@@ -22,9 +22,15 @@ import productACNTHAP from '../../../fixtures/product_ACNTHAP.json';
 import productBCSPDFT from '../../../fixtures/product_BCSPDFT.json';
 import productBCSPWHT from '../../../fixtures/product_BCSPWHT.json';
 import productPRPOXXX from '../../../fixtures/product_PRPOXXX.json';
+// S2 스티커(02) fixture — PriceTable3D 변형(THO_DFT 모양커팅 + 소재) + FixedUnit(vTmpl_price 시트가).
+import productSTTHCIC from '../../../fixtures/product_STTHCIC.json'; // 원형 스티커(규격, digital_price)
+import productSTCUXXX from '../../../fixtures/product_STCUXXX.json'; // 사각반칼 스티커(사이즈직접입력, digital_price)
+import productSTPADPN from '../../../fixtures/product_STPADPN.json'; // DTF 판스티커(시트, vTmpl_price/FixedUnit)
 import priceQ30 from '../../../fixtures/price_q30_p10.json';
 import priceQ300 from '../../../fixtures/price_q300_p10.json';
 import priceDigital from '../../../fixtures/price_BCSPDFT_sample.json';
+import priceSticker from '../../../fixtures/price_STTHCIC_sample.json'; // 반칼/규격 스티커 digital_price (비로그인 PRICE=0)
+import priceStickerFixed from '../../../fixtures/price_STPADPN_sample.json'; // FixedUnit vTmpl_price — 실 시트가 PRICE=4000(비로그인 공개가)
 import presignedSample from '../../../fixtures/presigned_response_sample.json';
 
 const PRODUCTS: Record<string, unknown> = {
@@ -35,10 +41,16 @@ const PRODUCTS: Record<string, unknown> = {
   BCSPDFT: productBCSPDFT, // 일반 명함 (단/양면)
   BCSPWHT: productBCSPWHT, // 화이트인쇄(별색) 컬러명함
   PRPOXXX: productPRPOXXX, // 종이 포스터/엽서류
+  // S2 스티커(02)
+  STTHCIC: productSTTHCIC, // 원형 스티커(규격: 11 size + THO_DFT 원형 모양커팅, digital_price)
+  STCUXXX: productSTCUXXX, // 사각반칼 스티커(사이즈직접입력 + THO_DFT 사각, digital_price)
+  STPADPN: productSTPADPN, // DTF 판스티커(시트단위 vTmpl_price = FixedUnit, fir=1)
 };
 
-// 디지털인쇄 단일면 상품 prefix(BC=명함, PR=엽서/포스터/카드). fixture 가격 근사 선택용.
-const DIGITAL_PRINT_PREFIX = /^(BC|PR|NC)/;
+// 디지털인쇄/스티커 단일면 상품 prefix(BC=명함, PR=엽서/포스터, NC=카드, ST=스티커). fixture 가격 근사 선택용.
+const DIGITAL_PRINT_PREFIX = /^(BC|PR|NC|ST)/;
+// FixedUnit(vTmpl_price) 시트가 상품 — price_gbn 으로 분기. ST DTF 판/네임스티커 등.
+const FIXED_UNIT_CODES = new Set(['STPADPN', 'STPADNM']);
 
 export class FixtureRedDataSource implements RedDataSource {
   async fetchProduct(code: string): Promise<RedDigitalProductResponse> {
@@ -47,6 +59,16 @@ export class FixtureRedDataSource implements RedDataSource {
   }
 
   async fetchPrice(req: NormalizedPriceRequest): Promise<RedPriceResponse> {
+    // FixedUnit(vTmpl_price) 시트가 — 응답 envelope 동일(ORD_INFO/PCS_INFO→result/result_sum),
+    // 위젯은 price_gbn 무관·불투명 finalPrice 만 소비(INV-1). 캡처는 PRICE=4000(공개 시트가).
+    // @MX:NOTE S2 FixedUnit fixture 만 비로그인에도 실가(공개가) — digital_price 와 응답 shape 동일.
+    if (FIXED_UNIT_CODES.has(req.productCode)) {
+      return priceStickerFixed as RedPriceResponse;
+    }
+    // 스티커(ST) PriceTable3D 변형 — digital_price, THO_DFT 라인 포함. 비로그인 PRICE=0(shape 검증용).
+    if (req.productCode.startsWith('ST')) {
+      return priceSticker as RedPriceResponse;
+    }
     // 디지털인쇄(명함·엽서)는 digital_price 응답 shape fixture 로 — 책자 워터폴과 응답 형태 구분.
     // @MX:NOTE 디지털인쇄 price fixture 는 비로그인 캡처라 PRICE=0(shape 검증용). 실 단가는 BFF 권위.
     if (DIGITAL_PRINT_PREFIX.test(req.productCode)) {

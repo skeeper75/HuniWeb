@@ -1,0 +1,181 @@
+{
+  "product": "STTHCIC",
+  "capturedAt": "2026-06-02T13:45:47.410Z",
+  "token": {
+    "ok": true,
+    "exp": 1780410076
+  },
+  "loader": "selectProduct",
+  "optionMutation": {
+    "ok": true,
+    "kind": "select",
+    "to": 1,
+    "optCount": 19,
+    "label": "아트지라벨(초강접)"
+  },
+  "storeKeysAfterInit": [
+    "config",
+    "exterior",
+    "order",
+    "product"
+  ],
+  "priceCallCount": 3,
+  "priceCalls": [
+    {
+      "rel": 2935,
+      "status": 200,
+      "reqBody": "{\"dataJson\":{\"ORD_INFO\":[{\"PDT_CD\":\"STTHCIC\",\"MTRL_CD\":\"RXATL090\",\"CUT_WDT\":50,\"CUT_HGH\":50,\"WRK_WDT\":54,\"WRK_HGH\":54,\"DOSU_COD\":\"SID_S\",\"PRN_CLR_CNT\":4}],\"PCS_INFO\":[{\"PCS_COD\":\"THO_DFT\",\"PCS_DTL_COD\":\"CL005\",\"ATTB\":\"\"},{\"PCS_COD\":\"CUT_DFT\",\"PCS_DTL_COD\":\"DFXXX\",\"ATTB\":\"\"}],\"price_gbn\":\"digital_price\",\"mb_cust_cod\":\"10000000\"}}",
+      "respBody": {
+        "retCode": 999,
+        "msg": "",
+        "result": null,
+        "result_sum": {
+          "PRICE": 0,
+          "PRICE_VAT": 0,
+          "PRICE_MALL": 0,
+          "PRICE_MALL_VAT": 0,
+          "ORG_PRICE": 0,
+          "ORG_PRICE_VAT": 0
+        },
+        "query": null,
+        "query_flexible": null
+      }
+    },
+    {
+      "rel": 3398,
+      "status": 200,
+      "reqBody": "{\"dataJson\":{\"ORD_INFO\":[{\"PDT_CD\":\"STTHCIC\",\"MTRL_CD\":\"RXATL090\",\"CUT_WDT\":50,\"CUT_HGH\":50,\"WRK_WDT\":54,\"WRK_HGH\":54,\"PRN_CNT\":100,\"ORD_CNT\":1,\"DOSU_COD\":\"SID_S\",\"PRN_CLR_CNT\":4}],\"PCS_INFO\":[{\"PCS_COD\":\"THO_DFT\",\"PCS_DTL_COD\":\"CL005\",\"ATTB\":\"\"},{\"PCS_COD\":\"CUT_DFT\",\"PCS_DTL_COD\":\"DFXXX\",\"ATTB\":\"\"}],\"price_gbn\":\"digital_price\",\"mb_cust_cod\":\"10000000\"}}",
+      "respBody": {
+        "retCode": 200,
+        "msg": "",
+        "result": [
+          {
+            "PCS_CD": "THO_DFT",
+            "PCS_DTL_CD": "CL005",
+            "PCS_COD": "THO_DFT",
+            "PCS_DTL_COD": "CL005",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 100, 주문건수 : 1",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 100, 주문건수 : 1 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "모양커팅",
+            "PCS_DTL_NME": "원형 50X50"
+          },
+          {
+            "PCS_CD": "CUT_DFT",
+            "PCS_DTL_CD": "DFXXX",
+            "PCS_COD": "CUT_DFT",
+            "PCS_DTL_COD": "DFXXX",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 100, 주문건수 : 1",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 100, 주문건수 : 1 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "재단",
+            "PCS_DTL_NME": "재단"
+          }
+        ],
+        "result_sum": {
+          "PRICE": 0,
+          "PRICE_VAT": 0,
+          "PRICE_MALL": 0,
+          "PRICE_MALL_VAT": 0,
+          "ORG_PRICE": 0,
+          "ORG_PRICE_VAT": 0
+        },
+        "query": "dbo.WSP_ACPT_ORDER_TMPL_PCS_PRICE '0101', 'LNG_KO', 'STTHCIC', '<?xml version=\"1.0\"?>\n<PARAMS><DETAIL><MTRL_COD>RXATL090</MTRL_COD><CUT_WDT>50</CUT_WDT><CUT_HGH>50</CUT_HGH><PRN_CNT>100</PRN_CNT><ORD_CNT>1</ORD_CNT><SID_GBN>SID_S</SID_GBN><TMPL_IDX/><BTN_TYPE/><PNS_DIGIT/><PNS_CNT/><PACK_PRN_CNT/><CUST_COD>10000000</CUST_COD></DETAIL><PCS><PCS_COD>THO_DFT</PCS_COD><PCS_DTL_COD>CL005</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS><PCS><PCS_COD>CUT_DFT</PCS_COD><PCS_DTL_COD>DFXXX</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS></PARAMS>\n'",
+        "query_flexible": null
+      }
+    },
+    {
+      "rel": 7463,
+      "status": 200,
+      "reqBody": "{\"dataJson\":{\"ORD_INFO\":[{\"PDT_CD\":\"STTHCIC\",\"MTRL_CD\":\"RPATA090\",\"CUT_WDT\":50,\"CUT_HGH\":50,\"WRK_WDT\":54,\"WRK_HGH\":54,\"PRN_CNT\":100,\"ORD_CNT\":1,\"DOSU_COD\":\"SID_S\",\"PRN_CLR_CNT\":4}],\"PCS_INFO\":[{\"PCS_COD\":\"THO_DFT\",\"PCS_DTL_COD\":\"CL005\",\"ATTB\":\"\"},{\"PCS_COD\":\"CUT_DFT\",\"PCS_DTL_COD\":\"DFXXX\",\"ATTB\":\"\"}],\"price_gbn\":\"digital_price\",\"mb_cust_cod\":\"10000000\"}}",
+      "respBody": {
+        "retCode": 200,
+        "msg": "",
+        "result": [
+          {
+            "PCS_CD": "THO_DFT",
+            "PCS_DTL_CD": "CL005",
+            "PCS_COD": "THO_DFT",
+            "PCS_DTL_COD": "CL005",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 100, 주문건수 : 1",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 100, 주문건수 : 1 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "모양커팅",
+            "PCS_DTL_NME": "원형 50X50"
+          },
+          {
+            "PCS_CD": "CUT_DFT",
+            "PCS_DTL_CD": "DFXXX",
+            "PCS_COD": "CUT_DFT",
+            "PCS_DTL_COD": "DFXXX",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 100, 주문건수 : 1",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 100, 주문건수 : 1 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "재단",
+            "PCS_DTL_NME": "재단"
+          }
+        ],
+        "result_sum": {
+          "PRICE": 0,
+          "PRICE_VAT": 0,
+          "PRICE_MALL": 0,
+          "PRICE_MALL_VAT": 0,
+          "ORG_PRICE": 0,
+          "ORG_PRICE_VAT": 0
+        },
+        "query": "dbo.WSP_ACPT_ORDER_TMPL_PCS_PRICE '0101', 'LNG_KO', 'STTHCIC', '<?xml version=\"1.0\"?>\n<PARAMS><DETAIL><MTRL_COD>RPATA090</MTRL_COD><CUT_WDT>50</CUT_WDT><CUT_HGH>50</CUT_HGH><PRN_CNT>100</PRN_CNT><ORD_CNT>1</ORD_CNT><SID_GBN>SID_S</SID_GBN><TMPL_IDX/><BTN_TYPE/><PNS_DIGIT/><PNS_CNT/><PACK_PRN_CNT/><CUST_COD>10000000</CUST_COD></DETAIL><PCS><PCS_COD>THO_DFT</PCS_COD><PCS_DTL_COD>CL005</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS><PCS><PCS_COD>CUT_DFT</PCS_COD><PCS_DTL_COD>DFXXX</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS></PARAMS>\n'",
+        "query_flexible": null
+      }
+    }
+  ],
+  "network": [
+    {
+      "rel": 1780,
+      "dir": "req",
+      "method": "GET",
+      "url": "/rp-api/ko/product/get_digital_product_info",
+      "body": ""
+    },
+    {
+      "rel": 2820,
+      "dir": "req",
+      "method": "POST",
+      "url": "/rp-api/ko/product_price/get_ajax_price_vTmpl",
+      "body": "{\"dataJson\":{\"ORD_INFO\":[{\"PDT_CD\":\"STTHCIC\",\"MTRL_CD\":\"RXATL090\",\"CUT_WDT\":50,\"CUT_HGH\":50,\"WRK_WDT\":54,\"WRK_HGH\":54,\"DOSU_COD\":\"SID_S\",\"PRN_CLR_CNT\":4}],\"PCS_INFO\":[{\"PCS_COD\":\"THO_DFT\",\"PCS_DTL_COD\":\"CL005\",\"ATTB\":\"\"},{\"PCS_COD\":\"CUT_DFT\",\"PCS_DTL_COD\":\"DFXXX\",\"ATTB\":\"\"}],\"price_gbn\":\"digital_price\",\"mb_cust_cod\":\"10000000\"}}"
+    },
+    {
+      "rel": 3023,
+      "dir": "req",
+      "method": "POST",
+      "url": "/rp-api/ko/product_price/get_ajax_price_vTmpl",
+      "body": "{\"dataJson\":{\"ORD_INFO\":[{\"PDT_CD\":\"STTHCIC\",\"MTRL_CD\":\"RXATL090\",\"CUT_WDT\":50,\"CUT_HGH\":50,\"WRK_WDT\":54,\"WRK_HGH\":54,\"PRN_CNT\":100,\"ORD_CNT\":1,\"DOSU_COD\":\"SID_S\",\"PRN_CLR_CNT\":4}],\"PCS_INFO\":[{\"PCS_COD\":\"THO_DFT\",\"PCS_DTL_COD\":\"CL005\",\"ATTB\":\"\"},{\"PCS_COD\":\"CUT_DFT\",\"PCS_DTL_COD\":\"DFXXX\",\"ATTB\":\"\"}],\"price_gbn\":\"digital_price\",\"mb_cust_cod\":\"10000000\"}}"
+    },
+    {
+      "rel": 7176,
+      "dir": "req",
+      "method": "POST",
+      "url": "/rp-api/ko/product_price/get_ajax_price_vTmpl",
+      "body": "{\"dataJson\":{\"ORD_INFO\":[{\"PDT_CD\":\"STTHCIC\",\"MTRL_CD\":\"RPATA090\",\"CUT_WDT\":50,\"CUT_HGH\":50,\"WRK_WDT\":54,\"WRK_HGH\":54,\"PRN_CNT\":100,\"ORD_CNT\":1,\"DOSU_COD\":\"SID_S\",\"PRN_CLR_CNT\":4}],\"PCS_INFO\":[{\"PCS_COD\":\"THO_DFT\",\"PCS_DTL_COD\":\"CL005\",\"ATTB\":\"\"},{\"PCS_COD\":\"CUT_DFT\",\"PCS_DTL_COD\":\"DFXXX\",\"ATTB\":\"\"}],\"price_gbn\":\"digital_price\",\"mb_cust_cod\":\"10000000\"}}"
+    }
+  ]
+}

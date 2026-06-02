@@ -1,0 +1,262 @@
+{
+  "product": "STPADPN",
+  "capturedAt": "2026-06-02T13:46:02.215Z",
+  "token": {
+    "ok": true,
+    "exp": 1780410076
+  },
+  "loader": "selectProduct",
+  "optionMutation": {
+    "ok": true,
+    "kind": "select",
+    "to": 1,
+    "optCount": 2,
+    "label": "A4"
+  },
+  "storeKeysAfterInit": [
+    "config",
+    "exterior",
+    "order",
+    "product"
+  ],
+  "priceCallCount": 3,
+  "priceCalls": [
+    {
+      "rel": 2786,
+      "status": 200,
+      "reqBody": "{\"dataJson\":{\"ORD_INFO\":[{\"PDT_CD\":\"STPADPN\",\"MTRL_CD\":\"PXPUF003\",\"CUT_WDT\":140,\"CUT_HGH\":200,\"WRK_WDT\":144,\"WRK_HGH\":204,\"DOSU_COD\":\"SID_S\",\"PRN_CLR_CNT\":4}],\"PCS_INFO\":[{\"PCS_COD\":\"CUT_DFT\",\"PCS_DTL_COD\":\"DFXXX\",\"ATTB\":\"\"},{\"PCS_COD\":\"PRT_WHT\",\"PCS_DTL_COD\":\"DFXXX\",\"ATTB\":\"\"}],\"price_gbn\":\"vTmpl_price\",\"mb_cust_cod\":\"10000000\"}}",
+      "respBody": {
+        "retCode": 200,
+        "msg": "",
+        "result": [
+          {
+            "PCS_CD": "CUT_DFT",
+            "PCS_DTL_CD": "DFXXX",
+            "PCS_COD": "CUT_DFT",
+            "PCS_DTL_COD": "DFXXX",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 0, 주문건수 : 0",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 0, 주문건수 : 0 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "재단",
+            "PCS_DTL_NME": "재단"
+          },
+          {
+            "PCS_CD": "PRT_WHT",
+            "PCS_DTL_CD": "DFXXX",
+            "PCS_COD": "PRT_WHT",
+            "PCS_DTL_COD": "DFXXX",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 0, 주문건수 : 0",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 0, 주문건수 : 0 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "화이트인쇄",
+            "PCS_DTL_NME": "화이트인쇄"
+          },
+          {
+            "PCS_CD": "PRT_DFT",
+            "PCS_DTL_CD": "DFXXS",
+            "PCS_COD": "PRT_DFT",
+            "PCS_DTL_COD": "DFXXS",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 0, 주문건수 : 0",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 0, 주문건수 : 0 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "인쇄",
+            "PCS_DTL_NME": "인쇄단면"
+          }
+        ],
+        "result_sum": {
+          "PRICE": 0,
+          "PRICE_VAT": 0,
+          "PRICE_MALL": 0,
+          "PRICE_MALL_VAT": 0,
+          "ORG_PRICE": 0,
+          "ORG_PRICE_VAT": 0
+        },
+        "query": "dbo.WSP_ACPT_ORDER_TMPL_PCS_PRICE '0101', 'LNG_KO', 'STPADPN', '<?xml version=\"1.0\"?>\n<PARAMS><DETAIL><MTRL_COD>PXPUF003</MTRL_COD><CUT_WDT>140</CUT_WDT><CUT_HGH>200</CUT_HGH><PRN_CNT/><ORD_CNT/><SID_GBN>SID_S</SID_GBN><TMPL_IDX/><BTN_TYPE/><PNS_DIGIT/><PNS_CNT/><PACK_PRN_CNT/><CUST_COD>10000000</CUST_COD></DETAIL><PCS><PCS_COD>CUT_DFT</PCS_COD><PCS_DTL_COD>DFXXX</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS><PCS><PCS_COD>PRT_WHT</PCS_COD><PCS_DTL_COD>DFXXX</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS></PARAMS>\n'",
+        "query_flexible": null
+      }
+    },
+    {
+      "rel": 3086,
+      "status": 200,
+      "reqBody": "{\"dataJson\":{\"ORD_INFO\":[{\"PDT_CD\":\"STPADPN\",\"MTRL_CD\":\"PXPUF003\",\"CUT_WDT\":140,\"CUT_HGH\":200,\"WRK_WDT\":144,\"WRK_HGH\":204,\"PRN_CNT\":1,\"ORD_CNT\":1,\"DOSU_COD\":\"SID_S\",\"PRN_CLR_CNT\":4}],\"PCS_INFO\":[{\"PCS_COD\":\"CUT_DFT\",\"PCS_DTL_COD\":\"DFXXX\",\"ATTB\":\"\"},{\"PCS_COD\":\"PRT_WHT\",\"PCS_DTL_COD\":\"DFXXX\",\"ATTB\":\"\"}],\"price_gbn\":\"vTmpl_price\",\"mb_cust_cod\":\"10000000\"}}",
+      "respBody": {
+        "retCode": 200,
+        "msg": "",
+        "result": [
+          {
+            "PCS_CD": "CUT_DFT",
+            "PCS_DTL_CD": "DFXXX",
+            "PCS_COD": "CUT_DFT",
+            "PCS_DTL_COD": "DFXXX",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 1, 주문건수 : 1",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 1, 주문건수 : 1 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "재단",
+            "PCS_DTL_NME": "재단"
+          },
+          {
+            "PCS_CD": "PRT_WHT",
+            "PCS_DTL_CD": "DFXXX",
+            "PCS_COD": "PRT_WHT",
+            "PCS_DTL_COD": "DFXXX",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 1, 주문건수 : 1",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 1, 주문건수 : 1 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "화이트인쇄",
+            "PCS_DTL_NME": "화이트인쇄"
+          },
+          {
+            "PCS_CD": "PRT_DFT",
+            "PCS_DTL_CD": "DFXXS",
+            "PCS_COD": "PRT_DFT",
+            "PCS_DTL_COD": "DFXXS",
+            "PRICE": 4000,
+            "PRICE_VAT": 400,
+            "PRICE_MALL": 4000,
+            "PRICE_MALL_VAT": 400,
+            "ORG_PRICE": 4000,
+            "ORG_PRICE_VAT": 400,
+            "PRICE_LOG": "개당단가 : 4000.00원, 인쇄수량DDDDD : 1, 주문건수 : 1",
+            "PRICE_MALL_LOG": "개당단가 : 4000.00원, 인쇄수량DDDDD : 1, 주문건수 : 1 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "인쇄",
+            "PCS_DTL_NME": "인쇄단면"
+          }
+        ],
+        "result_sum": {
+          "PRICE": 4000,
+          "PRICE_VAT": 400,
+          "PRICE_MALL": 4000,
+          "PRICE_MALL_VAT": 400,
+          "ORG_PRICE": 4000,
+          "ORG_PRICE_VAT": 400
+        },
+        "query": "dbo.WSP_ACPT_ORDER_TMPL_PCS_PRICE '0101', 'LNG_KO', 'STPADPN', '<?xml version=\"1.0\"?>\n<PARAMS><DETAIL><MTRL_COD>PXPUF003</MTRL_COD><CUT_WDT>140</CUT_WDT><CUT_HGH>200</CUT_HGH><PRN_CNT>1</PRN_CNT><ORD_CNT>1</ORD_CNT><SID_GBN>SID_S</SID_GBN><TMPL_IDX/><BTN_TYPE/><PNS_DIGIT/><PNS_CNT/><PACK_PRN_CNT/><CUST_COD>10000000</CUST_COD></DETAIL><PCS><PCS_COD>CUT_DFT</PCS_COD><PCS_DTL_COD>DFXXX</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS><PCS><PCS_COD>PRT_WHT</PCS_COD><PCS_DTL_COD>DFXXX</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS></PARAMS>\n'",
+        "query_flexible": null
+      }
+    },
+    {
+      "rel": 7096,
+      "status": 200,
+      "reqBody": "{\"dataJson\":{\"ORD_INFO\":[{\"PDT_CD\":\"STPADPN\",\"MTRL_CD\":\"PXPUF003\",\"CUT_WDT\":210,\"CUT_HGH\":297,\"WRK_WDT\":214,\"WRK_HGH\":301,\"PRN_CNT\":1,\"ORD_CNT\":1,\"DOSU_COD\":\"SID_S\",\"PRN_CLR_CNT\":4}],\"PCS_INFO\":[{\"PCS_COD\":\"CUT_DFT\",\"PCS_DTL_COD\":\"DFXXX\",\"ATTB\":\"\"},{\"PCS_COD\":\"PRT_WHT\",\"PCS_DTL_COD\":\"DFXXX\",\"ATTB\":\"\"}],\"price_gbn\":\"vTmpl_price\",\"mb_cust_cod\":\"10000000\"}}",
+      "respBody": {
+        "retCode": 200,
+        "msg": "",
+        "result": [
+          {
+            "PCS_CD": "CUT_DFT",
+            "PCS_DTL_CD": "DFXXX",
+            "PCS_COD": "CUT_DFT",
+            "PCS_DTL_COD": "DFXXX",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 1, 주문건수 : 1",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 1, 주문건수 : 1 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "재단",
+            "PCS_DTL_NME": "재단"
+          },
+          {
+            "PCS_CD": "PRT_WHT",
+            "PCS_DTL_CD": "DFXXX",
+            "PCS_COD": "PRT_WHT",
+            "PCS_DTL_COD": "DFXXX",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 1, 주문건수 : 1",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 1, 주문건수 : 1 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "화이트인쇄",
+            "PCS_DTL_NME": "화이트인쇄"
+          },
+          {
+            "PCS_CD": "PRT_DFT",
+            "PCS_DTL_CD": "DFXXS",
+            "PCS_COD": "PRT_DFT",
+            "PCS_DTL_COD": "DFXXS",
+            "PRICE": 8000,
+            "PRICE_VAT": 800,
+            "PRICE_MALL": 8000,
+            "PRICE_MALL_VAT": 800,
+            "ORG_PRICE": 8000,
+            "ORG_PRICE_VAT": 800,
+            "PRICE_LOG": "개당단가 : 8000.00원, 인쇄수량DDDDD : 1, 주문건수 : 1",
+            "PRICE_MALL_LOG": "개당단가 : 8000.00원, 인쇄수량DDDDD : 1, 주문건수 : 1 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "인쇄",
+            "PCS_DTL_NME": "인쇄단면"
+          }
+        ],
+        "result_sum": {
+          "PRICE": 8000,
+          "PRICE_VAT": 800,
+          "PRICE_MALL": 8000,
+          "PRICE_MALL_VAT": 800,
+          "ORG_PRICE": 8000,
+          "ORG_PRICE_VAT": 800
+        },
+        "query": "dbo.WSP_ACPT_ORDER_TMPL_PCS_PRICE '0101', 'LNG_KO', 'STPADPN', '<?xml version=\"1.0\"?>\n<PARAMS><DETAIL><MTRL_COD>PXPUF003</MTRL_COD><CUT_WDT>210</CUT_WDT><CUT_HGH>297</CUT_HGH><PRN_CNT>1</PRN_CNT><ORD_CNT>1</ORD_CNT><SID_GBN>SID_S</SID_GBN><TMPL_IDX/><BTN_TYPE/><PNS_DIGIT/><PNS_CNT/><PACK_PRN_CNT/><CUST_COD>10000000</CUST_COD></DETAIL><PCS><PCS_COD>CUT_DFT</PCS_COD><PCS_DTL_COD>DFXXX</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS><PCS><PCS_COD>PRT_WHT</PCS_COD><PCS_DTL_COD>DFXXX</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS></PARAMS>\n'",
+        "query_flexible": null
+      }
+    }
+  ],
+  "network": [
+    {
+      "rel": 1410,
+      "dir": "req",
+      "method": "GET",
+      "url": "/rp-api/ko/product/get_digital_product_info",
+      "body": ""
+    },
+    {
+      "rel": 2476,
+      "dir": "req",
+      "method": "POST",
+      "url": "/rp-api/ko/product_price/get_ajax_price_vTmpl",
+      "body": "{\"dataJson\":{\"ORD_INFO\":[{\"PDT_CD\":\"STPADPN\",\"MTRL_CD\":\"PXPUF003\",\"CUT_WDT\":140,\"CUT_HGH\":200,\"WRK_WDT\":144,\"WRK_HGH\":204,\"DOSU_COD\":\"SID_S\",\"PRN_CLR_CNT\":4}],\"PCS_INFO\":[{\"PCS_COD\":\"CUT_DFT\",\"PCS_DTL_COD\":\"DFXXX\",\"ATTB\":\"\"},{\"PCS_COD\":\"PRT_WHT\",\"PCS_DTL_COD\":\"DFXXX\",\"ATTB\":\"\"}],\"price_gbn\":\"vTmpl_price\",\"mb_cust_cod\":\"10000000\"}}"
+    },
+    {
+      "rel": 2684,
+      "dir": "req",
+      "method": "POST",
+      "url": "/rp-api/ko/product_price/get_ajax_price_vTmpl",
+      "body": "{\"dataJson\":{\"ORD_INFO\":[{\"PDT_CD\":\"STPADPN\",\"MTRL_CD\":\"PXPUF003\",\"CUT_WDT\":140,\"CUT_HGH\":200,\"WRK_WDT\":144,\"WRK_HGH\":204,\"PRN_CNT\":1,\"ORD_CNT\":1,\"DOSU_COD\":\"SID_S\",\"PRN_CLR_CNT\":4}],\"PCS_INFO\":[{\"PCS_COD\":\"CUT_DFT\",\"PCS_DTL_COD\":\"DFXXX\",\"ATTB\":\"\"},{\"PCS_COD\":\"PRT_WHT\",\"PCS_DTL_COD\":\"DFXXX\",\"ATTB\":\"\"}],\"price_gbn\":\"vTmpl_price\",\"mb_cust_cod\":\"10000000\"}}"
+    },
+    {
+      "rel": 6787,
+      "dir": "req",
+      "method": "POST",
+      "url": "/rp-api/ko/product_price/get_ajax_price_vTmpl",
+      "body": "{\"dataJson\":{\"ORD_INFO\":[{\"PDT_CD\":\"STPADPN\",\"MTRL_CD\":\"PXPUF003\",\"CUT_WDT\":210,\"CUT_HGH\":297,\"WRK_WDT\":214,\"WRK_HGH\":301,\"PRN_CNT\":1,\"ORD_CNT\":1,\"DOSU_COD\":\"SID_S\",\"PRN_CLR_CNT\":4}],\"PCS_INFO\":[{\"PCS_COD\":\"CUT_DFT\",\"PCS_DTL_COD\":\"DFXXX\",\"ATTB\":\"\"},{\"PCS_COD\":\"PRT_WHT\",\"PCS_DTL_COD\":\"DFXXX\",\"ATTB\":\"\"}],\"price_gbn\":\"vTmpl_price\",\"mb_cust_cod\":\"10000000\"}}"
+    }
+  ]
+}
