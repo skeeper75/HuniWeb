@@ -34,7 +34,8 @@
 | **S4 아크릴 검증 (위젯/어댑터 0변경, finish-button 흡수, NC-2 신규 불요 확정) + hashRequest 핫픽스 + S4 비교 QA GO (54 green)** | 🟢 | 23b775e |
 | **S5 선행 라이브 검증 (파우치 PRICE>0, 가격모델 SKU별 상이, /rp-api 쿠키주입 수정)** | 🟢 | 39d78a3 |
 | **S5 명세 (NC-3 신규 불요 판정 + tmpl/tiered 어댑터, 위젯 코어 거의 0)** | 🟢 | 984a0b8 |
-| **S5 구현 (위젯 코어 완전 0줄, 계약 printCount? 1필드, 어댑터 직렬화+가드, 파우치 fixture) + 비교 QA GO (65 green)** | 🟢 | (이번) |
+| **S5 구현 (위젯 코어 완전 0줄, 계약 printCount? 1필드, 어댑터 직렬화+가드, 파우치 fixture) + 비교 QA GO (65 green)** | 🟢 | ff33d26 |
+| **S5-M1 TieredDiscount 라이브 검증 (7 SKU 스윕 → 수량할인 부재 확정, tiered_price=룩업방식 규명)** | 🟢 | (이번) |
 
 ## 3. 다음 할 일 (우선순위 순)
 
@@ -42,9 +43,10 @@
 
 > **S5 선행 라이브 검증 완료 (이번 세션):** 로그인 세션 갱신(customerCode 22025916, isClient) 후 실가 캡처. **핸드오프 가정 3건 보정**: ① 가격모델은 **SKU별 상이** — 굿즈 GSTGMIC=`tiered_price`(개당 6000원 **평탄, 할인구간 없음**), 파우치 GSPUFBC=`tmpl_price`(template-lookup 평탄단가). "굿즈/파우치=TieredDiscount 본진" 가정은 부분 오류. ② **비로그인 PRICE=0은 로그인 부족이 아님** — `mb_cust_cod`를 게스트(10000000)↔로그인(22025916)으로 바꿔도 동일, **쿠키 세션이 가격 권위**. ③ **파우치 PRICE=0 근본원인 확정**: tmpl_price는 `ORD_INFO[0].ORD_CNT`+`PRN_CNT` **둘 다 필수**(위젯이 둘 다 누락하면 침묵 0). 규격은 등록 템플릿 치수 정확매칭 필수(자유입력 견적불가). 산출: `05_qa/s5-pouch-live-note.md`, `05_qa/captures/s5_pouch_GSPUFBC.json`. 인프라: server.js `/rp-api` 프록시에 쿠키·red-editor-token 주입 누락 결함 수정(가격 API가 로그인 세션 미전달이던 버그).
 
-1. **[다음·최우선] S5-M1 말랑/문구 SKU 라이브 캡처 (TieredDiscount 본진 검증)** — S5 굿즈/파우치 구현+QA GO 완료(위젯 코어 **완전 0줄**, NC-3 신규 불요). 단 실측 2 SKU(GSTGMIC tiered 평탄·GSPUFBC tmpl 평탄) 모두 수량할인 0%로 **TieredDiscount 할인곡선 미확인**. "말랑 2개부터 즉시할인·최대50%"를 실증하려면 말랑/문구 SKU를 widget_monitor 라이브로 수량 스윕 캡처(로그인 세션 + `/rp-api` 쿠키 주입 패치 적용됨). → 곡선 확인 시 어댑터 fixture 보강(코어 불변).
-2. **S6 캘린더** — 순수 어댑터(책자 PriceTable3D 변형). ⚠ Red fixture 미보유 → widget_monitor 라이브 캡처 선행(임계경로).
-3. **후니 Figma 시각 재현** (expert-frontend) — 14(+NC-1) componentType을 DESIGN.md+`docs/figma/huni_product_option.fig` 시안에 충실하게. 컴포넌트 단위 1회 = 전 stage 재사용. (확대와 병행/이후)
+> **S5-M1 검증 완료 (이번):** 말랑/문구 7 SKU(GSPDLNG·GSMLSLC·GSTGMIC·GSTBMWM·GSNTSTA·GSDRSKS·GSNTSPR) 라이브 수량 스윕 → **전 SKU·전 구간 ORG_PRICE===PRICE, 수량할인 0% 확정**. 핸드오프 가정 "말랑 2개부터 즉시할인·최대50%"는 **Red 굿즈/문구 자동견적 경로에 부재**. 핵심 규명: `tiered_price` gbn은 **수량 tier가 아니라 규격/자재 룩업 방식**(GSTGMIC tiered인데 완전 선형이 증거). GSPDLNG식 개당단가 체감은 정가공식(고정비+변동비×수량)이지 할인 아님. → **후니 TieredDiscount는 Red와 무관, 후니 어댑터+`t_dsc_*` fixture로 독립정의**(Red 정합 금지 부합). 계약 `ORG_PRICE/PRICE` 2필드 슬롯은 이미 존재 → 후니 어댑터가 채택 시 위젯 코어 0변경. Red 기반 할인 fixture 추가 금지(만들 소스 없음·임의곡선은 baseline 오염). 노트 `05_qa/s5-m1-tiered-note.md`.
+
+1. **[다음·최우선] S6 캘린더** — 순수 어댑터(책자 PriceTable3D 변형). ⚠ Red fixture 미보유 → widget_monitor 라이브 캡처 선행(임계경로). 로그인 세션 + `/rp-api` 쿠키 패치 적용 상태라 캡처 가능.
+2. **후니 Figma 시각 재현** (expert-frontend) — 14(+NC-1) componentType을 DESIGN.md+`docs/figma/huni_product_option.fig` 시안에 충실하게. 컴포넌트 단위 1회 = 전 stage 재사용. (확대와 병행/이후)
 
 ### S4 아크릴 후속 보강 포인트 (s4-acryl-spec.md §7 / s4-qa.md)
 - **S4-M1**: 비로그인 PRICE=0 → SizeMatrix2D+TieredDiscount+부자재단가 3중 합성 실가 미확보. 로그인 캡처로 옵션변동→가격변동 직접 증거 필요(INV-1상 위젯 무관, 후니 비교 시 필요).

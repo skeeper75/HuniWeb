@@ -1,0 +1,71 @@
+{
+  "product": "GSMLSLC",
+  "capturedAt": "2026-06-02T22:43:27.532Z",
+  "step1": {
+    "ok": true,
+    "sizePicked": null,
+    "qtySet": false,
+    "qtyName": null
+  },
+  "step2": {
+    "ok": true,
+    "wSet": null,
+    "hSet": null,
+    "numCount": 5
+  },
+  "priceCalls": [
+    {
+      "rel": 2581,
+      "status": 200,
+      "reqBody": "{\"dataJson\":{\"ORD_INFO\":[{\"PDT_CD\":\"GSMLSLC\",\"MTRL_CD\":\"SXSML001\",\"CUT_WDT\":15.5,\"CUT_HGH\":15.5,\"WRK_WDT\":15.5,\"WRK_HGH\":15.5,\"DOSU_COD\":\"SID_S\",\"PRN_CLR_CNT\":4}],\"PCS_INFO\":[{\"PCS_COD\":\"DIR_MTR\",\"PCS_DTL_COD\":\"MLS01\",\"ATTB\":1,\"ATTB_2\":\"\",\"ATTB_3\":\"\"}],\"price_gbn\":\"tmpl_price\",\"mb_cust_cod\":\"10000000\"}}",
+      "respBody": {
+        "retCode": 200,
+        "msg": "",
+        "result": [
+          {
+            "PCS_CD": "DIR_MTR",
+            "PCS_DTL_CD": "MLS01",
+            "PCS_COD": "DIR_MTR",
+            "PCS_DTL_COD": "MLS01",
+            "PRICE": 2800,
+            "PRICE_VAT": 280,
+            "PRICE_MALL": 2800,
+            "PRICE_MALL_VAT": 280,
+            "ORG_PRICE": 2800,
+            "ORG_PRICE_VAT": 280,
+            "PRICE_LOG": "개당단가 : 2800.00원, 인쇄수량DDDDD : 0, 주문건수 : 0",
+            "PRICE_MALL_LOG": "개당단가 : 2800.00원, 인쇄수량DDDDD : 0, 주문건수 : 0 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "부자재직접인쇄",
+            "PCS_DTL_NME": "핑크"
+          },
+          {
+            "PCS_CD": "PRT_DFT",
+            "PCS_DTL_CD": "DFXXS",
+            "PCS_COD": "PRT_DFT",
+            "PCS_DTL_COD": "DFXXS",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 0, 주문건수 : 0",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 0, 주문건수 : 0 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "인쇄",
+            "PCS_DTL_NME": "인쇄단면"
+          }
+        ],
+        "result_sum": {
+          "PRICE": 2800,
+          "PRICE_VAT": 280,
+          "PRICE_MALL": 2800,
+          "PRICE_MALL_VAT": 280,
+          "ORG_PRICE": 2800,
+          "ORG_PRICE_VAT": 280
+        },
+        "query": "dbo.WSP_ACPT_ORDER_TMPL_PCS_PRICE '0101', 'LNG_KO', 'GSMLSLC', '<?xml version=\"1.0\"?>\n<PARAMS><DETAIL><MTRL_COD>SXSML001</MTRL_COD><CUT_WDT>15.5</CUT_WDT><CUT_HGH>15.5</CUT_HGH><PRN_CNT/><ORD_CNT/><SID_GBN>SID_S</SID_GBN><TMPL_IDX/><BTN_TYPE/><PNS_DIGIT/><PNS_CNT/><PACK_PRN_CNT/><CUST_COD>15090019</CUST_COD></DETAIL><PCS><PCS_COD>DIR_MTR</PCS_COD><PCS_DTL_COD>MLS01</PCS_DTL_COD><ATTB>1</ATTB><ATTB_2/><ATTB_3/></PCS></PARAMS>\n'",
+        "query_flexible": null
+      }
+    }
+  ]
+}
