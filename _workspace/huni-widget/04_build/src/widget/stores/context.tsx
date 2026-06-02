@@ -1,6 +1,9 @@
 // state-management §0·3 — store 인스턴스를 React Context 로 위젯 트리에 주입(전역 싱글톤 금지).
 import { createContext, useContext, useRef, type ReactNode } from 'react';
 import { useStore } from 'zustand';
+// D3: useStore(api, selector, equalityFn) 3-인자 형태는 zustand v4 에서 deprecated.
+// 동일 의미의 useStoreWithEqualityFn 으로 교체해 콘솔 경고 제거(동작 동일).
+import { useStoreWithEqualityFn } from 'zustand/traditional';
 import { shallow } from 'zustand/shallow';
 import type { WidgetState, WidgetStore } from './widget-store';
 import { selectCanOrder } from './widget-store';
@@ -52,7 +55,7 @@ export function useOptionSelection(groupId: string) {
 }
 
 export function useGroupValues(groupId: string): OptionValue[] | undefined {
-  return useStore(
+  return useStoreWithEqualityFn(
     useWidgetStoreApi(),
     (s) => s.product?.optionGroups.find((g) => g.id === groupId)?.values,
     shallow,
@@ -76,5 +79,28 @@ export function usePageCount() {
   return {
     pageCount: useStore(api, (s) => s.pageCount),
     setPageCount: (n: number) => api.getState().setPageCount(n),
+  };
+}
+
+// 에디터 세션(오버레이 렌더용) — editor-integration §1·3.
+export function useEditorSession() {
+  const api = useWidgetStoreApi();
+  return {
+    config: useStore(api, (s) => s.editorConfig),
+    side: useStore(api, (s) => s.editorSide),
+    openEditor: (side: import('@/contract').SideKey) => api.getState().openEditor(side),
+    applyEditorResult: (r: import('@/contract').NormalizedEditorResult) =>
+      api.getState().applyEditorResult(r),
+    closeEditor: () => api.getState().closeEditor(),
+  };
+}
+
+// 면별 업로드/입력 상태 — PdfUploader / 에디터 버튼이 사용.
+export function useSideInput(side: import('@/contract').SideKey) {
+  const api = useWidgetStoreApi();
+  return {
+    artifact: useStore(api, (s) => s.artifacts[side]),
+    uploading: useStore(api, (s) => s.uploadingSide === side),
+    uploadPdf: (file: File) => api.getState().uploadPdf(side, file),
   };
 }

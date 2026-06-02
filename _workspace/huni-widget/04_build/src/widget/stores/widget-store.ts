@@ -6,6 +6,8 @@ import type {
   NormalizedArtifact,
   NormalizedCartHandoff,
   NormalizedPriceRequest,
+  NormalizedEditorConfig,
+  NormalizedEditorResult,
   SideKey,
   OptionGroup,
 } from '@/contract';
@@ -43,6 +45,8 @@ export interface WidgetState {
   // ui
   status: WidgetStatus;
   editorSide: SideKey | null;
+  editorConfig: NormalizedEditorConfig | null; // 열린 에디터 세션 config (오버레이 렌더용)
+  uploadingSide: SideKey | null; // PDF 업로드 진행 중인 면
   errors: string[];
 
   // actions
@@ -53,6 +57,12 @@ export interface WidgetState {
   setArtifact(side: SideKey, a: NormalizedArtifact): void;
   schedulePriceQuote(): void;
   cartHandoff(): NormalizedCartHandoff;
+  // 에디터 (editor-integration §1·3)
+  openEditor(side: SideKey): Promise<void>;
+  applyEditorResult(r: NormalizedEditorResult): void;
+  closeEditor(): void;
+  // 업로드 (api-contract #3·4, s3-upload-flow): presigned → S3 직접 PUT → file-meta.
+  uploadPdf(side: SideKey, file: File): Promise<void>;
 }
 
 export interface WidgetStoreDeps {
@@ -65,6 +75,19 @@ export interface WidgetStoreDeps {
   // price-engine.md §3 파라미터 (테스트에서 0 으로 즉시 실행 가능)
   debounceMs?: number;
   cacheTtlMs?: number;
+  // S3 직접 PUT 수행자 — 기본은 fetch PUT(s3-upload-flow §2). 테스트는 stub 주입.
+  // @MX:NOTE [O5] presigned 쿼리에 checksum 헤더 포함 가능 — 운영 SDK 실 PUT 헤더 미캡처.
+  // Content-Type:application/pdf + UNSIGNED-PAYLOAD 조합은 라이브 검증됨. checksum 강제 시 빌드타임 보강.
+  putToS3?: (uploadUrl: string, file: File) => Promise<void>;
+}
+
+async function defaultPutToS3(uploadUrl: string, file: File): Promise<void> {
+  const res = await fetch(uploadUrl, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/pdf' },
+    body: file,
+  });
+  if (!res.ok) throw new Error(`S3 업로드 실패: HTTP ${res.status}`);
 }
 
 export type WidgetStore = StoreApi<WidgetState>;
@@ -101,6 +124,8 @@ export function createWidgetStore(deps: WidgetStoreDeps): WidgetStore {
     priceCache: new Map(),
     status: 'idle',
     editorSide: null,
+    editorConfig: null,
+    uploadingSide: null,
     errors: [],
 
     async loadProduct(code: string) {
@@ -161,6 +186,80 @@ export function createWidgetStore(deps: WidgetStoreDeps): WidgetStore {
 
     setArtifact(side, a) {
       set({ artifacts: { ...get().artifacts, [side]: a } });
+    },
+
+    async openEditor(side) {
+      const code = get().product?.code;
+      if (!code) return;
+      set({ status: 'designing', editorSide: side });
+      try {
+        // BFF/어댑터가 토큰체인(makers /token,/editor,/template/hit)을 수행하고 최종 config 만 반환.
+        // 위젯은 token 을 보관하지 않고 즉시 SDK(iframe URL)로 전달(보안 — editor-integration §1).
+        const config = await deps.bff.editorConfig(code, side);
+        set({ editorConfig: config });
+      } catch (e) {
+        set({ status: 'error', editorSide: null, errors: [`에디터 로드 실패: ${String(e)}`] });
+      }
+    },
+
+    applyEditorResult(r) {
+      // goto-cart 정규화 결과 → artifacts[side]=editor. 가격 재계산(페이지수 변동 가능).
+      const artifact: NormalizedArtifact = {
+        side: r.side,
+        kind: 'editor',
+        projectId: r.projectId,
+        thumbnailUrls: r.thumbnailUrls,
+        totalPageCount: r.totalPageCount,
+      };
+      set({
+        artifacts: { ...get().artifacts, [r.side]: artifact },
+        editorConfig: null,
+        editorSide: null,
+        status: 'ready',
+      });
+      get().schedulePriceQuote();
+    },
+
+    closeEditor() {
+      set({ editorConfig: null, editorSide: null, status: 'ready' });
+    },
+
+    async uploadPdf(side, file) {
+      const product = get().product;
+      if (!product) return;
+      // 파일 유효성(application/pdf) — s3-upload-flow §3 step 2.
+      if (file.type !== 'application/pdf') {
+        set({ errors: ['PDF 파일만 업로드할 수 있습니다.'] });
+        return;
+      }
+      set({ uploadingSide: side });
+      try {
+        // ① presigned 발급(직전 1회, 60분 만료 — 미리 발급 금지).
+        const presigned = await deps.bff.presigned({
+          fileName: file.name,
+          productCode: product.code,
+          contentType: 'application/pdf',
+          side,
+        });
+        // ② S3 직접 PUT(BFF 경유 안 함).
+        await (deps.putToS3 ?? defaultPutToS3)(presigned.uploadUrl, file);
+        // ③ file-meta 조회(페이지수/크기 — canOrder 입력).
+        const meta = await deps.bff.fileMeta(presigned.storedFileName);
+        const artifact: NormalizedArtifact = {
+          side,
+          kind: 'pdf',
+          storedFileName: presigned.storedFileName,
+          originalFileName: file.name,
+          totalPageCount: meta.pageCount,
+        };
+        set({
+          artifacts: { ...get().artifacts, [side]: artifact }, // == fileUploadInfo[side]
+          uploadingSide: null,
+        });
+        get().schedulePriceQuote();
+      } catch (e) {
+        set({ uploadingSide: null, errors: [`업로드 실패: ${String(e)}`] });
+      }
     },
 
     schedulePriceQuote() {

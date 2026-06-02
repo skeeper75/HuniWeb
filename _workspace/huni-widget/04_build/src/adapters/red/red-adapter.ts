@@ -7,6 +7,8 @@ import type {
   ProductSide,
   SideKey,
   NormalizedConstraints,
+  QuantityRule,
+  InputSpec,
   DisableRule,
   SizeRule,
   NormalizedPriceRequest,
@@ -128,8 +130,26 @@ function mapPcsGroups(pcsInfo: RedPcsInfo[], side: SideKey): OptionGroup[] {
   return groups;
 }
 
+// 수량/내지장수 스펙(pdt_prn_cnt_info) → QuantityRule. mapOptionGroups·mapConstraints 공용.
+// FIR/INC/STEP/DFT 와 책자 내지(MIN/MAX/STEP_INN_PAGE)를 한 곳에서 추출해 UI 그룹과 제약이 동일 소스를 본다.
+function buildQuantityRule(data: RedProductData): QuantityRule | undefined {
+  const prn = data.pdt_prn_cnt_info[0];
+  if (!prn) return undefined;
+  return {
+    min: prn.MIN_PRN_CNT,
+    first: prn.FIR_CNT,
+    increment: prn.INC_CNT,
+    step: prn.INC_STEP,
+    default: prn.DFT_PRN_CNT,
+    pageMin: prn.MIN_INN_PAGE,
+    pageMax: prn.MAX_INN_PAGE,
+    pageStep: prn.STEP_INN_PAGE,
+  };
+}
+
 function mapOptionGroups(data: RedProductData, hasInner: boolean): OptionGroup[] {
   const groups: OptionGroup[] = [];
+  const q = buildQuantityRule(data);
 
   // 규격 (option-button)
   const visibleSizes = data.pdt_size_info.filter((s) => s.HIDE_YN !== 'Y');
@@ -208,6 +228,48 @@ function mapOptionGroups(data: RedProductData, hasInner: boolean): OptionGroup[]
         })),
       });
     }
+
+    // 내지 장수 (page-counter-input) — 책자만. MIN/MAX/STEP_INN_PAGE 기반 입력형 그룹.
+    // [D1] 이전에는 mapConstraints 의 quantity 객체로만 들어가 UI 가 렌더되지 못했다.
+    if (q?.pageMin != null && q?.pageMax != null) {
+      groups.push({
+        id: 'GRP_INNER_PAGE',
+        side: 'inner',
+        label: '내지 장수',
+        componentType: DATASET_COMPONENT_TYPE.innerPage, // 'page-counter-input'
+        required: true,
+        visible: true,
+        values: [], // 입력형 — values 대신 inputSpec 사용. 빈 배열로 계약 타입 충족(반복 시 no-op).
+        inputSpec: {
+          min: q.pageMin,
+          max: q.pageMax,
+          step: q.pageStep ?? 1,
+          defaultValue: q.pageMin,
+        } satisfies InputSpec,
+      });
+    }
+  }
+
+  // 수량 (counter-input) — 전 상품 공통. FIR/INC/STEP/DFT 기반 입력형 그룹.
+  // [D1] 이전에는 mapConstraints 의 quantity 객체로만 들어가 OptionPanel 이 렌더할 그룹이 없었다.
+  // 이 그룹이 UI 표면, mapConstraints 의 quantity 는 검증(clamp/snap) 소스 — 둘 다 같은 buildQuantityRule 사용.
+  if (q) {
+    groups.push({
+      id: 'GRP_QUANTITY',
+      side: 'default',
+      label: '수량',
+      componentType: DATASET_COMPONENT_TYPE.quantity, // 'counter-input'
+      required: true,
+      visible: true,
+      values: [], // 입력형 — values 대신 inputSpec 사용. 빈 배열로 계약 타입 충족(반복 시 no-op).
+      inputSpec: {
+        min: q.min,
+        max: Number.MAX_SAFE_INTEGER, // Red FIR/INC 기반 — 상한 미명시. 실상한은 가격 API/검증이 판단.
+        step: q.step,
+        first: q.first,
+        defaultValue: q.default,
+      } satisfies InputSpec,
+    });
   }
 
   return groups;
@@ -215,7 +277,6 @@ function mapOptionGroups(data: RedProductData, hasInner: boolean): OptionGroup[]
 
 function mapConstraints(data: RedProductData): NormalizedConstraints {
   const base = data.pdt_base_info[0];
-  const prn = data.pdt_prn_cnt_info[0];
 
   const disableRules: DisableRule[] = data.pdt_disable_pcs_info.map((r) => ({
     triggerValueId: r.MTRL_CD,
@@ -234,19 +295,9 @@ function mapConstraints(data: RedProductData): NormalizedConstraints {
 
   return {
     disableRules,
+    // UI 그룹(GRP_QUANTITY/GRP_INNER_PAGE)과 동일 소스 — 그룹은 표면, 이 객체는 검증(clamp/snap).
     quantity: {
-      default: prn
-        ? {
-            min: prn.MIN_PRN_CNT,
-            first: prn.FIR_CNT,
-            increment: prn.INC_CNT,
-            step: prn.INC_STEP,
-            default: prn.DFT_PRN_CNT,
-            pageMin: prn.MIN_INN_PAGE,
-            pageMax: prn.MAX_INN_PAGE,
-            pageStep: prn.STEP_INN_PAGE,
-          }
-        : undefined,
+      default: buildQuantityRule(data),
     },
     sizeRules,
     base: {

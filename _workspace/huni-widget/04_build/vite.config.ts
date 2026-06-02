@@ -13,6 +13,10 @@ export default defineConfig({
   },
   resolve: {
     alias: { '@': resolve(__dirname, 'src') },
+    // React 단일 인스턴스 강제 — dev 모듈 그래프(loader raw-URL + optimized deps)에서
+    // React 가 두 인스턴스로 분리돼 "Invalid hook call" 이 뜨는 것을 차단. (Radix 가 위젯과
+    // 같은 React 를 보게 보장.) node_modules 가 이미 deduped 라 prod 빌드엔 무영향.
+    dedupe: ['react', 'react-dom'],
   },
   build: {
     lib: {

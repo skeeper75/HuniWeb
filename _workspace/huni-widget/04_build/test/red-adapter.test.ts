@@ -33,6 +33,39 @@ describe('Red adapter → 정규화 계약', () => {
     }
   });
 
+  // [D1 회귀] 수량/내지장수 입력형 그룹이 optionGroups 로 방출되어야 OptionPanel 이 렌더한다.
+  it('D1: 수량(counter-input)·내지장수(page-counter-input) OptionGroup 방출', () => {
+    const p = mapProduct(productPRBKYPR as unknown as RedDigitalProductResponse);
+
+    // 수량 그룹 — 전 상품 공통, default side, FIR/INC/STEP/DFT 기반 inputSpec.
+    const qty = p.optionGroups.find((g) => g.id === 'GRP_QUANTITY');
+    expect(qty).toBeTruthy();
+    expect(qty?.componentType).toBe('counter-input');
+    expect(qty?.side).toBe('default');
+    expect(qty?.visible).toBe(true);
+    expect(qty?.inputSpec).toBeTruthy();
+    expect(qty?.inputSpec?.first).toBe(1); // FIR_CNT
+    expect(qty?.inputSpec?.step).toBe(10); // INC_STEP
+    expect(qty?.inputSpec?.defaultValue).toBe(30); // DFT_PRN_CNT
+    expect(qty?.inputSpec?.min).toBe(30); // MIN_PRN_CNT
+
+    // 내지 장수 그룹 — 책자(inner)만, MIN/MAX/STEP_INN_PAGE 기반.
+    const page = p.optionGroups.find((g) => g.id === 'GRP_INNER_PAGE');
+    expect(page).toBeTruthy();
+    expect(page?.componentType).toBe('page-counter-input');
+    expect(page?.side).toBe('inner');
+    expect(page?.visible).toBe(true);
+    expect(page?.inputSpec?.min).toBe(10); // MIN_INN_PAGE
+    expect(page?.inputSpec?.max).toBe(300); // MAX_INN_PAGE
+    expect(page?.inputSpec?.step).toBe(1); // STEP_INN_PAGE
+
+    // 제약(quantity) 객체도 그대로 유지 — 검증(clamp/snap) 소스.
+    const cq = p.constraints.quantity.default;
+    expect(cq?.first).toBe(1);
+    expect(cq?.pageMin).toBe(10);
+    expect(cq?.pageMax).toBe(300);
+  });
+
   it('disableRules 평면화 (RXOMO080 → 그룹 비활성)', () => {
     const p = mapProduct(productPRBKYPR as unknown as RedDigitalProductResponse);
     const rule = p.constraints.disableRules.find((r) => r.triggerValueId === 'RXOMO080');
