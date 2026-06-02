@@ -7,7 +7,7 @@
 
 ## 0. 핵심 원칙
 
-[역공학 price-engine §2 단가분해] result_log[3] 머신리더블 단가를 단순 곱해도 실제가와 불일치(130,260 ≫ 56,000) → 단가테이블·구간보간은 서버 내부. **위젯이 재계산하면 틀린다**. 위젯은 표시만.
+[역공학 price-engine §2 단가분해] Red 응답의 머신리더블 단가를 단순 곱해도 실제가와 불일치(130,260 ≫ 56,000) → 단가테이블·구간보간은 서버 내부. **위젯이 재계산하면 틀린다**(Red·후니 공통). 위젯은 서버 가격 API의 응답을 표시만 하고, 가격 공식 자체는 서버(오늘 Red 참고 / 추후 후니 자체 공식) 책임이다. Red 가격값과 후니 가격값을 비교·정합하지 않는다.
 
 ```
 옵션 변경 → store.selections 갱신 → applyCascade → debounce(300ms)
@@ -35,25 +35,36 @@ function buildPriceRequest(s: WidgetState): NormalizedPriceRequest {
 }
 ```
 
-> 위젯은 `priceSchemeKey`·자재 id·color count를 **해석 없이 전달**. price_gbn 분기(book2025/tiered/vTmpl)는 [역공학 §1] 서버측 가격 룰 엔진이 처리. 위젯은 echo만 → 후니 어댑터가 후니 가격엔진으로 동일 분기.
+> 위젯은 `priceSchemeKey`·자재 id·color count를 **해석 없이 전달**(불투명 옵션 선택). `price_gbn` 분기(book2025/tiered/vTmpl)는 [역공학 §1] **Red 서버의 분기 방식(참고)**일 뿐이며 후니에 강제되지 않는다. 후니 가격 API/어댑터는 **후니 자체 가격체계**(그것이 무엇이든)로 분기한다. 위젯은 어느 쪽이든 불투명 `priceSchemeKey`를 echo만 하므로 무관하다.
 
 ---
 
-## 2. price_gbn 분기 (서버측, 위젯 무관)
+## 2. 가격체계 분기 (서버측, 위젯 무관)
 
-[역공학 price-engine §1]:
+아래 표는 **Red 위젯이 관찰된 분기 방식(참고)**이다 [역공학 price-engine §1]. 후니가 이 키·체계를 채택해야 한다는 의미가 아니다:
 
-| 상품 | priceSchemeKey (Red price_gbn) | 체계 |
-|------|-------------------------------|------|
+| 상품 | Red price_gbn (참고) | Red 체계 |
+|------|----------------------|----------|
 | 책자 | `book2025_price` | 표지+내지 분리, 페이지×수량 |
 | 굿즈 | `tiered_price` | 수량 구간 단가 |
 | 아크릴 | `vTmpl_price` | 템플릿 기반 |
 
-[결정] 위젯은 이 키를 요청에 echo만 하고 동일 엔드포인트(`/price`)로 호출. 분기는 BFF/어댑터/가격엔진 책임. 위젯에 분기 로직 0.
+[결정] 위젯은 불투명 `priceSchemeKey`를 요청에 echo만 하고 동일 엔드포인트(`/price`)로 호출. **가격체계 분기 자체는 후니 가격 API/어댑터의 책임이며 후니 자체 스킴으로 결정**된다(Red의 분기 구조와 무관). 위젯에 분기 로직 0.
 
 ---
 
-## 3. 디바운스 + 캐시
+## 3. 디바운스 + 캐시 (서버 권위 + 클라이언트 캐싱)
+
+[전략 — Red 접근 계승] 위젯은 가격을 **불투명 값으로 취급**(클라이언트 계산 0). 트래픽은 두 장치로만 억제한다 — ① 디바운스(연속 변경 시 마지막 1건만), ② 옵션조합 캐시(동일 정규화 조합 재선택 시 재호출 회피). 과설계 금지: 추측성 무효화 프레임워크·설정 노출 없이 인메모리 `Map` + TTL 만으로 끝낸다.
+
+**캐시 hit/miss 흐름**:
+```
+옵션 변경 → debounce(300ms, last-only) 통과
+  → buildPriceRequest → key = hashRequest(정규화 요청)
+  → cache.get(key):
+       hit  & (now - ts < TTL): 즉시 store.price 세팅, 네트워크 0 (status 변동 없음)
+       miss 또는 만료          : status='pricing' → BFF POST /price → 응답 cache.set(key) + store.price
+```
 
 ```ts
 // debounce 300ms — [동작분석] 라이브 ~360ms(300 디바운스 + 처리) 입증
@@ -108,7 +119,9 @@ Req:  NormalizedPriceRequest   (data-contract §3)
 Res:  NormalizedPriceBreakdown (data-contract §3)
 ```
 
-BFF 내부(어댑터): `NormalizedPriceRequest` → Red `{dataJson:{ORD_INFO,PCS_INFO,price_gbn,mb_cust_cod}}` → `get_ajax_price_vTmpl` → 워터폴 적용 → `NormalizedPriceBreakdown`. [역공학 §1 실측 계약].
+BFF 내부(어댑터)는 데이터소스마다 다르다. 위젯은 어느 경우든 `NormalizedPriceRequest`만 보내고 `NormalizedPriceBreakdown`만 받는다:
+- **오늘(Red 어댑터, 참고 구현)**: `NormalizedPriceRequest` → Red `{dataJson:{ORD_INFO,PCS_INFO,price_gbn,mb_cust_cod}}` → `get_ajax_price_vTmpl` → 워터폴 → `NormalizedPriceBreakdown` [역공학 §1 실측].
+- **추후(후니 어댑터)**: `NormalizedPriceRequest` → 후니 가격 API의 **자체 요청 형태** → 후니 가격 응답 → `NormalizedPriceBreakdown`. 후니 API가 Red 형태일 필요 없음. 매핑은 후니 API를 그 자체로 받아 정규화 타입으로 직접 사상([data-adapter §4]).
 
 ---
 
@@ -120,5 +133,5 @@ BFF 내부(어댑터): `NormalizedPriceRequest` → Red `{dataJson:{ORD_INFO,PCS
 
 ## 7. OPEN
 
-- 굿즈/아크릴 가격 요청 정확 필드(PAGE_CNT 생략 등) — 어댑터 분기로 흡수, 후니 데이터로 검증 [역공학 미검증: 비책자].
-- 회원등급 할인 워터폴 실데이터 — 어댑터 책임, 위젯 무관 [역공학 미검증].
+- 굿즈/아크릴 가격 요청 정확 필드(PAGE_CNT 생략 등) — 어댑터 분기로 흡수. 후니 어댑터가 후니 가격 API를 정규화 계약으로 올바르게 사상하는지 검증(Red값과의 정합 아님) [역공학 미검증: 비책자].
+- 회원등급/할인 산정 — 후니 가격 API/어댑터 책임, 위젯 무관 (위젯은 `finalPrice`만 표시) [역공학 미검증].

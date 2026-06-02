@@ -132,7 +132,7 @@ lines      = result[].map → {code:PCS_CD, label:result_log[0] 한글, amount:P
 후니 DB가 Neon이든 다른 형태든, `ProductAdapter`/`PriceAdapter`/... 5개 인터페이스를 구현하면 위젯은 무변경. 후니 어댑터가 해야 할 일:
 
 1. 후니 옵션 마스터 → `NormalizedProduct`(componentType 매핑 테이블은 후니 옵션 타입 기준으로 1회 작성).
-2. 후니 가격엔진(또는 Red 동형 ORD_INFO+PCS_INFO 계약) → `NormalizedPriceBreakdown`. 후니가 동일 계약을 노출하면 §2.4 거의 재사용.
+2. **후니 가격 API의 자체 요청/응답 형태** → `NormalizedPriceBreakdown`로 **직접** 사상. 후니가 Red 형태(ORD_INFO+PCS_INFO/price_gbn)를 노출한다는 가정 없음 — 후니 API가 어떤 shape든 그 자체를 받아 정규화한다. §2.4(Red 매핑)는 **오늘의 Red 어댑터 구현 참고**일 뿐 후니가 따를 템플릿이 아니다. 정규화 계약(`NormalizedPriceRequest`/`Breakdown`)은 Red·후니 API를 **각자의 형태 그대로** 수용하도록 중립이다. Red 가격값과 후니 가격값을 비교·정합하지 않는다(별개 가격 공식).
 3. 후니 S3/스토리지 presigned → `NormalizedPresigned`.
 4. 후니 Edicus 파트너 설정(`.env.local` EDICUS_PARTNER_CODE 등) → 토큰 발급 → `NormalizedEditorConfig`.
 5. cartHandoff → [UNDECIDED 커머스]. 후니 커머스 확정 시 이 메서드 내부만 구현.

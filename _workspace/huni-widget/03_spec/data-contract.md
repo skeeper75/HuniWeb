@@ -119,9 +119,10 @@ export interface BaseRule {
 
 ---
 
-## 3. 가격 계약 (서버 권위)
+## 3. 가격 계약 (서버 권위, Red-shape 중립)
 
-[역공학 price-engine] ORD_INFO+PCS_INFO 실측 계약을 정규화. **위젯은 단가/공식 없음**.
+[설계] 가격 요청/응답은 **특정 백엔드 형태와 무관한 중립 정규화 shape**다. Red의 ORD_INFO+PCS_INFO/price_gbn 구조는 정규화의 출발 근거가 아니라 **오늘 Red 어댑터가 매핑해 들어오는 한 소스 형태(참고)**일 뿐이다. 이 계약은 Red 어댑터(오늘)와 후니 가격 API 어댑터(추후) 둘 다 — **각자의 고유 형태 그대로** — 만족할 수 있어야 한다. **위젯은 단가/공식 없음**(가격은 불투명 결과값).
+> 아래 필드의 주석은 Red 어댑터가 그 필드를 어디서 채우는지에 대한 참고일 뿐(예: `quantity`↔Red PRN_CNT). 후니 어댑터는 후니 API에서 동일 정규화 필드를 자기 방식으로 채운다. 계약 필드명에 Red/후니 고유명은 없다.
 
 ```ts
 // contract/price.ts
@@ -144,14 +145,14 @@ export interface NormalizedPriceBreakdown {
   // 최종 표시금액 (3단 워터폴 [역공학] 은 어댑터가 적용해 final로 평면화)
   finalPrice: number;           // 결제금액(부가세 별산 전)
   vat: number;
-  shipping: number;             // book_info.DLVR_AMT
-  lines: PriceLine[];           // 공정별 분해 (투명성 표시 — DESIGN Summary)
+  shipping: number;             // 배송비 (Red 어댑터는 book_info.DLVR_AMT에서 채움 — 참고)
+  lines: PriceLine[];           // 공정별 분해 (선택적, 투명성 표시 — DESIGN Summary)
   raw?: unknown;                // 디버그용 (위젯은 안 씀)
 }
 export interface PriceLine { code: string; label: string; amount: number; } // PCS_CD → 한글 label
 ```
 
-> [결정] 3단 워터폴(정가/할인가/몰가) 선택 로직은 **어댑터**가 수행하고 위젯엔 `finalPrice` 단일값만 준다. [역공학 §1 워터폴]이 서버/할인 정책 영역이므로 위젯 책임에서 제거(단순성). 공정별 `lines`는 DESIGN Summary 투명성 표시용으로 보존.
+> [결정] 위젯엔 항상 `finalPrice` 단일값만 준다. 최종금액을 **어떻게 산정하는지**는 백엔드/어댑터 영역이다 — Red의 3단 워터폴(정가/할인가/몰가)은 [역공학 §1] Red 산정 방식(참고)이고, 후니는 후니 자체 할인·금액 산정을 쓴다. 어느 쪽이든 위젯은 산정 방식을 모르고 결과 `finalPrice`만 표시(단순성). 공정별 `lines`는 선택적 — 백엔드가 분해 행을 제공하면 DESIGN Summary 투명성 표시에 쓰고, 없으면 비워도 된다.
 
 ---
 
