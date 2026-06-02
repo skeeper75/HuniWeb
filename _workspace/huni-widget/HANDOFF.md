@@ -32,6 +32,8 @@
 | **S3 NC-1 구현 (첫 코어 터치, store 분기1개+numeric slot, 39 green)** | 🟢 | 7968401 |
 | **S3/NC-1 비교 QA — GO (8/8 PASS, 결함해소 3중 증명, INV-3 git show)** | 🟢 | 7b2dc9a |
 | **S4 아크릴 검증 (위젯/어댑터 0변경, finish-button 흡수, NC-2 신규 불요 확정) + hashRequest 핫픽스 + S4 비교 QA GO (54 green)** | 🟢 | 23b775e |
+| **S5 선행 라이브 검증 (파우치 PRICE>0, 가격모델 SKU별 상이, /rp-api 쿠키주입 수정)** | 🟢 | 39d78a3 |
+| **S5 명세 (NC-3 신규 불요 판정 + tmpl/tiered 어댑터, 위젯 코어 거의 0)** | 🟢 | (이번) |
 
 ## 3. 다음 할 일 (우선순위 순)
 
@@ -39,9 +41,9 @@
 
 > **S5 선행 라이브 검증 완료 (이번 세션):** 로그인 세션 갱신(customerCode 22025916, isClient) 후 실가 캡처. **핸드오프 가정 3건 보정**: ① 가격모델은 **SKU별 상이** — 굿즈 GSTGMIC=`tiered_price`(개당 6000원 **평탄, 할인구간 없음**), 파우치 GSPUFBC=`tmpl_price`(template-lookup 평탄단가). "굿즈/파우치=TieredDiscount 본진" 가정은 부분 오류. ② **비로그인 PRICE=0은 로그인 부족이 아님** — `mb_cust_cod`를 게스트(10000000)↔로그인(22025916)으로 바꿔도 동일, **쿠키 세션이 가격 권위**. ③ **파우치 PRICE=0 근본원인 확정**: tmpl_price는 `ORD_INFO[0].ORD_CNT`+`PRN_CNT` **둘 다 필수**(위젯이 둘 다 누락하면 침묵 0). 규격은 등록 템플릿 치수 정확매칭 필수(자유입력 견적불가). 산출: `05_qa/s5-pouch-live-note.md`, `05_qa/captures/s5_pouch_GSPUFBC.json`. 인프라: server.js `/rp-api` 프록시에 쿠키·red-editor-token 주입 누락 결함 수정(가격 API가 로그인 세션 미전달이던 버그).
 
-1. **[다음·최우선] S5 굿즈/파우치/문구 확대** — 가격모델 **TieredDiscount 본진**(파우치/문구/굿즈/말랑 수량구간 %할인, 말랑 2개부터 즉시할인·최대50%). 일부 포장재=FixedUnit. **GSTGMIC fixture 보유**(검증자산).
-   - 신규 componentType 후보 **NC-3 `image-option-selector`(64×64)** — 색상/타입 셀렉터 다수일 때. ⚠ **image-chip variant 우선·미확정**. S4 전례(NC-2가 디자인 시스템 근거로 흡수 판명)대로 **hw-architect가 디자인 시스템(huni-design-system v5.0.0) 조회 → 신규 vs variant 확정** 후 진행.
-   - 패턴: S4와 동일 파이프라인 — hw-architect(판정·명세 `03_spec/s5-*.md`) → hw-builder(검증/흡수 실증, 0변경 목표) → hw-qa(비교 QA GO).
+1. **[다음·최우선] S5 hw-builder 구현/검증** — 명세 완료(`03_spec/s5-goods-pouch-spec.md`, `s5-nc3-decision.md`). **NC-3=신규 불요 확정**(디자인 시스템 v5.0.0에 image-option-selector 64×64 부재, 50×50 ImageChip로 통합 + 실측 2 SKU에 색상셀렉터 부재). 구현 범위 = 위젯 코어 0줄, **계약 `printCount?` optional 1필드 + buildPriceRequest echo 1줄**(하위호환), 나머지는 어댑터(ORD_CNT/PRN_CNT 직렬화·`quantity≥1&&printCount≥1` 가드)+데이터(파우치 fixture)+테스트. hw-builder가 회귀 0(54 green 유지) 실증 → hw-qa 비교 QA GO.
+   - ⚠ **TieredDiscount 본진 미확인**(S5-M1): 실측 2 SKU(GSTGMIC tiered 평탄·GSPUFBC tmpl 평탄) 모두 수량할인 0%. "말랑 2개부터 즉시할인" 곡선은 **말랑/문구 SKU 라이브 캡처가 후속 임계경로**.
+   - 패턴: S4와 동일 — (명세 완료) → hw-builder(0변경 목표 실증) → hw-qa(비교 QA GO).
 2. **S6 캘린더** — 순수 어댑터(책자 PriceTable3D 변형). ⚠ **Red fixture 미보유 → widget_monitor 라이브 캡처 선행**(임계경로).
 3. **후니 Figma 시각 충실 재현** (expert-frontend) — 14(+NC-1) componentType을 DESIGN.md+`docs/figma/huni_product_option.fig` 시안에 충실하게. 컴포넌트 단위 1회 = 전 stage 재사용. (확대와 병행/이후)
 
