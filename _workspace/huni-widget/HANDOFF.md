@@ -8,7 +8,7 @@
 
 ## 1. 한 줄 요약
 
-후니 인쇄 자동견적 위젯을 **역공학 보강 → 구현**으로 만드는 하네스. 현재 **책자(S0)·디지털인쇄(S1)·스티커(S2) 구현+비교QA GO 완료**, 위젯 코어가 정규화 계약+어댑터로 "코드 0변경 상품 확대" 가설을 **S1·S2 연속 실증**(S2는 `src/widget/**` 0줄 변경을 git diff로 증명). 다음은 **S3 포스터/실사(신규 NC-1 dimension-matrix-input) + Figma 시각 재현**.
+후니 인쇄 자동견적 위젯을 **역공학 보강 → 구현**으로 만드는 하네스. 현재 **책자(S0)·디지털인쇄(S1)·스티커(S2)·포스터/실사(S3) 구현+비교QA GO 완료**. 두 핵심 가설 실증: ① "코드 0변경 상품 확대"(S1·S2, `src/widget/**` 0줄 git diff 증명) ② **"신규 componentType도 코어 재작성 0"**(S3 NC-1 = 첫 코어 터치였으나 store `dimsFromSelection` if-분기 1개 + numeric slot만, cascade/shadow/editor-bridge/price-seam 0줄 — git show 7968401 증명). 다음은 **S4 아크릴(NC-2 option-addon-picker) + Figma 시각 재현**.
 
 ## 2. 현재 진척 (커밋 완료)
 
@@ -27,13 +27,21 @@
 | **S1 디지털인쇄 확대 (위젯 코어 0변경)** | 🟢 | 3ba1c08 |
 | **S1 비교 QA — GO (5항목 PASS, 회귀 라이브)** | 🟢 | 74a383b |
 | **S2 스티커 캡처+fixture+코어0변경 실증 (29/29 무회귀)** | 🟢 | 19e0331 |
-| **S2 비교 QA — GO (6/6 PASS, F4 PASS, INV-3 git diff 증명)** | 🟢 | (이번 커밋) |
+| **S2 비교 QA — GO (6/6 PASS, F4 PASS, INV-3 git diff 증명)** | 🟢 | b6c01f4 |
+| **S3 포스터/실사 캡처 + NC-1 명세** | 🟢 | d2a10c6 |
+| **S3 NC-1 구현 (첫 코어 터치, store 분기1개+numeric slot, 39 green)** | 🟢 | 7968401 |
+| **S3/NC-1 비교 QA — GO (8/8 PASS, 결함해소 3중 증명, INV-3 git show)** | 🟢 | (이번 커밋) |
 
 ## 3. 다음 할 일 (우선순위 순)
 
-1. **[다음] S3 포스터/실사·사인·배너 확대** — 신규 componentType **NC-1 `dimension-matrix-input`**(2D 가로×세로 → SizeMatrix2D 단가) 첫 도입. ⚠ **실사/포스터 Red fixture 미보유 → widget_monitor 라이브 캡처 선행**(S1·S2 방식: :3001 프록시로 임의 productCode 구동, catalog.json엔 없음). S3는 위젯 가시 변경(첫 신규 leaf 컴포넌트) — dispatcher case 추가 + 계약 `ComponentType` union 1줄, 코어(store/cascade/shadow) 불변. QA 노트: `area-input` 디스패처 case는 이미 존재하나 S0~S2 미사용이라 S3에서 첫 실데이터 검증 대상.
-2. **S4 아크릴** (NC-2 option-addon-picker, ACNTHAP fixture 보유), **S5 굿즈/파우치** (NC-3, GSTGMIC fixture 보유), **S6 캘린더** (순수 어댑터, ⚠ fixture 캡처 선행).
-3. **후니 Figma 시각 충실 재현** (expert-frontend) — 14 componentType을 DESIGN.md+`docs/figma/huni_product_option.fig` 시안에 충실하게. 컴포넌트 단위 1회 = 전 stage 재사용. (사용자 Q2 선택, 확대와 병행/이후)
+1. **[다음] S4 아크릴 확대** — 신규 componentType **NC-2 `option-addon-picker`**(고리/자석/바디칼라 등 가격기여 옵션, 라벨+추가단가 병기). ACNTHAP fixture 보유. SizeMatrix2D는 **S3 NC-1 재사용**. 가격모델 3중 합성(SizeMatrix2D + 옵션단가 + TieredDiscount 50%) 전부 BFF. ⚠ NC-2는 expansion-strategy §3에서 **변형 우선**(option-button + 값별 추가단가 라벨 병기로 흡수 가능성) — Figma 확인 후 신규 vs variant 확정. 추가단가는 **라벨 텍스트 병기**(서버권위 유지, 계약 가격필드 추가 금지).
+2. **S5 굿즈/파우치** (NC-3 image-option-selector 조건부, image-chip variant 우선, GSTGMIC fixture 보유), **S6 캘린더** (순수 어댑터, 책자 변형, ⚠ fixture 캡처 선행).
+3. **후니 Figma 시각 충실 재현** (expert-frontend) — 14(+NC-1) componentType을 DESIGN.md+`docs/figma/huni_product_option.fig` 시안에 충실하게. 컴포넌트 단위 1회 = 전 stage 재사용. (사용자 Q2 선택, 확대와 병행/이후)
+
+### S3 NC-1 후속 보강 포인트 (s3-qa.md / NC1-impl-note.md)
+- PRICE>0 실가 비교(로그인 캡처로 cutW/cutH 변동→PRICE 변동 직접 증거) — 후니 비교검증 임계경로
+- 작업사이즈 `work=cut+CUT_MRG(4mm)` 공식의 real_price 상품 공통성(BNBNFBL/BNPTPET만 캡처)
+- MAX_CUT 검증 위치(leaf clampAxis vs canOrder) UX 정합 / defaultSelections DFT_YN=Y 우선정렬 후니 정책 정합
 
 ### S1·S2 잔존 Minor (비차단, 병행 보강 가능)
 - S1-M1: 별색 5종 fixture 보강
