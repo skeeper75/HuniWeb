@@ -1,0 +1,702 @@
+{
+  "captured_at": "2026-06-02T08:04:29.125Z",
+  "source": "localhost:3001 → www.redprinting.co.kr (live)",
+  "evidence": "[라이브 검증]",
+  "note": "pdt_disable_pcs_info = 캐스케이드 제약 (특정 자재 선택 시 비활성화되는 후가공). MTRL_CD↔PCS_CD 매핑.",
+  "catalog_summary": {
+    "total_products": 479,
+    "new_widget_vue3": "~25 (책자 PRBKY*/PRBKO*, 굿즈 GS*, 아크릴 AC*)",
+    "legacy_jquery": "나머지"
+  },
+  "categories": {
+    "GS": 136,
+    "PR": 56,
+    "ST": 36,
+    "PH": 30,
+    "CL": 30,
+    "TP": 23,
+    "BN": 23,
+    "FS": 21,
+    "AC": 20,
+    "AI": 14,
+    "BT": 12,
+    "AH": 10,
+    "BC": 9,
+    "NC": 9,
+    "FB": 8,
+    "OT": 7,
+    "EN": 7,
+    "HL": 7,
+    "PO": 7,
+    "LF": 3,
+    "PD": 3,
+    "ET": 2,
+    "PM": 2,
+    "SK": 2,
+    "PV": 1,
+    "ME": 1
+  },
+  "products": [
+    {
+      "pdt_cod": "PRBKYPR",
+      "pdt_nme": "무선 책자 (컬러)",
+      "price_gbn": "book2025_price",
+      "item_gbn": "book2025_item",
+      "unit": "권",
+      "editors": {
+        "useKoiEditor": "Y",
+        "useRPEditor": "N",
+        "usePDF": "Y"
+      },
+      "datasets": [
+        "pdt_base_info",
+        "pdt_mtrl_info",
+        "pdt_size_info",
+        "pdt_dosu_info",
+        "pdt_bnc_info",
+        "pdt_dosu_bnc_info",
+        "pdt_prn_cnt_info",
+        "pdt_prn_cnt_info_add",
+        "pdt_exp_prn_cnt_info",
+        "pdt_pcs_info",
+        "pdt_add_pcs_info",
+        "pdt_disable_pcs_info",
+        "inner_pdt_mtrl_info",
+        "inner_pdt_dosu_info",
+        "inner_pdt_bnc_info",
+        "inner_pdt_dosu_bnc_info",
+        "pdt_add_info"
+      ],
+      "size_sample": {
+        "DIV_NM": "무선책자 (A4세로형)",
+        "CUT": "210.00x297.00",
+        "WRK": "220.00x307.00"
+      },
+      "mtrl_count": 1,
+      "mtrl_sample": {
+        "MTRL_CD": "RXART300",
+        "PTT_NME": "아트지",
+        "WGT": "300"
+      },
+      "dosu": [
+        {
+          "COD": "SID_S",
+          "NME": "단면",
+          "CLR": 4
+        },
+        {
+          "COD": "SID_D",
+          "NME": "양면",
+          "CLR": 8
+        }
+      ],
+      "qty_rule": {
+        "FIR": 1,
+        "INC": 10,
+        "STEP": 10,
+        "MIN": 30,
+        "DFT": 30,
+        "MIN_PAGE": 10,
+        "MAX_PAGE": 300
+      },
+      "pcs_count": 20,
+      "pcs_list": [
+        {
+          "PCS_COD": "COT_DFT",
+          "GRP": "코팅",
+          "DTL": "TCMAS",
+          "DTL_NME": "무광코팅단면",
+          "ESN": "Y",
+          "VIEW": "Y",
+          "SUB_MTRL": "N"
+        },
+        {
+          "PCS_COD": "COT_DFT",
+          "GRP": "코팅",
+          "DTL": "TCGLS",
+          "DTL_NME": "유광코팅단면",
+          "ESN": "Y",
+          "VIEW": "Y",
+          "SUB_MTRL": "N"
+        },
+        {
+          "PCS_COD": "COT_DFT",
+          "GRP": "코팅",
+          "DTL": "TCEBS",
+          "DTL_NME": "엠보코팅단면",
+          "ESN": "Y",
+          "VIEW": "Y",
+          "SUB_MTRL": "N"
+        },
+        {
+          "PCS_COD": "CUT_DFT",
+          "GRP": "재단",
+          "DTL": "DFXXX",
+          "DTL_NME": "재단",
+          "ESN": "Y",
+          "VIEW": "N",
+          "SUB_MTRL": "N"
+        },
+        {
+          "PCS_COD": "PER_DFT",
+          "GRP": "무선",
+          "DTL": "BPLFT",
+          "DTL_NME": "좌철",
+          "ESN": "Y",
+          "VIEW": "N",
+          "SUB_MTRL": "N"
+        },
+        {
+          "PCS_COD": "CVR_SFT",
+          "GRP": "커버",
+          "DTL": "DFXXX",
+          "DTL_NME": "소프트커버",
+          "ESN": "Y",
+          "VIEW": "N",
+          "SUB_MTRL": "N"
+        },
+        {
+          "PCS_COD": "CVR_SWN",
+          "GRP": "날개 커버",
+          "DTL": "DFPRT",
+          "DTL_NME": "날개소프트커버",
+          "ESN": "N",
+          "VIEW": "Y",
+          "SUB_MTRL": "N"
+        },
+        {
+          "PCS_COD": "END_PAP",
+          "GRP": "면지",
+          "DTL": "CLYEL",
+          "DTL_NME": "노랑",
+          "ESN": "N",
+          "VIEW": "Y",
+          "SUB_MTRL": "N"
+        },
+        {
+          "PCS_COD": "END_PAP",
+          "GRP": "면지",
+          "DTL": "CLMIN",
+          "DTL_NME": "민트",
+          "ESN": "N",
+          "VIEW": "Y",
+          "SUB_MTRL": "N"
+        },
+        {
+          "PCS_COD": "END_PAP",
+          "GRP": "면지",
+          "DTL": "CLWHT",
+          "DTL_NME": "화이트",
+          "ESN": "N",
+          "VIEW": "Y",
+          "SUB_MTRL": "N"
+        },
+        {
+          "PCS_COD": "END_PAP",
+          "GRP": "면지",
+          "DTL": "CLPPL",
+          "DTL_NME": "보라",
+          "ESN": "N",
+          "VIEW": "Y",
+          "SUB_MTRL": "N"
+        },
+        {
+          "PCS_COD": "END_PAP",
+          "GRP": "면지",
+          "DTL": "CLPIN",
+          "DTL_NME": "분홍",
+          "ESN": "N",
+          "VIEW": "Y",
+          "SUB_MTRL": "N"
+        },
+        {
+          "PCS_COD": "END_PAP",
+          "GRP": "면지",
+          "DTL": "CLAPR",
+          "DTL_NME": "살구",
+          "ESN": "N",
+          "VIEW": "Y",
+          "SUB_MTRL": "N"
+        },
+        {
+          "PCS_COD": "END_PAP",
+          "GRP": "면지",
+          "DTL": "CLGRN",
+          "DTL_NME": "연두",
+          "ESN": "N",
+          "VIEW": "Y",
+          "SUB_MTRL": "N"
+        },
+        {
+          "PCS_COD": "END_PAP",
+          "GRP": "면지",
+          "DTL": "CLBLU",
+          "DTL_NME": "파랑",
+          "ESN": "N",
+          "VIEW": "Y",
+          "SUB_MTRL": "N"
+        },
+        {
+          "PCS_COD": "END_PAP",
+          "GRP": "면지",
+          "DTL": "CLSKY",
+          "DTL_NME": "하늘",
+          "ESN": "N",
+          "VIEW": "Y",
+          "SUB_MTRL": "N"
+        },
+        {
+          "PCS_COD": "END_PAP",
+          "GRP": "면지",
+          "DTL": "CLGRY",
+          "DTL_NME": "회색",
+          "ESN": "N",
+          "VIEW": "Y",
+          "SUB_MTRL": "N"
+        },
+        {
+          "PCS_COD": "SCO_DFT",
+          "GRP": "부분UV",
+          "DTL": "DFXXS",
+          "DTL_NME": "부분UV 단면",
+          "ESN": "N",
+          "VIEW": "Y",
+          "SUB_MTRL": "N"
+        },
+        {
+          "PCS_COD": "BIND_DIRECTION",
+          "GRP": "제본방향",
+          "DTL": "BPLFT",
+          "DTL_NME": "좌철",
+          "ESN": "Y",
+          "VIEW": "Y"
+        },
+        {
+          "PCS_COD": "BIND_DIRECTION",
+          "GRP": "제본방향",
+          "DTL": "BPTOP",
+          "DTL_NME": "상철",
+          "ESN": "Y",
+          "VIEW": "Y"
+        }
+      ],
+      "disable_pcs_count": 24,
+      "disable_pcs": [
+        {
+          "MTRL_CD": "RXOMO080",
+          "PCS_CD": "COT_DFT",
+          "PCS_DTL_CD": null
+        },
+        {
+          "MTRL_CD": "RXOMO080",
+          "PCS_CD": "FLD_DFT",
+          "PCS_DTL_CD": null
+        },
+        {
+          "MTRL_CD": "RXOMO080",
+          "PCS_CD": "MIS_DFT",
+          "PCS_DTL_CD": null
+        },
+        {
+          "MTRL_CD": "RXOMO080",
+          "PCS_CD": "PRT_MAG",
+          "PCS_DTL_CD": null
+        },
+        {
+          "MTRL_CD": "RXOMO080",
+          "PCS_CD": "SCO_DFT",
+          "PCS_DTL_CD": null
+        },
+        {
+          "MTRL_CD": "RXOMO080",
+          "PCS_CD": "SCO_GLD",
+          "PCS_DTL_CD": null
+        },
+        {
+          "MTRL_CD": "RXOMO080",
+          "PCS_CD": "SCO_SLV",
+          "PCS_DTL_CD": null
+        },
+        {
+          "MTRL_CD": "RXOMO100",
+          "PCS_CD": "COT_DFT",
+          "PCS_DTL_CD": null
+        },
+        {
+          "MTRL_CD": "RXOMO100",
+          "PCS_CD": "FLD_DFT",
+          "PCS_DTL_CD": null
+        },
+        {
+          "MTRL_CD": "RXOMO100",
+          "PCS_CD": "LAM_DFT",
+          "PCS_DTL_CD": null
+        },
+        {
+          "MTRL_CD": "RXOMO100",
+          "PCS_CD": "MIS_DFT",
+          "PCS_DTL_CD": null
+        },
+        {
+          "MTRL_CD": "RXOMO100",
+          "PCS_CD": "OSI_DFT",
+          "PCS_DTL_CD": null
+        },
+        {
+          "MTRL_CD": "RXOMO100",
+          "PCS_CD": "PRT_MAG",
+          "PCS_DTL_CD": null
+        },
+        {
+          "MTRL_CD": "RXOMO100",
+          "PCS_CD": "SCO_DFT",
+          "PCS_DTL_CD": null
+        },
+        {
+          "MTRL_CD": "RXOMO100",
+          "PCS_CD": "SCO_GLD",
+          "PCS_DTL_CD": null
+        },
+        {
+          "MTRL_CD": "RXOMO100",
+          "PCS_CD": "SCO_SLV",
+          "PCS_DTL_CD": null
+        },
+        {
+          "MTRL_CD": "RXPLM080",
+          "PCS_CD": "COT_DFT",
+          "PCS_DTL_CD": null
+        },
+        {
+          "MTRL_CD": "RXPLM080",
+          "PCS_CD": "MIS_DFT",
+          "PCS_DTL_CD": null
+        },
+        {
+          "MTRL_CD": "RXPLM100",
+          "PCS_CD": "COT_DFT",
+          "PCS_DTL_CD": null
+        },
+        {
+          "MTRL_CD": "RXPLM100",
+          "PCS_CD": "MIS_DFT",
+          "PCS_DTL_CD": null
+        },
+        {
+          "MTRL_CD": "RXPLW080",
+          "PCS_CD": "COT_DFT",
+          "PCS_DTL_CD": null
+        },
+        {
+          "MTRL_CD": "RXPLW080",
+          "PCS_CD": "MIS_DFT",
+          "PCS_DTL_CD": null
+        },
+        {
+          "MTRL_CD": "RXPLW100",
+          "PCS_CD": "COT_DFT",
+          "PCS_DTL_CD": null
+        },
+        {
+          "MTRL_CD": "RXPLW100",
+          "PCS_CD": "MIS_DFT",
+          "PCS_DTL_CD": null
+        }
+      ],
+      "inner": {
+        "count": 4,
+        "sample": "RXYWM080"
+      },
+      "option_info": null
+    },
+    {
+      "pdt_cod": "GSTGMIC",
+      "pdt_nme": "마이크 네임택",
+      "price_gbn": "tiered_price",
+      "item_gbn": "vDigital_item",
+      "unit": "개",
+      "editors": {
+        "useKoiEditor": "Y",
+        "useRPEditor": "N",
+        "usePDF": "Y"
+      },
+      "datasets": [
+        "pdt_base_info",
+        "pdt_mtrl_info",
+        "pdt_size_info",
+        "pdt_dosu_info",
+        "pdt_prn_cnt_info",
+        "pdt_prn_cnt_info_add",
+        "pdt_exp_prn_cnt_info",
+        "pdt_pcs_info",
+        "pdt_add_pcs_info",
+        "pdt_disable_pcs_info",
+        "pdt_add_info"
+      ],
+      "size_sample": {
+        "DIV_NM": "삼각 마이크 네임택S",
+        "CUT": "351.00x241.00",
+        "WRK": "355.00x245.00"
+      },
+      "mtrl_count": 1,
+      "mtrl_sample": {
+        "MTRL_CD": "RXBVW300",
+        "PTT_NME": "BV",
+        "WGT": "300"
+      },
+      "dosu": [
+        {
+          "COD": "SID_S",
+          "NME": "단면",
+          "CLR": 4
+        }
+      ],
+      "qty_rule": {
+        "FIR": 1,
+        "INC": 1,
+        "STEP": 10,
+        "MIN": 1,
+        "DFT": 1,
+        "MIN_PAGE": 1,
+        "MAX_PAGE": 1
+      },
+      "pcs_count": 11,
+      "pcs_list": [
+        {
+          "PCS_COD": "COT_DFT",
+          "GRP": "코팅",
+          "DTL": "TCGLS",
+          "DTL_NME": "유광코팅단면",
+          "ESN": "Y",
+          "VIEW": "N",
+          "SUB_MTRL": "N"
+        },
+        {
+          "PCS_COD": "THO_CUT",
+          "GRP": "모양커팅",
+          "DTL": "TG001",
+          "DTL_NME": "삼각 마이크텍 S",
+          "ESN": "Y",
+          "VIEW": "N",
+          "SUB_MTRL": "N"
+        },
+        {
+          "PCS_COD": "THO_CUT",
+          "GRP": "모양커팅",
+          "DTL": "TG002",
+          "DTL_NME": "사각 마이크텍 S",
+          "ESN": "Y",
+          "VIEW": "N",
+          "SUB_MTRL": "N"
+        },
+        {
+          "PCS_COD": "THO_CUT",
+          "GRP": "모양커팅",
+          "DTL": "TG003",
+          "DTL_NME": "삼각 마이크텍 L",
+          "ESN": "Y",
+          "VIEW": "N",
+          "SUB_MTRL": "N"
+        },
+        {
+          "PCS_COD": "THO_CUT",
+          "GRP": "모양커팅",
+          "DTL": "TG004",
+          "DTL_NME": "사각 마이크텍 L",
+          "ESN": "Y",
+          "VIEW": "N",
+          "SUB_MTRL": "N"
+        },
+        {
+          "PCS_COD": "WRK_MTR",
+          "GRP": "부자재작업",
+          "DTL": "TG001",
+          "DTL_NME": "삼각 마이크텍 스펀지 S",
+          "ESN": "Y",
+          "VIEW": "N",
+          "SUB_MTRL": "Y"
+        },
+        {
+          "PCS_COD": "WRK_MTR",
+          "GRP": "부자재작업",
+          "DTL": "TG002",
+          "DTL_NME": "사각 마이크텍 스펀지 S",
+          "ESN": "Y",
+          "VIEW": "N",
+          "SUB_MTRL": "Y"
+        },
+        {
+          "PCS_COD": "WRK_MTR",
+          "GRP": "부자재작업",
+          "DTL": "TG003",
+          "DTL_NME": "삼각 마이크텍 스펀지 L",
+          "ESN": "Y",
+          "VIEW": "N",
+          "SUB_MTRL": "Y"
+        },
+        {
+          "PCS_COD": "WRK_MTR",
+          "GRP": "부자재작업",
+          "DTL": "TG004",
+          "DTL_NME": "사각 마이크텍 스펀지 L",
+          "ESN": "Y",
+          "VIEW": "N",
+          "SUB_MTRL": "Y"
+        },
+        {
+          "PCS_COD": "PDT_WRK",
+          "GRP": "제품가공",
+          "DTL": "PKT01",
+          "DTL_NME": "마이크텍 조립",
+          "ESN": "Y",
+          "VIEW": "N",
+          "SUB_MTRL": "N"
+        },
+        {
+          "PCS_COD": "PAK_POL",
+          "GRP": "폴리백 개별포장",
+          "DTL": "DFXXX",
+          "DTL_NME": "폴리백 개별포장",
+          "ESN": "Y",
+          "VIEW": "N",
+          "SUB_MTRL": "N"
+        }
+      ],
+      "disable_pcs_count": 0,
+      "disable_pcs": [],
+      "inner": null,
+      "option_info": null
+    },
+    {
+      "pdt_cod": "ACNTHAP",
+      "pdt_nme": "아크릴 명찰",
+      "price_gbn": "vTmpl_price",
+      "item_gbn": "vDigital_item",
+      "unit": "pcs",
+      "editors": {
+        "useKoiEditor": "Y",
+        "useRPEditor": "N",
+        "usePDF": "N"
+      },
+      "datasets": [
+        "pdt_base_info",
+        "pdt_mtrl_info",
+        "pdt_size_info",
+        "pdt_dosu_info",
+        "pdt_prn_cnt_info",
+        "pdt_prn_cnt_info_add",
+        "pdt_exp_prn_cnt_info",
+        "pdt_pcs_info",
+        "pdt_add_pcs_info",
+        "pdt_disable_pcs_info",
+        "pdt_add_info",
+        "option_info"
+      ],
+      "size_sample": {
+        "DIV_NM": "소 70X25",
+        "CUT": "70.00x25.00",
+        "WRK": "72.00x27.00"
+      },
+      "mtrl_count": 1,
+      "mtrl_sample": {
+        "MTRL_CD": "RXIGC075",
+        "PTT_NME": "고투명 PET 리무버블",
+        "WGT": "075"
+      },
+      "dosu": [
+        {
+          "COD": "SID_S",
+          "NME": "단면",
+          "CLR": 4
+        }
+      ],
+      "qty_rule": {
+        "FIR": 1,
+        "INC": 1,
+        "STEP": 10,
+        "MIN": 1,
+        "DFT": 1,
+        "MIN_PAGE": 1,
+        "MAX_PAGE": 1
+      },
+      "pcs_count": 4,
+      "pcs_list": [
+        {
+          "PCS_COD": "BON_PAP",
+          "GRP": "접착",
+          "DTL": "ACXXS",
+          "DTL_NME": "아크릴합지",
+          "ESN": "Y",
+          "VIEW": "N",
+          "SUB_MTRL": "N"
+        },
+        {
+          "PCS_COD": "LAS_DFT",
+          "GRP": "레이저",
+          "DTL": "DFXXX",
+          "DTL_NME": "레이저",
+          "ESN": "Y",
+          "VIEW": "N",
+          "SUB_MTRL": "N"
+        },
+        {
+          "PCS_COD": "WRK_MTR",
+          "GRP": "부자재작업",
+          "DTL": "NBPIN",
+          "DTL_NME": "옷핀 집게",
+          "ESN": "Y",
+          "VIEW": "Y",
+          "SUB_MTRL": "Y"
+        },
+        {
+          "PCS_COD": "WRK_MTR",
+          "GRP": "부자재작업",
+          "DTL": "NBMGN",
+          "DTL_NME": "마그넷",
+          "ESN": "Y",
+          "VIEW": "Y",
+          "SUB_MTRL": "Y"
+        }
+      ],
+      "disable_pcs_count": 3,
+      "disable_pcs": [
+        {
+          "MTRL_CD": "RXIGC075",
+          "PCS_CD": "COT_DFT",
+          "PCS_DTL_CD": null
+        },
+        {
+          "MTRL_CD": "RXIGC075",
+          "PCS_CD": "MIS_DFT",
+          "PCS_DTL_CD": null
+        },
+        {
+          "MTRL_CD": "RXIGC075",
+          "PCS_CD": "SCO_DFT",
+          "PCS_DTL_CD": null
+        }
+      ],
+      "inner": null,
+      "option_info": {
+        "production_method": [
+          {
+            "COD": null,
+            "COD_NME": null
+          }
+        ],
+        "shape_info": [
+          {
+            "COD": null,
+            "COD_NME": null
+          }
+        ],
+        "print_data": [
+          {
+            "COD": null,
+            "COD_NME": null
+          }
+        ]
+      }
+    }
+  ]
+}
