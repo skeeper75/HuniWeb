@@ -26,11 +26,15 @@ import productPRPOXXX from '../../../fixtures/product_PRPOXXX.json';
 import productSTTHCIC from '../../../fixtures/product_STTHCIC.json'; // 원형 스티커(규격, digital_price)
 import productSTCUXXX from '../../../fixtures/product_STCUXXX.json'; // 사각반칼 스티커(사이즈직접입력, digital_price)
 import productSTPADPN from '../../../fixtures/product_STPADPN.json'; // DTF 판스티커(시트, vTmpl_price/FixedUnit)
+// S3 포스터·실사·사인·배너(04·05) fixture — SizeMatrix2D(가로×세로). 자유입력+규격프리셋. NC-1 근거.
+import productBNBNFBL from '../../../fixtures/product_BNBNFBL.json'; // 현수막(real_price, MAX_CUT 5000, 자유입력 W/H)
+import productBNPTPET from '../../../fixtures/product_BNPTPET.json'; // PET 배너(real_price, 가공옵션 COT_DFT/타공)
 import priceQ30 from '../../../fixtures/price_q30_p10.json';
 import priceQ300 from '../../../fixtures/price_q300_p10.json';
 import priceDigital from '../../../fixtures/price_BCSPDFT_sample.json';
 import priceSticker from '../../../fixtures/price_STTHCIC_sample.json'; // 반칼/규격 스티커 digital_price (비로그인 PRICE=0)
 import priceStickerFixed from '../../../fixtures/price_STPADPN_sample.json'; // FixedUnit vTmpl_price — 실 시트가 PRICE=4000(비로그인 공개가)
+import priceBanner from '../../../fixtures/price_BNBNFBL_sample.json'; // S3 SizeMatrix2D real_price — CUT_WDT=5000/CUT_HGH=900 수치 직접전달. 비로그인 PRICE=0(shape 검증)
 import presignedSample from '../../../fixtures/presigned_response_sample.json';
 
 const PRODUCTS: Record<string, unknown> = {
@@ -45,6 +49,9 @@ const PRODUCTS: Record<string, unknown> = {
   STTHCIC: productSTTHCIC, // 원형 스티커(규격: 11 size + THO_DFT 원형 모양커팅, digital_price)
   STCUXXX: productSTCUXXX, // 사각반칼 스티커(사이즈직접입력 + THO_DFT 사각, digital_price)
   STPADPN: productSTPADPN, // DTF 판스티커(시트단위 vTmpl_price = FixedUnit, fir=1)
+  // S3 포스터·실사·사인·배너(04·05) — SizeMatrix2D(가로×세로 수치 직접전달)
+  BNBNFBL: productBNBNFBL, // 현수막(real_price, 자유입력 W/H + 규격프리셋, MAX_CUT 5000)
+  BNPTPET: productBNPTPET, // PET 배너(real_price, 가공옵션 PCS_INFO)
 };
 
 // 디지털인쇄/스티커 단일면 상품 prefix(BC=명함, PR=엽서/포스터, NC=카드, ST=스티커). fixture 가격 근사 선택용.
@@ -68,6 +75,11 @@ export class FixtureRedDataSource implements RedDataSource {
     // 스티커(ST) PriceTable3D 변형 — digital_price, THO_DFT 라인 포함. 비로그인 PRICE=0(shape 검증용).
     if (req.productCode.startsWith('ST')) {
       return priceSticker as RedPriceResponse;
+    }
+    // S3 배너/현수막(BN) — SizeMatrix2D real_price. CUT_WDT/CUT_HGH 수치 직접전달 응답 shape.
+    // @MX:NOTE SizeMatrix2D 단가는 BFF 권위(INV-1). fixture 는 비로그인 PRICE=0(shape 검증).
+    if (req.productCode.startsWith('BN')) {
+      return priceBanner as RedPriceResponse;
     }
     // 디지털인쇄(명함·엽서)는 digital_price 응답 shape fixture 로 — 책자 워터폴과 응답 형태 구분.
     // @MX:NOTE 디지털인쇄 price fixture 는 비로그인 캡처라 PRICE=0(shape 검증용). 실 단가는 BFF 권위.

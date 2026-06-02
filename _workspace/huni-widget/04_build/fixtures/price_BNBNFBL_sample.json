@@ -1,0 +1,32 @@
+{
+  "retCode": 200,
+  "msg": "",
+  "result": [
+    {
+      "PCS_CD": "CUT_ZUN",
+      "PCS_DTL_CD": "ZDINC",
+      "PCS_COD": "CUT_ZUN",
+      "PCS_DTL_COD": "ZDINC",
+      "PRICE": 0,
+      "PRICE_VAT": 0,
+      "PRICE_MALL": 0,
+      "PRICE_MALL_VAT": 0,
+      "ORG_PRICE": 0,
+      "ORG_PRICE_VAT": 0,
+      "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 0, 주문건수 : 0",
+      "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 0, 주문건수 : 0 분양몰 할인율: 0.0000, 환율 :1.00",
+      "PCS_NME": "재단준드",
+      "PCS_DTL_NME": "정사이즈재단"
+    }
+  ],
+  "result_sum": {
+    "PRICE": 0,
+    "PRICE_VAT": 0,
+    "PRICE_MALL": 0,
+    "PRICE_MALL_VAT": 0,
+    "ORG_PRICE": 0,
+    "ORG_PRICE_VAT": 0
+  },
+  "query": "dbo.WSP_ACPT_ORDER_TMPL_PCS_PRICE '0101', 'LNG_KO', 'BNBNFBL', '<?xml version=\"1.0\"?>\n<PARAMS><DETAIL><MTRL_COD>PXBFCXXX</MTRL_COD><CUT_WDT>5000</CUT_WDT><CUT_HGH>900</CUT_HGH><PRN_CNT/><ORD_CNT/><SID_GBN>SID_S</SID_GBN><TMPL_IDX/><BTN_TYPE/><PNS_DIGIT/><PNS_CNT/><PACK_PRN_CNT/><CUST_COD>10000000</CUST_COD></DETAIL><PCS><PCS_COD>CUT_ZUN</PCS_COD><PCS_DTL_COD>ZDINC</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS></PARAMS>\n'",
+  "query_flexible": null
+}

@@ -1,0 +1,1934 @@
+{
+  "product": "BNPTPET",
+  "capturedAt": "2026-06-02T14:12:41.973Z",
+  "token": {
+    "ok": true,
+    "exp": 1780410076
+  },
+  "loader": "selectProduct",
+  "domScan": {
+    "ok": true,
+    "selects": [
+      {
+        "name": "material",
+        "opts": [
+          "PET",
+          "블락아웃PET-수성용"
+        ]
+      },
+      {
+        "name": "dosu",
+        "opts": [
+          "단면"
+        ]
+      },
+      {
+        "name": "sizes",
+        "opts": [
+          "사이즈직접입력",
+          "1000X1000"
+        ]
+      },
+      {
+        "name": "PRN_CNT",
+        "opts": [
+          "1"
+        ]
+      }
+    ],
+    "numbers": [
+      {
+        "name": "w-재단사이즈",
+        "ph": "",
+        "val": "0",
+        "min": "",
+        "max": ""
+      },
+      {
+        "name": "h-재단사이즈",
+        "ph": "",
+        "val": "0",
+        "min": "",
+        "max": ""
+      },
+      {
+        "name": "w-작업사이즈",
+        "ph": "",
+        "val": "4",
+        "min": "",
+        "max": ""
+      },
+      {
+        "name": "h-작업사이즈",
+        "ph": "",
+        "val": "4",
+        "min": "",
+        "max": ""
+      },
+      {
+        "name": "ORD_CNT",
+        "ph": "",
+        "val": "1",
+        "min": "1",
+        "max": ""
+      }
+    ],
+    "texts": [
+      {
+        "name": "order-subject",
+        "ph": "",
+        "val": ""
+      }
+    ],
+    "buttons": [
+      "주문 가능 자재",
+      "직접 입력하기",
+      "템플릿 다운로드",
+      "PDF"
+    ]
+  },
+  "optionMutation": {
+    "ok": true,
+    "kind": "select",
+    "to": 1,
+    "label": "블락아웃PET-수성용"
+  },
+  "storeKeysAfterInit": [
+    "config",
+    "exterior",
+    "order",
+    "product"
+  ],
+  "storeAfterInit": {
+    "config": {
+      "locale": "ko"
+    },
+    "exterior": {
+      "uploadType": {
+        "default": "pdf"
+      },
+      "editorData": {
+        "default": null
+      },
+      "payloadForEditorConfig": {
+        "default": {
+          "lang_cod": "ko",
+          "pdt_cod": "BNPTPET",
+          "PDT_NM": "PET배너",
+          "sizeInfo": {
+            "DIV_NM": "사이즈직접입력",
+            "DIV_SEQ": 0,
+            "DivInfo": {},
+            "cutSize": {
+              "width": 0,
+              "height": 0
+            },
+            "workSize": {
+              "width": 4,
+              "height": 4
+            }
+          },
+          "pcsInfo": [
+            {
+              "PCS_CD": "COT_DFT",
+              "PCS_GRP_NM": "코팅",
+              "VIEW_YN": "Y",
+              "ESN_YN": "Y",
+              "selectedOptions": [
+                {
+                  "PCS_CD": "COT_DFT",
+                  "PCS_DTL_CD": "TCMAS",
+                  "PCS_DTL_NM": "무광코팅단면"
+                }
+              ]
+            },
+            {
+              "PCS_CD": "CUT_ZUN",
+              "PCS_GRP_NM": "재단",
+              "VIEW_YN": "Y",
+              "ESN_YN": "Y",
+              "selectedOptions": [
+                {
+                  "PCS_CD": "CUT_ZUN",
+                  "PCS_DTL_CD": "ZDINC",
+                  "PCS_DTL_NM": "정사이즈재단",
+                  "ATTB": ""
+                }
+              ]
+            }
+          ],
+          "meterialInfo": {
+            "PTT_CD": "PET",
+            "PTT_NM": "일반배너",
+            "WGT_CD": "XXX",
+            "CLR_CD": "X",
+            "MTRL_CD": "PXPETXXX",
+            "MTRL_NM": "PET",
+            "MTRL_TYPE": "P",
+            "PRT_HIDE_YN": null
+          },
+          "dosuInfo": {
+            "COD": "SID_S",
+            "COD_NME": "단면",
+            "PRN_CLR_CNT": 4
+          },
+          "quantityInfo": {
+            "ordCnt": 1,
+            "prnCnt": 1
+          },
+          "base": {
+            "item_gbn": "real_item",
+            "koi_template_resource_id": "",
+            "pdt_mtrl_info": [],
+            "pdt_pcs_info": []
+          }
+        }
+      }
+    },
+    "order": {
+      "orderData": {
+        "dosuInfo": {
+          "COD": "SID_S",
+          "COD_NME": "단면",
+          "PRN_CLR_CNT": 4
+        },
+        "sizeInfo": {
+          "DIV_NM": "사이즈직접입력",
+          "DIV_SEQ": 0,
+          "DivInfo": {},
+          "cutSize": {
+            "width": 0,
+            "height": 0
+          },
+          "workSize": {
+            "width": 4,
+            "height": 4
+          }
+        },
+        "pcsInfo": [
+          {
+            "PCS_CD": "COT_DFT",
+            "PCS_GRP_NM": "코팅",
+            "VIEW_YN": "Y",
+            "ESN_YN": "Y",
+            "selectedOptions": [
+              {
+                "PCS_CD": "COT_DFT",
+                "PCS_DTL_CD": "TCMAS",
+                "PCS_DTL_NM": "무광코팅단면"
+              }
+            ]
+          },
+          {
+            "PCS_CD": "CUT_ZUN",
+            "PCS_GRP_NM": "재단",
+            "VIEW_YN": "Y",
+            "ESN_YN": "Y",
+            "selectedOptions": [
+              {
+                "PCS_CD": "CUT_ZUN",
+                "PCS_DTL_CD": "ZDINC",
+                "PCS_DTL_NM": "정사이즈재단",
+                "ATTB": ""
+              }
+            ]
+          }
+        ],
+        "validation": null,
+        "meterialInfo": {
+          "PTT_CD": "PET",
+          "PTT_NM": "일반배너",
+          "WGT_CD": "XXX",
+          "CLR_CD": "X",
+          "MTRL_CD": "PXPETXXX",
+          "MTRL_NM": "PET",
+          "MTRL_TYPE": "P",
+          "PRT_HIDE_YN": null
+        },
+        "quantityInfo": {
+          "ordCnt": 1,
+          "prnCnt": 1
+        },
+        "priceCalc": {
+          "params": {
+            "ORD_INFO": [
+              {
+                "PDT_CD": "BNPTPET",
+                "MTRL_CD": "PXPETXXX",
+                "CUT_WDT": 0,
+                "CUT_HGH": 0,
+                "WRK_WDT": 4,
+                "WRK_HGH": 4,
+                "PRN_CNT": 1,
+                "ORD_CNT": 1,
+                "DOSU_COD": "SID_S",
+                "PRN_CLR_CNT": 4
+              }
+            ],
+            "PCS_INFO": [
+              {
+                "PCS_COD": "COT_DFT",
+                "PCS_DTL_COD": "TCMAS"
+              },
+              {
+                "PCS_COD": "CUT_ZUN",
+                "PCS_DTL_COD": "ZDINC",
+                "ATTB": ""
+              }
+            ],
+            "price_gbn": "real_price",
+            "mb_cust_cod": "10000000"
+          },
+          "result": {
+            "retCode": 999,
+            "msg": "",
+            "result": null,
+            "result_sum": {
+              "PRICE": 0,
+              "PRICE_VAT": 0,
+              "PRICE_MALL": 0,
+              "PRICE_MALL_VAT": 0,
+              "ORG_PRICE": 0,
+              "ORG_PRICE_VAT": 0
+            },
+            "query": "dbo.WSP_ACPT_ORDER_TMPL_PCS_PRICE '0101', 'LNG_KO', 'BNPTPET', '<?xml version=\"1.0\"?>\n<PARAMS><DETAIL><MTRL_COD>PXPETXXX</MTRL_COD><CUT_WDT/><CUT_HGH/><PRN_CNT>1</PRN_CNT><ORD_CNT>1</ORD_CNT><SID_GBN>SID_S</SID_GBN><TMPL_IDX/><BTN_TYPE/><PNS_DIGIT/><PNS_CNT/><PACK_PRN_CNT/><CUST_COD>10000000</CUST_COD></DETAIL><PCS><PCS_COD>COT_DFT</PCS_COD><PCS_DTL_COD>TCMAS</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS><PCS><PCS_COD>CUT_ZUN</PCS_COD><PCS_DTL_COD>ZDINC</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS></PARAMS>\n'",
+            "query_flexible": null
+          }
+        }
+      }
+    },
+    "product": {
+      "baseInfo": {
+        "product_option": {
+          "option": {
+            "pdt_cod": "BNPTPET",
+            "pdt_nme": "PET배너",
+            "item_gbn": "real_item",
+            "price_gbn": "real_price",
+            "skinInfo": {
+              "pageDirection": {
+                "view_yn": "N",
+                "title": "주문서 작성"
+              },
+              "paperSelect": {
+                "view_yn": "Y",
+                "title": "용지"
+              },
+              "sizeSelect": {
+                "view_yn": "Y",
+                "title": "규격 (mm)"
+              },
+              "dosuSelect": {
+                "view_yn": "Y",
+                "title": "인쇄 도수"
+              },
+              "subjectGroup": {
+                "view_yn": "Y",
+                "title": "주문 제목"
+              },
+              "quantityGroup": {
+                "view_yn": "Y",
+                "title": {
+                  "orderCnt": "디자인 수 (건수)",
+                  "printCnt": "수량"
+                }
+              }
+            },
+            "order_yn": "Y",
+            "cut_guide_yn": "N",
+            "able_paper_yn": "Y",
+            "price_table_yn": "N",
+            "useTemplateDownload": "Y",
+            "useKoiEditor": "N",
+            "useRPEditor": "N",
+            "usePDF": "Y",
+            "usePDFordCnt": "Y",
+            "useEditorOrdCnt": "N",
+            "koiAccessToken": "[REDACTED-JWT]",
+            "rpAccessToken": null,
+            "koi_template_resource_id": "",
+            "koiOption": []
+          }
+        },
+        "product_data": {
+          "pdt_base_info": [
+            {
+              "PDT_CD": "BNPTPET",
+              "PDT_NM": "PET배너",
+              "WDT_HGH_GBN_YN": "N",
+              "PRN_YN": "Y",
+              "PDT_UNIT": "장",
+              "ORD_CNT_YN": "Y",
+              "NO_STD_ABL_YN": "N",
+              "MIN_CUT_WDT": "0.00",
+              "MIN_CUT_HGH": "0.00",
+              "MAX_CUT_WDT": "1000.00",
+              "MAX_CUT_HGH": "1000.00",
+              "DFT_CUT_WDT": "0.00",
+              "DFT_CUT_HGH": "0.00",
+              "CUT_MRG": "4.00",
+              "FIR_CNT": 1,
+              "INC": 1,
+              "INC_STEP": 1,
+              "NOTE": "",
+              "REAM_YN": "",
+              "SET_CNT": 1,
+              "SIZE_PCS_USE": "",
+              "MAX_PRN_CNT": 0,
+              "DAY_PRDC_PDT_YN": "Y",
+              "DAY_ABLE_PRN_CNT": 100
+            }
+          ],
+          "pdt_mtrl_info": [
+            {
+              "MTRL_TYPE": "P",
+              "CLR_CD": "X",
+              "CLR_NM": "기본",
+              "PTT_CD": "PET",
+              "PTT_NM": "일반배너",
+              "WGT_CD": "XXX",
+              "MTRL_CD": "PXPETXXX",
+              "HIDE_YN": "N",
+              "HIDE_RSN": "",
+              "NOTE": "",
+              "SID_GBN": "",
+              "CLR_COD": "X",
+              "CLR_NME": "기본",
+              "PTT_COD": "PET",
+              "PTT_NME": "일반배너",
+              "WGT_COD": "XXX",
+              "MTRL_COD": "PXPETXXX",
+              "MTRL_NM": "PET",
+              "GRP_OPTION_CD": "",
+              "CLR_OPTION_CD": "",
+              "PRT_HIDE_YN": null,
+              "BSN_YN": "N",
+              "CLR_HEX_CD": ""
+            },
+            {
+              "MTRL_TYPE": "P",
+              "CLR_CD": "X",
+              "CLR_NM": "기본",
+              "PTT_CD": "BOP",
+              "PTT_NM": "블락아웃PET",
+              "WGT_CD": "XXX",
+              "MTRL_CD": "PXBOPXXX",
+              "HIDE_YN": "N",
+              "HIDE_RSN": "",
+              "NOTE": "",
+              "SID_GBN": "",
+              "CLR_COD": "X",
+              "CLR_NME": "기본",
+              "PTT_COD": "BOP",
+              "PTT_NME": "블락아웃PET",
+              "WGT_COD": "XXX",
+              "MTRL_COD": "PXBOPXXX",
+              "MTRL_NM": "블락아웃PET-수성용",
+              "GRP_OPTION_CD": "",
+              "CLR_OPTION_CD": "",
+              "PRT_HIDE_YN": null,
+              "BSN_YN": "N",
+              "CLR_HEX_CD": ""
+            }
+          ],
+          "pdt_size_info": [
+            {
+              "DIV_NM": "사이즈직접입력",
+              "WRK_WDT": "4.00",
+              "WRK_HGH": "4.00",
+              "CUT_WDT": "0.00",
+              "CUT_HGH": "0.00",
+              "DFT_YN": "Y",
+              "DIV_CD": "",
+              "DIV_SEQ": 0,
+              "STICKER_TYPE": "",
+              "REAM_PAPER_CNT": null,
+              "NOTE": null,
+              "PDT_SIZE_INFO": "",
+              "HIDE_YN": "N"
+            },
+            {
+              "DIV_NM": "1000X1000",
+              "WRK_WDT": "1004.00",
+              "WRK_HGH": "1004.00",
+              "CUT_WDT": "1000.00",
+              "CUT_HGH": "1000.00",
+              "DFT_YN": "N",
+              "DIV_CD": "",
+              "DIV_SEQ": 1,
+              "STICKER_TYPE": "",
+              "REAM_PAPER_CNT": null,
+              "NOTE": null,
+              "PDT_SIZE_INFO": "",
+              "HIDE_YN": "N"
+            }
+          ],
+          "pdt_dosu_info": [
+            {
+              "COD": "SID_S",
+              "COD_NME": "단면",
+              "PRN_CLR_CNT": 4
+            }
+          ],
+          "pdt_prn_cnt_info": [
+            {
+              "DIV_CD": "",
+              "REAM_CNT": "",
+              "PRN_CNT": "",
+              "DFT_YN": "Y",
+              "DFT_PRN_CNT": 1,
+              "FIR_CNT": 1,
+              "INC_CNT": 1,
+              "INC_STEP": 1,
+              "MIN_PRN_CNT": 1,
+              "MIN_INN_PAGE": 1,
+              "MAX_INN_PAGE": 1,
+              "STEP_INN_PAGE": 1,
+              "MAX_THCK": null,
+              "INN_MAX_WGT": null,
+              "COV_MIN_WGT": null
+            }
+          ],
+          "pdt_prn_cnt_info_add": [],
+          "pdt_exp_prn_cnt_info": null,
+          "pdt_pcs_info": [
+            {
+              "PCS_CD": "COT_DFT",
+              "PCS_GRP_NM": "코팅",
+              "PCS_DTL_CD": "TCMAS",
+              "PCS_DTL_NM": "무광코팅단면",
+              "WEB_PCS_DTL_GRP": "COT_DFT_TC",
+              "WEB_PCS_DTL_GRP_NM": "",
+              "WRK_WDT": "0.00",
+              "WRK_HGH": "0.00",
+              "CUT_WDT": "0.00",
+              "CUT_HGH": "0.00",
+              "VIEW_YN": "Y",
+              "HIDE_YN": "N",
+              "NOTICE": [],
+              "ESN_YN": "Y",
+              "NOTE": "",
+              "MTRL_CD": "",
+              "MTRL_COD": "",
+              "DIV_SEQ": 0,
+              "SUB_MTRL_YN": "N",
+              "STICKER_TYPE": null,
+              "QTY_INPUT_YN": "N",
+              "PCS_COD": "COT_DFT",
+              "PCS_GRP_NME": "코팅",
+              "PCS_DTL_COD": "TCMAS",
+              "PCS_DTL_NME": "무광코팅단면",
+              "PCS_GROUP_NME": "무광코팅단면"
+            },
+            {
+              "PCS_CD": "COT_DFT",
+              "PCS_GRP_NM": "코팅",
+              "PCS_DTL_CD": "TCGLS",
+              "PCS_DTL_NM": "유광코팅단면",
+              "WEB_PCS_DTL_GRP": "COT_DFT_TC",
+              "WEB_PCS_DTL_GRP_NM": "",
+              "WRK_WDT": "0.00",
+              "WRK_HGH": "0.00",
+              "CUT_WDT": "0.00",
+              "CUT_HGH": "0.00",
+              "VIEW_YN": "Y",
+              "HIDE_YN": "N",
+              "NOTICE": [],
+              "ESN_YN": "Y",
+              "NOTE": "",
+              "MTRL_CD": "",
+              "MTRL_COD": "",
+              "DIV_SEQ": 0,
+              "SUB_MTRL_YN": "N",
+              "STICKER_TYPE": null,
+              "QTY_INPUT_YN": "N",
+              "PCS_COD": "COT_DFT",
+              "PCS_GRP_NME": "코팅",
+              "PCS_DTL_COD": "TCGLS",
+              "PCS_DTL_NME": "유광코팅단면",
+              "PCS_GROUP_NME": "유광코팅단면"
+            },
+            {
+              "PCS_CD": "CUT_ZUN",
+              "PCS_GRP_NM": "재단",
+              "PCS_DTL_CD": "ZDINC",
+              "PCS_DTL_NM": "정사이즈재단",
+              "WEB_PCS_DTL_GRP": "CUT_ZUN_ZD",
+              "WEB_PCS_DTL_GRP_NM": "",
+              "WRK_WDT": "0.00",
+              "WRK_HGH": "0.00",
+              "CUT_WDT": "0.00",
+              "CUT_HGH": "0.00",
+              "VIEW_YN": "Y",
+              "HIDE_YN": "N",
+              "NOTICE": [
+                "가로, 세로 중 한쪽면이 1,700mm 미만(재단사이즈 기준)인 경우만 가능합니다."
+              ],
+              "ESN_YN": "Y",
+              "NOTE": "",
+              "MTRL_CD": "",
+              "MTRL_COD": "",
+              "DIV_SEQ": 0,
+              "SUB_MTRL_YN": "N",
+              "STICKER_TYPE": null,
+              "QTY_INPUT_YN": "N",
+              "PCS_COD": "CUT_ZUN",
+              "PCS_GRP_NME": "재단",
+              "PCS_DTL_COD": "ZDINC",
+              "PCS_DTL_NME": "정사이즈재단",
+              "PCS_GROUP_NME": "정사이즈재단"
+            },
+            {
+              "PCS_CD": "CUT_ZUN",
+              "PCS_GRP_NM": "재단",
+              "PCS_DTL_CD": "ZDFRM",
+              "PCS_DTL_NM": "모양재단",
+              "WEB_PCS_DTL_GRP": "CUT_ZUN_ZD",
+              "WEB_PCS_DTL_GRP_NM": "",
+              "WRK_WDT": "0.00",
+              "WRK_HGH": "0.00",
+              "CUT_WDT": "0.00",
+              "CUT_HGH": "0.00",
+              "VIEW_YN": "Y",
+              "HIDE_YN": "N",
+              "NOTICE": [
+                "가로, 세로 중 한쪽면이 1,700mm 미만(재단사이즈 기준)인 경우만 가능합니다."
+              ],
+              "ESN_YN": "Y",
+              "NOTE": "",
+              "MTRL_CD": "",
+              "MTRL_COD": "",
+              "DIV_SEQ": 0,
+              "SUB_MTRL_YN": "N",
+              "STICKER_TYPE": null,
+              "QTY_INPUT_YN": "N",
+              "PCS_COD": "CUT_ZUN",
+              "PCS_GRP_NME": "재단",
+              "PCS_DTL_COD": "ZDFRM",
+              "PCS_DTL_NME": "모양재단",
+              "PCS_GROUP_NME": "모양재단"
+            },
+            {
+              "PCS_CD": "ILT_DFT",
+              "PCS_GRP_NM": "아일렛",
+              "PCS_DTL_CD": "RCDFT",
+              "PCS_DTL_NM": "사각귀퉁이",
+              "WEB_PCS_DTL_GRP": "ILT_DFT_RC",
+              "WEB_PCS_DTL_GRP_NM": "",
+              "WRK_WDT": "0.00",
+              "WRK_HGH": "0.00",
+              "CUT_WDT": "0.00",
+              "CUT_HGH": "0.00",
+              "VIEW_YN": "Y",
+              "HIDE_YN": "N",
+              "NOTICE": [],
+              "ESN_YN": "N",
+              "NOTE": "",
+              "MTRL_CD": "",
+              "MTRL_COD": "",
+              "DIV_SEQ": 0,
+              "SUB_MTRL_YN": "N",
+              "STICKER_TYPE": null,
+              "QTY_INPUT_YN": "N",
+              "PCS_COD": "ILT_DFT",
+              "PCS_GRP_NME": "아일렛",
+              "PCS_DTL_COD": "RCDFT",
+              "PCS_DTL_NME": "사각귀퉁이",
+              "PCS_GROUP_NME": "사각귀퉁이"
+            },
+            {
+              "PCS_CD": "ILT_DFT",
+              "PCS_GRP_NM": "아일렛",
+              "PCS_DTL_CD": "RCALL",
+              "PCS_DTL_NM": "사각테두리",
+              "WEB_PCS_DTL_GRP": "ILT_DFT_RC",
+              "WEB_PCS_DTL_GRP_NM": "",
+              "WRK_WDT": "0.00",
+              "WRK_HGH": "0.00",
+              "CUT_WDT": "0.00",
+              "CUT_HGH": "0.00",
+              "VIEW_YN": "Y",
+              "HIDE_YN": "N",
+              "NOTICE": [],
+              "ESN_YN": "N",
+              "NOTE": "",
+              "MTRL_CD": "",
+              "MTRL_COD": "",
+              "DIV_SEQ": 0,
+              "SUB_MTRL_YN": "N",
+              "STICKER_TYPE": null,
+              "QTY_INPUT_YN": "N",
+              "PCS_COD": "ILT_DFT",
+              "PCS_GRP_NME": "아일렛",
+              "PCS_DTL_COD": "RCALL",
+              "PCS_DTL_NME": "사각테두리",
+              "PCS_GROUP_NME": "사각테두리"
+            },
+            {
+              "PCS_CD": "QBG_DFT",
+              "PCS_GRP_NM": "큐방",
+              "PCS_DTL_CD": "DFXXX",
+              "PCS_DTL_NM": "큐방",
+              "WEB_PCS_DTL_GRP": "QBG_DFT_DF",
+              "WEB_PCS_DTL_GRP_NM": "",
+              "WRK_WDT": "0.00",
+              "WRK_HGH": "0.00",
+              "CUT_WDT": "0.00",
+              "CUT_HGH": "0.00",
+              "VIEW_YN": "Y",
+              "HIDE_YN": "N",
+              "NOTICE": [
+                "부자재 큐방만 판매합니다.<br>큐방을 끼울 수 있는 아일렛 후가공을 선택하시거나, <br>타공 구멍은 직접 뚫으신 후 사용하셔야 합니다."
+              ],
+              "ESN_YN": "N",
+              "NOTE": "",
+              "MTRL_CD": "",
+              "MTRL_COD": "",
+              "DIV_SEQ": 0,
+              "SUB_MTRL_YN": "Y",
+              "STICKER_TYPE": null,
+              "QTY_INPUT_YN": "N",
+              "PCS_COD": "QBG_DFT",
+              "PCS_GRP_NME": "큐방",
+              "PCS_DTL_COD": "DFXXX",
+              "PCS_DTL_NME": "큐방",
+              "PCS_GROUP_NME": "큐방"
+            },
+            {
+              "PCS_CD": "SUB_MTR",
+              "PCS_GRP_NM": "추가부자재",
+              "PCS_DTL_CD": "CT001",
+              "PCS_DTL_NM": "큐브 양면 젤리테이프",
+              "WEB_PCS_DTL_GRP": "SUB_MTR_CT",
+              "WEB_PCS_DTL_GRP_NM": "젤리테이프",
+              "WRK_WDT": "0.00",
+              "WRK_HGH": "0.00",
+              "CUT_WDT": "0.00",
+              "CUT_HGH": "0.00",
+              "VIEW_YN": "Y",
+              "HIDE_YN": "N",
+              "NOTICE": [],
+              "ESN_YN": "N",
+              "NOTE": "",
+              "MTRL_CD": "",
+              "MTRL_COD": "",
+              "DIV_SEQ": 0,
+              "SUB_MTRL_YN": "Y",
+              "STICKER_TYPE": null,
+              "QTY_INPUT_YN": "Y",
+              "PCS_COD": "SUB_MTR",
+              "PCS_GRP_NME": "추가부자재",
+              "PCS_DTL_COD": "CT001",
+              "PCS_DTL_NME": "큐브 양면 젤리테이프",
+              "PCS_GROUP_NME": "큐브 양면 젤리테이프"
+            }
+          ],
+          "pdt_add_pcs_info": null,
+          "pdt_disable_pcs_info": [],
+          "pdt_add_info": [
+            [],
+            []
+          ]
+        },
+        "member_info": {
+          "mb_id": "RPf9936d865d739fd86b05681c6a787eca",
+          "mb_cust_cod": "10000000",
+          "discount_cust_yn": null,
+          "mall_cust_yn": null,
+          "bsn_yn": null,
+          "blk_con": null,
+          "edicusUserID": "cmVkcHJpbnRpbmdfbm9tZW1iZXI="
+        }
+      }
+    }
+  },
+  "storeAfterOption": {
+    "config": {
+      "locale": "ko"
+    },
+    "exterior": {
+      "uploadType": {
+        "default": "pdf"
+      },
+      "editorData": {
+        "default": null
+      },
+      "payloadForEditorConfig": {
+        "default": {
+          "lang_cod": "ko",
+          "pdt_cod": "BNPTPET",
+          "PDT_NM": "PET배너",
+          "sizeInfo": {
+            "DIV_NM": "사이즈직접입력",
+            "DIV_SEQ": 0,
+            "DivInfo": {},
+            "cutSize": {
+              "width": 0,
+              "height": 0
+            },
+            "workSize": {
+              "width": 4,
+              "height": 4
+            }
+          },
+          "pcsInfo": [
+            {
+              "PCS_CD": "COT_DFT",
+              "PCS_GRP_NM": "코팅",
+              "VIEW_YN": "Y",
+              "ESN_YN": "Y",
+              "selectedOptions": [
+                {
+                  "PCS_CD": "COT_DFT",
+                  "PCS_DTL_CD": "TCMAS",
+                  "PCS_DTL_NM": "무광코팅단면"
+                }
+              ]
+            },
+            {
+              "PCS_CD": "CUT_ZUN",
+              "PCS_GRP_NM": "재단",
+              "VIEW_YN": "Y",
+              "ESN_YN": "Y",
+              "selectedOptions": [
+                {
+                  "PCS_CD": "CUT_ZUN",
+                  "PCS_DTL_CD": "ZDINC",
+                  "PCS_DTL_NM": "정사이즈재단",
+                  "ATTB": ""
+                }
+              ]
+            }
+          ],
+          "meterialInfo": {
+            "PTT_CD": "BOP",
+            "PTT_NM": "블락아웃PET",
+            "WGT_CD": "XXX",
+            "CLR_CD": "X",
+            "MTRL_CD": "PXBOPXXX",
+            "MTRL_NM": "블락아웃PET-수성용",
+            "MTRL_TYPE": "P",
+            "PRT_HIDE_YN": null
+          },
+          "dosuInfo": {
+            "COD": "SID_S",
+            "COD_NME": "단면",
+            "PRN_CLR_CNT": 4
+          },
+          "quantityInfo": {
+            "ordCnt": 1,
+            "prnCnt": 1
+          },
+          "base": {
+            "item_gbn": "real_item",
+            "koi_template_resource_id": "",
+            "pdt_mtrl_info": [],
+            "pdt_pcs_info": []
+          }
+        }
+      }
+    },
+    "order": {
+      "orderData": {
+        "dosuInfo": {
+          "COD": "SID_S",
+          "COD_NME": "단면",
+          "PRN_CLR_CNT": 4
+        },
+        "sizeInfo": {
+          "DIV_NM": "사이즈직접입력",
+          "DIV_SEQ": 0,
+          "DivInfo": {},
+          "cutSize": {
+            "width": 0,
+            "height": 0
+          },
+          "workSize": {
+            "width": 4,
+            "height": 4
+          }
+        },
+        "pcsInfo": [
+          {
+            "PCS_CD": "COT_DFT",
+            "PCS_GRP_NM": "코팅",
+            "VIEW_YN": "Y",
+            "ESN_YN": "Y",
+            "selectedOptions": [
+              {
+                "PCS_CD": "COT_DFT",
+                "PCS_DTL_CD": "TCMAS",
+                "PCS_DTL_NM": "무광코팅단면"
+              }
+            ]
+          },
+          {
+            "PCS_CD": "CUT_ZUN",
+            "PCS_GRP_NM": "재단",
+            "VIEW_YN": "Y",
+            "ESN_YN": "Y",
+            "selectedOptions": [
+              {
+                "PCS_CD": "CUT_ZUN",
+                "PCS_DTL_CD": "ZDINC",
+                "PCS_DTL_NM": "정사이즈재단",
+                "ATTB": ""
+              }
+            ]
+          }
+        ],
+        "validation": null,
+        "meterialInfo": {
+          "PTT_CD": "BOP",
+          "PTT_NM": "블락아웃PET",
+          "WGT_CD": "XXX",
+          "CLR_CD": "X",
+          "MTRL_CD": "PXBOPXXX",
+          "MTRL_NM": "블락아웃PET-수성용",
+          "MTRL_TYPE": "P",
+          "PRT_HIDE_YN": null
+        },
+        "quantityInfo": {
+          "ordCnt": 1,
+          "prnCnt": 1
+        },
+        "priceCalc": {
+          "params": {
+            "ORD_INFO": [
+              {
+                "PDT_CD": "BNPTPET",
+                "MTRL_CD": "PXBOPXXX",
+                "CUT_WDT": 0,
+                "CUT_HGH": 0,
+                "WRK_WDT": 4,
+                "WRK_HGH": 4,
+                "PRN_CNT": 1,
+                "ORD_CNT": 1,
+                "DOSU_COD": "SID_S",
+                "PRN_CLR_CNT": 4
+              }
+            ],
+            "PCS_INFO": [
+              {
+                "PCS_COD": "COT_DFT",
+                "PCS_DTL_COD": "TCMAS"
+              },
+              {
+                "PCS_COD": "CUT_ZUN",
+                "PCS_DTL_COD": "ZDINC",
+                "ATTB": ""
+              }
+            ],
+            "price_gbn": "real_price",
+            "mb_cust_cod": "10000000"
+          },
+          "result": {
+            "retCode": 999,
+            "msg": "",
+            "result": null,
+            "result_sum": {
+              "PRICE": 0,
+              "PRICE_VAT": 0,
+              "PRICE_MALL": 0,
+              "PRICE_MALL_VAT": 0,
+              "ORG_PRICE": 0,
+              "ORG_PRICE_VAT": 0
+            },
+            "query": "dbo.WSP_ACPT_ORDER_TMPL_PCS_PRICE '0101', 'LNG_KO', 'BNPTPET', '<?xml version=\"1.0\"?>\n<PARAMS><DETAIL><MTRL_COD>PXBOPXXX</MTRL_COD><CUT_WDT/><CUT_HGH/><PRN_CNT>1</PRN_CNT><ORD_CNT>1</ORD_CNT><SID_GBN>SID_S</SID_GBN><TMPL_IDX/><BTN_TYPE/><PNS_DIGIT/><PNS_CNT/><PACK_PRN_CNT/><CUST_COD>10000000</CUST_COD></DETAIL><PCS><PCS_COD>COT_DFT</PCS_COD><PCS_DTL_COD>TCMAS</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS><PCS><PCS_COD>CUT_ZUN</PCS_COD><PCS_DTL_COD>ZDINC</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS></PARAMS>\n'",
+            "query_flexible": null
+          }
+        }
+      }
+    },
+    "product": {
+      "baseInfo": {
+        "product_option": {
+          "option": {
+            "pdt_cod": "BNPTPET",
+            "pdt_nme": "PET배너",
+            "item_gbn": "real_item",
+            "price_gbn": "real_price",
+            "skinInfo": {
+              "pageDirection": {
+                "view_yn": "N",
+                "title": "주문서 작성"
+              },
+              "paperSelect": {
+                "view_yn": "Y",
+                "title": "용지"
+              },
+              "sizeSelect": {
+                "view_yn": "Y",
+                "title": "규격 (mm)"
+              },
+              "dosuSelect": {
+                "view_yn": "Y",
+                "title": "인쇄 도수"
+              },
+              "subjectGroup": {
+                "view_yn": "Y",
+                "title": "주문 제목"
+              },
+              "quantityGroup": {
+                "view_yn": "Y",
+                "title": {
+                  "orderCnt": "디자인 수 (건수)",
+                  "printCnt": "수량"
+                }
+              }
+            },
+            "order_yn": "Y",
+            "cut_guide_yn": "N",
+            "able_paper_yn": "Y",
+            "price_table_yn": "N",
+            "useTemplateDownload": "Y",
+            "useKoiEditor": "N",
+            "useRPEditor": "N",
+            "usePDF": "Y",
+            "usePDFordCnt": "Y",
+            "useEditorOrdCnt": "N",
+            "koiAccessToken": "[REDACTED-JWT]",
+            "rpAccessToken": null,
+            "koi_template_resource_id": "",
+            "koiOption": []
+          }
+        },
+        "product_data": {
+          "pdt_base_info": [
+            {
+              "PDT_CD": "BNPTPET",
+              "PDT_NM": "PET배너",
+              "WDT_HGH_GBN_YN": "N",
+              "PRN_YN": "Y",
+              "PDT_UNIT": "장",
+              "ORD_CNT_YN": "Y",
+              "NO_STD_ABL_YN": "N",
+              "MIN_CUT_WDT": "0.00",
+              "MIN_CUT_HGH": "0.00",
+              "MAX_CUT_WDT": "1000.00",
+              "MAX_CUT_HGH": "1000.00",
+              "DFT_CUT_WDT": "0.00",
+              "DFT_CUT_HGH": "0.00",
+              "CUT_MRG": "4.00",
+              "FIR_CNT": 1,
+              "INC": 1,
+              "INC_STEP": 1,
+              "NOTE": "",
+              "REAM_YN": "",
+              "SET_CNT": 1,
+              "SIZE_PCS_USE": "",
+              "MAX_PRN_CNT": 0,
+              "DAY_PRDC_PDT_YN": "Y",
+              "DAY_ABLE_PRN_CNT": 100
+            }
+          ],
+          "pdt_mtrl_info": [
+            {
+              "MTRL_TYPE": "P",
+              "CLR_CD": "X",
+              "CLR_NM": "기본",
+              "PTT_CD": "PET",
+              "PTT_NM": "일반배너",
+              "WGT_CD": "XXX",
+              "MTRL_CD": "PXPETXXX",
+              "HIDE_YN": "N",
+              "HIDE_RSN": "",
+              "NOTE": "",
+              "SID_GBN": "",
+              "CLR_COD": "X",
+              "CLR_NME": "기본",
+              "PTT_COD": "PET",
+              "PTT_NME": "일반배너",
+              "WGT_COD": "XXX",
+              "MTRL_COD": "PXPETXXX",
+              "MTRL_NM": "PET",
+              "GRP_OPTION_CD": "",
+              "CLR_OPTION_CD": "",
+              "PRT_HIDE_YN": null,
+              "BSN_YN": "N",
+              "CLR_HEX_CD": ""
+            },
+            {
+              "MTRL_TYPE": "P",
+              "CLR_CD": "X",
+              "CLR_NM": "기본",
+              "PTT_CD": "BOP",
+              "PTT_NM": "블락아웃PET",
+              "WGT_CD": "XXX",
+              "MTRL_CD": "PXBOPXXX",
+              "HIDE_YN": "N",
+              "HIDE_RSN": "",
+              "NOTE": "",
+              "SID_GBN": "",
+              "CLR_COD": "X",
+              "CLR_NME": "기본",
+              "PTT_COD": "BOP",
+              "PTT_NME": "블락아웃PET",
+              "WGT_COD": "XXX",
+              "MTRL_COD": "PXBOPXXX",
+              "MTRL_NM": "블락아웃PET-수성용",
+              "GRP_OPTION_CD": "",
+              "CLR_OPTION_CD": "",
+              "PRT_HIDE_YN": null,
+              "BSN_YN": "N",
+              "CLR_HEX_CD": ""
+            }
+          ],
+          "pdt_size_info": [
+            {
+              "DIV_NM": "사이즈직접입력",
+              "WRK_WDT": "4.00",
+              "WRK_HGH": "4.00",
+              "CUT_WDT": "0.00",
+              "CUT_HGH": "0.00",
+              "DFT_YN": "Y",
+              "DIV_CD": "",
+              "DIV_SEQ": 0,
+              "STICKER_TYPE": "",
+              "REAM_PAPER_CNT": null,
+              "NOTE": null,
+              "PDT_SIZE_INFO": "",
+              "HIDE_YN": "N"
+            },
+            {
+              "DIV_NM": "1000X1000",
+              "WRK_WDT": "1004.00",
+              "WRK_HGH": "1004.00",
+              "CUT_WDT": "1000.00",
+              "CUT_HGH": "1000.00",
+              "DFT_YN": "N",
+              "DIV_CD": "",
+              "DIV_SEQ": 1,
+              "STICKER_TYPE": "",
+              "REAM_PAPER_CNT": null,
+              "NOTE": null,
+              "PDT_SIZE_INFO": "",
+              "HIDE_YN": "N"
+            }
+          ],
+          "pdt_dosu_info": [
+            {
+              "COD": "SID_S",
+              "COD_NME": "단면",
+              "PRN_CLR_CNT": 4
+            }
+          ],
+          "pdt_prn_cnt_info": [
+            {
+              "DIV_CD": "",
+              "REAM_CNT": "",
+              "PRN_CNT": "",
+              "DFT_YN": "Y",
+              "DFT_PRN_CNT": 1,
+              "FIR_CNT": 1,
+              "INC_CNT": 1,
+              "INC_STEP": 1,
+              "MIN_PRN_CNT": 1,
+              "MIN_INN_PAGE": 1,
+              "MAX_INN_PAGE": 1,
+              "STEP_INN_PAGE": 1,
+              "MAX_THCK": null,
+              "INN_MAX_WGT": null,
+              "COV_MIN_WGT": null
+            }
+          ],
+          "pdt_prn_cnt_info_add": [],
+          "pdt_exp_prn_cnt_info": null,
+          "pdt_pcs_info": [
+            {
+              "PCS_CD": "COT_DFT",
+              "PCS_GRP_NM": "코팅",
+              "PCS_DTL_CD": "TCMAS",
+              "PCS_DTL_NM": "무광코팅단면",
+              "WEB_PCS_DTL_GRP": "COT_DFT_TC",
+              "WEB_PCS_DTL_GRP_NM": "",
+              "WRK_WDT": "0.00",
+              "WRK_HGH": "0.00",
+              "CUT_WDT": "0.00",
+              "CUT_HGH": "0.00",
+              "VIEW_YN": "Y",
+              "HIDE_YN": "N",
+              "NOTICE": [],
+              "ESN_YN": "Y",
+              "NOTE": "",
+              "MTRL_CD": "",
+              "MTRL_COD": "",
+              "DIV_SEQ": 0,
+              "SUB_MTRL_YN": "N",
+              "STICKER_TYPE": null,
+              "QTY_INPUT_YN": "N",
+              "PCS_COD": "COT_DFT",
+              "PCS_GRP_NME": "코팅",
+              "PCS_DTL_COD": "TCMAS",
+              "PCS_DTL_NME": "무광코팅단면",
+              "PCS_GROUP_NME": "무광코팅단면"
+            },
+            {
+              "PCS_CD": "COT_DFT",
+              "PCS_GRP_NM": "코팅",
+              "PCS_DTL_CD": "TCGLS",
+              "PCS_DTL_NM": "유광코팅단면",
+              "WEB_PCS_DTL_GRP": "COT_DFT_TC",
+              "WEB_PCS_DTL_GRP_NM": "",
+              "WRK_WDT": "0.00",
+              "WRK_HGH": "0.00",
+              "CUT_WDT": "0.00",
+              "CUT_HGH": "0.00",
+              "VIEW_YN": "Y",
+              "HIDE_YN": "N",
+              "NOTICE": [],
+              "ESN_YN": "Y",
+              "NOTE": "",
+              "MTRL_CD": "",
+              "MTRL_COD": "",
+              "DIV_SEQ": 0,
+              "SUB_MTRL_YN": "N",
+              "STICKER_TYPE": null,
+              "QTY_INPUT_YN": "N",
+              "PCS_COD": "COT_DFT",
+              "PCS_GRP_NME": "코팅",
+              "PCS_DTL_COD": "TCGLS",
+              "PCS_DTL_NME": "유광코팅단면",
+              "PCS_GROUP_NME": "유광코팅단면"
+            },
+            {
+              "PCS_CD": "CUT_ZUN",
+              "PCS_GRP_NM": "재단",
+              "PCS_DTL_CD": "ZDINC",
+              "PCS_DTL_NM": "정사이즈재단",
+              "WEB_PCS_DTL_GRP": "CUT_ZUN_ZD",
+              "WEB_PCS_DTL_GRP_NM": "",
+              "WRK_WDT": "0.00",
+              "WRK_HGH": "0.00",
+              "CUT_WDT": "0.00",
+              "CUT_HGH": "0.00",
+              "VIEW_YN": "Y",
+              "HIDE_YN": "N",
+              "NOTICE": [
+                "가로, 세로 중 한쪽면이 1,700mm 미만(재단사이즈 기준)인 경우만 가능합니다."
+              ],
+              "ESN_YN": "Y",
+              "NOTE": "",
+              "MTRL_CD": "",
+              "MTRL_COD": "",
+              "DIV_SEQ": 0,
+              "SUB_MTRL_YN": "N",
+              "STICKER_TYPE": null,
+              "QTY_INPUT_YN": "N",
+              "PCS_COD": "CUT_ZUN",
+              "PCS_GRP_NME": "재단",
+              "PCS_DTL_COD": "ZDINC",
+              "PCS_DTL_NME": "정사이즈재단",
+              "PCS_GROUP_NME": "정사이즈재단"
+            },
+            {
+              "PCS_CD": "CUT_ZUN",
+              "PCS_GRP_NM": "재단",
+              "PCS_DTL_CD": "ZDFRM",
+              "PCS_DTL_NM": "모양재단",
+              "WEB_PCS_DTL_GRP": "CUT_ZUN_ZD",
+              "WEB_PCS_DTL_GRP_NM": "",
+              "WRK_WDT": "0.00",
+              "WRK_HGH": "0.00",
+              "CUT_WDT": "0.00",
+              "CUT_HGH": "0.00",
+              "VIEW_YN": "Y",
+              "HIDE_YN": "N",
+              "NOTICE": [
+                "가로, 세로 중 한쪽면이 1,700mm 미만(재단사이즈 기준)인 경우만 가능합니다."
+              ],
+              "ESN_YN": "Y",
+              "NOTE": "",
+              "MTRL_CD": "",
+              "MTRL_COD": "",
+              "DIV_SEQ": 0,
+              "SUB_MTRL_YN": "N",
+              "STICKER_TYPE": null,
+              "QTY_INPUT_YN": "N",
+              "PCS_COD": "CUT_ZUN",
+              "PCS_GRP_NME": "재단",
+              "PCS_DTL_COD": "ZDFRM",
+              "PCS_DTL_NME": "모양재단",
+              "PCS_GROUP_NME": "모양재단"
+            },
+            {
+              "PCS_CD": "ILT_DFT",
+              "PCS_GRP_NM": "아일렛",
+              "PCS_DTL_CD": "RCDFT",
+              "PCS_DTL_NM": "사각귀퉁이",
+              "WEB_PCS_DTL_GRP": "ILT_DFT_RC",
+              "WEB_PCS_DTL_GRP_NM": "",
+              "WRK_WDT": "0.00",
+              "WRK_HGH": "0.00",
+              "CUT_WDT": "0.00",
+              "CUT_HGH": "0.00",
+              "VIEW_YN": "Y",
+              "HIDE_YN": "N",
+              "NOTICE": [],
+              "ESN_YN": "N",
+              "NOTE": "",
+              "MTRL_CD": "",
+              "MTRL_COD": "",
+              "DIV_SEQ": 0,
+              "SUB_MTRL_YN": "N",
+              "STICKER_TYPE": null,
+              "QTY_INPUT_YN": "N",
+              "PCS_COD": "ILT_DFT",
+              "PCS_GRP_NME": "아일렛",
+              "PCS_DTL_COD": "RCDFT",
+              "PCS_DTL_NME": "사각귀퉁이",
+              "PCS_GROUP_NME": "사각귀퉁이"
+            },
+            {
+              "PCS_CD": "ILT_DFT",
+              "PCS_GRP_NM": "아일렛",
+              "PCS_DTL_CD": "RCALL",
+              "PCS_DTL_NM": "사각테두리",
+              "WEB_PCS_DTL_GRP": "ILT_DFT_RC",
+              "WEB_PCS_DTL_GRP_NM": "",
+              "WRK_WDT": "0.00",
+              "WRK_HGH": "0.00",
+              "CUT_WDT": "0.00",
+              "CUT_HGH": "0.00",
+              "VIEW_YN": "Y",
+              "HIDE_YN": "N",
+              "NOTICE": [],
+              "ESN_YN": "N",
+              "NOTE": "",
+              "MTRL_CD": "",
+              "MTRL_COD": "",
+              "DIV_SEQ": 0,
+              "SUB_MTRL_YN": "N",
+              "STICKER_TYPE": null,
+              "QTY_INPUT_YN": "N",
+              "PCS_COD": "ILT_DFT",
+              "PCS_GRP_NME": "아일렛",
+              "PCS_DTL_COD": "RCALL",
+              "PCS_DTL_NME": "사각테두리",
+              "PCS_GROUP_NME": "사각테두리"
+            },
+            {
+              "PCS_CD": "QBG_DFT",
+              "PCS_GRP_NM": "큐방",
+              "PCS_DTL_CD": "DFXXX",
+              "PCS_DTL_NM": "큐방",
+              "WEB_PCS_DTL_GRP": "QBG_DFT_DF",
+              "WEB_PCS_DTL_GRP_NM": "",
+              "WRK_WDT": "0.00",
+              "WRK_HGH": "0.00",
+              "CUT_WDT": "0.00",
+              "CUT_HGH": "0.00",
+              "VIEW_YN": "Y",
+              "HIDE_YN": "N",
+              "NOTICE": [
+                "부자재 큐방만 판매합니다.<br>큐방을 끼울 수 있는 아일렛 후가공을 선택하시거나, <br>타공 구멍은 직접 뚫으신 후 사용하셔야 합니다."
+              ],
+              "ESN_YN": "N",
+              "NOTE": "",
+              "MTRL_CD": "",
+              "MTRL_COD": "",
+              "DIV_SEQ": 0,
+              "SUB_MTRL_YN": "Y",
+              "STICKER_TYPE": null,
+              "QTY_INPUT_YN": "N",
+              "PCS_COD": "QBG_DFT",
+              "PCS_GRP_NME": "큐방",
+              "PCS_DTL_COD": "DFXXX",
+              "PCS_DTL_NME": "큐방",
+              "PCS_GROUP_NME": "큐방"
+            },
+            {
+              "PCS_CD": "SUB_MTR",
+              "PCS_GRP_NM": "추가부자재",
+              "PCS_DTL_CD": "CT001",
+              "PCS_DTL_NM": "큐브 양면 젤리테이프",
+              "WEB_PCS_DTL_GRP": "SUB_MTR_CT",
+              "WEB_PCS_DTL_GRP_NM": "젤리테이프",
+              "WRK_WDT": "0.00",
+              "WRK_HGH": "0.00",
+              "CUT_WDT": "0.00",
+              "CUT_HGH": "0.00",
+              "VIEW_YN": "Y",
+              "HIDE_YN": "N",
+              "NOTICE": [],
+              "ESN_YN": "N",
+              "NOTE": "",
+              "MTRL_CD": "",
+              "MTRL_COD": "",
+              "DIV_SEQ": 0,
+              "SUB_MTRL_YN": "Y",
+              "STICKER_TYPE": null,
+              "QTY_INPUT_YN": "Y",
+              "PCS_COD": "SUB_MTR",
+              "PCS_GRP_NME": "추가부자재",
+              "PCS_DTL_COD": "CT001",
+              "PCS_DTL_NME": "큐브 양면 젤리테이프",
+              "PCS_GROUP_NME": "큐브 양면 젤리테이프"
+            }
+          ],
+          "pdt_add_pcs_info": null,
+          "pdt_disable_pcs_info": [],
+          "pdt_add_info": [
+            [],
+            []
+          ]
+        },
+        "member_info": {
+          "mb_id": "RPf9936d865d739fd86b05681c6a787eca",
+          "mb_cust_cod": "10000000",
+          "discount_cust_yn": null,
+          "mall_cust_yn": null,
+          "bsn_yn": null,
+          "blk_con": null,
+          "edicusUserID": "cmVkcHJpbnRpbmdfbm9tZW1iZXI="
+        }
+      }
+    }
+  },
+  "productInfoCount": 1,
+  "productInfo": [
+    {
+      "rel": 1893,
+      "status": 200,
+      "respBody": {
+        "retCode": 200,
+        "msg": "",
+        "result": {
+          "product_option": {
+            "option": {
+              "pdt_cod": "BNPTPET",
+              "pdt_nme": "PET배너",
+              "item_gbn": "real_item",
+              "price_gbn": "real_price",
+              "skinInfo": {
+                "pageDirection": {
+                  "view_yn": "N",
+                  "title": "주문서 작성"
+                },
+                "paperSelect": {
+                  "view_yn": "Y",
+                  "title": "용지"
+                },
+                "sizeSelect": {
+                  "view_yn": "Y",
+                  "title": "규격 (mm)"
+                },
+                "dosuSelect": {
+                  "view_yn": "Y",
+                  "title": "인쇄 도수"
+                },
+                "subjectGroup": {
+                  "view_yn": "Y",
+                  "title": "주문 제목"
+                },
+                "quantityGroup": {
+                  "view_yn": "Y",
+                  "title": {
+                    "orderCnt": "디자인 수 (건수)",
+                    "printCnt": "수량"
+                  }
+                }
+              },
+              "order_yn": "Y",
+              "cut_guide_yn": "N",
+              "able_paper_yn": "Y",
+              "price_table_yn": "N",
+              "useTemplateDownload": "Y",
+              "useKoiEditor": "N",
+              "useRPEditor": "N",
+              "usePDF": "Y",
+              "usePDFordCnt": "Y",
+              "useEditorOrdCnt": "N",
+              "koiAccessToken": "[REDACTED-JWT]",
+              "rpAccessToken": null,
+              "koi_template_resource_id": "",
+              "koiOption": []
+            }
+          },
+          "product_data": {
+            "pdt_base_info": [
+              {
+                "PDT_CD": "BNPTPET",
+                "PDT_NM": "PET배너",
+                "WDT_HGH_GBN_YN": "N",
+                "PRN_YN": "Y",
+                "PDT_UNIT": "장",
+                "ORD_CNT_YN": "Y",
+                "NO_STD_ABL_YN": "N",
+                "MIN_CUT_WDT": "0.00",
+                "MIN_CUT_HGH": "0.00",
+                "MAX_CUT_WDT": "1000.00",
+                "MAX_CUT_HGH": "1000.00",
+                "DFT_CUT_WDT": "0.00",
+                "DFT_CUT_HGH": "0.00",
+                "CUT_MRG": "4.00",
+                "FIR_CNT": 1,
+                "INC": 1,
+                "INC_STEP": 1,
+                "NOTE": "",
+                "REAM_YN": "",
+                "SET_CNT": 1,
+                "SIZE_PCS_USE": "",
+                "MAX_PRN_CNT": 0,
+                "DAY_PRDC_PDT_YN": "Y",
+                "DAY_ABLE_PRN_CNT": 100
+              }
+            ],
+            "pdt_mtrl_info": [
+              {
+                "MTRL_TYPE": "P",
+                "CLR_CD": "X",
+                "CLR_NM": "기본",
+                "PTT_CD": "PET",
+                "PTT_NM": "일반배너",
+                "WGT_CD": "XXX",
+                "MTRL_CD": "PXPETXXX",
+                "HIDE_YN": "N",
+                "HIDE_RSN": "",
+                "NOTE": "",
+                "SID_GBN": "",
+                "CLR_COD": "X",
+                "CLR_NME": "기본",
+                "PTT_COD": "PET",
+                "PTT_NME": "일반배너",
+                "WGT_COD": "XXX",
+                "MTRL_COD": "PXPETXXX",
+                "MTRL_NM": "PET",
+                "GRP_OPTION_CD": "",
+                "CLR_OPTION_CD": "",
+                "PRT_HIDE_YN": null,
+                "BSN_YN": "N",
+                "CLR_HEX_CD": ""
+              },
+              {
+                "MTRL_TYPE": "P",
+                "CLR_CD": "X",
+                "CLR_NM": "기본",
+                "PTT_CD": "BOP",
+                "PTT_NM": "블락아웃PET",
+                "WGT_CD": "XXX",
+                "MTRL_CD": "PXBOPXXX",
+                "HIDE_YN": "N",
+                "HIDE_RSN": "",
+                "NOTE": "",
+                "SID_GBN": "",
+                "CLR_COD": "X",
+                "CLR_NME": "기본",
+                "PTT_COD": "BOP",
+                "PTT_NME": "블락아웃PET",
+                "WGT_COD": "XXX",
+                "MTRL_COD": "PXBOPXXX",
+                "MTRL_NM": "블락아웃PET-수성용",
+                "GRP_OPTION_CD": "",
+                "CLR_OPTION_CD": "",
+                "PRT_HIDE_YN": null,
+                "BSN_YN": "N",
+                "CLR_HEX_CD": ""
+              }
+            ],
+            "pdt_size_info": [
+              {
+                "DIV_NM": "사이즈직접입력",
+                "WRK_WDT": "4.00",
+                "WRK_HGH": "4.00",
+                "CUT_WDT": "0.00",
+                "CUT_HGH": "0.00",
+                "DFT_YN": "Y",
+                "DIV_CD": "",
+                "DIV_SEQ": 0,
+                "STICKER_TYPE": "",
+                "REAM_PAPER_CNT": null,
+                "NOTE": null,
+                "PDT_SIZE_INFO": "",
+                "HIDE_YN": "N"
+              },
+              {
+                "DIV_NM": "1000X1000",
+                "WRK_WDT": "1004.00",
+                "WRK_HGH": "1004.00",
+                "CUT_WDT": "1000.00",
+                "CUT_HGH": "1000.00",
+                "DFT_YN": "N",
+                "DIV_CD": "",
+                "DIV_SEQ": 1,
+                "STICKER_TYPE": "",
+                "REAM_PAPER_CNT": null,
+                "NOTE": null,
+                "PDT_SIZE_INFO": "",
+                "HIDE_YN": "N"
+              }
+            ],
+            "pdt_dosu_info": [
+              {
+                "COD": "SID_S",
+                "COD_NME": "단면",
+                "PRN_CLR_CNT": 4
+              }
+            ],
+            "pdt_prn_cnt_info": [
+              {
+                "DIV_CD": "",
+                "REAM_CNT": "",
+                "PRN_CNT": "",
+                "DFT_YN": "Y",
+                "DFT_PRN_CNT": 1,
+                "FIR_CNT": 1,
+                "INC_CNT": 1,
+                "INC_STEP": 1,
+                "MIN_PRN_CNT": 1,
+                "MIN_INN_PAGE": 1,
+                "MAX_INN_PAGE": 1,
+                "STEP_INN_PAGE": 1,
+                "MAX_THCK": null,
+                "INN_MAX_WGT": null,
+                "COV_MIN_WGT": null
+              }
+            ],
+            "pdt_prn_cnt_info_add": [],
+            "pdt_exp_prn_cnt_info": null,
+            "pdt_pcs_info": [
+              {
+                "PCS_CD": "COT_DFT",
+                "PCS_GRP_NM": "코팅",
+                "PCS_DTL_CD": "TCMAS",
+                "PCS_DTL_NM": "무광코팅단면",
+                "WEB_PCS_DTL_GRP": "COT_DFT_TC",
+                "WEB_PCS_DTL_GRP_NM": "",
+                "WRK_WDT": "0.00",
+                "WRK_HGH": "0.00",
+                "CUT_WDT": "0.00",
+                "CUT_HGH": "0.00",
+                "VIEW_YN": "Y",
+                "HIDE_YN": "N",
+                "NOTICE": [],
+                "ESN_YN": "Y",
+                "NOTE": "",
+                "MTRL_CD": "",
+                "MTRL_COD": "",
+                "DIV_SEQ": 0,
+                "SUB_MTRL_YN": "N",
+                "STICKER_TYPE": null,
+                "QTY_INPUT_YN": "N",
+                "PCS_COD": "COT_DFT",
+                "PCS_GRP_NME": "코팅",
+                "PCS_DTL_COD": "TCMAS",
+                "PCS_DTL_NME": "무광코팅단면",
+                "PCS_GROUP_NME": "무광코팅단면"
+              },
+              {
+                "PCS_CD": "COT_DFT",
+                "PCS_GRP_NM": "코팅",
+                "PCS_DTL_CD": "TCGLS",
+                "PCS_DTL_NM": "유광코팅단면",
+                "WEB_PCS_DTL_GRP": "COT_DFT_TC",
+                "WEB_PCS_DTL_GRP_NM": "",
+                "WRK_WDT": "0.00",
+                "WRK_HGH": "0.00",
+                "CUT_WDT": "0.00",
+                "CUT_HGH": "0.00",
+                "VIEW_YN": "Y",
+                "HIDE_YN": "N",
+                "NOTICE": [],
+                "ESN_YN": "Y",
+                "NOTE": "",
+                "MTRL_CD": "",
+                "MTRL_COD": "",
+                "DIV_SEQ": 0,
+                "SUB_MTRL_YN": "N",
+                "STICKER_TYPE": null,
+                "QTY_INPUT_YN": "N",
+                "PCS_COD": "COT_DFT",
+                "PCS_GRP_NME": "코팅",
+                "PCS_DTL_COD": "TCGLS",
+                "PCS_DTL_NME": "유광코팅단면",
+                "PCS_GROUP_NME": "유광코팅단면"
+              },
+              {
+                "PCS_CD": "CUT_ZUN",
+                "PCS_GRP_NM": "재단",
+                "PCS_DTL_CD": "ZDINC",
+                "PCS_DTL_NM": "정사이즈재단",
+                "WEB_PCS_DTL_GRP": "CUT_ZUN_ZD",
+                "WEB_PCS_DTL_GRP_NM": "",
+                "WRK_WDT": "0.00",
+                "WRK_HGH": "0.00",
+                "CUT_WDT": "0.00",
+                "CUT_HGH": "0.00",
+                "VIEW_YN": "Y",
+                "HIDE_YN": "N",
+                "NOTICE": [
+                  "가로, 세로 중 한쪽면이 1,700mm 미만(재단사이즈 기준)인 경우만 가능합니다."
+                ],
+                "ESN_YN": "Y",
+                "NOTE": "",
+                "MTRL_CD": "",
+                "MTRL_COD": "",
+                "DIV_SEQ": 0,
+                "SUB_MTRL_YN": "N",
+                "STICKER_TYPE": null,
+                "QTY_INPUT_YN": "N",
+                "PCS_COD": "CUT_ZUN",
+                "PCS_GRP_NME": "재단",
+                "PCS_DTL_COD": "ZDINC",
+                "PCS_DTL_NME": "정사이즈재단",
+                "PCS_GROUP_NME": "정사이즈재단"
+              },
+              {
+                "PCS_CD": "CUT_ZUN",
+                "PCS_GRP_NM": "재단",
+                "PCS_DTL_CD": "ZDFRM",
+                "PCS_DTL_NM": "모양재단",
+                "WEB_PCS_DTL_GRP": "CUT_ZUN_ZD",
+                "WEB_PCS_DTL_GRP_NM": "",
+                "WRK_WDT": "0.00",
+                "WRK_HGH": "0.00",
+                "CUT_WDT": "0.00",
+                "CUT_HGH": "0.00",
+                "VIEW_YN": "Y",
+                "HIDE_YN": "N",
+                "NOTICE": [
+                  "가로, 세로 중 한쪽면이 1,700mm 미만(재단사이즈 기준)인 경우만 가능합니다."
+                ],
+                "ESN_YN": "Y",
+                "NOTE": "",
+                "MTRL_CD": "",
+                "MTRL_COD": "",
+                "DIV_SEQ": 0,
+                "SUB_MTRL_YN": "N",
+                "STICKER_TYPE": null,
+                "QTY_INPUT_YN": "N",
+                "PCS_COD": "CUT_ZUN",
+                "PCS_GRP_NME": "재단",
+                "PCS_DTL_COD": "ZDFRM",
+                "PCS_DTL_NME": "모양재단",
+                "PCS_GROUP_NME": "모양재단"
+              },
+              {
+                "PCS_CD": "ILT_DFT",
+                "PCS_GRP_NM": "아일렛",
+                "PCS_DTL_CD": "RCDFT",
+                "PCS_DTL_NM": "사각귀퉁이",
+                "WEB_PCS_DTL_GRP": "ILT_DFT_RC",
+                "WEB_PCS_DTL_GRP_NM": "",
+                "WRK_WDT": "0.00",
+                "WRK_HGH": "0.00",
+                "CUT_WDT": "0.00",
+                "CUT_HGH": "0.00",
+                "VIEW_YN": "Y",
+                "HIDE_YN": "N",
+                "NOTICE": [],
+                "ESN_YN": "N",
+                "NOTE": "",
+                "MTRL_CD": "",
+                "MTRL_COD": "",
+                "DIV_SEQ": 0,
+                "SUB_MTRL_YN": "N",
+                "STICKER_TYPE": null,
+                "QTY_INPUT_YN": "N",
+                "PCS_COD": "ILT_DFT",
+                "PCS_GRP_NME": "아일렛",
+                "PCS_DTL_COD": "RCDFT",
+                "PCS_DTL_NME": "사각귀퉁이",
+                "PCS_GROUP_NME": "사각귀퉁이"
+              },
+              {
+                "PCS_CD": "ILT_DFT",
+                "PCS_GRP_NM": "아일렛",
+                "PCS_DTL_CD": "RCALL",
+                "PCS_DTL_NM": "사각테두리",
+                "WEB_PCS_DTL_GRP": "ILT_DFT_RC",
+                "WEB_PCS_DTL_GRP_NM": "",
+                "WRK_WDT": "0.00",
+                "WRK_HGH": "0.00",
+                "CUT_WDT": "0.00",
+                "CUT_HGH": "0.00",
+                "VIEW_YN": "Y",
+                "HIDE_YN": "N",
+                "NOTICE": [],
+                "ESN_YN": "N",
+                "NOTE": "",
+                "MTRL_CD": "",
+                "MTRL_COD": "",
+                "DIV_SEQ": 0,
+                "SUB_MTRL_YN": "N",
+                "STICKER_TYPE": null,
+                "QTY_INPUT_YN": "N",
+                "PCS_COD": "ILT_DFT",
+                "PCS_GRP_NME": "아일렛",
+                "PCS_DTL_COD": "RCALL",
+                "PCS_DTL_NME": "사각테두리",
+                "PCS_GROUP_NME": "사각테두리"
+              },
+              {
+                "PCS_CD": "QBG_DFT",
+                "PCS_GRP_NM": "큐방",
+                "PCS_DTL_CD": "DFXXX",
+                "PCS_DTL_NM": "큐방",
+                "WEB_PCS_DTL_GRP": "QBG_DFT_DF",
+                "WEB_PCS_DTL_GRP_NM": "",
+                "WRK_WDT": "0.00",
+                "WRK_HGH": "0.00",
+                "CUT_WDT": "0.00",
+                "CUT_HGH": "0.00",
+                "VIEW_YN": "Y",
+                "HIDE_YN": "N",
+                "NOTICE": [
+                  "부자재 큐방만 판매합니다.<br>큐방을 끼울 수 있는 아일렛 후가공을 선택하시거나, <br>타공 구멍은 직접 뚫으신 후 사용하셔야 합니다."
+                ],
+                "ESN_YN": "N",
+                "NOTE": "",
+                "MTRL_CD": "",
+                "MTRL_COD": "",
+                "DIV_SEQ": 0,
+                "SUB_MTRL_YN": "Y",
+                "STICKER_TYPE": null,
+                "QTY_INPUT_YN": "N",
+                "PCS_COD": "QBG_DFT",
+                "PCS_GRP_NME": "큐방",
+                "PCS_DTL_COD": "DFXXX",
+                "PCS_DTL_NME": "큐방",
+                "PCS_GROUP_NME": "큐방"
+              },
+              {
+                "PCS_CD": "SUB_MTR",
+                "PCS_GRP_NM": "추가부자재",
+                "PCS_DTL_CD": "CT001",
+                "PCS_DTL_NM": "큐브 양면 젤리테이프",
+                "WEB_PCS_DTL_GRP": "SUB_MTR_CT",
+                "WEB_PCS_DTL_GRP_NM": "젤리테이프",
+                "WRK_WDT": "0.00",
+                "WRK_HGH": "0.00",
+                "CUT_WDT": "0.00",
+                "CUT_HGH": "0.00",
+                "VIEW_YN": "Y",
+                "HIDE_YN": "N",
+                "NOTICE": [],
+                "ESN_YN": "N",
+                "NOTE": "",
+                "MTRL_CD": "",
+                "MTRL_COD": "",
+                "DIV_SEQ": 0,
+                "SUB_MTRL_YN": "Y",
+                "STICKER_TYPE": null,
+                "QTY_INPUT_YN": "Y",
+                "PCS_COD": "SUB_MTR",
+                "PCS_GRP_NME": "추가부자재",
+                "PCS_DTL_COD": "CT001",
+                "PCS_DTL_NME": "큐브 양면 젤리테이프",
+                "PCS_GROUP_NME": "큐브 양면 젤리테이프"
+              }
+            ],
+            "pdt_add_pcs_info": null,
+            "pdt_disable_pcs_info": [],
+            "pdt_add_info": [
+              [],
+              []
+            ]
+          },
+          "member_info": {
+            "mb_id": "RPf9936d865d739fd86b05681c6a787eca",
+            "mb_cust_cod": "10000000",
+            "discount_cust_yn": null,
+            "mall_cust_yn": null,
+            "bsn_yn": null,
+            "blk_con": null,
+            "edicusUserID": "cmVkcHJpbnRpbmdfbm9tZW1iZXI="
+          }
+        }
+      }
+    }
+  ],
+  "priceCallCount": 3,
+  "priceCalls": [
+    {
+      "rel": 2490,
+      "status": 200,
+      "reqBody": "{\"dataJson\":{\"ORD_INFO\":[{\"PDT_CD\":\"BNPTPET\",\"MTRL_CD\":\"PXPETXXX\",\"CUT_WDT\":0,\"CUT_HGH\":0,\"WRK_WDT\":4,\"WRK_HGH\":4,\"DOSU_COD\":\"SID_S\",\"PRN_CLR_CNT\":4}],\"PCS_INFO\":[{\"PCS_COD\":\"COT_DFT\",\"PCS_DTL_COD\":\"TCMAS\"},{\"PCS_COD\":\"CUT_ZUN\",\"PCS_DTL_COD\":\"ZDINC\",\"ATTB\":\"\"}],\"price_gbn\":\"real_price\",\"mb_cust_cod\":\"10000000\"}}",
+      "respBody": {
+        "retCode": 999,
+        "msg": "",
+        "result": null,
+        "result_sum": {
+          "PRICE": 0,
+          "PRICE_VAT": 0,
+          "PRICE_MALL": 0,
+          "PRICE_MALL_VAT": 0,
+          "ORG_PRICE": 0,
+          "ORG_PRICE_VAT": 0
+        },
+        "query": "dbo.WSP_ACPT_ORDER_TMPL_PCS_PRICE '0101', 'LNG_KO', 'BNPTPET', '<?xml version=\"1.0\"?>\n<PARAMS><DETAIL><MTRL_COD>PXPETXXX</MTRL_COD><CUT_WDT/><CUT_HGH/><PRN_CNT/><ORD_CNT/><SID_GBN>SID_S</SID_GBN><TMPL_IDX/><BTN_TYPE/><PNS_DIGIT/><PNS_CNT/><PACK_PRN_CNT/><CUST_COD>10000000</CUST_COD></DETAIL><PCS><PCS_COD>COT_DFT</PCS_COD><PCS_DTL_COD>TCMAS</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS><PCS><PCS_COD>CUT_ZUN</PCS_COD><PCS_DTL_COD>ZDINC</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS></PARAMS>\n'",
+        "query_flexible": null
+      }
+    },
+    {
+      "rel": 2672,
+      "status": 200,
+      "reqBody": "{\"dataJson\":{\"ORD_INFO\":[{\"PDT_CD\":\"BNPTPET\",\"MTRL_CD\":\"PXPETXXX\",\"CUT_WDT\":0,\"CUT_HGH\":0,\"WRK_WDT\":4,\"WRK_HGH\":4,\"PRN_CNT\":1,\"ORD_CNT\":1,\"DOSU_COD\":\"SID_S\",\"PRN_CLR_CNT\":4}],\"PCS_INFO\":[{\"PCS_COD\":\"COT_DFT\",\"PCS_DTL_COD\":\"TCMAS\"},{\"PCS_COD\":\"CUT_ZUN\",\"PCS_DTL_COD\":\"ZDINC\",\"ATTB\":\"\"}],\"price_gbn\":\"real_price\",\"mb_cust_cod\":\"10000000\"}}",
+      "respBody": {
+        "retCode": 999,
+        "msg": "",
+        "result": null,
+        "result_sum": {
+          "PRICE": 0,
+          "PRICE_VAT": 0,
+          "PRICE_MALL": 0,
+          "PRICE_MALL_VAT": 0,
+          "ORG_PRICE": 0,
+          "ORG_PRICE_VAT": 0
+        },
+        "query": "dbo.WSP_ACPT_ORDER_TMPL_PCS_PRICE '0101', 'LNG_KO', 'BNPTPET', '<?xml version=\"1.0\"?>\n<PARAMS><DETAIL><MTRL_COD>PXPETXXX</MTRL_COD><CUT_WDT/><CUT_HGH/><PRN_CNT>1</PRN_CNT><ORD_CNT>1</ORD_CNT><SID_GBN>SID_S</SID_GBN><TMPL_IDX/><BTN_TYPE/><PNS_DIGIT/><PNS_CNT/><PACK_PRN_CNT/><CUST_COD>10000000</CUST_COD></DETAIL><PCS><PCS_COD>COT_DFT</PCS_COD><PCS_DTL_COD>TCMAS</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS><PCS><PCS_COD>CUT_ZUN</PCS_COD><PCS_DTL_COD>ZDINC</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS></PARAMS>\n'",
+        "query_flexible": null
+      }
+    },
+    {
+      "rel": 7907,
+      "status": 200,
+      "reqBody": "{\"dataJson\":{\"ORD_INFO\":[{\"PDT_CD\":\"BNPTPET\",\"MTRL_CD\":\"PXBOPXXX\",\"CUT_WDT\":0,\"CUT_HGH\":0,\"WRK_WDT\":4,\"WRK_HGH\":4,\"PRN_CNT\":1,\"ORD_CNT\":1,\"DOSU_COD\":\"SID_S\",\"PRN_CLR_CNT\":4}],\"PCS_INFO\":[{\"PCS_COD\":\"COT_DFT\",\"PCS_DTL_COD\":\"TCMAS\"},{\"PCS_COD\":\"CUT_ZUN\",\"PCS_DTL_COD\":\"ZDINC\",\"ATTB\":\"\"}],\"price_gbn\":\"real_price\",\"mb_cust_cod\":\"10000000\"}}",
+      "respBody": {
+        "retCode": 999,
+        "msg": "",
+        "result": null,
+        "result_sum": {
+          "PRICE": 0,
+          "PRICE_VAT": 0,
+          "PRICE_MALL": 0,
+          "PRICE_MALL_VAT": 0,
+          "ORG_PRICE": 0,
+          "ORG_PRICE_VAT": 0
+        },
+        "query": "dbo.WSP_ACPT_ORDER_TMPL_PCS_PRICE '0101', 'LNG_KO', 'BNPTPET', '<?xml version=\"1.0\"?>\n<PARAMS><DETAIL><MTRL_COD>PXBOPXXX</MTRL_COD><CUT_WDT/><CUT_HGH/><PRN_CNT>1</PRN_CNT><ORD_CNT>1</ORD_CNT><SID_GBN>SID_S</SID_GBN><TMPL_IDX/><BTN_TYPE/><PNS_DIGIT/><PNS_CNT/><PACK_PRN_CNT/><CUST_COD>10000000</CUST_COD></DETAIL><PCS><PCS_COD>COT_DFT</PCS_COD><PCS_DTL_COD>TCMAS</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS><PCS><PCS_COD>CUT_ZUN</PCS_COD><PCS_DTL_COD>ZDINC</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS></PARAMS>\n'",
+        "query_flexible": null
+      }
+    }
+  ],
+  "network": [
+    {
+      "rel": 1399,
+      "dir": "req",
+      "method": "GET",
+      "url": "/rp-api/ko/product/get_digital_product_info",
+      "body": ""
+    },
+    {
+      "rel": 2337,
+      "dir": "req",
+      "method": "POST",
+      "url": "/rp-api/ko/product_price/get_ajax_price_vTmpl",
+      "body": "{\"dataJson\":{\"ORD_INFO\":[{\"PDT_CD\":\"BNPTPET\",\"MTRL_CD\":\"PXPETXXX\",\"CUT_WDT\":0,\"CUT_HGH\":0,\"WRK_WDT\":4,\"WRK_HGH\":4,\"DOSU_COD\":\"SID_S\",\"PRN_CLR_CNT\":4}],\"PCS_INFO\":[{\"PCS_COD\":\"COT_DFT\",\"PCS_DTL_COD\":\"TCMAS\"},{\"PCS_COD\":\"CUT_ZUN\",\"PCS_DTL_COD\":\"ZDINC\",\"ATTB\":\"\"}],\"price_gbn\":\"real_price\",\"mb_cust_cod\":\"10000000\"}}"
+    },
+    {
+      "rel": 2544,
+      "dir": "req",
+      "method": "POST",
+      "url": "/rp-api/ko/product_price/get_ajax_price_vTmpl",
+      "body": "{\"dataJson\":{\"ORD_INFO\":[{\"PDT_CD\":\"BNPTPET\",\"MTRL_CD\":\"PXPETXXX\",\"CUT_WDT\":0,\"CUT_HGH\":0,\"WRK_WDT\":4,\"WRK_HGH\":4,\"PRN_CNT\":1,\"ORD_CNT\":1,\"DOSU_COD\":\"SID_S\",\"PRN_CLR_CNT\":4}],\"PCS_INFO\":[{\"PCS_COD\":\"COT_DFT\",\"PCS_DTL_COD\":\"TCMAS\"},{\"PCS_COD\":\"CUT_ZUN\",\"PCS_DTL_COD\":\"ZDINC\",\"ATTB\":\"\"}],\"price_gbn\":\"real_price\",\"mb_cust_cod\":\"10000000\"}}"
+    },
+    {
+      "rel": 7779,
+      "dir": "req",
+      "method": "POST",
+      "url": "/rp-api/ko/product_price/get_ajax_price_vTmpl",
+      "body": "{\"dataJson\":{\"ORD_INFO\":[{\"PDT_CD\":\"BNPTPET\",\"MTRL_CD\":\"PXBOPXXX\",\"CUT_WDT\":0,\"CUT_HGH\":0,\"WRK_WDT\":4,\"WRK_HGH\":4,\"PRN_CNT\":1,\"ORD_CNT\":1,\"DOSU_COD\":\"SID_S\",\"PRN_CLR_CNT\":4}],\"PCS_INFO\":[{\"PCS_COD\":\"COT_DFT\",\"PCS_DTL_COD\":\"TCMAS\"},{\"PCS_COD\":\"CUT_ZUN\",\"PCS_DTL_COD\":\"ZDINC\",\"ATTB\":\"\"}],\"price_gbn\":\"real_price\",\"mb_cust_cod\":\"10000000\"}}"
+    }
+  ]
+}
