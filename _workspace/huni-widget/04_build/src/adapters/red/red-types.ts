@@ -131,7 +131,8 @@ export interface RedPriceResponse {
     ORG_PRICE: number;
     ORG_PRICE_VAT: number;
   };
-  result_log: { list: unknown[] };
+  // result_log 는 책자 응답에만 존재 — 디지털인쇄(get_ajax_price_vTmpl) 캡처에는 부재. optional.
+  result_log?: { list: unknown[] };
   book_info?: { DLVR_AMT: number };
 }
 
