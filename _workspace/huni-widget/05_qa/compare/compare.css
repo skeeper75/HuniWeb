@@ -1,0 +1,131 @@
+/* 비교 검증 하네스 — 순수 CSS, 의존성 없음. Huni DESIGN.md 토큰 일부 차용. */
+:root {
+  --primary: #553886;
+  --primary-dark: #3B2573;
+  --ours: #2563eb;
+  --red: #d92121;
+  --intent: #553886;
+  --line: #e2e2e2;
+  --bg: #f5f5f5;
+  --text-dark: #1e1e1e;
+  --text-muted: #757575;
+  --vw: 560px;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body {
+  font-family: "Noto Sans", system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text-dark);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* 상단 바 */
+.topbar {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 16px;
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+  flex-wrap: wrap;
+}
+.topbar-title strong { font-size: 15px; }
+.topbar-title .muted { margin-left: 10px; font-size: 12px; color: var(--text-muted); }
+.topbar-controls { display: flex; align-items: center; gap: 14px; font-size: 13px; }
+.topbar-controls label { display: inline-flex; align-items: center; gap: 6px; color: #424242; }
+.topbar-controls select { padding: 4px 6px; border: 1px solid var(--line); border-radius: 4px; }
+.topbar-controls .chk { cursor: pointer; }
+#reload {
+  padding: 6px 12px; border: 1px solid var(--primary); background: var(--primary);
+  color: #fff; border-radius: 5px; cursor: pointer; font-size: 13px; font-weight: 600;
+}
+#reload:hover { background: var(--primary-dark); }
+
+/* 3분할 */
+.grid {
+  flex: 1 1 auto;
+  display: grid;
+  grid-template-columns: auto auto minmax(300px, 1fr);
+  gap: 12px;
+  padding: 12px;
+  overflow: auto;
+  align-items: start;
+}
+.pane {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 110px);
+}
+.sidepane { min-width: 300px; }
+
+.pane-head {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--line);
+  background: #fafafa;
+}
+.pane-head .src { font-size: 11px; color: var(--text-muted); }
+.tag { font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 4px; color: #fff; }
+.tag-ours { background: var(--ours); }
+.tag-red { background: var(--red); }
+.tag-intent { background: var(--intent); }
+.pane-head.ours { border-top: 3px solid var(--ours); }
+.pane-head.red { border-top: 3px solid var(--red); }
+.pane-head.intent { border-top: 3px solid var(--intent); }
+
+.pane-body { flex: 1 1 auto; overflow: auto; position: relative; background: #eee; }
+iframe.vw {
+  width: var(--vw);
+  height: 100%;
+  min-height: 1400px;
+  border: 0;
+  display: block;
+  background: #fff;
+}
+.redwarn {
+  position: absolute; left: 8px; right: 8px; bottom: 8px;
+  font-size: 11px; color: #842029; background: #fff3f3;
+  border: 1px solid #f3c2c2; border-radius: 6px; padding: 6px 8px;
+}
+.redwarn code { background: #fbe3e3; padding: 1px 4px; border-radius: 3px; }
+
+/* 사이드 패널 */
+.sidebody { padding: 14px; font-size: 13px; line-height: 1.55; background: #fff; }
+.sidebody h3 { font-size: 13px; margin: 18px 0 8px; color: var(--primary); border-bottom: 1px solid var(--line); padding-bottom: 4px; }
+.sidebody h3:first-child { margin-top: 0; }
+.legend { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 6px; }
+.legend span { font-size: 11px; padding: 2px 6px; border-radius: 4px; color: #fff; }
+.note { font-size: 11px; color: var(--text-muted); margin: 4px 0 0; }
+
+ul.checklist { list-style: none; margin: 0; padding: 0; }
+ul.checklist li {
+  display: flex; align-items: flex-start; gap: 8px;
+  padding: 6px 0; border-bottom: 1px dashed var(--line);
+}
+ul.checklist li:last-child { border-bottom: 0; }
+ul.checklist input { margin-top: 3px; }
+ul.checklist .label { flex: 1; }
+ul.checklist .label b { display: block; }
+ul.checklist .label small { color: var(--text-muted); }
+
+table.spec { width: 100%; border-collapse: collapse; font-size: 11.5px; }
+table.spec th, table.spec td { text-align: left; padding: 4px 6px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table.spec th { color: var(--primary); font-weight: 600; }
+
+.swatch-row { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0; }
+.swatch { width: 28px; height: 28px; border-radius: 4px; border: 1px solid rgba(0,0,0,.1); position: relative; }
+.swatch small { position: absolute; left: 0; right: 0; bottom: -14px; font-size: 8px; text-align: center; color: var(--text-muted); }
+.refbox { background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px; font-size: 11.5px; color: #424242; }
+.refbox code { background: #ececec; padding: 1px 4px; border-radius: 3px; }

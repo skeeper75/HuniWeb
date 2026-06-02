@@ -1,0 +1,23 @@
+/* 비교 하네스 정적 서버 — Node 내장 모듈만 사용(의존성 0). 포트 4173. */
+const http = require('http');
+const fs = require('fs');
+const path = require('path');
+
+const PORT = process.env.COMPARE_PORT || 4173;
+const ROOT = __dirname;
+const MIME = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.png': 'image/png' };
+
+http.createServer((req, res) => {
+  let urlPath = decodeURIComponent((req.url || '/').split('?')[0]);
+  if (urlPath === '/') urlPath = '/compare.html';
+  // 디렉터리 탈출 방지
+  const filePath = path.join(ROOT, path.normalize(urlPath).replace(/^(\.\.[/\\])+/, ''));
+  if (!filePath.startsWith(ROOT)) { res.writeHead(403); return res.end('Forbidden'); }
+  fs.readFile(filePath, (err, data) => {
+    if (err) { res.writeHead(404); return res.end('Not found: ' + urlPath); }
+    res.writeHead(200, { 'Content-Type': MIME[path.extname(filePath)] || 'application/octet-stream' });
+    res.end(data);
+  });
+}).listen(PORT, () => {
+  console.log('Compare harness: http://localhost:' + PORT + '/compare.html');
+});

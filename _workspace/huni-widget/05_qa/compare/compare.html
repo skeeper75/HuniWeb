@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Huni vs Red — 위젯 비교 검증 하네스</title>
+  <link rel="icon" href="data:," />
+  <link rel="stylesheet" href="./compare.css" />
+</head>
+<body>
+  <!-- ── 상단 바 ───────────────────────────────────────── -->
+  <header class="topbar">
+    <div class="topbar-title">
+      <strong>위젯 비교 검증 하네스</strong>
+      <span class="muted">우리 위젯(Huni) vs 레퍼런스(Red) · 상품 PRBKYPR(중철 책자)</span>
+    </div>
+    <div class="topbar-controls">
+      <label>뷰포트 폭
+        <select id="vw">
+          <option value="380">380 (모바일)</option>
+          <option value="480">480</option>
+          <option value="560" selected>560 (기본)</option>
+          <option value="720">720</option>
+        </select>
+      </label>
+      <label class="chk">
+        <input type="checkbox" id="syncScroll" /> 스크롤 동기화
+      </label>
+      <button id="reload">양쪽 새로고침</button>
+    </div>
+  </header>
+
+  <!-- ── 3분할 본문 ────────────────────────────────────── -->
+  <main class="grid">
+    <!-- LEFT: 우리 위젯 -->
+    <section class="pane">
+      <div class="pane-head ours">
+        <span class="tag tag-ours">우리 위젯 (Huni)</span>
+        <span class="src">localhost:5173 · 구현 결과물</span>
+      </div>
+      <div class="pane-body">
+        <iframe id="frameOurs" class="vw" src="http://localhost:5173/" title="Huni 우리 위젯"></iframe>
+      </div>
+    </section>
+
+    <!-- MIDDLE: Red 레퍼런스 -->
+    <section class="pane">
+      <div class="pane-head red">
+        <span class="tag tag-red">Red 레퍼런스 (동작 기준)</span>
+        <span class="src">localhost:3001 · 가격/캐스케이드/상호작용 정답</span>
+      </div>
+      <div class="pane-body">
+        <iframe id="frameRed" class="vw" src="http://localhost:3001/" title="Red 레퍼런스 위젯"></iframe>
+        <div id="redWarn" class="redwarn">
+          Red가 안 보이면 테스트베드(:3001)가 꺼져 있습니다 →
+          <code>cd raw/widget_monitor/local && node server.js</code>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIGHT: 체크리스트 + 디자인 의도 -->
+    <aside class="pane sidepane">
+      <div class="pane-head intent">
+        <span class="tag tag-intent">검증 패널</span>
+        <span class="src">DESIGN.md = 시각 의도 기준</span>
+      </div>
+      <div class="pane-body sidebody" id="sidebody"><!-- JS 주입 --></div>
+    </aside>
+  </main>
+
+  <script src="./compare.js"></script>
+</body>
+</html>
