@@ -22,7 +22,10 @@ describe('NC-1 라이브 증명 — BNBNFBL 자유입력 cutW/cutH 가 가격요
     };
 
     // dev 하네스와 동일: productCode=BNBNFBL, debounce=0(즉시 가격).
-    const store = createWidgetStore({ bff, productCode: 'BNBNFBL', debounceMs: 0 });
+    // cacheTtlMs:0 — 자유입력 수치(5000X900)가 기본 프리셋(5000X900)과 동일 dimension 이라 cache hit 으로
+    //  price() 가 막히지 않게 매 요청 캡처 보장(hashRequest 핫픽스 후 캐시 정상화 → 동일조합은 정당히 hit).
+    //  본 테스트 의도는 "자유입력 수치가 price() 에 실린다"이며 캐시 hit/miss 는 부차적.
+    const store = createWidgetStore({ bff, productCode: 'BNBNFBL', debounceMs: 0, cacheTtlMs: 0 });
     await settle();
 
     const product = store.getState().product!;
@@ -57,7 +60,8 @@ describe('NC-1 라이브 증명 — BNBNFBL 자유입력 cutW/cutH 가 가격요
       captured.push(req);
       return origPrice(req);
     };
-    const store = createWidgetStore({ bff, productCode: 'BNBNFBL', debounceMs: 0 });
+    // cacheTtlMs:0 — 기본 진입 프리셋(5000X900) 재선택이 동일 dimension 이라 cache hit 되어 push 가 누락되는 것 방지.
+    const store = createWidgetStore({ bff, productCode: 'BNBNFBL', debounceMs: 0, cacheTtlMs: 0 });
     await settle();
 
     const product = store.getState().product!;

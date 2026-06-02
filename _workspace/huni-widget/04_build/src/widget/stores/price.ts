@@ -88,7 +88,19 @@ export function buildPriceRequest(s: WidgetState): NormalizedPriceRequest {
 }
 
 // 결정적 직렬화 해시 — 동일 옵션 조합 = 동일 키 (price-engine §3 캐시 키).
+// [HARD] 중첩 객체 키까지 안정 정렬해야 옵션 변경(dimensions/selectedFinishes/materials/colorCounts 내부)이
+//  서로 다른 키를 낸다. JSON.stringify(req, replacerArray) 는 replacer 가 모든 레벨에 적용돼 중첩 키를 누락하므로 금지.
+function stableSerialize(v: unknown): string {
+  if (v === null || typeof v !== 'object') return JSON.stringify(v) ?? 'null';
+  if (Array.isArray(v)) return `[${v.map(stableSerialize).join(',')}]`;
+  const obj = v as Record<string, unknown>;
+  const body = Object.keys(obj)
+    .sort()
+    .map((k) => `${JSON.stringify(k)}:${stableSerialize(obj[k])}`)
+    .join(',');
+  return `{${body}}`;
+}
+
 export function hashRequest(req: NormalizedPriceRequest): string {
-  const stable = JSON.stringify(req, Object.keys(req).sort());
-  return stable;
+  return stableSerialize(req);
 }

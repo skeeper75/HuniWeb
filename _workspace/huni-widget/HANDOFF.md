@@ -8,7 +8,7 @@
 
 ## 1. 한 줄 요약
 
-후니 인쇄 자동견적 위젯을 **역공학 보강 → 구현**으로 만드는 하네스. 현재 **책자(S0)·디지털인쇄(S1)·스티커(S2)·포스터/실사(S3) 구현+비교QA GO 완료**. 두 핵심 가설 실증: ① "코드 0변경 상품 확대"(S1·S2, `src/widget/**` 0줄 git diff 증명) ② **"신규 componentType도 코어 재작성 0"**(S3 NC-1 = 첫 코어 터치였으나 store `dimsFromSelection` if-분기 1개 + numeric slot만, cascade/shadow/editor-bridge/price-seam 0줄 — git show 7968401 증명). 다음은 **S4 아크릴(NC-2 option-addon-picker) + Figma 시각 재현**.
+후니 인쇄 자동견적 위젯을 **역공학 보강 → 구현**으로 만드는 하네스. 현재 **책자(S0)·디지털인쇄(S1)·스티커(S2)·포스터/실사(S3 NC-1)·아크릴(S4) 구현+비교QA GO 완료**. 두 핵심 가설 실증: ① "코드 0변경 상품 확대"(S1·S2·**S4**, `src/widget/**` 0줄 git diff 증명) ② **"신규 componentType도 코어 재작성 0"**(S3 NC-1 = 첫 코어 터치였으나 store `dimsFromSelection` if-분기 1개 + numeric slot만, cascade/shadow/editor-bridge/price-seam 0줄 — git show 7968401 증명). **S4 핵심 성과: NC-2(option-addon-picker)는 신규 불요 — finish-button 흡수 확정(디자인 시스템 v5.0.0에 가격델타 전용 컴포넌트 부재), 위젯/어댑터 0줄. 사이즈도 NC-1 재사용 아님(vTmpl_price+0×0 sentinel 부재 → option-button).** 또한 S4 검증 중 **hashRequest 캐시 키 버그(전 상품 가격 재산정 차단) 발견·핫픽스**(price.ts hashRequest → 재귀 키정렬 stableSerialize). 다음은 **S5 굿즈/파우치(NC-3 image-option-selector 조건부) + Figma 시각 재현**.
 
 ## 2. 현재 진척 (커밋 완료)
 
@@ -30,11 +30,14 @@
 | **S2 비교 QA — GO (6/6 PASS, F4 PASS, INV-3 git diff 증명)** | 🟢 | b6c01f4 |
 | **S3 포스터/실사 캡처 + NC-1 명세** | 🟢 | d2a10c6 |
 | **S3 NC-1 구현 (첫 코어 터치, store 분기1개+numeric slot, 39 green)** | 🟢 | 7968401 |
-| **S3/NC-1 비교 QA — GO (8/8 PASS, 결함해소 3중 증명, INV-3 git show)** | 🟢 | (이번 커밋) |
+| **S3/NC-1 비교 QA — GO (8/8 PASS, 결함해소 3중 증명, INV-3 git show)** | 🟢 | 7b2dc9a |
+| **S4 아크릴 검증 (위젯/어댑터 0변경, ACNTHAP finish-button 흡수, NC-2 신규 불요 확정, 45 green)** | 🟢 | (이번 커밋) |
+| **hashRequest 캐시 키 버그 핫픽스 (전상품 가격 재산정 차단 해소, reproduction-first, 54 green)** | 🟢 | (이번 커밋) |
+| **S4 비교 QA — GO (echo/NC-1 경계/핫픽스 정상화/S0~S3 무회귀 PASS)** | 🟢 | (이번 커밋) |
 
 ## 3. 다음 할 일 (우선순위 순)
 
-1. **[다음] S4 아크릴 확대** — 신규 componentType **NC-2 `option-addon-picker`**(고리/자석/바디칼라 등 가격기여 옵션, 라벨+추가단가 병기). ACNTHAP fixture 보유. SizeMatrix2D는 **S3 NC-1 재사용**. 가격모델 3중 합성(SizeMatrix2D + 옵션단가 + TieredDiscount 50%) 전부 BFF. ⚠ NC-2는 expansion-strategy §3에서 **변형 우선**(option-button + 값별 추가단가 라벨 병기로 흡수 가능성) — Figma 확인 후 신규 vs variant 확정. 추가단가는 **라벨 텍스트 병기**(서버권위 유지, 계약 가격필드 추가 금지).
+1. **[완료] S4 아크릴** — NC-2 신규 불요, **finish-button 흡수 확정**(위젯/어댑터 0줄). 사이즈=option-button(vTmpl_price+0×0 sentinel 부재 → NC-1 미발동). 명세 `03_spec/s4-acryl-spec.md`·QA `05_qa/s4-qa.md` GO. hashRequest 캐시 버그 핫픽스 동반(`price.ts` stableSerialize). **→ 다음은 아래 2번 S5.**
 2. **S5 굿즈/파우치** (NC-3 image-option-selector 조건부, image-chip variant 우선, GSTGMIC fixture 보유), **S6 캘린더** (순수 어댑터, 책자 변형, ⚠ fixture 캡처 선행).
 3. **후니 Figma 시각 충실 재현** (expert-frontend) — 14(+NC-1) componentType을 DESIGN.md+`docs/figma/huni_product_option.fig` 시안에 충실하게. 컴포넌트 단위 1회 = 전 stage 재사용. (사용자 Q2 선택, 확대와 병행/이후)
 
