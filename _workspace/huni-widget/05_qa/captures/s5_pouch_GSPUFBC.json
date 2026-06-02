@@ -1,0 +1,92 @@
+{
+  "product": "GSPUFBC",
+  "productName": "노트북-태블릿 파우치 (면10수화이트)",
+  "priceModel": "tmpl_price",
+  "capturedAt": "2026-06-03",
+  "loginCustomerCode": "22025916",
+  "endpoint": "POST /rp-api/ko/product_price/get_ajax_price_vTmpl",
+  "summary": {
+    "priceAchieved": true,
+    "minViablePrice": 2850000,
+    "minViablePriceContext": "ORD_CNT=100, PRN_CNT=1, 11in세로 230x288",
+    "rootCauseOfZeroPrice": "위젯이 reqBody의 ORD_INFO[0]에 ORD_CNT(주문건수)와 PRN_CNT(인쇄수량) 두 필드를 모두 넣어야 PRICE>0. 둘 중 하나라도 누락/0이면 서버가 0 반환. 기존 캡처 reqBody는 두 필드 모두 부재."
+  },
+  "optionDump": {
+    "note": "Shadow DOM #redWidgetSdk 내 16개 컨트롤. material/dosu는 단일옵션 고정, sizes는 5개 등록 템플릿, PRN_CNT는 select(1~46 step5), 수량은 unnamed number input(val=1).",
+    "controls": [
+      {"tag": "SELECT", "name": "material", "options": 1, "value": "PXFBW010", "label": "면10수화이트", "role": "자재(단일 고정)"},
+      {"tag": "SELECT", "name": "dosu", "options": 1, "value": "SID_S", "label": "단면", "role": "도수(단일 고정, 가격무관)"},
+      {"tag": "SELECT", "name": "sizes", "options": 5, "value": "1", "role": "규격(등록 템플릿 5종, 가격에 영향)"},
+      {"tag": "INPUT", "type": "number", "role": "CUT_WDT 재단폭(읽기전용, 규격선택시 자동)"},
+      {"tag": "INPUT", "type": "number", "role": "CUT_HGH 재단높이"},
+      {"tag": "INPUT", "type": "number", "role": "WRK_WDT 작업폭"},
+      {"tag": "INPUT", "type": "number", "role": "WRK_HGH 작업높이"},
+      {"tag": "INPUT", "type": "number", "value": "1", "role": "수량 입력(ORD_CNT 후보, 헤드리스에서 reqBody에 미반영됨)"},
+      {"tag": "SELECT", "name": "PRN_CNT", "options": 10, "value": "1", "optionValues": [1,6,11,16,21,26,31,36,41,46], "role": "인쇄수량(가격 선형 배수)"},
+      {"tag": "BUTTON", "text": "직접 입력하기", "role": "사이즈 직접입력 토글"},
+      {"tag": "BUTTON", "text": "템플릿 다운로드"},
+      {"tag": "BUTTON", "text": "PDF"},
+      {"tag": "BUTTON", "text": "에디터"},
+      {"tag": "BUTTON", "text": "편집하기"}
+    ]
+  },
+  "incompleteReqBody_PRICE0": {
+    "note": "위젯이 실제 보낸 reqBody. ORD_CNT/PRN_CNT 부재 → 서버 PRICE_LOG='인쇄수량 0, 주문건수 0' → PRICE=0",
+    "dataJson": {
+      "ORD_INFO": [{"PDT_CD": "GSPUFBC", "MTRL_CD": "PXFBW010", "CUT_WDT": 230, "CUT_HGH": 288, "WRK_WDT": 250, "WRK_HGH": 308, "DOSU_COD": "SID_S", "PRN_CLR_CNT": 4}],
+      "PCS_INFO": [{"PCS_COD": "CUT_DFT", "PCS_DTL_COD": "DFXXX"}, {"PCS_COD": "PDT_WRK", "PCS_DTL_COD": "PUBOK"}, {"PCS_COD": "FLX_ZIP", "PCS_DTL_COD": "ZPH01"}],
+      "price_gbn": "tmpl_price",
+      "mb_cust_cod": "[REDACTED-session-authoritative]"
+    }
+  },
+  "completeReqBody_PRICEgt0": {
+    "note": "ORD_INFO[0]에 ORD_CNT+PRN_CNT 추가 → PRICE=2850000. PCS_INFO/top-level 배치는 무시됨, ORD_INFO만 유효.",
+    "dataJson": {
+      "ORD_INFO": [{"PDT_CD": "GSPUFBC", "MTRL_CD": "PXFBW010", "CUT_WDT": 230, "CUT_HGH": 288, "WRK_WDT": 250, "WRK_HGH": 308, "DOSU_COD": "SID_S", "PRN_CLR_CNT": 4, "ORD_CNT": 100, "PRN_CNT": 1}],
+      "PCS_INFO": [{"PCS_COD": "CUT_DFT", "PCS_DTL_COD": "DFXXX", "ATTB": ""}, {"PCS_COD": "PDT_WRK", "PCS_DTL_COD": "PUBOK", "ATTB": ""}, {"PCS_COD": "FLX_ZIP", "PCS_DTL_COD": "ZPH01", "ATTB": ""}],
+      "price_gbn": "tmpl_price",
+      "mb_cust_cod": "[REDACTED-22025916]"
+    }
+  },
+  "quantitySweep_ORD_CNT": {
+    "note": "11in세로 230x288, PRN_CNT=1 고정. 개당 28500원 완전 평탄 — 수량할인 0%.",
+    "rows": [
+      {"ORD_CNT": 1, "PRICE": 28500, "ORG_PRICE": 28500, "unit": 28500, "discountPct": 0},
+      {"ORD_CNT": 2, "PRICE": 57000, "ORG_PRICE": 57000, "unit": 28500, "discountPct": 0},
+      {"ORD_CNT": 5, "PRICE": 142500, "ORG_PRICE": 142500, "unit": 28500, "discountPct": 0},
+      {"ORD_CNT": 10, "PRICE": 285000, "ORG_PRICE": 285000, "unit": 28500, "discountPct": 0},
+      {"ORD_CNT": 30, "PRICE": 855000, "ORG_PRICE": 855000, "unit": 28500, "discountPct": 0},
+      {"ORD_CNT": 100, "PRICE": 2850000, "ORG_PRICE": 2850000, "unit": 28500, "discountPct": 0},
+      {"ORD_CNT": 300, "PRICE": 8550000, "ORG_PRICE": 8550000, "unit": 28500, "discountPct": 0},
+      {"ORD_CNT": 1000, "PRICE": 28500000, "ORG_PRICE": 28500000, "unit": 28500, "discountPct": 0}
+    ]
+  },
+  "prnCntSweep": {
+    "note": "ORD_CNT=100 고정. PRN_CNT는 개당단가를 선형 배수. PRN_CNT=N → 개당 = 28500*N (정확 비례).",
+    "rows": [
+      {"PRN_CNT": 1, "PRICE": 2850000, "unitPerItem": 28500},
+      {"PRN_CNT": 6, "PRICE": 17100000, "unitPerItem": 171000},
+      {"PRN_CNT": 11, "PRICE": 31350000, "unitPerItem": 313500},
+      {"PRN_CNT": 16, "PRICE": 45600000, "unitPerItem": 456000},
+      {"PRN_CNT": 21, "PRICE": 59850000, "unitPerItem": 598500}
+    ]
+  },
+  "sizePriceTable": {
+    "note": "ORD_CNT=100, PRN_CNT=1. tmpl_price는 등록 템플릿 (CUT_WDT,CUT_HGH)에 정확 매칭될 때만 유효 — 임의 사이즈는 PRICE=0.",
+    "rows": [
+      {"size": "11in세로", "CUT": "230x288", "WRK": "250x308", "PRICE": 2850000, "unit": 28500},
+      {"size": "13in가로", "CUT": "330x250", "WRK": "350x270", "PRICE": 3150000, "unit": 31500},
+      {"size": "13in세로", "CUT": "250x338", "WRK": "270x358", "PRICE": 3150000, "unit": 31500},
+      {"size": "15in가로", "CUT": "365x270", "WRK": "385x290", "PRICE": 3450000, "unit": 34500},
+      {"size": "17in가로", "CUT": "410x284", "WRK": "430x304", "PRICE": 3650000, "unit": 36500}
+    ]
+  },
+  "dimensionImpact": {
+    "DOSU_COD": {"effect": "none", "tested": ["SID_S", "SID_D"], "note": "단면/양면 동일가 — 템플릿가에 포함"},
+    "PRN_CLR_CNT": {"effect": "none", "tested": [1, 4, 8], "note": "인쇄 색수 가격 무관 — 템플릿가에 포함"},
+    "ORD_CNT": {"effect": "linear, no discount", "note": "주문건수 선형, 할인곡선 없음"},
+    "PRN_CNT": {"effect": "linear multiplier on unit", "note": "인쇄수량이 개당단가를 정수 배수"},
+    "size": {"effect": "template lookup", "note": "등록 5종만 유효, 개당단가 28500~36500 사이 면적 증가에 따라 단계적"}
+  },
+  "credentialsRedaction": "cookies/JWT/editor-token raw 미포함. mb_cust_cod는 [REDACTED] 처리. 서버 세션쿠키가 가격 권위(mb_cust_cod 조작 무의미)."
+}

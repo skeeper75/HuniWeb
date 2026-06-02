@@ -37,6 +37,8 @@
 
 > **직전 완료(23b775e):** S4 아크릴 — NC-2 신규 불요(finish-button 흡수 확정), 위젯/어댑터 0줄. hashRequest 캐시 버그 핫픽스 동반. 명세 `03_spec/s4-acryl-spec.md`·QA `05_qa/s4-qa.md`.
 
+> **S5 선행 라이브 검증 완료 (이번 세션):** 로그인 세션 갱신(customerCode 22025916, isClient) 후 실가 캡처. **핸드오프 가정 3건 보정**: ① 가격모델은 **SKU별 상이** — 굿즈 GSTGMIC=`tiered_price`(개당 6000원 **평탄, 할인구간 없음**), 파우치 GSPUFBC=`tmpl_price`(template-lookup 평탄단가). "굿즈/파우치=TieredDiscount 본진" 가정은 부분 오류. ② **비로그인 PRICE=0은 로그인 부족이 아님** — `mb_cust_cod`를 게스트(10000000)↔로그인(22025916)으로 바꿔도 동일, **쿠키 세션이 가격 권위**. ③ **파우치 PRICE=0 근본원인 확정**: tmpl_price는 `ORD_INFO[0].ORD_CNT`+`PRN_CNT` **둘 다 필수**(위젯이 둘 다 누락하면 침묵 0). 규격은 등록 템플릿 치수 정확매칭 필수(자유입력 견적불가). 산출: `05_qa/s5-pouch-live-note.md`, `05_qa/captures/s5_pouch_GSPUFBC.json`. 인프라: server.js `/rp-api` 프록시에 쿠키·red-editor-token 주입 누락 결함 수정(가격 API가 로그인 세션 미전달이던 버그).
+
 1. **[다음·최우선] S5 굿즈/파우치/문구 확대** — 가격모델 **TieredDiscount 본진**(파우치/문구/굿즈/말랑 수량구간 %할인, 말랑 2개부터 즉시할인·최대50%). 일부 포장재=FixedUnit. **GSTGMIC fixture 보유**(검증자산).
    - 신규 componentType 후보 **NC-3 `image-option-selector`(64×64)** — 색상/타입 셀렉터 다수일 때. ⚠ **image-chip variant 우선·미확정**. S4 전례(NC-2가 디자인 시스템 근거로 흡수 판명)대로 **hw-architect가 디자인 시스템(huni-design-system v5.0.0) 조회 → 신규 vs variant 확정** 후 진행.
    - 패턴: S4와 동일 파이프라인 — hw-architect(판정·명세 `03_spec/s5-*.md`) → hw-builder(검증/흡수 실증, 0변경 목표) → hw-qa(비교 QA GO).
@@ -95,7 +97,7 @@ cd _workspace/huni-widget/05_qa/compare && node serve.js   # :4173 → /compare.
 
 ## 7. 미해결·주의사항
 
-- **비로그인 PRICE=0** (S1·S3·S4 공통): 비로그인 캡처라 PRICE=0 (응답 shape는 정확). 실 단가는 후니 BFF 또는 로그인 세션 재캡처 필요. 서버 권위라 위젯 무영향.
+- **PRICE=0 현상 재해석** (S5 라이브 검증): 로그인 부족이 아니라 **reqBody 필수필드 누락**이 원인으로 확정(파우치 tmpl_price = ORD_CNT+PRN_CNT 둘 다 필수). 굿즈 tiered_price는 로그인 없이도 PRICE>0. 어댑터에서 가격호출 전 `ORD_CNT≥1 && PRN_CNT≥1` 가드 필수(Red 위젯의 침묵 PRICE=0 결함 재현 금지). 서버(쿠키 세션) 권위라 위젯은 여전히 opaque.
 - **후니 DB 가격·제약·위젯 테이블 미작성**: 임계경로는 후니 데이터 작성(가격 B1/제약 B2/배송 B3)이지 위젯 설계 아님. 위젯은 Red fixture로 무차단 진행.
 - **캘린더(S6) Red fixture 미보유** → S6 진입 시 widget_monitor 캡처 선행. (S3 포스터/실사는 BNBNFBL/BNPTPET 캡처 완료, 아크릴은 ACNTHAP 보유.)
 - **타 아크릴 SKU 자유입력 미검증**(S4-M2): 명찰 외 아크릴이 자유입력이면 NC-1 자동 발동 — fixture 캡처로 확인.

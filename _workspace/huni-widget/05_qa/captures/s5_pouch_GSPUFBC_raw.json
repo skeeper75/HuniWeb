@@ -1,0 +1,599 @@
+{
+  "product": "GSPUFBC",
+  "capturedAt": "2026-06-02T21:37:26.097Z",
+  "dump0": {
+    "ok": true,
+    "controls": [
+      {
+        "tag": "BUTTON",
+        "name": "",
+        "text": "주문 가능 자재",
+        "ariaPressed": null,
+        "cls": "extra-btn",
+        "disabled": false
+      },
+      {
+        "tag": "SELECT",
+        "name": "material",
+        "id": "",
+        "value": "PXFBW010",
+        "selectedIndex": 0,
+        "options": [
+          {
+            "i": 0,
+            "val": "PXFBW010",
+            "text": "면10수화이트",
+            "sel": true
+          }
+        ]
+      },
+      {
+        "tag": "SELECT",
+        "name": "dosu",
+        "id": "",
+        "value": "SID_S",
+        "selectedIndex": 0,
+        "options": [
+          {
+            "i": 0,
+            "val": "SID_S",
+            "text": "단면",
+            "sel": true
+          }
+        ]
+      },
+      {
+        "tag": "SELECT",
+        "name": "sizes",
+        "id": "",
+        "value": "1",
+        "selectedIndex": 0,
+        "options": [
+          {
+            "i": 0,
+            "val": "1",
+            "text": "11인치 - 세로형",
+            "sel": true
+          },
+          {
+            "i": 1,
+            "val": "2",
+            "text": "13인치 - 가로형",
+            "sel": false
+          },
+          {
+            "i": 2,
+            "val": "3",
+            "text": "13인치 - 세로형",
+            "sel": false
+          },
+          {
+            "i": 3,
+            "val": "4",
+            "text": "15인치 - 가로형",
+            "sel": false
+          },
+          {
+            "i": 4,
+            "val": "5",
+            "text": "17인치 - 가로형",
+            "sel": false
+          }
+        ]
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "name": "",
+        "id": "w-재단사이즈",
+        "value": "230",
+        "checked": false,
+        "placeholder": ""
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "name": "",
+        "id": "h-재단사이즈",
+        "value": "288",
+        "checked": false,
+        "placeholder": ""
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "name": "",
+        "id": "w-작업사이즈",
+        "value": "250",
+        "checked": false,
+        "placeholder": ""
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "name": "",
+        "id": "h-작업사이즈",
+        "value": "308",
+        "checked": false,
+        "placeholder": ""
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "name": "",
+        "id": "ORD_CNT",
+        "value": "1",
+        "checked": false,
+        "placeholder": ""
+      },
+      {
+        "tag": "SELECT",
+        "name": "PRN_CNT",
+        "id": "",
+        "value": "1",
+        "selectedIndex": 0,
+        "options": [
+          {
+            "i": 0,
+            "val": "1",
+            "text": "1",
+            "sel": true
+          },
+          {
+            "i": 1,
+            "val": "6",
+            "text": "6",
+            "sel": false
+          },
+          {
+            "i": 2,
+            "val": "11",
+            "text": "11",
+            "sel": false
+          },
+          {
+            "i": 3,
+            "val": "16",
+            "text": "16",
+            "sel": false
+          },
+          {
+            "i": 4,
+            "val": "21",
+            "text": "21",
+            "sel": false
+          },
+          {
+            "i": 5,
+            "val": "26",
+            "text": "26",
+            "sel": false
+          },
+          {
+            "i": 6,
+            "val": "31",
+            "text": "31",
+            "sel": false
+          },
+          {
+            "i": 7,
+            "val": "36",
+            "text": "36",
+            "sel": false
+          },
+          {
+            "i": 8,
+            "val": "41",
+            "text": "41",
+            "sel": false
+          },
+          {
+            "i": 9,
+            "val": "46",
+            "text": "46",
+            "sel": false
+          }
+        ]
+      },
+      {
+        "tag": "BUTTON",
+        "name": "",
+        "text": "직접 입력하기",
+        "ariaPressed": null,
+        "cls": "action-btn",
+        "disabled": false
+      },
+      {
+        "tag": "INPUT",
+        "type": "text",
+        "name": "",
+        "id": "order-subject",
+        "value": "",
+        "checked": false,
+        "placeholder": ""
+      },
+      {
+        "tag": "BUTTON",
+        "name": "",
+        "text": "템플릿 다운로드",
+        "ariaPressed": null,
+        "cls": "extra-btn",
+        "disabled": false
+      },
+      {
+        "tag": "BUTTON",
+        "name": "",
+        "text": "PDF",
+        "ariaPressed": null,
+        "cls": "upload-btn",
+        "disabled": false
+      },
+      {
+        "tag": "BUTTON",
+        "name": "",
+        "text": "에디터",
+        "ariaPressed": null,
+        "cls": "upload-btn active",
+        "disabled": false
+      },
+      {
+        "tag": "BUTTON",
+        "name": "",
+        "text": "편집하기",
+        "ariaPressed": null,
+        "cls": "upload-btn edit",
+        "disabled": false
+      }
+    ],
+    "labelsSample": []
+  },
+  "actions": [
+    {
+      "sel": "sizes",
+      "pickedIdx": 0,
+      "pickedText": "11인치 - 세로형"
+    },
+    {
+      "qtyInput": "ORD_CNT",
+      "set": 100
+    },
+    {
+      "sel": "PRN_CNT",
+      "pickedIdx": 0,
+      "pickedText": "1"
+    }
+  ],
+  "dump1": {
+    "ok": true,
+    "controls": [
+      {
+        "tag": "BUTTON",
+        "name": "",
+        "text": "주문 가능 자재",
+        "ariaPressed": null,
+        "cls": "extra-btn",
+        "disabled": false
+      },
+      {
+        "tag": "SELECT",
+        "name": "material",
+        "id": "",
+        "value": "PXFBW010",
+        "selectedIndex": 0,
+        "options": [
+          {
+            "i": 0,
+            "val": "PXFBW010",
+            "text": "면10수화이트",
+            "sel": true
+          }
+        ]
+      },
+      {
+        "tag": "SELECT",
+        "name": "dosu",
+        "id": "",
+        "value": "SID_S",
+        "selectedIndex": 0,
+        "options": [
+          {
+            "i": 0,
+            "val": "SID_S",
+            "text": "단면",
+            "sel": true
+          }
+        ]
+      },
+      {
+        "tag": "SELECT",
+        "name": "sizes",
+        "id": "",
+        "value": "1",
+        "selectedIndex": 0,
+        "options": [
+          {
+            "i": 0,
+            "val": "1",
+            "text": "11인치 - 세로형",
+            "sel": true
+          },
+          {
+            "i": 1,
+            "val": "2",
+            "text": "13인치 - 가로형",
+            "sel": false
+          },
+          {
+            "i": 2,
+            "val": "3",
+            "text": "13인치 - 세로형",
+            "sel": false
+          },
+          {
+            "i": 3,
+            "val": "4",
+            "text": "15인치 - 가로형",
+            "sel": false
+          },
+          {
+            "i": 4,
+            "val": "5",
+            "text": "17인치 - 가로형",
+            "sel": false
+          }
+        ]
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "name": "",
+        "id": "w-재단사이즈",
+        "value": "230",
+        "checked": false,
+        "placeholder": ""
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "name": "",
+        "id": "h-재단사이즈",
+        "value": "288",
+        "checked": false,
+        "placeholder": ""
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "name": "",
+        "id": "w-작업사이즈",
+        "value": "250",
+        "checked": false,
+        "placeholder": ""
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "name": "",
+        "id": "h-작업사이즈",
+        "value": "308",
+        "checked": false,
+        "placeholder": ""
+      },
+      {
+        "tag": "INPUT",
+        "type": "number",
+        "name": "",
+        "id": "ORD_CNT",
+        "value": "100",
+        "checked": false,
+        "placeholder": ""
+      },
+      {
+        "tag": "SELECT",
+        "name": "PRN_CNT",
+        "id": "",
+        "value": "1",
+        "selectedIndex": 0,
+        "options": [
+          {
+            "i": 0,
+            "val": "1",
+            "text": "1",
+            "sel": true
+          },
+          {
+            "i": 1,
+            "val": "6",
+            "text": "6",
+            "sel": false
+          },
+          {
+            "i": 2,
+            "val": "11",
+            "text": "11",
+            "sel": false
+          },
+          {
+            "i": 3,
+            "val": "16",
+            "text": "16",
+            "sel": false
+          },
+          {
+            "i": 4,
+            "val": "21",
+            "text": "21",
+            "sel": false
+          },
+          {
+            "i": 5,
+            "val": "26",
+            "text": "26",
+            "sel": false
+          },
+          {
+            "i": 6,
+            "val": "31",
+            "text": "31",
+            "sel": false
+          },
+          {
+            "i": 7,
+            "val": "36",
+            "text": "36",
+            "sel": false
+          },
+          {
+            "i": 8,
+            "val": "41",
+            "text": "41",
+            "sel": false
+          },
+          {
+            "i": 9,
+            "val": "46",
+            "text": "46",
+            "sel": false
+          }
+        ]
+      },
+      {
+        "tag": "BUTTON",
+        "name": "",
+        "text": "직접 입력하기",
+        "ariaPressed": null,
+        "cls": "action-btn",
+        "disabled": false
+      },
+      {
+        "tag": "INPUT",
+        "type": "text",
+        "name": "",
+        "id": "order-subject",
+        "value": "",
+        "checked": false,
+        "placeholder": ""
+      },
+      {
+        "tag": "BUTTON",
+        "name": "",
+        "text": "템플릿 다운로드",
+        "ariaPressed": null,
+        "cls": "extra-btn",
+        "disabled": false
+      },
+      {
+        "tag": "BUTTON",
+        "name": "",
+        "text": "PDF",
+        "ariaPressed": null,
+        "cls": "upload-btn",
+        "disabled": false
+      },
+      {
+        "tag": "BUTTON",
+        "name": "",
+        "text": "에디터",
+        "ariaPressed": null,
+        "cls": "upload-btn active",
+        "disabled": false
+      },
+      {
+        "tag": "BUTTON",
+        "name": "",
+        "text": "편집하기",
+        "ariaPressed": null,
+        "cls": "upload-btn edit",
+        "disabled": false
+      }
+    ],
+    "labelsSample": []
+  },
+  "priceCalls": [
+    {
+      "rel": 2944,
+      "status": 200,
+      "reqBody": "{\"dataJson\":{\"ORD_INFO\":[{\"PDT_CD\":\"GSPUFBC\",\"MTRL_CD\":\"PXFBW010\",\"CUT_WDT\":230,\"CUT_HGH\":288,\"WRK_WDT\":250,\"WRK_HGH\":308,\"DOSU_COD\":\"SID_S\",\"PRN_CLR_CNT\":4}],\"PCS_INFO\":[{\"PCS_COD\":\"CUT_DFT\",\"PCS_DTL_COD\":\"DFXXX\",\"ATTB\":\"\"},{\"PCS_COD\":\"PDT_WRK\",\"PCS_DTL_COD\":\"PUBOK\",\"ATTB\":\"\"},{\"PCS_COD\":\"FLX_ZIP\",\"PCS_DTL_COD\":\"ZPH01\",\"ATTB\":\"\"}],\"price_gbn\":\"tmpl_price\",\"mb_cust_cod\":\"10000000\"}}",
+      "respBody": {
+        "retCode": 200,
+        "msg": "",
+        "result": [
+          {
+            "PCS_CD": "CUT_DFT",
+            "PCS_DTL_CD": "DFXXX",
+            "PCS_COD": "CUT_DFT",
+            "PCS_DTL_COD": "DFXXX",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 0, 주문건수 : 0",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 0, 주문건수 : 0 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "재단",
+            "PCS_DTL_NME": "재단"
+          },
+          {
+            "PCS_CD": "PDT_WRK",
+            "PCS_DTL_CD": "PUBOK",
+            "PCS_COD": "PDT_WRK",
+            "PCS_DTL_COD": "PUBOK",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 0, 주문건수 : 0",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 0, 주문건수 : 0 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "제품가공",
+            "PCS_DTL_NME": "노트북-태블릿 파우치가공"
+          },
+          {
+            "PCS_CD": "FLX_ZIP",
+            "PCS_DTL_CD": "ZPH01",
+            "PCS_COD": "FLX_ZIP",
+            "PCS_DTL_COD": "ZPH01",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 0, 주문건수 : 0",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 0, 주문건수 : 0 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "지퍼가공",
+            "PCS_DTL_NME": "지퍼가공 세로형"
+          },
+          {
+            "PCS_CD": "PRT_DFT",
+            "PCS_DTL_CD": "DFXXS",
+            "PCS_COD": "PRT_DFT",
+            "PCS_DTL_COD": "DFXXS",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 0, 주문건수 : 0",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 0, 주문건수 : 0 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "인쇄",
+            "PCS_DTL_NME": "인쇄단면"
+          }
+        ],
+        "result_sum": {
+          "PRICE": 0,
+          "PRICE_VAT": 0,
+          "PRICE_MALL": 0,
+          "PRICE_MALL_VAT": 0,
+          "ORG_PRICE": 0,
+          "ORG_PRICE_VAT": 0
+        },
+        "query": "dbo.WSP_ACPT_ORDER_TMPL_PCS_PRICE '0101', 'LNG_KO', 'GSPUFBC', '<?xml version=\"1.0\"?>\n<PARAMS><DETAIL><MTRL_COD>PXFBW010</MTRL_COD><CUT_WDT>230</CUT_WDT><CUT_HGH>288</CUT_HGH><PRN_CNT/><ORD_CNT/><SID_GBN>SID_S</SID_GBN><TMPL_IDX/><BTN_TYPE/><PNS_DIGIT/><PNS_CNT/><PACK_PRN_CNT/><CUST_COD>15090019</CUST_COD></DETAIL><PCS><PCS_COD>CUT_DFT</PCS_COD><PCS_DTL_COD>DFXXX</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS><PCS><PCS_COD>PDT_WRK</PCS_COD><PCS_DTL_COD>PUBOK</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS><PCS><PCS_COD>FLX_ZIP</PCS_COD><PCS_DTL_COD>ZPH01</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS></PARAMS>\n'",
+        "query_flexible": null
+      }
+    }
+  ]
+}
