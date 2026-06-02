@@ -141,3 +141,26 @@ export interface RedPresignedResponse {
   filename: string;
   presignedURL: string;
 }
+
+// ── 가격 요청 reqBody shape (get_ajax_price* 실측, s5_pouch_GSPUFBC/s3_rp_GSTGMIC 캡처) ──
+// [HARD] ORD_CNT/PRN_CNT/ORD_INFO/price_gbn 등 Red 고유 필드는 이 파일 + red-adapter.ts 안에만.
+// [S5 실측] tmpl/tiered_price 서버는 ORD_INFO[0]에 ORD_CNT(주문건수) + PRN_CNT(인쇄수량) 둘 다 요구.
+//  둘 중 하나라도 없거나 0이면 PRICE=0(침묵). 캡처 incompleteReqBody/completeReqBody 근거.
+export interface RedPriceReqOrdInfo {
+  PDT_CD: string;
+  CUT_WDT: number;
+  CUT_HGH: number;
+  WRK_WDT: number;
+  WRK_HGH: number;
+  ORD_CNT: number; // 주문건수 (정규화 quantity)
+  PRN_CNT: number; // 인쇄수량 (정규화 printCount, 미전달 시 1)
+  PRN_CLR_CNT?: number;
+  MTRL_CD?: string;
+  DOSU_COD?: string;
+}
+
+export interface RedPriceReqBody {
+  ORD_INFO: RedPriceReqOrdInfo[];
+  PCS_INFO: Array<{ PCS_COD: string; PCS_DTL_COD: string; ATTB?: string }>;
+  price_gbn: string; // 불투명 가격체계 echo (tmpl_price / tiered_price / ...)
+}

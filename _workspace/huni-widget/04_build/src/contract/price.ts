@@ -22,7 +22,11 @@ export interface NormalizedPriceRequest {
   dimensions: PriceDimension[]; // side별
   colorCounts: Partial<Record<SideKey, number>>;
   materials: Partial<Record<SideKey, string>>; // 불투명 자재 id
-  quantity: number;
+  quantity: number; // 주문건수(굿즈=디자인 수). 어댑터가 ORD_CNT 로 직렬화.
+  // S5: 인쇄수량(개당단가 정수배 인자). 굿즈/파우치(tmpl/tiered_price)에서만 의미.
+  // [HARD] 중립 도메인명(Red PRN_CNT 아님). optional → S0~S4 미전달 시 undefined(하위호환, 회귀 0).
+  // 위젯은 echo 도 안 함(현 stage UI 미노출) — 어댑터 직렬화가 quantity↔ORD_CNT / printCount↔PRN_CNT 분리.
+  printCount?: number;
   pageCount?: number; // 책자
   selectedFinishes: SelectedFinish[];
 }

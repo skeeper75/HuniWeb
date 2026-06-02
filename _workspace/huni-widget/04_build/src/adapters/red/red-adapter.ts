@@ -36,6 +36,8 @@ import type {
   RedPcsInfo,
   RedPriceResponse,
   RedPresignedResponse,
+  RedPriceReqBody,
+  RedPriceReqOrdInfo,
 } from './red-types';
 import { DATASET_COMPONENT_TYPE, pcsComponentType } from './component-type-map';
 
@@ -341,6 +343,49 @@ function mapConstraints(data: RedProductData): NormalizedConstraints {
   };
 }
 
+// ── Price 직렬화: NormalizedPriceRequest → Red reqBody (data-adapter §2.4, S5 §2.3) ──
+// [HARD] quantity↔ORD_CNT / printCount↔PRN_CNT 분리. 위젯은 두 수치를 각자 echo만,
+//  ORD_INFO 직렬화는 어댑터(서버) 책임(INV-1). printCount 미전달(S0~S4) → PRN_CNT=1(하위호환).
+// [S5 실측] tmpl/tiered_price 는 ORD_INFO[0]에 ORD_CNT+PRN_CNT 둘 다 있어야 PRICE>0(둘 다 누락 시 침묵 0).
+export function serializeRedPriceRequest(req: NormalizedPriceRequest): RedPriceReqBody {
+  const d = req.dimensions[0];
+  const ord: RedPriceReqOrdInfo = {
+    PDT_CD: req.productCode,
+    CUT_WDT: d?.cutW ?? 0,
+    CUT_HGH: d?.cutH ?? 0,
+    WRK_WDT: d?.workW ?? 0,
+    WRK_HGH: d?.workH ?? 0,
+    ORD_CNT: req.quantity, // 주문건수(굿즈=디자인 수)
+    PRN_CNT: req.printCount ?? 1, // 인쇄수량(미전달 상품군 = 1, 책자/디지털 하위호환)
+    PRN_CLR_CNT: req.colorCounts.default,
+    MTRL_CD: req.materials.default,
+  };
+  return {
+    ORD_INFO: [ord],
+    PCS_INFO: req.selectedFinishes.map((f) => ({
+      // PCS_<CD> 그룹 id 에서 Red PCS_COD 복원(어댑터 내부 역매핑).
+      PCS_COD: f.groupId.startsWith('PCS_') ? f.groupId.slice(4) : f.groupId,
+      PCS_DTL_COD: f.valueId,
+      ATTB: '',
+    })),
+    price_gbn: req.priceSchemeKey, // 불투명 echo (tmpl_price / tiered_price)
+  };
+}
+
+// 가격호출 가드 — ORD_CNT≥1 && PRN_CNT≥1 (s5-pouch-live-note §②: Red 침묵 PRICE=0 결함 재현 금지).
+// 위반 시 명시적 미견적(ok:false) 반환 — 침묵 0 아님. 어댑터(서버) 책임(위젯은 가격 의미 모름, INV-1).
+function isPriceRequestQuotable(req: NormalizedPriceRequest): boolean {
+  return (req.quantity ?? 0) >= 1 && (req.printCount ?? 1) >= 1;
+}
+
+const UNQUOTABLE_BREAKDOWN: NormalizedPriceBreakdown = {
+  ok: false,
+  finalPrice: 0,
+  vat: 0,
+  shipping: 0,
+  lines: [],
+};
+
 // ── Price: NormalizedPriceRequest → Red → NormalizedPriceBreakdown (data-adapter §2.4) ──
 // [HARD] 3단 워터폴은 어댑터가 finalPrice 로 평면화. 위젯은 산정 방식 모름.
 export function mapPriceResponse(res: RedPriceResponse): NormalizedPriceBreakdown {
@@ -395,6 +440,8 @@ class RedProductAdapter implements ProductAdapter {
 class RedPriceAdapter implements PriceAdapter {
   constructor(private ds: RedDataSource) {}
   async quote(req: NormalizedPriceRequest): Promise<NormalizedPriceBreakdown> {
+    // 가드: ORD_CNT/PRN_CNT 누락(0) → 명시적 미견적(침묵 PRICE=0 재현 금지, s5 §2.4).
+    if (!isPriceRequestQuotable(req)) return UNQUOTABLE_BREAKDOWN;
     return mapPriceResponse(await this.ds.fetchPrice(req));
   }
 }

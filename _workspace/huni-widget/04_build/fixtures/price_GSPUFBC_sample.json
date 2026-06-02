@@ -1,0 +1,24 @@
+{
+  "_note": "S5 파우치 GSPUFBC tmpl_price 가격응답 fixture — s5_pouch_GSPUFBC.json completeReqBody 결과(11in세로 230x288, ORD_CNT=100, PRN_CNT=1 → PRICE=2,850,000, 개당 28,500 평탄단가). 로그인(customerCode 22025916) 실가. PRICE_MALL==PRICE==ORG_PRICE → finalPrice=ORG_PRICE 워터폴.",
+  "retCode": 200,
+  "result": [
+    {
+      "PCS_CD": "PRT_DFT",
+      "PCS_DTL_CD": "DFXXX",
+      "PRICE": 2850000,
+      "PRICE_VAT": 285000,
+      "PRICE_MALL": 2850000,
+      "PRICE_MALL_VAT": 285000,
+      "ORG_PRICE": 2850000,
+      "ORG_PRICE_VAT": 285000
+    }
+  ],
+  "result_sum": {
+    "PRICE": 2850000,
+    "PRICE_VAT": 285000,
+    "PRICE_MALL": 2850000,
+    "PRICE_MALL_VAT": 285000,
+    "ORG_PRICE": 2850000,
+    "ORG_PRICE_VAT": 285000
+  }
+}

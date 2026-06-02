@@ -137,7 +137,7 @@ if ((req.quantity ?? 0) < 1 || (req.printCount ?? 1) < 1) {
 | # | 파일 | 변경 | 줄수(+/−) | 근거 |
 |---|------|------|-----------|------|
 | 1 | `src/contract/price.ts` | `printCount?: number` optional 추가 | +1 / 0 | §3.1 (유일한 계약 변경) |
-| 2 | `src/widget/stores/price.ts` `buildPriceRequest` | `printCount: <printCount selection>` 1줄 추가(존재 시) | +1 / 0 | 수량과 동일 패턴, 새 store 분기 아님 |
+| 2 | `src/widget/stores/price.ts` `buildPriceRequest` | **현 stage 0줄(실구현)** — printCount UI 미노출이라 어댑터 직렬화가 전담. printCount selection UI 노출 시에만 +1 | 0 | 수량과 동일 패턴, 새 store 분기 아님. [S5-O1 정정: 코어 완전 0 달성, S4 동급] |
 | 3 | `src/widget/components/controls/OptionControl.tsx` (dispatcher) | **변경 0** — NC-3 신규 case 없음 | 0 / 0 | §1 판정 |
 | 4 | `src/widget/stores/widget-store.ts` (cascade/selectOption) | **변경 0** — printCount는 counter-input 기존 경로 | 0 / 0 | counter-input 재사용 |
 | 5 | `src/adapters/red/red-adapter.ts` | ORD_CNT/PRN_CNT 직렬화 분리(§2.3) + tmpl/tiered price_gbn echo | 어댑터 수정(위젯 아님) | [DA §2.4] 보강 |
@@ -147,13 +147,13 @@ if ((req.quantity ?? 0) < 1 || (req.printCount ?? 1) < 1) {
 | 9 | `fixtures/product_GSPUFBC.json` | **신규 권장**(파우치 어댑터 테스트용) — [CAPP] 구조로 작성 | 신규 fixture | §5 |
 | 10 | `test/red-adapter-goods-pouch.test.ts` | **신규** — GSTGMIC/GSPUFBC 어댑터 출력 검증 | 신규(+~80) | §4.2 |
 
-> **위젯 코어 0변경 증명:** dispatcher case 0, store 분기 0(buildPriceRequest의 printCount 추가는 quantity와 동일한 "수치 echo" 슬롯이지 새 분기 아님 — NC-1의 dimsFromSelection if-분기보다 약함). cascade/shadow/editor-bridge/price-seam 0. **S5는 S4(완전 0)와 NC-1(분기 1개) 사이** — 계약 optional 1필드 + 그 값을 echo하는 1줄. INV-3/5 유지.
+> **위젯 코어 0변경 증명(실구현 갱신):** dispatcher case 0, store 분기 0. **실구현은 buildPriceRequest echo조차 0줄** — printCount UI 미노출이라 직렬화를 어댑터(`serializeRedPriceRequest`)가 전담(`req.printCount ?? 1 → PRN_CNT`). cascade/shadow/editor-bridge/price-seam 0. **S5 = 위젯 코어 완전 0줄(S4 동급), NC-1(store 분기 1개)보다 강함** — 계약 optional 1필드만. INV-3/5 유지. (hw-qa GO 판정, S5-O1)
 
 ### 4.2 hw-builder 검증 체크리스트
 
 1. **굿즈 GSTGMIC 어댑터 출력**: 사이즈 4종=option-button(삼각S 기본 DFT_YN=Y), 자재 1종=select-box, 수량/디자인수=counter-input, PCS 전부 VIEW_YN=N→`visible:false`(미렌더, hidden essential), `price_gbn="tiered_price"` echo. [FXG]
 2. **파우치 GSPUFBC 어댑터 출력**: 규격 5종=option-button(폐쇄 enum), 치수 자동주입(SizeRule), 자재/도수 단일, `printCount` 슬롯→PRN_CNT 직렬화, `price_gbn="tmpl_price"` echo. nonStandardAllowed=false → NC-1 미발동. [CAPP]
-3. **ORD_CNT+PRN_CNT 직렬화**: buildPriceRequest가 quantity·printCount 둘 다 채우고 어댑터가 ORD_INFO[0]에 두 필드 직렬화(누락 시 가드 발동). [CAPP completeReqBody]
+3. **ORD_CNT+PRN_CNT 직렬화**: 어댑터(`serializeRedPriceRequest`)가 ORD_INFO[0]에 `quantity→ORD_CNT`·`printCount ?? 1→PRN_CNT` 직렬화(현 stage printCount UI 미노출 → 기본 1, 누락 시 가드 발동). [CAPP completeReqBody]
 4. **가드 동작**: printCount=0 또는 quantity=0 → quote()가 `{ok:false, finalPrice:0}` 명시 반환(침묵 0 아님). [NOTE §②]
 5. **계약 중립**: `printCount`만 추가됐고 PRN_CNT/ORD_CNT/price_gbn 등 Red 고유명 위젯·계약 0건(grep 게이트). [INV-2]
 6. **회귀(INV-3)**: PRBKYPR(S0)·디지털(S1)·스티커(S2)·BNBNFBL/BNPTPET(S3 NC-1)·ACNTHAP(S4) fixture 여전히 동일 출력. printCount optional이므로 이전 stage 무영향. tsc/vitest green.
