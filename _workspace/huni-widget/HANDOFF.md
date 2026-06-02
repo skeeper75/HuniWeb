@@ -1,6 +1,6 @@
 # Huni-Widget 하네스 — 세션 핸드오프
 
-**작성:** 2026-06-02 | **마지막 커밋:** `3ba1c08` (S1 디지털인쇄 확대)
+**작성:** 2026-06-02 (갱신) | **마지막 커밋:** S2 비교 QA GO 직후
 
 다음 세션이 이어받기 위한 인수인계 문서. 상세 결정은 auto-memory(`MEMORY.md`) 참조.
 
@@ -8,7 +8,7 @@
 
 ## 1. 한 줄 요약
 
-후니 인쇄 자동견적 위젯을 **역공학 보강 → 구현**으로 만드는 하네스. 현재 **책자(S0)·디지털인쇄(S1) 구현+검증 완료**, 위젯 코어가 정규화 계약+어댑터로 "코드 0변경 상품 확대" 가설을 실증한 상태. 다음은 **S1 비교 QA → S2~S6 확대 + Figma 시각 재현**.
+후니 인쇄 자동견적 위젯을 **역공학 보강 → 구현**으로 만드는 하네스. 현재 **책자(S0)·디지털인쇄(S1)·스티커(S2) 구현+비교QA GO 완료**, 위젯 코어가 정규화 계약+어댑터로 "코드 0변경 상품 확대" 가설을 **S1·S2 연속 실증**(S2는 `src/widget/**` 0줄 변경을 git diff로 증명). 다음은 **S3 포스터/실사(신규 NC-1 dimension-matrix-input) + Figma 시각 재현**.
 
 ## 2. 현재 진척 (커밋 완료)
 
@@ -25,14 +25,20 @@
 | Phase D 점진 QA (비교 하네스, 종합 GO) | 🟢 | 5c6e43d |
 | 전체 확대 전략 (7-stage 로드맵) | 🟢 | 3a62fba |
 | **S1 디지털인쇄 확대 (위젯 코어 0변경)** | 🟢 | 3ba1c08 |
+| **S1 비교 QA — GO (5항목 PASS, 회귀 라이브)** | 🟢 | 74a383b |
+| **S2 스티커 캡처+fixture+코어0변경 실증 (29/29 무회귀)** | 🟢 | 19e0331 |
+| **S2 비교 QA — GO (6/6 PASS, F4 PASS, INV-3 git diff 증명)** | 🟢 | (이번 커밋) |
 
 ## 3. 다음 할 일 (우선순위 순)
 
-1. **[즉시] S1 비교 QA** — hw-qa로 비교 하네스(4173)에서 디지털인쇄(BCSPDFT 명함·PRPOXXX 포스터) 검증: 단일면 UI·별색(BCSPWHT) 자동적용·단/양면 colorCounts(4↔8)·select-box custom dropdown·회귀(격리·포털·hook0). **주의: S1 fixture는 비로그인 캡처라 가격값=0 — shape/동작/렌더 위주, 가격값 비교 제외.** 산출 `05_qa/s1-qa.md`. (이번 세션에서 위임 직전 중단됨 — 다음 세션 첫 작업)
-2. **S2 스티커 확대** — 순수 어댑터+데이터 예상 (PriceTable3D 반칼 + FixedUnit 타투/팩). S1과 동일 패턴.
-3. **S3 포스터/실사** — 신규 componentType **NC-1 dimension-matrix-input**(2D 가로×세로) 필요. ⚠ 실사 Red fixture 미보유 → widget_monitor 캡처 선행.
-4. **S4 아크릴** (NC-2 option-addon-picker, ACNTHAP fixture 보유), **S5 굿즈/파우치** (NC-3, GSTGMIC fixture 보유), **S6 캘린더** (순수 어댑터, ⚠ fixture 캡처 선행).
-5. **후니 Figma 시각 충실 재현** (expert-frontend) — 14 componentType을 DESIGN.md+`docs/figma/huni_product_option.fig` 시안에 충실하게. 컴포넌트 단위 1회 = 전 stage 재사용. (사용자 Q2 선택, 확대와 병행/이후)
+1. **[다음] S3 포스터/실사·사인·배너 확대** — 신규 componentType **NC-1 `dimension-matrix-input`**(2D 가로×세로 → SizeMatrix2D 단가) 첫 도입. ⚠ **실사/포스터 Red fixture 미보유 → widget_monitor 라이브 캡처 선행**(S1·S2 방식: :3001 프록시로 임의 productCode 구동, catalog.json엔 없음). S3는 위젯 가시 변경(첫 신규 leaf 컴포넌트) — dispatcher case 추가 + 계약 `ComponentType` union 1줄, 코어(store/cascade/shadow) 불변. QA 노트: `area-input` 디스패처 case는 이미 존재하나 S0~S2 미사용이라 S3에서 첫 실데이터 검증 대상.
+2. **S4 아크릴** (NC-2 option-addon-picker, ACNTHAP fixture 보유), **S5 굿즈/파우치** (NC-3, GSTGMIC fixture 보유), **S6 캘린더** (순수 어댑터, ⚠ fixture 캡처 선행).
+3. **후니 Figma 시각 충실 재현** (expert-frontend) — 14 componentType을 DESIGN.md+`docs/figma/huni_product_option.fig` 시안에 충실하게. 컴포넌트 단위 1회 = 전 stage 재사용. (사용자 Q2 선택, 확대와 병행/이후)
+
+### S1·S2 잔존 Minor (비차단, 병행 보강 가능)
+- S1-M1: 별색 5종 fixture 보강
+- S2-M1: 가시 모양선택(VIEW_YN=Y) SKU fixture 미보유 / S2-M2: FixedUnit A4 datapoint fixture 미적재
+- S2-F1: 기획 "타투/스티커팩" 동명 SKU가 Red ST 36종에 부재 → STPADPN(시트)로 FixedUnit 대표 대체. 후니 D-매핑 시 확인
 
 상세 로드맵: `03_spec/expansion-strategy.md`, 메모리 `huni-widget-expansion-strategy`.
 
