@@ -15,6 +15,7 @@ export type ComponentType =
   | 'mini-color-chip'
   | 'large-color-chip'
   | 'area-input'
+  | 'dimension-matrix-input' // NC-1: 규격프리셋 칩 + 자유입력(가로×세로) → cutW/cutH 수치 직접전달(SizeMatrix2D 차원)
   | 'page-counter-input'
   | 'finish-button'
   | 'finish-select-box'

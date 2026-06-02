@@ -15,11 +15,21 @@ function selectedId(v: SelectionValue | undefined): string | undefined {
 }
 
 // 선택된 규격 → dimensions (cut/work). size 그룹의 선택값 → SizeRule.
+// NC-1: 자유입력 모드(SIZE_0 sentinel: cutW=0&cutH=0)일 때 numeric slot 의 사용자 수치를 직접 전달.
 function dimsFromSelection(s: WidgetState, side: SideKey): PriceDimension {
   const product = s.product!;
   const sizeGroup = product.optionGroups.find((g) => g.id === 'GRP_SIZE');
   const sel = sizeGroup ? selectedId(s.selections[sizeGroup.id]) : undefined;
   const rule = product.constraints.sizeRules.find((r) => r.valueId === sel);
+  // 자유입력 분기: 선택된 규격 rule 이 0×0 sentinel("사이즈직접입력")이고 사용자 수치가 있으면 직접 공급.
+  // 작업사이즈 = 재단사이즈 + CUT_MRG(BaseRule). 가격 산술 없음 — 수치 전달만(INV-1).
+  if (sizeGroup && rule && rule.cutW === 0 && rule.cutH === 0) {
+    const dim = s.dimensionInputs[sizeGroup.id];
+    if (dim && (dim.w > 0 || dim.h > 0)) {
+      const mrg = product.constraints.base.cutMargin;
+      return { side, cutW: dim.w, cutH: dim.h, workW: dim.w + mrg, workH: dim.h + mrg };
+    }
+  }
   if (rule) {
     return { side, cutW: rule.cutW, cutH: rule.cutH, workW: rule.workW, workH: rule.workH };
   }

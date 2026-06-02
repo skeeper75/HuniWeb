@@ -9,6 +9,7 @@ import { ColorChipGroup, MiniColorChipGroup, LargeColorChipGroup } from './Color
 import { ImageChipGroup } from './ImageChip';
 import { PriceSlider } from './PriceSlider';
 import { AreaInput } from './AreaInput';
+import { DimensionMatrixInput } from './DimensionMatrixInput';
 
 export function OptionControl({ group }: { group: OptionGroup }) {
   const { value, set } = useOptionSelection(group.id);
@@ -39,6 +40,8 @@ export function OptionControl({ group }: { group: OptionGroup }) {
       return <PageCounterBridge group={group} />;
     case 'area-input':
       return <AreaInputBridge group={group} />;
+    case 'dimension-matrix-input':
+      return <DimensionMatrixBridge group={group} />;
     case 'price-slider':
       return <PriceSliderBridge group={group} />;
     // summary / upload-cta 는 디스패처 대상 아님(패널 고정)
@@ -84,4 +87,26 @@ function PriceSliderBridge({ group }: { group: OptionGroup }) {
   if (!group.inputSpec) return null;
   const n = typeof value === 'string' ? Number(value) : undefined;
   return <PriceSlider spec={group.inputSpec} value={n} onChange={(v) => set(String(v))} />;
+}
+
+// NC-1: dimension-matrix-input 브리지. selection(프리셋/sentinel) + dimensionInputs(자유입력 W/H) 동시 구독.
+// 자유입력 sentinel id 는 sizeRules 의 0×0 룰(=사이즈직접입력)로 식별 — 계약 슬롯만 사용(Red 고유명 0).
+function DimensionMatrixBridge({ group }: { group: OptionGroup }) {
+  const { value, set } = useOptionSelection(group.id);
+  const dimension = useWidgetSelector((s) => s.dimensionInputs[group.id]);
+  const setDimensionInput = useWidgetSelector((s) => s.setDimensionInput);
+  const freeRule = useWidgetSelector((s) =>
+    s.product?.constraints.sizeRules.find((r) => r.cutW === 0 && r.cutH === 0),
+  );
+  if (!freeRule) return <OptionButtonGroup group={group} value={value} onChange={set} />;
+  return (
+    <DimensionMatrixInput
+      group={group}
+      selectedId={Array.isArray(value) ? value[0] : value}
+      freeInputId={freeRule.valueId}
+      dimension={dimension}
+      onSelectPreset={(id) => set(id)}
+      onChangeDimension={(d) => setDimensionInput(group.id, d)}
+    />
+  );
 }

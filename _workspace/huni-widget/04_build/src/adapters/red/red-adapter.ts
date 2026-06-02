@@ -61,7 +61,7 @@ export function mapProduct(res: RedDigitalProductResponse): NormalizedProduct {
       ]
     : [{ key: 'default', label: '기본', uploadType: opt.usePDF === 'Y' ? 'pdf' : 'editor' }];
 
-  const optionGroups = mapOptionGroups(data, hasInner);
+  const optionGroups = mapOptionGroups(data, hasInner, opt.price_gbn);
   const constraints = mapConstraints(data);
 
   return {
@@ -147,21 +147,50 @@ function buildQuantityRule(data: RedProductData): QuantityRule | undefined {
   };
 }
 
-function mapOptionGroups(data: RedProductData, hasInner: boolean): OptionGroup[] {
+function mapOptionGroups(data: RedProductData, hasInner: boolean, priceScheme: string): OptionGroup[] {
   const groups: OptionGroup[] = [];
   const q = buildQuantityRule(data);
 
-  // 규격 (option-button)
+  // 규격
   const visibleSizes = data.pdt_size_info.filter((s) => s.HIDE_YN !== 'Y');
   if (visibleSizes.length > 0) {
+    // NC-1: real_price(실사·배너, SizeMatrix2D) + 자유입력 sentinel("사이즈직접입력")이 있으면
+    //  dimension-matrix-input(프리셋 칩 + 가로×세로 자유입력)로 라우팅. 그 외(digital S1/S2)는 option-button 유지.
+    const hasFreeInput = visibleSizes.some(
+      (s) => num(s.CUT_WDT) === 0 && num(s.CUT_HGH) === 0,
+    );
+    const isDimensionMatrix = priceScheme === 'real_price' && hasFreeInput;
+    const base = data.pdt_base_info[0];
+    // dimension-matrix 는 기본 선택이 기본규격(DFT_YN=Y)이 되도록 정렬(자유입력 sentinel 후순위).
+    // store.defaultSelections 가 첫 값을 기본 선택하므로 — 첫 진입 = 기본규격(캡처: 5000X900), 빈 자유입력 아님.
+    const orderedSizes = isDimensionMatrix
+      ? [...visibleSizes].sort((a, b) => (b.DFT_YN === 'Y' ? 1 : 0) - (a.DFT_YN === 'Y' ? 1 : 0))
+      : visibleSizes;
     groups.push({
       id: 'GRP_SIZE',
       side: 'default',
       label: '규격',
-      componentType: DATASET_COMPONENT_TYPE.size,
+      componentType: isDimensionMatrix ? 'dimension-matrix-input' : DATASET_COMPONENT_TYPE.size,
       required: true,
       visible: true,
-      values: visibleSizes.map(sizeValue),
+      values: orderedSizes.map(sizeValue),
+      // 자유입력 범위(MIN/MAX_CUT) — dimension-matrix 일 때만. axis2=세로(InputSpec 기존 슬롯).
+      ...(isDimensionMatrix
+        ? {
+            inputSpec: {
+              min: num(base?.MIN_CUT_WDT),
+              max: num(base?.MAX_CUT_WDT),
+              step: 1,
+              defaultValue: 0,
+              axis2: {
+                min: num(base?.MIN_CUT_HGH),
+                max: num(base?.MAX_CUT_HGH),
+                label: '세로',
+              },
+              helpText: `가로 ${num(base?.MIN_CUT_WDT)}~${num(base?.MAX_CUT_WDT)}mm · 세로 ${num(base?.MIN_CUT_HGH)}~${num(base?.MAX_CUT_HGH)}mm`,
+            } satisfies InputSpec,
+          }
+        : {}),
     });
   }
 

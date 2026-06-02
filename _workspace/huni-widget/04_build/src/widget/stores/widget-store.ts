@@ -26,6 +26,13 @@ export type WidgetStatus =
 
 export type SelectionValue = string | string[];
 
+// NC-1: 자유입력(가로×세로) 수치 슬롯. selection(opaque id) 과 병렬 — groupId 별로 cutW/cutH 후보를 보관.
+// 설계 결정: selection 에 수치를 직렬화하지 않고 별도 numeric map 으로 분리(최소 침습, 타입 안전).
+export interface DimensionInput {
+  w: number;
+  h: number;
+}
+
 export interface WidgetState {
   // config
   locale: string;
@@ -35,6 +42,8 @@ export interface WidgetState {
   product: NormalizedProduct | null;
   // order — 사용자 선택 상태
   selections: Record<string, SelectionValue>;
+  // NC-1: groupId → 자유입력 가로/세로 수치(selection 과 병렬 numeric slot).
+  dimensionInputs: Record<string, DimensionInput>;
   quantity: number;
   pageCount?: number;
   // exterior — 면별 입력 결과
@@ -52,6 +61,7 @@ export interface WidgetState {
   // actions
   loadProduct(code: string): Promise<void>;
   selectOption(groupId: string, valueId: SelectionValue): void;
+  setDimensionInput(groupId: string, d: DimensionInput): void; // NC-1 자유입력 수치 슬롯 갱신
   setQuantity(n: number): void;
   setPageCount(n: number): void;
   setArtifact(side: SideKey, a: NormalizedArtifact): void;
@@ -99,7 +109,9 @@ const DEFAULT_TTL = 30_000; // 30s
 function defaultSelections(product: NormalizedProduct): Record<string, SelectionValue> {
   const sel: Record<string, SelectionValue> = {};
   for (const g of product.optionGroups) {
-    if (g.inputSpec) continue; // 입력형은 별도 수량/페이지 상태
+    // 순수 입력형(counter/area/page)은 별도 수량/페이지 상태로 처리 — 단 dimension-matrix 는
+    // values(규격프리셋)도 가지므로 기본 프리셋을 선택해야 함(NC-1: 첫 진입 = 기본규격).
+    if (g.inputSpec && g.values.length === 0) continue;
     const first = g.values.find((v) => !v.disabled);
     if (first) sel[g.id] = first.id;
   }
@@ -117,6 +129,7 @@ export function createWidgetStore(deps: WidgetStoreDeps): WidgetStore {
     member: { tier: deps.memberTier },
     product: null,
     selections: {},
+    dimensionInputs: {},
     quantity: 0,
     pageCount: undefined,
     artifacts: {},
@@ -137,6 +150,7 @@ export function createWidgetStore(deps: WidgetStoreDeps): WidgetStore {
         set({
           product,
           selections: defaultSelections(product),
+          dimensionInputs: {},
           quantity: q?.default ?? 1,
           pageCount: sides.some((s) => s.key === 'inner') ? q?.pageMin : undefined,
           status: 'ready',
@@ -157,6 +171,12 @@ export function createWidgetStore(deps: WidgetStoreDeps): WidgetStore {
         const next = applyCascade(product, selections, groupId);
         set({ product: next.product, selections: next.selections });
       }
+      get().schedulePriceQuote();
+    },
+
+    // NC-1: 자유입력 가로/세로 수치 갱신 → numeric slot 저장 후 재가격(dimsFromSelection 자유입력 분기 소비).
+    setDimensionInput(groupId, d) {
+      set({ dimensionInputs: { ...get().dimensionInputs, [groupId]: d } });
       get().schedulePriceQuote();
     },
 
