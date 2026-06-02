@@ -1,0 +1,494 @@
+{
+  "product": "TPCLWLB",
+  "capturedAt": "2026-06-02T23:03:36.679Z",
+  "schema": {
+    "mounted": true,
+    "nodeCount": 106,
+    "selects": [
+      {
+        "name": "paper",
+        "options": [
+          "아트지"
+        ]
+      },
+      {
+        "name": "weight",
+        "options": [
+          "120g"
+        ]
+      },
+      {
+        "name": "dosu",
+        "options": [
+          "단면"
+        ]
+      },
+      {
+        "name": "sizes",
+        "options": [
+          "500X730"
+        ]
+      },
+      {
+        "name": "starting-year",
+        "options": [
+          "2026년",
+          "2027년",
+          "2028년"
+        ]
+      },
+      {
+        "name": "starting-month",
+        "options": [
+          "1월",
+          "2월",
+          "3월",
+          "4월",
+          "5월",
+          "6월",
+          "7월",
+          "8월",
+          "9월",
+          "10월",
+          "11월",
+          "12월"
+        ]
+      },
+      {
+        "name": "PRN_CNT",
+        "options": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10"
+        ]
+      }
+    ],
+    "numbers": [
+      {
+        "name": "w-재단사이즈",
+        "value": "500"
+      },
+      {
+        "name": "h-재단사이즈",
+        "value": "730"
+      },
+      {
+        "name": "w-작업사이즈",
+        "value": "504"
+      },
+      {
+        "name": "h-작업사이즈",
+        "value": "734"
+      }
+    ],
+    "radioGroups": [],
+    "textInputs": [
+      "order-subject"
+    ],
+    "textSample": "용지주문 가능 자재 아트지 120g인쇄 옵션단면규격 (mm)500X730재단 사이즈가로mm세로mm작업 사이즈가로mm세로mm시작 년도/월2026년2027년2028년1월2월3월4월5월6월7월8월9월10월11월12월* 선택하신 달 부터 12달 달력이 제공됩니다.수량12345678910 개 직접 입력하기주문제목파일 업로드에디터편집하기"
+  },
+  "action": {
+    "ok": true,
+    "sizePicked": null,
+    "sizeName": "sizes",
+    "qtySet": true,
+    "qtyName": ""
+  },
+  "infoCalls": [
+    {
+      "rel": 1344,
+      "status": 200,
+      "respBody": {
+        "retCode": 200,
+        "msg": "",
+        "result": {
+          "product_option": {
+            "option": {
+              "pdt_cod": "TPCLWLB",
+              "pdt_nme": "큰 달력(효도 달력)",
+              "item_gbn": "vDigital_item",
+              "price_gbn": "vTmpl_price",
+              "skinInfo": {
+                "pageDirection": {
+                  "view_yn": "N",
+                  "title": "주문서 작성"
+                },
+                "paperSelect": {
+                  "view_yn": "Y",
+                  "title": "용지"
+                },
+                "sizeSelect": {
+                  "view_yn": "N",
+                  "title": "규격 (mm)"
+                },
+                "dosuSelect": {
+                  "view_yn": "N",
+                  "title": "인쇄 도수"
+                },
+                "subjectGroup": {
+                  "view_yn": "Y",
+                  "title": "주문 제목"
+                },
+                "quantityGroup": {
+                  "view_yn": "Y",
+                  "title": {
+                    "orderCnt": "디자인 수 (건수)",
+                    "printCnt": "수량"
+                  }
+                }
+              },
+              "order_yn": "Y",
+              "cut_guide_yn": "N",
+              "able_paper_yn": "Y",
+              "price_table_yn": "Y",
+              "useTemplateDownload": "Y",
+              "useKoiEditor": "Y",
+              "useRPEditor": "N",
+              "usePDF": "N",
+              "usePDFordCnt": "Y",
+              "useEditorOrdCnt": "N",
+              "koiAccessToken": "[JWT]",
+              "rpAccessToken": null,
+              "koi_template_resource_id": null,
+              "koiOption": []
+            }
+          },
+          "product_data": {
+            "pdt_base_info": [
+              {
+                "PDT_CD": "TPCLWLB",
+                "PDT_NM": "큰 달력(효도 달력)",
+                "WDT_HGH_GBN_YN": "N",
+                "PRN_YN": "Y",
+                "PDT_UNIT": "개",
+                "ORD_CNT_YN": "Y",
+                "NO_STD_ABL_YN": "N",
+                "MIN_CUT_WDT": "10.00",
+                "MIN_CUT_HGH": "10.00",
+                "MAX_CUT_WDT": "500.00",
+                "MAX_CUT_HGH": "730.00",
+                "DFT_CUT_WDT": "50.00",
+                "DFT_CUT_HGH": "20.00",
+                "CUT_MRG": "4.00",
+                "FIR_CNT": 1,
+                "INC": 1,
+                "INC_STEP": 10,
+                "NOTE": "",
+                "REAM_YN": "",
+                "SET_CNT": 1,
+                "SIZE_PCS_USE": "",
+                "MAX_PRN_CNT": 0,
+                "DAY_PRDC_PDT_YN": "N",
+                "DAY_ABLE_PRN_CNT": 0
+              }
+            ],
+            "pdt_mtrl_info": [
+              {
+                "MTRL_TYPE": "R",
+                "CLR_CD": "X",
+                "CLR_NM": "기본",
+                "PTT_CD": "ART",
+                "PTT_NM": "아트지",
+                "WGT_CD": "120",
+                "MTRL_CD": "RXART120",
+                "HIDE_YN": "N",
+                "HIDE_RSN": "",
+                "NOTE": "",
+                "SID_GBN": "",
+                "CLR_COD": "X",
+                "CLR_NME": "기본",
+                "PTT_COD": "ART",
+                "PTT_NME": "아트지",
+                "WGT_COD": "120",
+                "MTRL_COD": "RXART120",
+                "MTRL_NM": "아트지120g",
+                "GRP_OPTION_CD": "",
+                "CLR_OPTION_CD": "",
+                "PRT_HIDE_YN": null,
+                "BSN_YN": "N",
+                "CLR_HEX_CD": ""
+              }
+            ],
+            "pdt_size_info": [
+              {
+                "DIV_NM": "500X730",
+                "WRK_WDT": "504.00",
+                "WRK_HGH": "734.00",
+                "CUT_WDT": "500.00",
+                "CUT_HGH": "730.00",
+                "DFT_YN": "Y",
+                "DIV_CD": "",
+                "DIV_SEQ": 1,
+                "STICKER_TYPE": "",
+                "REAM_PAPER_CNT": null,
+                "NOTE": null,
+                "PDT_SIZE_INFO": "제품사이즈 : 500 X 730mm (높이:10mm )",
+                "HIDE_YN": "N"
+              }
+            ],
+            "pdt_dosu_info": [
+              {
+                "COD": "SID_S",
+                "COD_NME": "단면",
+                "PRN_CLR_CNT": 4
+              }
+            ],
+            "pdt_prn_cnt_info": [
+              {
+                "DIV_CD": "",
+                "REAM_CNT": "",
+                "PRN_CNT": "",
+                "DFT_YN": "Y",
+                "DFT_PRN_CNT": 1,
+                "FIR_CNT": 1,
+                "INC_CNT": 1,
+                "INC_STEP": 10,
+                "MIN_PRN_CNT": 1,
+                "MIN_INN_PAGE": 1,
+                "MAX_INN_PAGE": 1,
+                "STEP_INN_PAGE": 1,
+                "MAX_THCK": null,
+                "INN_MAX_WGT": null,
+                "COV_MIN_WGT": null
+              }
+            ],
+            "pdt_prn_cnt_info_add": [],
+            "pdt_exp_prn_cnt_info": null,
+            "pdt_pcs_info": [
+              {
+                "PCS_CD": "CUT_DFT",
+                "PCS_GRP_NM": "재단",
+                "PCS_DTL_CD": "DFXXX",
+                "PCS_DTL_NM": "재단",
+                "WEB_PCS_DTL_GRP": "CUT_DFT_DF",
+                "WEB_PCS_DTL_GRP_NM": "",
+                "WRK_WDT": "0.00",
+                "WRK_HGH": "0.00",
+                "CUT_WDT": "0.00",
+                "CUT_HGH": "0.00",
+                "VIEW_YN": "N",
+                "HIDE_YN": "N",
+                "NOTICE": [],
+                "ESN_YN": "Y",
+                "NOTE": "",
+                "MTRL_CD": "",
+                "MTRL_COD": "",
+                "DIV_SEQ": 0,
+                "SUB_MTRL_YN": "N",
+                "STICKER_TYPE": null,
+                "QTY_INPUT_YN": "N",
+                "PCS_COD": "CUT_DFT",
+                "PCS_GRP_NME": "재단",
+                "PCS_DTL_COD": "DFXXX",
+                "PCS_DTL_NME": "재단",
+                "PCS_GROUP_NME": "재단"
+              },
+              {
+                "PCS_CD": "STA_CLD",
+                "PCS_GRP_NM": "중철",
+                "PCS_DTL_CD": "DFXXX",
+                "PCS_DTL_NM": "효도달력 쫄대",
+                "WEB_PCS_DTL_GRP": "STA_CLD_DF",
+                "WEB_PCS_DTL_GRP_NM": "",
+                "WRK_WDT": "0.00",
+                "WRK_HGH": "0.00",
+                "CUT_WDT": "0.00",
+                "CUT_HGH": "0.00",
+                "VIEW_YN": "N",
+                "HIDE_YN": "N",
+                "NOTICE": [],
+                "ESN_YN": "Y",
+                "NOTE": "",
+                "MTRL_CD": "",
+                "MTRL_COD": "",
+                "DIV_SEQ": 0,
+                "SUB_MTRL_YN": "N",
+                "STICKER_TYPE": null,
+                "QTY_INPUT_YN": "N",
+                "PCS_COD": "STA_CLD",
+                "PCS_GRP_NME": "중철",
+                "PCS_DTL_COD": "DFXXX",
+                "PCS_DTL_NME": "효도달력 쫄대",
+                "PCS_GROUP_NME": "효도달력 쫄대"
+              },
+              {
+                "PCS_CD": "PAK_POL",
+                "PCS_GRP_NM": "폴리백 개별포장",
+                "PCS_DTL_CD": "DFCDL",
+                "PCS_DTL_NM": "달력 개별포장",
+                "WEB_PCS_DTL_GRP": "PAK_POL_DF",
+                "WEB_PCS_DTL_GRP_NM": "",
+                "WRK_WDT": "0.00",
+                "WRK_HGH": "0.00",
+                "CUT_WDT": "0.00",
+                "CUT_HGH": "0.00",
+                "VIEW_YN": "N",
+                "HIDE_YN": "N",
+                "NOTICE": [],
+                "ESN_YN": "Y",
+                "NOTE": "",
+                "MTRL_CD": "",
+                "MTRL_COD": "",
+                "DIV_SEQ": 0,
+                "SUB_MTRL_YN": "N",
+                "STICKER_TYPE": null,
+                "QTY_INPUT_YN": "N",
+                "PCS_COD": "PAK_POL",
+                "PCS_GRP_NME": "폴리백 개별포장",
+                "PCS_DTL_COD": "DFCDL",
+                "PCS_DTL_NME": "달력 개별포장",
+                "PCS_GROUP_NME": "달력 개별포장"
+              }
+            ],
+            "pdt_add_pcs_info": null,
+            "pdt_disable_pcs_info": [
+              {
+                "MTRL_CD": "RXART120",
+                "PCS_CD": "COT_DFT",
+                "PCS_DTL_CD": null,
+                "NOTE": null
+              },
+              {
+                "MTRL_CD": "RXART120",
+                "PCS_CD": "LAM_DFT",
+                "PCS_DTL_CD": null,
+                "NOTE": null
+              },
+              {
+                "MTRL_CD": "RXART120",
+                "PCS_CD": "MIS_DFT",
+                "PCS_DTL_CD": null,
+                "NOTE": null
+              },
+              {
+                "MTRL_CD": "RXART120",
+                "PCS_CD": "SCO_DFT",
+                "PCS_DTL_CD": null,
+                "NOTE": null
+              },
+              {
+                "MTRL_CD": "RXART120",
+                "PCS_CD": "SCO_GLD",
+                "PCS_DTL_CD": null,
+                "NOTE": null
+              },
+              {
+                "MTRL_CD": "RXART120",
+                "PCS_CD": "SCO_SLV",
+                "PCS_DTL_CD": null,
+                "NOTE": null
+              }
+            ],
+            "pdt_add_info": [
+              [],
+              []
+            ]
+          },
+          "member_info": {
+            "mb_id": "lojesus75",
+            "mb_cust_cod": "15090019",
+            "discount_cust_yn": "N",
+            "mall_cust_yn": "N",
+            "bsn_yn": "N",
+            "blk_con": "N",
+            "edicusUserID": "7Iug7Jqw7KeEbG9qZXN1czc1"
+          }
+        }
+      }
+    }
+  ],
+  "priceCalls": [
+    {
+      "rel": 2232,
+      "status": 200,
+      "reqBody": "{\"dataJson\":{\"ORD_INFO\":[{\"PDT_CD\":\"TPCLWLB\",\"MTRL_CD\":\"RXART120\",\"CUT_WDT\":500,\"CUT_HGH\":730,\"WRK_WDT\":504,\"WRK_HGH\":734,\"PRN_CNT\":1,\"ORD_CNT\":13,\"DOSU_COD\":\"SID_S\",\"PRN_CLR_CNT\":4}],\"PCS_INFO\":[{\"PCS_COD\":\"CUT_DFT\",\"PCS_DTL_COD\":\"DFXXX\",\"ATTB\":\"\"},{\"PCS_COD\":\"STA_CLD\",\"PCS_DTL_COD\":\"DFXXX\",\"ATTB\":\"\"},{\"PCS_COD\":\"PAK_POL\",\"PCS_DTL_COD\":\"DFCDL\",\"ATTB\":\"\"}],\"price_gbn\":\"vTmpl_price\",\"mb_cust_cod\":\"10000000\"}}",
+      "respBody": {
+        "retCode": 200,
+        "msg": "",
+        "result": [
+          {
+            "PCS_CD": "CUT_DFT",
+            "PCS_DTL_CD": "DFXXX",
+            "PCS_COD": "CUT_DFT",
+            "PCS_DTL_COD": "DFXXX",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 1, 주문건수 : 1",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 1, 주문건수 : 1 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "재단",
+            "PCS_DTL_NME": "재단"
+          },
+          {
+            "PCS_CD": "STA_CLD",
+            "PCS_DTL_CD": "DFXXX",
+            "PCS_COD": "STA_CLD",
+            "PCS_DTL_COD": "DFXXX",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 1, 주문건수 : 1",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 1, 주문건수 : 1 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "달력쫄대",
+            "PCS_DTL_NME": "효도달력 쫄대"
+          },
+          {
+            "PCS_CD": "PAK_POL",
+            "PCS_DTL_CD": "DFCDL",
+            "PCS_COD": "PAK_POL",
+            "PCS_DTL_COD": "DFCDL",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 1, 주문건수 : 1",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 1, 주문건수 : 1 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "폴리백 개별포장",
+            "PCS_DTL_NME": "달력 개별포장"
+          },
+          {
+            "PCS_CD": "PRT_DFT",
+            "PCS_DTL_CD": "DFXXS",
+            "PCS_COD": "PRT_DFT",
+            "PCS_DTL_COD": "DFXXS",
+            "PRICE": 11900,
+            "PRICE_VAT": 1190,
+            "PRICE_MALL": 11900,
+            "PRICE_MALL_VAT": 1190,
+            "ORG_PRICE": 11900,
+            "ORG_PRICE_VAT": 1190,
+            "PRICE_LOG": "개당단가 : 11900.00원, 인쇄수량DDDDD : 1, 주문건수 : 1",
+            "PRICE_MALL_LOG": "개당단가 : 11900.00원, 인쇄수량DDDDD : 1, 주문건수 : 1 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "인쇄",
+            "PCS_DTL_NME": "인쇄단면"
+          }
+        ],
+        "result_sum": {
+          "PRICE": 11900,
+          "PRICE_VAT": 1190,
+          "PRICE_MALL": 11900,
+          "PRICE_MALL_VAT": 1190,
+          "ORG_PRICE": 11900,
+          "ORG_PRICE_VAT": 1190
+        },
+        "query": "dbo.WSP_ACPT_ORDER_TMPL_PCS_PRICE '0101', 'LNG_KO', 'TPCLWLB', '<?xml version=\"1.0\"?>\n<PARAMS><DETAIL><MTRL_COD>RXART120</MTRL_COD><CUT_WDT>500</CUT_WDT><CUT_HGH>730</CUT_HGH><PRN_CNT>1</PRN_CNT><ORD_CNT>13</ORD_CNT><SID_GBN>SID_S</SID_GBN><TMPL_IDX/><BTN_TYPE/><PNS_DIGIT/><PNS_CNT/><PACK_PRN_CNT/><CUST_COD>15090019</CUST_COD></DETAIL><PCS><PCS_COD>CUT_DFT</PCS_COD><PCS_DTL_COD>DFXXX</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS><PCS><PCS_COD>STA_CLD</PCS_COD><PCS_DTL_COD>DFXXX</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS><PCS><PCS_COD>PAK_POL</PCS_COD><PCS_DTL_COD>DFCDL</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS></PARAMS>\n'",
+        "query_flexible": null
+      }
+    }
+  ]
+}

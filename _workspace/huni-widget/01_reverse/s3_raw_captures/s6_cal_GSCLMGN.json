@@ -1,0 +1,429 @@
+{
+  "product": "GSCLMGN",
+  "capturedAt": "2026-06-02T23:03:49.135Z",
+  "schema": {
+    "mounted": true,
+    "nodeCount": 92,
+    "selects": [
+      {
+        "name": "paper",
+        "options": [
+          "자석스티커지"
+        ]
+      },
+      {
+        "name": "weight",
+        "options": [
+          "350g"
+        ]
+      },
+      {
+        "name": "dosu",
+        "options": [
+          "단면"
+        ]
+      },
+      {
+        "name": "sizes",
+        "options": [
+          "347mmX470mm"
+        ]
+      },
+      {
+        "name": "PRN_CNT",
+        "options": [
+          "1",
+          "6",
+          "11",
+          "16",
+          "21",
+          "26",
+          "31",
+          "36",
+          "41",
+          "46"
+        ]
+      }
+    ],
+    "numbers": [
+      {
+        "name": "w-재단사이즈",
+        "value": "347"
+      },
+      {
+        "name": "h-재단사이즈",
+        "value": "470"
+      },
+      {
+        "name": "w-작업사이즈",
+        "value": "357"
+      },
+      {
+        "name": "h-작업사이즈",
+        "value": "480"
+      },
+      {
+        "name": "ORD_CNT",
+        "value": "1"
+      }
+    ],
+    "radioGroups": [],
+    "textInputs": [
+      "order-subject"
+    ],
+    "textSample": "용지주문 가능 자재 자석스티커지 350g인쇄 옵션단면규격 (mm)347mmX470mm재단 사이즈가로mm세로mm작업 사이즈가로mm세로mm디자인 수 (건수)수량161116212631364146직접 입력하기* 총 주문 수량은 1개입니다주문제목파일 업로드에디터편집하기"
+  },
+  "action": {
+    "ok": true,
+    "sizePicked": null,
+    "sizeName": "sizes",
+    "qtySet": true,
+    "qtyName": ""
+  },
+  "infoCalls": [
+    {
+      "rel": 1315,
+      "status": 200,
+      "respBody": {
+        "retCode": 200,
+        "msg": "",
+        "result": {
+          "product_option": {
+            "option": {
+              "pdt_cod": "GSCLMGN",
+              "pdt_nme": "자석캘린더",
+              "item_gbn": "edicus_item",
+              "price_gbn": "tmpl_price",
+              "skinInfo": {
+                "pageDirection": {
+                  "view_yn": "N",
+                  "title": "주문서 작성"
+                },
+                "paperSelect": {
+                  "view_yn": "Y",
+                  "title": "용지"
+                },
+                "sizeSelect": {
+                  "view_yn": "N",
+                  "title": "규격 (mm)"
+                },
+                "dosuSelect": {
+                  "view_yn": "N",
+                  "title": "인쇄 도수"
+                },
+                "subjectGroup": {
+                  "view_yn": "Y",
+                  "title": "주문 제목"
+                },
+                "quantityGroup": {
+                  "view_yn": "Y",
+                  "title": {
+                    "orderCnt": "디자인 수 (건수)",
+                    "printCnt": "수량"
+                  }
+                }
+              },
+              "order_yn": "Y",
+              "cut_guide_yn": "N",
+              "able_paper_yn": "Y",
+              "price_table_yn": "N",
+              "useTemplateDownload": "Y",
+              "useKoiEditor": "Y",
+              "useRPEditor": "N",
+              "usePDF": "N",
+              "usePDFordCnt": "Y",
+              "useEditorOrdCnt": "N",
+              "koiAccessToken": "[JWT]",
+              "rpAccessToken": null,
+              "koi_template_resource_id": null,
+              "koiOption": []
+            }
+          },
+          "product_data": {
+            "pdt_base_info": [
+              {
+                "PDT_CD": "GSCLMGN",
+                "PDT_NM": "자석캘린더",
+                "WDT_HGH_GBN_YN": "N",
+                "PRN_YN": "Y",
+                "PDT_UNIT": "개",
+                "ORD_CNT_YN": "Y",
+                "NO_STD_ABL_YN": "N",
+                "MIN_CUT_WDT": "347.00",
+                "MIN_CUT_HGH": "470.00",
+                "MAX_CUT_WDT": "347.00",
+                "MAX_CUT_HGH": "470.00",
+                "DFT_CUT_WDT": "0.00",
+                "DFT_CUT_HGH": "0.00",
+                "CUT_MRG": "10.00",
+                "FIR_CNT": 1,
+                "INC": 5,
+                "INC_STEP": 10,
+                "NOTE": "",
+                "REAM_YN": "",
+                "SET_CNT": 1,
+                "SIZE_PCS_USE": "",
+                "MAX_PRN_CNT": 0,
+                "DAY_PRDC_PDT_YN": "N",
+                "DAY_ABLE_PRN_CNT": 0
+              }
+            ],
+            "pdt_mtrl_info": [
+              {
+                "MTRL_TYPE": "R",
+                "CLR_CD": "X",
+                "CLR_NM": "기본",
+                "PTT_CD": "MGP",
+                "PTT_NM": "자석스티커지",
+                "WGT_CD": "350",
+                "MTRL_CD": "RXMGP350",
+                "HIDE_YN": "N",
+                "HIDE_RSN": "",
+                "NOTE": "",
+                "SID_GBN": "",
+                "CLR_COD": "X",
+                "CLR_NME": "기본",
+                "PTT_COD": "MGP",
+                "PTT_NME": "자석스티커지",
+                "WGT_COD": "350",
+                "MTRL_COD": "RXMGP350",
+                "MTRL_NM": "자석스티커 350g",
+                "GRP_OPTION_CD": "",
+                "CLR_OPTION_CD": "",
+                "PRT_HIDE_YN": null,
+                "BSN_YN": "N",
+                "CLR_HEX_CD": ""
+              }
+            ],
+            "pdt_size_info": [
+              {
+                "DIV_NM": "347mmX470mm",
+                "WRK_WDT": "357.00",
+                "WRK_HGH": "480.00",
+                "CUT_WDT": "347.00",
+                "CUT_HGH": "470.00",
+                "DFT_YN": "Y",
+                "DIV_CD": "",
+                "DIV_SEQ": 1,
+                "STICKER_TYPE": "",
+                "REAM_PAPER_CNT": null,
+                "NOTE": null,
+                "PDT_SIZE_INFO": "",
+                "HIDE_YN": "N"
+              }
+            ],
+            "pdt_dosu_info": [
+              {
+                "COD": "SID_S",
+                "COD_NME": "단면",
+                "PRN_CLR_CNT": 4
+              }
+            ],
+            "pdt_prn_cnt_info": [
+              {
+                "DIV_CD": "",
+                "REAM_CNT": "",
+                "PRN_CNT": "",
+                "DFT_YN": "Y",
+                "DFT_PRN_CNT": 1,
+                "FIR_CNT": 1,
+                "INC_CNT": 5,
+                "INC_STEP": 10,
+                "MIN_PRN_CNT": 1,
+                "MIN_INN_PAGE": 1,
+                "MAX_INN_PAGE": 1,
+                "STEP_INN_PAGE": 1,
+                "MAX_THCK": null,
+                "INN_MAX_WGT": null,
+                "COV_MIN_WGT": null
+              }
+            ],
+            "pdt_prn_cnt_info_add": [],
+            "pdt_exp_prn_cnt_info": null,
+            "pdt_pcs_info": [
+              {
+                "PCS_CD": "COT_DFT",
+                "PCS_GRP_NM": "코팅",
+                "PCS_DTL_CD": "TCBDS",
+                "PCS_DTL_NM": "화이트보드코팅",
+                "WEB_PCS_DTL_GRP": "COT_DFT_TC",
+                "WEB_PCS_DTL_GRP_NM": "",
+                "WRK_WDT": "0.00",
+                "WRK_HGH": "0.00",
+                "CUT_WDT": "0.00",
+                "CUT_HGH": "0.00",
+                "VIEW_YN": "N",
+                "HIDE_YN": "N",
+                "NOTICE": [],
+                "ESN_YN": "Y",
+                "NOTE": "",
+                "MTRL_CD": "",
+                "MTRL_COD": "",
+                "DIV_SEQ": 0,
+                "SUB_MTRL_YN": "N",
+                "STICKER_TYPE": null,
+                "QTY_INPUT_YN": "N",
+                "PCS_COD": "COT_DFT",
+                "PCS_GRP_NME": "코팅",
+                "PCS_DTL_COD": "TCBDS",
+                "PCS_DTL_NME": "화이트보드코팅",
+                "PCS_GROUP_NME": "화이트보드코팅"
+              },
+              {
+                "PCS_CD": "THO_CUT",
+                "PCS_GRP_NM": "모양커팅",
+                "PCS_DTL_CD": "FRXXX",
+                "PCS_DTL_NM": "자유모양커팅",
+                "WEB_PCS_DTL_GRP": "THO_CUT_FR",
+                "WEB_PCS_DTL_GRP_NM": "",
+                "WRK_WDT": "0.00",
+                "WRK_HGH": "0.00",
+                "CUT_WDT": "0.00",
+                "CUT_HGH": "0.00",
+                "VIEW_YN": "N",
+                "HIDE_YN": "N",
+                "NOTICE": [],
+                "ESN_YN": "Y",
+                "NOTE": "",
+                "MTRL_CD": "",
+                "MTRL_COD": "",
+                "DIV_SEQ": 0,
+                "SUB_MTRL_YN": "N",
+                "STICKER_TYPE": null,
+                "QTY_INPUT_YN": "N",
+                "PCS_COD": "THO_CUT",
+                "PCS_GRP_NME": "모양커팅",
+                "PCS_DTL_COD": "FRXXX",
+                "PCS_DTL_NME": "자유모양커팅",
+                "PCS_GROUP_NME": "자유모양커팅"
+              }
+            ],
+            "pdt_add_pcs_info": null,
+            "pdt_disable_pcs_info": [
+              {
+                "MTRL_CD": "RXMGP350",
+                "PCS_CD": "SCO_GLD",
+                "PCS_DTL_CD": null,
+                "NOTE": null
+              },
+              {
+                "MTRL_CD": "RXMGP350",
+                "PCS_CD": "SCO_SLV",
+                "PCS_DTL_CD": null,
+                "NOTE": null
+              },
+              {
+                "MTRL_CD": "RXMGP350",
+                "PCS_CD": "COT_DFT",
+                "PCS_DTL_CD": "TCHLS",
+                "NOTE": null
+              },
+              {
+                "MTRL_CD": "RXMGP350",
+                "PCS_CD": "COT_DFT",
+                "PCS_DTL_CD": "TCSDS",
+                "NOTE": null
+              },
+              {
+                "MTRL_CD": "RXMGP350",
+                "PCS_CD": "COT_DFT",
+                "PCS_DTL_CD": "TCSSS",
+                "NOTE": null
+              },
+              {
+                "MTRL_CD": "RXMGP350",
+                "PCS_CD": "COT_DFT",
+                "PCS_DTL_CD": "TCSTS",
+                "NOTE": null
+              }
+            ],
+            "pdt_add_info": [
+              [],
+              []
+            ]
+          },
+          "member_info": {
+            "mb_id": "lojesus75",
+            "mb_cust_cod": "15090019",
+            "discount_cust_yn": "N",
+            "mall_cust_yn": "N",
+            "bsn_yn": "N",
+            "blk_con": "N",
+            "edicusUserID": "7Iug7Jqw7KeEbG9qZXN1czc1"
+          }
+        }
+      }
+    }
+  ],
+  "priceCalls": [
+    {
+      "rel": 2127,
+      "status": 200,
+      "reqBody": "{\"dataJson\":{\"ORD_INFO\":[{\"PDT_CD\":\"GSCLMGN\",\"MTRL_CD\":\"RXMGP350\",\"CUT_WDT\":347,\"CUT_HGH\":470,\"WRK_WDT\":357,\"WRK_HGH\":480,\"DOSU_COD\":\"SID_S\",\"PRN_CLR_CNT\":4}],\"PCS_INFO\":[{\"PCS_COD\":\"THO_CUT\",\"PCS_DTL_COD\":\"FRXXX\",\"ATTB\":\"\"},{\"PCS_COD\":\"COT_DFT\",\"PCS_DTL_COD\":\"TCBDS\",\"ATTB\":\"\"}],\"price_gbn\":\"tmpl_price\",\"mb_cust_cod\":\"10000000\"}}",
+      "respBody": {
+        "retCode": 200,
+        "msg": "",
+        "result": [
+          {
+            "PCS_CD": "THO_CUT",
+            "PCS_DTL_CD": "FRXXX",
+            "PCS_COD": "THO_CUT",
+            "PCS_DTL_COD": "FRXXX",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 0, 주문건수 : 0",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 0, 주문건수 : 0 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "완칼도무송",
+            "PCS_DTL_NME": "자유모양커팅"
+          },
+          {
+            "PCS_CD": "COT_DFT",
+            "PCS_DTL_CD": "TCBDS",
+            "PCS_COD": "COT_DFT",
+            "PCS_DTL_COD": "TCBDS",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 0, 주문건수 : 0",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 0, 주문건수 : 0 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "코팅",
+            "PCS_DTL_NME": "화이트보드코팅"
+          },
+          {
+            "PCS_CD": "PRT_DFT",
+            "PCS_DTL_CD": "DFXXS",
+            "PCS_COD": "PRT_DFT",
+            "PCS_DTL_COD": "DFXXS",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 0, 주문건수 : 0",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 0, 주문건수 : 0 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "인쇄",
+            "PCS_DTL_NME": "인쇄단면"
+          }
+        ],
+        "result_sum": {
+          "PRICE": 0,
+          "PRICE_VAT": 0,
+          "PRICE_MALL": 0,
+          "PRICE_MALL_VAT": 0,
+          "ORG_PRICE": 0,
+          "ORG_PRICE_VAT": 0
+        },
+        "query": "dbo.WSP_ACPT_ORDER_TMPL_PCS_PRICE '0101', 'LNG_KO', 'GSCLMGN', '<?xml version=\"1.0\"?>\n<PARAMS><DETAIL><MTRL_COD>RXMGP350</MTRL_COD><CUT_WDT>347</CUT_WDT><CUT_HGH>470</CUT_HGH><PRN_CNT/><ORD_CNT/><SID_GBN>SID_S</SID_GBN><TMPL_IDX/><BTN_TYPE/><PNS_DIGIT/><PNS_CNT/><PACK_PRN_CNT/><CUST_COD>15090019</CUST_COD></DETAIL><PCS><PCS_COD>THO_CUT</PCS_COD><PCS_DTL_COD>FRXXX</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS><PCS><PCS_COD>COT_DFT</PCS_COD><PCS_DTL_COD>TCBDS</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS></PARAMS>\n'",
+        "query_flexible": null
+      }
+    }
+  ]
+}

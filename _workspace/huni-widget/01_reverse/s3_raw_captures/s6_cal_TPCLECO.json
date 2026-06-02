@@ -1,0 +1,415 @@
+{
+  "product": "TPCLECO",
+  "capturedAt": "2026-06-02T23:03:24.228Z",
+  "schema": {
+    "mounted": true,
+    "nodeCount": 7,
+    "selects": [],
+    "numbers": [],
+    "radioGroups": [],
+    "textInputs": [],
+    "textSample": "주문 위젯을 생성할 수 없습니다 😱달력 사이즈 설정이 필요합니다"
+  },
+  "action": {
+    "ok": true,
+    "sizePicked": null,
+    "sizeName": null,
+    "qtySet": false,
+    "qtyName": null
+  },
+  "infoCalls": [
+    {
+      "rel": 1419,
+      "status": 200,
+      "respBody": {
+        "retCode": 200,
+        "msg": "",
+        "result": {
+          "product_option": {
+            "option": {
+              "pdt_cod": "TPCLECO",
+              "pdt_nme": "에코 캘린더",
+              "item_gbn": "vDigital_item",
+              "price_gbn": "tiered_price",
+              "skinInfo": {
+                "pageDirection": {
+                  "view_yn": "N",
+                  "title": "주문서 작성"
+                },
+                "paperSelect": {
+                  "view_yn": "Y",
+                  "title": "용지"
+                },
+                "sizeSelect": {
+                  "view_yn": "N",
+                  "title": "규격 (mm)"
+                },
+                "dosuSelect": {
+                  "view_yn": "Y",
+                  "title": "인쇄 도수"
+                },
+                "subjectGroup": {
+                  "view_yn": "Y",
+                  "title": "주문 제목"
+                },
+                "quantityGroup": {
+                  "view_yn": "Y",
+                  "title": {
+                    "orderCnt": "디자인 수 (건수)",
+                    "printCnt": "수량"
+                  }
+                }
+              },
+              "order_yn": "Y",
+              "cut_guide_yn": "N",
+              "able_paper_yn": "Y",
+              "price_table_yn": "Y",
+              "useTemplateDownload": "Y",
+              "useKoiEditor": "Y",
+              "useRPEditor": "N",
+              "usePDF": "Y",
+              "usePDFordCnt": "Y",
+              "useEditorOrdCnt": "N",
+              "koiAccessToken": "[JWT]",
+              "rpAccessToken": null,
+              "koi_template_resource_id": null,
+              "koiOption": []
+            }
+          },
+          "product_data": {
+            "pdt_base_info": [
+              {
+                "PDT_CD": "TPCLECO",
+                "PDT_NM": "에코 캘린더",
+                "WDT_HGH_GBN_YN": "N",
+                "PRN_YN": "Y",
+                "PDT_UNIT": "권",
+                "ORD_CNT_YN": "Y",
+                "NO_STD_ABL_YN": "N",
+                "MIN_CUT_WDT": "90.00",
+                "MIN_CUT_HGH": "90.00",
+                "MAX_CUT_WDT": "297.00",
+                "MAX_CUT_HGH": "190.00",
+                "DFT_CUT_WDT": "0.00",
+                "DFT_CUT_HGH": "0.00",
+                "CUT_MRG": "4.00",
+                "FIR_CNT": 1,
+                "INC": 1,
+                "INC_STEP": 10,
+                "NOTE": "",
+                "REAM_YN": "",
+                "SET_CNT": 1,
+                "SIZE_PCS_USE": "",
+                "MAX_PRN_CNT": 0,
+                "DAY_PRDC_PDT_YN": "N",
+                "DAY_ABLE_PRN_CNT": 0
+              }
+            ],
+            "pdt_mtrl_info": [
+              {
+                "MTRL_TYPE": "R",
+                "CLR_CD": "X",
+                "CLR_NM": "기본",
+                "PTT_CD": "ART",
+                "PTT_NM": "아트지",
+                "WGT_CD": "180",
+                "MTRL_CD": "RXART180",
+                "HIDE_YN": "N",
+                "HIDE_RSN": "",
+                "NOTE": "",
+                "SID_GBN": "",
+                "CLR_COD": "X",
+                "CLR_NME": "기본",
+                "PTT_COD": "ART",
+                "PTT_NME": "아트지",
+                "WGT_COD": "180",
+                "MTRL_COD": "RXART180",
+                "MTRL_NM": "아트지180g",
+                "GRP_OPTION_CD": "",
+                "CLR_OPTION_CD": "",
+                "PRT_HIDE_YN": null,
+                "BSN_YN": "N",
+                "CLR_HEX_CD": ""
+              },
+              {
+                "MTRL_TYPE": "R",
+                "CLR_CD": "X",
+                "CLR_NM": "기본",
+                "PTT_CD": "SNO",
+                "PTT_NM": "스노우",
+                "WGT_CD": "180",
+                "MTRL_CD": "RXSNO180",
+                "HIDE_YN": "N",
+                "HIDE_RSN": "",
+                "NOTE": "",
+                "SID_GBN": "",
+                "CLR_COD": "X",
+                "CLR_NME": "기본",
+                "PTT_COD": "SNO",
+                "PTT_NME": "스노우",
+                "WGT_COD": "180",
+                "MTRL_COD": "RXSNO180",
+                "MTRL_NM": "스노우지180g",
+                "GRP_OPTION_CD": "",
+                "CLR_OPTION_CD": "",
+                "PRT_HIDE_YN": null,
+                "BSN_YN": "N",
+                "CLR_HEX_CD": ""
+              },
+              {
+                "MTRL_TYPE": "R",
+                "CLR_CD": "X",
+                "CLR_NM": "기본",
+                "PTT_CD": "RAU",
+                "PTT_NM": "랑데뷰울트라화이트",
+                "WGT_CD": "190",
+                "MTRL_CD": "RXRAU190",
+                "HIDE_YN": "N",
+                "HIDE_RSN": "",
+                "NOTE": "",
+                "SID_GBN": "",
+                "CLR_COD": "X",
+                "CLR_NME": "기본",
+                "PTT_COD": "RAU",
+                "PTT_NME": "랑데뷰울트라화이트",
+                "WGT_COD": "190",
+                "MTRL_COD": "RXRAU190",
+                "MTRL_NM": "랑데뷰울트라화이트190g",
+                "GRP_OPTION_CD": "",
+                "CLR_OPTION_CD": "",
+                "PRT_HIDE_YN": null,
+                "BSN_YN": "N",
+                "CLR_HEX_CD": ""
+              },
+              {
+                "MTRL_TYPE": "R",
+                "CLR_CD": "X",
+                "CLR_NM": "기본",
+                "PTT_CD": "RAU",
+                "PTT_NM": "랑데뷰울트라화이트",
+                "WGT_CD": "210",
+                "MTRL_CD": "RXRAU210",
+                "HIDE_YN": "N",
+                "HIDE_RSN": "",
+                "NOTE": "",
+                "SID_GBN": "",
+                "CLR_COD": "X",
+                "CLR_NME": "기본",
+                "PTT_COD": "RAU",
+                "PTT_NME": "랑데뷰울트라화이트",
+                "WGT_COD": "210",
+                "MTRL_COD": "RXRAU210",
+                "MTRL_NM": "랑데뷰울트라화이트210g",
+                "GRP_OPTION_CD": "",
+                "CLR_OPTION_CD": "",
+                "PRT_HIDE_YN": null,
+                "BSN_YN": "N",
+                "CLR_HEX_CD": ""
+              }
+            ],
+            "pdt_size_info": [],
+            "pdt_dosu_info": [
+              {
+                "COD": "SID_S",
+                "COD_NME": "단면",
+                "PRN_CLR_CNT": 4
+              },
+              {
+                "COD": "SID_D",
+                "COD_NME": "양면",
+                "PRN_CLR_CNT": 8
+              }
+            ],
+            "pdt_prn_cnt_info": [
+              {
+                "DIV_CD": "",
+                "REAM_CNT": "",
+                "PRN_CNT": "",
+                "DFT_YN": "Y",
+                "DFT_PRN_CNT": 2,
+                "FIR_CNT": 1,
+                "INC_CNT": 1,
+                "INC_STEP": 10,
+                "MIN_PRN_CNT": 2,
+                "MIN_INN_PAGE": 2,
+                "MAX_INN_PAGE": 200,
+                "STEP_INN_PAGE": 1,
+                "MAX_THCK": "23.00",
+                "INN_MAX_WGT": 1000,
+                "COV_MIN_WGT": 200
+              }
+            ],
+            "pdt_prn_cnt_info_add": [],
+            "pdt_exp_prn_cnt_info": null,
+            "pdt_pcs_info": [
+              {
+                "PCS_CD": "CUT_DFT",
+                "PCS_GRP_NM": "재단",
+                "PCS_DTL_CD": "DFXXX",
+                "PCS_DTL_NM": "재단",
+                "WEB_PCS_DTL_GRP": "CUT_DFT_DF",
+                "WEB_PCS_DTL_GRP_NM": "",
+                "WRK_WDT": "0.00",
+                "WRK_HGH": "0.00",
+                "CUT_WDT": "0.00",
+                "CUT_HGH": "0.00",
+                "VIEW_YN": "N",
+                "HIDE_YN": "N",
+                "NOTICE": [],
+                "ESN_YN": "Y",
+                "NOTE": "",
+                "MTRL_CD": "",
+                "MTRL_COD": "",
+                "DIV_SEQ": 0,
+                "SUB_MTRL_YN": "N",
+                "STICKER_TYPE": null,
+                "QTY_INPUT_YN": "N",
+                "PCS_COD": "CUT_DFT",
+                "PCS_GRP_NME": "재단",
+                "PCS_DTL_COD": "DFXXX",
+                "PCS_DTL_NME": "재단",
+                "PCS_GROUP_NME": "재단"
+              },
+              {
+                "PCS_CD": "RIN_DFT",
+                "PCS_GRP_NM": "링제본",
+                "PCS_DTL_CD": "BPTOP",
+                "PCS_DTL_NM": "상철",
+                "WEB_PCS_DTL_GRP": "RIN_DFT_BP",
+                "WEB_PCS_DTL_GRP_NM": "",
+                "WRK_WDT": "0.00",
+                "WRK_HGH": "0.00",
+                "CUT_WDT": "0.00",
+                "CUT_HGH": "0.00",
+                "VIEW_YN": "N",
+                "HIDE_YN": "N",
+                "NOTICE": [],
+                "ESN_YN": "Y",
+                "NOTE": "",
+                "MTRL_CD": "",
+                "MTRL_COD": "",
+                "DIV_SEQ": 0,
+                "SUB_MTRL_YN": "N",
+                "STICKER_TYPE": null,
+                "QTY_INPUT_YN": "N",
+                "PCS_COD": "RIN_DFT",
+                "PCS_GRP_NME": "링제본",
+                "PCS_DTL_COD": "BPTOP",
+                "PCS_DTL_NME": "상철",
+                "PCS_GROUP_NME": "상철"
+              },
+              {
+                "PCS_CD": "PAK_ETC",
+                "PCS_GRP_NM": "포장",
+                "PCS_DTL_CD": "PK018",
+                "PCS_DTL_NM": "에코캘린더 OPP포장",
+                "WEB_PCS_DTL_GRP": "PAK_ETC_PK",
+                "WEB_PCS_DTL_GRP_NM": "",
+                "WRK_WDT": "0.00",
+                "WRK_HGH": "0.00",
+                "CUT_WDT": "0.00",
+                "CUT_HGH": "0.00",
+                "VIEW_YN": "Y",
+                "HIDE_YN": "N",
+                "NOTICE": [],
+                "ESN_YN": "N",
+                "NOTE": "",
+                "MTRL_CD": "",
+                "MTRL_COD": "",
+                "DIV_SEQ": 0,
+                "SUB_MTRL_YN": "N",
+                "STICKER_TYPE": null,
+                "QTY_INPUT_YN": "N",
+                "PCS_COD": "PAK_ETC",
+                "PCS_GRP_NME": "포장",
+                "PCS_DTL_COD": "PK018",
+                "PCS_DTL_NME": "에코캘린더 OPP포장",
+                "PCS_GROUP_NME": "에코캘린더 OPP포장"
+              }
+            ],
+            "pdt_add_pcs_info": null,
+            "pdt_disable_pcs_info": [
+              {
+                "MTRL_CD": "RXART180",
+                "PCS_CD": "LAM_DFT",
+                "PCS_DTL_CD": null,
+                "NOTE": null
+              },
+              {
+                "MTRL_CD": "RXRAU190",
+                "PCS_CD": "LAM_DFT",
+                "PCS_DTL_CD": null,
+                "NOTE": null
+              },
+              {
+                "MTRL_CD": "RXRAU190",
+                "PCS_CD": "SCO_GLD",
+                "PCS_DTL_CD": null,
+                "NOTE": null
+              },
+              {
+                "MTRL_CD": "RXRAU190",
+                "PCS_CD": "SCO_SLV",
+                "PCS_DTL_CD": null,
+                "NOTE": null
+              },
+              {
+                "MTRL_CD": "RXRAU210",
+                "PCS_CD": "SCO_GLD",
+                "PCS_DTL_CD": null,
+                "NOTE": null
+              },
+              {
+                "MTRL_CD": "RXRAU210",
+                "PCS_CD": "SCO_SLV",
+                "PCS_DTL_CD": null,
+                "NOTE": null
+              },
+              {
+                "MTRL_CD": "RXSNO180",
+                "PCS_CD": "LAM_DFT",
+                "PCS_DTL_CD": null,
+                "NOTE": null
+              }
+            ],
+            "pdt_add_info": [
+              [],
+              [
+                {
+                  "ATTB_CD": "RIN_BLK",
+                  "ATTB_NM": "검정색",
+                  "PCS_CD": "RIN_DFT"
+                },
+                {
+                  "ATTB_CD": "RIN_WHT",
+                  "ATTB_NM": "흰색",
+                  "PCS_CD": "RIN_DFT"
+                },
+                {
+                  "ATTB_CD": "RIN_GLD",
+                  "ATTB_NM": "금색",
+                  "PCS_CD": "RIN_DFT"
+                },
+                {
+                  "ATTB_CD": "RIN_SLV",
+                  "ATTB_NM": "은색",
+                  "PCS_CD": "RIN_DFT"
+                }
+              ]
+            ]
+          },
+          "member_info": {
+            "mb_id": "lojesus75",
+            "mb_cust_cod": "15090019",
+            "discount_cust_yn": "N",
+            "mall_cust_yn": "N",
+            "bsn_yn": "N",
+            "blk_con": "N",
+            "edicusUserID": "7Iug7Jqw7KeEbG9qZXN1czc1"
+          }
+        }
+      }
+    }
+  ],
+  "priceCalls": []
+}
