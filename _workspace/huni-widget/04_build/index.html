@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Huni Widget — Dev Harness</title>
+    <!-- 호스트 페이지가 의도적으로 공격적 CSS 를 둬도 위젯이 격리되는지 확인 -->
+    <style>
+      body { font-size: 12px; font-family: Times; background: #eee; }
+      button { background: red; border-radius: 9999px; }
+    </style>
+  </head>
+  <body>
+    <h1>후니 위젯 격리 테스트 (호스트 CSS: 12px Times, 빨강 둥근 버튼)</h1>
+    <div id="host" style="max-width: 560px; margin: 24px auto;"></div>
+    <script type="module">
+      import { init } from '/src/widget-loader/index.ts';
+      init(document.getElementById('host'), { productCode: 'PRBKYPR' });
+    </script>
+  </body>
+</html>

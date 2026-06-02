@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Shadow DOM :host 규칙 (shadow-dom-strategy §3·4, bp-react-shadow-dom §3).
+ * 이 CSS 전체는 Vite ?inline 으로 문자열 import → CSSStyleSheet.replaceSync →
+ * shadowRoot.adoptedStyleSheets 로 주입된다 (호스트로 누수 0).
+ */
+:host {
+  /* DESIGN §2 디자인 토큰 — Shadow 내부 전체 상속 */
+  --primary: #553886;
+  --primary-dark: #3B2573;
+  --text-label: #424242;
+  --text-body: #616161;
+  --text-muted: #979797;
+  --border-default: #CACACA;
+  --bg-section: #F5F5F5;
+  --badge-best: #3B2573;
+
+  /* shadcn/Radix 호환 토큰 (필요 시 컴포넌트가 참조) */
+  --background: #ffffff;
+  --foreground: #424242;
+
+  /*
+   * rem/line-height 상속 함정 대응 (bp-react-shadow-dom §3 "rem/line-height 상속 함정").
+   * 호스트 font-size 가 12px 이면 위젯 rem 이 전부 틀어지므로 컨테이너 기준값 명시 고정.
+   */
+  font-size: 16px;
+  line-height: 1.5;
+
+  /* DESIGN [CRITICAL]: Noto Sans ONLY, 자간 -5% 전역 */
+  font-family: 'Noto Sans KR', 'Noto Sans', sans-serif;
+  letter-spacing: -0.05em;
+
+  color: var(--text-label);
+
+  /* 호스트 페이지 스타일 침투 차단 보강 (display 만 복구, all:initial 은 자식에 과함) */
+  display: block;
+  box-sizing: border-box;
+}
+
+:host *,
+:host *::before,
+:host *::after {
+  box-sizing: border-box;
+}
