@@ -24,7 +24,7 @@ function SideInput({ sideDef }: { sideDef: ProductSide }) {
       type="button"
       onClick={() => void openEditor(sideDef.key)}
       className={cn(
-        'flex h-[50px] items-center justify-center bg-white px-4 text-[14px] transition-colors',
+        'flex h-[50px] items-center justify-center rounded-[4px] bg-white px-4 text-[14px] transition-colors',
         done
           ? 'border-2 border-[#553886] text-[#553886]'
           : 'border border-[#CACACA] text-[#424242] hover:border-[#553886]',

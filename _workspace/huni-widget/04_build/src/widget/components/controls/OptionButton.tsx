@@ -28,7 +28,7 @@ function OptionButtonBase({ group, value, onChange, width = 155 }: Props) {
             onClick={() => !disabled && onChange(v.id)}
             style={{ width, height: 50 }}
             className={cn(
-              'flex items-center justify-center text-[14px] font-semibold transition-colors',
+              'flex items-center justify-center rounded-[4px] text-[14px] font-semibold transition-colors',
               'border bg-white',
               disabled
                 ? 'border-[#CACACA] bg-[#F5F5F5] text-[#CACACA] cursor-not-allowed'

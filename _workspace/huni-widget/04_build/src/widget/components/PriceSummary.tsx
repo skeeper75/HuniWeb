@@ -38,7 +38,7 @@ export function PriceSummary() {
         </div>
       )}
       <div className="mt-1 flex items-center justify-between">
-        <span className="text-[14px] font-medium text-[#424242]">합계</span>
+        <span className="text-[16px] font-semibold text-[#1E1E1E]">합계</span>
         <span className="text-[24px] font-semibold text-[#553886]">{won(price.finalPrice)}</span>
       </div>
     </div>

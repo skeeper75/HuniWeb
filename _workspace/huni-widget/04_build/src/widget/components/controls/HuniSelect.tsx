@@ -29,7 +29,7 @@ function HuniSelectBase({ group, value, onChange, width = 348 }: Props) {
           aria-haspopup="listbox"
           style={{ width, height: 50 }}
           className={cn(
-            'flex items-center justify-between bg-white px-4 text-[14px]',
+            'flex items-center justify-between rounded-[4px] bg-white px-4 text-[14px]',
             'border',
             open ? 'border-[#553886]' : 'border-[#CACACA]',
             selected ? 'text-[#424242]' : 'text-[#979797]',
@@ -45,8 +45,8 @@ function HuniSelectBase({ group, value, onChange, width = 348 }: Props) {
           align="start"
           sideOffset={4}
           role="listbox"
-          className="z-50 max-h-[280px] overflow-y-auto border border-[#CACACA] bg-white shadow-lg"
-          style={{ width }}
+          className="z-50 max-h-[280px] overflow-y-auto rounded-b-[4px] border border-[#CACACA] bg-white"
+          style={{ width, boxShadow: '0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1)' }}
         >
           {group.values.map((v) => {
             const isSel = v.id === selectedId;

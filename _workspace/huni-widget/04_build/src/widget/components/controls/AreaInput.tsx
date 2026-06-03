@@ -29,7 +29,7 @@ export function AreaInput({ spec, value, onChange }: Props) {
           value={pair[0]}
           onChange={(e) => setAxis(0, e.target.value)}
           placeholder="가로"
-          className="h-[50px] w-[140px] border border-[#CACACA] bg-white px-3 text-[14px] text-[#424242] outline-none placeholder:text-[#CACACA] focus:border-[#553886]"
+          className="h-[50px] w-[140px] rounded-[4px] border border-[#CACACA] bg-white px-3 text-[14px] text-[#424242] outline-none placeholder:text-[#CACACA] focus:border-[#553886]"
         />
         <span className="text-[14px] text-[#424242]">X</span>
         <input
@@ -39,7 +39,7 @@ export function AreaInput({ spec, value, onChange }: Props) {
           value={pair[1]}
           onChange={(e) => setAxis(1, e.target.value)}
           placeholder="세로"
-          className="h-[50px] w-[140px] border border-[#CACACA] bg-white px-3 text-[14px] text-[#424242] outline-none placeholder:text-[#CACACA] focus:border-[#553886]"
+          className="h-[50px] w-[140px] rounded-[4px] border border-[#CACACA] bg-white px-3 text-[14px] text-[#424242] outline-none placeholder:text-[#CACACA] focus:border-[#553886]"
         />
       </div>
       {spec.helpText && <p className="mt-1 text-[11px] text-[#979797]">{spec.helpText}</p>}

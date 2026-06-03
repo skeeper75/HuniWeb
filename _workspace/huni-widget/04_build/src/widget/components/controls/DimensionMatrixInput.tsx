@@ -65,7 +65,7 @@ export function DimensionMatrixInput({
               onClick={() => !disabled && onSelectPreset(v.id)}
               style={{ width: 155, height: 50 }}
               className={cn(
-                'flex items-center justify-center text-[14px] font-semibold transition-colors',
+                'flex items-center justify-center rounded-[4px] text-[14px] font-semibold transition-colors',
                 'border bg-white',
                 disabled
                   ? 'border-[#CACACA] bg-[#F5F5F5] text-[#CACACA] cursor-not-allowed'
@@ -91,7 +91,7 @@ export function DimensionMatrixInput({
               value={w === 0 ? '' : w}
               onChange={(e) => setW(e.target.value)}
               placeholder="가로"
-              className="h-[50px] w-[140px] border border-[#CACACA] bg-white px-3 text-[14px] text-[#424242] outline-none placeholder:text-[#CACACA] focus:border-[#553886]"
+              className="h-[50px] w-[140px] rounded-[4px] border border-[#CACACA] bg-white px-3 text-[14px] text-[#424242] outline-none placeholder:text-[#CACACA] focus:border-[#553886]"
             />
             <span className="text-[14px] text-[#424242]">X</span>
             <input
@@ -101,7 +101,7 @@ export function DimensionMatrixInput({
               value={h === 0 ? '' : h}
               onChange={(e) => setH(e.target.value)}
               placeholder={spec?.axis2?.label ?? '세로'}
-              className="h-[50px] w-[140px] border border-[#CACACA] bg-white px-3 text-[14px] text-[#424242] outline-none placeholder:text-[#CACACA] focus:border-[#553886]"
+              className="h-[50px] w-[140px] rounded-[4px] border border-[#CACACA] bg-white px-3 text-[14px] text-[#424242] outline-none placeholder:text-[#CACACA] focus:border-[#553886]"
             />
             <span className="text-[14px] text-[#979797]">mm</span>
           </div>
