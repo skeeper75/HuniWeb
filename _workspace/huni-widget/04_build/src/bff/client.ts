@@ -8,6 +8,7 @@ import type {
   NormalizedPresigned,
   NormalizedEditorConfig,
   NormalizedCartHandoff,
+  NormalizedOrderReadiness,
   SideKey,
 } from '@/contract';
 
@@ -17,5 +18,7 @@ export interface BffClient {
   presigned(req: NormalizedPresignedRequest): Promise<NormalizedPresigned>; // POST /presigned
   fileMeta(storedFileName: string): Promise<{ pageCount?: number; sizeBytes?: number }>; // POST /file-meta
   editorConfig(code: string, side: SideKey): Promise<NormalizedEditorConfig>; // POST /editor-config
+  // L-D3-1: 서버 주문가능 판정(isReadyToOrder). goto-cart 핸드오프 전 게이트.
+  isReadyToOrder(payload: NormalizedCartHandoff): Promise<NormalizedOrderReadiness>; // POST /order-readiness
   cartHandoff(payload: NormalizedCartHandoff): Promise<{ ok: boolean; redirectUrl?: string }>; // POST /cart-handoff
 }

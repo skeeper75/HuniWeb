@@ -17,6 +17,7 @@ function makeBff(): BffClient {
     },
     fileMeta: async () => ({ pageCount: 8, sizeBytes: 1234 }),
     editorConfig: (c, s) => base.editorConfig(c, s),
+    isReadyToOrder: (p) => base.isReadyToOrder(p),
     cartHandoff: (p) => base.cartHandoff(p),
   };
 }

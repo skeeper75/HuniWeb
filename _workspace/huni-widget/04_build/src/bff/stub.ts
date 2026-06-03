@@ -15,6 +15,7 @@ import type {
   NormalizedPresigned,
   NormalizedEditorConfig,
   NormalizedCartHandoff,
+  NormalizedOrderReadiness,
   SideKey,
 } from '@/contract';
 
@@ -38,6 +39,9 @@ export class StubBffClient implements BffClient {
   }
   editorConfig(code: string, side: SideKey): Promise<NormalizedEditorConfig> {
     return this.adapter.editor.getConfig(code, side);
+  }
+  isReadyToOrder(payload: NormalizedCartHandoff): Promise<NormalizedOrderReadiness> {
+    return this.adapter.cart.isReadyToOrder(payload);
   }
   cartHandoff(payload: NormalizedCartHandoff): Promise<{ ok: boolean; redirectUrl?: string }> {
     return this.adapter.cart.handoff(payload);
