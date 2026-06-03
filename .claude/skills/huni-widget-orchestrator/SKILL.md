@@ -2,15 +2,15 @@
 name: huni-widget-orchestrator
 description: >
   후니프린팅 인쇄 자동견적 위젯 구현 하네스 오케스트레이터. RedPrinting 위젯 역공학 보강(widget_monitor 라이브 테스트베드 활용) → 동작 구조 분석 + 국내외 베스트프랙티스 리서치 → 위젯 개발 요소 상세 명세 → React-in-Shadow-DOM 위젯 구현 → 경계면 교차 QA → 후니 시각재현 정합 까지 7인 에이전트(reverse-engineer/runtime-analyst/researcher/architect/builder/qa/design-fidelity) 파이프라인으로 수행한다.
-  '후니 위젯 구현', '인쇄 자동견적 위젯', '위젯 하네스 실행', 'huni-widget', '역공학 보강', '위젯 동작 분석', '위젯 명세 작성', '위젯 빌드', '위젯 QA', '위젯 다시 구현', '위젯 하네스 재실행', '위젯 업데이트', '특정 단계만 재실행', '상품 확대', '신규 상품 추가', '캘린더/스티커/굿즈 확대', '확대 스테이지', '라이브 캡처 선행', '시각재현', '시각 정합', '디자인 정합', 'Figma 시각재현', '후니 스킨 입히기', 'DESIGN.md 정합', '스크린샷 diff' 요청 시 반드시 사용. 단순 질문은 직접 응답.
+  '후니 위젯 구현', '인쇄 자동견적 위젯', '위젯 하네스 실행', 'huni-widget', '역공학 보강', '위젯 동작 분석', '위젯 명세 작성', '위젯 빌드', '위젯 QA', '위젯 다시 구현', '위젯 하네스 재실행', '위젯 업데이트', '특정 단계만 재실행', '상품 확대', '신규 상품 추가', '캘린더/스티커/굿즈 확대', '확대 스테이지', '라이브 캡처 선행', '시각재현', '시각 정합', '디자인 정합', 'Figma 시각재현', '후니 스킨 입히기', 'DESIGN.md 정합', '스크린샷 diff', '코드 정합', '구조 정합', '역공학 코드 검증', '전 상품 정합', '팀으로 재검증', '코드 레벨 정합', '독립 재검증', '보정 웨이브', '갭 지도' 요청 시 반드시 사용. 단순 질문은 직접 응답.
 license: Apache-2.0
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash, Agent, AskUserQuestion, TodoWrite
 metadata:
-  version: "1.1.0"
+  version: "1.3.0"
   category: "domain"
   status: "active"
   updated: "2026-06-03"
-  tags: "huni, widget, redprinting, shadow-dom, edicus, pipeline, agent-team, reverse-engineering"
+  tags: "huni, widget, redprinting, shadow-dom, edicus, pipeline, agent-team, reverse-engineering, code-parity, independent-verification, team-crossverify"
 ---
 
 # Huni Widget — 구현 하네스 오케스트레이터
@@ -115,6 +115,55 @@ test -f .env.local && echo ".env.local OK" || echo ".env.local MISSING"
 4. **hw-qa 비교 QA** — 경계면 교차 비교(캡처↔구현 round-trip, 어댑터↔계약, INV-3 git 증명, 가드). GO/NO-GO 판정. 정직성: 미검증·생략 항목은 은폐 말고 명시.
 
 매 스테이지 후 산출물은 커밋 병행하고 `HANDOFF.md`·CLAUDE.md 변경이력을 갱신한다. **커밋 전 비밀값 스캔**: `grep -rlE 'eyJ...\.eyJ...\.' _workspace/huni-widget/` 0건 확인(캡처 respBody JWT 누출 방지).
+
+## 코드 레벨 구조 정합 검증축 (S0~S3 — 캡처 표본을 넘어선 권위)
+
+캡처 표본(라이브) 동등성은 필요조건이나 충분치 않다. 표본이 단순 케이스만 쓰면 구조 결함을 못 본다. 역공학 소스코드(`docs/reversing/red_reverse_engineer/03_deobfuscated/` 4모듈: app_api/widget_sdk/components/editor_sdk)를 **권위 명세**로 삼아 신규 구현과 책임·로직·분기 재현 동등(라인 답습 아님)을 전수 대조한다. "전 상품"은 캡처 표본이 아니라 **코드가 분기하는 모든 경로**.
+
+| 단계 | 내용 | 산출 |
+|------|------|------|
+| S0 | 역공학 4모듈 구조 전수 지도(책임·상품분기 인벤토리) | `07_parity/red-code-map-*`, `red-code-structure-map` |
+| S1 | 도메인별 대응 매트릭스 → 갭 전체지도(완전재현/부분/누락/상이) | `parity-matrix-*`, `parity-gap-map` |
+| S2 | 전 상품 분기 커버리지(itemGroup×컴포넌트 vs 우리 커버) | `parity-matrix-S2` |
+| S3 | 갭 보정(리스크 오름차순 웨이브) + 독립 재검증 | 보정 + `*-verification` |
+
+### 독립 재검증 게이트 [HARD]
+모든 보정 라운드: builder 보정 → **hw-qa 독립 재검증(직접 재실행·캡처 field-for-field 대조·vite-node probe·실렌더) → GO**. builder 자기보고는 GO 근거로 불충분. (실증: 자기테스트가 통과시킨 F-2 직렬화 shape·C-A/C-B 잠복부채·G-1 ATTB 누락을 독립검증이 적발.)
+
+### 검증 메타 원칙 (팀 교차검증 도출) [HARD]
+1. **분기 도달 증명**: "RESOLVED" 선언 전, 그 분기를 실제 traverse하는 fixture/probe 존재를 명시. 없으면 "PARTIAL-stub(미도달)"로 재분류. (주석+타입+테스트통과만으론 타우톨로지.)
+2. **field-for-field 직렬화 대조**: 어댑터 출력 reqBody를 라이브 캡처와 값 단위 단언(componentType/groupId 단언만으론 불충분 — fixture가 HTTP 우회 시 shape 결함 침묵).
+3. **왕복·전이 양방향**: disable 단방향이 아닌 disable→re-enable 복원까지.
+4. **상품별 분기 vs PCS전역**: Red의 product-keyed 규칙(MATERIAL_PCS_CODE_MAP·roundingConfigMap·accFilterConfigMap)을 어댑터가 PCS전역으로 평면화하지 않았는지.
+
+### 실행 모드: 팀 vs 서브 [HARD]
+- **에이전트 팀(`TeamCreate`)**: 다중 렌즈 분석·교차 재검증 — 발견 공유·상충 토론·누락 보완·자가 오탐 정정이 품질을 높이는 단계. 예: 코드정합 교차검증 3렌즈(authority/integration/assumption, `SendMessage` 자체조율). 단 `.claude` 파일 수정은 untracked라 worktree 불가 → 직접/foreground.
+- **서브 에이전트**: 단일 회의적 독립 검증(hw-qa), 단일 테스트베드 공유 순차 캡처, 같은 트리 write+test 반복 보정(worktree node_modules/머지 비용 회피).
+- 도구를 작업 성격에 맞춘다: **발견=팀, 단일 독립검증·순차 보정=서브.**
+
+### HARD 도메인·불변
+- **RedPrinting PRICE=0 불가**: 위젯이 PRICE=0 받으면 항상 우리측 결함 신호(세션/필드/규격/엔드포인트)이지 Red 정상반환 아님. 0=격리 대상이 아니라 진단·수정 신호. `mapPriceResponse`는 0 시 `ok:false` + 명시 진단 사유(`priceUnavailableReason`; throw는 미캡처 fixture 보존 위해 회피). 가격 동등성은 **PRICE>0 실측 기준선으로만** 검증.
+- **INV 완화 조건**: 위젯 코어 0줄은 확대에 적용. 버그·구조결함 보정은 정당 예외 — 코어 최소 + 계약 additive-optional + `git diff --stat` 전수 명시·1줄 정당화.
+- **신규 leaf 사전정당**: 신규 컨트롤은 사전 정당화(왜 기존 14종으로 불가) 없이 금지. 플래그 분기(`group.multiple`) 우선, 신규 dispatcher case 회피.
+- **커밋 완결성**: 커밋 후 HEAD 상태에서 게이트(tsc/vitest/build) 재확인. 워킹트리 통과 ≠ 커밋트리 통과(예: isReadyToOrder BFF 배선 누락).
+
+## 실행 지침 (사용자용)
+
+**트리거 표현**: "위젯 하네스 실행", "코드 정합/구조 정합", "전 상품 정합", "팀으로 재검증", "독립 재검증", "보정 웨이브", "확대 스테이지", "시각재현" 등(description 키워드). 단순 질문은 직접 응답.
+
+**입력 자산(read-only)**: `docs/reversing/red_reverse_engineer/`(역공학 4모듈), `raw/widget_monitor/local/`(라이브 테스트베드, `node server.js`→:3001), `_workspace/huni-widget/04_build`(구현), `07_parity/`(정합 산출), `.env.local`(RP/Edicus 자격).
+
+**단계별 지시 예시 (사용자가 이렇게 말하면 됨)**:
+- 동등성 검증: "후니 위젯이 Red와 같이 동작하는지 검증" → 캡처 게이트 + 코드정합 S0~S3
+- 코드 정합: "역공학 코드 기준 전 상품 정합 확인" → S0 지도부터 단계별
+- 보정: "발견된 갭 보정" → 리스크 오름차순 웨이브, 각 웨이브 후 독립 재검증
+- 팀 교차검증: "팀으로 재검증해서 놓친 것 찾아" → `TeamCreate` 다중 렌즈
+- 확대: "캘린더/스티커 확대" → 확대 스테이지 루프(캡처 선행 판단)
+- 부분: "S3 보정만" / "특정 단계만 재실행" → Phase 0 부분 재실행 판정
+
+**검증 게이트 호출**: 보정/구현 후 "독립 재검증" 명시 요청 → hw-qa가 자기보고 불신·직접 재실행으로 GO/NO-GO. 기준: tsc 0 / vitest green / build OK / `git diff` 코어 최소 / 캡처 field 대조 / 왕복 복원.
+
+**실행 모드 선택**: 다중 렌즈 분석·교차검증은 "팀으로", 단일 검증·순차 보정은 기본(서브). 강제 시 명시. 팀 모델은 `workflow.yaml` default_model: opus(추론집약 하네스).
 
 ## 에러 핸들링
 
