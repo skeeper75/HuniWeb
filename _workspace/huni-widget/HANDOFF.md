@@ -1,7 +1,7 @@
 # Huni-Widget 하네스 — 세션 핸드오프
 
-**갱신:** 2026-06-04 (2차 팀 교차검증 + 보정 Wave1 세션) | **마지막 커밋:** `3844eb6`
-**HEAD 게이트:** `cd _workspace/huni-widget/04_build && npx tsc --noEmit && npx vitest run && npx vite build` → tsc 0 / **vitest 149** / build OK
+**갱신:** 2026-06-04 (2차 팀 교차검증 + 보정 Wave1·W2-a 세션) | **마지막 커밋:** `2bcb480`
+**HEAD 게이트:** `cd _workspace/huni-widget/04_build && npx tsc --noEmit && npx vitest run && npx vite build` → tsc 0 / **vitest 150** / build OK
 
 다음 세션이 이어받기 위한 인수인계. 상세 결정은 auto-memory(`MEMORY.md`)·`07_parity/` 참조.
 
@@ -29,7 +29,8 @@
 
 > **이번 세션 완료:** 2차 팀 교차검증(3렌즈) + 보정 Wave1(G-1 ATTB 권위 날조 정정, 커밋 3844eb6). 상세 [[crossverify-round2-findings]].
 > **2차 교차검증 신규 이연(우선순위 반영):**
-> - **W2-a** [구조]: SUB_MTR 이중의미 평면화(A-2 발현) — QUANTITY_ECHO_PCS Set→엔트리-shape(다종 MTRL_CD·ATTB_CD None→ATTB=""). ACPDSTD 현 "50" 오echo(권위 deob_07:2162=""). hw-builder 신중구현 대기. INN_DFT 조건부(INNON=1/SKSTU='')도 동일 패턴.
+> - ~~**W2-a** SUB_MTR 이중의미 평면화~~ ✅ **완료**(커밋 2bcb480, hw-qa 독립재검증 GO): isMaterialMultiSubMtr discriminator(엔트리-shape)로 ACPDSTD ATTB=""·AIPPCUT echo 보존. 어댑터 전용, INV-3 코어 0줄.
+> - **W2-b** [구조, 잔여]: INN_DFT 조건부(INNON=1/SKSTU="") — discriminator 축이 PCS_DTL_COD라 W2-a와 상이 + INN_DFT fixture 0개. 캡처/fixture 확보 후 보정(현 quantity-echo 보존).
 > - **D-1**: WRK_MTR/DIR_MTR ATTB scaling 미검증 — qty=1 캡처가 ORD_CNT/상수/material-qty 구분 불가. §3-2 PRICE>0 재캡처와 묶어 qty>1 캡처로 해소.
 > - **G-5**: 의류(clothes2025) apparel 배타삼항이 pdt_pcs_info(DIR_MTR 필수 가격축) 드롭(red-adapter.ts:83-85). size_color 비보상. CLSTSHS PRICE=0로 미발현 → 의류 PRICE>0 캡처 선행, additive 삼항 처방. 컨버전 게이트.
 > - **G-INT-0**: 런타임 price 경로가 reqBody 미직렬화(fixture 정적룩업) → shape 결함 침묵(F-2 구조 잔존). 실 HTTP BFF 배선(컨버전)까지 회귀가드 부재 — 인식 필요.
