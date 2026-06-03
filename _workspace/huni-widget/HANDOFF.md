@@ -1,144 +1,87 @@
 # Huni-Widget 하네스 — 세션 핸드오프
 
-**작성:** 2026-06-03 (S6 캘린더 GO 갱신) | **마지막 커밋:** `baeea1d` (S6 캘린더 비교 QA GO)
+**갱신:** 2026-06-03 (코드 레벨 정합 + 팀 교차검증 + 하네스 진화 세션) | **마지막 커밋:** `6ff1303`
+**HEAD 게이트:** `cd _workspace/huni-widget/04_build && npx tsc --noEmit && npx vitest run && npx vite build` → tsc 0 / **vitest 148** / build OK
 
-다음 세션이 이어받기 위한 인수인계 문서. 상세 결정은 auto-memory(`MEMORY.md`) 참조.
+다음 세션이 이어받기 위한 인수인계. 상세 결정은 auto-memory(`MEMORY.md`)·`07_parity/` 참조.
 
 ---
 
 ## 1. 한 줄 요약
 
-후니 인쇄 자동견적 위젯을 **역공학 보강 → 구현**으로 만드는 하네스. 현재 **책자(S0)·디지털인쇄(S1)·스티커(S2)·포스터/실사(S3 NC-1)·아크릴(S4)·굿즈/파우치(S5) 구현+비교QA GO 완료**. 두 핵심 가설 실증: ① "코드 0변경 상품 확대"(S1·S2·S4·**S5**, `src/widget/**` 0줄 git diff 증명) ② **"신규 componentType도 코어 재작성 0"**(S3 NC-1 = 첫 코어 터치였으나 store `dimsFromSelection` if-분기 1개만; S4 NC-2·**S5 NC-3 둘 다 "신규 불요"로 흡수** — 디자인 시스템 v5.0.0 근거 + 실측 SKU에 해당 컴포넌트 부재).
+후니 인쇄 자동견적 위젯을 **역공학 보강 → 구현 → 검증** 으로 만드는 하네스. S0~S6 상품 확대 완료 후, 이번 세션에 **검증 깊이를 3단계 격상**: ① Red 라이브 동등성 게이트 GO → ② **코드 레벨 구조 정합(S0~S3, 역공학 4모듈 권위 대조)** → ③ **에이전트 팀 교차검증(서브가 놓친 5갭 발견·보정)**. 코드 정합·보정 전부 hw-qa 독립 재검증 GO. **위젯은 Red와 책임·로직·분기 재현 동등**임이 코드 레벨로 입증·보정됨. 다음 단계는 **후니 컨버전**(어댑터 데이터소스 교체).
 
-**S5 핵심 성과(ff33d26):** NC-3 `image-option-selector`(64×64) **신규 불요 확정**(DS v5.0.0에 부재→50×50 ImageChip 통합 + 굿즈/파우치 실측 SKU에 색상셀렉터 부재). 구현은 **위젯 코어 완전 0줄(S4 동급, NC-1보다 강함)** — 계약 `printCount?` optional 1필드 + 어댑터(`serializeRedPriceRequest`: quantity→ORD_CNT/printCount→PRN_CNT 분리 + `quantity≥1&&printCount≥1` 가드)만. 파우치 tmpl_price 실가(2,850,000) fixture화. vitest 54→65 green.
+## 2. 이번 세션 성과 (커밋 완료)
 
-**S5-M1 라이브 검증(981e03f):** 말랑/문구 7 SKU 수량 스윕 → **Red 굿즈/문구 자동견적엔 수량할인(TieredDiscount) 부재 확정**. `tiered_price` gbn은 수량 tier가 아니라 규격/자재 룩업 방식(GSTGMIC tiered인데 선형이 증거). → 후니 TieredDiscount는 `t_dsc_*` fixture로 독립정의(Red 정합 금지 부합).
+| 작업 | 커밋 |
+|------|------|
+| 종합 동등성 게이트 GO (Red 라이브 4차원×4모델, F-1/F-2 봉인) | `5e98bed` |
+| 코드 레벨 정합 S0~S1 (역공학 4모듈 전수지도 + 갭 전체지도) | `ab885be` |
+| S3 MAJOR 라운드 (14항목 보정: 의류 apparel·ACC·color-chip·ROU·VIEW_YN·itemGroup·에디터) | `e3ff577`·`b48fa15`·`3a4afa6` |
+| isReadyToOrder BFF 배선 누락 보충 | `87bfbc6` |
+| **팀 교차검증 4결함 보정** (G-1 WRK/DIR_MTR ATTB·C-B 자재왕복 코팅·G-2 에디터 가격콜백·PRICE=0 진단) | `59fed43`·`26b65f1`·`41eb53d` |
+| 하네스 진화 (오케스트레이터 v1.3.0 + hw-qa/hw-builder + worktree drift 정정) | `6ff1303` |
 
-**S6 성과(이번 세션, baeea1d):** 캘린더 5종 라이브 캡처 → **옵셋 캘린더(HLCLSTD/HLCLWAL) = 책자 PriceTable3D 변형 확정**(ORD_INFO 책자/포스터와 필드 동형, PRICE 778,500/2,368,500 실가). 캘린더 전용 옵션(CLD_STD 달력규격·STA_CLD 시작연월·PAK_POL 포장)은 **PCS_INFO 행 = 기존 select 흡수 → 신규 componentType 불요(NC 3연속)**. 구현 **위젯 코어 완전 0줄**(S4·S5 동급, git diff src/widget=src/contract=0): 어댑터 한정(PRN_CNT 폐쇄래더→select enum + null-safety) + fixture 4종 + test 1종. 비교 QA 6/6 GO. vitest 65→76 green. price_gbn은 불투명 echo라 offset2023_price 신규 문자열도 코어 무관(INV-1 재확인).
+**vitest 76 → 148.** 위젯 코어 INV-3 준수(구조결함 보정은 정당 완화, additive). 신규 leaf 2개(MultiCheckGroup·AccPanel). Agent Teams 팀 모델 opus 통일.
 
-**브리핑 확인(직전):** 컨버전 전략(Red 어댑터→정규화 계약→후니 어댑터 교체)이 코드로 정합함 확인 — 위젯은 `src/contract/`만 소비, Red 구조는 `src/adapters/red/`에 격리, 후니 교체자리(`createHuniAdapter`) 예약됨. **유일한 미실증: 후니 어댑터 코드 0줄**(문서 검증 90%, huni-db-mapping.md). 사용자 결정 = **현 방식(Red 확대) 유지**, 후니 어댑터는 DB 확정 후. **다음은 Figma 시각 재현 또는 후속 stage.**
+## 3. 다음 할 일 (우선순위 순) — 전부 컨버전 단계, day-1 무차단
 
-## 2. 현재 진척 (커밋 완료)
+> **이번 세션 직전 완료:** 하네스 진화 반영(A2/C). 코드 정합 전 과정(S0~S3+팀교차검증+보정) GO. 상세 `07_parity/`.
 
-| 단계 | 상태 | 커밋 |
-|------|------|------|
-| Phase 1 역공학 보강 (미검증 3대 라이브 해소) | 🟢 | 8f6d801 |
-| Phase 2 동작분석 + 베스트프랙티스 리서치 | 🟢 | 9e07479, 142340d |
-| Phase 3 위젯 명세 (정규화 계약+어댑터 키스톤) | 🟢 | d1ebada |
-| 가격 명세 정정 (Red→후니 정합 가정 제거) | 🟢 | 6af69cd |
-| 후니 DB(29테이블) ↔ 계약 비교분석 + 보정 | 🟢 | 2d261b4, 5fef90c |
-| Phase 4 Pass1 (기반 A + Shadow코어/store/14컴포넌트 B) | 🟢 | 137aa62 |
-| Pass1 스모크 + 비교 검증 하네스 구축 | 🟢 | 16ab257, 2642202 |
-| D1 수정 + Phase D(업로드·Edicus·origin보안) + React dedupe | 🟢 | 5421f99 |
-| Phase D 점진 QA (비교 하네스, 종합 GO) | 🟢 | 5c6e43d |
-| 전체 확대 전략 (7-stage 로드맵) | 🟢 | 3a62fba |
-| **S1 디지털인쇄 확대 (위젯 코어 0변경)** | 🟢 | 3ba1c08 |
-| **S1 비교 QA — GO (5항목 PASS, 회귀 라이브)** | 🟢 | 74a383b |
-| **S2 스티커 캡처+fixture+코어0변경 실증 (29/29 무회귀)** | 🟢 | 19e0331 |
-| **S2 비교 QA — GO (6/6 PASS, F4 PASS, INV-3 git diff 증명)** | 🟢 | b6c01f4 |
-| **S3 포스터/실사 캡처 + NC-1 명세** | 🟢 | d2a10c6 |
-| **S3 NC-1 구현 (첫 코어 터치, store 분기1개+numeric slot, 39 green)** | 🟢 | 7968401 |
-| **S3/NC-1 비교 QA — GO (8/8 PASS, 결함해소 3중 증명, INV-3 git show)** | 🟢 | 7b2dc9a |
-| **S4 아크릴 검증 (위젯/어댑터 0변경, finish-button 흡수, NC-2 신규 불요 확정) + hashRequest 핫픽스 + S4 비교 QA GO (54 green)** | 🟢 | 23b775e |
-| **S5 선행 라이브 검증 (파우치 PRICE>0, 가격모델 SKU별 상이, /rp-api 쿠키주입 수정)** | 🟢 | 39d78a3 |
-| **S5 명세 (NC-3 신규 불요 판정 + tmpl/tiered 어댑터, 위젯 코어 거의 0)** | 🟢 | 984a0b8 |
-| **S5 구현 (위젯 코어 완전 0줄, 계약 printCount? 1필드, 어댑터 직렬화+가드, 파우치 fixture) + 비교 QA GO (65 green)** | 🟢 | ff33d26 |
-| **S5-M1 TieredDiscount 라이브 검증 (7 SKU 스윕 → 수량할인 부재 확정, tiered_price=룩업방식 규명)** | 🟢 | 981e03f |
-| **S6 캘린더 라이브 캡처 (5종, 옵셋=PriceTable3D 변형 확정, JWT redact)** | 🟢 | 5cefba4 |
-| **S6 어댑터 명세 (PriceTable3D 변형 + NC 불요 판정)** | 🟢 | e51b54f |
-| **S6 옵셋 캘린더 구현 (위젯 코어 완전 0줄, PRN_CNT 래더 enum, 76 green)** | 🟢 | 8863cbd |
-| **S6 비교 QA — GO (6/6 PASS, INV-3 0줄 재확인, S6-M1 DOSU_COD 검증한계 명시)** | 🟢 | baeea1d |
-
-## 3. 다음 할 일 (우선순위 순)
-
-> **직전 완료(이번 세션):** S6 캘린더 end-to-end — 라이브 캡처(5cefba4) → 어댑터 명세(e51b54f) → 구현 코어 0줄(8863cbd) → 비교 QA GO(baeea1d). 상세는 §1 요약·§7 미해결·`05_qa/s6-qa.md`·`s6-calendar-live-note.md`·`03_spec/s6-calendar-spec.md` 참조.
-
-1. **[다음·최우선] 후니 Figma 시각 재현** (expert-frontend) — 14(+NC-1) componentType을 DESIGN.md+`docs/figma/huni_product_option.fig` 시안에 충실하게. 컴포넌트 단위 1회 = 전 stage 재사용.
-2. **S6 후속(비차단)**: S6-O1 PRN_CNT enum→printCount store 배선(코어 1줄, 후니 노출 시) · S6-M1 DOSU_COD 실 BFF round-trip 검증(fixture 라우팅상 현재 미검증) · S6-M2 dimension별 단가. 그 외 캘린더 변형: GSCLMGN(자석=굿즈 tiered, 수량래더 재캡처로 PRICE>0) · TPCLECO(Red 상품 미설정, 후니 D-매핑 시 확인).
-3. **확대 후속 stage**: `03_spec/expansion-strategy.md` 7-stage 로드맵 잔여분.
-
-### S4 아크릴 후속 보강 포인트 (s4-acryl-spec.md §7 / s4-qa.md)
-- **S4-M1**: 비로그인 PRICE=0 → SizeMatrix2D+TieredDiscount+부자재단가 3중 합성 실가 미확보. 로그인 캡처로 옵션변동→가격변동 직접 증거 필요(INV-1상 위젯 무관, 후니 비교 시 필요).
-- **S4-M2**: 타 아크릴 SKU(스탠드/코롯토/키링)가 가로×세로 **자유입력**이면 그 SKU는 NC-1 자동 발동 → SKU별 fixture 캡처로 `price_gbn`·sentinel 확인. ACNTHAP(명찰)=프리셋만이라 NC-1 무관.
-- **skinInfo view_yn=N**: 아크릴 도수/용지 화면 숨김이 현 어댑터에 미반영(노출됨). 가격 무해(값 1개 자명), 시각 정합은 후니 단계 보정. 위젯 코어 불변 원칙상 본 stage 미수정.
-- **hidden essential(BON_PAP/LAS_DFT) 단가**: 숨김 필수옵션이 `selectedFinishes`에 echo됨(QA S4-O1 확인 — 정합 안전). 로그인 Red 캡처로 finalPrice 반영 직접 증거 보강 가능.
-
-### S3 NC-1 후속 보강 포인트 (s3-qa.md / NC1-impl-note.md)
-- PRICE>0 실가 비교(로그인 캡처로 cutW/cutH 변동→PRICE 변동 직접 증거) — 후니 비교검증 임계경로
-- 작업사이즈 `work=cut+CUT_MRG(4mm)` 공식의 real_price 상품 공통성(BNBNFBL/BNPTPET만 캡처)
-- MAX_CUT 검증 위치(leaf clampAxis vs canOrder) UX 정합 / defaultSelections DFT_YN=Y 우선정렬 후니 정책 정합
-
-### S1·S2 잔존 Minor (비차단, 병행 보강 가능)
-- S1-M1: 별색 5종 fixture 보강
-- S2-M1: 가시 모양선택(VIEW_YN=Y) SKU fixture 미보유 / S2-M2: FixedUnit A4 datapoint fixture 미적재
-- S2-F1: 기획 "타투/스티커팩" 동명 SKU가 Red ST 36종에 부재 → STPADPN(시트)로 FixedUnit 대표 대체. 후니 D-매핑 시 확인
-
-상세 로드맵: `03_spec/expansion-strategy.md`, 메모리 `huni-widget-expansion-strategy`.
+1. **[최우선] 후니 컨버전** — `createHuniAdapter` 데이터소스 교체(현재 `bff/stub.ts:25` 주석만, 구현 0줄). 후니 옵션마스터 수령 시 어댑터를 Red→후니로 교체. 위젯 코어·정규화 계약 불변(무손실 컨버전). 메모리 [[huni-widget-conversion-strategy]].
+2. **PRICE>0 재캡처** — 의류(CLSTSHS clothes2025_price)·ACC(ACPDSTD·GSSBMTL)·포스터(BNBNFBL/BNPTPET) 가격 미캡처. 현재 PRICE=0→ok:false+`priceUnavailableReason` 안전격리. **Red는 PRICE=0 불가 → 그 0은 우리측 캡처 공백**([[huni-widget-red-price-never-zero]]). 로그인 세션+등록규격으로 PRICE>0 받아 가격 동등성 마감.
+3. **L-3 size-linked 반경(G-4) / 합성 ATTB(잠복)** — dormant(GSCDPOP fixture 부재). 컨버전 시 옵션마스터에 size-linked 반경 상품·합성ATTB 있으면 보정(어댑터 divSeq 전달 + cascade size→radius 재계산). `07_parity/crossverify-findings.md`.
+4. **G-3 라인앵커 정정** — deob 재생성으로 어댑터 주석 라인참조 stale(추적성만). 정리 시.
 
 ## 4. 핵심 결정/컨텍스트 (auto-memory 참조)
 
-- **컨버전 전략** (`huni-widget-conversion-strategy`): 위젯은 정규화 계약에만 의존, Red 어댑터로 구현·검증 → 후니 어댑터 교체로 무손실 컨버전. **후니 DB 스키마 확보됨**(`docs/huni/table-spec_260602.html` 29테이블, 단 상품마스터만 작성·가격/제약/위젯테이블 미작성).
-- **가격 전략** (`huni-widget-price-strategy`): 서버 권위 + 클라 캐싱. Red 역산은 분석용 유지하되 **후니 가격과 정합·이식 금지**(후니는 4가지 가격모델 자체 보유: PriceTable3D/SizeMatrix2D/FixedUnit/TieredDiscount).
-- **Shopby 제외** (`shopby-excluded-from-scope`): 장바구니/주문은 정규화 경계+백엔드 미정.
-- **확대 전략** (`huni-widget-expansion-strategy`): 7-stage, 가격모델·옵션구조 단위, 위젯 코어 불변 5 불변식. **NC-2/NC-3 "변형 우선" 디폴트가 S4에서 실증됨**(디자인 시스템에 가격델타 전용 컴포넌트 부재 → finish-button 흡수).
-- **커밋 병행** (`commit-along-harness-work`): 작업 시 git 커밋 병행, `.env.local` IGNORED 검증. ⚠ 루트 `.gitignore`에 `*-key.*` 보안 패턴 존재 — 테스트 파일명에 `-key` 포함 금지(예: price-cache-key→price-cache로 변경한 전례).
+- **코드 정합 완료** ([[huni-widget-code-parity-done]]): 역공학 소스코드 4모듈(deob_05/06/07/editor_sdk)이 권위. 캡처 표본 < 코드 권위(단편 금지). 산출 `07_parity/`.
+- **PRICE=0 불가** ([[huni-widget-red-price-never-zero]], HARD): RedPrinting 위젯은 PRICE=0 절대 반환 안 함. 0=우리측 결함신호(세션/필드/규격). 격리 아닌 진단·수정 대상. 가격 동등성은 PRICE>0 실측으로만.
+- **컨버전 전략** ([[huni-widget-conversion-strategy]]): 위젯은 정규화 계약만 의존, Red 어댑터로 구현·검증 → 후니 어댑터 교체로 무손실 컨버전. 후니 DB 스키마 확보됨(`docs/huni/table-spec_260602.html` 29테이블, 상품마스터만 작성·가격/제약 미작성).
+- **가격 전략** ([[huni-widget-price-strategy]]): 서버 권위+클라 캐싱. Red 역산은 분석용, 후니 가격과 정합·이식 금지.
+- **fixture가 shape 결함 은폐** ([[fixture-masks-serialization-shape]]): 어댑터/직렬화는 캡처와 field-for-field 대조 테스트 필수. fixture 미보유 시 침묵 폴백 금지→throw.
+- **커밋 병행** ([[commit-along-harness-work]]): `.env.local` IGNORED 검증. `.claude` 하네스 정의는 tracked(huni-widget만). `*-key.*` 패턴 주의.
 
 ## 5. 검증된 불변식 (깨면 안 됨)
 
-1. 서버 권위 가격 (위젯은 가격 계산 안 함, opaque)
-2. 정규화 계약 Red/후니 중립 (위젯 코드에 PCS_CD/MTRL_CD/ORD_INFO/price_gbn/Shopby 0건)
-3. 위젯 코어 불변 (store/cascade/shadow/dispatcher/price-seam/editor-bridge) — 확대는 어댑터+데이터+신규 leaf만. **S4·S5는 store 분기조차 0(NC-1보다 강한 실증, git diff src/widget/=0줄).** 단 **버그 수정은 정당한 예외**(hashRequest 핫픽스 = price.ts 캐시 키만 수정, 가격 로직 무변경).
-4. Shadow DOM 격리 (호스트 CSS 누수 0) + shadcn Portal-in-Shadow
-5. 14 componentType switch dispatcher 고정 (신규는 NC-1~3 dispatcher case 추가만. 현재 **NC-1만 추가**, **NC-2(S4)·NC-3(S5) 둘 다 흡수로 불요** — DS v5.0.0 근거)
+1. 서버 권위 가격(위젯 opaque) — **PRICE=0 받으면 결함**(Red 0 불가)
+2. 정규화 계약 Red/후니 중립(위젯 코드에 PCS_CD/MTRL_CD/price_gbn/Shopby 0건)
+3. 위젯 코어 불변(store/cascade/shadow/dispatcher/price-seam/editor-bridge) — 확대는 어댑터+데이터+신규leaf만. **버그·구조결함 보정은 정당 예외**(코어 최소·additive·git diff 명시)
+4. Shadow DOM 격리 + shadcn Portal-in-Shadow (Tailwind 변수체인 함정: shadow/ring은 style 명시주입)
+5. 신규 leaf 사전정당(현재 정확히 2개: MultiCheckGroup·AccPanel) + 신규 dispatcher case는 NC만
+6. **독립 재검증 게이트**: builder 보정 → hw-qa 직접 재실행·field대조·왕복양방향 → GO. 자기보고 불충분
 
 ## 6. 환경 재기동 (세션 종료 시 서버 내려감)
 
 ```bash
-# 우리 위젯 dev (vite, dedupe 적용됨)
-cd _workspace/huni-widget/04_build && npm run dev          # :5173
-
+# 우리 위젯 dev
+cd _workspace/huni-widget/04_build && npm run dev          # :5173 (/?p=PRODUCTCODE, /explorer.html)
 # Red 레퍼런스 테스트베드 (라이브 캡처 시 필수)
-cd raw/widget_monitor/local && node extract-cookies.cjs    # 로그인 세션 갱신(토큰 ~1h, RP_* in .env)
-cd raw/widget_monitor/local && node server.js              # :3001 (/rp-api 쿠키+red-editor-token 주입 패치 적용됨)
-
-# 비교 검증 하네스
-cd _workspace/huni-widget/05_qa/compare && node serve.js   # :4173 → /compare.html
+cd raw/widget_monitor/local && node extract-cookies.cjs    # 로그인 세션 갱신(RP_* in .env, 토큰~1h)
+cd raw/widget_monitor/local && node server.js              # :3001 (/rp-api 쿠키+토큰 주입, fresh 재기동 필수=가격캡처)
 ```
+> 가격캡처 노하우: `POST /rp-api/ko/product_price/get_ajax_price_vTmpl`, reqBody `dataJson.ORD_INFO[0]`에 ORD_CNT+PRN_CNT 둘 다 필수(누락=침묵0). 쿠키세션이 가격권위.
 
-> **라이브 가격 캡처 노하우(S5 확립):** 가격 API = `POST /rp-api/ko/product_price/get_ajax_price_vTmpl`. 응답 `result_sum.PRICE`=총가/`ORG_PRICE`=정가(할인전, 할인율=1−PRICE/ORG). reqBody `ORD_INFO[0]`에 **ORD_CNT+PRN_CNT 둘 다 필수**(누락 시 침묵 PRICE=0). `mb_cust_cod`는 무관 — **쿠키 세션이 가격 권위**. 수량 스윕은 reqBody의 ORD_CNT만 바꿔 재POST(s5-tiered-sweep.cjs 패턴).
+## 7. 미해결·주의
 
-게이트 재현: `cd _workspace/huni-widget/04_build && npx tsc --noEmit && npx vitest run && npx vite build`
-**현재 기준: tsc EXIT 0 / vitest 76 passed (11 files) / vite build 성공 (widget.js ~747KB, S6 fixture 증분)**
-
-## 7. 미해결·주의사항
-
-- **PRICE=0 현상 재해석** (S5 라이브 검증): 로그인 부족이 아니라 **reqBody 필수필드 누락**이 원인으로 확정(파우치 tmpl_price = ORD_CNT+PRN_CNT 둘 다 필수). 굿즈 tiered_price는 로그인 없이도 PRICE>0. 어댑터에서 가격호출 전 `ORD_CNT≥1 && PRN_CNT≥1` 가드 필수(Red 위젯의 침묵 PRICE=0 결함 재현 금지). 서버(쿠키 세션) 권위라 위젯은 여전히 opaque.
-- **후니 TieredDiscount 미정의**(S5-M1 후속): Red 굿즈/문구엔 수량할인 부재 확정(이식 소스 없음) → 후니 `t_dsc_*` 실데이터 확정 시 후니 어댑터 fixture로 독립정의. 계약 `ORG_PRICE/PRICE` 2필드 슬롯 기존재라 위젯 코어 0변경. **Red 기반 할인 fixture 임의 생성 금지**(baseline 오염).
-- **후니 어댑터 코드 0줄**(컨버전 미실증): "무손실 컨버전"은 문서 검증(huni-db-mapping 90%)이지 코드 미실증. 현 방식(Red 확대)이 사용자 결정이나, 어느 시점 `createHuniAdapter` PoC 1개로 코드 실증 권장(자리는 `bff/stub.ts:24` 예약됨).
-- **후니 DB 가격·제약·위젯 테이블 미작성**: 임계경로는 후니 데이터 작성(가격 B1/제약 B2/배송 B3)이지 위젯 설계 아님. 위젯은 Red fixture로 무차단 진행.
-- **[해소됨] 캘린더(S6) Red fixture 미보유** → HLCLSTD/HLCLWAL product+price fixture 라이브 캡처 적재 완료(5cefba4/8863cbd).
-- **S6-M1 DOSU_COD 검증 한계**(QA 정직 노출): `quote()`가 productCode로 fixture 라우팅하므로 round-trip이 DOSU_COD 유무를 실제 검증 못함. PRN_CLR_CNT↔DOSU_COD 1:1 종속+green이라 divergence는 없으나 "생략 가능"은 실 BFF round-trip으로만 확정. 후속.
-- **S6-O1 PRN_CNT store 배선 미완**: select-box enum은 어댑터 출력에 존재하나 buildPriceRequest 배선은 코어라 INV-3 우선 보류(S5 echo 전례 동형). 미선택 시 PRN_CNT=1 단가(가드 통과). 후니 노출 시 1줄.
-- **타 아크릴 SKU 자유입력 미검증**(S4-M2): 명찰 외 아크릴이 자유입력이면 NC-1 자동 발동 — fixture 캡처로 확인.
-- **실 S3 PUT·Edicus 토큰체인**은 stub(Phase D) — 후니 BFF 연동 시 라이브 보강.
-- **번들 크기**: fixture가 prod 번들에 포함돼 증가 추세 — G단계(경량화)에서 fixture 분리.
-- **상품마스터 무결성 결함**(PM-DUP 코드중복 등): 어댑터 키 round-trip으로 흡수, 위젯 무영향.
-- **[해소됨] hashRequest 캐시 키 버그**: replacer 배열이 중첩 키 누락 → 옵션 변경 시 가격 재산정 차단이던 전 상품 결함. 23b775e에서 재귀 키정렬 `stableSerialize`로 핫픽스(재현 테스트 `test/price-cache.test.ts` 9케이스 회귀 보호).
+- **후니 어댑터 코드 0줄**(컨버전 미실증): 무손실 컨버전은 문서 검증(huni-db-mapping 90%)이지 코드 미실증. `createHuniAdapter` PoC가 다음 핵심.
+- **의류/ACC/포스터 가격 미검증**: 옵션 SHAPE·분기만 검증, 가격 동등성 미검증(PRICE>0 재캡처 필요). 현재 안전격리(ok:false+진단).
+- **L-3/G-4 size-linked 반경**: dead code, dormant. GSCDPOP류 상품 컨버전 시 발현.
+- **합성 ATTB(잠복)**: COT/SCO×ATTB_CD 공존 fixture 0, 무발현. 컨버전 게이트.
+- **후니 DB 가격·제약·위젯 테이블 미작성**: 임계경로는 후니 데이터 작성이지 위젯 설계 아님.
 
 ## 8. 입력 자산 (read-only)
 
-- 역공학: `docs/reversing/`, 라이브 테스트베드 `raw/widget_monitor/local/`
-- 후니 실데이터: `docs/huni/*.xlsx` (상품마스터·가격표), 분석본 `_workspace/print-quote/02_business/`
-- 후니 DB: `docs/huni/table-spec_260602.html`
-- 디자인: `_workspace/print-quote/04_design/DESIGN.md`, `docs/figma/huni_product_option.fig`, 디자인 시스템 스킬 `huni-design-system` (v5.0.0, 14 componentType 카탈로그)
-- 자격증명: `.env.local` (RP_*/Edicus/Neon, .gitignore 보호)
-- 보유 fixture: PRBKYPR(S0)·BCSP*/디지털(S1)·STCUXXX/STPADPN/STTHCIC(S2)·BNBNFBL/BNPTPET/PRPOXXX(S3)·ACNTHAP(S4)·GSTGMIC/GSPUFBC(S5)·**HLCLSTD/HLCLWAL(S6, product+price fixture 적재)**
-- S5-M1 라이브 캡처(분석용, fixture 아님): GSPDLNG·GSMLSLC·GSTBMWM·GSNTSTA·GSDRSKS·GSNTSPR (`05_qa/captures/sweep_*.json`, `s3_rp_*.json`)
-- S6 캘린더 라이브 캡처: `05_qa/captures/s6_cal_*.json` (HLCLSTD/HLCLWAL=fixture화, TPCLWLB/GSCLMGN/TPCLECO=분석용). 캡처 스크립트 `raw/widget_monitor/local/s6-calendar-capture.cjs`
+- 역공학: `docs/reversing/red_reverse_engineer/03_deobfuscated/`(4모듈 deob_05/06/07/editor_sdk — 코드 정합 권위), `docs/reversing/*.html`(심층리포트), 라이브 테스트베드 `raw/widget_monitor/local/`
+- 코드 정합 산출: `07_parity/`(red-code-map-05/06/07/08·structure-map·parity-matrix-P1/D1~D4·parity-gap-map·S2·wave-a/b/c-verification·crossverify-findings·crossverify-fix-verification·harness-improvements)
+- 후니 실데이터/DB: `docs/huni/*.xlsx`, `docs/huni/table-spec_260602.html`
+- 디자인: `_workspace/print-quote/04_design/DESIGN.md`, `docs/figma/huni_product_option.fig`, 디자인시스템 스킬 `huni-design-system`
+- 자격증명: `.env.local`(RP_*/Edicus/Neon, gitignore 보호)
+- 보유 fixture(04_build/fixtures): PRBKYPR/BCSP*/디지털·STCUXXX/STPADPN/STTHCIC·BNBNFBL/BNPTPET/PRPOXXX·ACNTHAP/AIPPCUT·GSTGMIC/GSPUFBC/GSBGRDY·HLCLSTD/HLCLWAL·BCFOXXX·CLSTSHS·ACPDSTD·GSSBMTL
 
 ## 9. 재개 방법
 
-1. 이 문서 + `MEMORY.md` + `03_spec/expansion-strategy.md` 읽기
-2. 게이트 재현으로 baseline(65 green) 확인 (`cd 04_build && npx tsc --noEmit && npx vitest run`)
-3. **다음 할 일 §3-1 (S6 캘린더)부터** — `huni-widget-orchestrator` 스킬 사용. Red fixture 미보유라 **라이브 캡처 선행**(§6 환경재기동 + 가격캡처 노하우) → S4/S5 전례대로 hw-architect(어댑터 명세) → hw-builder(코어 0변경) → hw-qa(비교 QA GO) 순.
-4. 작업 후 커밋 병행 (§4 커밋 병행 메모리, `.env.local` IGNORED + `*-key.*` 패턴 주의)
+1. 이 문서 + `MEMORY.md` + `07_parity/parity-gap-map.md`·`crossverify-findings.md` 읽기
+2. 게이트 재현으로 baseline(148 green) 확인
+3. **다음 할 일 §3-1(후니 컨버전)** 또는 §3-2(PRICE>0 재캡처)부터 — `huni-widget-orchestrator` 스킬 사용(코드정합 검증축·실행지침이 v1.3.0에 인코딩됨)
+4. 작업 후 커밋 병행(§4). 보정은 builder→hw-qa 독립 재검증 게이트 필수(§5-6). 다중 렌즈 분석/교차검증은 `TeamCreate` 팀(opus), 단일 독립검증·순차 보정은 서브
