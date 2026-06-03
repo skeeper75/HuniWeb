@@ -113,6 +113,12 @@ describe('F-2 직렬화 shape 정합 — serializeRedPriceRequest ↔ 라이브 
     const stateNoTier = stateOf(p, { selections: { GRP_SIZE: def.valueId }, quantity: 1 });
     const bodyNoTier = serializeRedPriceRequest({ ...buildPriceRequest(stateNoTier), printCount: 1 });
     expect(bodyNoTier.dataJson.mb_cust_cod).toBe('10000000');
+
+    // [W1-a / G-INT-2] customerTier='' (embedder 비로그인 빈값) → '10000000' 대체. `??` 였다면 '' 통과해
+    //  캡처 실증상 Red 침묵 PRICE=0 유발([HARD] PRICE=0=우리측 결함). `||` 로 빈문자열 falsy 처리 검증.
+    const stateEmptyTier = stateOf(p, { selections: { GRP_SIZE: def.valueId }, member: { tier: '' }, quantity: 1 });
+    const bodyEmptyTier = serializeRedPriceRequest({ ...buildPriceRequest(stateEmptyTier), printCount: 1 });
+    expect(bodyEmptyTier.dataJson.mb_cust_cod).toBe('10000000');
   });
 
   it('ORD_INFO 가격필드 = 캡처 (PDT_CD/CUT/WRK/ORD_CNT/PRN_CNT/PRN_CLR_CNT/MTRL_CD)', () => {

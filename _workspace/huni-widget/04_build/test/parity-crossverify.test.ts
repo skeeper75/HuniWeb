@@ -62,9 +62,12 @@ describe('C-B 자재 왕복 — required 합성그룹(COT) re-enable 시 첫 활
 });
 
 // ─────────────────────────────────────────────────────────────────────────────
-// G-1 (CORRECTED) — WRK_MTR/DIR_MTR 가 QUANTITY_ECHO 누락 → ATTB=orderQty 복구.
-//  Red 4종 자재연결 PCS 전부 ATTB=orderQty: SUB_MTR(mod_07:2597)/PDT_WRK(2954)/DIR_MTR(2470)/WRK_MTR(3572).
-//  [정정] ACPDSTD SUB_MTR ATTB=quantity 는 날조 아님 — Red SUB_MTR 도 orderQty default(2597). 유지.
+// [Round-2 교차검증 정정] 구 "G-1 ATTB=orderQty" 는 권위 날조였음(07_parity/crossverify-round2-findings §2).
+//  인용 mod_07:2597/2954/2470/3572 는 deob 부존재(deob_07=2607줄/deob_06=1392줄). 실 deob ATTB 대입
+//  4곳(1008 size장수/2162 ""/2387 속성값/06:1250 prnCnt) 중 ORD_CNT 0건. 캡처 실측도 ORD_CNT=1 뿐.
+//  처방: PDT_WRK 4/4 ATTB=""(W1-b 제거) / ACPDSTD SUB_MTR 권위 ""(deob_07:2162, W2-a 엔트리-shape 이연)
+//   / WRK_MTR·DIR_MTR 은 qty=1 우연일치라 현 동작 보존(D-1, qty>1 재캡처 전 미검증).
+//  아래는 현 동작 characterization + 정직 표기(권위 입증 아님).
 // ─────────────────────────────────────────────────────────────────────────────
 function priceReqWith(productCode: string, groupId: string, quantity: number): NormalizedPriceRequest {
   return {
@@ -79,32 +82,40 @@ function priceReqWith(productCode: string, groupId: string, quantity: number): N
   };
 }
 
-describe('G-1 자재연결 ATTB — WRK_MTR/DIR_MTR 누락 해소 (4종 전부 ATTB=orderQty)', () => {
-  it('WRK_MTR(GSTGMIC) → ATTB=수량 echo (이전 누락=빈문자 해소)', () => {
+describe('자재연결 ATTB — Round-2 정정 (현 동작 characterization + 정직표기)', () => {
+  it('WRK_MTR(GSTGMIC) → 현 동작 ATTB=String(qty) characterization (D-1 미검증)', () => {
     const entry = serializeRedPriceRequest(priceReqWith('GSTGMIC', 'PCS_WRK_MTR', 500)).dataJson.PCS_INFO
       .find((e) => e.PCS_COD === 'WRK_MTR')!;
-    expect(entry.ATTB).toBe('500'); // 이전엔 '' (set 미포함) → orderQty echo
+    // [D-1] 캡처는 ORD_CNT=1 의 ATTB=1 뿐 → scaling 미검증. 현 동작 보존(권위 입증 아님), qty>1 재캡처 게이트.
+    expect(entry.ATTB).toBe('500');
     expect(entry.ATTB_2).toBe(''); // 빈슬롯 운용
   });
 
-  it('DIR_MTR(의류) → ATTB=수량 echo (이전 누락 해소)', () => {
+  it('DIR_MTR → 현 동작 ATTB=String(qty) characterization (D-1, serializer-isolated)', () => {
     const entry = serializeRedPriceRequest(priceReqWith('GSBKLAP', 'PCS_DIR_MTR', 12)).dataJson.PCS_INFO
       .find((e) => e.PCS_COD === 'DIR_MTR')!;
-    expect(entry.ATTB).toBe('12'); // 이전엔 '' → orderQty echo
+    // [D-1] GBKLAP fixture 부재 → 실 mapProduct 왕복 아닌 serializer 단위(타우톨로지). 권위=deob_07:1008(size장수).
+    //  의류는 G-5(apparel 배타드롭)로 실 경로 0 — 값 미검증, 컨버전 게이트.
+    expect(entry.ATTB).toBe('12');
   });
 
-  it('PDT_WRK / SUB_MTR 4종 모두 orderQty echo (정정: SUB_MTR add-on 도 orderQty default)', () => {
+  it('PDT_WRK → ATTB="" (W1-b: 캡처 GSPUFBC×2·GSTGMIC 4/4 ATTB="", ORD_CNT=1 에도 "")', () => {
     const pdt = serializeRedPriceRequest(priceReqWith('GSTGMIC', 'PCS_PDT_WRK', 500)).dataJson.PCS_INFO
       .find((e) => e.PCS_COD === 'PDT_WRK')!;
-    expect(pdt.ATTB).toBe('500'); // PDT_WRK 유지(기존 정상)
-    // ACPDSTD SUB_MTR — 정정: ATTB=quantity 가 정상(Red SUB_MTR orderQty default, mod_07:2597). 유지 회귀가드.
+    expect(pdt.ATTB).toBe(''); // 수량 echo 아님 확정 — QUANTITY_ECHO_PCS 에서 제거됨
+  });
+
+  it('[characterization, W2-a 이연] ACPDSTD SUB_MTR 현 동작 ATTB="50" — 권위는 ""(deob_07:2162)', () => {
+    // A-2 발현: SUB_MTR 가 QUANTITY_ECHO_PCS Set 멤버라 다종 자재선택형에도 String(qty) 오echo.
+    //  올바른 보정=PCS_COD Set→엔트리-shape(다종 MTRL_CD·ATTB_CD None→"") 규칙(W2-a, hw-builder 신중구현 대기).
+    //  현 동작을 고정해 W2-a 보정 시 이 테스트가 강제 갱신되게 함(characterization).
     const p = mapProduct(productACPDSTD as unknown as RedDigitalProductResponse);
     const sub = p.optionGroups.find((g) => g.id === 'PCS_SUB_MTR')!;
     const subEntry = serializeRedPriceRequest({
       ...priceReqWith('ACPDSTD', 'PCS_SUB_MTR', 50),
       selectedFinishes: [{ groupId: 'PCS_SUB_MTR', valueId: sub.values[0].id }],
     }).dataJson.PCS_INFO.find((e) => e.PCS_COD === 'SUB_MTR')!;
-    expect(subEntry.ATTB).toBe('50'); // [정정] 날조 아님 — orderQty echo 유지(제거하지 않음)
+    expect(subEntry.ATTB).toBe('50'); // [KNOWN GAP] 권위는 "" — W2-a 엔트리-shape 규칙으로 보정 예정
   });
 
   it('비-자재연결 후가공(CUT_DFT 등)은 ATTB 빈 echo 유지(과잉 echo 0)', () => {

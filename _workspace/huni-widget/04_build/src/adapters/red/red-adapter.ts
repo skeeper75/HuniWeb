@@ -128,13 +128,21 @@ function sizeValue(s: RedSizeInfo): OptionValue {
 //  우리도 어댑터가 2 OptionGroup(side=option-button, coating=finish-button)으로 분해하고,
 //  serializeRedPriceRequest 가 `coating+side` 로 재합성한다(신규 leaf 불필요).
 const COMPOSITE_PCS = new Set(['COT_DFT', 'SCO_DFT']);
-// L-1/G-1 수량형(자재연결) ATTB 후가공 — ATTB=주문수량 echo + ATTB_2/3 빈슬롯.
-//  Red 는 4종 자재연결 PCS 전부 ATTB=orderQty: SUB_MTR(mod_07:2597) / PDT_WRK(2954) /
-//  DIR_MTR(2470) / WRK_MTR(3572). [G-1 수정] 기존 set 이 WRK_MTR/DIR_MTR 누락 → 해당 상품
-//  (ACNTHAP·GSTGMIC=WRK_MTR / 의류 DIR_MTR)이 ATTB='' 직렬화(수량 소실 = 가격왜곡). 2종 추가로 해소.
-//  INN_DFT 는 내지마감 수량형(유지). [LATENT] SUB_MTR QTY_INPUT_YN==='Y' 분기(컴포넌트-로컬 수량)는
-//  fixture 부재로 dormant — 컨버전 단계 처리.
-const QUANTITY_ECHO_PCS = new Set(['SUB_MTR', 'PDT_WRK', 'INN_DFT', 'WRK_MTR', 'DIR_MTR']);
+// L-1 ATTB 후가공 — ATTB 는 PCS_DTL_COD/속성보유별 *다형*(단일 권위 없음).
+//  [W1-c 권위 정정] 이전 주석의 mod_07:2597/2954/2470/3572("ATTB=orderQty")는 deob 소스에
+//  *부존재*(deob_07=2607줄/deob_06=1392줄에서 종료, 인용 라인은 ATTB 대입 아님). 실재 deob
+//  ATTB 대입은 4곳뿐이며 어느 것도 ORD_CNT(주문수량) 아님:
+//    deob_07:1008  DIR_MTR  = materialMap[code].quantity  (선택자재 size-combo **장수**)
+//    deob_07:2162  SUB_MTR  = ""                          (material-multi 빈문자열)
+//    deob_07:2387  BID_SIL  = newValue                    (사용자 **속성값**)
+//    deob_06:1250  material = orderData.quantityInfo.prnCnt(**PRN_CNT**, ORD_CNT 아님)
+//  캡처 실측: 전 quantity-echo PCS 에서 ORD_CNT 는 항상 1 또는 부재 → ATTB=ORD_CNT 권위 0건.
+//    PDT_WRK: GSPUFBC×2·GSTGMIC(PKT01) 4/4 ATTB='' (ORD_CNT=1 에도 '') → echo 대상 아님(W1-b 제외).
+//  [HARD] 새 미검증 권위 생성 금지. 아래 set 의 String(req.quantity) 값 동작은 qty=1 캡처와
+//  *우연일치*(ATTB=1) — qty>1 재캡처로 ORD_CNT/상수/material-qty 구분 전까지 ATTB scaling 미검증
+//  (Deferred D-1, 컨버전 게이트). 이번 Wave 는 PDT_WRK 만 echo 대상에서 제거(캡처 정합), 나머지
+//  WRK_MTR/DIR_MTR/SUB_MTR/INN_DFT 값 동작은 보존(임의 ''치환=캡처 반증·날조 위험).
+const QUANTITY_ECHO_PCS = new Set(['SUB_MTR', 'INN_DFT', 'WRK_MTR', 'DIR_MTR']);
 // L-3a 멀티선택 후가공 — 귀돌이(ROU_DFT) 4귀 부분집합 선택(mod_07:3325 u=선택목록 배열).
 const MULTI_SELECT_PCS = new Set(['ROU_DFT']);
 // 합성그룹 식별 suffix — 직렬화 재합성이 이 규칙으로 짝을 찾는다.
@@ -566,7 +574,9 @@ export function serializeRedPriceRequest(req: NormalizedPriceRequest): RedPriceR
         // PCS_<CD> 그룹 id 에서 Red PCS_COD 복원(어댑터 내부 역매핑).
         //  L-2: 복합 2축 그룹은 store 가 base groupId(PCS_COT_DFT) + 재합성 valueId(coating+side)로 emit.
         const pcsCod = f.groupId.startsWith('PCS_') ? f.groupId.slice(4) : f.groupId;
-        // L-1 수량형 ATTB(SUB_MTR/PDT_WRK, mod_07:2586/2467): ATTB=주문수량 echo + ATTB_2/3 빈슬롯.
+        // L-1 ATTB(QUANTITY_ECHO_PCS): String(req.quantity) echo + ATTB_2/3 빈슬롯.
+        //  [W1-c] mod_07:2586/2467 인용은 deob 부존재(상단 set 정의 주석 참조). ATTB scaling 미검증 —
+        //  qty=1 캡처 우연일치, qty>1 재캡처/컨버전 게이트(D-1) 전까지 값 동작 보존.
         //  Red 코드지식은 어댑터에만(INV-1) — 위젯/store 는 수량을 ATTB 로 계산하지 않음.
         const isQuantityEchoPcs = QUANTITY_ECHO_PCS.has(pcsCod);
         const entry: { PCS_COD: string; PCS_DTL_COD: string; ATTB: string; ATTB_2?: string; ATTB_3?: string } = {
@@ -583,7 +593,10 @@ export function serializeRedPriceRequest(req: NormalizedPriceRequest): RedPriceR
         return entry;
       }),
       price_gbn: req.priceSchemeKey, // 불투명 echo (tmpl_price / tiered_price)
-      mb_cust_cod: req.customerTier ?? '10000000', // 고객등급 (미전달 시 비회원 공개가)
+      // W1-a(G-INT-2): `||` 로 빈문자열까지 falsy 처리. `??` 는 null/undefined 만 catch 하여
+      //  customerTier:'' 가 mb_cust_cod:'' 로 직렬화 → 캡처 실증상 Red 침묵 PRICE=0 유발
+      //  ([HARD] PRICE=0=우리측 결함). 빈문자열은 비회원 공개가(10000000)로 대체.
+      mb_cust_cod: req.customerTier || '10000000', // 고객등급 (미전달/빈값 시 비회원 공개가)
     },
   };
 }
