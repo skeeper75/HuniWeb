@@ -1,5 +1,9 @@
 # crossverify-fix-verification.md — 팀 교차검증 4결함 수정 독립 재검증
 
+> ⚠️ **[2026-06-04 SUPERSEDE — G-1 부분 철회]** 본 문서의 **G-1 "RESOLVED"는 권위 오독으로 무효화**됨.
+> 인용한 `mod_06:1279(orderQty watcher)/1313-1315`는 ATTB=orderQty 대입처가 아니며(deob_06 전체 ATTB 대입은 1250=prnCnt 단 1곳), `mod_07:2597` 류 인용은 deob 부존재. 2차 팀 교차검증(authority/integration/assumption 3렌즈 + deob·캡처 직접 실측)이 **ATTB=ORD_CNT 권위 0건**을 확정. 상세·정정 처방은 **[[crossverify-round2-findings]]**(`07_parity/crossverify-round2-findings.md`) 참조. 보정 Wave1(커밋 3844eb6): PDT_WRK echo 제거·mb_cust_cod 빈값 가드·날조 주석 정정. ACPDSTD SUB_MTR(ATTB="" 권위)는 W2-a 엔트리-shape 규칙으로 이연.
+> 본 문서의 C-B/G-2/PRICE=0 결론과 §1~§9 본문은 **감사 추적용으로 보존**(아래 G-1 단언만 무효).
+
 > 검증자: hw-qa. 일시: 2026-06-03. 입력: crossverify-findings.md(처리결과 섹션), parity-gap-map.md(PRICE=0 정정), memory "Red NEVER returns PRICE=0".
 > **원칙: 빌더 자가보고 미신뢰.** 증거는 내가 직접 수집(Red 소스 정독 + diff·fixture 추출 + 독립 vite-node walk-back/re-derive/per-product probe + 게이트 재현).
 > **팀이 드러낸 사각**: 순차검증은 "단일 트리거 1-step + 현 fixture"만 봤다 → 본 검증은 **walk-back / re-derive / 상품별 경로**를 직접 probe.

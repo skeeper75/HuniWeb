@@ -1,7 +1,7 @@
 # Huni-Widget 하네스 — 세션 핸드오프
 
-**갱신:** 2026-06-03 (코드 레벨 정합 + 팀 교차검증 + 하네스 진화 세션) | **마지막 커밋:** `6ff1303`
-**HEAD 게이트:** `cd _workspace/huni-widget/04_build && npx tsc --noEmit && npx vitest run && npx vite build` → tsc 0 / **vitest 148** / build OK
+**갱신:** 2026-06-04 (2차 팀 교차검증 + 보정 Wave1 세션) | **마지막 커밋:** `3844eb6`
+**HEAD 게이트:** `cd _workspace/huni-widget/04_build && npx tsc --noEmit && npx vitest run && npx vite build` → tsc 0 / **vitest 149** / build OK
 
 다음 세션이 이어받기 위한 인수인계. 상세 결정은 auto-memory(`MEMORY.md`)·`07_parity/` 참조.
 
@@ -21,12 +21,18 @@
 | isReadyToOrder BFF 배선 누락 보충 | `87bfbc6` |
 | **팀 교차검증 4결함 보정** (G-1 WRK/DIR_MTR ATTB·C-B 자재왕복 코팅·G-2 에디터 가격콜백·PRICE=0 진단) | `59fed43`·`26b65f1`·`41eb53d` |
 | 하네스 진화 (오케스트레이터 v1.3.0 + hw-qa/hw-builder + worktree drift 정정) | `6ff1303` |
+| **2차 팀 교차검증 + 보정 Wave1** (G-1 ATTB 권위 날조 정정: PDT_WRK echo 제거·mb_cust_cod 빈값 가드·날조 주석. 신규 G-5 의류 DIR_MTR 드롭·A-2 SUB_MTR 평면화·B-1 dead 발굴) | `3844eb6` |
 
 **vitest 76 → 148.** 위젯 코어 INV-3 준수(구조결함 보정은 정당 완화, additive). 신규 leaf 2개(MultiCheckGroup·AccPanel). Agent Teams 팀 모델 opus 통일.
 
 ## 3. 다음 할 일 (우선순위 순) — 전부 컨버전 단계, day-1 무차단
 
-> **이번 세션 직전 완료:** 하네스 진화 반영(A2/C). 코드 정합 전 과정(S0~S3+팀교차검증+보정) GO. 상세 `07_parity/`.
+> **이번 세션 완료:** 2차 팀 교차검증(3렌즈) + 보정 Wave1(G-1 ATTB 권위 날조 정정, 커밋 3844eb6). 상세 [[crossverify-round2-findings]].
+> **2차 교차검증 신규 이연(우선순위 반영):**
+> - **W2-a** [구조]: SUB_MTR 이중의미 평면화(A-2 발현) — QUANTITY_ECHO_PCS Set→엔트리-shape(다종 MTRL_CD·ATTB_CD None→ATTB=""). ACPDSTD 현 "50" 오echo(권위 deob_07:2162=""). hw-builder 신중구현 대기. INN_DFT 조건부(INNON=1/SKSTU='')도 동일 패턴.
+> - **D-1**: WRK_MTR/DIR_MTR ATTB scaling 미검증 — qty=1 캡처가 ORD_CNT/상수/material-qty 구분 불가. §3-2 PRICE>0 재캡처와 묶어 qty>1 캡처로 해소.
+> - **G-5**: 의류(clothes2025) apparel 배타삼항이 pdt_pcs_info(DIR_MTR 필수 가격축) 드롭(red-adapter.ts:83-85). size_color 비보상. CLSTSHS PRICE=0로 미발현 → 의류 PRICE>0 캡처 선행, additive 삼항 처방. 컨버전 게이트.
+> - **G-INT-0**: 런타임 price 경로가 reqBody 미직렬화(fixture 정적룩업) → shape 결함 침묵(F-2 구조 잔존). 실 HTTP BFF 배선(컨버전)까지 회귀가드 부재 — 인식 필요.
 
 1. **[최우선] 후니 컨버전** — `createHuniAdapter` 데이터소스 교체(현재 `bff/stub.ts:25` 주석만, 구현 0줄). 후니 옵션마스터 수령 시 어댑터를 Red→후니로 교체. 위젯 코어·정규화 계약 불변(무손실 컨버전). 메모리 [[huni-widget-conversion-strategy]].
 2. **PRICE>0 재캡처** — 의류(CLSTSHS clothes2025_price)·ACC(ACPDSTD·GSSBMTL)·포스터(BNBNFBL/BNPTPET) 가격 미캡처. 현재 PRICE=0→ok:false+`priceUnavailableReason` 안전격리. **Red는 PRICE=0 불가 → 그 0은 우리측 캡처 공백**([[huni-widget-red-price-never-zero]]). 로그인 세션+등록규격으로 PRICE>0 받아 가격 동등성 마감.
