@@ -163,7 +163,7 @@ test -f .env.local && echo ".env.local OK" || echo ".env.local MISSING"
 
 **검증 게이트 호출**: 보정/구현 후 "독립 재검증" 명시 요청 → hw-qa가 자기보고 불신·직접 재실행으로 GO/NO-GO. 기준: tsc 0 / vitest green / build OK / `git diff` 코어 최소 / 캡처 field 대조 / 왕복 복원.
 
-**실행 모드 선택**: 다중 렌즈 분석·교차검증은 "팀으로", 단일 검증·순차 보정은 기본(서브). 강제 시 명시. 팀 모델은 `workflow.yaml` default_model: opus(추론집약 하네스).
+**실행 모드 선택**: 다중 렌즈 분석·교차검증은 "팀으로", 단일 검증·순차 보정은 기본(서브). 강제 시 명시. 팀 모델은 `workflow.yaml` default_model: opus(추론집약 하네스). **하네스 전체 팀 모드 실행 절차·제약은 `_workspace/huni-widget/TEAM-MODE-GUIDE.md` 참조**(전제 확인·트리거·팀/서브 매핑·TeamCreate 워크플로우·하이브리드 예시).
 
 ## 에러 핸들링
 
