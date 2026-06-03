@@ -11,6 +11,8 @@
 const { chromium } = require('playwright');
 const fs = require('fs');
 const path = require('path');
+// [보안] respBody가 Edicus 세션 JWT(refreshToken 등)를 echo할 수 있어 직렬화 출력 전체를 redact (안전규칙 #5)
+const redact = s => (s||'').replace(/(token=)[^&"\s]+/gi,'$1[REDACTED]').replace(/eyJ[A-Za-z0-9_-]{15,}\.[A-Za-z0-9_-]{15,}\.?[A-Za-z0-9_-]*/g,'[JWT]');
 
 const BASE = 'http://localhost:3001';
 const PRODUCT = process.env.PRODUCT || 'BNBNFBL';
@@ -145,8 +147,9 @@ async function run() {
     priceCalls: priceCalls.map(c => ({ rel: c.rel, status: c.status, reqBody: redactStr(c.reqBody), respBody: c.respBody })),
     network: net.map(n => ({ ...n, body: redactStr(n.body) })),
   };
-  fs.writeFileSync(path.join(OUT, `s3_${PRODUCT}.json`), JSON.stringify(result, null, 2));
-  fs.writeFileSync(path.join(RAW, `s3_${PRODUCT}.json`), JSON.stringify(result, null, 2));
+  const serialized = redact(JSON.stringify(result, null, 2));
+  fs.writeFileSync(path.join(OUT, `s3_${PRODUCT}.json`), serialized);
+  fs.writeFileSync(path.join(RAW, `s3_${PRODUCT}.json`), serialized);
   console.log('[DONE]', PRODUCT, 'priceCalls=', priceCalls.length, 'productInfo=', productInfo.length, 'numbers=', (domScan.numbers||[]).length);
   await browser.close();
 }

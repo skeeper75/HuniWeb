@@ -69,8 +69,10 @@ async function run() {
 
   const out = { product:PRODUCT, capturedAt:new Date().toISOString(), step1, step2,
     priceCalls: priceCalls.map(c=>({rel:c.rel,status:c.status,reqBody:redact(c.reqBody),respBody:c.respBody})) };
-  fs.writeFileSync(path.join(OUT,`s3_rp_${PRODUCT}.json`), JSON.stringify(out,null,2));
-  fs.writeFileSync(path.join(RAW,`s3_rp_${PRODUCT}.json`), JSON.stringify(out,null,2));
+  // [보안] respBody가 Edicus 세션 JWT(refreshToken 등)를 echo할 수 있어 직렬화 출력 전체를 redact (안전규칙 #5)
+  const serialized = redact(JSON.stringify(out,null,2));
+  fs.writeFileSync(path.join(OUT,`s3_rp_${PRODUCT}.json`), serialized);
+  fs.writeFileSync(path.join(RAW,`s3_rp_${PRODUCT}.json`), serialized);
   console.log('[DONE]', PRODUCT, 'priceCalls=', priceCalls.length);
   await browser.close();
 }
