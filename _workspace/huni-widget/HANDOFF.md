@@ -1,6 +1,6 @@
 # Huni-Widget 하네스 — 세션 핸드오프
 
-**작성:** 2026-06-03 (S5 GO + S5-M1 검증 갱신) | **마지막 커밋:** `981e03f` (S5-M1 TieredDiscount 라이브 검증)
+**작성:** 2026-06-03 (S6 캘린더 GO 갱신) | **마지막 커밋:** `baeea1d` (S6 캘린더 비교 QA GO)
 
 다음 세션이 이어받기 위한 인수인계 문서. 상세 결정은 auto-memory(`MEMORY.md`) 참조.
 
@@ -14,7 +14,9 @@
 
 **S5-M1 라이브 검증(981e03f):** 말랑/문구 7 SKU 수량 스윕 → **Red 굿즈/문구 자동견적엔 수량할인(TieredDiscount) 부재 확정**. `tiered_price` gbn은 수량 tier가 아니라 규격/자재 룩업 방식(GSTGMIC tiered인데 선형이 증거). → 후니 TieredDiscount는 `t_dsc_*` fixture로 독립정의(Red 정합 금지 부합).
 
-**브리핑 확인(이번 세션):** 컨버전 전략(Red 어댑터→정규화 계약→후니 어댑터 교체)이 코드로 정합함 확인 — 위젯은 `src/contract/`만 소비, Red 구조는 `src/adapters/red/`에 격리, 후니 교체자리(`createHuniAdapter`) 예약됨. **유일한 미실증: 후니 어댑터 코드 0줄**(문서 검증 90%, huni-db-mapping.md). 사용자 결정 = **현 방식(Red 확대) 유지**, 후니 어댑터는 DB 확정 후. **다음은 S6 캘린더(라이브 캡처 선행) + Figma 시각 재현.**
+**S6 성과(이번 세션, baeea1d):** 캘린더 5종 라이브 캡처 → **옵셋 캘린더(HLCLSTD/HLCLWAL) = 책자 PriceTable3D 변형 확정**(ORD_INFO 책자/포스터와 필드 동형, PRICE 778,500/2,368,500 실가). 캘린더 전용 옵션(CLD_STD 달력규격·STA_CLD 시작연월·PAK_POL 포장)은 **PCS_INFO 행 = 기존 select 흡수 → 신규 componentType 불요(NC 3연속)**. 구현 **위젯 코어 완전 0줄**(S4·S5 동급, git diff src/widget=src/contract=0): 어댑터 한정(PRN_CNT 폐쇄래더→select enum + null-safety) + fixture 4종 + test 1종. 비교 QA 6/6 GO. vitest 65→76 green. price_gbn은 불투명 echo라 offset2023_price 신규 문자열도 코어 무관(INV-1 재확인).
+
+**브리핑 확인(직전):** 컨버전 전략(Red 어댑터→정규화 계약→후니 어댑터 교체)이 코드로 정합함 확인 — 위젯은 `src/contract/`만 소비, Red 구조는 `src/adapters/red/`에 격리, 후니 교체자리(`createHuniAdapter`) 예약됨. **유일한 미실증: 후니 어댑터 코드 0줄**(문서 검증 90%, huni-db-mapping.md). 사용자 결정 = **현 방식(Red 확대) 유지**, 후니 어댑터는 DB 확정 후. **다음은 Figma 시각 재현 또는 후속 stage.**
 
 ## 2. 현재 진척 (커밋 완료)
 
@@ -42,13 +44,18 @@
 | **S5 명세 (NC-3 신규 불요 판정 + tmpl/tiered 어댑터, 위젯 코어 거의 0)** | 🟢 | 984a0b8 |
 | **S5 구현 (위젯 코어 완전 0줄, 계약 printCount? 1필드, 어댑터 직렬화+가드, 파우치 fixture) + 비교 QA GO (65 green)** | 🟢 | ff33d26 |
 | **S5-M1 TieredDiscount 라이브 검증 (7 SKU 스윕 → 수량할인 부재 확정, tiered_price=룩업방식 규명)** | 🟢 | 981e03f |
+| **S6 캘린더 라이브 캡처 (5종, 옵셋=PriceTable3D 변형 확정, JWT redact)** | 🟢 | 5cefba4 |
+| **S6 어댑터 명세 (PriceTable3D 변형 + NC 불요 판정)** | 🟢 | e51b54f |
+| **S6 옵셋 캘린더 구현 (위젯 코어 완전 0줄, PRN_CNT 래더 enum, 76 green)** | 🟢 | 8863cbd |
+| **S6 비교 QA — GO (6/6 PASS, INV-3 0줄 재확인, S6-M1 DOSU_COD 검증한계 명시)** | 🟢 | baeea1d |
 
 ## 3. 다음 할 일 (우선순위 순)
 
-> **직전 완료(이번 세션):** S5 구현+QA GO(ff33d26, 위젯 코어 완전 0줄·65 green) → S5-M1 TieredDiscount 라이브 검증(981e03f, 수량할인 부재 확정) → 컨버전 전략 정합 브리핑(현 방식 유지 결정). 상세는 §1 요약·§7 미해결·`05_qa/s5-qa.md`·`s5-m1-tiered-note.md` 참조.
+> **직전 완료(이번 세션):** S6 캘린더 end-to-end — 라이브 캡처(5cefba4) → 어댑터 명세(e51b54f) → 구현 코어 0줄(8863cbd) → 비교 QA GO(baeea1d). 상세는 §1 요약·§7 미해결·`05_qa/s6-qa.md`·`s6-calendar-live-note.md`·`03_spec/s6-calendar-spec.md` 참조.
 
-1. **[다음·최우선] S6 캘린더** — 순수 어댑터(책자 PriceTable3D 변형). ⚠ **Red fixture 미보유 → widget_monitor 라이브 캡처 선행(임계경로)**. S6 진입 시: ① 토큰 갱신 `node extract-cookies.cjs` → `node server.js`(:3001, `/rp-api` 쿠키 패치 적용됨) ② 캘린더 SKU 캡처(`PRODUCT=<code> node s3-realprice-capture.cjs`) → reqBody·옵션 구조 파악 ③ S4/S5 전례 파이프라인 — hw-architect(어댑터 명세, 신규 componentType 불요 예상) → hw-builder(코어 0변경) → hw-qa(비교 QA GO).
-2. **후니 Figma 시각 재현** (expert-frontend) — 14(+NC-1) componentType을 DESIGN.md+`docs/figma/huni_product_option.fig` 시안에 충실하게. 컴포넌트 단위 1회 = 전 stage 재사용. (확대와 병행/이후)
+1. **[다음·최우선] 후니 Figma 시각 재현** (expert-frontend) — 14(+NC-1) componentType을 DESIGN.md+`docs/figma/huni_product_option.fig` 시안에 충실하게. 컴포넌트 단위 1회 = 전 stage 재사용.
+2. **S6 후속(비차단)**: S6-O1 PRN_CNT enum→printCount store 배선(코어 1줄, 후니 노출 시) · S6-M1 DOSU_COD 실 BFF round-trip 검증(fixture 라우팅상 현재 미검증) · S6-M2 dimension별 단가. 그 외 캘린더 변형: GSCLMGN(자석=굿즈 tiered, 수량래더 재캡처로 PRICE>0) · TPCLECO(Red 상품 미설정, 후니 D-매핑 시 확인).
+3. **확대 후속 stage**: `03_spec/expansion-strategy.md` 7-stage 로드맵 잔여분.
 
 ### S4 아크릴 후속 보강 포인트 (s4-acryl-spec.md §7 / s4-qa.md)
 - **S4-M1**: 비로그인 PRICE=0 → SizeMatrix2D+TieredDiscount+부자재단가 3중 합성 실가 미확보. 로그인 캡처로 옵션변동→가격변동 직접 증거 필요(INV-1상 위젯 무관, 후니 비교 시 필요).
@@ -101,7 +108,7 @@ cd _workspace/huni-widget/05_qa/compare && node serve.js   # :4173 → /compare.
 > **라이브 가격 캡처 노하우(S5 확립):** 가격 API = `POST /rp-api/ko/product_price/get_ajax_price_vTmpl`. 응답 `result_sum.PRICE`=총가/`ORG_PRICE`=정가(할인전, 할인율=1−PRICE/ORG). reqBody `ORD_INFO[0]`에 **ORD_CNT+PRN_CNT 둘 다 필수**(누락 시 침묵 PRICE=0). `mb_cust_cod`는 무관 — **쿠키 세션이 가격 권위**. 수량 스윕은 reqBody의 ORD_CNT만 바꿔 재POST(s5-tiered-sweep.cjs 패턴).
 
 게이트 재현: `cd _workspace/huni-widget/04_build && npx tsc --noEmit && npx vitest run && npx vite build`
-**현재 기준: tsc EXIT 0 / vitest 65 passed (10 files) / vite build 성공 (widget.js 715KB)**
+**현재 기준: tsc EXIT 0 / vitest 76 passed (11 files) / vite build 성공 (widget.js ~747KB, S6 fixture 증분)**
 
 ## 7. 미해결·주의사항
 
@@ -109,7 +116,9 @@ cd _workspace/huni-widget/05_qa/compare && node serve.js   # :4173 → /compare.
 - **후니 TieredDiscount 미정의**(S5-M1 후속): Red 굿즈/문구엔 수량할인 부재 확정(이식 소스 없음) → 후니 `t_dsc_*` 실데이터 확정 시 후니 어댑터 fixture로 독립정의. 계약 `ORG_PRICE/PRICE` 2필드 슬롯 기존재라 위젯 코어 0변경. **Red 기반 할인 fixture 임의 생성 금지**(baseline 오염).
 - **후니 어댑터 코드 0줄**(컨버전 미실증): "무손실 컨버전"은 문서 검증(huni-db-mapping 90%)이지 코드 미실증. 현 방식(Red 확대)이 사용자 결정이나, 어느 시점 `createHuniAdapter` PoC 1개로 코드 실증 권장(자리는 `bff/stub.ts:24` 예약됨).
 - **후니 DB 가격·제약·위젯 테이블 미작성**: 임계경로는 후니 데이터 작성(가격 B1/제약 B2/배송 B3)이지 위젯 설계 아님. 위젯은 Red fixture로 무차단 진행.
-- **캘린더(S6) Red fixture 미보유** → S6 진입 시 widget_monitor 캡처 선행. (S3 포스터/실사는 BNBNFBL/BNPTPET 캡처 완료, 아크릴은 ACNTHAP 보유.)
+- **[해소됨] 캘린더(S6) Red fixture 미보유** → HLCLSTD/HLCLWAL product+price fixture 라이브 캡처 적재 완료(5cefba4/8863cbd).
+- **S6-M1 DOSU_COD 검증 한계**(QA 정직 노출): `quote()`가 productCode로 fixture 라우팅하므로 round-trip이 DOSU_COD 유무를 실제 검증 못함. PRN_CLR_CNT↔DOSU_COD 1:1 종속+green이라 divergence는 없으나 "생략 가능"은 실 BFF round-trip으로만 확정. 후속.
+- **S6-O1 PRN_CNT store 배선 미완**: select-box enum은 어댑터 출력에 존재하나 buildPriceRequest 배선은 코어라 INV-3 우선 보류(S5 echo 전례 동형). 미선택 시 PRN_CNT=1 단가(가드 통과). 후니 노출 시 1줄.
 - **타 아크릴 SKU 자유입력 미검증**(S4-M2): 명찰 외 아크릴이 자유입력이면 NC-1 자동 발동 — fixture 캡처로 확인.
 - **실 S3 PUT·Edicus 토큰체인**은 stub(Phase D) — 후니 BFF 연동 시 라이브 보강.
 - **번들 크기**: fixture가 prod 번들에 포함돼 증가 추세 — G단계(경량화)에서 fixture 분리.
@@ -123,9 +132,9 @@ cd _workspace/huni-widget/05_qa/compare && node serve.js   # :4173 → /compare.
 - 후니 DB: `docs/huni/table-spec_260602.html`
 - 디자인: `_workspace/print-quote/04_design/DESIGN.md`, `docs/figma/huni_product_option.fig`, 디자인 시스템 스킬 `huni-design-system` (v5.0.0, 14 componentType 카탈로그)
 - 자격증명: `.env.local` (RP_*/Edicus/Neon, .gitignore 보호)
-- 보유 fixture: PRBKYPR(S0)·BCSP*/디지털(S1)·STCUXXX/STPADPN/STTHCIC(S2)·BNBNFBL/BNPTPET/PRPOXXX(S3)·ACNTHAP(S4)·**GSTGMIC/GSPUFBC(S5, product+price fixture 적재)**
+- 보유 fixture: PRBKYPR(S0)·BCSP*/디지털(S1)·STCUXXX/STPADPN/STTHCIC(S2)·BNBNFBL/BNPTPET/PRPOXXX(S3)·ACNTHAP(S4)·GSTGMIC/GSPUFBC(S5)·**HLCLSTD/HLCLWAL(S6, product+price fixture 적재)**
 - S5-M1 라이브 캡처(분석용, fixture 아님): GSPDLNG·GSMLSLC·GSTBMWM·GSNTSTA·GSDRSKS·GSNTSPR (`05_qa/captures/sweep_*.json`, `s3_rp_*.json`)
-- 캘린더(S6): Red fixture **미보유** → 라이브 캡처 선행 필요
+- S6 캘린더 라이브 캡처: `05_qa/captures/s6_cal_*.json` (HLCLSTD/HLCLWAL=fixture화, TPCLWLB/GSCLMGN/TPCLECO=분석용). 캡처 스크립트 `raw/widget_monitor/local/s6-calendar-capture.cjs`
 
 ## 9. 재개 방법
 
