@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="data:," />
+    <title>Huni Widget — Catalog Explorer (dev)</title>
+    <!-- 사이드바 UI/CSS는 raw/widget_monitor/local/index.html 구조 차용(프로젝트 소유) -->
+    <style>
+      * { box-sizing: border-box; }
+      body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Noto Sans KR', sans-serif; color: #222; }
+
+      .topbar { display: flex; align-items: center; gap: 12px; padding: 10px 16px; background: #1a1a1a; color: #fff; }
+      .topbar h1 { font-size: 14px; margin: 0; font-weight: 600; }
+      .active-pdt { font-size: 13px; opacity: .9; }
+
+      .layout { display: flex; height: calc(100vh - 41px); }
+
+      /* -- sidebar (reference 차용) -- */
+      .sidebar { width: 290px; background: #fff; border-right: 1px solid #e0e0e0; display: flex; flex-direction: column; flex-shrink: 0; }
+      .sidebar-header { padding: 10px; border-bottom: 1px solid #eee; }
+      .search-input { width: 100%; padding: 7px 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 13px; outline: none; }
+      .search-input:focus { border-color: #6b46c1; }
+      .cat-tabs { display: flex; gap: 4px; padding: 8px; flex-wrap: wrap; border-bottom: 1px solid #eee; max-height: 132px; overflow-y: auto; }
+      .cat-tab { padding: 3px 9px; border-radius: 12px; font-size: 12px; cursor: pointer; border: 1px solid #ddd; background: #fff; color: #555; transition: all .15s; }
+      .cat-tab:hover { border-color: #6b46c1; color: #6b46c1; }
+      .cat-tab.active { background: #6b46c1; color: #fff; border-color: #6b46c1; }
+      .product-list { flex: 1; overflow-y: auto; padding: 4px; }
+      .product-item { padding: 8px 10px; border-radius: 6px; cursor: pointer; border: 1px solid transparent; margin-bottom: 2px; transition: all .12s; }
+      .product-item:hover { background: #f5f3ff; border-color: #ddd6fe; }
+      .product-item.active { background: #f5f3ff; border-color: #6b46c1; }
+      .product-item .pdt-row { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
+      .product-item .pdt-code { font-size: 10px; color: #999; font-family: monospace; }
+      .product-item .pdt-name { font-size: 13px; color: #333; margin-top: 1px; line-height: 1.3; }
+      .product-item .cat-badge { font-size: 10px; color: #aaa; margin-top: 2px; }
+      .badge { font-size: 9px; font-weight: 600; padding: 1px 6px; border-radius: 10px; white-space: nowrap; }
+      .badge-fixture { background: #dcfce7; color: #15803d; }
+      .badge-none { background: #f1f1f1; color: #999; }
+      .product-count { padding: 8px 12px; border-top: 1px solid #eee; font-size: 11px; color: #888; }
+
+      /* -- main -- */
+      .main { flex: 1; overflow-y: auto; background: #f7f7f8; padding: 24px; }
+      .widget-wrap { max-width: 620px; margin: 0 auto; position: relative; }
+      .widget-placeholder { text-align: center; color: #aaa; padding: 80px 0; }
+      .no-fixture { background: #fff; border: 1px dashed #d4b3b3; border-radius: 10px; padding: 24px; text-align: center; }
+      .no-fixture strong { color: #b45309; display: block; margin-bottom: 8px; }
+      .no-fixture p { color: #666; font-size: 13px; margin: 4px 0; }
+      .no-fixture a { color: #6b46c1; font-size: 12px; word-break: break-all; }
+    </style>
+  </head>
+  <body>
+    <div class="topbar">
+      <h1>Huni Widget · Catalog Explorer</h1>
+      <span class="active-pdt" id="activePdtLabel">&#8592; 사이드바에서 상품 선택</span>
+    </div>
+
+    <div class="layout">
+      <div class="sidebar">
+        <div class="sidebar-header">
+          <input type="text" class="search-input" id="searchInput" placeholder="상품명 또는 pdtCode 검색..." />
+        </div>
+        <div class="cat-tabs" id="catTabs"></div>
+        <div class="product-list" id="productList"></div>
+        <div class="product-count" id="filteredCount"></div>
+      </div>
+
+      <div class="main">
+        <div class="widget-wrap">
+          <div class="widget-placeholder" id="placeholder">
+            <p>fixture 보유 14종은 후니 위젯 렌더 · 미보유는 원본 페이지 새 탭</p>
+          </div>
+          <div id="widget-host"></div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/dev/explorer.ts"></script>
+  </body>
+</html>
