@@ -47,6 +47,9 @@ export interface OptionValue {
   badge?: 'recommend' | 'best' | 'new' | 'up';
   disabled?: boolean; // 캐스케이드 런타임 계산. 어댑터 초기값 false.
   priceColorCount?: number; // dosu→CLR_CNT 평면화 (가격요청 조립용, 불투명)
+  // L-1 ATTB: 이 값 선택 시 가격요청 PCS_INFO.ATTB 로 운반될 불투명 속성문자열(속성칩값 등).
+  //  어댑터가 후가공 데이터에서 산출해 주입. 위젯은 의미 무계산·echo만. OPTIONAL·additive.
+  attb?: string;
 }
 
 export interface OptionGroup {

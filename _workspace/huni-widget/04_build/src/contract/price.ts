@@ -13,6 +13,12 @@ export interface PriceDimension {
 export interface SelectedFinish {
   groupId: string;
   valueId: string;
+  // L-1 ATTB: 후가공별로 (a)속성칩 선택값 (b)수량 echo 등 다형 불투명 문자열. 위젯은 의미 무계산·운반만.
+  //  OPTIONAL·additive — 미보유 후가공은 undefined(직렬화 시 ATTB:'' 하위호환). 사이즈연동 반경(ROU/L-3)은
+  //  본 BLOCKER 범위 밖(attb 슬롯만 준비). attb2/attb3 = SUB_MTR 류의 ATTB_2/ATTB_3 빈슬롯(현 빈값).
+  attb?: string;
+  attb2?: string;
+  attb3?: string;
 }
 
 export interface NormalizedPriceRequest {

@@ -52,10 +52,11 @@ describe('S3 포스터/배너 → 어댑터 매핑 + NC-1 dimension-matrix-input
 
   it('현수막 가격 응답(real_price, SizeMatrix2D) → 동일 정규화 shape (cutW/cutH BFF 권위)', () => {
     const b = mapPriceResponse(priceBanner as unknown as RedPriceResponse);
-    expect(b.ok).toBe(true);
+    // 비로그인 캡처라 PRICE=0(shape 검증). D-L3: 침묵 0원은 주문불가(ok:false).
+    expect(b.ok).toBe(b.finalPrice > 0); // PRICE>0 일 때만 ok:true
     expect(typeof b.finalPrice).toBe('number');
     // INV-1: 위젯은 SizeMatrix2D 좌표/보간을 모른다. 불투명 finalPrice 만 소비.
-    console.log(`  real_price finalPrice=${b.finalPrice} lines=${b.lines.length}`);
+    console.log(`  real_price finalPrice=${b.finalPrice} ok=${b.ok} lines=${b.lines.length}`);
   });
 });
 

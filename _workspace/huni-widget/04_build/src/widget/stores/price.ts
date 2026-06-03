@@ -60,14 +60,47 @@ function materialsFromSelections(s: WidgetState): Partial<Record<SideKey, string
   return out;
 }
 
+// L-2 복합 2축 후가공 그룹 식별 suffix (어댑터가 PCS_DTL_CD 를 coating/side 2축으로 분해할 때 부여).
+//  직렬화 전에 store 가 `coating+side` 단일 PCS_DTL_COD 로 재합성한다.
+const COMPOSITE_SIDE_SUFFIX = '__side';
+const COMPOSITE_COATING_SUFFIX = '__coating';
+
+function selectedAttb(g: OptionGroup, valueId: string): string | undefined {
+  // L-1: 선택값의 attb(어댑터가 산출한 불투명 속성문자열) 운반. 미보유 시 undefined.
+  return g.values.find((v) => v.id === valueId)?.attb;
+}
+
 function finishesFromSelections(s: WidgetState): SelectedFinish[] {
   const product = s.product!;
+  const groups = product.optionGroups as OptionGroup[];
   const out: SelectedFinish[] = [];
-  for (const g of product.optionGroups as OptionGroup[]) {
+  // L-2: 복합 2축(coating/side) 그룹 base PCS_CD 별로 짝을 모아 재합성.
+  const composite = new Map<string, { coating?: string; side?: string }>();
+  for (const g of groups) {
     if (!g.id.startsWith('PCS_')) continue;
+    // L-2: 복합 2축 그룹은 직접 emit 하지 않고 base 별로 모음(아래에서 재합성).
+    if (g.id.endsWith(COMPOSITE_SIDE_SUFFIX) || g.id.endsWith(COMPOSITE_COATING_SUFFIX)) {
+      const sel = selectedId(s.selections[g.id]);
+      if (sel == null) continue;
+      const isSide = g.id.endsWith(COMPOSITE_SIDE_SUFFIX);
+      const base = g.id.slice(0, g.id.lastIndexOf('__'));
+      const entry = composite.get(base) ?? {};
+      if (isSide) entry.side = sel;
+      else entry.coating = sel;
+      composite.set(base, entry);
+      continue;
+    }
     const v = s.selections[g.id];
     if (v == null) continue;
-    for (const valueId of Array.isArray(v) ? v : [v]) out.push({ groupId: g.id, valueId });
+    for (const valueId of Array.isArray(v) ? v : [v]) {
+      out.push({ groupId: g.id, valueId, attb: selectedAttb(g, valueId) });
+    }
+  }
+  // L-2 재합성: coating+side 둘 다 선택된 base 만 단일 PCS_DTL_COD(=coating+side)로 emit.
+  for (const [base, { coating, side }] of composite) {
+    if (coating != null && side != null) {
+      out.push({ groupId: base, valueId: `${coating}${side}` });
+    }
   }
   return out;
 }

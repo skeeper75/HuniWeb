@@ -33,11 +33,15 @@ describe('S2 스티커 → 기존 14 componentType 커버 (위젯 코어 0변경
     const tho = p.optionGroups.find(g=>g.id.includes('THO_DFT'));
     console.log('  THO_DFT group:', tho ? `${tho.id}:${tho.componentType} values=${tho.values.length}` : 'NOT FOUND');
   });
-  it('스티커 가격 응답(digital + FixedUnit) → 동일 정규화 shape', () => {
-    const b1 = mapPriceResponse(priceSticker as unknown as RedPriceResponse);
-    const b2 = mapPriceResponse(priceStickerFixed as unknown as RedPriceResponse);
-    expect(b1.ok).toBe(true); expect(b2.ok).toBe(true);
+  it('스티커 가격 응답(digital + FixedUnit) → 동일 정규화 shape (D-L3: PRICE=0 → ok:false)', () => {
+    const b1 = mapPriceResponse(priceSticker as unknown as RedPriceResponse); // 비로그인 digital_price PRICE=0
+    const b2 = mapPriceResponse(priceStickerFixed as unknown as RedPriceResponse); // FixedUnit 공개가 PRICE=4000
+    // shape 는 동일(어댑터 중립)하되, D-L3: 침묵 0원은 주문불가(ok:false). 실가 응답만 ok:true.
+    expect(b1.ok).toBe(false); // PRICE=0 → 주문불가 (Red mod_06:1167 정합)
+    expect(b1.finalPrice).toBe(0);
+    expect(b2.ok).toBe(true); // PRICE=4000 → 주문가능
+    expect(b2.finalPrice).toBeGreaterThan(0);
     expect(typeof b1.finalPrice).toBe('number'); expect(typeof b2.finalPrice).toBe('number');
-    console.log(`  digital_price finalPrice=${b1.finalPrice} lines=${b1.lines.length} | FixedUnit finalPrice=${b2.finalPrice} lines=${b2.lines.length}`);
+    console.log(`  digital_price finalPrice=${b1.finalPrice} ok=${b1.ok} | FixedUnit finalPrice=${b2.finalPrice} ok=${b2.ok}`);
   });
 });

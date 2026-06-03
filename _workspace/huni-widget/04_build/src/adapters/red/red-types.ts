@@ -175,7 +175,8 @@ export interface RedPriceReqOrdInfo {
 //  근거: captures/b1_AIPPCUT.json reqBody, data-adapter.md:80-86.
 export interface RedPriceReqInner {
   ORD_INFO: RedPriceReqOrdInfo[];
-  PCS_INFO: Array<{ PCS_COD: string; PCS_DTL_COD: string; ATTB?: string }>;
+  // L-1: ATTB 는 다형 불투명 문자열(속성칩값·수량 등). ATTB_2/ATTB_3 슬롯은 SUB_MTR 류가 운용(현 빈값).
+  PCS_INFO: Array<{ PCS_COD: string; PCS_DTL_COD: string; ATTB?: string; ATTB_2?: string; ATTB_3?: string }>;
   price_gbn: string; // 불투명 가격체계 echo (tmpl_price / tiered_price / ...)
   mb_cust_cod: string; // 고객 등급 (정규화 customerTier ?? '10000000'). 누락 시 Red 침묵 0 위험.
 }

@@ -112,10 +112,11 @@ describe('Red adapter (S1 디지털인쇄) → 정규화 계약', () => {
   it('디지털인쇄 가격 응답 → NormalizedPriceBreakdown (책자와 동일 워터폴 평면화, shape 검증)', () => {
     const b = mapPriceResponse(priceDigital as unknown as RedPriceResponse);
     // 비로그인 캡처라 PRICE=0 이지만 정규화 shape 는 책자와 동일해야 한다 (어댑터 중립).
-    expect(b.ok).toBe(true);
+    // D-L3: 단 침묵 0원은 ok:false(주문불가) — shape 보존과 주문가능 판정은 별개.
+    expect(b.ok).toBe(b.finalPrice > 0); // PRICE=0 → ok:false
     expect(typeof b.finalPrice).toBe('number');
     expect(typeof b.vat).toBe('number');
     expect(Array.isArray(b.lines)).toBe(true);
-    expect(b.lines[0]?.code).toBe('CUT_DFT'); // 공정 코드 round-trip
+    expect(b.lines[0]?.code).toBe('CUT_DFT'); // 공정 코드 round-trip (shape 보존)
   });
 });

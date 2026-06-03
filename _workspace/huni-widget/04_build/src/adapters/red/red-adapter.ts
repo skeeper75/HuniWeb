@@ -103,6 +103,60 @@ function sizeValue(s: RedSizeInfo): OptionValue {
   return { id: `SIZE_${s.DIV_SEQ}`, label: s.DIV_NM, disabled: false };
 }
 
+// L-2: 복합 2축 후가공(단/양면 × 코팅) — PCS_DTL_CD 가 `coating(slice0,4)+side(slice-1)` 합성코드.
+//  Red(mod_07:2247~2249) 는 이를 단/양면 라디오 + 코팅 그리드 2축으로 렌더하고 가격 시 재합성.
+//  우리도 어댑터가 2 OptionGroup(side=option-button, coating=finish-button)으로 분해하고,
+//  serializeRedPriceRequest 가 `coating+side` 로 재합성한다(신규 leaf 불필요).
+const COMPOSITE_PCS = new Set(['COT_DFT', 'SCO_DFT']);
+// L-1 수량형 ATTB 후가공 — ATTB=주문수량 echo + ATTB_2/3 빈슬롯(mod_07:2586 SUB_MTR / 2467 PDT_WRK).
+const QUANTITY_ECHO_PCS = new Set(['SUB_MTR', 'PDT_WRK', 'INN_DFT']);
+// 합성그룹 식별 suffix — 직렬화 재합성이 이 규칙으로 짝을 찾는다.
+const COMPOSITE_SIDE_SUFFIX = '__side';
+const COMPOSITE_COATING_SUFFIX = '__coating';
+// side 코드(slice -1) → 표시 라벨. (단면 S / 양면 D)
+const COMPOSITE_SIDE_LABEL: Record<string, string> = { S: '단면', D: '양면' };
+
+function splitCoatingSide(pcsDtlCd: string): { coating: string; side: string } {
+  // coating = 앞 4자(TCMA/DFXX...), side = 마지막 1자(S/D).
+  return { coating: pcsDtlCd.slice(0, 4), side: pcsDtlCd.slice(-1) };
+}
+
+// 복합 2축 후가공 1 PCS_CD → 2 OptionGroup(side option-button + coating finish-button).
+function mapCompositePcsGroup(pcsCd: string, items: RedPcsInfo[], side: SideKey): OptionGroup[] {
+  const first = items[0];
+  // distinct side / coating 축 추출(중복 제거, 입력 순서 보존).
+  const sideSeen = new Map<string, string>(); // sideCode → label
+  const coatSeen = new Map<string, string>(); // coatingCode → label(첫 등장 PCS_DTL_NM)
+  for (const it of items) {
+    const { coating, side: sd } = splitCoatingSide(it.PCS_DTL_CD);
+    if (!sideSeen.has(sd)) sideSeen.set(sd, COMPOSITE_SIDE_LABEL[sd] ?? sd);
+    if (!coatSeen.has(coating)) coatSeen.set(coating, it.PCS_DTL_NM);
+  }
+  const required = first.ESN_YN === 'Y';
+  const visible = first.VIEW_YN === 'Y';
+  const sideGroup: OptionGroup = {
+    id: `PCS_${pcsCd}${COMPOSITE_SIDE_SUFFIX}`,
+    side,
+    label: `${first.PCS_GRP_NM} 면`,
+    componentType: 'option-button',
+    required,
+    visible,
+    multiple: false,
+    values: [...sideSeen].map(([id, label]) => ({ id, label, disabled: false })),
+  };
+  const coatingGroup: OptionGroup = {
+    id: `PCS_${pcsCd}${COMPOSITE_COATING_SUFFIX}`,
+    side,
+    label: first.PCS_GRP_NM,
+    componentType: pcsComponentType(false), // finish-button
+    required,
+    visible,
+    multiple: false,
+    values: [...coatSeen].map(([id, label]) => ({ id, label, disabled: false })),
+  };
+  return [sideGroup, coatingGroup];
+}
+
 // PCS 그룹화: PCS_CD 별로 묶고, 각 PCS_DTL_CD 를 OptionValue 로.
 function mapPcsGroups(pcsInfo: RedPcsInfo[], side: SideKey): OptionGroup[] {
   const byGroup = new Map<string, RedPcsInfo[]>();
@@ -113,6 +167,11 @@ function mapPcsGroups(pcsInfo: RedPcsInfo[], side: SideKey): OptionGroup[] {
   }
   const groups: OptionGroup[] = [];
   for (const [pcsCd, items] of byGroup) {
+    // L-2: 복합 2축 후가공은 side/coating 2그룹으로 분해.
+    if (COMPOSITE_PCS.has(pcsCd)) {
+      groups.push(...mapCompositePcsGroup(pcsCd, items, side));
+      continue;
+    }
     const first = items[0];
     const values: OptionValue[] = items.map((it) => ({
       id: it.PCS_DTL_CD,
@@ -420,12 +479,26 @@ export function serializeRedPriceRequest(req: NormalizedPriceRequest): RedPriceR
   return {
     dataJson: {
       ORD_INFO: [ord],
-      PCS_INFO: req.selectedFinishes.map((f) => ({
+      PCS_INFO: req.selectedFinishes.map((f) => {
         // PCS_<CD> 그룹 id 에서 Red PCS_COD 복원(어댑터 내부 역매핑).
-        PCS_COD: f.groupId.startsWith('PCS_') ? f.groupId.slice(4) : f.groupId,
-        PCS_DTL_COD: f.valueId,
-        ATTB: '',
-      })),
+        //  L-2: 복합 2축 그룹은 store 가 base groupId(PCS_COT_DFT) + 재합성 valueId(coating+side)로 emit.
+        const pcsCod = f.groupId.startsWith('PCS_') ? f.groupId.slice(4) : f.groupId;
+        // L-1 수량형 ATTB(SUB_MTR/PDT_WRK, mod_07:2586/2467): ATTB=주문수량 echo + ATTB_2/3 빈슬롯.
+        //  Red 코드지식은 어댑터에만(INV-1) — 위젯/store 는 수량을 ATTB 로 계산하지 않음.
+        const isQuantityEchoPcs = QUANTITY_ECHO_PCS.has(pcsCod);
+        const entry: { PCS_COD: string; PCS_DTL_COD: string; ATTB: string; ATTB_2?: string; ATTB_3?: string } = {
+          PCS_COD: pcsCod,
+          PCS_DTL_COD: f.valueId,
+          // L-1: ATTB 다형 불투명 echo(속성칩값=f.attb / 수량형=quantity). 미보유 후가공은 ''(하위호환).
+          ATTB: f.attb ?? (isQuantityEchoPcs ? String(req.quantity) : ''),
+        };
+        // ATTB_2/ATTB_3 슬롯: 수량형 후가공은 빈슬롯 운용(mod_07:2598). 그 외는 explicit attb2/3 만.
+        if (f.attb2 != null) entry.ATTB_2 = f.attb2;
+        else if (isQuantityEchoPcs) entry.ATTB_2 = '';
+        if (f.attb3 != null) entry.ATTB_3 = f.attb3;
+        else if (isQuantityEchoPcs) entry.ATTB_3 = '';
+        return entry;
+      }),
       price_gbn: req.priceSchemeKey, // 불투명 echo (tmpl_price / tiered_price)
       mb_cust_cod: req.customerTier ?? '10000000', // 고객등급 (미전달 시 비회원 공개가)
     },
@@ -470,8 +543,13 @@ export function mapPriceResponse(res: RedPriceResponse): NormalizedPriceBreakdow
     amount: l.PRICE,
   }));
 
+  // [D-L3 정합] Red 는 `!result_sum.PRICE → 주문불가`(mod_06:1167). retCode===200 이어도 PRICE 가
+  //  0/누락이면 침묵 0원이 주문으로 빠져나갈 수 있다 → 어댑터가 ok 게이트로 차단.
+  //  finalPrice(워터폴 평면화) > 0 을 ok 조건에 포함해 0원 응답이 절대 ok:true 로 통과하지 못하게 한다.
+  const ok = res.retCode === 200 && finalPrice > 0;
+
   return {
-    ok: res.retCode === 200,
+    ok,
     finalPrice,
     vat,
     shipping: res.book_info?.DLVR_AMT ?? 0,
