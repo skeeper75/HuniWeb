@@ -77,6 +77,10 @@ export interface RedPcsInfo {
   //  shape (a) FOI/박은 ATTB_CD 부재(선택 그리드) — 어댑터가 둘을 구분.
   ATTB_CD?: string | null;
   ATTB_NM?: string | null;
+  // W2-a discriminator(SUB_MTR 이중의미): material-multi(다종 자재선택)는 엔트리별 *비어있지 않은*
+  //  MTRL_CD 를 갖는다(ACPDSTD SXAPR005 등 12종). 단일 add-on(AIPPCUT 에코백)은 MTRL_CD=""(빈값).
+  //  근거: fixtures/product_ACPDSTD.json(MTRL_CD 12종 distinct) vs product_AIPPCUT.json(MTRL_CD 전부 "").
+  MTRL_CD?: string | null;
 }
 
 export interface RedDisablePcs {

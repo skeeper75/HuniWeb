@@ -143,6 +143,29 @@ const COMPOSITE_PCS = new Set(['COT_DFT', 'SCO_DFT']);
 //  (Deferred D-1, 컨버전 게이트). 이번 Wave 는 PDT_WRK 만 echo 대상에서 제거(캡처 정합), 나머지
 //  WRK_MTR/DIR_MTR/SUB_MTR/INN_DFT 값 동작은 보존(임의 ''치환=캡처 반증·날조 위험).
 const QUANTITY_ECHO_PCS = new Set(['SUB_MTR', 'INN_DFT', 'WRK_MTR', 'DIR_MTR']);
+// W2-a(A-2 발현) SUB_MTR 이중의미 해소 — `QUANTITY_ECHO_PCS` 단일 Set 이 SUB_MTR 의 두 의미를
+//  평면화한다: (a)다종 자재선택형(ACPDSTD: 엔트리별 distinct MTRL_CD·ATTB_CD None·VIEW_YN=Y) 은
+//  Red 권위(deob_07:2162 material-multi)상 ATTB="" / (b)단일 add-on(AIPPCUT SUB_MTR EC001: MTRL_CD="")
+//  은 라이브 캡처(05_qa/captures/b1_AIPPCUT.json)상 ATTB=1(=quantity echo). 단일 PCS_COD Set 으로는
+//  둘을 못 가른다 → 의미는 PCS_COD 단일축이 아니라 *엔트리 shape*(MTRL_CD 보유/다종 여부).
+//  [discriminator] material-multi = SUB_MTR 그룹의 엔트리가 *모두* 비어있지 않은 MTRL_CD 를 갖고
+//   distinct MTRL_CD 가 2종 이상이며 어떤 엔트리도 ATTB_CD 를 갖지 않음(=가시 자재선택 리스트).
+//   근거: fixtures/product_ACPDSTD.json(MTRL_CD 12종 distinct, ATTB_CD None) vs
+//         product_AIPPCUT.json(MTRL_CD 전부 "" → 단일 add-on, 캡처 ATTB=1 유지).
+//  [어댑터 전용 해법, INV-3] 이 판정은 mapProduct 시점(mapPcsGroups)에 데이터가 있으므로 어댑터 내부에서
+//   material-multi 엔트리의 OptionValue.attb 슬롯에 '' 를 명시 적재한다. serialize 의 `f.attb ?? (echo)` 는
+//   '' 가 nullish 아님이라 ATTB="" 로 단락(short-circuit) → 캡처/store/계약 무변경(코어 0줄).
+//  [HARD] 새 권위 생성 아님 — ATTB="" 는 deob_07:2162, ATTB=1 echo 는 b1_AIPPCUT 캡처. 둘 다 실측.
+//  [잔여·정직표기] material-multi 의 ATTB_2/ATTB_3 빈슬롯 동작은 캡처 0건(ACPDSTD 가격경로 미캡처)이라
+//   권위 부재 → 현 quantity-echo 경로의 빈슬롯('')을 보존(무해한 빈문자열). 값 동작(ATTB="")만 보정.
+function isMaterialMultiSubMtr(pcsCd: string, items: RedPcsInfo[]): boolean {
+  if (pcsCd !== 'SUB_MTR') return false;
+  const mtrlCds = items.map((it) => (it.MTRL_CD ?? '').trim());
+  const allHaveMtrl = mtrlCds.every((c) => c.length > 0);
+  const distinct = new Set(mtrlCds).size;
+  const noAttbCd = items.every((it) => it.ATTB_CD == null);
+  return allHaveMtrl && distinct >= 2 && noAttbCd;
+}
 // L-3a 멀티선택 후가공 — 귀돌이(ROU_DFT) 4귀 부분집합 선택(mod_07:3325 u=선택목록 배열).
 const MULTI_SELECT_PCS = new Set(['ROU_DFT']);
 // 합성그룹 식별 suffix — 직렬화 재합성이 이 규칙으로 짝을 찾는다.
@@ -217,11 +240,15 @@ function mapPcsGroups(pcsInfo: RedPcsInfo[], side: SideKey, pdtCode: string): Op
     //  factor!=='size' 또는 미등록 상품(BCFOXXX/BCSPDFT)은 고정 default '4'. size-linked(GSCDPOP)는
     //  사이즈 DIV_SEQ 의존 — 로드 시엔 DFT 사이즈 DIV_SEQ 기준 초기값, 사이즈 변경 시 cascade 가 재계산.
     const rouRadius = isMulti && pcsCd === 'ROU_DFT' ? roundingRadius(pdtCode) : undefined;
+    // W2-a: material-multi SUB_MTR(다종 자재선택)면 ATTB="" 권위(deob_07:2162) 적재 → quantity echo 차단.
+    //  단일 add-on SUB_MTR(AIPPCUT, MTRL_CD="")은 false → attb=undefined 유지 → 캡처 ATTB=1 echo 보존.
+    const materialMultiSubMtr = isMaterialMultiSubMtr(pcsCd, items);
     const values: OptionValue[] = items.map((it) => {
       // L-1 shape (b): ATTB_CD 보유(RIN_DFT 등) → 가격측 속성 echo 를 attb 슬롯에 적재.
       //  shape (a) FOI/박은 ATTB_CD 부재 → 일반 선택 그리드(attb 없음, PCS_DTL_COD 자체가 선택축).
       const attbCd = it.ATTB_CD ?? undefined;
-      const attb = rouRadius ?? attbCd ?? undefined;
+      // W2-a: material-multi 는 빈문자열 명시(serialize 에서 '' 가 echo 를 단락) > rouRadius > 속성칩 > undefined.
+      const attb = materialMultiSubMtr ? '' : (rouRadius ?? attbCd ?? undefined);
       return {
         id: it.PCS_DTL_CD,
         label: it.PCS_DTL_NM,
