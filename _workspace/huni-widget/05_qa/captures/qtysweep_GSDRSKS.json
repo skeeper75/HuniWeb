@@ -1,0 +1,141 @@
+{
+  "product": "GSDRSKS",
+  "mission": "D-1/W2-b material-PCS ATTB scaling",
+  "capturedAt": "2026-06-03T22:46:16.282Z",
+  "sizePicked": null,
+  "qtyCtl": "PRN_CNT",
+  "qtyMax": 11,
+  "hasOrdInput": false,
+  "sweep": [
+    {
+      "via": "PRN_CNT",
+      "requested": 1,
+      "applied": {
+        "ok": true,
+        "set": "1"
+      },
+      "captured": false
+    },
+    {
+      "via": "PRN_CNT",
+      "requested": 2,
+      "applied": {
+        "ok": true,
+        "set": ""
+      },
+      "captured": false
+    },
+    {
+      "via": "PRN_CNT",
+      "requested": 10,
+      "applied": {
+        "ok": true,
+        "set": ""
+      },
+      "captured": false
+    }
+  ],
+  "rawPriceCalls": [
+    {
+      "mark": "init",
+      "status": 200,
+      "reqBody": "{\"dataJson\":{\"ORD_INFO\":[{\"PDT_CD\":\"GSDRSKS\",\"MTRL_CD\":\"RIBVW350\",\"CUT_WDT\":342,\"CUT_HGH\":250,\"WRK_WDT\":347,\"WRK_HGH\":255,\"DOSU_COD\":\"SID_S\",\"PRN_CLR_CNT\":4}],\"PCS_INFO\":[{\"PCS_COD\":\"COT_DFT\",\"PCS_DTL_COD\":\"TCGLS\",\"ATTB\":\"\"},{\"PCS_COD\":\"INN_DFT\",\"PCS_DTL_COD\":\"SKSTU\",\"ATTB\":\"\"},{\"PCS_COD\":\"CUT_DFT\",\"PCS_DTL_COD\":\"DFXXX\",\"ATTB\":\"\"},{\"PCS_COD\":\"RIN_COL\",\"PCS_DTL_COD\":\"BPTOP\",\"ATTB\":\"\"}],\"price_gbn\":\"tmpl_price\",\"mb_cust_cod\":\"10000000\"}}",
+      "respBody": {
+        "retCode": 200,
+        "msg": "",
+        "result": [
+          {
+            "PCS_CD": "COT_DFT",
+            "PCS_DTL_CD": "TCGLS",
+            "PCS_COD": "COT_DFT",
+            "PCS_DTL_COD": "TCGLS",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 0, 주문건수 : 0",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 0, 주문건수 : 0 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "코팅",
+            "PCS_DTL_NME": "유광코팅단면"
+          },
+          {
+            "PCS_CD": "INN_DFT",
+            "PCS_DTL_CD": "SKSTU",
+            "PCS_COD": "INN_DFT",
+            "PCS_DTL_COD": "SKSTU",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 0, 주문건수 : 0",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 0, 주문건수 : 0 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "내지",
+            "PCS_DTL_NME": "학생용속지"
+          },
+          {
+            "PCS_CD": "CUT_DFT",
+            "PCS_DTL_CD": "DFXXX",
+            "PCS_COD": "CUT_DFT",
+            "PCS_DTL_COD": "DFXXX",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 0, 주문건수 : 0",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 0, 주문건수 : 0 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "재단",
+            "PCS_DTL_NME": "재단"
+          },
+          {
+            "PCS_CD": "RIN_COL",
+            "PCS_DTL_CD": "BPTOP",
+            "PCS_COD": "RIN_COL",
+            "PCS_DTL_COD": "BPTOP",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 0, 주문건수 : 0",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 0, 주문건수 : 0 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "코일링제본",
+            "PCS_DTL_NME": "상철"
+          },
+          {
+            "PCS_CD": "PRT_DFT",
+            "PCS_DTL_CD": "DFXXS",
+            "PCS_COD": "PRT_DFT",
+            "PCS_DTL_COD": "DFXXS",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 0, 주문건수 : 0",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 0, 주문건수 : 0 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "인쇄",
+            "PCS_DTL_NME": "인쇄단면"
+          }
+        ],
+        "result_sum": {
+          "PRICE": 0,
+          "PRICE_VAT": 0,
+          "PRICE_MALL": 0,
+          "PRICE_MALL_VAT": 0,
+          "ORG_PRICE": 0,
+          "ORG_PRICE_VAT": 0
+        },
+        "query": "dbo.WSP_ACPT_ORDER_TMPL_PCS_PRICE '0101', 'LNG_KO', 'GSDRSKS', '<?xml version=\"1.0\"?>\n<PARAMS><DETAIL><MTRL_COD>RIBVW350</MTRL_COD><CUT_WDT>342</CUT_WDT><CUT_HGH>250</CUT_HGH><PRN_CNT/><ORD_CNT/><SID_GBN>SID_S</SID_GBN><TMPL_IDX/><BTN_TYPE/><PNS_DIGIT/><PNS_CNT/><PACK_PRN_CNT/><CUST_COD>15090019</CUST_COD></DETAIL><PCS><PCS_COD>COT_DFT</PCS_COD><PCS_DTL_COD>TCGLS</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS><PCS><PCS_COD>INN_DFT</PCS_COD><PCS_DTL_COD>SKSTU</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS><PCS><PCS_COD>CUT_DFT</PCS_COD><PCS_DTL_COD>DFXXX</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS><PCS><PCS_COD>RIN_COL</PCS_COD><PCS_DTL_COD>BPTOP</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS></PARAMS>\n'",
+        "query_flexible": null
+      }
+    }
+  ]
+}

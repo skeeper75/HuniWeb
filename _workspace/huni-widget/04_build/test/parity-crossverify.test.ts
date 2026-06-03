@@ -67,7 +67,7 @@ describe('C-B 자재 왕복 — required 합성그룹(COT) re-enable 시 첫 활
 //  인용 mod_07:2597/2954/2470/3572 는 deob 부존재(deob_07=2607줄/deob_06=1392줄). 실 deob ATTB 대입
 //  4곳(1008 size장수/2162 ""/2387 속성값/06:1250 prnCnt) 중 ORD_CNT 0건. 캡처 실측도 ORD_CNT=1 뿐.
 //  처방: PDT_WRK 4/4 ATTB=""(W1-b 제거) / ACPDSTD SUB_MTR 권위 ""(deob_07:2162, W2-a 엔트리-shape 이연)
-//   / WRK_MTR·DIR_MTR 은 qty=1 우연일치라 현 동작 보존(D-1, qty>1 재캡처 전 미검증).
+//   / WRK_MTR·DIR_MTR 은 ATTB=사용자 건수(N) echo — qty-sweep 라이브 검증(D-1 RESOLVED, Red 값 일치).
 //  아래는 현 동작 characterization + 정직 표기(권위 입증 아님).
 // ─────────────────────────────────────────────────────────────────────────────
 function priceReqWith(productCode: string, groupId: string, quantity: number): NormalizedPriceRequest {
@@ -84,19 +84,20 @@ function priceReqWith(productCode: string, groupId: string, quantity: number): N
 }
 
 describe('자재연결 ATTB — Round-2 정정 (현 동작 characterization + 정직표기)', () => {
-  it('WRK_MTR(GSTGMIC) → 현 동작 ATTB=String(qty) characterization (D-1 미검증)', () => {
+  it('WRK_MTR(GSTGMIC) → ATTB=건수 echo (D-1 RESOLVED: qty-sweep 라이브 검증)', () => {
     const entry = serializeRedPriceRequest(priceReqWith('GSTGMIC', 'PCS_WRK_MTR', 500)).dataJson.PCS_INFO
       .find((e) => e.PCS_COD === 'WRK_MTR')!;
-    // [D-1] 캡처는 ORD_CNT=1 의 ATTB=1 뿐 → scaling 미검증. 현 동작 보존(권위 입증 아님), qty>1 재캡처 게이트.
+    // [D-1 RESOLVED] qty-sweep(GSTGMIC/ACNTHAP) ATTB가 {2,10}로 건수 따라 변함·PRICE 선형 → ATTB=String(건수) 정당.
+    //  Red 는 건수를 PRN_CNT 축에 싣고 우리는 ORD_CNT 축(G-6, 잠복/컨버전 게이트) — 값은 일치, 필드축만 별건.
     expect(entry.ATTB).toBe('500');
     expect(entry.ATTB_2).toBe(''); // 빈슬롯 운용
   });
 
-  it('DIR_MTR → 현 동작 ATTB=String(qty) characterization (D-1, serializer-isolated)', () => {
+  it('DIR_MTR → ATTB=건수 echo (D-1 RESOLVED: GSPDLNG/GSTBMWM 라이브 검증)', () => {
     const entry = serializeRedPriceRequest(priceReqWith('GSBKLAP', 'PCS_DIR_MTR', 12)).dataJson.PCS_INFO
       .find((e) => e.PCS_COD === 'DIR_MTR')!;
-    // [D-1] GBKLAP fixture 부재 → 실 mapProduct 왕복 아닌 serializer 단위(타우톨로지). 권위=deob_07:1008(size장수).
-    //  의류는 G-5(apparel 배타드롭)로 실 경로 0 — 값 미검증, 컨버전 게이트.
+    // [D-1 RESOLVED] GSPDLNG/GSTBMWM(DIR_MTR) qty-sweep ATTB {2,10}·PRICE 선형 → ATTB=String(건수) 값 정당.
+    //  (이 테스트는 GBKLAP serializer-단위지만 값 권위는 실 DIR_MTR 상품 라이브로 확보.) 의류 DIR_MTR 유지=G-5 확정.
     expect(entry.ATTB).toBe('12');
   });
 

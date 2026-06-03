@@ -1,0 +1,612 @@
+{
+  "product": "GSTGMIC",
+  "mission": "D-1/W2-b material-PCS ATTB scaling",
+  "capturedAt": "2026-06-03T22:44:29.980Z",
+  "sizePicked": "삼각 마이크 네임택L",
+  "qtyCtl": "PRN_CNT",
+  "qtyMax": 10,
+  "hasOrdInput": false,
+  "sweep": [
+    {
+      "via": "PRN_CNT",
+      "requested": 1,
+      "applied": {
+        "ok": true,
+        "set": "1"
+      },
+      "captured": false
+    },
+    {
+      "via": "PRN_CNT",
+      "requested": 2,
+      "applied": {
+        "ok": true,
+        "set": "2"
+      },
+      "captured": true,
+      "ORD_CNT_echo": 1,
+      "PRN_CNT_echo": 2,
+      "price_gbn": "tiered_price",
+      "materials": [
+        {
+          "PCS_COD": "WRK_MTR",
+          "PCS_DTL_COD": "TG003",
+          "ATTB": 2,
+          "ATTB_2": "",
+          "ATTB_3": ""
+        }
+      ],
+      "allPcsCods": [
+        "WRK_MTR",
+        "COT_DFT",
+        "PDT_WRK",
+        "PAK_POL",
+        "THO_CUT"
+      ],
+      "PRICE": 13600,
+      "pcsPrices": [
+        {
+          "PCS_CD": "WRK_MTR",
+          "PRICE": 0,
+          "LOG": "개당단가 : 0.00원, 인쇄수량 : 2, 주문건수 : 1, 자재단가 : 0.00"
+        },
+        {
+          "PCS_CD": "COT_DFT",
+          "PRICE": 0,
+          "LOG": "개당단가 : 0.00원, 인쇄수량 : 2, 주문건수 : 1, 자재단가 : 0.00"
+        },
+        {
+          "PCS_CD": "PDT_WRK",
+          "PRICE": 0,
+          "LOG": "개당단가 : 0.00원, 인쇄수량 : 2, 주문건수 : 1, 자재단가 : 0.00"
+        },
+        {
+          "PCS_CD": "PAK_POL",
+          "PRICE": 0,
+          "LOG": "개당단가 : 0.00원, 인쇄수량 : 2, 주문건수 : 1, 자재단가 : 0.00"
+        },
+        {
+          "PCS_CD": "THO_CUT",
+          "PRICE": 0,
+          "LOG": "개당단가 : 0.00원, 인쇄수량 : 2, 주문건수 : 1, 자재단가 : 0.00"
+        },
+        {
+          "PCS_CD": "PRT_DFT",
+          "PRICE": 13600,
+          "LOG": "개당단가 : 13600.00원, 인쇄수량 : 2, 주문건수 : 1, 자재단가 : 0.00"
+        }
+      ]
+    },
+    {
+      "via": "PRN_CNT",
+      "requested": 10,
+      "applied": {
+        "ok": true,
+        "set": "10"
+      },
+      "captured": true,
+      "ORD_CNT_echo": 1,
+      "PRN_CNT_echo": 10,
+      "price_gbn": "tiered_price",
+      "materials": [
+        {
+          "PCS_COD": "WRK_MTR",
+          "PCS_DTL_COD": "TG003",
+          "ATTB": 10,
+          "ATTB_2": "",
+          "ATTB_3": ""
+        }
+      ],
+      "allPcsCods": [
+        "WRK_MTR",
+        "COT_DFT",
+        "PDT_WRK",
+        "PAK_POL",
+        "THO_CUT"
+      ],
+      "PRICE": 66200,
+      "pcsPrices": [
+        {
+          "PCS_CD": "WRK_MTR",
+          "PRICE": 0,
+          "LOG": "개당단가 : 0.00원, 인쇄수량 : 10, 주문건수 : 1, 자재단가 : 0.00"
+        },
+        {
+          "PCS_CD": "COT_DFT",
+          "PRICE": 0,
+          "LOG": "개당단가 : 0.00원, 인쇄수량 : 10, 주문건수 : 1, 자재단가 : 0.00"
+        },
+        {
+          "PCS_CD": "PDT_WRK",
+          "PRICE": 0,
+          "LOG": "개당단가 : 0.00원, 인쇄수량 : 10, 주문건수 : 1, 자재단가 : 0.00"
+        },
+        {
+          "PCS_CD": "PAK_POL",
+          "PRICE": 0,
+          "LOG": "개당단가 : 0.00원, 인쇄수량 : 10, 주문건수 : 1, 자재단가 : 0.00"
+        },
+        {
+          "PCS_CD": "THO_CUT",
+          "PRICE": 0,
+          "LOG": "개당단가 : 0.00원, 인쇄수량 : 10, 주문건수 : 1, 자재단가 : 0.00"
+        },
+        {
+          "PCS_CD": "PRT_DFT",
+          "PRICE": 66200,
+          "LOG": "개당단가 : 66200.00원, 인쇄수량 : 10, 주문건수 : 1, 자재단가 : 0.00"
+        }
+      ]
+    }
+  ],
+  "rawPriceCalls": [
+    {
+      "mark": "init",
+      "status": 200,
+      "reqBody": "{\"dataJson\":{\"ORD_INFO\":[{\"PDT_CD\":\"GSTGMIC\",\"MTRL_CD\":\"RXBVW300\",\"CUT_WDT\":351,\"CUT_HGH\":241,\"WRK_WDT\":355,\"WRK_HGH\":245,\"PRN_CNT\":1,\"ORD_CNT\":1,\"DOSU_COD\":\"SID_S\",\"PRN_CLR_CNT\":4}],\"PCS_INFO\":[{\"PCS_COD\":\"WRK_MTR\",\"PCS_DTL_COD\":\"TG001\",\"ATTB\":1,\"ATTB_2\":\"\",\"ATTB_3\":\"\"},{\"PCS_COD\":\"COT_DFT\",\"PCS_DTL_COD\":\"TCGLS\",\"ATTB\":\"\"},{\"PCS_COD\":\"PDT_WRK\",\"PCS_DTL_COD\":\"PKT01\",\"ATTB\":\"\"},{\"PCS_COD\":\"PAK_POL\",\"PCS_DTL_COD\":\"DFXXX\",\"ATTB\":\"\"},{\"PCS_COD\":\"THO_CUT\",\"PCS_DTL_COD\":\"TG001\",\"ATTB\":\"\"}],\"price_gbn\":\"tiered_price\",\"mb_cust_cod\":\"10000000\"}}",
+      "respBody": {
+        "retCode": 200,
+        "msg": "",
+        "result": [
+          {
+            "PCS_CD": "WRK_MTR",
+            "PCS_DTL_CD": "TG001",
+            "PCS_COD": "WRK_MTR",
+            "PCS_DTL_COD": "TG001",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00 분양몰 할인율: 0.0000, 환율 : 1.00",
+            "PCS_NME": "부자재작업",
+            "PCS_DTL_NME": "삼각 마이크텍 스펀지 S"
+          },
+          {
+            "PCS_CD": "COT_DFT",
+            "PCS_DTL_CD": "TCGLS",
+            "PCS_COD": "COT_DFT",
+            "PCS_DTL_COD": "TCGLS",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00 분양몰 할인율: 0.0000, 환율 : 1.00",
+            "PCS_NME": "코팅",
+            "PCS_DTL_NME": "유광코팅단면"
+          },
+          {
+            "PCS_CD": "PDT_WRK",
+            "PCS_DTL_CD": "PKT01",
+            "PCS_COD": "PDT_WRK",
+            "PCS_DTL_COD": "PKT01",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00 분양몰 할인율: 0.0000, 환율 : 1.00",
+            "PCS_NME": "제품가공",
+            "PCS_DTL_NME": "마이크텍 조립"
+          },
+          {
+            "PCS_CD": "PAK_POL",
+            "PCS_DTL_CD": "DFXXX",
+            "PCS_COD": "PAK_POL",
+            "PCS_DTL_COD": "DFXXX",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00 분양몰 할인율: 0.0000, 환율 : 1.00",
+            "PCS_NME": "폴리백 개별포장",
+            "PCS_DTL_NME": "폴리백 개별포장"
+          },
+          {
+            "PCS_CD": "THO_CUT",
+            "PCS_DTL_CD": "TG001",
+            "PCS_COD": "THO_CUT",
+            "PCS_DTL_COD": "TG001",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00 분양몰 할인율: 0.0000, 환율 : 1.00",
+            "PCS_NME": "완칼도무송",
+            "PCS_DTL_NME": "삼각 마이크텍 S"
+          },
+          {
+            "PCS_CD": "PRT_DFT",
+            "PCS_DTL_CD": "DFXXS",
+            "PCS_COD": "PRT_DFT",
+            "PCS_DTL_COD": "DFXXS",
+            "PRICE": 6000,
+            "PRICE_VAT": 600,
+            "PRICE_MALL": 6000,
+            "PRICE_MALL_VAT": 600,
+            "ORG_PRICE": 6000,
+            "ORG_PRICE_VAT": 600,
+            "PRICE_LOG": "개당단가 : 6000.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00",
+            "PRICE_MALL_LOG": "개당단가 : 6000.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00 분양몰 할인율: 0.0000, 환율 : 1.00",
+            "PCS_NME": "인쇄",
+            "PCS_DTL_NME": "인쇄단면"
+          }
+        ],
+        "result_sum": {
+          "PRICE": 6000,
+          "PRICE_VAT": 600,
+          "PRICE_MALL": 6000,
+          "PRICE_MALL_VAT": 600,
+          "ORG_PRICE": 6000,
+          "ORG_PRICE_VAT": 600
+        },
+        "query": "dbo.WSP_ACPT_ORDER_TMPL_PCS_TIERED_PRICE '0101', 'LNG_KO', 'GSTGMIC', '<?xml version=\"1.0\"?>\n<PARAMS><DETAIL><MTRL_COD>RXBVW300</MTRL_COD><CUT_WDT>351</CUT_WDT><CUT_HGH>241</CUT_HGH><PRN_CNT>1</PRN_CNT><ORD_CNT>1</ORD_CNT><SID_GBN>SID_S</SID_GBN><TMPL_IDX/><BTN_TYPE/><PNS_DIGIT/><PNS_CNT/><PACK_PRN_CNT/><CUST_COD>15090019</CUST_COD></DETAIL><PCS><PCS_COD>WRK_MTR</PCS_COD><PCS_DTL_COD>TG001</PCS_DTL_COD><ATTB>1</ATTB><ATTB_2/><ATTB_3/></PCS><PCS><PCS_COD>COT_DFT</PCS_COD><PCS_DTL_COD>TCGLS</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS><PCS><PCS_COD>PDT_WRK</PCS_COD><PCS_DTL_COD>PKT01</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS><PCS><PCS_COD>PAK_POL</PCS_COD><PCS_DTL_COD>DFXXX</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS><PCS><PCS_COD>THO_CUT</PCS_COD><PCS_DTL_COD>TG001</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS></PARAMS>\n'",
+        "query_flexible": null
+      }
+    },
+    {
+      "mark": "init",
+      "status": 200,
+      "reqBody": "{\"dataJson\":{\"ORD_INFO\":[{\"PDT_CD\":\"GSTGMIC\",\"MTRL_CD\":\"RXBVW300\",\"CUT_WDT\":351,\"CUT_HGH\":291,\"WRK_WDT\":355,\"WRK_HGH\":295,\"PRN_CNT\":1,\"ORD_CNT\":1,\"DOSU_COD\":\"SID_S\",\"PRN_CLR_CNT\":4}],\"PCS_INFO\":[{\"PCS_COD\":\"WRK_MTR\",\"PCS_DTL_COD\":\"TG003\",\"ATTB\":1,\"ATTB_2\":\"\",\"ATTB_3\":\"\"},{\"PCS_COD\":\"COT_DFT\",\"PCS_DTL_COD\":\"TCGLS\",\"ATTB\":\"\"},{\"PCS_COD\":\"PDT_WRK\",\"PCS_DTL_COD\":\"PKT01\",\"ATTB\":\"\"},{\"PCS_COD\":\"PAK_POL\",\"PCS_DTL_COD\":\"DFXXX\",\"ATTB\":\"\"},{\"PCS_COD\":\"THO_CUT\",\"PCS_DTL_COD\":\"TG003\",\"ATTB\":\"\"}],\"price_gbn\":\"tiered_price\",\"mb_cust_cod\":\"10000000\"}}",
+      "respBody": {
+        "retCode": 200,
+        "msg": "",
+        "result": [
+          {
+            "PCS_CD": "WRK_MTR",
+            "PCS_DTL_CD": "TG003",
+            "PCS_COD": "WRK_MTR",
+            "PCS_DTL_COD": "TG003",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00 분양몰 할인율: 0.0000, 환율 : 1.00",
+            "PCS_NME": "부자재작업",
+            "PCS_DTL_NME": "삼각 마이크텍 스펀지 L"
+          },
+          {
+            "PCS_CD": "COT_DFT",
+            "PCS_DTL_CD": "TCGLS",
+            "PCS_COD": "COT_DFT",
+            "PCS_DTL_COD": "TCGLS",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00 분양몰 할인율: 0.0000, 환율 : 1.00",
+            "PCS_NME": "코팅",
+            "PCS_DTL_NME": "유광코팅단면"
+          },
+          {
+            "PCS_CD": "PDT_WRK",
+            "PCS_DTL_CD": "PKT01",
+            "PCS_COD": "PDT_WRK",
+            "PCS_DTL_COD": "PKT01",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00 분양몰 할인율: 0.0000, 환율 : 1.00",
+            "PCS_NME": "제품가공",
+            "PCS_DTL_NME": "마이크텍 조립"
+          },
+          {
+            "PCS_CD": "PAK_POL",
+            "PCS_DTL_CD": "DFXXX",
+            "PCS_COD": "PAK_POL",
+            "PCS_DTL_COD": "DFXXX",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00 분양몰 할인율: 0.0000, 환율 : 1.00",
+            "PCS_NME": "폴리백 개별포장",
+            "PCS_DTL_NME": "폴리백 개별포장"
+          },
+          {
+            "PCS_CD": "THO_CUT",
+            "PCS_DTL_CD": "TG003",
+            "PCS_COD": "THO_CUT",
+            "PCS_DTL_COD": "TG003",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00 분양몰 할인율: 0.0000, 환율 : 1.00",
+            "PCS_NME": "완칼도무송",
+            "PCS_DTL_NME": "삼각 마이크텍 L"
+          },
+          {
+            "PCS_CD": "PRT_DFT",
+            "PCS_DTL_CD": "DFXXS",
+            "PCS_COD": "PRT_DFT",
+            "PCS_DTL_COD": "DFXXS",
+            "PRICE": 7000,
+            "PRICE_VAT": 700,
+            "PRICE_MALL": 7000,
+            "PRICE_MALL_VAT": 700,
+            "ORG_PRICE": 7000,
+            "ORG_PRICE_VAT": 700,
+            "PRICE_LOG": "개당단가 : 7000.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00",
+            "PRICE_MALL_LOG": "개당단가 : 7000.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00 분양몰 할인율: 0.0000, 환율 : 1.00",
+            "PCS_NME": "인쇄",
+            "PCS_DTL_NME": "인쇄단면"
+          }
+        ],
+        "result_sum": {
+          "PRICE": 7000,
+          "PRICE_VAT": 700,
+          "PRICE_MALL": 7000,
+          "PRICE_MALL_VAT": 700,
+          "ORG_PRICE": 7000,
+          "ORG_PRICE_VAT": 700
+        },
+        "query": "dbo.WSP_ACPT_ORDER_TMPL_PCS_TIERED_PRICE '0101', 'LNG_KO', 'GSTGMIC', '<?xml version=\"1.0\"?>\n<PARAMS><DETAIL><MTRL_COD>RXBVW300</MTRL_COD><CUT_WDT>351</CUT_WDT><CUT_HGH>291</CUT_HGH><PRN_CNT>1</PRN_CNT><ORD_CNT>1</ORD_CNT><SID_GBN>SID_S</SID_GBN><TMPL_IDX/><BTN_TYPE/><PNS_DIGIT/><PNS_CNT/><PACK_PRN_CNT/><CUST_COD>15090019</CUST_COD></DETAIL><PCS><PCS_COD>WRK_MTR</PCS_COD><PCS_DTL_COD>TG003</PCS_DTL_COD><ATTB>1</ATTB><ATTB_2/><ATTB_3/></PCS><PCS><PCS_COD>COT_DFT</PCS_COD><PCS_DTL_COD>TCGLS</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS><PCS><PCS_COD>PDT_WRK</PCS_COD><PCS_DTL_COD>PKT01</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS><PCS><PCS_COD>PAK_POL</PCS_COD><PCS_DTL_COD>DFXXX</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS><PCS><PCS_COD>THO_CUT</PCS_COD><PCS_DTL_COD>TG003</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS></PARAMS>\n'",
+        "query_flexible": null
+      }
+    },
+    {
+      "mark": "PRN_CNT=2",
+      "status": 200,
+      "reqBody": "{\"dataJson\":{\"ORD_INFO\":[{\"PDT_CD\":\"GSTGMIC\",\"MTRL_CD\":\"RXBVW300\",\"CUT_WDT\":351,\"CUT_HGH\":291,\"WRK_WDT\":355,\"WRK_HGH\":295,\"PRN_CNT\":2,\"ORD_CNT\":1,\"DOSU_COD\":\"SID_S\",\"PRN_CLR_CNT\":4}],\"PCS_INFO\":[{\"PCS_COD\":\"WRK_MTR\",\"PCS_DTL_COD\":\"TG003\",\"ATTB\":2,\"ATTB_2\":\"\",\"ATTB_3\":\"\"},{\"PCS_COD\":\"COT_DFT\",\"PCS_DTL_COD\":\"TCGLS\",\"ATTB\":\"\"},{\"PCS_COD\":\"PDT_WRK\",\"PCS_DTL_COD\":\"PKT01\",\"ATTB\":\"\"},{\"PCS_COD\":\"PAK_POL\",\"PCS_DTL_COD\":\"DFXXX\",\"ATTB\":\"\"},{\"PCS_COD\":\"THO_CUT\",\"PCS_DTL_COD\":\"TG003\",\"ATTB\":\"\"}],\"price_gbn\":\"tiered_price\",\"mb_cust_cod\":\"10000000\"}}",
+      "respBody": {
+        "retCode": 200,
+        "msg": "",
+        "result": [
+          {
+            "PCS_CD": "WRK_MTR",
+            "PCS_DTL_CD": "TG003",
+            "PCS_COD": "WRK_MTR",
+            "PCS_DTL_COD": "TG003",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량 : 2, 주문건수 : 1, 자재단가 : 0.00",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량 : 2, 주문건수 : 1, 자재단가 : 0.00 분양몰 할인율: 0.0000, 환율 : 1.00",
+            "PCS_NME": "부자재작업",
+            "PCS_DTL_NME": "삼각 마이크텍 스펀지 L"
+          },
+          {
+            "PCS_CD": "COT_DFT",
+            "PCS_DTL_CD": "TCGLS",
+            "PCS_COD": "COT_DFT",
+            "PCS_DTL_COD": "TCGLS",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량 : 2, 주문건수 : 1, 자재단가 : 0.00",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량 : 2, 주문건수 : 1, 자재단가 : 0.00 분양몰 할인율: 0.0000, 환율 : 1.00",
+            "PCS_NME": "코팅",
+            "PCS_DTL_NME": "유광코팅단면"
+          },
+          {
+            "PCS_CD": "PDT_WRK",
+            "PCS_DTL_CD": "PKT01",
+            "PCS_COD": "PDT_WRK",
+            "PCS_DTL_COD": "PKT01",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량 : 2, 주문건수 : 1, 자재단가 : 0.00",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량 : 2, 주문건수 : 1, 자재단가 : 0.00 분양몰 할인율: 0.0000, 환율 : 1.00",
+            "PCS_NME": "제품가공",
+            "PCS_DTL_NME": "마이크텍 조립"
+          },
+          {
+            "PCS_CD": "PAK_POL",
+            "PCS_DTL_CD": "DFXXX",
+            "PCS_COD": "PAK_POL",
+            "PCS_DTL_COD": "DFXXX",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량 : 2, 주문건수 : 1, 자재단가 : 0.00",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량 : 2, 주문건수 : 1, 자재단가 : 0.00 분양몰 할인율: 0.0000, 환율 : 1.00",
+            "PCS_NME": "폴리백 개별포장",
+            "PCS_DTL_NME": "폴리백 개별포장"
+          },
+          {
+            "PCS_CD": "THO_CUT",
+            "PCS_DTL_CD": "TG003",
+            "PCS_COD": "THO_CUT",
+            "PCS_DTL_COD": "TG003",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량 : 2, 주문건수 : 1, 자재단가 : 0.00",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량 : 2, 주문건수 : 1, 자재단가 : 0.00 분양몰 할인율: 0.0000, 환율 : 1.00",
+            "PCS_NME": "완칼도무송",
+            "PCS_DTL_NME": "삼각 마이크텍 L"
+          },
+          {
+            "PCS_CD": "PRT_DFT",
+            "PCS_DTL_CD": "DFXXS",
+            "PCS_COD": "PRT_DFT",
+            "PCS_DTL_COD": "DFXXS",
+            "PRICE": 13600,
+            "PRICE_VAT": 1360,
+            "PRICE_MALL": 13600,
+            "PRICE_MALL_VAT": 1360,
+            "ORG_PRICE": 13600,
+            "ORG_PRICE_VAT": 1360,
+            "PRICE_LOG": "개당단가 : 13600.00원, 인쇄수량 : 2, 주문건수 : 1, 자재단가 : 0.00",
+            "PRICE_MALL_LOG": "개당단가 : 13600.00원, 인쇄수량 : 2, 주문건수 : 1, 자재단가 : 0.00 분양몰 할인율: 0.0000, 환율 : 1.00",
+            "PCS_NME": "인쇄",
+            "PCS_DTL_NME": "인쇄단면"
+          }
+        ],
+        "result_sum": {
+          "PRICE": 13600,
+          "PRICE_VAT": 1360,
+          "PRICE_MALL": 13600,
+          "PRICE_MALL_VAT": 1360,
+          "ORG_PRICE": 13600,
+          "ORG_PRICE_VAT": 1360
+        },
+        "query": "dbo.WSP_ACPT_ORDER_TMPL_PCS_TIERED_PRICE '0101', 'LNG_KO', 'GSTGMIC', '<?xml version=\"1.0\"?>\n<PARAMS><DETAIL><MTRL_COD>RXBVW300</MTRL_COD><CUT_WDT>351</CUT_WDT><CUT_HGH>291</CUT_HGH><PRN_CNT>2</PRN_CNT><ORD_CNT>1</ORD_CNT><SID_GBN>SID_S</SID_GBN><TMPL_IDX/><BTN_TYPE/><PNS_DIGIT/><PNS_CNT/><PACK_PRN_CNT/><CUST_COD>15090019</CUST_COD></DETAIL><PCS><PCS_COD>WRK_MTR</PCS_COD><PCS_DTL_COD>TG003</PCS_DTL_COD><ATTB>2</ATTB><ATTB_2/><ATTB_3/></PCS><PCS><PCS_COD>COT_DFT</PCS_COD><PCS_DTL_COD>TCGLS</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS><PCS><PCS_COD>PDT_WRK</PCS_COD><PCS_DTL_COD>PKT01</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS><PCS><PCS_COD>PAK_POL</PCS_COD><PCS_DTL_COD>DFXXX</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS><PCS><PCS_COD>THO_CUT</PCS_COD><PCS_DTL_COD>TG003</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS></PARAMS>\n'",
+        "query_flexible": null
+      }
+    },
+    {
+      "mark": "PRN_CNT=10",
+      "status": 200,
+      "reqBody": "{\"dataJson\":{\"ORD_INFO\":[{\"PDT_CD\":\"GSTGMIC\",\"MTRL_CD\":\"RXBVW300\",\"CUT_WDT\":351,\"CUT_HGH\":291,\"WRK_WDT\":355,\"WRK_HGH\":295,\"PRN_CNT\":10,\"ORD_CNT\":1,\"DOSU_COD\":\"SID_S\",\"PRN_CLR_CNT\":4}],\"PCS_INFO\":[{\"PCS_COD\":\"WRK_MTR\",\"PCS_DTL_COD\":\"TG003\",\"ATTB\":10,\"ATTB_2\":\"\",\"ATTB_3\":\"\"},{\"PCS_COD\":\"COT_DFT\",\"PCS_DTL_COD\":\"TCGLS\",\"ATTB\":\"\"},{\"PCS_COD\":\"PDT_WRK\",\"PCS_DTL_COD\":\"PKT01\",\"ATTB\":\"\"},{\"PCS_COD\":\"PAK_POL\",\"PCS_DTL_COD\":\"DFXXX\",\"ATTB\":\"\"},{\"PCS_COD\":\"THO_CUT\",\"PCS_DTL_COD\":\"TG003\",\"ATTB\":\"\"}],\"price_gbn\":\"tiered_price\",\"mb_cust_cod\":\"10000000\"}}",
+      "respBody": {
+        "retCode": 200,
+        "msg": "",
+        "result": [
+          {
+            "PCS_CD": "WRK_MTR",
+            "PCS_DTL_CD": "TG003",
+            "PCS_COD": "WRK_MTR",
+            "PCS_DTL_COD": "TG003",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량 : 10, 주문건수 : 1, 자재단가 : 0.00",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량 : 10, 주문건수 : 1, 자재단가 : 0.00 분양몰 할인율: 0.0000, 환율 : 1.00",
+            "PCS_NME": "부자재작업",
+            "PCS_DTL_NME": "삼각 마이크텍 스펀지 L"
+          },
+          {
+            "PCS_CD": "COT_DFT",
+            "PCS_DTL_CD": "TCGLS",
+            "PCS_COD": "COT_DFT",
+            "PCS_DTL_COD": "TCGLS",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량 : 10, 주문건수 : 1, 자재단가 : 0.00",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량 : 10, 주문건수 : 1, 자재단가 : 0.00 분양몰 할인율: 0.0000, 환율 : 1.00",
+            "PCS_NME": "코팅",
+            "PCS_DTL_NME": "유광코팅단면"
+          },
+          {
+            "PCS_CD": "PDT_WRK",
+            "PCS_DTL_CD": "PKT01",
+            "PCS_COD": "PDT_WRK",
+            "PCS_DTL_COD": "PKT01",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량 : 10, 주문건수 : 1, 자재단가 : 0.00",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량 : 10, 주문건수 : 1, 자재단가 : 0.00 분양몰 할인율: 0.0000, 환율 : 1.00",
+            "PCS_NME": "제품가공",
+            "PCS_DTL_NME": "마이크텍 조립"
+          },
+          {
+            "PCS_CD": "PAK_POL",
+            "PCS_DTL_CD": "DFXXX",
+            "PCS_COD": "PAK_POL",
+            "PCS_DTL_COD": "DFXXX",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량 : 10, 주문건수 : 1, 자재단가 : 0.00",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량 : 10, 주문건수 : 1, 자재단가 : 0.00 분양몰 할인율: 0.0000, 환율 : 1.00",
+            "PCS_NME": "폴리백 개별포장",
+            "PCS_DTL_NME": "폴리백 개별포장"
+          },
+          {
+            "PCS_CD": "THO_CUT",
+            "PCS_DTL_CD": "TG003",
+            "PCS_COD": "THO_CUT",
+            "PCS_DTL_COD": "TG003",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량 : 10, 주문건수 : 1, 자재단가 : 0.00",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량 : 10, 주문건수 : 1, 자재단가 : 0.00 분양몰 할인율: 0.0000, 환율 : 1.00",
+            "PCS_NME": "완칼도무송",
+            "PCS_DTL_NME": "삼각 마이크텍 L"
+          },
+          {
+            "PCS_CD": "PRT_DFT",
+            "PCS_DTL_CD": "DFXXS",
+            "PCS_COD": "PRT_DFT",
+            "PCS_DTL_COD": "DFXXS",
+            "PRICE": 66200,
+            "PRICE_VAT": 6620,
+            "PRICE_MALL": 66200,
+            "PRICE_MALL_VAT": 6620,
+            "ORG_PRICE": 66200,
+            "ORG_PRICE_VAT": 6620,
+            "PRICE_LOG": "개당단가 : 66200.00원, 인쇄수량 : 10, 주문건수 : 1, 자재단가 : 0.00",
+            "PRICE_MALL_LOG": "개당단가 : 66200.00원, 인쇄수량 : 10, 주문건수 : 1, 자재단가 : 0.00 분양몰 할인율: 0.0000, 환율 : 1.00",
+            "PCS_NME": "인쇄",
+            "PCS_DTL_NME": "인쇄단면"
+          }
+        ],
+        "result_sum": {
+          "PRICE": 66200,
+          "PRICE_VAT": 6620,
+          "PRICE_MALL": 66200,
+          "PRICE_MALL_VAT": 6620,
+          "ORG_PRICE": 66200,
+          "ORG_PRICE_VAT": 6620
+        },
+        "query": "dbo.WSP_ACPT_ORDER_TMPL_PCS_TIERED_PRICE '0101', 'LNG_KO', 'GSTGMIC', '<?xml version=\"1.0\"?>\n<PARAMS><DETAIL><MTRL_COD>RXBVW300</MTRL_COD><CUT_WDT>351</CUT_WDT><CUT_HGH>291</CUT_HGH><PRN_CNT>10</PRN_CNT><ORD_CNT>1</ORD_CNT><SID_GBN>SID_S</SID_GBN><TMPL_IDX/><BTN_TYPE/><PNS_DIGIT/><PNS_CNT/><PACK_PRN_CNT/><CUST_COD>15090019</CUST_COD></DETAIL><PCS><PCS_COD>WRK_MTR</PCS_COD><PCS_DTL_COD>TG003</PCS_DTL_COD><ATTB>10</ATTB><ATTB_2/><ATTB_3/></PCS><PCS><PCS_COD>COT_DFT</PCS_COD><PCS_DTL_COD>TCGLS</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS><PCS><PCS_COD>PDT_WRK</PCS_COD><PCS_DTL_COD>PKT01</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS><PCS><PCS_COD>PAK_POL</PCS_COD><PCS_DTL_COD>DFXXX</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS><PCS><PCS_COD>THO_CUT</PCS_COD><PCS_DTL_COD>TG003</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS></PARAMS>\n'",
+        "query_flexible": null
+      }
+    }
+  ]
+}

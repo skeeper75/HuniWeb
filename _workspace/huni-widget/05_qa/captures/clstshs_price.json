@@ -1,0 +1,289 @@
+{
+  "product": "CLSTSHS",
+  "mission": "G-5 apparel DIR_MTR + PRICE>0",
+  "capturedAt": "2026-06-03T22:50:01.925Z",
+  "summary": [
+    {
+      "mark": "init",
+      "gbn": "clothes2025_price",
+      "PDT": "CLSTSHS",
+      "ORD_CNT": 1,
+      "allPcs": [
+        "PDT_WRK",
+        "DIR_MTR"
+      ],
+      "hasDIR_MTR": true,
+      "DIR_MTR": {
+        "PCS_COD": "DIR_MTR",
+        "PCS_DTL_COD": "SI014",
+        "ATTB": 1
+      },
+      "SUM": 19900
+    },
+    {
+      "mark": "method",
+      "gbn": "clothes2025_price",
+      "PDT": "CLSTSHS",
+      "ORD_CNT": 1,
+      "allPcs": [
+        "PDT_WRK",
+        "DIR_MTR"
+      ],
+      "hasDIR_MTR": true,
+      "DIR_MTR": {
+        "PCS_COD": "DIR_MTR",
+        "PCS_DTL_COD": "SI014",
+        "ATTB": 1
+      },
+      "SUM": 19900
+    },
+    {
+      "mark": "sizeM",
+      "gbn": "clothes2025_price",
+      "PDT": "CLSTSHS",
+      "ORD_CNT": 1,
+      "allPcs": [
+        "PDT_WRK",
+        "DIR_MTR"
+      ],
+      "hasDIR_MTR": true,
+      "DIR_MTR": {
+        "PCS_COD": "DIR_MTR",
+        "PCS_DTL_COD": "SI030",
+        "ATTB": 1
+      },
+      "SUM": 19900
+    },
+    {
+      "mark": "qty",
+      "gbn": "clothes2025_price",
+      "PDT": "CLSTSHS",
+      "ORD_CNT": 1,
+      "allPcs": [
+        "PDT_WRK",
+        "DIR_MTR"
+      ],
+      "hasDIR_MTR": true,
+      "DIR_MTR": {
+        "PCS_COD": "DIR_MTR",
+        "PCS_DTL_COD": "SI030",
+        "ATTB": 1
+      },
+      "SUM": 19900
+    }
+  ],
+  "rawPriceCalls": [
+    {
+      "mark": "init",
+      "status": 200,
+      "reqBody": "{\"dataJson\":{\"ORD_INFO\":[{\"PDT_CD\":\"CLSTSHS\",\"MTRL_CD\":\"SXSRT326\",\"CUT_WDT\":100,\"CUT_HGH\":100,\"WRK_WDT\":100,\"WRK_HGH\":100,\"PRN_CNT\":1,\"ORD_CNT\":1,\"DOSU_COD\":\"SID_S\",\"PRN_CLR_CNT\":4,\"PRINT_TYPE\":\"PTP_DTF\"}],\"PCS_INFO\":[{\"PCS_COD\":\"PDT_WRK\",\"PCS_DTL_COD\":\"CL011\"},{\"PCS_COD\":\"DIR_MTR\",\"PCS_DTL_COD\":\"SI014\",\"ATTB\":1}],\"price_gbn\":\"clothes2025_price\",\"mb_cust_cod\":\"10000000\"}}",
+      "respBody": {
+        "retCode": 200,
+        "msg": "",
+        "result": [
+          {
+            "PCS_CD": "PDT_WRK",
+            "PCS_DTL_CD": "CL011",
+            "PCS_COD": "PDT_WRK",
+            "PCS_DTL_COD": "CL011",
+            "PRICE": 3700,
+            "PRICE_VAT": 370,
+            "PRICE_MALL": 3700,
+            "PRICE_MALL_VAT": 370,
+            "ORG_PRICE": 3700,
+            "ORG_PRICE_VAT": 370,
+            "PRICE_LOG": "개당단가 : 3700.00원, 인쇄수량DDDDD : 1, 주문건수 : 1",
+            "PRICE_MALL_LOG": "개당단가 : 3700.00원, 인쇄수량DDDDD : 1, 주문건수 : 1 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "제품가공",
+            "PCS_DTL_NME": "좌측가슴"
+          },
+          {
+            "PCS_CD": "DIR_MTR",
+            "PCS_DTL_CD": "SI014",
+            "PCS_COD": "DIR_MTR",
+            "PCS_DTL_COD": "SI014",
+            "PRICE": 16200,
+            "PRICE_VAT": 1620,
+            "PRICE_MALL": 16200,
+            "PRICE_MALL_VAT": 1620,
+            "ORG_PRICE": 16200,
+            "ORG_PRICE_VAT": 1620,
+            "PRICE_LOG": "개당단가 : 16200.00원, 인쇄수량DDDDD : 1, 주문건수 : 1",
+            "PRICE_MALL_LOG": "개당단가 : 16200.00원, 인쇄수량DDDDD : 1, 주문건수 : 1 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "부자재직접인쇄",
+            "PCS_DTL_NME": "(5942) 6.2oz 프리미엄 티셔츠 화이트  L"
+          }
+        ],
+        "result_sum": {
+          "PRICE": 19900,
+          "PRICE_VAT": 1990,
+          "PRICE_MALL": 19900,
+          "PRICE_MALL_VAT": 1990,
+          "ORG_PRICE": 19900,
+          "ORG_PRICE_VAT": 1990
+        },
+        "query": "dbo.WSP_ACPT_ORDER_TMPL_PCS_PRICE '0101', 'LNG_KO', 'CLSTSHS', '<?xml version=\"1.0\"?>\n<PARAMS><DETAIL><MTRL_COD>SXSRT326</MTRL_COD><CUT_WDT>100</CUT_WDT><CUT_HGH>100</CUT_HGH><PRN_CNT>1</PRN_CNT><ORD_CNT>1</ORD_CNT><SID_GBN>SID_S</SID_GBN><TMPL_IDX/><BTN_TYPE/><PNS_DIGIT/><PNS_CNT/><PACK_PRN_CNT/><CUST_COD>15090019</CUST_COD></DETAIL><PCS><PCS_COD>PDT_WRK</PCS_COD><PCS_DTL_COD>CL011</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS><PCS><PCS_COD>DIR_MTR</PCS_COD><PCS_DTL_COD>SI014</PCS_DTL_COD><ATTB>1</ATTB><ATTB_2/><ATTB_3/></PCS></PARAMS>\n'",
+        "query_flexible": null
+      }
+    },
+    {
+      "mark": "method",
+      "status": 200,
+      "reqBody": "{\"dataJson\":{\"ORD_INFO\":[{\"PDT_CD\":\"CLSTSHS\",\"MTRL_CD\":\"SXSRT326\",\"CUT_WDT\":100,\"CUT_HGH\":100,\"WRK_WDT\":100,\"WRK_HGH\":100,\"PRN_CNT\":1,\"ORD_CNT\":1,\"DOSU_COD\":\"SID_S\",\"PRN_CLR_CNT\":4,\"PRINT_TYPE\":\"PTP_DIR\"}],\"PCS_INFO\":[{\"PCS_COD\":\"PDT_WRK\",\"PCS_DTL_COD\":\"CL011\"},{\"PCS_COD\":\"DIR_MTR\",\"PCS_DTL_COD\":\"SI014\",\"ATTB\":1}],\"price_gbn\":\"clothes2025_price\",\"mb_cust_cod\":\"10000000\"}}",
+      "respBody": {
+        "retCode": 200,
+        "msg": "",
+        "result": [
+          {
+            "PCS_CD": "PDT_WRK",
+            "PCS_DTL_CD": "CL011",
+            "PCS_COD": "PDT_WRK",
+            "PCS_DTL_COD": "CL011",
+            "PRICE": 3700,
+            "PRICE_VAT": 370,
+            "PRICE_MALL": 3700,
+            "PRICE_MALL_VAT": 370,
+            "ORG_PRICE": 3700,
+            "ORG_PRICE_VAT": 370,
+            "PRICE_LOG": "개당단가 : 3700.00원, 인쇄수량DDDDD : 1, 주문건수 : 1",
+            "PRICE_MALL_LOG": "개당단가 : 3700.00원, 인쇄수량DDDDD : 1, 주문건수 : 1 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "제품가공",
+            "PCS_DTL_NME": "좌측가슴"
+          },
+          {
+            "PCS_CD": "DIR_MTR",
+            "PCS_DTL_CD": "SI014",
+            "PCS_COD": "DIR_MTR",
+            "PCS_DTL_COD": "SI014",
+            "PRICE": 16200,
+            "PRICE_VAT": 1620,
+            "PRICE_MALL": 16200,
+            "PRICE_MALL_VAT": 1620,
+            "ORG_PRICE": 16200,
+            "ORG_PRICE_VAT": 1620,
+            "PRICE_LOG": "개당단가 : 16200.00원, 인쇄수량DDDDD : 1, 주문건수 : 1",
+            "PRICE_MALL_LOG": "개당단가 : 16200.00원, 인쇄수량DDDDD : 1, 주문건수 : 1 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "부자재직접인쇄",
+            "PCS_DTL_NME": "(5942) 6.2oz 프리미엄 티셔츠 화이트  L"
+          }
+        ],
+        "result_sum": {
+          "PRICE": 19900,
+          "PRICE_VAT": 1990,
+          "PRICE_MALL": 19900,
+          "PRICE_MALL_VAT": 1990,
+          "ORG_PRICE": 19900,
+          "ORG_PRICE_VAT": 1990
+        },
+        "query": "dbo.WSP_ACPT_ORDER_TMPL_PCS_PRICE '0101', 'LNG_KO', 'CLSTSHS', '<?xml version=\"1.0\"?>\n<PARAMS><DETAIL><MTRL_COD>SXSRT326</MTRL_COD><CUT_WDT>100</CUT_WDT><CUT_HGH>100</CUT_HGH><PRN_CNT>1</PRN_CNT><ORD_CNT>1</ORD_CNT><SID_GBN>SID_S</SID_GBN><TMPL_IDX/><BTN_TYPE/><PNS_DIGIT/><PNS_CNT/><PACK_PRN_CNT/><CUST_COD>15090019</CUST_COD></DETAIL><PCS><PCS_COD>PDT_WRK</PCS_COD><PCS_DTL_COD>CL011</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS><PCS><PCS_COD>DIR_MTR</PCS_COD><PCS_DTL_COD>SI014</PCS_DTL_COD><ATTB>1</ATTB><ATTB_2/><ATTB_3/></PCS></PARAMS>\n'",
+        "query_flexible": null
+      }
+    },
+    {
+      "mark": "sizeM",
+      "status": 200,
+      "reqBody": "{\"dataJson\":{\"ORD_INFO\":[{\"PDT_CD\":\"CLSTSHS\",\"MTRL_CD\":\"SXSRT226\",\"CUT_WDT\":100,\"CUT_HGH\":100,\"WRK_WDT\":100,\"WRK_HGH\":100,\"PRN_CNT\":1,\"ORD_CNT\":1,\"DOSU_COD\":\"SID_S\",\"PRN_CLR_CNT\":4,\"PRINT_TYPE\":\"PTP_DIR\"}],\"PCS_INFO\":[{\"PCS_COD\":\"PDT_WRK\",\"PCS_DTL_COD\":\"CL011\"},{\"PCS_COD\":\"DIR_MTR\",\"PCS_DTL_COD\":\"SI030\",\"ATTB\":1}],\"price_gbn\":\"clothes2025_price\",\"mb_cust_cod\":\"10000000\"}}",
+      "respBody": {
+        "retCode": 200,
+        "msg": "",
+        "result": [
+          {
+            "PCS_CD": "PDT_WRK",
+            "PCS_DTL_CD": "CL011",
+            "PCS_COD": "PDT_WRK",
+            "PCS_DTL_COD": "CL011",
+            "PRICE": 3700,
+            "PRICE_VAT": 370,
+            "PRICE_MALL": 3700,
+            "PRICE_MALL_VAT": 370,
+            "ORG_PRICE": 3700,
+            "ORG_PRICE_VAT": 370,
+            "PRICE_LOG": "개당단가 : 3700.00원, 인쇄수량DDDDD : 1, 주문건수 : 1",
+            "PRICE_MALL_LOG": "개당단가 : 3700.00원, 인쇄수량DDDDD : 1, 주문건수 : 1 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "제품가공",
+            "PCS_DTL_NME": "좌측가슴"
+          },
+          {
+            "PCS_CD": "DIR_MTR",
+            "PCS_DTL_CD": "SI030",
+            "PCS_COD": "DIR_MTR",
+            "PCS_DTL_COD": "SI030",
+            "PRICE": 16200,
+            "PRICE_VAT": 1620,
+            "PRICE_MALL": 16200,
+            "PRICE_MALL_VAT": 1620,
+            "ORG_PRICE": 16200,
+            "ORG_PRICE_VAT": 1620,
+            "PRICE_LOG": "개당단가 : 16200.00원, 인쇄수량DDDDD : 1, 주문건수 : 1",
+            "PRICE_MALL_LOG": "개당단가 : 16200.00원, 인쇄수량DDDDD : 1, 주문건수 : 1 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "부자재직접인쇄",
+            "PCS_DTL_NME": "(5942) 6.2oz 프리미엄 티셔츠 화이트 M"
+          }
+        ],
+        "result_sum": {
+          "PRICE": 19900,
+          "PRICE_VAT": 1990,
+          "PRICE_MALL": 19900,
+          "PRICE_MALL_VAT": 1990,
+          "ORG_PRICE": 19900,
+          "ORG_PRICE_VAT": 1990
+        },
+        "query": "dbo.WSP_ACPT_ORDER_TMPL_PCS_PRICE '0101', 'LNG_KO', 'CLSTSHS', '<?xml version=\"1.0\"?>\n<PARAMS><DETAIL><MTRL_COD>SXSRT226</MTRL_COD><CUT_WDT>100</CUT_WDT><CUT_HGH>100</CUT_HGH><PRN_CNT>1</PRN_CNT><ORD_CNT>1</ORD_CNT><SID_GBN>SID_S</SID_GBN><TMPL_IDX/><BTN_TYPE/><PNS_DIGIT/><PNS_CNT/><PACK_PRN_CNT/><CUST_COD>15090019</CUST_COD></DETAIL><PCS><PCS_COD>PDT_WRK</PCS_COD><PCS_DTL_COD>CL011</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS><PCS><PCS_COD>DIR_MTR</PCS_COD><PCS_DTL_COD>SI030</PCS_DTL_COD><ATTB>1</ATTB><ATTB_2/><ATTB_3/></PCS></PARAMS>\n'",
+        "query_flexible": null
+      }
+    },
+    {
+      "mark": "qty",
+      "status": 200,
+      "reqBody": "{\"dataJson\":{\"ORD_INFO\":[{\"PDT_CD\":\"CLSTSHS\",\"MTRL_CD\":\"SXSRT226\",\"CUT_WDT\":100,\"CUT_HGH\":100,\"WRK_WDT\":100,\"WRK_HGH\":100,\"PRN_CNT\":1,\"ORD_CNT\":1,\"DOSU_COD\":\"SID_S\",\"PRN_CLR_CNT\":4,\"PRINT_TYPE\":\"PTP_DIR\"}],\"PCS_INFO\":[{\"PCS_COD\":\"PDT_WRK\",\"PCS_DTL_COD\":\"CL011\"},{\"PCS_COD\":\"DIR_MTR\",\"PCS_DTL_COD\":\"SI030\",\"ATTB\":1}],\"price_gbn\":\"clothes2025_price\",\"mb_cust_cod\":\"10000000\"}}",
+      "respBody": {
+        "retCode": 200,
+        "msg": "",
+        "result": [
+          {
+            "PCS_CD": "PDT_WRK",
+            "PCS_DTL_CD": "CL011",
+            "PCS_COD": "PDT_WRK",
+            "PCS_DTL_COD": "CL011",
+            "PRICE": 3700,
+            "PRICE_VAT": 370,
+            "PRICE_MALL": 3700,
+            "PRICE_MALL_VAT": 370,
+            "ORG_PRICE": 3700,
+            "ORG_PRICE_VAT": 370,
+            "PRICE_LOG": "개당단가 : 3700.00원, 인쇄수량DDDDD : 1, 주문건수 : 1",
+            "PRICE_MALL_LOG": "개당단가 : 3700.00원, 인쇄수량DDDDD : 1, 주문건수 : 1 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "제품가공",
+            "PCS_DTL_NME": "좌측가슴"
+          },
+          {
+            "PCS_CD": "DIR_MTR",
+            "PCS_DTL_CD": "SI030",
+            "PCS_COD": "DIR_MTR",
+            "PCS_DTL_COD": "SI030",
+            "PRICE": 16200,
+            "PRICE_VAT": 1620,
+            "PRICE_MALL": 16200,
+            "PRICE_MALL_VAT": 1620,
+            "ORG_PRICE": 16200,
+            "ORG_PRICE_VAT": 1620,
+            "PRICE_LOG": "개당단가 : 16200.00원, 인쇄수량DDDDD : 1, 주문건수 : 1",
+            "PRICE_MALL_LOG": "개당단가 : 16200.00원, 인쇄수량DDDDD : 1, 주문건수 : 1 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "부자재직접인쇄",
+            "PCS_DTL_NME": "(5942) 6.2oz 프리미엄 티셔츠 화이트 M"
+          }
+        ],
+        "result_sum": {
+          "PRICE": 19900,
+          "PRICE_VAT": 1990,
+          "PRICE_MALL": 19900,
+          "PRICE_MALL_VAT": 1990,
+          "ORG_PRICE": 19900,
+          "ORG_PRICE_VAT": 1990
+        },
+        "query": "dbo.WSP_ACPT_ORDER_TMPL_PCS_PRICE '0101', 'LNG_KO', 'CLSTSHS', '<?xml version=\"1.0\"?>\n<PARAMS><DETAIL><MTRL_COD>SXSRT226</MTRL_COD><CUT_WDT>100</CUT_WDT><CUT_HGH>100</CUT_HGH><PRN_CNT>1</PRN_CNT><ORD_CNT>1</ORD_CNT><SID_GBN>SID_S</SID_GBN><TMPL_IDX/><BTN_TYPE/><PNS_DIGIT/><PNS_CNT/><PACK_PRN_CNT/><CUST_COD>15090019</CUST_COD></DETAIL><PCS><PCS_COD>PDT_WRK</PCS_COD><PCS_DTL_COD>CL011</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS><PCS><PCS_COD>DIR_MTR</PCS_COD><PCS_DTL_COD>SI030</PCS_DTL_COD><ATTB>1</ATTB><ATTB_2/><ATTB_3/></PCS></PARAMS>\n'",
+        "query_flexible": null
+      }
+    }
+  ]
+}

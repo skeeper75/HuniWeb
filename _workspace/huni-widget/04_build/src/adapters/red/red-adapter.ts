@@ -138,10 +138,12 @@ const COMPOSITE_PCS = new Set(['COT_DFT', 'SCO_DFT']);
 //    deob_06:1250  material = orderData.quantityInfo.prnCnt(**PRN_CNT**, ORD_CNT 아님)
 //  캡처 실측: 전 quantity-echo PCS 에서 ORD_CNT 는 항상 1 또는 부재 → ATTB=ORD_CNT 권위 0건.
 //    PDT_WRK: GSPUFBC×2·GSTGMIC(PKT01) 4/4 ATTB='' (ORD_CNT=1 에도 '') → echo 대상 아님(W1-b 제외).
-//  [HARD] 새 미검증 권위 생성 금지. 아래 set 의 String(req.quantity) 값 동작은 qty=1 캡처와
-//  *우연일치*(ATTB=1) — qty>1 재캡처로 ORD_CNT/상수/material-qty 구분 전까지 ATTB scaling 미검증
-//  (Deferred D-1, 컨버전 게이트). 이번 Wave 는 PDT_WRK 만 echo 대상에서 제거(캡처 정합), 나머지
-//  WRK_MTR/DIR_MTR/SUB_MTR/INN_DFT 값 동작은 보존(임의 ''치환=캡처 반증·날조 위험).
+//  [D-1 RESOLVED 2026-06-04 qty-sweep] WRK_MTR/DIR_MTR ATTB = 사용자 건수(N) echo 라이브 검증:
+//   GSTGMIC·ACNTHAP·GSPDLNG·GSTBMWM 에서 ATTB 가 {2,10} 로 PRN_CNT(건수)를 따라 변하고 PRICE 선형.
+//   우리 String(req.quantity)=사용자 건수 N → Red ATTB(=건수 N)와 값 일치 → 현 동작 정당.
+//  ※ 단 굿즈 건수의 *필드축*은 별건(G-6, 잠복/컨버전 게이트): Red 는 건수를 PRN_CNT 에 싣고 ORD_CNT=1,
+//   우리는 ORD_CNT 에 실음. ATTB 값은 옳으나 실 HTTP 가격권위(PRN_CNT) 배선은 컨버전 시 정렬 필요.
+//  INN_DFT 는 노트류 요청 shape 결함으로 scaling 미검증 유지(W2-b). SUB_MTR 은 W2-a(엔트리-shape).
 const QUANTITY_ECHO_PCS = new Set(['SUB_MTR', 'INN_DFT', 'WRK_MTR', 'DIR_MTR']);
 // W2-a(A-2 발현) SUB_MTR 이중의미 해소 — `QUANTITY_ECHO_PCS` 단일 Set 이 SUB_MTR 의 두 의미를
 //  평면화한다: (a)다종 자재선택형(ACPDSTD: 엔트리별 distinct MTRL_CD·ATTB_CD None·VIEW_YN=Y) 은

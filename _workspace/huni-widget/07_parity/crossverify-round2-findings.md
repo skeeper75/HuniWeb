@@ -99,3 +99,26 @@
 ## 4. 1차→2차 교훈 (하네스 정직성)
 - 1차 hw-qa "crossverify-fix-verification GO(신규부채 0)"의 G-1 부분은 **권위 미대조**(소스 라인 인용 자체를 검증 안 함) + 양변 String() 타우톨로지 테스트. → **검증 메타원칙1(도달+권위 인용 실재성)을 게이트에 명문화** 필요.
 - 보정 시 [HARD] 새 미검증 권위 생성 금지가 결정적 — "ATTB=orderQty 폐기"를 "ATTB=''"로 단순치환하면 캡처상 ATTB=1인 PCS가 깨짐. 캡처·deob 권위 밖은 보류가 옳음.
+
+---
+
+## 5. 라이브 캡처 결과 (2026-06-04, qty-sweep + 의류 PRICE>0)
+
+세션 갱신(extract-cookies) 후 testbed :3001 fresh 재기동, qty {1,2,10}로 material-PCS 스윕. 산출 `05_qa/captures/qtysweep_*.json`·`clstshs_price.json`, 분석 `05_qa/qtysweep-attb-analysis.md`. 전 출력 JWT redact(0건).
+
+### 5.1 D-1 RESOLVED — material-PCS ATTB = 건수(PRN_CNT) 값 echo (현 동작 검증)
+- 4상품(GSTGMIC·ACNTHAP=WRK_MTR / GSPDLNG·GSTBMWM=DIR_MTR) 전수에서 ATTB가 {2,10}로 변하고 `result_sum.PRICE`가 선형 비례 → **상수 아님**. 변하는 축은 **PRN_CNT(건수/디자인 수)**, ORD_CNT는 1 불변.
+- 코드 대조: 우리 위젯은 사용자 quantity 선택 N → `req.quantity=N` → material `ATTB=String(N)`. 즉 **ATTB가 사용자 건수 N을 echo** = Red의 ATTB(=PRN_CNT=N)와 **값 일치**. → 어댑터 `ATTB=String(req.quantity)` 및 characterization 테스트(ATTB='500'/'12')는 **값으로 정당**(D-1 "현 동작 보존"이 옳았음, 이제 라이브 검증).
+
+### 5.2 G-6 신규 (잠복, 컨버전 게이트) — 굿즈 수량 필드축 스왑 (ORD_CNT vs PRN_CNT)
+- Red(굿즈): 사용자 건수 N → `ORD_CNT=1`, **`PRN_CNT=N`**. 우리: `ORD_CNT=N`, `PRN_CNT=1`(`price.ts:34,37` quantity↔ORD_CNT/printCount↔PRN_CNT 분리, printCount UI 미노출=1).
+- 즉 **굿즈에서 건수를 ORD_CNT 필드에 넣는데 Red 가격권위는 PRN_CNT** → 실 HTTP 시 1건 단가 고정 침묵 결함. 단 현재 fixture 정적룩업이라 **미발현(G-INT-0)** → 컨버전 게이트. 처방=상품군(tiered_price 굿즈)별 quantity→PRN_CNT 매핑 결정(아키텍트 주도, 코어 touch).
+
+### 5.3 G-5 CONFIRMED — 의류 DIR_MTR을 Red는 유지, 우리는 드롭
+- 라이브: CLSTSHS clothes2025_price `result_sum.PRICE=19,900`, PCS_INFO `allPcs=[PDT_WRK, DIR_MTR]` → Red는 **DIR_MTR 유지**. size M 시 DIR_MTR.PCS_DTL_COD SI014→SI030(size-linked). 우리 apparel 배타삼항(red-adapter.ts:83-85)은 드롭 → **실 결함 확정**. 처방=additive 삼항(hidden-essential 중복가드). 컨버전 게이트(실 가격 시 발현).
+
+### 5.4 W2-b/INN_DFT 여전히 미해결 — 우리측 요청 shape 결함
+- 노트류(GSNTSPR/GSDRSKS) tmpl_price는 ORD_INFO에 ORD_CNT/PRN_CNT 필드 부재(굿즈 tiered_price와 다른 shape), PRN_CNT 셀렉트=페이지수(비연속 1,6,11…). 조작해도 `result_sum.PRICE=0` → **우리측 요청 shape/필수필드 결함 신호**(Red 정상값 아님, HARD). INN_DFT scaling은 0-응답으로 판정 불가 → **미검증 유지**. editor_sdk tmpl_price 노트 요청 필드 역공학 후 재캡처 필요.
+
+### 5.5 가격 권위 정정 (HARD 실증) — result_sum.PRICE
+- 가격 권위 = `result_sum.PRICE` 단일 출처. per-PCS `result[].PRICE`는 자재/코팅 번들 구성요소에서 **0이 정상**(GSTGMIC WRK_MTR/COT_DFT 라인=0, 실가는 PRT_DFT 라인+result_sum). per-line을 읽으면 **거짓 PRICE=0** → HARD 규칙이 경고하던 침묵 결함 벡터를 캡처가 실제로 재현·교정. mapPriceResponse가 result_sum을 권위로 쓰는지 별도 확인 권고.

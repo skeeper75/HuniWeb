@@ -27,13 +27,15 @@
 
 ## 3. 다음 할 일 (우선순위 순) — 전부 컨버전 단계, day-1 무차단
 
-> **이번 세션 완료:** 2차 팀 교차검증(3렌즈) + 보정 Wave1(G-1 ATTB 권위 날조 정정, 커밋 3844eb6). 상세 [[crossverify-round2-findings]].
-> **2차 교차검증 신규 이연(우선순위 반영):**
-> - ~~**W2-a** SUB_MTR 이중의미 평면화~~ ✅ **완료**(커밋 2bcb480, hw-qa 독립재검증 GO): isMaterialMultiSubMtr discriminator(엔트리-shape)로 ACPDSTD ATTB=""·AIPPCUT echo 보존. 어댑터 전용, INV-3 코어 0줄.
-> - **W2-b** [구조, 잔여]: INN_DFT 조건부(INNON=1/SKSTU="") — discriminator 축이 PCS_DTL_COD라 W2-a와 상이 + INN_DFT fixture 0개. 캡처/fixture 확보 후 보정(현 quantity-echo 보존).
-> - **D-1**: WRK_MTR/DIR_MTR ATTB scaling 미검증 — qty=1 캡처가 ORD_CNT/상수/material-qty 구분 불가. §3-2 PRICE>0 재캡처와 묶어 qty>1 캡처로 해소.
-> - **G-5**: 의류(clothes2025) apparel 배타삼항이 pdt_pcs_info(DIR_MTR 필수 가격축) 드롭(red-adapter.ts:83-85). size_color 비보상. CLSTSHS PRICE=0로 미발현 → 의류 PRICE>0 캡처 선행, additive 삼항 처방. 컨버전 게이트.
-> - **G-INT-0**: 런타임 price 경로가 reqBody 미직렬화(fixture 정적룩업) → shape 결함 침묵(F-2 구조 잔존). 실 HTTP BFF 배선(컨버전)까지 회귀가드 부재 — 인식 필요.
+> **이번 세션 완료:** 2차 팀 교차검증(3렌즈) + 보정 Wave1(커밋 3844eb6) + W2-a(커밋 2bcb480) + **라이브 qty-sweep 캡처(D-1 결판·G-5 확정·G-6 신규)**. 상세 [[crossverify-round2-findings]] §5.
+> **상태 정리:**
+> - ~~**W2-a**~~ ✅ 완료(커밋 2bcb480, hw-qa GO): SUB_MTR 엔트리-shape discriminator. 어댑터 전용 INV-3 코어 0줄.
+> - ~~**D-1**~~ ✅ **RESOLVED**(라이브 qty-sweep): WRK_MTR/DIR_MTR ATTB={2,10} 건수(PRN_CNT) 따라 변함·PRICE 선형 → 우리 `ATTB=String(req.quantity)`=건수 echo가 Red와 **값 일치**. characterization 테스트 정당 입증. (커밋 대기)
+> - **G-6** [신규, 잠복/컨버전 게이트]: 굿즈 수량 **필드축 스왑** — Red 는 건수를 PRN_CNT 에 싣고 ORD_CNT=1, 우리는 ORD_CNT 에 실음(`price.ts:34,37`). ATTB 값은 옳으나 실 HTTP 가격권위(PRN_CNT) 배선이 컨버전 시 정렬 필요. fixture 정적룩업이라 현재 미발현(G-INT-0).
+> - **G-5** ✅ **CONFIRMED**(라이브): CLSTSHS clothes2025_price PRICE=19,900, PCS_INFO `[PDT_WRK,DIR_MTR]` → Red 는 DIR_MTR **유지**. 우리 apparel 배타삼항(red-adapter.ts:83-85)은 드롭=실 결함. 처방=additive 삼항(hidden-essential 중복가드). 컨버전 게이트.
+> - **W2-b** [잔여]: INN_DFT 노트류(GSNTSPR/GSDRSKS) tmpl_price 가 우리측 요청 shape 결함(ORD_CNT/PRN_CNT 필드 부재 → SUM=0). scaling 0-응답 판정 불가. editor_sdk tmpl_price 노트 요청 필드 역공학 후 재캡처.
+> - **G-INT-0**: 런타임 price 경로 fixture 정적룩업 → shape 결함 침묵. 실 HTTP BFF 배선(컨버전)까지 회귀가드 부재.
+> **가격 권위(HARD 실증):** `result_sum.PRICE`가 단일 권위. per-PCS `result[].PRICE`는 번들 구성요소 0이 정상 → per-line 읽으면 거짓 PRICE=0(캡처가 실증·교정). mapPriceResponse가 result_sum 쓰는지 확인 권고.
 
 1. **[최우선] 후니 컨버전** — `createHuniAdapter` 데이터소스 교체(현재 `bff/stub.ts:25` 주석만, 구현 0줄). 후니 옵션마스터 수령 시 어댑터를 Red→후니로 교체. 위젯 코어·정규화 계약 불변(무손실 컨버전). 메모리 [[huni-widget-conversion-strategy]].
 2. **PRICE>0 재캡처** — 의류(CLSTSHS clothes2025_price)·ACC(ACPDSTD·GSSBMTL)·포스터(BNBNFBL/BNPTPET) 가격 미캡처. 현재 PRICE=0→ok:false+`priceUnavailableReason` 안전격리. **Red는 PRICE=0 불가 → 그 0은 우리측 캡처 공백**([[huni-widget-red-price-never-zero]]). 로그인 세션+등록규격으로 PRICE>0 받아 가격 동등성 마감.

@@ -1,0 +1,310 @@
+{
+  "product": "GSTBMWM",
+  "mission": "D-1/W2-b material-PCS ATTB scaling",
+  "capturedAt": "2026-06-03T22:45:22.618Z",
+  "sizePicked": null,
+  "qtyCtl": "PRN_CNT",
+  "qtyMax": 10,
+  "hasOrdInput": false,
+  "sweep": [
+    {
+      "via": "PRN_CNT",
+      "requested": 1,
+      "applied": {
+        "ok": true,
+        "set": "1"
+      },
+      "captured": false
+    },
+    {
+      "via": "PRN_CNT",
+      "requested": 2,
+      "applied": {
+        "ok": true,
+        "set": "2"
+      },
+      "captured": true,
+      "ORD_CNT_echo": 1,
+      "PRN_CNT_echo": 2,
+      "price_gbn": "tmpl_price",
+      "materials": [
+        {
+          "PCS_COD": "DIR_MTR",
+          "PCS_DTL_COD": "TM039",
+          "ATTB": 2,
+          "ATTB_2": "",
+          "ATTB_3": ""
+        }
+      ],
+      "allPcsCods": [
+        "DIR_MTR",
+        "PAK_ETC"
+      ],
+      "PRICE": 90000,
+      "pcsPrices": [
+        {
+          "PCS_CD": "DIR_MTR",
+          "PRICE": 90000,
+          "LOG": "개당단가 : 90000.00원, 인쇄수량DDDDD : 2, 주문건수 : 1"
+        },
+        {
+          "PCS_CD": "PAK_ETC",
+          "PRICE": 0,
+          "LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 2, 주문건수 : 1"
+        }
+      ]
+    },
+    {
+      "via": "PRN_CNT",
+      "requested": 10,
+      "applied": {
+        "ok": true,
+        "set": "10"
+      },
+      "captured": true,
+      "ORD_CNT_echo": 1,
+      "PRN_CNT_echo": 10,
+      "price_gbn": "tmpl_price",
+      "materials": [
+        {
+          "PCS_COD": "DIR_MTR",
+          "PCS_DTL_COD": "TM039",
+          "ATTB": 10,
+          "ATTB_2": "",
+          "ATTB_3": ""
+        }
+      ],
+      "allPcsCods": [
+        "DIR_MTR",
+        "PAK_ETC"
+      ],
+      "PRICE": 450000,
+      "pcsPrices": [
+        {
+          "PCS_CD": "DIR_MTR",
+          "PRICE": 450000,
+          "LOG": "개당단가 : 450000.00원, 인쇄수량DDDDD : 10, 주문건수 : 1"
+        },
+        {
+          "PCS_CD": "PAK_ETC",
+          "PRICE": 0,
+          "LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 10, 주문건수 : 1"
+        }
+      ]
+    }
+  ],
+  "rawPriceCalls": [
+    {
+      "mark": "init",
+      "status": 200,
+      "reqBody": "{\"dataJson\":{\"ORD_INFO\":[{\"PDT_CD\":\"GSTBMWM\",\"MTRL_CD\":\"SXMIRW06\",\"CUT_WDT\":60,\"CUT_HGH\":120,\"WRK_WDT\":60,\"WRK_HGH\":120,\"DOSU_COD\":\"SID_X\",\"PRN_CLR_CNT\":0}],\"PCS_INFO\":[{\"PCS_COD\":\"DIR_MTR\",\"PCS_DTL_COD\":\"TM039\",\"ATTB\":1,\"ATTB_2\":\"\",\"ATTB_3\":\"\"},{\"PCS_COD\":\"PAK_ETC\",\"PCS_DTL_COD\":\"PK012\",\"ATTB\":\"\"}],\"price_gbn\":\"tmpl_price\",\"mb_cust_cod\":\"10000000\"}}",
+      "respBody": {
+        "retCode": 200,
+        "msg": "",
+        "result": [
+          {
+            "PCS_CD": "DIR_MTR",
+            "PCS_DTL_CD": "TM039",
+            "PCS_COD": "DIR_MTR",
+            "PCS_DTL_COD": "TM039",
+            "PRICE": 45000,
+            "PRICE_VAT": 4500,
+            "PRICE_MALL": 45000,
+            "PRICE_MALL_VAT": 4500,
+            "ORG_PRICE": 45000,
+            "ORG_PRICE_VAT": 4500,
+            "PRICE_LOG": "개당단가 : 45000.00원, 인쇄수량DDDDD : 0, 주문건수 : 0",
+            "PRICE_MALL_LOG": "개당단가 : 45000.00원, 인쇄수량DDDDD : 0, 주문건수 : 0 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "부자재직접인쇄",
+            "PCS_DTL_NME": "미르 와이드마우스 보틀 화이트 20oz"
+          },
+          {
+            "PCS_CD": "PAK_ETC",
+            "PCS_DTL_CD": "PK012",
+            "PCS_COD": "PAK_ETC",
+            "PCS_DTL_COD": "PK012",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 0, 주문건수 : 0",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 0, 주문건수 : 0 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "개별포장",
+            "PCS_DTL_NME": "텀블러 패키징"
+          }
+        ],
+        "result_sum": {
+          "PRICE": 45000,
+          "PRICE_VAT": 4500,
+          "PRICE_MALL": 45000,
+          "PRICE_MALL_VAT": 4500,
+          "ORG_PRICE": 45000,
+          "ORG_PRICE_VAT": 4500
+        },
+        "query": "dbo.WSP_ACPT_ORDER_TMPL_PCS_PRICE '0101', 'LNG_KO', 'GSTBMWM', '<?xml version=\"1.0\"?>\n<PARAMS><DETAIL><MTRL_COD>SXMIRW06</MTRL_COD><CUT_WDT>60</CUT_WDT><CUT_HGH>120</CUT_HGH><PRN_CNT/><ORD_CNT/><SID_GBN>SID_X</SID_GBN><TMPL_IDX/><BTN_TYPE/><PNS_DIGIT/><PNS_CNT/><PACK_PRN_CNT/><CUST_COD>15090019</CUST_COD></DETAIL><PCS><PCS_COD>DIR_MTR</PCS_COD><PCS_DTL_COD>TM039</PCS_DTL_COD><ATTB>1</ATTB><ATTB_2/><ATTB_3/></PCS><PCS><PCS_COD>PAK_ETC</PCS_COD><PCS_DTL_COD>PK012</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS></PARAMS>\n'",
+        "query_flexible": null
+      }
+    },
+    {
+      "mark": "init",
+      "status": 200,
+      "reqBody": "{\"dataJson\":{\"ORD_INFO\":[{\"PDT_CD\":\"GSTBMWM\",\"MTRL_CD\":\"SXMIRW06\",\"CUT_WDT\":60,\"CUT_HGH\":120,\"WRK_WDT\":60,\"WRK_HGH\":120,\"PRN_CNT\":1,\"ORD_CNT\":1,\"DOSU_COD\":\"SID_X\",\"PRN_CLR_CNT\":0}],\"PCS_INFO\":[{\"PCS_COD\":\"DIR_MTR\",\"PCS_DTL_COD\":\"TM039\",\"ATTB\":1,\"ATTB_2\":\"\",\"ATTB_3\":\"\"},{\"PCS_COD\":\"PAK_ETC\",\"PCS_DTL_COD\":\"PK012\",\"ATTB\":\"\"}],\"price_gbn\":\"tmpl_price\",\"mb_cust_cod\":\"10000000\"}}",
+      "respBody": {
+        "retCode": 200,
+        "msg": "",
+        "result": [
+          {
+            "PCS_CD": "DIR_MTR",
+            "PCS_DTL_CD": "TM039",
+            "PCS_COD": "DIR_MTR",
+            "PCS_DTL_COD": "TM039",
+            "PRICE": 45000,
+            "PRICE_VAT": 4500,
+            "PRICE_MALL": 45000,
+            "PRICE_MALL_VAT": 4500,
+            "ORG_PRICE": 45000,
+            "ORG_PRICE_VAT": 4500,
+            "PRICE_LOG": "개당단가 : 45000.00원, 인쇄수량DDDDD : 1, 주문건수 : 1",
+            "PRICE_MALL_LOG": "개당단가 : 45000.00원, 인쇄수량DDDDD : 1, 주문건수 : 1 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "부자재직접인쇄",
+            "PCS_DTL_NME": "미르 와이드마우스 보틀 화이트 20oz"
+          },
+          {
+            "PCS_CD": "PAK_ETC",
+            "PCS_DTL_CD": "PK012",
+            "PCS_COD": "PAK_ETC",
+            "PCS_DTL_COD": "PK012",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 1, 주문건수 : 1",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 1, 주문건수 : 1 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "개별포장",
+            "PCS_DTL_NME": "텀블러 패키징"
+          }
+        ],
+        "result_sum": {
+          "PRICE": 45000,
+          "PRICE_VAT": 4500,
+          "PRICE_MALL": 45000,
+          "PRICE_MALL_VAT": 4500,
+          "ORG_PRICE": 45000,
+          "ORG_PRICE_VAT": 4500
+        },
+        "query": "dbo.WSP_ACPT_ORDER_TMPL_PCS_PRICE '0101', 'LNG_KO', 'GSTBMWM', '<?xml version=\"1.0\"?>\n<PARAMS><DETAIL><MTRL_COD>SXMIRW06</MTRL_COD><CUT_WDT>60</CUT_WDT><CUT_HGH>120</CUT_HGH><PRN_CNT>1</PRN_CNT><ORD_CNT>1</ORD_CNT><SID_GBN>SID_X</SID_GBN><TMPL_IDX/><BTN_TYPE/><PNS_DIGIT/><PNS_CNT/><PACK_PRN_CNT/><CUST_COD>15090019</CUST_COD></DETAIL><PCS><PCS_COD>DIR_MTR</PCS_COD><PCS_DTL_COD>TM039</PCS_DTL_COD><ATTB>1</ATTB><ATTB_2/><ATTB_3/></PCS><PCS><PCS_COD>PAK_ETC</PCS_COD><PCS_DTL_COD>PK012</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS></PARAMS>\n'",
+        "query_flexible": null
+      }
+    },
+    {
+      "mark": "PRN_CNT=2",
+      "status": 200,
+      "reqBody": "{\"dataJson\":{\"ORD_INFO\":[{\"PDT_CD\":\"GSTBMWM\",\"MTRL_CD\":\"SXMIRW06\",\"CUT_WDT\":60,\"CUT_HGH\":120,\"WRK_WDT\":60,\"WRK_HGH\":120,\"PRN_CNT\":2,\"ORD_CNT\":1,\"DOSU_COD\":\"SID_X\",\"PRN_CLR_CNT\":0}],\"PCS_INFO\":[{\"PCS_COD\":\"DIR_MTR\",\"PCS_DTL_COD\":\"TM039\",\"ATTB\":2,\"ATTB_2\":\"\",\"ATTB_3\":\"\"},{\"PCS_COD\":\"PAK_ETC\",\"PCS_DTL_COD\":\"PK012\",\"ATTB\":\"\"}],\"price_gbn\":\"tmpl_price\",\"mb_cust_cod\":\"10000000\"}}",
+      "respBody": {
+        "retCode": 200,
+        "msg": "",
+        "result": [
+          {
+            "PCS_CD": "DIR_MTR",
+            "PCS_DTL_CD": "TM039",
+            "PCS_COD": "DIR_MTR",
+            "PCS_DTL_COD": "TM039",
+            "PRICE": 90000,
+            "PRICE_VAT": 9000,
+            "PRICE_MALL": 90000,
+            "PRICE_MALL_VAT": 9000,
+            "ORG_PRICE": 90000,
+            "ORG_PRICE_VAT": 9000,
+            "PRICE_LOG": "개당단가 : 90000.00원, 인쇄수량DDDDD : 2, 주문건수 : 1",
+            "PRICE_MALL_LOG": "개당단가 : 90000.00원, 인쇄수량DDDDD : 2, 주문건수 : 1 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "부자재직접인쇄",
+            "PCS_DTL_NME": "미르 와이드마우스 보틀 화이트 20oz"
+          },
+          {
+            "PCS_CD": "PAK_ETC",
+            "PCS_DTL_CD": "PK012",
+            "PCS_COD": "PAK_ETC",
+            "PCS_DTL_COD": "PK012",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 2, 주문건수 : 1",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 2, 주문건수 : 1 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "개별포장",
+            "PCS_DTL_NME": "텀블러 패키징"
+          }
+        ],
+        "result_sum": {
+          "PRICE": 90000,
+          "PRICE_VAT": 9000,
+          "PRICE_MALL": 90000,
+          "PRICE_MALL_VAT": 9000,
+          "ORG_PRICE": 90000,
+          "ORG_PRICE_VAT": 9000
+        },
+        "query": "dbo.WSP_ACPT_ORDER_TMPL_PCS_PRICE '0101', 'LNG_KO', 'GSTBMWM', '<?xml version=\"1.0\"?>\n<PARAMS><DETAIL><MTRL_COD>SXMIRW06</MTRL_COD><CUT_WDT>60</CUT_WDT><CUT_HGH>120</CUT_HGH><PRN_CNT>2</PRN_CNT><ORD_CNT>1</ORD_CNT><SID_GBN>SID_X</SID_GBN><TMPL_IDX/><BTN_TYPE/><PNS_DIGIT/><PNS_CNT/><PACK_PRN_CNT/><CUST_COD>15090019</CUST_COD></DETAIL><PCS><PCS_COD>DIR_MTR</PCS_COD><PCS_DTL_COD>TM039</PCS_DTL_COD><ATTB>2</ATTB><ATTB_2/><ATTB_3/></PCS><PCS><PCS_COD>PAK_ETC</PCS_COD><PCS_DTL_COD>PK012</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS></PARAMS>\n'",
+        "query_flexible": null
+      }
+    },
+    {
+      "mark": "PRN_CNT=10",
+      "status": 200,
+      "reqBody": "{\"dataJson\":{\"ORD_INFO\":[{\"PDT_CD\":\"GSTBMWM\",\"MTRL_CD\":\"SXMIRW06\",\"CUT_WDT\":60,\"CUT_HGH\":120,\"WRK_WDT\":60,\"WRK_HGH\":120,\"PRN_CNT\":10,\"ORD_CNT\":1,\"DOSU_COD\":\"SID_X\",\"PRN_CLR_CNT\":0}],\"PCS_INFO\":[{\"PCS_COD\":\"DIR_MTR\",\"PCS_DTL_COD\":\"TM039\",\"ATTB\":10,\"ATTB_2\":\"\",\"ATTB_3\":\"\"},{\"PCS_COD\":\"PAK_ETC\",\"PCS_DTL_COD\":\"PK012\",\"ATTB\":\"\"}],\"price_gbn\":\"tmpl_price\",\"mb_cust_cod\":\"10000000\"}}",
+      "respBody": {
+        "retCode": 200,
+        "msg": "",
+        "result": [
+          {
+            "PCS_CD": "DIR_MTR",
+            "PCS_DTL_CD": "TM039",
+            "PCS_COD": "DIR_MTR",
+            "PCS_DTL_COD": "TM039",
+            "PRICE": 450000,
+            "PRICE_VAT": 45000,
+            "PRICE_MALL": 450000,
+            "PRICE_MALL_VAT": 45000,
+            "ORG_PRICE": 450000,
+            "ORG_PRICE_VAT": 45000,
+            "PRICE_LOG": "개당단가 : 450000.00원, 인쇄수량DDDDD : 10, 주문건수 : 1",
+            "PRICE_MALL_LOG": "개당단가 : 450000.00원, 인쇄수량DDDDD : 10, 주문건수 : 1 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "부자재직접인쇄",
+            "PCS_DTL_NME": "미르 와이드마우스 보틀 화이트 20oz"
+          },
+          {
+            "PCS_CD": "PAK_ETC",
+            "PCS_DTL_CD": "PK012",
+            "PCS_COD": "PAK_ETC",
+            "PCS_DTL_COD": "PK012",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 10, 주문건수 : 1",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 10, 주문건수 : 1 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "개별포장",
+            "PCS_DTL_NME": "텀블러 패키징"
+          }
+        ],
+        "result_sum": {
+          "PRICE": 450000,
+          "PRICE_VAT": 45000,
+          "PRICE_MALL": 450000,
+          "PRICE_MALL_VAT": 45000,
+          "ORG_PRICE": 450000,
+          "ORG_PRICE_VAT": 45000
+        },
+        "query": "dbo.WSP_ACPT_ORDER_TMPL_PCS_PRICE '0101', 'LNG_KO', 'GSTBMWM', '<?xml version=\"1.0\"?>\n<PARAMS><DETAIL><MTRL_COD>SXMIRW06</MTRL_COD><CUT_WDT>60</CUT_WDT><CUT_HGH>120</CUT_HGH><PRN_CNT>10</PRN_CNT><ORD_CNT>1</ORD_CNT><SID_GBN>SID_X</SID_GBN><TMPL_IDX/><BTN_TYPE/><PNS_DIGIT/><PNS_CNT/><PACK_PRN_CNT/><CUST_COD>15090019</CUST_COD></DETAIL><PCS><PCS_COD>DIR_MTR</PCS_COD><PCS_DTL_COD>TM039</PCS_DTL_COD><ATTB>10</ATTB><ATTB_2/><ATTB_3/></PCS><PCS><PCS_COD>PAK_ETC</PCS_COD><PCS_DTL_COD>PK012</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS></PARAMS>\n'",
+        "query_flexible": null
+      }
+    }
+  ]
+}

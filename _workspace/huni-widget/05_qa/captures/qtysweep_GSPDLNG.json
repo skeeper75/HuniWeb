@@ -1,0 +1,384 @@
+{
+  "product": "GSPDLNG",
+  "mission": "D-1/W2-b material-PCS ATTB scaling",
+  "capturedAt": "2026-06-03T22:44:58.797Z",
+  "sizePicked": null,
+  "qtyCtl": "PRN_CNT",
+  "qtyMax": 10,
+  "hasOrdInput": false,
+  "sweep": [
+    {
+      "via": "PRN_CNT",
+      "requested": 1,
+      "applied": {
+        "ok": true,
+        "set": "1"
+      },
+      "captured": false
+    },
+    {
+      "via": "PRN_CNT",
+      "requested": 2,
+      "applied": {
+        "ok": true,
+        "set": "2"
+      },
+      "captured": true,
+      "ORD_CNT_echo": 1,
+      "PRN_CNT_echo": 2,
+      "price_gbn": "vTmpl_price",
+      "materials": [
+        {
+          "PCS_COD": "DIR_MTR",
+          "PCS_DTL_COD": "LD001",
+          "ATTB": 2,
+          "ATTB_2": "",
+          "ATTB_3": ""
+        }
+      ],
+      "allPcsCods": [
+        "DIR_MTR",
+        "PAK_ETC"
+      ],
+      "PRICE": 32000,
+      "pcsPrices": [
+        {
+          "PCS_CD": "DIR_MTR",
+          "PRICE": 20000,
+          "LOG": "개당단가 : 20000.00원, 인쇄수량DDDDD : 2, 주문건수 : 1"
+        },
+        {
+          "PCS_CD": "PAK_ETC",
+          "PRICE": 2000,
+          "LOG": "개당단가 : 2000.00원, 인쇄수량DDDDD : 2, 주문건수 : 1"
+        },
+        {
+          "PCS_CD": "PRT_DFT",
+          "PRICE": 10000,
+          "LOG": "개당단가 : 10000.00원, 인쇄수량DDDDD : 2, 주문건수 : 1"
+        }
+      ]
+    },
+    {
+      "via": "PRN_CNT",
+      "requested": 10,
+      "applied": {
+        "ok": true,
+        "set": "10"
+      },
+      "captured": true,
+      "ORD_CNT_echo": 1,
+      "PRN_CNT_echo": 10,
+      "price_gbn": "vTmpl_price",
+      "materials": [
+        {
+          "PCS_COD": "DIR_MTR",
+          "PCS_DTL_COD": "LD001",
+          "ATTB": 10,
+          "ATTB_2": "",
+          "ATTB_3": ""
+        }
+      ],
+      "allPcsCods": [
+        "DIR_MTR",
+        "PAK_ETC"
+      ],
+      "PRICE": 159500,
+      "pcsPrices": [
+        {
+          "PCS_CD": "DIR_MTR",
+          "PRICE": 100000,
+          "LOG": "개당단가 : 100000.00원, 인쇄수량DDDDD : 10, 주문건수 : 1"
+        },
+        {
+          "PCS_CD": "PAK_ETC",
+          "PRICE": 10000,
+          "LOG": "개당단가 : 10000.00원, 인쇄수량DDDDD : 10, 주문건수 : 1"
+        },
+        {
+          "PCS_CD": "PRT_DFT",
+          "PRICE": 49500,
+          "LOG": "개당단가 : 49500.00원, 인쇄수량DDDDD : 10, 주문건수 : 1"
+        }
+      ]
+    }
+  ],
+  "rawPriceCalls": [
+    {
+      "mark": "init",
+      "status": 200,
+      "reqBody": "{\"dataJson\":{\"ORD_INFO\":[{\"PDT_CD\":\"GSPDLNG\",\"MTRL_CD\":\"SXLPD001\",\"CUT_WDT\":800,\"CUT_HGH\":300,\"WRK_WDT\":860,\"WRK_HGH\":360,\"DOSU_COD\":\"SID_S\",\"PRN_CLR_CNT\":4}],\"PCS_INFO\":[{\"PCS_COD\":\"DIR_MTR\",\"PCS_DTL_COD\":\"LD001\",\"ATTB\":1,\"ATTB_2\":\"\",\"ATTB_3\":\"\"},{\"PCS_COD\":\"PAK_ETC\",\"PCS_DTL_COD\":\"DFXXX\",\"ATTB\":\"\"}],\"price_gbn\":\"vTmpl_price\",\"mb_cust_cod\":\"10000000\"}}",
+      "respBody": {
+        "retCode": 200,
+        "msg": "",
+        "result": [
+          {
+            "PCS_CD": "DIR_MTR",
+            "PCS_DTL_CD": "LD001",
+            "PCS_COD": "DIR_MTR",
+            "PCS_DTL_COD": "LD001",
+            "PRICE": 10000,
+            "PRICE_VAT": 1000,
+            "PRICE_MALL": 10000,
+            "PRICE_MALL_VAT": 1000,
+            "ORG_PRICE": 10000,
+            "ORG_PRICE_VAT": 1000,
+            "PRICE_LOG": "개당단가 : 10000.00원, 인쇄수량DDDDD : 0, 주문건수 : 0",
+            "PRICE_MALL_LOG": "개당단가 : 10000.00원, 인쇄수량DDDDD : 0, 주문건수 : 0 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "부자재직접인쇄",
+            "PCS_DTL_NME": "장패드 4T"
+          },
+          {
+            "PCS_CD": "PAK_ETC",
+            "PCS_DTL_CD": "DFXXX",
+            "PCS_COD": "PAK_ETC",
+            "PCS_DTL_COD": "DFXXX",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 0, 주문건수 : 0",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 0, 주문건수 : 0 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "개별포장",
+            "PCS_DTL_NME": "개별포장"
+          },
+          {
+            "PCS_CD": "PRT_DFT",
+            "PCS_DTL_CD": "DFXXS",
+            "PCS_COD": "PRT_DFT",
+            "PCS_DTL_COD": "DFXXS",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 0, 주문건수 : 0",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량DDDDD : 0, 주문건수 : 0 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "인쇄",
+            "PCS_DTL_NME": "인쇄단면"
+          }
+        ],
+        "result_sum": {
+          "PRICE": 10000,
+          "PRICE_VAT": 1000,
+          "PRICE_MALL": 10000,
+          "PRICE_MALL_VAT": 1000,
+          "ORG_PRICE": 10000,
+          "ORG_PRICE_VAT": 1000
+        },
+        "query": "dbo.WSP_ACPT_ORDER_TMPL_PCS_PRICE '0101', 'LNG_KO', 'GSPDLNG', '<?xml version=\"1.0\"?>\n<PARAMS><DETAIL><MTRL_COD>SXLPD001</MTRL_COD><CUT_WDT>800</CUT_WDT><CUT_HGH>300</CUT_HGH><PRN_CNT/><ORD_CNT/><SID_GBN>SID_S</SID_GBN><TMPL_IDX/><BTN_TYPE/><PNS_DIGIT/><PNS_CNT/><PACK_PRN_CNT/><CUST_COD>15090019</CUST_COD></DETAIL><PCS><PCS_COD>DIR_MTR</PCS_COD><PCS_DTL_COD>LD001</PCS_DTL_COD><ATTB>1</ATTB><ATTB_2/><ATTB_3/></PCS><PCS><PCS_COD>PAK_ETC</PCS_COD><PCS_DTL_COD>DFXXX</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS></PARAMS>\n'",
+        "query_flexible": null
+      }
+    },
+    {
+      "mark": "init",
+      "status": 200,
+      "reqBody": "{\"dataJson\":{\"ORD_INFO\":[{\"PDT_CD\":\"GSPDLNG\",\"MTRL_CD\":\"SXLPD001\",\"CUT_WDT\":800,\"CUT_HGH\":300,\"WRK_WDT\":860,\"WRK_HGH\":360,\"PRN_CNT\":1,\"ORD_CNT\":1,\"DOSU_COD\":\"SID_S\",\"PRN_CLR_CNT\":4}],\"PCS_INFO\":[{\"PCS_COD\":\"DIR_MTR\",\"PCS_DTL_COD\":\"LD001\",\"ATTB\":1,\"ATTB_2\":\"\",\"ATTB_3\":\"\"},{\"PCS_COD\":\"PAK_ETC\",\"PCS_DTL_COD\":\"DFXXX\",\"ATTB\":\"\"}],\"price_gbn\":\"vTmpl_price\",\"mb_cust_cod\":\"10000000\"}}",
+      "respBody": {
+        "retCode": 200,
+        "msg": "",
+        "result": [
+          {
+            "PCS_CD": "DIR_MTR",
+            "PCS_DTL_CD": "LD001",
+            "PCS_COD": "DIR_MTR",
+            "PCS_DTL_COD": "LD001",
+            "PRICE": 10000,
+            "PRICE_VAT": 1000,
+            "PRICE_MALL": 10000,
+            "PRICE_MALL_VAT": 1000,
+            "ORG_PRICE": 10000,
+            "ORG_PRICE_VAT": 1000,
+            "PRICE_LOG": "개당단가 : 10000.00원, 인쇄수량DDDDD : 1, 주문건수 : 1",
+            "PRICE_MALL_LOG": "개당단가 : 10000.00원, 인쇄수량DDDDD : 1, 주문건수 : 1 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "부자재직접인쇄",
+            "PCS_DTL_NME": "장패드 4T"
+          },
+          {
+            "PCS_CD": "PAK_ETC",
+            "PCS_DTL_CD": "DFXXX",
+            "PCS_COD": "PAK_ETC",
+            "PCS_DTL_COD": "DFXXX",
+            "PRICE": 1000,
+            "PRICE_VAT": 100,
+            "PRICE_MALL": 1000,
+            "PRICE_MALL_VAT": 100,
+            "ORG_PRICE": 1000,
+            "ORG_PRICE_VAT": 100,
+            "PRICE_LOG": "개당단가 : 1000.00원, 인쇄수량DDDDD : 1, 주문건수 : 1",
+            "PRICE_MALL_LOG": "개당단가 : 1000.00원, 인쇄수량DDDDD : 1, 주문건수 : 1 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "개별포장",
+            "PCS_DTL_NME": "개별포장"
+          },
+          {
+            "PCS_CD": "PRT_DFT",
+            "PCS_DTL_CD": "DFXXS",
+            "PCS_COD": "PRT_DFT",
+            "PCS_DTL_COD": "DFXXS",
+            "PRICE": 5000,
+            "PRICE_VAT": 500,
+            "PRICE_MALL": 5000,
+            "PRICE_MALL_VAT": 500,
+            "ORG_PRICE": 5000,
+            "ORG_PRICE_VAT": 500,
+            "PRICE_LOG": "개당단가 : 5000.00원, 인쇄수량DDDDD : 1, 주문건수 : 1",
+            "PRICE_MALL_LOG": "개당단가 : 5000.00원, 인쇄수량DDDDD : 1, 주문건수 : 1 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "인쇄",
+            "PCS_DTL_NME": "인쇄단면"
+          }
+        ],
+        "result_sum": {
+          "PRICE": 16000,
+          "PRICE_VAT": 1600,
+          "PRICE_MALL": 16000,
+          "PRICE_MALL_VAT": 1600,
+          "ORG_PRICE": 16000,
+          "ORG_PRICE_VAT": 1600
+        },
+        "query": "dbo.WSP_ACPT_ORDER_TMPL_PCS_PRICE '0101', 'LNG_KO', 'GSPDLNG', '<?xml version=\"1.0\"?>\n<PARAMS><DETAIL><MTRL_COD>SXLPD001</MTRL_COD><CUT_WDT>800</CUT_WDT><CUT_HGH>300</CUT_HGH><PRN_CNT>1</PRN_CNT><ORD_CNT>1</ORD_CNT><SID_GBN>SID_S</SID_GBN><TMPL_IDX/><BTN_TYPE/><PNS_DIGIT/><PNS_CNT/><PACK_PRN_CNT/><CUST_COD>15090019</CUST_COD></DETAIL><PCS><PCS_COD>DIR_MTR</PCS_COD><PCS_DTL_COD>LD001</PCS_DTL_COD><ATTB>1</ATTB><ATTB_2/><ATTB_3/></PCS><PCS><PCS_COD>PAK_ETC</PCS_COD><PCS_DTL_COD>DFXXX</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS></PARAMS>\n'",
+        "query_flexible": null
+      }
+    },
+    {
+      "mark": "PRN_CNT=2",
+      "status": 200,
+      "reqBody": "{\"dataJson\":{\"ORD_INFO\":[{\"PDT_CD\":\"GSPDLNG\",\"MTRL_CD\":\"SXLPD001\",\"CUT_WDT\":800,\"CUT_HGH\":300,\"WRK_WDT\":860,\"WRK_HGH\":360,\"PRN_CNT\":2,\"ORD_CNT\":1,\"DOSU_COD\":\"SID_S\",\"PRN_CLR_CNT\":4}],\"PCS_INFO\":[{\"PCS_COD\":\"DIR_MTR\",\"PCS_DTL_COD\":\"LD001\",\"ATTB\":2,\"ATTB_2\":\"\",\"ATTB_3\":\"\"},{\"PCS_COD\":\"PAK_ETC\",\"PCS_DTL_COD\":\"DFXXX\",\"ATTB\":\"\"}],\"price_gbn\":\"vTmpl_price\",\"mb_cust_cod\":\"10000000\"}}",
+      "respBody": {
+        "retCode": 200,
+        "msg": "",
+        "result": [
+          {
+            "PCS_CD": "DIR_MTR",
+            "PCS_DTL_CD": "LD001",
+            "PCS_COD": "DIR_MTR",
+            "PCS_DTL_COD": "LD001",
+            "PRICE": 20000,
+            "PRICE_VAT": 2000,
+            "PRICE_MALL": 20000,
+            "PRICE_MALL_VAT": 2000,
+            "ORG_PRICE": 20000,
+            "ORG_PRICE_VAT": 2000,
+            "PRICE_LOG": "개당단가 : 20000.00원, 인쇄수량DDDDD : 2, 주문건수 : 1",
+            "PRICE_MALL_LOG": "개당단가 : 20000.00원, 인쇄수량DDDDD : 2, 주문건수 : 1 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "부자재직접인쇄",
+            "PCS_DTL_NME": "장패드 4T"
+          },
+          {
+            "PCS_CD": "PAK_ETC",
+            "PCS_DTL_CD": "DFXXX",
+            "PCS_COD": "PAK_ETC",
+            "PCS_DTL_COD": "DFXXX",
+            "PRICE": 2000,
+            "PRICE_VAT": 200,
+            "PRICE_MALL": 2000,
+            "PRICE_MALL_VAT": 200,
+            "ORG_PRICE": 2000,
+            "ORG_PRICE_VAT": 200,
+            "PRICE_LOG": "개당단가 : 2000.00원, 인쇄수량DDDDD : 2, 주문건수 : 1",
+            "PRICE_MALL_LOG": "개당단가 : 2000.00원, 인쇄수량DDDDD : 2, 주문건수 : 1 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "개별포장",
+            "PCS_DTL_NME": "개별포장"
+          },
+          {
+            "PCS_CD": "PRT_DFT",
+            "PCS_DTL_CD": "DFXXS",
+            "PCS_COD": "PRT_DFT",
+            "PCS_DTL_COD": "DFXXS",
+            "PRICE": 10000,
+            "PRICE_VAT": 1000,
+            "PRICE_MALL": 10000,
+            "PRICE_MALL_VAT": 1000,
+            "ORG_PRICE": 10000,
+            "ORG_PRICE_VAT": 1000,
+            "PRICE_LOG": "개당단가 : 10000.00원, 인쇄수량DDDDD : 2, 주문건수 : 1",
+            "PRICE_MALL_LOG": "개당단가 : 10000.00원, 인쇄수량DDDDD : 2, 주문건수 : 1 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "인쇄",
+            "PCS_DTL_NME": "인쇄단면"
+          }
+        ],
+        "result_sum": {
+          "PRICE": 32000,
+          "PRICE_VAT": 3200,
+          "PRICE_MALL": 32000,
+          "PRICE_MALL_VAT": 3200,
+          "ORG_PRICE": 32000,
+          "ORG_PRICE_VAT": 3200
+        },
+        "query": "dbo.WSP_ACPT_ORDER_TMPL_PCS_PRICE '0101', 'LNG_KO', 'GSPDLNG', '<?xml version=\"1.0\"?>\n<PARAMS><DETAIL><MTRL_COD>SXLPD001</MTRL_COD><CUT_WDT>800</CUT_WDT><CUT_HGH>300</CUT_HGH><PRN_CNT>2</PRN_CNT><ORD_CNT>1</ORD_CNT><SID_GBN>SID_S</SID_GBN><TMPL_IDX/><BTN_TYPE/><PNS_DIGIT/><PNS_CNT/><PACK_PRN_CNT/><CUST_COD>15090019</CUST_COD></DETAIL><PCS><PCS_COD>DIR_MTR</PCS_COD><PCS_DTL_COD>LD001</PCS_DTL_COD><ATTB>2</ATTB><ATTB_2/><ATTB_3/></PCS><PCS><PCS_COD>PAK_ETC</PCS_COD><PCS_DTL_COD>DFXXX</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS></PARAMS>\n'",
+        "query_flexible": null
+      }
+    },
+    {
+      "mark": "PRN_CNT=10",
+      "status": 200,
+      "reqBody": "{\"dataJson\":{\"ORD_INFO\":[{\"PDT_CD\":\"GSPDLNG\",\"MTRL_CD\":\"SXLPD001\",\"CUT_WDT\":800,\"CUT_HGH\":300,\"WRK_WDT\":860,\"WRK_HGH\":360,\"PRN_CNT\":10,\"ORD_CNT\":1,\"DOSU_COD\":\"SID_S\",\"PRN_CLR_CNT\":4}],\"PCS_INFO\":[{\"PCS_COD\":\"DIR_MTR\",\"PCS_DTL_COD\":\"LD001\",\"ATTB\":10,\"ATTB_2\":\"\",\"ATTB_3\":\"\"},{\"PCS_COD\":\"PAK_ETC\",\"PCS_DTL_COD\":\"DFXXX\",\"ATTB\":\"\"}],\"price_gbn\":\"vTmpl_price\",\"mb_cust_cod\":\"10000000\"}}",
+      "respBody": {
+        "retCode": 200,
+        "msg": "",
+        "result": [
+          {
+            "PCS_CD": "DIR_MTR",
+            "PCS_DTL_CD": "LD001",
+            "PCS_COD": "DIR_MTR",
+            "PCS_DTL_COD": "LD001",
+            "PRICE": 100000,
+            "PRICE_VAT": 10000,
+            "PRICE_MALL": 100000,
+            "PRICE_MALL_VAT": 10000,
+            "ORG_PRICE": 100000,
+            "ORG_PRICE_VAT": 10000,
+            "PRICE_LOG": "개당단가 : 100000.00원, 인쇄수량DDDDD : 10, 주문건수 : 1",
+            "PRICE_MALL_LOG": "개당단가 : 100000.00원, 인쇄수량DDDDD : 10, 주문건수 : 1 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "부자재직접인쇄",
+            "PCS_DTL_NME": "장패드 4T"
+          },
+          {
+            "PCS_CD": "PAK_ETC",
+            "PCS_DTL_CD": "DFXXX",
+            "PCS_COD": "PAK_ETC",
+            "PCS_DTL_COD": "DFXXX",
+            "PRICE": 10000,
+            "PRICE_VAT": 1000,
+            "PRICE_MALL": 10000,
+            "PRICE_MALL_VAT": 1000,
+            "ORG_PRICE": 10000,
+            "ORG_PRICE_VAT": 1000,
+            "PRICE_LOG": "개당단가 : 10000.00원, 인쇄수량DDDDD : 10, 주문건수 : 1",
+            "PRICE_MALL_LOG": "개당단가 : 10000.00원, 인쇄수량DDDDD : 10, 주문건수 : 1 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "개별포장",
+            "PCS_DTL_NME": "개별포장"
+          },
+          {
+            "PCS_CD": "PRT_DFT",
+            "PCS_DTL_CD": "DFXXS",
+            "PCS_COD": "PRT_DFT",
+            "PCS_DTL_COD": "DFXXS",
+            "PRICE": 49500,
+            "PRICE_VAT": 4950,
+            "PRICE_MALL": 49500,
+            "PRICE_MALL_VAT": 4950,
+            "ORG_PRICE": 49500,
+            "ORG_PRICE_VAT": 4950,
+            "PRICE_LOG": "개당단가 : 49500.00원, 인쇄수량DDDDD : 10, 주문건수 : 1",
+            "PRICE_MALL_LOG": "개당단가 : 49500.00원, 인쇄수량DDDDD : 10, 주문건수 : 1 분양몰 할인율: 0.0000, 환율 :1.00",
+            "PCS_NME": "인쇄",
+            "PCS_DTL_NME": "인쇄단면"
+          }
+        ],
+        "result_sum": {
+          "PRICE": 159500,
+          "PRICE_VAT": 15950,
+          "PRICE_MALL": 159500,
+          "PRICE_MALL_VAT": 15950,
+          "ORG_PRICE": 159500,
+          "ORG_PRICE_VAT": 15950
+        },
+        "query": "dbo.WSP_ACPT_ORDER_TMPL_PCS_PRICE '0101', 'LNG_KO', 'GSPDLNG', '<?xml version=\"1.0\"?>\n<PARAMS><DETAIL><MTRL_COD>SXLPD001</MTRL_COD><CUT_WDT>800</CUT_WDT><CUT_HGH>300</CUT_HGH><PRN_CNT>10</PRN_CNT><ORD_CNT>1</ORD_CNT><SID_GBN>SID_S</SID_GBN><TMPL_IDX/><BTN_TYPE/><PNS_DIGIT/><PNS_CNT/><PACK_PRN_CNT/><CUST_COD>15090019</CUST_COD></DETAIL><PCS><PCS_COD>DIR_MTR</PCS_COD><PCS_DTL_COD>LD001</PCS_DTL_COD><ATTB>10</ATTB><ATTB_2/><ATTB_3/></PCS><PCS><PCS_COD>PAK_ETC</PCS_COD><PCS_DTL_COD>DFXXX</PCS_DTL_COD><ATTB/><ATTB_2/><ATTB_3/></PCS></PARAMS>\n'",
+        "query_flexible": null
+      }
+    }
+  ]
+}
