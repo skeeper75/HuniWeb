@@ -41,3 +41,12 @@ origin allowlist 보안 · 에디터 토큰 미보관 · PRICE=0 명시적 ok:fa
 
 ## 미완 (S2)
 전 상품 분기 커버리지: itemGroup(book2025/clothes2025/vDigital/ACC) × 컴포넌트조합 전수 vs 우리 커버 — 보정 범위 확정용. 의류·부자재 전경로가 코드엔 있으나 우리 미지원·무증상이라 S2가 "어느 상품이 어느 갭에 걸리는지" 확정.
+
+## [HARD 도메인 정정 — 2026-06-03] PRICE=0 의미 재정의 (B1 "포스터 미가격" 오진 철회)
+- **사용자 HARD 정정**: RedPrinting 위젯은 **PRICE=0 을 정상 반환하지 않는다**. 0 은 **항상 우리측 요청/세션/필수필드/스펙선택 결함** 신호이지, "Red 가 해당 상품을 미가격 등록" 같은 정상 빈상태가 **아니다**.
+- **오진 철회**: 이전 B1 진단 "포스터 BNBNFBL/BNPTPET = Red 미가격 상품(전화주문/미운영)"은 **오진**. 그 0 은 우리 **비로그인/세션 캡처 공백**이지 Red 미가격이 아니다.
+- **구현 반영**: `mapPriceResponse`(red-adapter.ts) 가 finalPrice=0 시 `ok:false` 유지 + **비치명적 진단**(`priceUnavailableReason` 필드 + console.warn) 부여. throw 안 함(미캡처 fixture 렌더 보존).
+- **PRICE>0 재캡처 TODO** (그 0 은 캡처 공백 — Red 미가격 아님):
+  - **포스터/배너**: BNBNFBL, BNPTPET (로그인 세션 + 등록규격 재캡처)
+  - **의류**: CLSTSHS (clothes2025_price 스윕 — 현재 어댑터 가격경로 0 이었음)
+  - **ACC**: ACPDSTD(단순 add-on), GSSBMTL(다단 캐스케이드) (부자재 가격 스윕)
