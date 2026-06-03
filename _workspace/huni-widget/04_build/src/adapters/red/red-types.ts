@@ -72,6 +72,11 @@ export interface RedPcsInfo {
   PCS_DTL_NM: string;
   VIEW_YN: string; // "Y" | "N"
   ESN_YN: string; // "Y" | "N"
+  // L-1 속성칩 shape (b): RIN_DFT 류는 선택 옵션 그리드가 아니라 가격측 ATTB 단일 echo
+  //  (ATTB_CD=속성코드 예 RIN_SLV, ATTB_NM=속성명 예 은색). major_attbchip_HLCLWAL.json 실측.
+  //  shape (a) FOI/박은 ATTB_CD 부재(선택 그리드) — 어댑터가 둘을 구분.
+  ATTB_CD?: string | null;
+  ATTB_NM?: string | null;
 }
 
 export interface RedDisablePcs {
@@ -107,6 +112,9 @@ export interface RedProductData {
   pdt_prn_cnt_info: RedPrnCntInfo[];
   inner_pdt_mtrl_info?: RedMtrlInfo[];
   inner_pdt_dosu_info?: RedDosuInfo[];
+  // Wave C 의류(clothes2025): apparel_info 6블록(print_type/print_area/apparel_color/size_info/size_color_info/pantone_color).
+  //  타입은 apparel.ts 의 ApparelInfo. red-types 는 존재만 선언(상세는 apparel 모듈).
+  apparel_info?: unknown;
 }
 
 export interface RedMemberInfo {

@@ -1,0 +1,228 @@
+{
+ "retCode": 200,
+ "msg": "",
+ "result": {
+  "product_option": {
+   "option": {
+    "pdt_cod": "GSSBMTL",
+    "pdt_nme": "메탈 부자재 (캐스케이드 부자재)",
+    "item_gbn": "edicus_item",
+    "price_gbn": "tmpl_price",
+    "skinInfo": {
+     "pageDirection": {
+      "view_yn": "N",
+      "title": "주문서 작성"
+     },
+     "paperSelect": {
+      "view_yn": "Y",
+      "title": "용지"
+     },
+     "sizeSelect": {
+      "view_yn": "Y",
+      "title": "규격 (mm)"
+     },
+     "dosuSelect": {
+      "view_yn": "N",
+      "title": "인쇄 도수"
+     },
+     "subjectGroup": {
+      "view_yn": "Y",
+      "title": "주문 제목"
+     },
+     "quantityGroup": {
+      "view_yn": "Y",
+      "title": {
+       "orderCnt": "디자인 수 (건수)",
+       "printCnt": "수량"
+      }
+     }
+    },
+    "order_yn": "Y",
+    "cut_guide_yn": "N",
+    "able_paper_yn": "Y",
+    "price_table_yn": "N",
+    "useTemplateDownload": "Y",
+    "useKoiEditor": "Y",
+    "useRPEditor": "N",
+    "usePDF": "Y",
+    "usePDFordCnt": "Y",
+    "useEditorOrdCnt": "N",
+    "koiAccessToken": "[REDACTED-JWT]",
+    "rpAccessToken": null,
+    "koi_template_resource_id": "",
+    "koiOption": [],
+    "ptt_cod": "37"
+   }
+  },
+  "product_data": {
+   "pdt_base_info": [
+    {
+     "PDT_CD": "ACPDSTD",
+     "PDT_NM": "아크릴 등신대",
+     "WDT_HGH_GBN_YN": "N",
+     "PRN_YN": "Y",
+     "PDT_UNIT": "pcs",
+     "ORD_CNT_YN": "Y",
+     "NO_STD_ABL_YN": "N",
+     "MIN_CUT_WDT": "10.00",
+     "MIN_CUT_HGH": "10.00",
+     "MAX_CUT_WDT": "300.00",
+     "MAX_CUT_HGH": "250.00",
+     "DFT_CUT_WDT": "50.00",
+     "DFT_CUT_HGH": "20.00",
+     "CUT_MRG": "4.00",
+     "FIR_CNT": 1,
+     "INC": 5,
+     "INC_STEP": 11,
+     "NOTE": "",
+     "REAM_YN": "",
+     "SET_CNT": 1,
+     "SIZE_PCS_USE": "",
+     "MAX_PRN_CNT": 0,
+     "DAY_PRDC_PDT_YN": "N",
+     "DAY_ABLE_PRN_CNT": 0
+    }
+   ],
+   "pdt_mtrl_info": [
+    {
+     "MTRL_TYPE": "P",
+     "CLR_CD": "X",
+     "CLR_NM": "없음",
+     "PTT_CD": "ACR",
+     "PTT_NM": "아크릴_3T 투명",
+     "WGT_CD": "016",
+     "MTRL_CD": "PXACR016",
+     "HIDE_YN": "N",
+     "HIDE_RSN": "",
+     "NOTE": "",
+     "SID_GBN": "",
+     "CLR_COD": "X",
+     "CLR_NME": "없음",
+     "PTT_COD": "ACR",
+     "PTT_NME": "아크릴_3T 투명",
+     "WGT_COD": "016",
+     "MTRL_COD": "PXACR016",
+     "MTRL_NM": "아크릴_3T 투명",
+     "GRP_OPTION_CD": "",
+     "CLR_OPTION_CD": "",
+     "PRT_HIDE_YN": "N",
+     "BSN_YN": "N",
+     "CLR_HEX_CD": ""
+    }
+   ],
+   "pdt_size_info": [
+    {
+     "DIV_NM": "사이즈직접입력",
+     "WRK_WDT": "4.00",
+     "WRK_HGH": "4.00",
+     "CUT_WDT": "0.00",
+     "CUT_HGH": "0.00",
+     "DFT_YN": "Y",
+     "DIV_CD": "",
+     "DIV_SEQ": 1,
+     "STICKER_TYPE": "",
+     "REAM_PAPER_CNT": null,
+     "NOTE": null,
+     "PDT_SIZE_INFO": "",
+     "HIDE_YN": "N"
+    }
+   ],
+   "pdt_dosu_info": [
+    {
+     "COD": "SID_S",
+     "COD_NME": "단면",
+     "PRN_CLR_CNT": 4
+    }
+   ],
+   "pdt_prn_cnt_info": [
+    {
+     "DIV_CD": "",
+     "REAM_CNT": "",
+     "PRN_CNT": "",
+     "DFT_YN": "Y",
+     "DFT_PRN_CNT": 1,
+     "FIR_CNT": 1,
+     "INC_CNT": 5,
+     "INC_STEP": 11,
+     "MIN_PRN_CNT": 1,
+     "MIN_INN_PAGE": 1,
+     "MAX_INN_PAGE": 1,
+     "STEP_INN_PAGE": 1,
+     "MAX_THCK": null,
+     "INN_MAX_WGT": null,
+     "COV_MIN_WGT": null
+    }
+   ],
+   "pdt_prn_cnt_info_add": [],
+   "pdt_exp_prn_cnt_info": null,
+   "pdt_pcs_info": [
+    {
+     "PCS_CD": "LAS_DFT",
+     "PCS_GRP_NM": "레이저",
+     "PCS_DTL_CD": "DFXXX",
+     "PCS_DTL_NM": "레이저",
+     "WEB_PCS_DTL_GRP": "LAS_DFT_DF",
+     "WEB_PCS_DTL_GRP_NM": "",
+     "WRK_WDT": "0.00",
+     "WRK_HGH": "0.00",
+     "CUT_WDT": "0.00",
+     "CUT_HGH": "0.00",
+     "VIEW_YN": "N",
+     "HIDE_YN": "N",
+     "NOTICE": [
+      "\t자동 견적은 A3 용지 1미터 이하 커팅 기준 금액입니다. 파일 업로드 후 최종 견적을 확인하실 수 있습니다."
+     ],
+     "ESN_YN": "Y",
+     "NOTE": "",
+     "MTRL_CD": "",
+     "MTRL_COD": "",
+     "DIV_SEQ": 0,
+     "SUB_MTRL_YN": "N",
+     "STICKER_TYPE": null,
+     "QTY_INPUT_YN": "N",
+     "PCS_COD": "LAS_DFT",
+     "PCS_GRP_NME": "레이저",
+     "PCS_DTL_COD": "DFXXX",
+     "PCS_DTL_NME": "레이저",
+     "PCS_GROUP_NME": "레이저"
+    }
+   ],
+   "pdt_add_pcs_info": null,
+   "pdt_disable_pcs_info": [],
+   "pdt_add_info": [
+    [],
+    []
+   ],
+   "option_info": {
+    "production_method": [
+     {
+      "COD": null,
+      "COD_NME": null
+     }
+    ],
+    "shape_info": [
+     {
+      "COD": null,
+      "COD_NME": null
+     }
+    ],
+    "print_data": [
+     {
+      "COD": null,
+      "COD_NME": null
+     }
+    ]
+   }
+  },
+  "member_info": {
+   "mb_id": "REDACTED",
+   "mb_cust_cod": "10000000",
+   "discount_cust_yn": "N",
+   "mall_cust_yn": "N",
+   "bsn_yn": "N",
+   "blk_con": "N",
+   "edicusUserID": "REDACTED"
+  }
+ },
+ "_note": "Wave C ACC 다단 캐스케이드 fixture(합성) — GSSBMTL ptt_cod=37 → accFilterConfigMap CASCADE(컬러 5 + 불박 후가공 3). product_info 에 acc config 부재(번들상수), 어댑터가 acc-config.ts 에서 주입. 최소 product_data(ACPDSTD shape 차용). 합성 데이터(실 product_info 캡처 아님 — GSSBMTL 은 probe 미발현)."
+}

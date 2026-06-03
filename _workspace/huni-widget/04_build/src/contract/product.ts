@@ -19,8 +19,24 @@ export type ComponentType =
   | 'page-counter-input'
   | 'finish-button'
   | 'finish-select-box'
+  | 'acc-panel' // L-12 ACC 부자재 다단 캐스케이드/멀티 패널 (D4 정당화 신규 leaf #2)
   | 'summary'
   | 'upload-cta';
+
+// L-12 ACC 부자재 패널 메타 — 어댑터가 accFilterConfigMap 에서 산출, acc-panel 컨트롤이 소비.
+//  CASCADE = 단계별 종속 select(상위선택→하위옵션), MULTI = 그룹별 독립 멀티선택.
+export interface AccFilterGroup {
+  id: string; // 단계/그룹 식별 (그룹 단위 selection 키)
+  label: string; // GRP_NME (불투명 라벨)
+  kind: 'cascade-step' | 'multi-group';
+  dependsOn?: string; // cascade: 직전 단계 id (옵션이 그 선택에 의존하면 표시)
+  groupCode?: string; // multi: 자재그룹 코드(GRP_COD)
+  values: OptionValue[]; // 정적 옵션(부재 시 동적 — 상위선택 의존, 위젯은 빈 배열 렌더)
+}
+export interface AccPanelSpec {
+  uiType: 'CASCADE' | 'MULTI';
+  groups: AccFilterGroup[];
+}
 
 export interface ProductSide {
   key: SideKey;
@@ -62,6 +78,7 @@ export interface OptionGroup {
   multiple?: boolean; // 다중 선택 여부 (후가공 등)
   values: OptionValue[]; // 동적 .map() 대상
   inputSpec?: InputSpec; // 입력형(counter/area/page) — values 대신
+  accSpec?: AccPanelSpec; // L-12 acc-panel 전용 — 다단 캐스케이드/멀티 부자재 스펙(OPTIONAL·additive)
 }
 
 export interface EditorCapability {
@@ -82,6 +99,10 @@ export interface NormalizedProduct {
   name: string;
   unit: string; // "권" | "개" — 표시용
   priceSchemeKey: string; // 불투명 가격체계 키. 위젯은 가격요청에 echo만.
+  // D-L2: itemGroup 불투명 분류 echo(Red item_gbn — book2025/clothes2025/vDigital/ACC).
+  //  스키마 분기 권위(어댑터가 사용). 위젯은 의미 무계산. OPTIONAL·additive.
+  //  미전달(레거시 fixture) 시 어댑터가 isBook 형상 휴리스틱 fallback.
+  itemGroup?: string;
   sides: ProductSide[];
   optionGroups: OptionGroup[]; // 렌더 순서대로
   constraints: NormalizedConstraints;

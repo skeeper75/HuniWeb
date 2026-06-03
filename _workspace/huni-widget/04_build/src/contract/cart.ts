@@ -27,3 +27,10 @@ export interface NormalizedCartHandoff {
   priceSnapshot: { finalPrice: number; vat: number; shipping: number };
   artifacts: NormalizedArtifact[];
 }
+
+// L-D3-1: 서버 주문가능 판정(Red isReadyToOrder → can_order/doc_rev). 클라 canOrder(선택/가격/파일)
+//  와 별개로 서버측 doc 검수·재고 등을 게이트. 위젯은 불투명 결과만 소비.
+export interface NormalizedOrderReadiness {
+  canOrder: boolean;
+  reasons: string[]; // 불투명 사유 코드/문자열 (서버 권위)
+}

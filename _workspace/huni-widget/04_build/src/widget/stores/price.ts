@@ -110,6 +110,7 @@ export function buildPriceRequest(s: WidgetState): NormalizedPriceRequest {
   return {
     productCode: product.code,
     priceSchemeKey: product.priceSchemeKey, // 불투명 echo
+    itemGroup: product.itemGroup, // D-L2 불투명 분류 echo (직렬화 스키마 분기 권위)
     customerTier: s.member.tier,
     dimensions: product.sides.map((side) => dimsFromSelection(s, side.key)),
     colorCounts: colorCountsFromSelections(s),

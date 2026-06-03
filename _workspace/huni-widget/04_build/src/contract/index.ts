@@ -6,12 +6,15 @@ export type {
   InputSpec,
   OptionValue,
   OptionGroup,
+  AccFilterGroup,
+  AccPanelSpec,
   EditorCapability,
   CtaCapability,
   NormalizedProduct,
 } from './product';
 export type {
   DisableRule,
+  VisibilityRule,
   QuantityRule,
   SizeRule,
   BaseRule,
@@ -30,4 +33,9 @@ export type {
   NormalizedUploadResult,
 } from './upload';
 export type { NormalizedEditorConfig, NormalizedEditorResult } from './editor';
-export type { SelectedOption, NormalizedArtifact, NormalizedCartHandoff } from './cart';
+export type {
+  SelectedOption,
+  NormalizedArtifact,
+  NormalizedCartHandoff,
+  NormalizedOrderReadiness,
+} from './cart';

@@ -24,6 +24,9 @@ export interface SelectedFinish {
 export interface NormalizedPriceRequest {
   productCode: string;
   priceSchemeKey: string; // 불투명 echo
+  // D-L2: itemGroup 불투명 echo — 어댑터 직렬화의 ORD_INFO 스키마 분기 권위(book2025=책자 분리필드).
+  //  OPTIONAL·additive. 미전달 시 isBook 형상 휴리스틱 fallback.
+  itemGroup?: string;
   customerTier?: string; // 불투명 (기본 어댑터가 채움)
   dimensions: PriceDimension[]; // side별
   colorCounts: Partial<Record<SideKey, number>>;

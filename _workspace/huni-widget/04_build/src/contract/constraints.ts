@@ -7,6 +7,15 @@ export interface DisableRule {
   disablesValueId?: string; // 특정 값만 비활성
 }
 
+// P4 (L-D2-1): VIEW_YN 런타임 동적 add/remove (Red v() mod_06:1452).
+//  특정 값 선택 시 후가공 그룹을 런타임에 표시(add)/숨김(remove)한다. disable(회색) 과 다른 축 —
+//  visible 토글(렌더 자체 add/remove). 어댑터가 add_pcs_info/Red 룰에서 채움(현 fixture 미보유 시 빈 배열).
+export interface VisibilityRule {
+  triggerValueId: string; // 선택 시 트리거되는 OptionValue.id
+  showsGroupId?: string; // 표시(add)할 그룹 id
+  hidesGroupId?: string; // 숨김(remove)할 그룹 id
+}
+
 export interface QuantityRule {
   min: number;
   first: number;
@@ -39,6 +48,8 @@ export interface BaseRule {
 export interface NormalizedConstraints {
   // ① material → pcs disable
   disableRules: DisableRule[];
+  // ①-b P4: material/값 → 그룹 visible 동적 토글(add/remove). OPTIONAL·additive(미보유 시 빈 배열).
+  visibilityRules?: VisibilityRule[];
   // ② quantity (수량/페이지 clamp/snap) — side별
   quantity: Partial<Record<SideKey, QuantityRule>>;
   // ③ dosu↔bnc → OptionValue.priceColorCount 로 평면화 (별도 배열 없음)

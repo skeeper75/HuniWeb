@@ -8,6 +8,7 @@ import type {
   NormalizedPriceRequest,
   NormalizedEditorConfig,
   NormalizedEditorResult,
+  NormalizedOrderReadiness,
   SideKey,
   OptionGroup,
 } from '@/contract';
@@ -67,6 +68,8 @@ export interface WidgetState {
   setArtifact(side: SideKey, a: NormalizedArtifact): void;
   schedulePriceQuote(): void;
   cartHandoff(): NormalizedCartHandoff;
+  // L-D3-1: 서버 주문가능 판정(goto-cart 전 게이트). 클라 canOrder 통과 후 서버 doc_rev/재고 확인.
+  checkOrderReadiness(): Promise<NormalizedOrderReadiness>;
   // 에디터 (editor-integration §1·3)
   openEditor(side: SideKey): Promise<void>;
   applyEditorResult(r: NormalizedEditorResult): void;
@@ -82,6 +85,9 @@ export interface WidgetStoreDeps {
   deviceType?: 'pc' | 'mobile';
   memberTier?: string;
   onPriceChange?: (b: NormalizedPriceBreakdown) => void;
+  // onOptionChange: 옵션 변경 시 호스트 통지(Red onOptionChange, COMMON/ACC). 위젯은 통지만, 호스트가 소비.
+  //  현 선택 스냅샷(groupId/valueId)을 호스트로. additive — 미주입 시 no-op.
+  onOptionChange?: (change: { groupId: string; valueId: SelectionValue }) => void;
   // price-engine.md §3 파라미터 (테스트에서 0 으로 즉시 실행 가능)
   debounceMs?: number;
   cacheTtlMs?: number;
@@ -171,6 +177,8 @@ export function createWidgetStore(deps: WidgetStoreDeps): WidgetStore {
         const next = applyCascade(product, selections, groupId);
         set({ product: next.product, selections: next.selections });
       }
+      // 호스트 통지(Red onOptionChange) — 가격재계산과 별개로 옵션변경 자체를 호스트에 알림.
+      deps.onOptionChange?.({ groupId, valueId });
       get().schedulePriceQuote();
     },
 
@@ -331,6 +339,14 @@ export function createWidgetStore(deps: WidgetStoreDeps): WidgetStore {
         },
         artifacts: Object.values(s.artifacts).filter(Boolean) as NormalizedArtifact[],
       };
+    },
+
+    // L-D3-1: goto-cart 전 서버 주문가능 게이트. 클라 canOrder 가 먼저 막고, 통과 시 서버 doc_rev/재고 확인.
+    //  Red 는 goto-cart 가 바로 onResult 로 갔으나, 서버 isReadyToOrder 게이트를 추가(침묵 주문 방지).
+    async checkOrderReadiness(): Promise<NormalizedOrderReadiness> {
+      const clientGate = selectCanOrder(get());
+      if (!clientGate.ok) return { canOrder: false, reasons: clientGate.reasons };
+      return deps.bff.isReadyToOrder(get().cartHandoff());
     },
   }));
 

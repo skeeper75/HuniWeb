@@ -25,8 +25,10 @@ interface FromEdicusMessage {
     ps_code?: string;
     tnUrlList?: string[];
     totalPageCount?: number;
+    page_count?: number; // page-count-changed
     case?: unknown; // [O4] 값 종류 미캡처 — pass-through, 해석 안 함.
     docInfo?: EdicusDocInfo;
+    [k: string]: unknown; // prod-var-changed 등 불투명 info echo
   };
 }
 
@@ -36,6 +38,13 @@ export interface EditorBridgeCallbacks {
   onProjectId(side: SideKey, projectId: string): void;
   onResult(result: NormalizedEditorResult): void; // goto-cart 정규화 결과
   onClose(side: SideKey): void;
+  // 에디터 3액션(MAJOR) — 그 외 ~25 from-edicus 액션은 에디터 내부 UX 라 의도적 미처리.
+  //  page-count-changed: 면수 변동 → 가격재계산(불투명 totalPageCount echo).
+  onPageCountChanged?(side: SideKey, totalPageCount: number): void;
+  //  request-user-token: 에디터가 토큰 갱신 요청 → 호스트/BFF 가 새 토큰을 to-edicus 로 송신.
+  onRequestUserToken?(side: SideKey): void;
+  //  prod-var-changed: 커스텀탭 변수변경 → 가격재계산(불투명 info echo).
+  onProdVarChanged?(side: SideKey, info: Record<string, unknown>): void;
 }
 
 // 메시지 리스너를 붙일 대상(기본 window). 테스트에서 가짜 타깃 주입 가능.
@@ -142,6 +151,20 @@ export class EditorBridge {
         this.cb.onResult(result);
         break;
       }
+      case 'page-count-changed': {
+        // 면수 변동 → 가격재계산(불투명 totalPageCount echo). page_count/totalPageCount 둘 중 하나.
+        const pc = d.info?.totalPageCount ?? d.info?.page_count;
+        if (pc != null) this.cb.onPageCountChanged?.(this.side, pc);
+        break;
+      }
+      case 'request-user-token':
+        // 에디터 토큰 갱신 요청 → 호스트/BFF 가 새 토큰 발급해 to-edicus 로 송신.
+        this.cb.onRequestUserToken?.(this.side);
+        break;
+      case 'prod-var-changed':
+        // 커스텀탭 변수변경 → 가격재계산(불투명 info echo).
+        this.cb.onProdVarChanged?.(this.side, (d.info ?? {}) as Record<string, unknown>);
+        break;
       case 'close':
         this.cb.onClose(this.side);
         break;
@@ -150,11 +173,23 @@ export class EditorBridge {
 
   // 에디터 iframe src 조립 — editor-integration §1.
   // 토큰은 위젯이 보관하지 않고 즉시 URL 로 전달(메모리 노출 최소화).
-  buildIframeSrc(editorHost: string): string {
+  // L-D3-5: cmd 분기 — 신규작업=create / 기존 프로젝트 재편집=open(projectId) / 재구성=reform.
+  //  Red 는 진입 의도별로 cmd 를 달리한다. projectId 가 있으면 재편집/재구성 진입.
+  buildIframeSrc(
+    editorHost: string,
+    opts?: { mode?: 'create' | 'edit' | 'reform'; projectId?: string },
+  ): string {
+    const mode = opts?.mode ?? 'create';
+    const cmd = mode === 'edit' ? 'open' : mode === 'reform' ? 'reform' : 'create';
     const u = new URL(`${editorHost}/ed`);
-    u.hash = `#/editor_landing?cmd=create&token=${encodeURIComponent(
+    let hash = `#/editor_landing?cmd=${cmd}&token=${encodeURIComponent(
       this.config.token,
     )}&ps_code=${encodeURIComponent(this.config.psCode)}`;
+    // 재편집/재구성은 기존 프로젝트 식별자(projectId)를 URL 로 전달.
+    if ((mode === 'edit' || mode === 'reform') && opts?.projectId) {
+      hash += `&project_id=${encodeURIComponent(opts.projectId)}`;
+    }
+    u.hash = hash;
     return u.toString();
   }
 }

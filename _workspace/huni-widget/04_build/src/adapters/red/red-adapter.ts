@@ -19,6 +19,7 @@ import type {
   NormalizedUploadResult,
   NormalizedEditorConfig,
   NormalizedCartHandoff,
+  NormalizedOrderReadiness,
 } from '@/contract';
 import type {
   ProductAdapter,
@@ -40,7 +41,15 @@ import type {
   RedPriceReqBody,
   RedPriceReqOrdInfo,
 } from './red-types';
-import { DATASET_COMPONENT_TYPE, pcsComponentType } from './component-type-map';
+import {
+  DATASET_COMPONENT_TYPE,
+  pcsComponentType,
+  pcsColorHexMap,
+  roundingRadius,
+} from './component-type-map';
+import { accFilterConfig, ACC_PANEL_COMPONENT_TYPE } from './acc-config';
+import type { AccPanelSpec, AccFilterGroup, VisibilityRule } from '@/contract';
+import { buildApparelGroups, isApparelItemGroup, type ApparelInfo } from './apparel';
 
 const num = (s: string | number | undefined): number => {
   if (typeof s === 'number') return s;
@@ -64,14 +73,25 @@ export function mapProduct(res: RedDigitalProductResponse): NormalizedProduct {
       ]
     : [{ key: 'default', label: '기본', uploadType: opt.usePDF === 'Y' ? 'pdf' : 'editor' }];
 
-  const optionGroups = mapOptionGroups(data, hasInner, opt.price_gbn);
-  const constraints = mapConstraints(data);
+  // Wave C 의류: clothes2025 면 apparel_info → 의류 OptionGroup + visibilityRules(PTP_SLK 토글).
+  const apparel =
+    isApparelItemGroup(opt.item_gbn) && data.apparel_info
+      ? buildApparelGroups(data.apparel_info as ApparelInfo)
+      : undefined;
+  // pttCode(부자재 config 키) — Red 위젯 init 파라미터. product_option.ptt_cod 가 있으면 사용(L-12).
+  const pttCode = typeof opt.ptt_cod === 'string' ? opt.ptt_cod : undefined;
+  const optionGroups = apparel
+    ? apparel.groups
+    : mapOptionGroups(data, hasInner, opt.price_gbn, opt.pdt_cod, pttCode);
+  const constraints = mapConstraints(data, apparel?.visibilityRules);
 
   return {
     code: opt.pdt_cod,
     name: opt.pdt_nme,
     unit: data.pdt_base_info[0]?.PDT_UNIT ?? '개',
     priceSchemeKey: opt.price_gbn, // 불투명 echo
+    // D-L2: itemGroup 불투명 분류 echo(Red item_gbn) — 스키마 분기 권위. 위젯 무계산.
+    itemGroup: opt.item_gbn,
     sides,
     optionGroups,
     constraints,
@@ -110,6 +130,8 @@ function sizeValue(s: RedSizeInfo): OptionValue {
 const COMPOSITE_PCS = new Set(['COT_DFT', 'SCO_DFT']);
 // L-1 수량형 ATTB 후가공 — ATTB=주문수량 echo + ATTB_2/3 빈슬롯(mod_07:2586 SUB_MTR / 2467 PDT_WRK).
 const QUANTITY_ECHO_PCS = new Set(['SUB_MTR', 'PDT_WRK', 'INN_DFT']);
+// L-3a 멀티선택 후가공 — 귀돌이(ROU_DFT) 4귀 부분집합 선택(mod_07:3325 u=선택목록 배열).
+const MULTI_SELECT_PCS = new Set(['ROU_DFT']);
 // 합성그룹 식별 suffix — 직렬화 재합성이 이 규칙으로 짝을 찾는다.
 const COMPOSITE_SIDE_SUFFIX = '__side';
 const COMPOSITE_COATING_SUFFIX = '__coating';
@@ -158,7 +180,7 @@ function mapCompositePcsGroup(pcsCd: string, items: RedPcsInfo[], side: SideKey)
 }
 
 // PCS 그룹화: PCS_CD 별로 묶고, 각 PCS_DTL_CD 를 OptionValue 로.
-function mapPcsGroups(pcsInfo: RedPcsInfo[], side: SideKey): OptionGroup[] {
+function mapPcsGroups(pcsInfo: RedPcsInfo[], side: SideKey, pdtCode: string): OptionGroup[] {
   const byGroup = new Map<string, RedPcsInfo[]>();
   for (const p of pcsInfo) {
     const arr = byGroup.get(p.PCS_CD) ?? [];
@@ -173,19 +195,37 @@ function mapPcsGroups(pcsInfo: RedPcsInfo[], side: SideKey): OptionGroup[] {
       continue;
     }
     const first = items[0];
-    const values: OptionValue[] = items.map((it) => ({
-      id: it.PCS_DTL_CD,
-      label: it.PCS_DTL_NM,
-      disabled: false,
-    }));
+    // L-4: 색상 후가공(END_PAP 등) hex 상수맵 보유 시 colorHex 주입 → color-chip 라우팅.
+    //  ColorChip 은 colorHex 를 이미 렌더하므로 데이터만 채우면 즉시 동작(D4 SPEC-L4).
+    const hexMap = pcsColorHexMap(pcsCd);
+    // L-3a: 귀돌이(ROU_DFT)는 4귀 부분집합 선택(멀티). multiple:true → MultiCheckGroup 렌더 + 배열선택.
+    const isMulti = MULTI_SELECT_PCS.has(pcsCd);
+    // L-3b: ROU_DFT 반경 ATTB 주입(번들 상수 roundingConfigMap 이식, mod_07:3300~3344).
+    //  factor!=='size' 또는 미등록 상품(BCFOXXX/BCSPDFT)은 고정 default '4'. size-linked(GSCDPOP)는
+    //  사이즈 DIV_SEQ 의존 — 로드 시엔 DFT 사이즈 DIV_SEQ 기준 초기값, 사이즈 변경 시 cascade 가 재계산.
+    const rouRadius = isMulti && pcsCd === 'ROU_DFT' ? roundingRadius(pdtCode) : undefined;
+    const values: OptionValue[] = items.map((it) => {
+      // L-1 shape (b): ATTB_CD 보유(RIN_DFT 등) → 가격측 속성 echo 를 attb 슬롯에 적재.
+      //  shape (a) FOI/박은 ATTB_CD 부재 → 일반 선택 그리드(attb 없음, PCS_DTL_COD 자체가 선택축).
+      const attbCd = it.ATTB_CD ?? undefined;
+      const attb = rouRadius ?? attbCd ?? undefined;
+      return {
+        id: it.PCS_DTL_CD,
+        label: it.PCS_DTL_NM,
+        colorHex: hexMap?.[it.PCS_DTL_CD],
+        ...(attb != null ? { attb } : {}),
+        disabled: false,
+      };
+    });
     groups.push({
       id: `PCS_${pcsCd}`,
       side,
       label: first.PCS_GRP_NM,
-      componentType: pcsComponentType(false), // colorHex 부재 → finish-button (RULE-2)
+      // hexMap 있으면 color-chip, 아니면 finish-button (RULE-2/RULE-4).
+      componentType: pcsComponentType(Boolean(hexMap)),
       required: first.ESN_YN === 'Y',
       visible: first.VIEW_YN === 'Y', // VIEW_YN=N = hidden essential (자동적용)
-      multiple: false,
+      multiple: isMulti,
       values,
     });
   }
@@ -222,7 +262,13 @@ function prnCntLadder(data: RedProductData): RedPrnCntInfo[] {
   return ladder;
 }
 
-function mapOptionGroups(data: RedProductData, hasInner: boolean, priceScheme: string): OptionGroup[] {
+function mapOptionGroups(
+  data: RedProductData,
+  hasInner: boolean,
+  priceScheme: string,
+  pdtCode: string,
+  pttCode?: string,
+): OptionGroup[] {
   const groups: OptionGroup[] = [];
   const q = buildQuantityRule(data);
   const prnLadder = prnCntLadder(data);
@@ -303,7 +349,7 @@ function mapOptionGroups(data: RedProductData, hasInner: boolean, priceScheme: s
   }
 
   // 후가공 (finish-button, PCS_CD 그룹화)
-  groups.push(...mapPcsGroups(data.pdt_pcs_info, 'default'));
+  groups.push(...mapPcsGroups(data.pdt_pcs_info, 'default', pdtCode));
 
   // 내지 (책자)
   if (hasInner && data.inner_pdt_mtrl_info) {
@@ -399,10 +445,36 @@ function mapOptionGroups(data: RedProductData, hasInner: boolean, priceScheme: s
     });
   }
 
+  // L-12 ACC 부자재 다단 캐스케이드/멀티 — accFilterConfigMap 등록 상품만 acc-panel 그룹 추가.
+  //  미등록(ACPDSTD 류 단순 add-on)은 SUM_MTR finish-button 으로 이미 흡수 → 본 패널 미생성.
+  const accCfg = accFilterConfig(pdtCode, pttCode);
+  if (accCfg) {
+    const accGroups: AccFilterGroup[] = accCfg.filters.map((f, idx) => ({
+      id: `ACC_F${idx}`,
+      label: f.GRP_NME,
+      kind: f.GRP_TYPE === 'MTRL_MULTI_GRP' ? 'multi-group' : 'cascade-step',
+      // cascade: 옵션 부재(기종/패턴/컬러) 단계는 직전 단계 선택에 의존(동적).
+      dependsOn: f.GRP_TYPE === 'MTRL_SUB_GRP' && !f.options ? `ACC_F${idx - 1}` : undefined,
+      groupCode: f.GRP_COD,
+      values: (f.options ?? []).map((o) => ({ id: o.COD, label: o.COD_NME, disabled: false })),
+    }));
+    const accSpec: AccPanelSpec = { uiType: accCfg.uiType, groups: accGroups };
+    groups.push({
+      id: 'ACC_PANEL',
+      side: 'default',
+      label: '부자재',
+      componentType: ACC_PANEL_COMPONENT_TYPE, // 'acc-panel'
+      required: false,
+      visible: true,
+      values: [], // 패널 — values 대신 accSpec 사용.
+      accSpec,
+    });
+  }
+
   return groups;
 }
 
-function mapConstraints(data: RedProductData): NormalizedConstraints {
+function mapConstraints(data: RedProductData, extraVisibilityRules?: VisibilityRule[]): NormalizedConstraints {
   const base = data.pdt_base_info[0];
 
   // S6: 일부 상품(옵셋 캘린더)은 pdt_disable_pcs_info 가 null(빈 비활성 규칙). null→[] 평탄화.
@@ -423,6 +495,9 @@ function mapConstraints(data: RedProductData): NormalizedConstraints {
 
   return {
     disableRules,
+    // P4: VIEW_YN 동적 add/remove 룰. 일반 상품은 product_info 에 명시 룰 부재(Red 런타임 v()) → 빈 배열.
+    //  Wave C 의류: PTP_SLK 선택 시 multiSize/pantone 토글 룰을 어댑터(apparel.ts)가 산출해 주입.
+    visibilityRules: extraVisibilityRules ?? [],
     // UI 그룹(GRP_QUANTITY/GRP_INNER_PAGE)과 동일 소스 — 그룹은 표면, 이 객체는 검증(clamp/snap).
     quantity: {
       default: buildQuantityRule(data),
@@ -452,11 +527,14 @@ function mapConstraints(data: RedProductData): NormalizedConstraints {
 //  - DOSU_COD 는 의도 omit(OPEN-1) — PRN_CLR_CNT 가 도수 가격의미 운반(테스트 입증, 회귀 가드 유지).
 export function serializeRedPriceRequest(req: NormalizedPriceRequest): RedPriceReqBody {
   const d = req.dimensions[0];
-  // 책자 판정: 내지(inner) 자재/색 또는 면수(pageCount)가 존재하면 표지/내지 분리 직렬화.
+  // D-L2: 책자 판정 권위 = itemGroup(book2025 분류, 명시값). Red 는 item_gbn 으로 스키마 분기(mod_05:1859).
+  //  itemGroup 미전달(레거시) 시에만 inner/pageCount 형상 휴리스틱 fallback(취약성 격리).
   const isBook =
-    req.materials.inner !== undefined ||
-    req.colorCounts.inner !== undefined ||
-    req.pageCount !== undefined;
+    req.itemGroup != null
+      ? req.itemGroup.startsWith('book2025')
+      : req.materials.inner !== undefined ||
+        req.colorCounts.inner !== undefined ||
+        req.pageCount !== undefined;
   const ord: RedPriceReqOrdInfo = {
     PDT_CD: req.productCode,
     CUT_WDT: d?.cutW ?? 0,
@@ -565,6 +643,8 @@ export interface RedDataSource {
   fetchPresigned(req: NormalizedPresignedRequest): Promise<RedPresignedResponse>;
   fetchFileMeta(storedFileName: string): Promise<{ pageCount?: number; sizeBytes?: number }>;
   fetchEditorConfig(code: string, side: SideKey): Promise<NormalizedEditorConfig>;
+  // L-D3-1: 서버 주문가능 판정(isReadyToOrder → can_order/doc_rev).
+  fetchOrderReadiness(payload: NormalizedCartHandoff): Promise<NormalizedOrderReadiness>;
   postCartHandoff(payload: NormalizedCartHandoff): Promise<{ ok: boolean; redirectUrl?: string }>;
 }
 
@@ -606,6 +686,10 @@ class RedEditorAdapter implements EditorAdapter {
 
 class RedCartAdapter implements CartAdapter {
   constructor(private ds: RedDataSource) {}
+  async isReadyToOrder(payload: NormalizedCartHandoff): Promise<NormalizedOrderReadiness> {
+    // L-D3-1: 서버 주문가능 판정 위임(Red isReadyToOrder → can_order/doc_rev).
+    return this.ds.fetchOrderReadiness(payload);
+  }
   async handoff(payload: NormalizedCartHandoff): Promise<{ ok: boolean; redirectUrl?: string }> {
     // [UNDECIDED] 커머스 바인딩. 본 패스는 데이터소스로 위임(stub).
     return this.ds.postCartHandoff(payload);

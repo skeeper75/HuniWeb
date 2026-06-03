@@ -1,0 +1,1398 @@
+{
+ "retCode": 200,
+ "msg": "",
+ "result": {
+  "product_option": {
+   "option": {
+    "pdt_cod": "CLSTSHS",
+    "pdt_nme": null,
+    "item_gbn": "clothes2025_item",
+    "price_gbn": "clothes2025_price",
+    "skinInfo": {
+     "pageDirection": {
+      "view_yn": "N",
+      "title": "주문서 작성"
+     },
+     "paperSelect": {
+      "view_yn": "N",
+      "title": "용지"
+     },
+     "sizeSelect": {
+      "view_yn": "N",
+      "title": "규격 (mm)"
+     },
+     "dosuSelect": {
+      "view_yn": "N",
+      "title": "인쇄 도수"
+     },
+     "subjectGroup": {
+      "view_yn": "Y",
+      "title": "주문 제목"
+     },
+     "quantityGroup": {
+      "view_yn": "Y",
+      "title": {
+       "orderCnt": "디자인 수 (건수)",
+       "printCnt": "수량"
+      }
+     }
+    },
+    "order_yn": null,
+    "cut_guide_yn": null,
+    "able_paper_yn": "Y",
+    "price_table_yn": "Y",
+    "useTemplateDownload": "Y",
+    "useKoiEditor": "N",
+    "useRPEditor": "N",
+    "usePDF": "N",
+    "usePDFordCnt": "Y",
+    "useEditorOrdCnt": "N",
+    "koiAccessToken": "[REDACTED-JWT]",
+    "rpAccessToken": null,
+    "koi_template_resource_id": "",
+    "koiOption": []
+   }
+  },
+  "product_data": {
+   "pdt_base_info": [
+    {
+     "PDT_CD": "CLSTSHS",
+     "PDT_NM": null,
+     "WDT_HGH_GBN_YN": "N",
+     "PRN_YN": "Y",
+     "PDT_UNIT": "개",
+     "ORD_CNT_YN": "Y",
+     "NO_STD_ABL_YN": "N",
+     "MIN_CUT_WDT": "10.00",
+     "MIN_CUT_HGH": "10.00",
+     "MAX_CUT_WDT": "500.00",
+     "MAX_CUT_HGH": "730.00",
+     "DFT_CUT_WDT": "0.00",
+     "DFT_CUT_HGH": "0.00",
+     "CUT_MRG": "0.00",
+     "FIR_CNT": 1,
+     "INC": 1,
+     "INC_STEP": 10,
+     "NOTE": "",
+     "REAM_YN": "",
+     "SET_CNT": 1,
+     "SIZE_PCS_USE": "",
+     "MAX_PRN_CNT": 0,
+     "DAY_PRDC_PDT_YN": "N",
+     "DAY_ABLE_PRN_CNT": 0
+    }
+   ],
+   "pdt_mtrl_info": [
+    {
+     "MTRL_TYPE": "S",
+     "CLR_CD": "X",
+     "CLR_NM": "기본",
+     "PTT_CD": "SRT",
+     "PTT_NM": "(5942-1)6.2oz 프리미엄 티셔츠",
+     "WGT_CD": "103",
+     "MTRL_CD": "SXSRT103",
+     "HIDE_YN": "N",
+     "HIDE_RSN": "",
+     "NOTE": "",
+     "SID_GBN": "",
+     "CLR_COD": "X",
+     "CLR_NME": "기본",
+     "PTT_COD": "SRT",
+     "PTT_NME": "(5942-1)6.2oz 프리미엄 티셔츠",
+     "WGT_COD": "103",
+     "MTRL_COD": "SXSRT103",
+     "MTRL_NM": "(5942) 6.2oz 프리미엄 티셔츠 블랙 S",
+     "GRP_OPTION_CD": "",
+     "CLR_OPTION_CD": "",
+     "PRT_HIDE_YN": null,
+     "BSN_YN": "N",
+     "CLR_HEX_CD": "221815"
+    },
+    {
+     "MTRL_TYPE": "S",
+     "CLR_CD": "X",
+     "CLR_NM": "기본",
+     "PTT_CD": "SHT",
+     "PTT_NM": "(5001-1) 5.6oz 하이퀄리티 티셔츠",
+     "WGT_CD": "103",
+     "MTRL_CD": "SXSHT103",
+     "HIDE_YN": "N",
+     "HIDE_RSN": "",
+     "NOTE": "",
+     "SID_GBN": "",
+     "CLR_COD": "X",
+     "CLR_NME": "기본",
+     "PTT_COD": "SHT",
+     "PTT_NME": "(5001-1) 5.6oz 하이퀄리티 티셔츠",
+     "WGT_COD": "103",
+     "MTRL_COD": "SXSHT103",
+     "MTRL_NM": "(5001) 5.6oz 하이퀄리티 티셔츠 블랙 S",
+     "GRP_OPTION_CD": "",
+     "CLR_OPTION_CD": "",
+     "PRT_HIDE_YN": null,
+     "BSN_YN": "N",
+     "CLR_HEX_CD": "25282A"
+    },
+    {
+     "MTRL_TYPE": "S",
+     "CLR_CD": "X",
+     "CLR_NM": "기본",
+     "PTT_CD": "SRT",
+     "PTT_NM": "(5942-1)6.2oz 프리미엄 티셔츠",
+     "WGT_CD": "126",
+     "MTRL_CD": "SXSRT126",
+     "HIDE_YN": "N",
+     "HIDE_RSN": "",
+     "NOTE": "",
+     "SID_GBN": "",
+     "CLR_COD": "X",
+     "CLR_NME": "기본",
+     "PTT_COD": "SRT",
+     "PTT_NME": "(5942-1)6.2oz 프리미엄 티셔츠",
+     "WGT_COD": "126",
+     "MTRL_COD": "SXSRT126",
+     "MTRL_NM": "(5942) 6.2oz 프리미엄 티셔츠 화이트 S",
+     "GRP_OPTION_CD": "",
+     "CLR_OPTION_CD": "",
+     "PRT_HIDE_YN": null,
+     "BSN_YN": "N",
+     "CLR_HEX_CD": "ffffff"
+    }
+   ],
+   "pdt_size_info": [
+    {
+     "DIV_NM": "기본",
+     "WRK_WDT": "100.00",
+     "WRK_HGH": "100.00",
+     "CUT_WDT": "100.00",
+     "CUT_HGH": "100.00",
+     "DFT_YN": "N",
+     "DIV_CD": "",
+     "DIV_SEQ": 1,
+     "STICKER_TYPE": "",
+     "REAM_PAPER_CNT": null,
+     "NOTE": null,
+     "PDT_SIZE_INFO": "제품사이즈 : 100 X 100mm",
+     "HIDE_YN": "N"
+    }
+   ],
+   "pdt_dosu_info": [
+    {
+     "COD": "SID_S",
+     "COD_NME": "단면",
+     "PRN_CLR_CNT": 4
+    },
+    {
+     "COD": "SID_X",
+     "COD_NME": "인쇄없음",
+     "PRN_CLR_CNT": 0
+    }
+   ],
+   "pdt_prn_cnt_info": [],
+   "pdt_prn_cnt_info_add": [],
+   "pdt_exp_prn_cnt_info": null,
+   "pdt_pcs_info": [
+    {
+     "PCS_CD": "DIR_MTR",
+     "PCS_GRP_NM": "부자재직접인쇄",
+     "PCS_DTL_CD": "SI001",
+     "PCS_DTL_NM": "5.6oz 하이퀄리티 티셔츠 블랙 S",
+     "WEB_PCS_DTL_GRP": "DIR_MTR_SI",
+     "WEB_PCS_DTL_GRP_NM": "슈티에스 반팔티",
+     "WRK_WDT": "0.00",
+     "WRK_HGH": "0.00",
+     "CUT_WDT": "0.00",
+     "CUT_HGH": "0.00",
+     "VIEW_YN": "N",
+     "HIDE_YN": "N",
+     "NOTICE": [],
+     "ESN_YN": "Y",
+     "NOTE": "",
+     "MTRL_CD": "SXSHT103",
+     "MTRL_COD": "SXSHT103",
+     "DIV_SEQ": 0,
+     "SUB_MTRL_YN": "Y",
+     "STICKER_TYPE": null,
+     "QTY_INPUT_YN": "Y",
+     "PCS_COD": "DIR_MTR",
+     "PCS_GRP_NME": "부자재직접인쇄",
+     "PCS_DTL_COD": "SI001",
+     "PCS_DTL_NME": "5.6oz 하이퀄리티 티셔츠 블랙 S",
+     "PCS_GROUP_NME": "5.6oz 하이퀄리티 티셔츠 블랙 S"
+    },
+    {
+     "PCS_CD": "DIR_MTR",
+     "PCS_GRP_NM": "부자재직접인쇄",
+     "PCS_DTL_CD": "SI002",
+     "PCS_DTL_NM": "5.6oz 하이퀄리티 티셔츠 블랙 M",
+     "WEB_PCS_DTL_GRP": "DIR_MTR_SI",
+     "WEB_PCS_DTL_GRP_NM": "슈티에스 반팔티",
+     "WRK_WDT": "0.00",
+     "WRK_HGH": "0.00",
+     "CUT_WDT": "0.00",
+     "CUT_HGH": "0.00",
+     "VIEW_YN": "N",
+     "HIDE_YN": "N",
+     "NOTICE": [],
+     "ESN_YN": "Y",
+     "NOTE": "",
+     "MTRL_CD": "SXSHT203",
+     "MTRL_COD": "SXSHT203",
+     "DIV_SEQ": 0,
+     "SUB_MTRL_YN": "Y",
+     "STICKER_TYPE": null,
+     "QTY_INPUT_YN": "Y",
+     "PCS_COD": "DIR_MTR",
+     "PCS_GRP_NME": "부자재직접인쇄",
+     "PCS_DTL_COD": "SI002",
+     "PCS_DTL_NME": "5.6oz 하이퀄리티 티셔츠 블랙 M",
+     "PCS_GROUP_NME": "5.6oz 하이퀄리티 티셔츠 블랙 M"
+    },
+    {
+     "PCS_CD": "DIR_MTR",
+     "PCS_GRP_NM": "부자재직접인쇄",
+     "PCS_DTL_CD": "SI003",
+     "PCS_DTL_NM": "5.6oz 하이퀄리티 티셔츠 블랙 L",
+     "WEB_PCS_DTL_GRP": "DIR_MTR_SI",
+     "WEB_PCS_DTL_GRP_NM": "슈티에스 반팔티",
+     "WRK_WDT": "0.00",
+     "WRK_HGH": "0.00",
+     "CUT_WDT": "0.00",
+     "CUT_HGH": "0.00",
+     "VIEW_YN": "N",
+     "HIDE_YN": "N",
+     "NOTICE": [],
+     "ESN_YN": "Y",
+     "NOTE": "",
+     "MTRL_CD": "SXSHT303",
+     "MTRL_COD": "SXSHT303",
+     "DIV_SEQ": 0,
+     "SUB_MTRL_YN": "Y",
+     "STICKER_TYPE": null,
+     "QTY_INPUT_YN": "Y",
+     "PCS_COD": "DIR_MTR",
+     "PCS_GRP_NME": "부자재직접인쇄",
+     "PCS_DTL_COD": "SI003",
+     "PCS_DTL_NME": "5.6oz 하이퀄리티 티셔츠 블랙 L",
+     "PCS_GROUP_NME": "5.6oz 하이퀄리티 티셔츠 블랙 L"
+    }
+   ],
+   "pdt_add_pcs_info": null,
+   "pdt_disable_pcs_info": [],
+   "pdt_add_info": [
+    [],
+    []
+   ],
+   "apparel_info": {
+    "print_type": [
+     {
+      "COD": "PTP_DTF",
+      "COD_NME": "DTF 열전사",
+      "USE_YN": "Y",
+      "order": 1
+     },
+     {
+      "COD": "PTP_DIR",
+      "COD_NME": "직접인쇄",
+      "USE_YN": "Y",
+      "order": 2
+     },
+     {
+      "COD": "PTP_SLK",
+      "COD_NME": "날염(실크인쇄)",
+      "USE_YN": "Y",
+      "order": 3
+     }
+    ],
+    "print_area": [
+     {
+      "COD": "CL011",
+      "COD_NME": "좌측가슴",
+      "ORD": 1,
+      "KOI_NME": "leftchest"
+     },
+     {
+      "COD": "CL001",
+      "COD_NME": "앞면",
+      "ORD": 2,
+      "KOI_NME": "front"
+     },
+     {
+      "COD": "CL009",
+      "COD_NME": "좌측팔",
+      "ORD": 3,
+      "KOI_NME": "leftsleeve"
+     },
+     {
+      "COD": "CL010",
+      "COD_NME": "우측팔",
+      "ORD": 4,
+      "KOI_NME": "rightsleeve"
+     },
+     {
+      "COD": "CL004",
+      "COD_NME": "뒷목",
+      "ORD": 5,
+      "KOI_NME": "neck"
+     },
+     {
+      "COD": "CL002",
+      "COD_NME": "뒷면",
+      "ORD": 6,
+      "KOI_NME": "back"
+     }
+    ],
+    "apparel_color": [
+     {
+      "COD": "26",
+      "COD_NME": "화이트",
+      "ORD": 1,
+      "HEX": "#FFFFFF",
+      "DEFAULT": "Y",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "03",
+      "COD_NME": "블랙",
+      "ORD": 2,
+      "HEX": "#25282A",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "65",
+      "COD_NME": "애쉬",
+      "ORD": 3,
+      "HEX": "#c4c6c8",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "58",
+      "COD_NME": "멜란지 그레이",
+      "ORD": 4,
+      "HEX": "#9C9C9F",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "66",
+      "COD_NME": "챠콜",
+      "ORD": 5,
+      "HEX": "#69615f",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "68",
+      "COD_NME": "라이트 그레이",
+      "ORD": 6,
+      "HEX": "#aeadae",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "72",
+      "COD_NME": "골드",
+      "ORD": 7,
+      "HEX": "#f5a439",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "74",
+      "COD_NME": "민트 그린",
+      "ORD": 8,
+      "HEX": "#6dc6ce",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "75",
+      "COD_NME": "그린",
+      "ORD": 9,
+      "HEX": "#22905b",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "77",
+      "COD_NME": "시티 그린",
+      "ORD": 10,
+      "HEX": "#736e4b",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "83",
+      "COD_NME": "다크 브라운",
+      "ORD": 11,
+      "HEX": "#715743",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "85",
+      "COD_NME": "퍼플",
+      "ORD": 12,
+      "HEX": "#614183",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "86",
+      "COD_NME": "오렌지",
+      "ORD": 13,
+      "HEX": "#ec6938",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "87",
+      "COD_NME": "핑크",
+      "ORD": 14,
+      "HEX": "#efbcd6",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "88",
+      "COD_NME": "레드",
+      "ORD": 15,
+      "HEX": "#cf000d",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "89",
+      "COD_NME": "버건디",
+      "ORD": 16,
+      "HEX": "#7e4b58",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "94",
+      "COD_NME": "로얄블루",
+      "ORD": 17,
+      "HEX": "#23569d",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "95",
+      "COD_NME": "네이비",
+      "ORD": 18,
+      "HEX": "#474b58",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "96",
+      "COD_NME": "인디고",
+      "ORD": 19,
+      "HEX": "#424765",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "A2",
+      "COD_NME": "다크 챠콜",
+      "ORD": 20,
+      "HEX": "#4b4948",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "A4",
+      "COD_NME": "커네리 옐로우",
+      "ORD": 21,
+      "HEX": "#fcd252",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "A5",
+      "COD_NME": "바닐라 화이트",
+      "ORD": 22,
+      "HEX": "#dad8d6",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "AB",
+      "COD_NME": "애쉬드 블루",
+      "ORD": 23,
+      "HEX": "#a4b0c6",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "AI",
+      "COD_NME": "라이트 옐로우",
+      "ORD": 24,
+      "HEX": "#e6e494",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "AJ",
+      "COD_NME": "라이트 블루",
+      "ORD": 25,
+      "HEX": "#a4cee6",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "AL",
+      "COD_NME": "라이트 퍼플",
+      "ORD": 26,
+      "HEX": "#c4a5c8",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "AM",
+      "COD_NME": "라이트 핑크",
+      "ORD": 27,
+      "HEX": "#f0d2e4",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "AN",
+      "COD_NME": "아이비 그린",
+      "ORD": 28,
+      "HEX": "#48655b",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "AO",
+      "COD_NME": "트로피컬 핑크",
+      "ORD": 29,
+      "HEX": "#d54477",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "AP",
+      "COD_NME": "샌드 카키",
+      "ORD": 30,
+      "HEX": "#9d8f6f",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "AQ",
+      "COD_NME": "터코이즈 블루",
+      "ORD": 31,
+      "HEX": "#00849e",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "AS",
+      "COD_NME": "샌드 베이지",
+      "ORD": 32,
+      "HEX": "#e3d8c4",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "BG",
+      "COD_NME": "라이트 올리브",
+      "ORD": 33,
+      "HEX": "#80825b",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "EN",
+      "COD_NME": "헤이지 블랙",
+      "ORD": 34,
+      "HEX": "#43413b",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "EM",
+      "COD_NME": "헤이지 네이비",
+      "ORD": 35,
+      "HEX": "#2a3346",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "CT",
+      "COD_NME": "헤이지 그린",
+      "ORD": 36,
+      "HEX": "#4b8286",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "67",
+      "COD_NME": "오트밀",
+      "ORD": 37,
+      "HEX": "#ddd3cb",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "70",
+      "COD_NME": "네추럴",
+      "ORD": 38,
+      "HEX": "#dcd6d1",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "71",
+      "COD_NME": "옐로우",
+      "ORD": 39,
+      "HEX": "#fce36a",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "79",
+      "COD_NME": "멜론",
+      "ORD": 40,
+      "HEX": "#91d0c6",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "84",
+      "COD_NME": "라이트 베이지",
+      "ORD": 41,
+      "HEX": "#ddc8a2",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "90",
+      "COD_NME": "라벤더",
+      "ORD": 42,
+      "HEX": "#995d91",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "92",
+      "COD_NME": "색소폰",
+      "ORD": 43,
+      "HEX": "#5e9fd6",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "93",
+      "COD_NME": "아쿠아 블루",
+      "ORD": 44,
+      "HEX": "#58bcd8",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "97",
+      "COD_NME": "슬레이트",
+      "ORD": 45,
+      "HEX": "#3d4d54",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "A9",
+      "COD_NME": "하이레드",
+      "ORD": 46,
+      "HEX": "#e60012",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "AF",
+      "COD_NME": "바나나",
+      "ORD": 47,
+      "HEX": "#f8c963",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "AR",
+      "COD_NME": "바이올렛 퍼플",
+      "ORD": 48,
+      "HEX": "#71589d",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "AU",
+      "COD_NME": "살구",
+      "ORD": 49,
+      "HEX": "#f4b4a6",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "AV",
+      "COD_NME": "애플 그린",
+      "ORD": 50,
+      "HEX": "#0b877f",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "AW",
+      "COD_NME": "베이비 핑크",
+      "ORD": 51,
+      "HEX": "#fadadf",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "AY",
+      "COD_NME": "다크 헤더 네이비",
+      "ORD": 52,
+      "HEX": "#464f60",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "BC",
+      "COD_NME": "다크 네이비",
+      "ORD": 53,
+      "HEX": "#474f56",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     },
+     {
+      "COD": "BD",
+      "COD_NME": "헤더 블랙",
+      "ORD": 54,
+      "HEX": "#615d59",
+      "DEFAULT": "N",
+      "HIDE_YN": "N"
+     }
+    ],
+    "size_info": [
+     {
+      "COD": "X",
+      "COD_NME": "XS",
+      "ORD": 1,
+      "GBN": "adult"
+     },
+     {
+      "COD": "1",
+      "COD_NME": "S",
+      "ORD": 2,
+      "GBN": "adult"
+     },
+     {
+      "COD": "2",
+      "COD_NME": "M",
+      "ORD": 3,
+      "GBN": "adult"
+     },
+     {
+      "COD": "3",
+      "COD_NME": "L",
+      "ORD": 4,
+      "GBN": "adult"
+     },
+     {
+      "COD": "4",
+      "COD_NME": "XL",
+      "ORD": 5,
+      "GBN": "adult"
+     },
+     {
+      "COD": "5",
+      "COD_NME": "2XL",
+      "ORD": 6,
+      "GBN": "adult"
+     },
+     {
+      "COD": "6",
+      "COD_NME": "3XL",
+      "ORD": 7,
+      "GBN": "adult"
+     }
+    ],
+    "size_color_info": [
+     {
+      "COD": "1",
+      "COD_NME": "S",
+      "ORD": 1,
+      "HEX": "221815",
+      "GBN": "adult",
+      "CLR_COD": "03",
+      "CLR_COD_NME": "블랙",
+      "HIDE_YN": "N",
+      "HIDE_RSN": "",
+      "QUICK_ORD_YN": "Y",
+      "MTRL_COD": "SXSRT103"
+     },
+     {
+      "COD": "1",
+      "COD_NME": "S",
+      "ORD": 2,
+      "HEX": "ffffff",
+      "GBN": "adult",
+      "CLR_COD": "26",
+      "CLR_COD_NME": "화이트",
+      "HIDE_YN": "N",
+      "HIDE_RSN": "",
+      "QUICK_ORD_YN": "Y",
+      "MTRL_COD": "SXSRT126"
+     },
+     {
+      "COD": "1",
+      "COD_NME": "S",
+      "ORD": 3,
+      "HEX": "9c9c9f",
+      "GBN": "adult",
+      "CLR_COD": "58",
+      "CLR_COD_NME": "그레이",
+      "HIDE_YN": "N",
+      "HIDE_RSN": "",
+      "QUICK_ORD_YN": "N",
+      "MTRL_COD": "SXSRT158"
+     },
+     {
+      "COD": "1",
+      "COD_NME": "S",
+      "ORD": 4,
+      "HEX": "c4c6c8",
+      "GBN": "adult",
+      "CLR_COD": "65",
+      "CLR_COD_NME": "애쉬",
+      "HIDE_YN": "N",
+      "HIDE_RSN": "",
+      "QUICK_ORD_YN": "N",
+      "MTRL_COD": "SXSRT165"
+     },
+     {
+      "COD": "1",
+      "COD_NME": "S",
+      "ORD": 5,
+      "HEX": "69615f",
+      "GBN": "adult",
+      "CLR_COD": "66",
+      "CLR_COD_NME": "차콜",
+      "HIDE_YN": "N",
+      "HIDE_RSN": "",
+      "QUICK_ORD_YN": "N",
+      "MTRL_COD": "SXSRT166"
+     },
+     {
+      "COD": "1",
+      "COD_NME": "S",
+      "ORD": 6,
+      "HEX": "ddd3cb",
+      "GBN": "adult",
+      "CLR_COD": "67",
+      "CLR_COD_NME": "오트밀",
+      "HIDE_YN": "N",
+      "HIDE_RSN": "",
+      "QUICK_ORD_YN": "N",
+      "MTRL_COD": "SXSRT167"
+     },
+     {
+      "COD": "1",
+      "COD_NME": "S",
+      "ORD": 7,
+      "HEX": "fbf9f7",
+      "GBN": "adult",
+      "CLR_COD": "69",
+      "CLR_COD_NME": "아이보리",
+      "HIDE_YN": "N",
+      "HIDE_RSN": "",
+      "QUICK_ORD_YN": "N",
+      "MTRL_COD": "SXSRT169"
+     },
+     {
+      "COD": "1",
+      "COD_NME": "S",
+      "ORD": 8,
+      "HEX": "dcd6d1",
+      "GBN": "adult",
+      "CLR_COD": "70",
+      "CLR_COD_NME": "네추럴",
+      "HIDE_YN": "N",
+      "HIDE_RSN": "",
+      "QUICK_ORD_YN": "N",
+      "MTRL_COD": "SXSRT170"
+     },
+     {
+      "COD": "1",
+      "COD_NME": "S",
+      "ORD": 9,
+      "HEX": "fce36a",
+      "GBN": "adult",
+      "CLR_COD": "71",
+      "CLR_COD_NME": "옐로우",
+      "HIDE_YN": "N",
+      "HIDE_RSN": "",
+      "QUICK_ORD_YN": "N",
+      "MTRL_COD": "SXSRT171"
+     },
+     {
+      "COD": "1",
+      "COD_NME": "S",
+      "ORD": 10,
+      "HEX": "f5a439",
+      "GBN": "adult",
+      "CLR_COD": "72",
+      "CLR_COD_NME": "골드",
+      "HIDE_YN": "N",
+      "HIDE_RSN": "",
+      "QUICK_ORD_YN": "N",
+      "MTRL_COD": "SXSRT172"
+     },
+     {
+      "COD": "1",
+      "COD_NME": "S",
+      "ORD": 11,
+      "HEX": "22905b",
+      "GBN": "adult",
+      "CLR_COD": "75",
+      "CLR_COD_NME": "그린",
+      "HIDE_YN": "N",
+      "HIDE_RSN": "",
+      "QUICK_ORD_YN": "N",
+      "MTRL_COD": "SXSRT175"
+     },
+     {
+      "COD": "1",
+      "COD_NME": "S",
+      "ORD": 12,
+      "HEX": "736e4b",
+      "GBN": "adult",
+      "CLR_COD": "77",
+      "CLR_COD_NME": "그린",
+      "HIDE_YN": "N",
+      "HIDE_RSN": "",
+      "QUICK_ORD_YN": "N",
+      "MTRL_COD": "SXSRT177"
+     },
+     {
+      "COD": "1",
+      "COD_NME": "S",
+      "ORD": 13,
+      "HEX": "b2d474",
+      "GBN": "adult",
+      "CLR_COD": "78",
+      "CLR_COD_NME": "그린",
+      "HIDE_YN": "N",
+      "HIDE_RSN": "",
+      "QUICK_ORD_YN": "N",
+      "MTRL_COD": "SXSRT178"
+     },
+     {
+      "COD": "1",
+      "COD_NME": "S",
+      "ORD": 14,
+      "HEX": "715743",
+      "GBN": "adult",
+      "CLR_COD": "83",
+      "CLR_COD_NME": "브라운",
+      "HIDE_YN": "N",
+      "HIDE_RSN": "",
+      "QUICK_ORD_YN": "N",
+      "MTRL_COD": "SXSRT183"
+     },
+     {
+      "COD": "1",
+      "COD_NME": "S",
+      "ORD": 15,
+      "HEX": "ec6938",
+      "GBN": "adult",
+      "CLR_COD": "86",
+      "CLR_COD_NME": "오렌지",
+      "HIDE_YN": "N",
+      "HIDE_RSN": "",
+      "QUICK_ORD_YN": "N",
+      "MTRL_COD": "SXSRT186"
+     },
+     {
+      "COD": "1",
+      "COD_NME": "S",
+      "ORD": 16,
+      "HEX": "efbcd6",
+      "GBN": "adult",
+      "CLR_COD": "87",
+      "CLR_COD_NME": "핑크",
+      "HIDE_YN": "N",
+      "HIDE_RSN": "",
+      "QUICK_ORD_YN": "N",
+      "MTRL_COD": "SXSRT187"
+     },
+     {
+      "COD": "1",
+      "COD_NME": "S",
+      "ORD": 17,
+      "HEX": "cf000d",
+      "GBN": "adult",
+      "CLR_COD": "88",
+      "CLR_COD_NME": "레드",
+      "HIDE_YN": "N",
+      "HIDE_RSN": "",
+      "QUICK_ORD_YN": "N",
+      "MTRL_COD": "SXSRT188"
+     },
+     {
+      "COD": "1",
+      "COD_NME": "S",
+      "ORD": 18,
+      "HEX": "7e4b58",
+      "GBN": "adult",
+      "CLR_COD": "89",
+      "CLR_COD_NME": "버건디",
+      "HIDE_YN": "N",
+      "HIDE_RSN": "",
+      "QUICK_ORD_YN": "N",
+      "MTRL_COD": "SXSRT189"
+     },
+     {
+      "COD": "1",
+      "COD_NME": "S",
+      "ORD": 19,
+      "HEX": "735471",
+      "GBN": "adult",
+      "CLR_COD": "91",
+      "CLR_COD_NME": "퍼플",
+      "HIDE_YN": "N",
+      "HIDE_RSN": "",
+      "QUICK_ORD_YN": "N",
+      "MTRL_COD": "SXSRT191"
+     },
+     {
+      "COD": "1",
+      "COD_NME": "S",
+      "ORD": 20,
+      "HEX": "5e9fd6",
+      "GBN": "adult",
+      "CLR_COD": "92",
+      "CLR_COD_NME": "색소폰",
+      "HIDE_YN": "N",
+      "HIDE_RSN": "",
+      "QUICK_ORD_YN": "N",
+      "MTRL_COD": "SXSRT192"
+     },
+     {
+      "COD": "1",
+      "COD_NME": "S",
+      "ORD": 21,
+      "HEX": "23569d",
+      "GBN": "adult",
+      "CLR_COD": "94",
+      "CLR_COD_NME": "로얄블루",
+      "HIDE_YN": "N",
+      "HIDE_RSN": "",
+      "QUICK_ORD_YN": "N",
+      "MTRL_COD": "SXSRT194"
+     },
+     {
+      "COD": "1",
+      "COD_NME": "S",
+      "ORD": 22,
+      "HEX": "474b58",
+      "GBN": "adult",
+      "CLR_COD": "95",
+      "CLR_COD_NME": "네이비",
+      "HIDE_YN": "N",
+      "HIDE_RSN": "",
+      "QUICK_ORD_YN": "N",
+      "MTRL_COD": "SXSRT195"
+     },
+     {
+      "COD": "1",
+      "COD_NME": "S",
+      "ORD": 23,
+      "HEX": "424765",
+      "GBN": "adult",
+      "CLR_COD": "96",
+      "CLR_COD_NME": "인디고",
+      "HIDE_YN": "N",
+      "HIDE_RSN": "",
+      "QUICK_ORD_YN": "N",
+      "MTRL_COD": "SXSRT196"
+     },
+     {
+      "COD": "1",
+      "COD_NME": "S",
+      "ORD": 24,
+      "HEX": "3d4d54",
+      "GBN": "adult",
+      "CLR_COD": "97",
+      "CLR_COD_NME": "슬레이트",
+      "HIDE_YN": "N",
+      "HIDE_RSN": "",
+      "QUICK_ORD_YN": "N",
+      "MTRL_COD": "SXSRT197"
+     },
+     {
+      "COD": "1",
+      "COD_NME": "S",
+      "ORD": 25,
+      "HEX": "4b4948",
+      "GBN": "adult",
+      "CLR_COD": "A2",
+      "CLR_COD_NME": "챠콜",
+      "HIDE_YN": "N",
+      "HIDE_RSN": "",
+      "QUICK_ORD_YN": "N",
+      "MTRL_COD": "SXSRT1A2"
+     },
+     {
+      "COD": "1",
+      "COD_NME": "S",
+      "ORD": 26,
+      "HEX": "dad8d6",
+      "GBN": "adult",
+      "CLR_COD": "A5",
+      "CLR_COD_NME": "화이트",
+      "HIDE_YN": "N",
+      "HIDE_RSN": "",
+      "QUICK_ORD_YN": "N",
+      "MTRL_COD": "SXSRT1A5"
+     },
+     {
+      "COD": "1",
+      "COD_NME": "S",
+      "ORD": 27,
+      "HEX": "9fb5ab",
+      "GBN": "adult",
+      "CLR_COD": "A6",
+      "CLR_COD_NME": "그린",
+      "HIDE_YN": "N",
+      "HIDE_RSN": "",
+      "QUICK_ORD_YN": "N",
+      "MTRL_COD": "SXSRT1A6"
+     },
+     {
+      "COD": "1",
+      "COD_NME": "S",
+      "ORD": 28,
+      "HEX": "bda19a",
+      "GBN": "adult",
+      "CLR_COD": "A7",
+      "CLR_COD_NME": "핑크",
+      "HIDE_YN": "N",
+      "HIDE_RSN": "",
+      "QUICK_ORD_YN": "N",
+      "MTRL_COD": "SXSRT1A7"
+     },
+     {
+      "COD": "1",
+      "COD_NME": "S",
+      "ORD": 29,
+      "HEX": "f8c963",
+      "GBN": "adult",
+      "CLR_COD": "AF",
+      "CLR_COD_NME": "바나나",
+      "HIDE_YN": "N",
+      "HIDE_RSN": "",
+      "QUICK_ORD_YN": "N",
+      "MTRL_COD": "SXSRT1AF"
+     },
+     {
+      "COD": "1",
+      "COD_NME": "S",
+      "ORD": 30,
+      "HEX": "a4cee6",
+      "GBN": "adult",
+      "CLR_COD": "AJ",
+      "CLR_COD_NME": "블루",
+      "HIDE_YN": "N",
+      "HIDE_RSN": "",
+      "QUICK_ORD_YN": "N",
+      "MTRL_COD": "SXSRT1AJ"
+     }
+    ],
+    "pantone_color": [
+     {
+      "pantone_name": "PANTONE 100 C",
+      "rgb_R": "242",
+      "rgb_G": "234",
+      "rgb_B": "122",
+      "hex_cod": "#F2EA7A"
+     },
+     {
+      "pantone_name": "PANTONE 101 C",
+      "rgb_R": "244",
+      "rgb_G": "235",
+      "rgb_B": "89",
+      "hex_cod": "#F4EB59"
+     },
+     {
+      "pantone_name": "PANTONE 102 C",
+      "rgb_R": "250",
+      "rgb_G": "230",
+      "rgb_B": "0",
+      "hex_cod": "#FAE600"
+     },
+     {
+      "pantone_name": "PANTONE 103 C",
+      "rgb_R": "198",
+      "rgb_G": "172",
+      "rgb_B": "0",
+      "hex_cod": "#C6AC00"
+     },
+     {
+      "pantone_name": "PANTONE 104 C",
+      "rgb_R": "174",
+      "rgb_G": "154",
+      "rgb_B": "0",
+      "hex_cod": "#AE9A00"
+     },
+     {
+      "pantone_name": "PANTONE 105 C",
+      "rgb_R": "134",
+      "rgb_G": "121",
+      "rgb_B": "35",
+      "hex_cod": "#867923"
+     },
+     {
+      "pantone_name": "PANTONE 106 C",
+      "rgb_R": "248",
+      "rgb_G": "229",
+      "rgb_B": "84",
+      "hex_cod": "#F8E554"
+     },
+     {
+      "pantone_name": "PANTONE 107 C",
+      "rgb_R": "251",
+      "rgb_G": "224",
+      "rgb_B": "32",
+      "hex_cod": "#FBE020"
+     },
+     {
+      "pantone_name": "PANTONE 108 C",
+      "rgb_R": "253",
+      "rgb_G": "216",
+      "rgb_B": "0",
+      "hex_cod": "#FDD800"
+     },
+     {
+      "pantone_name": "PANTONE 109 C",
+      "rgb_R": "255",
+      "rgb_G": "209",
+      "rgb_B": "0",
+      "hex_cod": "#FFD100"
+     },
+     {
+      "pantone_name": "PANTONE 110 C",
+      "rgb_R": "216",
+      "rgb_G": "169",
+      "rgb_B": "0",
+      "hex_cod": "#D8A900"
+     },
+     {
+      "pantone_name": "PANTONE 111 C",
+      "rgb_R": "170",
+      "rgb_G": "141",
+      "rgb_B": "0",
+      "hex_cod": "#AA8D00"
+     },
+     {
+      "pantone_name": "PANTONE 112 C",
+      "rgb_R": "151",
+      "rgb_G": "128",
+      "rgb_B": "0",
+      "hex_cod": "#978000"
+     },
+     {
+      "pantone_name": "PANTONE 113 C",
+      "rgb_R": "249",
+      "rgb_G": "223",
+      "rgb_B": "77",
+      "hex_cod": "#F9DF4D"
+     },
+     {
+      "pantone_name": "PANTONE 114 C",
+      "rgb_R": "250",
+      "rgb_G": "221",
+      "rgb_B": "65",
+      "hex_cod": "#FADD41"
+     },
+     {
+      "pantone_name": "PANTONE 115 C",
+      "rgb_R": "251",
+      "rgb_G": "219",
+      "rgb_B": "64",
+      "hex_cod": "#FBDB40"
+     },
+     {
+      "pantone_name": "PANTONE 116 C",
+      "rgb_R": "255",
+      "rgb_G": "202",
+      "rgb_B": "0",
+      "hex_cod": "#FFCA00"
+     },
+     {
+      "pantone_name": "PANTONE 117 C",
+      "rgb_R": "200",
+      "rgb_G": "152",
+      "rgb_B": "0",
+      "hex_cod": "#C89800"
+     },
+     {
+      "pantone_name": "PANTONE 118 C",
+      "rgb_R": "174",
+      "rgb_G": "136",
+      "rgb_B": "0",
+      "hex_cod": "#AE8800"
+     },
+     {
+      "pantone_name": "PANTONE 119 C",
+      "rgb_R": "135",
+      "rgb_G": "115",
+      "rgb_B": "29",
+      "hex_cod": "#87731D"
+     },
+     {
+      "pantone_name": "PANTONE 120 C",
+      "rgb_R": "250",
+      "rgb_G": "220",
+      "rgb_B": "110",
+      "hex_cod": "#FADC6E"
+     },
+     {
+      "pantone_name": "PANTONE 1205 C",
+      "rgb_R": "248",
+      "rgb_G": "227",
+      "rgb_B": "151",
+      "hex_cod": "#F8E397"
+     },
+     {
+      "pantone_name": "PANTONE 121 C",
+      "rgb_R": "250",
+      "rgb_G": "217",
+      "rgb_B": "99",
+      "hex_cod": "#FAD963"
+     },
+     {
+      "pantone_name": "PANTONE 1215 C",
+      "rgb_R": "250",
+      "rgb_G": "221",
+      "rgb_B": "128",
+      "hex_cod": "#FADD80"
+     }
+    ]
+   }
+  },
+  "member_info": {
+   "mb_id": "REDACTED",
+   "mb_cust_cod": "10000000",
+   "discount_cust_yn": "N",
+   "mall_cust_yn": "N",
+   "bsn_yn": "N",
+   "blk_con": "N",
+   "edicusUserID": "REDACTED"
+  }
+ },
+ "_note": "Wave C 의류 fixture — captures/major_apparel_CLSTSHS.json(5.6oz 티셔츠). clothes2025_item, apparel_info 6블록(print_type 3/print_area 6/apparel_color 54/size_info 7/size_color_info 227/pantone_color 1124). JWT/회원 REDACTED. [번들가드] pantone_color 1124→24, size_color_info 227→30 대표샘플 트림(실 캡처 부분집합, 날조 0). 분기/shape 검증 충분, 전량은 시각재현/가격 후속. pdt_mtrl_info 584→3, pdt_pcs_info 591→3 트림(의류 경로 미사용 — apparel_info 만 소비)."
+}

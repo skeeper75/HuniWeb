@@ -3,6 +3,8 @@
 import type { OptionGroup } from '@/contract';
 import { useOptionSelection, useGroupValues, useWidgetSelector } from '../../stores/context';
 import { OptionButtonGroup, FinishButtonGroup } from './OptionButton';
+import { MultiCheckGroup } from './MultiCheckGroup';
+import { AccPanel } from './AccPanel';
 import { HuniSelect, FinishSelect } from './HuniSelect';
 import { CounterInput, PageCounterInput } from './CounterInput';
 import { ColorChipGroup, MiniColorChipGroup, LargeColorChipGroup } from './ColorChip';
@@ -21,7 +23,13 @@ export function OptionControl({ group }: { group: OptionGroup }) {
     case 'option-button':
       return <OptionButtonGroup group={liveGroup} value={value} onChange={set} />;
     case 'finish-button':
-      return <FinishButtonGroup group={liveGroup} value={value} onChange={set} />;
+      // L-3a: 멀티선택 후가공(귀돌이 ROU_DFT 4귀)은 MultiCheckGroup(체크박스+전체토글).
+      //  신규 ComponentType 추가 없이 group.multiple 플래그로 leaf 분기(D4 단순성 가드).
+      return group.multiple ? (
+        <MultiCheckGroup group={liveGroup} value={value} onChange={set} />
+      ) : (
+        <FinishButtonGroup group={liveGroup} value={value} onChange={set} />
+      );
     case 'select-box':
       return <HuniSelect group={liveGroup} value={value} onChange={set} />;
     case 'finish-select-box':
@@ -44,11 +52,30 @@ export function OptionControl({ group }: { group: OptionGroup }) {
       return <DimensionMatrixBridge group={group} />;
     case 'price-slider':
       return <PriceSliderBridge group={group} />;
+    case 'acc-panel':
+      return <AccPanelBridge group={group} />;
     // summary / upload-cta 는 디스패처 대상 아님(패널 고정)
     case 'summary':
     case 'upload-cta':
       return null;
   }
+}
+
+// L-12: ACC 부자재 패널 브리지 — accSpec 의 각 그룹 id 별 selection 을 store 에서 구독/기록.
+//  그룹 id(ACC_F0/ACC_F1...)를 selection 키로 사용(어댑터 평면 키). 가격재계산은 selectOption 이 트리거.
+function AccPanelBridge({ group }: { group: OptionGroup }) {
+  const selectionsMap = useWidgetSelector((s) => s.selections);
+  const setOption = useWidgetSelector((s) => s.selectOption);
+  if (!group.accSpec) return null;
+  const values: Record<string, string | string[] | undefined> = {};
+  for (const g of group.accSpec.groups) values[g.id] = selectionsMap[g.id];
+  return (
+    <AccPanel
+      spec={group.accSpec}
+      values={values}
+      onChange={(groupId, v) => setOption(groupId, v)}
+    />
+  );
 }
 
 // 입력형 — quantity/pageCount 는 store 의 전용 상태를 쓰므로 별도 브리지.
