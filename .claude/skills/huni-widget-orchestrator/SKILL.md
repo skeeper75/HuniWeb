@@ -1,8 +1,8 @@
 ---
 name: huni-widget-orchestrator
 description: >
-  후니프린팅 인쇄 자동견적 위젯 구현 하네스 오케스트레이터. RedPrinting 위젯 역공학 보강(widget_monitor 라이브 테스트베드 활용) → 동작 구조 분석 + 국내외 베스트프랙티스 리서치 → 위젯 개발 요소 상세 명세 → React-in-Shadow-DOM 위젯 구현 → 경계면 교차 QA 까지 6인 에이전트(reverse-engineer/runtime-analyst/researcher/architect/builder/qa) 파이프라인으로 수행한다.
-  '후니 위젯 구현', '인쇄 자동견적 위젯', '위젯 하네스 실행', 'huni-widget', '역공학 보강', '위젯 동작 분석', '위젯 명세 작성', '위젯 빌드', '위젯 QA', '위젯 다시 구현', '위젯 하네스 재실행', '위젯 업데이트', '특정 단계만 재실행', '상품 확대', '신규 상품 추가', '캘린더/스티커/굿즈 확대', '확대 스테이지', '라이브 캡처 선행' 요청 시 반드시 사용. 단순 질문은 직접 응답.
+  후니프린팅 인쇄 자동견적 위젯 구현 하네스 오케스트레이터. RedPrinting 위젯 역공학 보강(widget_monitor 라이브 테스트베드 활용) → 동작 구조 분석 + 국내외 베스트프랙티스 리서치 → 위젯 개발 요소 상세 명세 → React-in-Shadow-DOM 위젯 구현 → 경계면 교차 QA → 후니 시각재현 정합 까지 7인 에이전트(reverse-engineer/runtime-analyst/researcher/architect/builder/qa/design-fidelity) 파이프라인으로 수행한다.
+  '후니 위젯 구현', '인쇄 자동견적 위젯', '위젯 하네스 실행', 'huni-widget', '역공학 보강', '위젯 동작 분석', '위젯 명세 작성', '위젯 빌드', '위젯 QA', '위젯 다시 구현', '위젯 하네스 재실행', '위젯 업데이트', '특정 단계만 재실행', '상품 확대', '신규 상품 추가', '캘린더/스티커/굿즈 확대', '확대 스테이지', '라이브 캡처 선행', '시각재현', '시각 정합', '디자인 정합', 'Figma 시각재현', '후니 스킨 입히기', 'DESIGN.md 정합', '스크린샷 diff' 요청 시 반드시 사용. 단순 질문은 직접 응답.
 license: Apache-2.0
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash, Agent, AskUserQuestion, TodoWrite
 metadata:
@@ -28,6 +28,7 @@ metadata:
 | ③ 위젯 명세 | hw-architect | 순차 | 01·02 + DESIGN.md → `03_spec/` |
 | ④ 구현 | hw-builder (메인 트리) | 순차 | 03_spec → `04_build/` |
 | ⑤ QA | hw-qa | 점진적 | 04_build vs 03_spec/캡처/DESIGN → `05_qa/` |
+| ⑥ 시각재현 | hw-design-fidelity | 순차(빌드 후) | 04_build + 02_analysis(Red구조) + huni-design-system/DESIGN.md(후니스킨) → `06_fidelity/` |
 
 ## Phase 0: 컨텍스트 확인
 
@@ -57,6 +58,7 @@ test -f .env.local && echo ".env.local OK" || echo ".env.local MISSING"
 03_spec/       구현 명세 (architecture, component-tree, state-management, price-engine, shadow-dom-strategy, editor-integration, api-contract, bundle-strategy, build-plan)
 04_build/      위젯 구현 코드 (build-plan 지정 트리)
 05_qa/         검증 (qa-report, boundary-matrix, regression-checklist)
+06_fidelity/   시각재현 정합 (fidelity-report, skin-mapping, conflicts, captures/before·after)
 ```
 
 규칙: 중간 산출물은 보존(감사 추적). 라이브 캡처 raw는 01_reverse/ 하위 captures/에. 비밀값은 산출물에 평문 금지.
@@ -94,6 +96,12 @@ test -f .env.local && echo ".env.local OK" || echo ".env.local MISSING"
 `Agent`로 hw-qa 호출(model opus, general-purpose). huni-widget-qa 스킬. 경계면 교차 비교 + widget_monitor 레퍼런스 대비 동작 검증. 산출 05_qa/.
 
 게이트: 경계면 매트릭스 PASS / DESIGN 규칙 체크 / 결함은 파일:라인·재현법 포함.
+
+### Phase 6 — 시각재현 정합 (빌드 후)
+
+`Agent`로 hw-design-fidelity 호출(model opus, general-purpose, 메인 트리). huni-widget-design-fidelity 스킬 사용. 이미 빌드된 `04_build` 위젯의 외형을 후니 디자인에 정합한다. **권위 분리 불변 규칙:** 배치·옵션 캐스케이드·인터랙션 흐름은 Red 구조(`02_analysis/`) 보존, 색·폰트·간격·외형만 후니 스킨(huni-design-system 스펙 + DESIGN.md)으로 입힘. 베이스라인 측정 → 후니 기준 대조 → 외형 스킨 정합 → 회귀 가드 → 스크린샷 diff + 수치 재대조. 산출 `06_fidelity/`.
+
+게이트: 구조 무변경 증명(`git diff` 에서 캐스케이드·상태관리·핸들러·배치 0줄, 외형 토큰/스타일만). 후니 8 Critical Rules·토큰 일치. 충돌은 `conflicts.md`에 출처 병기. 후니 스펙 갭은 임의 디자인 없이 보고. hw-qa 경계면 매트릭스가 정합 전후 동일.
 
 ## 확대 스테이지 루프 (S1~Sn — 실제 주 작업)
 
