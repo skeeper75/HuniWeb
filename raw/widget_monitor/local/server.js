@@ -14,14 +14,21 @@ let logs = [];
 require('dotenv').config({ path: path.join(__dirname, '.env') });
 
 // ── 세션 쿠키 로딩 (cookies.json) ─────────────────────
+// [가격 권위] /rp-api 가격 프록시가 주입하는 로그인 세션. extract-cookies 가 cookies.json 을
+// 다시 쓰면 이 함수로 메모리(sessionCookieStr)에 재로드해야 가격 단가가 갱신된다.
 let sessionCookieStr = '';
-try {
-  const cookies = JSON.parse(fs.readFileSync(path.join(__dirname, 'cookies.json'), 'utf8'));
-  sessionCookieStr = cookies.map(c => `${c.name}=${c.value}`).join('; ');
-  console.log(`[Auth] 쿠키 ${cookies.length}개 로드`);
-} catch {
-  console.warn('[Auth] cookies.json 없음 — node extract-cookies.cjs 실행 필요');
+function loadSessionCookies() {
+  try {
+    const cookies = JSON.parse(fs.readFileSync(path.join(__dirname, 'cookies.json'), 'utf8'));
+    sessionCookieStr = cookies.map(c => `${c.name}=${c.value}`).join('; ');
+    console.log(`[Auth] 쿠키 ${cookies.length}개 로드`);
+    return cookies.length;
+  } catch {
+    console.warn('[Auth] cookies.json 없음 — node extract-cookies.cjs 실행 필요');
+    return 0;
+  }
 }
+loadSessionCookies();
 
 // ── 에디터 토큰 관리 ───────────────────────────────────
 let editorToken = process.env.RP_EDITOR_TOKEN || '';
@@ -38,10 +45,13 @@ async function refreshEditorToken() {
   const { execSync } = require('child_process');
   try {
     execSync('node extract-cookies.cjs', { cwd: __dirname, stdio: 'pipe', timeout: 90000 });
-    // .env 다시 로드
+    // .env 다시 로드 (에디터 토큰)
     const envContent = fs.readFileSync(path.join(__dirname, '.env'), 'utf8');
     const match = envContent.match(/RP_EDITOR_TOKEN=(.+)/);
     if (match) { editorToken = match[1].trim(); console.log('[Auth] 토큰 갱신 완료'); }
+    // [BUGFIX] 세션 쿠키도 메모리 재로드 — 누락 시 가격 권위 쿠키가 stale로 남아
+    // 구동 중 자동갱신/POST /refresh-token 후에도 /rp-api 가 비로그인 단가(침묵 PRICE=0)로 회귀했다.
+    loadSessionCookies();
   } catch (e) { console.error('[Auth] 토큰 갱신 실패:', e.message); }
 }
 
@@ -290,8 +300,18 @@ app.use('/captures', express.static(path.join(__dirname, '..')));
 // ── 정적 파일 ──────────────────────────────────────────
 app.use(express.static(__dirname));
 
-app.listen(3001, () => {
-  console.log('\nRedPrinting Widget Simulator: http://localhost:3001');
-  console.log('  /rp-api/*     → https://www.redprinting.co.kr');
-  console.log('  /widget-api/* → https://widget-api.redprinting.co.kr\n');
-});
+// 직접 실행 시에만 listen — require 시(테스트)엔 함수만 노출
+if (require.main === module) {
+  app.listen(3001, () => {
+    console.log('\nRedPrinting Widget Simulator: http://localhost:3001');
+    console.log('  /rp-api/*     → https://www.redprinting.co.kr');
+    console.log('  /widget-api/* → https://widget-api.redprinting.co.kr\n');
+  });
+}
+
+module.exports = {
+  loadSessionCookies,
+  isTokenExpired,
+  getSessionCookieStr: () => sessionCookieStr,
+  getEditorToken: () => editorToken,
+};

@@ -69,14 +69,14 @@ widget_monitor는 **두 종류의 자격**을 관리하며 수명·갱신 경로
 | 자격 | 무엇 | 수명 | 메모리 갱신 |
 |------|------|------|------------|
 | 에디터 토큰(`RP_EDITOR_TOKEN`) | Edicus JWT(`exp`) | ~55분 | `setInterval`/`POST /refresh-token`/`refreshEditorToken()`이 **메모리 재로드** |
-| 세션 쿠키(`cookies.json`) | **가격 권위** — 로그인 고객 단가표 | 로그인 세션 | server.js가 **시작 시 1회만** `sessionCookieStr`로 로드 |
+| 세션 쿠키(`cookies.json`) | **가격 권위** — 로그인 고객 단가표 | 로그인 세션 | `refreshEditorToken()`이 `extract-cookies` 후 `loadSessionCookies()`로 **메모리 재로드** |
 
-**[HARD] 핵심 한계:** 구동 중 자동갱신과 `POST /refresh-token`은 `extract-cookies.cjs`를 돌려 `cookies.json`을 디스크에 다시 쓰지만 **메모리의 `sessionCookieStr`은 재로드하지 않는다**(server.js line 17-20 시작 시 1회 로드, `refreshEditorToken`이 미재할당). 가격 프록시(`/rp-api`)는 이 메모리 쿠키를 주입하므로 — **오래된 서버에 `/refresh-token`만 치면 토큰은 신선해도 가격 쿠키가 stale → 비로그인 단가/침묵 PRICE=0으로 회귀한다**(reqBody 필수필드 누락과 함께 침묵 PRICE=0의 또 다른 벡터).
+> **[해소됨] 과거 한계:** 예전 server.js는 `sessionCookieStr`을 시작 시 1회만 로드하고 `refreshEditorToken`이 미재할당 → 구동 중 자동갱신/`/refresh-token` 후에도 가격 쿠키가 stale로 남아 비로그인 단가(침묵 PRICE=0)로 회귀하는 결함이 있었다. **버그 수정 완료**(server.js `loadSessionCookies()` 추출 + refresh 경로에서 호출, 재현 테스트 `test-cookie-reload.cjs`) → 이제 `/refresh-token`·자동갱신이 토큰+쿠키를 함께 메모리 갱신한다.
 
 가격 캡처 전 절차:
 1. `curl -s localhost:3001/token-status` 로 만료 확인(`.env` 수정시각 grep으로 가늠하지 말 것).
-2. 만료/오래됨이면 `node extract-cookies.cjs`(쿠키+토큰 동시 갱신) **→ 서버 재기동**. in-process `/refresh-token`만으로는 가격 쿠키가 안 올라온다.
-3. 즉, **가격 캡처 세션은 항상 fresh 서버로 시작**한다(extract-cookies 후 `node server.js` 새로).
+2. 만료면 `POST /refresh-token`(구동 중 서버에서 토큰+쿠키 동시 갱신) **또는** `node extract-cookies.cjs` 후 서버 재기동 — 둘 다 유효.
+3. 서버가 내려가 있으면 `node extract-cookies.cjs` → `node server.js`(fresh 시작 시에도 쿠키 로드됨).
 
 ### Step 2 — 위젯 라이브 구동 + Shadow DOM 상태 추출
 
