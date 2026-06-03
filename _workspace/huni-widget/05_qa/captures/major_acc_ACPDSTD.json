@@ -1,0 +1,835 @@
+{
+  "product": "ACPDSTD",
+  "tag": "acc",
+  "capturedAt": "2026-06-03T09:31:08.245Z",
+  "purpose": "S3 MAJOR round baseline harvest",
+  "infoEndpoint": "/rp-api/ko/product/get_digital_product_info",
+  "infoCalls": [
+    {
+      "rel": 1593,
+      "url": "/rp-api/ko/product/get_digital_product_info",
+      "status": 200
+    }
+  ],
+  "widgetMounted": true,
+  "widgetDump": {
+    "mounted": true,
+    "selects": [
+      {
+        "name": "material",
+        "n": 1,
+        "opts": [
+          {
+            "v": "PXACR016",
+            "t": "아크릴_3T 투명"
+          }
+        ]
+      },
+      {
+        "name": "dosu",
+        "n": 1,
+        "opts": [
+          {
+            "v": "SID_S",
+            "t": "단면"
+          }
+        ]
+      },
+      {
+        "name": "sizes",
+        "n": 1,
+        "opts": [
+          {
+            "v": "1",
+            "t": "사이즈직접입력"
+          }
+        ]
+      },
+      {
+        "name": "PRN_CNT",
+        "n": 11,
+        "opts": [
+          {
+            "v": "1",
+            "t": "1"
+          },
+          {
+            "v": "6",
+            "t": "6"
+          },
+          {
+            "v": "11",
+            "t": "11"
+          },
+          {
+            "v": "16",
+            "t": "16"
+          },
+          {
+            "v": "21",
+            "t": "21"
+          },
+          {
+            "v": "26",
+            "t": "26"
+          },
+          {
+            "v": "31",
+            "t": "31"
+          },
+          {
+            "v": "36",
+            "t": "36"
+          },
+          {
+            "v": "41",
+            "t": "41"
+          },
+          {
+            "v": "46",
+            "t": "46"
+          },
+          {
+            "v": "51",
+            "t": "51"
+          }
+        ]
+      },
+      {
+        "name": "SUM_MTR/등신대 받침대",
+        "n": 12,
+        "opts": [
+          {
+            "v": "AB005",
+            "t": "원형 - S"
+          },
+          {
+            "v": "AB009",
+            "t": "원형 - M"
+          },
+          {
+            "v": "AB013",
+            "t": "원형 - L"
+          },
+          {
+            "v": "AB014",
+            "t": "타원형 - L"
+          },
+          {
+            "v": "AB010",
+            "t": "타원형 - M"
+          },
+          {
+            "v": "AB006",
+            "t": "타원형 - S"
+          },
+          {
+            "v": "AB007",
+            "t": "사각형 - S"
+          },
+          {
+            "v": "AB011",
+            "t": "사각형 - M"
+          },
+          {
+            "v": "AB015",
+            "t": "사각형 - L"
+          },
+          {
+            "v": "AB016",
+            "t": "육각형 - L"
+          },
+          {
+            "v": "AB012",
+            "t": "육각형 - M"
+          },
+          {
+            "v": "AB008",
+            "t": "육각형 - S"
+          }
+        ]
+      }
+    ],
+    "numInputs": [
+      {
+        "name": "",
+        "value": "0",
+        "ro": false
+      },
+      {
+        "name": "",
+        "value": "0",
+        "ro": false
+      },
+      {
+        "name": "",
+        "value": "4",
+        "ro": false
+      },
+      {
+        "name": "",
+        "value": "4",
+        "ro": false
+      },
+      {
+        "name": "",
+        "value": "1",
+        "ro": false
+      },
+      {
+        "name": "",
+        "value": "1",
+        "ro": false
+      }
+    ],
+    "checkboxes": [],
+    "buttons": [
+      "주문 가능 자재",
+      "직접 입력하기",
+      "템플릿 다운로드",
+      "PDF",
+      "에디터",
+      "편집하기"
+    ]
+  },
+  "scan": {
+    "pcsCodesPresent": [
+      "LAS_DFT",
+      "SUB_MTR",
+      "PRT_WHT"
+    ],
+    "attbBearing": [],
+    "rouEntries": [],
+    "apparel": null,
+    "accFilters": null,
+    "sizeCount": 0,
+    "materialCount": 0,
+    "topKeys": [
+      "retCode",
+      "msg",
+      "result"
+    ]
+  },
+  "productDataKeys": [
+    "retCode",
+    "msg",
+    "result"
+  ],
+  "rawProductData": {
+    "retCode": 200,
+    "msg": "",
+    "result": {
+      "product_option": {
+        "option": {
+          "pdt_cod": "ACPDSTD",
+          "pdt_nme": "아크릴 등신대",
+          "item_gbn": "edicus_item",
+          "price_gbn": "tmpl_price",
+          "skinInfo": {
+            "pageDirection": {
+              "view_yn": "N",
+              "title": "주문서 작성"
+            },
+            "paperSelect": {
+              "view_yn": "Y",
+              "title": "용지"
+            },
+            "sizeSelect": {
+              "view_yn": "Y",
+              "title": "규격 (mm)"
+            },
+            "dosuSelect": {
+              "view_yn": "N",
+              "title": "인쇄 도수"
+            },
+            "subjectGroup": {
+              "view_yn": "Y",
+              "title": "주문 제목"
+            },
+            "quantityGroup": {
+              "view_yn": "Y",
+              "title": {
+                "orderCnt": "디자인 수 (건수)",
+                "printCnt": "수량"
+              }
+            }
+          },
+          "order_yn": "Y",
+          "cut_guide_yn": "N",
+          "able_paper_yn": "Y",
+          "price_table_yn": "N",
+          "useTemplateDownload": "Y",
+          "useKoiEditor": "Y",
+          "useRPEditor": "N",
+          "usePDF": "Y",
+          "usePDFordCnt": "Y",
+          "useEditorOrdCnt": "N",
+          "koiAccessToken": "[JWT]",
+          "rpAccessToken": null,
+          "koi_template_resource_id": "",
+          "koiOption": []
+        }
+      },
+      "product_data": {
+        "pdt_base_info": [
+          {
+            "PDT_CD": "ACPDSTD",
+            "PDT_NM": "아크릴 등신대",
+            "WDT_HGH_GBN_YN": "N",
+            "PRN_YN": "Y",
+            "PDT_UNIT": "pcs",
+            "ORD_CNT_YN": "Y",
+            "NO_STD_ABL_YN": "N",
+            "MIN_CUT_WDT": "10.00",
+            "MIN_CUT_HGH": "10.00",
+            "MAX_CUT_WDT": "300.00",
+            "MAX_CUT_HGH": "250.00",
+            "DFT_CUT_WDT": "50.00",
+            "DFT_CUT_HGH": "20.00",
+            "CUT_MRG": "4.00",
+            "FIR_CNT": 1,
+            "INC": 5,
+            "INC_STEP": 11,
+            "NOTE": "",
+            "REAM_YN": "",
+            "SET_CNT": 1,
+            "SIZE_PCS_USE": "",
+            "MAX_PRN_CNT": 0,
+            "DAY_PRDC_PDT_YN": "N",
+            "DAY_ABLE_PRN_CNT": 0
+          }
+        ],
+        "pdt_mtrl_info": [
+          {
+            "MTRL_TYPE": "P",
+            "CLR_CD": "X",
+            "CLR_NM": "없음",
+            "PTT_CD": "ACR",
+            "PTT_NM": "아크릴_3T 투명",
+            "WGT_CD": "016",
+            "MTRL_CD": "PXACR016",
+            "HIDE_YN": "N",
+            "HIDE_RSN": "",
+            "NOTE": "",
+            "SID_GBN": "",
+            "CLR_COD": "X",
+            "CLR_NME": "없음",
+            "PTT_COD": "ACR",
+            "PTT_NME": "아크릴_3T 투명",
+            "WGT_COD": "016",
+            "MTRL_COD": "PXACR016",
+            "MTRL_NM": "아크릴_3T 투명",
+            "GRP_OPTION_CD": "",
+            "CLR_OPTION_CD": "",
+            "PRT_HIDE_YN": "N",
+            "BSN_YN": "N",
+            "CLR_HEX_CD": ""
+          }
+        ],
+        "pdt_size_info": [
+          {
+            "DIV_NM": "사이즈직접입력",
+            "WRK_WDT": "4.00",
+            "WRK_HGH": "4.00",
+            "CUT_WDT": "0.00",
+            "CUT_HGH": "0.00",
+            "DFT_YN": "Y",
+            "DIV_CD": "",
+            "DIV_SEQ": 1,
+            "STICKER_TYPE": "",
+            "REAM_PAPER_CNT": null,
+            "NOTE": null,
+            "PDT_SIZE_INFO": "",
+            "HIDE_YN": "N"
+          }
+        ],
+        "pdt_dosu_info": [
+          {
+            "COD": "SID_S",
+            "COD_NME": "단면",
+            "PRN_CLR_CNT": 4
+          }
+        ],
+        "pdt_prn_cnt_info": [
+          {
+            "DIV_CD": "",
+            "REAM_CNT": "",
+            "PRN_CNT": "",
+            "DFT_YN": "Y",
+            "DFT_PRN_CNT": 1,
+            "FIR_CNT": 1,
+            "INC_CNT": 5,
+            "INC_STEP": 11,
+            "MIN_PRN_CNT": 1,
+            "MIN_INN_PAGE": 1,
+            "MAX_INN_PAGE": 1,
+            "STEP_INN_PAGE": 1,
+            "MAX_THCK": null,
+            "INN_MAX_WGT": null,
+            "COV_MIN_WGT": null
+          }
+        ],
+        "pdt_prn_cnt_info_add": [],
+        "pdt_exp_prn_cnt_info": null,
+        "pdt_pcs_info": [
+          {
+            "PCS_CD": "LAS_DFT",
+            "PCS_GRP_NM": "레이저",
+            "PCS_DTL_CD": "DFXXX",
+            "PCS_DTL_NM": "레이저",
+            "WEB_PCS_DTL_GRP": "LAS_DFT_DF",
+            "WEB_PCS_DTL_GRP_NM": "",
+            "WRK_WDT": "0.00",
+            "WRK_HGH": "0.00",
+            "CUT_WDT": "0.00",
+            "CUT_HGH": "0.00",
+            "VIEW_YN": "N",
+            "HIDE_YN": "N",
+            "NOTICE": [
+              "\t자동 견적은 A3 용지 1미터 이하 커팅 기준 금액입니다. 파일 업로드 후 최종 견적을 확인하실 수 있습니다."
+            ],
+            "ESN_YN": "Y",
+            "NOTE": "",
+            "MTRL_CD": "",
+            "MTRL_COD": "",
+            "DIV_SEQ": 0,
+            "SUB_MTRL_YN": "N",
+            "STICKER_TYPE": null,
+            "QTY_INPUT_YN": "N",
+            "PCS_COD": "LAS_DFT",
+            "PCS_GRP_NME": "레이저",
+            "PCS_DTL_COD": "DFXXX",
+            "PCS_DTL_NME": "레이저",
+            "PCS_GROUP_NME": "레이저"
+          },
+          {
+            "PCS_CD": "SUB_MTR",
+            "PCS_GRP_NM": "추가부자재",
+            "PCS_DTL_CD": "AB005",
+            "PCS_DTL_NM": "원형 - S",
+            "WEB_PCS_DTL_GRP": "SUB_MTR_AB",
+            "WEB_PCS_DTL_GRP_NM": "등신대 받침대",
+            "WRK_WDT": "50.00",
+            "WRK_HGH": "50.00",
+            "CUT_WDT": "50.00",
+            "CUT_HGH": "50.00",
+            "VIEW_YN": "Y",
+            "HIDE_YN": "N",
+            "NOTICE": [
+              "* 고리 지름 구멍이 2.5mm 이상이어야 사용이 가능합니다."
+            ],
+            "ESN_YN": "Y",
+            "NOTE": "",
+            "MTRL_CD": "SXAPR005",
+            "MTRL_COD": "SXAPR005",
+            "DIV_SEQ": 0,
+            "SUB_MTRL_YN": "Y",
+            "STICKER_TYPE": null,
+            "QTY_INPUT_YN": "Y",
+            "PCS_COD": "SUB_MTR",
+            "PCS_GRP_NME": "추가부자재",
+            "PCS_DTL_COD": "AB005",
+            "PCS_DTL_NME": "원형 - S",
+            "PCS_GROUP_NME": "원형 - S"
+          },
+          {
+            "PCS_CD": "SUB_MTR",
+            "PCS_GRP_NM": "추가부자재",
+            "PCS_DTL_CD": "AB009",
+            "PCS_DTL_NM": "원형 - M",
+            "WEB_PCS_DTL_GRP": "SUB_MTR_AB",
+            "WEB_PCS_DTL_GRP_NM": "등신대 받침대",
+            "WRK_WDT": "60.00",
+            "WRK_HGH": "60.00",
+            "CUT_WDT": "60.00",
+            "CUT_HGH": "60.00",
+            "VIEW_YN": "Y",
+            "HIDE_YN": "N",
+            "NOTICE": [
+              "* 고리 지름 구멍이 2.5mm 이상이어야 사용이 가능합니다."
+            ],
+            "ESN_YN": "Y",
+            "NOTE": "",
+            "MTRL_CD": "SXAPR009",
+            "MTRL_COD": "SXAPR009",
+            "DIV_SEQ": 0,
+            "SUB_MTRL_YN": "Y",
+            "STICKER_TYPE": null,
+            "QTY_INPUT_YN": "Y",
+            "PCS_COD": "SUB_MTR",
+            "PCS_GRP_NME": "추가부자재",
+            "PCS_DTL_COD": "AB009",
+            "PCS_DTL_NME": "원형 - M",
+            "PCS_GROUP_NME": "원형 - M"
+          },
+          {
+            "PCS_CD": "SUB_MTR",
+            "PCS_GRP_NM": "추가부자재",
+            "PCS_DTL_CD": "AB013",
+            "PCS_DTL_NM": "원형 - L",
+            "WEB_PCS_DTL_GRP": "SUB_MTR_AB",
+            "WEB_PCS_DTL_GRP_NM": "등신대 받침대",
+            "WRK_WDT": "80.00",
+            "WRK_HGH": "80.00",
+            "CUT_WDT": "80.00",
+            "CUT_HGH": "80.00",
+            "VIEW_YN": "Y",
+            "HIDE_YN": "N",
+            "NOTICE": [
+              "* 고리 지름 구멍이 2.5mm 이상이어야 사용이 가능합니다."
+            ],
+            "ESN_YN": "Y",
+            "NOTE": "",
+            "MTRL_CD": "SXAPR013",
+            "MTRL_COD": "SXAPR013",
+            "DIV_SEQ": 0,
+            "SUB_MTRL_YN": "Y",
+            "STICKER_TYPE": null,
+            "QTY_INPUT_YN": "Y",
+            "PCS_COD": "SUB_MTR",
+            "PCS_GRP_NME": "추가부자재",
+            "PCS_DTL_COD": "AB013",
+            "PCS_DTL_NME": "원형 - L",
+            "PCS_GROUP_NME": "원형 - L"
+          },
+          {
+            "PCS_CD": "SUB_MTR",
+            "PCS_GRP_NM": "추가부자재",
+            "PCS_DTL_CD": "AB014",
+            "PCS_DTL_NM": "타원형 - L",
+            "WEB_PCS_DTL_GRP": "SUB_MTR_AB",
+            "WEB_PCS_DTL_GRP_NM": "등신대 받침대",
+            "WRK_WDT": "80.00",
+            "WRK_HGH": "80.00",
+            "CUT_WDT": "80.00",
+            "CUT_HGH": "80.00",
+            "VIEW_YN": "Y",
+            "HIDE_YN": "N",
+            "NOTICE": [
+              "* 고리 지름 구멍이 2.5mm 이상이어야 사용이 가능합니다."
+            ],
+            "ESN_YN": "Y",
+            "NOTE": "",
+            "MTRL_CD": "SXAPR014",
+            "MTRL_COD": "SXAPR014",
+            "DIV_SEQ": 0,
+            "SUB_MTRL_YN": "Y",
+            "STICKER_TYPE": null,
+            "QTY_INPUT_YN": "Y",
+            "PCS_COD": "SUB_MTR",
+            "PCS_GRP_NME": "추가부자재",
+            "PCS_DTL_COD": "AB014",
+            "PCS_DTL_NME": "타원형 - L",
+            "PCS_GROUP_NME": "타원형 - L"
+          },
+          {
+            "PCS_CD": "SUB_MTR",
+            "PCS_GRP_NM": "추가부자재",
+            "PCS_DTL_CD": "AB010",
+            "PCS_DTL_NM": "타원형 - M",
+            "WEB_PCS_DTL_GRP": "SUB_MTR_AB",
+            "WEB_PCS_DTL_GRP_NM": "등신대 받침대",
+            "WRK_WDT": "60.00",
+            "WRK_HGH": "60.00",
+            "CUT_WDT": "60.00",
+            "CUT_HGH": "60.00",
+            "VIEW_YN": "Y",
+            "HIDE_YN": "N",
+            "NOTICE": [
+              "* 고리 지름 구멍이 2.5mm 이상이어야 사용이 가능합니다."
+            ],
+            "ESN_YN": "Y",
+            "NOTE": "",
+            "MTRL_CD": "SXAPR010",
+            "MTRL_COD": "SXAPR010",
+            "DIV_SEQ": 0,
+            "SUB_MTRL_YN": "Y",
+            "STICKER_TYPE": null,
+            "QTY_INPUT_YN": "Y",
+            "PCS_COD": "SUB_MTR",
+            "PCS_GRP_NME": "추가부자재",
+            "PCS_DTL_COD": "AB010",
+            "PCS_DTL_NME": "타원형 - M",
+            "PCS_GROUP_NME": "타원형 - M"
+          },
+          {
+            "PCS_CD": "SUB_MTR",
+            "PCS_GRP_NM": "추가부자재",
+            "PCS_DTL_CD": "AB006",
+            "PCS_DTL_NM": "타원형 - S",
+            "WEB_PCS_DTL_GRP": "SUB_MTR_AB",
+            "WEB_PCS_DTL_GRP_NM": "등신대 받침대",
+            "WRK_WDT": "50.00",
+            "WRK_HGH": "50.00",
+            "CUT_WDT": "50.00",
+            "CUT_HGH": "50.00",
+            "VIEW_YN": "Y",
+            "HIDE_YN": "N",
+            "NOTICE": [
+              "* 고리 지름 구멍이 2.5mm 이상이어야 사용이 가능합니다."
+            ],
+            "ESN_YN": "Y",
+            "NOTE": "",
+            "MTRL_CD": "SXAPR006",
+            "MTRL_COD": "SXAPR006",
+            "DIV_SEQ": 0,
+            "SUB_MTRL_YN": "Y",
+            "STICKER_TYPE": null,
+            "QTY_INPUT_YN": "Y",
+            "PCS_COD": "SUB_MTR",
+            "PCS_GRP_NME": "추가부자재",
+            "PCS_DTL_COD": "AB006",
+            "PCS_DTL_NME": "타원형 - S",
+            "PCS_GROUP_NME": "타원형 - S"
+          },
+          {
+            "PCS_CD": "SUB_MTR",
+            "PCS_GRP_NM": "추가부자재",
+            "PCS_DTL_CD": "AB007",
+            "PCS_DTL_NM": "사각형 - S",
+            "WEB_PCS_DTL_GRP": "SUB_MTR_AB",
+            "WEB_PCS_DTL_GRP_NM": "등신대 받침대",
+            "WRK_WDT": "50.00",
+            "WRK_HGH": "50.00",
+            "CUT_WDT": "50.00",
+            "CUT_HGH": "50.00",
+            "VIEW_YN": "Y",
+            "HIDE_YN": "N",
+            "NOTICE": [
+              "* 고리 지름 구멍이 2.5mm 이상이어야 사용이 가능합니다."
+            ],
+            "ESN_YN": "Y",
+            "NOTE": "",
+            "MTRL_CD": "SXAPR007",
+            "MTRL_COD": "SXAPR007",
+            "DIV_SEQ": 0,
+            "SUB_MTRL_YN": "Y",
+            "STICKER_TYPE": null,
+            "QTY_INPUT_YN": "Y",
+            "PCS_COD": "SUB_MTR",
+            "PCS_GRP_NME": "추가부자재",
+            "PCS_DTL_COD": "AB007",
+            "PCS_DTL_NME": "사각형 - S",
+            "PCS_GROUP_NME": "사각형 - S"
+          },
+          {
+            "PCS_CD": "SUB_MTR",
+            "PCS_GRP_NM": "추가부자재",
+            "PCS_DTL_CD": "AB011",
+            "PCS_DTL_NM": "사각형 - M",
+            "WEB_PCS_DTL_GRP": "SUB_MTR_AB",
+            "WEB_PCS_DTL_GRP_NM": "등신대 받침대",
+            "WRK_WDT": "60.00",
+            "WRK_HGH": "60.00",
+            "CUT_WDT": "60.00",
+            "CUT_HGH": "60.00",
+            "VIEW_YN": "Y",
+            "HIDE_YN": "N",
+            "NOTICE": [
+              "* 고리 지름 구멍이 2.5mm 이상이어야 사용이 가능합니다."
+            ],
+            "ESN_YN": "Y",
+            "NOTE": "",
+            "MTRL_CD": "SXAPR011",
+            "MTRL_COD": "SXAPR011",
+            "DIV_SEQ": 0,
+            "SUB_MTRL_YN": "Y",
+            "STICKER_TYPE": null,
+            "QTY_INPUT_YN": "Y",
+            "PCS_COD": "SUB_MTR",
+            "PCS_GRP_NME": "추가부자재",
+            "PCS_DTL_COD": "AB011",
+            "PCS_DTL_NME": "사각형 - M",
+            "PCS_GROUP_NME": "사각형 - M"
+          },
+          {
+            "PCS_CD": "SUB_MTR",
+            "PCS_GRP_NM": "추가부자재",
+            "PCS_DTL_CD": "AB015",
+            "PCS_DTL_NM": "사각형 - L",
+            "WEB_PCS_DTL_GRP": "SUB_MTR_AB",
+            "WEB_PCS_DTL_GRP_NM": "등신대 받침대",
+            "WRK_WDT": "80.00",
+            "WRK_HGH": "80.00",
+            "CUT_WDT": "80.00",
+            "CUT_HGH": "80.00",
+            "VIEW_YN": "Y",
+            "HIDE_YN": "N",
+            "NOTICE": [
+              "* 고리 지름 구멍이 2.5mm 이상이어야 사용이 가능합니다."
+            ],
+            "ESN_YN": "Y",
+            "NOTE": "",
+            "MTRL_CD": "SXAPR015",
+            "MTRL_COD": "SXAPR015",
+            "DIV_SEQ": 0,
+            "SUB_MTRL_YN": "Y",
+            "STICKER_TYPE": null,
+            "QTY_INPUT_YN": "Y",
+            "PCS_COD": "SUB_MTR",
+            "PCS_GRP_NME": "추가부자재",
+            "PCS_DTL_COD": "AB015",
+            "PCS_DTL_NME": "사각형 - L",
+            "PCS_GROUP_NME": "사각형 - L"
+          },
+          {
+            "PCS_CD": "SUB_MTR",
+            "PCS_GRP_NM": "추가부자재",
+            "PCS_DTL_CD": "AB016",
+            "PCS_DTL_NM": "육각형 - L",
+            "WEB_PCS_DTL_GRP": "SUB_MTR_AB",
+            "WEB_PCS_DTL_GRP_NM": "등신대 받침대",
+            "WRK_WDT": "80.00",
+            "WRK_HGH": "80.00",
+            "CUT_WDT": "80.00",
+            "CUT_HGH": "80.00",
+            "VIEW_YN": "Y",
+            "HIDE_YN": "N",
+            "NOTICE": [
+              "* 고리 지름 구멍이 2.5mm 이상이어야 사용이 가능합니다."
+            ],
+            "ESN_YN": "Y",
+            "NOTE": "",
+            "MTRL_CD": "SXAPR016",
+            "MTRL_COD": "SXAPR016",
+            "DIV_SEQ": 0,
+            "SUB_MTRL_YN": "Y",
+            "STICKER_TYPE": null,
+            "QTY_INPUT_YN": "Y",
+            "PCS_COD": "SUB_MTR",
+            "PCS_GRP_NME": "추가부자재",
+            "PCS_DTL_COD": "AB016",
+            "PCS_DTL_NME": "육각형 - L",
+            "PCS_GROUP_NME": "육각형 - L"
+          },
+          {
+            "PCS_CD": "SUB_MTR",
+            "PCS_GRP_NM": "추가부자재",
+            "PCS_DTL_CD": "AB012",
+            "PCS_DTL_NM": "육각형 - M",
+            "WEB_PCS_DTL_GRP": "SUB_MTR_AB",
+            "WEB_PCS_DTL_GRP_NM": "등신대 받침대",
+            "WRK_WDT": "60.00",
+            "WRK_HGH": "60.00",
+            "CUT_WDT": "60.00",
+            "CUT_HGH": "60.00",
+            "VIEW_YN": "Y",
+            "HIDE_YN": "N",
+            "NOTICE": [
+              "* 고리 지름 구멍이 2.5mm 이상이어야 사용이 가능합니다."
+            ],
+            "ESN_YN": "Y",
+            "NOTE": "",
+            "MTRL_CD": "SXAPR012",
+            "MTRL_COD": "SXAPR012",
+            "DIV_SEQ": 0,
+            "SUB_MTRL_YN": "Y",
+            "STICKER_TYPE": null,
+            "QTY_INPUT_YN": "Y",
+            "PCS_COD": "SUB_MTR",
+            "PCS_GRP_NME": "추가부자재",
+            "PCS_DTL_COD": "AB012",
+            "PCS_DTL_NME": "육각형 - M",
+            "PCS_GROUP_NME": "육각형 - M"
+          },
+          {
+            "PCS_CD": "SUB_MTR",
+            "PCS_GRP_NM": "추가부자재",
+            "PCS_DTL_CD": "AB008",
+            "PCS_DTL_NM": "육각형 - S",
+            "WEB_PCS_DTL_GRP": "SUB_MTR_AB",
+            "WEB_PCS_DTL_GRP_NM": "등신대 받침대",
+            "WRK_WDT": "50.00",
+            "WRK_HGH": "50.00",
+            "CUT_WDT": "50.00",
+            "CUT_HGH": "50.00",
+            "VIEW_YN": "Y",
+            "HIDE_YN": "N",
+            "NOTICE": [
+              "* 고리 지름 구멍이 2.5mm 이상이어야 사용이 가능합니다."
+            ],
+            "ESN_YN": "Y",
+            "NOTE": "",
+            "MTRL_CD": "SXAPR008",
+            "MTRL_COD": "SXAPR008",
+            "DIV_SEQ": 0,
+            "SUB_MTRL_YN": "Y",
+            "STICKER_TYPE": null,
+            "QTY_INPUT_YN": "Y",
+            "PCS_COD": "SUB_MTR",
+            "PCS_GRP_NME": "추가부자재",
+            "PCS_DTL_COD": "AB008",
+            "PCS_DTL_NME": "육각형 - S",
+            "PCS_GROUP_NME": "육각형 - S"
+          },
+          {
+            "PCS_CD": "PRT_WHT",
+            "PCS_GRP_NM": "화이트인쇄",
+            "PCS_DTL_CD": "DFXXX",
+            "PCS_DTL_NM": "화이트인쇄",
+            "WEB_PCS_DTL_GRP": "PRT_WHT_DF",
+            "WEB_PCS_DTL_GRP_NM": "",
+            "WRK_WDT": "0.00",
+            "WRK_HGH": "0.00",
+            "CUT_WDT": "0.00",
+            "CUT_HGH": "0.00",
+            "VIEW_YN": "Y",
+            "HIDE_YN": "N",
+            "NOTICE": [
+              "파일 업로드 방식에 따라 자동 화이트 적용 방법이 달라집니다.(PDF: 고객 화이트 레이어 무시 후 자동 적용 / 에디터: 이미지에 맞춰 자동 적용)",
+              "업로드한 PDF 파일 > 화이트 레이어에 작업한 데이터 영역만큼 화이트인쇄. (PDF주문 ONLY)"
+            ],
+            "ESN_YN": "N",
+            "NOTE": "",
+            "MTRL_CD": "",
+            "MTRL_COD": "",
+            "DIV_SEQ": 0,
+            "SUB_MTRL_YN": "N",
+            "STICKER_TYPE": null,
+            "QTY_INPUT_YN": "N",
+            "PCS_COD": "PRT_WHT",
+            "PCS_GRP_NME": "화이트인쇄",
+            "PCS_DTL_COD": "DFXXX",
+            "PCS_DTL_NME": "화이트인쇄",
+            "PCS_GROUP_NME": "화이트인쇄"
+          }
+        ],
+        "pdt_add_pcs_info": null,
+        "pdt_disable_pcs_info": [],
+        "pdt_add_info": [
+          [],
+          []
+        ],
+        "option_info": {
+          "production_method": [
+            {
+              "COD": null,
+              "COD_NME": null
+            }
+          ],
+          "shape_info": [
+            {
+              "COD": null,
+              "COD_NME": null
+            }
+          ],
+          "print_data": [
+            {
+              "COD": null,
+              "COD_NME": null
+            }
+          ]
+        }
+      },
+      "member_info": {
+        "mb_id": "lojesus75",
+        "mb_cust_cod": "15090019",
+        "discount_cust_yn": "N",
+        "mall_cust_yn": "N",
+        "bsn_yn": "N",
+        "blk_con": "N",
+        "edicusUserID": "7Iug7Jqw7KeEbG9qZXN1czc1"
+      }
+    }
+  }
+}

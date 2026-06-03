@@ -1,0 +1,566 @@
+{
+  "product": "STDRCAD",
+  "tag": "radius",
+  "capturedAt": "2026-06-03T09:32:06.059Z",
+  "purpose": "S3 MAJOR round baseline harvest",
+  "infoEndpoint": "/rp-api/ko/product/get_digital_product_info",
+  "infoCalls": [
+    {
+      "rel": 1445,
+      "url": "/rp-api/ko/product/get_digital_product_info",
+      "status": 200
+    }
+  ],
+  "widgetMounted": true,
+  "widgetDump": {
+    "mounted": true,
+    "selects": [
+      {
+        "name": "paper",
+        "n": 1,
+        "opts": [
+          {
+            "v": "YUR",
+            "t": "유포 리무버블"
+          }
+        ]
+      },
+      {
+        "name": "weight",
+        "n": 1,
+        "opts": [
+          {
+            "v": "RXYUR100",
+            "t": "100g"
+          }
+        ]
+      },
+      {
+        "name": "dosu",
+        "n": 1,
+        "opts": [
+          {
+            "v": "SID_S",
+            "t": "단면"
+          }
+        ]
+      },
+      {
+        "name": "sizes",
+        "n": 0,
+        "opts": []
+      }
+    ],
+    "numInputs": [
+      {
+        "name": "",
+        "value": "64",
+        "ro": false
+      },
+      {
+        "name": "",
+        "value": "95",
+        "ro": false
+      },
+      {
+        "name": "",
+        "value": "68",
+        "ro": false
+      },
+      {
+        "name": "",
+        "value": "99",
+        "ro": false
+      }
+    ],
+    "checkboxes": [],
+    "buttons": [
+      "S칩",
+      "L칩",
+      "칩 없음",
+      "PDF",
+      "에디터",
+      "편집하기"
+    ]
+  },
+  "scan": {
+    "pcsCodesPresent": [
+      "CUT_DFT",
+      "PAK_ETC",
+      "THO_DFT",
+      "PDT_WRK",
+      "SUB_MTR",
+      "COT_DFT",
+      "MIS_DFT",
+      "SCO_DFT"
+    ],
+    "attbBearing": [],
+    "rouEntries": [],
+    "apparel": null,
+    "accFilters": null,
+    "sizeCount": 0,
+    "materialCount": 0,
+    "topKeys": [
+      "retCode",
+      "msg",
+      "result"
+    ]
+  },
+  "productDataKeys": [
+    "retCode",
+    "msg",
+    "result"
+  ],
+  "rawProductData": {
+    "retCode": 200,
+    "msg": "",
+    "result": {
+      "product_option": {
+        "option": {
+          "pdt_cod": "STDRCAD",
+          "pdt_nme": "카드스티커",
+          "item_gbn": "edicus_item",
+          "price_gbn": "tmpl_price",
+          "skinInfo": {
+            "pageDirection": {
+              "view_yn": "N",
+              "title": "주문서 작성"
+            },
+            "paperSelect": {
+              "view_yn": "Y",
+              "title": "용지"
+            },
+            "sizeSelect": {
+              "view_yn": "N",
+              "title": "규격 (mm)"
+            },
+            "dosuSelect": {
+              "view_yn": "Y",
+              "title": "인쇄 도수"
+            },
+            "subjectGroup": {
+              "view_yn": "Y",
+              "title": "주문 제목"
+            },
+            "quantityGroup": {
+              "view_yn": "Y",
+              "title": {
+                "orderCnt": "디자인 수 (건수)",
+                "printCnt": "수량"
+              }
+            }
+          },
+          "order_yn": "Y",
+          "cut_guide_yn": "N",
+          "able_paper_yn": null,
+          "price_table_yn": "N",
+          "useTemplateDownload": null,
+          "useKoiEditor": "Y",
+          "useRPEditor": "N",
+          "usePDF": "Y",
+          "usePDFordCnt": "Y",
+          "useEditorOrdCnt": "N",
+          "koiAccessToken": "[JWT]",
+          "rpAccessToken": null,
+          "koi_template_resource_id": "",
+          "koiOption": []
+        }
+      },
+      "product_data": {
+        "pdt_base_info": [
+          {
+            "PDT_CD": "STDRCAD",
+            "PDT_NM": "카드스티커",
+            "WDT_HGH_GBN_YN": "N",
+            "PRN_YN": "Y",
+            "PDT_UNIT": "장",
+            "ORD_CNT_YN": "Y",
+            "NO_STD_ABL_YN": "N",
+            "MIN_CUT_WDT": "64.00",
+            "MIN_CUT_HGH": "95.00",
+            "MAX_CUT_WDT": "64.00",
+            "MAX_CUT_HGH": "95.00",
+            "DFT_CUT_WDT": "0.00",
+            "DFT_CUT_HGH": "0.00",
+            "CUT_MRG": "4.00",
+            "FIR_CNT": 1,
+            "INC": 1,
+            "INC_STEP": 10,
+            "NOTE": "",
+            "REAM_YN": "",
+            "SET_CNT": 1,
+            "SIZE_PCS_USE": "",
+            "MAX_PRN_CNT": 0,
+            "DAY_PRDC_PDT_YN": "N",
+            "DAY_ABLE_PRN_CNT": 0
+          }
+        ],
+        "pdt_mtrl_info": [
+          {
+            "MTRL_TYPE": "R",
+            "CLR_CD": "X",
+            "CLR_NM": "기본",
+            "PTT_CD": "YUR",
+            "PTT_NM": "유포 리무버블",
+            "WGT_CD": "100",
+            "MTRL_CD": "RXYUR100",
+            "HIDE_YN": "N",
+            "HIDE_RSN": "",
+            "NOTE": "",
+            "SID_GBN": "",
+            "CLR_COD": "X",
+            "CLR_NME": "기본",
+            "PTT_COD": "YUR",
+            "PTT_NME": "유포 리무버블",
+            "WGT_COD": "100",
+            "MTRL_COD": "RXYUR100",
+            "MTRL_NM": "유포 리무버블 100g",
+            "GRP_OPTION_CD": "",
+            "CLR_OPTION_CD": "",
+            "PRT_HIDE_YN": null,
+            "BSN_YN": "N",
+            "CLR_HEX_CD": ""
+          }
+        ],
+        "pdt_size_info": [
+          {
+            "DIV_NM": "S칩 카드용",
+            "WRK_WDT": "68.00",
+            "WRK_HGH": "99.00",
+            "CUT_WDT": "64.00",
+            "CUT_HGH": "95.00",
+            "DFT_YN": "Y",
+            "DIV_CD": "",
+            "DIV_SEQ": 1,
+            "STICKER_TYPE": "",
+            "REAM_PAPER_CNT": null,
+            "NOTE": null,
+            "PDT_SIZE_INFO": "제품사이즈 : 64 X 95mm",
+            "HIDE_YN": "N"
+          },
+          {
+            "DIV_NM": "L칩 카드용",
+            "WRK_WDT": "68.00",
+            "WRK_HGH": "99.00",
+            "CUT_WDT": "64.00",
+            "CUT_HGH": "95.00",
+            "DFT_YN": "N",
+            "DIV_CD": "",
+            "DIV_SEQ": 2,
+            "STICKER_TYPE": "",
+            "REAM_PAPER_CNT": null,
+            "NOTE": null,
+            "PDT_SIZE_INFO": "제품사이즈 : 64 X 95mm",
+            "HIDE_YN": "N"
+          },
+          {
+            "DIV_NM": "칩 없는 카드용",
+            "WRK_WDT": "68.00",
+            "WRK_HGH": "99.00",
+            "CUT_WDT": "64.00",
+            "CUT_HGH": "95.00",
+            "DFT_YN": "N",
+            "DIV_CD": "",
+            "DIV_SEQ": 3,
+            "STICKER_TYPE": "",
+            "REAM_PAPER_CNT": null,
+            "NOTE": null,
+            "PDT_SIZE_INFO": "제품사이즈 : 64 X 95mm",
+            "HIDE_YN": "N"
+          }
+        ],
+        "pdt_dosu_info": [
+          {
+            "COD": "SID_S",
+            "COD_NME": "단면",
+            "PRN_CLR_CNT": 4
+          }
+        ],
+        "pdt_prn_cnt_info": [
+          {
+            "DIV_CD": "",
+            "REAM_CNT": "",
+            "PRN_CNT": "",
+            "DFT_YN": "Y",
+            "DFT_PRN_CNT": 1,
+            "FIR_CNT": 1,
+            "INC_CNT": 1,
+            "INC_STEP": 10,
+            "MIN_PRN_CNT": 1,
+            "MIN_INN_PAGE": 1,
+            "MAX_INN_PAGE": 1,
+            "STEP_INN_PAGE": 1,
+            "MAX_THCK": null,
+            "INN_MAX_WGT": null,
+            "COV_MIN_WGT": null
+          }
+        ],
+        "pdt_prn_cnt_info_add": [],
+        "pdt_exp_prn_cnt_info": null,
+        "pdt_pcs_info": [
+          {
+            "PCS_CD": "CUT_DFT",
+            "PCS_GRP_NM": "재단",
+            "PCS_DTL_CD": "DFXXX",
+            "PCS_DTL_NM": "재단",
+            "WEB_PCS_DTL_GRP": "CUT_DFT_DF",
+            "WEB_PCS_DTL_GRP_NM": "",
+            "WRK_WDT": "0.00",
+            "WRK_HGH": "0.00",
+            "CUT_WDT": "0.00",
+            "CUT_HGH": "0.00",
+            "VIEW_YN": "N",
+            "HIDE_YN": "N",
+            "NOTICE": [
+              "* 기본 A5~A4 묶음재단 : 반칼로 떼어 쓸 수 있도록 제작해 드립니다.",
+              "* 낱개 스티커를 원하실 경우 개별재단 옵션을 선택해 주세요."
+            ],
+            "ESN_YN": "Y",
+            "NOTE": "",
+            "MTRL_CD": "",
+            "MTRL_COD": "",
+            "DIV_SEQ": 0,
+            "SUB_MTRL_YN": "N",
+            "STICKER_TYPE": null,
+            "QTY_INPUT_YN": "N",
+            "PCS_COD": "CUT_DFT",
+            "PCS_GRP_NME": "재단",
+            "PCS_DTL_COD": "DFXXX",
+            "PCS_DTL_NME": "재단",
+            "PCS_GROUP_NME": "재단"
+          },
+          {
+            "PCS_CD": "PAK_ETC",
+            "PCS_GRP_NM": "포장",
+            "PCS_DTL_CD": "DFXXX",
+            "PCS_DTL_NM": "개별포장",
+            "WEB_PCS_DTL_GRP": "PAK_ETC_DF",
+            "WEB_PCS_DTL_GRP_NM": "",
+            "WRK_WDT": "0.00",
+            "WRK_HGH": "0.00",
+            "CUT_WDT": "0.00",
+            "CUT_HGH": "0.00",
+            "VIEW_YN": "N",
+            "HIDE_YN": "N",
+            "NOTICE": [],
+            "ESN_YN": "Y",
+            "NOTE": "",
+            "MTRL_CD": "",
+            "MTRL_COD": "",
+            "DIV_SEQ": 0,
+            "SUB_MTRL_YN": "N",
+            "STICKER_TYPE": null,
+            "QTY_INPUT_YN": "N",
+            "PCS_COD": "PAK_ETC",
+            "PCS_GRP_NME": "포장",
+            "PCS_DTL_COD": "DFXXX",
+            "PCS_DTL_NME": "개별포장",
+            "PCS_GROUP_NME": "개별포장"
+          },
+          {
+            "PCS_CD": "THO_DFT",
+            "PCS_GRP_NM": "모양커팅",
+            "PCS_DTL_CD": "DR001",
+            "PCS_DTL_NM": "S칩 카드용",
+            "WEB_PCS_DTL_GRP": "THO_DFT_DR",
+            "WEB_PCS_DTL_GRP_NM": "",
+            "WRK_WDT": "68.00",
+            "WRK_HGH": "99.00",
+            "CUT_WDT": "64.00",
+            "CUT_HGH": "95.00",
+            "VIEW_YN": "N",
+            "HIDE_YN": "N",
+            "NOTICE": [],
+            "ESN_YN": "Y",
+            "NOTE": "",
+            "MTRL_CD": "",
+            "MTRL_COD": "",
+            "DIV_SEQ": 1,
+            "SUB_MTRL_YN": "N",
+            "STICKER_TYPE": "DR",
+            "QTY_INPUT_YN": "N",
+            "PCS_COD": "THO_DFT",
+            "PCS_GRP_NME": "모양커팅",
+            "PCS_DTL_COD": "DR001",
+            "PCS_DTL_NME": "S칩 카드용",
+            "PCS_GROUP_NME": "S칩 카드용"
+          },
+          {
+            "PCS_CD": "THO_DFT",
+            "PCS_GRP_NM": "모양커팅",
+            "PCS_DTL_CD": "DR002",
+            "PCS_DTL_NM": "L칩 카드용",
+            "WEB_PCS_DTL_GRP": "THO_DFT_DR",
+            "WEB_PCS_DTL_GRP_NM": "",
+            "WRK_WDT": "68.00",
+            "WRK_HGH": "99.00",
+            "CUT_WDT": "64.00",
+            "CUT_HGH": "95.00",
+            "VIEW_YN": "N",
+            "HIDE_YN": "N",
+            "NOTICE": [],
+            "ESN_YN": "Y",
+            "NOTE": "",
+            "MTRL_CD": "",
+            "MTRL_COD": "",
+            "DIV_SEQ": 2,
+            "SUB_MTRL_YN": "N",
+            "STICKER_TYPE": "DR",
+            "QTY_INPUT_YN": "N",
+            "PCS_COD": "THO_DFT",
+            "PCS_GRP_NME": "모양커팅",
+            "PCS_DTL_COD": "DR002",
+            "PCS_DTL_NME": "L칩 카드용",
+            "PCS_GROUP_NME": "L칩 카드용"
+          },
+          {
+            "PCS_CD": "THO_DFT",
+            "PCS_GRP_NM": "모양커팅",
+            "PCS_DTL_CD": "DR003",
+            "PCS_DTL_NM": "칩 없는 카드용",
+            "WEB_PCS_DTL_GRP": "THO_DFT_DR",
+            "WEB_PCS_DTL_GRP_NM": "",
+            "WRK_WDT": "68.00",
+            "WRK_HGH": "99.00",
+            "CUT_WDT": "64.00",
+            "CUT_HGH": "95.00",
+            "VIEW_YN": "N",
+            "HIDE_YN": "N",
+            "NOTICE": [],
+            "ESN_YN": "Y",
+            "NOTE": "",
+            "MTRL_CD": "",
+            "MTRL_COD": "",
+            "DIV_SEQ": 3,
+            "SUB_MTRL_YN": "N",
+            "STICKER_TYPE": "DR",
+            "QTY_INPUT_YN": "N",
+            "PCS_COD": "THO_DFT",
+            "PCS_GRP_NME": "모양커팅",
+            "PCS_DTL_COD": "DR003",
+            "PCS_DTL_NME": "칩 없는 카드용",
+            "PCS_GROUP_NME": "칩 없는 카드용"
+          },
+          {
+            "PCS_CD": "PDT_WRK",
+            "PCS_GRP_NM": "후지인쇄",
+            "PCS_DTL_CD": "PP002",
+            "PCS_DTL_NM": "후지인쇄",
+            "WEB_PCS_DTL_GRP": "PDT_WRK_PP",
+            "WEB_PCS_DTL_GRP_NM": "추가 일반인쇄",
+            "WRK_WDT": "0.00",
+            "WRK_HGH": "0.00",
+            "CUT_WDT": "0.00",
+            "CUT_HGH": "0.00",
+            "VIEW_YN": "Y",
+            "HIDE_YN": "N",
+            "NOTICE": [],
+            "ESN_YN": "N",
+            "NOTE": "",
+            "MTRL_CD": "",
+            "MTRL_COD": "",
+            "DIV_SEQ": 0,
+            "SUB_MTRL_YN": "N",
+            "STICKER_TYPE": null,
+            "QTY_INPUT_YN": "N",
+            "PCS_COD": "PDT_WRK",
+            "PCS_GRP_NME": "후지인쇄",
+            "PCS_DTL_COD": "PP002",
+            "PCS_DTL_NME": "후지인쇄",
+            "PCS_GROUP_NME": "후지인쇄"
+          },
+          {
+            "PCS_CD": "SUB_MTR",
+            "PCS_GRP_NM": "추가부자재",
+            "PCS_DTL_CD": "BG001",
+            "PCS_DTL_NM": "PVC지퍼백(8X12)",
+            "WEB_PCS_DTL_GRP": "SUB_MTR_BG",
+            "WEB_PCS_DTL_GRP_NM": "지퍼백",
+            "WRK_WDT": "0.00",
+            "WRK_HGH": "0.00",
+            "CUT_WDT": "0.00",
+            "CUT_HGH": "0.00",
+            "VIEW_YN": "Y",
+            "HIDE_YN": "N",
+            "NOTICE": [],
+            "ESN_YN": "N",
+            "NOTE": "",
+            "MTRL_CD": "",
+            "MTRL_COD": "",
+            "DIV_SEQ": 0,
+            "SUB_MTRL_YN": "Y",
+            "STICKER_TYPE": null,
+            "QTY_INPUT_YN": "Y",
+            "PCS_COD": "SUB_MTR",
+            "PCS_GRP_NME": "추가부자재",
+            "PCS_DTL_COD": "BG001",
+            "PCS_DTL_NME": "PVC지퍼백(8X12)",
+            "PCS_GROUP_NME": "PVC지퍼백(8X12)"
+          }
+        ],
+        "pdt_add_pcs_info": null,
+        "pdt_disable_pcs_info": [
+          {
+            "MTRL_CD": "RXYUR100",
+            "PCS_CD": "COT_DFT",
+            "PCS_DTL_CD": null,
+            "NOTE": null
+          },
+          {
+            "MTRL_CD": "RXYUR100",
+            "PCS_CD": "MIS_DFT",
+            "PCS_DTL_CD": null,
+            "NOTE": null
+          },
+          {
+            "MTRL_CD": "RXYUR100",
+            "PCS_CD": "SCO_DFT",
+            "PCS_DTL_CD": null,
+            "NOTE": null
+          },
+          {
+            "MTRL_CD": "RXYUR100",
+            "PCS_CD": "COT_DFT",
+            "PCS_DTL_CD": "TCSSS",
+            "NOTE": null
+          },
+          {
+            "MTRL_CD": "RXYUR100",
+            "PCS_CD": "COT_DFT",
+            "PCS_DTL_CD": "TCSTS",
+            "NOTE": null
+          }
+        ],
+        "pdt_add_info": [
+          [],
+          []
+        ],
+        "option_info": {
+          "shape_info": [
+            {
+              "COD": "DR001",
+              "COD_NME": "S칩"
+            },
+            {
+              "COD": "DR002",
+              "COD_NME": "L칩"
+            },
+            {
+              "COD": "DR003",
+              "COD_NME": "칩 없음"
+            }
+          ]
+        }
+      },
+      "member_info": {
+        "mb_id": "lojesus75",
+        "mb_cust_cod": "15090019",
+        "discount_cust_yn": "N",
+        "mall_cust_yn": "N",
+        "bsn_yn": "N",
+        "blk_con": "N",
+        "edicusUserID": "7Iug7Jqw7KeEbG9qZXN1czc1"
+      }
+    }
+  }
+}

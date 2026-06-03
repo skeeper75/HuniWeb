@@ -1,0 +1,1259 @@
+{
+  "product": "BCSPDFT",
+  "tag": "radius",
+  "capturedAt": "2026-06-03T09:33:02.184Z",
+  "purpose": "S3 MAJOR round baseline harvest",
+  "infoEndpoint": "/rp-api/ko/product/get_digital_product_info",
+  "infoCalls": [
+    {
+      "rel": 1440,
+      "url": "/rp-api/ko/product/get_digital_product_info",
+      "status": 200
+    }
+  ],
+  "widgetMounted": true,
+  "widgetDump": {
+    "mounted": true,
+    "selects": [
+      {
+        "name": "paper",
+        "n": 3,
+        "opts": [
+          {
+            "v": "ART",
+            "t": "아트지"
+          },
+          {
+            "v": "SNO",
+            "t": "스노우"
+          },
+          {
+            "v": "ETP",
+            "t": "얼스팩"
+          }
+        ]
+      },
+      {
+        "name": "weight",
+        "n": 2,
+        "opts": [
+          {
+            "v": "RXART250",
+            "t": "250g"
+          },
+          {
+            "v": "RXART300",
+            "t": "300g"
+          }
+        ]
+      },
+      {
+        "name": "dosu",
+        "n": 2,
+        "opts": [
+          {
+            "v": "SID_D",
+            "t": "양면"
+          },
+          {
+            "v": "SID_S",
+            "t": "단면"
+          }
+        ]
+      },
+      {
+        "name": "sizes",
+        "n": 3,
+        "opts": [
+          {
+            "v": "0",
+            "t": "사이즈직접입력"
+          },
+          {
+            "v": "1",
+            "t": "90X50"
+          },
+          {
+            "v": "2",
+            "t": "50X90"
+          }
+        ]
+      },
+      {
+        "name": "PRN_CNT",
+        "n": 10,
+        "opts": [
+          {
+            "v": "1",
+            "t": "1"
+          },
+          {
+            "v": "101",
+            "t": "101"
+          },
+          {
+            "v": "201",
+            "t": "201"
+          },
+          {
+            "v": "301",
+            "t": "301"
+          },
+          {
+            "v": "401",
+            "t": "401"
+          },
+          {
+            "v": "501",
+            "t": "501"
+          },
+          {
+            "v": "601",
+            "t": "601"
+          },
+          {
+            "v": "701",
+            "t": "701"
+          },
+          {
+            "v": "801",
+            "t": "801"
+          },
+          {
+            "v": "901",
+            "t": "901"
+          }
+        ]
+      }
+    ],
+    "numInputs": [
+      {
+        "name": "",
+        "value": "90",
+        "ro": false
+      },
+      {
+        "name": "",
+        "value": "50",
+        "ro": false
+      },
+      {
+        "name": "",
+        "value": "94",
+        "ro": false
+      },
+      {
+        "name": "",
+        "value": "54",
+        "ro": false
+      },
+      {
+        "name": "",
+        "value": "1",
+        "ro": false
+      }
+    ],
+    "checkboxes": [],
+    "buttons": [
+      "주문 가능 자재",
+      "직접 입력하기",
+      "템플릿 다운로드",
+      "PDF"
+    ]
+  },
+  "scan": {
+    "pcsCodesPresent": [
+      "CUT_DFT",
+      "COT_DFT",
+      "HOL_DFT",
+      "POL_BAG",
+      "ROU_DFT",
+      "SUB_MTR",
+      "PRT_MAG",
+      "LAM_DFT",
+      "SCO_DFT",
+      "SCO_GLD",
+      "SCO_SLV"
+    ],
+    "attbBearing": [],
+    "rouEntries": [
+      {
+        "PCS_DTL_CD": "DFXLT",
+        "PCS_DTL_NM": "귀돌이좌상",
+        "DIV_SEQ": 0,
+        "WEB_PCS_DTL_GRP": "ROU_DFT_DF",
+        "keys": [
+          "PCS_CD",
+          "PCS_GRP_NM",
+          "PCS_DTL_CD",
+          "PCS_DTL_NM",
+          "WEB_PCS_DTL_GRP",
+          "WEB_PCS_DTL_GRP_NM",
+          "WRK_WDT",
+          "WRK_HGH",
+          "CUT_WDT",
+          "CUT_HGH",
+          "VIEW_YN",
+          "HIDE_YN",
+          "NOTICE",
+          "ESN_YN",
+          "NOTE",
+          "MTRL_CD",
+          "MTRL_COD",
+          "DIV_SEQ"
+        ]
+      },
+      {
+        "PCS_DTL_CD": "DFXRT",
+        "PCS_DTL_NM": "귀돌이우상",
+        "DIV_SEQ": 0,
+        "WEB_PCS_DTL_GRP": "ROU_DFT_DF",
+        "keys": [
+          "PCS_CD",
+          "PCS_GRP_NM",
+          "PCS_DTL_CD",
+          "PCS_DTL_NM",
+          "WEB_PCS_DTL_GRP",
+          "WEB_PCS_DTL_GRP_NM",
+          "WRK_WDT",
+          "WRK_HGH",
+          "CUT_WDT",
+          "CUT_HGH",
+          "VIEW_YN",
+          "HIDE_YN",
+          "NOTICE",
+          "ESN_YN",
+          "NOTE",
+          "MTRL_CD",
+          "MTRL_COD",
+          "DIV_SEQ"
+        ]
+      },
+      {
+        "PCS_DTL_CD": "DFXLB",
+        "PCS_DTL_NM": "귀돌이좌하",
+        "DIV_SEQ": 0,
+        "WEB_PCS_DTL_GRP": "ROU_DFT_DF",
+        "keys": [
+          "PCS_CD",
+          "PCS_GRP_NM",
+          "PCS_DTL_CD",
+          "PCS_DTL_NM",
+          "WEB_PCS_DTL_GRP",
+          "WEB_PCS_DTL_GRP_NM",
+          "WRK_WDT",
+          "WRK_HGH",
+          "CUT_WDT",
+          "CUT_HGH",
+          "VIEW_YN",
+          "HIDE_YN",
+          "NOTICE",
+          "ESN_YN",
+          "NOTE",
+          "MTRL_CD",
+          "MTRL_COD",
+          "DIV_SEQ"
+        ]
+      },
+      {
+        "PCS_DTL_CD": "DFXRB",
+        "PCS_DTL_NM": "귀돌이우하",
+        "DIV_SEQ": 0,
+        "WEB_PCS_DTL_GRP": "ROU_DFT_DF",
+        "keys": [
+          "PCS_CD",
+          "PCS_GRP_NM",
+          "PCS_DTL_CD",
+          "PCS_DTL_NM",
+          "WEB_PCS_DTL_GRP",
+          "WEB_PCS_DTL_GRP_NM",
+          "WRK_WDT",
+          "WRK_HGH",
+          "CUT_WDT",
+          "CUT_HGH",
+          "VIEW_YN",
+          "HIDE_YN",
+          "NOTICE",
+          "ESN_YN",
+          "NOTE",
+          "MTRL_CD",
+          "MTRL_COD",
+          "DIV_SEQ"
+        ]
+      }
+    ],
+    "apparel": null,
+    "accFilters": null,
+    "sizeCount": 0,
+    "materialCount": 0,
+    "topKeys": [
+      "retCode",
+      "msg",
+      "result"
+    ]
+  },
+  "productDataKeys": [
+    "retCode",
+    "msg",
+    "result"
+  ],
+  "rawProductData": {
+    "retCode": 200,
+    "msg": "",
+    "result": {
+      "product_option": {
+        "option": {
+          "pdt_cod": "BCSPDFT",
+          "pdt_nme": "일반 명함",
+          "item_gbn": "digital_item",
+          "price_gbn": "digital_price",
+          "skinInfo": {
+            "pageDirection": {
+              "view_yn": "N",
+              "title": "주문서 작성"
+            },
+            "paperSelect": {
+              "view_yn": "Y",
+              "title": "용지"
+            },
+            "sizeSelect": {
+              "view_yn": "Y",
+              "title": "규격 (mm)"
+            },
+            "dosuSelect": {
+              "view_yn": "Y",
+              "title": "인쇄 도수"
+            },
+            "subjectGroup": {
+              "view_yn": "Y",
+              "title": "주문 제목"
+            },
+            "quantityGroup": {
+              "view_yn": "Y",
+              "title": {
+                "orderCnt": "디자인 수 (건수)",
+                "printCnt": "수량"
+              }
+            }
+          },
+          "order_yn": "Y",
+          "cut_guide_yn": "N",
+          "able_paper_yn": "Y",
+          "price_table_yn": "N",
+          "useTemplateDownload": "Y",
+          "useKoiEditor": "N",
+          "useRPEditor": "N",
+          "usePDF": "Y",
+          "usePDFordCnt": "Y",
+          "useEditorOrdCnt": "N",
+          "koiAccessToken": "[JWT]",
+          "rpAccessToken": null,
+          "koi_template_resource_id": "",
+          "koiOption": []
+        }
+      },
+      "product_data": {
+        "pdt_base_info": [
+          {
+            "PDT_CD": "BCSPDFT",
+            "PDT_NM": "일반 명함",
+            "WDT_HGH_GBN_YN": "N",
+            "PRN_YN": "Y",
+            "PDT_UNIT": "장",
+            "ORD_CNT_YN": "Y",
+            "NO_STD_ABL_YN": "N",
+            "MIN_CUT_WDT": "30.00",
+            "MIN_CUT_HGH": "30.00",
+            "MAX_CUT_WDT": "297.00",
+            "MAX_CUT_HGH": "420.00",
+            "DFT_CUT_WDT": "0.00",
+            "DFT_CUT_HGH": "0.00",
+            "CUT_MRG": "4.00",
+            "FIR_CNT": 100,
+            "INC": 100,
+            "INC_STEP": 10,
+            "NOTE": "",
+            "REAM_YN": "",
+            "SET_CNT": 1,
+            "SIZE_PCS_USE": "",
+            "MAX_PRN_CNT": 0,
+            "DAY_PRDC_PDT_YN": "N",
+            "DAY_ABLE_PRN_CNT": 0
+          }
+        ],
+        "pdt_mtrl_info": [
+          {
+            "MTRL_TYPE": "R",
+            "CLR_CD": "X",
+            "CLR_NM": "기본",
+            "PTT_CD": "ART",
+            "PTT_NM": "아트지",
+            "WGT_CD": "250",
+            "MTRL_CD": "RXART250",
+            "HIDE_YN": "N",
+            "HIDE_RSN": "",
+            "NOTE": "",
+            "SID_GBN": "",
+            "CLR_COD": "X",
+            "CLR_NME": "기본",
+            "PTT_COD": "ART",
+            "PTT_NME": "아트지",
+            "WGT_COD": "250",
+            "MTRL_COD": "RXART250",
+            "MTRL_NM": "아트지250g",
+            "GRP_OPTION_CD": "",
+            "CLR_OPTION_CD": "",
+            "PRT_HIDE_YN": null,
+            "BSN_YN": "N",
+            "CLR_HEX_CD": ""
+          },
+          {
+            "MTRL_TYPE": "R",
+            "CLR_CD": "X",
+            "CLR_NM": "기본",
+            "PTT_CD": "ART",
+            "PTT_NM": "아트지",
+            "WGT_CD": "300",
+            "MTRL_CD": "RXART300",
+            "HIDE_YN": "N",
+            "HIDE_RSN": "",
+            "NOTE": "",
+            "SID_GBN": "",
+            "CLR_COD": "X",
+            "CLR_NME": "기본",
+            "PTT_COD": "ART",
+            "PTT_NME": "아트지",
+            "WGT_COD": "300",
+            "MTRL_COD": "RXART300",
+            "MTRL_NM": "아트지300g",
+            "GRP_OPTION_CD": "",
+            "CLR_OPTION_CD": "",
+            "PRT_HIDE_YN": null,
+            "BSN_YN": "N",
+            "CLR_HEX_CD": ""
+          },
+          {
+            "MTRL_TYPE": "R",
+            "CLR_CD": "X",
+            "CLR_NM": "기본",
+            "PTT_CD": "SNO",
+            "PTT_NM": "스노우",
+            "WGT_CD": "250",
+            "MTRL_CD": "RXSNO250",
+            "HIDE_YN": "N",
+            "HIDE_RSN": "",
+            "NOTE": "",
+            "SID_GBN": "",
+            "CLR_COD": "X",
+            "CLR_NME": "기본",
+            "PTT_COD": "SNO",
+            "PTT_NME": "스노우",
+            "WGT_COD": "250",
+            "MTRL_COD": "RXSNO250",
+            "MTRL_NM": "스노우지250g",
+            "GRP_OPTION_CD": "",
+            "CLR_OPTION_CD": "",
+            "PRT_HIDE_YN": null,
+            "BSN_YN": "N",
+            "CLR_HEX_CD": ""
+          },
+          {
+            "MTRL_TYPE": "R",
+            "CLR_CD": "X",
+            "CLR_NM": "기본",
+            "PTT_CD": "SNO",
+            "PTT_NM": "스노우",
+            "WGT_CD": "300",
+            "MTRL_CD": "RXSNO300",
+            "HIDE_YN": "N",
+            "HIDE_RSN": "",
+            "NOTE": "",
+            "SID_GBN": "",
+            "CLR_COD": "X",
+            "CLR_NME": "기본",
+            "PTT_COD": "SNO",
+            "PTT_NME": "스노우",
+            "WGT_COD": "300",
+            "MTRL_COD": "RXSNO300",
+            "MTRL_NM": "스노우지300g",
+            "GRP_OPTION_CD": "",
+            "CLR_OPTION_CD": "",
+            "PRT_HIDE_YN": null,
+            "BSN_YN": "N",
+            "CLR_HEX_CD": ""
+          },
+          {
+            "MTRL_TYPE": "R",
+            "CLR_CD": "X",
+            "CLR_NM": "기본",
+            "PTT_CD": "ETP",
+            "PTT_NM": "얼스팩",
+            "WGT_CD": "226",
+            "MTRL_CD": "RXETP226",
+            "HIDE_YN": "N",
+            "HIDE_RSN": "",
+            "NOTE": "",
+            "SID_GBN": "",
+            "CLR_COD": "X",
+            "CLR_NME": "기본",
+            "PTT_COD": "ETP",
+            "PTT_NME": "얼스팩",
+            "WGT_COD": "226",
+            "MTRL_COD": "RXETP226",
+            "MTRL_NM": "얼스팩 226g",
+            "GRP_OPTION_CD": "",
+            "CLR_OPTION_CD": "",
+            "PRT_HIDE_YN": null,
+            "BSN_YN": "N",
+            "CLR_HEX_CD": ""
+          }
+        ],
+        "pdt_size_info": [
+          {
+            "DIV_NM": "사이즈직접입력",
+            "WRK_WDT": "4.00",
+            "WRK_HGH": "4.00",
+            "CUT_WDT": "0.00",
+            "CUT_HGH": "0.00",
+            "DFT_YN": "N",
+            "DIV_CD": "",
+            "DIV_SEQ": 0,
+            "STICKER_TYPE": "",
+            "REAM_PAPER_CNT": null,
+            "NOTE": null,
+            "PDT_SIZE_INFO": "",
+            "HIDE_YN": "N"
+          },
+          {
+            "DIV_NM": "90X50",
+            "WRK_WDT": "94.00",
+            "WRK_HGH": "54.00",
+            "CUT_WDT": "90.00",
+            "CUT_HGH": "50.00",
+            "DFT_YN": "Y",
+            "DIV_CD": "",
+            "DIV_SEQ": 1,
+            "STICKER_TYPE": "",
+            "REAM_PAPER_CNT": null,
+            "NOTE": null,
+            "PDT_SIZE_INFO": "",
+            "HIDE_YN": "N"
+          },
+          {
+            "DIV_NM": "50X90",
+            "WRK_WDT": "54.00",
+            "WRK_HGH": "94.00",
+            "CUT_WDT": "50.00",
+            "CUT_HGH": "90.00",
+            "DFT_YN": "N",
+            "DIV_CD": "",
+            "DIV_SEQ": 2,
+            "STICKER_TYPE": "",
+            "REAM_PAPER_CNT": null,
+            "NOTE": null,
+            "PDT_SIZE_INFO": "",
+            "HIDE_YN": "N"
+          }
+        ],
+        "pdt_dosu_info": [
+          {
+            "COD": "SID_D",
+            "COD_NME": "양면",
+            "PRN_CLR_CNT": 8
+          },
+          {
+            "COD": "SID_S",
+            "COD_NME": "단면",
+            "PRN_CLR_CNT": 4
+          }
+        ],
+        "pdt_prn_cnt_info": [
+          {
+            "DIV_CD": "",
+            "REAM_CNT": "",
+            "PRN_CNT": "",
+            "DFT_YN": "Y",
+            "DFT_PRN_CNT": 100,
+            "FIR_CNT": 100,
+            "INC_CNT": 100,
+            "INC_STEP": 10,
+            "MIN_PRN_CNT": 1,
+            "MIN_INN_PAGE": 1,
+            "MAX_INN_PAGE": 1,
+            "STEP_INN_PAGE": 1,
+            "MAX_THCK": null,
+            "INN_MAX_WGT": null,
+            "COV_MIN_WGT": null
+          }
+        ],
+        "pdt_prn_cnt_info_add": [],
+        "pdt_exp_prn_cnt_info": null,
+        "pdt_pcs_info": [
+          {
+            "PCS_CD": "CUT_DFT",
+            "PCS_GRP_NM": "재단",
+            "PCS_DTL_CD": "DFXXX",
+            "PCS_DTL_NM": "재단",
+            "WEB_PCS_DTL_GRP": "CUT_DFT_DF",
+            "WEB_PCS_DTL_GRP_NM": "",
+            "WRK_WDT": "0.00",
+            "WRK_HGH": "0.00",
+            "CUT_WDT": "0.00",
+            "CUT_HGH": "0.00",
+            "VIEW_YN": "N",
+            "HIDE_YN": "N",
+            "NOTICE": [],
+            "ESN_YN": "Y",
+            "NOTE": "",
+            "MTRL_CD": "",
+            "MTRL_COD": "",
+            "DIV_SEQ": 0,
+            "SUB_MTRL_YN": "N",
+            "STICKER_TYPE": null,
+            "QTY_INPUT_YN": "N",
+            "PCS_COD": "CUT_DFT",
+            "PCS_GRP_NME": "재단",
+            "PCS_DTL_COD": "DFXXX",
+            "PCS_DTL_NME": "재단",
+            "PCS_GROUP_NME": "재단"
+          },
+          {
+            "PCS_CD": "COT_DFT",
+            "PCS_GRP_NM": "코팅",
+            "PCS_DTL_CD": "TCMAS",
+            "PCS_DTL_NM": "무광코팅단면",
+            "WEB_PCS_DTL_GRP": "COT_DFT_TC",
+            "WEB_PCS_DTL_GRP_NM": "",
+            "WRK_WDT": "0.00",
+            "WRK_HGH": "0.00",
+            "CUT_WDT": "0.00",
+            "CUT_HGH": "0.00",
+            "VIEW_YN": "Y",
+            "HIDE_YN": "N",
+            "NOTICE": [],
+            "ESN_YN": "N",
+            "NOTE": "",
+            "MTRL_CD": "",
+            "MTRL_COD": "",
+            "DIV_SEQ": 0,
+            "SUB_MTRL_YN": "N",
+            "STICKER_TYPE": null,
+            "QTY_INPUT_YN": "N",
+            "PCS_COD": "COT_DFT",
+            "PCS_GRP_NME": "코팅",
+            "PCS_DTL_COD": "TCMAS",
+            "PCS_DTL_NME": "무광코팅단면",
+            "PCS_GROUP_NME": "무광코팅단면"
+          },
+          {
+            "PCS_CD": "COT_DFT",
+            "PCS_GRP_NM": "코팅",
+            "PCS_DTL_CD": "TCMAD",
+            "PCS_DTL_NM": "무광코팅양면",
+            "WEB_PCS_DTL_GRP": "COT_DFT_TC",
+            "WEB_PCS_DTL_GRP_NM": "",
+            "WRK_WDT": "0.00",
+            "WRK_HGH": "0.00",
+            "CUT_WDT": "0.00",
+            "CUT_HGH": "0.00",
+            "VIEW_YN": "Y",
+            "HIDE_YN": "N",
+            "NOTICE": [],
+            "ESN_YN": "N",
+            "NOTE": "",
+            "MTRL_CD": "",
+            "MTRL_COD": "",
+            "DIV_SEQ": 0,
+            "SUB_MTRL_YN": "N",
+            "STICKER_TYPE": null,
+            "QTY_INPUT_YN": "N",
+            "PCS_COD": "COT_DFT",
+            "PCS_GRP_NME": "코팅",
+            "PCS_DTL_COD": "TCMAD",
+            "PCS_DTL_NME": "무광코팅양면",
+            "PCS_GROUP_NME": "무광코팅양면"
+          },
+          {
+            "PCS_CD": "COT_DFT",
+            "PCS_GRP_NM": "코팅",
+            "PCS_DTL_CD": "TCGLS",
+            "PCS_DTL_NM": "유광코팅단면",
+            "WEB_PCS_DTL_GRP": "COT_DFT_TC",
+            "WEB_PCS_DTL_GRP_NM": "",
+            "WRK_WDT": "0.00",
+            "WRK_HGH": "0.00",
+            "CUT_WDT": "0.00",
+            "CUT_HGH": "0.00",
+            "VIEW_YN": "Y",
+            "HIDE_YN": "N",
+            "NOTICE": [],
+            "ESN_YN": "N",
+            "NOTE": "",
+            "MTRL_CD": "",
+            "MTRL_COD": "",
+            "DIV_SEQ": 0,
+            "SUB_MTRL_YN": "N",
+            "STICKER_TYPE": null,
+            "QTY_INPUT_YN": "N",
+            "PCS_COD": "COT_DFT",
+            "PCS_GRP_NME": "코팅",
+            "PCS_DTL_COD": "TCGLS",
+            "PCS_DTL_NME": "유광코팅단면",
+            "PCS_GROUP_NME": "유광코팅단면"
+          },
+          {
+            "PCS_CD": "COT_DFT",
+            "PCS_GRP_NM": "코팅",
+            "PCS_DTL_CD": "TCGLD",
+            "PCS_DTL_NM": "유광코팅양면",
+            "WEB_PCS_DTL_GRP": "COT_DFT_TC",
+            "WEB_PCS_DTL_GRP_NM": "",
+            "WRK_WDT": "0.00",
+            "WRK_HGH": "0.00",
+            "CUT_WDT": "0.00",
+            "CUT_HGH": "0.00",
+            "VIEW_YN": "Y",
+            "HIDE_YN": "N",
+            "NOTICE": [],
+            "ESN_YN": "N",
+            "NOTE": "",
+            "MTRL_CD": "",
+            "MTRL_COD": "",
+            "DIV_SEQ": 0,
+            "SUB_MTRL_YN": "N",
+            "STICKER_TYPE": null,
+            "QTY_INPUT_YN": "N",
+            "PCS_COD": "COT_DFT",
+            "PCS_GRP_NME": "코팅",
+            "PCS_DTL_COD": "TCGLD",
+            "PCS_DTL_NME": "유광코팅양면",
+            "PCS_GROUP_NME": "유광코팅양면"
+          },
+          {
+            "PCS_CD": "HOL_DFT",
+            "PCS_GRP_NM": "타공",
+            "PCS_DTL_CD": "DFXXX",
+            "PCS_DTL_NM": "타공",
+            "WEB_PCS_DTL_GRP": "HOL_DFT_DF",
+            "WEB_PCS_DTL_GRP_NM": "",
+            "WRK_WDT": "0.00",
+            "WRK_HGH": "0.00",
+            "CUT_WDT": "0.00",
+            "CUT_HGH": "0.00",
+            "VIEW_YN": "Y",
+            "HIDE_YN": "N",
+            "NOTICE": [],
+            "ESN_YN": "N",
+            "NOTE": "",
+            "MTRL_CD": "",
+            "MTRL_COD": "",
+            "DIV_SEQ": 0,
+            "SUB_MTRL_YN": "N",
+            "STICKER_TYPE": null,
+            "QTY_INPUT_YN": "N",
+            "PCS_COD": "HOL_DFT",
+            "PCS_GRP_NME": "타공",
+            "PCS_DTL_COD": "DFXXX",
+            "PCS_DTL_NME": "타공",
+            "PCS_GROUP_NME": "타공"
+          },
+          {
+            "PCS_CD": "POL_BAG",
+            "PCS_GRP_NM": "폴리백",
+            "PCS_DTL_CD": "HL001",
+            "PCS_DTL_NM": "플라워",
+            "WEB_PCS_DTL_GRP": "POL_BAG_HL",
+            "WEB_PCS_DTL_GRP_NM": null,
+            "WRK_WDT": "0.00",
+            "WRK_HGH": "0.00",
+            "CUT_WDT": "0.00",
+            "CUT_HGH": "0.00",
+            "VIEW_YN": "Y",
+            "HIDE_YN": "N",
+            "NOTICE": [
+              "57x90(mm) 사이즈 : 1세트(20장) 단위로 구매 가능합니다."
+            ],
+            "ESN_YN": "N",
+            "NOTE": "",
+            "MTRL_CD": "",
+            "MTRL_COD": "",
+            "DIV_SEQ": 0,
+            "SUB_MTRL_YN": "Y",
+            "STICKER_TYPE": null,
+            "QTY_INPUT_YN": "Y",
+            "PCS_COD": "POL_BAG",
+            "PCS_GRP_NME": "폴리백",
+            "PCS_DTL_COD": "HL001",
+            "PCS_DTL_NME": "플라워",
+            "PCS_GROUP_NME": "플라워"
+          },
+          {
+            "PCS_CD": "POL_BAG",
+            "PCS_GRP_NM": "폴리백",
+            "PCS_DTL_CD": "HL002",
+            "PCS_DTL_NM": "다이아몬드",
+            "WEB_PCS_DTL_GRP": "POL_BAG_HL",
+            "WEB_PCS_DTL_GRP_NM": null,
+            "WRK_WDT": "0.00",
+            "WRK_HGH": "0.00",
+            "CUT_WDT": "0.00",
+            "CUT_HGH": "0.00",
+            "VIEW_YN": "Y",
+            "HIDE_YN": "N",
+            "NOTICE": [
+              "57x90(mm) 사이즈 : 1세트(20장) 단위로 구매 가능합니다."
+            ],
+            "ESN_YN": "N",
+            "NOTE": "",
+            "MTRL_CD": "",
+            "MTRL_COD": "",
+            "DIV_SEQ": 0,
+            "SUB_MTRL_YN": "Y",
+            "STICKER_TYPE": null,
+            "QTY_INPUT_YN": "Y",
+            "PCS_COD": "POL_BAG",
+            "PCS_GRP_NME": "폴리백",
+            "PCS_DTL_COD": "HL002",
+            "PCS_DTL_NME": "다이아몬드",
+            "PCS_GROUP_NME": "다이아몬드"
+          },
+          {
+            "PCS_CD": "POL_BAG",
+            "PCS_GRP_NM": "폴리백",
+            "PCS_DTL_CD": "HL003",
+            "PCS_DTL_NM": "레인보우",
+            "WEB_PCS_DTL_GRP": "POL_BAG_HL",
+            "WEB_PCS_DTL_GRP_NM": null,
+            "WRK_WDT": "0.00",
+            "WRK_HGH": "0.00",
+            "CUT_WDT": "0.00",
+            "CUT_HGH": "0.00",
+            "VIEW_YN": "Y",
+            "HIDE_YN": "N",
+            "NOTICE": [
+              "57x90(mm) 사이즈 : 1세트(20장) 단위로 구매 가능합니다."
+            ],
+            "ESN_YN": "N",
+            "NOTE": "",
+            "MTRL_CD": "",
+            "MTRL_COD": "",
+            "DIV_SEQ": 0,
+            "SUB_MTRL_YN": "Y",
+            "STICKER_TYPE": null,
+            "QTY_INPUT_YN": "Y",
+            "PCS_COD": "POL_BAG",
+            "PCS_GRP_NME": "폴리백",
+            "PCS_DTL_COD": "HL003",
+            "PCS_DTL_NME": "레인보우",
+            "PCS_GROUP_NME": "레인보우"
+          },
+          {
+            "PCS_CD": "POL_BAG",
+            "PCS_GRP_NM": "폴리백",
+            "PCS_DTL_CD": "HL004",
+            "PCS_DTL_NM": "리틀 스타",
+            "WEB_PCS_DTL_GRP": "POL_BAG_HL",
+            "WEB_PCS_DTL_GRP_NM": null,
+            "WRK_WDT": "0.00",
+            "WRK_HGH": "0.00",
+            "CUT_WDT": "0.00",
+            "CUT_HGH": "0.00",
+            "VIEW_YN": "Y",
+            "HIDE_YN": "N",
+            "NOTICE": [
+              "57x90(mm) 사이즈 : 1세트(20장) 단위로 구매 가능합니다."
+            ],
+            "ESN_YN": "N",
+            "NOTE": "",
+            "MTRL_CD": "",
+            "MTRL_COD": "",
+            "DIV_SEQ": 0,
+            "SUB_MTRL_YN": "Y",
+            "STICKER_TYPE": null,
+            "QTY_INPUT_YN": "Y",
+            "PCS_COD": "POL_BAG",
+            "PCS_GRP_NME": "폴리백",
+            "PCS_DTL_COD": "HL004",
+            "PCS_DTL_NME": "리틀 스타",
+            "PCS_GROUP_NME": "리틀 스타"
+          },
+          {
+            "PCS_CD": "POL_BAG",
+            "PCS_GRP_NM": "폴리백",
+            "PCS_DTL_CD": "HL005",
+            "PCS_DTL_NM": "샌드 스톰",
+            "WEB_PCS_DTL_GRP": "POL_BAG_HL",
+            "WEB_PCS_DTL_GRP_NM": null,
+            "WRK_WDT": "0.00",
+            "WRK_HGH": "0.00",
+            "CUT_WDT": "0.00",
+            "CUT_HGH": "0.00",
+            "VIEW_YN": "Y",
+            "HIDE_YN": "N",
+            "NOTICE": [
+              "57x90(mm) 사이즈 : 1세트(20장) 단위로 구매 가능합니다."
+            ],
+            "ESN_YN": "N",
+            "NOTE": "",
+            "MTRL_CD": "",
+            "MTRL_COD": "",
+            "DIV_SEQ": 0,
+            "SUB_MTRL_YN": "Y",
+            "STICKER_TYPE": null,
+            "QTY_INPUT_YN": "Y",
+            "PCS_COD": "POL_BAG",
+            "PCS_GRP_NME": "폴리백",
+            "PCS_DTL_COD": "HL005",
+            "PCS_DTL_NME": "샌드 스톰",
+            "PCS_GROUP_NME": "샌드 스톰"
+          },
+          {
+            "PCS_CD": "POL_BAG",
+            "PCS_GRP_NM": "폴리백",
+            "PCS_DTL_CD": "HL006",
+            "PCS_DTL_NM": "세로 하트",
+            "WEB_PCS_DTL_GRP": "POL_BAG_HL",
+            "WEB_PCS_DTL_GRP_NM": null,
+            "WRK_WDT": "0.00",
+            "WRK_HGH": "0.00",
+            "CUT_WDT": "0.00",
+            "CUT_HGH": "0.00",
+            "VIEW_YN": "Y",
+            "HIDE_YN": "N",
+            "NOTICE": [
+              "57x90(mm) 사이즈 : 1세트(20장) 단위로 구매 가능합니다."
+            ],
+            "ESN_YN": "N",
+            "NOTE": "",
+            "MTRL_CD": "",
+            "MTRL_COD": "",
+            "DIV_SEQ": 0,
+            "SUB_MTRL_YN": "Y",
+            "STICKER_TYPE": null,
+            "QTY_INPUT_YN": "Y",
+            "PCS_COD": "POL_BAG",
+            "PCS_GRP_NME": "폴리백",
+            "PCS_DTL_COD": "HL006",
+            "PCS_DTL_NME": "세로 하트",
+            "PCS_GROUP_NME": "세로 하트"
+          },
+          {
+            "PCS_CD": "POL_BAG",
+            "PCS_GRP_NM": "폴리백",
+            "PCS_DTL_CD": "HL007",
+            "PCS_DTL_NM": "블라썸",
+            "WEB_PCS_DTL_GRP": "POL_BAG_HL",
+            "WEB_PCS_DTL_GRP_NM": null,
+            "WRK_WDT": "0.00",
+            "WRK_HGH": "0.00",
+            "CUT_WDT": "0.00",
+            "CUT_HGH": "0.00",
+            "VIEW_YN": "Y",
+            "HIDE_YN": "Y",
+            "NOTICE": [
+              "57x90(mm) 사이즈 : 1세트(20장) 단위로 구매 가능합니다."
+            ],
+            "ESN_YN": "N",
+            "NOTE": "",
+            "MTRL_CD": "",
+            "MTRL_COD": "",
+            "DIV_SEQ": 0,
+            "SUB_MTRL_YN": "Y",
+            "STICKER_TYPE": null,
+            "QTY_INPUT_YN": "Y",
+            "PCS_COD": "POL_BAG",
+            "PCS_GRP_NME": "폴리백",
+            "PCS_DTL_COD": "HL007",
+            "PCS_DTL_NME": "블라썸",
+            "PCS_GROUP_NME": "블라썸"
+          },
+          {
+            "PCS_CD": "ROU_DFT",
+            "PCS_GRP_NM": "귀돌이",
+            "PCS_DTL_CD": "DFXLT",
+            "PCS_DTL_NM": "귀돌이좌상",
+            "WEB_PCS_DTL_GRP": "ROU_DFT_DF",
+            "WEB_PCS_DTL_GRP_NM": "",
+            "WRK_WDT": "0.00",
+            "WRK_HGH": "0.00",
+            "CUT_WDT": "0.00",
+            "CUT_HGH": "0.00",
+            "VIEW_YN": "Y",
+            "HIDE_YN": "N",
+            "NOTICE": [],
+            "ESN_YN": "N",
+            "NOTE": "",
+            "MTRL_CD": "",
+            "MTRL_COD": "",
+            "DIV_SEQ": 0,
+            "SUB_MTRL_YN": "N",
+            "STICKER_TYPE": null,
+            "QTY_INPUT_YN": "N",
+            "PCS_COD": "ROU_DFT",
+            "PCS_GRP_NME": "귀돌이",
+            "PCS_DTL_COD": "DFXLT",
+            "PCS_DTL_NME": "귀돌이좌상",
+            "PCS_GROUP_NME": "귀돌이좌상"
+          },
+          {
+            "PCS_CD": "ROU_DFT",
+            "PCS_GRP_NM": "귀돌이",
+            "PCS_DTL_CD": "DFXRT",
+            "PCS_DTL_NM": "귀돌이우상",
+            "WEB_PCS_DTL_GRP": "ROU_DFT_DF",
+            "WEB_PCS_DTL_GRP_NM": "",
+            "WRK_WDT": "0.00",
+            "WRK_HGH": "0.00",
+            "CUT_WDT": "0.00",
+            "CUT_HGH": "0.00",
+            "VIEW_YN": "Y",
+            "HIDE_YN": "N",
+            "NOTICE": [],
+            "ESN_YN": "N",
+            "NOTE": "",
+            "MTRL_CD": "",
+            "MTRL_COD": "",
+            "DIV_SEQ": 0,
+            "SUB_MTRL_YN": "N",
+            "STICKER_TYPE": null,
+            "QTY_INPUT_YN": "N",
+            "PCS_COD": "ROU_DFT",
+            "PCS_GRP_NME": "귀돌이",
+            "PCS_DTL_COD": "DFXRT",
+            "PCS_DTL_NME": "귀돌이우상",
+            "PCS_GROUP_NME": "귀돌이우상"
+          },
+          {
+            "PCS_CD": "ROU_DFT",
+            "PCS_GRP_NM": "귀돌이",
+            "PCS_DTL_CD": "DFXLB",
+            "PCS_DTL_NM": "귀돌이좌하",
+            "WEB_PCS_DTL_GRP": "ROU_DFT_DF",
+            "WEB_PCS_DTL_GRP_NM": "",
+            "WRK_WDT": "0.00",
+            "WRK_HGH": "0.00",
+            "CUT_WDT": "0.00",
+            "CUT_HGH": "0.00",
+            "VIEW_YN": "Y",
+            "HIDE_YN": "N",
+            "NOTICE": [],
+            "ESN_YN": "N",
+            "NOTE": "",
+            "MTRL_CD": "",
+            "MTRL_COD": "",
+            "DIV_SEQ": 0,
+            "SUB_MTRL_YN": "N",
+            "STICKER_TYPE": null,
+            "QTY_INPUT_YN": "N",
+            "PCS_COD": "ROU_DFT",
+            "PCS_GRP_NME": "귀돌이",
+            "PCS_DTL_COD": "DFXLB",
+            "PCS_DTL_NME": "귀돌이좌하",
+            "PCS_GROUP_NME": "귀돌이좌하"
+          },
+          {
+            "PCS_CD": "ROU_DFT",
+            "PCS_GRP_NM": "귀돌이",
+            "PCS_DTL_CD": "DFXRB",
+            "PCS_DTL_NM": "귀돌이우하",
+            "WEB_PCS_DTL_GRP": "ROU_DFT_DF",
+            "WEB_PCS_DTL_GRP_NM": "",
+            "WRK_WDT": "0.00",
+            "WRK_HGH": "0.00",
+            "CUT_WDT": "0.00",
+            "CUT_HGH": "0.00",
+            "VIEW_YN": "Y",
+            "HIDE_YN": "N",
+            "NOTICE": [],
+            "ESN_YN": "N",
+            "NOTE": "",
+            "MTRL_CD": "",
+            "MTRL_COD": "",
+            "DIV_SEQ": 0,
+            "SUB_MTRL_YN": "N",
+            "STICKER_TYPE": null,
+            "QTY_INPUT_YN": "N",
+            "PCS_COD": "ROU_DFT",
+            "PCS_GRP_NME": "귀돌이",
+            "PCS_DTL_COD": "DFXRB",
+            "PCS_DTL_NME": "귀돌이우하",
+            "PCS_GROUP_NME": "귀돌이우하"
+          },
+          {
+            "PCS_CD": "SUB_MTR",
+            "PCS_GRP_NM": "추가부자재",
+            "PCS_DTL_CD": "CA100",
+            "PCS_DTL_NM": "명함케이스 100장용",
+            "WEB_PCS_DTL_GRP": "SUB_MTR_CA",
+            "WEB_PCS_DTL_GRP_NM": "명함케이스",
+            "WRK_WDT": "0.00",
+            "WRK_HGH": "0.00",
+            "CUT_WDT": "0.00",
+            "CUT_HGH": "0.00",
+            "VIEW_YN": "Y",
+            "HIDE_YN": "N",
+            "NOTICE": [
+              "90x50 사이즈만 넣을 수 있습니다."
+            ],
+            "ESN_YN": "N",
+            "NOTE": "",
+            "MTRL_CD": "",
+            "MTRL_COD": "",
+            "DIV_SEQ": 0,
+            "SUB_MTRL_YN": "Y",
+            "STICKER_TYPE": null,
+            "QTY_INPUT_YN": "Y",
+            "PCS_COD": "SUB_MTR",
+            "PCS_GRP_NME": "추가부자재",
+            "PCS_DTL_COD": "CA100",
+            "PCS_DTL_NME": "명함케이스 100장용",
+            "PCS_GROUP_NME": "명함케이스 100장용"
+          },
+          {
+            "PCS_CD": "SUB_MTR",
+            "PCS_GRP_NM": "추가부자재",
+            "PCS_DTL_CD": "CA200",
+            "PCS_DTL_NM": "명함케이스 200장용",
+            "WEB_PCS_DTL_GRP": "SUB_MTR_CA",
+            "WEB_PCS_DTL_GRP_NM": "명함케이스",
+            "WRK_WDT": "0.00",
+            "WRK_HGH": "0.00",
+            "CUT_WDT": "0.00",
+            "CUT_HGH": "0.00",
+            "VIEW_YN": "Y",
+            "HIDE_YN": "N",
+            "NOTICE": [
+              "90x50 사이즈만 넣을 수 있습니다."
+            ],
+            "ESN_YN": "N",
+            "NOTE": "",
+            "MTRL_CD": "",
+            "MTRL_COD": "",
+            "DIV_SEQ": 0,
+            "SUB_MTRL_YN": "Y",
+            "STICKER_TYPE": null,
+            "QTY_INPUT_YN": "Y",
+            "PCS_COD": "SUB_MTR",
+            "PCS_GRP_NME": "추가부자재",
+            "PCS_DTL_COD": "CA200",
+            "PCS_DTL_NME": "명함케이스 200장용",
+            "PCS_GROUP_NME": "명함케이스 200장용"
+          }
+        ],
+        "pdt_add_pcs_info": [
+          {
+            "PCS_CD": "PRT_MAG",
+            "PCS_GRP_NM": "매직잉크",
+            "PCS_DTL_CD": "DFXXX",
+            "PCS_DTL_NM": "매직잉크",
+            "WEB_PCS_DTL_GRP": "",
+            "WEB_PCS_DTL_GRP_NM": "",
+            "WRK_WDT": "0.00",
+            "WRK_HGH": "0.00",
+            "CUT_WDT": "0.00",
+            "CUT_HGH": "0.00",
+            "VIEW_YN": "Y",
+            "HIDE_YN": "",
+            "NOTICE": [
+              ""
+            ],
+            "ESN_YN": "N",
+            "NOTE": "",
+            "MTRL_CD": "RXSNO250",
+            "MTRL_COD": "RXSNO250",
+            "DIV_SEQ": "",
+            "SUB_MTRL_YN": "",
+            "STICKER_TYPE": "",
+            "QTY_INPUT_YN": "",
+            "PCS_COD": "PRT_MAG",
+            "PCS_GRP_NME": "매직잉크",
+            "PCS_DTL_COD": "DFXXX",
+            "PCS_DTL_NME": "매직잉크",
+            "PCS_GROUP_NME": "매직잉크"
+          },
+          {
+            "PCS_CD": "PRT_MAG",
+            "PCS_GRP_NM": "매직잉크",
+            "PCS_DTL_CD": "DFXXX",
+            "PCS_DTL_NM": "매직잉크",
+            "WEB_PCS_DTL_GRP": "",
+            "WEB_PCS_DTL_GRP_NM": "",
+            "WRK_WDT": "0.00",
+            "WRK_HGH": "0.00",
+            "CUT_WDT": "0.00",
+            "CUT_HGH": "0.00",
+            "VIEW_YN": "Y",
+            "HIDE_YN": "",
+            "NOTICE": [
+              ""
+            ],
+            "ESN_YN": "N",
+            "NOTE": "",
+            "MTRL_CD": "RXSNO300",
+            "MTRL_COD": "RXSNO300",
+            "DIV_SEQ": "",
+            "SUB_MTRL_YN": "",
+            "STICKER_TYPE": "",
+            "QTY_INPUT_YN": "",
+            "PCS_COD": "PRT_MAG",
+            "PCS_GRP_NME": "매직잉크",
+            "PCS_DTL_COD": "DFXXX",
+            "PCS_DTL_NME": "매직잉크",
+            "PCS_GROUP_NME": "매직잉크"
+          }
+        ],
+        "pdt_disable_pcs_info": [
+          {
+            "MTRL_CD": "RXETP226",
+            "PCS_CD": "COT_DFT",
+            "PCS_DTL_CD": null,
+            "NOTE": null
+          },
+          {
+            "MTRL_CD": "RXETP226",
+            "PCS_CD": "LAM_DFT",
+            "PCS_DTL_CD": null,
+            "NOTE": null
+          },
+          {
+            "MTRL_CD": "RXETP226",
+            "PCS_CD": "PRT_MAG",
+            "PCS_DTL_CD": null,
+            "NOTE": null
+          },
+          {
+            "MTRL_CD": "RXETP226",
+            "PCS_CD": "SCO_DFT",
+            "PCS_DTL_CD": null,
+            "NOTE": null
+          },
+          {
+            "MTRL_CD": "RXETP226",
+            "PCS_CD": "SCO_GLD",
+            "PCS_DTL_CD": null,
+            "NOTE": null
+          },
+          {
+            "MTRL_CD": "RXETP226",
+            "PCS_CD": "SCO_SLV",
+            "PCS_DTL_CD": null,
+            "NOTE": null
+          }
+        ],
+        "pdt_add_info": [
+          [],
+          []
+        ]
+      },
+      "member_info": {
+        "mb_id": "lojesus75",
+        "mb_cust_cod": "15090019",
+        "discount_cust_yn": "N",
+        "mall_cust_yn": "N",
+        "bsn_yn": "N",
+        "blk_con": "N",
+        "edicusUserID": "7Iug7Jqw7KeEbG9qZXN1czc1"
+      }
+    }
+  }
+}
