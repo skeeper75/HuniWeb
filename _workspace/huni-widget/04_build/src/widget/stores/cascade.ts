@@ -66,10 +66,14 @@ function applyVisibilityAndEssential(
     }
   }
 
-  // hidden essential 자동선택: required && !visible && 값 보유 && 미선택 → 첫 활성값 적재.
+  // [C-B] required + 미선택 + 활성값보유 그룹 자가복구 — visible/hidden 대칭.
+  //  이전(C-B 버그): `g.visible` 조건이 hidden-essential 만 채워, 자재 왕복(RXOMO080→RXART300)으로
+  //  re-enable 된 visible+required 합성그룹(PCS_COT_DFT__side/__coating)은 selection 영구 undefined →
+  //  가격요청서 코팅 소실. visible 조건 제거로 visible required 그룹도 첫 활성값 재적재.
+  //  Red mod_07:2266 coating watcher(`find(!disabled)`, 빈값 금지)와 정합. 활성값 없으면(전체 disable) skip.
   const nextSelections = { ...selections };
   for (const g of nextProduct.optionGroups) {
-    if (!g.required || g.visible || g.inputSpec || g.values.length === 0) continue;
+    if (!g.required || g.inputSpec || g.values.length === 0) continue;
     if (nextSelections[g.id] != null) continue;
     const first = g.values.find((v) => v.disabled !== true);
     if (first) nextSelections[g.id] = first.id;

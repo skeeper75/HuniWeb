@@ -53,4 +53,8 @@ export interface NormalizedPriceBreakdown {
   shipping: number;
   lines: PriceLine[]; // 공정별 분해 (선택적 투명성 표시 — DESIGN Summary)
   raw?: unknown; // 디버그용 (위젯은 안 씀)
+  // [HARD 도메인] RedPrinting 위젯은 PRICE=0 을 정상 반환하지 않는다 — 0 은 항상 우리측
+  //  요청/세션/스펙선택 결함 신호. finalPrice=0 일 때 어댑터가 진단 사유를 채운다(정상 빈상태로 침묵 금지).
+  //  OPTIONAL·additive — PRICE>0 이면 undefined. 위젯은 표시/로깅에만 사용(가격 계산 안 함).
+  priceUnavailableReason?: string;
 }

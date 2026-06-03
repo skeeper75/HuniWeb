@@ -74,6 +74,9 @@ export interface WidgetState {
   openEditor(side: SideKey): Promise<void>;
   applyEditorResult(r: NormalizedEditorResult): void;
   closeEditor(): void;
+  // G-2: 에디터 토큰 갱신(request-user-token) — BFF editorConfig 재발급 후 갱신 토큰을 editorConfig 에 반영.
+  //  위젯은 토큰 보관 안 함 — 새 config 를 set 해 EditorOverlay 가 to-edicus 로 즉시 전달.
+  refreshEditorToken(side: SideKey): Promise<void>;
   // 업로드 (api-contract #3·4, s3-upload-flow): presigned → S3 직접 PUT → file-meta.
   uploadPdf(side: SideKey, file: File): Promise<void>;
 }
@@ -250,6 +253,19 @@ export function createWidgetStore(deps: WidgetStoreDeps): WidgetStore {
 
     closeEditor() {
       set({ editorConfig: null, editorSide: null, status: 'ready' });
+    },
+
+    // G-2: 에디터 토큰 갱신 — BFF 가 토큰체인 재수행한 새 config 발급, editorConfig 에 반영.
+    //  열린 세션이 없으면 no-op. 토큰은 메모리만(보관 안 함) — EditorOverlay 가 to-edicus 로 전달.
+    async refreshEditorToken(side) {
+      const code = get().product?.code;
+      if (!code || get().editorConfig == null) return;
+      try {
+        const config = await deps.bff.editorConfig(code, side);
+        set({ editorConfig: config });
+      } catch (e) {
+        set({ errors: [`에디터 토큰 갱신 실패: ${String(e)}`] });
+      }
     },
 
     async uploadPdf(side, file) {

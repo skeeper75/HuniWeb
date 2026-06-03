@@ -92,6 +92,10 @@ export function useEditorSession() {
     applyEditorResult: (r: import('@/contract').NormalizedEditorResult) =>
       api.getState().applyEditorResult(r),
     closeEditor: () => api.getState().closeEditor(),
+    // G-2: 에디터 가격연동 콜백 배선용 — 면수변경/변수변경 시 재계산, 토큰갱신.
+    setPageCount: (n: number) => api.getState().setPageCount(n),
+    reQuote: () => api.getState().schedulePriceQuote(),
+    refreshEditorToken: (side: import('@/contract').SideKey) => api.getState().refreshEditorToken(side),
   };
 }
 

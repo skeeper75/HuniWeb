@@ -14,7 +14,8 @@ const BASE_ORIGIN = import.meta.env.VITE_EDICUS_BASE_HOST ?? 'https://edicusbase
 
 export function EditorOverlay() {
   const container = usePortalContainer();
-  const { config, applyEditorResult, closeEditor } = useEditorSession();
+  const { config, applyEditorResult, closeEditor, setPageCount, reQuote, refreshEditorToken } =
+    useEditorSession();
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const bridgeRef = useRef<EditorBridge | null>(null);
 
@@ -31,6 +32,16 @@ export function EditorOverlay() {
         },
         onResult: (r) => applyEditorResult(r),
         onClose: () => closeEditor(),
+        // [G-2] 에디터 가격연동 3콜백 배선 — 이전엔 미전달(no-op) → stale-price 벡터.
+        //  prod-var-changed(MAJOR): 커스텀탭 변수변경 → 즉시 재계산(의류 변수가격 stale 방지).
+        onProdVarChanged: () => reQuote(),
+        //  page-count-changed(MINOR): 면수↑ 라이브 표시 갱신 — 최종가는 goto-cart 가 재계산하나
+        //   편집 중 표시 신선도를 위해 setPageCount→재계산(totalPageCount 없으면 무동작).
+        onPageCountChanged: (_side, totalPageCount) => {
+          if (totalPageCount > 0) setPageCount(totalPageCount);
+        },
+        //  request-user-token: 에디터 토큰 갱신 → BFF editorConfig 재발급(위젯 토큰 미보관).
+        onRequestUserToken: (side) => void refreshEditorToken(side),
       },
       { allowedOrigins: [BASE_ORIGIN, EDITOR_HOST] },
     );
@@ -42,7 +53,7 @@ export function EditorOverlay() {
       bridge.detach();
       bridgeRef.current = null;
     };
-  }, [config, applyEditorResult, closeEditor]);
+  }, [config, applyEditorResult, closeEditor, setPageCount, reQuote, refreshEditorToken]);
 
   if (!config || !container) return null;
 

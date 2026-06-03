@@ -128,8 +128,13 @@ function sizeValue(s: RedSizeInfo): OptionValue {
 //  우리도 어댑터가 2 OptionGroup(side=option-button, coating=finish-button)으로 분해하고,
 //  serializeRedPriceRequest 가 `coating+side` 로 재합성한다(신규 leaf 불필요).
 const COMPOSITE_PCS = new Set(['COT_DFT', 'SCO_DFT']);
-// L-1 수량형 ATTB 후가공 — ATTB=주문수량 echo + ATTB_2/3 빈슬롯(mod_07:2586 SUB_MTR / 2467 PDT_WRK).
-const QUANTITY_ECHO_PCS = new Set(['SUB_MTR', 'PDT_WRK', 'INN_DFT']);
+// L-1/G-1 수량형(자재연결) ATTB 후가공 — ATTB=주문수량 echo + ATTB_2/3 빈슬롯.
+//  Red 는 4종 자재연결 PCS 전부 ATTB=orderQty: SUB_MTR(mod_07:2597) / PDT_WRK(2954) /
+//  DIR_MTR(2470) / WRK_MTR(3572). [G-1 수정] 기존 set 이 WRK_MTR/DIR_MTR 누락 → 해당 상품
+//  (ACNTHAP·GSTGMIC=WRK_MTR / 의류 DIR_MTR)이 ATTB='' 직렬화(수량 소실 = 가격왜곡). 2종 추가로 해소.
+//  INN_DFT 는 내지마감 수량형(유지). [LATENT] SUB_MTR QTY_INPUT_YN==='Y' 분기(컴포넌트-로컬 수량)는
+//  fixture 부재로 dormant — 컨버전 단계 처리.
+const QUANTITY_ECHO_PCS = new Set(['SUB_MTR', 'PDT_WRK', 'INN_DFT', 'WRK_MTR', 'DIR_MTR']);
 // L-3a 멀티선택 후가공 — 귀돌이(ROU_DFT) 4귀 부분집합 선택(mod_07:3325 u=선택목록 배열).
 const MULTI_SELECT_PCS = new Set(['ROU_DFT']);
 // 합성그룹 식별 suffix — 직렬화 재합성이 이 규칙으로 짝을 찾는다.
@@ -626,6 +631,20 @@ export function mapPriceResponse(res: RedPriceResponse): NormalizedPriceBreakdow
   //  finalPrice(워터폴 평면화) > 0 을 ok 조건에 포함해 0원 응답이 절대 ok:true 로 통과하지 못하게 한다.
   const ok = res.retCode === 200 && finalPrice > 0;
 
+  // [HARD 도메인 재정의] RedPrinting 위젯은 PRICE=0 을 정상 반환하지 않는다 — 0 은 항상 우리측
+  //  요청/세션/스펙선택 결함 신호(정상 "미가격 빈상태" 아님). 0 을 침묵 처리하지 않고 진단 사유를 명시.
+  //  비치명적(throw 안 함) — 미캡처 fixture(포스터/의류/ACC, PRICE=0)의 렌더를 깨지 않기 위함.
+  //  [TODO 재캡처] 그 fixture 들의 0 은 우리 캡처공백(비로그인/세션)이지 Red 미가격이 아니다 →
+  //  PRICE>0 재캡처 필요: BNBNFBL/BNPTPET(포스터), CLSTSHS(의류), ACPDSTD/GSSBMTL(ACC).
+  let priceUnavailableReason: string | undefined;
+  if (finalPrice <= 0) {
+    priceUnavailableReason =
+      'Red 위젯은 PRICE=0 을 정상 반환하지 않음 — 세션 만료/필수필드 누락/스펙선택 결함 또는 우리측 가격캡처 공백 가능성';
+    if (typeof console !== 'undefined' && typeof console.warn === 'function') {
+      console.warn(`[price] PRICE=0 진단: ${priceUnavailableReason} (retCode=${res.retCode})`);
+    }
+  }
+
   return {
     ok,
     finalPrice,
@@ -633,6 +652,7 @@ export function mapPriceResponse(res: RedPriceResponse): NormalizedPriceBreakdow
     shipping: res.book_info?.DLVR_AMT ?? 0,
     lines,
     raw: res,
+    ...(priceUnavailableReason ? { priceUnavailableReason } : {}),
   };
 }
 
