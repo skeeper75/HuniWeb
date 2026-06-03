@@ -19,14 +19,14 @@ metadata:
 
 ## 실행 모드: 하이브리드 파이프라인 (서브 에이전트)
 
-기본은 서브 에이전트 파이프라인(`Agent` 직접 호출). Phase 2는 병렬, 나머지는 순차. 모든 Agent 호출에 `model: "opus"` 명시. 구현 단계(hw-builder)만 `isolation: "worktree"`.
+기본은 서브 에이전트 파이프라인(`Agent` 직접 호출). Phase 2는 병렬, 나머지는 순차. 모든 Agent 호출에 `model: "opus"` 명시. **hw-builder는 메인 트리에서 실행**(단일 빌더·병렬 없음 + `git diff src/widget` INV-3 증명을 메인 트리에서 수행해야 하므로 worktree 미사용 — S1~S6 전례).
 
 | Phase | 에이전트 | 실행 | 입력 → 산출 |
 |-------|---------|------|------------|
 | ① 역공학 보강 | hw-reverse-engineer | 순차 | 역공학자료+widget_monitor → `01_reverse/` |
 | ② 동작분석 + 리서치 | hw-runtime-analyst, hw-researcher | **병렬** | 01_reverse → `02_analysis/`, `02_research/` |
 | ③ 위젯 명세 | hw-architect | 순차 | 01·02 + DESIGN.md → `03_spec/` |
-| ④ 구현 | hw-builder (worktree) | 순차 | 03_spec → `04_build/` |
+| ④ 구현 | hw-builder (메인 트리) | 순차 | 03_spec → `04_build/` |
 | ⑤ QA | hw-qa | 점진적 | 04_build vs 03_spec/캡처/DESIGN → `05_qa/` |
 
 ## Phase 0: 컨텍스트 확인
@@ -85,7 +85,7 @@ test -f .env.local && echo ".env.local OK" || echo ".env.local MISSING"
 
 ### Phase 4 — 구현
 
-`Agent`로 hw-builder 호출(model opus, **isolation: "worktree"**). 프롬프트 경로는 프로젝트 루트 상대경로, `cd /절대경로` 금지. huni-widget-build 스킬 사용. build-plan 우선순위 순서로 구현.
+`Agent`로 hw-builder 호출(model opus, **메인 트리 — worktree 미사용**: 단일 빌더이고 `git diff src/widget`/`src/contract` 0줄 INV-3 증명과 빌드 게이트를 메인 트리에서 수행해야 한다). huni-widget-build 스킬 사용. build-plan 우선순위 순서로 구현.
 
 게이트: 빌드/타입체크 통과 증거. DESIGN.md 8 Critical Rules 준수.
 
@@ -120,7 +120,7 @@ test -f .env.local && echo ".env.local OK" || echo ".env.local MISSING"
 
 ## 테스트 시나리오
 
-**정상 흐름:** `_workspace/huni-widget/` 없음 → Phase 0 초기 실행 판정 → Phase 1 역공학 보강(라이브 캡처) → Phase 2 동작분석+리서치 병렬 → Phase 3 명세 → Phase 4 worktree 구현 → Phase 5 점진 QA PASS → 통합 보고.
+**정상 흐름:** `_workspace/huni-widget/` 없음 → Phase 0 초기 실행 판정 → Phase 1 역공학 보강(라이브 캡처) → Phase 2 동작분석+리서치 병렬 → Phase 3 명세 → Phase 4 메인 트리 구현 → Phase 5 점진 QA PASS → 통합 보고.
 
 **에러 흐름:** Phase 1에서 RP_EDITOR_TOKEN 만료로 라이브 캡처 실패 → `node extract-cookies.cjs`로 1회 갱신 재시도 → 재실패 시 기존 body-log.json/캡처로 폴백, gaps-resolved.md에 미검증 표기 후 Phase 2 진행.
 
