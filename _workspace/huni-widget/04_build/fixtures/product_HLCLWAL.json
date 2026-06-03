@@ -1,0 +1,342 @@
+{
+  "retCode": 200,
+  "msg": "",
+  "result": {
+    "product_option": {
+      "option": {
+        "pdt_cod": "HLCLWAL",
+        "pdt_nme": "[옵셋] 벽걸이 캘린더",
+        "item_gbn": "offset2023_item",
+        "price_gbn": "offset2023_price",
+        "skinInfo": {
+          "pageDirection": {
+            "view_yn": "N",
+            "title": "주문서 작성"
+          },
+          "paperSelect": {
+            "view_yn": "Y",
+            "title": "용지"
+          },
+          "sizeSelect": {
+            "view_yn": "Y",
+            "title": "규격 (mm)"
+          },
+          "dosuSelect": {
+            "view_yn": "Y",
+            "title": "인쇄 도수"
+          },
+          "subjectGroup": {
+            "view_yn": "Y",
+            "title": "주문 제목"
+          },
+          "quantityGroup": {
+            "view_yn": "Y",
+            "title": {
+              "orderCnt": "인쇄장수",
+              "printCnt": "수량"
+            }
+          }
+        },
+        "order_yn": "Y",
+        "cut_guide_yn": "N",
+        "able_paper_yn": "Y",
+        "price_table_yn": "N",
+        "useTemplateDownload": "N",
+        "useKoiEditor": "N",
+        "useRPEditor": "N",
+        "usePDF": "Y",
+        "usePDFordCnt": "Y",
+        "useEditorOrdCnt": "N",
+        "koiAccessToken": "[JWT]",
+        "rpAccessToken": null,
+        "koi_template_resource_id": "",
+        "koiOption": []
+      }
+    },
+    "product_data": {
+      "pdt_base_info": [
+        {
+          "PDT_CD": "HLCLWAL",
+          "PDT_NM": "옵셋 벽걸이 캘린더",
+          "WDT_HGH_GBN_YN": "N",
+          "PRN_YN": "Y",
+          "PDT_UNIT": "개",
+          "ORD_CNT_YN": null,
+          "NO_STD_ABL_YN": "N",
+          "MIN_CUT_WDT": "10.00",
+          "MIN_CUT_HGH": "10.00",
+          "MAX_CUT_WDT": "700.00",
+          "MAX_CUT_HGH": "700.00",
+          "DFT_CUT_WDT": "0.00",
+          "DFT_CUT_HGH": "0.00",
+          "CUT_MRG": "4.00",
+          "FIR_CNT": null,
+          "INC": null,
+          "INC_STEP": null,
+          "NOTE": "제품 정보(기초정보 및 주문가능 최대 최소 사이즈)",
+          "REAM_YN": "N"
+        }
+      ],
+      "pdt_mtrl_info": [
+        {
+          "MTRL_TYPE": "R",
+          "CLR_CD": "X",
+          "CLR_NM": "기본",
+          "PTT_CD": "SNO",
+          "PTT_NM": "스노우",
+          "WGT_CD": "150",
+          "MTRL_CD": "RXSNO150",
+          "HIDE_YN": "N",
+          "HIDE_RSN": "",
+          "NOTE": "제품별 주문가능한 지질",
+          "SID_GBN": null,
+          "CLR_COD": "X",
+          "CLR_NME": "기본",
+          "PTT_COD": "SNO",
+          "PTT_NME": "스노우",
+          "WGT_COD": "150",
+          "MTRL_COD": "RXSNO150",
+          "MTRL_NM": null,
+          "GRP_OPTION_CD": null,
+          "CLR_OPTION_CD": null,
+          "PRT_HIDE_YN": null,
+          "BSN_YN": null
+        },
+        {
+          "MTRL_TYPE": "R",
+          "CLR_CD": "X",
+          "CLR_NM": "기본",
+          "PTT_CD": "ART",
+          "PTT_NM": "아트지",
+          "WGT_CD": "150",
+          "MTRL_CD": "RXART150",
+          "HIDE_YN": "N",
+          "HIDE_RSN": "",
+          "NOTE": "제품별 주문가능한 지질",
+          "SID_GBN": null,
+          "CLR_COD": "X",
+          "CLR_NME": "기본",
+          "PTT_COD": "ART",
+          "PTT_NME": "아트지",
+          "WGT_COD": "150",
+          "MTRL_COD": "RXART150",
+          "MTRL_NM": null,
+          "GRP_OPTION_CD": null,
+          "CLR_OPTION_CD": null,
+          "PRT_HIDE_YN": null,
+          "BSN_YN": null
+        },
+        {
+          "MTRL_TYPE": "R",
+          "CLR_CD": "X",
+          "CLR_NM": "기본",
+          "PTT_CD": "RAN",
+          "PTT_NM": "랑데뷰내츄럴",
+          "WGT_CD": "160",
+          "MTRL_CD": "RXRAN160",
+          "HIDE_YN": "N",
+          "HIDE_RSN": "",
+          "NOTE": "제품별 주문가능한 지질",
+          "SID_GBN": null,
+          "CLR_COD": "X",
+          "CLR_NME": "기본",
+          "PTT_COD": "RAN",
+          "PTT_NME": "랑데뷰내츄럴",
+          "WGT_COD": "160",
+          "MTRL_COD": "RXRAN160",
+          "MTRL_NM": null,
+          "GRP_OPTION_CD": null,
+          "CLR_OPTION_CD": null,
+          "PRT_HIDE_YN": null,
+          "BSN_YN": null
+        }
+      ],
+      "pdt_size_info": [
+        {
+          "DIV_NM": "A3",
+          "WRK_WDT": "301.00",
+          "WRK_HGH": "424.00",
+          "CUT_WDT": "297.00",
+          "CUT_HGH": "420.00",
+          "DFT_YN": "Y",
+          "DIV_CD": "",
+          "DIV_SEQ": 2,
+          "STICKER_TYPE": "",
+          "REAM_PAPER_CNT": 0,
+          "NOTE": "제품별 사이즈",
+          "PDT_SIZE_INFO": null,
+          "HIDE_YN": null
+        },
+        {
+          "DIV_NM": "A2",
+          "WRK_WDT": "424.00",
+          "WRK_HGH": "598.00",
+          "CUT_WDT": "420.00",
+          "CUT_HGH": "594.00",
+          "DFT_YN": "N",
+          "DIV_CD": "",
+          "DIV_SEQ": 1,
+          "STICKER_TYPE": "",
+          "REAM_PAPER_CNT": 0,
+          "NOTE": "제품별 사이즈",
+          "PDT_SIZE_INFO": null,
+          "HIDE_YN": null
+        },
+        {
+          "DIV_NM": "A4",
+          "WRK_WDT": "214.00",
+          "WRK_HGH": "301.00",
+          "CUT_WDT": "210.00",
+          "CUT_HGH": "297.00",
+          "DFT_YN": "N",
+          "DIV_CD": "",
+          "DIV_SEQ": 3,
+          "STICKER_TYPE": "",
+          "REAM_PAPER_CNT": 0,
+          "NOTE": "제품별 사이즈",
+          "PDT_SIZE_INFO": null,
+          "HIDE_YN": null
+        }
+      ],
+      "pdt_dosu_info": [
+        {
+          "COD": "SID_S",
+          "COD_NME": "단면",
+          "PRN_CLR_CNT": 4,
+          "SIDE_CD": "SID_S",
+          "SIDE_NM": "단면"
+        }
+      ],
+      "pdt_prn_cnt_info": [
+        {
+          "DIV_CD": "",
+          "REAM_CNT": 0,
+          "PRN_CNT": 500,
+          "DFT_YN": "Y",
+          "DFT_PRN_CNT": 500,
+          "FIR_CNT": null,
+          "INC_CNT": null,
+          "INC_STEP": null,
+          "MIN_PRN_CNT": null,
+          "MIN_INN_PAGE": null,
+          "MAX_INN_PAGE": null,
+          "STEP_INN_PAGE": null,
+          "MAX_THCK": null,
+          "INN_MAX_WGT": null,
+          "COV_MIN_WGT": null
+        }
+      ],
+      "pdt_exp_prn_cnt_info": null,
+      "pdt_pcs_info": [
+        {
+          "PCS_CD": "CUT_DFT",
+          "PCS_GRP_NM": "재단",
+          "PCS_DTL_CD": "DFXXX",
+          "PCS_DTL_NM": "재단",
+          "WEB_PCS_DTL_GRP": "CUT_DFT_DF",
+          "WEB_PCS_DTL_GRP_NM": "",
+          "WRK_WDT": "0.00",
+          "WRK_HGH": "0.00",
+          "CUT_WDT": "0.00",
+          "CUT_HGH": "0.00",
+          "VIEW_YN": "N",
+          "NOTICE": [],
+          "HIDE_YN": null,
+          "ESN_YN": "Y",
+          "NOTE": "후가공 정보",
+          "MTRL_CD": null,
+          "MTRL_COD": null,
+          "DIV_SEQ": null,
+          "SUB_MTRL_YN": null,
+          "STICKER_TYPE": null,
+          "QTY_INPUT_YN": "N",
+          "PCS_COD": "CUT_DFT",
+          "PCS_GRP_NME": "재단",
+          "PCS_DTL_COD": "DFXXX",
+          "PCS_DTL_NME": "재단",
+          "PCS_GROUP_NME": "재단"
+        },
+        {
+          "PCS_CD": "HOL_DFT",
+          "PCS_GRP_NM": "타공",
+          "PCS_DTL_CD": "DFXXX",
+          "PCS_DTL_NM": "타공",
+          "WEB_PCS_DTL_GRP": "HOL_DFT_DF",
+          "WEB_PCS_DTL_GRP_NM": "",
+          "WRK_WDT": "0.00",
+          "WRK_HGH": "0.00",
+          "CUT_WDT": "0.00",
+          "CUT_HGH": "0.00",
+          "VIEW_YN": "N",
+          "NOTICE": [],
+          "HIDE_YN": null,
+          "ESN_YN": "Y",
+          "NOTE": "후가공 정보",
+          "MTRL_CD": null,
+          "MTRL_COD": null,
+          "DIV_SEQ": null,
+          "SUB_MTRL_YN": null,
+          "STICKER_TYPE": null,
+          "QTY_INPUT_YN": "N",
+          "PCS_COD": "HOL_DFT",
+          "PCS_GRP_NME": "타공",
+          "PCS_DTL_COD": "DFXXX",
+          "PCS_DTL_NME": "타공",
+          "PCS_GROUP_NME": "타공"
+        },
+        {
+          "PCS_CD": "RIN_CUT",
+          "PCS_GRP_NM": "링제본",
+          "PCS_DTL_CD": "BPTOP",
+          "PCS_DTL_NM": "상철",
+          "WEB_PCS_DTL_GRP": "RIN_CUT_BP",
+          "WEB_PCS_DTL_GRP_NM": "",
+          "WRK_WDT": "0.00",
+          "WRK_HGH": "0.00",
+          "CUT_WDT": "0.00",
+          "CUT_HGH": "0.00",
+          "VIEW_YN": "N",
+          "NOTICE": [],
+          "HIDE_YN": null,
+          "ESN_YN": "Y",
+          "NOTE": "후가공 정보",
+          "MTRL_CD": null,
+          "MTRL_COD": null,
+          "DIV_SEQ": null,
+          "SUB_MTRL_YN": null,
+          "STICKER_TYPE": null,
+          "QTY_INPUT_YN": "N",
+          "PCS_COD": "RIN_CUT",
+          "PCS_GRP_NME": "링제본",
+          "PCS_DTL_COD": "BPTOP",
+          "PCS_DTL_NME": "상철",
+          "PCS_GROUP_NME": "상철"
+        }
+      ],
+      "pdt_add_pcs_info": null,
+      "pdt_disable_pcs_info": null,
+      "pdt_add_info": [
+        [
+          []
+        ],
+        [
+          {
+            "ATTB_CD": "RIN_SLV",
+            "ATTB_NM": "은색",
+            "PCS_CD": "RIN_DFT"
+          }
+        ]
+      ]
+    },
+    "member_info": {
+      "mb_id": "RP_REDACTED",
+      "mb_cust_cod": "REDACTED",
+      "discount_cust_yn": null,
+      "mall_cust_yn": null,
+      "bsn_yn": null,
+      "blk_con": null,
+      "edicusUserID": "REDACTED"
+    }
+  },
+  "_note": "S6 캘린더 HLCLWAL fixture — s6_cal_HLCLWAL.json RAW 미러 infoCall[0].respBody 통째(2026-06-03). offset2023_price PriceTable3D 변형(책자형). 규격 3종/자재 3종/도수 1종(양면 PRN_CLR_CNT 8)/PCS(CUT_DFT,HOL_DFT,RIN_CUT). pdt_prn_cnt_info 단일행(PRN_CNT 500, FIR/INC null). member_info REDACTED."
+}

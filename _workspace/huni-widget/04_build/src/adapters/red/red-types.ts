@@ -82,13 +82,17 @@ export interface RedDisablePcs {
 
 export interface RedPrnCntInfo {
   DFT_PRN_CNT: number;
-  FIR_CNT: number;
-  INC_CNT: number;
-  INC_STEP: number;
-  MIN_PRN_CNT: number;
-  MIN_INN_PAGE: number;
-  MAX_INN_PAGE: number;
-  STEP_INN_PAGE: number;
+  FIR_CNT: number | null;
+  INC_CNT: number | null;
+  INC_STEP: number | null;
+  MIN_PRN_CNT: number | null;
+  MIN_INN_PAGE: number | null;
+  MAX_INN_PAGE: number | null;
+  STEP_INN_PAGE: number | null;
+  // S6 옵셋 캘린더(offset2023_price): 폐쇄 인쇄수량 래더. FIR/INC/MIN 이 모두 null 이고
+  //  PRN_CNT(행별 고정 수량값) + DFT_YN 으로 enum 을 구성한다(자유 counter 가 아닌 select 래더).
+  PRN_CNT?: number | string;
+  DFT_YN?: string;
 }
 
 export interface RedProductData {
@@ -98,7 +102,8 @@ export interface RedProductData {
   pdt_dosu_info: RedDosuInfo[];
   pdt_dosu_bnc_info: Array<{ PRN_CLR_CNT: number; COD: string; COD_NME: string }>;
   pdt_pcs_info: RedPcsInfo[];
-  pdt_disable_pcs_info: RedDisablePcs[];
+  // S6: 옵셋 캘린더는 null 로 옴(빈 비활성 규칙). 어댑터가 null→[] 평탄화.
+  pdt_disable_pcs_info: RedDisablePcs[] | null;
   pdt_prn_cnt_info: RedPrnCntInfo[];
   inner_pdt_mtrl_info?: RedMtrlInfo[];
   inner_pdt_dosu_info?: RedDosuInfo[];

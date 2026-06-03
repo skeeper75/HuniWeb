@@ -34,6 +34,7 @@ import type {
   RedMtrlInfo,
   RedSizeInfo,
   RedPcsInfo,
+  RedPrnCntInfo,
   RedPriceResponse,
   RedPresignedResponse,
   RedPriceReqBody,
@@ -137,21 +138,35 @@ function mapPcsGroups(pcsInfo: RedPcsInfo[], side: SideKey): OptionGroup[] {
 function buildQuantityRule(data: RedProductData): QuantityRule | undefined {
   const prn = data.pdt_prn_cnt_info[0];
   if (!prn) return undefined;
+  // S6: 옵셋 캘린더는 FIR/INC/MIN 이 null(폐쇄 래더 = select enum). 이때 counter 규칙은 GRP_PRN_CNT
+  //  select 가 대체하므로 null→0 평탄화로 충분(계약 QuantityRule 은 number — clamp/snap 가드가 0 을 흡수).
   return {
-    min: prn.MIN_PRN_CNT,
-    first: prn.FIR_CNT,
-    increment: prn.INC_CNT,
-    step: prn.INC_STEP,
+    min: prn.MIN_PRN_CNT ?? 0,
+    first: prn.FIR_CNT ?? 0,
+    increment: prn.INC_CNT ?? 0,
+    step: prn.INC_STEP ?? 0,
     default: prn.DFT_PRN_CNT,
-    pageMin: prn.MIN_INN_PAGE,
-    pageMax: prn.MAX_INN_PAGE,
-    pageStep: prn.STEP_INN_PAGE,
+    pageMin: prn.MIN_INN_PAGE ?? undefined,
+    pageMax: prn.MAX_INN_PAGE ?? undefined,
+    pageStep: prn.STEP_INN_PAGE ?? undefined,
   };
+}
+
+// S6 옵셋 캘린더(offset2023_price): pdt_prn_cnt_info 가 자유 counter(FIR/INC 보유)가 아니라
+//  폐쇄 인쇄수량 래더(FIR/INC/MIN 모두 null + 행별 PRN_CNT 고정값)인지 판정. 그렇다면 PRN_CNT 는
+//  counter-input 이 아니라 select-box enum 으로 렌더해야 한다(임의값 PRICE=0 방지, 명세 §3.3-A).
+function prnCntLadder(data: RedProductData): RedPrnCntInfo[] {
+  const rows = data.pdt_prn_cnt_info ?? [];
+  const ladder = rows.filter(
+    (r) => r.FIR_CNT == null && r.INC_CNT == null && r.PRN_CNT != null && num(r.PRN_CNT) > 0,
+  );
+  return ladder;
 }
 
 function mapOptionGroups(data: RedProductData, hasInner: boolean, priceScheme: string): OptionGroup[] {
   const groups: OptionGroup[] = [];
   const q = buildQuantityRule(data);
+  const prnLadder = prnCntLadder(data);
 
   // 규격
   const visibleSizes = data.pdt_size_info.filter((s) => s.HIDE_YN !== 'Y');
@@ -281,10 +296,32 @@ function mapOptionGroups(data: RedProductData, hasInner: boolean, priceScheme: s
     }
   }
 
-  // 수량 (counter-input) — 전 상품 공통. FIR/INC/STEP/DFT 기반 입력형 그룹.
-  // [D1] 이전에는 mapConstraints 의 quantity 객체로만 들어가 OptionPanel 이 렌더할 그룹이 없었다.
-  // 이 그룹이 UI 표면, mapConstraints 의 quantity 는 검증(clamp/snap) 소스 — 둘 다 같은 buildQuantityRule 사용.
-  if (q) {
+  // 수량/인쇄수량.
+  // (A) S6 옵셋 캘린더: PRN_CNT 가 폐쇄 래더(FIR/INC null)면 counter-input 이 아니라 select-box enum.
+  //     임의 수량 입력 시 PRICE=0(서버가 등록 래더값만 단가 보유) → 자유입력 왜곡 금지(명세 §3.3-A, 선택지 A).
+  //     componentType 은 기존 select-box 재사용(신규 타입 0). 값 = pdt_prn_cnt_info[].PRN_CNT.
+  // (B) 그 외(책자/디지털/굿즈): 기존 counter-input GRP_QUANTITY 유지.
+  if (prnLadder.length > 0) {
+    // store.defaultSelections 가 첫 값을 기본 선택하므로 기본값(DFT_YN=Y)을 선두로 정렬.
+    const ordered = [...prnLadder].sort(
+      (a, b) => (b.DFT_YN === 'Y' ? 1 : 0) - (a.DFT_YN === 'Y' ? 1 : 0),
+    );
+    groups.push({
+      id: 'GRP_PRN_CNT',
+      side: 'default',
+      label: '수량',
+      componentType: DATASET_COMPONENT_TYPE.material, // 'select-box' (폐쇄 enum, 신규 타입 아님)
+      required: true,
+      visible: true,
+      values: ordered.map((r) => ({
+        id: String(num(r.PRN_CNT)),
+        label: String(num(r.PRN_CNT)),
+        disabled: false,
+      })),
+    });
+  } else if (q) {
+    // [D1] 이전에는 mapConstraints 의 quantity 객체로만 들어가 OptionPanel 이 렌더할 그룹이 없었다.
+    // 이 그룹이 UI 표면, mapConstraints 의 quantity 는 검증(clamp/snap) 소스 — 둘 다 같은 buildQuantityRule 사용.
     groups.push({
       id: 'GRP_QUANTITY',
       side: 'default',
@@ -309,7 +346,8 @@ function mapOptionGroups(data: RedProductData, hasInner: boolean, priceScheme: s
 function mapConstraints(data: RedProductData): NormalizedConstraints {
   const base = data.pdt_base_info[0];
 
-  const disableRules: DisableRule[] = data.pdt_disable_pcs_info.map((r) => ({
+  // S6: 일부 상품(옵셋 캘린더)은 pdt_disable_pcs_info 가 null(빈 비활성 규칙). null→[] 평탄화.
+  const disableRules: DisableRule[] = (data.pdt_disable_pcs_info ?? []).map((r) => ({
     triggerValueId: r.MTRL_CD,
     // PCS_DTL_CD null = 그룹 전체 비활성. 그룹 id 는 mapPcsGroups 와 동일 규칙(PCS_ prefix).
     disablesGroupId: r.PCS_DTL_CD === null ? `PCS_${r.PCS_CD}` : undefined,

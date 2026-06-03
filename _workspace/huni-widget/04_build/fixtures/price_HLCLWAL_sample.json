@@ -1,0 +1,56 @@
+{
+  "_note": "S6 캘린더 HLCLWAL offset2023_price 가격응답 fixture — s6_cal_HLCLWAL.json rel 7395(완전 호출 PRN_CNT 500/ORD_CNT 1 → PRICE 2,368,500, 로그인 실가). result_sum + result(공정별 라인). 책자와 동일 envelope.",
+  "retCode": 200,
+  "result": [
+    {
+      "PCS_CD": "CUT_DFT",
+      "PCS_DTL_CD": "DFXXX",
+      "PRICE": 0,
+      "PRICE_VAT": 0,
+      "PRICE_MALL": 0,
+      "PRICE_MALL_VAT": 0,
+      "ORG_PRICE": 0,
+      "ORG_PRICE_VAT": 0
+    },
+    {
+      "PCS_CD": "HOL_DFT",
+      "PCS_DTL_CD": "DFXXX",
+      "PRICE": 6300,
+      "PRICE_VAT": 630,
+      "PRICE_MALL": 6300,
+      "PRICE_MALL_VAT": 630,
+      "ORG_PRICE": 6300,
+      "ORG_PRICE_VAT": 630
+    },
+    {
+      "PCS_CD": "PRT_DFT",
+      "PCS_DTL_CD": "DFXXS",
+      "PRICE": 1955100,
+      "PRICE_VAT": 195510,
+      "PRICE_MALL": 1955100,
+      "PRICE_MALL_VAT": 195510,
+      "ORG_PRICE": 1955100,
+      "ORG_PRICE_VAT": 195510
+    },
+    {
+      "PCS_CD": "RIN_CUT",
+      "PCS_DTL_CD": "BPTOP",
+      "PRICE": 407100,
+      "PRICE_VAT": 40710,
+      "PRICE_MALL": 407100,
+      "PRICE_MALL_VAT": 40710,
+      "ORG_PRICE": 407100,
+      "ORG_PRICE_VAT": 40710
+    }
+  ],
+  "result_sum": {
+    "PCS_ETC_PRICE": 413400,
+    "PCS_PRI_PRICE": 1955100,
+    "PRICE": 2368500,
+    "PRICE_VAT": 236850,
+    "PRICE_MALL": 2368500,
+    "PRICE_MALL_VAT": 236850,
+    "ORG_PRICE": 2368500,
+    "ORG_PRICE_VAT": 236850
+  }
+}

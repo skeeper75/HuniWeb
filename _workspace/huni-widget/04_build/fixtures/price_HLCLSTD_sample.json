@@ -1,0 +1,56 @@
+{
+  "_note": "S6 캘린더 HLCLSTD offset2023_price 가격응답 fixture — s6_cal_HLCLSTD.json rel 7440(완전 호출 세로형 90x180, PRN_CNT 500/ORD_CNT 1 → PRICE 778,500, 로그인 실가). PRICE_MALL==PRICE==ORG_PRICE → finalPrice=ORG_PRICE 워터폴. 라인: CLD_STD 198000/CUT_DFT 0/PRT_DFT 362700/RIN_DFT 217800.",
+  "retCode": 200,
+  "result": [
+    {
+      "PCS_CD": "CLD_STD",
+      "PCS_DTL_CD": "BK001",
+      "PRICE": 198000,
+      "PRICE_VAT": 19800,
+      "PRICE_MALL": 198000,
+      "PRICE_MALL_VAT": 19800,
+      "ORG_PRICE": 198000,
+      "ORG_PRICE_VAT": 19800
+    },
+    {
+      "PCS_CD": "CUT_DFT",
+      "PCS_DTL_CD": "DFXXX",
+      "PRICE": 0,
+      "PRICE_VAT": 0,
+      "PRICE_MALL": 0,
+      "PRICE_MALL_VAT": 0,
+      "ORG_PRICE": 0,
+      "ORG_PRICE_VAT": 0
+    },
+    {
+      "PCS_CD": "PRT_DFT",
+      "PCS_DTL_CD": "DFXXD",
+      "PRICE": 362700,
+      "PRICE_VAT": 36270,
+      "PRICE_MALL": 362700,
+      "PRICE_MALL_VAT": 36270,
+      "ORG_PRICE": 362700,
+      "ORG_PRICE_VAT": 36270
+    },
+    {
+      "PCS_CD": "RIN_DFT",
+      "PCS_DTL_CD": "BPTOP",
+      "PRICE": 217800,
+      "PRICE_VAT": 21780,
+      "PRICE_MALL": 217800,
+      "PRICE_MALL_VAT": 21780,
+      "ORG_PRICE": 217800,
+      "ORG_PRICE_VAT": 21780
+    }
+  ],
+  "result_sum": {
+    "PCS_ETC_PRICE": 415800,
+    "PCS_PRI_PRICE": 362700,
+    "PRICE": 778500,
+    "PRICE_VAT": 77850,
+    "PRICE_MALL": 778500,
+    "PRICE_MALL_VAT": 77850,
+    "ORG_PRICE": 778500,
+    "ORG_PRICE_VAT": 77850
+  }
+}
