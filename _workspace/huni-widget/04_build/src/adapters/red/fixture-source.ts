@@ -18,6 +18,8 @@ import type {
 import productPRBKYPR from '../../../fixtures/product_PRBKYPR.json';
 import productGSTGMIC from '../../../fixtures/product_GSTGMIC.json';
 import productACNTHAP from '../../../fixtures/product_ACNTHAP.json';
+// B1 SizeMatrix2D 대표 — 에코백(real_price, 등록규격 300X340 → PRICE=3300). 게이트 F-1.
+import productAIPPCUT from '../../../fixtures/product_AIPPCUT.json';
 // S1 디지털인쇄(명함·엽서) fixture — 단일면, 내지 분리 없음, 별색 finish 그룹 포함.
 import productBCSPDFT from '../../../fixtures/product_BCSPDFT.json';
 import productBCSPWHT from '../../../fixtures/product_BCSPWHT.json';
@@ -40,6 +42,7 @@ import priceQ300 from '../../../fixtures/price_q300_p10.json';
 import priceDigital from '../../../fixtures/price_BCSPDFT_sample.json';
 import priceSticker from '../../../fixtures/price_STTHCIC_sample.json'; // 반칼/규격 스티커 digital_price (비로그인 PRICE=0)
 import priceStickerFixed from '../../../fixtures/price_STPADPN_sample.json'; // FixedUnit vTmpl_price — 실 시트가 PRICE=4000(비로그인 공개가)
+import priceEcobag from '../../../fixtures/price_AIPPCUT_sample.json'; // B1 SizeMatrix2D real_price — 등록규격 300X340 → PRICE=3300(공개가, 룩업 단가)
 import priceBanner from '../../../fixtures/price_BNBNFBL_sample.json'; // S3 SizeMatrix2D real_price — CUT_WDT=5000/CUT_HGH=900 수치 직접전달. 비로그인 PRICE=0(shape 검증)
 import pricePouch from '../../../fixtures/price_GSPUFBC_sample.json'; // S5 tmpl_price — 11in세로 ORD_CNT=100 PRN_CNT=1 → PRICE=2,850,000(로그인 실가, 평탄단가)
 import priceCalendarStd from '../../../fixtures/price_HLCLSTD_sample.json'; // S6 offset2023_price — 세로형 PRN_CNT=500/ORD_CNT=1 → PRICE=778,500(로그인 실가, 책자 envelope)
@@ -50,6 +53,8 @@ const PRODUCTS: Record<string, unknown> = {
   PRBKYPR: productPRBKYPR,
   GSTGMIC: productGSTGMIC,
   ACNTHAP: productACNTHAP,
+  // B1 SizeMatrix2D 대표 — 에코백(real_price, 0×0 sentinel→dimension-matrix, 등록규격 300X340)
+  AIPPCUT: productAIPPCUT,
   // S1 디지털인쇄
   BCSPDFT: productBCSPDFT, // 일반 명함 (단/양면)
   BCSPWHT: productBCSPWHT, // 화이트인쇄(별색) 컬러명함
@@ -75,7 +80,13 @@ const FIXED_UNIT_CODES = new Set(['STPADPN', 'STPADNM']);
 
 export class FixtureRedDataSource implements RedDataSource {
   async fetchProduct(code: string): Promise<RedDigitalProductResponse> {
-    const p = PRODUCTS[code] ?? productPRBKYPR;
+    // [HARD] 미보유 productCode 는 명시적 에러 — 침묵 PRBKYPR(책자) 폴백 금지(게이트 F-1).
+    //  이전엔 `?? productPRBKYPR` 폴백으로 AIPPCUT 등이 책자 구조로 가장(masquerade) → 검증 공허화.
+    //  fixture 미보유 상품은 "unknown product"로 표면화(어댑터/BFF 경계 책임).
+    const p = PRODUCTS[code];
+    if (!p) {
+      throw new Error(`[fixture] unknown product "${code}" — no fixture (silent PRBKYPR fallback removed, F-1)`);
+    }
     return p as RedDigitalProductResponse;
   }
 
@@ -85,6 +96,11 @@ export class FixtureRedDataSource implements RedDataSource {
     // @MX:NOTE S2 FixedUnit fixture 만 비로그인에도 실가(공개가) — digital_price 와 응답 shape 동일.
     if (FIXED_UNIT_CODES.has(req.productCode)) {
       return priceStickerFixed as RedPriceResponse;
+    }
+    // B1 에코백(AIPPCUT) — SizeMatrix2D real_price. 등록규격 300X340 → PRICE=3300(공개 룩업단가).
+    // @MX:NOTE real_price 는 등록 (규격×자재) 그리드 룩업(off-grid=0). 단가는 BFF 권위(INV-1).
+    if (req.productCode === 'AIPPCUT') {
+      return priceEcobag as RedPriceResponse;
     }
     // 스티커(ST) PriceTable3D 변형 — digital_price, THO_DFT 라인 포함. 비로그인 PRICE=0(shape 검증용).
     if (req.productCode.startsWith('ST')) {

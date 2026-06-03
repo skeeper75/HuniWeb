@@ -385,8 +385,19 @@ function mapConstraints(data: RedProductData): NormalizedConstraints {
 // [HARD] quantity↔ORD_CNT / printCount↔PRN_CNT 분리. 위젯은 두 수치를 각자 echo만,
 //  ORD_INFO 직렬화는 어댑터(서버) 책임(INV-1). printCount 미전달(S0~S4) → PRN_CNT=1(하위호환).
 // [S5 실측] tmpl/tiered_price 는 ORD_INFO[0]에 ORD_CNT+PRN_CNT 둘 다 있어야 PRICE>0(둘 다 누락 시 침묵 0).
+// [HARD] 출력 shape = 캡처 실측 reqBody(captures/b1_AIPPCUT.json) field-for-field 정합:
+//  `{dataJson:{ORD_INFO:[{...}], PCS_INFO, price_gbn, mb_cust_cod}}`.
+//  - dataJson 래퍼 + mb_cust_cod(customerTier??'10000000') 필수 — 누락 시 실 Red 거부/침묵0(F-2).
+//  - 책자(inner side 보유 → materials.inner/colorCounts.inner 존재)는 표지/내지 분리필드(CVR_/INN_*)
+//    + PAGE_CNT 출력(data-adapter.md:80-86). 단일면 상품은 undefined → JSON 직렬화 시 생략.
+//  - DOSU_COD 는 의도 omit(OPEN-1) — PRN_CLR_CNT 가 도수 가격의미 운반(테스트 입증, 회귀 가드 유지).
 export function serializeRedPriceRequest(req: NormalizedPriceRequest): RedPriceReqBody {
   const d = req.dimensions[0];
+  // 책자 판정: 내지(inner) 자재/색 또는 면수(pageCount)가 존재하면 표지/내지 분리 직렬화.
+  const isBook =
+    req.materials.inner !== undefined ||
+    req.colorCounts.inner !== undefined ||
+    req.pageCount !== undefined;
   const ord: RedPriceReqOrdInfo = {
     PDT_CD: req.productCode,
     CUT_WDT: d?.cutW ?? 0,
@@ -398,15 +409,26 @@ export function serializeRedPriceRequest(req: NormalizedPriceRequest): RedPriceR
     PRN_CLR_CNT: req.colorCounts.default,
     MTRL_CD: req.materials.default,
   };
+  if (isBook) {
+    // 책자 표지/내지 분리 (data-adapter.md:81-84). 표지=default, 내지=inner.
+    ord.PAGE_CNT = req.pageCount;
+    ord.CVR_CLR_CNT = req.colorCounts.default;
+    ord.INN_CLR_CNT = req.colorCounts.inner;
+    ord.CVR_MTRL_CD = req.materials.default;
+    ord.INN_MTRL_CD = req.materials.inner;
+  }
   return {
-    ORD_INFO: [ord],
-    PCS_INFO: req.selectedFinishes.map((f) => ({
-      // PCS_<CD> 그룹 id 에서 Red PCS_COD 복원(어댑터 내부 역매핑).
-      PCS_COD: f.groupId.startsWith('PCS_') ? f.groupId.slice(4) : f.groupId,
-      PCS_DTL_COD: f.valueId,
-      ATTB: '',
-    })),
-    price_gbn: req.priceSchemeKey, // 불투명 echo (tmpl_price / tiered_price)
+    dataJson: {
+      ORD_INFO: [ord],
+      PCS_INFO: req.selectedFinishes.map((f) => ({
+        // PCS_<CD> 그룹 id 에서 Red PCS_COD 복원(어댑터 내부 역매핑).
+        PCS_COD: f.groupId.startsWith('PCS_') ? f.groupId.slice(4) : f.groupId,
+        PCS_DTL_COD: f.valueId,
+        ATTB: '',
+      })),
+      price_gbn: req.priceSchemeKey, // 불투명 echo (tmpl_price / tiered_price)
+      mb_cust_cod: req.customerTier ?? '10000000', // 고객등급 (미전달 시 비회원 공개가)
+    },
   };
 }
 

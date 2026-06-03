@@ -162,10 +162,26 @@ export interface RedPriceReqOrdInfo {
   PRN_CLR_CNT?: number;
   MTRL_CD?: string;
   DOSU_COD?: string;
+  // ── 책자 분리필드 (data-adapter.md:80-86) — 표지/내지 색·자재 분리 + 면수.
+  //  단일면 상품엔 부재(undefined → JSON 직렬화 시 생략). 책자(inner side 보유)에서만 출력.
+  PAGE_CNT?: number;
+  CVR_CLR_CNT?: number;
+  INN_CLR_CNT?: number;
+  CVR_MTRL_CD?: string;
+  INN_MTRL_CD?: string;
 }
 
-export interface RedPriceReqBody {
+// 가격요청 내부 페이로드 — 캡처 실측 reqBody 는 항상 `{dataJson:{...}}` 래핑 + mb_cust_cod 포함.
+//  근거: captures/b1_AIPPCUT.json reqBody, data-adapter.md:80-86.
+export interface RedPriceReqInner {
   ORD_INFO: RedPriceReqOrdInfo[];
   PCS_INFO: Array<{ PCS_COD: string; PCS_DTL_COD: string; ATTB?: string }>;
   price_gbn: string; // 불투명 가격체계 echo (tmpl_price / tiered_price / ...)
+  mb_cust_cod: string; // 고객 등급 (정규화 customerTier ?? '10000000'). 누락 시 Red 침묵 0 위험.
+}
+
+// [HARD] 캡처 reqBody field-for-field 정합 — 최상위는 `{dataJson:{...}}` 래퍼.
+//  이전(F-2): bare {ORD_INFO,PCS_INFO,price_gbn} → 실 Red 엔드포인트 거부/침묵0 위험.
+export interface RedPriceReqBody {
+  dataJson: RedPriceReqInner;
 }

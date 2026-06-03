@@ -1,0 +1,24 @@
+{
+  "_note": "B1 SizeMatrix2D real_price 가격응답 fixture — captures/b1_AIPPCUT.json rel 2893 완전호출(등록규격 300X340, ORD_CNT=1, PRN_CNT=1, 자재 PXPLP001 + SUB_MTR/EC001) 결과 → PRICE=3300(개당단가 3300원). 로그인 mb_cust_cod=10000000 공개가. PRICE_MALL==PRICE==ORG_PRICE → finalPrice=ORG_PRICE 워터폴. off-grid(자유치수)는 Red가 0 반환(등록그리드 룩업, 연속공식 아님).",
+  "retCode": 200,
+  "result": [
+    {
+      "PCS_CD": "SUB_MTR",
+      "PCS_DTL_CD": "EC001",
+      "PRICE": 3300,
+      "PRICE_VAT": 330,
+      "PRICE_MALL": 3300,
+      "PRICE_MALL_VAT": 330,
+      "ORG_PRICE": 3300,
+      "ORG_PRICE_VAT": 330
+    }
+  ],
+  "result_sum": {
+    "PRICE": 3300,
+    "PRICE_VAT": 330,
+    "PRICE_MALL": 3300,
+    "PRICE_MALL_VAT": 330,
+    "ORG_PRICE": 3300,
+    "ORG_PRICE_VAT": 330
+  }
+}

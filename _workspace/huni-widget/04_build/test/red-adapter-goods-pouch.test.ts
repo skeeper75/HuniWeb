@@ -105,16 +105,16 @@ describe('S5 어댑터 직렬화 — quantity↔ORD_CNT / printCount↔PRN_CNT �
     expect(req.quantity).toBe(100);
     // 어댑터가 직렬화: printCount 미전달 → PRN_CNT=1(하위호환), quantity → ORD_CNT.
     const body = serializeRedPriceRequest(req);
-    expect(body.ORD_INFO[0].ORD_CNT).toBe(100);
-    expect(body.ORD_INFO[0].PRN_CNT).toBe(1); // 미전달 기본값
-    expect(body.ORD_INFO[0].CUT_WDT).toBe(230);
-    expect(body.ORD_INFO[0].CUT_HGH).toBe(288);
-    expect(body.price_gbn).toBe('tmpl_price'); // 불투명 echo
+    expect(body.dataJson.ORD_INFO[0].ORD_CNT).toBe(100);
+    expect(body.dataJson.ORD_INFO[0].PRN_CNT).toBe(1); // 미전달 기본값
+    expect(body.dataJson.ORD_INFO[0].CUT_WDT).toBe(230);
+    expect(body.dataJson.ORD_INFO[0].CUT_HGH).toBe(288);
+    expect(body.dataJson.price_gbn).toBe('tmpl_price'); // 불투명 echo
     // printCount 명시 전달(미래 후니/파우치 PRN_CNT 옵션) → PRN_CNT 로 분리 직렬화.
     const body2 = serializeRedPriceRequest({ ...req, printCount: 6 });
-    expect(body2.ORD_INFO[0].ORD_CNT).toBe(100); // 불변
-    expect(body2.ORD_INFO[0].PRN_CNT).toBe(6); // printCount 반영
-    console.log(`  serialize: ORD_CNT=${body.ORD_INFO[0].ORD_CNT} PRN_CNT=${body.ORD_INFO[0].PRN_CNT}(미전달) → printCount=6 시 PRN_CNT=${body2.ORD_INFO[0].PRN_CNT}`);
+    expect(body2.dataJson.ORD_INFO[0].ORD_CNT).toBe(100); // 불변
+    expect(body2.dataJson.ORD_INFO[0].PRN_CNT).toBe(6); // printCount 반영
+    console.log(`  serialize: ORD_CNT=${body.dataJson.ORD_INFO[0].ORD_CNT} PRN_CNT=${body.dataJson.ORD_INFO[0].PRN_CNT}(미전달) → printCount=6 시 PRN_CNT=${body2.dataJson.ORD_INFO[0].PRN_CNT}`);
   });
 
   it('selectedFinishes → PCS_INFO 직렬화 (PCS_ prefix 역매핑)', () => {
@@ -130,7 +130,7 @@ describe('S5 어댑터 직렬화 — quantity↔ORD_CNT / printCount↔PRN_CNT �
       quantity: 100,
     });
     const body = serializeRedPriceRequest(buildPriceRequest(state));
-    const cods = body.PCS_INFO.map((p2) => p2.PCS_COD);
+    const cods = body.dataJson.PCS_INFO.map((p2) => p2.PCS_COD);
     expect(cods).toContain('CUT_DFT'); // PCS_ prefix 제거 역매핑
     expect(cods).toContain('PDT_WRK');
     expect(cods).toContain('FLX_ZIP');

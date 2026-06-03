@@ -1,0 +1,284 @@
+{
+  "product": "BNBNFBL",
+  "capturedAt": "2026-06-03T07:10:29.296Z",
+  "purpose": "B1 SizeMatrix2D real_price PRICE>0 baseline OR definitive PRICE=0 diagnosis",
+  "sessionFresh": true,
+  "custCodeFromWidget": null,
+  "widgetMeta": {
+    "ok": true,
+    "selects": [
+      {
+        "name": "material",
+        "value": "PXBFCXXX",
+        "n": 1,
+        "opts": [
+          {
+            "v": "PXBFCXXX",
+            "t": "현수막"
+          }
+        ]
+      },
+      {
+        "name": "dosu",
+        "value": "SID_S",
+        "n": 1,
+        "opts": [
+          {
+            "v": "SID_S",
+            "t": "단면"
+          }
+        ]
+      },
+      {
+        "name": "sizes",
+        "value": "1",
+        "n": 5,
+        "opts": [
+          {
+            "v": "0",
+            "t": "사이즈직접입력"
+          },
+          {
+            "v": "1",
+            "t": "5000X900"
+          },
+          {
+            "v": "3",
+            "t": "900X900"
+          },
+          {
+            "v": "2",
+            "t": "900X5000"
+          },
+          {
+            "v": "4",
+            "t": "1800X1780"
+          }
+        ]
+      },
+      {
+        "name": "PRN_CNT",
+        "value": "1",
+        "n": 1,
+        "opts": [
+          {
+            "v": "1",
+            "t": "1"
+          }
+        ]
+      }
+    ],
+    "numInputs": [
+      {
+        "name": "",
+        "value": "5000",
+        "ro": false
+      },
+      {
+        "name": "",
+        "value": "900",
+        "ro": false
+      },
+      {
+        "name": "",
+        "value": "5004",
+        "ro": false
+      },
+      {
+        "name": "",
+        "value": "904",
+        "ro": false
+      },
+      {
+        "name": "",
+        "value": "1",
+        "ro": false
+      }
+    ]
+  },
+  "stepA": {
+    "ok": true,
+    "sizePicked": "5000X900",
+    "qtyName": "",
+    "prnSel": "1"
+  },
+  "widgetPriceCalls": [
+    {
+      "rel": 2962,
+      "url": "/rp-api/ko/product_price/get_ajax_price_vTmpl",
+      "status": 200,
+      "reqBody": "{\"dataJson\":{\"ORD_INFO\":[{\"PDT_CD\":\"BNBNFBL\",\"MTRL_CD\":\"PXBFCXXX\",\"CUT_WDT\":5000,\"CUT_HGH\":900,\"WRK_WDT\":5004,\"WRK_HGH\":904,\"DOSU_COD\":\"SID_S\",\"PRN_CLR_CNT\":4}],\"PCS_INFO\":[{\"PCS_COD\":\"CUT_ZUN\",\"PCS_DTL_COD\":\"ZDINC\",\"ATTB\":\"\"}],\"price_gbn\":\"real_price\",\"mb_cust_cod\":\"10000000\"}}",
+      "result_sum": {
+        "PRICE": 0,
+        "PRICE_VAT": 0,
+        "PRICE_MALL": 0,
+        "PRICE_MALL_VAT": 0,
+        "ORG_PRICE": 0,
+        "ORG_PRICE_VAT": 0
+      },
+      "priceLog": "개당단가 : 0.00원, 인쇄수량DDDDD : 0, 주문건수 : 0"
+    },
+    {
+      "rel": 3213,
+      "url": "/rp-api/ko/product_price/get_ajax_price_vTmpl",
+      "status": 200,
+      "reqBody": "{\"dataJson\":{\"ORD_INFO\":[{\"PDT_CD\":\"BNBNFBL\",\"MTRL_CD\":\"PXBFCXXX\",\"CUT_WDT\":5000,\"CUT_HGH\":900,\"WRK_WDT\":5004,\"WRK_HGH\":904,\"PRN_CNT\":1,\"ORD_CNT\":1,\"DOSU_COD\":\"SID_S\",\"PRN_CLR_CNT\":4}],\"PCS_INFO\":[{\"PCS_COD\":\"CUT_ZUN\",\"PCS_DTL_COD\":\"ZDINC\",\"ATTB\":\"\"}],\"price_gbn\":\"real_price\",\"mb_cust_cod\":\"10000000\"}}",
+      "result_sum": {
+        "PRICE": 0,
+        "PRICE_VAT": 0,
+        "PRICE_MALL": 0,
+        "PRICE_MALL_VAT": 0,
+        "ORG_PRICE": 0,
+        "ORG_PRICE_VAT": 0
+      },
+      "priceLog": "개당단가 : 0.00원, 인쇄수량DDDDD : 1, 주문건수 : 1"
+    },
+    {
+      "rel": 11868,
+      "url": "/rp-api/ko/product_price/get_ajax_price_vTmpl",
+      "status": 200,
+      "reqBody": "{\"dataJson\":{\"ORD_INFO\":[{\"PDT_CD\":\"BNBNFBL\",\"MTRL_CD\":\"PXBFCXXX\",\"CUT_WDT\":5000,\"CUT_HGH\":900,\"WRK_WDT\":5004,\"WRK_HGH\":904,\"PRN_CNT\":1,\"ORD_CNT\":1,\"DOSU_COD\":\"SID_S\",\"PRN_CLR_CNT\":4}],\"PCS_INFO\":[{\"PCS_COD\":\"CUT_ZUN\",\"PCS_DTL_COD\":\"ZDINC\",\"ATTB\":\"\"}],\"price_gbn\":\"real_price\",\"mb_cust_cod\":\"10000000\"}}",
+      "result_sum": {
+        "PRICE": 0,
+        "PRICE_VAT": 0,
+        "PRICE_MALL": 0,
+        "PRICE_MALL_VAT": 0,
+        "ORG_PRICE": 0,
+        "ORG_PRICE_VAT": 0
+      },
+      "priceLog": "개당단가 : 0.00원, 인쇄수량DDDDD : 1, 주문건수 : 1"
+    },
+    {
+      "rel": 12172,
+      "url": "/rp-api/ko/product_price/get_ajax_price_vTmpl",
+      "status": 200,
+      "reqBody": "{\"dataJson\":{\"ORD_INFO\":[{\"PDT_CD\":\"BNBNFBL\",\"MTRL_CD\":\"PXBFCXXX\",\"CUT_WDT\":5000,\"CUT_HGH\":900,\"WRK_WDT\":5004,\"WRK_HGH\":904,\"PRN_CNT\":1,\"ORD_CNT\":1,\"DOSU_COD\":\"SID_S\",\"PRN_CLR_CNT\":4}],\"PCS_INFO\":[{\"PCS_COD\":\"CUT_ZUN\",\"PCS_DTL_COD\":\"ZDINC\",\"ATTB\":\"\"}],\"price_gbn\":\"real_price\",\"mb_cust_cod\":\"\"}}",
+      "result_sum": {
+        "PRICE": 0,
+        "PRICE_VAT": 0,
+        "PRICE_MALL": 0,
+        "PRICE_MALL_VAT": 0,
+        "ORG_PRICE": 0,
+        "ORG_PRICE_VAT": 0
+      },
+      "priceLog": "개당단가 : 0.00원, 인쇄수량DDDDD : 1, 주문건수 : 1"
+    },
+    {
+      "rel": 12486,
+      "url": "/rp-api/ko/product_price/get_ajax_price_vTmpl",
+      "status": 200,
+      "reqBody": "{\"dataJson\":{\"ORD_INFO\":[{\"PDT_CD\":\"BNBNFBL\",\"MTRL_CD\":\"PXBFCXXX\",\"CUT_WDT\":600,\"CUT_HGH\":900,\"WRK_WDT\":604,\"WRK_HGH\":904,\"PRN_CNT\":1,\"ORD_CNT\":1,\"DOSU_COD\":\"SID_S\",\"PRN_CLR_CNT\":4}],\"PCS_INFO\":[{\"PCS_COD\":\"CUT_ZUN\",\"PCS_DTL_COD\":\"ZDINC\",\"ATTB\":\"\"}],\"price_gbn\":\"real_price\",\"mb_cust_cod\":\"\"}}",
+      "result_sum": {
+        "PRICE": 0,
+        "PRICE_VAT": 0,
+        "PRICE_MALL": 0,
+        "PRICE_MALL_VAT": 0,
+        "ORG_PRICE": 0,
+        "ORG_PRICE_VAT": 0
+      },
+      "priceLog": "개당단가 : 0.00원, 인쇄수량DDDDD : 1, 주문건수 : 1"
+    }
+  ],
+  "manualDiagnosis": [
+    {
+      "custCode": "10000000",
+      "ord": {
+        "PDT_CD": "BNBNFBL",
+        "MTRL_CD": "PXBFCXXX",
+        "CUT_WDT": 5000,
+        "CUT_HGH": 900,
+        "WRK_WDT": 5004,
+        "WRK_HGH": 904,
+        "PRN_CNT": 1,
+        "ORD_CNT": 1,
+        "DOSU_COD": "SID_S",
+        "PRN_CLR_CNT": 4
+      },
+      "status": 200,
+      "result_sum": {
+        "PRICE": 0,
+        "PRICE_VAT": 0,
+        "PRICE_MALL": 0,
+        "PRICE_MALL_VAT": 0,
+        "ORG_PRICE": 0,
+        "ORG_PRICE_VAT": 0
+      },
+      "log": "개당단가 : 0.00원, 인쇄수량DDDDD : 1, 주문건수 : 1"
+    },
+    {
+      "custCode": "",
+      "ord": {
+        "PDT_CD": "BNBNFBL",
+        "MTRL_CD": "PXBFCXXX",
+        "CUT_WDT": 5000,
+        "CUT_HGH": 900,
+        "WRK_WDT": 5004,
+        "WRK_HGH": 904,
+        "PRN_CNT": 1,
+        "ORD_CNT": 1,
+        "DOSU_COD": "SID_S",
+        "PRN_CLR_CNT": 4
+      },
+      "status": 200,
+      "result_sum": {
+        "PRICE": 0,
+        "PRICE_VAT": 0,
+        "PRICE_MALL": 0,
+        "PRICE_MALL_VAT": 0,
+        "ORG_PRICE": 0,
+        "ORG_PRICE_VAT": 0
+      },
+      "log": "개당단가 : 0.00원, 인쇄수량DDDDD : 1, 주문건수 : 1"
+    },
+    {
+      "custCode": "",
+      "ord": {
+        "PDT_CD": "BNBNFBL",
+        "MTRL_CD": "PXBFCXXX",
+        "CUT_WDT": 600,
+        "CUT_HGH": 900,
+        "WRK_WDT": 604,
+        "WRK_HGH": 904,
+        "PRN_CNT": 1,
+        "ORD_CNT": 1,
+        "DOSU_COD": "SID_S",
+        "PRN_CLR_CNT": 4
+      },
+      "status": 200,
+      "result_sum": {
+        "PRICE": 0,
+        "PRICE_VAT": 0,
+        "PRICE_MALL": 0,
+        "PRICE_MALL_VAT": 0,
+        "ORG_PRICE": 0,
+        "ORG_PRICE_VAT": 0
+      },
+      "log": "개당단가 : 0.00원, 인쇄수량DDDDD : 1, 주문건수 : 1"
+    },
+    {
+      "custCode": "",
+      "ord": {
+        "PDT_CD": "BNBNFBL",
+        "MTRL_CD": "PXBFCXXX",
+        "CUT_WDT": 1000,
+        "CUT_HGH": 2000,
+        "WRK_WDT": 1004,
+        "WRK_HGH": 2004,
+        "PRN_CNT": 1,
+        "ORD_CNT": 1,
+        "DOSU_COD": "SID_S",
+        "PRN_CLR_CNT": 4
+      },
+      "status": 200,
+      "result_sum": {
+        "PRICE": 0,
+        "PRICE_VAT": 0,
+        "PRICE_MALL": 0,
+        "PRICE_MALL_VAT": 0,
+        "ORG_PRICE": 0,
+        "ORG_PRICE_VAT": 0
+      },
+      "log": "개당단가 : 0.00원, 인쇄수량DDDDD : 1, 주문건수 : 1"
+    }
+  ]
+}

@@ -139,7 +139,7 @@ describe('S6 옵셋 캘린더 가격 round-trip — rel 7440 완전호출(PRN_CN
     // round-trip 은 printCount 를 명시 구성(파우치 테스트 전례). 어댑터 직렬화 정합만 증명.
     const req: NormalizedPriceRequest = { ...buildPriceRequest(state), printCount: 500 };
     const body = serializeRedPriceRequest(req);
-    const ord = body.ORD_INFO[0];
+    const ord = body.dataJson.ORD_INFO[0];
     // 캡처 reqBody ORD_INFO[0]: CUT 90x180, WRK 94x184, PRN_CNT 500, ORD_CNT 1, PRN_CLR_CNT 8, MTRL RXRAU240.
     expect(ord.PDT_CD).toBe('HLCLSTD');
     expect(ord.CUT_WDT).toBe(90);
@@ -150,9 +150,9 @@ describe('S6 옵셋 캘린더 가격 round-trip — rel 7440 완전호출(PRN_CN
     expect(ord.ORD_CNT).toBe(1); // 주문건수 = quantity
     expect(ord.PRN_CLR_CNT).toBe(8); // 도수 양면 (DOSU_COD 가격의미 운반 — OPEN-1 추가 불요)
     expect(ord.MTRL_CD).toBe('RXRAU240');
-    expect(body.price_gbn).toBe('offset2023_price'); // 불투명 echo
+    expect(body.dataJson.price_gbn).toBe('offset2023_price'); // 불투명 echo
     // PCS_INFO 역매핑(PCS_ prefix 제거): CLD_STD/CUT_DFT/RIN_DFT.
-    const cods = body.PCS_INFO.map((f) => f.PCS_COD);
+    const cods = body.dataJson.PCS_INFO.map((f) => f.PCS_COD);
     expect(cods).toContain('CLD_STD');
     expect(cods).toContain('CUT_DFT');
     expect(cods).toContain('RIN_DFT');

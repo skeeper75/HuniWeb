@@ -1,0 +1,122 @@
+{
+  "product": "PRBKYPR",
+  "capturedAt": "2026-06-03T07:13:41.218Z",
+  "purpose": "B2 editor full-flow from-edicus timeline + goto-cart case",
+  "editorTabButtons": [
+    "가이드 보기",
+    "직접 입력하기",
+    "주문 가능 자재",
+    "직접 입력하기",
+    "PDF",
+    "주문 가능 자재",
+    "가이드 보기",
+    "표지 템플릿 다운로드",
+    "PDF",
+    "에디터",
+    "무료 디자인으로 편집하기"
+  ],
+  "editorNetwork": [
+    {
+      "rel": 9144,
+      "status": 200,
+      "method": "POST",
+      "url": "/widget-api/api/editor/config/KOI"
+    },
+    {
+      "rel": 9500,
+      "status": 200,
+      "method": "POST",
+      "url": "/makers-api/token"
+    },
+    {
+      "rel": 9794,
+      "status": 200,
+      "method": "POST",
+      "url": "/makers-api/editor"
+    },
+    {
+      "rel": 10016,
+      "status": 200,
+      "method": "PUT",
+      "url": "/makers-api/v1/template/Z2NzOi8vdGVtcGxhdGUvcGFydG5lcnMvcmVkcC9yZXMvdGVtcGxhdGUvMjg1MDQxNC5qc29u/hit"
+    },
+    {
+      "rel": 11908,
+      "status": 500,
+      "method": "GET",
+      "url": "/makers-api/v2/template/resource/2850414"
+    }
+  ],
+  "fromEdicusEventCount": 6,
+  "fromEdicusActions": [
+    "load-project-report",
+    "ready-to-listen",
+    "doc-changed",
+    "request-prod-info",
+    "project-id-created",
+    "load-project-report"
+  ],
+  "fromEdicusTimeline": [
+    {
+      "relMs": 0,
+      "type": "from-edicus",
+      "action": "load-project-report",
+      "info": {
+        "status": "start",
+        "edicus_user_id": null,
+        "project_id": null,
+        "ps_code": "210x297-PER_DFT-CVR_SFT@PRBKYPR"
+      },
+      "origin": "https://edicusbase.firebaseapp.com"
+    },
+    {
+      "relMs": 105,
+      "type": "from-edicus",
+      "action": "ready-to-listen",
+      "info": null,
+      "origin": "https://edicusbase.firebaseapp.com"
+    },
+    {
+      "relMs": 1145,
+      "type": "from-edicus",
+      "action": "doc-changed",
+      "info": {
+        "ps_code": "210x297-PER_DFT-CVR_SFT@PRBKYPR",
+        "page_count": 2,
+        "template_uri": "gcs://template/partners/redp/res/template/2850414.json",
+        "div": "red_widget",
+        "vdp_catalog": "[array:0]"
+      },
+      "origin": "https://edicusbase.firebaseapp.com"
+    },
+    {
+      "relMs": 1146,
+      "type": "from-edicus",
+      "action": "request-prod-info",
+      "info": {},
+      "origin": "https://edicusbase.firebaseapp.com"
+    },
+    {
+      "relMs": 1815,
+      "type": "from-edicus",
+      "action": "project-id-created",
+      "info": {
+        "project_id": "-OuBK8JlFbp00b7-fuEB"
+      },
+      "origin": "https://edicusbase.firebaseapp.com"
+    },
+    {
+      "relMs": 1816,
+      "type": "from-edicus",
+      "action": "load-project-report",
+      "info": {
+        "status": "end",
+        "edicus_user_id": "redp-redprinting",
+        "project_id": "-OuBK8JlFbp00b7-fuEB",
+        "ps_code": "210x297-PER_DFT-CVR_SFT@PRBKYPR"
+      },
+      "origin": "https://edicusbase.firebaseapp.com"
+    }
+  ],
+  "gotoCartCaseValues": []
+}
