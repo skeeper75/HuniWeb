@@ -51,7 +51,7 @@ Load order follows the FK graph: `price_formulas` + `price_components` (parents)
 
 ## 확정 매핑 규칙 (round-2, 2026-06-04 사용자 확정 — HARD)
 
-These 7 rules are user-confirmed and authoritative. Do NOT re-derive or override silently.
+These rules are user-confirmed and authoritative. Do NOT re-derive or override silently.
 
 1. **별색 = 공정(process), NOT 도수(clr).** 별색은 `t_proc_processes` (`PROC_000007 별색인쇄` + 자식 화이트/클리어/핑크/금색/은색 `PROC_000008~012`). 상품의 별색 선택 = `t_prd_product_processes`(proc_cd). 별색 **단가**는 `디지털인쇄비` 시트 F~O 셀값을 별색인쇄비 comp_cd로 그대로 적재. [HARD] clr_cd 매핑 금지(FK 위반 — clr은 0~4도/CMYK뿐). 박도 동일(`PROC_000033 박`+17자식 → 박형압비).
 2. **단/양면 = 각 시트 단가 그대로, 양면 ≠ 단면×2.** 양면 단가를 단면×2로 계산 금지(실측상 비2배 가변). 시트의 단면·양면 단가를 각각 그대로 저장. 코팅 단/양면=`coat_side_cnt`(1/2), 인쇄 단/양면=별도 comp_cd(단면인쇄비/양면인쇄비).
@@ -59,7 +59,11 @@ These 7 rules are user-confirmed and authoritative. Do NOT re-derive or override
 4. **합가 = `t_prd_product_prices`(상품단가).** 한 시트에 단가와 합가가 공존하면 합가는 분해·재합산하지 말고 **합가 그대로 상품단가로 반영**(이중원천 불일치 방지). 적용: 커팅타공("인쇄비+소재+커팅")·포스터사인("코팅포함가")·인쇄후가공("(합가)")·제본("삼각대 포함")·스티커(소재+코팅 결합). 단 합가가 사이즈/수량별로 변하면 규칙3(component_prices 차원)에 종속.
 5. **면적형 곱셈·수량할인 = 공식 외부(적용단)** 처리, 매트릭스 셀은 룩업 적재. `addtn_yn`은 합산 플래그뿐(곱셈 표현 불가).
 6. **단가 → `t_prc_component_prices`** (구성요소 분해 단가). 적재 컬럼명은 라이브 DDL 기준(frm_typ_cd/comp_typ_cd/unit_price).
-7. **apply_ymd = 가격 효력일**(변경된 가격을 적용할 일자), `'yyyy-MM-dd'` NOT NULL. go-live 확정 시 일괄 주입, round-1과 형식 정합.
+7. **apply_ymd = 가격 효력일**(변경된 가격을 적용할 일자) NOT NULL. round-1 `t_prd_product_discount_tables`가 `20260601`(yyyyMMdd) 사용 → **round-1 값/형식과 정합**(파일럿 20260601). 프로젝트 전역 일자 형식 표준(yyyyMMdd vs yyyy-MM-dd)은 go-live 전 1개로 확정.
+8. **완제품 유형 단정 금지.** 완제품은 (가)수량×단가 (나)수량구간할인 (다)여러 유형 결합 등 **여러 방향으로 쓰일 수 있다**. 한 상품을 "고정가형" 등 단일 유형으로 못박지 말 것. base 단가는 component_prices/product_prices에 저장하되, 수량·할인·결합은 외부(주문 계산·round-1)에서 적용. frm_typ_cd는 base 계산 형태만 표기(단순형=단일단가), 최종가 성격을 단정하지 않음.
+9. **round-1(수량구간할인)과 통합.** 굿즈/파우치·문구·아크릴은 수량구간할인 상품이며 **round-1이 이미 매핑 완료**(`DSC_GOODSA/B`·문구·아크릴 할인테이블 + `t_prd_product_discount_tables` 상품링크). round-2는 **base 단가만** 적재하고 구간할인 **재매핑 금지**(중복). 최종가 = base 단가 × 수량 × (1 − round-1 할인율).
+
+[HARD] **스키마 변경 금지.** 가격 매핑은 기존 테이블/컬럼 구조로만 수행. 코드/자재/상품이 없으면(어색데이터) **데이터 추가 또는 보류**로 처리하되 스키마(컬럼/제약)는 건드리지 않는다. 작성하는 산출 파일에는 **매핑 근거(왜 이 테이블/차원/NULL인가)**를 반드시 남긴다. 어색한 데이터는 `03_validation/price-awkward-data.md`에 정리.
 
 비가격 시트(매핑 대상 아님): `판걸이수`(주문수량→출력매수 변환계수), `굿즈파우치(구간할인)`(round-1 t_dsc), `후가공_박(백업)`(중복 제외). → `01_excel/price-sheet-scope.md`.
 

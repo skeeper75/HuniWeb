@@ -1,52 +1,57 @@
-# 가격 매핑 파일럿 — 굿즈파우치 고정가형 (round-2)
+# 가격 매핑 파일럿 — 굿즈파우치 (round-2)
 
-첫 통합 매핑 파일럿. 고정가형 `굿즈파우치(가격포함)` 3상품으로 **단일가 경로 + 사이즈 variant 경로**를 end-to-end 검증. **DB 무접촉**(읽기전용 참조 CSV + 적재용 CSV만 생성, 실제 적재 미수행). 식별자/컬럼/코드는 영어.
+첫 통합 매핑 파일럿. 굿즈파우치(가격포함) 상품으로 **단가 경로 + 사이즈 variant 경로**를 end-to-end 검증하고, **round-1(수량구간할인)과 통합**해 본다. **스키마 변경 0 · DB 무접촉**(읽기전용 참조 CSV + 적재용 CSV만, 실제 적재 미수행). 식별자/컬럼/코드는 영어.
 
-## 파일럿 범위 (3상품, 결정 ③ 검증)
+> [HARD 원칙] ① 완제품을 "고정가" 등 하나의 유형으로 **단정하지 않는다**(완제품은 수량×단가·구간할인·결합 등 여러 방향으로 쓰임). ② **스키마를 변경하지 않고** 기존 구조로 매핑한다. ③ 각 매핑에 **왜 그렇게 했는지(근거)**를 남긴다.
 
-| 상품 | prd_cd | 유형 | 경로 |
-|------|--------|------|------|
-| 레더코스터 (원형90mm, 3300) | PRD_000188 | 단일가 | `t_prd_product_prices` |
-| 사각손거울 (S/M/L = 5000/5500/6000) | PRD_000186 | 사이즈 variant | `t_prc_component_prices` (siz_cd 차원) |
-| 머그컵 (화이트/반투명/투명 = 6500/7500/7500) | PRD_000193 | 색상 variant | **GAP** — mat_cd 미존재 |
+## 0. 가격 계산의 전체 구조 (왜 이 매핑인가)
 
-## 매핑 설계 (확정규칙 적용)
+후니 가격은 3형태가 결합한다: **(가) 수량×단가**, **(나) 수량구간할인**, **(다) 여러 유형 결합**. 굿즈/파우치·문구·아크릴은 (가)+(나) 형태다:
 
-### 경로 A — 단일가 → `t_prd_product_prices`
-레더코스터처럼 variant 없는 상품은 상품단가 테이블 직접 적재.
-- `(PRD_000188, apply_ymd, unit_price=3300)`. 1행.
+```
+최종가 = base 단가(상품/사이즈/옵션별)  ×  수량  ×  (1 − 수량구간할인율)
+          └ round-2 (이 작업)              └ 주문        └ round-1 (이미 매핑 완료)
+```
 
-### 경로 B — 사이즈 variant → 공식엔진 + `component_prices` siz_cd
-손거울처럼 사이즈별 가격이 다른 상품은 결정③대로 component_prices의 siz_cd 차원으로. FRM_TYPE.02 단순형 공식 1개 + 완제품가 component 1개:
-- `t_prc_price_formulas`: `PRF_GDS_SQMIRROR` (frm_typ_cd=FRM_TYPE.02)
-- `t_prc_price_components`: `COMP_GDS_SQMIRROR` (comp_typ_cd=**NULL** — 아래 발견3)
-- `t_prc_formula_components`: PRF↔COMP (disp_seq=1, addtn_yn=Y)
-- `t_prc_component_prices`: 3행, siz_cd=SIZ_000384/386/388, unit_price=5000/5500/6000, 그 외 차원 NULL
-- `t_prd_product_price_formulas`: PRD_000186 → PRF_GDS_SQMIRROR
+→ 그래서 round-2는 **base 단가만** 적재한다. 구간할인은 round-1이 이미 `DSC_GOODSA/B`·문구·아크릴 할인테이블 + 상품링크로 매핑했으므로 **재매핑하지 않는다**(중복 방지). 완제품을 "고정가"로 보면 이 구조가 깨지므로 단정하지 않는다.
 
-siz_cd 해소(파일 기반): 엑셀 "S(75x130mm)/M(95x166mm)/L(120x218mm)" = `t_siz_sizes` SIZ_000384/386/388 정확 일치 + `t_prd_product_sizes` 링크 존재.
+## 1. 파일럿 상품 (3종, 경로별 근거)
 
-## 검증 결과 — 15/15 PASS (파일 기반)
+| 상품 | prd_cd | 시트 단가 | round-1 할인 | 적재 경로 · 근거 |
+|------|--------|-----------|--------------|------------------|
+| 레더코스터 | PRD_000188 | 3300 (원형90mm 단일) | DSC_GOODSA | `t_prd_product_prices`. **근거**: 사이즈/옵션 variant 없음 → 단일 단가 1행. 단가이지 합가/고정가 아님(수량·할인은 외부) |
+| 사각손거울 | PRD_000186 | S/M/L=5000/5500/6000 | DSC_GOODSA | `t_prc_component_prices`(siz_cd). **근거**: 사이즈별 단가 상이 → product_prices PK(2컬럼) 불가, siz_cd 차원 필요(결정③) |
+| 머그컵 | PRD_000193 | 화이트/반투명/투명=6500/7500/7500 | DSC_GOODSB | **보류**. **근거**: 색상→mat_cd인데 머그 색상 자재 부재(AWK-6). 자재 등록 후 적재 |
 
-- **recompute**(시트값=CSV값): 레더코스터 3300, 손거울 5000/5500/6000 전부 일치 ✓
-- **FK 존재**(참조 CSV): prd_cd·siz_cd·frm_typ_cd 전부 부모 존재 ✓
-- **제약**: 자연키 UNIQUE8 무중복, apply_ymd NOT NULL, use_yn/addtn_yn∈Y/N, PK 유니크 ✓
-- 적재순서(formulas+components→formula_components+component_prices→product_price_formulas; product_prices 독립) 준수.
+## 2. 매핑 설계 (근거 포함)
 
-## 파일럿 발견 (결정 검증 + 신규)
+### 경로 A — 단일 단가 → `t_prd_product_prices` (레더코스터)
+- `(PRD_000188, 20260601, unit_price=3300)`. 1행.
+- **왜 product_prices?** variant가 없어 한 상품에 단가 1개뿐 → PK(prd_cd, apply_ymd)로 충분. 차원 테이블 불필요.
+- **왜 3300이 고정가 아닌가?** 구간할인적용테이블=굿즈A타입(round-1). 100개 주문 시 3300×100×(1−할인). 즉 per-item 단가.
 
-1. **결정③ siz_cd 경로 입증** — 사이즈 variant는 component_prices.siz_cd로 무결하게 적재 가능. 스키마 변경 0. SIZ 코드·product_sizes 링크 기존재.
-2. **결정③ mat_cd 경로 GAP(신규)** — 색상 variant(머그 화이트/반투명/투명)는 `t_mat_materials`에 해당 자재 부재(화이트면지·아크릴화이트 등 타용도만). **해소: 머그 색상 자재 선등록(MAT 신규) 후 mat_cd 차원 적재**, 또는 색상=옵션 별도 처리. → 컨버전 게이트 항목.
-3. **comp_typ_cd NULL 처리(신규)** — 굿즈 완제품가는 PRC_COMPONENT_TYPE 5종(인쇄/코팅/용지/후가공/박형압) 어디에도 안 맞음. comp_typ_cd nullable이라 NULL 적재 가능하나, "완제품가/상품가" 유형 신설 여부는 후니 확인 대상.
-4. **apply_ymd placeholder** — `2026-07-01` 임시값. go-live 확정 시 일괄 변경(결정⑦).
+### 경로 B — 사이즈 variant 단가 → 공식 + `component_prices`(siz_cd) (손거울)
+- `PRF_GDS_SQMIRROR`(FRM_TYPE.02 단순형) ← **왜 단순형?** base가 단일 단가(인쇄+코팅 등 합산 아님). 단 "고정가"로 단정 아님 — 수량·할인이 붙는다.
+- `COMP_GDS_SQMIRROR`(comp_typ_cd=**NULL**) ← **왜 NULL?** PRC_COMPONENT_TYPE 5종에 완제품가 유형 없음(AWK-7), nullable이라 스키마 변경 없이 NULL.
+- `component_prices` 3행: siz_cd=SIZ_000384/386/388, unit_price=5000/5500/6000, 그 외 차원 NULL ← **왜 siz_cd?** 사이즈가 가격 결정축. SIZ 코드·product_sizes 링크 기존재(파일 해소).
+- `t_prd_product_price_formulas`: PRD_000186→PRF. 구간할인은 round-1 `t_prd_product_discount_tables`(DSC_GOODSA)가 별도 링크.
 
-## 산출물
+### apply 일자 — `20260601`
+- **왜 이 값?** round-1 `t_prd_product_discount_tables`가 `20260601` 사용 → 라운드 정합. (DDL comment는 `yyyy-MM-dd`라 형식 표준 확정 필요: AWK-8)
 
-- `02_mapping/load_price_pilot/` — 적재용 CSV 6종(t_prd_product_prices·t_prc_price_formulas·price_components·formula_components·component_prices·t_prd_product_price_formulas)
-- `00_schema/ref-{products,sizes,materials,product-processes,product-sizes}.csv` — 읽기전용 1회 추출 참조(파일 기반 작업용)
+## 3. 검증 (파일 기반, DB 무접촉)
 
-## 다음 단계
+- recompute(시트값=CSV값): 레더코스터 3300, 손거울 5000/5500/6000 일치
+- FK 존재(참조 CSV): prd_cd·siz_cd·frm_typ_cd 부모 존재
+- 제약: 자연키 UNIQUE8 무중복·apply_ymd NOT NULL·use_yn/addtn_yn∈Y/N·PK 유니크
+- round-1 통합: 손거울/레더 → DSC_GOODSA, 머그 → DSC_GOODSB 링크 기존(중복 매핑 안 함)
 
-- 머그 색상 GAP(발견2) 해소 방식 결정 → 색상 variant 파일럿 보강
-- 동일 패턴으로 고정가형 확대(상품액세서리 등) → 이후 원자합산형(엽서) 파일럿
-- comp_typ_cd 완제품가 유형 신설 여부 후니 확인
+## 4. 어색한 데이터 (→ `03_validation/price-awkward-data.md` 상세)
+
+AWK-1 미등록 상품 5종 · AWK-3 variant 35종 · AWK-5 "사이즈 필수"칸에 옵션(11온스/색상) 혼재 · AWK-6 머그 색상 mat_cd 부재 · AWK-7 완제품가 comp_typ_cd 부재 · AWK-8 apply 일자 형식 불일치 · AWK-9 가격=단가+round-1 할인.
+
+## 5. 산출물 · 다음
+
+- `02_mapping/load_price_pilot/` 적재용 CSV 6종(DB 미적재)
+- `00_schema/ref-*.csv` 읽기전용 참조 5종
+- 다음: AWK-6(머그 자재)·AWK-8(일자형식)·AWK-7(완제품가 유형) 후니 확정 → 색상 variant 보강 → 고정가형 확대 → 원자합산형(엽서) 파일럿

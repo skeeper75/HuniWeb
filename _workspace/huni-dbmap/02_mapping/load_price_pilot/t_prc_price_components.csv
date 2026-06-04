@@ -1,2 +1,2 @@
 comp_cd,comp_nm,comp_typ_cd,note,use_yn
-COMP_GDS_SQMIRROR,사각손거울 완제품가,,완제품 고정가(인쇄/코팅 등 분해 아님) → comp_typ_cd NULL,Y
+COMP_GDS_SQMIRROR,사각손거울 상품단가,,comp_typ_cd=NULL: PRC_COMPONENT_TYPE 5종(인쇄/코팅/용지/후가공/박형압)에 '완제품가' 유형 부재→어색데이터. 스키마 변경 없이 NULL 적재,Y
