@@ -12,6 +12,13 @@ G 기준서(_workspace/huni-dbmap/05_method/G-extraction-spec.md) 구현체.
 - 빈셀 보존(공백 != 없음), 유효 0 보존(타입 강제 금지).
 - 셀메타: 스레드댓글(XML 직접 파싱)·배경색 fill·★제약텍스트 플래그를 셀/행 귀속.
 
+엑셀 정보 축 전수(8축, G §⑨) — 어느 축도 버리지 않음(무손실):
+  ①값 ②행숨김(row_hidden) ③열숨김(col_hidden) ④셀코멘트 ⑤배경색fill+글자색font
+  ⑥수식여부(is_formula+formula) ⑦하이퍼링크 ⑧병합(composite).
+  행/열 숨김은 비활성/품절/참고 신호 — 제외·삭제 금지, hidden 플래그로 보존(L2가 판정).
+  숨김열도 컬럼으로 추출하되 col_hidden=true 표기(값+숨김플래그 둘 다 보존).
+  수식 셀은 data_only 값과 원본 수식 둘 다 보존(실사 S열 `=SUM(R)*1.1` VAT파생 등).
+
 산출: silsa-l1.csv (tidy 1행1레코드), silsa-l1-meta.csv (셀/시트 메타).
 시트명 파라미터화 — 전수 확장 가능.
 
@@ -156,13 +163,25 @@ def find_data_rows(ws, anchor_cols):
 
 def extract_sheet(xlsx_path, sheet_name, out_csv, out_meta):
     wb = openpyxl.load_workbook(xlsx_path, data_only=True)
-    wb_fmt = openpyxl.load_workbook(xlsx_path, data_only=False)  # fill/font
+    wb_fmt = openpyxl.load_workbook(xlsx_path, data_only=False)  # fill/font + 수식
     ws = wb[sheet_name]
-    ws_f = wb_fmt[sheet_name]
+    ws_f = wb_fmt[sheet_name]      # data_only=False -> 수식/하이퍼링크 원본 보유
     maxc = ws.max_column
 
     comp, work_col, cut_col, bleed_col = build_composite_headers(ws)
     comments = load_threaded_comments(xlsx_path, sheet_name)
+
+    # ---- 축③ 열숨김 (col_hidden) : col_idx -> bool. 숨김열도 컬럼으로 보존, 플래그만 표기 ----
+    col_hidden = {}
+    for c in range(1, maxc + 1):
+        letter = get_column_letter(c)
+        dim = ws.column_dimensions.get(letter)
+        col_hidden[c] = bool(dim.hidden) if dim is not None else False
+
+    # ---- 축② 행숨김 (row_hidden) : row -> bool. 숨김행도 레코드로 보존, 플래그만 표기 ----
+    def row_is_hidden(r):
+        dim = ws.row_dimensions.get(r)
+        return bool(dim.hidden) if dim is not None else False
 
     # 화이트리스트 ffill 대상 컬럼 idx (composite/단순 이름이 화이트리스트에 포함)
     ffill_cols = [c for c, name in comp.items() if name in FFILL_WHITELIST]
@@ -233,6 +252,19 @@ def extract_sheet(xlsx_path, sheet_name, out_csv, out_meta):
             cmt = comments.get(ref)
             val = ws.cell(r, c).value
             has_star = bool(val and isinstance(val, str) and "★" in val)
+            # ---- 축⑥ 수식여부 : data_only=False 워크북(ws_f)에서 식별 ----
+            fcell_val = cell.value  # cell == ws_f.cell(r,c) -> 수식이면 '=' 시작 문자열
+            is_formula = bool(isinstance(fcell_val, str) and fcell_val.startswith("="))
+            formula = fcell_val if is_formula else ""
+            # ---- 축⑦ 하이퍼링크 : ws_f.cell.hyperlink ----
+            hyperlink = ""
+            try:
+                if cell.hyperlink is not None and cell.hyperlink.target:
+                    hyperlink = cell.hyperlink.target
+            except Exception:
+                hyperlink = ""
+            # ---- 축③ 열숨김 플래그 (해당 셀 컬럼이 숨김열인지) ----
+            c_hidden = col_hidden.get(c, False)
             if fg and fg not in ("00000000", "FFFFFFFF"):
                 fill_meaning = FILL_MEANING.get(fg)
                 if fg == "FFD9D9D9" and sheet_name in GRAY_CONFIRMED_SHEETS:
@@ -240,27 +272,39 @@ def extract_sheet(xlsx_path, sheet_name, out_csv, out_meta):
             else:
                 fg = None
                 fill_meaning = None
-            if fg or cmt or has_star or (font_rgb and font_rgb not in ("FF000000", "00000000")):
+            font_show = font_rgb if (font_rgb and font_rgb not in ("FF000000", "00000000")) else None
+            if (fg or cmt or has_star or font_show or is_formula or hyperlink or c_hidden):
                 m = {}
                 if fg:
                     m["fill_rgb"] = fg
                     m["fill_meaning"] = fill_meaning
-                if font_rgb and font_rgb not in ("FF000000", "00000000"):
-                    m["font_rgb"] = font_rgb
+                if font_show:
+                    m["font_rgb"] = font_show
                 if cmt:
                     m["comment_author"] = cmt["author"]
                     m["comment_text"] = cmt["text"]
                 if has_star:
                     m["has_constraint_star"] = True
+                if is_formula:
+                    m["is_formula"] = True
+                    m["formula"] = formula
+                if hyperlink:
+                    m["hyperlink"] = hyperlink
+                if c_hidden:
+                    m["col_hidden"] = True
                 cell_meta[comp[c]] = m
                 meta_rows.append({
                     "sheet": sheet_name, "row_seq": r, "ref": ref,
                     "col": comp[c],
                     "fill_rgb": fg or "", "fill_meaning": fill_meaning or "",
-                    "font_rgb": (font_rgb if (font_rgb and font_rgb not in ("FF000000", "00000000")) else ""),
+                    "font_rgb": (font_show or ""),
                     "comment_author": cmt["author"] if cmt else "",
                     "comment_text": cmt["text"] if cmt else "",
                     "has_constraint_star": "true" if has_star else "",
+                    "is_formula": "true" if is_formula else "",
+                    "formula": formula,
+                    "hyperlink": hyperlink,
+                    "col_hidden": "true" if c_hidden else "",
                 })
 
         rec = {
@@ -268,6 +312,7 @@ def extract_sheet(xlsx_path, sheet_name, out_csv, out_meta):
             "row_seq": r,
             "prd_nm": prd_nm,
             "_anchor_ffilled": "true" if ffilled else "false",
+            "_row_hidden": "true" if row_is_hidden(r) else "false",   # 축② 행숨김 메타
             "_work_size_col": (comp[work_col] if work_col else ""),
             "_work_size_value": (cols.get(comp[work_col], "") if work_col else ""),
             "cols": cols,
@@ -286,14 +331,15 @@ def extract_sheet(xlsx_path, sheet_name, out_csv, out_meta):
 
     # ---- write CSV (tidy: 한 행 = 한 레코드, cols 펼침) ----
     all_colnames = [comp[c] for c in range(1, maxc + 1)]
-    fixed = ["sheet", "row_seq", "prd_nm", "_anchor_ffilled",
+    fixed = ["sheet", "row_seq", "prd_nm", "_anchor_ffilled", "_row_hidden",
              "_work_size_col", "_work_size_value"]
     with open(out_csv, "w", newline="", encoding="utf-8-sig") as f:
         w = csv.writer(f)
         w.writerow(fixed + all_colnames + ["cell_meta_json"])
         for rec in records:
             row = [rec["sheet"], rec["row_seq"], rec["prd_nm"],
-                   rec["_anchor_ffilled"], rec["_work_size_col"], rec["_work_size_value"]]
+                   rec["_anchor_ffilled"], rec["_row_hidden"],
+                   rec["_work_size_col"], rec["_work_size_value"]]
             for name in all_colnames:
                 v = rec["cols"].get(name, "")
                 row.append(v)
@@ -305,18 +351,29 @@ def extract_sheet(xlsx_path, sheet_name, out_csv, out_meta):
         w = csv.writer(f)
         w.writerow(["sheet", "type", "row_seq", "ref", "col",
                     "fill_rgb", "fill_meaning", "font_rgb",
-                    "comment_author", "comment_text", "has_constraint_star", "text"])
+                    "comment_author", "comment_text", "has_constraint_star",
+                    "is_formula", "formula", "hyperlink", "col_hidden", "text"])
         for fn in footnotes:
             w.writerow([sheet_name, "footnote", "", fn["ref"], "", fn["fill_rgb"],
-                        "범례마커", "", "", "", "", fn["text"]])
+                        "범례마커", "", "", "", "", "", "", "", "", fn["text"]])
         for cc in col_comments:
             w.writerow([sheet_name, "column_comment", "", cc["ref"], cc["col"],
-                        "", "", "", cc["author"], cc["text"], "", ""])
+                        "", "", "", cc["author"], cc["text"], "", "", "", "", "", ""])
+        # 축③ 열숨김 = 시트레벨 메타로도 1행 기록(컬럼명+숨김플래그 보존)
+        for c in range(1, maxc + 1):
+            if col_hidden.get(c, False):
+                w.writerow([sheet_name, "hidden_column", "", get_column_letter(c) + "1",
+                            comp[c], "", "", "", "", "", "", "", "", "", "true", ""])
         for m in meta_rows:
             w.writerow([m["sheet"], "cell", m["row_seq"], m["ref"], m["col"],
                         m["fill_rgb"], m["fill_meaning"], m["font_rgb"],
-                        m["comment_author"], m["comment_text"], m["has_constraint_star"], ""])
+                        m["comment_author"], m["comment_text"], m["has_constraint_star"],
+                        m["is_formula"], m["formula"], m["hyperlink"], m["col_hidden"], ""])
 
+    hidden_row_recs = [rec["row_seq"] for rec in records if rec["_row_hidden"] == "true"]
+    hidden_cols = [comp[c] for c in range(1, maxc + 1) if col_hidden.get(c, False)]
+    formula_cells = sum(1 for m in meta_rows if m["is_formula"] == "true")
+    hyperlink_cells = sum(1 for m in meta_rows if m["hyperlink"])
     summary = {
         "sheet": sheet_name,
         "max_col": maxc,
@@ -329,6 +386,13 @@ def extract_sheet(xlsx_path, sheet_name, out_csv, out_meta):
         "column_comments": len(col_comments),
         "cell_meta_records": len(meta_rows),
         "comments_total": len(comments),
+        # 신규 4축 요약 (축②③⑥⑦)
+        "hidden_rows": sorted(hidden_row_recs),
+        "hidden_row_count": len(hidden_row_recs),
+        "hidden_cols": hidden_cols,
+        "hidden_col_count": len(hidden_cols),
+        "formula_cells": formula_cells,
+        "hyperlink_cells": hyperlink_cells,
     }
     return summary
 

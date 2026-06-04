@@ -237,6 +237,49 @@ footnote 범례 원문(전 상품시트 공통, 초록셀 FFB6D7A8에 기재 —
 
 ---
 
+## ⑨ 엑셀 정보 축 전수표 (누락0 체계화 — 13시트 실측, 2026-06-05)
+
+땜질식 규칙 추가(A1→작업사이즈공백→행숨김 연쇄 발견)로는 누락0 도달 불가가 드러나, **엑셀 셀이 가진 모든 정보 축을 전수 열거하고 어느 축도 버리지 않음**으로 체계화한다. 13시트 실측으로 축을 추출대상 8 + 미사용(무시 확정) 4로 분류했다.
+
+### 9-1. 추출 대상 축 (8) — 전부 L1 보존 (무손실)
+
+| # | 축 | 추출 방법 | 실측 분포 | 보존 위치 |
+|:-:|------|----------|----------|----------|
+| ① | 값(계산값) | `data_only=True` 셀값 | 전 시트 | `cols`(composite명) |
+| ② | **행숨김(row_hidden)** | `ws.row_dimensions[r].hidden` | 실사 18행(투명포스터★ r18~21·폼보드 r68/69·포맥스 r73·프레임리스 r77 등)·아크릴 r152~157 아크릴쉐이커★·r159~162 지비츠★ | 레코드 메타 `_row_hidden` |
+| ③ | **열숨김(col_hidden)** | `ws.column_dimensions[L].hidden` | 캘린더 I·디캘 I·실사 K·아크릴 L·굿즈 I = **전부 `출력용지규격`**(캘린더14·디캘7행 값보유·실사K 안내1·나머지 빈) | 셀메타 `col_hidden`+시트메타 `hidden_column` 행, **데이터는 컬럼으로 그대로 보존** |
+| ④ | 셀코멘트 | `xl/threadedComments/*.xml` 직접 파싱 | MAP1·실사8·아크릴8·굿즈4 등 24건 | 셀메타 `comment_author`/`comment_text` |
+| ⑤ | 배경색fill+글자색font | `fill.fgColor.rgb`/`font.color.rgb` | 노랑=신규·그레이=품절(문구·굿즈) 외 미확정색 RGB만 | 셀메타 `fill_rgb`/`fill_meaning`/`font_rgb` |
+| ⑥ | **수식여부(is_formula)** | `data_only=False` 워크북 병행 로드 → `=` 시작 식별 | 실사 S열 `=SUM(R)*1.1` VAT파생 **58건** | 셀메타 `is_formula`+`formula`(원본 수식), 값은 data_only로 별도 보존 |
+| ⑦ | **하이퍼링크** | `cell.hyperlink.target` | 책자 1건(실사·캘린더 0) | 셀메타 `hyperlink` |
+| ⑧ | 병합 | `ws.merged_cells.ranges` | 가로병합 그룹헤더 62개 | composite 컬럼명(④절) |
+
+**[HARD] 행/열 숨김 = 비활성/품절/참고 신호 — 제외·삭제 금지, hidden 플래그 필수 보존**. L1은 숨김행도 레코드로, 숨김열도 컬럼으로 그대로 뜨고 `_row_hidden`/`col_hidden` 플래그만 표기한다. "숨김=비활성→미적재" 판정은 **L2 영역**(②경계 원칙 동일). 예: 포맥스보드 A1(실사 r73)은 `_row_hidden=true` + 작업사이즈공백이 **둘 다** 레코드에 보존되어 L2가 다중 신호로 판정.
+
+**[HARD] 수식 셀 파생 플래그**: 수식 셀은 `data_only=True` 계산값과 `data_only=False` 원본 수식을 **둘 다** 보존한다(`is_formula=true`+`formula`). 수식값은 다른 셀 의존 파생값임을 L2가 알 수 있게 한다(실사 S=VAT포함가는 R가의 ×1.1 파생).
+
+### 9-2. 미사용 축 (4) — 무시 확정 (전 시트 0)
+
+| 축 | 실측 | 판정 |
+|------|------|------|
+| 취소선(strike) | 전 시트 0 | 무시 |
+| 아웃라인그룹(outline) | 전 시트 0 | 무시 |
+| 자동필터(autofilter) | 전 시트 0 | 무시 |
+| 데이터유효성(dataValidation) | 전 시트 0 | 무시 |
+
+(향후 신규 시트에서 위 축이 발견되면 추출 대상으로 승격 재검토 — 현 13시트 기준 전무.)
+
+### 9-3. 완전성 검증 보강 (⑥ 게이트에 4축 추가)
+
+| 게이트 | 기준 | 실사 실측 |
+|--------|------|----------|
+| `row_hidden_preservation` | 원본 숨김행(데이터보유) 수 == 추출 `_row_hidden=true` 레코드 수 | 8==8 PASS |
+| `col_hidden_preservation` | 원본 숨김열명 ⊆ 추출 플래그열명 + 숨김열 데이터 컬럼 보존 | K(`출력용지규격`) PASS |
+| `formula_preservation` | 원본 수식 셀 수 == 추출 `is_formula=true` 메타 수 | 58==58 PASS |
+| `hyperlink_preservation` | 원본 하이퍼링크 수 == 추출 `hyperlink` 메타 수 | 0==0 PASS |
+
+---
+
 ## 보조 산출 (05_method/G-*)
 - `G-groupheader-map.csv` — 그룹헤더 가로병합 62행 전수(sheet·merge_range·col_start·col_end·is_vertical·group_name).
 - `G-cell-comments.csv` — 스레드댓글 24행 실텍스트(sheet·ref·author·text).
