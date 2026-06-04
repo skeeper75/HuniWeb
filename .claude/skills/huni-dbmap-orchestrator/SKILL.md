@@ -1,6 +1,6 @@
 ---
 name: huni-dbmap-orchestrator
-description: 후니프린팅 DB 데이터 매핑 하네스 오케스트레이터. Railway railway DB(PostgreSQL 18.4, 29테이블) 구조를 읽기전용으로 시트화하고, 상품마스터·인쇄상품 가격표 엑셀 데이터를 DB 테이블에 매핑(매핑 설계서 + 적재용 CSV)하되 DB 직접 적재는 보류한다. 4인 에이전트 팀(dbm-schema-analyst / dbm-excel-analyst / dbm-mapping-designer / dbm-validator)으로 구조분석·엑셀분석 병렬 → 매핑 설계 → 경계면 교차검증 파이프라인을 수행한다. round-1(완료): 수량구간별 할인(t_dsc_*, 아크릴/굿즈·파우치/문구) — dbm-mapping 스킬. round-2(진행): 가격 공식 엔진(t_prc_* 4단 구조) — dbm-price-formula 스킬, fit-gap 선행 후 점진 파일럿(디지털인쇄/엽서). 'DB 매핑', 'DB 구조 파악', '테이블 시트화', '엑셀 데이터 매핑', '구간할인 매핑', '수량구간 할인', '가격표 매핑', '상품마스터 매핑', 'Railway DB', '적재 CSV 생성', '매핑 검증', 'DB매핑 하네스 실행', '하네스 재실행', '매핑 업데이트', '특정 테이블만 매핑', '추가 매핑', '가격 매핑', '가격공식 매핑', 'round-2', 't_prc 매핑', '단가표 매핑', '계산공식 매핑', '가격 스키마 적정성', '가격엔진 fit-gap', '가격 fit-gap만', '가격 매핑 다시' 요청 시 반드시 사용. 단순 질문은 직접 응답.
+description: 후니프린팅 DB 데이터 매핑 하네스 오케스트레이터. Railway railway DB(PostgreSQL 18.4, 29테이블) 구조를 읽기전용으로 시트화하고, 상품마스터·인쇄상품 가격표 엑셀 데이터를 DB 테이블에 매핑(매핑 설계서 + 적재용 CSV)하되 DB 직접 적재는 보류한다. 4인 에이전트 팀(dbm-schema-analyst / dbm-excel-analyst / dbm-mapping-designer / dbm-validator)으로 구조분석·엑셀분석 병렬 → 매핑 설계 → 경계면 교차검증 파이프라인을 수행한다. round-1(완료): 수량구간별 할인(t_dsc_*, 아크릴/굿즈·파우치/문구) — dbm-mapping 스킬. round-2(진행): 가격 공식 엔진(t_prc_* 4단 구조) — dbm-price-formula 스킬, fit-gap 선행 후 점진 파일럿(디지털인쇄/엽서). 'DB 매핑', 'DB 구조 파악', '테이블 시트화', '엑셀 데이터 매핑', '구간할인 매핑', '수량구간 할인', '가격표 매핑', '상품마스터 매핑', 'Railway DB', '적재 CSV 생성', '매핑 검증', 'DB매핑 하네스 실행', '하네스 재실행', '매핑 업데이트', '특정 테이블만 매핑', '추가 매핑', '가격 매핑', '가격공식 매핑', 'round-2', 't_prc 매핑', '단가표 매핑', '계산공식 매핑', '가격 스키마 적정성', '가격엔진 fit-gap', '가격 fit-gap만', '가격 매핑 다시', 'DB 매핑 검증', '상품 매핑 정합', '적재 검증', '9속성 검증', '엑셀 DB 대조', '매핑 감사', '정합 재검증', '기초데이터 검증', '상품마스터 검증', '사이즈/자재/공정/판형/묶음수/페이지룰/추가상품 검증', '특정 속성만 검증', '검증 다시' 요청 시 반드시 사용. 단순 질문은 직접 응답.
 ---
 
 # huni-dbmap Orchestrator
@@ -21,9 +21,11 @@ Coordinates a 4-agent team to (1) sheet the live Railway DB structure and (2) ma
 |-------|--------|--------|-------|--------|
 | round-1 | quantity-bracket discount | `t_dsc_*`, `t_prd_product_discount_tables` | `dbm-mapping` | DONE (validated GO) |
 | round-2 | price formula engine | `t_prc_*` (6 tables), `t_prd_product_price_formulas`, `t_prd_product_prices` | `dbm-price-formula` | IN PROGRESS |
+| round-3 | mapping audit (DB↔Excel 정합 검증) | `t_prd_*` 9속성 테이블 + 마스터(`t_siz_/t_mat_/t_proc_/t_cod_`) | `dbm-mapping-audit` | ACTIVE |
 
 - **round-1**: quantity-bracket discounts for 아크릴 / 굿즈·파우치 / 문구. Flat bracket rows. Complete.
 - **round-2**: the price is a *formula engine* (`판매가 = Σ components`, each component priced by a multi-dimensional lookup) — not a flat table. Excel authority: 상품마스터 `계산공식집초안` (formula intent, typed by 공식 유형) + 가격표 19 단가시트 (component matrices). **fit-gap FIRST** (is `t_prc_*` adequate? — round-1 did not extract the `t_prc_*` DDL), then **incremental pilot** (디지털인쇄/엽서, 원자합산형) before widening to all 공식 유형. See `dbm-price-formula`.
+- **round-3 (audit)**: verify the *already-loaded* `t_prd_*` data against the Excel source, per product × 9 attributes {사이즈·자재·인쇄옵션·공정·공정택일그룹·판형사이즈·묶음수·페이지룰·추가상품}. **Excel = authority**, DB 적재값을 검증. **기초데이터순** (마스터 코드 정합 → 상품별 연결 정합, FK 의존순). Classify MATCH / MISSING(엑셀O DB X) / EXTRA(DB O 엑셀 X) / MISMATCH. This is verification of existing data, NOT mapping design or loading. See `dbm-mapping-audit`.
 
 ## Team & roles
 
@@ -84,6 +86,22 @@ Round-2 reuses the same team but inserts a **fit-gap gate before mapping** (the 
 **Phase 5 — Validation** (validator, incremental): boundary cross-check including the price-specific **recompute check** (sum components per formula for a sample product+qty, compare to a known price) → `03_validation/price-validation-report.md` with GO/NO-GO. Route findings back to the designer.
 
 **Phase 6 — Report & widen decision**: surface the fit-gap verdict + pilot result + price user-decisions; on GO, ask whether to widen to the next 공식 유형 / category.
+
+## Pipeline (round-3 mapping audit)
+
+Verify already-loaded `t_prd_*` data against the Excel source. **Excel = authority**; 기초데이터순 (master → product-link). Designer/validator load `dbm-mapping-audit`. Execution mode: hybrid — parallel extract (schema-analyst DB값 + excel-analyst 엑셀값) → validator 속성별 정합 대조 (incremental, 속성당 1패스).
+
+**Phase 1 — Setup**: verify `.env.local` RAILWAY_DB_* + the two xlsx; confirm the 9 attribute tables + masters are the audit targets. Resolve scope (which attributes this run — user picks 기초데이터순 staged).
+
+**Phase 2a — DB 적재값 추출** (schema-analyst, read-only): for each in-scope attribute table (`t_prd_product_sizes/materials/print_options/processes/process_excl_groups/plate_sizes/bundle_qtys/page_rules/addons`) + masters, extract current rows → `00_schema/ref-<table>.csv` (reuse if fresh; **re-extract if stale** — past 권위반전 교훈). NEVER write to DB.
+
+**Phase 2b — 엑셀 원천 파싱** (excel-analyst, parallel): parse 상품마스터 + 가격표 for the 9 attributes per product (prd_nm 기준) → `04_audit/excel-attrs-normalized.md` + per-attr normalized rows. Map which 시트/컬럼 = which attribute.
+
+**Phase 3 — 마스터 정합** (validator, FIRST): Step 1 of dbm-mapping-audit — 사이즈/자재/공정/코드 마스터가 엑셀 코드체계와 정합하는지. Broken master flags dependent product-links as suspect → `04_audit/00_master-parity.md`. Gate: 상품 연결 검증은 마스터 정합 확인 후.
+
+**Phase 4 — 속성별 연결 정합** (validator, incremental): per attribute, DB↔Excel by prd_nm → MATCH/MISSING/EXTRA/MISMATCH → `04_audit/<attr>-parity.md` + `<attr>-mismatches.csv`. 기초데이터순 staged (사용자 선택). EXTRA는 삭제 단정 금지(플래그+출처).
+
+**Phase 5 — 종합 + 보고** (validator → lead): `04_audit/audit-summary.md` dashboard (속성별 4분류 카운트) + 이슈 목록. Lead surfaces to user (어느 속성 우선 정정할지). Known signal: 묶음수 4행 vs 엑셀 → MISSING 정량 확증 예상.
 
 ## Data passing
 
