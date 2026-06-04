@@ -59,9 +59,10 @@ These rules are user-confirmed and authoritative. Do NOT re-derive or override s
 4. **합가 = `t_prd_product_prices`(상품단가).** 한 시트에 단가와 합가가 공존하면 합가는 분해·재합산하지 말고 **합가 그대로 상품단가로 반영**(이중원천 불일치 방지). 적용: 커팅타공("인쇄비+소재+커팅")·포스터사인("코팅포함가")·인쇄후가공("(합가)")·제본("삼각대 포함")·스티커(소재+코팅 결합). 단 합가가 사이즈/수량별로 변하면 규칙3(component_prices 차원)에 종속.
 5. **면적형 곱셈·수량할인 = 공식 외부(적용단)** 처리, 매트릭스 셀은 룩업 적재. `addtn_yn`은 합산 플래그뿐(곱셈 표현 불가).
 6. **단가 → `t_prc_component_prices`** (구성요소 분해 단가). 적재 컬럼명은 라이브 DDL 기준(frm_typ_cd/comp_typ_cd/unit_price).
-7. **apply_ymd = 가격 효력일**(변경된 가격을 적용할 일자) NOT NULL. round-1 `t_prd_product_discount_tables`가 `20260601`(yyyyMMdd) 사용 → **round-1 값/형식과 정합**(파일럿 20260601). 프로젝트 전역 일자 형식 표준(yyyyMMdd vs yyyy-MM-dd)은 go-live 전 1개로 확정.
+7. **apply_ymd = 가격 효력일**(변경된 가격을 적용할 일자) NOT NULL. **형식 표준 = `yyyy-MM-dd`, 값 = `2026-06-01`(D-E 확정, AWK-8 해소)** — DDL comment(`varchar(10)`, `yyyy-MM-dd`)와 정합. round-1·round-2 적재 CSV 전건 `2026-06-01`로 통일 완료. 모든 행이 단일 go-live 일자 공유(그룹별 상이 일자 미적용).
 8. **완제품 유형 단정 금지.** 완제품은 (가)수량×단가 (나)수량구간할인 (다)여러 유형 결합 등 **여러 방향으로 쓰일 수 있다**. 한 상품을 "고정가형" 등 단일 유형으로 못박지 말 것. base 단가는 component_prices/product_prices에 저장하되, 수량·할인·결합은 외부(주문 계산·round-1)에서 적용. frm_typ_cd는 base 계산 형태만 표기(단순형=단일단가), 최종가 성격을 단정하지 않음.
 9. **round-1(수량구간할인)과 통합.** 굿즈/파우치·문구·아크릴은 수량구간할인 상품이며 **round-1이 이미 매핑 완료**(`DSC_GOODSA/B`·문구·아크릴 할인테이블 + `t_prd_product_discount_tables` 상품링크). round-2는 **base 단가만** 적재하고 구간할인 **재매핑 금지**(중복). 최종가 = base 단가 × 수량 × (1 − round-1 할인율).
+10. **완제품가 comp_typ_cd = `PRC_COMPONENT_TYPE.06 완제품비`(D-D 확정, AWK-7 해소).** 인쇄/코팅/용지 등으로 분해되지 않는 **통가격(완제품가)** 구성요소의 유형. `t_cod_base_codes`에 자식코드 1행 신설(`cod_cd=PRC_COMPONENT_TYPE.06`, `upr_cod_cd=PRC_COMPONENT_TYPE`, `cod_nm=완제품비`) — **DDL 무변경이나 코드행 INSERT는 필요**(직접 적재 금지 → 적재 CSV 산출 또는 후니 코드마스터 등록). 적용 경로 2가지: ①**단독 최종판매가 → `t_prd_product_prices`**(comp_typ_cd 무관, 규칙④) / ②**합산형 공식의 구성요소 → `t_prc_price_components.comp_typ_cd=.06`**(기존 NULL 정상화). [HARD] **`PRC_COMPONENT_TYPE.06`(가격항목 축)과 `PRD_TYPE.01 완제품`(상품분류 축)은 별개** — 다른 부모그룹·테이블·FK, 이름만 겹침. 실데이터에 `PRD_TYPE.01` 상품 0건(전부 .02 반제품/.03 기성/.04 디자인). 즉 `.06`은 상품유형과 무관한 가격구성요소이며, **상품유형으로 가격경로를 단정하지 말 것**(규칙⑧ 연결).
 
 [HARD] **스키마 변경 금지.** 가격 매핑은 기존 테이블/컬럼 구조로만 수행. 코드/자재/상품이 없으면(어색데이터) **데이터 추가 또는 보류**로 처리하되 스키마(컬럼/제약)는 건드리지 않는다. 작성하는 산출 파일에는 **매핑 근거(왜 이 테이블/차원/NULL인가)**를 반드시 남긴다. 어색한 데이터는 `03_validation/price-awkward-data.md`에 정리.
 

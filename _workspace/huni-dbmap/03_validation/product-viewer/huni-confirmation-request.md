@@ -97,17 +97,17 @@
 
 ---
 
-## D-E. apply_ymd 전역 일자 형식 표준 — AWK-8 (go-live 전 결정)
+## D-E. apply_ymd 전역 일자 형식 표준 — AWK-8 ✅ 확정완료(2026-06-04)
 
-**필요한 결정**: round-1 `t_prd_product_discount_tables`는 `20260601`(yyyyMMdd 8자리), DDL/스펙 comment는 `yyyy-MM-dd`(10자리). 프로젝트 전역 가격 효력일 형식을 **1개로 확정**.
+**확정**: 전역 가격 효력일 형식 = `yyyy-MM-dd`, 값 = `2026-06-01`. (당초 round-1 `20260601`(yyyyMMdd 8자리) vs DDL/스펙 comment `yyyy-MM-dd`(10자리) 불일치 → `yyyy-MM-dd`로 통일.) round-1·round-2 적재 CSV 및 검토 워크북 전건 정정 완료.
 
 **가격매핑을 막는 이유**: `t_prc_component_prices.apply_ymd`·`t_prd_product_prices.apply_ymd`는 varchar(10) NOT NULL이며 자연키 UNIQUE8의 구성요소. round-1과 형식이 다르면 라운드 간 가격 효력일 비교·정합이 깨지고, 잘못된 형식은 길이/정합 오류.
 
 **영향**: round-2 가격 적재 전체(component_prices·product_prices 모든 행).
 
 **옵션/권고**:
-- (권고) **go-live 시점에 실제 일자 일괄 주입** + round-1과 동일 형식으로 통일. DDL이 varchar(10)이므로 `'2026-06-01'`(yyyy-MM-dd) 채택 시 round-1(`20260601`)도 같은 형식으로 정정 권장. 파일럿은 잠정 round-1 정합값(20260601) 사용 중.
-- 결정 1개만 하면 됨(형식 + go-live 일자).
+- ✅ **확정**: `yyyy-MM-dd` 채택, 값 `2026-06-01`. round-1(`t_prd_product_discount_tables`·`t_dsc_discount_details`)·round-2 파일럿 CSV 전건 `2026-06-01`로 정정 완료. DDL `varchar(10)` 정합.
+- 잔여: 실제 go-live 일자가 `2026-06-01`과 다르면 전역 치환 1회로 갱신(형식은 고정).
 
 ---
 

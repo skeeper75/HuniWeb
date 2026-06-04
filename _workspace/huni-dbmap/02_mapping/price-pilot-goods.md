@@ -26,7 +26,7 @@
 ## 2. 매핑 설계 (근거 포함)
 
 ### 경로 A — 단일 단가 → `t_prd_product_prices` (레더코스터)
-- `(PRD_000188, 20260601, unit_price=3300)`. 1행.
+- `(PRD_000188, 2026-06-01, unit_price=3300)`. 1행.
 - **왜 product_prices?** variant가 없어 한 상품에 단가 1개뿐 → PK(prd_cd, apply_ymd)로 충분. 차원 테이블 불필요.
 - **왜 3300이 고정가 아닌가?** 구간할인적용테이블=굿즈A타입(round-1). 100개 주문 시 3300×100×(1−할인). 즉 per-item 단가.
 
@@ -36,8 +36,8 @@
 - `component_prices` 3행: siz_cd=SIZ_000384/386/388, unit_price=5000/5500/6000, 그 외 차원 NULL ← **왜 siz_cd?** 사이즈가 가격 결정축. SIZ 코드·product_sizes 링크 기존재(파일 해소).
 - `t_prd_product_price_formulas`: PRD_000186→PRF. 구간할인은 round-1 `t_prd_product_discount_tables`(DSC_GOODSA)가 별도 링크.
 
-### apply 일자 — `20260601`
-- **왜 이 값?** round-1 `t_prd_product_discount_tables`가 `20260601` 사용 → 라운드 정합. (DDL comment는 `yyyy-MM-dd`라 형식 표준 확정 필요: AWK-8)
+### apply 일자 — `2026-06-01`
+- **왜 이 값?** round-1 `t_prd_product_discount_tables`와 라운드 정합. **형식 표준 = `yyyy-MM-dd`(D-E 확정, AWK-8 해소)** — DDL comment(`yyyy-MM-dd`)와 정합. round-1 적재 CSV도 `2026-06-01`로 정정 완료.
 
 ## 3. 검증 (파일 기반, DB 무접촉)
 

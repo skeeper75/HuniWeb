@@ -62,7 +62,7 @@ pouch_eco 범위가 명세가 주장하는 대로 CAT_000011 서브트리에서 
 |-------|--------|----------|
 | 타입/길이 — `dsc_rate` numeric(5,2) | PASS | 최대값 50.00 ≤ 999.99, 모두 ≤ 소수 2자리 |
 | 타입 — `min_qty`/`max_qty` integer | PASS | 최대 10000 ≪ int32 |
-| 길이 — `apply_ymd` varchar(10) | PASS | `20260601` = 8자 |
+| 길이 — `apply_ymd` varchar(10) | PASS | `2026-06-01` = 10자 (D-E 확정 형식) |
 | NOT NULL — 필수 컬럼 | PASS | 16행 모두 dsc_tbl_cd, apply_ymd, min_qty 채워짐 |
 | CHECK NAND — rate/amt 중 정확히 하나 | PASS | 16행 전부: `dsc_rate` 설정, `dsc_amt` 빈값. **둘-다-null 행 0개** (0% 밴드는 `0.00` 저장, NULL 아님 — 의미상 명시적, D7 참고) |
 | FK `dsc_typ_cd` = `DSC_TYPE.01` | PASS | `DSC_TYPE.01` (정률) 존재, use_yn='Y' |
@@ -70,7 +70,7 @@ pouch_eco 범위가 명세가 주장하는 대로 CAT_000011 서브트리에서 
 | 구간 커버리지 (빈틈 없음) | PASS | ACR/POUCH/STAT 모두 1→10000 연속, 빈틈/중복 없음 |
 | `apply_ymd` 포맷 | MINOR M3 참고 | varchar-date 컬럼에 DB 선례를 세울 기존 행이 없음; 포맷은 순수 설계 선택 (D2) |
 
-**MINOR M3:** 모든 할인/등급 테이블이 비어 있어 (0행) `apply_ymd` / `apply_bgn_ymd` 문자열 포맷에 대한 **기존 데이터 선례가 없다**. 선택된 `20260601` (YYYYMMDD, 8자)은 varchar(10)에 들어맞고 `discount-domain-detail.md`의 문서화된 예시와 일치하지만, 명세의 "확립된 규약" 주장은 라이브 데이터가 아닌 문서에 근거한다. 비차단; 설계 결정 D2로 흡수됨.
+**MINOR M3 (해소):** 당초 모든 할인/등급 테이블이 비어 있어 (0행) 포맷 선례가 없었고 잠정 `20260601`(YYYYMMDD, 8자)을 사용했으나, **D-E 확정으로 `2026-06-01`(yyyy-MM-dd, 10자) 채택** — DDL `varchar(10)` 및 comment와 정합. 전 적재 CSV 정정 완료. 설계 결정 D2로 흡수·확정.
 
 ---
 
@@ -147,7 +147,7 @@ Mapping-spec §4 적재 순서 = `tables` (헤더) → `details` → `product_di
 ### 설계 결정 — 검증자 판단 아님 (mapping-spec §5에서 이관, 미해소)
 사용자에게 미루는 것이 옳음; 어느 것도 결함이 아님:
 - **D1 — 요율 단위 PERCENT vs FRACTION** (적재는 퍼센트 `10.00` 저장). 최고 영향 확인 항목; 단위가 틀리면 조용히 100× 오가격.
-- **D2 — 적용일 `20260601`** (플레이스홀더; YYYYMMDD vs YYYY-MM-DD).
+- **D2 — 적용일 `2026-06-01`** ✅ 확정(D-E: yyyy-MM-dd). 전 CSV 정정 완료.
 - **D3 — 최상위 구간 `max_qty=10000` 리터럴 vs 개방형 NULL** (`까지` 라벨은 sentinel/개방형 근거로 약함).
 - **D4 — 구간 경계 포함** (런타임 의미; 변경할 저장값 없음).
 - **D5 — pouch_eco 범위 = 50 (합집합)** — 위 M1과 직접 연계.

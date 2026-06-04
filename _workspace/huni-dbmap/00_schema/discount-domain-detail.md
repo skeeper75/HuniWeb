@@ -29,7 +29,7 @@
 | Column | Type | Null | Default | 비고 |
 |--------|------|:----:|---------|------|
 | `dsc_tbl_cd` | varchar(50) | NO | — | 할인테이블코드 (→ 헤더) |
-| `apply_ymd` | varchar(10) | NO | — | 적용일자 (시계열 키, 예: `20260601`) |
+| `apply_ymd` | varchar(10) | NO | — | 적용일자 (시계열 키, 예: `2026-06-01` — D-E 확정 yyyy-MM-dd) |
 | `min_qty` | integer | NO | — | 수량구간하한 |
 | `max_qty` | integer | YES | — | 수량구간상한 (NULL = 상한 없는 최상위 구간) |
 | `dsc_typ_cd` | varchar(50) | YES | — | 할인유형코드 (→ DSC_TYPE.*) |
