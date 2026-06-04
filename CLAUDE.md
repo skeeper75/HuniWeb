@@ -728,6 +728,6 @@ For detailed patterns on plugins, sandboxing, headless mode, and version managem
 **변경 이력 (최근 3건, 전체는 `_workspace/huni-dbmap/CHANGELOG.md`):**
 | 날짜 | 변경 내용 | 대상 | 사유 |
 |------|----------|------|------|
-| 2026-06-04 | round-2 구조해석·준비도 평가·결정7건 확정 — 라이브 t_prc_* DDL 추출, 계산공식집초안 27블록 전수. 별색=공정(clr 아님), variant=component_prices 차원, 합가=상품단가테이블, apply_ymd=가격효력일 | _workspace/huni-dbmap/{00_schema,01_excel,02_mapping}, dbm-price-formula | DB구조 해석 후 매핑준비도 점검 + 결정 확정 |
-| 2026-06-04 | D-D·D-E 확정 + 어색데이터 SIZE_NAME_NOISE 81건 정정 — apply_ymd 포맷 확정, 완제품가 comp_typ_cd 신설, 차원 미분리(장수→bdl_qty). 권위반전: 라이브 t_siz_sizes 77/77 NOT NULL(추출본 stale) | dbm-price-formula(규칙7·10), 02_mapping/correction, 04_review | 어색데이터 정정 + 실무진 검토본 |
-| 2026-06-04 | round-3(매핑 정합 검증) 하네스 확장 — 신규 스킬 `dbm-mapping-audit`(엑셀=권위, 9속성↔t_prd_* 1:1, MATCH/MISSING/EXTRA/MISMATCH, read-only). 9속성 전부 적재 확인. 묶음수 4행 MISSING 확증 예상 | .claude/skills/dbm-mapping-audit(신규)·huni-dbmap-orchestrator | DB↔엑셀 매핑 정합 검증 하네스 구성 |
+| 2026-06-05 | round-3 방법론 재설계 — "엑셀=권위 단순대조"→"DB 정규화 규칙=기준" + L1(충실추출)↔L2(정합검증) 2계층. 결함 뿌리가 매핑 아닌 엑셀 추출(포맥스 A1 false MISSING). 방법 설계 A~D(CONDITIONAL GO)·L1 기준 E·F·G | _workspace/huni-dbmap/05_method/{A~G}, HANDOFF-audit | 사용자 — 검증 방법론 근본 결함 지적 |
+| 2026-06-05 | round-3 전체 L1 토대 정립 — 정보축 8개 전수화(값·행숨김·열숨김·코멘트·배경/글자색·수식·하이퍼링크·병합), 토대=상품마스터13+판걸이수+출력소재IMPORT, 엔티티 2축(상품정보 우선/가격정보 round-2 이연). 15시트 9게이트 PASS(non-empty100%·round-trip0)·별도설정24↔IMPORT 18/6 | _workspace/huni-dbmap/06_extract/(15 l1+docs+scripts) | 사용자 — 전 상품 단일 신뢰 토대 |
+| 2026-06-05 | round-3 하네스 보강 + 핸드오프 — 스킬 3종(dbm-mapping-audit 프레임교정·정보축·의미코드맵 / dbm-excel-parse L1 충실추출 / orchestrator round-3 L1→L2 파이프라인)에 세션 교훈 인코딩. HANDOFF 시작점=L2 정합검증부터 | .claude/skills/{dbm-mapping-audit,dbm-excel-parse,huni-dbmap-orchestrator}, HANDOFF-audit | 사용자 — 작업내용 하네스 보강 + 핸드오프 작성 |

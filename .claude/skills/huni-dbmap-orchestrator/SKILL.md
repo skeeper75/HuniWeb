@@ -25,7 +25,7 @@ Coordinates a 4-agent team to (1) sheet the live Railway DB structure and (2) ma
 
 - **round-1**: quantity-bracket discounts for 아크릴 / 굿즈·파우치 / 문구. Flat bracket rows. Complete.
 - **round-2**: the price is a *formula engine* (`판매가 = Σ components`, each component priced by a multi-dimensional lookup) — not a flat table. Excel authority: 상품마스터 `계산공식집초안` (formula intent, typed by 공식 유형) + 가격표 19 단가시트 (component matrices). **fit-gap FIRST** (is `t_prc_*` adequate? — round-1 did not extract the `t_prc_*` DDL), then **incremental pilot** (디지털인쇄/엽서, 원자합산형) before widening to all 공식 유형. See `dbm-price-formula`.
-- **round-3 (audit)**: verify the *already-loaded* `t_prd_*` data against the Excel source, per product × 9 attributes {사이즈·자재·인쇄옵션·공정·공정택일그룹·판형사이즈·묶음수·페이지룰·추가상품}. **Excel = authority**, DB 적재값을 검증. **기초데이터순** (마스터 코드 정합 → 상품별 연결 정합, FK 의존순). Classify MATCH / MISSING(엑셀O DB X) / EXTRA(DB O 엑셀 X) / MISMATCH. This is verification of existing data, NOT mapping design or loading. See `dbm-mapping-audit`.
+- **round-3 (audit)**: verify the *already-loaded* `t_prd_*` data against the Excel source, per product × 9 attributes {사이즈·자재·인쇄옵션·공정·공정택일그룹·판형사이즈·묶음수·페이지룰·추가상품}. **프레임: "DB 정규화 규칙=기준"**(엑셀=담을 내용; "엑셀=권위 단순대조"는 false MISSING으로 폐기). **L1↔L2 2계층**: L1 충실추출(전 컬럼·8 정보축·숨김/미출시/내부용 보존, 누락0 기계보증) → L2 정합검증(기대행 대비, 숨김/미출시=비활성). **기초데이터순** (마스터 정합 → 상품별 연결, FK 의존순). Classify MATCH / MISSING / EXTRA / MISMATCH. 검증이지 매핑설계·적재 아님. See `dbm-mapping-audit` + `dbm-excel-parse`(L1).
 
 ## Team & roles
 
@@ -87,21 +87,21 @@ Round-2 reuses the same team but inserts a **fit-gap gate before mapping** (the 
 
 **Phase 6 — Report & widen decision**: surface the fit-gap verdict + pilot result + price user-decisions; on GO, ask whether to widen to the next 공식 유형 / category.
 
-## Pipeline (round-3 mapping audit)
+## Pipeline (round-3 mapping audit — L1 토대 → L2 정합)
 
-Verify already-loaded `t_prd_*` data against the Excel source. **Excel = authority**; 기초데이터순 (master → product-link). Designer/validator load `dbm-mapping-audit`. Execution mode: hybrid — parallel extract (schema-analyst DB값 + excel-analyst 엑셀값) → validator 속성별 정합 대조 (incremental, 속성당 1패스).
+**[프레임 교정] "엑셀=권위 단순 집합대조" 폐기 → "DB 정규화 규칙=기준" + L1↔L2 2계층.** 검증 결함의 뿌리는 매핑(L2)이 아니라 엑셀 추출(L1)이다(false MISSING — 포맥스 A1: 속성별 단일컬럼 평면화로 작업사이즈 공백·행숨김 신호 소실). 방법론 = `05_method/`(A 베스트프랙티스·B 정규화규칙사전·C 전수대조설계·D 독립검증·E 무손실추출·F 시트구조·G 추출기준서), L1 토대 = `06_extract/`. Designer/validator load `dbm-mapping-audit`, excel-analyst loads `dbm-excel-parse` L1 섹션.
 
-**Phase 1 — Setup**: verify `.env.local` RAILWAY_DB_* + the two xlsx; confirm the 9 attribute tables + masters are the audit targets. Resolve scope (which attributes this run — user picks 기초데이터순 staged).
+**Phase 0 — 방법론/토대 확인**: `05_method/`(A~G) + `06_extract/`(L1 토대) 존재 점검. 방법 미설계면 **1단계 방법설계**(A 리서치 + B 규칙사전[기초데이터 마스터 전체가 기준, 표본 오버피팅 금지] + C 전수설계) 선행 → D 독립검증 → 하네스 교정.
 
-**Phase 2a — DB 적재값 추출** (schema-analyst, read-only): for each in-scope attribute table (`t_prd_product_sizes/materials/print_options/processes/process_excl_groups/plate_sizes/bundle_qtys/page_rules/addons`) + masters, extract current rows → `00_schema/ref-<table>.csv` (reuse if fresh; **re-extract if stale** — past 권위반전 교훈). NEVER write to DB.
+**Phase 1 — Setup**: `.env.local` RAILWAY_DB_* + 두 xlsx. **토대 범위 = 상품마스터 13시트 + 가격표 `판걸이수`(사이즈 마진/작업/블리드/전지 권위) + `출력소재(IMPORT)`(`*별도설정` 자재 권위)**. 가격표 나머지 16시트(단가)=round-2 영역. **엔티티 2축: 상품정보 먼저 정립 / 가격정보(단가·연당가·가격)는 axis=price 분리 라벨링해 round-2 이연**(무손실 보존).
 
-**Phase 2b — 엑셀 원천 파싱** (excel-analyst, parallel): parse 상품마스터 + 가격표 for the 9 attributes per product (prd_nm 기준) → `04_audit/excel-attrs-normalized.md` + per-attr normalized rows. Map which 시트/컬럼 = which attribute.
+**Phase 2 — L1 충실추출 (토대 정립, excel-analyst)**: `extract_l1.py --sheet`로 15시트 L1 추출(8 정보축, dbm-excel-parse L1 섹션). 의미코드맵(행숨김=비활성·그레이배경=품절/준비중·그레이글자/숨김열=내부용·노랑=신규·★=제약) 라벨. `verify_l1.py` 9게이트(non-empty 100%·round-trip 0, 미통과=L2 차단). `*별도설정`↔IMPORT ● 매핑. → `06_extract/`(`<slug>-l1.csv`+meta·`product-info-foundation.md` 정합검증 대상·`price-info-deferred.md` 이연·`seoljeong-import-map.md`).
 
-**Phase 3 — 마스터 정합** (validator, FIRST): Step 1 of dbm-mapping-audit — 사이즈/자재/공정/코드 마스터가 엑셀 코드체계와 정합하는지. Broken master flags dependent product-links as suspect → `04_audit/00_master-parity.md`. Gate: 상품 연결 검증은 마스터 정합 확인 후.
+**Phase 3 — DB 적재값 추출 + 마스터 정합** (schema-analyst read-only → validator FIRST): 9속성 테이블(`t_prd_product_sizes/materials/print_options/processes/process_excl_groups/plate_sizes/bundle_qtys/page_rules/addons`)+마스터 → `00_schema/ref-<table>.csv`(stale면 라이브 재추출). 마스터(사이즈/자재/공정/코드)↔엑셀 코드체계 정합 → `04_audit/00_master-parity.md`. Gate: 상품 연결 검증은 마스터 정합 후.
 
-**Phase 4 — 속성별 연결 정합** (validator, incremental): per attribute, DB↔Excel by prd_nm → MATCH/MISSING/EXTRA/MISMATCH → `04_audit/<attr>-parity.md` + `<attr>-mismatches.csv`. 기초데이터순 staged (사용자 선택). EXTRA는 삭제 단정 금지(플래그+출처).
+**Phase 4 — L2 속성별 정합** (validator, incremental): `product-info-foundation.md`를 입력으로, 속성별 DB↔**기대행(B규칙 정규화 변환)** 대조 → MATCH/MISSING/EXTRA/MISMATCH. **[HARD] 숨김/미출시=비활성 분류(MISSING 아님)**. 기초데이터순 staged(사용자 선택). EXTRA 삭제 단정 금지(플래그+출처). → `04_audit/<attr>-parity.md`+`<attr>-mismatches.csv`.
 
-**Phase 5 — 종합 + 보고** (validator → lead): `04_audit/audit-summary.md` dashboard (속성별 4분류 카운트) + 이슈 목록. Lead surfaces to user (어느 속성 우선 정정할지). Known signal: 묶음수 4행 vs 엑셀 → MISSING 정량 확증 예상.
+**Phase 5 — 종합 + 보고** (validator → lead): `04_audit/audit-summary.md` 대시보드(속성별 4분류) + 이슈. Lead가 사용자에 정정 우선순위. → BLOCK 해소 → 가격정보(round-2) → 전수.
 
 ## Data passing
 
@@ -145,6 +145,8 @@ round-2 (price):
 - **Partial re-run**: "문구 구간할인 매핑만 다시" → Phase 0 partial → excel-analyst (문구 block) + mapping-designer (문구 table) + validator (문구 only); other tables untouched.
 - **Round-2 flow (price)**: "가격 매핑해줘" / "round-2 진행" → round-2 pipeline → 2a DDL extraction + 2b excel analysis (parallel) → Phase 3 fit-gap GATE → pilot 디지털인쇄/엽서 mapping → validator recompute check GO → report fit-gap verdict + widen decision.
 - **Fit-gap only**: "가격 스키마 적정성만 확인" / "가격 fit-gap만" → run Phases 1–3 (DDL + excel + fit-gap), stop before pilot mapping; deliver `schema-fitgap-price.md` only.
+- **Round-3 flow (audit)**: "DB 매핑 검증" / "정합 재검증" → Phase 0 방법론/토대 확인 → (미설계면 1단계 방법설계 A~G) → Phase 2 L1 충실추출(15시트, 9게이트 PASS) → Phase 3 마스터 정합 → Phase 4 L2 속성별 정합(숨김/미출시=비활성) → Phase 5 대시보드 + 정정 우선순위.
+- **Round-3 L1 only**: "엑셀 충실추출만" / "전 상품 토대만" → Phase 1–2 (L1 추출 + 9게이트 검증), stop before L2; deliver `06_extract/product-info-foundation.md` only.
 - **Error flow**: DB unreachable → Phase 1 blocker report, ask user to verify host/port; no agents spawned.
 
 ## CLAUDE.md pointer
