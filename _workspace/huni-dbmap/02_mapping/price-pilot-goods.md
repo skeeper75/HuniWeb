@@ -32,7 +32,7 @@
 
 ### 경로 B — 사이즈 variant 단가 → 공식 + `component_prices`(siz_cd) (손거울)
 - `PRF_GDS_SQMIRROR`(FRM_TYPE.02 단순형) ← **왜 단순형?** base가 단일 단가(인쇄+코팅 등 합산 아님). 단 "고정가"로 단정 아님 — 수량·할인이 붙는다.
-- `COMP_GDS_SQMIRROR`(comp_typ_cd=**NULL**) ← **왜 NULL?** PRC_COMPONENT_TYPE 5종에 완제품가 유형 없음(AWK-7), nullable이라 스키마 변경 없이 NULL.
+- `COMP_GDS_SQMIRROR`(comp_typ_cd=**`PRC_COMPONENT_TYPE.06` 완제품비**) ← **왜 .06?** 완제품 통가격(인쇄/코팅 비분해) 구성요소 = 규칙10 경로②. **D-D 확정으로 AWK-7 해소**(당초 NULL). 코드행은 `t_cod_base_codes.csv` 선적재(FK 부모).
 - `component_prices` 3행: siz_cd=SIZ_000384/386/388, unit_price=5000/5500/6000, 그 외 차원 NULL ← **왜 siz_cd?** 사이즈가 가격 결정축. SIZ 코드·product_sizes 링크 기존재(파일 해소).
 - `t_prd_product_price_formulas`: PRD_000186→PRF. 구간할인은 round-1 `t_prd_product_discount_tables`(DSC_GOODSA)가 별도 링크.
 
@@ -48,10 +48,10 @@
 
 ## 4. 어색한 데이터 (→ `03_validation/price-awkward-data.md` 상세)
 
-AWK-1 미등록 상품 5종 · AWK-3 variant 35종 · AWK-5 "사이즈 필수"칸에 옵션(11온스/색상) 혼재 · AWK-6 머그 색상 mat_cd 부재 · AWK-7 완제품가 comp_typ_cd 부재 · AWK-8 apply 일자 형식 불일치 · AWK-9 가격=단가+round-1 할인.
+AWK-1 미등록 상품 5종 · AWK-3 variant 35종 · AWK-5 "사이즈 필수"칸에 옵션(11온스/색상) 혼재 · AWK-6 머그 색상 mat_cd 부재 · ~~AWK-7 완제품가 comp_typ_cd 부재~~ ✅ **해소(D-D: `.06` 신설)** · ~~AWK-8 apply 일자 형식 불일치~~ ✅ **해소(D-E: yyyy-MM-dd)** · AWK-9 가격=단가+round-1 할인.
 
 ## 5. 산출물 · 다음
 
-- `02_mapping/load_price_pilot/` 적재용 CSV 6종(DB 미적재)
+- `02_mapping/load_price_pilot/` 적재용 CSV 7종(DB 미적재) — `t_cod_base_codes.csv`(`.06` 코드행) 신설 포함. 적재순서: `t_cod_base_codes`(코드) → `t_prc_price_components` → 나머지(FK 부모 선존재)
 - `00_schema/ref-*.csv` 읽기전용 참조 5종
-- 다음: AWK-6(머그 자재)·AWK-8(일자형식)·AWK-7(완제품가 유형) 후니 확정 → 색상 variant 보강 → 고정가형 확대 → 원자합산형(엽서) 파일럿
+- 다음: AWK-6(머그 자재)·AWK-7/8 해소 → 색상 variant 보강(AWK-6 후니 등록 대기) → 고정가형 확대 → 원자합산형(엽서) 파일럿. (AWK-7=`.06` 확정, AWK-8=`yyyy-MM-dd` 확정.)

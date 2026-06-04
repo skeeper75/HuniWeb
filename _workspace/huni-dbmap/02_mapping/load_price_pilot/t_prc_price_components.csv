@@ -1,2 +1,2 @@
 comp_cd,comp_nm,comp_typ_cd,note,use_yn
-COMP_GDS_SQMIRROR,사각손거울 상품단가,,comp_typ_cd=NULL: PRC_COMPONENT_TYPE 5종(인쇄/코팅/용지/후가공/박형압)에 '완제품가' 유형 부재→어색데이터. 스키마 변경 없이 NULL 적재,Y
+COMP_GDS_SQMIRROR,사각손거울 상품단가,PRC_COMPONENT_TYPE.06,comp_typ_cd=PRC_COMPONENT_TYPE.06 완제품비(D-D 확정·AWK-7 해소): 완제품 통가격(분해 아님) 구성요소. 단순형 공식의 통가격 term(규칙10 경로②). FK 부모는 t_cod_base_codes.csv 선적재 필요,Y

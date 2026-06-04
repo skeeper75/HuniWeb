@@ -83,17 +83,18 @@
 
 ---
 
-## D-D. 완제품가 comp_typ_cd 유형 신설 여부 — AWK-7 (구조 결정)
+## D-D. 완제품가 comp_typ_cd 유형 신설 — AWK-7 ✅ 확정완료(2026-06-04)
 
-**필요한 결정**: 굿즈/완제품의 "상품가/완제품가"가 `PRC_COMPONENT_TYPE` 5종(인쇄비/코팅비/용지비/후가공비/박형압비) 어디에도 맞지 않는다. (가) comp_typ_cd를 **NULL로 적재**(스키마 무변경)할 것인가, (나) "상품가/완제품가" 코드를 **신설**(데이터 추가)할 것인가.
+**확정 = (나) 코드 신설**: `PRC_COMPONENT_TYPE.06 완제품비`를 `t_cod_base_codes`에 자식코드 1행 신설(DDL 무변경, 코드행 INSERT). 2경로 규칙 — 단독 최종판매가→`t_prd_product_prices`(comp_typ_cd 무관), 공식 통가격 구성요소→`t_prc_price_components.comp_typ_cd=.06`. (당초 권고는 NULL 적재였으나, 합산·단순형 공식 term의 분류 일관성·운영을 위해 신설로 확정.)
 
 **가격매핑을 막는 이유(약차단)**: 완제품가를 component로 표현할 때 유형 분류가 없으면 comp_typ_cd가 빈다. nullable이라 NULL 적재는 가능하나, 다수 DIRECT 상품(D-A/B/C 상품 대부분이 완제품가)에 일관 규칙이 없으면 분류 일관성·후속 운영에 혼선.
 
 **영향**: DIRECT 160건 상품 다수(굿즈/파우치/아크릴/완제품 전반; v2 기준, v1 246). 단가/합가를 component로 적재하는 모든 케이스.
 
-**옵션/권고**:
-- (권고) comp_typ_cd **NULL 적재**(스키마 무변경, 규칙 즉시 적용 가능). 완제품가는 대부분 `t_prd_product_prices`(상품단가)로 가므로 component 분류 자체가 불필요한 경우 많음.
-- (대안) 운영상 분류가 필요하면 `PRC_COMPONENT_TYPE`에 "상품가/완제품가" 코드 1종 추가(데이터 추가, 코드 마스터만, 스키마 무변경).
+**확정 처리**:
+- `PRC_COMPONENT_TYPE.06 완제품비` 코드행 적재 CSV 신설(`02_mapping/load_price_pilot/t_cod_base_codes.csv`). 적재순서: 코드행 → `t_prc_price_components`(FK 부모 선존재).
+- 손거울 파일럿 `COMP_GDS_SQMIRROR.comp_typ_cd` NULL→`.06` 반영. dbm-price-formula 규칙10 신설.
+- [HARD] `PRC_COMPONENT_TYPE.06`(가격항목 축)≠`PRD_TYPE.01 완제품`(상품분류 축, 실데이터 0건) — 별개. 상품유형으로 가격경로 단정 금지.
 
 ---
 
