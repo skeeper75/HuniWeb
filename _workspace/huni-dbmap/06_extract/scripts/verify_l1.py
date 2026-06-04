@@ -140,8 +140,9 @@ def run(xlsx_path, sheet_name, csv_path, meta_path):
             name = idx_to_name[c]
             ext_val = er.get(name, "")
             orig_val = norm(ws.cell(rseq, c).value)
-            # ffill 역보정: ffill 컬럼이고 원본이 빈값인데 추출이 채워졌으면 -> 메타(_anchor_ffilled)로 설명되는 정당 펼침
-            if c in ffill_cols and orig_val == "" and ext_val != "":
+            # ffill 역보정: ffill 컬럼이고 원본이 빈값(또는 공백 only 연속행 마커)인데 추출이 채워졌으면
+            #   -> 메타(_anchor_ffilled)로 설명되는 정당 펼침. 공백 only = ragged 연속행 마커(데이터 아님).
+            if c in ffill_cols and orig_val.strip() == "" and ext_val != "":
                 # 정당한 ffill 펼침 — round-trip 시 원본 빈값으로 환원되어야 무손실
                 # (메타 _anchor_ffilled=true 로 기록됨 -> diff 아님)
                 continue

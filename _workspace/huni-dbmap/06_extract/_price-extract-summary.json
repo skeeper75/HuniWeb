@@ -1,0 +1,197 @@
+{
+  "판걸이수": {
+    "summary": {
+      "sheet": "판걸이수",
+      "data_rows": 125,
+      "fields": 12,
+      "first_row": 2,
+      "last_row": 126,
+      "hidden_rows": 0,
+      "hidden_cols": [],
+      "comments": 0,
+      "meta_cells": 1001,
+      "axis_product_cols": [
+        "사이즈옵션명",
+        "재단사이즈",
+        "블리드",
+        "작업사이즈",
+        "상품",
+        "판걸이",
+        "인쇄가능영역",
+        "원형아이마크영역(완칼)",
+        "격자아이마크영역(반칼)"
+      ],
+      "axis_price_cols": [
+        "디지털인쇄(국4절)",
+        "디지털인쇄(3절)",
+        "col_I"
+      ]
+    },
+    "verify": {
+      "row_count": {
+        "orig": 125,
+        "ext": 125,
+        "pass": true
+      },
+      "col_coverage": {
+        "maxcol": 12,
+        "ext_fields": 12,
+        "pass": true
+      },
+      "nonempty_preservation": {
+        "orig": 813,
+        "preserved": 813,
+        "missing": 0,
+        "mismatch": 0,
+        "rate_pct": 100.0,
+        "pass": true
+      },
+      "roundtrip": {
+        "diff": 0,
+        "pass": true,
+        "samples": []
+      },
+      "orig_formula_cells": 0,
+      "orig_hyperlink_cells": 0,
+      "overall": true
+    },
+    "axis_map": {
+      "사이즈옵션명": "product",
+      "재단사이즈": "product",
+      "블리드": "product",
+      "작업사이즈": "product",
+      "상품": "product",
+      "판걸이": "product",
+      "디지털인쇄(국4절)": "price",
+      "디지털인쇄(3절)": "price",
+      "col_I": "price",
+      "인쇄가능영역": "product",
+      "원형아이마크영역(완칼)": "product",
+      "격자아이마크영역(반칼)": "product"
+    }
+  },
+  "출력소재(IMPORT)": {
+    "summary": {
+      "sheet": "출력소재(IMPORT)",
+      "data_rows": 120,
+      "fields": 26,
+      "first_row": 4,
+      "last_row": 123,
+      "hidden_rows": 0,
+      "hidden_cols": [],
+      "comments": 0,
+      "meta_cells": 3120,
+      "mark_count": 235,
+      "product_columns": [
+        "프리미엄엽서",
+        "스탠다드엽서",
+        "2단접지카드 / 3단접지카드 / 미니접지카드",
+        "프리미엄명함",
+        "소량전단지/접지리플렛 :: 소량전단지포스터/리플렛팜플렛 :: 코팅/오시/접지",
+        "중철내지",
+        "중철표지",
+        "무선내지",
+        "무선표지 :: 코팅/오시",
+        "트윈링내지",
+        "트윈링표지 :: 코팅/오시",
+        "탁상형캘린더",
+        "미니탁상형캘린더",
+        "엽서캘린더",
+        "벽걸이캘린더"
+      ],
+      "product_column_count": 15,
+      "daebunryu_groups": [
+        "디지털인쇄"
+      ],
+      "paper_desc_cols": [
+        "대분류 :: 구분",
+        "중분류",
+        "종이명",
+        "평량",
+        "파일명약어",
+        "구매정보",
+        "전지",
+        "종이사이즈"
+      ],
+      "price_cols_deferred": [
+        "연당가",
+        "가격\n(국4절)",
+        "가격(3절)"
+      ]
+    },
+    "verify": {
+      "row_count": {
+        "orig": 120,
+        "ext": 120,
+        "pass": true
+      },
+      "col_coverage": {
+        "maxcol": 26,
+        "ext_fields": 26,
+        "pass": true
+      },
+      "nonempty_preservation": {
+        "orig": 947,
+        "preserved": 947,
+        "missing": 0,
+        "mismatch": 0,
+        "rate_pct": 100.0,
+        "pass": true
+      },
+      "roundtrip": {
+        "diff": 0,
+        "pass": true,
+        "samples": []
+      },
+      "orig_formula_cells": 947,
+      "orig_hyperlink_cells": 0,
+      "overall": true,
+      "matrix_marks": 235
+    },
+    "axis_map": {
+      "대분류 :: 구분": "product",
+      "중분류": "product",
+      "종이명": "product",
+      "평량": "product",
+      "파일명약어": "product",
+      "구매정보": "product",
+      "전지": "product",
+      "연당가": "price",
+      "가격\n(국4절)": "price",
+      "가격(3절)": "price",
+      "종이사이즈": "product",
+      "프리미엄엽서": "product",
+      "스탠다드엽서": "product",
+      "2단접지카드 / 3단접지카드 / 미니접지카드": "product",
+      "프리미엄명함": "product",
+      "소량전단지/접지리플렛 :: 소량전단지포스터/리플렛팜플렛 :: 코팅/오시/접지": "product",
+      "중철내지": "product",
+      "중철표지": "product",
+      "무선내지": "product",
+      "무선표지 :: 코팅/오시": "product",
+      "트윈링내지": "product",
+      "트윈링표지 :: 코팅/오시": "product",
+      "탁상형캘린더": "product",
+      "미니탁상형캘린더": "product",
+      "엽서캘린더": "product",
+      "벽걸이캘린더": "product"
+    },
+    "product_headers": [
+      "프리미엄엽서",
+      "스탠다드엽서",
+      "2단접지카드 / 3단접지카드 / 미니접지카드",
+      "프리미엄명함",
+      "소량전단지/접지리플렛 :: 소량전단지포스터/리플렛팜플렛 :: 코팅/오시/접지",
+      "중철내지",
+      "중철표지",
+      "무선내지",
+      "무선표지 :: 코팅/오시",
+      "트윈링내지",
+      "트윈링표지 :: 코팅/오시",
+      "탁상형캘린더",
+      "미니탁상형캘린더",
+      "엽서캘린더",
+      "벽걸이캘린더"
+    ]
+  }
+}

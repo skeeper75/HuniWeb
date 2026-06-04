@@ -194,6 +194,8 @@ def extract_sheet(xlsx_path, sheet_name, out_csv, out_meta):
         for c in range(1, maxc + 1):
             cell = ws_f.cell(r, c)
             fg = cell.fill.fgColor.rgb if (cell.fill and cell.fill.patternType) else None
+            if fg is not None and not isinstance(fg, str):
+                fg = str(fg)
             if fg == "FFB6D7A8":
                 v = ws.cell(r, c).value
                 footnotes.append({"ref": get_column_letter(c) + str(r),
@@ -243,10 +245,14 @@ def extract_sheet(xlsx_path, sheet_name, out_csv, out_meta):
             ref = get_column_letter(c) + str(r)
             cell = ws_f.cell(r, c)
             fg = cell.fill.fgColor.rgb if (cell.fill and cell.fill.patternType) else None
+            # openpyxl 은 fgColor.rgb 를 RGB 객체로 줄 수 있어 str 강제(JSON 직렬화·일관 비교)
+            if fg is not None and not isinstance(fg, str):
+                fg = str(fg)
             font_rgb = None
             try:
-                if cell.font and cell.font.color and cell.font.color.rgb and isinstance(cell.font.color.rgb, str):
-                    font_rgb = cell.font.color.rgb
+                if cell.font and cell.font.color and cell.font.color.rgb:
+                    fr = cell.font.color.rgb
+                    font_rgb = fr if isinstance(fr, str) else str(fr)
             except Exception:
                 font_rgb = None
             cmt = comments.get(ref)
