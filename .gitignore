@@ -197,6 +197,10 @@ secret-*.*
 .moai/memory/
 .moai/worktrees/
 
+# OMC workflow/agent state artifacts (local-only)
+.omc/
+**/.omc/
+
 # ===========================================
 # Evolution Telemetry (local-only usage data)
 # Learnings and new-skills are git-tracked for team sharing.

@@ -1,0 +1,192 @@
+# PRICE ENGINE RAW DDL (read-only extraction, railway pg18.4)
+# tables: t_prc_price_formulas, t_prc_price_components, t_prc_formula_components, t_prc_component_prices, t_prd_product_price_formulas, t_prd_product_prices, t_prd_product_bundle_qtys
+
+## COLUMNS (table | col | ord | type | maxlen | precision | scale | nullable | default)
+t_prc_component_prices | comp_price_id | 1 | bigint | - | 64 | 0 | NO | -
+t_prc_component_prices | comp_cd | 2 | character varying | 50 | - | - | NO | -
+t_prc_component_prices | apply_ymd | 3 | character varying | 10 | - | - | NO | -
+t_prc_component_prices | siz_cd | 4 | character varying | 50 | - | - | YES | -
+t_prc_component_prices | clr_cd | 5 | character varying | 50 | - | - | YES | -
+t_prc_component_prices | mat_cd | 6 | character varying | 50 | - | - | YES | -
+t_prc_component_prices | coat_side_cnt | 7 | integer | - | 32 | 0 | YES | -
+t_prc_component_prices | bdl_qty | 8 | integer | - | 32 | 0 | YES | -
+t_prc_component_prices | min_qty | 9 | integer | - | 32 | 0 | YES | -
+t_prc_component_prices | unit_price | 10 | numeric | - | 12 | 2 | YES | -
+t_prc_component_prices | note | 11 | character varying | 500 | - | - | YES | -
+t_prc_component_prices | reg_dt | 12 | timestamp without time zone | - | - | - | NO | now()
+t_prc_component_prices | upd_dt | 13 | timestamp without time zone | - | - | - | YES | -
+t_prc_formula_components | frm_cd | 1 | character varying | 50 | - | - | NO | -
+t_prc_formula_components | comp_cd | 2 | character varying | 50 | - | - | NO | -
+t_prc_formula_components | disp_seq | 3 | integer | - | 32 | 0 | YES | -
+t_prc_formula_components | addtn_yn | 4 | character | 1 | - | - | YES | -
+t_prc_formula_components | reg_dt | 5 | timestamp without time zone | - | - | - | NO | now()
+t_prc_formula_components | upd_dt | 6 | timestamp without time zone | - | - | - | YES | -
+t_prc_price_components | comp_cd | 1 | character varying | 50 | - | - | NO | -
+t_prc_price_components | comp_nm | 2 | character varying | 200 | - | - | NO | -
+t_prc_price_components | comp_typ_cd | 3 | character varying | 50 | - | - | YES | -
+t_prc_price_components | note | 4 | character varying | 500 | - | - | YES | -
+t_prc_price_components | use_yn | 5 | character | 1 | - | - | NO | -
+t_prc_price_components | reg_dt | 6 | timestamp without time zone | - | - | - | NO | now()
+t_prc_price_components | upd_dt | 7 | timestamp without time zone | - | - | - | YES | -
+t_prc_price_formulas | frm_cd | 1 | character varying | 50 | - | - | NO | -
+t_prc_price_formulas | frm_nm | 2 | character varying | 200 | - | - | NO | -
+t_prc_price_formulas | frm_typ_cd | 3 | character varying | 50 | - | - | NO | -
+t_prc_price_formulas | note | 4 | character varying | 500 | - | - | YES | -
+t_prc_price_formulas | use_yn | 5 | character | 1 | - | - | NO | -
+t_prc_price_formulas | reg_dt | 6 | timestamp without time zone | - | - | - | NO | now()
+t_prc_price_formulas | upd_dt | 7 | timestamp without time zone | - | - | - | YES | -
+t_prd_product_bundle_qtys | prd_cd | 1 | character varying | 50 | - | - | NO | -
+t_prd_product_bundle_qtys | bdl_qty | 2 | integer | - | 32 | 0 | NO | -
+t_prd_product_bundle_qtys | bdl_unit_typ_cd | 3 | character varying | 50 | - | - | YES | -
+t_prd_product_bundle_qtys | dflt_yn | 4 | character | 1 | - | - | NO | -
+t_prd_product_bundle_qtys | disp_seq | 5 | integer | - | 32 | 0 | YES | -
+t_prd_product_bundle_qtys | reg_dt | 6 | timestamp without time zone | - | - | - | NO | now()
+t_prd_product_bundle_qtys | upd_dt | 7 | timestamp without time zone | - | - | - | YES | -
+t_prd_product_price_formulas | prd_cd | 1 | character varying | 50 | - | - | NO | -
+t_prd_product_price_formulas | frm_cd | 2 | character varying | 50 | - | - | NO | -
+t_prd_product_price_formulas | apply_bgn_ymd | 3 | character varying | 10 | - | - | YES | -
+t_prd_product_price_formulas | note | 4 | character varying | 500 | - | - | YES | -
+t_prd_product_price_formulas | reg_dt | 5 | timestamp without time zone | - | - | - | NO | now()
+t_prd_product_price_formulas | upd_dt | 6 | timestamp without time zone | - | - | - | YES | -
+t_prd_product_prices | prd_cd | 1 | character varying | 50 | - | - | NO | -
+t_prd_product_prices | apply_ymd | 2 | character varying | 10 | - | - | NO | -
+t_prd_product_prices | unit_price | 3 | numeric | - | 12 | 2 | YES | -
+t_prd_product_prices | note | 4 | character varying | 500 | - | - | YES | -
+t_prd_product_prices | reg_dt | 5 | timestamp without time zone | - | - | - | NO | now()
+t_prd_product_prices | upd_dt | 6 | timestamp without time zone | - | - | - | YES | -
+
+## CONSTRAINTS (table | name | type | definition)  [p=PK c=CHECK f=FK u=UNIQUE]
+
+## INDEXES
+t_prc_component_prices | ix_t_prc_comp_prices_siz_cd | CREATE INDEX ix_t_prc_comp_prices_siz_cd ON public.t_prc_component_prices USING btree (siz_cd)
+t_prc_component_prices | ix_t_prc_comp_prices_clr_cd | CREATE INDEX ix_t_prc_comp_prices_clr_cd ON public.t_prc_component_prices USING btree (clr_cd)
+t_prc_component_prices | ux_t_prc_comp_prices_nat_key | CREATE UNIQUE INDEX ux_t_prc_comp_prices_nat_key ON public.t_prc_component_prices USING btree (comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty)
+t_prc_component_prices | ix_t_prc_comp_prices_mat_cd | CREATE INDEX ix_t_prc_comp_prices_mat_cd ON public.t_prc_component_prices USING btree (mat_cd)
+t_prc_component_prices | t_prc_component_prices_pkey | CREATE UNIQUE INDEX t_prc_component_prices_pkey ON public.t_prc_component_prices USING btree (comp_price_id)
+t_prc_component_prices | ix_t_prc_comp_prices_comp_cd | CREATE INDEX ix_t_prc_comp_prices_comp_cd ON public.t_prc_component_prices USING btree (comp_cd)
+t_prc_component_prices | ix_t_prc_comp_prices_comp_apply | CREATE INDEX ix_t_prc_comp_prices_comp_apply ON public.t_prc_component_prices USING btree (comp_cd, apply_ymd DESC)
+t_prc_formula_components | t_prc_formula_components_pkey | CREATE UNIQUE INDEX t_prc_formula_components_pkey ON public.t_prc_formula_components USING btree (frm_cd, comp_cd)
+t_prc_formula_components | ix_t_prc_formula_comps_comp_cd | CREATE INDEX ix_t_prc_formula_comps_comp_cd ON public.t_prc_formula_components USING btree (comp_cd)
+t_prc_price_components | ix_t_prc_price_components_comp_typ_cd | CREATE INDEX ix_t_prc_price_components_comp_typ_cd ON public.t_prc_price_components USING btree (comp_typ_cd)
+t_prc_price_components | pk_t_prc_price_components | CREATE UNIQUE INDEX pk_t_prc_price_components ON public.t_prc_price_components USING btree (comp_cd)
+t_prc_price_formulas | pk_t_prc_price_formulas | CREATE UNIQUE INDEX pk_t_prc_price_formulas ON public.t_prc_price_formulas USING btree (frm_cd)
+t_prc_price_formulas | ix_t_prc_price_formulas_frm_typ_cd | CREATE INDEX ix_t_prc_price_formulas_frm_typ_cd ON public.t_prc_price_formulas USING btree (frm_typ_cd)
+t_prd_product_bundle_qtys | t_prd_product_bundle_qtys_pkey | CREATE UNIQUE INDEX t_prd_product_bundle_qtys_pkey ON public.t_prd_product_bundle_qtys USING btree (prd_cd, bdl_qty)
+t_prd_product_bundle_qtys | ix_t_prd_product_bdl_qtys_bdl_unit_typ_cd | CREATE INDEX ix_t_prd_product_bdl_qtys_bdl_unit_typ_cd ON public.t_prd_product_bundle_qtys USING btree (bdl_unit_typ_cd)
+t_prd_product_price_formulas | t_prd_product_price_formulas_pkey | CREATE UNIQUE INDEX t_prd_product_price_formulas_pkey ON public.t_prd_product_price_formulas USING btree (prd_cd, frm_cd)
+t_prd_product_price_formulas | ix_t_prd_prc_frm_frm_cd | CREATE INDEX ix_t_prd_prc_frm_frm_cd ON public.t_prd_product_price_formulas USING btree (frm_cd)
+t_prd_product_prices | pk_t_prd_product_prices | CREATE UNIQUE INDEX pk_t_prd_product_prices ON public.t_prd_product_prices USING btree (prd_cd, apply_ymd)
+t_prd_product_prices | ix_t_prd_product_prices_prd_apply | CREATE INDEX ix_t_prd_product_prices_prd_apply ON public.t_prd_product_prices USING btree (prd_cd, apply_ymd DESC)
+
+## TABLE/COLUMN COMMENTS (DB의 의미 주석)
+t_prc_component_prices | (table) | 구성요소 다차원 단가 — 시계열
+t_prc_component_prices | comp_price_id | 구성요소단가ID
+t_prc_component_prices | comp_cd | 구성요소코드
+t_prc_component_prices | apply_ymd | 적용일자
+t_prc_component_prices | siz_cd | 사이즈코드
+t_prc_component_prices | clr_cd | 도수코드
+t_prc_component_prices | mat_cd | 자재코드
+t_prc_component_prices | coat_side_cnt | 코팅면수
+t_prc_component_prices | bdl_qty | 묶음수 차원 키
+t_prc_component_prices | min_qty | 수량구간하한
+t_prc_component_prices | unit_price | 단가
+t_prc_component_prices | note | 비고
+t_prc_component_prices | reg_dt | 등록일시
+t_prc_component_prices | upd_dt | 수정일시
+t_prc_formula_components | (table) | 공식별구성요소
+t_prc_formula_components | frm_cd | 공식코드
+t_prc_formula_components | comp_cd | 구성요소코드
+t_prc_formula_components | disp_seq | 표시순서
+t_prc_formula_components | addtn_yn | 가산여부
+t_prc_formula_components | reg_dt | 등록일시
+t_prc_formula_components | upd_dt | 수정일시
+t_prc_price_components | (table) | 가격구성요소
+t_prc_price_components | comp_cd | 구성요소코드
+t_prc_price_components | comp_nm | 구성요소명
+t_prc_price_components | comp_typ_cd | 구성요소유형코드
+t_prc_price_components | note | 비고
+t_prc_price_components | use_yn | 사용여부
+t_prc_price_components | reg_dt | 등록일시
+t_prc_price_components | upd_dt | 수정일시
+t_prc_price_formulas | (table) | 가격공식
+t_prc_price_formulas | frm_cd | 공식코드
+t_prc_price_formulas | frm_nm | 공식명
+t_prc_price_formulas | frm_typ_cd | 공식유형코드
+t_prc_price_formulas | note | 비고
+t_prc_price_formulas | use_yn | 사용여부
+t_prc_price_formulas | reg_dt | 등록일시
+t_prc_price_formulas | upd_dt | 수정일시
+t_prd_product_bundle_qtys | (table) | 상품별묶음수
+t_prd_product_bundle_qtys | prd_cd | 상품코드
+t_prd_product_bundle_qtys | bdl_qty | 묶음수
+t_prd_product_bundle_qtys | bdl_unit_typ_cd | 묶음단위유형코드
+t_prd_product_bundle_qtys | dflt_yn | 기본여부
+t_prd_product_bundle_qtys | disp_seq | 표시순서
+t_prd_product_bundle_qtys | reg_dt | 등록일시
+t_prd_product_bundle_qtys | upd_dt | 수정일시
+t_prd_product_price_formulas | (table) | 상품별가격공식
+t_prd_product_price_formulas | prd_cd | 상품코드
+t_prd_product_price_formulas | frm_cd | 공식코드
+t_prd_product_price_formulas | apply_bgn_ymd | 적용시작일자
+t_prd_product_price_formulas | note | 비고
+t_prd_product_price_formulas | reg_dt | 등록일시
+t_prd_product_price_formulas | upd_dt | 수정일시
+t_prd_product_prices | (table) | 상품단가, 시계열
+t_prd_product_prices | prd_cd | 상품코드
+t_prd_product_prices | apply_ymd | 적용일자
+t_prd_product_prices | unit_price | 단가
+t_prd_product_prices | note | 비고
+t_prd_product_prices | reg_dt | 등록일시
+t_prd_product_prices | upd_dt | 수정일시
+
+## CONSTRAINTS (table | name | type | definition)  [p=PK c=CHECK f=FK]
+t_prc_component_prices | fk_prc_comp_prices_comp_cd | f | FOREIGN KEY (comp_cd) REFERENCES t_prc_price_components(comp_cd) ON UPDATE CASCADE ON DELETE CASCADE
+t_prc_component_prices | fk_prc_comp_prices_clr_cd | f | FOREIGN KEY (clr_cd) REFERENCES t_clr_color_counts(clr_cd) ON UPDATE CASCADE ON DELETE CASCADE
+t_prc_component_prices | fk_prc_comp_prices_siz_cd | f | FOREIGN KEY (siz_cd) REFERENCES t_siz_sizes(siz_cd) ON UPDATE CASCADE ON DELETE CASCADE
+t_prc_component_prices | fk_prc_comp_prices_mat_cd | f | FOREIGN KEY (mat_cd) REFERENCES t_mat_materials(mat_cd) ON UPDATE CASCADE ON DELETE CASCADE
+t_prc_component_prices | t_prc_component_prices_comp_price_id_not_null | n | NOT NULL comp_price_id
+t_prc_component_prices | t_prc_component_prices_reg_dt_not_null | n | NOT NULL reg_dt
+t_prc_component_prices | t_prc_component_prices_apply_ymd_not_null | n | NOT NULL apply_ymd
+t_prc_component_prices | t_prc_component_prices_comp_cd_not_null | n | NOT NULL comp_cd
+t_prc_component_prices | t_prc_component_prices_pkey | p | PRIMARY KEY (comp_price_id)
+t_prc_formula_components | t_prc_formula_components_addtn_yn_check | c | CHECK ((addtn_yn = ANY (ARRAY['Y'::bpchar, 'N'::bpchar])))
+t_prc_formula_components | fk_prc_formula_comps_frm_cd | f | FOREIGN KEY (frm_cd) REFERENCES t_prc_price_formulas(frm_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prc_formula_components | fk_prc_formula_comps_comp_cd | f | FOREIGN KEY (comp_cd) REFERENCES t_prc_price_components(comp_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prc_formula_components | t_prc_formula_components_frm_cd_not_null | n | NOT NULL frm_cd
+t_prc_formula_components | t_prc_formula_components_comp_cd_not_null | n | NOT NULL comp_cd
+t_prc_formula_components | t_prc_formula_components_reg_dt_not_null | n | NOT NULL reg_dt
+t_prc_formula_components | t_prc_formula_components_pkey | p | PRIMARY KEY (frm_cd, comp_cd)
+t_prc_price_components | t_prc_price_components_use_yn_check | c | CHECK ((use_yn = ANY (ARRAY['Y'::bpchar, 'N'::bpchar])))
+t_prc_price_components | fk_prc_price_components_comp_typ_cd | f | FOREIGN KEY (comp_typ_cd) REFERENCES t_cod_base_codes(cod_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prc_price_components | t_prc_price_components_comp_cd_not_null | n | NOT NULL comp_cd
+t_prc_price_components | t_prc_price_components_reg_dt_not_null | n | NOT NULL reg_dt
+t_prc_price_components | t_prc_price_components_use_yn_not_null | n | NOT NULL use_yn
+t_prc_price_components | t_prc_price_components_comp_nm_not_null | n | NOT NULL comp_nm
+t_prc_price_components | pk_t_prc_price_components | p | PRIMARY KEY (comp_cd)
+t_prc_price_formulas | t_prc_price_formulas_use_yn_check | c | CHECK ((use_yn = ANY (ARRAY['Y'::bpchar, 'N'::bpchar])))
+t_prc_price_formulas | fk_prc_price_formulas_frm_typ_cd | f | FOREIGN KEY (frm_typ_cd) REFERENCES t_cod_base_codes(cod_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prc_price_formulas | t_prc_price_formulas_frm_typ_cd_not_null | n | NOT NULL frm_typ_cd
+t_prc_price_formulas | t_prc_price_formulas_frm_nm_not_null | n | NOT NULL frm_nm
+t_prc_price_formulas | t_prc_price_formulas_frm_cd_not_null | n | NOT NULL frm_cd
+t_prc_price_formulas | t_prc_price_formulas_use_yn_not_null | n | NOT NULL use_yn
+t_prc_price_formulas | t_prc_price_formulas_reg_dt_not_null | n | NOT NULL reg_dt
+t_prc_price_formulas | pk_t_prc_price_formulas | p | PRIMARY KEY (frm_cd)
+t_prd_product_bundle_qtys | t_prd_product_bundle_qtys_dflt_yn_check | c | CHECK ((dflt_yn = ANY (ARRAY['Y'::bpchar, 'N'::bpchar])))
+t_prd_product_bundle_qtys | fk_prd_product_bdl_qtys_bdl_unit_typ_cd | f | FOREIGN KEY (bdl_unit_typ_cd) REFERENCES t_cod_base_codes(cod_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prd_product_bundle_qtys | fk_prd_product_bdl_qtys_prd_cd | f | FOREIGN KEY (prd_cd) REFERENCES t_prd_products(prd_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prd_product_bundle_qtys | t_prd_product_bundle_qtys_reg_dt_not_null | n | NOT NULL reg_dt
+t_prd_product_bundle_qtys | t_prd_product_bundle_qtys_dflt_yn_not_null | n | NOT NULL dflt_yn
+t_prd_product_bundle_qtys | t_prd_product_bundle_qtys_prd_cd_not_null | n | NOT NULL prd_cd
+t_prd_product_bundle_qtys | t_prd_product_bundle_qtys_bdl_qty_not_null | n | NOT NULL bdl_qty
+t_prd_product_bundle_qtys | t_prd_product_bundle_qtys_pkey | p | PRIMARY KEY (prd_cd, bdl_qty)
+t_prd_product_price_formulas | fk_prd_prc_frm_prd_cd | f | FOREIGN KEY (prd_cd) REFERENCES t_prd_products(prd_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prd_product_price_formulas | fk_prd_prc_frm_frm_cd | f | FOREIGN KEY (frm_cd) REFERENCES t_prc_price_formulas(frm_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prd_product_price_formulas | t_prd_product_price_formulas_frm_cd_not_null | n | NOT NULL frm_cd
+t_prd_product_price_formulas | t_prd_product_price_formulas_reg_dt_not_null | n | NOT NULL reg_dt
+t_prd_product_price_formulas | t_prd_product_price_formulas_prd_cd_not_null | n | NOT NULL prd_cd
+t_prd_product_price_formulas | t_prd_product_price_formulas_pkey | p | PRIMARY KEY (prd_cd, frm_cd)
+t_prd_product_prices | fk_prd_product_prices_prd_cd | f | FOREIGN KEY (prd_cd) REFERENCES t_prd_products(prd_cd) ON UPDATE CASCADE ON DELETE CASCADE
+t_prd_product_prices | t_prd_product_prices_prd_cd_not_null | n | NOT NULL prd_cd
+t_prd_product_prices | t_prd_product_prices_apply_ymd_not_null | n | NOT NULL apply_ymd
+t_prd_product_prices | t_prd_product_prices_reg_dt_not_null | n | NOT NULL reg_dt
+t_prd_product_prices | pk_t_prd_product_prices | p | PRIMARY KEY (prd_cd, apply_ymd)

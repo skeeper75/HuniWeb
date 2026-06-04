@@ -47,7 +47,21 @@ Load order follows the FK graph: `price_formulas` + `price_components` (parents)
 
 - 상품마스터 **`계산공식집초안`** (1108행): formulas in Korean prose, **typed** at the block head (e.g. `[원자합산형: 프리미엄엽서 / 코팅엽서…]`). Each formula expands into numbered steps `(1)…(n)`, and each step names a **참조시트명** (판걸이수 / 디지털인쇄비 / 코팅 / 출력소재 / 인쇄후가공…). This is the authority for formula → components → price-source wiring.
 - 가격표 **19개 단가시트** (디지털인쇄비, 코팅, 출력소재, 인쇄후가공, 커팅타공, …): each is a `t_prc_component_prices` matrix — a 2D table of 수량행 × 옵션열, usually with **banded multi-row headers** (e.g. 디지털인쇄비: row2 band 흑백/칼라/별색 × row3 단면/양면).
-- 상품마스터 per-category sheets (디지털인쇄, 스티커, 책자, 실사, 아크릴, 문구(가격포함), 굿즈파우치(가격포함)…): product rows (ID, MES ITEM_CD, 상품명, 사이즈) + which options/formula a product uses. `(가격포함)` sheets carry product-level prices → `t_prd_product_prices`.
+- 상품마스터 per-category sheets (디지털인쇄, 스티커, 책자, 실사, 아크릴, 문구(가격포함), 굿즈파우치(가격포함)…): product rows (ID, MES ITEM_CD, 상품명, 사이즈) + which options/formula a product uses. `(가격포함)` sheets carry product-level prices.
+
+## 확정 매핑 규칙 (round-2, 2026-06-04 사용자 확정 — HARD)
+
+These 7 rules are user-confirmed and authoritative. Do NOT re-derive or override silently.
+
+1. **별색 = 공정(process), NOT 도수(clr).** 별색은 `t_proc_processes` (`PROC_000007 별색인쇄` + 자식 화이트/클리어/핑크/금색/은색 `PROC_000008~012`). 상품의 별색 선택 = `t_prd_product_processes`(proc_cd). 별색 **단가**는 `디지털인쇄비` 시트 F~O 셀값을 별색인쇄비 comp_cd로 그대로 적재. [HARD] clr_cd 매핑 금지(FK 위반 — clr은 0~4도/CMYK뿐). 박도 동일(`PROC_000033 박`+17자식 → 박형압비).
+2. **단/양면 = 각 시트 단가 그대로, 양면 ≠ 단면×2.** 양면 단가를 단면×2로 계산 금지(실측상 비2배 가변). 시트의 단면·양면 단가를 각각 그대로 저장. 코팅 단/양면=`coat_side_cnt`(1/2), 인쇄 단/양면=별도 comp_cd(단면인쇄비/양면인쇄비).
+3. **variant 가격 = `t_prc_component_prices` 차원으로 저장**(NOT `t_prd_product_prices`). variant = 한 상품(prd_cd 1개) 안의 사이즈/옵션별 다른 가격(예: 손거울 S/M/L 5000/5500/6000, 머그 화이트/반투명/투명 6500/7500/7500). 사이즈 variant→`siz_cd`, 색상/재질 variant→`mat_cd`. 단일가(variant 없는) 상품만 `t_prd_product_prices`. 이유: product_prices PK=(prd_cd,apply_ymd)는 variant 차원 슬롯이 없어 다중행 PK 충돌. `t_prd_product_sizes`(상품-사이즈 링크 기존재) 활용.
+4. **합가 = `t_prd_product_prices`(상품단가).** 한 시트에 단가와 합가가 공존하면 합가는 분해·재합산하지 말고 **합가 그대로 상품단가로 반영**(이중원천 불일치 방지). 적용: 커팅타공("인쇄비+소재+커팅")·포스터사인("코팅포함가")·인쇄후가공("(합가)")·제본("삼각대 포함")·스티커(소재+코팅 결합). 단 합가가 사이즈/수량별로 변하면 규칙3(component_prices 차원)에 종속.
+5. **면적형 곱셈·수량할인 = 공식 외부(적용단)** 처리, 매트릭스 셀은 룩업 적재. `addtn_yn`은 합산 플래그뿐(곱셈 표현 불가).
+6. **단가 → `t_prc_component_prices`** (구성요소 분해 단가). 적재 컬럼명은 라이브 DDL 기준(frm_typ_cd/comp_typ_cd/unit_price).
+7. **apply_ymd = 가격 효력일**(변경된 가격을 적용할 일자), `'yyyy-MM-dd'` NOT NULL. go-live 확정 시 일괄 주입, round-1과 형식 정합.
+
+비가격 시트(매핑 대상 아님): `판걸이수`(주문수량→출력매수 변환계수), `굿즈파우치(구간할인)`(round-1 t_dsc), `후가공_박(백업)`(중복 제외). → `01_excel/price-sheet-scope.md`.
 
 ## Step 0 — Schema fit-gap (run FIRST, answers "is the schema adequate?")
 
