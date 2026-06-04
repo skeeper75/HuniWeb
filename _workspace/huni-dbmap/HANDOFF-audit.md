@@ -4,9 +4,18 @@
 
 ## 0. 한 줄 현황
 
-DB↔엑셀 9속성 매핑 정합 검증(round-3)을 1차 완료(대시보드: GO 3·MAJOR 4·CONDITIONAL 1·CONFIRM 1)했으나, **사용자가 검증 방법론의 근본 결함을 지적 → 재설계 합의**. 다음 작업 = **방법론 1단계 설계**(베스트프랙티스 리서치 + 정규화 규칙 사전[한 상품 다면체] + 전수 자동 대조 설계). 이후 하네스 개선 → 전수 실행. **DB 미적재 유지**.
+DB↔엑셀 9속성 매핑 정합 검증(round-3) 1차 완료(대시보드: GO 3·MAJOR 4·CONDITIONAL 1·CONFIRM 1) → 방법론 근본 결함 지적 → 재설계 합의 → **[2026-06-05] 방법론 1단계 설계(A+B+C) 완료·독립검증 CONDITIONAL GO**. 산출 `05_method/`: A(ETL 베스트프랙티스 12출처)·B(정규화 규칙사전 28규칙, 프리미엄엽서 4공정 MISSING 자동검출 확정)·C(전수대조 7단계 설계, 1차결함 재발불가 3중방어)·D(독립검증: dead link 0·날조 0·7포인트 PASS). 다음 = **하네스 개선(dbm-mapping-audit 프레임 교정) + 차단전제 BLOCK-1~4 해소 → 전수 실행**. **DB 미적재 유지**.
 
-> [다음 세션 시작점] §3(사용자 교정 핵심) + §5(다음 작업)부터 읽을 것.
+> [다음 세션 시작점] §0 + §5-2(1단계 결과·차단전제)부터 읽을 것. 산출 상세는 `05_method/{A,B,C,D}-*.md`.
+
+### 5-2. 1단계 방법 설계 결과 (2026-06-05, CONDITIONAL GO)
+
+- **A** `05_method/A-etl-bestpractices.md` — 기대행(expected rows) 생성→3계층 대조(count→set→value)·무결성 게이트 선행·no-reverse-load. 출처 12.
+- **B** `05_method/B-normalization-rules.md` — 6 기초데이터 28 변환규칙. 핵심 **R-PROC-2(줄수/개수=공정 존재 신호)**. 마스터 전체 정합 명시(오버피팅 방지). 라이브 `ref-product-sets.csv`(28행) 추출.
+- **C** `05_method/C-fulldiff-design.md` — 7단계 파이프라인(S0~S7), 7 변환함수군, 7 배제사전, 회귀게이트(R-PROC-2 MISSING≥6).
+- **D** `05_method/D-method-validation.md` — 독립검증. dead link 0·날조 0·7포인트 PASS. CONDITIONAL GO(차단전제 4건 잔존).
+- **전수 실행 차단 전제(BLOCK, 해소 후 실행)**: ①BLOCK-1 R-MAT-2 IMPORT 컬럼↔prd_cd 매핑 확정 ②BLOCK-2 중철책자 PRD_000068 sets 0행 라이브 확증 ③BLOCK-3 공정택일그룹 권위부재(자동검출 불가·CONFIRM 반자동) ④**BLOCK-4(최위험) 시트별 줄수/개수 블록 헤더 ANCHOR 테이블 확정**(미확정 시 오시/미싱 오매핑).
+- 경미 FLAG 2건(검출력 무영향): B R-PROC-4 박색상 범위 표기·C ANCHOR "부모공정" 용어.
 
 ## 1. 절대 원칙 (HARD)
 
