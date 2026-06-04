@@ -1,7 +1,7 @@
 {
   "tool_name": "Bash",
-  "tool_input_preview": "{\"command\":\"git add _workspace/huni-widget/04_build/ && git status --short _workspace/huni-widget/04_build/ | grep -cE '^A' | xargs echo \\\"스테이징 파일 수:\\\" && echo \\\"\\\" && echo \\\"=== node_modules/dist 스테이...",
-  "error": "Exit code 1\nwarning: could not open directory '_workspace/huni-widget/04_build/_workspace/huni-widget/04_build/': No such file or directory\nfatal: pathspec '_workspace/huni-widget/04_build/' did not match any files\nnode_modules/dist 제외 OK\n\nOn branch main\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\t../../../.claude/agents/moai/\n\t../../../.claude/agents/print-quote/\n\t../../../.claude/commands/\n\t../../../.claude/hooks/\n\t../../../.claude/output-styles/\n\t../../....",
-  "timestamp": "2026-06-02T10:05:06.306Z",
+  "tool_input_preview": "{\"command\":\"cd /Users/innojini/Dev/HuniWeb/_workspace/huni-widget/04_build\\necho \\\"=== component-type-map.ts 전문 ===\\\" && cat src/adapters/red/component-type-map.ts 2>/dev/null\\necho \\\"\\\" && echo \\\"===...",
+  "error": "Exit code 1\n=== component-type-map.ts 전문 ===\n// data-adapter.md §3 — componentType 매핑 규칙 (어댑터 결정 로직).\n// [결정] 위젯이 아니라 어댑터가 \"Red 데이터셋 → componentType\" 을 결정. 룩업 테이블이면 충분(과한 휴리스틱 금지).\nimport type { ComponentType } from '@/contract';\n\n// Red 논리 데이터셋 키 → componentType.\n// PCS 그룹은 색상 여부에 따라 color-chip 분기가 필요하므로 별도 함수에서 처리.\nexport const DATASET_COMPONENT_TYPE: Record<string, ComponentType> = {\n  size: 'option-button', // pdt_size_info (값 ≤ ~6, 텍스트)\n  material: 'select-box', // pdt_mtrl_info (값 多)\n  dos...",
+  "timestamp": "2026-06-03T04:24:52.802Z",
   "retry_count": 1
 }
