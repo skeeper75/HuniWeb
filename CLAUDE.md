@@ -728,3 +728,26 @@ For detailed patterns on plugins, sandboxing, headless mode, and version managem
 | 2026-06-04 | 2차 팀 교차검증(authority/integration/assumption 3렌즈, read-only) + 보정 Wave1 — **G-1 "RESOLVED" ATTB 권위 날조 적발**(인용 mod_07:2597 등 deob 부존재, 실 ATTB 대입 4곳 중 ORD_CNT 0건, 캡처도 ORD_CNT=1 뿐). 보정: PDT_WRK echo 제거(캡처 4/4 '')·mb_cust_cod 빈값 침묵PRICE=0 가드(`??`→`||`)·날조 주석 정정·타우톨로지 테스트 정직 재작성. 신규 발굴: G-5(의류 apparel 배타삼항이 DIR_MTR 필수 가격축 드롭)·A-2(SUB_MTR 이중의미 평면화 ATTB="50" 오echo)·B-1(size-linked 반경 dead). 이연: W2-a(SUB_MTR 엔트리-shape 규칙)·D-1(WRK/DIR qty>1 재캡처)·G-5/G-INT-0(컨버전 게이트). 1차 hw-qa RESOLVED가 소스 오독 기반이었음을 supersede 표기. vitest 148→149, INV-3 코어 0줄 | 04_build src/adapters·test, 07_parity/crossverify-round2-findings·fix-verification(supersede), HANDOFF, 커밋 3844eb6 | 사용자 — huni-widget 하네스를 팀으로 실행 + 보정 웨이브 |
 | 2026-06-04 | 라이브 qty-sweep 캡처(RP 세션 갱신→testbed :3001 fresh→qty {1,2,10} 스윕) — **D-1 RESOLVED**(WRK_MTR/DIR_MTR ATTB가 건수(PRN_CNT) 따라 {2,10} 변함·PRICE 선형 → 우리 ATTB=String(req.quantity)=건수 echo가 Red와 값 일치, characterization 정당 입증). **G-5 CONFIRMED**(CLSTSHS PRICE=19,900, Red 의류는 DIR_MTR 유지 → 우리 apparel 삼항 드롭=실결함, additive 처방·컨버전 게이트). **G-6 신규**(굿즈 수량 필드축 스왑: Red 건수=PRN_CNT/ORD_CNT=1, 우리 ORD_CNT=건수 → 값 옳으나 필드축 컨버전 정렬 필요, 잠복). W2-b/INN_DFT 잔여(노트류 tmpl_price 우리측 요청 shape 결함 SUM=0). 가격권위=result_sum.PRICE(per-line 0=거짓PRICE=0 실증). 캡처/노트 redact 0건. 어댑터/테스트 D-1 코멘트 검증반영(동작 무변경) | 05_qa/captures(qtysweep 6+의류)·qtysweep-attb-analysis, 07_parity/round2-findings §5, 04_build 코멘트, HANDOFF | 사용자 — 캡처 세션 진행(터미널 로그인) |
 | 2026-06-04 | 보정 W2-a — SUB_MTR 이중의미 평면화(A-2) 해소. isMaterialMultiSubMtr discriminator(엔트리-shape: 전부 non-empty MTRL_CD·≥2 distinct·ATTB_CD 부재)로 ACPDSTD material-multi→ATTB="", AIPPCUT 단일 add-on(MTRL_CD="")→echo 보존. 어댑터 전용(INV-3 위젯/계약 0줄, red-types는 Red 원시 shape). hw-qa 독립 재검증 GO(게이트 손수 재실행·discriminator fixture 실측·field walk·자기 오탐 철회). W2-b(INN_DFT 조건부) 이연(fixture 0개·축 상이). vitest 149→150 | 04_build src/adapters/red·test, 05_qa/w2a-independent-reverify, HANDOFF, 커밋 2bcb480 | 사용자 — W2-a 보정 + hw-qa 독립 재검증 |
+
+---
+
+## 하네스: Huni-DBMap (Railway DB 데이터 매핑)
+
+**목표:** Railway `railway` DB(PostgreSQL 18.4, 29테이블) 구조를 읽기전용으로 시트화하고, 상품마스터·인쇄상품 가격표 엑셀 데이터를 DB 테이블에 매핑(매핑 설계서 + 적재용 CSV)한다. **DB 직접 적재는 보류**(사용자 결정 — 시트·매핑 설계까지). 4인 에이전트 팀(`dbm-schema-analyst` / `dbm-excel-analyst` / `dbm-mapping-designer` / `dbm-validator`)으로 구조분석·엑셀분석 병렬 → 매핑 설계 → 경계면 교차검증.
+
+**트리거:** "DB 매핑", "DB 구조 파악", "테이블 시트화", "엑셀 데이터 매핑", "구간할인 매핑", "수량구간 할인", "가격표 매핑", "상품마스터 매핑", "Railway DB", "적재 CSV", "매핑 검증", "DB매핑 하네스 실행/재실행/업데이트", "특정 테이블만 매핑" 등 본 도메인 요청 시 `huni-dbmap-orchestrator` 스킬을 사용. 단순 질문은 직접 응답.
+
+**산출물 루트:** `_workspace/huni-dbmap/` (00_schema·01_excel·02_mapping·03_validation·_meta)
+
+**접속/보안:** Railway 자격증명은 `.env.local`의 `RAILWAY_DB_*`에만 저장(chmod 600·gitignore). `_workspace`(git 추적)에 비밀값 금지. DB 파괴적 쓰기 없음 — 읽기전용 조회 + 롤백전용 dry-run만 허용.
+
+**산출물 형식:** 구조·매핑 설계 문서=Markdown, 적재 대상 데이터 row=CSV(per-table) 병행.
+
+**1차 초점:** 수량구간별 할인 — 아크릴(엑셀 '아크릴' r49 / `CAT_000009`)·굿즈/파우치(엑셀 '굿즈파우치(구간할인)' r1 / 파우치 `CAT_000213~228`+에코백 `CAT_000011`)·문구(동 시트 r10 / `CAT_000008`) → `t_dsc_discount_tables`→`t_dsc_discount_details`→`t_prd_product_discount_tables`. (가격 `t_prc_*`·할인 `t_dsc_*`·고객 `t_cus_` 테이블은 현재 전부 비어있음 = 매핑 타겟.)
+
+**변경 이력:**
+| 날짜 | 변경 내용 | 대상 | 사유 |
+|------|----------|------|------|
+| 2026-06-04 | 초기 구성 (4인 에이전트 + 오케스트레이터 + 방법론 스킬 3종(schema-extract/excel-parse/mapping) + _workspace 구조 + .env.local RAILWAY 접속 + DB감사: 29테이블·가격/할인 비어있음 확인) | 전체 | Railway DB 데이터 매핑 하네스 신규 구축 |
+| 2026-06-04 | 1차 수량구간할인 매핑 실행·검증 GO (할인테이블 7종: 아크릴일반·아크릴카라비너·패브릭(파우치+에코백, 부자재제외)·문구·굿즈A·굿즈B·말랑 → 헤더7·구간35·링크99 적재CSV). 권위=상품마스터 "구간할인적용테이블" 컬럼(행별) + 파우치/아크릴 카테고리단위. JOIN KEY=prd_nm(MES_ITEM_CD 전부 NULL). 확정규칙: 할인율=퍼센트(numeric(5,2))·마지막구간 max_qty=NULL(무제한)·DSC_TYPE.01(정률). 잔여: apply_ymd go-live 확정·round-2(가격 t_prc_*) | _workspace/huni-dbmap/{00_schema,01_excel,02_mapping/load,03_validation} | 1차 매핑 실행 |
+| 2026-06-04 | 산출 문서 한글화 — _workspace 산출 .md 12종 한국어 재작성(식별자/코드값/CSV헤더 영어 유지) + 4개 스킬에 "산출 문서 한국어" HARD 규칙 추가(재발방지) | _workspace/huni-dbmap/**.md, .claude/skills/{huni-dbmap-orchestrator,dbm-*} | 사용자 — 문서 한글 작성 요청 |
