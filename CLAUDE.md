@@ -127,9 +127,9 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 **변경 이력 (최근 3건, 전체는 `_workspace/huni-dbmap/CHANGELOG.md`):**
 | 날짜 | 변경 내용 | 대상 | 사유 |
 |------|----------|------|------|
-| 2026-06-05 | round-3 방법론 재설계 — "엑셀=권위 단순대조"→"DB 정규화 규칙=기준" + L1(충실추출)↔L2(정합검증) 2계층. 결함 뿌리가 매핑 아닌 엑셀 추출(포맥스 A1 false MISSING). 방법 설계 A~D(CONDITIONAL GO)·L1 기준 E·F·G | _workspace/huni-dbmap/05_method/{A~G}, HANDOFF-audit | 사용자 — 검증 방법론 근본 결함 지적 |
 | 2026-06-05 | round-3 전체 L1 토대 정립 — 정보축 8개 전수화(값·행숨김·열숨김·코멘트·배경/글자색·수식·하이퍼링크·병합), 토대=상품마스터13+판걸이수+출력소재IMPORT, 엔티티 2축(상품정보 우선/가격정보 round-2 이연). 15시트 9게이트 PASS(non-empty100%·round-trip0)·별도설정24↔IMPORT 18/6 | _workspace/huni-dbmap/06_extract/(15 l1+docs+scripts) | 사용자 — 전 상품 단일 신뢰 토대 |
 | 2026-06-05 | round-3 하네스 보강 + 핸드오프 — 스킬 3종(dbm-mapping-audit 프레임교정·정보축·의미코드맵 / dbm-excel-parse L1 충실추출 / orchestrator round-3 L1→L2 파이프라인)에 세션 교훈 인코딩. HANDOFF 시작점=L2 정합검증부터 | .claude/skills/{dbm-mapping-audit,dbm-excel-parse,huni-dbmap-orchestrator}, HANDOFF-audit | 사용자 — 작업내용 하네스 보강 + 핸드오프 작성 |
+| 2026-06-05 | round-3 L2 정합 재검증 v2 — 독립검증 GO(CONDITIONAL). 3-Wave(BLOCK해소→9속성전수→독립재검증). 회귀게이트 PASS(R-PROC-2 32건, 1차결함 프리미엄엽서4공정 재현·해소)·부당정정/날조 0건. 판정 GO3(사이즈·인쇄옵션·페이지룰)/MAJOR4(자재·공정·묶음수·추가상품 적재결손)/CONDITIONAL1(판형)/N/A1(공정택일그룹). DB 미적재. 다음=공정택일그룹 도메인해석(캘린더/현수막 UI택일·인쇄방식별 레시피) | _workspace/huni-dbmap/04_audit/{v2,block*}, HANDOFF-audit | 사용자 — DB 매핑 검증/정합 재검증 |
 
 ---
 

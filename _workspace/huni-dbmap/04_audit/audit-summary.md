@@ -1,3 +1,5 @@
+> [SUPERSEDED 2026-06-05] 본 1차 대시보드는 방법론 결함(엑셀 단순집합대조·부모코드 오매칭)을 내포한다. **권위 = `04_audit/v2/audit-summary-v2.md`**(B 규칙 코드화 expected 재산출 + 독립 재검증 GO). 1차는 변동 추적용 보존. v2 회귀게이트 PASS(R-PROC-2 32건), 독립검증 `v2/independent-review.md` 날조 0건.
+
 # round-3 매핑 정합 검증 종합 대시보드 (Phase 5)
 
 9속성 연결 정합 검증(Phase 4) 결과를 **새 대조 없이 집계만** 한다. 권위=엑셀 원천, DB 재조회 없음(추출본). 모든 수치는 각 parity.md/mismatches.csv 인용(출처 명시). 분모=245 공통 상품(`00_master-parity.md`).

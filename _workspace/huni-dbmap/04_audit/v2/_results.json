@@ -1,0 +1,126 @@
+{
+  "size": {
+    "row_cnt": {
+      "MATCH": 415,
+      "MISSING": 31,
+      "EXTRA": 21,
+      "MISMATCH": 0
+    },
+    "prd_cnt": {
+      "MATCH_only": 133,
+      "has_MISSING": 13,
+      "has_EXTRA": 12,
+      "has_MISMATCH": 0
+    },
+    "exp_rows": 473,
+    "unresolved": 7
+  },
+  "process": {
+    "row_cnt": {
+      "MATCH": 156,
+      "MISSING": 48,
+      "EXTRA": 40,
+      "MISMATCH": 0
+    },
+    "prd_cnt": {
+      "MATCH_only": 28,
+      "has_MISSING": 25,
+      "has_EXTRA": 38,
+      "has_MISMATCH": 0
+    },
+    "exp_rows": 206,
+    "unresolved": 2
+  },
+  "material": {
+    "row_cnt": {
+      "MATCH": 209,
+      "MISSING": 40,
+      "EXTRA": 266,
+      "MISMATCH": 0
+    },
+    "prd_cnt": {
+      "MATCH_only": 47,
+      "has_MISSING": 31,
+      "has_EXTRA": 140,
+      "has_MISMATCH": 0
+    },
+    "exp_rows": 271,
+    "unresolved": 3
+  },
+  "print_option": {
+    "row_cnt": {
+      "MATCH": 109,
+      "MISSING": 3,
+      "EXTRA": 63,
+      "MISMATCH": 0
+    },
+    "prd_cnt": {
+      "MATCH_only": 74,
+      "has_MISSING": 3,
+      "has_EXTRA": 21,
+      "has_MISMATCH": 0
+    },
+    "exp_rows": 147,
+    "unresolved": 0
+  },
+  "rproc2_missing": 32,
+  "rproc2_by_prd": {
+    "프리미엄 쿠폰/상품권": [
+      "29",
+      "30",
+      "31",
+      "32"
+    ],
+    "프리미엄엽서": [
+      "29",
+      "30",
+      "31",
+      "32"
+    ],
+    "소량전단지": [
+      "31",
+      "32"
+    ],
+    "3단접지카드": [
+      "31",
+      "32"
+    ],
+    "미니접지카드": [
+      "31",
+      "32"
+    ],
+    "스탠다드엽서": [
+      "29",
+      "30",
+      "31",
+      "32"
+    ],
+    "프리미엄명함": [
+      "31",
+      "32"
+    ],
+    "스탠다드명함": [
+      "31",
+      "32"
+    ],
+    "스탠다드 쿠폰/상품권": [
+      "29",
+      "30",
+      "31",
+      "32"
+    ],
+    "2단접지카드": [
+      "31",
+      "32"
+    ],
+    "와이드 접지리플렛": [
+      "31",
+      "32"
+    ],
+    "접지리플렛": [
+      "31",
+      "32"
+    ]
+  },
+  "spc_proc_missing": 2
+}
