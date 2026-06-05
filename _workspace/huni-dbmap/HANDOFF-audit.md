@@ -8,8 +8,10 @@ round-3 **인쇄 도메인 KB + 11시트 종단 결함 처리(라이브 권위) 
 
 > [다음 세션 시작점 — 여기부터]
 > 1. **입력 = `08_remediation/_summary.md`**(11시트 통합 결함 대시보드: 시트×4분류·공통패턴8·v2반전·처리우선순위 H1~H13·실무컨펌16주제·위젯선결조건) + 각 `08_remediation/<sheet>.md`(시트별 종단). 도메인 KB = `07_domain/`(db-domain-structure-live·pdf-domain-knowledge·decision-trail-harvest·term-bridge-draft). 전략 = `05_method/H`.
-> 2. **다음 작업 = 실무 컨펌 16주제 해소**(도메인 결정 A1~A7 + 적재정책 B1~B9, _summary §5). 사용자가 도메인 권위 → AskUserQuestion으로 우선순위(BLOCKER 관련 먼저) 해소. 특히 **BLOCKER 3**(G-GP-2 goods-pouch size77·G-GP-1 폰케이스5미등록·G-CL-1 calendar 택일멤버)·**016=사용자 수동시험적재**(레퍼런스 검증선행).
-> 3. 컨펌 해소 후 = **처리(적재) CSV 설계** — High H1~H13부터, FK순(상품등록→size→material[IMPORT해소]→process[excl_group]→addon→page_rule). 마스터는 전 시트 건전(연결테이블만). **DB 쓰기는 별도 승인**.
+> 2. **실무 컨펌 1·2차 확정**(`08_remediation/_confirmations.md`): 그레이밴딩=미출시/보류(품절 아님, goods-pouch 폰케이스 BLOCKER 해제)·calendar 가공=택일·IMPORT ●=실자재·qty_unit 상품군일괄·완칼=공정+조각수는bundle_qty·**variant=관리용이성 우선**(과세분화 금지, 금색열쇠고리 통합). **3차 메타교정**: 도메인 질문 자가확보 선행([[메모리 dbmap-domain-knowledge-before-asking]]).
+> 3. **도메인 심화 완료**(07_domain L2 `process-recipe-tree.md`·L3 `entity-semantic-model.md`): C-9 생산방식 3구조(A통합 sets0정상/B셋트 반제품 sub_prd 빈껍데기/C단일, **자재권위=parent+usage_cd**)·C-10 제본8종 차이(레이플랫vsPUR=후니PUR운영 권위)·C-11 UV/별색5종 용도. **벤치마킹**(`benchmark-competitors.md`): **후니 스키마가 RP/WP 표현력 흡수/능가 → 답습 불요·미적재만 채우기 + 캐스케이드 제약(자재/사이즈→공정 disable) 1건만 보강**.
+> 4. **다음 = 처리(적재) 설계** — High H1~H13 미적재 채우기, FK순(상품등록→size→material[IMPORT/두께해소]→process[excl_group 연결]→addon→page_rule[interval]). variant=RP 축독립+disable. 캐스케이드 제약 신설. 마스터 전 시트 건전(연결테이블만). **DB 쓰기 별도 승인**.
+> 5. **잔여 컨펌 소수**(도메인 선행 완료로 축소): 레이플랫vsPUR 포토북 사실(1순위)·통합상품(068~071) 향후 sub_prd 분해 여부·UV화이트vs별색화이트 인코딩 위치(B4)·옵셋/실크 운영 여부.
 > 4. 가격정보(round-2 t_prc_*)는 9속성 정제 후 이연 — `price-info-deferred.md`. round-1 구간할인 완료.
 > 5. [HARD 교훈] DB 구조/적재 판정은 **라이브 직접확인 권위**(추정·번호연속추론·표본일반화 금지). 인쇄방식≠절대축(시트=1차 단위). 미지=가설→리서치(국내+해외)→사용자 컨펌.
 
