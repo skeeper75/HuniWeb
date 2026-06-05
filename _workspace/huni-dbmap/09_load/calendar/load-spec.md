@@ -20,7 +20,7 @@
 | `t_prd_product_materials_conditional.csv` | (보류) | 보류 | **라이브 기적재 중복PK 4행**(MAT_000107 몽블랑190g, 108/109/110/111) | **4** |
 | `load/t_prd_product_processes_excl_link_update.csv` | t_prd_product_processes (UPDATE) | UPDATE | G-CL-1 택일 멤버 연결 **[BLOCKER 부분해소]** | **4** |
 | `load/t_prd_product_process_excl_groups_note_update.csv` | t_prd_product_process_excl_groups (UPDATE) | UPDATE | G-CL-3 우드거치대 이중분류 정정 | **1** |
-| `load/t_prd_products_editor_yn_update.csv` | t_prd_products (UPDATE) | UPDATE | G-DC-1 design-calendar 디자인축 | **5** (Y=4) |
+| ~~`load/t_prd_products_editor_yn_update.csv`~~ **철회** → `_deferred/t_prd_products_editor_yn_update_WITHDRAWN.csv` | ~~t_prd_products (UPDATE)~~ | **철회(2026-06-05)** | ~~G-DC-1~~ design-calendar=신규 별도 prd_cd 등록(`09_load/design-calendar/`)으로 분리 | **0**(active) / 5(이력) |
 | `load/t_prd_products_qtyunit_update.csv` | t_prd_products (UPDATE) | UPDATE | G-CL-6 qty_unit | **5** |
 | `t_prd_product_processes_excl_member_flag.csv` | (flag) | 보류 | G-CL-1/2 비명칭 멤버(발명 금지) | 6 |
 | `material_misaxis_flag.csv` | (flag) | 보류 | 삼각대/링 mis-axis 자재(삭제 금지) | 6 |
@@ -33,8 +33,10 @@
 
 생성기 `gen_load.py`(재현 가능) · 검증 `verify_expected.py`(게이트 **PASS, exit 0**, §7).
 
-> **design-calendar 신규행 = 0**(HARD): design-calendar는 calendar와 **prd_cd 108~112 완전 공유**.
-> 신규 상품/행 절대 금지 — 디자인축은 `t_prd_products.editor_yn` 플래그 UPDATE로만 인코딩(C-5). 자기검증에 신규행0 가드 포함.
+> **[정정 2026-06-05] design-calendar 처리 분리·editor_yn UPDATE 철회**(HARD): 라이브 재SELECT 결과
+> **113~117 부재·캘린더 108~112=업로드 전용(editor_yn=N 정상)**. design-calendar="108~112 공유 variant"는 해석 오류.
+> 디자인캘린더는 **사이즈 차이(엽서 6→1, 벽걸이 3→1)** 때문에 단일 prd_cd로 표현 불가 → **신규 별도 prd_cd 등록 대상**(후니 (N,Y) 선례=스티커팩·포토북[디자인명]·먼슬리플래너). 신규 등록 설계는 **`09_load/design-calendar/load-spec.md`로 분리**.
+> 본 calendar 산출물에서 **`t_prd_products_editor_yn_update.csv` 4행(108/109/111/112 N→Y) 철회**(active 제거 → `_deferred/t_prd_products_editor_yn_update_WITHDRAWN.csv`에 사유 보존, 삭제 아님). `verify_expected.py`의 C5-editor_yn 게이트·신규행0 가드의 editor_yn 참조 제거. **calendar(108~112)는 일반 업로드 캘린더 적재만 유지(material 43·excl_link 4·qty 5) — design-calendar 제외 후 게이트 재PASS(exit 0).**
 
 ---
 
@@ -48,9 +50,9 @@
 | 벽걸이캘린더 | PRD_000111 | .04 | Y | N | ● | ● (디자인보유●) |
 | 와이드벽걸이캘린더 | PRD_000112 | .04 | Y | N | ● | ● (디자인보유●) |
 
-- **두 시트 = 동일 5 prd_cd**(108~112 연속). design-calendar.md ① 라이브 확정 — DB에 "디자인캘린더" 별도 상품 0건.
+- **calendar 시트 = 108~112(라이브 실재 업로드 캘린더).** design-calendar 시트의 5상품도 prd_nm으로는 108~112와 매칭되나(113~117 부재) — **[정정 2026-06-05] 사이즈 셋이 다르므로 공유 variant가 아니라 신규 별도 prd_cd 등록 대상**(`09_load/design-calendar/`). DB에 디자인캘린더 별도 상품 **미적재(0건) → 신규 등록 필요.**
 - **use_yn=N 없음**(전 5상품 Y) → deferred(비활성) 분리 대상 없음. 그레이밴딩(C-1 미출시) 해당 없음.
-- design-calendar 차이 = 디자인보유●·가격포함·고정페이지·종이 직접명(몽블랑190g). → **editor_yn 플래그로 인코딩**(C-5).
+- design-calendar 차이 = 디자인보유●·가격포함·고정페이지·종이 직접명(몽블랑190g)·**사이즈 셋 다름(엽서 6→1, 벽걸이 3→1)**. → ~~editor_yn 플래그로 인코딩~~ **[정정 2026-06-05] 신규 별도 prd_cd로 인코딩**(사이즈 차이로 단일 prd_cd 표현 불가 — `09_load/design-calendar/`). 108~112 editor_yn=N 유지(업로드 전용 정상).
 
 ---
 
@@ -60,7 +62,7 @@
 
 ```
 ① qty_unit UPDATE (t_prd_products)           — 컬럼 업데이트, FK 무관, 독립
-② editor_yn UPDATE (t_prd_products)          — design-calendar 디자인축, 컬럼 업데이트, FK 무관, 신규행0
+② [철회 2026-06-05] editor_yn UPDATE         — design-calendar 공유 variant 해석 오류로 철회. 디자인캘린더는 신규 별도 prd_cd(09_load/design-calendar/). 본 calendar 적재에서 제외
 ③ material INSERT (R3 IMPORT, active 43)     — FK: prd_cd→t_prd_products, mat_cd→t_mat. excl_grp 연결 선행 불요. MAT_000107 충돌 4행 conditional 분리
 ④ process excl_grp_cd UPDATE (R1 BLOCKER)    — 기적재 process행 갱신. FK: excl_grp_cd→excl_group 헤더(110/111/112 적재됨)
 ⑤ excl_group note UPDATE (R4 거치대 정정)     — excl_group 헤더 갱신(우드거치대 trigger 제거)
@@ -68,8 +70,8 @@
 ```
 
 **UPDATE성과 INSERT성의 분리(HARD):**
-- **excl_grp_cd 연결(④)·editor_yn(②)·qty_unit(①)·excl_group note(⑤)** = 기존 행/컬럼 **UPDATE** → 별도 `*_update.csv`
-  (현재값 `current_*` + 목표값 `target_*` + `_provenance`). INSERT 아님.
+- **excl_grp_cd 연결(④)·qty_unit(①)·excl_group note(⑤)** = 기존 행/컬럼 **UPDATE** → 별도 `*_update.csv`
+  (현재값 `current_*` + 목표값 `target_*` + `_provenance`). INSERT 아님. (~~editor_yn(②)~~ 철회 — 디자인캘린더 신규 별도 prd_cd 분리)
 - **material(③)만 INSERT** = 신규 연결 행. PK=(prd_cd, mat_cd, usage_cd). **active 43행만 INSERT** — MAT_000107(몽블랑190g)
   4행은 라이브 기적재(중복PK)라 `t_prd_product_materials_conditional.csv`로 분리(적재 직전 라이브 재확인 후 폐기/승격).
 
@@ -191,28 +193,19 @@ NULL인 것 → 기존 행 갱신. 별도 `*_excl_link_update.csv`(current `NULL
 
 ---
 
-### C-5 — design-calendar editor_yn [UPDATE 5행(Y=4), **신규행 0**, G-DC-1]
+### C-5 — design-calendar [**철회·재정의 2026-06-05**: 108~112 editor_yn UPDATE 철회 → 신규 별도 prd_cd 등록(별도 설계)]
 
-**도메인 근거(C-5 binding):** design-calendar = calendar와 동일 prd_cd(108~112). DB에 별도 "디자인캘린더" 상품 미존재.
-디자인 제공(완성형) 축 = `t_prd_products.editor_yn` 플래그(**컬럼 실재 확인**, 현재 전 5상품 N). → **editor_yn UPDATE로만 인코딩.**
+> **🔴 [라이브 정정 2026-06-05]** 본 섹션의 기존 처리("108~112 editor_yn=Y UPDATE")는 **철회**한다. 사유:
+> - **라이브 read-only SELECT 확증:** 113~117 부재·캘린더 108~112는 `(file_upload_yn=Y, editor_yn=N)` = **업로드 전용이 정상**. 108~112를 editor_yn=Y로 바꾸면 라이브 정상값을 오염시킨다.
+> - **공유 variant 해석 오류:** design-calendar는 calendar와 prd_cd 108~112를 공유하는 variant가 **아니다**. 디자인캘린더는 **사이즈 셋이 다르다**(엽서 디자인 145×145 1종 vs 업로드 110=6종, 벽걸이 디자인 210×297 1종 vs 업로드 111=3종 — L1 권위). 모드별 사이즈가 다르면 단일 prd_cd로 표현 불가.
+> - **후니 선례:** 후니는 "디자인 제공으로 옵션이 달라지는" 상품을 **별도 prd_cd**로 둔다(라이브 (N,Y)=3건=스티커팩 PRD_000065·포토북[디자인명] PRD_000100·먼슬리플래너 PRD_000176, 업로드본과 별개 prd_cd·이름 구분).
+>
+> **재정의:** 디자인캘린더(5상품)는 **신규 별도 prd_cd로 등록**한다 — 설계는 **`09_load/design-calendar/load-spec.md`로 분리**(placeholder `PRD_NEW_DCAL_1~5`, 실제 prd_cd는 적재 시 후니가 라이브 max 280 이후로 부여 — 발명 금지). 신규 마스터 INSERT는 **DB 쓰기라 별도 승인 필요**.
 
-**처리 성격 = UPDATE only, 신규행 절대 금지(HARD):** 기존 108~112 행의 editor_yn 컬럼 갱신. prd_cd ∈ {108~112} 강제
-(생성기·검증 양쪽 assert). 신규 prd_cd 발생 시 FATAL.
+**철회 처리(삭제 아님·이력 보존):** `load/t_prd_products_editor_yn_update.csv` 4행(108/109/111/112 N→Y)을 active load에서 제거하고 `_deferred/t_prd_products_editor_yn_update_WITHDRAWN.csv`에 **철회 사유와 함께 보관**. `verify_expected.py`의 `C5-editor_yn` 게이트 + 신규행0 가드의 editor_yn 참조 제거(qtyunit만 유지). calendar 게이트 재PASS(exit 0).
 
-| prd_cd | 상품 | design-calendar 디자인보유 | current→target | 처리 |
-|--------|------|:------------------------:|----------------|------|
-| 108 | 탁상형캘린더 | ● | N → **Y** | editor_yn=Y |
-| 109 | 미니탁상형캘린더 | ● | N → **Y** | editor_yn=Y |
-| 111 | 벽걸이캘린더 | ● | N → **Y** | editor_yn=Y |
-| 112 | 와이드벽걸이캘린더 | ● | N → **Y** | editor_yn=Y |
-| **110** | 엽서캘린더 | **(시트 등장·● 비표시)** | N → N (no-op) | **flag** |
-
-- **110 셀 모호(중요):** design-calendar L1 엽서캘린더 행은 **가격(4000)·고정페이지(12P)를 보유 = 디자인캘린더 판매 멤버**이나
-  `디자인보유` 셀이 **비어 있음**(다른 4상품은 ●). → 셀 충실 판독상 editor_yn=Y 단정 불가. **현행 N 유지 + flag(컨펌Q-3).**
-  임의로 Y/N 결정하지 않음(발명 금지).
-- **editor_yn ≠ 상품수 증가:** C-5 "상품수 중복 계상 금지" 준수 — 동일 5 prd_cd에 플래그만 토글.
-
-> **provenance:** `design-calendar L1 디자인보유●→editor_yn=Y (C-5, 신규행0)` / 110: `가격 등장이나 디자인보유● 비표시 → 셀 모호, 현행 유지 no-op + flag`
+- **110 셀 모호(과거 flag)는 이제 무관:** 디자인캘린더가 신규 별도 prd_cd로 가므로, 110 엽서의 "디자인보유● 비표시" 셀 모호는 **108~112 UPDATE 여부와 무관**. 신규 디자인엽서캘린더(`PRD_NEW_DCAL_3`)는 L1 가격·고정페이지·종이로 등록되며, "디자인보유 ● 비표시"는 신규 등록 설계의 컨펌 항목으로 이관(design-calendar/load-spec.md).
+- **calendar 108~112 영향 없음:** 본 철회로 calendar(108~112)는 editor_yn=N(라이브 정상) 그대로 유지. material 43·excl_link 4·qty 5만 적재.
 
 ---
 
@@ -233,8 +226,7 @@ NULL인 것 → 기존 행 갱신. 별도 `*_excl_link_update.csv`(current `NULL
 **발명 금지 → 전부 deferred + CONFIRM (`_deferred/page_rule_ringcolor_deferred.csv`):**
 - **calendar 장수(다중):** `4(8P)/8(16P)/12(24P)…` = 달력 월수↔페이지. **variant인가 page_rule(min/max)인가 미확정**(G-CL-5).
   `4(8P)`형은 장수4=8페이지 = 변형 옵션에 가까우나 단정 불가.
-- **design-calendar 페이지(단일 고정):** `30P/26P/12P/13P` 고정 → page_rule(min=max) 자연스러우나 **G-DC-1(editor_yn) 인코딩에
-  의존**(같은 prd_cd가 calendar 가변·design-calendar 고정을 공유) → editor_yn 분기 후 결정.
+- **design-calendar 페이지(단일 고정):** `30P/26P/12P/13P` 고정 → page_rule(min=max) 자연스러움. **[정정 2026-06-05] 신규 별도 prd_cd로 등록되므로 calendar(108~112)와 페이지 셋 충돌 없음** — 디자인캘린더 신규 prd_cd에 page_rule(min=max=30/26/12/13) 직접 적재(설계는 `09_load/design-calendar/`). ~~editor_yn 분기 의존~~ 불요.
 - **링칼라 조건부:** `★고리형트윈링제본선택시만 : 링칼라선택`(111/112) = 고리형트윈링(proc) 선택을 부모로 하는 **조건부 자식**.
   트윈링 proc param vs 별도 옵션 인코딩 미확정(G-CL-5). 라이브엔 링칼라가 자재(MAT_000253 링블랙)로 기적재(mis-axis, §5).
 
@@ -248,7 +240,7 @@ NULL인 것 → 기존 행 갱신. 별도 `*_excl_link_update.csv`(current `NULL
 | QTY_UNIT.01 | EA | code-values | R6 target 정합 |
 | USAGE.07 | 공통 | digital-print 컨벤션 | R3 material 정합 |
 | GRP-CAL-가공 | 헤더 110/111/112 적재 | ref-excl-groups | R1 excl_grp_cd FK 타깃 실재 |
-| editor_yn | char(1) NOT NULL | columns.csv #12 | C-5 UPDATE 정합(Y/N) |
+| editor_yn | char(1) NOT NULL | columns.csv #12 | ~~C-5 UPDATE~~ **철회**(2026-06-05): calendar 108~112 editor_yn=N 유지. 디자인캘린더는 신규 별도 prd_cd 등록 시 editor_yn=Y(09_load/design-calendar/) |
 | 우드거치대 | PRD_000012 (PRD_TYPE.03) | ref-products | C-6 addon 단일축 정합 |
 
 **캐스케이드 제약(benchmark §9):** 캘린더 L1에 **자재→공정 disable 신호 없음**(digital-print의 "180g이상 코팅가능" 같은 셀 주석
@@ -274,14 +266,14 @@ NULL인 것 → 기존 행 갱신. 별도 `*_excl_link_update.csv`(current `NULL
 |----|----------|---------|-----------|
 | **Q-1 [택일 H5 완결 선결]** | 택일 비명칭 멤버(가공없음/제본없음/우드거치대/삼각대) | flag(미적재·발명 금지) | **110·112 택일그룹이 멤버 1개라 기능상 미성립**(H5 PARTIAL). 미연결 6종을 추정 proc로 메우지 않음 — "가공없음"·"제본없음"에 신규 proc_cd 부여인가, UI "선택 안 함"(proc 없이)인가? 거치대(삼각대/우드)·삼각대는 addon으로 단일화? **이 답이 110/112 택일을 ≥2멤버로 완성하는 선결 조건.** |
 | **Q-2** | 108/109 excl_group 헤더 0행 | 신설 보류 | 삼각대 단일 가공이라 택일그룹 불요인가, GRP-CAL-가공 헤더 신설해야 하는가? (라이브 헤더 0행 확정) |
-| **Q-3 [design-cal 110 editor_yn 모호]** | 110 엽서 editor_yn | no-op(N 유지)+flag | design-calendar 시트 등장(가격 4000·고정페이지 보유)이나 **디자인보유● 셀 비표시** — editor_yn=Y로 할지? 임의 Y/N 단정 안 함(발명 금지·셀 충실판독). 현행 N 유지는 no-op(적재 무영향). |
+| **Q-3 [철회·이관 2026-06-05]** | ~~110 엽서 editor_yn~~ | **calendar에선 무관**(108~112 editor_yn=N 유지) | editor_yn UPDATE 철회로 본 Q는 calendar 범위 밖. 디자인엽서캘린더(신규 `PRD_NEW_DCAL_3`)의 "디자인보유● 비표시" 셀 모호는 **`09_load/design-calendar/` 신규 등록 설계의 컨펌 항목**으로 이관. |
 | **Q-4** | 장수(calendar) page vs variant | deferred | `4(8P)/8(16P)…` 장수 = page_rule(min/max)인가 선택 variant인가? |
 | **Q-5** | design-calendar 페이지(고정) 적재 | deferred | `30P/26P/12P/13P` 고정 페이지를 page_rule(min=max)로? editor_yn 분기 후 자재(몽블랑190g 단일) 제약과 함께? |
 | **Q-6** | 링칼라 조건부 인코딩 | deferred(mis-axis flag) | 링칼라(★고리형트윈링선택시만)를 트윈링 proc param vs 별도 옵션? 현재 자재(링블랙)로 mis-axis 적재됨 |
 | **Q-7** | 삼각대/링 mis-axis 자재 | flag(삭제 안 함) | 거치대/링을 material에서 addon/process param으로 축 정정? (삭제 없이 재분류) |
 | **Q-8 [신규]** | material MAT_000107 4행 라이브 충돌 | conditional 보류(active 제외) | 적재 직전 라이브-export에서 108/109/110/111의 MAT_000107이 여전히 실재하면 conditional 4행 **폐기**, 부재면 **active 승격**. (라이브 SELECT 1회로 즉시 판정) |
 
-> **Q-2·Q-3·Q-8은 라이브 SELECT 1회로 즉시 해소 가능**(108/109 excl_group 실태·110 editor_yn 현재값·MAT_000107 충돌 재확인).
+> **Q-2·Q-8은 라이브 SELECT 1회로 즉시 해소 가능**(108/109 excl_group 실태·MAT_000107 충돌 재확인). **Q-3은 철회·이관**(editor_yn UPDATE 철회 — 디자인캘린더 신규 별도 prd_cd로 `09_load/design-calendar/`).
 > **Q-1은 도메인 컨펌 필수** — 라이브 조회로 안 풀림(택일 멤버 모델링 결정). **Q-1 미해소 = 110/112 택일 H5 미완(BLOCKER 잔존).**
 
 ---
@@ -294,15 +286,15 @@ label                      exp   act  miss  extra  result
 R3-material(IMPORT)         43    43     0      0  PASS
 R1-excl_link(UPDATE)         4     4     0      0  PASS
 R6-qtyunit(EA)               5     5     0      0  PASS
-C5-editor_yn(●→Y)            4     4     0      0  PASS
 design-cal-신규행0              0     -     -      0  PASS
 FK-existence                 -     -     -      0  PASS
 
 GATE: PASS — 누락0·날조0·신규행0   (exit 0)
 ```
 
-**실행 확인:** 2026-06-05 NO-GO 보정 후 `verify_expected.py` 재실행 → **exit 0, 전 게이트 PASS**(누락0·날조0·신규행0,
-R3-material **43**=라이브충돌 4행 conditional 제외). 상세 원리·stale 한계·보정 이력은 `expected-vs-load.md`.
+**실행 확인:** **2026-06-05 design-calendar editor_yn UPDATE 철회 후** `verify_expected.py` 재실행 → **exit 0, 전 게이트 PASS**.
+`C5-editor_yn(●→Y)` 게이트는 **철회**(디자인캘린더 신규 별도 prd_cd 분리 — `09_load/design-calendar/`가 신규 등록 검증 담당).
+R3-material **43**=라이브충돌 4행 conditional 제외. 상세 원리·stale 한계·보정 이력은 `expected-vs-load.md`.
 
 ---
 

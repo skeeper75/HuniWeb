@@ -83,19 +83,15 @@ exp_qu=set(ALL_CAL)
 act_qu=set(r['prd_cd'] for r in load_load('t_prd_products_qtyunit_update.csv') if r['target_qty_unit_typ_cd']=='QTY_UNIT.01')
 check('R6-qtyunit(EA)', exp_qu, act_qu)
 
-# ---- C-5 editor_yn: design-calendar 디자인보유● → Y (110 모호 flag 제외) ----
-dc_design=set()
-with open(os.path.join(ROOT,'06_extract/design-calendar-l1.csv'),encoding='utf-8-sig') as f:
-    for row in csv.DictReader(f):
-        nm=row.get('prd_nm','').strip()
-        if nm in NM2CD and (row.get('디자인보유','') or '').strip()=='●':
-            dc_design.add(NM2CD[nm])
-act_editor_y=set(r['prd_cd'] for r in load_load('t_prd_products_editor_yn_update.csv') if r['target_editor_yn']=='Y')
-check('C5-editor_yn(●→Y)', dc_design, act_editor_y)
+# ---- C-5 editor_yn 게이트 철회 (2026-06-05): design-calendar는 108~112 공유 variant가 아니라
+#      신규 별도 prd_cd 등록 대상(라이브 113~117 부재·캘린더 108~112=업로드전용 editor_yn=N 정상).
+#      108~112 editor_yn=Y UPDATE는 _deferred/t_prd_products_editor_yn_update_WITHDRAWN.csv로 철회 이력 보존.
+#      디자인캘린더 신규 등록 검증은 09_load/design-calendar/verify_design_calendar.py(별도 설계)가 담당.
+#      본 calendar 게이트는 일반 업로드 캘린더(108~112) 적재만 검증.
 
-# ---- design-calendar 신규행=0 가드 (모든 editor/qtyunit UPDATE prd_cd ⊆ 108~112) ----
+# ---- design-calendar 신규행=0 가드 (qtyunit UPDATE prd_cd ⊆ 108~112) ----
 newrow=[]
-for name in ('t_prd_products_editor_yn_update.csv','t_prd_products_qtyunit_update.csv'):
+for name in ('t_prd_products_qtyunit_update.csv',):  # editor_yn UPDATE 철회로 제외
     for r in load_load(name):
         if r['prd_cd'] not in ALL_CAL: newrow.append((name,r['prd_cd']))
 # material/link도 캘린더 외 prd_cd면 신규/오염

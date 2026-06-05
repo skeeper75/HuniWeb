@@ -1,0 +1,6 @@
+prd_cd,prd_nm,member_label,ring_color,issue,_provenance
+PRD_NEW_DCAL_1,디자인탁상형캘린더,삼각대(그레이),,master proc_cd 부재 — 삼각대는 ref-processes.csv에 코드 없음(발명 금지). 삼각대=거치대(addon) 후보인지 process 멤버인지 컨펌(Q-DC-4),"L1 row3 캘린더사양_캘린더가공=삼각대(그레이) — proc_cd 미존재로 미적재 flag"
+PRD_NEW_DCAL_2,디자인미니탁상형캘린더,삼각대(블랙),,master proc_cd 부재 — 삼각대 코드 없음. 컨펌 Q-DC-4,"L1 row8 캘린더가공=삼각대(블랙) — proc_cd 미존재로 미적재 flag"
+PRD_NEW_DCAL_3,디자인엽서캘린더,가공없음(재단만),,L1 캘린더가공 공란 — 가공없음. UI "선택 안 함" 또는 무가공이라 process 행 불요(컨펌 Q-DC-4),"L1 row11 캘린더가공 공란 — 무가공"
+PRD_NEW_DCAL_4,디자인벽걸이캘린더,링칼라=블랙,블랙,링칼라(★고리형트윈링선택시만)=블랙 — 트윈링 proc param vs 별도 옵션 미확정(G-CL-5 동일). 자재 mis-axis 적재 금지(컨펌 Q-DC-5),"L1 row14 캘린더사양_링칼라=블랙 — 트윈링 조건부 링색"
+PRD_NEW_DCAL_5,디자인와이드벽걸이캘린더,링칼라=블랙,블랙,링칼라=블랙 — 트윈링 proc param vs 별도 옵션 미확정. 컨펌 Q-DC-5,"L1 row16 링칼라=블랙 — 트윈링 조건부 링색"

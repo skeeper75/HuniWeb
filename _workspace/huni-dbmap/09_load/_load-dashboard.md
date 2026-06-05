@@ -24,13 +24,14 @@
 | **sticker** | process 3(화이트별색) | qty 16 | 066 원형 11(BLOCKED master부재)·064 deferred | GO-W-F |
 | **product-accessory**(대조군) | (정합양호 — 적재 최소) | qty 15 | bundle 9 deferred | GO-W-F |
 | **photobook** | (거의 기적재 no-op) | qty 1 | 책등 param(스키마 슬롯 부재)·복합분해 proposal | GO-W-F |
-| **calendar(+design-cal)** | material 43·excl_link 4(택일연결) | qty 5·editor_yn 4 | material 4 conditional(보정)·장수/링칼라 12·미연결멤버 6 | **보정후 GO** |
+| **calendar** | material 43·excl_link 4(택일연결) | qty 5 | material 4 conditional(보정)·장수/링칼라 12·미연결멤버 6 | **보정후 GO** |
+| **design-calendar**(신규 등록) | t_prd_products 5(신규)·size 5·material 5·print 5·page_rule 5·addon 2·process 2 | — | editor_yn UPDATE 철회(라이브 정정)·placeholder prd_cd(후니 부여)·삼각대/링칼라 flag·가격 round-2 | **신규등록 GO·Q-DC-0 승인 대기** |
 | **acrylic** | process 29(완칼14·UV14·부착1)·material 10·bundle 6 | 두께 20·UV정정 20·nonspec 12·qty 23 | 완칼 over-reach 3·151 conditional(보정)·★/use_yn=N | **보정후 GO** |
 | **silsa** | process 1(화이트별색)·addon 1 | nonspec 13·qty 28 | 보드자재 7·addon flag 9·★ 2(발명회피) | GO-W-F |
 | **goods-pouch** | addon 1 | qty 98 | **size 77 BLOCKED-LEGIT**·폰케이스 5 비활성 | GO-W-F |
 
 - **마스터(`t_mat`·`t_proc`·`t_cod`·`t_siz`·sets)는 전 시트 무변경** — 상품 연결 테이블(`t_prd_product_*`)만 적재. 모든 prd_cd FK 라이브 실재 확인.
-- **UPDATE-class 산출**(컬럼 갱신, INSERT 아님): qty_unit(전시트)·editor_yn(calendar/dc)·excl_grp_cd(calendar 택일연결)·두께/UV/nonspec(acrylic)·nonspec(silsa). 별도 `*_update.csv`로 분리(현재값+목표값+provenance).
+- **UPDATE-class 산출**(컬럼 갱신, INSERT 아님): qty_unit(전시트)·excl_grp_cd(calendar 택일연결)·두께/UV/nonspec(acrylic)·nonspec(silsa). 별도 `*_update.csv`로 분리(현재값+목표값+provenance). (~~editor_yn(calendar/dc)~~ **철회 2026-06-05** — 디자인캘린더는 신규 별도 prd_cd 등록 INSERT-class로 재분류, `09_load/design-calendar/`).
 
 ---
 
@@ -61,7 +62,7 @@
 3. **variant 분해 (C-8 관리용이성)** — 두께→material(acrylic MAT_042~044)·색상→material·사이즈→size·표지타입→sub_prd. 과세분화 금지(금색열쇠고리 통합). 평면화 해소.
 4. **완칼=공정+조각수=bundle_qty (C-7)** — acrylic/sticker. 조각수 bundle_qty 차원, 위젯표시 조각수. 가격은 round-2.
 5. **캐스케이드 제약 (benchmark §9, 신설 1)** — digital-print "180g 미만→코팅 disable"가 유일 grounded. `constraint_json`(jsonb 컬럼 실존) 인코딩 권고. 타 시트 grounded disable 없으면 발명 금지.
-6. **UPDATE성 처리** — editor_yn(design-cal)·excl_grp_cd(택일연결)·print_side 정정(UV)·qty_unit은 기존행 컬럼 갱신 → 별도 update-set CSV(INSERT 아님).
+6. **UPDATE성 처리** — excl_grp_cd(택일연결)·print_side 정정(UV)·qty_unit은 기존행 컬럼 갱신 → 별도 update-set CSV(INSERT 아님). (~~editor_yn(design-cal)~~ 철회 2026-06-05 — 디자인캘린더 신규 별도 prd_cd 등록 INSERT로 재분류).
 7. **모범 재적재 금지** — silsa 봉제/타공/족자/부착/코팅(정합 적재)·photobook 9속성·sticker 커팅·product-accessory 분기는 **정상**, 재적재 0(기계 보증).
 
 ---

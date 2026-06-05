@@ -137,38 +137,15 @@ with open(os.path.join(LOAD,'t_prd_product_process_excl_groups_note_update.csv')
     for r in excl_note_upd: w.writerow(r)
 
 # ============================================================
-# C-5 — design-calendar editor_yn UPDATE [신규행 0, design-calendar G-DC-1]
+# C-5 — design-calendar editor_yn UPDATE [철회 2026-06-05 — 더 이상 생성 안 함]
 # ============================================================
-# design-calendar = calendar와 동일 prd_cd(108~112). 별도 상품/행 절대 금지.
-# 디자인 제공 축 = editor_yn 플래그(컬럼 실재, 현재 전 5상품 N). design-calendar L1 디자인보유● → editor_yn=Y.
-# **신규행 0 가드**: 이 set은 기존 108~112 UPDATE만. prd_cd ∈ ALL_CAL 강제.
-# design-calendar L1: 디자인보유(●) 보유 + design-calendar 시트 등장(가격 포함) 확인.
-# 디자인보유●를 1차 권위로 editor_yn=Y. 단 ● 비표시인데 가격·고정페이지가 있어 design-calendar에 등장하는
-# 상품(110 엽서)은 셀 모호 → flag(발명 금지, 임의 Y/N 결정 안 함).
-dc_design_yn=set(); dc_in_sheet=set()  # ●표시 / 가격 등장(시트 멤버)
-with open(os.path.join(ROOT,'06_extract/design-calendar-l1.csv'),encoding='utf-8-sig') as f:
-    for row in csv.DictReader(f):
-        nm=row.get('prd_nm','').strip()
-        if nm not in NM2CD: continue
-        cd=NM2CD[nm]
-        if (row.get('디자인보유','') or '').strip()=='●': dc_design_yn.add(cd)
-        if (row.get('가격','') or '').strip(): dc_in_sheet.add(cd)  # 가격 있는 행 = 디자인캘린더 판매 멤버
-dc_ambiguous = dc_in_sheet - dc_design_yn  # 시트엔 있으나 ● 비표시 = 셀 모호
-EDITOR_UPD_HDR=['prd_cd','prd_nm','current_editor_yn','target_editor_yn','use_yn','upd_dt','_provenance']
-editor_upd_rows=[]; editor_flag=[]
-for cd in ALL_CAL:  # 신규행 금지: 기존 108~112만
-    r=prods[cd]
-    has_design = cd in dc_design_yn
-    tgt='Y' if has_design else r['editor_yn']  # 디자인보유● → Y, 아니면 현행 유지(no-op)
-    prov=(f'design-calendar L1 디자인보유●→editor_yn=Y (C-5, 신규행0)' if has_design
-          else f'design-calendar 디자인보유(없음)→현행 유지 no-op (C-5, 신규행0)')
-    if cd in dc_ambiguous:
-        prov=f'design-calendar 가격 등장(시트 멤버)이나 디자인보유● 비표시 → 셀 모호, 현행 유지 no-op + flag (C-5, 발명 금지)'
-        editor_flag.append((cd, r['prd_nm'], 'design-calendar 시트 등장(가격O)이나 디자인보유● 비표시 — editor_yn=Y 여부 CONFIRM'))
-    editor_upd_rows.append([cd, r['prd_nm'], r['editor_yn'], tgt, r['use_yn'], UPDDT, prov])
-with open(os.path.join(LOAD,'t_prd_products_editor_yn_update.csv'),'w',newline='',encoding='utf-8') as f:
-    w=csv.writer(f); w.writerow(EDITOR_UPD_HDR)
-    for r in editor_upd_rows: w.writerow(r)
+# [철회 사유] 라이브 read-only SELECT(2026-06-05) 확증: 113~117 부재·캘린더 108~112=(file_upload_yn=Y, editor_yn=N)
+#   = 업로드 전용이 정상. design-calendar="108~112 공유 variant(editor_yn=Y UPDATE)" 해석은 오류.
+#   디자인캘린더는 사이즈 셋이 다르므로(엽서 6→1, 벽걸이 3→1) 단일 prd_cd로 표현 불가 → 신규 별도 prd_cd 등록 대상.
+#   후니 (N,Y) 선례=스티커팩(065)·포토북[디자인명](100)·먼슬리플래너(176). 신규 등록 설계는 09_load/design-calendar/.
+# [처리] 본 블록(108~112 editor_yn=Y UPDATE 생성)을 비활성화. 기존 산출 CSV는 _deferred/...WITHDRAWN.csv로 이력 보존(삭제 아님).
+#   calendar(108~112)는 editor_yn=N 라이브 정상값 유지 — UPDATE 산출 0.
+# @MX:NOTE: 디자인캘린더 신규 등록 CSV 생성은 09_load/design-calendar/(별도 설계)가 담당. 본 gen_load는 calendar 업로드 적재 전용.
 
 # ============================================================
 # R6 (Medium) — qty_unit 일괄 부여 [UPDATE set, calendar G-CL-6]
@@ -246,13 +223,11 @@ print("=== R1 process excl_grp_cd LINK update rows:", len(proc_upd_rows), "| fla
 print("    link per prd:", dict(Counter(r[0] for r in proc_upd_rows)))
 print("=== R1 excl member MISSING flag rows (발명 금지):", len(member_missing))
 print("=== R4 excl_group note update rows (우드거치대 정정):", len(excl_note_upd))
-print("=== C-5 editor_yn UPDATE rows:", len(editor_upd_rows), "(신규행 0, prd_cd⊆ALL_CAL 강제)")
-print("    editor_yn→Y:", [r[0] for r in editor_upd_rows if r[3]=='Y'])
-print("    editor_yn flag(셀 모호):", editor_flag)
+print("=== C-5 editor_yn UPDATE: 철회 2026-06-05 (디자인캘린더 신규 별도 prd_cd 등록 — 09_load/design-calendar/). calendar 108~112 editor_yn=N 라이브 정상 유지")
 print("=== R6 qty_unit UPDATE rows:", len(qu_rows), "(캘린더=EA=QTY_UNIT.01)")
 print("=== DEFERRED page/ring rows:", len(page_def))
 print("=== material mis-axis flag rows (삭제 금지):", len(misaxis))
-# 신규행 0 가드 (design-calendar)
-nonmember=[r[0] for r in editor_upd_rows if r[0] not in ALL_CAL]
-assert not nonmember, f"FATAL: design-calendar 신규행 발생 {nonmember}"
-print("=== GUARD: design-calendar 신규행 0 확인 OK (editor set 전건 ⊆ 108~112)")
+# 신규행 0 가드 (calendar 적재 = 108~112만; editor_yn UPDATE 철회로 qty_unit 기준으로 검사)
+nonmember=[r[0] for r in qu_rows if r[0] not in ALL_CAL]
+assert not nonmember, f"FATAL: calendar 신규행 발생 {nonmember}"
+print("=== GUARD: calendar 신규행 0 확인 OK (UPDATE set 전건 ⊆ 108~112)")

@@ -1,0 +1,7 @@
+_WITHDRAWN,철회사유: design-calendar=108~112 공유 variant 해석 오류. 라이브 editor_yn=N이 정상(캘린더 108~112는 업로드 전용 file_upload_yn=Y·editor_yn=N). 디자인캘린더는 108~112가 아니라 신규 별도 prd_cd 등록 대상(09_load/design-calendar/). 본 UPDATE는 active load에서 제거하되 이력 보존을 위해 _deferred에 사유와 함께 보관. 삭제 아님.,철회일=2026-06-05,근거=라이브 read-only SELECT(113~117 부재·캘린더 108~112만·(N,Y)=3=스티커팩/포토북[디자인명]/먼슬리플래너)
+prd_cd,prd_nm,current_editor_yn,target_editor_yn,use_yn,upd_dt,_provenance,_withdrawn_reason
+PRD_000108,탁상형캘린더,N,Y,Y,2026-06-05 00:00:00,"design-calendar L1 디자인보유●→editor_yn=Y (C-5, 신규행0)","철회: 라이브 editor_yn=N 정상(업로드 전용). 디자인캘린더는 신규 별도 prd_cd 등록(공유 variant 아님)"
+PRD_000109,미니탁상형캘린더,N,Y,Y,2026-06-05 00:00:00,"design-calendar L1 디자인보유●→editor_yn=Y (C-5, 신규행0)","철회: 라이브 editor_yn=N 정상(업로드 전용). 디자인캘린더는 신규 별도 prd_cd 등록(공유 variant 아님)"
+PRD_000110,엽서캘린더,N,N,Y,2026-06-05 00:00:00,"design-calendar 가격 등장(시트 멤버)이나 디자인보유● 비표시 → 셀 모호, 현행 유지 no-op + flag","철회 무관(원래 no-op). 디자인캘린더 엽서는 신규 별도 prd_cd로 등록"
+PRD_000111,벽걸이캘린더,N,Y,Y,2026-06-05 00:00:00,"design-calendar L1 디자인보유●→editor_yn=Y (C-5, 신규행0)","철회: 라이브 editor_yn=N 정상(업로드 전용). 디자인캘린더는 신규 별도 prd_cd 등록(공유 variant 아님)"
+PRD_000112,와이드벽걸이캘린더,N,Y,Y,2026-06-05 00:00:00,"design-calendar L1 디자인보유●→editor_yn=Y (C-5, 신규행0)","철회: 라이브 editor_yn=N 정상(업로드 전용). 디자인캘린더는 신규 별도 prd_cd 등록(공유 variant 아님)"
