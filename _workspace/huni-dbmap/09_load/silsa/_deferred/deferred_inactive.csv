@@ -1,0 +1,3 @@
+kind,prd_cd,prd_nm,detail,_provenance,_deferred_reason
+nonspec,PRD_000129,폼보드,비규격 가로=20~120·세로=20~240,L1:폼보드 비규격(r69 사용자입력) 가로=20~120·세로=20~240,"nonspec_yn=N(라이브) + 사용자입력 행 _row_hidden=true + 단위 스케일 이상(20~120 vs 포스터 200~1200 → cm 의심) → active 제외. 폼보드 사용자입력 활성화 여부+단위 컨펌(D-SL-5)"
+unregistered_star,(미등록),투명포스터★,L1 전행 숨김(r18~21)+★제약,L1:투명포스터 _row_hidden=true(r18~21)+has_constraint_star (G-SL-8/C-1),"★제약+전행 숨김=미출시/보류(C-1 비활성). t_prd_products 미등록 → MISSING 아님. 접착투명포스터(122 등록)와 별개 상품. 출시 시 등록+화이트별색 동반 컨펌(D-SL-7)"

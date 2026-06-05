@@ -1,0 +1,2 @@
+prd_cd,prd_nm,live_page_min,live_page_max,live_page_incr,stale_ref_state,verdict,action,_provenance
+PRD_000097,떡메모지,3,3,3,부재(stale ref에 097 행 없음),"MISMATCH/잡음 의심 — 떡제본은 page 무의미(묶음수 권 도메인, bundle_qty 50/100장1권 적재됨)",FLAG only — 삭제 단정 금지. 라이브 097 page_rule 실재 재확인 후 제거 여부 컨펌(D-BK-4),"booklet.md G-BK-5: 라이브 097 page_rule=3/3/3, 엑셀 떡메모지 내지페이지 컬럼 부재. stale ref-product-page-rules.csv: 부재(stale ref에 097 행 없음)"

@@ -1,0 +1,13 @@
+prd_cd,sheet,page_label,interpretation,reason,_provenance
+PRD_000108,calendar,4(8P)/8(16P)/12(24P)/16(32P),장수↔페이지 다중(variant 또는 page_rule min/max 미확정),G-CL-5 CONFIRM: 장수=variant인가 page_rule인가 미확정 (발명 금지),L1 calendar 장수(필수)=4(8P)/8(16P)/12(24P)/16(32P)
+PRD_000109,calendar,12(24P)/16(32P),장수↔페이지 다중(variant 또는 page_rule min/max 미확정),G-CL-5 CONFIRM: 장수=variant인가 page_rule인가 미확정 (발명 금지),L1 calendar 장수(필수)=12(24P)/16(32P)
+PRD_000110,calendar,12/13/14/15/16,장수↔페이지 다중(variant 또는 page_rule min/max 미확정),G-CL-5 CONFIRM: 장수=variant인가 page_rule인가 미확정 (발명 금지),L1 calendar 장수(필수)=12/13/14/15/16
+PRD_000111,calendar,4~15(8P~30P),장수↔페이지 다중(variant 또는 page_rule min/max 미확정),G-CL-5 CONFIRM: 장수=variant인가 page_rule인가 미확정 (발명 금지),L1 calendar 장수(필수)=4~15(8P~30P)
+PRD_000112,calendar,4~15(8P~30P),장수↔페이지 다중(variant 또는 page_rule min/max 미확정),G-CL-5 CONFIRM: 장수=variant인가 page_rule인가 미확정 (발명 금지),L1 calendar 장수(필수)=4~15(8P~30P)
+PRD_000108,design-calendar,30P,페이지 단일 고정(page_rule min=max 또는 고정 variant),G-DC-4 CONFIRM: 고정 페이지 적재방식 미확정(G-DC-1 editor_yn 인코딩에 의존) (발명 금지),L1 design-calendar 페이지사양=30P 단일
+PRD_000109,design-calendar,26P,페이지 단일 고정(page_rule min=max 또는 고정 variant),G-DC-4 CONFIRM: 고정 페이지 적재방식 미확정(G-DC-1 editor_yn 인코딩에 의존) (발명 금지),L1 design-calendar 페이지사양=26P 단일
+PRD_000110,design-calendar,12P,페이지 단일 고정(page_rule min=max 또는 고정 variant),G-DC-4 CONFIRM: 고정 페이지 적재방식 미확정(G-DC-1 editor_yn 인코딩에 의존) (발명 금지),L1 design-calendar 페이지사양=12P 단일
+PRD_000111,design-calendar,13P,페이지 단일 고정(page_rule min=max 또는 고정 variant),G-DC-4 CONFIRM: 고정 페이지 적재방식 미확정(G-DC-1 editor_yn 인코딩에 의존) (발명 금지),L1 design-calendar 페이지사양=13P 단일
+PRD_000112,design-calendar,13P,페이지 단일 고정(page_rule min=max 또는 고정 variant),G-DC-4 CONFIRM: 고정 페이지 적재방식 미확정(G-DC-1 editor_yn 인코딩에 의존) (발명 금지),L1 design-calendar 페이지사양=13P 단일
+PRD_000111,calendar,링칼라(블랙),고리형트윈링 선택시만 조건부 자식 옵션,G-CL-5 CONFIRM: 조건부 의존(트윈링 proc param vs 별도 옵션) 인코딩 미확정 (발명 금지),L1 calendar 링칼라=★고리형트윈링제본선택시만
+PRD_000112,calendar,링칼라(블랙),고리형트윈링 선택시만 조건부 자식 옵션,G-CL-5 CONFIRM: 조건부 의존 인코딩 미확정 (발명 금지),L1 calendar 링칼라=★고리형트윈링제본선택시만

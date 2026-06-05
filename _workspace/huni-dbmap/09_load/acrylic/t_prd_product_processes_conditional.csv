@@ -1,0 +1,2 @@
+prd_cd,proc_cd,excl_grp_cd,mand_proc_yn,disp_seq,reg_dt,upd_dt,_provenance,_conditional_reason
+PRD_000151,PROC_000081,,N,19,2026-06-05 00:00:00,,"L1:맥세이프 스마트톡 가공=맥세이프스마트톡 → 부착 PROC_000081 (대상 param, G-AC-4/C-6)","151 맥세이프 부착 기적재, 중복PK, 적재 직전 재확인 — stale ref-product-processes에 PRD_000151 PROC_000081 이미 기적재(D-AC-1). active INSERT 시 중복 PK 실패. 적재 직전 라이브 SELECT로 151 PROC_000081 부재 확인 후에만 적재(부재면 active 승격, 실재면 폐기). digital-print 016 conditional 처리 동형."

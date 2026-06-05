@@ -122,14 +122,14 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 **접속/보안:** Railway 자격증명은 `.env.local`의 `RAILWAY_DB_*`에만 저장(chmod 600·gitignore). `_workspace`(git 추적)에 비밀값 금지. DB 파괴적 쓰기 없음 — 읽기전용 조회 + 롤백전용 dry-run만 허용. 데이터는 `db railway`에(postgres 아님), 비표준 포트, JOIN KEY=`prd_nm` only.
 
-**진행 상태:** round-1(구간할인, 검증 GO·미적재) DONE · round-2(가격 공식엔진 t_prc_*, fit-gap) IN PROGRESS · round-3(매핑 정합 audit, L1 충실추출→L2 정합검증 2계층) ACTIVE.
+**진행 상태:** round-1(구간할인, 검증 GO·미적재) DONE · round-2(가격 공식엔진 t_prc_*, fit-gap) IN PROGRESS · round-3(매핑 정합 audit→**처리(적재) 설계**, 11시트 전수 게이트 PASS·독립검증 GO·컨펌 해소) **적재설계 DONE·DB 미적재**(master 신설·적재 별도 승인).
 
 **변경 이력 (최근 3건, 전체는 `_workspace/huni-dbmap/CHANGELOG.md`):**
 | 날짜 | 변경 내용 | 대상 | 사유 |
 |------|----------|------|------|
-| 2026-06-05 | round-3 전체 L1 토대 정립 — 정보축 8개 전수화(값·행숨김·열숨김·코멘트·배경/글자색·수식·하이퍼링크·병합), 토대=상품마스터13+판걸이수+출력소재IMPORT, 엔티티 2축(상품정보 우선/가격정보 round-2 이연). 15시트 9게이트 PASS(non-empty100%·round-trip0)·별도설정24↔IMPORT 18/6 | _workspace/huni-dbmap/06_extract/(15 l1+docs+scripts) | 사용자 — 전 상품 단일 신뢰 토대 |
-| 2026-06-05 | round-3 하네스 보강 + 핸드오프 — 스킬 3종(dbm-mapping-audit 프레임교정·정보축·의미코드맵 / dbm-excel-parse L1 충실추출 / orchestrator round-3 L1→L2 파이프라인)에 세션 교훈 인코딩. HANDOFF 시작점=L2 정합검증부터 | .claude/skills/{dbm-mapping-audit,dbm-excel-parse,huni-dbmap-orchestrator}, HANDOFF-audit | 사용자 — 작업내용 하네스 보강 + 핸드오프 작성 |
-| 2026-06-05 | round-3 L2 정합 재검증 v2 — 독립검증 GO(CONDITIONAL). 3-Wave(BLOCK해소→9속성전수→독립재검증). 회귀게이트 PASS(R-PROC-2 32건, 1차결함 프리미엄엽서4공정 재현·해소)·부당정정/날조 0건. 판정 GO3(사이즈·인쇄옵션·페이지룰)/MAJOR4(자재·공정·묶음수·추가상품 적재결손)/CONDITIONAL1(판형)/N/A1(공정택일그룹). DB 미적재. 다음=공정택일그룹 도메인해석(캘린더/현수막 UI택일·인쇄방식별 레시피) | _workspace/huni-dbmap/04_audit/{v2,block*}, HANDOFF-audit | 사용자 — DB 매핑 검증/정합 재검증 |
+| 2026-06-05 | round-3 L2 정합 재검증 v2 — 독립검증 GO(CONDITIONAL). 3-Wave. 회귀게이트 PASS(R-PROC-2 32건)·부당정정/날조 0. 판정 GO3/MAJOR4/CONDITIONAL1/N/A1. DB 미적재 | _workspace/huni-dbmap/04_audit/{v2,block*} | 사용자 — 정합 재검증 |
+| 2026-06-05 | round-3 도메인 심화(L2/L3)+벤치마킹+컨펌1~3차 — 실무컨펌 확정(그레이밴딩=미출시·완칼=공정+조각수bundle·variant=관리용이성). L2 process-recipe-tree·L3 entity-semantic-model(생산방식3구조·제본8종·UV/별색). 벤치마킹: 후니 스키마가 RP/WP 흡수·능가→답습 불요·미적재만 채우기+캐스케이드 제약1 보강 | _workspace/huni-dbmap/07_domain/(process-recipe-tree,entity-semantic-model,benchmark-competitors), 08_remediation/_confirmations | 사용자 — 도메인 자가확보+벤치마킹 |
+| 2026-06-05 | round-3 처리(적재) 설계 완료 — 11시트 전수+컨펌 해소. digital-print 파일럿(자동대조 게이트 verify_expected.py 정립)→Wave A/B 전수 적재설계(dbm-mapping-designer 11시트, FK순 size→material[IMPORT]→process[excl_group]→addon→page_rule)→독립 적대검증(dbm-validator 5종, 과소적재 dodge·발명 검증)GO→calendar·acrylic 보정(PK충돌·완칼 over-reach 161/168/169). active~835행+UPDATE-set, 전게이트 누락0·날조0·발명0·dodge0. **컨펌 K-1~5 결정**: 레이저커팅 proc_cd 신설·형상 siz_cd 신설·photobook 엑셀제본대로. BLOCKER: gp size=비치수 마스터모델링 미정(BLOCKED-LEGIT)·calendar 택일=PARTIAL. DB 미적재(master 신설·적재 별도 승인) | _workspace/huni-dbmap/{09_load/(11+_load-dashboard),03_validation/(5종),08_remediation/_confirmation-recommendations} | 사용자 — HANDOFF 읽고 처리(적재) 설계 + 컨펌 해소 |
 
 ---
 

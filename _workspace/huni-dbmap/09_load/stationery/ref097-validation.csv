@@ -1,0 +1,6 @@
+table,observed,verdict,_finding
+t_prd_product_processes,PROC_000022 떡제본 · excl_grp_cd=BLANK · mand_proc_yn=N · disp_seq=1,PARTIAL,떡제본 proc_cd 정확(마스터 정합). 단 mand_proc_yn=N(제본 필수 도메인과 불일치)·excl_grp 미연결
+t_prd_product_process_excl_groups,GRP-BOOK-제본 헤더 존재(SEL_TYPE.01·max1·mand=Y·note=trigger=떡제본),ORPHAN,excl_group 헤더는 있으나 process 행 excl_grp_cd 공란 → 미연결 고아 헤더(booklet 떡제본 spillover)
+t_prd_product_bundle_qtys,50/QTY_UNIT.03/dflt=Y/seq=1 + 100/QTY_UNIT.03/dflt=Y/seq=1,DEFECT,두 행 모두 dflt_yn=Y(이중 기본값)·disp_seq 동일(1) — 기본값 1개 원칙 위배
+t_prd_product_page_rules,(행 없음),CORRECT-BY-DOMAIN,L1 페이지사양 3/3/3 있으나 떡제본은 page 무의미(recipe §3-2 rule4) → 미적재가 도메인상 정당(잡음 회피)
+t_prd_product_materials,MAT_000073(백색모조지 120g) USAGE.01 dflt=Y,MATCH,L1 백모조120 → MAT_000073 정합. 내지 단일슬롯 정상

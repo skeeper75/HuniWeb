@@ -1,0 +1,10 @@
+prd_cd,prd_nm,candidate_bdl_qty,bdl_unit_typ_cd,reason,_provenance
+PRD_000001,OPP접착봉투,50,QTY_UNIT.01,"라이브 bdl_qty=50 기적재(skip, 중복PK 회피)",L1:OPP접착봉투 size괄호 장수신호=[50] (R2 G-PA-3 Low DEFERRED)
+PRD_000002,OPP비접착봉투,20|50,QTY_UNIT.01,"라이브 bdl_qty=50 기적재(skip, 중복PK 회피)","L1:OPP비접착봉투 size괄호 장수신호=[20, 50] (R2 G-PA-3 Low DEFERRED)"
+PRD_000003,트래싱지 카드봉투,20|30|40|100,QTY_UNIT.01,"다중 장수 공존[20, 30, 40, 100] → PK=prd_cd 단일행 대표값 미확정(CONFIRM D-PA-2)","L1:트래싱지 카드봉투 size괄호 장수신호=[20, 30, 40, 100] (R2 G-PA-3 Low DEFERRED)"
+PRD_000004,카드봉투,10,QTY_UNIT.01,단일 장수=10 후보. bundle 별도 적재 필요여부 정책 미확정(CONFIRM D-PA-2),L1:카드봉투 size괄호 장수신호=[10] (R2 G-PA-3 Low DEFERRED)
+PRD_000005,캘린더봉투,10,QTY_UNIT.01,단일 장수=10 후보. bundle 별도 적재 필요여부 정책 미확정(CONFIRM D-PA-2),L1:캘린더봉투 size괄호 장수신호=[10] (R2 G-PA-3 Low DEFERRED)
+PRD_000006,볼체인,3,QTY_UNIT.01,단일 장수=3 후보. bundle 별도 적재 필요여부 정책 미확정(CONFIRM D-PA-2),L1:볼체인 size괄호 장수신호=[3] (R2 G-PA-3 Low DEFERRED)
+PRD_000009,투명케이스,10,QTY_UNIT.01,단일 장수=10 후보. bundle 별도 적재 필요여부 정책 미확정(CONFIRM D-PA-2),L1:투명케이스 size괄호 장수신호=[10] (R2 G-PA-3 Low DEFERRED)
+PRD_000010,행택끈,100,QTY_UNIT.01,단일 장수=100 후보. bundle 별도 적재 필요여부 정책 미확정(CONFIRM D-PA-2),L1:행택끈 size괄호 장수신호=[100] (R2 G-PA-3 Low DEFERRED)
+PRD_000011,자석고정용고무판,20,QTY_UNIT.01,단일 장수=20 후보. bundle 별도 적재 필요여부 정책 미확정(CONFIRM D-PA-2),L1:자석고정용고무판 size괄호 장수신호=[20] (R2 G-PA-3 Low DEFERRED)

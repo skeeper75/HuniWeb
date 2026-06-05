@@ -1,0 +1,2 @@
+scope,prd_cd,constraint_type,trigger_axis,trigger_cond,target_axis,target_action,target_value,_provenance
+digital-print,PRD_ALL_DP,material_thickness->process_disable,material(종이 평량 g),평량 < 180g,process(코팅 PROC_000014~016),disable,코팅 비활성(180g 미만),"L1:digital-print 코팅(옵션) 셀 주석 ""★종이두께선택시 : 180g이상 코팅가능"" (benchmark §9 캐스케이드 제약 신설)"

@@ -1,0 +1,7 @@
+prd_cd,prd_nm,slot,usage_cd,l1_paper_cell,import_col_status,reason,_provenance
+PRD_000070,PUR책자,내지,USAGE.01,*별도설정,IMPORT 컬럼 부재,"B1 잔여 — PUR내지 IMPORT 상품컬럼 부재, 자재 소스 미확정. 추정 발명 금지. 컨펌 D-BK-1","seoljeong-import-map row6: PUR책자 내지 import_col=(확인 필요), matched=0"
+PRD_000070,PUR책자,표지,USAGE.02,*별도설정,IMPORT 컬럼 부재,B1 잔여 — PUR표지 IMPORT 상품컬럼 부재. 컨펌 D-BK-1,"seoljeong-import-map row7: PUR책자 표지 import_col=(확인 필요), matched=0"
+PRD_000072,하드커버책자,내지,USAGE.01,*별도설정,IMPORT 컬럼 부재,B1 잔여 — 하드커버 내지 IMPORT 부재(표지=전용지는 기적재 USAGE.02). 컨펌 D-BK-1,"seoljeong-import-map row10: 하드커버책자 내지 import_col=(확인 필요), matched=0"
+PRD_000077,레더 하드커버책자,내지,USAGE.01,*별도설정,IMPORT 컬럼 부재,B1 잔여 — 레더하드 내지 IMPORT 부재(표지=레더 기적재). 컨펌 D-BK-1,"seoljeong-import-map row11: 레더 하드커버책자 내지 import_col=(확인 필요), matched=0"
+PRD_000082,하드커버 링책자,내지,USAGE.01,*별도설정,IMPORT 컬럼 부재,B1 잔여 — 하드링 내지 IMPORT 부재(표지=전용지 기적재). 컨펌 D-BK-1,"seoljeong-import-map row12: 하드커버 링책자 내지 import_col=(확인 필요), matched=0"
+PRD_000088,레더 링바인더,내지,USAGE.01,(L1 내지종이 빈값),IMPORT 컬럼 부재 + L1 원천 공백,B1 잔여 + G-BK-4 — 레더바인더 내지종이 L1 빈값·IMPORT 부재. 제본/excl/page도 전무(MISMATCH). 발명 금지. 컨펌 D-BK-1·D-BK-3,L1: 레더 링바인더 내지종이=빈값; booklet.md G-BK-4 088 proc/excl/page 0행

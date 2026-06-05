@@ -1,136 +1,52 @@
-# Huni-DBMap 매핑 정합 검증(round-3) + 방법론 재설계 핸드오프
+# Huni-DBMap round-3 핸드오프 — 처리(적재) 설계 완료
 
-작성: 2026-06-05 · 다음 세션이 이 문서만 읽고 이어가도록 정리. 식별자/코드/SQL 영어, 설명 한국어.
+작성 2026-06-05 · 이 문서만 읽고 이어가도록 정리. 식별자/코드/SQL 영어, 설명 한국어.
 
 ## 0. 한 줄 현황
 
-round-3 **인쇄 도메인 KB + 11시트 종단 결함 처리(라이브 권위) 완료**. **작업 진짜 목적 = 엑셀 적재 결함(누락/오매칭/모호)을 도메인지식 토대로 처리해 인쇄자동견적 위젯용 DB 정제**(도메인지식=렌즈·수단, [[메모리 dbmap-true-purpose-remediation]]). 진행: L2 v2 검증 GO → **전략 H**(05_method/H, 도메인 4계층 KB+렌즈게이트) → **Phase 0 수확**(07_domain, 라이브 13 SELECT: 인쇄방식5종·공정83·Decision14종) → **digital-print 파일럿** → **11시트 전수**(08_remediation/, 5그룹 병렬) → **통합 대시보드**(08_remediation/_summary.md). **핵심 = DB 라이브 직접확인 권위**(추출본/v2 stale → 11시트 전부 라이브 반전). **DB 미적재 유지**.
+round-3 **처리(적재) 설계 완료 — 11시트 전수 + 도메인 컨펌 해소**. 작업 목적 = 엑셀 적재 결함(누락/오매칭/모호)을 도메인 토대로 처리해 인쇄자동견적 위젯용 DB 정제([[dbmap-true-purpose-remediation]]). digital-print **파일럿**(패턴+자동대조 게이트 정립) → **Wave A/B 전수 적재설계**(dbm-mapping-designer, 11시트) → **독립 적대검증**(dbm-validator 5종) GO → **NO-GO/CONDITIONAL 2시트(calendar·acrylic) 보정** → **도메인 컨펌 해소**(자가확보 권고 → K-1~5 결정). active ~835행 + UPDATE-set, 전 게이트 누락0·날조0, 발명0·dodge0. **DB 미적재 유지**.
 
 > [다음 세션 시작점 — 여기부터]
-> 1. **입력 = `08_remediation/_summary.md`**(11시트 통합 결함 대시보드: 시트×4분류·공통패턴8·v2반전·처리우선순위 H1~H13·실무컨펌16주제·위젯선결조건) + 각 `08_remediation/<sheet>.md`(시트별 종단). 도메인 KB = `07_domain/`(db-domain-structure-live·pdf-domain-knowledge·decision-trail-harvest·term-bridge-draft). 전략 = `05_method/H`.
-> 2. **실무 컨펌 1·2차 확정**(`08_remediation/_confirmations.md`): 그레이밴딩=미출시/보류(품절 아님, goods-pouch 폰케이스 BLOCKER 해제)·calendar 가공=택일·IMPORT ●=실자재·qty_unit 상품군일괄·완칼=공정+조각수는bundle_qty·**variant=관리용이성 우선**(과세분화 금지, 금색열쇠고리 통합). **3차 메타교정**: 도메인 질문 자가확보 선행([[메모리 dbmap-domain-knowledge-before-asking]]).
-> 3. **도메인 심화 완료**(07_domain L2 `process-recipe-tree.md`·L3 `entity-semantic-model.md`): C-9 생산방식 3구조(A통합 sets0정상/B셋트 반제품 sub_prd 빈껍데기/C단일, **자재권위=parent+usage_cd**)·C-10 제본8종 차이(레이플랫vsPUR=후니PUR운영 권위)·C-11 UV/별색5종 용도. **벤치마킹**(`benchmark-competitors.md`): **후니 스키마가 RP/WP 표현력 흡수/능가 → 답습 불요·미적재만 채우기 + 캐스케이드 제약(자재/사이즈→공정 disable) 1건만 보강**.
-> 4. **다음 = 처리(적재) 설계** — High H1~H13 미적재 채우기, FK순(상품등록→size→material[IMPORT/두께해소]→process[excl_group 연결]→addon→page_rule[interval]). variant=RP 축독립+disable. 캐스케이드 제약 신설. 마스터 전 시트 건전(연결테이블만). **DB 쓰기 별도 승인**.
-> 5. **잔여 컨펌 소수**(도메인 선행 완료로 축소): 레이플랫vsPUR 포토북 사실(1순위)·통합상품(068~071) 향후 sub_prd 분해 여부·UV화이트vs별색화이트 인코딩 위치(B4)·옵셋/실크 운영 여부.
-> 4. 가격정보(round-2 t_prc_*)는 9속성 정제 후 이연 — `price-info-deferred.md`. round-1 구간할인 완료.
-> 5. [HARD 교훈] DB 구조/적재 판정은 **라이브 직접확인 권위**(추정·번호연속추론·표본일반화 금지). 인쇄방식≠절대축(시트=1차 단위). 미지=가설→리서치(국내+해외)→사용자 컨펌.
+> 1. **입력** = `09_load/_load-dashboard.md`(전수 종합 대시보드) · `08_remediation/_confirmation-recommendations.md`(컨펌 권고 + 사용자 확정 §10) · 각 `09_load/<sheet>/load-spec.md` · `03_validation/{dp,waveA1,waveA2,waveB1,waveB2}-load-validation.md`(검증 5종).
+> 2. **다음 = (A) booklet 실무 자재정보 입력** 또는 **(B) DB 적재 인가** — 둘 다 외부 의존:
+>    - **(A)** booklet 5상품(070 PUR·072 하드커버·077 레더하드·082 하드링·088 레더바인더) 내지종이 = 엑셀/IMPORT 소스 부재(K-1 데이터 확인 완료) → **후니 실무 자재정보 필요**. 입력 시 `09_load/booklet/_deferred` 6행 해소.
+>    - **(B)** 적재 인가 시: ① **master 신설** — `레이저커팅` proc_cd 1(K-2)·형상 siz_cd(굿즈14·스티커 원형11/형상, K-3/4) ② **[HARD] 적재 직전 라이브 export로 `verify_expected.py` 재실행**(게이트가 stale ref 2026-06-04를 읽음 → 라이브 격차 닫기, calendar PK충돌이 실증) ③ conditional 행(digital-print 016 DROP·calendar material 4·acrylic 151) 라이브 재확인 ④ FK순 INSERT(size→material→process[excl_group 연결]→addon→page_rule).
+> 3. **이번 세션 결정**(재론 금지, `_confirmation-recommendations.md §10` 권위):
+>    - **K-1** booklet 내지자재 = IMPORT 컬럼 부재 확인 → 실무자재 잔여
+>    - **K-2** acrylic 모양컷 = `레이저커팅` proc_cd 신설(053 종이완칼 차용 중단)
+>    - **K-3/K-4** 형상+치수 siz_cd master 신설(엑셀 크기 표준목록 등록, 모양=공정 유지·치수=size·A4/A5=plate). goods-pouch "77 BLOCKER"는 의미축 4분리 결과 siz_cd 신설은 14건뿐(용량21·단양면12·라벨49는 다른 축)
+>    - **K-5** photobook = 엑셀 제본 컬럼대로(PUR 적재 완료, 외부 표준 재고 불요)
+>    - **[도메인해소]** calendar 미연결멤버 = "없음"=빈선택지(proc 신설0)·거치대=addon·장수=옵션(page_rule 아님) / photobook 책등 = master `prcs_dtl_opt.책등` 상속+위젯 런타임(DDL 불요)
+> 4. [HARD 원칙] DB 미적재 · 라이브 권위(추출본 stale) · 추정0(provenance) · **엑셀 명시값=권위, 외부표준으로 재고 금지**([[dbmap-domain-knowledge-before-asking]]) · 사용자 질문은 비전문가 이해 가능하게 평이하게.
 
-> [참고] 직전 L2 v2 검증(§5-4 이하)은 추출본 기반이라 일부 라이브 반전됨(프리미엄엽서 016 등). 검증 권위는 라이브 재확인한 08_remediation. v2는 방법론 참고로 보존.
+## 1. 건드리지 말 것 (확정 산출)
 
-### 5-4. L2 정합 재검증 v2 결과 (2026-06-05, GO CONDITIONAL)
+- **`09_load/` 11시트 적재설계 + load CSV + 게이트** — 전 시트 self-check PASS(누락0·날조0), 독립검증 GO. calendar(PK충돌 4행 conditional)·acrylic(완칼 17→14·151 conditional) 보정 완료.
+- **`03_validation/` 검증 5종** — UPHELD 합계 다수·OVERTURN 0(보정 반영 후)·NO-GO 0.
+- digital-print 016 conditional **DROP 확정**(라이브 29~32 실재) · `00_schema/columns.csv` 3테이블 메타 보강 · `08_remediation/digital-print.md` 029 use_yn 정정.
+- **보수처리 정당분(재공격 금지)**: silsa 봉제/타공 모범 재적재0 · photobook 9속성 기적재 no-op · product-accessory 대조군 · **goods-pouch size BLOCKED-LEGIT**(비치수 마스터 모델링 미정 — 적재 누락 아님).
 
-3-Wave 파이프라인으로 차단전제 해소 후 전수 재검증, 독립 재검증까지 완료.
+## 2. 미해소 (적재 전 — 외부 의존)
 
-- **Wave1 BLOCK 해소** (`04_audit/block{1,2,4}-*`): B1 자재 IMPORT↔prd_cd 14행 전건확정(미해소0·6갭[하드커버내지4=정상구조갭/형압명함·PUR=CONFIRM]) · B2 PRD_000068 sets 라이브1회=정상0행(중철/무선/PUR/트윈링 일관, 거짓MISSING 배제·추출본=라이브 일치) · **B4(최위험) 줄수/개수 ANCHOR=digital-print 1시트 한정**(엽서/명함=별개시트 아닌 단일 digital-print의 구분블록, L1 composite헤더가 '오시/미싱/가변' 텍스트 보존→순서의존 오매핑 구조해소). BLOCK-3만 N/A 보류.
-- **Wave2 9속성 전수** (`04_audit/v2/`, `scripts/audit_v2.py` 재현가능): 회귀게이트 **PASS**(R-PROC-2 32건≥6) · false정정(size83 치수브리지·process 부모오매칭 false MISSING12 철회·코팅 false EXTRA43 철회·material MATCH+88) · **형압자식051/052 6건 신규 진짜MISSING** · 별색9→2축소(CONFIRM7) · 숨김/미출시 비활성분류(그레이밴딩3193셀=goods-pouch·unresolved7상품).
-- **Wave3 독립 재검증** (`04_audit/v2/independent-review.md`): v2 비작성 dbm-validator가 적대적 검증 — 8검증포인트 7PASS+1CONDITIONAL, audit_v2.py 재실행 바이트동일, **부당정정·은폐·날조 0건**, MINOR2(치수그룹수 off-by-one·별색잔여2 substrate 혼동가능[단 이미 CONFIRM보류라 무해]). 최종 GO.
-- **9속성 판정**: GO 3(사이즈 조건부A1 3건·인쇄옵션·페이지룰11/11) / MAJOR 4(자재·공정·묶음수·추가상품 — 상품별 적재결손, 마스터는 건전) / CONDITIONAL 1(판형 의미축) / N/A 1(공정택일그룹 BLOCK-3).
+- **booklet 5상품 내지자재** = 후니 실무정보(엑셀/IMPORT/라이브 소스 부재, 발명 금지).
+- **master siz_cd/proc_cd 신설** = DB 쓰기 승인 필요(레이저커팅 proc·형상 siz_cd).
+- **시트별 잔여 컨펌** = 각 `09_load/<sheet>/load-spec.md §컨펌목록` 권위.
+- **가격정보(round-2 t_prc_*)** 이연 = `06_extract/price-info-deferred.md`. round-1 구간할인 완료.
 
-> [참고] 기존 §5-3(L1 토대) 이하는 직전 세션 핸드오프로 보존. L2 재검증이 이를 입력으로 소비 완료.
-
-### 5-2. 1단계 방법 설계 결과 (2026-06-05, CONDITIONAL GO)
-
-- **A** `05_method/A-etl-bestpractices.md` — 기대행(expected rows) 생성→3계층 대조(count→set→value)·무결성 게이트 선행·no-reverse-load. 출처 12.
-- **B** `05_method/B-normalization-rules.md` — 6 기초데이터 28 변환규칙. 핵심 **R-PROC-2(줄수/개수=공정 존재 신호)**. 마스터 전체 정합 명시(오버피팅 방지). 라이브 `ref-product-sets.csv`(28행) 추출.
-- **C** `05_method/C-fulldiff-design.md` — 7단계 파이프라인(S0~S7), 7 변환함수군, 7 배제사전, 회귀게이트(R-PROC-2 MISSING≥6).
-- **D** `05_method/D-method-validation.md` — 독립검증. dead link 0·날조 0·7포인트 PASS. CONDITIONAL GO(차단전제 4건 잔존).
-- **전수 실행 차단 전제(BLOCK, 해소 후 실행)**: ①BLOCK-1 R-MAT-2 IMPORT 컬럼↔prd_cd 매핑 확정 ②BLOCK-2 중철책자 PRD_000068 sets 0행 라이브 확증 ③BLOCK-3 공정택일그룹 권위부재(자동검출 불가·CONFIRM 반자동) ④**BLOCK-4(최위험) 시트별 줄수/개수 블록 헤더 ANCHOR 테이블 확정**(미확정 시 오시/미싱 오매핑).
-- 경미 FLAG 2건(검출력 무영향): B R-PROC-4 박색상 범위 표기·C ANCHOR "부모공정" 용어.
-
-### 5-3. L1 충실추출 기준 정립 (2026-06-05) — 사용자 교정 반영
-
-[교훈] 사용자가 실사 포맥스보드 A1 "MISSING" 판정을 추궁 → **1차 결함의 진짜 뿌리는 매핑(L2)이 아니라 엑셀 추출(L1)** 이었음이 드러남. 1차 `excel-*.csv`는 속성별 단일 컬럼만 평면화(사이즈=E만)해 같은 행의 작업사이즈(I/J) 등 행내 관계를 버렸고, 그 위 매핑이 오판(A1 false MISSING — A1 행 작업사이즈 공백=생산 미정의 신호를 못 봄. A1 적재한 포스터류 11종은 작업사이즈 채워짐, 미적재 3종은 공백 — 100% 상관). → **작업을 L1(충실 추출)↔L2(정규화 매핑) 2계층으로 분리**. L1을 원본과 셀단위 자동대조해 "누락 0" 기계 보증 = 사용자가 산출물 더미를 일일이 안 봐도 되는 단일 신뢰 토대.
-
-- **E** `05_method/E-extraction-bestpractices.md` — 무손실 추출 7원칙(추출↔해석 2단분리·전컬럼·빈셀보존·머지셀 unmerge-fill·2행헤더 forward-fill composite·ffill 화이트리스트·완전성 검증). 출처 11.
-- **F** `05_method/F-sheet-structures.md` — 13시트 전수 구조. 11 상품시트 전부 병합셀(14~22)·1차가 버린 14 누락축. (포맥스 원인을 "H블리드"로 오기 → G에서 "작업사이즈"로 정정.)
-- **G** `05_method/G-extraction-spec.md`(+ G-groupheader-map.csv 62행·G-cell-comments.csv 24건·G-fill-freq.csv) — **L1 충실추출 기준서**. ① L1↔L2 경계 ② 공통 추출모델 ③ **그룹헤더 composite 귀속맵 11시트 62개**(가로병합 row1 그룹↔하위, 2축 `내지파일사양_작업` vs `표지파일사양_작업`, 작업사이즈 컬럼위치 시트별 실측: 디지털/스티커/책자내지/포토북내지/문구내지=H·캘린더/디캘/굿즈=G·실사=I·아크릴=J, 고정레터 추출 HARD 금지) ④ **실무진 메타 추출+의미**(스레드댓글 24건 xl/threadedComments XML 직접파싱 — 굿즈 E2/O2가 가격축 결정맥락, E2는 병합셀이라 XML이 유일 보존경로 / 배경색 노랑=신규 확정·그레이=품절[문구/굿즈만 footnote 확정]·나머지 미확정 / COMMENT컬럼·footnote·제약텍스트) ⑤ 완전성 검증(컬럼커버리지·non-empty보존율·round-trip·메타보존) ⑥ tidy 산출스키마 ⑦ 사용자 검토포인트 7건.
-- **사용자 검토포인트 7건(승인 필요)**: ①시트별 grain ②ffill 화이트리스트(A~D만) ③유효0 컬럼 ④배경색→의미 코드맵 확정(미확정 색 실무진 확인) ⑤코멘트 귀속규칙 ⑥round-trip 핵심시트 범위 ⑦캘린더/디캘 footnote 범례 미확인.
-- **[L1 실사 시연 완료, 2026-06-05]** `06_extract/` — 실사 시트 L1 충실추출 실제 구현+자동대조. `silsa-l1.csv`(115행×41필드 전컬럼 tidy)·`silsa-l1-meta.csv`(메타 356행)·`scripts/extract_l1.py`(--sheet 파라미터화, 전수 확장 가능)·`verify_l1.py`·`silsa-l1-report.md`. **자동대조 5종 전부 PASS**: non-empty 셀 보존율 100%(1100/1100)·round-trip diff 0·행카운트 115==115·컬럼커버리지·댓글 9==9. **포맥스보드 A1(row_seq 73) 작업사이즈 공백 보존 입증**(A3=303x426·A2=426x600·A1='') → 1차 평면화(excel-size.csv E만, 작업사이즈 drop)가 false MISSING 낸 정보가 L1엔 살아있음. 전수확장 증명: `--sheet 디지털인쇄` 무수정 재실행 PASS(212행).
-  - [L1 시연 중 발견·확인 필요] ① **G §5-2 배경색 범례(노랑=신규/그레이=품절)가 실사엔 불일치** — 실사 노랑 fill 0건, footnote(C147)는 필수/옵션 안내. G 범례는 디지털 등 타 시트 기준일 가능성 → 시트별 범례 확정 필요(L1 추출엔 무영향, 미확정색 RGB만 보존). ② 실사 회색 fill(FFB7B7B7, 포맥스 A1행 포함) 의미 미확정 — "미생산" 보조신호 가능성, 단정 불가.
-- **[L1 정보축 전수 보강 완료, 2026-06-05]** 사용자가 A1 추궁 연쇄(A1→작업사이즈공백→**행 숨김**)로 추출 누락을 거듭 발견 → 땜질 대신 **엑셀 정보 축 전수화**로 전환(목표=누락0 근접). 13시트 정보축 진단: **추출대상 8축**(①값 ②행숨김[실사8·아크릴10, 비활성/품절 신호] ③열숨김[5시트 출력용지규격, 캘린더14·디캘7행 값보유] ④셀코멘트 ⑤배경색+글자색 ⑥수식여부[실사 S열 58 VAT파생] ⑦하이퍼링크[책자1] ⑧병합) + **미사용 4축 확정**(취소선·아웃라인·자동필터·데이터유효성 전 시트 0). extract_l1.py에 누락 4축(row_hidden·col_hidden·is_formula·hyperlink) 추가, verify_l1.py 9게이트. **실사 재추출 9게이트 전부 PASS**(non-empty 100% 1100/1100·round-trip 0·숨김8 보존·수식58 보존). 포맥스 A1=`_row_hidden=true`+작업사이즈공백+회색fill 3신호 한 레코드 동시보존 / 투명포스터★ r18~21 전행 hidden 보존 / 숨김열 출력용지규격 값+플래그 보존. 전수확장(캘린더 무수정 PASS). → **정보 축이 유한 확정**되어 "모르는 누락"이 축 차원에서 빠짐없이 잡힘. G §9에 정보축 전수표+행/열숨김=비활성신호 HARD 규칙 추가.
-  - [L1 시연 중 발견·확인 필요] ① **G §5-2 배경색 범례(노랑=신규/그레이=품절)가 실사엔 불일치** — 실사 노랑 fill 0건, footnote(C147)는 필수/옵션 안내. 시트별 범례 확정 필요(L1 무영향, 미확정색 RGB만 보존). ② 실사 회색 fill(FFB7B7B7, 포맥스 A1행) 의미 미확정 — 숨김과 결합 시 "비활성" 가능성이나 단정 불가, L2/실무 확인.
-- **[전체 L1 토대 정립 완료, 2026-06-05]** 사용자 보강으로 토대 범위 확정 = **상품마스터 13시트 + 가격표 판걸이수(사이즈 마진/작업/블리드/전지/판걸이/인쇄영역 권위) + 출력소재(IMPORT)(`*별도설정` 자재 권위)**. 가격표 나머지 16시트(단가)는 round-2 영역 제외. **엔티티 2축 원칙: 상품정보 먼저 정립 / 가격정보(단가·연당가·가격)는 분리 라벨링해 round-2 이연**(무손실 보존). 15시트 L1 추출 **9게이트 전건 PASS**(non-empty 100%·round-trip 0 전 시트, 상품마스터 1247레코드·판걸이수 125·IMPORT 종이120×상품15 ●235 unpivot·댓글24·수식 silsa58/IMPORT947 보존). 전 상품 커버리지 259페어/253고유. **`*별도설정` 24↔IMPORT 18매칭/6갭**(PUR책자·하드커버·형압명함=IMPORT 상품컬럼 부재 실갭, prd_cd 미확정=BLOCK-1). 산출 `06_extract/`: 15 `<slug>-l1.csv`+meta·`import-paper-matrix-long.csv`·`product-info-foundation.md`(정합검증 대상)·`price-info-deferred.md`(round-2 이연)·`seoljeong-import-map.md`·`all-sheets-l1-report.md`·scripts(extract_l1/extract_price/verify_l1/run_all_master).
-  - [확인 필요] ① goods-pouch 그레이 103행(품절 행단위) ② 미확정색(실사 파랑·아크릴 분홍) ③ font 비흑색 "비노출" 의미 ④ 판걸이수 col_I(헤더 0) ⑤ IMPORT 카드 통합컬럼 종이분기 ⑥ 별도설정 prd_cd(BLOCK-1).
-- **다음**: L2(B 규칙 R-SIZE-7 작업사이즈 게이트 + **숨김행/열·미출시=비활성 판정 규칙** 보강 + C 전수대조) — `product-info-foundation.md`를 입력으로 상품정보 9속성 정합검증 → BLOCK-1~4 해소 → 가격정보(round-2) → 전수 실행. **DB 미적재 유지**.
-
-## 1. 절대 원칙 (HARD)
-
-- **DB 적재 절대 금지**(INSERT/UPDATE/DDL). read-only 조회만. 산출=설계서·CSV·규칙까지.
-- **[신규·핵심] 엑셀=권위 단순대조 폐기 → "DB 정규화 규칙 = 기준"**. DB는 엑셀을 정규화 변환해 적재한 결과물. 엑셀 값으로 DB를 덮으면 **DB 오염**. 엑셀=담을 내용, DB 정규화 패턴=변환 기준.
-- **추출본 stale 주의**: ref-*.csv가 옛 스냅샷일 수 있음. 존재/NULL/등록 판정은 라이브 read-only로 확증(권위반전 교훈).
-- **EXTRA(DB 잉여) 삭제 단정 금지** — 플래그+출처만.
-- 산출 .md 한국어, 식별자/컬럼/코드 영어.
-
-## 2. round-3 1차 검증 결과 (참고 — 방법론 결함 내포, 재검증 대상)
-
-9속성 대시보드(`04_audit/audit-summary.md`):
-
-| 속성 | 판정 | 핵심 |
-|------|------|------|
-| 사이즈·인쇄옵션·페이지룰 | GO | 표기차 브리지·전건 일치 |
-| 자재·공정·묶음수·추가상품 | MAJOR | 상품별 적재 결손(MISSING) |
-| 판형사이즈 | CONDITIONAL | 의미축(엑셀 전지 vs DB 작업사이즈) |
-| 공정택일그룹 | CONFIRM | 엑셀 원천 부재 |
-
-**이 결과는 신뢰 제한적**: 1층 감사가 "존재 확인" 수준이었고, 2층(상품별 매핑)이 부분 누락을 놓침(§3-4 프리미엄엽서). 재설계 후 재검증 필요.
-
-## 3. 사용자가 교정한 핵심 (재설계 토대 — 가장 중요)
-
-1. **검증은 2층 구조**: ①**1층 기초데이터 검증**(마스터가 엑셀 의미대로 정규화 적재됐나) ②**2층 상품별 기초데이터 매핑 검증**(각 상품이 자기 기초데이터를 다 연결했나). round-3도 이 구조(Phase3 마스터/Phase4 속성)였으나 실행 부실.
-2. **DB 정규화 규칙 = 기준** (§1). 엑셀≠DB가 "DB 오류"가 아님 — 정규화 변환 결과일 수 있음. MISSING 재해석 = "정규화 규칙대로면 적재돼야 할 누락분"(엑셀을 DB 규칙으로 변환 후 적재).
-3. **1층 감사 결함**: 집합 대조·FK 해소·표기차 브리지(존재·구조 수준)만 했고, **"DB 정규화가 엑셀 의미를 정확·완전히 반영했나"의 도메인 의미 검증은 안 함**. 정규화 규칙을 명시적으로 확정하지 않음.
-4. **프리미엄엽서 사례(결함 증거)**: DB 공정 = `PROC_000027(직각)`+`PROC_000028(둥근)` = **귀돌이만**. 엑셀 = 귀돌이+오시+미싱+가변텍스트+가변이미지 5종(`직각|둥근|없음|1줄|2줄|3줄|...|1개|2개|3개`). → **오시/미싱/가변텍스트/가변이미지 4종 누락**. 마스터엔 `PROC_000029~032` 다 있음(1층 GO). 그런데 검증이 엑셀 옵션값(1줄/2개)을 "과적재 옵션→제외"로 처리해 **누락을 못 봄**. = 1층 감사가 도메인 의미(줄수=오시 공정 신호)를 안 풀어 2층 누락을 가림.
-5. **방법 = 규칙 기반 전수 자동 대조**(하나씩 금지). 260상품을 사람이 하나씩 보면 느림·놓침. 엑셀 시트는 칸(컬럼) 구조 고정 → "칸↔기초데이터 변환규칙"을 한 번 정하면 전체 자동 적용. 표본은 "규칙 도출용", 누락 검출은 "규칙 코드화→전수 일괄".
-6. **표본 = 한 상품 다면체**: 공정 한 속성만 보지 말고, **프리미엄엽서 한 상품이 가진 전체 기초데이터(사이즈·자재·공정·도수·상품셋트·기초코드)를 입체적으로 함께** 풀어 규칙 일관성 확보.
-
-## 4. 검증 대상 재정의 (기초데이터 6종 + 상품별 매핑)
-
-**1층 기초데이터 6종**(사용자 명시):
-- 사이즈 `t_siz_sizes`(497) · 자재 `t_mat_materials`(336) · 공정 `t_proc_processes`(83) · **도수 `t_clr_color_counts`(5)** · **상품셋트 `t_prd_product_sets`(28)** · 기초코드 `t_cod_base_codes`(58)
-- (이전 9속성에 **도수·상품셋트 추가**. 인쇄옵션/묶음수/페이지룰/판형/추가상품/공정택일그룹은 2층 상품별 매핑)
-
-**2층 상품별 매핑**: 각 상품(분모 245 공통)이 위 기초데이터를 정규화 규칙대로 연결했나.
-
-## 5. 다음 작업 (1단계: 방법 설계 — 하네스 개선 前)
-
-사용자 지시: "어떻게 할지 방법을 먼저 확정 → 하네스 개선". 산출 3종:
-
-**A. 베스트프랙티스 리서치** — 비정규화 Excel(ragged·취합) → 정규화 DB 적재 ETL 모범사례 + **DB 오염(제약 위반·중복·정규화 깨짐) 방지** 원칙. WebSearch 필요(기존 dbm 에이전트엔 없음 → general-purpose 또는 신규 리서치 에이전트 검토).
-
-**B. 정규화 규칙 사전(다면체)** — 표본=프리미엄엽서(+소수 대표상품) **한 상품의 6 기초데이터 전부**를 입체적으로 풀어, "엑셀 시트 칸 → DB 코드/구조" 변환규칙을 **도메인 의미**로 도출. 엑셀 옵션값(1줄/2개/별색)=기초데이터 존재 신호로 재해석. 규칙은 시트 칸 구조 기반이라 같은 시트 전체에 적용.
-
-**C. 전수 대조 방법 설계서** — 규칙을 코드(스크립트)화 → 엑셀 260상품 전수 적용 → "정규화된 기대 DB 행" 생성 → 실제 DB ref-*.csv와 집합 대조 → 상품별 누락/잉여/일치 자동 분류·출력. 사람 수동 X.
-
-→ A+B+C 확정·사용자 검토 후: **하네스 개선**(dbm-mapping-audit 프레임 "엑셀=권위"→"DB정규화규칙=기준" 교정 + 리서치 단계 신설) → **전수 실행**.
-
-## 6. 산출물 지도
+## 3. 산출물 지도
 
 ```
 _workspace/huni-dbmap/
-├ 00_schema/   ref-*.csv 15종(round-3 fresh 전체추출)·round3-extract-note.md
-│              code-values.md·columns.csv·price-engine-ddl.md(round-2)
-├ 04_audit/    audit-summary.md(9속성 대시보드)·<속성>-parity.md·<속성>-mismatches.csv
-│              excel-sheet-attr-map.md·excel-attrs-normalized.md·excel-*.csv(엑셀 파싱)
-│              import-paper-extract.csv·import-resolution.csv(출력소재 IMPORT)
-│              00_master-parity.md(1층 1차 — §3-3 결함)
-├ 02_mapping/correction/  (별건: SIZE_NAME_NOISE 정정·묶음수 18행)
-├ HANDOFF.md       (round-2 가격매핑)
-└ HANDOFF-audit.md (이 문서 — round-3 검증+재설계)
+├ 09_load/            (이번 세션 핵심) _load-dashboard.md + 11 <sheet>/{load-spec.md·load/*.csv·verify_expected.py·expected-vs-load.md·_deferred·*conditional.csv}
+├ 03_validation/      dp-·waveA1-·waveA2-·waveB1-·waveB2-load-validation.md (독립 검증 5종)
+├ 08_remediation/     11 <sheet>.md(결함 진단)·_summary.md·_confirmations.md(C-1~12)·_confirmation-recommendations.md(K-1~5 확정 §10)
+├ 07_domain/          db-domain-structure-live·pdf-domain-knowledge·entity-semantic-model(L3)·process-recipe-tree(L2)·benchmark-competitors
+├ 06_extract/         15 <slug>-l1.csv(L1 토대)·product-info-foundation·price-info-deferred·seoljeong-import-map
+├ 04_audit/           round-3 L2 검증 v2(이전 단계, 보존)
+├ 00_schema/          ref-*.csv·columns.csv(3테이블 보강)·price-engine-ddl
+└ HANDOFF-audit.md    (이 문서)
 ```
-- 스킬: `.claude/skills/dbm-mapping-audit`(프레임 교정 대상)·`huni-dbmap-orchestrator`(round-3 파이프라인)
-- 에이전트(재사용): dbm-schema-analyst·dbm-excel-analyst·dbm-validator·dbm-mapping-designer
-- 메모리: dbmap-round3-mapping-audit·dbmap-no-db-load-file-first
-- 입력: `docs/huni/후니프린팅_상품마스터_260527.xlsx`·`docs/huni/후니프린팅_인쇄상품_가격표_260527.xlsx`
-- 커밋: 80d61ec(구성)·b2be7e9·6f7f91e·8cb38ea·fcbf197·493bcee(검증)
 
-## 7. 핵심 도메인 사실 (정규화 규칙 도출 시 필수)
+## 4. 이전 이력
 
-- **별색=공정**: `PROC_000007 별색인쇄`+자식 `PROC_000008~012`(화이트/클리어/핑크/금색/은색). clr(도수) 아님. 엑셀 인쇄칸 표기→DB 공정 연결.
-- **공정 파라미터 정규화**: 엑셀 `1줄/2줄/3줄`·`1개/2개` = 오시(`PROC_000029`)·미싱(`PROC_000030`)·가변텍스트(`PROC_000031`)·가변이미지(`PROC_000032`) 공정 + 줄수/개수(`prcs_dtl_opt` JSON). "옵션값"이 아니라 **공정 존재 신호**.
-- **귀돌이**: `PROC_000026`+자식 직각(`PROC_000027`)/둥근(`PROC_000028`).
-- **형압**: 양각/음각(`PROC_000050~052`).
-- **사이즈 표기차**: `73x98`↔`73 x 98 mm`, 판걸이수 시트 브리지(작업사이즈 D열). 범위형→nonspec, 복합→분리. 비치수(폰모델/사용자입력)=옵션축.
-- **자재 별도설정**: `*별도설정`=플레이스홀더 아님 → 가격표 `출력소재(IMPORT)` 시트(종이마스터120+상품15컬럼 ●)에 실자재. 지/g 표기차.
-- **판형**: DB `t_prd_product_plate_sizes.siz_cd`=작업사이즈(cut+블리드), 엑셀 출력용지규격=전지(t_siz 마스터에 없음). 의미축 상이.
-- **JOIN KEY=prd_nm** (MES_ITEM_CD NULL 신뢰금지). 분모=245 공통(DB 280=고유273+반제품, 엑셀 260=고유253+보류/잡음8).
-- 코드 FK: QTY_UNIT(묶음단위 재사용)·OUTPUT_PAPER_TYPE·SEL_TYPE·USAGE 등 `t_cod_base_codes`.
+round-3 L1 토대 정립·L2 정합 재검증 v2 상세 = `04_audit/v2`·`06_extract`·이전 git 핸드오프(git log). 본 핸드오프는 그 위에 적재설계까지 완료한 기준으로 갱신됨. 전체 변경 이력 = `CHANGELOG.md`.
