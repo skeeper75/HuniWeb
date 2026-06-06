@@ -1,0 +1,122 @@
+artifact,output_kind,output_key,source,source_detail
+01_siz_register.sql,siz_insert,SIZ_000501,t_prd_product_sizes_066_circle.BLOCKED.csv+code-row-preload.md§2,원형10x10|cut 10.00x10.00|diam 10mm|8EA
+01_siz_register.sql,siz_insert,SIZ_000502,t_prd_product_sizes_066_circle.BLOCKED.csv+code-row-preload.md§2,원형15x15|cut 15.00x15.00|diam 15mm|8EA
+01_siz_register.sql,siz_insert,SIZ_000503,t_prd_product_sizes_066_circle.BLOCKED.csv+code-row-preload.md§2,원형20x20|cut 20.00x20.00|diam 20mm|6EA
+01_siz_register.sql,siz_insert,SIZ_000504,t_prd_product_sizes_066_circle.BLOCKED.csv+code-row-preload.md§2,원형25x25|cut 25.00x25.00|diam 25mm|3EA
+01_siz_register.sql,siz_insert,SIZ_000505,t_prd_product_sizes_066_circle.BLOCKED.csv+code-row-preload.md§2,원형30x30|cut 30.00x30.00|diam 30mm|2EA
+01_siz_register.sql,siz_insert,SIZ_000506,t_prd_product_sizes_066_circle.BLOCKED.csv+code-row-preload.md§2,원형40x40|cut 40.00x40.00|diam 40mm|2EA
+01_siz_register.sql,siz_insert,SIZ_000507,t_prd_product_sizes_066_circle.BLOCKED.csv+code-row-preload.md§2,원형45x45|cut 45.00x45.00|diam 45mm|1EA
+01_siz_register.sql,siz_insert,SIZ_000508,t_prd_product_sizes_066_circle.BLOCKED.csv+code-row-preload.md§2,원형50x50|cut 50.00x50.00|diam 50mm|1EA
+01_siz_register.sql,siz_insert,SIZ_000509,t_prd_product_sizes_066_circle.BLOCKED.csv+code-row-preload.md§2,원형55x55|cut 55.00x55.00|diam 55mm|1EA
+01_siz_register.sql,siz_insert,SIZ_000510,t_prd_product_sizes_066_circle.BLOCKED.csv+code-row-preload.md§2,원형60x60|cut 60.00x60.00|diam 60mm|1EA
+02_component_prices.sql,price_insert,comp_price_id=2956,t_prc_component_prices.csv,line:2957|SIZ_PENDING_GP_원형10mm->SIZ_000501|mat:MAT_000084|min_qty:1000
+02_component_prices.sql,price_insert,comp_price_id=2957,t_prc_component_prices.csv,line:2958|SIZ_PENDING_GP_원형10mm->SIZ_000501|mat:MAT_000153|min_qty:1000
+02_component_prices.sql,price_insert,comp_price_id=2958,t_prc_component_prices.csv,line:2959|SIZ_PENDING_GP_원형15mm->SIZ_000502|mat:MAT_000084|min_qty:1000
+02_component_prices.sql,price_insert,comp_price_id=2959,t_prc_component_prices.csv,line:2960|SIZ_PENDING_GP_원형15mm->SIZ_000502|mat:MAT_000153|min_qty:1000
+02_component_prices.sql,price_insert,comp_price_id=2960,t_prc_component_prices.csv,line:2961|SIZ_PENDING_GP_원형20mm->SIZ_000503|mat:MAT_000084|min_qty:1000
+02_component_prices.sql,price_insert,comp_price_id=2961,t_prc_component_prices.csv,line:2962|SIZ_PENDING_GP_원형20mm->SIZ_000503|mat:MAT_000153|min_qty:1000
+02_component_prices.sql,price_insert,comp_price_id=2962,t_prc_component_prices.csv,line:2963|SIZ_PENDING_GP_원형25mm->SIZ_000504|mat:MAT_000084|min_qty:1000
+02_component_prices.sql,price_insert,comp_price_id=2963,t_prc_component_prices.csv,line:2964|SIZ_PENDING_GP_원형25mm->SIZ_000504|mat:MAT_000153|min_qty:1000
+02_component_prices.sql,price_insert,comp_price_id=2964,t_prc_component_prices.csv,line:2965|SIZ_PENDING_GP_원형30mm->SIZ_000505|mat:MAT_000084|min_qty:1000
+02_component_prices.sql,price_insert,comp_price_id=2965,t_prc_component_prices.csv,line:2966|SIZ_PENDING_GP_원형30mm->SIZ_000505|mat:MAT_000153|min_qty:1000
+02_component_prices.sql,price_insert,comp_price_id=2968,t_prc_component_prices.csv,line:2969|SIZ_PENDING_GP_원형40mm->SIZ_000506|mat:MAT_000084|min_qty:1000
+02_component_prices.sql,price_insert,comp_price_id=2969,t_prc_component_prices.csv,line:2970|SIZ_PENDING_GP_원형40mm->SIZ_000506|mat:MAT_000153|min_qty:1000
+02_component_prices.sql,price_insert,comp_price_id=2970,t_prc_component_prices.csv,line:2971|SIZ_PENDING_GP_원형45mm->SIZ_000507|mat:MAT_000084|min_qty:1000
+02_component_prices.sql,price_insert,comp_price_id=2971,t_prc_component_prices.csv,line:2972|SIZ_PENDING_GP_원형45mm->SIZ_000507|mat:MAT_000153|min_qty:1000
+02_component_prices.sql,price_insert,comp_price_id=2972,t_prc_component_prices.csv,line:2973|SIZ_PENDING_GP_원형50mm->SIZ_000508|mat:MAT_000084|min_qty:1000
+02_component_prices.sql,price_insert,comp_price_id=2973,t_prc_component_prices.csv,line:2974|SIZ_PENDING_GP_원형50mm->SIZ_000508|mat:MAT_000153|min_qty:1000
+02_component_prices.sql,price_insert,comp_price_id=2974,t_prc_component_prices.csv,line:2975|SIZ_PENDING_GP_원형55mm->SIZ_000509|mat:MAT_000084|min_qty:1000
+02_component_prices.sql,price_insert,comp_price_id=2975,t_prc_component_prices.csv,line:2976|SIZ_PENDING_GP_원형55mm->SIZ_000509|mat:MAT_000153|min_qty:1000
+02_component_prices.sql,price_insert,comp_price_id=2976,t_prc_component_prices.csv,line:2977|SIZ_PENDING_GP_원형60mm->SIZ_000510|mat:MAT_000084|min_qty:1000
+02_component_prices.sql,price_insert,comp_price_id=2977,t_prc_component_prices.csv,line:2978|SIZ_PENDING_GP_원형60mm->SIZ_000510|mat:MAT_000153|min_qty:1000
+02_component_prices.sql,price_insert,comp_price_id=2978,t_prc_component_prices.csv,line:2979|SIZ_PENDING_GP_원형10mm->SIZ_000501|mat:MAT_000084|min_qty:2000
+02_component_prices.sql,price_insert,comp_price_id=2979,t_prc_component_prices.csv,line:2980|SIZ_PENDING_GP_원형10mm->SIZ_000501|mat:MAT_000153|min_qty:2000
+02_component_prices.sql,price_insert,comp_price_id=2980,t_prc_component_prices.csv,line:2981|SIZ_PENDING_GP_원형15mm->SIZ_000502|mat:MAT_000084|min_qty:2000
+02_component_prices.sql,price_insert,comp_price_id=2981,t_prc_component_prices.csv,line:2982|SIZ_PENDING_GP_원형15mm->SIZ_000502|mat:MAT_000153|min_qty:2000
+02_component_prices.sql,price_insert,comp_price_id=2982,t_prc_component_prices.csv,line:2983|SIZ_PENDING_GP_원형20mm->SIZ_000503|mat:MAT_000084|min_qty:2000
+02_component_prices.sql,price_insert,comp_price_id=2983,t_prc_component_prices.csv,line:2984|SIZ_PENDING_GP_원형20mm->SIZ_000503|mat:MAT_000153|min_qty:2000
+02_component_prices.sql,price_insert,comp_price_id=2984,t_prc_component_prices.csv,line:2985|SIZ_PENDING_GP_원형25mm->SIZ_000504|mat:MAT_000084|min_qty:2000
+02_component_prices.sql,price_insert,comp_price_id=2985,t_prc_component_prices.csv,line:2986|SIZ_PENDING_GP_원형25mm->SIZ_000504|mat:MAT_000153|min_qty:2000
+02_component_prices.sql,price_insert,comp_price_id=2986,t_prc_component_prices.csv,line:2987|SIZ_PENDING_GP_원형30mm->SIZ_000505|mat:MAT_000084|min_qty:2000
+02_component_prices.sql,price_insert,comp_price_id=2987,t_prc_component_prices.csv,line:2988|SIZ_PENDING_GP_원형30mm->SIZ_000505|mat:MAT_000153|min_qty:2000
+02_component_prices.sql,price_insert,comp_price_id=2990,t_prc_component_prices.csv,line:2991|SIZ_PENDING_GP_원형40mm->SIZ_000506|mat:MAT_000084|min_qty:2000
+02_component_prices.sql,price_insert,comp_price_id=2991,t_prc_component_prices.csv,line:2992|SIZ_PENDING_GP_원형40mm->SIZ_000506|mat:MAT_000153|min_qty:2000
+02_component_prices.sql,price_insert,comp_price_id=2992,t_prc_component_prices.csv,line:2993|SIZ_PENDING_GP_원형45mm->SIZ_000507|mat:MAT_000084|min_qty:2000
+02_component_prices.sql,price_insert,comp_price_id=2993,t_prc_component_prices.csv,line:2994|SIZ_PENDING_GP_원형45mm->SIZ_000507|mat:MAT_000153|min_qty:2000
+02_component_prices.sql,price_insert,comp_price_id=2994,t_prc_component_prices.csv,line:2995|SIZ_PENDING_GP_원형50mm->SIZ_000508|mat:MAT_000084|min_qty:2000
+02_component_prices.sql,price_insert,comp_price_id=2995,t_prc_component_prices.csv,line:2996|SIZ_PENDING_GP_원형50mm->SIZ_000508|mat:MAT_000153|min_qty:2000
+02_component_prices.sql,price_insert,comp_price_id=2996,t_prc_component_prices.csv,line:2997|SIZ_PENDING_GP_원형55mm->SIZ_000509|mat:MAT_000084|min_qty:2000
+02_component_prices.sql,price_insert,comp_price_id=2997,t_prc_component_prices.csv,line:2998|SIZ_PENDING_GP_원형55mm->SIZ_000509|mat:MAT_000153|min_qty:2000
+02_component_prices.sql,price_insert,comp_price_id=2998,t_prc_component_prices.csv,line:2999|SIZ_PENDING_GP_원형60mm->SIZ_000510|mat:MAT_000084|min_qty:2000
+02_component_prices.sql,price_insert,comp_price_id=2999,t_prc_component_prices.csv,line:3000|SIZ_PENDING_GP_원형60mm->SIZ_000510|mat:MAT_000153|min_qty:2000
+02_component_prices.sql,price_insert,comp_price_id=3000,t_prc_component_prices.csv,line:3001|SIZ_PENDING_GP_원형10mm->SIZ_000501|mat:MAT_000084|min_qty:3000
+02_component_prices.sql,price_insert,comp_price_id=3001,t_prc_component_prices.csv,line:3002|SIZ_PENDING_GP_원형10mm->SIZ_000501|mat:MAT_000153|min_qty:3000
+02_component_prices.sql,price_insert,comp_price_id=3002,t_prc_component_prices.csv,line:3003|SIZ_PENDING_GP_원형15mm->SIZ_000502|mat:MAT_000084|min_qty:3000
+02_component_prices.sql,price_insert,comp_price_id=3003,t_prc_component_prices.csv,line:3004|SIZ_PENDING_GP_원형15mm->SIZ_000502|mat:MAT_000153|min_qty:3000
+02_component_prices.sql,price_insert,comp_price_id=3004,t_prc_component_prices.csv,line:3005|SIZ_PENDING_GP_원형20mm->SIZ_000503|mat:MAT_000084|min_qty:3000
+02_component_prices.sql,price_insert,comp_price_id=3005,t_prc_component_prices.csv,line:3006|SIZ_PENDING_GP_원형20mm->SIZ_000503|mat:MAT_000153|min_qty:3000
+02_component_prices.sql,price_insert,comp_price_id=3006,t_prc_component_prices.csv,line:3007|SIZ_PENDING_GP_원형25mm->SIZ_000504|mat:MAT_000084|min_qty:3000
+02_component_prices.sql,price_insert,comp_price_id=3007,t_prc_component_prices.csv,line:3008|SIZ_PENDING_GP_원형25mm->SIZ_000504|mat:MAT_000153|min_qty:3000
+02_component_prices.sql,price_insert,comp_price_id=3008,t_prc_component_prices.csv,line:3009|SIZ_PENDING_GP_원형30mm->SIZ_000505|mat:MAT_000084|min_qty:3000
+02_component_prices.sql,price_insert,comp_price_id=3009,t_prc_component_prices.csv,line:3010|SIZ_PENDING_GP_원형30mm->SIZ_000505|mat:MAT_000153|min_qty:3000
+02_component_prices.sql,price_insert,comp_price_id=3012,t_prc_component_prices.csv,line:3013|SIZ_PENDING_GP_원형40mm->SIZ_000506|mat:MAT_000084|min_qty:3000
+02_component_prices.sql,price_insert,comp_price_id=3013,t_prc_component_prices.csv,line:3014|SIZ_PENDING_GP_원형40mm->SIZ_000506|mat:MAT_000153|min_qty:3000
+02_component_prices.sql,price_insert,comp_price_id=3014,t_prc_component_prices.csv,line:3015|SIZ_PENDING_GP_원형45mm->SIZ_000507|mat:MAT_000084|min_qty:3000
+02_component_prices.sql,price_insert,comp_price_id=3015,t_prc_component_prices.csv,line:3016|SIZ_PENDING_GP_원형45mm->SIZ_000507|mat:MAT_000153|min_qty:3000
+02_component_prices.sql,price_insert,comp_price_id=3016,t_prc_component_prices.csv,line:3017|SIZ_PENDING_GP_원형50mm->SIZ_000508|mat:MAT_000084|min_qty:3000
+02_component_prices.sql,price_insert,comp_price_id=3017,t_prc_component_prices.csv,line:3018|SIZ_PENDING_GP_원형50mm->SIZ_000508|mat:MAT_000153|min_qty:3000
+02_component_prices.sql,price_insert,comp_price_id=3018,t_prc_component_prices.csv,line:3019|SIZ_PENDING_GP_원형55mm->SIZ_000509|mat:MAT_000084|min_qty:3000
+02_component_prices.sql,price_insert,comp_price_id=3019,t_prc_component_prices.csv,line:3020|SIZ_PENDING_GP_원형55mm->SIZ_000509|mat:MAT_000153|min_qty:3000
+02_component_prices.sql,price_insert,comp_price_id=3020,t_prc_component_prices.csv,line:3021|SIZ_PENDING_GP_원형60mm->SIZ_000510|mat:MAT_000084|min_qty:3000
+02_component_prices.sql,price_insert,comp_price_id=3021,t_prc_component_prices.csv,line:3022|SIZ_PENDING_GP_원형60mm->SIZ_000510|mat:MAT_000153|min_qty:3000
+02_component_prices.sql,price_insert,comp_price_id=3022,t_prc_component_prices.csv,line:3023|SIZ_PENDING_GP_원형10mm->SIZ_000501|mat:MAT_000084|min_qty:4000
+02_component_prices.sql,price_insert,comp_price_id=3023,t_prc_component_prices.csv,line:3024|SIZ_PENDING_GP_원형10mm->SIZ_000501|mat:MAT_000153|min_qty:4000
+02_component_prices.sql,price_insert,comp_price_id=3024,t_prc_component_prices.csv,line:3025|SIZ_PENDING_GP_원형15mm->SIZ_000502|mat:MAT_000084|min_qty:4000
+02_component_prices.sql,price_insert,comp_price_id=3025,t_prc_component_prices.csv,line:3026|SIZ_PENDING_GP_원형15mm->SIZ_000502|mat:MAT_000153|min_qty:4000
+02_component_prices.sql,price_insert,comp_price_id=3026,t_prc_component_prices.csv,line:3027|SIZ_PENDING_GP_원형20mm->SIZ_000503|mat:MAT_000084|min_qty:4000
+02_component_prices.sql,price_insert,comp_price_id=3027,t_prc_component_prices.csv,line:3028|SIZ_PENDING_GP_원형20mm->SIZ_000503|mat:MAT_000153|min_qty:4000
+02_component_prices.sql,price_insert,comp_price_id=3028,t_prc_component_prices.csv,line:3029|SIZ_PENDING_GP_원형25mm->SIZ_000504|mat:MAT_000084|min_qty:4000
+02_component_prices.sql,price_insert,comp_price_id=3029,t_prc_component_prices.csv,line:3030|SIZ_PENDING_GP_원형25mm->SIZ_000504|mat:MAT_000153|min_qty:4000
+02_component_prices.sql,price_insert,comp_price_id=3030,t_prc_component_prices.csv,line:3031|SIZ_PENDING_GP_원형30mm->SIZ_000505|mat:MAT_000084|min_qty:4000
+02_component_prices.sql,price_insert,comp_price_id=3031,t_prc_component_prices.csv,line:3032|SIZ_PENDING_GP_원형30mm->SIZ_000505|mat:MAT_000153|min_qty:4000
+02_component_prices.sql,price_insert,comp_price_id=3034,t_prc_component_prices.csv,line:3035|SIZ_PENDING_GP_원형40mm->SIZ_000506|mat:MAT_000084|min_qty:4000
+02_component_prices.sql,price_insert,comp_price_id=3035,t_prc_component_prices.csv,line:3036|SIZ_PENDING_GP_원형40mm->SIZ_000506|mat:MAT_000153|min_qty:4000
+02_component_prices.sql,price_insert,comp_price_id=3036,t_prc_component_prices.csv,line:3037|SIZ_PENDING_GP_원형45mm->SIZ_000507|mat:MAT_000084|min_qty:4000
+02_component_prices.sql,price_insert,comp_price_id=3037,t_prc_component_prices.csv,line:3038|SIZ_PENDING_GP_원형45mm->SIZ_000507|mat:MAT_000153|min_qty:4000
+02_component_prices.sql,price_insert,comp_price_id=3038,t_prc_component_prices.csv,line:3039|SIZ_PENDING_GP_원형50mm->SIZ_000508|mat:MAT_000084|min_qty:4000
+02_component_prices.sql,price_insert,comp_price_id=3039,t_prc_component_prices.csv,line:3040|SIZ_PENDING_GP_원형50mm->SIZ_000508|mat:MAT_000153|min_qty:4000
+02_component_prices.sql,price_insert,comp_price_id=3040,t_prc_component_prices.csv,line:3041|SIZ_PENDING_GP_원형55mm->SIZ_000509|mat:MAT_000084|min_qty:4000
+02_component_prices.sql,price_insert,comp_price_id=3041,t_prc_component_prices.csv,line:3042|SIZ_PENDING_GP_원형55mm->SIZ_000509|mat:MAT_000153|min_qty:4000
+02_component_prices.sql,price_insert,comp_price_id=3042,t_prc_component_prices.csv,line:3043|SIZ_PENDING_GP_원형60mm->SIZ_000510|mat:MAT_000084|min_qty:4000
+02_component_prices.sql,price_insert,comp_price_id=3043,t_prc_component_prices.csv,line:3044|SIZ_PENDING_GP_원형60mm->SIZ_000510|mat:MAT_000153|min_qty:4000
+02_component_prices.sql,price_insert,comp_price_id=3044,t_prc_component_prices.csv,line:3045|SIZ_PENDING_GP_원형10mm->SIZ_000501|mat:MAT_000084|min_qty:5000
+02_component_prices.sql,price_insert,comp_price_id=3045,t_prc_component_prices.csv,line:3046|SIZ_PENDING_GP_원형10mm->SIZ_000501|mat:MAT_000153|min_qty:5000
+02_component_prices.sql,price_insert,comp_price_id=3046,t_prc_component_prices.csv,line:3047|SIZ_PENDING_GP_원형15mm->SIZ_000502|mat:MAT_000084|min_qty:5000
+02_component_prices.sql,price_insert,comp_price_id=3047,t_prc_component_prices.csv,line:3048|SIZ_PENDING_GP_원형15mm->SIZ_000502|mat:MAT_000153|min_qty:5000
+02_component_prices.sql,price_insert,comp_price_id=3048,t_prc_component_prices.csv,line:3049|SIZ_PENDING_GP_원형20mm->SIZ_000503|mat:MAT_000084|min_qty:5000
+02_component_prices.sql,price_insert,comp_price_id=3049,t_prc_component_prices.csv,line:3050|SIZ_PENDING_GP_원형20mm->SIZ_000503|mat:MAT_000153|min_qty:5000
+02_component_prices.sql,price_insert,comp_price_id=3050,t_prc_component_prices.csv,line:3051|SIZ_PENDING_GP_원형25mm->SIZ_000504|mat:MAT_000084|min_qty:5000
+02_component_prices.sql,price_insert,comp_price_id=3051,t_prc_component_prices.csv,line:3052|SIZ_PENDING_GP_원형25mm->SIZ_000504|mat:MAT_000153|min_qty:5000
+02_component_prices.sql,price_insert,comp_price_id=3052,t_prc_component_prices.csv,line:3053|SIZ_PENDING_GP_원형30mm->SIZ_000505|mat:MAT_000084|min_qty:5000
+02_component_prices.sql,price_insert,comp_price_id=3053,t_prc_component_prices.csv,line:3054|SIZ_PENDING_GP_원형30mm->SIZ_000505|mat:MAT_000153|min_qty:5000
+02_component_prices.sql,price_insert,comp_price_id=3056,t_prc_component_prices.csv,line:3057|SIZ_PENDING_GP_원형40mm->SIZ_000506|mat:MAT_000084|min_qty:5000
+02_component_prices.sql,price_insert,comp_price_id=3057,t_prc_component_prices.csv,line:3058|SIZ_PENDING_GP_원형40mm->SIZ_000506|mat:MAT_000153|min_qty:5000
+02_component_prices.sql,price_insert,comp_price_id=3058,t_prc_component_prices.csv,line:3059|SIZ_PENDING_GP_원형45mm->SIZ_000507|mat:MAT_000084|min_qty:5000
+02_component_prices.sql,price_insert,comp_price_id=3059,t_prc_component_prices.csv,line:3060|SIZ_PENDING_GP_원형45mm->SIZ_000507|mat:MAT_000153|min_qty:5000
+02_component_prices.sql,price_insert,comp_price_id=3060,t_prc_component_prices.csv,line:3061|SIZ_PENDING_GP_원형50mm->SIZ_000508|mat:MAT_000084|min_qty:5000
+02_component_prices.sql,price_insert,comp_price_id=3061,t_prc_component_prices.csv,line:3062|SIZ_PENDING_GP_원형50mm->SIZ_000508|mat:MAT_000153|min_qty:5000
+02_component_prices.sql,price_insert,comp_price_id=3062,t_prc_component_prices.csv,line:3063|SIZ_PENDING_GP_원형55mm->SIZ_000509|mat:MAT_000084|min_qty:5000
+02_component_prices.sql,price_insert,comp_price_id=3063,t_prc_component_prices.csv,line:3064|SIZ_PENDING_GP_원형55mm->SIZ_000509|mat:MAT_000153|min_qty:5000
+02_component_prices.sql,price_insert,comp_price_id=3064,t_prc_component_prices.csv,line:3065|SIZ_PENDING_GP_원형60mm->SIZ_000510|mat:MAT_000084|min_qty:5000
+02_component_prices.sql,price_insert,comp_price_id=3065,t_prc_component_prices.csv,line:3066|SIZ_PENDING_GP_원형60mm->SIZ_000510|mat:MAT_000153|min_qty:5000
+03_product_sizes.sql,size_link,PRD_000066+SIZ_000501,t_prd_product_sizes_066_circle.BLOCKED.csv,diam 10mm|disp_seq 27|원형10mm size link — 신규 SIZ_000501
+03_product_sizes.sql,size_link,PRD_000066+SIZ_000502,t_prd_product_sizes_066_circle.BLOCKED.csv,diam 15mm|disp_seq 28|원형15mm size link — 신규 SIZ_000502
+03_product_sizes.sql,size_link,PRD_000066+SIZ_000503,t_prd_product_sizes_066_circle.BLOCKED.csv,diam 20mm|disp_seq 29|원형20mm size link — 신규 SIZ_000503
+03_product_sizes.sql,size_link,PRD_000066+SIZ_000504,t_prd_product_sizes_066_circle.BLOCKED.csv,diam 25mm|disp_seq 30|원형25mm size link — 신규 SIZ_000504
+03_product_sizes.sql,size_link,PRD_000066+SIZ_000505,t_prd_product_sizes_066_circle.BLOCKED.csv,diam 30mm|disp_seq 31|원형30mm size link — 신규 SIZ_000505
+03_product_sizes.sql,size_link,PRD_000066+SIZ_000422,t_prd_product_sizes_066_circle.BLOCKED.csv,diam 35mm|disp_seq 32|원형35mm size link — SIZ_000422 재사용(committed)
+03_product_sizes.sql,size_link,PRD_000066+SIZ_000506,t_prd_product_sizes_066_circle.BLOCKED.csv,diam 40mm|disp_seq 33|원형40mm size link — 신규 SIZ_000506
+03_product_sizes.sql,size_link,PRD_000066+SIZ_000507,t_prd_product_sizes_066_circle.BLOCKED.csv,diam 45mm|disp_seq 34|원형45mm size link — 신규 SIZ_000507
+03_product_sizes.sql,size_link,PRD_000066+SIZ_000508,t_prd_product_sizes_066_circle.BLOCKED.csv,diam 50mm|disp_seq 35|원형50mm size link — 신규 SIZ_000508
+03_product_sizes.sql,size_link,PRD_000066+SIZ_000509,t_prd_product_sizes_066_circle.BLOCKED.csv,diam 55mm|disp_seq 36|원형55mm size link — 신규 SIZ_000509
+03_product_sizes.sql,size_link,PRD_000066+SIZ_000510,t_prd_product_sizes_066_circle.BLOCKED.csv,diam 60mm|disp_seq 37|원형60mm size link — 신규 SIZ_000510

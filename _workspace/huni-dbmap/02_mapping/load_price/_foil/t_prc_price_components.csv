@@ -1,0 +1,7 @@
+comp_cd,comp_nm,comp_typ_cd,note,use_yn
+COMP_FOIL_SMALL_GENERAL,소형박 일반박 가공비(면적·수량별),PRC_COMPONENT_TYPE.05,"박=공정(규칙①), 박형압비(.05). 일반박 7종(금유광/은유광/먹유광/청박/적박/동박/펄박) 동일가 공유 → 1 comp. 등급A~E 소멸(면적좌표=siz_cd, 수량=min_qty).",Y
+COMP_FOIL_SMALL_SPECIAL,소형박 특수박 가공비(면적·수량별),PRC_COMPONENT_TYPE.05,특수박 3종(백박/홀로그램박/트윙클박) 동일가 공유 → 1 comp. 일반박과 단가표 상이(B04/B05).,Y
+COMP_FOIL_LARGE_GENERAL,대형박 일반박 가공비(면적·수량별),PRC_COMPONENT_TYPE.05,일반박 6종(금유광/금무광/은유광/은무광/동박/청박) 동일가 공유 → 1 comp.,Y
+COMP_FOIL_LARGE_SPECIAL,대형박 특수박 가공비(면적·수량별),PRC_COMPONENT_TYPE.05,특수박 6종(먹유광/백박/홀로그램/트윙클/적박/녹박) 동일가 공유 → 1 comp.,Y
+COMP_FOIL_DIE_SMALL,소형박 동판비(아연판 셋업·면적별),PRC_COMPONENT_TYPE.05,동판비=1회성 셋업(아연판). 수량무관(min_qty NULL). 소형=단일셀 80x40.,Y
+COMP_FOIL_DIE_LARGE,대형박 동판비(아연판 셋업·면적별),PRC_COMPONENT_TYPE.05,동판비=1회성 셋업. 수량무관(min_qty NULL). 대형=가로×세로 8x8 매트릭스.,Y

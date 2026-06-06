@@ -1,0 +1,2 @@
+prd_cd,frm_cd,apply_bgn_ymd,note
+# (empty — no new binding row needed) PRD_000050 → PRF_ENV_MAKING is ALREADY live (apply_bgn_ymd=2026-06-01). Live note: "봉투제작→소재/수량별 단가 공식. 봉투종류(티켓/소/자켓/대) siz_cd 후니 등록 후 component_prices siz 채움". This ENV track fills exactly that component_prices siz gap. No binding INSERT required.

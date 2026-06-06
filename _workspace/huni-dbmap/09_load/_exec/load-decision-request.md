@@ -13,6 +13,9 @@
 |------|--------|------|------|
 | 인쇄가격 | `_exec_price/` (00~05) | **3,200** (코드1·공식10·구성요소143·배선13·**단가 2,988**·바인딩45) | `_exec_price/apply.sh` (기본 ROLLBACK·`commit`=인간) |
 | 상품마스터 | `_exec/` (00·05·06·09·09b·90) | **즉시 384 + 코드행 11 + 묶음 24(round-5 6+정정 18) + update 289** | `_exec/apply.sh` |
+| **인쇄가격+상품마스터(GP원형)** | **`_migrate_gp_circle/`** (신규 2026-06-06) | **siz 10 + GP단가 100 + sticker066 size 11** | `_migrate_gp_circle/apply.sh` (기본 ROLLBACK·`commit`=인간) — **빌드+로컬게이트 GO(R1~R4·R6 PASS), R5 라이브 DRY-RUN 리드승인 대기** |
+
+> **[신규] GP 합판도무송 원형 트랙(자율 quick win 완료)**: 아래 §2 #4(GP 직경 100행)가 빌드 완료되어 §1로 승격. sticker 066(합판도무송스티커) 원형과 **동일 직경**이라 sticker 원형 siz(`SIZ_000501~510`)를 **공유**(GP 전용 신규등록 0). 게이트 = `03_validation/load-execution-gate-gp-circle.md`(GO-PENDING-LIVE-DRYRUN). 인간 승인 필요: ① 라이브 롤백 DRY-RUN(R5) ② siz 10종 마스터 등록 ③ COMMIT.
 
 - 가격 단가 2,988 = 2,108(원래 GO) + **880(판형 교정: GUK4 870→SIZ_000499·GP원형35mm 10→SIZ_000422)**.
 - 전 게이트 통과: S-gate(도메인 의미) + G1~G9 + R1~R6, 라이브 롤백 DRY-RUN 위반0·멱등·COMMIT0.
