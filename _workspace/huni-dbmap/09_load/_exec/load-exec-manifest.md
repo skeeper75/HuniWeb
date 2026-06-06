@@ -23,6 +23,7 @@
 | 05 | `05_t_prd_product_materials.sql` | `t_prd_product_materials` | 316 | `(prd_cd, mat_cd, usage_cd)` | PK `t_prd_product_materials_pkey` | `mat_cd→t_mat`, `usage_cd→t_cod`, `prd_cd→t_prd_products` |
 | 06 | `06_t_prd_product_processes.sql` | `t_prd_product_processes` | 62 | `(prd_cd, proc_cd)` | PK `t_prd_product_processes_pkey` | `proc_cd→t_proc`, `prd_cd→t_prd_products` |
 | 09 | `09_t_prd_product_bundle_qtys.sql` | `t_prd_product_bundle_qtys` | 6 | `(prd_cd, bdl_qty)` | PK `t_prd_product_bundle_qtys_pkey` | `bdl_unit_typ_cd→t_cod`, `prd_cd→t_prd_products` |
+| 09b | `09b_correction_bundle_qtys.sql` | `t_prd_product_bundle_qtys` | 18 | `(prd_cd, bdl_qty)` | PK `t_prd_product_bundle_qtys_pkey` | `bdl_unit_typ_cd→t_cod`, `prd_cd→t_prd_products` (09 와 동일 FK) |
 | 90 | `90_update_set.sql` | `t_prd_products`·`t_prd_product_materials` | 289 (UPDATE) | (UPDATE WHERE prd_cd[+key]) | — | INSERT 단계 이후(기존 행 갱신) |
 
 상위 래퍼 = `apply.sql`(`BEGIN; \i 00a … \i 90`). COMMIT/ROLLBACK은 로더가 주입.
@@ -41,6 +42,23 @@
   파일에 `BEGIN/COMMIT` 없음(중첩·부분커밋 경로 0). 종결 COMMIT/ROLLBACK은 로더 단일 세션 주입.
 - **재현성(R3·G8):** 전 SQL은 `gen_load_sql.py`가 CSV에서 생성(손편집 0). 행수 어서트 내장
   (코드행 1+10·적재 384·update-set 289). per-row provenance = `*.provenance.csv`.
+
+## 2-bis. 정정(보완) 묶음수 통합 — 단계09b (2026-06-06 추가)
+
+Jun-4 SIZE_NAME_NOISE 정정에서 **GO 판정됐으나 round-5 _exec 에 통합되지 않은 고아 적재본**
+(`02_mapping/correction/load/t_prd_product_bundle_qtys.csv`, 18행 9상품)을 단계09b 로 보완 통합.
+
+- **묶음수 적재 총량 = round-5 6행(PRD_000160/163) + 정정 18행(9상품: PRD_000001/002/003/004/005/
+  009/011/066/198) = 24행.** 두 집합은 prd_cd 가 완전히 분리(교집합 0) — 중복 적재 없음.
+- 생성기: `gen_correction_bundle_sql.py`(재현 가능, 손편집 금지). 패턴은 단계09 와 동일
+  (`ON CONFLICT (prd_cd, bdl_qty) DO NOTHING`, `reg_dt` 공란→`DEFAULT`).
+- FK 라이브 read-only 검증 완료: `prd_cd→t_prd_products` 9/9 실존 · `bdl_unit_typ_cd→QTY_UNIT`
+  .01/.02/.04 전부 실존. **PK 충돌:** PRD_000001/50·PRD_000002/50 라이브 선존 → `DO NOTHING`
+  으로 no-op(멱등성 입증). 나머지 16행 신규 INSERT.
+- **정정 치수(`t_siz_sizes_dims`)는 SKIP 유지** — 라이브가 이미 정확한 work/cut 치수 보유
+  (77/77 NOT NULL), cm 2건은 라이브가 옳음(검증 §3 권위). 적재 시 회귀 위험이라 미포함.
+- apply.sql 자동 편입은 보류(round-4 GO 매니페스트 권위 보존) — 검증자 R1~R6 + 인간 승인 시
+  09 직후에 `\i 09b_correction_bundle_qtys.sql` 추가. 본 트랙은 SQL 파일 생성·매니페스트 기록까지.
 
 ## 3. 제외 (차단/GAP/비실행 update-set — 적재 SQL 미포함, 재포장 금지)
 

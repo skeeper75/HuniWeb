@@ -201,3 +201,63 @@ DETAIL: Failing row contains (PRD_000068, MAT_000073, USAGE.01, null, Y, 1, null
 
 ### 5. 최종 판정: **GO (양 트랙)**
 양 트랙 R1~R6 + G1~G9 전건 PASS. 실행 가능·멱등·라이브 무위반 라이브 실증 완료. 잔여는 게이트 실패 아닌 **인간 승인 에스컬레이션**(실제 COMMIT·DDL 적용·코드행 등록 — 인간 결정 큐 참조). **COMMIT 0·DDL 적용 0·NEVER COMMIT 유지.**
+
+---
+
+## 정정 통합 + 전체 카탈로그 검증 (보완)
+
+검증 대상: ① 고아 Jun-4 정정 묶음수(18행·9상품)를 `09b_correction_bundle_qtys.sql` 로 멱등 통합 + `apply.sql` 배선(09 후 90 전), ② 전체 카탈로그 적재가능성 매트릭스 `catalog-loadability.md`. 라이브 롤백전용 DRY-RUN(lead+user 승인)으로 실증. **DB 쓰기 0 · NEVER COMMIT.**
+
+### S-1. 09b 정정 묶음수 — 정확성 검증: **PASS**
+
+| 항목 | 기대 | 실측 | 판정 |
+|------|------|------|------|
+| INSERT 문 수 | 18 | 18 | PASS |
+| ON CONFLICT (prd_cd, bdl_qty) DO NOTHING | 전건 | 18/18 | PASS |
+| reg_dt 슬롯 = `DEFAULT`(공란→키워드) | 전건 | 18/18 | PASS |
+| distinct prd_cd 집합 | 001·002·003·004·005·009·011·066·198 (9) | 동일 9 | PASS |
+| CSV 데이터행 수 | 18 | 18 (9행 헤더 제외) | PASS |
+| CSV↔SQL 튜플 대조(prd,qty,unit) | field-for-field 일치 | 18/18 완전일치·날조 0·드롭 0·재매핑 0 | PASS |
+
+라이브 read-only FK 검증:
+- **prd_cd 9/9 실존** in `t_prd_products`.
+- **bdl_unit_typ_cd FK = `t_cod_base_codes(cod_cd)`** (QTY 공통코드 테이블 아님). `QTY_UNIT.01/.02/.04` **3/3 실존** → FK OK.
+- PK = `(prd_cd, bdl_qty)` — **ON CONFLICT 충돌키와 정확히 일치**(R1 멱등 충돌키 정합).
+- `reg_dt` NOT NULL DEFAULT now() → `DEFAULT` 키워드 정당. `del_yn` NOT NULL DEFAULT 'N' → 컬럼 미기재(기본값 사용) 정당. CHECK(dflt_yn IN Y/N): 전건 'N' 충족.
+
+→ **09b GO.** 출처 CSV 충실·무발명·FK/PK/NOT NULL/CHECK 전건 충족.
+
+### S-2. apply.sql 통합 — **PASS**
+- 09b 가 09(번들) 직후·90(update-set) 직전에 배선 — FK 순서 정합(번들 의존 = prd_cd + QTY_UNIT, 둘 다 선존). 위상 위배 0.
+- 단일 `BEGIN` + `\set ON_ERROR_STOP on`, 중첩/중간 COMMIT 0(COMMIT/ROLLBACK 미포함 — apply.sh 주입). R2 원자성 보존.
+- apply.sql echo 문수 = 실제 INSERT 문수 **전건 일치**(1·10·316·62·6·18·289 UPDATE).
+
+### S-3. 라이브 롤백 DRY-RUN(갱신 apply.sql 전체·2-pass·단일 BEGIN…ROLLBACK)
+
+| 테이블 | baseline | pass1 후 | pass2 후 | 2회차 델타 | 판정 |
+|--------|----------|----------|----------|-----------|------|
+| t_prd_product_bundle_qtys | 4 | **26** | 26 | **0** | PASS |
+| t_prd_product_materials | 402 | 716 | 716 | 0 | PASS |
+| t_prd_product_processes | 198 | 260 | 260 | 0 | PASS |
+
+- **번들 시도/충돌/순증**: 시도 24 = round-5 6(PRD_000160×5·163×1) + 정정 18. 라이브 선존 충돌 2(PRD_000001/50·PRD_000002/50) → ON CONFLICT no-op. **순증 22 = 26−4** — 정확히 reconcile.
+- **제약 위반 = 0** (NOT NULL/FK/PK/type/CHECK). ON_ERROR_STOP=1 하에 2-pass end-to-end 완주(abort 0).
+- **멱등성**: 2회차 전 테이블 행델타 0.
+- **ROLLBACK 확정**: post-rollback bundle = 4(=baseline). 라이브 무변경. **NEVER COMMIT.**
+- pass1 후 9상품 18 정정행 전부 존재 확인.
+
+### S-4. 매트릭스 정합(catalog-loadability.md) — **PASS**
+- 라이브 `t_prd_products` 총수 = **275** (read-only). verdict 합계 = 완비 179 + 적재대기 91 + 차단·GAP 0 + 검토 5 = **275** ✓ reconcile.
+- **검토 5 전건 라이브 공란 확인**(siz/print/plate/mat/proc/bdl/page/addon 전부 0): PRD_000168 아크릴입체코롯토·000199 투명부채·000207 극세사타월·000282 카드봉투(블랙)·000283 트레싱지봉투 — 진짜 갭(mis-flag 아님).
+- 완비 스폿(3): PRD_000034 펄명함(siz1·mat4·proc10)·000159 아크릴코스터(siz2·mat1)·000072 하드커버책자(siz2·mat4·proc4) — 라이브와 정확 일치.
+- 적재대기 스폿(3): PRD_000146 아크릴키링(라이브 proc=0 → R5-proc 대기 확인)·000031 프리미엄명함(라이브 mat=0 → R5-mat 대기 확인)·000097 떡메모지(mat·proc 선존, 가격만 대기) — 매트릭스 판정과 정합.
+
+### S-5. 발견 사항(findings)
+
+- **F-3 [MINOR] → 매핑/디자이너 라우팅.** 정정 CSV 가 PRD_000001/50·PRD_000002/50 의 `bdl_unit_typ_cd` 를 `QTY_UNIT.02`(낱장/매?)로 산정했으나 **라이브 선존행 단위는 `QTY_UNIT.01`**. ON CONFLICT DO NOTHING 으로 적재 무해(라이브 단위 보존·DRY-RUN 으로 .01 유지 실증)이나, 정정 산출물의 단위 산정과 라이브가 불일치한다. 적재 차단 아님 — **dbm-mapping-designer 가 두 상품의 정확한 묶음 단위(QTY_UNIT.01 vs .02)를 출처 엑셀 대비 확정**할 것. (자체 무발명 — 09b 는 CSV 를 충실 반영했을 뿐, 불일치 뿌리는 정정 CSV↔라이브.)
+- **F-4 [MINOR] → builder 라우팅(문서).** 매트릭스 §3-2 가 번들 합계 "24(시도)"만 표기하고 라이브 선존 2건 no-op(→순증 22)을 비공개. 적재본 자체 결함 아님(시도-행 회계는 정당). builder 가 §3-2 각주에 "시도 24 / 라이브 선존 no-op 2 / 순증 22(DRY-RUN 실증)"를 보강 권장.
+
+(독립성: 본 게이트는 build/propose 와 분리 — 위 F-3·F-4 실결함 ≥1 적발로 R6 충족.)
+
+### S-6. 보완 최종 판정: **GO**
+09b 정정 통합 GO · apply.sql 배선 OK · 라이브 DRY-RUN 위반 0·멱등 델타 0·ROLLBACK 무변경 · 매트릭스 275 reconcile · 검토 5 진짜공란 확인. 잔여 F-3/F-4 는 MINOR(적재 무해, 라우팅 처리). **COMMIT 0·DB 쓰기 0·NEVER COMMIT 유지.**

@@ -1,0 +1,19 @@
+sql_stmt_seq,conflict_or_where_key,source_csv_row
+1,"(prd_cd, bdl_qty)",correction/load/t_prd_product_bundle_qtys.csv:row2 PRD_000001/bdl50
+2,"(prd_cd, bdl_qty)",correction/load/t_prd_product_bundle_qtys.csv:row3 PRD_000002/bdl50
+3,"(prd_cd, bdl_qty)",correction/load/t_prd_product_bundle_qtys.csv:row4 PRD_000002/bdl20
+4,"(prd_cd, bdl_qty)",correction/load/t_prd_product_bundle_qtys.csv:row5 PRD_000003/bdl20
+5,"(prd_cd, bdl_qty)",correction/load/t_prd_product_bundle_qtys.csv:row6 PRD_000003/bdl40
+6,"(prd_cd, bdl_qty)",correction/load/t_prd_product_bundle_qtys.csv:row7 PRD_000003/bdl100
+7,"(prd_cd, bdl_qty)",correction/load/t_prd_product_bundle_qtys.csv:row8 PRD_000003/bdl30
+8,"(prd_cd, bdl_qty)",correction/load/t_prd_product_bundle_qtys.csv:row9 PRD_000004/bdl10
+9,"(prd_cd, bdl_qty)",correction/load/t_prd_product_bundle_qtys.csv:row10 PRD_000005/bdl10
+10,"(prd_cd, bdl_qty)",correction/load/t_prd_product_bundle_qtys.csv:row11 PRD_000009/bdl10
+11,"(prd_cd, bdl_qty)",correction/load/t_prd_product_bundle_qtys.csv:row12 PRD_000011/bdl20
+12,"(prd_cd, bdl_qty)",correction/load/t_prd_product_bundle_qtys.csv:row13 PRD_000066/bdl8
+13,"(prd_cd, bdl_qty)",correction/load/t_prd_product_bundle_qtys.csv:row14 PRD_000066/bdl6
+14,"(prd_cd, bdl_qty)",correction/load/t_prd_product_bundle_qtys.csv:row15 PRD_000066/bdl3
+15,"(prd_cd, bdl_qty)",correction/load/t_prd_product_bundle_qtys.csv:row16 PRD_000066/bdl2
+16,"(prd_cd, bdl_qty)",correction/load/t_prd_product_bundle_qtys.csv:row17 PRD_000066/bdl1
+17,"(prd_cd, bdl_qty)",correction/load/t_prd_product_bundle_qtys.csv:row18 PRD_000198/bdl1
+18,"(prd_cd, bdl_qty)",correction/load/t_prd_product_bundle_qtys.csv:row19 PRD_000198/bdl2
