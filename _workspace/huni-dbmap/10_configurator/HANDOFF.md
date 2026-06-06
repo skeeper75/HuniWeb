@@ -5,7 +5,9 @@
 
 ## 0. 한 줄 현황 + 다음 시작점
 
-현 스키마(상품별 차원 나열: size/material/process/print_option/…)를 **상품 컨피규레이터(CPQ)** 로 확장하는 설계 트랙. **설계안 정본화 완료 + 실상품 2종(일반현수막·프리미엄엽서) 종단 인스턴스화·독립 적대검증 완료(둘 다 CONDITIONAL-GO)**. DB·DDL 미적용(설계·검증 문서까지만).
+현 스키마(상품별 차원 나열: size/material/process/print_option/…)를 **상품 컨피규레이터(CPQ)** 로 확장하는 설계 트랙. **설계안 정본화 완료 + 실상품 2종(일반현수막·프리미엄엽서) 종단 인스턴스화·독립 적대검증 완료(둘 다 CONDITIONAL-GO)**.
+
+> **[2026-06-06 라이브 구현 확인 — DB·DDL 미적용 → 적용됨]** 라이브 DB 직접 추출 결과 **설계가 실제 구현 완료**: 옵션3(option_groups 13행/options/option_items)+템플릿2(templates 11행/template_selections)+제약1+카테고리1 **신규 테이블**, `t_prd_product_process_excl_groups` **제거(흡수)**, polymorphic 검증 트리거 `fn_chk_opt_item_ref`(OPT_REF_DIM 7종), `addons.addon_prd_cd→tmpl_cd`, 전 도메인 `del_yn`/`del_dt`. **검증 문서↔라이브 정합 판정 = `../00_schema/cpq-schema.md §4` 권위**. 검증 문서의 사실 인용은 정확(MISMATCH 0 유지)하나, 설계 제안 중 **🔴 `ref_param_json` 미구현(공정 파라미터 보존)·🟡 `templates.price` 미구현·⚠️ ref_dim 8종→7종(addon 제외)·`rule_typ`→`rule_typ_cd` 코드화**는 라이브와 차이. 적재는 스키마+택일그룹마이그/템플릿헤더/카테고리까지(옵션항목·선택·제약 **0행**). 라이브 재문서화 = `../00_schema/{cpq-schema.md,schema-overview.md,_live-schema-dump-260606.txt}`.
 
 > **[다음 시작점]** 본 §0 + §4(미해결) 읽고, §6 다음 후보 중 택1. 설계 정본 = `cpq-design.md`. 검증된 예시 = `banner-walkthrough.md`·`postcard-walkthrough.md`(각 validation 동반).
 
@@ -38,7 +40,8 @@
 
 **잔존 미실증 GAP (설계 일반화의 빈 칸):**
 - **GAP-A [MAJOR]** 진짜 max-N(전체 옵션수 > max_sel_cnt) 미실증 — 엽서 후가공은 max=전체4라 상한 무의미. **박색상 16종 중 N종** 또는 **별색 5종 중 N종** 같은 케이스 필요.
-- **GAP-2 [MAJOR]** `t_prd_product_process_excl_groups` 마이그레이션 미실증 — 배너·엽서 둘 다 excl_grp 0행. **제본 택일(엽서북 GRP-BOOK류)** 등 excl_grp 실재 상품 필요.
+- **GAP-2 [✅ 라이브 해소]** `t_prd_product_process_excl_groups` 마이그레이션 — **라이브에서 실제 구현됨**: excl_groups 테이블 제거 + 제본 택일(`GRP-BOOK-제본` PRD_000068~100 10상품)·캘린더 가공(`GRP-CAL-가공` PRD_000110~112)이 `option_groups`(SEL_TYPE.01 max=1)로 마이그. 설계 미실증 칸이 라이브에서 채워짐(`cpq-schema.md §1.5`).
+- **GAP-6 [🔴 신규 — 라이브 정합]** `ref_param_json` **미구현** — walkthrough가 "타공 4/6/8개를 공정 1행 + `{"구수":N}`로 재사용(마스터 비대화 방지)"을 핵심으로 설계했으나 라이브 `option_items`엔 `qty`만 존재. 공정 파라미터 보존 메커니즘 결정 필요(컬럼 추가 재제안 vs 공정행 분리 vs qty 전용). (`cpq-schema.md §4-8·§5`)
 - **GAP-5 [정책 미정]** 미적재 차원 vs EXISTS 트리거 충돌 — 종이=별도설정(material 0행)·후가공 PROC_000029~032(0행)·열재단 053(0행) 옵션은 참조 차원 부재 → 트리거 위반. **정책 택1: ①차원 선적재 의무 ②"센티넬"은 EXISTS 면제(material_cd=NULL+MES 수기지정).**
 - **GAP-B/C [MINOR]** ★사이즈선택(본체연동 동적 봉투) template 미지원 · note 문자열→siz_cd 마이그레이션 결정규칙 미정.
 

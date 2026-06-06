@@ -2,6 +2,7 @@
 
 > **상태/이력**
 > - 작성 2026-06-06 · **WIP** · 사용자 합의 완료·리뷰 대기.
+> - **[2026-06-06 라이브 정합 확인]** 본 설계가 라이브 DB에 **구현 완료** — 옵션3(option_groups/options/option_items)+템플릿2+제약1+카테고리1 신규, `t_prd_product_process_excl_groups` 흡수(제본/캘린더 마이그 실증), polymorphic 검증 트리거 `fn_chk_opt_item_ref` 7종. 설계↔라이브 정합 판정 + 차이(🔴 `ref_param_json` 미구현·🟡 `templates.price` 미구현·⚠️ ref_dim **8종→7종**[addon 제외, tmpl로 분리]·`rule_typ`→`rule_typ_cd` 코드화·➕ `del_yn`/`categories` 추가) = **`00_schema/cpq-schema.md` §4 권위**. 본 문서의 잠정 물리명·8종 ref_dim·일부 컬럼(price)은 라이브 확정본으로 갱신 대상.
 > - 본 문서는 그간 대화로만 존재하던 CPQ(Configure-Price-Quote) 데이터모델 설계를 정본화한 것이다.
 > - 식별자/테이블/컬럼/코드/SQL/JSON = **English**, 설명 = **Korean**.
 > - 검증 인스턴스화: `banner-walkthrough.md`(일반현수막 PRD_000138 종단 실증) 참조.

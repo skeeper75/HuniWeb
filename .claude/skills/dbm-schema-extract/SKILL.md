@@ -1,6 +1,6 @@
 ---
 name: dbm-schema-extract
-description: Railway PostgreSQL 후니프린팅 railway DB의 구조를 읽기전용으로 추출해 검토용 시트(Markdown + CSV)로 만드는 방법론 스킬. psql 안전 읽기전용 쿼리 툴킷, 29테이블 접두사 도메인 분류, 컬럼/타입/제약/FK/CHECK/인덱스/코드값 추출 패턴, 구조 시트 포맷 표준을 제공한다. 'DB 구조 추출', '스키마 시트 작성', 'DDL 추출', '제약/FK 정리', '코드값 조회', 'information_schema 조회' 작업 시 반드시 사용.
+description: Railway PostgreSQL 후니프린팅 railway DB의 구조를 읽기전용으로 추출해 검토용 시트(Markdown + CSV)로 만드는 방법론 스킬. psql 안전 읽기전용 쿼리 툴킷, 44테이블(t_* 도메인 34 + Django 10; CPQ 옵션/템플릿/제약 레이어 포함) 접두사 도메인 분류, 컬럼/타입/제약/FK/CHECK/인덱스/트리거/코드값 추출 패턴, 구조 시트 포맷 표준을 제공한다. 'DB 구조 추출', '스키마 시트 작성', 'DDL 추출', '제약/FK 정리', '코드값 조회', 'information_schema 조회' 작업 시 반드시 사용.
 ---
 
 # DB Schema Extraction Methodology
@@ -27,22 +27,24 @@ q() { psql -h "$RAILWAY_DB_HOST" -p "$RAILWAY_DB_PORT" -U "$RAILWAY_DB_USER" -d 
 
 Define `q` as a shell function (not a variable) — zsh treats a variable holding the full command as a single command name and fails.
 
-## Domain grouping (29 tables by prefix)
+## Domain grouping (44 tables — t_* domain 34 + Django 10)
 
-Group tables in the overview by prefix so reviewers see the domain map at a glance:
+Group tables in the overview by prefix so reviewers see the domain map at a glance (Django/auth 10 tables는 도메인 무관 — t_* 34만 대상):
 
 | Prefix | Domain | Notes |
 |--------|--------|-------|
 | `t_cat_` | Categories | master reference |
-| `t_cod_` | Base codes | enum/code dictionary — FK target for `*_typ_cd`, `grade_cd` |
+| `t_cod_` | Base codes | enum/code dictionary — FK target for `*_typ_cd`, `grade_cd`. CPQ 신규 그룹: `OPT_REF_DIM`(7)/`SEL_TYPE`(2)/`RULE_TYPE`(3) |
 | `t_clr_` | Color counts | master |
 | `t_mat_` | Materials | master |
 | `t_siz_` | Sizes | master |
 | `t_proc_` | Processes | master |
-| `t_prd_` | Products + relations | products and their materials/sizes/options/processes/sets/bundles/discount links |
-| `t_prc_` | Pricing | formulas/components/prices (currently empty) |
-| `t_dsc_` | Discounts | discount tables/details/grade rates (currently empty) |
-| `t_cus_` | Customers | (currently empty) |
+| `t_prd_` | Products + 차원 + **CPQ** | 차원(materials/sizes/print_options/processes/sets/bundle_qtys/page_rules/plate_sizes/categories) + **CPQ 레이어(2026-06-06 라이브 구현): `option_groups`/`options`/`option_items`[polymorphic `ref_dim_cd`→OPT_REF_DIM + 트리거 `fn_chk_opt_item_ref`], `templates`/`template_selections`, `product_constraints`[`logic` jsonb]**. `addons.addon_prd_cd→tmpl_cd`. `products.constraint_json` jsonb 캐시. **`t_prd_product_process_excl_groups` 제거**(option_groups 흡수) |
+| `t_prc_` | Pricing | formulas/components/prices (가격 매핑 산출, 미적재) |
+| `t_dsc_` | Discounts | discount tables/details/grade rates |
+| `t_cus_` | Customers | |
+
+> **[2026-06-06 라이브 델타]** 이전 29 → 현재 t_* 34. CPQ 구현으로 t_prd_ CPQ 레이어 6신규 + categories, `excl_groups` 제거, **전 마스터·차원·CPQ 테이블에 `del_yn`/`del_dt` 소프트삭제 + `trg_*_upd_dt` 트리거 추가**. 추출 시 CPQ polymorphic 트리거 본문(`pg_get_functiondef`)·`del_yn` 필터·신규 코드그룹을 함께 시트화. **상세·정합 판정 = `_workspace/huni-dbmap/00_schema/cpq-schema.md`**.
 
 ## Extraction queries
 

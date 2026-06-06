@@ -23,6 +23,8 @@ metadata:
 
 후니프린팅 **DB 적재 상태 ↔ 엑셀 원천**의 정합을 상품별 9속성으로 검증한다. 매핑 *설계*(dbm-mapping)나 가격 *공식*(dbm-price-formula)이 아니라, **이미 DB에 적재된 데이터가 엑셀과 맞는지 감사**하는 것이 목적이다.
 
+> **[2026-06-06 라이브 변경 — CPQ 구현]** 9속성 중 **공정택일그룹**(`t_prd_product_process_excl_groups`)은 라이브에서 **제거**되어 CPQ `t_prd_product_option_groups`(`sel_typ_cd`=SEL_TYPE; 제본 `GRP-BOOK`·캘린더 `GRP-CAL` 마이그)로 **흡수**됨. 해당 속성 검증 시 `option_groups`/`options`/`option_items`(polymorphic `ref_dim_cd`→OPT_REF_DIM + 트리거 `fn_chk_opt_item_ref`)를 참조한다. 라이브는 44테이블(CPQ 옵션/템플릿/제약 레이어 + 전 도메인 `del_yn`/`del_dt` 추가 — 적재값 추출 시 `del_yn='N'` 필터 인지). 상세 = `00_schema/cpq-schema.md`.
+
 ## 권위 원칙 (Why)
 
 - **[교정] DB 정규화 규칙 = 기준 (엑셀=담을 내용, "단순 집합대조" 폐기).** 엑셀은 정규화 변환 전 원천이고, DB는 그것을 정규화 적재한 결과물이다. **엑셀≠DB가 곧 "DB 오류"가 아니다** — 정규화 변환 결과일 수 있다. 검증 기준 = "정규화 규칙대로 엑셀을 변환한 **기대행(expected rows)**" 대비 실제 DB. MISSING = "규칙대로면 적재됐어야 할 누락분". 구 프레임 "엑셀=권위 단순 집합대조"는 false MISSING을 낳아 폐기됨(포맥스 A1: 엑셀 E칸만 보고 작업사이즈 공백·행숨김 신호를 놓쳐 오판). 엑셀 자체 어색데이터는 본 스킬 범위 밖 — product-viewer 정정 트랙 참조.

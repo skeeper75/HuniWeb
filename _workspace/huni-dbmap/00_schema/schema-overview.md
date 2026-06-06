@@ -1,6 +1,8 @@
 # 스키마 개요 — Railway `railway` DB
 
-PostgreSQL 18.4 · 스키마 `public` · 테이블 29개 · 읽기 전용 추출.
+PostgreSQL 18.4 · 스키마 `public` · **t_* 도메인 34테이블** (+ Django 10 = 44) · 읽기 전용 추출.
+
+> **[2026-06-06 갱신]** 아래 §도메인맵·전체표는 2026-06-03 기준 **29테이블 스냅샷**이다. 이후 **CPQ 컨피규레이터가 라이브에 구현**되어 t_* 6테이블 추가·`t_prd_product_process_excl_groups` 제거(흡수)·전 도메인 `del_yn`/`del_dt` 추가·`t_prd_product_addons` 변경(addon_prd_cd→tmpl_cd). **CPQ 신규/변경 상세 + 설계 정합 판정 = `cpq-schema.md` 권위.** 본 문서 말미 §CPQ 확장 델타 참조. 라이브 원시 덤프 = `_live-schema-dump-260606.txt`.
 
 행 수는 실제 `count(*)`로 검증함(캐시된 `n_live_tup`이 아님). 테이블 접두사 도메인별로 묶음.
 
@@ -60,3 +62,25 @@ PostgreSQL 18.4 · 스키마 `public` · 테이블 29개 · 읽기 전용 추출
 3. **파우치 범위가 명시된 것보다 넓다.** 작업은 `CAT_000213..CAT_000228`이라 했지만, 실제 파우치 리프 카테고리는 `CAT_000213`–`CAT_000242`, `CAT_000305`, 그리고 에코백 아래 혼합된 형제들에 걸쳐 있다. `target-keys.md` 참고.
 4. **상품은 L1 카테고리에 절대 연결되지 않는다.** `CAT_000008/9/11`은 직접 상품 연결이 **0**이다; 상품은 리프 카테고리에만 부착된다. 최상위 카테고리에서의 할인 적용 범위는 `t_cat_categories.upr_cat_cd`의 **재귀 서브트리 순회**가 필요하다.
 5. **`MES_ITEM_CD`는 대소문자 혼합 / 따옴표 처리됨.** 컬럼 `t_prd_products."MES_ITEM_CD"`은 유일한 대문자 식별자이며, 부분 UNIQUE 인덱스(`WHERE MES_ITEM_CD IS NOT NULL`)를 가진다. 로더는 이것을 따옴표로 감싸야 한다.
+
+---
+
+## CPQ 확장 델타 (2026-06-06, 라이브 직접 추출) — 상세는 `cpq-schema.md`
+
+| 변경 | 테이블 | 행수 | 비고 |
+|------|--------|-----:|------|
+| **신규** | `t_prd_product_option_groups` | 13 | 옵션그룹(택일/다중). `sel_typ_cd`→SEL_TYPE. **excl_groups 흡수처**(제본 GRP-BOOK 10·캘린더 GRP-CAL 3) |
+| **신규** | `t_prd_product_options` | 0 | 옵션. `opt_grp_cd`→option_groups |
+| **신규** | `t_prd_product_option_items` | 0 | 옵션재료 polymorphic(`ref_dim_cd`→OPT_REF_DIM 7종 + ref_key1/2). **검증 트리거 `fn_chk_opt_item_ref`** |
+| **신규** | `t_prd_templates` | 11 | 구성템플릿(=SKU). `base_prd_cd`→products |
+| **신규** | `t_prd_template_selections` | 0 | 템플릿 선택(polymorphic + opt_cd + sel_val) |
+| **신규** | `t_prd_product_constraints` | 0 | 제약 `logic` jsonb(JSONLogic). `rule_typ_cd`→RULE_TYPE |
+| **변경** | `t_prd_product_addons` | 34 | `addon_prd_cd` → **`tmpl_cd`**(FK→templates) |
+| **변경** | `t_prd_products` | **275** | `constraint_json` jsonb(제약 compile 캐시, 현재 non-null 0). 행수 280→275 |
+| **변경** | `t_prd_product_categories` | **274** | 행수 280→274 |
+| **제거** | `t_prd_product_process_excl_groups` | — | 삭제됨 → option_groups로 흡수 |
+| **전역** | 마스터·차원·CPQ 테이블 | — | `del_yn`/`del_dt` 소프트삭제 + `trg_*_upd_dt` 트리거 추가 |
+
+신규 코드그룹(`t_cod_base_codes`): `OPT_REF_DIM`(7: 사이즈/판형/자재/공정/묶음수/도수/셋트) · `SEL_TYPE`(2: 단일/다중) · `RULE_TYPE`(3: 호환/금지/필수동반).
+
+**설계(`10_configurator/cpq-design.md`) 대비 라이브 차이**(검증 문서 보강점, `cpq-schema.md §4` 권위): 🔴 `ref_param_json` 미구현(공정 파라미터 보존 부재) · 🟡 `t_prd_templates.price` 미구현 · ⚠️ ref_dim 8종→**7종**(addon 제외, tmpl로 분리) · `rule_typ`→`rule_typ_cd` 코드화. ✅ 정합: 옵션/템플릿/제약 테이블·polymorphic 트리거·color-count=opt_id(MISMATCH-1 정정 반영)·excl_groups 흡수(설계 GAP-2 해소).

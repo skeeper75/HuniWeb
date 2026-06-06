@@ -1,0 +1,488 @@
+# 라이브 스키마 덤프 (railway DB, t_* 엔티티 34) — 2026-06-06 read-only
+
+## [COLUMNS] table.col | type | nullable | default
+t_cat_categories|cat_cd|character varying(50)|NO|
+t_cat_categories|cat_nm|character varying(100)|NO|
+t_cat_categories|upr_cat_cd|character varying(50)|YES|
+t_cat_categories|cat_lvl|integer|NO|
+t_cat_categories|disp_seq|integer|YES|
+t_cat_categories|use_yn|character(1)|NO|
+t_cat_categories|reg_dt|timestamp without time zone|NO|now()
+t_cat_categories|upd_dt|timestamp without time zone|YES|
+t_clr_color_counts|clr_cd|character varying(50)|NO|
+t_clr_color_counts|clr_nm|character varying(100)|NO|
+t_clr_color_counts|chnl_cnt|integer|NO|
+t_clr_color_counts|use_yn|character(1)|NO|
+t_clr_color_counts|note|character varying(500)|YES|
+t_clr_color_counts|reg_dt|timestamp without time zone|NO|now()
+t_clr_color_counts|upd_dt|timestamp without time zone|YES|
+t_clr_color_counts|del_yn|character(1)|NO|'N'::bpchar
+t_clr_color_counts|del_dt|timestamp without time zone|YES|
+t_cod_base_codes|cod_cd|character varying(50)|NO|
+t_cod_base_codes|cod_nm|character varying(100)|NO|
+t_cod_base_codes|upr_cod_cd|character varying(50)|YES|
+t_cod_base_codes|disp_seq|integer|YES|
+t_cod_base_codes|use_yn|character(1)|NO|
+t_cod_base_codes|note|character varying(500)|YES|
+t_cod_base_codes|reg_dt|timestamp without time zone|NO|now()
+t_cod_base_codes|upd_dt|timestamp without time zone|YES|
+t_cus_customers|cus_cd|character varying(50)|NO|
+t_cus_customers|cus_nm|character varying(100)|NO|
+t_cus_customers|grade_cd|character varying(50)|YES|
+t_cus_customers|reg_ymd|character varying(10)|YES|
+t_cus_customers|use_yn|character(1)|NO|
+t_cus_customers|reg_dt|timestamp without time zone|NO|now()
+t_cus_customers|upd_dt|timestamp without time zone|YES|
+t_dsc_discount_details|dsc_tbl_cd|character varying(50)|NO|
+t_dsc_discount_details|apply_ymd|character varying(10)|NO|
+t_dsc_discount_details|min_qty|integer|NO|
+t_dsc_discount_details|max_qty|integer|YES|
+t_dsc_discount_details|dsc_typ_cd|character varying(50)|YES|
+t_dsc_discount_details|dsc_rate|numeric|YES|
+t_dsc_discount_details|dsc_amt|numeric|YES|
+t_dsc_discount_details|note|character varying(500)|YES|
+t_dsc_discount_details|reg_dt|timestamp without time zone|NO|now()
+t_dsc_discount_details|upd_dt|timestamp without time zone|YES|
+t_dsc_discount_tables|dsc_tbl_cd|character varying(50)|NO|
+t_dsc_discount_tables|dsc_tbl_nm|character varying(100)|NO|
+t_dsc_discount_tables|note|character varying(500)|YES|
+t_dsc_discount_tables|use_yn|character(1)|NO|
+t_dsc_discount_tables|reg_dt|timestamp without time zone|NO|now()
+t_dsc_discount_tables|upd_dt|timestamp without time zone|YES|
+t_dsc_grade_discount_rates|grade_cd|character varying(50)|NO|
+t_dsc_grade_discount_rates|cat_cd|character varying(50)|NO|
+t_dsc_grade_discount_rates|apply_ymd|character varying(10)|NO|
+t_dsc_grade_discount_rates|dsc_typ_cd|character varying(50)|YES|
+t_dsc_grade_discount_rates|dsc_rate|numeric|YES|
+t_dsc_grade_discount_rates|dsc_amt|numeric|YES|
+t_dsc_grade_discount_rates|note|character varying(500)|YES|
+t_dsc_grade_discount_rates|reg_dt|timestamp without time zone|NO|now()
+t_dsc_grade_discount_rates|upd_dt|timestamp without time zone|YES|
+t_mat_materials|mat_cd|character varying(50)|NO|
+t_mat_materials|mat_nm|character varying(200)|NO|
+t_mat_materials|mat_typ_cd|character varying(50)|NO|
+t_mat_materials|upr_mat_cd|character varying(50)|YES|
+t_mat_materials|sel_typ_cd|character varying(50)|YES|
+t_mat_materials|max_sel_cnt|integer|YES|
+t_mat_materials|width|numeric|YES|
+t_mat_materials|height|numeric|YES|
+t_mat_materials|depth|numeric|YES|
+t_mat_materials|weight|numeric|YES|
+t_mat_materials|bdl_qty|integer|YES|
+t_mat_materials|use_yn|character(1)|NO|
+t_mat_materials|note|character varying(500)|YES|
+t_mat_materials|reg_dt|timestamp without time zone|NO|now()
+t_mat_materials|upd_dt|timestamp without time zone|YES|
+t_mat_materials|del_yn|character(1)|NO|'N'::bpchar
+t_mat_materials|del_dt|timestamp without time zone|YES|
+t_prc_component_prices|comp_price_id|bigint|NO|
+t_prc_component_prices|comp_cd|character varying(50)|NO|
+t_prc_component_prices|apply_ymd|character varying(10)|NO|
+t_prc_component_prices|siz_cd|character varying(50)|YES|
+t_prc_component_prices|clr_cd|character varying(50)|YES|
+t_prc_component_prices|mat_cd|character varying(50)|YES|
+t_prc_component_prices|coat_side_cnt|integer|YES|
+t_prc_component_prices|bdl_qty|integer|YES|
+t_prc_component_prices|min_qty|integer|YES|
+t_prc_component_prices|unit_price|numeric|YES|
+t_prc_component_prices|note|character varying(500)|YES|
+t_prc_component_prices|reg_dt|timestamp without time zone|NO|now()
+t_prc_component_prices|upd_dt|timestamp without time zone|YES|
+t_prc_formula_components|frm_cd|character varying(50)|NO|
+t_prc_formula_components|comp_cd|character varying(50)|NO|
+t_prc_formula_components|disp_seq|integer|YES|
+t_prc_formula_components|addtn_yn|character(1)|YES|
+t_prc_formula_components|reg_dt|timestamp without time zone|NO|now()
+t_prc_formula_components|upd_dt|timestamp without time zone|YES|
+t_prc_price_components|comp_cd|character varying(50)|NO|
+t_prc_price_components|comp_nm|character varying(200)|NO|
+t_prc_price_components|comp_typ_cd|character varying(50)|YES|
+t_prc_price_components|note|character varying(500)|YES|
+t_prc_price_components|use_yn|character(1)|NO|
+t_prc_price_components|reg_dt|timestamp without time zone|NO|now()
+t_prc_price_components|upd_dt|timestamp without time zone|YES|
+t_prc_price_formulas|frm_cd|character varying(50)|NO|
+t_prc_price_formulas|frm_nm|character varying(200)|NO|
+t_prc_price_formulas|frm_typ_cd|character varying(50)|NO|
+t_prc_price_formulas|note|character varying(500)|YES|
+t_prc_price_formulas|use_yn|character(1)|NO|
+t_prc_price_formulas|reg_dt|timestamp without time zone|NO|now()
+t_prc_price_formulas|upd_dt|timestamp without time zone|YES|
+t_prd_product_addons|prd_cd|character varying(50)|NO|
+t_prd_product_addons|disp_seq|integer|YES|
+t_prd_product_addons|note|character varying(500)|YES|
+t_prd_product_addons|reg_dt|timestamp without time zone|NO|now()
+t_prd_product_addons|upd_dt|timestamp without time zone|YES|
+t_prd_product_addons|tmpl_cd|character varying(50)|NO|
+t_prd_product_bundle_qtys|prd_cd|character varying(50)|NO|
+t_prd_product_bundle_qtys|bdl_qty|integer|NO|
+t_prd_product_bundle_qtys|bdl_unit_typ_cd|character varying(50)|YES|
+t_prd_product_bundle_qtys|dflt_yn|character(1)|NO|
+t_prd_product_bundle_qtys|disp_seq|integer|YES|
+t_prd_product_bundle_qtys|reg_dt|timestamp without time zone|NO|now()
+t_prd_product_bundle_qtys|upd_dt|timestamp without time zone|YES|
+t_prd_product_bundle_qtys|del_yn|character(1)|NO|'N'::bpchar
+t_prd_product_bundle_qtys|del_dt|timestamp without time zone|YES|
+t_prd_product_categories|prd_cd|character varying(50)|NO|
+t_prd_product_categories|cat_cd|character varying(50)|NO|
+t_prd_product_categories|main_cat_yn|character(1)|NO|
+t_prd_product_categories|disp_seq|integer|YES|
+t_prd_product_categories|note|character varying(500)|YES|
+t_prd_product_categories|reg_dt|timestamp without time zone|NO|now()
+t_prd_product_categories|upd_dt|timestamp without time zone|YES|
+t_prd_product_constraints|prd_cd|character varying(50)|NO|
+t_prd_product_constraints|rule_cd|character varying(50)|NO|
+t_prd_product_constraints|rule_nm|character varying(200)|NO|
+t_prd_product_constraints|rule_typ_cd|character varying(50)|YES|
+t_prd_product_constraints|logic|jsonb|NO|
+t_prd_product_constraints|err_msg|character varying(500)|YES|
+t_prd_product_constraints|disp_seq|integer|YES|
+t_prd_product_constraints|use_yn|character(1)|NO|'Y'::bpchar
+t_prd_product_constraints|del_yn|character(1)|NO|'N'::bpchar
+t_prd_product_constraints|del_dt|timestamp without time zone|YES|
+t_prd_product_constraints|reg_dt|timestamp without time zone|NO|now()
+t_prd_product_constraints|upd_dt|timestamp without time zone|YES|
+t_prd_product_discount_tables|prd_cd|character varying(50)|NO|
+t_prd_product_discount_tables|dsc_tbl_cd|character varying(50)|NO|
+t_prd_product_discount_tables|apply_bgn_ymd|character varying(10)|NO|
+t_prd_product_discount_tables|note|character varying(500)|YES|
+t_prd_product_discount_tables|reg_dt|timestamp without time zone|NO|now()
+t_prd_product_discount_tables|upd_dt|timestamp without time zone|YES|
+t_prd_product_materials|prd_cd|character varying(50)|NO|
+t_prd_product_materials|mat_cd|character varying(50)|NO|
+t_prd_product_materials|usage_cd|character varying(50)|NO|
+t_prd_product_materials|dep_proc_cd|character varying(50)|YES|
+t_prd_product_materials|dflt_yn|character(1)|NO|
+t_prd_product_materials|disp_seq|integer|YES|
+t_prd_product_materials|reg_dt|timestamp without time zone|NO|now()
+t_prd_product_materials|upd_dt|timestamp without time zone|YES|
+t_prd_product_materials|del_yn|character(1)|NO|'N'::bpchar
+t_prd_product_materials|del_dt|timestamp without time zone|YES|
+t_prd_product_option_groups|prd_cd|character varying(50)|NO|
+t_prd_product_option_groups|opt_grp_cd|character varying(50)|NO|
+t_prd_product_option_groups|opt_grp_nm|character varying(100)|NO|
+t_prd_product_option_groups|sel_typ_cd|character varying(50)|YES|
+t_prd_product_option_groups|min_sel_cnt|integer|YES|
+t_prd_product_option_groups|max_sel_cnt|integer|YES|
+t_prd_product_option_groups|mand_yn|character(1)|YES|
+t_prd_product_option_groups|disp_seq|integer|YES|
+t_prd_product_option_groups|use_yn|character(1)|NO|'Y'::bpchar
+t_prd_product_option_groups|del_yn|character(1)|NO|'N'::bpchar
+t_prd_product_option_groups|del_dt|timestamp without time zone|YES|
+t_prd_product_option_groups|note|character varying(500)|YES|
+t_prd_product_option_groups|reg_dt|timestamp without time zone|NO|now()
+t_prd_product_option_groups|upd_dt|timestamp without time zone|YES|
+t_prd_product_option_items|prd_cd|character varying(50)|NO|
+t_prd_product_option_items|opt_cd|character varying(50)|NO|
+t_prd_product_option_items|item_seq|integer|NO|
+t_prd_product_option_items|ref_dim_cd|character varying(50)|NO|
+t_prd_product_option_items|ref_key1|character varying(50)|NO|
+t_prd_product_option_items|ref_key2|character varying(50)|YES|
+t_prd_product_option_items|qty|integer|YES|
+t_prd_product_option_items|use_yn|character(1)|NO|'Y'::bpchar
+t_prd_product_option_items|del_yn|character(1)|NO|'N'::bpchar
+t_prd_product_option_items|del_dt|timestamp without time zone|YES|
+t_prd_product_option_items|reg_dt|timestamp without time zone|NO|now()
+t_prd_product_option_items|upd_dt|timestamp without time zone|YES|
+t_prd_product_options|prd_cd|character varying(50)|NO|
+t_prd_product_options|opt_cd|character varying(50)|NO|
+t_prd_product_options|opt_grp_cd|character varying(50)|NO|
+t_prd_product_options|opt_nm|character varying(100)|NO|
+t_prd_product_options|dflt_yn|character(1)|YES|
+t_prd_product_options|disp_seq|integer|YES|
+t_prd_product_options|use_yn|character(1)|NO|'Y'::bpchar
+t_prd_product_options|del_yn|character(1)|NO|'N'::bpchar
+t_prd_product_options|del_dt|timestamp without time zone|YES|
+t_prd_product_options|note|character varying(500)|YES|
+t_prd_product_options|reg_dt|timestamp without time zone|NO|now()
+t_prd_product_options|upd_dt|timestamp without time zone|YES|
+t_prd_product_page_rules|prd_cd|character varying(50)|NO|
+t_prd_product_page_rules|page_min|integer|NO|
+t_prd_product_page_rules|page_max|integer|NO|
+t_prd_product_page_rules|page_incr|integer|NO|
+t_prd_product_page_rules|note|character varying(500)|YES|
+t_prd_product_page_rules|reg_dt|timestamp without time zone|NO|now()
+t_prd_product_page_rules|upd_dt|timestamp without time zone|YES|
+t_prd_product_plate_sizes|prd_cd|character varying(50)|NO|
+t_prd_product_plate_sizes|siz_cd|character varying(50)|NO|
+t_prd_product_plate_sizes|dflt_plt_yn|character(1)|NO|
+t_prd_product_plate_sizes|output_paper_typ_cd|character varying(50)|YES|
+t_prd_product_plate_sizes|output_file_typ|character varying(30)|YES|
+t_prd_product_plate_sizes|note|character varying(500)|YES|
+t_prd_product_plate_sizes|reg_dt|timestamp without time zone|NO|now()
+t_prd_product_plate_sizes|upd_dt|timestamp without time zone|YES|
+t_prd_product_plate_sizes|del_yn|character(1)|NO|'N'::bpchar
+t_prd_product_plate_sizes|del_dt|timestamp without time zone|YES|
+t_prd_product_price_formulas|prd_cd|character varying(50)|NO|
+t_prd_product_price_formulas|frm_cd|character varying(50)|NO|
+t_prd_product_price_formulas|apply_bgn_ymd|character varying(10)|YES|
+t_prd_product_price_formulas|note|character varying(500)|YES|
+t_prd_product_price_formulas|reg_dt|timestamp without time zone|NO|now()
+t_prd_product_price_formulas|upd_dt|timestamp without time zone|YES|
+t_prd_product_prices|prd_cd|character varying(50)|NO|
+t_prd_product_prices|apply_ymd|character varying(10)|NO|
+t_prd_product_prices|unit_price|numeric|YES|
+t_prd_product_prices|note|character varying(500)|YES|
+t_prd_product_prices|reg_dt|timestamp without time zone|NO|now()
+t_prd_product_prices|upd_dt|timestamp without time zone|YES|
+t_prd_product_print_options|prd_cd|character varying(50)|NO|
+t_prd_product_print_options|opt_id|integer|NO|
+t_prd_product_print_options|print_side|character varying(20)|NO|
+t_prd_product_print_options|front_colrcnt_cd|character varying(50)|NO|
+t_prd_product_print_options|back_colrcnt_cd|character varying(50)|NO|
+t_prd_product_print_options|dflt_yn|character(1)|NO|
+t_prd_product_print_options|disp_seq|integer|YES|
+t_prd_product_print_options|reg_dt|timestamp without time zone|NO|now()
+t_prd_product_print_options|upd_dt|timestamp without time zone|YES|
+t_prd_product_print_options|del_yn|character(1)|NO|'N'::bpchar
+t_prd_product_print_options|del_dt|timestamp without time zone|YES|
+t_prd_product_processes|prd_cd|character varying(50)|NO|
+t_prd_product_processes|proc_cd|character varying(50)|NO|
+t_prd_product_processes|mand_proc_yn|character(1)|NO|
+t_prd_product_processes|disp_seq|integer|YES|
+t_prd_product_processes|reg_dt|timestamp without time zone|NO|now()
+t_prd_product_processes|upd_dt|timestamp without time zone|YES|
+t_prd_product_processes|del_yn|character(1)|NO|'N'::bpchar
+t_prd_product_processes|del_dt|timestamp without time zone|YES|
+t_prd_product_sets|prd_cd|character varying(50)|NO|
+t_prd_product_sets|sub_prd_cd|character varying(50)|NO|
+t_prd_product_sets|sub_prd_qty|integer|NO|
+t_prd_product_sets|disp_seq|integer|YES|
+t_prd_product_sets|note|character varying(500)|YES|
+t_prd_product_sets|reg_dt|timestamp without time zone|NO|now()
+t_prd_product_sets|upd_dt|timestamp without time zone|YES|
+t_prd_product_sets|del_yn|character(1)|NO|'N'::bpchar
+t_prd_product_sets|del_dt|timestamp without time zone|YES|
+t_prd_product_sizes|prd_cd|character varying(50)|NO|
+t_prd_product_sizes|siz_cd|character varying(50)|NO|
+t_prd_product_sizes|dflt_yn|character(1)|NO|
+t_prd_product_sizes|disp_seq|integer|YES|
+t_prd_product_sizes|reg_dt|timestamp without time zone|NO|now()
+t_prd_product_sizes|upd_dt|timestamp without time zone|YES|
+t_prd_product_sizes|del_yn|character(1)|NO|'N'::bpchar
+t_prd_product_sizes|del_dt|timestamp without time zone|YES|
+t_prd_products|prd_cd|character varying(50)|NO|
+t_prd_products|MES_ITEM_CD|character varying(30)|YES|
+t_prd_products|prd_nm|character varying(200)|NO|
+t_prd_products|prd_typ_cd|character varying(50)|NO|
+t_prd_products|semi_role_cd|character varying(50)|YES|
+t_prd_products|nonspec_yn|character(1)|NO|
+t_prd_products|nonspec_width_min|numeric|YES|
+t_prd_products|nonspec_width_max|numeric|YES|
+t_prd_products|nonspec_height_min|numeric|YES|
+t_prd_products|nonspec_height_max|numeric|YES|
+t_prd_products|file_upload_yn|character(1)|NO|
+t_prd_products|editor_yn|character(1)|NO|
+t_prd_products|min_qty|integer|YES|
+t_prd_products|max_qty|integer|YES|
+t_prd_products|qty_incr|integer|YES|
+t_prd_products|dflt_qty|integer|YES|
+t_prd_products|constraint_json|jsonb|YES|
+t_prd_products|use_yn|character(1)|NO|
+t_prd_products|reg_dt|timestamp without time zone|NO|now()
+t_prd_products|upd_dt|timestamp without time zone|YES|
+t_prd_products|qty_unit_typ_cd|character varying(50)|YES|
+t_prd_template_selections|tmpl_cd|character varying(50)|NO|
+t_prd_template_selections|sel_seq|integer|NO|
+t_prd_template_selections|ref_dim_cd|character varying(50)|YES|
+t_prd_template_selections|ref_key1|character varying(50)|YES|
+t_prd_template_selections|ref_key2|character varying(50)|YES|
+t_prd_template_selections|opt_cd|character varying(50)|YES|
+t_prd_template_selections|sel_val|character varying(100)|YES|
+t_prd_template_selections|qty|integer|YES|
+t_prd_template_selections|use_yn|character(1)|NO|'Y'::bpchar
+t_prd_template_selections|del_yn|character(1)|NO|'N'::bpchar
+t_prd_template_selections|del_dt|timestamp without time zone|YES|
+t_prd_template_selections|reg_dt|timestamp without time zone|NO|now()
+t_prd_template_selections|upd_dt|timestamp without time zone|YES|
+t_prd_templates|tmpl_cd|character varying(50)|NO|
+t_prd_templates|base_prd_cd|character varying(50)|NO|
+t_prd_templates|tmpl_nm|character varying(200)|NO|
+t_prd_templates|dflt_qty|integer|YES|
+t_prd_templates|use_yn|character(1)|NO|'Y'::bpchar
+t_prd_templates|del_yn|character(1)|NO|'N'::bpchar
+t_prd_templates|del_dt|timestamp without time zone|YES|
+t_prd_templates|note|character varying(500)|YES|
+t_prd_templates|reg_dt|timestamp without time zone|NO|now()
+t_prd_templates|upd_dt|timestamp without time zone|YES|
+t_proc_processes|proc_cd|character varying(50)|NO|
+t_proc_processes|proc_nm|character varying(200)|NO|
+t_proc_processes|upr_proc_cd|character varying(50)|YES|
+t_proc_processes|prcs_dtl_opt|jsonb|YES|
+t_proc_processes|disp_seq|integer|YES|
+t_proc_processes|use_yn|character(1)|NO|
+t_proc_processes|note|character varying(500)|YES|
+t_proc_processes|reg_dt|timestamp without time zone|NO|now()
+t_proc_processes|upd_dt|timestamp without time zone|YES|
+t_proc_processes|del_yn|character(1)|NO|'N'::bpchar
+t_proc_processes|del_dt|timestamp without time zone|YES|
+t_siz_sizes|siz_cd|character varying(50)|NO|
+t_siz_sizes|siz_nm|character varying(50)|NO|
+t_siz_sizes|work_width|numeric|YES|
+t_siz_sizes|work_height|numeric|YES|
+t_siz_sizes|cut_width|numeric|YES|
+t_siz_sizes|cut_height|numeric|YES|
+t_siz_sizes|margin_top|numeric|YES|
+t_siz_sizes|margin_bot|numeric|YES|
+t_siz_sizes|margin_lft|numeric|YES|
+t_siz_sizes|margin_rgt|numeric|YES|
+t_siz_sizes|impos_yn|character(1)|NO|
+t_siz_sizes|use_yn|character(1)|NO|
+t_siz_sizes|note|character varying(500)|YES|
+t_siz_sizes|reg_dt|timestamp without time zone|NO|now()
+t_siz_sizes|upd_dt|timestamp without time zone|YES|
+t_siz_sizes|del_yn|character(1)|NO|'N'::bpchar
+t_siz_sizes|del_dt|timestamp without time zone|YES|
+
+## [CONSTRAINTS] table [type] name -> ref
+t_cat_categories|c|t_cat_categories_use_yn_check|
+t_cat_categories|f|fk_cat_categories_upr_cat_cd|t_cat_categories
+t_cat_categories|p|pk_t_cat_categories|
+t_clr_color_counts|c|ck_t_clr_color_counts_del_yn|
+t_clr_color_counts|c|t_clr_color_counts_use_yn_check|
+t_clr_color_counts|p|pk_t_clr_color_counts|
+t_cod_base_codes|c|t_cod_base_codes_use_yn_check|
+t_cod_base_codes|f|fk_cod_base_codes_upr_cod_cd|t_cod_base_codes
+t_cod_base_codes|p|pk_t_cod_base_codes|
+t_cus_customers|c|t_cus_customers_use_yn_check|
+t_cus_customers|f|fk_cus_customers_grade_cd|t_cod_base_codes
+t_cus_customers|p|pk_t_cus_customers|
+t_dsc_discount_details|c|ck_t_dsc_discount_details_amt_excl|
+t_dsc_discount_details|f|fk_dsc_discount_details_dsc_tbl_cd|t_dsc_discount_tables
+t_dsc_discount_details|f|fk_dsc_discount_details_dsc_typ_cd|t_cod_base_codes
+t_dsc_discount_details|p|pk_t_dsc_discount_details|
+t_dsc_discount_tables|c|t_dsc_discount_tables_use_yn_check|
+t_dsc_discount_tables|p|pk_t_dsc_discount_tables|
+t_dsc_grade_discount_rates|c|ck_t_dsc_grade_dsc_rates_amt_excl|
+t_dsc_grade_discount_rates|f|fk_dsc_grade_dsc_rates_cat_cd|t_cat_categories
+t_dsc_grade_discount_rates|f|fk_dsc_grade_dsc_rates_dsc_typ_cd|t_cod_base_codes
+t_dsc_grade_discount_rates|f|fk_dsc_grade_dsc_rates_grade_cd|t_cod_base_codes
+t_dsc_grade_discount_rates|p|pk_t_dsc_grade_discount_rates|
+t_mat_materials|c|ck_t_mat_materials_del_yn|
+t_mat_materials|c|t_mat_materials_use_yn_check|
+t_mat_materials|f|fk_mat_materials_mat_typ_cd|t_cod_base_codes
+t_mat_materials|f|fk_mat_materials_sel_typ_cd|t_cod_base_codes
+t_mat_materials|f|fk_mat_materials_upr_mat_cd|t_mat_materials
+t_mat_materials|p|pk_t_mat_materials|
+t_prc_component_prices|f|fk_prc_comp_prices_clr_cd|t_clr_color_counts
+t_prc_component_prices|f|fk_prc_comp_prices_comp_cd|t_prc_price_components
+t_prc_component_prices|f|fk_prc_comp_prices_mat_cd|t_mat_materials
+t_prc_component_prices|f|fk_prc_comp_prices_siz_cd|t_siz_sizes
+t_prc_component_prices|p|t_prc_component_prices_pkey|
+t_prc_formula_components|c|t_prc_formula_components_addtn_yn_check|
+t_prc_formula_components|f|fk_prc_formula_comps_comp_cd|t_prc_price_components
+t_prc_formula_components|f|fk_prc_formula_comps_frm_cd|t_prc_price_formulas
+t_prc_formula_components|p|t_prc_formula_components_pkey|
+t_prc_price_components|c|t_prc_price_components_use_yn_check|
+t_prc_price_components|f|fk_prc_price_components_comp_typ_cd|t_cod_base_codes
+t_prc_price_components|p|pk_t_prc_price_components|
+t_prc_price_formulas|c|t_prc_price_formulas_use_yn_check|
+t_prc_price_formulas|f|fk_prc_price_formulas_frm_typ_cd|t_cod_base_codes
+t_prc_price_formulas|p|pk_t_prc_price_formulas|
+t_prd_product_addons|f|fk_prd_product_addons_prd_cd|t_prd_products
+t_prd_product_addons|f|fk_prd_product_addons_tmpl_cd|t_prd_templates
+t_prd_product_addons|p|t_prd_product_addons_pkey|
+t_prd_product_bundle_qtys|c|ck_t_prd_product_bundle_qtys_del_yn|
+t_prd_product_bundle_qtys|c|t_prd_product_bundle_qtys_dflt_yn_check|
+t_prd_product_bundle_qtys|f|fk_prd_product_bdl_qtys_bdl_unit_typ_cd|t_cod_base_codes
+t_prd_product_bundle_qtys|f|fk_prd_product_bdl_qtys_prd_cd|t_prd_products
+t_prd_product_bundle_qtys|p|t_prd_product_bundle_qtys_pkey|
+t_prd_product_categories|c|t_prd_product_categories_main_cat_yn_check|
+t_prd_product_categories|f|fk_prd_product_cats_cat_cd|t_cat_categories
+t_prd_product_categories|f|fk_prd_product_cats_prd_cd|t_prd_products
+t_prd_product_categories|p|t_prd_product_categories_pkey|
+t_prd_product_constraints|c|t_prd_product_constraints_del_yn_check|
+t_prd_product_constraints|c|t_prd_product_constraints_use_yn_check|
+t_prd_product_constraints|f|fk_prd_constraints_prd_cd|t_prd_products
+t_prd_product_constraints|f|fk_prd_constraints_rule_typ_cd|t_cod_base_codes
+t_prd_product_constraints|p|t_prd_product_constraints_pkey|
+t_prd_product_discount_tables|f|fk_prd_dsc_tbls_dsc_tbl_cd|t_dsc_discount_tables
+t_prd_product_discount_tables|f|fk_prd_dsc_tbls_prd_cd|t_prd_products
+t_prd_product_discount_tables|p|t_prd_product_discount_tables_pkey|
+t_prd_product_materials|c|ck_t_prd_product_materials_del_yn|
+t_prd_product_materials|c|t_prd_product_materials_dflt_yn_check|
+t_prd_product_materials|f|fk_prd_product_mats_dep_proc_cd|t_proc_processes
+t_prd_product_materials|f|fk_prd_product_mats_mat_cd|t_mat_materials
+t_prd_product_materials|f|fk_prd_product_mats_prd_cd|t_prd_products
+t_prd_product_materials|f|fk_prd_product_mats_usage_cd|t_cod_base_codes
+t_prd_product_materials|p|t_prd_product_materials_pkey|
+t_prd_product_option_groups|c|t_prd_product_option_groups_del_yn_check|
+t_prd_product_option_groups|c|t_prd_product_option_groups_mand_yn_check|
+t_prd_product_option_groups|c|t_prd_product_option_groups_use_yn_check|
+t_prd_product_option_groups|f|fk_prd_opt_groups_prd_cd|t_prd_products
+t_prd_product_option_groups|f|fk_prd_opt_groups_sel_typ_cd|t_cod_base_codes
+t_prd_product_option_groups|p|t_prd_product_option_groups_pkey|
+t_prd_product_option_items|c|t_prd_product_option_items_del_yn_check|
+t_prd_product_option_items|c|t_prd_product_option_items_use_yn_check|
+t_prd_product_option_items|f|fk_prd_opt_items_opt|t_prd_product_options
+t_prd_product_option_items|f|fk_prd_opt_items_ref_dim_cd|t_cod_base_codes
+t_prd_product_option_items|p|t_prd_product_option_items_pkey|
+t_prd_product_options|c|t_prd_product_options_del_yn_check|
+t_prd_product_options|c|t_prd_product_options_dflt_yn_check|
+t_prd_product_options|c|t_prd_product_options_use_yn_check|
+t_prd_product_options|f|fk_prd_options_opt_grp|t_prd_product_option_groups
+t_prd_product_options|f|fk_prd_options_prd_cd|t_prd_products
+t_prd_product_options|p|t_prd_product_options_pkey|
+t_prd_product_page_rules|f|fk_prd_product_page_rules_prd_cd|t_prd_products
+t_prd_product_page_rules|p|t_prd_product_page_rules_pkey|
+t_prd_product_plate_sizes|c|ck_t_prd_product_plate_sizes_del_yn|
+t_prd_product_plate_sizes|c|t_prd_product_plate_sizes_dflt_plt_yn_check|
+t_prd_product_plate_sizes|f|fk_prd_plt_siz_output_paper_typ_cd|t_cod_base_codes
+t_prd_product_plate_sizes|f|fk_prd_product_plt_siz_prd_cd|t_prd_products
+t_prd_product_plate_sizes|f|fk_prd_product_plt_siz_siz_cd|t_siz_sizes
+t_prd_product_plate_sizes|p|t_prd_product_plate_sizes_pkey|
+t_prd_product_price_formulas|f|fk_prd_prc_frm_frm_cd|t_prc_price_formulas
+t_prd_product_price_formulas|f|fk_prd_prc_frm_prd_cd|t_prd_products
+t_prd_product_price_formulas|p|t_prd_product_price_formulas_pkey|
+t_prd_product_prices|f|fk_prd_product_prices_prd_cd|t_prd_products
+t_prd_product_prices|p|pk_t_prd_product_prices|
+t_prd_product_print_options|c|ck_t_prd_product_print_options_del_yn|
+t_prd_product_print_options|c|t_prd_product_print_options_dflt_yn_check|
+t_prd_product_print_options|f|fk_prd_prnt_opt_back_colrcnt_cd|t_clr_color_counts
+t_prd_product_print_options|f|fk_prd_prnt_opt_front_colrcnt_cd|t_clr_color_counts
+t_prd_product_print_options|f|fk_prd_product_prnt_opt_prd_cd|t_prd_products
+t_prd_product_print_options|p|t_prd_product_print_options_pkey|
+t_prd_product_processes|c|ck_t_prd_product_processes_del_yn|
+t_prd_product_processes|c|t_prd_product_processes_mand_proc_yn_check|
+t_prd_product_processes|f|fk_prd_product_procs_prd_cd|t_prd_products
+t_prd_product_processes|f|fk_prd_product_procs_proc_cd|t_proc_processes
+t_prd_product_processes|p|t_prd_product_processes_pkey|
+t_prd_product_sets|c|ck_t_prd_product_sets_del_yn|
+t_prd_product_sets|f|fk_prd_product_sets_prd_cd|t_prd_products
+t_prd_product_sets|f|fk_prd_product_sets_sub_prd_cd|t_prd_products
+t_prd_product_sets|p|pk_t_prd_product_sets|
+t_prd_product_sizes|c|ck_t_prd_product_sizes_del_yn|
+t_prd_product_sizes|c|t_prd_product_sizes_dflt_yn_check|
+t_prd_product_sizes|f|fk_prd_product_sizes_prd_cd|t_prd_products
+t_prd_product_sizes|f|fk_prd_product_sizes_siz_cd|t_siz_sizes
+t_prd_product_sizes|p|t_prd_product_sizes_pkey|
+t_prd_products|c|t_prd_products_editor_yn_check|
+t_prd_products|c|t_prd_products_file_upload_yn_check|
+t_prd_products|c|t_prd_products_nonspec_yn_check|
+t_prd_products|c|t_prd_products_use_yn_check|
+t_prd_products|f|fk_prd_products_prd_typ_cd|t_cod_base_codes
+t_prd_products|f|fk_prd_products_qty_unit_typ_cd|t_cod_base_codes
+t_prd_products|f|fk_prd_products_semi_role_cd|t_cod_base_codes
+t_prd_products|p|pk_t_prd_products|
+t_prd_template_selections|c|t_prd_template_selections_del_yn_check|
+t_prd_template_selections|c|t_prd_template_selections_use_yn_check|
+t_prd_template_selections|f|fk_prd_tmpl_sel_ref_dim_cd|t_cod_base_codes
+t_prd_template_selections|f|fk_prd_tmpl_sel_tmpl_cd|t_prd_templates
+t_prd_template_selections|p|t_prd_template_selections_pkey|
+t_prd_templates|c|t_prd_templates_del_yn_check|
+t_prd_templates|c|t_prd_templates_use_yn_check|
+t_prd_templates|f|fk_prd_templates_base_prd_cd|t_prd_products
+t_prd_templates|p|t_prd_templates_pkey|
+t_proc_processes|c|ck_t_proc_processes_del_yn|
+t_proc_processes|c|t_proc_processes_use_yn_check|
+t_proc_processes|f|fk_proc_processes_upr_proc_cd|t_proc_processes
+t_proc_processes|p|pk_t_proc_processes|
+t_siz_sizes|c|ck_t_siz_sizes_del_yn|
+t_siz_sizes|c|t_siz_sizes_impos_yn_check|
+t_siz_sizes|c|t_siz_sizes_use_yn_check|
+t_siz_sizes|p|pk_t_siz_sizes|
+
+## [TRIGGERS] table | trigger | timing/event | function
+ERROR:  ORDER BY position 2 is not in select list
+LINE 1: ...ernal AND t.tgrelid::regclass::text LIKE 't\_%' ORDER BY 1,2
+                                                                      ^
