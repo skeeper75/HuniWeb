@@ -1,0 +1,378 @@
+table_name	ordinal_position	column_name	data_type	coalesce	coalesce	coalesce	is_nullable	coalesce
+auth_group	1	id	integer		32	0	NO	
+auth_group	2	name	character varying	150			NO	
+auth_group_permissions	1	id	bigint		64	0	NO	
+auth_group_permissions	2	group_id	integer		32	0	NO	
+auth_group_permissions	3	permission_id	integer		32	0	NO	
+auth_permission	1	id	integer		32	0	NO	
+auth_permission	2	name	character varying	255			NO	
+auth_permission	3	content_type_id	integer		32	0	NO	
+auth_permission	4	codename	character varying	100			NO	
+auth_user	1	id	integer		32	0	NO	
+auth_user	2	password	character varying	128			NO	
+auth_user	3	last_login	timestamp with time zone				YES	
+auth_user	4	is_superuser	boolean				NO	
+auth_user	5	username	character varying	150			NO	
+auth_user	6	first_name	character varying	150			NO	
+auth_user	7	last_name	character varying	150			NO	
+auth_user	8	email	character varying	254			NO	
+auth_user	9	is_staff	boolean				NO	
+auth_user	10	is_active	boolean				NO	
+auth_user	11	date_joined	timestamp with time zone				NO	
+auth_user_groups	1	id	bigint		64	0	NO	
+auth_user_groups	2	user_id	integer		32	0	NO	
+auth_user_groups	3	group_id	integer		32	0	NO	
+auth_user_user_permissions	1	id	bigint		64	0	NO	
+auth_user_user_permissions	2	user_id	integer		32	0	NO	
+auth_user_user_permissions	3	permission_id	integer		32	0	NO	
+django_admin_log	1	id	integer		32	0	NO	
+django_admin_log	2	action_time	timestamp with time zone				NO	
+django_admin_log	3	object_id	text				YES	
+django_admin_log	4	object_repr	character varying	200			NO	
+django_admin_log	5	action_flag	smallint		16	0	NO	
+django_admin_log	6	change_message	text				NO	
+django_admin_log	7	content_type_id	integer		32	0	YES	
+django_admin_log	8	user_id	integer		32	0	NO	
+django_content_type	1	id	integer		32	0	NO	
+django_content_type	3	app_label	character varying	100			NO	
+django_content_type	4	model	character varying	100			NO	
+django_migrations	1	id	bigint		64	0	NO	
+django_migrations	2	app	character varying	255			NO	
+django_migrations	3	name	character varying	255			NO	
+django_migrations	4	applied	timestamp with time zone				NO	
+django_session	1	session_key	character varying	40			NO	
+django_session	2	session_data	text				NO	
+django_session	3	expire_date	timestamp with time zone				NO	
+t_cat_categories	1	cat_cd	character varying	50			NO	
+t_cat_categories	2	cat_nm	character varying	100			NO	
+t_cat_categories	3	upr_cat_cd	character varying	50			YES	
+t_cat_categories	4	cat_lvl	integer		32	0	NO	
+t_cat_categories	5	disp_seq	integer		32	0	YES	
+t_cat_categories	6	use_yn	character	1			NO	
+t_cat_categories	7	reg_dt	timestamp without time zone				NO	now()
+t_cat_categories	8	upd_dt	timestamp without time zone				YES	
+t_clr_color_counts	1	clr_cd	character varying	50			NO	
+t_clr_color_counts	2	clr_nm	character varying	100			NO	
+t_clr_color_counts	3	chnl_cnt	integer		32	0	NO	
+t_clr_color_counts	4	use_yn	character	1			NO	
+t_clr_color_counts	5	note	character varying	500			YES	
+t_clr_color_counts	6	reg_dt	timestamp without time zone				NO	now()
+t_clr_color_counts	7	upd_dt	timestamp without time zone				YES	
+t_clr_color_counts	8	del_yn	character	1			NO	'N'::bpchar
+t_clr_color_counts	9	del_dt	timestamp without time zone				YES	
+t_cod_base_codes	1	cod_cd	character varying	50			NO	
+t_cod_base_codes	2	cod_nm	character varying	100			NO	
+t_cod_base_codes	3	upr_cod_cd	character varying	50			YES	
+t_cod_base_codes	4	disp_seq	integer		32	0	YES	
+t_cod_base_codes	5	use_yn	character	1			NO	
+t_cod_base_codes	6	note	character varying	500			YES	
+t_cod_base_codes	7	reg_dt	timestamp without time zone				NO	now()
+t_cod_base_codes	8	upd_dt	timestamp without time zone				YES	
+t_cus_customers	1	cus_cd	character varying	50			NO	
+t_cus_customers	2	cus_nm	character varying	100			NO	
+t_cus_customers	3	grade_cd	character varying	50			YES	
+t_cus_customers	4	reg_ymd	character varying	10			YES	
+t_cus_customers	5	use_yn	character	1			NO	
+t_cus_customers	6	reg_dt	timestamp without time zone				NO	now()
+t_cus_customers	7	upd_dt	timestamp without time zone				YES	
+t_dsc_discount_details	1	dsc_tbl_cd	character varying	50			NO	
+t_dsc_discount_details	2	apply_ymd	character varying	10			NO	
+t_dsc_discount_details	3	min_qty	integer		32	0	NO	
+t_dsc_discount_details	4	max_qty	integer		32	0	YES	
+t_dsc_discount_details	5	dsc_typ_cd	character varying	50			YES	
+t_dsc_discount_details	6	dsc_rate	numeric		5	2	YES	
+t_dsc_discount_details	7	dsc_amt	numeric		12	2	YES	
+t_dsc_discount_details	8	note	character varying	500			YES	
+t_dsc_discount_details	9	reg_dt	timestamp without time zone				NO	now()
+t_dsc_discount_details	10	upd_dt	timestamp without time zone				YES	
+t_dsc_discount_tables	1	dsc_tbl_cd	character varying	50			NO	
+t_dsc_discount_tables	2	dsc_tbl_nm	character varying	100			NO	
+t_dsc_discount_tables	3	note	character varying	500			YES	
+t_dsc_discount_tables	4	use_yn	character	1			NO	
+t_dsc_discount_tables	5	reg_dt	timestamp without time zone				NO	now()
+t_dsc_discount_tables	6	upd_dt	timestamp without time zone				YES	
+t_dsc_grade_discount_rates	1	grade_cd	character varying	50			NO	
+t_dsc_grade_discount_rates	2	cat_cd	character varying	50			NO	
+t_dsc_grade_discount_rates	3	apply_ymd	character varying	10			NO	
+t_dsc_grade_discount_rates	4	dsc_typ_cd	character varying	50			YES	
+t_dsc_grade_discount_rates	5	dsc_rate	numeric		5	2	YES	
+t_dsc_grade_discount_rates	6	dsc_amt	numeric		12	2	YES	
+t_dsc_grade_discount_rates	7	note	character varying	500			YES	
+t_dsc_grade_discount_rates	8	reg_dt	timestamp without time zone				NO	now()
+t_dsc_grade_discount_rates	9	upd_dt	timestamp without time zone				YES	
+t_mat_materials	1	mat_cd	character varying	50			NO	
+t_mat_materials	2	mat_nm	character varying	200			NO	
+t_mat_materials	3	mat_typ_cd	character varying	50			NO	
+t_mat_materials	4	upr_mat_cd	character varying	50			YES	
+t_mat_materials	5	sel_typ_cd	character varying	50			YES	
+t_mat_materials	6	max_sel_cnt	integer		32	0	YES	
+t_mat_materials	7	width	numeric		8	2	YES	
+t_mat_materials	8	height	numeric		8	2	YES	
+t_mat_materials	9	depth	numeric		8	2	YES	
+t_mat_materials	10	weight	numeric		8	2	YES	
+t_mat_materials	11	bdl_qty	integer		32	0	YES	
+t_mat_materials	12	use_yn	character	1			NO	
+t_mat_materials	13	note	character varying	500			YES	
+t_mat_materials	14	reg_dt	timestamp without time zone				NO	now()
+t_mat_materials	15	upd_dt	timestamp without time zone				YES	
+t_mat_materials	16	del_yn	character	1			NO	'N'::bpchar
+t_mat_materials	17	del_dt	timestamp without time zone				YES	
+t_prc_component_prices	1	comp_price_id	bigint		64	0	NO	
+t_prc_component_prices	2	comp_cd	character varying	50			NO	
+t_prc_component_prices	3	apply_ymd	character varying	10			NO	
+t_prc_component_prices	4	siz_cd	character varying	50			YES	
+t_prc_component_prices	5	clr_cd	character varying	50			YES	
+t_prc_component_prices	6	mat_cd	character varying	50			YES	
+t_prc_component_prices	7	coat_side_cnt	integer		32	0	YES	
+t_prc_component_prices	8	bdl_qty	integer		32	0	YES	
+t_prc_component_prices	9	min_qty	integer		32	0	YES	
+t_prc_component_prices	10	unit_price	numeric		12	2	YES	
+t_prc_component_prices	11	note	character varying	500			YES	
+t_prc_component_prices	12	reg_dt	timestamp without time zone				NO	now()
+t_prc_component_prices	13	upd_dt	timestamp without time zone				YES	
+t_prc_formula_components	1	frm_cd	character varying	50			NO	
+t_prc_formula_components	2	comp_cd	character varying	50			NO	
+t_prc_formula_components	3	disp_seq	integer		32	0	YES	
+t_prc_formula_components	4	addtn_yn	character	1			YES	
+t_prc_formula_components	5	reg_dt	timestamp without time zone				NO	now()
+t_prc_formula_components	6	upd_dt	timestamp without time zone				YES	
+t_prc_price_components	1	comp_cd	character varying	50			NO	
+t_prc_price_components	2	comp_nm	character varying	200			NO	
+t_prc_price_components	3	comp_typ_cd	character varying	50			YES	
+t_prc_price_components	4	note	character varying	500			YES	
+t_prc_price_components	5	use_yn	character	1			NO	
+t_prc_price_components	6	reg_dt	timestamp without time zone				NO	now()
+t_prc_price_components	7	upd_dt	timestamp without time zone				YES	
+t_prc_price_formulas	1	frm_cd	character varying	50			NO	
+t_prc_price_formulas	2	frm_nm	character varying	200			NO	
+t_prc_price_formulas	3	frm_typ_cd	character varying	50			NO	
+t_prc_price_formulas	4	note	character varying	500			YES	
+t_prc_price_formulas	5	use_yn	character	1			NO	
+t_prc_price_formulas	6	reg_dt	timestamp without time zone				NO	now()
+t_prc_price_formulas	7	upd_dt	timestamp without time zone				YES	
+t_prd_product_addons	1	prd_cd	character varying	50			NO	
+t_prd_product_addons	3	disp_seq	integer		32	0	YES	
+t_prd_product_addons	4	note	character varying	500			YES	
+t_prd_product_addons	5	reg_dt	timestamp without time zone				NO	now()
+t_prd_product_addons	6	upd_dt	timestamp without time zone				YES	
+t_prd_product_addons	7	tmpl_cd	character varying	50			NO	
+t_prd_product_bundle_qtys	1	prd_cd	character varying	50			NO	
+t_prd_product_bundle_qtys	2	bdl_qty	integer		32	0	NO	
+t_prd_product_bundle_qtys	3	bdl_unit_typ_cd	character varying	50			YES	
+t_prd_product_bundle_qtys	4	dflt_yn	character	1			NO	
+t_prd_product_bundle_qtys	5	disp_seq	integer		32	0	YES	
+t_prd_product_bundle_qtys	6	reg_dt	timestamp without time zone				NO	now()
+t_prd_product_bundle_qtys	7	upd_dt	timestamp without time zone				YES	
+t_prd_product_bundle_qtys	8	del_yn	character	1			NO	'N'::bpchar
+t_prd_product_bundle_qtys	9	del_dt	timestamp without time zone				YES	
+t_prd_product_categories	1	prd_cd	character varying	50			NO	
+t_prd_product_categories	2	cat_cd	character varying	50			NO	
+t_prd_product_categories	3	main_cat_yn	character	1			NO	
+t_prd_product_categories	4	disp_seq	integer		32	0	YES	
+t_prd_product_categories	5	note	character varying	500			YES	
+t_prd_product_categories	6	reg_dt	timestamp without time zone				NO	now()
+t_prd_product_categories	7	upd_dt	timestamp without time zone				YES	
+t_prd_product_constraints	1	prd_cd	character varying	50			NO	
+t_prd_product_constraints	2	rule_cd	character varying	50			NO	
+t_prd_product_constraints	3	rule_nm	character varying	200			NO	
+t_prd_product_constraints	4	rule_typ_cd	character varying	50			YES	
+t_prd_product_constraints	5	logic	jsonb				NO	
+t_prd_product_constraints	6	err_msg	character varying	500			YES	
+t_prd_product_constraints	7	disp_seq	integer		32	0	YES	
+t_prd_product_constraints	8	use_yn	character	1			NO	'Y'::bpchar
+t_prd_product_constraints	9	del_yn	character	1			NO	'N'::bpchar
+t_prd_product_constraints	10	del_dt	timestamp without time zone				YES	
+t_prd_product_constraints	11	reg_dt	timestamp without time zone				NO	now()
+t_prd_product_constraints	12	upd_dt	timestamp without time zone				YES	
+t_prd_product_discount_tables	1	prd_cd	character varying	50			NO	
+t_prd_product_discount_tables	2	dsc_tbl_cd	character varying	50			NO	
+t_prd_product_discount_tables	3	apply_bgn_ymd	character varying	10			NO	
+t_prd_product_discount_tables	4	note	character varying	500			YES	
+t_prd_product_discount_tables	5	reg_dt	timestamp without time zone				NO	now()
+t_prd_product_discount_tables	6	upd_dt	timestamp without time zone				YES	
+t_prd_product_materials	1	prd_cd	character varying	50			NO	
+t_prd_product_materials	2	mat_cd	character varying	50			NO	
+t_prd_product_materials	3	usage_cd	character varying	50			NO	
+t_prd_product_materials	4	dep_proc_cd	character varying	50			YES	
+t_prd_product_materials	5	dflt_yn	character	1			NO	
+t_prd_product_materials	6	disp_seq	integer		32	0	YES	
+t_prd_product_materials	7	reg_dt	timestamp without time zone				NO	now()
+t_prd_product_materials	8	upd_dt	timestamp without time zone				YES	
+t_prd_product_materials	9	del_yn	character	1			NO	'N'::bpchar
+t_prd_product_materials	10	del_dt	timestamp without time zone				YES	
+t_prd_product_option_groups	1	prd_cd	character varying	50			NO	
+t_prd_product_option_groups	2	opt_grp_cd	character varying	50			NO	
+t_prd_product_option_groups	3	opt_grp_nm	character varying	100			NO	
+t_prd_product_option_groups	4	sel_typ_cd	character varying	50			YES	
+t_prd_product_option_groups	5	min_sel_cnt	integer		32	0	YES	
+t_prd_product_option_groups	6	max_sel_cnt	integer		32	0	YES	
+t_prd_product_option_groups	7	mand_yn	character	1			YES	
+t_prd_product_option_groups	8	disp_seq	integer		32	0	YES	
+t_prd_product_option_groups	9	use_yn	character	1			NO	'Y'::bpchar
+t_prd_product_option_groups	10	del_yn	character	1			NO	'N'::bpchar
+t_prd_product_option_groups	11	del_dt	timestamp without time zone				YES	
+t_prd_product_option_groups	12	note	character varying	500			YES	
+t_prd_product_option_groups	13	reg_dt	timestamp without time zone				NO	now()
+t_prd_product_option_groups	14	upd_dt	timestamp without time zone				YES	
+t_prd_product_option_items	1	prd_cd	character varying	50			NO	
+t_prd_product_option_items	2	opt_cd	character varying	50			NO	
+t_prd_product_option_items	3	item_seq	integer		32	0	NO	
+t_prd_product_option_items	4	ref_dim_cd	character varying	50			NO	
+t_prd_product_option_items	5	ref_key1	character varying	50			NO	
+t_prd_product_option_items	6	ref_key2	character varying	50			YES	
+t_prd_product_option_items	7	qty	integer		32	0	YES	
+t_prd_product_option_items	8	use_yn	character	1			NO	'Y'::bpchar
+t_prd_product_option_items	9	del_yn	character	1			NO	'N'::bpchar
+t_prd_product_option_items	10	del_dt	timestamp without time zone				YES	
+t_prd_product_option_items	11	reg_dt	timestamp without time zone				NO	now()
+t_prd_product_option_items	12	upd_dt	timestamp without time zone				YES	
+t_prd_product_options	1	prd_cd	character varying	50			NO	
+t_prd_product_options	2	opt_cd	character varying	50			NO	
+t_prd_product_options	3	opt_grp_cd	character varying	50			NO	
+t_prd_product_options	4	opt_nm	character varying	100			NO	
+t_prd_product_options	5	dflt_yn	character	1			YES	
+t_prd_product_options	6	disp_seq	integer		32	0	YES	
+t_prd_product_options	7	use_yn	character	1			NO	'Y'::bpchar
+t_prd_product_options	8	del_yn	character	1			NO	'N'::bpchar
+t_prd_product_options	9	del_dt	timestamp without time zone				YES	
+t_prd_product_options	10	note	character varying	500			YES	
+t_prd_product_options	11	reg_dt	timestamp without time zone				NO	now()
+t_prd_product_options	12	upd_dt	timestamp without time zone				YES	
+t_prd_product_page_rules	1	prd_cd	character varying	50			NO	
+t_prd_product_page_rules	2	page_min	integer		32	0	NO	
+t_prd_product_page_rules	3	page_max	integer		32	0	NO	
+t_prd_product_page_rules	4	page_incr	integer		32	0	NO	
+t_prd_product_page_rules	5	note	character varying	500			YES	
+t_prd_product_page_rules	6	reg_dt	timestamp without time zone				NO	now()
+t_prd_product_page_rules	7	upd_dt	timestamp without time zone				YES	
+t_prd_product_plate_sizes	1	prd_cd	character varying	50			NO	
+t_prd_product_plate_sizes	2	siz_cd	character varying	50			NO	
+t_prd_product_plate_sizes	3	dflt_plt_yn	character	1			NO	
+t_prd_product_plate_sizes	4	output_paper_typ_cd	character varying	50			YES	
+t_prd_product_plate_sizes	5	output_file_typ	character varying	30			YES	
+t_prd_product_plate_sizes	6	note	character varying	500			YES	
+t_prd_product_plate_sizes	7	reg_dt	timestamp without time zone				NO	now()
+t_prd_product_plate_sizes	8	upd_dt	timestamp without time zone				YES	
+t_prd_product_plate_sizes	9	del_yn	character	1			NO	'N'::bpchar
+t_prd_product_plate_sizes	10	del_dt	timestamp without time zone				YES	
+t_prd_product_price_formulas	1	prd_cd	character varying	50			NO	
+t_prd_product_price_formulas	2	frm_cd	character varying	50			NO	
+t_prd_product_price_formulas	3	apply_bgn_ymd	character varying	10			YES	
+t_prd_product_price_formulas	4	note	character varying	500			YES	
+t_prd_product_price_formulas	5	reg_dt	timestamp without time zone				NO	now()
+t_prd_product_price_formulas	6	upd_dt	timestamp without time zone				YES	
+t_prd_product_prices	1	prd_cd	character varying	50			NO	
+t_prd_product_prices	2	apply_ymd	character varying	10			NO	
+t_prd_product_prices	3	unit_price	numeric		12	2	YES	
+t_prd_product_prices	4	note	character varying	500			YES	
+t_prd_product_prices	5	reg_dt	timestamp without time zone				NO	now()
+t_prd_product_prices	6	upd_dt	timestamp without time zone				YES	
+t_prd_product_print_options	1	prd_cd	character varying	50			NO	
+t_prd_product_print_options	2	opt_id	integer		32	0	NO	
+t_prd_product_print_options	3	print_side	character varying	20			NO	
+t_prd_product_print_options	4	front_colrcnt_cd	character varying	50			NO	
+t_prd_product_print_options	5	back_colrcnt_cd	character varying	50			NO	
+t_prd_product_print_options	6	dflt_yn	character	1			NO	
+t_prd_product_print_options	7	disp_seq	integer		32	0	YES	
+t_prd_product_print_options	8	reg_dt	timestamp without time zone				NO	now()
+t_prd_product_print_options	9	upd_dt	timestamp without time zone				YES	
+t_prd_product_print_options	10	del_yn	character	1			NO	'N'::bpchar
+t_prd_product_print_options	11	del_dt	timestamp without time zone				YES	
+t_prd_product_processes	1	prd_cd	character varying	50			NO	
+t_prd_product_processes	2	proc_cd	character varying	50			NO	
+t_prd_product_processes	4	mand_proc_yn	character	1			NO	
+t_prd_product_processes	5	disp_seq	integer		32	0	YES	
+t_prd_product_processes	6	reg_dt	timestamp without time zone				NO	now()
+t_prd_product_processes	7	upd_dt	timestamp without time zone				YES	
+t_prd_product_processes	8	del_yn	character	1			NO	'N'::bpchar
+t_prd_product_processes	9	del_dt	timestamp without time zone				YES	
+t_prd_product_sets	1	prd_cd	character varying	50			NO	
+t_prd_product_sets	2	sub_prd_cd	character varying	50			NO	
+t_prd_product_sets	3	sub_prd_qty	integer		32	0	NO	
+t_prd_product_sets	4	disp_seq	integer		32	0	YES	
+t_prd_product_sets	5	note	character varying	500			YES	
+t_prd_product_sets	6	reg_dt	timestamp without time zone				NO	now()
+t_prd_product_sets	7	upd_dt	timestamp without time zone				YES	
+t_prd_product_sets	8	del_yn	character	1			NO	'N'::bpchar
+t_prd_product_sets	9	del_dt	timestamp without time zone				YES	
+t_prd_product_sizes	1	prd_cd	character varying	50			NO	
+t_prd_product_sizes	2	siz_cd	character varying	50			NO	
+t_prd_product_sizes	3	dflt_yn	character	1			NO	
+t_prd_product_sizes	4	disp_seq	integer		32	0	YES	
+t_prd_product_sizes	5	reg_dt	timestamp without time zone				NO	now()
+t_prd_product_sizes	6	upd_dt	timestamp without time zone				YES	
+t_prd_product_sizes	7	del_yn	character	1			NO	'N'::bpchar
+t_prd_product_sizes	8	del_dt	timestamp without time zone				YES	
+t_prd_products	1	prd_cd	character varying	50			NO	
+t_prd_products	2	MES_ITEM_CD	character varying	30			YES	
+t_prd_products	3	prd_nm	character varying	200			NO	
+t_prd_products	4	prd_typ_cd	character varying	50			NO	
+t_prd_products	5	semi_role_cd	character varying	50			YES	
+t_prd_products	6	nonspec_yn	character	1			NO	
+t_prd_products	7	nonspec_width_min	numeric		8	2	YES	
+t_prd_products	8	nonspec_width_max	numeric		8	2	YES	
+t_prd_products	9	nonspec_height_min	numeric		8	2	YES	
+t_prd_products	10	nonspec_height_max	numeric		8	2	YES	
+t_prd_products	11	file_upload_yn	character	1			NO	
+t_prd_products	12	editor_yn	character	1			NO	
+t_prd_products	13	min_qty	integer		32	0	YES	
+t_prd_products	14	max_qty	integer		32	0	YES	
+t_prd_products	15	qty_incr	integer		32	0	YES	
+t_prd_products	16	dflt_qty	integer		32	0	YES	
+t_prd_products	17	constraint_json	jsonb				YES	
+t_prd_products	18	use_yn	character	1			NO	
+t_prd_products	19	reg_dt	timestamp without time zone				NO	now()
+t_prd_products	20	upd_dt	timestamp without time zone				YES	
+t_prd_products	21	qty_unit_typ_cd	character varying	50			YES	
+t_prd_template_selections	1	tmpl_cd	character varying	50			NO	
+t_prd_template_selections	2	sel_seq	integer		32	0	NO	
+t_prd_template_selections	3	ref_dim_cd	character varying	50			YES	
+t_prd_template_selections	4	ref_key1	character varying	50			YES	
+t_prd_template_selections	5	ref_key2	character varying	50			YES	
+t_prd_template_selections	6	opt_cd	character varying	50			YES	
+t_prd_template_selections	7	sel_val	character varying	100			YES	
+t_prd_template_selections	8	qty	integer		32	0	YES	
+t_prd_template_selections	9	use_yn	character	1			NO	'Y'::bpchar
+t_prd_template_selections	10	del_yn	character	1			NO	'N'::bpchar
+t_prd_template_selections	11	del_dt	timestamp without time zone				YES	
+t_prd_template_selections	12	reg_dt	timestamp without time zone				NO	now()
+t_prd_template_selections	13	upd_dt	timestamp without time zone				YES	
+t_prd_templates	1	tmpl_cd	character varying	50			NO	
+t_prd_templates	2	base_prd_cd	character varying	50			NO	
+t_prd_templates	3	tmpl_nm	character varying	200			NO	
+t_prd_templates	4	dflt_qty	integer		32	0	YES	
+t_prd_templates	5	use_yn	character	1			NO	'Y'::bpchar
+t_prd_templates	6	del_yn	character	1			NO	'N'::bpchar
+t_prd_templates	7	del_dt	timestamp without time zone				YES	
+t_prd_templates	8	note	character varying	500			YES	
+t_prd_templates	9	reg_dt	timestamp without time zone				NO	now()
+t_prd_templates	10	upd_dt	timestamp without time zone				YES	
+t_proc_processes	1	proc_cd	character varying	50			NO	
+t_proc_processes	2	proc_nm	character varying	200			NO	
+t_proc_processes	3	upr_proc_cd	character varying	50			YES	
+t_proc_processes	4	prcs_dtl_opt	jsonb				YES	
+t_proc_processes	5	disp_seq	integer		32	0	YES	
+t_proc_processes	6	use_yn	character	1			NO	
+t_proc_processes	7	note	character varying	500			YES	
+t_proc_processes	8	reg_dt	timestamp without time zone				NO	now()
+t_proc_processes	9	upd_dt	timestamp without time zone				YES	
+t_proc_processes	10	del_yn	character	1			NO	'N'::bpchar
+t_proc_processes	11	del_dt	timestamp without time zone				YES	
+t_siz_sizes	1	siz_cd	character varying	50			NO	
+t_siz_sizes	2	siz_nm	character varying	50			NO	
+t_siz_sizes	3	work_width	numeric		8	2	YES	
+t_siz_sizes	4	work_height	numeric		8	2	YES	
+t_siz_sizes	5	cut_width	numeric		8	2	YES	
+t_siz_sizes	6	cut_height	numeric		8	2	YES	
+t_siz_sizes	7	margin_top	numeric		8	2	YES	
+t_siz_sizes	8	margin_bot	numeric		8	2	YES	
+t_siz_sizes	9	margin_lft	numeric		8	2	YES	
+t_siz_sizes	10	margin_rgt	numeric		8	2	YES	
+t_siz_sizes	11	impos_yn	character	1			NO	
+t_siz_sizes	12	use_yn	character	1			NO	
+t_siz_sizes	13	note	character varying	500			YES	
+t_siz_sizes	14	reg_dt	timestamp without time zone				NO	now()
+t_siz_sizes	15	upd_dt	timestamp without time zone				YES	
+t_siz_sizes	16	del_yn	character	1			NO	'N'::bpchar
+t_siz_sizes	17	del_dt	timestamp without time zone				YES	
+(376 rows)

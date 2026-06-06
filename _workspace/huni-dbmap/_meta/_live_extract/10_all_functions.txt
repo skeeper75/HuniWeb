@@ -1,0 +1,60 @@
+===FUNC=== fn_chk_opt_item_ref
+CREATE OR REPLACE FUNCTION public.fn_chk_opt_item_ref()
+ RETURNS trigger
+ LANGUAGE plpgsql
+AS $function$
+BEGIN
+  CASE NEW.ref_dim_cd
+    WHEN 'OPT_REF_DIM.01' THEN  -- 사이즈 → t_prd_product_sizes(siz_cd)
+      IF NOT EXISTS (SELECT 1 FROM t_prd_product_sizes
+                     WHERE prd_cd = NEW.prd_cd AND siz_cd = NEW.ref_key1) THEN
+        RAISE EXCEPTION 'opt_item ref 무결성 위반: 사이즈 ref_key1=% 가 상품 %에 없음 (ref_dim_cd=%)', NEW.ref_key1, NEW.prd_cd, NEW.ref_dim_cd;
+      END IF;
+    WHEN 'OPT_REF_DIM.02' THEN  -- 판형 → t_prd_product_plate_sizes(siz_cd)
+      IF NOT EXISTS (SELECT 1 FROM t_prd_product_plate_sizes
+                     WHERE prd_cd = NEW.prd_cd AND siz_cd = NEW.ref_key1) THEN
+        RAISE EXCEPTION 'opt_item ref 무결성 위반: 판형 ref_key1=% 가 상품 %에 없음 (ref_dim_cd=%)', NEW.ref_key1, NEW.prd_cd, NEW.ref_dim_cd;
+      END IF;
+    WHEN 'OPT_REF_DIM.03' THEN  -- 자재 → t_prd_product_materials(mat_cd, usage_cd)
+      IF NOT EXISTS (SELECT 1 FROM t_prd_product_materials
+                     WHERE prd_cd = NEW.prd_cd AND mat_cd = NEW.ref_key1 AND usage_cd = NEW.ref_key2) THEN
+        RAISE EXCEPTION 'opt_item ref 무결성 위반: 자재 mat_cd=%/usage_cd=% 가 상품 %에 없음 (ref_dim_cd=%)', NEW.ref_key1, NEW.ref_key2, NEW.prd_cd, NEW.ref_dim_cd;
+      END IF;
+    WHEN 'OPT_REF_DIM.04' THEN  -- 공정 → t_prd_product_processes(proc_cd)
+      IF NOT EXISTS (SELECT 1 FROM t_prd_product_processes
+                     WHERE prd_cd = NEW.prd_cd AND proc_cd = NEW.ref_key1) THEN
+        RAISE EXCEPTION 'opt_item ref 무결성 위반: 공정 ref_key1=% 가 상품 %에 없음 (ref_dim_cd=%)', NEW.ref_key1, NEW.prd_cd, NEW.ref_dim_cd;
+      END IF;
+    WHEN 'OPT_REF_DIM.05' THEN  -- 묶음수 → t_prd_product_bundle_qtys(bdl_qty, integer)
+      IF NOT EXISTS (SELECT 1 FROM t_prd_product_bundle_qtys
+                     WHERE prd_cd = NEW.prd_cd AND bdl_qty = CAST(NEW.ref_key1 AS integer)) THEN
+        RAISE EXCEPTION 'opt_item ref 무결성 위반: 묶음수 ref_key1=% 가 상품 %에 없음 (ref_dim_cd=%)', NEW.ref_key1, NEW.prd_cd, NEW.ref_dim_cd;
+      END IF;
+    WHEN 'OPT_REF_DIM.06' THEN  -- 도수 → t_prd_product_print_options(opt_id, integer)
+      IF NOT EXISTS (SELECT 1 FROM t_prd_product_print_options
+                     WHERE prd_cd = NEW.prd_cd AND opt_id = CAST(NEW.ref_key1 AS integer)) THEN
+        RAISE EXCEPTION 'opt_item ref 무결성 위반: 도수 ref_key1=% 가 상품 %에 없음 (ref_dim_cd=%)', NEW.ref_key1, NEW.prd_cd, NEW.ref_dim_cd;
+      END IF;
+    WHEN 'OPT_REF_DIM.07' THEN  -- 셋트 → t_prd_product_sets(sub_prd_cd)
+      IF NOT EXISTS (SELECT 1 FROM t_prd_product_sets
+                     WHERE prd_cd = NEW.prd_cd AND sub_prd_cd = NEW.ref_key1) THEN
+        RAISE EXCEPTION 'opt_item ref 무결성 위반: 셋트 ref_key1=% 가 상품 %에 없음 (ref_dim_cd=%)', NEW.ref_key1, NEW.prd_cd, NEW.ref_dim_cd;
+      END IF;
+    ELSE
+      RAISE EXCEPTION '미지원 ref_dim_cd: % (option_items prd_cd=%, opt_cd=%)', NEW.ref_dim_cd, NEW.prd_cd, NEW.opt_cd;
+  END CASE;
+  RETURN NEW;
+END;
+$function$
+
+===FUNC=== fn_upd_dt
+CREATE OR REPLACE FUNCTION public.fn_upd_dt()
+ RETURNS trigger
+ LANGUAGE plpgsql
+AS $function$
+BEGIN
+  NEW.upd_dt = now();
+  RETURN NEW;
+END;
+$function$
+

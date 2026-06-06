@@ -1,0 +1,9 @@
+table_name	conname	pg_get_constraintdef
+auth_group	auth_group_name_key	UNIQUE (name)
+auth_group_permissions	auth_group_permissions_group_id_permission_id_0cd325b0_uniq	UNIQUE (group_id, permission_id)
+auth_permission	auth_permission_content_type_id_codename_01ab375a_uniq	UNIQUE (content_type_id, codename)
+auth_user	auth_user_username_key	UNIQUE (username)
+auth_user_groups	auth_user_groups_user_id_group_id_94350c0c_uniq	UNIQUE (user_id, group_id)
+auth_user_user_permissions	auth_user_user_permissions_user_id_permission_id_14a6b632_uniq	UNIQUE (user_id, permission_id)
+django_content_type	django_content_type_app_label_model_76bd3d3b_uniq	UNIQUE (app_label, model)
+(7 rows)

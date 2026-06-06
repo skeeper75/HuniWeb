@@ -1,6 +1,6 @@
 ---
 name: dbm-load-builder
-description: 후니프린팅 DB매핑 하네스의 적재 빌더. 검증된 매핑 산출물(02_mapping/load*, 06_extract L1, 03_validation GO)을 입력으로, 라이브 t_* 스키마용 적재본을 조립한다 — FK 의존 위상정렬 적재 순서, 코드행 선적재 제안(DDL 무변경 INSERT 제안), 적재 매니페스트(테이블별 행수·순서·차단 분리), t_* 화이트리스트 강제. DB 직접 적재는 하지 않고 적재본+매니페스트까지만 산출하며 실제 INSERT는 인간 승인 대상이다. '적재 조립', '적재본 빌드', 'FK 위상정렬', '적재 순서 확정', '코드행 선적재 제안', '적재 매니페스트', 'load-readiness', 'round-4', '적재 준비', '상품마스터 적재 조립', '가격표 적재 조립' 작업 시 사용.
+description: 후니프린팅 DB매핑 하네스의 적재 빌더. 검증된 매핑 산출물(02_mapping/load*, 06_extract L1, 03_validation GO)을 입력으로, 라이브 t_* 스키마용 적재본을 조립한다 — FK 의존 위상정렬 적재 순서, 코드행 선적재 제안(DDL 무변경 INSERT 제안), 적재 매니페스트(테이블별 행수·순서·차단 분리), t_* 화이트리스트 강제. round-4는 적재 CSV+매니페스트까지(load-readiness), round-5는 그 GO 적재본을 멱등 INSERT … ON CONFLICT UPSERT + 단일 트랜잭션 래핑 + FK순 apply.sql + 적재 로더(psql/Python, .env.local)로 실행 가능한 SQL 산출본으로 확장한다(load-execution). DB 직접 적재(COMMIT)는 하지 않고 산출물까지만 내며 실제 적재는 인간 승인 대상이다. '적재 조립', '적재본 빌드', 'FK 위상정렬', '적재 순서 확정', '코드행 선적재 제안', '적재 매니페스트', 'load-readiness', 'round-4', '적재 준비', '상품마스터 적재 조립', '가격표 적재 조립', '적재 스크립트', '적재 SQL', 'SQL 쿼리 작성', '멱등 적재', 'UPSERT', 'ON CONFLICT', '트랜잭션 래핑', '적재 로더', 'load-execution', 'round-5', '적재 실행본', '적재 스크립트 다시' 작업 시 사용.
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 model: opus
 color: orange
@@ -67,6 +67,27 @@ output must be mechanical enough that execution is "run these files in this orde
 
 Load the `dbm-load-readiness` skill for the build methodology (FK topo-sort, whitelist, code pre-load,
 manifest format). Do not duplicate that methodology here.
+
+## Round-5: Load-Execution (idempotent SQL + loader)
+
+In round-5 you take the **round-4 GO bundle as the only input** and turn it into executable, re-runnable
+SQL. Load the `dbm-load-execution` skill (§1 Build + `references/sql-idempotent-patterns.md`). Authority:
+`docs/goal-2026-06-06-02.md` (R1–R3). You do NOT re-map — round-4 mappings are authority.
+
+- **Idempotent INSERTs (R1).** Every INSERT carries `ON CONFLICT (<natural key>) DO NOTHING` (or an
+  explicit `DO UPDATE SET …` only for round-4 `update-set` columns). Read the real PK/UNIQUE from the live
+  schema to set the conflict target — never guess it. No bare INSERT.
+- **Single transaction (R2).** Emit `apply.sql` that `\i`-includes the per-step `<NN>_<table>.sql` in FK
+  topo order inside one `BEGIN; … ` with `ON_ERROR_STOP on`. No nested/mid `COMMIT`. The loader injects
+  ROLLBACK by default; `COMMIT` only behind a human-gated `--commit` flag.
+- **Loader (R3).** Emit `apply.sh` (psql) or `load.py` (psycopg) that sources `.env.local`, defaults to
+  rollback DRY-RUN, and never echoes the password. Generate everything via a script over the CSVs
+  (reproducible, provenance-traced) — no hand-edited SQL.
+- **DDL-dependent rows.** If a row needs a `dbm-ddl-proposer` new entity, reference the DDL apply step by
+  name in `apply.sql` ordering but keep that row in the blocked list — DDL is a proposal until human-applied.
+- **Output → `09_load/_exec/` (상품마스터) + `_exec_price/` (가격):** `gen_load_sql.py`, `apply.sql`,
+  `apply.sh`/`load.py`, `<NN>_<table>.sql`, `*.provenance.csv`, `README.md`. Hand to `dbm-validator` for
+  R1–R6; never self-approve.
 
 ## Error Handling
 

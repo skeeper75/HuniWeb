@@ -1,0 +1,73 @@
+table_name	conname	def
+auth_group_permissions	auth_group_permissio_permission_id_84c5c92e_fk_auth_perm	FOREIGN KEY (permission_id) REFERENCES auth_permission(id) DEFERRABLE INITIALLY DEFERRED
+auth_group_permissions	auth_group_permissions_group_id_b120cbf9_fk_auth_group_id	FOREIGN KEY (group_id) REFERENCES auth_group(id) DEFERRABLE INITIALLY DEFERRED
+auth_permission	auth_permission_content_type_id_2f476e4b_fk_django_co	FOREIGN KEY (content_type_id) REFERENCES django_content_type(id) DEFERRABLE INITIALLY DEFERRED
+auth_user_groups	auth_user_groups_group_id_97559544_fk_auth_group_id	FOREIGN KEY (group_id) REFERENCES auth_group(id) DEFERRABLE INITIALLY DEFERRED
+auth_user_groups	auth_user_groups_user_id_6a12ed8b_fk_auth_user_id	FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED
+auth_user_user_permissions	auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm	FOREIGN KEY (permission_id) REFERENCES auth_permission(id) DEFERRABLE INITIALLY DEFERRED
+auth_user_user_permissions	auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id	FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED
+django_admin_log	django_admin_log_content_type_id_c4bce8eb_fk_django_co	FOREIGN KEY (content_type_id) REFERENCES django_content_type(id) DEFERRABLE INITIALLY DEFERRED
+django_admin_log	django_admin_log_user_id_c564eba6_fk_auth_user_id	FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED
+t_cat_categories	fk_cat_categories_upr_cat_cd	FOREIGN KEY (upr_cat_cd) REFERENCES t_cat_categories(cat_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_cod_base_codes	fk_cod_base_codes_upr_cod_cd	FOREIGN KEY (upr_cod_cd) REFERENCES t_cod_base_codes(cod_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_cus_customers	fk_cus_customers_grade_cd	FOREIGN KEY (grade_cd) REFERENCES t_cod_base_codes(cod_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_dsc_discount_details	fk_dsc_discount_details_dsc_tbl_cd	FOREIGN KEY (dsc_tbl_cd) REFERENCES t_dsc_discount_tables(dsc_tbl_cd) ON UPDATE CASCADE ON DELETE CASCADE
+t_dsc_discount_details	fk_dsc_discount_details_dsc_typ_cd	FOREIGN KEY (dsc_typ_cd) REFERENCES t_cod_base_codes(cod_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_dsc_grade_discount_rates	fk_dsc_grade_dsc_rates_cat_cd	FOREIGN KEY (cat_cd) REFERENCES t_cat_categories(cat_cd) ON UPDATE CASCADE ON DELETE CASCADE
+t_dsc_grade_discount_rates	fk_dsc_grade_dsc_rates_dsc_typ_cd	FOREIGN KEY (dsc_typ_cd) REFERENCES t_cod_base_codes(cod_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_dsc_grade_discount_rates	fk_dsc_grade_dsc_rates_grade_cd	FOREIGN KEY (grade_cd) REFERENCES t_cod_base_codes(cod_cd) ON UPDATE CASCADE ON DELETE CASCADE
+t_mat_materials	fk_mat_materials_mat_typ_cd	FOREIGN KEY (mat_typ_cd) REFERENCES t_cod_base_codes(cod_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_mat_materials	fk_mat_materials_sel_typ_cd	FOREIGN KEY (sel_typ_cd) REFERENCES t_cod_base_codes(cod_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_mat_materials	fk_mat_materials_upr_mat_cd	FOREIGN KEY (upr_mat_cd) REFERENCES t_mat_materials(mat_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prc_component_prices	fk_prc_comp_prices_clr_cd	FOREIGN KEY (clr_cd) REFERENCES t_clr_color_counts(clr_cd) ON UPDATE CASCADE ON DELETE CASCADE
+t_prc_component_prices	fk_prc_comp_prices_comp_cd	FOREIGN KEY (comp_cd) REFERENCES t_prc_price_components(comp_cd) ON UPDATE CASCADE ON DELETE CASCADE
+t_prc_component_prices	fk_prc_comp_prices_mat_cd	FOREIGN KEY (mat_cd) REFERENCES t_mat_materials(mat_cd) ON UPDATE CASCADE ON DELETE CASCADE
+t_prc_component_prices	fk_prc_comp_prices_siz_cd	FOREIGN KEY (siz_cd) REFERENCES t_siz_sizes(siz_cd) ON UPDATE CASCADE ON DELETE CASCADE
+t_prc_formula_components	fk_prc_formula_comps_comp_cd	FOREIGN KEY (comp_cd) REFERENCES t_prc_price_components(comp_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prc_formula_components	fk_prc_formula_comps_frm_cd	FOREIGN KEY (frm_cd) REFERENCES t_prc_price_formulas(frm_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prc_price_components	fk_prc_price_components_comp_typ_cd	FOREIGN KEY (comp_typ_cd) REFERENCES t_cod_base_codes(cod_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prc_price_formulas	fk_prc_price_formulas_frm_typ_cd	FOREIGN KEY (frm_typ_cd) REFERENCES t_cod_base_codes(cod_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prd_product_addons	fk_prd_product_addons_prd_cd	FOREIGN KEY (prd_cd) REFERENCES t_prd_products(prd_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prd_product_addons	fk_prd_product_addons_tmpl_cd	FOREIGN KEY (tmpl_cd) REFERENCES t_prd_templates(tmpl_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prd_product_bundle_qtys	fk_prd_product_bdl_qtys_bdl_unit_typ_cd	FOREIGN KEY (bdl_unit_typ_cd) REFERENCES t_cod_base_codes(cod_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prd_product_bundle_qtys	fk_prd_product_bdl_qtys_prd_cd	FOREIGN KEY (prd_cd) REFERENCES t_prd_products(prd_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prd_product_categories	fk_prd_product_cats_cat_cd	FOREIGN KEY (cat_cd) REFERENCES t_cat_categories(cat_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prd_product_categories	fk_prd_product_cats_prd_cd	FOREIGN KEY (prd_cd) REFERENCES t_prd_products(prd_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prd_product_constraints	fk_prd_constraints_prd_cd	FOREIGN KEY (prd_cd) REFERENCES t_prd_products(prd_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prd_product_constraints	fk_prd_constraints_rule_typ_cd	FOREIGN KEY (rule_typ_cd) REFERENCES t_cod_base_codes(cod_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prd_product_discount_tables	fk_prd_dsc_tbls_dsc_tbl_cd	FOREIGN KEY (dsc_tbl_cd) REFERENCES t_dsc_discount_tables(dsc_tbl_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prd_product_discount_tables	fk_prd_dsc_tbls_prd_cd	FOREIGN KEY (prd_cd) REFERENCES t_prd_products(prd_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prd_product_materials	fk_prd_product_mats_dep_proc_cd	FOREIGN KEY (dep_proc_cd) REFERENCES t_proc_processes(proc_cd) ON UPDATE CASCADE ON DELETE SET NULL
+t_prd_product_materials	fk_prd_product_mats_mat_cd	FOREIGN KEY (mat_cd) REFERENCES t_mat_materials(mat_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prd_product_materials	fk_prd_product_mats_prd_cd	FOREIGN KEY (prd_cd) REFERENCES t_prd_products(prd_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prd_product_materials	fk_prd_product_mats_usage_cd	FOREIGN KEY (usage_cd) REFERENCES t_cod_base_codes(cod_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prd_product_option_groups	fk_prd_opt_groups_prd_cd	FOREIGN KEY (prd_cd) REFERENCES t_prd_products(prd_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prd_product_option_groups	fk_prd_opt_groups_sel_typ_cd	FOREIGN KEY (sel_typ_cd) REFERENCES t_cod_base_codes(cod_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prd_product_option_items	fk_prd_opt_items_opt	FOREIGN KEY (prd_cd, opt_cd) REFERENCES t_prd_product_options(prd_cd, opt_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prd_product_option_items	fk_prd_opt_items_ref_dim_cd	FOREIGN KEY (ref_dim_cd) REFERENCES t_cod_base_codes(cod_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prd_product_options	fk_prd_options_opt_grp	FOREIGN KEY (prd_cd, opt_grp_cd) REFERENCES t_prd_product_option_groups(prd_cd, opt_grp_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prd_product_options	fk_prd_options_prd_cd	FOREIGN KEY (prd_cd) REFERENCES t_prd_products(prd_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prd_product_page_rules	fk_prd_product_page_rules_prd_cd	FOREIGN KEY (prd_cd) REFERENCES t_prd_products(prd_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prd_product_plate_sizes	fk_prd_plt_siz_output_paper_typ_cd	FOREIGN KEY (output_paper_typ_cd) REFERENCES t_cod_base_codes(cod_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prd_product_plate_sizes	fk_prd_product_plt_siz_prd_cd	FOREIGN KEY (prd_cd) REFERENCES t_prd_products(prd_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prd_product_plate_sizes	fk_prd_product_plt_siz_siz_cd	FOREIGN KEY (siz_cd) REFERENCES t_siz_sizes(siz_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prd_product_price_formulas	fk_prd_prc_frm_frm_cd	FOREIGN KEY (frm_cd) REFERENCES t_prc_price_formulas(frm_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prd_product_price_formulas	fk_prd_prc_frm_prd_cd	FOREIGN KEY (prd_cd) REFERENCES t_prd_products(prd_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prd_product_prices	fk_prd_product_prices_prd_cd	FOREIGN KEY (prd_cd) REFERENCES t_prd_products(prd_cd) ON UPDATE CASCADE ON DELETE CASCADE
+t_prd_product_print_options	fk_prd_prnt_opt_back_colrcnt_cd	FOREIGN KEY (back_colrcnt_cd) REFERENCES t_clr_color_counts(clr_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prd_product_print_options	fk_prd_prnt_opt_front_colrcnt_cd	FOREIGN KEY (front_colrcnt_cd) REFERENCES t_clr_color_counts(clr_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prd_product_print_options	fk_prd_product_prnt_opt_prd_cd	FOREIGN KEY (prd_cd) REFERENCES t_prd_products(prd_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prd_product_processes	fk_prd_product_procs_prd_cd	FOREIGN KEY (prd_cd) REFERENCES t_prd_products(prd_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prd_product_processes	fk_prd_product_procs_proc_cd	FOREIGN KEY (proc_cd) REFERENCES t_proc_processes(proc_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prd_products	fk_prd_products_prd_typ_cd	FOREIGN KEY (prd_typ_cd) REFERENCES t_cod_base_codes(cod_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prd_products	fk_prd_products_qty_unit_typ_cd	FOREIGN KEY (qty_unit_typ_cd) REFERENCES t_cod_base_codes(cod_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prd_products	fk_prd_products_semi_role_cd	FOREIGN KEY (semi_role_cd) REFERENCES t_cod_base_codes(cod_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prd_product_sets	fk_prd_product_sets_prd_cd	FOREIGN KEY (prd_cd) REFERENCES t_prd_products(prd_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prd_product_sets	fk_prd_product_sets_sub_prd_cd	FOREIGN KEY (sub_prd_cd) REFERENCES t_prd_products(prd_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prd_product_sizes	fk_prd_product_sizes_prd_cd	FOREIGN KEY (prd_cd) REFERENCES t_prd_products(prd_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prd_product_sizes	fk_prd_product_sizes_siz_cd	FOREIGN KEY (siz_cd) REFERENCES t_siz_sizes(siz_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prd_templates	fk_prd_templates_base_prd_cd	FOREIGN KEY (base_prd_cd) REFERENCES t_prd_products(prd_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prd_template_selections	fk_prd_tmpl_sel_ref_dim_cd	FOREIGN KEY (ref_dim_cd) REFERENCES t_cod_base_codes(cod_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+t_prd_template_selections	fk_prd_tmpl_sel_tmpl_cd	FOREIGN KEY (tmpl_cd) REFERENCES t_prd_templates(tmpl_cd) ON UPDATE CASCADE ON DELETE CASCADE
+t_proc_processes	fk_proc_processes_upr_proc_cd	FOREIGN KEY (upr_proc_cd) REFERENCES t_proc_processes(proc_cd) ON UPDATE CASCADE ON DELETE RESTRICT
+(71 rows)

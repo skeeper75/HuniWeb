@@ -1,6 +1,6 @@
 ---
 name: huni-dbmap-orchestrator
-description: 후니프린팅 DB 데이터 매핑 하네스 오케스트레이터. Railway railway DB(PostgreSQL 18.4, **44테이블 — t_* 도메인 34 + Django 10, CPQ 컨피규레이터 옵션/템플릿/제약 레이어 라이브 구현 포함**) 구조를 읽기전용으로 시트화하고, 상품마스터·인쇄상품 가격표 엑셀 데이터를 DB 테이블에 매핑(매핑 설계서 + 적재용 CSV)하되 DB 직접 적재는 보류한다. 5인 에이전트 팀(dbm-schema-analyst / dbm-excel-analyst / dbm-mapping-designer / dbm-validator / dbm-load-builder)으로 구조분석·엑셀분석 병렬 → 매핑 설계 → 경계면 교차검증 파이프라인을 수행한다. round-1(완료): 수량구간별 할인(t_dsc_*, 아크릴/굿즈·파우치/문구) — dbm-mapping 스킬. round-2(진행): 가격 공식 엔진(t_prc_* 4단 구조) — dbm-price-formula 스킬, fit-gap 선행 후 점진 파일럿(디지털인쇄/엽서). round-4(적재 준비): 상품마스터·가격표의 검증된 매핑을 t_* 적재본(FK 위상정렬·코드행 선적재 제안·적재 매니페스트)으로 조립하고 G1~G9 완료 게이트 + 트랜잭션 롤백 DRY-RUN으로 적재 가능성을 증명 — dbm-load-readiness 스킬, t_* 화이트리스트 강제, 실제 INSERT는 인간 승인(권위 docs/goal-2026-06-06-01.md). 'DB 매핑', 'DB 구조 파악', '테이블 시트화', '엑셀 데이터 매핑', '구간할인 매핑', '수량구간 할인', '가격표 매핑', '상품마스터 매핑', 'Railway DB', '적재 CSV 생성', '매핑 검증', 'DB매핑 하네스 실행', '하네스 재실행', '매핑 업데이트', '특정 테이블만 매핑', '추가 매핑', '가격 매핑', '가격공식 매핑', 'round-2', 't_prc 매핑', '단가표 매핑', '계산공식 매핑', '가격 스키마 적정성', '가격엔진 fit-gap', '가격 fit-gap만', '가격 매핑 다시', 'DB 매핑 검증', '상품 매핑 정합', '적재 검증', '9속성 검증', '엑셀 DB 대조', '매핑 감사', '정합 재검증', '기초데이터 검증', '상품마스터 검증', '사이즈/자재/공정/판형/묶음수/페이지룰/추가상품 검증', '특정 속성만 검증', '검증 다시', 'CPQ 검증', '컨피규레이터 스키마', 'CPQ 정합', '라이브 스키마 재확인', '옵션/템플릿/제약 스키마', '스키마 재문서화', '하네스 강화', '적재 준비', 'round-4', '적재본 빌드', '적재 조립', 'FK 위상정렬', '적재 순서 확정', '코드행 선적재', '적재 매니페스트', 'DRY-RUN', '적재 가능성 검증', 'G1 G9 게이트', '완료 게이트', 't_* 화이트리스트', '적재 게이트 다시', '상품마스터 적재 조립', '가격표 적재 조립' 요청 시 반드시 사용. 단순 질문은 직접 응답.
+description: 후니프린팅 DB 데이터 매핑 하네스 오케스트레이터. Railway railway DB(PostgreSQL 18.4, **44테이블 — t_* 도메인 34 + Django 10, CPQ 컨피규레이터 옵션/템플릿/제약 레이어 라이브 구현 포함**) 구조를 읽기전용으로 시트화하고, 상품마스터·인쇄상품 가격표 엑셀 데이터를 DB 테이블에 매핑(매핑 설계서 + 적재용 CSV)하되 DB 직접 적재는 보류한다. 6인 에이전트 팀(dbm-schema-analyst / dbm-excel-analyst / dbm-mapping-designer / dbm-validator / dbm-load-builder / dbm-ddl-proposer)으로 구조분석·엑셀분석 병렬 → 매핑 설계 → 경계면 교차검증 파이프라인을 수행한다. round-1(완료): 수량구간별 할인(t_dsc_*, 아크릴/굿즈·파우치/문구) — dbm-mapping 스킬. round-2(진행): 가격 공식 엔진(t_prc_* 4단 구조) — dbm-price-formula 스킬, fit-gap 선행 후 점진 파일럿(디지털인쇄/엽서). round-4(적재 준비): 상품마스터·가격표의 검증된 매핑을 t_* 적재본(FK 위상정렬·코드행 선적재 제안·적재 매니페스트)으로 조립하고 G1~G9 완료 게이트 + 트랜잭션 롤백 DRY-RUN으로 적재 가능성을 증명 — dbm-load-readiness 스킬, t_* 화이트리스트 강제, 실제 INSERT는 인간 승인(권위 docs/goal-2026-06-06-01.md). round-5(적재 실행본): round-4 GO 적재본을 멱등 INSERT … ON CONFLICT UPSERT + 단일 트랜잭션 + FK순 적재 SQL/로더로 실행본화하고, GAP/차단을 라이브 t_* 정합 신규 엔티티 DDL 제안서로 닫으며, 롤백전용 라이브 DRY-RUN으로 멱등성·적재가능성을 R1~R6 게이트로 증명 — dbm-load-execution 스킬, DDL 직접적용·COMMIT 금지(인간 승인), 권위 docs/goal-2026-06-06-02.md. 'DB 매핑', 'DB 구조 파악', '테이블 시트화', '엑셀 데이터 매핑', '구간할인 매핑', '수량구간 할인', '가격표 매핑', '상품마스터 매핑', 'Railway DB', '적재 CSV 생성', '매핑 검증', 'DB매핑 하네스 실행', '하네스 재실행', '매핑 업데이트', '특정 테이블만 매핑', '추가 매핑', '가격 매핑', '가격공식 매핑', 'round-2', 't_prc 매핑', '단가표 매핑', '계산공식 매핑', '가격 스키마 적정성', '가격엔진 fit-gap', '가격 fit-gap만', '가격 매핑 다시', 'DB 매핑 검증', '상품 매핑 정합', '적재 검증', '9속성 검증', '엑셀 DB 대조', '매핑 감사', '정합 재검증', '기초데이터 검증', '상품마스터 검증', '사이즈/자재/공정/판형/묶음수/페이지룰/추가상품 검증', '특정 속성만 검증', '검증 다시', 'CPQ 검증', '컨피규레이터 스키마', 'CPQ 정합', '라이브 스키마 재확인', '옵션/템플릿/제약 스키마', '스키마 재문서화', '하네스 강화', '적재 준비', 'round-4', '적재본 빌드', '적재 조립', 'FK 위상정렬', '적재 순서 확정', '코드행 선적재', '적재 매니페스트', 'DRY-RUN', '적재 가능성 검증', 'G1 G9 게이트', '완료 게이트', 't_* 화이트리스트', '적재 게이트 다시', '상품마스터 적재 조립', '가격표 적재 조립', '적재 스크립트', '적재 스크립트 작성', '적재 SQL', 'SQL 쿼리 작성', '멱등 적재', 'UPSERT', 'ON CONFLICT', '트랜잭션 래핑', '적재 로더', '신규 엔티티 제안', 'DDL 제안', '스키마 부족분 제안', 'GAP 엔티티', '라이브 DRY-RUN', 'round-5', '적재 실행본', '적재 실행 게이트', 'R1 R6 게이트', '멱등성 검증', '적재 스크립트 다시', 'DDL 제안 다시' 요청 시 반드시 사용. 단순 질문은 직접 응답.
 ---
 
 # huni-dbmap Orchestrator
@@ -22,12 +22,14 @@ Coordinates a 4-agent team to (1) sheet the live Railway DB structure and (2) ma
 | round-1 | quantity-bracket discount | `t_dsc_*`, `t_prd_product_discount_tables` | `dbm-mapping` | DONE (validated GO) |
 | round-2 | price formula engine | `t_prc_*` (6 tables), `t_prd_product_price_formulas`, `t_prd_product_prices` | `dbm-price-formula` | IN PROGRESS |
 | round-3 | mapping audit (DB↔Excel 정합 검증) | `t_prd_*` 9속성 테이블 + 마스터(`t_siz_/t_mat_/t_proc_/t_cod_`) | `dbm-mapping-audit` | ACTIVE |
-| round-4 | load-readiness (적재본 조립 + G1~G9 게이트 + DRY-RUN) | 상품마스터 `t_prd_*` + 가격 `t_prc_*` (whitelist) | `dbm-load-readiness` | READY |
+| round-4 | load-readiness (적재본 조립 + G1~G9 게이트 + DRY-RUN) | 상품마스터 `t_prd_*` + 가격 `t_prc_*` (whitelist) | `dbm-load-readiness` | DONE (양 트랙 GO) |
+| round-5 | load-execution (멱등 SQL/로더 + 신규 엔티티 DDL 제안 + 라이브 DRY-RUN, R1~R6) | round-4 GO 적재본 `t_prd_*` + `t_prc_*` + `11_ddl_proposals` | `dbm-load-execution` | READY |
 
 - **round-1**: quantity-bracket discounts for 아크릴 / 굿즈·파우치 / 문구. Flat bracket rows. Complete.
 - **round-2**: the price is a *formula engine* (`판매가 = Σ components`, each component priced by a multi-dimensional lookup) — not a flat table. Excel authority: 상품마스터 `계산공식집초안` (formula intent, typed by 공식 유형) + 가격표 19 단가시트 (component matrices). **fit-gap FIRST** (is `t_prc_*` adequate? — round-1 did not extract the `t_prc_*` DDL), then **incremental pilot** (디지털인쇄/엽서, 원자합산형) before widening to all 공식 유형. See `dbm-price-formula`.
 - **round-3 (audit)**: verify the *already-loaded* `t_prd_*` data against the Excel source, per product × 9 attributes {사이즈·자재·인쇄옵션·공정·공정택일그룹·판형사이즈·묶음수·페이지룰·추가상품}. **프레임: "DB 정규화 규칙=기준"**(엑셀=담을 내용; "엑셀=권위 단순대조"는 false MISSING으로 폐기). **L1↔L2 2계층**: L1 충실추출(전 컬럼·8 정보축·숨김/미출시/내부용 보존, 누락0 기계보증) → L2 정합검증(기대행 대비, 숨김/미출시=비활성). **기초데이터순** (마스터 정합 → 상품별 연결, FK 의존순). Classify MATCH / MISSING / EXTRA / MISMATCH. 검증이지 매핑설계·적재 아님. See `dbm-mapping-audit` + `dbm-excel-parse`(L1).
 - **round-4 (load-readiness)**: take the *validated* mappings from round-2/3 and prove they are **loadable** into live `t_*` — distinct from *correct*. `dbm-load-builder` composes the FK-topo-sorted load bundle (`09_load/`: manifest + ordered load CSV + code-row pre-load proposals + blocked/GAP list, **`t_*` whitelist enforced**); `dbm-validator` runs the **G1–G9 completion gate** + rollback-only DRY-RUN and emits GO/NO-GO. Build (builder) and gate (validator) are separate agents — that separation IS gate G9. **No DB writes, no DDL; real INSERT = human approval.** Authority: `docs/goal-2026-06-06-01.md`. See `dbm-load-readiness`.
+- **round-5 (load-execution)**: take the *round-4 GO bundle* and make it **executable + re-runnable** — distinct from *loadable*. `dbm-load-builder` turns the bundle into idempotent `INSERT … ON CONFLICT` SQL wrapped in one transaction + a loader (`09_load/_exec*/`); `dbm-ddl-proposer` closes round-4's GAP/BLOCKED items with **minimal `t_*`-consistent new-entity DDL proposals** (`11_ddl_proposals/`, search-before-mint); `dbm-validator` runs the **R1–R6 gate** (멱등성·트랜잭션 원자성·실행가능성·DDL 제안 정합·라이브 DRY-RUN·독립성) on top of carried-forward G1–G9, and emits GO/NO-GO. **No `COMMIT`, no DDL apply; both are human approval.** Authority: `docs/goal-2026-06-06-02.md` (inherits goal-...-01). See `dbm-load-execution`.
 
 ## Team & roles
 
@@ -37,9 +39,10 @@ Coordinates a 4-agent team to (1) sheet the live Railway DB structure and (2) ma
 | `dbm-excel-analyst` | Excel parse + normalize (round-2: 계산공식집초안 + 단가시트 matrices) | dbm-excel-parse |
 | `dbm-mapping-designer` | mapping spec + load CSV | dbm-mapping / **dbm-price-formula** |
 | `dbm-validator` | boundary cross-check + loadability; round-4 G1–G9 gate | dbm-mapping / **dbm-price-formula** / **dbm-load-readiness** |
-| `dbm-load-builder` | **round-4 only**: assemble FK-ordered load bundle + code-row pre-load + manifest (`09_load/`) | **dbm-load-readiness** |
+| `dbm-load-builder` | **round-4**: assemble FK-ordered load bundle + code-row pre-load + manifest (`09_load/`). **round-5**: turn the GO bundle into idempotent `ON CONFLICT` SQL + transaction wrap + loader (`09_load/_exec*/`) | **dbm-load-readiness** / **dbm-load-execution** |
+| `dbm-ddl-proposer` | **round-5 only**: close round-4 GAP/BLOCKED with minimal `t_*`-consistent new-entity DDL proposals (`11_ddl_proposals/`, search-before-mint) | **dbm-load-execution** |
 
-All agents spawn with `model: "opus"`. Round is resolved in Phase 0; the designer/validator load the round-matching skill (round-2 → `dbm-price-formula`, round-4 → `dbm-load-readiness`). `dbm-load-builder` is spawned only in round-4.
+All agents spawn with `model: "opus"`. Round is resolved in Phase 0; the designer/validator load the round-matching skill (round-2 → `dbm-price-formula`, round-4 → `dbm-load-readiness`, round-5 → `dbm-load-execution`). `dbm-load-builder` runs in round-4 and round-5; `dbm-ddl-proposer` is spawned only in round-5.
 
 ## Execution mode: agent team (hybrid)
 
@@ -120,6 +123,22 @@ Round-2 reuses the same team but inserts a **fit-gap gate before mapping** (the 
 
 **Phase 4 — 보고 + 승인 게이트** (lead): GO 번들 + 코드행 선적재 제안 + GAP을 사용자에 에스컬레이션. 실제 INSERT 실행 승인은 본 트랙 종착점 너머(인간 승인). NO-GO면 실패 게이트·라우팅 보고 후 해당 단계 재조립·재게이트.
 
+## Pipeline (round-5 load-execution — 멱등 실행본 + DDL 제안 → R1~R6 게이트)
+
+**[프레임] round-4는 적재본이 *적재 가능*함을 증명했다. round-5는 그 GO 적재본이 *실행 가능·재실행 안전*하고, round-4가 GAP/차단으로 남긴 부분이 *정직하게 닫힘*을 증명한다 — 적재가능성과 실행가능성·멱등성은 다른 실패면이다.** 권위 = `docs/goal-2026-06-06-02.md`(R1~R6 + G1~G9 carry-forward, DDL 제안 격상·COMMIT 금지). 생성(builder/proposer)과 게이트(validator)는 **별도 에이전트** = R6. 세 에이전트는 `dbm-load-execution` 스킬을 로드한다.
+
+**Phase 0 — 입력 확인**: round-4 GO 적재본(`09_load/_assembled*/`) + 게이트 판정서(`03_validation/load-readiness-gate*.md`)가 GO인지 확인. round-4 GO 없는 트랙은 round-5 진입 불가(먼저 round-4 완료).
+
+**Phase 1 — Setup**: `.env.local` RAILWAY_DB_* 읽기전용 연결 확인. 입력 = round-4 GO 적재본(재매핑 금지) + `blocked-and-gaps.md`(GAP 목록).
+
+**Phase 2 — 실행본 빌드 + DDL 제안** (team, **병렬** — 독립 입력):
+- **load-builder** → GO 적재본을 ① 멱등 `INSERT … ON CONFLICT`(충돌키=라이브 PK/UNIQUE에서 읽기) → ② 단일 트랜잭션 래핑(`apply.sql`, `ON_ERROR_STOP`) → ③ FK순 + 코드행 선적재 step 00 → ④ 적재 로더(기본 롤백, `--commit`=인간 승인) → `09_load/_exec/`·`_exec_price/`. 재현 생성기·provenance.
+- **ddl-proposer** → round-4 `blocked-and-gaps.md`의 GAP/BLOCKED를 입력으로 ① search-before-mint(기존 t_* 무손실 표현 불가 입증) → ② 최소 신규 엔티티(사다리: 코드행<컬럼<JSONB<테이블) 라이브 컨벤션 정합 설계 → ③ 영향분석(기존 행·FK·적용순서·백필·롤백) → `11_ddl_proposals/`(`.sql`+`.md`+summary). DDL 직접 적용 금지.
+
+**Phase 3 — R1~R6 게이트 + 라이브 DRY-RUN** (validator, 적대적): `dbm-load-execution` §3 + `references/live-dry-run.md`로 **G1~G9 carry-forward 재확인 + R1~R6** 각 증거기반 PASS/FAIL. 기본은 로컬 선검사(SQL 파싱·`ON CONFLICT` 존재·충돌키 정합·트랜잭션 구조). **R1/R5 라이브 DRY-RUN(롤백전용)은 lead 승인 시 1회** — 멱등성 2회 적용 + 제약위반 0 실증. builder/proposer 산출을 validator가 검증(R6 독립성) — 조용히 고치지 말고 finding을 builder(SQL/순서)·proposer(DDL)·designer(매핑)로 라우팅, 변경분만 재게이트. → `03_validation/load-execution-gate.md` GO/NO-GO. **NEVER COMMIT.**
+
+**Phase 4 — 보고 + 승인 게이트** (lead): GO 실행본(`_exec*/`) + DDL 제안(`11_ddl_proposals/`) + 인간 승인 큐(① 라이브 DRY-RUN 실행 ② 실제 `COMMIT` 적재 ③ 신규 DDL 적용 ④ 코드행 등록)를 사용자에 에스컬레이션. 실제 적재·DDL 적용은 본 트랙 종착점 너머(인간 승인). NO-GO면 실패 게이트·라우팅 보고 후 재빌드·재게이트.
+
 - File-based via `_workspace/huni-dbmap/` (00_schema / 01_excel / 02_mapping / 03_validation / _meta).
 - Task-based via TaskCreate/TaskUpdate for dependency + progress.
 - Message-based via SendMessage for live coordination and findings handoff.
@@ -159,6 +178,12 @@ round-4 (load-readiness):
 - GAP 모델링: t_*로 무손실 표현 불가 항목(예: 박 2단 룩업) — 에스컬레이션 처리 방향.
 - Real INSERT 실행 승인: GO 번들 제시 후 실제 적재를 진행할지(본 하네스 종착점 너머).
 
+round-5 (load-execution):
+- 라이브 DRY-RUN 실행 승인: 롤백전용이라도 쓰기 트랜잭션 — R1/R5 실증을 위해 라이브에서 1회 돌릴지.
+- 신규 엔티티 DDL 적용 승인: `11_ddl_proposals/`의 CREATE/ALTER를 후니가 라이브에 적용할지(제안≠적용). GAP별 채택/보류.
+- 실제 `COMMIT`(영구 적재) 승인: G1~G9 + R1~R6 PASS 실행본 제시 후 실제 적재를 진행할지(본 하네스 종착점 너머).
+- `DO UPDATE` 대상 확정: round-4 update-set 컬럼(qty_unit·nonspec 등)을 멱등 갱신할지, 변경분만 적용할지.
+
 ## Test scenarios
 
 - **Normal flow (round-1)**: "DB 구조 파악하고 구간할인 매핑해줘" → Phase 0 initial → 2 parallel analysts → designer → validator GO → report with decision gate.
@@ -171,6 +196,12 @@ round-4 (load-readiness):
 - **Round-4 gate-only**: "적재 게이트 다시" / "G1 G9 게이트 다시" → 기존 `09_load/` 번들 재조립 없이 validator만 G1~G9 재실행.
 - **Round-4 partial rebuild**: "가격표 적재 조립만 다시" → load-builder가 `t_prc_*` 단계만 재조립, validator가 해당 단계만 재게이트; 나머지 적재 단계 보존.
 - **Round-4 whitelist error**: 매핑이 비-`t_`(Django) 테이블을 가리킴 → load-builder가 G1(화이트리스트)에서 정지·플래그, 번들 미산출.
+- **Round-5 flow (load-execution)**: "적재 스크립트 작성" / "round-5" / "적재 SQL 만들어줘" → Phase 0 round-4 GO 확인 → Phase 2 병렬(load-builder 멱등 SQL+로더 `_exec*/` · ddl-proposer GAP DDL 제안 `11_ddl_proposals/`) → Phase 3 validator G1~G9 carry-forward + R1~R6 + (lead 승인 시)라이브 DRY-RUN → `load-execution-gate.md` GO/NO-GO → lead가 라이브 DRY-RUN·COMMIT·DDL 적용·코드행 승인을 사용자에 에스컬레이션.
+- **Round-5 SQL-only**: "멱등 적재 SQL만" → load-builder가 `_exec*/` SQL+로더만, validator R1~R3 로컬 검사; DDL 제안·라이브 DRY-RUN 생략.
+- **Round-5 DDL-proposal-only**: "신규 엔티티 제안만" / "스키마 부족분 제안" → ddl-proposer가 `11_ddl_proposals/`만, validator R4(search-before-mint·정규화·충돌); 적재 SQL 무변경.
+- **Round-5 gate-only**: "적재 실행 게이트 다시" / "R1 R6 다시" → validator가 기존 `_exec*/` + `11_ddl_proposals/`에 R1~R6 재실행, 재빌드 없음.
+- **Round-5 live DRY-RUN**: "라이브 DRY-RUN 해줘" → lead 승인 후에만 validator가 `BEGIN…ROLLBACK` 2회(R1 멱등성/R5 제약위반), 위반 보고, NEVER COMMIT.
+- **Round-5 idempotency error**: 어떤 INSERT에 `ON CONFLICT` 누락 → validator R1 FAIL, load-builder로 라우팅; DDL 제안이 기존 테이블 중복 → R4 FAIL(search-before-mint), ddl-proposer로 라우팅.
 - **Error flow**: DB unreachable → Phase 1 blocker report, ask user to verify host/port; no agents spawned.
 
 ## CLAUDE.md pointer
