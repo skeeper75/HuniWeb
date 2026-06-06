@@ -18,7 +18,7 @@ BEGIN;
 \echo '>> 03_prc_formula_components.sql (13 stmts)'
 \i 03_prc_formula_components.sql
 
-\echo '>> 04_prc_component_prices.sql (2988 stmts)'
+\echo '>> 04_prc_component_prices.sql (3292 stmts)'
 \i 04_prc_component_prices.sql
 
 \echo '>> 05_prd_product_price_formulas.sql (45 stmts)'

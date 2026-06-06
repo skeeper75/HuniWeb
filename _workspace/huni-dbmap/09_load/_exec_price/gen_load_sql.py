@@ -29,12 +29,16 @@ PRICE_SRC = os.path.join(
 
 # siz 교정 맵(CONFIRMED, search-before-mint, 기존 라이브 siz 재사용·무발명).
 # 권위: 02_mapping/price-siz-mapping-inspection.md §1-1/§1-4 + 라이브 read-only SELECT.
-#  - SIZ_PENDING_GUK4    → SIZ_000499 (316x467, 국전계열 plate, 단일 공유 출력판형, impos=Y)
+#  - SIZ_PENDING_GUK4     → SIZ_000499 (cut 316x467/work 306x457, 국전계열 plate, impos=Y)
 #  - SIZ_PENDING_GP_원형35mm → SIZ_000422 (원형35x35, 라이브 정확 일치)
-# 두 타깃 siz_cd 모두 라이브 t_siz_sizes 실존(del_yn=N), FK fk_prc_comp_prices_siz_cd PASS.
+#  - SIZ_PENDING_3JEOL    → SIZ_000077 (cut 300x625/work 304x629, impos=Y, 국3절 표준 ≈313x636
+#       근접 유일 impos=Y 판형. SIZ_000475[330x640]은 impos=N=완성품이라 기각. GUK4와 동일 구조:
+#       3JEOL=단일 공유 출력판형 304행[distinct siz 1, comps=디지털인쇄S1/S2·코팅무광/유광]).
+# 세 타깃 siz_cd 모두 라이브 t_siz_sizes 실존(del_yn=N·impos_yn=Y), FK fk_prc_comp_prices_siz_cd PASS.
 SIZ_CORRECTION = {
     "SIZ_PENDING_GUK4": "SIZ_000499",
     "SIZ_PENDING_GP_원형35mm": "SIZ_000422",
+    "SIZ_PENDING_3JEOL": "SIZ_000077",
 }
 
 
@@ -188,12 +192,13 @@ def gen_03_formula_components():
 
 
 def gen_04_component_prices():
-    """단계04 단가 2,988행 (= 즉시 2,108 + siz 교정 880).
+    """단계04 단가 3,292행 (= 즉시 2,108 + siz 교정 1,184).
 
     원천 = 매핑 산출 t_prc_component_prices.csv(4,805행)에서 직접 파티셔닝(재현성 G8):
       · 적재가능(real-siz SIZ_0*) + NULL-siz   → 종전 2,108행(조립본과 1:1 동일·검증됨)
-      · siz 교정(SIZ_CORRECTION 맵 880행)      → 신규 적재가능(placeholder→실 siz_cd 치환)
-      · 잔여 SIZ_PENDING_*                       → 차단 유지(1,817행, blocked-and-gaps.md §A)
+      · siz 교정(SIZ_CORRECTION 맵 1,184행)    → 신규 적재가능(placeholder→실 siz_cd 치환)
+          GUK4 870 + GP원형35mm 10 + 3JEOL 304 = 1,184.
+      · 잔여 SIZ_PENDING_*                       → 차단 유지(1,513행, blocked-and-gaps.md §A)
     교정은 siz_cd 1:1 치환만(다른 차원 컬럼 불변·무발명·라이브 실존 siz 재사용).
     note 앞에 [siz-corrected: <placeholder>→<siz_cd>] 프로비넌스 접두 부착.
 
@@ -241,16 +246,17 @@ def gen_04_component_prices():
                   f"comp_price_id={r['comp_price_id']}{prov_tag}")
         out.append((stmt, srcref))
         prov.append(("t_prc_component_prices", srcref))
-    # 파티션 어서트(재현성·정합): 즉시 2,108(real 1,313 + null 795) + 교정 880 = 2,988, 차단 1,817.
+    # 파티션 어서트(재현성·정합): 즉시 2,108(real 1,313 + null 795) + 교정 1,184 = 3,292, 차단 1,513.
     assert n_loadable_real == 1313, f"real-siz {n_loadable_real} != 1313"
     assert n_loadable_null == 795, f"null-siz {n_loadable_null} != 795"
-    assert n_corrected == 880, f"corrected {n_corrected} != 880"
-    assert n_blocked == 1817, f"blocked {n_blocked} != 1817"
-    assert len(out) == 2988, f"04 loadable {len(out)} != 2988"
+    assert n_corrected == 1184, f"corrected {n_corrected} != 1184"
+    assert n_blocked == 1513, f"blocked {n_blocked} != 1513"
+    assert len(out) == 3292, f"04 loadable {len(out)} != 3292"
     return write_step(
         "04_prc_component_prices.sql",
-        "단계04 단가 2,988(즉시 2,108 + siz교정 880) — 충돌키=PK comp_price_id. "
-        "siz 교정 GUK4→SIZ_000499/GP원형35mm→SIZ_000422(라이브 실존·무발명). 잔여 1,817 차단.",
+        "단계04 단가 3,292(즉시 2,108 + siz교정 1,184) — 충돌키=PK comp_price_id. "
+        "siz 교정 GUK4→SIZ_000499/GP원형35mm→SIZ_000422/3JEOL→SIZ_000077"
+        "(라이브 실존·impos=Y·무발명). 잔여 1,513 차단.",
         cols, "(comp_price_id)", out, prov)
 
 
@@ -303,10 +309,10 @@ def main():
     print("가격 적재 SQL 생성 완료:")
     for k in sorted(counts):
         print(f"  {k}: {counts[k]} stmts")
-    print(f"  총 INSERT 문: {total} (기대 3,200 — siz 교정 880행 통합)")
-    assert total == 3200, f"행수 불일치: {total} != 3200"
-    assert counts["04_prc_component_prices.sql"] == 2988, "04 행수 != 2988"
-    print("  행수 검증 OK (04 단가 2,988 = 즉시 2,108 + siz교정 880)")
+    print(f"  총 INSERT 문: {total} (기대 3,504 — siz 교정 1,184행 통합: GUK4 870+GP35 10+3JEOL 304)")
+    assert total == 3504, f"행수 불일치: {total} != 3504"
+    assert counts["04_prc_component_prices.sql"] == 3292, "04 행수 != 3292"
+    print("  행수 검증 OK (04 단가 3,292 = 즉시 2,108 + siz교정 1,184)")
 
 
 if __name__ == "__main__":

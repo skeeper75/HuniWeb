@@ -1,5 +1,5 @@
 -- 04_prc_component_prices.sql
--- 단계04 단가 2,988(즉시 2,108 + siz교정 880) — 충돌키=PK comp_price_id. siz 교정 GUK4→SIZ_000499/GP원형35mm→SIZ_000422(라이브 실존·무발명). 잔여 1,817 차단.
+-- 단계04 단가 3,292(즉시 2,108 + siz교정 1,184) — 충돌키=PK comp_price_id. siz 교정 GUK4→SIZ_000499/GP원형35mm→SIZ_000422/3JEOL→SIZ_000077(라이브 실존·impos=Y·무발명). 잔여 1,513 차단.
 -- 생성: gen_load_sql.py (손편집 금지). 멱등: ON CONFLICT 가드.
 -- BEGIN/COMMIT 미포함 — apply.sql 가 트랜잭션 래핑.
 
@@ -370,6 +370,374 @@ ON CONFLICT (comp_price_id) DO NOTHING;
 -- src: t_prc_component_prices.csv:row93 comp_price_id=92 siz:SIZ_PENDING_GUK4->SIZ_000499
 INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
 VALUES (92, 'COMP_COAT_GLOSSY', '2026-06-01', 'SIZ_000499', NULL, NULL, 2, NULL, 1000000, 200, '[siz-corrected: SIZ_PENDING_GUK4→SIZ_000499] 코팅(국4절)/유광코팅/양면 출력매수≥1000000')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row94 comp_price_id=93 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (93, 'COMP_COAT_MATTE', '2026-06-01', 'SIZ_000077', NULL, NULL, 1, NULL, 1, 3000, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/무광코팅/단면 출력매수≥1')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row95 comp_price_id=94 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (94, 'COMP_COAT_MATTE', '2026-06-01', 'SIZ_000077', NULL, NULL, 2, NULL, 1, 6000, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/무광코팅/양면 출력매수≥1')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row96 comp_price_id=95 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (95, 'COMP_COAT_GLOSSY', '2026-06-01', 'SIZ_000077', NULL, NULL, 1, NULL, 1, 3000, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/유광코팅/단면 출력매수≥1')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row97 comp_price_id=96 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (96, 'COMP_COAT_GLOSSY', '2026-06-01', 'SIZ_000077', NULL, NULL, 2, NULL, 1, 6000, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/유광코팅/양면 출력매수≥1')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row98 comp_price_id=97 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (97, 'COMP_COAT_MATTE', '2026-06-01', 'SIZ_000077', NULL, NULL, 1, NULL, 2, 2500, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/무광코팅/단면 출력매수≥2')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row99 comp_price_id=98 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (98, 'COMP_COAT_MATTE', '2026-06-01', 'SIZ_000077', NULL, NULL, 2, NULL, 2, 5000, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/무광코팅/양면 출력매수≥2')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row100 comp_price_id=99 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (99, 'COMP_COAT_GLOSSY', '2026-06-01', 'SIZ_000077', NULL, NULL, 1, NULL, 2, 2500, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/유광코팅/단면 출력매수≥2')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row101 comp_price_id=100 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (100, 'COMP_COAT_GLOSSY', '2026-06-01', 'SIZ_000077', NULL, NULL, 2, NULL, 2, 5000, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/유광코팅/양면 출력매수≥2')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row102 comp_price_id=101 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (101, 'COMP_COAT_MATTE', '2026-06-01', 'SIZ_000077', NULL, NULL, 1, NULL, 5, 2000, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/무광코팅/단면 출력매수≥5')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row103 comp_price_id=102 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (102, 'COMP_COAT_MATTE', '2026-06-01', 'SIZ_000077', NULL, NULL, 2, NULL, 5, 4000, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/무광코팅/양면 출력매수≥5')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row104 comp_price_id=103 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (103, 'COMP_COAT_GLOSSY', '2026-06-01', 'SIZ_000077', NULL, NULL, 1, NULL, 5, 2000, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/유광코팅/단면 출력매수≥5')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row105 comp_price_id=104 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (104, 'COMP_COAT_GLOSSY', '2026-06-01', 'SIZ_000077', NULL, NULL, 2, NULL, 5, 4000, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/유광코팅/양면 출력매수≥5')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row106 comp_price_id=105 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (105, 'COMP_COAT_MATTE', '2026-06-01', 'SIZ_000077', NULL, NULL, 1, NULL, 10, 1500, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/무광코팅/단면 출력매수≥10')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row107 comp_price_id=106 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (106, 'COMP_COAT_MATTE', '2026-06-01', 'SIZ_000077', NULL, NULL, 2, NULL, 10, 3000, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/무광코팅/양면 출력매수≥10')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row108 comp_price_id=107 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (107, 'COMP_COAT_GLOSSY', '2026-06-01', 'SIZ_000077', NULL, NULL, 1, NULL, 10, 1500, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/유광코팅/단면 출력매수≥10')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row109 comp_price_id=108 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (108, 'COMP_COAT_GLOSSY', '2026-06-01', 'SIZ_000077', NULL, NULL, 2, NULL, 10, 3000, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/유광코팅/양면 출력매수≥10')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row110 comp_price_id=109 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (109, 'COMP_COAT_MATTE', '2026-06-01', 'SIZ_000077', NULL, NULL, 1, NULL, 20, 1200, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/무광코팅/단면 출력매수≥20')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row111 comp_price_id=110 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (110, 'COMP_COAT_MATTE', '2026-06-01', 'SIZ_000077', NULL, NULL, 2, NULL, 20, 2400, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/무광코팅/양면 출력매수≥20')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row112 comp_price_id=111 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (111, 'COMP_COAT_GLOSSY', '2026-06-01', 'SIZ_000077', NULL, NULL, 1, NULL, 20, 1200, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/유광코팅/단면 출력매수≥20')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row113 comp_price_id=112 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (112, 'COMP_COAT_GLOSSY', '2026-06-01', 'SIZ_000077', NULL, NULL, 2, NULL, 20, 2400, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/유광코팅/양면 출력매수≥20')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row114 comp_price_id=113 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (113, 'COMP_COAT_MATTE', '2026-06-01', 'SIZ_000077', NULL, NULL, 1, NULL, 30, 1200, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/무광코팅/단면 출력매수≥30')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row115 comp_price_id=114 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (114, 'COMP_COAT_MATTE', '2026-06-01', 'SIZ_000077', NULL, NULL, 2, NULL, 30, 2400, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/무광코팅/양면 출력매수≥30')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row116 comp_price_id=115 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (115, 'COMP_COAT_GLOSSY', '2026-06-01', 'SIZ_000077', NULL, NULL, 1, NULL, 30, 1200, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/유광코팅/단면 출력매수≥30')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row117 comp_price_id=116 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (116, 'COMP_COAT_GLOSSY', '2026-06-01', 'SIZ_000077', NULL, NULL, 2, NULL, 30, 2400, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/유광코팅/양면 출력매수≥30')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row118 comp_price_id=117 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (117, 'COMP_COAT_MATTE', '2026-06-01', 'SIZ_000077', NULL, NULL, 1, NULL, 40, 1050, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/무광코팅/단면 출력매수≥40')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row119 comp_price_id=118 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (118, 'COMP_COAT_MATTE', '2026-06-01', 'SIZ_000077', NULL, NULL, 2, NULL, 40, 2100, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/무광코팅/양면 출력매수≥40')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row120 comp_price_id=119 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (119, 'COMP_COAT_GLOSSY', '2026-06-01', 'SIZ_000077', NULL, NULL, 1, NULL, 40, 1050, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/유광코팅/단면 출력매수≥40')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row121 comp_price_id=120 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (120, 'COMP_COAT_GLOSSY', '2026-06-01', 'SIZ_000077', NULL, NULL, 2, NULL, 40, 2100, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/유광코팅/양면 출력매수≥40')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row122 comp_price_id=121 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (121, 'COMP_COAT_MATTE', '2026-06-01', 'SIZ_000077', NULL, NULL, 1, NULL, 50, 1050, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/무광코팅/단면 출력매수≥50')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row123 comp_price_id=122 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (122, 'COMP_COAT_MATTE', '2026-06-01', 'SIZ_000077', NULL, NULL, 2, NULL, 50, 2100, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/무광코팅/양면 출력매수≥50')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row124 comp_price_id=123 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (123, 'COMP_COAT_GLOSSY', '2026-06-01', 'SIZ_000077', NULL, NULL, 1, NULL, 50, 1050, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/유광코팅/단면 출력매수≥50')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row125 comp_price_id=124 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (124, 'COMP_COAT_GLOSSY', '2026-06-01', 'SIZ_000077', NULL, NULL, 2, NULL, 50, 2100, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/유광코팅/양면 출력매수≥50')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row126 comp_price_id=125 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (125, 'COMP_COAT_MATTE', '2026-06-01', 'SIZ_000077', NULL, NULL, 1, NULL, 70, 900, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/무광코팅/단면 출력매수≥70')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row127 comp_price_id=126 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (126, 'COMP_COAT_MATTE', '2026-06-01', 'SIZ_000077', NULL, NULL, 2, NULL, 70, 1800, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/무광코팅/양면 출력매수≥70')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row128 comp_price_id=127 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (127, 'COMP_COAT_GLOSSY', '2026-06-01', 'SIZ_000077', NULL, NULL, 1, NULL, 70, 900, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/유광코팅/단면 출력매수≥70')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row129 comp_price_id=128 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (128, 'COMP_COAT_GLOSSY', '2026-06-01', 'SIZ_000077', NULL, NULL, 2, NULL, 70, 1800, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/유광코팅/양면 출력매수≥70')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row130 comp_price_id=129 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (129, 'COMP_COAT_MATTE', '2026-06-01', 'SIZ_000077', NULL, NULL, 1, NULL, 100, 750, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/무광코팅/단면 출력매수≥100')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row131 comp_price_id=130 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (130, 'COMP_COAT_MATTE', '2026-06-01', 'SIZ_000077', NULL, NULL, 2, NULL, 100, 1500, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/무광코팅/양면 출력매수≥100')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row132 comp_price_id=131 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (131, 'COMP_COAT_GLOSSY', '2026-06-01', 'SIZ_000077', NULL, NULL, 1, NULL, 100, 750, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/유광코팅/단면 출력매수≥100')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row133 comp_price_id=132 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (132, 'COMP_COAT_GLOSSY', '2026-06-01', 'SIZ_000077', NULL, NULL, 2, NULL, 100, 1500, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/유광코팅/양면 출력매수≥100')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row134 comp_price_id=133 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (133, 'COMP_COAT_MATTE', '2026-06-01', 'SIZ_000077', NULL, NULL, 1, NULL, 150, 600, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/무광코팅/단면 출력매수≥150')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row135 comp_price_id=134 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (134, 'COMP_COAT_MATTE', '2026-06-01', 'SIZ_000077', NULL, NULL, 2, NULL, 150, 1200, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/무광코팅/양면 출력매수≥150')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row136 comp_price_id=135 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (135, 'COMP_COAT_GLOSSY', '2026-06-01', 'SIZ_000077', NULL, NULL, 1, NULL, 150, 600, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/유광코팅/단면 출력매수≥150')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row137 comp_price_id=136 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (136, 'COMP_COAT_GLOSSY', '2026-06-01', 'SIZ_000077', NULL, NULL, 2, NULL, 150, 1200, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/유광코팅/양면 출력매수≥150')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row138 comp_price_id=137 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (137, 'COMP_COAT_MATTE', '2026-06-01', 'SIZ_000077', NULL, NULL, 1, NULL, 200, 450, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/무광코팅/단면 출력매수≥200')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row139 comp_price_id=138 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (138, 'COMP_COAT_MATTE', '2026-06-01', 'SIZ_000077', NULL, NULL, 2, NULL, 200, 900, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/무광코팅/양면 출력매수≥200')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row140 comp_price_id=139 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (139, 'COMP_COAT_GLOSSY', '2026-06-01', 'SIZ_000077', NULL, NULL, 1, NULL, 200, 450, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/유광코팅/단면 출력매수≥200')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row141 comp_price_id=140 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (140, 'COMP_COAT_GLOSSY', '2026-06-01', 'SIZ_000077', NULL, NULL, 2, NULL, 200, 900, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/유광코팅/양면 출력매수≥200')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row142 comp_price_id=141 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (141, 'COMP_COAT_MATTE', '2026-06-01', 'SIZ_000077', NULL, NULL, 1, NULL, 250, 450, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/무광코팅/단면 출력매수≥250')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row143 comp_price_id=142 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (142, 'COMP_COAT_MATTE', '2026-06-01', 'SIZ_000077', NULL, NULL, 2, NULL, 250, 900, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/무광코팅/양면 출력매수≥250')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row144 comp_price_id=143 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (143, 'COMP_COAT_GLOSSY', '2026-06-01', 'SIZ_000077', NULL, NULL, 1, NULL, 250, 450, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/유광코팅/단면 출력매수≥250')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row145 comp_price_id=144 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (144, 'COMP_COAT_GLOSSY', '2026-06-01', 'SIZ_000077', NULL, NULL, 2, NULL, 250, 900, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/유광코팅/양면 출력매수≥250')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row146 comp_price_id=145 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (145, 'COMP_COAT_MATTE', '2026-06-01', 'SIZ_000077', NULL, NULL, 1, NULL, 300, 380, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/무광코팅/단면 출력매수≥300')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row147 comp_price_id=146 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (146, 'COMP_COAT_MATTE', '2026-06-01', 'SIZ_000077', NULL, NULL, 2, NULL, 300, 760, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/무광코팅/양면 출력매수≥300')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row148 comp_price_id=147 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (147, 'COMP_COAT_GLOSSY', '2026-06-01', 'SIZ_000077', NULL, NULL, 1, NULL, 300, 380, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/유광코팅/단면 출력매수≥300')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row149 comp_price_id=148 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (148, 'COMP_COAT_GLOSSY', '2026-06-01', 'SIZ_000077', NULL, NULL, 2, NULL, 300, 760, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/유광코팅/양면 출력매수≥300')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row150 comp_price_id=149 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (149, 'COMP_COAT_MATTE', '2026-06-01', 'SIZ_000077', NULL, NULL, 1, NULL, 400, 300, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/무광코팅/단면 출력매수≥400')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row151 comp_price_id=150 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (150, 'COMP_COAT_MATTE', '2026-06-01', 'SIZ_000077', NULL, NULL, 2, NULL, 400, 600, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/무광코팅/양면 출력매수≥400')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row152 comp_price_id=151 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (151, 'COMP_COAT_GLOSSY', '2026-06-01', 'SIZ_000077', NULL, NULL, 1, NULL, 400, 300, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/유광코팅/단면 출력매수≥400')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row153 comp_price_id=152 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (152, 'COMP_COAT_GLOSSY', '2026-06-01', 'SIZ_000077', NULL, NULL, 2, NULL, 400, 600, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/유광코팅/양면 출력매수≥400')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row154 comp_price_id=153 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (153, 'COMP_COAT_MATTE', '2026-06-01', 'SIZ_000077', NULL, NULL, 1, NULL, 500, 270, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/무광코팅/단면 출력매수≥500')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row155 comp_price_id=154 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (154, 'COMP_COAT_MATTE', '2026-06-01', 'SIZ_000077', NULL, NULL, 2, NULL, 500, 540, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/무광코팅/양면 출력매수≥500')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row156 comp_price_id=155 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (155, 'COMP_COAT_GLOSSY', '2026-06-01', 'SIZ_000077', NULL, NULL, 1, NULL, 500, 270, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/유광코팅/단면 출력매수≥500')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row157 comp_price_id=156 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (156, 'COMP_COAT_GLOSSY', '2026-06-01', 'SIZ_000077', NULL, NULL, 2, NULL, 500, 540, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/유광코팅/양면 출력매수≥500')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row158 comp_price_id=157 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (157, 'COMP_COAT_MATTE', '2026-06-01', 'SIZ_000077', NULL, NULL, 1, NULL, 700, 240, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/무광코팅/단면 출력매수≥700')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row159 comp_price_id=158 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (158, 'COMP_COAT_MATTE', '2026-06-01', 'SIZ_000077', NULL, NULL, 2, NULL, 700, 480, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/무광코팅/양면 출력매수≥700')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row160 comp_price_id=159 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (159, 'COMP_COAT_GLOSSY', '2026-06-01', 'SIZ_000077', NULL, NULL, 1, NULL, 700, 240, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/유광코팅/단면 출력매수≥700')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row161 comp_price_id=160 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (160, 'COMP_COAT_GLOSSY', '2026-06-01', 'SIZ_000077', NULL, NULL, 2, NULL, 700, 480, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/유광코팅/양면 출력매수≥700')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row162 comp_price_id=161 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (161, 'COMP_COAT_MATTE', '2026-06-01', 'SIZ_000077', NULL, NULL, 1, NULL, 900, 210, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/무광코팅/단면 출력매수≥900')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row163 comp_price_id=162 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (162, 'COMP_COAT_MATTE', '2026-06-01', 'SIZ_000077', NULL, NULL, 2, NULL, 900, 420, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/무광코팅/양면 출력매수≥900')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row164 comp_price_id=163 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (163, 'COMP_COAT_GLOSSY', '2026-06-01', 'SIZ_000077', NULL, NULL, 1, NULL, 900, 210, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/유광코팅/단면 출력매수≥900')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row165 comp_price_id=164 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (164, 'COMP_COAT_GLOSSY', '2026-06-01', 'SIZ_000077', NULL, NULL, 2, NULL, 900, 420, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/유광코팅/양면 출력매수≥900')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row166 comp_price_id=165 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (165, 'COMP_COAT_MATTE', '2026-06-01', 'SIZ_000077', NULL, NULL, 1, NULL, 1000, 200, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/무광코팅/단면 출력매수≥1000')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row167 comp_price_id=166 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (166, 'COMP_COAT_MATTE', '2026-06-01', 'SIZ_000077', NULL, NULL, 2, NULL, 1000, 400, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/무광코팅/양면 출력매수≥1000')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row168 comp_price_id=167 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (167, 'COMP_COAT_GLOSSY', '2026-06-01', 'SIZ_000077', NULL, NULL, 1, NULL, 1000, 200, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/유광코팅/단면 출력매수≥1000')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row169 comp_price_id=168 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (168, 'COMP_COAT_GLOSSY', '2026-06-01', 'SIZ_000077', NULL, NULL, 2, NULL, 1000, 400, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/유광코팅/양면 출력매수≥1000')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row170 comp_price_id=169 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (169, 'COMP_COAT_MATTE', '2026-06-01', 'SIZ_000077', NULL, NULL, 1, NULL, 1500, 180, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/무광코팅/단면 출력매수≥1500')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row171 comp_price_id=170 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (170, 'COMP_COAT_MATTE', '2026-06-01', 'SIZ_000077', NULL, NULL, 2, NULL, 1500, 360, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/무광코팅/양면 출력매수≥1500')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row172 comp_price_id=171 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (171, 'COMP_COAT_GLOSSY', '2026-06-01', 'SIZ_000077', NULL, NULL, 1, NULL, 1500, 180, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/유광코팅/단면 출력매수≥1500')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row173 comp_price_id=172 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (172, 'COMP_COAT_GLOSSY', '2026-06-01', 'SIZ_000077', NULL, NULL, 2, NULL, 1500, 360, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/유광코팅/양면 출력매수≥1500')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row174 comp_price_id=173 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (173, 'COMP_COAT_MATTE', '2026-06-01', 'SIZ_000077', NULL, NULL, 1, NULL, 2500, 170, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/무광코팅/단면 출력매수≥2500')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row175 comp_price_id=174 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (174, 'COMP_COAT_MATTE', '2026-06-01', 'SIZ_000077', NULL, NULL, 2, NULL, 2500, 340, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/무광코팅/양면 출력매수≥2500')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row176 comp_price_id=175 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (175, 'COMP_COAT_GLOSSY', '2026-06-01', 'SIZ_000077', NULL, NULL, 1, NULL, 2500, 170, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/유광코팅/단면 출력매수≥2500')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row177 comp_price_id=176 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (176, 'COMP_COAT_GLOSSY', '2026-06-01', 'SIZ_000077', NULL, NULL, 2, NULL, 2500, 340, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/유광코팅/양면 출력매수≥2500')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row178 comp_price_id=177 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (177, 'COMP_COAT_MATTE', '2026-06-01', 'SIZ_000077', NULL, NULL, 1, NULL, 5000, 150, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/무광코팅/단면 출력매수≥5000')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row179 comp_price_id=178 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (178, 'COMP_COAT_MATTE', '2026-06-01', 'SIZ_000077', NULL, NULL, 2, NULL, 5000, 300, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/무광코팅/양면 출력매수≥5000')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row180 comp_price_id=179 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (179, 'COMP_COAT_GLOSSY', '2026-06-01', 'SIZ_000077', NULL, NULL, 1, NULL, 5000, 150, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/유광코팅/단면 출력매수≥5000')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row181 comp_price_id=180 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (180, 'COMP_COAT_GLOSSY', '2026-06-01', 'SIZ_000077', NULL, NULL, 2, NULL, 5000, 300, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/유광코팅/양면 출력매수≥5000')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row182 comp_price_id=181 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (181, 'COMP_COAT_MATTE', '2026-06-01', 'SIZ_000077', NULL, NULL, 1, NULL, 1000000, 150, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/무광코팅/단면 출력매수≥1000000')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row183 comp_price_id=182 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (182, 'COMP_COAT_MATTE', '2026-06-01', 'SIZ_000077', NULL, NULL, 2, NULL, 1000000, 300, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/무광코팅/양면 출력매수≥1000000')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row184 comp_price_id=183 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (183, 'COMP_COAT_GLOSSY', '2026-06-01', 'SIZ_000077', NULL, NULL, 1, NULL, 1000000, 150, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/유광코팅/단면 출력매수≥1000000')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row185 comp_price_id=184 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (184, 'COMP_COAT_GLOSSY', '2026-06-01', 'SIZ_000077', NULL, NULL, 2, NULL, 1000000, 300, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 코팅(3절)/유광코팅/양면 출력매수≥1000000')
 ON CONFLICT (comp_price_id) DO NOTHING;
 -- src: t_prc_component_prices.csv:row186 comp_price_id=185 siz:SIZ_PENDING_GUK4->SIZ_000499
 INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
@@ -3338,6 +3706,854 @@ ON CONFLICT (comp_price_id) DO NOTHING;
 -- src: t_prc_component_prices.csv:row927 comp_price_id=926 siz:SIZ_PENDING_GUK4->SIZ_000499
 INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
 VALUES (926, 'COMP_PRINT_SPOT_SILVER_S2', '2026-06-01', 'SIZ_000499', NULL, NULL, NULL, NULL, 1000000, 900, '[siz-corrected: SIZ_PENDING_GUK4→SIZ_000499] 디지털인쇄 출력비(국4절)/별색(은색)/양면 출력매수≥1000000 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row928 comp_price_id=927 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (927, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 1, 3500, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥1 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row929 comp_price_id=928 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (928, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 1, 5000, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥1 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row930 comp_price_id=929 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (929, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 1, 4500, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥1 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row931 comp_price_id=930 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (930, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 1, 7000, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥1 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row932 comp_price_id=931 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (931, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 2, 2500, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥2 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row933 comp_price_id=932 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (932, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 2, 2900, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥2 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row934 comp_price_id=933 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (933, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 2, 2800, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥2 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row935 comp_price_id=934 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (934, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 2, 4600, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥2 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row936 comp_price_id=935 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (935, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 3, 2000, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥3 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row937 comp_price_id=936 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (936, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 3, 2500, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥3 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row938 comp_price_id=937 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (937, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 3, 2500, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥3 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row939 comp_price_id=938 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (938, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 3, 4300, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥3 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row940 comp_price_id=939 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (939, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 4, 1800, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥4 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row941 comp_price_id=940 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (940, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 4, 2200, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥4 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row942 comp_price_id=941 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (941, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 4, 2000, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥4 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row943 comp_price_id=942 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (942, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 4, 3500, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥4 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row944 comp_price_id=943 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (943, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 5, 1200, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥5 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row945 comp_price_id=944 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (944, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 5, 2000, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥5 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row946 comp_price_id=945 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (945, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 5, 1700, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥5 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row947 comp_price_id=946 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (946, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 5, 3000, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥5 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row948 comp_price_id=947 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (947, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 6, 900, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥6 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row949 comp_price_id=948 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (948, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 6, 1900, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥6 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row950 comp_price_id=949 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (949, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 6, 1500, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥6 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row951 comp_price_id=950 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (950, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 6, 2600, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥6 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row952 comp_price_id=951 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (951, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 7, 800, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥7 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row953 comp_price_id=952 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (952, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 7, 1700, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥7 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row954 comp_price_id=953 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (953, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 7, 1300, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥7 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row955 comp_price_id=954 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (954, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 7, 2300, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥7 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row956 comp_price_id=955 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (955, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 8, 700, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥8 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row957 comp_price_id=956 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (956, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 8, 1500, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥8 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row958 comp_price_id=957 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (957, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 8, 1200, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥8 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row959 comp_price_id=958 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (958, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 8, 2100, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥8 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row960 comp_price_id=959 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (959, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 9, 600, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥9 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row961 comp_price_id=960 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (960, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 9, 1300, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥9 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row962 comp_price_id=961 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (961, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 9, 1100, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥9 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row963 comp_price_id=962 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (962, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 9, 1900, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥9 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row964 comp_price_id=963 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (963, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 10, 500, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥10 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row965 comp_price_id=964 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (964, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 10, 1200, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥10 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row966 comp_price_id=965 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (965, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 10, 1000, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥10 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row967 comp_price_id=966 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (966, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 10, 1600, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥10 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row968 comp_price_id=967 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (967, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 15, 610, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥15 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row969 comp_price_id=968 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (968, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 15, 1200, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥15 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row970 comp_price_id=969 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (969, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 15, 1200, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥15 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row971 comp_price_id=970 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (970, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 15, 2430, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥15 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row972 comp_price_id=971 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (971, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 20, 540, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥20 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row973 comp_price_id=972 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (972, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 20, 1080, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥20 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row974 comp_price_id=973 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (973, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 20, 1150, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥20 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row975 comp_price_id=974 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (974, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 20, 2300, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥20 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row976 comp_price_id=975 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (975, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 25, 470, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥25 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row977 comp_price_id=976 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (976, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 25, 950, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥25 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row978 comp_price_id=977 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (977, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 25, 1080, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥25 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row979 comp_price_id=978 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (978, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 25, 2200, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥25 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row980 comp_price_id=979 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (979, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 30, 410, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥30 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row981 comp_price_id=980 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (980, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 30, 810, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥30 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row982 comp_price_id=981 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (981, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 30, 1010, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥30 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row983 comp_price_id=982 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (982, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 30, 2030, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥30 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row984 comp_price_id=983 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (983, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 35, 380, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥35 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row985 comp_price_id=984 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (984, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 35, 760, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥35 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row986 comp_price_id=985 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (985, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 35, 950, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥35 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row987 comp_price_id=986 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (986, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 35, 1890, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥35 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row988 comp_price_id=987 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (987, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 40, 340, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥40 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row989 comp_price_id=988 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (988, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 40, 680, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥40 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row990 comp_price_id=989 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (989, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 40, 880, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥40 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row991 comp_price_id=990 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (990, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 40, 1760, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥40 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row992 comp_price_id=991 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (991, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 45, 340, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥45 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row993 comp_price_id=992 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (992, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 45, 680, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥45 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row994 comp_price_id=993 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (993, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 45, 810, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥45 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row995 comp_price_id=994 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (994, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 45, 1620, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥45 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row996 comp_price_id=995 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (995, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 50, 340, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥50 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row997 comp_price_id=996 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (996, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 50, 680, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥50 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row998 comp_price_id=997 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (997, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 50, 750, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥50 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row999 comp_price_id=998 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (998, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 50, 1490, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥50 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1000 comp_price_id=999 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (999, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 60, 270, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥60 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1001 comp_price_id=1000 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1000, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 60, 540, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥60 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1002 comp_price_id=1001 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1001, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 60, 680, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥60 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1003 comp_price_id=1002 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1002, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 60, 1350, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥60 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1004 comp_price_id=1003 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1003, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 70, 270, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥70 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1005 comp_price_id=1004 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1004, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 70, 540, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥70 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1006 comp_price_id=1005 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1005, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 70, 610, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥70 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1007 comp_price_id=1006 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1006, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 70, 1200, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥70 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1008 comp_price_id=1007 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1007, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 80, 270, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥80 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1009 comp_price_id=1008 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1008, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 80, 540, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥80 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1010 comp_price_id=1009 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1009, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 80, 540, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥80 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1011 comp_price_id=1010 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1010, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 80, 1080, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥80 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1012 comp_price_id=1011 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1011, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 90, 270, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥90 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1013 comp_price_id=1012 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1012, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 90, 540, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥90 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1014 comp_price_id=1013 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1013, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 90, 470, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥90 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1015 comp_price_id=1014 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1014, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 90, 950, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥90 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1016 comp_price_id=1015 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1015, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 100, 270, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥100 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1017 comp_price_id=1016 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1016, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 100, 540, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥100 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1018 comp_price_id=1017 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1017, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 100, 470, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥100 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1019 comp_price_id=1018 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1018, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 100, 950, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥100 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1020 comp_price_id=1019 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1019, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 150, 190, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥150 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1021 comp_price_id=1020 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1020, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 150, 380, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥150 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1022 comp_price_id=1021 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1021, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 150, 450, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥150 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1023 comp_price_id=1022 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1022, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 150, 890, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥150 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1024 comp_price_id=1023 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1023, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 200, 180, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥200 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1025 comp_price_id=1024 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1024, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 200, 350, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥200 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1026 comp_price_id=1025 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1025, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 200, 420, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥200 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1027 comp_price_id=1026 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1026, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 200, 840, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥200 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1028 comp_price_id=1027 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1027, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 250, 160, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥250 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1029 comp_price_id=1028 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1028, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 250, 330, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥250 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1030 comp_price_id=1029 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1029, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 250, 390, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥250 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1031 comp_price_id=1030 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1030, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 250, 780, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥250 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1032 comp_price_id=1031 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1031, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 300, 150, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥300 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1033 comp_price_id=1032 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1032, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 300, 300, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥300 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1034 comp_price_id=1033 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1033, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 300, 360, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥300 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1035 comp_price_id=1034 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1034, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 300, 730, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥300 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1036 comp_price_id=1035 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1035, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 350, 140, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥350 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1037 comp_price_id=1036 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1036, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 350, 270, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥350 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1038 comp_price_id=1037 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1037, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 350, 340, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥350 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1039 comp_price_id=1038 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1038, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 350, 680, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥350 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1040 comp_price_id=1039 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1039, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 400, 120, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥400 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1041 comp_price_id=1040 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1040, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 400, 250, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥400 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1042 comp_price_id=1041 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1041, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 400, 310, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥400 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1043 comp_price_id=1042 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1042, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 400, 620, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥400 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1044 comp_price_id=1043 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1043, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 450, 110, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥450 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1045 comp_price_id=1044 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1044, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 450, 220, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥450 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1046 comp_price_id=1045 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1045, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 450, 280, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥450 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1047 comp_price_id=1046 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1046, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 450, 560, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥450 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1048 comp_price_id=1047 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1047, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 500, 95, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥500 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1049 comp_price_id=1048 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1048, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 500, 190, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥500 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1050 comp_price_id=1049 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1049, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 500, 260, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥500 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1051 comp_price_id=1050 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1050, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 500, 520, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥500 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1052 comp_price_id=1051 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1051, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 600, 95, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥600 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1053 comp_price_id=1052 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1052, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 600, 190, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥600 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1054 comp_price_id=1053 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1053, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 600, 250, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥600 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1055 comp_price_id=1054 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1054, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 600, 500, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥600 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1056 comp_price_id=1055 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1055, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 700, 95, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥700 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1057 comp_price_id=1056 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1056, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 700, 190, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥700 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1058 comp_price_id=1057 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1057, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 700, 240, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥700 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1059 comp_price_id=1058 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1058, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 700, 490, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥700 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1060 comp_price_id=1059 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1059, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 800, 95, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥800 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1061 comp_price_id=1060 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1060, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 800, 190, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥800 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1062 comp_price_id=1061 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1061, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 800, 240, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥800 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1063 comp_price_id=1062 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1062, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 800, 480, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥800 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1064 comp_price_id=1063 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1063, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 900, 95, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥900 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1065 comp_price_id=1064 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1064, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 900, 190, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥900 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1066 comp_price_id=1065 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1065, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 900, 230, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥900 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1067 comp_price_id=1066 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1066, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 900, 460, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥900 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1068 comp_price_id=1067 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1067, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 1000, 95, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥1000 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1069 comp_price_id=1068 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1068, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 1000, 190, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥1000 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1070 comp_price_id=1069 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1069, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 1000, 220, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥1000 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1071 comp_price_id=1070 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1070, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 1000, 450, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥1000 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1072 comp_price_id=1071 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1071, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 1200, 95, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥1200 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1073 comp_price_id=1072 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1072, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 1200, 190, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥1200 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1074 comp_price_id=1073 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1073, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 1200, 220, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥1200 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1075 comp_price_id=1074 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1074, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 1200, 440, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥1200 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1076 comp_price_id=1075 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1075, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 1400, 88, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥1400 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1077 comp_price_id=1076 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1076, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 1400, 180, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥1400 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1078 comp_price_id=1077 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1077, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 1400, 220, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥1400 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1079 comp_price_id=1078 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1078, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 1400, 440, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥1400 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1080 comp_price_id=1079 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1079, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 1600, 88, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥1600 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1081 comp_price_id=1080 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1080, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 1600, 180, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥1600 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1082 comp_price_id=1081 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1081, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 1600, 220, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥1600 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1083 comp_price_id=1082 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1082, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 1600, 430, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥1600 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1084 comp_price_id=1083 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1083, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 1800, 81, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥1800 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1085 comp_price_id=1084 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1084, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 1800, 160, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥1800 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1086 comp_price_id=1085 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1085, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 1800, 210, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥1800 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1087 comp_price_id=1086 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1086, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 1800, 420, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥1800 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1088 comp_price_id=1087 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1087, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 2000, 81, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥2000 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1089 comp_price_id=1088 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1088, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 2000, 160, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥2000 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1090 comp_price_id=1089 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1089, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 2000, 210, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥2000 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1091 comp_price_id=1090 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1090, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 2000, 420, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥2000 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1092 comp_price_id=1091 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1091, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 2500, 75, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥2500 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1093 comp_price_id=1092 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1092, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 2500, 150, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥2500 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1094 comp_price_id=1093 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1093, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 2500, 210, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥2500 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1095 comp_price_id=1094 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1094, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 2500, 420, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥2500 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1096 comp_price_id=1095 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1095, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 3000, 75, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥3000 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1097 comp_price_id=1096 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1096, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 3000, 150, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥3000 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1098 comp_price_id=1097 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1097, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 3000, 210, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥3000 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1099 comp_price_id=1098 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1098, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 3000, 410, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥3000 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1100 comp_price_id=1099 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1099, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 3500, 68, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥3500 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1101 comp_price_id=1100 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1100, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 3500, 135, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥3500 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1102 comp_price_id=1101 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1101, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 3500, 210, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥3500 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1103 comp_price_id=1102 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1102, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 3500, 410, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥3500 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1104 comp_price_id=1103 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1103, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 4000, 68, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥4000 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1105 comp_price_id=1104 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1104, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 4000, 135, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥4000 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1106 comp_price_id=1105 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1105, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 4000, 200, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥4000 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1107 comp_price_id=1106 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1106, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 4000, 410, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥4000 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1108 comp_price_id=1107 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1107, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 4500, 61, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥4500 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1109 comp_price_id=1108 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1108, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 4500, 122, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥4500 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1110 comp_price_id=1109 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1109, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 4500, 200, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥4500 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1111 comp_price_id=1110 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1110, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 4500, 400, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥4500 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1112 comp_price_id=1111 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1111, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 5000, 61, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥5000 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1113 comp_price_id=1112 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1112, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 5000, 122, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥5000 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1114 comp_price_id=1113 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1113, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 5000, 200, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥5000 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1115 comp_price_id=1114 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1114, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 5000, 400, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥5000 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1116 comp_price_id=1115 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1115, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 6000, 54, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥6000 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1117 comp_price_id=1116 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1116, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 6000, 108, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥6000 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1118 comp_price_id=1117 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1117, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 6000, 200, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥6000 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1119 comp_price_id=1118 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1118, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 6000, 400, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥6000 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1120 comp_price_id=1119 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1119, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 7000, 54, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥7000 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1121 comp_price_id=1120 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1120, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 7000, 108, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥7000 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1122 comp_price_id=1121 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1121, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 7000, 200, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥7000 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1123 comp_price_id=1122 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1122, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 7000, 400, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥7000 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1124 comp_price_id=1123 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1123, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 8000, 54, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥8000 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1125 comp_price_id=1124 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1124, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 8000, 108, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥8000 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1126 comp_price_id=1125 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1125, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 8000, 200, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥8000 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1127 comp_price_id=1126 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1126, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 8000, 400, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥8000 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1128 comp_price_id=1127 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1127, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 9000, 54, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥9000 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1129 comp_price_id=1128 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1128, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 9000, 108, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥9000 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1130 comp_price_id=1129 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1129, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 9000, 190, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥9000 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1131 comp_price_id=1130 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1130, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 9000, 390, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥9000 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1132 comp_price_id=1131 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1131, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 10000, 54, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥10000 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1133 comp_price_id=1132 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1132, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 10000, 108, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥10000 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1134 comp_price_id=1133 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1133, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 10000, 190, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥10000 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1135 comp_price_id=1134 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1134, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 10000, 390, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥10000 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1136 comp_price_id=1135 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1135, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 1000000, 54, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/단면 출력매수≥1000000 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1137 comp_price_id=1136 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1136, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000002', NULL, NULL, NULL, 1000000, 108, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/흑백(1도)/양면 출력매수≥1000000 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1138 comp_price_id=1137 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1137, 'COMP_PRINT_DIGITAL_S1', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 1000000, 190, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/단면 출력매수≥1000000 (별색=공정,clr=NULL)')
+ON CONFLICT (comp_price_id) DO NOTHING;
+-- src: t_prc_component_prices.csv:row1139 comp_price_id=1138 siz:SIZ_PENDING_3JEOL->SIZ_000077
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
+VALUES (1138, 'COMP_PRINT_DIGITAL_S2', '2026-06-01', 'SIZ_000077', 'CLR_000005', NULL, NULL, NULL, 1000000, 390, '[siz-corrected: SIZ_PENDING_3JEOL→SIZ_000077] 디지털인쇄 출력비(3절)/칼라(CMYK)/양면 출력매수≥1000000 (별색=공정,clr=NULL)')
 ON CONFLICT (comp_price_id) DO NOTHING;
 -- src: t_prc_component_prices.csv:row1140 comp_price_id=1139
 INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note)
