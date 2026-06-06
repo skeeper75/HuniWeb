@@ -171,13 +171,77 @@
 
 | # | 항목 | 상태 | 필요 결정/입력 |
 |---|------|------|---------------|
-| F-1 🟡 | **고정가 비표준 규격 siz** | 미해소 | 5x5/5x7/8x8/8x10(레더아트액자)·300*600/900*1200(족자)·600x1800(PET/메쉬배너)·290x90~590x390(아크릴스티커)·150x300/180x420(미니배너) — 라이브 siz 후보 탐색·등록 필요(좌표 발명 금지). 표준 A시리즈(A1~A5)는 기존 재사용. |
+| F-1 🟢 | **고정가 비표준 규격 siz** | **RESOLVED (§6.5)** | 5x5/5x7/8x8/8x10/300x600/900x1200/600x1800/290x90~590x390/150x300/180x420 — **전건 라이브 siz 실존 확증**(live SELECT): 5x5=SIZ_000304·5x7=SIZ_000306·8x8=SIZ_000308·8x10=SIZ_000310·300x600=SIZ_000319·900x1200=SIZ_000320·600x1800=SIZ_000321·290x90=SIZ_000324·290x190=SIZ_000325·390x290=SIZ_000326·590x390=SIZ_000327·150x300=SIZ_000028·180x420=SIZ_000328·A1=SIZ_000293. **신규 등록 0**. 고정가 자율 적재가능. |
 | F-2 🟡 | **시트커팅/아크릴스티커 색상축** | 부분해소 | 무광"(화이트/블랙)"·유광"(화이트/블랙)"·미러"(골드/실버)"는 **소재명에 색상 합성**(단일 가격행) → 색상 분리 단가 없음. round-2 mat variant(#6 결함큐)와 연계. 색상별 동일가면 mat_cd 무관 단일 적재. |
 | F-3 🟡 | **REVERSED 29종 siz 재사용 여부** | 미해소 | POSTER 2 + ACRYL 27이 라이브 역방향(HxW)만 존재. 직접입력형이라 면적동일 시 재사용 정당 가능 vs 의미축 보존. `_acryl_siz_match.csv`(round-2) 참조. 후니 결정. |
 | F-4 🟡 | **GUK4/실사 코팅포함가 합가** | 정합(규칙④) | 실사 note `완제품가[코팅포함가]` = 합가 그대로 적재(분해·재합산 금지). 추가 결정 불요, 확인만. |
 | F-5 🟢 | **폼보드/포맥스/시트커팅/아크릴스티커 raw 재파싱** | 불요 | B11 concat·B27 raw영역에서 L1으로 전량 복구. raw xlsx 재파싱 불필요(값 100% 보존 확인). |
 | F-6 🟡 | **현수막 가공옵션명/추가옵션명 컬럼** | 별도처리 | B26/B27 trailing 컬럼(가공옵션명·추가옵션명)은 면적 width 아님 → grid 추출서 제외(정상). 별도 add-on 옵션으로 처리 필요(본 정정 범위 외). |
 | F-7 🟡 | **실사 11 분류 = 추론** | 후니 확인 | 면적매트릭스 = 실사 11(PRD_000118~128)은 후니 명시 아닌 추론(고정가 15만 후니 명시 확정). block 구조(B01~B11 = [세로][가로] grid)가 강한 증거이나 후니 확인 1건. |
+
+---
+
+## 6.5 고정가 15 적재 매핑 확정 — siz 전건 라이브 재사용 (F-1 해소·자율 적재가능)
+
+> **갱신(2026-06-06, dbm-mapping-designer)**: F-1 플래그(고정가 비표준 규격 siz)를 **라이브 SELECT 검증으로 전건 해소**했다. 73 cells의 모든 규격옵션이 **라이브에 이미 존재하는 siz_cd로 매핑** → 신규 siz 등록 **0건**. 고정가형 15는 **siz 의존성 없이 자율 적재 가능**(면적매트릭스 211 siz 등록 대기와 무관하게 독립 GO).
+
+### 6.5.1 규격옵션 → 라이브 siz 매핑표 (search-before-mint, 전건 EXACT 재사용, 라이브 SELECT 확증)
+
+| 규격옵션 | siz_cd | siz_nm(라이브) | work WxH | 검증 |
+|---------|--------|---------------|----------|------|
+| A1 | **SIZ_000293** | A1(594x841mm) | 594x841 | live SELECT ✅ (A1 명시 엔트리. SIZ_000294 `594x841` 동치이나 A2~A5 letter-name 컨벤션 정합상 SIZ_000293 선택) |
+| A2 | SIZ_000317 | A2 | 420x594 | live SELECT ✅ |
+| A3 | SIZ_000315 | A3 | 297x420 | live SELECT ✅ |
+| A4 | SIZ_000258 | A4 | 210x297 | live SELECT ✅ |
+| A5 | SIZ_000426 | A5 | 148x210 | live SELECT ✅ |
+| 5x5 | SIZ_000304 | 5x5(127x127mm) | 127x127 | live SELECT ✅ |
+| 5x7 | SIZ_000306 | 5x7(127x178mm) | 127x178 | live SELECT ✅ |
+| 8x8 | SIZ_000308 | 8x8(203x203mm) | 203x203 | live SELECT ✅ |
+| 8x10 | SIZ_000310 | 8x10(203x254mm) | 203x254 | live SELECT ✅ |
+| 150x300 | SIZ_000028 | 150x300 | 152x302 | live SELECT ✅ |
+| 180x420 | SIZ_000328 | 180x420 | 180x420 | live SELECT ✅ |
+| 290x90 | SIZ_000324 | 290x90 | 290x90 | live SELECT ✅ |
+| 290x190 | SIZ_000325 | 290x190 | 290x190 | live SELECT ✅ |
+| 390x290 | SIZ_000326 | 390x290 | 390x290 | live SELECT ✅ |
+| 590x390 | SIZ_000327 | 590x390 | 590x390 | live SELECT ✅ |
+| 600x1800 | SIZ_000321 | 600x1800 | 600x1800 | live SELECT ✅ (PET배너/메쉬배너) |
+| 300x600 (300*600) | SIZ_000319 | 300x600 | 300x600 | live SELECT ✅ (족자) |
+| 900x1200 (900*1200) | SIZ_000320 | 900x1200 | 900x1200 | live SELECT ✅ (족자) |
+
+→ **18 distinct siz_cd, 전건 use_yn=Y 라이브 실존. 신규 등록 0. 발명 0.** F-1 RESOLVED.
+
+### 6.5.2 색상옵션 처리 (폼보드/포맥스 화이트/검정 — distinction 보존)
+
+- **라이브 board-color material 탐색 결과**: `t_mat_materials`에 폼보드/포맥스 **전용 색상 자재 부재**(MAT 화이트/블랙은 면지·링·아크릴·파우치 등 타용도 — board 귀속 불가). → 작업지시대로 **per-색상 comp_cd** 채택.
+- **모델링**: 색상 = board 색상 = 별도 차원. 화이트/검정을 **comp_cd로 분리**(가격이 색상별로 다름 — 화이트 7000 vs 검정 8500 등). `mat_cd` 차원 미사용(적합 자재 부재).
+  - 폼보드 → `COMP_FOAMBOARD_WHITE`(A3/A2/A1: 7000/12000/20000) + `COMP_FOAMBOARD_BLACK`(8500/14000/24000)
+  - 포맥스보드 → `COMP_FOMEXBOARD_WHITE`(8500/13000/23000) + `COMP_FOMEXBOARD_BLACK`(10000/16000/30000)
+- **구CSV 오라벨 정정**: round-2 구 `t_prc_component_prices.csv`는 포맥스를 `FOMEXBOARD_WHITE3MM`/`_WHITE5MM`(두께축)로 모델 → **재추출 권위(A3/A2/A1×화이트/검정 색상축)와 불일치**. WHITE5MM 가격(10000/16000/30000)은 실제 **검정(추가)** 컬럼 → `COMP_FOMEXBOARD_BLACK`로 정정. 두께 표기 폐기, 색상 distinction 정정 보존.
+- **시트커팅/아크릴스티커 색상**: 무광(화이트/블랙)·유광(화이트/블랙)은 **색상별 동일가** → 단일 comp_cd, mat 무관(단가 분기 없음, F-2 정합). 단 미러(골드/실버)는 유광과 가격 상이 → `COMP_POSTER_ACRYLSTK_MIRROR` 별도 comp(유광 9000~ vs 미러 11000~). 무광 vs 홀로그램도 별도 comp(가격 상이).
+
+### 6.5.3 고정가형 formula 설계 (PRF_POSTER_FIXED 오바인딩 대체)
+
+- **frm_typ_cd = FRM_TYPE.02 단순형**(라이브 실존 2종 .01 합산형/.02 단순형 중 fixed=단순형). "면적-좌표" `PRF_POSTER_FIXED` 단일 오바인딩을 **제품별 고정가형 공식 15종**으로 대체.
+- **모델**: 판매가 = `component_prices` 룩업 by (siz=규격, min_qty=수량)[+색상 comp_cd]. 면적 무관(룩업 only). `formula_components.addtn_yn=N`(합산 아님, 단일 comp 룩업). **수량스케일/할인은 공식 외부**(규칙⑧ — 미니류 5단 수량구간은 min_qty 차원, 액자/배너 13종은 qty=1; round-1 구간할인은 별도 적용단).
+- 산출: `fixedprice-formulas.csv` = 15 price_formulas + 17 formula_components(폼/포맥스 화이트+검정 split 2추가) + 15 product_price_formulas 바인딩. 검증: comp↔formula 양방향 orphan 0, frm_typ 전건 FRM_TYPE.02.
+
+### 6.5.4 폐기한 오좌표 placeholder (10건 → 라이브 siz 재사용으로 정상화)
+
+| 폐기 placeholder siz_cd | comp_cd | 정정 siz_cd |
+|------------------------|---------|------------|
+| SIZ_PENDING_POSTER_A1 (×5) | FRAMELESS_WOOD / JOKJA / FOAMBOARD_WHITE / FOAMBOARD_BLACK / FOMEXBOARD(W/B 2건) | **SIZ_000293** |
+| SIZ_PENDING_POSTER_5x5 | LEATHER_FRAME | SIZ_000304 |
+| SIZ_PENDING_POSTER_5x7 | LEATHER_FRAME | SIZ_000306 |
+| SIZ_PENDING_POSTER_8x8 | LEATHER_FRAME | SIZ_000308 |
+| SIZ_PENDING_POSTER_8x10 | LEATHER_FRAME | SIZ_000310 |
+
+→ 구 `02_mapping/load_price/t_prc_component_prices.csv`의 **고정가 15 관련 SIZ_PENDING_POSTER 10행 전량 폐기**, 라이브 실 siz로 교체. (정정본 = `fixedprice-component-prices.csv`)
+
+### 6.5.5 결론
+
+- **고정가 15 siz 전부 라이브 재사용, 신규등록 0, 자율 적재가능.**
+- 73 cells → `t_prc_component_prices` 73행 매핑 완료(natural-key 8컬럼 중복 0, C-2 PASS). 좌표 siz 211 등록(면적매트릭스 track) 대기와 **독립** — 고정가는 siz 블로커 없이 즉시 적재 가능.
+- 잔여(고정가 외 track 공통, 본 정정의 신규 블로커 아님): ① `PRC_COMPONENT_TYPE.06 완제품비` 코드행 미등록(규칙⑩, code-row INSERT 제안) ② 17 comp_cd 신규(price_components INSERT, DB 미적재 정상). 둘 다 dbm-load-builder/dbm-ddl-proposer가 적재본 조립 시 코드행 선적재로 처리.
 
 ---
 
@@ -189,6 +253,9 @@
   - 본 문서 `02_mapping/price-correction-poster-sign.md`
   - `02_mapping/load_price_correction/fixedprice-qty-spec-reextract.csv` (고정가 15제품 [수량][규격] 73 cells)
   - `02_mapping/load_price_correction/areamatrix-siz-registration.csv` (면적 POSTER+ACRYL 308 distinct 좌표 siz, search-before-mint 상태)
+  - **`02_mapping/load_price_correction/fixedprice-component-prices.csv`** (적재용 component_prices 73행 — siz_cd 전건 라이브 해소, 색상 per-comp_cd, 완제품비.06)
+  - **`02_mapping/load_price_correction/fixedprice-formulas.csv`** (고정가형 formula 15 + formula_components 17 + product 바인딩 15, FRM_TYPE.02 단순형)
+- **갱신 시 라이브 SELECT 1회 실행**(siz 18종 + comp_cd/code 존재 확인, read-only). INSERT/UPDATE/DDL/COMMIT 0. 비밀번호 미출력.
 
 ## 부록 A. 재현 명령
 - 고정가 재추출: `06_extract/price-poster-sign-l1.csv` 의 B13/B15/B17/B19/B21/B23/B25/B29/B31(clean) + B11 concat(폼보드/포맥스) + B27 r286-299(시트커팅/아크릴스티커).
