@@ -1,0 +1,7 @@
+-- capture-inserted-keys.sql — 현재 commit 트랜잭션이 새로 INSERT 한 PK 키 캡처(가격)
+-- 생성: gen_safety_sql.py (손편집 금지). 적재 SQL 미변경(멱등성 보존).
+-- apply.sh commit 모드가 \i 적재 직후·COMMIT 직전에 같은 트랜잭션에서 실행.
+-- apply.sh 가 이 COPY 앞뒤로 \o <keys.csv> / \o 를 주입 → 데이터만 파일로 라우팅.
+-- 식별: xmin = pg_current_xact_id()::xid → 선존 코드행(ON CONFLICT 스킵) 제외.
+COPY (SELECT 't_prd_product_price_formulas' AS tbl, 'prd_cd,frm_cd' AS pk_cols, prd_cd::text || '|' || frm_cd::text AS pk_vals FROM t_prd_product_price_formulas WHERE xmin = pg_current_xact_id()::xid UNION ALL SELECT 't_prc_component_prices' AS tbl, 'comp_price_id' AS pk_cols, comp_price_id::text AS pk_vals FROM t_prc_component_prices WHERE xmin = pg_current_xact_id()::xid UNION ALL SELECT 't_prc_formula_components' AS tbl, 'frm_cd,comp_cd' AS pk_cols, frm_cd::text || '|' || comp_cd::text AS pk_vals FROM t_prc_formula_components WHERE xmin = pg_current_xact_id()::xid UNION ALL SELECT 't_prc_price_components' AS tbl, 'comp_cd' AS pk_cols, comp_cd::text AS pk_vals FROM t_prc_price_components WHERE xmin = pg_current_xact_id()::xid UNION ALL SELECT 't_prc_price_formulas' AS tbl, 'frm_cd' AS pk_cols, frm_cd::text AS pk_vals FROM t_prc_price_formulas WHERE xmin = pg_current_xact_id()::xid UNION ALL SELECT 't_cod_base_codes' AS tbl, 'cod_cd' AS pk_cols, cod_cd::text AS pk_vals FROM t_cod_base_codes WHERE xmin = pg_current_xact_id()::xid AND cod_cd = 'PRC_COMPONENT_TYPE.06' ORDER BY tbl, pk_vals) TO STDOUT WITH (FORMAT csv, HEADER true);
+

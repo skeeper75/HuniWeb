@@ -11,10 +11,15 @@
 #  - ON_ERROR_STOP=1: 임의 문 실패 시 트랜잭션 abort → 전체 롤백(R2 원자성).
 #  - 멱등성(R1): apply.sql 의 모든 INSERT 는 ON CONFLICT 가드. 2회 실행해도 2회차 행변경 0.
 #
+# COMMIT-안전(되돌림): commit 모드에서 runts 를 주면 적재 직후·COMMIT 직전에 같은 트랜잭션 안에서
+# capture-inserted-keys.sql 을 실행해 신규행 PK 를 inserted_keys_<runts>.csv 로 캡처(언두 대비).
+# 적재 SQL(00~05) 자체는 일절 변경하지 않는다(멱등성 보존).
+#
 # 사용:
-#   ./apply.sh            # DRY-RUN(롤백). 적재 시도 후 무조건 ROLLBACK.
-#   ./apply.sh dryrun     # 동일(명시).
-#   ./apply.sh commit     # 영구 적재(인간 승인 시에만). 본 하네스 자동 실행 금지.
+#   ./apply.sh                     # DRY-RUN(롤백). 적재 시도 후 무조건 ROLLBACK.
+#   ./apply.sh dryrun              # 동일(명시).
+#   ./apply.sh commit              # 영구 적재(인간 승인 시에만). 본 하네스 자동 실행 금지.
+#   ./apply.sh commit <runts>      # 영구 적재 + 신규키 캡처(언두 대비). 예: ./apply.sh commit 20260606T1530
 set -euo pipefail
 
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -39,13 +44,24 @@ set +a
 : "${RAILWAY_DB_PASSWORD:?RAILWAY_DB_PASSWORD 미설정}"
 
 MODE="${1:-dryrun}"
+RUNTS="${2:-}"
 export PGPASSWORD="$RAILWAY_DB_PASSWORD"   # 환경변수로만 전달, echo 금지
 
 run_psql() {
-  # apply.sql(BEGIN…) 실행 후 종결문($1: ROLLBACK|COMMIT)을 같은 세션에 이어 주입 → 단일 트랜잭션.
-  # 행 영향 카운트는 \i 내부 \echo + psql 결과로 출력.
+  # apply.sql(BEGIN…) → [commit+runts 시 capture-inserted-keys.sql] → 종결문($1)을 같은 세션에 주입.
+  # 단일 트랜잭션. 캡처는 적재 직후·COMMIT 직전에 신규행 PK 를 inserted_keys_<runts>.csv 로 떠둔다.
   local terminator="$1"
-  { cat "$HERE/apply.sql"; echo "$terminator;"; } | \
+  local keys_csv="$HERE/inserted_keys_${RUNTS}.csv"
+  {
+    cat "$HERE/apply.sql"
+    if [ "$terminator" = "COMMIT" ] && [ -n "$RUNTS" ]; then
+      # 캡처 COPY ... TO STDOUT 의 출력만 keys_csv 로 라우팅(\o 리터럴 경로). \echo 잡음 미포함.
+      echo "\\o $keys_csv"
+      cat "$HERE/capture-inserted-keys.sql"
+      echo "\\o"
+    fi
+    echo "$terminator;"
+  } | \
     psql -h "$RAILWAY_DB_HOST" -p "$RAILWAY_DB_PORT" -U "$RAILWAY_DB_USER" \
          -d "$RAILWAY_DB_NAME" -v ON_ERROR_STOP=1 -f -
 }
@@ -58,7 +74,11 @@ case "$MODE" in
     echo "[DRY-RUN] 완료 — ROLLBACK. 영구 변경 0."
     ;;
   commit)
-    echo "[COMMIT MODE] 인간 승인 적재 — 영구 INSERT. (본 하네스 자동 실행 금지)"
+    if [ -n "$RUNTS" ]; then
+      echo "[COMMIT MODE] 인간 승인 적재 — 영구 INSERT + 신규키 캡처(runts=$RUNTS, 언두 대비)."
+    else
+      echo "[COMMIT MODE] 인간 승인 적재 — 영구 INSERT. (runts 미지정 → 신규키 캡처 생략)"
+    fi
     run_psql "COMMIT"
     echo "[COMMIT MODE] 완료 — COMMIT."
     ;;

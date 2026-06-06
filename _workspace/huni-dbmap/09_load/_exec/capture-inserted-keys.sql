@@ -1,0 +1,12 @@
+-- capture-inserted-keys.sql — 현재 commit 트랜잭션이 새로 INSERT 한 PK 키 캡처
+-- 생성: gen_safety_sql.py (손편집 금지). 적재 SQL 미변경(멱등성 보존).
+-- apply.sh commit 모드가 \i 적재 직후·COMMIT 직전에 같은 트랜잭션에서 실행.
+-- apply.sh 가 이 COPY 앞뒤로 \o <keys.csv> / \o 를 주입 → 데이터만 파일로 라우팅.
+-- 식별: xmin = pg_current_xact_id()::xid → ON CONFLICT 로 스킵된 선존행 제외(정확).
+--
+-- [핵심 보정] thickness UPDATE-set(90)은 mat_cd(=PK)를 바꾼다 → 갱신된 행의 xmin 이
+-- 현재 트랜잭션이 되어 'INSERT 신규행'처럼 보인다. 이를 INSERT-언두 DELETE 대상에서
+-- 제외해야 한다(이 행은 UPDATE 이므로 before-image UPDATE-복원이 담당). 아래 t_prd_
+-- product_materials 캡처는 thickness NEW-타깃 (prd,NEW_mat,usage)을 NOT IN 으로 배제.
+COPY (SELECT 't_prd_product_bundle_qtys' AS tbl, 'prd_cd,bdl_qty' AS pk_cols, prd_cd::text || '|' || bdl_qty::text AS pk_vals FROM t_prd_product_bundle_qtys WHERE xmin = pg_current_xact_id()::xid UNION ALL SELECT 't_prd_product_processes' AS tbl, 'prd_cd,proc_cd' AS pk_cols, prd_cd::text || '|' || proc_cd::text AS pk_vals FROM t_prd_product_processes WHERE xmin = pg_current_xact_id()::xid UNION ALL SELECT 't_prd_product_materials' AS tbl, 'prd_cd,mat_cd,usage_cd' AS pk_cols, prd_cd::text || '|' || mat_cd::text || '|' || usage_cd::text AS pk_vals FROM t_prd_product_materials WHERE xmin = pg_current_xact_id()::xid AND (prd_cd, mat_cd, usage_cd) NOT IN (('PRD_000146','MAT_000043','USAGE.07'), ('PRD_000147','MAT_000043','USAGE.07'), ('PRD_000148','MAT_000043','USAGE.07'), ('PRD_000149','MAT_000043','USAGE.07'), ('PRD_000150','MAT_000043','USAGE.07'), ('PRD_000151','MAT_000043','USAGE.07'), ('PRD_000152','MAT_000043','USAGE.07'), ('PRD_000154','MAT_000043','USAGE.07'), ('PRD_000155','MAT_000043','USAGE.07'), ('PRD_000156','MAT_000043','USAGE.07'), ('PRD_000157','MAT_000043','USAGE.07'), ('PRD_000158','MAT_000043','USAGE.07'), ('PRD_000159','MAT_000043','USAGE.07'), ('PRD_000160','MAT_000043','USAGE.07'), ('PRD_000161','MAT_000043','USAGE.07'), ('PRD_000162','MAT_000043','USAGE.07'), ('PRD_000163','MAT_000042','USAGE.07'), ('PRD_000164','MAT_000044','USAGE.07'), ('PRD_000165','MAT_000044','USAGE.07'), ('PRD_000166','MAT_000043','USAGE.07')) UNION ALL SELECT 't_siz_sizes' AS tbl, 'siz_cd' AS pk_cols, siz_cd::text AS pk_vals FROM t_siz_sizes WHERE xmin = pg_current_xact_id()::xid UNION ALL SELECT 't_proc_processes' AS tbl, 'proc_cd' AS pk_cols, proc_cd::text AS pk_vals FROM t_proc_processes WHERE xmin = pg_current_xact_id()::xid ORDER BY tbl, pk_vals) TO STDOUT WITH (FORMAT csv, HEADER true);
+
