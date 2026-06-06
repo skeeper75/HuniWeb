@@ -100,4 +100,7 @@ print("=== 적재본 조립 완료 (즉시 적재가능 행만) ===")
 for k in sorted(stats):
     print(f"  {k}: {stats[k]} rows")
 print(f"--- component_prices: insertable={len(insertable)} / blocked(placeholder)={len(blocked)} / total={cp_total}")
+# 즉시 적재가능 합계 = 전 적재 CSV 행수 합(실제 산출값에서 도출 — 매니페스트 §0/§3-1 합계와 정합)
+grand_total = sum(stats.values())
+print(f"--- 즉시 적재가능 합계(전 6 load CSV 행수 합) = {grand_total} (매니페스트 §0/§3-1 '즉시 적재가능' 값)")
 print("--- 차단 행은 적재본에서 제외(blocked-and-gaps.md 참조)")
