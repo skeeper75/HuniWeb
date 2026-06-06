@@ -1,0 +1,921 @@
+{
+  "pass_count": 15,
+  "total": 15,
+  "sheets": {
+    "디지털인쇄비": {
+      "slug": "digital-print-price",
+      "overall": true,
+      "gates": {
+        "cell_count": {
+          "orig_nonempty": 1092,
+          "ext_records": 1092,
+          "dup_cells": 0,
+          "pass": true
+        },
+        "nonempty_preserve": {
+          "orig": 1092,
+          "preserved": 1092,
+          "missing": 0,
+          "mismatch": 0,
+          "rate_pct": 100.0,
+          "missing_samples": [],
+          "mismatch_samples": [],
+          "pass": true
+        },
+        "roundtrip": {
+          "diff": 0,
+          "samples": [],
+          "pass": true
+        },
+        "col_coverage": {
+          "orig_cols": 15,
+          "ext_cols": 15,
+          "missing_cols": [],
+          "pass": true
+        },
+        "row_coverage": {
+          "orig_rows": 113,
+          "ext_rows": 113,
+          "missing_rows": [],
+          "pass": true
+        },
+        "merge_preserve": {
+          "orig_merges": 11,
+          "ext_merges": 11,
+          "pass": true
+        },
+        "formula_preserve": {
+          "orig": 0,
+          "ext": 0,
+          "pass": true
+        },
+        "comment_preserve": {
+          "orig": 0,
+          "ext": 0,
+          "pass": true
+        },
+        "hidden_preserve": {
+          "orig_hidden_cols": [],
+          "ext_hidden_cols": [],
+          "orig_hidden_rows_data": [],
+          "ext_hidden_rows": [],
+          "pass": true
+        }
+      }
+    },
+    "코팅": {
+      "slug": "coating",
+      "overall": true,
+      "gates": {
+        "cell_count": {
+          "orig_nonempty": 246,
+          "ext_records": 246,
+          "dup_cells": 0,
+          "pass": true
+        },
+        "nonempty_preserve": {
+          "orig": 246,
+          "preserved": 246,
+          "missing": 0,
+          "mismatch": 0,
+          "rate_pct": 100.0,
+          "missing_samples": [],
+          "mismatch_samples": [],
+          "pass": true
+        },
+        "roundtrip": {
+          "diff": 0,
+          "samples": [],
+          "pass": true
+        },
+        "col_coverage": {
+          "orig_cols": 5,
+          "ext_cols": 5,
+          "missing_cols": [],
+          "pass": true
+        },
+        "row_coverage": {
+          "orig_rows": 52,
+          "ext_rows": 52,
+          "missing_rows": [],
+          "pass": true
+        },
+        "merge_preserve": {
+          "orig_merges": 6,
+          "ext_merges": 6,
+          "pass": true
+        },
+        "formula_preserve": {
+          "orig": 0,
+          "ext": 0,
+          "pass": true
+        },
+        "comment_preserve": {
+          "orig": 0,
+          "ext": 0,
+          "pass": true
+        },
+        "hidden_preserve": {
+          "orig_hidden_cols": [],
+          "ext_hidden_cols": [],
+          "orig_hidden_rows_data": [],
+          "ext_hidden_rows": [],
+          "pass": true
+        }
+      }
+    },
+    "접지옵션": {
+      "slug": "folding",
+      "overall": true,
+      "gates": {
+        "cell_count": {
+          "orig_nonempty": 446,
+          "ext_records": 446,
+          "dup_cells": 0,
+          "pass": true
+        },
+        "nonempty_preserve": {
+          "orig": 446,
+          "preserved": 446,
+          "missing": 0,
+          "mismatch": 0,
+          "rate_pct": 100.0,
+          "missing_samples": [],
+          "mismatch_samples": [],
+          "pass": true
+        },
+        "roundtrip": {
+          "diff": 0,
+          "samples": [],
+          "pass": true
+        },
+        "col_coverage": {
+          "orig_cols": 5,
+          "ext_cols": 5,
+          "missing_cols": [],
+          "pass": true
+        },
+        "row_coverage": {
+          "orig_rows": 101,
+          "ext_rows": 101,
+          "missing_rows": [],
+          "pass": true
+        },
+        "merge_preserve": {
+          "orig_merges": 2,
+          "ext_merges": 2,
+          "pass": true
+        },
+        "formula_preserve": {
+          "orig": 0,
+          "ext": 0,
+          "pass": true
+        },
+        "comment_preserve": {
+          "orig": 0,
+          "ext": 0,
+          "pass": true
+        },
+        "hidden_preserve": {
+          "orig_hidden_cols": [],
+          "ext_hidden_cols": [],
+          "orig_hidden_rows_data": [],
+          "ext_hidden_rows": [],
+          "pass": true
+        }
+      }
+    },
+    "인쇄후가공": {
+      "slug": "post-process",
+      "overall": true,
+      "gates": {
+        "cell_count": {
+          "orig_nonempty": 320,
+          "ext_records": 320,
+          "dup_cells": 0,
+          "pass": true
+        },
+        "nonempty_preserve": {
+          "orig": 320,
+          "preserved": 320,
+          "missing": 0,
+          "mismatch": 0,
+          "rate_pct": 100.0,
+          "missing_samples": [],
+          "mismatch_samples": [],
+          "pass": true
+        },
+        "roundtrip": {
+          "diff": 0,
+          "samples": [],
+          "pass": true
+        },
+        "col_coverage": {
+          "orig_cols": 8,
+          "ext_cols": 8,
+          "missing_cols": [],
+          "pass": true
+        },
+        "row_coverage": {
+          "orig_rows": 51,
+          "ext_rows": 51,
+          "missing_rows": [],
+          "pass": true
+        },
+        "merge_preserve": {
+          "orig_merges": 8,
+          "ext_merges": 8,
+          "pass": true
+        },
+        "formula_preserve": {
+          "orig": 0,
+          "ext": 0,
+          "pass": true
+        },
+        "comment_preserve": {
+          "orig": 0,
+          "ext": 0,
+          "pass": true
+        },
+        "hidden_preserve": {
+          "orig_hidden_cols": [],
+          "ext_hidden_cols": [],
+          "orig_hidden_rows_data": [],
+          "ext_hidden_rows": [],
+          "pass": true
+        }
+      }
+    },
+    "커팅타공": {
+      "slug": "cutting",
+      "overall": true,
+      "gates": {
+        "cell_count": {
+          "orig_nonempty": 162,
+          "ext_records": 162,
+          "dup_cells": 0,
+          "pass": true
+        },
+        "nonempty_preserve": {
+          "orig": 162,
+          "preserved": 162,
+          "missing": 0,
+          "mismatch": 0,
+          "rate_pct": 100.0,
+          "missing_samples": [],
+          "mismatch_samples": [],
+          "pass": true
+        },
+        "roundtrip": {
+          "diff": 0,
+          "samples": [],
+          "pass": true
+        },
+        "col_coverage": {
+          "orig_cols": 7,
+          "ext_cols": 7,
+          "missing_cols": [],
+          "pass": true
+        },
+        "row_coverage": {
+          "orig_rows": 64,
+          "ext_rows": 64,
+          "missing_rows": [],
+          "pass": true
+        },
+        "merge_preserve": {
+          "orig_merges": 6,
+          "ext_merges": 6,
+          "pass": true
+        },
+        "formula_preserve": {
+          "orig": 0,
+          "ext": 0,
+          "pass": true
+        },
+        "comment_preserve": {
+          "orig": 0,
+          "ext": 0,
+          "pass": true
+        },
+        "hidden_preserve": {
+          "orig_hidden_cols": [],
+          "ext_hidden_cols": [],
+          "orig_hidden_rows_data": [],
+          "ext_hidden_rows": [],
+          "pass": true
+        }
+      }
+    },
+    "스티커": {
+      "slug": "sticker-price",
+      "overall": true,
+      "gates": {
+        "cell_count": {
+          "orig_nonempty": 834,
+          "ext_records": 834,
+          "dup_cells": 0,
+          "pass": true
+        },
+        "nonempty_preserve": {
+          "orig": 834,
+          "preserved": 834,
+          "missing": 0,
+          "mismatch": 0,
+          "rate_pct": 100.0,
+          "missing_samples": [],
+          "mismatch_samples": [],
+          "pass": true
+        },
+        "roundtrip": {
+          "diff": 0,
+          "samples": [],
+          "pass": true
+        },
+        "col_coverage": {
+          "orig_cols": 20,
+          "ext_cols": 20,
+          "missing_cols": [],
+          "pass": true
+        },
+        "row_coverage": {
+          "orig_rows": 72,
+          "ext_rows": 72,
+          "missing_rows": [],
+          "pass": true
+        },
+        "merge_preserve": {
+          "orig_merges": 12,
+          "ext_merges": 12,
+          "pass": true
+        },
+        "formula_preserve": {
+          "orig": 0,
+          "ext": 0,
+          "pass": true
+        },
+        "comment_preserve": {
+          "orig": 0,
+          "ext": 0,
+          "pass": true
+        },
+        "hidden_preserve": {
+          "orig_hidden_cols": [],
+          "ext_hidden_cols": [],
+          "orig_hidden_rows_data": [],
+          "ext_hidden_rows": [],
+          "pass": true
+        }
+      }
+    },
+    "합판도무송스티커": {
+      "slug": "gangpan-sticker",
+      "overall": true,
+      "gates": {
+        "cell_count": {
+          "orig_nonempty": 505,
+          "ext_records": 505,
+          "dup_cells": 0,
+          "pass": true
+        },
+        "nonempty_preserve": {
+          "orig": 505,
+          "preserved": 505,
+          "missing": 0,
+          "mismatch": 0,
+          "rate_pct": 100.0,
+          "missing_samples": [],
+          "mismatch_samples": [],
+          "pass": true
+        },
+        "roundtrip": {
+          "diff": 0,
+          "samples": [],
+          "pass": true
+        },
+        "col_coverage": {
+          "orig_cols": 29,
+          "ext_cols": 29,
+          "missing_cols": [],
+          "pass": true
+        },
+        "row_coverage": {
+          "orig_rows": 24,
+          "ext_rows": 24,
+          "missing_rows": [],
+          "pass": true
+        },
+        "merge_preserve": {
+          "orig_merges": 40,
+          "ext_merges": 40,
+          "pass": true
+        },
+        "formula_preserve": {
+          "orig": 0,
+          "ext": 0,
+          "pass": true
+        },
+        "comment_preserve": {
+          "orig": 0,
+          "ext": 0,
+          "pass": true
+        },
+        "hidden_preserve": {
+          "orig_hidden_cols": [],
+          "ext_hidden_cols": [],
+          "orig_hidden_rows_data": [],
+          "ext_hidden_rows": [],
+          "pass": true
+        }
+      }
+    },
+    "봉투제작": {
+      "slug": "envelope",
+      "overall": true,
+      "gates": {
+        "cell_count": {
+          "orig_nonempty": 60,
+          "ext_records": 60,
+          "dup_cells": 0,
+          "pass": true
+        },
+        "nonempty_preserve": {
+          "orig": 60,
+          "preserved": 60,
+          "missing": 0,
+          "mismatch": 0,
+          "rate_pct": 100.0,
+          "missing_samples": [],
+          "mismatch_samples": [],
+          "pass": true
+        },
+        "roundtrip": {
+          "diff": 0,
+          "samples": [],
+          "pass": true
+        },
+        "col_coverage": {
+          "orig_cols": 9,
+          "ext_cols": 9,
+          "missing_cols": [],
+          "pass": true
+        },
+        "row_coverage": {
+          "orig_rows": 8,
+          "ext_rows": 8,
+          "missing_rows": [],
+          "pass": true
+        },
+        "merge_preserve": {
+          "orig_merges": 5,
+          "ext_merges": 5,
+          "pass": true
+        },
+        "formula_preserve": {
+          "orig": 0,
+          "ext": 0,
+          "pass": true
+        },
+        "comment_preserve": {
+          "orig": 0,
+          "ext": 0,
+          "pass": true
+        },
+        "hidden_preserve": {
+          "orig_hidden_cols": [],
+          "ext_hidden_cols": [],
+          "orig_hidden_rows_data": [],
+          "ext_hidden_rows": [],
+          "pass": true
+        }
+      }
+    },
+    "명함포토카드": {
+      "slug": "namecard-photocard",
+      "overall": true,
+      "gates": {
+        "cell_count": {
+          "orig_nonempty": 262,
+          "ext_records": 262,
+          "dup_cells": 0,
+          "pass": true
+        },
+        "nonempty_preserve": {
+          "orig": 262,
+          "preserved": 262,
+          "missing": 0,
+          "mismatch": 0,
+          "rate_pct": 100.0,
+          "missing_samples": [],
+          "mismatch_samples": [],
+          "pass": true
+        },
+        "roundtrip": {
+          "diff": 0,
+          "samples": [],
+          "pass": true
+        },
+        "col_coverage": {
+          "orig_cols": 6,
+          "ext_cols": 6,
+          "missing_cols": [],
+          "pass": true
+        },
+        "row_coverage": {
+          "orig_rows": 103,
+          "ext_rows": 103,
+          "missing_rows": [],
+          "pass": true
+        },
+        "merge_preserve": {
+          "orig_merges": 22,
+          "ext_merges": 22,
+          "pass": true
+        },
+        "formula_preserve": {
+          "orig": 0,
+          "ext": 0,
+          "pass": true
+        },
+        "comment_preserve": {
+          "orig": 0,
+          "ext": 0,
+          "pass": true
+        },
+        "hidden_preserve": {
+          "orig_hidden_cols": [],
+          "ext_hidden_cols": [],
+          "orig_hidden_rows_data": [],
+          "ext_hidden_rows": [],
+          "pass": true
+        }
+      }
+    },
+    "후가공_박(소형)": {
+      "slug": "foil-small",
+      "overall": true,
+      "gates": {
+        "cell_count": {
+          "orig_nonempty": 284,
+          "ext_records": 284,
+          "dup_cells": 0,
+          "pass": true
+        },
+        "nonempty_preserve": {
+          "orig": 284,
+          "preserved": 284,
+          "missing": 0,
+          "mismatch": 0,
+          "rate_pct": 100.0,
+          "missing_samples": [],
+          "mismatch_samples": [],
+          "pass": true
+        },
+        "roundtrip": {
+          "diff": 0,
+          "samples": [],
+          "pass": true
+        },
+        "col_coverage": {
+          "orig_cols": 12,
+          "ext_cols": 12,
+          "missing_cols": [],
+          "pass": true
+        },
+        "row_coverage": {
+          "orig_rows": 44,
+          "ext_rows": 44,
+          "missing_rows": [],
+          "pass": true
+        },
+        "merge_preserve": {
+          "orig_merges": 5,
+          "ext_merges": 5,
+          "pass": true
+        },
+        "formula_preserve": {
+          "orig": 0,
+          "ext": 0,
+          "pass": true
+        },
+        "comment_preserve": {
+          "orig": 0,
+          "ext": 0,
+          "pass": true
+        },
+        "hidden_preserve": {
+          "orig_hidden_cols": [],
+          "ext_hidden_cols": [],
+          "orig_hidden_rows_data": [],
+          "ext_hidden_rows": [],
+          "pass": true
+        }
+      }
+    },
+    "엽서북떡메": {
+      "slug": "postcard-book",
+      "overall": true,
+      "gates": {
+        "cell_count": {
+          "orig_nonempty": 681,
+          "ext_records": 681,
+          "dup_cells": 0,
+          "pass": true
+        },
+        "nonempty_preserve": {
+          "orig": 681,
+          "preserved": 681,
+          "missing": 0,
+          "mismatch": 0,
+          "rate_pct": 100.0,
+          "missing_samples": [],
+          "mismatch_samples": [],
+          "pass": true
+        },
+        "roundtrip": {
+          "diff": 0,
+          "samples": [],
+          "pass": true
+        },
+        "col_coverage": {
+          "orig_cols": 13,
+          "ext_cols": 13,
+          "missing_cols": [],
+          "pass": true
+        },
+        "row_coverage": {
+          "orig_rows": 74,
+          "ext_rows": 74,
+          "missing_rows": [],
+          "pass": true
+        },
+        "merge_preserve": {
+          "orig_merges": 13,
+          "ext_merges": 13,
+          "pass": true
+        },
+        "formula_preserve": {
+          "orig": 0,
+          "ext": 0,
+          "pass": true
+        },
+        "comment_preserve": {
+          "orig": 0,
+          "ext": 0,
+          "pass": true
+        },
+        "hidden_preserve": {
+          "orig_hidden_cols": [],
+          "ext_hidden_cols": [],
+          "orig_hidden_rows_data": [],
+          "ext_hidden_rows": [],
+          "pass": true
+        }
+      }
+    },
+    "제본": {
+      "slug": "binding",
+      "overall": true,
+      "gates": {
+        "cell_count": {
+          "orig_nonempty": 113,
+          "ext_records": 113,
+          "dup_cells": 0,
+          "pass": true
+        },
+        "nonempty_preserve": {
+          "orig": 113,
+          "preserved": 113,
+          "missing": 0,
+          "mismatch": 0,
+          "rate_pct": 100.0,
+          "missing_samples": [],
+          "mismatch_samples": [],
+          "pass": true
+        },
+        "roundtrip": {
+          "diff": 0,
+          "samples": [],
+          "pass": true
+        },
+        "col_coverage": {
+          "orig_cols": 6,
+          "ext_cols": 6,
+          "missing_cols": [],
+          "pass": true
+        },
+        "row_coverage": {
+          "orig_rows": 26,
+          "ext_rows": 26,
+          "missing_rows": [],
+          "pass": true
+        },
+        "merge_preserve": {
+          "orig_merges": 3,
+          "ext_merges": 3,
+          "pass": true
+        },
+        "formula_preserve": {
+          "orig": 0,
+          "ext": 0,
+          "pass": true
+        },
+        "comment_preserve": {
+          "orig": 0,
+          "ext": 0,
+          "pass": true
+        },
+        "hidden_preserve": {
+          "orig_hidden_cols": [],
+          "ext_hidden_cols": [],
+          "orig_hidden_rows_data": [],
+          "ext_hidden_rows": [],
+          "pass": true
+        }
+      }
+    },
+    "후가공_박(대형)": {
+      "slug": "foil-large",
+      "overall": true,
+      "gates": {
+        "cell_count": {
+          "orig_nonempty": 417,
+          "ext_records": 417,
+          "dup_cells": 0,
+          "pass": true
+        },
+        "nonempty_preserve": {
+          "orig": 417,
+          "preserved": 417,
+          "missing": 0,
+          "mismatch": 0,
+          "rate_pct": 100.0,
+          "missing_samples": [],
+          "mismatch_samples": [],
+          "pass": true
+        },
+        "roundtrip": {
+          "diff": 0,
+          "samples": [],
+          "pass": true
+        },
+        "col_coverage": {
+          "orig_cols": 15,
+          "ext_cols": 15,
+          "missing_cols": [],
+          "pass": true
+        },
+        "row_coverage": {
+          "orig_rows": 41,
+          "ext_rows": 41,
+          "missing_rows": [],
+          "pass": true
+        },
+        "merge_preserve": {
+          "orig_merges": 5,
+          "ext_merges": 5,
+          "pass": true
+        },
+        "formula_preserve": {
+          "orig": 0,
+          "ext": 0,
+          "pass": true
+        },
+        "comment_preserve": {
+          "orig": 0,
+          "ext": 0,
+          "pass": true
+        },
+        "hidden_preserve": {
+          "orig_hidden_cols": [],
+          "ext_hidden_cols": [],
+          "orig_hidden_rows_data": [],
+          "ext_hidden_rows": [],
+          "pass": true
+        }
+      }
+    },
+    "아크릴": {
+      "slug": "acrylic-price",
+      "overall": true,
+      "gates": {
+        "cell_count": {
+          "orig_nonempty": 579,
+          "ext_records": 579,
+          "dup_cells": 0,
+          "pass": true
+        },
+        "nonempty_preserve": {
+          "orig": 579,
+          "preserved": 579,
+          "missing": 0,
+          "mismatch": 0,
+          "rate_pct": 100.0,
+          "missing_samples": [],
+          "mismatch_samples": [],
+          "pass": true
+        },
+        "roundtrip": {
+          "diff": 0,
+          "samples": [],
+          "pass": true
+        },
+        "col_coverage": {
+          "orig_cols": 16,
+          "ext_cols": 16,
+          "missing_cols": [],
+          "pass": true
+        },
+        "row_coverage": {
+          "orig_rows": 88,
+          "ext_rows": 88,
+          "missing_rows": [],
+          "pass": true
+        },
+        "merge_preserve": {
+          "orig_merges": 14,
+          "ext_merges": 14,
+          "pass": true
+        },
+        "formula_preserve": {
+          "orig": 81,
+          "ext": 81,
+          "pass": true
+        },
+        "comment_preserve": {
+          "orig": 0,
+          "ext": 0,
+          "pass": true
+        },
+        "hidden_preserve": {
+          "orig_hidden_cols": [],
+          "ext_hidden_cols": [],
+          "orig_hidden_rows_data": [],
+          "ext_hidden_rows": [],
+          "pass": true
+        }
+      }
+    },
+    "포스터사인": {
+      "slug": "poster-sign",
+      "overall": true,
+      "gates": {
+        "cell_count": {
+          "orig_nonempty": 1222,
+          "ext_records": 1222,
+          "dup_cells": 0,
+          "pass": true
+        },
+        "nonempty_preserve": {
+          "orig": 1222,
+          "preserved": 1222,
+          "missing": 0,
+          "mismatch": 0,
+          "rate_pct": 100.0,
+          "missing_samples": [],
+          "mismatch_samples": [],
+          "pass": true
+        },
+        "roundtrip": {
+          "diff": 0,
+          "samples": [],
+          "pass": true
+        },
+        "col_coverage": {
+          "orig_cols": 14,
+          "ext_cols": 14,
+          "missing_cols": [],
+          "pass": true
+        },
+        "row_coverage": {
+          "orig_rows": 258,
+          "ext_rows": 258,
+          "missing_rows": [],
+          "pass": true
+        },
+        "merge_preserve": {
+          "orig_merges": 35,
+          "ext_merges": 35,
+          "pass": true
+        },
+        "formula_preserve": {
+          "orig": 0,
+          "ext": 0,
+          "pass": true
+        },
+        "comment_preserve": {
+          "orig": 0,
+          "ext": 0,
+          "pass": true
+        },
+        "hidden_preserve": {
+          "orig_hidden_cols": [],
+          "ext_hidden_cols": [],
+          "orig_hidden_rows_data": [],
+          "ext_hidden_rows": [],
+          "pass": true
+        }
+      }
+    }
+  }
+}

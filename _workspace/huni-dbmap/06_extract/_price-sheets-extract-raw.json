@@ -1,0 +1,2009 @@
+{
+  "디지털인쇄비": {
+    "sheet": "디지털인쇄비",
+    "slug": "digital-print-price",
+    "max_row": 116,
+    "max_col": 15,
+    "nonempty_cells": 1092,
+    "record_count": 1092,
+    "block_count": 2,
+    "blocks": [
+      {
+        "block_id": "B01",
+        "title": "디지털인쇄 출력비(국4절)",
+        "row_range": [
+          1,
+          60
+        ],
+        "col_range": [
+          "A",
+          "O"
+        ],
+        "header_rows": [
+          2,
+          3
+        ],
+        "data_start_row": 4
+      },
+      {
+        "block_id": "B02",
+        "title": "디지털인쇄 출력비(3절)",
+        "row_range": [
+          61,
+          116
+        ],
+        "col_range": [
+          "A",
+          "O"
+        ],
+        "header_rows": [
+          62,
+          63
+        ],
+        "data_start_row": 64
+      }
+    ],
+    "merged_count": 11,
+    "hidden_cols": [],
+    "hidden_rows": [],
+    "formula_cells": 0,
+    "comment_cells": 0,
+    "out_csv": "price-digital-print-price-l1.csv",
+    "out_meta": "price-digital-print-price-l1-meta.csv"
+  },
+  "코팅": {
+    "sheet": "코팅",
+    "slug": "coating",
+    "max_row": 56,
+    "max_col": 5,
+    "nonempty_cells": 246,
+    "record_count": 246,
+    "block_count": 2,
+    "blocks": [
+      {
+        "block_id": "B01",
+        "title": "코팅(국4절)",
+        "row_range": [
+          1,
+          30
+        ],
+        "col_range": [
+          "A",
+          "E"
+        ],
+        "header_rows": [
+          2,
+          3
+        ],
+        "data_start_row": 4
+      },
+      {
+        "block_id": "B02",
+        "title": "코팅(3절)",
+        "row_range": [
+          31,
+          56
+        ],
+        "col_range": [
+          "A",
+          "E"
+        ],
+        "header_rows": [
+          32,
+          33
+        ],
+        "data_start_row": 34
+      }
+    ],
+    "merged_count": 6,
+    "hidden_cols": [],
+    "hidden_rows": [],
+    "formula_cells": 0,
+    "comment_cells": 0,
+    "out_csv": "price-coating-l1.csv",
+    "out_meta": "price-coating-l1-meta.csv"
+  },
+  "접지옵션": {
+    "sheet": "접지옵션",
+    "slug": "folding",
+    "max_row": 105,
+    "max_col": 5,
+    "nonempty_cells": 446,
+    "record_count": 446,
+    "block_count": 2,
+    "blocks": [
+      {
+        "block_id": "B01",
+        "title": "카드접지 단가 (오시+접지)",
+        "row_range": [
+          1,
+          55
+        ],
+        "col_range": [
+          "A",
+          "E"
+        ],
+        "header_rows": [
+          2,
+          3
+        ],
+        "data_start_row": 4
+      },
+      {
+        "block_id": "B02",
+        "title": "리플렛 접지 단가 (오시+접지)",
+        "row_range": [
+          56,
+          105
+        ],
+        "col_range": [
+          "A",
+          "E"
+        ],
+        "header_rows": [
+          57
+        ],
+        "data_start_row": 58
+      }
+    ],
+    "merged_count": 3,
+    "hidden_cols": [],
+    "hidden_rows": [],
+    "formula_cells": 0,
+    "comment_cells": 0,
+    "out_csv": "price-folding-l1.csv",
+    "out_meta": "price-folding-l1-meta.csv"
+  },
+  "인쇄후가공": {
+    "sheet": "인쇄후가공",
+    "slug": "post-process",
+    "max_row": 57,
+    "max_col": 9,
+    "nonempty_cells": 320,
+    "record_count": 320,
+    "block_count": 5,
+    "blocks": [
+      {
+        "block_id": "B01",
+        "title": "모서리 (귀돌이, 합가)",
+        "row_range": [
+          1,
+          11
+        ],
+        "col_range": [
+          "A",
+          "I"
+        ],
+        "header_rows": [
+          2
+        ],
+        "data_start_row": 3
+      },
+      {
+        "block_id": "B02",
+        "title": "100장당 1000원씩 올립니다.",
+        "row_range": [
+          12,
+          14
+        ],
+        "col_range": [
+          "A",
+          "I"
+        ],
+        "header_rows": [],
+        "data_start_row": null
+      },
+      {
+        "block_id": "B03",
+        "title": "오시 (합가)",
+        "row_range": [
+          15,
+          31
+        ],
+        "col_range": [
+          "A",
+          "I"
+        ],
+        "header_rows": [
+          16
+        ],
+        "data_start_row": 17
+      },
+      {
+        "block_id": "B04",
+        "title": "가변(텍스트)",
+        "row_range": [
+          32,
+          57
+        ],
+        "col_range": [
+          "A",
+          "E"
+        ],
+        "header_rows": [
+          33
+        ],
+        "data_start_row": 34
+      },
+      {
+        "block_id": "B05",
+        "title": "가변(이미지)",
+        "row_range": [
+          32,
+          57
+        ],
+        "col_range": [
+          "F",
+          "I"
+        ],
+        "header_rows": [
+          33
+        ],
+        "data_start_row": 34
+      }
+    ],
+    "merged_count": 9,
+    "hidden_cols": [],
+    "hidden_rows": [],
+    "formula_cells": 0,
+    "comment_cells": 0,
+    "out_csv": "price-post-process-l1.csv",
+    "out_meta": "price-post-process-l1-meta.csv"
+  },
+  "커팅타공": {
+    "sheet": "커팅타공",
+    "slug": "cutting",
+    "max_row": 66,
+    "max_col": 8,
+    "nonempty_cells": 162,
+    "record_count": 162,
+    "block_count": 3,
+    "blocks": [
+      {
+        "block_id": "B01",
+        "title": "커팅(완칼) 가공비 (국4절)",
+        "row_range": [
+          1,
+          38
+        ],
+        "col_range": [
+          "A",
+          "H"
+        ],
+        "header_rows": [
+          2
+        ],
+        "data_start_row": 3
+      },
+      {
+        "block_id": "B02",
+        "title": "1장당 2000원씩 올립니다.",
+        "row_range": [
+          39,
+          41
+        ],
+        "col_range": [
+          "A",
+          "H"
+        ],
+        "header_rows": [],
+        "data_start_row": null
+      },
+      {
+        "block_id": "B03",
+        "title": "타공 (단가)",
+        "row_range": [
+          42,
+          66
+        ],
+        "col_range": [
+          "A",
+          "H"
+        ],
+        "header_rows": [
+          43
+        ],
+        "data_start_row": 44
+      }
+    ],
+    "merged_count": 6,
+    "hidden_cols": [],
+    "hidden_rows": [],
+    "formula_cells": 0,
+    "comment_cells": 0,
+    "out_csv": "price-cutting-l1.csv",
+    "out_meta": "price-cutting-l1-meta.csv"
+  },
+  "스티커": {
+    "sheet": "스티커",
+    "slug": "sticker-price",
+    "max_row": 89,
+    "max_col": 20,
+    "nonempty_cells": 834,
+    "record_count": 834,
+    "block_count": 7,
+    "blocks": [
+      {
+        "block_id": "B01",
+        "title": "반칼 자유형/규격 스티커 (국4절)",
+        "row_range": [
+          1,
+          44
+        ],
+        "col_range": [
+          "A",
+          "T"
+        ],
+        "header_rows": [
+          2,
+          3
+        ],
+        "data_start_row": 5
+      },
+      {
+        "block_id": "B02",
+        "title": "낱장(완칼) 자유형 스티커",
+        "row_range": [
+          45,
+          55
+        ],
+        "col_range": [
+          "A",
+          "T"
+        ],
+        "header_rows": [
+          46
+        ],
+        "data_start_row": 47
+      },
+      {
+        "block_id": "B03",
+        "title": "낱장(완칼) 자유형 투명스티커",
+        "row_range": [
+          56,
+          66
+        ],
+        "col_range": [
+          "A",
+          "T"
+        ],
+        "header_rows": [
+          57
+        ],
+        "data_start_row": 58
+      },
+      {
+        "block_id": "B04",
+        "title": "대형(완칼) 자유형 스티커",
+        "row_range": [
+          67,
+          77
+        ],
+        "col_range": [
+          "A",
+          "T"
+        ],
+        "header_rows": [
+          68
+        ],
+        "data_start_row": 69
+      },
+      {
+        "block_id": "B05",
+        "title": "타투 스티커 (3장단위)",
+        "row_range": [
+          78,
+          79
+        ],
+        "col_range": [
+          "A",
+          "T"
+        ],
+        "header_rows": [
+          79
+        ],
+        "data_start_row": null
+      },
+      {
+        "block_id": "B06",
+        "title": "기본가",
+        "row_range": [
+          80,
+          85
+        ],
+        "col_range": [
+          "A",
+          "T"
+        ],
+        "header_rows": [],
+        "data_start_row": 81
+      },
+      {
+        "block_id": "B07",
+        "title": "스티커팩 (54장 1세트)",
+        "row_range": [
+          86,
+          89
+        ],
+        "col_range": [
+          "A",
+          "T"
+        ],
+        "header_rows": [
+          87
+        ],
+        "data_start_row": 88
+      }
+    ],
+    "merged_count": 12,
+    "hidden_cols": [],
+    "hidden_rows": [],
+    "formula_cells": 0,
+    "comment_cells": 0,
+    "out_csv": "price-sticker-price-l1.csv",
+    "out_meta": "price-sticker-price-l1-meta.csv"
+  },
+  "합판도무송스티커": {
+    "sheet": "합판도무송스티커",
+    "slug": "gangpan-sticker",
+    "max_row": 30,
+    "max_col": 29,
+    "nonempty_cells": 505,
+    "record_count": 505,
+    "block_count": 3,
+    "blocks": [
+      {
+        "block_id": "B01",
+        "title": "합판 도무송 스티커(원형)",
+        "row_range": [
+          1,
+          11
+        ],
+        "col_range": [
+          "A",
+          "AC"
+        ],
+        "header_rows": [
+          2,
+          3
+        ],
+        "data_start_row": 4
+      },
+      {
+        "block_id": "B02",
+        "title": "합판 도무송 스티커(정사각)",
+        "row_range": [
+          12,
+          22
+        ],
+        "col_range": [
+          "A",
+          "AC"
+        ],
+        "header_rows": [
+          13,
+          14
+        ],
+        "data_start_row": 15
+      },
+      {
+        "block_id": "B03",
+        "title": "합판 도무송 스티커 (직사각)",
+        "row_range": [
+          23,
+          30
+        ],
+        "col_range": [
+          "A",
+          "AC"
+        ],
+        "header_rows": [
+          24,
+          25
+        ],
+        "data_start_row": 26
+      }
+    ],
+    "merged_count": 40,
+    "hidden_cols": [],
+    "hidden_rows": [],
+    "formula_cells": 0,
+    "comment_cells": 0,
+    "out_csv": "price-gangpan-sticker-l1.csv",
+    "out_meta": "price-gangpan-sticker-l1-meta.csv"
+  },
+  "봉투제작": {
+    "sheet": "봉투제작",
+    "slug": "envelope",
+    "max_row": 8,
+    "max_col": 9,
+    "nonempty_cells": 60,
+    "record_count": 60,
+    "block_count": 1,
+    "blocks": [
+      {
+        "block_id": "B01",
+        "title": "봉투제작",
+        "row_range": [
+          1,
+          8
+        ],
+        "col_range": [
+          "A",
+          "I"
+        ],
+        "header_rows": [
+          2,
+          3
+        ],
+        "data_start_row": 4
+      }
+    ],
+    "merged_count": 5,
+    "hidden_cols": [],
+    "hidden_rows": [],
+    "formula_cells": 0,
+    "comment_cells": 0,
+    "out_csv": "price-envelope-l1.csv",
+    "out_meta": "price-envelope-l1-meta.csv"
+  },
+  "명함포토카드": {
+    "sheet": "명함포토카드",
+    "slug": "namecard-photocard",
+    "max_row": 134,
+    "max_col": 6,
+    "nonempty_cells": 262,
+    "record_count": 262,
+    "block_count": 12,
+    "blocks": [
+      {
+        "block_id": "B01",
+        "title": "스탠다드명함",
+        "row_range": [
+          1,
+          7
+        ],
+        "col_range": [
+          "A",
+          "F"
+        ],
+        "header_rows": [
+          2,
+          3
+        ],
+        "data_start_row": 4
+      },
+      {
+        "block_id": "B02",
+        "title": "프리미엄명함",
+        "row_range": [
+          8,
+          14
+        ],
+        "col_range": [
+          "A",
+          "F"
+        ],
+        "header_rows": [
+          9,
+          10
+        ],
+        "data_start_row": 11
+      },
+      {
+        "block_id": "B03",
+        "title": "코팅명함",
+        "row_range": [
+          15,
+          21
+        ],
+        "col_range": [
+          "A",
+          "F"
+        ],
+        "header_rows": [
+          16,
+          17
+        ],
+        "data_start_row": 18
+      },
+      {
+        "block_id": "B04",
+        "title": "펄명함 (스타드림)",
+        "row_range": [
+          22,
+          28
+        ],
+        "col_range": [
+          "A",
+          "F"
+        ],
+        "header_rows": [
+          23,
+          24
+        ],
+        "data_start_row": 25
+      },
+      {
+        "block_id": "B05",
+        "title": "투명명함",
+        "row_range": [
+          29,
+          35
+        ],
+        "col_range": [
+          "A",
+          "F"
+        ],
+        "header_rows": [
+          30,
+          31
+        ],
+        "data_start_row": 32
+      },
+      {
+        "block_id": "B06",
+        "title": "화이트인쇄명함 (큐리어스스킨)",
+        "row_range": [
+          36,
+          42
+        ],
+        "col_range": [
+          "A",
+          "F"
+        ],
+        "header_rows": [
+          37,
+          38
+        ],
+        "data_start_row": 39
+      },
+      {
+        "block_id": "B07",
+        "title": "모양명함 (90x50)",
+        "row_range": [
+          43,
+          49
+        ],
+        "col_range": [
+          "A",
+          "F"
+        ],
+        "header_rows": [
+          44,
+          45
+        ],
+        "data_start_row": 46
+      },
+      {
+        "block_id": "B08",
+        "title": "미니모양명함 (50x50)",
+        "row_range": [
+          50,
+          56
+        ],
+        "col_range": [
+          "A",
+          "F"
+        ],
+        "header_rows": [
+          51,
+          52
+        ],
+        "data_start_row": 53
+      },
+      {
+        "block_id": "B09",
+        "title": "오리지널박명함",
+        "row_range": [
+          57,
+          73
+        ],
+        "col_range": [
+          "A",
+          "F"
+        ],
+        "header_rows": [
+          58,
+          59,
+          60
+        ],
+        "data_start_row": 61
+      },
+      {
+        "block_id": "B10",
+        "title": "포토카드(20장1세트)",
+        "row_range": [
+          74,
+          81
+        ],
+        "col_range": [
+          "A",
+          "C"
+        ],
+        "header_rows": [
+          75
+        ],
+        "data_start_row": 76
+      },
+      {
+        "block_id": "B11",
+        "title": "투명포토카드(20장1세트)",
+        "row_range": [
+          74,
+          134
+        ],
+        "col_range": [
+          "D",
+          "F"
+        ],
+        "header_rows": [
+          75
+        ],
+        "data_start_row": 76
+      },
+      {
+        "block_id": "B12",
+        "title": "포토카드(대랑제작)",
+        "row_range": [
+          82,
+          134
+        ],
+        "col_range": [
+          "A",
+          "F"
+        ],
+        "header_rows": [
+          83
+        ],
+        "data_start_row": 84
+      }
+    ],
+    "merged_count": 22,
+    "hidden_cols": [],
+    "hidden_rows": [],
+    "formula_cells": 0,
+    "comment_cells": 0,
+    "out_csv": "price-namecard-photocard-l1.csv",
+    "out_meta": "price-namecard-photocard-l1-meta.csv"
+  },
+  "후가공_박(소형)": {
+    "sheet": "후가공_박(소형)",
+    "slug": "foil-small",
+    "max_row": 50,
+    "max_col": 13,
+    "nonempty_cells": 284,
+    "record_count": 284,
+    "block_count": 5,
+    "blocks": [
+      {
+        "block_id": "B01",
+        "title": "동판비",
+        "row_range": [
+          1,
+          7
+        ],
+        "col_range": [
+          "A",
+          "M"
+        ],
+        "header_rows": [
+          2
+        ],
+        "data_start_row": 3
+      },
+      {
+        "block_id": "B02",
+        "title": "소형박 가공비 일반박 면적당가격 정의 (금유광, 은유광, 먹유광, 청박, 적박, 동박, 펄박)",
+        "row_range": [
+          8,
+          30
+        ],
+        "col_range": [
+          "A",
+          "G"
+        ],
+        "header_rows": [
+          9,
+          10,
+          11,
+          12
+        ],
+        "data_start_row": null
+      },
+      {
+        "block_id": "B03",
+        "title": "소형박 가공비 일반박 수량별 가격 (금유광, 은유광, 먹유광, 청박, 적박, 동박, 펄박)",
+        "row_range": [
+          8,
+          30
+        ],
+        "col_range": [
+          "H",
+          "M"
+        ],
+        "header_rows": [
+          9
+        ],
+        "data_start_row": 10
+      },
+      {
+        "block_id": "B04",
+        "title": "소형박 가공비 특수박 면적당가격 정의 (백박, 홀로그램박, 트윙클박)",
+        "row_range": [
+          31,
+          50
+        ],
+        "col_range": [
+          "A",
+          "G"
+        ],
+        "header_rows": [
+          32,
+          33,
+          34,
+          35
+        ],
+        "data_start_row": null
+      },
+      {
+        "block_id": "B05",
+        "title": "소형박 가공비 특수박 수량별 가격 (백박, 홀로그램박, 트윙클박)",
+        "row_range": [
+          31,
+          50
+        ],
+        "col_range": [
+          "H",
+          "M"
+        ],
+        "header_rows": [
+          32
+        ],
+        "data_start_row": 33
+      }
+    ],
+    "merged_count": 5,
+    "hidden_cols": [],
+    "hidden_rows": [],
+    "formula_cells": 0,
+    "comment_cells": 0,
+    "out_csv": "price-foil-small-l1.csv",
+    "out_meta": "price-foil-small-l1-meta.csv"
+  },
+  "엽서북떡메": {
+    "sheet": "엽서북떡메",
+    "slug": "postcard-book",
+    "max_row": 76,
+    "max_col": 13,
+    "nonempty_cells": 681,
+    "record_count": 681,
+    "block_count": 3,
+    "blocks": [
+      {
+        "block_id": "B01",
+        "title": "엽서북",
+        "row_range": [
+          1,
+          45
+        ],
+        "col_range": [
+          "A",
+          "M"
+        ],
+        "header_rows": [
+          2,
+          3,
+          4
+        ],
+        "data_start_row": 5
+      },
+      {
+        "block_id": "B02",
+        "title": "떡메모지",
+        "row_range": [
+          46,
+          47
+        ],
+        "col_range": [
+          "A",
+          "M"
+        ],
+        "header_rows": [
+          47
+        ],
+        "data_start_row": null
+      },
+      {
+        "block_id": "B03",
+        "title": "장수 / 수량",
+        "row_range": [
+          48,
+          76
+        ],
+        "col_range": [
+          "A",
+          "M"
+        ],
+        "header_rows": [],
+        "data_start_row": 49
+      }
+    ],
+    "merged_count": 13,
+    "hidden_cols": [],
+    "hidden_rows": [],
+    "formula_cells": 0,
+    "comment_cells": 0,
+    "out_csv": "price-postcard-book-l1.csv",
+    "out_meta": "price-postcard-book-l1-meta.csv"
+  },
+  "제본": {
+    "sheet": "제본",
+    "slug": "binding",
+    "max_row": 32,
+    "max_col": 6,
+    "nonempty_cells": 113,
+    "record_count": 113,
+    "block_count": 3,
+    "blocks": [
+      {
+        "block_id": "B01",
+        "title": "제본비",
+        "row_range": [
+          1,
+          13
+        ],
+        "col_range": [
+          "A",
+          "F"
+        ],
+        "header_rows": [
+          2
+        ],
+        "data_start_row": 3
+      },
+      {
+        "block_id": "B02",
+        "title": "하드커버 제본비",
+        "row_range": [
+          14,
+          24
+        ],
+        "col_range": [
+          "A",
+          "F"
+        ],
+        "header_rows": [
+          15
+        ],
+        "data_start_row": 16
+      },
+      {
+        "block_id": "B03",
+        "title": "캘린더 제본비",
+        "row_range": [
+          25,
+          32
+        ],
+        "col_range": [
+          "A",
+          "F"
+        ],
+        "header_rows": [
+          26
+        ],
+        "data_start_row": 27
+      }
+    ],
+    "merged_count": 3,
+    "hidden_cols": [],
+    "hidden_rows": [],
+    "formula_cells": 0,
+    "comment_cells": 0,
+    "out_csv": "price-binding-l1.csv",
+    "out_meta": "price-binding-l1-meta.csv"
+  },
+  "후가공_박(대형)": {
+    "sheet": "후가공_박(대형)",
+    "slug": "foil-large",
+    "max_row": 48,
+    "max_col": 16,
+    "nonempty_cells": 417,
+    "record_count": 417,
+    "block_count": 5,
+    "blocks": [
+      {
+        "block_id": "B01",
+        "title": "동판비",
+        "row_range": [
+          1,
+          10
+        ],
+        "col_range": [
+          "A",
+          "P"
+        ],
+        "header_rows": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "data_start_row": null
+      },
+      {
+        "block_id": "B02",
+        "title": "*아연판",
+        "row_range": [
+          11,
+          13
+        ],
+        "col_range": [
+          "A",
+          "P"
+        ],
+        "header_rows": [],
+        "data_start_row": null
+      },
+      {
+        "block_id": "B03",
+        "title": "대형박 가공비 일반박 면적당가격 정의 (금유광, 금무광, 은유광, 은무광,동박,청박)",
+        "row_range": [
+          14,
+          33
+        ],
+        "col_range": [
+          "A",
+          "P"
+        ],
+        "header_rows": [
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ],
+        "data_start_row": null
+      },
+      {
+        "block_id": "B04",
+        "title": "대형박 가공비 특수박 면적당가격 정의 (먹유광, 백박, 홀로그램, 트윙클, 적박, 녹박)",
+        "row_range": [
+          34,
+          48
+        ],
+        "col_range": [
+          "A",
+          "J"
+        ],
+        "header_rows": [
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43
+        ],
+        "data_start_row": null
+      },
+      {
+        "block_id": "B05",
+        "title": "대형박 가공비 특수박 수량별 가격 (먹유광, 백박, 홀로그램, 트윙클, 적박, 녹박)",
+        "row_range": [
+          34,
+          48
+        ],
+        "col_range": [
+          "K",
+          "P"
+        ],
+        "header_rows": [
+          35
+        ],
+        "data_start_row": 36
+      }
+    ],
+    "merged_count": 37,
+    "hidden_cols": [],
+    "hidden_rows": [],
+    "formula_cells": 0,
+    "comment_cells": 0,
+    "out_csv": "price-foil-large-l1.csv",
+    "out_meta": "price-foil-large-l1-meta.csv"
+  },
+  "아크릴": {
+    "sheet": "아크릴",
+    "slug": "acrylic-price",
+    "max_row": 107,
+    "max_col": 16,
+    "nonempty_cells": 579,
+    "record_count": 579,
+    "block_count": 7,
+    "blocks": [
+      {
+        "block_id": "B01",
+        "title": "투명아크릴3T (직접입력형) 양면9도 / 단면7도 통용 단가",
+        "row_range": [
+          1,
+          20
+        ],
+        "col_range": [
+          "A",
+          "P"
+        ],
+        "header_rows": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16
+        ],
+        "data_start_row": null
+      },
+      {
+        "block_id": "B02",
+        "title": "투명아크릴1.5T (직접입력형) 양면9도 / 단면7도 통용 단가",
+        "row_range": [
+          21,
+          34
+        ],
+        "col_range": [
+          "A",
+          "P"
+        ],
+        "header_rows": [
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31
+        ],
+        "data_start_row": null
+      },
+      {
+        "block_id": "B03",
+        "title": "미러아크릴3T (직접입력형) 전면5도 통용 단가",
+        "row_range": [
+          35,
+          48
+        ],
+        "col_range": [
+          "A",
+          "P"
+        ],
+        "header_rows": [
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45
+        ],
+        "data_start_row": null
+      },
+      {
+        "block_id": "B04",
+        "title": "아크릴상품 수량별 구간할인",
+        "row_range": [
+          49,
+          89
+        ],
+        "col_range": [
+          "A",
+          "P"
+        ],
+        "header_rows": [
+          50,
+          51,
+          52,
+          53,
+          54,
+          55,
+          56,
+          57,
+          60,
+          61,
+          62,
+          63,
+          64,
+          65,
+          66,
+          67,
+          68,
+          69,
+          70,
+          71,
+          72,
+          73,
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80,
+          81,
+          82,
+          83,
+          84,
+          85,
+          86
+        ],
+        "data_start_row": null
+      },
+      {
+        "block_id": "B05",
+        "title": "아크릴코롯토",
+        "row_range": [
+          90,
+          101
+        ],
+        "col_range": [
+          "A",
+          "P"
+        ],
+        "header_rows": [
+          91,
+          92,
+          93,
+          94,
+          95,
+          96,
+          97
+        ],
+        "data_start_row": null
+      },
+      {
+        "block_id": "B06",
+        "title": "아크릴카라비너 (투명아크릴 3T+3T 접합)",
+        "row_range": [
+          102,
+          107
+        ],
+        "col_range": [
+          "A",
+          "C"
+        ],
+        "header_rows": [
+          103,
+          104,
+          105,
+          106,
+          107
+        ],
+        "data_start_row": null
+      },
+      {
+        "block_id": "B07",
+        "title": "아크릴카라비너 수량별 구간할인",
+        "row_range": [
+          102,
+          107
+        ],
+        "col_range": [
+          "D",
+          "P"
+        ],
+        "header_rows": [
+          103,
+          104,
+          105,
+          106
+        ],
+        "data_start_row": null
+      }
+    ],
+    "merged_count": 14,
+    "hidden_cols": [],
+    "hidden_rows": [],
+    "formula_cells": 81,
+    "comment_cells": 0,
+    "out_csv": "price-acrylic-price-l1.csv",
+    "out_meta": "price-acrylic-price-l1-meta.csv"
+  },
+  "포스터사인": {
+    "sheet": "포스터사인",
+    "slug": "poster-sign",
+    "max_row": 316,
+    "max_col": 14,
+    "nonempty_cells": 1222,
+    "record_count": 1222,
+    "block_count": 31,
+    "blocks": [
+      {
+        "block_id": "B01",
+        "title": "아트프린트포스터 (인화지)",
+        "row_range": [
+          1,
+          17
+        ],
+        "col_range": [
+          "A",
+          "N"
+        ],
+        "header_rows": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "data_start_row": null
+      },
+      {
+        "block_id": "B02",
+        "title": "아트페이퍼포스터 (매트지)",
+        "row_range": [
+          18,
+          34
+        ],
+        "col_range": [
+          "A",
+          "N"
+        ],
+        "header_rows": [
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32
+        ],
+        "data_start_row": null
+      },
+      {
+        "block_id": "B03",
+        "title": "방수포스터 (PET)",
+        "row_range": [
+          35,
+          51
+        ],
+        "col_range": [
+          "A",
+          "N"
+        ],
+        "header_rows": [
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49
+        ],
+        "data_start_row": null
+      },
+      {
+        "block_id": "B04",
+        "title": "접착방수포스터 (PVC)",
+        "row_range": [
+          52,
+          68
+        ],
+        "col_range": [
+          "A",
+          "N"
+        ],
+        "header_rows": [
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          63,
+          64,
+          65,
+          66
+        ],
+        "data_start_row": null
+      },
+      {
+        "block_id": "B05",
+        "title": "접착투명포스터 (투명PVC)",
+        "row_range": [
+          69,
+          85
+        ],
+        "col_range": [
+          "A",
+          "N"
+        ],
+        "header_rows": [
+          70,
+          71,
+          72,
+          73,
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80,
+          81,
+          82,
+          83
+        ],
+        "data_start_row": null
+      },
+      {
+        "block_id": "B06",
+        "title": "아트패브릭포스터 (그래픽천)",
+        "row_range": [
+          86,
+          102
+        ],
+        "col_range": [
+          "A",
+          "N"
+        ],
+        "header_rows": [
+          87,
+          88,
+          89,
+          90,
+          91,
+          92,
+          93,
+          94,
+          95,
+          96,
+          97,
+          98,
+          99,
+          100
+        ],
+        "data_start_row": null
+      },
+      {
+        "block_id": "B07",
+        "title": "린넨패브릭포스터",
+        "row_range": [
+          103,
+          119
+        ],
+        "col_range": [
+          "A",
+          "N"
+        ],
+        "header_rows": [
+          104,
+          105,
+          106,
+          107,
+          108,
+          109,
+          110,
+          111,
+          112,
+          113,
+          114,
+          115,
+          116,
+          117
+        ],
+        "data_start_row": null
+      },
+      {
+        "block_id": "B08",
+        "title": "캔버스패브릭포스터",
+        "row_range": [
+          120,
+          136
+        ],
+        "col_range": [
+          "A",
+          "N"
+        ],
+        "header_rows": [
+          121,
+          122,
+          123,
+          124,
+          125,
+          126,
+          127,
+          128,
+          129,
+          130,
+          131,
+          132,
+          133,
+          134
+        ],
+        "data_start_row": null
+      },
+      {
+        "block_id": "B09",
+        "title": "레더아트프린트",
+        "row_range": [
+          137,
+          153
+        ],
+        "col_range": [
+          "A",
+          "N"
+        ],
+        "header_rows": [
+          138,
+          139,
+          140,
+          141,
+          142,
+          143,
+          144,
+          145,
+          146,
+          147,
+          148,
+          149,
+          150,
+          151
+        ],
+        "data_start_row": null
+      },
+      {
+        "block_id": "B10",
+        "title": "타이벡프린트 (하드 / 소프트)",
+        "row_range": [
+          154,
+          170
+        ],
+        "col_range": [
+          "A",
+          "N"
+        ],
+        "header_rows": [
+          155,
+          156,
+          157,
+          158,
+          159,
+          160,
+          161,
+          162,
+          163,
+          164,
+          165,
+          166,
+          167,
+          168
+        ],
+        "data_start_row": null
+      },
+      {
+        "block_id": "B11",
+        "title": "메쉬프린트",
+        "row_range": [
+          171,
+          199
+        ],
+        "col_range": [
+          "A",
+          "N"
+        ],
+        "header_rows": [
+          172,
+          173,
+          174,
+          175,
+          176,
+          177,
+          178,
+          179,
+          180,
+          181,
+          182,
+          183,
+          184,
+          185,
+          188,
+          189,
+          190,
+          191,
+          194,
+          195,
+          196,
+          197
+        ],
+        "data_start_row": null
+      },
+      {
+        "block_id": "B12",
+        "title": "프레임리스우드액자",
+        "row_range": [
+          200,
+          200
+        ],
+        "col_range": [
+          "A",
+          "N"
+        ],
+        "header_rows": [],
+        "data_start_row": null
+      },
+      {
+        "block_id": "B13",
+        "title": "사이즈 / 수량",
+        "row_range": [
+          201,
+          204
+        ],
+        "col_range": [
+          "A",
+          "N"
+        ],
+        "header_rows": [],
+        "data_start_row": 202
+      },
+      {
+        "block_id": "B14",
+        "title": "레더아트액자",
+        "row_range": [
+          205,
+          205
+        ],
+        "col_range": [
+          "A",
+          "N"
+        ],
+        "header_rows": [],
+        "data_start_row": null
+      },
+      {
+        "block_id": "B15",
+        "title": "사이즈 / 수량",
+        "row_range": [
+          206,
+          209
+        ],
+        "col_range": [
+          "A",
+          "N"
+        ],
+        "header_rows": [],
+        "data_start_row": 207
+      },
+      {
+        "block_id": "B16",
+        "title": "족자포스터",
+        "row_range": [
+          210,
+          210
+        ],
+        "col_range": [
+          "A",
+          "N"
+        ],
+        "header_rows": [],
+        "data_start_row": null
+      },
+      {
+        "block_id": "B17",
+        "title": "사이즈 / 수량",
+        "row_range": [
+          211,
+          215
+        ],
+        "col_range": [
+          "A",
+          "N"
+        ],
+        "header_rows": [],
+        "data_start_row": 212
+      },
+      {
+        "block_id": "B18",
+        "title": "캔버스행잉포스터",
+        "row_range": [
+          216,
+          216
+        ],
+        "col_range": [
+          "A",
+          "N"
+        ],
+        "header_rows": [],
+        "data_start_row": null
+      },
+      {
+        "block_id": "B19",
+        "title": "사이즈 / 수량",
+        "row_range": [
+          217,
+          222
+        ],
+        "col_range": [
+          "A",
+          "N"
+        ],
+        "header_rows": [],
+        "data_start_row": 218
+      },
+      {
+        "block_id": "B20",
+        "title": "린넨우드봉족자",
+        "row_range": [
+          223,
+          223
+        ],
+        "col_range": [
+          "A",
+          "N"
+        ],
+        "header_rows": [],
+        "data_start_row": null
+      },
+      {
+        "block_id": "B21",
+        "title": "사이즈 / 수량",
+        "row_range": [
+          224,
+          228
+        ],
+        "col_range": [
+          "A",
+          "N"
+        ],
+        "header_rows": [],
+        "data_start_row": 225
+      },
+      {
+        "block_id": "B22",
+        "title": "PET배너",
+        "row_range": [
+          229,
+          229
+        ],
+        "col_range": [
+          "A",
+          "N"
+        ],
+        "header_rows": [],
+        "data_start_row": null
+      },
+      {
+        "block_id": "B23",
+        "title": "사이즈 / 수량",
+        "row_range": [
+          230,
+          237
+        ],
+        "col_range": [
+          "A",
+          "N"
+        ],
+        "header_rows": [],
+        "data_start_row": 231
+      },
+      {
+        "block_id": "B24",
+        "title": "메쉬배너",
+        "row_range": [
+          238,
+          238
+        ],
+        "col_range": [
+          "A",
+          "N"
+        ],
+        "header_rows": [],
+        "data_start_row": null
+      },
+      {
+        "block_id": "B25",
+        "title": "사이즈 / 수량",
+        "row_range": [
+          239,
+          243
+        ],
+        "col_range": [
+          "A",
+          "N"
+        ],
+        "header_rows": [],
+        "data_start_row": 240
+      },
+      {
+        "block_id": "B26",
+        "title": "일반현수막",
+        "row_range": [
+          244,
+          264
+        ],
+        "col_range": [
+          "A",
+          "N"
+        ],
+        "header_rows": [
+          245,
+          246,
+          247,
+          248,
+          249,
+          250,
+          251,
+          252,
+          253,
+          254,
+          255,
+          256,
+          257,
+          258,
+          259,
+          260,
+          261
+        ],
+        "data_start_row": null
+      },
+      {
+        "block_id": "B27",
+        "title": "메쉬현수막",
+        "row_range": [
+          265,
+          299
+        ],
+        "col_range": [
+          "A",
+          "N"
+        ],
+        "header_rows": [
+          266,
+          267,
+          268,
+          269,
+          270,
+          271,
+          272,
+          273,
+          274,
+          275,
+          276,
+          277,
+          278,
+          279,
+          280,
+          281,
+          282,
+          286,
+          287,
+          288,
+          289,
+          293,
+          294,
+          295,
+          296
+        ],
+        "data_start_row": null
+      },
+      {
+        "block_id": "B28",
+        "title": "미니스탠딩보드",
+        "row_range": [
+          300,
+          300
+        ],
+        "col_range": [
+          "A",
+          "N"
+        ],
+        "header_rows": [],
+        "data_start_row": null
+      },
+      {
+        "block_id": "B29",
+        "title": "사이즈 / 수량",
+        "row_range": [
+          301,
+          309
+        ],
+        "col_range": [
+          "A",
+          "N"
+        ],
+        "header_rows": [],
+        "data_start_row": 302
+      },
+      {
+        "block_id": "B30",
+        "title": "미니배너",
+        "row_range": [
+          310,
+          310
+        ],
+        "col_range": [
+          "A",
+          "N"
+        ],
+        "header_rows": [],
+        "data_start_row": null
+      },
+      {
+        "block_id": "B31",
+        "title": "사이즈 / 수량",
+        "row_range": [
+          311,
+          316
+        ],
+        "col_range": [
+          "A",
+          "N"
+        ],
+        "header_rows": [],
+        "data_start_row": 312
+      }
+    ],
+    "merged_count": 35,
+    "hidden_cols": [],
+    "hidden_rows": [],
+    "formula_cells": 0,
+    "comment_cells": 0,
+    "out_csv": "price-poster-sign-l1.csv",
+    "out_meta": "price-poster-sign-l1-meta.csv"
+  }
+}

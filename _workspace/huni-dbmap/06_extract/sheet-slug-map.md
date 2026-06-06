@@ -28,4 +28,30 @@ L1 충실추출 산출 파일명 규칙: `<slug>-l1.csv`(데이터) + `<slug>-l1
 | 판걸이수 | `pangeori` | `pangeori-l1.csv`/`-meta.csv` | 사이즈 마진(판형) 권위. A=조인키 |
 | 출력소재(IMPORT) | `import-paper` | `import-paper-l1.csv`/`-meta.csv` + `import-paper-matrix-long.csv` | 별도설정 자재 권위. 종이×상품 ●매트릭스 unpivot |
 
-가격표 나머지 16시트(단가)는 본 토대 범위 제외(round-2 가격 매핑 대상).
+## 가격표 단가시트 (round-2, 15시트 — 2026-06-06 추출 완료)
+
+L1 무손실 추출 + 구조분석 산출: `price-<slug>-l1.csv` + `price-<slug>-l1-meta.csv`(셀단위 long).
+재현: `scripts/extract_price_sheets.py` + `verify_price_sheets.py`(9게이트, 15/15 PASS).
+구조 카탈로그: `05_method/F2-price-sheet-structures.md`. **평면화·적재는 다음 단계(미수행).**
+
+> 주의: `스티커`·`아크릴`은 상품마스터에도 동명 시트가 있어 가격표는 `-price` 접미로 충돌 회피.
+
+| 한글 시트명 | 영문 슬러그 | 블록수 | 비고 |
+|------------|------------|:-----:|------|
+| 디지털인쇄비 | `digital-print-price` | 2 | 수량×도수×단/양면, 국4절/3절 |
+| 코팅 | `coating` | 2 | 수량×코팅종×단/양면, 국4절/3절 |
+| 접지옵션 | `folding` | 2 | 카드/리플렛 접지(오시+접지 합가) |
+| 인쇄후가공 | `post-process` | 5 | 모서리/오시/미싱/가변, 전부 합가, 가로동거 |
+| 커팅타공 | `cutting` | 3 | 완칼 + 타공(단가/합가), 가로동거 |
+| 스티커 | `sticker-price` | 7 | 사이즈판수×소재 + 완칼 다상품 |
+| 합판도무송스티커 | `gangpan-sticker` | 3 | 모양(원/정사각/직사각)×사이즈×소재 |
+| 봉투제작 | `envelope` | 1 | 봉투종류×소재(8행) |
+| 명함포토카드 | `namecard-photocard` | 12 | 명함 다상품×(단/양면×소재) + 포토카드 |
+| 후가공_박(소형) | `foil-small` | 5 | 동판비 + 면적정의(2D class)↔수량별가격 |
+| 엽서북떡메 | `postcard-book` | 3 | 사이즈×인쇄×페이지×수량 4축(밴드 3단) |
+| 제본 | `binding` | 3 | 제본/하드커버/캘린더 종류×수량 |
+| 후가공_박(대형) | `foil-large` | 5 | 동판비(2D) + 면적정의(class)↔수량별가격 |
+| 아크릴 | `acrylic-price` | 7 | 면적매트릭스 + 구간할인 + 수식81(미러=투명×2) |
+| 포스터사인 | `poster-sign` | 31 | 면적매트릭스 다상품, 코팅포함가 |
+
+비대상(제외): `굿즈파우치(구간할인)`(round-1 t_dsc), `후가공_박(백업)`(중복).
