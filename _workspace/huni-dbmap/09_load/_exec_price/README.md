@@ -1,15 +1,17 @@
 # 가격(t_prc_*) 적재 실행본 — `_exec_price/` (round-5)
 
-> round-4 GO 가격 적재본(`09_load/_assembled_price/`, 2,320행)을 **멱등 실행 SQL + 로더**로
-> 완성한 산출물. 실제 `COMMIT`(영구 적재)·DDL은 **인간 승인** 대상 — 본 트랙은 산출 + 롤백 DRY-RUN까지.
-> 권위: `docs/goal-2026-06-06-02.md`(round-5) · `_assembled_price/load-manifest.md`(GO) ·
-> `03_validation/price-load-validation-final.md`(GO). 식별자/SQL 영어, 설명 한국어.
+> round-4 GO 가격 적재본(`09_load/_assembled_price/`)을 **멱등 실행 SQL + 로더**로 완성한 산출물.
+> **siz 교정 통합(2026-06-06): GUK4 870 + GP원형35mm 10 = 880행을 차단→적재 승격**(기존 라이브 siz
+> 재사용·무발명). 총 적재 2,320→**3,200**, component_prices 2,108→**2,988**, 차단 2,697→**1,817**.
+> 실제 `COMMIT`(영구 적재)·DDL은 **인간 승인** 대상 — 본 트랙은 산출 + 롤백 DRY-RUN까지.
+> 권위: `docs/goal-2026-06-06-02.md`(round-5) · `02_mapping/price-siz-mapping-inspection.md`(siz 교정) ·
+> `_assembled_price/load-manifest.md`(GO) · `03_validation/price-load-validation-final.md`(GO). 식별자/SQL 영어, 설명 한국어.
 
 ## 1. 무엇인가
 
-가격 6테이블(t_prc_* 5 + 코드행 1)의 **즉시 적재가능 2,320행**을 라이브 FK 위상정렬 순서로
-재실행 안전(멱등)하게 적재하는 SQL 스크립트와 로더다. **재매핑 0** — round-4 검증 CSV를 조립·순서화·
-래핑만 했다. 모든 INSERT는 `ON CONFLICT … DO NOTHING` 가드를 가져 2회 실행해도 2회차 행변경 0(R1).
+가격 6테이블(t_prc_* 5 + 코드행 1)의 **즉시 적재가능 3,200행**을 라이브 FK 위상정렬 순서로
+재실행 안전(멱등)하게 적재하는 SQL 스크립트와 로더다. **재매핑 0** — round-4 검증 CSV + siz 교정(siz_cd
+1:1 치환만)을 조립·순서화·래핑했다. 모든 INSERT는 `ON CONFLICT … DO NOTHING` 가드를 가져 2회 실행해도 2회차 행변경 0(R1).
 
 ## 2. 실행 순서 (FK 위상정렬) + 충돌키(ON CONFLICT) — 라이브 제약 매핑
 
@@ -19,10 +21,16 @@
 | 01 | `01_prc_price_formulas.sql` | `t_prc_price_formulas` | 10 | `(frm_cd)` | PK `pk_t_prc_price_formulas` |
 | 02 | `02_prc_price_components.sql` | `t_prc_price_components` | 143 | `(comp_cd)` | PK `pk_t_prc_price_components` |
 | 03 | `03_prc_formula_components.sql` | `t_prc_formula_components` | 13 | `(frm_cd, comp_cd)` | PK `t_prc_formula_components_pkey` |
-| 04 | `04_prc_component_prices.sql` | `t_prc_component_prices` | 2,108 | `(comp_price_id)` | PK `t_prc_component_prices_pkey` |
+| 04 | `04_prc_component_prices.sql` | `t_prc_component_prices` | 2,988 ※siz | `(comp_price_id)` | PK `t_prc_component_prices_pkey` |
 | 05 | `05_prd_product_price_formulas.sql` | `t_prd_product_price_formulas` | 45 | `(prd_cd, frm_cd)` | PK `t_prd_product_price_formulas_pkey` |
 
-상위 트랜잭션 래퍼 = `apply.sql`(`BEGIN; \i 00 … \i 05`). COMMIT/ROLLBACK은 로더가 주입.
+상위 트랜잭션 래퍼 = `apply.sql`(`BEGIN; \i 00 … \i 05`). COMMIT/ROLLBACK은 로더가 주입. 총 INSERT **3,200**.
+
+※siz **04 = 2,988 (즉시 real 1,313 + null 795 = 2,108) + siz 교정 880**. 교정 = `siz_cd` 1:1 치환만
+(`SIZ_PENDING_GUK4→SIZ_000499`[316x467], `SIZ_PENDING_GP_원형35mm→SIZ_000422`[원형35x35]). 두 타깃 siz_cd
+모두 라이브 `t_siz_sizes` 실존(`del_yn=N`), FK `fk_prc_comp_prices_siz_cd` PASS. search-before-mint·무발명.
+교정 행은 `note`에 `[siz-corrected: …]` + SQL `-- src:`에 `siz:<from>-><to>` 표기로 행별 추적. 잔여
+placeholder 1,817행은 차단 유지(§5).
 
 ### 04 단가 충돌키를 PK(`comp_price_id`)로 택한 이유 (검증자 확인 요망)
 
@@ -41,7 +49,9 @@ comp_price_id·같은 차원) 방어로 **존속**한다(적재본 자연키 int
 - **원자성(R2):** `apply.sql` 단일 `BEGIN`. `ON_ERROR_STOP=1` → 임의 문 실패 시 전체 롤백. 테이블별
   파일에 `BEGIN/COMMIT` 없음(중첩·부분커밋 경로 0). COMMIT/ROLLBACK은 로더가 단일 세션 종결로 주입.
 - **재현성(R3·G8):** 전 SQL은 `gen_load_sql.py`가 CSV에서 생성(손편집 0). 같은 입력 → 같은 출력.
-  행수 어서트(2,320) 내장. per-row provenance = `*.provenance.csv`(sql_stmt_seq → source_csv:row).
+  행수 어서트(총 3,200·04=2,988·파티션 real 1,313/null 795/교정 880/차단 1,817) 내장. 04는 원천
+  `02_mapping/load_price/t_prc_component_prices.csv`에서 직접 파티셔닝 + `SIZ_CORRECTION` 맵 적용(재현적).
+  per-row provenance = `*.provenance.csv`(sql_stmt_seq → source_csv:row, 교정행은 `siz:<from>-><to>` 포함).
 
 ## 4. 실행법 (로더)
 
@@ -56,12 +66,14 @@ cd 09_load/_exec_price
 
 ## 5. 제외 (차단/GAP — 적재 SQL 미포함, 재포장 금지)
 
-`_assembled_price/blocked-and-gaps.md` 권위. 본 실행본은 **즉시 적재가능 2,320행만**.
+`_assembled_price/blocked-and-gaps.md` 권위. 본 실행본은 **적재가능 3,200행만**(siz 교정 880 포함).
 
 | 제외 | 규모 | 사유 | 해소 조건 |
 |------|------|------|----------|
-| component_prices placeholder siz | 2,697행 | siz_cd=`SIZ_PENDING%`(후니 미등록) | 후니 siz 등록 후 builder 재조립 |
+| component_prices 잔여 placeholder siz | 1,817행 | siz_cd=`SIZ_PENDING%`(후니 미등록): 3JEOL 304·STK 456·POSTER 680·ACRYL 237·GP(원형35mm 제외) 100·ENV 40 | 후니 siz 등록/모델링 결정 후 재생성 |
 | 박 시트 2단 룩업 | GAP 1건 | 면적→분류→가격 중간키 무손실 표현 불가 | ddl-proposer 제안서(11_ddl_proposals) |
+
+> siz 교정으로 GUK4 870 + GP원형35mm 10 = **880행은 차단 해소(적재 승격)** — 더이상 제외 아님(§2 ※siz).
 
 ## 6. 인간 승인 체크포인트
 

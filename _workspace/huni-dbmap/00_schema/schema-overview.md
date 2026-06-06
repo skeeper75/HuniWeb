@@ -3,6 +3,8 @@
 PostgreSQL 18.4 · 스키마 `public` · **t_* 도메인 34테이블** (+ Django 10 = 44) · 읽기 전용 추출.
 
 > **[2026-06-06 갱신]** 아래 §도메인맵·전체표는 2026-06-03 기준 **29테이블 스냅샷**이다. 이후 **CPQ 컨피규레이터가 라이브에 구현**되어 t_* 6테이블 추가·`t_prd_product_process_excl_groups` 제거(흡수)·전 도메인 `del_yn`/`del_dt` 추가·`t_prd_product_addons` 변경(addon_prd_cd→tmpl_cd). **CPQ 신규/변경 상세 + 설계 정합 판정 = `cpq-schema.md` 권위.** 본 문서 말미 §CPQ 확장 델타 참조. 라이브 원시 덤프 = `_live-schema-dump-260606.txt`.
+>
+> **[2026-06-06 갱신 #2] 라이브 행수 재실측 + 판형/사이즈/가격 관계 심층분석**: 아래 행수표는 stale. 라이브 실측(2026-06-06): t_* **34테이블**, cod_base_codes **71**, siz_sizes **500**, plate_sizes **494**, product_sizes **436**, product_materials **402**, print_options **166**, processes **198**, dsc_discount_details **35**·dsc_discount_tables **7**(round-1 적재됨), 가격 t_prc_* **전부 0행**. **출력판형(plate)은 별도 테이블이 아니라 `t_siz_sizes` 행을 `t_prd_product_plate_sizes.output_paper_typ_cd`(국전/46/기타)로 분류한 것** — 완성품·판형 사이즈가 한 마스터에 공존. 가격 siz_cd의 SIZ_PENDING 2,697행 진단(국4절=기존 SIZ_000499 등) = **`schema-relationship-analysis.md` 권위**.
 
 행 수는 실제 `count(*)`로 검증함(캐시된 `n_live_tup`이 아님). 테이블 접두사 도메인별로 묶음.
 

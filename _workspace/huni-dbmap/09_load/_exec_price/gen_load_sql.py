@@ -20,6 +20,23 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(HERE, "..", "_assembled_price", "load")
 OUT = HERE
 
+# 단계04 단가 권위 원천(매핑 산출, BOM 포함). 04는 _assembled_price 대신 이 원천에서
+# 직접 파티셔닝하여 siz 교정을 재현적으로 적용한다(손편집 0). 다른 단계(00/01/02/03/05)는
+# 종전대로 _assembled_price/load 에서 읽는다.
+PRICE_SRC = os.path.join(
+    HERE, "..", "..", "02_mapping", "load_price", "t_prc_component_prices.csv"
+)
+
+# siz 교정 맵(CONFIRMED, search-before-mint, 기존 라이브 siz 재사용·무발명).
+# 권위: 02_mapping/price-siz-mapping-inspection.md §1-1/§1-4 + 라이브 read-only SELECT.
+#  - SIZ_PENDING_GUK4    → SIZ_000499 (316x467, 국전계열 plate, 단일 공유 출력판형, impos=Y)
+#  - SIZ_PENDING_GP_원형35mm → SIZ_000422 (원형35x35, 라이브 정확 일치)
+# 두 타깃 siz_cd 모두 라이브 t_siz_sizes 실존(del_yn=N), FK fk_prc_comp_prices_siz_cd PASS.
+SIZ_CORRECTION = {
+    "SIZ_PENDING_GUK4": "SIZ_000499",
+    "SIZ_PENDING_GP_원형35mm": "SIZ_000422",
+}
+
 
 def sql_str(v):
     """문자열 리터럴: 작은따옴표 이스케이프. None/공란 → NULL."""
@@ -60,7 +77,13 @@ def sql_char1(v):
 
 
 def read_csv(name):
-    with open(os.path.join(SRC, name), newline="", encoding="utf-8") as f:
+    # utf-8-sig: 원천 CSV의 BOM을 첫 컬럼명에서 제거(원천은 BOM 포함, 조립본은 미포함 — 양쪽 안전).
+    with open(os.path.join(SRC, name), newline="", encoding="utf-8-sig") as f:
+        return list(csv.DictReader(f))
+
+
+def read_csv_abs(path):
+    with open(path, newline="", encoding="utf-8-sig") as f:
         return list(csv.DictReader(f))
 
 
@@ -165,32 +188,69 @@ def gen_03_formula_components():
 
 
 def gen_04_component_prices():
-    """단계04 단가 2,108행.
-    충돌키 = PK comp_price_id (CSV가 결정적 명시값 제공). 자연키 unique index
+    """단계04 단가 2,988행 (= 즉시 2,108 + siz 교정 880).
+
+    원천 = 매핑 산출 t_prc_component_prices.csv(4,805행)에서 직접 파티셔닝(재현성 G8):
+      · 적재가능(real-siz SIZ_0*) + NULL-siz   → 종전 2,108행(조립본과 1:1 동일·검증됨)
+      · siz 교정(SIZ_CORRECTION 맵 880행)      → 신규 적재가능(placeholder→실 siz_cd 치환)
+      · 잔여 SIZ_PENDING_*                       → 차단 유지(1,817행, blocked-and-gaps.md §A)
+    교정은 siz_cd 1:1 치환만(다른 차원 컬럼 불변·무발명·라이브 실존 siz 재사용).
+    note 앞에 [siz-corrected: <placeholder>→<siz_cd>] 프로비넌스 접두 부착.
+
+    충돌키 = PK comp_price_id (CSV 결정적 명시값). 자연키 unique index
     ux_t_prc_comp_prices_nat_key 는 NULLS DISTINCT(라이브 확증)라 NULL 포함 행에서
     멱등 미보장 → PK 충돌키 채택(재실행 안전). 자연키 unique 는 의미중복 2차 방어로 존속.
     """
-    rows = read_csv("04_prc_component_prices.csv")
+    rows = read_csv_abs(PRICE_SRC)
     cols = ["comp_price_id", "comp_cd", "apply_ymd", "siz_cd", "clr_cd", "mat_cd",
             "coat_side_cnt", "bdl_qty", "min_qty", "unit_price", "note"]
     out, prov = [], []
+    n_loadable_real, n_loadable_null, n_corrected, n_blocked = 0, 0, 0, 0
     for i, r in enumerate(rows, 2):
+        src_siz = (r.get("siz_cd") or "").strip()
+        # 잔여 placeholder(교정 대상 아님) → 차단 유지(적재 SQL에 미포함). 침묵드롭 아님:
+        # blocked-and-gaps.md §A 가 1,817행을 사유·해소조건과 함께 명시한다.
+        if src_siz.startswith("SIZ_PENDING") and src_siz not in SIZ_CORRECTION:
+            n_blocked += 1
+            continue
         if len(r["comp_cd"]) > 50:
             raise ValueError(f"comp_cd > 50자: {r['comp_cd']!r} (행 {i})")
+        # siz 교정 적용(1:1 치환). note 에 프로비넌스 접두.
+        eff_siz = src_siz
+        note = r.get("note", "") or ""
+        prov_tag = ""
+        if src_siz in SIZ_CORRECTION:
+            eff_siz = SIZ_CORRECTION[src_siz]
+            note = f"[siz-corrected: {src_siz}→{eff_siz}] {note}".rstrip()
+            prov_tag = f" siz:{src_siz}->{eff_siz}"
+            n_corrected += 1
+        elif src_siz == "":
+            n_loadable_null += 1
+        else:
+            n_loadable_real += 1
         vals = [
             sql_int(r["comp_price_id"]), sql_str(r["comp_cd"]), sql_str(r["apply_ymd"]),
-            sql_str(r["siz_cd"]), sql_str(r["clr_cd"]), sql_str(r["mat_cd"]),
+            sql_str(eff_siz), sql_str(r["clr_cd"]), sql_str(r["mat_cd"]),
             sql_int(r["coat_side_cnt"]), sql_int(r["bdl_qty"]), sql_int(r["min_qty"]),
-            sql_num(r["unit_price"]), sql_str(r["note"]),
+            sql_num(r["unit_price"]), sql_str(note),
         ]
         stmt = (f"INSERT INTO t_prc_component_prices ({', '.join(cols)})\n"
                 f"VALUES ({', '.join(vals)})\n"
                 f"ON CONFLICT (comp_price_id) DO NOTHING;")
-        out.append((stmt, f"04_prc_component_prices.csv:row{i} comp_price_id={r['comp_price_id']}"))
-        prov.append(("t_prc_component_prices", f"04_prc_component_prices.csv:row{i}"))
+        srcref = (f"t_prc_component_prices.csv:row{i} "
+                  f"comp_price_id={r['comp_price_id']}{prov_tag}")
+        out.append((stmt, srcref))
+        prov.append(("t_prc_component_prices", srcref))
+    # 파티션 어서트(재현성·정합): 즉시 2,108(real 1,313 + null 795) + 교정 880 = 2,988, 차단 1,817.
+    assert n_loadable_real == 1313, f"real-siz {n_loadable_real} != 1313"
+    assert n_loadable_null == 795, f"null-siz {n_loadable_null} != 795"
+    assert n_corrected == 880, f"corrected {n_corrected} != 880"
+    assert n_blocked == 1817, f"blocked {n_blocked} != 1817"
+    assert len(out) == 2988, f"04 loadable {len(out)} != 2988"
     return write_step(
         "04_prc_component_prices.sql",
-        "단계04 단가 — 충돌키=PK comp_price_id(CSV 명시값). 자연키 idx NULLS DISTINCT 라 PK 채택.",
+        "단계04 단가 2,988(즉시 2,108 + siz교정 880) — 충돌키=PK comp_price_id. "
+        "siz 교정 GUK4→SIZ_000499/GP원형35mm→SIZ_000422(라이브 실존·무발명). 잔여 1,817 차단.",
         cols, "(comp_price_id)", out, prov)
 
 
@@ -243,9 +303,10 @@ def main():
     print("가격 적재 SQL 생성 완료:")
     for k in sorted(counts):
         print(f"  {k}: {counts[k]} stmts")
-    print(f"  총 INSERT 문: {total} (기대 2,320)")
-    assert total == 2320, f"행수 불일치: {total} != 2320"
-    print("  행수 검증 OK")
+    print(f"  총 INSERT 문: {total} (기대 3,200 — siz 교정 880행 통합)")
+    assert total == 3200, f"행수 불일치: {total} != 3200"
+    assert counts["04_prc_component_prices.sql"] == 2988, "04 행수 != 2988"
+    print("  행수 검증 OK (04 단가 2,988 = 즉시 2,108 + siz교정 880)")
 
 
 if __name__ == "__main__":
