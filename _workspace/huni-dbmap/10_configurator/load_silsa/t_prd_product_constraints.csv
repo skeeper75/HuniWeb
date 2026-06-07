@@ -1,4 +1,0 @@
-prd_cd,rule_cd,rule_nm,rule_typ_cd,logic,err_msg,disp_seq,use_yn
-PRD_000138,R-SIZE-NONSPEC,사용자입력 치수 범위,RULE_TYPE.01,"{""or"":[{""!="":[{""var"":""size_mode""},""nonspec""]},{""and"":[{"">="":[{""var"":""width""},500]},{""<="":[{""var"":""width""},1750]},{"">="":[{""var"":""height""},500]},{""<="":[{""var"":""height""},5000]}]}]}","가로 500~1750mm, 세로 500~5000mm 범위로 입력하세요",1,Y
-PRD_000138,R-GAKMOK-HEIGHT,각목 규격×세로 정합,RULE_TYPE.02,"{""and"":[{""if"":[{""=="":[{""var"":""chuga""},""OP-CHUGA-GAKMOK-LE900""]},{""<="":[{""var"":""height""},900]},true]},{""if"":[{""=="":[{""var"":""chuga""},""OP-CHUGA-GAKMOK-GT900""]},{"">"":[{""var"":""height""},900]},true]}]}","세로 900mm 이하는 각목(900이하), 초과는 각목(900초과)를 선택하세요",2,Y
-PRD_000138,R-BONGJE-PARAM,봉미싱 선택 시 사이즈 필수,RULE_TYPE.03,"{""if"":[{""=="":[{""var"":""gagong""},""OP-GAGONG-BONGMISING""]},{""and"":[{"">"":[{""var"":""width""},0]},{"">"":[{""var"":""height""},0]}]},true]}",봉미싱 가공은 사이즈 확정이 필요합니다,3,Y
