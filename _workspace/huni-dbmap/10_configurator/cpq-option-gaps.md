@@ -62,6 +62,14 @@
 - **제안 후보:** ① 차원행 **선적재**(정석, FK-topo 순서) vs ② "별도설정"=deferred 센티넬(mat_cd=NULL 허용 + MES 단계 수기지정 + 트리거 EXISTS 면제 예외).
 - **주의:** 이는 DDL이 아니라 **적재 순서/센티넬 규약** 결정 — dbm-load-builder와 공유.
 
+### GAP-BOARD — 보드종류(화이트/블랙 보드·포맥스 두께)가 가공 vs 자재 vs 형태 모호 (silsa widening 신규)
+
+- **내용:** silsa 폼보드(PRD_000129) 가공축 `화이트보드`/`블랙보드`, 포맥스보드(PRD_000130) `화이트포맥스(3mm)`/`화이트포맥스(5mm)`가 **가공(proc) vs 자재(보드 substrate) vs 형태(두께 spec)** 어디인지 모호. 라이브 마스터에 "보드" 공정·"보드종류" 자재 **둘 다 부재**. 해당 5상품(129·130·131·132·144) **materials 0행**.
+- **영향:** 보드·액자류(폼보드·포맥스보드·프레임리스·레더아트액자·미니보드스탠딩). 본체 substrate 미적재라 옵션화 차단.
+- **라이브 권위:** `silsa-coverage-map.md §6.1`(공정명 키워드 0건·자재명 0건 실측 · 5상품 materials 0행).
+- **제안 후보(미확정):** ① **자재 `.03`(권고)** — 보드 substrate=물리 소재, 화이트/블랙=본체색→재질 합성, 두께=depth spec(마스터 지도 §3.1 정합) vs ② 가공 `.04`(L1 W열 배치 충실) vs ③ 형태(siz depth 융합).
+- **판정:** **DESIGN DECISION NEEDING CONFIRMATION** — L1이 가공축에 둔 의도 확인 후 자재행 vs 공정행 신설 라우팅. 침묵 선택 안 함.
+
 ### GAP-PANSU — 판수(사이즈별 판걸이)=가격축이나 차원 7종에 전용축 없음
 
 - **내용:** 판수(73x98→15, 100x150→8…)는 사이즈마다 다르고 제작수량 증가단위(incr)와 결합. 차원 7종 어디에도 "판수" 전용축 없음 → size 행 부속속성(SIZ note 판걸이)으로만 존재.
@@ -75,8 +83,9 @@
 
 | 우선 | GAP | 사다리 후보(search-before-mint) | 차단도 |
 |:----:|-----|--------------------------------|--------|
-| **High** | GAP-PARAM (+GAP-COUNT) | 컬럼(ref_param_json jsonb) — 가장 광범위, 공정 재사용 핵심 | 후가공·박·구수 전반 차단 |
-| **High** | GAP-DEFER | 적재순서/센티넬 규약(DDL 아님) — load-builder 공유 | 별도설정 종이·미적재 공정 차단 |
+| **High** | GAP-PARAM (+GAP-COUNT) | 컬럼(ref_param_json jsonb) — 가장 광범위, 공정 재사용 핵심 | 후가공·박·구수·봉제폭/유형·족자모양·코팅면 전반 차단 |
+| **High** | GAP-DEFER | 적재순서/센티넬 규약(DDL 아님) — load-builder 공유 | 별도설정 종이·미적재 공정·별색·각목·보드 차단 |
+| Medium | GAP-BOARD | 설계 결정(자재 권고 vs 공정 vs 형태) → 차원행 신설 | 보드·액자류 보드substrate 차단 |
 | Medium | GAP-SHAPE | siz width/height NULL 허용 확인 → 라벨 | 굿즈 형상·용량 |
 | Medium | GAP-OPT | 사다리 신중(코드행→컬럼→테이블) | 포장·자유옵션 |
 | Medium | GAP-COMPOSITE | 컬럼(item_combine_typ/parent_item_seq) | 박/형압·복합옵션 정합 |
@@ -102,4 +111,20 @@
 | **GAP-A**(진짜 max-N) | 후가공 max_sel_cnt=4=전체4 → 상한 무의미(위반 불가). '다중선택'만 행사, 진짜 max-N(전체>상한) 미실증 | postcard-walkthrough-validation GAP-A 승계 | 본 파일럿 범위 밖(박색상 16종 중 N 필요) |
 
 > **파일럿이 추가로 라이브 실측 확정한 것:** ① `ref_param_json` 컬럼 실부재(GAP-PARAM = 설계 추정 → **실측 확정**). ② `templates.price` 컬럼 실부재(🟡9 = 설계 추정 → **실측 확정**). ③ option_items 트리거가 **행단위 REJECT** → BLOCKED 5행이 적재 차단(GAP-DEFER 차단도 = 실 행 5/9). 둘 다 dbm-ddl-proposer 입력 확정 강화(추정→실측).
-</content>
+
+---
+
+## silsa 시트 전수 widening 행사 기록 — 29상품 커버리지 (2026-06-07)
+
+`silsa-coverage-map.md`가 silsa 29상품(115행) 전체로 넓혀 행사/노출한 GAP. 라이브 `ref-product-*.csv`·`ref-processes.csv` 실측.
+
+| GAP | silsa widening 행사 양상 | 실측 근거 | 신규/강화 |
+|-----|-------------------------|-----------|-----------|
+| **GAP-BOARD** 🆕 | 폼보드/포맥스보드 보드종류(화이트보드/블랙보드/화이트포맥스3mm·5mm)가 가공vs자재vs형태 모호. 마스터 공정·자재 둘 다 부재 | 5상품(129·130·131·132·144) materials 0행 · 공정/자재 키워드 0건 | **신규 SCHEMA gap**(설계 결정·자재 권고) |
+| **GAP-PARAM** 🔴 | 코팅 면(14/15 `{면:단/양면}`)·봉제 폭/유형(080)·족자 모양(082) 신규 행사 — 엽서 후가공 외로 확장 | ref-processes.csv prcs_dtl_opt 면/폭/모양 enum 실재, 보존처 부재 | 강화(공정 4종 추가 param) |
+| **GAP-COMPOSITE** | 복합옵션 8종(각목+끈·오버로크+리본끈·말아박기+면끈·우드봉+면끈·오버로크+봉미싱…) 광범위 행사 | silsa-l1.csv 가공20·추가13 중 복합 8 | 강화(8종으로 "동반 암묵규약" 입증) |
+| **GAP-DEFER** | 차단 주류 = 별색 PROC_000008(122)·**부착081(124·139 — 081은 138에만 적재)**·각목셋트(138)·보드자재·열재단084·addon링크 미적재 | ref-product-* 0행 다수 · ref-product-processes.csv(124=080만·139=079만) | 강화(DATA 선적재가 차단 본질) |
+| **GAP-PRODUCT** 🆕 | 투명포스터★ 라이브 prd_cd 미등록 + L1 전행 행숨김(비활성) → 옵션 레이어 대상 외 | ref-products.csv 부재 · silsa-l1-report §5-1 | 정보(상품 등록 선행) |
+
+> **신규 SCHEMA gap = GAP-BOARD 1건**(설계 결정). 나머지는 DATA gap(선적재) 또는 기식별 SCHEMA gap 재행사. **코팅·별색 신규 2축은 공정 `.04`로 흡수돼 GAP 미발생**(라이브 마스터 PROC_000014/15/8 실재 — 과분할 0). 커버리지 verdict = **PARTIAL-GO**(`silsa-coverage-map.md §7`).
+> **[over-claim 정정·2026-06-07]** validator MAJOR 적발 — 복합옵션 부착081 COVERED를 138 파일럿에서 124로 이월(over-claim). 상품별 재룩업 결과 **081은 138에만 적재** → 124(면끈/리본끈)·139(끈추가)는 **DATA gap(부착081 선적재, SCHEMA 아님)**. SCHEMA gap 목록 무변동(GAP-BOARD 1건 유지), DATA gap에만 추가. 교훈: 파일럿 1상품의 COVERED를 widening에 이월 금지 — 차원행은 상품별 재룩업.
