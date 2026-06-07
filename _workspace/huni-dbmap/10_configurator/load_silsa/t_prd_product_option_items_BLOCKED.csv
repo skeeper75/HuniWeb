@@ -1,0 +1,4 @@
+prd_cd,opt_cd,item_seq,ref_dim_cd,ref_key1,ref_key2,qty,use_yn,block_reason
+PRD_000138,OP-GAGONG-YEOLJAEDAN,1,OPT_REF_DIM.04,PROC_000053,,1,Y,BLOCKED — PROC_000053(완칼) PRD_000138 미적재(라이브=079/080/081만) → 트리거 REJECT. 열재단→053 환원은 도메인 해석([CONFIRM]). 선적재(GAP-DEFER) 또는 가공없음 센티넬 규약 필요
+PRD_000138,OP-CHUGA-GAKMOK-LE900,2,OPT_REF_DIM.07,[CONFIRM],,1,Y,BLOCKED — 각목(900이하) sub_prd_cd 미상: 각목 상품 ref-products 0행 + PRD_000138 sets 0행 → 트리거 REJECT. 각목 완제상품 선등록 + sets 적재 필요. 규격(900이하) param 보존처 부재(GAP-PARAM/GAP-COMPOSITE)
+PRD_000138,OP-CHUGA-GAKMOK-GT900,2,OPT_REF_DIM.07,[CONFIRM],,1,Y,BLOCKED — 각목(900초과) sub_prd_cd 미상(상동). 각목 완제상품 선등록 + sets 적재 필요. 규격(900초과) param 보존처 부재
