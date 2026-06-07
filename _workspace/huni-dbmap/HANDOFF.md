@@ -1,50 +1,48 @@
 # Huni-DBMap — HANDOFF (다음 세션 재시작 포인터)
 
-> 작성 2026-06-07(최신). 권위 goal=`docs/goal-2026-06-06-02.md`. 본 문서 + 아래 메모리를 읽으면 재발견 0으로 재개. 이전 round-2/4/5·plate 상세는 `CHANGELOG.md`·메모리에 보존.
+> 작성 2026-06-07(최신). 권위 = 본 문서 + 메모리 `dbmap-cpq-option-layer-mapping`·`dbmap-cpq-configurator-design`. 본 문서 + 메모리를 읽으면 재발견 0으로 재개. 이전 트랙(round-2 가격·round-4/5 적재·plate·디지털인쇄 가격엔진) 상세는 `CHANGELOG.md`·메모리에 보존.
 
 ## 한 줄 현황
-**디지털인쇄 가격엔진 설계+검증+라이브 적재 완료** + ENV봉투·GP원형 GO분 라이브 적재 완료(2026-06-07 사용자 `/goal` "설계·검증 마무리분 라이브 반영" 승인 → 실 COMMIT). **3트랙 308행 라이브 적재**(디지털 147·ENV 40·GP 121[신규siz10+가격100+링크11]), R1~R6 전건 PASS·멱등 2-pass·FK고아0·공식사슬 완결(016 가격조회 가능) 실증. 적재 전 라이브 IDENTITY 시퀀스 stale·GP 명시ID 충돌 결함을 DRY-RUN이 적발→setval 재동기화+auto-IDENTITY 통일로 해소. **잔존 미적재**: 디지털 차단분(3절/투명/박/019·030·049·048)·박 트랙·자재정규화.
+**round-6 (CPQ 옵션 레이어 L2 매핑) 트랙 신설 + 실사 시트 전체 커버리지 확인 완료.** 라이브 CPQ 옵션 레이어(`t_prd_product_option_groups/options/option_items·templates·constraints`, 거의 비어있음)에 상품마스터/가격표의 **옵션성 속성을 어느 엔티티로 매핑할지**를 설계·검증. 핵심 = **매핑 2층위**(L1 차원/가격 적재 ≠ L2 옵션구조: 이미 적재된 차원행을 polymorphic `ref_dim_cd`로 **참조**해 선택옵션으로 묶음). 산출 = 마스터 지도(13시트 속성→4엔티티) + 엽서·현수막 파일럿(GO) + M-1 해소(열재단=실제 가공) + **실사 29상품 전체 커버리지(PARTIAL-YES)**. DB 미적재(설계·검증 문서까지·실 적재는 인간 승인).
 
-## 다음 시작점 (정확한 다음 행동)
-1. **[최우선·차단해소 큰 트랙] 3절·투명 plate 교정 + 디지털 가격 차단분 적재** — 019 투명엽서·030 지그재그엽서·049 와이드접지리플렛은 **plate=작업사이즈(국4절 plate 교정 미적용분)**라 디지털 인쇄비 커버 0 → 가격 lookup 깸(현재 BLOCKED·미적재). 국4절 plate 교정(c722c24)을 3절(330×660)·투명(315×467)로 확장. 신규 siz 채번(인간 승인) + 3절/투명 인쇄비·용지비 단가 정합 후 BLOCKED 바인딩 3 + 용지비 9 + 049 복귀. 산출물: `02_mapping/digital-print-engine/*_BLOCKED_siz.csv`.
-2. **[차단해소] 박(대형) foil 트랙** — DGP-A·E 박 슬롯 6행(`*_BLOCKED_foil.csv`)은 foil 트랙(`02_mapping/price-foil-matrix-mapping.md`, CONDITIONAL-GO·BLOCKER-1) 해소 의존. BLOCKER-1(재사용 siz 혼합축·SIZ_000047 삼중바인딩) 축통일 후 COMP_FOIL_LARGE_* 적재→슬롯 배선.
-3. **[잔여 인간승인/컨펌]** ①컨펌① 공식단위 배선(옵션 후보 전부 배선 — 런타임 옵션 게이팅 전제) ②048 접지리플렛 재바인딩(기존 PRF_FOLD_SUM→PRF_DGP_E, DELETE+INSERT 마이그레이션) ③박(대형) foil 슬롯 6행(foil 트랙 BLOCKER-1 해소 의존) ④use_yn=N 5상품(021/022/023/028/051) 노출/적재 시점.
-4. **[기존 잔여] round-5 미적재**: GP원형(빌드 GO·`09_load/_migrate_gp_circle/`)·ENV봉투(`_exec_env/`)·박(CONDITIONAL-GO)·자재정규화(설계 완료).
+## 다음 시작점 (정확한 다음 행동 — 택1)
+1. **[권장·커버리지 확장] 아크릴/포스터사인 시트 커버리지** — 실사 시트를 완료했으니 마스터 지도 패밀리③의 나머지(아크릴 25상품)와 패밀리별 커버리지를 같은 방식(`silsa-coverage-map` 패턴)으로 확장. 또는 패밀리②(책자·캘린더)로 가서 **excl_group 마이그 실증(GAP-2)** — 두 파일럿 모두 미행사한 칸(라이브 GRP-BOOK 제본·GRP-CAL 캘린더 택일그룹을 option_group으로 변환).
+2. **[GAP 닫기] dbm-ddl-proposer로 신규 SCHEMA gap 제안** — `cpq-option-gaps.md`의 8+1건 중 우선순위: **GAP-PARAM**(ref_param_json, 공정 파라미터 보존 — 타공 구수·봉제 폭·코팅 면·족자 모양, 복합옵션·실사 전반에서 재행사된 High) → **GAP-BOARD**(보드종류=자재vs가공vs형태, 신규·설계 결정 선행) → GAP-HIDDEN/OPT/COMPOSITE. heat-cut-process-proposal과 같은 search-before-mint 제안서 산출.
+3. **[설계 결정 해소]** 미해결 design decision: ①잉크색=도수 vs 자유옵션그릇 ②용량(머그)=비치수 size vs 규격 ③면지/바인더링=자재 vs 공정/셋트 ④**보드종류(GAP-BOARD)** ⑤실내/실외 거치대=1 base vs 2 SKU. 사용자/도메인 확정 필요.
+4. **[실 적재 — 인간 승인]** CPQ 옵션 레이어 GO 파일럿(엽서·현수막)의 INSERTABLE 행 실제 적재 + 차원행 선적재(부착081 124/139·별색122·각목셋트·열재단 공정 등). dbm-load-builder로 멱등 적재본 조립 후 인간 승인.
 
 ## 미해결 / 블로커
-- **국4절 147행 실 COMMIT**: 인간 승인 대기(설계+CSV+GO까지 산출, INSERT는 별도 승인).
-- **3절/투명/049 가격 차단**: plate=작업사이즈 미교정이 근인. plate 교정 트랙과 동시 해소(신규 siz 채번 인간 승인).
-- **박(대형) 단가**: foil 트랙(`02_mapping/price-foil-matrix-mapping.md`, CONDITIONAL-GO·BLOCKER-1) 의존. DGP-A·E에 슬롯만 예약(6행 차단).
-- **048 재바인딩**: PK=(prd_cd,frm_cd)라 단순 INSERT 불가 → DELETE PRF_FOLD_SUM + INSERT PRF_DGP_E 마이그레이션(인간 승인).
-- [기존] GP/ENV/박/자재정규화 인간 승인.
+- **CPQ 적재 = 인간 승인 대기** — 모든 옵션 레이어 INSERT·차원행 선적재·코드행·DDL은 인간 승인(설계·검증 문서까지만 산출).
+- **차원행 선적재(DATA gap, 다수)** — 부착 PROC_081은 **138 파일럿에만 적재**(124·139는 선적재 필요)·별색 PROC_008(122)·각목 셋트(138)·보드 자재(129·130·131·132·144)·addon 링크(135·136·137)·nonspec 범위. 선적재로 해소되나 인간 승인.
+- **열재단 공정 신설(M-1)** — PROC_000084 `[CONFIRM-CHANNEL]` 채번=라이브 MAX 확인 후 후니 배정. `11_ddl_proposals/heat-cut-process-proposal` 제안서까지.
+- **신규 SCHEMA gap GAP-BOARD** — 폼보드/포맥스 보드종류 엔티티 미확정(설계 결정 선행).
+- **각목 셋트** — 각목 완제상품 자체 미등록 + sets 0행 → 복합옵션 seq2 BLOCKED. 상품 등록 선행.
+- **실외용배너거치대** — base 상품 미등록(GAP-DATA).
+- 설계 결정 5건(위 다음 시작점 §3).
 
 ## 이번 세션 결정 (재론 금지)
-- **디지털인쇄 = 원자합산형(FRM_TYPE.01), fit-gap ADEQUATE** — 신규 테이블/FRM_TYPE.03 불요. 6공식 전부 기존 6테이블 + COMP_PAPER 1종 신규로 흡수. 면적매트릭스형(G-3)은 디지털 무관.
-- **용지비 = COMP_PAPER 단일 component**(PRC_COMPONENT_TYPE.03) + mat_cd(종이)×siz_cd(출력용지규격) 차원. 종이별 분리 component(120종) 과분할 금지. unit_price=import-paper 절가 verbatim·수량무관(min_qty=NULL).
-- **곱셈계수(×출력매수·÷판걸이수·+손지율 5장)·판걸이수=앱 런타임. DB=[수량행단가] lookup만**. addtn_yn=합산 플래그뿐(곱셈 아님). 메모리 `dbmap-compute-in-app-db-stores-lookup` 정합.
-- **별색=공정(G-1)**: COMP_PRINT_SPOT_*=PRC_COMPONENT_TYPE.01 인쇄비·clr_cd=NULL. 도수 매핑 금지(FK 위반).
-- **PRC_COMPONENT_TYPE 라이브 6종**(.06 완제품비 포함 — 권위문서 stale 정정). COMP_CUT_FULL_DIECUT=.06 완제품비(.04 아님).
-- **종이 mat_cd 차단 0건**: 디지털인쇄용지 58종 전부 라이브 t_mat 선존재(당초 우려 해소).
-- **plate=작업사이즈 미교정 상품(019/030/049)은 가격 LOADABLE 불가** — 디지털 인쇄비가 출력용지규격 siz(SIZ_000077/499) 전용이라 작업사이즈 plate는 커버 0.
+- **매핑은 2층위** — L1 원천적재(차원·가격, round-1~5)≠L2 옵션구조(CPQ 레이어). L2는 새 데이터 적재가 아니라 차원행 polymorphic 참조. **L2≠L1 혼동(차원 데이터를 option_items에 재적재)이 1차 실패모드**.
+- **트리거 dispatch 정합(HARD)** — 도수=`opt_id`(NOT clr_cd)·자재=`mat_cd+usage_cd`·공정=`proc_cd`. 라이브 `fn_chk_opt_item_ref` 정확히 일치. 권위=`00_schema/cpq-schema.md §2`.
+- **흡수/분할 입도(WowPress)** — 본체색=재질 합성·형상=규격 융합·인쇄면/잉크도수=도수·**별색=공정**·**코팅=공정**(PROC_014/015). 과분할 금지.
+- **코팅·별색 = 공정 `.04`** — 신규 축이나 라이브 마스터에 공정으로 명시·차원행 적재됨(자재 합성 후보 기각, 모호 아님). 검증 PASS.
+- **M-1 열재단 = ① 실제 가공**(3,000원, 가격표 권위) — ②기본마감 센티넬 아님. 도메인 일반론(비즈하우스 0원)만 보면 오판 → **가격표 명시값=권위**가 정정. 완칼 PROC_053 차용 폐기→신규 PROC_000084.
+- **필수성 ≠ process link** — 옵션 필수성(택1·필수)은 CPQ `option_group.mand_yn`, process link는 후보 제공(mand_proc_yn=N).
+- **적재 CSV = 라이브 컬럼만**(F-1 교훈, note 등 비라이브 컬럼 금지) · **BLOCKED 행은 별도 `*_BLOCKED.csv` 분리**(round-5 패턴).
+- **복합옵션 차원행 COVERED는 상품별 재룩업 필수**(커버리지 over-claim 교훈) — 파일럿 1상품의 COVERED를 widening 시 이월 금지. L2 load-bearing = "그 prd_cd에 그 차원행이 실재하는가".
+- **생성-검증 분리(R6)** — designer(option-mapper)≠gate(validator). 매 파일럿 validator가 실결함 적발(F-1 note·열재단 M-1·커버리지 over-claim).
 
-## 건드리지 말 것 (확정 산출 · 라이브 적재됨)
-- **라이브 적재된 3트랙 (2026-06-07 COMMIT·재적재 금지·멱등이라 재실행은 무해)**: 디지털 147(`09_load/_exec_dgp/`)·ENV 40(`_exec_env/`)·GP 121(`_migrate_gp_circle/`, 신규 siz SIZ_000501~510 포함). 각 폴더 `undo.sh`가 롤백 안전망. 적재 전 백업: `_exec_dgp/backup_state_20260607_151837.txt`·GP/ENV backup CSV.
-- **디지털인쇄 가격엔진 GO 적재본**: `02_mapping/digital-print-engine/` (LOADABLE 147행·검증 GO·라이브 반영됨). 재설계 금지.
-- 검증 게이트: `03_validation/digital-print-engine-gate.md`(설계 GO)·`digital-print-load-execution-gate.md`(R1~R6 GO). 권위.
-- **국4절 plate 적재분**(라이브 반영·c722c24·검증 통과). `09_load/_migrate_plate_load_guk4/backup_state_20260607_092507.sql`(undo).
-- 폐기 이력(인용 금지): `08_remediation/plate-size-remodel-design.md`·`plate-size-correction-design.md`·`04_audit/plate-size-live-diagnosis.md`.
-- [기존] `09_load/_exec*`·`_migrate_*` GO 적재본.
-
-## 핵심 산출물 (이번 세션)
-- 설계: `02_mapping/digital-print-engine/digital-print-price-engine-design.md` (fit-gap ADEQUATE·6공식·용지비 차원모델·차단 정직표기·보정이력 D-1~D-5)
-- 적재CSV(GO): `t_prc_price_formulas_DGP`(6)·`t_prc_price_components_PAPER`(1)·`t_prc_formula_components_DGP`(72)·`t_prc_component_prices_PAPER`(49)·`t_prd_product_price_formulas_DGP`(19) + provenance + BLOCKED(siz 용지비9·foil 6·바인딩3)
-- 검증: `03_validation/digital-print-engine-gate.md` (GO)
-- 권위문서 정정: `00_schema/price-engine-ddl.md`·`price-engine-fk-refs.md` (PRC_COMPONENT_TYPE 6종+.06 완제품비, D-3)
-- 메모리: `dbmap-digitalprint-atomic-formula-unbuilt`(설계 완료로 갱신)
-- 커밋: 본 핸드오프 커밋
+## 건드리지 말 것 (확정 산출 · 검증 완료)
+- **마스터 지도** `10_configurator/attribute-entity-map.md`(13시트 속성→4엔티티, 사용자 "각 속성 어디에 매핑" 직접 해소) — 재설계 금지.
+- **GAP 레지스터** `10_configurator/cpq-option-gaps.md`(8+1건, GAP-BOARD 신규 포함) — ddl-proposer 입력.
+- **검증 GO 파일럿**: 엽서 `postcard-option-layer.md`+`load/*`(검증 `cpq-option-validation.md` GO) · 현수막 `silsa-option-layer.md`+`load_silsa/*`(검증 `cpq-option-validation-silsa.md` GO).
+- **M-1 결정 산출**: `m1-yeoljaedan-decision.md`(① verdict·3증거선) · 리서치 2종(`m1-yeoljaedan-{domain,competitor}-research.md`) · 공정 제안 `11_ddl_proposals/heat-cut-process-proposal.{md,sql}`.
+- **실사 커버리지**: `silsa-coverage-map.md`(PARTIAL-YES) + 검증 `silsa-coverage-validation.md`(over-claim 정정 반영).
+- **하네스 정의(신규·다음 세션부터 직접 사용 가능)**: 에이전트 `dbm-option-mapper` · 스킬 `dbm-cpq-option-mapping` · `dbm-validator`(CPQ 인지)·`huni-dbmap-orchestrator`(round-6). 커밋 7547703·6e0c8fc·9ea4d53·ac56535.
+- [이전 트랙] 라이브 적재된 3트랙(디지털147·ENV40·GP121, undo.sh 안전망)·디지털인쇄 가격엔진·국4절 plate·round-1 할인. 재적재 금지.
 
 ## 하네스 운영 메모 (다음 세션 주의)
-- **가격 정합 = 단가 아닌 공식 사슬 전체**(formula→formula_components→product_price_formulas). 단가 적재 ≠ 가격조회 가능(round-2 핵심 교훈, 이번에 사슬 연결로 해소).
-- **plate=작업사이즈 미교정 = 가격 LOADABLE 차단 신호**. 디지털 인쇄비는 출력용지규격 siz 전용. 새 디지털 상품 가격조회 가능화하려면 plate 교정 선행.
-- 스키마 표면 행대조 금지 — 컬럼/note/플래그/FK를 라이브로 먼저 규명(메모리 `dbmap-schema-deep-analysis-first`).
-- 빌더/검증 에이전트 spawn 시 "자가커밋 금지" 명시. 실 COMMIT·siz채번·코드행등록·DDL적용은 인간 승인. 생성·검증 분리(R6)로 D-5까지 적발됨.
+- **신규 에이전트 `dbm-option-mapper`는 이제 subagent_type으로 직접 spawn 가능**(이번 세션은 general-purpose 주입으로 가동했으나 레지스트리에 로드됨). dbm-validator도 CPQ 옵션 검증 인지.
+- **트리거**: "CPQ 옵션 매핑"·"옵션 레이어 매핑"·"속성 엔티티 매핑 지도"·"상품군 옵션 파일럿"·"round-6"·"커버리지 분석" → `huni-dbmap-orchestrator` round-6 또는 `dbm-cpq-option-mapping` 스킬.
+- **빌더/검증 에이전트 spawn 시 "자가커밋 금지"·"NO DB writes" 명시**. 실 COMMIT·siz채번·코드행등록·DDL적용은 인간 승인.
+- **에이전트 반환이 빈약**(opus 4.x literal) — 산출물을 항상 Bash/Read로 직접 검증(행수·트리거 정합·XML 누출·BLOCKED 정직). 매 파일럿이 그렇게 실결함 적발.
+- **권위 순서**: Excel/가격표 명시값 > 추출 스냅샷(ref-*.csv stale — 존재/등록 판정은 라이브 권위) > 설계 문서. 라이브 스키마+트리거 > 설계. `cpq-schema.md §4`(design↔live).
