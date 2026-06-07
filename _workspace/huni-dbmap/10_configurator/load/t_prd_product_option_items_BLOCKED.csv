@@ -1,0 +1,6 @@
+prd_cd,opt_cd,item_seq,ref_dim_cd,ref_key1,ref_key2,qty,use_yn,block_reason
+PRD_000016,OP-HUGA-OSI,1,OPT_REF_DIM.04,PROC_000029,,1,Y,BLOCKED — PROC_000029 PRD_000016 미적재 → 트리거 REJECT. param{줄수0~3} ref_param_json 부재(GAP-PARAM). 선적재 필요(GAP-DEFER)
+PRD_000016,OP-HUGA-MISING,1,OPT_REF_DIM.04,PROC_000030,,1,Y,BLOCKED — PROC_000030 미적재 → 트리거 REJECT. param{줄수0~3} 미보존(GAP-PARAM)
+PRD_000016,OP-HUGA-VARTEXT,1,OPT_REF_DIM.04,PROC_000031,,1,Y,BLOCKED — PROC_000031 미적재 → 트리거 REJECT. param{개수0~3} 미보존(GAP-PARAM)
+PRD_000016,OP-HUGA-VARIMG,1,OPT_REF_DIM.04,PROC_000032,,1,Y,BLOCKED — PROC_000032 미적재 → 트리거 REJECT. param{개수0~3} 미보존(GAP-PARAM)
+PRD_000016,OP-JONGI-DEFAULT,1,OPT_REF_DIM.03,[CONFIRM],,1,Y,BLOCKED — 종이=*별도설정 material 0행 → mat_cd 미상·트리거 REJECT. usage_cd(ref_key2)도 미상(GAP-DEFER)

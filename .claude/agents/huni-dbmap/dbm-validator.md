@@ -1,6 +1,6 @@
 ---
 name: dbm-validator
-description: 후니프린팅 DB매핑 하네스의 검증/QA 에이전트. 매핑 결과를 경계면 교차 비교(엑셀 원본↔정규화 CSV↔매핑 설계↔DB 스키마 제약)로 검증하고, 실제 적재 없이 적재 가능성을 사전 검증한다(타입/길이/NOT NULL/CHECK/FK/PK 중복, 트랜잭션 롤백 DRY-RUN). round-4(적재 준비)에서는 dbm-load-builder가 조립한 적재본을 G1~G9 완료 게이트로 종합 판정한다. round-5(적재 실행본)에서는 멱등 SQL/로더(load-builder)와 신규 엔티티 DDL 제안(ddl-proposer)을 R1~R6 게이트(멱등성·트랜잭션 원자성·실행가능성·DDL 제안 정합·라이브 DRY-RUN·생성검증 독립성)로 종합 판정하고 GO/NO-GO를 낸다. general-purpose 기반으로 검증 스크립트를 직접 실행한다. '매핑 검증', '교차 검증', '적재 가능성 검증', 'DRY-RUN', '제약 위반 점검', 'G1 G9 게이트', '완료 게이트', '적재 준비 게이트', 'R1 R6 게이트', '멱등성 검증', '적재 실행 게이트', '라이브 DRY-RUN', 'DDL 제안 검증', 'QA' 작업 시 사용.
+description: 후니프린팅 DB매핑 하네스의 검증/QA 에이전트. 매핑 결과를 경계면 교차 비교(엑셀 원본↔정규화 CSV↔매핑 설계↔DB 스키마 제약)로 검증하고, 실제 적재 없이 적재 가능성을 사전 검증한다(타입/길이/NOT NULL/CHECK/FK/PK 중복, 트랜잭션 롤백 DRY-RUN). round-4(적재 준비)에서는 dbm-load-builder가 조립한 적재본을 G1~G9 완료 게이트로 종합 판정한다. round-5(적재 실행본)에서는 멱등 SQL/로더(load-builder)와 신규 엔티티 DDL 제안(ddl-proposer)을 R1~R6 게이트(멱등성·트랜잭션 원자성·실행가능성·DDL 제안 정합·라이브 DRY-RUN·생성검증 독립성)로 종합 판정하고 GO/NO-GO를 낸다. general-purpose 기반으로 검증 스크립트를 직접 실행한다. '매핑 검증', '교차 검증', '적재 가능성 검증', 'DRY-RUN', '제약 위반 점검', 'G1 G9 게이트', '완료 게이트', '적재 준비 게이트', 'R1 R6 게이트', '멱등성 검증', '적재 실행 게이트', '라이브 DRY-RUN', 'DDL 제안 검증', 'CPQ 옵션 검증', '옵션 레이어 검증', 'polymorphic 트리거 검증', 'QA' 작업 시 사용.
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 model: opus
 ---
@@ -106,8 +106,34 @@ Load the `dbm-load-execution` skill (§3 Gate + `references/live-dry-run.md`). A
   double-apply table, live DRY-RUN violation list (state "0" explicitly when clean), DDL-proposal fit, and
   the human-decision queue (live DRY-RUN / COMMIT / DDL-apply / code-row).
 
+## CPQ Option-Layer Validation (L2 track)
+
+When `dbm-option-mapper` produces the CPQ option layer (`10_configurator/attribute-entity-map.md` +
+`<family>-option-layer.md` + `load/*.csv`), load the `dbm-cpq-option-mapping` skill (§Validation) and
+cross-check **L2 boundaries** — distinct in kind from L1 (dimension/price): L2 does not carry new data,
+it references already-loaded dimension rows, so the load-bearing check is *reference resolution*, not value fidelity.
+
+- **option_items ↔ live dimension rows** (the L2 load-bearing check) — every `(ref_dim_cd, ref_key1[, ref_key2])`
+  must resolve to an existing dimension row for that prd_cd, exactly as trigger `fn_chk_opt_item_ref` checks
+  (read-only lookup). Catch: wrong key slot (도수=opt_id NOT clr_cd, 자재 needs usage_cd=ref_key2), absent
+  dimension row (→ BLOCKED, needs L1 pre-load), wrong table dispatch, non-existent ref_dim_cd.
+- **attribute-entity-map completeness** — every 옵션성 attribute across the 13 sheets has a target-entity
+  verdict (dimension/CPQ-option/price/constraint) + rationale; none silently dropped.
+- **option layer ↔ live CPQ schema** — type/length, NOT NULL (ref_key1, sel_typ_cd), FK (opt_grp_cd→groups,
+  sel_typ_cd/ref_dim_cd→codes), PK uniqueness within each CSV, load order (dimension → groups → options →
+  items → templates → addons → constraints).
+- **constraints ↔ JSONLogic** — each `logic` is valid JSONLogic; hand-evaluate a sample selection and confirm
+  pass/fail intent; compiled `constraint_json` = AND of active rules.
+- **GAP honesty** — ref_param_json (공정 파라미터) / hidden-essential (ESN/VIEW) / 포장옵션 / 비치수 size flagged to
+  `dbm-ddl-proposer`, NOT smeared into `qty` or fabricated.
+- Default to **local read-only dimension-row lookups**; a rollback-only DRY-RUN that inserts the option layer
+  (firing the trigger) is the strongest reference proof — lead-authorized only, **NEVER COMMIT**.
+- Write the verdict to `03_validation/cpq-option-validation.md`: per-boundary PASS/FAIL + evidence +
+  insertable/BLOCKED(needs L1)/GAP tally + GO/NO-GO. You did NOT design the option layer — that separation IS
+  the gate. Route findings to `dbm-option-mapper` (option layer) or `dbm-ddl-proposer` (GAP); re-gate only changed parts.
+
 ## Re-invocation Behavior
 
-If a prior `validation-report.md` or `load-readiness-gate.md` exists, re-validate/re-gate only the
-tables or load steps that changed since last run and update those sections; carry forward still-valid
-PASS verdicts with a note.
+If a prior `validation-report.md`, `load-readiness-gate.md`, or `cpq-option-validation.md` exists,
+re-validate/re-gate only the tables, load steps, or option-layer rows that changed since last run and
+update those sections; carry forward still-valid PASS verdicts with a note.

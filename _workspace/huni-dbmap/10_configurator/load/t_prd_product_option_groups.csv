@@ -1,0 +1,6 @@
+prd_cd,opt_grp_cd,opt_grp_nm,sel_typ_cd,min_sel_cnt,max_sel_cnt,mand_yn,disp_seq,use_yn,note
+PRD_000016,OG-DOSU,인쇄(도수),SEL_TYPE.01,1,1,Y,1,Y,단/양면 택1 (print_option opt_id 1/2)
+PRD_000016,OG-JONGI,종이,SEL_TYPE.01,1,1,Y,2,Y,종이=*별도설정 material 0행 → GAP-DEFER (옵션 BLOCKED)
+PRD_000016,OG-MOSEORI,모서리,SEL_TYPE.01,0,1,N,3,Y,직각/둥근 택1 (PROC_000027/028)
+PRD_000016,OG-HUGAGONG,후가공,SEL_TYPE.02,0,4,N,4,Y,오시/미싱/가변텍스트/가변이미지 다중 — L1 row2~4 4종 동시. 029~032 process 0행 → GAP-DEFER
+PRD_000016,OG-CHUGA,추가상품(봉투),SEL_TYPE.01,0,1,N,5,Y,봉투 add-on은 template로 (ref_dim 아님)
