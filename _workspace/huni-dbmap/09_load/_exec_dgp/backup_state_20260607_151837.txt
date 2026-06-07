@@ -1,0 +1,21 @@
+-- before-state backup 20260607_151837 (디지털인쇄 가격엔진 적재). read-only SELECT 덤프.
+== before-state (1) 신규 키 부재 확인 (전부 0 이어야 적재 깨끗) ==
+                   chk                   | cnt 
+-----------------------------------------+-----
+ price_formulas PRF_DGP_*                |   0
+ price_components COMP_PAPER             |   0
+ formula_components frm_cd PRF_DGP_*     |   0
+ component_prices COMP_PAPER@SIZ_000499  |   0
+ product_price_formulas frm_cd PRF_DGP_* |   0
+(5 rows)
+
+== before-state (2) 영향 5테이블 현행 총 행수 (적재 후 +147 검증 기준선) ==
+             tbl              | rows_now 
+------------------------------+----------
+ t_prc_component_prices       |     3432
+ t_prc_formula_components     |       13
+ t_prc_price_components       |      143
+ t_prc_price_formulas         |       10
+ t_prd_product_price_formulas |       45
+(5 rows)
+

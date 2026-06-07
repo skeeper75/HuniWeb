@@ -12,14 +12,23 @@
 
 | 산출 | 대상 테이블 | 행수 | 멱등 충돌키 |
 |------|------------|:----:|------------|
+| **(step 00) 시퀀스 재동기화** | `t_prc_component_prices_comp_price_id_seq` | — | `setval` (idempotent) |
 | **원형 직경 siz 등록** | `t_siz_sizes` | **10 NEW** | `ON CONFLICT (siz_cd)` |
-| **GP 원형 가격** | `t_prc_component_prices` | **100** (10직경×2mat×5수량밴드) | `ON CONFLICT (comp_price_id)` |
+| **GP 원형 가격** | `t_prc_component_prices` | **100** (10직경×2mat×5수량밴드) | **auto-IDENTITY + 자연키 NOT EXISTS** |
 | **066 원형 size link** | `t_prd_product_sizes` | **11** (신규 10 + 재사용 1) | `ON CONFLICT (prd_cd, siz_cd)` |
 
 - **신규 siz_cd**: `SIZ_000501 .. SIZ_000510` (10연번). 직경 10/15/20/25/30/40/45/50/55/60mm.
 - **재사용 siz**: 원형35mm = `SIZ_000422`(committed _exec_price GO 번들에 이미 적재) — **재등록하지 않음**.
 - **GP 가격 100행**: source `t_prc_component_prices.csv`의 `SIZ_PENDING_GP_원형*`(35mm 제외) 행을
-  실 siz_cd(501~510)로 치환. `comp_price_id`는 source CSV 값 명시(committed `_exec_price` 04 패턴 일치).
+  실 siz_cd(501~510)로 치환. `comp_price_id`는 **auto-IDENTITY**(명시 폐지, 아래 §6 수정 참조).
+
+> **[수정 2026-06-07 — 라이브 DRY-RUN 적발]** 기존 02 는 명시 `comp_price_id`(2956~3065) +
+> `ON CONFLICT (comp_price_id) DO NOTHING` 이었으나, `comp_price_id` 는 IDENTITY(BY DEFAULT)·시퀀스
+> stale(last_value=2 vs MAX=4805)이라 (1) 명시 ID 는 시퀀스를 무시해 향후 auto-IDENTITY 와 충돌·비멱등,
+> (2) ON CONFLICT(comp_price_id) 가 명시 ID 가 우연히 라이브에 있으면 자연키 무관하게 가격행을 silently
+> skip(under-load) 하는 결함이 있었다. → **02 를 auto-IDENTITY(comp_price_id 생략) + 자연키 NOT EXISTS
+> 멱등 가드**로 전환하고, migrate.sql **step 00 에 setval**(시퀀스→MAX)을 추가. 라이브 2-pass DRY-RUN 실증:
+> GP 가격 100행이 `comp_price_id` 4806~ 발급(충돌 0), 2회차 0행(멱등), 35mm committed 10행 무간섭.
 
 ## 2. 왜 (배경 — 동일 상품의 같은 원형 직경)
 
@@ -65,12 +74,25 @@
   이를 인지하고 **511부터** 시작하도록 이미 조정됨(`_migrate_areamatrix/MIGRATION.md §10` 확인). **충돌 0.**
 - 최종 코드는 후니 마스터데이터 등록 결정이다. 후니가 다른 번호를 배정하면 빌더가 의존 적재행의 siz_cd를 실번호로 교체 후 재조립.
 
-## 6. reg_dt NOT NULL DEFAULT 처리 (round-5 교훈 준수)
+## 6. comp_price_id 시퀀스 + reg_dt 처리 (라이브 DRY-RUN 교훈 준수)
+
+### 6.1 comp_price_id IDENTITY 시퀀스 재동기화 (step 00 — 수정 2026-06-07)
+
+- **라이브 확증**: `t_prc_component_prices.comp_price_id` = IDENTITY(BY DEFAULT), 시퀀스
+  `public.t_prc_component_prices_comp_price_id_seq` 가 `last_value=2`(stale)인데 `MAX(comp_price_id)=4805`·`count=3292`.
+  2026-06-06 적재가 명시 ID 로 넣고 시퀀스를 전진시키지 않은 것이 근인.
+- **결함**: 02 가 auto-IDENTITY(또는 명시 ID)로 INSERT 할 때 시퀀스가 1,2,…를 발급 → 기존 행과 PK 충돌.
+- **수정**: migrate.sql **step 00** 에 `setval('…comp_price_id_seq', (SELECT COALESCE(MAX(comp_price_id),0) …), true)` 추가.
+  → 시퀀스를 현재 MAX(4805)로 동기화. 02 의 GP 가격 100행은 4806~ 발급(충돌 0). setval 은 idempotent·롤백 시 영구 미반영.
+- **02 멱등 가드**: `comp_price_id` 생략(auto-IDENTITY) + 자연키(8) `IS NOT DISTINCT FROM` NOT EXISTS.
+  (GP 가격은 clr/coat/bdl 차원 NULL 이고 자연키 UNIQUE 가 NULLS DISTINCT 라 ON CONFLICT 무력 → NOT EXISTS 로 NULL-safe 매칭.)
+
+### 6.2 reg_dt NOT NULL DEFAULT 처리
 
 - **component_prices(STEP 2)**: `reg_dt`(NOT NULL DEFAULT now()) 컬럼을 **INSERT 컬럼 목록에서 생략** →
-  DB DEFAULT now() 발화. committed `_exec_price/04` 패턴과 동일. (명시 NULL 금지 — round-5 라이브 DRY-RUN이 적발한 함정.)
+  DB DEFAULT now() 발화. (명시 NULL 금지 — round-5 라이브 DRY-RUN이 적발한 함정.)
 - **product_sizes(STEP 3)**: `reg_dt`(NOT NULL DEFAULT now())에 BLOCKED CSV의 **실값 `'2026-06-05 00:00:00'` 명시**.
-  공란이 아니라 실값이므로 NULL 위험 없음. 만약 source가 공란이었다면 생성기가 `DEFAULT` 키워드를 쓰도록 설계(`sql_ts` 헬퍼).
+  공란이 아니라 실값이므로 NULL 위험 없음. source가 공란이면 생성기가 `DEFAULT` 키워드를 쓰도록 설계(`sql_ts` 헬퍼).
 - `del_yn`(NOT NULL DEFAULT 'N')은 STEP 3에서 생략 → DEFAULT 발화. `upd_dt`/`del_dt`(NULL 허용)도 생략.
 
 ## 7. 안전 절차 (재실행 안전·롤백전용)
@@ -95,11 +117,13 @@
 
 # 3) 되돌리기 (필요 시)
 ./undo.sh                    # DRY-RUN (롤백)
-./undo.sh --commit           # comp_price_id IN(100) DELETE + 066 link(501~510) DELETE + 10 siz DELETE
+./undo.sh --commit           # GP 가격(자연키 comp_cd+siz 501~510) DELETE + 066 link(501~510) DELETE + 10 siz DELETE
 ```
 
-- `migrate.sql`은 단일 `BEGIN…COMMIT`(원자성). `apply.sh` DRY-RUN이 마지막 `COMMIT;`→`ROLLBACK;` 치환.
-- 모든 INSERT는 `ON CONFLICT … DO NOTHING`(멱등) — 2회 적용 시 2회차 행변경 0 기대(라이브 DRY-RUN으로 검증 대상).
+- `migrate.sql`은 단일 `BEGIN…COMMIT`(원자성). step 00 setval → 가드0 → 01·02·03 → assert. `apply.sh` DRY-RUN이 마지막 `COMMIT;`→`ROLLBACK;` 치환.
+- siz/link = `ON CONFLICT … DO NOTHING`, 가격 = **자연키 NOT EXISTS** (멱등) — 라이브 2-pass DRY-RUN 실증 완료(2회차 0행, §10).
+- **undo 가격 DELETE 는 자연키(comp_cd=COMP_GANGPAN_PRINT + siz 501~510)** — `comp_price_id` 명시 폐지로 PK IN 불가.
+  35mm(`SIZ_000422`)는 siz IN 절에서 빠지므로 committed 분 보존(무간섭).
 - 자격증명은 `.env.local`(`RAILWAY_DB_*`)에서만. 비밀번호는 어떤 스크립트도 stdout/로그/`_workspace`에 출력하지 않는다.
 - **35mm(`SIZ_000422`)는 committed 분** → undo는 35mm size link·siz를 절대 제거하지 않음(IN 절에서 제외).
 
@@ -118,15 +142,31 @@
 |------|------|
 | `gen_migrate_sql.py` | 생성기(입력 CSV/권위표 verbatim → 멱등 SQL, 재현성. 손편집 금지) |
 | `01_siz_register.sql` | 10 NEW 원형 siz INSERT (`ON CONFLICT (siz_cd) DO NOTHING`) |
-| `02_component_prices.sql` | 100 GP 가격 INSERT (`ON CONFLICT (comp_price_id) DO NOTHING`) |
+| `02_component_prices.sql` | 100 GP 가격 INSERT (**auto-IDENTITY + 자연키 NOT EXISTS** 가드, 수정 2026-06-07) |
 | `03_product_sizes.sql` | 11 066 원형 size link (`ON CONFLICT (prd_cd, siz_cd) DO NOTHING`) |
-| `migrate.sql` | 단일 트랜잭션 래퍼(BEGIN → 가드0 → 01 → 02 → 03 → assert ×3 → COMMIT) |
+| `migrate.sql` | 단일 트랜잭션 래퍼(BEGIN → **step00 setval** → 가드0 → 01 → 02 → 03 → assert ×4 → COMMIT) |
 | `apply.sh` | 로더(기본 DRY-RUN/rollback, `--commit`=인간 승인). `.env.local`만. 비번 미출력 |
 | `backup.sh` / `backup.sql` | 읽기전용 백업 스냅샷(undo 권위) |
-| `undo.sh` / `undo.sql` | 역실행(prices 100 + link 10 + siz 10 DELETE, 35mm 보존) |
+| `undo.sh` / `undo.sql` | 역실행(가격 자연키 DELETE + link 10 + siz 10 DELETE, 35mm 보존) |
 | `migrate.provenance.csv` | 생성행 → source CSV/권위표 출처(검증 역대조) |
 
-## 10. 검증 핸드오프 (자기 승인 금지)
+## 10. 라이브 2-pass DRY-RUN 실증 (수정 검증, 2026-06-07)
 
-`dbm-validator`에게 R1~R6 + 라이브 롤백 DRY-RUN(2회 멱등성·제약위반0) 검증을 요청한다. 빌더는 자기 승인하지 않는다.
+롤백전용 단일 트랜잭션 내 2회 적재 + 강제 ROLLBACK(COMMIT 0, DB 영구 무변경):
+
+| 점검 | PASS 1 | PASS 2 | 판정 |
+|------|:------:|:------:|:----:|
+| setval (시퀀스→MAX) | 4805 | 4905 | OK (재동기화 발화) |
+| siz 501~510 | 10 | 10 | 멱등 (2회차 0행) |
+| GP 가격 (501~510) | 100 | 100 | **멱등 + under-load 0** |
+| GP 가격 comp_price_id 범위 | 4806~ | — | **충돌 0** (>MAX 4805) |
+| 066 size link | 11 | 11 | 멱등 |
+| 35mm(SIZ_000422) committed | 10 | 10 | **무간섭** |
+| ROLLBACK 후 잔존 | — | 0 | DB 영구 무변경 |
+
+→ 수정(auto-IDENTITY+자연키 가드+setval) 실증 완료. **GP 가격 정확히 100행 적재(under-load 해소), 2회차 0행(멱등).**
+
+## 11. 검증 핸드오프 (자기 승인 금지)
+
+`dbm-validator`에게 R1~R6 최종 게이트(위 §10 라이브 DRY-RUN 결과 포함 재확인)를 요청한다. 빌더는 자기 승인하지 않는다.
 별도 디렉터리이며 committed `_exec_price`/`_exec`/`_migrate_fixedprice`/`_migrate_areamatrix`와 무간섭.

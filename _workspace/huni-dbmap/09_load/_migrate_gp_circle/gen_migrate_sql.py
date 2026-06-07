@@ -13,23 +13,34 @@
 #     - 09_load/_assembled/code-row-preload.md §2                            (siz_cd 배정 권위표)
 #   산출:
 #     - 01_siz_register.sql      10 NEW 원형 siz INSERT  (ON CONFLICT (siz_cd) DO NOTHING)
-#     - 02_component_prices.sql  100 GP 가격 INSERT        (ON CONFLICT (comp_price_id) DO NOTHING)
+#     - 02_component_prices.sql  100 GP 가격 INSERT        (auto-IDENTITY + 자연키 NOT EXISTS 가드)
 #     - 03_product_sizes.sql     11 PRD_000066 원형 size link (ON CONFLICT (prd_cd, siz_cd) DO NOTHING)
-#     - migrate.sql              BEGIN → 가드0 → 01 → 02 → 03 → assert → COMMIT (로더가 ROLLBACK/COMMIT 주입)
-#     - undo.sql                 등록 10 siz + 100 GP prices + 11 size link 제거
+#     - migrate.sql              BEGIN → step00 setval → 가드0 → 01 → 02 → 03 → assert → COMMIT
+#     - undo.sql                 등록 10 siz + 100 GP prices + 11 size link 제거 (가격=자연키 DELETE)
 #     - backup.sql               (읽기전용) 신규 siz_cd 부재 확증 + 영향 GP comp 스냅샷
 #     - migrate.provenance.csv   생성행 → source CSV 출처 추적
 #
+#   [수정 2026-06-07 — 라이브 DRY-RUN 적발 결함]
+#     기존 02 는 명시 comp_price_id(2956~3065) + ON CONFLICT (comp_price_id) DO NOTHING 이었다.
+#     라이브 확증: comp_price_id 는 IDENTITY(BY DEFAULT)·시퀀스 stale(last_value=2 vs MAX=4805).
+#       (1) 명시 ID 는 시퀀스를 무시 → 이후 auto-IDENTITY INSERT 가 그 ID 를 재발급해 충돌·비멱등.
+#       (2) ON CONFLICT(comp_price_id) 는 명시 ID 가 우연히 라이브에 있으면 자연키 무관하게
+#           가격행을 silently skip → under-load (디지털인쇄 04 와 동일 부류 결함).
+#     수정: 02 를 comp_price_id 생략(auto-IDENTITY) + 자연키(8) NOT EXISTS 멱등 가드로 전환.
+#           migrate.sql step 00 에 setval 추가(시퀀스→MAX) → 100행 4806~ 발급(충돌 0).
+#           undo 도 자연키(comp_cd + siz 501~510) DELETE 로 전환(id 미상이므로 PK IN 불가).
+#
 #   원칙(round-5):
-#     - 멱등성(R1): 모든 INSERT는 ON CONFLICT 가드.
+#     - 멱등성(R1): siz/link = ON CONFLICT(PK) 가드. 가격 = 자연키 NOT EXISTS(IS NOT DISTINCT FROM)
+#                   — GP 가격은 clr/coat/bdl 차원 NULL 이고 자연키 UNIQUE 가 NULLS DISTINCT 라
+#                   ON CONFLICT 무력 → NOT EXISTS 로 NULL-safe 매칭(디지털인쇄 04 와 동일 패턴).
 #     - 원자성(R2): 단일 트랜잭션(migrate.sql). 중간 COMMIT 없음.
 #     - 재현성(R3): CSV/권위표 위 스크립트 생성. 같은 입력 → 같은 출력.
 #     - FK 위상순(R): siz → component_prices, siz → product_sizes. 부모(siz) 먼저.
 #     - search-before-mint: 10 비-35mm 직경만 신규(라이브 max=SIZ_000500, 501~510 sticker 예약 점유).
 #                           35mm = 기존 SIZ_000422 재사용(committed). 발명 0.
-#     - reg_dt NOT NULL DEFAULT 교훈(round-5): component_prices는 reg_dt 컬럼 미포함(DEFAULT now() 발화,
-#                           committed _exec_price/04 패턴 일치). product_sizes는 source reg_dt 실값('2026-06-05')
-#                           을 명시(공란 아님 → NULL 위험 없음).
+#     - reg_dt NOT NULL DEFAULT 교훈(round-5): component_prices는 reg_dt 컬럼 미포함(DEFAULT now() 발화).
+#                           product_sizes는 source reg_dt 실값('2026-06-05')을 명시(공란 아님 → NULL 위험 없음).
 #   읽기전용. DB 쓰기·DDL·COMMIT 0. 비밀번호 미출력.
 # =====================================================================
 import csv
@@ -215,22 +226,55 @@ def gen_component_prices_sql(rows):
     L.append("-- STEP 2: GP(합판도무송) 원형 가격 적재 (t_prc_component_prices)")
     L.append(f"--   {len(rows)} GP 원형 행 (10직경×2mat[MAT_000084/153]×5수량밴드[1000..5000]). 35mm 제외(committed).")
     L.append("--   placeholder SIZ_PENDING_GP_원형NNmm → 실 siz_cd(501~510) 치환. note 에 [siz-corrected:…] 접두.")
-    L.append("--   comp_price_id = source CSV surrogate PK 명시(committed _exec_price 04 패턴 일치).")
-    L.append("--   reg_dt 미포함 — NOT NULL DEFAULT now() 발화(committed 04 와 동일, round-5 reg_dt 교훈 준수).")
-    L.append("--   ON CONFLICT (comp_price_id) DO NOTHING — 충돌키=라이브 PK. 재실행 시 no-op(R1).")
+    L.append("--")
+    L.append("--   [수정 2026-06-07 — 라이브 DRY-RUN 적발 결함]")
+    L.append("--   기존: comp_price_id 명시(2956~3065) + ON CONFLICT (comp_price_id) DO NOTHING.")
+    L.append("--   결함: comp_price_id 는 IDENTITY(BY DEFAULT)·시퀀스 stale(last_value=2 vs MAX=4805).")
+    L.append("--         명시 ID 는 시퀀스를 무시 → 향후 auto-IDENTITY INSERT 와 충돌·재실행 비멱등.")
+    L.append("--         또한 ON CONFLICT(comp_price_id) 가 명시 ID 가 우연히 라이브에 있으면 가격행을")
+    L.append("--         자연키 무관하게 silently skip → under-load.")
+    L.append("--   수정: comp_price_id 생략(auto-IDENTITY) + 자연키 NOT EXISTS 멱등 가드.")
+    L.append("--         migrate.sql step 00 setval 로 시퀀스를 MAX 로 재동기화 → 100행 4806~ 발급.")
+    L.append("--   자연키(8): (comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty).")
+    L.append("--     GP 용 NULL 차원(clr/coat/bdl) 존재 → ux_t_prc_comp_prices_nat_key 가 NULLS DISTINCT")
+    L.append("--     (라이브 indnullsnotdistinct=f)라 ON CONFLICT 무력 → IS NOT DISTINCT FROM 매칭 가드 사용.")
+    L.append("--   reg_dt 미포함 — NOT NULL DEFAULT now() 발화(round-5 reg_dt 교훈 준수).")
     L.append("--   comp_cd=COMP_GANGPAN_PRINT 는 라이브 실재(35mm 행이 이미 참조). FK fk_prc_comp_prices_comp_cd PASS.")
     L.append("-- =====================================================================")
-    cols = ("(comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, "
+    cols = ("(comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, "
             "coat_side_cnt, bdl_qty, min_qty, unit_price, note)")
     for r in rows:
-        vals = (f"({sql_num(r['comp_price_id'])}, {sql_str(r['comp_cd'])}, {sql_str(r['apply_ymd'])}, "
-                f"{sql_str(r['siz_cd'])}, {sql_str(r['clr_cd'])}, {sql_str(r['mat_cd'])}, "
-                f"{sql_num(r['coat_side_cnt'])}, {sql_num(r['bdl_qty'])}, {sql_num(r['min_qty'])}, "
-                f"{sql_num(r['unit_price'])}, {sql_str(r['note'])})")
-        L.append(f"-- src: load_price/t_prc_component_prices.csv:{r['src_line']} comp_price_id={r['comp_price_id']} "
+        comp_cd = sql_str(r['comp_cd'])
+        apply_ymd = sql_str(r['apply_ymd'])
+        siz_cd = sql_str(r['siz_cd'])
+        clr_cd = sql_str(r['clr_cd'])           # 빈 → NULL
+        mat_cd = sql_str(r['mat_cd'])
+        coat = sql_num(r['coat_side_cnt'])       # 빈 → NULL
+        bdl = sql_num(r['bdl_qty'])              # 빈 → NULL
+        minq = sql_num(r['min_qty'])
+        price = sql_num(r['unit_price'])
+        note = sql_str(r['note'])
+        # WHERE NOT EXISTS 자연키 매칭 — IS NOT DISTINCT FROM (NULL-safe equality)
+        where_match = (
+            f"comp_cd IS NOT DISTINCT FROM {comp_cd}"
+            f" AND apply_ymd IS NOT DISTINCT FROM {apply_ymd}"
+            f" AND siz_cd IS NOT DISTINCT FROM {siz_cd}"
+            f" AND clr_cd IS NOT DISTINCT FROM {clr_cd}"
+            f" AND mat_cd IS NOT DISTINCT FROM {mat_cd}"
+            f" AND coat_side_cnt IS NOT DISTINCT FROM {coat}"
+            f" AND bdl_qty IS NOT DISTINCT FROM {bdl}"
+            f" AND min_qty IS NOT DISTINCT FROM {minq}"
+        )
+        sel_vals = (f"{comp_cd}, {apply_ymd}, {siz_cd}, {clr_cd}, {mat_cd}, "
+                    f"{coat}, {bdl}, {minq}, {price}, {note}")
+        L.append(f"-- src: load_price/t_prc_component_prices.csv:{r['src_line']} (was comp_price_id={r['comp_price_id']}) "
                  f"siz:{r['placeholder']}->{r['siz_cd']}")
-        L.append(f"INSERT INTO t_prc_component_prices {cols} VALUES {vals} "
-                 f"ON CONFLICT (comp_price_id) DO NOTHING;")
+        L.append(f"INSERT INTO t_prc_component_prices {cols}")
+        L.append(f"SELECT {sel_vals}")
+        L.append("WHERE NOT EXISTS (")
+        L.append("  SELECT 1 FROM t_prc_component_prices")
+        L.append(f"  WHERE {where_match}")
+        L.append(");")
     L.append("")
     return "\n".join(L)
 
@@ -260,18 +304,26 @@ def gen_product_sizes_sql(links):
 
 # ---- migrate.sql wrapper ---------------------------------------------
 def gen_migrate_sql(price_rows, links):
-    pid_in = ", ".join(str(r["comp_price_id"]) for r in price_rows)
     L = []
     L.append("-- =====================================================================")
     L.append("-- GP 합판도무송 원형 직경 마이그레이션 (migrate.sql)")
     L.append("-- 생성: gen_migrate_sql.py (입력 CSV verbatim, 손편집 금지)")
     L.append("-- 단일 트랜잭션. 로더(apply.sh)가 ROLLBACK 주입(기본 DRY-RUN), --commit=인간 승인.")
-    L.append("-- 3단계: 01 siz 등록(10) → 02 GP 가격(100) → 03 066 size link(11). FK 위상순(siz 먼저).")
-    L.append("-- 35mm(SIZ_000422)는 committed _exec_price GO 번들에 이미 적재 — 본 트랙 무간섭.")
+    L.append("-- 4단계: 00 시퀀스 재동기화 → 01 siz 등록(10) → 02 GP 가격(100) → 03 066 size link(11).")
+    L.append("--        FK 위상순(siz 먼저). 35mm(SIZ_000422)는 committed _exec_price GO 번들 적재 — 무간섭.")
+    L.append("--")
+    L.append("-- [수정 2026-06-07 — 라이브 DRY-RUN 적발] step 00 setval 추가: comp_price_id 시퀀스")
+    L.append("--   stale(last_value=2 vs MAX=4805). 02 가 auto-IDENTITY 로 전환됐으므로, 시퀀스를 MAX 로")
+    L.append("--   재동기화해야 100행이 4806~ 발급(충돌 0). setval idempotent·롤백 시 영구 미반영(DRY-RUN 안전).")
     L.append("-- =====================================================================")
     L.append("\\set ON_ERROR_STOP on")
     L.append("\\timing on")
     L.append("BEGIN;")
+    L.append("")
+    L.append("-- 단계 0: comp_price_id IDENTITY 시퀀스 재동기화 (02 auto-IDENTITY INSERT 전).")
+    L.append("--   라이브 DRY-RUN 적발: 시퀀스 last_value=2 vs MAX(comp_price_id)=4805. setval 로 동기화.")
+    L.append("SELECT setval('public.t_prc_component_prices_comp_price_id_seq',")
+    L.append("              (SELECT COALESCE(MAX(comp_price_id), 0) FROM t_prc_component_prices), true);")
     L.append("")
     L.append("-- 가드 0: search-before-mint 불변식 — 신규 SIZ_000501~510 적재 전 라이브 부재(0)여야 정상.")
     L.append("--         >0 이면 이미 존재 → ON CONFLICT DO NOTHING 이 멱등 처리(중단 아님, NOTICE 만).")
@@ -292,16 +344,31 @@ def gen_migrate_sql(price_rows, links):
     L.append("\\i 03_product_sizes.sql")
     L.append("")
     L.append("-- 적재 후 어서션 (롤백 전 검증용 — DRY-RUN/검증에서 사용)")
-    L.append("-- 1) FK 고아(siz): 본 적재 100 GP 가격행의 siz_cd 전건 t_siz_sizes 존재 (0=PASS).")
+    L.append("-- 1) FK 고아(siz): 본 적재 GP 가격행의 siz_cd 전건 t_siz_sizes 존재 (0=PASS).")
+    L.append("--    [수정] comp_price_id 명시 폐지 → 자연키(comp_cd=COMP_GANGPAN_PRINT + siz 501~510)로 식별.")
     L.append("DO $$")
     L.append("DECLARE orphan int;")
     L.append("BEGIN")
+    gp_siz_in = ", ".join(f"'{s}'" for s in NEW_SIZ_CDS)
     L.append("  SELECT count(*) INTO orphan FROM t_prc_component_prices cp")
     L.append("   LEFT JOIN t_siz_sizes s ON s.siz_cd = cp.siz_cd")
-    L.append(f"   WHERE cp.comp_price_id IN ({pid_in}) AND s.siz_cd IS NULL;")
-    L.append("  RAISE NOTICE '[assert] GP 가격 100행 FK 고아(siz 미해소, 0=PASS): %', orphan;")
+    L.append(f"   WHERE cp.comp_cd = 'COMP_GANGPAN_PRINT' AND cp.siz_cd IN ({gp_siz_in})")
+    L.append("     AND s.siz_cd IS NULL;")
+    L.append("  RAISE NOTICE '[assert] GP 원형 가격행 FK 고아(siz 미해소, 0=PASS): %', orphan;")
     L.append("  IF orphan <> 0 THEN")
     L.append("    RAISE EXCEPTION 'GP 가격행 FK 고아 % 건 — siz 미등록. 중단.', orphan;")
+    L.append("  END IF;")
+    L.append("END $$;")
+    L.append("")
+    L.append("-- 1b) 적재 행수 검증: 본 트랜잭션에서 GP 원형(siz 501~510) 가격행이 정확히 100건이어야 (under-load 0).")
+    L.append("DO $$")
+    L.append("DECLARE gp_cnt int;")
+    L.append("BEGIN")
+    L.append("  SELECT count(*) INTO gp_cnt FROM t_prc_component_prices")
+    L.append(f"   WHERE comp_cd = 'COMP_GANGPAN_PRINT' AND siz_cd IN ({gp_siz_in});")
+    L.append("  RAISE NOTICE '[assert] GP 원형(501~510) 가격행 수(100=PASS, 1회차): %', gp_cnt;")
+    L.append("  IF gp_cnt <> 100 THEN")
+    L.append("    RAISE EXCEPTION 'GP 원형 가격행 % 건 (기대 100) — under/over-load. 중단.', gp_cnt;")
     L.append("  END IF;")
     L.append("END $$;")
     L.append("")
@@ -340,21 +407,26 @@ def gen_migrate_sql(price_rows, links):
 
 
 def gen_undo_sql(price_rows, links):
-    price_ids = [r["comp_price_id"] for r in price_rows]
     L = []
     L.append("-- =====================================================================")
     L.append("-- GP 원형 마이그레이션 역실행 (undo.sql)")
     L.append("--   추가한 100 GP 가격 + 11 066 size link + 등록 10 siz 를 제거한다. 단일 트랜잭션.")
     L.append("--   기본 ROLLBACK(undo.sh DRY-RUN). --commit=인간 승인.")
     L.append("--   제거순 = 적재 역순(자식 먼저): prices → size link → siz. FK 안전.")
-    L.append("--   35mm(SIZ_000422)는 committed 분이라 절대 건드리지 않음(IN 절에서 제외).")
+    L.append("--   35mm(SIZ_000422)는 committed 분이라 절대 건드리지 않음(siz 501~510 한정).")
+    L.append("--")
+    L.append("--   [수정 2026-06-07] comp_price_id 명시 폐지(auto-IDENTITY 전환)에 따라 가격 DELETE 를")
+    L.append("--   자연키(comp_cd=COMP_GANGPAN_PRINT + siz 501~510)로 전환. id 를 모르므로 PK IN 불가.")
+    L.append("--   35mm(SIZ_000422)는 siz IN 절에서 제외되므로 committed 분 보존 — 안전.")
     L.append("-- =====================================================================")
     L.append("\\set ON_ERROR_STOP on")
     L.append("BEGIN;")
     L.append("")
-    L.append("-- 1) GP 가격 100행 제거 — comp_price_id(PK) IN 으로 정밀(본 적재분만, 35mm 미포함).")
-    pid_in = ", ".join(str(p) for p in price_ids)
-    L.append(f"DELETE FROM t_prc_component_prices WHERE comp_price_id IN ({pid_in});")
+    L.append("-- 1) GP 원형 가격 100행 제거 — 자연키(comp_cd + 신규 siz 501~510)로 정밀.")
+    L.append("--    35mm(SIZ_000422)는 IN 절에서 빠지므로 committed 분 무간섭.")
+    new_siz_in = ", ".join(f"'{s}'" for s in NEW_SIZ_CDS)
+    L.append("DELETE FROM t_prc_component_prices")
+    L.append(f" WHERE comp_cd = 'COMP_GANGPAN_PRINT' AND siz_cd IN ({new_siz_in});")
     L.append("")
     L.append("-- 2) 066 size link 중 신규 siz(501~510)분만 제거 — 35mm(SIZ_000422) link 는 보존(재사용 권위).")
     new_link_siz = ", ".join(f"'{s}'" for s in NEW_SIZ_CDS)
@@ -431,8 +503,11 @@ def main():
     assert len(price_rows) == 100, f"GP 가격행 수 {len(price_rows)} != 100 (실제 {len(price_rows)})"
     assert excluded_35 == 10, f"35mm 제외 수 {excluded_35} != 10"
     assert len(links) == 11, f"size link 수 {len(links)} != 11"
-    pid = [r["comp_price_id"] for r in price_rows]
-    assert len(set(pid)) == 100, f"comp_price_id PK 중복 — distinct {len(set(pid))} != 100"
+    # [수정] comp_price_id 명시 폐지(auto-IDENTITY) → 자연키(8) distinct 검증으로 전환.
+    #   GP 가격 자연키: (comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty).
+    natkeys = [(r["comp_cd"], r["apply_ymd"], r["siz_cd"], r["clr_cd"], r["mat_cd"],
+               r["coat_side_cnt"], r["bdl_qty"], r["min_qty"]) for r in price_rows]
+    assert len(set(natkeys)) == 100, f"GP 가격 자연키 중복 — distinct {len(set(natkeys))} != 100"
     # 가격행 siz_cd 가 전부 등록 siz(501~510)로 해소되는지(고아 0)
     unresolved = [r for r in price_rows if r["siz_cd"] not in NEW_SIZ_CDS]
     assert not unresolved, f"미해소 siz 가격행 {len(unresolved)} — 권위표 누락"
@@ -457,7 +532,8 @@ def main():
     print(f"[gen] GP 가격행     : {len(price_rows)}  (MAT_000084 {n84} + MAT_000153 {n153}, 밴드 {bands})")
     print(f"[gen] 35mm 제외     : {excluded_35}  (committed _exec_price SIZ_000422, 본 트랙 무간섭)")
     print(f"[gen] 066 size link : {len(links)}  (신규 10 + 재사용 1[SIZ_000422])")
-    print(f"[gen] comp_price_id distinct : {len(set(pid))}/{len(pid)}  (PK 중복 0 필수)")
+    print(f"[gen] GP 가격 자연키 distinct : {len(set(natkeys))}/{len(natkeys)}  (중복 0 필수, auto-IDENTITY)")
+    print("[gen] 02 = auto-IDENTITY + 자연키 NOT EXISTS 가드 / migrate step00 setval (시퀀스 재동기화)")
 
 
 if __name__ == "__main__":
