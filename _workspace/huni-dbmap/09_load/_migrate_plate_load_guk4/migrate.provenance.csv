@@ -1,0 +1,86 @@
+sql_file,op,source,target,note
+01_plate_correction_guk4.sql,DELETE,plate-load-products.csv(31 corr),prd_cd IN(31) AND siz_cd<>SIZ_000499,live 101 rows
+01_plate_correction_guk4.sql,INSERT,plate-load-products.csv:PRD_000017,"PRD_000017,SIZ_000499,Y,OUTPUT_PAPER_TYPE.01",코팅엽서
+01_plate_correction_guk4.sql,INSERT,plate-load-products.csv:PRD_000018,"PRD_000018,SIZ_000499,Y,OUTPUT_PAPER_TYPE.01",스탠다드엽서
+01_plate_correction_guk4.sql,INSERT,plate-load-products.csv:PRD_000020,"PRD_000020,SIZ_000499,Y,OUTPUT_PAPER_TYPE.01",화이트인쇄엽서
+01_plate_correction_guk4.sql,INSERT,plate-load-products.csv:PRD_000021,"PRD_000021,SIZ_000499,Y,OUTPUT_PAPER_TYPE.01",핑크별색엽서
+01_plate_correction_guk4.sql,INSERT,plate-load-products.csv:PRD_000022,"PRD_000022,SIZ_000499,Y,OUTPUT_PAPER_TYPE.01",금은별색엽서
+01_plate_correction_guk4.sql,INSERT,plate-load-products.csv:PRD_000023,"PRD_000023,SIZ_000499,Y,OUTPUT_PAPER_TYPE.01",모양엽서
+01_plate_correction_guk4.sql,INSERT,plate-load-products.csv:PRD_000024,"PRD_000024,SIZ_000499,Y,OUTPUT_PAPER_TYPE.01",포토카드
+01_plate_correction_guk4.sql,INSERT,plate-load-products.csv:PRD_000026,"PRD_000026,SIZ_000499,Y,OUTPUT_PAPER_TYPE.01",종이슬로건
+01_plate_correction_guk4.sql,INSERT,plate-load-products.csv:PRD_000027,"PRD_000027,SIZ_000499,Y,OUTPUT_PAPER_TYPE.01",2단접지카드
+01_plate_correction_guk4.sql,INSERT,plate-load-products.csv:PRD_000028,"PRD_000028,SIZ_000499,Y,OUTPUT_PAPER_TYPE.01",미니접지카드
+01_plate_correction_guk4.sql,INSERT,plate-load-products.csv:PRD_000029,"PRD_000029,SIZ_000499,Y,OUTPUT_PAPER_TYPE.01",3단접지카드
+01_plate_correction_guk4.sql,INSERT,plate-load-products.csv:PRD_000031,"PRD_000031,SIZ_000499,Y,OUTPUT_PAPER_TYPE.01",프리미엄명함
+01_plate_correction_guk4.sql,INSERT,plate-load-products.csv:PRD_000032,"PRD_000032,SIZ_000499,Y,OUTPUT_PAPER_TYPE.01",코팅명함
+01_plate_correction_guk4.sql,INSERT,plate-load-products.csv:PRD_000033,"PRD_000033,SIZ_000499,Y,OUTPUT_PAPER_TYPE.01",스탠다드명함
+01_plate_correction_guk4.sql,INSERT,plate-load-products.csv:PRD_000034,"PRD_000034,SIZ_000499,Y,OUTPUT_PAPER_TYPE.01",펄명함
+01_plate_correction_guk4.sql,INSERT,plate-load-products.csv:PRD_000035,"PRD_000035,SIZ_000499,Y,OUTPUT_PAPER_TYPE.01",모양명함
+01_plate_correction_guk4.sql,INSERT,plate-load-products.csv:PRD_000036,"PRD_000036,SIZ_000499,Y,OUTPUT_PAPER_TYPE.01",미니모양명함
+01_plate_correction_guk4.sql,INSERT,plate-load-products.csv:PRD_000038,"PRD_000038,SIZ_000499,Y,OUTPUT_PAPER_TYPE.01",형압명함
+01_plate_correction_guk4.sql,INSERT,plate-load-products.csv:PRD_000040,"PRD_000040,SIZ_000499,Y,OUTPUT_PAPER_TYPE.01",화이트인쇄명함
+01_plate_correction_guk4.sql,INSERT,plate-load-products.csv:PRD_000041,"PRD_000041,SIZ_000499,Y,OUTPUT_PAPER_TYPE.01",스탠다드 쿠폰/상품권
+01_plate_correction_guk4.sql,INSERT,plate-load-products.csv:PRD_000042,"PRD_000042,SIZ_000499,Y,OUTPUT_PAPER_TYPE.01",프리미엄 쿠폰/상품권
+01_plate_correction_guk4.sql,INSERT,plate-load-products.csv:PRD_000043,"PRD_000043,SIZ_000499,Y,OUTPUT_PAPER_TYPE.01",인쇄배경지(OPP봉투타입)
+01_plate_correction_guk4.sql,INSERT,plate-load-products.csv:PRD_000044,"PRD_000044,SIZ_000499,Y,OUTPUT_PAPER_TYPE.01",인쇄배경지(투명케이스타입)
+01_plate_correction_guk4.sql,INSERT,plate-load-products.csv:PRD_000045,"PRD_000045,SIZ_000499,Y,OUTPUT_PAPER_TYPE.01",인쇄헤더택
+01_plate_correction_guk4.sql,INSERT,plate-load-products.csv:PRD_000046,"PRD_000046,SIZ_000499,Y,OUTPUT_PAPER_TYPE.01",라벨/택
+01_plate_correction_guk4.sql,INSERT,plate-load-products.csv:PRD_000047,"PRD_000047,SIZ_000499,Y,OUTPUT_PAPER_TYPE.01",소량전단지
+01_plate_correction_guk4.sql,INSERT,plate-load-products.csv:PRD_000048,"PRD_000048,SIZ_000499,Y,OUTPUT_PAPER_TYPE.01",접지리플렛
+01_plate_correction_guk4.sql,INSERT,plate-load-products.csv:PRD_000108,"PRD_000108,SIZ_000499,Y,OUTPUT_PAPER_TYPE.01",탁상형캘린더
+01_plate_correction_guk4.sql,INSERT,plate-load-products.csv:PRD_000109,"PRD_000109,SIZ_000499,Y,OUTPUT_PAPER_TYPE.01",미니탁상형캘린더
+01_plate_correction_guk4.sql,INSERT,plate-load-products.csv:PRD_000110,"PRD_000110,SIZ_000499,Y,OUTPUT_PAPER_TYPE.01",엽서캘린더
+01_plate_correction_guk4.sql,INSERT,plate-load-products.csv:PRD_000111,"PRD_000111,SIZ_000499,Y,OUTPUT_PAPER_TYPE.01",벽걸이캘린더
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000023 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000024 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000112 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000116 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000117 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000121 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000122 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000123 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000125 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000128 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000130 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000131 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000134 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000136 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000138 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000140 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000141 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000145 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000146 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000149 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000150 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000151 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000152 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000153 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000154 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000155 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000156 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000158 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000159 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000160 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000161 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000162 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000163 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000164 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000165 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000166 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000167 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000168 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000169 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000177 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000178 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000182 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000184 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000282 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000283 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000284 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000285 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000286 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000287 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000288 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000289 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000290 del_yn->Y,NOT EXISTS 3-guard
+02_worksize_orphan_cleanup.sql,UPDATE(soft-delete),plate-worksize-orphan-cleanup.csv(32scope ORPHAN),SIZ_000291 del_yn->Y,NOT EXISTS 3-guard
