@@ -20,8 +20,9 @@ round-2 가격 매핑 fit-gap·차원 매핑용. `t_prc_component_prices`의 차
 | PRC_COMPONENT_TYPE.03 | 용지비 |
 | PRC_COMPONENT_TYPE.04 | 후가공비 |
 | PRC_COMPONENT_TYPE.05 | 박형압비 |
+| PRC_COMPONENT_TYPE.06 | 완제품비 |
 
-주의: 계산공식집초안의 구성요소(인쇄비·코팅비·용지비·후가공비·박)와 정확히 대응. **별색인쇄비**는 별도 유형 없음(인쇄비 .01 귀속 또는 별도 comp_cd 결정 대상).
+주의: 계산공식집초안의 구성요소(인쇄비·코팅비·용지비·후가공비·박)와 정확히 대응. **.06 완제품비** = 용지·인쇄·가공이 포함된 통가격 단가(고정가형 완제품가·커팅 합가)에 사용 — round-2 봉투(COMP_ENV_MAKING)·스티커·명함·포스터·엽서북 완제품가 component가 .06이며 `COMP_CUT_FULL_DIECUT`(완칼 합가)도 .06. **별색인쇄비**는 별도 유형 없음(인쇄비 .01 귀속 또는 별도 comp_cd 결정 대상). [정정 2026-06-07: 라이브 6종 확인 — .06 완제품비 누락 보강. dbm-validator D-3]
 
 ## 도수 코드 (clr_cd) — `t_clr_color_counts` — `t_prc_component_prices.clr_cd` FK 대상 (5행)
 

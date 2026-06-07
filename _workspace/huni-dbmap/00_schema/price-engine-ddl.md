@@ -41,7 +41,7 @@
 ```
 t_cod_base_codes(cod_cd)
    ├─< t_prc_price_formulas.frm_typ_cd        (FRM_TYPE — 합산형/단순형)
-   ├─< t_prc_price_components.comp_typ_cd      (PRC_COMPONENT_TYPE — 인쇄/코팅/용지/후가공/박형압)
+   ├─< t_prc_price_components.comp_typ_cd      (PRC_COMPONENT_TYPE — 인쇄/코팅/용지/후가공/박형압/완제품비)
    └─< t_prd_product_bundle_qtys.bdl_unit_typ_cd (QTY_UNIT — EA/매/권/세트)
 
 t_prc_price_formulas(frm_cd)
@@ -197,7 +197,7 @@ t_prd_products(prd_cd)
 | C-3 `max_qty` 부재 | `component_prices`에 max_qty 없음 = **상향개방**(min_qty 이상 다음 구간까지). 구간 표현은 min_qty 행들의 연속 | max_qty 만들려 하지 말 것. 구간 경계는 정렬된 min_qty로 해석 |
 | C-4 `addtn_yn` 의미 | `formula_components.addtn_yn` char(1) CHECK Y/N. **합산 여부 플래그일 뿐 곱셈 연산 아님** | addtn_yn으로 배수/곱 표현 금지. 곱(×출력매수 등)은 공식 단계 의미로 별도 처리 |
 | C-5 FRM_TYPE 2종 | `frm_typ_cd` ∈ {FRM_TYPE.01 합산형, FRM_TYPE.02 단순형}. NOT NULL | 그 외 값 적재 = FK 위반. "원자합산형/고정가형/면적형" → 코드 매핑 후 적재 |
-| C-6 PRC_COMPONENT_TYPE 5종 | `comp_typ_cd` ∈ {.01 인쇄비, .02 코팅비, .03 용지비, .04 후가공비, .05 박형압비}. nullable | 별색인쇄비는 전용 유형 없음 → .01 귀속 또는 별도 comp_cd 결정 |
+| C-6 PRC_COMPONENT_TYPE 6종 | `comp_typ_cd` ∈ {.01 인쇄비, .02 코팅비, .03 용지비, .04 후가공비, .05 박형압비, **.06 완제품비**}. nullable | 별색인쇄비는 전용 유형 없음 → .01 귀속. 완칼/완제품 통가격(`COMP_CUT_FULL_DIECUT` 등)은 .04 아닌 **.06 완제품비**. [정정 2026-06-07: 라이브 6종 확인. dbm-validator D-3] |
 | C-7 clr 5종 | `clr_cd` ∈ {CLR_000001 인쇄안함, 000002 1도, 000003 2도, 000004 3도, 000005 CMYK 4도}. 별색 없음 | 별색 clr_cd 적재 = FK 위반(G-1) |
 | C-8 use_yn/dflt_yn CHECK | `price_formulas.use_yn`·`price_components.use_yn`·`bundle_qtys.dflt_yn` char(1) CHECK Y/N NOT NULL | 공란/소문자 적재 거부. 기본 'Y' |
 | C-9 NULL=NULL 비차원 | nullable 차원 컬럼은 빈 문자열이 아니라 **NULL**로 적재(빈 문자열은 FK 위반). CSV 공란→NULL 변환 규칙 명문화 | '' 적재 시 siz/clr/mat FK 위반 |

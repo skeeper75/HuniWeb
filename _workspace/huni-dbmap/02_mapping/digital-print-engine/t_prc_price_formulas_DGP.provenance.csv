@@ -1,0 +1,7 @@
+frm_cd,calc_formula_row,formula_text,live_check
+PRF_DGP_A,r4,판매가 = 인쇄비 + 코팅비 + 용지비 + 후가공비 + 추가상품,PRF_DGP_A 부재(신규 mint)
+PRF_DGP_B,r15,판매가 = 인쇄비 + 용지비 + 커팅비,신규 mint
+PRF_DGP_C,r19,판매가 = 인쇄비 + 용지비 + 접지비 + 타공비 + 추가상품,신규 mint
+PRF_DGP_D,r25,판매가 = 인쇄비 + 코팅비 + 용지비 + 후가공비,신규 mint
+PRF_DGP_E,r29,판매가 = 인쇄비 + 코팅비 + 용지비 + 접지비 + 후가공비 + 후가공_박(대형) + 추가상품,신규 mint
+PRF_DGP_F,r49,판매가 = 용지비 + 인쇄비 + 커팅비 (썬캡 use_yn=N),신규 mint
