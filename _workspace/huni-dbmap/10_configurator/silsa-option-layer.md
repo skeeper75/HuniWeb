@@ -9,12 +9,12 @@
 
 ## 0. 워크스루 → 적재본 정련 요약 (무엇이 바뀌었나)
 
-본 파일럿이 워크스루(설계 초안, `banner-walkthrough.md`)에 가한 **적재 임계 정련 6건** — 전부 라이브 스키마/트리거 권위(`cpq-schema §2/§4`·`ref-product-processes.csv` 실측)에 근거. 핵심은 **워크스루가 `[CONFIRM]`으로 미뤘던 두 코드(열재단→053, 각목 set)가 라이브 검증 결과 "트리거 REJECT 예정 = BLOCKED"로 확정**된다는 것이다.
+본 파일럿이 워크스루(설계 초안, `banner-walkthrough.md`)에 가한 **적재 임계 정련 6건** — 전부 라이브 스키마/트리거 권위(`cpq-schema §2/§4`·`ref-product-processes.csv` 실측)에 근거. 핵심은 **워크스루가 `[CONFIRM]`으로 미뤘던 두 코드(열재단·각목 set)가 검증 결과 BLOCKED로 확정**된다는 것이다. 그 중 **열재단은 M-1 ① 확정**(`m1-yeoljaedan-decision.md`: 가격표 권위 3,000원 → 실제 가공 공정)에 따라 완칼 PROC_053 차용을 폐기하고 **신규 열재단 전용 공정 PROC_000084 신설 제안**(`11_ddl_proposals/heat-cut-process-proposal`)으로 정정한다 — 여전히 BLOCKED이나 사유는 "공정 신설·적재 인간승인 대기"다.
 
 | # | 워크스루(설계 초안) | 적재본(라이브 정합) | 근거 |
 |---|---------------------|---------------------|------|
 | **R1** | ref_dim_cd = 텍스트 `'process'`/`'set'`/`'addon'`/`'size'` | ref_dim_cd = **라이브 코드 FK** `OPT_REF_DIM.04`(공정)·`.07`(셋트). add-on은 ref_dim 아님(template) | cpq-schema §2 트리거 디스패치·§3 코드값 7종 |
-| **R2** | 열재단 → `PROC_000053` `[CONFIRM]`(미해소) | **PROC_000053 PRD_000138 미적재 확정**(라이브=079/080/081만) → 열재단 옵션 item **BLOCKED**(트리거 REJECT) | ref-product-processes.csv PRD_000138 = 079/080/081 (053 부재) |
+| **R2** | 열재단 → `PROC_000053` 완칼 차용 `[CONFIRM]`(미해소) | **M-1 ① 확정 — 완칼 차용 폐기**(천 매질 부적합), 열재단 = 실제 가공 공정(가격표 3,000원) → **신규 PROC_000084 신설 제안**. 열재단 item 여전히 **BLOCKED**(공정 신설·적재 인간승인 대기) | m1-yeoljaedan-decision.md · 11_ddl_proposals/heat-cut-process-proposal · price-poster-sign-l1.csv(3,000원) |
 | **R3** | option_items에 `ref_param_json {"구수":N}` 저장 | **`ref_param_json` 컬럼 라이브 부재** → 구수/규격 미보존. 타공 4/6/8행은 적재하되 param은 GAP-PARAM 플래그. **qty에 구수 smear 금지** | `_live-schema-dump` option_items = qty만(cpq-schema §4 🔴8) |
 | **R4** | 각목 = `set` or `addon` `[CONFIRM 코드]`(미해소) | **각목 상품 ref-products 0행 + PRD_000138 sets 0행 확정** → 각목 seq2 item **BLOCKED**(sub_prd_cd 미상·트리거 REJECT) | ref-products.csv(각목 0행)·ref-product-sets.csv(PRD_000138 0행) |
 | **R5** | constraint `rule_typ` = 텍스트 `compatible`/`forbidden`/`required` | **`rule_typ_cd` 코드 FK** = `RULE_TYPE.01`(호환)/`.02`(금지)/`.03`(필수동반) | cpq-schema §4 ⚠️11·§3 RULE_TYPE |
@@ -43,9 +43,9 @@
 - `PROC_000079 타공`: `{"inputs":[{"key":"구수","max":8,"min":1,"type":"integer","unit":"개"}]}`
 - `PROC_000080 봉제`: `{"inputs":[{"key":"유형","type":"enum","values":["오버로크","말아박기","봉미싱"]},{"key":"폭","type":"number","unit":"mm"}]}` ← **봉미싱 ∈ 유형 enum**
 - `PROC_000081 부착`: `{"inputs":[{"key":"대상","type":"enum","values":["라벨","맥세이프","끈","테입"]}]}` ← **끈·테입 ∈ 대상 enum**, **큐방 ∉ enum**
-- `PROC_000053 완칼`: `{"inputs":[{"key":"모양","type":"string","required":false}]}` — 열재단 환원 후보이나 **PRD_000138 미적재**
+- `PROC_000053 완칼`: `{"inputs":[{"key":"모양","type":"string","required":false}]}` — 종이 다이컷 공정(천 매질 부적합). **열재단 환원 차용 폐기**(M-1 ① 확정) → 열재단은 신규 PROC_000084로 분리. 053 자체는 PRD_000138 무관
 
-**Step 0 판정:** 타공(079)·봉제(080)·부착(081)은 차원행 실재 → 해당 option_item 등록 가능(INSERTABLE). **열재단=PROC_000053은 PRD_000138 차원행 부재** → 트리거 REJECT = **BLOCKED**(needs L1 pre-load, GAP-DEFER). **각목=set은 PRD_000138 sets 0행 + 각목 완제상품 자체 부재** → 트리거 REJECT = **BLOCKED**(sub_prd_cd 미상, `[CONFIRM]`). 이 두 BLOCKED가 워크스루 `[CONFIRM]`의 라이브 확정 결과다(R2·R4).
+**Step 0 판정:** 타공(079)·봉제(080)·부착(081)은 차원행 실재 → 해당 option_item 등록 가능(INSERTABLE). **열재단=신규 PROC_000084(공정 마스터 미신설)** → 트리거 REJECT = **BLOCKED**(M-1 ① 확정·완칼 차용 폐기, 공정 신설·적재 인간승인 대기, 제안서 `11_ddl_proposals/heat-cut-process-proposal`). **각목=set은 PRD_000138 sets 0행 + 각목 완제상품 자체 부재** → 트리거 REJECT = **BLOCKED**(sub_prd_cd 미상, `[CONFIRM]`). 이 두 BLOCKED가 워크스루 `[CONFIRM]`의 확정 결과다(R2·R4).
 
 ---
 
@@ -85,7 +85,7 @@
 
 | 옵션 값 | 타깃 엔티티 | ref_dim_cd | ref_key1 | param(정의만, 미보존) | 트리거 검사 | 판정 |
 |---|---|---|---|---|---|:--:|
-| 열재단 | 공정 PROC_000053 완칼 | `OPT_REF_DIM.04` | `PROC_000053` `[CONFIRM]` | `{"모양":"열재단"}` | processes(053) **부재** | ❌ **BLOCKED**(GAP-DEFER) |
+| 열재단 | 공정 **열재단(신규 PROC_000084)** | `OPT_REF_DIM.04` | `PROC_000084` `[CONFIRM-CHANNEL]` | 없음(flat 3,000원) | processes(084) **신설 대기** | ❌ **BLOCKED**(신설·적재 인간승인 대기) |
 | 타공(4개) | 공정 PROC_000079 타공 | `OPT_REF_DIM.04` | `PROC_000079` | `{"구수":4}` | processes(079) EXISTS | ✅ INSERTABLE |
 | 타공(6개) | 공정 PROC_000079 타공 | `OPT_REF_DIM.04` | `PROC_000079` | `{"구수":6}` | processes(079) EXISTS | ✅ INSERTABLE |
 | 타공(8개) | 공정 PROC_000079 타공 | `OPT_REF_DIM.04` | `PROC_000079` | `{"구수":8}` | processes(079) EXISTS | ✅ INSERTABLE |
@@ -230,7 +230,7 @@ qty       = 5
 
 | # | 옵션 값(L1) | 그룹 | 타깃 엔티티 | ref_dim_cd | ref_key1 | param | 판정 |
 |:--:|---|---|---|---|---|---|:--:|
-| 1 | 열재단 | OG-GAGONG | 공정 완칼 | OPT_REF_DIM.04 | PROC_000053 `[CONFIRM]` | {모양} | **BLOCKED** |
+| 1 | 열재단 | OG-GAGONG | 공정 열재단(신규) | OPT_REF_DIM.04 | PROC_000084 `[CONFIRM-CHANNEL]` | 없음 | **BLOCKED**(신설대기) |
 | 2 | 타공(4개) | OG-GAGONG | 공정 타공 | OPT_REF_DIM.04 | PROC_000079 | {구수:4} GAP-PARAM | INSERTABLE |
 | 3 | 타공(6개) | OG-GAGONG | 공정 타공 | OPT_REF_DIM.04 | PROC_000079 | {구수:6} GAP-PARAM | INSERTABLE |
 | 4 | 타공(8개) | OG-GAGONG | 공정 타공 | OPT_REF_DIM.04 | PROC_000079 | {구수:8} GAP-PARAM | INSERTABLE |
@@ -254,13 +254,13 @@ qty       = 5
 ```
 [선행 — L1, 대부분 라이브 적재됨] dimension rows:
   ✅ sizes(SIZ_000322)·materials(MAT_000182)·processes 079/080/081 — 적재됨
-  ❌ processes PROC_000053(열재단/완칼) 0행 — 선적재 필요(GAP-DEFER)
+  ❌ processes 열재단 전용공정 PROC_000084(신규) 0행 — 신설·적재 인간승인 대기(M-1 ① 확정·완칼 PROC_053 차용 폐기, 제안서 11_ddl_proposals/heat-cut-process-proposal)
   ❌ sets(각목 sub_prd_cd) 0행 + 각목 완제상품 자체 부재 — 상품+sets 선적재 필요([CONFIRM])
 [1] t_prd_product_option_groups (2행)         — FK: prd_cd→products, sel_typ_cd→cod (트리거 없음)
 [2] t_prd_product_options (11행)              — FK: opt_grp_cd→option_groups (트리거 없음)
 [3] t_prd_product_option_items (적재 CSV = INSERTABLE 9행만) — 트리거: ref_dim_cd별 차원행 EXISTS
        적재 CSV(load_silsa/t_prd_product_option_items.csv): 타공4/6/8(079)·양면테입/큐방/끈/각목LE끈/각목GT끈 seq1(081)·봉미싱(080)
-       분리 CSV(load_silsa/t_prd_product_option_items_BLOCKED.csv, 적재 대상 아님): 열재단(053)·각목 seq2 ×2(set) — 선적재 후 적재 대기
+       분리 CSV(load_silsa/t_prd_product_option_items_BLOCKED.csv, 적재 대상 아님): 열재단(신규 PROC_000084)·각목 seq2 ×2(set) — 신설/선적재 후 적재 대기
 [4] t_prd_product_constraints (3행)           — FK: prd_cd→products, rule_typ_cd→cod
 [5] UPDATE t_prd_products.constraint_json     — §5 compile 캐시
 ```
@@ -277,7 +277,7 @@ qty       = 5
 | option_groups | 2 | 2 | 0 | 트리거 없음 (OG-GAGONG·OG-CHUGA) |
 | options | 11 | 11 | 0 | 트리거 없음(헤더). 가공6+추가5 |
 | **option_items** (`...option_items.csv`) | **9** | **9** | **0** | 적재 CSV = INSERTABLE 9행(타공3·081계열5·봉미싱1). note 컬럼 제거(F-1) |
-| **option_items 분리** (`..._BLOCKED.csv`) | **3** | **0** | **3** | 열재단(053)·각목 seq2 ×2(set). 적재 대상 아님 — 선적재 후 적재 대기. block_reason 컬럼 보유 |
+| **option_items 분리** (`..._BLOCKED.csv`) | **3** | **0** | **3** | 열재단(신규 PROC_000084 신설대기)·각목 seq2 ×2(set). 적재 대상 아님 — 신설/선적재 후 적재 대기. block_reason 컬럼 보유 |
 | constraints | 3 | 3 | 0 | JSONLogic 손계산·python 검증 PASS |
 | **합계** | **28** | **25** | **3** | 적재 CSV 합 = 25행(3 BLOCKED은 분리 CSV로 격리) + constraint_json UPDATE 1건 |
 
@@ -288,7 +288,7 @@ qty       = 5
 ## 10. 설계 결정 필요 / `[CONFIRM]` (리드 에스컬레이션)
 
 ### 미해결 `[CONFIRM]` (라이브 실부재/실해석 — 발명 금지)
-1. **`[CONFIRM]` 열재단 = PROC_000053** — PROC_000053(완칼) PRD_000138 미적재. 열재단→053 환원은 도메인 해석(엑셀 명시 아님). **해소 = 053 차원 선적재 vs "가공없음/열재단=기본재단" 센티넬 규약**(GAP-DEFER·banner GAP-5). 현재 OP-GAGONG-YEOLJAEDAN은 dflt이나 item BLOCKED → 기본 가공이 적재 불가인 모순. **High** 우선.
+1. **`[CONFIRM-CHANNEL]` 열재단 = 신규 PROC_000084** — **M-1 ① 확정**(`m1-yeoljaedan-decision.md`): 열재단 = 실제 가공 공정(가격표 권위 3,000원, 0원 "추가없음"과 구분). 완칼 PROC_053 차용은 **폐기**(종이 다이컷, 천 매질 부적합). 열재단 전용 공정 신설 제안 = `11_ddl_proposals/heat-cut-process-proposal`(proc_cd=PROC_000084 채번=라이브 MAX 확인 후 후니 배정·인간 승인). param 없음(flat). 현재 OP-GAGONG-YEOLJAEDAN은 dflt이나 item BLOCKED(공정 신설 대기) → 기본 가공이 적재 불가 → 공정 신설·적재 인간승인 시 해소. **High** 우선.
 2. **`[CONFIRM]` 각목 sub_prd_cd** — 각목 완제상품 ref-products 0행 + PRD_000138 sets 0행. **해소 = 각목 완제상품 등록(PRD_000xxx) + t_prd_product_sets 적재**. 발명 금지. 복합옵션 2종(LE900/GT900)의 seq2 직결.
 3. **`[CONFIRM]` 양면테입 → {대상:테입}** — L1 `양면테입` ≠ enum `테입`. 합리적 추론이나 엑셀 명시 매핑 아님(validation GAP-4). ref_key1=081은 INSERTABLE이나 param 의미 확정 필요.
 4. **`[CONFIRM]` 큐방 enum 확장** — 부착(081) `대상` enum=`라벨/맥세이프/끈/테입`에 `큐방` 없음. ref_key1=081 EXISTS라 item INSERTABLE이나, param `{대상:큐방}`은 enum 외 값 → **enum 확장 vs 별도 처리** 결정 필요.
@@ -297,7 +297,7 @@ qty       = 5
 | # | 결정 사항 | 후보 | 종속 GAP |
 |---|---|---|---|
 | D-1 | **타공 구수·각목 규격 보존처** | option_items `ref_param_json` 컬럼 추가 vs qty 재사용(불가-구수≠소비량) | **GAP-PARAM**(High) |
-| D-2 | **열재단(053)·각목(set) 미적재 처리** | 차원 선적재(정석) vs deferred 센티넬 규약 | **GAP-DEFER**(High) — BLOCKED 3행 직결 |
+| D-2 | **열재단·각목(set) 미적재 처리** | **열재단: M-1 ① 확정 — 열재단 전용 공정 신설 제안 `11_ddl_proposals/heat-cut-process-proposal`(완칼 차용 폐기, 신설·적재 인간승인)** / 각목: 차원 선적재 vs deferred 센티넬 | **GAP-DEFER**(High) — BLOCKED 3행 직결 |
 | D-3 | **복합옵션 항목 결합 의미** | `item_combine_typ`(AND동반) 플래그 vs "한 옵션 내 전 item 동반필수" 암묵 규약 | **GAP-COMPOSITE** — 각목+끈 동반 |
 | D-4 | **각목 귀속(set vs addon)** | set(`.07` 옵션재료) vs addon(template, 별 주문라인) | (각목=부속이므로 set 1차 권고) |
 | D-5 | **사이즈 이원성 표현** | 규격=차원 / 사용자입력=products nonspec 범위+constraint (본 파일럿 채택, products.nonspec_w/h_min/max 현재 NULL → 적재 필요) | size 제약 |
@@ -316,7 +316,7 @@ qty       = 5
 | `load_silsa/t_prd_product_option_groups.csv` | 2 | silsa-l1 가공/추가 캐스케이드 + master map 패밀리③ verdict |
 | `load_silsa/t_prd_product_options.csv` | 11 | silsa-l1.csv row108~113 가공6+추가5 |
 | `load_silsa/t_prd_product_option_items.csv` | 9 (INSERTABLE) | ref-product-processes(079/080/081) + ref-processes prcs_dtl_opt + 트리거 §2. note 컬럼 제거(F-1) |
-| `load_silsa/t_prd_product_option_items_BLOCKED.csv` | 3 (BLOCKED) | 열재단(053 부재)·각목 seq2(set 0행) — GAP-DEFER 해소 후 적재 대기. block_reason 컬럼 |
+| `load_silsa/t_prd_product_option_items_BLOCKED.csv` | 3 (BLOCKED) | 열재단(신규 PROC_000084 신설대기·M-1 ①)·각목 seq2(set 0행) — 신설/선적재 후 적재 대기. block_reason 컬럼 |
 | `load_silsa/t_prd_product_constraints.csv` | 3 | JSONLogic(python 검증 PASS) + L1 row109/111/112 |
 
 | 코드/값 | 출처 |
@@ -324,7 +324,7 @@ qty       = 5
 | PRD_000138 일반현수막 PRD_TYPE.04 nonspec_yn=Y | ref-products.csv / silsa.md §① |
 | SIZ_000322 5000x900 / MAT_000182 현수막천 USAGE.07 | ref-product-sizes/materials.csv |
 | PROC_000079 타공{구수1~8}·080 봉제{유형,폭}·081 부착{대상:라벨/맥세이프/끈/테입} | ref-processes.csv prcs_dtl_opt |
-| PROC_000053 완칼{모양} (열재단 환원 후보·미적재) | ref-processes.csv / ref-product-processes.csv(PRD_000138=079/080/081만) |
+| 열재단 = 신규 PROC_000084 `[CONFIRM-CHANNEL]` (M-1 ① 확정·완칼 PROC_053 차용 폐기) | m1-yeoljaedan-decision.md / 11_ddl_proposals/heat-cut-process-proposal / 06_extract/price-poster-sign-l1.csv(열재단 3,000원) |
 | 각목/큐방 완제상품 0행 · PRD_000138 sets/addons 0행 | ref-products.csv · ref-product-sets/addons.csv |
 | nonspec 가로 500~1750·세로 500~5000 / 가공6·추가5 값 | silsa-l1.csv 일반현수막 row108~113 |
 | SEL_TYPE.01/.02 · OPT_REF_DIM.01~07 · RULE_TYPE.01/.02/.03 | cpq-schema.md §2/§3 / code-values.md |

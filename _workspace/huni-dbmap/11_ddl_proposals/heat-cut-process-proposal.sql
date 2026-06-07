@@ -1,0 +1,104 @@
+-- =====================================================================
+-- DDL PROPOSAL: 열재단(熱裁斷 / heat-cut) 신규 마스터 공정
+--   (PROPOSAL ONLY — DO NOT APPLY without human approval.)
+--   실제 적용/INSERT/COMMIT 은 전부 인간 승인 게이트. 본 파일은 미실행.
+-- =====================================================================
+-- Closes round-6 silsa pilot M-1.
+--   lead verdict = ① 열재단 = 실제 가공(distinct process), 3증거선 확정:
+--     (a) 가격표 권위[결정적] price-poster-sign-l1.csv B26 J246/K246 = 3,000원
+--         (band ladder 3000>4000>5000>3000>4000) ≠ 추가없음=0원 sentinel.
+--     (b) 경쟁사 m1-yeoljaedan-competitor-research.md — RedPrinting=CUT_ZUN
+--         (visible process) / CUT_DFT(hidden sentinel) 코드 분리, 현수막=CUT_ZUN.
+--         WowPress "현수막 열재단(사방/상하/좌우)" 명명 가공 item.
+--     (c) 도메인 m1-yeoljaedan-domain-research.md — 열칼로 가장자리 융착(실노동).
+--   rows unblocked: silsa-option-layer.md OG-GAGONG item "열재단" (R2/§4)
+--     = 현재 BLOCKED(트리거 REJECT) → 본 제안 적용 후 INSERTABLE 승격.
+-- =====================================================================
+-- search-before-mint 요약 (상세 .md §1):
+--   ref-processes.csv 83행 재단/cut/마감 family 전수:
+--     · PROC_000027 직각  note="default 재단"      = 종이 기계 직각 재단(귀돌이 그룹)
+--     · PROC_000053 완칼  note="Die Cut, 종이+후지" = 종이 다이컷 (silsa 파일럿 차용처)
+--     · PROC_000054 반칼  note="Kiss Cut, 종이만"   = 스티커 반칼
+--     · PROC_000055 스티커완칼                       = 스티커 다이컷
+--   → 전부 **종이/스티커** 대상. **천(플렉스/패브릭) 열봉합 재단** 공정 0건.
+--   PROC_000053(완칼)은 매질(종이+후지)·동작(칼 다이컷, 융착 없음)이 천 열재단과
+--   상이 → 의미 오용(파일럿이 [CONFIRM]으로 차용했으나 매질 불일치). 기존 행에
+--   '열재단'으로 환원 가능한 link 없음 = 진짜 GAP(누락된 마스터 행).
+--   사다리 최저단 = 신규 마스터 공정 1행(t_proc_processes) + 상품링크 1행.
+--   신규 테이블/컬럼/JSONB키 불요(기존 2테이블 그대로 수용).
+-- ---------------------------------------------------------------------
+
+-- =====================================================================
+-- forward (적용) — 인간 승인 후에만
+-- =====================================================================
+
+-- (1) 신규 마스터 공정 행 — t_proc_processes
+--     컬럼 shape(00_schema/columns.csv L306-316, _live-schema-dump L308-318):
+--       proc_cd PK varchar(50) NOT NULL | proc_nm varchar(200) NOT NULL
+--       upr_proc_cd varchar(50) NULL(self-FK) | prcs_dtl_opt jsonb NULL
+--       disp_seq int NULL | use_yn char(1) NOT NULL(CHECK Y/N)
+--       note varchar(500) NULL | reg_dt ts NOT NULL DEFAULT now()
+--       upd_dt ts NULL | del_yn char(1) NOT NULL DEFAULT 'N'(CHECK Y/N) | del_dt ts NULL
+--
+--   [CONFIRM-CHANNEL] proc_cd = 사람이 채번해야 함. PROC_000084 는 현재
+--     master(ref-processes.csv max=PROC_000083) 기준 "다음 번호"로 보이나,
+--     본 제안은 그 번호가 라이브에서 비어있음을 단정하지 않는다(추출본 stale
+--     주의 + dbmap 메모리 placeholder PROC_000084 의도적 제외 이력). 채번은
+--     적용 직전 라이브 MAX(proc_cd) 확인 후 후니가 배정. 아래는 placeholder.
+--   prcs_dtl_opt(param): 가격표 B26 열재단 = 단일 flat 3,000원, 구수/줄수/위치
+--     세분 단가 없음 → param 불요(NULL). WowPress "사방/상하/좌우" 위치 변형은
+--     존재하나 후니 가격표엔 위치별 단가 부재 → 미반영(`[CONFIRM]` §2). 도입 시
+--     PROC_000080 봉제 패턴({"key":"위치","type":"enum"}) 으로 후속 ALTER 가능.
+--
+-- INSERT INTO t_proc_processes
+--   (proc_cd, proc_nm, upr_proc_cd, prcs_dtl_opt, disp_seq, use_yn, note, del_yn)
+-- VALUES
+--   ('PROC_000084' /*[CONFIRM-CHANNEL]*/, '열재단', NULL, NULL,
+--    22 /*[CONFIRM] disp_seq — 현 max disp_seq=21(에폭시) 다음*/, 'Y',
+--    'Heat cut, 천 가장자리 열봉합 — 실사/현수막 원단 융착재단(M-1 ①)', 'N');
+--   -- reg_dt 는 명시 생략 → DEFAULT now() 발화(round-5 reg_dt NOT NULL 교훈).
+
+-- (2) 상품-공정 링크 행 — t_prd_product_processes (일반현수막 PRD_000138)
+--     컬럼 shape(columns.csv L237-244, _live-schema-dump L239-246):
+--       prd_cd PK/FK→t_prd_products | proc_cd PK/FK→t_proc_processes
+--       mand_proc_yn char(1) NOT NULL(CHECK) | disp_seq int NULL
+--       reg_dt ts NOT NULL DEFAULT now() | upd_dt ts NULL
+--       del_yn char(1) NOT NULL DEFAULT 'N' | del_dt ts NULL
+--     ※ 이 테이블엔 excl_grp_cd 컬럼이 라이브 스키마에 없음. (ref CSV의
+--       excl_grp_cd 는 추출 편의 컬럼 — 라이브 적재 대상 아님. CSV PRD_000138
+--       = 079/080/081 전부 excl_grp_cd 공백·mand_proc_yn=N 확인.)
+--     기존 PRD_000138 링크(079 타공/080 봉제/081 부착)는 disp_seq=1·mand=N.
+--
+-- INSERT INTO t_prd_product_processes
+--   (prd_cd, proc_cd, mand_proc_yn, disp_seq, del_yn)
+-- VALUES
+--   ('PRD_000138', 'PROC_000084' /*[CONFIRM-CHANNEL]*/,
+--    'N' /*[CONFIRM] 가공 group은 CPQ option 레이어에서 택1·필수 — process
+--         link 자체는 후보 제공이므로 기존 079/080/081과 동일 mand=N 권장.
+--         필수성은 option_group mand_yn에서 표현(silsa-option-layer OG-GAGONG)*/,
+--    1 /*[CONFIRM] disp_seq — 기존 링크 전부 1*/, 'N');
+--   -- reg_dt DEFAULT now().
+
+-- ---------------------------------------------------------------------
+-- rollback (되돌리기)
+-- ---------------------------------------------------------------------
+-- DELETE FROM t_prd_product_processes
+--   WHERE prd_cd='PRD_000138' AND proc_cd='PROC_000084' /*[CONFIRM-CHANNEL]*/;
+-- DELETE FROM t_proc_processes
+--   WHERE proc_cd='PROC_000084' /*[CONFIRM-CHANNEL]*/;
+--   -- (순수 INSERT 2행이므로 DELETE 2행이 완전 롤백. soft-delete 미사용 —
+--   --  단순 신규행이라 hard DELETE 안전. 운영 정책상 soft 원하면 del_yn='Y'.)
+
+-- ---------------------------------------------------------------------
+-- 적용 순서 / 영향 (요약 — 상세 .md §3)
+--   step 0 : [CONFIRM-CHANNEL] 라이브 MAX(proc_cd) 확인 → proc_cd 채번
+--   step 1 : (1) t_proc_processes 마스터 행 INSERT   ← 반드시 먼저(FK 부모)
+--   step 2 : (2) t_prd_product_processes 링크 행 INSERT
+--   기존 행 영향: 없음(순수 INSERT 2행, 파괴적 변경 0).
+--   FK 영향: (2)의 proc_cd→(1) 선존재, prd_cd→PRD_000138 선존재. 고아 0.
+--   backfill scope: 직접 열재단 사용 상품 = **PRD_000138 일반현수막 1개**
+--     (silsa-l1.csv 가공 col 전수: 일반현수막만 열재단; 메쉬현수막=재단만[별건],
+--      PET배너/메쉬배너=타공만). 향후 열재단 채택 상품은 동일 패턴 링크 추가.
+--   price 영향: 3,000원은 가격표 가공옵션 추가가격(round-2 가격엔진 영역).
+--     본 공정 행에 가격 컬럼 없음 — 가격 중복 저장 금지(공정≠가격).
+-- =====================================================================

@@ -1,9 +1,25 @@
-# DDL 제안 요약 — round-5 (dbm-ddl-proposer)
+# DDL 제안 요약 — round-5 + round-6 (dbm-ddl-proposer)
 
 > 권위: `docs/goal-2026-06-06-02.md` §5(제안 경계)·R4(제안 정합)·§6.6/6.9(직접 적용 금지·search-before-mint) ·
 > `ddl-proposal-method.md`. **전 제안 = propose ≠ apply. 라이브 CREATE/ALTER 0. COMMIT 0.**
-> 입력 GAP: `09_load/_assembled/blocked-and-gaps.md` + `_assembled_price/blocked-and-gaps.md`.
+> 입력 GAP: `09_load/_assembled/blocked-and-gaps.md` + `_assembled_price/blocked-and-gaps.md` + round-6 silsa pilot M-1.
 > search-before-mint = 라이브 read-only(`00_schema/_live-schema-dump-260606.txt`·ref-*.csv·06_extract) 기반.
+
+---
+
+## 0. round-6 추가 제안 (M-1 — 열재단 신규 공정)
+
+| # | GAP | 판정 | 제안 엔티티(1줄) | 사다리 | 승격 행수 | 산출물 |
+|---|-----|------|------------------|--------|-----------|--------|
+| M-1 | 열재단(천 열봉합 재단) 마스터 공정 부재 — 파일럿이 PROC_000053 완칼(종이) 차용→BLOCKED | **DDL-NEEDED** (마스터 데이터 행) | `t_proc_processes` 1행(열재단) + `t_prd_product_processes` 1행(PRD_000138) | 1(데이터 행, 최저단) | OG-GAGONG "열재단" item **BLOCKED→INSERTABLE** | `heat-cut-process-proposal.{sql,md}` |
+
+- **lead verdict = ① 실제 가공**(가격표 권위 3,000원≠0원 + 경쟁사 CUT_ZUN①/CUT_DFT② 코드분리 + 도메인 열칼 융착). 도메인 리서치의 ② 권고는 가격표 권위로 override.
+- **backfill scope = PRD_000138 일반현수막 1개**(silsa-l1.csv 가공 col 전수: 메쉬현수막=재단만[별건]·PET/메쉬배너=타공만).
+- **신규 테이블/컬럼/JSONB 불요** — 기존 2테이블 그대로 수용(사다리 최저단). 가격은 가격엔진(round-2)에만, 공정 행에 중복 저장 금지.
+
+> ⚠ **proc_cd 채번 충돌 주의**: 본 요약 §1 row4(레이저커팅 NOT-DDL)와 M-1(열재단)이 **둘 다 placeholder `PROC_000084`를 적었다.** 두 공정은 같은 코드를 가질 수 없다. **적용 직전 라이브 `MAX(proc_cd)` 확인 후 후니가 서로 다른 채번을 배정**해야 한다(어느 placeholder도 "비어있음"을 단정하지 않음).
+
+---
 
 ---
 

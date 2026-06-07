@@ -1,5 +1,5 @@
 prd_cd,opt_cd,opt_grp_cd,opt_nm,dflt_yn,disp_seq,use_yn,note
-PRD_000138,OP-GAGONG-YEOLJAEDAN,OG-GAGONG,열재단,Y,1,Y,기본 가공. item=PROC_000053 완칼 — 차원 0행 BLOCKED (GAP-DEFER)
+PRD_000138,OP-GAGONG-YEOLJAEDAN,OG-GAGONG,열재단,Y,1,Y,기본 가공(보이는 옵션·dflt). item=신규 PROC_000084 — 공정 신설 인간승인 대기 BLOCKED (M-1 ① 확정·완칼 차용 폐기)
 PRD_000138,OP-GAGONG-TAGONG4,OG-GAGONG,타공(4개),N,2,Y,item=PROC_000079 {구수:4} (param GAP-PARAM)
 PRD_000138,OP-GAGONG-TAGONG6,OG-GAGONG,타공(6개),N,3,Y,item=PROC_000079 {구수:6} (param GAP-PARAM)
 PRD_000138,OP-GAGONG-TAGONG8,OG-GAGONG,타공(8개),N,4,Y,item=PROC_000079 {구수:8} (param GAP-PARAM)
