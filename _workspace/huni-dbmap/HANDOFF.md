@@ -1,33 +1,33 @@
 # Huni-DBMap — HANDOFF (다음 세션 재시작 포인터)
 
-> 작성 2026-06-08(최신). 권위 = 본 문서 + `docs/goal-2026-06-08-01.md`(round-7) + 메모리 `dbmap-coverage-matrix-roundup`·`dbmap-live-admin-product-viewer`·`dbmap-l2-requires-l1-price-table`·`dbmap-option-material-process-bundle`. 본 문서 + 메모리를 읽으면 재발견 0으로 재개. 이전 트랙(round-2 가격·round-4/5 적재·plate·디지털인쇄·CPQ·round-6 현수막) 상세는 `CHANGELOG.md`·메모리에 보존.
+> 작성 2026-06-08(최신). 권위 = 본 문서 + `docs/goal-2026-06-08-01.md`(round-7) + 메모리 `dbmap-admin-ui-spec`·`dbmap-coverage-matrix-roundup`·`dbmap-live-admin-product-viewer`·`dbmap-l2-requires-l1-price-table`·`dbmap-option-material-process-bundle`. 본 문서 + 메모리를 읽으면 재발견 0으로 재개. 이전 트랙(round-2 가격·round-4/5 적재·plate·디지털인쇄·CPQ·round-6 현수막·round-7 커버리지) 상세는 `CHANGELOG.md`·메모리에 보존.
 
 ## 한 줄 현황
-**round-7 입체 커버리지 검증 실행 완료 — 독립 평가 GO(C1~C8 전건 PASS).** 전 상품군(11시트) × 라이브 t_* 엔티티 **209셀 매트릭스** 구축 + admin 3원대조 + 관계무결성 + 갭보드 산출, `evaluator-active`(fresh context)가 행수 10셀·R1/R4/R7·admin 3종을 독립 재측정해 전건 일치 확증. 사용자가 요구한 "전체 입체 조망"의 DoD(goal §7) 충족. **DB 미적재 — 검증/조망 전용, 발견 미적재의 실 적재는 인간 승인.**
+**round-8 admin UI 입력 명세 완료 — 독립 검증 GO(누락 0).** 라이브 admin product-viewer를 `gstack live`로 전수 분석, **34 t_* 엔티티 332컬럼의 모든 항목**을 {UI라벨·컬럼·위젯·필수·타입제약·코드값도메인·미적재입력법·입력화면}으로 정의(`13_admin-ui-spec/`). round-7 미적재 갭(CPQ 옵션·가격사슬·차원 PARTIAL)을 admin 입력 경로(FK 위상순서)로 환원. 사용자 directive("각 페이지 모든 항목 정의, 하나도 빠짐없이") 충족. **DB 미적재 — 명세/입력경로까지, 실 입력은 인간 승인.**
 
 ## 이번 세션 핵심 결정·발견 (재논의 금지)
-- **[실행] round-7 매트릭스 GO** — `12_coverage/`에 209셀(✅51·🟡44·❌49·◆17·➖48) 매트릭스. admin 자격증명을 `.env.local` `HUNI_ADMIN_URL/ID/PW`(admin/retail00534!!)에 저장 → gstack browse 로그인 성공, 대표상품 3종(PRD_000016 엽서·PRD_000111 캘린더·PRD_000193 머그컵) admin=DB 100% 일치.
-- **[횡단 발견] CPQ 옵션 레이어 전면 미적재** — `t_prd_product_option_items` 전역 **0행**(R7 FAIL). round-6 설계 GO분(일반현수막·OPP봉투)이 option_groups/options만 껍데기 적재(items 0) = 실 COMMIT 미완. ~28갭 → dbm-option-mapper.
-- **[횡단 발견] 가격 사슬 6 상품군 미적재** — 포토북·캘린더·디자인캘린더·아크릴·굿즈파우치·상품악세사리 공식 부재(단절 아닌 부재, 적재분 사슬은 R4 PASS). → dbm-price-formula.
-- **[횡단 발견] DB-ONLY 17셀** — 엑셀 master 미요구·DB 행 존재(판걸이수 plate·구간할인 외부권위 적재 vs 과적재). 상품악세사리 옵션 잔재(OPP봉투 items 0) 포함 = 검토 대상. 추측 0 원칙으로 required=Y 자동전환 안 함.
-- **[평가자 실결함 D-1·Medium] ✅LOADED = 행-존재만 검증** — SKILL §5 "변형 커버리지"(엑셀 요구 변형 전부 적재) 미구현. 캘린더 공정 LOADED지만 5상품 중 4상품이 1행만 보유. NO-GO 아님(범례가 LOADED를 정직 정의)·차기 보정 권고.
-- **[권위 확정] admin = DB 100% 일치 → DB psql 실측을 상태 권위로 신뢰**(C3·C4 입증). 추출본 단독 판정 0.
+- **[정정·사용자] 분석 대상 = admin product-viewer** (고객 사이트 www.huniprinting.com·IA.xlsx 배제). admin이 t_* 역할 UI ground-truth이자 데이터 넣는 화면이므로 각 필드 정의 = 미적재 해소 직접 명세.
+- **[구조] 입력 화면 2종**: ① catalog Django admin change form(14모델 직접등록, 필드 전수 노출, `_raw/forms/*.json` 덤프) ② product-viewer pvEdit() 섹션(상품별 하위 12엔티티, headless 미재현 → table-spec 컬럼+표시구조로 정의).
+- **[권위 교정] 컬럼 권위 = 라이브 `information_schema`** (table-spec_260608.html은 보조). table-spec에 `tags` jsonb 미기재 → 1차 명세가 침묵 누락 → 독립검증이 적발(NO-GO)→보정. **교훈: 명세 컬럼은 반드시 information_schema 교차확인.**
+- **[검증] 독립 게이트 G1~G7 GO** — evaluator-active가 information_schema로 34엔티티 컬럼수 독립 재집계, 332컬럼 누락 0 확인. tags 2건 적발→보정→재판정 GO.
+- **[미적재 채움 경로] FK 위상순서**: 마스터 코드 先 → 상품 → 차원행 → 가격(공식→구성요소→단가→바인딩) → CPQ(옵션그룹→옵션→옵션항목 polymorphic→제약→템플릿).
 
 ## 다음 시작점 (정확한 다음 행동 — 택1, 모두 인간 승인 적재)
-1. **[최상위 갭] CPQ 옵션 레이어 실 적재 준비** — round-6 GO 설계분(일반현수막 v2 `09_load/_exec_silsa_banner/`)의 option_items 0행을 채우는 실 적재. "CPQ 옵션 매핑"/"옵션 레이어 적재" 트리거 → dbm-option-mapper. 실 COMMIT = 인간 승인.
-2. **[도메인 결정] DOMAIN-UNDECIDED 2건** — 굿즈파우치 사이즈 87 미적재·상품악세사리 사이즈 8 미적재: "기성품 사이즈 = 차원행(t_prd_product_sizes)인가 텍스트 표기인가". 머그컵 admin size 0 확증. 이 결정이 사이즈 차원 적재 방향을 가름.
-3. **[가격 사슬] 미적재 6 상품군 공식 적재** — 포토북·캘린더·아크릴 등 가격 공식+component_prices. "가격 매핑"/"round-2" 트리거 → dbm-price-formula.
-4. **[D-1 보정] LOADED 변형 커버리지 부차 판정** — `build_matrix.py state_of()`에 evidence_columns 대비 적재 변형 수 검사 추가, 또는 범례 캐비엇 명시. → dbm-mapping-designer/coverage 재실행.
-5. **[이월·인간 승인] round-6 일반현수막 실 적재** — siz 77 등록·자재 mint 4·열재단 PROC_000084·실 COMMIT. 상세 = CHANGELOG 2026-06-08 행.
+1. **[최상위] CPQ 옵션 레이어 실 입력** — round-8 명세(B-cpq.md §3-2)대로 현수막 "각목추가" 그룹의 option_items 0행을 polymorphic ref_dim_cd+ref_key로 채워 CPQ 사슬 완결. admin product-viewer 옵션 섹션. 실 COMMIT = 인간 승인.
+2. **[GAP-PARAM] DDL 제안** — `t_prd_product_option_items.ref_param_json` 부재(파라미터형 옵션 슬롯 없음) → `dbm-ddl-proposer` ALTER 제안(인간 승인).
+3. **[가격 사슬] 미적재 6 상품군** — C-core-price.md §④(가) 입력순서대로 가격공식→구성요소→단가→바인딩. dbm-price-formula.
+4. **[DOMAIN 결정] 기성품 사이즈** — 굿즈/악세사리 사이즈=차원행 vs 텍스트(머그컵 admin size 0). 사용자 결정 후 입력.
+5. **[이월] round-6 일반현수막 실 적재** — siz 77·자재 mint·열재단 PROC·실 COMMIT(인간 승인). CHANGELOG 참조.
 
 ## 미해결 / 블로커
-- **round-7은 조망/검증 전용 — 발견된 미적재는 갭보드 라우팅까지만.** 실제 적재·DDL·COMMIT 전부 인간 승인(기존 DB 미적재 원칙 유지).
-- **DB-ONLY 17셀 권위 미판별** — 외부권위(판걸이수·구간할인) 정당 적재 vs 과적재 구분이 미완. 상품악세사리 OPP봉투 옵션 잔재(items 0)는 "의도된 옵션 vs 파일럿 테스트 잔재" 검토 필요.
-- **이전 트랙 잔존**(CHANGELOG): 디지털인쇄 잔존 차단(3절/투명/박/048/019·030·049 plate교정)·excl_group 마이그(GAP-2)·미해결 설계결정(잉크색·머그용량·면지/바인더링·보드종류·각목 2규격).
+- **round-8은 명세/입력경로 전용 — 실제 데이터 입력(COMMIT) 없음**(인간 승인). admin product-viewer pvEdit() 팝업은 headless 미재현(필드는 table-spec+표시구조로 정의, 실제 입력 위젯 정밀화는 GAP).
+- **GAP-PARAM**: option_items에 ref_param_json 부재 → 파라미터형 옵션은 opt_nm 텍스트로만 구분. ALTER 필요 시 인간 승인.
+- **DB-ONLY 17셀 판별**(round-7): plate/discount/material 외부권위 vs 과적재 미판별.
+- **이전 트랙 잔존**(CHANGELOG): 디지털인쇄 잔존 차단(3절/투명/박/048 등)·excl_group 마이그·설계결정 미정.
 
 ## 건드리지 말 것 (확정·검증 완료)
-- `_workspace/huni-dbmap/12_coverage/` — round-7 매트릭스 산출물(GO 판정). 매트릭스·갭보드·관계무결성·admin 캡처·재현 스크립트.
-- `_workspace/huni-dbmap/03_validation/coverage-matrix-gate.md` — 독립 평가 게이트(C1~C8 GO). 이번 세션 작성.
-- `docs/goal-2026-06-08-01.md`·`.claude/agents/huni-dbmap/dbm-coverage-auditor.md`·`.claude/skills/dbm-coverage-matrix/SKILL.md` — round-7 권위·에이전트·스킬.
-- `.env.local` `HUNI_ADMIN_*` — admin 자격증명(chmod 600·gitignored). 검증됨.
-- 이전 GO·라이브 COMMIT분(디지털인쇄 308행·상품마스터·가격·round-6 현수막 적재본 등 CHANGELOG 보존).
+- `_workspace/huni-dbmap/13_admin-ui-spec/` — round-8 admin UI 명세(GO). admin-ui-spec.md(마스터)·entities/{A-dimensions,B-cpq,C-core-price}.md·_raw/(원천 덤프).
+- `_workspace/huni-dbmap/03_validation/admin-ui-spec-gate.md` — 독립 검증 게이트(GO). 이번 세션 작성.
+- `_workspace/huni-dbmap/12_coverage/` + `03_validation/coverage-matrix-gate.md` — round-7 커버리지(GO).
+- `.env.local` `HUNI_ADMIN_*` — admin 자격증명(chmod 600·gitignored).
+- 이전 GO·라이브 COMMIT분(CHANGELOG 보존).
