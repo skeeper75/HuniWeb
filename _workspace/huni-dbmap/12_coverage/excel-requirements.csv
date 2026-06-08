@@ -1,0 +1,210 @@
+family,entity,required,evidence_columns
+digital-print,t_prd_products,Y,always (상품 코어)
+digital-print,t_prd_product_categories,Y,always (상품 코어)
+digital-print,t_prd_product_sizes,Y,사이즈(필수)|파일사양_작업사이즈|파일사양_재단사이즈
+digital-print,t_prd_product_materials,Y,종이(필수)
+digital-print,t_prd_product_print_options,Y,인쇄(옵션)|별색인쇄(옵션)_화이트|별색인쇄(옵션)_클리어|별색인쇄(옵션)_핑크|별색인쇄(옵션)_금색|별색인쇄(옵션)_은색
+digital-print,t_prd_product_processes,Y,코팅(옵션)|커팅(옵션)|접지(옵션)|후가공(옵션)_모서리|후가공(옵션)_오시|후가공(옵션)_미싱|후가공(옵션)_가변(텍스트)|후가공(옵션)_가변(이미지)|박(앞면) / 박(뒷면) / 형압 (옵션)_박/형압 가공|박(앞면) / 박(뒷면) / 형압 (옵션)_크기|박(앞면) / 박(뒷면) / 형압 (옵션)_박칼라
+digital-print,t_prd_product_plate_sizes,Y,파일사양_출력용지규격
+digital-print,t_prd_product_bundle_qtys,N,
+digital-print,t_prd_product_page_rules,N,
+digital-print,t_prd_product_sets,N,
+digital-print,t_prd_product_addons,Y,추가상품(옵션)_추가상품
+digital-print,t_prd_product_option_groups,Y,별색인쇄(옵션)_화이트|별색인쇄(옵션)_클리어|별색인쇄(옵션)_핑크|별색인쇄(옵션)_금색|별색인쇄(옵션)_은색|코팅(옵션)|후가공(옵션)_모서리|후가공(옵션)_오시|후가공(옵션)_미싱|후가공(옵션)_가변(텍스트)|후가공(옵션)_가변(이미지)
+digital-print,t_prd_product_options,Y,별색인쇄(옵션)_화이트|별색인쇄(옵션)_클리어|별색인쇄(옵션)_핑크|별색인쇄(옵션)_금색|별색인쇄(옵션)_은색|코팅(옵션)|후가공(옵션)_모서리|후가공(옵션)_오시|후가공(옵션)_미싱|후가공(옵션)_가변(텍스트)|후가공(옵션)_가변(이미지)
+digital-print,t_prd_product_option_items,Y,별색인쇄(옵션)_화이트|별색인쇄(옵션)_클리어|별색인쇄(옵션)_핑크|별색인쇄(옵션)_금색|별색인쇄(옵션)_은색|코팅(옵션)|후가공(옵션)_모서리|후가공(옵션)_오시|후가공(옵션)_미싱|후가공(옵션)_가변(텍스트)|후가공(옵션)_가변(이미지)
+digital-print,t_prd_templates,Y,주문방법(필수)_편집기
+digital-print,t_prd_product_constraints,Y,별색인쇄(옵션)_화이트|별색인쇄(옵션)_클리어|별색인쇄(옵션)_핑크|별색인쇄(옵션)_금색|별색인쇄(옵션)_은색|커팅(옵션)
+digital-print,t_prd_product_price_formulas,Y,가격공식
+digital-print,t_prc_component_prices,Y,가격공식
+digital-print,t_prd_product_discount_tables,N,
+sticker,t_prd_products,Y,always (상품 코어)
+sticker,t_prd_product_categories,Y,always (상품 코어)
+sticker,t_prd_product_sizes,Y,사이즈(필수)|파일사양_작업사이즈|파일사양_재단사이즈
+sticker,t_prd_product_materials,Y,종이(필수)
+sticker,t_prd_product_print_options,Y,인쇄(옵션)|별색인쇄(옵션)_화이트
+sticker,t_prd_product_processes,Y,커팅(옵션)|조각수(옵션)
+sticker,t_prd_product_plate_sizes,Y,파일사양_출력용지규격
+sticker,t_prd_product_bundle_qtys,N,
+sticker,t_prd_product_page_rules,N,
+sticker,t_prd_product_sets,N,
+sticker,t_prd_product_addons,N,
+sticker,t_prd_product_option_groups,Y,별색인쇄(옵션)_화이트|조각수(옵션)
+sticker,t_prd_product_options,Y,별색인쇄(옵션)_화이트|조각수(옵션)
+sticker,t_prd_product_option_items,Y,별색인쇄(옵션)_화이트|조각수(옵션)
+sticker,t_prd_templates,Y,주문방법(필수)_편집기
+sticker,t_prd_product_constraints,Y,별색인쇄(옵션)_화이트|커팅(옵션)
+sticker,t_prd_product_price_formulas,Y,"price-table sheet (가격표 단가시트 보유, sheet-slug-map.md)"
+sticker,t_prc_component_prices,Y,"price-table sheet (가격표 단가시트 보유, sheet-slug-map.md)"
+sticker,t_prd_product_discount_tables,N,
+booklet,t_prd_products,Y,always (상품 코어)
+booklet,t_prd_product_categories,Y,always (상품 코어)
+booklet,t_prd_product_sizes,Y,사이즈(필수)|내지파일사양_작업사이즈|내지파일사양_재단사이즈|표지파일사양_작업사이즈
+booklet,t_prd_product_materials,Y,내지종이(필수)|표지종이(필수)
+booklet,t_prd_product_print_options,Y,내지인쇄(필수)|표지인쇄(필수)
+booklet,t_prd_product_processes,Y,표지옵션(옵션)_표지코팅(옵션)|박(표지) / 형압 (옵션)_박/형압가공|박(표지) / 형압 (옵션)_크기|박(표지) / 형압 (옵션)_박칼라|제본(필수)|제본(옵션)_제본방향(옵션)|제본(옵션)_면지(옵션)|제본(옵션)_링컬러(옵션)|제본(옵션)_바인더링(옵션)|제본(옵션)_제본(옵션)
+booklet,t_prd_product_plate_sizes,N,
+booklet,t_prd_product_bundle_qtys,Y,개별포장(옵션)
+booklet,t_prd_product_page_rules,Y,내지페이지(필수)_최소|내지페이지(필수)_최대|내지페이지(필수)_증가
+booklet,t_prd_product_sets,N,
+booklet,t_prd_product_addons,N,
+booklet,t_prd_product_option_groups,Y,표지옵션(옵션)_표지코팅(옵션)|표지옵션(옵션)_투명커버(옵션)|제본(옵션)_제본방향(옵션)|제본(옵션)_면지(옵션)|제본(옵션)_링컬러(옵션)|제본(옵션)_바인더링(옵션)|제본(옵션)_제본(옵션)
+booklet,t_prd_product_options,Y,표지옵션(옵션)_표지코팅(옵션)|표지옵션(옵션)_투명커버(옵션)|제본(옵션)_제본방향(옵션)|제본(옵션)_면지(옵션)|제본(옵션)_링컬러(옵션)|제본(옵션)_바인더링(옵션)|제본(옵션)_제본(옵션)
+booklet,t_prd_product_option_items,Y,표지옵션(옵션)_표지코팅(옵션)|표지옵션(옵션)_투명커버(옵션)|제본(옵션)_제본방향(옵션)|제본(옵션)_면지(옵션)|제본(옵션)_링컬러(옵션)|제본(옵션)_바인더링(옵션)|제본(옵션)_제본(옵션)
+booklet,t_prd_templates,Y,주문방법(필수)_편집기
+booklet,t_prd_product_constraints,Y,표지옵션(옵션)_표지코팅(옵션)|표지옵션(옵션)_투명커버(옵션)|제본(옵션)_제본방향(옵션)
+booklet,t_prd_product_price_formulas,Y,"price-table sheet (가격표 단가시트 보유, sheet-slug-map.md)"
+booklet,t_prc_component_prices,Y,"price-table sheet (가격표 단가시트 보유, sheet-slug-map.md)"
+booklet,t_prd_product_discount_tables,N,
+photobook,t_prd_products,Y,always (상품 코어)
+photobook,t_prd_product_categories,Y,always (상품 코어)
+photobook,t_prd_product_sizes,Y,사이즈(필수)|내지파일사양_작업사이즈|내지파일사양_재단사이즈|표지사양_작업사이즈
+photobook,t_prd_product_materials,Y,내지종이|표지사양_블리드|표지사양_작업사이즈|표지사양_파일명약어|표지사양_출력파일|표지사양_폴더|표지종이사양
+photobook,t_prd_product_print_options,Y,내지인쇄|표지인쇄사양
+photobook,t_prd_product_processes,Y,제본사양_제본|제본사양_면지|제본사양_책등
+photobook,t_prd_product_plate_sizes,N,
+photobook,t_prd_product_bundle_qtys,N,
+photobook,t_prd_product_page_rules,Y,내지페이지(편집기)_최소|내지페이지(편집기)_최대|내지페이지(편집기)_증가
+photobook,t_prd_product_sets,Y,표지타입(필수)|표지사양_블리드|표지사양_작업사이즈|표지사양_파일명약어|표지사양_출력파일|표지사양_폴더
+photobook,t_prd_product_addons,N,
+photobook,t_prd_product_option_groups,N,
+photobook,t_prd_product_options,N,
+photobook,t_prd_product_option_items,N,
+photobook,t_prd_templates,Y,주문방법(필수)_편집기
+photobook,t_prd_product_constraints,N,
+photobook,t_prd_product_price_formulas,Y,가격_기본(24P)|가격_추가(2P)당
+photobook,t_prc_component_prices,Y,가격_기본(24P)|가격_추가(2P)당
+photobook,t_prd_product_discount_tables,N,
+calendar,t_prd_products,Y,always (상품 코어)
+calendar,t_prd_product_categories,Y,always (상품 코어)
+calendar,t_prd_product_sizes,Y,사이즈(필수)|파일사양_작업사이즈|파일사양_재단사이즈
+calendar,t_prd_product_materials,Y,종이사양
+calendar,t_prd_product_print_options,Y,인쇄(필수)
+calendar,t_prd_product_processes,Y,캘린더가공(필수)_삼각대컬러|캘린더가공(필수)_캘린더가공|캘린더가공(필수)_추가가격|캘린더가공(필수)_링칼라
+calendar,t_prd_product_plate_sizes,Y,파일사양_출력용지규격
+calendar,t_prd_product_bundle_qtys,Y,개별포장(옵션)
+calendar,t_prd_product_page_rules,Y,장수(필수)
+calendar,t_prd_product_sets,N,
+calendar,t_prd_product_addons,Y,추가상품(옵션)_추가상품
+calendar,t_prd_product_option_groups,Y,캘린더가공(필수)_삼각대컬러|캘린더가공(필수)_캘린더가공|캘린더가공(필수)_추가가격|캘린더가공(필수)_링칼라
+calendar,t_prd_product_options,Y,캘린더가공(필수)_삼각대컬러|캘린더가공(필수)_캘린더가공|캘린더가공(필수)_추가가격|캘린더가공(필수)_링칼라
+calendar,t_prd_product_option_items,Y,캘린더가공(필수)_삼각대컬러|캘린더가공(필수)_캘린더가공|캘린더가공(필수)_추가가격|캘린더가공(필수)_링칼라
+calendar,t_prd_templates,N,
+calendar,t_prd_product_constraints,Y,캘린더가공(필수)_삼각대컬러|캘린더가공(필수)_캘린더가공|캘린더가공(필수)_추가가격|캘린더가공(필수)_링칼라
+calendar,t_prd_product_price_formulas,Y,캘린더가공(필수)_추가가격
+calendar,t_prc_component_prices,Y,캘린더가공(필수)_추가가격
+calendar,t_prd_product_discount_tables,N,
+design-calendar,t_prd_products,Y,always (상품 코어)
+design-calendar,t_prd_product_categories,Y,always (상품 코어)
+design-calendar,t_prd_product_sizes,Y,사이즈(필수)|파일사양_작업사이즈|파일사양_재단사이즈
+design-calendar,t_prd_product_materials,Y,종이사양
+design-calendar,t_prd_product_print_options,Y,인쇄사양
+design-calendar,t_prd_product_processes,Y,캘린더사양_캘린더가공|캘린더사양_링칼라
+design-calendar,t_prd_product_plate_sizes,Y,파일사양_출력용지규격
+design-calendar,t_prd_product_bundle_qtys,N,
+design-calendar,t_prd_product_page_rules,Y,페이지사양
+design-calendar,t_prd_product_sets,N,
+design-calendar,t_prd_product_addons,Y,추가상품(옵션)_추가상품|추가상품(옵션)_추가가격
+design-calendar,t_prd_product_option_groups,Y,캘린더사양_캘린더가공
+design-calendar,t_prd_product_options,Y,캘린더사양_캘린더가공
+design-calendar,t_prd_product_option_items,Y,캘린더사양_캘린더가공
+design-calendar,t_prd_templates,Y,주문방법(필수)_편집기
+design-calendar,t_prd_product_constraints,Y,캘린더사양_캘린더가공
+design-calendar,t_prd_product_price_formulas,Y,가격|추가상품(옵션)_추가가격
+design-calendar,t_prc_component_prices,Y,가격|추가상품(옵션)_추가가격
+design-calendar,t_prd_product_discount_tables,N,
+silsa,t_prd_products,Y,always (상품 코어)
+silsa,t_prd_product_categories,Y,always (상품 코어)
+silsa,t_prd_product_sizes,Y,사이즈(필수)|파일사양_작업사이즈|파일사양_재단사이즈
+silsa,t_prd_product_materials,Y,소재(필수)
+silsa,t_prd_product_print_options,N,
+silsa,t_prd_product_processes,Y,코팅(옵션)|가공(옵션)_가공
+silsa,t_prd_product_plate_sizes,N,
+silsa,t_prd_product_bundle_qtys,N,
+silsa,t_prd_product_page_rules,N,
+silsa,t_prd_product_sets,N,
+silsa,t_prd_product_addons,N,
+silsa,t_prd_product_option_groups,Y,코팅(옵션)|가공(옵션)_가공
+silsa,t_prd_product_options,Y,코팅(옵션)|가공(옵션)_가공
+silsa,t_prd_product_option_items,Y,코팅(옵션)|가공(옵션)_가공
+silsa,t_prd_templates,Y,주문방법(필수)_편집기
+silsa,t_prd_product_constraints,N,
+silsa,t_prd_product_price_formulas,Y,price|price (vat포함)|price(V)|추가(옵션)_추가옵션가격
+silsa,t_prc_component_prices,Y,price|price (vat포함)|price(V)|추가(옵션)_추가옵션가격
+silsa,t_prd_product_discount_tables,N,
+acrylic,t_prd_products,Y,always (상품 코어)
+acrylic,t_prd_product_categories,Y,always (상품 코어)
+acrylic,t_prd_product_sizes,Y,사이즈(필수)|파일사양_작업사이즈|파일사양_재단사이즈
+acrylic,t_prd_product_materials,Y,소재(필수)
+acrylic,t_prd_product_print_options,Y,인쇄사양
+acrylic,t_prd_product_processes,Y,조각수(옵션)|가공(옵션)_가공|가공(옵션)_가격
+acrylic,t_prd_product_plate_sizes,N,
+acrylic,t_prd_product_bundle_qtys,N,
+acrylic,t_prd_product_page_rules,N,
+acrylic,t_prd_product_sets,N,
+acrylic,t_prd_product_addons,Y,추가상품(옵션)_추가상품|추가상품(옵션)_추가가격
+acrylic,t_prd_product_option_groups,Y,조각수(옵션)|가공(옵션)_가공|가공(옵션)_가격
+acrylic,t_prd_product_options,Y,조각수(옵션)|가공(옵션)_가공|가공(옵션)_가격
+acrylic,t_prd_product_option_items,Y,조각수(옵션)|가공(옵션)_가공|가공(옵션)_가격
+acrylic,t_prd_templates,Y,주문방법(필수)_편집기
+acrylic,t_prd_product_constraints,N,
+acrylic,t_prd_product_price_formulas,Y,가격|가공(옵션)_가격|추가상품(옵션)_추가가격
+acrylic,t_prc_component_prices,Y,가격|가공(옵션)_가격|추가상품(옵션)_추가가격
+acrylic,t_prd_product_discount_tables,N,
+stationery,t_prd_products,Y,always (상품 코어)
+stationery,t_prd_product_categories,Y,always (상품 코어)
+stationery,t_prd_product_sizes,Y,사이즈(필수)|내지파일사양_작업사이즈|내지파일사양_재단사이즈|표지파일사양_작업사이즈
+stationery,t_prd_product_materials,Y,내지(옵션)|종이(옵션)|표지사양
+stationery,t_prd_product_print_options,Y,내지인쇄사양|표지인쇄사양
+stationery,t_prd_product_processes,Y,제본옵션(옵션)|제본사양
+stationery,t_prd_product_plate_sizes,N,
+stationery,t_prd_product_bundle_qtys,Y,개별포장(옵션)
+stationery,t_prd_product_page_rules,Y,페이지사양_최소|페이지사양_최대|페이지사양_증가
+stationery,t_prd_product_sets,Y,표지사양
+stationery,t_prd_product_addons,N,
+stationery,t_prd_product_option_groups,Y,내지(옵션)
+stationery,t_prd_product_options,Y,내지(옵션)
+stationery,t_prd_product_option_items,Y,내지(옵션)
+stationery,t_prd_templates,Y,주문방법(필수)_편집기
+stationery,t_prd_product_constraints,N,
+stationery,t_prd_product_price_formulas,Y,가격
+stationery,t_prc_component_prices,Y,가격
+stationery,t_prd_product_discount_tables,Y,구간할인적용테이블
+goods-pouch,t_prd_products,Y,always (상품 코어)
+goods-pouch,t_prd_product_categories,Y,always (상품 코어)
+goods-pouch,t_prd_product_sizes,Y,사이즈(필수)|파일사양_작업사이즈
+goods-pouch,t_prd_product_materials,N,
+goods-pouch,t_prd_product_print_options,N,
+goods-pouch,t_prd_product_processes,Y,가공(옵션)_가공|가공(옵션)_가격
+goods-pouch,t_prd_product_plate_sizes,N,
+goods-pouch,t_prd_product_bundle_qtys,N,
+goods-pouch,t_prd_product_page_rules,N,
+goods-pouch,t_prd_product_sets,N,
+goods-pouch,t_prd_product_addons,Y,추가상품(옵션)_추가상품|추가상품(옵션)_추가가격
+goods-pouch,t_prd_product_option_groups,Y,선택(옵션)_선택|가공(옵션)_가공|가공(옵션)_가격
+goods-pouch,t_prd_product_options,Y,선택(옵션)_선택|가공(옵션)_가공|가공(옵션)_가격
+goods-pouch,t_prd_product_option_items,Y,선택(옵션)_선택|가공(옵션)_가공|가공(옵션)_가격
+goods-pouch,t_prd_templates,Y,주문방법(필수)_편집기
+goods-pouch,t_prd_product_constraints,N,
+goods-pouch,t_prd_product_price_formulas,Y,가격|가공(옵션)_가격|추가상품(옵션)_추가가격
+goods-pouch,t_prc_component_prices,Y,가격|가공(옵션)_가격|추가상품(옵션)_추가가격
+goods-pouch,t_prd_product_discount_tables,Y,구간할인적용테이블
+product-accessory,t_prd_products,Y,always (상품 코어)
+product-accessory,t_prd_product_categories,Y,always (상품 코어)
+product-accessory,t_prd_product_sizes,Y,사이즈(필수)
+product-accessory,t_prd_product_materials,N,
+product-accessory,t_prd_product_print_options,N,
+product-accessory,t_prd_product_processes,N,
+product-accessory,t_prd_product_plate_sizes,N,
+product-accessory,t_prd_product_bundle_qtys,N,
+product-accessory,t_prd_product_page_rules,N,
+product-accessory,t_prd_product_sets,N,
+product-accessory,t_prd_product_addons,N,
+product-accessory,t_prd_product_option_groups,N,
+product-accessory,t_prd_product_options,N,
+product-accessory,t_prd_product_option_items,N,
+product-accessory,t_prd_templates,N,
+product-accessory,t_prd_product_constraints,N,
+product-accessory,t_prd_product_price_formulas,Y,가격
+product-accessory,t_prc_component_prices,Y,가격
+product-accessory,t_prd_product_discount_tables,N,

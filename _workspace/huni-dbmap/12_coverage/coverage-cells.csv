@@ -1,0 +1,210 @@
+family,entity,required,state,prds_in_family,prds_with_rows,total_rows,source_cell,note
+digital-print,t_prd_products,Y,LOADED,36,36,36,always (상품 코어),
+digital-print,t_prd_product_categories,Y,LOADED,36,36,36,always (상품 코어),
+digital-print,t_prd_product_sizes,Y,PARTIAL,36,33,92,사이즈(필수)|파일사양_작업사이즈|파일사양_재단사이즈,33/36 상품만 행 보유
+digital-print,t_prd_product_materials,Y,PARTIAL,36,35,248,종이(필수),35/36 상품만 행 보유
+digital-print,t_prd_product_print_options,Y,PARTIAL,36,32,53,인쇄(옵션)|별색인쇄(옵션)_화이트|별색인쇄(옵션)_클리어|별색인쇄(옵션)_핑크|별색인쇄(옵션)_금색|별색인쇄(옵션)_은색,32/36 상품만 행 보유
+digital-print,t_prd_product_processes,Y,PARTIAL,36,23,122,코팅(옵션)|커팅(옵션)|접지(옵션)|후가공(옵션)_모서리|후가공(옵션)_오시|후가공(옵션)_미싱|후가공(옵션)_가변(텍스트)|후가공(옵션)_가변(이미지)|박(앞면) / 박(뒷면) / 형압 (옵션)_박/형압 가공|박(앞면) / 박(뒷면) / 형압 (옵션)_크기|박(앞면) / 박(뒷면) / 형압 (옵션)_박칼라,23/36 상품만 행 보유
+digital-print,t_prd_product_plate_sizes,Y,LOADED,36,36,45,파일사양_출력용지규격,
+digital-print,t_prd_product_bundle_qtys,N,N/A,36,0,0,,엑셀이 이 엔티티 요구 안 함
+digital-print,t_prd_product_page_rules,N,N/A,36,0,0,,엑셀이 이 엔티티 요구 안 함
+digital-print,t_prd_product_sets,N,N/A,36,0,0,,엑셀이 이 엔티티 요구 안 함
+digital-print,t_prd_product_addons,Y,PARTIAL,36,1,1,추가상품(옵션)_추가상품,1/36 상품만 행 보유
+digital-print,t_prd_product_option_groups,Y,MISSING,36,0,0,별색인쇄(옵션)_화이트|별색인쇄(옵션)_클리어|별색인쇄(옵션)_핑크|별색인쇄(옵션)_금색|별색인쇄(옵션)_은색|코팅(옵션)|후가공(옵션)_모서리|후가공(옵션)_오시|후가공(옵션)_미싱|후가공(옵션)_가변(텍스트)|후가공(옵션)_가변(이미지),필요한데 라이브 0행
+digital-print,t_prd_product_options,Y,MISSING,36,0,0,별색인쇄(옵션)_화이트|별색인쇄(옵션)_클리어|별색인쇄(옵션)_핑크|별색인쇄(옵션)_금색|별색인쇄(옵션)_은색|코팅(옵션)|후가공(옵션)_모서리|후가공(옵션)_오시|후가공(옵션)_미싱|후가공(옵션)_가변(텍스트)|후가공(옵션)_가변(이미지),필요한데 라이브 0행
+digital-print,t_prd_product_option_items,Y,MISSING,36,0,0,별색인쇄(옵션)_화이트|별색인쇄(옵션)_클리어|별색인쇄(옵션)_핑크|별색인쇄(옵션)_금색|별색인쇄(옵션)_은색|코팅(옵션)|후가공(옵션)_모서리|후가공(옵션)_오시|후가공(옵션)_미싱|후가공(옵션)_가변(텍스트)|후가공(옵션)_가변(이미지),필요한데 라이브 0행
+digital-print,t_prd_templates,Y,PARTIAL,36,2,2,주문방법(필수)_편집기,2/36 상품만 행 보유
+digital-print,t_prd_product_constraints,Y,PARTIAL,36,1,1,별색인쇄(옵션)_화이트|별색인쇄(옵션)_클리어|별색인쇄(옵션)_핑크|별색인쇄(옵션)_금색|별색인쇄(옵션)_은색|커팅(옵션),1/36 상품만 행 보유
+digital-print,t_prd_product_price_formulas,Y,PARTIAL,36,26,26,가격공식,26/36 상품만 행 보유
+digital-print,t_prc_component_prices,Y,PARTIAL,36,26,19402,가격공식,26/36 상품만 행 보유
+digital-print,t_prd_product_discount_tables,N,N/A,36,0,0,,엑셀이 이 엔티티 요구 안 함
+sticker,t_prd_products,Y,LOADED,16,16,16,always (상품 코어),
+sticker,t_prd_product_categories,Y,LOADED,16,16,16,always (상품 코어),
+sticker,t_prd_product_sizes,Y,LOADED,16,16,76,사이즈(필수)|파일사양_작업사이즈|파일사양_재단사이즈,
+sticker,t_prd_product_materials,Y,LOADED,16,16,50,종이(필수),
+sticker,t_prd_product_print_options,Y,LOADED,16,16,16,인쇄(옵션)|별색인쇄(옵션)_화이트,
+sticker,t_prd_product_processes,Y,PARTIAL,16,14,17,커팅(옵션)|조각수(옵션),14/16 상품만 행 보유
+sticker,t_prd_product_plate_sizes,Y,LOADED,16,16,65,파일사양_출력용지규격,
+sticker,t_prd_product_bundle_qtys,N,DB-ONLY,16,1,5,,엑셀 master 미요구이나 DB 5행 존재(외부 권위 적재/과적재 후보 — gap-board 참조)
+sticker,t_prd_product_page_rules,N,N/A,16,0,0,,엑셀이 이 엔티티 요구 안 함
+sticker,t_prd_product_sets,N,N/A,16,0,0,,엑셀이 이 엔티티 요구 안 함
+sticker,t_prd_product_addons,N,N/A,16,0,0,,엑셀이 이 엔티티 요구 안 함
+sticker,t_prd_product_option_groups,Y,MISSING,16,0,0,별색인쇄(옵션)_화이트|조각수(옵션),필요한데 라이브 0행
+sticker,t_prd_product_options,Y,MISSING,16,0,0,별색인쇄(옵션)_화이트|조각수(옵션),필요한데 라이브 0행
+sticker,t_prd_product_option_items,Y,MISSING,16,0,0,별색인쇄(옵션)_화이트|조각수(옵션),필요한데 라이브 0행
+sticker,t_prd_templates,Y,PARTIAL,16,8,8,주문방법(필수)_편집기,8/16 상품만 행 보유
+sticker,t_prd_product_constraints,Y,MISSING,16,0,0,별색인쇄(옵션)_화이트|커팅(옵션),필요한데 라이브 0행
+sticker,t_prd_product_price_formulas,Y,PARTIAL,16,4,4,"price-table sheet (가격표 단가시트 보유, sheet-slug-map.md)",4/16 상품만 행 보유
+sticker,t_prc_component_prices,Y,PARTIAL,16,4,1144,"price-table sheet (가격표 단가시트 보유, sheet-slug-map.md)",4/16 상품만 행 보유
+sticker,t_prd_product_discount_tables,N,N/A,16,0,0,,엑셀이 이 엔티티 요구 안 함
+booklet,t_prd_products,Y,LOADED,10,10,10,always (상품 코어),
+booklet,t_prd_product_categories,Y,LOADED,10,10,11,always (상품 코어),
+booklet,t_prd_product_sizes,Y,LOADED,10,10,24,사이즈(필수)|내지파일사양_작업사이즈|내지파일사양_재단사이즈|표지파일사양_작업사이즈,
+booklet,t_prd_product_materials,Y,PARTIAL,10,9,116,내지종이(필수)|표지종이(필수),9/10 상품만 행 보유
+booklet,t_prd_product_print_options,Y,LOADED,10,10,18,내지인쇄(필수)|표지인쇄(필수),
+booklet,t_prd_product_processes,Y,PARTIAL,10,9,49,표지옵션(옵션)_표지코팅(옵션)|박(표지) / 형압 (옵션)_박/형압가공|박(표지) / 형압 (옵션)_크기|박(표지) / 형압 (옵션)_박칼라|제본(필수)|제본(옵션)_제본방향(옵션)|제본(옵션)_면지(옵션)|제본(옵션)_링컬러(옵션)|제본(옵션)_바인더링(옵션)|제본(옵션)_제본(옵션),9/10 상품만 행 보유
+booklet,t_prd_product_plate_sizes,N,DB-ONLY,10,10,32,,엑셀 master 미요구이나 DB 32행 존재(외부 권위 적재/과적재 후보 — gap-board 참조)
+booklet,t_prd_product_bundle_qtys,Y,PARTIAL,10,1,2,개별포장(옵션),1/10 상품만 행 보유
+booklet,t_prd_product_page_rules,Y,PARTIAL,10,9,9,내지페이지(필수)_최소|내지페이지(필수)_최대|내지페이지(필수)_증가,9/10 상품만 행 보유
+booklet,t_prd_product_sets,N,DB-ONLY,10,6,21,,엑셀 master 미요구이나 DB 21행 존재(외부 권위 적재/과적재 후보 — gap-board 참조)
+booklet,t_prd_product_addons,N,N/A,10,0,0,,엑셀이 이 엔티티 요구 안 함
+booklet,t_prd_product_option_groups,Y,MISSING,10,0,0,표지옵션(옵션)_표지코팅(옵션)|표지옵션(옵션)_투명커버(옵션)|제본(옵션)_제본방향(옵션)|제본(옵션)_면지(옵션)|제본(옵션)_링컬러(옵션)|제본(옵션)_바인더링(옵션)|제본(옵션)_제본(옵션),필요한데 라이브 0행
+booklet,t_prd_product_options,Y,MISSING,10,0,0,표지옵션(옵션)_표지코팅(옵션)|표지옵션(옵션)_투명커버(옵션)|제본(옵션)_제본방향(옵션)|제본(옵션)_면지(옵션)|제본(옵션)_링컬러(옵션)|제본(옵션)_바인더링(옵션)|제본(옵션)_제본(옵션),필요한데 라이브 0행
+booklet,t_prd_product_option_items,Y,MISSING,10,0,0,표지옵션(옵션)_표지코팅(옵션)|표지옵션(옵션)_투명커버(옵션)|제본(옵션)_제본방향(옵션)|제본(옵션)_면지(옵션)|제본(옵션)_링컬러(옵션)|제본(옵션)_바인더링(옵션)|제본(옵션)_제본(옵션),필요한데 라이브 0행
+booklet,t_prd_templates,Y,PARTIAL,10,1,1,주문방법(필수)_편집기,1/10 상품만 행 보유
+booklet,t_prd_product_constraints,Y,MISSING,10,0,0,표지옵션(옵션)_표지코팅(옵션)|표지옵션(옵션)_투명커버(옵션)|제본(옵션)_제본방향(옵션),필요한데 라이브 0행
+booklet,t_prd_product_price_formulas,Y,PARTIAL,10,6,6,"price-table sheet (가격표 단가시트 보유, sheet-slug-map.md)",6/10 상품만 행 보유
+booklet,t_prc_component_prices,Y,PARTIAL,10,6,378,"price-table sheet (가격표 단가시트 보유, sheet-slug-map.md)",6/10 상품만 행 보유
+booklet,t_prd_product_discount_tables,N,N/A,10,0,0,,엑셀이 이 엔티티 요구 안 함
+photobook,t_prd_products,Y,LOADED,1,1,1,always (상품 코어),
+photobook,t_prd_product_categories,Y,LOADED,1,1,1,always (상품 코어),
+photobook,t_prd_product_sizes,Y,LOADED,1,1,4,사이즈(필수)|내지파일사양_작업사이즈|내지파일사양_재단사이즈|표지사양_작업사이즈,
+photobook,t_prd_product_materials,Y,LOADED,1,1,7,내지종이|표지사양_블리드|표지사양_작업사이즈|표지사양_파일명약어|표지사양_출력파일|표지사양_폴더|표지종이사양,
+photobook,t_prd_product_print_options,Y,LOADED,1,1,2,내지인쇄|표지인쇄사양,
+photobook,t_prd_product_processes,Y,LOADED,1,1,1,제본사양_제본|제본사양_면지|제본사양_책등,
+photobook,t_prd_product_plate_sizes,N,DB-ONLY,1,1,11,,엑셀 master 미요구이나 DB 11행 존재(외부 권위 적재/과적재 후보 — gap-board 참조)
+photobook,t_prd_product_bundle_qtys,N,N/A,1,0,0,,엑셀이 이 엔티티 요구 안 함
+photobook,t_prd_product_page_rules,Y,LOADED,1,1,1,내지페이지(편집기)_최소|내지페이지(편집기)_최대|내지페이지(편집기)_증가,
+photobook,t_prd_product_sets,Y,LOADED,1,1,7,표지타입(필수)|표지사양_블리드|표지사양_작업사이즈|표지사양_파일명약어|표지사양_출력파일|표지사양_폴더,
+photobook,t_prd_product_addons,N,N/A,1,0,0,,엑셀이 이 엔티티 요구 안 함
+photobook,t_prd_product_option_groups,N,N/A,1,0,0,,엑셀이 이 엔티티 요구 안 함
+photobook,t_prd_product_options,N,N/A,1,0,0,,엑셀이 이 엔티티 요구 안 함
+photobook,t_prd_product_option_items,N,N/A,1,0,0,,엑셀이 이 엔티티 요구 안 함
+photobook,t_prd_templates,Y,LOADED,1,1,1,주문방법(필수)_편집기,
+photobook,t_prd_product_constraints,N,N/A,1,0,0,,엑셀이 이 엔티티 요구 안 함
+photobook,t_prd_product_price_formulas,Y,MISSING,1,0,0,가격_기본(24P)|가격_추가(2P)당,필요한데 라이브 0행
+photobook,t_prc_component_prices,Y,MISSING,1,0,0,가격_기본(24P)|가격_추가(2P)당,필요한데 라이브 0행
+photobook,t_prd_product_discount_tables,N,N/A,1,0,0,,엑셀이 이 엔티티 요구 안 함
+calendar,t_prd_products,Y,LOADED,5,5,5,always (상품 코어),
+calendar,t_prd_product_categories,Y,LOADED,5,5,5,always (상품 코어),
+calendar,t_prd_product_sizes,Y,LOADED,5,5,14,사이즈(필수)|파일사양_작업사이즈|파일사양_재단사이즈,
+calendar,t_prd_product_materials,Y,LOADED,5,5,56,종이사양,
+calendar,t_prd_product_print_options,Y,LOADED,5,5,7,인쇄(필수),
+calendar,t_prd_product_processes,Y,LOADED,5,5,6,캘린더가공(필수)_삼각대컬러|캘린더가공(필수)_캘린더가공|캘린더가공(필수)_추가가격|캘린더가공(필수)_링칼라,
+calendar,t_prd_product_plate_sizes,Y,LOADED,5,5,5,파일사양_출력용지규격,
+calendar,t_prd_product_bundle_qtys,Y,MISSING,5,0,0,개별포장(옵션),필요한데 라이브 0행
+calendar,t_prd_product_page_rules,Y,MISSING,5,0,0,장수(필수),필요한데 라이브 0행
+calendar,t_prd_product_sets,N,N/A,5,0,0,,엑셀이 이 엔티티 요구 안 함
+calendar,t_prd_product_addons,Y,MISSING,5,0,0,추가상품(옵션)_추가상품,필요한데 라이브 0행
+calendar,t_prd_product_option_groups,Y,MISSING,5,0,0,캘린더가공(필수)_삼각대컬러|캘린더가공(필수)_캘린더가공|캘린더가공(필수)_추가가격|캘린더가공(필수)_링칼라,필요한데 라이브 0행
+calendar,t_prd_product_options,Y,MISSING,5,0,0,캘린더가공(필수)_삼각대컬러|캘린더가공(필수)_캘린더가공|캘린더가공(필수)_추가가격|캘린더가공(필수)_링칼라,필요한데 라이브 0행
+calendar,t_prd_product_option_items,Y,MISSING,5,0,0,캘린더가공(필수)_삼각대컬러|캘린더가공(필수)_캘린더가공|캘린더가공(필수)_추가가격|캘린더가공(필수)_링칼라,필요한데 라이브 0행
+calendar,t_prd_templates,N,N/A,5,0,0,,엑셀이 이 엔티티 요구 안 함
+calendar,t_prd_product_constraints,Y,MISSING,5,0,0,캘린더가공(필수)_삼각대컬러|캘린더가공(필수)_캘린더가공|캘린더가공(필수)_추가가격|캘린더가공(필수)_링칼라,필요한데 라이브 0행
+calendar,t_prd_product_price_formulas,Y,MISSING,5,0,0,캘린더가공(필수)_추가가격,필요한데 라이브 0행
+calendar,t_prc_component_prices,Y,MISSING,5,0,0,캘린더가공(필수)_추가가격,필요한데 라이브 0행
+calendar,t_prd_product_discount_tables,N,N/A,5,0,0,,엑셀이 이 엔티티 요구 안 함
+design-calendar,t_prd_products,Y,LOADED,5,5,5,always (상품 코어),
+design-calendar,t_prd_product_categories,Y,LOADED,5,5,5,always (상품 코어),
+design-calendar,t_prd_product_sizes,Y,LOADED,5,5,14,사이즈(필수)|파일사양_작업사이즈|파일사양_재단사이즈,
+design-calendar,t_prd_product_materials,Y,LOADED,5,5,56,종이사양,
+design-calendar,t_prd_product_print_options,Y,LOADED,5,5,7,인쇄사양,
+design-calendar,t_prd_product_processes,Y,LOADED,5,5,6,캘린더사양_캘린더가공|캘린더사양_링칼라,
+design-calendar,t_prd_product_plate_sizes,Y,LOADED,5,5,5,파일사양_출력용지규격,
+design-calendar,t_prd_product_bundle_qtys,N,N/A,5,0,0,,엑셀이 이 엔티티 요구 안 함
+design-calendar,t_prd_product_page_rules,Y,MISSING,5,0,0,페이지사양,필요한데 라이브 0행
+design-calendar,t_prd_product_sets,N,N/A,5,0,0,,엑셀이 이 엔티티 요구 안 함
+design-calendar,t_prd_product_addons,Y,MISSING,5,0,0,추가상품(옵션)_추가상품|추가상품(옵션)_추가가격,필요한데 라이브 0행
+design-calendar,t_prd_product_option_groups,Y,MISSING,5,0,0,캘린더사양_캘린더가공,필요한데 라이브 0행
+design-calendar,t_prd_product_options,Y,MISSING,5,0,0,캘린더사양_캘린더가공,필요한데 라이브 0행
+design-calendar,t_prd_product_option_items,Y,MISSING,5,0,0,캘린더사양_캘린더가공,필요한데 라이브 0행
+design-calendar,t_prd_templates,Y,MISSING,5,0,0,주문방법(필수)_편집기,필요한데 라이브 0행
+design-calendar,t_prd_product_constraints,Y,MISSING,5,0,0,캘린더사양_캘린더가공,필요한데 라이브 0행
+design-calendar,t_prd_product_price_formulas,Y,MISSING,5,0,0,가격|추가상품(옵션)_추가가격,필요한데 라이브 0행
+design-calendar,t_prc_component_prices,Y,MISSING,5,0,0,가격|추가상품(옵션)_추가가격,필요한데 라이브 0행
+design-calendar,t_prd_product_discount_tables,N,N/A,5,0,0,,엑셀이 이 엔티티 요구 안 함
+silsa,t_prd_products,Y,LOADED,28,28,28,always (상품 코어),
+silsa,t_prd_product_categories,Y,LOADED,28,28,28,always (상품 코어),
+silsa,t_prd_product_sizes,Y,LOADED,28,28,84,사이즈(필수)|파일사양_작업사이즈|파일사양_재단사이즈,
+silsa,t_prd_product_materials,Y,PARTIAL,28,23,27,소재(필수),23/28 상품만 행 보유
+silsa,t_prd_product_print_options,N,N/A,28,0,0,,엑셀이 이 엔티티 요구 안 함
+silsa,t_prd_product_processes,Y,PARTIAL,28,17,28,코팅(옵션)|가공(옵션)_가공,17/28 상품만 행 보유
+silsa,t_prd_product_plate_sizes,N,DB-ONLY,28,28,84,,엑셀 master 미요구이나 DB 84행 존재(외부 권위 적재/과적재 후보 — gap-board 참조)
+silsa,t_prd_product_bundle_qtys,N,N/A,28,0,0,,엑셀이 이 엔티티 요구 안 함
+silsa,t_prd_product_page_rules,N,N/A,28,0,0,,엑셀이 이 엔티티 요구 안 함
+silsa,t_prd_product_sets,N,N/A,28,0,0,,엑셀이 이 엔티티 요구 안 함
+silsa,t_prd_product_addons,N,N/A,28,0,0,,엑셀이 이 엔티티 요구 안 함
+silsa,t_prd_product_option_groups,Y,PARTIAL,28,1,1,코팅(옵션)|가공(옵션)_가공,1/28 상품만 행 보유
+silsa,t_prd_product_options,Y,PARTIAL,28,1,3,코팅(옵션)|가공(옵션)_가공,1/28 상품만 행 보유
+silsa,t_prd_product_option_items,Y,MISSING,28,0,0,코팅(옵션)|가공(옵션)_가공,필요한데 라이브 0행
+silsa,t_prd_templates,Y,PARTIAL,28,3,3,주문방법(필수)_편집기,3/28 상품만 행 보유
+silsa,t_prd_product_constraints,N,N/A,28,0,0,,엑셀이 이 엔티티 요구 안 함
+silsa,t_prd_product_price_formulas,Y,LOADED,28,28,28,price|price (vat포함)|price(V)|추가(옵션)_추가옵션가격,
+silsa,t_prc_component_prices,Y,LOADED,28,28,28,price|price (vat포함)|price(V)|추가(옵션)_추가옵션가격,
+silsa,t_prd_product_discount_tables,N,N/A,28,0,0,,엑셀이 이 엔티티 요구 안 함
+acrylic,t_prd_products,Y,LOADED,25,25,25,always (상품 코어),
+acrylic,t_prd_product_categories,Y,LOADED,25,25,25,always (상품 코어),
+acrylic,t_prd_product_sizes,Y,PARTIAL,25,23,77,사이즈(필수)|파일사양_작업사이즈|파일사양_재단사이즈,23/25 상품만 행 보유
+acrylic,t_prd_product_materials,Y,PARTIAL,25,23,34,소재(필수),23/25 상품만 행 보유
+acrylic,t_prd_product_print_options,Y,PARTIAL,25,21,63,인쇄사양,21/25 상품만 행 보유
+acrylic,t_prd_product_processes,Y,PARTIAL,25,14,16,조각수(옵션)|가공(옵션)_가공|가공(옵션)_가격,14/25 상품만 행 보유
+acrylic,t_prd_product_plate_sizes,N,DB-ONLY,25,16,51,,엑셀 master 미요구이나 DB 51행 존재(외부 권위 적재/과적재 후보 — gap-board 참조)
+acrylic,t_prd_product_bundle_qtys,N,DB-ONLY,25,2,6,,엑셀 master 미요구이나 DB 6행 존재(외부 권위 적재/과적재 후보 — gap-board 참조)
+acrylic,t_prd_product_page_rules,N,N/A,25,0,0,,엑셀이 이 엔티티 요구 안 함
+acrylic,t_prd_product_sets,N,N/A,25,0,0,,엑셀이 이 엔티티 요구 안 함
+acrylic,t_prd_product_addons,Y,MISSING,25,0,0,추가상품(옵션)_추가상품|추가상품(옵션)_추가가격,필요한데 라이브 0행
+acrylic,t_prd_product_option_groups,Y,MISSING,25,0,0,조각수(옵션)|가공(옵션)_가공|가공(옵션)_가격,필요한데 라이브 0행
+acrylic,t_prd_product_options,Y,MISSING,25,0,0,조각수(옵션)|가공(옵션)_가공|가공(옵션)_가격,필요한데 라이브 0행
+acrylic,t_prd_product_option_items,Y,MISSING,25,0,0,조각수(옵션)|가공(옵션)_가공|가공(옵션)_가격,필요한데 라이브 0행
+acrylic,t_prd_templates,Y,PARTIAL,25,1,1,주문방법(필수)_편집기,1/25 상품만 행 보유
+acrylic,t_prd_product_constraints,N,N/A,25,0,0,,엑셀이 이 엔티티 요구 안 함
+acrylic,t_prd_product_price_formulas,Y,MISSING,25,0,0,가격|가공(옵션)_가격|추가상품(옵션)_추가가격,필요한데 라이브 0행
+acrylic,t_prc_component_prices,Y,MISSING,25,0,0,가격|가공(옵션)_가격|추가상품(옵션)_추가가격,필요한데 라이브 0행
+acrylic,t_prd_product_discount_tables,N,DB-ONLY,25,11,11,,엑셀 master 미요구이나 DB 11행 존재(외부 권위 적재/과적재 후보 — gap-board 참조)
+stationery,t_prd_products,Y,LOADED,11,11,11,always (상품 코어),
+stationery,t_prd_product_categories,Y,LOADED,11,11,12,always (상품 코어),
+stationery,t_prd_product_sizes,Y,LOADED,11,11,13,사이즈(필수)|내지파일사양_작업사이즈|내지파일사양_재단사이즈|표지파일사양_작업사이즈,
+stationery,t_prd_product_materials,Y,LOADED,11,11,21,내지(옵션)|종이(옵션)|표지사양,
+stationery,t_prd_product_print_options,Y,PARTIAL,11,7,8,내지인쇄사양|표지인쇄사양,7/11 상품만 행 보유
+stationery,t_prd_product_processes,Y,PARTIAL,11,9,16,제본옵션(옵션)|제본사양,9/11 상품만 행 보유
+stationery,t_prd_product_plate_sizes,N,DB-ONLY,11,8,11,,엑셀 master 미요구이나 DB 11행 존재(외부 권위 적재/과적재 후보 — gap-board 참조)
+stationery,t_prd_product_bundle_qtys,Y,PARTIAL,11,1,2,개별포장(옵션),1/11 상품만 행 보유
+stationery,t_prd_product_page_rules,Y,PARTIAL,11,2,2,페이지사양_최소|페이지사양_최대|페이지사양_증가,2/11 상품만 행 보유
+stationery,t_prd_product_sets,Y,PARTIAL,11,1,1,표지사양,1/11 상품만 행 보유
+stationery,t_prd_product_addons,N,N/A,11,0,0,,엑셀이 이 엔티티 요구 안 함
+stationery,t_prd_product_option_groups,Y,MISSING,11,0,0,내지(옵션),필요한데 라이브 0행
+stationery,t_prd_product_options,Y,MISSING,11,0,0,내지(옵션),필요한데 라이브 0행
+stationery,t_prd_product_option_items,Y,MISSING,11,0,0,내지(옵션),필요한데 라이브 0행
+stationery,t_prd_templates,Y,PARTIAL,11,6,6,주문방법(필수)_편집기,6/11 상품만 행 보유
+stationery,t_prd_product_constraints,N,N/A,11,0,0,,엑셀이 이 엔티티 요구 안 함
+stationery,t_prd_product_price_formulas,Y,PARTIAL,11,1,1,가격,1/11 상품만 행 보유
+stationery,t_prc_component_prices,Y,PARTIAL,11,1,112,가격,1/11 상품만 행 보유
+stationery,t_prd_product_discount_tables,Y,PARTIAL,11,6,6,구간할인적용테이블,6/11 상품만 행 보유
+goods-pouch,t_prd_products,Y,LOADED,98,98,98,always (상품 코어),
+goods-pouch,t_prd_product_categories,Y,LOADED,98,98,98,always (상품 코어),
+goods-pouch,t_prd_product_sizes,Y,PARTIAL,98,11,26,사이즈(필수)|파일사양_작업사이즈,11/98 상품만 행 보유
+goods-pouch,t_prd_product_materials,N,DB-ONLY,98,61,130,,엑셀 master 미요구이나 DB 130행 존재(외부 권위 적재/과적재 후보 — gap-board 참조)
+goods-pouch,t_prd_product_print_options,N,N/A,98,0,0,,엑셀이 이 엔티티 요구 안 함
+goods-pouch,t_prd_product_processes,Y,PARTIAL,98,6,6,가공(옵션)_가공|가공(옵션)_가격,6/98 상품만 행 보유
+goods-pouch,t_prd_product_plate_sizes,N,DB-ONLY,98,85,122,,엑셀 master 미요구이나 DB 122행 존재(외부 권위 적재/과적재 후보 — gap-board 참조)
+goods-pouch,t_prd_product_bundle_qtys,N,DB-ONLY,98,1,2,,엑셀 master 미요구이나 DB 2행 존재(외부 권위 적재/과적재 후보 — gap-board 참조)
+goods-pouch,t_prd_product_page_rules,N,N/A,98,0,0,,엑셀이 이 엔티티 요구 안 함
+goods-pouch,t_prd_product_sets,N,N/A,98,0,0,,엑셀이 이 엔티티 요구 안 함
+goods-pouch,t_prd_product_addons,Y,MISSING,98,0,0,추가상품(옵션)_추가상품|추가상품(옵션)_추가가격,필요한데 라이브 0행
+goods-pouch,t_prd_product_option_groups,Y,MISSING,98,0,0,선택(옵션)_선택|가공(옵션)_가공|가공(옵션)_가격,필요한데 라이브 0행
+goods-pouch,t_prd_product_options,Y,MISSING,98,0,0,선택(옵션)_선택|가공(옵션)_가공|가공(옵션)_가격,필요한데 라이브 0행
+goods-pouch,t_prd_product_option_items,Y,MISSING,98,0,0,선택(옵션)_선택|가공(옵션)_가공|가공(옵션)_가격,필요한데 라이브 0행
+goods-pouch,t_prd_templates,Y,PARTIAL,98,96,96,주문방법(필수)_편집기,96/98 상품만 행 보유
+goods-pouch,t_prd_product_constraints,N,N/A,98,0,0,,엑셀이 이 엔티티 요구 안 함
+goods-pouch,t_prd_product_price_formulas,Y,MISSING,98,0,0,가격|가공(옵션)_가격|추가상품(옵션)_추가가격,필요한데 라이브 0행
+goods-pouch,t_prc_component_prices,Y,MISSING,98,0,0,가격|가공(옵션)_가격|추가상품(옵션)_추가가격,필요한데 라이브 0행
+goods-pouch,t_prd_product_discount_tables,Y,PARTIAL,98,81,81,구간할인적용테이블,81/98 상품만 행 보유
+product-accessory,t_prd_products,Y,LOADED,15,15,15,always (상품 코어),
+product-accessory,t_prd_product_categories,Y,LOADED,15,15,16,always (상품 코어),
+product-accessory,t_prd_product_sizes,Y,PARTIAL,15,7,38,사이즈(필수),7/15 상품만 행 보유
+product-accessory,t_prd_product_materials,N,DB-ONLY,15,8,29,,엑셀 master 미요구이나 DB 29행 존재(외부 권위 적재/과적재 후보 — gap-board 참조)
+product-accessory,t_prd_product_print_options,N,N/A,15,0,0,,엑셀이 이 엔티티 요구 안 함
+product-accessory,t_prd_product_processes,N,N/A,15,0,0,,엑셀이 이 엔티티 요구 안 함
+product-accessory,t_prd_product_plate_sizes,N,N/A,15,0,0,,엑셀이 이 엔티티 요구 안 함
+product-accessory,t_prd_product_bundle_qtys,N,DB-ONLY,15,7,11,,엑셀 master 미요구이나 DB 11행 존재(외부 권위 적재/과적재 후보 — gap-board 참조)
+product-accessory,t_prd_product_page_rules,N,N/A,15,0,0,,엑셀이 이 엔티티 요구 안 함
+product-accessory,t_prd_product_sets,N,N/A,15,0,0,,엑셀이 이 엔티티 요구 안 함
+product-accessory,t_prd_product_addons,N,N/A,15,0,0,,엑셀이 이 엔티티 요구 안 함
+product-accessory,t_prd_product_option_groups,N,DB-ONLY,15,1,1,,엑셀 master 미요구이나 DB 1행 존재(외부 권위 적재/과적재 후보 — gap-board 참조)
+product-accessory,t_prd_product_options,N,DB-ONLY,15,1,2,,엑셀 master 미요구이나 DB 2행 존재(외부 권위 적재/과적재 후보 — gap-board 참조)
+product-accessory,t_prd_product_option_items,N,N/A,15,0,0,,엑셀이 이 엔티티 요구 안 함
+product-accessory,t_prd_templates,N,N/A,15,0,0,,엑셀이 이 엔티티 요구 안 함
+product-accessory,t_prd_product_constraints,N,DB-ONLY,15,1,3,,엑셀 master 미요구이나 DB 3행 존재(외부 권위 적재/과적재 후보 — gap-board 참조)
+product-accessory,t_prd_product_price_formulas,Y,MISSING,15,0,0,가격,필요한데 라이브 0행
+product-accessory,t_prc_component_prices,Y,MISSING,15,0,0,가격,필요한데 라이브 0행
+product-accessory,t_prd_product_discount_tables,N,N/A,15,0,0,,엑셀이 이 엔티티 요구 안 함
