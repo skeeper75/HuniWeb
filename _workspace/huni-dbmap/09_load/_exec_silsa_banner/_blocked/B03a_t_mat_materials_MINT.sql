@@ -1,0 +1,30 @@
+-- =====================================================================
+-- step B-03a — t_mat_materials (BLOCKED-MINT 제안 — 인간 승인·search-before-mint)
+-- [v2] 큐방·각목(900이하/초과)·봉제사 자재 신규 mint 제안. master 부재 라이브 재증명. mat_cd 채번=후니
+-- 멱등: 재실행 시 0행 변경. 손편집 금지(gen_load_sql.py 생성).
+-- reg_dt 명시 생략→DEFAULT now() 발화(round-5 교훈: 명시 NULL 은 DEFAULT 미발화).
+-- =====================================================================
+-- [HARD·인간 승인] 자재 mint = 후니 채번. mat_cd = [CONFIRM-CHANNEL] placeholder.
+--   적용 직전 라이브 MAX(mat_cd) 재확인 후 배정(현 MAX=MAT_000336 → MAT_000337+ 후보).
+--   search-before-mint: 끈 MAT_000070·양면테입 MAT_000069 = master 실재(mint 불요·B03b 링크만).
+--     큐방·각목·봉제사 = 라이브 t_mat_materials 0행 재증명(아래 근거) → mint 제안.
+-- [멱등] ON CONFLICT (mat_cd) DO NOTHING. mat_typ_cd=MAT_TYPE.07(부속) NOT NULL·use_yn NOT NULL.
+-- 제안: 봉제사 — 봉미싱 실=자재 등록(D②). t_mat_materials 0행 재증명(실버/실사소재만). MAT_TYPE.07 부속
+-- INSERT INTO t_mat_materials (mat_cd, mat_nm, mat_typ_cd, use_yn, note, reg_dt)
+-- VALUES ('[CONFIRM-CHANNEL mat_cd]', '봉제사', 'MAT_TYPE.07', 'Y', '자재 mint 제안(round-6 v2 BUNDLE): 봉미싱 실=자재 등록(D②). t_mat_materials 0행 재증명(실버/실사소재만). MAT_TYPE.07 부속', now())
+-- ON CONFLICT (mat_cd) DO NOTHING;
+-- 제안: 큐방 — 큐방 자재(D). 큐/방/하토메/고리 검색 0행(아크릴부속 고리·천정고리만). MAT_TYPE.07 부속
+-- INSERT INTO t_mat_materials (mat_cd, mat_nm, mat_typ_cd, use_yn, note, reg_dt)
+-- VALUES ('[CONFIRM-CHANNEL mat_cd]', '큐방', 'MAT_TYPE.07', 'Y', '자재 mint 제안(round-6 v2 BUNDLE): 큐방 자재(D). 큐/방/하토메/고리 검색 0행(아크릴부속 고리·천정고리만). MAT_TYPE.07 부속', now())
+-- ON CONFLICT (mat_cd) DO NOTHING;
+-- 제안: 각목(900이하) — 각목 신규 자재 mint(D③·우드봉 차용 배제). t_mat_materials 0행 재증명. 사각단면 목재. MAT_TYPE.07
+-- INSERT INTO t_mat_materials (mat_cd, mat_nm, mat_typ_cd, use_yn, note, reg_dt)
+-- VALUES ('[CONFIRM-CHANNEL mat_cd]', '각목(900이하)', 'MAT_TYPE.07', 'Y', '자재 mint 제안(round-6 v2 BUNDLE): 각목 신규 자재 mint(D③·우드봉 차용 배제). t_mat_materials 0행 재증명. 사각단면 목재. MAT_TYPE.07', now())
+-- ON CONFLICT (mat_cd) DO NOTHING;
+-- 제안: 각목(900초과) — 각목(900초과) 신규 자재 mint(D③). 2규격 모델 D-2([CONFIRM] 별 mat_cd vs 단일+param). MAT_TYPE.07
+-- INSERT INTO t_mat_materials (mat_cd, mat_nm, mat_typ_cd, use_yn, note, reg_dt)
+-- VALUES ('[CONFIRM-CHANNEL mat_cd]', '각목(900초과)', 'MAT_TYPE.07', 'Y', '자재 mint 제안(round-6 v2 BUNDLE): 각목(900초과) 신규 자재 mint(D③). 2규격 모델 D-2([CONFIRM] 별 mat_cd vs 단일+param). MAT_TYPE.07', now())
+-- ON CONFLICT (mat_cd) DO NOTHING;
+
+-- ↑ 주석 처리(commented) — mat_cd 미채번이라 실행 SQL 아님. 후니 채번 후 활성화.
+SELECT 'B03a: t_mat_materials mint — PROPOSAL ONLY (mat_cd 미채번, 인간 승인)' AS step_b03a;

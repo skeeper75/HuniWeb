@@ -1,0 +1,36 @@
+-- =====================================================================
+-- step 02 — t_prc_price_components
+-- 옵션 추가가격 component 10 신설(가공6+추가4). COMP_POSTER_BANNER_NORMAL 라이브 선존재(미포함). PK=comp_cd
+-- 멱등: 재실행 시 0행 변경. 손편집 금지(gen_load_sql.py 생성).
+-- reg_dt 명시 생략→DEFAULT now() 발화(round-5 교훈: 명시 NULL 은 DEFAULT 미발화).
+-- =====================================================================
+INSERT INTO t_prc_price_components (comp_cd, comp_nm, comp_typ_cd, note, use_yn, reg_dt)
+VALUES ('COMP_BANNER_FIN_HEATCUT', '일반현수막 열재단', 'PRC_COMPONENT_TYPE.04', '가공옵션 열재단 추가가격 3000 flat (B26 J/K). 본체 마감 가공', 'Y', now())
+ON CONFLICT (comp_cd) DO NOTHING;
+INSERT INTO t_prc_price_components (comp_cd, comp_nm, comp_typ_cd, note, use_yn, reg_dt)
+VALUES ('COMP_BANNER_FIN_EYELET4', '일반현수막 타공(4개)', 'PRC_COMPONENT_TYPE.04', '가공옵션 타공4 추가가격 3000 flat (B26 K247). 아일렛 4개', 'Y', now())
+ON CONFLICT (comp_cd) DO NOTHING;
+INSERT INTO t_prc_price_components (comp_cd, comp_nm, comp_typ_cd, note, use_yn, reg_dt)
+VALUES ('COMP_BANNER_FIN_EYELET6', '일반현수막 타공(6개)', 'PRC_COMPONENT_TYPE.04', '가공옵션 타공6 추가가격 4000 flat (B26 K248). 아일렛 6개', 'Y', now())
+ON CONFLICT (comp_cd) DO NOTHING;
+INSERT INTO t_prc_price_components (comp_cd, comp_nm, comp_typ_cd, note, use_yn, reg_dt)
+VALUES ('COMP_BANNER_FIN_EYELET8', '일반현수막 타공(8개)', 'PRC_COMPONENT_TYPE.04', '가공옵션 타공8 추가가격 5000 flat (B26 K249). 아일렛 8개', 'Y', now())
+ON CONFLICT (comp_cd) DO NOTHING;
+INSERT INTO t_prc_price_components (comp_cd, comp_nm, comp_typ_cd, note, use_yn, reg_dt)
+VALUES ('COMP_BANNER_FIN_DTAPE', '일반현수막 양면테입', 'PRC_COMPONENT_TYPE.04', '가공옵션 양면테입 추가가격 3000 flat (B26 K250). 부착 부속', 'Y', now())
+ON CONFLICT (comp_cd) DO NOTHING;
+INSERT INTO t_prc_price_components (comp_cd, comp_nm, comp_typ_cd, note, use_yn, reg_dt)
+VALUES ('COMP_BANNER_FIN_SEW', '일반현수막 봉미싱', 'PRC_COMPONENT_TYPE.04', '가공옵션 봉미싱 추가가격 4000 flat (B26 K251). 끝단 봉제', 'Y', now())
+ON CONFLICT (comp_cd) DO NOTHING;
+INSERT INTO t_prc_price_components (comp_cd, comp_nm, comp_typ_cd, note, use_yn, reg_dt)
+VALUES ('COMP_BANNER_ADD_QBANG4', '일반현수막 큐방(4개)추가', 'PRC_COMPONENT_TYPE.06', '추가옵션 큐방4 추가가격 3000 flat (B26 N247). 거치 부자재 통가격 (D-CHUGA-TYP)', 'Y', now())
+ON CONFLICT (comp_cd) DO NOTHING;
+INSERT INTO t_prc_price_components (comp_cd, comp_nm, comp_typ_cd, note, use_yn, reg_dt)
+VALUES ('COMP_BANNER_ADD_STRING4', '일반현수막 끈(4개)추가', 'PRC_COMPONENT_TYPE.06', '추가옵션 끈4 추가가격 4000 flat (B26 N248). 거치 부자재 통가격 (D-CHUGA-TYP)', 'Y', now())
+ON CONFLICT (comp_cd) DO NOTHING;
+INSERT INTO t_prc_price_components (comp_cd, comp_nm, comp_typ_cd, note, use_yn, reg_dt)
+VALUES ('COMP_BANNER_ADD_LUMBER_LE900', '일반현수막 각목(900이하)+끈추가', 'PRC_COMPONENT_TYPE.06', '추가옵션 각목(세로변 900mm이하)+끈 추가가격 4000 (B26 N249). 세로변 기준(U-3). 거치 부자재 통가격', 'Y', now())
+ON CONFLICT (comp_cd) DO NOTHING;
+INSERT INTO t_prc_price_components (comp_cd, comp_nm, comp_typ_cd, note, use_yn, reg_dt)
+VALUES ('COMP_BANNER_ADD_LUMBER_GT900', '일반현수막 각목(900초과)+끈추가', 'PRC_COMPONENT_TYPE.06', '추가옵션 각목(세로변 900mm초과)+끈 추가가격 8000 (B26 N250). 세로변 기준(U-3). 거치 부자재 통가격', 'Y', now())
+ON CONFLICT (comp_cd) DO NOTHING;

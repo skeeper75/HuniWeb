@@ -1,0 +1,2 @@
+frm_cd,frm_nm,frm_typ_cd,note,use_yn
+PRF_PBK_PAGEBAND,포토북 page-band 합산형(기본가24P+추가2P당),FRM_TYPE.01,합산형: 판매가=기본가(24P)+ceil((pages-24)/2)*추가2P단가. page count multiply는 앱 런타임(DB=lookup only).,Y

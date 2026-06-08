@@ -1,0 +1,15 @@
+-- =====================================================================
+-- step 00 — pre-load markers (no INSERT)
+-- 열재단 PROC_000084=DDL제안(미적용)·siz 77규격=master-data 신규·각목 등 자재(.03) mint=master-data (v2 BUNDLE, 전부 인간 승인)
+-- 멱등: 재실행 시 0행 변경. 손편집 금지(gen_load_sql.py 생성).
+-- reg_dt 명시 생략→DEFAULT now() 발화(round-5 교훈: 명시 NULL 은 DEFAULT 미발화).
+-- =====================================================================
+-- 이 단계에는 적재 INSERT 가 없다(인간 승인 대기 항목 마커).
+--  (a) [DDL] 열재단 신규 공정 PROC_000084 — 11_ddl_proposals/heat-cut-process-proposal.sql
+--      적용(t_proc_processes + t_prd_product_processes 2행) 후에만 열재단 option_item INSERTABLE 승격.
+--  (b) [master-data] siz 77규격 SIZ_000538~000618 — load/t_siz_sizes_BLOCKED.csv
+--      후니 siz 등록 후에만 77 area-cell price + R-GAKMOK constraint 적재 가능.
+--      search-before-mint: 라이브 MAX(siz_cd)=SIZ_000510, 77규격 미존재 확인(_blocked/ 별도).
+--  (c) [master-data] 각목 자재(.03) mint — 라이브 t_mat_materials '각목' 부재 확인(v2: 각목=material, 셋트.07/sub_prd_cd 폐기).
+--      각목 자재 mint(MAT_TYPE.07) + t_prd_product_materials 링크 후에만 각목 자재 seq item INSERTABLE.
+SELECT '00: pre-load markers — no INSERT in main transaction (human-approved items)' AS step_00;

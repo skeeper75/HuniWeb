@@ -1,0 +1,13 @@
+-- =====================================================================
+-- step 09 — t_prd_product_constraints
+-- [v2] R-GAKMOK-HEIGHT=GAP-DEFER(var=mat_cd 정정·각목 자재 mint+링크·siz 77·폼빌더 선행). 현 적재 0행. logic jsonb NOT NULL
+-- 멱등: 재실행 시 0행 변경. 손편집 금지(gen_load_sql.py 생성).
+-- reg_dt 명시 생략→DEFAULT now() 발화(round-5 교훈: 명시 NULL 은 DEFAULT 미발화).
+-- =====================================================================
+-- 현 시점 적재 constraint 0행.
+--  · R-SIZE-NONSPEC = 폐기(사이즈=이산 매트릭스, 유효성=가격 셀 존재).
+--  · R-BONGJE-PARAM = 불요(사이즈 필수 선택은 공통 전제).
+--  · R-GAKMOK-HEIGHT = GAP-DEFER: [v2] var = mat_cd(각목 material 재귀속, v1 sub_prd_cd 폐기).
+--      logic(jsonb) 저장 가능하나 선행 3건 미충족: ① 각목 자재 mint(t_mat_materials)+PRD_000138 자재링크,
+--      ② siz 77 등록, ③ 폼빌더 배열-멤버십 입력방식(F-1). 차원 선등록 후 별도 승인 적재.
+SELECT '09: constraints — 0 rows now (R-GAKMOK GAP-DEFER, var=mat_cd, human-approved prereqs)' AS step_09;

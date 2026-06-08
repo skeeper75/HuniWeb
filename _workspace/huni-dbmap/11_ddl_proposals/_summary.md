@@ -7,6 +7,25 @@
 
 ---
 
+## 0a. round-6 Phase-0 DECISION PACK (CPQ 옵션 레이어 L2 차단 해소 — 2026-06-07)
+
+> CPQ 옵션 레이어 적재(L2)를 막는 GAP-PARAM(공정 파라미터 보존) + 5건 미해결 설계 결정. **propose only — 라이브 read-only 실측 포함, ALTER/COMMIT 0.**
+
+| # | GAP/결정 | 판정 | 제안/권고(1줄) | 사다리 | 산출물 |
+|---|----------|------|----------------|--------|--------|
+| P0-A | GAP-PARAM(+COUNT) — 공정 파라미터 선택값(타공 구수·줄수·개수·박크기·조각수·구수) 보존처 부재 = ref_param_json 미구현 | **DDL-NEEDED** | `ALTER t_prd_product_option_items ADD ref_param_json jsonb NULL` (단 1줄) | **3(JSONB)** | `ref-param-json-proposal.{md,sql}` |
+| P0-1 | 잉크색(만년스탬프)=도수 vs 자유옵션그릇 | DECISION | 권고 **B(자유옵션그릇)** 조건부(GAP-OPT 종속) | — | `10_configurator/design-decisions-pack.md §1` |
+| P0-2 | 용량(머그 11온스)=비치수 size vs 별 사양축 | DECISION | 권고 **A(비치수 size 마스터 경유)** | — | `…pack.md §2` |
+| P0-3 | 면지/바인더링(booklet)=자재 vs 공정/셋트 | **RESOLVED(라이브)** | **A 자재(.03) 확정** — 면지=USAGE.03·링=USAGE.07 라이브 실재 | 0(DDL 불요) | `…pack.md §3` |
+| P0-4 | 보드종류(폼보드/포맥스)=자재 vs 가공 vs 형태 | DECISION | 권고 **A 자재(.03)** — 5상품 n_mat=0 실측 | — | `…pack.md §4` |
+| P0-5 | 실내/실외 거치대=1 base+옵션 vs 2 SKU | DECISION | 권고 **B 2 template** — 라이브 add-on 패턴 정합 | 0(DDL 불요·데이터만) | `…pack.md §5` |
+
+- **라이브 실측 확정(read-only 2026-06-07):** option_items 12컬럼·0행·`ref_param_json` 전 DB 부재 / prcs_dtl_opt(jsonb) 파라미터 *스키마* 실재(줄수·면·제본 다축) → schema↔value 비대칭이 GAP-PARAM 본질 / jsonb 라이브 컨벤션 3건(logic·constraint_json·prcs_dtl_opt)·GIN 0 / 면지=MAT_000001~004(.03 USAGE.03)·링=MAT_000012~023(.03 USAGE.07) / 보드 5상품(129·130·131·132·144) n_mat=0·보드 자재명/공정명 0건 / 우드거치대 PRD_000012=상품+TMPL-PRD_000012.
+- **라이브↔설계 문서 모순:** attribute-entity-map §5.3·cpq-option-gaps가 `[CONFIRM]`으로 둔 면지/바인더링이 **라이브 실측=자재(.03) 확정** → 설계 문서 정정 권고(P0-3).
+- **DDL-NEEDED 1건(P0-A)** = option_items 0행이라 백필 0·트리거 미참조·인덱스 불요(최소 ALTER).
+
+---
+
 ## 0. round-6 추가 제안 (M-1 — 열재단 신규 공정)
 
 | # | GAP | 판정 | 제안 엔티티(1줄) | 사다리 | 승격 행수 | 산출물 |

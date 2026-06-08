@@ -1,0 +1,10 @@
+frm_cd,frm_nm,frm_typ_cd,note,use_yn
+PRF_BIND_JUNGCHEOL,제본 합산형 상품별 [중철책자],FRM_TYPE.01,D-WIRE 재모델: PRD_000068 중철책자 전용 공식(PRF_BIND_SUM 분리). 합산항=중철 제본비 단일 comp,Y
+PRF_BIND_MUSEON,제본 합산형 상품별 [무선책자],FRM_TYPE.01,D-WIRE 재모델: PRD_000069 무선책자 전용 공식(PRF_BIND_SUM 분리). 합산항=무선 제본비 단일 comp,Y
+PRF_BIND_PUR,제본 합산형 상품별 [PUR책자],FRM_TYPE.01,D-WIRE 재모델: PRD_000070 PUR책자 전용 공식(PRF_BIND_SUM 분리). 합산항=PUR 제본비 단일 comp,Y
+PRF_BIND_TWINRING,제본 합산형 상품별 [트윈링책자],FRM_TYPE.01,D-WIRE 재모델: PRD_000071 트윈링책자 전용 공식(PRF_BIND_SUM 분리). 합산항=트윈링 제본비 단일 comp,Y
+PRF_NAMECARD_STD,명함 단순형 상품별 [스탠다드명함],FRM_TYPE.02,D-WIRE 재모델: PRD_000033 스탠다드명함 전용 공식(PRF_NAMECARD_FIXED 분리·C1 supersede). 단/양면 STD comp,Y
+PRF_NAMECARD_PREMIUM,명함 단순형 상품별 [프리미엄명함],FRM_TYPE.02,D-WIRE 재모델: PRD_000031 프리미엄명함 전용 공식(PRF_NAMECARD_FIXED 분리·C1 supersede). 단/양면 x 무게A/B PREMIUM comp,Y
+PRF_NAMECARD_COAT,명함 단순형 상품별 [코팅명함],FRM_TYPE.02,D-WIRE 재모델: PRD_000032 코팅명함 전용 공식(PRF_NAMECARD_FIXED 분리·C1 supersede). 단/양면 COAT comp,Y
+PRF_PHOTOCARD_STD,포토카드 단순형 상품별 [포토카드],FRM_TYPE.02,D-WIRE 재모델: PRD_000024 포토카드 전용 공식(PRF_PHOTOCARD_FIXED 분리). 세트 완제품가 SET comp,Y
+PRF_PHOTOCARD_CLEAR,포토카드 단순형 상품별 [투명포토카드],FRM_TYPE.02,D-WIRE 재모델: PRD_000025 투명포토카드 전용 공식(PRF_PHOTOCARD_FIXED 분리). 세트 완제품가 CLEAR_SET comp,Y

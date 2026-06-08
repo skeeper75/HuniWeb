@@ -1,0 +1,3 @@
+comp_cd,comp_nm,comp_typ_cd,note,use_yn
+COMP_PBK_BASE24P,"포토북 기본가(완제품가, ≤24P) [COMP_PBK_BASE24P]",PRC_COMPONENT_TYPE.06,사이즈(siz)×표지(mat) 기본단가 @ 24P. 통가격(완제품비).,Y
+COMP_PBK_ADD2P,포토북 추가2P당 증분단가 [COMP_PBK_ADD2P],PRC_COMPONENT_TYPE.06,사이즈×표지 추가 2페이지당 증분. 곱셈계수 ceil((pages-24)/2)는 앱 적용(DB=단위단가 lookup).,Y
