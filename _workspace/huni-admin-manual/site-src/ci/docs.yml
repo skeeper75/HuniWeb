@@ -1,0 +1,76 @@
+name: Publish Admin Manual (MkDocs)
+
+# docs-as-code: 사람이 하네스로 매뉴얼을 갱신·QA한 뒤 커밋하면,
+# CI는 빌드·배포만 자동으로 수행한다. LLM 하네스를 CI에서 무인 실행하지 않는다.
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "_workspace/huni-admin-manual/manual/**"
+      - "_workspace/huni-admin-manual/captures/**"
+      - "_workspace/huni-admin-manual/site-src/**"
+      - ".github/workflows/docs.yml"
+  # 수동 실행 허용(긴급 재배포)
+  workflow_dispatch:
+
+# GitHub Pages 배포에 필요한 권한
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 동시 배포 1건으로 제한(진행 중 실행은 취소하지 않고 큐잉)
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+env:
+  SITE_SRC: _workspace/huni-admin-manual/site-src
+
+jobs:
+  build:
+    name: Build site
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: pip-docs-${{ runner.os }}-${{ hashFiles('_workspace/huni-admin-manual/site-src/requirements-docs.txt') }}
+          restore-keys: |
+            pip-docs-${{ runner.os }}-
+
+      - name: Install dependencies
+        run: pip install -r "$SITE_SRC/requirements-docs.txt"
+
+      - name: Normalize docs tree (manual + captures -> docs/)
+        run: python "$SITE_SRC/build_docs.py"
+
+      - name: Build MkDocs site (strict)
+        run: mkdocs build -f "$SITE_SRC/mkdocs.yml" --strict
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _workspace/huni-admin-manual/site-src/site
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

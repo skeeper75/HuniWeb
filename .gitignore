@@ -184,6 +184,11 @@ secret-*.*
 
 # Skill-specific credentials
 .claude/skills/*/.env*
+
+# MkDocs 문서 사이트 빌드 생성물(소스만 추적: mkdocs.yml·build_docs.py·requirements·README)
+_workspace/huni-admin-manual/site-src/docs/
+_workspace/huni-admin-manual/site-src/site/
+_workspace/huni-admin-manual/site-src/.venv/
 .claude/skills/*/secrets/
 .claude/skills/*/*/*secret*
 .claude/skills/*/*/*key*

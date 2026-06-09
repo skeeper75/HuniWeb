@@ -1,0 +1,70 @@
+site_name: 후니 상품·가격 DB 관리자 운영자 매뉴얼
+site_description: 후니 상품·가격 데이터를 직접 등록·수정하는 운영자(비개발자)를 위한 업무 가이드
+docs_dir: docs
+
+theme:
+  name: material
+  language: ko
+  features:
+    - navigation.sections
+    - navigation.top
+    - navigation.instant
+    - navigation.tracking
+    - navigation.indexes
+    - toc.follow
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+  palette:
+    # 라이트 모드
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: 다크 모드로 전환
+    # 다크 모드
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: 라이트 모드로 전환
+
+plugins:
+  - search:
+      lang:
+        - ko
+        - en
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+      # 한글 제목 anchor 보존: 기본 toc slugify는 비ASCII(한글)를 제거해
+      # 매뉴얼이 손으로 적은 한글 anchor 링크가 깨진다. Unicode 보존 slugify로 교정.
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+
+nav:
+  - 시작하기:
+      - 홈: index.md
+      - 00 시작하기: 01_getting-started.md
+  - 업무별 절차:
+      - 01 상품 등록·수정하기: 02_product-register.md
+      - 02 상품 하위정보 다루기: 03_product-sections.md
+      - 03 옵션 구성하기: 04_options.md
+      - 04 구성 템플릿(SKU) 만들기: 05_sku-templates.md
+      - 05 제약 규칙 설정하기: 06_constraints.md
+      - 06 기초정보 마스터 관리하기: 07_masters.md
+      - 07 가격·할인·고객 관리하기: 08_pricing.md
+  - 레퍼런스 · 부록:
+      - 09 화면 레퍼런스: 09_screen-reference.md
+      - 10 부록: 10_appendix.md

@@ -1,6 +1,6 @@
 ---
 name: huni-admin-manual-orchestrator
-description: 후니 라이브 Django admin(huni-admin-production.up.railway.app/admin/) 운영자 사용 매뉴얼 작성 하네스 오케스트레이터. raw/webadmin 소스 분석 → 라이브 DB 코드값 검증 ∥ 라이브 화면 스크린샷 캡처 → 운영자 step-by-step 매뉴얼 집필(스크린샷 임베드) → 전수 커버리지·정합 QA 까지 5인 에이전트 팀(ham-source-analyst / ham-db-verifier / ham-live-capturer / ham-manual-writer / ham-manual-qa)으로 수행한다. 표준 Django admin 레이어(전 t_* 모델 changelist/changeform)와 커스텀 상품뷰어 레이어(옵션 드릴다운·SKU 템플릿·제약·impact·sku-catalog)를 모두 전수한다. 'admin 매뉴얼', '관리자 매뉴얼 작성', 'webadmin 매뉴얼', '라이브 사이트 사용 설명서', '운영자 가이드', 'admin 사용법 문서', '화면 캡처 매뉴얼', '매뉴얼 하네스 실행', '매뉴얼 다시 작성', '매뉴얼 재실행', '매뉴얼 업데이트', '매뉴얼 보완', '특정 화면만 매뉴얼', '캡처만 다시', '매뉴얼 검증' 요청 시 반드시 이 스킬을 사용한다. 단순 질문은 직접 응답.
+description: 후니 라이브 Django admin(huni-admin-production.up.railway.app/admin/) 운영자 사용 매뉴얼 작성 하네스 오케스트레이터. raw/webadmin 소스 분석 → 라이브 DB 코드값 검증 ∥ 라이브 화면 스크린샷 캡처 → 운영자 step-by-step 매뉴얼 집필(스크린샷 임베드) → 전수 커버리지·정합 QA 까지 5인 에이전트 팀(ham-source-analyst / ham-db-verifier / ham-live-capturer / ham-manual-writer / ham-manual-qa)으로 수행한다. 표준 Django admin 레이어(전 t_* 모델 changelist/changeform)와 커스텀 상품뷰어 레이어(옵션 드릴다운·SKU 템플릿·제약·impact·sku-catalog)를 모두 전수한다. 'admin 매뉴얼', '관리자 매뉴얼 작성', 'webadmin 매뉴얼', '라이브 사이트 사용 설명서', '운영자 가이드', 'admin 사용법 문서', '화면 캡처 매뉴얼', '매뉴얼 하네스 실행', '매뉴얼 다시 작성', '매뉴얼 재실행', '매뉴얼 업데이트', '매뉴얼 보완', '특정 화면만 매뉴얼', '캡처만 다시', '매뉴얼 검증', '문서 사이트 발행', 'mkdocs', 'docs 빌드', '문서 배포', 'docs-as-code', '문서 시스템 보강' 요청 시 반드시 이 스킬을 사용한다. 단순 질문은 직접 응답.
 ---
 
 # Huni Admin 매뉴얼 하네스 오케스트레이터
@@ -20,6 +20,7 @@ description: 후니 라이브 Django admin(huni-admin-production.up.railway.app/
 | ham-live-capturer | 라이브 화면 gstack 캡처 | huni-admin-live-capture | `captures/*.png`, `03_capture_screen-index.md` |
 | ham-manual-writer | 운영자 매뉴얼 집필 | huni-admin-manual-authoring | `MANUAL.md` (또는 `manual/*.md`) |
 | ham-manual-qa | 전수 커버리지·정합 검증 | huni-admin-live-capture(재확인) | `04_qa_manual-gate.md` |
+| ham-docs-publisher | 매뉴얼→MkDocs 문서 사이트 발행·CI | huni-admin-docs-publish | `site-src/`·`.github/workflows/docs.yml` |
 
 산출물 루트: `_workspace/huni-admin-manual/`
 
@@ -67,6 +68,10 @@ description: 후니 라이브 Django admin(huni-admin-production.up.railway.app/
 2. `04_qa_manual-gate.md`의 GO/NO-GO 확인. NO-GO면 결함을 작가에 재할당해 Phase 3 일부 반복.
 3. GO면 최종 매뉴얼(`MANUAL.md` 또는 `manual/00_index.md`) 확정.
 4. 커버리지 요약(화면 N개 중 매뉴얼 수록 N개·캡처 N개)을 리더가 사용자에 보고.
+
+### Phase 4.5: 문서 사이트 발행 (선택 — docs-as-code)
+
+매뉴얼이 QA GO면, `ham-docs-publisher`로 Material for MkDocs 사이트를 발행한다(`huni-admin-docs-publish` 스킬). 원본 매뉴얼 불가침 — `site-src/`에 mkdocs.yml·정규화 빌드 스크립트(`build_docs.py`)·`requirements-docs.txt`·`README.md`와 `.github/workflows/docs.yml`(빌드·배포만 자동, 매뉴얼 재생성은 사람이 트리거) 산출, `mkdocs build --strict`로 깨진 링크·이미지 0 검증. 호스팅 연결(GitHub Pages 활성화·cross-repo 시크릿)은 인간 승인. webadmin(별도 레포 HuniProductPrice2) 코드 변경 시 매뉴얼 갱신은 사람이 하네스로 트리거 → 갱신 push → CI 자동 발행.
 
 ### Phase 5: 정리
 
