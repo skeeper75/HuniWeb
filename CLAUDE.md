@@ -131,7 +131,26 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 | 2026-06-08 | **round-8 admin UI 입력 명세 완료 — 34 t_* 엔티티 332컬럼 전수 정의 + 독립검증 GO(누락 0)** — 사용자 directive("각 페이지 모든 항목 정의, 하나의 메뉴·항목도 안 빠지게")로 라이브 admin product-viewer를 `gstack live`로 전수 분석. **[정정] 분석 대상=admin**(고객 사이트 www.huniprinting.com·IA.xlsx 배제, 사용자 명시). **입력 화면 2종**: catalog Django change form(14모델 직접등록·필드 전수 노출·`_raw/forms/*.json` 덤프) + product-viewer pvEdit() 섹션(상품별 하위 12엔티티·headless 미재현→table-spec+표시구조 정의). **34 t_* 엔티티 332컬럼**을 {UI라벨·컬럼·위젯·필수·타입제약·코드값도메인(라이브DB)·미적재입력법·입력화면}으로 정의(A차원12·B CPQ7·C코어가격할인15 + 마스터). round-7 미적재 갭(CPQ option_items 0행·가격사슬 6상품군·차원 PARTIAL)→admin 입력 FK 위상순서 환원. `evaluator-active` 독립검증이 information_schema로 컬럼수 재집계→**1차 NO-GO**(`tags` jsonb 2건 누락: table-spec 미기재 침묵 누락)→보정→**G1~G7 전건 PASS GO**. **[HARD 교훈] 컬럼 권위=라이브 information_schema(table-spec 보조)**. GAP-PARAM(option_items ref_param_json 부재→ALTER 제안). 명세/입력경로 전용·실 입력은 인간 승인. | _workspace/huni-dbmap/{13_admin-ui-spec/(admin-ui-spec·entities/{A-dimensions,B-cpq,C-core-price}·_raw),03_validation/admin-ui-spec-gate,HANDOFF}·메모리1신규(dbmap-admin-ui-spec)·.env.local·CLAUDE.md, 커밋 본커밋 | 사용자(admin 전수 UI/UX 분석·미적재 입력 명세) |
 | 2026-06-08 | **round-7 입체 커버리지 검증 실행 완료 — 209셀 매트릭스 + 독립평가 GO(C1~C8 전건 PASS)** — 골격(신규 에이전트 `dbm-coverage-auditor`·스킬 `dbm-coverage-matrix`·goal C1~C8·오케스트레이터 round-7) 위에서 실 실행. admin 자격증명을 `.env.local` `HUNI_ADMIN_*`(admin/retail00534!!)에 저장→gstack browse 로그인 성공. **전 상품군 11시트 × 라이브 t_* 19엔티티 209셀 매트릭스**(✅LOADED51·🟡PARTIAL44·❌MISSING49·◆DB-ONLY17·➖N/A48)+admin 3원대조 3종(PRD_000016엽서·000111캘린더·000193머그컵 admin=DB 100%일치)+관계무결성 R1~R7+갭보드 정직분류. `evaluator-active`(fresh context) 독립평가가 **행수 10셀·R1/R4/R7·admin 3종·C1 재집계·C2 인용 독립 재측정 전건 일치** 확증→**C1~C8 전건 PASS GO**. **횡단 발견**: ①CPQ 옵션 레이어 전면 미적재(option_items 전역 0행·R7 FAIL, round-6 GO분 실COMMIT 미완) ②가격사슬 6상품군 부재(단절 아닌 부재) ③DB-ONLY 17셀(판걸이수/구간할인 외부권위 vs 과적재) ④DOMAIN-UNDECIDED 2(기성품 사이즈=차원행 vs 텍스트). **실결함 D-1[Medium]**: ✅LOADED=행존재만 검증·SKILL §5 변형커버리지 미구현(NO-GO 아님·차기 보정). **교훈: 입체 조망(너비)이 시트별 종단(깊이)이 못 본 횡단 갭을 포착·admin=DB 100%일치로 psql 실측을 상태 권위로 입증**. 조망/검증 전용·DB 미적재, 발견 미적재 실 적재는 인간 승인. | _workspace/huni-dbmap/{12_coverage/(coverage-matrix·coverage-cells·gap-board·relationship-integrity·admin-captures·scripts),03_validation/coverage-matrix-gate,HANDOFF}·메모리1갱신(dbmap-coverage-matrix-roundup)·.env.local(HUNI_ADMIN_*)·CLAUDE.md, 커밋 본커밋 | 사용자(round-7 실행·커밋+핸드오프) |---
 
-## 8. MoAI Framework (gated — rarely used here)
+## 8. Harness: Huni-Admin-Manual (라이브 Django admin 운영자 사용 매뉴얼)
+
+**목표:** 라이브 후니 Django admin(`huni-admin-production.up.railway.app/admin/`, `raw/webadmin` 소스·Railway DB)을 ① 소스 ② 라이브 DB ③ 실제 화면 3중 대조로 전수 분석하여, 비개발자 운영자가 상품·가격·옵션을 등록/수정하기 위한 **상세 사용 매뉴얼(전 화면 전수 + 실제 스크린샷 임베드 + step-by-step)** 을 5인 에이전트 팀(`ham-source-analyst` / `ham-db-verifier` / `ham-live-capturer` / `ham-manual-writer` / `ham-manual-qa`)으로 산출.
+
+**트리거:** "admin 매뉴얼", "관리자 매뉴얼 작성", "webadmin 매뉴얼", "라이브 사이트 사용 설명서", "운영자 가이드", "admin 사용법 문서", "화면 캡처 매뉴얼", "매뉴얼 하네스 실행/재실행/업데이트/보완", "특정 화면만 매뉴얼", "캡처만 다시", "매뉴얼 검증" 등 본 도메인 요청 시 `huni-admin-manual-orchestrator` 스킬을 사용. 단순 질문은 직접 응답.
+
+**대상 구조(이중 레이어):** ① 표준 Django admin(Unfold 테마) — `catalog/admin.py`가 전 `t_*` 모델을 제너릭 ModelAdmin으로 자동 등록(모델별 목록 changelist/추가·수정 changeform, 자동채번·YN 드롭다운·트리 드롭다운·논리삭제). ② 커스텀 상품 뷰어 — `admin/`의 홈(상품 목록→상세→섹션편집), 옵션 드릴다운 3계층, SKU 템플릿 2계층, 제약 폼빌더+검증 미리보기, impact·sku-catalog standalone.
+
+**산출물 루트:** `_workspace/huni-admin-manual/` (`01_source_*`·`02_db_*`·`03_capture_*`+`captures/`·`MANUAL.md`(또는 `manual/`)·`04_qa_*`).
+
+**자격증명/안전:** 라이브 운영 DB — DB는 `.env.local` `RAILWAY_DB_*`로 읽기전용 SELECT만, 라이브 화면은 `.env.local` `HUNI_ADMIN_*`로 읽기 탐색만(저장/삭제 클릭 금지). 비밀값은 `_workspace`(git 추적)·stdout·스크린샷에 비노출.
+
+**변경 이력 (최근 3건):**
+| 날짜 | 변경 내용 | 대상 | 사유 |
+|------|----------|------|------|
+| 2026-06-10 | 하네스 초기 구성 — 5인 팀(source-analyst·db-verifier·live-capturer·manual-writer·manual-qa) + 스킬 4종(orchestrator + source-map·live-capture·manual-authoring 방법론). 소스 이중 레이어(표준 admin + 상품뷰어) 파악, 운영자 task-oriented 매뉴얼·실제 스크린샷 임베드·전수 커버리지 QA로 설계 | `.claude/agents/huni-admin-manual/`·`.claude/skills/huni-admin-{manual-orchestrator,source-map,live-capture,manual-authoring}`·CLAUDE.md §8 | 사용자(라이브 admin 사용 매뉴얼 작성 하네스 구축) |
+
+---
+
+## 9. MoAI Framework (gated — rarely used here)
 
 The MoAI-ADK orchestration framework (SPEC plan/run/sync, TRUST 5, DDD/TDD, Agent Teams,
 design GAN loop) is installed but not the primary workflow in this repo. Its detailed
