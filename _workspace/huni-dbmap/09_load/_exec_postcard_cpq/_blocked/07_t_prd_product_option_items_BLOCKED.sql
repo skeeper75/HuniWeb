@@ -1,0 +1,27 @@
+-- =====================================================================
+-- _blocked/07 — t_prd_product_option_items BLOCKED 5행 (적재 대상 아님 · 격리)
+-- 프리미엄엽서(PRD_000016) CPQ · 차원행 부재로 트리거 fn_chk_opt_item_ref REJECT 예정 → 미적재.
+--
+-- [BLOCKED 사유] 트리거가 (prd_cd, 차원행) EXISTS 를 행단위로 강제하는데 해당 차원행이 라이브 0행:
+--   후가공 PROC_000029(오시)/030(미싱)/031(가변텍스트)/032(가변이미지) = t_prd_product_processes 미적재.
+--   종이=*별도설정 = t_prd_product_materials(PRD_000016) 0행 → mat_cd/usage_cd 미상([CONFIRM]).
+--
+-- [UNBLOCK 조건]
+--   후가공: PROC_000029~032 를 PRD_000016 에 차원 선적재(공정 mint+링크·인간 승인) → INSERTABLE 승격.
+--           + 줄수/개수 파라미터(GAP-PARAM) 보존처 결정(ref_param_json ALTER 제안 = ddl-proposer 트랙).
+--   종이:   종이 자재 차원 선적재 vs deferred 센티넬(mat_cd 규약) 확정(GAP-DEFER·D-2).
+--
+-- [HARD] 본 파일은 apply.sql 에서 \i 하지 않는다(BLOCKED·실행 금지). 차단 명세 보존 전용.
+--        억지 적재 시 트리거가 EXCEPTION → 전체 트랜잭션 ROLLBACK (R2). 침묵 적재 금지.
+-- =====================================================================
+-- (재코드 참고: 설계 OP-HUGA-OSI=OPV_000022 · MISING=OPV_000023 · VARTEXT=OPV_000024 · VARIMG=OPV_000025 · JONGI-DEFAULT=OPV_000019)
+--
+-- 후가공 오시 (PROC_000029 부재):
+-- INSERT INTO t_prd_product_option_items (prd_cd, opt_cd, item_seq, ref_dim_cd, ref_key1, qty, use_yn)
+--   SELECT 'PRD_000016', <OPV_000022 resolve>, 1, 'OPT_REF_DIM.04', 'PROC_000029', 1, 'Y';  -- REJECT(차원 0행)
+-- 후가공 미싱 (PROC_000030 부재):  ... ref_key1='PROC_000030'                              -- REJECT
+-- 후가공 가변텍스트 (PROC_000031 부재): ... ref_key1='PROC_000031'                          -- REJECT
+-- 후가공 가변이미지 (PROC_000032 부재): ... ref_key1='PROC_000032'                          -- REJECT
+-- 종이 별도설정 (material 0행·mat_cd [CONFIRM]):
+-- INSERT ... ref_dim_cd='OPT_REF_DIM.03', ref_key1=<mat_cd 미상>, ref_key2=<usage_cd 미상>  -- REJECT(차원 0행)
+SELECT 'BLOCKED 07: 후가공 4(PROC_000029~032) + 종이1(material 0행) — 차원 선적재 후 적재. 본 트랜잭션 미적재.' AS blocked_07;

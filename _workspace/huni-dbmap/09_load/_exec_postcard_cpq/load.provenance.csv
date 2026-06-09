@@ -1,0 +1,32 @@
+sql_file,step,target_row_key,source_authority
+05_t_prd_product_option_groups.sql,05,opt_grp_nm=인쇄(도수) -> OPT_000005,postcard-option-layer.md §2 + live MAX+1(re-code OG-*)
+05_t_prd_product_option_groups.sql,05,opt_grp_nm=종이 -> OPT_000006,postcard-option-layer.md §2 + live MAX+1(re-code OG-*)
+05_t_prd_product_option_groups.sql,05,opt_grp_nm=모서리 -> OPT_000007,postcard-option-layer.md §2 + live MAX+1(re-code OG-*)
+05_t_prd_product_option_groups.sql,05,opt_grp_nm=후가공 -> OPT_000008,postcard-option-layer.md §2 + live MAX+1(re-code OG-*)
+05_t_prd_product_option_groups.sql,05,opt_grp_nm=추가상품(봉투) -> OPT_000009,postcard-option-layer.md §2 + live MAX+1(re-code OG-*)
+06_t_prd_product_options.sql,06,opt_nm=단면 -> OPV_000017,postcard-option-layer.md §3 + live MAX+1(re-code OP-*)
+06_t_prd_product_options.sql,06,opt_nm=양면 -> OPV_000018,postcard-option-layer.md §3 + live MAX+1(re-code OP-*)
+06_t_prd_product_options.sql,06,opt_nm=별도설정 -> OPV_000019,postcard-option-layer.md §3 + live MAX+1(re-code OP-*)
+06_t_prd_product_options.sql,06,opt_nm=직각 -> OPV_000020,postcard-option-layer.md §3 + live MAX+1(re-code OP-*)
+06_t_prd_product_options.sql,06,opt_nm=둥근 -> OPV_000021,postcard-option-layer.md §3 + live MAX+1(re-code OP-*)
+06_t_prd_product_options.sql,06,opt_nm=오시 -> OPV_000022,postcard-option-layer.md §3 + live MAX+1(re-code OP-*)
+06_t_prd_product_options.sql,06,opt_nm=미싱 -> OPV_000023,postcard-option-layer.md §3 + live MAX+1(re-code OP-*)
+06_t_prd_product_options.sql,06,opt_nm=가변텍스트 -> OPV_000024,postcard-option-layer.md §3 + live MAX+1(re-code OP-*)
+06_t_prd_product_options.sql,06,opt_nm=가변이미지 -> OPV_000025,postcard-option-layer.md §3 + live MAX+1(re-code OP-*)
+06_t_prd_product_options.sql,06,opt_nm=봉투없음 -> OPV_000026,postcard-option-layer.md §3 + live MAX+1(re-code OP-*)
+06_t_prd_product_options.sql,06,opt_nm=OPP접착봉투 110x160 50장 -> OPV_000027,postcard-option-layer.md §3 + live MAX+1(re-code OP-*)
+06_t_prd_product_options.sql,06,opt_nm=OPP비접착봉투 110x160 50장 -> OPV_000028,postcard-option-layer.md §3 + live MAX+1(re-code OP-*)
+06_t_prd_product_options.sql,06,opt_nm=카드봉투(화이트) 165x115 50장 -> OPV_000029,postcard-option-layer.md §3 + live MAX+1(re-code OP-*)
+07_t_prd_product_option_items.sql,07,단면#seq1 .06 1,postcard-option-layer.md §4 INSERTABLE + trigger fn_chk_opt_item_ref
+07_t_prd_product_option_items.sql,07,양면#seq1 .06 2,postcard-option-layer.md §4 INSERTABLE + trigger fn_chk_opt_item_ref
+07_t_prd_product_option_items.sql,07,직각#seq1 .04 PROC_000027,postcard-option-layer.md §4 INSERTABLE + trigger fn_chk_opt_item_ref
+07_t_prd_product_option_items.sql,07,둥근#seq1 .04 PROC_000028,postcard-option-layer.md §4 INSERTABLE + trigger fn_chk_opt_item_ref
+08_t_prd_templates.sql,08,tmpl_nm=카드봉투(화이트) 165x115 mm 50장 -> TMPL_000010,postcard-option-layer.md §6 + search-before-mint(TMPL-000005/006 reuse) + live MAX+1
+09_t_prd_template_selections.sql,09,카드봉투(화이트) 165x115 mm 50장#sel1 SIZ_000104,postcard-option-layer.md §6 + ref-product-sizes(SIZ_000104 base 실재)
+10_t_prd_product_addons.sql,10,addon PRD_000001/OPP접착봉투 110x160 mm 50장 seq1,postcard-option-layer.md §6 AS-IS addon 마이그 + live addon 실재(TMPL-000005)
+10_t_prd_product_addons.sql,10,addon PRD_000002/OPP비접착봉투 110x160 mm 50장 seq2,postcard-option-layer.md §6 AS-IS addon 마이그 + live addon 실재(TMPL-000005)
+10_t_prd_product_addons.sql,10,addon PRD_000004/카드봉투(화이트) 165x115 mm 50장 seq3,postcard-option-layer.md §6 AS-IS addon 마이그 + live addon 실재(TMPL-000005)
+11_t_prd_product_constraints.sql,11,rule_nm=후가공 최대 4종 -> RULE_001,postcard-option-layer.md §5 JSONLogic(python PASS) + re-code R-*
+11_t_prd_product_constraints.sql,11,rule_nm=후가공 파라미터 범위 -> RULE_002,postcard-option-layer.md §5 JSONLogic(python PASS) + re-code R-*
+11_t_prd_product_constraints.sql,11,rule_nm=수량 판수 배수 -> RULE_003,postcard-option-layer.md §5 JSONLogic(python PASS) + re-code R-*
+12_t_prd_products_constraint_json.sql,12,PRD_000016.constraint_json compile,postcard-option-layer.md §5 compile(AND of 3 rules)

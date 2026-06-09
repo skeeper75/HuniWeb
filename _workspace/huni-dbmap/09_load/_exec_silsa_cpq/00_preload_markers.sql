@@ -1,0 +1,25 @@
+-- =====================================================================
+-- step 00 — pre-load markers (NO INSERT) — 적용된 설계 결정 명시
+-- 일반현수막(PRD_000138) CPQ 옵션레이어 v2 + 마스터 mint · `_exec_silsa_cpq`
+-- 권위: silsa-option-layer-v2.md (옵션 STRUCTURE) · code-identifier-strategy.md (코드 규약)
+-- =====================================================================
+-- [적용 결정]
+--  D1 전략: 순차 surrogate PK 유지. 멱등=이름기반 NOT EXISTS(신규 DDL 0). 코드 재발급 없음.
+--  D2 멱등키: option_groups=(prd_cd,opt_grp_nm) · options=(prd_cd,opt_grp_cd,opt_nm)
+--             · materials=(mat_nm,mat_typ_cd) · processes=(proc_nm)
+--             · materials_link/processes_link/option_items=자연키.
+--  D3 separator: 신규 CPQ 코드 `_` 통일 (OPT_/OPV_). 기존 OPT-/OPV- 하이픈(삭제분)은 본 적재 미관여.
+--  D4 채번: 라이브 MAX(suffix)+1 리터럴 부여 (생성 트리거 부재). 멱등은 이름키.
+--           mat MAT_000337~340 · proc PROC_000084 · opt_grp OPT_000003~000004 · opt OPV_000006~000016.
+--  D5 rule_cd: 상품별 카운터 RULE_001.
+--  D-2 (적용): 각목 2규격 = 별 mat_cd 2개 (각목900이하=MAT_000338 · 각목900초과=MAT_000339).
+--              사유: ref_param_json 부재(GAP-PARAM·D4 no-DDL) → 단일 mat_cd+param 불가 → 2 mat_cd 모델.
+--  D① (반영): 타공=bare-hole(구멍만·아일렛 안 끼움)=process-only.
+--  D② (반영): 봉미싱 실=자재 등록(MAT_000340 봉제사 mint).
+--  D③ (반영): 각목=신규 mint(우드봉 차용 배제).
+-- [search-before-mint 재확인 2026-06-09 live]: 큐방·각목·봉제사 t_mat_materials 0행(부재 재증명) → mint 정당.
+--   끈 MAT_000070·양면테입 MAT_000069 = 실재(EXISTS) → LINK only(mint 안 함).
+--   열재단 t_proc_processes 0행 → mint. 079/080/081 = 실재+PRD_000138 링크 실재.
+-- [BLOCKED 잔존] R-GAKMOK constraint(siz 76규격 미등록 의존) → _blocked/08. 부착 enum 큐방 [CONFIRM].
+-- [HARD] NEVER COMMIT — 로더 기본 ROLLBACK. mint=master-data INSERT(DDL 아님·CREATE/ALTER 없음).
+SELECT '00: markers — applied decisions D1~D5/D-2/D①②③, search-before-mint reconfirmed' AS step_00;

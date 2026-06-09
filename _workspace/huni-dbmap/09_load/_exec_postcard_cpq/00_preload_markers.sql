@@ -1,0 +1,26 @@
+-- =====================================================================
+-- step 00 — pre-load markers (NO INSERT) — 적용된 설계 결정 명시
+-- 프리미엄엽서(PRD_000016) CPQ 옵션레이어 · `_exec_postcard_cpq` (round-6 CPQ → load-execution)
+-- 권위: postcard-option-layer.md (옵션 STRUCTURE만) · code-identifier-strategy.md (코드 규약 D1~D5)
+-- =====================================================================
+-- [적용 결정 — 코드 규약 D1~D5]
+--  D1 전략: 순차 surrogate PK. 멱등 = 이름/자연키 기반 NOT EXISTS (신규 DDL 0). 코드 재발급 없음.
+--  D2 멱등키: option_groups=(prd_cd,opt_grp_nm) · options=(prd_cd,opt_grp_cd,opt_nm)
+--             · option_items=(prd_cd,opt_cd,item_seq) · templates=(base_prd_cd,tmpl_nm)
+--             · template_selections=(tmpl_cd,sel_seq) · addons=(prd_cd,tmpl_cd) · constraints=(prd_cd,rule_nm).
+--  D3 separator: 신규 CPQ 코드 `_` 통일 (OPT_/OPV_/TMPL_).
+--  D4 채번: 라이브 MAX(suffix)+1 리터럴 (생성 트리거 부재). 멱등은 이름/자연키.
+--           opt_grp OPT_000005~000009 · opt OPV_000017~000029 · tmpl TMPL_000010 · rule RULE_001~003.
+--  D5 rule_cd: 상품별 카운터 RULE_001~003 (복합 PK 충돌 없음).
+-- [설계 시맨틱 코드 RE-CODE] OG-DOSU/OP-DOSU-SINGLE/TMPL-ENV-*/R-HUGA-* (DEPRECATED) → 전부 `_` surrogate.
+-- [search-before-mint — 봉투 템플릿] (2026-06-09 live 재확인)
+--   OPP접착 = TMPL-000005 (base PRD_000001, del_yn=N) 실재 → mint 안 함. selection(SIZ_000085 qty50) 실재 → 미관여.
+--   OPP비접착 = TMPL-000006 (base PRD_000002, del_yn=N) 실재 → mint 안 함. selection 실재 → 미관여.
+--   카드봉투(화이트) = 활성 템플릿 부재 (TMPL-000007 del_yn=Y·base PRD_000281) → TMPL_000010 신규 mint (base PRD_000004).
+--   PRD_000016 addon = 라이브 1행 (→TMPL-000005, disp_seq1) 실재 → 멱등 가드 흡수, addon 2행 신규(TMPL-000006/TMPL_000010).
+-- [차원행 전제 — INSERTABLE option_items]
+--   도수 .06 → print_options opt_id 1/2 (PRD_000016 실재) ✅ · 모서리 .04 → PROC_000027/028 (PRD_000016 링크 실재) ✅.
+-- [BLOCKED] 종이=*별도설정 material 0행 · 후가공 PROC_000029~032 0행 → option_item 차원행 부재(트리거 REJECT) → _blocked/.
+--   별색 그룹 = 본 상품 미보유(L1 별색 전 7행 공백) → 미인스턴스화(발명 금지).
+-- [HARD] NEVER COMMIT — 로더 기본 ROLLBACK. DDL(CREATE/ALTER) 없음. mint=master-data INSERT.
+SELECT '00: markers — D1~D5/re-code/search-before-mint(TMPL-000005/006 reuse, TMPL_000010 mint)' AS step_00;

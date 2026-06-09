@@ -1,0 +1,45 @@
+sql_file,step,target_row_key,source_authority
+01_t_mat_materials.sql,01,mat_nm=큐방 → MAT_000337,silsa-option-layer-v2.md §1.1 + live MAX+1
+01_t_mat_materials.sql,01,mat_nm=각목(900이하) → MAT_000338,silsa-option-layer-v2.md §1.1 + live MAX+1
+01_t_mat_materials.sql,01,mat_nm=각목(900초과) → MAT_000339,silsa-option-layer-v2.md §1.1 + live MAX+1
+01_t_mat_materials.sql,01,mat_nm=봉제사 → MAT_000340,silsa-option-layer-v2.md §1.1 + live MAX+1
+02_t_proc_processes.sql,02,proc_nm=열재단 → PROC_000084,silsa-option-layer-v2.md §1.2 M-1 ① + live MAX+1
+03_t_prd_product_materials.sql,03,link MAT_000069/USAGE.07,silsa-option-layer-v2.md §7 자재링크 선적재 + 양면테입(실재 EXISTS) 링크 — 양면테입 옵션 자재 seq
+03_t_prd_product_materials.sql,03,link MAT_000070/USAGE.07,silsa-option-layer-v2.md §7 자재링크 선적재 + 끈(실재 EXISTS) 링크 — 끈/각목복합 옵션 자재 seq
+03_t_prd_product_materials.sql,03,link 큐방/USAGE.07,silsa-option-layer-v2.md §7 자재링크 선적재 + 큐방(mint MAT_000337) 링크 — 큐방 옵션 자재 seq
+03_t_prd_product_materials.sql,03,link 각목(900이하)/USAGE.07,silsa-option-layer-v2.md §7 자재링크 선적재 + 각목900이하(mint MAT_000338) 링크 — 각목LE 옵션 자재 seq
+03_t_prd_product_materials.sql,03,link 각목(900초과)/USAGE.07,silsa-option-layer-v2.md §7 자재링크 선적재 + 각목900초과(mint MAT_000339) 링크 — 각목GT 옵션 자재 seq
+03_t_prd_product_materials.sql,03,link 봉제사/USAGE.07,silsa-option-layer-v2.md §7 자재링크 선적재 + 봉제사(mint MAT_000340) 링크 — 봉미싱 옵션 자재 seq
+04_t_prd_product_processes.sql,04,link 열재단(PROC_000084),silsa-option-layer-v2.md §1.2/§7 열재단 신설+링크
+05_t_prd_product_option_groups.sql,05,opt_grp_nm=가공 → OPT_000003,load_silsa_v2/t_prd_product_option_groups.csv + live MAX+1
+05_t_prd_product_option_groups.sql,05,opt_grp_nm=추가 → OPT_000004,load_silsa_v2/t_prd_product_option_groups.csv + live MAX+1
+06_t_prd_product_options.sql,06,opt_nm=열재단 → OPV_000006,load_silsa_v2/t_prd_product_options.csv + live MAX+1
+06_t_prd_product_options.sql,06,opt_nm=타공(4개) → OPV_000007,load_silsa_v2/t_prd_product_options.csv + live MAX+1
+06_t_prd_product_options.sql,06,opt_nm=타공(6개) → OPV_000008,load_silsa_v2/t_prd_product_options.csv + live MAX+1
+06_t_prd_product_options.sql,06,opt_nm=타공(8개) → OPV_000009,load_silsa_v2/t_prd_product_options.csv + live MAX+1
+06_t_prd_product_options.sql,06,opt_nm=양면테입 → OPV_000010,load_silsa_v2/t_prd_product_options.csv + live MAX+1
+06_t_prd_product_options.sql,06,opt_nm=봉미싱 → OPV_000011,load_silsa_v2/t_prd_product_options.csv + live MAX+1
+06_t_prd_product_options.sql,06,opt_nm=추가없음 → OPV_000012,load_silsa_v2/t_prd_product_options.csv + live MAX+1
+06_t_prd_product_options.sql,06,opt_nm=큐방(4개)추가 → OPV_000013,load_silsa_v2/t_prd_product_options.csv + live MAX+1
+06_t_prd_product_options.sql,06,opt_nm=끈(4개)추가 → OPV_000014,load_silsa_v2/t_prd_product_options.csv + live MAX+1
+06_t_prd_product_options.sql,06,opt_nm=각목(900이하)+끈(4개) 추가 → OPV_000015,load_silsa_v2/t_prd_product_options.csv + live MAX+1
+06_t_prd_product_options.sql,06,opt_nm=각목(900초과)+끈(4개) 추가 → OPV_000016,load_silsa_v2/t_prd_product_options.csv + live MAX+1
+07_t_prd_product_option_items.sql,07,열재단#seq1 .04 열재단,load_silsa_v2 items+BLOCKED CSV(승격) + trigger fn_chk_opt_item_ref
+07_t_prd_product_option_items.sql,07,타공(4개)#seq1 .04 PROC_000079,load_silsa_v2 items+BLOCKED CSV(승격) + trigger fn_chk_opt_item_ref
+07_t_prd_product_option_items.sql,07,타공(6개)#seq1 .04 PROC_000079,load_silsa_v2 items+BLOCKED CSV(승격) + trigger fn_chk_opt_item_ref
+07_t_prd_product_option_items.sql,07,타공(8개)#seq1 .04 PROC_000079,load_silsa_v2 items+BLOCKED CSV(승격) + trigger fn_chk_opt_item_ref
+07_t_prd_product_option_items.sql,07,양면테입#seq1 .03 MAT_000069,load_silsa_v2 items+BLOCKED CSV(승격) + trigger fn_chk_opt_item_ref
+07_t_prd_product_option_items.sql,07,양면테입#seq2 .04 PROC_000081,load_silsa_v2 items+BLOCKED CSV(승격) + trigger fn_chk_opt_item_ref
+07_t_prd_product_option_items.sql,07,봉미싱#seq1 .03 봉제사,load_silsa_v2 items+BLOCKED CSV(승격) + trigger fn_chk_opt_item_ref
+07_t_prd_product_option_items.sql,07,봉미싱#seq2 .04 PROC_000080,load_silsa_v2 items+BLOCKED CSV(승격) + trigger fn_chk_opt_item_ref
+07_t_prd_product_option_items.sql,07,큐방(4개)추가#seq1 .03 큐방,load_silsa_v2 items+BLOCKED CSV(승격) + trigger fn_chk_opt_item_ref
+07_t_prd_product_option_items.sql,07,큐방(4개)추가#seq2 .04 PROC_000081,load_silsa_v2 items+BLOCKED CSV(승격) + trigger fn_chk_opt_item_ref
+07_t_prd_product_option_items.sql,07,끈(4개)추가#seq1 .03 MAT_000070,load_silsa_v2 items+BLOCKED CSV(승격) + trigger fn_chk_opt_item_ref
+07_t_prd_product_option_items.sql,07,끈(4개)추가#seq2 .04 PROC_000081,load_silsa_v2 items+BLOCKED CSV(승격) + trigger fn_chk_opt_item_ref
+07_t_prd_product_option_items.sql,07,각목(900이하)+끈(4개) 추가#seq1 .03 각목(900이하),load_silsa_v2 items+BLOCKED CSV(승격) + trigger fn_chk_opt_item_ref
+07_t_prd_product_option_items.sql,07,각목(900이하)+끈(4개) 추가#seq2 .03 MAT_000070,load_silsa_v2 items+BLOCKED CSV(승격) + trigger fn_chk_opt_item_ref
+07_t_prd_product_option_items.sql,07,각목(900이하)+끈(4개) 추가#seq3 .04 PROC_000081,load_silsa_v2 items+BLOCKED CSV(승격) + trigger fn_chk_opt_item_ref
+07_t_prd_product_option_items.sql,07,각목(900초과)+끈(4개) 추가#seq1 .03 각목(900초과),load_silsa_v2 items+BLOCKED CSV(승격) + trigger fn_chk_opt_item_ref
+07_t_prd_product_option_items.sql,07,각목(900초과)+끈(4개) 추가#seq2 .03 MAT_000070,load_silsa_v2 items+BLOCKED CSV(승격) + trigger fn_chk_opt_item_ref
+07_t_prd_product_option_items.sql,07,각목(900초과)+끈(4개) 추가#seq3 .04 PROC_000081,load_silsa_v2 items+BLOCKED CSV(승격) + trigger fn_chk_opt_item_ref
+08_t_prd_product_constraints.sql,08,R-GAKMOK RULE_001 (DEFER),load_silsa_v2/t_prd_product_constraints_GAP.csv (siz 의존 BLOCKED)

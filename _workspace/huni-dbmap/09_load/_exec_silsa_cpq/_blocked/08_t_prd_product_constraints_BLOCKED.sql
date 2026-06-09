@@ -1,0 +1,15 @@
+-- =====================================================================
+-- _blocked/08 — t_prd_product_constraints R-GAKMOK (RULE_001) — BLOCKED(siz 의존)
+--   본 트랜잭션(apply.sql) 미포함. 선행 충족 후 별도 인간 승인 적재.
+--   각목 mat_cd(MAT_000338/339)는 본 패키지 mint 로 충족되나, logic 의 siz_cd 멤버십 집합이
+--   siz 76규격 미등록(가격트랙)으로 미완 → DEFER. 폼빌더 배열-멤버십 입력방식(F-1) 미검증도 잔존.
+--   [패턴 예시 — 적용 아님] siz_cd 집합과 각목 mat_cd 확정 후 멱등 가드로 적재:
+-- INSERT INTO t_prd_product_constraints (prd_cd, rule_cd, rule_nm, rule_typ_cd, logic, err_msg, disp_seq, use_yn)
+-- SELECT 'PRD_000138', 'RULE_001', '각목 규격×세로변 정합', 'RULE_TYPE.01',
+--   '{"and":[
+--      {"if":[{"==":[{"var":"mat_cd"},"<각목900이하 mat_cd>"]},{"in":[{"var":"siz_cd"},["<세로<=900 siz_cd...>"]]},true]},
+--      {"if":[{"==":[{"var":"mat_cd"},"<각목900초과 mat_cd>"]},{"in":[{"var":"siz_cd"},["<세로>900 siz_cd...>"]]},true]}
+--   ]}'::jsonb,
+--   '각목(900이하)는 세로변 900mm 이하, 각목(900초과)는 900mm 초과 규격에만 선택 가능합니다', 1, 'Y'
+-- WHERE NOT EXISTS (SELECT 1 FROM t_prd_product_constraints WHERE prd_cd='PRD_000138' AND rule_cd='RULE_001');
+SELECT 'BLOCKED 08: R-GAKMOK — siz 76규격 등록(가격트랙)·F-1 폼빌더 선행 후 인간 승인 적재' AS blocked_08;
