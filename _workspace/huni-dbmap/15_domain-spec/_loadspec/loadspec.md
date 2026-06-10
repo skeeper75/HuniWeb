@@ -128,3 +128,48 @@ prd_cd PK(1:1) · page_min/max/incr. **디지털인쇄 낱장=무관(0행 정상
 | C37 박칼라 | prcs_dtl_opt vs 자재 미정 | 박색 귀속(공정 param vs 포일 자재) 컨펌 — `domain-research-notes` |
 
 > **불일치(discrepancy) 없음:** 소스 models.py와 본 분석은 정합. 라이브 DB 실제 행은 dbm-schema-analyst/validator가 별도 확인(본 문서는 코드 권위만).
+
+---
+
+# 스티커 적재명세 delta (round-11 확대 #1 · 2026-06-10)
+
+> §1~3(제너릭 `BaseAdmin` 기계·두 적재 surface·`BASE_CODE_GROUP` 14)은 **전 시트 공유** — 재기술 안 함. 스티커가 디지털인쇄 대비 **새로 활성화하는 적재 경로의 delta만** 기록.
+
+## S1. 스티커가 추가로 쓰는 t_* 적재 경로
+
+| t_* 엔티티 | 스티커 delta | 적재 surface | 근거 |
+|-----------|--------------|:--:|------|
+| **t_proc_processes** (커팅) | PROC_000053 완칼{`모양` string} · PROC_000054 반칼{`모양` string, `조각수` int} · PROC_000055 스티커완칼{`조각수` int≥1} → `prcs_dtl_opt` JSON에 모양·조각수 param. 디지털인쇄는 코팅/별색 위주, 스티커는 **커팅 공정이 주축** | A(마스터) | models.py:473 `prcs_dtl_opt` · db-domain-structure-live §165-167 |
+| **t_prd_product_processes** (커팅 연결) | 반칼/완칼/스티커완칼 + 화이트별색을 상품에 연결. `mand_proc_yn`=커팅은 필수공정(스티커 정체) | B(상품인라인) | models.py:391 |
+| **t_mat_materials** (점착지) | `mat_typ_cd`=**MAT_TYPE.11 스티커**(디지털인쇄=종이.01). 무광/유광코팅스티커=별 mat_cd(코팅 자재 흡수). 데드롱=합판 전용 | A | models.py:126 · MAT_TYPE.11 |
+| **t_prd_product_bundle_qtys** (조각수) | `bdl_qty`=조각수(*최대20·5~10·*1조각), `bdl_unit_typ_cd`=QTY_UNIT(조각 단위). 디지털인쇄 낱장은 0행이었으나 **스티커는 조각수로 활성** | B | models.py:234 |
+| **t_prd_product_print_options** | `print_side`=**단면 단일**(양면 없음), back_colrcnt=0 | B | models.py:366 |
+| **t_prd_product_plate_sizes** | `output_file_typ`=PDF/PDF(W)/AI(칼선)/JPG(전사) 자유텍스트. **PDF(W)=화이트별색·AI(칼선)=커팅 동반** | B | models.py:317 |
+
+## S2. 스티커 미사용 t_* (디지털인쇄와 차이 — 적재 안 함)
+
+| t_* | 사유 |
+|-----|------|
+| `t_prd_product_processes`(접지/오시/미싱/박/형압/가변) | 스티커 후가공 미사용(C29~30·박/형압 컬럼 부재·빈값) |
+| `t_prd_product_addons` | 스티커 추가상품 없음(C31~32 빈값) |
+| `t_proc_processes`(코팅 family) | **코팅=자재 흡수**(무광/유광코팅스티커 mat_cd) — C23 빈값 |
+| `t_prc_price_formulas`(C40 가격공식) | 스티커 시트 가격공식 컬럼 부재 → 가격표(`06_extract/price-gangpan-sticker`)·round-2 별도 |
+
+## S3. 적재 surface별 코드값 도메인 (스티커 활성 enum)
+
+| 필드 | 코드그룹 | 스티커 허용값(엑셀 도출) |
+|------|----------|--------------------------|
+| `mat_typ_cd` | MAT_TYPE | .11 스티커(점착지) |
+| `usage_cd` | USAGE | .01 본체(낱장 점착물) |
+| `output_paper_typ_cd` | OUTPUT_PAPER_TYPE | 330x470·210x297·297x420·420x594·400x600(6) |
+| `bdl_unit_typ_cd`·`qty_unit_typ_cd` | QTY_UNIT | 조각/장(조각수 단위) — 라이브 코드값 확인 대상(CONFIRM-ST-2) |
+| `prd_typ_cd` | PRD_TYPE | .04 디자인/.03 기성 |
+
+## S4. 스티커 적재 discrepancy (코드 vs 엑셀 현실)
+
+| 항목 | 코드(models.py) | 엑셀 현실(260610) | 처리 |
+|------|-----------------|-------------------|------|
+| **합판도무송 형상** | `prcs_dtl_opt.모양`(공정 param 자리 있음) | C24 커팅 빈값·형상 37종이 `t_siz_sizes`로 흡수(정사각NxN(EA)) | **discrepancy = CONFIRM-ST-1**(형상 size 흡수). dbm-validator/schema-analyst가 라이브 실제 행 확인 후 해소. round-10 escalate와 동일 대상 |
+| 조각수 적재 위치 | bundle_qty + prcs_dtl_opt 둘 다 자리 있음 | C25 조각수 일부 상품만 | CONFIRM-ST-2(이중 vs 택1) |
+
+> **불일치 처리 원칙(스킬 HARD):** 코드와 라이브 스키마가 어긋나 보이면 추측으로 메우지 않고 discrepancy로 기록 → validator/schema-analyst가 라이브 실측으로 해소. 본 delta는 코드 권위 + 엑셀 현실 대조까지만.
