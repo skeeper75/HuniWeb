@@ -222,3 +222,93 @@ prd_cd PK(1:1) · page_min/max/incr. **디지털인쇄 낱장=무관(0행 정상
 | B 셋트 sub_prd 분해 | sets/sub_prd 자리 있음 | A 통합은 표지도 parent 적재 | CONFIRM-BK-5(분해 범위) |
 
 > **불일치 처리 원칙(스킬 HARD):** 코드와 라이브 스키마가 어긋나 보이면 추측으로 메우지 않고 discrepancy로 기록 → validator/schema-analyst가 라이브 실측으로 해소. 본 delta는 코드 권위 + 엑셀 현실 대조까지만.
+
+---
+
+# 포토북 적재명세 delta (round-11 확대 #3 · 2026-06-10)
+
+> §1~3(제너릭 `BaseAdmin`·두 적재 surface·`BASE_CODE_GROUP`)은 전 시트 공유 — 재기술 안 함. 포토북이 책자 대비 **새로 활성화하는 적재 경로의 delta만**. 포토북은 책자類(반제품·page_rule·usage 3슬롯)이나 **PUR 단일(excl_group 불요) + 가격포함(t_prc_* 활성)**이 핵심 차이.
+
+## P1. 포토북이 추가로 쓰는 t_* 적재 경로
+
+| t_* 엔티티 | 포토북 delta | 적재 surface | 근거 |
+|-----------|--------------|:--:|------|
+| **t_prd_product_prices / t_prc_*** | **가격포함 시트** — C37 기본(24P) base + C38 추가(2P)당 per-page. 디지털인쇄(원자합산)·스티커·책자는 가격 컬럼 부재였으나 **포토북은 가격 내장**. round-2(`dbm-price-formula`) 고정가 base + 증분 component(PRF_PHOTOBOOK) | A | models.py:336·203 · round-2 |
+| **t_prd_products**(반제품) | 표지타입(C18) 하드/레더하드=`prd_typ_cd`=PRD_TYPE.02 반제품 sub_prd + sets. 소프트=종이표지(A 통합 근접) | A | PRD_TYPE.02·entity-semantic §2/§4 |
+| **t_prd_product_page_rules** | 내지 page_min/max/incr(C15~17, 24~150·증가2). 책자처럼 활성. **증가2=가격 추가(2P)당 정합** | B | models.py:302 |
+| **t_prd_product_processes**(PUR 제본) | PROC_000017 자식 **PUR 단일** + mand=Y. **excl_group 불요**(책자 GRP-BOOK-제본 택일과 차이 — 포토북=PUR만) | B | models.py:391 |
+| **t_prd_product_materials**(3 usage) | USAGE.01 내지(몽블랑130)·.02 표지(아트250/레더)·.03 면지(그레이). 책자와 동일 3슬롯 | B | models.py:283·USAGE |
+| **t_prd_products**(에디터) | `editor_yn`=Y(C35, 에디터 중심)·디자인명=디자인 템플릿(PRD_TYPE.04 디자인·디자인보유) | A | models.py:444 |
+
+## P2. 포토북 미사용/희소 t_*
+
+| t_* | 사유 |
+|-----|------|
+| `t_prd_process_excl_groups` | **포토북=PUR 단일**(택일 불요). 책자 GRP-BOOK-제본과 차이 |
+| `t_proc_processes`(별색·커팅) | 포토북=별색/커팅 없음(제본물) |
+| `t_prd_product_addons` | 포토북 추가상품 없음(C 부재) |
+| `t_prd_product_bundle_qtys` | 포토북=권/조각 묶음 없음(page_rule로 페이지) |
+
+## P3. 적재 surface별 코드값 도메인 (포토북 활성 enum)
+
+| 필드 | 코드그룹 | 포토북 허용값(엑셀 도출) |
+|------|----------|--------------------------|
+| `usage_cd` | USAGE | .01 내지·.02 표지·.03 면지 |
+| `prd_typ_cd` | PRD_TYPE | .02 반제품(하드/레더 표지 sub_prd)·.04 디자인(에디터) |
+| `mat_typ_cd` | MAT_TYPE | 종이(몽블랑130·아트250)·.06 가죽(레더) |
+| `frm_typ_cd`·`comp_typ_cd` | (가격) | 고정가 base + per-page 증분(round-2) |
+
+## P4. 포토북 적재 discrepancy (코드 vs 엑셀 현실)
+
+| 항목 | 코드(models.py) | 엑셀 현실(260610) | 처리 |
+|------|-----------------|-------------------|------|
+| 레이플랫 vs PUR | PROC_000017 family(PUR·레이플랫 둘 다 자리) | C28 PUR 전 variant·레이플랫 적재0 | CONFIRM-PB-2(C-10 1순위·미운영 가설) |
+| 표지타입 sub_prd 분해 | sets/sub_prd 자리 있음 | 하드/레더=반제품·소프트=종이표지 | CONFIRM-PB-1(소프트 분해 범위) |
+| 가격 내장 | t_prc_*·product_prices 자리 | C37/38 base+per-page | CONFIRM-PB-4(round-2 고정가+증분) |
+
+---
+
+# 캘린더 적재명세 delta (round-11 확대 #4 · 2026-06-10)
+
+> §1~3 공유 — 재기술 안 함. 캘린더가 포토북/책자 대비 **새로 활성화하는 적재 경로의 delta만**. 캘린더는 **낱장(내지/표지·page_rule 없음) + GRP-CAL-가공 택일 + addon 첫 활성 + 장수 GAP**이 핵심 차이.
+
+## CL1. 캘린더가 추가로 쓰는 t_* 적재 경로
+
+| t_* 엔티티 | 캘린더 delta | 적재 surface | 근거 |
+|-----------|--------------|:--:|------|
+| **t_prd_process_excl_groups** | **GRP-CAL-가공 택일그룹**(SEL_TYPE.01 단일). 캘린더가공(C19) 6멤버(가공없음·우드거치대·타공·트윈링제본·제본없음). 책자=GRP-BOOK-제본, 캘린더=**GRP-CAL-가공**(별 그룹) | B | db-structure GRP-CAL-가공·entity-semantic §1 #5 |
+| **t_prd_product_addons** | **첫 활성**(스티커/책자/포토북 미사용). C26 캘린더봉투(★사이즈선택)·우드거치대 → `tmpl_cd` PK + `t_prd_templates`(SKU). ★사이즈선택=constraint 캐스케이드 | B | models.py:218 addon→tmpl 전환 |
+| **t_prd_product_processes**(거치/제본/타공) | 삼각대거치(C18 그레이/블랙)·고리형트윈링제본(C21 링칼라)·타공(1구/2구)+끈. prcs_dtl_opt=삼각대컬러·링칼라·구수 | A→B | models.py:391·473 |
+| **t_prd_product_plate_sizes**(출력판형) | output_paper_typ_cd=316x467·**330x660(와이드 3절)**. 출력판형≠재단 | B | models.py:317·OUTPUT_PAPER_TYPE |
+| **장수(C17)** | **GAP — 미확정**. page_rule(min/max/incr) vs variant 선택옵션 vs 가격차원. 라이브 page_rule 0행(G-CL-5). CONFIRM-CL-3 | — | entity-semantic §2 |
+| **가공/추가상품 추가가격(C20/C27)** | round-6 옵션 가격(가공별 우드4000·트윈링2000·봉투2400) | (round-6) | round-6 L2 |
+| **t_prd_products**(2 surface) | 캘린더=file_upload_yn=Y·디자인캘린더=editor_yn=Y·가격포함·PRD_TYPE.04 디자인 | A | models.py:444 |
+
+## CL2. 캘린더 미사용 t_* (낱장 — 책자/포토북과 차이)
+
+| t_* | 사유 |
+|-----|------|
+| `t_prd_product_page_rules` | **캘린더=낱장(내지 없음)** — page_rule 무관(장수는 별 축, GAP). 책자/포토북과 정반대 |
+| `t_prd_product_materials`(.02 표지/.03 면지) | 캘린더=낱장 usage.01 본체만(내지/표지/면지 없음) |
+| `t_prd_products`(반제품 sub_prd) | 캘린더=C 완제품/단일(반제품 없음) |
+| `t_proc_processes`(별색·커팅·박/형압) | 캘린더 후가공 없음 |
+
+## CL3. 적재 surface별 코드값 도메인 (캘린더 활성 enum)
+
+| 필드 | 코드그룹 | 캘린더 허용값(엑셀 도출) |
+|------|----------|--------------------------|
+| `usage_cd` | USAGE | .01 본체(낱장) |
+| `sel_typ_cd` | SEL_TYPE | .01 단일(GRP-CAL-가공 택1) |
+| `output_paper_typ_cd` | OUTPUT_PAPER_TYPE | 316x467·330x660(와이드) |
+| `prd_typ_cd` | PRD_TYPE | .04 디자인(디자인캘린더)·.01 완제품 |
+| `bdl_unit_typ_cd`·`qty_unit_typ_cd` | QTY_UNIT | 장수 단위(장) — 라이브 코드값 확인 대상(CL-3) |
+
+## CL4. 캘린더 적재 discrepancy (코드 vs 엑셀 현실)
+
+| 항목 | 코드(models.py) | 엑셀 현실(260610) | 처리 |
+|------|-----------------|-------------------|------|
+| 장수(낱장 매수) | page_rule 자리(책자용) | C17 4(8P)/8(16P)·page_rule 0행 | CONFIRM-CL-3(G-CL-5 — page_rule vs variant vs 가격) |
+| 우드거치대 | 가공 process + addon tmpl 둘 다 자리 | C19 가공·C26 추가상품 양쪽 | CONFIRM-CL-2(OPTION vs TEMPLATE·C-4) |
+| 디자인캘린더 | 같은 prd_cd + PRD_TYPE.04 둘 다 가능 | 같은 MES 007-0001~5·가격포함 | CONFIRM-CL-1(별 상품 vs surface) |
+
+> **불일치 처리 원칙(스킬 HARD):** 코드와 라이브 스키마가 어긋나 보이면 추측으로 메우지 않고 discrepancy로 기록 → validator/schema-analyst가 라이브 실측으로 해소. 본 delta는 코드 권위 + 엑셀 현실 대조까지만.
