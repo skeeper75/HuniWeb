@@ -2,7 +2,10 @@
 
 > 작성 2026-06-11(최신·round-13). 권위 = 본 문서 + 메모리 `dbmap-mapping-research-round12`·`dbmap-correctness-audit-round13`·`dbmap-column-domain-loadspec-round11`·`dbmap-schema-design-intent-first`·`dbmap-code-identifier-strategy`·`dbmap-live-admin-product-viewer`·`dbmap-silsa-price-via-poster-sign`. 본 문서 + 메모리를 읽으면 재발견 0으로 재개. 이전 트랙(round-2 가격·round-4/5 적재·plate·CPQ·round-6 현수막·round-7 커버리지·round-8 admin UI·round-10 변경추적·round-11 도메인) 상세는 `CHANGELOG.md`·메모리에 보존.
 
-## 한 줄 현황 (round-14 **webadmin 스키마 변경 추적 하네스 신설 + Phase10/11 영향 진단** — 2026-06-11·이번 세션·최신)
+## 한 줄 현황 (round-13 **라이브 정합 교정 확대 — 6/11 GO** — 2026-06-11·이번 세션·최신)
+**디지털인쇄 파일럿(GO)에 이어 굿즈파우치·상품악세사리·실사·아크릴·문구 5 family 정합 교정 = 누적 6/11 GO(DB 미적재).** `dbm-correctness-auditor` 팬아웃(family별 1) + `dbm-validator` 독립 K0~K6 — **생성자≠검증자 2-pass가 매 라운드 실질 결함 적발·보정**(악세 분류 정반대 "0행 MISSING"↔"3행 MIS-LOADED"·아크릴 카운트 과대 22→20/16→14·문구 카테고리 재연결 번호 prd_cd순≠노드순 오매핑). **[HARD 사용자 directive 2026-06-11] v03 마이그레이션 파일(`data/raw/prdmaster_full_migration_v03_20260518.xlsx`)은 상품마스터 미분석 산물로 오류 多 → 정답 권위 참조 금지(피고원). `load_master`=순수 전파기(변환 로직 부재·코드 Read 입증)·진짜 진원=상류 v03 정규화 단계(레포 미동봉). 정답 기준 = 상품마스터 원본 엑셀 L1(`06_extract/<slug>-l1.csv`)+스키마의도+도메인+사이트정체.** 발견: **굿즈파우치 정체 오분류 0(사용자 의심 반증·결함은 속성축: 본체색×사이즈 폭증·비소재 자재화·봉제→부착·CPQ 미적재)** · **상품악세사리 이중등록=의도 확정**(`sql/09_delete_dup_products.sql`이 281/282/283 삭제 제외 입증·Q-ID-A 답=봉투세트 `t_prd_product_sets`+CPQ 사이즈매칭) · **실사 size 면적매트릭스 CORRECT(의심 반증)**·레더 .08 vs 책자 .06 평면화 · **아크릴 print_side에 UV변형 20상품 오적재(전역 의미축 위반·정답 `PROC_000002.prcs_dtl_opt`)**·완칼 전무 · **문구 미싱제본 MISSING**(`PROC_000017` 자식 9종 부재, 기존 030 미싱·074 6단미싱접지는 제본 family 아님=mint 조건부 정당). **횡단 결함: 카테고리 고아 오연결(전 family 공통·정상노드 재연결 search-before-mint)·색상/형상/용량=자재 오염(MAT_TYPE.08~10)·v03 진원.** 커밋 7916cb1·656dcaf. 산출 `17_correctness/{goods-pouch,product-accessory,silsa,acrylic,stationery}/`(각 5종)+`_gate/`(각 게이트). 권위 [[dbmap-correctness-audit-round13]]. **DB 미적재(교정 매니페스트까지·실 COMMIT=round-5/6/10+인간 승인). 잔존 컨펌 ~44건. 다음 = 잔여 5시트(스티커·책자·포토북·캘린더·디자인캘린더, round-12 mapping-final 보유로 대조 기준 有·정체 의심 낮음).**
+
+## 직전 현황 (round-14 **webadmin 스키마 변경 추적 하네스 신설 + Phase10/11 영향 진단** — 2026-06-11)
 **webadmin(라이브 DB 스키마+적재 소스 오브 트루스)이 진화할 때 추적하는 트랙 신설(round-14) + Phase10/11 영향 진단 완료.** 사용자 `/harness:harness`("webadmin 코드 변경→스키마 변경이력+매핑 정확 처리"). 신규 스킬 `dbm-schema-change-tracking` + `dbm-change-tracker`에 round-14 스키마 모드 추가(신규 에이전트 0)·오케스트레이터 round-14. **핵심 = 3-way 정합(webadmin git 선언 / 라이브 information_schema 적용 / 우리 dbmap 산출 참조) + DDL·데이터백필 레벨 분리("컬럼 존재≠적용 완료").** **영향 진단**(`18_schema-change/impact-diagnosis.md`·166줄, 베이스라인 `d6026be`↔HEAD `bd12d03`·sql 15→23·t_* 34→35): Phase10/11이 `constraint_json`·`dep_proc_cd` **삭제** + `t_prd_template_prices`·`use_dims`·`pricing_dims` 신설 + 가격엔진 차원 8→10 + 단가유형(단가형/합가형) PRICE_TYPE 코드값 신설. **라이브 DDL 갭 0(전부 반영)·단 데이터 백필 미완**(proc_cd/opt_cd 0행·prc_typ 전부 단가형·template_prices 0행 — "컬럼 존재≠적용 완료"). **우리 산출 round-2/6/11/12/13 전부 MAJOR stale**(CRITICAL 0·적재값 무손상·모델/스펙 *문서*만 stale·가격엔진 Phase11 전면 미인지). Top3 stale=constraint_json 삭제·가격차원+단가유형·dep_proc_cd 삭제. 커밋 5f00203 + 본커밋. 권위 [[dbmap-schema-change-round14]]. **추적·영향·갱신 제안 전용(webadmin/DB/우리 산출 수정 없음). 다음 = round-14 실행(영향 매트릭스→stale 산출 갱신·intent-map/cpq-schema/price-ddl 우선) 또는 round-13 시트 확대.**
 
 ## 직전 현황 (round-13 **라이브 정합 교정 하네스 신설 + 디지털인쇄 파일럿 GO** — 2026-06-11)
@@ -52,10 +55,10 @@
 
 ## 다음 시작점 (정확한 다음 행동 — 순서대로)
 
-**★ [2026-06-11 최우선·택1] round-13 또는 round-12 시트 확대.** 두 트랙 모두 1~6시트(round-12)·디지털인쇄(round-13) GO 검증 완료 — 검증된 방법으로 확대만 남음.
-- **round-13 라이브 정합 교정 확대** (트리거: "라이브 정합 교정"·"round-13"·"적재 정확성 점검"): 디지털인쇄 외 10시트. **권장 우선 = 굿즈파우치·상품악세사리**(정체 오분류 의심 높음 — 굿즈파우치=포장·상품악세사리=OTC). 절차 = C-ID 상품정체(실제 사이트 `huniprinting.com` gstack + `print-quote/02_business/product-master.md`) → 적재로직 재구성(`load_master.py`) → 라이브 diff → 교정 매니페스트 → dbm-validator K0~K6. 신규 에이전트 `dbm-correctness-auditor`는 생성세션 미로드 가능 → general-purpose+스킬 로드 폴백(이번 세션 검증). 인라인 한국어 선호.
-- **round-12 매핑 확정 확대** (트리거: "round-12"·"매핑 확정 리서치"): 나머지 5시트(실사·아크릴·문구·굿즈파우치·상품악세사리). 디지털인쇄 외 1~6시트 GO. mapping-final → round-4/5 적재 인계 가능(인간 승인).
-- **잔존 컨펌(인간 결정 대기)**: round-13 디지털인쇄 4건(Q-ID-A 봉투세트 적재모델·Q-ID-B 카테고리 273/274/275/283 재연결+고아 296/295 정리·Q-DP-C 박8색·Q-DP-B tmpl separator). round-12 횡단 코팅 Q9 정책.
+**★ [2026-06-11 최우선] round-13 라이브 정합 교정 잔여 5시트.** 6/11 GO(디지털인쇄·굿즈파우치·상품악세사리·실사·아크릴·문구) — 검증된 방법으로 확대만 남음.
+- **잔여 5시트 = 스티커·책자·포토북·캘린더·디자인캘린더** (전부 round-12 mapping-final 보유 → 대조 기준 有·정체 의심 낮음). 트리거 "라이브 정합 교정"·"round-13". 절차 = C-ID 상품정체(`print-quote/02_business/product-master.md`+크롤) → 적재로직 재구성(`load_master.py`) → 라이브 diff → 교정 매니페스트 → `dbm-validator` K0~K6. **[HARD] v03 참조 금지(오류 多 피고원)·정답=상품마스터 L1+스키마의도+도메인+사이트.** `dbm-correctness-auditor` 팬아웃(family별 1·model opus) + `dbm-validator` 독립 게이트(생성자≠검증자·2-pass 보정). 권장 = 5 병렬 또는 2배치(책자/포토북/디자인캘린더 ∥ 스티커/캘린더).
+- **횡단 결함 종합(선택·교정 계획용)**: 6 family 공통 카테고리 고아 오연결·색상/형상/용량=자재 오염(MAT_TYPE.08~10)·v03 진원을 한 판 종합 → 실 교정(round-5/6/10)·실무진 컨펌 일괄에 유용.
+- **잔존 컨펌(인간 결정 대기·~44건, 실 교정=round-5/6/10 트랙)**: 디지털인쇄 4(Q-ID-A 봉투세트·Q-ID-B 카테고리 273/274/275/283 재연결+고아 295/296 정리·Q-DP-C 박8색·Q-DP-B separator) + 굿즈 5(Q-GP-1~5) + 악세 8(Q-ID-A·Q-PA-A~G) + 실사 7(Q-SL-1~6·A) + 아크릴 8(CONFIRM-AC-1/3/4/6/usage/A1/ID-1/ID-2) + 문구 12(Q-ST-A~M). 횡단 일괄 후보: 카테고리 고아 재연결(전 family)·색상=자재 오염(MAT_TYPE.08~10)·코팅 Q9 정책.
 
 > **[이력] round-11 매핑 확정 트랙 = round-12로 실행 완료(1~6시트).** 아래 round-9~11 항목은 CPQ 적재(엽서·카드봉투) 미완분 — round-13 교정과 별개 트랙, 적재 단계에서 재개.
 
