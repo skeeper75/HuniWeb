@@ -30,6 +30,7 @@ Coordinates a 4-agent team to (1) sheet the live Railway DB structure and (2) ma
 | round-10 | **버전 변경 추적 + 델타 적용** (상품마스터·가격표 신규 버전의 변경분만 추적·적용) | 변경 영향 `t_prd_*`/`t_prc_*`/CPQ (델타 UPSERT) | `dbm-change-tracking` | ACTIVE |
 | round-11 | **컬럼 도메인 의미 + 상품 BOM + 적재명세** (상품마스터 각 시트 컬럼의 인쇄 도메인 의미 확정 + 상품별 자재/공정 + raw/webadmin 적재명세 → 매핑 정보) | 상품마스터 전 시트 → 전 `t_*` (의미·BOM·적재명세 정리, 적재 아님) | `dbm-column-domain` · `dbm-loadspec-extract` | ACTIVE |
 | round-12 | **매핑 확정 리서치** (4개 내부 권위{round-11 산출·실무진 확정 Q1~Q15·schema-design-intent-map·loadspec} 결합 + 국내10·해외10 경쟁사/CIP4/ISO 표준 갭헌팅 + 라이브 실측 → 시트별 컬럼→기초데이터 확정 매핑) | 상품마스터 11시트 → `16_mapping-research/<family>/mapping-final.md` (M1~M6 게이트, 적재 아님) | `dbm-mapping-research` | ACTIVE |
+| round-13 | **라이브 정합 교정** (라이브=교정대상 역전 — webadmin 적재 oracle{`sql/`·`tools/load_master.py`·`docs/`ERD}+스키마의도+엑셀+도메인을 정답으로, 상품별 추출규칙 도출 + 라이브 전수 diff → 교정 매니페스트) | 상품마스터 11시트 → `17_correctness/<family>/`{loadlogic-notes·extraction-plan·live-diff·correction-manifest} (K1~K6 게이트, 적재 아님) | `dbm-correctness-audit` | ACTIVE |
 
 - **round-1**: quantity-bracket discounts for 아크릴 / 굿즈·파우치 / 문구. Flat bracket rows. Complete.
 - **round-2**: the price is a *formula engine* (`판매가 = Σ components`, each component priced by a multi-dimensional lookup) — not a flat table. Excel authority: 상품마스터 `계산공식집초안` (formula intent, typed by 공식 유형) + 가격표 19 단가시트 (component matrices). **fit-gap FIRST** (is `t_prc_*` adequate? — round-1 did not extract the `t_prc_*` DDL), then **incremental pilot** (디지털인쇄/엽서, 원자합산형) before widening to all 공식 유형. See `dbm-price-formula`.
@@ -41,6 +42,8 @@ Coordinates a 4-agent team to (1) sheet the live Railway DB structure and (2) ma
 - **round-10 (버전 변경 추적 + 델타 적용)**: rounds 1–7 mapped/loaded a **single snapshot** of the Excel — round-10 tracks the **difference between two versions** (baseline → new, e.g. 상품마스터 260527→260610) and applies only the delta. The load-bearing insight is **3-way**: the delta to apply is NOT (new − baseline) — the **live DB is the state authority**, baseline = operator *intent*, live = *reality* (may differ from a naive baseline mapping). `dbm-change-tracker` does key-based(`prd_cd`/`prd_nm`) cell-level 3-way diff → ADDED/REMOVED/MODIFIED/UNCHANGED, impact-maps each changed cell to t_* entity/column (reusing 9속성·가격·CPQ lenses), reconciles new↔live, and emits ① a row-level **change manifest** (사람이 읽는 추적 감사본) + ② an **idempotent delta UPSERT** (`ON CONFLICT … DO UPDATE …, upd_dt`, reusing `dbm-load-execution` SQL patterns); `dbm-validator` gates V1~V8 + rollback-only DRY-RUN. **REMOVED = 논리삭제 제안·escalate (절대 hard-delete 금지)**; 신규 코드값 = 선적재 제안. **No COMMIT, no DDL apply, no DELETE — all human approval.** See `dbm-change-tracking`.
 - **round-11 (컬럼 도메인 의미 + 상품 BOM + 적재명세)**: rounds 1–10 mapped/loaded/tracked the data, but the round-9 lesson (기계적 매핑 금지·스키마 설계의도 선행) requires the **excel-side half to be settled first**: what each column *means* and what each product is *made of*. `dbm-domain-researcher` produces ① a **column dictionary** (각 시트 각 컬럼의 인쇄 도메인 의미, 애매모호 0 — authority ① 후니 PDF ② 07_domain KB ③ 국내외 표준 보조) + ② a **product BOM** (각 상품명 리서치 → 자재+공정 전체). `dbm-loadspec-extractor` extracts from raw/webadmin source ③ a **load-spec** (각 t_* 가 무엇을 어떻게 적재하는가 — `BaseAdmin` 제너릭·`BASE_CODE_GROUP` 코드값·상품뷰어 적재경로, file:line). The three combine into **매핑 정보** that feeds the still-unwritten `schema-design-intent-map.md` + downstream L1/L2 mapping. Reuses 07_domain 의미축 (재유도 금지); 1 product-family pilot (디지털인쇄) sets the depth bar, then widen. **분석/정리 전용 — DB 적재 없음.** See `dbm-column-domain` + `dbm-loadspec-extract`.
 - **round-12 (매핑 확정 리서치)**: round-11 settled what each column *means*; round-12 turns that into the **per-sheet definitive mapping** (`mapping-final`: 컬럼 → live `t_*.column` + 변환 규칙 + 코드값/FK + 라이브 실측 상태). Procedure = combine the four internal authorities (round-11 sheet artifacts · 실무진 확정 `_review/실무진-검토질문.md` Q1~Q15 — ★5건 overrides round-11 drafts · `00_schema/schema-design-intent-map.md` OM-1~7 · `_loadspec/loadspec.md`) → **gap-hunt externally** (국내 10·해외 10 경쟁사, CIP4 JDF/XJDF, ISO 인쇄표준, 인쇄용어 — 갭 발견용 보조, 답습 금지, 기존 KB 재사용) → verify every mapping right-hand side against the live DB read-only → `dbm-validator` gates **M1~M6** (커버리지·권위 인용 실재·실무진 정합·오모델 재발 0·라이브 실측·갭 처분). Output feeds round-4/5 load assembly directly. **분석/확정 전용 — DB 적재 없음(인간 승인).** Per the round-10/11 lesson, prefer inline Korean execution or parallel `dbm-domain-researcher` fan-out with main-session QA. See `dbm-mapping-research`.
+
+- **round-13 (라이브 정합 교정)**: rounds 1–12 mapped/confirmed against the live DB as authority. round-13 **reverses** that — the live DB is the **defendant**, and the **webadmin load oracle** (the code that actually loaded it) + schema intent + Excel + settled domain are the **judge**. The user's concern: 라이브 DB was loaded by `raw/webadmin` (HuniProductPrice2) without its load logic / schema fully analyzed, so 교정 필요분 many (round-12 already saw 레더 3-way·코팅 family 불일치). The load-bearing check = **reconstruct how `tools/load_master.py` (+`sql/`) transformed each Excel column into `t_*`, then judge that transform against Excel intent + schema intent + domain** — correct→keep, wrong→correct. **[HARD] `catalog/models.py` is `# auto-generated` (inspectdb·`managed=False`) — a DB mirror, NOT load logic; the oracle is `sql/`+`tools/`.** `dbm-correctness-auditor` produces per-product extraction-plan + live-diff + correction-manifest (loadlogic-notes for the reconstructed load rules); `dbm-validator` gates **K1~K6** (추출규칙 커버리지·oracle 인용 실재·적재로직 근거·라이브 실측 독립 재현·비파괴 search-before-mint·오모델 정합). Output = 비파괴 교정 제안 (COMMIT/DDL/DELETE = 인간 승인); GO corrections feed round-5 / round-10 delta tracks. **분석/교정제안 전용 — DB 적재·수정 없음.** Per the round-10/11 lesson, prefer inline Korean execution or `dbm-correctness-auditor` fan-out with main-session QA. See `dbm-correctness-audit`.
 
 ## Team & roles
 
@@ -57,8 +60,9 @@ Coordinates a 4-agent team to (1) sheet the live Railway DB structure and (2) ma
 | `dbm-change-tracker` | **round-10 only**: 두 엑셀 버전 키 기반 3-way diff(ADDED/REMOVED/MODIFIED) + 셀→t_* 영향 매핑 + new↔live 정합 + 변경 매니페스트(추적 감사본) + 멱등 델타 UPSERT(upd_dt). REMOVED=논리삭제 제안(비파괴) | **dbm-change-tracking** |
 | `dbm-domain-researcher` | **round-11 + round-12**: (r11) 상품마스터 각 시트 컬럼의 인쇄 도메인 의미 확정(컬럼 도메인 사전, 애매모호 0) + 각 상품명 리서치 → 자재/공정 BOM. 권위 후니 PDF > 07_domain KB > 국내외 표준(보조). 07_domain 의미축 재사용(재유도 금지). (r12) 4 내부 권위 결합 + 경쟁사/CIP4/표준 갭헌팅 + 라이브 실측 → 시트별 mapping-final | **dbm-column-domain** · **dbm-mapping-research** |
 | `dbm-loadspec-extractor` | **round-11 only**: raw/webadmin Django 소스(models/admin/basecodes/views)에서 각 t_* 적재명세 추출 — 컬럼·폼위젯·코드값그룹·자동채번·적재 surface(admin changeform/상품뷰어), file:line 근거. DB 미접속(소스 읽기 전용) | **dbm-loadspec-extract** |
+| `dbm-correctness-auditor` | **round-13 only**: 라이브=교정대상 역전. webadmin 적재 oracle(`sql/`·`tools/load_master.py`)+스키마의도+엑셀+도메인을 정답으로, 상품별 추출규칙(extraction-plan) 도출 + 적재로직 재구성(loadlogic-notes) + 라이브 전수 diff(live-diff) → 교정 매니페스트(correction-manifest). 비파괴(COMMIT/DDL/DELETE 없음) | **dbm-correctness-audit** |
 
-All agents spawn with `model: "opus"`. Round is resolved in Phase 0; the designer/validator load the round-matching skill (round-2 → `dbm-price-formula`, round-4 → `dbm-load-readiness`, round-5 → `dbm-load-execution`, round-6 → `dbm-cpq-option-mapping`). `dbm-load-builder` runs in round-4 and round-5; `dbm-ddl-proposer` is spawned in round-5 and round-6; `dbm-option-mapper` is spawned only in round-6; **round-11 spawns `dbm-domain-researcher` (의미) ∥ `dbm-loadspec-extractor` (적재명세) in parallel, integrated into 매핑 정보; per the round-9/10 lesson (위임이 "완료"만 반환·신규 에이전트 생성세션 미로드), the orchestrator may run round-11 inline (Korean, visible) instead of delegating.**
+All agents spawn with `model: "opus"`. Round is resolved in Phase 0; the designer/validator load the round-matching skill (round-2 → `dbm-price-formula`, round-4 → `dbm-load-readiness`, round-5 → `dbm-load-execution`, round-6 → `dbm-cpq-option-mapping`). `dbm-load-builder` runs in round-4 and round-5; `dbm-ddl-proposer` is spawned in round-5 and round-6; `dbm-option-mapper` is spawned only in round-6; **round-11 spawns `dbm-domain-researcher` (의미) ∥ `dbm-loadspec-extractor` (적재명세) in parallel, integrated into 매핑 정보; round-13 spawns `dbm-correctness-auditor` (one per family, fan-out) + `dbm-validator` (K1~K6 gate, separate agent); per the round-9/10 lesson (위임이 "완료"만 반환·신규 에이전트 생성세션 미로드), the orchestrator may run round-11/13 inline (Korean, visible) instead of delegating.**
 
 ## Execution mode: agent team (hybrid)
 
@@ -255,6 +259,27 @@ round-12 (mapping-research):
 - 🔴 컨펌 잔여: mapping-final의 미확정 행에 대한 실무진 추가 질문 발송 여부.
 - round-4/5 인계 승인: M1~M6 GO 시트를 적재본 조립 트랙으로 넘길지(적재 자체는 별도 인간 승인).
 
+round-13 (correctness-audit):
+- 파일럿 시트 선정: 어느 시트부터 교정 감사할지(권장 디지털인쇄 — round-11/12 검증 최다).
+- MIS-LOADED 교정 방향: 라이브 오적재분(예: 코팅=공정인데 자재로 적재·레더 자재유형 혼재)을 어떻게 고칠지 — 기존행 재연결 vs 정정 vs 신설.
+- 적재 로직 결함 처리: `load_master.py` 등에서 발견된 변환 규칙 결함을 webadmin 팀에 회신할지(원인 교정) vs DB만 교정.
+- AMBIGUOUS 컨펌: oracle 내부 충돌(엑셀 vs ERD 문서) 행의 최종 판정(실무진/사용자).
+- 실 교정 승인: 교정 매니페스트 GO분을 round-5(멱등 UPSERT)/round-10(델타) 트랙으로 넘겨 실제 COMMIT/논리삭제할지(본 하네스 종착점 너머·인간 승인).
+
+## Pipeline (round-13 correctness-audit — 라이브=교정대상 → 교정 매니페스트)
+
+**[프레임] rounds 1–12는 라이브를 권위로 봤다. round-13은 역전 — 라이브=피고, oracle(webadmin 적재 SQL+`load_master.py`+ERD 문서)+스키마의도+엑셀+도메인=판관.** 생성(correctness-auditor)과 게이트(validator)는 별도 에이전트 = K-게이트 독립성. 둘 다 `dbm-correctness-audit` 스킬 로드. 산출 루트 = `17_correctness/<family>/`.
+
+**Phase 0 — 입력 확인**: oracle 4소스 존재 점검(엑셀 L1 `06_extract/<slug>-l1.csv` · webadmin `sql/`+`tools/load_master.py` · `00_schema/schema-design-intent-map.md` · round-11/12 `15_domain-spec`/`16_mapping-research`). 부재 시 BLOCKED 보고(round-11/12 선행 안내). 라이브 `.env.local` `RAILWAY_DB_*` 읽기전용 확인.
+
+**Phase 1 — 상품 정체 확정 → 적재 로직 재구성** (correctness-auditor): (a) **C-ID 상품 정체**: 각 상품이 무엇인지(범주 일반인쇄/포장재/굿즈·구성 세트/단품·생산방식)를 권위 0(실제 사이트 `huniprinting.com` gstack + 기존 크롤 + print-quote `product-master.md`)로 확정 → `product-identity.md`. 정체가 칼럼 추출의 전제(실증: 인쇄배경지=포장재 세트, round-11 오분류). (b) `tools/load_master.py`(+`sql/`)에서 엑셀 칼럼→t_* 변환 규칙 재구성 → `loadlogic-notes.md`. **models.py는 거울일 뿐(db_comment만 사용).**
+
+**Phase 2 — 정답 추출규칙 + 라이브 diff** (correctness-auditor): 상품별 × 5속성축(size·자재·공정·도수·인쇄옵션) 정답 추출규칙 도출(엑셀+스키마의도+도메인) → `extraction-plan.md`; 라이브 전수 실측 후 field-for-field 대조 → `live-diff.md`; 분류(CORRECT/MIS-LOADED/MISSING/EXTRA/AMBIGUOUS)+why+how(비파괴)+라우팅 → `correction-manifest.md`.
+
+**Phase 3 — K1~K6 게이트** (validator, 적대적): K1 추출규칙 커버리지 · K2 oracle 인용 실재 · K3 적재로직 근거 · K4 라이브 실측 독립 재현 · K5 비파괴·search-before-mint · K6 오모델 정합. 전부 PASS = GO. → `17_correctness/_gate/<family>-gate.md`. 발견 결함은 correctness-auditor로 라우팅, 조용히 수정 금지. **NEVER COMMIT/DDL/DELETE.**
+
+**Phase 4 — 보고 + 승인 게이트** (lead): 교정 매니페스트 요약(분류 분포) + 적재 로직 결함 + 인간 승인 큐(MIS-LOADED 교정 방향·실 COMMIT은 round-5/10 트랙)를 사용자에 에스컬레이션.
+
 ## Test scenarios
 
 - **Normal flow (round-1)**: "DB 구조 파악하고 구간할인 매핑해줘" → Phase 0 initial → 2 parallel analysts → designer → validator GO → report with decision gate.
@@ -286,6 +311,11 @@ round-12 (mapping-research):
 - **Round-12 single-sheet**: "스티커 매핑 확정만" → 해당 시트만 P1~P4 + M게이트, 타 시트 산출 보존.
 - **Round-12 gap-hunt-only**: "갭헌팅만" / "놓친 정보 리서치만" → P2만 수행해 research-gap-board 산출, mapping-final 미작성.
 - **Round-12 missing-input error**: 입력 4소스 중 하나라도 부재(예: 해당 시트 round-11 미완) → Phase 0에서 BLOCKED 보고, round-11 선행을 안내(추측 매핑 금지).
+- **Round-13 flow (correctness-audit)**: "라이브 정합 교정" / "round-13" / "적재 정확성 점검" → Phase 0 oracle 4소스 확인 → Phase 1 적재 로직 재구성(`load_master.py`) → Phase 2 상품별 추출규칙+라이브 diff+교정 매니페스트 → Phase 3 validator K1~K6 → `<family>-gate.md` GO/NO-GO → lead가 MIS-LOADED 교정 방향·실 교정(round-5/10 인계)을 사용자에 에스컬레이션.
+- **Round-13 single-sheet / partial**: "디지털인쇄 교정만" / "스티커 자재만 교정 점검" → 해당 시트(또는 속성)만 Phase 1~3, 타 산출 보존.
+- **Round-13 extraction-plan-only**: "추출 계획만" / "어떻게 뽑을지 계획만" → Phase 1~2의 extraction-plan까지, 라이브 diff·교정 매니페스트 생략.
+- **Round-13 mis-load found**: 라이브가 코팅을 자재로 적재(Q9=공정) → correctness-auditor가 MIS-LOADED 분류 + load_master.py 원인 재구성 + 기존 공정행 재연결 제안(search-before-mint), validator K3/K6 확인, 실 교정은 round-5/10 인계(인간 승인).
+- **Round-13 missing-input error**: oracle 4소스 중 부재(해당 시트 round-11/12 미완 등) → Phase 0 BLOCKED 보고, 선행 안내(추측 교정 금지).
 - **Error flow**: DB unreachable → Phase 1 blocker report, ask user to verify host/port; no agents spawned.
 
 ## CLAUDE.md pointer
