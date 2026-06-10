@@ -173,3 +173,52 @@ prd_cd PK(1:1) · page_min/max/incr. **디지털인쇄 낱장=무관(0행 정상
 | 조각수 적재 위치 | bundle_qty + prcs_dtl_opt 둘 다 자리 있음 | C25 조각수 일부 상품만 | CONFIRM-ST-2(이중 vs 택1) |
 
 > **불일치 처리 원칙(스킬 HARD):** 코드와 라이브 스키마가 어긋나 보이면 추측으로 메우지 않고 discrepancy로 기록 → validator/schema-analyst가 라이브 실측으로 해소. 본 delta는 코드 권위 + 엑셀 현실 대조까지만.
+
+---
+
+# 책자 적재명세 delta (round-11 확대 #2 · 2026-06-10)
+
+> §1~3(제너릭 `BaseAdmin`·두 적재 surface·`BASE_CODE_GROUP`)은 전 시트 공유 — 재기술 안 함. 책자가 디지털인쇄/스티커 대비 **새로 활성화하는 적재 경로의 delta만**. 책자는 **반제품(B 셋트)·page_rule·제본 택일** 때문에 가장 많은 t_* 경로를 쓴다.
+
+## B1. 책자가 추가로 쓰는 t_* 적재 경로
+
+| t_* 엔티티 | 책자 delta | 적재 surface | 근거 |
+|-----------|------------|:--:|------|
+| **t_prd_product_page_rules** | `page_min`/`page_max`/`page_incr`(C15~17). 디지털인쇄/스티커는 0행이었으나 **책자 내지에서 처음 활성**. 제본별 차등(중철 4~28/4배수·무선 24~300·트윈링 8~100·떡제본 무관) | B(상품인라인) | models.py:302 `t_prd_product_page_rules` |
+| **t_prd_product_processes**(제본) | PROC_000017 제본 자식 7종(중철/무선/PUR/트윈링/하드커버무선/하드커버트윈링/떡) + `mand_proc_yn=Y`(제본 필수). prcs_dtl_opt=방향(좌철/상철)·책등(mm)·묶음단위·고리형 | B | models.py:391·473 |
+| **t_prd_process_excl_groups** | **GRP-BOOK-제본 택일그룹**(SEL_TYPE.01 단일, 헤더+멤버 FK). 디지털/스티커 미사용. 제본은 택1 | B | db-structure §219·entity-semantic §26 |
+| **t_prd_product_materials**(usage 분리) | **3 usage 슬롯**: USAGE.01 내지(C13)·USAGE.02 표지(C24)·USAGE.03 면지(C33). 디지털/스티커는 본체(.01)만. B 셋트라도 자재 권위=parent+usage_cd | B | models.py:283 `usage_cd`·USAGE |
+| **t_prd_products**(반제품) | B 셋트 표지=`prd_typ_cd`=**PRD_TYPE.02 반제품** sub_prd 빈 껍데기 선생성 후 sets 연결. 하드커버/레더만 | A | PRD_TYPE.02·entity-semantic §119 |
+| **t_prd_product_bundle_qtys**(권) | 떡제본 `bdl_qty`=50/100장1권, `bdl_unit_typ_cd`=QTY_UNIT.03 권(C36). 스티커는 조각 단위였음 | B | models.py:234·QTY_UNIT.03 |
+| **t_prd_product_print_options**(내지/표지 별도) | 내지 print_side(C14)·표지 print_side(C25) 별 행. 양면(내지)+단면(하드 표지) | B | models.py:366 |
+| **t_proc_processes**(표지 공정) | 코팅(C26)·투명커버 부착(C27)·박/형압(C28)·포장 수축(C42) — usage=표지로 연결 | A→B | models.py:473 |
+
+## B2. 책자 미사용/희소 t_*
+
+| t_* | 사유 |
+|-----|------|
+| `t_proc_processes`(별색인쇄 PROC_000007) | 책자=별색 없음(C 별색 컬럼 부재). db-structure §308 "별색인쇄 적재 0" 정합 |
+| `t_proc_processes`(커팅 PROC_53/54/55) | 책자=반칼/완칼 없음(제본물). 스티커 전용 |
+| `t_prd_product_addons` | 책자 추가상품 없음 |
+| `t_prc_price_formulas`(C 가격공식) | 책자 시트 가격 컬럼 부재 → 가격표/round-2 별도 |
+
+## B3. 적재 surface별 코드값 도메인 (책자 활성 enum)
+
+| 필드 | 코드그룹 | 책자 허용값(엑셀 도출) |
+|------|----------|------------------------|
+| `usage_cd` | USAGE | .01 내지·.02 표지·.03 면지·.05 투명커버 |
+| `prd_typ_cd` | PRD_TYPE | .01 완제품(A 통합)·.02 반제품(B 셋트 표지 sub_prd)·.04 디자인 |
+| `mat_typ_cd` | MAT_TYPE | 종이(내지/표지)·.06 가죽(레더)·부속(D링/트윈링) |
+| `bdl_unit_typ_cd` | QTY_UNIT | .03 권(떡제본 50/100장1권) |
+| `sel_typ_cd` | SEL_TYPE | .01 단일(GRP-BOOK-제본 택1) |
+| `semi_role_cd` | SEMI_ROLE | .02 표지·.03 면지(B 셋트 sub_prd 역할) |
+
+## B4. 책자 적재 discrepancy (코드 vs 엑셀 현실)
+
+| 항목 | 코드(models.py) | 엑셀 현실(260610) | 처리 |
+|------|-----------------|-------------------|------|
+| 레더 링바인더 제본 | PROC_000017 제본 family 자리 있음 | C31 제본 빈값(바인더링만) | CONFIRM-BK-2(바인더가 제본인가) |
+| 링/D링 귀속 | 자재(부속) + prcs_dtl_opt(책등) 둘 다 자리 | C34/C35 링컬러·D링 mm | CONFIRM-BK-3(자재 vs param) |
+| B 셋트 sub_prd 분해 | sets/sub_prd 자리 있음 | A 통합은 표지도 parent 적재 | CONFIRM-BK-5(분해 범위) |
+
+> **불일치 처리 원칙(스킬 HARD):** 코드와 라이브 스키마가 어긋나 보이면 추측으로 메우지 않고 discrepancy로 기록 → validator/schema-analyst가 라이브 실측으로 해소. 본 delta는 코드 권위 + 엑셀 현실 대조까지만.
