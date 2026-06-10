@@ -1,6 +1,6 @@
 ---
 name: huni-dbmap-orchestrator
-description: 후니프린팅 DB 데이터 매핑 하네스 오케스트레이터. Railway railway DB(PostgreSQL 18.4, **44테이블 — t_* 도메인 34 + Django 10, CPQ 컨피규레이터 옵션/템플릿/제약 레이어 라이브 구현 포함**) 구조를 읽기전용으로 시트화하고, 상품마스터·인쇄상품 가격표 엑셀 데이터를 DB 테이블에 매핑(매핑 설계서 + 적재용 CSV)하되 DB 직접 적재는 보류한다. 7인 에이전트 팀(dbm-schema-analyst / dbm-excel-analyst / dbm-mapping-designer / dbm-validator / dbm-load-builder / dbm-ddl-proposer / dbm-option-mapper)으로 구조분석·엑셀분석 병렬 → 매핑 설계 → 경계면 교차검증 파이프라인을 수행한다. round-1(완료): 수량구간별 할인(t_dsc_*, 아크릴/굿즈·파우치/문구) — dbm-mapping 스킬. round-2(진행): 가격 공식 엔진(t_prc_* 4단 구조) — dbm-price-formula 스킬, fit-gap 선행 후 점진 파일럿(디지털인쇄/엽서). round-4(적재 준비): 상품마스터·가격표의 검증된 매핑을 t_* 적재본(FK 위상정렬·코드행 선적재 제안·적재 매니페스트)으로 조립하고 G1~G9 완료 게이트 + 트랜잭션 롤백 DRY-RUN으로 적재 가능성을 증명 — dbm-load-readiness 스킬, t_* 화이트리스트 강제, 실제 INSERT는 인간 승인(권위 docs/goal-2026-06-06-01.md). round-5(적재 실행본): round-4 GO 적재본을 멱등 INSERT … ON CONFLICT UPSERT + 단일 트랜잭션 + FK순 적재 SQL/로더로 실행본화하고, GAP/차단을 라이브 t_* 정합 신규 엔티티 DDL 제안서로 닫으며, 롤백전용 라이브 DRY-RUN으로 멱등성·적재가능성을 R1~R6 게이트로 증명 — dbm-load-execution 스킬, DDL 직접적용·COMMIT 금지(인간 승인), 권위 docs/goal-2026-06-06-02.md. round-6(CPQ 옵션 레이어 매핑): 상품마스터·가격표의 옵션성 속성을 라이브 CPQ 옵션 레이어(t_prd_product_option_groups/options/option_items·templates·constraints)에 매핑 — 이미 적재된 차원행을 polymorphic ref_dim_cd(OPT_REF_DIM 7종)로 참조해 option layer 재구성, 속성→엔티티(차원/CPQ옵션/가격/제약) 마스터 지도 + 상품군 파일럿, WowPress 흡수원칙+RedPrinting 캐스케이드 6종+JSONLogic constraints, 검증 트리거 fn_chk_opt_item_ref 무결성 준수 — dbm-cpq-option-mapping 스킬·dbm-option-mapper 설계가, DB 미적재(인간 승인). 'DB 매핑', 'DB 구조 파악', '테이블 시트화', '엑셀 데이터 매핑', '구간할인 매핑', '수량구간 할인', '가격표 매핑', '상품마스터 매핑', 'Railway DB', '적재 CSV 생성', '매핑 검증', 'DB매핑 하네스 실행', '하네스 재실행', '매핑 업데이트', '특정 테이블만 매핑', '추가 매핑', '가격 매핑', '가격공식 매핑', 'round-2', 't_prc 매핑', '단가표 매핑', '계산공식 매핑', '가격 스키마 적정성', '가격엔진 fit-gap', '가격 fit-gap만', '가격 매핑 다시', 'DB 매핑 검증', '상품 매핑 정합', '적재 검증', '9속성 검증', '엑셀 DB 대조', '매핑 감사', '정합 재검증', '기초데이터 검증', '상품마스터 검증', '사이즈/자재/공정/판형/묶음수/페이지룰/추가상품 검증', '특정 속성만 검증', '검증 다시', 'CPQ 검증', '컨피규레이터 스키마', 'CPQ 정합', '라이브 스키마 재확인', '옵션/템플릿/제약 스키마', '스키마 재문서화', '하네스 강화', '적재 준비', 'round-4', '적재본 빌드', '적재 조립', 'FK 위상정렬', '적재 순서 확정', '코드행 선적재', '적재 매니페스트', 'DRY-RUN', '적재 가능성 검증', 'G1 G9 게이트', '완료 게이트', 't_* 화이트리스트', '적재 게이트 다시', '상품마스터 적재 조립', '가격표 적재 조립', '적재 스크립트', '적재 스크립트 작성', '적재 SQL', 'SQL 쿼리 작성', '멱등 적재', 'UPSERT', 'ON CONFLICT', '트랜잭션 래핑', '적재 로더', '신규 엔티티 제안', 'DDL 제안', '스키마 부족분 제안', 'GAP 엔티티', '라이브 DRY-RUN', 'round-5', '적재 실행본', '적재 실행 게이트', 'R1 R6 게이트', '멱등성 검증', '적재 스크립트 다시', 'DDL 제안 다시', 'CPQ 옵션 매핑', '옵션 레이어 매핑', '속성 엔티티 매핑 지도', 'option_groups 설계', 'polymorphic ref_dim_cd 매핑', '옵션 캐스케이드 매핑', '상품군 옵션 파일럿', 'CPQ 옵션 검증', 'round-6', 'CPQ 옵션 매핑 다시', '입체 커버리지', '커버리지 매트릭스', '전 상품군 조망', '전체 시트 매핑 검증', '상품마스터 전수 검증', '미적재 조망', '필요요소 도출', '엔티티 관계 무결성', '3원 대조', 'round-7', '커버리지 검증 다시' 요청 시 반드시 사용. 단순 질문은 직접 응답.
+description: 후니프린팅 DB 데이터 매핑 하네스 오케스트레이터. Railway railway DB(PostgreSQL 18.4, **44테이블 — t_* 도메인 34 + Django 10, CPQ 컨피규레이터 옵션/템플릿/제약 레이어 라이브 구현 포함**) 구조를 읽기전용으로 시트화하고, 상품마스터·인쇄상품 가격표 엑셀 데이터를 DB 테이블에 매핑(매핑 설계서 + 적재용 CSV)하되 DB 직접 적재는 보류한다. 7인 에이전트 팀(dbm-schema-analyst / dbm-excel-analyst / dbm-mapping-designer / dbm-validator / dbm-load-builder / dbm-ddl-proposer / dbm-option-mapper)으로 구조분석·엑셀분석 병렬 → 매핑 설계 → 경계면 교차검증 파이프라인을 수행한다. round-1(완료): 수량구간별 할인(t_dsc_*, 아크릴/굿즈·파우치/문구) — dbm-mapping 스킬. round-2(진행): 가격 공식 엔진(t_prc_* 4단 구조) — dbm-price-formula 스킬, fit-gap 선행 후 점진 파일럿(디지털인쇄/엽서). round-4(적재 준비): 상품마스터·가격표의 검증된 매핑을 t_* 적재본(FK 위상정렬·코드행 선적재 제안·적재 매니페스트)으로 조립하고 G1~G9 완료 게이트 + 트랜잭션 롤백 DRY-RUN으로 적재 가능성을 증명 — dbm-load-readiness 스킬, t_* 화이트리스트 강제, 실제 INSERT는 인간 승인(권위 docs/goal-2026-06-06-01.md). round-5(적재 실행본): round-4 GO 적재본을 멱등 INSERT … ON CONFLICT UPSERT + 단일 트랜잭션 + FK순 적재 SQL/로더로 실행본화하고, GAP/차단을 라이브 t_* 정합 신규 엔티티 DDL 제안서로 닫으며, 롤백전용 라이브 DRY-RUN으로 멱등성·적재가능성을 R1~R6 게이트로 증명 — dbm-load-execution 스킬, DDL 직접적용·COMMIT 금지(인간 승인), 권위 docs/goal-2026-06-06-02.md. round-6(CPQ 옵션 레이어 매핑): 상품마스터·가격표의 옵션성 속성을 라이브 CPQ 옵션 레이어(t_prd_product_option_groups/options/option_items·templates·constraints)에 매핑 — 이미 적재된 차원행을 polymorphic ref_dim_cd(OPT_REF_DIM 7종)로 참조해 option layer 재구성, 속성→엔티티(차원/CPQ옵션/가격/제약) 마스터 지도 + 상품군 파일럿, WowPress 흡수원칙+RedPrinting 캐스케이드 6종+JSONLogic constraints, 검증 트리거 fn_chk_opt_item_ref 무결성 준수 — dbm-cpq-option-mapping 스킬·dbm-option-mapper 설계가, DB 미적재(인간 승인). 'DB 매핑', 'DB 구조 파악', '테이블 시트화', '엑셀 데이터 매핑', '구간할인 매핑', '수량구간 할인', '가격표 매핑', '상품마스터 매핑', 'Railway DB', '적재 CSV 생성', '매핑 검증', 'DB매핑 하네스 실행', '하네스 재실행', '매핑 업데이트', '특정 테이블만 매핑', '추가 매핑', '가격 매핑', '가격공식 매핑', 'round-2', 't_prc 매핑', '단가표 매핑', '계산공식 매핑', '가격 스키마 적정성', '가격엔진 fit-gap', '가격 fit-gap만', '가격 매핑 다시', 'DB 매핑 검증', '상품 매핑 정합', '적재 검증', '9속성 검증', '엑셀 DB 대조', '매핑 감사', '정합 재검증', '기초데이터 검증', '상품마스터 검증', '사이즈/자재/공정/판형/묶음수/페이지룰/추가상품 검증', '특정 속성만 검증', '검증 다시', 'CPQ 검증', '컨피규레이터 스키마', 'CPQ 정합', '라이브 스키마 재확인', '옵션/템플릿/제약 스키마', '스키마 재문서화', '하네스 강화', '적재 준비', 'round-4', '적재본 빌드', '적재 조립', 'FK 위상정렬', '적재 순서 확정', '코드행 선적재', '적재 매니페스트', 'DRY-RUN', '적재 가능성 검증', 'G1 G9 게이트', '완료 게이트', 't_* 화이트리스트', '적재 게이트 다시', '상품마스터 적재 조립', '가격표 적재 조립', '적재 스크립트', '적재 스크립트 작성', '적재 SQL', 'SQL 쿼리 작성', '멱등 적재', 'UPSERT', 'ON CONFLICT', '트랜잭션 래핑', '적재 로더', '신규 엔티티 제안', 'DDL 제안', '스키마 부족분 제안', 'GAP 엔티티', '라이브 DRY-RUN', 'round-5', '적재 실행본', '적재 실행 게이트', 'R1 R6 게이트', '멱등성 검증', '적재 스크립트 다시', 'DDL 제안 다시', 'CPQ 옵션 매핑', '옵션 레이어 매핑', '속성 엔티티 매핑 지도', 'option_groups 설계', 'polymorphic ref_dim_cd 매핑', '옵션 캐스케이드 매핑', '상품군 옵션 파일럿', 'CPQ 옵션 검증', 'round-6', 'CPQ 옵션 매핑 다시', '입체 커버리지', '커버리지 매트릭스', '전 상품군 조망', '전체 시트 매핑 검증', '상품마스터 전수 검증', '미적재 조망', '필요요소 도출', '엔티티 관계 무결성', '3원 대조', 'round-7', '커버리지 검증 다시', '변경 추적', '버전 diff', '버전 비교', '변경분 적용', '신규 버전 적용', '상품마스터 업데이트', '가격표 업데이트', '변경 매니페스트', '델타 적재', '델타 적용', '엑셀 변경 추적', 'round-10', '변경 추적 다시' 요청 시 반드시 사용. 단순 질문은 직접 응답.
 ---
 
 # huni-dbmap Orchestrator
@@ -25,7 +25,9 @@ Coordinates a 4-agent team to (1) sheet the live Railway DB structure and (2) ma
 | round-4 | load-readiness (적재본 조립 + G1~G9 게이트 + DRY-RUN) | 상품마스터 `t_prd_*` + 가격 `t_prc_*` (whitelist) | `dbm-load-readiness` | DONE (양 트랙 GO) |
 | round-5 | load-execution (멱등 SQL/로더 + 신규 엔티티 DDL 제안 + 라이브 DRY-RUN, R1~R6) | round-4 GO 적재본 `t_prd_*` + `t_prc_*` + `11_ddl_proposals` | `dbm-load-execution` | READY |
 | round-6 | **CPQ 옵션 레이어(L2) 매핑** (속성→엔티티 마스터 지도 + 상품군 파일럿) | `t_prd_product_option_groups/options/option_items` · `templates/template_selections` · `constraints` | `dbm-cpq-option-mapping` | ACTIVE |
-| round-7 | **입체 커버리지 검증** (상품마스터 전 상품군 × 라이브 t_* 엔티티 매트릭스 조망) | 전 `t_prd_*`/`t_prc_*`/CPQ 엔티티 (조망·검증 전용, 적재 아님) | `dbm-coverage-matrix` | ACTIVE (골격 구축 완료, 실행 미시작) |
+| round-7 | **입체 커버리지 검증** (상품마스터 전 상품군 × 라이브 t_* 엔티티 매트릭스 조망) | 전 `t_prd_*`/`t_prc_*`/CPQ 엔티티 (조망·검증 전용, 적재 아님) | `dbm-coverage-matrix` | DONE (GO) |
+| round-8/9 | admin UI 입력 명세 / CPQ 옵션 레이어 실 적재 (이력은 CLAUDE.md §7) | `13_admin-ui-spec` / silsa CPQ 43행 | — / `dbm-cpq-option-mapping` | DONE |
+| round-10 | **버전 변경 추적 + 델타 적용** (상품마스터·가격표 신규 버전의 변경분만 추적·적용) | 변경 영향 `t_prd_*`/`t_prc_*`/CPQ (델타 UPSERT) | `dbm-change-tracking` | ACTIVE |
 
 - **round-1**: quantity-bracket discounts for 아크릴 / 굿즈·파우치 / 문구. Flat bracket rows. Complete.
 - **round-2**: the price is a *formula engine* (`판매가 = Σ components`, each component priced by a multi-dimensional lookup) — not a flat table. Excel authority: 상품마스터 `계산공식집초안` (formula intent, typed by 공식 유형) + 가격표 19 단가시트 (component matrices). **fit-gap FIRST** (is `t_prc_*` adequate? — round-1 did not extract the `t_prc_*` DDL), then **incremental pilot** (디지털인쇄/엽서, 원자합산형) before widening to all 공식 유형. See `dbm-price-formula`.
@@ -34,6 +36,7 @@ Coordinates a 4-agent team to (1) sheet the live Railway DB structure and (2) ma
 - **round-5 (load-execution)**: take the *round-4 GO bundle* and make it **executable + re-runnable** — distinct from *loadable*. `dbm-load-builder` turns the bundle into idempotent `INSERT … ON CONFLICT` SQL wrapped in one transaction + a loader (`09_load/_exec*/`); `dbm-ddl-proposer` closes round-4's GAP/BLOCKED items with **minimal `t_*`-consistent new-entity DDL proposals** (`11_ddl_proposals/`, search-before-mint); `dbm-validator` runs the **R1–R6 gate** (멱등성·트랜잭션 원자성·실행가능성·DDL 제안 정합·라이브 DRY-RUN·독립성) on top of carried-forward G1–G9, and emits GO/NO-GO. **No `COMMIT`, no DDL apply; both are human approval.** Authority: `docs/goal-2026-06-06-02.md` (inherits goal-...-01). See `dbm-load-execution`.
 - **round-6 (CPQ option-layer mapping)**: map the 옵션성 attributes of 상품마스터/가격표 onto the live CPQ option layer — distinct in kind from L1 (rounds 1–5). **L2 does not load new data; it references already-loaded dimension rows.** `t_prd_product_option_groups`(sel_typ 택1/택N) → `options` → `option_items`(polymorphic `ref_dim_cd` → dimension row, enforced by live trigger `fn_chk_opt_item_ref`) + `constraints`(JSONLogic) + `templates`(=SKU add-on). The unit is: (A) an **attribute→entity master map** (every 옵션성 attribute across 13 sheets → dimension/CPQ-option/price/constraint) + (B) a **per-상품군 pilot** (full option-layer chain, load-ready). Method fuses **WowPress 흡수원칙**(형상→규격·본체색→재질 합성, 과분할 금지) + **RedPrinting 캐스케이드 6종**(material→pcs disable·dosu↔bnc·essential/hidden → JSONLogic). The live GAPs (`ref_param_json` 공정 파라미터, hidden-essential, 포장옵션, 비치수 size) route to `dbm-ddl-proposer` — flagged, never fabricated. `dbm-option-mapper` designs, `dbm-validator` cross-checks (trigger-reference resolution = the load-bearing L2 check). **No DB writes; real INSERT + code-row + DDL = human approval.** See `dbm-cpq-option-mapping`.
 - **round-7 (입체 커버리지 검증)**: rounds 1–6 went **시트별 종단(깊이)** — round-7 goes **전 상품군 횡단(너비)**. Build the **one matrix**: 상품마스터 11 상품군(rows) × 라이브 t_* 엔티티(columns), each cell = need(엑셀 권위)/state(라이브 실측 LOADED·PARTIAL·MISSING·N/A)/agreement(대표상품 엑셀↔DB↔admin 3원 대조). Surfaces what is missing *across all families at once* (a single-sheet deep-dive structurally cannot). `dbm-coverage-auditor` builds the matrix + gap-board + relationship-integrity; `evaluator-active` (fresh context) gates C1~C8 — that separation IS C7. admin product-viewer (gstack browse) = 대표상품+의심분 집중 (전수 아님). **검증/조망 전용 — DB 적재(COMMIT) 없음, 미적재 실적재는 인간 승인.** Authority: `docs/goal-2026-06-08-01.md`. See `dbm-coverage-matrix`.
+- **round-10 (버전 변경 추적 + 델타 적용)**: rounds 1–7 mapped/loaded a **single snapshot** of the Excel — round-10 tracks the **difference between two versions** (baseline → new, e.g. 상품마스터 260527→260610) and applies only the delta. The load-bearing insight is **3-way**: the delta to apply is NOT (new − baseline) — the **live DB is the state authority**, baseline = operator *intent*, live = *reality* (may differ from a naive baseline mapping). `dbm-change-tracker` does key-based(`prd_cd`/`prd_nm`) cell-level 3-way diff → ADDED/REMOVED/MODIFIED/UNCHANGED, impact-maps each changed cell to t_* entity/column (reusing 9속성·가격·CPQ lenses), reconciles new↔live, and emits ① a row-level **change manifest** (사람이 읽는 추적 감사본) + ② an **idempotent delta UPSERT** (`ON CONFLICT … DO UPDATE …, upd_dt`, reusing `dbm-load-execution` SQL patterns); `dbm-validator` gates V1~V8 + rollback-only DRY-RUN. **REMOVED = 논리삭제 제안·escalate (절대 hard-delete 금지)**; 신규 코드값 = 선적재 제안. **No COMMIT, no DDL apply, no DELETE — all human approval.** See `dbm-change-tracking`.
 
 ## Team & roles
 
@@ -47,6 +50,7 @@ Coordinates a 4-agent team to (1) sheet the live Railway DB structure and (2) ma
 | `dbm-ddl-proposer` | **round-5/6**: close GAP/BLOCKED with minimal `t_*`-consistent new-entity DDL proposals (`11_ddl_proposals/`, search-before-mint); round-6 GAPs = `ref_param_json`·hidden-essential·포장옵션·비치수 size | **dbm-load-execution** / **dbm-cpq-option-mapping** |
 | `dbm-option-mapper` | **round-6 only**: design the CPQ option layer — attribute→entity master map + per-상품군 option-layer pilot (option_groups/options/option_items·templates·constraints), polymorphic `ref_dim_cd` referencing already-loaded dimension rows | **dbm-cpq-option-mapping** |
 | `dbm-coverage-auditor` | **round-7 only**: build the 입체 coverage matrix (상품군 × t_* 엔티티), 필요요소 도출(엑셀 권위) + 라이브 실측(읽기전용 psql) + admin 3원 대조 + 관계 무결성 + 갭 보드. 조망/검증 전용 (적재 아님) | **dbm-coverage-matrix** |
+| `dbm-change-tracker` | **round-10 only**: 두 엑셀 버전 키 기반 3-way diff(ADDED/REMOVED/MODIFIED) + 셀→t_* 영향 매핑 + new↔live 정합 + 변경 매니페스트(추적 감사본) + 멱등 델타 UPSERT(upd_dt). REMOVED=논리삭제 제안(비파괴) | **dbm-change-tracking** |
 
 All agents spawn with `model: "opus"`. Round is resolved in Phase 0; the designer/validator load the round-matching skill (round-2 → `dbm-price-formula`, round-4 → `dbm-load-readiness`, round-5 → `dbm-load-execution`, round-6 → `dbm-cpq-option-mapping`). `dbm-load-builder` runs in round-4 and round-5; `dbm-ddl-proposer` is spawned in round-5 and round-6; `dbm-option-mapper` is spawned only in round-6.
 
@@ -161,7 +165,25 @@ Round-2 reuses the same team but inserts a **fit-gap gate before mapping** (the 
 
 **Phase 5 — 보고 + 결정** (lead): 마스터 지도 + 파일럿 결과 + design decisions(attribute 타깃·sel_typ·잉크색 축·우선 상품군) + GAP을 사용자에 에스컬레이션. 다음 상품군 확대 여부 결정. 실제 적재·코드행·DDL은 인간 승인.
 
-- File-based via `_workspace/huni-dbmap/` (00_schema / 01_excel / 02_mapping / 03_validation / _meta).
+## Pipeline (round-10 change-tracking — 버전 diff → 변경 매니페스트 + 멱등 델타 적용)
+
+**[프레임] 앞선 라운드는 *단일 스냅샷*을 매핑·적재했다. round-10은 *두 버전의 차이*를 추적·적용한다 — 적용할 델타 ≠ (new − baseline). 라이브 DB가 상태 권위(baseline=의도·live=현실).** 생성(change-tracker)과 게이트(validator)는 별도 에이전트 = V8. 둘 다 `dbm-change-tracking` 스킬 로드. 산출 루트 = `14_change-tracking/<baseline>-to-<new>/`.
+
+**Phase 0 — 입력 확인**: 두 버전 xlsx 존재(baseline=현 라이브 적재 소스, new=목표). 직전 버전쌍 산출물이 있으면 보존(감사 체인). 버전쌍 미존재 → 신규 추적.
+
+**Phase 1 — Setup**: `.env.local` RAILWAY_DB_* 읽기전용 확인. 대상 시트 = 변경 발생 시트(전 시트 diff 후 변경분만). 키 컬럼 시트별 확정(`prd_cd`/`prd_nm`).
+
+**Phase 2 — 버전쌍 정규화 추출 + 키 기반 3-way diff** (change-tracker, excel-analyst 보조): 양 버전을 동일 추출기(`dbm-excel-parse`)로 L1 정규화 → `diff_versions.py`로 시트별 `{key→row}` 3-way diff → ADDED/REMOVED/MODIFIED(셀별 전→후)/UNCHANGED + 키 무결성·rename 의심쌍 플래그. → `_extract/{baseline,new}/`·`diff/<sheet>-changes.csv`·`_diff-summary.md`.
+
+**Phase 3 — 셀→t_* 영향 매핑 + 라이브 정합** (change-tracker, schema-analyst 보조): 각 변경 셀 → 영향 t_* 엔티티/컬럼(9속성·가격·CPQ 렌즈) + 영향 라이브 행(prd_cd) 현재값 읽기전용 실측 → new 목표와 대조해 apply_class(INSERT/UPDATE/NO_OP/LOGICAL_DELETE_PROPOSAL/ESCALATE/GAP). → `impact/<entity>-impact.csv`.
+
+**Phase 4 — 변경 매니페스트 + 델타 적용본** (change-tracker): V7 매니페스트(행 단위 감사본 CSV+MD) + 멱등 델타 UPSERT(`dbm-load-execution` 패턴: `_delta/<NN>_<table>.sql`·`apply.sql`·롤백 로더, FK 위상정렬, `upd_dt`) + 코드행 선적재 제안 + REMOVED 논리삭제 제안/GAP 분리. → `14_change-tracking/<pair>/`. NEVER COMMIT/DELETE.
+
+**Phase 5 — V1~V8 게이트** (validator, 적대적): V1 키매칭·V2 분류완전성(셀 누락0)·V3 REMOVED 비파괴·V4 영향매핑·V5 멱등성(DRY-RUN 2회 delta 0)·V6 upd_dt·V7 추적성(매니페스트↔diff 1:1)·V8 라이브 수렴(독립). 전부 PASS = GO. → `03_validation/change-tracking-gate.md`.
+
+**Phase 6 — 보고 + 승인 게이트** (lead): 변경 매니페스트 요약(시트별 4분류) + 델타 적용본 + 인간 승인 큐(① REMOVED 논리삭제 처리 ② rename 의심쌍 판정 ③ 신규 코드행 등록 ④ 실제 델타 COMMIT)를 사용자에 에스컬레이션. 실 적재는 본 트랙 종착점 너머.
+
+- File-based via `_workspace/huni-dbmap/` (00_schema / 01_excel / 02_mapping / 03_validation / 14_change-tracking / _meta).
 - Task-based via TaskCreate/TaskUpdate for dependency + progress.
 - Message-based via SendMessage for live coordination and findings handoff.
 
@@ -213,6 +235,13 @@ round-6 (CPQ option-layer mapping):
 - GAP 처리 방향: ref_param_json(공정 파라미터)·hidden-essential·포장옵션·비치수 size를 ddl-proposer 제안으로 닫을지/보류할지.
 - 실제 옵션 레이어 INSERT·코드행 등록 승인: GO 파일럿 제시 후 실제 적재 진행 여부(본 하네스 종착점 너머).
 
+round-10 (change-tracking):
+- REMOVED 처리: 엑셀에서 사라진 행(예: 아크릴 −24행)을 논리삭제(use_yn=N)할지·진짜 단종인지·재명명(rename)인지 — 인간 판정.
+- rename 의심쌍 확정: ADDED+REMOVED 고유사도 쌍이 재명명인지 별개 변경인지.
+- 신규 코드행 등록 승인: 신규 상품/속성이 요구하는 미존재 코드값(`t_cod_base_codes`) 등록.
+- 실제 델타 COMMIT 승인: V1~V8 PASS 델타 적용본 제시 후 라이브에 실제 적용할지(본 하네스 종착점 너머).
+- 변경이력 DB 정착 여부: upd_dt 외 전용 변경이력 테이블이 필요한지(필요 시 ddl-proposer 제안).
+
 ## Test scenarios
 
 - **Normal flow (round-1)**: "DB 구조 파악하고 구간할인 매핑해줘" → Phase 0 initial → 2 parallel analysts → designer → validator GO → report with decision gate.
@@ -235,6 +264,11 @@ round-6 (CPQ option-layer mapping):
 - **Round-6 map-only**: "속성 엔티티 매핑 지도만" → option-mapper가 `attribute-entity-map.md`만(13시트 속성→엔티티 verdict), 파일럿 생략.
 - **Round-6 pilot family**: "굿즈 옵션 레이어만" / "배너 CPQ 파일럿" → option-mapper가 해당 상품군 option-layer + load CSV, validator 해당 상품군만 검증.
 - **Round-6 trigger-ref error**: option_item이 도수를 `clr_cd`로 참조(올바른 키=opt_id) 또는 라이브 미적재 차원행 참조 → validator가 trigger-reference resolution에서 FAIL/BLOCKED, option-mapper로 라우팅; 차원행 부재면 L1 선적재 BLOCKED로 분리.
+- **Round-10 flow (change-tracking)**: "변경 추적" / "신규 버전 적용" / "상품마스터 260610 변경분 적용" → Phase 0 두 버전 확인 → Phase 2 양 버전 L1 추출 + 키 기반 3-way diff → Phase 3 셀→t_* 영향 매핑 + 라이브 정합 → Phase 4 change-tracker가 변경 매니페스트 + 멱등 델타 UPSERT → Phase 5 validator V1~V8 + DRY-RUN → `change-tracking-gate.md` GO/NO-GO → lead가 REMOVED·rename·코드행·COMMIT 승인을 사용자에 에스컬레이션.
+- **Round-10 diff-only**: "버전 비교만" / "무엇이 바뀌었는지만" → change-tracker가 `diff/` + `change-manifest.*`만(추적 감사본), 델타 SQL 생략.
+- **Round-10 REMOVED escalation**: 아크릴 −24행 → change-tracker가 키 매칭으로 REMOVED 분류 + rename 의심쌍 검사 → 논리삭제 제안(hard-delete 금지)으로 분리, lead가 사용자 판정 요청.
+- **Round-10 key-undecidable**: 시트 키 후보가 행을 유일 식별 못함(중복/공백) → change-tracker가 그 시트를 diff BLOCKED 표기(불신뢰 diff 미산출), 후보 키 보고.
+- **Round-10 gate-only**: "변경 게이트 다시" / "V1 V8 다시" → validator가 기존 `_delta/` + `change-manifest.*`에 V1~V8 재실행, 재diff 없음.
 - **Error flow**: DB unreachable → Phase 1 blocker report, ask user to verify host/port; no agents spawned.
 
 ## CLAUDE.md pointer
