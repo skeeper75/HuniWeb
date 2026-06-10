@@ -31,6 +31,7 @@ Coordinates a 4-agent team to (1) sheet the live Railway DB structure and (2) ma
 | round-11 | **컬럼 도메인 의미 + 상품 BOM + 적재명세** (상품마스터 각 시트 컬럼의 인쇄 도메인 의미 확정 + 상품별 자재/공정 + raw/webadmin 적재명세 → 매핑 정보) | 상품마스터 전 시트 → 전 `t_*` (의미·BOM·적재명세 정리, 적재 아님) | `dbm-column-domain` · `dbm-loadspec-extract` | ACTIVE |
 | round-12 | **매핑 확정 리서치** (4개 내부 권위{round-11 산출·실무진 확정 Q1~Q15·schema-design-intent-map·loadspec} 결합 + 국내10·해외10 경쟁사/CIP4/ISO 표준 갭헌팅 + 라이브 실측 → 시트별 컬럼→기초데이터 확정 매핑) | 상품마스터 11시트 → `16_mapping-research/<family>/mapping-final.md` (M1~M6 게이트, 적재 아님) | `dbm-mapping-research` | ACTIVE |
 | round-13 | **라이브 정합 교정** (라이브=교정대상 역전 — webadmin 적재 oracle{`sql/`·`tools/load_master.py`·`docs/`ERD}+스키마의도+엑셀+도메인을 정답으로, 상품별 추출규칙 도출 + 라이브 전수 diff → 교정 매니페스트) | 상품마스터 11시트 → `17_correctness/<family>/`{loadlogic-notes·extraction-plan·live-diff·correction-manifest} (K1~K6 게이트, 적재 아님) | `dbm-correctness-audit` | ACTIVE |
+| round-14 | **webadmin 스키마 변경 추적** (라이브 DB 소스 오브 트루스 webadmin이 진화할 때 — 베이스라인↔HEAD git diff로 스키마 구조 변경이력 + 3-way 정합{git 선언/라이브 적용/우리 산출 참조} + DDL·백필 레벨 분리 → 우리 산출 stale 영향/갱신) | webadmin `sql/`·`tools/` → `18_schema-change/<pair>/`{schema-change-log·live-apply-crosscheck·impact-matrix·update-manifest} (W1~W6 게이트, 수정 아님) | `dbm-schema-change-tracking` | ACTIVE |
 
 - **round-1**: quantity-bracket discounts for 아크릴 / 굿즈·파우치 / 문구. Flat bracket rows. Complete.
 - **round-2**: the price is a *formula engine* (`판매가 = Σ components`, each component priced by a multi-dimensional lookup) — not a flat table. Excel authority: 상품마스터 `계산공식집초안` (formula intent, typed by 공식 유형) + 가격표 19 단가시트 (component matrices). **fit-gap FIRST** (is `t_prc_*` adequate? — round-1 did not extract the `t_prc_*` DDL), then **incremental pilot** (디지털인쇄/엽서, 원자합산형) before widening to all 공식 유형. See `dbm-price-formula`.
@@ -45,6 +46,8 @@ Coordinates a 4-agent team to (1) sheet the live Railway DB structure and (2) ma
 
 - **round-13 (라이브 정합 교정)**: rounds 1–12 mapped/confirmed against the live DB as authority. round-13 **reverses** that — the live DB is the **defendant**, and the **webadmin load oracle** (the code that actually loaded it) + schema intent + Excel + settled domain are the **judge**. The user's concern: 라이브 DB was loaded by `raw/webadmin` (HuniProductPrice2) without its load logic / schema fully analyzed, so 교정 필요분 many (round-12 already saw 레더 3-way·코팅 family 불일치). The load-bearing check = **reconstruct how `tools/load_master.py` (+`sql/`) transformed each Excel column into `t_*`, then judge that transform against Excel intent + schema intent + domain** — correct→keep, wrong→correct. **[HARD] `catalog/models.py` is `# auto-generated` (inspectdb·`managed=False`) — a DB mirror, NOT load logic; the oracle is `sql/`+`tools/`.** `dbm-correctness-auditor` produces per-product extraction-plan + live-diff + correction-manifest (loadlogic-notes for the reconstructed load rules); `dbm-validator` gates **K1~K6** (추출규칙 커버리지·oracle 인용 실재·적재로직 근거·라이브 실측 독립 재현·비파괴 search-before-mint·오모델 정합). Output = 비파괴 교정 제안 (COMMIT/DDL/DELETE = 인간 승인); GO corrections feed round-5 / round-10 delta tracks. **분석/교정제안 전용 — DB 적재·수정 없음.** Per the round-10/11 lesson, prefer inline Korean execution or `dbm-correctness-auditor` fan-out with main-session QA. See `dbm-correctness-audit`.
 
+- **round-14 (webadmin 스키마 변경 추적)**: rounds 1–13 treated the live DB schema as a fixed target. round-14 tracks what happens when **`raw/webadmin` (the schema+load source-of-truth) itself evolves** — it is a living project (Phase 10/11 redesigned the price engine + CPQ constraints: `constraint_json` dropped, `use_dims`/`template_prices` added). The load-bearing insight is **3-way**: the truth needs (1) **선언 (webadmin git)** — `sql/` DDL + `tools/` load logic diff baseline↔HEAD; (2) **적용 (라이브 information_schema)** — did the declaration reach the live DB, AND **separate DDL-level (column exists) from data-backfill-level (rows filled)** — "컬럼 존재 ≠ 적용 완료" (Phase 11: `proc_cd`/`opt_cd` columns added but 0 rows); (3) **참조 (우리 dbmap 산출)** — which of round-2/6/11/12/13 still references a dropped/changed schema = stale. The three axes diverging IS the finding. **[HARD] baseline = the webadmin commit our artifacts analyzed** (cross-verify by the sql files/columns they cite). `dbm-change-tracker` (round-14 mode) classifies schema changes + impact-maps to our artifacts (CRITICAL/MAJOR/MINOR severity) + emits update-manifest; `dbm-validator` gates **W1~W6**. **추적·영향·갱신 제안 전용 — webadmin/DB/우리 산출 직접 수정 없음.** First run's diagnosis = `18_schema-change/impact-diagnosis.md` (baseline `d6026be` ↔ HEAD `bd12d03`, round-2/6/11/12/13 all MAJOR, 0 CRITICAL — 적재값 무손상·문서만 stale). See `dbm-schema-change-tracking`.
+
 ## Team & roles
 
 | Agent | Role | Skill (round-1 / round-2) |
@@ -57,7 +60,7 @@ Coordinates a 4-agent team to (1) sheet the live Railway DB structure and (2) ma
 | `dbm-ddl-proposer` | **round-5/6**: close GAP/BLOCKED with minimal `t_*`-consistent new-entity DDL proposals (`11_ddl_proposals/`, search-before-mint); round-6 GAPs = `ref_param_json`·hidden-essential·포장옵션·비치수 size | **dbm-load-execution** / **dbm-cpq-option-mapping** |
 | `dbm-option-mapper` | **round-6 only**: design the CPQ option layer — attribute→entity master map + per-상품군 option-layer pilot (option_groups/options/option_items·templates·constraints), polymorphic `ref_dim_cd` referencing already-loaded dimension rows | **dbm-cpq-option-mapping** |
 | `dbm-coverage-auditor` | **round-7 only**: build the 입체 coverage matrix (상품군 × t_* 엔티티), 필요요소 도출(엑셀 권위) + 라이브 실측(읽기전용 psql) + admin 3원 대조 + 관계 무결성 + 갭 보드. 조망/검증 전용 (적재 아님) | **dbm-coverage-matrix** |
-| `dbm-change-tracker` | **round-10 only**: 두 엑셀 버전 키 기반 3-way diff(ADDED/REMOVED/MODIFIED) + 셀→t_* 영향 매핑 + new↔live 정합 + 변경 매니페스트(추적 감사본) + 멱등 델타 UPSERT(upd_dt). REMOVED=논리삭제 제안(비파괴) | **dbm-change-tracking** |
+| `dbm-change-tracker` | **round-10**: 두 엑셀 버전 키 기반 3-way diff(ADDED/REMOVED/MODIFIED) + 셀→t_* 영향 매핑 + new↔live 정합 + 변경 매니페스트 + 멱등 델타 UPSERT. **round-14**(스키마 모드): webadmin `sql/`·`tools/` 베이스라인↔HEAD git diff → 스키마 구조 변경이력 + 3-way 정합(git 선언/라이브 적용/우리 산출 참조) + DDL·백필 레벨 분리 → 우리 산출 stale 영향 매트릭스 + 갱신 매니페스트 | **dbm-change-tracking** / **dbm-schema-change-tracking** |
 | `dbm-domain-researcher` | **round-11 + round-12**: (r11) 상품마스터 각 시트 컬럼의 인쇄 도메인 의미 확정(컬럼 도메인 사전, 애매모호 0) + 각 상품명 리서치 → 자재/공정 BOM. 권위 후니 PDF > 07_domain KB > 국내외 표준(보조). 07_domain 의미축 재사용(재유도 금지). (r12) 4 내부 권위 결합 + 경쟁사/CIP4/표준 갭헌팅 + 라이브 실측 → 시트별 mapping-final | **dbm-column-domain** · **dbm-mapping-research** |
 | `dbm-loadspec-extractor` | **round-11 only**: raw/webadmin Django 소스(models/admin/basecodes/views)에서 각 t_* 적재명세 추출 — 컬럼·폼위젯·코드값그룹·자동채번·적재 surface(admin changeform/상품뷰어), file:line 근거. DB 미접속(소스 읽기 전용) | **dbm-loadspec-extract** |
 | `dbm-correctness-auditor` | **round-13 only**: 라이브=교정대상 역전. webadmin 적재 oracle(`sql/`·`tools/load_master.py`)+스키마의도+엑셀+도메인을 정답으로, 상품별 추출규칙(extraction-plan) 도출 + 적재로직 재구성(loadlogic-notes) + 라이브 전수 diff(live-diff) → 교정 매니페스트(correction-manifest). 비파괴(COMMIT/DDL/DELETE 없음) | **dbm-correctness-audit** |
@@ -259,12 +262,34 @@ round-12 (mapping-research):
 - 🔴 컨펌 잔여: mapping-final의 미확정 행에 대한 실무진 추가 질문 발송 여부.
 - round-4/5 인계 승인: M1~M6 GO 시트를 적재본 조립 트랙으로 넘길지(적재 자체는 별도 인간 승인).
 
+round-14 (schema-change-tracking):
+- 베이스라인 커밋 확정: 우리 산출이 분석한 webadmin 시점(자동 추정 vs 명시 지정).
+- stale 산출 갱신 승인: impact-matrix MAJOR 항목(constraint_json 삭제·가격차원·dep_proc_cd)을 우리 산출에 실제 반영할지(추적은 제안까지).
+- 백필 미완 처리: 신규 컬럼/테이블 0행(proc_cd/opt_cd·template_prices)을 우리 적재 트랙(round-5)에서 채울지.
+- 정기 추적 트리거: webadmin Phase 12~15 진화 시 재추적 주기.
+
 round-13 (correctness-audit):
 - 파일럿 시트 선정: 어느 시트부터 교정 감사할지(권장 디지털인쇄 — round-11/12 검증 최다).
 - MIS-LOADED 교정 방향: 라이브 오적재분(예: 코팅=공정인데 자재로 적재·레더 자재유형 혼재)을 어떻게 고칠지 — 기존행 재연결 vs 정정 vs 신설.
 - 적재 로직 결함 처리: `load_master.py` 등에서 발견된 변환 규칙 결함을 webadmin 팀에 회신할지(원인 교정) vs DB만 교정.
 - AMBIGUOUS 컨펌: oracle 내부 충돌(엑셀 vs ERD 문서) 행의 최종 판정(실무진/사용자).
 - 실 교정 승인: 교정 매니페스트 GO분을 round-5(멱등 UPSERT)/round-10(델타) 트랙으로 넘겨 실제 COMMIT/논리삭제할지(본 하네스 종착점 너머·인간 승인).
+
+## Pipeline (round-14 schema-change-tracking — webadmin 진화 → 스키마 변경이력 + 우리 산출 영향)
+
+**[프레임] rounds 1–13은 라이브 스키마를 고정 타깃으로 봤다. round-14는 `raw/webadmin`(스키마+적재 소스)이 *진화*할 때를 추적한다 — 3-way 정합(git 선언/라이브 적용/우리 산출 참조) + DDL·백필 레벨 분리("컬럼 존재≠적용 완료").** `dbm-change-tracker`(round-14 모드)가 추적, `dbm-validator`가 게이트. 둘 다 `dbm-schema-change-tracking` 스킬 로드. 산출 루트 = `18_schema-change/<baseline>-to-<head>/`.
+
+**Phase 0 — 베이스라인 식별**: 우리 산출이 분석한 webadmin 시점 커밋을 베이스라인으로 특정(인용 sql/컬럼 존재 시점 교차검증). HEAD=현재. 이전 추적 있으면 직전 HEAD가 다음 베이스라인.
+
+**Phase 1 — 스키마 변경 분류** (change-tracker, 선언): 베이스라인↔HEAD `sql/`+`tools/`+`basecodes.py` git diff → 테이블/컬럼/FK/트리거/코드값/적재로직 add/modify/drop, 커밋 해시·file:line 근거 → `schema-change-log.md`.
+
+**Phase 2 — 라이브 적용 대조** (change-tracker, 적용·읽기전용): 각 선언 변경을 라이브 information_schema로 실측, **DDL 적용 + 백필 상태 분리** → `live-apply-crosscheck.md`(선언/DDL적용/백필 3열).
+
+**Phase 3 — 우리 산출 영향 매핑** (change-tracker): 각 변경 → 우리 산출 stale 부분 Grep 전수 추적 + 심각도(CRITICAL/MAJOR/MINOR) → `impact-matrix.md` + 갱신 제안 `update-manifest.md`.
+
+**Phase 4 — W1~W6 게이트** (validator, 적대적): W1 베이스라인 정확·W2 변경 분류 완전(커밋 실재)·W3 라이브 적용 대조(DDL≠백필)·W4 영향 매핑 완전·W5 DDL·백필 분리·W6 갱신 라우팅 정합. → `18_schema-change/_gate/<pair>-gate.md`. **NEVER 수정.**
+
+**Phase 5 — 보고 + 갱신 라우팅** (lead): 영향 매트릭스 + 시급 stale + 갱신 제안을 사용자에 에스컬레이션. 실제 산출 갱신은 별도(라우팅 후).
 
 ## Pipeline (round-13 correctness-audit — 라이브=교정대상 → 교정 매니페스트)
 
@@ -316,6 +341,11 @@ round-13 (correctness-audit):
 - **Round-13 extraction-plan-only**: "추출 계획만" / "어떻게 뽑을지 계획만" → Phase 1~2의 extraction-plan까지, 라이브 diff·교정 매니페스트 생략.
 - **Round-13 mis-load found**: 라이브가 코팅을 자재로 적재(Q9=공정) → correctness-auditor가 MIS-LOADED 분류 + load_master.py 원인 재구성 + 기존 공정행 재연결 제안(search-before-mint), validator K3/K6 확인, 실 교정은 round-5/10 인계(인간 승인).
 - **Round-13 missing-input error**: oracle 4소스 중 부재(해당 시트 round-11/12 미완 등) → Phase 0 BLOCKED 보고, 선행 안내(추측 교정 금지).
+- **Round-14 flow (schema-change-tracking)**: "webadmin 변경 추적" / "스키마 변경이력" / "round-14" / "매핑 stale 점검" → Phase 0 베이스라인 식별 → Phase 1 git diff 스키마 변경 분류 → Phase 2 라이브 적용 대조(DDL/백필 분리) → Phase 3 우리 산출 영향 매트릭스 → validator W1~W6 → lead가 stale 갱신·백필 미완을 사용자에 에스컬레이션.
+- **Round-14 diff-only**: "무엇이 바뀌었는지만" / "스키마 변경이력만" → change-tracker가 `schema-change-log.md`+`live-apply-crosscheck.md`만, 영향 매핑 생략.
+- **Round-14 impact-only**: "우리 산출 어디가 stale인지만" → 기존 schema-change-log 기반 `impact-matrix.md`만(변경 재분류 없이 영향 추적).
+- **Round-14 baseline-undecidable**: 베이스라인 커밋이 우리 산출 인용과 모호 → change-tracker가 후보 보고(불신뢰 diff 미산출).
+- **Round-14 DDL≠backfill**: 신규 컬럼 존재하나 0행 → Phase 2가 "선언만·미적용(백필 갭)"으로 분리 표기(W5), "적용 완료" 오판 금지.
 - **Error flow**: DB unreachable → Phase 1 blocker report, ask user to verify host/port; no agents spawned.
 
 ## CLAUDE.md pointer
