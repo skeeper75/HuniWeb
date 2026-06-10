@@ -312,3 +312,279 @@ prd_cd PK(1:1) · page_min/max/incr. **디지털인쇄 낱장=무관(0행 정상
 | 디자인캘린더 | 같은 prd_cd + PRD_TYPE.04 둘 다 가능 | 같은 MES 007-0001~5·가격포함 | CONFIRM-CL-1(별 상품 vs surface) |
 
 > **불일치 처리 원칙(스킬 HARD):** 코드와 라이브 스키마가 어긋나 보이면 추측으로 메우지 않고 discrepancy로 기록 → validator/schema-analyst가 라이브 실측으로 해소. 본 delta는 코드 권위 + 엑셀 현실 대조까지만.
+
+---
+
+# 실사 적재명세 delta (round-11 확대 #5 · 2026-06-10)
+
+> §1~3 공유 — 재기술 안 함. 실사가 앞 시트 대비 **새로 활성화하는 적재 경로의 delta만**. 실사는 **면적형 사이즈(규격+비규격+자유) + 소재=상품정체 + 실사 후가공(D-24/b.9) + 화이트 별색 + 가격은 포스터사인 매트릭스(분석 제외)**가 핵심 차이.
+>
+> **⚠️ [HARD·사용자] 가격 5컬럼(R/S/V/X/Z) 분석 제외** — 적재명세도 가격 경로는 다루지 않음(round-2 포스터사인 면적매트릭스 트랙).
+
+## SL1. 실사가 추가로 쓰는 t_* 적재 경로
+
+| t_* 엔티티 | 실사 delta | 적재 surface | 근거 |
+|-----------|-----------|:--:|------|
+| **t_mat_materials**(실사소재 다종) | **소재=상품정체.** MAT_TYPE.08 실사소재(인화지·매트지·PET·PVC·투명PET/PVC) + .05 원단(그래픽천·린넨·캔버스·현수막천·타이벡·메쉬) + .06 가죽(레더) | A→B | models.py:126·db-structure §191 |
+| **t_prd_product_processes**(실사 후가공) | 봉제(PROC_000080 유형=오버로크/봉미싱·폭4cm)·타공(PROC_000079 구수=4)·부착(PROC_000081)·족자제작(PROC_000082 모양=사각)·열재단(PROC_000084 round-9 mint)·보드마운팅(화이트보드/포맥스3mm) | A→B | models.py:391·473·D-24·b.9 |
+| **t_prd_product_processes**(화이트 별색) | PROC_000008 화이트 underbase(투명/홀로그램 소재). clr_cd=NULL(별색=공정). G-SL-2 도메인 필수 | B | entity-semantic §3 |
+| **t_prd_product_processes**(코팅) | 무광코팅=PROC 코팅(자재 아님·Q9 확정) | B | Q9 실무진 |
+| **t_prd_product_sizes**(면적형) | 규격(A3/A2/A1)+고정(600x1800·5000x900)+인치(5x5)+**비규격 입력제약(min/max)**+사용자입력. 가격격자≠입력UX | A→B | models.py:427·492 |
+| **t_prd_products**(인쇄방식 2종) | PROC_000006 실사(대부분)·**PROC_000002 UV**(아크릴스티커 폴더=레이저커팅. ※PROC_000007=별색인쇄). file_upload_yn=Y·일부 editor_yn=Y(액자/행잉/족자) | A | models.py:444·process-recipe §1 |
+| **t_prd_product_addons**(거치/족자) | 거치대(배너/스탠딩)·우드봉(족자)·액자프레임 → tmpl_cd. "출력만"=addon 미선택 | B | models.py:218 |
+| **가격(포스터사인 매트릭스)** | **분석 제외**(사용자). t_prc_component_prices(siz_cd 치수조합)+면적공식+ceiling=round-2 별도 | (round-2) | [[dbmap-silsa-price-via-poster-sign]] |
+
+## SL2. 실사 미사용/희소 t_* (낱장 면적형 — 책자/캘린더와 차이)
+
+| t_* | 사유 |
+|-----|------|
+| `t_prd_product_page_rules` | **실사=낱장 단일**(내지 없음·장수 없음). 캘린더 장수와도 다름(실사=면적, 매수 무관) |
+| `t_prd_product_materials`(.02 표지/.03 면지) | 실사=낱장 본체 1슬롯(usage CONFIRM-SL-5). 표지/면지/반제품 없음 |
+| `t_prd_product_bundle_qtys` | 실사=수량(개)만, 묶음수 없음 |
+| `t_prd_product_plate_sizes`(출력판형) | **희소** — 실사=대형 롤출력이라 전지규격 무의미(K 숨김열·안내문만). 캘린더와 차이 |
+| `t_prd_process_excl_groups` | **GRP-SL-가공 부재**(GRP-BOOK/CAL만) — 실사 가공 택일그룹 미적재(G-SL-3·CONFIRM-SL-3) |
+
+## SL3. 적재 surface별 코드값 도메인 (실사 활성 enum)
+
+| 필드 | 코드그룹 | 실사 허용값(엑셀 도출) |
+|------|----------|------------------------|
+| `mat_typ_cd` | MAT_TYPE | .08 실사소재·.05 원단·.06 가죽 |
+| `usage_cd` | USAGE | .01 본체(낱장 — CONFIRM-SL-5) |
+| (인쇄방식) | PROC 트리 | PROC_000006 실사·PROC_000002 UV(아크릴스티커) |
+| prcs_dtl_opt | (공정 param) | 봉제 유형(오버로크/봉미싱)·폭(4cm)·타공 구수(4)·족자 모양(사각) |
+| (화이트 별색) | PROC | PROC_000008 화이트(clr_cd=NULL) |
+| `output_file_typ` | (파일포맷) | JPG(실사 주력)·PDF·PDF+커팅AI |
+
+## SL4. 실사 적재 discrepancy (코드 vs 엑셀 현실)
+
+| 항목 | 코드(models.py) | 엑셀 현실(260610) | 처리 |
+|------|-----------------|-------------------|------|
+| 사이즈(면적형) | t_prd_product_sizes 이산 행 | C5 규격+C6/C7 비규격 연속범위+자유입력 | CONFIRM-SL-1(비규격=입력제약·가격유효=포스터사인 매트릭스) |
+| 가공 택일그룹 | excl_groups(GRP-BOOK/CAL만) | C20 실사 가공 다종 UI 택일 | CONFIRM-SL-3(GRP-SL-가공 신규 vs 단순공정·G-SL-3) |
+| 화이트 별색 | PROC_000008 자리 | C18 접착투명만 명시·투명/홀로그램 빈값 | CONFIRM-SL-2(도메인 강제 vs 명시분만·G-SL-2) |
+| 아크릴스티커 인쇄방식 | 시트=실사 분류 | 폴더=레이저커팅(UV) | CONFIRM-SL-7(UV 라우팅 확정) |
+| 거치대/우드봉 | addon tmpl + process 둘 다 자리 | C21 거치대/우드봉·"출력만" | CONFIRM-SL-4(자재 vs 공정 vs addon) |
+| 가격(R/S/V/X/Z) | inline price 컬럼 5개 | 면적별 매트릭스 필요 | **분석 제외**(포스터사인 매트릭스·round-2) |
+
+> **불일치 처리 원칙(스킬 HARD):** 코드와 라이브 스키마가 어긋나 보이면 추측으로 메우지 않고 discrepancy로 기록 → validator/schema-analyst가 라이브 실측으로 해소. 본 delta는 코드 권위 + 엑셀 현실 대조까지만. **가격 경로는 사용자 지시로 분석 제외**(포스터사인 면적매트릭스 round-2 트랙).
+
+---
+
+# 아크릴 적재명세 delta (round-11 확대 #6 · 2026-06-10)
+
+> §1~3 공유 — 재기술 안 함. 아크릴이 앞 시트 대비 **새로 활성화하는 적재 경로의 delta만**. 아크릴은 **UV 단일 인쇄방식(PROC_000002·변형) + 두께=자재(MAT_TYPE.03) + 부속자재(MAT_TYPE.07)+부착공정(PROC_000081) 2축 + 완칼 묵시 + 조각수(조합형)**가 핵심 차이. 마스터는 round-3 라이브 확인상 **건전**(두께·부속·완칼·부착·UV 코드 전부 존재) — 결함은 **상품 연결 결손/오매핑**.
+>
+> **⚠️ 가격 3컬럼(H/V/X) 값 매핑 분석 제외** — 아크릴 가격표 round-2 트랙.
+
+## AC1. 아크릴이 추가로 쓰는 t_* 적재 경로
+
+| t_* 엔티티 | 아크릴 delta | 적재 surface | 근거 |
+|-----------|-----------|:--:|------|
+| **t_prd_product_processes**(UV 인쇄방식) | **PROC_000002 UV** + `prcs_dtl_opt.변형`(배면양면/풀빼다/투명테두리/단면). 아크릴=UV 단일 — 인쇄방식 연결 필수(라이브 §264 전상품 미연결→첫 연결 대상) | A→B | models.py:391·473·db-structure §47/§264 |
+| **t_prd_product_processes**(완칼) | **PROC_000053 완칼**{모양 string·조각수 int}(레이저커팅·die-cut). **묵시 필수**(엑셀 무명시이나 도메인 필수 G-AC-1). 형상 굿즈만 — 판/입체류 over-reach 제외(161/168/169) | B | models.py:391·db-structure §165-167 |
+| **t_prd_product_processes**(부착) | **PROC_000081 부착**{대상=맥세이프/끈/자석/핀}. 라이브 맥세이프(PRD_000151)만 1행(G-AC-4) | B | models.py:391·D-24 |
+| **t_mat_materials**(아크릴 두께) | `mat_typ_cd`=**MAT_TYPE.03**. **두께=자재 식별자**: MAT_000042(1.5mm)·043(3mm)·044(8mm)·195/196(골드/실버). 라이브 22상품 MAT_000192 일괄=두께소실(G-AC-3) | A→B | models.py:126·MAT_TYPE.03 |
+| **t_mat_materials**(부속) | `mat_typ_cd`=**MAT_TYPE.07 부속**. 고리/자석/핀/집게/바디/끈/와이어링=MAT_000045~057. 라이브 전무(G-AC-4) | A→B | models.py:126/283 |
+| **t_prd_product_bundle_qtys**(조각수) | `bdl_qty`=조각수(자유형스탠드 2~6·미니파츠 10). **조합형만**(단품형=1조각). 스티커 조각수 활성과 동류 | B | models.py:234·QTY_UNIT |
+| **t_prd_products**(nonspec) | `nonspec_yn`/`nonspec_*_min/max`. `사용자입력` 11상품. 라이브 nonspec 전무(G-AC-6) | A | models.py:444 |
+| **t_prd_product_addons**(볼체인) | 키링/포카키링 → tmpl_cd + PRD_000006 볼체인. 라이브 1행(선택안함)만(9색 미반영 G-AC-7) | B | models.py:218 |
+
+## AC2. 아크릴 미사용/희소 t_*
+
+| t_* | 사유 |
+|-----|------|
+| `t_prd_product_page_rules` | 아크릴=낱장 굿즈(내지/장수 없음) |
+| `t_prd_product_materials`(.02 표지/.03 면지) | 아크릴=본체(.01)+부속(.07). 반제품 없음 |
+| `t_prd_process_excl_groups` | 아크릴 택일그룹 0행(GRP-BOOK/CAL만). UV변형은 별 excl_group 불요 |
+| `t_proc_processes`(코팅/제본/박/형압/오시/미싱) | 아크릴 후가공 미사용. 별색=UV 변형 풀빼다로 흡수 |
+| `t_prd_product_plate_sizes`(출력판형) | **희소** — UV 평판=시트/판재라 전지규격 무의미 |
+
+## AC3. 적재 surface별 코드값 도메인 (아크릴 활성 enum)
+
+| 필드 | 코드그룹 | 아크릴 허용값 |
+|------|----------|---------------|
+| `mat_typ_cd` | MAT_TYPE | .03 아크릴(본체)·.07 부속 |
+| `usage_cd` | USAGE | .01 본체·(부속 usage — CONFIRM-AC-3) |
+| `prd_typ_cd` | PRD_TYPE | .04 디자인상품(라이브 전수) |
+| (인쇄방식) | PROC 트리 | **PROC_000002 UV**(단일) |
+| prcs_dtl_opt(UV변형) | (param) | 배면양면·풀빼다·투명테두리·단면 |
+| prcs_dtl_opt(완칼) | (param) | 모양(원형/사각/하트/자물쇠/사용자)·조각수(2~10) |
+| `bdl_unit_typ_cd` | QTY_UNIT | 조각/세트 |
+
+## AC4. 아크릴 적재 discrepancy (코드 vs 라이브 — round-3 권위)
+
+| 항목 | 코드/마스터 존재 | 라이브 현실(round-3 SELECT) | 처리 |
+|------|------------------|------------------------------|------|
+| UV변형 | PROC_000002 변형 param + print_side | print_side에 배면양면/풀빼다 오적재 | CONFIRM-AC-4(변형 process 이동·G-AC-5) |
+| 두께 자재 | MAT_000042/043/044 | 22상품 MAT_000192 일괄(두께 소실) | CONFIRM-AC-2(192→042/044·G-AC-3) |
+| 완칼 | PROC_000053 마스터 존재 | 23상품 0건 + 161/168/169 over-reach | CONFIRM-AC-1(형상 굿즈만·G-AC-1) |
+| 가공 부속 | MAT_000045~057 + PROC_000081 | 맥세이프만 1행·부속 전무 | CONFIRM-AC-3(자재+부착 2축·G-AC-3/4) |
+| 조각수 | bundle + prcs_dtl_opt 둘 다 | process 0행 | CONFIRM-AC-5(둘 다·G-AC-2) |
+| 볼체인 9색 | addon tmpl(PRD_000006) | 1행(선택안함)만 | CONFIRM-AC-6(variant vs 9 addon·G-AC-7) |
+| nonspec | nonspec_*_min/max | 전 NULL | CONFIRM-AC-7(비규격 범위·G-AC-6) |
+| ★신규 | 등록 가능 | 쉐이커★/지비츠★ 미등록 | CONFIRM-AC-8(출시 vs 보류) |
+| 가격(H/V/X) | inline price | 사이즈별 단가 | **분석 제외**(아크릴 가격표·round-2) |
+
+> **권위:** 아크릴은 round-3가 이미 라이브 13 SELECT로 G-AC-1~9 확정(마스터 건전·상품 연결 결손). 본 delta는 그 권위 + 엑셀 대조까지. 가격 경로 분석 제외.
+
+---
+
+# 문구(가격포함) 적재명세 delta (round-11 확대 #6 · 2026-06-10)
+
+> §1~3 공유 — 재기술 안 함. 문구는 booklet과 구조 동형(반제품·page_rule·제본·usage 슬롯)이나 **① 가격포함(t_prc_* 고정가 활성, booklet 부재) ② 박/형압 전무 ③ 미싱제본 신규(PROC_000017 자식 부재) ④ 구간할인(round-1) 연결 ⑤ PVC커버(USAGE.05)·합지보드/하드보드 부속**이 차이.
+
+## ST2-1. 문구가 추가로 쓰는 t_* 적재 경로
+
+| t_* 엔티티 | 문구 delta | 적재 surface | 근거 |
+|------------|-----------|:--:|------|
+| **t_prd_product_prices / t_prc_*** | **가격포함** — C29 inline 고정가(다이어리 9000~15000·스프링 4500·수첩 3000·메모 5000/6000·중철 2500). round-2 고정가형. **떡메모지=`*가격표참고`**(묶음수 50/100장 × size 매트릭스, component_prices siz 차원) | A | models.py:336·203·round-2 |
+| **t_prd_product_page_rules** | 내지 page_min/max/incr. 먼슬리=28~28·증가0(고정 28P)·떡메모=3~3·증가3. 무지내지 다수=빈값(page 무의미) | B | models.py:302 |
+| **t_prd_product_bundle_qtys** | **떡메모지 묶음수** — 50장1권·100장1권. `bdl_unit`=QTY_UNIT.03 권. page_rule과 별 축 | B | models.py:234·entity-semantic §28·138 |
+| **t_proc_processes**(트윈링 PROC_000021) | 스프링노트(좌철)/수첩(상철)=트윈링 + 방향 param·실버링 링컬러 | A→B | db-structure §306·161 |
+| **t_proc_processes**(미싱제본 — 신규) | 만년다이어리 소프트/레더소프트·먼슬리=미싱제본(`*출력+미싱`). **PROC_000017 8자식에 부재 → 신규 등록 후보**(ST2-5) | A→B | db-structure §127 갭 |
+| **t_prd_product_materials**(usage 슬롯+부속) | USAGE.01 내지(백모조)·.02 표지(아트250/레더)·.03 면지(하드커버)·.05 투명커버(PVC) + 부속(실버링·합지보드·하드보드) | B | models.py:283·USAGE |
+| **t_dsc_***(구간할인 round-1) | C36 `문구 구간할인` → 상품 연결 | (round-1) | round-1 t_dsc_* |
+
+## ST2-2. 문구 미사용/희소 t_* (booklet 대비)
+
+| t_* 엔티티 | 사유 |
+|------------|------|
+| `t_proc_processes`(박 PROC_000033·형압 051/052) | **문구=박/형압 컬럼 전무**(문구류 박 미운영) |
+| `t_proc_processes`(별색인쇄 PROC_000007) | 문구=별색 없음 |
+| `t_proc_processes`(커팅 53/54/55) | 문구=제본물(스티커 전용) |
+| `t_prd_product_addons` | 문구=추가상품 없음(캘린더 첫 활성과 차이) |
+| `t_prd_product_plate_sizes` | **희소** — 낱장 PDF 출력 |
+| `t_prd_process_excl_groups`(GRP-CAL-가공) | 문구=캘린더 가공 없음. 단 GRP-BOOK-제본은 사용 |
+
+## ST2-3. 적재 surface별 코드값 도메인 (문구 활성 enum)
+
+| 필드 | 코드그룹 | 문구 허용값 |
+|------|----------|-------------|
+| `mat_typ_cd` | MAT_TYPE | .01 종이(백모조·아트250)·.06 가죽(레더)·.07 부속(실버링·합지보드·하드보드)·(.05 USAGE 투명커버=PVC) |
+| `usage_cd` | USAGE | .01 내지·.02 표지·.03 면지·.05 투명커버·(.06 표지타입 variant) |
+| `proc_cd`(제본) | PROC_000017 자식 | 트윈링(021)·중철·떡제본·하드커버 + **미싱제본(신규)** |
+| `bdl_unit` | QTY_UNIT | .03 권(떡메모 50/100장1권) |
+| `sel_typ_cd` | SEL_TYPE | .01 단일(GRP-BOOK-제본 택일) |
+| 방향(prcs_dtl_opt) | (트윈링) | 좌철(노트)·상철(수첩) |
+
+## ST2-4. 문구 적재 discrepancy (코드 vs 엑셀 현실)
+
+| 항목 | 코드/스키마 자리 | 엑셀 현실 | 처리 |
+|------|-----------------|-----------|------|
+| 미싱제본 | PROC_000017 자식 8종 | 만년다이어리 소프트/먼슬리=`*출력+미싱` | CONFIRM-ST2-5(신규 등록 vs 후가공) |
+| 만년다이어리 커버타입 | 1 vs 4 prd_cd | MES 008-0020~0023 별 4코드·130x190 동일 | CONFIRM-ST2-2(별상품 vs 표지타입 variant USAGE.06) |
+| 떡메모지 가격 | inline 고정가 | `*가격표참고`(묶음수×size 매트릭스) | CONFIRM-ST2-7(component_prices siz 차원) |
+| 제본옵션(C27) 이중의미 | 단일 컬럼 | 트윈링=실버링(링)·하드커버=면지 | CONFIRM-ST2-3(링 param/자재 vs 면지 USAGE.03) |
+| 표지사양 복합(C25) | 자재 컬럼 | `아트250 + 무광코팅`(자재+공정) | 분해(자재 USAGE.02 + 코팅 공정) |
+| page vs 묶음수 vs 장수 | page_rule/bundle | 먼슬리 28·떡메모 page3·떡메모 묶음수(권) | 3축 분리 적재 |
+| COMMENT 부속힌트 | 견적 컬럼 부재 | `*합지보드`·`*PVC커버`=BOM 힌트 | note 보존 + 부속 자재 도출 |
+
+> **적재 순서:** 마스터(제본+미싱 신규·USAGE·QTY_UNIT.03) → 상품(11, 노트류 editor_yn=Y·메모패드내지커스텀 준비중 보류) → 하위(usage 4슬롯·page_rule·bundle 떡메모·제본) → round-6(GRP-BOOK-제본 택일·면지 캐스케이드) → round-2(고정가·떡메모 가격표참고) → round-1(구간할인).
+
+---
+
+# 굿즈파우치(가격포함) 적재명세 delta (round-11 확대 #6 · 2026-06-10)
+
+> §1~3 공유 — 재기술 안 함. 굿즈파우치 핵심 차이: **혼합 인쇄방식 다종(폴더=라우팅) + 색상×사이즈 variant(round-10 size→option) + 굿즈 후가공(봉제 D-24/에폭시 b.12/맥세이프) + 본체색=재질행 합성 + MES 코드 미부여 + 가격포함(round-2 고정가형) + 구간할인(round-1)**.
+>
+> **⚠️ 가격 4컬럼(가격·선택가격·가공가격·추가가격) 분석 제외** — round-2 고정가형 트랙.
+
+## GP1. 굿즈파우치가 추가로 쓰는 t_* 적재 경로
+
+| t_* 엔티티 | 굿즈파우치 delta | 적재 surface | 근거 |
+|-----------|-----------------|:--:|------|
+| **t_mat_materials**(굿즈 자재 다종) | **소재=상품군 정체.** MAT_TYPE.05 원단(린넨/캔버스/광목/메쉬/타이벡/면/극세사)·.06 가죽·.09 파우치·.10 악세사리·.03 아크릴·.04 금속·.02 필름. **본체색=재질행 합성**(split 금지) | A→B | models.py:126·db-structure §191 |
+| **t_prd_product_processes**(굿즈 후가공) | 봉제(PROC_000080 오버로크/말아박기/봉미싱·폭)·에폭시(PROC_000083 b.12 굿즈파우치 전용)·부착(PROC_000081 맥세이프/보냉/라벨)·레이저커팅 | A→B | models.py:391·473·D-24·b.12 |
+| **t_prd_products**(인쇄방식 다종·MES 미부여) | **폴더=라우팅:** UV(000002)·디지털(000004)·실사(000006) + 외주/신규(이지굿즈 PVC고주파·만년도장·전사·패브릭→봉제). editor_yn=Y 주력·**mes_item_cd 대부분 NULL**(신규 등록) | A | models.py:444·process-recipe §207 |
+| **t_prd_product_sizes**(치수+variant) | 치수형(작업사이즈만·재단/블리드 빈값 G-GP-2) + 사이즈등급(M/L/XL)·형상 융합(siz_nm). 옵션형(폰기종/방향/구수/면)=round-6 | A→B | models.py:427·G-GP-2/3 |
+| **t_prd_product_options/option_items**(round-6 variant) | **본체색**(재질행 합성 ref_dim_cd=mat+usage)·사이즈등급/폰기종·방향/면(도수)·구수(공정). round-10 size→option 재분류분 | B(round-6) | round-10 |
+| **t_prd_product_addons**(굿즈 부속) | 볼체인(키링 9색)·잉크 5cc(만년스탬프 리필)·아크릴스탠드 → tmpl_cd | B | models.py:218 |
+| **t_prd_product_categories**(19 구분) | **구분 풍부**(폰케이스/말랑/데스크/라이프/레더파우치/패션 등) — 인쇄방식·구간할인 라우팅 키 | B | models.py |
+| **t_dsc_***(구간할인 round-1) | 굿즈A타입(15)·B타입(11)·말랑상품(5)·파우치/에코백(1)·없음(2). 카테고리단위 | (round-1) | [[dbmap-discount-authority]] |
+
+## GP2. 굿즈파우치 미사용/희소 t_*
+
+| t_* | 사유 |
+|-----|------|
+| `t_prd_product_page_rules` | 굿즈=낱장 단품(내지/장수 없음) |
+| `t_prd_product_materials`(.02 표지/.03 면지) | 굿즈=낱장 본체 1슬롯(USAGE.01 CONFIRM-GP-5) |
+| `t_prd_product_bundle_qtys` | 굿즈=수량(개)만 |
+| `t_prd_product_plate_sizes` | **전 빈값** — 직인쇄/단품(전지규격 무의미) |
+| `t_siz_sizes.margin_*/cut_*` | **전 빈값** — 리지드 굿즈(작업사이즈만·G-GP-2 재단치수 누락) |
+| `t_prd_process_excl_groups` | **GRP-GP-가공 부재**(GRP-BOOK/CAL만)·CONFIRM-GP-3(실사 G-SL-3 동류) |
+
+## GP3. 적재 surface별 코드값 도메인 (굿즈파우치 활성 enum)
+
+| 필드 | 코드그룹 | 굿즈파우치 허용값 |
+|------|----------|-------------------|
+| `mat_typ_cd` | MAT_TYPE | .05 원단·.06 가죽·.09 파우치·.10 악세사리·.03 아크릴·.04 금속·.02 필름·.01 종이 |
+| `usage_cd` | USAGE | .01 본체(낱장 — CONFIRM-GP-5) |
+| (인쇄방식) | PROC 트리 | UV(000002)·디지털(000004)·실사(000006) + 외주/신규(패브릭·전사·이지굿즈·만년도장) CONFIRM-GP-7 |
+| (가공) | PROC | 봉제(000080)·에폭시(000083 b.12)·부착(000081) |
+| `output_file_typ` | (파일포맷) | JPG(주력)·PDF·AI·PNG |
+| (구간할인) | t_dsc_* | 굿즈A/B타입·말랑상품·파우치/에코백·없음 |
+| `mes_item_cd` | (MES) | **대부분 NULL**(미부여·신규 등록 CONFIRM-GP-8) |
+
+## GP4. 굿즈파우치 적재 discrepancy (코드 vs 엑셀 현실)
+
+| 항목 | 코드(models.py) | 엑셀 현실(260610) | 처리 |
+|------|-----------------|-------------------|------|
+| 사이즈(variant) | 이산 치수행 | C5 224행 중 202 옵션성(폰기종/등급/방향/구수/면) | CONFIRM-GP-1(치수형→size·옵션형→CPQ·round-10 재분류) |
+| 본체색 | 재질행 | C15 색상 옵션(블랙/화이트/글리터·복합 "블랙 XL") | CONFIRM-GP-2(재질행 합성·split 금지·2축 분리) |
+| 가공 택일그룹 | excl_groups(GRP-BOOK/CAL만) | C17 굿즈 가공(라벨/에폭시/맥세이프) 택일 | CONFIRM-GP-3(GRP-GP-가공 신규 vs 단순공정·실사 SL-3 일괄) |
+| 인쇄방식 PROC | UV/디지털/실사만 명시 | C12 폴더 다종(이지굿즈/만년도장/전사/패브릭 외주 코드 부재) | CONFIRM-GP-7(외주/신규 PROC mint vs 흡수) |
+| MES 코드 | mes_item_cd NOT NULL 기대 | C3 대부분 빈값(신규 미등록) | CONFIRM-GP-8(NULL 적재·prd_nm 멱등·상태→use_yn) |
+| 부속(볼체인/맥세이프/보냉) | addon+process+material 모두 자리 | C22/C17 볼체인·맥세이프·보냉 내피 | CONFIRM-GP-4(자재 vs 공정 vs addon·BK-3/CL-5/SL-4 일괄) |
+| 블리드/재단/출력용지규격 | siz/plate 컬럼 | C6/C8/C9 전 빈값(리지드 굿즈) | 미적재 정당(작업사이즈만·G-GP-2) |
+| 가격(4컬럼) | inline price | 가격포함(고정가형) | **분석 제외**(round-2 고정가형) |
+
+> **불일치 처리 원칙(스킬 HARD):** 코드와 라이브가 어긋나면 추측으로 메우지 않고 discrepancy로 기록 → validator/schema-analyst가 라이브 실측으로 해소. **가격 경로는 가격포함 시트라도 round-2 고정가형 트랙으로 분리**.
+
+---
+
+# 상품악세사리(가격포함) 적재명세 delta (round-11 확대 #9 · 11시트 완성 · 2026-06-10)
+
+> §1~3 공유 — 재기술 안 함. 상품악세사리는 **완제 부속·별매 부자재(인쇄 BOM 부재) + OTC TEMPLATE 카탈로그(이중 등록) + 사이즈 3축 복합(치수+묶음+색상) + 가격포함(round-2 고정가)**가 핵심 차이. round-9 OTC 인벤토리가 권위.
+
+## PA1. 상품악세사리가 추가로 쓰는 t_* 적재 경로
+
+| t_* 엔티티 | 상품악세사리 delta | 적재 surface | 근거 |
+|-----------|-------------------|:--:|------|
+| **t_prd_templates**(addon SKU) | **부자재=addon 참조 SKU.** 봉투(엽서/카드/캘린더)·볼체인(키링)·우드(캘린더/족자/행잉)·리필잉크(만년스탬프) → tmpl_cd. 다른 시트 `_addons.tmpl_cd`가 참조 | A | models.py addon→tmpl·round-9 OTC |
+| **t_prd_products**(부자재 독립) | 15 부자재 자체 prd_cd(독립 판매). 라이브 PRD_000001/002 봉투·006 볼체인·015 리필잉크·281~283 카드봉투. **이중 등록**(prd_cd + tmpl_cd) | A | round-9 OTC TEMPLATE |
+| **t_prd_product_bundle_qtys**(묶음수) | **사이즈 셀 묶음 인코딩** 50장·3개1팩·2개1세트·20개입·10개 → bdl_qty + QTY_UNIT(장/개/팩/세트) | B | models.py:234·QTY_UNIT |
+| **t_prd_product_sizes**(치수 variant) | 봉투 치수·우드 길이(270/360/480mm)·잉크 용량(5cc)·투명케이스 3D치수 | A→B | models.py:427 |
+| **t_prd_product_options/option_items**(색상 — round-6) | 볼체인 8색·리필잉크 7색·와이어링 3색·카드봉투 화이트/블랙·행택끈 3종 = 색상 variant(옵션 vs 별 SKU PA-3) | B(round-6) | round-9 C-6 |
+| **t_prd_product_categories**(2 구분) | 봉투/케이스·상품액세서리 | B | models.py |
+| **가격(고정가)** | **가격포함→round-2 고정가**(variant별 단가). 도메인은 BOM까지 | (round-2) | C9 |
+
+## PA2. 상품악세사리 미사용 t_* (완제 부속 — 전 시트와 최대 차이)
+
+| t_* | 사유 |
+|-----|------|
+| `t_prd_product_materials` | **완제 부속(인쇄 안 함)** — 자재=완제품 자체. 후니 자재 BOM 미적용 유일 시트 |
+| `t_prd_product_processes` | **공정 없음**(매입 완제/외주 우드). 인쇄/후가공 부재 |
+| `t_prd_product_print_options` | 인쇄 안 함(도수/인쇄면 없음) |
+| `t_prd_product_plate_sizes`·`t_prd_product_page_rules` | 출력판형/page 무관(부자재) |
+| `t_prd_process_excl_groups` | 택일그룹 없음 |
+
+## PA3. 적재 surface별 코드값 도메인 (상품악세사리 활성 enum)
+
+| 필드 | 코드그룹 | 상품악세사리 허용값 |
+|------|----------|---------------------|
+| `prd_typ_cd` | PRD_TYPE | (부자재/완제 — 라이브 확인) |
+| `bdl_unit_typ_cd` | QTY_UNIT | 장(봉투)·개(케이스)·팩(볼체인)·세트(천정고리)·개입(자석) |
+| (색상 variant) | (색상 코드/옵션) | 볼체인 8·리필잉크 7·와이어링 3·카드봉투 2·행택끈 3 |
+| `mes_item_cd` | (MES) | 012-0004~0018(**공유 다수** PA-5) |
+
+## PA4. 상품악세사리 적재 discrepancy (코드 vs 엑셀 현실)
+
+| 항목 | 코드/스키마 자리 | 엑셀 현실(260610) | 처리 |
+|------|-----------------|-------------------|------|
+| 부자재 이중 등록 | prd_cd + tmpl_cd 둘 다 자리 | 15 부자재(라이브 일부 prd_cd 적재) | CONFIRM-PA-1(독립 + addon 이중) |
+| 사이즈 3축 복합 | siz/bundle/색상 분리 자리 | C5 `70x200mm (50장)`·`오렌지 (3개1팩)` | CONFIRM-PA-2/3(치수/묶음/색상 분해) |
+| 우드 부속 | addon tmpl + process 자리 | 우드거치대/봉/행거 | CONFIRM-PA-4(OPTION vs TEMPLATE·C-4·CL-2/SL-4 일괄) |
+| MES 공유 | mes_item_cd | 012-0004 OPP접착=비접착 등 | CONFIRM-PA-5(별 prd_cd·prd_nm 멱등) |
+| 가격 | inline 고정가 | 가격포함(variant 단가) | round-2 고정가형 |
+
+> **불일치 처리 원칙(스킬 HARD):** 코드와 라이브가 어긋나면 추측으로 메우지 않고 discrepancy로 기록 → validator/schema-analyst가 라이브 실측으로 해소. 상품악세사리는 round-9 OTC 인벤토리가 이미 TEMPLATE/OPTION 판별 권위 — 본 delta는 그 권위 + 엑셀 대조까지. **MAP 시트=카테고리 맵(상품 아님) round-11 제외.**
