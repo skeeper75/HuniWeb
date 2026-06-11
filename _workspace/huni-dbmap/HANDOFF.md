@@ -2,7 +2,10 @@
 
 > 작성 2026-06-11(최신·round-13). 권위 = 본 문서 + 메모리 `dbmap-mapping-research-round12`·`dbmap-correctness-audit-round13`·`dbmap-column-domain-loadspec-round11`·`dbmap-schema-design-intent-first`·`dbmap-code-identifier-strategy`·`dbmap-live-admin-product-viewer`·`dbmap-silsa-price-via-poster-sign`. 본 문서 + 메모리를 읽으면 재발견 0으로 재개. 이전 트랙(round-2 가격·round-4/5 적재·plate·CPQ·round-6 현수막·round-7 커버리지·round-8 admin UI·round-10 변경추적·round-11 도메인) 상세는 `CHANGELOG.md`·메모리에 보존.
 
-## 한 줄 현황 (round-13 **라이브 정합 교정 전 11시트 완료 — 11/11 GO** — 2026-06-11·최신)
+## 한 줄 현황 (round-13 **횡단 결함 종합 GO — 14 결정점** — 2026-06-11·최신)
+**전 11시트 GO 후속: 횡단 결함 종합(메타) GO(`17_correctness/_crosscut/` 3종 + 게이트 `_gate/crosscut-gate.md` X1~X6).** 전 10 family **171 finding(결함성 113·CORRECT 58) 전수 1:1 추적**("67"은 잔여 4 family만의 합·전수는 171) → 3대 패턴(① 카테고리 고아 14노드·113상품[정상 잎노드 두고 상위노드 직결] ② MAT_TYPE.07~10 자재 오염 .08=36·.09=58·.10=8상품 ③ v03 진원 10 family 전부) + 추가 횡단 6축. **개별 ~70 컨펌 → 14 결정점(BATCH-1~14, 비전문가용 a 권장/b 대안)**. 단일원인 다중오염 Top=**MAT_000186 레더 1행 → 6상품·4 family**(mat_typ만 .06 UPDATE 1회 동시 교정). `dbm-validator` X1 2차 적발(§0-bis 개념분류→171 전수 1:1 표 강제·집계 byte 일치·날조 0). **P1 4건(BATCH-1 카테고리 재연결·2 색/부속 분리·3 코팅 통일·4 레더 정정)만 닫아도 4 family씩 횡단 해제.** 🔴 핵심 쟁점=BATCH-3 코팅 CONFLICT(Q9 공정 vs 스티커 가격모델 3컬럼)·BATCH-12 v03 상류 수정 여부(전 트랙 방향)·BATCH-6 size↔option 경계. 산출 `_crosscut/`(crosscut-synthesis 171행 추적·batch-confirmations 14결정·remediation-roadmap 트랙배정). 권위 [[dbmap-correctness-audit-round13]]. **DB 미적재(종합·컨펌 패키지까지). 다음 = P1 실 교정 착수(실무진/인간 결정) 또는 round-14 stale 갱신.**
+
+## 한 줄 현황 (round-13 **라이브 정합 교정 전 11시트 완료 — 11/11 GO** — 2026-06-11)
 **잔여 4 family(스티커·책자·포토북·캘린더+디자인캘린더) 전건 GO → round-13 전 11/11 시트 완료(DB 미적재).** `dbm-correctness-auditor` 팬아웃(family별 1) + `dbm-validator` 독립 K0~K6 2-pass. 1차 GO 2(스티커·캘린더)·CONDITIONAL 2(책자·포토북) → 보정 후 전건 GO. **validator 2-pass가 또 실결함 적발(생성자≠검증자 재확증): ① 포토북 F-PB-1 oracle 날조(소프트 page "4~14"를 엑셀 L1 권위로 4종 산출에 단언했으나 실측 공란→MISSING 오분류→AMBIGUOUS 재분류) ② 포토북 F-PB-2 재연결 오매핑(레더 교정을 prd_cd 재연결로 제안했으나 정답=mat_typ만 .06 UPDATE·이름 정합만으로 책자 자재 MAT_000008 끌어올 뻔) ③ 책자 F-GATE-BK-2 정체표 라이브 불일치(전용노드 CAT_000100~103/106/107 상품0 고아=digital-print F-GATE-1 동형).** 핵심 교정(family별 최위험): 스티커=코팅 8상품 자재 오적재(Q9 공정 CONFLICT)·책자=PRD_000078 sub_prd 몽블랑130g(레더여야·17 sub_prd 중 유일 예외)·포토북=레더 mat_typ .01/.08→.06(MAT_000186 .08 6상품 횡단오염)·캘린더=삼각대/링 자재 오적재(공정이어야)+plate .01 vs load_master .03 재적재 퇴행. 분류 합 67(스티커17·책자13·포토북17·캘린더20). **횡단 결함 확증: 카테고리 고아 오연결(전 family·digital-print 동형)·MAT_TYPE.07~10 자재 오염·v03 정규화 진원(load_master=순수 전파기).** 산출 `17_correctness/{sticker,booklet,photobook,calendar}/`(각 5종)+`_gate/`(각 K0~K6). 권위 [[dbmap-correctness-audit-round13]]. **DB 미적재(교정 매니페스트까지). 다음 = 횡단 결함 종합 / 실 적재(round-5/6/10+인간 승인) / round-14 stale 산출 갱신.**
 
 ## 직전 현황 (round-13 **라이브 정합 교정 확대 — 6/11 GO** — 2026-06-11)
@@ -59,7 +62,7 @@
 ## 다음 시작점 (정확한 다음 행동 — 순서대로)
 
 **★ [2026-06-11 완료] round-13 라이브 정합 교정 — 전 11시트 GO.** 6 family(디지털인쇄·굿즈파우치·상품악세사리·실사·아크릴·문구) + 잔여 4 family(스티커·책자·포토북·캘린더+디자인캘린더) = **11/11 시트 전건 GO**. round-13 종결. 다음 우선 ↓
-- **(A) 횡단 결함 종합** [권장·교정 계획용]: 전 11 family 공통 패턴을 한 판 종합 — ① 카테고리 고아 오연결(digital-print/책자 동형·정상 잎노드 두고 상위노드 직결) ② MAT_TYPE.07~10 자재 오염(삼각대/링/본체색/형상/용량) ③ v03 정규화 진원(load_master=순수 전파기) → 실 교정(round-5/6/10)·실무진 컨펌 일괄에 유용.
+- **(A) 횡단 결함 종합** [✅ 완료 2026-06-11·GO] — `17_correctness/_crosscut/` 3종(crosscut-synthesis 171 finding 전수 1:1·batch-confirmations 14 결정점·remediation-roadmap 트랙배정)+게이트 X1~X6 GO. 3대 패턴(카테고리 고아 14노드·113상품 / MAT_TYPE.07~10 오염 .08=36·.09=58·.10=8 / v03 진원 10 family) 정량 확정. **다음 하위 = P1 4건(BATCH-1~4) 실무진/사용자 결정 → round-5/6/10 실 교정.** 🔴 결정 대기: BATCH-3 코팅 CONFLICT·BATCH-12 v03 상류 vs DB 직접·BATCH-6 size↔option.
 - **(B) round-14 stale 산출 갱신**: Phase10/11 영향 진단(`18_schema-change/impact-diagnosis.md`) 완료·실 갱신 미실행. round-2/6/11/12/13 MAJOR stale(가격엔진 차원 8→10·constraint_json 삭제) → intent-map/cpq-schema/price-ddl 우선.
 - **(C) 실 적재**: round-13 교정 GO분을 round-5(멱등 UPSERT)/round-10(델타) 트랙 + 인간 승인.
 - **잔존 컨펌(인간 결정 대기·~70건, 실 교정=round-5/6/10 트랙)**: 6 family 44건(디지털 4·굿즈 5·악세 8·실사 7·아크릴 8·문구 12) + 잔여 4 family ~26건(스티커 Q-ST-A~MES 5·책자 Q-BK-A~E 5+BK-CAT 재연결·포토북 Q1~5+PB-C4 6·캘린더 CL-A~G 7). 횡단 일괄 후보: 카테고리 고아 재연결(전 family)·MAT_TYPE.07~10 자재 오염·코팅 Q9 정책.
