@@ -15,7 +15,7 @@
 - 앵커: `t_prc_*` 4단 · 차원 컬럼=`t_prc_component_prices`(proc_cd·opt_cd·siz_cd) + `t_prc_price_components.prc_typ_cd`
 - 출처: 라이브 psql `information_schema`(t_prc_* 컬럼 실측) + `raw/webadmin/sql/21_pricing_dims.sql`·`sql/22_use_dims.sql`(seed/init) + `raw/webadmin/docs/prcx01-pricing-model.md`·`pricing-erd.md` {tier A, FRESH}
 - 연결: [[#PE-002]] · [[load-path#LP-002]] (loaded-via — 적재 경로)
-- 사용처: [[recipes/sticker#STK-PRC-002]] (uses — 스티커 가격 차원 컬럼)
+- 사용처: [[recipes/sticker#STK-PRC-002]] (uses — 스티커 가격 차원 컬럼) · [[recipes/calendar#CAL-PRC-001]] (uses — 캘린더 t_prc 4단·미연결) · [[recipes/acrylic#AC-PRC-002]] (uses — 아크릴 가격 차원 t_prc_*)
 - answers_cq: CQ-PRICE-01 (단가표 vs 공식 계산) · CQ-PRICE-08 (견적 합산 공식)
 - tags: #가격 #t_prc #차원 #Phase11 #W3
 
@@ -32,7 +32,7 @@
 - 앵커: 가격공식 PK (prd_cd, apply_bgn_ymd)
 - 출처: `sql/18_unify_price_keys.sql` (impact-diagnosis I-7) {tier A, FRESH}
 - 연결: [[load-path#LP-005]] · [[#PE-STALE]]
-- 사용처: _(레시피 집필 시 채움)_
+- 사용처: [[recipes/acrylic#AC-PRC-002]] (uses — 멱등 PK)
 - tags: #가격 #PK #멱등 #I-7
 
 ### [PE-004] template 직접단가 (t_prd_template_prices)  {🟡}
@@ -52,7 +52,7 @@
 - 앵커: `t_prc_price_formulas`(PRF_DGP_A~F) + COMP_PAPER
 - 출처: `02_mapping/digital-print-engine/` {tier C, 공식사슬 FRESH·차원 컬럼 PARTIAL-STALE I-1·I-2}
 - 연결: [[processes#PRC-003]] (uses — 별색=공정 합산 항목) · [[../base/paper#BPP-002]] (uses — 용지 평량)
-- 사용처: [[recipes/digital-print#DGP-PR-001]] (priced-by — 디지털인쇄 원자합산형) · [[recipes/booklet#BK-PRC-001]] (priced-by — 책자 제본 합산형 PRF_BIND_SUM)
+- 사용처: [[recipes/digital-print#DGP-PR-001]] (priced-by — 디지털인쇄 원자합산형) · [[recipes/booklet#BK-PRC-001]] (priced-by — 책자 제본 합산형 PRF_BIND_SUM) · [[recipes/photobook#PB-PRC-001]] (priced-by — 포토북 page-band 합산형 PRF_PBK_PAGEBAND·미적재) · [[recipes/calendar#CAL-PRC-001]] (priced-by — 캘린더 원자합산형 디지털 계열·미적재)
 - answers_cq: CQ-PRICE-03 (디지털인쇄 단가 매트릭스 구조) · CQ-PRICE-06 (후가공 가산 단가)
 - tags: #가격 #합산형 #디지털인쇄 #PRF_DGP
 
@@ -61,7 +61,7 @@
 - 앵커: `t_prc_component_prices`(siz 차원, [세로][가로]) + 면적공식 + ceiling
 - 출처: `02_mapping/silsa-poster-area-matrix/` + `09_load/_migrate_areamatrix/` + 메모리 `dbmap-price-formula-types-authority`·`dbmap-silsa-price-via-poster-sign` {tier C, FRESH}
 - 연결: [[../base/sizes#BSZ-003]] (uses — 출력판형 보편 정의) · [[#PE-STALE]]
-- 사용처: _(레시피 집필 시 채움)_
+- 사용처: [[recipes/acrylic#AC-PRC-001]] (priced-by — 아크릴 면적매트릭스·미러=투명×2)
 - answers_cq: CQ-PRICE-05 (면적 기반 가로×세로 계산)
 - tags: #가격 #면적매트릭스 #ceiling #포스터사인
 
@@ -70,7 +70,7 @@
 - 앵커: `t_prc_component_prices`(수량×옵션 고정가)
 - 출처: `09_load/_migrate_fixedprice/` + `02_mapping/price211-fixedgrid/` {tier C, FRESH}
 - 연결: [[#PE-006]] · [[#PE-STALE]]
-- 사용처: [[recipes/booklet#BK-PRC-002]] (책자 떡제본 고정가 엽서북/떡메모지) · [[recipes/sticker#STK-PRC-001]] (priced-by — 형상×치수×코팅 격자)
+- 사용처: [[recipes/booklet#BK-PRC-002]] (책자 떡제본 고정가 엽서북/떡메모지) · [[recipes/sticker#STK-PRC-001]] (priced-by — 형상×치수×코팅 격자) · [[recipes/calendar#CAL-DC-001]] (priced-by — 디자인캘린더 고정가 직접단가 4000~24000) · [[recipes/calendar#CAL-PRC-002]] (캘린더가공 옵션 추가가 격자)
 - tags: #가격 #고정가형 #포스터교정
 
 ### [PE-008] 구간형 (수량구간 할인) t_dsc_*  {🟡}
@@ -78,7 +78,7 @@
 - 앵커: `t_dsc_*`(헤더·구간·링크)
 - 출처: `00_schema/discount-domain-detail.md` + `raw/webadmin/tools/load_discounts.py` {tier A/C, PARTIAL-STALE: I-7 PK}
 - 연결: [[load-path#LP-001]] (loaded-via) · 메모리 `dbmap-discount-authority`
-- 사용처: [[recipes/digital-print#DGP-PR-003]] (비대상 — 디지털인쇄는 구간형 아님·대조)
+- 사용처: [[recipes/digital-print#DGP-PR-003]] (비대상 — 디지털인쇄는 구간형 아님·대조) · [[recipes/acrylic#AC-PRC-001]] (priced-by — 아크릴 카테고리 수량구간 할인)
 - answers_cq: CQ-PRICE-04 (수량 구간별 할인 체계)
 - tags: #가격 #구간할인 #t_dsc
 
@@ -99,7 +99,7 @@
 - 앵커: (DB 외 — 앱 계산) · 입력 = `t_prd_product_plate_sizes` + 작업사이즈
 - 출처: 메모리 `dbmap-compute-in-app-db-stores-lookup`·`pangeori-l1.csv`(판걸이수=판형 마진 권위) {tier B/C, FRESH}
 - 연결: [[../base/prepress-file#BPF-002]] (uses — 판걸이 N-up 보편 개념) · [[#PE-006]] (ceiling 동일 철학)
-- 사용처: [[recipes/digital-print#DGP-PR-001]] (uses — 판수=앱 계산) · [[recipes/sticker#STK-DIM-002]] (uses — 스티커 판수=앱)
+- 사용처: [[recipes/digital-print#DGP-PR-001]] (uses — 판수=앱 계산) · [[recipes/sticker#STK-DIM-002]] (uses — 스티커 판수=앱) · [[recipes/acrylic#AC-DIM-003]] (uses — UV 평판 판걸이수=앱 계산)
 - answers_cq: CQ-PRICE-10 (판걸이수가 가격에 미치는 영향·계산)
 - tags: #앱계산 #판수 #판걸이수 #박등급
 
@@ -133,6 +133,7 @@
 - 내용: 6상품군 가격사슬 부재(crosscut 추가-I). template_prices 0행([PE-004]).
 - 출처: `_curation/axis-price-engine.md` GAP-PE-3 {tier C}
 - 연결: [[#PE-004]]
+- 사용처: [[recipes/photobook#PB-PRC-001]] (포토북 가격 0행·PRF_PBK_PAGEBAND 적재 필요) · [[recipes/calendar#CAL-PRC-001]] (캘린더 가격사슬 부재·미연결) · [[recipes/calendar#CAL-DC-001]] (디자인캘린더 prices 0행·고정가 미적재)
 - tags: #GAP #가격미적재
 
 ### [PE-GAP-4] 박 가격 GAP · plate 교정 대기 차단 (3절/투명/048/019)  {🔴}

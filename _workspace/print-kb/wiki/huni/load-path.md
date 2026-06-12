@@ -14,7 +14,7 @@
 - 앵커: `raw/webadmin/sql/01a~23_*.sql` · `tools/load_master.py`·`load_discounts.py`
 - 출처: `raw/webadmin/sql/01a~23_*.sql` + `raw/webadmin/tools/load_master.py`(로직만) {tier A, FRESH(HEAD bd12d03)}
 - 연결: [[#LP-STALE]] (v03 입력 금지) · [[#LP-002]]
-- 사용처: [[recipes/booklet#BK-LP-001]] (책자 load_master 10·11~21 시트 적재) · [[recipes/digital-print#DGP-LP-001]] (loaded-via — 디지털인쇄 적재 oracle·v03 금지) · [[recipes/sticker#STK-LP-001]] (loaded-via — 스티커 v03 전파기)
+- 사용처: [[recipes/booklet#BK-LP-001]] (책자 load_master 10·11~21 시트 적재) · [[recipes/digital-print#DGP-LP-001]] (loaded-via — 디지털인쇄 적재 oracle·v03 금지) · [[recipes/sticker#STK-LP-001]] (loaded-via — 스티커 v03 전파기) · [[recipes/photobook#PB-LP-001]] (loaded-via — 포토북 load_master·가격 함수 부재) · [[recipes/acrylic#AC-LP-001]] (loaded-via — 적재 oracle) · [[recipes/calendar#CAL-LP-001]] (loaded-via — 캘린더 load_master 순수 전파기)
 - answers_cq: CQ-PROD-01 (상품 분류·적재 기준) · CQ-TERM-07 (코드체계 적재)
 - tags: #적재 #oracle #webadmin #load_master
 
@@ -35,7 +35,7 @@
 - 앵커: `t_cod_base_codes`(`upr_cod_cd` 계층) · `00_schema/code-identifier-strategy.md` + `15_domain-spec/<family>/mapping-info.md`
 - 출처: `00_schema/code-identifier-strategy.md`(전략 FRESH) + `15_domain-spec/<family>/mapping-info.md`(PARTIAL: I-6) {tier C}
 - 연결: [[#LP-004]] · [[cpq-options#CPQ-003]] (requires — 차원행 선적재 트리거) · [[materials#MAT-003]] (mapped-to — t_cod_base_codes)
-- 사용처: [[recipes/booklet#BK-LP-001]] (책자 FK 위상 적재) · [[recipes/digital-print#DGP-LP-002]] (loaded-via — 디지털인쇄 FK 위상·코드행) · [[recipes/sticker#STK-LP-002]] (loaded-via — 스티커 FK 위상·코드행)
+- 사용처: [[recipes/booklet#BK-LP-001]] (책자 FK 위상 적재) · [[recipes/digital-print#DGP-LP-002]] (loaded-via — 디지털인쇄 FK 위상·코드행) · [[recipes/sticker#STK-LP-002]] (loaded-via — 스티커 FK 위상·코드행) · [[recipes/photobook#PB-LP-001]] (loaded-via — 포토북 FK 위상·sets B셋트) · [[recipes/acrylic#AC-LP-002]] (loaded-via — FK 위상·코드행 선적재) · [[recipes/calendar#CAL-LP-001]] (uses — 캘린더 FK 위상·코드행 선적재)
 - answers_cq: CQ-FILE-05 (조판/임포지션 적재 입력값)
 - tags: #적재 #FK위상 #코드행선적재 #BASE_CODE_GROUP
 
@@ -44,7 +44,7 @@
 - 앵커: ON CONFLICT (이름 기반) + 채번 MAX+1
 - 출처: 메모리 `dbmap-code-identifier-strategy`·`dbmap-no-db-load-file-first` {tier C, FRESH}
 - 연결: [[#LP-005]] (PK 주의) · [[price-engine#PE-003]]
-- 사용처: [[recipes/digital-print#DGP-LP-002]] (loaded-via — 봉투 template 재사용·separator) · [[recipes/digital-print#DGP-DM-004]] (loaded-via — 묶음수 멱등) · [[recipes/sticker#STK-LP-002]] (loaded-via — 스티커 search-before-mint 030~047)
+- 사용처: [[recipes/digital-print#DGP-LP-002]] (loaded-via — 봉투 template 재사용·separator) · [[recipes/digital-print#DGP-DM-004]] (loaded-via — 묶음수 멱등) · [[recipes/sticker#STK-LP-002]] (loaded-via — 스티커 search-before-mint 030~047) · [[recipes/photobook#PB-LP-001]] (loaded-via — 포토북 멱등·search-before-mint) · [[recipes/acrylic#AC-LP-002]] (loaded-via — 멱등 UPSERT) · [[recipes/calendar#CAL-ST-DEF-004]] (멱등 — plate 재적재 .01→.03 퇴행 위험) · [[recipes/calendar#CAL-ST-DEF-007]] (search-before-mint — 삼각대거치 공정 마스터 부재 입증)
 - tags: #적재 #멱등 #UPSERT #search-before-mint #채번
 
 ### [LP-005] 가격 ON CONFLICT 새 PK = (prd_cd, apply_bgn_ymd)  {🟡}
@@ -64,7 +64,7 @@
 - 앵커: `13_admin-ui-spec/admin-ui-spec.md`·`entities/` + product-viewer pvEdit
 - 출처: `13_admin-ui-spec/admin-ui-spec.md`·`entities/`(입력경로 FRESH) + `18_schema-change/impact-diagnosis.md`(백필 미완) {tier C/A, PARTIAL-STALE: I-10·I-11}
 - 연결: [[price-engine#PE-002]] (백필 0행) · [[price-engine#PE-004]] (template_prices 0행)
-- 사용처: [[recipes/sticker#STK-LP-002]] (loaded-via — 스티커 admin pvEdit 입력경로)
+- 사용처: [[recipes/sticker#STK-LP-002]] (loaded-via — 스티커 admin pvEdit 입력경로) · [[recipes/acrylic#AC-LP-002]] (loaded-via — admin 입력경로)
 - answers_cq: CQ-FILE-01 (파일 입고 상태머신·운영자 입력경로)
 - tags: #적재 #adminUI #입력경로 #백필미완 #컬럼존재≠백필
 
@@ -73,7 +73,7 @@
 - 앵커: CLAUDE.md §7 진행상태 + `09_load/_exec*/` 매니페스트
 - 출처: CLAUDE.md §7 진행상태 + `09_load/_exec*/` {tier C, FRESH}
 - 연결: [[#LP-STALE]] · 메모리 `dbmap-round5-load-execution`
-- 사용처: [[recipes/digital-print#DGP-DM-003]] (loaded-via — plate 값정답·경로불명) · [[recipes/digital-print#DGP-PR-002]] (디지털 308행 적재·차단 잔존)
+- 사용처: [[recipes/digital-print#DGP-DM-003]] (loaded-via — plate 값정답·경로불명) · [[recipes/digital-print#DGP-PR-002]] (디지털 308행 적재·차단 잔존) · [[recipes/calendar#CAL-LP-002]] (캘린더 GO분 적재됨·미적재/drift 구분)
 - tags: #적재 #현황 #GO분적재 #LOADED=행존재만
 
 ---
@@ -94,6 +94,7 @@
 - 내용: 결함 진원 v03 상류를 고칠지 DB를 직접 교정할지 미결.
 - 출처: `_curation/axis-load-path.md` GAP-LP-1 · `_crosscut/` BATCH-12 {tier C}
 - 연결: [[#LP-STALE]]
+- 사용처: [[recipes/calendar#CAL-ST-DEF-013]] (캘린더 v03 상류 vs DB 직접 BATCH-12) · [[recipes/calendar#CAL-LP-002]] (캘린더 결함 진원=상류 v03/스키마 drift)
 - tags: #GAP #v03상류 #BATCH-12
 
 ### [LP-GAP-2] template_prices 적재 경로 미반영 (SKU 가격 오버라이드 I-4)  {🔴}
@@ -113,6 +114,7 @@
 - 내용: round-5/6/10 교정 + 신규 교정의 실 COMMIT은 인간 승인 대기.
 - 출처: `_curation/axis-load-path.md` GAP-LP-4 {tier C}
 - 연결: [[#LP-007]]
+- 사용처: [[recipes/acrylic#GAP-AC-7]] (아크릴 실 교정 COMMIT 승인 대기)
 - tags: #GAP #COMMIT승인대기
 
 ---

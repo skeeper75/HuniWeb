@@ -37,10 +37,10 @@
 - [recipes/digital-print](recipes/digital-print.md): 디지털인쇄 — 36상품/7구분(엽서·명함·상품권·배경지·라벨택 등)·배경지=포장세트·원자합산형 PRF_DGP·round-13 결함18(C-01~18). 🟡 (✅6·🟡10·🔴8·⚪2)
 - [recipes/sticker](recipes/sticker.md): 스티커 16상품(PRD_000052~067)·인쇄방식 5분기·형상=칼틀 size(Q7)·형상×치수×코팅 격자 가격·코팅 자재 오적재(Q9 공정 CONFLICT·BATCH-3)·063 화이트 누락·CPQ 미적재. 🟡 (round-13 GO·결함17)
 - [recipes/booklet](recipes/booklet.md): 책자 10완제품+21반제품(PRD_000068~098)·생산구조 3종(A통합/B셋트/떡제본)·제본 합산형 PRF_BIND_SUM·떡제본 고정가·박색/코팅=공정(Q2/Q9)·BK-2 sub_prd 078 몽블랑(레더여야)·BK-CAT 전용잎노드 6개 고아·CPQ 미적재. 🟡 (round-13 GO·결함13·컨펌Q-BK-A~E)
-- _(예정)_ recipes/photobook: 포토북 — 팩 `_curation/pack-photobook.md`
-- _(예정)_ recipes/calendar: 캘린더 — 팩 `_curation/pack-calendar.md`
-- _(예정)_ recipes/design-calendar: 디자인캘린더 — 팩 `_curation/pack-calendar.md`(공유)
-- _(예정)_ recipes/acrylic: 아크릴 — 팩 `_curation/pack-acrylic.md`
+- [recipes/photobook](recipes/photobook.md): 포토북 1논리상품(PRD_000100)+반제품7(101~107)·size4×표지타입5 variant(책자와 정반대)·page-band 합산형 PRF_PBK_PAGEBAND(라이브 미적재·≠엽서북 PRF_PCB_FIXED)·레더 .01/.08→.06(MAT_000186 6상품 횡단)·소프트 page "4~14"=엑셀 공란 GAP(F-PB-1 oracle 날조 적발)·CPQ 미적재. 🟡 (round-13 GO·결함8·컨펌Q1~Q5)
+- [recipes/calendar](recipes/calendar.md): 캘린더+디자인캘린더 5 form factor(PRD_000108~112·탁상/미니/엽서/벽걸이/와이드)·디자인캘린더=같은 상품 에디터 surface(별 상품 아님)·장수=고유 축(page_rule 아님·Q12)·캘린더가공 택일그룹 GRP-CAL-가공(excl_groups Phase11 삭제→option_groups 흡수)·캘린더=원자합산형/디자인캘린더=고정가형(둘 다 미적재)·삼각대/링 자재 오적재(정답 공정)·plate .01↔.03 적재경로 퇴행·삼각대거치 공정 mint. 🟡 (round-13 GO·결함20·컨펌CL-A~G)
+- _(통합)_ design-calendar: 디자인캘린더는 calendar.md에 통합(팩 결정·같은 5상품 surface)
+- [recipes/acrylic](recipes/acrylic.md): 아크릴 23등록 상품(PRD_000146~169)·UV 평판인쇄 굿즈 단품·두께=자재(1.5/3/8mm)·형상=완칼 묵시·가격=가로×세로 면적매트릭스(미러=투명×2)·**UV 변형 print_side 오적재 20상품(정답 PROC_000002)**·완칼 전무·볼체인 소실·CPQ 미적재. 🟡 (round-13 GO·결함14·✅4·🟡10·🔴11·⚪2)
 - _(예정)_ recipes/silsa: 실사 — 팩 `_curation/pack-silsa.md`
 - _(예정)_ recipes/goods-pouch: 굿즈파우치 — 팩 `_curation/pack-goods-pouch.md`
 - _(예정)_ recipes/product-accessory: 상품악세사리 — 팩 `_curation/pack-product-accessory.md`
