@@ -41,10 +41,10 @@
 - [recipes/calendar](recipes/calendar.md): 캘린더+디자인캘린더 5 form factor(PRD_000108~112·탁상/미니/엽서/벽걸이/와이드)·디자인캘린더=같은 상품 에디터 surface(별 상품 아님)·장수=고유 축(page_rule 아님·Q12)·캘린더가공 택일그룹 GRP-CAL-가공(excl_groups Phase11 삭제→option_groups 흡수)·캘린더=원자합산형/디자인캘린더=고정가형(둘 다 미적재)·삼각대/링 자재 오적재(정답 공정)·plate .01↔.03 적재경로 퇴행·삼각대거치 공정 mint. 🟡 (round-13 GO·결함20·컨펌CL-A~G)
 - _(통합)_ design-calendar: 디자인캘린더는 calendar.md에 통합(팩 결정·같은 5상품 surface)
 - [recipes/acrylic](recipes/acrylic.md): 아크릴 23등록 상품(PRD_000146~169)·UV 평판인쇄 굿즈 단품·두께=자재(1.5/3/8mm)·형상=완칼 묵시·가격=가로×세로 면적매트릭스(미러=투명×2)·**UV 변형 print_side 오적재 20상품(정답 PROC_000002)**·완칼 전무·볼체인 소실·CPQ 미적재. 🟡 (round-13 GO·결함14·✅4·🟡10·🔴11·⚪2)
-- _(예정)_ recipes/silsa: 실사 — 팩 `_curation/pack-silsa.md`
-- _(예정)_ recipes/goods-pouch: 굿즈파우치 — 팩 `_curation/pack-goods-pouch.md`
-- _(예정)_ recipes/product-accessory: 상품악세사리 — 팩 `_curation/pack-product-accessory.md`
-- _(예정)_ recipes/stationery: 문구 — 팩 `_curation/pack-stationery.md`
+- [recipes/silsa](recipes/silsa.md): 실사 28등록 PRD_000118~145·소재기반 13군·면적매트릭스 13+고정가 16·일반현수막 CPQ(og3/oi18)·카테고리 고아 CAT_000298·자재.08 평면화·레더 .08→.06(MAT_000186 6상품 횡단). 🟡 (round-13 GO·결함14·✅5·🟡10·🔴8·⚪2)
+- [recipes/goods-pouch](recipes/goods-pouch.md): 굿즈파우치 103상품·19 상품군·혼합 인쇄방식 7종(패브릭/UV/전사외주/이지굿즈PVC고주파/디지털/만년도장/실사)·사이즈=치수형22 vs 옵션형202(round-10 size→option 448셀)·본체색=재질행 합성(정답 모델)·고정가형+구간할인 굿즈A/B타입·봉제(080)/에폭시(083)/맥세이프 후가공·카테고리 고아 35상품·자재 폭증/오염(.09)·봉제→부착 오적재·CPQ 미적재. 🟡 (round-13 GO·결함17·컨펌Q-GP-1~5)
+- [recipes/product-accessory](recipes/product-accessory.md): 상품악세사리 15 부자재(PRD_000001~015)·**전부 카테고리 012 포장재**(인쇄물 아님·인쇄 5축 N/A·시트 라벨일 뿐)·봉투/케이스 11+상품액세서리 4·사이즈=치수×묶음수×색상 3축 복합·**이중등록=의도**(OTC TEMPLATE 281/282/283·09_delete_dup 삭제제외 입증)·우드거치대=자재·색상 4종 MAT_TYPE.10 자재 오염(정답 옵션)·카테고리 고아 293→276/285/287 재연결·가격사슬 0행(round-2 미커버)·봉투세트=sets+CPQ 사이즈매칭(Q-ID-A)·CPQ 미적재. 🟡 (round-13 GO·결함14·컨펌Q-ID-A·Q-PA-A~G)
+- [recipes/stationery](recipes/stationery.md): 문구 11완제품(만년다이어리 4·먼슬리·스프링노트/수첩·메모패드·중철노트·떡메모지 097)+반제품1·생산구조 3종(A통합/B셋트/단순·booklet 동형)·고정가형 C29 inline(round-2 미실행·prices 0행)·떡메모지=묶음수×size 매트릭스·**미싱제본 MISSING**(030/074는 제본 family 아님·신규공정 BATCH-13)·종이 usage.07 fallback·카테고리 의미매칭(노드순≠prd_cd순 F-ST-G1)·박 미운영·CPQ 미적재. 🟡 (round-13 GO·결함18·컨펌Q-ST-A~M)
 
 ## 🏷️ HUNI — 정책 (policy 레이어)
 

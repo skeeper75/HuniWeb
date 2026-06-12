@@ -14,7 +14,7 @@
 - 앵커: `t_mat_materials` · `t_prd_product_materials`(mat_cd + usage_cd)
 - 출처: `huni-dbmap/00_schema/ref-materials.csv`·`ref-product-materials.csv` + 라이브 psql {tier A, PARTIAL: 06-04 스냅샷·round-13 오적재 미반영}
 - 연결: [[../base/paper#BPP-003]] (uses — 자재의 보편 상위 개념)
-- 사용처: [[recipes/booklet#BK-BOM-001]] (책자 자재 usage 슬롯 내지/표지/면지/링) · [[recipes/sticker#STK-BOM-003]] (스티커 점착지 자재) · [[recipes/photobook#PB-BOM-001]] (포토북 자재 usage 슬롯 내지/표지/면지) · [[recipes/calendar#CAL-BOM-001]] (캘린더 본체 종이 usage USAGE.07 공통) · [[recipes/acrylic#AC-BOM-001]] (uses — 아크릴 본체/부속 자재 마스터)
+- 사용처: [[recipes/booklet#BK-BOM-001]] (책자 자재 usage 슬롯 내지/표지/면지/링) · [[recipes/sticker#STK-BOM-003]] (스티커 점착지 자재) · [[recipes/photobook#PB-BOM-001]] (포토북 자재 usage 슬롯 내지/표지/면지) · [[recipes/calendar#CAL-BOM-001]] (캘린더 본체 종이 usage USAGE.07 공통) · [[recipes/acrylic#AC-BOM-001]] (uses — 아크릴 본체/부속 자재 마스터) · [[recipes/product-accessory#PA-BOM-001]] (uses — 우드거치대=부속 자재 usage_cd) · [[recipes/stationery#ST-BOM-001]] (uses — 문구 내지/표지/면지/PVC/부속 usage 슬롯) · [[recipes/silsa#SL-BOM-001]] (uses — 실사 소재별 본체 자재 USAGE.07 낱장 단일) · [[recipes/goods-pouch#GP-BOM-002]] (uses — 굿즈 자재 마스터·소재별 MAT_TYPE)
 - answers_cq: CQ-PROD-05 (상품별 옵션 축·자재) · CQ-TERM-04 (종이/소재 약어)
 - tags: #자재 #구조 #usage_cd
 
@@ -23,7 +23,7 @@
 - 앵커: `t_prd_product_materials.usage_cd`
 - 출처: `15_domain-spec/digital-print/domain-research-notes.md` + 메모리 `dbmap-column-domain-loadspec-round11` {tier C, FRESH}
 - 연결: [[#MAT-001]] · [[../base/binding#BBD-001]] (uses — 표지/내지=제본 단위 보편 개념)
-- 사용처: [[recipes/digital-print#DGP-BM-001]] (uses — 낱장 USAGE.07 공통) · [[recipes/booklet#BK-ID-002]] (책자 A통합/B셋트 parent+usage_cd 생산구조) · [[recipes/sticker#STK-BOM-003]] (스티커 점착지 parent+usage) · [[recipes/photobook#PB-ID-002]] (포토북 B셋트 parent+usage_cd·sub_prd 빈껍데기) · [[recipes/calendar#CAL-ID-004]] (캘린더 우드거치대=부속 자재) · [[recipes/acrylic#AC-DIM-001]] (uses — 아크릴 두께=자재 parent)
+- 사용처: [[recipes/digital-print#DGP-BM-001]] (uses — 낱장 USAGE.07 공통) · [[recipes/booklet#BK-ID-002]] (책자 A통합/B셋트 parent+usage_cd 생산구조) · [[recipes/sticker#STK-BOM-003]] (스티커 점착지 parent+usage) · [[recipes/photobook#PB-ID-002]] (포토북 B셋트 parent+usage_cd·sub_prd 빈껍데기) · [[recipes/calendar#CAL-ID-004]] (캘린더 우드거치대=부속 자재) · [[recipes/acrylic#AC-DIM-001]] (uses — 아크릴 두께=자재 parent) · [[recipes/product-accessory#PA-BOM-001]] (uses — 부자재 parent+usage_cd 우드거치대) · [[recipes/stationery#ST-ID-002]] (책자동형 A통합/B셋트 parent+usage_cd) · [[recipes/silsa#SL-BOM-001]] (uses — 실사 낱장 본체 parent+usage_cd C단일) · [[recipes/goods-pouch#GP-BOM-001]] (uses — 굿즈 낱장 USAGE.07 공통·본체색 parent 합성)
 - tags: #자재 #parent #usage_cd
 
 ---
@@ -35,7 +35,7 @@
 - 앵커: `t_mat_materials.mat_typ_cd` ← `t_cod_base_codes`(`upr_cod_cd` 계층, `cod_grp_cd` 없음)
 - 출처: 라이브 psql(`t_cod_base_codes` 컬럼 실측) + `00_schema/ref-base-codes.csv`·`code-values.md` {tier A/C, PARTIAL-STALE: impact-diagnosis I-8 코드 정정}
 - 연결: [[#MAT-005]] (.07~10 오염) · [[load-path#LP-003]] (loaded-via — 코드행 선적재)
-- 사용처: [[recipes/sticker#STK-ST-004]] (스티커 점착지 .01↔.11 혼재 교정대기) · [[recipes/acrylic#AC-BOM-001]] (uses — MAT_TYPE .03/.07 본체/부속)
+- 사용처: [[recipes/sticker#STK-ST-004]] (스티커 점착지 .01↔.11 혼재 교정대기) · [[recipes/acrylic#AC-BOM-001]] (uses — MAT_TYPE .03/.07 본체/부속) · [[recipes/goods-pouch#GP-BOM-002]] (uses — MAT_TYPE .05/.04/.09/.10 도메인) · [[recipes/silsa#SL-BOM-001]] (자재 = 소재별 parent + usage_cd (낱장 본체 단일)) · [[recipes/silsa#SL-DEF-002]] (자재유형 .08 평면화 (패브릭=.05·레더=.06이어야))
 - answers_cq: CQ-TERM-07 (코드체계 의미 — MAT_TYPE)
 - tags: #자재 #MAT_TYPE #코드도메인
 
@@ -44,7 +44,7 @@
 - 앵커: `t_mat_materials`(합성 원칙 — 행 분할 아님)
 - 출처: `10_configurator/wowpress-option-model.md`·`huni-goods-option-mapping.md` + 메모리 `dbmap-material-option-normalization` {tier C/D, FRESH}
 - 연결: [[cpq-options#CPQ-005]] (uses — 옵션=자재+공정 BUNDLE) · [[#MAT-005]]
-- 사용처: [[recipes/acrylic#AC-DIM-001]] (uses — 본체색=재질행 합성·과분할 금지)
+- 사용처: [[recipes/acrylic#AC-DIM-001]] (uses — 본체색=재질행 합성·과분할 금지) · [[recipes/goods-pouch#GP-BOM-001]] (uses — 본체색=재질행 합성·과분할 금지·굿즈가 정답 모델) · [[recipes/product-accessory#PA-BOM-002]] (색상 부자재 = 자재 오적재 (MAT_TYPE.10 오염))
 - answers_cq: CQ-PROD-06 (variant 색/사이즈/두께 → 차원 분해)
 - tags: #자재 #정규화 #과분할금지 #본체색합성
 
@@ -57,7 +57,7 @@
 - 앵커: `t_mat_materials`(mat_typ_cd .07~.10 오염 행)
 - 출처: `17_correctness/<family>/correction-manifest.md` + `_crosscut/crosscut-synthesis.md` 패턴축② {tier C(round-13), FRESH}
 - 연결: [[#MAT-004]] (정답 원칙) · [[processes#PRC-006]] (UV 오적재 동형)
-- 사용처: [[recipes/sticker#STK-ST-004]] (스티커 자재유형 .01/.11 혼재 사례) · [[recipes/acrylic#AC-DEF-001]] (UV print_side 오적재 동형 패턴)
+- 사용처: [[recipes/sticker#STK-ST-004]] (스티커 자재유형 .01/.11 혼재 사례) · [[recipes/acrylic#AC-DEF-001]] (UV print_side 오적재 동형 패턴) · [[recipes/product-accessory#PA-ST-002]] (상품악세사리 색상 4종 MAT_TYPE.10 자재 오염) · [[recipes/goods-pouch#GP-ST-003]] (굿즈 MAT_TYPE.09 무차별 오염·비-소재 자재화 사례) · [[recipes/booklet#BK-DEF-001]] (라이브 오적재 양면 표기 (round-13 correction-manifest)) · [[recipes/calendar#CAL-BOM-001]] (자재 = 본체 종이(usage USAGE.07 공통) + 거치/제본 부속) · [[recipes/calendar#CAL-ST-DEF-001]] (라이브 오적재 양면 표기 (round-13 correction-manifest)) · [[recipes/photobook#PB-DEF-001]] (라이브 오적재 양면 표기 (round-13 correction-manifest)) · [[recipes/silsa#SL-DEF-002]] (자재유형 .08 평면화 (패브릭=.05·레더=.06이어야)) · [[recipes/stationery#ST-DEF-001]] (라이브 오적재 양면 표기 (round-13 correction-manifest))
 - tags: #결함 #자재오염 #round13 #교정대기
 
 ### [MAT-006] 레더 자재 3-way 혼재 → 정답 .06(가죽)  {🔴 교정대기}
@@ -65,7 +65,7 @@
 - 앵커: `t_mat_materials` MAT_000186 (mat_typ_cd .08 → .06)
 - 출처: `16_mapping-research/photobook/mapping-final.md` + `17_correctness/photobook/correction-manifest.md` (F-PB) {tier C(round-12/13), FRESH}
 - 연결: [[#MAT-005]] (오염 패턴) · [[#MAT-003]]
-- 사용처: [[recipes/booklet#BK-DEF-001]] (책자 BK-2·BK-3 레더 .08→.06 교정대기) · [[recipes/photobook#PB-BOM-001]] (requires — 포토북 레더 표지 .06) · [[recipes/photobook#PB-DEF-001]] (포토북 PB-C1 레더 .01/.08→.06·MAT_000186 6상품 횡단)
+- 사용처: [[recipes/booklet#BK-DEF-001]] (책자 BK-2·BK-3 레더 .08→.06 교정대기) · [[recipes/photobook#PB-BOM-001]] (requires — 포토북 레더 표지 .06) · [[recipes/photobook#PB-DEF-001]] (포토북 PB-C1 레더 .01/.08→.06·MAT_000186 6상품 횡단) · [[recipes/stationery#ST-DEF-001]] (문구 ST-04 레더 174/175 .08→.06 교정대기) · [[recipes/silsa#SL-DEF-002]] (실사 레더 MAT_000186 .08→.06·패브릭 .05·1행 6상품 횡단)
 - tags: #결함 #레더 #가죽 #횡단오염 #round13
 
 ---
@@ -76,12 +76,14 @@
 - 내용: 굿즈파우치는 본체색=재질행 합성(정답)이나 다른 family는 색=자재 오염(②). BATCH-2 컨펌 미결.
 - 출처: `_curation/axis-materials.md` GAP-MAT-1 · `_crosscut/` BATCH-2 {tier C}
 - 연결: [[#MAT-004]] · [[#MAT-005]]
+- 사용처: [[recipes/product-accessory#PA-ST-002]] (상품악세사리 색상 variant 귀속 Q-PA-B·BATCH-2) · [[recipes/goods-pouch#GP-ST-002]] (굿즈 본체색×규격 8행 폭증 교정대기·Q-GP-2)
 - tags: #GAP #본체색
 
 ### [MAT-GAP-2] SHAPE/COUNT/OPT 3축 신설 필요 (WowPress 1축 GAP)  {🔴}
 - 내용: 형상/구수/옵션 3축이 자재 정규화로 표현 불가 → ddl-proposer 신설 필요.
 - 출처: `_curation/axis-materials.md` GAP-MAT-2 {tier D}
 - 연결: [[#MAT-004]]
+- 사용처: [[recipes/acrylic#AC-DEF-003]] (usage 미분화 (33행 전부 USAGE.07)) · [[recipes/acrylic#AC-DEF-010]] (입체블럭169 두께 192 폴백 (라미10T 자재 부재))
 - tags: #GAP #SHAPE #COUNT
 
 ### [MAT-GAP-3] dep_proc_cd 삭제 후 자재→공정 게이팅 대체경로 미확정  {🔴}

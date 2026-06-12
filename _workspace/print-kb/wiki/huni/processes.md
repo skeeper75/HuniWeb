@@ -15,7 +15,7 @@
 - 앵커: `t_proc_processes` · `t_prd_product_processes`(배타 `mand_proc_yn`)
 - 출처: `00_schema/ref-processes.csv`·`ref-product-processes.csv` + 라이브 psql(`information_schema` 실측) {tier A, PARTIAL: 06-04 스냅샷·excl_groups 삭제 반영}
 - 연결: [[../base/finishing#BFN-001]] (uses — 공정의 보편 상위 개념) · [[#PRC-002]] · [[#PRC-GAP-5]] (택일그룹 GAP)
-- 사용처: [[recipes/digital-print#DGP-BM-002]] (uses — 디지털인쇄 공정 라우트) · [[recipes/sticker#STK-BOM-001]] (uses — 커팅 반칼/완칼/도무송) · [[recipes/calendar#CAL-BOM-002]] (uses — 캘린더 트윈링제본/타공/포장·삼각대거치) · [[recipes/acrylic#AC-BOM-002]] (uses — 아크릴 UV 단일 인쇄방식)
+- 사용처: [[recipes/digital-print#DGP-BM-002]] (uses — 디지털인쇄 공정 라우트) · [[recipes/sticker#STK-BOM-001]] (uses — 커팅 반칼/완칼/도무송) · [[recipes/calendar#CAL-BOM-002]] (uses — 캘린더 트윈링제본/타공/포장·삼각대거치) · [[recipes/acrylic#AC-BOM-002]] (uses — 아크릴 UV 단일 인쇄방식) · [[recipes/stationery#ST-BOM-002]] (uses — 문구 제본 PROC_000017 자식 1:1·mand_proc_yn) · [[recipes/goods-pouch#GP-BOM-003]] (uses — 봉제/에폭시/맥세이프 공정 마스터·연결) · [[recipes/silsa#SL-BOM-002]] (인쇄방식 = 실사 PROC_000006 (아크릴스티커만 UV PROC_000002)) · [[recipes/silsa#SL-BOM-003]] (후가공 = 봉제·타공·족자·열재단·보드마운팅 (소재가 완성형태)) · [[recipes/silsa#SL-DEF-003]] (봉제/족자 공정 param 손실 (4상품·variant 축약)) · [[recipes/silsa#SL-DEF-004]] (보드마운팅 공정 마스터 0개 (폼/포맥스/스탠딩 표현 불가)) · [[recipes/silsa#SL-DEF-007]] (액자 귀속 = 공정(액자가공) vs 부속(프레임 별매) 미확정)
 - answers_cq: CQ-PROC-01 (공정 라우트·상품군 매핑) · CQ-PROC-02 (공정 시퀀스 전후 의존)
 - tags: #공정 #구조 #mand_proc_yn
 
@@ -37,7 +37,7 @@
 - 앵커: `t_proc_processes`(별색 공정, clr_cd=NULL)
 - 출처: `15_domain-spec/digital-print/domain-research-notes.md` + round-13 acrylic {tier C(round-11/13), FRESH}
 - 연결: [[../base/color#BCL-003]] (uses — 별색 보편 정의) · [[price-engine#PE-005]] (priced-by — 별색=공정 → 합산형 비용)
-- 사용처: [[recipes/digital-print#DGP-BM-002]] (uses — 별색=공정 합산 항목) · [[recipes/sticker#STK-BOM-002]] (uses — 화이트 underbase=공정) · [[recipes/calendar#CAL-BOM-003]] (uses — 링칼라/삼각대컬러=공정 param 동형)
+- 사용처: [[recipes/digital-print#DGP-BM-002]] (uses — 별색=공정 합산 항목) · [[recipes/sticker#STK-BOM-002]] (uses — 화이트 underbase=공정) · [[recipes/calendar#CAL-BOM-003]] (uses — 링칼라/삼각대컬러=공정 param 동형) · [[recipes/silsa#SL-BOM-004]] (uses — 실사 투명/홀로그램 화이트 underbase PROC_000008) · [[recipes/goods-pouch#GP-BOM-003]] (uses — 잉크색/면=도수 별색 인접) · [[recipes/photobook#PB-BOM-003]] (도수 = 내지 양면 CMYK4 · 표지 단면 CMYK4 (별색 없음))
 - answers_cq: CQ-FIN-03 (별색인쇄 용도) · CQ-FIN-05 (박 vs 형압 vs 별색금 구별·DB 인코딩)
 - tags: #공정 #별색 #spotcolor #clr_cd_null
 
@@ -46,7 +46,7 @@
 - 앵커: `t_prd_product_processes`(자재 미연결 공정)
 - 출처: 메모리 `dbmap-option-material-process-bundle` {FRESH}
 - 연결: [[#PRC-005]] · [[materials#MAT-004]]
-- 사용처: [[recipes/digital-print#DGP-BM-003]] (uses — 완칼 PROC_000053 커팅=순수공정) · [[recipes/sticker#STK-BOM-001]] (uses — 스티커 커팅=순수공정) · [[recipes/acrylic#AC-BOM-003]] (uses — 아크릴 완칼=순수공정·묵시 필수)
+- 사용처: [[recipes/digital-print#DGP-BM-003]] (uses — 완칼 PROC_000053 커팅=순수공정) · [[recipes/sticker#STK-BOM-001]] (uses — 스티커 커팅=순수공정) · [[recipes/acrylic#AC-BOM-003]] (uses — 아크릴 완칼=순수공정·묵시 필수) · [[recipes/silsa#SL-BOM-003]] (후가공 = 봉제·타공·족자·열재단·보드마운팅 (소재가 완성형태)) · [[recipes/silsa#SL-CPQ-002]] (일반현수막138 = 끈/각목 자재+공정 BUNDLE 파일럿 (oi=18행 COMMIT·라이브 실측))
 - tags: #공정 #순수공정 #열재단 #타공
 
 ### [PRC-005] 박·코팅·UV = 공정 (실무진 확정 Q1~Q15)  {🟡}
@@ -54,7 +54,7 @@
 - 앵커: `t_proc_processes`(박·코팅·UV PROC_000002)
 - 출처: `15_domain-spec/<family>/domain-research-notes.md`(Q1~Q15) + 메모리 `dbmap-column-domain-loadspec-round11` {tier B, FRESH}
 - 연결: [[#PRC-006]] · [[../base/finishing#BFN-004]] (uses — 박 보편 정의)
-- 사용처: [[recipes/digital-print#DGP-BM-004]] (uses — 박=공정) · [[recipes/digital-print#DGP-BM-002]] (uses — 박/코팅 공정) · [[recipes/sticker#STK-ST-001]] (uses — 코팅=공정 정답, CONFLICT) · [[recipes/booklet#BK-BOM-002]] (uses — 책자 제본/코팅/박색=공정) · [[recipes/photobook#PB-BOM-002]] (uses — 포토북 무광코팅=공정 정답·평면화 교정대기) · [[recipes/acrylic#AC-BOM-002]] (uses — UV=PROC_000002 공정 정답)
+- 사용처: [[recipes/digital-print#DGP-BM-004]] (uses — 박=공정) · [[recipes/digital-print#DGP-BM-002]] (uses — 박/코팅 공정) · [[recipes/sticker#STK-ST-001]] (uses — 코팅=공정 정답, CONFLICT) · [[recipes/booklet#BK-BOM-002]] (uses — 책자 제본/코팅/박색=공정) · [[recipes/photobook#PB-BOM-002]] (uses — 포토북 무광코팅=공정 정답·평면화 교정대기) · [[recipes/acrylic#AC-BOM-002]] (uses — UV=PROC_000002 공정 정답) · [[recipes/stationery#ST-BOM-002]] (uses — 문구 코팅=공정·박 미운영) · [[recipes/goods-pouch#GP-BOM-003]] (uses — 굿즈 후가공=공정 인접) · [[recipes/product-accessory#PA-BOM-001]] (인쇄 BOM N/A · 완제 부자재 (우드거치대=자재)) · [[recipes/silsa#SL-BOM-002]] (인쇄방식 = 실사 PROC_000006 (아크릴스티커만 UV PROC_000002)) · [[recipes/silsa#SL-BOM-004]] (화이트 별색(underbase) = 투명/홀로그램 소재 도메인 필수 (PROC_000008))
 - answers_cq: CQ-FIN-01 (후가공 공정 전체 목록) · CQ-FIN-02 (코팅 종류) · CQ-FIN-04 (UV평판인쇄 정의)
 - tags: #공정 #박 #코팅 #UV #실무진확정
 
@@ -67,7 +67,7 @@
 - 앵커: `t_proc_processes`(공정) vs `t_mat_materials`(자재) — 코팅 적재 타깃 충돌
 - 출처: `17_correctness/<family>/correction-manifest.md` + `_crosscut/crosscut-synthesis.md` 추가-A·Q9 {tier C(round-13), FRESH}
 - 연결: [[materials#MAT-005]] · [[#PRC-GAP-1]]
-- 사용처: [[recipes/sticker#STK-ST-001]] (코팅 자재 오적재 8상품·CONFLICT) · [[recipes/booklet#BK-BOM-002]] (책자=코팅 공정 측 기준점) · [[recipes/photobook#PB-DEF-001]] (포토북 PB-C2 무광코팅 자재 평면화·family 이탈)
+- 사용처: [[recipes/sticker#STK-ST-001]] (코팅 자재 오적재 8상품·CONFLICT) · [[recipes/booklet#BK-BOM-002]] (책자=코팅 공정 측 기준점) · [[recipes/photobook#PB-DEF-001]] (포토북 PB-C2 무광코팅 자재 평면화·family 이탈) · [[recipes/stationery#ST-DEF-001]] (문구 ST-03 코팅 평면화→자재+공정 분리·공정 측 기준점)
 - tags: #결함 #코팅 #CONFLICT #BATCH-3 #미결
 
 ### [PRC-007] 아크릴 print_side에 UV 오적재 (20상품)  {🔴 교정대기}
@@ -83,7 +83,7 @@
 - 앵커: `t_proc_processes`(미싱제본 — 미신설)
 - 출처: `17_correctness/stationery/correction-manifest.md` + 메모리 round-11(미싱제본 신규) {tier C(round-13), FRESH}
 - 연결: [[#PRC-GAP-2]] · [[../base/binding#BBD-003]] (uses — 제본 방식 보편 정의)
-- 사용처: _(레시피 집필 시 채움)_
+- 사용처: [[recipes/stationery#ST-BOM-003]] (uses — 미싱제본 신규 공정 필요·030/074는 제본 family 아님) · [[recipes/stationery#ST-DEF-001]] (라이브 권위 — 미싱제본 MISSING 172/175/176)
 - tags: #결함 #미싱제본 #MISSING #문구
 
 ---
@@ -94,13 +94,14 @@
 - 내용: [PRC-006] 통일 결정 미결.
 - 출처: `_curation/axis-processes.md` GAP-PROC-1 · `_crosscut/` BATCH-3 {tier C}
 - 연결: [[#PRC-006]]
+- 사용처: [[recipes/booklet#BK-DEF-007]] (컨펌 미결 (Q-BK-A~E)) · [[recipes/photobook#PB-DEF-003]] (컨펌 미결 (Q1~Q5)) · [[recipes/stationery#ST-DEF-006]] (컨펌 미결 (Q-ST-A~M)) · [[recipes/sticker#STK-ST-001]] (코팅 = 자재 오적재 (Q9 공정 CONFLICT 미결))
 - tags: #GAP #코팅 #BATCH-3
 
 ### [PRC-GAP-2] 신규 공정 신설 미결 (미싱제본·보드마운팅·삼각대거치)  {🔴}
 - 내용: BATCH-13 — 신규 공정 신설 결정 미결.
 - 출처: `_curation/axis-processes.md` GAP-PROC-2 · `_crosscut/` BATCH-13 {tier C}
 - 연결: [[#PRC-008]]
-- 사용처: [[recipes/calendar#CAL-ST-DEF-007]] (삼각대거치 공정 마스터 부재·mint 필요) · [[recipes/calendar#CAL-ST-DEF-013]] (CL-A 삼각대거치 컨펌)
+- 사용처: [[recipes/calendar#CAL-ST-DEF-007]] (삼각대거치 공정 마스터 부재·mint 필요) · [[recipes/calendar#CAL-ST-DEF-013]] (CL-A 삼각대거치 컨펌) · [[recipes/stationery#ST-BOM-003]] (미싱제본 신규 mint·Q-ST-A) · [[recipes/stationery#ST-DEF-006]] (BATCH-13 미싱제본 컨펌) · [[recipes/goods-pouch#GP-ST-005]] (굿즈 봉제/에폭시/맥세이프 신규 공정 신설 미결·Q-GP-5)
 - tags: #GAP #신규공정 #BATCH-13
 
 ### [PRC-GAP-3] 박 부모 PROC_000033 미연결 vs 박색 8자식 옵션풀  {🔴}
@@ -114,7 +115,7 @@
 - 내용: [W3 라이브 실측] `t_prd_product_process_excl_groups` 테이블 **라이브 부존재**(06-04 ref-csv 존재 → 이후 삭제). 인쇄방식별 택일 레시피([PRC-002])를 담을 전용 구조 없음 — 현 라이브는 `mand_proc_yn` 스칼라뿐. 택일그룹이 정답 모델이면 신규 엔티티(ddl-proposer) 또는 `constraints.logic`(JSONLogic 배타)로 대체 표현 필요. **결정 미결**: 전용 테이블 재신설 vs constraints 흡수.
 - 출처: 라이브 psql `information_schema`(0행) + `00_schema/ref-product-process-excl-groups.csv`(과거 ref, STALE) {tier A}
 - 연결: [[#PRC-002]] · [[cpq-options#CPQ-007]] (constraints.logic 대체경로 후보)
-- 사용처: [[recipes/calendar#CAL-CPQ-001]] (캘린더가공 택일=excl_groups 아닌 option_groups 흡수) · [[recipes/calendar#CAL-LP-002]] (load_master excl 로더 타겟 Phase11 삭제→재적재 실패)
+- 사용처: [[recipes/calendar#CAL-CPQ-001]] (캘린더가공 택일=excl_groups 아닌 option_groups 흡수) · [[recipes/calendar#CAL-LP-002]] (load_master excl 로더 타겟 Phase11 삭제→재적재 실패) · [[recipes/goods-pouch#GAP-GP-3]] (굿즈 가공 택일그룹 GRP-GP-가공·excl_grp_cd 삭제·Q-GP-3) · [[recipes/sticker#STK-CPQ-002]] (제약 = constraints.logic 단일경로 (constraint_json STALE))
 - tags: #GAP #택일그룹 #excl_groups삭제 #W3
 
 ### [PRC-GAP-4] dep_proc_cd 삭제 후 자재→공정 게이팅 대체경로  {🔴}

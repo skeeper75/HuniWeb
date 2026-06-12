@@ -54,7 +54,7 @@
 - 앵커: `t_prd_product_sizes.siz_cd`(완성품 4종) · `t_siz_sizes`(펼침 siz 7종 마스터)
 - 출처: `16_mapping-research/photobook/mapping-final.md` C5·C21 + `_gate/photobook-gate.md` K4(size4·펼침siz7 미연결 재현) {tier C(round-12/13), FRESH·라이브 실측}
 - 연결: [[base/sizes#BSZ-001]] (uses — 재단/작업/출력판형 보편 구분) · [[#PB-DEF-003]] (PB-A1 펼침 siz 귀속 컨펌)
-- answers_cq: CQ-PROD-06 (variant 사이즈 → 차원 분해)
+- answers_cq: CQ-PROD-06 (variant 사이즈 → 차원 분해) · CQ-PROD-07 (선택 가능 사이즈 목록 4 이산 variant·비규격 미허용)
 - tags: #포토북 #사이즈 #이산variant #펼침siz
 
 ### [PB-DIM-002] page_rule = 24/150/증가2 (하드 권위·소프트/레더 엑셀 공란 GAP)  {🟡}

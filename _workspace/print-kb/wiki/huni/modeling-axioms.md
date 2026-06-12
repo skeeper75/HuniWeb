@@ -10,6 +10,7 @@
 - 근거(보편): "방식→후가공/소재 종속"은 보편 사실 [검증] → [[../base/printing-methods#출처-베이스--표준교과서]]에 잔류. 본 명제는 그 보편 사실의 **후니 적용 해석**.
 - 출처: `_research/base-verification.md` A-11(SINGLE — 모델링 명제, 외부 재단 제외) · 메모리 `dbmap-print-method-not-absolute-axis`("인쇄방식 절대축 아님·시트=1차 이해단위") · 메모리 `dbmap-true-purpose-remediation`(접근 단위=시트/상품군 종단).
 - 연결: [[../base/printing-methods#3-방식-선택을-가르는-변수]] · [[index]]
+- 사용처: [[recipes/goods-pouch#GP-ID-002]] (uses — 굿즈 인쇄방식 7종≠최상위 분기·시트=1차) · [[recipes/acrylic#AC-ID-001]] (아크릴 = UV 평판인쇄 디자인 굿즈·단품(카테고리 009)) · [[recipes/silsa#SL-ID-001]] (실사 = 카테고리 004(포스터)+005(사인) 일반 인쇄물·소재 기반)
 - answers_cq: CQ-PROD-01 (상품군 분류 기준 = 인쇄방식 아님·시트 단위) · CQ-PROC-03 (인쇄방식 5종·"1상품=1방식" 규칙 재해석)
 - tags: #모델링 #인쇄방식 #분기축 #시트단위
 

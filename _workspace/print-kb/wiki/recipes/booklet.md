@@ -53,7 +53,7 @@
 - 앵커: `t_prd_product_sizes.siz_cd` · `t_prd_product_plate_sizes.siz_cd`
 - 출처: `16_mapping-research/booklet/mapping-final.md` C5·C8·C20(🟡) + 메모리 `dbmap-platesize-is-output-paper` {tier C(round-12), FRESH}
 - 연결: [[base/sizes#BSZ-001]] (uses — 재단/작업/출력판형 보편 구분) · [[#BK-DEF-007]] (Q-BK-E 책등 모델 컨펌)
-- answers_cq: CQ-PROD-06 (variant 사이즈 → 차원 분해)
+- answers_cq: CQ-PROD-06 (variant 사이즈 → 차원 분해) · CQ-PROD-07 (선택 가능 사이즈 목록·비규격 사용자입력 허용 여부)
 - tags: #책자 #사이즈 #책등 #두께
 
 ### [BK-DIM-002] page_rule = 제본별 차등 (떡메모지는 묶음수)  {🟡}
@@ -90,7 +90,7 @@
 - 앵커: `t_proc_processes`(PROC_000017/013/033/050/075 family) · `t_prd_product_processes`
 - 출처: `16_mapping-research/booklet/mapping-final.md` C26/28/30/31/42 + `17_correctness/booklet/correction-manifest.md` BK-10·BK-12 {tier C(round-12/13), FRESH·라이브 실측}
 - 연결: [[huni/processes#PRC-005]] (uses — 박/코팅=공정 실무진확정) · [[huni/processes#PRC-006]] (코팅 CONFLICT — 책자는 공정 측 기준점) · [[base/finishing#BFN-004]] (uses — 박 보편 정의) · [[base/binding#BBD-003]] (uses — 제본 방식)
-- answers_cq: CQ-FIN-01 (후가공 공정 목록) · CQ-FIN-05 (박 vs 형압 vs 별색금 구별)
+- answers_cq: CQ-FIN-01 (후가공 공정 목록) · CQ-FIN-05 (박 vs 형압 vs 별색금 구별) · CQ-PROC-06 (제본 N종 물리 차이·각자 필요 기초데이터 책등/링/면지 — BOM-001 자재 슬롯 교차)
 - tags: #책자 #공정 #제본 #박색공정 #코팅공정
 
 ### [BK-BOM-003] 박 크기→등급 = 앱 계산 (DB 미저장)  {🟡}

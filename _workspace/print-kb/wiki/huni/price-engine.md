@@ -15,7 +15,7 @@
 - 앵커: `t_prc_*` 4단 · 차원 컬럼=`t_prc_component_prices`(proc_cd·opt_cd·siz_cd) + `t_prc_price_components.prc_typ_cd`
 - 출처: 라이브 psql `information_schema`(t_prc_* 컬럼 실측) + `raw/webadmin/sql/21_pricing_dims.sql`·`sql/22_use_dims.sql`(seed/init) + `raw/webadmin/docs/prcx01-pricing-model.md`·`pricing-erd.md` {tier A, FRESH}
 - 연결: [[#PE-002]] · [[load-path#LP-002]] (loaded-via — 적재 경로)
-- 사용처: [[recipes/sticker#STK-PRC-002]] (uses — 스티커 가격 차원 컬럼) · [[recipes/calendar#CAL-PRC-001]] (uses — 캘린더 t_prc 4단·미연결) · [[recipes/acrylic#AC-PRC-002]] (uses — 아크릴 가격 차원 t_prc_*)
+- 사용처: [[recipes/sticker#STK-PRC-002]] (uses — 스티커 가격 차원 컬럼) · [[recipes/calendar#CAL-PRC-001]] (uses — 캘린더 t_prc 4단·미연결) · [[recipes/acrylic#AC-PRC-002]] (uses — 아크릴 가격 차원 t_prc_*) · [[recipes/goods-pouch#GP-PRC-001]] (uses — 굿즈 t_prc_* 4단·고정가형) · [[recipes/booklet#BK-PRC-001]] (제본 합산형 — PRF_BIND_SUM + COMP_BIND_* (일반책자·하드커버)) · [[recipes/photobook#PB-PRC-001]] (page-band 합산형 — PRF_PBK_PAGEBAND (제안·라이브 미적재)) · [[recipes/product-accessory#PA-WID-002]] (가격 권위 = 서버 (PRICE=0 불가 신호))
 - answers_cq: CQ-PRICE-01 (단가표 vs 공식 계산) · CQ-PRICE-08 (견적 합산 공식)
 - tags: #가격 #t_prc #차원 #Phase11 #W3
 
@@ -24,7 +24,7 @@
 - 앵커: `t_prc_price_components.prc_typ_cd` (PRICE_TYPE 코드 — `pricing_dims` 아님, 라이브 부존재)
 - 출처: 라이브 psql(`t_prc_price_components` 144행 .01 실측) + `18_schema-change/impact-diagnosis.md` I-2·§3 백필 {tier A, FRESH}
 - 연결: [[#PE-001]] · [[#PE-GAP-1]]
-- 사용처: _(레시피 집필 시 채움)_
+- 사용처: _(레시피 집필 시 채움)_ · [[recipes/sticker#STK-PRC-002]] (가격 차원 컬럼·단가유형 = 라이브 실측 권위)
 - tags: #가격 #단가유형 #prc_typ_cd #합가형미식별 #W3
 
 ### [PE-003] 가격공식 PK = (prd_cd, apply_bgn_ymd)  {🟡}
@@ -32,7 +32,7 @@
 - 앵커: 가격공식 PK (prd_cd, apply_bgn_ymd)
 - 출처: `sql/18_unify_price_keys.sql` (impact-diagnosis I-7) {tier A, FRESH}
 - 연결: [[load-path#LP-005]] · [[#PE-STALE]]
-- 사용처: [[recipes/acrylic#AC-PRC-002]] (uses — 멱등 PK)
+- 사용처: [[recipes/acrylic#AC-PRC-002]] (uses — 멱등 PK) · [[recipes/goods-pouch#GP-PRC-001]] (uses — 멱등 가격 PK) · [[recipes/silsa#SL-PRC-002]] (가격 = 면적매트릭스 13상품 + 고정가형 16상품 (2 모델 공존)) · [[recipes/sticker#STK-PRC-002]] (가격 차원 컬럼·단가유형 = 라이브 실측 권위)
 - tags: #가격 #PK #멱등 #I-7
 
 ### [PE-004] template 직접단가 (t_prd_template_prices)  {🟡}
@@ -40,7 +40,7 @@
 - 앵커: `t_prd_template_prices` (0행)
 - 출처: `sql/20_template_prices.sql` (impact-diagnosis I-4) {tier A, FRESH(스키마만)}
 - 연결: [[cpq-options#CPQ-006]] (templates) · [[#PE-GAP-3]]
-- 사용처: _(레시피 집필 시 채움)_
+- 사용처: [[recipes/product-accessory#PA-PRC-001]] (uses — OTC 부자재 SKU 직접단가 경로 후보·라이브 0행)
 - tags: #가격 #template_prices #SKU #0행
 
 ---
@@ -61,7 +61,7 @@
 - 앵커: `t_prc_component_prices`(siz 차원, [세로][가로]) + 면적공식 + ceiling
 - 출처: `02_mapping/silsa-poster-area-matrix/` + `09_load/_migrate_areamatrix/` + 메모리 `dbmap-price-formula-types-authority`·`dbmap-silsa-price-via-poster-sign` {tier C, FRESH}
 - 연결: [[../base/sizes#BSZ-003]] (uses — 출력판형 보편 정의) · [[#PE-STALE]]
-- 사용처: [[recipes/acrylic#AC-PRC-001]] (priced-by — 아크릴 면적매트릭스·미러=투명×2)
+- 사용처: [[recipes/acrylic#AC-PRC-001]] (priced-by — 아크릴 면적매트릭스·미러=투명×2) · [[recipes/silsa#SL-PRC-001]] (priced-by — 실사 포스터사인 [가로×세로] 면적매트릭스 687셀·실사 inline 금지) · [[recipes/goods-pouch#GP-PRC-001]] (비대상 — 굿즈=고정가형·면적매트릭스 아님)
 - answers_cq: CQ-PRICE-05 (면적 기반 가로×세로 계산)
 - tags: #가격 #면적매트릭스 #ceiling #포스터사인
 
@@ -70,7 +70,7 @@
 - 앵커: `t_prc_component_prices`(수량×옵션 고정가)
 - 출처: `09_load/_migrate_fixedprice/` + `02_mapping/price211-fixedgrid/` {tier C, FRESH}
 - 연결: [[#PE-006]] · [[#PE-STALE]]
-- 사용처: [[recipes/booklet#BK-PRC-002]] (책자 떡제본 고정가 엽서북/떡메모지) · [[recipes/sticker#STK-PRC-001]] (priced-by — 형상×치수×코팅 격자) · [[recipes/calendar#CAL-DC-001]] (priced-by — 디자인캘린더 고정가 직접단가 4000~24000) · [[recipes/calendar#CAL-PRC-002]] (캘린더가공 옵션 추가가 격자)
+- 사용처: [[recipes/booklet#BK-PRC-002]] (책자 떡제본 고정가 엽서북/떡메모지) · [[recipes/sticker#STK-PRC-001]] (priced-by — 형상×치수×코팅 격자) · [[recipes/calendar#CAL-DC-001]] (priced-by — 디자인캘린더 고정가 직접단가 4000~24000) · [[recipes/calendar#CAL-PRC-002]] (캘린더가공 옵션 추가가 격자) · [[recipes/product-accessory#PA-PRC-001]] (priced-by — 부자재 variant별 고정가·치수×묶음 격자) · [[recipes/stationery#ST-PRC-001]] (priced-by — 문구 C29 inline 고정가·미적재) · [[recipes/stationery#ST-PRC-002]] (priced-by — 떡메모지 묶음수×size 매트릭스) · [[recipes/silsa#SL-PRC-002]] (priced-by — 실사 고정가형 16상품·면적매트릭스 13과 공존) · [[recipes/goods-pouch#GP-PRC-001]] (priced-by — 굿즈 고정가형 수량×옵션 단가) · [[recipes/photobook#PB-PRC-002]] (가격 ≠ PRF_PCB_FIXED (그건 엽서북 PRD_000094))
 - tags: #가격 #고정가형 #포스터교정
 
 ### [PE-008] 구간형 (수량구간 할인) t_dsc_*  {🟡}
@@ -78,7 +78,7 @@
 - 앵커: `t_dsc_*`(헤더·구간·링크)
 - 출처: `00_schema/discount-domain-detail.md` + `raw/webadmin/tools/load_discounts.py` {tier A/C, PARTIAL-STALE: I-7 PK}
 - 연결: [[load-path#LP-001]] (loaded-via) · 메모리 `dbmap-discount-authority`
-- 사용처: [[recipes/digital-print#DGP-PR-003]] (비대상 — 디지털인쇄는 구간형 아님·대조) · [[recipes/acrylic#AC-PRC-001]] (priced-by — 아크릴 카테고리 수량구간 할인)
+- 사용처: [[recipes/digital-print#DGP-PR-003]] (비대상 — 디지털인쇄는 구간형 아님·대조) · [[recipes/acrylic#AC-PRC-001]] (priced-by — 아크릴 카테고리 수량구간 할인) · [[recipes/stationery#ST-PRC-003]] (priced-by — 문구 카테고리 수량구간 할인) · [[recipes/silsa#SL-PRC-002]] (priced-by — 실사 수량구간 할인 t_dsc_*) · [[recipes/goods-pouch#GP-PRC-002]] (priced-by — 굿즈A/B타입·말랑·파우치/에코백 구간할인)
 - answers_cq: CQ-PRICE-04 (수량 구간별 할인 체계)
 - tags: #가격 #구간할인 #t_dsc
 
@@ -87,7 +87,7 @@
 - 앵커: `t_prc_price_formulas`(PRF_<X> 상품별)
 - 출처: `02_mapping/dwire-poster-formula-remodel/`·`dwire-bind-namecard-photocard-remodel/` + 메모리 `dbmap-price-chain-dwire-per-product-formula` {tier C, FRESH}
 - 연결: [[#PE-005]] · [[#PE-007]]
-- 사용처: _(레시피 집필 시 채움)_
+- 사용처: _(레시피 집필 시 채움)_ · [[recipes/booklet#BK-PRC-003]] (레더 링바인더(088) 가격 BLOCKED (제본종류 미상))
 - tags: #가격 #상품별공식 #가격사슬 #broken4
 
 ---
@@ -99,7 +99,7 @@
 - 앵커: (DB 외 — 앱 계산) · 입력 = `t_prd_product_plate_sizes` + 작업사이즈
 - 출처: 메모리 `dbmap-compute-in-app-db-stores-lookup`·`pangeori-l1.csv`(판걸이수=판형 마진 권위) {tier B/C, FRESH}
 - 연결: [[../base/prepress-file#BPF-002]] (uses — 판걸이 N-up 보편 개념) · [[#PE-006]] (ceiling 동일 철학)
-- 사용처: [[recipes/digital-print#DGP-PR-001]] (uses — 판수=앱 계산) · [[recipes/sticker#STK-DIM-002]] (uses — 스티커 판수=앱) · [[recipes/acrylic#AC-DIM-003]] (uses — UV 평판 판걸이수=앱 계산)
+- 사용처: [[recipes/digital-print#DGP-PR-001]] (uses — 판수=앱 계산) · [[recipes/sticker#STK-DIM-002]] (uses — 스티커 판수=앱) · [[recipes/acrylic#AC-DIM-003]] (uses — UV 평판 판걸이수=앱 계산) · [[recipes/booklet#BK-BOM-003]] (박 크기→등급 = 앱 계산 (DB 미저장)) · [[recipes/photobook#PB-DIM-003]] (책등(두께) = 앱 런타임 계산 (DB 미저장)) · [[recipes/silsa#SL-PRC-001]] (가격 = 포스터사인 [가로×세로] 면적매트릭스 (실사 inline price 아님 [HARD]))
 - answers_cq: CQ-PRICE-10 (판걸이수가 가격에 미치는 영향·계산)
 - tags: #앱계산 #판수 #판걸이수 #박등급
 
@@ -111,6 +111,7 @@
 - 내용: `00_schema/price-engine-ddl.md`(C-PRICEENG)는 **인용 금지**. 사유: ① "6차원/8컬럼 자연키" → 사실 8차원/10컬럼(I-1) ② 단가형/합가형 개념 전무(I-2) ③ template_prices 누락(I-4) ④ 구 PK(I-7). **대체: `sql/21·22` + `pricing-erd.md`**([PE-001~004]). 추가 함정: 단가형 가정(합가형 오매핑 위험 I-2)·round-2 포스터 면적-좌표 오모델(교정분 권위).
 - 출처: `18_schema-change/impact-diagnosis.md` I-1·I-2·I-4·I-7 {tier A, FRESH}
 - 연결: [[#PE-001]] · [[#PE-006]] · [[#PE-007]]
+- 사용처: [[recipes/acrylic#AC-PRC-002]] (면적매트릭스 적재 = silsa-poster 동형 마이그레이션) · [[recipes/silsa#SL-PRC-001]] (가격 = 포스터사인 [가로×세로] 면적매트릭스 (실사 inline price 아님 [HARD])) · [[recipes/silsa#SL-PRC-002]] (가격 = 면적매트릭스 13상품 + 고정가형 16상품 (2 모델 공존)) · [[recipes/sticker#STK-PRC-002]] (가격 차원 컬럼·단가유형 = 라이브 실측 권위) · [[recipes/booklet#sources]] (STALE 인용 금지 — price-engine-ddl 본 페이지 미인용) · [[recipes/calendar#sources]] (STALE 인용 금지 — price-engine-ddl 본 페이지 미인용) · [[recipes/goods-pouch#sources]] (STALE 인용 0 확인 — price-engine-ddl 본 페이지 미인용) · [[recipes/photobook#sources]] (STALE 인용 금지 — price-engine-ddl 본 페이지 미인용) · [[recipes/product-accessory#sources]] (STALE 인용 0 확인 — price-engine-ddl 본 페이지 미인용) · [[recipes/stationery#sources]] (STALE 인용 금지 — price-engine-ddl 본 페이지 미인용)
 - tags: #STALE #price-engine-ddl #인용금지 #Phase11
 
 ---
@@ -133,7 +134,7 @@
 - 내용: 6상품군 가격사슬 부재(crosscut 추가-I). template_prices 0행([PE-004]).
 - 출처: `_curation/axis-price-engine.md` GAP-PE-3 {tier C}
 - 연결: [[#PE-004]]
-- 사용처: [[recipes/photobook#PB-PRC-001]] (포토북 가격 0행·PRF_PBK_PAGEBAND 적재 필요) · [[recipes/calendar#CAL-PRC-001]] (캘린더 가격사슬 부재·미연결) · [[recipes/calendar#CAL-DC-001]] (디자인캘린더 prices 0행·고정가 미적재)
+- 사용처: [[recipes/photobook#PB-PRC-001]] (포토북 가격 0행·PRF_PBK_PAGEBAND 적재 필요) · [[recipes/calendar#CAL-PRC-001]] (캘린더 가격사슬 부재·미연결) · [[recipes/calendar#CAL-DC-001]] (디자인캘린더 prices 0행·고정가 미적재) · [[recipes/product-accessory#PA-ST-003]] (상품악세사리 부자재 가격사슬 0행·round-2 미커버) · [[recipes/stationery#ST-PRC-001]] (문구 prices 0행·round-2 미실행) · [[recipes/goods-pouch#GP-PRC-001]] (굿즈 라이브 가격 적재 미확인·prices 0행 가능성)
 - tags: #GAP #가격미적재
 
 ### [PE-GAP-4] 박 가격 GAP · plate 교정 대기 차단 (3절/투명/048/019)  {🔴}
