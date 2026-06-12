@@ -1,6 +1,6 @@
 import re, os, glob
 ROOT="/Users/innojini/Dev/HuniWeb/_workspace/print-kb/wiki"
-scope = glob.glob(f"{ROOT}/base/*.md") + glob.glob(f"{ROOT}/huni/*.md")
+scope = glob.glob(f"{ROOT}/base/*.md") + glob.glob(f"{ROOT}/huni/*.md") + glob.glob(f"{ROOT}/recipes/*.md")
 all_pages = scope + [f"{ROOT}/index.md", f"{ROOT}/README.md", f"{ROOT}/log.md"] + glob.glob(f"{ROOT}/policy/*.md") + glob.glob(f"{ROOT}/sources/*.md")
 PLACEHOLDER={"링크","교차참조","페이지#항목ID","옛페이지#ID","새페이지#ID","다른-페이지#항목","recipes/<family>#항목ID","axis-x#항목ID","../huni/...","../base/...","index"}
 

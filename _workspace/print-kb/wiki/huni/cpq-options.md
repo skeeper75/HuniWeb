@@ -14,7 +14,7 @@
 - 앵커: `t_prd_product_option_groups`·`options`·`option_items`·`templates`·`template_selections`·`constraints`
 - 출처: `00_schema/cpq-schema.md` + 라이브 psql {tier A/C, PARTIAL-STALE: I-5·I-8·I-11}
 - 연결: [[#CPQ-002]] · [[price-engine#PE-001]] (uses — L1 차원)
-- 사용처: _(레시피 집필 시 채움)_
+- 사용처: [[recipes/digital-print#DGP-CPQ-001]] (uses — 엽서 파일럿 L2)
 - answers_cq: CQ-PROD-05 (선택 옵션 축·캐스케이드 구조)
 - tags: #CPQ #구조 #L2 #7테이블
 
@@ -23,7 +23,7 @@
 - 앵커: `t_prd_product_option_items.ref_dim_cd` (OPT_REF_DIM 7종)
 - 출처: `00_schema/cpq-schema.md` + `10_configurator/cpq-design.md` {tier A/C, FRESH(트리거)·설계 PARTIAL}
 - 연결: [[#CPQ-003]] (requires — 무결성 트리거) · [[materials#MAT-001]] (uses — mat_cd+usage_cd) · [[processes#PRC-003]] (uses — 도수=opt_id)
-- 사용처: _(레시피 집필 시 채움)_
+- 사용처: [[recipes/digital-print#DGP-CPQ-001]] (requires — 엽서 옵션 ref_dim_cd) · [[recipes/sticker#STK-CPQ-001]] (uses — 스티커 옵션축 ref_dim_cd)
 - answers_cq: CQ-PROD-05 (옵션 축 참조 구조)
 - tags: #CPQ #polymorphic #ref_dim_cd #OPT_REF_DIM
 
@@ -44,7 +44,7 @@
 - 앵커: 매핑 결정 규칙(attribute-entity-map)
 - 출처: `10_configurator/attribute-entity-map.md` + 메모리 `dbmap-schema-design-intent-first` {tier C(round-6), PARTIAL-STALE: I-5·I-9}
 - 연결: [[#CPQ-005]] · [[widget-contract#WID-003]] (componentType)
-- 사용처: _(레시피 집필 시 채움)_
+- 사용처: [[recipes/sticker#STK-CPQ-001]] (uses — 스티커 코팅/화이트/조각수/형상 → 4엔티티)
 - tags: #CPQ #속성매핑 #4엔티티 #삼중바인딩
 
 ### [CPQ-005] BUNDLE 원칙 (옵션 = 자재 + 공정)  {🟡}
@@ -52,7 +52,7 @@
 - 앵커: `option_items`(다중 seq) + `templates`(묶음)
 - 출처: 메모리 `dbmap-option-material-process-bundle` + `10_configurator/silsa-option-layer-v2.md` {tier C, FRESH}
 - 연결: [[materials#MAT-004]] (uses — 자재 축) · [[processes#PRC-004]] (uses — 순수공정=자재없음)
-- 사용처: _(레시피 집필 시 채움)_
+- 사용처: [[recipes/booklet#BK-CPQ-002]] (책자 투명커버/링/인쇄면지 BUNDLE)
 - answers_cq: CQ-FIN-10 (굿즈 전용 후가공 — 아일렛·봉제 등 옵션=자재+공정)
 - tags: #CPQ #BUNDLE #자재공정 #아일렛
 
@@ -61,7 +61,7 @@
 - 앵커: `t_prd_templates`·`template_selections`(OTC)
 - 출처: `10_configurator/all-sheets-otc-extract.md`·`option-vs-template-guide.md` + round-13 product-accessory {tier C, FRESH}
 - 연결: [[price-engine#PE-004]] (priced-by — template_prices) · [[#CPQ-001]]
-- 사용처: _(레시피 집필 시 채움)_
+- 사용처: [[recipes/digital-print#DGP-CPQ-002]] (uses — 봉투 addon template) · [[recipes/digital-print#DGP-CPQ-003]] (uses — 봉투세트 OTC 후보)
 - answers_cq: CQ-PROD-11 (묶음/세트 판매 단위) · CQ-PROD-03 (아키타입 완제품 귀속)
 - tags: #CPQ #OTC #템플릿 #이중등록의도
 
@@ -70,7 +70,7 @@
 - 앵커: `t_prd_product_constraints.logic` (JSONLogic, RULE_TYPE 2종)
 - 출처: `10_configurator/cpq-design.md` + 메모리 `dbmap-live-admin-product-viewer`(제약 var 7키·logic NOT NULL) {tier A/C, FRESH(트리거)·설계 PARTIAL}
 - 연결: [[#CPQ-STALE]] · [[widget-contract#WID-004]] (mapped-to — 옵션 캐스케이드 위젯 계약)
-- 사용처: _(레시피 집필 시 채움)_
+- 사용처: [[recipes/digital-print#DGP-DM-002]] (excludes — 봉투 사이즈매칭 캐스케이드 후보)
 - answers_cq: CQ-PROC-05 (공정 선행 종속성 강제) · CQ-PROD-05 (캐스케이드 구조)
 - tags: #CPQ #제약 #constraints.logic #JSONLogic #캐스케이드
 
@@ -83,7 +83,7 @@
 - 앵커: `t_prd_product_option_items`(라이브 18행 — silsa 파일럿)
 - 출처: 라이브 psql(`count(*)`=18 실측, CONF-1) + `10_configurator/silsa-option-layer-v2.md`·`silsa-live-reconciliation.md` + `_crosscut/` 추가-H {tier A, FRESH}
 - 연결: [[#CPQ-001]] · [[#CPQ-GAP-1]]
-- 사용처: _(레시피 집필 시 채움)_
+- 사용처: [[recipes/digital-print#DGP-CPQ-001]] (디지털인쇄 옵션 레이어 미적재) · [[recipes/sticker#STK-ST-006]] (스티커 옵션 레이어 미적재) · [[recipes/booklet#BK-CPQ-001]] (책자 option_groups 0행·제본 1:1)
 - tags: #결함 #CPQ미적재 #silsa파일럿 #BATCH-6 #CONF-1 #18행
 
 ### [CPQ-STALE] constraint_json 적재 타깃 = STALE (인용 금지)  {🔴 STALE}

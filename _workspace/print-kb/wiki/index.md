@@ -32,11 +32,11 @@
 
 ## 🍳 RECIPES — 상품군 레시피 (11)
 
-> 상품 조립의 1차 진입점. 8절 템플릿(정체→차원→BOM→가격사슬→CPQ→위젯→적재→결함). (차기 집필 — 큐레이션 팩 `_curation/pack-<family>.md` 보유.)
+> 상품 조립의 1차 진입점. 8절 템플릿(정체→차원→BOM→가격사슬→CPQ→위젯→적재→결함). 조립 뷰(축 항목 [[링크]] 참조). (나머지 차기 집필 — 큐레이션 팩 `_curation/pack-<family>.md` 보유.)
 
-- _(예정)_ recipes/digital-print: 디지털인쇄 — 팩 `_curation/pack-digital-print.md`
-- _(예정)_ recipes/sticker: 스티커 — 팩 `_curation/pack-sticker.md`
-- _(예정)_ recipes/booklet: 책자 — 팩 `_curation/pack-booklet.md`
+- [recipes/digital-print](recipes/digital-print.md): 디지털인쇄 — 36상품/7구분(엽서·명함·상품권·배경지·라벨택 등)·배경지=포장세트·원자합산형 PRF_DGP·round-13 결함18(C-01~18). 🟡 (✅6·🟡10·🔴8·⚪2)
+- [recipes/sticker](recipes/sticker.md): 스티커 16상품(PRD_000052~067)·인쇄방식 5분기·형상=칼틀 size(Q7)·형상×치수×코팅 격자 가격·코팅 자재 오적재(Q9 공정 CONFLICT·BATCH-3)·063 화이트 누락·CPQ 미적재. 🟡 (round-13 GO·결함17)
+- [recipes/booklet](recipes/booklet.md): 책자 10완제품+21반제품(PRD_000068~098)·생산구조 3종(A통합/B셋트/떡제본)·제본 합산형 PRF_BIND_SUM·떡제본 고정가·박색/코팅=공정(Q2/Q9)·BK-2 sub_prd 078 몽블랑(레더여야)·BK-CAT 전용잎노드 6개 고아·CPQ 미적재. 🟡 (round-13 GO·결함13·컨펌Q-BK-A~E)
 - _(예정)_ recipes/photobook: 포토북 — 팩 `_curation/pack-photobook.md`
 - _(예정)_ recipes/calendar: 캘린더 — 팩 `_curation/pack-calendar.md`
 - _(예정)_ recipes/design-calendar: 디자인캘린더 — 팩 `_curation/pack-calendar.md`(공유)

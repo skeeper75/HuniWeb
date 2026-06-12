@@ -10,11 +10,11 @@
 ## 1. 자재 구조
 
 ### [MAT-001] 자재 마스터·상품 연결 구조  {🟡}
-- 내용: 자재는 `t_mat_materials`(마스터 행, `mat_cd`·`mat_typ`)에 등재되고, 상품은 `t_prd_product_materials`로 자재를 참조하며 **`usage_cd`(사용축)** 로 "어디에 쓰이는가"(내지/표지·본체/부속 등)를 구분한다. 즉 한 자재행이 여러 상품·여러 용도로 재사용된다.
+- 내용: 자재는 `t_mat_materials`(마스터 행, `mat_cd`·`mat_typ_cd`)에 등재되고, 상품은 `t_prd_product_materials`로 자재를 참조하며 **`usage_cd`(사용축)** 로 "어디에 쓰이는가"(내지/표지·본체/부속 등)를 구분한다. 즉 한 자재행이 여러 상품·여러 용도로 재사용된다.
 - 앵커: `t_mat_materials` · `t_prd_product_materials`(mat_cd + usage_cd)
 - 출처: `huni-dbmap/00_schema/ref-materials.csv`·`ref-product-materials.csv` + 라이브 psql {tier A, PARTIAL: 06-04 스냅샷·round-13 오적재 미반영}
 - 연결: [[../base/paper#BPP-003]] (uses — 자재의 보편 상위 개념)
-- 사용처: _(레시피 집필 시 채움)_
+- 사용처: [[recipes/booklet#BK-BOM-001]] (책자 자재 usage 슬롯 내지/표지/면지/링) · [[recipes/sticker#STK-BOM-003]] (스티커 점착지 자재)
 - answers_cq: CQ-PROD-05 (상품별 옵션 축·자재) · CQ-TERM-04 (종이/소재 약어)
 - tags: #자재 #구조 #usage_cd
 
@@ -23,7 +23,7 @@
 - 앵커: `t_prd_product_materials.usage_cd`
 - 출처: `15_domain-spec/digital-print/domain-research-notes.md` + 메모리 `dbmap-column-domain-loadspec-round11` {tier C, FRESH}
 - 연결: [[#MAT-001]] · [[../base/binding#BBD-001]] (uses — 표지/내지=제본 단위 보편 개념)
-- 사용처: _(레시피 집필 시 채움)_
+- 사용처: [[recipes/digital-print#DGP-BM-001]] (uses — 낱장 USAGE.07 공통) · [[recipes/booklet#BK-ID-002]] (책자 A통합/B셋트 parent+usage_cd 생산구조) · [[recipes/sticker#STK-BOM-003]] (스티커 점착지 parent+usage)
 - tags: #자재 #parent #usage_cd
 
 ---
@@ -32,10 +32,10 @@
 
 ### [MAT-003] 자재유형 코드(MAT_TYPE) 도메인  {🟡}
 - 내용: 자재는 `MAT_TYPE` 코드로 유형 분류된다(예: .06 가죽). 단 **.07~.10 구간은 round-13에서 오염이 확인됨** — 색·형상·사이즈·구(口)수 같은 비(非)자재 속성이 자재행으로 잘못 등재(아래 [MAT-005]). **[W3] 코드 마스터 라이브 테이블 = `t_cod_base_codes`**(`t_base_codes` 아님). 컬럼 = `cod_cd`·`upr_cod_cd`(자기참조 계층) — **`cod_grp_cd` 컬럼 없음**. MAT_TYPE "그룹"은 별도 그룹 컬럼이 아니라 `upr_cod_cd`(상위코드) 계층으로 묶인다.
-- 앵커: `t_mat_materials.mat_typ` ← `t_cod_base_codes`(`upr_cod_cd` 계층, `cod_grp_cd` 없음)
+- 앵커: `t_mat_materials.mat_typ_cd` ← `t_cod_base_codes`(`upr_cod_cd` 계층, `cod_grp_cd` 없음)
 - 출처: 라이브 psql(`t_cod_base_codes` 컬럼 실측) + `00_schema/ref-base-codes.csv`·`code-values.md` {tier A/C, PARTIAL-STALE: impact-diagnosis I-8 코드 정정}
 - 연결: [[#MAT-005]] (.07~10 오염) · [[load-path#LP-003]] (loaded-via — 코드행 선적재)
-- 사용처: _(레시피 집필 시 채움)_
+- 사용처: [[recipes/sticker#STK-ST-004]] (스티커 점착지 .01↔.11 혼재 교정대기)
 - answers_cq: CQ-TERM-07 (코드체계 의미 — MAT_TYPE)
 - tags: #자재 #MAT_TYPE #코드도메인
 
@@ -54,18 +54,18 @@
 
 ### [MAT-005] MAT_TYPE .07~.10 자재 오염 (~120행)  {🔴 교정대기}
 - 내용: round-13 횡단 결함축 ②. **라이브 현재값: 색/형상/사이즈/구수가 MAT_TYPE .08~.10에 자재로 오적재(~120행)** → **정답: 자재가 아닌 차원/옵션 속성**([MAT-004] 합성·규격 원칙으로 환원). 라이브 자재값 직접 인용 금지 — family correction-manifest 대조 후 "오적재(교정 대기)"로 표기.
-- 앵커: `t_mat_materials`(mat_typ .07~.10 오염 행)
+- 앵커: `t_mat_materials`(mat_typ_cd .07~.10 오염 행)
 - 출처: `17_correctness/<family>/correction-manifest.md` + `_crosscut/crosscut-synthesis.md` 패턴축② {tier C(round-13), FRESH}
 - 연결: [[#MAT-004]] (정답 원칙) · [[processes#PRC-006]] (UV 오적재 동형)
-- 사용처: _(레시피 집필 시 채움)_
+- 사용처: [[recipes/sticker#STK-ST-004]] (스티커 자재유형 .01/.11 혼재 사례)
 - tags: #결함 #자재오염 #round13 #교정대기
 
 ### [MAT-006] 레더 자재 3-way 혼재 → 정답 .06(가죽)  {🔴 교정대기}
-- 내용: round-13 결함축 B. 레더(가죽) 자재가 .01(종이)/.06(가죽)/.08(실사) **3-way로 혼재 적재**. **라이브 현재값: MAT_000186 mat_typ=.08(실사) → 정답: .06(가죽)**. MAT_000186 단일 행이 photobook 6상품으로 **횡단 오염**한다(1행 오류 → 6상품 전파). 책자/포토북 레더 인용 시 반드시 .06로.
-- 앵커: `t_mat_materials` MAT_000186 (mat_typ .08 → .06)
+- 내용: round-13 결함축 B. 레더(가죽) 자재가 .01(종이)/.06(가죽)/.08(실사) **3-way로 혼재 적재**. **라이브 현재값: MAT_000186 mat_typ_cd=.08(실사) → 정답: .06(가죽)**. MAT_000186 단일 행이 photobook 6상품으로 **횡단 오염**한다(1행 오류 → 6상품 전파). 책자/포토북 레더 인용 시 반드시 .06로.
+- 앵커: `t_mat_materials` MAT_000186 (mat_typ_cd .08 → .06)
 - 출처: `16_mapping-research/photobook/mapping-final.md` + `17_correctness/photobook/correction-manifest.md` (F-PB) {tier C(round-12/13), FRESH}
 - 연결: [[#MAT-005]] (오염 패턴) · [[#MAT-003]]
-- 사용처: _(레시피 집필 시 채움)_
+- 사용처: [[recipes/booklet#BK-DEF-001]] (책자 BK-2·BK-3 레더 .08→.06 교정대기)
 - tags: #결함 #레더 #가죽 #횡단오염 #round13
 
 ---

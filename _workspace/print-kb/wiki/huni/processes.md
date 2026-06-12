@@ -15,7 +15,7 @@
 - 앵커: `t_proc_processes` · `t_prd_product_processes`(배타 `mand_proc_yn`)
 - 출처: `00_schema/ref-processes.csv`·`ref-product-processes.csv` + 라이브 psql(`information_schema` 실측) {tier A, PARTIAL: 06-04 스냅샷·excl_groups 삭제 반영}
 - 연결: [[../base/finishing#BFN-001]] (uses — 공정의 보편 상위 개념) · [[#PRC-002]] · [[#PRC-GAP-5]] (택일그룹 GAP)
-- 사용처: _(레시피 집필 시 채움)_
+- 사용처: [[recipes/digital-print#DGP-BM-002]] (uses — 디지털인쇄 공정 라우트) · [[recipes/sticker#STK-BOM-001]] (uses — 커팅 반칼/완칼/도무송)
 - answers_cq: CQ-PROC-01 (공정 라우트·상품군 매핑) · CQ-PROC-02 (공정 시퀀스 전후 의존)
 - tags: #공정 #구조 #mand_proc_yn
 
@@ -37,7 +37,7 @@
 - 앵커: `t_proc_processes`(별색 공정, clr_cd=NULL)
 - 출처: `15_domain-spec/digital-print/domain-research-notes.md` + round-13 acrylic {tier C(round-11/13), FRESH}
 - 연결: [[../base/color#BCL-003]] (uses — 별색 보편 정의) · [[price-engine#PE-005]] (priced-by — 별색=공정 → 합산형 비용)
-- 사용처: _(레시피 집필 시 채움)_
+- 사용처: [[recipes/digital-print#DGP-BM-002]] (uses — 별색=공정 합산 항목) · [[recipes/sticker#STK-BOM-002]] (uses — 화이트 underbase=공정)
 - answers_cq: CQ-FIN-03 (별색인쇄 용도) · CQ-FIN-05 (박 vs 형압 vs 별색금 구별·DB 인코딩)
 - tags: #공정 #별색 #spotcolor #clr_cd_null
 
@@ -46,7 +46,7 @@
 - 앵커: `t_prd_product_processes`(자재 미연결 공정)
 - 출처: 메모리 `dbmap-option-material-process-bundle` {FRESH}
 - 연결: [[#PRC-005]] · [[materials#MAT-004]]
-- 사용처: _(레시피 집필 시 채움)_
+- 사용처: [[recipes/digital-print#DGP-BM-003]] (uses — 완칼 PROC_000053 커팅=순수공정) · [[recipes/sticker#STK-BOM-001]] (uses — 스티커 커팅=순수공정)
 - tags: #공정 #순수공정 #열재단 #타공
 
 ### [PRC-005] 박·코팅·UV = 공정 (실무진 확정 Q1~Q15)  {🟡}
@@ -54,7 +54,7 @@
 - 앵커: `t_proc_processes`(박·코팅·UV PROC_000002)
 - 출처: `15_domain-spec/<family>/domain-research-notes.md`(Q1~Q15) + 메모리 `dbmap-column-domain-loadspec-round11` {tier B, FRESH}
 - 연결: [[#PRC-006]] · [[../base/finishing#BFN-004]] (uses — 박 보편 정의)
-- 사용처: _(레시피 집필 시 채움)_
+- 사용처: [[recipes/digital-print#DGP-BM-004]] (uses — 박=공정) · [[recipes/digital-print#DGP-BM-002]] (uses — 박/코팅 공정) · [[recipes/sticker#STK-ST-001]] (uses — 코팅=공정 정답, CONFLICT) · [[recipes/booklet#BK-BOM-002]] (uses — 책자 제본/코팅/박색=공정)
 - answers_cq: CQ-FIN-01 (후가공 공정 전체 목록) · CQ-FIN-02 (코팅 종류) · CQ-FIN-04 (UV평판인쇄 정의)
 - tags: #공정 #박 #코팅 #UV #실무진확정
 
@@ -67,7 +67,7 @@
 - 앵커: `t_proc_processes`(공정) vs `t_mat_materials`(자재) — 코팅 적재 타깃 충돌
 - 출처: `17_correctness/<family>/correction-manifest.md` + `_crosscut/crosscut-synthesis.md` 추가-A·Q9 {tier C(round-13), FRESH}
 - 연결: [[materials#MAT-005]] · [[#PRC-GAP-1]]
-- 사용처: _(레시피 집필 시 채움)_
+- 사용처: [[recipes/sticker#STK-ST-001]] (코팅 자재 오적재 8상품·CONFLICT) · [[recipes/booklet#BK-BOM-002]] (책자=코팅 공정 측 기준점)
 - tags: #결함 #코팅 #CONFLICT #BATCH-3 #미결
 
 ### [PRC-007] 아크릴 print_side에 UV 오적재 (20상품)  {🔴 교정대기}
@@ -106,6 +106,7 @@
 - 내용: digital-print C-06 AMBIGUOUS — 박(있음) 부모 PROC_000033이 박색 8자식 옵션풀과 미연결.
 - 출처: `_curation/axis-processes.md` GAP-PROC-3 {tier C}
 - 연결: [[#PRC-005]] · [[cpq-options#CPQ-002]]
+- 사용처: [[recipes/digital-print#DGP-BM-004]] (박 부모 PROC_000033 vs 박색 8자식 — 상품권 042)
 - tags: #GAP #박 #옵션풀
 
 ### [PRC-GAP-5] 공정택일그룹 라이브 DB 구조 부재 (excl_groups 삭제)  {🔴}

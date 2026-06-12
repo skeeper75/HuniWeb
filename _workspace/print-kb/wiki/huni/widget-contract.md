@@ -14,7 +14,7 @@
 - 앵커: DB 외 — `huni-widget/03_spec/data-contract.md`·`api-contract.md`
 - 출처: `huni-widget/03_spec/data-contract.md`·`api-contract.md` + 메모리 `huni-widget-conversion-strategy` {tier D, FRESH}
 - 연결: [[#WID-002]] (mapped-to — 어댑터 경계) · [[../base/...]] _(보편 없음 — 후니 구현 명세)_
-- 사용처: _(레시피 집필 시 채움)_
+- 사용처: [[recipes/booklet#BK-WID-001]] (책자 정규화 계약 일반형·전용 스펙 부재) · [[recipes/digital-print#DGP-WID-001]] (mapped-to — 디지털인쇄 일반형·전용 스펙 부재) · [[recipes/sticker#STK-WID-001]] (mapped-to — 스티커 정규화 계약 일반형)
 - answers_cq: CQ-PROD-05 (옵션 축 — 위젯 계약 shape)
 - tags: #위젯 #정규화계약 #DB독립
 
@@ -23,7 +23,7 @@
 - 앵커: DB 경계 — `huni-widget/03_spec/data-adapter.md`·`huni-db-mapping.md`
 - 출처: `huni-widget/03_spec/data-adapter.md`·`huni-db-mapping.md` {tier D, PARTIAL-STALE}
 - 연결: [[#WID-001]] · [[load-path#LP-002]] (t_* FK 위상) · [[cpq-options#CPQ-STALE]]
-- 사용처: _(레시피 집필 시 채움)_
+- 사용처: [[recipes/sticker#STK-WID-001]] (mapped-to — 스티커 어댑터 경계)
 - tags: #위젯 #어댑터 #무손실컨버전 #PARTIAL-STALE
 
 ---
@@ -35,7 +35,7 @@
 - 앵커: `huni-widget/03_spec/componenttype-mapping-matrix.md` + admin product-viewer(12탭)
 - 출처: `huni-widget/03_spec/componenttype-mapping-matrix.md`·`component-tree.md` + `print-quote/04_design/DESIGN.md` + 메모리 `dbmap-live-admin-product-viewer` {tier D/A, FRESH}
 - 연결: [[cpq-options#CPQ-004]] (mapped-to — 속성→componentType) · huni-design-system 스킬(Figma 14 컴포넌트)
-- 사용처: _(레시피 집필 시 채움)_
+- 사용처: [[recipes/digital-print#DGP-WID-001]] (mapped-to — 디지털인쇄 옵션 UI componentType) · [[recipes/sticker#STK-WID-001]] (mapped-to — 스티커 옵션 UI componentType)
 - answers_cq: CQ-PROD-08 (상품-카테고리 UI 노출 구조) · CQ-TERM-06 (UI 표시 라벨)
 - tags: #위젯 #componentType #shadcn #14컴포넌트
 
@@ -52,7 +52,7 @@
 - 앵커: DB 외 — 서버 가격 API(후니 가격=t_prc_*)
 - 출처: `huni-widget/03_spec/price-engine.md`·`01_reverse/price-engine-reversed.md` + 메모리 `huni-widget-price-strategy`·`huni-widget-red-price-never-zero` {tier D, FRESH(후보)}
 - 연결: [[price-engine#PE-001]] (priced-by — 후니 가격 권위) · [[#WID-STALE]]
-- 사용처: _(레시피 집필 시 채움)_
+- 사용처: [[recipes/digital-print#DGP-WID-002]] (priced-by — 디지털인쇄 서버 가격권위·PRICE=0 불가) · [[recipes/sticker#STK-WID-002]] (priced-by — 스티커 서버 가격권위)
 - answers_cq: CQ-PRICE-01 (가격 권위 = 서버 공식 계산)
 - tags: #위젯 #가격권위 #서버 #PRICE0불가
 
