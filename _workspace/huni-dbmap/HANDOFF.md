@@ -2,7 +2,10 @@
 
 > 작성 2026-06-11(최신·round-13). 권위 = 본 문서 + 메모리 `dbmap-mapping-research-round12`·`dbmap-correctness-audit-round13`·`dbmap-column-domain-loadspec-round11`·`dbmap-schema-design-intent-first`·`dbmap-code-identifier-strategy`·`dbmap-live-admin-product-viewer`·`dbmap-silsa-price-via-poster-sign`. 본 문서 + 메모리를 읽으면 재발견 0으로 재개. 이전 트랙(round-2 가격·round-4/5 적재·plate·CPQ·round-6 현수막·round-7 커버리지·round-8 admin UI·round-10 변경추적·round-11 도메인) 상세는 `CHANGELOG.md`·메모리에 보존.
 
-## 한 줄 현황 (round-15 **생산형태 × 그릇 × 선택→견적 binding — 보정·재게이트 GO** — 2026-06-13·최신)
+## 한 줄 현황 (round-15 후속 **케이스 컨펌 치환표 + Wave-0 전건 확정** — 2026-06-13·최신)
+**사용자 "엑셀→DB 적재 이후작업" 다음 단계 2건 완료.** ① **(가) 케이스 컨펌 치환표**(`19_grid-binding/case-substitution-table.md`): round-13 14 BATCH + AMBIGUOUS 3 = **17건 전수**를 round-15 §2 생산형태×그릇 매트릭스로 치환 → **🟢 원칙 도출 9 · 🟡 경계 쟁점 3 · ⚪ 직교 축 5**. `dbm-validator` 독립검증 **S1~S6 GO·뒤집힌 판정 0**(셀 인용 9건 글자단위 실재·OM-1/2/7 정합·OBS-1 Low 비차단). **개별 ~70 컨펌이 "생산형태 3 × 그릇 원칙"으로 수렴**(케이스별 재논의 소멸). ② **(나) Wave-0 전건 확정**(`wave0-decision-package.md`): roadmap §4 선결 게이트. 확정 3(BATCH-2/3/4 round-15 P1) + 사용자 결정 5 — **D-1 🟢 DB에서 직접 교정**(우리가 정답 L1 알고 v03 재작업=webadmin 일정 의존→하류 즉시·멱등 UPSERT+재실행 가드 전제) · **D-2 🟢 생산형태 그릇 원칙 일괄 채택**(🟢9건 자동 수렴) · **D-3 🟢 카테고리 113상품 이동+빈 임시함 숨김** · **D-4 🟢 경계2(size↔option·폴더위치)는 round-6/2 트랙에서** · D-5 운영 권장(MES·정체보류·하이픈). **[HARD 사용자 directive] 모든 교정 산출물=쉬운 한국어**(비전문가 빠른 확인·실무진 라벨 원칙 §1.0-b 연장). **Wave-0 게이트 해제 → Wave-1 진입 가능.** 커밋 f9c8197(치환표)·92e4999(Wave-0). 권위 [[dbmap-grid-binding-round15]]. **DB 미적재. 다음 = Wave-1 실 교정**(roadmap §4 권장: BATCH-4 레더 .06 1행 UPDATE=6상품 → BATCH-1 카테고리 113상품, round-10 델타·멱등 UPSERT·인간 승인) **또는 round-14 stale 갱신.**
+
+## 한 줄 현황 (round-15 **생산형태 × 그릇 × 선택→견적 binding — 보정·재게이트 GO** — 2026-06-13)
 **사용자 directive("엑셀→DB 적재 분석 후 이후작업 정리")로 신설(`19_grid-binding/`). 생산형태 3분류(완제품/반제품/기성상품·디자인=직교 editor·prd_cd 단위) × 구성요소 11 그릇 × 선택→견적 end-to-end를 전 11시트 binding(A~E: 성격·그릇·선택→견적·경쟁사·GAP)로 조망.** 산출=`production-form-grid-matrix.md`(원칙·진단·쉬운라벨)+10 시트 binding+`competitor-by-production-form.md`(완제품·반제품 경쟁사 흡수·GAP 0)+`index.md`+`_gate/grid-binding-gate.md`. **3대 발견: ① 가격은 두 엑셀에 다 존재 — 인쇄상품 가격표 6시트(디지털·스티커·책자·실사·아크릴·캘린더제본[제본시트 B03]) + 상품마스터 가격포함 5시트(포토북·문구·굿즈·악세사리·디자인캘린더). 라이브 ❌=미적재일 뿐 ② [신규 오모델] 라이브 `prd_typ_cd`≠생산형태: 굿즈/문구=`.03`기성·디지털/실사/아크릴/스티커/캘린더=`.04`디자인·완제품 `.01`은 3건뿐(명함/엽서/상품권 대표)·악세사리만 도메인=라이브 일치. 사용자 "디자인상품≠생산형태"를 라이브가 역증 ③ [HARD directive] 실무진 표시 필드(note/tags)는 쉬운 한국어(`PRD_TYPE.04`→"디자인상품(에디터)"·`PROC_000002`→"UV인쇄")·각 binding '실무진 쉬운 라벨' 열.** `dbm-validator` 독립검증 **NO-GO**(prd_typ_cd 오귀속·"라이브 0" 과장 적발)→전 binding 보정→재게이트 **G1·G5·G6 GO**(생성자≠검증자 또 적발). 라이브 실측: `option_items 25·comp_prices 3,481·product_prices 0·price_formulas 63`(coverage ❌=상품군별 충족률, 전역 0 아님). Wave-0 P1 확정: **BATCH-2**(색·부속 분리 a)·**BATCH-3**(코팅 혼합:스티커 출력소재=자재유지/입히는코팅=공정)·**BATCH-4**(레더 `.08→.06` 가죽). 권위 [[dbmap-grid-binding-round15]]. **DB 미적재(조망/원칙). 다음 = 케이스 컨펌 치환표(BATCH-1~14+미회신 ~70→생산형태 원칙/예외) / Wave-0 잔여 결정(BATCH-1·5~14·특히 🔴 BATCH-12 v03 방향) / 적재(round-5/6/10+인간 승인).**
 
 ## 한 줄 현황 (round-13 **횡단 결함 종합 GO — 14 결정점** — 2026-06-11)
@@ -64,10 +67,10 @@
 
 ## 다음 시작점 (정확한 다음 행동 — 순서대로)
 
-**★ [2026-06-13 완료] round-15 생산형태 × 그릇 × 선택→견적 binding — 보정·재게이트 GO.** `19_grid-binding/` 전 11시트 binding(A~E) + 경쟁사 생산형태별 확장 + 독립검증(NO-GO→보정→GO). **다음 우선 순서:**
-- **(가) 케이스 컨펌 치환표** — round-13 BATCH-1~14 + 미회신 ~70건을 `production-form-grid-matrix.md §2` 생산형태 원칙/예외로 최종 분류(round-15의 다음 논리 단계).
-- **(나) Wave-0 잔여 결정** — BATCH-1(카테고리 재연결)·BATCH-5~14 + 🔴 **BATCH-12(v03 상류 vs DB 직접 — 전체 교정 방향)**·BATCH-6(size↔option). Wave-0 P1 확정분 = BATCH-2/3/4([[dbmap-grid-binding-round15]]).
-- **(다) round-14 stale 갱신** / **(라) 적재**(round-5/6/10+인간 승인).
+**★ [2026-06-13 완료] round-15 후속 (가) 치환표 + (나) Wave-0 전건 확정.** 17건 §2 그릇 치환(🟢9·🟡3·⚪5, S1~S6 GO) + Wave-0 결정 5건 확정(D-1 DB직접·D-2 원칙일괄·D-3 카테고리·D-4 트랙에서·D-5 권장). **Wave-0 게이트 해제.** 산출 `19_grid-binding/{case-substitution-table,wave0-decision-package}.md`+`_gate/case-substitution-gate.md`. 커밋 f9c8197·92e4999. **다음 우선 순서:**
+- **(다음·실 교정 착수) Wave-1** — roadmap §4 권장: **BATCH-4 레더 .06**(`MAT_000186` mat_typ `.08→.06` 1행 UPDATE=6상품 동시·즉시효과·검산완료) → **BATCH-1 카테고리**(113상품 정상노드 이동+빈 고아 14 use_yn='N'). **트랙=round-10 델타(멱등 UPSERT·upd_dt) + 인간 승인.** [HARD] 교정 산출물=쉬운 한국어. D-1=DB직접이라 **load_master 재실행 가드 필수**(MES NULL·plate .03 퇴행 회귀 방지).
+- **(병행) round-14 stale 갱신** — Phase10/11 영향(`18_schema-change/impact-diagnosis.md`)·우리 산출 round-2/6/11/12/13 MAJOR stale → intent-map/cpq-schema/price-ddl 우선.
+- **(경계·트랙 진입 시) D-4** — BATCH-6 size↔option(round-6 CPQ)·BATCH-10 폴더 위치(round-2/생산메타)는 해당 트랙에서 도메인과 함께 결정.
 - **MINOR(차단 아님):** 스티커 `.04`×16 vs 라이브 17(시트 경계)·`price_formulas` 풀네임(t_prc=16/t_prd=63) 병기.
 
 **★ [2026-06-11 완료] round-13 라이브 정합 교정 — 전 11시트 GO.** 6 family(디지털인쇄·굿즈파우치·상품악세사리·실사·아크릴·문구) + 잔여 4 family(스티커·책자·포토북·캘린더+디자인캘린더) = **11/11 시트 전건 GO**. round-13 종결. 다음 우선 ↓
