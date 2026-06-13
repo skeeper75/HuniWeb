@@ -2,7 +2,10 @@
 
 > 작성 2026-06-11(최신·round-13). 권위 = 본 문서 + 메모리 `dbmap-mapping-research-round12`·`dbmap-correctness-audit-round13`·`dbmap-column-domain-loadspec-round11`·`dbmap-schema-design-intent-first`·`dbmap-code-identifier-strategy`·`dbmap-live-admin-product-viewer`·`dbmap-silsa-price-via-poster-sign`. 본 문서 + 메모리를 읽으면 재발견 0으로 재개. 이전 트랙(round-2 가격·round-4/5 적재·plate·CPQ·round-6 현수막·round-7 커버리지·round-8 admin UI·round-10 변경추적·round-11 도메인) 상세는 `CHANGELOG.md`·메모리에 보존.
 
-## 한 줄 현황 (round-13 **횡단 결함 종합 GO — 14 결정점** — 2026-06-11·최신)
+## 한 줄 현황 (round-15 **생산형태 × 그릇 × 선택→견적 binding — 보정·재게이트 GO** — 2026-06-13·최신)
+**사용자 directive("엑셀→DB 적재 분석 후 이후작업 정리")로 신설(`19_grid-binding/`). 생산형태 3분류(완제품/반제품/기성상품·디자인=직교 editor·prd_cd 단위) × 구성요소 11 그릇 × 선택→견적 end-to-end를 전 11시트 binding(A~E: 성격·그릇·선택→견적·경쟁사·GAP)로 조망.** 산출=`production-form-grid-matrix.md`(원칙·진단·쉬운라벨)+10 시트 binding+`competitor-by-production-form.md`(완제품·반제품 경쟁사 흡수·GAP 0)+`index.md`+`_gate/grid-binding-gate.md`. **3대 발견: ① 가격은 두 엑셀에 다 존재 — 인쇄상품 가격표 6시트(디지털·스티커·책자·실사·아크릴·캘린더제본[제본시트 B03]) + 상품마스터 가격포함 5시트(포토북·문구·굿즈·악세사리·디자인캘린더). 라이브 ❌=미적재일 뿐 ② [신규 오모델] 라이브 `prd_typ_cd`≠생산형태: 굿즈/문구=`.03`기성·디지털/실사/아크릴/스티커/캘린더=`.04`디자인·완제품 `.01`은 3건뿐(명함/엽서/상품권 대표)·악세사리만 도메인=라이브 일치. 사용자 "디자인상품≠생산형태"를 라이브가 역증 ③ [HARD directive] 실무진 표시 필드(note/tags)는 쉬운 한국어(`PRD_TYPE.04`→"디자인상품(에디터)"·`PROC_000002`→"UV인쇄")·각 binding '실무진 쉬운 라벨' 열.** `dbm-validator` 독립검증 **NO-GO**(prd_typ_cd 오귀속·"라이브 0" 과장 적발)→전 binding 보정→재게이트 **G1·G5·G6 GO**(생성자≠검증자 또 적발). 라이브 실측: `option_items 25·comp_prices 3,481·product_prices 0·price_formulas 63`(coverage ❌=상품군별 충족률, 전역 0 아님). Wave-0 P1 확정: **BATCH-2**(색·부속 분리 a)·**BATCH-3**(코팅 혼합:스티커 출력소재=자재유지/입히는코팅=공정)·**BATCH-4**(레더 `.08→.06` 가죽). 권위 [[dbmap-grid-binding-round15]]. **DB 미적재(조망/원칙). 다음 = 케이스 컨펌 치환표(BATCH-1~14+미회신 ~70→생산형태 원칙/예외) / Wave-0 잔여 결정(BATCH-1·5~14·특히 🔴 BATCH-12 v03 방향) / 적재(round-5/6/10+인간 승인).**
+
+## 한 줄 현황 (round-13 **횡단 결함 종합 GO — 14 결정점** — 2026-06-11)
 **전 11시트 GO 후속: 횡단 결함 종합(메타) GO(`17_correctness/_crosscut/` 3종 + 게이트 `_gate/crosscut-gate.md` X1~X6).** 전 10 family **171 finding(결함성 113·CORRECT 58) 전수 1:1 추적**("67"은 잔여 4 family만의 합·전수는 171) → 3대 패턴(① 카테고리 고아 14노드·113상품[정상 잎노드 두고 상위노드 직결] ② MAT_TYPE.07~10 자재 오염 .08=36·.09=58·.10=8상품 ③ v03 진원 10 family 전부) + 추가 횡단 6축. **개별 ~70 컨펌 → 14 결정점(BATCH-1~14, 비전문가용 a 권장/b 대안)**. 단일원인 다중오염 Top=**MAT_000186 레더 1행 → 6상품·4 family**(mat_typ만 .06 UPDATE 1회 동시 교정). `dbm-validator` X1 2차 적발(§0-bis 개념분류→171 전수 1:1 표 강제·집계 byte 일치·날조 0). **P1 4건(BATCH-1 카테고리 재연결·2 색/부속 분리·3 코팅 통일·4 레더 정정)만 닫아도 4 family씩 횡단 해제.** 🔴 핵심 쟁점=BATCH-3 코팅 CONFLICT(Q9 공정 vs 스티커 가격모델 3컬럼)·BATCH-12 v03 상류 수정 여부(전 트랙 방향)·BATCH-6 size↔option 경계. 산출 `_crosscut/`(crosscut-synthesis 171행 추적·batch-confirmations 14결정·remediation-roadmap 트랙배정). 권위 [[dbmap-correctness-audit-round13]]. **DB 미적재(종합·컨펌 패키지까지). 다음 = P1 실 교정 착수(실무진/인간 결정) 또는 round-14 stale 갱신.**
 
 ## 한 줄 현황 (round-13 **라이브 정합 교정 전 11시트 완료 — 11/11 GO** — 2026-06-11)
@@ -60,6 +63,12 @@
 - **[교훈] 에이전트 위임이 최종 텍스트를 "완료/Complete"로만 반환하는 실패모드** — 산출 파일/게이트를 직접 읽어 회수. 사용자가 영어 위임 지시문에 혼란 + 호출이 자꾸 끊김 → **다음 세션은 가능하면 인라인(한국어·보이게) 진행 선호.**
 
 ## 다음 시작점 (정확한 다음 행동 — 순서대로)
+
+**★ [2026-06-13 완료] round-15 생산형태 × 그릇 × 선택→견적 binding — 보정·재게이트 GO.** `19_grid-binding/` 전 11시트 binding(A~E) + 경쟁사 생산형태별 확장 + 독립검증(NO-GO→보정→GO). **다음 우선 순서:**
+- **(가) 케이스 컨펌 치환표** — round-13 BATCH-1~14 + 미회신 ~70건을 `production-form-grid-matrix.md §2` 생산형태 원칙/예외로 최종 분류(round-15의 다음 논리 단계).
+- **(나) Wave-0 잔여 결정** — BATCH-1(카테고리 재연결)·BATCH-5~14 + 🔴 **BATCH-12(v03 상류 vs DB 직접 — 전체 교정 방향)**·BATCH-6(size↔option). Wave-0 P1 확정분 = BATCH-2/3/4([[dbmap-grid-binding-round15]]).
+- **(다) round-14 stale 갱신** / **(라) 적재**(round-5/6/10+인간 승인).
+- **MINOR(차단 아님):** 스티커 `.04`×16 vs 라이브 17(시트 경계)·`price_formulas` 풀네임(t_prc=16/t_prd=63) 병기.
 
 **★ [2026-06-11 완료] round-13 라이브 정합 교정 — 전 11시트 GO.** 6 family(디지털인쇄·굿즈파우치·상품악세사리·실사·아크릴·문구) + 잔여 4 family(스티커·책자·포토북·캘린더+디자인캘린더) = **11/11 시트 전건 GO**. round-13 종결. 다음 우선 ↓
 - **(A) 횡단 결함 종합** [✅ 완료 2026-06-11·GO] — `17_correctness/_crosscut/` 3종(crosscut-synthesis 171 finding 전수 1:1·batch-confirmations 14 결정점·remediation-roadmap 트랙배정)+게이트 X1~X6 GO. 3대 패턴(카테고리 고아 14노드·113상품 / MAT_TYPE.07~10 오염 .08=36·.09=58·.10=8 / v03 진원 10 family) 정량 확정. **다음 하위 = P1 4건(BATCH-1~4) 실무진/사용자 결정 → round-5/6/10 실 교정.** 🔴 결정 대기: BATCH-3 코팅 CONFLICT·BATCH-12 v03 상류 vs DB 직접·BATCH-6 size↔option.
