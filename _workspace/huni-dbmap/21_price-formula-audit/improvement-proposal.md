@@ -5,7 +5,9 @@
 
 ---
 
-## A. 공식 비고(note) 가독성 개선 — D-3·D-4 해소
+## A. 공식 비고(note) 가독성 개선 — D-3·D-4 해소  ✅ 라이브 적용 완료 (2026-06-13)
+
+> **[적용됨]** 사용자 승인으로 아래 16건 note를 라이브 `t_prc_price_formulas`에 멱등 UPDATE·COMMIT. 검증: 내부행번호·영문약어·빈 note 전건 0. 백업·롤백 = `_apply/`(APPLIED.md·apply-note.sql·rollback-note.sql).
 
 원칙: ① 내부 행번호("계산공식집초안 행N")는 본문에서 빼고 필요 시 괄호 말미로 격하 ② 영문 약어(comp/mat)는 쉬운 한국어로 ③ "무슨 상품·무슨 계산"이 첫 문장에 오게.
 

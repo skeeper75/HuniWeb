@@ -1,0 +1,16 @@
+UPDATE t_prc_price_formulas SET note='합산형: 제본비=[수량행][제본종류열] 구성요소 (행69). 책자 원자합산형 공식의 제본 구성요소' WHERE frm_cd='PRF_BIND_SUM';
+UPDATE t_prc_price_formulas SET note='합산형: 판매가=인쇄비+코팅비+용지비+후가공비+추가상품 (계산공식집초안 행4). 별색인쇄비 행7 별도. 박(대형) 슬롯 행11. 엽서·상품권·종이슬로건' WHERE frm_cd='PRF_DGP_A';
+UPDATE t_prc_price_formulas SET note='합산형: 판매가=인쇄비+용지비+커팅비 (계산공식집초안 행15). 커팅=완칼(die-cut)' WHERE frm_cd='PRF_DGP_B';
+UPDATE t_prc_price_formulas SET note='합산형: 판매가=인쇄비+용지비+접지비+타공비+추가상품 (계산공식집초안 행19)' WHERE frm_cd='PRF_DGP_C';
+UPDATE t_prc_price_formulas SET note='합산형: 판매가=인쇄비+코팅비+용지비+후가공비 (계산공식집초안 행25)' WHERE frm_cd='PRF_DGP_D';
+UPDATE t_prc_price_formulas SET note='합산형: 판매가=인쇄비+코팅비+용지비+접지비+후가공비+박(대형)+추가상품 (계산공식집초안 행29). 국4절/3절 기준' WHERE frm_cd='PRF_DGP_E';
+UPDATE t_prc_price_formulas SET note='합산형: 판매가=용지비+인쇄비+커팅비 (계산공식집초안 행49). use_yn=N 미출시' WHERE frm_cd='PRF_DGP_F';
+UPDATE t_prc_price_formulas SET note='단순형: 판매가=[수량행][소재열] (계산공식집초안 행46). 완제품가 1 component. 봉투종류·소재는 component_prices 차원' WHERE frm_cd='PRF_ENV_MAKING';
+UPDATE t_prc_price_formulas SET note='합산형: 접지비=[제작수량행] 구성요소 (행30). 카드/리플렛 상위 원자합산형 공식의 후가공 구성요소' WHERE frm_cd='PRF_FOLD_SUM';
+UPDATE t_prc_price_formulas SET note='단순형: [수량행][사이즈×소재열] (행61). 사이즈mm·소재는 component_prices 차원' WHERE frm_cd='PRF_GANGPAN_FIXED';
+UPDATE t_prc_price_formulas SET note='단순형: [수량행][소재×면열] (행33). 용지포함 단품가. 면=comp흡수, 소재=mat 차원' WHERE frm_cd='PRF_NAMECARD_FIXED';
+UPDATE t_prc_price_formulas SET note='단순형: [수량행][옵션열] (행92). 사이즈=siz, 면·페이지=comp흡수 차원' WHERE frm_cd='PRF_PCB_FIXED';
+UPDATE t_prc_price_formulas SET note='단순형: [세트당 고정단가] (행43). 20장1세트=bdl_qty 차원. 일반/투명 분리' WHERE frm_cd='PRF_PHOTOCARD_FIXED';
+UPDATE t_prc_price_formulas SET note='단순형: [면적/사이즈×수량][소재별] 완제품가(출력+코팅+가공 포함). 메인=완제품비.06 통가격 + 추가옵션 별도 add-on. 면적시트 31블록' WHERE frm_cd='PRF_POSTER_FIXED';
+UPDATE t_prc_price_formulas SET note='단순형: [수량행][출력매수×소재열] (계산공식집초안 행52). 규격(판수)·소재는 component_prices 차원' WHERE frm_cd='PRF_STK_FIXED';
+UPDATE t_prc_price_formulas SET note='단순형: [수량행][옵션열] (행92, 엽서북/떡메). 사이즈=siz, 권당장수=bdl_qty, 장수=min_qty' WHERE frm_cd='PRF_TTEOKME_FIXED';
