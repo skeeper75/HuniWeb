@@ -2,7 +2,10 @@
 
 > 작성 2026-06-11(최신·round-13). 권위 = 본 문서 + 메모리 `dbmap-mapping-research-round12`·`dbmap-correctness-audit-round13`·`dbmap-column-domain-loadspec-round11`·`dbmap-schema-design-intent-first`·`dbmap-code-identifier-strategy`·`dbmap-live-admin-product-viewer`·`dbmap-silsa-price-via-poster-sign`. 본 문서 + 메모리를 읽으면 재발견 0으로 재개. 이전 트랙(round-2 가격·round-4/5 적재·plate·CPQ·round-6 현수막·round-7 커버리지·round-8 admin UI·round-10 변경추적·round-11 도메인) 상세는 `CHANGELOG.md`·메모리에 보존.
 
-## 한 줄 현황 (round-15 후속 **케이스 컨펌 치환표 + Wave-0 전건 확정** — 2026-06-13·최신)
+## 한 줄 현황 (round-16 **가격표 → Phase11 가격엔진 그릇 import 준비 하네스 신설 + 3시트 GO** — 2026-06-13·최신)
+**사용자 "Wave-1 교정 전, 가격표를 webadmin에 복붙할 수 있는 엑셀 그릇으로 정리 + 매핑 절차 mermaid"** → `/harness:harness`로 신설. **그릇 권위 = webadmin Phase11 가격엔진 `evaluate_price` 4테이블**(`raw/webadmin/.planning/phases/11-price-engine-simulator/`): `t_prc_price_formulas`(공식정의 frm_cd·frm_nm·note·use_yn) → `t_prd_product_price_formulas`(상품바인딩·별 테이블) → `t_prc_formula_components`(배선) → `t_prc_price_components`(`prc_typ_cd` 단가/합가·`use_dims`) → `t_prc_component_prices`(10차원 자연키). 신규 스킬 `dbm-price-import-prep`·에이전트 `dbm-price-import-builder`·오케스트레이터 round-16. 산출 = 시트별 `20_price-import/<sheet>/`{structure·decomposition·**import.xlsx**(webadmin 복붙용·테이블 1:1·1행 DB컬럼·2행 한글라벨)·mapping-flow(mermaid)}. **3시트 = 3구조 검증 GO:** ① **스티커(MATRIX)** 7블록·**소재 7종 개별분해**(사용자 피드백 "유포·비코팅·미색·투명·홀로그램 소재별로 나눠야"·라이브 t_mat_materials 실측 153/084/242/155/156/162/163). 1차 NO-GO(공식정의/바인딩 혼동·BLOCKED siz NULL강제)→보정→소재보정 **3회 GO**. 단가/합가로 round-2 BLOCKED 2건(타투·팩) 해소. ② **디지털인쇄비(합산형)** 2블록·6공식·954행·**재사용 신규0**(round-2 308행 재현). 1차 GO. ③ **아크릴(면적매트릭스형)** 8블록·4매트릭스·siz단독차원(수량축 없음). 🔴 **가격사슬 단절 발견·라이브 실증**(단가행 121 적재됐으나 formula_components 배선 0=엔진 조회 경로 없음). 1차 GO. **5대 교훈: ① 그릇 권위=라이브 information_schema(개념설계 11-CONTEXT 아님·`frm_typ_cd` 라이브 부재) ② 공식정의≠상품바인딩(별 테이블·혼동 금지) ③ 헤더 "/"=개별 소재 나열(collapse 금지) ④ BLOCKED는 NULL강제 금지·별 시트 ⑤ 가격사슬 단절(단가행 적재≠공식배선=엔진조회불가).** round-14 stale 반영(8→10차원·단가/합가). 커밋 5ee79cb·89db932·0889aab·ff78213. 권위 [[dbmap-price-import-round16]]. **DB 미적재. 다음 = 세트/고정형 대표(봉투/엽서북떡메/제본/박) + 동형 잔여 7시트(명함포토카드·합판도무송·코팅·접지옵션·인쇄후가공·커팅타공·출력소재IMPORT) + 컨펌 해소(스티커 Q-STK-1/5/6·디지털 Q-DGP-1/2·아크릴 Q-ACR-1~6).**
+
+## 한 줄 현황 (round-15 후속 **케이스 컨펌 치환표 + Wave-0 전건 확정** — 2026-06-13)
 **사용자 "엑셀→DB 적재 이후작업" 다음 단계 2건 완료.** ① **(가) 케이스 컨펌 치환표**(`19_grid-binding/case-substitution-table.md`): round-13 14 BATCH + AMBIGUOUS 3 = **17건 전수**를 round-15 §2 생산형태×그릇 매트릭스로 치환 → **🟢 원칙 도출 9 · 🟡 경계 쟁점 3 · ⚪ 직교 축 5**. `dbm-validator` 독립검증 **S1~S6 GO·뒤집힌 판정 0**(셀 인용 9건 글자단위 실재·OM-1/2/7 정합·OBS-1 Low 비차단). **개별 ~70 컨펌이 "생산형태 3 × 그릇 원칙"으로 수렴**(케이스별 재논의 소멸). ② **(나) Wave-0 전건 확정**(`wave0-decision-package.md`): roadmap §4 선결 게이트. 확정 3(BATCH-2/3/4 round-15 P1) + 사용자 결정 5 — **D-1 🟢 DB에서 직접 교정**(우리가 정답 L1 알고 v03 재작업=webadmin 일정 의존→하류 즉시·멱등 UPSERT+재실행 가드 전제) · **D-2 🟢 생산형태 그릇 원칙 일괄 채택**(🟢9건 자동 수렴) · **D-3 🟢 카테고리 113상품 이동+빈 임시함 숨김** · **D-4 🟢 경계2(size↔option·폴더위치)는 round-6/2 트랙에서** · D-5 운영 권장(MES·정체보류·하이픈). **[HARD 사용자 directive] 모든 교정 산출물=쉬운 한국어**(비전문가 빠른 확인·실무진 라벨 원칙 §1.0-b 연장). **Wave-0 게이트 해제 → Wave-1 진입 가능.** 커밋 f9c8197(치환표)·92e4999(Wave-0). 권위 [[dbmap-grid-binding-round15]]. **DB 미적재. 다음 = Wave-1 실 교정**(roadmap §4 권장: BATCH-4 레더 .06 1행 UPDATE=6상품 → BATCH-1 카테고리 113상품, round-10 델타·멱등 UPSERT·인간 승인) **또는 round-14 stale 갱신.**
 
 ## 한 줄 현황 (round-15 **생산형태 × 그릇 × 선택→견적 binding — 보정·재게이트 GO** — 2026-06-13)
@@ -66,6 +69,13 @@
 - **[교훈] 에이전트 위임이 최종 텍스트를 "완료/Complete"로만 반환하는 실패모드** — 산출 파일/게이트를 직접 읽어 회수. 사용자가 영어 위임 지시문에 혼란 + 호출이 자꾸 끊김 → **다음 세션은 가능하면 인라인(한국어·보이게) 진행 선호.**
 
 ## 다음 시작점 (정확한 다음 행동 — 순서대로)
+
+**★ [2026-06-13 진행중·최신] round-16 가격표 → Phase11 그릇 import 준비.** 하네스 신설 + 3시트(스티커·디지털인쇄비·아크릴) 3구조 검증 GO. **다음 우선 순서:**
+- **(A) 세트/고정형 대표 1시트** — 마지막 미검증 구조. `엽서북떡메`(떡메=합가형 가능·세트) 또는 `봉투제작`/`제본`/`후가공_박`. `dbm-price-import-builder` 위임(스티커·디지털·아크릴 교훈 프롬프트 재사용).
+- **(B) 동형 잔여 7시트** — 명함포토카드·합판도무송(MATRIX 동형=스티커 패턴) · 코팅·접지옵션·인쇄후가공·커팅타공(합산형 동형=디지털 패턴) · 출력소재IMPORT(소재). 구조 확립됐으니 패턴 적용.
+- **(C) 컨펌 해소** — 스티커 Q-STK-1(타투 base)·Q-STK-5(투명전용지 코드)·Q-STK-6(팩 소재) · 디지털 Q-DGP-1(단/양면)·Q-DGP-2(3절 별색) · 아크릴 Q-ACR-1~6(후가공·카라비너·코롯토·좌표방향·siz채번·공식사슬). + 아크릴 MINOR(30x50 비대칭 3건 누락 보정).
+- **(D) 실 적재** — 그릇 GO분을 round-5(멱등 UPSERT)/round-10 트랙 + 인간 승인. 가격사슬 단절(아크릴류)은 공식+배선+바인딩 신규 적재 필요.
+- **[HARD] builder 위임 시 5대 교훈 프롬프트 필수**: 라이브 information_schema 실측 선행·공식정의/바인딩 분리·헤더 개별분해·BLOCKED NULL금지·가격사슬(배선) 확인. (스티커 1차 NO-GO가 이걸로 디지털·아크릴 1차 GO 전환.)
 
 **★ [2026-06-13 완료] round-15 후속 (가) 치환표 + (나) Wave-0 전건 확정.** 17건 §2 그릇 치환(🟢9·🟡3·⚪5, S1~S6 GO) + Wave-0 결정 5건 확정(D-1 DB직접·D-2 원칙일괄·D-3 카테고리·D-4 트랙에서·D-5 권장). **Wave-0 게이트 해제.** 산출 `19_grid-binding/{case-substitution-table,wave0-decision-package}.md`+`_gate/case-substitution-gate.md`. 커밋 f9c8197·92e4999. **다음 우선 순서:**
 - **(다음·실 교정 착수) Wave-1** — roadmap §4 권장: **BATCH-4 레더 .06**(`MAT_000186` mat_typ `.08→.06` 1행 UPDATE=6상품 동시·즉시효과·검산완료) → **BATCH-1 카테고리**(113상품 정상노드 이동+빈 고아 14 use_yn='N'). **트랙=round-10 델타(멱등 UPSERT·upd_dt) + 인간 승인.** [HARD] 교정 산출물=쉬운 한국어. D-1=DB직접이라 **load_master 재실행 가드 필수**(MES NULL·plate .03 퇴행 회귀 방지).
