@@ -20,6 +20,11 @@ triggers:
 - **🔴 터무니없음**: 자릿수 차이 / 우리값 비정상(계산불가·0·음수·과대합산 round-18 D-2) / 같은 옵션인데 설명 불가 배율. → 우리측 결함 신호 → arbiter 라우팅.
 - 경계는 단일 숫자 박제 금지 — 인쇄 도메인 상식(같은 사양 시장가는 통상 동일 자릿수·수배 이내). 자릿수·비정상은 무조건 🔴.
 
+**[round-18+ 정립] 두 종 오라클 + materiality 임계.** 베스트프랙티스(metamorphic·reasonableness oracle·재무 materiality):
+- **정답 오라클** = 권위 엑셀 known값(exact 일치 기대·돈 데이터). verifier 재계산이 담당.
+- **합리성 오라클** = ① metamorphic 관계(수량↑→단가↓·면적 k배→≈k배·옵션 추가→비감소) ② 경쟁사 plausibility(정답 아님·자릿수/비정상만 이상치). 본 벤치마크가 담당.
+- **materiality 임계 PASS / WARN / 🔴FAIL**: 절대(금액)+상대(%) blended. 소차이=PASS(전략차)·설명필요 수배=WARN·자릿수/비정상=🔴FAIL(차단·arbiter 회부). 모든 차이를 동급 차단하지 않음.
+
 ## 1. 경쟁사 가격 획득
 
 | 경쟁사 | 출처 | 방법 |

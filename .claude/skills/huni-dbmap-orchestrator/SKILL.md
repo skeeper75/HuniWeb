@@ -348,21 +348,27 @@ round-13 (correctness-audit):
 
 **Phase 5 — 보고 + 결정** (lead): 사슬 완결/단절 분포 + 재계산 일치/불일치/계산불가 + 결함을 사용자에 에스컬레이션. 단절 실 교정(round-5/13)·실제 엔진(Phase 11) 구현·불일치 원인 판정은 인간 승인.
 
-## Pipeline (round-18+ 확장 — 클래스 전수 + 경쟁사 벤치마크 + 정합 정립)
+## Pipeline (round-18+ 확장 — **게이트형** 클래스 전수 + 경쟁사 벤치마크 + 정합 정립)
 
-**[프레임] round-18 파일럿(단일 상품)을 상품군 전체로 확장 + 경쟁사 합리성 대조 + 돈-크리티컬 정합 정립.** 권위 = 가격표/상품마스터 엑셀(사용자 directive: 모든 가격 구성요소는 엑셀에 정립). 경쟁사(와우프레스 공개 API·레드프린팅 본인계정) = **합리성 오라클**(정답 아님). 게이트 원칙: **"같은 옵션인데 터무니없이 가격차 = 우리측 결함."** 생성≠검증(verifier/benchmark/arbiter ≠ validator). round-9/10 교훈으로 인라인 한국어 선호.
+**[프레임] round-18 파일럿(단일 상품)을 상품군 전체로 확장 + 경쟁사 합리성 대조 + 돈-크리티컬 정합 정립.** 권위 = 가격표/상품마스터 엑셀(사용자 directive: 모든 가격 구성요소는 엑셀에 정립). 경쟁사(와우프레스 공개 API·레드프린팅 본인계정) = **합리성 오라클**(정답 아님). 생성≠검증. round-9/10 교훈으로 인라인 한국어 선호.
 
-**Phase 1 — 클래스 분류**: 라이브 `t_prd_product_price_formulas` 역인덱스로 15 가격공식 클래스(공식별 동일 적용 상품군) + 184 가격미구성 상품 분류 → `26_price-engine-verify/_class-map.md`.
+**[HARD·핵심 정립 — 사용자 directive + 베스트프랙티스] 게이트 순서 = 데이터 정합 → 사슬 → 계산.** 베스트프랙티스(CPQ 표준 data integrity→config→pricing·source-to-target value-level reconciliation·metamorphic 오라클·closed-loop remediation·RTM, `28_price-arbitration/_pipeline-review/bestpractice-research.md`): **구성요소가 엑셀대로 맞게 적재됐는지 먼저 검증하고, 통과한 클래스만 가격계산으로 진입한다.** 틀린 매핑 위 계산은 garbage(엽서 D-2가 실증: 명세 순수매칭 22,849,330원). **[HARD] 계산기(`recompute.py`)가 라이브에 없는 옵션→구성요소 매핑을 코드로 메우는 보정 하드코딩 금지 — 보정이 필요하면 그것이 G-DATA 반려 신호(거짓 GO 방지). corrected 경로는 진단 대조용일 뿐 GO 근거 아님.**
 
-**Phase 2 — 클래스별 재계산** (verifier, 클래스당 대표+변형): round-18 recompute를 각 클래스 대표 상품에 적용(출력판형 해석·선택→구성요소 보정매칭·단가/합가·수량구간·할인). → `26_price-engine-verify/<class>/`.
+**Phase 1 — 클래스 분류**: 라이브 `t_prd_product_price_formulas` 역인덱스로 15 가격공식 클래스 + 184 가격미구성 분류 → `26_price-engine-verify/_class-map.md`.
 
-**Phase 3 — 경쟁사 벤치마크** (competitor-benchmark): 클래스 대표 × 같은 옵션을 와우프레스·레드프린팅과 대조 → 3열 비교표·차이율·B-gate(정상/주의/🔴터무니없음) → `27_competitor-benchmark/<class>/`{benchmark·absurd-gaps}.
+**Phase 2 — 선행 게이트 ① G-DATA(의미·적재 정합)** (arbiter `mapping-integrity` + round-13 재사용): 클래스 대표·변형의 구성요소(자재·공정·사이즈·도수·옵션)가 **권위 엑셀대로 라이브에 셀단위 적재**됐는지(완전성·차원 키 정합·옵션→comp 존재·round-13 적재값 정확성[A-2]) 검증. **행 존재≠적재(round-7 D-1)**: 변형 조합별 단가행 존재+값일치까지. NO-GO 클래스는 계산 진입 차단 → arbiter 정립(Phase 6) 직행. → `28_price-arbitration/<class>/mapping-integrity.md`.
 
-**Phase 4 — 정합 정립 심의** (arbiter, 돈-크리티컬): benchmark 🔴 + verifier 결함을 받아 가격↔상품요소 매핑 권위 엑셀 대조·근본원인·미진 요건 정립 방안(대안·트레이드오프·권고·트랙·컨펌) → `28_price-arbitration/<class>/`{mapping-integrity·root-cause·remediation-plan}.
+**Phase 3 — 선행 게이트 ② G-CHAIN(구조·사슬 배선)** (verifier `chain-completeness`): 가격소스 바인딩·공식→formula_components→price_components→component_prices·할인 연결이 *연결*됐나(구조). → `26_price-engine-verify/<class>/chain-completeness.md`.
 
-**Phase 5 — 게이트** (validator): PE1~PE6(재계산)·B1~B6(벤치마크)·A1~A6(정립) 독립 게이트 → `_gate/`. NEVER COMMIT/DDL.
+**Phase 4 — G-CALC(계산, G-DATA+G-CHAIN PASS 클래스만)** (verifier `recompute.py`): 출력판형 해석·차원 매칭·단가/합가·수량구간·시계열·할인 순차곱. **보정 하드코딩 0**. + **합리성 오라클(metamorphic)**: 수량↑→단가↓ 단조·면적 k배→가격 ≈k배·옵션 추가→총가 비감소 위반 검출. → `26_price-engine-verify/<class>/`{recompute-cases·expected-vs-computed}.
 
-**Phase 6 — 보고 + 정립 라우팅** (lead): 클래스별 정합 판정·🔴 터무니없는 차이·정립 방안을 사용자에 에스컬레이션. 실 교정(round-5 적재·round-13 교정·ddl-proposer)은 인간 승인(가격=돈, 더 보수적).
+**Phase 5 — 경쟁사 벤치마크** (competitor-benchmark): 같은 옵션 × 와우프레스·레드프린팅 대조. **정답 오라클(엑셀 known=exact)** + **합리성 오라클(경쟁사 plausibility)**. **materiality 임계 PASS/WARN/🔴FAIL**(절대+상대 blended·자릿수/비정상=🔴). → `27_competitor-benchmark/<class>/`{benchmark·absurd-gaps}.
+
+**Phase 6 — 정합 정립 심의** (arbiter, 돈-크리티컬): G-DATA NO-GO + benchmark 🔴 + 오라클 위반의 근본원인·미진 요건 정립 방안(대안·트레이드오프·권고·t_*·트랙·컨펌) → `28_price-arbitration/<class>/`{root-cause·remediation-plan}.
+
+**Phase 7 — 게이트 + 재검증 폐루프** (validator): G-DATA·G-CHAIN·PE(재계산)·B(벤치마크)·A(정립) 독립 게이트 + **요건↔게이트 추적표(RTM, 상품군×가격요소 커버리지 빈칸=미검증)** + **교정 적용 후 게이트 재실행 → 통과해야 RESOLVED(폐루프)** → `_gate/`. NEVER COMMIT/DDL.
+
+**Phase 8 — 보고 + 정립 라우팅** (lead): 클래스별 게이트 통과/차단·🔴 차이·정립 방안·RTM 커버리지를 사용자에 에스컬레이션. 실 교정(round-5/13/ddl-proposer)은 인간 승인(가격=돈, 더 보수적).
 
 ## Test scenarios
 
