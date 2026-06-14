@@ -97,7 +97,19 @@
 
 ## 다음 시작점 (정확한 다음 행동 — 순서대로)
 
-**★ [2026-06-14 최신·세션끝] Tier A 37상품 CPQ 옵션 레이어 적재.** 구성 완전성 스캔 완료(`25_load-readiness-scan/composition-checkboard.md`·라이브 247상품×17테이블). **기초 완전 37상품(엽서·명함·스티커·책자·포스터·배너·`opt_grp`만 비어있음)** 에 **컬럼순서=`disp_seq` 권위 + 기초데이터→옵션→템플릿→제약 FK위상(silsa `09_load/_exec_silsa_cpq/` 패턴)** 으로 CPQ 적재. **권장 파일럿 = 명함 3상품(031/032/033·구성 깨끗)** 또는 **disp_seq 컬럼순서 원칙 명문화(intent-map/cpq-design) 선행.** Tier B 가격결손 46=round-2/16. Tier C 미흡 54(하드커버책자·포토북·굿즈·타이벡·이미지피켓)=기초데이터부터·체크 후순위. 실 COMMIT=인간 승인·load_master 재실행 가드. 권위 [[dbmap-load-column-order-staged]]. **+ 잔여 = 빈 임시함 전역정리(use_yn='N')·부자재 2상품 구성보강 후 분류.**
+**★★ [2026-06-14 최신·세션끝·다음 세션 1순위] round-18+ 게이트형 파이프라인 — C-1 검증부터 착수.**
+사용자 지시: **"C-1부터 검증하는 부분으로 다음 세션."** 게이트형 파이프라인(Phase2 G-DATA→Phase3 G-CHAIN→통과시 Phase4 G-CALC→Phase5 벤치마크→Phase6 정립→Phase7 폐루프+RTM)은 정립 완료(커밋 291a691). 다음 세션 정확한 행동:
+1. **C-1 결정·검증 먼저** — "G-DATA(적재 정합 게이트)에서 **round-13(라이브 적재 정확성) GO를 선행 필수로 강제**할지 vs 조건부 허용". 검증 방법: 클래스별로 round-13 교정 산출(`17_correctness/<family>/`)의 GO 여부 + 가격 차원 키가 참조하는 마스터 행(자재·공정·사이즈)이 MIS-LOADED인지 라이브 실측 → C-1 정책 확정(강제 권장 근거: 틀린 마스터 행 참조 시 가격도 틀림). **사용자 C-1 결정 받거나, 근거 제시 후 확정.**
+2. **C-1 확정 후 첫 클래스 G-DATA 검증 실행** — 권장 ① **PRF_DGP_A(엽서·9상품)**: 정립대로면 D-2(옵션→구성요소 매핑 미적재)로 **G-DATA NO-GO 차단 → arbiter 정립 직행**이 정상(현행 거짓 GO와 대비 실증). 그 다음 ② **PRF_BIND_SUM(제본·4)**: 레드 캡처(PRBKYPR 8조합) 보유로 벤치마크 즉시 가능.
+3. 담당: G-DATA=`dbm-price-arbiter`(mapping-integrity, round-13 재사용) / G-CHAIN·G-CALC=`dbm-price-engine-verifier` / 벤치마크=`dbm-competitor-benchmark`(와우프레스 공개 API·레드 본인계정) / 게이트=`dbm-validator`. 생성≠검증·인라인 한국어·읽기전용·[HARD] 계산기 보정 하드코딩 금지.
+- **C-2(병행 결정)**: D-2 옵션→구성요소 매핑 권위 = CPQ `option_items` vs 차원 컬럼 신설 — arbiter 정립 본론(첫 클래스 정립 시 결정).
+- 권위·심의 근거: `28_price-arbitration/_pipeline-review/{arbiter-review,bestpractice-research}.md`·클래스맵 `26_price-engine-verify/_class-map.md`·[[dbmap-price-class-benchmark-round18plus]].
+
+**[건드리지 말 것]** round-18 엽서 파일럿 산출(`26_price-engine-verify/postcard/`·GO 검증 완료)·정립된 4 스킬 게이트 순서(G-DATA→G-CHAIN→G-CALC)·라이브 적재분(Tier A CPQ 1,026행·safeload 7행+더미정리·가격 round-2/16 적재분) — 모두 검증 완료/COMMIT. **[HARD] 계산기 보정 하드코딩으로 거짓 GO 내지 말 것**(이번 세션 핵심 교훈).
+
+---
+
+**★ [2026-06-14 이력] Tier A 37상품 CPQ 옵션 레이어 적재.** 구성 완전성 스캔 완료(`25_load-readiness-scan/composition-checkboard.md`·라이브 247상품×17테이블). **기초 완전 37상품(엽서·명함·스티커·책자·포스터·배너·`opt_grp`만 비어있음)** 에 **컬럼순서=`disp_seq` 권위 + 기초데이터→옵션→템플릿→제약 FK위상(silsa `09_load/_exec_silsa_cpq/` 패턴)** 으로 CPQ 적재. **권장 파일럿 = 명함 3상품(031/032/033·구성 깨끗)** 또는 **disp_seq 컬럼순서 원칙 명문화(intent-map/cpq-design) 선행.** Tier B 가격결손 46=round-2/16. Tier C 미흡 54(하드커버책자·포토북·굿즈·타이벡·이미지피켓)=기초데이터부터·체크 후순위. 실 COMMIT=인간 승인·load_master 재실행 가드. 권위 [[dbmap-load-column-order-staged]]. **+ 잔여 = 빈 임시함 전역정리(use_yn='N')·부자재 2상품 구성보강 후 분류.**
 
 **★ [2026-06-14 완료] 컨펌대기 ~71건 정리 — 14 BATCH 전부 Wave-0 방향확정·원칙미정 0.** 상태판 `23_remediation-apply/_CONFIRM-STATUS-260614.md`. 스티커 코팅=예외(자재유지) 결정·카테고리 잔존고아 12상품 COMMIT(누적118). 11시트 라이브 정정 **즉시적용분 COMMIT 완료**(카테고리 고아 106상품·자재정정·MES 등). 남은 = 각 시트 **컨펌대기 ~71건**: size→option(굿즈 BATCH-6·`schema-design-intent-map` 의존)·코팅 공정/자재(Q9 CONFLICT)·봉투/케이스 세트(Q-ID-A)·박색 8상품 CPQ vs 공정(Q-DP-C)·형상 적재처(prcs_dtl_opt 신규 ddl-proposer)·미싱제본 신설·장수 옵션(Q12)·가격사슬 배선·잔존 고아 14상품·MAT_TYPE 오염. 설계는 각 `23_remediation-apply/<slug>/`{`manifest-worksheet` 컨펌대기 블록·`cpq-plan`·`apply.sql` 주석}에 보존. **권장: 주제별 그룹화(횡단=코팅 Q9·박색·카테고리 잔존고아·MAT_TYPE) 후 사용자 일괄 결정** → 해소분을 신규적재(공정/자재 연결 INSERT·round-5)·CPQ(round-6 option/template/constraint)·가격(round-2/16) 라이브 적재. 가격표(260527)=round-16 그릇+`22_price-load-prereq` 선결 진단 보유. 권위 [[dbmap-live-remediation-260610]]·[[dbmap-correctness-audit-round13]].
 
