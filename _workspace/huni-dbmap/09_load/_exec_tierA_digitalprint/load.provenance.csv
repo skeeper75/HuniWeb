@@ -1,0 +1,326 @@
+sql_file,step,target_row_key,source_authority
+05_groups,05,PRD_000016/인쇄 → OPT_000005,L1 인쇄(옵션) + attr-map 패밀리① 도수
+06_options,06,PRD_000016/단면 opt_id1,L1 인쇄 + live print_options
+06_options,06,PRD_000016/양면 opt_id2,L1 인쇄 + live print_options
+05_groups,05,PRD_000016/종이 → OPT_000006,L1 종이(필수) + live materials
+06_options,06,PRD_000016/종이 MAT_000074,live materials USAGE.07
+06_options,06,PRD_000016/종이 MAT_000082,live materials USAGE.07
+06_options,06,PRD_000016/종이 MAT_000092,live materials USAGE.07
+06_options,06,PRD_000016/종이 MAT_000101,live materials USAGE.07
+06_options,06,PRD_000016/종이 MAT_000109,live materials USAGE.07
+06_options,06,PRD_000016/종이 MAT_000113,live materials USAGE.07
+06_options,06,PRD_000016/종이 MAT_000114,live materials USAGE.07
+06_options,06,PRD_000016/종이 MAT_000115,live materials USAGE.07
+06_options,06,PRD_000016/종이 MAT_000116,live materials USAGE.07
+06_options,06,PRD_000016/종이 MAT_000117,live materials USAGE.07
+06_options,06,PRD_000016/종이 MAT_000118,live materials USAGE.07
+06_options,06,PRD_000016/종이 MAT_000120,live materials USAGE.07
+06_options,06,PRD_000016/종이 MAT_000121,live materials USAGE.07
+06_options,06,PRD_000016/종이 MAT_000123,live materials USAGE.07
+06_options,06,PRD_000016/종이 MAT_000124,live materials USAGE.07
+06_options,06,PRD_000016/종이 MAT_000125,live materials USAGE.07
+06_options,06,PRD_000016/종이 MAT_000126,live materials USAGE.07
+06_options,06,PRD_000016/종이 MAT_000127,live materials USAGE.07
+06_options,06,PRD_000016/종이 MAT_000128,live materials USAGE.07
+06_options,06,PRD_000016/종이 MAT_000129,live materials USAGE.07
+06_options,06,PRD_000016/종이 MAT_000130,live materials USAGE.07
+05_groups,05,PRD_000016/모서리 → OPT_000007,L1 후가공_모서리 + live 027/028
+06_options,06,PRD_000016/모서리 직각,live processes PROC_000027
+06_options,06,PRD_000016/모서리 둥근,live processes PROC_000028
+05_groups,05,PRD_000016/후가공 → OPT_000008,L1 후가공 다중 + live processes
+06_options,06,PRD_000016/후가공 오시,live processes PROC_000029
+06_options,06,PRD_000016/후가공 미싱,live processes PROC_000030
+06_options,06,PRD_000016/후가공 가변텍스트,live processes PROC_000031
+06_options,06,PRD_000016/후가공 가변이미지,live processes PROC_000032
+05_groups,05,PRD_000017/인쇄 → OPT_000009,L1 인쇄(옵션) + attr-map 패밀리① 도수
+06_options,06,PRD_000017/단면 opt_id1,L1 인쇄 + live print_options
+06_options,06,PRD_000017/양면 opt_id2,L1 인쇄 + live print_options
+05_groups,05,PRD_000017/종이 → OPT_000010,L1 종이(필수) + live materials
+06_options,06,PRD_000017/종이 MAT_000081,live materials USAGE.07
+06_options,06,PRD_000017/종이 MAT_000082,live materials USAGE.07
+05_groups,05,PRD_000017/코팅 → OPT_000011,L1 코팅(옵션) + live processes 014/015
+06_options,06,PRD_000017/코팅없음,sentinel
+06_options,06,PRD_000017/코팅 유광,live processes PROC_000014
+06_options,06,PRD_000017/코팅 무광,live processes PROC_000015
+05_groups,05,PRD_000017/모서리 → OPT_000012,L1 후가공_모서리 + live 027/028
+06_options,06,PRD_000017/모서리 직각,live processes PROC_000027
+06_options,06,PRD_000017/모서리 둥근,live processes PROC_000028
+05_groups,05,PRD_000018/인쇄 → OPT_000013,L1 인쇄(옵션) + attr-map 패밀리① 도수
+06_options,06,PRD_000018/단면 opt_id1,L1 인쇄 + live print_options
+06_options,06,PRD_000018/양면 opt_id2,L1 인쇄 + live print_options
+05_groups,05,PRD_000018/종이 → OPT_000014,L1 종이(필수) + live materials
+06_options,06,PRD_000018/종이 MAT_000074,live materials USAGE.07
+06_options,06,PRD_000018/종이 MAT_000080,live materials USAGE.07
+06_options,06,PRD_000018/종이 MAT_000081,live materials USAGE.07
+06_options,06,PRD_000018/종이 MAT_000082,live materials USAGE.07
+06_options,06,PRD_000018/종이 MAT_000090,live materials USAGE.07
+06_options,06,PRD_000018/종이 MAT_000091,live materials USAGE.07
+06_options,06,PRD_000018/종이 MAT_000092,live materials USAGE.07
+05_groups,05,PRD_000018/모서리 → OPT_000015,L1 후가공_모서리 + live 027/028
+06_options,06,PRD_000018/모서리 직각,live processes PROC_000027
+06_options,06,PRD_000018/모서리 둥근,live processes PROC_000028
+05_groups,05,PRD_000018/후가공 → OPT_000016,L1 후가공 다중 + live processes
+06_options,06,PRD_000018/후가공 오시,live processes PROC_000029
+06_options,06,PRD_000018/후가공 미싱,live processes PROC_000030
+06_options,06,PRD_000018/후가공 가변텍스트,live processes PROC_000031
+06_options,06,PRD_000018/후가공 가변이미지,live processes PROC_000032
+05_groups,05,PRD_000024/인쇄 → OPT_000017,L1 인쇄(옵션) + attr-map 패밀리① 도수
+06_options,06,PRD_000024/단면 opt_id1,L1 인쇄 + live print_options
+06_options,06,PRD_000024/양면 opt_id2,L1 인쇄 + live print_options
+05_groups,05,PRD_000024/종이 → OPT_000018,L1 종이(필수) + live materials
+06_options,06,PRD_000024/종이 MAT_000082,live materials USAGE.07
+05_groups,05,PRD_000024/코팅 → OPT_000019,L1 코팅(옵션) + live processes 014/015
+06_options,06,PRD_000024/코팅없음,sentinel
+06_options,06,PRD_000024/코팅 유광,live processes PROC_000014
+06_options,06,PRD_000024/코팅 무광,live processes PROC_000015
+05_groups,05,PRD_000024/모서리 → OPT_000020,L1 후가공_모서리 + live 027/028
+06_options,06,PRD_000024/모서리 직각,live processes PROC_000027
+06_options,06,PRD_000024/모서리 둥근,live processes PROC_000028
+05_groups,05,PRD_000024/화이트별색 → OPT_000021,L1 별색 화이트 — BLOCKED 차원행 부재
+07_items_BLOCKED,07,PRD_000024/화이트별색,L1 별색 화이트 — 차원행 부재 BLOCKED
+05_groups,05,PRD_000025/인쇄 → OPT_000022,L1 인쇄(옵션) + attr-map 패밀리① 도수
+06_options,06,PRD_000025/단면 opt_id1,L1 인쇄 + live print_options
+05_groups,05,PRD_000025/종이 → OPT_000023,L1 종이(필수) + live materials
+06_options,06,PRD_000025/종이 MAT_000178,live materials USAGE.07
+05_groups,05,PRD_000025/모서리 → OPT_000024,L1 후가공_모서리 + live 027/028
+06_options,06,PRD_000025/모서리 직각,live processes PROC_000027
+06_options,06,PRD_000025/모서리 둥근,live processes PROC_000028
+05_groups,05,PRD_000025/화이트별색 → OPT_000025,L1 별색 화이트 — BLOCKED 차원행 부재
+07_items_BLOCKED,07,PRD_000025/화이트별색,L1 별색 화이트 — 차원행 부재 BLOCKED
+05_groups,05,PRD_000026/인쇄 → OPT_000026,L1 인쇄(옵션) + attr-map 패밀리① 도수
+06_options,06,PRD_000026/단면 opt_id1,L1 인쇄 + live print_options
+06_options,06,PRD_000026/양면 opt_id2,L1 인쇄 + live print_options
+05_groups,05,PRD_000026/종이 → OPT_000027,L1 종이(필수) + live materials
+06_options,06,PRD_000026/종이 MAT_000082,live materials USAGE.07
+05_groups,05,PRD_000026/코팅 → OPT_000028,L1 코팅(옵션) + live processes 014/015
+06_options,06,PRD_000026/코팅없음,sentinel
+06_options,06,PRD_000026/코팅 유광,live processes PROC_000014
+06_options,06,PRD_000026/코팅 무광,live processes PROC_000015
+05_groups,05,PRD_000027/인쇄 → OPT_000029,L1 인쇄(옵션) + attr-map 패밀리① 도수
+06_options,06,PRD_000027/양면 opt_id1,L1 인쇄 + live print_options
+05_groups,05,PRD_000027/종이 → OPT_000030,L1 종이(필수) + live materials
+06_options,06,PRD_000027/종이 MAT_000074,live materials USAGE.07
+06_options,06,PRD_000027/종이 MAT_000081,live materials USAGE.07
+06_options,06,PRD_000027/종이 MAT_000082,live materials USAGE.07
+06_options,06,PRD_000027/종이 MAT_000091,live materials USAGE.07
+06_options,06,PRD_000027/종이 MAT_000092,live materials USAGE.07
+06_options,06,PRD_000027/종이 MAT_000101,live materials USAGE.07
+06_options,06,PRD_000027/종이 MAT_000108,live materials USAGE.07
+06_options,06,PRD_000027/종이 MAT_000109,live materials USAGE.07
+06_options,06,PRD_000027/종이 MAT_000113,live materials USAGE.07
+06_options,06,PRD_000027/종이 MAT_000114,live materials USAGE.07
+06_options,06,PRD_000027/종이 MAT_000115,live materials USAGE.07
+06_options,06,PRD_000027/종이 MAT_000116,live materials USAGE.07
+06_options,06,PRD_000027/종이 MAT_000123,live materials USAGE.07
+06_options,06,PRD_000027/종이 MAT_000125,live materials USAGE.07
+05_groups,05,PRD_000027/후가공 → OPT_000031,L1 후가공 다중 + live processes
+06_options,06,PRD_000027/후가공 가변텍스트,live processes PROC_000031
+06_options,06,PRD_000027/후가공 가변이미지,live processes PROC_000032
+05_groups,05,PRD_000027/접지 → OPT_000032,L1 접지(옵션) — BLOCKED 차원행 부재
+07_items_BLOCKED,07,PRD_000027/접지 2단 가로접지,L1 접지 — 차원행 부재 BLOCKED
+07_items_BLOCKED,07,PRD_000027/접지 2단 세로접지,L1 접지 — 차원행 부재 BLOCKED
+05_groups,05,PRD_000027/박칼라 → OPT_000033,L1 박칼라 + live 박칼라 공정 037~044
+06_options,06,PRD_000027/박없음,sentinel
+06_options,06,PRD_000027/박칼라 홀로그램,live processes PROC_000037
+06_options,06,PRD_000027/박칼라 금유광,live processes PROC_000038
+06_options,06,PRD_000027/박칼라 은유광,live processes PROC_000039
+06_options,06,PRD_000027/박칼라 먹유광,live processes PROC_000040
+06_options,06,PRD_000027/박칼라 동박,live processes PROC_000041
+06_options,06,PRD_000027/박칼라 적박,live processes PROC_000042
+06_options,06,PRD_000027/박칼라 청박,live processes PROC_000043
+06_options,06,PRD_000027/박칼라 트윙클,live processes PROC_000044
+05_groups,05,PRD_000029/인쇄 → OPT_000034,L1 인쇄(옵션) + attr-map 패밀리① 도수
+06_options,06,PRD_000029/양면 opt_id1,L1 인쇄 + live print_options
+05_groups,05,PRD_000029/종이 → OPT_000035,L1 종이(필수) + live materials
+06_options,06,PRD_000029/종이 MAT_000074,live materials USAGE.07
+06_options,06,PRD_000029/종이 MAT_000081,live materials USAGE.07
+06_options,06,PRD_000029/종이 MAT_000082,live materials USAGE.07
+06_options,06,PRD_000029/종이 MAT_000091,live materials USAGE.07
+06_options,06,PRD_000029/종이 MAT_000092,live materials USAGE.07
+06_options,06,PRD_000029/종이 MAT_000101,live materials USAGE.07
+06_options,06,PRD_000029/종이 MAT_000108,live materials USAGE.07
+06_options,06,PRD_000029/종이 MAT_000109,live materials USAGE.07
+06_options,06,PRD_000029/종이 MAT_000113,live materials USAGE.07
+06_options,06,PRD_000029/종이 MAT_000114,live materials USAGE.07
+06_options,06,PRD_000029/종이 MAT_000115,live materials USAGE.07
+06_options,06,PRD_000029/종이 MAT_000116,live materials USAGE.07
+06_options,06,PRD_000029/종이 MAT_000123,live materials USAGE.07
+06_options,06,PRD_000029/종이 MAT_000125,live materials USAGE.07
+05_groups,05,PRD_000029/후가공 → OPT_000036,L1 후가공 다중 + live processes
+06_options,06,PRD_000029/후가공 가변텍스트,live processes PROC_000031
+06_options,06,PRD_000029/후가공 가변이미지,live processes PROC_000032
+05_groups,05,PRD_000029/접지 → OPT_000037,L1 접지(옵션) — BLOCKED 차원행 부재
+07_items_BLOCKED,07,PRD_000029/접지 3단 가로접지,L1 접지 — 차원행 부재 BLOCKED
+07_items_BLOCKED,07,PRD_000029/접지 3단 세로접지,L1 접지 — 차원행 부재 BLOCKED
+05_groups,05,PRD_000029/박칼라 → OPT_000038,L1 박칼라 + live 박칼라 공정 037~044
+06_options,06,PRD_000029/박없음,sentinel
+06_options,06,PRD_000029/박칼라 홀로그램,live processes PROC_000037
+06_options,06,PRD_000029/박칼라 금유광,live processes PROC_000038
+06_options,06,PRD_000029/박칼라 은유광,live processes PROC_000039
+06_options,06,PRD_000029/박칼라 먹유광,live processes PROC_000040
+06_options,06,PRD_000029/박칼라 동박,live processes PROC_000041
+06_options,06,PRD_000029/박칼라 적박,live processes PROC_000042
+06_options,06,PRD_000029/박칼라 청박,live processes PROC_000043
+06_options,06,PRD_000029/박칼라 트윙클,live processes PROC_000044
+05_groups,05,PRD_000031/인쇄 → OPT_000039,L1 인쇄(옵션) + attr-map 패밀리① 도수
+06_options,06,PRD_000031/단면 opt_id1,L1 인쇄 + live print_options
+06_options,06,PRD_000031/양면 opt_id2,L1 인쇄 + live print_options
+05_groups,05,PRD_000031/종이 → OPT_000040,L1 종이(필수) + live materials
+06_options,06,PRD_000031/종이 MAT_000099,live materials USAGE.07
+06_options,06,PRD_000031/종이 MAT_000101,live materials USAGE.07
+06_options,06,PRD_000031/종이 MAT_000102,live materials USAGE.07
+06_options,06,PRD_000031/종이 MAT_000108,live materials USAGE.07
+06_options,06,PRD_000031/종이 MAT_000109,live materials USAGE.07
+06_options,06,PRD_000031/종이 MAT_000113,live materials USAGE.07
+06_options,06,PRD_000031/종이 MAT_000114,live materials USAGE.07
+06_options,06,PRD_000031/종이 MAT_000115,live materials USAGE.07
+06_options,06,PRD_000031/종이 MAT_000116,live materials USAGE.07
+06_options,06,PRD_000031/종이 MAT_000117,live materials USAGE.07
+06_options,06,PRD_000031/종이 MAT_000118,live materials USAGE.07
+06_options,06,PRD_000031/종이 MAT_000119,live materials USAGE.07
+06_options,06,PRD_000031/종이 MAT_000123,live materials USAGE.07
+06_options,06,PRD_000031/종이 MAT_000124,live materials USAGE.07
+06_options,06,PRD_000031/종이 MAT_000125,live materials USAGE.07
+06_options,06,PRD_000031/종이 MAT_000126,live materials USAGE.07
+05_groups,05,PRD_000031/모서리 → OPT_000041,L1 후가공_모서리 + live 027/028
+06_options,06,PRD_000031/모서리 직각,live processes PROC_000027
+06_options,06,PRD_000031/모서리 둥근,live processes PROC_000028
+05_groups,05,PRD_000031/후가공 → OPT_000042,L1 후가공 다중 + live processes
+06_options,06,PRD_000031/후가공 가변텍스트,live processes PROC_000031
+06_options,06,PRD_000031/후가공 가변이미지,live processes PROC_000032
+05_groups,05,PRD_000031/박칼라 → OPT_000043,L1 박칼라 + live 박칼라 공정 037~044
+06_options,06,PRD_000031/박없음,sentinel
+06_options,06,PRD_000031/박칼라 홀로그램,live processes PROC_000037
+06_options,06,PRD_000031/박칼라 금유광,live processes PROC_000038
+06_options,06,PRD_000031/박칼라 은유광,live processes PROC_000039
+06_options,06,PRD_000031/박칼라 먹유광,live processes PROC_000040
+06_options,06,PRD_000031/박칼라 동박,live processes PROC_000041
+06_options,06,PRD_000031/박칼라 적박,live processes PROC_000042
+06_options,06,PRD_000031/박칼라 청박,live processes PROC_000043
+06_options,06,PRD_000031/박칼라 트윙클,live processes PROC_000044
+05_groups,05,PRD_000032/인쇄 → OPT_000044,L1 인쇄(옵션) + attr-map 패밀리① 도수
+06_options,06,PRD_000032/단면 opt_id1,L1 인쇄 + live print_options
+06_options,06,PRD_000032/양면 opt_id2,L1 인쇄 + live print_options
+05_groups,05,PRD_000032/종이 → OPT_000045,L1 종이(필수) + live materials
+06_options,06,PRD_000032/종이 MAT_000081,live materials USAGE.07
+06_options,06,PRD_000032/종이 MAT_000082,live materials USAGE.07
+05_groups,05,PRD_000032/코팅 → OPT_000046,L1 코팅(옵션) + live processes 014/015
+06_options,06,PRD_000032/코팅없음,sentinel
+06_options,06,PRD_000032/코팅 유광,live processes PROC_000014
+06_options,06,PRD_000032/코팅 무광,live processes PROC_000015
+05_groups,05,PRD_000032/모서리 → OPT_000047,L1 후가공_모서리 + live 027/028
+06_options,06,PRD_000032/모서리 직각,live processes PROC_000027
+06_options,06,PRD_000032/모서리 둥근,live processes PROC_000028
+05_groups,05,PRD_000033/인쇄 → OPT_000048,L1 인쇄(옵션) + attr-map 패밀리① 도수
+06_options,06,PRD_000033/단면 opt_id1,L1 인쇄 + live print_options
+06_options,06,PRD_000033/양면 opt_id2,L1 인쇄 + live print_options
+05_groups,05,PRD_000033/종이 → OPT_000049,L1 종이(필수) + live materials
+06_options,06,PRD_000033/종이 MAT_000074,live materials USAGE.07
+06_options,06,PRD_000033/종이 MAT_000081,live materials USAGE.07
+06_options,06,PRD_000033/종이 MAT_000082,live materials USAGE.07
+06_options,06,PRD_000033/종이 MAT_000091,live materials USAGE.07
+06_options,06,PRD_000033/종이 MAT_000092,live materials USAGE.07
+05_groups,05,PRD_000033/모서리 → OPT_000050,L1 후가공_모서리 + live 027/028
+06_options,06,PRD_000033/모서리 직각,live processes PROC_000027
+06_options,06,PRD_000033/모서리 둥근,live processes PROC_000028
+05_groups,05,PRD_000033/후가공 → OPT_000051,L1 후가공 다중 + live processes
+06_options,06,PRD_000033/후가공 가변텍스트,live processes PROC_000031
+06_options,06,PRD_000033/후가공 가변이미지,live processes PROC_000032
+05_groups,05,PRD_000041/인쇄 → OPT_000052,L1 인쇄(옵션) + attr-map 패밀리① 도수
+06_options,06,PRD_000041/단면 opt_id1,L1 인쇄 + live print_options
+06_options,06,PRD_000041/양면 opt_id2,L1 인쇄 + live print_options
+05_groups,05,PRD_000041/종이 → OPT_000053,L1 종이(필수) + live materials
+06_options,06,PRD_000041/종이 MAT_000072,live materials USAGE.07
+06_options,06,PRD_000041/종이 MAT_000078,live materials USAGE.07
+06_options,06,PRD_000041/종이 MAT_000088,live materials USAGE.07
+06_options,06,PRD_000041/종이 MAT_000105,live materials USAGE.07
+05_groups,05,PRD_000041/후가공 → OPT_000054,L1 후가공 다중 + live processes
+06_options,06,PRD_000041/후가공 오시,live processes PROC_000029
+06_options,06,PRD_000041/후가공 미싱,live processes PROC_000030
+06_options,06,PRD_000041/후가공 가변텍스트,live processes PROC_000031
+06_options,06,PRD_000041/후가공 가변이미지,live processes PROC_000032
+05_groups,05,PRD_000042/인쇄 → OPT_000055,L1 인쇄(옵션) + attr-map 패밀리① 도수
+06_options,06,PRD_000042/단면 opt_id1,L1 인쇄 + live print_options
+06_options,06,PRD_000042/양면 opt_id2,L1 인쇄 + live print_options
+05_groups,05,PRD_000042/종이 → OPT_000056,L1 종이(필수) + live materials
+06_options,06,PRD_000042/종이 MAT_000107,live materials USAGE.07
+06_options,06,PRD_000042/종이 MAT_000118,live materials USAGE.07
+06_options,06,PRD_000042/종이 MAT_000121,live materials USAGE.07
+06_options,06,PRD_000042/종이 MAT_000125,live materials USAGE.07
+06_options,06,PRD_000042/종이 MAT_000128,live materials USAGE.07
+06_options,06,PRD_000042/종이 MAT_000129,live materials USAGE.07
+06_options,06,PRD_000042/종이 MAT_000240,live materials USAGE.07
+06_options,06,PRD_000042/종이 MAT_000241,live materials USAGE.07
+05_groups,05,PRD_000042/후가공 → OPT_000057,L1 후가공 다중 + live processes
+06_options,06,PRD_000042/후가공 오시,live processes PROC_000029
+06_options,06,PRD_000042/후가공 미싱,live processes PROC_000030
+06_options,06,PRD_000042/후가공 가변텍스트,live processes PROC_000031
+06_options,06,PRD_000042/후가공 가변이미지,live processes PROC_000032
+05_groups,05,PRD_000042/박칼라 → OPT_000058,L1 박칼라 + live 박칼라 공정 037~044
+06_options,06,PRD_000042/박없음,sentinel
+06_options,06,PRD_000042/박칼라 홀로그램,live processes PROC_000037
+06_options,06,PRD_000042/박칼라 금유광,live processes PROC_000038
+06_options,06,PRD_000042/박칼라 은유광,live processes PROC_000039
+06_options,06,PRD_000042/박칼라 먹유광,live processes PROC_000040
+06_options,06,PRD_000042/박칼라 동박,live processes PROC_000041
+06_options,06,PRD_000042/박칼라 적박,live processes PROC_000042
+06_options,06,PRD_000042/박칼라 청박,live processes PROC_000043
+06_options,06,PRD_000042/박칼라 트윙클,live processes PROC_000044
+05_groups,05,PRD_000047/인쇄 → OPT_000059,L1 인쇄(옵션) + attr-map 패밀리① 도수
+06_options,06,PRD_000047/단면 opt_id1,L1 인쇄 + live print_options
+06_options,06,PRD_000047/양면 opt_id2,L1 인쇄 + live print_options
+05_groups,05,PRD_000047/종이 → OPT_000060,L1 종이(필수) + live materials
+06_options,06,PRD_000047/종이 MAT_000072,live materials USAGE.07
+06_options,06,PRD_000047/종이 MAT_000073,live materials USAGE.07
+06_options,06,PRD_000047/종이 MAT_000074,live materials USAGE.07
+06_options,06,PRD_000047/종이 MAT_000076,live materials USAGE.07
+06_options,06,PRD_000047/종이 MAT_000077,live materials USAGE.07
+06_options,06,PRD_000047/종이 MAT_000078,live materials USAGE.07
+06_options,06,PRD_000047/종이 MAT_000079,live materials USAGE.07
+06_options,06,PRD_000047/종이 MAT_000080,live materials USAGE.07
+06_options,06,PRD_000047/종이 MAT_000081,live materials USAGE.07
+06_options,06,PRD_000047/종이 MAT_000082,live materials USAGE.07
+06_options,06,PRD_000047/종이 MAT_000086,live materials USAGE.07
+06_options,06,PRD_000047/종이 MAT_000087,live materials USAGE.07
+06_options,06,PRD_000047/종이 MAT_000088,live materials USAGE.07
+06_options,06,PRD_000047/종이 MAT_000089,live materials USAGE.07
+06_options,06,PRD_000047/종이 MAT_000090,live materials USAGE.07
+06_options,06,PRD_000047/종이 MAT_000091,live materials USAGE.07
+06_options,06,PRD_000047/종이 MAT_000092,live materials USAGE.07
+06_options,06,PRD_000047/종이 MAT_000095,live materials USAGE.07
+06_options,06,PRD_000047/종이 MAT_000096,live materials USAGE.07
+06_options,06,PRD_000047/종이 MAT_000097,live materials USAGE.07
+06_options,06,PRD_000047/종이 MAT_000098,live materials USAGE.07
+06_options,06,PRD_000047/종이 MAT_000099,live materials USAGE.07
+06_options,06,PRD_000047/종이 MAT_000101,live materials USAGE.07
+06_options,06,PRD_000047/종이 MAT_000102,live materials USAGE.07
+06_options,06,PRD_000047/종이 MAT_000104,live materials USAGE.07
+06_options,06,PRD_000047/종이 MAT_000105,live materials USAGE.07
+06_options,06,PRD_000047/종이 MAT_000106,live materials USAGE.07
+06_options,06,PRD_000047/종이 MAT_000107,live materials USAGE.07
+06_options,06,PRD_000047/종이 MAT_000108,live materials USAGE.07
+06_options,06,PRD_000047/종이 MAT_000109,live materials USAGE.07
+06_options,06,PRD_000047/종이 MAT_000113,live materials USAGE.07
+06_options,06,PRD_000047/종이 MAT_000114,live materials USAGE.07
+06_options,06,PRD_000047/종이 MAT_000115,live materials USAGE.07
+06_options,06,PRD_000047/종이 MAT_000116,live materials USAGE.07
+06_options,06,PRD_000047/종이 MAT_000117,live materials USAGE.07
+06_options,06,PRD_000047/종이 MAT_000118,live materials USAGE.07
+06_options,06,PRD_000047/종이 MAT_000119,live materials USAGE.07
+06_options,06,PRD_000047/종이 MAT_000120,live materials USAGE.07
+06_options,06,PRD_000047/종이 MAT_000121,live materials USAGE.07
+06_options,06,PRD_000047/종이 MAT_000123,live materials USAGE.07
+06_options,06,PRD_000047/종이 MAT_000124,live materials USAGE.07
+06_options,06,PRD_000047/종이 MAT_000125,live materials USAGE.07
+06_options,06,PRD_000047/종이 MAT_000126,live materials USAGE.07
+06_options,06,PRD_000047/종이 MAT_000127,live materials USAGE.07
+06_options,06,PRD_000047/종이 MAT_000128,live materials USAGE.07
+06_options,06,PRD_000047/종이 MAT_000129,live materials USAGE.07
+06_options,06,PRD_000047/종이 MAT_000130,live materials USAGE.07
+05_groups,05,PRD_000047/코팅 → OPT_000061,L1 코팅(옵션) + live processes 014/015
+06_options,06,PRD_000047/코팅없음,sentinel
+06_options,06,PRD_000047/코팅 유광,live processes PROC_000014
+06_options,06,PRD_000047/코팅 무광,live processes PROC_000015
+05_groups,05,PRD_000047/후가공 → OPT_000062,L1 후가공 다중 + live processes
+06_options,06,PRD_000047/후가공 가변텍스트,live processes PROC_000031
+06_options,06,PRD_000047/후가공 가변이미지,live processes PROC_000032

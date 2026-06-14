@@ -1,0 +1,64 @@
+prd_cd,opt_grp_nm,disp_seq,opt_nm,ref_dim_cd,ref_key1,ref_key2,L1_source_col,note
+PRD_000068,사이즈,1,A5(148x210mm),OPT_REF_DIM.01,SIZ_000170,,사이즈(필수),dflt
+PRD_000068,사이즈,1,A4(210x297mm),OPT_REF_DIM.01,SIZ_000172,,사이즈(필수),
+PRD_000068,내지종이,2,<mat_usage USAGE.01 전개>,OPT_REF_DIM.03,<live mat_cd>,USAGE.01,내지종이(필수),라이브 자재행 1:1 옵션 전개
+PRD_000068,내지인쇄,3,양면,OPT_REF_DIM.06,1,,내지인쇄(필수),dflt
+PRD_000068,내지인쇄,3,단면,OPT_REF_DIM.06,2,,내지인쇄(필수),
+PRD_000068,표지종이,4,<mat_usage USAGE.02 전개>,OPT_REF_DIM.03,<live mat_cd>,USAGE.02,표지종이(필수),라이브 자재행 1:1 옵션 전개
+PRD_000068,표지인쇄,5,양면,OPT_REF_DIM.06,1,,표지인쇄(필수),dflt GAP-DOSU-USAGE
+PRD_000068,표지인쇄,5,단면,OPT_REF_DIM.06,2,,표지인쇄(필수), GAP-DOSU-USAGE
+PRD_000068,표지코팅,6,유광,OPT_REF_DIM.04,PROC_000014,,표지옵션_표지코팅,dflt
+PRD_000068,표지코팅,6,무광,OPT_REF_DIM.04,PROC_000015,,표지옵션_표지코팅,
+PRD_000068,제본,9,중철제본,OPT_REF_DIM.04,PROC_000018,,제본(필수),dflt
+PRD_000069,사이즈,1,A5(148x210mm),OPT_REF_DIM.01,SIZ_000170,,사이즈(필수),dflt
+PRD_000069,사이즈,1,A4(210x297mm),OPT_REF_DIM.01,SIZ_000172,,사이즈(필수),
+PRD_000069,내지종이,2,<mat_usage USAGE.01 전개>,OPT_REF_DIM.03,<live mat_cd>,USAGE.01,내지종이(필수),라이브 자재행 1:1 옵션 전개
+PRD_000069,내지인쇄,3,양면,OPT_REF_DIM.06,1,,내지인쇄(필수),dflt
+PRD_000069,내지인쇄,3,단면,OPT_REF_DIM.06,2,,내지인쇄(필수),
+PRD_000069,표지종이,4,<mat_usage USAGE.02 전개>,OPT_REF_DIM.03,<live mat_cd>,USAGE.02,표지종이(필수),라이브 자재행 1:1 옵션 전개
+PRD_000069,표지인쇄,5,양면,OPT_REF_DIM.06,1,,표지인쇄(필수),dflt GAP-DOSU-USAGE
+PRD_000069,표지인쇄,5,단면,OPT_REF_DIM.06,2,,표지인쇄(필수), GAP-DOSU-USAGE
+PRD_000069,표지코팅,6,유광,OPT_REF_DIM.04,PROC_000014,,표지옵션_표지코팅,dflt
+PRD_000069,표지코팅,6,무광,OPT_REF_DIM.04,PROC_000015,,표지옵션_표지코팅,
+PRD_000069,박/형압,8,홀로그램,OPT_REF_DIM.04,PROC_000037,,박(표지)/형압_박형압가공,
+PRD_000069,박/형압,8,금유광,OPT_REF_DIM.04,PROC_000038,,박(표지)/형압_박형압가공,
+PRD_000069,박/형압,8,은유광,OPT_REF_DIM.04,PROC_000039,,박(표지)/형압_박형압가공,
+PRD_000069,박/형압,8,먹유광,OPT_REF_DIM.04,PROC_000040,,박(표지)/형압_박형압가공,
+PRD_000069,박/형압,8,동박,OPT_REF_DIM.04,PROC_000041,,박(표지)/형압_박형압가공,
+PRD_000069,박/형압,8,적박,OPT_REF_DIM.04,PROC_000042,,박(표지)/형압_박형압가공,
+PRD_000069,박/형압,8,청박,OPT_REF_DIM.04,PROC_000043,,박(표지)/형압_박형압가공,
+PRD_000069,박/형압,8,트윙클,OPT_REF_DIM.04,PROC_000044,,박(표지)/형압_박형압가공,
+PRD_000069,박/형압,8,형압(양각),OPT_REF_DIM.04,PROC_000051,,박(표지)/형압_박형압가공,
+PRD_000069,박/형압,8,형압(음각),OPT_REF_DIM.04,PROC_000052,,박(표지)/형압_박형압가공,
+PRD_000069,제본,9,무선제본,OPT_REF_DIM.04,PROC_000019,,제본(필수),dflt
+PRD_000071,사이즈,1,A5(148x210mm),OPT_REF_DIM.01,SIZ_000170,,사이즈(필수),dflt
+PRD_000071,사이즈,1,A4(210x297mm),OPT_REF_DIM.01,SIZ_000172,,사이즈(필수),
+PRD_000071,사이즈,1,A5(210x148mm),OPT_REF_DIM.01,SIZ_000253,,사이즈(필수),
+PRD_000071,사이즈,1,A4(297x210mm),OPT_REF_DIM.01,SIZ_000255,,사이즈(필수),
+PRD_000071,내지종이,2,<mat_usage USAGE.01 전개>,OPT_REF_DIM.03,<live mat_cd>,USAGE.01,내지종이(필수),라이브 자재행 1:1 옵션 전개
+PRD_000071,내지인쇄,3,단면,OPT_REF_DIM.06,1,,내지인쇄(필수),dflt
+PRD_000071,내지인쇄,3,양면,OPT_REF_DIM.06,2,,내지인쇄(필수),
+PRD_000071,표지종이,4,<mat_usage USAGE.02 전개>,OPT_REF_DIM.03,<live mat_cd>,USAGE.02,표지종이(필수),라이브 자재행 1:1 옵션 전개
+PRD_000071,표지인쇄,5,단면,OPT_REF_DIM.06,1,,표지인쇄(필수),dflt GAP-DOSU-USAGE
+PRD_000071,표지인쇄,5,양면,OPT_REF_DIM.06,2,,표지인쇄(필수), GAP-DOSU-USAGE
+PRD_000071,표지코팅,6,유광,OPT_REF_DIM.04,PROC_000014,,표지옵션_표지코팅,dflt
+PRD_000071,표지코팅,6,무광,OPT_REF_DIM.04,PROC_000015,,표지옵션_표지코팅,
+PRD_000071,투명커버,7,유광투명커버,OPT_REF_DIM.03,MAT_000244,USAGE.05,표지옵션_투명커버,dflt
+PRD_000071,투명커버,7,무광투명커버,OPT_REF_DIM.03,MAT_000245,USAGE.05,표지옵션_투명커버,
+PRD_000071,제본,9,트윈링제본,OPT_REF_DIM.04,PROC_000021,,제본(필수),dflt
+PRD_000071,링컬러,10,화이트링,OPT_REF_DIM.03,MAT_000013,USAGE.07,제본_링컬러,dflt
+PRD_000071,링컬러,10,블랙링,OPT_REF_DIM.03,MAT_000014,USAGE.07,제본_링컬러,
+PRD_000071,링컬러,10,메탈링,OPT_REF_DIM.03,MAT_000015,USAGE.07,제본_링컬러,
+PRD_000094,사이즈,1,100x150,OPT_REF_DIM.01,SIZ_000003,,사이즈(필수),dflt
+PRD_000094,사이즈,1,135x135,OPT_REF_DIM.01,SIZ_000004,,사이즈(필수),
+PRD_000094,사이즈,1,150x100,OPT_REF_DIM.01,SIZ_000124,,사이즈(필수),
+PRD_000094,내지종이,2,<mat_usage USAGE.01 전개>,OPT_REF_DIM.03,<live mat_cd>,USAGE.01,내지종이(필수),라이브 자재행 1:1 옵션 전개
+PRD_000094,내지인쇄,3,단면,OPT_REF_DIM.06,1,,내지인쇄(필수),dflt
+PRD_000094,내지인쇄,3,양면,OPT_REF_DIM.06,2,,내지인쇄(필수),
+PRD_000094,표지종이,4,<mat_usage USAGE.02 전개>,OPT_REF_DIM.03,<live mat_cd>,USAGE.02,표지종이(필수),라이브 자재행 1:1 옵션 전개
+PRD_000094,표지인쇄,5,단면,OPT_REF_DIM.06,1,,표지인쇄(필수),dflt GAP-DOSU-USAGE
+PRD_000094,표지인쇄,5,양면,OPT_REF_DIM.06,2,,표지인쇄(필수), GAP-DOSU-USAGE
+PRD_000094,표지코팅,6,무광,OPT_REF_DIM.04,PROC_000015,,표지옵션_표지코팅,dflt
+PRD_000094,제본,9,떡제본,OPT_REF_DIM.04,PROC_000022,,제본(필수),dflt
+PRD_000094,셋트구성,11,엽서북-내지,OPT_REF_DIM.07,PRD_000095,,set(BOM 내지/표지),dflt
+PRD_000094,셋트구성,11,엽서북-표지,OPT_REF_DIM.07,PRD_000096,,set(BOM 내지/표지),

@@ -1,0 +1,34 @@
+table,prd_cd,code,name,ref_dim_cd,ref_key1,ref_key2,authority,note
+option_groups,PRD_000052,OPT_000006,종이,,,,sticker-l1.csv col23 종이(필수)+live materials 5,코팅=자재 흡수 S1
+option_groups,PRD_000052,OPT_000007,인쇄,,,,sticker-l1.csv col24 인쇄(옵션)+live print_options opt_id=1,단면 단일
+option_groups,PRD_000052,OPT_000008,커팅,,,,sticker-l1.csv col31 커팅(옵션)+live PROC_000054,반칼
+option_groups,PRD_000053,OPT_000009,종이,,,,sticker-l1.csv 종이+live MAT_000162,투명스티커
+option_groups,PRD_000053,OPT_000010,인쇄,,,,live print_options opt_id=1,단면
+option_groups,PRD_000053,OPT_000011,화이트별색,,,,sticker-l1.csv col25 별색_화이트+live PROC_000008,화이트인쇄(단면) C-S5
+option_groups,PRD_000053,OPT_000012,커팅,,,,live PROC_000054,반칼
+option_groups,PRD_000055,OPT_000013,종이,,,,live MAT_000154,유포지
+option_groups,PRD_000055,OPT_000014,인쇄,,,,live print_options opt_id=1,단면
+option_groups,PRD_000055,OPT_000015,커팅,,,,live PROC_000053,완칼
+option_groups,PRD_000066,OPT_000016,종이,,,,live materials 6,죽은 stub OPT-000004 무관
+option_groups,PRD_000066,OPT_000017,인쇄,,,,live print_options opt_id=1,커팅=siz 융합 S3
+option_items,PRD_000052,,유포스티커,OPT_REF_DIM.03,MAT_000153,USAGE.07,live t_prd_product_materials,
+option_items,PRD_000052,,비코팅스티커,OPT_REF_DIM.03,MAT_000084,USAGE.07,live,
+option_items,PRD_000052,,무광코팅스티커,OPT_REF_DIM.03,MAT_000155,USAGE.07,live,코팅=자재 S1
+option_items,PRD_000052,,유광코팅스티커,OPT_REF_DIM.03,MAT_000156,USAGE.07,live,코팅=자재 S1
+option_items,PRD_000052,,미색스티커,OPT_REF_DIM.03,MAT_000242,USAGE.07,live,
+option_items,PRD_000052,,단면,OPT_REF_DIM.06,1,,live print_options,opt_id NOT clr_cd
+option_items,PRD_000052,,반칼,OPT_REF_DIM.04,PROC_000054,,live processes,
+option_items,PRD_000053,,투명스티커,OPT_REF_DIM.03,MAT_000162,USAGE.07,live,
+option_items,PRD_000053,,단면,OPT_REF_DIM.06,1,,live,
+option_items,PRD_000053,,화이트인쇄,OPT_REF_DIM.04,PROC_000008,,live processes,별색=공정 clr_cd NULL
+option_items,PRD_000053,,반칼,OPT_REF_DIM.04,PROC_000054,,live,
+option_items,PRD_000055,,유포지,OPT_REF_DIM.03,MAT_000154,USAGE.07,live,
+option_items,PRD_000055,,단면,OPT_REF_DIM.06,1,,live,
+option_items,PRD_000055,,완칼,OPT_REF_DIM.04,PROC_000053,,live processes,
+option_items,PRD_000066,,유포스티커,OPT_REF_DIM.03,MAT_000153,USAGE.07,live,
+option_items,PRD_000066,,비코팅스티커,OPT_REF_DIM.03,MAT_000084,USAGE.07,live,
+option_items,PRD_000066,,무광코팅스티커,OPT_REF_DIM.03,MAT_000155,USAGE.07,live,
+option_items,PRD_000066,,유광코팅스티커,OPT_REF_DIM.03,MAT_000156,USAGE.07,live,
+option_items,PRD_000066,,투명데드롱스티커,OPT_REF_DIM.03,MAT_000170,USAGE.07,live,
+option_items,PRD_000066,,은데드롱스티커,OPT_REF_DIM.03,MAT_000171,USAGE.07,live,
+option_items,PRD_000066,,단면,OPT_REF_DIM.06,1,,live,

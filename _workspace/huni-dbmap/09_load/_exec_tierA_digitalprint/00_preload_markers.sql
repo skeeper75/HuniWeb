@@ -1,0 +1,22 @@
+-- =====================================================================
+-- step 00 — pre-load markers (NO INSERT) — 적용된 설계 결정 명시
+-- 디지털인쇄 Tier A 14상품 CPQ 옵션레이어 · `_exec_tierA_digitalprint`
+-- 권위: tierA/digitalprint-option-layer.md(STRUCTURE) · cpq-schema §2(트리거) · _exec_silsa_cpq(패턴)
+-- =====================================================================
+-- [적용 결정]
+--  D-A 종이: option_group(택1) + 종이마다 1 option + 1 option_item(.03 mat_cd+usage_cd). opt_nm=mat_cd(이름키).
+--  D-B 사이즈: option_group 미생성(UI 상단 1차축·postcard 파일럿 계승). 차원행은 존재(CONFIRM 노출).
+--  D-C 도수: OG-인쇄 SEL_TYPE.01 mand. ref .06 opt_id(NOT clr_cd·MISMATCH-1 정정).
+--  D-D 코팅: 유광(014)/무광(015) 2 공정 + 코팅없음 센티넬. 단/양면 면구분=GAP-PARAM.
+--  D-E 후가공: OG-후가공 SEL_TYPE.02 다중. 오시029/미싱030/가변텍스트031/가변이미지032. 줄수/개수=GAP-PARAM.
+--  D-F 모서리: 직각027/둥근028 택1.
+--  D-G 접지: BLOCKED(라이브 process 접지공정 065~068 미링크). _blocked/items.
+--  D-H 박칼라: 박없음 센티넬 + 8종(037~044) 택1. 박크기=GAP-PARAM.
+--  D-I 화이트별색: BLOCKED(024/025 화이트 별색공정 미링크·[CONFIRM] 코드).
+--  D-J 봉투(016): 라이브 기존 add-on(TMPL-000005/006/009/010/011) → 옵션 중복생성 안 함.
+--  채번: opt_grp 라이브 MAX(suffix)=5 → OPT_000005+ · opt MAX=16 → OPV_000017+ (리터럴·`_`통일·멱등은 이름키).
+-- [차원행 실측 2026-06-14 read-only]: 14상품 sizes/materials/print_options/processes 적재 확인.
+--   후가공 PROC_029~032·코팅 014/015·박칼라 037~044 = 라이브 적재(postcard BLOCKED 5행 STALE→INSERTABLE 승격).
+-- [더미 분리]: 016 OPT-000005 후가공/OPV-000007~010 · 025 RULE_001 = _cleanup_dummy.sql(인간 승인).
+-- [HARD] NEVER COMMIT — 로더 기본 ROLLBACK. CPQ 행 INSERT 만(DDL/mint 없음).
+SELECT '00: markers — Tier A 14상품 옵션레이어, decisions D-A~D-J' AS step_00;

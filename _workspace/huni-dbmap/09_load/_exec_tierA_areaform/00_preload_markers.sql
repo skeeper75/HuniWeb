@@ -1,0 +1,19 @@
+-- =====================================================================
+-- step 00 — pre-load markers (NO INSERT) — Tier A 면적형 13상품 CPQ 옵션레이어
+-- 권위: tierA/areaform-option-layer.md · _exec_silsa_cpq (138 패턴) · cpq-schema.md (트리거)
+-- =====================================================================
+-- [적용 결정]
+--  D1 멱등=이름기반 NOT EXISTS(신규 DDL 0·코드 재발급 없음). D3 separator `_`(OPT_/OPV_).
+--  D4 채번 라이브 MAX+1: opt_grp OPT_000005~ · opt OPV_000017~ (138 점유 OPT_000004/OPV_000016 다음).
+--  prn=0 13상품 전부 → 도수 OG 0개. 소재 1행 → 소재 OG 0개. 비규격=products 범위+constraint(option_item 아님).
+--  가공 param(타공 구수·봉제 유형·족자 모양)=GAP-PARAM(ref_param_json 미구현) → option_item은 공정행만 가리킴.
+-- [BLOCKED 격리] 본 L2 적재 미관여 (차원행/LINK 재적재 안 함):
+--  · 거치대 template (136/137 실내/실외) — 거치대 상품 라이브 미발견(GAP-ADDON-STAND)
+--  · +끈/+면끈/+우드행거/+우드봉/+천정고리 BUNDLE 자재 미링크 (124/133/134/135 — GAP-BUNDLE-LINK)
+--  · 리본끈 자재 라이브 0행 (124 — GAP-RIBBON)
+--  · 139 재단만(PROC_000084)·끈추가(MAT_000070+PROC_000081) — L1 LINK 의존 BLOCKED [FINDING-1 보정·일관성]
+-- [FINDING-1 보정] L1 차원 LINK 선적재(product-materials/processes INSERT)는 L2 옵션 트랜잭션에서 분리.
+--  · _l1_link_preload.sql (별도 패키지·인간 승인 필요) — L2 적재의 선행 의존. apply.sql(L2 순수)에 비포함.
+--  · 마스터 코드는 라이브 실재(발명 아님)이나 product-link INSERT=L1 차원행 생성=L2 경계 밖.
+-- [HARD] NEVER COMMIT — 로더 기본 ROLLBACK. apply.sql=DDL/L1 LINK 없는 순수 L2 옵션레이어 INSERT.
+SELECT '00: markers — Tier A 13 products, OG from OPT_000005/OPV_000017, L1 LINK separated, BLOCKED isolated' AS step_00;

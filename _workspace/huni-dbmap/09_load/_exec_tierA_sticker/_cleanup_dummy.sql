@@ -1,0 +1,15 @@
+-- =====================================================================
+-- _cleanup_dummy.sql — 066 죽은 stub 정리 (인간 승인 전용, apply.sql 미포함)
+--   라이브 실측(2026-06-14):
+--     OPT-000004 원형 (del_yn='Y'·use_yn='N')  — 이미 소프트삭제됨(추가 조치 불요)
+--     OPV-000006 옵션1 (del_yn='N', opt_grp_cd=OPT-000004=삭제된 그룹) — 고아 옵션(option_items 0행)
+--   고아 OPV-000006 은 삭제된 그룹을 가리키는 매달린 행 → 소프트삭제 권장(hard-delete 금지).
+--   본 적재(apply.sql)는 이름검사 NOT EXISTS 가드로 stub 과 충돌하지 않으므로,
+--   이 정리는 선택적·인간 승인 후 별도 실행. NEVER auto-run.
+-- =====================================================================
+-- (인간 승인 시) 고아 옵션 소프트삭제:
+-- UPDATE t_prd_product_options
+--   SET del_yn='Y', del_dt=now(), upd_dt=now(),
+--       note=COALESCE(note,'')||' [정리 2026-06-14: 삭제된 그룹 OPT-000004 고아 → 소프트삭제]'
+-- WHERE prd_cd='PRD_000066' AND opt_cd='OPV-000006' AND opt_grp_cd='OPT-000004' AND del_yn='N';
+\echo '   _cleanup_dummy: 066 고아 OPV-000006 정리 = 인간 승인 후 주석 해제 실행 (NEVER auto-run)'
