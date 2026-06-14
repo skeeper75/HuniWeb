@@ -2,7 +2,18 @@
 
 > 작성 2026-06-14(최신·round-6 Tier A CPQ 확대). 권위 = 본 문서 + 메모리 `dbmap-tierA-cpq-option-load`·`dbmap-load-column-order-staged`·`dbmap-cpq-option-layer-mapping`·`dbmap-mapping-research-round12`·`dbmap-correctness-audit-round13`·`dbmap-column-domain-loadspec-round11`·`dbmap-schema-design-intent-first`·`dbmap-code-identifier-strategy`·`dbmap-live-admin-product-viewer`·`dbmap-silsa-price-via-poster-sign`. 본 문서 + 메모리를 읽으면 재발견 0으로 재개. 이전 트랙(round-2 가격·round-4/5 적재·plate·CPQ·round-6 현수막·round-7 커버리지·round-8 admin UI·round-10 변경추적·round-11 도메인) 상세는 `CHANGELOG.md`·메모리에 보존.
 
-## 한 줄 현황 (**round-18+ 제본 2×2 정리 + BC-5 9종 연결 정립 + 싸바리/레이플랫 조사** — 2026-06-15·최신)
+## 한 줄 현황 (**round-18+ 책자시트 43컬럼 매핑 준비 전수 체크** — 2026-06-15·최신)
+사용자 directive("책자시트 각 칼럼 값이 매핑 준비됐는지 체크·제본이 종류만인지 옵션 전체인지 확인"). 산출 [`26_price-engine-verify/_binding-overview/booklet-column-readiness.md`](dbm-correctness-auditor).
+- **책자=11상품(완제품 10+보류 링바인더 1)·43 의미 컬럼**(내지블록 C6~17·표지블록 C18~30·제본 C31~36·식별/수량 등). **준비도: ✅약 30 · 🟡 8 · ❌ 3.**
+- **★사용자 질문 직답 — 제본은 "종류만"이 아니었음**: 제본옵션 C33 면지✅(USAGE.03 자재)·C34 링컬러✅(USAGE.07 금속)·C35 바인더링 D링✅(088·31/42/56mm)·C36 묶음수✅(097·권)는 **이미 적재**. **단 C32 제본방향(좌철/상철)만 완전 미적재=책자 최대 갭** — PROC_000017에 "방향" 입력 정의(스키마)만 있고 `t_prd_product_processes`에 param 값 그릇 없음(묶음수·책등은 다른 그릇으로 대체됐으나 방향은 본래·대체 모두 부재). "종류만 봤다"는 round-18 가격 트랙 한정.
+- **❌ 3개**: C12/C23 내지·표지 폴더(출력용지규격 전량 NULL·[[dbmap-platesize-is-output-paper]] 연계) + C32 제본방향.
+- **🟡 8개**: C1 카테고리 잎노드 고아·C5 책등두께·C11/C20/C22 출력파일 일부 NULL·C24 레더 자재유형 충돌·C42 088 후공정 (대부분 round-13 미해결 승계).
+- **🔴 책자 가격 끝까지 계산 불가**: 칼럼 속성 입력은 대부분 준비됐으나 **가격사슬(공식 배선)이 중철(068)만 완결**·무선/PUR/트윈링은 단가만(미배선=BC-5)·하드커버/떡은 공식 미구성. "데이터 준비됐으나 가격 못 냄".
+- **★신규 발견(기존 산출보다 최신)**: CPQ 옵션 레이어가 **2026-06-14 07:22에 4상품만(068/069/071/094) 부분 적재**됨 → round-13(06-11) "option_groups 0행"은 **stale**. 나머지 6상품(070/072/077/082/088/097) 옵션 0행.
+- **컨펌(High 2)**: Q-BK-방향(좌철/상철=CPQ option group vs per-product param ref_param_json 신설 vs 견적단계)·Q-BK-가격(무선/PUR/트윈링 배선·하드커버/떡 공식 구성). (Medium/Low: 나머지 6상품 CPQ·폴더·레더 자재·책등두께=round-13 승계.)
+- **다음 = ① C32 제본방향 그릇 정립(ref_param_json GAP·round-6/8 연계) ② 책자 가격공식 배선(BC-5 책자4 GO+완제품 공식 트랙) ③ 나머지 6상품 CPQ 옵션 적재 ④ 다음 클래스.** 실 적용=인간 승인.
+
+## 한 줄 현황 (**round-18+ 제본 2×2 정리 + BC-5 9종 연결 정립 + 싸바리/레이플랫 조사** — 2026-06-15)
 사용자 directive("제본 12종 각각 상품·가격표 존재 확인·없으면 연결 불가하니 정리방안")에 직답.
 - **제본 12종 × 상품존재 × 가격표존재 2×2[`26_price-engine-verify/_binding-overview/binding-product-price-matrix`]**: A(상품O·가격O) 9 · B(상품O·가격X) 1(떡) · C(가격O·상품X) 1(싸바리) · D(둘다X) 1(레이플랫).
 - **BC-5 정립[arbiter·`28_price-arbitration/PRF_BIND_SUM/remediation-plan`]: A안 확장.** 책자4 GO = 공식 3 신설(무선/PUR/트윈링) + formula_components 배선 3 + 상품바인딩 UPDATE 3(069/070/071) · **DDL0·comp 신설0**(단가 74셀 값 그대로) · round-5 멱등. **🔴 결정적 정정: 하드커버5·캘린더4는 라이브 16공식에 완제품 공식 자체가 없음(실측)→제본 comp 편입 대상 부재→DEFER**(제본 BIND 공식·배선까지만, 상품 바인딩은 완제품 공식 적재 트랙에·표지/인쇄/용지 권위 미확보로 추측 적재 금지). 하드커버 "표지비 별도"(BC-8·완제품 트랙 별 comp) · 캘린더 "삼각대 포함"(CAL_* 단가에 이미 포함). 떡=`PRF_TTEOKME_FIXED` 이미 존재(고정가 클래스·B 일부 수정).
