@@ -2,7 +2,18 @@
 
 > 작성 2026-06-14(최신·round-6 Tier A CPQ 확대). 권위 = 본 문서 + 메모리 `dbmap-tierA-cpq-option-load`·`dbmap-load-column-order-staged`·`dbmap-cpq-option-layer-mapping`·`dbmap-mapping-research-round12`·`dbmap-correctness-audit-round13`·`dbmap-column-domain-loadspec-round11`·`dbmap-schema-design-intent-first`·`dbmap-code-identifier-strategy`·`dbmap-live-admin-product-viewer`·`dbmap-silsa-price-via-poster-sign`. 본 문서 + 메모리를 읽으면 재발견 0으로 재개. 이전 트랙(round-2 가격·round-4/5 적재·plate·CPQ·round-6 현수막·round-7 커버리지·round-8 admin UI·round-10 변경추적·round-11 도메인) 상세는 `CHANGELOG.md`·메모리에 보존.
 
-## 한 줄 현황 (**round-18+ BIND 정립 완주 + 후니 제본 12종 전수 조망** — 2026-06-15·최신)
+## 한 줄 현황 (**round-18+ 제본 2×2 정리 + BC-5 9종 연결 정립 + 싸바리/레이플랫 조사** — 2026-06-15·최신)
+사용자 directive("제본 12종 각각 상품·가격표 존재 확인·없으면 연결 불가하니 정리방안")에 직답.
+- **제본 12종 × 상품존재 × 가격표존재 2×2[`26_price-engine-verify/_binding-overview/binding-product-price-matrix`]**: A(상품O·가격O) 9 · B(상품O·가격X) 1(떡) · C(가격O·상품X) 1(싸바리) · D(둘다X) 1(레이플랫).
+- **BC-5 정립[arbiter·`28_price-arbitration/PRF_BIND_SUM/remediation-plan`]: A안 확장.** 책자4 GO = 공식 3 신설(무선/PUR/트윈링) + formula_components 배선 3 + 상품바인딩 UPDATE 3(069/070/071) · **DDL0·comp 신설0**(단가 74셀 값 그대로) · round-5 멱등. **🔴 결정적 정정: 하드커버5·캘린더4는 라이브 16공식에 완제품 공식 자체가 없음(실측)→제본 comp 편입 대상 부재→DEFER**(제본 BIND 공식·배선까지만, 상품 바인딩은 완제품 공식 적재 트랙에·표지/인쇄/용지 권위 미확보로 추측 적재 금지). 하드커버 "표지비 별도"(BC-8·완제품 트랙 별 comp) · 캘린더 "삼각대 포함"(CAL_* 단가에 이미 포함). 떡=`PRF_TTEOKME_FIXED` 이미 존재(고정가 클래스·B 일부 수정).
+- **싸바리/레이플랫 조사[`26_price-engine-verify/_binding-overview/sabari-layflat-research`]**:
+  - **싸바리 = 고아 아님(교정).** 싸바리=합판지를 인쇄표지로 싸 발라 하드커버(양장) 표지를 만드는 현장 용어. 후니 실판매 — 라이브 `PRD_000088 레더 링바인더`(+5상품)·`CAT_000131 레더링바인더`·후니 사이트 카테고리 "싸바리바인더"로 실재. 미연결 원인 = "쓰는 상품 없음"이 아니라 **명칭 불일치(싸바리바인더↔레더 링바인더) + BOM/공정 미적재(088~093 공정 0)**. → 명칭 매핑 + 레더 링바인더 5상품 BOM/공정 적재 + COMP_BIND_SSABARI 배선으로 연결(인간 승인).
+  - **레이플랫 = v03 마이그레이션 `06_공정정보` 1행 잔재**(`load_master.py:211` 적재·레포 미존재 라이브 거울). 미운영 마스터(상품 0·가격표 0·comp 0·오적재 아닌 여분 정의). PUR과 별개 고급 제본·국내외 포토북 표준+RedPrinting도 레이플랫이라 도입검토 사안(코드 준비됨)·계획 없으면 use_yn=N.
+- **제본 최종 결론: 진짜 "버릴 것" 없음** — 모두 연결 가능(A 9·B 떡·C 싸바리) 또는 의도적 미출시(D 레이플랫). 사용자가 우려한 "연결 불가"는 사실상 레이플랫 1종(미출시라 정상).
+- **컨펌: BC-5(책자4 A안 확정)·BC-5b(하드커버/캘린더 DEFER 승인)·BC-8(하드커버 표지비 그릇)·BC-7(메모패드 가격출처)·SB-1(싸바리=레더링바인더 동일)·SB-2(제본공정)·LF-1(레이플랫 미운영 확정)·LF-2(레이플랫 도입계획).**
+- **다음 = ① 책자4 연결 적재(round-5 멱등·DDL0·인간승인) ② 완제품 공식 부재분(하드커버·캘린더·184 미구성) 가격권위 확보 트랙 ③ 싸바리 레더링바인더 매핑+BOM 적재 ④ SB/LF/BC 컨펌 해소 ⑤ 다음 클래스(PRF_DGP_B~F/POSTER).** 실 적용=인간 승인 DEFERRED.
+
+## 한 줄 현황 (**round-18+ BIND 정립 완주 + 후니 제본 12종 전수 조망** — 2026-06-15)
 BIND 클래스 정립 완주 + 사용자 우려("제본방식 다양·정확히 확인하고 가자") 따라 제본 전체 조망(책자4만으론 부분적임을 데이터로 확인).
 - **PRF_BIND_SUM 정립[arbiter S5·`28_price-arbitration/PRF_BIND_SUM/{mapping-integrity,remediation-plan}`]: BIND-C1 권고 = A안(제본방식별 공식분리 `PRF_BIND_MUSEON/PUR/TWINRING` 신설 + 상품→공식 1:1 바인딩·DDL 0).** 근거=제본방식은 상품별 1고정(정적 멤버십)→정적 바인딩(공식분리)이 의미정합. **★일반원칙: 멤버십 구조가 해법 결정 — PRF_DGP_A(한 상품 내 다중택1=엽서 단/양면)=option_items+OPT_REF_DIM.08 / BIND(상품별 1고정)=공식분리. 반대 해법이 정합(같은 .08 강요가 오히려 부정합).** B-WIRE(공식에 중철 comp 1개만 배선·3/4 단절)·B-FORMULA(1공식↔4상품 미스매치) BLOCKING이나 값 32/32 일치=구조결함·값정상. 정립 트랙=t_prc_price_formulas INSERT3+formula_components INSERT3+product_price_formulas UPDATE3(round-5 멱등·DDL0).
 - **벤치마크 보류[`27_competitor-benchmark/PRF_BIND_SUM/`]: 레드 PRBKYPR 비교 0건**(레드=좌철 단일·완제품총액·BIND unit_amt=0 / 우리=제본비 단독+B-WIRE 완제품합산 봉쇄). 🔴FAIL 없음이나 "정상 입증"도 아님. 가능화=레드 무선/중철 완제품 신규 캡처 + B-WIRE 해소. (벤치마크/리서치 접근=레드·와우프레스 상품군 옵션구성·가격차 대조.)
