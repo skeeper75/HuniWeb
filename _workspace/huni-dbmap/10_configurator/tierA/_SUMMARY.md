@@ -1,6 +1,6 @@
 # Tier A 35상품 CPQ 옵션 레이어 적재 — 종합 (round-6 확대)
 
-> 작성 2026-06-14 · 권위 = 본 문서 + 4 검증 게이트(`03_validation/cpq-tierA-*.md`) + 4 적재본(`09_load/_exec_tierA_*`). **DB 미적재 — 설계·검증·멱등 DRY-RUN까지. 실 COMMIT은 인간 승인.** [HARD] 쉬운 한국어, 식별자/SQL English.
+> 작성 2026-06-14 · 권위 = 본 문서 + 4 검증 게이트(`03_validation/cpq-tierA-*.md`) + 4 적재본(`09_load/_exec_tierA_*`) + 적용기록 `_APPLIED-260614.md`. **✅ GO분 라이브 COMMIT 완료(2026-06-14·1,026행·검증 전건·고아0·멱등2회차). BLOCKED 17·L1 LINK 3·테스트더미 정리(016/025/066)·GAP DDL은 인간 승인 잔존.** [HARD] 쉬운 한국어, 식별자/SQL English.
 
 ## 0. 무엇을 했나
 
