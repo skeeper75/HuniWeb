@@ -106,6 +106,18 @@ Load the `dbm-load-execution` skill (§3 Gate + `references/live-dry-run.md`). A
   double-apply table, live DRY-RUN violation list (state "0" explicitly when clean), DDL-proposal fit, and
   the human-decision queue (live DRY-RUN / COMMIT / DDL-apply / code-row).
 
+## Round-20: Batch Aggregate Mode (집계 검증)
+
+When `dbm-load-builder` runs a homogeneous-class **batch** (`dbm-batch-load`), do NOT gate row-by-row —
+that is the token blowup the batch removes. Instead:
+- Receive the `verify_batch.sql` aggregate (통과 N · 실패 M · 예외 목록 CSV) and **independently re-run**
+  the aggregate SQL + `apply_batch.sh <dir> idempotent` (DRY-RUN 2-pass) yourself — 생성≠검증 preserved
+  at the aggregate level, not per row.
+- Review only **실패·예외** rows (FK 고아·NULL·자연키 중복·가격 diff≠0·멱등 delta≠0). Spot-check a few
+  exceptions against the 권위 가격표, not all rows.
+- PASS = all aggregate fail counts 0 + 멱등 delta 0 + apply_ymd 단일 세대. Then GO; COMMIT stays human-gated.
+- If any class fails precondition (plate 미교정·컬럼 미완), confirm it was **excluded** (not force-loaded).
+
 ## CPQ Option-Layer Validation (L2 track)
 
 When `dbm-option-mapper` produces the CPQ option layer (`10_configurator/attribute-entity-map.md` +

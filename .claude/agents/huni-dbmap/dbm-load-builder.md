@@ -89,6 +89,26 @@ SQL. Load the `dbm-load-execution` skill (§1 Build + `references/sql-idempotent
   `apply.sh`/`load.py`, `<NN>_<table>.sql`, `*.provenance.csv`, `README.md`. Hand to `dbm-validator` for
   R1–R6; never self-approve.
 
+## Round-20: Batch Load (동형 클래스 배치)
+
+When the task is **대량/동형 배치 적재** (270 products, repeated patterns) — not a single bundle —
+load the `dbm-batch-load` skill and use its `scripts/` instead of hand-assembling per-item `_exec` bundles.
+This removes the per-product token blowup (한 건씩 = 173K tokens/7 rows). Authority: `dbm-batch-load` SKILL.md.
+
+- **Classify first (S1).** Run `scripts/classify.py` — group products by (옵션구성 시그니처, 가격계산방식
+  = PRF_* class) × state. Batch only `ready` classes with ≥2 members; route `pending` (plate 미교정·컬럼 미완)
+  to precondition tracks; exclude `unlisted`. Homogeneous = same (옵션구성, 가격계산방식), not same sheet.
+- **Precondition gate (S2).** Confirm 기초 차원·plate·가격사슬 정합 (reuse round-19 readiness / round-13
+  correctness) before transform. 미달 클래스 = 배치 제외 (억지 적재 금지).
+- **Deterministic transform (S3).** `scripts/gen_batch_upsert.py` over reused L1 CSV (06_extract /
+  02_mapping/scripts) → 멱등 **NOT EXISTS NULL-safe** UPSERT (ON CONFLICT 금지 — 자연키 인덱스 NULLS
+  DISTINCT), `apply_ymd='2026-06-01'` 고정 (단가행 적용일 분기 = 가격 이중계상). One rule per class.
+- **Aggregate verify (S4).** `apply_batch.sh <dir> idempotent` (DRY-RUN 2-pass 멱등) + `verify_batch.sql`
+  (FK·NULL·중복·가격 diff 집계 → 통과 N·실패 M·예외). Hand 집계 결과 to `dbm-validator` 집계 모드 — 예외만.
+- **Commit (S5).** 집계 GO + 인간 승인 후 `apply_batch.sh <dir> commit`. **백업은 위험 변경(--backup)만**;
+  일상 멱등 UPSERT는 `apply_batch.sh <dir> baseline`(git CSV)로 충분 — 매 적재 DB 백업 금지(과한 프로세스).
+- **Output → `09_load/_batch_<class>/`** + classification at `3X_batch/`. Context 최소 — 행 나열 금지·집계만 보고.
+
 ## Error Handling
 
 - A mapping that targets a non-`t_` table, or a row that violates a constraint discovered during
