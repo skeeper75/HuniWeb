@@ -2,6 +2,14 @@
 
 > 작성 2026-06-14(최신·round-6 Tier A CPQ 확대). 권위 = 본 문서 + 메모리 `dbmap-tierA-cpq-option-load`·`dbmap-load-column-order-staged`·`dbmap-cpq-option-layer-mapping`·`dbmap-mapping-research-round12`·`dbmap-correctness-audit-round13`·`dbmap-column-domain-loadspec-round11`·`dbmap-schema-design-intent-first`·`dbmap-code-identifier-strategy`·`dbmap-live-admin-product-viewer`·`dbmap-silsa-price-via-poster-sign`. 본 문서 + 메모리를 읽으면 재발견 0으로 재개. 이전 트랙(round-2 가격·round-4/5 적재·plate·CPQ·round-6 현수막·round-7 커버리지·round-8 admin UI·round-10 변경추적·round-11 도메인) 상세는 `CHANGELOG.md`·메모리에 보존.
 
+## 한 줄 현황 (**round-19 종단 견적가능 파이프라인 신설 + 3상품군 실행 + 가격 폐루프 큐** — 2026-06-15·최신)
+`/harness:harness` 파이프라인 검증·강화. **감사 진단: 16라운드가 전부 레이어(가로)·종단(세로)으로 닫힌 상품군 0(D-1 근본결함)·목적(CPQ 3종 차원환원=생산정보)과 무게중심 불일치(가격 5라운드 vs CPQ 1)·readiness 비균질(booklet 1시트만).** 강화 A+B+C(사용자 선택)로 **round-19 종단 파이프라인 신설** — 기존 레이어 라운드를 호출 순서로 엮는 메타(S0 컬럼 readiness→S1 미적재 라우팅→S2~4 적재[round-13/5/6/16/18]→S5 견적가능 Q1~Q6→S7 RTM). 신규 에이전트 `dbm-readiness-auditor`+스킬 `dbm-product-readiness`·오케스트레이터 round-19 통합.
+- **[HARD] 견적가능 = ①UI 옵션선택 + ②선택의 차원환원(자재·공정·사이즈·도수=생산정보·MES_ITEM_CD 아님 [[dbmap-goal-ui-quote-mes]]) + ③가격계산 셋 다**(하나라도 미달=NO-GO·거짓GO 금지).
+- **3상품군 종단 실행**(`29_readiness/{postcard,voucher,namecard}/`): 엽서016/017/018·상품권041/042(PRF_DGP_A 합산형)·명함031/032/033(PRF_NAMECARD_FIXED 고정가형). **파이프라인 입증**=복제성(합산형2 동형)·일반성(고정가형서도 Q게이트 작동)·거짓GO차단(명함032 코팅 3,800 과소2,000 정직판정)·횡단결함 자동발견. **공통: ①UI·②차원환원 3상품군 전건 PASS·③가격만 막힘.** 견적가능 완전GO 0·조건부GO 2(엽서·상품권 기본옵션)·NO-GO 1(명함 배선미완)·미검증 7. 골든 라이브 재현(엽서44,330/141,650·상품권38,073·명함033=3,500·보정 하드코딩0).
+- **가격 3종 횡단 인간 승인 큐**(`29_readiness/_price-remediation-queue.md`·arbiter): ① **D-1b** 후가공 prc_typ 오적재(22comp=후가공13+박/완칼9·값정확·메타만·**ⓒ-2 신규 PRICE_TYPE.03 권고**·엽서+상품권 동시정상화 최고ROI) ② **WIRE** 배선미완(명함23comp 미배선=**공식분리 ⓑ권고**·042박 comp0 신설=종이 이중계상 방지 공용 `COMP_FOIL_AREA_*` ⓐ·명함박은 배선만) ③ **GAP-PARAM**(ref_param_json·ddl-proposer). **컨펌 7건**(C-D1b·D1b-06·WIRE-1·WIRE-3·MATGROUP·GAP-2·CUT_PERF_1H6).
+- 커밋 5건(5131f14 신설·ebdbc94 엽서·7492a1b 상품권·3d65a65 명함·7031cad 큐). **DB 미적재**(엔진 evaluate_price 미구현=실청구 위험0·큐 적재 안전). 권위 [[dbm-readiness-to-quote-round19]].
+- **다음 = 가격 폐루프 닫기(컨펌 7건 해소→실 적용 인간 승인) 또는 종단 확대. 아래 "다음 시작점" 참조.**
+
 ## 한 줄 현황 (**round-18+ 책자시트 43컬럼 매핑 준비 전수 체크** — 2026-06-15·최신)
 사용자 directive("책자시트 각 칼럼 값이 매핑 준비됐는지 체크·제본이 종류만인지 옵션 전체인지 확인"). 산출 [`26_price-engine-verify/_binding-overview/booklet-column-readiness.md`](dbm-correctness-auditor).
 - **책자=11상품(완제품 10+보류 링바인더 1)·43 의미 컬럼**(내지블록 C6~17·표지블록 C18~30·제본 C31~36·식별/수량 등). **준비도: ✅약 30 · 🟡 8 · ❌ 3.**
@@ -130,15 +138,19 @@ BIND 클래스 정립 완주 + 사용자 우려("제본방식 다양·정확히 
 
 ## 다음 시작점 (정확한 다음 행동 — 순서대로)
 
-**★★ [2026-06-14 최신·세션끝·다음 세션 1순위] round-18+ 게이트형 파이프라인 — C-1 검증부터 착수.**
-사용자 지시: **"C-1부터 검증하는 부분으로 다음 세션."** 게이트형 파이프라인(Phase2 G-DATA→Phase3 G-CHAIN→통과시 Phase4 G-CALC→Phase5 벤치마크→Phase6 정립→Phase7 폐루프+RTM)은 정립 완료(커밋 291a691). 다음 세션 정확한 행동:
-1. **C-1 결정·검증 먼저** — "G-DATA(적재 정합 게이트)에서 **round-13(라이브 적재 정확성) GO를 선행 필수로 강제**할지 vs 조건부 허용". 검증 방법: 클래스별로 round-13 교정 산출(`17_correctness/<family>/`)의 GO 여부 + 가격 차원 키가 참조하는 마스터 행(자재·공정·사이즈)이 MIS-LOADED인지 라이브 실측 → C-1 정책 확정(강제 권장 근거: 틀린 마스터 행 참조 시 가격도 틀림). **사용자 C-1 결정 받거나, 근거 제시 후 확정.**
-2. **C-1 확정 후 첫 클래스 G-DATA 검증 실행** — 권장 ① **PRF_DGP_A(엽서·9상품)**: 정립대로면 D-2(옵션→구성요소 매핑 미적재)로 **G-DATA NO-GO 차단 → arbiter 정립 직행**이 정상(현행 거짓 GO와 대비 실증). 그 다음 ② **PRF_BIND_SUM(제본·4)**: 레드 캡처(PRBKYPR 8조합) 보유로 벤치마크 즉시 가능.
-3. 담당: G-DATA=`dbm-price-arbiter`(mapping-integrity, round-13 재사용) / G-CHAIN·G-CALC=`dbm-price-engine-verifier` / 벤치마크=`dbm-competitor-benchmark`(와우프레스 공개 API·레드 본인계정) / 게이트=`dbm-validator`. 생성≠검증·인라인 한국어·읽기전용·[HARD] 계산기 보정 하드코딩 금지.
-- **C-2(병행 결정)**: D-2 옵션→구성요소 매핑 권위 = CPQ `option_items` vs 차원 컬럼 신설 — arbiter 정립 본론(첫 클래스 정립 시 결정).
-- 권위·심의 근거: `28_price-arbitration/_pipeline-review/{arbiter-review,bestpractice-research}.md`·클래스맵 `26_price-engine-verify/_class-map.md`·[[dbmap-price-class-benchmark-round18plus]].
+**★★ [2026-06-15 최신·세션끝·다음 세션 1순위] round-19 종단 — 가격 폐루프 닫기(컨펌 7건 → 실 적용).**
+3상품군 종단으로 ①UI·②차원환원은 전건 PASS 확인, **③가격만 막힘**. 가격 3종 큐(`29_readiness/_price-remediation-queue.md`)를 닫으면 완전 견적가능 GO. 다음 세션 정확한 행동:
+1. **우리가 할 수 있는 컨펌부터 해소(가격표 260527 재대조·읽기전용):** MATGROUP(033 소재군 동일가?)·CUT_PERF_1H6(타공 "합가" 라벨?)·WIRE-3(명함 박 단가가 종이포함 완제품가인지) → 가격표 직접 대조로 3건 컨펌 자체 해소 가능.
+2. **최고 ROI = D-1b 그룹① 정정 제안본:** ⓒ-2(신규 `PRICE_TYPE.03` base_code) + 후가공13 comp `prc_typ` 멱등 UPDATE 제안본(round-13/round-5 트랙·단가행 값 불변). 적용 시 엽서C3=104,330·상품권C2=48,073 재검증으로 RESOLVED. **단 엔진규칙(.03 해석)=webadmin Phase11 C-D1b·실 적용 인간 승인·prc_typ와 엔진 동시 배포.**
+3. **WIRE 배선 제안본:** WIRE-1(고정가형 명함종 = **공식분리 ⓑ** 권고·BIND 일반원칙 정합) 확정 후 명함 PREMIUM/COAT 배선(round-16) + 박 공용 comp(042 `COMP_FOIL_AREA_*` 신설·명함031 기존 FOIL 배선).
+4. 담당: 가격표 재대조=`dbm-price-arbiter`/`dbm-price-engine-verifier` / D-1b 정정본=`dbm-load-builder`(멱등 UPDATE)+`dbm-ddl-proposer`(base_code) / 배선=`dbm-price-import-builder` / GAP-PARAM DDL=`dbm-ddl-proposer`. 생성≠검증·인라인 한국어·읽기전용·**[HARD] 계산기 보정 하드코딩 금지·실 COMMIT 인간 승인**.
+- **컨펌 7건:** C-D1b·D1b-06(webadmin Phase11 엔진) / WIRE-1·WIRE-3·MATGROUP·CUT_PERF_1H6(round-2/16+가격표 재대조) / GAP-2(ddl-proposer).
+- **대안 — 종단 확대:** 포토카드·접지카드(PRF_DGP_* 동형·선례 재사용·빠름) 또는 스티커/아크릴(MATRIX·면적매트릭스 = 또 다른 공식 유형으로 파이프라인 추가 일반성). RTM 빈칸 7.
+- 권위: `29_readiness/_price-remediation-queue.md`·`29_readiness/_rtm.md`·[[dbm-readiness-to-quote-round19]]·[[dbmap-goal-ui-quote-mes]].
 
-**[건드리지 말 것]** round-18 엽서 파일럿 산출(`26_price-engine-verify/postcard/`·GO 검증 완료)·정립된 4 스킬 게이트 순서(G-DATA→G-CHAIN→G-CALC)·라이브 적재분(Tier A CPQ 1,026행·safeload 7행+더미정리·가격 round-2/16 적재분) — 모두 검증 완료/COMMIT. **[HARD] 계산기 보정 하드코딩으로 거짓 GO 내지 말 것**(이번 세션 핵심 교훈).
+**[참고·이전 트랙] round-18+ 게이트형 클래스 전수(C-1/C-2):** round-19가 엽서 클래스(PRF_DGP_A)를 종단으로 실증하며 사실상 진행함(D-1b·D-2 동일 결함 확인). 미진행 클래스(PRF_POSTER_FIXED 28·PRF_BIND_SUM 등)는 round-19 종단 확대 또는 round-18+ 게이트형으로. 게이트 순서(데이터정합 G-DATA→사슬 G-CHAIN→계산 G-CALC) 정립 완료(커밋 291a691). C-1(G-DATA에 round-13 GO 선행 강제 여부)·C-2(D-2 매핑 권위 option_items vs 차원컬럼) 미해소. 권위 `28_price-arbitration/_pipeline-review/`·`26_price-engine-verify/_class-map.md`·[[dbmap-price-class-benchmark-round18plus]].
+
+**[건드리지 말 것]** round-19 신설분(에이전트 `dbm-readiness-auditor`·스킬 `dbm-product-readiness`·오케스트레이터 round-19 통합)·3상품군 종단 산출(`29_readiness/{postcard,voucher,namecard}/`·`_rtm.md`·`_price-remediation-queue.md`) — 검증 완료/커밋(5건). round-18 엽서 파일럿 산출(`26_price-engine-verify/postcard,PRF_DGP_A/`·GO 검증 완료)·정립된 게이트 순서(G-DATA→G-CHAIN→G-CALC)·라이브 적재분(Tier A CPQ 1,026행·safeload 7행+더미정리·가격 round-2/16 적재분) — 모두 검증 완료/COMMIT. **[HARD] 계산기 보정 하드코딩으로 거짓 GO 내지 말 것**(핵심 교훈)·**견적가능=①UI+②차원환원+③가격 셋 다여야 GO**.
 
 ---
 
