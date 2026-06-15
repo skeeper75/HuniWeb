@@ -38,6 +38,7 @@ Coordinates a 4-agent team to (1) sheet the live Railway DB structure and (2) ma
 | round-18+ | **가격엔진 실증 확장 — 클래스 전수 + 경쟁사 벤치마크 + 정합 정립**(round-18 3축 확장) — ① **15 가격공식 클래스 전수**(공식별 동일 적용 상품군: PRF_POSTER_FIXED 28·PRF_DGP_A 9·PRF_BIND_SUM 4 등·직접단가0·184상품 가격미구성) 클래스별 재계산 ② **경쟁사 합리성 벤치마크**(와우프레스 공개 API·레드프린팅 본인계정/캡처와 같은 옵션 대조 — **"터무니없는 가격차=우리측 결함 신호"** 사용자 directive·경쟁사=오라클) ③ **돈-크리티컬 정합 정립 심의**(가격↔상품요소 매핑 권위 엑셀 대조·미진 요건 정립 방안 deliberation). 권위=가격표/상품마스터 엑셀 | 15 클래스 → `27_competitor-benchmark/<class>/`·`28_price-arbitration/<class>/` (PE+B+A 게이트, 적재 아님·읽기전용) | `dbm-competitor-benchmark`·`dbm-price-arbiter` | ACTIVE |
 | round-19 | **상품군 종단 견적가능 완주** (한 상품군을 컬럼 readiness→미적재 식별→적재 라우팅→견적가능 판정까지 종단으로 민다 — 기존 레이어 라운드를 호출 순서로 엮는 메타 파이프라인. 견적가능=①UI 옵션선택+②선택의 차원환원 생산정보[MES_ITEM_CD 아님]+③가격계산 셋 다) | `29_readiness/<family>/`{column-readiness·quote-gate}·`_rtm.md` (Q1~Q6 게이트, 적재 아님·점검/판정/조율) | `dbm-product-readiness` | ACTIVE |
 | round-20 | **동형 클래스 배치 적재** (270 상품을 한 건씩이 아니라 **동형 클래스**[동일 옵션구성×동일 가격계산방식] 단위로 결정적 스크립트 배치 적재 — 상태 분류[ready/pending/unlisted]·선결 게이트[컬럼 완정성]·멱등 NOT EXISTS NULL-safe UPSERT·apply_ymd 고정·SQL 집계 전수 검증·**백업은 위험변경만+git baseline CSV**[매 적재 백업=과한 프로세스 폐기]. 한 건당 173K 토큰 비효율 제거·컨텍스트 최소화) | `scripts/`(classify·gen_batch_upsert·verify_batch·apply_batch) → `09_load/_batch_<class>/`·`3X_batch/classification` (집계 게이트, DRY-RUN+집계까지·COMMIT은 GO 후 인간 승인) | `dbm-batch-load` | ACTIVE |
+| round-21 | **상품군 동형 효율 파이프라인 + 자율 자기개선** (round-18 클래스·19 종단·20 배치를 "상품군 동형" 한 축으로 수렴. 토대 모델[출력소재·판걸이수·가격표 2분류·계산공식집초안 동형성·적재 산출 기준 §9] 위에서 **Sc 동형분류**[계산공식집초안×옵션, 50개 미만, 미출시 제외] + **대표**[시트 실측 superset·상품군마다 다름] 선정 → 대표 **5레이어 완전종단**[구성요소·옵션·템플릿·제약·가격, 주문가능 형태 실적재] → **Sp 동형 자동전파**[batch-load]. **이진 게이트로 자율 검증·보정 폐루프**[가격 골든값 대조·견적가능 Q1~Q6·멱등/제약위반0·webadmin 가시성], 사람 개입은 인간 승인 큐[실 COMMIT·도메인 컨펌·권위 부재]만) | 전 상품군 50개 미만 → `29_readiness/<family>/` + `09_load/_batch_<class>/`, 토대 = `dbm-batch-load/references/product-group-isomorphism-model.md` | `dbm-readiness-auditor` + `dbm-batch-load` | ACTIVE |
 
 - **round-1**: quantity-bracket discounts for 아크릴 / 굿즈·파우치 / 문구. Flat bracket rows. Complete.
 - **round-2**: the price is a *formula engine* (`판매가 = Σ components`, each component priced by a multi-dimensional lookup) — not a flat table. Excel authority: 상품마스터 `계산공식집초안` (formula intent, typed by 공식 유형) + 가격표 19 단가시트 (component matrices). **fit-gap FIRST** (is `t_prc_*` adequate? — round-1 did not extract the `t_prc_*` DDL), then **incremental pilot** (디지털인쇄/엽서, 원자합산형) before widening to all 공식 유형. See `dbm-price-formula`.
@@ -77,7 +78,7 @@ Coordinates a 4-agent team to (1) sheet the live Railway DB structure and (2) ma
 | `dbm-price-engine-verifier` | **round-18 only**: 가격엔진 실증검토 — 라이브 `evaluate_price` 미구현 전제(gstack 실증) → 상품군(아크릴·문구·굿즈/파우치)별 ① 가격사슬 완전성 라이브 실측(소스 바인딩·공식→배선→단가행·`t_dsc` 할인 연결·등급) ② Phase11 명세(11-CONTEXT/prcx01) 재구현 검증용 계산기(`recompute.py`)로 대표 케이스 재계산(단가/합가·NULL·동시매칭·수량구간·시계열·할인 순차곱) ③ 가격표 known값↔가격뷰어 수치 대조 ④ 가격뷰어 정합. round-16/17 산출 재사용. 비파괴(읽기전용) | **dbm-price-engine-verify** |
 | `dbm-competitor-benchmark` | **round-18 확장**: 경쟁사 가격 합리성 벤치마크 — 우리 재계산값을 같은 옵션으로 와우프레스(공개 WooCommerce Store API)·레드프린팅(본인 계정 jobcost + 기존 캡처)과 대조. **"같은 옵션인데 터무니없이 가격차 = 우리측 결함 신호"**(사용자 directive·경쟁사=합리성 오라클·정답 아님). 동형 옵션 매핑·3열 비교표·B-gate(정상/주의/🔴터무니없음)·🔴분 arbiter 라우팅. 비파괴(경쟁사 가격 조회만·주문/폼 금지) | **dbm-competitor-benchmark** |
 | `dbm-price-arbiter` | **round-18 확장**: 가격 정합 정립 심의(돈-크리티컬 전담) — 가격공식 클래스별 가격↔상품요소(자재·공정·사이즈·도수·옵션) 매핑이 권위 엑셀대로 정확한지 심층 검토 + benchmark 🔴/verifier 결함 근본원인 규명 + 미진 요건(184상품 가격 미구성·판형 해석·옵션→구성요소) 정립 방안 deliberation(대안·트레이드오프·권고·t_*·트랙·컨펌). 심의자(보고서 아님). 비파괴(실 교정=round-5/13/ddl-proposer+인간 승인) | **dbm-price-arbiter** |
-| `dbm-readiness-auditor` | **round-19 only**: 상품군 종단 견적가능 감사·조율 — 한 상품군의 엑셀 전 의미컬럼 × 목표 t_* 라이브 적재 점검(booklet식 컬럼 readiness 매트릭스) + 견적가능 Q1~Q6 게이트(①UI 옵션선택+②선택의 차원환원 생산정보+③가격계산) + 미달 라우팅(round-13/5/6/16/18) + RTM(상품군×견적요소 진척판). 점검·판정·조율 전담(직접 적재 안 함·실 COMMIT 인간 승인) | **dbm-product-readiness** |
+| `dbm-readiness-auditor` | **round-19 + round-21**: (r19) 상품군 종단 견적가능 감사·조율 — 한 상품군의 엑셀 전 의미컬럼 × 목표 t_* 라이브 적재 점검(booklet식 컬럼 readiness 매트릭스) + 견적가능 Q1~Q6 게이트(①UI 옵션선택+②선택의 차원환원 생산정보+③가격계산) + 미달 라우팅(round-13/5/6/16/18) + RTM(상품군×견적요소 진척판). (r21) 동형 효율 파이프라인 게이트·조율 — Sc 동형 분류(계산공식집초안×옵션·50개 미만)·대표(시트 실측 superset) 선정 → 대표 5레이어 완전종단(주문가능 형태 실적재·토대 §9) → Sp 동형 자동전파(`dbm-batch-load`). 이진 게이트 자율 검증·보정 폐루프. 점검·판정·조율 전담(직접 적재 안 함·실 COMMIT 인간 승인). 토대 = `dbm-batch-load/references/product-group-isomorphism-model.md` | **dbm-product-readiness** |
 
 All agents spawn with `model: "opus"`. Round is resolved in Phase 0; the designer/validator load the round-matching skill (round-2 → `dbm-price-formula`, round-4 → `dbm-load-readiness`, round-5 → `dbm-load-execution`, round-6 → `dbm-cpq-option-mapping`, round-18 → `dbm-price-engine-verify`). round-18 spawns `dbm-price-engine-verifier` (one per family or inline, generate) + `dbm-validator` (PE1~PE6 gate, separate agent = 생성자≠검증자); per the round-9/10 lesson, the orchestrator may run round-18 inline (Korean, visible) — the recompute is read-only. `dbm-load-builder` runs in round-4 and round-5; `dbm-ddl-proposer` is spawned in round-5 and round-6; `dbm-option-mapper` is spawned only in round-6; **round-11 spawns `dbm-domain-researcher` (의미) ∥ `dbm-loadspec-extractor` (적재명세) in parallel, integrated into 매핑 정보; round-13 spawns `dbm-correctness-auditor` (one per family, fan-out) + `dbm-validator` (K1~K6 gate, separate agent); per the round-9/10 lesson (위임이 "완료"만 반환·신규 에이전트 생성세션 미로드), the orchestrator may run round-11/13 inline (Korean, visible) instead of delegating.**
 
@@ -388,6 +389,20 @@ round-13 (correctness-audit):
 **Phase 4 — S5 견적가능 Q-게이트** (auditor): Q1 컬럼 커버리지(빈칸0)·Q2 기초 완전·Q3 ①UI+②차원환원(option_items polymorphic 해소·트리거 정합)·Q4 ③가격사슬 완결·Q5 견적 시뮬레이션(대표 선택→차원환원 BOM+가격, 보정 하드코딩0)·Q6 정직 갭 → `<family>/quote-gate.md` GO/NO-GO. 셋(①②③) 다 PASS여야 견적가능 GO.
 
 **Phase 5 — S7 RTM 갱신 + 보고** (auditor → lead): 적재 라우팅 후 해당 요소 라이브 재실측(견적가능 폐루프·적재 전 stale 판정 금지) + `_rtm.md`(상품군×견적요소 진척판·견적가능 열 ✅ 개수=진짜 진척) 갱신 + 차단·인간 승인 큐 에스컬레이션. NEVER COMMIT.
+
+## Pipeline (round-21 product-group isomorphism — 동형 효율 + 자율 자기개선)
+
+**실행 모드:** 하이브리드 (Sc 분류·게이트 = 메인/`dbm-readiness-auditor`, S2~S4 적재 = 기존 라운드 서브, Sp 전파 = `dbm-batch-load` 스크립트)
+
+**[프레임] round-18(가격공식 클래스)·19(종단)·20(배치)를 "상품군 동형" 한 축으로 수렴한다.** 모든 상품을 하나씩 보지 않는다 — 같은 상품군은 옵션·가격공식이 동형(계산공식집초안 권위)이므로, 대표 1개를 주문가능 형태로 완전종단시키고 동형 나머지는 자동 전파한다. **토대 = `dbm-batch-load/references/product-group-isomorphism-model.md` (전 단계가 먼저 읽음).**
+
+**Sc — 동형 분류 + 대표 선정** (readiness-auditor): 계산공식집초안 × 옵션구성으로 상품군(동형 클래스, 50개 미만) 분류, 미출시·옵션 미완비 제외. 각 상품군 시트 실측으로 대표(superset — 옵션/구성요소/제약 최대) 선정. 추상 원리 금지(일반화의 오류), 상품군마다 다름(프리미엄엽서=디지털인쇄, 일반현수막=실사).
+
+**S0~S5 — 대표 5레이어 완전종단** (readiness-auditor 게이트 + 기존 라운드 적재): 구성요소(BOM)·옵션(CPQ)·템플릿·제약·가격이 어우러져 **주문가능 형태로 실적재**. 가격검증은 전체 옵션×전체 공식×다양 조합(인쇄비 한정 금지). 적재 산출은 토대 §9 준수 — 코드 3축(시스템 `*_cd`·관리 `*_nm`/tags·고객 disp_nm)·비고 실무진 한국어·명칭 권위 후니 용어·사이즈 공용/전용/판형(impos_yn) 구분 + search-before-mint 중복 금지 + 정규화.
+
+**Sp — 동형 자동 전파** (batch-load): 대표 GO면 동형 나머지를 스크립트 자동 적재 + 집계 전수 검증(예외만 사람).
+
+**[HARD] 자율 자기개선 폐루프.** 각 단계는 사람 판단 없이 **이진 게이트**로 판정한다 — 가격 = 가격표 골든값 수치 대조, 견적가능 = Q1~Q6 라이브 실측, 적재 = 멱등·제약위반0·FK고아0 DRY-RUN, 가시성 = webadmin admin 명칭 노출. NO-GO면 결함을 라우팅·보정하고 재게이트하는 폐루프를 돈다(생성≠검증: `dbm-validator`/`evaluator-active` 독립). 상품군 큐를 자율 반복하며 사람 개입은 **인간 승인 큐(실 COMMIT·도메인 컨펌·권위/골든값 부재)만**으로 모은다 — 매 턴 방향 지시가 아니라 가끔 큐 승인. 같은 결함이 반복되면 토대 모델·에이전트를 갱신(하네스 진화).
 
 ## Test scenarios
 

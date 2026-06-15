@@ -18,11 +18,17 @@ For a target sheet (one product family at a time), produce:
 
 You answer the user's core requirement: "research each column's meaning until nothing is ambiguous, and research each product name to derive all its materials and processes." Mapping is only correct when the domain meaning beneath it is settled — you settle it.
 
+## Foundation Model [READ FIRST]
+
+Before any column/BOM/price research, read `.claude/skills/dbm-batch-load/references/product-group-isomorphism-model.md`. It frames the whole task: 출력소재(IMPORT) is the output-deciding axis (종이 carries 국4절/3절 단가; 비종이 carries price inside the 상품자체 가격표 as 포함가, not in 출력소재); 판걸이수 is the 출력매수 lookup; the 가격표 splits into 가공/공정 추가가 vs 상품자체 포함가; and **상품군 동형성** — `계산공식집초안` defines one price formula per product *group* (same group = same options = same formula). Your column meanings, BOM, and price-component chains must land inside this model.
+
 ## Authority Order [HARD]
 
 1. **후니 공식 PDF** — `docs/huni/후니프린팅_공정관리_시행초안_20260210.pdf` (17 Case 공정플로우·14 공정팀), `docs/huni/후니프린팅_주문프로세스_20251001.pdf` (인쇄타입·조판·파일명·인쇄타입별 파일). These are the company's own operating reality.
 2. **라이브 DB / 기존 07_domain KB** — `_workspace/huni-dbmap/07_domain/` (`entity-semantic-model.md` L3 의미축, `process-recipe-tree.md` L2 인쇄방식·제본·생산방식, `db-domain-structure-live.md`, `pdf-domain-knowledge.md`, `benchmark-competitors.md`). The semantic axes are ALREADY established here — build on them, do not re-derive.
-3. **국내외 인쇄 표준 (보조)** — WebSearch/WebFetch only to fill gaps the PDF/DB do not cover, or to corroborate physical/print principles. When a standard conflicts with 후니 operating fact, **후니 wins** and you flag the conflict, never silently adopt the standard.
+3. **상품군 경쟁사 리서치 (매핑 시 의무, not 보조)** — When mapping a product group's options and price, competitor product-group research is MANDATORY: domestic/overseas print sites already sell these products, so their option structure and price formula are a reality oracle that surfaces missing options and validates the price chain. Map the same option selections onto the competitor product (사이즈·소재·도수·수량·가공) and compare. Competitor data corroborates — 후니 excel/PDF wins on conflict.
+4. **후니 레거시 사이트 (리서치 폴백)** — For products that domain/competitor research does not surface (e.g. 인쇄배경지=포장세트), check the huni legacy site directly: `https://www.huniprinting.com/product/list.asp?pcode=<code>` (category pcode, e.g. 62). This is the seller's own listing — authoritative for product identity and option presence when the excel is ambiguous.
+5. **국내외 인쇄 표준 (보조)** — WebSearch/WebFetch only to fill gaps the PDF/DB do not cover, or to corroborate physical/print principles. When a standard conflicts with 후니 operating fact, **후니 wins** and you flag the conflict, never silently adopt the standard.
 
 **추정 0.** Every column meaning and every BOM element is backed by a real source. Unknowns are written as a hypothesis with its source and a confirmation question — never a quiet guess. This is the round-9 lesson ("스키마 설계의도 선행, 기계적 매핑 금지") applied to the excel side.
 
