@@ -48,11 +48,19 @@ def opt_signature(prd_cd: str) -> str:
 
 
 def main() -> None:
-    # 상품 × 가격클래스 × use_yn (예시 쿼리 — 적용 시 컬럼 조정)
+    # 상품 × 가격클래스 × use_yn.
+    # price_class = 상품에 바인딩된 가격공식 frm_cd "집합"(string_agg).
+    #   - 라이브 실측(2026-06-15): 현재 상품당 공식 1개(1:N 0건)이나 스키마 허용 →
+    #     집합으로 잡아 다중 공식 상품도 안전히 한 시그니처로 묶는다(중복 행 방지).
+    #   - 한 시트(상품군)에 여러 공식이면 상품마다 frm_cd가 달라 자동으로 다른 클래스로 분리.
+    #   - formula_components 는 frm_cd 기준(prd_cd 컬럼 없음) → 같은 공식 = 같은 comp 세트
+    #     (comp 차이는 런타임 option 선택). 그래서 frm_cd 집합이 진짜 가격 동형.
     prods = q("""SELECT p.prd_cd, p.prd_nm, p.use_yn,
-                        coalesce(f.frm_cd,'NONE') AS price_class
+                        coalesce(string_agg(DISTINCT f.frm_cd, '+' ORDER BY f.frm_cd),
+                                 'NONE') AS price_class
                  FROM t_prd_products p
                  LEFT JOIN t_prd_product_price_formulas f USING (prd_cd)
+                 GROUP BY p.prd_cd, p.prd_nm, p.use_yn
                  ORDER BY price_class, p.prd_cd""")
     rows = []
     for prd_cd, prd_nm, use_yn, price_class in prods:
