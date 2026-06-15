@@ -11,7 +11,7 @@
 | 상품군 | 기초(siz/mat/proc/clr) | option(①UI) | template/addon | constraint | 가격사슬(③) | **견적가능** | 점검일 | 비고 |
 |--------|:--:|:--:|:--:|:--:|:--:|:--:|:--:|------|
 | **엽서(016/017/018)** | ✅ | ✅ | 🟡 | ➖ | 🟡 | **🟡 GO(조건부)** | 2026-06-15 | 기본옵션 GO·후가공 가격 D-1b **정정 제안본+게이트 GO**(13 comp·ⓒ-2 PRICE_TYPE.03)·실 적용 인간 승인 대기 |
-| 책자 | ✅ | 🟡 | 🟡 | 🟡 | ❌ | ❌ | 2026-06-15* | C32 제본방향 그릇부재·가격사슬 중철만(booklet-column-readiness 참조·round-19 미정식) |
+| **책자(068~071)** | ✅ | 🟡 | 🟡 | 🟡 | ❌ | **❌ NO-GO** | 2026-06-15 | **round-21 7차 사이클 정식 종단**. 책자4(중철068/무선069/PUR070/트윈링071·PRF_BIND_SUM 합산형). 대표=무선069+트윈링071 보완. 기초 GO·**②차원환원 GO**(069/071 ref_dim 전건 해소·NULL 0·트리거 0). **①UI 🟡: 070 CPQ 0행 + C32 제본방향 그릇부재**. **③가격 ❌ BOOKLET-BIND-WIRE: PRF_BIND_SUM에 중철 comp 1개만 배선·무선/PUR/트윈링 단가행(각 8행)존재·미배선·단가행 골든 32/32 verbatim**(명함 NAMECARD-WIRE 동근→A안 공식분리). round-5 배선+round-6 070 CPQ+그릇 컨펌(`_isomorphism/booklet-cycle-report.md`) |
 | **포토카드(024/025)** | ✅ | ✅ | ➖ | ➖ | 🟡 | **🟡 세트모드 GO·대량모드 NO-GO** | 2026-06-15 | 기초·①UI·②차원환원 GO(화이트별색 optional BLOCKED). ③가격: **세트제작 SET/CLEAR_SET 둘 다 배선·값 정합(024 6,000·025 8,500·×수량 안 함·보정0) = 세트모드 견적가능 GO**. **대량제작 COMP_PHOTOCARD_BULK(50구간) 미배선(PHOTOCARD-BULK-WIRE)=대량주문 단절 NO-GO**. 배선만(데이터 L1 정합·comp 신설0). 명함 대비 경량(per-variant 배선 완비·모드 1배선 누락). 선결=C-MODE(세트/대량 분기 입력축 컨펌). 인간 승인 대기 |
 | 접지카드 | | | | | | | | 미검증 |
 | **명함(031/032/033)** | ✅ | ✅ | ➖ | ➖ | ❌ | **❌ NO-GO** | 2026-06-15 | 기초·①UI·②차원환원 GO. ③가격 **WIRE 배선 제안본+게이트 GO**: 공식분리 ⓑ(PRF_NAMECARD_PREMIUM/COAT 신설+바인딩)·031박 FOIL 배선·033 MATGROUP 대표가 복제(mat_cd 귀속 라이브 해소). 배선만(데이터 L1 정합)·실 적용 인간 승인 대기 |
@@ -21,19 +21,25 @@
 | 스티커 | | | | | | | | 미검증 |
 | **아크릴(146~169)** | ✅ | ❌ | ➖ | 🟡 | ❌ | **❌ NO-GO** | 2026-06-15 | 면적매트릭스형(3차 사이클). 기초(siz/mat/proc/print_opt) GO·단가행 골든 정합(룩업 검증·off-grid ceiling 성립). **①UI CPQ 전무(ACRYL-CPQ-ZERO·groups/items 0)** + **③가격사슬 전무(ACRYL-CHAIN-NONE·PRF_ACRYL*/배선/바인딩 0·단가행만 실재)**. round-6 CPQ 신설 + round-2/16 공식사슬 신설(둘 다 신규·실 COMMIT 인간 승인) |
 | **실사(118~145)** | ✅ | 🟡 | 🟡 | 🟡 | ❌ | **❌ NO-GO** | 2026-06-15 | 면적매트릭스형(5차·혼재 계산공식집초안 r100~103). 기초 GO(siz+nonspec·mat·proc·plate84). **①UI 🟡: 대표 일반현수막(138) CPQ 3그룹/14옵션/18 items 전건 ref_dim 해소(②차원환원 실증·아크릴과 결정적 차이)·나머지 17 면적매트릭스 본체 CPQ 미완**. **③가격 ❌ SILSA-WIRE: 공식 PRF_POSTER_FIXED 존재·28상품 바인딩·comp53/단가행105 골든 정합(현수막 8,000·미니배너 3,500·인화지 21,600)이나 배선 인화지 1개만(27상품 미도달·명함 NAMECARD-WIRE 동형)** + 면적격자 87% BLOCKED. ★ 아크릴(이중전무)보다 성숙. round-16 소재별 공식분리/배선 + round-6 현수막 CPQ 패턴 17상품 복제(실 COMMIT 인간 승인) |
-| 굿즈/파우치 | | | | | | | | 미검증 |
+| **문구(097/172~181)** | 🟡 | ❌ | 🟡 | ❌ | ❌ | **❌ NO-GO** | 2026-06-15 | **round-21 9차 사이클 정식 종단**. 문구=책자 구조 동형(내지+표지+제본 반제품)이나 **가격 이질**(고정가형 inline + 떡메모 매트릭스). 2 동형 클래스: (A) 고정가 9상품·(B) 떡메모(097). 대표=스프링노트177+하드173+떡메모097. **①UI ❌ STAT-CPQ-VOID: 문구 전 상품 CPQ 0/0/0**(책자 069=8그룹과 결정적 차이)·②환원 대상 0·C32 방향 그릇부재. **③가격 ❌: (A) 고정가 PRF·단가 전무(STAT-PRICE-GRID·아크릴 이중전무形) / (B) 떡메모 PRF_TTEOKME_FIXED 공식·배선·단가 112✅·바인딩 0(STAT-TTEOKME-WIRE)·단가행 골든 112/112 verbatim**. 기초 🟡(미싱제본 PROC 부재 172/175/176·종이 .07 fallback·면지/실버링/sets 미연결 — round-13 교정 부분만 적용). 책자보다 더 무거운 결함(`_isomorphism/stationery-cycle-report.md`) |
+| **굿즈/파우치(183~290)** | 🟡 | ❌ | ❌ | ❌ | ❌ | **❌ NO-GO** | 2026-06-15 | **round-21 8차 사이클 정식 종단**. 고정가 포함가형(상품자체 포함가). 대표=캔버스삼각파우치 240(GP-A 패브릭봉제류). **GOODS-TRIPLE-EMPTY = 견적 3요소 셋 다 미달**: ①UI 굿즈 전역 option_groups 0행·②차원환원 봉제(PROC_000080)→부착(081) 오적재+M/L 자재행(MAT_TYPE.09) 오염·③가격 굿즈 전용 공식 0/17·바인딩 0·**단가행 0**(아크릴보다 한 단계 더 빈 결함 극단형). **포함가 값=verbatim 4/4**(M 9,800·L 11,500·라벨 +300). round-2/6 파일럿 미포함이 진원. CPQ+가격+BOM 통째 신설(`_isomorphism/goods-pouch-cycle-report.md`) |
+| **캘린더(108~112)** | 🟡 | ❌ | ❌ | ❌ | ❌ | **❌ NO-GO** | 2026-06-15 | **round-21 10차(마지막) 사이클 정식 종단**. form factor 5상품(탁상108/미니109/엽서110/벽걸이111/와이드112) 단일 클래스·완제품 합산형. 대표=벽걸이111(가공택일 최다·조건부 링칼라 캐스케이드). **CAL-FORMULA-ABSENT = 삼중전무**: ①UI CPQ 0/0/0·②환원 불가·③**완제품 합산공식 유형 자체 라이브 부재**(메커니즘 PRF_BIND_SUM/PRF_DGP_A 존재하나 캘린더 배선 0)+디자인캘린더 고정가 0. **제본 단가행 COMP_BIND_CAL_* 24행 verbatim 정합**(CAL_WALL 5000/4000/3000/2500/2000/2000=가격표 B27~B32). round-13 NULL판정한 MES/editor_yn은 적재 후 채워짐 확인(stale 반증). PRF_CAL_* 신설+CAL comp 배선(5상품 동형)+CPQ 신설(`_isomorphism/calendar-cycle-report.md`) |
 
-> *책자 행은 round-19 정식 종단(S0~S7) 미실행 — `26_price-engine-verify/_binding-overview/booklet-column-readiness.md`(2026-06-15) 조망 기반 참고치. 정식 점검 시 갱신.
+> *책자 행 = round-21 7차 사이클 정식 종단 완료(`_isomorphism/booklet-{class,rep-5layer,cycle-report}.md`). 단가행 골든 32/32 verbatim·차단=BOOKLET-BIND-WIRE(시스템 배선).
+> *문구 행 = round-21 9차 사이클 정식 종단 완료(`_isomorphism/stationery-{class,rep-5layer,cycle-report}.md`). 떡메모 단가행 112/112 verbatim·차단=STAT-MULTI-VOID(CPQ 전무+가격그릇 부재+바인딩 0+미싱 PROC). 책자와 구조 동근·가격/CPQ 이질(책자 WIRE 재발 안 함·문구 더 이른 단계 막힘=아크릴形).
 
 ## 견적가능 카운트
 
 - **완전 견적가능(무조건 GO) = 0**
 - **조건부 견적가능(기본 GO·정정 잔존) = 3** (엽서·상품권 — PRF_DGP_A 합산형 / **포토카드 — 고정가형 세트모드 GO·대량모드 BULK-WIRE 잔존**)
-- **종단 점검·NO-GO = 3** (명함 — 고정가형·NAMECARD-WIRE 부분 배선 단절 / 아크릴 — 면적매트릭스형·CPQ 전무 + 가격사슬 전무 / **실사 — 면적매트릭스형 혼재·SILSA-WIRE 부분 배선[인화지 1개만]+격자 BLOCKED·대표 CPQ는 적재**)
-- 미검증 = 5 (접지카드·배경지·인쇄홍보물·스티커·굿즈파우치)
+- **종단 점검·NO-GO = 8** (명함 — NAMECARD-WIRE / 아크릴 — 이중전무 / 실사 — SILSA-WIRE / 스티커 — STK-AXIS / 책자 — BOOKLET-BIND-WIRE[7차] / **굿즈파우치 — GOODS-TRIPLE-EMPTY[8차·결함 극단형·단가행 0]** / **문구 — STAT-MULTI-VOID[9차·CPQ+가격그릇+바인딩+BOM 4종 미충족]** / **캘린더 — CAL-FORMULA-ABSENT[10차·완제품 합산공식 유형 자체 부재]**)
+- 미검증 = 3 (접지카드·배경지·인쇄홍보물) — **round-21 자율 동형 루프 10/10 완주**(엽서·명함·아크릴·포토카드·실사·스티커·책자·굿즈파우치·문구·캘린더). 미검증 3종은 기존 상품군 동형(접지=PRF_DGP 합산형·배경지=포장세트·인쇄홍보물=고정가형)이라 신규 결함유형 0 예상.
+- ★ **10/10 시스템 결론 일관 확정**: 전 상품군 단가행 값=verbatim(값 결함 0)·차단=전부 시스템(WIRE/CPQ/ENGINE/공식신설)·per-product 0. 결함 깊이 = WIRE형(엽서·명함·실사·책자·포토카드) < 이중전무(아크릴) < 삼중전무(굿즈·문구·캘린더). 종합 = `_isomorphism/_final-synthesis-10cycle.md`.
+- ★ **책자(7차 사이클·합산형 제본비항)**: 명함 NAMECARD-WIRE와 **동근 결함**(공유 PRF_BIND_SUM 1공식 ↔ 상품별 제본방식 1고정 미스매치). 해법 = 명함과 동일 **A안 공식분리**(PRF_BIND_MUSEON/PUR/TWINRING 신설+comp 1:1 배선+바인딩 교정·`PRF_BIND_SUM/remediation-plan.md`). 새 결함유형 0 = WIRE의 4번째 인스턴스(엽서 D-1b·명함·실사·책자). **②차원환원은 책자가 가장 깨끗**(069/071 ref NULL 0·미해소 0). 책자 고유 신규 갭 = C32 제본방향 그릇부재(공정에 per-product param 슬롯 없음·`booklet-cycle-report.md`).
 - ★ **실사(5차 사이클·면적매트릭스형)**: 아크릴과 같은 면적매트릭스형이나 **성숙도가 다름** — 아크릴=이중전무(CPQ 0 + 공식 부재)·실사=공식 존재+28바인딩+대표 CPQ 적재(②차원환원 실증)·**배선만 부분(인화지 1개·명함 NAMECARD-WIRE 동형)**. 같은 면적매트릭스형도 적재 상태가 다르고 Q-게이트가 혼동 없이 구분 = 일반성. 실사 시트 = **2 공식유형 혼재**(r100 면적매트릭스 18 + r103 고정가 보드/배너). 단가행 골든 전건 정합(보정0)·off-grid ceiling·좌표 방향 함정 = 아크릴 패턴 재사용(`_isomorphism/silsa-cycle-report.md`).
 - ★ **포토카드(4차 사이클·고정가형)**: 세트제작 모드는 SET/CLEAR_SET 둘 다 배선·값 정합으로 **즉시 견적가능 GO**(명함 NAMECARD-WIRE처럼 전 상품 단절 아님). 결함=대량제작 모드 1배선(PHOTOCARD-BULK-WIRE)+화이트별색 optional BLOCKED. 명함 패턴 무수정 재사용·per-variant 완비/per-mode 누락 케이스 추가(`_isomorphism/photocard-cycle-report.md`).
 - ★ **토대 §5 3 공식 유형 전부 종단 점검 완료**: 엽서(원자합산형·조건부 GO) · 명함(고정가형·NO-GO) · 아크릴(면적매트릭스형·NO-GO). Q-게이트가 합산/고정가/면적매트릭스 각 구조에 맞춰 올바로 작동 입증(`_isomorphism/acrylic-cycle-report.md` §2).
+- ★ **문구(9차 사이클·고정가형+매트릭스 인접·책자 구조 동형)**: 시스템 결론 **9/9 일관 확증**. 단 문구는 책자(데이터 멀쩡·WIRE 단일)와 달리 **CPQ·가격그릇·바인딩·BOM 4종 동시 미충족** = 라이브 적재 파이프라인이 거의 닿지 않은 가장 무거운 결함 프로파일(per-product 아닌 시스템 미적재). 책자와 **구조 동근·가격/CPQ 이질**(책자 WIRE 재발 안 함). 떡메모(B)만 바인딩 1건 근접·(A) 9상품은 CPQ+가격그릇+단가 3중 신설(아크릴 Q3 동급). 떡메모 단가행 112/112 verbatim(`_isomorphism/stationery-cycle-report.md` §4).
 
 > ★ round-19 핵심 부수목표 입증: 고정가형(명함)에서 Q-게이트가 합산형과 다르게 올바로 작동(공식 정의 무가정 실측·×수량 안 함·배선 누락 NAMECARD-WIRE를 단가행 누락과 구분·032 STD 떨어짐 거짓 GO 차단). 권위 = `namecard/quote-gate.md` §0.
 > ★ 042 박 해결 참고 패턴 확보: 명함 박은 COMP_NAMECARD_FOIL_*(데이터 실재·후가공_박(소형) 면적등급×수량+동판셋업5,000)·미배선 — 042(comp 0개)와 대조. 공용 박 가공비 comp 설계 시 031·042 동시 해결(`namecard/quote-gate.md` §9).
