@@ -2,7 +2,15 @@
 
 > 작성 2026-06-14(최신·round-6 Tier A CPQ 확대). 권위 = 본 문서 + 메모리 `dbmap-tierA-cpq-option-load`·`dbmap-load-column-order-staged`·`dbmap-cpq-option-layer-mapping`·`dbmap-mapping-research-round12`·`dbmap-correctness-audit-round13`·`dbmap-column-domain-loadspec-round11`·`dbmap-schema-design-intent-first`·`dbmap-code-identifier-strategy`·`dbmap-live-admin-product-viewer`·`dbmap-silsa-price-via-poster-sign`. 본 문서 + 메모리를 읽으면 재발견 0으로 재개. 이전 트랙(round-2 가격·round-4/5 적재·plate·CPQ·round-6 현수막·round-7 커버리지·round-8 admin UI·round-10 변경추적·round-11 도메인) 상세는 `CHANGELOG.md`·메모리에 보존.
 
-## 한 줄 현황 (**round-19 종단 견적가능 파이프라인 신설 + 3상품군 실행 + 가격 폐루프 큐** — 2026-06-15·최신)
+## 한 줄 현황 (**round-21 상품군 동형 효율 파이프라인 + 자율 자기개선 하네스 강화** — 2026-06-15·★최신)
+`/harness:harness` 운영/유지보수. 사용자 5턴 정교화로 **토대 모델 신설 + round-21 등록**. 커밋 `bd126fe`.
+- **토대 모델**(`.claude/skills/dbm-batch-load/references/product-group-isomorphism-model.md` 9섹션) = 단일 진실: 출력소재(IMPORT)=출력 결정축(종이 국4절/3절 단가·비종이=합가매트릭스로 상품테이블 포함가·**가격없음≠GAP**)·판걸이수=출력매수 룩업·가격표 2분류(가공 추가가/상품 포함가)·**계산공식집초안=동형 권위**(원자합산/고정가/면적매트릭스·50개 미만)·적재 §9(코드3축·후니용어·사이즈정규화 impos_yn/search-before-mint·webadmin 가시성).
+- **파이프라인**: Sc 동형분류+대표 선정 → S0~S5 대표 5레이어 완전종단 → Sp 동형 자동전파. **대표=시트실측 superset**([HARD] 추상 금지=일반화 오류·상품군마다 다름). **5레이어**(구성요소·옵션·템플릿·제약·가격)=주문가능 실적재(검증샘플 아님).
+- **[HARD] 자율 자기개선**(사용자 비전): 이진게이트(가격골든·Q1~6·멱등·webadmin)·생성≠검증·보정폐루프·상품군 큐 자율반복·**사람개입=인간승인큐(COMMIT·도메인컨펌·권위부재)만**. 매 턴 방향지시 아님.
+- **강화 4건**: 토대 reference·`dbm-domain-researcher`(경쟁사 의무·huniprinting.com 폴백)·`dbm-readiness-auditor`(round-21 Sc/Sp 확장)·오케스트레이터. 시각화 = `HARNESS-round21-pipeline.md`(mermaid 4종). 권위 [[dbmap-product-group-isomorphism-round21]].
+- **다음 시작점**: **round-21 첫 사이클 실행 미완**(사용자 리밋으로 중단). `dbm-readiness-auditor`(round-21 모드)로 **디지털인쇄 엽서 동형 클래스 한 사이클** 실행 — Sc(엽서 동형 분류+대표 시트실측 superset 선정, 프리미엄엽서 가설 실측 검증) → S0(대표 컬럼 readiness) → S5(이진 게이트 Q1~6+webadmin) → 자율성 평가(사람 개입 없이 어디까지·인간승인큐). 라이브 읽기전용·실 COMMIT 금지. round-19 산출(`29_readiness/postcard`) 재활용. **이 한 사이클로 파이프라인 자율 작동 입증이 목표.**
+
+## 한 줄 현황 (**round-19 종단 견적가능 파이프라인 신설 + 3상품군 실행 + 가격 폐루프 큐** — 2026-06-15)
 `/harness:harness` 파이프라인 검증·강화. **감사 진단: 16라운드가 전부 레이어(가로)·종단(세로)으로 닫힌 상품군 0(D-1 근본결함)·목적(CPQ 3종 차원환원=생산정보)과 무게중심 불일치(가격 5라운드 vs CPQ 1)·readiness 비균질(booklet 1시트만).** 강화 A+B+C(사용자 선택)로 **round-19 종단 파이프라인 신설** — 기존 레이어 라운드를 호출 순서로 엮는 메타(S0 컬럼 readiness→S1 미적재 라우팅→S2~4 적재[round-13/5/6/16/18]→S5 견적가능 Q1~Q6→S7 RTM). 신규 에이전트 `dbm-readiness-auditor`+스킬 `dbm-product-readiness`·오케스트레이터 round-19 통합.
 - **[HARD] 견적가능 = ①UI 옵션선택 + ②선택의 차원환원(자재·공정·사이즈·도수=생산정보·MES_ITEM_CD 아님 [[dbmap-goal-ui-quote-mes]]) + ③가격계산 셋 다**(하나라도 미달=NO-GO·거짓GO 금지).
 - **3상품군 종단 실행**(`29_readiness/{postcard,voucher,namecard}/`): 엽서016/017/018·상품권041/042(PRF_DGP_A 합산형)·명함031/032/033(PRF_NAMECARD_FIXED 고정가형). **파이프라인 입증**=복제성(합산형2 동형)·일반성(고정가형서도 Q게이트 작동)·거짓GO차단(명함032 코팅 3,800 과소2,000 정직판정)·횡단결함 자동발견. **공통: ①UI·②차원환원 3상품군 전건 PASS·③가격만 막힘.** 견적가능 완전GO 0·조건부GO 2(엽서·상품권 기본옵션)·NO-GO 1(명함 배선미완)·미검증 7. 골든 라이브 재현(엽서44,330/141,650·상품권38,073·명함033=3,500·보정 하드코딩0).
