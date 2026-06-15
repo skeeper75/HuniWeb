@@ -1,6 +1,18 @@
 # Huni-DBMap — HANDOFF (다음 세션 재시작 포인터)
 
-> 작성 2026-06-14(최신·round-6 Tier A CPQ 확대). 권위 = 본 문서 + 메모리 `dbmap-tierA-cpq-option-load`·`dbmap-load-column-order-staged`·`dbmap-cpq-option-layer-mapping`·`dbmap-mapping-research-round12`·`dbmap-correctness-audit-round13`·`dbmap-column-domain-loadspec-round11`·`dbmap-schema-design-intent-first`·`dbmap-code-identifier-strategy`·`dbmap-live-admin-product-viewer`·`dbmap-silsa-price-via-poster-sign`. 본 문서 + 메모리를 읽으면 재발견 0으로 재개. 이전 트랙(round-2 가격·round-4/5 적재·plate·CPQ·round-6 현수막·round-7 커버리지·round-8 admin UI·round-10 변경추적·round-11 도메인) 상세는 `CHANGELOG.md`·메모리에 보존.
+## ★최신 현황 (**round-22 6축 기초데이터 staged 교정·적재 + 굿즈 자재 정리** — 2026-06-16)
+`/harness:harness` 6축(① 기초코드 ② 사이즈 ③ 도수 ④ 자재 ⑤ 공정 ⑥ 카테고리) 기준 상품마스터 단계별 라이브 적재 + 매핑 오류 교정. 하네스 신설(스킬 `dbm-axis-staged-load` v2·신규 에이전트 0·기존 재사용). 권위 = [[dbmap-axis-staged-load-round22]] + `_workspace/huni-dbmap/32_axis-staged-load/`.
+- **★핵심 판정(`03_webadmin-load-path-analysis`)**: webadmin `load_master`=무변환 전파기 → 6축 오류 진원 전부 **ⓐ(입력 v03)** → 교정 정답=**교정 입력 엑셀 재적재(경로 Y·근본·P-TRUNCATE 안전)** > 라이브 직접 SQL(경로 X·재적재 시 소멸). **webadmin 코드 수정 금지**(개발자 GitHub 배포·read-only). 권위=상품마스터/가격표·**v03 배제**.
+- **★실 라이브 COMMIT(되돌리지 말 것·undo.sh 보유) = 153행**: ⑥카테고리 고아 부카테고리 페어 **111 삭제**+빈노드 12 `use_yn='N'`(정상 주카테고리 273 무손상) · ⑤에폭시 **PRD_000169 1행** · 굿즈/파우치 본체자재 **41행**(레더23·캔버스9·린넨5·메쉬4·기존 자재 재사용·신규 mint 0). 각 `_exec_*/apply-log.md`.
+- **명세/제안(라이브 미적용)**: ②사이즈(라이브 가역0·전부 가격종속) · ④B-3 비소재 CPQ 축이동 설계 · **굿즈/파우치 자재정보 정리 제안**(전수 103상품 + RP·WP 권위 → 후니 자재 모델이 정답·**완제품도 자재**·모델 신설 불요·`_proposal/`).
+- **다음 시작점**: (a) **완제품 20종 자재 mint 설계**(유리/세라믹/양철/우드/규조토/코르크/벨벳…·신규 자재 코드)+연결 (b) **GPM-4** 오염 `.09` link 제거(본체 선적재 완료→이제 가능) (c) **경로 Y 개발자 패키지**(`_backlog/developer-code-changes.md`) 전달 (d) ①기초코드·round-6 CPQ 색→option.
+- **미해결/블로커**: ★**상품마스터 굿즈파우치 시트에 "본체 소재" 컬럼 부재**(근본·실무진 신설 필요·구조적 진원) · 컨펌 큐(GP-Q1~6 완제품 자재등록 정책·신규 mat_typ 범위·타이벡 하드/소프트·머그 용량·잉크색·폰케이스 5 미등록·B-2·B-10 코롯토·봉제 49 BOM·신규 mint 3) · 경로 X는 v03 재적재 시 회귀(경로 Y 선결).
+- **이번 세션 결정**: 경로 Y 근본(진원 ⓐ)·webadmin 코드 수정 금지·권위=상품마스터/가격표(v03 배제)·완제품도 자재(RP·WP 독립 수렴 권위)·라이브 153행 가역 적용·실 COMMIT은 인간 승인.
+- **건드리지 말 것**: 라이브 COMMIT 153행(⑥111·⑤1·굿즈41·undo 보유)·정상 카테고리 273·검증 GO 산출(`_gate/`)·BLOCKED 2(PRD_000218/229 비활성)·168 코롯토(B-10).
+
+---
+
+> 작성 2026-06-14(round-6 Tier A CPQ 확대·이하 이전 라운드 현황 보존). 권위 = 본 문서 + 메모리 `dbmap-tierA-cpq-option-load`·`dbmap-load-column-order-staged`·`dbmap-cpq-option-layer-mapping`·`dbmap-mapping-research-round12`·`dbmap-correctness-audit-round13`·`dbmap-column-domain-loadspec-round11`·`dbmap-schema-design-intent-first`·`dbmap-code-identifier-strategy`·`dbmap-live-admin-product-viewer`·`dbmap-silsa-price-via-poster-sign`. 본 문서 + 메모리를 읽으면 재발견 0으로 재개. 이전 트랙(round-2 가격·round-4/5 적재·plate·CPQ·round-6 현수막·round-7 커버리지·round-8 admin UI·round-10 변경추적·round-11 도메인) 상세는 `CHANGELOG.md`·메모리에 보존.
 
 ## 한 줄 현황 (**round-21 자율 동형 루프 10/10 완주 — 잔여 4상품군(책자·굿즈파우치·문구·캘린더) 사이클 + 전 상품군 동형 분류 완성** — 2026-06-15·★최신)
 사용자 "자율 루프 다음 상품군 완주" 선택. 6사이클(엽서·명함·아크릴·포토카드·실사·스티커)에 이어 **책자·굿즈파우치·문구·캘린더 4사이클 추가 실행 → 전 상품군 10/10 완주**. 각 사이클 생성(`dbm-readiness-auditor`) + 독립검증(`dbm-validator`) 분리. 종합 = `29_readiness/_isomorphism/_final-synthesis-10cycle.md`(단일 권위·6사이클분은 `_3cycle-synthesis.md` 보존). 권위 [[dbmap-round21-isomorphism-10cycle-complete]].
