@@ -13,8 +13,14 @@
   - `01_카테고리` 시트: 위 고아 14노드의 **`사용여부`='N'** (행 삭제 금지 — surrogate 행순 보존). `상위카테고리코드` 채움은 불요(정답 잎노드 이미 존재).
 - **상세 매핑:** `_corrected_xlsx/category-correction-spec.md` §2·§5.
 
-### A-2. ④ 자재 (이번 mat_typ 정정 0건 — 진짜 오염은 CPQ 의존·B-3)
-- mat_typ 정정 대상 없음(레더 이미 .06). 비소재 행(색/형상/구수 .09/.10) 분리는 CPQ option·siz 축이동 선행 필요(다음 단계).
+### A-2. ④ 자재 — mat_typ 정정 0건 + 비소재 CPQ 축이동(B-3) 설계 완료 (라이브 적용 0)
+- **mat_typ 정정 0건**(레더 이미 .06).
+- **B-3 비소재 오염 축이동 설계**(`_corrected_xlsx/material-nonmaterial-cpq-spec.md`·검증 `_gate/material-cpq-gate.md` GO): .08 실사14·.09 파우치74·.10 악세사리43=**131행**·연결 **82 distinct 상품/172 link**(검증 정정·명세 84/144는 per-typ 혼용 오류 F-1)·component_prices **0참조**(가격 안전).
+  - **라벨별 목표 축:** 색(본체색 2~3종=자재유지·4종+→CPQ option)·형상→siz칼틀/공정·구수→bundle·용량/사이즈→siz·인쇄면→print_side·소재유지 23.
+  - **[HARD] FK 위상(80/82 상품 BOM이 .08/.09/.10에 의존·load-bearing):** siz/bundle/print_side 적재 → CPQ option(round-6·webadmin 적재경로 부재) → product_materials 82상품 재배선 → 오염행 use_yn='N'(마지막). **삭제 선행 시 80상품 본체 자재 전손.**
+  - **라이브 적용 0건** — 전부 경로 Y(siz/bundle/print_side·v03 05_자재정보/14_상품별자재) + round-6 CPQ 트랙(색→option ~21행) + BLOCKED.
+  - **정정 노트(검증 발견):** F-1 재배선 분모=82/172(명세 84/144 정정·실 적재 시 단일 권위 SELECT 재집계) · F-2 양면유광(316/317/318)=색 아닌 마감 공정 · F-3 .09 색 라벨합 미세 오류.
+  - **도메인 컨펌 4건:** AX-1 만년스탬프 잉크색7 귀속 · AX-2 size→siz 사슬 보존 · AX-4 봉투/(3개1팩)/리필잉크 통일 · B-7 형상 칼틀 vs 공정param.
 
 ### A-3. ② 사이즈 (라이브 가역 안전분 0건 — 전부 경로 Y/BLOCKED)
 - 검증 결과 ②사이즈축은 단독 가역 교정 0(component_prices가 116 siz를 2,601행 CASCADE 참조·가격모델 종속).
