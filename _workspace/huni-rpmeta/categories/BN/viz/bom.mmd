@@ -1,0 +1,43 @@
+%% BN 자재/공정 BOM — 출처: categories/BN/reverse.md §1~7 + §8 횡단종합
+%% 본체자재(소재 합성코드 MTRL_CD) · usage 슬롯 · 후가공 공정(순수공정 vs 자재+공정 bundle)
+flowchart TB
+  ROOT["BN 현수막류 본체\n(인쇄 substrate · 단일 본체)"]
+
+  %% ── 본체 자재: MTRL_CD 4축 합성코드 ──
+  ROOT --> MAT["본체 자재 = pdt_mtrl_info\nMTRL_CD = TYPE+PTT+CLR+WGT 4축 합성"]
+  MAT --> MT["MTRL_TYPE=P"]
+  MAT --> PTT["PTT_CD(소재정체)\nBFC현수막·PET·BOP블락아웃·TFC/TFL텐트천·MAS매쉬·VGP부직포"]
+  MAT --> CLR["CLR_CD(본체색)\nX 기본"]
+  MAT --> WGT["WGT_CD(무게)\nXXX"]
+  MAT --> PM["인쇄방식 분기\n수성C(BOP/TFC) · 라텍스L(BOPTEX/TFL)"]
+
+  %% ── usage 슬롯 (BN: 본체 단일 substrate) ──
+  ROOT --> USG["usage 슬롯\nBN = 단일 substrate(본체만)\n※ GS에서 본체+내지+링 다중슬롯 확인"]
+
+  %% ── 후가공 공정: 순수공정 vs 자재+공정 bundle ──
+  ROOT --> PROC["후가공 = pdt_pcs_info\n7그룹(BNBNFBL/BNTNHVY 최대)"]
+
+  PROC --> PURE["순수 공정 (SUB_MTRL_YN=N)"]
+  PURE --> CUT["CUT_ZUN 재단(필수)\n정사이즈/방풍커팅/모양재단"]
+  PURE --> COT["COT_DFT 코팅\n무광/유광 (PET 필수)"]
+  PURE --> SEW["SEW_DFT 봉제 / SEW_RIN 고리\n접어꿰매기/줄미싱/봉미싱/사방고리"]
+  PURE --> PKG["PKG_GB 포장\n(텐트천 강제필수)"]
+
+  PROC --> BUND["자재+공정 bundle (SUB_MTRL_YN=Y)\n부자재 소비 + 부착 공정"]
+  BUND --> ILT["ILT_DFT 아일렛\n금속링 + 타공 공정"]
+  BUND --> LUM["LUM_DFT 각목\n각목_타공포함"]
+  BUND --> QBG["QBG_DFT 큐방"]
+  BUND --> ROP["ROP_DFT 로프\n3mm/5mm + 수량입력(QTY_INPUT_Y)"]
+  BUND --> SUB["SUB_MTR 추가부자재\n젤리테이프 + 수량입력"]
+
+  %% ── 부속물(별개 완제 SKU·본체 BOM 외) ──
+  ROOT -. "별개 완제 부속(본체 BOM 외)" .-> ADD["거치대 CDL_DFT\nX배너 8종 · 롤업 RLU01/02/03 [SKU]"]
+
+  classDef mat fill:#e6f2ff,stroke:#3b82f6,color:#000;
+  classDef pure fill:#d4edda,stroke:#28a745,color:#000;
+  classDef bund fill:#fff3cd,stroke:#d39e00,color:#000;
+  classDef addon fill:#f1f3f5,stroke:#adb5bd,color:#000;
+  class MAT,MT,PTT,CLR,WGT,PM mat;
+  class PURE,CUT,COT,SEW,PKG pure;
+  class BUND,ILT,LUM,QBG,ROP,SUB bund;
+  class ADD addon;

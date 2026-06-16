@@ -1,0 +1,40 @@
+%% BN 15축 메타모델 맵 — 출처: 02_metamodel/discovered-axes.md(D-1~D-10·distinct/facet) + metamodel-dictionary.md(15 dictionaried 축)
+%% BN이 실제로 행사하는 축 = 진하게 / GS 신축(#14·#15) = BN 미행사(단일값·미관측) / D-8 = facet 거부
+flowchart TB
+  subgraph STATIC["7 정적 축"]
+    A1["#1 자재 (Material)\nMTRL_CD=TYPE+PTT+CLR+WGT 4축 합성\nBN: 행사 ✅ distinct(D-2 메타규칙)"]
+    A2["#2 공정 (Process)\npcs_cod+pcs_dtl · 별색=공정\nBN: 행사 ✅"]
+    A3["#3 옵션 (Option)\n3계층 polymorphic ref\nBN: 수량 등 행사 ✅"]
+    A4["#4 템플릿/SKU\nTemplate→Selection · prd_typ\nBN: 거치대 SKU로 일부 행사 △"]
+    A5["#5 제약 (Constraint)\n논리유형 6종 distinct(D-3)\nBN: ESN(필수)·MIN/MAX·disable 행사 ✅"]
+    A6["#6 기초코드 (Enum)\nEnumGroup→Value\nBN: 사이즈프리셋·도수 enum 행사 ✅"]
+    A7["#7 카테고리 (Category)\n트리 parent FK\nBN: 행사 ✅"]
+  end
+
+  subgraph REL["4 관계/동역학 축"]
+    A8["#8 부속물 (Addon) — distinct(D-1)\nBN: 거치대(CDL_DFT) 행사 ✅ ★BN 발굴원"]
+    A9["#9 공정 파라미터 — distinct(D-4)\nBN: 로프 수량·구수 행사 ✅ ★BN 발굴원"]
+    A10["#10 수량 모델 — distinct(D-5)\nORD_CNT 건수 × PRN_CNT 수량 이중축\nBN: 전6상품 일관 행사 ✅ ★BN 발굴원"]
+  end
+
+  subgraph CROSS["2 횡단 축"]
+    A11["#11 가격기여 역할 — distinct(D-6)\nSizeMatrix2D 면적가\nBN: real_price 공통계약 행사 ✅ ★BN 발굴원"]
+    A12["#12 인쇄방식/생산 레시피 — distinct 조건부(D-7)\nMTRL_CD 끝자리 수성C/라텍스L\nBN: 자재 facet으로 행사 △"]
+    A13["#13 사이즈 (Size) — facet 흡수\n프리셋 enum + nonspec MIN/MAX\nBN: 형상(어깨띠/거치형)도 size로 흡수 ✅"]
+  end
+
+  subgraph GS["GS 신축 2 (BN 미행사)"]
+    A14["#14 본체 형태가공 — distinct(D-10·GS)\nBN: 평면 substrate라 미행사 ✖"]
+    A15["#15 생산형태 — distinct(D-9·GS)\nBN: 전부 C형 단일값→미발굴 ✖"]
+  end
+
+  REJ["D-8 UI 런타임(Vue/jQuery)\n= facet 거부 ❌ (동일 base-data 공유·표현계층)"]
+
+  classDef on fill:#d4edda,stroke:#28a745,color:#000;
+  classDef partial fill:#fff3cd,stroke:#d39e00,color:#000;
+  classDef off fill:#f1f3f5,stroke:#adb5bd,color:#666;
+  classDef rej fill:#f8d7da,stroke:#dc3545,color:#000;
+  class A1,A2,A3,A5,A6,A7,A8,A9,A10,A11,A13 on;
+  class A4,A12 partial;
+  class A14,A15 off;
+  class REJ rej;

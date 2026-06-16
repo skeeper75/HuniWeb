@@ -25,7 +25,8 @@ Always lift instances to patterns. If you can't state it without naming a specif
 ## Workflow
 
 ### 1. Cluster the extracts
-Group `01_reverse/` axes by what they manage. Resolve `_ambiguous-fragments.md` into buckets (record verdicts
+Group `categories/*/reverse.md` axes by what they manage. Resolve each category's `## Ambiguous fragments`
+section into buckets (record verdicts
 in `_resolved-fragments.md`). Ground meaning in print domain — load dbm-domain KB at
 `_workspace/huni-dbmap/07_domain/` (entity-semantic-model, process-recipe-tree) or request dbm-domain-researcher.
 

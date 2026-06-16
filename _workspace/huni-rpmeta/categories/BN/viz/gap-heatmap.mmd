@@ -1,0 +1,37 @@
+%% BN 갭 히트맵 — 출처: 03_gap/gap-matrix.md (v1.0 BN 13축 보존 — PASS 5·WEAK 6·GAP 2)
+%% 범례: 🟢 PASS(동등 표현력) · 🟡 WEAK(그릇 있으나 미정규화/축혼동/오염) · 🔴 GAP(관리 그릇 부재 = vessel-gap)
+%% ※ GS 라이브 정정(§VI): ④template_prices·⑬nonspec 범위 vessel 발견 → 2건 완화(점선 화살표로 표시)
+flowchart TB
+  L["범례: 🟢 PASS · 🟡 WEAK · 🔴 GAP(vessel-gap)"]:::legend
+
+  subgraph PASS_["🟢 PASS (5)"]
+    G2["② 공정\n별색/UV/박 = 공정 행 정상분리"]:::pass
+    G3["③ 옵션\n3계층 polymorphic·트리거 무결성·items 469행"]:::pass
+    G6["⑥ 기초코드\nEnumGroup/Value 2계층 동등"]:::pass
+    G7["⑦ 카테고리\n트리+다중분류·round-22 고아 0"]:::pass
+    G8["⑧ 부속물\naddon→tmpl_cd 독립 SKU"]:::pass
+  end
+
+  subgraph WEAK_["🟡 WEAK (6)"]
+    G1["① 자재\n합성 분해축(CLR/PTT/WGT) 컬럼 부재 + MAT_TYPE.08~10 오염"]:::weak
+    G4["④ 템플릿\ntemplates.price 미구현(번들 추가가격 보관처)"]:::weak
+    G5["⑤ 제약\nRULE_TYPE 3종뿐 — match/min-max/essential 표현 못함"]:::weak
+    G10["⑩ 수량모델\nbundle_qty만 · 건수×수량 이중축 1급분리 부재"]:::weak
+    G11["⑪ 가격기여역할\nprc_typ_cd만 · 선택축 price_role 태그·frm_typ_cd 부재"]:::weak
+    G13["⑬ 사이즈\nnonspec MIN/MAX 미확인 · size/plate 한 마스터 혼재"]:::weak
+  end
+
+  subgraph GAP_["🔴 GAP — vessel-gap (2)"]
+    G9["⑨ 공정 파라미터\nref_param_json 미구현 — 줄수/mm/색/조각수 1급슬롯 부재"]:::gap
+    G12["⑫ 인쇄방식 레시피\nallowed_processes·게이팅 lifecycle 그릇 부재(조건부)"]:::gap
+  end
+
+  %% GS 라이브 정정 델타(§VI)
+  G4 -. "GS 정정: t_prd_template_prices 발견 → data-gap화(PASS 근접)" .-> FIX4["④ 완화"]:::fix
+  G13 -. "GS 정정: nonspec_width/height_min/max 실측 → 부분 PASS" .-> FIX13["⑬ 완화"]:::fix
+
+  classDef pass fill:#d4edda,stroke:#28a745,color:#000;
+  classDef weak fill:#fff3cd,stroke:#d39e00,color:#000;
+  classDef gap fill:#f8d7da,stroke:#dc3545,color:#000;
+  classDef fix fill:#e2e3f3,stroke:#6f42c1,color:#000;
+  classDef legend fill:#fff,stroke:#333,color:#000;

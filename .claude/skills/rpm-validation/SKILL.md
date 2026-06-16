@@ -16,8 +16,8 @@ overfit axes, wrong gap verdicts, and duplicate-mint vessels before they propaga
 
 ## The gates
 
-### M1 — Extraction fidelity (after 01_reverse)
-Re-open each cited source (live capture, huni-widget asset, API field). Atoms in `01_reverse/` must match it.
+### M1 — Extraction fidelity (after reverse)
+Re-open each cited source (live capture, huni-widget asset, API field). Atoms in `categories/*/reverse.md` must match it.
 Fabricated/unsourced fragments, or `unobserved` dressed as fact → FAIL.
 
 ### M2 — Metamodel soundness (after 02_metamodel)

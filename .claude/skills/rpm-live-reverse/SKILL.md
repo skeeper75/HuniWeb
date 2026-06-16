@@ -58,10 +58,14 @@ Tag each axis with its likely management bucket. Use domain cues: 별색→공�
 Every fragment carries a source. Unobserved behavior is marked `unobserved`, never invented. A product not
 in the catalog is reported, not fabricated.
 
-## Outputs
-- `_workspace/huni-rpmeta/01_reverse/rp-option-extract-<category>.md`
-- `_workspace/huni-rpmeta/01_reverse/rp-extract-index.md` (coverage: category→products→axes→source)
-- `_workspace/huni-rpmeta/01_reverse/_ambiguous-fragments.md`
+## Outputs (per-category folder + cross-cutting index)
+- `_workspace/huni-rpmeta/categories/<CAT>/reverse.md` — the category's atomic extracts, ending with an
+  `## Ambiguous fragments` section (bucket-unclear fragments the architect resolves).
+- `_workspace/huni-rpmeta/_index.md` — cross-cutting coverage (category→products→axes→reuse/live source);
+  create if absent, append/update this category's row, preserve others.
+
+Each category lives under `categories/<CAT>/` (reverse.md now; viz/, deepcheck.md, summary.md added by the
+visualizer/deepcheck agents). 02~05 stages remain cross-cutting folders.
 
 ## Done when
 Sampled categories each have an extract with sourced atomic records, the index shows coverage vs reuse/live,

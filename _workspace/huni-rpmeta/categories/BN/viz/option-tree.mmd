@@ -1,0 +1,54 @@
+%% BN 옵션-구성 트리 — 출처: categories/BN/reverse.md (대표 6상품 axes/choices/cascade/price_flag)
+%% 범례: [P] = 가격영향 플래그(가격요청에 전달), (필수) = ESN_YN=Y, [bundle] = SUB_MTRL_YN=Y 자재+공정, [SKU] = 완제 부속물
+flowchart LR
+  BN["BN 현수막류\nitem_gbn=real_item / price_gbn=real_price\nSizeMatrix2D 면적가 · editor=PDF only"]
+
+  %% ── 축 ──
+  BN --> MAT["축: 용지(자재)"]
+  BN --> SIZE["축: 규격(mm)(사이즈)"]
+  BN --> DOSU["축: 인쇄 도수"]
+  BN --> QTY["축: 수량"]
+  BN --> PCS["축: 후가공(pdt_pcs_info)"]
+  BN --> CDL["축: 거치대(CDL_DFT) · X배너/롤업만"]
+
+  %% ── 자재 ──
+  MAT --> M1["현수막 PXBFCXXX [P]\n(BNBNFBL 단일)"]
+  MAT --> M2["PET / 블락아웃PET 2종 [P]\n(BNPTPET·BNSTDFT)"]
+  MAT --> M3["텐트천 수성/라텍스 PXTFC·PXTFL [P]\n(소재×인쇄방식 분기)"]
+  MAT --> M4["부직포어깨띠 / 매쉬 단일소재 [P]"]
+  MAT -. "자재변경 → pdt_disable_pcs_info 룩업\n(BN 샘플 0건)" .-> PCS
+
+  %% ── 사이즈 ──
+  SIZE --> SP["프리셋 enum (DIV_NM)\n예: 5000X900·900X900·1800X1780 [P]"]
+  SIZE --> SU["사이즈직접입력 USER/SIZE_0 [P]\n제약: MIN/MAX_CUT 0~5000(BNPTPET 0~1000)"]
+  SP -. "선택→CUT_WDT/HGH 룩업" .-> PFLAG1["작업=재단+CUT_MRG 4mm"]
+  SU -. "직접입력→USER 수치 직접전달(룩업불가)" .-> PFLAG1
+
+  %% ── 도수 ──
+  DOSU --> D1["SID_S 단면 (PRN_CLR_CNT=4) [P]"]
+
+  %% ── 수량(이중축) ──
+  QTY --> Q1["ORD_CNT 디자인 수(건수, min1)"]
+  QTY --> Q2["PRN_CNT 수량"]
+  QTY -. "SSR: number1_sel 수량 · number4_sel N배(건수)" .-> Q2
+
+  %% ── 후가공 7그룹(BNBNFBL/BNTNHVY 최대) ──
+  PCS --> P_CUT["CUT_ZUN 재단 (필수)\n정사이즈/방풍커팅/모양재단 — 택1 [P]"]
+  PCS --> P_COT["COT_DFT 코팅 (PET 필수ESN_Y)\n무광/유광 [P]"]
+  PCS --> P_ILT["ILT_DFT 아일렛 [bundle][P]\n사각귀퉁이/사각테두리"]
+  PCS --> P_LUM["LUM_DFT 각목 [bundle][P]"]
+  PCS --> P_QBG["QBG_DFT 큐방 [bundle][P]"]
+  PCS --> P_ROP["ROP_DFT 로프 [bundle][P]\n3mm/5mm · 자체 수량입력(QTY_INPUT_Y)"]
+  PCS --> P_SEW["SEW_DFT 봉제 / SEW_RIN 고리 [P]"]
+  PCS --> P_SUB["SUB_MTR 추가부자재 [bundle][P]\n젤리테이프 · 수량입력"]
+  PCS --> P_PKG["PKG_GB 포장 (BNTNHVY 강제필수)\n말아서 포장 필수 — 소재→포장 강제규칙"]
+
+  %% ── 거치대(부속 SKU) ──
+  CDL --> C1["X배너: 실내/실외 거치대 8종 [SKU][P]"]
+  CDL --> C2["롤업: RLU01/02/03 (600/850/1000) [SKU][P]"]
+  C2 -. "거치대 폭 ↔ size 프리셋 1:1 캐스케이드(가능성)" .-> SIZE
+
+  classDef price fill:#e6f2ff,stroke:#3b82f6;
+  classDef req fill:#fff3cd,stroke:#d39e00;
+  class M1,M2,M3,M4,SP,SU,D1,C1,C2 price;
+  class P_CUT,P_COT,P_PKG req;

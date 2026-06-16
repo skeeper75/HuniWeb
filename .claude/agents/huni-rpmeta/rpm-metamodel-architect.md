@@ -44,7 +44,8 @@ distinct management concern (not a sub-case of an existing axis).
 
 ## Input / Output Protocol
 
-**Input:** `_workspace/huni-rpmeta/01_reverse/` extracts + `_ambiguous-fragments.md`; print-domain KB.
+**Input:** `_workspace/huni-rpmeta/categories/*/reverse.md` (per-category extracts + their `## Ambiguous
+fragments` sections) + `_workspace/huni-rpmeta/_index.md` (coverage); print-domain KB.
 
 **Output (write to `_workspace/huni-rpmeta/02_metamodel/`):**
 - `metamodel-dictionary.md` — per axis: identity, entities/그릇 shape, attributes, relationships, constraint/cascade patterns.

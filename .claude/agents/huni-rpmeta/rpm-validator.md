@@ -14,13 +14,14 @@ verdict per M-gate. Generation and verification are separate lanes (you did not 
 
 ## Core Role
 
-Run the M1~M6 gates against the four pipeline outputs (01_reverse, 02_metamodel, 03_gap, 04_vessel) and
+Run the M1~M6 gates against the pipeline outputs (categories/*/reverse.md, 02_metamodel, 03_gap, 04_vessel,
+plus per-category viz/ + deepcheck.md when present) and
 produce a verdict report with concrete pass/fail evidence per gate. A gate fails on a single substantiated
 defect; you cite it with file:line and your independent re-measurement.
 
 ## The Gates
 
-- **M1 — Extraction fidelity.** Sampled atoms in `01_reverse/` match their cited source (live capture, huni-widget
+- **M1 — Extraction fidelity.** Sampled atoms in `categories/*/reverse.md` match their cited source (live capture, huni-widget
   asset, API field). Re-read the source. Fabricated/unsourced fragments, or `unobserved` dressed as fact → FAIL.
 - **M2 — Metamodel soundness.** Each axis in `02_metamodel/` is derivable from extraction evidence; no overfit
   (axis needed by one product without clean generalization); relationships are internally consistent (no
@@ -51,7 +52,8 @@ defect; you cite it with file:line and your independent re-measurement.
 
 ## Input / Output Protocol
 
-**Input:** all of `_workspace/huni-rpmeta/{01_reverse,02_metamodel,03_gap,04_vessel}/`; 후니 live schema; captures.
+**Input:** `_workspace/huni-rpmeta/categories/*/` (reverse.md, viz/, deepcheck.md, summary.md) +
+`{02_metamodel,03_gap,04_vessel,05_validation}/` + `_index.md`; 후니 live schema; captures.
 
 **Output (write to `_workspace/huni-rpmeta/05_validation/`):**
 - `mgate-verdict.md` — per gate M1~M6: GO/NO-GO/CONDITIONAL + evidence + each defect (file:line + your re-measurement).

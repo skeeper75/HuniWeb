@@ -42,10 +42,15 @@ fragment as one of: 자재(material) / 공정(process) / 옵션(option) / 템플
 
 **Input:** orchestrator's sample list (pdtCodes per category) + reuse pointers above.
 
-**Output (write to `_workspace/huni-rpmeta/01_reverse/`):**
-- `rp-option-extract-<category>.md` — per-category sampled products with atomic option records + base-data tags.
-- `rp-extract-index.md` — sampled coverage map (category → products → axes count → reuse vs live source).
-- `_ambiguous-fragments.md` — fragments whose management bucket is unclear (architect resolves).
+**Output (per-category folder + cross-cutting index):**
+- `_workspace/huni-rpmeta/categories/<CAT>/reverse.md` — that category's sampled products with atomic option
+  records + base-data tags, ending with an `## Ambiguous fragments` section (fragments whose management
+  bucket is unclear — the architect resolves these).
+- `_workspace/huni-rpmeta/_index.md` — cross-cutting coverage map (category → products → axes count → reuse
+  vs live source); create if absent, append the category row if present (preserve other categories' rows).
+
+The per-category folder `categories/<CAT>/` is the home for everything about that category (reverse.md now;
+later visualizer's `viz/`, deepcheck's `deepcheck.md`, and `summary.md`). 02~05 stages stay cross-cutting.
 
 Load the `rpm-live-reverse` skill for the sampling/capture/extraction method. Do not duplicate it here.
 
