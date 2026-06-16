@@ -7,7 +7,8 @@
 >
 > **── 버전 ──**
 > - **v1.0 (BN, 13축):** 현수막류 메타모델(13축) 대조. PASS 5·WEAK 6·GAP 2. (§I~III·종합 = BN, **보존**.)
-> - **v2.0 (GS 통합·현재):** 메타모델 15축(v2.0)으로 확장 + GS 신축 2(#14 본체형태가공·#15 생산형태) + GS facet 라이브 정밀 실측. BN 13축 판정은 **보존**(GS 실측이 일부 BN 판정 정정 = §IV-bis에 명기). GS 추가 = **§IV(굿즈 본체자재 상세)·§V(GS 신축 #14·#15)·§VI(BN 판정 GS 정정)**.
+> - **v2.0 (GS 통합):** 메타모델 15축(v2.0)으로 확장 + GS 신축 2(#14 본체형태가공·#15 생산형태) + GS facet 라이브 정밀 실측. BN 13축 판정은 **보존**(GS 실측이 일부 BN 판정 정정 = §VI에 명기). GS 추가 = **§IV(굿즈 본체자재 상세)·§V(GS 신축 #14·#15)·§VI(BN 판정 GS 정정)**.
+> - **v3.0 (TP 통합·현재):** 메타모델 16축(v3.0)으로 확장 + TP 신축 1(#16 디자인 입력 채널) + TP facet 5종(T-A~T-E). BN·GS 판정 **보존**. TP 추가 = **§VIII(#16 디자인 입력 채널 — vessel-gap 1순위)·§IX(TP facet 판정)·§X(TP 종합 카운트)**. 라이브 information_schema 정밀 실측(2026-06-17·read-only)으로 #16 그릇 부재 확정.
 >
 > **GS 라이브 실측 핵심(2026-06-17 read-only):** 굿즈 본체자재는 **vessel-gap(분해축 컬럼 부재) + 부분 data-fix 혼재** — 자세히 §IV. 형태가공(#14)=GAP(봉제만). 생산형태(#15)=WEAK(prd_typ_cd≠생산형태). usage 다중슬롯=PASS(USAGE.01~07 적재). 가격모델 4종=vessel 대부분 존재(template_prices unit_price)·data-gap.
 
@@ -255,3 +256,72 @@
 - **GS가 BN 정정:** ④template_prices·⑬nonspec 범위 vessel 발견 → 2건 완화(vessel-gap→data-gap/PASS).
 
 > 모든 판정 양쪽 증거 보유. 라이브 read-only 접속 성공(2026-06-17·psql 직접 SELECT) — `provisional(snapshot)` 불필요. dbmap round-22(B-3·GPM-4·⑥카테고리)와 정합(재발견 아님·라이브 실측으로 확증).
+
+---
+
+## VIII. ★TP 신축 — 메타모델 #16 디자인 입력 채널 (vessel-gap 1순위·directive 핵심·v3.0)
+
+> 사용자 directive 최우선 항목 = "디자인 입력 채널 축(#16/D-11)을 후니가 담을 그릇이 있는가". 라이브 information_schema 정밀 실측(2026-06-17·read-only)으로 판별 — 본 TP 갭분석의 핵심 산출.
+
+### VIII-0. 라이브 실측 결과 (information_schema 직접 SELECT 2026-06-17)
+
+| 측정 | 라이브 결과 | 함의 |
+|---|---|---|
+| `t_prd_products` 전 컬럼(23) | `prd_cd·MES_ITEM_CD·prd_nm·prd_typ_cd·semi_role_cd·nonspec_*·**file_upload_yn·editor_yn**·min/max/incr/dflt_qty·use_yn·reg/upd_dt·qty_unit_typ_cd·del_yn/dt` | 디자인 입력 신호 = **`editor_yn`·`file_upload_yn` 불리언 2개뿐.** `item_gbn`(채널 타입)·에디터 종류(KOI/Edicus/RP) 구분·`koi_template_resource_id`(템플릿 리소스 포인터)·VDP/가변데이터 컬럼 **전무.** |
+| editor/koi/edicus/vdp/item_gbn/channel/resource/asset/template/variable 컬럼 전역 검색 | `t_prd_products.editor_yn`·`file_upload_yn` + `tmpl_cd`(templates 계열)만 매치. **에디터 채널·리소스·VDP 컬럼 0건.** | RP `item_gbn`(vDigital/edicus/offset2023)·`useKoiEditor`/`useRPEditor`·`koiOption[]`·`setVariableData` 대응 그릇 **부재 확정.** |
+| 에디터/디자인/리소스/asset/vdp **테이블** 전역 검색 | `t_prd_templates`·`t_prd_template_selections`·`t_prd_template_prices`만. **에디터 채널/디자인 자산 전용 standalone 테이블 0건.** | TemplateAsset(에디터 디자인 시안 카탈로그) 그릇 부재 — `t_prd_templates`는 완제SKU(아래 IX T-A 이중의미). |
+| base_codes 그룹 16종 | MAT_TYPE·PRD_TYPE·OPT_REF_DIM·SEL_TYPE·RULE_TYPE·USAGE·QTY_UNIT·SEMI_ROLE·OUTPUT_PAPER_TYPE·PRC_*·DSC_TYPE·CUS_GRADE·TEST* | **에디터 채널/item_gbn enum 그룹 부재** — 채널 *타입*(KOI vs Edicus vs PDF)을 분류할 코드 도메인조차 없음. RP `item_gbn` 3값 대응 enum 미존재. |
+| `editor_yn`/`file_upload_yn` 분포(use_yn=Y) | Y/Y=104·Y/N=3·N/Y=91·N/N=49 | editor_yn=Y **107상품** — 에디터 *사용 여부*는 불리언으로 잡으나, *어느 에디터*·*어느 템플릿 리소스*·*VDP 가능*은 표현 불가(평면 불리언). HLCLSTD형(N/Y=PDF전용) 91건은 입력채널 값 보유. |
+
+### VIII-1. 판정 — #16 디자인 입력 채널 = **GAP** ❌ (vessel-gap, 1순위)
+
+| 면 | 증거 |
+|---|---|
+| **RP 표현력** | `DesignInputChannel`(channel=item_gbn[vDigital_item/edicus_item/offset2023_item]·use_koi_editor·use_rp_editor·use_template_download·use_pdf·ord_cnt_source·vdp_capable) + 종속 `TemplateAsset`(template_resource_id·asset_options·price=0). 입력채널이 디자인수 산정·템플릿 자산 노출·VDP를 *게이팅*. (dictionary §16, D-11) |
+| **후니 현황** | 라이브 `t_prd_products`에 **`editor_yn`·`file_upload_yn` 불리언 2개**만. 채널 타입 컬럼·에디터 종류 enum·템플릿 리소스 ID·VDP 변수 스키마 그릇 **전무**(전역 컬럼/테이블/base_code 검색 0건). |
+| **판정** | **GAP** — RP의 "디자인을 *어떻게 입력받나*"(KOI/Edicus/PDF 채널 + 템플릿 리소스 바인딩 + VDP 가변데이터 + 디자인수 산정 출처)를 후니 스키마가 표현 못함. 현재는 `editor_yn`(Y/N) 단일 불리언으로 *에디터 사용 여부*만 — RP `item_gbn` 3분기·에디터 종류·리소스 포인터·VDP를 **전혀 담지 못함**(의미축 대거 drop). **vessel-gap**(빈 테이블 아님·스키마가 축을 표현 못함). ★후니=Edicus를 huni-widget RedEditorSDK *코드 계약*으로만 보유, **DB 그릇 미정 가설(T-1) 라이브로 확정**. |
+| **dbmap 교차참조** | dbmap에 디자인 입력 채널 진단 **없음**(dbmap은 자재/가격/CPQ/카테고리 축 중심·에디터 채널 미터치). **재발견 아님·dbmap 갭과 비충돌 = 신규 vessel-gap.** huni-widget `seed-redprinting-sdk-analysis.md`(RedEditorSDK 45메서드·`sdkOpenEditor`/`fnKoiEditor`/`fnRpEditor`)·`editor-bridge-protocol.md`(cmd create-design-project·editor_type/run_mode 파라미터)가 *코드 계약*만 — DB 그릇 설계가 vessel 과제. = `vessel-needs.md` **V-10**(P1 최우선). |
+
+> **★결론(사용자 핵심 질의 직답):** **#16 디자인 입력 채널 = GAP(vessel-gap·후니 그릇 부재).** ① 라이브 `t_prd_products`에 `editor_yn`·`file_upload_yn` 불리언 2개만 존재 — *에디터 사용 여부*만 표현. ② RP `item_gbn`(채널 3분기)·에디터 종류(KOI/Edicus/RP)·`koi_template_resource_id`(템플릿 리소스)·VDP 변수 스키마·디자인수 산정 출처에 대응할 **컬럼·테이블·enum 그룹 전무**(전역 검색 0건·base_code 16그룹에 에디터 채널 enum 없음). ③ 후니는 Edicus를 huni-widget RedEditorSDK *코드 계약*으로만 보유하고 **DB 그릇 미정(T-1 가설)을 라이브로 확정** → 입력채널 메타를 담을 그릇 설계가 vessel 1순위. **dbmap이 한 번도 안 건드린 신규 vessel-gap(중복/충돌 없음).**
+
+---
+
+## IX. TP facet 판정 (distinct 거부 — 기존 축 흡수 + 이중의미)
+
+> discovered-axes T-A~T-E(facet 강등)를 후니 그릇 대조. distinct 신축 아니므로 기존 축 판정에 흡수되나, **T-A 템플릿 이중의미 오염 위험**은 별도 명시(directive 요구).
+
+### IX-A. ★템플릿 자산(에디터 디자인 시안) — **WEAK** 🟡 (T-A 이중의미 오염 위험)
+
+| 면 | 증거 |
+|---|---|
+| **RP 표현력** | `TemplateAsset`(에디터가 로드하는 디자인 시안 카탈로그·가격0·D-11#16 종속). RP=`useTemplateDownload=Y`·`koi_template_resource_id`·SDK getTemplateList. **#4 완제SKU 템플릿과 *같은 단어 다른 의미*.** (dictionary §4 TP 분리·T-A) |
+| **후니 현황** | 라이브 `t_prd_templates`(12행) 실측 = **완제SKU/OTC 번들**: `봉투(700x200)`·`카드봉투(블랙) 165x115 50장`·`OPP접착봉투`·`트레싱지봉투` — 전부 봉투류 완제 주문단위(`base_prd_cd`→products·`dflt_qty`·`tmpl_nm`=수량 포함 SKU명). 디자인 시안 리소스 그릇 **아님.** TemplateAsset(에디터 디자인 시안) 그릇 **부재.** |
+| **판정** | **WEAK** — TemplateAsset *전용* 그릇은 **부재(GAP성)**이나, **★핵심 위험 = `t_prd_templates`에 TP 디자인 시안을 매핑하면 의미 오염.** 라이브 `t_prd_templates`는 완제SKU(봉투 50장 단위)인데, TP "템플릿"(`koi_template_resource_id` = 가격0 디자인 리소스·런타임 SDK 로드)을 여기 적재하면 *가격0 디자인 리소스를 주문단위로 오모델* → **이중의미 충돌**(dictionary #4 [HARD] "디자인 시안을 완제SKU에 적재 금지"). 그릇 부재 + 오염 위험 양면 = **WEAK + 분리 권고**(별 엔티티 `TemplateAsset`은 #16 입력채널 그릇과 함께 설계 — V-10 종속). |
+| **dbmap 교차참조** | dbmap `cpq-schema.md §5`(template_selections=완제SKU 구성·OTC 봉투 선례)·`dbmap-schema-design-intent-first`(카드봉투 색=siz 오매핑 교훈 = 같은 값 잘못된 t_* 위험). **★TP 디자인 시안↔완제SKU 분리 = 본 하네스 신규 명시**(dbmap은 templates를 완제SKU로만 다룸·디자인 시안 미터치). |
+
+### IX-B~E. VDP·페이지계층·형태variant·특수인쇄 — 기존 축 흡수 (요약)
+
+| TP facet | 귀속 축 | 후니 그릇 판정 | 근거(라이브) |
+|---|---|---|---|
+| **T-B VDP(가변데이터)** | #16 입력채널 데이터바인딩 facet × 수량#10 | **GAP**(vessel-gap, #16 종속) | VDP 변수 스키마(`setVariableData`/`data_feed`) 담을 그릇 부재 — #16 입력채널 그릇과 함께 설계(V-10 일부). 명함(TPBCDFT)·상장(TPPOAWD) VDP 후보. 라이브 가변데이터 컬럼 0건. |
+| **T-C 페이지계층(INN_PAGE)** | 수량모델#10 + 제약#5 | **PASS(부분)** ✅ | `t_prd_product_page_rules`(11행) = 내지 페이지룰 그릇 존재(§10 수량모델 WEAK에 흡수·캘린더 월수/북 대수 표현 가능). min/max/step 범위는 제약#5 WEAK. 신규 vessel 불요. |
+| **T-D 형태variant(M/I/보딩·탁상/벽걸이)** | 사이즈#13 + 칼틀공정#2 | **WEAK** 🟡 | 사이즈 프리셋(§13 WEAK·`t_siz_sizes`)+칼틀=공정(§2 PASS)으로 흡수. GS THO_CUT 형상 동형(§13 GS 확장). 신규 vessel 불요·기존 사이즈 WEAK에 귀속. |
+| **T-E 특수인쇄(PRT_WHT/PRT_MAG·박·미싱)** | 공정#2 (+넘버링=VDP) | **PASS** ✅ | 화이트=`PROC_000008`·클리어 009·박 033~049·별색 007 라이브 보유(§2 PASS). 별색=공정 경계 준수. 미싱(절취선)=공정·넘버링(순차)=VDP면 T-B(#16) 귀속·라이브 미관측→data/검증. 신규 vessel 불요. |
+
+> **TP facet 요지:** T-A 템플릿 자산만 **WEAK(이중의미 오염 위험·V-10 종속 설계)**, T-B VDP는 **#16 GAP에 흡수**, T-C/T-D/T-E는 **기존 축(page_rules·사이즈·공정)으로 흡수**(신규 vessel 불요). 즉 TP가 추가하는 *순 신규 vessel-gap = #16 디자인 입력 채널 1건*(+T-A/T-B는 그 종속·T-A 오염 경고).
+
+---
+
+## X. v3.0 종합 카운트 (BN 13 + GS 신축 2 + TP 신축 1 = 16축)
+
+| 판정 | 개수 | 축 |
+|---|---:|---|
+| **PASS** | 5 | ②공정 · ③옵션 · ⑥기초코드 · ⑦카테고리 · ⑧부속물 (+ ①usage·④template_prices·⑬nonspec·T-C page_rules·T-E 특수인쇄 = PASS 측면) |
+| **WEAK** | 8 | ①자재(분해축) · ④템플릿(가격 data-gap화) · ⑤제약 · ⑩수량모델 · ⑪가격기여역할 · ⑬사이즈(혼재·T-D 형태variant) · #15 생산형태 · **T-A 템플릿 자산(신규·이중의미 오염)** |
+| **GAP** | 4 | ⑨공정파라미터 · ⑫인쇄방식레시피 · #14 본체형태가공 · **#16 디자인 입력 채널(신규·★1순위·T-B VDP 종속)** |
+
+- **TP 신축 판정:** **#16 디자인 입력 채널 = GAP**(★vessel-gap 1순위·후니 그릇 부재·라이브 확정). T-A 템플릿 자산=**WEAK**(이중의미 오염 위험). T-B VDP=#16 GAP 흡수. T-C/T-D/T-E=기존 축 흡수.
+- **디자인 입력 채널(directive 핵심):** **vessel-gap**(데이터 미적재 아님) — `editor_yn` 불리언만·item_gbn/에디터종류/리소스ID/VDP 그릇 전무·base_code enum 부재. dbmap 미터치 신규 갭(중복/충돌 없음). 후니 Edicus=코드 계약만·DB 그릇 미정 확정.
+- **TP가 BN/GS 정정 안 함:** TP는 본체와 직교한 *신축*이라 기존 BN/GS 판정 불변(보존). T-C 페이지계층은 기존 page_rules로 PASS·신규 갭 아님.
+
+> 모든 판정 양쪽 증거 보유(메타모델 항목 + 후니 t_* 라이브 실측). 라이브 information_schema 직접 SELECT(2026-06-17·read-only) — `provisional(snapshot)` 불필요. **TP 신규 vessel-gap = #16 1건(+T-A/T-B 종속)·dbmap 갭과 비충돌.**

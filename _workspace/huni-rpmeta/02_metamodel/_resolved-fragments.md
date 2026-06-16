@@ -153,3 +153,71 @@
 | (횡단) 생산형태 | **생산형태** | 본체 모델 governing ⊥카테고리 | **distinct** ★ | D-9 |
 
 **GS 강제 분류 회피(SKILL §3·§5):** distinct 승급 = **D-9 생산형태·D-10 형태가공 2종**(BN·GS 둘 다 견디는 governing/lifecycle). G-1~G-4는 양면 트레이드오프 펼친 뒤 facet 강등(완제 본체·소재 분리·기종·variant — 전부 기존 축 결합으로 왜곡 없이 표현). 단일 상품군 전용 축 신설 0건. ★G-1·G-2는 침묵 선택 거부하고 트레이드오프 명시 후 판정.
+
+---
+
+# TP(디자인템플릿) fragment 판정 (v3.0 — 디자인 입력/에디터)
+
+> `categories/TP/reverse.md` ## Ambiguous fragments T-1~T-7 판정. 3 상품군(BN 면적·GS 완제·TP 디자인입력) 증거로 distinct/facet 결정.
+> 과잉 일반화 경계(SKILL §5): TP 한 군만의 특이는 facet 강등. distinct 승급 = 비-TP 트윈 직접 대조 + 후니 동형(huni-widget RedEditorSDK 계약) 보유 시만.
+> ★메타모델 단계 해소 가능분과 라이브/엑셀 검증 필요분(→gap/validation 라우팅)을 구분 표기.
+
+## T-1. 에디터 채널의 관리 그릇 — 디자인 입력 채널 축 [distinct → D-11 / #16] ★directive 핵심
+
+- **판정:** **디자인 입력 채널 축(Design-Input Channel) = distinct (D-11·#16).** `item_gbn`+`useKoiEditor`/`useRPEditor`/`usePDF`/`useEditorOrdCnt`/`useTemplateDownload` 플래그 묶음 = 본체 옵션 트리와 직교한 별 관리축.
+- **근거:** reverse §0.1 비-TP 트윈 직접 대조(TPCLSTD vs HLCLSTD — 본체/가격 동일·입력채널만 차이) + 가격 0(reverse §3 TPCLWLB) + huni-widget RedEditorSDK 45메서드·Edicus 브릿지 계약(`seed-redprinting-sdk-analysis.md`·`editor-bridge-protocol.md`). 옵션#3(본체속성)·공정#2(본체작업)·템플릿#4(완제번들) 어느 것도 "디자인 입력 메커니즘"을 왜곡 없이 못 담음. 7버킷 어디에도 안 들어감(reverse T-1 vessel-gap 1순위 가설 확정).
+- **메타모델 해소:** ✅ 축 정초 완료(dictionary #16). **그릇 후보(상품 속성 컬럼 vs 별 테이블 vs 입력채널 엔티티) 중 메타모델은 별 엔티티(DesignInputChannel + 종속 TemplateAsset)로 모델링** — 후니 t_* 실제 그릇 유무·매핑은 **→ gap/vessel 단계**(라이브 information_schema에 item_gbn/에디터 플래그 대응 컬럼 확인).
+
+## T-2. 템플릿 자산의 정체 — 입력채널 리소스 facet + 템플릿#4 이중의미 분리 [facet → T-A] ★핵심
+
+- **판정:** **D-11 입력채널의 리소스 facet (distinct 거부). 단 [HARD] 템플릿#4와 이중의미 분리.** TP 템플릿 자산(`useTemplateDownload`·`koi_template_resource_id`·SDK getTemplateList) = 에디터 디자인 시안(가격0·D-11 종속) ≠ 후니 `t_prd_templates`(완제SKU 번들·주문단위·#4).
+- **양면 트레이드오프(침묵 선택 금지):** discovered-axes T-A 참조 — (가) 별 distinct 신설 vs (나) D-11 리소스 facet + #4 이중의미 명시. **(나) 채택**: 템플릿 자산은 독립 lifecycle 없음(에디터 채널 없으면 0) → D-11 하위. 단 #4가 두 의미 갖지 않게 별 엔티티(`Template` 완제SKU / `TemplateAsset` 디자인 시안) 분리.
+- **근거:** reverse §0.3·T-2 "같은 단어 다른 의미" 정확히 일치. 가격 0(인쇄/자재가 가격 주체). 메타모델 #4·#16에 이중의미 명시 완료.
+- **메타모델 해소:** ✅ 이중의미 분리 정초 완료. 상품별 실제 템플릿 자산 카탈로그·VDP 변수 스키마는 unobserved(`koiOption[]` 빈배열) → **검증 필요분: 로그인 에디터 캡처 → validation 단계**.
+
+## T-3. 티켓 넘버링/미싱(순차·절취) 공정 — 공정#2 (+넘버링은 VDP 가능) [facet → T-E] / 일부 검증 필요
+
+- **판정:** **공정 축(#2) facet (distinct 거부).** 미싱(절취선)=공정#2. 넘버링(일련번호)=공정#2 또는 (가변 증분이면) VDP(T-B·#16 입력채널 데이터바인딩). reverse T-3 "순차/절취 공정축" 신축 가설 → **신축 불요**(절취=기존 공정, 순차번호=VDP/공정 분배).
+- **근거:** reverse §2 SSR "미싱" 텍스트 + GS/AC 박·완칼 공정 동형. 순차번호가 *디자인 데이터*(에디터 변수)인지 *생산 공정*(인쇄 후 넘버링기)인지가 귀속을 가름.
+- **메타모델 해소:** 🟡 부분 — 절취선=공정#2 확정. **넘버링 규칙(가변 증분·일련번호 시작/증가)은 unobserved → 검증 필요분: VDP vs 공정 귀속 라이브 확인 → gap/validation 단계.**
+
+## T-4. "디자인 X" 상품의 모델링 단위 — 상품 분리 vs 옵션화 [메타모델 판정 아님·후니 정책] / gap 라우팅
+
+- **판정:** **메타모델 판정 아닌 후니 카탈로그 *정책 결정***(GS G-2 코스터 6 pdtCode와 동류 모호성). RedPrinting=별 pdtCode(TPBCDFT vs BC 일반명함) — 검증된 방식이나 답습 강제 아님. 메타모델은 둘 다 표현 가능: (가) 별 pdtCode면 디자인입력채널(#16)이 상품 속성, (나) 옵션화면 한 상품의 입력채널 variant.
+- **근거:** reverse T-4. "디자인 X"=동종(BC/WT/PO) + 입력채널 레이어. 입력채널이 직교(#16)이므로 *기술적으로는 옵션화 가능*(한 명함 상품 + 에디터 사용여부 플래그). 단 RP는 가격모델(digital vs 일반)·템플릿 자산 차이로 별 상품 운영.
+- **메타모델 해소:** ✅ 메타모델은 양쪽 표현 가능(입력채널 #16이 상품속성/variant 둘 다 수용). **분리 vs 옵션화 선택은 후니 정책 → gap/vessel 단계(갭분석가·실무 결정).** GS G-2 하이브리드 권고(정형=옵션화·캐스케이드 동반=별 상품) 동형 적용 가능.
+
+## T-5. PRT_WHT/PRT_MAG 특수인쇄의 버킷 — 공정#2 (별색=공정 경계) [facet → T-E]
+
+- **판정:** **공정 축(#2) facet (distinct 거부).** PRT_WHT(화이트언더베이스)=공정(별색 family·화이트 후공정). PRT_MAG(메탈릭/마그넷 인쇄)=공정(특수인쇄). 박(TPTKFOI FOI)=공정 확정.
+- **근거:** round-22 경계규칙 "별색=공정·잉크색≠자재·UV=공정param"(메모리 `dbmap-axis-staged-load-round22`). PRT_WHT를 도수(별색)나 자재(백색잉크)로 오적재 금지 — entity-semantic #2 "별색=공정 PROC_000007 family". reverse T-5 대조 요청 = 경계규칙으로 해소.
+- **메타모델 해소:** ✅ 공정#2 귀속 확정(도메인 경계규칙). 검증 불요(도메인 사실).
+
+## T-6. STA_CLD 쫄대(달력 봉)의 자재/공정 이중성 — 공정#2 + 자재#1 bundle [facet]
+
+- **판정:** **공정 축(#2 제본) + 자재 축(#1 봉/쫄대 consumes) bundle facet (distinct 거부).** 효도달력 STA_CLD "쫄대" = 중철 제본(공정) + 쫄대(금속/플라스틱 봉=자재 consumes). GS 제본(링=자재+꿰기=공정) bundle과 동형 — "옵션=자재+공정 BUNDLE" 케이스 추가.
+- **근거:** reverse T-6·§3. 메모리 `dbmap-option-material-process-bundle`(아일렛=금속링 자재+타공 공정) 동형. 메타모델 #2 "공정의 자재소비(SUB_MTRL_YN/consumes FK)" + #1 usage가 이미 담음.
+- **메타모델 해소:** ✅ 기존 자재공정 bundle(D-2·#1/#2)로 흡수. 신축 불요.
+
+## T-7. 페이지 계층(INN_PAGE)이 옵션인가 차원인가 — 수량모델#10 슬롯 + 제약#5 [facet → T-C]
+
+- **판정:** **수량모델(#10) 다중슬롯 + 제약(#5 min/max/step) facet (distinct 거부).** INN_PAGE(2~200·STEP1)=캘린더 월수·북 대수 "내지 페이지수" 수량성 슬롯(ORD_CNT/PRN_CNT/bundle_qty와 나란함). 값 범위=제약#5.
+- **근거:** reverse T-7·§0.4. seed §3 책자 "내지장수(2~130)" + bridge `num_page/max_page/min_page/unit_page`(에디터 공통 파라미터) = 후니/RP 모두 페이지수=수량성 입력. 수량모델이 이미 다중슬롯 축(D-5)이므로 신축 불요.
+- **메타모델 해소:** 🟡 부분 — 수량모델#10 슬롯 귀속 확정. **INN_PAGE↔가격 결합방식(TPCLECO tiered_price와 페이지수 관계)은 unobserved → 검증 필요분: gap/validation 단계(가격 트랙).**
+
+---
+
+## TP 판정 요약표
+
+| Fragment | 1차 귀속 축 | 판정 | distinct/facet | 등재 | 검증 라우팅 |
+|---|---|---|---|---|---|
+| T-1 에디터 채널 그릇 | **디자인 입력 채널** | 본체와 직교·가격0·비-TP 트윈 | **distinct** ★ | D-11/#16 | 후니 그릇 유무 → gap/vessel |
+| T-2 템플릿 자산 정체 | D-11 facet + 템플릿#4 이중의미 | 에디터 종속 리소스·#4와 다른의미 | **facet(거부)** ★ | T-A | 자산 카탈로그 → validation |
+| T-3 넘버링/미싱 공정 | 공정#2 (+VDP) | 절취=공정·순차=VDP/공정 | facet(거부) | T-E | 넘버링 규칙 → gap/validation |
+| T-4 "디자인 X" 모델링 단위 | (메타모델 판정 아님) | 후니 카탈로그 정책 | 정책결정 | T-4 | 분리vs옵션화 → gap/실무 |
+| T-5 PRT_WHT/PRT_MAG | 공정#2 | 별색=공정 경계 | facet(거부) | T-E | (도메인사실·검증불요) |
+| T-6 STA_CLD 쫄대 | 공정#2+자재#1 bundle | 제본+봉 consumes | facet(거부) | #1·#2 | (해소·검증불요) |
+| T-7 INN_PAGE 페이지계층 | 수량#10 + 제약#5 | 수량성 슬롯+범위 | facet(거부) | T-C | INN_PAGE↔가격 → gap/validation |
+
+**TP 강제 분류 회피(SKILL §3·§5):** distinct 승급 = **D-11 디자인 입력 채널 1종**(비-TP 트윈 직접 대조 + huni-widget RedEditorSDK 계약 권위). T-2~T-7은 양면 트레이드오프(특히 T-2 템플릿 자산) 펼친 뒤 facet 강등/정책 라우팅. 단일 카테고리 전용 축 신설 0건. ★T-1=가장 강한 vessel-gap distinct, T-2=템플릿 이중의미 [HARD] 분리, T-4=메타모델 판정 거부하고 후니 정책으로 라우팅(침묵 선택 회피).
+**검증 라우팅 요약:** 메타모델 해소 ✅ = T-1(축정초)·T-4(양쪽표현)·T-5·T-6 / 부분 🟡 = T-2·T-3·T-7(unobserved 잔존 → gap/validation). 라이브/엑셀 검증 필요분 = 후니 입력채널 그릇 유무(T-1)·템플릿 자산 카탈로그·VDP 스키마(T-2)·넘버링 규칙(T-3)·INN_PAGE 가격결합(T-7).

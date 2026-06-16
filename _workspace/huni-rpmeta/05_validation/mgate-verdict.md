@@ -378,3 +378,210 @@
 - 결함 라우팅 = `_defects.md` D-3. NO-GO 0 — 재게이트 불요. GS 전 단계 GO 비준.
 - BN verdict 보존. 라이브 재실측 세션 권위(2026-06-17·psql 직접 SELECT).
 - 핵심 직답: **본체소재=vessel-gap(분해축)+data 양면** · **#15=신규 그릇 0 정당(semi_role_cd 28행 실재)** · **MAT_TYPE.09/.10=오라벨 확정·112 비자재·교정은 84상품 load-bearing으로 목적지 선행 필수.**
+
+---
+---
+
+# ═══ TP(디자인템플릿) 확장 검증 (v3.0) ═══
+
+> rpm-validator. TP 확장분(categories/TP/reverse·02_metamodel 16축 v3.0 #16/D-11·T-A~T-E·03_gap §VIII~X·04_vessel V-10/V-11·11_ddl_proposals 2종) 독립 재검.
+> **BN/GS verdict(위)는 보존** — TP 섹션만 추가. 생성자 주장 비신뢰: s6 캡처 직접 재파싱(M1) + 라이브 information_schema 직접 재실측(M4·M5) + 양 DDL BEGIN..ROLLBACK DRY-RUN 재실증.
+> 재실측 세션: 2026-06-17, 라이브 Railway `railway` DB 읽기전용 SELECT(`SET default_transaction_read_only=on`·쓰기/COMMIT 0·비밀값 비노출). RedPrinting POST 0.
+
+## TP 종합 판정
+
+| 게이트 | 대상 | 판정 | 근거 요약 |
+|---|---|:---:|---|
+| **M1** | TP 추출 충실성 | **GO** | s6 캡처(TPCLWLB/TPCLECO/HLCLSTD/HLCLWAL/GSCLMGN) 직접 재파싱: item_gbn·에디터 플래그·price_gbn·PCS PRICE 전 load-bearing 원자 일치. ★TPCLWLB PRICE=11900(PRT_DFT 인쇄단면)·에디터/제본/포장 PCS=0 / HLCLSTD twin offset2023·koi=N·tmpl=N·pdf=Y 직접 확인. `unobserved` 정직(Vue client-render 정직 기록). 날조 0. |
+| **M2** | 메타모델 정합 (16축 v3.0) | **GO** | #16 D-11이 캡처 증거+비-TP 트윈 대조로 도출·BN/GS/TP 3군 견딤·오버피팅 거부(T-A~T-E facet)·템플릿#4↔#16 이중의미 분리 일관·도메인 경계 정합. |
+| **M3** | 발굴축 타당성 (#16 distinct + facet 5) | **GO** | D-11 distinctness 재검 통과(★캡처 cross-tab으로 채널⊥가격/print-method·editor_yn 환원불가 독립 입증). T-A~T-E facet 강등 정당(특히 T-A 이중의미). 과승격/과강등 0. |
+| **M4** | TP 갭 판정 정확 | **GO** | #16 vessel-gap 라이브 직접 확정: t_prd_products=editor_yn/file_upload_yn/semi_role_cd만·item_gbn/channel/resource/vdp 컬럼 **전역 0건**·base_code 16그룹에 에디터 채널 enum 0·분포 Y/Y104·Y/N3·N/Y91·N/N49(editor_yn=Y 107). templates 12=봉투 완제SKU·page_rules 11 존재. 전 핵심 행수 일치. |
+| **M5** | TP 그릇 건전성 (V-10·V-11) | **GO** | search-before-mint 라이브 입증(2-불리언 환원 한계·채널 1:1→컬럼·시안 1:N→테이블). ★양 DDL BEGIN..ROLLBACK DRY-RUN: INSERT 11코드행+ALTER 8+백필 UPDATE 107+CREATE 2 전부 무오류·**0 leaked**·mint 타깃 부재 확인. FK/reg_dt 트랩 준수. |
+| **M6** | 생성-검증 독립성 | **GO** | self-approve 0. M1 캡처 python 재파싱·M4/M5 psql 라이브 재측·DRY-RUN을 *직접* 재생산(생성자 숫자 echo 아님). dodge-hunt 4건 전부 깨기 실패. |
+
+**TP 전체: GO.** NO-GO 0·차단 0. 결함 = Low 2건(D-4 ORD_CNT=13 표기·D-5 proc 96/97·templates 테스트행). `_defects.md` 라우팅.
+
+---
+
+## TP M1 — 추출 충실성 (after categories/TP/reverse) → **GO** ★캡처 직접 재대조
+
+`categories/TP/reverse.md`의 load-bearing 주장 2건을 인용 캡처(`huni-widget/01_reverse/s3_raw_captures/s6_cal_*.json`)에 직접 재파싱 대조.
+
+### ① ★TPCLSTD vs HLCLSTD 직접 대조(에디터 플래그 차이·자재/가격 동일) — reverse §0.1·:41~47
+TPCLSTD 자체는 client-render(빈응답)이나, 주장 = "자매 TPCL* 실측 + HLCLSTD 비-TP 트윈 대조". 캡처 직접 재파싱(`product_option.option` 플래그):
+
+| 캡처 | item_gbn | useKoiEditor | useTemplateDownload | usePDF | price_gbn | reverse 주장 일치 |
+|---|---|:--:|:--:|:--:|---|:--:|
+| **TPCLWLB**(TP) | `vDigital_item` | **Y** | **Y** | N | vTmpl_price | ✅ (:41) |
+| **TPCLECO**(TP) | `vDigital_item` | **Y** | **Y** | **Y** | tiered_price | ✅ (:42) |
+| **HLCLSTD**(비-TP 트윈) | `offset2023_item` | **N** | **N** | **Y** | offset2023_price | ✅ (:46 "에디터0·템플릿0·PDF 전용") |
+| **HLCLWAL**(비-TP) | `offset2023_item` | **N** | **N** | **Y** | offset2023_price | ✅ (:47) |
+| **GSCLMGN**(edicus 참조) | `edicus_item` | **Y** | **Y** | N | tmpl_price | ✅ (:45 "Edicus SDK 채널") |
+
+→ "같은 캘린더가 TP면 KOI+템플릿(useKoiEditor=Y·useTemplateDownload=Y), 비-TP(HL)면 offset2023·에디터0·PDF전용" = **캡처로 직접 입증**. TPCLSTD 구조의 자매-실측 확정 정당(직접관측 unobserved 정직).
+
+### ② ★TPCLWLB PRICE=11900·에디터/제본 PCS=0 — reverse §3·:162~164
+TPCLWLB priceCall 직접 재파싱(`s6_cal_TPCLWLB.json` priceCalls[0]):
+
+| PCS 라인 | PCS_COD | PCS_NME | PRICE | reverse 주장 일치 |
+|---|---|---|---:|:--:|
+| result[0] | CUT_DFT | 재단 | **0** | ✅ (CUT_DFT 0) |
+| result[1] | STA_CLD | 효도달력 쫄대 | **0** | ✅ (STA_CLD 0) |
+| result[2] | PAK_POL | 달력 개별포장 | **0** | ✅ (PAK_POL 0) |
+| result[3] | **PRT_DFT** | **인쇄단면** | **11900** | ✅ (PRT_DFT 인쇄=가격 주체) |
+| result_sum | — | — | **11900** | ✅ (PRICE=11900) |
+
+→ reverse §3 "가격 주체 = PRT_DFT(인쇄)·템플릿/에디터는 가격 0" = **field-for-field 입증**. 디자인 입력(제본 쫄대·재단·포장) PCS 라인 전부 0, 인쇄단면만 11900. D-11 "입력채널 가격 0" 핵심 증거 캡처로 확정.
+
+### ③ `unobserved` 정직성 (M1 핵심 — 미관측을 fact 위장했나)
+- reverse가 TPBCDFT·TPCLSTD·TPCLHOL·디자인X 군을 `[live:SSR] partial`/`unobserved`로 정직 표기(:44·:131·§4 catalog unobs). 신규 Vue client-render·BFF 익명불가를 명시(:248~262). `koi_template_resource_id` 캡처값=**None/빈**(비로그인·미선택)임을 캡처 재파싱으로 확인 → reverse "관측분 null/빈배열"(:60·:256) 정직.
+- catalog pdtCode·상품명은 `redprinting_catalog.json` 실재(reverse 출처규칙 :13). 미관측을 사실로 위장한 사례 0.
+
+### dodge-hunt(M1 최고위험): "ORD_CNT=13" 가 캡처에 실재하나
+- reverse :163이 "(개당단가, ORD_CNT=13)"로 표기. 캡처 priceCall PRICE_LOG 재파싱 = "개당단가:11900.00원, 인쇄수량:1, 주문건수:**1**" — **ORD_CNT(주문건수)=1**, 13 아님.
+- 판정: **날조 아님·Low 표기 결함** — PRICE=11900·PRT_DFT 주체(load-bearing)는 정확. "ORD_CNT=13"은 비-load-bearing 보조 주석(다른 수량 상태 혼입 또는 효도달력 13면 페이지를 ORD_CNT로 오기). 가격 구조 주장 무영향. → `_defects.md` D-4(Low).
+
+**TP M1 = GO.** load-bearing 원자(item_gbn·에디터플래그·price_gbn·PCS PRICE) 캡처 전수 일치, twin 대조·가격0 직접 입증, unobserved 정직. 날조 0.
+
+---
+
+## TP M2 — 메타모델 정합 (16축 v3.0) → **GO**
+
+### #16 도출성 + 오버피팅 검사
+- **#16 디자인 입력 채널 도출:** 캡처(item_gbn 3분기·비-TP 트윈 본체동일·가격0)에서 직접 도출(M1 ②③ 입증). 7버킷 어디에도 안 들어감 — 옵션#3(본체속성)·공정#2(본체작업)·템플릿#4(완제번들)와 직교. 단일상품 아님(비-TP 트윈 대조 + GS edicus_item·BN PDF 전 카테고리 채널값 보유).
+- **오버피팅 능동 거부:** TP 신패턴 6종 중 distinct는 #16 1종만, 나머지 5종(T-A 템플릿자산·T-B VDP·T-C 페이지계층·T-D 형태variant·T-E 특수인쇄)은 facet 강등(`discovered-axes.md:299` "TP 통합 과잉일반화 거부 기록"). 단일 카테고리 전용 축 신설 0.
+
+### 템플릿#4↔#16 이중의미 분리 일관성 (★directive)
+- 사전 #4(:108~109)·#16(:253)이 `Template`(완제SKU·`t_prd_templates`) vs `TemplateAsset`(에디터 디자인 시안·가격0·#16 종속)를 **별 엔티티로 분리** 명시. metamodel 핵심명제 #16(:293) [HARD] 일관. 라이브 `t_prd_templates`=봉투 완제SKU(M4 확인)이라 분리 정당.
+
+### ERD ↔ 사전 정합 + 도메인 경계
+- DesignInputChannel→Product(classifies)·→TemplateAsset(provides)·→QuantitySlot(gates ord_cnt)·↔PrintMethod(상관 아님 결정)·⊥본체옵션(직교) 관계가 사전 §16과 무모순. 도메인 경계 [HARD]: 입력채널≠인쇄방식(#12)·TemplateAsset≠템플릿#4·PRT_WHT=공정(T-E) 라이브 정합(별색=공정 BN/GS verdict 확증분 유지).
+
+**TP M2 = GO.** #16 도출·오버피팅 거부·이중의미 분리 일관·ERD/도메인 경계 정합.
+
+---
+
+## TP M3 — 발굴축 타당성 (#16 distinct + facet T-A~T-E) → **GO** ★캡처 cross-tab 재검
+
+### distinctness 재검 (`discovered-axes.md` D-11)
+★캡처 cross-tab 직접 재측(s6 5캡처 item_gbn×price_gbn×useKoiEditor):
+
+| 검정 | 캡처 증거 | 결론 |
+|---|---|---|
+| 채널 = 가격/print-method facet 인가? | 같은 `vDigital_item`(TPCLWLB·TPCLECO)이 **다른** price_gbn(vTmpl vs tiered) | ❌ facet 아님 — 채널이 가격/방식에 종속 안 됨(#12와 별 축) |
+| editor_yn 불리언이 채널 인코딩? | useKoiEditor=Y가 `vDigital_item`(TPCLWLB)·`edicus_item`(GSCLMGN) **양쪽** | ❌ 불가 — Y가 KOI·Edicus 평면화(채널 의미축 drop) |
+| 본체와 직교? | HLCLSTD/HLCLWAL(offset2023·editor0·PDF) vs TPCL*(KOI·템플릿) 본체동일 | ✅ 직교(M1① twin) |
+
+→ **D-11 distinct 판정에 동의.** 7버킷·기존 8축(BN)·GS 2축과 직교(본체옵션 외부·게이팅 lifecycle 보유). facet 위장 아님 — 캡처 cross-tab으로 채널⊥가격·editor_yn 환원불가 독립 입증.
+
+### facet 강등 정당성 (과승격/과강등 검사 — M3 핵심)
+| facet | 정체 | 강등 판정 | 재검 |
+|---|---|:--:|:--:|
+| **T-A** 템플릿 자산 | 에디터 디자인 시안(가격0) | D-11 리소스 facet + #4 이중의미 분리 | ✅ 정당 — 독립 lifecycle 없음(채널 없으면 0)→D-11 종속. 단 #4와 별 엔티티(이중의미 [HARD]). 침묵선택 거부·양면 트레이드오프 명시. |
+| **T-B** VDP | 가변데이터 | D-11 데이터바인딩 facet × 수량#10 | ✅ 정당 — 에디터 능력·변수행수=수량모델. 미관측→검증 라우팅 정직. |
+| **T-C** 페이지계층 INN_PAGE | 캘린더 월수·북 대수 | 수량#10 슬롯 + 제약#5 | ✅ 정당 — page_rules 기존 그릇(라이브 11행 확인 M4). 신축 불요. |
+| **T-D** 형태variant(M/I/보딩) | 티켓/캘린더 형태 | 사이즈#13 + 칼틀공정#2 | ✅ 정당 — GS THO_CUT 동형. 형태=프리셋/칼틀 enum·고유 lifecycle 없음. |
+| **T-E** 특수인쇄(PRT_WHT/박/미싱) | 화이트·메탈릭·박·절취 | 공정#2 (+넘버링=VDP) | ✅ 정당 — 별색=공정 경계(round-22)·화이트 PROC_000008 라이브 보유. |
+
+### dodge-hunt(M3 최고위험): T-A 템플릿 자산이 distinct 인데 facet 강등한 건 아닌가(과강등)
+- reverse T-2가 "1순위 분리 필요" 제기 → 신축 후보였음. 그러나 facet 강등.
+- 판정: **과강등 아님** — TemplateAsset은 `useKoiEditor=N`이면 0(독립 lifecycle 없음·D-11 종속). 신축 시 D-11과 1:1 종속 축 2개로 분열(중복). 단 "facet=무시"가 아니라 **#4와 별 엔티티 분리 + V-11 신규 테이블 그릇**으로 1급 보존 → 강등이되 그릇은 mint. 의미축 drop 0. **깨기 실패(정당).**
+
+**TP M3 = GO.** #16 distinct 재검 통과(캡처 cross-tab)·T-A~T-E facet 강등 정당·과승격/과강등 0·미관측 정직 라우팅.
+
+---
+
+## TP M4 — 갭 판정 정확 (after 03_gap §VIII~X) → **GO** ★핵심 라이브 재실측
+
+### ① #16 디자인 입력 채널 = GAP(vessel-gap) 라이브 직접 확정 (directive 핵심 질의)
+라이브 information_schema 직접 SELECT(2026-06-17·`SET default_transaction_read_only=on`):
+
+| gap-matrix VIII-0 주장 | 검증자 라이브 재실측 | 일치 |
+|---|---|:--:|
+| t_prd_products 디자인입력 컬럼 = editor_yn·file_upload_yn 불리언만 | 매치 컬럼 = **editor_yn·file_upload_yn·semi_role_cd만**·item_gbn/design_input_channel_cd/editor_kind_cd/koi_template_resource_id/vdp_yn/ord_cnt_source_cd **전부 부재** | ✅ |
+| 에디터/채널/리소스/VDP 컬럼 전역 0건 | 전역 정규식(`editor|koi|edicus|vdp|item_gbn|channel|resource|asset|variable|design_input`) = **`t_prd_products.editor_yn` 1건만** | ✅ |
+| base_code 16그룹에 에디터 채널 enum 부재 | 부모 그룹 16종(CUS_GRADE…USAGE) = **EDITOR_KIND/DESIGN_INPUT_CHANNEL/ITEM_GBN 없음** | ✅ |
+| editor_yn×file_upload_yn 분포 Y/Y104·Y/N3·N/Y91·N/N49 | **Y/Y=104·Y/N=3·N/Y=91·N/N=49**·editor_yn=Y **107** | ✅ (정확 일치) |
+
+→ **#16 = GAP(vessel-gap·후니 그릇 부재) 독립 확정.** RP item_gbn 3분기·에디터종류·리소스ID·VDP를 담을 컬럼·테이블·enum 전무. dbmap 미터치 신규 갭(자재/가격/CPQ 축과 비충돌) 확인. ★directive 핵심 질의 직답 = **GAP 정확**.
+
+### ② TP facet 그릇 판정 (§IX)
+| facet | gap 판정 | 검증자 라이브 재측 | 일치 |
+|---|---|---|:--:|
+| T-A 템플릿 자산 | WEAK(부재+`t_prd_templates` 오염위험) | t_prd_templates 12행=봉투(700x200)/OPP봉투/카드봉투 **완제SKU**(+테스트3) — 디자인 시안 아님·TemplateAsset 전용 그릇 부재 | ✅ |
+| T-B VDP | GAP(#16 종속) | 가변데이터 컬럼 0건(전역 검색) | ✅ |
+| T-C 페이지계층 | PASS(부분) | `t_prd_product_page_rules` 존재·**11행** | ✅ |
+| T-D 형태variant | WEAK | 사이즈/공정 기존 축(BN/GS 판정 유지) | ✅ |
+| T-E 특수인쇄 | PASS | 화이트=PROC_000008 등 공정 보유(GS verdict M2 확증분) | ✅ |
+
+### 핵심 행수 재실측 (gap §0/VIII 주장 독립 확인)
+option_groups **134**·option_items **469**·constraints **10**·template_selections **14**·templates **12**·price_formulas **17**·component_prices **3,416**·mat_materials **340**·base_codes **84** = gap 표기와 **전수 일치**. 날조 행수 0.
+
+### dodge-hunt(M4 최고위험): #16 GAP이 "editor_yn 있으니 사실 표현 가능"을 과장한 GAP 아닌가
+- 반대 검정: editor_yn(Y/N)이 채널 3분기를 환원하나? → 분포 Y/Y=104 셀에 KOI(vDigital)·Edicus가 *섞임*(M1① GSCLMGN edicus_item도 useKoiEditor=Y) → 2-불리언이 채널 못 분해. editor_yn=Y는 *에디터 사용 여부*만·*어느 에디터/리소스/VDP*는 0정보. GAP 판정이 과장 아닌 정확(표현력 부재 실재). **깨기 실패.**
+
+**TP M4 = GO.** #16 vessel-gap 양면 직접 확정·facet 그릇 판정 일치·핵심 행수 전수 일치·dbmap 비충돌. directive 핵심 질의 = GAP 정확.
+
+---
+
+## TP M5 — 그릇 건전성 (V-10·V-11) → **GO** ★양 DDL DRY-RUN 재실증
+
+### search-before-mint 라이브 입증
+| vessel | 주장 | 검증자 라이브 재실측 | 판정 |
+|---|---|---|:--:|
+| **V-10 채널** | editor_yn+file_upload_yn 2-불리언이 5 의미축 환원 불가(GAP) | 컬럼/enum/테이블 전역 0건·Y/Y셀 채널 충돌 확인(M4①) | ✅ GAP 실재·그릇 필요 |
+| **V-10 사다리** | 채널=상품 1:1→컬럼에서 멈춤·테이블 mint 거부 | 채널은 prd당 1값(메타모델 §16) → 컬럼 정규 슬롯·테이블 over-modeling | ✅ 컬럼 정당·테이블 거부 옳음 |
+| **V-11 시안** | 시안=상품 1:N·독립 lifecycle·가격0→테이블만 무손실 | t_prd_template_assets·t_prd_product_template_assets **둘 다 부재**(신규 mint·중복 아님) | ✅ 신규 테이블 mint 정당 |
+| **이중의미 분리** | TemplateAsset≠`t_prd_templates`(완제SKU 흡수 금지) | t_prd_templates=봉투 완제SKU 확인 → 디자인 시안 적재 시 오염 실재 | ✅ 물리 분리 정당 |
+| **FK/reg_dt 트랩** | base_codes.cod_cd FK·reg_dt NOT NULL 명시 | base_codes PK=cod_cd·reg_dt NOT NULL·products PK=prd_cd 확인 | ✅ |
+
+### ★양 DDL BEGIN..ROLLBACK DRY-RUN 재실증 (직접 실행·롤백 강제·COMMIT 0)
+검증자가 양 DDL(`ddl-proposal-design-input-channel.sql`·`ddl-proposal-template-asset.sql`)을 단일 트랜잭션으로 라이브 실행 후 **강제 ROLLBACK**(ON_ERROR_STOP=1):
+- `INSERT 0 11`(코드행 3그룹 11행) → 무오류
+- `ALTER TABLE` ×8(ADD COLUMN ×4 + CHECK ×1 + FK ×3) → 무오류
+- 백필 `UPDATE 107`(editor_yn='Y'⇒channel∈{.01,.03}) → **107 = editor_yn=Y 분포와 정확 일치**(정합 규칙 적용 검증)
+- `CREATE TABLE` ×2(template_assets 마스터+링크·FK 3) → 무오류
+- `ROLLBACK` → **post-rollback leak 검사: assets_leaked=f·channel_col_leaked=f·code_leaked=f** = **0 leaked·COMMIT 0**
+
+→ 양 DDL 구문 유효·FK 무결성·reg_dt 트랩 준수·롤백 무위험 **직접 실증**. roadmap "0 leaked" 주장 독립 재현.
+
+### "신규 그릇 불요" facet 흡수 정당성 (§4-TP)
+- VDP=vdp_yn 게이트(본문 보류 open)·페이지=page_rules 기존(11행 확인)·형태=사이즈/공정 기존·특수인쇄=공정(PROC_000008) 기존 — 전부 라이브 그릇 실재로 흡수 정당. 신규 0.
+
+### dodge-hunt(M5 최고위험): V-11 신규 테이블 2가 over-modeling 아닌가
+- 검정: 시안을 `t_prd_products.template_resource_id` 컬럼 1개로 못 담나? → 시안=상품당 N개(갤러리)·1:1 컬럼 가정 붕괴. jsonb 배열? → 개별 resource_id 조인/FK 무결성 상실. `t_prd_templates` 흡수? → 봉투 완제SKU와 이중의미 오염(라이브 확인). **1:N·독립 lifecycle·이중의미** 3조건이 컬럼/jsonb/기존테이블 전부 배제 → 테이블만 무손실. over-modeling 아닌 정확 사다리(4단 도달). 채널(V-10)은 1:1이라 컬럼에서 멈춤(테이블 0) — 대조가 사다리 규율 입증. **깨기 실패.**
+
+**TP M5 = GO.** search-before-mint 라이브 입증·양 DDL DRY-RUN 0 leaked·신규 테이블 2(V-11) 정당·V-10 테이블 0 정당·컨벤션/FK/reg_dt 정합.
+
+---
+
+## TP M6 — 생성-검증 독립성 → **GO**
+
+- **self-approve 0:** TP 각 단계(reverse→metamodel→gap→vessel) 산출이 다음 입력일 뿐·자기 게이트 0. 본 검증은 별 레인(rpm-validator)이 캡처·라이브·DRY-RUN을 *직접* 재측정.
+- **echo 아닌 재유도:** M1(s6 5캡처 python 재파싱·item_gbn/플래그/PCS PRICE 재추출)·M4(psql 컬럼/enum/분포 라이브 재측)·M5(양 DDL BEGIN..ROLLBACK 직접 실행·UPDATE 107 재현·leak 검사) — 생성자 숫자 받아쓰기 0. editor 분포·16 base그룹·12 templates·11 page_rules·mint 타깃 부재 전부 독립 재측정.
+- **dodge-hunt 4건**(M1 ORD_CNT=13·M3 T-A 과강등·M4 #16 GAP 과장·M5 V-11 over-modeling) 전부 깨기 시도 → 전부 실패(주장 견고) 또는 Low 결함 격하.
+- **★독립성 입증:** 검증자 캡처 cross-tab(item_gbn×price_gbn)이 D-11 distinct를 *생성자 트윈 논증과 다른 각도*(가격 독립성)로 재확인 — 받아쓰기 아닌 재유도.
+
+**TP M6 = GO.**
+
+---
+
+## TP 재실측으로 확인/반증한 핵심 주장
+
+**확인(CONFIRMED):**
+1. **#16 디자인 입력 채널 = vessel-gap(GAP)** — t_prd_products=editor_yn/file_upload_yn만·item_gbn/channel/resource/vdp 컬럼 전역 0건·base_code 16그룹에 에디터 enum 0·분포 Y/Y104·Y/N3·N/Y91·N/N49(editor_yn=Y 107). directive 핵심 질의 직답.
+2. **비-TP 트윈 대조** — TPCLWLB/TPCLECO(vDigital·KOI·템플릿) vs HLCLSTD/HLCLWAL(offset2023·에디터0·PDF) 캡처 직접 확인. 본체 동일·입력채널만 차이.
+3. **TPCLWLB PRICE=11900** — PRT_DFT 인쇄단면 주체·CUT_DFT/STA_CLD/PAK_POL PCS=0 field-for-field 확인(입력채널 가격0).
+4. **D-11 distinct(캡처 cross-tab)** — 채널⊥가격/print-method(같은 vDigital이 vTmpl/tiered)·editor_yn 불리언 채널 환원불가(KOI/Edicus 평면화) 독립 입증.
+5. **templates 12=봉투 완제SKU**(이중의미 분리 정당)·page_rules 11 존재(T-C PASS)·V-11 mint 타깃 부재.
+6. **양 DDL DRY-RUN 0 leaked** — INSERT11+ALTER8+UPDATE107+CREATE2 무오류·ROLLBACK·leak 0·COMMIT 0.
+
+**반증/하향(없음·결함만):**
+- 어떤 TP PASS/WEAK/GAP/vessel 판정도 반증 안 됨. 결함 = Low 2건(D-4 ORD_CNT=13 표기·D-5 proc 96/97·templates 테스트행 미언급) — 판정 무영향.
+
+---
+
+## TP 인계
+- 결함 라우팅 = `_defects.md` D-4·D-5. NO-GO 0 — 재게이트 불요. TP 전 단계 GO 비준.
+- BN/GS verdict 보존. 라이브 재실측 세션 권위(2026-06-17·psql 직접 SELECT·BEGIN..ROLLBACK DRY-RUN).
+- **TP 핵심 직답:** #16 디자인 입력 채널 = **GAP(vessel-gap)** 라이브 확정(editor_yn 불리언만·채널/리소스/VDP 그릇 전무·dbmap 미터치 신규) · D-11 = **진짜 distinct**(캡처 cross-tab 동의) · V-10(컬럼·채널1:1)/V-11(테이블·시안1:N 이중의미) 사다리 정확·DRY-RUN 0 leaked.

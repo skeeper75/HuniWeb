@@ -7,7 +7,8 @@
 >
 > **── 버전 ──**
 > - **v1.0 (BN):** V-1~V-7 (BN 13축 vessel-gap). **보존.**
-> - **v2.0 (GS·현재):** + V-3 **굿즈 분해축 확장**(본체색/용량/두께) + **V-8 본체형태가공(#14 GAP)** + **V-9 생산형태 governing(#15 WEAK)**. GS 라이브 실측(2026-06-17)이 V-4 min-max·④template_prices·⑬nonspec을 **완화**(아래 정정 노트).
+> - **v2.0 (GS):** + V-3 **굿즈 분해축 확장**(본체색/용량/두께) + **V-8 본체형태가공(#14 GAP)** + **V-9 생산형태 governing(#15 WEAK)**. GS 라이브 실측(2026-06-17)이 V-4 min-max·④template_prices·⑬nonspec을 **완화**(아래 정정 노트).
+> - **v3.0 (TP·현재):** + **V-10 디자인 입력 채널 그릇(#16 GAP·★P1 최우선·directive 핵심)** + V-10 종속 **TemplateAsset 분리**(T-A 이중의미)·**VDP 변수 스키마**(T-B). TP 신규 vessel-gap = V-10 1건(BN/GS 항목 불변·보존).
 
 ---
 
@@ -18,6 +19,19 @@ leverage = (① unblock 상품 수) × (② 횡단성: 몇 축을 푸는가) × 
 ---
 
 ## P1 — 최우선 (표현력 0 + 횡단 게이팅)
+
+### V-10. ★디자인 입력 채널 그릇 (#16 GAP) — leverage ★★★ (directive 1순위·TP 본질·dbmap 미터치 신규)
+
+- **무엇:** 상품의 디자인을 *어떻게 입력받나*(에디터 채널 + 입력방식)를 담는 축. RP `DesignInputChannel`(channel=item_gbn[KOI/Edicus/PDF]·use_koi/rp_editor·use_template_download·use_pdf·ord_cnt_source·vdp_capable) + 종속 `TemplateAsset`(에디터 디자인 시안·가격0)·VDP 변수 스키마.
+- **왜 필요:** **라이브 information_schema 실측(2026-06-17)**: `t_prd_products`에 디자인 입력 신호 = **`editor_yn`·`file_upload_yn` 불리언 2개뿐.** RP `item_gbn`(3분기)·에디터 종류(KOI vs Edicus vs RP)·`koi_template_resource_id`(템플릿 리소스)·VDP 변수 스키마·디자인수 산정 출처에 대응할 **컬럼·테이블·base_code enum 전무**(전역 검색 0건·16그룹에 에디터 채널 enum 없음). 후니=Edicus를 huni-widget RedEditorSDK *코드 계약*으로만 보유, **DB 그릇 미정(T-1 가설) 라이브 확정.** 그릇 없으면: ① 한 상품이 어느 에디터로 디자인 입력하는지 DB로 표현 불가(앱 하드코딩) ② 에디터 기성 템플릿 시안 카탈로그 미관리(런타임 SDK만) ③ 디자인수(ORD_CNT) 산정 출처(PDF/에디터)가 수량모델#10에 연결 안 됨 ④ VDP(명함·상장 가변데이터) 그릇 부재.
+- **unblock:** TP 23상품(디자인명함·티켓·캘린더·북·평면지류) + 전 카테고리 editor_yn=Y **107상품**(에디터 사용). huni-widget 컨버전(Edicus 어댑터)이 DB 입력채널 메타에 의존 → 위젯-DB 경계 1급. MES 생산팀 라우팅(에디터 채널별 입력물 처리)에도 연결.
+- **사다리 후보(designer 판정):**
+  - ① **base_code enum 신설** — `EDITOR_CHANNEL`(또는 `DESIGN_INPUT`) 그룹(KOI/Edicus/RP/PDF·offset) = 코드행 사다리 최저단(채널 타입 분류).
+  - ② **`t_prd_products` 컬럼 추가** — `design_input_channel_cd`(→ ①enum)·`template_resource_id`(에디터 리소스 포인터)·`ord_cnt_source`(PDF/에디터)·`vdp_yn`. 현 `editor_yn` 불리언 *대체/보강*(search-before-mint: editor_yn+file_upload_yn 조합으로 channel 일부 환원 가능한지 — Y/Y vs N/Y vs Y/N 4분포가 KOI/PDF/Edicus 환원에 부족함을 designer가 증명).
+  - ③ **TemplateAsset 별 테이블**(T-A 종속) — 에디터 디자인 시안 카탈로그(template_resource_id·asset_options·price=0·channel FK). **★`t_prd_templates`(완제SKU·봉투)와 별 엔티티**(이중의미 분리·아래 V-11).
+  - ④ **VDP 변수 스키마**(T-B 종속) — 가변데이터 필드 정의(명함 이름/직함). 미관측(`koiOption[]` 빈배열·로그인 에디터 필요) → 검증 후 designer 판정.
+- **dbmap 라우팅:** **dbmap 미터치(신규 vessel-gap·중복/충돌 없음).** huni-widget `seed-redprinting-sdk-analysis.md`(RedEditorSDK 45메서드)·`editor-bridge-protocol.md`(cmd create-design-project·editor_type/run_mode)가 코드 계약 권위 → designer가 DB 그릇 설계·`dbm-ddl-proposer`. **huni-widget 컨버전 전략과 정합 필수**(어댑터가 읽을 입력채널 메타).
+- **[HARD] directive 1순위:** 본 하네스(RP-Meta)의 TP directive 핵심 = "디자인 입력 채널 vessel-gap 판정". GAP 확정 → V-10이 vessel 설계 **최우선**. 단 designer는 search-before-mint(editor_yn 환원 한계 증명) 선행.
 
 ### V-1. 공정 파라미터 그릇 (#9 GAP) — leverage ★★★
 
@@ -105,6 +119,16 @@ leverage = (① unblock 상품 수) × (② 횡단성: 몇 축을 푸는가) × 
 
 ---
 
+## ═══ TP 신축 vessel (v3.0) ═══
+
+### V-11. TemplateAsset 분리 그릇 (#4↔#16 이중의미·T-A WEAK) — leverage ★★ (V-10 종속·오염 방지)
+
+- **무엇:** 에디터가 로드하는 *디자인 시안 카탈로그*(가격0·런타임 SDK)를 완제SKU 템플릿(#4)과 **별 엔티티**로 분리. RP `TemplateAsset`(template_resource_id·asset_options·channel FK).
+- **왜 필요:** **라이브 실측(2026-06-17)**: `t_prd_templates`(12행)=완제SKU/OTC = `봉투(700x200) 50`·`카드봉투(블랙) 165x115 50장`·`OPP접착봉투` — 봉투류 완제 주문단위(`base_prd_cd`→products·`dflt_qty`). TP "템플릿"(`koi_template_resource_id`=가격0 디자인 리소스)을 **여기 적재하면 의미 오염** — 가격0 디자인 시안을 주문단위 SKU로 오모델(dictionary #4 [HARD] 금지). **★`dbmap-schema-design-intent-first`(카드봉투 색=siz 오매핑) 동형 위험** — 같은 값을 잘못된 t_*에.
+- **unblock:** TP 디자인 시안 보유 상품(디자인명함·캘린더·상장 등)·에디터 채널 운영. `t_prd_templates` 오염 방지(완제SKU 순수성 보존).
+- **사다리 후보(designer 판정):** V-10 ③과 동일 — `TemplateAsset` 별 테이블(template_resource_id·asset_options·price=0·design_input_channel_cd FK→V-10). **`t_prd_templates`에 컬럼 추가로 흡수 금지**(완제SKU↔디자인 시안 이중의미 = 별 엔티티 필수). search-before-mint: 없음(완제SKU 그릇과 의미 명확히 다름).
+- **dbmap 라우팅:** **dbmap 미터치(신규).** dbmap은 `t_prd_templates`를 완제SKU(봉투 OTC)로만 다룸(`cpq-schema §5`) — 디자인 시안 미개념. V-10과 함께 설계(종속).
+
 ## ═══ GS 라이브 실측 정정 노트 (BN vessel-needs 완화) ═══
 
 GS 라이브 실측(2026-06-17)이 BN의 보수적 vessel-gap 일부를 **그릇 발견으로 완화**:
@@ -121,14 +145,17 @@ GS 라이브 실측(2026-06-17)이 BN의 보수적 vessel-gap 일부를 **그릇
 
 ## 정비 로드맵 (leverage + FK 의존 순서)
 
-1. **V-3 자재 분해축 (★GS 최우선)** — 굿즈 본체자재 핵심 결함·B-3 축이동 목적지·오염 광범위(.09 69·.10 43)·텀블러/장패드 용량/두께 분해 의존. 사용자 directive 최우선.
-2. **V-8 본체 형태가공 (GS GAP)** — 파우치 103상품 본체 BOM load-bearing·봉제만 존재. 공정 행 선행.
-3. **V-2 인쇄방식 게이팅**(최상위 게이트·다른 축 선행) — 단 조건부 1급화 판정 먼저.
-4. **V-1 공정 파라미터**(CPQ 옵션 완성 선결·FK load-bearing).
-5. **V-4 제약 논리유형**(코드행 경량·횡단 간선·match/essential 위주로 축소 — nonspec은 상품 컬럼 흡수).
-6. **V-9 생산형태 governing**(주로 data 교정·governing 그릇은 designer 검토).
-7. **V-5 수량**(샘플 확대 후) / **V-6 사이즈 nonspec**(그릇 발견·혼재만 잔존·완화).
-8. **V-7 가격 role**(가격 트랙 위임 권고·최하).
+1. **V-10 디자인 입력 채널 (★TP directive 1순위)** — TP 본질·editor_yn 불리언만·dbmap 미터치 신규 GAP·editor_yn=Y 107상품·huni-widget 컨버전 경계. V-11(TemplateAsset)·VDP 종속. **directive 최우선.** search-before-mint(editor_yn 환원 한계) 선행.
+2. **V-3 자재 분해축 (★GS 최우선)** — 굿즈 본체자재 핵심 결함·B-3 축이동 목적지·오염 광범위(.09 69·.10 43)·텀블러/장패드 용량/두께 분해 의존.
+3. **V-8 본체 형태가공 (GS GAP)** — 파우치 103상품 본체 BOM load-bearing·봉제만 존재. 공정 행 선행.
+4. **V-2 인쇄방식 게이팅**(최상위 게이트·다른 축 선행) — 단 조건부 1급화 판정 먼저.
+5. **V-1 공정 파라미터**(CPQ 옵션 완성 선결·FK load-bearing).
+6. **V-11 TemplateAsset 분리**(V-10 종속·`t_prd_templates` 오염 방지·V-10과 함께 설계).
+7. **V-4 제약 논리유형**(코드행 경량·횡단 간선·match/essential 위주로 축소 — nonspec은 상품 컬럼 흡수).
+8. **V-9 생산형태 governing**(주로 data 교정·governing 그릇은 designer 검토).
+9. **V-5 수량**(샘플 확대 후) / **V-6 사이즈 nonspec**(그릇 발견·혼재만 잔존·완화).
+10. **V-7 가격 role**(가격 트랙 위임 권고·최하).
 
-> [HARD] FK 위상: 자재 분해축(V-3)·인쇄방식(V-2)이 옵션/제약 축의 참조 대상 → 선행. 공정 파라미터(V-1)·형태가공(V-8)은 공정 행 선행. designer는 이 순서로 `_vessel-roadmap.md` 확정.
+> [HARD] FK 위상: **디자인 입력 채널(V-10)이 TemplateAsset(V-11)·VDP의 참조 대상 → 선행**(채널 enum→리소스→VDP). 자재 분해축(V-3)·인쇄방식(V-2)이 옵션/제약 축의 참조 대상 → 선행. 공정 파라미터(V-1)·형태가공(V-8)은 공정 행 선행. designer는 이 순서로 `_vessel-roadmap.md` 확정.
 > ★GS 정정으로 ④template_prices·V-6 nonspec은 vessel-gap에서 **하향**(그릇 발견) — designer는 search-before-mint로 PASS 재확인 권장.
+> ★TP 핵심: V-10이 신규 P1 최상위(directive 1순위). V-10⊥본체옵션(직교)·가격0 → 본체 축 그릇과 독립 설계. V-11은 V-10 종속·완제SKU 분리 명시.

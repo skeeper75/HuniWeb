@@ -1,0 +1,45 @@
+%% TP 상품 구조 BOM — 출처: categories/TP/reverse.md §0~3·§5 + 02_metamodel(#16 D-11)·03_gap §VIII
+%% ★TP BOM 특징 = 본체 인쇄물(동종 비-TP 공유) + 디자인 입력 레이어(에디터 채널 + 템플릿 자산) 직교 추가.
+%% ★가격 주체 = 인쇄/자재/후가공(PRT_DFT 등). 디자인 입력(에디터/템플릿)은 가격 0 (TPCLWLB 실측 PRICE=PRT_DFT 11900).
+flowchart TB
+  ROOT["TP 디자인템플릿 상품 본체\n(인쇄물 substrate · 동종 비-TP와 공유)"]
+
+  %% ════ 본체 자재 (동종 옵셋/디지털 공유 — pdt_mtrl_info) ════
+  ROOT --> MAT["본체 자재 = pdt_mtrl_info\n동종 비-TP(HL/BC) 용지군 공유"]
+  MAT --> M1["용지(평량 variant)\nRXART180·RXSNO180·RXRAU190/210\n(고급지 11종 — TPTKDFT 티켓 실측)"]
+
+  %% ════ usage 슬롯 (캘린더/북 = 다면 페이지 계층) ════
+  ROOT --> USG["usage 슬롯\n캘린더/북 = 페이지 계층(다면)"]
+  USG --> PG["월별/대수 페이지 (INN_PAGE)\nMIN~MAX·STEP1 (TPCLECO 2~200)\n[옵션(페이지) + 제약]"]
+
+  %% ════ 후가공 공정 (동종 공유 + TP 특화) ════
+  ROOT --> PROC["후가공 = pdt_pcs_info"]
+  PROC --> PURE["순수 공정"]
+  PURE --> PRT["PRT_DFT 인쇄 (★가격 주체 [P=11900])"]
+  PURE --> CUT["CUT_DFT 재단 / THO_EXC 칼틀(완칼)"]
+  PURE --> COT["COT_DFT 코팅"]
+  PURE --> SP["특수인쇄 PRT_WHT(화이트)·PRT_MAG·박(TPTKFOI FOI)\n미싱(절취선) — 공정 (T-E)"]
+  PURE --> PKG["PAK_ETC/PAK_POL 포장"]
+  PROC --> BUND["자재+공정 bundle"]
+  BUND --> BIND["제본 RIN_DFT 링 / STA_CLD 중철+쫄대\n(링/쫄대 자재 + 제본 공정)"]
+  BUND --> SUB["SUB_MTR 부자재(티켓 홀더/끈 추정)"]
+
+  %% ════ ★디자인 입력 레이어 (TP 본질 · 본체 BOM과 직교 · 가격 0) ════
+  ROOT -. "★TP가 추가하는 직교 레이어 (본체 BOM 외 · 가격 0)" .-> DI["디자인 입력 레이어 (#16 D-11)"]
+  DI --> CH["에디터 채널 (item_gbn)\nKOI(vDigital) / Edicus(edicus·VDP) / 없음(offset2023·PDF)\n[가격 0 · 본체와 직교]"]
+  DI --> TA["템플릿 자산 (TemplateAsset · T-A)\nuseTemplateDownload=Y · koi_template_resource_id\n에디터가 런타임 로드하는 디자인 시안 [가격 0]\n★≠ t_prd_templates 완제SKU(이중의미 분리)"]
+  DI --> VDP["VDP 가변데이터 (T-B)\nsetVariableData — 명함/상장 이름·직함\n[#16 데이터바인딩 · 가격 0]"]
+
+  %% ════ 이중수량 (디자인 입력 연동) ════
+  ROOT --> QTY["이중수량 = ORD_CNT 디자인수(건수) × PRN_CNT 부수\n(usePDFordCnt — 디자인 입력 채널 연동)"]
+
+  classDef mat fill:#e6f2ff,stroke:#3b82f6,color:#000;
+  classDef pure fill:#d4edda,stroke:#28a745,color:#000;
+  classDef bund fill:#fff3cd,stroke:#d39e00,color:#000;
+  classDef di fill:#e2e3f3,stroke:#6f42c1,color:#000;
+  classDef price fill:#cfe2ff,stroke:#084298,color:#000;
+  class MAT,M1 mat;
+  class PURE,CUT,COT,SP,PKG pure;
+  class BUND,BIND,SUB bund;
+  class DI,CH,TA,VDP di;
+  class PRT price;

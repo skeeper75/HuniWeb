@@ -1,9 +1,10 @@
 # RedPrinting 옵션 관리 메타모델 ERD (mermaid)
 
-> rpm-metamodel-architect. **v2.0 (GS 통합):** 15 관리 축과 그 관계를 그린 ERD. 가치는 *관계*에 집중(SKILL §4).
-> 정초 = `metamodel-dictionary.md`(축 사전 15축) + `discovered-axes.md`(발굴 근거 D-1~D-10).
-> 추상 메타모델 — 후니 비종속(특정 t_* 컬럼명 아닌 패턴). RedPrinting BN(평면)+GS(완제/입체) 역공학 권위.
-> **GS 신규 반영:** 생산형태(#15 governing) · 본체 형태가공(#14) · 완제 본체 두 표현 facet(자재행/DIR_MTR) · 가격모델 4종.
+> rpm-metamodel-architect. **v3.0 (TP 통합):** 16 관리 축과 그 관계를 그린 ERD. 가치는 *관계*에 집중(SKILL §4).
+> 정초 = `metamodel-dictionary.md`(축 사전 16축) + `discovered-axes.md`(발굴 근거 D-1~D-11).
+> 추상 메타모델 — 후니 비종속(특정 t_* 컬럼명 아닌 패턴). RedPrinting BN(면적)+GS(완제/입체)+TP(디자인입력) 역공학 권위.
+> **GS 반영:** 생산형태(#15 governing) · 본체 형태가공(#14) · 완제 본체 두 표현 facet · 가격모델 4종.
+> **TP 신규 반영:** 디자인 입력 채널(#16 본체옵션과 직교·가격0) · 템플릿 자산(에디터 디자인 시안·#4 완제SKU와 별 엔티티 분리) · 입력채널→수량(디자인수 게이팅).
 
 ---
 
@@ -22,6 +23,7 @@ erDiagram
     PRODUCT ||--o{ TEMPLATE : "완제 SKU(번들)"
     PRODUCT ||--|| PRODUCTION_TYPE : "생산형태(classified-by ⊥category)"
     PRODUCT ||--o{ FORM_ASSEMBLY : "본체 형태가공(GS 완제/입체)"
+    PRODUCT ||--|| DESIGN_INPUT_CHANNEL : "디자인입력(classified-by ⊥본체옵션·가격0)"
 
     PRODUCTION_TYPE ||--o{ MATERIAL : "governs 본체모델(A/B=자재행 C=DIR_MTR SKU)"
     PRODUCTION_TYPE ||--o{ FORM_ASSEMBLY : "governs(C 입체만 활성)"
@@ -58,6 +60,10 @@ erDiagram
 
     PRINT_METHOD ||--o{ PROCESS_MEMBER : "gates(가능공정 부분집합)"
     PRINT_METHOD }o--o| MATERIAL : "자재 facet 인코딩(수성/라텍스)"
+    PRINT_METHOD }o..o| DESIGN_INPUT_CHANNEL : "상관(offset↔에디터0·결정아님)"
+
+    DESIGN_INPUT_CHANNEL ||--o{ TEMPLATE_ASSET : "provides 디자인 시안(≠완제SKU)"
+    DESIGN_INPUT_CHANNEL ||--o{ QUANTITY_SLOT : "gates 디자인수(ORD_CNT 산정출처)"
 
     TEMPLATE ||--o{ ADDON : "번들 구성"
     TEMPLATE ||--o{ TEMPLATE_SELECTION : "구성 선택"
@@ -146,11 +152,25 @@ erDiagram
         code parent_cat_cd
         bool main_yn "잎노드"
     }
+    DESIGN_INPUT_CHANNEL {
+        enum channel "item_gbn: vDigital(KOI)/edicus(VDP)/offset2023(없음·PDF)"
+        bool use_koi_editor
+        bool use_rp_editor
+        bool use_template_download "TemplateAsset 노출 게이트"
+        bool use_pdf "PDF 직접 업로드"
+        enum ord_cnt_source "PDF/에디터(디자인수 산정·#10 게이팅)"
+        bool vdp_capable "Edicus setVariableData(가변데이터)"
+    }
+    TEMPLATE_ASSET {
+        code template_resource_id "koi_template_resource_id(≠완제SKU #4)"
+        json asset_options "koiOption[]"
+        int price "0(디자인 입력 무료)"
+    }
 ```
 
 ---
 
-## 2. 축 분류 그래프 (15축 + 제약 간선 엔진 + GS governing)
+## 2. 축 분류 그래프 (16축 + 제약 간선 엔진 + GS/TP governing)
 
 ```mermaid
 graph TB
@@ -180,6 +200,11 @@ graph TB
         FORM["14 본체 형태가공<br/>(평면→입체 생성 PDT_WRK/FLX_ZIP)"]
     end
 
+    subgraph TPNEW["II-c. TP 신축 — distinct D-11"]
+        DICH["16 디자인 입력 채널<br/>(KOI/Edicus/PDF ⊥본체옵션·가격0)"]
+        TASSET["TemplateAsset<br/>(에디터 디자인 시안·≠완제SKU#4)"]
+    end
+
     subgraph ENGINE["5 제약 논리유형 (D-3) — 관계 엔진"]
         C["disable / force / match<br/>exclude / essential / min-max"]
     end
@@ -188,6 +213,11 @@ graph TB
     PTYPE ==>|governs 활성| FORM
     PTYPE ==>|governs 완제SKU항목화| TMPL
     PTYPE -.->|직교 ⊥| CAT
+
+    DICH ==>|provides 디자인시안| TASSET
+    DICH ==>|gates 디자인수 ORD_CNT| QTY
+    DICH -.->|직교 ⊥ 가격0| OPT
+    DICH -.->|상관·결정아님| METHOD
 
     METHOD -.->|gates 가능공정| PROC
     METHOD -.->|자재 facet 인코딩| MAT
@@ -214,11 +244,13 @@ graph TB
     classDef cross fill:#fef7e0,stroke:#fbbc04
     classDef engine fill:#fce8e6,stroke:#ea4335
     classDef gsnew fill:#f3e8fd,stroke:#9334e6
+    classDef tpnew fill:#e0f7fa,stroke:#0097a7
     class MAT,PROC,OPT,TMPL,BASE,CAT,SIZE static
     class ADDON,PARAM,QTY dyn
     class PRICE,METHOD cross
     class C engine
     class PTYPE,FORM gsnew
+    class DICH,TASSET tpnew
 ```
 
 ---
@@ -250,15 +282,22 @@ flowchart TD
     FORCE --> PRICE
     FORM --> PRICE
 
+    DICH["디자인 입력 채널<br/>(#16 ⊥본체옵션·가격0)"] -.->|use_template_download| TASSET["템플릿 자산<br/>(디자인 시안·≠완제SKU)"]
+    DICH -.->|ord_cnt_source 게이팅| QTY
+    DICH -.->|가격 기여 0| PRICE
+
     classDef gate fill:#fef7e0,stroke:#fbbc04
     classDef sel fill:#e8f0fe,stroke:#4285f4
     classDef calc fill:#e6f4ea,stroke:#34a853
     classDef gsnew fill:#f3e8fd,stroke:#9334e6
+    classDef tpnew fill:#e0f7fa,stroke:#0097a7
     class M,FORCE,CONS gate
     class MAT,SIZE,PROC,ADDON,QTY,PARAM,PARAM2 sel
     class PRICE calc
     class PT,BODYSKU,FORM gsnew
+    class DICH,TASSET tpnew
 ```
+> ★디자인 입력 채널(#16)은 본체 캐스케이드와 *분리된 직교 레인*이다 — 디자인수(ORD_CNT) 산정만 수량으로 게이팅하고 가격에는 기여하지 않음(가격 기여 0). 템플릿 자산(디자인 시안)을 노출하되 완제SKU(#4 번들)와 별 레이어.
 
 ---
 
@@ -273,4 +312,6 @@ flowchart TD
 - **★완제 본체(GS)는 자재 facet** — DIR_MTR=자재참조(소재/색/용량 분해) + 가격기여(#11 개당단가 주체) + 템플릿(#4 SKU). 신축 아닌 기존 축 결합.
 - **★형태가공(#14·GS)은 본체를 생성** — 파우치/마이크텍 봉제·지퍼. 일반 후가공(본체에 작업)과 별 lifecycle. C 입체에서만 활성.
 - **가격은 price_gbn 라우팅(GS)** — 면적형(BN)·tmpl·vTmpl·tiered 4종. 완제본체 유무가 분기 단서.
-- **2 상품군 미관측(갱신): 카테고리 트리 깊이·template_selections·vTmpl 분기조건** — 책자/문구 reuse 캡처로 보강 필요(discovered-axes 갭).
+- **★디자인 입력 채널(#16·TP)은 직교 레인** — KOI/Edicus/PDF 에디터 채널이 본체 옵션과 분리(가격 0). 비-TP 트윈(HLCLSTD)과 본체/가격 동일·입력채널만 차이. 디자인수(ORD_CNT)만 수량으로 게이팅, 템플릿 자산(디자인 시안) 노출. 후니 위젯 Edicus 어댑터 통합 경계와 정합(huni-widget RedEditorSDK 계약).
+- **★템플릿 두 의미 분리(TP·T-A)** — 완제SKU 번들(#4 `t_prd_templates`) vs 에디터 디자인 시안(TemplateAsset·#16 종속·가격0). 같은 단어 다른 의미·별 엔티티. 후니 매핑 시 디자인 시안을 완제SKU에 적재 금지.
+- **3 상품군 미관측(갱신): 카테고리 트리 깊이·template_selections·vTmpl 분기조건 + TP 템플릿 자산 카탈로그·VDP 변수 스키마·티켓 넘버링(VDP vs 공정)·INN_PAGE↔가격 결합** — 책자/문구 reuse + 로그인 에디터 캡처로 보강 필요(discovered-axes 갭).

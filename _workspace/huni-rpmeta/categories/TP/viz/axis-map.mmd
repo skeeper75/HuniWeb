@@ -1,0 +1,63 @@
+%% TP 16축 메타모델 맵 — 출처: 02_metamodel/discovered-axes.md(D-11 TP 신축·TP facet T-A~T-E) + metamodel-dictionary.md(#16·#4 이중의미)
+%% ★TP 기여 = #16 디자인 입력 채널 1축 distinct 신설(가장 강한 vessel-gap). TP facet 5종은 기존 축 흡수(신축 거부).
+%% 진하게(green) = TP가 행사·기여 / 황(partial) = TP가 흡수/일부 / 회(off) = TP 미행사(BN/GS 축) / 보라 = TP 신축
+flowchart TB
+  subgraph STATIC["7 정적 축"]
+    A1["#1 자재 (Material)\nTP: 용지=동종 옵셋/디지털 공유 ✅"]
+    A2["#2 공정 (Process)\nTP: 제본·특수인쇄(PRT_WHT/박 T-E)·미싱 흡수 ✅"]
+    A3["#3 옵션 (Option)\nTP: 페이지수·수량 행사 ✅"]
+    A4["#4 템플릿/SKU\n★이중의미 분리: 완제SKU ≠ TemplateAsset(T-A)\nTP: 디자인 시안=#16 종속 facet △"]
+    A5["#5 제약 (Constraint)\nTP: INN_PAGE min/max/step 행사 ✅"]
+    A6["#6 기초코드 (Enum)\nTP: 형태 enum(M/I/보딩·탁상/벽걸이) 행사 ✅"]
+    A7["#7 카테고리 (Category)\nTP: 행사 ✅"]
+  end
+
+  subgraph REL["4 관계/동역학 축"]
+    A8["#8 부속물 (Addon)\nTP: 미행사(평면 디자인물) ✖"]
+    A9["#9 공정 파라미터\nTP: 일부(칼틀·박색 variant) △"]
+    A10["#10 수량 모델\nORD_CNT 디자인수 × PRN_CNT 부수\nTP: 디자인입력 연동 이중수량 ✅"]
+  end
+
+  subgraph CROSS["2 횡단 축"]
+    A11["#11 가격기여 역할\nTP: vTmpl/tiered/digital 가격모델 ✅\n★디자인입력=가격 0"]
+    A12["#12 인쇄방식 레시피\nTP: KOI/Edicus/옵셋 = 입력채널과 구별(≠#16) △"]
+    A13["#13 사이즈 (Size)\nTP: 형태variant(T-D)·페이지계층(T-C) 흡수 ✅"]
+  end
+
+  subgraph PRIOR["GS 신축 2 (TP 미행사)"]
+    A14["#14 본체 형태가공 (GS)\nTP: 평면 디자인물 → 미행사 ✖"]
+    A15["#15 생산형태 (GS)\nTP: 디자인/기성 noted △"]
+  end
+
+  subgraph TPNEW["★TP 신축 1 (#16 — distinct·directive 핵심)"]
+    A16["#16 디자인 입력 채널 (Design-Input Channel) — distinct(D-11)\nitem_gbn(vDigital/edicus/offset2023) + useKoiEditor/useRP/usePDF/useEditorOrdCnt\n★본체 옵션과 직교(⊥) · 가격 0 · 비-TP 트윈(HLCLSTD) 직접 대조\nTP: ★★신설 — BN/GS 미발굴 본질축"]
+  end
+
+  %% TP facet 5종 (distinct 거부 → 흡수처)
+  subgraph FACET["TP facet 5종 (distinct 거부 — 기존 축 흡수)"]
+    TA["T-A 템플릿 자산 → #16 리소스 facet\n(완제SKU #4와 이중의미 분리·WEAK)"]
+    TB["T-B VDP(가변데이터) → #16 데이터바인딩 facet × #10"]
+    TC["T-C 페이지계층 INN_PAGE → #10 + #5\n(page_rules로 PASS)"]
+    TD["T-D 형태 variant(M/I/보딩) → #13 + #2\n(GS THO_CUT 동형)"]
+    TE["T-E 특수인쇄(PRT_WHT/MAG·박) → #2 별색 family"]
+  end
+  TA -. 흡수 .-> A16
+  TB -. 흡수 .-> A16
+  TC -. 흡수 .-> A10
+  TD -. 흡수 .-> A13
+  TE -. 흡수 .-> A2
+
+  REJ["D-8 UI 런타임(Vue/jQuery)\n= facet 거부 ❌ (TP도 같은 base-data 공유)"]
+
+  classDef on fill:#d4edda,stroke:#28a745,color:#000;
+  classDef partial fill:#fff3cd,stroke:#d39e00,color:#000;
+  classDef off fill:#f1f3f5,stroke:#adb5bd,color:#666;
+  classDef new fill:#e2e3f3,stroke:#6f42c1,color:#000;
+  classDef facet fill:#fde2e4,stroke:#c9184a,color:#000;
+  classDef rej fill:#f8d7da,stroke:#dc3545,color:#000;
+  class A1,A2,A3,A5,A6,A7,A10,A11,A13 on;
+  class A4,A9,A12,A15 partial;
+  class A8,A14 off;
+  class A16 new;
+  class TA,TB,TC,TD,TE facet;
+  class REJ rej;

@@ -1,7 +1,7 @@
 # RP 추출 커버리지 인덱스
 
 > 후니 RP-Meta 하네스 파이프라인 ① — 샘플 커버리지 맵 (rpm-reverse-engineer).
-> 실행 이력: ① BN(현수막류) 파일럿 6+1상품. ② GS(굿즈/잡화) 확장 12상품. 대표 샘플링(답습 전수수집 아님).
+> 실행 이력: ① BN(현수막류) 파일럿 6+1상품. ② GS(굿즈/잡화) 확장 12상품. ③ TP(디자인템플릿) 확장 대표3+20횡단. 대표 샘플링(답습 전수수집 아님).
 
 ## 커버리지 맵 — BN(현수막류) (상품 → 축 → 출처)
 
@@ -34,6 +34,20 @@
 
 > GSTTDTM은 코스터 6소재군 대표 — 나머지 5(GSPLCST 펠트·GSTTCRK 코르크·GSTTPAP 종이·GSTTACR 아크릴(모양)·GSTTREZ 레더)는 §9에 묶어 기록(소재만 다른 동형, 답습 회피).
 
+## 커버리지 맵 — TP(디자인템플릿, 23상품·★템플릿/에디터 축 본질)
+
+| pdtCode | 상품명 | 구조 다양성 | 축 수 | 에디터 채널 | 템플릿 | 페이지/형태 | 가격모델 | 출처 |
+|---------|--------|------------|-------|-----------|--------|------------|---------|------|
+| TPBCDFT | 디자인 명함 | 에디터+VDP 기본 | 2+ | Edicus(추정) | useTemplate(추정) | - | unobs | `[live:SSR]` partial |
+| TPTKDFT | 티켓(M/I/보딩) | 형태variant·티켓특화·SSR실측 | 8 | **KOI(Y)·PDF(Y)** 실측 | unobs | M/I/보딩·미싱 | digital_price | `[live:SSR]` |
+| TPCLSTD | 디자인_탁상 세로 캘린더 | 캘린더·HL옵셋 트윈대조 | 7 | KOI+템플릿(자매실측) | **Y**(useTemplate) | 12~13월·링 | vTmpl(추정) | `[reuse:productInfo]` 자매+`[live:catalog]` |
+| TPCLECO | 에코 캘린더 | 페이지계층 정점 | 6 | **KOI(Y)·PDF(Y)** | **Y** | **2~200면**·상철RIN | **tiered_price** | `[reuse:productInfo]` 풀 |
+| TPCLWLB | 큰달력(효도) | 중철쫄대·가격실측 | 4 | **KOI(Y)·템플릿(Y)** | **Y** | 1면·중철STA쫄대 | **vTmpl_price** | `[reuse:productInfo]` 풀 |
+
+> TPCLECO·TPCLWLB는 ★풀 productInfo 실측(에디터 플래그 전체 + TPCLWLB PRICE=11900). TPCLSTD 구조는 동형 자매로 확정.
+> 나머지 18종(디자인 X 4·박티켓·캘린더 4·북 3·평면지류 8)은 reverse.md §4 그룹 A~E에 묶어 횡단 태깅(에디터/템플릿 동형, 답습 회피).
+> **★HL 옵셋 캘린더(비-TP 트윈) 실측 대조**: HLCLSTD/HLCLWAL = `offset2023_item`·useKoiEditor=N·useTemplate=N·usePDF=Y — TP가 추가하는 단 하나 = 디자인 입력 레이어.
+
 ## 재사용 vs 라이브 비율
 ### BN(7상품)
 - **재사용(reuse:Vue-BFF)**: 2상품(BNBNFBL, BNPTPET) = 29% — huni-widget s3 캡처 풀 옵션트리(productInfo 실응답).
@@ -60,6 +74,20 @@
 - **코스터 6소재 개당단가·옵션** — 소재가 pdtCode 분리는 확정, 소재별 가격/옵션 미관측.
 - **전 GS PRICE 실가** — 비로그인 캡처라 다수 PRICE=0(노트류·코스터). 단 텀블러45000·마스크끈2800·장패드16000·마이크네임택6000/7000은 실가 확보(가격모델 3종 입증). PRICE=0은 세션결함(메모리)·옵션구조엔 무관.
 
+## TP 재사용 vs 라이브 비율 (23상품·대표3+20횡단)
+- **재사용(reuse:productInfo)**: 2상품(TPCLECO·TPCLWLB) — huni-widget s6 캘린더 캡처 풀 infoCall(에디터 플래그 전체 + product_data + TPCLWLB PRICE=11900). ★TP 에디터/템플릿 축 1차 증거. **비-TP 트윈 HLCLSTD/HLCLWAL 실측 대조분도 재사용**.
+- **라이브 보강(live:SSR)**: 1상품(TPTKDFT) — 레거시 jQuery·SSR 인라인 플래그(useKoiEditor=Y/usePDF=Y/digital_price) + 용지11종 + PCS data-type 6종 + 미싱/보딩 텍스트 추출.
+- **catalog+SSR-partial**: 1상품(TPBCDFT) edicus 마커만, 옵션 unobs / 나머지 19종 catalog 상품명 + 그룹 횡단 태깅(unobserved 정직).
+
+## TP 미관측(unobserved) 요약
+- **신규 Vue TP 상품 옵션 상세 + 에디터 플래그**(TPBCDFT·TPCLSTD·TPCLHOL·TPCLWAL·TPCLWEK·디자인 X 군) — client-render·BFF 익명불가. item_gbn/useKoiEditor는 동형 자매(TPCLECO/TPCLWLB) 실측 외 추정.
+- **템플릿 자산 카탈로그** — koi_template_resource_id/koiOption[] 관측분 null/빈배열(비로그인·미선택). 상품별 실제 템플릿 목록·VDP 변수 스키마 미관측(로그인 에디터 필요).
+- **티켓 미싱/넘버링/일련번호 상세** — SSR "미싱" 텍스트만, 옵션구조·번호규칙 JS렌더. 순차번호 공정축은 가설.
+- **TP 가격 실가 다양성** — TPCLWLB 11900(vTmpl)만 PRICE>0 실측. TPCLECO(tiered)·TPTKDFT(digital) 가격모델만 확정·실가 미캡처.
+
+## TP 미샘플 상품 (23종 중 18종, 대표3+실측2 외 그룹 횡단)
+디자인 X 4(명함/쿠폰/손목띠/슬로건)·박티켓·캘린더 4(탁상실측외 벽걸이타공/걸이/스케줄러)·북 3(엽서북/사진북/포토카드)·평면지류 8(와블러/떡메/점메/세팅지/네임·패키지스티커/데코페이퍼/상장) — 구조 다양성(에디터 3채널·템플릿 자산·페이지 계층·형태 variant·티켓 특화·이중수량)은 대표3+실측2로 커버. 검증 시 갭(VDP 변수·티켓 넘버링·상장 양식 템플릿)은 로그인 에디터 캡처로 추가.
+
 ## GS 미샘플 상품 (136종 중 124종, 답습 회피로 의도적 제외)
 케이스류 19종(GSCAGB*글라스범퍼·GSCATPG/P투명젤·GSCAEPB에폭시·GSCAPDL에어팟레더 등), 텀블러/보틀 다수, 파우치 6소재(GSPULTC/GSPULTH 레더·GSPUFBC코튼 외), 거울/스트랩/뱃지/마그넷/스티커형 굿즈 등 — 구조 다양성은 12샘플로 충분히 커버(완제SKU·variant 3채널·자재 다중슬롯·제본 3방식·본체조립·tiered가격·소재축 6분기·기종variant). 메타모델 검증 시 갭(예: 케이스 기종 enum 규모·뱃지 핀부착 bundle) 발견되면 추가.
 
@@ -72,3 +100,9 @@ BNBNLOW(특가현수막), BNBNDAY(오늘출발), BNTPSNG(타포린단면), BNFGB
 3. **부속물(거치대) 축** — 본체와 분리된 SKU/번들 축 + size 캐스케이드 모델링.
 4. **소재→강제옵션 규칙 엔진** — PET→코팅필수, 텐트천→포장필수 (ESN_YN/PKG_GB) = disable의 역(force) 제약.
 5. `_ambiguous-fragments.md` 모호 항목 버킷 확정.
+
+## 다음 단계 — TP 추가분 (rpm-metamodel-architect 주목)
+6. **★에디터/디자인입력 축 신설 검토** — `item_gbn`+useKoiEditor/useRPEditor/usePDF/useTemplateDownload 플래그 묶음을 후니 어느 그릇으로? 옵션 트리와 직교 → 7버킷 어디에도 안 들어감(vessel-gap 1순위). T-1.
+7. **★템플릿 "디자인 자산" vs "완제 SKU" 분리** — TP 템플릿(디자인 시안·가격0·에디터 종속)이 후니 `t_prd_templates`(완제SKU·봉투/OTC)와 같은 단어 다른 의미. 템플릿 개념 2분화 필요. T-2.
+8. **에디터 채널 3종 계약 재사용** — KOI/Edicus/없음. huni-widget 역공학 RedEditorSDK 45메서드 계약(setCurrentTemplate/openVdpViewer/setVariableData) 이미 확보 → TP 메타모델이 그 계약 흡수.
+9. **페이지 계층(INN_PAGE)·티켓 넘버링/미싱 공정축** — 캘린더 월수·북 대수 + 순차번호/절취선이 옵션/차원/공정 중 무엇? T-3·T-7.

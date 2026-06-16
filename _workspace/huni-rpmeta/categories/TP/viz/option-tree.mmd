@@ -1,0 +1,49 @@
+%% TP 옵션-구성 트리 — 출처: categories/TP/reverse.md (§0 디자인입력 직교·§3 TPCLSTD vs HLCLSTD 트윈·§5 종합)
+%% ★핵심 = TP가 추가하는 건 "디자인 입력 레이어"뿐(에디터 채널 + 템플릿 자산). 자재/사이즈/후가공/가격은 동종 비-TP와 공유.
+%% 범례: [P] = 가격주체(PRICE>0) · [P0] = 가격 0(디자인 입력 무료) · ⊥ = 본체 옵션 트리와 직교(orthogonal) · (필수) = ESN_YN=Y
+flowchart LR
+  TP["TPCLSTD 디자인_탁상 세로 캘린더 (TP)\nitem_gbn=vDigital_item · price_gbn=vTmpl_price\nKOI에디터+기성템플릿 (TPCLWLB/TPCLECO 자매 실측)"]
+
+  %% ════ 직교 레인 1: 디자인 입력 레이어 (TP의 본질·본체와 ⊥) ════
+  subgraph ORTHO["⊥ 디자인 입력 레이어 (TP가 추가하는 단 하나 · 본체 옵션과 직교 · 가격 0)"]
+    direction TB
+    CH["축: 에디터 채널 [⊥]\nitem_gbn 게이팅"]
+    CH --> CH1["KOI 에디터 (vDigital_item)\nuseKoiEditor=Y [P0]"]
+    CH --> CH2["Edicus SDK (edicus_item)\nVDP 가변데이터 · TPBCDFT 추정 [P0]"]
+    CH --> CH3["없음 (offset2023_item)\nPDF 업로드 전용 — ★HL(비-TP)"]
+    CH --> TA["축: 템플릿 자산 [⊥]\nuseTemplateDownload=Y\nkoi_template_resource_id [P0]\n(옵션도 SKU도 아닌 별도 디자인 자산)"]
+  end
+
+  TP --> CH
+
+  %% ════ 본체 레인: 동종 비-TP(HLCLSTD)와 100% 공유 ════
+  subgraph BODY["본체 옵션 트리 (HLCLSTD 옵셋 트윈과 공유 — 자재/사이즈/후가공/가격)"]
+    direction TB
+    MAT["축: 용지(자재)\nRXART180·RXSNO180·RXRAU190/210 [P]\n(평량 variant·동종 옵셋 공유)"]
+    PAGE["축: 월별 페이지 계층\nINN_PAGE MIN~MAX·STEP1 (TPCLECO 2~200)\n탁상=12~13면 [제약 min/max/step]"]
+    BIND["축: 제본\nRIN_DFT 링 / STA_CLD 중철+쫄대 [P]\n(공정+자재 bundle)"]
+    PKG["축: 포장\nPAK_ETC OPP / PAK_POL 폴리백 [P]"]
+    PRT["축: 인쇄 PRT_DFT 단면 [P]\n★가격 주체 (TPCLWLB PRICE=11900)"]
+    QTY["축: 이중수량\nORD_CNT 디자인수(건수) × PRN_CNT 부수\n(usePDFordCnt — 디자인입력 연동)"]
+  end
+
+  TP --> MAT
+  TP --> PAGE
+  TP --> BIND
+  TP --> PKG
+  TP --> PRT
+  TP --> QTY
+
+  %% ════ 직접 대조: TPCLSTD(TP) vs HLCLSTD(비-TP) — directive ④ ════
+  HL["HLCLSTD 옵셋 탁상 캘린더 (비-TP)\noffset2023_item · useKoiEditor=N\nuseTemplateDownload=N · usePDF=Y\n= 에디터0·템플릿0·PDF전용"]
+  HL == "★차이 = 디자인 입력 레이어 1개뿐\n(자재·사이즈·후가공·가격 완전 동일)" ==> BODY
+  CH3 -. "offset2023 = HL 채널 (TP 아님)" .-> HL
+
+  classDef ortho fill:#e2e3f3,stroke:#6f42c1,color:#000;
+  classDef price fill:#e6f2ff,stroke:#3b82f6,color:#000;
+  classDef free fill:#d1ecf1,stroke:#0c5460,color:#000;
+  classDef twin fill:#f1f3f5,stroke:#adb5bd,color:#000;
+  class CH,TA ortho;
+  class CH1,CH2 free;
+  class MAT,BIND,PKG,PRT price;
+  class HL,CH3 twin;

@@ -1,0 +1,44 @@
+%% TP 갭 히트맵 — 출처: 03_gap/gap-matrix.md §VIII~X (v3.0 TP 통합·PASS 5·WEAK 8·GAP 4)
+%% 범례: 🟢 PASS(동등 표현력) · 🟡 WEAK(그릇 있으나 미정규화/이중의미/오염) · 🔴 GAP(관리 그릇 부재 = vessel-gap)
+%% ★TP 직접 산출 = #16 디자인입력채널 GAP(1순위·vessel-gap) + T-A 템플릿자산 WEAK(이중의미 오염). 나머지 BN/GS 판정 보존.
+flowchart TB
+  L["범례: 🟢 PASS · 🟡 WEAK · 🔴 GAP(vessel-gap)\nTP 종합: PASS 5 · WEAK 8 · GAP 4 (16축 v3.0)"]:::legend
+
+  subgraph PASS_["🟢 PASS (5)"]
+    G2["② 공정\n특수인쇄(화이트 008·박 033~049·별색 007)·미싱=공정 정상"]:::pass
+    G3["③ 옵션\n3계층 polymorphic·페이지수/수량"]:::pass
+    G6["⑥ 기초코드\nEnumGroup/Value 2계층 동등"]:::pass
+    G7["⑦ 카테고리\n트리+다중분류·round-22 고아 0"]:::pass
+    G8["⑧ 부속물\naddon→tmpl_cd 독립 SKU"]:::pass
+  end
+
+  subgraph WEAK_["🟡 WEAK (8)"]
+    G1["① 자재\n합성 분해축 컬럼 부재 + MAT_TYPE.08~10 오염"]:::weak
+    G4["④ 템플릿\ntemplates.price 미구현(가격 facet 결손)"]:::weak
+    G5["⑤ 제약\nRULE_TYPE 3종뿐 · INN_PAGE min/max/step 표현 약함"]:::weak
+    G10["⑩ 수량모델\nbundle_qty만 · 건수×수량(ORD/PRN) 이중축 1급분리 부재"]:::weak
+    G11["⑪ 가격기여역할\nprc_typ_cd만 · price_role 태그·frm_typ_cd 부재"]:::weak
+    G13["⑬ 사이즈\nnonspec MIN/MAX · size/plate 한 마스터 혼재"]:::weak
+    G15["#15 생산형태\nprd_typ_cd ≠ 생산형태 governing(오모델)"]:::weak
+    GTA["★T-A 템플릿 자산\nTemplateAsset 전용 그릇 부재 +\nt_prd_templates(완제SKU 봉투) 적재 시 이중의미 오염 ⚠️"]:::weaktp
+  end
+
+  subgraph GAP_["🔴 GAP — vessel-gap (4)"]
+    G9["⑨ 공정 파라미터\nref_param_json 미구현 — 줄수/mm/색/조각수 슬롯 부재"]:::gap
+    G12["⑫ 인쇄방식 레시피\nallowed_processes·게이팅 lifecycle 부재(조건부)"]:::gap
+    G14["#14 본체 형태가공\n봉제만 · 조립/지퍼 형태가공 그릇 부재(GS)"]:::gap
+    G16["★★#16 디자인 입력 채널 (TP·1순위)\neditor_yn·file_upload_yn 불리언 2개뿐\nitem_gbn 3분기·에디터종류(KOI/Edicus)·리소스ID·VDP 그릇 전무\n전역 컬럼/테이블/base_code 검색 0건 · dbmap 미터치 신규"]:::gaptp
+  end
+
+  %% TP 직접 산출 강조 + facet PASS 흡수
+  G16 == "★directive 핵심 — vessel V-10 그릇 설계" ==> V10["#16 → V-10\n(코드행+컬럼4·신규테이블 0)"]:::fix
+  GTA == "이중의미 분리 — vessel V-11 그릇" ==> V11["T-A → V-11\nTemplateAsset 신규테이블(유일 mint)"]:::fix
+  G2 -. "T-E 특수인쇄·T-C 페이지계층(page_rules 11행)=PASS 흡수" .-> FIXTC["T-C/T-E 흡수\n신규 vessel 불요"]:::fix
+
+  classDef pass fill:#d4edda,stroke:#28a745,color:#000;
+  classDef weak fill:#fff3cd,stroke:#d39e00,color:#000;
+  classDef weaktp fill:#ffe0b2,stroke:#e65100,color:#000;
+  classDef gap fill:#f8d7da,stroke:#dc3545,color:#000;
+  classDef gaptp fill:#f5b7b1,stroke:#922b21,color:#000;
+  classDef fix fill:#e2e3f3,stroke:#6f42c1,color:#000;
+  classDef legend fill:#fff,stroke:#333,color:#000;

@@ -7,11 +7,14 @@
 >
 > **── 버전 ──**
 > - **v1.0 (BN 파일럿):** 현수막류(BN) 6상품. 13축(7 정적 + 4 관계/동역학 + 2 횡단).
-> - **v2.0 (GS 통합·현재):** + 굿즈/잡화(GS) 12상품. BN(평면 배너)·GS(완제/입체 굿즈) **2 상품군 증거**로 검증. GS 신축 2종 distinct 추가(D-9 생산형태·D-10 본체 형태가공), 기존 7축 확장(완제 본체/본체소재/variant 3채널/usage 다중슬롯/가격모델 3종). 총 **15축**.
+> - **v2.0 (GS 통합):** + 굿즈/잡화(GS) 12상품. BN(평면 배너)·GS(완제/입체 굿즈) **2 상품군 증거**. GS 신축 2종 distinct(D-9 생산형태·D-10 본체 형태가공). 총 **15축**.
+> - **v3.0 (TP 통합·현재):** + 디자인템플릿(TP) 대표3+20횡단. BN(면적)·GS(완제/입체)·TP(디자인입력) **3 상품군 증거**로 검증. TP 신축 1종 distinct 추가(D-11 디자인 입력 채널 #16), 템플릿#4 이중의미 분리(완제SKU vs 에디터 디자인 자산). 총 **16축**.
 >
-> 축 총 **15개 = 7 정적 축(자재·공정·옵션·템플릿·제약·기초코드·카테고리) + 4 관계/동역학 축(부속물·공정파라미터·수량모델·제약논리) + 2 횡단 축(가격기여역할·인쇄방식레시피) + GS 신축 2(생산형태·본체 형태가공)**. 발굴 근거=`discovered-axes.md`.
+> 축 총 **16개 = 7 정적 축(자재·공정·옵션·템플릿·제약·기초코드·카테고리) + 4 관계/동역학 축(부속물·공정파라미터·수량모델·제약논리) + 2 횡단 축(가격기여역할·인쇄방식레시피) + GS 신축 2(생산형태·본체 형태가공) + TP 신축 1(디자인 입력 채널)**. 발굴 근거=`discovered-axes.md`.
 >
 > **GS 통합 원칙(과잉 일반화 경계, SKILL §5):** 2 상품군(BN 평면·GS 완제/입체)을 *둘 다* 견디는 패턴만 메타모델 축으로 승격. 한 군만의 특이(폰케이스 기종 enum 규모·코스터 6 pdtCode 분리)는 facet으로 강등(distinct 거부). BN 본체=`ORD_INFO.MTRL_CD`(자재) vs GS 본체=`DIR_MTR/WRK_MTR`(PCS 항목)는 **같은 자재축의 두 표현 facet**(아래 #1·#4 명시).
+>
+> **TP 통합 원칙(v3.0):** 3 상품군(BN·GS·TP)을 *셋 다* 견디는 패턴만 승격. TP 발굴 6종 중 **D-11 디자인 입력 채널만 distinct**(비-TP 트윈 직접 대조 + huni-widget RedEditorSDK 계약 권위). 나머지 5종(템플릿 자산·VDP·페이지계층·형태variant·특수인쇄)은 facet 강등. **★템플릿 이중의미 [HARD]:** 메타모델 #4 "템플릿/SKU"는 *완제 주문 단위*(봉투결합 엽서·OTC·후니 `t_prd_templates`), TP "템플릿 자산"은 *에디터 디자인 시안*(가격0·D-11#16 종속) — **같은 단어 다른 의미·별 엔티티 분리**(아래 #4·#16 명시).
 >
 > 각 축 포맷: **identity**(관리 대상) · **entities(그릇 shape)**(추상 레코드, 후니 비종속) · **attributes** · **relationships**(FK/polymorphic/composition) · **constraint & cascade**.
 > 확정도: ✅양군+도메인 권위 · 🟡부분+도메인 추론 · 🔴미관측(도메인 KB로 보강).
@@ -102,6 +105,8 @@
 - **constraint & cascade:** 번들 내 구성 일관성(거치대 size ↔ 본체 size match, D-3). **BN 한계:** prd_typ 다양성(반제품/디자인/기성)·완제 SKU 계층은 책자/굿즈 샘플 필요(discovered-axes 갭).
 
 - **★GS 확장 — 완제 본체가 템플릿 항목 (v2.0·G-1):** GS 굿즈 본체(`DIR_MTR/WRK_MTR`)는 *완제 SKU 라벨*(PCS_DTL_NME)로 등장 — 자재(#1 본체 facet)이면서 동시에 *주문 가능 완제 단위*(템플릿/SKU). 즉 완제 굿즈에서 **본체 = 자재참조 + 템플릿 항목 복합**. RP는 이 복합을 한 PCS_COD(DIR_MTR)에 융합. **G-1 핵심 의사결정(양면 트레이드오프) → discovered-axes.md G-1.** 메타모델 정답 = 본체를 (a) 자재참조(소재 분해)와 (b) SKU 식별(개당단가 주체)로 *두 역할 분리*하되 한 엔티티가 둘 다 carry(완제 SKU = body_material_ref + sku_price_role). 생산형태(#15)가 이 분기를 governing(C 완제품 → 본체=완제 SKU 항목, A/B 통합·셋트 → 본체=자재행).
+
+- **★TP 이중의미 분리 — 템플릿#4 ≠ 에디터 템플릿 자산 (v3.0·T-A) [HARD]:** 본 축(#4 템플릿/SKU)은 **완제 주문 단위**(본체+부속 번들·봉투결합 엽서·OTC·후니 `t_prd_templates`)다. TP에서 관측된 "템플릿"(`useTemplateDownload=Y`·`koi_template_resource_id`·SDK `getTemplateList`)은 **에디터가 로드하는 디자인 시안**(가격 0·런타임 카탈로그·D-11#16 입력채널 종속)으로 — *같은 단어 다른 의미*다. 메타모델은 둘을 **별 엔티티로 분리**: `Template`(#4 완제SKU 번들·주문단위) vs `TemplateAsset`(#16 종속 디자인 자산·입력 리소스). RedPrinting `koi_template_resource_id`=후자, `t_prd_templates`=전자. **후니 매핑 시 혼동 금지** — TP 디자인 시안을 `t_prd_templates`(완제SKU)에 적재하면 의미 오염(가격0 디자인 리소스를 주문단위로 오모델). 갭/vessel 단계에서 입력채널 리소스 그릇 별도 설계(T-A 판정).
 
 ### 5. 제약 축 (Constraint) ✅ — D-3 유형화
 
@@ -238,6 +243,36 @@
 
 ---
 
+## II-c. TP 신축 (디자인템플릿이 드러낸 distinct 축) — 발굴 v3.0
+
+### 16. 디자인 입력 채널 축 (Design-Input Channel) ✅ — distinct D-11 (TP 신축, 본체 옵션과 직교) ★directive 핵심
+
+- **identity:** 상품의 디자인을 *어떻게 입력받는가*(에디터 채널 + 입력방식). 본체(자재·공정·사이즈·수량)와 **직교**하며 가격 0 — 본체 옵션 트리(`pdt_pcs_info`)를 오염시키지 않고 `item_gbn` + `product_option.option` 플래그 묶음으로 인코딩. 입력채널이 *디자인수 산정·템플릿 자산 노출·VDP 가능여부*를 게이팅하는 lifecycle 보유.
+- **entities(그릇):**
+  - `DesignInputChannel` — `{channel, editor_flags, ord_cnt_source}`. RP=`product_option.option`.
+  - `TemplateAsset`(종속 — T-A) — 에디터가 로드하는 디자인 시안 카탈로그. **★#4 완제SKU 템플릿과 별 엔티티**(가격0·디자인 리소스). RP=`koi_template_resource_id`/`koiOption[]`.
+- **attributes(DesignInputChannel):**
+  - `channel`(item_gbn — `vDigital_item` KOI / `edicus_item` Edicus SDK·VDP / `offset2023_item` 없음·PDF).
+  - `use_koi_editor`·`use_rp_editor`(자체 에디터 사용 Y/N).
+  - `use_template_download`(기성 디자인 시안 갤러리 제공 — TemplateAsset 노출 게이트).
+  - `use_pdf`(PDF 직접 업로드 허용).
+  - `ord_cnt_source`(`usePDFordCnt`/`useEditorOrdCnt` — 디자인수(건수) 산정 출처 = PDF/에디터, 수량모델#10 ORD_CNT 게이팅).
+  - `vdp_capable`(Edicus openVdpViewer/setVariableData 능력 — T-B facet).
+- **attributes(TemplateAsset):** `template_resource_id`(RP koi_template_resource_id), `asset_options`(koiOption[]), `price=0`(디자인 입력 무료).
+- **relationships:**
+  - DesignInputChannel → Product(classifies — 1상품 1입력구성).
+  - DesignInputChannel → TemplateAsset(provides — 에디터 디자인 시안, T-A. **≠ #4 완제SKU**).
+  - DesignInputChannel → QuantitySlot(#10, **gates** — ord_cnt_source가 ORD_CNT "디자인 수(건수)" 출처 결정).
+  - DesignInputChannel ↔ PrintMethod(#12, **상관** — offset2023↔에디터0·PDF전용 동반 경향이나 결정 아님: vDigital이라도 KOI/PDF 갈림).
+  - DesignInputChannel ⊥ 본체 옵션(자재#1·공정#2·사이즈#13·옵션#3 — 직교·가격 0).
+- **constraint & cascade:**
+  - 입력채널 구성이 TemplateAsset 노출(use_template_download)·VDP(channel=edicus)·디자인수 산정(ord_cnt_source)을 게이팅.
+  - **distinctness 근거:** ★비-TP 트윈 직접 대조 — 같은 캘린더가 TPCLSTD(TP)=KOI+템플릿 / HLCLSTD(비-TP)=PDF전용, **자재/사이즈/후가공/가격 완전 동일·입력채널만 차이**(reverse §0.1). 가격 0(TPCLWLB PRICE 주체=PRT_DFT 인쇄·에디터/템플릿 PCS=0, reverse §3). huni-widget RedEditorSDK 45메서드 + Edicus 브릿지(`sdkOpenEditor`/`fnKoiEditor`/`fnRpEditor`·cmd create-design-project) = 후니 위젯도 동일 에디터 채널 1급 통합 계약 보유(`seed-redprinting-sdk-analysis.md`·`editor-bridge-protocol.md`). 옵션#3=본체속성·공정#2=본체작업·템플릿#4=완제번들 어느 것도 "디자인 입력 메커니즘"을 왜곡 없이 못 담음 → distinct 정당. 오버피팅 검토: TP 단일이나 비-TP 트윈 대조 + 전 카테고리(BN PDF·GS edicus_item)가 입력채널 값 보유 + 후니 위젯 동형 → 단일상품 아님.
+  - **★후니 갭(vessel 단계):** 후니 t_*에 "디자인 입력 채널" 그릇 **부재 가설**(vessel-gap 1순위). 후니 위젯이 Edicus 어댑터를 *코드 계약*으로만 가지므로(huni-widget) 입력채널 메타(에디터 타입·템플릿 리소스 ID·VDP 변수 스키마·디자인수 산정 출처)를 담을 DB 그릇 설계가 vessel 과제. 갭분석가가 라이브 information_schema에서 대응 컬럼 유무 확인.
+  - **도메인 경계(HARD):** 입력채널 ≠ 인쇄방식(#12) — 입력은 *주문측 디자인 UX*, 인쇄방식은 *생산측 공정 게이팅*. 상관하나 동일 아님. TemplateAsset(디자인 시안·가격0) ≠ 템플릿#4(완제SKU·주문단위) — 같은 단어 다른 의미(T-A).
+
+---
+
 ## 메타모델 핵심 명제 (RedPrinting 정규화 방식 요약)
 
 1. **자재는 합성된다** — MTRL_CD 하나가 소재·색·무게·인쇄방식 4~5축 인코딩(D-2). 분해 표현력 필수(평면화=의미축 drop).
@@ -254,7 +289,11 @@
 12. **★평면→입체 형태가공은 별도 공정 lifecycle이다 (GS·D-10)** — PDT_WRK/FLX_ZIP가 본체를 *생성*(일반 후가공=본체에 작업). 굿즈 특유 distinct 축.
 13. **★variant는 3채널로 분산 인코딩된다 (GS·G-4)** — DTL코드(SKU성·다차원 합일)·ATTB(공정 파라미터)·CUT(사이즈 차원). 단일 평면화 금지·기존 축으로 분배. 한 DTL이 자재+사이즈+칼틀+가격 동시 결정(강결합)은 polymorphic option_item 다중 참조로.
 14. **★가격모델은 옵션 모델 위에서 라우팅된다 (GS·G-7)** — 면적형(BN)·완제SKU개당가(tmpl)·variant템플릿(vTmpl)·구간가(tiered) 4종. price_gbn=상품 속성, 완제본체 유무가 분기 단서.
+15. **★디자인 입력은 본체와 직교한 별 축이다 (TP·D-11)** — 에디터 채널(KOI/Edicus/PDF)이 `item_gbn`+플래그로 인코딩, 본체 옵션 트리와 직교·가격 0. 같은 상품이 TP면 에디터+템플릿, 비-TP면 PDF업로드, 본체/가격 동일(HLCLSTD 트윈). 입력채널이 디자인수·템플릿자산·VDP를 게이팅.
+16. **★템플릿은 두 의미다 (TP·T-A) [HARD]** — 완제SKU 번들(#4 주문단위·`t_prd_templates`) vs 에디터 디자인 시안(#16 종속 TemplateAsset·가격0·`koi_template_resource_id`). 같은 단어 다른 의미 → 별 엔티티 분리. 후니 매핑 시 디자인 시안을 완제SKU에 적재 금지.
 
-> **도메인 사실 준수 체크(HARD):** 별색=공정(D-2/#2) · 본체색=자재 CLR(D-2) · 판걸이수=앱계산 DB미저장(D-4) · UV변형=공정파라미터 not print_side(#2) · size≠plate(#13) · 형상≠자재(#13 흡수) · **생산형태⊥카테고리(#15)** · **완제 본체=자재 facet not 신축(#1)** · **두께=자재(#1 GS 장패드 4T)**. 전부 entity-semantic-model L3(C-9 생산방식)·process-recipe-tree L2 정합.
+> **도메인 사실 준수 체크(HARD):** 별색=공정(D-2/#2) · 본체색=자재 CLR(D-2) · 판걸이수=앱계산 DB미저장(D-4) · UV변형=공정파라미터 not print_side(#2) · size≠plate(#13) · 형상≠자재(#13 흡수) · **생산형태⊥카테고리(#15)** · **완제 본체=자재 facet not 신축(#1)** · **두께=자재(#1 GS 장패드 4T)** · **디자인 입력채널⊥본체옵션(#16·가격0)** · **PRT_WHT=공정 not 도수/자재(#2·T-E)** · **템플릿 자산≠완제SKU(#4/#16 분리·T-A)**. 전부 entity-semantic-model L3(C-9 생산방식)·process-recipe-tree L2 정합.
 
 > **GS 통합 과잉일반화 거부 기록:** ① "완제 본체 SKU" = 자재축 facet(distinct 거부 — BN/GS 같은 자재참조). ② "본체 소재 pdtCode 분리" = 자재+카테고리 복합 facet(distinct 거부 — RP 카탈로그 정책일 뿐). ③ "variant 3채널" = 기존 옵션/공정파라미터/사이즈로 분배(distinct 거부). ④ "기종 enum"(폰케이스) = 사이즈 프리셋 대규모 인스턴스(distinct 거부). **distinct 승격 = 생산형태(#15)·본체 형태가공(#14) 2종만**(BN·GS 둘 다 견디는 governing/lifecycle 보유).
+
+> **TP 통합 과잉일반화 거부 기록:** ⑤ "템플릿 자산" = D-11 입력채널 리소스 facet(distinct 거부 — D-11 종속·단 템플릿#4와 이중의미 분리). ⑥ "VDP" = 입력채널 데이터바인딩 facet × 수량#10(distinct 거부). ⑦ "페이지계층 INN_PAGE" = 수량모델#10 슬롯 + 제약#5(distinct 거부). ⑧ "형태 variant"(M/I/보딩·탁상/벽걸이) = 사이즈#13+칼틀#2(distinct 거부 — GS THO_CUT 동형). ⑨ "특수인쇄 PRT_WHT/PRT_MAG·미싱/넘버링" = 공정#2(+넘버링은 VDP 가능·distinct 거부). **distinct 승격 = 디자인 입력 채널(#16) 1종만**(BN·GS·TP 세 군 견디는 게이팅 lifecycle + 비-TP 트윈 직접 대조).
