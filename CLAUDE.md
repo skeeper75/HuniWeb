@@ -185,7 +185,26 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 ---
 
-## 11. MoAI Framework (gated — rarely used here)
+## 11. Harness: Huni-RP-Meta (RedPrinting 옵션 관리 메타모델 → 후니 기초데이터 관리 그릇 설계)
+
+**목표:** RedPrinting 라이브(redprinting.co.kr, 479상품/26카테고리)의 주문옵션 구성을 **대표 샘플**로 역공학하여 "옵션 관리 메타모델"(자재/공정/옵션/템플릿/제약/기초코드/카테고리 + **추가 발굴 축**)을 도출하고, 후니 실제 t_* 현황과 갭 분석한 뒤, 후니에 필요한 기초데이터 관리 **"그릇"(스키마/관리축)**을 설계 제안한다. RedPrinting은 사용자 본인 설계 시스템이므로 검증된 참조 모델로 흡수(답습 아님). 위젯 구현 역공학(huni-widget)·후니 t_* 실 적재/매핑(huni-dbmap)과 별개의 **메타모델 발굴·그릇 설계 전용** 하네스.
+
+**트리거:** "레드프린팅 옵션 분석", "RP 메타모델", "옵션 관리 메타모델", "기초데이터 관리 체계/그릇", "자재 공정 옵션 관리 그릇", "관리 메타모델 발굴", "RedPrinting 벤치마크 메타모델", "후니 기초데이터 그릇 설계", "현수막 옵션 구성 분석", "RP-Meta 하네스 실행/재실행/업데이트/보완", "특정 상품군만 메타모델" 등 본 도메인 요청 시 `huni-rpmeta-orchestrator` 스킬을 사용. 단순 질문은 직접 응답.
+
+**산출물 루트:** `_workspace/huni-rpmeta/` (01_reverse·02_metamodel·03_gap·04_vessel·05_validation). 에이전트=`rpm-reverse-engineer`·`rpm-metamodel-architect`·`rpm-gap-analyst`·`rpm-vessel-designer`·`rpm-validator`(+재사용 `dbm-schema-analyst`/`dbm-ddl-proposer`/`dbm-domain-researcher`).
+
+**핵심 결정:** ① 대표샘플→메타모델→확대(전수수집 금지) ② 7버킷 외 **추가 메타모델 심층 발굴**이 핵심 directive ③ 라이브 읽기전용(주문/POST 금지) ④ **DB 미적재 — 그릇=설계 제안, 실 적용 인간 승인**(search-before-mint·정규화·컨벤션 정합) ⑤ RedPrinting 모델은 흡수하되 naming/codes는 후니로 유입 금지 ⑥ 생성≠검증(M1~M6 게이트).
+
+**변경 이력 (최근 3건):**
+| 날짜 | 변경 내용 | 대상 | 사유 |
+|------|----------|------|------|
+| 2026-06-17 | **굿즈(GS) 확장 종단 완주 — M1~M6 전체 GO** — 사용자 "굿즈 갭분석". GS 대표 12종 역공학(재사용67% s3 GS캡처+라이브33%·신규Vue SSR미노출=catalog/unobserved 정직) → 메타모델 **13→15축**(GS 신축 distinct 2: **#14 본체형태가공**[조립/지퍼/봉제·평면→입체 생성]·**#15 생산형태**[완제/반제/기성/디자인·카테고리와 직교 governing]; facet 강등 4: 완제본체SKU=자재축facet·소재pdtCode분리·variant3채널·기종enum) → 굿즈 갭(PASS5·WEAK7·GAP3) → 그릇 설계(실신규 2=코드행/컬럼·**신규테이블 mint 0**) → validator GO(NO-GO0·D-3 Low 이미교정). **★핵심 발견: 굿즈 본체자재 결함의 스키마 진원 = vessel-gap(데이터 미적재 아님)** — `t_mat_materials`에 물리치수만, RP body_color/capacity/thickness 분해축 컬럼 부재 → 소재/색/용량이 상품명 의존 고착(round-22 "본체소재 0개"의 진짜 원인). **★MAT_TYPE.09 "파우치"·.10 "악세사리"=자재유형을 상품군명으로 만든 vessel-level 오라벨**(112행 비자재·84상품 BOM load-bearing→단순 재명명 금지·목적지 선행·use_yn=N 마지막·dbmap B-3 강결합). #15는 라이브 `semi_role_cd`(28행) 발견으로 "신규 불요" 재분류(후니 표현력이 추정보다 좋음). 실 적용 인간 승인·행 교정은 dbmap 트랙 | `_workspace/huni-rpmeta/`(01~05 GS 확장)·CLAUDE.md §11·[[huni-rpmeta-harness]] | 사용자(굿즈 갭분석) |
+| 2026-06-17 | **현수막(BN) 파일럿 종단 완주 — M1~M6 전체 GO** — BN 대표 6종 역공학(재사용33%+SSR라이브67%·chrome MCP 미주입/BFF API 인증차단·상품HTML GET만 가능) → **옵션 관리 메타모델 13축 도출**(7정적+발굴 7 distinct: D-1부속물·D-2자재합성&공정결합·D-3제약6유형[force=disable역방향]·D-4공정파라미터·D-5수량모델·D-6가격기여역할·D-7인쇄방식레시피·D-8 UI런타임 facet강등) → 후니 갭(PASS5·WEAK6·GAP2) → 그릇 설계(**실그릇 3=코드행/컬럼만·신규테이블 mint 0**+재분류5) → validator M1~M6 GO(NO-GO0). **★라이브 재실측이 dbmap 스냅샷 stale 정정: option_items 0→469·groups 13→134·constraints 0→10·comp_prices 0→3,416·카테고리고아 0(round-22 반영)** → data-gap 대부분 닫힘·본 하네스=vessel-gap만. **★RP MTRL_CD 합성코드=후니 자재오염(MAT_TYPE.08~10=129행) 정답모델·SUB_MTRL_YN=후니 옵션=자재+공정 BUNDLE 동형·제약6유형=CPQ logic JSONLogic 대응.** open decision 5(인쇄방식 1급화·본체색 목적지 등)·실 적용 인간 승인 | `_workspace/huni-rpmeta/`(01_reverse~05_validation)·CLAUDE.md §11·[[huni-rpmeta-harness]] | 사용자(현수막 파일럿 먼저 실행) |
+| 2026-06-17 | 하네스 초기 구성 — 5인 팀(rpm-reverse-engineer·metamodel-architect·gap-analyst·vessel-designer·validator) + 스킬 4종(rpm-live-reverse·rpm-metamodel-design·rpm-gap-vessel·rpm-validation) + 오케스트레이터. RedPrinting 옵션 구성 역공학(base-data 렌즈)→메타모델 발굴(7버킷+추가축)→후니 갭(PASS/WEAK/GAP)→그릇 설계(search-before-mint) 파이프라인. dbm-* 3 에이전트 재사용. 라이브 읽기전용·DB 미적재 | `.claude/agents/huni-rpmeta/`·`.claude/skills/{rpm-live-reverse,rpm-metamodel-design,rpm-gap-vessel,rpm-validation,huni-rpmeta-orchestrator}`·CLAUDE.md §11 | 사용자(`/harness:harness` — RedPrinting 메타모델로 후니 기초데이터 관리 그릇 만들기) |
+
+---
+
+## 12. MoAI Framework (gated — rarely used here)
 
 The MoAI-ADK orchestration framework (SPEC plan/run/sync, TRUST 5, DDD/TDD, Agent Teams,
 design GAN loop) is installed but not the primary workflow in this repo. Its detailed
