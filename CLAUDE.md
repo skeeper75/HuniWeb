@@ -170,7 +170,22 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 ---
 
-## 10. MoAI Framework (gated — rarely used here)
+## 10. Harness: Huni-Project-Plan (프로젝트 일정관리 통합 IA 문서)
+
+**목표:** 후니프린팅 리뉴얼(Classic ASP→신규)의 **프로젝트 일정관리 통합 IA 문서(엑셀)**를 산출·갱신. 후니에서 논의된 IA·정책이 권위이며, 위젯·에디쿠스(레드 역공학)·주문→생산(MES) 흐름·Shopby 표준 갭·라이브 DB 실측을 반영해 실무진용 일정관리 엑셀(역할·담당자·주차 병렬일정·고객 준비물·외부계약·개발자 상세)을 만든다. 실제 기능목록 권위(가상 창작 금지)·쉬운 말+용어집·주차 상대일정(날짜 날조 금지)·쇼핑개발(김동학 1명) 병목→AI 병행 가속.
+
+**트리거:** "프로젝트 일정관리 문서", "일정관리 IA", "통합 IA 일정", "일정표 작성", "역할분담 문서", "페이즈 일정", "단계배치", "일정관리 다시/업데이트/보완", "위젯 기능목록 일정", "MES 흐름 일정", "고객 준비물 정리", "huni-project-plan" 등 본 도메인 요청 시 `huni-project-plan-orchestrator` 스킬을 사용. 단순 질문은 직접 응답.
+
+**산출물 루트:** `_workspace/huni-project-plan/` (01_research·02_synthesis·03_build·04_qa). 최종=`docs/huni/후니프린팅_프로젝트일정관리_통합IA_*.xlsx`(11시트). 에이전트=`hpp-ia-curator`·`hpp-xlsx-builder`·`hpp-plan-qa`(+콘텐츠 수집은 `hw-reverse-engineer`/`dbm-schema-analyst`/`pq-researcher` 재사용).
+
+**변경 이력:**
+| 날짜 | 변경 내용 | 대상 | 사유 |
+|------|----------|------|------|
+| 2026-06-16 | 하네스 초기 구성 + 일정관리 엑셀 산출 — 경량 하네스(신규 에이전트 3 + 오케스트레이터 1·기존 hw/dbm/pq 재사용). 입력 IA 144기능 → **보강 162기능**(Shopby 표준 갭·주문 런타임·MES 생산브릿지 18행) + 신규 6시트(위젯·에디쿠스 22기능·주문→MES 안밖·고객준비물/최숙진실장·외부계약14·용어집·개발자상세). 실측 근거: 위젯 역공학·라이브 DB(주문 런타임 0개·MES_ITEM_CD 16/275)·Shopby OpenAPI. 주차 상대일정+병렬 레인+병목(쇼핑 공수 2배). 독립 QA Q1~Q5 GO(High 0·가상기능 0·집계 정합·비밀값 노출 0) | `.claude/agents/huni-project-plan/`·`.claude/skills/huni-project-plan-orchestrator`·`_workspace/huni-project-plan/`·CLAUDE.md §10 | 사용자(`/harness:harness` — 프로젝트 일정관리 문서) |
+
+---
+
+## 11. MoAI Framework (gated — rarely used here)
 
 The MoAI-ADK orchestration framework (SPEC plan/run/sync, TRUST 5, DDD/TDD, Agent Teams,
 design GAN loop) is installed but not the primary workflow in this repo. Its detailed
