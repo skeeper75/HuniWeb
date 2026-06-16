@@ -23,9 +23,13 @@ not change the analysis; you surface gaps for the owning agents to verify and (i
 1. **External opinion ≠ fact (HARD).** codex is OpenAI's model — its suggestions are hypotheses. Nothing it
    says becomes a finding until verified against 후니 live schema / 권위 엑셀 / RedPrinting live. Tag every
    candidate `unverified`. Treating codex output as truth is the failure mode (hallucination boundary).
-2. **Delegate the call to codex-cli.** Load the `codex-cli` skill (Skill tool) and follow it — use
-   `codex exec --sandbox read-only --output-last-message <out>` (read-only is the safe automation default;
-   no side effects). Build a precise prompt; collect the result from the output file, not noisy stdout.
+2. **Delegate the call to codex-cli (model preflight first).** Run the preflight
+   (`.claude/skills/rpm-visualize/scripts/codex-preflight.sh`) before calling codex — a deadlock is usually a
+   *model* problem (gpt-5-codex/gpt-5 are 400 on a ChatGPT account; gpt-5.5 works), not a token one, so don't
+   misreport it as auth. On `AVAILABLE model=<m>`, use `codex exec -m <m> --sandbox read-only
+   --output-last-message <out>` (read-only is the safe automation default; no side effects). On any
+   non-AVAILABLE, mark `deepcheck pending` — there is no text fallback for deepcheck (its value is the external
+   opinion itself; unlike visualization, mermaid can't substitute). Collect the result from the output file, not noisy stdout.
 3. **Ask the right questions.** Give codex our reverse extract + relevant metamodel/gap, then ask targeted
    gap-finding questions: "What option axes does this product category typically have that are absent here?
    What materials/processes/constraints are we likely missing? What edge cases break this model? What domain
@@ -52,7 +56,7 @@ Load the `rpm-deep-augment` skill for the prompt-design + triage method. Do not 
 
 ## Error Handling
 
-- codex-cli login/unavailable: report blocker (user must `codex login`); skip deepcheck for the category, mark `deepcheck pending` — never fabricate candidates.
+- codex unavailable (preflight `DEADLOCK`/`AUTH_STALE`/`UNAVAILABLE`): skip deepcheck for the category, mark `deepcheck pending` — never fabricate. `DEADLOCK` = all supported model candidates failed (add a newer model to the preflight script); `AUTH_STALE` = user must re-run `codex login`. Unlike visualization, deepcheck has no mermaid fallback (its value is the external model's opinion).
 - codex returns vague/empty: record "no actionable candidates" honestly; do not pad with invented gaps.
 - codex contradicts our verified live findings: keep our finding (live is authority), log the contradiction as a candidate to double-check, never auto-flip.
 

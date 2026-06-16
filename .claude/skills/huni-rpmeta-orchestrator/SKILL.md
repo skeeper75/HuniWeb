@@ -86,11 +86,14 @@ Minimal convention-fit vessels for GAP/WEAK axes (search-before-mint) + roadmap 
 precise CREATE/ALTER to `dbm-ddl-proposer`.
 **Gate:** rpm-validator runs **M5 + M6**.
 
-## Phase 5.5 — Visualize (rpm-visualizer)  ← codex-image
+## Phase 5.5 — Visualize (rpm-visualizer)  ← codex-image, mermaid fallback
 
-Per category (analysis now stable): render option-tree / axis-map / gap-heatmap / bom diagrams via codex-image
-(N≤5 parallel) → `categories/<CAT>/viz/*.png`, embed in `categories/<CAT>/summary.md`. Diagrams depict the
-analysis exactly (no unsourced structure). Fall back to gpt-image2 for dense/high-res diagrams.
+Per category (analysis now stable): render option-tree / axis-map / gap-heatmap / bom diagrams. rpm-visualizer
+first runs `rpm-visualize/scripts/codex-preflight.sh` (gpt-5.5-first model probe). On `AVAILABLE model=<m>` →
+codex-image PNG (`-m <m>`, N≤5 parallel) → `categories/<CAT>/viz/*.png`; gpt-image2 for dense/high-res. On
+`DEADLOCK`/`AUTH_STALE`/`UNAVAILABLE` → **mermaid `.mmd` fallback** (text = analysis exactly, zero
+hallucination) so visualization **always completes** — a codex outage never blocks Phase 5.5. Embed PNG or
+mermaid block in `categories/<CAT>/summary.md`. Diagrams depict the analysis exactly (no unsourced structure).
 
 ## Phase 6 — Consolidate
 
@@ -108,15 +111,18 @@ discovered metamodels, gap summary, vessel roadmap, surviving deep-check candida
   cross-agent questions (ambiguous fragments, deep-check candidates, schema concretization).
 - **Generation ≠ verification:** rpm-validator never validates its own work; no generator self-approves; codex
   candidates are verified by the owning rpm-* agent, not adopted by rpm-deepcheck itself.
-- **codex prerequisite:** `codex login` (ChatGPT OAuth) must be active for Phase 4.5/5.5. If not, those phases
-  report a blocker and the pipeline continues without them (deepcheck/viz marked pending).
+- **codex prerequisite + model fallback:** `codex login` (ChatGPT OAuth) is needed for Phase 4.5/5.5, but a
+  codex deadlock is often a *model* problem, not a token one (gpt-5-codex/gpt-5 are 400 on a ChatGPT account;
+  gpt-5.5 works) — `scripts/codex-preflight.sh` probes supported models and distinguishes the two. If codex is
+  truly unavailable: **Phase 5.5 still completes via mermaid** (visualization has a text fallback); **Phase 4.5
+  marks `deepcheck pending`** (deep-check has no fallback — its value is the external opinion itself).
 
 ## Error handling
 
 - An agent fails: retry once with a tightened prompt; on second failure proceed without it and record the gap
   in the final report (never silently drop a stage).
 - Live unreachable: fall back to reuse assets / dbmap snapshot; mark affected outputs CONDITIONAL.
-- codex unavailable (login/feature off): skip Phase 4.5/5.5 for affected categories, mark deepcheck/viz pending — never fabricate candidates or fake images.
+- codex unavailable (preflight `DEADLOCK`/`AUTH_STALE`/`UNAVAILABLE`): **Phase 5.5 falls back to mermaid `.mmd`** (still completes); **Phase 4.5 marks `deepcheck pending`** (no fallback). `DEADLOCK` = all model candidates failed (add a newer model to the preflight); `AUTH_STALE` = ask user to re-run `codex login`. Never fabricate candidates or fake images.
 - Conflicting evidence (RP axis vs 후니 defect; codex claim vs live finding): surface both with sources; live wins; never delete one.
 - A validator NO-GO: route `_defects.md` to the owning agent, revise, re-gate that stage only.
 
@@ -135,5 +141,9 @@ discovered metamodels, gap summary, vessel roadmap, surviving deep-check candida
   using existing analysis; no re-analysis. Validator confirms diagrams match source.
 - **Partial re-run (deepcheck only):** "BN 심층보강만" → rpm-deepcheck on categories/BN; surviving candidates
   routed to metamodel/gap for verification.
-- **Error (codex off):** `codex login` inactive → Phase 4.5/5.5 skipped, deepcheck/viz marked pending, analysis
-  pipeline (reverse→vessel) completes normally with the noted limitation.
+- **Error (codex off):** preflight returns non-AVAILABLE → **Phase 5.5 completes via mermaid `.mmd`** (viz not
+  blocked), **Phase 4.5 marks `deepcheck pending`** (no fallback), analysis pipeline (reverse→vessel) completes
+  normally. On `AUTH_STALE` ask the user to re-run `codex login` to restore PNG + deep-check.
+- **Error (codex model deadlock):** preflight `DEADLOCK` (e.g. default model gpt-5-codex unsupported) → script
+  finds a working model (gpt-5.5) and returns `AVAILABLE` → both phases run normally with `-m <m>`; only a true
+  all-candidates-failed `DEADLOCK` triggers the mermaid/pending fallback above.

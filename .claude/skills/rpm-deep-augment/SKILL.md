@@ -25,14 +25,19 @@ also hallucinates, so its value is *only* as a candidate generator: every sugges
    - "What edge cases or variant patterns would break this model?"
    - "What industry-standard domain facts about this category should inform a base-data schema?"
    Demand specific, falsifiable claims; reject requests for vague advice.
-3. **Pre-flight codex auth (HARD).** `codex login status` can falsely report "Logged in" on an *expired*
-   OAuth refresh token. Verify with a trivial ping first — `codex exec --sandbox read-only
-   --output-last-message /tmp/codex-ping.md "reply OK"` — and confirm the file has real content. A
-   `401 Unauthorized` or empty output means the token is stale: stop, ask the user to re-run `codex login`
-   (or `codex login --device-auth` if headless), mark `deepcheck pending`. Never fabricate candidates.
-4. **Call codex-cli (read-only).** Load the `codex-cli` skill and follow it: `codex exec --sandbox read-only
-   --output-last-message /tmp/rpm-deepcheck-{CAT}.md "<prompt>"`. Read-only = no side effects (safe default).
-   Collect the answer from the output file (stdout has noise). Never paste credentials/.env into the prompt.
+3. **Pre-flight codex + model fallback (HARD).** Two traps: `codex login status` falsely reports "Logged in"
+   on an *expired* token, AND a codex deadlock is often a *model* problem, not a token one (gpt-5-codex/gpt-5
+   are `400 not supported` on a ChatGPT account; gpt-5.5 works). Run
+   `.claude/skills/rpm-visualize/scripts/codex-preflight.sh` (pings supported model candidates, gpt-5.5 first)
+   — it prints `AVAILABLE model=<m>` / `DEADLOCK` / `AUTH_STALE` / `UNAVAILABLE`. On `AVAILABLE`, call codex
+   with `-m <m>` (step 4). On any non-AVAILABLE, mark `deepcheck pending` — deepcheck has **no text fallback**
+   (its whole value is an external model's opinion; mermaid can't substitute). For `AUTH_STALE`, ask the user
+   to re-run `codex login` (or `codex login --device-auth` if headless). `DEADLOCK` = all model candidates
+   failed (add a newer model to the preflight). Never fabricate candidates.
+4. **Call codex-cli (read-only, model from preflight).** Load the `codex-cli` skill and follow it: `codex exec
+   -m <model> --sandbox read-only --output-last-message /tmp/rpm-deepcheck-{CAT}.md "<prompt>"` (use the `<m>`
+   from `AVAILABLE model=<m>`). Read-only = no side effects (safe default). Collect the answer from the output
+   file (stdout has noise). Never paste credentials/.env into the prompt.
 5. **Triage the output.** Classify every item:
    - **(a) new candidate** → tag `unverified` + route: new axis→metamodel-architect, new gap→gap-analyst,
      missed option→reverse-engineer, vessel implication→vessel-designer.
