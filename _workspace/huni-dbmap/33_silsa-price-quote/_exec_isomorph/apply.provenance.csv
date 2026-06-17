@@ -1,0 +1,20 @@
+sql_file,step,table,op,target,source
+apply.sql,STEP1/2,t_prc_formula_components,UPDATE comp_cd→정본,PRF_POSTER_LEATHER_AP disp_seq=1 COMP_POSTER_LEATHER_ARTPRINT→COMP_POSTER_CANVAS_FABRIC,design §3 그룹A
+apply.sql,STEP1/2,t_prc_formula_components,UPDATE comp_cd→정본,PRF_POSTER_MESH disp_seq=1 COMP_POSTER_MESH_PRINT→COMP_POSTER_CANVAS_FABRIC,design §3 그룹A
+apply.sql,STEP1/2,t_prc_formula_components,UPDATE comp_cd→정본,PRF_POSTER_TYVEK disp_seq=1 COMP_POSTER_TYVEK_PRINT→COMP_POSTER_CANVAS_FABRIC,design §3 그룹A
+apply.sql,STEP1/2,t_prc_formula_components,UPDATE comp_cd→정본,PRF_POSTER_ADH_WP disp_seq=1 COMP_POSTER_ADH_WATERPROOF_PVC→COMP_POSTER_ARTPRINT_PHOTO,design §3 그룹B
+apply.sql,STEP1/2,t_prc_formula_components,UPDATE comp_cd→정본,PRF_POSTER_ARTFABRIC disp_seq=1 COMP_POSTER_ARTFABRIC_GRAPHIC→COMP_POSTER_ARTPRINT_PHOTO,design §3 그룹B
+apply.sql,STEP1/2,t_prc_formula_components,UPDATE comp_cd→정본,PRF_POSTER_WATERPROOF disp_seq=1 COMP_POSTER_WATERPROOF_PET→COMP_POSTER_ARTPRINT_PHOTO,design §3 그룹B
+apply.sql,STEP3,t_prc_price_components,UPDATE use_yn=N,COMP_POSTER_LEATHER_ARTPRINT,design §6 #3
+apply.sql,STEP3,t_prc_price_components,UPDATE use_yn=N,COMP_POSTER_MESH_PRINT,design §6 #3
+apply.sql,STEP3,t_prc_price_components,UPDATE use_yn=N,COMP_POSTER_TYVEK_PRINT,design §6 #3
+apply.sql,STEP3,t_prc_price_components,UPDATE use_yn=N,COMP_POSTER_ADH_WATERPROOF_PVC,design §6 #3
+apply.sql,STEP3,t_prc_price_components,UPDATE use_yn=N,COMP_POSTER_ARTFABRIC_GRAPHIC,design §6 #3
+apply.sql,STEP3,t_prc_price_components,UPDATE use_yn=N,COMP_POSTER_WATERPROOF_PET,design §6 #3
+apply.sql,STEP4,t_prc_price_components,UPDATE comp_nm/note,COMP_POSTER_CANVAS_FABRIC,design §4 정본·Q-IM1 라이브 frm_nm
+apply.sql,STEP4,t_prc_price_components,UPDATE comp_nm/note,COMP_POSTER_ARTPRINT_PHOTO,design §4 정본·Q-IM1 라이브 frm_nm
+apply.sql,STEP5,t_prc_price_components,UPDATE comp_nm/note,COMP_POSTER_ARTPAPER_MATTE,design §4 단독·Q-IM1 라이브명=아트페이퍼포스터
+apply.sql,STEP5,t_prc_price_components,UPDATE comp_nm/note,COMP_POSTER_BANNER_MESH,design §4 단독·Q-IM1 라이브명=메쉬현수막
+apply.sql,STEP5,t_prc_price_components,UPDATE comp_nm/note,COMP_POSTER_ADH_CLEAR_PVC,design §4 단독·Q-IM1 라이브명=접착투명포스터
+apply.sql,STEP5,t_prc_price_components,UPDATE comp_nm/note,COMP_POSTER_LINEN_FABRIC,design §4 단독·Q-IM1 라이브명=린넨패브릭포스터
+apply.sql,STEP5,t_prc_price_components,UPDATE comp_nm/note,COMP_POSTER_BANNER_NORMAL,design §4 단독·Q-IM1 라이브명=일반현수막

@@ -1,0 +1,30 @@
+=== BACKUP formula_components 배선 ===
+        frm_cd         |            comp_cd             | disp_seq 
+-----------------------+--------------------------------+----------
+ PRF_POSTER_ADH_WP     | COMP_POSTER_ADH_WATERPROOF_PVC |        1
+ PRF_POSTER_ARTFABRIC  | COMP_POSTER_ARTFABRIC_GRAPHIC  |        1
+ PRF_POSTER_LEATHER_AP | COMP_POSTER_LEATHER_ARTPRINT   |        1
+ PRF_POSTER_MESH       | COMP_POSTER_MESH_PRINT         |        1
+ PRF_POSTER_TYVEK      | COMP_POSTER_TYVEK_PRINT        |        1
+ PRF_POSTER_WATERPROOF | COMP_POSTER_WATERPROOF_PET     |        1
+(6 rows)
+
+=== BACKUP price_components comp_nm/note/use_yn ===
+            comp_cd             |                              comp_nm                              |                                  note                                   | use_yn 
+--------------------------------+-------------------------------------------------------------------+-------------------------------------------------------------------------+--------
+ COMP_POSTER_ADH_CLEAR_PVC      | 포스터 완제품가(포함항목 통가격) [COMP_POSTER_ADH_CLEAR_PVC]      | 포스터·사인 완제품가(소재+출력+가공 포함 통가격). 사이즈·수량별 단가표. | Y
+ COMP_POSTER_ADH_WATERPROOF_PVC | 포스터 완제품가(포함항목 통가격) [COMP_POSTER_ADH_WATERPROOF_PVC] | 포스터·사인 완제품가(소재+출력+가공 포함 통가격). 사이즈·수량별 단가표. | Y
+ COMP_POSTER_ARTFABRIC_GRAPHIC  | 포스터 완제품가(포함항목 통가격) [COMP_POSTER_ARTFABRIC_GRAPHIC]  | 포스터·사인 완제품가(소재+출력+가공 포함 통가격). 사이즈·수량별 단가표. | Y
+ COMP_POSTER_ARTPAPER_MATTE     | 포스터 완제품가(포함항목 통가격) [COMP_POSTER_ARTPAPER_MATTE]     | 포스터·사인 완제품가(소재+출력+가공 포함 통가격). 사이즈·수량별 단가표. | Y
+ COMP_POSTER_ARTPRINT_PHOTO     | 포스터 완제품가(포함항목 통가격) [COMP_POSTER_ARTPRINT_PHOTO]     | 포스터·사인 완제품가(소재+출력+가공 포함 통가격). 사이즈·수량별 단가표. | Y
+ COMP_POSTER_BANNER_MESH        | 포스터 완제품가(포함항목 통가격) [COMP_POSTER_BANNER_MESH]        | 포스터·사인 완제품가(소재+출력+가공 포함 통가격). 사이즈·수량별 단가표. | Y
+ COMP_POSTER_BANNER_NORMAL      | 포스터 완제품가(포함항목 통가격) [COMP_POSTER_BANNER_NORMAL]      | 포스터·사인 완제품가(소재+출력+가공 포함 통가격). 사이즈·수량별 단가표. | Y
+ COMP_POSTER_CANVAS_FABRIC      | 포스터 완제품가(포함항목 통가격) [COMP_POSTER_CANVAS_FABRIC]      | 포스터·사인 완제품가(소재+출력+가공 포함 통가격). 사이즈·수량별 단가표. | Y
+ COMP_POSTER_CANVAS_HANGING     | 포스터 완제품가(포함항목 통가격) [COMP_POSTER_CANVAS_HANGING]     | 포스터·사인 완제품가(소재+출력+가공 포함 통가격). 사이즈·수량별 단가표. | Y
+ COMP_POSTER_LEATHER_ARTPRINT   | 포스터 완제품가(포함항목 통가격) [COMP_POSTER_LEATHER_ARTPRINT]   | 포스터·사인 완제품가(소재+출력+가공 포함 통가격). 사이즈·수량별 단가표. | Y
+ COMP_POSTER_LINEN_FABRIC       | 포스터 완제품가(포함항목 통가격) [COMP_POSTER_LINEN_FABRIC]       | 포스터·사인 완제품가(소재+출력+가공 포함 통가격). 사이즈·수량별 단가표. | Y
+ COMP_POSTER_MESH_PRINT         | 포스터 완제품가(포함항목 통가격) [COMP_POSTER_MESH_PRINT]         | 포스터·사인 완제품가(소재+출력+가공 포함 통가격). 사이즈·수량별 단가표. | Y
+ COMP_POSTER_TYVEK_PRINT        | 포스터 완제품가(포함항목 통가격) [COMP_POSTER_TYVEK_PRINT]        | 포스터·사인 완제품가(소재+출력+가공 포함 통가격). 사이즈·수량별 단가표. | Y
+ COMP_POSTER_WATERPROOF_PET     | 포스터 완제품가(포함항목 통가격) [COMP_POSTER_WATERPROOF_PET]     | 포스터·사인 완제품가(소재+출력+가공 포함 통가격). 사이즈·수량별 단가표. | Y
+(14 rows)
+

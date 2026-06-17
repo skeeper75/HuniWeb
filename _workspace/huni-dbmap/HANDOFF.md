@@ -1,6 +1,36 @@
 # Huni-DBMap — HANDOFF (다음 세션 재시작 포인터)
 
-## ★★최신 현황 (**round-23 실사 가격 견적화 — 라이브 적재 완료** — 2026-06-18)
+## ★★최신 현황 (**실사 동형 가격테이블 결합 + 가격구성요소 네이밍 표준화 — 라이브 COMMIT** — 2026-06-18)
+`/harness:harness` 2건. 권위 = [[dbmap-price-component-grouping]]·[[dbmap-naming-standardization]] + `_workspace/huni-dbmap/33_silsa-price-quote/`·`34_naming-standardization/`.
+
+### ★실 라이브 COMMIT (되돌리지 말 것·undo 보유)
+1. **실사 동형 가격테이블 결합** (`33_silsa-price-quote/_exec_isomorph/`·**UPDATE 19**·INSERT/DELETE 0): 실사 본체 면적매트릭스 13 comp 중 단가 **byte-identical 2그룹**만 결합 → **13→7**. 그룹A 정본 `COMP_POSTER_CANVAS_FABRIC`←레더/메쉬/타이벡 · 그룹B 정본 `COMP_POSTER_ARTPRINT_PHOTO`(PRF_POSTER_FIXED 보유)←방수PVC/아트패브릭/방수PET. 배선재지정 6 + 레거시 use_yn=N 6 + comp_nm/note 7. **단가행 보존·가격 불변**(골든 A=37,800·B=21,600). 단독 5(일반현수막·린넨·접착투명·메쉬현수막·아트페이퍼) 결합금지(단가 상이·ARTPAPER 26좌표 공유했으나 범위 달라 정당). R1~R6 GO.
+2. **가격구성요소 네이밍 표준화** (`34_naming-standardization/_exec_naming/`·**UPDATE 111**[comp_nm 110·note 2·comp_typ 1]·INSERT/DELETE 0): comp_nm **코드노출 102→0**(빈더미 2 제외)·실무진 표준 한글 용어+변별자. **가격행 7293·use_yn 무변경**·멱등. R1~R6 GO.
+
+### ★확립 모델/규칙 (HARD)
+- **동형 결합 = 전컬럼 md5/셀단위 diff로 byte-identical만**(행수 같아도 단가 다르면 결합 금지)·comp 레벨만(PRF 공식 유지)·배선 재지정 + use_yn=N + 단가행 보존. 실사·아크릴 동형.
+- **네이밍 권위순서: ① 후니프린팅 레거시(huniprinting.com `/product/list.asp?pcode=N`·buysangsang.com) 최우선·후니 고유상품 우선 → ② 라이브 DB(proc_nm·cod_nm·note·frm_nm) → ③ rpmeta(RP 흡수·naming/codes 유입 금지) → ④ 인쇄표준**. comp_nm 코드노출 금지.
+- 후니 고유상품/용어: 스탠다드명함·화이트인쇄명함(큐리어스스킨)·펄명함(스타드림)·오리지널박명함·떡메모지·합판도무송·큐방·상상디자인·전자액자. 컨펌해소: 큐방(구방❌)·열재단(PROC_000084)·봉미싱·귀돌이비·각목(900↑/↓)+끈.
+- **라이브 admin 접속 = admin / test1234**(.env.local 미저장·gstack browse 세션). 18메뉴. 드리프트(라이브 권위): 카테고리·자재·공정·기초코드가 커스텀 마스터-디테일(`/admin/category-master/`·`/admin/master/mat|proc/`·`/admin/basecode-master/`)·가격뷰어/시뮬레이터 정식메뉴.
+
+### 다음 시작점
+- (a) **아크릴 동형 결합**(실사와 같은 패턴·byte-identical 검사→배선재지정·Q-PR-3 라이브 부분진화 재실측 선행)
+- (b) **빈더미 comp 2건 use_yn=N 정리**(`COMP_POPT_BNR_GAKMOK_STR_900_4`·`COMP_POSTEROPT_BANNER_MESH_PROC_OPT`·가격행 0)
+- (c) round-23 잔여(타투 1~2장·064 실측단가·카라비너 활성화·미러 연결)
+- (d) admin 드리프트(커스텀 마스터-디테일)를 매뉴얼/round-8 admin-ui-spec에 반영(필요 시)
+
+### 미해결/블로커
+- 빈더미 2건·아크릴 동형(부분진화 재실측)·round-23 잔여(064·타투·카라비너·미러)·admin 드리프트 문서 미반영·전 페이지 캡처 임시디렉터리(`_workspace/huni-rpmeta/_tmp/livecap` rm 차단 잔류).
+
+### 이번 세션 결정
+- 동형 결합=byte-identical만(단가 상이 결합 금지) · 네이밍 권위 후니 레거시 최우선·후니 고유용어 우선·rpmeta naming 유입 금지 · comp_nm/note는 가격무관 표시용이나 라이브 변경=매건 인간 승인 · 빈더미 별도 트랙.
+
+### 건드리지 말 것 (라이브 COMMIT·undo 보유)
+- 실사 결합 정본 `COMP_POSTER_CANVAS_FABRIC`·`COMP_POSTER_ARTPRINT_PHOTO` + 레거시 6 use_yn=N · 네이밍 표준화 111행 comp_nm/note · 각 `_exec_isomorph/`·`_exec_naming/` backup·undo · 검증 GO 산출(`_gate/silsa-isomorph-merge-verdict.md`·`naming-standardization-verdict.md`).
+
+---
+
+## ★최신 현황 (**round-23 실사 가격 견적화 — 라이브 적재 완료** — 2026-06-18)
 `/harness:harness` "실사시트 가격 구성요소 등록→견적가능" 7항목 + 후속(린넨·아크릴·스티커·별색·반칼·064). 신규 자산 0(기존 가격 트랙 재사용). 권위 = [[dbmap-area-matrix-wh-dimension]]·[[dbmap-price-component-grouping]] + `_workspace/huni-dbmap/33_silsa-price-quote/`.
 
 ### ★실 라이브 COMMIT (되돌리지 말 것·각 `_exec_*/backup_*`·undo 보유)
