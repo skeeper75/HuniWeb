@@ -1,0 +1,27 @@
+-- acrylic2-blocked.BLOCKED.sql — 차단 항목 (apply.sql 에 포함 금지·인간 승인/컨펌/채번 후 별도 실행)
+-- ★이 파일은 apply.sql 에서 \i 하지 않는다. 추측/미채번 적재 금지(돈-크리티컬).
+-- =========================================================================================
+-- BLOCKED-1 · Q-ACR-9 — 미러 바인딩 (본체 상품 0개·CPQ 소재옵션 선결)
+--   COMP_ACRYL_MIRROR3T 단가행 실재(52행·A1 축전환 완료)하나 라이브 미러3T 본체 상품 0개.
+--   (미러스티커=완제품 별 트랙·골드실버명찰 use_yn=N·거울=별 상품군). 미러=본체 소재옵션 가능성이나
+--   아크릴 CPQ 옵션레이어 전무(GAP-CPQ-ZERO) → 어느 상품이 미러 소재를 선택하는지 미확정. 추측 바인딩 금지.
+-- INSERT INTO t_prc_price_formulas (frm_cd,frm_nm,use_yn,reg_dt) VALUES ('PRF_MIRROR_ACRYL','미러 아크릴 공식','Y',now());  -- 보류(바인딩 상품 불명)
+--
+-- BLOCKED-2 · Q-ACR-CARA-OPT — 카라비너 (형상 opt_cd 채번 선행·PRD_000166 비활성)
+--   B07 4형상 고정가(자물쇠40x69=5800·하트A43x71=5800·하트B59x54=6300·원형68x70=6900).
+--   COMP_ACRYL_CARABINER(.06 완제품비·.01 단가형·use_dims [opt_cd]) 설계 완료. 형상=opt_cd(OPV_NNNNNN)이나
+--   라이브 형상 base code 0 → opt_cd 4 채번 선행(코드 트랙·dbm-code-identifier-strategy). 채번 후 단가행 4 INSERT.
+--   PRD_000166 비활성(use_yn=N)이라 우선순위 LOW. 치수(40x69 등)는 명칭 설명·면적축 아님(고정가형).
+-- INSERT INTO t_prc_price_components (comp_cd,comp_nm,comp_typ_cd,prc_typ_cd,use_dims,use_yn,del_yn,reg_dt)
+--   VALUES ('COMP_ACRYL_CARABINER','아크릴카라비너 완제품가','PRC_COMPONENT_TYPE.06','PRICE_TYPE.01','["opt_cd"]'::jsonb,'Y','N',now());  -- opt_cd 채번 후
+--
+-- BLOCKED-3 · Q-ACR-CO1 — 코롯토 상품 바인딩 (B5·정체 컨펌 후)
+--   comp/단가행/공식(B2~B4)은 GO. 바인딩 = 코롯토 4상품 정체 컨펌 후:
+--   PRD_000164 아크릴코롯토(use_yn=N)·PRD_000168 아크릴입체코롯토(Y)·PRD_000226 아크릴쉐이커코롯토(N)·PRD_000165 포카코롯토(미확인).
+--   입체/쉐이커/포카가 같은 면적매트릭스인지 컨펌 필요(사이트/실무진). 활성 PRD_000168만 정체 확인 시 우선 바인딩 가능.
+-- INSERT INTO t_prd_product_price_formulas (prd_cd,frm_cd,apply_bgn_ymd,...) VALUES ('PRD_000168','PRF_COROTTO_ACRYL',...);  -- 정체 컨펌 후
+--
+-- BLOCKED-4 · Q-ACR-7b — CLEAR3T .02 시맨틱 (.01 정정 vs .02 유지)
+--   가격 무영향(min_qty=1 → ÷1=×1). webadmin 개발자 컨펌(왜 .01 아닌 .02인가). 우선순위 LOW.
+--   A5가 min_qty=1 가드로 가격 정합은 확보(엔진 ValueError 해소). prc_typ_cd 변경은 보류.
+-- UPDATE t_prc_price_components SET prc_typ_cd='PRICE_TYPE.01' WHERE comp_cd='COMP_ACRYL_CLEAR3T';  -- 보류(개발자 컨펌)
