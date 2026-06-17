@@ -9,6 +9,7 @@
 > - **v3.0 (TP·2026-06-17):** + **V-10 디자인 입력 채널(#16 GAP·★directive 1순위)** = base_code 그룹 3 + 상품 컬럼 4(신규 테이블 0) + **V-11 TemplateAsset 분리(T-A WEAK)** = 신규 테이블 2(본 하네스 **유일 mint**·이중의미 분리). TP 나머지 facet(VDP·페이지계층·형태variant·특수인쇄) = 기존 흡수(신규 0). 라이브 DRY-RUN(BEGIN..ROLLBACK)으로 양 DDL 유효성 실증·0 leaked. v1.0/v2.0 무수정.
 > - **v4.0 (PR·2026-06-17): PR 카테고리 = 신규 그릇 0건.** PR(인쇄물·책자·리플렛·포스터) distinct 신축 0(facet 강화 9건뿐) → search-before-mint 통과·기존 V-항목 충분. PR facet 6항(PASS 4: 표지/내지·접지/제본·page_rule·면지 / WEAK 1 / GAP 1) 중 조치 대상 2건은 기존 그릇에 facet 흡수: **P-7(인쇄방식 자재풀 게이팅) → V-2**(`vessel-print-method-recipe §7`·경로 A 제약흡수가 자재 부분집합도 담음·신규 0)·**P-6(digital_price 라우팅) → V-7**(`vessel-quantity-size-pricing §C4`·frm_typ_cd 결손 동일·가격 트랙 round-16/17 위임). **16축 포화의 vessel-side 검증** — 4번째 카테고리가 새 그릇을 요구하지 않음. 신규 테이블/컬럼/DDL/V-번호 0·인벤토리·Wave·정비권고 무수정.
 > - **v5.0 (ST·2026-06-17): ★16축 포화 붕괴 — 신규 그릇 1건(V-12 형상 축).** ST(스티커)가 distinct 신축 1건(#17 형상)으로 PR 포화를 정직하게 깸 → 17축. **V-12 형상 축**(`vessel-shape-axis.md`) = `SHAPE` base_code 그룹 1 + `t_prd_products.shape_cd`(상품 1형상) + `t_prd_product_sizes.shape_cd`(형상↔칼틀 1:多 게이팅·**기존 junction 재사용·테이블 mint 0**) — **컬럼 2(서로 다른 카디널리티)·신규 테이블 0.** 라이브 3-레벨 실측(형상 컬럼/테이블/SHAPE enum 0건)이 KB G-SK-2 확증. ★siz 흡수 거부 근거 = 형상↔칼틀 1:多(CL→CL001~100)·5형상 superset(STDCFBR) → siz 행 흡수 시 정규화 붕괴. **dbmap round-3 "도무송 형상=siz_cd 신설" 권고를 1:多 증거가 정정(충돌 아닌 정밀화).** ST facet 5항(칼선 S-2·재단입자 S-3·점착 S-4·인쇄방식 S-5·disable S-8) = **신규 vessel 0** — 전부 기존 V-항목 흡수(재단입자=PASS 그릇존재·점착→V-3·인쇄방식→V-2·disable→V-4·칼선→V-12/V-1 게이팅). 라이브 DRY-RUN(BEGIN..ROLLBACK)으로 코드행 6+ALTER ×2+FK ×2 유효성·백필 smoke·0 leaked 실증. **★[HARD] 1:1 흡수 카테고리(BN/GS/TP/PR)는 shape_cd NULL 유지·형상축 전면 강제 금지(오모델 회피).** v1.0~v4.0 무수정.
+> - **v6.0 (CL·2026-06-17): CL 카테고리 = 신규 그릇 0건, 의류 variant facet 흡수(size×color 2D=V-3·ref_key1/ref_key2 라이브 활성), 17축 재포화 vessel-side 검증.** CL(의류·티셔츠·앞치마·가방류) distinct 신축 0(의류 variant #18 부결·PR 패턴 반복) → search-before-mint 통과·기존 V-1~V-12 충분. CL facet 5항(PASS 1: Pantone 별색 PROC_000007 / WEAK 3 / GAP 1) 흡수: **C-2/C-3(size×color 2D matrix) → V-3**(`vessel-material-axis.md §9`·★2D 셀 구조는 `option_items.ref_key1/ref_key2` 페어링 **라이브 활성 255/469**이 무손실 수용=후니 옵션 그릇이 GS 1D→CL 2D variant 일반화 견딤·색=자재 CLR 라우팅·의류 원단 버킷 designer 판정)·**C-4(인쇄위치 멀티슬롯) → V-1**(위치별 공정 파라미터 `ref_param_json`·`vessel-process-parameter.md §5c`)+**V-10**(KOI_NME 위치-에디터 매핑·`vessel-design-input-channel.md §8`)·**C-6(인쇄방식 실크/전사/DTF) → V-2**(`vessel-print-method-recipe.md §9`·삼면 표현·경로 A 흡수)·**C-5(item_gbn=clothes2025 discriminator) → V-9**(`vessel-production-type.md §5d`·생산형태 governing·data 교정 주). **신규 테이블/컬럼/DDL/V-번호 0**(별색 지정값 1124 Pantone enum=#6 경량 후보·우선순위 최하·실크인쇄 한정·designer 판정 보류). **17축 재포화의 vessel-side 검증** — 6번째 카테고리가 새 그릇을 요구하지 않음. 인벤토리·Wave·정비권고 무수정·dbm-ddl-proposer 미호출.
 
 ---
 
@@ -46,6 +47,15 @@
 | **V-12 형상 축** (#17·★directive 1순위·신규) | GAP ❌ → PASS | `SHAPE` base_code 그룹 1 + `t_prd_products.shape_cd`(상품 1형상·ADD COLUMN NULL) + `t_prd_product_sizes.shape_cd`(형상↔칼틀 1:多 게이팅·기존 junction 재사용) — **신규 테이블 0**(1:多인데 junction 선재→컬럼 무손실) | **2 컬럼**(코드행+ALTER NULL×2) | 코드 1그룹(6) + 컬럼 2 |
 | ST facet(칼선 S-2·재단입자 S-3·점착 S-4·인쇄방식 S-5·disable S-8) | PASS/WEAK/GAP→흡수 | **신규 그릇 0** — 재단입자 S-3=PASS(PROC_053/054/055 실재)·점착 S-4→V-3 분해축(adhesion/weather 차원)·인쇄방식 S-5→V-2(UV/DTF/후지 enum)·disable S-8→V-4(RULE_TYPE disable 유형)·칼선 S-2→V-12/V-1 게이팅 | — | 0 (기존 흡수) |
 
+### v6.0 (CL) — facet 흡수만 (신규 그릇 0·17축 재포화)
+| 축 | gap 판정 | vessel 결과 | 사다리 | 신규 그릇 |
+|---|---|---|---|---|
+| **CL C-2/C-3 size×color 2D matrix** | WEAK → V-3 흡수 | **신규 그릇 0** — 2D 셀 구조=`option_items.ref_key1/ref_key2` 페어링 **라이브 활성 255/469**(use_yn=셀 가용성)이 무손실 수용·색=자재 CLR 라우팅·의류 원단 버킷=V-3 §9 designer 판정 | (V-3 공유·그릇 보유) | 0 (V-3 흡수) |
+| **CL C-4 인쇄위치 멀티슬롯** | WEAK → V-1+V-10 흡수 | **신규 그릇 0** — 위치 다중선택=옵션 레이어(SEL_TYPE.02·기존)·위치별 공정 파라미터=V-1 `ref_param_json`·KOI_NME 위치-에디터 매핑=V-10 채널 | (V-1·V-10 공유) | 0 (V-1·V-10 흡수) |
+| **CL C-6 인쇄방식 실크/전사/DTF** | GAP → V-2 경로 A PASS | **신규 그릇 0** — V-2(`vessel-print-method-recipe.md §9`) 경로 A(제약 흡수)가 의류 인쇄방식 삼면(자재facet/상품내옵션) 게이팅 담음 | (V-2 공유·데이터) | 0 (V-2 흡수) |
+| **CL C-5 item_gbn discriminator** | WEAK → V-9 흡수 | **신규 그릇 0** — clothes2025/tmpl 모델분기=생산형태 governing(prd_typ_cd+본체 그릇 유도)·data 교정 주·구현 discriminator라 vessel-gap 아님 | (V-9 공유·data) | 0 (V-9 흡수) |
+| **CL C-7 Pantone 별색** | PASS | **신규 그릇 0** — `PROC_000007 별색인쇄`+화이트/클리어/금/은 라이브 실재·별색=공정 경계 준수 | — | 0 (그릇 보유·1124 지정값 enum=#6 경량 후보·최하 보류) |
+
 ### v2.0 (GS) — 4 (V-3 확장 포함)
 | 축 | gap 판정 | vessel 결과 | 사다리 | 신규 그릇 |
 |---|---|---|---|---|
@@ -61,6 +71,7 @@
 - **★ST/V-12 핵심 교훈(v5.0): 1:多여도 junction이 선재하면 테이블 mint 불요.** 형상↔칼틀 1:多(CL→CL001~100)는 *카디널리티만 보면* 종속 테이블처럼 보이나 — `t_prd_product_sizes`(prd×siz junction)가 **이미 그 쌍을 담고 있어** `shape_cd` 분류 컬럼이 무손실. V-11(시안 1:N·*junction 부재*·독립 lifecycle → 테이블 mint 정당)과 대비: **mint 정당성 = 카디널리티 단독이 아니라 [1:N/M:N] AND [선재 junction 없음] AND [독립 lifecycle]의 합.** V-12는 1:多이나 선재 junction이 있어 컬럼에서 멈춤 = *정확한 사다리*. siz_sizes 마스터(497행 공유)가 아닌 prd×siz junction에 매는 것이 정규화 핵심(공유 칼틀 형상 충돌 회피).
 - **★PR 교훈(v4.0): 4번째 카테고리가 신규 그릇 0건** — PR facet 9건이 전부 기존 16축의 facet/family/cascade로 흡수. **16축 포화(saturation)의 vessel-side 증거.**
 - **★ST 교훈(v5.0): 5번째 카테고리가 포화를 정직하게 깸(신규 그릇 1)** — ST가 형상축 1건만 새 그릇을 요구하고 facet 5항은 전부 기존 흡수. 이는 오버피팅이 아니라 *사이즈축이 형상을 1:1 칼틀로 흡수해온 전제가 ST의 전용 shape_info 슬롯·1:多로 깨진* 증거 강제 결과. PR 포화 입증(distinct 0)도 여전히 유효 — PR은 형상을 1:1로만 가져 흡수 정당, ST가 1:多 분리를 명시 슬롯으로 드러내 차이를 만듦. **그릇 설계는 카테고리 증거에 정직(포화도 진화도 증거가 결정).**
+- **★CL 교훈(v6.0): 6번째 카테고리가 신규 그릇 0건(17축 재포화·PR 패턴 반복)** — CL facet 5항이 전부 기존 17축(V-1/V-2/V-3/V-9/V-10)의 facet/cascade로 흡수. ★핵심 vessel-side 검증 = **`option_items.ref_key1/ref_key2` 2D 페어링이 라이브 활성(255/469)으로 의류 size×color 2D 매트릭스·셀 가용성을 *구조적으로 견딤*** — 후니 옵션 그릇이 GS 1D variant→CL 2D variant 일반화를 무손실 수용. ST가 형상으로 포화를 깬 직후 CL은 다시 포화를 확인(distinct 0): **포화/붕괴/재포화는 카테고리 증거가 결정하지 미리 정해진 곡선이 아님.** 의류 variant #18 부결(별 그릇 가설→ref_key 페어링으로 환원)이 over-modeling 거부의 정직성 증거.
 
 ---
 

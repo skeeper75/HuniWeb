@@ -1,0 +1,43 @@
+%% CL 메타모델 17축 맵 — 출처: 02_metamodel/discovered-axes.md §31, _resolved-fragments.md(CL v6.0), gap §XV-XVI
+%% ★의류 variant #18 부결 → 17축 재포화(PR 패턴 반복·distinct 신축 0)
+flowchart TB
+  BANNER["★의류 variant #18 부결 → 17축 재포화<br/>(CL=6번째 카테고리·distinct 신축 0 — 가장 이질적 의류조차 17축 무손실 흡수)"]
+
+  subgraph REFUTE["★#18 부결 4근거 (전부 기존 17축으로 무손실 분해)"]
+    R1["item_gbn=clothes2025<br/>→ 구현 discriminator (#15 생산형태·G-1/P-4/S-5 동형)"]
+    R2["apparel_info 전용 6키<br/>→ 구현 컨테이너 뷰 (여러 축 담음·D-8 동형)"]
+    R3["size×color 2D 매트릭스<br/>→ 사이즈#13 × 색상(자재CLR #1) Cartesian + 셀가용성=제약#5"]
+    R4["Pantone 1124<br/>→ 별색 공정#2 (round-22 경계)"]
+  end
+
+  BANNER --> REFUTE
+
+  subgraph STRONG["CL이 강화한 facet 5항 (기존 축 매핑)"]
+    direction TB
+    A1["#1 자재 (size×color SKU matrix)<br/>WEAK — 2D 페어링 그릇 보유·CLR 분해축만 부재"]
+    A2["#2 공정 (인쇄위치 멀티슬롯 + 별색)<br/>WEAK/PASS"]
+    A9["#9 공정파라미터 (위치별 size·좌표)<br/>GAP — ref_param_json 부재"]
+    A12["#12 인쇄방식 레시피 (실크/전사/DTF)<br/>GAP — PrintMethod 1급 그릇 부재"]
+    A15["#15 생산형태 (item_gbn 분기)<br/>WEAK — prd_typ_cd≠생산형태"]
+    A16["#16 디자인입력 (KOI_NME 에디터 매핑)<br/>GAP — TP 합류"]
+  end
+
+  REFUTE --> STRONG
+
+  PASS["★PASS 측면 — option_items 2D 페어링 활성<br/>(ref_key2 255/469·자재.03 dominant)<br/>+ 별색 PROC_000007 family 라이브 실재<br/>= 17축 포화 재입증"]
+  STRONG --> PASS
+
+  subgraph IDLE["CL 미행사 축"]
+    I1["#3 옵션 · #4 템플릿 · #6 기초코드<br/>#7 카테고리 · #8 부속물 · #10 수량(이중만)<br/>#11 가격 · #13 사이즈(grid) · #14 형태가공<br/>#17 형상(ST 신축·CL 무관)"]
+  end
+
+  style BANNER fill:#ffe0b2,stroke:#e65100,stroke-width:3px
+  style REFUTE fill:#f3e5f5,stroke:#6a1b9a
+  style PASS fill:#c8e6c9,stroke:#2e7d32,stroke-width:2px
+  style A12 fill:#ffcdd2,stroke:#c62828
+  style A9 fill:#ffcdd2,stroke:#c62828
+  style A16 fill:#ffcdd2,stroke:#c62828
+  style A1 fill:#fff9c4,stroke:#f9a825
+  style A2 fill:#fff9c4,stroke:#f9a825
+  style A15 fill:#fff9c4,stroke:#f9a825
+  style IDLE fill:#eceff1,stroke:#90a4ae

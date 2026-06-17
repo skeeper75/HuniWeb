@@ -1,0 +1,38 @@
+%% CL size×color 2D 매트릭스 다이어그램 — 출처: reverse.md §0.2/§0.3 + gap §XV-2
+%% 사이즈(7행)×색상(54색) → 셀당 단일 MTRL_COD(SKU)·use_yn 셀가용성 · GS 1D variant의 2D 일반화
+flowchart TB
+  TITLE["★size×color 2D 매트릭스 (의류 본체 SKU 해소)<br/>CLSTSHS 자체: 7사이즈 × 54색 = 227셀 / CLTMSHS 단체: 9사이즈 × 6색 = 54셀<br/>각 셀 → 단일 MTRL_COD · 셀별 HIDE_YN/QUICK_ORD_YN 가용성"]
+
+  subgraph MATRIX["apparel_info.size_color_info — 2D 셀 → MTRL_COD"]
+    direction TB
+    HDR["         색상축 → CLR_COD: 03 블랙 · 26 화이트(DEFAULT) · 58 멜란지 · 65 애쉬 … 54색(HEX)"]
+    RS["사이즈축 COD=1 (S) ×CLR03→MTRL_COD <b>SXSRT103</b> · ×CLR26→ <b>SXSRT126</b>"]
+    RM["사이즈축 COD=2 (M) ×CLR26→ <b>SXSRT226</b>  (가격캡처 SI030)"]
+    RL["사이즈축 COD=3 (L) ×CLR26→ <b>SXSRT326</b>  (가격캡처 SI014)"]
+    RX["… XS/XL/2XL/3XL (size_info 7종·GBN=adult) · 단체티 +child 120~150"]
+    HDR --- RS
+    RS --- RM
+    RM --- RL
+    RL --- RX
+  end
+
+  TITLE --> MATRIX
+
+  ENC["★합성코드 인코딩: MTRL_COD = PTT(원단/제품타입) + 사이즈 첫자리(1=S·2=M·3=L) + 색 끝2자리(03·26)<br/>PCS_DTL_NME 라벨 융합: '(5942) 6.2oz 프리미엄 티셔츠 화이트 L'<br/>pdt_mtrl_info 584행 = size×color SKU 폭발"]
+  MATRIX --> ENC
+
+  CELL["셀가용성 (제약#5 셀단위): HIDE_YN=N만 노출 · HIDE_RSN · QUICK_ORD_YN<br/>(라이브 미관측 동작 — 데이터는 실측)"]
+  ENC --> CELL
+
+  GENERAL["★GS 1D variant의 2D 일반화<br/>GS = 1D-per-channel (DTL / ATTB / CUT 3채널) · CL = 2D 매트릭스(size×color→단일 MTRL_COD)<br/>둘 다 같은 기존 축으로 분해 (variant #18 부결)"]
+  CELL --> GENERAL
+
+  VESSEL["후니 표현 그릇 (gap §XV-2): option_items.ref_key1=사이즈(SIZ)·ref_key2=자재/색(MAT)<br/>item_seq=셀 · use_yn=셀가용성(HIDE_YN 대응) — ★라이브 활성(ref_key2 255/469)<br/>단 색상 전용 ref 타입 부재·의류 원단 MAT_TYPE 버킷 부재(자재 CLR 분해축=기존 #1 WEAK·V-3)"]
+  GENERAL --> VESSEL
+
+  style TITLE fill:#ffe0b2,stroke:#e65100,stroke-width:3px
+  style MATRIX fill:#e3f2fd,stroke:#1565c0
+  style ENC fill:#f3e5f5,stroke:#6a1b9a
+  style CELL fill:#fff3e0,stroke:#ef6c00
+  style GENERAL fill:#fce4ec,stroke:#c2185b
+  style VESSEL fill:#fff9c4,stroke:#f9a825,stroke-width:2px

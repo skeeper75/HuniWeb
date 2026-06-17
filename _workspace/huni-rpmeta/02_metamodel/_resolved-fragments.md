@@ -415,3 +415,91 @@
 **ST 강제 분류 회피(SKILL §3·§5):** **distinct 승급 1건(형상 #17) = 16축 포화 붕괴.** 9 fragment(S-2~S-10)는 기존 17축 facet/family/cascade/정책. ★directive 4 후보 적대 판정: ① 형상=★distinct(전용 슬롯·1:多·후니 KB G-SK-2 size축 미수용 확증) · ② 칼선=공정#2 facet(THO_GRA/THO_DFT 두 모드·KB PROC_053/054/055·도무송 결정적) · ③ 재단입자=공정#2 멤버(반칼/완칼=KB 1급 공정·신축 거부) · ④ 점착=자재#1 합성 차원(★침묵선택 거부하고 "별 자재계열 vs 자재 합성 차원" 트레이드오프 펼친 뒤 facet). **★포화 붕괴 정당성:** PR(distinct 0)이 입증한 16축 포화를 ST가 깬 것은 *오버피팅이 아니라 사이즈축이 형상을 1:1로만 흡수해온 전제가 ST의 전용 shape_info 슬롯·1:多로 깨진 증거 강제* — 모델은 카테고리 증거에 정직(포화도 진화도 증거가 결정). 단 1:1 흡수 카테고리(BN/GS/TP/PR)는 사이즈 프리셋 유지(형상축 강제 금지·오모델 회피).
 **ST가 더한 것:** ① **★형상축(#17) distinct 신설** — 사이즈와 분리된 상위 분류축(전용 슬롯·1:多 칼틀·5형상 superset). ② **자재#1 점착/내후 합성 차원**(adhesion_grade/weather_grade — 색상/두께 동형). ③ **공정#2 칼선 family 강화**(THO_GRA 자유/THO_DFT 프리셋칼틀·반칼/완칼 재단 멤버·KB PROC_053/054/055). ④ **인쇄방식#12 횡단 합류**(ST UV/DTF/후지 + PR 윤전/토너). ⑤ **제약#5 disable 정점**(227건 룰엔진 일반화 검증). 새 *축* 1(형상) + 기존 축 강화.
 **검증 라우팅 요약:** 메타모델 해소 ✅ = S-1(축정초)·S-3·S-6·S-7 / 부분 🟡 = S-2·S-4·S-5·S-8·S-9·S-10(unobserved 잔존 → gap/validation). 라이브/엑셀 검증 필요분 = 후니 형상 그릇 유무(S-1)·EL 칼틀(S-2)·점착 자재코드(S-4)·UV 가격엔진/후지(S-5)·disable 그릇(S-8)·넘버링 규칙(S-9)·완제SKU 규격(S-10).
+
+---
+
+# CL(의류·티셔츠·앞치마·가방류) fragment 판정 (v6.0 — 의류 variant·인쇄위치·인쇄방식·size×color 매트릭스) ★의류 variant #18 부결·재포화
+
+> `categories/CL/reverse.md` ## Ambiguous fragments C-1~C-9 판정. **6 상품군(BN 면적·GS 완제/입체·TP 디자인입력·PR 다면/제본/접지·ST 형상/칼선/점착·CL 의류 variant)** 증거로 distinct/facet 결정.
+> 과잉 일반화 경계(SKILL §5): CL 한 군만의 특이는 facet 강등. distinct 승급 = 6 상품군을 견디는 고유 lifecycle/governing + 후니 도메인 동형 보유 시만.
+> 도메인 정초 = `07_domain/{entity-semantic-model.md(본체색→자재 CLR·variant 분해·material usage·생산방식 C-9),pdf-domain-knowledge.md(별색=공정),db-domain-structure-live.md}` + GS reverse(variant 3채널 G-4·완제 본체 G-1) 직접 대조. **★domain-researcher 신규 호출 불요** — 의류 인쇄방식(전사/실크/나염/DTF=공정#2/인쇄방식#12)·size×color SKU(=사이즈#13×색상자재CLR Cartesian)·Pantone(=별색=공정#2·round-22 경계)이 후니 KB+기존 17축에 확정 존재(추정 0).
+> **★CL 핵심 판정: distinct 신규 축 0건(★의류 variant #18 부결) = 17축 재포화(PR 패턴 반복).** CL reverse가 "의류 variant=distinct #18"를 강하게 제기(§0.1~0.3·§15)했으나 9 fragment 전부 기존 17축 facet/matrix/family/정책으로 무손실 흡수. ★directive 최대 질문 적대 판정: **의류 variant = GS variant 축(G-4)의 2D 일반화 facet 클러스터**(자재#1 SKU matrix + 사이즈#13 + 색상자재CLR + 제약#5).
+
+## C-1. apparel_info 전체 구조의 버킷 — 구현 컨테이너 뷰 [facet → 신축 거부·D-8 동형]
+
+- **판정:** **구현 컨테이너 뷰 (distinct 거부) — D-8(UI 런타임=facet) 동근.** `apparel_info` 6키는 *새 1급 관리 그릇이 아니라* skinInfo에서 paper/size/dosu를 view_yn=N으로 숨기고 의류 옵션을 재담은 *구현 컨테이너*. 6키가 깔끔히 기존 축으로 분해: print_type→인쇄방식#12·print_area→공정#2(+#16 KOI)·apparel_color→색상(자재 CLR #1)·size_info→사이즈#13·size_color_info→자재#1 SKU matrix + 제약#5·pantone_color→별색 공정#2.
+- **근거:** reverse §0.2 "범용 옵션 트리와 직교하게 담는다"는 *렌더 구조*이지 관리 축 아님. D-8 "같은 base-data를 다르게 렌더할 뿐 고유 관리 데이터 없음=facet" 동일 논리 — apparel_info는 같은 base-data(여러 기존 축)를 의류 전용 구조로 묶은 뷰. 컨테이너는 축이 아님.
+- **메타모델 해소:** ✅ 6키 전부 기존 축 귀속(컨테이너 분해). **후니 흡수 시: apparel_info를 한 의류 테이블로 적재 금지 — 각 키를 해당 축(자재/사이즈/색/공정/제약)에 분해 적재 → gap/vessel(분해 매핑).**
+
+## C-2. 의류 variant = distinct #18인가 GS variant facet인가 — GS variant 2D 일반화 facet 클러스터 [distinct #18 부결] ★최대 directive 의사결정
+
+- **판정:** **facet — distinct #18 거부.** 의류 variant = GS variant 축(G-4)의 **2D 일반화 facet 클러스터**(자재#1 size×color SKU matrix + 사이즈#13 + 색상[자재 CLR] + 제약#5 셀가용성)·주 귀속=자재#1(G-1 본체 SKU 동형).
+- **★양면 트레이드오프 펼침(침묵 선택 금지) — discovered-axes C-2 참조:**
+  - **(가) distinct "의류 variant 축 #18" 신설:** 찬성=item_gbn=clothes2025 별 분기·apparel_info 전용 그릇·size×color 2D 매트릭스(GS 단일 DTL 초과)·Pantone 1124/위치6/방식3 의류 전용 차원군. 반대=★네 근거 전부 기존 축의 *표현/구현*으로 무손실 분해(distinct 요구 "기존 축이 왜곡 없이 못 담는 고유 lifecycle"이 없음).
+  - **(나) facet 클러스터 — GS variant 2D 일반화 [채택]:** ① item_gbn=clothes2025=구현 discriminator(어느 가격 SP·옵션 skin 분기 키)·PR P-4·ST S-5·GS G-1 정책패턴 동형(명제#19·축 아님) ② apparel_info=구현 컨테이너 뷰(C-1·D-8 동형) ③ size×color matrix=사이즈#13×색상(자재 CLR·D-2) Cartesian + 셀→MTRL_COD(G-1 본체 SKU 라벨 융합 의류판) + 셀가용성=제약#5(ST disable 227=S-8 정점의 2D판) ④ Pantone=별색 공정#2(C-7).
+- **★GS variant와의 관계(directive 핵심):** GS는 variant를 *1D-per-channel*(G-4: DTL코드/ATTB/CUT 3채널)로 해소, CL은 *2D 매트릭스*(size×color→단일 MTRL_COD)로 해소. **둘 다 같은 기존 축으로 분해되는 facet**이며, CL이 더한 것은 *2D cardinality + 셀별 가용성 정점*(새 관리 관심사 아님). 즉 의류 variant ⊃ GS variant 패턴의 2D 확장 — GS facet(G-4)의 일반화이지 별 축 아님.
+- **★역방향 오류 점검(distinct를 facet으로 숨김):** size×color 셀가용성 매트릭스(227셀)가 유일 잔여 distinct 후보. ST S-8(disable 227=#5 정점·1D)과 동일 규모·패턴, 단 2D subject(사이즈×색 axis-pair) → 제약#5 match/exclude의 2D subject로 무손실 흡수. 기존 축이 *왜곡 없이* 담음 → facet 정당(숨김 아님).
+- **★[HARD] G-1 동형 분해 요구:** MTRL_COD(SXSRT326)·PCS_DTL_NME("6.2oz 프리미엄 화이트 L")를 `{body_fabric/PTT, body_color/CLR, size/WGT}`로 분해(평면 SKU 라벨=의미축 drop·후니 본체소재 부재 결함의 의류판 정답).
+- **메타모델 해소:** ✅ facet 클러스터 귀속 확정(#1 CL 확장·#13·#5). **후니 그릇: 의류 본체를 자재(size×color SKU matrix)·셀가용성(제약)으로 분해 적재 → gap/vessel(2D matrix 흡수 그릇).**
+
+## C-3. size×color 매트릭스 = 어느 그릇 — 자재#1 SKU matrix + 제약#5 셀가용성 [facet → 신축 거부]
+
+- **판정:** **자재 축(#1 size×color SKU matrix facet·G-1 본체 SKU 동형) + 제약(#5 2D 셀가용성 정점) facet (distinct 거부).** 사이즈×색 → 단일 MTRL_COD = 두 기존 축(사이즈#13 × 색상[자재 CLR])의 Cartesian product, 셀=자재 SKU(G-1 라벨 융합), 셀별 HIDE_YN=제약#5.
+- **근거:** reverse §0.3 size_color_info 227셀(자체)/54셀(단체)·각 셀→MTRL_COD(S×블랙03→SXSRT103)·셀별 HIDE_YN/QUICK_ORD_YN. `entity-semantic-model.md` "색상 variant→material·사이즈 variant→size" 분리 원칙 = CL이 그 분리를 2D 매트릭스로 합일해 둠. GS G-1(완제 본체 라벨 융합)·G-4(variant 1D 채널)의 2D 일반화. 후니 굿즈 본체소재 부재(round-22 GPM)와 동형이나 2D 차원.
+- **메타모델 해소:** ✅ 자재#1 SKU matrix + 제약#5 귀속 확정. ★[HARD] MTRL_COD 분해(평면 매트릭스 코드 금지). **후니 자재모델에 "사이즈×색 SKU 해소" 그릇(2D matrix→코드) → gap/vessel.**
+
+## C-4. 인쇄위치(print_area) = 기초코드 vs 공정 vs 차원 — 공정#2 멀티슬롯 + #11 + #16 [facet → 신축 거부]
+
+- **판정:** **공정 축(#2)의 위치별 인쇄 멀티슬롯 facet (distinct 거부) + 가격기여#11(위치별 가산) + 입력채널#16(KOI_NME 에디터 매핑).** print_area 6위치(PDT_WRK 6행 1:1)·다중선택·위치마다 PDT_WRK 항목 가산. = 공정#2 위치별 멤버의 멀티슬롯(GS 귀돌이 ROU_DFT 4슬롯·ROP 동형 "한 공정이 위치별 N PCS 항목 분리").
+- **근거:** reverse §0.4 PDT_WRK 6행(CL011 좌측가슴·CL001 앞면…)·가격캡처 PDT_WRK/CL011 PRICE=3700(위치별 인쇄비). KOI_NME(leftchest/front)→에디터 캔버스 영역(입력채널#16 TP 합류). PR 다면(면분할)·GS PDT_WRK(본체조립)와 의미 다르나 *공정#2 멤버 멀티슬롯*이라는 점은 동일 family.
+- **메타모델 해소:** ✅ 공정#2 멀티슬롯 + #11 + #16 귀속 확정. **검증 필요분: 다중선택 가격 합산 규칙(앞면+뒷면+소매 동시·위치별 단가 차이) unobserved → gap/validation.**
+
+## C-5. 카테고리 내부 2모델(clothes2025 vs tmpl) — 생산형태#15 + item_gbn 구현 discriminator [facet → 신축 거부]
+
+- **판정:** **생산형태 축(#15) + item_gbn 구현 discriminator(정책) facet (distinct 거부).** 같은 CL 카테고리에서 티셔츠=clothes2025(전용 의류 모델)·앞치마/가방=tmpl(굿즈형)은 *본체 정체가 가격/옵션 패러다임을 결정* = 생산형태#15 governing(C 완제품/입체 vs 의류 SKU). item_gbn은 *구현 discriminator*(어느 모델/SP를 쓸지 분기 키)이지 관리 축 아님.
+- **근거:** reverse §0.1·§5. item_gbn=카테고리가 아니라 본체 정체로 결정 → 생산형태#15(⊥카테고리#7·D-9)가 이미 담음(같은 카테고리에 다른 생산형태 공존·노트 A/C 동형). item_gbn=clothes2025/tmpl 분기는 PR 인쇄방식 pdtCode(P-4)·GS DIR_MTR vs ORD_INFO(G-1) 구현 discriminator 동형.
+- **메타모델 해소:** ✅ 생산형태#15 + item_gbn=discriminator 귀속 확정. TP HL트윈(다른 카테고리 분기)과 다른 "동일 카테고리 내 생산형태 분기"이나 #15가 담음.
+
+## C-6. Pantone 1124 별색 라이브러리 vs ST/PR 별색 — 공정#2 별색 family + #6 도메인 [facet → 신축 거부] (※번호 정정: reverse C-6=인쇄방식, C-7=Pantone — 아래 C-6은 인쇄방식)
+
+- **판정(reverse C-6=인쇄방식):** **인쇄방식 레시피 축(#12) facet (distinct 거부) — 상품내 옵션 인코딩(삼면 표현)·PR P-4/ST S-5 합류.** CL은 인쇄방식(PTP_DTF/DIR/SLK)을 *한 상품 안 ORD_INFO.PRINT_TYPE 차원*으로 둠(ST/PR=상품분기 pdtCode·BN=자재 facet과 다른 인코딩). #12가 (a)자재 facet (b)상품분기 (c)상품내 옵션 삼면 표현을 가짐 확정.
+- **근거:** reverse §0.5 가격캡처 ORD_INFO.PRINT_TYPE(PTP_DTF→PTP_DIR)·apparel_info.print_type 3종. 의류 인쇄방식(실크=별색 spot·DTF=화이트언더베이스 동반)은 공정#2 별색/특수인쇄 family와도 연결(S-7 화이트강제 동형). 인쇄방식이 가능 자재풀(DTF→DTF전용·실크→Pantone 활성)·가격(DTF=DIR 동일 19900) 게이팅 = #12 lifecycle 유지.
+- **메타모델 해소:** ✅ #12 귀속 + 삼면 표현 확정. **검증 필요분: 실크(SLK)·인쇄방식×위치 조합 가격 unobserved → gap/validation.**
+
+## C-7. Pantone 1124 별색 = 의류 전용인가 — 공정#2 별색 family [facet → 신축 거부]
+
+- **판정:** **공정 축(#2 별색 family) facet (distinct 거부) + 기초코드#6 도메인 규모.** `apparel_info.pantone_color` 1124(PANTONE C 전체)=실크인쇄(PTP_SLK) spot color. **별색=공정(round-22 경계규칙·`entity-semantic-model.md` PROC_000007·HARD)** — ST/PR 별색·후니 별색과 같은 공정#2 그릇. 규모(1124)는 기초코드#6 별색 도메인 거버넌스 관점(enum 규모 정점)이나 *축은 공정#2*. 의류 전용 별색 도메인 아님(전체 Pantone C).
+- **근거:** reverse §0.2·§1. 별색=공정 경계(HARD·round-22)로 해소. ST 별색·PR 별색·후니 PROC_000007 별색 family 동일 그릇.
+- **메타모델 해소:** ✅ 공정#2 별색 귀속 확정(도메인 경계규칙). 검증 불요(도메인 사실). 단 1124 규모는 #6 별색 도메인 enum 거버넌스(갭분석가 enum 그릇 확인).
+
+## C-8. GBN(adult/child) 축 — 사이즈#13/기초코드#6 하위 속성 [facet → 신축 거부]
+
+- **판정:** **사이즈 축(#13)/기초코드(#6)의 연령 분류 하위 속성 facet (distinct 거부).** `apparel_info.size_info`의 GBN(성인/아동)이 사이즈 enum에 연령 분류 부착 — CLSTSHS(자체)=adult만·CLTMSHS(단체티)=adult+child 활성. GBN=사이즈 enum 하위 속성(별 분류축 아님). 상품별 child 가용=제약#5.
+- **근거:** reverse §2 size_info 9종(S~2XL adult + 120~150 child·단체티). GBN이 사이즈 코드의 속성(연령군)이지 독립 lifecycle 없음. 단체티만 child 활성=제약#5(상품별 가용).
+- **메타모델 해소:** ✅ 사이즈#13/#6 하위 속성 + 제약#5(child 가용) 귀속 확정.
+
+## C-9. CLST 가방/모자/에이프런(CLSTSAP/TOB/LUB/CAP) 모델 — 생산형태#15 + 카테고리#7 경계 [facet → 신축 거부]
+
+- **판정:** **생산형태 축(#15·tmpl 굿즈형) + 카테고리(#7 경계) facet (distinct 거부).** CL 카테고리 안 비의류(가방/모자/에이프런=캔버스 본체+인쇄=CLAPDFT 굿즈형 동류·apparel_info 부재 추정)는 의류(clothes2025)와 다른 생산형태(#15 C 완제품·tmpl). 카테고리=기능 트리(CL)이나 본체 정체가 생산형태/그릇 결정 → 카테고리⊥생산형태(#15·D-9) 재확인·카테고리 경계 명시.
+- **근거:** reverse §5·§14·§0.1. 캔버스 가방/모자/에이프런=tmpl 굿즈형(GS 완제 굿즈 동형·G-1). CL 카테고리 내 비의류 포함=카테고리는 기능 분류이나 생산형태가 본체 그릇 결정(item_gbn). **단 CLST 가방/모자 모델은 unobserved(apparel_info 부재 추정·미관측).**
+- **메타모델 해소:** ✅ 생산형태#15 + 카테고리#7 경계 귀속. **검증 필요분: CLST 가방/모자/에이프런 굿즈형 확정(item_gbn·apparel_info 부재) unobserved → gap/validation.**
+
+---
+
+## CL 판정 요약표
+
+| Fragment | 1차 귀속 축 | 판정 | distinct/facet | 등재 | 검증 라우팅 |
+|---|---|---|---|---|---|
+| C-1 apparel_info 그릇 | 구현 컨테이너 뷰(D-8 동형) | 6키→기존 축 분해 | facet(거부) | C-1 | 분해 적재 → gap/vessel |
+| C-2 의류 variant #18 | **자재#1+사이즈#13+색상CLR+제약#5 클러스터** | GS variant(G-4) 2D 일반화·item_gbn=정책·apparel_info=컨테이너 | **facet(거부·#18 부결)** ★ | C-2 | 2D matrix 흡수 그릇 → gap/vessel |
+| C-3 size×color 매트릭스 | 자재#1 SKU matrix + 제약#5 | 사이즈×색 Cartesian·G-1 본체 SKU 동형·셀가용성#5 정점 | **facet(거부·HARD 분해)** ★ | C-3 | 분해 그릇 → gap/vessel |
+| C-4 인쇄위치 print_area | 공정#2 멀티슬롯 + #11 + #16 | 위치별 PDT_WRK 가산·GS 귀돌이 4슬롯 동형 | facet(거부) | C-4 | 다중선택 합산 규칙 → gap |
+| C-5 카테고리 내 2모델 | 생산형태#15 + item_gbn discriminator | 본체정체=생산형태·item_gbn=구현 | facet(거부) | C-5 | (해소·#15 담음) |
+| C-6 인쇄방식 실크/전사/DTF | 인쇄방식레시피#12 | 상품내 옵션 인코딩(삼면 표현)·PR/ST 합류 | facet(거부) | C-6 | 실크·조합 가격 → gap |
+| C-7 Pantone 1124 별색 | 공정#2 별색 family + #6 도메인 | 별색=공정(round-22)·1124=#6 규모 | facet(거부) | C-7 | (해소·도메인사실) |
+| C-8 GBN adult/child | 사이즈#13/기초코드#6 하위 + 제약#5 | 연령 분류 속성·단체티만 child 활성 | facet(거부) | C-8 | (해소) |
+| C-9 CLST 가방/모자 모델 | 생산형태#15 + 카테고리#7 경계 | 비의류=tmpl 굿즈형·카테고리 경계 | facet(거부) | C-9 | 굿즈형 확정 → gap/validation |
+
+**CL 강제 분류 회피(SKILL §3·§5):** **distinct 승급 0건(★의류 variant #18 부결) = 17축 재포화(PR 패턴 반복).** 9 fragment 전부 기존 17축 facet/matrix/family/정책. ★directive 최대 질문 적대 판정: 의류 variant가 가장 distinct로 *보이는* 이유(전용 clothes2025 모델·전용 apparel_info 그릇·size×color 2D 매트릭스·Pantone 1124)가 전부 *구현 표현*(discriminator/컨테이너/Cartesian+셀가용성)이지 *관리 축*이 아님. **★C-2/C-3/C-4는 침묵선택 거부하고 "distinct #18 vs GS variant 2D 일반화 facet" 트레이드오프 펼친 뒤 facet.** 역방향 오류(distinct를 facet으로 숨김) 점검: size×color 셀가용성(227셀)이 유일 잔여 후보였으나 ST S-8(disable 227=#5 정점)과 동일 패턴으로 제약#5 무손실 흡수(2D subject)·숨김 아님.
+**CL이 더한 것(축 신설 아닌 *강화* + 재포화):** ① **17축 재포화** — 6번째 카테고리 distinct 0(PR 4번째 distinct 0 패턴 반복·모델 안정성 재확인). ② 자재#1 size×color 2D SKU 매트릭스 facet(GS variant G-4 1D의 2D 일반화·G-1 본체 SKU 동형). ③ 제약#5 2D 셀가용성 정점(ST disable 227=S-8의 2D판). ④ 인쇄방식#12 "상품내 옵션" 인코딩 추가(양면→삼면 표현). ⑤ 공정#2 인쇄위치 멀티슬롯 facet(GS 귀돌이 동형). ⑥ 카테고리⊥생산형태(#15) 경계 재확인(CL 내 비의류).
+**검증 라우팅 요약:** 메타모델 해소 ✅ = C-1·C-2·C-3·C-5·C-7·C-8 / 부분 🟡 = C-4·C-6·C-9(unobserved 잔존 → gap/validation). 라이브/엑셀 검증 필요분 = 다중선택 가격 합산(C-4)·실크/조합 가격(C-6)·CLST 가방/모자 굿즈형 확정(C-9) + 의류 본체 분해 흡수 그릇(C-2/C-3 → gap/vessel).

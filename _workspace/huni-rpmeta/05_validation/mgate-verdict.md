@@ -848,3 +848,134 @@ option_groups **134**·option_items **469**·constraints **10**·template_select
 - BN/GS/TP/PR verdict 보존. 라이브 재실측 세션 권위(2026-06-17·psql 직접 SELECT + 캡처 raw 파싱).
 - **★형상축 #17 distinct 승격 = VALIDATED** — 과잉승격 반증 실패(STDCFBR 5형상·CL/RC 1:多 캡처 재현)·칼선/재단/점착 facet 역검 통과(라이브 PROC/컬럼 재현)·#17 GAP 라이브 3-레벨 확증·V-12 그릇 최소성(junction 선재)·deepcheck #18 0 유입. **16축 포화 붕괴(5번째 카테고리 distinct 1종)는 오버피팅이 아니라 사이즈축 1:1 흡수 전제가 ST 1:多로 깨진 증거 강제 결과 — 검증됨.**
 - **ST 핵심 직답:** ST facet 5항 = **PASS 1**(재단입자 S-3·PROC_053/054/055 라이브 실재)·**WEAK 2**(점착 S-4=기존 #1·disable S-8=기존 #5)·**GAP 1**(인쇄방식 S-5=기존 #12)·**부분PASS 1**(칼선 S-2) · **distinct 신축 1(형상 #17)=신규 vessel-gap 1(V-12)** · facet 신규 vessel-gap 0(전부 기존 #1/#2/#5/#12 흡수) · 신규 테이블 0·컬럼 2·코드행 6 최소성 정당.
+
+---
+
+# ═══════════════════════════════════════════════
+# CL 카테고리 (의류·티셔츠·앞치마·가방류) M-gate 검증 — M2~M6
+# ═══════════════════════════════════════════════
+
+> rpm-validator 독립 재측정 2026-06-17 (read-only psql + 캡처 raw 파싱).
+> M1 = 별 세션 GO 완료(증거 `_defects.md` CL-M1). 본 세션 = **M2~M6 + ★의류 variant #18 부결 타당성 적대 검증(역방향 오류 적발)**.
+> 생성자(reverse/architect/gap-analyst/designer/deepcheck)와 별 레인. 생성자 주장 = 가설·라이브/캡처 재측으로만 비준.
+
+## CL M-gate 요약
+
+| 게이트 | 대상 | 판정 | 핵심 근거(독립 재측) |
+|--------|------|:---:|----------------------|
+| **M2** | 메타모델 정합(distinct 0·17축·apparel_sku_matrix facet) | **GO** | discovered-axes/dictionary/erd/_resolved 4문서 17축·distinct 0 일관·apparel_sku_matrix=MATERIAL enum facet(신규 엔티티 0)·관계 무모순 |
+| **M3** | ★의류 variant #18 부결 타당성(역방향 오류) | **GO** | size_color_info=227셀=227 distinct (size,color) pair·0 dup(Cartesian 확증)·MTRL_COD=size자리+color자리(G-1 동형)·라이브 ref_key1×ref_key2 2D 페어링 255행 전부 .03자재·PRD_000071=33×4 matrix → 2D=기존 2축 곱·**숨긴 distinct 없음** |
+| **M4** | 갭 판정 정확(PASS1/WEAK3/GAP1) | **GO** | 라이브 직접 SELECT 5건 전부 일치: option_items 469/ref_key2 255·ref_dim_cd .03=255/.04=156/.06=45/.01=11/.07=2·PROC_000007 별색 family 실재·print_method/item_gbn 컬럼 0건·processes PK=(prd_cd,proc_cd) |
+| **M5** | 그릇 건전성(신규 그릇 0·search-before-mint) | **GO** | ref_key1/ref_key2 2D 페어링이 size×color 무손실 수용(라이브 활성 실증)·OPT_REF_DIM 7종(color 없음)·MAT_TYPE 14종(apparel 버킷 없음)=V-3 WEAK 정확·신규 테이블/컬럼/V번호 0 정당 |
+| **M6** | 생성-검증 독립성 | **GO** | deepcheck 13후보 채택 0(H-2만 REFUTED-for-RP·캡처검증·미채택)·codex #18 facet 동의=robustness 기록(근거 아님 명시)·H-1/H-3 정직 unverified·#18 부결 dodge-hunt 독립 재현(깨기 실패) |
+
+**CL 종합 = GO. NO-GO 0. ★의류 variant #18 부결 = VALIDATED(역방향 오류 없음).**
+
+---
+
+## CL M2 — 메타모델 정합 = **GO**
+
+**검사:** distinct 0·17축 카운트 일관·apparel_sku_matrix 관계 무모순·ERD↔dictionary 일치.
+
+- **17축 4문서 일관 (재측):** `discovered-axes.md:29`(17 dictionaried)·`metamodel-dictionary.md:16`(축 총 17)·`metamodel-erd.md:3,205`(17 관리 축)·`_resolved-fragments.md:503`(distinct 승급 0) — **네 문서 전부 17축·CL distinct 0 일관.** CL 통합 후 카운트 변동 0(ST의 #17 형상 유지·#18 미추가).
+- **apparel_sku_matrix = MATERIAL enum facet (신규 엔티티 0):** `metamodel-erd.md:108` `enum apparel_sku_matrix "CL C-2/C-3 size×color 2D→단일 MTRL_COD"` = MATERIAL 엔티티의 *enum 속성*(별 테이블/엔티티 아님). `:55` 간선 `SIZE_PRESET }o--o{ MATERIAL : "CL C-3 size×color 2D matrix→MTRL_COD(셀가용성=CONSTRAINT 2D)"` — 기존 SIZE_PRESET↔MATERIAL 다대다 관계의 facet. 모순 FK/composition 0.
+- **ERD↔dictionary 일치:** dictionary `:75`(의류 본체=원단PTT×색CLR×사이즈WGT 합성 SKU·별 축 아님)·`:167`(2D 셀가용성=제약#5 2D subject)·`:258`(인쇄방식 삼면 표현=#12)와 erd `:108/:166/:371` 명제 동일. dictionary 명제 #23(`:400`)·과잉일반화 거부 기록 ㉙~㊲(`:412`)이 erd `:371` 본문과 정합.
+- **오버피팅 경계:** CL은 단일 카테고리에서 의류 전용 그릇(apparel_info·clothes2025)을 봤으나, "한 카테고리만 필요한 축" 거부 원칙대로 distinct 강요 없이 facet 분해. 6 상품군(BN·GS·TP·PR·ST·CL) 횡단으로 판정 → 오버피팅 아님.
+
+**CL M2 = GO.** 17축 4문서 일관·apparel_sku_matrix=MATERIAL facet(신규 엔티티 0)·관계 무모순·ERD=dictionary.
+
+---
+
+## CL M3 — ★의류 variant #18 부결 타당성 = **GO** (역방향 오류 없음·최중요)
+
+**적대 검사(역방향):** size×color 2D 매트릭스가 진짜 자재#1 SKU matrix + 제약#5 facet인가, 아니면 GS 1D variant를 질적으로 초과하는 distinct를 facet으로 *숨긴* 것인가. 캡처(major_apparel_CLSTSHS) 직접 파싱 + 라이브 재측으로 독립 재현.
+
+### 캡처 직접 파싱 (size×color→MTRL_COD 단일 인코딩 재현)
+- **size_color_info = 227셀 = 227 distinct (COD,CLR_COD) pair·dup 0** (python json 파싱·`major_apparel_CLSTSHS.json`). → **진짜 Cartesian product** of 사이즈(COD) × 색(CLR_COD). 새 차원이 아니라 *두 기존 축의 곱*.
+- **MTRL_COD = SXSRT + 사이즈자리 + 색자리:** `{COD:1,CLR_COD:03}→SXSRT103`·`{COD:1,CLR_COD:26}→SXSRT126`·`{COD:1,CLR_COD:58}→SXSRT158` 셀별 실측. → 셀→단일 MTRL_COD 해소 = **G-1 본체 SKU 라벨 융합과 동형**(reverse §0.3·architect C-3 판정 토대 진본).
+- **apparel_info 6키 카운트 전건 일치:** print_type=3(PTP_DTF/DIR/SLK)·print_area=6·apparel_color=54·size_info=7·size_color_info=227·pantone_color=1124 — **6/6 캡처 재현**(facet 분해의 전제 원자 진본).
+
+### 라이브 재측 (2D 표현 그릇 실재·기존 축이 왜곡 없이 담음)
+- **option_items 2D 페어링 라이브 활성:** `t_prd_product_option_items` ref_key1 사용 469/469·ref_key2 사용 **255**·ref_key1 AND ref_key2 동시 사용 **255**·전부 `ref_dim_cd=OPT_REF_DIM.03(자재)`. → 후니 옵션 그릇이 *이미* 2D(사이즈키×자재키) 셀을 운영 중.
+- **실제 매트릭스 상품 실재:** `PRD_000071` = 49 cells·distinct ref_key1=33·distinct ref_key2=4 → 33×4 매트릭스. 후니 옵션 그릇이 size×color 같은 2D variant를 *구조적으로 견딤* 실증.
+
+### 역방향 오류 판정 (4 distinct 근거 각각 깨기 시도)
+| #18 distinct 근거 | 깨기 결과(독립 재현) | distinct 잔존? |
+|---|---|:---:|
+| ① item_gbn=clothes2025 별 분기 | 라이브 print_method/item_gbn/pricing_model/price_gbn 컬럼 **전 테이블 0건** — 후니에 discriminator 컬럼조차 없음·RP item_gbn=구현 SP 분기키(관리 데이터 0)·PR P-4/ST S-5 동형 | ❌ 구현 discriminator |
+| ② apparel_info 전용 그릇 | 6키 전부 기존 축으로 깔끔 분해(print_type→#12·area→#2·color→#1CLR·size→#13·size_color→#1matrix+#5·pantone→#2별색)·고유 관리 데이터 0(D-8 동근) | ❌ 컨테이너 뷰 |
+| ③ size×color 2D 매트릭스 | 227셀=227 distinct pair·0 dup=사이즈#13×색상 Cartesian·셀→MTRL_COD=G-1 동형·라이브 ref_key1×ref_key2 페어링이 무손실 수용 | ❌ 두 기존 축의 곱 |
+| ④ Pantone1124/위치6/방식3 | Pantone=PROC_000007 별색 공정(라이브 실재)·위치=공정#2 멀티슬롯·방식=#12 — 전부 기존 축 값도메인 | ❌ 기존 축 |
+
+- **유일 잔여 후보 = 2D 셀가용성:** size×color 227셀의 셀별 HIDE_YN/QUICK_ORD_YN이 *새 관심사*일 가능성을 적대 검정 — 캡처 파싱 결과 HIDE_RSN 분포 = **226 blank + 1 "재고부족"**. 셀가용성은 `use_yn`(제약#5 2D subject)으로 무손실 표현 가능(ST disable 227=S-8 정점과 동일 패턴, subject만 2D). → **제약#5에 무손실 흡수·숨김 아님.**
+- **★역방향 오류 없음 확정:** distinct가 요구하는 "기존 축이 *왜곡 없이* 못 담는 고유 lifecycle/governing"이 **부재.** 2D-ness는 cardinality 속성이지 새 관리 축 아님. GS variant(G-4 1D-per-channel)의 2D 일반화 facet로 정확히 환원됨. **architect의 facet 부결은 over-modeling 거부의 정직한 결과이지 distinct 은폐 아님.**
+
+**CL M3 = GO.** 의류 variant #18 부결 = **VALIDATED**(역방향 오류 없음). size×color=사이즈#13×색상 Cartesian + 셀가용성=제약#5 2D subject·캡처+라이브 독립 재현·깨기 4/4 실패.
+
+---
+
+## CL M4 — 갭 판정 정확 = **GO**
+
+**검사:** gap-matrix §XV CL facet 5항 PASS1/WEAK3/GAP1을 라이브 information_schema 직접 SELECT 재실측·dbmap 정합.
+
+| # | CL facet | gap 판정 | 라이브 재측(2026-06-17 psql 직접) | 일치 |
+|:-:|---|:---:|---|:---:|
+| 1 | size×color 2D matrix | WEAK | option_items 469·ref_key2 255·ref_dim_cd .03자재=255/.04공정=156/.06도수=45/.01사이즈=11/.07셋트=2 (gap §XV-0 주장 byte-exact) / OPT_REF_DIM 7종(사이즈/판형/자재/공정/묶음수/도수/셋트·**color 없음**) / MAT_TYPE 14종(**apparel fabric 버킷 없음**·.09파우치/.10악세사리=상품군명) | ✅ |
+| 2 | 인쇄위치 멀티슬롯 | WEAK | `t_prd_product_processes` PK=(prd_cd,proc_cd)·컬럼 8개에 **위치 컬럼 0**·option_groups SEL_TYPE.02(다중)=11행 경유 표현 가능 | ✅ |
+| 3 | 인쇄방식 실크/전사/DTF | GAP | print_method/prn_mtd/item_gbn/pricing_model/price_gbn 컬럼 **전 테이블 0건** = #12 1급 그릇 부재 | ✅ |
+| 4 | Pantone 별색 | PASS | `PROC_000007 별색인쇄`·008화이트·009클리어·010핑크·011금색·012은색 **라이브 실재**(별색=공정 경계 준수) | ✅ |
+| 5 | item_gbn discriminator | WEAK | discriminator 컬럼 0건(=#15 생산형태 WEAK과 동일·prd_typ_cd가 body_model governing 안 함) | ✅ |
+
+- **양쪽 검증 (PASS·GAP 둘 다):** PASS(#4)=PROC_000007 family 실재로 *후니가 그릇 보유* 확인. GAP(#3)=print_method 컬럼 0건으로 *부재* 확인. WEAK(#1/#2/#5)=그릇 일부 보유(2D 페어링/옵션 다중/prd_typ_cd) + 분해축/위치파라미터/discriminator 결손 확인.
+- **dbmap 정합:** #1→`dbmap-material-option-normalization`(색상 variant→material)·round-22 ④자재 / #3→`dbmap-print-method-not-absolute-axis`(인쇄방식 비절대축) / #5→`dbmap-grid-binding-round15`(prd_typ_cd≠생산형태) — gap 인용 dbmap 메모리와 비충돌·CL GAP은 기존 #12 GAP과 동일(신규 dbmap 갭 0).
+- **카운트 드리프트 노트(판정 무영향):** gap §III 본문은 `t_proc_processes`=96·`t_prd_product_processes`=196로 기록하나 라이브 재측 = **97·270**(데이터 진화). CL §XV 판정의 load-bearing 수치(option_items 469/255·ref_dim 분포·PROC family·print_method 0·PK)는 전부 정확 → CL 판정 무영향. (전역 §III 카운트 갱신은 별 사항·D-CL-3 Low 기록.)
+
+**CL M4 = GO.** 5항 PASS1/WEAK3/GAP1 라이브 직접 SELECT 전건 일치·양쪽 검증·dbmap 정합.
+
+---
+
+## CL M5 — 그릇 건전성 = **GO**
+
+**검사:** CL 신규 그릇 0이 search-before-mint 정당 결과인지(ref_key1/ref_key2가 2D variant 무손실 수용)·기존 V-항목 흡수가 강화인지·부당 mint 회피 아닌지.
+
+- **신규 그릇 0 = search-before-mint 통과(실증):** `_vessel-roadmap.md:12,74` CL 신규 V-번호/테이블/컬럼 0. 핵심 근거 = `option_items.ref_key1/ref_key2` 2D 페어링이 size×color 2D 매트릭스 무손실 수용 → **라이브 재측으로 실증**(255행 2키 동시 사용·PRD_000071 33×4 매트릭스). 별 `apparel_sku_matrix` 테이블 mint 불요 = 정당(기존 그릇이 진짜 담음).
+- **기존 V-항목 흡수 = 강화(충돌 아님):** vessel-needs `:184` CL facet 5항이 V-3(자재 분해축)·V-1(위치 공정파라미터)·V-2(인쇄방식)·V-9(생산형태)·V-10(KOI 에디터매핑)에 흡수. 라이브 OPT_REF_DIM에 color 타입 없음·MAT_TYPE에 apparel 버킷 없음 재측 → V-3 WEAK(자재 CLR 분해축·의류 원단 버킷 결손)이 *정확*(기존 #1 WEAK 재확인이지 새 충돌 아님).
+- **부당 mint 회피 아님(dodge-hunt):** distinct를 facet으로 강등하고 그릇을 mint 회피했다면 표현력 손실이 있어야 함 — 그러나 2D 매트릭스·셀가용성이 라이브 그릇으로 무손실 수용됨(255행 활성). 손실 없음 = mint 회피가 부당하지 않음. 잔여 결손(자재 CLR 분해축·apparel 버킷)은 V-3로 정직 라우팅(은폐 아님).
+- **정규화/컨벤션:** 흡수 대상 전부 기존 t_* 컨벤션(option_items/processes/prd_typ_cd) 내·신규 mint 0이므로 컨벤션 드리프트 가능성 0.
+
+**CL M5 = GO.** 신규 그릇 0=search-before-mint 정당(2D 페어링 라이브 무손실 수용 실증)·V-항목 흡수=강화·mint 회피 부당 아님(표현력 손실 0).
+
+---
+
+## CL M6 — 생성-검증 독립성 = **GO**
+
+**검사:** deepcheck 13후보 무검증 채택 0·codex #18 동의가 근거 아닌 robustness 기록·HIGH 후보 정직 unverified·dodge-hunt.
+
+- **deepcheck 채택 0 (재검):** `categories/CL/deepcheck.md:11`("채택 0")·`:31`("총 13 후보·전부 unverified")·`:151`("채택 0 — owning agent 검증 전 사실 아님"). 라우팅표(`:130~144`) 전 후보 상태 = unverified/기록/흡수확인. **메타모델/갭/그릇에 codex 후보 무검증 유입 0** — discovered-axes/dictionary/erd/gap/vessel grep으로 H-1(blank garment)·H-3(재고 lifecycle)·M-1~M-6 후보가 distinct/그릇으로 *채택된 흔적 0*.
+- **H-2(자수) REFUTED는 채택 아닌 반증:** `:46,133` H-2가 캡처 검증으로 REFUTED-for-RP — 내가 독립 재현: `apparel_info.print_type` = PTP_DTF/PTP_DIR/PTP_SLK 3종으로 닫힘(python 파싱)·자수/패치 키워드 0 hit. **모델에 추가가 아니라 후보 제거**(정직 처리·robustness 입증).
+- **codex #18 동의 = robustness 기록(근거 아님 명시):** `:20~24,147` "codex 우리 facet 부결에 동의"를 *모델 robustness 추가 입증*으로 기록하되, `:8~11` 환각경계 HARD("codex=외부 의견·라이브/캡처 권위로 검증 전 사실 아님")로 codex 동의를 *판정 근거로 쓰지 않음* 명시. 우리 #18 부결 근거 = 라이브+캡처 재측(M3)이지 codex 동의 아님 — 정확.
+- **HIGH 후보 정직 unverified:** H-1(blank garment 거버넌스)·H-3(재고 lifecycle) = `:132,134` unverified 유지. H-3은 내 캡처 파싱에서 실제 신호 1건(HIDE_RSN="재고부족" 1셀) 발견 — deepcheck가 이를 정적 제약#5로 평면화하지 않고 *재고 동역학 미검토*로 열어둠이 정직(과소도 과대도 아님).
+- **dodge-hunt (riskiest claim per stage):** 최대 리스크 = "의류 variant #18 부결". 적대 재현(M3) — 4 distinct 근거 깨기 4/4 실패·2D 셀가용성 잔여 후보도 제약#5 무손실 흡수로 환원. **깨기 실패 = 부결 견고.**
+- **self-approve 0:** reverse(rpm-reverse-engineer)·metamodel(architect)·gap(gap-analyst)·vessel(designer)·deepcheck(codex/deepcheck) 산출을 validator(별 레인)가 라이브 psql + 캡처 raw 파싱으로 재도출 — echo 아닌 독립 재측.
+
+**CL M6 = GO.** deepcheck 13후보 채택 0·H-2 REFUTED(반증·미채택)·codex #18 동의=robustness 기록(근거 아님)·H-1/H-3 정직 unverified·#18 dodge-hunt 깨기 실패·self-approve 0.
+> **노트(H-2 병렬 진행):** H-2(자수)는 본 검증 시점 deepcheck.md에 이미 REFUTED-for-RP로 갱신 완료(`:46,133`)·내가 캡처로 독립 재현(print_type 3종 닫힘). reverse-engineer 측 추가 진행이 있으면 그 결과로 deepcheck.md 재갱신 시 M6 재확인 권고(현재 "채택 0"은 변동 없음).
+
+---
+
+## CL 재실측으로 확인/반증한 핵심 주장 (요약)
+1. **size_color_info 227셀=227 distinct (size,color) pair·dup 0** — 캡처 직접 파싱·size×color=두 기존 축 Cartesian 확증(#18 부결 토대).
+2. **MTRL_COD=SXSRT+사이즈자리+색자리(SXSRT103/126/158)** — 셀→단일 SKU=G-1 본체 SKU 동형 캡처 재현.
+3. **option_items 469·ref_key2 255·2키 동시 255 전부 .03자재·PRD_000071=33×4** — 후니 옵션 그릇이 2D variant 무손실 수용 라이브 실증(search-before-mint 정당).
+4. **OPT_REF_DIM 7종(color 없음)·MAT_TYPE 14종(apparel 버킷 없음)** — V-3 WEAK(자재 CLR 분해축·원단 버킷 결손) 정확.
+5. **PROC_000007 별색인쇄+008/009/011/012 family 라이브 실재** — Pantone 별색 PASS 정확(별색=공정 경계).
+6. **print_method/item_gbn/pricing_model/price_gbn 컬럼 전 테이블 0건** — #12 인쇄방식 GAP·item_gbn discriminator 부재 둘 다 확증.
+7. **t_prd_product_processes PK=(prd_cd,proc_cd)·위치 컬럼 0** — 인쇄위치 멀티슬롯 WEAK(공정행 반복 불가·옵션 경유만) 정확.
+8. **apparel_info.print_type=PTP_DTF/DIR/SLK 3종 닫힘·자수 0 hit** — H-2 REFUTED-for-RP 독립 재현.
+9. **HIDE_RSN=226 blank+1 "재고부족"** — H-3 재고 lifecycle 신호 실재 1셀·deepcheck unverified 유지 정직성 확인.
+
+## CL 인계
+- 결함 라우팅 = `_defects.md` CL 섹션(D-CL-2 §XV-2 미묘점 표기·D-CL-3 §III 전역 카운트 드리프트·전부 Low·판정 무영향). **NO-GO 0 — 재게이트 불요. CL M2~M6 GO 비준.**
+- BN/GS/TP/PR/ST verdict 보존. 라이브 재실측 세션 권위(2026-06-17·psql 직접 SELECT + 캡처 raw 파싱).
+- **★의류 variant #18 부결 = VALIDATED(역방향 오류 없음)** — 캡처(227셀 Cartesian·MTRL_COD 인코딩) + 라이브(ref_key1/ref_key2 2D 페어링 255·PRD_000071 33×4) 독립 재현으로 "distinct를 facet으로 숨김" 적대 검정 4/4 깨기 실패. size×color=사이즈#13×색상 Cartesian·셀가용성=제약#5 2D subject·기존 축이 *왜곡 없이* 담음. **6번째 카테고리 distinct 0=17축 재포화(PR 패턴 반복)는 모델 안정성 재확인이지 distinct 은폐 아님 — 검증됨.**
+- **CL 핵심 직답:** CL facet 5항 = **PASS 1**(Pantone 별색 C-7·PROC_000007 family 라이브 실재)·**WEAK 3**(size×color 2D C-2/C-3=기존 #1/#5·인쇄위치 C-4=기존 #2/#9·item_gbn C-5=기존 #15)·**GAP 1**(인쇄방식 C-6=기존 #12) · **distinct 신축 0(의류 variant #18 부결)=신규 vessel-gap 0** · 신규 테이블/컬럼/V번호 0(2D 페어링 라이브 활성이 search-before-mint 정당화) · deepcheck 13후보 채택 0.

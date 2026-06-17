@@ -1,8 +1,9 @@
 # RedPrinting 옵션 관리 메타모델 ERD (mermaid)
 
-> rpm-metamodel-architect. **v5.0 (ST 통합):** 17 관리 축과 그 관계를 그린 ERD. 가치는 *관계*에 집중(SKILL §4).
+> rpm-metamodel-architect. **v6.0 (CL 통합):** 17 관리 축과 그 관계를 그린 ERD. 가치는 *관계*에 집중(SKILL §4).
 > 정초 = `metamodel-dictionary.md`(축 사전 17축) + `discovered-axes.md`(발굴 근거 D-1~D-12).
-> 추상 메타모델 — 후니 비종속(특정 t_* 컬럼명 아닌 패턴). RedPrinting BN(면적)+GS(완제/입체)+TP(디자인입력)+PR(다면/제본/접지)+ST(형상/칼선/점착) 역공학 권위.
+> 추상 메타모델 — 후니 비종속(특정 t_* 컬럼명 아닌 패턴). RedPrinting BN(면적)+GS(완제/입체)+TP(디자인입력)+PR(다면/제본/접지)+ST(형상/칼선/점착)+CL(의류 variant) 역공학 권위.
+> **★CL 신규 반영(distinct 신축 0·★의류 variant #18 부결·17축 재포화):** **새 엔티티/축 0** — CL reverse가 강하게 제기한 "의류 variant=#18"를 적대 판정 후 facet 부결. CL이 더한 것은 *기존 엔티티 강화*: ① MATERIAL에 size×color 2D SKU 매트릭스 facet(GS variant G-4 1D의 2D 일반화·셀→단일 MTRL_COD=G-1 본체 SKU 동형·apparel_fabric/color/size 분해) ② CONSTRAINT 2D 셀가용성 정점(size×color 227셀 HIDE_YN = ST disable 227=S-8의 2D subject) ③ PRINT_METHOD method_cd enum에 의류 상품내옵션 표현(PTP_DTF/DIR/SLK·삼면 표현) ④ PROCESS_MEMBER 인쇄위치 멀티슬롯(print_area 6·위치별 가산·GS 귀돌이 동형) + KOI_NME→DESIGN_INPUT_CHANNEL. **item_gbn=clothes2025=구현 discriminator(엔티티 아님)·apparel_info=구현 컨테이너 뷰(여러 축 담음·D-8 동형). 6번째 카테고리 distinct 0 = 17축 재포화(PR 패턴 반복·모델 안정성 재확인).**
 > **GS 반영:** 생산형태(#15 governing) · 본체 형태가공(#14) · 완제 본체 두 표현 facet · 가격모델 4종.
 > **TP 반영:** 디자인 입력 채널(#16 본체옵션과 직교·가격0) · 템플릿 자산(에디터 디자인 시안·#4 완제SKU와 별 엔티티 분리) · 입력채널→수량(디자인수 게이팅).
 > **PR 반영(distinct 신축 0):** 자재 usage_cd 역할 전파 · 인쇄방식 → Material pool 게이팅(P-7) · 공정 접지 family + 접지↔오시 cascade(P-1) · PAGE_RULE 엔티티(P-3) · 가격 digital_price 라우팅(P-6) · book2025 표지/내지 분리(P-2).
@@ -51,6 +52,7 @@ erDiagram
     SIZE_PRESET }o--|| ENUM_VALUE : "프리셋 코드"
     SIZE_PRESET ||--o| NONSPEC_RANGE : "자유입력 min-max"
     SIZE_PRESET ||--o{ CONSTRAINT : "범위/match"
+    SIZE_PRESET }o--o{ MATERIAL : "CL C-3 size×color 2D matrix→MTRL_COD(셀가용성=CONSTRAINT 2D)"
 
     SHAPE ||--o{ SIZE_PRESET : "gates 칼틀/사이즈 부분집합(ST CL→CL001~100·1:多)"
     SHAPE ||--o{ PROCESS_MEMBER : "gates 칼선(FR→THO_GRA자유·정형→THO_DFT프리셋)"
@@ -103,6 +105,7 @@ erDiagram
         int weight_role_min_max "PR P-2 표지COV_MIN150/내지INN_MAX130"
         enum adhesion_grade "ST S-4 점착(일반/초강접/리무버블·자재 합성 차원)"
         enum weather_grade "ST S-4 내후(옥외방수/저온·자재 합성 차원)"
+        enum apparel_sku_matrix "CL C-2/C-3 size×color 2D→단일 MTRL_COD(GS variant G-4 2D 일반화·{fabric/PTT,color/CLR,size/WGT} 분해·#18 부결)"
         tag price_flag "면적단가키"
     }
     PRODUCTION_TYPE {
@@ -160,7 +163,7 @@ erDiagram
         enum direction "force=+/disable=-"
     }
     PRINT_METHOD {
-        enum method_cd "디지털/실사/UV/옵셋/실크 +PR(윤전/토너/인디고/리소)"
+        enum method_cd "디지털/실사/UV/옵셋/실크 +PR(윤전/토너/인디고/리소) +CL의류상품내옵션(PTP_DTF/DIR/SLK·삼면 표현)"
         text allowed_processes "가능공정집합"
         text allowed_material_pool "PR P-7 가능 자재 부분집합(윤전→YWM)"
         text file_formats
@@ -365,4 +368,5 @@ flowchart TD
 - **★PR distinct 신축 0 = 16축 포화** — 4번째 카테고리(다면/제본/접지)가 새 *축/엔티티* 0 도입(PAGE_RULE는 #10 수량 보조 엔티티). 9 fragment 전부 기존 축 facet/family/cascade.
 - **★형상(#17·ST)은 사이즈와 분리된 상위 분류축 = 16축 포화 붕괴** — `shape_info` 전용 슬롯이 사이즈를 1:1 흡수해온 전제를 깸(CL 형상↔CL001~100 칼틀 1:多·STDCFBR 5형상 superset). SHAPE gates SizePreset(칼틀 부분집합) + gates ProcessMember(칼선 FR→자유/정형→프리셋). 후니 KB G-SK-2 "형상 어느 축에도 없음"이 size축 미수용 확증. **단 1:1 흡수 카테고리(BN/GS/TP/PR)는 사이즈 프리셋 유지(형상축 강제 금지·오모델 회피).** 5번째 카테고리가 distinct 1 도입 = 모델이 카테고리 증거에 정직(포화도 진화도 증거 강제·오버피팅 아님).
 - **★ST 칼선/재단입자/점착은 facet** — 칼선(THO_GRA/THO_DFT)·반칼/완칼(CUT_DFT)은 후니 KB(반칼 PROC_054·완칼 053·스티커완칼 055·도무송)로 공정#2 멤버 확정(관계 강화·신축 아님)·점착/내후=자재#1 합성 차원(adhesion_grade/weather_grade 속성)·인쇄방식 UV/DTF/후지=#12 PR 합류·die-cut/판/정가=#11 라우팅(pricing_model 6종 흡수).
-- **5 상품군 미관측(갱신): 카테고리 트리 깊이·template_selections·vTmpl 분기조건 + TP 템플릿 자산 카탈로그·VDP 스키마·INN_PAGE↔가격 + PR 토너/인디고 자재풀·리플렛 접지강제·스코딕스/칼틀값 + ST UV 가격엔진·후지/수정 방식·EL 칼틀 enum·자석/메탈 자재코드·완제SKU 테이프 규격** — reuse + 로그인 캡처로 보강 필요(discovered-axes 갭).
+- **★의류 variant(#18)는 facet 부결·17축 재포화(CL·v6.0)** — 의류 본체 size×color 2D 매트릭스(→단일 MTRL_COD)는 GS variant 축(G-4 1D-per-channel)의 *2D 일반화 facet*·자재#1 SKU matrix(G-1 본체 SKU 동형)·셀가용성=제약#5(ST disable 227=S-8 정점의 2D판). item_gbn=clothes2025=구현 discriminator(정책패턴·엔티티/축 아님)·apparel_info=구현 컨테이너 뷰(여러 축 담음·D-8 동형). 인쇄방식=#12(상품내 옵션 인코딩=삼면 표현)·인쇄위치=공정#2 멀티슬롯(GS 귀돌이 동형)·Pantone=별색 공정#2·GBN=사이즈#13/#6 하위. **6번째 카테고리 distinct 0 = 17축 재포화(PR 패턴 반복) — 의류처럼 전용 그릇·전용 모델 가진 가장 이질적 카테고리조차 새 엔티티 0으로 흡수(모델 안정성 재확인). ★[HARD] MTRL_COD를 {fabric/PTT,color/CLR,size/WGT} 분해(G-1 동일 처방).**
+- **6 상품군 미관측(갱신): 카테고리 트리 깊이·template_selections·vTmpl 분기조건 + TP 템플릿 자산 카탈로그·VDP 스키마·INN_PAGE↔가격 + PR 토너/인디고 자재풀·리플렛 접지강제·스코딕스/칼틀값 + ST UV 가격엔진·후지/수정 방식·EL 칼틀 enum·자석/메탈 자재코드·완제SKU 테이프 규격 + CL 다중선택 인쇄위치 가격합산·실크/조합 가격·CLST 가방/모자 굿즈형 확정(item_gbn)·CLDF 브랜드완제 옵션상세** — reuse + 로그인 캡처로 보강 필요(discovered-axes 갭).

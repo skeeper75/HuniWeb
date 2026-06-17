@@ -122,3 +122,8 @@ ALTER TABLE t_prd_products ADD COLUMN vdp_yn  CHAR(1) NULL;                    -
 ## 7. DDL 위임
 - 코드행(DESIGN_INPUT_CHANNEL·EDITOR_KIND·ORD_CNT_SOURCE) + ALTER(ADD COLUMN ×4·FK ×3) 정밀 SQL = `dbm-ddl-proposer`(코드그룹 패턴 + `ref-param-json-proposal` ADD COLUMN NULL+FK 동형). 본 문서 §2가 설계 권위(which/why), 정밀 forward/rollback/순서 SQL은 ddl-proposer 산출 인용.
 - ★reg_dt NOT NULL DEFAULT now() 트랩 준수(라이브 t_cod_base_codes·t_prd_products reg_dt NOT NULL — INSERT 시 명시 또는 DEFAULT). round-5 교훈 반영.
+
+## 8. CL 인쇄위치 에디터 매핑 메모 (v6.0 — C-4 KOI_NME 합류·신규 그릇 0)
+- **CL C-4(의류 인쇄위치↔에디터 캔버스 매핑)가 V-10 디자인입력 채널에 합류**(`reverse.md §0.4·§42·§291`·`gap-matrix XV`·`vessel-needs.md CL 흡수 매핑`). 의류 `print_area` 6위치(좌측가슴/앞면/소매…)는 `KOI_NME`(leftchest/front/back/leftarm…)로 **에디터 캔버스 영역과 매핑** — 위치 enum이 에디터 디자인 입력 영역에 1:1 대응(TP 에디터 채널 #16 합류). 즉 위치 *선택*은 옵션 레이어·위치별 *공정 파라미터*는 V-1, 위치↔에디터 *영역 매핑*은 본 V-10(에디터 채널 축).
+- **그릇 조치 0(기존 흡수):** 위치-에디터 영역 매핑은 RP `koi_template_resource_id`/KOI 에디터 리소스 좌표계의 facet — V-10 §2의 `editor_kind_cd`(KOI/Edicus 분기) + (open §6.2) VDP/리소스 메타가 담는 에디터 채널 메타에 귀속. 위치별 KOI_NME 좌표 자체는 *에디터 SDK 런타임 계약*(huni-widget RedEditorSDK·`KOI_NME` 매핑)이지 DB 신규 그릇 수요 아님. **신규 V/컬럼/테이블 0** — V-10 채널 메타가 "이 의류 상품이 KOI 에디터로 6위치 캔버스 입력"임을 표현하면 위젯 어댑터가 KOI_NME 매핑을 런타임 계약으로 구동(§5 위젯 정규화 계약 정합 동일 원리).
+- search-before-mint: 위치-에디터 매핑 전용 DB 슬롯 불요(에디터 채널=editor_kind_cd·위치 enum=기초코드/옵션·KOI_NME 좌표=SDK 계약). V-10이 에디터 채널을 표현하면 의류 멀티위치 에디터 입력이 데이터-드리븐. **CL은 새 그릇을 더하지 않고 V-10 채널 축의 의류 적용례를 확증.**

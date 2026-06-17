@@ -1,7 +1,7 @@
 # RP 추출 커버리지 인덱스
 
 > 후니 RP-Meta 하네스 파이프라인 ① — 샘플 커버리지 맵 (rpm-reverse-engineer).
-> 실행 이력: ① BN(현수막류) 파일럿 6+1상품. ② GS(굿즈/잡화) 확장 12상품. ③ TP(디자인템플릿) 확장 대표3+20횡단. ④ PR(인쇄물·책자) 확장 대표3+53횡단. 대표 샘플링(답습 전수수집 아님).
+> 실행 이력: ① BN(현수막류) 파일럿 6+1상품. ② GS(굿즈/잡화) 확장 12상품. ③ TP(디자인템플릿) 확장 대표3+20횡단. ④ PR(인쇄물·책자) 확장 대표3+53횡단. ⑤ ST(스티커) 확장 대표3+33횡단. ⑥ CL(의류) 확장 대표3+27횡단. 대표 샘플링(답습 전수수집 아님).
 
 ## 커버리지 맵 — BN(현수막류) (상품 → 축 → 출처)
 
@@ -72,6 +72,19 @@
 > 나머지 33종(형상칼선5·다양한모양/패브릭4·점착특화7·특수후가공/소재5·인쇄방식분기7·기타형태4)은 reverse.md §4 그룹 A~F에 묶어 횡단 태깅(형상/칼선/점착/인쇄방식 동형, 답습 회피). 모집단=catalog category=ST 36상품(전부 /item/ST/·코드접두≠카테고리 누수 없음).
 > **★ST 신규 발굴축(BN/GS/TP/PR 미발굴)**: ① 형상(shape_info SQ/CL/EL/RC/FR enum·directive #1) ② 칼선 2메커니즘(THO_GRA 자유 vs THO_DFT 프리셋칼틀 enum 수십종) ③ 재단입자(묶음재단=반칼시트/개별재단=완칼낱장·directive #2) ④ 점착/내후 소재차원(directive #3). 인쇄방식(일반/UV STPAU*/DTF STPAD*/후지 STBP*) 분기는 PR 윤전/토너/인디고와 합류 → **16축 포화 유지 가설은 ST에서 깨질 후보**(형상·칼선·재단입자가 distinct 신규).
 
+## 커버리지 맵 — CL(의류·티셔츠·앞치마·가방류, 30상품·★의류 variant/apparel_info/2모델 본질)
+
+| pdtCode | 상품명 | 구조 다양성 | 축 수 | 본체 인코딩 | 모델(item_gbn) | 의류 차원 | 가격모델 | 출처 |
+|---------|--------|------------|-------|------------|---------------|-----------|---------|------|
+| CLSTSHS | 5.6oz 하이퀄리티 티셔츠 | ★자체 의류 정수·apparel_info 풀 | 8 | size×color→MTRL_COD(584행) | **clothes2025** | 54색·7사이즈·6위치·3방식·Pantone1124 | **clothes2025_price** | `[reuse:productInfo]`+`[reuse:price]` 풀 |
+| CLTMSHS | 단체티-반팔(Printstar086) | ★단체·브랜드완제·아동사이즈 | 7 | size×color→MTRL_COD(62행) | clothes2025 | 6색·9사이즈(★child)·6위치 | clothes2025_price | `[reuse:productInfo]` 풀 |
+| CLAPDFT | 앞치마 | ★굿즈형 분기·레거시SSR | 6 | DIR_MTR 완제SKU(용도×색 융합) | **tmpl(굿즈형)** | 본체8·영역5·위치chip·도수2 | **tmpl_price** | `[live:SSR]` |
+| CLDFSHS | 76000 반팔 티셔츠 | 브랜드완제·신규Vue | 7+ | unobserved | clothes2025(추정) | unobserved | unobs | `[live:SSR-neg]`+`[catalog]` |
+
+> CLSTSHS·CLTMSHS는 ★풀 productInfo 실측(★`apparel_info` 전용 6키 구조: print_type 3·print_area 6·apparel_color 54/6·size_info 7/9·size_color_info 227/54셀→MTRL_COD·pantone 1124). CLSTSHS는 가격(본체16200+위치3700·DTF/DIR·M/L) 추가 실측. CLAPDFT는 ★유일 SSR-positive(레거시 jQuery·paper8/size5/sodu2 select·print_area radio chip·tmpl_price).
+> 나머지 26종(자체의류12·자체가방모자에이프런4·브랜드완제8·단체2)은 reverse.md §5/§6/§14에 그룹 횡단 태깅(원단평량/형태/원단출처 동형, 답습 회피).
+> **★CL 신규 발굴축(BN/GS/TP/PR/ST 미발굴)**: ① **의류 variant = `clothes2025` 전용 item_gbn + `apparel_info` 전용 그릇**(GS variant facet 아님 — 1차 예측 distinct #18) ② **size×color = MTRL_COD 2D 매트릭스**(variant 4번째 인코딩·GS 3채널 초과) ③ **사이즈 grid(GBN 성인/아동)** ④ **인쇄위치 6 다중선택 공정(PDT_WRK·KOI_NME 에디터매핑)** ⑤ **카테고리 내부 2모델(clothes2025 티셔츠 vs tmpl 앞치마/가방)** ⑥ **원단 출처 3분기(자체/브랜드/단체)** ⑦ **Pantone 1124 별색 라이브러리**. 인쇄방식(DTF/직접/실크)은 ST/PR(상품분기)과 달리 CL은 상품내 ORD_INFO 옵션 → 인쇄방식 축 2표현 합류. 모집단=catalog category=CL 30상품(전부 /item/CL/·코드접두=CL≠카테고리 누수 0). **★17축 안정성: CL에서 의류 variant(#18 후보)가 깨질 강한 후보** — item_gbn·apparel_info·size×color·Pantone 모두 별도 그릇.
+
 ## 재사용 vs 라이브 비율
 ### BN(7상품)
 - **재사용(reuse:Vue-BFF)**: 2상품(BNBNFBL, BNPTPET) = 29% — huni-widget s3 캡처 풀 옵션트리(productInfo 실응답).
@@ -79,6 +92,22 @@
 ### GS(12상품)
 - **재사용(reuse:price-capture)**: 8상품(텀블러·마스크끈·장패드·스프링노트·중철노트·스케치북·파우치·마이크네임택) = 67% — huni-widget s3 가격캡처 reqBody/result/query 풀 추출(BN SSR보다 깊은 PCS 트리).
 - **라이브 보강(catalog+SSR-negative)**: 4상품(코스터·폰케이스·레더노트·효자손) = 33% — 상품정체·소재축은 catalog 확정, 옵션 상세는 client-render·BFF 익명불가로 `unobserved`(라이브 추출 시도했으나 GS 신규 Vue 옵션 미노출 확인).
+
+### CL(30상품·대표3+27횡단)
+- **재사용(reuse:productInfo+price)**: 2상품(CLSTSHS·CLTMSHS) — huni-widget 05_qa `major_apparel_*.json` 풀 rawProductData(★`apparel_info` 전용 6키 + pdt_pcs_info 591/62 + pdt_mtrl_info 584). CLSTSHS는 `clstshs_price.json` 가격(본체16200+위치3700) 추가. ★CL 의류 variant/size×color/인쇄위치/방식 축 1차 증거.
+- **라이브 보강(live:SSR)**: 1상품(CLAPDFT) — ★유일 SSR-positive(레거시 jQuery·paper8/size5/sodu2 select·print_area radio chip·tmpl_price). 굿즈형 분기 실측.
+- **catalog+SSR-negative**: 1상품(CLDFSHS) 신규 Vue 옵션 미노출(unobs) / 나머지 26종 catalog 상품명 + §5/§6/§14 그룹 횡단 태깅(원단평량/형태/원단출처 동형·unobserved 정직).
+
+## CL 미관측(unobserved) 요약
+- **CLDF\* 브랜드 완제 8종(76000/88000/300-ACT/Printstar 등) 옵션 + item_gbn** — Vue client-render. CLTMSHS(브랜드 완제·실측 clothes2025)로 동형 강한 추정·CLDF 인스턴스 미확정.
+- **CLST 가방/모자/에이프런(CLSTSAP/TOB/LUB/CAP) 모델** — 굿즈형(tmpl·apparel_info 부재) 추정·미관측. CL 카테고리 내 비의류 경계.
+- **인쇄위치 다중선택 가격 합산 규칙** — 좌측가슴 단일(3700) 실측. 다위치 동시·위치별 단가 차이 미관측.
+- **인쇄방식별 가격 차이** — DTF/DIR 동일(19900) 실측. 실크(SLK)·방식×위치 조합 미관측.
+- **size_color_info HIDE_YN 셀별 가용성 UI 동작** — 셀 데이터 실측·실제 비활성 캐스케이드 동작 미관측.
+- **CL 전반 PRICE>0 실가** — CLSTSHS 19900만 실측. CLTMSHS·CLAPDFT 가격 미캡처(구조 확정).
+
+## CL 미샘플 상품 (30종 중 26종, 대표3+CLDFSHS 외 그룹 횡단)
+자체의류 12(CLSTDLD~CLSTBSH 반팔/긴팔/스웻/후드/맨투맨/탱크탑·원단 4.01~10.0oz)·자체 가방/모자/에이프런 4(CLSTSAP·CLSTTOB·CLSTLUB·CLSTCAP 캔버스류=굿즈형 추정)·브랜드완제 7(CLDFMHS~CLDFNCP·제품번호)·단체 2(CLTMMTS·CLTMHDS) — 구조 다양성(2모델·size×color매트릭스·3인쇄방식·6위치·자체/브랜드/단체 3분기·아동사이즈·Pantone)은 대표3+CLTM/CLDF로 커버. 검증 시 갭(가방/모자 굿즈모델 확정·후드집업 지퍼·CLDF 낱장가격·다위치 합산)은 로그인 캡처로 추가.
 
 ## 라이브 접속 가능 여부 (다음 단계 참고)
 - **chrome MCP (navigate/get_page_text)**: 이 실행 컨텍스트에서 **미주입**(역할 frontmatter 선언됐으나 런타임 불가).
@@ -178,3 +207,11 @@ BNBNLOW(특가현수막), BNBNDAY(오늘출발), BNTPSNG(타포린단면), BNFGB
 21. **★판 vs die-cut vs 정가 3가격엔진 경계** — die-cut(digital_price 산정)·판(vTmpl_price 템플릿·완제SKU형)·정가(tmpl_price). price_gbn 분기 기준·GS tmpl/PR digital/book2025와 정합. S-6·P-6.
 22. **disable 룰엔진 정점 케이스(227건)** — ST `pdt_disable_pcs_info`가 BN 강제·PR 24건보다 깊다. JSONLogic constraint vs 자재-후가공 호환매트릭스 그릇 일반화 검증. S-8.
 23. **화이트강제 분기·넘버링 VDP·완제SKU 스티커** — PRT_WHT(일반 선택/DTF 강제·S-7)·NUM_DFT(가변 넘버링 VDP·S-9·TP 티켓 합류)·테이프/밴드 완제SKU(S-10·GS tmpl 합류).
+
+## 다음 단계 — CL 추가분 (rpm-metamodel-architect 주목 — ★의류 variant = distinct #18 판정)
+24. **★의류 variant #18 distinct vs GS facet 최종 판정** — C-2 핵심 directive. 1차 예측=**distinct #18**(근거: item_gbn `clothes2025` 별 그릇·apparel_info 전용 6키·size×color 2D 매트릭스·Pantone1124·인쇄위치6·인쇄방식3 모두 GS variant 초과). GS와 공유분=DIR_MTR 본체 PCS·PRICE주체·SKU라벨융합(variant 상위개념). 아키텍트가 §15 #1~4로 distinct 비준 또는 "variant 메타축의 의류 facet" 재분류.
+25. **★`apparel_info` 전용 그릇 = vessel-gap 정점** — C-1. print_type/area/color/size enum + size_color_info(227셀→MTRL_COD) + pantone1124가 후니 어느 그릇에도 직접 안 들어감. 의류 전용 테이블군 신설 vs 기초코드+자재+제약 조합뷰 판정. 후니 굿즈 본체소재 부재(round-22 GPM)와 연결.
+26. **★size×color = MTRL_COD 2D 매트릭스 그릇** — C-3. 후니 자재모델 1D(지종×평량)→CL 2D(size×color)→1 MTRL. variant 4번째 인코딩 흡수 그릇(자재행 폭발 vs 매트릭스 테이블).
+27. **★인쇄위치(print_area) 다중선택 공정축** — C-4. 기초코드(위치 enum)+공정(PDT_WRK 위치별 가산)+에디터매핑(KOI_NME→TP 채널#16). PR 다면·GS PDT_WRK와 경계 재정의.
+28. **★카테고리 내부 2모델(item_gbn 분기)** — C-5. 같은 CL이 clothes2025(티셔츠)·tmpl(앞치마/가방)로 그릇 분기. 후니 "카테고리" vs "모델/생산형태" 버킷 분리. round-15 생산형태×그릇 합류.
+29. **★원단 출처 3분기·GBN 연령·Pantone 규모** — C-6/C-7/C-8. CLST/CLDF/CLTM=원단 라이브러리 계열(옵션모델 동일·자재 카탈로그 분리) vs 카테고리/판매단위. 사이즈 GBN(성인/아동) 축. Pantone1124 별색=공정(후니 round-22) vs 의류 별색 도메인. 인쇄방식 인코딩 2표현(CL 옵션 vs ST/PR 상품분기) 통합.

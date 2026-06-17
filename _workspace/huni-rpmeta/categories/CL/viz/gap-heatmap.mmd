@@ -1,0 +1,28 @@
+%% CL 갭 히트맵 — 출처: gap-matrix.md §XV-XVI (라이브 information_schema 직접 SELECT 2026-06-17)
+%% CL facet 5항 PASS1/WEAK3/GAP1 · ★신규 vessel-gap 0 (전부 기존 #1/#2/#9/#12/#15 흡수)
+flowchart TB
+  BANNER["★CL distinct 신축 0 → 신규 vessel-gap 0<br/>(facet 5항 전부 기존 §I~§XIV 판정에 흡수·중복 계상 안 함)"]
+
+  subgraph FACET["CL facet 5항 (입력 directive 1~5)"]
+    direction TB
+    F4["🟢 PASS — ④ Pantone 별색 (C-7)<br/>귀속: 공정#2 별색 family<br/>PROC_000007 별색인쇄·008 화이트·009 클리어·011 금색·012 은색 라이브 실재<br/>(1124 색값 도메인만 #6 enum 미비)"]
+    F1["🟡 WEAK — ① size×color 2D matrix (C-2/C-3)<br/>귀속: 자재#1 + 사이즈#13 + 색상[자재CLR] + 제약#5<br/>★2D 페어링 그릇 보유: option_items.ref_key1/ref_key2 활성(255/469)·use_yn=셀가용성<br/>단 색상 전용 ref 타입 부재·의류 원단 MAT_TYPE 버킷 부재(CLR 분해축=기존 #1 WEAK·V-3)"]
+    F2["🟡 WEAK — ② 인쇄위치 멀티슬롯 (C-4)<br/>귀속: 공정#2 + 가격#11 + 입력채널#16<br/>공정행 멀티슬롯 불가(PK=(prd_cd,proc_cd)·위치 컬럼 0건)<br/>단 option(SEL_TYPE.02 다중)→option_items(공정.04·156행) 경유 표현 가능<br/>위치 파라미터=기존 #9 GAP·에디터 매핑=#16 GAP"]
+    F5["🟡 WEAK — ⑤ item_gbn=clothes2025 discriminator (C-5)<br/>귀속: 생산형태#15<br/>PRD_TYPE 5종 존재하나 prd_typ_cd가 body_model governing 안 함<br/>(구현 discriminator라 vessel-gap 아님·기존 #15와 동일)"]
+    F3["🔴 GAP — ③ 인쇄방식 실크/전사/DTF (C-6)<br/>귀속: 인쇄방식레시피#12<br/>print_method/prn_mtd/pool/item_gbn 전역 0건<br/>★기존 #12 GAP과 동일(PR P-4/P-7·ST S-5 횡단 합류·신규 아님)"]
+  end
+
+  BANNER --> FACET
+  FACET --> SUM["v6.0 종합 카운트 (17축·카운트 불변)<br/>PASS 5 · WEAK 8 · GAP 5<br/>★CL이 추가하는 vessel-needs = 0건 (V-1~V-12 불변)"]
+
+  LEGEND["범례 — 🟢 PASS(동등 표현력) · 🟡 WEAK(그릇 있으나 미정규화/축혼동) · 🔴 GAP(관리 그릇 부재)"]
+  SUM --> LEGEND
+
+  style BANNER fill:#ffe0b2,stroke:#e65100,stroke-width:3px
+  style F4 fill:#c8e6c9,stroke:#2e7d32,stroke-width:2px
+  style F1 fill:#fff9c4,stroke:#f9a825
+  style F2 fill:#fff9c4,stroke:#f9a825
+  style F5 fill:#fff9c4,stroke:#f9a825
+  style F3 fill:#ffcdd2,stroke:#c62828,stroke-width:2px
+  style SUM fill:#e1f5fe,stroke:#0277bd,stroke-width:2px
+  style LEGEND fill:#fafafa,stroke:#9e9e9e

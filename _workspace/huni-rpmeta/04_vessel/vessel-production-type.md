@@ -47,6 +47,11 @@ search-before-mint 결과 후니 표현력이 RP governing을 **기존 그릇으
 ## 5. DDL 참조
 - 해당 없음(신규 DDL 0). 값 교정 SQL = dbmap round-15(`dbmap-grid-binding-round15` 치환표) — vessel 트랙 밖.
 
+## 5d. CL item_gbn discriminator 메모 (v6.0 — C-5 합류·신규 그릇 0)
+- **CL C-5(의류 `item_gbn=clothes2025` discriminator)가 V-9 생산형태 governing에 합류**(`reverse.md §30·§298·§305`·`gap-matrix XV`·`vessel-needs.md CL 흡수 매핑`). CL 카테고리 내부 2모델 — 티셔츠類=`clothes2025`(전용 의류 모델·apparel_info)·앞치마/가방/모자=`tmpl`(굿즈 완제 SKU). item_gbn이 카테고리가 아닌 *본체 정체*로 모델/그릇을 분기시키는 것은 **생산형태 governing(#15)의 의류판**(GS prd_typ가 body_model·set_structure governing과 동형).
+- **vessel-gap 아님(주로 data·신규 그릇 0):** item_gbn(clothes2025/tmpl)은 RP *구현 discriminator*(앱 처리 채널 분기)이지 후니 DB 그릇 결손이 아니다 — §1 실측대로 후니는 `prd_typ_cd`(PRD_TYPE 5종)·`semi_role_cd`(SEMI_ROLE)·카테고리⊥생산형태 직교 구조를 이미 보유. 의류 모델 분기는 ① `prd_typ_cd` 분류(의류=디자인.04 또는 적정 형태) 또는 ② 본체 그릇 유무(clothes2025=size×color 옵션 매트릭스 보유 vs tmpl=완제 template SKU)로 *유도*됨 → §2 결론대로 **신규 코드행/컬럼/테이블 0**(governing은 prd_typ_cd 값 + 본체 그릇으로 표현). 의류 prd_typ_cd 값 교정은 data(round-15 치환표 동형) — vessel 아님.
+- **★CL 특기(카테고리 경계 모호):** "같은 CL 카테고리가 본체 정체에 따라 그릇 분기"(C-5/C-9)는 §1 "카테고리⊥생산형태 직교(한 상품 카테고리 다중소속 + prd_typ_cd 1값 독립)" 구조가 이미 수용 — CL=의류 카테고리 안에 가방(굿즈형)이 섞여도 prd_typ_cd/본체 그릇이 모델을 가르므로 카테고리 트리 변경 불요. **신규 V 아님·V-9에 흡수·governing 표현은 designer 검토(§2.x 동일·비권장)**. 의류 discriminator 컬럼 신설은 prd_typ_cd와 이행종속 신설 위험(§3 무중복 근거) → 비권장.
+
 ## 6. open decision (날조 금지)
 1. **governing 명시 컬럼 신설 여부:** 권고=불요(앱 규칙·정규화상 이행종속 회피). 후니가 DB 메타 박제를 directive로 요구할 때만 PRD_TYPE 코드 의미 규약(컬럼 mint 없이)으로 — designer 비권장.
 2. **prd_typ_cd 값 교정 범위**(굿즈 .03→완제품/셋트 분류): round-15 치환표 권위·data 트랙. **vessel 선행 불요**(그릇 이미 있음) → dbmap 즉시 가능.

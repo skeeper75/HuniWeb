@@ -64,6 +64,10 @@ COMMENT ON COLUMN t_prd_product_option_items.ref_param_json IS
 ## 5b. ST 형상↔칼선 게이팅 의존 (v5.0 — V-12 연동·신규 그릇 0)
 - **V-12 형상=FR(자유형) → 자유칼선이 V-1 ref_param_json에 의존**(`vessel-shape-axis.md §2.3`·`gap-matrix XIII-3`). 라이브 칼선 공정 = 완칼 `PROC_000053`·반칼 `PROC_000054`·스티커완칼 `PROC_000055`만 존재·자유칼선(도무송) 전용 row 부재. FR 형상은 **완칼(PROC_000053) + `{"모양": ...}` 파라미터**로 환원 — `PROC_000053.prcs_dtl_opt = {"inputs":[{"key":"모양","type":"string"}]}`(라이브 실측). 그 `모양` 선택값(예 `{"모양":"FRXXX"}`)을 적는 칸 = **본 V-1 `ref_param_json`**(§2 그릇 그대로). → V-12 형상축은 단독 완결 아님·**V-1 선행/병행 필요**(형상 게이팅이 V-1 파라미터 슬롯 활성화). 신규 그릇 0(V-1이 이미 담음·ST 추가 키 `{"모양"}`·`{"조각수"}`는 §2 jsonb shape 그대로).
 
+## 5c. CL 인쇄위치별 공정 파라미터 메모 (v6.0 — C-4 합류·신규 그릇 0)
+- **CL C-4(인쇄위치 멀티슬롯)의 *위치별 공정 파라미터*가 V-1에 합류**(`reverse.md §0.4·§42·§63`·`gap-matrix XV`·`vessel-needs.md CL 흡수 매핑`). 의류 인쇄위치(`print_area` 6종 — 좌측가슴/앞면/좌측팔/우측팔/뒷목/뒷면)는 **다중선택 위치 공정축**(앞면+뒷면+소매 동시 가능·각자 PDT_WRK 가산)이다. 본체 위치 선택 자체 = option_groups(SEL_TYPE.02 다중)→option_items(공정.04 156행)로 표현(그릇 보유·별 vessel 0). **위치별 인쇄 파라미터**(앞면 인쇄 size·소매 좌표·위치별 도수)를 적는 칸 = 본 V-1 `ref_param_json`(§2 그릇 그대로·`{"위치":"front","면적":...}` shape는 §2 jsonb 동형). → 위치 다중선택=옵션 레이어·위치별 파라미터=V-1. **신규 그릇 0(V-1이 담음).**
+- ★위치-에디터 캔버스 매핑(`KOI_NME` leftchest/front/back)은 V-1 파라미터가 아니라 **V-10 디자인입력 채널(#16)** 귀속(`vessel-design-input-channel.md` CL 메모·아래) — 위치 enum↔에디터 영역 매핑은 에디터 채널 축. V-1은 *공정 선택값*만, 에디터 매핑은 V-10. 두 축 직교(혼동 금지).
+
 ## 6. open decision (날조 금지)
 1. **트리거 param 키 검증 강도:** 본 그릇은 컬럼만(앱이 prcs_dtl_opt 스키마로 키 검증). DB 트리거에 "param 키 유효성" 강제는 별도 결정(권장: 앱 검증·복잡도↑ 회피).
 2. **키 표기:** 한글 키(`줄수`/`구수`) = prcs_dtl_opt 현행 권위. 영문 전환은 prcs_dtl_opt 동시 마이그 필요(유지 권장).

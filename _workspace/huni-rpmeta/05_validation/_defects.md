@@ -149,3 +149,36 @@
 - **GO 근거:** M2(17축 5파일 카운트 일관·SHAPE 엔티티 관계 무모순·형상 도출 증거 실측 인용) · M3(★형상 #17 distinct 적대 재검 통과 — STDCFBR 5형상·CL/RC 1:多 캡처 직접 재현·과잉승격 반증 실패 / 칼선·재단·점착 facet 역검 통과·숨김 0) · M4(#17 GAP 라이브 3-레벨 전건 재현·facet 5항 PASS1/WEAK2/GAP1/부분PASS1 전건 라이브 일치) · M5(search-before-mint 라이브 입증·junction 449행 선재로 신규 테이블 0 정당·reg_dt 트랩 준수·dbmap round-3 정정=정밀화) · M6(deepcheck 30후보 채택0·#18 0 유입·codex HIGH 무검증 유입 grep 0건·형상 1:多 dodge-hunt 독립 재현). **NO-GO 0·차단 0.**
 - **★형상축 #17 직답:** distinct 승격 = **VALIDATED**. 16축 포화 붕괴(5번째 카테고리 distinct 1종)는 오버피팅이 아니라 사이즈축 1:1 흡수 전제가 ST 전용 shape_info 슬롯·1:多·5형상 superset으로 깨진 증거 강제 결과 — 라이브 3-레벨 + 캡처 raw로 검증.
 - **유일 결함:** D-ST-1(②a/②b 중복운영 정합규칙·Low·open decision·무영향). 보정 권장이나 재게이트 불요.
+
+---
+
+## CL-M1 — 추출 충실성 (CL 카테고리 reverse.md) [verdict GO·날조 0]
+
+> rpm-validator 독립 재측정 2026-06-17. 캡처 직접 parse + 라이브 read-only GET 재현. 전 인용 수치 실재·일치. **NO-GO 0.**
+
+### CL-M1 재측정 증거 (전건 일치)
+- **인용 소스 실재성:** `major_apparel_CLSTSHS.json`(1.73MB)·`major_apparel_CLTMSHS.json`(577KB)·`clstshs_price.json`(12.7KB) 3종 전부 실재. `apparel_info` 경로(`/rawProductData/result/product_data/apparel_info`) 6키(print_type/print_area/apparel_color/size_info/size_color_info/pantone_color) 정확.
+- **CLSTSHS 카운트 전건 일치:** print_type=3(PTP_DTF/DIR/SLK USE_YN=Y)·print_area=6·apparel_color=54·size_info=7·size_color_info=227·pantone_color=1124 — **6/6 정확**. pdt_pcs_info=591(DIR_MTR 584+PDT_WRK 6+PAK_POL 1)·pdt_mtrl_info=584 정확.
+- **MTRL_COD 인코딩 실재:** SXSRT103(S×블랙03)·SXSRT126(S×화이트26)·SXSRT226·SXSRT326 전부 size_color_info에 실재. print_area COD/KOI_NME(CL011/leftchest·CL001/front·CL009/leftsleeve·CL010/rightsleeve·CL004/neck·CL002/back) verbatim. size COD_NME(XS/S/M/L/XL/2XL/3XL) GBN=adult. apparel_color(26 화이트#FFFFFF DEFAULT=Y·03 블랙·65 애쉬) 정확.
+- **가격 수치 실재:** clstshs_price.json — DIR_MTR PRICE=16200·PDT_WRK PRICE=3700·result_sum 19900 PCS_COD→PRICE 페어링 직접 확인. PRINT_TYPE PTP_DTF→PTP_DIR·MTRL_CD SXSRT226/326·CL011/SI014/SI030 실재.
+- **CLTMSHS 차이 전건 일치:** color=6·size=9(adult 5+child 4: 120/130/140/150 GBN=child)·size_color=54·pantone=1124·MTRL prefix SXZSB(SXZSB103/SXZSB162)·pdt_pcs_info=62 정확.
+- **CLAPDFT SSR 라이브 재현:** read-only GET HTTP 200·385KB(reverse 기록 일치)·`check_CLAPDFT`(레거시 jQuery)·`tmpl_price`(clothes2025 아님) 실재. paper select 8옵션(SXPWAX49/46/54/03·SXPSAX57/03·SXPGAX19/32 verbatim)·size 5옵션(disabled — "초기 비활성" 일치)·sodu 2옵션(data-type=4 단면·data-type=0 인쇄없음 정확)·paper_sub_select 1빈옵션(disabled)·name="print_area" radio·CL005 가슴 실재.
+- **전수 추적성:** catalog category=CL=30·CL접두 30코드 누수 0·reverse §14 30코드 열거 catalog와 완전 일치.
+- **unobserved 정직성(dodge-hunt):** unobserved/추정 마커 46건. §5 CLST 스펙트럼·§4 CLDFSHS·§6 CLDF는 옵션 VALUE를 전부 `unobserved`/`동형 추정`으로 표기 — 의류 일반지식(S/M/L)으로 미관측 상품 날조 0건. §5 oz 평량(4.01/10.0oz)은 catalog 상품명 유래(검증가능, 옵션 날조 아님).
+- **variant #18 토대 실재:** 메타모델 판정 토대인 `clothes2025_item`/`clothes2025_price` item_gbn이 양 캡처에 실재(GS tmpl 아님) — distinct 축 가설 증거 진본.
+
+### CL-M1 결함 (Low·판정 무영향)
+- **D-CL-1 (Low) — CLTMSHS DIR_MTR 행수 라벨 정밀도.** `categories/CL/reverse.md:139` 축 라벨 `본체(브랜드 완제 SKU) # PCS_COD=DIR_MTR (62행)`에서 "62행"을 DIR_MTR에 귀속. 재측정: pdt_pcs_info **총 62행** = DIR_MTR **55** + PDT_WRK 6 + PAK_POL 1. 62는 전체 pcs_info 총수(line 143 note "pdt_pcs_info 62행"은 정확). DIR_MTR 단독은 55. 날조 아님(소스 실재·62는 실수치) — 라벨이 총수를 단일 PCS_COD에 귀속한 표기 부정확. **조치(선택):** `DIR_MTR (55행, pcs_info 총 62)`로 정정. 메타모델/갭 판정 무영향.
+
+### CL-M2~M6 재측정 증거 (라이브 직접 SELECT + 캡처 파싱·전건 일치)
+- **M2 (메타모델):** 17축 4문서 일관(discovered-axes:29·dictionary:16·erd:3,205·_resolved:503)·distinct 0·apparel_sku_matrix=MATERIAL enum facet(erd:108·신규 엔티티 0)·SIZE_PRESET↔MATERIAL 간선(erd:55) 모순 0.
+- **M3 (★#18 부결):** size_color_info=227셀=227 distinct (size,color) pair·dup 0(캡처 python 파싱)·MTRL_COD=SXSRT+사이즈자리+색자리(SXSRT103/126/158)·라이브 option_items ref_key1 469/ref_key2 255/2키 동시 255 전부 .03자재·PRD_000071=33×4 매트릭스·HIDE_RSN 226blank+1"재고부족". 4 distinct 근거 깨기 4/4 실패.
+- **M4 (갭):** option_items 469·ref_key2 255·ref_dim_cd .03=255/.04=156/.06=45/.01=11/.07=2(gap §XV-0 byte-exact)·PROC_000007~012 별색 family 실재·print_method/item_gbn/pricing_model/price_gbn 컬럼 전 테이블 0건·processes PK=(prd_cd,proc_cd) 위치컬럼 0·OPT_REF_DIM 7종(color 없음)·MAT_TYPE 14종(apparel 버킷 없음)·SEL_TYPE.01=123/.02=11.
+- **M5 (그릇):** ref_key1/ref_key2 2D 페어링 라이브 활성 255행이 size×color 무손실 수용 실증·신규 V번호/테이블/컬럼 0(roadmap:12,74)·V-3 흡수=강화.
+- **M6 (독립성):** deepcheck 13후보 채택 0(deepcheck:11,31,151)·H-2 REFUTED-for-RP 독립 재현(print_type=PTP_DTF/DIR/SLK 3종 닫힘·자수 0 hit)·codex #18 동의=robustness 기록(근거 아님·환각경계 HARD:8~11)·H-1/H-3 unverified 유지.
+
+### CL-M2~M6 결함 (Low·판정 무영향)
+- **D-CL-2 (Low) — gap §XV-2 "PASS측면" 표기 모호.** `03_gap/gap-matrix.md:474,482` size×color 2D matrix를 WEAK 판정하면서 본문에 "그릇 견딤(PASS측면)"을 병기. 라이브 재측 결과 2D 페어링 구조는 실제 그릇 보유(ref_key 255 활성)이고 결손은 자재 CLR 분해축/apparel 버킷이므로 *내용은 정확*하나, "PASS측면"이라는 표현이 한 facet의 최종 판정(WEAK)과 혼동될 수 있음. **조치(선택):** "구조 보유(✅)·분해축 결손(WEAK)"로 두 면을 분리 라벨. 판정값(WEAK) 자체는 정확·무영향.
+- **D-CL-3 (Low·전역) — gap §III 전역 공정 카운트 드리프트.** `03_gap/gap-matrix.md:56`(추정 인용) `t_proc_processes` 96·`t_prd_product_processes` 196 기록이나 라이브 재측 = **97·270**(데이터 진화). **CL §XV 판정 무영향**(load-bearing 수치 option_items 469/255·ref_dim 분포·PROC_000007 family·print_method 0·PK는 전부 정확). 단 BN/GS 등 다른 섹션이 96/196 절대수를 인용하면 stale. **조치(선택·전역):** §III 공정 카운트를 97/270으로 갱신. CL 게이트 재게이트 불요.
+
+> **CL M2~M6 종합: NO-GO 0.** 결함 D-CL-1/D-CL-2/D-CL-3 전부 Low·메타모델/갭/그릇 판정 무영향. **의류 variant #18 부결 = VALIDATED(역방향 오류 없음).** 라우팅: D-CL-1→reverse-engineer·D-CL-2/D-CL-3→gap-analyst(선택 정정·재게이트 불요).

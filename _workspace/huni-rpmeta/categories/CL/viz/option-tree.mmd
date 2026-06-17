@@ -1,0 +1,38 @@
+%% CL 옵션 구성 트리 — 출처: reverse.md §0~3, §14
+%% 의류 본체(원단 oz) → size×color 2D 매트릭스 → 인쇄위치 다중 → 인쇄방식 → 별색 + 3분기(CLST/CLDF/CLTM/CLAPDFT)
+flowchart LR
+  CL["CL 의류·티셔츠·앞치마·가방류<br/>(카테고리 내부 2모델 분기)"]
+
+  %% 모델 분기 (item_gbn)
+  CL --> M1["★clothes2025 모델<br/>(티셔츠類 — 전용 apparel_info)<br/>item_gbn=clothes2025 / price_gbn=clothes2025_price"]
+  CL --> M2["굿즈형 tmpl 모델<br/>(앞치마/가방/모자 — apparel_info 없음)<br/>price_gbn=tmpl_price · GS 굿즈 동형"]
+
+  %% 원단 출처 3분기
+  M1 --> SRC["★원단 출처 3분기<br/>(옵션모델 동일·원단 라이브러리만 다름)"]
+  SRC --> CLST["CLST 자체의류<br/>SXSRT/SXSHT · 54색 · adult"]
+  SRC --> CLDF["CLDF 브랜드완제<br/>76000/Printstar · 추정 clothes2025"]
+  SRC --> CLTM["CLTM 단체티<br/>SXZSB · 6색 · ★child 활성(120~150)"]
+
+  %% clothes2025 axes
+  M1 --> BODY["의류 본체 SKU (DIR_MTR 584행)<br/>원단(oz)×색(CLR)×사이즈(WGT) 합성"]
+  BODY --> MTX["★size×color 2D 매트릭스<br/>size_color_info 227셀(자체)/54셀(단체)<br/>각 셀→단일 MTRL_COD (S×블랙03→SXSRT103)"]
+  MTX --> CELL["셀별 가용성<br/>HIDE_YN / QUICK_ORD_YN / HIDE_RSN"]
+
+  MTX --> POS["★인쇄위치 (print_area 6종·다중)<br/>PDT_WRK 6행 — 위치마다 인쇄비 가산"]
+  POS --> P1["CL011 좌측가슴(PRICE=3700) · CL001 앞면<br/>CL009 좌측팔 · CL010 우측팔 · CL004 뒷목 · CL002 뒷면"]
+  POS --> KOI["KOI_NME 에디터 매핑<br/>(leftchest/front…·TP 채널 합류)"]
+
+  MTX --> METHOD["★인쇄방식 (print_type 3종·상품내 옵션)<br/>ORD_INFO.PRINT_TYPE"]
+  METHOD --> PM1["PTP_DTF DTF열전사(기본) · PTP_DIR 직접인쇄"]
+  METHOD --> PM2["PTP_SLK 날염/실크인쇄"]
+  PM2 --> PANT["★별색 Pantone (pantone_color 1124)<br/>PANTONE C — 실크인쇄 spot color"]
+
+  M1 --> QTY["이중 수량<br/>ORD_CNT(디자인수=건수) × PRN_CNT(수량)"]
+  M1 --> PAK1["폴리백 개별포장 PAK_POL"]
+
+  %% tmpl 모델 (CLAPDFT 앞치마 실측)
+  M2 --> APR["CLAPDFT 앞치마(SSR 실측·레거시 jQuery)"]
+  APR --> APB["본체 완제 SKU (select paper 8옵션)<br/>용도(작업/공방/가게/손님)×색 SKU 융합"]
+  APR --> APS["사이즈=인쇄영역·용도별 (select size 5옵션)<br/>가슴150×50 / 포켓 / 가게180×260"]
+  APR --> APR2["인쇄위치 radio chip (CL005 가슴 등 6위치)"]
+  APR --> APD["도수 (select sodu): 단면(4) / 인쇄없음(0)"]

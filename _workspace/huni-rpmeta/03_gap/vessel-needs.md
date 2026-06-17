@@ -10,7 +10,8 @@
 > - **v2.0 (GS):** + V-3 **굿즈 분해축 확장**(본체색/용량/두께) + **V-8 본체형태가공(#14 GAP)** + **V-9 생산형태 governing(#15 WEAK)**. GS 라이브 실측(2026-06-17)이 V-4 min-max·④template_prices·⑬nonspec을 **완화**(아래 정정 노트).
 > - **v3.0 (TP):** + **V-10 디자인 입력 채널 그릇(#16 GAP·★P1 최우선·directive 핵심)** + V-10 종속 **TemplateAsset 분리**(T-A 이중의미)·**VDP 변수 스키마**(T-B). TP 신규 vessel-gap = V-10 1건(BN/GS 항목 불변·보존).
 > - **v4.0 (PR):** **신규 vessel-gap = 0건.** PR(인쇄물·책자·리플렛·포스터)이 distinct 신축 0(facet 강화 9건뿐) → 새 그릇 수요 없음. PR facet 6항(표지/내지·접지/제본·page_rule·면지 bundle·digital_price·인쇄방식 게이팅)의 PASS 4·WEAK 1·GAP 1은 **전부 기존 V-항목에 흡수**(가이드 = 아래 ## PR 흡수 매핑). V-1~V-11 항목·우선순위 **불변·보존**.
-> - **v5.0 (ST·현재) ★포화 붕괴:** + **V-12 형상 축 그릇(#17 GAP·★P1 신규 최우선·directive 핵심·16축 포화 붕괴)**. ST가 distinct 신축 1건(형상) 도입 → 신규 vessel-gap 1. ST facet 5항(칼선·재단입자·점착·인쇄방식·disable)은 **전부 기존 V-항목 흡수**(재단입자=PASS 그릇존재·점착=V-3·disable=V-4·인쇄방식=V-2·칼선=공정+V-12 게이팅·가격엔진=V-7) — 신규 V-번호 0(흡수 가이드 = 아래 ## ST 흡수 매핑). V-1~V-11 항목·우선순위 **불변·보존.**
+> - **v5.0 (ST) ★포화 붕괴:** + **V-12 형상 축 그릇(#17 GAP·★P1 신규 최우선·directive 핵심·16축 포화 붕괴)**. ST가 distinct 신축 1건(형상) 도입 → 신규 vessel-gap 1. ST facet 5항(칼선·재단입자·점착·인쇄방식·disable)은 **전부 기존 V-항목 흡수**(재단입자=PASS 그릇존재·점착=V-3·disable=V-4·인쇄방식=V-2·칼선=공정+V-12 게이팅·가격엔진=V-7) — 신규 V-번호 0(흡수 가이드 = 아래 ## ST 흡수 매핑). V-1~V-11 항목·우선순위 **불변·보존.**
+> - **v6.0 (CL·현재) ★17축 재포화:** **신규 vessel-gap = 0건.** CL(의류·티셔츠·앞치마·가방류)이 distinct 신축 0(의류 variant #18 부결·facet 강화 5항뿐) → 새 그릇 수요 없음(PR 패턴 반복). CL facet 5항(size×color 2D matrix·인쇄위치 멀티슬롯·인쇄방식·Pantone 별색·item_gbn discriminator)의 PASS 1·WEAK 3·GAP 1은 **전부 기존 V-항목에 흡수**(가이드 = 아래 ## CL 흡수 매핑). V-1~V-12 항목·우선순위 **불변·보존.** ★라이브 핵심: `option_items.ref_key1/ref_key2` 2D 페어링이 활성(255/469)으로 size×color 2D 셀 구조는 그릇 견딤 — CL이 더한 것은 새 그릇이 아니라 *기존 그릇이 의류 2D variant를 견딘다는 검증*.
 
 ---
 
@@ -176,6 +177,20 @@ ST가 추가한 신규 vessel-gap = **V-12 형상 축 1건**(위 P1). ST facet 5
 
 > **★ST 요지:** ST facet 5항 = PASS 1(S-3 재단입자·그릇존재·조치 0)·WEAK 2(S-4→V-3·S-8→V-4)·GAP 1(S-5→V-2)·부분PASS 1(S-2→V-12/V-1 게이팅). **신규 V-번호 = V-12 형상 1건뿐** — facet은 새 그릇 수요 0(전부 V-2/V-3/V-4/V-7에 흡수·V-12 게이팅). 이것이 포화 붕괴의 vessel-side 정직성: ST는 새 *축* 1건(형상)만 그릇을 요구하고, 칼선/재단/점착/인쇄방식/disable은 기존 그릇이 견딤. designer는 V-12 설계 시 형상↔칼틀(#13)·형상↔모양파라미터(#9 V-1)·형상=FR→자유칼선 게이팅 간선을 함께, V-3 설계 시 점착/내후 차원, V-2 설계 시 ST 인쇄방식 enum, V-4 설계 시 disable 유형을 *함께* 반영(별 순서 추가는 V-12뿐).
 
+## ═══ CL 흡수 매핑 (v6.0 — 신규 vessel 0·facet 5항 기존 V-항목 귀속) ═══
+
+CL이 추가한 신규 vessel-gap = **0건**(의류 variant #18 부결). CL facet 5항(directive 1~5)이 어느 기존 V-항목/판정에 흡수되는지. **새 V-번호 부여 안 함.**
+
+| CL facet | gap-matrix 판정 | 흡수 대상 | 그릇 조치 |
+|---|:---:|---|---|
+| **① size×color 2D matrix**(C-2/C-3) | **WEAK** | **V-3 자재 분해축**(+그릇존재 부분) | ★2D 셀 *구조*는 그릇 견딤(`option_items.ref_key1/ref_key2` 페어링 활성 255/469·`use_yn`=셀가용성·GS SKU·ST disable 정점 동형) → **2D vessel 조치 불요**. 단 ① 색상이 OPT_REF_DIM에 별 ref 타입 없음→자재 CLR 라우팅·자재 CLR 분해축 = **V-3**(#1 합성 분해축) ② 의류 원단 MAT_TYPE 버킷 부재(.09/.10는 상품군명)→V-3 버킷 재정의 검토. **신규 V 아님 — V-3 설계 시 의류 본체(원단×색×사이즈) 분해/버킷 함께 고려.** |
+| **② 인쇄위치 멀티슬롯**(C-4) | **WEAK** | **공정#2(옵션 경유 PASS측면)·V-1 공정파라미터·V-10 에디터매핑** | 본체 멀티슬롯 선택=option_groups(SEL_TYPE.02 다중)→option_items(공정.04 156행)로 표현 가능(그릇 보유) → **별 vessel 불요**. 위치별 공정 파라미터(앞면 size·소매 좌표)=**V-1**(#9 ref_param_json)·KOI_NME 에디터 캔버스 매핑=**V-10**(#16 디자인입력 채널). **신규 V 아님 — V-1·V-10에 흡수.** |
+| **③ 인쇄방식 실크/전사/DTF**(C-6) | **GAP** | **V-2 인쇄방식 게이팅** | PR P-4/P-7·ST S-5와 동일 #12 GAP — V-2(#12)의 자재(DTF필름)/도수노출/화이트강제/Pantone활성/가격엔진 게이팅 면. CL 의류 인쇄방식(실크/전사/DTF)이 *상품내 옵션 인코딩*으로 횡단 합류(신규 V 아님). V-2 설계 시 CL 인쇄방식 enum(DTF/전사/실크)·삼면 표현(자재facet/상품분기/상품내옵션) 포함 권고. |
+| **④ Pantone 별색**(C-7) | **PASS** | (없음·그릇 존재) | `PROC_000007 별색인쇄`+화이트008/클리어009/금색011/은색012 **라이브 실재**·별색=공정 경계 준수 → **vessel 조치 불요**(별색 *공정* 그릇 보유). ※ 1124 PANTONE C *색값 도메인*(어떤 팬톤색)을 담을 별색 enum은 #6 기초코드 미비 — **경량 enum 후보**(V-13 검토급·코드행 사다리·실크인쇄 상품 한정·우선순위 낮음·designer가 별색 지정값 관리 필요성 판정). |
+| **⑤ item_gbn discriminator**(C-5) | **WEAK** | **V-9 생산형태 governing** | item_gbn(clothes2025/tmpl)=§V-15 생산형태#15 WEAK과 동일·구현 discriminator라 vessel-gap 아님 → 주로 data(prd_typ_cd 교정)·governing 표현은 **V-9**(designer 검토). 의류는 PRD_TYPE 분류 또는 discriminator 컬럼 검토 — **신규 V 아님·V-9에 흡수.** |
+
+> **★CL 요지:** CL facet 5항 = PASS 1(C-7 Pantone 별색·그릇존재·조치 0)·WEAK 3(C-2/C-3→V-3·C-4→V-1/V-10·C-5→V-9)·GAP 1(C-6→V-2). **신규 V-번호 0** — CL은 새 그릇 수요를 추가하지 않고, 기존 V-1/V-2/V-3/V-9/V-10에 facet 강화 메모만 더한다. 이것이 17축 재포화의 vessel-side 증거(PR 패턴 반복): 6번째 카테고리가 새 그릇을 요구하지 않음. ★특기: `option_items.ref_key1/ref_key2` 2D 페어링이 라이브 활성(255/469)으로 의류 size×color 2D 매트릭스·셀가용성을 *구조적으로 견딤* — 후니 옵션 그릇이 GS 1D variant→CL 2D variant 일반화를 무손실 수용(검증 신호). designer는 V-3 설계 시 의류 본체(원단×색×사이즈) 분해/버킷, V-2 설계 시 CL 인쇄방식 enum, V-1 설계 시 위치별 공정 파라미터, V-10 설계 시 KOI_NME 위치-에디터 매핑을 *함께* 반영(별 순서/V-번호 추가 0). 별색 지정값(1124 Pantone) enum은 #6 경량 후보(우선순위 낮음·실크인쇄 한정).
+
 ---
 
 ## ═══ GS 라이브 실측 정정 노트 (BN vessel-needs 완화) ═══
@@ -211,3 +226,4 @@ GS 라이브 실측(2026-06-17)이 BN의 보수적 vessel-gap 일부를 **그릇
 > ★TP 핵심: V-10이 신규 P1 최상위(directive 1순위). V-10⊥본체옵션(직교)·가격0 → 본체 축 그릇과 독립 설계. V-11은 V-10 종속·완제SKU 분리 명시.
 > ★PR 핵심(v4.0): **로드맵 불변** — PR은 신규 V-항목 0. PR facet은 기존 V-2(인쇄방식 게이팅에 자재풀 면)·V-4(제약에 평량 min/max)·V-7(가격에 digital_price 라우팅)에 흡수되므로, designer가 그 항목들을 설계할 때 PR facet 메모를 *함께* 반영(별 순서 추가 없음). PASS 4건(표지/내지·접지/제본·page_rule·면지)은 그릇 보유로 vessel 조치 0.
 > ★ST 핵심(v5.0): **V-12 형상 = 신규 P1**(V-10·V-3과 나란한 directive 1순위·16축 포화 붕괴). FK 위상: 형상축(V-12)이 칼틀/사이즈(#13)·모양 파라미터(#9 V-1)의 *게이팅 분류자* → V-1·#13과 연동 선행 설계. ST facet 5항은 신규 V 0(재단입자 S-3=PASS 그릇존재·점착 S-4→V-3·disable S-8→V-4·인쇄방식 S-5→V-2·가격엔진 S-6→V-7·칼선 S-2→V-12/V-1 게이팅). designer는 V-12 설계 시 ① SHAPE enum 신설(명백) ② 1:1 흡수 카테고리 size 유지(전면 강제 금지) ③ 형상↔칼틀/모양파라미터/자유칼선 게이팅 간선을 함께 반영(별 순서 추가는 V-12뿐).
+> ★CL 핵심(v6.0): **로드맵 불변** — CL은 신규 V-항목 0(의류 variant #18 부결·17축 재포화). CL facet 5항은 기존 V-1(위치별 공정 파라미터)·V-2(CL 인쇄방식 enum)·V-3(의류 본체 원단×색×사이즈 분해/버킷)·V-9(item_gbn 생산형태)·V-10(KOI_NME 위치-에디터 매핑)에 흡수되므로, designer가 그 항목들을 설계할 때 CL facet 메모를 *함께* 반영(별 순서 추가 없음). PASS 1건(Pantone 별색 PROC_000007)·option_items 2D 페어링 활성(255/469 ref_key2)은 그릇 보유로 vessel 조치 0. ★주의: 의류 size×color 2D matrix는 후니 옵션 그릇이 *구조적으로 견딤*(ref_key1/ref_key2)이나 색상이 OPT_REF_DIM 7종에 별 ref 타입 없음→자재 CLR 라우팅·의류 원단 MAT_TYPE 버킷 부재 → V-3 설계 시 의류 본체 분해/버킷을 함께 고려. 별색 지정값(1124 Pantone) enum은 #6 경량 후보(우선순위 최하·실크인쇄 한정).

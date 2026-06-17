@@ -123,3 +123,11 @@ INSERT INTO t_cod_base_codes (cod_cd, cod_nm, upr_cod_cd, disp_seq, use_yn, reg_
 - **ST S-4(점착/내후 소재)가 V-3(#1) 합성 분해축에 합류**(`vessel-shape-axis.md §5`·`gap-matrix XIII-2`). 강접/리무버블/옥외/저온/자석/메탈/한지 = §2.1 MAT_FACET·§7.2 동형의 *추가 합성 차원*(adhesion_grade 점착강도·weather_grade 내후등급) — 색상/두께→material 분해와 같은 패턴. **신규 V 아님**: MAT_FACET 그룹에 `.04 점착강도`·`.05 내후등급` 코드행 추가로 흡수(facet 분류축)·값은 기존 컬럼/note 또는 굿즈 용량 동형 판정(과잉모델 경계·점착 상품 수 실측 후).
 - **★ST 자재는 클린 버킷:** ST 점착 소재는 `.11 스티커용지`(클린)이지 파우치 `.09`/악세사리 `.10` 오염 버킷 아님 — V-3 §1 오염 실증(MAT_TYPE.09)과 달리 ST 자재행은 정상 등록 가능. 점착/내후 차원은 *오염 교정(B-3)이 아니라 facet 추가*(data-gap 아님·분해축 코드만).
 - search-before-mint: 점착강도/내후등급 전용 컬럼 라이브 부재(§7.1 jsonb 0건 동일) → MAT_FACET 코드행이 분류·값은 컬럼/note. **신규 테이블 0·V-3 흡수.**
+
+---
+
+## ═══ §9. CL 의류 본체 분해축 + size×color 2D 메모 (V-3 CL·v6.0·신규 그릇 0) ═══
+- **CL C-2/C-3(의류 size×color 2D matrix)가 V-3(#1) 분해축에 합류**(`reverse.md §0.4·§285`·`gap-matrix XV`·`vessel-needs.md CL 흡수 매핑`). 의류 본체 = `{원단(fabric/PTT)×색(CLR)×사이즈}` 분해 = §1 합성 분해축의 *2D 일반화*(GS 1D variant·§7 완제 본체 분해축의 의류판). **신규 V 아님 — V-3 설계 시 의류 본체(원단×색×사이즈) 분해/버킷 함께 고려.**
+- **★2D 셀 *구조*는 그릇이 견딤(vessel 조치 0):** size×color 매트릭스 셀은 라이브 `t_prd_product_option_items.ref_key1/ref_key2` 2D 페어링이 **활성**(255/469행에 ref_key2 비NULL 실측) → 한 셀=(size,color) 쌍을 `ref_key1`=size·`ref_key2`=color로 무손실 인코딩·`use_yn`=셀 가용성(품절). GS SKU 1D·ST disable 정점과 동형 그릇이 의류 2D variant까지 *구조적으로 수용* — **2D matrix 전용 테이블 mint 불요**(후니 옵션 그릇이 1D→2D 일반화를 견딘다는 vessel-side 검증). 이것이 의류 variant #18 부결의 그릇 측 근거: 새 그릇 없이 기존 옵션 레이어가 담음.
+- **단 두 facet은 V-3 분해축에 귀속(신규 V 0):** ① **색상(body_color)이 OPT_REF_DIM 7종에 별 ref 타입 없음** → §2.2대로 자재 CLR 라우팅(본체색=재질행 합성 또는 option_items) — §1 색=option 위임 정답 계승 ② **의류 원단(SXSRT/SXZSB) MAT_TYPE 버킷 부재**(라이브 `.09`/`.10`은 파우치/악세사리 상품군명 버킷이지 의류 원단 버킷 아님) → V-3 §6 open decision "버킷 재정의"에 의류 원단 계열(자체 SXSRT/브랜드 SXZSB·평량 oz) 추가 검토. 단 CL은 자체/브랜드/단체 3분기 = *원단 라이브러리/모집단* 차이(옵션 모델 동일·clothes2025 단일) → 버킷이 아니라 자재 *행* 분리(자체 원단 vs 브랜드 원단 mat_cd)로도 환원 가능 → designer 실측 후 판정(과잉 버킷 mint 경계).
+- search-before-mint: 의류 size×color 2D 셀=ref_key1/ref_key2 기존 그릇 PASS·색=option 위임·원단=mat 행/버킷(기존 또는 코드행). **신규 테이블 0·V-3 흡수.** ★주의: 의류 평량(oz)·형태(반팔/긴팔/후드)는 §7 thickness/weight 동형 + 자재 행 분리 — 분해축 grain은 자재 행/MAT_FACET이지 새 그릇 아님.
