@@ -1,0 +1,17 @@
+-- W4_spot_dedup.PRECONDITION.BLOCKED.sql — 별색 정본화 선행 (grouping U5' / 별 트랙·이번 미적용)
+-- =========================================================================================
+-- ★상태(라이브 실측 2026-06-17): COMP_PRINT_SPOT_WHITE_S1 = 530행, 형제 4색(GOLD/PINK/SILVER/CLEAR)_S1/S2 전부 use_yn='Y'.
+--   530 = proc_cd 5색(PROC_000008~012) × print_opt_cd 2 × min_qty 53.  ← 화이트 comp에 5색 proc 교차적재(오적재 잔존).
+--
+-- ★W4 후가공 배선 자체는 영향 없음(BLOCKED 아님):
+--   W4는 comp_cd='COMP_PRINT_SPOT_WHITE_S1'/_S2 를 공식에 "배선"만 한다(formula_components).
+--   엔진 매칭 시 selections={proc_cd, print_opt_cd, plt_siz_cd, min_qty}를 모두 지정하면 (proc/popt/plt/min_qty) 조합당 단가행 1건으로 결정 → 동시매칭 0(검증됨).
+--   따라서 별색 배선은 정상 동작. dedup은 데이터 위생 문제일 뿐 배선 차단 사유 아님.
+--
+-- ★BLOCKED(이번 단위 아님): WHITE_S1 의 비-화이트 proc 교차행(PROC_000009~012) 정리 + 형제 색 comp use_yn=N
+--   → 이는 grouping 트랙(U5')의 "별색 정본화(WHITE_S1=5색 흡수·형제 N)" 단위 소관.
+--   여기서 섣불리 DELETE/use_yn=N 하면 (1) grouping 트랙과 중복·충돌 (2) 정본화 규칙(어느 행 유지)이 grouping 권위.
+--   → 별 트랙 GO 후 적용. 이번 G-D2 apply.sql 에는 미포함.
+--
+-- (의도적 빈 SQL — 실행 시 무영향. 선행 의존성 문서화 목적)
+SELECT 'PRECONDITION_NOTE: spot dedup belongs to grouping U5 track; W4 wiring works regardless' AS note;

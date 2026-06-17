@@ -1,0 +1,98 @@
+-- ============================================================================
+-- undo.sql.tmpl — 통합 실 COMMIT 역복원 템플릿 (인간 승인 후 실행 / 롤백전용 검증 먼저)
+--   apply.sh --commit 으로 적재한 신안+G-D2 통합 변경을 backup_<ts>/ CSV 기준 역복원.
+--   [HARD] 기본 ROLLBACK. 실 적용은 끝의 ROLLBACK→COMMIT 치환 + 인간 승인.
+--   사용: psql ... -v bkp=backup_<ts> -f undo.sql.tmpl  (또는 apply.sh 가 경로 주입)
+-- ============================================================================
+\set ON_ERROR_STOP on
+BEGIN;
+
+-- ── V1 undo (MINOR-2 정밀화): comp_price_id 기준 신규 667행만 삭제 ──────────────
+--   ★과삭제 방지: V1(신규 667)·V1b(전환 17)는 둘 다 apply_ymd='2026-06-01'·siz_width NOT NULL 이라
+--   apply_ymd/siz_width predicate 로 지우면 V1b 17행까지 과삭제됨.
+--   → 백업 CSV(pre_component_prices, 적재 前 스냅샷)에 있던 comp_price_id = V1b 가 전환한 기존행.
+--     V1 신규행은 그 집합에 없음 → "NOT IN (백업 comp_price_id)" 인 매트릭스 행만 삭제.
+CREATE TEMP TABLE _pre_cp_ids (comp_price_id bigint);
+\copy _pre_cp_ids FROM PROGRAM 'tail -n +2 :''bkp''/pre_component_prices.csv | cut -d, -f1' CSV
+
+DELETE FROM t_prc_component_prices cp
+ WHERE cp.comp_cd IN (
+   'COMP_POSTER_ADH_CLEAR_PVC','COMP_POSTER_ADH_WATERPROOF_PVC','COMP_POSTER_ARTFABRIC_GRAPHIC',
+   'COMP_POSTER_ARTPAPER_MATTE','COMP_POSTER_ARTPRINT_PHOTO','COMP_POSTER_BANNER_MESH',
+   'COMP_POSTER_BANNER_NORMAL','COMP_POSTER_CANVAS_FABRIC','COMP_POSTER_LEATHER_ARTPRINT',
+   'COMP_POSTER_LINEN_FABRIC','COMP_POSTER_MESH_PRINT','COMP_POSTER_TYVEK_PRINT','COMP_POSTER_WATERPROOF_PET'
+ )
+   AND cp.siz_width IS NOT NULL
+   AND cp.comp_price_id NOT IN (SELECT comp_price_id FROM _pre_cp_ids);  -- V1b 17행 보존
+
+-- ── V1b undo: 전환 17행을 siz_cd 복원·siz_width/height NULL (백업 값 기준) ─────────
+--   pre_component_prices.csv 에 기록된 (comp_price_id, siz_cd, siz_width, siz_height) 원복.
+CREATE TEMP TABLE _pre_cp (
+  comp_price_id bigint, comp_cd text, siz_cd text, siz_width numeric, siz_height numeric,
+  opt_cd text, proc_cd text, dim_vals text, unit_price numeric
+);
+\copy _pre_cp FROM ':bkp/pre_component_prices.csv' CSV HEADER
+UPDATE t_prc_component_prices cp
+   SET siz_cd = p.siz_cd, siz_width = p.siz_width, siz_height = p.siz_height, upd_dt = now()
+  FROM _pre_cp p
+ WHERE cp.comp_price_id = p.comp_price_id
+   AND (cp.siz_cd IS DISTINCT FROM p.siz_cd
+        OR cp.siz_width IS DISTINCT FROM p.siz_width
+        OR cp.siz_height IS DISTINCT FROM p.siz_height);
+
+-- ── W5 undo (MINOR-1 활용): 미싱 단가행·comp 메타 원복 ────────────────────────────
+--   ③ 단가행 proc_cd/dim_vals/opt_cd 원복 (pre_component_prices)
+UPDATE t_prc_component_prices cp
+   SET proc_cd = NULLIF(p.proc_cd,''), opt_cd = NULLIF(p.opt_cd,''),
+       dim_vals = NULLIF(p.dim_vals,'')::jsonb, upd_dt = now()
+  FROM _pre_cp p
+ WHERE cp.comp_price_id = p.comp_price_id
+   AND cp.comp_cd = 'COMP_PP_PERF_1L';
+--   ①② comp use_dims·prc_typ_cz / ④ use_yn 원복 (pre_use_dims: comp_cd,use_dims,prc_typ_cd,use_yn)
+CREATE TEMP TABLE _pre_pc (comp_cd text, use_dims text, prc_typ_cd text, use_yn text);
+\copy _pre_pc FROM ':bkp/pre_use_dims.csv' CSV HEADER
+UPDATE t_prc_price_components c
+   SET use_dims = NULLIF(p.use_dims,'')::jsonb, prc_typ_cd = NULLIF(p.prc_typ_cd,''),
+       use_yn = p.use_yn, upd_dt = now()
+  FROM _pre_pc p
+ WHERE c.comp_cd = p.comp_cd
+   AND (c.use_dims IS DISTINCT FROM NULLIF(p.use_dims,'')::jsonb
+        OR c.prc_typ_cd IS DISTINCT FROM NULLIF(p.prc_typ_cd,'')
+        OR c.use_yn IS DISTINCT FROM p.use_yn);
+
+-- ── V2 undo: 위 _pre_pc UPDATE 가 면적13 comp use_dims 도 원복(동일 CSV) ──────────
+--   (V2·W5 가 같은 price_components 를 건드리므로 use_dims/prc_typ/use_yn 한 번에 원복)
+
+-- ── W1/W2/W4/W6 undo: 신규 공식·배선 삭제 (PRF_POSTER_* — 단 FIXED 보존) ──────────
+DELETE FROM t_prc_formula_components
+ WHERE frm_cd LIKE 'PRF_POSTER_%' AND frm_cd <> 'PRF_POSTER_FIXED';
+-- W6 가 PERF_1L 을 28공식에 배선했으나 위 DELETE 가 PRF_POSTER_* 전체 배선을 지우므로 함께 제거됨.
+
+-- ── W3 undo: 바인딩 FIXED 복원 (백업 pre_product_price_formulas) ─────────────────
+DELETE FROM t_prd_product_price_formulas
+ WHERE prd_cd BETWEEN 'PRD_000118' AND 'PRD_000145' AND apply_bgn_ymd='2026-06-01'
+   AND frm_cd LIKE 'PRF_POSTER_%' AND frm_cd <> 'PRF_POSTER_FIXED';
+CREATE TEMP TABLE _pre_ppf (prd_cd text, frm_cd text, apply_bgn_ymd text);
+\copy _pre_ppf FROM ':bkp/pre_product_price_formulas.csv' CSV HEADER
+INSERT INTO t_prd_product_price_formulas (prd_cd, frm_cd, apply_bgn_ymd, reg_dt)
+SELECT prd_cd, frm_cd, apply_bgn_ymd, now() FROM _pre_ppf p
+ WHERE NOT EXISTS (SELECT 1 FROM t_prd_product_price_formulas x
+                    WHERE x.prd_cd=p.prd_cd AND x.apply_bgn_ymd=p.apply_bgn_ymd);
+
+-- W1 공식 헤더 삭제 (배선 제거 후·FIXED 보존). FK RESTRICT 회피 위해 마지막.
+DELETE FROM t_prc_price_formulas
+ WHERE frm_cd LIKE 'PRF_POSTER_%' AND frm_cd <> 'PRF_POSTER_FIXED';
+
+-- ── V3 undo: nonspec_incr 백업 값 복원 (대개 NULL) ───────────────────────────────
+CREATE TEMP TABLE _pre_ns (prd_cd text, nonspec_width_incr numeric, nonspec_height_incr numeric);
+\copy _pre_ns FROM ':bkp/pre_nonspec.csv' CSV HEADER
+UPDATE t_prd_products t
+   SET nonspec_width_incr = p.nonspec_width_incr, nonspec_height_incr = p.nonspec_height_incr, upd_dt = now()
+  FROM _pre_ns p
+ WHERE t.prd_cd = p.prd_cd
+   AND (t.nonspec_width_incr IS DISTINCT FROM p.nonspec_width_incr
+        OR t.nonspec_height_incr IS DISTINCT FROM p.nonspec_height_incr);
+
+-- [HARD] 기본 ROLLBACK. 실 역복원은 인간 승인 후 ROLLBACK→COMMIT 치환.
+ROLLBACK;
+\echo '===== UNDO DRY-RUN ROLLBACK 완료 (실 복원은 인간 승인) ====='
