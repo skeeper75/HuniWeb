@@ -1,5 +1,42 @@
 # Huni-DBMap — HANDOFF (다음 세션 재시작 포인터)
 
+## ★★최신 현황 (**round-23 실사 가격 견적화 — 라이브 적재 완료** — 2026-06-18)
+`/harness:harness` "실사시트 가격 구성요소 등록→견적가능" 7항목 + 후속(린넨·아크릴·스티커·별색·반칼·064). 신규 자산 0(기존 가격 트랙 재사용). 권위 = [[dbmap-area-matrix-wh-dimension]]·[[dbmap-price-component-grouping]] + `_workspace/huni-dbmap/33_silsa-price-quote/`.
+
+### ★실 라이브 COMMIT (되돌리지 말 것·각 `_exec_*/backup_*`·undo 보유)
+1. **포스터/사인 면적 견적 + G-D2 후가공 배선 (통합 X-1)**: INSERT 975·UPDATE 77·DELETE 28. ★A안(좌표 siz 채번) 폐기 → **신안 = `siz_width`/`siz_height` 구간 차원**(webadmin 신설·'이하' 상한·off-grid ceiling 엔진 내장·14차원 자연키). 본체 면적 13 comp use_dims=`[siz_width,siz_height]`·가격표 셀 verbatim 667·후가공(오시/미싱/귀돌이/가변/별색) addtn 배선·공식 28 분리. 골든 600×1800=21,600+오시2줄6,000=27,600.
+2. **린넨 가공옵션**: 마감가공 5택1(오버로크0·+리본끈800·말아박기1000·+면끈2000·봉미싱7cm2000)·add-on comp+단가행5+바인딩. INSERT 10.
+3. **아크릴 동형**: 가로/세로 구간 전환 217 단가행. ★`work_*`(블리드 작업사이즈) 금지·`siz_nm` WxH 파싱(W=앞)·두께 mat_cd 직교. + **마무리**: A5 긴급보정(CLEAR3T .02 min_qty NULL 81→1·엔진 ValueError 해소)·코롯토 comp 신설(B06 verbatim·105). BLOCKED=미러 바인딩·카라비너 채번·.02 시맨틱.
+4. **스티커 052~067 16상품 가격사슬 완결**: 소재 4미적재288·투명 오매핑170→162(90)·B3/B4 채번+단가·타투(.02 min_qty3)·팩(.01→.02 min_qty54)·062/063 반칼팬시 바인딩·058~061(A4 반칼 전용 SIZ_520 분리·오청구 회피)·**064 잠정**(B01 col1 차용 1260·전건 `[잠정]` note·추후 실측 교체).
+5. **별색 dedup**: 형제 9 comp(CLEAR/GOLD/PINK/SILVER S1·S2+WHITE_S2) use_yn=N+배선제거37 → 정본 `COMP_PRINT_SPOT_WHITE_S1`("별색인쇄비"·5색 proc×2면×53=530) 단일화. 단가행 보존·재적재0.
+6. **미싱 dangling 정리**: 비활성 PERF_2L/3L의 PRF_DGP_A/D 배선 DELETE 4(정본 PERF_1L 보존).
+
+### ★확립 모델/규칙 (HARD)
+- **면적매트릭스 가격 = `siz_width`/`siz_height` 구간 차원**(좌표 siz 채번 폐기)·'이하' 상한·off-grid 다음구간 ceiling·실사/현수막/아크릴 동형. 고정가(A시리즈)는 siz_cd 이산.
+- **가격구성요소 그룹핑 = 단일 comp + 종류축**(공정→proc_cd 트리/수량→dim_vals/색→proc_cd/도수→clr_cd→print_opt_cd/재질→mat_cd)·comp_grp 불요·**통합 = use_yn=N + 배선축소 + 단가행 보존(DELETE 아님)**. ★통합 키검사 시 종류축(proc_cd) 누락 금지(정상통합을 중복 오독).
+- **엔진(pricing.py)**: `.02` 합가형 = `unit_price÷min_qty×qty`(**min_qty 필수·NULL이면 ValueError**)·`.01` 단가형 = `×qty`(min_qty 무관)·`addtn_yn` 무참조(매칭=합산·동시매칭 ERR_AMBIGUOUS→공식 소재별 분리 필요). Phase11 evaluate_price **구현 완료**(38 passed).
+- **스티커: "(완칼)" 미명시 = 기본 반칼** → B01 귀속. 소재 확인이 가격테이블 매핑 키.
+- **같은 치수라도 가공(완칼 vs 반칼) 가격 다르면 siz_cd 분리**(공유 시 오청구).
+- webadmin = read-only oracle(개발자 GitHub 배포·코드 수정 금지). 라이브 적재는 인간 승인 후 우리가 COMMIT.
+
+### 다음 시작점
+- (a) **타투 1~2장 2,000원** — 주문정책(상품마스터 067 현재 3장 배수만 허용 → 1장 허용) + 고정가 구조 설계(엔진 .02는 수량비례라 flat 표현 추가설계·위젯 동반)
+- (b) **064 소형반칼 실측 단가** 수령 시 — `[잠정]` note 식별로 교체(현 B01 col1 차용)
+- (c) **카라비너(PRD_000166) 등록** — 형상 4종(가격축 5800~6900)+고리색 가격표 10종(무료)·opt_cd 채번+PRD 활성화(출시 시점)
+- (d) **미러 아크릴** 연결(본체 상품 0·CPQ 소재옵션 선결·사용자 보류)
+- (e) 다른 상품군 가격 견적화(round-21 10/10 동형 분류 참조) 또는 가격엔진 라이브 가동 검증
+
+### 미해결/블로커
+- 064 실측 단가(현 잠정)·타투 1~2장 정책·카라비너 활성화·미러 연결·아크릴 .02 시맨틱(개발자 LOW)·058~061 외 광범위 가격엔진 실가동 검증.
+
+### 이번 세션 결정
+- A안(좌표 siz) → 신안(가로/세로 구간) 전환(webadmin 정합·채번 0) · 별색/제본 통합은 정상(우리 "오염삭제" 오독 철회) · 통합=단가행 보존 · 064 잠정 우선 등록 후 추후 변경 · "(완칼) 미명시=반칼" · 실 COMMIT은 매건 인간 승인.
+
+### 건드리지 말 것 (라이브 COMMIT·undo 보유)
+- 위 1~6 전 COMMIT(포스터 면적·G-D2·린넨·아크릴 동형/마무리·스티커 052~067·별색 dedup·미싱 dangling) · 각 `_exec_*/backup_*`·`undo.sh`/`undo.sql` · 별색 정본 `COMP_PRINT_SPOT_WHITE_S1` · 반칼 A4 전용 `SIZ_000520` · 검증 GO 산출(`_gate/`).
+
+---
+
 ## ★최신 현황 (**round-22 6축 기초데이터 staged 교정·적재 + 굿즈 자재 정리** — 2026-06-16)
 `/harness:harness` 6축(① 기초코드 ② 사이즈 ③ 도수 ④ 자재 ⑤ 공정 ⑥ 카테고리) 기준 상품마스터 단계별 라이브 적재 + 매핑 오류 교정. 하네스 신설(스킬 `dbm-axis-staged-load` v2·신규 에이전트 0·기존 재사용). 권위 = [[dbmap-axis-staged-load-round22]] + `_workspace/huni-dbmap/32_axis-staged-load/`.
 - **★핵심 판정(`03_webadmin-load-path-analysis`)**: webadmin `load_master`=무변환 전파기 → 6축 오류 진원 전부 **ⓐ(입력 v03)** → 교정 정답=**교정 입력 엑셀 재적재(경로 Y·근본·P-TRUNCATE 안전)** > 라이브 직접 SQL(경로 X·재적재 시 소멸). **webadmin 코드 수정 금지**(개발자 GitHub 배포·read-only). 권위=상품마스터/가격표·**v03 배제**.
