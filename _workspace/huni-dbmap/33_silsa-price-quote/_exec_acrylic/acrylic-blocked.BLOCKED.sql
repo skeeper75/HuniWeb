@@ -1,0 +1,29 @@
+-- acrylic-blocked.BLOCKED.sql — 차단 항목 (apply.sql 에 포함 금지·인간 승인/컨펌 후 별도 실행)
+-- ★이 파일은 apply.sql 에서 \i 하지 않는다. 추측 적재 금지(돈-크리티컬).
+-- =========================================================================================
+-- BLOCKED-1 · Q-ACR-7 — prc_typ_cd .02 엔진계약 미확정 (min_qty 룩업 후 ×수량 vs 총액)
+--   CLEAR3T prc_typ_cd=PRICE_TYPE.02(합가형)·use_dims에 min_qty(전건 1). 면적매트릭스 개당단가는
+--   단가형(.01)이 원칙이나, 엔진 evaluate_price 미구현이라 .02 계산법 미확정. 추측으로 .01 강제 금지.
+--   A3가 min_qty 토큰은 제거(use_dims)하나 prc_typ_cd .02→.01 전환은 엔진 계약 확정 후.
+-- UPDATE t_prc_price_components SET prc_typ_cd='PRICE_TYPE.01' WHERE comp_cd='COMP_ACRYL_CLEAR3T';  -- 보류
+--
+-- BLOCKED-2 · Q-ACR-9 — 미러 본체 바인딩 상품 불명
+--   COMP_ACRYL_MIRROR3T 단가행 실재(37+15 전환/적재)하나 어느 상품이 미러3T 본체인지 불명.
+--   PRF_MIRROR_ACRYL 공식·배선·product_price_formulas 바인딩 신설은 바인딩 대상 상품 컨펌 후.
+--   본 실행본 = 미러 단가행 축 전환(A1)·GAP 적재(A2)만. 공식/바인딩 신설 0.
+-- INSERT INTO t_prc_price_formulas (frm_cd, frm_nm, use_yn, reg_dt) VALUES
+--   ('PRF_MIRROR_ACRYL','미러 아크릴 공식','Y',now());  -- 보류(바인딩 상품 불명)
+--
+-- BLOCKED-3 · GAP-CHAIN-COROTTO — 아크릴코롯토 comp 자체 부재(신설 별 트랙)
+--   B06 6×6 면적매트릭스 21조합. COMP_ACRYL_COROTTO 신규 comp+단가행+공식+사슬 = 별 신설 트랙.
+--   코롯토 = 면적매트릭스(siz_width/height 동형). 본 실행본 범위 외.
+--
+-- BLOCKED-4 · GAP-CHAIN-CARABINER — 아크릴카라비너 comp 자체 부재(신설 별 트랙)
+--   B07 4형상 고정가(자물쇠/하트A/하트B/원형). COMP_ACRYL_CARABINER 신규(고정가형·opt_cd·면적 아님).
+--   본 실행본 범위 외.
+--
+-- BLOCKED-5 · Q-ACR-AC2 (A4) — nonspec_width_incr/height_incr 증가단위 값 미명시
+--   아크릴 nonspec_yn=Y 상품(키링/마그넷/뱃지/스마트톡/명찰/머리끈/볼펜/지비츠/코롯토 등) width/height min/max 보유,
+--   incr 전건 NULL. 포스터는 매트릭스 그리드 스텝 도출 가능했으나 아크릴은 가격표/도메인이 증가단위를 명시 안 함.
+--   추측 적재 금지(arbiter 돈-크리티컬). 실무진 컨펌 후 별도 백필.
+-- UPDATE t_prd_products SET nonspec_width_incr=?, nonspec_height_incr=? WHERE prd_cd='PRD_000146' ...;  -- 보류
