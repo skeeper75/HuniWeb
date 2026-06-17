@@ -202,7 +202,22 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 | 2026-06-17 | **PR·ST·CL·AC·PD 5개 카테고리 종단 + PH reverse — 16→17축 수렴 입증** — 사용자 "다음 카테고리 분석"→연속 5개 종단(PR 인쇄물56·ST 스티커36·CL 의류30·AC 아크릴20·PD 스툴/구조물3)+PH reverse(API 529 중단·metamodel부터 재개). **ST가 #17 "형상(shape)" distinct 승격**(전용 shape_info 슬롯 실재+후니 KB G-SK-2 "형상 어느 축에도 없음" 결함→그릇 V-12 SHAPE base_code6+컬럼2·테이블0). 나머지 **PR/CL/AC/PD = distinct 0 재포화**(의류 variant·가공방식그룹핑 A-8·codex layer-stack D-13·완제 내재BOM PD-4 등 최강 #18 후보 적대 검증 전부 부결). ★수렴: 16축 4카테고리 안정→ST 1개 승격→3 연속 재포화·codex도 #18 부결 독립 동의(상품 68%). **★승격/부결 일관 기준[HARD]: 전용 슬롯 라이브 실재+KB 결함 둘 다→승격·기존 축이 왜곡없이 담음→부결("외형 이질" 아님). ★vessel-gap(축 부재·신규 그릇·ST 형상 V-12) vs data-gap(축 있으나 미적재·dbmap 트랙·PD-4 addons/usage 그릇 실재)=라이브 그릇 실재 여부로 판별.** 신규 테이블 mint=V-11 TemplateAsset·V-12 SHAPE 2건만(나머지 facet 컬럼/코드행 흡수·search-before-mint 8연속 통과). M1~M6 전건 GO·Low 정정(PD D-PD-2만 open). PH=액자/사진인화 라이브 전부 SSR-negative로 마운팅/거치/전면유리 미관측=#18 판정 미싱데이터(라이브 재캡처 또는 후니 도메인 권위 필요). | `_workspace/huni-rpmeta/categories/{PR,ST,CL,AC,PD,PH}/`·02~05 v8.0 extend·`04_vessel/vessel-shape-axis.md`·`11_ddl_proposals/ddl-proposal-shape-axis.sql`·HANDOFF.md·CLAUDE.md §11·[[huni-rpmeta-harness]] | 사용자(다음 카테고리 분석·계속·선별 진행) |
 | 2026-06-17 | **하네스 강화(운영/유지보수) — codex→mermaid 폴백 + 모델 폴백 체계화** — 사용자 `/harness:harness` "codex 동작 안 하면 mermaid 폴백 개선". 감사: pre-flight ping·mermaid 폴백 일부 존재하나 ① 모델 폴백(gpt-5.5) 부재 ② mermaid 폴백이 `rpm-visualizer` 에이전트 미반영(이번 세션 매번 수동 지시한 근본 원인) ③ 401만 체크(400 model 미처리). 개선 5종: ① **공용 `codex-preflight.sh` 신설**(`rpm-visualize/scripts`·모델 후보 순회 gpt-5.5 우선·`AVAILABLE/DEADLOCK/AUTH_STALE/UNAVAILABLE` 판정·**토큰문제 vs 모델데드락 구분**·실증 `AVAILABLE model=gpt-5.5`) ② `rpm-visualize` SKILL pre-flight 모델폴백+**mermaid 자동 폴백 격상**(pending은 소스 부재 시만) ③ **`rpm-visualizer` 에이전트 mermaid 폴백 영구 내재화**(Principle 6·Error Handling·codex outage→mermaid 산출·pending 아님) ④ `rpm-deepcheck`/`rpm-deep-augment` pre-flight 모델폴백(deepcheck는 mermaid 폴백 없음=외부의견 본질·non-AVAILABLE시 pending) ⑤ 오케스트레이터 Phase 5.5/에러/시나리오(Phase 5.5 mermaid로 항상 완료·4.5만 pending). 교훈 반영: **codex 데드락=모델선택 문제일 수 있음(버전 아님)→모델 후보 순회로 자동 복구**. 검증: 스크립트 문법 OK·5파일 경로 일관·실증 AVAILABLE | `.claude/skills/rpm-visualize/{SKILL.md,scripts/codex-preflight.sh}`·`.claude/skills/rpm-deep-augment/SKILL.md`·`.claude/agents/huni-rpmeta/{rpm-visualizer,rpm-deepcheck}.md`·`huni-rpmeta-orchestrator`·CLAUDE.md §11·[[huni-rpmeta-harness]] | 사용자(`/harness:harness` codex→mermaid 폴백 강화) |---
 
-## 12. MoAI Framework (gated — rarely used here)
+## 12. Harness: Huni-Basecode-Governance (기초코드 등록 거버넌스)
+
+**목표:** 후니프린팅 기초코드(자재·사이즈·도수·인쇄옵션·공정·기초코드+카테고리)를 개선/보완/수정하기 위해, **rpmeta 그릇 처방(vessel-gap)** + **dbmap 데이터 진단(round-13/22)** + 인쇄 도메인 지식 + 역공학 + 경쟁사를 종합해 "**기초코드 등록 명세 마스터**"(축별 신규 등록/교정/축이동 + webadmin 적재경로 + 4-way 근거)를 도출한다. 권위[HARD]=상품마스터(260610)+인쇄상품 가격표(260527), 역공학·경쟁사는 갭헌팅 보강(권위 덮어쓰기 금지). **rpmeta(그릇 부재 판정)도 dbmap(데이터 교정 적재)도 아닌, 그 둘의 교집합을 "무엇을 기초코드로 등록/교정할 것인가"의 거버넌스 명세로 종합**. 분석·명세 전용 — 실 라이브 COMMIT은 인간 승인 후 dbmap 적재 트랙(dbm-load-execution·dbm-axis-staged-load) 위임.
+
+**트리거:** "기초코드 등록", "기초코드 등록 필요분 도출", "기초코드 거버넌스", "기초코드 개선/보완/수정", "자재/사이즈/도수/인쇄옵션/공정/기초코드 정리", "잘못된 매핑 도출", "등록 명세 마스터", "권위 정답 사전", "4-way 진단", "basecode 하네스 실행/재실행/업데이트/보완", "특정 축만 등록명세", "자재 등록명세", "카테고리 등록명세", "huni-basecode" 등 본 도메인 요청 시 `huni-basecode-orchestrator` 스킬을 사용. 단순 질문은 직접 응답.
+
+**산출물 루트:** `_workspace/huni-basecode/` (01_authority·02_diagnosis·03_registration·04_gate). 4인 팀(`hbg-authority-curator`→`hbg-basecode-diagnostician`→`hbg-registration-designer`→`hbg-validator`)·권위 정답 사전→4-way 진단→등록 명세→B1~B6 게이트. 1순위 축=자재🔴·카테고리🔴(round-22 진단), 나머지 4축 스캐폴드(후속 확장). 라이브 읽기전용 SELECT만(파괴적 쓰기 0)·`.env.local` RAILWAY_DB_*.
+
+**변경 이력:**
+| 날짜 | 변경 내용 | 대상 | 사유 |
+|------|----------|------|------|
+| 2026-06-18 | 하네스 초기 구성 — 4 에이전트(hbg-authority-curator·diagnostician·registration-designer·validator) + 5 스킬(orchestrator + curation·diagnosis·registration-spec·governance-evaluation). rpmeta∩dbmap을 기초코드 등록 명세로 종합하는 신규 통합 거버넌스 하네스. 산출=등록 명세 마스터(분석·명세 전용·실 COMMIT은 dbmap 위임). 1순위=자재·카테고리 | `.claude/agents/huni-basecode/`·`.claude/skills/{huni-basecode-orchestrator,hbg-*}`·CLAUDE.md §12 | 사용자(`/harness:harness` — rpmeta 읽고 기초코드 등록 필요분 도출 전략) |
+
+---
+
+## 13. MoAI Framework (gated — rarely used here)
 
 The MoAI-ADK orchestration framework (SPEC plan/run/sync, TRUST 5, DDD/TDD, Agent Teams,
 design GAN loop) is installed but not the primary workflow in this repo. Its detailed
