@@ -214,3 +214,43 @@
 - **★A-8/D-13 역방향 오류 없음 VALIDATED** — distinct를 facet으로 숨긴 흔적 0(ST 형상#17 일관 기준·전용 슬롯+KB 결함 유무로 승격/부결 비대칭 정당). 적대 검정 4/4 깨기 실패. owning agent(metamodel-architect) 정정 불요.
 - **잔여 = D-AC-1(Low·M1·reverse-engineer·PTT 유도값 표기 정밀도·판정 무영향) 단 1건**(위 AC M1 섹션). M2~M6 게이트는 추가 결함 없음.
 - **dbmap 가격 트랙 위임 사항(vessel 범위 외·결함 아님):** Q-ACR-7(CLEAR3T prc_typ .02 엔진계산 미확정·라이브 84행 확증)·미러/코롯토/카라비너 공식 미신설은 `dbmap 31_acrylic` Q-ACR/GAP-CHAIN 범위(돈 크리티컬·인간 승인). rpmeta 그릇 결함 아님(frm_typ_cd는 기존 V-7).
+
+---
+
+## PD-M1 (추출 충실성) — rpm-reverse-engineer 신규 산출 독립 검증 [verdict: CONDITIONAL — 슬롯 귀속 결함 1건]
+
+> 라이브 읽기전용 재실측 2026-06-17. PD는 재사용 캡처 0 → 라이브 GET이 유일 근거. 3 PD 페이지(PDCHSTL/PDWRSLP/PDSRPPY) HTTP 200·실 SSR 파싱으로 reverse.md 원자 전건 대조.
+
+### 재실측 일치 증거 (대부분 전건 일치 — 날조 없음)
+- **catalog 전수·누수 0:** `redprinting_catalog.json` 479상품 중 category=PD = **정확히 3건**(PDCHSTL 스툴·PDWRSLP 슬리퍼·PDSRPPY 강아지 계단). ACPD*/GSCAPD*/STBPDFT 등 PD 문자 포함 코드는 전부 AC/GS/ST로 올바르게 분류(접두 누수 0). reverse.md §5 "3상품 전수" 정확.
+- **라이브 크기:** 392657/399344/369065 byte = reverse.md §1~3 헤더 "392KB/399KB/369KB" 정확.
+- **paper(자재) verbatim 일치:** 면10수화이트 / 슬리퍼원단 / PU(폴리우레탄)-코끼리원단 — §0.2·§1~3 일치.
+- **size verbatim 일치:** PDCHSTL 미니사각(292×292)·미니원형(305×305)·원형(305×305)·긴사각(580×290) / PDWRSLP 230~280mm 6프리셋 / PDSRPPY 2단(495×320)·3단(717×382) — §0.3·§1~3 전건 일치.
+- **sodu=단면** 3상품 전부 — §0.4 일치.
+- **PCS 슬롯 CHK 실재:** PDCHSTL `SEW_LTR_CHK+THO_CUT_CHK+SUB_MTR_CHK+six_clr` / PDWRSLP `PDT_WRK_CHK+THO_CUT_CHK+SUB_MTR_CHK`(SEW_LTR 없음) / PDSRPPY `SEW_LTR_CHK+THO_CUT_CHK+SUB_MTR_CHK+six_clr` — §0.5 슬롯 패턴(스툴/계단=SEW_LTR, 슬리퍼=PDT_WRK) 정확.
+- **icon_txt 라벨:** 레더재봉/모양커팅/추가부자재(스툴·계단)·제품가공/모양커팅/추가부자재(슬리퍼) — §0.5 라벨 일치.
+- **TIP "검정 밑창 1켤레씩 주문 가능":** 라이브 dd 실재("- 검정 밑창은 1켤레씩 주문 가능합니다 / - 화이트 밑창은 현재 주문이 불가하며 500켤레 이상…") — §2 note·§0.5 "검정=1켤레 가능 제약" 정직(추가로 화이트=현재 주문불가는 reverse 미기재).
+- **number1/number2 2슬롯**(수량·건수 직접입력) 실재 — §0.6 일치.
+- **unobserved 정직성:** THO_CUT_SUB_SELECT 상세 enum·SUB_MTR 상세·가격 infoCall 후행 = SSR 미노출 확인 → `unobserved` 표기 정직(날조 은폐 아님). 구조물 마케팅 카피(다리/솜/지퍼/논슬립)는 `[live:SSR-marketing]` non-axis로 옵션과 엄격 분리(라이브 detail 카피 실재).
+
+### D-PD-1 (Medium) — 슬리퍼 밑창색(검정/흰색)을 `six_clr`에 오귀속 [M1 → rpm-reverse-engineer]
+- **위치:** `categories/PD/reverse.md:74`(§0.5 표 `PDWRSLP | (six_clr→) 검정·흰색 | 밑창(sole) 색`)·`:166-171`(§2 `axis: 밑창색(six_clr→검정/흰색)` choices `[검정, 흰색]` base_data_tag `자재(본체색=밑창 sole)`).
+- **재측정(라이브 SSR):** `six_clr`는 3상품 전부 **별색(spot-color) 체크박스**(`name="six_clr" id="six_clr" value="Y" onclick="productOrder.sixclr_check('','')"`) — 검정/흰색 값이 부착돼 있지 않음(별색 standard 슬롯, reverse §0.4·§1·§3에서 별색으로 올바르게 판정한 바로 그 필드). **검정/흰색 밑창색 variant는 실제로 `SUB_MTR(추가부자재) sub-radio`에 인코딩**: `opt_checked('SUB_MTR','SLB01'..'SLB06')`=검정색 슬리퍼 230~280mm(MTRL_COD `SBSLP230~280`)·`SLW01~06`=흰색 슬리퍼 230~280mm(MTRL_COD `SWSLP*`). 즉 PDWRSLP의 밑창색은 **SUB_MTR 슬롯의 밑창색×사이즈 12-variant 매트릭스**이며, `six_clr`(별색)와는 별개 슬롯.
+- **결함 성격:** 값 날조 아님(검정/흰색·1켤레 TIP·밑창 sole 의미는 전부 실재) — **소스 슬롯 귀속이 틀림**(M1 "atom must match cited source"). `six_clr→검정/흰색`은 별색 체크박스에 부자재 매트릭스 값을 잘못 결선. 부작용 2건: ① reverse가 SUB_MTR을 별도 generic "추가부자재" 축(§2:188)으로도 나열해 밑창색이 **이중표상**(six_clr 1회 + SUB_MTR 1회)·SUB_MTR이 실은 밑창색 매트릭스를 *담고 있다*는 사실 누락. ② "자재(본체색=밑창)" 태그가 별색 슬롯에 붙어 메타모델 §4 "본체/밑창색 six_clr" 행(reverse §4:254)으로 전파 위험.
+- **심각도:** Medium — 단일 슬롯 귀속 오류이나 메타모델 자재#1 본체색 family·SUB_MTR 부자재 BUNDLE 판정 토대를 흔들 수 있음(밑창색이 별색이냐 부자재냐). distinct #18 부결 핵심 판정(구조/조립/3D폼=facet)에는 **무영향**(밑창색 귀속과 독립).
+- **조치:** §0.5·§2의 밑창색 축을 `six_clr` → `SUB_MTR_SUB_RADIO`(SLB*/SLW* 밑창색×사이즈 매트릭스)로 정정. six_clr은 PDWRSLP에서도 별색(spot-color)으로 통일 표기. §4 횡단표 "본체/밑창색 six_clr(PDWRSLP)" 행을 SUB_MTR 부자재 매트릭스로 재귀속. **재게이트 권장**(슬롯 귀속 정정 후 M2 자재#1 본체색 전파 재확인).
+
+> **PD-M1 종합: CONDITIONAL.** catalog 전수(3·누수0)·paper/size/sodu/PCS슬롯/icon_txt/TIP/수량모델 **전건 라이브 verbatim 일치·날조 0**, unobserved/SSR-marketing 정직성 충족. 단 **D-PD-1(Medium·밑창색 six_clr 오귀속)** 1건 — 값은 실재하나 인용 소스 슬롯이 틀림(별색 체크박스 ≠ SUB_MTR 부자재 매트릭스). NO-GO는 아님(날조·부존재 인용 아닌 슬롯 결선 오류)이나 M2 본체색 전파 위험으로 CONDITIONAL 처리. 라우팅: D-PD-1→rpm-reverse-engineer(정정 후 재게이트).
+
+### PD M2~M6 게이트 결과 (rpm-validator·2026-06-17·라이브 재실측) — 차단 결함 0건
+
+> M1 재확인(D-PD-1 정정 정합) + M2~M6 전건 GO. 라이브 information_schema 직접 SELECT(railway·read-only)로 PD facet 5항·PD-4 data-gap·distinct 0 부결 검증. **신규 차단(High/Medium) 결함 0건.** 비차단 Low 1건만 기록.
+
+### D-PD-2 (Low·비차단) — reverse 횡단표 SUB_MTR 밑창색에 `자재(본체색)` 태그 병기 [M1/M2 → rpm-reverse-engineer]
+- **위치:** `categories/PD/reverse.md:74·77·176·260` — D-PD-1 정정 후 밑창색을 SUB_MTR sub-radio로 올바르게 재귀속했으나, base_data_tag에 `자재(본체색=밑창 sole)`를 병기(예: §4:260 `자재(본체색 합성) + SUB_MTR 부자재#8`).
+- **재측정:** metamodel 전수 grep — 밑창색이 dictionary/discovered-axes/erd 어디에도 **자재 CLR(본체색)로 등재되지 않음**(부속물#8/자재 sub_mtrl variant로만 라우팅). 즉 reverse의 `본체색` 태그가 metamodel에 전파되지 않음(M2 토대 무영향).
+- **성격:** 밑창=슬리퍼 본체에 결합되는 부자재(sole)의 색이므로 "본체색"이라는 표현이 자재 CLR(인쇄 본체색)과 혼동될 여지가 있는 라벨링 슬랙. _resolved-fragments PD-6(:651)이 이미 "부속물#8 vs 자재 sub_mtrl 최종 귀속은 reverse SUB_MTR 정정본 검증 후"로 명시 — 미세 경계 미확정 상태를 정직하게 보유.
+- **심각도:** Low — 값·슬롯 귀속 정확(SUB_MTR·SLB*/SLW*·MTRL_COD SBSLP/SWSLP 실재)·distinct 0 불변·M2 자재 CLR 미전파(grep 0)이므로 비차단.
+- **조치(선택):** reverse §0.2/§4 밑창색 태그를 `자재(본체색=밑창)` → `SUB_MTR 부자재 variant(밑창 sole 소재 색·자재 CLR 아님)`로 명확화. 또는 PD-6 미세 경계(부속물#8 vs 자재 sub_mtrl) 확정 시 일괄 정리. **재게이트 불요**(비차단).
+
+> **PD M2~M6 종합: GO (전건).** 라이브 재실측 8검사 일치·PD-4 data-gap(addons PK·usage_cd .07=639 그릇 실재 직접 확인)·distinct 0 부결 검증·codex 17후보 채택 0. 차단 결함 0건·Low 1건(D-PD-2·비차단).

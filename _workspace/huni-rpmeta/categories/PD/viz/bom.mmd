@@ -1,0 +1,45 @@
+%% PD 완제 구조물 내재BOM 다이어그램 — 출처: reverse.md §0.1·§0.5·PD-4 + gap §XIX-1/§XIX-2
+%% ★directive 핵심: vessel-gap(ST 형상) vs data-gap(PD 내재BOM) 정반대 대비
+flowchart TB
+  TITLE["PD 완제 구조물 내재BOM — ★data-gap vs vessel-gap 대비<br/>RP가 입체 구조물을 완성 제조 · 고객은 그래픽/원단/사이즈/공정만 선택<br/>내재 부품(다리/받침/논슬립·솜/지퍼)은 옵션 미노출 = [live:SSR-marketing] 카피로만 등장"]
+
+  subgraph BODY["PD 완제 구조물 내재 부품 (RP 고정 제조사양)"]
+    direction TB
+    LEG["다리/받침 (스툴 원목다리·발받침)"]
+    NSLIP["논슬립 (계단 네이비 실리콘 미끄럼방지 원단)"]
+    FILL["솜 충전 (계단 커버 안 솜)"]
+    ZIP["지퍼 (계단 커버 분리세탁 지퍼)"]
+    SOLE["밑창 sole (슬리퍼 SLB*/SLW* 검정/흰색)"]
+  end
+
+  subgraph VESSEL["후니 그릇 — ★실재 확정 (라이브 2026-06-17)"]
+    direction TB
+    ADDON["t_prd_product_addons (addon→tmpl_cd FK)<br/>완제 부속 = template SKU<br/>BN 거치대 D-1 · AC 등신대 받침 A-3 PASS 동형"]
+    USAGE["t_prd_product_materials.usage_cd .07 공통 (639행)<br/>본체 결합 sub_mtrl consumes 슬롯<br/>USAGE enum 7종 거버넌스"]
+    OPT2D["option_items.ref_key1/ref_key2 2D 페어링<br/>밑창 색×사이즈 12-variant (CL size×color 동형·라이브 255/469 활성)"]
+  end
+
+  LEG -->|"부속물#8"| ADDON
+  NSLIP -->|"부속물#8 / 자재 usage"| ADDON
+  FILL -->|"자재 usage_cd .07"| USAGE
+  ZIP -->|"자재 usage_cd .07 (consumes)"| USAGE
+  SOLE -->|"부속물#8 + 색×사이즈 2D"| OPT2D
+
+  ADDON --> VERDICT
+  USAGE --> VERDICT
+  OPT2D --> VERDICT
+
+  VERDICT["★PD-4 판정 = data-gap (NOT vessel-gap)<br/>그릇은 실재 · 적재만 안 됨 (축 부재 아님)<br/>RP가 내재BOM을 마케팅 카피로만 둠 = 부속물#8/자재 usage에 적재할 데이터 미적재<br/>→ 본 RP-Meta 하네스(vessel 설계) 범위 외 · dbmap 적재 트랙"]
+
+  CONTRAST["◀▶ 정반대 대비 (directive 핵심)<br/>★ST 형상#17 = vessel-gap (그릇 자체 부재·KB G-SK-2 어느 축에도 없음)<br/>★PD 내재BOM = data-gap (그릇 실재·후니 KB가 addl_product/usage/생산방식 이미 1급 모델링)<br/>동일하게 '옵션에 안 보이는 구조'지만 진단 정반대"]
+
+  VERDICT --> CONTRAST
+
+  style TITLE fill:#e1f5fe,stroke:#0277bd,stroke-width:3px
+  style BODY fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
+  style VESSEL fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+  style ADDON fill:#c8e6c9,stroke:#2e7d32,stroke-width:2px
+  style USAGE fill:#c8e6c9,stroke:#2e7d32
+  style OPT2D fill:#c8e6c9,stroke:#2e7d32
+  style VERDICT fill:#eceff1,stroke:#546e7a,stroke-width:2px,stroke-dasharray: 5 5
+  style CONTRAST fill:#ffe0b2,stroke:#e65100,stroke-width:3px

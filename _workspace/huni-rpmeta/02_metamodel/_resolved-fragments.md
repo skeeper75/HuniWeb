@@ -596,3 +596,75 @@
 **AC 강제 분류 회피(SKILL §3·§5):** **distinct 승급 0건(★가공방식 그룹핑 A-8 부결) = 17축 재포화(PR 4번째·CL 6번째 distinct 0 패턴 반복).** 9 fragment 전부 기존 17축 facet/family/cascade/정책. ★directive 4 관전 적대 판정: ① 두께=자재#1 WGT facet([huni-ref] mat_cd 통합 동형) · ② 소재variant=자재#1 surface-finish facet(ST S-4 동형) · ③ 입체/스탠드=분산 facet(받침=부속물#8·두께=자재·양면=옵션·조형=공정·생산형태#15/형태가공#14 둘 다 아님) · ④ 가공방식 그룹핑=공정#2(라미)+자재#1 합성+옵션#3 cascade facet(★침묵선택 거부하고 "별 그룹핑 슬롯 #18 vs 세 축 분해" 트레이드오프 펼친 뒤 facet·형상#17과 정반대로 기존 축이 왜곡 없이 담음). **★재포화 정당성:** 형상(#17·ST)은 후니 KB G-SK-2 "어느 축에도 없음" 결함이 distinct를 강제했으나, AC 9 fragment(가공방식 포함)는 후니 KB+기존 축이 *왜곡 없이 담음* → distinct 0 정직. 7번째 카테고리(아크릴 두께/입체/가공방식)가 새 관리축 0 도입 = 모델 안정성 재확인(가장 강한 새 후보 A-8조차 무손실 흡수).
 **AC가 더한 것(축 신설 아닌 *강화*):** ① **17축 재포화** — 7번째 카테고리 distinct 0(PR·CL 패턴 반복). ② 자재#1 surface-finish 합성 차원(글리터/거울/자개/홀로그램/렌티큘러·ST S-4 점착/내후와 합류한 자재 합성 분해축). ③ 자재#1 WGT 슬롯 다의성 명시(평량 vs 두께·[huni-ref] mat_cd 동형). ④ 부속물#8 횡단 확장(받침 AB 12 SKU·고리 KR/CN/CR ST 공유=단일 부자재 마스터). ⑤ 옵션#3 가공방식 cascade(production_method→자재 subset 게이팅·G-4 채널 합류). ⑥ 가격#11 pricing_model acrylic2025 라우팅(소재/형태별 가격엔진). ⑦ 공정#2 라미네이션/합지 멤버 + 자재 합성 결과 bundle(D-2).
 **검증 라우팅 요약:** 메타모델 해소 ✅ = A-3·A-5·A-7·A-8(축 귀속 확정) / 부분 🟡 = A-1·A-2·A-4·A-6·A-9(unobserved 잔존 → gap/validation). 라이브/엑셀 검증 필요분 = WGT 슬롯 measure_type(A-1)·소재특화 자재코드/거울가격(A-2)·부착공정/부자재코드(A-4)·acrylic2025 산정식/prc_typ .02(A-6·[huni-ref] Q-ACR-7)·ACTPKEY 자산 카탈로그(A-9) + 후니 부자재 마스터 단일화(A-4 → gap/vessel).
+
+---
+
+# PD(스툴·슬리퍼·강아지계단 = 봉제 구조물/3D 조립 완제품) fragment 판정 (v8.0 — 조립·구조·3D폼·단수·완제 내재BOM) ★조립 distinct(#18) 적대 판정·재포화
+
+> `categories/PD/reverse.md` ## Ambiguous fragments PD-1~PD-5 판정. **8 상품군(BN 면적·GS 완제/입체·TP 디자인입력·PR 다면/제본/접지·ST 형상/칼선/점착·CL 의류 variant·AC 아크릴 두께/입체/가공방식·PD 봉제 구조물 완제품)** 증거로 distinct/facet 결정.
+> 과잉 일반화 경계(SKILL §5): PD 한 군만의 특이는 facet 강등. distinct 승급 = 8 상품군을 견디는 고유 lifecycle/governing + 후니 도메인 동형 보유 시만.
+> 도메인 정초 = `07_domain/entity-semantic-model.md`(addl_product 부속물 #9·생산방식 A/B/C·자재 usage·두께=자재) + GS(본체 형태가공 D-10/#14·완제 본체 G-1)·AC(입체/스탠드 분산 facet §0.3)·ST(형상 #17) 직접 대조. **★domain-researcher 신규 호출 불요** — 봉제/제품가공(=형태가공#14/공정#2)·완제 구조물 BOM(=부속물#8+생산형태#15+가격#11)·단수(=사이즈#13 프리셋)가 후니 KB+기존 17축에 확정 존재(추정 0).
+> **★PD 핵심 판정: distinct 신규 축 0건(★완제 구조물 내재BOM PD-4 #18 부결) = 17축 재포화(PR·CL·AC 패턴 반복).** PD reverse가 1차 예측한 "distinct 0(8번째 재포화)"를 적대 판정으로 비준 — 가장 이질적 *봉제 구조물 완제품*(스툴/슬리퍼/강아지계단)조차 17축 무손실 흡수. ★directive 최대 관전(조립·구조·3D폼·완제 내재BOM=distinct #18인가) 적대 판정: **PD-1 봉제=형태가공#14 family 멤버 · PD-2 직물원단=자재#1 · PD-3 단수/형상=사이즈#13 · PD-4 완제 내재BOM=부속물#8+생산형태#15+가격#11 분산 · PD-5 enum=공정/부속물 unobserved.**
+
+## PD-1. 구조물 봉제/제품가공(SEW_LTR·PDT_WRK) — 본체 형태가공#14(GS D-10) 봉제 family 멤버 [facet → 신축 거부]
+
+- **판정:** **본체 형태가공 축(#14·GS D-10)의 "봉제(SEW_LTR 레더재봉)" family 신규 멤버 + 공정#2 facet (distinct "조립 축 #18" 거부).** PDCHSTL/PDSRPPY `SEW_LTR_CHK`(레더재봉)·PDWRSLP `PDT_WRK_CHK`(제품가공)이 평면 원단/인쇄물을 *봉제·조립해 입체 완제 구조물 본체를 생성* — GS 형태가공#14(PDT_WRK 파우치가공·FLX_ZIP 지퍼)와 **동일 lifecycle**(본체 형태 자체를 생성·없으면 본체 부재).
+- **★적대 판정(조립 distinct #18 반론 검토):** reverse 반론 — "레더재봉/제품가공"은 인쇄 후가공(코팅/박)과 질적으로 다른 *조립/봉제 생산공정*(섬유/구조물 제조)이라 후니 공정모델이 인쇄 후가공 위주면 담을 그릇 부재 가능. **그러나:** ① PDWRSLP `PDT_WRK`는 GS `PDT_WRK`와 *동일 코드*(조립 마감)·이미 #14가 담음(파우치/마이크텍 조립). ② PDCHSTL/PDSRPPY `SEW_LTR`(레더재봉)은 #14에 **"봉제(sewing)" family 멤버 신규 등재**(assembly_type=봉제)이지 별 축 아님 — #14 정체("평면→입체 본체 *생성*")가 봉제도 포함. ③ 기존 PCS 슬롯에 인코딩(새 슬롯 없음·`[live:SSR]` icon_txt 실측) — RP가 봉제 조립을 *별 슬롯/별 축으로 인코딩하지 않음*. ④ 후니 KB에 "봉제/조립 공정 어느 축에도 없음" 결함 명시 *없음*(형태가공#14가 이미 distinct 축으로 존재·굿즈 BOM "평면→입체 조립" 동형) → distinct #18 부결, #14 family 확장 정당.
+- **근거:** GS D-10/#14 (본체 형태가공·PDT_WRK/FLX_ZIP)이 이미 distinct 축. THO_CUT(모양커팅)=공정#2(ST/GS 동형)·SUB_MTR=부속물#8(AC/ST 동형). 봉제 구조물 완제품(PD)이 굿즈(GS)에서 #14 횡단 확장 입증.
+- **메타모델 해소:** ✅ #14 봉제 family 멤버(SEW_LTR) + PDWRSLP PDT_WRK=GS 동형 귀속 확정. **검증 필요분: 봉제 공정 상세 enum·솜 충전/지퍼 consumes 자재(unobserved·infoCall 후행) → gap/validation.**
+
+## PD-2. PD 자재 = 직물/PU 원단(종이 아님) — 자재#1 PTT 차원 facet [distinct 거부]
+
+- **판정:** **자재 축(#1)의 PTT(소재계열) 차원 값 확장 facet (distinct 거부).** 면10수화이트·슬리퍼원단·PU(폴리우레탄)-코끼리원단(`[live:SSR]` paper 슬롯)이 종이 substrate가 아닌 *직물/합성수지 원단* — AC 아크릴·CL 의류원단(fabric PTT)과 동형(비종이 자재는 이미 여러 카테고리에서 관측). 별 "직물 자재축" 신축 불요.
+- **근거:** 자재#1 PTT 슬롯이 종이(BN/PR)·아크릴(AC mm)·의류원단(CL)·직물/PU(PD)를 *같은 합성코드 차원*으로 담음(D-2 자재 합성). 면10수="수(번수)"단위는 평량(종이 g·AC mm 두께)과 동류 WGT 차원 다형성(같은 슬롯·소재 도메인별 의미·A-1 WGT 다의성 동형).
+- **모호 지점(reverse 제기):** 후니 자재모델(지종×평량)이 직물(면10수=면사 굵기)·PU 같은 비종이 원단의 *물성 차원*(원단 종류·신축성)을 담는가 = round-22 굿즈 본체소재 부재 결함과 연결. → **갭분석가**(자재 합성코드에 직물 물성 차원 그릇 검토·data-gap).
+- **메타모델 해소:** ✅ 자재#1 PTT 차원 귀속 확정. **검증 필요분: 직물/PU 원단 물성 차원(원단종류/번수/신축성) 후니 자재모델 수용 여부 → gap/vessel.**
+
+## PD-3. 계단 단수(2단/3단)·스툴 형상 — 사이즈#13 프리셋 흡수 facet [distinct 거부] ★구조/형상 distinct 부결 결정적 증거
+
+- **판정:** **사이즈 축(#13)의 프리셋 흡수 facet (distinct "구조/형상 축 #18" 거부).** PDSRPPY size=2단(495×320)/3단(717×382)·PDCHSTL size=미니사각/미니원형/원형/긴사각(`[live:SSR]`)이 *단수/형상을 사이즈 프리셋에 1:1 인코딩* — ST 형상(#17)의 1:多가 아님.
+- **★적대 판정(구조/형상 distinct 반론·ST #17 대조):** ① **단수(2단/3단)** = 계단 구조의 층수(구조적 의미·하중)이나 RP가 *사이즈 프리셋으로만 노출*(2단=495×320 1:1·옵션 아님) → 구조가 사이즈에 흡수됨 = **구조 distinct 부결의 결정적 증거**. ② **스툴 형상(미니사각/미니원형/원형)** = ST 형상(#17)처럼 보이나 **형상↔사이즈 1:1**(원형=305×305 치수 프리셋 1개와 동치) → ST 1:多(한 형상 CL이 CL001~CL100 칼틀 enum span)와 다름 → ST #17 distinct 전제(1:多 분리·전용 shape_info 슬롯·5형상 superset) 미충족. PD는 형상=사이즈 1:1이므로 BN 어깨띠·GS THO_CUT·TP M/I·PR 카드형과 동일하게 **사이즈축이 형상을 흡수**(형상축 #17 강제 적용 금지=오모델 회피·dictionary #21 [HARD] 경계).
+- **근거:** ST #17 [HARD] 경계 "형상이 1:1이면 사이즈 흡수·1:多 분리가 명시 슬롯으로 드러나면 별 분류축". PD는 1:1(전용 shape_info 슬롯 없음·size 슬롯에 형상+치수 융합) → 사이즈#13 흡수 정당.
+- **모호 지점(reverse 제기):** "단수"가 생산 BOM 관점(2단 vs 3단 자재량/공정량 차이)에서 사이즈가 생산정보를 게이팅하는지 unobserved(infoCall 가격 후행). → **갭/가격 단계**(사이즈→생산BOM 게이팅).
+- **메타모델 해소:** ✅ 사이즈#13 프리셋 흡수 귀속 확정(구조/형상 distinct 부결). **검증 필요분: 단수→생산BOM(자재/공정량) 게이팅 unobserved → gap/validation.**
+
+## PD-4. 완제 구조물의 "옵션 미노출 제조레시피"(다리/받침/솜/지퍼/논슬립) — 부속물#8 + 생산형태#15 + 가격#11 분산 facet [distinct #18 거부] ★directive 핵심 의사결정
+
+- **판정:** **분산 facet — distinct "완제 구조물 내재BOM 축 #18" 거부.** 완제품 내재BOM(다리/받침/솜/지퍼/논슬립)이 옵션 미노출·고정 제조 사양(`[live:SSR-marketing]` 카피에만)이나 네 기존 축으로 무손실 분해.
+- **★양면 트레이드오프 펼침(침묵 선택 금지) — discovered-axes PD-4 참조:**
+  - **(가) distinct "완제 구조물 내재BOM 축 #18" 신설:** 찬성=봉제 구조물 고정 부품(다리/받침/솜/지퍼/논슬립)이 옵션 슬롯에 *없으면서도* 생산정보로 존재 — 옵션축(노출)·자재축(본체 substrate)이 "옵션 미노출 고정 제조 부품 명세"를 직접 담지 않음·RP 마케팅 카피로만 둠=관리 그릇 부재 신호(ST 형상 shape_info 전용 슬롯 가설). 반대=★세 갈래 무손실 분해·distinct 요구 "기존 축이 왜곡 없이 못 담는 고유 lifecycle"이 없음.
+  - **(나) 부속물#8 + 자재#1/공정#2 + 생산형태#15 + 가격#11 분산 facet [채택]:** ① 완제 부속 부품(다리·받침·논슬립 패드)=부속물#8(addl_product·`entity-semantic-model.md:30` "완제 부속: 거치대·우드봉·볼체인"·다리/받침/논슬립도 본체 분리 완제 부속·BN 거치대·AC 등신대 받침 동형)·옵션 미노출=부속물의 *고정(ESN=Y·view_yn=N·고객 미선택) facet*(AC 받침 ESN=Y 동형). ② 솜 충전/지퍼/논슬립 원단=자재#1 sub_mtrl usage_cd + 공정#2(봉제 consumes·FLX_ZIP 패턴). ③ "옵션 미노출 고정 제조" 성격=생산형태#15(C 완제품 governing·내재 BOM은 완제품 정체에 묶인 고정 레시피)·④ 완제 단가=가격#11(tmpl_price 내재 BOM 포함 개당단가).
+- **★ST 형상(#17)과의 결정적 차이(역방향 오류 점검):** 형상(#17)은 후니 KB G-SK-2 "형상 enum 어느 축에도 없음" 결함이 *기존 축이 왜곡 없이 못 담음*을 강제(distinct). 완제 내재BOM은 **정반대** — 후니 KB가 addl_product(#9·`:30`)·자재 usage(#2·`:23`)·생산방식 A/B/C(#15·`:113`)를 *이미 1급 모델링*(결함 명시 없음·부속물/usage/생산형태가 왜곡 없이 담음) → 형상=축 부재(distinct)·완제 내재BOM=축 충분(facet). **역방향 오류(distinct를 facet으로 숨김) 점검:** "옵션 미노출 고정 부품 명세"가 유일 잔여 후보였으나 부속물#8의 고정(ESN=Y·view_yn=N) 완제 부속 facet(AC 등신대 받침 ESN=Y 동형)으로 무손실 흡수 → facet 정당(숨김 아님·새 관리 관심사 없음).
+- **★data-gap vs vessel-gap [중요·갭분석가]:** RP가 내재BOM을 마케팅 카피로만 두는 것은 *부속물#8/생산BOM 그릇에 적재해야 할 데이터(다리/받침/논슬립·솜/지퍼)를 미적재*한 것 = **data-gap이지 vessel-gap(축 부재) 아님**. 후니가 완제 구조물 취급 시 부속물#8(다리/받침/논슬립=고정 ESN=Y·view_yn=N)·자재 usage(솜/지퍼 consumes)에 적재 = 기존 그릇 채우기(새 그릇 불요).
+- **메타모델 해소:** ✅ 분산 facet 귀속 확정(부속물#8 고정 부속 + 자재#1 usage + 생산형태#15 + 가격#11). **검증 필요분: 완제 구조물 BOM 상세(다리 종류/솜 충전량/논슬립 원단·전부 [live:SSR-marketing] 카피) → gap/validation(부속물/생산BOM data-gap 적재).**
+
+## PD-5. 모양커팅 상세 enum·추가부자재 enum·가격 결합 — 공정#2/부속물#8 [facet → unobserved]
+
+- **판정:** **공정 축(#2 THO_CUT)/부속물 축(#8 SUB_MTR) facet (distinct 거부) — unobserved.** THO_CUT_SUB_SELECT 상세 enum·SUB_MTR 상세 enum·price_gbn=tmpl_price 단가가 infoCall AJAX 후행이라 SSR 미노출. 축 판정(distinct 0)은 SSR 슬롯만으로 확정되므로 보강은 갭/가격 단계 선택.
+- **근거:** 모양커팅=공정#2(ST/GS THO_CUT 동형)·추가부자재=부속물#8(AC/ST SUB_MTR 동형)·가격=#11(tmpl 완제 단가·GS tmpl 동형). 전부 기존 축·날조 금지(unobserved).
+- **메타모델 해소:** 🟡 부분 — 축 귀속(공정#2/부속물#8/가격#11) 확정·상세 enum unobserved. **검증 필요분: THO_CUT/SUB_MTR 상세 enum·tmpl 단가 결합(infoCall 캡처·날조 금지) → gap/validation.**
+
+## PD-6. ★[정정·PD-M1 D-PD-1] 슬리퍼 밑창색(검정/흰색) — six_clr(별색) 오귀속 정정 → SUB_MTR 부자재 variant(부속물#8/자재 sub_mtrl) [facet → 신축 거부·distinct 0 불변]
+
+- **★정정 배경(PD-M1 Medium 결함 D-PD-1):** PDWRSLP 슬리퍼 밑창색(검정/흰색)이 reverse 초판에서 `six_clr`(별색)로 **오귀속**됐으나, 실제는 `SUB_MTR`(추가부자재) sub-radio(`SLB*`/`SLW*` 밑창색×사이즈 12-variant)임이 PD-M1 검증에서 적발(reverse §0.5/§2/§4 SUB_MTR로 정정 중). 본 메타모델 산출은 밑창색을 *자재#1 본체색(CLR) family로 참조한 곳이 없음*(전수 grep 확인 — 밑창색은 dictionary/discovered-axes/erd 어디에도 자재 CLR로 등재되지 않음). 따라서 **facet 귀속만 명시 고정**(정정 사항 누락 방지·향후 reverse 정정본 정합).
+- **판정:** **밑창색(SLB*/SLW*) = SUB_MTR 부자재 variant = 부속물#8(완제 부속·밑창 sole) 또는 자재 sub_mtrl(#1 본체 sub-component) facet (distinct 거부).** 밑창은 슬리퍼 본체와 결합되는 *별 완제 부속 부품(sole)*이고, 색×사이즈 12-variant는 그 부자재의 SKU variant — AC 받침(SUB_MTR·A-3/A-4)·ST SUB_MTR 부자재 variant와 동형. ★**별색(six_clr·공정#2)과 명확 구분** — 밑창색은 *부자재(밑창 소재)의 색 variant*(인쇄 잉크 별색 아님). round-22 경계규칙 "별색=공정·본체색=자재 CLR" 어느 쪽도 아닌 **부자재 variant**(고무/EVA 밑창의 제조 색).
+- **★자재 sub_mtrl vs 부속물#8 경계(미세 판정):** 밑창은 ① 슬리퍼 본체에 *봉제·접착으로 결합되는 구성 부품*(자재 sub_mtrl·usage_cd 슬롯·솜/지퍼 PD-4 동류) 관점 ② 본체와 *분리된 완제 부자재 SKU*(부속물#8·AC 받침 동류) 관점 양면. PD-4 완제 구조물 내재BOM(솜/지퍼=자재 sub_mtrl·다리/받침=부속물#8)과 동일 *분산 facet* 패턴 — 단 밑창색은 *옵션 노출*(SUB_MTR sub-radio·고객 선택)이라 PD-4 고정(view_yn=N) 내재BOM과 달리 **노출 부자재 variant**(view_yn=Y·12-variant 선택). 어느 쪽이든 **기존 축 facet**(별색 아님)이라 distinct 0 결론 불변.
+- **★distinct 0 불변:** 밑창색이 별색(six_clr·공정#2)이든 부자재 variant(부속물#8/자재 sub_mtrl)이든 **둘 다 기존 축 facet** — facet 귀속 정확성만 정정(별색→부자재 variant), 17축 결론·PD distinct 0 무영향. (PD-2 직물원단 자재#1·PD-4 솜/지퍼 자재 sub_mtrl과 합류한 봉제 구조물 부자재 모델.)
+- **메타모델 해소:** ✅ 밑창색=SUB_MTR 부자재 variant(부속물#8/자재 sub_mtrl)·별색(six_clr·공정#2)과 구분 정정 확정. **검증 필요분: 밑창 sole 자재코드(SLB*/SLW* 12-variant)·부속물#8 vs 자재 sub_mtrl 최종 귀속(밑창=결합 부품인지 분리 SKU인지) → gap/validation(reverse SUB_MTR 정정본 정합).**
+
+---
+
+## PD 판정 요약표
+
+| Fragment | 1차 귀속 축 | 판정 | distinct/facet | 등재 | 검증 라우팅 |
+|---|---|---|---|---|---|
+| PD-1 봉제/제품가공(SEW_LTR/PDT_WRK) | **본체 형태가공#14(GS D-10) 봉제 family** + 공정#2 | SEW_LTR=새 멤버·PDWRSLP PDT_WRK=GS 동일코드·기존 PCS 슬롯 | **facet(거부)** ★ | #14·#2 | 봉제 enum/솜·지퍼 consumes → gap |
+| PD-2 직물/PU 원단 | 자재#1 PTT 차원 | AC 아크릴·CL 의류원단 동형·비종이 이미 관측·면10수=번수 평량 | facet(거부) | #1 | 직물 물성 차원 그릇 → gap/vessel |
+| PD-3 단수(2/3단)·스툴형상 | 사이즈#13 프리셋 흡수 | 단수=구조이나 사이즈 1:1·형상=원형↔305×305 1개=ST 1:多 미충족 | **facet(거부)** ★ | #13 | 단수→생산BOM 게이팅 → gap |
+| PD-4 ★완제 구조물 내재BOM(다리/받침/솜/지퍼/논슬립) | **부속물#8(고정 ESN=Y)+자재#1 usage+생산형태#15+가격#11** | 옵션 미노출=고정 제조·후니 KB 결함 없음·형상#17과 정반대·data-gap not vessel-gap | **분산 facet(거부·#18 부결)** ★강후보 | #8·#1·#15·#11 | 완제 BOM 상세(다리/솜/논슬립) → gap(data-gap 적재) |
+| PD-5 모양커팅/추가부자재 enum·가격 | 공정#2·부속물#8·가격#11 | infoCall unobserved·축 판정 무영향 | facet(거부·unobserved) | #2·#8·#11 | THO_CUT/SUB_MTR enum·tmpl 단가 → gap |
+| PD-6 ★[정정 D-PD-1] 슬리퍼 밑창색(검정/흰색) | **SUB_MTR 부자재 variant=부속물#8/자재 sub_mtrl** | six_clr(별색) 오귀속 정정→SLB*/SLW* 밑창색×사이즈 12-variant·별색(공정#2)과 구분 | **facet(거부·distinct 0 불변)** ★정정 | #8/#1 | 밑창 sole 자재코드·부속물vs자재 최종귀속 → gap |
+
+**PD 강제 분류 회피(SKILL §3·§5):** **distinct 승급 0건(★완제 구조물 내재BOM PD-4 #18 부결) = 17축 재포화(PR 4번째·CL 6번째·AC 7번째 distinct 0 패턴 반복).** 5 fragment 전부 기존 17축 facet/family/cascade. ★directive 최대 관전(조립·구조·3D폼·완제 내재BOM이 distinct #18인가) 적대 판정: ① 봉제/제품가공=본체 형태가공#14(GS D-10) 봉제 family 멤버(별 조립축 아님·PDWRSLP=GS 동일코드) · ② 직물/PU 원단=자재#1 PTT(AC/CL 동형) · ③ 단수/형상=사이즈#13 프리셋 흡수(2단=495×320 1:1·원형↔305×305 1개=ST 형상 1:多 미충족=구조 distinct 부결 결정적 증거) · ④ 완제 구조물 내재BOM=부속물#8(고정 ESN=Y)+생산형태#15+가격#11 분산 facet(★침묵선택 거부하고 "별 완제 BOM 축 #18 vs 네 기존 축 분산" 트레이드오프 펼친 뒤 facet). **★재포화 정당성:** 형상(#17·ST)은 후니 KB G-SK-2 "어느 축에도 없음" 결함이 distinct 강제했으나, PD 5 fragment(완제 내재BOM 포함)는 후니 KB(addl_product·자재 usage·생산방식 A/B/C)+기존 축이 *왜곡 없이 담음* → distinct 0 정직. 8번째 카테고리(봉제 구조물 완제품)가 새 관리축 0 도입 = 모델 안정성 재확인(가장 이질적 카테고리·directive 최대 관전 조립/구조/3D폼도 무손실 흡수).
+**PD가 더한 것(축 신설 아닌 *강화*):** ① **17축 재포화** — 8번째 카테고리 distinct 0(PR·CL·AC 패턴 반복). ② 본체 형태가공#14 봉제(SEW_LTR) family 확장(굿즈→봉제 구조물 완제품 횡단). ③ 부속물#8 "고정(미노출·ESN=Y) 완제 부속" facet(완제 구조물 내재BOM·AC 받침 ESN=Y 합류). ④ 자재#1 비종이 원단 차원 확장(직물/PU·AC/CL 합류). ⑤ 사이즈#13 단수/구조 프리셋 흡수 입증(구조 distinct 부결 결정적). ⑥ 생산형태#15+가격#11(tmpl) 완제품 governing 재확인.
+**검증 라우팅 요약:** 메타모델 해소 ✅ = PD-1·PD-3·PD-4(축 귀속 확정) / 부분 🟡 = PD-2·PD-5(unobserved 잔존 → gap/validation). 라이브/엑셀 검증 필요분 = 직물 물성 차원 그릇(PD-2 → gap/vessel)·단수→생산BOM 게이팅(PD-3)·완제 BOM 상세 적재(PD-4 → gap data-gap)·THO_CUT/SUB_MTR enum·tmpl 단가(PD-5). **★PD-4 = data-gap(부속물/생산BOM 그릇 미적재)이지 vessel-gap(축 부재) 아님 — 갭분석가 핵심 구분.**

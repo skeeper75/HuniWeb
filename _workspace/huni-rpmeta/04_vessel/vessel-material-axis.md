@@ -7,6 +7,7 @@
 > **── 버전 ──**
 > - **v1.0 (BN):** §0~§6 (자재 분해축 일반 — 소재/두께/색). **보존(아래 원문 그대로).**
 > - **v2.0 (GS·2026-06-17):** + §7 **굿즈 완제 본체 분해축 확장**(body_color/capacity/thickness/brand). GS 라이브 재실측이 BN 결론 *확증*(분해축 컬럼 부재·MAT_TYPE.09/.10 오염). 신규 절만 추가, v1.0 무수정.
+> - **v8.0 (PD·2026-06-17):** + §11 **직물/PU 원단 물성 차원·밑창 sole sub_mtr 메모**(신규 그릇 0·facet 강화만). PD facet WEAK 2항(직물/PU=#1·밑창 SUB_MTR=#1/#8)이 본 V-3 분해축에 합류. 메모만 추가, §1~§10 무수정.
 
 ## 0. 한 줄 평결
 **대부분 PASS — 라이브 `t_mat_materials`는 이미 분해축 구조 컬럼을 보유**(`upr_mat_cd` 계층 + `width/height/depth/weight` + `sel_typ_cd`/`max_sel_cnt`/`bdl_qty`). 진짜 결손은 **"이 자재 행이 어느 분해 facet(소재/색/두께)인가"를 분류하는 facet 축 1개**뿐. 사다리 = **코드행(분해 facet enum) + 기존 컬럼 재사용**. 신규 테이블 mint 불요(over-modeling). 단 본체색 같은 facet은 round-6 CPQ option으로 가는 것이 정답일 수 있어 **분해 그릇은 "소재/두께"용으로 최소화** + 본체색은 option 위임.
@@ -155,3 +156,24 @@ INSERT INTO t_cod_base_codes (cod_cd, cod_nm, upr_cod_cd, disp_seq, use_yn, reg_
 ### 10.4 종합 (AC V-3 3차원)
 - AC가 V-3에 더한 것 = **3 facet 차원(measure_type·surface_finish·단일 부자재 마스터)**, 전부 `MAT_FACET` 코드행·버킷 재정의로 흡수 = **신규 테이블/컬럼/V-번호 0.** ① 두께 measure_type = MAT_FACET measure_type 세분(`.06 두께` 등) ② surface_finish = MAT_FACET 표면마감 코드(★ST adhesion/weather와 통합·동근) ③ 단일 부자재 마스터 = V-3 §6 버킷 재정의 *검토*(우선순위 중·★round-22 B-3 조율·행 영향 큼·designer 단독 mint 금지). search-before-mint: 두께/surface/부자재 전용 컬럼 전부 라이브 부재(NULL·텍스트 융합·버킷 분산) → MAT_FACET 코드행·버킷 재정의가 분류·값은 기존 컬럼/note/data 교정. **신규 그릇 0·V-3 흡수.**
 - ★dbmap 31_acrylic 라이브 산출과 **구조 동형 확증**(CLEAR3T가 3T/1.5T를 mat_cd로 통합·MIRROR3T 별 comp·화이트=`PROC_000008` 공정). Q-ACR-7(prc_typ `.02` 엔진계산 미확정)·미러 GAP은 **가격 트랙 범위 외**(vessel 아님·`vessel-quantity-size-pricing §C5`).
+
+---
+
+## ═══ §11. PD 직물/PU 원단 물성 + 밑창 sole sub_mtr 메모 (V-3 PD·v8.0·신규 그릇 0) ═══
+> PD 갭(`categories/PD/reverse.md`·`02_metamodel/_resolved-fragments.md` PD-1~PD-6·`gap-matrix §XIX`·`vessel-needs.md PD 흡수 매핑 ②⑤`). 후니 대조 = 라이브 `t_mat_materials` 실측(2026-06-17). **PD distinct 신축 0(완제 구조물 내재BOM #18 부결·17축 재포화·8번째 카테고리). PD facet 5항 중 WEAK 2(직물/PU=#1·밑창 SUB_MTR=#1/#8)가 본 V-3(#1) 분해축에 합류·신규 V-번호 0.** PD가 V-3에 더한 것 = **직물 물성 차원 + 밑창 sub_mtr variant**, 둘 다 §2.1 MAT_FACET·기존 그릇으로 흡수(별 테이블/컬럼 0).
+
+### 11.1 차원 ① 직물/PU 원단 물성 차원 (§7 thickness·§8 점착·§10 measure_type과 동근)
+- **PD #2(직물/PU 원단: 면10수·슬리퍼원단·PU폴리우레탄)가 §7 thickness/weight·§8 ST 점착/내후·§10 AC measure_type/surface_finish와 *동근***: 직물 *물성 차원*(번수[면10수=10수]·신축성[슬리퍼원단 elasticity]·원단 종류[PU/PVC]) = §1 합성 분해축의 *추가 차원*. 라이브 실측: 린넨(`.05`)/타이벡(`.05`)/메쉬(`.08`) 자재행은 실재(*링크* PASS)·★직물 물성 차원 분해 컬럼 부재(`mat_nm` 텍스트 융합 "면 10수").
+- **그릇 조치:** §2.1 `MAT_FACET`에 직물 물성 facet 코드 추가(번수[yarn count]·신축성·원단종류) — §8 점착강도(`.04`)·내후등급(`.05`)·§10 표면마감과 같은 *합성-차원 패턴*(한 MAT_FACET 그룹이 점착·내후·표면마감·직물물성을 다 담음). **PD 직물물성 ≡ ST adhesion/weather ≡ AC surface_finish = 동일 합성-차원 패턴**(별 그릇 아님). 값은 기존 컬럼/note(번수 수치는 `weight` 재해석 금지 — §10.1 measure_type 다의 회피·전용 코드/note). **신규 테이블 0·V-3 흡수.**
+- search-before-mint: 직물 번수/신축성/원단종류 전용 컬럼 라이브 부재(§7.1 jsonb 0건·§8·§10 동일) → MAT_FACET 코드행이 분류·값은 컬럼/note. **★미적재 본체소재 행(면10수/슬리퍼/PU)=data-gap**(`_data-gaps-noted §9`·round-22 ④자재·GPM-4) — 분해축 그릇(여기) 선행 후 행 적재(dbmap).
+
+### 11.2 차원 ② 밑창색×사이즈 SUB_MTR variant (★별색 아님 정정·CL §9 2D 동형)
+- **PD #5(밑창색×사이즈) = §9 CL size×color 2D 동형 + ★별색≠부자재 variant 경계 정정:** ★D-PD-1 정정 — 밑창색(검정/흰색)은 `six_clr`(별색·공정#2) **아니라** SUB_MTR 부자재 variant(`SLB01~06` 검정·`SLW01~06` 흰색 밑창색×사이즈 12-variant·`MTRL_COD SBSLP/SWSLP230~280`). 별색 인쇄(잉크)와 부자재(밑창 부품) variant는 **다른 축** — 슬리퍼 밑창은 결합 부품이지 인쇄 도수가 아님.
+- **그릇 조치(★둘 다 기존 그릇 PASS):**
+  - 밑창 = 완제 부자재(addon→tmpl_cd·#8 부속물) *또는* 본체 결합 부품(자재 sub_mtrl·`usage_cd .07` 639행 슬롯) — **둘 다 그릇 보유**(`vessel-form-assembly §7`·`_data-gaps-noted §9`와 정합).
+  - 밑창색×사이즈 12-variant = `t_prd_product_option_items.ref_key1/ref_key2` 2D 페어링(§9 CL size×color 동형·라이브 255/469 활성) — `ref_key1`=사이즈·`ref_key2`=밑창색 무손실 인코딩·`use_yn`=variant 가용성. **2D matrix 전용 테이블 mint 불요**(§9와 동일 구조적 수용).
+- search-before-mint: 밑창 sub_mtrl·2D 페어링 전부 기존 그릇 PASS(§9 CL·`vessel-form-assembly §7` usage_cd .07). **★밑창 sole 자재코드(SLB*/SLW*) 미적재=data-gap**(`_data-gaps-noted §9`)·★부속물#8 vs 자재 sub_mtrl 최종 귀속은 reverse SUB_MTR 정정본 검증 후(open decision·둘 다 그릇 실재라 vessel-gap 아님). **신규 테이블/컬럼 0·V-3 흡수.**
+
+### 11.3 종합 (PD V-3)
+- PD가 V-3에 더한 것 = **2 차원(직물 물성·밑창 sub_mtr variant)**, 전부 `MAT_FACET` 코드행(직물물성·§8/§10 합성차원 통합)·기존 sub_mtrl/2D 페어링 그릇으로 흡수 = **신규 테이블/컬럼/V-번호 0.** ① 직물물성 = MAT_FACET 합성차원(★ST 점착/AC surface_finish와 동근·BN→GS→ST→AC→PD 5카테고리 누적이 *합성-분해축은 차원을 계속 더해도 facet 코드행으로 닫힌다* 확증) ② 밑창 sub_mtr = 기존 usage_cd .07/addon + ref_key1/ref_key2 2D(§9 CL 동형·별색 아님 정정). search-before-mint: 직물물성/밑창 전용 컬럼 부재·기존 sub_mtrl/2D 페어링 PASS → MAT_FACET 코드·기존 그릇이 흡수·미적재 행=data(dbmap). **신규 그릇 0·V-3 흡수.**
+- ★`_data-gaps-noted §9` 정합: PD-4 완제 구조물 내재BOM(다리/받침/논슬립=부속물#8·솜/지퍼=자재 usage .07)·밑창 sole 자재코드·직물 본체소재 행은 **data-gap not vessel-gap**(그릇 실재·미적재만·dbmap). 본 §11은 *분해축 그릇*(직물물성 facet·밑창 variant 인코딩 구조)만 — 행 적재는 dbmap.

@@ -1,0 +1,59 @@
+%% PD 옵션 구성 트리 — 출처: categories/PD/reverse.md §0~§3 (3상품 전수·D-PD-1 정정 반영)
+%% ★PD = 봉제/조립 완제 구조물 · 구조물성(다리/받침/솜/지퍼/논슬립)은 고정 제조사양(옵션 미노출)
+flowchart TB
+  ROOT["PD 카테고리 — 봉제/조립 완제 구조물 (3상품 전수)<br/>레거시 productOrder 위젯 · price_gbn=tmpl_price (완제 템플릿 가격)<br/>★고객 선택축 = 자재/사이즈/도수/공정만 · 구조물 BOM은 RP 고정 제조"]
+
+  subgraph PDCHSTL["PDCHSTL 스툴"]
+    direction TB
+    S_PAPER["출력원단(paper) = 면10수화이트 (면직물·자재#1)"]
+    S_SODU["도수(sodu) = 단면 고정 (기초코드#6)"]
+    S_SIX["별색(six_clr) = Y (★별색=공정#2)"]
+    S_SIZE["사이즈(size) = 미니사각292·미니원형305·원형305·긴사각580×290<br/>(형상=칼틀 1:1 융합·사이즈#13)"]
+    S_SEW["레더재봉(SEW_LTR_CHK) = 봉제 조립 (공정#2 family)"]
+    S_THO["모양커팅(THO_CUT_CHK) = 외형 컷팅 (공정#2 + 사이즈 cascade)"]
+    S_SUB["추가부자재(SUB_MTR_CHK) = 부속물#8 + 공정 BUNDLE"]
+  end
+
+  subgraph PDWRSLP["PDWRSLP 슬리퍼"]
+    direction TB
+    W_PAPER["출력원단(paper) = 슬리퍼원단 (자재#1)"]
+    W_SODU["도수(sodu) = 단면 고정"]
+    W_SIX["별색(six_clr) = Y (6색인쇄·공정#2)<br/>★D-PD-1 정정: 밑창색 아님"]
+    W_SOLE["밑창색×사이즈 SUB_MTR sub-radio<br/>검정 SLB01~06 / 흰색 SLW01~06 (MTRL_COD SBSLP/SWSLP230~280)<br/>★12-variant 매트릭스 = 자재(본체색=밑창)+SUB_MTR 부속물#8"]
+    W_SIZE["사이즈(size) = 230~280mm (신발치수 6프리셋·사이즈#13)"]
+    W_THO["모양커팅(THO_CUT_CHK) = 공정#2"]
+    W_PDT["제품가공(PDT_WRK_CHK) = 조립 마감 (공정#2 family)"]
+    W_SUB["추가부자재(SUB_MTR_CHK) = 부속물#8 (밑창색 매트릭스 담음)"]
+  end
+
+  subgraph PDSRPPY["PDSRPPY 강아지계단"]
+    direction TB
+    P_PAPER["출력원단(paper) = PU(폴리우레탄)-코끼리원단 (자재#1)"]
+    P_SODU["도수(sodu) = 단면 고정"]
+    P_SIX["별색(six_clr) = Y (공정#2)"]
+    P_SIZE["사이즈(size) = 2단495×320 · 3단717×382<br/>★단수=구조 프리셋 1:1 흡수 (사이즈#13·구조 distinct 부결 강증거)"]
+    P_SEW["레더재봉(SEW_LTR_CHK) = 봉제 조립 (공정#2 family)"]
+    P_THO["모양커팅(THO_CUT_CHK) = 공정#2"]
+    P_SUB["추가부자재(SUB_MTR_CHK) = 부속물#8 + 공정"]
+  end
+
+  QTY["수량모델#10 (전 카테고리 동형)<br/>number1_sel 수량 1~10(PRN_CNT) · number2_sel 건수 1~11(ORD_CNT)"]
+
+  NONAXIS["★구조물 = 고정 제조사양 (옵션 미노출·선택 불가)<br/>스툴: 원목다리(소나무)·발받침·미끄럼방지 패드<br/>슬리퍼: 미끄럼 주의<br/>계단: 지퍼처리·솜과 커버 분리세탁·네이비 논슬립(실리콘 미끄럼방지 원단)·발판+옆면 이미지<br/>([live:SSR-marketing] 카피 — 옵션 슬롯 부재 = PD-4 내재BOM)"]
+
+  ROOT --> PDCHSTL
+  ROOT --> PDWRSLP
+  ROOT --> PDSRPPY
+  PDCHSTL --> QTY
+  PDWRSLP --> QTY
+  PDSRPPY --> QTY
+  QTY --> NONAXIS
+
+  style ROOT fill:#e1f5fe,stroke:#0277bd,stroke-width:3px
+  style PDCHSTL fill:#f3e5f5,stroke:#6a1b9a
+  style PDWRSLP fill:#e8f5e9,stroke:#2e7d32
+  style PDSRPPY fill:#fff3e0,stroke:#ef6c00
+  style W_SOLE fill:#fff9c4,stroke:#f9a825,stroke-width:2px
+  style P_SIZE fill:#fff9c4,stroke:#f9a825,stroke-width:2px
+  style QTY fill:#e0f2f1,stroke:#00695c
+  style NONAXIS fill:#ffcdd2,stroke:#c62828,stroke-width:2px

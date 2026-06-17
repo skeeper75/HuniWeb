@@ -1084,3 +1084,123 @@ ACTHDKY 캡처 raw 직접 파싱(`major_radius_ACTHDKY.json`):
 ## AC 인계
 - 결함 라우팅 = `_defects.md` AC 섹션(D-AC-1 M1 Low·판정 무영향 외 M2~M6 신규 결함 0). **NO-GO 0 — 재게이트 불요. AC M2~M6 GO 비준.**
 - BN/GS/TP/PR/ST/CL verdict 보존. 라이브 재실측 세션 권위(2026-06-17·railway DB read-only psql 직접 SELECT + 3캡처 raw JSON 파싱).
+
+---
+
+# PD 카테고리 M1 게이트 (rpm-validator·2026-06-17·라이브 read-only GET 재실측)
+
+> PD = 8번째 카테고리(스툴·슬리퍼·강아지계단 = 봉제/조립 완제 구조물). 재사용 캡처 0 → 라이브 SSR GET이 유일 근거. 3 PD 페이지 HTTP 200 실 파싱으로 reverse.md 원자 전건 대조.
+
+## M1 — 추출 충실성 (CONDITIONAL — 슬롯 귀속 결함 1건·날조 0)
+
+**재측정(라이브 직접 파싱·전건 일치분):**
+- catalog category=PD = **정확히 3건**(PDCHSTL/PDWRSLP/PDSRPPY)·접두 누수 0(ACPD*/GSCAPD*/STBPDFT → AC/GS/ST 정분류). reverse §5 "3상품 전수" 정확.
+- 라이브 byte 392657/399344/369065 = reverse 헤더 392/399/369KB 정확.
+- paper(자재) verbatim: 면10수화이트/슬리퍼원단/PU(폴리우레탄)-코끼리원단 일치.
+- size verbatim: 미니사각292×292·미니원형/원형305×305·긴사각580×290 / 230~280mm 6프리셋 / 2단495×320·3단717×382 전건 일치.
+- sodu=단면 ×3, PCS 슬롯(스툴/계단=SEW_LTR·슬리퍼=PDT_WRK·공통 THO_CUT/SUB_MTR), icon_txt 라벨, TIP "검정밑창 1켤레", number1/number2 2슬롯 전건 일치.
+- `unobserved`(THO_CUT_SUB_SELECT enum·SUB_MTR 상세·가격 infoCall) 정직 — SSR 미노출 재현. SSR-marketing(다리/솜/지퍼/논슬립) non-axis 분리 정직.
+
+**결함 D-PD-1 (Medium·M1→rpm-reverse-engineer):** `reverse.md:74·166-171` 슬리퍼 밑창색(검정/흰색)을 `six_clr`(별색 체크박스)에 오귀속. 라이브 SSR 실측 = `six_clr`는 3상품 전부 별색 슬롯(`sixclr_check`·검정/흰색 값 미부착), **밑창색 검정/흰색은 SUB_MTR sub-radio**(SLB01~06 검정 MTRL_COD `SBSLP*`·SLW01~06 흰색 `SWSLP*`·밑창색×사이즈 12-variant). 값은 실재(날조 아님)이나 소스 슬롯 결선 오류. 부작용: 밑창색 이중표상·§4 "본체/밑창색 six_clr" 행 전파 위험·M2 자재#1 본체색 family 토대 흔듦.
+
+**M1 판정: CONDITIONAL.** 카탈로그·paper/size/sodu/PCS/icon_txt/TIP/수량 전건 라이브 verbatim 일치·날조 0·unobserved 정직. 단 D-PD-1(Medium·밑창색 six_clr→SUB_MTR 오귀속) — 부존재 인용·값 날조 아닌 슬롯 결선 오류이므로 NO-GO는 아니나 M2 본체색 전파 위험으로 CONDITIONAL. distinct #18 부결(구조/조립/3D폼=facet) 핵심 판정에는 무영향(밑창색 귀속과 독립).
+
+## PD 인계
+- 결함 라우팅 = `_defects.md` PD-M1 섹션(D-PD-1 Medium). **rpm-reverse-engineer 정정 후 재게이트 권장**(§0.5·§2 밑창색 축 six_clr→SUB_MTR_SUB_RADIO 재귀속·§4 횡단표 재귀속·M2 본체색 전파 재확인).
+- M2~M6는 본 세션 범위 외(M1 전용 검증). reverse 정정 반영 후 메타모델/갭/그릇 산출 시 후속 게이트.
+
+---
+
+# PD 카테고리 M1 재확인 + M2~M6 게이트 (rpm-validator·2026-06-17·라이브 read-only 재실측)
+
+> D-PD-1 정정(밑창색 six_clr→SUB_MTR 재귀속)이 reverse·metamodel에 반영된 뒤의 종합 게이트. M4는 railway DB(zephyr.proxy.rlwy.net:45948/railway) `information_schema`/`t_*` 직접 SELECT(read-only·2026-06-17)로 생성자 숫자 비신뢰 재측정. distinct 0 부결·PD-4 data-gap을 최엄격 적대 검증.
+
+## M1 재확인 (CONDITIONAL → GO 승격)
+
+**D-PD-1 정정 정합 재대조(reverse·metamodel 양쪽 grep 실측):**
+- `categories/PD/reverse.md`: §0.4(:64)·§1(:108-113)·§2(:166-171)·§3(:222-225) **six_clr = 별색(공정#2)으로 3상품 전부 통일** — :171 명시 "★D-PD-1 정정: 종전 밑창색을 six_clr에 오귀속했으나 별색이 맞음". 밑창색 검정/흰색은 **별도 축으로 분리**(:172-177 `axis: 밑창색×사이즈(SUB_MTR sub-radio SLB*/SLW*)`·MTRL_COD SBSLP/SWSLP230~280·12-variant 매트릭스). §4 횡단표(:259-260)도 `six_clr=공정(별색)` 행과 `본체/밑창색=SUB_MTR sub-radio SLB*/SLW*(★six_clr 아님)` 행을 **명시 분리**.
+- `02_metamodel/_resolved-fragments.md` PD-6(:647-652)·`metamodel-dictionary.md`(:228): 정정 명시 고정 + **전수 grep 확인 — 밑창색이 dictionary/discovered-axes/erd 어디에도 자재 CLR(본체색)로 등재되지 않음**(별색→부자재 variant facet 귀속만 정정·distinct 0 불변).
+- six_clr 통일성: 3상품(PDCHSTL §1:108·PDWRSLP §2:166·PDSRPPY §3:222) 전부 별색(공정#2)으로 일관. 오귀속 잔재 0.
+
+**M1 판정: GO (CONDITIONAL 해소).** D-PD-1(유일 결함·Medium·슬롯 결선)이 reverse 4개 위치 + metamodel PD-6 전건 정정·six_clr 3상품 별색 통일·메타모델 본체색 전파 위험 차단(자재 CLR 미등재 grep 확증). catalog 전수(3·누수0)·paper/size/sodu/PCS/icon_txt/TIP/수량 라이브 verbatim 일치·날조 0·unobserved 정직 — M1 CONDITIONAL의 단일 사유가 정정되어 **GO 승격**. 잔여 미세 슬랙: reverse §0.2/§4 횡단표가 SUB_MTR 밑창색에 `자재(본체색=밑창)` 태그를 병기(자재 CLR로 *읽힐* 여지) — 단 metamodel은 이를 자재 CLR로 채택하지 않았고(grep 0) 부자재 variant(부속물#8/자재 sub_mtrl)로 라우팅하므로 M2 토대 무영향. 비차단 관찰(D-PD-2 Low로 기록).
+
+## M2 — 메타모델 정합 (GO)
+
+**증거 도출·오버피팅·관계 무모순·17축 카운트 일관 재검:**
+- **카운트 일관:** discovered-axes(:29) "발굴 distinct 11개 + PD facet 5종(distinct 0)"·dictionary(:14) "17 dictionaried 축 유지"·erd(:3,:6) "v8.0 새 엔티티/축 0" — **3 산출물 17축 카운트 완전 일치**. PD 통합으로 distinct 카운트 변동 0(BN/GS/TP/PR/ST/CL/AC 판정 보존).
+- **증거 도출:** PD facet 5항 전부 reverse 원자(§0.1~§0.6·§1~§3 [live:SSR])에서 도출 — PD-1 봉제(SEW_LTR/PDT_WRK PCS 슬롯 실측)→#14 family·PD-2 직물원단(면10수/슬리퍼/PU paper select 실측)→자재#1·PD-3 단수/형상(size select 실측)→사이즈#13·PD-4 내재BOM([live:SSR-marketing] 카피·옵션 슬롯 부재 실측)→분산 facet·PD-6 밑창색(SUB_MTR sub-radio 실측·정정)→부속물#8/자재 sub_mtrl. **fabricated/unsourced 축 0.**
+- **오버피팅:** PD reverse가 강제기한 "조립/구조/3D폼 distinct #18"을 침묵 채택하지 않고 양면 트레이드오프 펼친 뒤 facet 비준(_resolved-fragments PD-4 :634 "양면 트레이드오프 펼침·침묵 선택 금지"). 단일카테고리 축 강요 0.
+- **관계 무모순:** erd(:123-125 FORM_ASSEMBLY에 PD SEW_LTR family·:142-146 ADDON에 PD 다리/받침/논슬립 + view_yn=N facet·:190 channel) — PD 추가가 기존 엔티티 *강화*만이고 FK/composition 모순 신규 0. ERD↔dictionary 동기(둘 다 17축·동일 family 멤버).
+
+**M2 판정: GO.** PD facet 5항 reverse 증거 도출·17축 카운트 3산출물 일관·오버피팅 거부(침묵선택 금지 명문화)·ERD-dictionary 무모순. 단일 결함 없음.
+
+## M3 — facet 부결 타당성 (★최중요·GO)
+
+**directive 핵심: PD-4 완제 내재BOM·봉제·구조·단수·밑창색 부결이 정당한가 — 역방향 오류(distinct를 facet으로 숨김) 직접 재검:**
+
+- **PD-4 완제 구조물 내재BOM #18 부결 재검 (★directive 최대 관전):** 부결 논거 = "후니 KB가 addl_product(#9)·자재 usage·생산방식 A/B/C를 이미 1급 모델링 → 왜곡 없이 담음"(_resolved-fragments :631-639). **독립 재검 = 라이브 그릇 실재 여부 기준** — 이것이 ST 형상#17(distinct)과 정반대 부결의 결정적 시금석. 라이브 실측(아래 M4): `t_prd_product_addons`(PK=(prd_cd,tmpl_cd)·addon→template SKU) **실재**·usage_cd .07 공통 **639행** 슬롯 실재. 즉 다리/받침/논슬립=부속물#8·솜/지퍼=자재 usage가 *들어갈 그릇이 후니에 있음* → 부결 정당(축 있음·적재만 안 됨). ST 형상은 `t_siz_sizes`에 shape/form 컬럼 0건(라이브 확인)이라 "어느 축에도 없음"=distinct 강제. **두 판정이 동일 기준(라이브 그릇 실재)으로 정반대 결론 = 일관.** 역방향 오류 아님.
+- **봉제(PD-1) 부결:** #14 본체형태가공(GS D-10·이미 distinct)의 family 멤버로 흡수 — 새 축 아님(기존 distinct에 합류). 라이브 봉제 PROC_000080/088 2행 실재(M4) = 공정 그릇 존재·"본체 생성성" 분류축만 결손(=기존 #14 GAP·신규 아님). 정당.
+- **단수/형상(PD-3) 부결:** 사이즈#13 프리셋 1:1 흡수 — ST 형상#17의 1:多(원형↔CL001~100 span) 미충족(PD 원형↔305×305 *1개*). 라이브 t_siz_sizes work/cut width·height로 단수(2단=495×320)·형상(원형=305×305) 1:1 표현 가능(M4) = 형상축 강제 불요. 정당(ST 형상과의 분기 기준이 명확·일관).
+- **밑창색(PD-6) 부결:** 별색(공정#2) 아니라 SUB_MTR 부자재 variant(부속물#8/자재 sub_mtrl) — 어느 쪽이든 기존 축 facet(distinct 0 불변). 정당.
+- **역방향 오류(distinct→facet 은폐) 직접 hunt:** 유일 잔여 distinct 후보 = "옵션 미노출 고정 부품 명세"(PD-4) → 부속물#8의 고정(ESN=Y·view_yn=N) 완제 부속 facet으로 무손실 흡수(AC 등신대 받침 동형·라이브 addons 그릇 실재). **은폐된 진짜 distinct 없음** — 후니 KB가 내재BOM 구성요소(부속물/자재/생산방식)를 이미 1급 모델링하므로 facet 분해가 왜곡을 일으키지 않음(ST 형상처럼 "담을 축이 아예 없는" 상황과 본질 차이).
+
+**M3 판정: GO.** PD-4 #18 부결이 "라이브 그릇 실재" 기준으로 ST 형상#17 distinct 승격과 정반대 결론을 *일관되게* 도출(라이브 직접 실측으로 양측 확증) — 미스분류한 facet 0·은폐된 distinct 0. distinct 0 부결 **검증됨.**
+
+## M4 — 갭 판정 정확 (GO — 라이브 information_schema 직접 재실측)
+
+**PD facet 5항 PASS1/WEAK2/GAP1/data-gap1을 railway DB 직접 SELECT(read-only 2026-06-17·생성자 숫자 비신뢰)로 재측정:**
+
+| 검사 항목 | 생성자 주장(§XIX) | 내 독립 재측정(psql) | 일치 |
+|----------|------------------|---------------------|:----:|
+| 봉제/제품가공/조립/솜/지퍼 공정 행 | `PROC_000080·PROC_000088` 봉제 **2행만**·제품가공/조립/솜/지퍼 0건 | `SELECT proc_cd,proc_nm FROM t_proc_processes WHERE proc_nm ~ 봉제\|재봉\|조립\|솜\|지퍼\|제품가공` → **정확히 PROC_000080 봉제·PROC_000088 봉제 2행**(그 외 0). 전체 97행 중 2행 | ✅ |
+| `t_prd_product_addons` 그릇·PK | 컬럼 prd_cd·disp_seq·note·tmpl_cd·PK=(prd_cd,tmpl_cd)·addon→template FK | 컬럼 = prd_cd,disp_seq,note,reg_dt,upd_dt,tmpl_cd / **PK=(prd_cd,tmpl_cd) 확인**(pg_index 실측) | ✅ |
+| usage_cd .07 공통 행수 | **.07 공통 639행**(솜/지퍼/밑창 sub_mtrl 슬롯) | `GROUP BY usage_cd` → .01=49·.02=67·.03=15·.05=2·**.07=639** | ✅ |
+| `t_siz_sizes` shape 컬럼 | shape/form 컬럼 **0건**·work/cut width·height만 | 컬럼 18개 = siz_cd,siz_nm,work_width/height,cut_width/height,margin_*,impos_yn,...,tags — **shape/form 컬럼 0건 확인** | ✅ |
+| 직물/PU 원단 자재행 | 린넨 MAT_000184(.05)·타이벡(.05)·메쉬 MAT_000183(.08) 실재·물성 차원 컬럼 부재 | `WHERE mat_nm~린넨\|타이벡\|메쉬` → MAT_000184 린넨 **MAT_TYPE.05**·MAT_000187/188 타이벡 하드/소프트 **.05**·MAT_000183 메쉬 **.08**·MAT_000116 린넨커버 .01. 컬럼=width/height/depth/weight(**번수/신축성 컬럼 부재 확인**) | ✅ |
+| 밑창 sole 자재코드(SLB*/SLW*) | SBSLP/SWSLP230~280 12-variant **미적재**(data-gap) | `WHERE mat_cd~SBSLP\|SWSLP OR mat_nm~밑창` → **0행**(미적재 확정) | ✅ |
+| option_items 2D 페어링 | ref_key1/ref_key2(밑창색×사이즈 2D) | t_prd_product_option_items에 **ref_key1·ref_key2 컬럼 실재** | ✅ |
+| PD 상품 후니 DB 부재(naming leak 검사) | (RP 코드) | `WHERE prd_cd IN (PDCHSTL/PDWRSLP/PDSRPPY)` → **0행**(RP naming 후니 미유입·정당) | ✅ |
+
+**판정 정확성 재검(양면):**
+- **GAP 1 — 봉제/제품가공(PD-1=#14):** 봉제 2행만 실측 + 제품가공/조립/솜충전/지퍼 공정 행 0건 → "본체 생성성" 분류축 결손 = 기존 §V-14 #14 GAP과 동일(GS PDT_WRK/FLX_ZIP 동근·신규 아님). **GAP 판정 정확**(존재하지 않는 컬럼 인용 0·실재 안 하는 공정을 PASS로 위장 0).
+- **WEAK 2 — 직물/PU(PD-2)·밑창색 SUB_MTR(PD-6):** 자재행은 실재(린넨/타이벡/메쉬 라이브 확인)이나 물성 분해 컬럼 부재(width/height/depth/weight만) → 링크 PASS·분해축 WEAK. 밑창은 addons/usage 그릇 실재·자재코드(SLB*/SLW*) 미적재. **WEAK 판정 정확**(그릇 있되 차원 부족/미적재).
+- **PASS 1 — 단수/형상(PD-3=#13):** t_siz_sizes work/cut width·height로 1:1 프리셋 흡수·shape 컬럼 0건이 사이즈축 흡수 정당화(형상축 강제 불요). **PASS 정확**(존재 컬럼 인용·왜곡 없음).
+- **data-gap 1 — 완제 내재BOM(PD-4):** ★핵심 — `t_prd_product_addons`(addon→tmpl_cd) 그릇 + usage_cd .07 639행 슬롯 **둘 다 라이브 실재** → 다리/받침/논슬립=부속물#8·솜/지퍼=자재 usage가 *들어갈 그릇 있음*·적재만 안 됨 = **data-gap(축 부재 아님) 확정**. vessel-gap이 아님을 라이브가 직접 입증(그릇 실재 vs 부재). dbmap 적재 트랙 위임 정당.
+
+**M4 판정: GO.** PD facet 5항 8개 검사 전건 라이브 재측정 일치(생성자 숫자 받아쓰기 0)·verdict 양면(그릇 실재+미적재) 정확·존재 안 하는 컬럼 PASS 인용 0·실재 vessel을 GAP 오판 0. **★PD-4 data-gap 판정 = 라이브 그릇 실재(addons 테이블·usage .07 639행·PK 실측) 직접 확인으로 검증됨.**
+
+## M5 — 그릇 건전성 (GO)
+
+**PD 신규 그릇 0이 search-before-mint 정당한가·기존 V-8/V-3 흡수 적정·PD-4 data-gap 처리 타당:**
+- **신규 그릇 0 = search-before-mint 통과:** vessel-needs(:14·:214-226)·_vessel-roadmap(:13)·vessel-form-assembly §7·vessel-material-axis §11 모두 "PD 신규 V-번호 0·dbm-ddl-proposer 미호출" 일관. PD distinct 0이므로 새 그릇 수요 0 — 라이브 그릇 실재(M4)로 기존 V-8/V-3가 PD facet을 견딤 입증. **중복 mint 0·convention drift 0.**
+- **V-8(형태가공) 흡수 적정:** PD-1 봉제/제품가공 = V-8(#14)의 family 멤버(SEW_LTR/PDT_WRK = GS PDT_WRK/FLX_ZIP 동일 #14). vessel-form-assembly §7 "PD 추가 0·봉제/조립/솜충전 공정 행=data·PROC_CLASS 분류축뿐"(라이브 봉제 2행 실측 정합). 적정.
+- **V-3(자재 분해축) 흡수 적정:** PD-2 직물 물성 차원·PD-6 밑창 sub_mtrl = V-3에 facet 강화 메모(ST 점착·AC surface_finish 동근 합성차원). 신규 컬럼/테이블 0·기존 분해축 항목에 PD attribute 추가만. 적정.
+- **PD-4 vessel 미신설 타당:** PD-4 내재BOM을 data-gap(`_data-gaps-noted §9`·dbmap 위임)으로 라우팅·vessel 신설 안 함 = 라이브 그릇 실재(M4) 정합. 그릇 있는데 vessel 신설하면 중복 mint 위반 — 미신설이 정당.
+
+**M5 판정: GO.** PD 신규 그릇 0이 search-before-mint·라이브 그릇 실재로 정당·V-8/V-3 흡수 적정(정규화 무손실·t_* convention 정합)·PD-4 data-gap 위임으로 중복 mint 회피. 단일 결함 없음.
+
+## M6 — 생성-검증 독립성 (GO)
+
+**deepcheck.md codex 17후보 무검증 채택 0·H-1 정직 분류·AC layer-stack 교훈 적용·내 dodge-hunt:**
+- **17후보 전건 unverified·채택 0:** deepcheck(:16 "17건 전부 unverified"·:183 "채택 0건 — 전부 unverified") — 메타모델/갭/그릇 산출물에 codex 후보 silently 채택 0 확인(discovered-axes/dictionary/gap-matrix에 H-/M-/L- 후보 distinct 승격 0·전부 검증 트리거로만 보존).
+- **H-1(Construction Spec #18 후보) 정직 분류:** deepcheck(:24-31·:162) — codex가 #18 최강 후보로 제기했으나 **codex 스스로 "지금은 #18 확신 못함" 명시 + 결정 기준("재사용 정규화 객체냐 고정 템플릿 콘텐츠냐")이 우리 data-gap vs vessel-gap 프레임과 일치**(:13·:17). 기각 예상이나 검증 트리거(infoCall 캡처)로 살림 — unverified 정직 분류 확인. **codex가 data-gap 프레임에 동조** = 생성자가 외부 의견을 자기 결론 보강에 유리하게 cherry-pick한 게 아니라 정직 기록.
+- **AC layer-stack 교훈 적용:** deepcheck(:7 "AC layer-stack REFUTED 교훈[검증 전 distinct 신뢰 금지] 적용"·:181) 명시 — 캡처 전 채택 금지 원칙 일관.
+- **내 dodge-hunt(스테이지별 최위험 주장 깨기):** 최위험 주장 = "PD-4 data-gap(그릇 실재)". 깨기 시도 = 라이브에서 addons 그릇/usage .07 슬롯이 실재 안 하면 vessel-gap이어야 함 → **M4 직접 SELECT로 addons PK·usage .07=639 실재 확인 = 주장 견고(깨기 실패)**. 차위험 = "봉제 2행만"(GAP 근거) → 직접 쿼리로 정확히 2행 확인(깨기 실패). 차위험 = "ST 형상↔PD 형상 정반대 부결" → t_siz_sizes shape 컬럼 0건 직접 확인으로 양측 기준(라이브 그릇 실재) 일관 확증(깨기 실패).
+- **재유도(echo 아님):** M4 봉제 행수·usage 분포·addons PK·siz 컬럼·자재 mat_typ_cd·SLB/SLW 부재·PD 상품 후니 미유입 — 전부 psql 직접 SELECT 재측정(생성자 숫자 받아쓰기 0).
+
+**M6 판정: GO.** codex 17후보 무검증 채택 0·H-1 unverified 정직 분류(codex 자체 data-gap 프레임 동조)·AC layer-stack 교훈 적용·내 dodge-hunt 3건 전부 라이브로 주장 견고 확인(깨기 실패). 생성≠검증 독립 유지.
+
+## ═══ PD 종합 판정 ═══
+
+| 게이트 | 대상 | 판정 | 핵심 근거 |
+|--------|------|------|----------|
+| **M1(재확인)** | 추출 충실성·D-PD-1 정정 | **GO** ✅ (CONDITIONAL 해소) | six_clr 3상품 별색 통일·밑창색 SUB_MTR 분리·metamodel 자재 CLR 미등재(grep 0)·catalog/원자 verbatim |
+| **M2** | 메타모델 정합 | **GO** ✅ | 17축 3산출물 카운트 일관·증거 도출·오버피팅 거부(침묵선택 금지)·ERD-dict 무모순 |
+| **M3** | facet 부결 타당성 | **GO** ✅ | PD-4 #18 부결=ST 형상#17과 "라이브 그릇 실재" 동일기준 정반대 결론(일관)·은폐 distinct 0 |
+| **M4** | 갭 판정 정확 | **GO** ✅ | 8검사 라이브 재측정 전건 일치·PD-4 data-gap=addons/usage 그릇 실재 직접 확인·실재 vessel GAP오판 0 |
+| **M5** | 그릇 건전성 | **GO** ✅ | 신규 그릇 0=search-before-mint·V-8/V-3 흡수 적정·PD-4 vessel 미신설(중복 mint 회피) |
+| **M6** | 생성-검증 독립성 | **GO** ✅ | 17후보 채택 0·H-1 정직 unverified·dodge-hunt 3건 깨기 실패 |
+
+**종합: GO (M1~M6 전건).** PD = 8번째 카테고리·distinct 0 재포화. directive 최대 관전(조립·구조·3D폼·완제 내재BOM=distinct #18인가) 적대 검증 결과 **부결 정당** — 봉제 구조물 완제품의 가장 강한 distinct 후보(완제 내재BOM PD-4)가 라이브 그릇 실재(addons PK·usage .07=639) 직접 확인으로 **data-gap(축 있음·미적재) 확정·vessel-gap(축 부재) 아님**. ST 형상#17(t_siz_sizes shape 컬럼 0건=distinct 강제)과 동일 기준으로 정반대 결론을 일관 도출. distinct 0 부결·PD-4 data-gap 판정 **모두 라이브 재실측으로 검증됨.**
+
+**잔여(비차단):** D-PD-2(Low·reverse §0.2/§4 SUB_MTR 밑창색 `자재(본체색)` 태그 병기 슬랙 — metamodel 미채택이라 무영향) → `_defects.md` PD 섹션.

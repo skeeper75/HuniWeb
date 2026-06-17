@@ -123,6 +123,18 @@
 34. **★부자재 카탈로그 횡단 공유(SUB_MTR KR/CN/CR)** — AC 고리(80+)·받침(12)·뒷면(SXANB)이 ST SUB_MTR_KR/CN/CR과 코드 공유 = 굿즈/스티커/아크릴 횡단 단일 부자재 마스터 시사. 받침=필수(ESN=Y)·고리=선택 부자재 필수성 차원. 메모리 "옵션=자재+공정 BUNDLE" 정점. A-4.
 35. **★3 가격엔진(acrylic2025_price) 패턴** — AC 한 카테고리 3엔진(vTmpl/acrylic2025/tmpl). 전용 acrylic2025_price=면적매트릭스([huni-ref])·CL clothes2025·ST 3엔진과 "2025세대 형태/카테고리 전용 가격엔진" 통합. 상품명 소재≠본체자재(명찰 PET+합지·A-7)·인쇄면/화이트 투명소재 종속(A-5)·ACTPKEY 템플릿 AC vs TP(A-9) 동반. A-5·A-6·A-7·A-9.
 
+## 커버리지 맵 — PD(스툴·슬리퍼·강아지계단, 3상품 전수·★구조물/3D 조립 완제품 본질)
+
+| pdtCode | 상품명 | 구조 다양성 | 축 수 | 자재(원단) | 사이즈 의미 | 공정 PCS | 부자재 | 가격엔진 | 출처 |
+|---------|--------|------------|-------|-----------|------------|---------|--------|---------|------|
+| PDCHSTL | 스툴 | 봉제스툴·형상융합사이즈 | 9 | 면10수화이트(면직물) | 형상+치수(미니사각/원형/긴사각) | SEW_LTR 레더재봉·THO_CUT·six_clr별색 | SUB_MTR | **tmpl_price** | `[live:SSR]` |
+| PDWRSLP | 슬리퍼 | 신발류·발치수·밑창색 | 8 | 슬리퍼원단 | 발 치수(230~280mm) | six_clr별색·THO_CUT·PDT_WRK 제품가공 | SUB_MTR sub-radio 밑창색검정/흰색×사이즈 12-variant(SLB*/SLW*) | **tmpl_price** | `[live:SSR]` |
+| PDSRPPY | 강아지 계단 | 반려동물구조물·단수사이즈 | 8 | PU(폴리우레탄)-코끼리원단 | 단수+치수(2단/3단) | SEW_LTR 레더재봉·THO_CUT·six_clr | SUB_MTR | **tmpl_price** | `[live:SSR]` |
+
+> ★3상품 전수 `[live:SSR]` 실측(레거시 jQuery `productOrder` 위젯·Vue 아님). paper/sodu/size select + six_clr/SEW_LTR/THO_CUT/SUB_MTR/PDT_WRK 체크박스 + icon_txt 라벨 서버렌더. price_gbn=tmpl_price 3상품 공통. THO_CUT_SUB_SELECT 상세 enum·SUB_MTR enum·가격은 infoCall AJAX 후행(`unobserved`).
+> 모집단=catalog category=PD 3상품 전수(PDCHSTL·PDWRSLP·PDSRPPY·전부 /item/PD/·코드접두 PD≠카테고리 누수 0). 재사용 캡처 0 — 라이브 1차.
+> **★PD 핵심 발견 + 1차 distinct/facet 판정(directive 최대 관전 = 조립·구조·3D폼·부품 #18 여부)**: ① **조립/봉제(SEW_LTR 레더재봉·PDT_WRK 제품가공)=공정#2 family 멤버**(기존 PCS 슬롯 인코딩·새 슬롯 없음·AC WRK_MTR 동형·distinct #18 부결) ② **구조(다리/받침/바닥재/솜/지퍼/논슬립)=옵션 미노출 고정 제조사양**(마케팅 카피만·카테고리#7 정체에 내재·base-data 관리대상 아님) ③ **3D폼(입체 완제품)=GS 완제SKU·AC 코롯토 입체블록 동형**(tmpl_price 완제단가·생산형태#15 완제품) ④ **단수(2단/3단)=사이즈#13 프리셋 흡수**(1:1·구조 distinct 부결 결정적 증거) ⑤ **자재=직물/PU 원단**(종이 아님·AC/CL 비종이 자재 동형) ⑥ **밑창색=SUB_MTR sub-radio(SLB01~06 검정/SLW01~06 흰색·MTRL_COD SBSLP/SWSLP230~280)에 색×사이즈 12-variant 매트릭스로 인코딩**(★six_clr 아님·six_clr은 3상품 전부 별색=공정·D-PD-1 정정 반영) — 자재 본체색 variant·CL size×color MTRL_COD 매트릭스·GS/AC 본체색 동형. **★17축 안정성 = 재포화(distinct 0·8번째 카테고리·PR/CL/AC 패턴 반복) — 가장 이질적 "봉제 구조물 완제품"조차 17축 무손실 흡수.** 단 두 격상 명시: 공정#2 "봉제/제품가공" family 멤버 수용·완제 구조물 "내재 제조BOM"을 옵션과 분리해 카테고리#7/생산형태#15/addons#8에 두는 경계(vessel-gap 후보 PD-4).
+
 ## 재사용 vs 라이브 비율
 ### BN(7상품)
 - **재사용(reuse:Vue-BFF)**: 2상품(BNBNFBL, BNPTPET) = 29% — huni-widget s3 캡처 풀 옵션트리(productInfo 실응답).
