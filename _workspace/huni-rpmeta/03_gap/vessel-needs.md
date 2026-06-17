@@ -8,7 +8,8 @@
 > **── 버전 ──**
 > - **v1.0 (BN):** V-1~V-7 (BN 13축 vessel-gap). **보존.**
 > - **v2.0 (GS):** + V-3 **굿즈 분해축 확장**(본체색/용량/두께) + **V-8 본체형태가공(#14 GAP)** + **V-9 생산형태 governing(#15 WEAK)**. GS 라이브 실측(2026-06-17)이 V-4 min-max·④template_prices·⑬nonspec을 **완화**(아래 정정 노트).
-> - **v3.0 (TP·현재):** + **V-10 디자인 입력 채널 그릇(#16 GAP·★P1 최우선·directive 핵심)** + V-10 종속 **TemplateAsset 분리**(T-A 이중의미)·**VDP 변수 스키마**(T-B). TP 신규 vessel-gap = V-10 1건(BN/GS 항목 불변·보존).
+> - **v3.0 (TP):** + **V-10 디자인 입력 채널 그릇(#16 GAP·★P1 최우선·directive 핵심)** + V-10 종속 **TemplateAsset 분리**(T-A 이중의미)·**VDP 변수 스키마**(T-B). TP 신규 vessel-gap = V-10 1건(BN/GS 항목 불변·보존).
+> - **v4.0 (PR·현재):** **신규 vessel-gap = 0건.** PR(인쇄물·책자·리플렛·포스터)이 distinct 신축 0(facet 강화 9건뿐) → 새 그릇 수요 없음. PR facet 6항(표지/내지·접지/제본·page_rule·면지 bundle·digital_price·인쇄방식 게이팅)의 PASS 4·WEAK 1·GAP 1은 **전부 기존 V-항목에 흡수**(가이드 = 아래 ## PR 흡수 매핑). V-1~V-11 항목·우선순위 **불변·보존**.
 
 ---
 
@@ -129,6 +130,24 @@ leverage = (① unblock 상품 수) × (② 횡단성: 몇 축을 푸는가) × 
 - **사다리 후보(designer 판정):** V-10 ③과 동일 — `TemplateAsset` 별 테이블(template_resource_id·asset_options·price=0·design_input_channel_cd FK→V-10). **`t_prd_templates`에 컬럼 추가로 흡수 금지**(완제SKU↔디자인 시안 이중의미 = 별 엔티티 필수). search-before-mint: 없음(완제SKU 그릇과 의미 명확히 다름).
 - **dbmap 라우팅:** **dbmap 미터치(신규).** dbmap은 `t_prd_templates`를 완제SKU(봉투 OTC)로만 다룸(`cpq-schema §5`) — 디자인 시안 미개념. V-10과 함께 설계(종속).
 
+## ═══ PR 흡수 매핑 (v4.0 — 신규 vessel 0·기존 V-항목 귀속) ═══
+
+PR facet 6항(입력 directive)이 어느 기존 V-항목/판정에 흡수되는지. **신규 그릇 0건 — 새 V-번호 부여 안 함.**
+
+| PR facet | gap-matrix 판정 | 흡수 대상 | 그릇 조치 |
+|---|:---:|---|---|
+| **① 표지/내지 usage 슬롯** (P-2) | **PASS** | (없음·그릇 존재) | USAGE.01/.02/.03 enum + product_materials.usage_cd 실재·실적재 → **vessel 조치 불요**. cover/inner 인쇄비 행은 data-gap(dbmap 가격). |
+| **② 접지/제본 공정 family** (P-1·P-4) | **PASS** | (없음·그릇 존재) | 접지 19행·제본 9행·오시 2행 공정 행 실재 → **vessel 조치 불요**. 접지↔오시 cascade는 V-4(제약 RULE_TYPE match)와 겹침. |
+| **③ page_rule 엔티티** (P-3) | **PASS** | (없음·그릇 존재) | `t_prd_product_page_rules`(page_min/max/incr) = 메타모델 정밀 매핑 확증 → **vessel 조치 불요**(breadth는 data-gap). |
+| **④ 인쇄방식 자재풀 게이팅** (P-7) | **GAP** | **V-2 인쇄방식 게이팅** | P-7 = V-2(#12)의 *자재풀 부분집합 게이팅* 면 강화. V-2 설계 시 "PrintMethod gates Material pool" 관계 간선 포함 권고(신규 V 아님). |
+| **⑤ digital_price 라우팅** (P-6) | **WEAK** | **V-7 가격 role 태그** | P-6 = V-7(#11)의 pricing_model/frm_typ 라우팅키 부재와 동일. **가격 트랙 위임(V-7 최하)** — frm_typ_cd 그릇이 digital/면적 라우팅 해소. |
+| **⑥ 면지 bundle** (P-5) | **PASS** | (없음·그릇 존재) | 면지=USAGE.03 자재행+제본 공정+COMP_BIND 가격 = bundle 무손실 표현 → **vessel 조치 불요**. |
+| (부) 평량 제약 (COV_MIN/INN_MAX_WGT) | WEAK 흡수 | **V-4 제약 RULE_TYPE** | 평량 min/max 컬럼 부재 → V-4 RULE_TYPE.05(min-max 범위) 확장 시 같이 해소(코드행 경량). 단일 vessel 불요. |
+
+> **★PR 요지:** PR facet 6건 = PASS 4(그릇 이미 보유·조치 0)·WEAK 1(V-7 가격 위임)·GAP 1(V-2 인쇄방식 게이팅 강화). **신규 V-번호 0** — PR은 새 그릇 수요를 추가하지 않고, 기존 V-2/V-4/V-7에 facet 강화 메모만 더한다. 이것이 16축 포화의 vessel-side 증거: 4번째 카테고리가 새 그릇을 요구하지 않음. designer는 V-2 설계 시 자재풀 게이팅 면, V-4 설계 시 평량 min/max를 *함께* 고려(PR로 인한 별도 설계 항목 없음).
+
+---
+
 ## ═══ GS 라이브 실측 정정 노트 (BN vessel-needs 완화) ═══
 
 GS 라이브 실측(2026-06-17)이 BN의 보수적 vessel-gap 일부를 **그릇 발견으로 완화**:
@@ -159,3 +178,4 @@ GS 라이브 실측(2026-06-17)이 BN의 보수적 vessel-gap 일부를 **그릇
 > [HARD] FK 위상: **디자인 입력 채널(V-10)이 TemplateAsset(V-11)·VDP의 참조 대상 → 선행**(채널 enum→리소스→VDP). 자재 분해축(V-3)·인쇄방식(V-2)이 옵션/제약 축의 참조 대상 → 선행. 공정 파라미터(V-1)·형태가공(V-8)은 공정 행 선행. designer는 이 순서로 `_vessel-roadmap.md` 확정.
 > ★GS 정정으로 ④template_prices·V-6 nonspec은 vessel-gap에서 **하향**(그릇 발견) — designer는 search-before-mint로 PASS 재확인 권장.
 > ★TP 핵심: V-10이 신규 P1 최상위(directive 1순위). V-10⊥본체옵션(직교)·가격0 → 본체 축 그릇과 독립 설계. V-11은 V-10 종속·완제SKU 분리 명시.
+> ★PR 핵심(v4.0): **로드맵 불변** — PR은 신규 V-항목 0. PR facet은 기존 V-2(인쇄방식 게이팅에 자재풀 면)·V-4(제약에 평량 min/max)·V-7(가격에 digital_price 라우팅)에 흡수되므로, designer가 그 항목들을 설계할 때 PR facet 메모를 *함께* 반영(별 순서 추가 없음). PASS 4건(표지/내지·접지/제본·page_rule·면지)은 그릇 보유로 vessel 조치 0.

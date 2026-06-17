@@ -585,3 +585,129 @@ option_groups **134**·option_items **469**·constraints **10**·template_select
 - 결함 라우팅 = `_defects.md` D-4·D-5. NO-GO 0 — 재게이트 불요. TP 전 단계 GO 비준.
 - BN/GS verdict 보존. 라이브 재실측 세션 권위(2026-06-17·psql 직접 SELECT·BEGIN..ROLLBACK DRY-RUN).
 - **TP 핵심 직답:** #16 디자인 입력 채널 = **GAP(vessel-gap)** 라이브 확정(editor_yn 불리언만·채널/리소스/VDP 그릇 전무·dbmap 미터치 신규) · D-11 = **진짜 distinct**(캡처 cross-tab 동의) · V-10(컬럼·채널1:1)/V-11(테이블·시안1:N 이중의미) 사다리 정확·DRY-RUN 0 leaked.
+
+---
+---
+
+# ═══ PR(인쇄물·책자·리플렛·포스터) 확장 검증 (v4.0) ═══
+
+> rpm-validator. PR 확장분(`categories/PR/reverse.md`·02_metamodel 16축 v4.0 PR facet P-1~P-9·`03_gap §XI` PR facet 6항·`04_vessel/vessel-{print-method-recipe,quantity-size-pricing}` PR 보강·deepcheck 20후보) 독립 재검.
+> **BN/GS/TP verdict(위)는 보존** — PR 섹션만 추가. 생성자 주장 비신뢰: 캡처 재대조(M1·이미 CONDITIONAL→GO 완료) + 라이브 psql 직접 재실측(M4·M5·M6 dodge-hunt).
+> 재실측 세션: 2026-06-17, 라이브 Railway `railway` DB 읽기전용 SELECT(쓰기/주문/POST 0·비밀값 비노출).
+
+## PR 종합 판정
+
+| 게이트 | 대상 | 판정 | 근거 요약 |
+|---|---|:---:|---|
+| **M2** | 메타모델 정합 (16축 v4.0·PR facet) | **GO** | P-1~P-9 전부 추출 증거(reverse §0~§5·PRBKYPR/PRPOXXX 실측) 도출·**distinct 0** 오버피팅 능동 거부·관계 무모순(ERD usage 전파·자재풀 게이팅·접지 cascade·PAGE_RULE 종속 간선 추가, FK 충돌 0)·**16축 카운트 보존**(#1~#16 dictionary 일관·신축 0). |
+| **M3** | 추가 메타모델 타당성 (P-1~P-9 facet) | **GO** | facet 9건 distinctness 역검 통과·**facet 오분류 0(역방향)** — 진짜 distinct를 facet으로 숨긴 것 없음. P-2 표지/내지=usage_cd slot 재판정 **라이브 dodge-hunt로 확증**(섹션 scoping 컬럼 0건→role slot 정당·신규 role 차원 불요). |
+| **M4** | PR 갭 판정 정확 ★핵심 재실측 | **GO** | PR facet 6항 PASS4/WEAK1/GAP1 **전건 라이브 직접 재실측 일치**(USAGE 7종·usage 분포 .01=49/.02=67/.03=15/.05=2/.07=639·접지19/제본9/오시2·page_min/max/incr·면지MAT_000001~004·COMP_BIND 11·print_method/frm_typ 컬럼 0건). dbmap 비충돌. ※평량 컬럼 표기 미세결함 1건(Low). |
+| **M5** | PR 그릇 건전성 (신규 mint 0) | **GO** | search-before-mint 라이브 입증(constraints.logic+rule_typ_cd 실재·RULE_TYPE 3종·options.tags jsonb·sizes min/max 부재). PASS 4건 그릇 보유·V-2 자재풀 게이팅 흡수·V-7 가격위임 정당. **신규 테이블/컬럼/V-번호 0 = 부당회피 아님**(기존 그릇 무손실 표현 라이브 입증)·**부당추가 0**. |
+| **M6** | 생성-검증 독립성 | **GO** | deepcheck **20후보 무검증 채택 0** 확인(전부 unverified/triage·17축 0 도입). H-1(per-section)/H-2(서명대수)/H-3(교정) unverified 정직 분류·metamodel/gap 무유입 grep 확인. dodge-hunt(P-2 robustness) 라이브로 깨기 실패(=판정 견고). |
+
+**PR 전체: GO.** NO-GO 0·차단 0. 결함 = Low 1건(M4 평량 컬럼 표기). `_defects.md` PR 섹션 라우팅.
+
+---
+
+## PR M2 — 메타모델 정합 (16축 v4.0) → **GO**
+
+### 축 도출성 + 오버피팅 (P-1~P-9 distinct 0)
+- `discovered-axes.md:30` v4.0 판정 = "PR 9패턴(P-1~P-9) distinct 승격 0·전부 facet/family/cascade/정책". 각 facet의 귀속 축(#)과 reverse 증거 라인 명시(P-1 §1·§3 FLD_DFT 7종 / P-2 §0.1·§2 inner_pdt_* / P-3 §0.2 INN_PAGE / P-5 §2 END_PAP 10색 등). **추출 증거에서 도출 — 날조/근거없는 facet 0.**
+- 오버피팅 능동 거부: P-2 "별 role 차원 신설" 검토→거부(usage_cd 값과 1:1 중복), P-4 "상품분기 vs 옵션화"=후니 정책으로 환원(메타모델 판정 아님 명시). **단일상품 강요 축 0.**
+
+### ERD ↔ 사전 정합 (관계 무모순)
+- `metamodel-erd.md` PR 반영분 = 새 *축 노드 0* + PAGE_RULE 보조엔티티 1(QUANTITY_SLOT 종속·`erd:68`) + 관계 간선 강화(MATERIAL usage_cd 역할전파 `erd:67`·PRINTING→MATERIAL pool 게이팅·PROCESS 접지→오시 cascade `erd:69`·PRICING_MODEL price_gbn 라우팅 `erd:163`). 사전 `metamodel-dictionary.md:14`(16축 열거)과 **간선·엔티티 일치·모순 FK 0**.
+- **16축 카운트 보존 확인:** dictionary `#1~#16` 전부 numbered(#8=부속물 `dict:159`). discovered "D-8 제외"는 *발굴축 D-8(UI런타임)* 제외이지 *사전축 #8* 아님 — 카운트 충돌 없음. PR 통합으로 축 +0.
+
+**PR M2 = GO.** facet 도출·무모순·ERD 정합·16축 보존.
+
+---
+
+## PR M3 — 추가 메타모델 타당성 (P-1~P-9) → **GO**
+
+### facet 판정 역검 (진짜 distinct를 facet으로 숨겼나)
+- 9 facet 전수 역방향 점검 — 각 facet이 *고유 lifecycle/governing*을 갖는가 재시험:
+  - **P-1 접지**: 면수=접지방식 파생값(2단=4면)·접지↔오시 cascade = 공정#2 family + 제약#5. 고유 governing 없음(공정 멤버) → facet 정당.
+  - **P-3 페이지수**: INN_PAGE = 수량#10 슬롯 + page_rule 엔티티(라이브 실재). 별 lifecycle 없음(수량 차원) → facet 정당. TP T-C와 동일 슬롯 공유(횡단 일관).
+  - **P-4 제본/인쇄방식 분기**: 상품분기 vs 옵션화 = 카탈로그 *정책*(GS G-2·TP T-4 동류) — 메타모델 양쪽 표현 가능 → 정책 facet 정당.
+  - **P-7 인쇄방식 종속자재**: #12→#1 게이팅 *간선*(자재 부분집합) — 새 축 아닌 관계 강화 → facet 정당.
+- **facet 오분류 0(역방향) — 진짜 distinct를 숨긴 것 없음.** 가장 distinct-후보였던 P-2(역할 전파)도 usage_cd 값 중복으로 거부 정당(아래 dodge-hunt).
+
+### dodge-hunt(M3 최고위험): P-2 "표지/내지 역할" = 진짜 신규 role 차원 아닌가
+- 가설: cover/inner가 자재+도수+가격+평량 *전부* role-paired면 별 "역할(role) 축"이 정당할 수 있다(생성자도 검토 후 거부).
+- **라이브 재실측 반증:** `t_prd_product_materials` 컬럼 = `prd_cd·mat_cd·usage_cd·dflt_yn·disp_seq` — **role/section/page_range scoping 컬럼 0건**. 역할은 `usage_cd`(USAGE.01 내지/.02 표지/.03 면지) *값*으로만 인코딩. 도수/가격/평량의 role-pairing은 usage_cd가 그 축으로 *전파된 간선*이지 별도 관리대상 아님 → **신규 role 차원 신설 시 usage_cd와 1:1 중복**. **P-2 facet 판정 = robust(라이브 확증).**
+
+**PR M3 = GO.** facet 9건 재검 통과·역방향 오분류 0·P-2 라이브 robust.
+
+---
+
+## PR M4 — PR 갭 판정 정확 (§XI) → **GO** ★핵심 재실측
+
+> `03_gap/gap-matrix.md §XI` PR facet 6항(PASS4/WEAK1/GAP1)을 라이브 information_schema/데이터 **직접 재실측**(생성자 §XI-0 주장 비신뢰·독립 재조회).
+
+### 라이브 재실측 (psql read-only 2026-06-17·생성자 §XI-0 독립 재현)
+
+| # | facet | 생성자 판정 | 내 재실측 | 일치? |
+|---|---|:---:|---|:---:|
+| 1 | 표지/내지 usage 슬롯 + cover/inner 단가 | PASS | `USAGE.01~.07` 7종 실재 + `product_materials.usage_cd` 분포 **.01=49/.02=67/.03=15/.05=2/.07=639**(표지/내지 실적재) | ✅ |
+| 2 | 접지/제본 공정 family + 오시 cascade | PASS | 접지 **19행**(PROC_000056~074)·제본 **9행**(PROC_000017~025)·오시 **2행**(PROC_000029·090) 공정행 실재 | ✅ |
+| 3 | page_rule 엔티티 (INN_PAGE) | PASS | `t_prd_product_page_rules` 컬럼 = **`page_min·page_max·page_incr`**(+note/reg_dt/upd_dt)·**11행** — INN_PAGE→page_rule 1:1 라이브 확증 | ✅ |
+| 4 | 인쇄방식 자재풀 게이팅 | GAP | `print_method/prn_mtd/pool/allowed/pricing_model/price_gbn/item_gbn` 컬럼 전역 **0건** — PrintMethod 1급 그릇·allowed_material 관계 부재 | ✅ |
+| 5 | digital_price 라우팅 | WEAK | `t_prc_price_formulas` 컬럼 = `frm_cd·frm_nm·note·use_yn`(+dt) — **frm_typ/model 라우팅키 부재**·`price_gbn` 0건 | ✅ |
+| 6 | 면지 bundle (자재+공정) | PASS | USAGE.03 자재행 **MAT_000001~004**(화이트/블랙/그레이/인쇄면지)·제본공정 PROC_000017~025·`COMP_BIND_*` **11행** | ✅ |
+
+- **양면 검증:** PASS 측(그릇 존재 라이브 확인)·GAP/WEAK 측(컬럼 부재 라이브 확인) 양쪽 재실측. 존재하지 않는 컬럼 인용한 PASS 0·실재 그릇을 GAP한 것 0.
+- **dbmap 정합:** GAP #4=기존 #12(`dbmap-print-method-not-absolute-axis`)·WEAK #5=기존 #11(`dbmap-price-formula-audit-round17` frm_typ_cd 부재)에 매핑 — **신규 충돌 0**. PR distinct 0 → 신규 vessel-gap 0(중복 계상 안 함) 일관.
+
+### dodge-hunt(M4 최고위험): page_rule 11행이 "닫힌 data-gap"으로 결함 은폐했나
+- `§XI-1 #3` "11행 적재·breadth는 data-gap" — 그릇(컬럼) 존재 ≠ 전 책자 적재. 재실측: 컬럼 `page_min/max/incr` 실재(vessel PASS 정당)·11행은 TP캘린더+PR책자 공유. **vessel은 PASS·적재 breadth는 data-gap(dbmap)으로 정직 분리** — 은폐 아님.
+
+### 사소 불일치 (Low — 판정 무영향)
+- **D-PR-1 (평량 컬럼 표기):** §XI-0 표 "product_materials 평량 min/max 컬럼 `wgt/weight/min/max` 0건" — 내 재실측은 `t_mat_materials.weight` **컬럼 실재**(+`max_sel_cnt`). 단 `weight`=자재 단일 평량값이지 RP `COV_MIN_WGT=150/INN_MAX_WGT=130` *플랫폼 제약 min/max 쌍*이 아님 → **판정(평량제약=제약#5 WEAK 흡수) 무영향**, 표기만 부정확(`weight 0건`은 거짓·`min/max 제약쌍 0건`이 정확). Low.
+
+**PR M4 = GO.** facet 6항 전건 양면 라이브 재실측 일치·dbmap 비충돌. 표기 결함 1건은 Low(판정 무영향).
+
+---
+
+## PR M5 — PR 그릇 건전성 → **GO**
+
+### search-before-mint 라이브 입증 (생성자 = 신규 그릇 0)
+- **V-2 인쇄방식(P-7 자재풀 게이팅 흡수):** 경로 A(제약 흡수) 그릇 라이브 실재 — `t_prd_product_constraints.logic`(JSONLogic)+`rule_typ_cd` 컬럼·`RULE_TYPE.02 금지` 코드행 실재. 자재풀 게이팅=공정 게이팅과 *같은 제약 그릇* 무손실 흡수 → **1급 PrintMethod 테이블 mint 보류 정당**(over-modeling 회피). 파일포맷/팀=MES 미완 DEFER 정직.
+- **V-7 가격(P-6 digital_price 흡수):** `frm_typ/model` 라우팅키 라이브 부재 확인 → 가격기여는 `use_dims jsonb`+`prc_typ_cd`로 표현·frm_typ_cd=가격트랙 위임. **신규 그릇 0 정당**(라이브가 안 쓰는 축·leverage 최하).
+- **V-5/V-6(PR 무관 보강):** `options.tags`=jsonb(미사용 슬롯 실재)·`t_siz_sizes` min/max 컬럼 부재→V-4 RULE_TYPE.05 흡수 — 사다리 근거 라이브 일치.
+
+### 부당회피/부당추가 점검 (양방향)
+- **부당회피 0:** 신규 mint 0이 "결함 은폐"가 아님 — PASS 4건(usage·접지/제본·page_rule·면지)은 그릇 *실재 라이브 확인*(표현력 충분), GAP/WEAK 2건은 기존 V-2/V-7로 라우팅(새 그릇 불요가 입증된 결과).
+- **부당추가 0:** PR로 신규 테이블/컬럼/V-번호 0 — 16축 포화의 vessel-side 증거. 4번째 카테고리가 새 그릇 요구 0.
+
+### dodge-hunt(M5 최고위험): mint 0이 과소설계(P-7 게이팅 GAP 은폐) 아닌가
+- P-7 자재풀 게이팅을 제약 logic으로 흡수 = 표현력 충분한가? 라이브 `constraints.logic`(JSONLogic 임의조건)+`option_items`(ref_dim_cd 자재) 실재 → `{인쇄방식=토너 → disable 윤전전용지풀}` 표현 가능. **게이팅 무손실·과소설계 아님.** 단 토너/인디고 자재풀 차이는 unobserved→validation 정직 라우팅(은폐 아님).
+
+**PR M5 = GO.** search-before-mint 라이브 입증·신규 mint 0 정당(부당회피/추가 0)·제약 흡수 무손실.
+
+---
+
+## PR M6 — 생성-검증 독립성 → **GO**
+
+### deepcheck 무검증 채택 0 확인 (`categories/PR/deepcheck.md`)
+- codex 20후보(NEW-AXIS 5·MISSING-OPT/PROC 9·DOMAIN-RULE 6) + 도메인규칙 10항 = **전부 `unverified`·triage 등재까지**(`deepcheck:4·162` "채택 0" 명시).
+- **17축 0 도입 grep 확인:** `discovered-axes.md`에 17축/섹션축/서명대수 distinct 채택 **0건**(grep empty). `gap-matrix.md`에 H-1/H-2/H-3/per-section/proofing 신규 GAP 유입 **0건**(grep empty). → **deepcheck 후보가 metamodel/gap에 몰래 채택된 것 없음.**
+- H-1(per-section 자재)·H-2(서명/대수)·H-3(교정/승인) = 전부 unverified 정직 분류. **H-1은 deepcheck.md가 갱신되어 `REFUTED-for-RP`(2026-06-17 캡처 실측·채택0·재진입 불요)로 종결**(`deepcheck:43·147`). H-2/H-3 기각 예상·unverified 유지.
+
+### dodge-hunt(M6 최고위험·H-1 독립 재현): per-section 자재가 P-2 facet을 깨나
+- H-1 주장: usage_cd 2슬롯이 "1-16p=stockA, 17-32p=stockB" N-섹션을 못 담음→17축(섹션) 후보.
+- **내 독립 라이브 재실측:** PRD_000071 USAGE.01(내지) 행 **16개**·PRD_000068 **13개** 등 다중 inner 자재 실재. **그러나** `t_prd_product_materials`에 **section_cd/page_range/scope 컬럼 0건**(`disp_seq`만)·각 행은 `mat_cd` 상이+`dflt_yn` → 이는 **"내지 자재 16종 중 택1 선택풀"**이지 *섹션별 자재 배정*이 아님.
+- **결론:** 라이브에 섹션 scoping 키 부재 = RP/후니 모두 per-section 자재 미모델 → **H-1 REFUTED-for-RP 독립 재현·P-2 facet robust**. deepcheck의 "채택0·forward-looking noting만" 정직(나의 재실측이 동일 결론 도달).
+
+### 생성≠검증 레인
+- PR reverse(rpm-reverse-engineer)·metamodel(architect)·gap(gap-analyst)·vessel(designer)·deepcheck(codex/deepcheck) 산출을 validator(별 레인)가 라이브 재측으로 재검 — self-approve 0. 핵심 사실(USAGE 분포·접지19/제본9·page_min/max/incr·frm_typ 부재·섹션키 0)을 **생성자 인용 echo 아닌 직접 psql SELECT로 재도출.**
+
+**PR M6 = GO.** deepcheck 20후보 채택 0·17축 0 유입·H-1 dodge-hunt 독립 깨기 실패(판정 견고).
+
+---
+
+## PR 인계
+- 결함 라우팅 = `_defects.md` PR 섹션(D-PR-1 평량 컬럼 표기·Low). **NO-GO 0 — 재게이트 불요. PR 전 단계 GO 비준.**
+- BN/GS/TP verdict 보존. 라이브 재실측 세션 권위(2026-06-17·psql 직접 SELECT).
+- **deepcheck H-1 노트:** 본 검증 시점(deepcheck.md 10:05 갱신분) H-1 = `REFUTED-for-RP`로 종결·채택0. validator 독립 dodge-hunt(PRD_000071 섹션키 0건)가 동일 결론 재현 — H-1 최종 판정 확정(섹션 자재축 미도입 정당·forward-looking noting만).
+- **PR 핵심 직답:** PR facet 6항 = **PASS 4**(표지/내지 usage·접지/제본 공정·page_rule·면지 bundle — 그릇 라이브 실재)·**WEAK 1**(digital_price=기존 #11)·**GAP 1**(인쇄방식 자재풀=기존 #12) · **distinct 신축 0 = 신규 vessel-gap 0**(16축 포화 입증) · 신규 테이블/컬럼/V-번호 0 정당.

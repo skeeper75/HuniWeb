@@ -7,6 +7,7 @@
 > - **v1.0 (BN):** §0 8축 인벤토리·§1 Wave·§2·§3. **보존(아래 v1.0 표는 그대로, v2.0 행 추가).**
 > - **v2.0 (GS·2026-06-17):** + V-3 굿즈 확장(§7 in vessel-material-axis)·**V-8 형태가공**·**V-9 생산형태**·**MAT_TYPE 오라벨 교정**. GS 라이브 재측이 #14·#15를 BN 추정보다 *덜 vessel-gap*으로 확증(형태가공=분류축 1개·생산형태=신규 그릇 0). 인벤토리·Wave·정비권고에 GS 행만 추가, v1.0 무수정.
 > - **v3.0 (TP·2026-06-17):** + **V-10 디자인 입력 채널(#16 GAP·★directive 1순위)** = base_code 그룹 3 + 상품 컬럼 4(신규 테이블 0) + **V-11 TemplateAsset 분리(T-A WEAK)** = 신규 테이블 2(본 하네스 **유일 mint**·이중의미 분리). TP 나머지 facet(VDP·페이지계층·형태variant·특수인쇄) = 기존 흡수(신규 0). 라이브 DRY-RUN(BEGIN..ROLLBACK)으로 양 DDL 유효성 실증·0 leaked. v1.0/v2.0 무수정.
+> - **v4.0 (PR·2026-06-17): PR 카테고리 = 신규 그릇 0건.** PR(인쇄물·책자·리플렛·포스터) distinct 신축 0(facet 강화 9건뿐) → search-before-mint 통과·기존 V-항목 충분. PR facet 6항(PASS 4: 표지/내지·접지/제본·page_rule·면지 / WEAK 1 / GAP 1) 중 조치 대상 2건은 기존 그릇에 facet 흡수: **P-7(인쇄방식 자재풀 게이팅) → V-2**(`vessel-print-method-recipe §7`·경로 A 제약흡수가 자재 부분집합도 담음·신규 0)·**P-6(digital_price 라우팅) → V-7**(`vessel-quantity-size-pricing §C4`·frm_typ_cd 결손 동일·가격 트랙 round-16/17 위임). **16축 포화의 vessel-side 검증** — 4번째 카테고리가 새 그릇을 요구하지 않음. 신규 테이블/컬럼/DDL/V-번호 0·인벤토리·Wave·정비권고 무수정.
 
 ---
 
@@ -31,6 +32,13 @@
 | **V-11 TemplateAsset 분리** (T-A 이중의미) | WEAK 🟡 → PASS | `t_prd_template_assets` + `t_prd_product_template_assets` 신규 테이블 2(시안 1:N·독립 lifecycle·가격0·완제SKU 분리) | **4 테이블** | ★테이블 2 (본 하네스 유일 mint) |
 | TP facet(VDP·페이지계층·형태variant·특수인쇄) | GAP→흡수 / PASS | **신규 그릇 0** — VDP=`vdp_yn` 게이트(본문 보류 open)·페이지=page_rules 기존·형태=사이즈/공정 기존·특수인쇄=공정(화이트 PROC_000008·박) 기존 | — | 0 (기존 흡수) |
 
+### v4.0 (PR) — facet 흡수만 (신규 그릇 0)
+| 축 | gap 판정 | vessel 결과 | 사다리 | 신규 그릇 |
+|---|---|---|---|---|
+| **PR P-7 인쇄방식 자재풀 게이팅** | GAP → V-2 경로 A PASS | **신규 그릇 0** — V-2(`vessel-print-method-recipe §7`)에 "PrintMethod gates Material pool" 간선 흡수·제약 logic이 자재 부분집합도 담음 | (V-2 공유·데이터) | 0 (V-2 흡수) |
+| **PR P-6 digital_price 라우팅** | WEAK → V-7 위임 | **신규 그릇 0** — V-7(`vessel-quantity-size-pricing §C4`)의 frm_typ_cd 결손 동일·가격 트랙 round-16/17 위임 | (V-7 공유·위임) | 0 (V-7 흡수) |
+| PR facet(표지/내지·접지/제본·page_rule·면지) | PASS ×4 | **신규 그릇 0** — usage_cd·접지/제본 공정 행·page_rules·면지 bundle 전부 라이브 실재 | — | 0 (그릇 보유) |
+
 ### v2.0 (GS) — 4 (V-3 확장 포함)
 | 축 | gap 판정 | vessel 결과 | 사다리 | 신규 그릇 |
 |---|---|---|---|---|
@@ -42,7 +50,8 @@
 ### 카운트 (v1.0 + v2.0 + v3.0 통합)
 - **설계한 실 그릇(DDL/코드행 필요): 7** — V-1(JSONB 컬럼)·V-3(BN facet 코드 2 + GS 용량 코드 1)·V-4(코드행 2)·**V-8(PROC_CLASS 코드 5 + proc_class_cd 컬럼 1)**·**V-10(코드그룹 3 + 상품 컬럼 4)**·**V-11(신규 테이블 2)**. (+조건부: V-3 capacity 컬럼).
 - **"신규 그릇 불요" 재분류: 8** — V-2·#4·V-5·V-6·V-7 + **V-9(prd_typ_cd+semi_role_cd PASS)** + MAT_TYPE(신규 0·use_yn만) + **TP facet(VDP본문보류·페이지/형태/특수인쇄 기존 흡수)**. + essential(V-4 내부 PASS).
-- **신규 테이블 mint = 2건**(V-11 TemplateAsset 마스터+링크 — **본 하네스 전체 유일**). BN/GS·V-10 채널은 0(전부 코드행/컬럼). ★TP 핵심 교훈: **사다리는 축의 카디널리티가 결정** — V-10 채널=상품 1:1 → 컬럼에서 멈춤(테이블 거부), V-11 시안=상품 1:N·독립 lifecycle·완제SKU 이중의미 → 테이블만 무손실(mint 정당). over-modeling도 under-modeling도 아닌 *정확한 사다리*. GS 교훈(라이브 재측이 갭 완화)에 더해 TP는 *이중의미 분리가 테이블 mint를 정당화하는 유일 경우*임을 보임.
+- **신규 테이블 mint = 2건**(V-11 TemplateAsset 마스터+링크 — **본 하네스 전체 유일**). BN/GS·V-10 채널·**PR 전부 0**(코드행/컬럼/흡수). ★TP 핵심 교훈: **사다리는 축의 카디널리티가 결정** — V-10 채널=상품 1:1 → 컬럼에서 멈춤(테이블 거부), V-11 시안=상품 1:N·독립 lifecycle·완제SKU 이중의미 → 테이블만 무손실(mint 정당). over-modeling도 under-modeling도 아닌 *정확한 사다리*. GS 교훈(라이브 재측이 갭 완화)에 더해 TP는 *이중의미 분리가 테이블 mint를 정당화하는 유일 경우*임을 보임.
+- **★PR 교훈(v4.0): 4번째 카테고리가 신규 그릇 0건** — PR facet 9건이 전부 기존 16축의 facet/family/cascade로 흡수(P-7→V-2 자재풀 게이팅·P-6→V-7 digital_price 라우팅·PASS 4건 그릇 보유). 이는 search-before-mint의 *정직한 양성 결과* = 후니 기존 그릇 + V-1~V-11 설계가 인쇄물·책자 도메인까지 무손실 표현. **16축 포화(saturation)의 vessel-side 증거**: 메타모델 축 신설 0건이 그릇 신설 0건으로 일관 확인.
 
 ---
 

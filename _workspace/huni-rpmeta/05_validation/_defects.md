@@ -83,3 +83,50 @@
 - **TP vessel(04) V-10/V-11 결함 0** — M5 search-before-mint 라이브 입증 + 양 DDL BEGIN..ROLLBACK DRY-RUN 0 leaked(INSERT11+ALTER8+UPDATE107+CREATE2 무오류). 신규 테이블 2(V-11 시안 1:N·이중의미) 정당·V-10 테이블 0(채널 1:1) 정당.
 - **GS 핵심 직답 확인:** 본체소재 vessel-gap(분해축)+data 양면 · #15 신규 그릇 0 정당(semi_role_cd 28행) · MAT_TYPE.09/.10 오라벨 확정(112 비자재·목적지 선행 필수).
 - **TP 핵심 직답 확인:** #16 디자인 입력 채널 = **GAP(vessel-gap)** 라이브 확정(editor_yn 불리언만·item_gbn/채널/리소스/VDP 그릇 전무·base_code 에디터 enum 0·dbmap 미터치 신규) · D-11 = **진짜 distinct**(캡처 cross-tab으로 채널⊥가격·editor_yn 환원불가 동의) · 템플릿#4↔#16 이중의미 분리 정당(t_prd_templates=봉투 완제SKU 실측).
+
+---
+
+## PR-M1 (추출 충실성) — rpm-reverse-engineer 신규 산출 독립 검증
+
+> 검증 대상 `categories/PR/reverse.md`. 인용 캡처를 직접 Read/parse하여 라인/필드 단위 실측 대조.
+> **판정 = CONDITIONAL-GO** (날조 0·핵심 실측 전건 일치, but 전수추적 1누락 + 내부 수치 불일치 1).
+
+### 실측 대조 결과 (전건 일치 — 날조 없음)
+- **PRBKYPR 캡처(`captures/product_PRBKYPR.json`) 풀 실측 일치:** 표지/내지 분리(`pdt_mtrl_info` RXART300 vs `inner_pdt_mtrl_info` RXYWM080/100·RXPLW080/100 윤전전용지) · `inner_pdt_dosu_info`=SID_D 양면(NOTE "책자 내지 인쇄색도") · INN_MAX_WGT=130/COV_MIN_WGT=150 · INN_PAGE(MIN 10/MAX 300/STEP 1/DFT 30)·PRN(MIN 30/INC 10) · 면지 END_PAP 10색(노랑~회색 + NOTICE "내지 시작 전/후 컬러 양면인쇄 면지 삽입") · BIND_DIRECTION(BPLFT 좌철/BPTOP 상철 ESN=Y) · CVR_SWN 날개·CVR_SFT 소프트·SCO_DFT 부분UV(NOTICE "에디터 주문 불가") · disable 24건(RXOMO080 7건/RXOMO100 9건/RXPL* 각2건) · skinInfo quantityGroup={"orderCnt":"수량","printCnt":"내지장수"} · useKoiEditor=Y/usePDF=Y. **전부 캡처에 리터럴 실재.**
+- **가격 8조합(`price-engine-reversed.md`) 일치:** Δ1,120/page(라인125 "+1,120/page"·라인128 "1,115~1,120원") · 56,000/420,900/89,500 · CVR_CLR_CNT/INN_CLR_CNT 독립입력 · book2025_price. 수치 날조 0.
+- **PRPOXXX 포스터(`s3_PRPOXXX.json` productInfo[0]) 일치:** pdt_mtrl_info=**45** · FLD_DFT **7종 정확**(2단/3단/4단/대문/반대문/4단 병풍/N모양 — 캡처와 리터럴 일치) · 사이즈 6종(A2 420×594 DFT=Y/A3/A4/B3(4절)364×515/B4(8절)257×364/직접입력 100×150~) · digital_price·digital_item·NO_STD_ABL_YN=N·PDT_UNIT=장·useKoiEditor=N/usePDF=Y. 가격 PRICE=0(비로그인) 정직 기록.
+- **badge 정직성:** `[live:SSR-negative]`(PRLFXXX Vue client-render·옵션 미노출)는 정직한 "검증불가"로, 접지축을 동형 포스터 실측으로 보강·리플렛 강제여부는 unobserved 처리 — 날조를 가린 흔적 없음. unobserved 53건 모두 catalog 상품명만 보유분에 정직 부착.
+- **catalog 56 PR-prefix 코드** 라이브 실재 확인(`redprinting_catalog.json` PR##### 56개). 인용 코드 전건 실재.
+
+### D-6 (Low) — 포스터 후가공 "11그룹" vs 실측 9그룹 내부 불일치 [M1 → rpm-reverse-engineer]
+- **위치:** `categories/PR/reverse.md:210`·`:316` "풍부한 후가공(11그룹)"·"후가공11그룹".
+- **결함:** `s3_PRPOXXX.json` productInfo[0] `pdt_pcs_info`의 distinct PCS_CD = **9그룹**(CUT/COT/FLD/HOL/LAM/MIS/OSI/SCO/THO_GRA). §3 본문 축 나열도 정확히 9개. 요약 prose만 "11그룹"으로 과대 표기.
+- **심각도:** Low — 날조 아님(개별 축은 전부 실측 일치). 요약 수치만 +2 부풀림.
+- **조치:** "11그룹" → "9그룹"으로 정정(본문 9축과 일치).
+
+### D-7 (Low/Medium) — 전수추적 누락: PRSHTAG 미추적 [M1 → rpm-reverse-engineer]
+- **위치:** `categories/PR/reverse.md` 전체(§4 그룹표·§331 미샘플 목록). PR##### 토큰 55종만 등장.
+- **결함:** catalog PR-prefix 56종 중 **PRSHTAG("다양한 모양택")가 reverse.md 어디에도 미추적**. 반면 §4-C(라인258)에 **TPRNBND(TP접두·catalog category=GS·"링바인더")를 PR 책자군에 편입** — 결과적으로 "56상품 전수" 충족이 비-PR 코드 1개 대입 + PR 코드 1개 누락으로 성립. (TPRNBND는 URL이 `/item/PR/`이라 PR 경로 편입은 근거 있음·정직히 "코드=TP접두" 표기. 그러나 PRSHTAG 누락은 미보정.)
+- **심각도:** Low~Medium — "전수 추적성" directive 대비 1상품 누락. 단 PRSHTAG는 catalog `category=ET`(URL `/item/ET/PRSHTAG`)로 진짜 PR 카테고리 소속이 아닐 수 있어(코드 prefix만 PR) 메타모델 영향은 경미.
+- **조치:** PRSHTAG를 §4 카드/모양엽서군에 1행 추가(또는 "PR-prefix이나 ET 카테고리·범위 외" 명시)하여 56 전수 닫기. "56상품" 정의(코드 prefix vs catalog category)를 출처규칙에 명시 권장.
+
+### PR-M1 종합
+- **GO 근거:** 핵심 2 풀캡처(PRBKYPR/PRPOXXX) + 가격 8조합 + catalog 인용 전건 라인/필드 실측 일치. **단일 날조 0.** badge·unobserved 정직.
+- **CONDITIONAL 사유:** D-7(PRSHTAG 전수추적 1누락) + D-6(11→9 수치 불일치). 둘 다 Low·판정 무영향·문서 정합. 보정 시 GO.
+
+---
+
+## PR 카테고리 M2~M6 결함 (라이브 재실측 2026-06-17)
+
+> M2~M6 전건 GO. 결함 1건(Low·판정 무영향). 라우팅 = gap-analyst.
+
+### D-PR-1 (Low) — 평량 컬럼 표기 부정확 → gap-analyst
+- **위치:** `03_gap/gap-matrix.md §XI-0` 표 마지막 행 "product_materials 평량 min/max 컬럼 / COV_MIN_WGT/INN_MAX_WGT 대응 `wgt/weight/min/max` 컬럼 **0건**".
+- **결함:** 라이브 재실측 결과 `t_mat_materials.weight` **컬럼 실재**(+`max_sel_cnt`). "`weight` 컬럼 0건"은 거짓 — `weight`는 존재한다(자재 단일 평량값).
+- **단, 판정 무영향:** 실재하는 `weight`는 *자재 1행의 평량값*이지 RP `COV_MIN_WGT=150/INN_MAX_WGT=130` 같은 *표지/내지 플랫폼 제약 min/max 쌍*이 아니다. 정확한 표기 = "**평량 제약 min/max 쌍 컬럼 0건**". XI-3 결론(평량제약=제약#5 WEAK 흡수·별 vessel 불요) 그대로 정당 — `weight`는 자재 facet(분해축)이지 제약쌍 그릇이 아니므로 갭 판정 불변.
+- **심각도:** Low — 단어 정밀도 결함. 판정(PASS/WEAK/GAP 6항·vessel mint 0) 무영향.
+- **조치:** §XI-0 표를 "`weight`(자재 단일평량)는 실재하나 COV_MIN/INN_MAX *제약쌍* 컬럼 0건"으로 1줄 정정. 검증 무차단.
+
+### PR-M2~M6 종합
+- **GO 근거:** M2(16축 보존·distinct 0 도출·ERD 무모순) · M3(facet 9 역검·P-2 라이브 robust) · M4(facet 6항 PASS4/WEAK1/GAP1 전건 라이브 일치) · M5(search-before-mint 라이브 입증·mint 0 정당) · M6(deepcheck 20후보 채택0·17축 0 유입·H-1 독립 dodge-hunt 깨기 실패). **NO-GO 0·차단 0.**
+- **유일 결함:** D-PR-1(평량 컬럼 표기·Low·무영향). 보정 권장이나 재게이트 불요.

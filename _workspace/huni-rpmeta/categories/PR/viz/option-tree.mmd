@@ -1,0 +1,36 @@
+%% PR 옵션-구성 트리 — 출처: categories/PR/reverse.md §0~3·§4
+%% 대표상품 PRBKYPR(윤전 무선책자) 옵션 트리 + 평면지류(리플렛/포스터) 접지 별 브랜치.
+%% [P]=가격기여 노드 / cover(파랑)=표지 role / inner(초록)=내지 role / 주황=제약(disable).
+flowchart TB
+  ROOT["PRBKYPR 무선책자(컬러)\nitem_gbn: book2025_item · PDT_UNIT: 권"]
+
+  ROOT --> PM["인쇄방식 분기 (윤전/토너/인디고)\npdtCode prefix 분기 [상품분기]"]
+  ROOT --> BD["제본방식 (무선PER/스프링/트윈링/스테플러/실제본)\npdtCode 분기 [공정]"]
+  ROOT --> DIR["제본방향 (BPLFT 좌철 / BPTOP 상철)\nESN_YN=Y 필수"]
+
+  ROOT --> CVR["표지 자재 [P]\npdt_mtrl_info · COV_MIN_WGT=150 이상"]
+  ROOT --> INN["내지 자재 [P]\ninner_pdt_mtrl_info · 윤전전용지 RXYWM · INN_MAX_WGT=130"]
+  ROOT --> DOSU["표지 도수 / 내지 도수 [P]\nCVR_CLR_CNT / INN_CLR_CNT 독립입력"]
+
+  ROOT --> SIZ["규격\nA4/B5/A5/크라운판/신국판 + 자유입력(MIN_CUT~MAX_CUT)"]
+  ROOT --> PAGE["페이지수 INN_PAGE [P]\n10~300 STEP1 · 수량성 차원·가격선형 Δ1,120/page"]
+  ROOT --> QTY["수량 부수 PRN_CNT [P]\n30~ · FIR1·INC10·STEP10 · 볼륨디스카운트"]
+  ROOT --> PCS["후가공\n코팅COT[P]·면지END_PAP 10색·날개커버CVR_SWN·소프트커버CVR_SFT·부분UV SCO·재단"]
+
+  CVR -.-> CON["★캐스케이드 제약 (pdt_disable_pcs_info 24건)\n저평량지(모조80g) → 코팅/접지/미싱 비활성(disable)"]
+  INN -.-> CON
+
+  %% 평면지류 별 브랜치 (리플렛/포스터 접지축 — §0.3·§1·§3)
+  ROOT2["평면지류 (리플렛 PRLFXXX / 포스터 PRPOXXX)\nitem_gbn: digital_item"]
+  ROOT2 --> FLD["접지 FLD_DFT 7종 [공정·면 분할]\n2단/3단/4단/대문/반대문/4단병풍/N모양접지"]
+  ROOT2 --> OSI["오시 OSI_DFT (접는선 누름)\n접지 동반 cascade(두꺼운 용지)"]
+  FLD -.->|동반 cascade| OSI
+
+  classDef cover fill:#cfe2ff,stroke:#0d6efd,color:#000;
+  classDef inner fill:#d4edda,stroke:#28a745,color:#000;
+  classDef con fill:#fff3cd,stroke:#d39e00,color:#000;
+  classDef plain fill:#f1f3f5,stroke:#adb5bd,color:#000;
+  class CVR cover;
+  class INN inner;
+  class CON con;
+  class ROOT2,FLD,OSI plain;

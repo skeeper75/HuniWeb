@@ -78,6 +78,13 @@
 ### C3. open decision
 1. frm_typ_cd(PricingModel 유형) 거버넌스 코드그룹 신설 여부 = 가격 트랙(round-17) 결정. vessel 위임.
 
+### C4. PR facet 보강 (v4.0 — P-6 digital_price 라우팅 흡수·신규 그릇 0)
+> PR 갭 분석(`02_metamodel/_resolved-fragments.md` P-6·`03_gap/vessel-needs.md` PR 흡수 매핑). **신규 vessel-gap 0 — PR P-6은 본 V-7(#11)의 pricing_model/frm_typ 라우팅키 결손과 동일.** 새 테이블/컬럼/V-번호 추가 없음.
+- **P-6 = 규격물(digital_price) vs 면적물(면적매트릭스) 가격엔진 분기:** 포스터(`price_gbn=digital_price`·`NO_STD_ABL_YN=N` 비규격 가능·A2/A3/A4/B3/B4 프리셋 + MIN/MAX_CUT 자유입력)와 BN 현수막(`real_price` 면적매트릭스)은 *같은 좌표 입력(CUT_WDT/HGH)·다른 가격엔진*. `price_gbn`이 가격엔진을 라우팅(pricing_model 5종: 면적형 BN / digital_price 규격자유 PR / tmpl·vTmpl·tiered GS).
+- **V-7 연결:** P-6의 `price_gbn` 라우팅키 = C1~C2에서 결손으로 본 **`frm_typ_cd`(PricingModel 유형) 라이브 부재**와 동일 갭. 같은 좌표 입력을 어느 가격엔진(원자합산 digital vs 면적 룩업)으로 보낼지를 결정하는 *유형 분류축*이 라이브에 없다(`dbmap-price-formula-audit-round17` 확정 — price_views.py 미사용).
+- **그릇 조치:** **신규 그릇 0 — 가격 트랙 위임(V-7 최하·C2 권고 불변).** frm_typ_cd 거버넌스 코드그룹이 신설되면 digital/면적/tmpl/vTmpl/tiered 라우팅을 동시 해소. 본 하네스는 그릇 mint 안 함 — `dbmap-price-formula-types-authority`(면적매트릭스형 vs 고정가형)·`dbmap-digitalprint-atomic-formula-unbuilt`(digital 원자합산형)가 권위인 **dbmap 가격 트랙(round-16/17)** 결정 사안. 사이즈#13 면(프리셋+자유 동일·가격엔진만 분기)은 B절(V-6) RULE_TYPE.05로 이미 정합.
+- **판정:** P-6(digital_price 라우팅) = WEAK → **V-7과 함께 가격 트랙 위임.** frm_typ_cd 그릇이 digital/면적 라우팅을 해소(돈 크리티컬·인간 승인).
+
 ---
 
 ## 종합 (P3 3축)
@@ -85,5 +92,6 @@
 |---|---|---|---|
 | V-5 수량 | WEAK→보류 | 신규 0(필요 시 options.tags/코드행) | 샘플 확대 후 |
 | V-6 사이즈 nonspec | WEAK→V-4 흡수 | 신규 0(RULE_TYPE.05 재사용) | 코드행(V-4 공유) |
-| V-7 가격 role | WEAK→가격 트랙 위임 | 신규 0 | 위임 |
+| V-7 가격 role (+PR P-6 digital_price) | WEAK→가격 트랙 위임 | 신규 0 | 위임 |
 > 전 3축: 신규 테이블/컬럼 mint 0. 저 leverage·후니 미관측/가격 트랙 귀속으로 vessel 신설 부적합. open decision으로 샘플/트랙 결정 대기.
+> ★PR(v4.0): P-6(규격물 digital_price vs 면적물 가격엔진 분기)은 V-7 frm_typ_cd 라우팅키 결손과 동일 → 신규 그릇 0·가격 트랙(round-16/17) 위임(C4). 신규 V-번호 없음.

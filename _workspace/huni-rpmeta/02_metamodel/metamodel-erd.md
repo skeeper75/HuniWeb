@@ -1,10 +1,11 @@
 # RedPrinting 옵션 관리 메타모델 ERD (mermaid)
 
-> rpm-metamodel-architect. **v3.0 (TP 통합):** 16 관리 축과 그 관계를 그린 ERD. 가치는 *관계*에 집중(SKILL §4).
+> rpm-metamodel-architect. **v4.0 (PR 통합):** 16 관리 축과 그 관계를 그린 ERD. 가치는 *관계*에 집중(SKILL §4).
 > 정초 = `metamodel-dictionary.md`(축 사전 16축) + `discovered-axes.md`(발굴 근거 D-1~D-11).
-> 추상 메타모델 — 후니 비종속(특정 t_* 컬럼명 아닌 패턴). RedPrinting BN(면적)+GS(완제/입체)+TP(디자인입력) 역공학 권위.
+> 추상 메타모델 — 후니 비종속(특정 t_* 컬럼명 아닌 패턴). RedPrinting BN(면적)+GS(완제/입체)+TP(디자인입력)+PR(다면/제본/접지) 역공학 권위.
 > **GS 반영:** 생산형태(#15 governing) · 본체 형태가공(#14) · 완제 본체 두 표현 facet · 가격모델 4종.
-> **TP 신규 반영:** 디자인 입력 채널(#16 본체옵션과 직교·가격0) · 템플릿 자산(에디터 디자인 시안·#4 완제SKU와 별 엔티티 분리) · 입력채널→수량(디자인수 게이팅).
+> **TP 반영:** 디자인 입력 채널(#16 본체옵션과 직교·가격0) · 템플릿 자산(에디터 디자인 시안·#4 완제SKU와 별 엔티티 분리) · 입력채널→수량(디자인수 게이팅).
+> **PR 신규 반영(distinct 신축 0·기존 관계/속성 강화):** ① 자재 usage_cd "역할 전파"(표지/내지 → 자재·도수·가격·평량 role-paired) · ② 인쇄방식 → Material pool 게이팅 간선(P-7 윤전→YWM) · ③ 공정 접지(folding) family + 접지↔오시 cascade(P-1) · ④ PAGE_RULE 엔티티(INN_PAGE 내지 페이지·P-3) · ⑤ 가격 digital_price 라우팅(같은 좌표·다른 엔진·P-6) · ⑥ book2025 표지/내지 분리 가격(P-2). **★PR 새 *관리 축* 0 — 16축 포화. ERD는 새 *축* 노드 0·PAGE_RULE 보조 엔티티 1개(수량#10 종속) + 관계 간선 강화(usage 전파·자재풀 게이팅·접지 cascade)만.**
 
 ---
 
@@ -60,7 +61,12 @@ erDiagram
 
     PRINT_METHOD ||--o{ PROCESS_MEMBER : "gates(가능공정 부분집합)"
     PRINT_METHOD }o--o| MATERIAL : "자재 facet 인코딩(수성/라텍스)"
+    PRINT_METHOD ||--o{ MATERIAL : "gates 자재풀(PR P-7 윤전→YWM pool)"
     PRINT_METHOD }o..o| DESIGN_INPUT_CHANNEL : "상관(offset↔에디터0·결정아님)"
+
+    MATERIAL ||--o{ MATERIAL : "usage_cd 역할 전파(PR P-2 표지.02/내지.01/면지.03)"
+    QUANTITY_SLOT ||--o| PAGE_RULE : "내지 페이지 슬롯(PR P-3 INN_PAGE)"
+    PROCESS_MEMBER ||--o{ PROCESS_MEMBER : "접지→오시 cascade(PR P-1 folding↔crease)"
 
     DESIGN_INPUT_CHANNEL ||--o{ TEMPLATE_ASSET : "provides 디자인 시안(≠완제SKU)"
     DESIGN_INPUT_CHANNEL ||--o{ QUANTITY_SLOT : "gates 디자인수(ORD_CNT 산정출처)"
@@ -84,9 +90,11 @@ erDiagram
         code ptt_cd "소재"
         code clr_cd "본체색(별색 아님)"
         code wgt_cd "무게/두께(GS 장패드 4T)"
-        enum usage_cd "내지/표지/면지/공통(GS 다중슬롯✅)"
+        enum usage_cd "내지/표지/면지/공통(GS다중슬롯✅·PR역할전파→도수/가격/평량)"
         bool sub_mtrl_yn "부자재"
         enum body_repr "BN자재행 / GS DIR_MTR완제SKU항목"
+        code print_method_pool "PR P-7 인쇄방식 종속(윤전→YWM전용지)"
+        int weight_role_min_max "PR P-2 표지COV_MIN150/내지INN_MAX130"
         tag price_flag "면적단가키"
     }
     PRODUCTION_TYPE {
@@ -119,8 +127,14 @@ erDiagram
         enum size_variant
     }
     QUANTITY_SLOT {
-        enum slot_type "건수ORD/수량PRN/묶음/공정종속"
+        enum slot_type "건수ORD/수량PRN/묶음/공정종속/내지페이지(PR)"
         tag price_role "곱수/선형"
+    }
+    PAGE_RULE {
+        int page_min "PR P-3 책자10/캘린더2"
+        int page_max "책자300/캘린더200"
+        int page_incr "STEP1"
+        enum meaning "책자=대수페이지 / 캘린더=월수(TP T-C 합류)"
     }
     SIZE_PRESET {
         text div_nm "프리셋"
@@ -138,14 +152,15 @@ erDiagram
         enum direction "force=+/disable=-"
     }
     PRINT_METHOD {
-        enum method_cd "디지털/실사/UV/옵셋/실크"
+        enum method_cd "디지털/실사/UV/옵셋/실크 +PR(윤전/토너/인디고/리소)"
         text allowed_processes "가능공정집합"
+        text allowed_material_pool "PR P-7 가능 자재 부분집합(윤전→YWM)"
         text file_formats
         text team
     }
     PRICING_MODEL {
-        enum model "면적SizeMatrix2D(BN) / tmpl개당가 / vTmpl variant / tiered구간(GS)"
-        code price_gbn "라우팅키(완제본체 유무)"
+        enum model "면적SizeMatrix2D(BN) / tmpl / vTmpl / tiered(GS) / digital원자합산(PR) / book2025표지내지분리(PR)"
+        code price_gbn "라우팅키(완제본체 유무·digital vs 면적: 같은좌표 다른엔진)"
     }
     CATEGORY {
         code cat_cd
@@ -314,4 +329,9 @@ flowchart TD
 - **가격은 price_gbn 라우팅(GS)** — 면적형(BN)·tmpl·vTmpl·tiered 4종. 완제본체 유무가 분기 단서.
 - **★디자인 입력 채널(#16·TP)은 직교 레인** — KOI/Edicus/PDF 에디터 채널이 본체 옵션과 분리(가격 0). 비-TP 트윈(HLCLSTD)과 본체/가격 동일·입력채널만 차이. 디자인수(ORD_CNT)만 수량으로 게이팅, 템플릿 자산(디자인 시안) 노출. 후니 위젯 Edicus 어댑터 통합 경계와 정합(huni-widget RedEditorSDK 계약).
 - **★템플릿 두 의미 분리(TP·T-A)** — 완제SKU 번들(#4 `t_prd_templates`) vs 에디터 디자인 시안(TemplateAsset·#16 종속·가격0). 같은 단어 다른 의미·별 엔티티. 후니 매핑 시 디자인 시안을 완제SKU에 적재 금지.
-- **3 상품군 미관측(갱신): 카테고리 트리 깊이·template_selections·vTmpl 분기조건 + TP 템플릿 자산 카탈로그·VDP 변수 스키마·티켓 넘버링(VDP vs 공정)·INN_PAGE↔가격 결합** — 책자/문구 reuse + 로그인 에디터 캡처로 보강 필요(discovered-axes 갭).
+- **★usage_cd는 전파되는 역할이다(PR·P-2)** — 표지/내지(usage.02/.01)가 자재(#1)→도수(#6)→가격(#11 F_CVR/K_INN)→평량제약(#5)으로 role-paired 전파. RP `inner_pdt_*` 평행 스키마=usage 슬롯 물리구현. 별 "역할 축" 아닌 usage_cd 차원의 전파(침묵선택 거부 후 facet 격상).
+- **★접지(folding)는 면가공 family·면수=파생값(PR·P-1)** — FLD_DFT 7종이 평면 종이 N면 분할(2단=4면), 면수는 접지방식에서 *계산*(축 아님). 공정#2 family + 접지방식 파라미터(#9) + 접지→오시 cascade(#5). BN/GS/TP 미발굴.
+- **★인쇄방식이 자재풀도 게이팅(PR·P-7)** — 윤전→YWM 전용지 pool. D-7이 가능 공정뿐 아니라 가능 자재 부분집합도 게이팅(새 관계 간선). 토너/인디고 자재풀은 unobserved.
+- **★가격 digital_price 라우팅(PR·P-6)** — 같은 좌표(CUT_WDT/HGH) 입력이 포스터=digital원자합산·BN=면적매트릭스로 분기. pricing_model 6종(면적/digital/tmpl/vTmpl/tiered/book2025). book2025=표지/내지 분리 가격(usage_cd 전파의 가격판).
+- **★PR distinct 신축 0 = 16축 포화** — 4번째 카테고리(다면/제본/접지)가 새 *축/엔티티* 0 도입(PAGE_RULE는 #10 수량 보조 엔티티). 9 fragment 전부 기존 축 facet/family/cascade. 모델이 RedPrinting 카탈로그 shape를 견딤(강한 검증).
+- **4 상품군 미관측(갱신): 카테고리 트리 깊이·template_selections·vTmpl 분기조건 + TP 템플릿 자산 카탈로그·VDP 변수 스키마·티켓 넘버링(VDP vs 공정)·INN_PAGE↔가격 결합 + PR 토너/인디고/리소 자재풀(P-7)·리플렛 접지강제·면수 cascade(P-1)·스코딕스 패턴/박색/칼틀값(P-9)** — 책자/문구 reuse + 로그인 에디터/책자 캡처로 보강 필요(discovered-axes 갭).

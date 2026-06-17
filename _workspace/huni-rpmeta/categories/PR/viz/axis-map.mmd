@@ -1,0 +1,65 @@
+%% PR 메타모델 16축 매핑 — 출처: 02_metamodel/_resolved-fragments.md (PR 판정 v4.0 · P-1~P-9)
+%% ★PR 핵심: distinct 신축 0건. 9 fragment 전부 기존 16축의 facet/family/cascade/정책으로 흡수 = 16축 포화 입증.
+%% 초록=PR이 강화(facet) / 회색=PR 미행사 / 보라=신축(여기선 0).
+flowchart TB
+  subgraph STATIC["7 정적 축"]
+    A1["#1 자재 (Material)\nPR: usage_cd 역할전파 cover/inner 슬롯 (P-2) ✅"]
+    A2["#2 공정 (Process)\nPR: 접지 family+접지↔오시 cascade·면지삽입·스코딕스/레이저커팅 멤버 (P-1·P-5·P-9) ✅"]
+    A3["#3 옵션 (Option)\nPR: 행사 ✅"]
+    A4["#4 템플릿/SKU\nPR: 미강화 ✖"]
+    A5["#5 제약 (Constraint)\nPR: 접지↔오시 cascade·평량제약·disable 24건 (P-1) ✅"]
+    A6["#6 기초코드 (Enum)\nPR: 도수 표지/내지 2-role·접지방식 enum (P-2) ✅"]
+    A7["#7 카테고리 (Category)\nPR: 용도별책자 태그 (P-8) △"]
+  end
+  subgraph REL["4 관계/동역학 축"]
+    A8["#8 부속물 (Addon)\nPR: 미행사 ✖"]
+    A9["#9 공정 파라미터\nPR: 접지방식 enum 파라미터 (P-1) ✅"]
+    A10["#10 수량 모델\nPR: page_rule INN_PAGE 슬롯 (P-3) ✅"]
+  end
+  subgraph CROSS["2 횡단 축"]
+    A11["#11 가격기여 역할\nPR: digital_price 라우팅 추가·pricing_model 5종 (P-6) ✅"]
+    A12["#12 인쇄방식 레시피\nPR: 자재풀 게이팅 강화 윤전→YWM (P-7) ✅"]
+    A13["#13 사이즈 (Size)\nPR: 규격프리셋+자유범위·레이저커팅 칼틀 (P-6·P-9) ✅"]
+  end
+  subgraph PRIOR["GS 신축 2 (PR 미행사)"]
+    A14["#14 본체 형태가공 (GS)\nPR: 미행사 ✖"]
+    A15["#15 생산형태 (GS)\nPR: 미행사 ✖"]
+  end
+  subgraph TPNEW["TP 신축 1 (PR 미행사)"]
+    A16["#16 디자인 입력 채널 (TP)\nPR: 미행사 ✖"]
+  end
+
+  %% PR 9 fragment → 흡수처
+  subgraph FRAG["PR fragment 9종 (전부 facet/정책 — distinct 거부)"]
+    P1["P-1 접지(FLD_DFT) → #2 family + #9 + #5"]
+    P2["P-2 표지/내지 역할자재 → #1 usage_cd 전파"]
+    P3["P-3 INN_PAGE 페이지수 → #10 + #5 page_rule"]
+    P4["P-4 제본/인쇄방식/도수 분기 → #12·#2·#6 (정책)"]
+    P5["P-5 면지 END_PAP bundle → #1(.03)+#2"]
+    P6["P-6 규격vs면적 경계 → #11 라우팅 + #13"]
+    P7["P-7 인쇄방식 종속자재 → #12 자재풀 게이팅"]
+    P8["P-8 용도별책자 → #7 태그 (정책)"]
+    P9["P-9 스코딕스/레이저커팅 → #2 멤버 (+#13 칼틀)"]
+  end
+  P1 -.-> A2
+  P2 -.-> A1
+  P3 -.-> A10
+  P4 -.-> A12
+  P5 -.-> A1
+  P6 -.-> A11
+  P7 -.-> A12
+  P8 -.-> A7
+  P9 -.-> A2
+
+  BANNER["★PR distinct 신축 = 0건 — 9 fragment(P-1~P-9) 전부 기존 16축 facet/family/cascade/정책 흡수\n= 16축 모델 포화(saturation) 입증 (4번째 카테고리가 새 관리축 0 도입 = 강한 검증 신호)"]
+
+  classDef on fill:#d4edda,stroke:#28a745,color:#000;
+  classDef partial fill:#fff3cd,stroke:#d39e00,color:#000;
+  classDef off fill:#f1f3f5,stroke:#adb5bd,color:#666;
+  classDef frag fill:#fde2e4,stroke:#c9184a,color:#000;
+  classDef banner fill:#e2e3f3,stroke:#6f42c1,color:#000;
+  class A1,A2,A3,A5,A6,A9,A10,A11,A12,A13 on;
+  class A7 partial;
+  class A4,A8,A14,A15,A16 off;
+  class P1,P2,P3,P4,P5,P6,P7,P8,P9 frag;
+  class BANNER banner;

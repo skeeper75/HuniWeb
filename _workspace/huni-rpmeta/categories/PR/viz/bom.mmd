@@ -1,0 +1,47 @@
+%% PR 책자(PRBKYPR) BOM — 출처: categories/PR/reverse.md §0.1·§2·§5 + 02_metamodel P-2·P-5
+%% 표지/내지/면지 역할 분리 BOM (자재+공정 bundle). cover(파랑)/inner(초록)/면지(주황 bundle)/제본(회색).
+flowchart TB
+  ROOT["PRBKYPR 무선책자 BOM\nbook2025_price (cover/inner 분리 산정)"]
+
+  ROOT --> COVER
+  ROOT --> INNER
+  ROOT --> ENDP
+  ROOT --> BIND
+
+  subgraph COVER["표지 COVER role — usage_cd .02"]
+    C1["자재: pdt_mtrl_info 아트지300g 등 (COV_MIN_WGT=150↑)"]
+    C2["도수: pdt_dosu_info CVR_CLR_CNT (단면4/양면8)"]
+    C3["공정: 코팅COT(무광/유광/엠보)·날개CVR_SWN·소프트커버CVR_SFT·부분UV SCO·재단"]
+    C4["가격단가축: F_CVR_MTRL_AMT · G_CVR_PRINT_AMT"]
+  end
+
+  subgraph INNER["내지 INNER role — usage_cd .01"]
+    I1["자재: inner_pdt_mtrl_info 윤전전용백색모조80g RXYWM (INN_MAX_WGT=130↓·인쇄방식종속)"]
+    I2["도수: inner_pdt_dosu_info INN_CLR_CNT (양면)"]
+    I3["페이지: INN_PAGE 10~300 STEP1 (page_rule)"]
+    I4["가격단가축: K_INN_MTRL_AMT · L_INN_PRINT_AMT"]
+  end
+
+  subgraph ENDP["면지 ENDPAPER role — usage_cd .03 · ★자재+공정 BUNDLE"]
+    E1["자재(컬러지): END_PAP 10색 (노랑/민트/화이트/보라/분홍/살구/연두/파랑/하늘/회색)\n= MAT_000001~004 화이트/블랙/그레이/인쇄면지"]
+    E2["공정(삽입): 면지 삽입 가공"]
+  end
+
+  subgraph BIND["제본 BINDING — 공통"]
+    B1["제본방식: 무선PER_DFT(좌철) + 제본방향 BPLFT/BPTOP (ESN 필수)"]
+    B2["공정: PROC_000017~025 · 가격: COMP_BIND_* (BIND_AMT)"]
+  end
+
+  PRICE["가격모델 book2025_price\ncover/inner 분리 산정 + 페이지 선형가산(Δ1,120/page) + 수량 볼륨디스카운트\n실측 q30_p10=56,000원 ~ q300_p10=420,900원"]
+  ROOT --> PRICE
+
+  classDef cover fill:#cfe2ff,stroke:#0d6efd,color:#000;
+  classDef inner fill:#d4edda,stroke:#28a745,color:#000;
+  classDef endp fill:#fff3cd,stroke:#d39e00,color:#000;
+  classDef bind fill:#f1f3f5,stroke:#adb5bd,color:#000;
+  classDef price fill:#e2e3f3,stroke:#6f42c1,color:#000;
+  class C1,C2,C3,C4 cover;
+  class I1,I2,I3,I4 inner;
+  class E1,E2 endp;
+  class B1,B2 bind;
+  class PRICE price;

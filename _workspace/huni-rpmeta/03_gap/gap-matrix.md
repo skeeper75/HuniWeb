@@ -8,7 +8,8 @@
 > **── 버전 ──**
 > - **v1.0 (BN, 13축):** 현수막류 메타모델(13축) 대조. PASS 5·WEAK 6·GAP 2. (§I~III·종합 = BN, **보존**.)
 > - **v2.0 (GS 통합):** 메타모델 15축(v2.0)으로 확장 + GS 신축 2(#14 본체형태가공·#15 생산형태) + GS facet 라이브 정밀 실측. BN 13축 판정은 **보존**(GS 실측이 일부 BN 판정 정정 = §VI에 명기). GS 추가 = **§IV(굿즈 본체자재 상세)·§V(GS 신축 #14·#15)·§VI(BN 판정 GS 정정)**.
-> - **v3.0 (TP 통합·현재):** 메타모델 16축(v3.0)으로 확장 + TP 신축 1(#16 디자인 입력 채널) + TP facet 5종(T-A~T-E). BN·GS 판정 **보존**. TP 추가 = **§VIII(#16 디자인 입력 채널 — vessel-gap 1순위)·§IX(TP facet 판정)·§X(TP 종합 카운트)**. 라이브 information_schema 정밀 실측(2026-06-17·read-only)으로 #16 그릇 부재 확정.
+> - **v3.0 (TP 통합):** 메타모델 16축(v3.0)으로 확장 + TP 신축 1(#16 디자인 입력 채널) + TP facet 5종(T-A~T-E). BN·GS 판정 **보존**. TP 추가 = **§VIII(#16 디자인 입력 채널 — vessel-gap 1순위)·§IX(TP facet 판정)·§X(TP 종합 카운트)**. 라이브 information_schema 정밀 실측(2026-06-17·read-only)으로 #16 그릇 부재 확정.
+> - **v4.0 (PR 통합·현재):** PR(인쇄물·책자·리플렛·포스터)이 발굴한 **distinct 신축 0건 + facet 강화 9건(P-1~P-9)**. 따라서 PR 갭의 핵심 = "새 축 그릇 부재"가 아니라 **PR이 강화한 기존 축의 facet들을 후니가 같은 표현력으로 담는가**. **신규 축 카운트 변동 0** — 16축 유지. PR 추가 = **§XI(PR facet 6항 PASS/WEAK/GAP·라이브 2026-06-17 실측)**. BN·GS·TP 판정 **보존**. **★실측 핵심: PR facet 6건 중 PASS 4 (cover/inner usage·접지/제본 공정·page_rules 엔티티·면지 bundle)·WEAK 1 (digital_price 라우팅)·GAP 1 (인쇄방식 자재풀 게이팅) — distinct 신축이 없으니 신규 vessel-gap도 0(전부 기존 §I~III 축 판정에 흡수·인쇄방식 게이팅은 기존 #12 GAP과 동일).**
 >
 > **GS 라이브 실측 핵심(2026-06-17 read-only):** 굿즈 본체자재는 **vessel-gap(분해축 컬럼 부재) + 부분 data-fix 혼재** — 자세히 §IV. 형태가공(#14)=GAP(봉제만). 생산형태(#15)=WEAK(prd_typ_cd≠생산형태). usage 다중슬롯=PASS(USAGE.01~07 적재). 가격모델 4종=vessel 대부분 존재(template_prices unit_price)·data-gap.
 
@@ -325,3 +326,59 @@
 - **TP가 BN/GS 정정 안 함:** TP는 본체와 직교한 *신축*이라 기존 BN/GS 판정 불변(보존). T-C 페이지계층은 기존 page_rules로 PASS·신규 갭 아님.
 
 > 모든 판정 양쪽 증거 보유(메타모델 항목 + 후니 t_* 라이브 실측). 라이브 information_schema 직접 SELECT(2026-06-17·read-only) — `provisional(snapshot)` 불필요. **TP 신규 vessel-gap = #16 1건(+T-A/T-B 종속)·dbmap 갭과 비충돌.**
+
+---
+
+## XI. ★PR facet 갭 판정 — distinct 0·facet 강화 6항 (라이브 2026-06-17 실측·v4.0)
+
+> PR이 발굴한 P-1~P-9는 **전부 facet(distinct 신축 0)** → 갭의 핵심 = "PR이 강화한 기존 축 facet들을 후니가 같은 표현력으로 담는가". 입력 directive 6항을 라이브 information_schema 직접 SELECT(read-only)로 판별. **신규 축 없음 = 신규 vessel-gap 없음**(전부 기존 §I~III 축 판정에 매핑·중복 계상 안 함).
+
+### XI-0. 라이브 실측 결과 (psql read-only 2026-06-17 — PR facet 6항 직접 조회)
+
+| 측정 | 라이브 결과 | facet |
+|---|---|---|
+| **USAGE base_codes** | `.01 내지·.02 표지·.03 면지·.04 간지·.05 투명커버·.06 표지타입·.07 공통` (7종) | P-2 표지/내지 |
+| **product_materials usage_cd 분포** | `.01 내지=49·.02 표지=67·.03 면지=15·.05 투명커버=2·.07 공통=639` | P-2·P-5 — **표지/내지/면지 슬롯 실적재** |
+| **접지/제본 공정 행** | 접지 19행(`PROC_000056 접지`·057~074 가로/세로/2~8단/병풍/롤/오시접지/미싱접지) + 오시(`PROC_000029`·`PROC_000090`) + 제본 9행(`PROC_000017~025` 중철/무선/PUR/트윈링/떡/하드커버무선·트윈링/레이플랫) | P-1 접지·P-4 제본 |
+| **page_rules 엔티티** | 컬럼 = `prd_cd·page_min·page_max·page_incr·note·reg_dt·upd_dt` (11행 적재) | P-3 페이지수 |
+| **price_components 제본비** | `COMP_BIND_MUSEON/JUNGCHEOL/PUR/TWINRING/SSABARI/HC_MUSEON/HC_TWINRING/CAL_*`(11행·`PRICE_TYPE.01` 단가) | P-4·P-5 가격 |
+| **면지 자재 행** | USAGE.03 → `MAT_000001 화이트면지·002 블랙면지·003 그레이면지·004 인쇄면지`(PRD_000072/077/082 등 링크) | P-5 면지 bundle |
+| **print-method/pricing_model 게이팅 컬럼** | `print_method`/`prn_mtd`/`allowed`/`pool`/`price_gbn`/`item_gbn`/`pricing_model` 전역 검색 **0건** | P-6·P-7 |
+| **price_formulas frm_typ 컬럼** | `frm_cd·frm_nm·note·use_yn` — **frm_typ/model 컬럼 부재**(round-17 확증) | P-6 digital_price 라우팅 |
+| **자재 평량 컬럼** | `t_mat_materials.weight`(numeric) **실재** — 단 자재 *단일 평량값*이지 RP `COV_MIN_WGT`(표지 최소)/`INN_MAX_WGT`(내지 최대) **제약쌍(min/max) 부재** | P-2 평량제약 |
+
+### XI-1. PR facet 6항 판정 (입력 directive 1~6)
+
+| # | PR facet (입력 directive) | 귀속 축(메타모델) | 판정 | 후니 t_* 실측 근거 | dbmap 교차 |
+|---|---|---|:---:|---|---|
+| **1** | **표지/내지 역할 슬롯 (usage_cd 자재 슬롯) + cover/inner 단가축 분리** | 자재#1 usage_cd (§I-1) | **PASS** ✅ | `USAGE.01 내지/.02 표지/.03 면지` enum 실재 + `t_prd_product_materials.usage_cd`로 표지(67)·내지(49) **실적재**. cover/inner 단가는 `t_prc_price_components`가 `comp_cd` 단위로 분리(제본비 11행=방식별 별 comp_cd가 그 증거 — 표지인쇄비/내지인쇄비도 동일 패턴으로 별 comp_cd) + `use_dims` jsonb. RP `inner_pdt_*` 평행 스키마 = usage 슬롯의 후니판 구현. | `entity-semantic-model:23` USAGE 7종·`:118` parent+usage_cd 권위 |
+| **2** | **접지 공정 family + 접지↔오시 cascade + 면 분할 파생** | 공정#2 (§I-2) | **PASS** ✅ | 접지 19행(2~8단·병풍·롤·오시접지·미싱접지)·오시 2행 **공정 행 실재**. 면수(2단=4면)는 접지방식 파생값(DB 미저장·판걸이수 동형 정상). 접지↔오시 cascade는 제약#5(WEAK)로 표현. | round-22 ⑤공정·`dbmap-compute-in-app-db-stores-lookup`(파생값 앱계산) |
+| **3** | **page_rule 엔티티 (INN_PAGE min/max/incr)** | 수량#10 + 제약#5 (§IX-B T-C) | **PASS** ✅ | `t_prd_product_page_rules` 컬럼 = `page_min·page_max·page_incr` — **메타모델 정밀 매핑 주장 라이브 확증**(INN_PAGE→page_rule 1:1). 11행 적재(TP 캘린더+PR 책자 공유 슬롯). breadth는 data-gap. | `entity-semantic-model:29` page_rule 엔티티·TP T-C 합류 |
+| **4** | **인쇄방식 자재풀 게이팅 (윤전→YWM pool 등)** | 인쇄방식#12 → 자재#1 게이팅 (§III-12) | **GAP** ❌ | 인쇄방식이 **공정/자재/컬럼 어디에도 1급 그릇 없음** — `print_method`/`prn_mtd`/`allowed`/`pool` 컬럼 전역 0건. 윤전→YWM 자재풀 부분집합 게이팅(가능 자재 제약)을 표현할 PrintMethod 엔티티·allowed_material 관계 부재. **기존 #12 GAP과 동일**(신규 아님·P-7이 자재풀 게이팅 면을 *강화*했을 뿐). | §III-12·`dbmap-print-method-not-absolute-axis` |
+| **5** | **digital_price 라우팅 (규격물 vs 면적물 가격엔진 분기)** | 가격#11 pricing_model 라우팅 (§III-11) | **WEAK** 🟡 | 가격 사슬(`price_formulas` 17·`component_prices` 3,416)은 PASS급이나 **pricing_model/frm_typ 라우팅 컬럼 부재**(`price_formulas`에 frm_typ/model 컬럼 없음·`price_gbn`/`item_gbn` 전역 0건). digital_price(규격/자유) vs 면적매트릭스 분기를 1급 라우팅키로 못 가짐 → 상품군별 암묵/앱 분기. **기존 #11 WEAK(frm_typ_cd 라이브 부재·round-17)과 동일.** | §III-11·`dbmap-price-formula-audit-round17`(frm_typ_cd 부재) |
+| **6** | **제본 가공 BUNDLE (면지=자재+공정)** | 자재#1(usage.03)+공정#2 (§I-1·§I-2) | **PASS** ✅ | 면지 = `USAGE.03` 자재 행(MAT_000001~004 화이트/블랙/그레이/인쇄면지·실링크) + 제본/삽입 = 공정#2(`PROC_000017~025`) + 가격 = `COMP_BIND_*` 제본비 component. GS 제본 bundle(링=자재+꿰기=공정)·아일렛 동형 — **자재+공정 BUNDLE 패턴 무손실 표현**. | `entity-semantic-model:23` USAGE.03 면지·`dbmap-option-material-process-bundle` |
+
+> **★결론(입력 6항 직답):** PR facet 6건 = **PASS 4 (#1·#2·#3·#6) · WEAK 1 (#5) · GAP 1 (#4)**. ① **표지/내지 역할 슬롯**(P-2)·**접지/제본 공정**(P-1·P-4)·**page_rule 엔티티**(P-3)·**면지 bundle**(P-5) = 후니가 **이미 같은 표현력 보유**(USAGE enum·접지 19행·page_min/max/incr·면지 자재행 전부 라이브 실재·일부 실적재). ② **digital_price 라우팅**(P-6) = `pricing_model`/`frm_typ` 라우팅키 부재 = **기존 #11 WEAK과 동일**(신규 아님). ③ **인쇄방식 자재풀 게이팅**(P-7) = PrintMethod 1급 그릇 부재 = **기존 #12 GAP과 동일**(신규 아님). **★핵심: PR이 distinct 신축 0이므로 신규 vessel-gap도 0 — WEAK/GAP 2건은 전부 기존 BN 판정(#11·#12)에 이미 잡힌 것을 PR facet이 재확인. PR이 더한 것은 새 그릇 수요가 아니라 *기존 그릇이 PR facet을 견딘다는 검증 신호*(PASS 4건이 16축 포화 입증).**
+
+### XI-2. cover/inner 단가 분리 — 미묘점 (PASS 단서 + data-gap)
+
+표지/내지 인쇄비 *분리*(RP F_CVR vs K_INN)는 후니 `price_components.comp_cd` 단위 분리로 표현 가능(제본비가 방식별 11 comp_cd로 분리된 것이 동형 증거). **단 라이브에 표지인쇄비/내지인쇄비 명명 component 행은 아직 없음**(book2025 책자 가격이 미적재·`COMP_BIND_*` 제본비만 적재) → **vessel은 PASS(comp_cd 무한 분리 가능·use_dims jsonb), 책자 cover/inner 인쇄비 행은 data-gap**(dbmap 가격 트랙·`_data-gaps-noted.md` §2 가격 사슬). vessel 신설 불요.
+
+### XI-3. 평량 제약 (COV_MIN_WGT/INN_MAX_WGT) — 미묘점 (제약#5 WEAK 흡수)
+
+RP의 "표지 최소평량 150·내지 최대평량 130" platform-weight 제약은 후니 `t_mat_materials.weight`(단일 평량값) 컬럼은 **실재**하나 **표지 최소/내지 최대를 한 상품에 거는 제약쌍(min/max)을 담을 그릇은 부재** → 현재 앱/암묵 또는 제약 룰로 표현해야. **별 vessel 아님 — 제약 축#5 WEAK(match/min-max 유형 미거버넌스)에 흡수**(V-4 RULE_TYPE 확장 시 같이 해소·코드행 경량). 단일 vessel 신설 불요.
+
+---
+
+## XII. v4.0 종합 카운트 (PR 통합 — 신규 축 0·카운트 불변)
+
+| 판정 | 개수 | 축 | PR 영향 |
+|---|---:|---|---|
+| **PASS** | 5 | ②공정 · ③옵션 · ⑥기초코드 · ⑦카테고리 · ⑧부속물 (+ ①usage·④template_prices·⑬nonspec·T-C page_rules·T-E 특수인쇄 = PASS 측면) | **PR facet 4건이 PASS 측면 강화**(usage 표지/내지·접지/제본 공정·page_rules·면지 bundle) — 16축 포화 입증 |
+| **WEAK** | 8 | ①자재(분해축) · ④템플릿 · ⑤제약 · ⑩수량모델 · ⑪가격기여역할 · ⑬사이즈 · #15 생산형태 · T-A 템플릿 자산 | **PR P-6(digital_price)이 ⑪에 재확인**·평량제약이 ⑤에 흡수 — 신규 WEAK 0 |
+| **GAP** | 4 | ⑨공정파라미터 · ⑫인쇄방식레시피 · #14 본체형태가공 · #16 디자인 입력 채널 | **PR P-7(자재풀 게이팅)이 ⑫에 재확인**(인쇄방식 게이팅이 자재풀까지 확장) — 신규 GAP 0 |
+
+- **PR 판정 요지:** distinct 신축 0 → **신규 PASS/WEAK/GAP 축 0**. PR facet 6항 = PASS 4·WEAK 1(기존 ⑪)·GAP 1(기존 ⑫). PR이 한 일 = ① PASS 4건으로 기존 그릇의 PR facet 견딤 **검증**(16축 포화) ② WEAK/GAP 2건이 기존 #11·#12에 이미 잡혔음 **재확인**(중복 계상 안 함).
+- **PR이 추가하는 vessel-needs = 0건** — 전부 기존 V-항목(자재 §1·제약 V-4·가격 V-7·인쇄방식 V-2)에 흡수. PR 통합으로 vessel-needs 신규 항목 없음(BN/GS/TP V-1~V-11 불변).
+
+> 모든 판정 양쪽 증거 보유(메타모델 P-항목 + 후니 t_* 라이브 실측·2026-06-17 read-only psql 직접 SELECT). **PR distinct 신축 0 = 신규 vessel-gap 0·dbmap 갭과 비충돌·기존 판정 전부 보존.**

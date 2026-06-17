@@ -1,0 +1,27 @@
+%% PR facet 갭 히트맵 — 출처: 03_gap/gap-matrix.md §XI (PR facet 6항·라이브 2026-06-17 read-only 실측)
+%% 🟢 PASS(동등 표현력) · 🟡 WEAK(그릇있으나 미정규화) · 🔴 GAP(그릇 부재)
+%% ★PR distinct 신축 0 → 신규 vessel-gap 0. WEAK 1·GAP 1은 기존 #11·#12 재확인.
+flowchart TB
+  TITLE["PR facet 갭 히트맵 — PASS 4 / WEAK 1 / GAP 1\n(라이브 2026-06-17 information_schema 직접 SELECT)"]
+
+  F1["1) 표지/내지 역할 슬롯 (usage_cd 자재슬롯)\n귀속: 자재#1 | 🟢 PASS\n근거: USAGE.01내지/.02표지/.03면지 + product_materials 표지67·내지49 실적재"]
+  F2["2) 접지 공정 family + 접지↔오시 cascade\n귀속: 공정#2 | 🟢 PASS\n근거: 접지 19행·오시 2행 공정행 실재·면수=파생값(앱계산)"]
+  F3["3) page_rule 엔티티 INN_PAGE min/max/incr\n귀속: 수량#10+제약#5 | 🟢 PASS\n근거: page_min/max/incr 1:1 매핑·11행 적재"]
+  F4["4) 인쇄방식 자재풀 게이팅 (윤전→YWM pool)\n귀속: 인쇄방식#12 | 🔴 GAP\n근거: print_method/pool/allowed 컬럼 전역 0건 = 기존 #12 GAP과 동일"]
+  F5["5) digital_price 라우팅 (규격물 vs 면적물 분기)\n귀속: 가격#11 | 🟡 WEAK\n근거: pricing_model/frm_typ 라우팅키 부재 = 기존 #11 WEAK과 동일"]
+  F6["6) 제본 가공 BUNDLE (면지=자재+공정)\n귀속: 자재#1+공정#2 | 🟢 PASS\n근거: 면지 MAT_000001~004 + 제본 PROC_000017~025 + COMP_BIND_* 무손실"]
+
+  BANNER["★PR distinct 신축 0 → 신규 vessel-gap 0\nWEAK 1·GAP 1은 전부 기존 #11·#12 판정에 이미 잡힌 것을 재확인(중복 계상 안 함)\nPASS 4건이 16축 포화 검증신호"]
+
+  TITLE --> F1 --> F2 --> F3 --> F4 --> F5 --> F6 --> BANNER
+
+  classDef pass fill:#d4edda,stroke:#28a745,color:#000;
+  classDef weak fill:#fff3cd,stroke:#d39e00,color:#000;
+  classDef gap fill:#f8d7da,stroke:#dc3545,color:#000;
+  classDef title fill:#e9ecef,stroke:#495057,color:#000;
+  classDef banner fill:#e2e3f3,stroke:#6f42c1,color:#000;
+  class F1,F2,F3,F6 pass;
+  class F5 weak;
+  class F4 gap;
+  class TITLE title;
+  class BANNER banner;
