@@ -1,0 +1,16 @@
+-- U2_area_unitprices.BLOCKED.sql — 면적 매트릭스 단가행 적재 (BLOCKED — 미실행)
+--
+-- 차단 사유: 면적매트릭스 13블록의 (가로×세로)=단가 셀 ~687개의 구조화 소스(언피벗 CSV)가
+--   Phase B 입력에 부재. silsa-quote-design §5는 "U2 ~687(GAP)"으로 표기.
+--   원천 = docs/huni/후니프린팅_인쇄상품_가격표_260527.xlsx 시트 `포스터사인`(13 면적블록).
+--   이를 (comp_cd=COMP_POSTER_<MAT>, siz_cd=<좌표>, unit_price) 형태로 언피벗한 검증된 CSV가 선행돼야
+--   멱등 INSERT 가능. 좌표 siz_cd는 U1 선적재 후 매핑.
+--
+-- 미해소 컨펌(설계 Q-A2/Q-A3): 좌표 신규 106 vs 전건·off-grid ceiling 격자 범위.
+-- HARD: 단가행 날조 금지 — 가격표 셀을 검증된 추출 CSV 없이 INSERT 금지(돈-크리티컬).
+--
+-- 해소 경로: dbm-price-import-prep(round-16 poster-sign decomposition) → 언피벗 CSV →
+--   본 파일을 NOT EXISTS 가드 INSERT(자연키 8컬럼)로 재생성. 그 후 apply.sql에 편입.
+--
+-- (의도적 빈 트랜잭션 — 실행 시 영향 0)
+SELECT 'U2 BLOCKED: 면적 단가행 언피벗 CSV 선행 필요(가격표 포스터사인 13블록)' AS blocked_reason;
