@@ -177,3 +177,17 @@ INSERT INTO t_cod_base_codes (cod_cd, cod_nm, upr_cod_cd, disp_seq, use_yn, reg_
 ### 11.3 종합 (PD V-3)
 - PD가 V-3에 더한 것 = **2 차원(직물 물성·밑창 sub_mtr variant)**, 전부 `MAT_FACET` 코드행(직물물성·§8/§10 합성차원 통합)·기존 sub_mtrl/2D 페어링 그릇으로 흡수 = **신규 테이블/컬럼/V-번호 0.** ① 직물물성 = MAT_FACET 합성차원(★ST 점착/AC surface_finish와 동근·BN→GS→ST→AC→PD 5카테고리 누적이 *합성-분해축은 차원을 계속 더해도 facet 코드행으로 닫힌다* 확증) ② 밑창 sub_mtr = 기존 usage_cd .07/addon + ref_key1/ref_key2 2D(§9 CL 동형·별색 아님 정정). search-before-mint: 직물물성/밑창 전용 컬럼 부재·기존 sub_mtrl/2D 페어링 PASS → MAT_FACET 코드·기존 그릇이 흡수·미적재 행=data(dbmap). **신규 그릇 0·V-3 흡수.**
 - ★`_data-gaps-noted §9` 정합: PD-4 완제 구조물 내재BOM(다리/받침/논슬립=부속물#8·솜/지퍼=자재 usage .07)·밑창 sole 자재코드·직물 본체소재 행은 **data-gap not vessel-gap**(그릇 실재·미적재만·dbmap). 본 §11은 *분해축 그릇*(직물물성 facet·밑창 variant 인코딩 구조)만 — 행 적재는 dbmap.
+
+---
+
+## ═══ §12. PH 인화지×마감 surface-finish 메모 (V-3 PH·v9.0·신규 그릇 0) ═══
+> PH 갭(`categories/PH/reverse.md` §0.5·`02_metamodel/_resolved-fragments.md` PH-3·`gap-matrix §XXI`·`vessel-needs.md PH 흡수 매핑 ③`). 후니 대조 = 라이브 `t_mat_materials` 실측(2026-06-17). **PH distinct 신축 0(완제 액자 그릇/마운팅 #18 부결·17축 재포화·9번째 카테고리·★directive 최대 관전). PH facet 6항 중 WEAK 1(인화지×마감 surface-finish=#1)이 본 V-3(#1) 분해축에 합류·신규 V-번호 0.** PH가 V-3에 더한 것 = **인화지×마감 surface_finish 차원**, §10.2 AC surface_finish·§8 ST 점착/내후와 *동근*으로 흡수(별 테이블/컬럼 0).
+
+### 12.1 차원: 인화지×마감 surface-finish (§8 ST 점착·§10 AC surface_finish와 동근)
+- **PH #3(인화지×마감 경계: 유광/반광/스노우/홀로그램 마감 × 캐논전용지/스노우지 인화매체)가 §10.2 AC surface_finish·§8 ST adhesion/weather와 *동근***: §0.5 client-render 재캡처 실측 — "인화용지(반광-러스터)/인화용지(유광)"가 **한 combobox에 마감×매체 합성**(BN 코팅·AC 글리터/거울 동형·마감=인화지 매체 종속). 라이브 실측: `surface`/`finish`/`glitter` 컬럼 **전역 0건**·마감이 `mat_nm` 텍스트 융합("유광(Glossy)_캐논전용지").
+- **그릇 조치:** §2.1 `MAT_FACET` `surface_finish`(표면마감) 코드행으로 흡수 — §10.2 AC(글리터/거울/자개/홀로) + §8 ST(점착강도/내후등급)와 **동일 합성-차원 패턴**(한 MAT_FACET 그룹이 점착·내후·표면마감·인화마감을 다 담음). **PH 인화마감 ≡ AC surface_finish ≡ ST adhesion/weather = 동일 합성-차원 패턴**(별 그릇 아님). **신규 테이블/컬럼 0·V-3 흡수.**
+- search-before-mint: 인화 마감/매체 전용 컬럼 라이브 부재(§10 AC 동일·전역 0건·텍스트 융합) → MAT_FACET 코드행이 분류·값은 기존 컬럼/note. **★인화지 매체행(캐논전용지/스노우/홀로그램)·인화 마감 행=data-gap**(`_data-gaps-noted §10`·round-22 ④자재) — 분해축 그릇(여기) 선행 후 행 적재(dbmap).
+
+### 12.2 종합 (PH V-3)
+- PH가 V-3에 더한 것 = **1 차원(인화지×마감 surface_finish)**, `MAT_FACET` 코드행으로 흡수 = **신규 테이블/컬럼/V-번호 0.** ★**BN→GS→ST→AC→PD→PH 6카테고리째 V-3 합성-분해축에 차원을 더했으나 여전히 facet 코드행으로 닫힘**(테이블 mint로 번지지 않음·합성-분해축 사다리 정직성 6연속 확증). search-before-mint: 인화 마감/매체 전용 컬럼 부재 → MAT_FACET 코드·기존 컬럼/note·미적재 행=data(dbmap). **신규 그릇 0·V-3 흡수.**
+- ★`_data-gaps-noted §10` 정합: PH 인화지 매체행·인화 마감 행은 **data-gap not vessel-gap**(자재 그릇 실재·미적재만·dbmap). 본 §12는 *분해축 그릇*(surface_finish facet)만 — 행 적재는 dbmap. ★**deepcheck 주의: codex M-6 "photo paper weight/surface(gsm·RC·은염)"·M-4 glazing은 §0.5 미캡처·전부 `unverified` → 별 슬롯으로 OBSERVED되기 전 surface_finish 외 추가 facet mint 금지(라이브 실측 대상·`_vessel-roadmap.md` carry-forward).**

@@ -264,3 +264,57 @@ PHMGDFT(포토 머그컵)·PHPODFT(포토 화분·SSR-legacy 풀)
 ### PH-5 — PHMG/PHPO(머그·화분)가 PH 카테고리인가 GS 굿즈인가 (코드접두≠카테고리 본질)
 - PHMGDFT(머그)·PHPODFT(화분)은 category=PH이나 본질=전사인쇄 완제굿즈(GS GSTTDTM 코스터·GS 텀블러 동형). cate=디지털인쇄>컵&홀더(PHPODFT 실측).
 - 회부 = 카테고리#(category) 다중분류 — "출력매체(사진굿즈) vs 물성(컵&홀더)" 어느 축으로? GS 횡단 다중분류 패턴과 동형. RedPrinting은 PH로 묶음(사진 출력 매체 기준).
+
+---
+
+## 0.5 client-render 재캡처 (gstack browse, 2026-06-17) — 블로커 해소
+
+> 목적 = PH 고유 블로커(액자/사진인화 SSR-negative) 해소를 위한 Vue client-render 재캡처.
+> 대상 옵션 = ① 마운팅/거치(벽걸이/탁상) ② 전면 보호재(유리/아크릴) ③ 후면 받침. distinct 축 #18(마운팅 축) 판정의 결정적 미싱데이터.
+> **도구 = `gstack browse`(하네스 헤드리스 chromium, `.claude/skills/gstack/browse/dist/browse`).** `claude-in-chrome` MCP 서버는 미등록이나 gstack browse 바이너리가 빌드되어 있어 client-render 실측 성공. `[live:client-render]` 출처.
+
+### 결과: 미싱데이터 OBSERVED — PH-2 마운팅/거치 RESOLVED·전면 보호재는 별도 옵션축 미관측
+
+Vue client-render 후(networkidle 대기) 옵션 패널이 실제로 노출됨. SSR(레거시 GET)에서 미노출이던 옵션이 client-render에서 드러남 = §0.2 "SSR-negative → unobserved" 진단의 원인(Vue 지연 렌더) 확정. 라이브 읽기전용(옵션 토글만·주문/폼제출 0).
+
+### ① PHFRDIA 디아섹 액자 — 마운팅/거치 캐스케이드 OBSERVED `[live:client-render]`
+옵션 구조(주문 폼 `product_form`은 SSR fields=[]이나 client-render로 Vue custom combobox 노출 — `<select>` 아님, `forms` 미포착·snapshot accessibility tree로 실측):
+
+| 축 | 위젯 | 값(리터럴) |
+|----|------|-----------|
+| **거치 방식** | 버튼 토글 | **탁상용 / 벽걸이** ← §0.2 미싱데이터 실재 |
+| 거치×마감 합성 | combobox | 탁상용: 유광 / 무반사 / 자작나무 무광 / 자작나무 유광 (4) · 벽걸이: 동일 4 마감 |
+| 완제 SKU(거치+마감+사이즈) | combobox | 탁상용유광 127X177·152X203·203X254 (3) → 벽걸이유광 297X420 ~ 1000X1000 (15) |
+| 작업/재단 치수 | spinbutton(disabled) | 127·177(작업) / 131·181(재단) 자동표시 |
+| 수량 | combobox | 1~10·50·100 |
+| 디자인 입력 | 버튼 | PDF / 에디터 / 편집하기(#16 디자인입력채널) |
+
+- **★거치 방식(탁상용/벽걸이)이 캐스케이드 상위 축** — 토글 시 마감 라벨 prefix·사이즈 풀이 통째로 교체(탁상용=소형 3종, 벽걸이=대형 15종). 즉 거치방식 → 마감 → 완제SKU사이즈 → 수량 캐스케이드.
+- **전면 보호재(유리/아크릴) = 별도 옵션 select 미관측** — 마감 combobox는 표면처리(유광/무반사/자작나무)만. 디아섹은 전면재가 상품 내재(아크릴 마운팅) → 전면 보호재는 별도 축 아님(자재 내재/facet). **후면 받침도 별도 옵션 미관측.**
+- 증거 스크린샷: `/tmp/ph_phfrdia_options.png`(옵션 패널 + "사이즈" 섹션 탁상용/벽걸이용 탭 + 사이즈 표).
+
+### ② PHPTEDT 사진인화(편집형) — 인화지×마감 합성 + 형태축 OBSERVED `[live:client-render]`
+| 축 | 위젯 | 값 |
+|----|------|-----|
+| **형태(비율)** | 버튼 토글 | **일반 / 정사각 / 파노라마** |
+| 자재(인화지×마감) | combobox | 인화용지(반광-러스터) / 인화용지(유광) ← §0.3 합성 입증 |
+| 사이즈 | combobox | 3x5(89x127) ~ 8.27x11.7(210x297 A4) 8종 |
+| 치수 | spinbutton(disabled) | 89·127(작업) / 91·129(재단) 자동 |
+
+### ③ PHPRDFT 사진인화 — 재고 제약 OBSERVED `[live:client-render]`
+- 자재 combobox: 인화용지(유광) / **`[재고부족]` 홀로그램 무지개 인화지(disabled)** ← §0.3 "[재고부족] = 재고/주문가능 constraint" + 홀로그램 매체 입증. disabled 속성으로 주문불가 인코딩.
+- 수량 combobox: 1·5·10·15·20·25·30·35·40·45·50·100.
+
+### ④ PHFRWOD 원목 / PHFRALU 알루미늄 — "스타일" 진입형(옵션 미펼침)
+- 두 상품 모두 옵션 영역에 `[button] "스타일"`만 노출(combobox는 family_site nav만). 디아섹과 다른 옵션 UI(에디터/스타일 진입형 추정) — "스타일" 클릭 후에도 combobox 미펼침. **추가 인터랙션(에디터 진입 등) 필요분은 이번 미확보** = `unobserved`(원목/알루미늄 마운팅 옵션은 디아섹으로 패턴 입증됨, 개별 미확인은 정직 표기).
+
+### PH-1 / PH-2 verdict (재캡처 후)
+
+| 회부 | 재캡처 후 상태 | distinct #18 판정 |
+|------|----------------|-------------------|
+| **PH-1** (완제 프레임 = distinct #18인가 facet/variant인가) | **OBSERVED·1차 예측 강화** — 거치+마감+사이즈가 완제 SKU(combobox) 1개에 인코딩·거치방식이 캐스케이드 상위 차원. AC 두께/소재 variant·GS 완제SKU와 동형 구조 실측. → **facet/variant 흡수 우세**(최종 architect). | **NO 우세** (facet/variant) |
+| **PH-2** (마운팅/거치·전면 보호재·후면 받침) | **거치(탁상용/벽걸이) = RESOLVED·OBSERVED**(실재 캐스케이드 축). 전면 보호재·후면 받침 = **별도 옵션축 미관측**(마감 facet + 전면재 상품 내재). | 거치=실재하나 옵션 차원으로 구현 → **distinct 신규축 NO 우세** |
+
+**verdict 요약: distinct 축 #18(마운팅 축) = 마운팅/거치가 OBSERVED(실재)되었으나, 별도 신규 메타모델 축이 아니라 옵션 캐스케이드 상위 차원(거치방식 → 완제 SKU variant)으로 구현됨. 1차 예측(distinct 0·facet/variant 흡수)이 실측으로 강화.** 단 "거치방식"이라는 의미축이 후니 그릇(t_*)에 명시 차원으로 있는지는 **gap 분석 대상**(거치=옵션 캐스케이드 vs 완제 SKU variant 매핑). 최종 facet/distinct 판정은 metamodel-architect.
+
+**남은 미관측(정직 표기, 추정 승격 0):** 원목/알루미늄 액자 개별 옵션(스타일 진입형 미펼침)·전면 보호재가 별도 옵션인 다른 액자(한나무/멀티 미캡처)·포토북(PHBK* 면수/제본 client-render 미캡처). 디아섹·사진인화 대표로 핵심 축은 확보 — 추가 캡처는 architect/gap이 필요 시 지시.

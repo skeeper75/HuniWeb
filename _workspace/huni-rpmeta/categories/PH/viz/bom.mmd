@@ -1,0 +1,55 @@
+%% PH 자재/공정 BOM — 출처: categories/PH/reverse.md §0.1·§0.3·§0.5·§4 그룹 A~E
+%% ★액자 프레임 재질(pdtCode 분기) + 인화지 매체 · 미관측 영역은 정직 표기(날조 금지)
+flowchart TB
+  ROOT["PH 자재/공정 BOM — 출력매체별 본체 자재 + 매체"]
+
+  subgraph FRAME["① 액자 프레임 재질 (자재#1 variant·각=별 pdtCode·§0.1)"]
+    direction TB
+    M_HAN["한나무(원목) — PHFRHAN·PHFRHDU(듀얼)"]
+    M_ASH["애쉬 원목 — PHFRASB(브라운)·PHFRASH(내추럴)·PHFRASD(양면형)"]
+    M_WOD["원목 — PHFRWOD"]
+    M_ALU["알루미늄 — PHFRALU"]
+    M_PAP["종이 — PHFRPAP"]
+    M_ACR["아크릴 — PHFRACR"]
+    M_DIA["디아섹(아크릴 마운팅) — PHFRDIA"]
+    M_MUL["멀티프레임 — PHFRMUL(다면) · 첫돌 PHFRFIR(이벤트·재질 미관측)"]
+  end
+
+  subgraph MEDIA["② 사진인화 매체 (자재#1·인화지×마감 합성·§0.3·§0.5)"]
+    direction TB
+    P_GLOSS["인화용지(유광 Glossy)_캐논전용지"]
+    P_LUST["인화용지(반광 Luster·러스터)_캐논전용지"]
+    P_SNOW["스노우지(무광계)"]
+    P_HOLO["[재고부족] 홀로그램 무지개 인화지 (disabled·재고제약)"]
+  end
+
+  subgraph BODY["③ 기타 출력매체 본체 (그룹 C·D·E)"]
+    direction TB
+    B_BOARD["보드/판 용지 — 캐논전용지 등(포토보드·PR 포스터 동형)"]
+    B_BOOK["포토북 표지/내지 — 소프트/하드/프리미엄 커버(PR 책자 동형)"]
+    B_GOODS["포토굿즈 본체 — 머그 / 화분 + 전사지(transfer paper)"]
+  end
+
+  subgraph PROC["공정 (관측분만)"]
+    direction TB
+    PR_BIND["제본 — 소프트/하드/프리미엄 (포토북·#14)"]
+    PR_TRANS["전사인쇄 — 머그/화분 (포토굿즈·#14)"]
+    PR_FIN["마감(유광/반광/스노우) = 인화지 매체 종속 facet (별 공정축 아님·PH-3)"]
+  end
+
+  UNOBS["★미관측 (날조 금지·deepcheck 미캡처 — 확정 자재로 그리지 않음)<br/>매팅/패스파르투(H-2)·aperture/창 기하(H-3)·glazing 전면유리 다형성(M-4)<br/>후면 받침·마운팅 부자재·포토북 페이지(M-6) = unobserved"]
+
+  ROOT --> FRAME
+  ROOT --> MEDIA
+  ROOT --> BODY
+  ROOT --> PROC
+  BODY --> PROC
+  ROOT -.-> UNOBS
+
+  style ROOT fill:#e1f5fe,stroke:#0277bd,stroke-width:3px
+  style FRAME fill:#efebe9,stroke:#5d4037,stroke-width:2px
+  style MEDIA fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+  style BODY fill:#fff3e0,stroke:#ef6c00
+  style PROC fill:#e3f2fd,stroke:#1565c0
+  style P_HOLO fill:#ffcdd2,stroke:#c62828
+  style UNOBS fill:#ffcdd2,stroke:#c62828,stroke-width:2px

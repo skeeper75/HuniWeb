@@ -1,0 +1,45 @@
+%% PH 갭 히트맵 — 출처: 03_gap/gap-matrix.md §XXI (PH facet 6항·라이브 2026-06-17 실측·v9.0)
+%% ★PH = PASS 3 · WEAK 3 · GAP 0 · 신규 vessel-gap 0 (전부 기존 축 facet 재확인)
+flowchart TB
+  ROOT["PH 갭 판정 — distinct #18 부결 → 신규 vessel-gap 0<br/>🟢 PASS 3 · 🟡 WEAK 3 · 🔴 GAP 0<br/>(전부 기존 §I~§XX 축 판정에 매핑·중복 계상 안 함)"]
+
+  subgraph PASS["🟢 PASS 3 — 기존 그릇이 PH facet을 무손실 흡수"]
+    direction TB
+    P1["#1 거치방식(탁상용/벽걸이) 캐스케이드 — PH-2 ★directive 최대 관전<br/>option_groups 134행(SEL_TYPE.01 택1) → option_items 469행 → constraints.logic jsonb 10행<br/>거치 OBSERVED but 옵션#3 캐스케이드 상위 차원 → #18 부결"]
+    P4["#4 형태(일반/정사각/파노라마) 비율 프리셋 — 형태축<br/>t_siz_sizes work/cut width·height 1:1 프리셋(정사각=W:H 동일·파노라마=W≫H)<br/>형상#17 1:多 미충족 → 사이즈#13 흡수·형상축 강제 금지"]
+    P5["#5 PHMG/PHPO 다중분류(출력매체 PH ⊥ 물성 컵&홀더) — PH-5<br/>t_prd_product_categories main_cat_yn·2카테고리 8상품 라이브 실재(GS 동형)"]
+  end
+
+  subgraph WEAK["🟡 WEAK 3 — 담되 분해축 약함 (기존 #1·#4·#10 재확인)"]
+    direction TB
+    W2["#2 완제 액자 SKU(거치+마감+사이즈 인코딩) — PH-1<br/>t_prd_templates 12행 + template_selections 14행 그릇 보유<br/>★디자인시안↔완제SKU 이중의미(T-A·V-11과 동근)·완제SKU breadth는 data"]
+    W3["#3 인화지×마감 surface-finish — PH-3<br/>surface/finish/glitter/holo 컬럼 전역 0건·mat_nm 텍스트 융합<br/>(ST S-4·AC A-2·BN 코팅 동근·V-3 합성 분해축)"]
+    W6["#6 set/sheets 고정 단위(600매·4/5sheets) — PH-4<br/>bundle_qtys 28행·qty_unit_typ_cd 그릇 보유·set 배수 모델 약함(#10 동일)"]
+  end
+
+  subgraph GAP["🔴 GAP 0 — PH 신규 GAP 없음"]
+    direction TB
+    G0["PH 신규 GAP 0건<br/>포토북 제본=#14·PR책자 동형 · 디자인입력=#16·TP 동형 (기존 GAP 재확인·신규 아님)"]
+  end
+
+  subgraph VG["★ vessel-gap = 0"]
+    direction TB
+    V0["신규 vessel-gap 0건 (V-1~V-12 불변)<br/>PH-1/PH-2 거치/완제액자 = vessel-gap 아닌 data-gap(축 실재·미적재·dbmap CPQ 트랙)"]
+  end
+
+  ROOT --> PASS
+  ROOT --> WEAK
+  ROOT --> GAP
+  ROOT --> VG
+
+  style ROOT fill:#e1f5fe,stroke:#0277bd,stroke-width:3px
+  style PASS fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+  style WEAK fill:#fff8e1,stroke:#f9a825,stroke-width:2px
+  style GAP fill:#ffebee,stroke:#c62828,stroke-width:2px
+  style VG fill:#ede7f6,stroke:#5e35b1,stroke-width:2px
+  style P1 fill:#c8e6c9,stroke:#2e7d32
+  style P4 fill:#c8e6c9,stroke:#2e7d32
+  style P5 fill:#c8e6c9,stroke:#2e7d32
+  style W2 fill:#fff3c4,stroke:#f9a825
+  style W3 fill:#fff3c4,stroke:#f9a825
+  style W6 fill:#fff3c4,stroke:#f9a825

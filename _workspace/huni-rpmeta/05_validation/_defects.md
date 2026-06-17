@@ -254,3 +254,19 @@
 - **조치(선택):** reverse §0.2/§4 밑창색 태그를 `자재(본체색=밑창)` → `SUB_MTR 부자재 variant(밑창 sole 소재 색·자재 CLR 아님)`로 명확화. 또는 PD-6 미세 경계(부속물#8 vs 자재 sub_mtrl) 확정 시 일괄 정리. **재게이트 불요**(비차단).
 
 > **PD M2~M6 종합: GO (전건).** 라이브 재실측 8검사 일치·PD-4 data-gap(addons PK·usage_cd .07=639 그릇 실재 직접 확인)·distinct 0 부결 검증·codex 17후보 채택 0. 차단 결함 0건·Low 1건(D-PD-2·비차단).
+
+---
+
+## PH M1~M6 게이트 결과 (rpm-validator·2026-06-17·라이브 재실측) — 차단 결함 0건·GO
+
+> PH = 9번째 종단 카테고리. 라이브 information_schema 직접 SELECT(railway·read-only) 14건 + §0.5 캡처 아티팩트 재열람으로 검증. **생성자 인용 라이브 카운트 전건 byte-일치(인플레/날조 0)·§0.5 거치 OBSERVED 캡처 진위 확인·deepcheck H-1/H-2/H-3 채택 0·mint 0.** 신규 차단(High/Medium) 결함 0건. 비차단 Low 1건만 기록. 전문 = `mgate-verdict-PH.md`.
+
+### D-PH-V1 (Low·비차단) — reverse §0.5·deepcheck 인용 gstack 바이너리 경로 stale [M1 → rpm-reverse-engineer]
+- **위치:** `categories/PH/reverse.md:274`(§0.5)·`categories/PH/deepcheck.md` — "`.claude/skills/gstack/browse/dist/browse` 바이너리가 빌드되어 있어 client-render 실측 성공" 문구.
+- **재측정:** 파일시스템 전 디렉터리 검색(`find .claude -name browse -type f`·`find . -name browse`) = **0건**. 해당 경로 바이너리 부존재.
+- **반증(날조 아님):** §0.5 캡처 산출물 `/tmp/ph_phfrdia_options.png`(2.2MB·2026-06-17 15:11) 직접 재열람 = **진짜 RedPrinting PHFRDIA "디아섹 아크릴액자" 상품 페이지 client-render 스크린샷**. 거치 토글(탁상용/벽걸이)·마감 combobox·사이즈 표(탁상용/벽걸이 탭)·PDF/에디터/편집하기 버튼·"함께보면 좋은 제품" nav 블록이 화면에 실재 — reverse §0.5 전사와 field-for-field 일치. `gstack`/`browse` 스킬은 환경에 등록됨.
+- **성격:** 캡처 산출물·스킬은 실재하나 인용한 *바이너리 경로 문구*가 stale/부정확한 문서 nit. 추출 충실성(데이터↔소스 일치)은 캡처 재대조로 충족·캡처 날조 아님.
+- **심각도:** Low — M1 PASS 유지(게이트 무영향). 거치 OBSERVED·블로커 해소·#18 부결 근거 전부 유효.
+- **조치(선택):** §0.5/deepcheck 경로 문구를 실제 캡처 수단(`browse`/`gstack` 스킬 또는 산출물 경로)으로 정정. **재게이트 불요**(비차단).
+
+> **PH M1~M6 종합: GO (전건 PASS).** 라이브 재실측 14건 전건 일치(option_groups 134·items 469[ref_dim 255/156/45/11/2]·constraints.logic jsonb 10·templates 12·selections 14·bundle_qtys 28·surface/shape 컬럼 0·다중분류 2cat 8상품·main_cat_yn 273/8·shape_cd/SHAPE/design_input 0·PH products 0)·§0.5 캡처 진위 확인·#18 부결 건전(HARD ②불충족)·신규 mint 0(search-before-mint 통과)·deepcheck H-1~M-6 unobserved-pending mint 0·dodge 5건 격파. 차단 결함 0건·Low 1건(D-PH-V1·비차단·문서 경로 nit).

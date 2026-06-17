@@ -1,0 +1,67 @@
+%% PH 옵션 구성 트리 — 출처: categories/PH/reverse.md §0~§4 + §0.5 client-render 재캡처
+%% ★PH = 사진을 어떤 물성(종이/보드/액자/책/머그)으로 출력하느냐로 묶인 출력매체 카테고리 · 5개 이질 상품군 공존
+flowchart TB
+  ROOT["PH 카테고리 (30상품) — 출력매체(output medium) 카테고리<br/>★5개 이질 상품군 공존 · #18 거치/완제액자 부결(facet/variant)"]
+
+  subgraph FR["① 액자류 PHFR* (11상품·SSR-negative·프레임재질=pdtCode 분기)"]
+    direction TB
+    FR_MAT["프레임 재질 = 한나무/애쉬/원목/알루미늄/종이/아크릴/디아섹<br/>(자재#1 variant·상품을 가름·pdtCode 분기)"]
+    FR_MOUNT["거치 방식 = 탁상용 / 벽걸이 (버튼토글)<br/>★§0.5 OBSERVED·캐스케이드 상위 축 (옵션#3)"]
+    FR_FIN["마감(거치별) = 유광 / 무반사 / 자작나무 무광 / 자작나무 유광<br/>(자재 surface-finish facet)"]
+    FR_SKU["완제SKU 사이즈 = 탁상용 127X177·152X203·203X254 (3)<br/>벽걸이 297X420 ~ 1000X1000 (15) ★거치별 풀 교체"]
+    FR_QTY["수량 = 1~10·50·100"]
+    FR_DSGN["디자인 입력 = PDF / 에디터 / 편집하기 (#16)"]
+    FR_MAT --> FR_MOUNT --> FR_FIN --> FR_SKU --> FR_QTY --> FR_DSGN
+  end
+
+  subgraph PT["② 사진인화류 PHPT*/PHPR*/PHPK* (8상품·SSR-negative·매체모델=PHPTEDT/PHPRDFT 실측)"]
+    direction TB
+    PT_SHAPE["형태(비율) = 일반 / 정사각 / 파노라마 (버튼토글)<br/>★§0.5 OBSERVED·비율 프리셋 (사이즈#13 흡수·형상#17 부결)"]
+    PT_MAT["인화지×마감 = 인화용지(반광-러스터) / 인화용지(유광)<br/>[재고부족]홀로그램 무지개 (disabled·제약#5)"]
+    PT_SIZE["사이즈 = 3x5(89x127) ~ 8.27x11.7(210x297 A4) 8종"]
+    PT_QTY["수량 = 1·5·10·…·50·100"]
+    PT_SHAPE --> PT_MAT --> PT_SIZE --> PT_QTY
+  end
+
+  subgraph BD["③ 보드/판 PHPTPRM·PHST* (4상품·PHPTPRM SSR-legacy 풀실측·PR 포스터 동형)"]
+    direction TB
+    BD_PAPER["용지 = 유광(Glossy)_캐논전용지 / 반광(Luster)_캐논전용지 /<br/>스노우 / [재고부족]홀로그램 (자재+마감 합성)"]
+    BD_SIZE["규격(mm) = A6(115X158)·A5(158X220)·B5(186X260)·A4(220X307)·Original(260X370)"]
+    BD_ORD["디자인 수(건수) 1~50 × 수량(매수) 1~10 (이중수량 #10)"]
+    BD_SUBJ["주문 제목 (자유입력·비가격)"]
+    BD_PAPER --> BD_SIZE --> BD_ORD --> BD_SUBJ
+  end
+
+  subgraph BK["④ 포토북 PHBK* (5상품·PHBKMYB SSR-legacy·PR 책자 동형)"]
+    direction TB
+    BK_COVER["커버 = 소프트/하드/프리미엄 (제본 variant·#14·pdtCode 분기)"]
+    BK_SIZE["사이즈 = 8X6·8X8·10X8·10X10·12X12 (정사각계)"]
+    BK_SIDE["단면 / 양면 + 수량(매수) · 면수=client-render 미노출"]
+    BK_COVER --> BK_SIZE --> BK_SIDE
+  end
+
+  subgraph PK["⑤ 포토굿즈 PHMG/PHPO (2상품·PHPODFT SSR-legacy·GS 동형)"]
+    direction TB
+    PK_BODY["본체 = 머그 / 화분 (자재#1) + 전사지(transfer paper)"]
+    PK_PROC["전사인쇄(공정) · 단면 · 80x95mm · 건수+수량"]
+    PK_BODY --> PK_PROC
+  end
+
+  ROOT --> FR
+  ROOT --> PT
+  ROOT --> BD
+  ROOT --> BK
+  ROOT --> PK
+
+  UNOBS["★미관측(날조 금지·정직 표기): 전면 보호재(유리/아크릴)=별도옵션 미관측(디아섹=상품내재)<br/>후면 받침=별도옵션 미관측 · 원목/알루미늄 액자 스타일 진입형 미펼침 · 포토북 면수/제본 미캡처"]
+  FR -.-> UNOBS
+
+  style ROOT fill:#e1f5fe,stroke:#0277bd,stroke-width:3px
+  style FR fill:#f3e5f5,stroke:#6a1b9a
+  style PT fill:#e8f5e9,stroke:#2e7d32
+  style BD fill:#fff3e0,stroke:#ef6c00
+  style BK fill:#fce4ec,stroke:#ad1457
+  style PK fill:#e0f7fa,stroke:#00838f
+  style FR_MOUNT fill:#fff9c4,stroke:#f9a825,stroke-width:2px
+  style PT_SHAPE fill:#fff9c4,stroke:#f9a825,stroke-width:2px
+  style UNOBS fill:#ffcdd2,stroke:#c62828,stroke-width:2px

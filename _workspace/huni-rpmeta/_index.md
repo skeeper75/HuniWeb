@@ -1,7 +1,7 @@
 # RP 추출 커버리지 인덱스
 
 > 후니 RP-Meta 하네스 파이프라인 ① — 샘플 커버리지 맵 (rpm-reverse-engineer).
-> 실행 이력: ① BN(현수막류) 파일럿 6+1상품. ② GS(굿즈/잡화) 확장 12상품. ③ TP(디자인템플릿) 확장 대표3+20횡단. ④ PR(인쇄물·책자) 확장 대표3+53횡단. ⑤ ST(스티커) 확장 대표3+33횡단. ⑥ CL(의류) 확장 대표3+27횡단. ⑦ AC(아크릴·키링·코롯토·명찰·등신대) 확장 대표3+17횡단. 대표 샘플링(답습 전수수집 아님).
+> 실행 이력: ① BN(현수막류) 파일럿 6+1상품. ② GS(굿즈/잡화) 확장 12상품. ③ TP(디자인템플릿) 확장 대표3+20횡단. ④ PR(인쇄물·책자) 확장 대표3+53횡단. ⑤ ST(스티커) 확장 대표3+33횡단. ⑥ CL(의류) 확장 대표3+27횡단. ⑦ AC(아크릴·키링·코롯토·명찰·등신대) 확장 대표3+17횡단. ⑧ PD(스툴·슬리퍼·강아지계단·봉제 구조물) 전수 3상품. ⑨ PH(포토보드·액자·사진인화·포토북·포토굿즈) 확장 대표3+27횡단(★§0.5 client-render 재캡처로 거치/마운팅 블로커 해소). 대표 샘플링(답습 전수수집 아님). **메타모델 = 17축(9 카테고리·distinct: TP #16·ST #17·나머지 0·PH 재포화 9번째).**
 
 ## 커버리지 맵 — BN(현수막류) (상품 → 축 → 출처)
 
@@ -265,3 +265,22 @@ BNBNLOW(특가현수막), BNBNDAY(오늘출발), BNTPSNG(타포린단면), BNFGB
 27. **★인쇄위치(print_area) 다중선택 공정축** — C-4. 기초코드(위치 enum)+공정(PDT_WRK 위치별 가산)+에디터매핑(KOI_NME→TP 채널#16). PR 다면·GS PDT_WRK와 경계 재정의.
 28. **★카테고리 내부 2모델(item_gbn 분기)** — C-5. 같은 CL이 clothes2025(티셔츠)·tmpl(앞치마/가방)로 그릇 분기. 후니 "카테고리" vs "모델/생산형태" 버킷 분리. round-15 생산형태×그릇 합류.
 29. **★원단 출처 3분기·GBN 연령·Pantone 규모** — C-6/C-7/C-8. CLST/CLDF/CLTM=원단 라이브러리 계열(옵션모델 동일·자재 카탈로그 분리) vs 카테고리/판매단위. 사이즈 GBN(성인/아동) 축. Pantone1124 별색=공정(후니 round-22) vs 의류 별색 도메인. 인쇄방식 인코딩 2표현(CL 옵션 vs ST/PR 상품분기) 통합.
+
+## 커버리지 맵 — PH(포토보드·액자·사진인화·포토북·포토굿즈, 30상품·★완제 액자 그릇/마운팅·출력매체 5상품군 공존)
+| pdtCode | 상품 | 핵심 단서 | 축수 | 자재(대표) | 옵션/variant | 공정/형태 | 가격 | 출처 |
+|---|---|---|---|---|---|---|---|---|
+| PHPTPRM | 포토 보드 | ★보드/판·포스터 동형·풀 SSR | 5 | 인화지×마감(유광/반광/스노우/홀로그램) | 규격5·디자인수·매수 | koi 에디터 | tmpl_price | `[live:SSR-legacy]` 풀 |
+| PHFRDIA | 디아섹 아크릴 액자 | ★완제 프레임·거치 캐스케이드 ★§0.5 OBSERVED | 6 | 디아섹(프레임재질 pdtCode 분기) | **거치(탁상용/벽걸이)→마감→완제SKU사이즈** | 완제 조립 | unobserved | `[live:client-render]` |
+| PHPTEDT | 일반 사진인화 | ★인화지×마감 합성·형태(비율) ★§0.5 OBSERVED | 5 | 인화용지(반광-러스터/유광) | **형태(일반/정사각/파노라마)**·사이즈8 | - | unobserved | `[live:client-render]` |
+| PHPRDFT | 증명사진600 | ★[재고부족]홀로그램 disabled ★§0.5 OBSERVED | 4 | 인화용지(유광)·홀로그램(disabled) | 수량(set 배수) | - | unobserved | `[live:client-render]` |
+| PHBKMYB | 내 파일 포토북 | 사진책 제본·PR 책자 동형 | 4 | 표지/내지 | 정사각계 사이즈·단/양면 | 제본(소프트/하드/프리미엄) | digital_price | `[live:SSR-legacy]` |
+| PHPODFT | 포토 화분 | 전사인쇄 완제굿즈·GS 동형 | 4 | 전사지·화분 본체 | 단면·80x95mm·건수+수량 | 전사인쇄 | tmpl_price | `[live:SSR-legacy]` |
+
+> 5개 이질 상품군: ① 액자 PHFR*(11·프레임재질=pdtCode 분기) ② 사진인화 PHPT*/PHPR*/PHPK*(8) ③ 보드·판 PHPTPRM·PHST*(4) ④ 포토북 PHBK*(5) ⑤ 포토굿즈 PHMG/PHPO(2). 나머지 24종은 reverse.md §4 그룹 A~E에 묶어 횡단 태깅(답습 회피). 모집단=catalog category=PH 30상품(전부 /item/PH/).
+> **★§0.5 client-render 재캡처(gstack browse 2026-06-17·블로커 해소)**: reverse 1차의 SSR-negative(액자/사진인화 Vue client-render 옵션 미노출) 블로커를 OBSERVED로 해소 — PHFRDIA 거치(탁상용/벽걸이) 캐스케이드·PHPTEDT 인화지×마감 합성+형태축·PHPRDFT [재고부족]disabled 실측.
+> **★PH 발굴 fragment(전부 facet·distinct 0)**: PH-1 완제 프레임=완제SKU#4(거치+마감+사이즈 인코딩)+자재#1 variant+생산형태#15(★directive 최대 관전·1차 예측 facet 강화) · PH-2 거치=옵션#3 캐스케이드 상위 차원(★RESOLVED OBSERVED)·전면재=자재#1 내재·후면받침=부속물#8(미관측) · PH-3 인화지×마감=자재#1 surface-finish(ST S-4/AC A-2) · PH-4 set 단위=수량#10+완제SKU#4 base_quant · PH-5 머그·화분=카테고리#7 다중분류 · PH-6 형태(일반/정사각/파노라마)=사이즈#13 비율 프리셋(형상#17 부결). **★17축 안정성: PH가 9번째 카테고리로 재포화 — §0.5 거치 OBSERVED(미싱데이터 해소)되었으나 옵션 캐스케이드 + 완제 SKU variant 구현 → ST 형상#17 같은 KB 결함 부재로 distinct #18 부결.**
+
+## 다음 단계 — PH 추가분 (rpm-gap-analyst 주목 — ★전부 facet·data-gap)
+30. **★완제 SKU/거치 캐스케이드 그릇(data-gap)** — PH-1/PH-2. `t_prd_templates`/완제SKU 그릇 실재·거치방식 polymorphic ref(옵션#3·AC GRP_OPTION_CD cascade 동형)·거치+마감+사이즈 완제 variant 적재만(축 부재 아님·vessel-gap 아님). [HARD] 완제 SKU 라벨 분해 {mount_type,finish,frame_material,size}(G-1/AC variant 동일 처방).
+31. **★인화지×마감 surface-finish 분해 그릇** — PH-3. ST S-4 점착/AC A-2 surface-finish 합성축(V-3) 합류·`{ptt, surface_finish}` 분해(직물 물성 차원·점착/내후와 동근).
+32. **★미관측 라이브 재캡처 후보** — 전면 보호재 별옵션 액자(한나무/멀티 미캡처)·후면 받침(부속물#8 후보·unobserved)·포토북(PHBK*) 면수/제본 client-render·set base_quant(it_g_base_quant) 상세. deepcheck/gap이 필요 시 라이브 재캡처 또는 후니 도메인 권위로 확정.

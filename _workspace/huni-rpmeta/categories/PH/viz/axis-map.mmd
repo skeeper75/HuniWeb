@@ -1,0 +1,41 @@
+%% PH 메타모델 축 매핑 — 출처: categories/PH/summary.md "PH 각 축 → 기존 17축" + _resolved-fragments PH v9.0
+%% ★PH = 9번째 종단 카테고리 · distinct #18 부결(거치/완제액자 facet/variant) · 17축 재포화 · 신규 vessel-gap 0
+flowchart LR
+  PH["PH 카테고리<br/>★distinct #18 REFUTED<br/>17축 재포화 (9번째)<br/>신규 축 0"]
+
+  subgraph TOUCH["PH가 행사하는 기존 축 (강화 facet·신축 0)"]
+    direction TB
+    A1["#1 자재 — 프레임재질 variant(한나무/애쉬/원목/알루미늄/종이/아크릴/디아섹)<br/>인화지×마감 surface-finish · 전면 보호재 내재 · 전사지/머그·화분 본체"]
+    A3["#3 옵션 — ★거치방식(탁상용/벽걸이) 캐스케이드 상위 차원<br/>(거치→마감→완제SKU사이즈→수량) · 인쇄면"]
+    A4["#4 완제SKU — 거치+마감+사이즈 인코딩 완제 SKU combobox 1개<br/>(AC variant·GS 완제SKU 동형) · 고정 set 단위"]
+    A5["#5 제약 — [재고부족]홀로그램 disabled(주문가능 constraint)"]
+    A6["#6 기초코드 — 보드 규격 5종·인화 사이즈 enum·set base_quant"]
+    A7["#7 카테고리 — 출력매체(사진굿즈) ⊥ 물성(컵&홀더) 다중분류"]
+    A8["#8 부속물 — 후면 받침(미관측 후보)"]
+    A10["#10 수량모델 — 건수×매수 이중 수량 · set 배수(600매/4·5sheets)"]
+    A11["#11 가격 — tmpl_price(보드/굿즈)·digital_price(포토북) 라우팅"]
+    A13["#13 사이즈 — ★형태(일반/정사각/파노라마) 비율 프리셋 흡수 · 작업/재단 치수"]
+    A14["#14 본체 형태가공 — 포토북 제본(소프트/하드/프리미엄)·전사인쇄"]
+    A15["#15 생산형태 — 액자=C 완제품(프레임에 인쇄물 끼움) · 보드/굿즈=완제"]
+    A16["#16 디자인입력 — PDF/에디터/편집하기(§0.5 OBSERVED·TP 동형)·koi 에디터"]
+  end
+
+  subgraph NOT["PH 미행사 축"]
+    direction TB
+    N2["#2 공정 — 마감은 자재 facet·포토북 제본은 #14"]
+    N9["#9 공정파라미터 · #12 인쇄방식레시피 (미행사)"]
+    N17["#17 형상 — 형태=비율 1:1 사이즈 흡수·형상축 강제 금지(ST 1:多 미충족)"]
+  end
+
+  REFUTE["★#18 REFUTED — 완제 액자 그릇/마운팅(거치)<br/>거치 OBSERVED(전용슬롯✅) but 후니 KB 결함 없음(❌)<br/>→ 옵션#3 캐스케이드 + 완제SKU#4 variant로 무손실 흡수<br/>(형상#17 G-SK-2와 정반대)"]
+
+  PH --> TOUCH
+  PH --> NOT
+  PH -.-> REFUTE
+
+  style PH fill:#e1f5fe,stroke:#0277bd,stroke-width:3px
+  style A3 fill:#c8e6c9,stroke:#2e7d32,stroke-width:2px
+  style A4 fill:#c8e6c9,stroke:#2e7d32,stroke-width:2px
+  style A13 fill:#c8e6c9,stroke:#2e7d32,stroke-width:2px
+  style NOT fill:#f5f5f5,stroke:#9e9e9e
+  style REFUTE fill:#ffe0b2,stroke:#e65100,stroke-width:2px

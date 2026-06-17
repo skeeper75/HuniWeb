@@ -668,3 +668,73 @@
 **PD 강제 분류 회피(SKILL §3·§5):** **distinct 승급 0건(★완제 구조물 내재BOM PD-4 #18 부결) = 17축 재포화(PR 4번째·CL 6번째·AC 7번째 distinct 0 패턴 반복).** 5 fragment 전부 기존 17축 facet/family/cascade. ★directive 최대 관전(조립·구조·3D폼·완제 내재BOM이 distinct #18인가) 적대 판정: ① 봉제/제품가공=본체 형태가공#14(GS D-10) 봉제 family 멤버(별 조립축 아님·PDWRSLP=GS 동일코드) · ② 직물/PU 원단=자재#1 PTT(AC/CL 동형) · ③ 단수/형상=사이즈#13 프리셋 흡수(2단=495×320 1:1·원형↔305×305 1개=ST 형상 1:多 미충족=구조 distinct 부결 결정적 증거) · ④ 완제 구조물 내재BOM=부속물#8(고정 ESN=Y)+생산형태#15+가격#11 분산 facet(★침묵선택 거부하고 "별 완제 BOM 축 #18 vs 네 기존 축 분산" 트레이드오프 펼친 뒤 facet). **★재포화 정당성:** 형상(#17·ST)은 후니 KB G-SK-2 "어느 축에도 없음" 결함이 distinct 강제했으나, PD 5 fragment(완제 내재BOM 포함)는 후니 KB(addl_product·자재 usage·생산방식 A/B/C)+기존 축이 *왜곡 없이 담음* → distinct 0 정직. 8번째 카테고리(봉제 구조물 완제품)가 새 관리축 0 도입 = 모델 안정성 재확인(가장 이질적 카테고리·directive 최대 관전 조립/구조/3D폼도 무손실 흡수).
 **PD가 더한 것(축 신설 아닌 *강화*):** ① **17축 재포화** — 8번째 카테고리 distinct 0(PR·CL·AC 패턴 반복). ② 본체 형태가공#14 봉제(SEW_LTR) family 확장(굿즈→봉제 구조물 완제품 횡단). ③ 부속물#8 "고정(미노출·ESN=Y) 완제 부속" facet(완제 구조물 내재BOM·AC 받침 ESN=Y 합류). ④ 자재#1 비종이 원단 차원 확장(직물/PU·AC/CL 합류). ⑤ 사이즈#13 단수/구조 프리셋 흡수 입증(구조 distinct 부결 결정적). ⑥ 생산형태#15+가격#11(tmpl) 완제품 governing 재확인.
 **검증 라우팅 요약:** 메타모델 해소 ✅ = PD-1·PD-3·PD-4(축 귀속 확정) / 부분 🟡 = PD-2·PD-5(unobserved 잔존 → gap/validation). 라이브/엑셀 검증 필요분 = 직물 물성 차원 그릇(PD-2 → gap/vessel)·단수→생산BOM 게이팅(PD-3)·완제 BOM 상세 적재(PD-4 → gap data-gap)·THO_CUT/SUB_MTR enum·tmpl 단가(PD-5). **★PD-4 = data-gap(부속물/생산BOM 그릇 미적재)이지 vessel-gap(축 부재) 아님 — 갭분석가 핵심 구분.**
+
+---
+
+# PH(포토보드·액자·사진인화·포토북·포토굿즈 = 사진을 어떤 물성으로 출력하느냐로 묶인 출력매체 카테고리) fragment 판정 (v9.0 — 완제 액자 그릇·마운팅/거치·전면 보호재·인화지×마감·set 단위·다중분류) ★완제 그릇/마운팅 distinct(#18) 적대 판정·재포화
+
+> `categories/PH/reverse.md` ## Ambiguous fragments PH-1~PH-5 + §0.5 형태축 판정. **9 상품군(BN 면적·GS 완제/입체·TP 디자인입력·PR 다면/제본/접지·ST 형상/칼선/점착·CL 의류 variant·AC 아크릴 두께/입체/가공방식·PD 봉제 구조물 완제품·PH 완제 액자 그릇/출력매체)** 증거로 distinct/facet 결정.
+> 과잉 일반화 경계(SKILL §5): PH 한 군만의 특이는 facet 강등. distinct 승급 = 9 상품군을 견디는 고유 lifecycle/governing + 후니 도메인 동형 보유 시만.
+> 도메인 정초 = `07_domain/entity-semantic-model.md`(addl_product 부속물 #9·완제SKU 템플릿·생산방식 A/B/C·자재 usage·surface-finish 합성) + GS(완제 본체 SKU G-1·생산형태 D-9)·AC(소재 variant A-2·두께 WGT A-1·받침 부속물 A-3)·ST(형상 #17 [HARD] 경계·점착 surface-finish S-4)·PD(완제 내재BOM PD-4·단수 사이즈 1:1 흡수 PD-3) 직접 대조. **★domain-researcher 신규 호출 불요** — 완제 프레임(=완제SKU#4+자재#1 variant+생산형태#15)·거치(=옵션#3 캐스케이드 상위 차원)·인화지×마감(=자재#1 surface-finish)·형태 비율(=사이즈#13 프리셋)이 후니 KB+기존 17축에 확정 존재(추정 0).
+> **★PH 핵심 판정: distinct 신규 축 0건(★완제 액자 그릇/마운팅 PH-1·PH-2 #18 부결) = 17축 재포화(PR·CL·AC·PD 패턴 반복).** PH reverse가 1차 예측한 "distinct 0(facet)·미확정(SSR-negative 블로커)"를 **§0.5 client-render 재캡처(gstack browse 2026-06-17)가 블로커 해소 후 적대 판정으로 비준** — 가장 distinct로 *보이던* 완제 액자(인쇄물 + 별도 프레임 2-파트 조립)조차 17축 무손실 흡수. ★directive 최대 관전(완제 프레임·마운팅/거치·전면 보호재=distinct #18인가) 적대 판정: **PH-1 완제 프레임=완제SKU#4(거치+마감+사이즈 인코딩)+자재#1 variant+생산형태#15 · PH-2 거치=옵션#3 캐스케이드 상위 차원(RESOLVED OBSERVED)·전면재=자재#1 내재·후면받침=부속물#8(미관측) · PH-3 인화지×마감=자재#1 surface-finish · PH-4 set 단위=수량#10+완제SKU#4 · PH-5 머그·화분=카테고리#7 다중분류 · 형태(일반/정사각/파노라마)=사이즈#13 비율 프리셋(형상#17 부결).**
+
+## PH-1. 완제 액자 = "인쇄물을 끼우는 빈 프레임(2-파트 완제 그릇)" — 완제SKU#4 + 자재#1 프레임재질 variant + 생산형태#15 [distinct #18 거부] ★directive 핵심 의사결정
+
+- **판정:** **분산 facet/variant — distinct "완제 그릇/마운팅 축 #18" 거부.** 액자(PHFR* 11종)는 AC(아크릴 본체 직접 인쇄)·GS(완제굿즈)와 달리 *인화물을 사후에 끼우는 빈 프레임*(2-파트 완제 구조)이나, **§0.5 client-render 재캡처**가 거치+마감+사이즈를 **완제 SKU combobox 1개에 인코딩**(PHFRDIA 탁상용유광 127X177 ~ 벽걸이유광 1000X1000)함을 OBSERVED — AC 두께/소재 variant·GS 완제 본체 SKU(G-1)와 동형 구조.
+- **★양면 트레이드오프 펼침(침묵 선택 금지) — discovered-axes PH-1 참조:**
+  - **(가) distinct "완제 그릇/마운팅 축 #18" 신설:** 찬성=완제 프레임은 인쇄 본체가 아니라 *인쇄물을 담는 그릇*(역할 역전)·"인쇄물 + 별도 프레임 조립" 2-파트 완제 구조가 단일 자재/단일 본체와 다름·거치(탁상/벽걸이)가 액자의 핵심 정체축. 반대=★세 기존 축 무손실 분담·거치는 옵션 캐스케이드로 구현(별 그릇 없음).
+  - **(나) 완제SKU#4 + 자재#1 프레임재질 variant + 생산형태#15(C 완제품) 분산 facet [채택]:** ① 거치+마감+사이즈가 *완제 SKU 라벨 1개*(combobox 값)로 등장 = 템플릿/완제SKU#4(GS 완제 본체 SKU G-1 "미르 화이트 20oz" 라벨 융합 동형·AC 완제 받침 SKU 12 동형). ② 프레임재질(한나무/애쉬/원목/알루미늄/종이/아크릴/디아섹)=자재#1 variant(AC 소재 variant·ST 점착소재 spectrum 동형·pdtCode 분기 = GS 코스터 6 pdtCode·G-2 동류 카탈로그 정책). ③ "완제 프레임에 인쇄물 끼움" 성격=생산형태#15(C 완제품 governing·본체=완제 SKU vs 자재행 결정).
+- **★ST 형상(#17)과의 결정적 차이(역방향 오류 점검·HARD 기준):** ① 전용 슬롯 라이브 실재? = **거치 버튼 토글 OBSERVED**(§0.5·미싱데이터 해소·✅ 충족). ② 후니 KB가 "기존 축이 못 담음" 결함 명시? = **없음**(❌ 불충족) — 완제SKU#4·옵션#3·자재#1 variant가 왜곡 없이 담음·형상#17의 G-SK-2("형상 어느 축에도 없음") 같은 KB 결함 부재. **둘 다 충족해야 승격 → ②가 불충족 → distinct #18 부결**(facet/variant). 형상은 둘 다 충족(승격), 완제 그릇은 ①만 충족(부결) = 결정적 분기. **역방향 오류(distinct를 facet으로 숨김) 점검:** "2-파트 완제 그릇"이 유일 잔여 후보였으나 완제SKU#4(거치+마감+사이즈 인코딩 = AC variant·GS 완제SKU 동형)의 facet으로 무손실 흡수 → facet 정당(숨김 아님·새 관리 관심사 없음).
+- **메타모델 해소:** ✅ 완제SKU#4 + 자재#1 프레임재질 variant + 생산형태#15 분산 facet 귀속 확정(#18 부결). **검증 필요분: 거치방식 캐스케이드(옵션#3 polymorphic ref)·거치+마감+사이즈 완제 SKU variant 그릇 매핑 → gap(data-gap 적재·축 부재 아님).**
+
+## PH-2. 마운팅/거치(탁상용/벽걸이)·전면 보호재(유리/아크릴)·후면 받침 — 거치=옵션#3 캐스케이드 상위 차원(RESOLVED) + 전면재=자재#1 내재 + 후면받침=부속물#8(미관측) [distinct #18 거부] ★블로커 해소
+
+- **판정:** **거치=옵션#3 캐스케이드 상위 차원 facet (distinct "마운팅 축 #18" 거부·RESOLVED OBSERVED).** §0.5 PHFRDIA에서 **거치방식(탁상용/벽걸이)이 버튼 토글로 OBSERVED** — reverse 1차의 "unobserved(SSR-negative)" 블로커가 해소됨(Vue 지연 렌더가 SSR-negative 원인 확정). 단 거치는 *별 메타모델 축이 아니라 옵션 캐스케이드 상위 차원*: 거치방식(탁상용/벽걸이) → 마감(유광/무반사/자작나무) → 완제 SKU 사이즈(탁상용=소형 3종·벽걸이=대형 15종) → 수량. 거치방식 토글 시 마감 prefix·사이즈 풀이 통째로 교체 = 옵션#3 polymorphic cascade(AC GRP_OPTION_CD 가공방식→자재 subset 게이팅 A-8·G-4 채널 동형).
+- **★전면 보호재(유리/아크릴) = 자재#1 내재/facet:** §0.5 — 마감 combobox는 표면처리(유광/무반사/자작나무)만 노출·**전면 보호재 별도 옵션 select 미관측**. 디아섹은 전면재가 *상품 내재*(아크릴 마운팅)이므로 전면 보호재는 별도 축 아님(자재#1 내재 또는 마감 facet). 유리/아크릴 전면이 별도 선택인 다른 액자(한나무/멀티)는 미캡처(`unobserved`·날조 금지) — 관측분(디아섹)은 자재 내재.
+- **★후면 받침 = 부속물#8 후보(미관측):** §0.5 별도 옵션 미관측. 도메인상 후면 받침/이젤은 AC 등신대 받침·BN 거치대(D-1 부속물#8) 동형 후보이나 라이브 미노출 → `unobserved` 정직 표기(추정 승격 0).
+- **★distinct #18 판정:** 거치가 OBSERVED(실재)되었으나 **옵션 캐스케이드 상위 차원(거치방식 → 완제 SKU variant)으로 구현** → 별 신규 메타모델 축 아님(PH-1 HARD 기준 ② 불충족 동일). 거치=옵션#3·완제 SKU=완제SKU#4가 왜곡 없이 담음.
+- **메타모델 해소:** ✅ 거치=옵션#3 캐스케이드 상위 차원·전면재=자재#1 내재 귀속 확정(#18 부결). **검증 필요분: 거치 캐스케이드 polymorphic ref 매핑(옵션#3)·전면 보호재가 별도 옵션인 액자(한나무/멀티 미캡처)·후면 받침(부속물#8 후보)은 unobserved → gap/validation(라이브 재캡처 또는 후니 도메인 권위).**
+
+## PH-3. 인화지(자재) vs 마감(공정) 경계 — 인화지×마감 합성 = 자재#1 surface-finish facet [distinct 거부] ★ST S-4·AC A-2 동형
+
+- **판정:** **자재 축(#1)의 surface-finish 합성 차원 facet (별 "마감 공정 축" 거부).** §0.5 PHPTEDT 자재 combobox = "인화용지(반광-러스터) / 인화용지(유광)" — *인화지(자재) + 마감(반광/유광)을 한 combobox 값에 합성*(reverse §0.3 1차 예측 입증). PHPTPRM "유광(Glossy)_캐논전용지" 동형. 마감은 별 공정 멤버가 아니라 *인화지 매체에 종속된 표면 특성*(ST 점착/내후 S-4·AC 글리터/거울 A-2 surface-finish 합성 차원과 동근).
+- **★자재 surface-finish vs 공정 경계(미세 판정):** 사진인화 "유광/반광/스노우"는 *인화지 자체의 표면 특성*(매체 종속·인화 시점에 매체로 결정)이므로 자재 surface-finish facet 우세(BN 코팅=후가공 공정과 다름 — 코팅은 인쇄 후 별 공정 적용·마감은 매체 선택). 단 합성 인코딩("유광_캐논전용지")은 후니 정규화 시 `{ptt(캐논전용지/스노우/홀로그램), surface_finish(유광/반광/무광)}` 분해 필요(ST 점착 `adhesion_grade`·AC `surface_finish` 합성축과 동근·평면 라벨 금지).
+- **근거:** ST S-4 "점착/내후=자재#1 합성 차원(`adhesion_grade`/`weather_grade`)"·AC A-2 "surface-finish=자재#1 합성 차원"·`entity-semantic-model.md:51-53` "색상/두께 variant→material" 원칙 동형. 후니 자재모델에 surface-finish 합성 차원 부재=ST/AC가 드러낸 동일 갭(V-3 자재 합성 차원 그릇·갭분석가 합류).
+- **메타모델 해소:** ✅ 자재#1 surface-finish facet 귀속 확정. **검증 필요분: 인화지×마감 합성 분해 그릇(`{ptt, surface_finish}`·ST/AC V-3 합류) → gap/vessel.**
+
+## PH-4. set/sheets 단위 수량(600매·4sheets·5sheets) — 수량모델#10 set 배수 + 완제SKU#4/기초코드#6 base_quant facet [distinct 거부] ★GS 완제 base_quant 동형
+
+- **판정:** **수량 모델 축(#10) set 배수 + 완제SKU#4/기초코드#6 base_quant facet (별 축 거부).** 증명사진600/포켓사진600(=600매 set)·판스티커-노브랜드(4sheets)·스퀘어(5sheets) = *매수/sheets 묶음이 상품명에 인코딩된 고정 set 단위*(1주문=1 set). GS 텀블러(it_g_base_quant=1·완제) 동형 — set 단위 = `it_g_base_quant` 인코딩.
+- **★양면(set=수량 vs set=템플릿 SKU):** ① set을 수량모델#10 슬롯(set 배수·printCnt)으로 볼 수 있고 ② 고정 set(600매 묶음 1단위)을 완제SKU#4 base_quant(GS 완제 base_quant 동형)로 볼 수 있음 — 둘 다 기존 축 facet(별 축 아님). RP는 상품명 인코딩(고정 set)이므로 base_quant 우세·수량은 set 배수.
+- **근거:** 수량모델#10(건수×매수 이중 수량·PHPTPRM 디자인수+수량)·`it_g_base_quant`(기초코드#6·GS 완제 동형). set 단위=base_quant 인코딩이지 새 관리 관심사 아님.
+- **메타모델 해소:** ✅ 수량#10 set 배수 + base_quant facet 귀속 확정. **검증 필요분: set base_quant 그릇(`it_g_base_quant`·GS 동형) 적재 → gap(data-gap).**
+
+## PH-5. PHMG/PHPO(머그·화분)의 PH vs GS 귀속 — 카테고리#7 다중분류 facet [distinct 거부] ★GS 코드접두≠본질 동형
+
+- **판정:** **카테고리 축(#7) 다중분류 facet (distinct 거부).** PHMGDFT(머그)·PHPODFT(화분)은 category=PH(출력매체=사진굿즈)이나 cate=디지털인쇄>컵&홀더(물성·PHPODFT 실측)·본질=전사인쇄 완제굿즈(GS GSTTDTM 코스터·텀블러 동형). "코드접두≠카테고리 본질"(GS 코스터 동형). 출력매체(사진굿즈) ⊥ 물성(컵&홀더) **다중분류**(GS 횡단 다중분류 패턴 동형).
+- **근거:** 카테고리#7 다중분류(GS G-2 코스터 소재 pdtCode 분리·물성 vs 기능 직교)·"출력매체로 묶느냐 물성으로 묶느냐"는 메타모델 판정이 아닌 **후니 카탈로그 정책 결정**(갭분석가/실무) — 메타모델은 둘 다 표현 가능(다중분류 노드).
+- **메타모델 해소:** ✅ 카테고리#7 다중분류 facet 귀속 확정. **검증 필요분: 출력매체 vs 물성 다중분류 정책(GS G-2 동형·정책 결정) → gap/실무.**
+
+## PH-6. ★형태(일반/정사각/파노라마) — 사이즈#13 비율 프리셋 흡수 facet [형상#17 부결] ★형상축 강제 금지·PD-3 동형
+
+- **판정:** **사이즈 축(#13) 비율 프리셋 흡수 facet (distinct "형상 축 #17" 적용 거부).** §0.5 PHPTEDT에서 **형태(일반/정사각/파노라마)가 버튼 토글로 OBSERVED** — 이는 인화 *비율(aspect ratio)* 프리셋(일반=3:2·정사각=1:1·파노라마=와이드)이지 ST 형상(SQ/CL/EL/RC/FR)의 외곽 칼틀 형상 enum이 아님.
+- **★ST 형상(#17) [HARD] 경계 적용:** 형상이 사이즈와 **1:1**이면 사이즈 프리셋에 흡수(형상축 강제 금지=오모델 회피)·**1:多** 분리가 명시 슬롯으로 드러나면 별 분류축(#17). PH 형태는 형태→사이즈 1:1(정사각=특정 정사각 치수 프리셋·파노라마=와이드 치수 프리셋·전용 shape_info 슬롯 없음·치수 combobox와 융합) → ST 1:多(한 형상 CL이 CL001~CL100 칼틀 enum span) 미충족 → 사이즈#13 흡수 정당(BN 어깨띠·GS THO_CUT·TP M/I·PR 카드형·PD 단수/형상 동형).
+- **근거:** dictionary #13/#17 [HARD] 경계·PD-3 "스툴 원형↔305×305 1개=ST 1:多 미충족" 동형. PH 형태=비율 프리셋(1:1)이므로 형상축 #17 부결·사이즈#13 흡수.
+- **메타모델 해소:** ✅ 사이즈#13 비율 프리셋 흡수 귀속 확정(형상#17 부결). **검증 필요분: 형태→사이즈 비율 프리셋 그릇(사이즈#13 enum) 적재 → gap.**
+
+---
+
+## PH 판정 요약표
+
+| Fragment | 1차 귀속 축 | 판정 | distinct/facet | 등재 | 검증 라우팅 |
+|---|---|---|---|---|---|
+| PH-1 ★완제 프레임(인쇄물 끼우는 빈 그릇) | **완제SKU#4(거치+마감+사이즈)+자재#1 프레임재질 variant+생산형태#15** | §0.5 거치/마감/사이즈=완제 SKU combobox 1개 인코딩·AC variant·GS G-1 동형·후니 KB 결함 없음·HARD ② 불충족 | **분산 facet/variant(거부·#18 부결)** ★강후보 | #4·#1·#15 | 거치 캐스케이드 polymorphic ref·완제 SKU variant → gap(data-gap) |
+| PH-2 ★마운팅/거치·전면 보호재·후면 받침 | **거치=옵션#3 캐스케이드 상위 차원(RESOLVED)·전면재=자재#1 내재·후면받침=부속물#8(미관측)** | §0.5 거치(탁상용/벽걸이) OBSERVED·옵션 캐스케이드 구현·전면재 디아섹 내재·후면받침 unobserved | **facet(거부·#18 부결)** ★블로커 해소 | #3·#1·#8 | 거치 캐스케이드·전면재 별옵션 액자·후면받침 unobserved → gap/validation |
+| PH-3 인화지(자재) vs 마감(공정) | 자재#1 surface-finish 합성 | §0.5 "인화용지(반광-러스터)/유광" 합성 입증·ST S-4/AC A-2 동형·마감=매체 종속 | facet(거부) | #1 | 인화지×마감 분해 그릇({ptt,surface_finish}·ST/AC V-3) → gap/vessel |
+| PH-4 set/sheets 수량(600매·4/5sheets) | 수량#10 set 배수 + 완제SKU#4/기초코드#6 base_quant | 상품명 인코딩 고정 set·1주문=1 set·GS 텀블러 base_quant 동형 | facet(거부) | #10·#4·#6 | set base_quant 그릇(GS 동형) → gap(data-gap) |
+| PH-5 PHMG/PHPO(머그·화분)=PH vs GS | 카테고리#7 다중분류 | 출력매체(PH)⊥물성(컵&홀더)·GS 코드접두≠본질·다중분류 | facet(거부) | #7 | 출력매체 vs 물성 다중분류 정책(GS G-2) → gap/실무 |
+| PH-6 ★형태(일반/정사각/파노라마) | 사이즈#13 비율 프리셋 흡수 | §0.5 OBSERVED·비율(aspect ratio) 프리셋·형상↔사이즈 1:1·ST 1:多 미충족·PD-3 동형 | **facet(거부·형상#17 부결)** ★형상축 강제 금지 | #13 | 형태→사이즈 비율 프리셋 그릇 → gap |
+
+**PH 강제 분류 회피(SKILL §3·§5):** **distinct 승급 0건(★완제 액자 그릇/마운팅 PH-1·PH-2 #18 부결) = 17축 재포화(PR 4번째·CL 6번째·AC 7번째·PD 8번째 distinct 0 패턴 반복).** 6 fragment(PH-1~PH-6) 전부 기존 17축 facet/family/cascade/정책. ★directive 최대 관전(완제 프레임·마운팅/거치·전면 보호재가 distinct #18인가) 적대 판정: ① 완제 프레임=완제SKU#4(거치+마감+사이즈 인코딩)+자재#1 프레임재질 variant+생산형태#15(AC variant·GS 완제SKU G-1 동형) · ② 거치(탁상용/벽걸이)=옵션#3 캐스케이드 상위 차원(★§0.5 RESOLVED OBSERVED·블로커 해소·옵션 구현이지 별 그릇 아님)·전면재=자재#1 내재(디아섹 상품내재) · ③ 인화지×마감=자재#1 surface-finish(ST S-4/AC A-2 동형) · ④ set 단위=수량#10+완제SKU#4 base_quant(GS 동형) · ⑤ 머그·화분=카테고리#7 다중분류(GS 동형) · ⑥ 형태(일반/정사각/파노라마)=사이즈#13 비율 프리셋 흡수(★형상#17 부결·1:1·형상축 강제 금지). **★재포화 정당성(HARD 기준 양방향 점검):** 형상(#17·ST)은 후니 KB G-SK-2 "어느 축에도 없음" 결함이 distinct 강제(① 전용 슬롯 + ② KB 결함 둘 다 충족·승격)했으나, PH 6 fragment(완제 프레임·마운팅 포함)는 **① 전용 슬롯 OBSERVED(거치 버튼 토글)되었으나 ② 후니 KB 결함 명시 없음**(완제SKU#4·옵션#3·자재#1·사이즈#13이 왜곡 없이 담음) → ②가 불충족 → distinct 0 정직. §0.5 재캡처가 블로커를 OBSERVED로 해소했음에도 거치가 옵션 캐스케이드 + 완제 SKU variant로 구현됨이 실측 → facet 결론이 미싱데이터 해소 후에도 강화. 9번째 카테고리(완제 액자/출력매체)가 새 관리축 0 도입 = 모델 안정성 재확인(가장 distinct로 보이던 2-파트 완제 그릇·directive 최대 관전 마운팅/거치도 무손실 흡수).
+**PH가 더한 것(축 신설 아닌 *강화*):** ① **17축 재포화** — 9번째 카테고리 distinct 0(PR·CL·AC·PD 패턴 반복). ② 완제SKU#4 "거치+마감+사이즈 인코딩 완제 SKU combobox" 강화(AC 두께/소재 variant·GS 완제 본체 SKU G-1 합류·라벨 융합 분해 처방). ③ 자재#1 프레임재질 variant 확장(한나무/애쉬/원목/알루미늄/종이/아크릴/디아섹·AC 소재 variant 합류)·인화지×마감 surface-finish(ST S-4/AC A-2 합류·V-3). ④ 옵션#3 "거치방식 캐스케이드 상위 차원" 강화(거치→마감→완제SKU사이즈→수량·AC GRP_OPTION_CD cascade 동형). ⑤ 사이즈#13 비율(aspect ratio) 프리셋 흡수 입증(형상 1:1·형상#17 강제 금지 재확인·PD-3 합류). ⑥ 제약#5 [재고부족]disable(§0.5 PHPRDFT OBSERVED·ST disable·AC 명찰 cascade 합류). ⑦ 카테고리#7 출력매체 vs 물성 다중분류(GS G-2 합류). ⑧ 가격#11 tmpl/digital_price 라우팅·생산형태#15 완제품 governing 재확인.
+**검증 라우팅 요약:** 메타모델 해소 ✅ = PH-1·PH-2·PH-3·PH-5·PH-6(축 귀속 확정·거치 블로커 §0.5 RESOLVED) / 부분 🟡 = PH-4(set base_quant unobserved 상세). 라이브/엑셀 검증 필요분 = 거치 캐스케이드 polymorphic ref 매핑(PH-1/PH-2 → gap data-gap)·전면 보호재 별옵션 액자(한나무/멀티 미캡처)·후면 받침 부속물#8(PH-2 → unobserved 재캡처)·인화지×마감 surface-finish 분해 그릇(PH-3 → V-3 ST/AC 합류)·포토북 면수/제본 client-render(PHBK* 미캡처). **★PH-1/PH-2 = data-gap(완제 SKU/거치 캐스케이드 그릇 미적재)이지 vessel-gap(축 부재) 아님 — 갭분석가 핵심 구분(PD-4 data-gap·AC A-3 PASS 동형).**
