@@ -9,15 +9,18 @@
 > - **v1.0 (BN 파일럿):** 현수막류(BN) 6상품. 13축(7 정적 + 4 관계/동역학 + 2 횡단).
 > - **v2.0 (GS 통합):** + 굿즈/잡화(GS) 12상품. BN(평면 배너)·GS(완제/입체 굿즈) **2 상품군 증거**. GS 신축 2종 distinct(D-9 생산형태·D-10 본체 형태가공). 총 **15축**.
 > - **v3.0 (TP 통합):** + 디자인템플릿(TP) 대표3+20횡단. BN(면적)·GS(완제/입체)·TP(디자인입력) **3 상품군 증거**로 검증. TP 신축 1종 distinct 추가(D-11 디자인 입력 채널 #16), 템플릿#4 이중의미 분리(완제SKU vs 에디터 디자인 자산). 총 **16축**.
-> - **v4.0 (PR 통합·현재):** + 인쇄물·책자·리플렛·포스터(PR) 대표3+53횡단. BN(면적 단면)·GS(완제/입체)·TP(디자인입력)·PR(다면/제본/접지) **4 상품군 증거**로 검증. **★PR distinct 신축 0종 — 9 fragment(P-1~P-9) 전부 기존 16축 facet/family/cascade/정책으로 흡수 = 16축 포화(saturation) 입증.** 총 **16축 유지**. PR은 새 *축*이 아니라 기존 축 *강화*: 공정#2 접지 family · 자재#1 usage_cd 역할 전파 · page_rule 엔티티(#10) · 인쇄방식#12 자재풀 게이팅 · 가격#11 digital_price 라우팅.
+> - **v4.0 (PR 통합):** + 인쇄물·책자·리플렛·포스터(PR) 대표3+53횡단. BN(면적 단면)·GS(완제/입체)·TP(디자인입력)·PR(다면/제본/접지) **4 상품군 증거**로 검증. **★PR distinct 신축 0종 — 9 fragment(P-1~P-9) 전부 기존 16축 facet/family/cascade/정책으로 흡수 = 16축 포화(saturation) 입증.** 총 **16축 유지**. PR은 새 *축*이 아니라 기존 축 *강화*: 공정#2 접지 family · 자재#1 usage_cd 역할 전파 · page_rule 엔티티(#10) · 인쇄방식#12 자재풀 게이팅 · 가격#11 digital_price 라우팅.
+> - **★v5.0 (ST 통합·현재):** + 스티커(ST) 대표3+33횡단. BN·GS·TP·PR·ST **5 상품군 증거**로 검증. **★ST distinct 신축 1종(#17 형상) = 16축 포화 붕괴.** 4 distinct 후보 적대 판정: **형상=distinct(#17)·칼선=공정#2 facet·재단입자=공정#2 facet·점착=자재#1 facet.** 형상(shape)이 사이즈축(#13)을 *1:1 칼틀로 흡수*해온 전제를 깸 — ST `option_info.shape_info` 전용 슬롯·형상↔사이즈 1:多(CL→CL001~100)·5형상 superset·후니 KB G-SK-2 "형상 어느 축에도 없음" 확증. 나머지 9 fragment(S-2~S-10)는 facet(칼선/재단=공정#2 family·KB PROC_053/054/055 결정적·점착=자재 합성·인쇄방식=#12 PR합류·disable 227=#5 정점). 총 **17축**. PR 포화 입증(distinct 0)도 유효 — PR은 형상 1:1로 흡수 정당, ST가 1:多 분리를 명시 슬롯으로 드러내 차이.
 >
-> 축 총 **16개 = 7 정적 축(자재·공정·옵션·템플릿·제약·기초코드·카테고리) + 4 관계/동역학 축(부속물·공정파라미터·수량모델·제약논리) + 2 횡단 축(가격기여역할·인쇄방식레시피) + GS 신축 2(생산형태·본체 형태가공) + TP 신축 1(디자인 입력 채널)**. 발굴 근거=`discovered-axes.md`. **PR이 distinct 0 추가(4군 견딤)=모델 포화.**
+> 축 총 **17개 = 7 정적 축(자재·공정·옵션·템플릿·제약·기초코드·카테고리) + 4 관계/동역학 축(부속물·공정파라미터·수량모델·제약논리) + 2 횡단 축(가격기여역할·인쇄방식레시피) + GS 신축 2(생산형태·본체 형태가공) + TP 신축 1(디자인 입력 채널) + ST 신축 1(형상 #17)**. 발굴 근거=`discovered-axes.md`. **PR distinct 0(4군 포화)→ST distinct 1(형상·5군 포화 붕괴)=모델은 카테고리 증거에 정직하게 진화.**
 >
 > **GS 통합 원칙(과잉 일반화 경계, SKILL §5):** 2 상품군(BN 평면·GS 완제/입체)을 *둘 다* 견디는 패턴만 메타모델 축으로 승격. 한 군만의 특이(폰케이스 기종 enum 규모·코스터 6 pdtCode 분리)는 facet으로 강등(distinct 거부). BN 본체=`ORD_INFO.MTRL_CD`(자재) vs GS 본체=`DIR_MTR/WRK_MTR`(PCS 항목)는 **같은 자재축의 두 표현 facet**(아래 #1·#4 명시).
 >
 > **TP 통합 원칙(v3.0):** 3 상품군(BN·GS·TP)을 *셋 다* 견디는 패턴만 승격. TP 발굴 6종 중 **D-11 디자인 입력 채널만 distinct**(비-TP 트윈 직접 대조 + huni-widget RedEditorSDK 계약 권위). 나머지 5종(템플릿 자산·VDP·페이지계층·형태variant·특수인쇄)은 facet 강등. **★템플릿 이중의미 [HARD]:** 메타모델 #4 "템플릿/SKU"는 *완제 주문 단위*(봉투결합 엽서·OTC·후니 `t_prd_templates`), TP "템플릿 자산"은 *에디터 디자인 시안*(가격0·D-11#16 종속) — **같은 단어 다른 의미·별 엔티티 분리**(아래 #4·#16 명시).
 >
 > **PR 통합 원칙(v4.0):** 4 상품군(BN·GS·TP·PR)을 *넷 다* 견디는 패턴만 승격. **PR 발굴 9종(P-1~P-9) distinct 승격 0** — 전부 기존 축 facet/family/cascade/정책. 이는 *오버피팅 회피의 정직한 결과이자 16축 포화 입증*(4번째 카테고리=새 축 0). PR이 더한 강화: **(P-1) 공정#2 "접지(folding)" family + 접지↔오시 cascade**(평면 종이 면가공·면수=파생값 축 아님) · **(P-2) 자재#1 usage_cd "역할 전파"**(★침묵선택 거부: 표지/내지 role이 자재→도수→가격→평량 전파되나 별 "역할 축" 아닌 usage_cd 전파·`inner_pdt_*`=usage 슬롯 물리구현) · **(P-3) page_rule 엔티티**(INN_PAGE=수량#10 슬롯+후니 `_page_rules`·TP T-C 합류) · **(P-4) 공정방식=상품분기 정책**(GS G-2·TP T-4 동류·인쇄방식#12·공정#2·도수#6 분배) · **(P-5) 면지=자재+공정 bundle**(D-2) · **(P-6) 가격#11 digital_price 라우팅**(pricing_model 5종) · **(P-7) 인쇄방식#12 자재풀 게이팅 간선** · **(P-8) 용도=카테고리#7 태그** · **(P-9) 공정#2 멤버**(스코딕스 입체UV·레이저커팅·합지). 도메인 정초=`entity-semantic-model.md`(usage_cd 7종·page_rule 엔티티)+reverse 실측, domain-researcher 신규호출 불요.
+>
+> **★ST 통합 원칙(v5.0·포화 붕괴):** 5 상품군(BN·GS·TP·PR·ST)을 *다섯 다* 견디는 패턴만 승격. ST 발굴 4 distinct 후보 중 **D-12 형상(#17)만 distinct** — 사이즈축(#13)이 형상을 *1:1 칼틀로 흡수*해온 전제(BN 어깨띠·GS THO_CUT·TP 티켓·PR 카드형 전부 1:1)가 ST에서 *1:多로 깨짐*(전용 `shape_info` 슬롯·CL 형상↔CL001~100 칼틀 span·STDCFBR 5형상 superset). **★[HARD] 형상축 적용 경계:** 형상이 사이즈와 1:1이면 사이즈 프리셋에 흡수 표현(BN/GS/TP/PR 유지·형상축 강제 금지=오모델 회피)·1:多 분리가 명시 슬롯으로 드러나면 별 분류축(#17). 나머지 9종(칼선·재단입자·점착·인쇄방식·가격엔진·화이트강제·disable·넘버링·완제SKU)은 facet — **칼선(THO_GRA/THO_DFT)·재단입자(반칼/완칼)는 공정#2 family**(후니 KB 결정적: 반칼=PROC_000054·완칼=PROC_000053·스티커완칼=PROC_000055·도무송=칼선 자유모형 컷팅 전부 공정 멤버), **점착/내후는 자재#1 합성 차원**(색상→material·두께→material 동형), **인쇄방식(UV/DTF/후지)은 #12 PR 윤전/토너/인디고 합류**, **disable 227건은 #5 정점**.
 >
 > 각 축 포맷: **identity**(관리 대상) · **entities(그릇 shape)**(추상 레코드, 후니 비종속) · **attributes** · **relationships**(FK/polymorphic/composition) · **constraint & cascade**.
 > 확정도: ✅양군+도메인 권위 · 🟡부분+도메인 추론 · 🔴미관측(도메인 KB로 보강).
@@ -60,6 +63,12 @@
   - **★role이 자재 너머로 *전파*된다:** PR이 입증한 핵심 = usage_cd가 자재뿐 아니라 **도수(`pdt_dosu_info` vs `inner_pdt_dosu_info`·CVR_CLR_CNT/INN_CLR_CNT, #6)·가격(F_CVR_MTRL_AMT vs K_INN_MTRL_AMT, #11)·평량제약(COV_MIN_WGT=150 vs INN_MAX_WGT=130, #5/#13)** 으로 전파됨. 즉 usage_cd = "태그"가 아니라 *자재→도수→가격→평량을 role-paired로 흐르게 하는 간선*. **★침묵선택 거부:** 별 "역할(role) 차원" 축 신설(pricing-role#11처럼 횡단 전파)을 검토했으나 거부 — role=usage_cd 값(신축 시 1:1 중복), 도수/가격 role-paired=usage_cd 전파(별 축 아님). 메타모델 정답 = usage_cd 슬롯이 #6/#11/#13으로 전파됨을 명시(역할 전파 격상).
   - **면지(END_PAP) = usage.03 면지 + 삽입 공정 bundle(P-5):** 면지 10색 "선택 컬러 양면인쇄 면지 삽입" = 컬러지(자재·usage_cd .03면지) + 삽입(공정#2) bundle — D-2 자재공정 bundle(아일렛·GS 링·TP STA_CLD 쫄대) 동형.
 
+- **★ST 확장 — 점착/내후 합성 차원(adhesion/weatherability) (v5.0·S-4):**
+  - **점착·내후성 = 자재 합성의 또 다른 차원(별 축 아님):** 스티커 자재(`pdt_mtrl_info` 19~26종)가 지종(PTT)×평량(WGT)×색(CLR) 외에 **점착강도·내후성**으로도 분기 — 일반/초강접(RPATA090)·리무버블(유포/PET 재부착)·옥외 유포(방수)·저온(냉장/냉동)·자석(자성시트)·메탈(금/은/동라벨지)·한지(인견). STTHUSR 26소재 enum에 이 spectrum이 *한 상품 안에 공존*(self-contained variant)이며 동시에 점착특화 상품(STRMDFT 리무버블·STOTDFT 옥외·STMADFT 자석·STLTDFT 저온)으로도 분리.
+  - **★distinct 거부 근거:** 점착/내후는 *새 관리 대상이 아니라 자재 합성코드의 추가 분해축*. `entity-semantic-model.md:51-53` "색상 variant→material·두께 variant→material(별도 mat_cd)" 원칙과 동형 — 점착강도/내후등급도 **material 합성축(adhesion_grade·weather_grade)**으로 분해(별 자재계열 신설 금지). 자석=자성시트(소재)·메탈=금속라벨지(소재)는 PTT 슬롯, 점착성은 별 합성 차원 컬럼. RP가 점착특화 상품(STRMDFT)으로 *분리*한 것은 GS 코스터 6 pdtCode(G-2)·PR 인쇄방식 분리(P-4)와 동류 **카탈로그 정책**(상품분기 vs variant — 후니 정책 결정). 메타모델 정답 = 자재 합성코드에 `{ptt, wgt, clr, adhesion_grade, weather_grade}` 분해축 추가(평면 라벨 금지).
+  - **도메인 정합:** 후니 자재모델(`entity-semantic-model.md:22` material = 종이/소재/부속 + usage_cd + 두께)에는 *점착/내후 차원 부재* → ST가 드러낸 자재 합성 갭(갭분석가 주목). GS 본체소재·PR 방수/점착포스터 자재분기와 합류.
+  - **★경계(HARD):** 점착=자재 속성(소재의 접착면 특성)이지 공정 아님. 단 스크래치층(STSKDFT 은박 긁는층)·박색(STFODFT FOI)은 *공정#2*(소재 위 후공정 — 자재 아님). 자석/메탈 본체는 자재(PTT), 점착성은 자재 합성 차원, 표면 추가층은 공정 — 3자 구분.
+
 ### 2. 공정 축 (Process) ✅ — D-2/D-4 확장
 
 - **identity:** 본체에 가하는 작업(재단·코팅·봉제·타공·박·형압·완칼·아크릴가공·제본…). 순수공정 vs 자재소비공정 구분.
@@ -98,6 +107,14 @@
   - **PR 특수후가공 멤버 (P-9):** 스코딕스(Scodix 입체 UV 엠보·PRCASCO)=특수인쇄 UV family(#9 UV param·PROC_000002)·레이저커팅(THO_LAS·PRCACUT)=특수재단 + 칼틀 형상=사이즈#13(도무송 형상=칼틀 1:1)·합지(BON_PAP)=접합 + 자재 2종 bundle(P-5 동형)·화이트인쇄(PRT_WHT)=별색 family(TP T-E 동형·도수/자재 오적재 금지). 전부 *새 멤버*이지 새 *축* 아님.
   - **부분UV(SCO_DFT)·날개커버(CVR_SWN)·책받침코팅(LAM_DFT)·타공(HOL_DFT)·모양커팅(THO_GRA)·미싱(MIS_DFT):** 포스터/책자 후가공 멤버(공정#2). NOTICE "투명 잉크 부분 PDF 별도·에디터 주문 불가"(SCO_DFT) = 입력채널#16 제약(usePDF 전용).
   - **disable 제약 (책자 24건·P-1):** `pdt_disable_pcs_info` — 저평량지(미색모조80g·에스플러스) → 코팅/접지(FLD)/미싱 비활성. 자재→공정 disable(D-3·BN force의 역방향). PCS_DTL_CD=null이면 그룹 전체 disable.
+
+- **★ST 확장 — 칼선 2메커니즘 + 재단입자 family (v5.0·S-2/S-3) ★directive #1/#2 — facet 확정:**
+  - **★칼선(모양커팅) = 공정#2의 두 모드 family (S-2·신축 거부):** 모양커팅이 `THO_GRA`(자유칼선=디자인 외곽 도무송)와 `THO_DFT`(형상별 프리셋 칼틀 enum: 원형 CL001~010·라운드 RC001~025) 두 메커니즘으로 갈림(reverse §0.2 실측). **후니 KB 결정적(`pdf-domain-knowledge.md:113-115`):** 완칼(PROC_000053 종이+후지)·반칼(PROC_000054 종이만 `모양`)·스티커완칼(PROC_000055 `조각수`)·도무송("칼선 자유모형 컷팅·완칼/반칼 계열")이 *전부 공정 멤버*. → THO_GRA/THO_DFT = 모양커팅 공정의 두 모드(family)이지 별 축 아님. **프리셋칼틀(THO_DFT)이 사이즈를 겸함** = 공정#2(칼선) + 사이즈#13(칼틀=프리셋) cascade(형상#17이 어느 칼틀 enum인지 게이팅). PR THO_GRA(1종)·GS THO_CUT·레이저커팅(P-9) 합류 — ST가 칼틀 enum(원형 11·라운드 25)으로 가장 깊으나 *깊이는 멤버 수이지 새 축 아님*.
+  - **★재단 입자(반칼/완칼/낱장) = 공정#2 멤버 + 배치 facet (S-3·신축 거부):** `CUT_DFT`가 DFXXX 묶음재단(반칼시트=시트에 배치 후 kiss-cut으로 떼어씀)·DFITM 개별재단(낱장 완칼 분리) 2종(reverse §0.3 NOTICE 실측). **후니 KB 결정적(`pdf-domain-knowledge.md:71` Case2 스티커 레시피):** "디지털출력 → (코팅) → **반칼커팅/완칼커팅** → 재단 → 포장" = 반칼/완칼이 *재단 공정의 분기 멤버*. 상품명 "사각반칼"의 "반칼"=묶음재단(DFXXX) 기본값. → 재단입자 = 공정#2(재단) 멤버(반칼=PROC_054·완칼=PROC_053) + (시트 배치는 임포지션 facet). GS 완칼 THO_CUT과 같은 "재단/분리 입자" 공정 family로 통합. **★별 축 거부:** 반칼/완칼이 *별 분류축*이 아니라 후니가 이미 PROC_053/054/055로 1급 공정 멤버화 — 신축은 공정 멤버 중복.
+  - **★화이트강제(PRT_WHT) = 공정#2 + 제약#5 (S-7):** 화이트언더베이스(투명/유색/천 위 발색)가 일반 스티커=선택(ESN_YN=N)·DTF=강제(ESN_YN=Y·천 위 전사라 흰바탕 필수). 공정#2 별색 family(TP T-E·`entity-semantic-model.md:88` PROC_000008 화이트=투명/홀로그램/메탈 베이스) + 자재(투명PET)/인쇄방식(DTF)→화이트 force cascade(#5). **별색=공정 경계(HARD)** — 화이트를 도수/자재로 오적재 금지.
+  - **★넘버링(NUM_DFT) = 공정#2 (+가변이면 VDP#16) (S-9):** 일련번호 가변 인쇄가 ① 단순 공정(인쇄 후 넘버링기) ② VDP(가변데이터·`db-domain-structure-live.md:133` "가변텍스트/가변이미지" 공정 멤버 실재). TP T-3 티켓 넘버링·#16 입력채널 데이터바인딩 합류. 절취선(미싱 MIS_DFT)=공정#2 확정·순차번호=VDP/공정 분배. 가변 증분 규칙 unobserved → gap/validation.
+  - **★특수후가공 멤버 (S-4 경계):** 스크래치층(STSKDFT 은박)=공정#2(소재 위 후공정)·박/형압(STFODFT FOI·STEMDFT EMB)=공정#2(PR P-9·TP T-E 동형). 자재 아님(점착=자재 합성·표면층=공정 분리·#1 ST 경계 참조).
+  - **★disable_pcs 정점(227건) (S-8):** ST `pdt_disable_pcs_info` 227건(26소재 × 후가공 — 특수소재[PET/금속/한지]→코팅/박/형압/미싱/부분UV/접지 비활성). BN 강제(0건)·책자(24건)의 **정점 케이스** — 제약#5 disable 룰엔진 일반화 검증(JSONLogic vs 자재-후가공 호환매트릭스 그릇). 자재→공정 disable(D-3·force의 역방향).
 
 ### 3. 옵션 축 (Option) ✅
 
@@ -206,6 +223,8 @@
   - **★digital_price = 같은 좌표·다른 엔진 (P-6·directive #3):** 포스터(`price_gbn=digital_price`)와 BN 현수막(`real_price` 면적매트릭스)이 *같은 좌표(CUT_WDT/HGH) 입력·다른 가격엔진* — 포스터=규격/자유사이즈 디지털 원자합산(A2/A3/A4 프리셋+자유 100×150~500×730), BN=면적 룩업 매트릭스. **사이즈 차원(#13)은 동일(좌표)이나 price_gbn이 가격엔진을 라우팅.** `pricing_model` enum **5종으로 확장**: 면적매트릭스(BN real_price)·digital원자합산(PR digital_price)·완제SKU개당가(tmpl)·variant템플릿(vTmpl)·구간가(tiered). 메모리 `dbmap-digitalprint-atomic-formula-unbuilt`(digital 원자합산형) 정합.
   - **★book2025 = 표지/내지 role-paired 가격 (P-2):** 책자 `book2025_price`가 표지·내지를 *독립 산정*(reqBody CVR_MTRL_CD/INN_MTRL_CD·CVR_CLR_CNT/INN_CLR_CNT·PAGE_CNT·PRN_CNT). 단가축 분리: F_CVR_MTRL_AMT vs K_INN_MTRL_AMT·G_CVR_PRINT vs L_INN_PRINT. = usage_cd role(#1 P-2)이 *가격기여역할로 전파*된 증거(표지가/내지가 별 price_role). 규칙: 수량=볼륨디스카운트 곡선·페이지=선형가산(Δ1,120/page)·표지/내지 도수 독립가산. pricing_model=book2025(cover/inner 분리+페이지선형+수량볼륨)로 6번째 라우팅.
 
+- **★ST 확장 — die-cut/판/정가 3가격엔진 라우팅 (v5.0·S-6):** 같은 ST 안에서 가격엔진이 형태별 3종으로 분기(reverse §0.6·§3 실측): ① **die-cut**(자유사이즈·칼틀·`digital_price` 산정형 — 좌표+THO 칼틀 PCS 전달, BN 면적매트릭스와 별·PR digital 합류) ② **판(板)**(고정 판규격 140X200/A4·장단위·`vTmpl_price` 템플릿형 — 완제SKU에 가까움·GS tmpl/vTmpl 합류·STPADPN 실측) ③ **정가**(STPADIY `tmpl_price` 고정). pricing_model enum이 기존 6종(면적/digital/tmpl/vTmpl/tiered/book2025)으로 ST 3종 전부 흡수 — **신축 불요**(라우팅 키=price_gbn·형태가 분기). die-cut↔판 차이는 사이즈 모드(#13 자유/고정)와 연동.
+
 ### 12. 인쇄방식/생산 레시피 축 (Print-Method Recipe) ✅ — distinct(조건부) D-7
 
 - **identity:** 인쇄방식(디지털/실사/UV/옵셋/실크)이 *가능 공정·파일포맷·생산팀·기초데이터를 게이팅*하는 최상위 레시피 축.
@@ -218,6 +237,8 @@
   - **★자재풀 게이팅 (P-7·새 관계 간선):** 윤전 책자(PRBKYPR) 내지는 *윤전전용 백색모조*(PTT=YWM·RXYWM080)만 사용 — 인쇄방식이 자재코드에 *인코딩*될 뿐 아니라 **가능 자재 부분집합을 게이팅**(윤전→YWM pool·토너/인디고→다른 pool 추정). process-recipe §1 "1상품=1인쇄방식이 가능 공정 부분집합 결정"의 *자재판*. D-7 "자재 facet 인코딩"을 *gates-material-pool* 관계로 강화. 토너/인디고/리소 자재풀 차이는 unobserved → gap/validation.
   - **인쇄방식 = pdtCode 분기 (P-4):** 같은 책자가 윤전(PRBKYPR `book2025`)·토너(PRBKO* 소량즉납)·인디고(PRIDPRT 낱장)·리소(PRPORSO 별색)별 별 pdtCode. 인쇄방식이 자재풀·최소수량·가격모델 동반결정 → 단순 옵션화 위험(P-4 정책 권고: 인쇄방식=별 pdtCode). RP는 인쇄방식을 옵션 아닌 상품으로 정규화(GS 코스터 소재분리·TP 디자인X분리 동형). 후니 도메인 인쇄방식 5종(PROC_000002~6)에 윤전/토너/인디고/리소 매핑은 갭분석가.
 
+- **★ST 확장 — 인쇄방식 4계열 횡단 합류 (v5.0·S-5·PR P-4/P-7 동형):** ST가 인쇄방식을 **일반(디지털 STTH*/STCU*)·UV(STPAU*)·DTF 열전사(STPAD*)·후지(STBP*)** 4계열로 pdtCode prefix 분기(reverse §0.5·§3 실측). 인쇄방식이 **자재(DTF=DTF전용필름 단일 PXPUF003)·도수노출(DTF=dosuView=N 숨김)·화이트강제(DTF PRT_WHT ESN_YN=Y)·가격엔진(DTF=vTmpl_price)** 을 동반결정 = PR 윤전→YWM 자재풀 게이팅(P-7)의 ST판. **★PR과 합류·신축 아님:** "인쇄방식=상품분기 + 자재/도수/가격 게이팅"은 PR(P-4)·ST(S-5) 두 카테고리 횡단 패턴 — #12 인쇄방식레시피 축이 이미 담음(가능 자재풀·공정·파일·팀 게이팅). 후니 PROC_000002 UV(`db-domain-structure-live.md:159` `변형` enum)·DTF/후지는 도메인 인쇄방식 enum 확장(갭분석가). ST는 UV가 별 인쇄방식(STPAU*)이자 PROC_000002 변형 — 후니 인쇄방식 트리 매핑 검토.
+
 ### 13. 사이즈 축 (Size) ✅ — 기초코드+제약 복합(명시)
 
 > A-2/A-3/A-5에서 횡단 참조되어 별도 명시(기초코드 #6 + 제약 #5의 복합이나 1급 취급).
@@ -229,6 +250,10 @@
 - **constraint & cascade:** 프리셋 선택→cut 룩업 / 직접입력→USER 수치(min/max 범위). 작업=재단+4mm. **도메인 경계:** size=재단치수 ≠ plate(작업/전지 판형, entity-semantic #1/#6 별개 축). 형상은 size 프리셋으로 흡수(shape 1급화=오버피팅 거부).
 - **★GS 확장:** 사이즈 프리셋이 *복합 차원*일 수 있음 — 파우치 "13인치 가로형/세로형"(기종 × 방향), 노트 "여권형/Medium"(형상 캐스케이드). THO_CUT 형상↔사이즈 1:1(메모리 round-3 K컨펌 "도무송 형상=size 칼틀 1:1" 동형). 폰케이스 기종 enum(GSCAPHN, unobserved)은 사이즈 프리셋의 *대규모 enum* — 별도 "기종 축" distinct 거부(facet, G-3): 기종=사이즈/칼틀 프리셋의 대규모 인스턴스일 뿐 고유 lifecycle 없음.
 - **★PR 확장 (v4.0·P-6/P-9):** ① **같은 좌표·다른 가격엔진 (P-6):** 포스터(A2/A3/A4/B3/B4 프리셋 + MIN/MAX_CUT 자유 100×150~500×730·NO_STD_ABL_YN=N)와 BN 현수막이 같은 사이즈 차원(좌표)이나 가격엔진만 분기(digital_price vs 면적매트릭스·#11). 사이즈 입력 구조는 동일·가격기여역할(#11)에서 라우팅. ② **출판판형 프리셋 (P-4):** 크라운판/신국판/A4·B5·A5세로형 = 책자 특화 사이즈 프리셋. ③ **레이저커팅 칼틀 (P-9):** THO_LAS 칼틀 형상 = 사이즈 프리셋(형상↔칼틀 1:1·GS THO_CUT 동형). 칼틀값 unobserved.
+- **★ST 확장 — 형상축(#17)과의 분리 + 칼틀이 사이즈를 겸함 (v5.0·S-1/S-2/S-6):**
+  - **★형상↔사이즈 분리(#17 distinct의 사이즈측 함의):** BN/GS/TP/PR에선 형상이 *사이즈 프리셋과 1:1*(어깨띠·하트·티켓)이라 사이즈축이 형상을 흡수했으나, ST는 **한 형상이 다수 칼틀/사이즈를 span**(CL 원형 → THO_DFT/CL001~CL010 + CLFRE 자유원형). 즉 사이즈축은 형상의 *하위*(형상이 어느 사이즈 프리셋 집합인지 게이팅) — 형상은 별 분류축(#17)으로 분리. **★[HARD] 사이즈축은 형상 자체를 담지 않음(원형이라는 사실을 매 사이즈에 중복 인코딩 금지)** — 형상=상위 분류(#17)·사이즈=치수 프리셋(#13)·칼틀=형상별 사이즈 프리셋(THO_DFT 공정#2). `entity-semantic-model.md:39` G-SK-2 "size축에 형상 enum drop·어느 축에도 없음"이 분리 필요를 결함으로 확증.
+  - **★칼틀이 사이즈를 겸함:** 정형 형상(SQ/CL/RC)은 `THO_DFT` 프리셋 칼틀이 사이즈를 고정(CL001=10X10·RC001=40X20). 자유형(FR)은 자유사이즈(nonspec·디자인 외곽 기준). 즉 형상#17이 *사이즈 입력 모드*(프리셋 칼틀 vs 자유)를 게이팅. 사이즈 차원은 동일(좌표)이나 입력 게이트가 형상에 종속.
+  - **die-cut vs 판 사이즈 모드 (S-6):** die-cut(자유사이즈+칼틀·digital_price)·판(고정 판규격 140X200/A4·vTmpl_price) — 사이즈 차원이 자유범위(die-cut)/고정프리셋(판)으로 갈리고 가격엔진(#11)이 라우팅. PR P-6(규격 vs 면적)·GS 완제SKU 동형.
 
 ---
 
@@ -303,6 +328,31 @@
 
 ---
 
+## II-d. ST 신축 (스티커가 드러낸 distinct 축) — 발굴 v5.0 ★16축 포화 붕괴
+
+### 17. 형상 축 (Shape) ✅ — distinct D-12 (ST 신축, 사이즈와 분리·#13 게이팅) ★directive #1·포화 최초 붕괴
+
+- **identity:** 인쇄물의 *외곽 형상*(사각 SQ / 원형 CL / 타원 EL / 사각라운드 RC / 자유형 FR)을 *사이즈와 분리된 전용 enum 슬롯*으로 관리하는 분류축. 형상이 ① 칼틀(THO_DFT) enum의 부분집합과 사이즈 입력모드(프리셋 vs 자유)를 게이팅 ② 자유형(FR)이면 자유칼선(THO_GRA)을 강제 ③ 상품 분기(원형=STTHCIC)와 한상품 옵션(STDCFBR 5형상)을 모두 인코딩. **사이즈(#13 치수)의 상위 분류** — 형상이 1:多로 칼틀/사이즈를 span(기존 BN/GS/TP/PR의 형상=사이즈 1:1 흡수 전제를 깸).
+- **entities(그릇):**
+  - `Shape` — `{shape_cd, shape_name, cutting_mode_gate, size_mode}`. RP=`option_info.shape_info` 전용 슬롯.
+- **attributes(Shape):**
+  - `shape_cd`(SQ 사각/CL 원형/EL 타원/RC 사각라운드/FR 자유형 — RP shape_info COD).
+  - `cutting_mode_gate`(FR→THO_GRA 자유칼선·SQ/CL/RC→THO_DFT 프리셋칼틀 — 형상이 칼선 메커니즘 게이팅).
+  - `size_mode`(정형→프리셋 칼틀 enum(사이즈 고정)·자유형→nonspec 자유사이즈 — 형상이 사이즈 입력모드 게이팅).
+  - `encoding`(상품분기 1:1 STTHCIC원형 / 한상품 N형상 옵션 STDCFBR 5형상 — 인코딩 유연).
+- **relationships:**
+  - Shape → Product(**classifies** — 상품분기 1:1 또는 한상품 N형상 옵션).
+  - Shape → SizePreset(#13, **gates** — 형상별 칼틀/사이즈 프리셋 부분집합: CL→CL001~CL010·RC→RC001~RC025).
+  - Shape → ProcessMember(#2 칼선, **gates** — FR→THO_GRA(자유 도무송)·정형→THO_DFT(프리셋 칼틀)).
+  - Shape ⊂ EnumValue(#6 기초코드, 값 도메인 공급).
+- **constraint & cascade:**
+  - 형상 선택 → 칼선 메커니즘(THO_GRA/THO_DFT) 강제 + 사이즈 입력모드(프리셋/자유) 게이팅.
+  - **distinctness 근거(적대 판정):** ★사이즈축(#13)이 형상을 *1:1 칼틀로 흡수*해온 전제(BN 어깨띠·GS THO_CUT·TP M/I·PR 카드형 전부 형상=사이즈 프리셋 1개)가 ST에서 **1:多로 깨짐** — 전용 `shape_info` 슬롯·CL 형상 1개 ↔ CL001~CL100 칼틀 10+종 span·STDCFBR 5형상 superset(reverse §0.1·§0.2). 사이즈축으로 형상 표현 시 "원형이라는 사실"을 매 사이즈 프리셋에 중복 인코딩(정규화 붕괴). **★후니 KB 결정적**(`entity-semantic-model.md:39` "size축에 형상 enum drop(G-SK-2): 도형/치수 enum(원형 25~90mm)이 어느 축에도 없음") = 사이즈축이 형상을 *왜곡 없이 못 담음*을 후니 자신이 결함으로 명시 → distinct 정당.
+  - **★[HARD] 형상축 적용 경계(오모델 회피):** 형상이 사이즈와 *1:1*이면 사이즈 프리셋에 흡수 표현(BN/GS/TP/PR 유지·형상축 강제 적용 금지)·1:多 분리가 명시 슬롯으로 드러나면 별 분류축(#17 ST·도무송 자유형·칼틀 enum 깊은 상품). 형상축을 모든 상품에 강제하면 1:1 흡수 카테고리에 불필요한 분류 레이어 오모델.
+  - **★후니 갭(갭분석가 주목):** 후니 t_*에 "형상" 그릇 *부재 확정*(KB G-SK-2 "어느 축에도 없음"). 도형/치수 enum(원형 25~90mm)이 size축에 drop = vessel-gap. 갭분석가가 라이브 information_schema에서 shape 컬럼/테이블 유무 + 형상↔칼틀(완칼 PROC_053 `모양`·반칼 PROC_054 `모양`) 게이팅 그릇 확인. **단 1:1 흡수 카테고리는 size 프리셋 유지.**
+
+---
+
 ## 메타모델 핵심 명제 (RedPrinting 정규화 방식 요약)
 
 1. **자재는 합성된다** — MTRL_CD 하나가 소재·색·무게·인쇄방식 4~5축 인코딩(D-2). 분해 표현력 필수(평면화=의미축 drop).
@@ -325,11 +375,15 @@
 18. **★접지는 평면 종이의 면가공 family다 (PR·P-1)** — FLD_DFT 7종이 종이를 N면 분할(2단=4면), 면수=파생값(축 아님). 공정#2 family + 접지방식 파라미터(#9) + 접지↔오시 동반 cascade(#5). BN/GS/TP 미발굴 공정 family.
 19. **★공정방식이 상품을 가른다 (PR·P-4)** — 인쇄방식(윤전/토너/인디고/리소)·제본방식(무선/스프링/트윈링/스테플러/실제본)·도수(컬러/흑백)를 RP는 개별 pdtCode로 펼침(책자 19상품). 상품분기 vs 옵션화=후니 정책(GS G-2·TP T-4 동류). 인쇄방식이 자재풀(#12 P-7)·가격엔진 게이팅→단순 옵션화 위험.
 20. **★PR distinct 신축 0 = 16축 포화 (PR·v4.0)** — 4번째 카테고리(다면/제본/접지)가 새 관리축 0개 도입. 9 fragment 전부 기존 축 facet/family/cascade. 모델이 RedPrinting 카탈로그 shape를 견딤(오버피팅 회피의 정직한 결과·강한 검증 신호).
+21. **★형상은 사이즈와 분리된 분류축이다 (ST·D-12·#17·포화 붕괴)** — `shape_info` 전용 슬롯(SQ/CL/EL/RC/FR)이 사이즈를 1:1 흡수해온 전제를 깸(CL 형상↔CL001~100 칼틀 1:多·STDCFBR 5형상 superset). 형상=사이즈 상위 분류·칼선/사이즈모드 게이팅. **단 1:1 흡수 카테고리(BN/GS/TP/PR)는 사이즈 프리셋 유지(형상축 강제 금지)** — 후니 KB G-SK-2 "형상 어느 축에도 없음" 확증.
+22. **★ST 칼선/재단입자는 공정 family·점착은 자재 합성이다 (ST·v5.0)** — 칼선(THO_GRA/THO_DFT)·반칼/완칼(CUT_DFT)은 후니 KB(PROC_053/054/055·도무송)로 공정#2 멤버 확정(신축 거부)·점착/내후(강접/리무버블/옥외/저온/자석/메탈/한지)는 자재#1 합성 차원(색상/두께→material 동형). 인쇄방식(UV/DTF/후지)은 #12 PR 윤전/토너 합류. **5번째 카테고리가 distinct 1종(형상)만 추가 = 모델은 카테고리 증거에 정직(포화도 진화도 증거 강제).**
 
-> **도메인 사실 준수 체크(HARD):** 별색=공정(D-2/#2) · 본체색=자재 CLR(D-2) · 판걸이수=앱계산 DB미저장(D-4) · UV변형=공정파라미터 not print_side(#2) · size≠plate(#13) · 형상≠자재(#13 흡수) · **생산형태⊥카테고리(#15)** · **완제 본체=자재 facet not 신축(#1)** · **두께=자재(#1 GS 장패드 4T)** · **디자인 입력채널⊥본체옵션(#16·가격0)** · **PRT_WHT=공정 not 도수/자재(#2·T-E)** · **템플릿 자산≠완제SKU(#4/#16 분리·T-A)** · **표지/내지=usage_cd 슬롯 not 신축(#1·P-2)** · **접지 면수=파생값 not 차원(#2·P-1)** · **page_rule=내지 페이지(수량#10 슬롯+별 엔티티, 떡제본/낱장엔 무의미·P-3)** · **digital_price≠면적매트릭스(같은 좌표·다른 엔진·#11·P-6)**. 전부 entity-semantic-model L3(C-9 생산방식·usage_cd 7종·page_rule)·process-recipe-tree L2(접지/제본/인쇄방식 레시피) 정합.
+> **도메인 사실 준수 체크(HARD):** 별색=공정(D-2/#2) · 본체색=자재 CLR(D-2) · 판걸이수=앱계산 DB미저장(D-4) · UV변형=공정파라미터 not print_side(#2) · size≠plate(#13) · **형상=별 분류축(#17 ST 1:多)·1:1이면 사이즈 흡수(BN/GS/TP/PR)** · **생산형태⊥카테고리(#15)** · **완제 본체=자재 facet not 신축(#1)** · **두께=자재(#1 GS 장패드 4T)** · **디자인 입력채널⊥본체옵션(#16·가격0)** · **PRT_WHT=공정 not 도수/자재(#2·T-E·S-7)** · **템플릿 자산≠완제SKU(#4/#16 분리·T-A)** · **표지/내지=usage_cd 슬롯 not 신축(#1·P-2)** · **접지 면수=파생값 not 차원(#2·P-1)** · **page_rule=내지 페이지(수량#10 슬롯+별 엔티티·P-3)** · **digital_price≠면적매트릭스(같은 좌표·다른 엔진·#11·P-6)** · **반칼=PROC_054/완칼=PROC_053/스티커완칼=PROC_055=공정 멤버 not 별 재단입자 축(#2·S-3)** · **점착/내후=자재 합성 차원 not 별 자재계열(#1·S-4)**. 전부 entity-semantic-model L3(C-9 생산방식·usage_cd 7종·page_rule·G-SK-2 형상갭·variant 분해)·process-recipe-tree L2(접지/제본/인쇄방식 레시피)·pdf-domain-knowledge(반칼/완칼/도무송 공정·Case2 스티커 레시피) 정합.
 
 > **GS 통합 과잉일반화 거부 기록:** ① "완제 본체 SKU" = 자재축 facet(distinct 거부 — BN/GS 같은 자재참조). ② "본체 소재 pdtCode 분리" = 자재+카테고리 복합 facet(distinct 거부 — RP 카탈로그 정책일 뿐). ③ "variant 3채널" = 기존 옵션/공정파라미터/사이즈로 분배(distinct 거부). ④ "기종 enum"(폰케이스) = 사이즈 프리셋 대규모 인스턴스(distinct 거부). **distinct 승격 = 생산형태(#15)·본체 형태가공(#14) 2종만**(BN·GS 둘 다 견디는 governing/lifecycle 보유).
 
 > **TP 통합 과잉일반화 거부 기록:** ⑤ "템플릿 자산" = D-11 입력채널 리소스 facet(distinct 거부 — D-11 종속·단 템플릿#4와 이중의미 분리). ⑥ "VDP" = 입력채널 데이터바인딩 facet × 수량#10(distinct 거부). ⑦ "페이지계층 INN_PAGE" = 수량모델#10 슬롯 + 제약#5(distinct 거부). ⑧ "형태 variant"(M/I/보딩·탁상/벽걸이) = 사이즈#13+칼틀#2(distinct 거부 — GS THO_CUT 동형). ⑨ "특수인쇄 PRT_WHT/PRT_MAG·미싱/넘버링" = 공정#2(+넘버링은 VDP 가능·distinct 거부). **distinct 승격 = 디자인 입력 채널(#16) 1종만**(BN·GS·TP 세 군 견디는 게이팅 lifecycle + 비-TP 트윈 직접 대조).
 
 > **PR 통합 과잉일반화 거부 기록 (v4.0·distinct 0):** ⑩ "접지/면분할 축"(P-1) = 공정#2 접지 family + 파라미터#9 + 오시 cascade#5(면수=파생값·축 아님). ⑪ "표지/내지 역할 차원 축"(P-2) = 자재#1 usage_cd 슬롯 전파(★침묵선택 거부 — 별 역할축 아님). ⑫ "페이지 차원 축"(P-3) = 수량#10 슬롯 + page_rule 엔티티(TP T-C 합류). ⑬ "공정방식 분기 축"(P-4) = 인쇄방식#12·공정#2·도수#6 분배 + 정책(GS G-2 동류). ⑭ "면지 bundle 축"(P-5) = 자재#1 usage.03 + 공정#2(D-2 동형). ⑮ "규격/면적 사이즈 축"(P-6) = 가격#11 라우팅 + 사이즈#13(같은 좌표·다른 엔진). ⑯ "인쇄방식종속 자재 축"(P-7) = 인쇄방식#12 자재풀 게이팅 간선. ⑰ "용도 분류 축"(P-8) = 카테고리#7 태그/마케팅 라벨. ⑱ "스코딕스/레이저커팅 축"(P-9) = 공정#2 멤버 + 칼틀 사이즈#13. **distinct 승격 0종 — 9 fragment 전부 facet/family/cascade/정책. 16축 포화 입증(4번째 카테고리=새 축 0).**
+
+> **★ST 통합 과잉일반화 거부 기록 (v5.0·distinct 1·포화 붕괴):** ⑲ "형상 축"(S-1) = **★distinct 승격(#17)** — 사이즈축 1:1 흡수 전제가 ST 전용 슬롯·1:多로 깨짐(유일한 승격). ⑳ "칼선 메커니즘 축"(S-2) = 공정#2 family(THO_GRA/THO_DFT 두 모드·도무송=공정 멤버·KB 결정적) + 프리셋칼틀=사이즈#13. ㉑ "재단 입자 축"(S-3) = 공정#2 멤버(반칼=PROC_054·완칼=PROC_053·스티커완칼=PROC_055·KB 결정적·별 축 거부). ㉒ "점착/내후 자재계열 축"(S-4) = 자재#1 합성 차원(adhesion/weather·색상/두께→material 동형·★침묵선택 거부 후 facet). ㉓ "인쇄방식 분기 축"(S-5) = 인쇄방식레시피#12(PR P-4/P-7 합류·자재/도수/가격 게이팅). ㉔ "가격엔진 분기 축"(S-6) = 가격#11 라우팅(die-cut/판/정가·PR P-6·GS G-7 합류). ㉕ "화이트강제 축"(S-7) = 공정#2 + 제약#5 cascade. ㉖ "disable 룰엔진 축"(S-8) = 제약#5 정점 케이스(227건). ㉗ "넘버링 VDP 축"(S-9) = 공정#2(+가변=VDP#16·TP T-3 합류). ㉘ "완제SKU 스티커 축"(S-10) = 템플릿#4 + 생산형태#15(GS tmpl 합류). **distinct 승격 1종(형상 #17) — 9 fragment facet. 5번째 카테고리가 distinct 1 도입 = 16축 포화 붕괴(오버피팅 아님·증거 강제). ★S-4는 침묵선택 거부하고 "별 점착자재계열 vs 자재 합성 차원" 트레이드오프 펼친 뒤 facet.**

@@ -1,0 +1,64 @@
+%% ST 옵션 구성 트리 — 출처: reverse.md §0~3
+%% 형상 → 칼선 2메커니즘 → 재단입자(반칼/완칼) → 소재(점착) → 후가공 + 인쇄방식 분기
+flowchart LR
+  ST["ST 스티커<br/>digital_item / digital_price"]
+
+  %% 1급 축: 형상 shape_info
+  ST --> SHAPE["★형상 shape_info<br/>(전용 enum 슬롯)"]
+  SHAPE --> FR["FR 자유형"]
+  SHAPE --> SQ["SQ 사각형"]
+  SHAPE --> CL["CL 원형"]
+  SHAPE --> EL["EL 타원형"]
+  SHAPE --> RC["RC 사각라운드"]
+  SHAPE --> SUPER["STDCFBR<br/>5형상 superset"]
+
+  %% 칼선 2메커니즘 (게이팅)
+  FR -->|FR→강제| THOGRA["★THO_GRA 자유칼선<br/>FRXXX 도무송 (디자인 외곽)<br/>ESN=Y · VIEW=N"]
+  SQ -->|정형→강제| THODFT["★THO_DFT 프리셋칼틀<br/>SQXXX / CL001~010 / RC001~025<br/>(형상별 사이즈 enum)"]
+  CL --> THODFT
+  RC --> THODFT
+
+  %% 재단 입자
+  THOGRA --> CUT["재단입자 CUT_DFT"]
+  THODFT --> CUT
+  CUT --> DFXXX["DFXXX 묶음재단<br/>★반칼시트 (기본 ESN=Y)"]
+  CUT --> DFITM["DFITM 개별재단<br/>완칼 낱장"]
+
+  %% 소재 (점착)
+  DFXXX --> MTRL["용지/자재 pdt_mtrl_info<br/>19~26종 (PTT×WGT×점착)"]
+  DFITM --> MTRL
+  MTRL --> M1["일반 라벨 (아트지90g 기본)"]
+  MTRL --> M2["★점착 spectrum<br/>초강접·리무버블·옥외유포·저온·자석·메탈·한지"]
+  MTRL --> M3["투명/은무 PET"]
+
+  %% 후가공
+  MTRL --> FIN["후가공 PCS"]
+  FIN --> COT["코팅 COT_DFT (무광/유광)"]
+  FIN --> WHT["$ 화이트인쇄 PRT_WHT"]
+  FIN --> NUM["넘버링 NUM_DFT (VDP)"]
+  FIN --> SCO["부분UV SCO_DFT"]
+  FIN --> PAK["폴리백 개별포장 PAK_POL<br/>6규격 (공정+부자재 BUNDLE)"]
+
+  %% 캐스케이드 제약
+  MTRL -.->|★pdt_disable_pcs_info 227건| DIS["disable 룰: 특수소재→<br/>코팅/박/형압/미싱/부분UV/접지 비활성"]
+
+  %% 인쇄방식 분기 (별 상품/가격엔진)
+  ST --> PM["★인쇄방식 분기<br/>(pdtCode prefix + 가격엔진)"]
+  PM --> PMG["일반 STTH*/STCU*<br/>digital_price"]
+  PM --> PMUV["UV STPAU*<br/>(vDigital 추정)"]
+  PM --> PMDTF["DTF STPAD*<br/>vTmpl_price · DTF필름<br/>도수숨김 · 화이트강제"]
+  PM --> PMBP["후지 STBPDFT<br/>투명후지 자재"]
+
+  %% 판 vs die-cut 가격엔진
+  PM --> ENG["판 vs die-cut 가격엔진"]
+  ENG --> EDIE["die-cut: 자유사이즈+칼틀<br/>digital_price (산정형)"]
+  ENG --> EPAN["판: 고정규격 140X200/A4<br/>vTmpl_price (완제SKU형)"]
+
+  classDef shape fill:#fde68a,stroke:#b45309,color:#000
+  classDef price fill:#bbf7d0,stroke:#15803d,color:#000
+  classDef cut fill:#bfdbfe,stroke:#1d4ed8,color:#000
+  classDef constraint fill:#fecaca,stroke:#b91c1c,color:#000
+  class SHAPE,FR,SQ,CL,EL,RC,SUPER shape
+  class THOGRA,THODFT,CUT,DFXXX,DFITM cut
+  class WHT,ENG,EDIE,EPAN price
+  class DIS constraint

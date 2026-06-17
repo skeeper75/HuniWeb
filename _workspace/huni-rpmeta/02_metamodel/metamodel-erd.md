@@ -1,11 +1,12 @@
 # RedPrinting 옵션 관리 메타모델 ERD (mermaid)
 
-> rpm-metamodel-architect. **v4.0 (PR 통합):** 16 관리 축과 그 관계를 그린 ERD. 가치는 *관계*에 집중(SKILL §4).
-> 정초 = `metamodel-dictionary.md`(축 사전 16축) + `discovered-axes.md`(발굴 근거 D-1~D-11).
-> 추상 메타모델 — 후니 비종속(특정 t_* 컬럼명 아닌 패턴). RedPrinting BN(면적)+GS(완제/입체)+TP(디자인입력)+PR(다면/제본/접지) 역공학 권위.
+> rpm-metamodel-architect. **v5.0 (ST 통합):** 17 관리 축과 그 관계를 그린 ERD. 가치는 *관계*에 집중(SKILL §4).
+> 정초 = `metamodel-dictionary.md`(축 사전 17축) + `discovered-axes.md`(발굴 근거 D-1~D-12).
+> 추상 메타모델 — 후니 비종속(특정 t_* 컬럼명 아닌 패턴). RedPrinting BN(면적)+GS(완제/입체)+TP(디자인입력)+PR(다면/제본/접지)+ST(형상/칼선/점착) 역공학 권위.
 > **GS 반영:** 생산형태(#15 governing) · 본체 형태가공(#14) · 완제 본체 두 표현 facet · 가격모델 4종.
 > **TP 반영:** 디자인 입력 채널(#16 본체옵션과 직교·가격0) · 템플릿 자산(에디터 디자인 시안·#4 완제SKU와 별 엔티티 분리) · 입력채널→수량(디자인수 게이팅).
-> **PR 신규 반영(distinct 신축 0·기존 관계/속성 강화):** ① 자재 usage_cd "역할 전파"(표지/내지 → 자재·도수·가격·평량 role-paired) · ② 인쇄방식 → Material pool 게이팅 간선(P-7 윤전→YWM) · ③ 공정 접지(folding) family + 접지↔오시 cascade(P-1) · ④ PAGE_RULE 엔티티(INN_PAGE 내지 페이지·P-3) · ⑤ 가격 digital_price 라우팅(같은 좌표·다른 엔진·P-6) · ⑥ book2025 표지/내지 분리 가격(P-2). **★PR 새 *관리 축* 0 — 16축 포화. ERD는 새 *축* 노드 0·PAGE_RULE 보조 엔티티 1개(수량#10 종속) + 관계 간선 강화(usage 전파·자재풀 게이팅·접지 cascade)만.**
+> **PR 반영(distinct 신축 0):** 자재 usage_cd 역할 전파 · 인쇄방식 → Material pool 게이팅(P-7) · 공정 접지 family + 접지↔오시 cascade(P-1) · PAGE_RULE 엔티티(P-3) · 가격 digital_price 라우팅(P-6) · book2025 표지/내지 분리(P-2).
+> **★ST 신규 반영(distinct 신축 1·#17 형상·16축 포화 붕괴):** ① **SHAPE 신규 엔티티(#17 형상)** — 사이즈#13과 분리된 전용 enum 슬롯·형상↔사이즈 1:多·SHAPE gates SizePreset + gates ProcessMember(칼선) + classifies Product · ② 칼선/재단입자=공정#2 family(THO_GRA/THO_DFT·반칼/완칼 PROC_053/054/055·신축 아님·관계 강화) · ③ 점착/내후=자재#1 합성 차원(adhesion_grade·weather_grade 속성 추가) · ④ 인쇄방식 UV/DTF/후지=#12 PR 합류(method_cd enum 확장) · ⑤ 가격 die-cut/판/정가=#11 라우팅(pricing_model 기존 6종 흡수). **★ST 새 *축* 1(형상) + SHAPE 엔티티 1개 + 자재#1 점착 속성 + 관계 간선(SHAPE→SizePreset/ProcessMember 게이팅). 5번째 카테고리가 distinct 1 도입 = 포화 붕괴(증거 강제·오버피팅 아님).**
 
 ---
 
@@ -25,6 +26,7 @@ erDiagram
     PRODUCT ||--|| PRODUCTION_TYPE : "생산형태(classified-by ⊥category)"
     PRODUCT ||--o{ FORM_ASSEMBLY : "본체 형태가공(GS 완제/입체)"
     PRODUCT ||--|| DESIGN_INPUT_CHANNEL : "디자인입력(classified-by ⊥본체옵션·가격0)"
+    PRODUCT }o--o{ SHAPE : "형상(ST classifies — 상품분기 or N형상 옵션)"
 
     PRODUCTION_TYPE ||--o{ MATERIAL : "governs 본체모델(A/B=자재행 C=DIR_MTR SKU)"
     PRODUCTION_TYPE ||--o{ FORM_ASSEMBLY : "governs(C 입체만 활성)"
@@ -49,6 +51,10 @@ erDiagram
     SIZE_PRESET }o--|| ENUM_VALUE : "프리셋 코드"
     SIZE_PRESET ||--o| NONSPEC_RANGE : "자유입력 min-max"
     SIZE_PRESET ||--o{ CONSTRAINT : "범위/match"
+
+    SHAPE ||--o{ SIZE_PRESET : "gates 칼틀/사이즈 부분집합(ST CL→CL001~100·1:多)"
+    SHAPE ||--o{ PROCESS_MEMBER : "gates 칼선(FR→THO_GRA자유·정형→THO_DFT프리셋)"
+    SHAPE }o--|| ENUM_VALUE : "형상 enum(SQ/CL/EL/RC/FR)"
 
     OPTION_GROUP ||--o{ OPTION : "택1/택N"
     OPTION }o--o| MATERIAL : "polymorphic ref"
@@ -95,6 +101,8 @@ erDiagram
         enum body_repr "BN자재행 / GS DIR_MTR완제SKU항목"
         code print_method_pool "PR P-7 인쇄방식 종속(윤전→YWM전용지)"
         int weight_role_min_max "PR P-2 표지COV_MIN150/내지INN_MAX130"
+        enum adhesion_grade "ST S-4 점착(일반/초강접/리무버블·자재 합성 차원)"
+        enum weather_grade "ST S-4 내후(옥외방수/저온·자재 합성 차원)"
         tag price_flag "면적단가키"
     }
     PRODUCTION_TYPE {
@@ -181,11 +189,17 @@ erDiagram
         json asset_options "koiOption[]"
         int price "0(디자인 입력 무료)"
     }
+    SHAPE {
+        code shape_cd "ST shape_info: SQ사각/CL원형/EL타원/RC라운드/FR자유"
+        enum cutting_mode_gate "FR→THO_GRA자유칼선 / 정형→THO_DFT프리셋칼틀"
+        enum size_mode "정형=프리셋칼틀(사이즈고정) / FR=nonspec자유"
+        enum encoding "상품분기1:1(STTHCIC) / 한상품N형상옵션(STDCFBR 5형상)"
+    }
 ```
 
 ---
 
-## 2. 축 분류 그래프 (16축 + 제약 간선 엔진 + GS/TP governing)
+## 2. 축 분류 그래프 (17축 + 제약 간선 엔진 + GS/TP governing + ST 형상 게이팅)
 
 ```mermaid
 graph TB
@@ -220,6 +234,10 @@ graph TB
         TASSET["TemplateAsset<br/>(에디터 디자인 시안·≠완제SKU#4)"]
     end
 
+    subgraph STNEW["II-d. ST 신축 — distinct D-12 ★포화붕괴"]
+        SHAPE["17 형상 Shape<br/>(SQ/CL/EL/RC/FR ⊥사이즈·1:多 칼틀)"]
+    end
+
     subgraph ENGINE["5 제약 논리유형 (D-3) — 관계 엔진"]
         C["disable / force / match<br/>exclude / essential / min-max"]
     end
@@ -233,6 +251,10 @@ graph TB
     DICH ==>|gates 디자인수 ORD_CNT| QTY
     DICH -.->|직교 ⊥ 가격0| OPT
     DICH -.->|상관·결정아님| METHOD
+
+    SHAPE ==>|gates 칼틀/사이즈 1:多| SIZE
+    SHAPE ==>|gates 칼선 FR→자유/정형→프리셋| PROC
+    SHAPE -.->|⊥사이즈치수·상위분류| SIZE
 
     METHOD -.->|gates 가능공정| PROC
     METHOD -.->|자재 facet 인코딩| MAT
@@ -260,12 +282,14 @@ graph TB
     classDef engine fill:#fce8e6,stroke:#ea4335
     classDef gsnew fill:#f3e8fd,stroke:#9334e6
     classDef tpnew fill:#e0f7fa,stroke:#0097a7
+    classDef stnew fill:#fde8f3,stroke:#e6349a
     class MAT,PROC,OPT,TMPL,BASE,CAT,SIZE static
     class ADDON,PARAM,QTY dyn
     class PRICE,METHOD cross
     class C engine
     class PTYPE,FORM gsnew
     class DICH,TASSET tpnew
+    class SHAPE stnew
 ```
 
 ---
@@ -277,13 +301,15 @@ flowchart TD
     PT["생산형태<br/>(#15 최상위 governing)"] -->|C 완제품| BODYSKU["완제 본체 SKU<br/>(DIR_MTR 텀블러·코스터)"]
     PT -->|A 통합/B 셋트| MAT["자재 선택<br/>(D-2 합성·usage 다중)"]
     PT -->|C 입체| FORM["본체 형태가공<br/>(파우치봉제·지퍼)"]
-    M["인쇄방식<br/>(D-7 게이팅)"] -->|가능 공정 부분집합| AVAIL["가용 공정/옵션 집합"]
+    M["인쇄방식<br/>(D-7 게이팅·UV/DTF/후지)"] -->|가능 공정·자재풀 부분집합| AVAIL["가용 공정/옵션 집합"]
     BODYSKU -->|소재/색/용량 분해| MAT
-    MAT -->|disable 룩업| AVAIL
-    MAT -->|force ESN_YN| FORCE["강제 공정<br/>(PET→코팅·텐트천→포장)"]
-    AVAIL --> SIZE["사이즈 선택<br/>(프리셋/nonspec/기종)"]
+    MAT -->|disable 룩업(ST 227건)| AVAIL
+    MAT -->|force ESN_YN| FORCE["강제 공정<br/>(PET→코팅·DTF→화이트)"]
+    SHP["형상 Shape<br/>(#17 ST·⊥사이즈·1:多 칼틀)"] -->|gates 칼틀/사이즈모드| SIZE["사이즈 선택<br/>(프리셋/nonspec/기종)"]
+    SHP -->|gates 칼선 FR→자유/정형→프리셋| PROC
+    AVAIL --> SIZE
     SIZE -->|match| ADDON["호환 부속물<br/>(롤업 size↔거치대)"]
-    AVAIL --> PROC["공정 선택<br/>(택1/택N·제본그룹)"]
+    AVAIL --> PROC["공정 선택<br/>(택1/택N·제본·칼선·재단입자 반칼/완칼)"]
     PROC -->|sub_mtrl_yn=Y| CONS["자재 소비<br/>(아일렛=금속링·링/스펀지 usage)"]
     PROC -->|qty_input_yn=Y / ATTB| PARAM["공정 파라미터<br/>(로프 수량·줄수·링색·반경)"]
     PARAM -->|cascade| PARAM2["후행 파라미터<br/>(오시줄수→접지단수)"]
@@ -306,12 +332,15 @@ flowchart TD
     classDef calc fill:#e6f4ea,stroke:#34a853
     classDef gsnew fill:#f3e8fd,stroke:#9334e6
     classDef tpnew fill:#e0f7fa,stroke:#0097a7
+    classDef stnew fill:#fde8f3,stroke:#e6349a
     class M,FORCE,CONS gate
     class MAT,SIZE,PROC,ADDON,QTY,PARAM,PARAM2 sel
     class PRICE calc
     class PT,BODYSKU,FORM gsnew
     class DICH,TASSET tpnew
+    class SHP stnew
 ```
+> ★형상(#17·ST)은 본체 캐스케이드의 *상위 분류 게이트* — 사이즈(칼틀/프리셋 부분집합)와 칼선(자유 THO_GRA vs 프리셋 THO_DFT)을 게이팅하나, 형상 자체는 사이즈 치수가 아님(원형이라는 사실을 사이즈에 중복 인코딩 금지). 단 형상이 사이즈와 1:1인 카테고리(BN/GS/TP/PR)는 사이즈 프리셋에 흡수(형상축 강제 금지).
 > ★디자인 입력 채널(#16)은 본체 캐스케이드와 *분리된 직교 레인*이다 — 디자인수(ORD_CNT) 산정만 수량으로 게이팅하고 가격에는 기여하지 않음(가격 기여 0). 템플릿 자산(디자인 시안)을 노출하되 완제SKU(#4 번들)와 별 레이어.
 
 ---
@@ -333,5 +362,7 @@ flowchart TD
 - **★접지(folding)는 면가공 family·면수=파생값(PR·P-1)** — FLD_DFT 7종이 평면 종이 N면 분할(2단=4면), 면수는 접지방식에서 *계산*(축 아님). 공정#2 family + 접지방식 파라미터(#9) + 접지→오시 cascade(#5). BN/GS/TP 미발굴.
 - **★인쇄방식이 자재풀도 게이팅(PR·P-7)** — 윤전→YWM 전용지 pool. D-7이 가능 공정뿐 아니라 가능 자재 부분집합도 게이팅(새 관계 간선). 토너/인디고 자재풀은 unobserved.
 - **★가격 digital_price 라우팅(PR·P-6)** — 같은 좌표(CUT_WDT/HGH) 입력이 포스터=digital원자합산·BN=면적매트릭스로 분기. pricing_model 6종(면적/digital/tmpl/vTmpl/tiered/book2025). book2025=표지/내지 분리 가격(usage_cd 전파의 가격판).
-- **★PR distinct 신축 0 = 16축 포화** — 4번째 카테고리(다면/제본/접지)가 새 *축/엔티티* 0 도입(PAGE_RULE는 #10 수량 보조 엔티티). 9 fragment 전부 기존 축 facet/family/cascade. 모델이 RedPrinting 카탈로그 shape를 견딤(강한 검증).
-- **4 상품군 미관측(갱신): 카테고리 트리 깊이·template_selections·vTmpl 분기조건 + TP 템플릿 자산 카탈로그·VDP 변수 스키마·티켓 넘버링(VDP vs 공정)·INN_PAGE↔가격 결합 + PR 토너/인디고/리소 자재풀(P-7)·리플렛 접지강제·면수 cascade(P-1)·스코딕스 패턴/박색/칼틀값(P-9)** — 책자/문구 reuse + 로그인 에디터/책자 캡처로 보강 필요(discovered-axes 갭).
+- **★PR distinct 신축 0 = 16축 포화** — 4번째 카테고리(다면/제본/접지)가 새 *축/엔티티* 0 도입(PAGE_RULE는 #10 수량 보조 엔티티). 9 fragment 전부 기존 축 facet/family/cascade.
+- **★형상(#17·ST)은 사이즈와 분리된 상위 분류축 = 16축 포화 붕괴** — `shape_info` 전용 슬롯이 사이즈를 1:1 흡수해온 전제를 깸(CL 형상↔CL001~100 칼틀 1:多·STDCFBR 5형상 superset). SHAPE gates SizePreset(칼틀 부분집합) + gates ProcessMember(칼선 FR→자유/정형→프리셋). 후니 KB G-SK-2 "형상 어느 축에도 없음"이 size축 미수용 확증. **단 1:1 흡수 카테고리(BN/GS/TP/PR)는 사이즈 프리셋 유지(형상축 강제 금지·오모델 회피).** 5번째 카테고리가 distinct 1 도입 = 모델이 카테고리 증거에 정직(포화도 진화도 증거 강제·오버피팅 아님).
+- **★ST 칼선/재단입자/점착은 facet** — 칼선(THO_GRA/THO_DFT)·반칼/완칼(CUT_DFT)은 후니 KB(반칼 PROC_054·완칼 053·스티커완칼 055·도무송)로 공정#2 멤버 확정(관계 강화·신축 아님)·점착/내후=자재#1 합성 차원(adhesion_grade/weather_grade 속성)·인쇄방식 UV/DTF/후지=#12 PR 합류·die-cut/판/정가=#11 라우팅(pricing_model 6종 흡수).
+- **5 상품군 미관측(갱신): 카테고리 트리 깊이·template_selections·vTmpl 분기조건 + TP 템플릿 자산 카탈로그·VDP 스키마·INN_PAGE↔가격 + PR 토너/인디고 자재풀·리플렛 접지강제·스코딕스/칼틀값 + ST UV 가격엔진·후지/수정 방식·EL 칼틀 enum·자석/메탈 자재코드·완제SKU 테이프 규격** — reuse + 로그인 캡처로 보강 필요(discovered-axes 갭).

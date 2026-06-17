@@ -61,6 +61,9 @@ COMMENT ON COLUMN t_prd_product_option_items.ref_param_json IS
 ## 5. DDL 참조
 - **정밀 SQL = `_workspace/huni-dbmap/11_ddl_proposals/ref-param-json-proposal.sql`** (dbm-ddl-proposer 소유·재사용). 본 vessel은 그릇 판정 + **영향분석 §4를 라이브 469행으로 갱신**해 통합.
 
+## 5b. ST 형상↔칼선 게이팅 의존 (v5.0 — V-12 연동·신규 그릇 0)
+- **V-12 형상=FR(자유형) → 자유칼선이 V-1 ref_param_json에 의존**(`vessel-shape-axis.md §2.3`·`gap-matrix XIII-3`). 라이브 칼선 공정 = 완칼 `PROC_000053`·반칼 `PROC_000054`·스티커완칼 `PROC_000055`만 존재·자유칼선(도무송) 전용 row 부재. FR 형상은 **완칼(PROC_000053) + `{"모양": ...}` 파라미터**로 환원 — `PROC_000053.prcs_dtl_opt = {"inputs":[{"key":"모양","type":"string"}]}`(라이브 실측). 그 `모양` 선택값(예 `{"모양":"FRXXX"}`)을 적는 칸 = **본 V-1 `ref_param_json`**(§2 그릇 그대로). → V-12 형상축은 단독 완결 아님·**V-1 선행/병행 필요**(형상 게이팅이 V-1 파라미터 슬롯 활성화). 신규 그릇 0(V-1이 이미 담음·ST 추가 키 `{"모양"}`·`{"조각수"}`는 §2 jsonb shape 그대로).
+
 ## 6. open decision (날조 금지)
 1. **트리거 param 키 검증 강도:** 본 그릇은 컬럼만(앱이 prcs_dtl_opt 스키마로 키 검증). DB 트리거에 "param 키 유효성" 강제는 별도 결정(권장: 앱 검증·복잡도↑ 회피).
 2. **키 표기:** 한글 키(`줄수`/`구수`) = prcs_dtl_opt 현행 권위. 영문 전환은 prcs_dtl_opt 동시 마이그 필요(유지 권장).

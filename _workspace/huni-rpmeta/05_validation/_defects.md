@@ -130,3 +130,22 @@
 ### PR-M2~M6 종합
 - **GO 근거:** M2(16축 보존·distinct 0 도출·ERD 무모순) · M3(facet 9 역검·P-2 라이브 robust) · M4(facet 6항 PASS4/WEAK1/GAP1 전건 라이브 일치) · M5(search-before-mint 라이브 입증·mint 0 정당) · M6(deepcheck 20후보 채택0·17축 0 유입·H-1 독립 dodge-hunt 깨기 실패). **NO-GO 0·차단 0.**
 - **유일 결함:** D-PR-1(평량 컬럼 표기·Low·무영향). 보정 권장이나 재게이트 불요.
+
+---
+
+# ═══ ST(스티커) 확장 결함 (v5.0·★16축 포화 붕괴 검증·BN/GS/TP/PR 보존) ═══
+
+> ST M2~M6 라이브 재실측(2026-06-17·psql 직접 SELECT + 캡처 raw 파싱). **★형상축 #17 distinct 승격 = VALIDATED.** NO-GO 0·차단 0.
+
+## ST 카테고리 M2~M6 결함
+
+### D-ST-1 (Low) — V-12 ②a/②b 형상 컬럼 중복운영 정합규칙 미확정 [M5 → rpm-vessel-designer]
+- **위치:** `04_vessel/vessel-shape-axis.md:121`(open decision 1)·`ddl-proposal-shape-axis.sql:73`.
+- **결함:** V-12가 형상을 `t_prd_products.shape_cd`(②a 상품 단일형상) + `t_prd_product_sizes.shape_cd`(②b 칼틀별 1:多) 두 컬럼에 매되, 둘 다 보유 상품(원형 스티커인데 CL001~ 칼틀 다수)의 정합규칙 `products.shape_cd NOT NULL ⇒ product_sizes.shape_cd ∈ {NULL, 동일값}`을 **앱/V-4 검증으로 미루고 DB 제약으로 미확정**(open decision). 5형상 superset(STDCFBR)=②a NULL·②b 권위 분담은 무손실이나, 단일형상+다칼틀 상품의 이중저장 일관성 강제 수단이 open.
+- **심각도:** Low — 설계 무손실/무중복 논증(§3.1)은 정당하고 open decision으로 정직 명시됨. 실 적용(인간 승인+dbmap 적재) 전 ST 적재 실측으로 ②a/②b 단순화 여부 판정 가능. 판정(M5 GO·신규 테이블 0·컬럼 2 최소성) 무영향.
+- **조치:** ST 형상 백필 시 ②a/②b 중 하나로 단순화(상품분기형만이면 ②a·옵션형만이면 ②b) 또는 정합 트리거/CHECK 추가 검토. 검증 무차단.
+
+### ST-M2~M6 종합
+- **GO 근거:** M2(17축 5파일 카운트 일관·SHAPE 엔티티 관계 무모순·형상 도출 증거 실측 인용) · M3(★형상 #17 distinct 적대 재검 통과 — STDCFBR 5형상·CL/RC 1:多 캡처 직접 재현·과잉승격 반증 실패 / 칼선·재단·점착 facet 역검 통과·숨김 0) · M4(#17 GAP 라이브 3-레벨 전건 재현·facet 5항 PASS1/WEAK2/GAP1/부분PASS1 전건 라이브 일치) · M5(search-before-mint 라이브 입증·junction 449행 선재로 신규 테이블 0 정당·reg_dt 트랩 준수·dbmap round-3 정정=정밀화) · M6(deepcheck 30후보 채택0·#18 0 유입·codex HIGH 무검증 유입 grep 0건·형상 1:多 dodge-hunt 독립 재현). **NO-GO 0·차단 0.**
+- **★형상축 #17 직답:** distinct 승격 = **VALIDATED**. 16축 포화 붕괴(5번째 카테고리 distinct 1종)는 오버피팅이 아니라 사이즈축 1:1 흡수 전제가 ST 전용 shape_info 슬롯·1:多·5형상 superset으로 깨진 증거 강제 결과 — 라이브 3-레벨 + 캡처 raw로 검증.
+- **유일 결함:** D-ST-1(②a/②b 중복운영 정합규칙·Low·open decision·무영향). 보정 권장이나 재게이트 불요.

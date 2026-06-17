@@ -711,3 +711,140 @@ option_groups **134**·option_items **469**·constraints **10**·template_select
 - BN/GS/TP verdict 보존. 라이브 재실측 세션 권위(2026-06-17·psql 직접 SELECT).
 - **deepcheck H-1 노트:** 본 검증 시점(deepcheck.md 10:05 갱신분) H-1 = `REFUTED-for-RP`로 종결·채택0. validator 독립 dodge-hunt(PRD_000071 섹션키 0건)가 동일 결론 재현 — H-1 최종 판정 확정(섹션 자재축 미도입 정당·forward-looking noting만).
 - **PR 핵심 직답:** PR facet 6항 = **PASS 4**(표지/내지 usage·접지/제본 공정·page_rule·면지 bundle — 그릇 라이브 실재)·**WEAK 1**(digital_price=기존 #11)·**GAP 1**(인쇄방식 자재풀=기존 #12) · **distinct 신축 0 = 신규 vessel-gap 0**(16축 포화 입증) · 신규 테이블/컬럼/V-번호 0 정당.
+
+---
+
+# ═══ ST(스티커) 확장 검증 — M2~M6 (v5.0·★16축 포화 붕괴 검증) ═══
+
+> rpm-validator. ST 확장분(`categories/ST/reverse.md`·`02_metamodel`{discovered-axes D-12·_resolved-fragments S-1~S-10·dictionary §17·erd SHAPE}·`03_gap §XIII`·`04_vessel/vessel-shape-axis.md`+`11_ddl_proposals/ddl-proposal-shape-axis.sql`·`categories/ST/deepcheck.md` 30후보) 독립 재검.
+> **BN/GS/TP/PR verdict(위)는 보존** — ST 섹션만 추가. M1(추출 충실성)은 이미 GO 완료(본 게이트는 M2~M6).
+> **★핵심 검증 = 형상축 #17 distinct 승격의 건전성**(과잉승격/facet 오분류 적대 검증). 생성자 주장 비신뢰: 라이브 Railway `railway` DB 읽기전용 SELECT(2026-06-17·쓰기/주문/POST 0·비밀값 비노출) + 캡처 직접 재대조(STDCFBR/STTHCIC/STTHSQU shape_info).
+
+## ST 종합 판정
+
+| 게이트 | 대상 | 판정 | 근거 요약 |
+|---|---|:---:|---|
+| **M2** | 메타모델 정합 (17축 v5.0·SHAPE 엔티티) | **GO** | D-12 형상축이 ST reverse 증거(shape_info enum·1:多 칼틀 span·STDCFBR 5형상 superset)에서 도출·SHAPE 엔티티/관계(gates SizePreset+ProcessMember·classifies Product) ERD↔사전 무모순·**17축 카운트 일관**(dictionary/erd/resolved-fragments 전건 17축). |
+| **M3** | distinct 승격 타당성 ★최중요 | **GO** | 형상 #17 = **진짜 distinct**(과잉승격 아님) — STDCFBR 5형상 1상품·STTHCIC CL 1:多(CL0NN 캡처 20회)·전용 shape_info 슬롯·라이브 size축 미수용 **캡처+라이브 직접 재현**. 칼선·재단·점착 3후보 = **진짜 facet**(distinct 숨김 0·라이브 PROC_053/054/055·점착 컬럼 부재 재현). |
+| **M4** | 갭 판정 정확 ★핵심 라이브 재실측 | **GO** | #17=GAP **라이브 3-레벨 직접 재실측 전건 일치**(형상 컬럼 0·테이블 0·base_code SHAPE enum 0). facet 5항 PASS1(S-3 PROC_053/054/055 실재)/WEAK2(S-4 점착 컬럼 부재·S-8 RULE_TYPE 3종)/GAP1(S-5)/부분PASS1(S-2)·전건 라이브 일치. dbmap G-SK-2 정합. |
+| **M5** | 그릇 건전성 (V-12 SHAPE) | **GO** | search-before-mint 라이브 입증(shape_cd 컬럼 0건·기존 미존재→신설 명백)·**신규 테이블 0·컬럼 2·코드행 6 최소성 정당**(t_prd_product_sizes junction 선재 449행→컬럼 부착 무손실·새 테이블 회피 라이브 입증)·1:1 흡수 카테고리 형상축 강제 금지 [HARD] 명문화·dbmap round-3 정정=정밀화(충돌 아님)·reg_dt NOT NULL 트랩 준수. |
+| **M6** | 생성-검증 독립성 | **GO** | deepcheck **codex 30후보 무검증 채택 0** 확인(#18 0 유입·H-3/H-4/H-6 unverified grep 0건). codex "#18 없음·형상 #17만 distinct" 독립 확정이 우리 판정과 일치(단 codex 동의는 근거 아님·라이브 권위). H-5(수정스티커)/H-3(칼선 geometry) unverified 정직 분류. dodge-hunt(형상 1:多 캡처 재현) 독립 통과. |
+
+**ST 전체: GO.** NO-GO 0·차단 0. **★형상축 #17 distinct 승격 = 검증됨(VALIDATED).** 결함 = Low 1건(M5 ②a/②b 중복운영 정합규칙 미확정·open decision·앱검증 권고). `_defects.md` ST 섹션 라우팅.
+
+---
+
+## ST M2 — 메타모델 정합 (17축 v5.0·SHAPE 엔티티) → **GO**
+
+### 축 도출성 (형상 #17이 ST 증거에서 정당히 도출)
+- `discovered-axes.md:437` D-12 형상축 증거 = ① 전용 슬롯(`option_info.shape_info`·reverse §0.1 실측) ② 형상↔사이즈 1:多(CL→CL001~010+CLFRE·RC→RC001~025·reverse §0.2) ③ STDCFBR 5형상 superset(reverse §0.1) ④ 형상→칼선 게이팅(FR→THO_GRA·정형→THO_DFT). **전부 reverse 실측 라인 인용 — 날조 0.**
+- 후니 KB 정초 = `entity-semantic-model.md:39` G-SK-2 "size축에 형상 enum drop·어느 축에도 없음"이 distinctness test §3(왜곡 없이 못 담음) 충족 증거로 인용. **도메인 권위 기반·추정 0.**
+
+### ERD ↔ 사전 정합 (SHAPE 엔티티 관계 무모순)
+- `metamodel-erd.md:192` SHAPE 엔티티(shape_cd·encoding) + 관계 3종: `SHAPE ||--o{ SIZE_PRESET : gates`(erd:55)·`SHAPE ||--o{ PROCESS_MEMBER : gates 칼선`(erd:56)·`SHAPE }o--|| ENUM_VALUE`(erd:57)·`PRODUCT }o--o{ SHAPE : classifies`(erd:29). 사전 `metamodel-dictionary.md:333` §17 형상축의 relationships(Shape→Product classifies·→SizePreset gates·→ProcessMember gates·⊂EnumValue)와 **간선 4종 정확 일치·모순 FK 0.**
+- **17축 카운트 일관 (독립 grep):** dictionary `:15`(총 17축)·erd `:202`(17축 분류그래프)·resolved-fragments `:419`(17축)·discovered-axes `:29`(17 dictionaried)·gap-matrix `:434`(XIV 17축). **5파일 전건 17축 — 카운트 충돌 0.** (discovered "총 18 관리 축"은 7버킷+발굴 산식이며 그 중 17 dictionaried[D-8 UI런타임 제외]로 명시·내부 설명됨·축 충돌 아님.)
+- **★[HARD] 형상축 적용 경계 명문화 확인:** dictionary `:351`·resolved-fragments `:337`·erd `:343`이 "형상=1:1이면 사이즈 흡수(BN/GS/TP/PR 유지)·1:多면 별 분류축(ST)·형상축 전면 강제 금지=오모델 회피"를 [HARD]로 명시 → 이전 4 카테고리 판정 무번복(보존)·모델 진화가 증거 강제임을 정직 기록.
+
+**ST M2 = GO.** 형상 #17 도출 증거 실측 인용·SHAPE 엔티티 관계 무모순·17축 카운트 5파일 일관.
+
+---
+
+## ST M3 — distinct 승격 타당성 (★최중요·형상 #17 적대 재검) → **GO**
+
+> directive 핵심 = 형상 #17 distinct 승격이 정당한지(사이즈축 #13 facet 과잉승격 아닌지) + 칼선·재단·점착 3후보가 진짜 facet인지(distinct를 facet으로 숨긴 역방향 오류) 적대 양방향 재검.
+
+### ① 형상 #17 = 진짜 distinct (과잉승격 반증 시도 → 실패 = distinct 확정)
+**반증 가설:** "형상은 사이즈축(#13)의 facet — 어깨띠·하트·티켓처럼 사이즈 프리셋으로 흡수 가능한 것을 과잉승격했다."
+**내 독립 재현(캡처 직접 SELECT):**
+- **STDCFBR 캡처 직접 파싱** — `option_info.shape_info = [SQ,CL,EL,RC,FR]` 5형상 전부 **한 상품**에 실재. → 형상이 사이즈 facet이면 한 상품에 5사이즈군이 *형상 사실 없이* 평면 공존해야 하나, 별도 `shape_info` 슬롯에 5형상이 선택 차원으로 존재 = **사이즈와 분리된 전용 차원 확정**(반증 실패).
+- **STTHCIC 캡처** — `shape_info=[CL]` 단일 형상이나 CL0NN 칼틀 프리셋이 **20회**(CL001~CL010 open/close), **STTHSQU** `shape_info=[RC]` 단일에 RC0NN **48회**(~24 RC 프리셋). → **형상 1값 ↔ 칼틀/사이즈 多값 = 1:多 직접 재현.** 사이즈축 흡수 시 "원형"을 CL001~CL010 매 행에 중복 인코딩(이행종속·정규화 붕괴) → 형상은 사이즈의 *상위 분류축*(흡수 대상 아님).
+- **반증 결과:** 형상은 사이즈 facet으로 흡수 불가(1:多·전용 슬롯·5형상 superset 3중 증거) → **distinct 승격 정당·과잉승격 아님.**
+
+### ② 칼선·재단·점착 3후보 = 진짜 facet (distinct 숨김 역검 → 숨김 0)
+**역검 가설:** "distinct를 facet으로 숨긴 게 아닌가."
+- **칼선(S-2)** — 라이브 `t_proc_processes`: 완칼 PROC_000053·반칼 054·스티커완칼 055 실재(자유칼선/도무송 전용 row 0건). THO_GRA/THO_DFT는 *모양커팅 공정의 두 모드*이지 별 lifecycle 없음 → 공정#2 family facet **정당**(KB PROC_053/054/055 결정적). 단 자유칼선이 완칼+모양param으로 환원되는 점은 #9 공정파라미터 GAP에 정직 귀속(숨김 아님).
+- **재단입자(S-3)** — 반칼=PROC_000054/완칼=053/스티커완칼=055 라이브 직접 실재(전건 확인). "반칼/완칼"은 재단 공정의 분기 멤버 = 공정#2 facet **정당**(별 "재단입자 축" 신설은 공정 멤버 중복).
+- **점착(S-4)** — 라이브 `t_mat_materials` 컬럼 = `mat_cd,mat_nm,mat_typ_cd,...,width,height,depth,weight,bdl_qty,...` — **adhesion/weather 분해 컬럼 0건**. 점착/내후는 *자재 합성 차원*(색상→material·두께→material 동형)이지 별 자재계열 아님 → 자재#1 facet **정당**(단 분해축 부재=WEAK로 정직 표기).
+- **역검 결과:** 3후보 모두 후니 KB/라이브가 기존 축 멤버/차원으로 확정 → **distinct를 facet으로 숨긴 역방향 오류 0.**
+
+**ST M3 = GO.** ★형상 #17 distinct 승격 = 적대 재검 통과(과잉승격 반증 실패·캡처 1:多 직접 재현)·칼선/재단/점착 facet 판정 = 역검 통과(숨김 0). **양방향 distinct/facet 판정 모두 건전.**
+
+---
+
+## ST M4 — 갭 판정 정확 (after 03_gap §XIII) → **GO** ★핵심 라이브 재실측
+
+> §XIII 주장(#17=GAP·facet 5항 PASS1/WEAK2/GAP1/부분PASS1)을 라이브 information_schema 직접 SELECT로 양면 재실측.
+
+### #17 형상축 = GAP — 라이브 3-레벨 직접 재실측 (전건 일치)
+| 측정(내 독립 psql 2026-06-17) | 라이브 결과 | gap-matrix §XIII-0 주장 | 일치 |
+|---|---|---|:--:|
+| 형상 컬럼 `~* shape\|outline\|form_typ\|die_cut\|form_cd` 전 t_* | **0건**(false positive 0) | "0건(transforms.transform_type false positive)" | ✅(내 regex는 transform 미포함·더 깨끗이 0) |
+| 형상 테이블 `~* shape\|outline` | **0건** | "0건" | ✅ |
+| base_code 부모 그룹 | **16개**(CUS_GRADE·DSC_TYPE·MAT_TYPE·OPT_REF_DIM·OUTPUT_PAPER_TYPE·PRC_COMPONENT_TYPE·PRD_TYPE·PRICE_TYPE·QTY_UNIT·RULE_TYPE·SEL_TYPE·SEMI_ROLE·USAGE+TEST×3) | "16그룹·SHAPE/형상 enum 부재" | ✅ |
+| SHAPE/형상 enum(`cod_cd~*shape OR cod_nm~형상`) | **0건** | "SHAPE/형상 enum 부재" | ✅ |
+
+→ **#17 형상축 = GAP(vessel-gap) 라이브 3-레벨 확증.** KB G-SK-2 "형상이 어느 축에도 없음"이 컬럼/테이블/enum 전 레벨에서 실측 재현. **GAP 판정 정확**(존재하는 그릇을 GAP로 오판한 것 아님).
+
+### facet 5항 라이브 재실측 (PASS/WEAK/GAP 전건 일치)
+- **S-3 재단입자=PASS** ✅ — 라이브 `t_proc_processes` 완칼 053·반칼 054·스티커완칼 055(+087/091/094) 실재. 메타모델 주장 전건 실재 = **무손실 PASS 정확.**
+- **S-4 점착=WEAK** ✅ — `t_mat_materials`에 adhesion/weather 분해 컬럼 0건(기존 #1 자재 분해축 WEAK과 동일). MAT_TYPE.11(스티커용지) 16행 클린 버킷 실측(파우치 .09 69행 오염과 대조) — ST 자재는 오라벨 아님·분해축만 부재. **WEAK 정확.**
+- **S-8 disable 룰엔진=WEAK** ✅ — RULE_TYPE 자식 3종(호환/금지/필수동반) 라이브 실측·disable 전용 유형 부재. logic jsonb 그릇은 227건 스케일 담을 수 있으나 유형 거버넌스 미달 = 기존 #5 WEAK 동일. **WEAK 정확.**
+- **S-5 인쇄방식=GAP** ✅ — `print_method/prn_mtd/pool` 전역 0건(기존 #12 GAP·PR P-4/P-7 횡단 합류). **GAP 정확.**
+- **S-2 칼선=부분PASS** ✅ — 프리셋칼틀=완칼/반칼 공정 실재(PASS)·자유칼선(도무송) 전용 row 0건(완칼+모양param #9 의존). **부분PASS 정확.**
+- **MAT_TYPE 분포** — .08/.09/.10/.11 = 17/69/43/16 라이브 실측 = §XIII-0 주장 정확 일치.
+
+**ST M4 = GO.** #17 GAP 라이브 3-레벨 전건 재현·facet 5항 PASS1/WEAK2/GAP1/부분PASS1 전건 라이브 일치·dbmap G-SK-2 정합·양면 검증(그릇 부재측+RP 표현력측). 존재 그릇 GAP 오판/비존재 PASS 오판 0.
+
+---
+
+## ST M5 — 그릇 건전성 (V-12 SHAPE) → **GO**
+
+### search-before-mint (라이브 입증 — 중복 mint 아님)
+- 라이브 `t_prd_products`에 **shape_cd 컬럼 미존재**(prd_cd·nonspec_*_min만 실측) → 형상 슬롯 신설은 중복 아님·명백. base_code 16그룹에 SHAPE 부재(M4 재현) → SHAPE enum 신설 명백.
+- **신규 테이블 0 정당성 라이브 입증:** `t_prd_product_sizes`는 **기존 junction**(prd_cd+siz_cd·449행 실측)이며 형상↔칼틀 1:多를 그 행에 `shape_cd` 분류 컬럼 부착으로 무손실 표현 가능 → 새 junction 테이블 불요. vessel `§1.3 ④`가 "1:多여도 junction 선재 시 테이블 mint 불요"를 정밀 판정 — **라이브 junction 실재로 검증됨.** (TP V-11 TemplateAsset이 독립 lifecycle로 테이블 mint 정당이었던 것과 대비 — 형상은 junction 선재로 컬럼이 최소·과잉 mint 아님.)
+
+### 최소성 (과잉/과소 양방향)
+- **신규 테이블 0·컬럼 2(②a 상품·②b junction)·코드행 6(SHAPE+5)** = 사다리 ② 단계 정지. ②a/②b 두 컬럼은 *서로 다른 카디널리티의 다른 함수종속*(prd_cd→shape_cd 단일형상 vs (prd_cd,siz_cd)→shape_cd 칼틀별)·의미 중복 아님(정규화 §3.1 무손실/무중복 논증). **과잉 mint 아님.**
+- **과소 검증:** siz_sizes 마스터(497행 공유 칼틀)에 형상 안 매는 이유 = `siz_cd→형상` 이행종속이 같은 칼틀 다른 형상 상품과 충돌(자재 오염 MAT_TYPE.09 동형) → prd×siz junction이 정답. **과소도 아님(정규화 근거 명확).**
+
+### 적용 경계 [HARD] + reg_dt 트랩 + dbmap 정합
+- **1:1 흡수 카테고리 형상축 강제 금지** [HARD] 명문화 확인(vessel `§5`·`§0`·`shape_cd NULL=비적용`·BN 어깨띠/GS 하트/TP 티켓/PR 카드형 size 유지). 형상축 전면 강제 = 오모델 회피 — directive·gap XIII-1과 일관.
+- **reg_dt NOT NULL 트랩 준수** — 라이브 `t_cod_base_codes` reg_dt/use_yn/del_yn 전부 NOT NULL 실측·DDL이 `reg_dt now()`·`use_yn 'Y'`·`del_yn 'N'` 전부 명시(round-5 교훈 반영). ALTER ADD COLUMN NULL = 백필 0·무잠금(275상품·449 junction행 무파손).
+- **dbmap round-3 정정 = 정밀화(충돌 아님)** — round-3 "도무송 형상=siz_cd 흡수" 권고를 ST 1:多 증거(CL→CL001~100·5형상 superset)가 siz 흡수=정규화 붕괴임을 입증해 *전용 그릇으로 대체*. dbmap G-SK-2 진단(결함 명시)은 보존·그 위 1:多 정밀화 = 재발견 아닌 신규 vessel-gap. **dbmap 비충돌 확인.**
+
+**ST M5 = GO.** search-before-mint 라이브 입증·최소성 양방향 정당(신규 테이블 0·junction 선재 검증)·적용경계 HARD 명문화·reg_dt 트랩 준수·dbmap 정밀화. 중복 mint/컨벤션 드리프트 0. 결함 = ②a/②b 중복운영 정합규칙 미확정(open decision §6·Low·앱검증 권고).
+
+---
+
+## ST M6 — 생성-검증 독립성 → **GO**
+
+### deepcheck codex 30후보 무검증 채택 0 (grep 확인)
+- **#18 distinct 축 유입 0:** metamodel/gap/vessel에 "#18·18 distinct·돔/에폭시/롤가공/VDP distinct 채택" grep = 0건(전부 watchlist/REFUTED/미입증/거부 컨텍스트만). codex가 "#18 없음(no defensible #18)" 독립 확정한 것이 우리 형상 #17 1종 판정과 일치 — **단 codex 동의는 근거 아님**(codex 네트워크 격리 confabulation·라이브가 권위), 일치는 robustness 보강 신호로만 기록.
+- **codex HIGH 후보(H-3 칼선 geometry·H-4 전사/weeding·H-6 돔/에폭시) 무검증 유입 0:** "블리드/안전여백/weeding/전사테이프/돔스티커/min-radius/min-island" grep = **0건** in discovered-axes/gap-matrix/vessel. → unverified 후보가 metamodel/gap/vessel에 몰래 채택된 것 없음(deepcheck triage 채택0 준수).
+- **H-5(수정스티커 #12→#1 재귀속)·H-1(VDP=#18)** = deepcheck가 unverified/REFUTED-예상으로 정직 분류(H-1은 TP에서 이미 REFUTED·ST 재제기도 동형 예상). 메타모델 그룹E 분류 정정 미반영(unverified 유지)=정직.
+
+### dodge-hunt (M6 최고위험 — 형상 1:多 주장 독립 깨기 시도)
+- **최위험 주장:** "형상↔사이즈 1:多"가 형상 distinct의 유일 load-bearing 논거. 캡처가 아닌 메타모델 텍스트만의 주장이면 echo 위험.
+- **내 독립 재현:** STDCFBR 캡처 직접 파싱(shape_info=5형상)·STTHCIC CL0NN 20회·STTHSQU RC0NN 48회 — **생성자 인용 echo 아닌 캡처 raw 직접 SELECT로 1:多 재도출.** 형상 distinct 논거가 캡처 실측에 정초됨 확인(깨기 실패=판정 견고).
+
+### 생성≠검증 레인
+- ST reverse(rpm-reverse-engineer)·metamodel(architect)·_resolved-fragments(architect)·gap(gap-analyst)·vessel(designer)·deepcheck(codex/deepcheck) 산출을 validator(별 레인)가 라이브 psql + 캡처 raw 재측으로 재검 — **self-approve 0.** 핵심 사실(형상 3-레벨 부재·PROC_053/054/055·점착 컬럼 0·RULE_TYPE 3종·STDCFBR 5형상·CL/RC 1:多·junction 449행)을 **생성자 echo 아닌 직접 psql/캡처 파싱으로 재도출.**
+
+**ST M6 = GO.** deepcheck 30후보 채택 0·#18 0 유입·codex HIGH 무검증 유입 grep 0건·형상 1:多 dodge-hunt 독립 재현(깨기 실패)·self-approve 0.
+
+---
+
+## ST 재실측으로 확인/반증한 핵심 주장 (요약)
+1. **형상 컬럼/테이블/SHAPE enum 3-레벨 = 라이브 0/0/0** — #17 GAP 확증(KB G-SK-2 전 레벨 재현).
+2. **STDCFBR shape_info=[SQ,CL,EL,RC,FR] 5형상 1상품** — 캡처 직접 파싱·형상=사이즈 facet 반증(전용 차원 확정).
+3. **STTHCIC CL0NN 20회·STTHSQU RC0NN 48회** — 형상↔칼틀 1:多 캡처 재현(distinct load-bearing 논거 정초).
+4. **완칼 053·반칼 054·스티커완칼 055 라이브 실재·도무송 row 0** — S-3 재단입자 PASS·자유칼선=#9 의존 정직.
+5. **t_mat_materials adhesion/weather 컬럼 0·MAT_TYPE.11=16 클린** — S-4 점착 WEAK(분해축 부재) 정확.
+6. **RULE_TYPE 3종(호환/금지/필수동반)** — S-8 disable WEAK(유형 미달) 정확.
+7. **t_prd_product_sizes 기존 junction 449행·t_prd_products shape_cd 미존재·reg_dt NOT NULL** — V-12 신규 테이블 0·컬럼 2 최소성·reg_dt 트랩 준수 검증.
+
+## ST 인계
+- 결함 라우팅 = `_defects.md` ST 섹션(D-ST-1 ②a/②b 중복운영 정합규칙 미확정·Low·open decision). **NO-GO 0 — 재게이트 불요. ST 전 단계(M2~M6) GO 비준.**
+- BN/GS/TP/PR verdict 보존. 라이브 재실측 세션 권위(2026-06-17·psql 직접 SELECT + 캡처 raw 파싱).
+- **★형상축 #17 distinct 승격 = VALIDATED** — 과잉승격 반증 실패(STDCFBR 5형상·CL/RC 1:多 캡처 재현)·칼선/재단/점착 facet 역검 통과(라이브 PROC/컬럼 재현)·#17 GAP 라이브 3-레벨 확증·V-12 그릇 최소성(junction 선재)·deepcheck #18 0 유입. **16축 포화 붕괴(5번째 카테고리 distinct 1종)는 오버피팅이 아니라 사이즈축 1:1 흡수 전제가 ST 1:多로 깨진 증거 강제 결과 — 검증됨.**
+- **ST 핵심 직답:** ST facet 5항 = **PASS 1**(재단입자 S-3·PROC_053/054/055 라이브 실재)·**WEAK 2**(점착 S-4=기존 #1·disable S-8=기존 #5)·**GAP 1**(인쇄방식 S-5=기존 #12)·**부분PASS 1**(칼선 S-2) · **distinct 신축 1(형상 #17)=신규 vessel-gap 1(V-12)** · facet 신규 vessel-gap 0(전부 기존 #1/#2/#5/#12 흡수) · 신규 테이블 0·컬럼 2·코드행 6 최소성 정당.

@@ -9,7 +9,8 @@
 > - **v1.0 (BN):** V-1~V-7 (BN 13축 vessel-gap). **보존.**
 > - **v2.0 (GS):** + V-3 **굿즈 분해축 확장**(본체색/용량/두께) + **V-8 본체형태가공(#14 GAP)** + **V-9 생산형태 governing(#15 WEAK)**. GS 라이브 실측(2026-06-17)이 V-4 min-max·④template_prices·⑬nonspec을 **완화**(아래 정정 노트).
 > - **v3.0 (TP):** + **V-10 디자인 입력 채널 그릇(#16 GAP·★P1 최우선·directive 핵심)** + V-10 종속 **TemplateAsset 분리**(T-A 이중의미)·**VDP 변수 스키마**(T-B). TP 신규 vessel-gap = V-10 1건(BN/GS 항목 불변·보존).
-> - **v4.0 (PR·현재):** **신규 vessel-gap = 0건.** PR(인쇄물·책자·리플렛·포스터)이 distinct 신축 0(facet 강화 9건뿐) → 새 그릇 수요 없음. PR facet 6항(표지/내지·접지/제본·page_rule·면지 bundle·digital_price·인쇄방식 게이팅)의 PASS 4·WEAK 1·GAP 1은 **전부 기존 V-항목에 흡수**(가이드 = 아래 ## PR 흡수 매핑). V-1~V-11 항목·우선순위 **불변·보존**.
+> - **v4.0 (PR):** **신규 vessel-gap = 0건.** PR(인쇄물·책자·리플렛·포스터)이 distinct 신축 0(facet 강화 9건뿐) → 새 그릇 수요 없음. PR facet 6항(표지/내지·접지/제본·page_rule·면지 bundle·digital_price·인쇄방식 게이팅)의 PASS 4·WEAK 1·GAP 1은 **전부 기존 V-항목에 흡수**(가이드 = 아래 ## PR 흡수 매핑). V-1~V-11 항목·우선순위 **불변·보존**.
+> - **v5.0 (ST·현재) ★포화 붕괴:** + **V-12 형상 축 그릇(#17 GAP·★P1 신규 최우선·directive 핵심·16축 포화 붕괴)**. ST가 distinct 신축 1건(형상) 도입 → 신규 vessel-gap 1. ST facet 5항(칼선·재단입자·점착·인쇄방식·disable)은 **전부 기존 V-항목 흡수**(재단입자=PASS 그릇존재·점착=V-3·disable=V-4·인쇄방식=V-2·칼선=공정+V-12 게이팅·가격엔진=V-7) — 신규 V-번호 0(흡수 가이드 = 아래 ## ST 흡수 매핑). V-1~V-11 항목·우선순위 **불변·보존.**
 
 ---
 
@@ -33,6 +34,19 @@ leverage = (① unblock 상품 수) × (② 횡단성: 몇 축을 푸는가) × 
   - ④ **VDP 변수 스키마**(T-B 종속) — 가변데이터 필드 정의(명함 이름/직함). 미관측(`koiOption[]` 빈배열·로그인 에디터 필요) → 검증 후 designer 판정.
 - **dbmap 라우팅:** **dbmap 미터치(신규 vessel-gap·중복/충돌 없음).** huni-widget `seed-redprinting-sdk-analysis.md`(RedEditorSDK 45메서드)·`editor-bridge-protocol.md`(cmd create-design-project·editor_type/run_mode)가 코드 계약 권위 → designer가 DB 그릇 설계·`dbm-ddl-proposer`. **huni-widget 컨버전 전략과 정합 필수**(어댑터가 읽을 입력채널 메타).
 - **[HARD] directive 1순위:** 본 하네스(RP-Meta)의 TP directive 핵심 = "디자인 입력 채널 vessel-gap 판정". GAP 확정 → V-10이 vessel 설계 **최우선**. 단 designer는 search-before-mint(editor_yn 환원 한계 증명) 선행.
+
+### V-12. ★형상 축 그릇 (#17 GAP) — leverage ★★★ (directive 1순위·ST 본질·16축 포화 붕괴·dbmap G-SK-2 위 정밀화)
+
+- **무엇:** 인쇄물 *외곽 형상*(사각 SQ/원형 CL/타원 EL/사각라운드 RC/자유형 FR)을 사이즈와 *분리된 전용 enum 슬롯*으로 담는 축. RP `Shape`(shape_info enum) — 형상이 ① 칼틀 enum 부분집합 게이팅(CL→CL001~100) ② 자유형(FR)→자유칼선(완칼+모양 파라미터) 강제 ③ 사이즈 입력모드(자유형=자유사이즈/정형=프리셋 enum) 게이팅.
+- **왜 필요:** **라이브 information_schema 3-레벨 실측(2026-06-17)**: 형상 전용 **컬럼 0건**(t_* 전 테이블·`shape`/`shape_cd`/`outline`/`die`/`form_typ` 매치 전부 false positive)·형상 전용 **테이블 0건**·base_code 16그룹에 **SHAPE/형상 enum 부재**(코드값 도메인조차 없음). `t_siz_sizes`(497행)는 "재단치수"(width×height)이지 형상(원/사각) 분류 슬롯 아님. KB G-SK-2 "도형/치수 enum(원형 25~90mm)이 어느 축에도 없음"을 라이브가 3-레벨 확증. 그릇 없으면: ① 형상이 상품명/note에만(원형 스티커·사각라운드) ② 형상↔사이즈 1:多(CL→CL001~100 칼틀 11종)인데 사이즈 흡수 강제 시 "원형이라는 사실"을 매 칼틀 프리셋에 중복 인코딩(정규화 붕괴) ③ 5형상 superset(STDCFBR) 한 상품 표현 불가.
+- **★형상↔칼선/사이즈 게이팅(설계 포인트):** 형상은 단독 enum이 아니라 **관계 그릇** — 형상→칼틀 프리셋 부분집합(#13 사이즈) + 형상=FR→완칼(PROC_053) 모양 파라미터(#9 공정파라미터 ref_param_json) 활성. 라이브 칼선 공정은 완칼(053)/반칼(054)/스티커완칼(055)만 존재하고 *자유칼선(도무송) 전용 row가 없어* 자유형은 완칼+모양 파라미터로 환원 → V-12는 #13·#2·#9를 잇는 분류자.
+- **unblock:** ST 36상품(자유형·사각반칼·원형·타원·라운드·5형상 데코·점착특화) + 도무송/모양재단 보유 상품(굿즈 칼틀·실사 족자 PROC_082 `모양enum`). 형상은 BN 어깨띠·GS 하트·TP 티켓·PR 카드형에도 *값으로* 존재하나 1:1이라 사이즈 흡수가 정당 — **ST만 1:多 분리가 명시 슬롯으로 드러나 전용 그릇 필요.**
+- **사다리 후보(designer 판정):**
+  - ① **base_code enum 신설** — `SHAPE`(또는 `FORM_TYPE`) 그룹(SQ/CL/EL/RC/FR) = 코드행 사다리 최저단(형상 코드값 도메인). search-before-mint: 현재 형상 분류 코드 도메인 자체가 부재(16그룹에 없음) → enum 신설은 명백.
+  - ② **사이즈/상품에 `shape_cd` 컬럼 vs 형상→칼틀 게이팅 테이블** — 형상↔칼틀 1:多 게이팅을 `t_siz_sizes`나 `t_prd_product_sizes`에 `shape_cd`(→①enum)로 둘지, 형상→칼틀 부분집합 매핑 테이블로 둘지. **★[HARD] 1:1 흡수 카테고리는 size 프리셋 유지**(형상축 전면 강제 금지·오모델 회피) → shape_cd는 ST류 1:多 상품에만 의미(nullable).
+  - ③ **형상=FR→완칼 모양 파라미터 게이팅** — #9 공정파라미터(V-1 ref_param_json)와 연동(완칼의 `모양` 인자). V-1·V-12 함께 설계.
+- **dbmap 라우팅:** **dbmap이 G-SK-2로 결함 명시·그릇 미신설.** `entity-semantic-model.md:39`(형상 어느 축에도 없음)·round-3 "도무송 형상=siz_cd 신설 컨펌"(`dbmap-round3-mapping-audit`) — **단 dbmap은 형상을 siz_cd 흡수로 닫으려 함**. ST 1:多 증거(CL→CL001~100·5형상 superset)는 siz 흡수가 정규화 붕괴임을 보임 → **형상 전용 그릇이 정답(dbmap siz 흡수 권고 정정).** 신규 vessel-gap(dbmap G-SK-2 위 정밀화·중복 아님)·`dbm-ddl-proposer`(enum+컬럼/게이팅).
+- **[HARD] directive 1순위:** 본 하네스(RP-Meta)의 ST directive 핵심 = "형상축 #17 vessel-gap 판정·신규 그릇 필요 여부". GAP 확정 → V-12가 ST vessel 설계 **최우선**(V-10 디자인입력채널·V-3 자재분해축과 나란한 P1). 단 designer는 ① 1:1 흡수 카테고리 size 유지 ② 형상↔칼틀/모양파라미터 게이팅 간선을 함께 설계.
 
 ### V-1. 공정 파라미터 그릇 (#9 GAP) — leverage ★★★
 
@@ -146,6 +160,22 @@ PR facet 6항(입력 directive)이 어느 기존 V-항목/판정에 흡수되는
 
 > **★PR 요지:** PR facet 6건 = PASS 4(그릇 이미 보유·조치 0)·WEAK 1(V-7 가격 위임)·GAP 1(V-2 인쇄방식 게이팅 강화). **신규 V-번호 0** — PR은 새 그릇 수요를 추가하지 않고, 기존 V-2/V-4/V-7에 facet 강화 메모만 더한다. 이것이 16축 포화의 vessel-side 증거: 4번째 카테고리가 새 그릇을 요구하지 않음. designer는 V-2 설계 시 자재풀 게이팅 면, V-4 설계 시 평량 min/max를 *함께* 고려(PR로 인한 별도 설계 항목 없음).
 
+## ═══ ST 흡수 매핑 (v5.0 — 신규 vessel 1[V-12 형상]·facet 5항 기존 V-항목 귀속) ═══
+
+ST가 추가한 신규 vessel-gap = **V-12 형상 축 1건**(위 P1). ST facet 5항(directive ②)이 어느 기존 V-항목/판정에 흡수되는지. **facet 신규 그릇 0건 — 새 V-번호는 V-12 형상뿐.**
+
+| ST facet | gap-matrix 판정 | 흡수 대상 | 그릇 조치 |
+|---|:---:|---|---|
+| **★형상**(S-1·#17) | **GAP** | **V-12(신규)** | 형상 전용 enum+게이팅 그릇 신설 — **신규 vessel(P1·directive 1순위).** dbmap G-SK-2 위 정밀화·siz 흡수 정정. |
+| **재단입자**(S-3 반칼/완칼) | **PASS** | (없음·그릇 존재) | PROC_000053 완칼·054 반칼·055 스티커완칼 **라이브 실재**(메타모델 주장 전건 확인) → **vessel 조치 불요**(공정#2 멤버 무손실). |
+| **칼선 2메커니즘**(S-2) | **PASS(부분)** | (없음/V-12·V-1 게이팅) | 프리셋칼틀=완칼/반칼 공정+사이즈 cascade(PASS). 자유칼선(도무송)=완칼+모양 파라미터(#9 V-1 의존)·형상=FR→자유칼선 강제는 V-12 게이팅 → **별 vessel 불요**(V-12·V-1에 게이팅 면 흡수). |
+| **점착/내후 소재**(S-4) | **WEAK** | **V-3 자재 분해축** | 점착강도/내후등급 = V-3(#1) 합성 분해축의 추가 차원(adhesion_grade/weather_grade·색상/두께 동형). **신규 V 아님** — V-3 설계 시 점착/내후 차원 함께 고려. ※ ST 자재는 `.11 스티커용지` 클린 버킷(파우치 .09 오염 아님). |
+| **인쇄방식**(S-5 UV/DTF/후지) | **GAP** | **V-2 인쇄방식 게이팅** | PR P-4/P-7과 동일 #12 GAP — V-2(#12)의 자재/도수/화이트강제/가격엔진 게이팅 면. ST UV/DTF/후지가 횡단 합류(신규 V 아님). V-2 설계 시 ST 인쇄방식 enum(UV/DTF/후지) 포함 권고. |
+| **disable 227건 룰엔진**(S-8) | **WEAK** | **V-4 제약 논리유형** | logic jsonb 스케일은 견딤(227건 OK)·**RULE_TYPE disable 전용 유형 부재** = V-4(#5)의 유형 확장(코드행 .04 disable 등 경량). ST가 disable 정점 케이스로 룰엔진 스케일 검증 — V-4 설계 시 disable 유형 명시 권고. |
+| (부) 가격엔진 3종(S-6 판/die-cut/정가) | WEAK 흡수 | **V-7 가격 role 태그** | pricing_model 6종이 ST 3엔진(digital/vTmpl/tmpl) 흡수 — V-7(#11) frm_typ_cd 라우팅과 동일. **가격 트랙 위임(V-7 최하).** |
+
+> **★ST 요지:** ST facet 5항 = PASS 1(S-3 재단입자·그릇존재·조치 0)·WEAK 2(S-4→V-3·S-8→V-4)·GAP 1(S-5→V-2)·부분PASS 1(S-2→V-12/V-1 게이팅). **신규 V-번호 = V-12 형상 1건뿐** — facet은 새 그릇 수요 0(전부 V-2/V-3/V-4/V-7에 흡수·V-12 게이팅). 이것이 포화 붕괴의 vessel-side 정직성: ST는 새 *축* 1건(형상)만 그릇을 요구하고, 칼선/재단/점착/인쇄방식/disable은 기존 그릇이 견딤. designer는 V-12 설계 시 형상↔칼틀(#13)·형상↔모양파라미터(#9 V-1)·형상=FR→자유칼선 게이팅 간선을 함께, V-3 설계 시 점착/내후 차원, V-2 설계 시 ST 인쇄방식 enum, V-4 설계 시 disable 유형을 *함께* 반영(별 순서 추가는 V-12뿐).
+
 ---
 
 ## ═══ GS 라이브 실측 정정 노트 (BN vessel-needs 완화) ═══
@@ -165,7 +195,8 @@ GS 라이브 실측(2026-06-17)이 BN의 보수적 vessel-gap 일부를 **그릇
 ## 정비 로드맵 (leverage + FK 의존 순서)
 
 1. **V-10 디자인 입력 채널 (★TP directive 1순위)** — TP 본질·editor_yn 불리언만·dbmap 미터치 신규 GAP·editor_yn=Y 107상품·huni-widget 컨버전 경계. V-11(TemplateAsset)·VDP 종속. **directive 최우선.** search-before-mint(editor_yn 환원 한계) 선행.
-2. **V-3 자재 분해축 (★GS 최우선)** — 굿즈 본체자재 핵심 결함·B-3 축이동 목적지·오염 광범위(.09 69·.10 43)·텀블러/장패드 용량/두께 분해 의존.
+1b. **V-12 형상 축 (★ST directive 1순위·신규)** — ST 본질·형상 컬럼/테이블/enum 3-레벨 전무·dbmap G-SK-2 위 정밀화(siz 흡수 정정)·ST 36상품+도무송/모양재단·형상↔칼틀(#13)/모양파라미터(#9)/자유칼선(#2) 게이팅 분류자. **단 1:1 흡수 카테고리는 size 유지(전면 강제 금지).** SHAPE enum 신설은 명백(16그룹에 부재). V-1(공정파라미터)·#13과 연동 설계.
+2. **V-3 자재 분해축 (★GS 최우선)** — 굿즈 본체자재 핵심 결함·B-3 축이동 목적지·오염 광범위(.09 69·.10 43)·텀블러/장패드 용량/두께 분해 의존. **+ST 점착/내후 차원(adhesion_grade/weather_grade) 합류.**
 3. **V-8 본체 형태가공 (GS GAP)** — 파우치 103상품 본체 BOM load-bearing·봉제만 존재. 공정 행 선행.
 4. **V-2 인쇄방식 게이팅**(최상위 게이트·다른 축 선행) — 단 조건부 1급화 판정 먼저.
 5. **V-1 공정 파라미터**(CPQ 옵션 완성 선결·FK load-bearing).
@@ -179,3 +210,4 @@ GS 라이브 실측(2026-06-17)이 BN의 보수적 vessel-gap 일부를 **그릇
 > ★GS 정정으로 ④template_prices·V-6 nonspec은 vessel-gap에서 **하향**(그릇 발견) — designer는 search-before-mint로 PASS 재확인 권장.
 > ★TP 핵심: V-10이 신규 P1 최상위(directive 1순위). V-10⊥본체옵션(직교)·가격0 → 본체 축 그릇과 독립 설계. V-11은 V-10 종속·완제SKU 분리 명시.
 > ★PR 핵심(v4.0): **로드맵 불변** — PR은 신규 V-항목 0. PR facet은 기존 V-2(인쇄방식 게이팅에 자재풀 면)·V-4(제약에 평량 min/max)·V-7(가격에 digital_price 라우팅)에 흡수되므로, designer가 그 항목들을 설계할 때 PR facet 메모를 *함께* 반영(별 순서 추가 없음). PASS 4건(표지/내지·접지/제본·page_rule·면지)은 그릇 보유로 vessel 조치 0.
+> ★ST 핵심(v5.0): **V-12 형상 = 신규 P1**(V-10·V-3과 나란한 directive 1순위·16축 포화 붕괴). FK 위상: 형상축(V-12)이 칼틀/사이즈(#13)·모양 파라미터(#9 V-1)의 *게이팅 분류자* → V-1·#13과 연동 선행 설계. ST facet 5항은 신규 V 0(재단입자 S-3=PASS 그릇존재·점착 S-4→V-3·disable S-8→V-4·인쇄방식 S-5→V-2·가격엔진 S-6→V-7·칼선 S-2→V-12/V-1 게이팅). designer는 V-12 설계 시 ① SHAPE enum 신설(명백) ② 1:1 흡수 카테고리 size 유지(전면 강제 금지) ③ 형상↔칼틀/모양파라미터/자유칼선 게이팅 간선을 함께 반영(별 순서 추가는 V-12뿐).

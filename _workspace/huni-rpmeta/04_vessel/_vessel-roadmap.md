@@ -8,6 +8,7 @@
 > - **v2.0 (GS·2026-06-17):** + V-3 굿즈 확장(§7 in vessel-material-axis)·**V-8 형태가공**·**V-9 생산형태**·**MAT_TYPE 오라벨 교정**. GS 라이브 재측이 #14·#15를 BN 추정보다 *덜 vessel-gap*으로 확증(형태가공=분류축 1개·생산형태=신규 그릇 0). 인벤토리·Wave·정비권고에 GS 행만 추가, v1.0 무수정.
 > - **v3.0 (TP·2026-06-17):** + **V-10 디자인 입력 채널(#16 GAP·★directive 1순위)** = base_code 그룹 3 + 상품 컬럼 4(신규 테이블 0) + **V-11 TemplateAsset 분리(T-A WEAK)** = 신규 테이블 2(본 하네스 **유일 mint**·이중의미 분리). TP 나머지 facet(VDP·페이지계층·형태variant·특수인쇄) = 기존 흡수(신규 0). 라이브 DRY-RUN(BEGIN..ROLLBACK)으로 양 DDL 유효성 실증·0 leaked. v1.0/v2.0 무수정.
 > - **v4.0 (PR·2026-06-17): PR 카테고리 = 신규 그릇 0건.** PR(인쇄물·책자·리플렛·포스터) distinct 신축 0(facet 강화 9건뿐) → search-before-mint 통과·기존 V-항목 충분. PR facet 6항(PASS 4: 표지/내지·접지/제본·page_rule·면지 / WEAK 1 / GAP 1) 중 조치 대상 2건은 기존 그릇에 facet 흡수: **P-7(인쇄방식 자재풀 게이팅) → V-2**(`vessel-print-method-recipe §7`·경로 A 제약흡수가 자재 부분집합도 담음·신규 0)·**P-6(digital_price 라우팅) → V-7**(`vessel-quantity-size-pricing §C4`·frm_typ_cd 결손 동일·가격 트랙 round-16/17 위임). **16축 포화의 vessel-side 검증** — 4번째 카테고리가 새 그릇을 요구하지 않음. 신규 테이블/컬럼/DDL/V-번호 0·인벤토리·Wave·정비권고 무수정.
+> - **v5.0 (ST·2026-06-17): ★16축 포화 붕괴 — 신규 그릇 1건(V-12 형상 축).** ST(스티커)가 distinct 신축 1건(#17 형상)으로 PR 포화를 정직하게 깸 → 17축. **V-12 형상 축**(`vessel-shape-axis.md`) = `SHAPE` base_code 그룹 1 + `t_prd_products.shape_cd`(상품 1형상) + `t_prd_product_sizes.shape_cd`(형상↔칼틀 1:多 게이팅·**기존 junction 재사용·테이블 mint 0**) — **컬럼 2(서로 다른 카디널리티)·신규 테이블 0.** 라이브 3-레벨 실측(형상 컬럼/테이블/SHAPE enum 0건)이 KB G-SK-2 확증. ★siz 흡수 거부 근거 = 형상↔칼틀 1:多(CL→CL001~100)·5형상 superset(STDCFBR) → siz 행 흡수 시 정규화 붕괴. **dbmap round-3 "도무송 형상=siz_cd 신설" 권고를 1:多 증거가 정정(충돌 아닌 정밀화).** ST facet 5항(칼선 S-2·재단입자 S-3·점착 S-4·인쇄방식 S-5·disable S-8) = **신규 vessel 0** — 전부 기존 V-항목 흡수(재단입자=PASS 그릇존재·점착→V-3·인쇄방식→V-2·disable→V-4·칼선→V-12/V-1 게이팅). 라이브 DRY-RUN(BEGIN..ROLLBACK)으로 코드행 6+ALTER ×2+FK ×2 유효성·백필 smoke·0 leaked 실증. **★[HARD] 1:1 흡수 카테고리(BN/GS/TP/PR)는 shape_cd NULL 유지·형상축 전면 강제 금지(오모델 회피).** v1.0~v4.0 무수정.
 
 ---
 
@@ -39,6 +40,12 @@
 | **PR P-6 digital_price 라우팅** | WEAK → V-7 위임 | **신규 그릇 0** — V-7(`vessel-quantity-size-pricing §C4`)의 frm_typ_cd 결손 동일·가격 트랙 round-16/17 위임 | (V-7 공유·위임) | 0 (V-7 흡수) |
 | PR facet(표지/내지·접지/제본·page_rule·면지) | PASS ×4 | **신규 그릇 0** — usage_cd·접지/제본 공정 행·page_rules·면지 bundle 전부 라이브 실재 | — | 0 (그릇 보유) |
 
+### v5.0 (ST) — 1 신축 + facet 흡수 (★16축 포화 붕괴)
+| 축 | gap 판정 | vessel 결과 | 사다리 | 신규 그릇 |
+|---|---|---|---|---|
+| **V-12 형상 축** (#17·★directive 1순위·신규) | GAP ❌ → PASS | `SHAPE` base_code 그룹 1 + `t_prd_products.shape_cd`(상품 1형상·ADD COLUMN NULL) + `t_prd_product_sizes.shape_cd`(형상↔칼틀 1:多 게이팅·기존 junction 재사용) — **신규 테이블 0**(1:多인데 junction 선재→컬럼 무손실) | **2 컬럼**(코드행+ALTER NULL×2) | 코드 1그룹(6) + 컬럼 2 |
+| ST facet(칼선 S-2·재단입자 S-3·점착 S-4·인쇄방식 S-5·disable S-8) | PASS/WEAK/GAP→흡수 | **신규 그릇 0** — 재단입자 S-3=PASS(PROC_053/054/055 실재)·점착 S-4→V-3 분해축(adhesion/weather 차원)·인쇄방식 S-5→V-2(UV/DTF/후지 enum)·disable S-8→V-4(RULE_TYPE disable 유형)·칼선 S-2→V-12/V-1 게이팅 | — | 0 (기존 흡수) |
+
 ### v2.0 (GS) — 4 (V-3 확장 포함)
 | 축 | gap 판정 | vessel 결과 | 사다리 | 신규 그릇 |
 |---|---|---|---|---|
@@ -47,11 +54,13 @@
 | **V-9 생산형태 governing** (#15) | WEAK 🟡→PASS | **신규 그릇 0** — prd_typ_cd + `semi_role_cd`(set_structure 실재)로 PASS·잔여는 값 교정(data round-15) | — | 0 (PASS 재분류) |
 | **MAT_TYPE 오라벨 교정** | vessel-level 분류축 결함 | `.09/.10 use_yn='N'`(행 선이동 후)·신소재 .05 흡수 — 신규 0 | 코드 use_yn(행 의존) | 0 (★open decision·B-3 강결합) |
 
-### 카운트 (v1.0 + v2.0 + v3.0 통합)
-- **설계한 실 그릇(DDL/코드행 필요): 7** — V-1(JSONB 컬럼)·V-3(BN facet 코드 2 + GS 용량 코드 1)·V-4(코드행 2)·**V-8(PROC_CLASS 코드 5 + proc_class_cd 컬럼 1)**·**V-10(코드그룹 3 + 상품 컬럼 4)**·**V-11(신규 테이블 2)**. (+조건부: V-3 capacity 컬럼).
-- **"신규 그릇 불요" 재분류: 8** — V-2·#4·V-5·V-6·V-7 + **V-9(prd_typ_cd+semi_role_cd PASS)** + MAT_TYPE(신규 0·use_yn만) + **TP facet(VDP본문보류·페이지/형태/특수인쇄 기존 흡수)**. + essential(V-4 내부 PASS).
-- **신규 테이블 mint = 2건**(V-11 TemplateAsset 마스터+링크 — **본 하네스 전체 유일**). BN/GS·V-10 채널·**PR 전부 0**(코드행/컬럼/흡수). ★TP 핵심 교훈: **사다리는 축의 카디널리티가 결정** — V-10 채널=상품 1:1 → 컬럼에서 멈춤(테이블 거부), V-11 시안=상품 1:N·독립 lifecycle·완제SKU 이중의미 → 테이블만 무손실(mint 정당). over-modeling도 under-modeling도 아닌 *정확한 사다리*. GS 교훈(라이브 재측이 갭 완화)에 더해 TP는 *이중의미 분리가 테이블 mint를 정당화하는 유일 경우*임을 보임.
-- **★PR 교훈(v4.0): 4번째 카테고리가 신규 그릇 0건** — PR facet 9건이 전부 기존 16축의 facet/family/cascade로 흡수(P-7→V-2 자재풀 게이팅·P-6→V-7 digital_price 라우팅·PASS 4건 그릇 보유). 이는 search-before-mint의 *정직한 양성 결과* = 후니 기존 그릇 + V-1~V-11 설계가 인쇄물·책자 도메인까지 무손실 표현. **16축 포화(saturation)의 vessel-side 증거**: 메타모델 축 신설 0건이 그릇 신설 0건으로 일관 확인.
+### 카운트 (v1.0 + v2.0 + v3.0 + v5.0 통합)
+- **설계한 실 그릇(DDL/코드행 필요): 8** — V-1(JSONB 컬럼)·V-3(BN facet 코드 2 + GS 용량 코드 1)·V-4(코드행 2)·**V-8(PROC_CLASS 코드 5 + proc_class_cd 컬럼 1)**·**V-10(코드그룹 3 + 상품 컬럼 4)**·**V-11(신규 테이블 2)**·**V-12(SHAPE 코드그룹 1[6코드] + 컬럼 2)**. (+조건부: V-3 capacity 컬럼).
+- **"신규 그릇 불요" 재분류: 8** — V-2·#4·V-5·V-6·V-7 + **V-9(prd_typ_cd+semi_role_cd PASS)** + MAT_TYPE(신규 0·use_yn만) + **TP facet(VDP본문보류·페이지/형태/특수인쇄 기존 흡수)** + **ST facet 5항(재단입자 PASS·점착→V-3·인쇄방식→V-2·disable→V-4·칼선→V-12/V-1 게이팅)**. + essential(V-4 내부 PASS).
+- **신규 테이블 mint = 2건**(V-11 TemplateAsset 마스터+링크 — **본 하네스 전체 유일**). BN/GS·V-10 채널·**V-12 형상**·**PR 전부 0**(코드행/컬럼/흡수). ★TP 핵심 교훈: **사다리는 축의 카디널리티가 결정** — V-10 채널=상품 1:1 → 컬럼에서 멈춤(테이블 거부), V-11 시안=상품 1:N·독립 lifecycle·완제SKU 이중의미 → 테이블만 무손실(mint 정당). over-modeling도 under-modeling도 아닌 *정확한 사다리*.
+- **★ST/V-12 핵심 교훈(v5.0): 1:多여도 junction이 선재하면 테이블 mint 불요.** 형상↔칼틀 1:多(CL→CL001~100)는 *카디널리티만 보면* 종속 테이블처럼 보이나 — `t_prd_product_sizes`(prd×siz junction)가 **이미 그 쌍을 담고 있어** `shape_cd` 분류 컬럼이 무손실. V-11(시안 1:N·*junction 부재*·독립 lifecycle → 테이블 mint 정당)과 대비: **mint 정당성 = 카디널리티 단독이 아니라 [1:N/M:N] AND [선재 junction 없음] AND [독립 lifecycle]의 합.** V-12는 1:多이나 선재 junction이 있어 컬럼에서 멈춤 = *정확한 사다리*. siz_sizes 마스터(497행 공유)가 아닌 prd×siz junction에 매는 것이 정규화 핵심(공유 칼틀 형상 충돌 회피).
+- **★PR 교훈(v4.0): 4번째 카테고리가 신규 그릇 0건** — PR facet 9건이 전부 기존 16축의 facet/family/cascade로 흡수. **16축 포화(saturation)의 vessel-side 증거.**
+- **★ST 교훈(v5.0): 5번째 카테고리가 포화를 정직하게 깸(신규 그릇 1)** — ST가 형상축 1건만 새 그릇을 요구하고 facet 5항은 전부 기존 흡수. 이는 오버피팅이 아니라 *사이즈축이 형상을 1:1 칼틀로 흡수해온 전제가 ST의 전용 shape_info 슬롯·1:多로 깨진* 증거 강제 결과. PR 포화 입증(distinct 0)도 여전히 유효 — PR은 형상을 1:1로만 가져 흡수 정당, ST가 1:多 분리를 명시 슬롯으로 드러내 차이를 만듦. **그릇 설계는 카테고리 증거에 정직(포화도 진화도 증거가 결정).**
 
 ---
 
@@ -68,6 +77,9 @@
 
 ### Wave 2-TP — V-10 디자인 입력 채널 (★directive 1순위·코드행 + ALTER NULL·무잠금)
 2a. **V-10 코드그룹 3 + `t_prd_products` 컬럼 4** — TP directive 1순위·editor_yn=Y 107상품 unblock·huni-widget 컨버전 경계. ADD COLUMN NULL=백필 0·무잠금(DRY-RUN 실증). FK 3→base_codes. 정합 규칙 `editor_yn='Y'⇒channel∈{.01,.03}`. → `ddl-proposal-design-input-channel.sql`. **V-11 선행**(EDITOR_KIND 코드행).
+
+### Wave 2-ST — V-12 형상 축 (★directive 1순위·코드행 + ALTER NULL·무잠금)
+2b. **V-12 `SHAPE` 코드그룹 1(6코드) + `t_prd_products.shape_cd`(상품 1형상) + `t_prd_product_sizes.shape_cd`(형상↔칼틀 1:多)** — ST directive 1순위·ST 36상품 unblock·형상 3-레벨 전무. ADD COLUMN NULL ×2 = 백필 0·무잠금(DRY-RUN 실증·0 leaked). FK 2→base_codes. **★[HARD] 1:1 흡수 카테고리(BN/GS/TP/PR)는 shape_cd NULL 유지·형상축 전면 강제 금지.** 형상→칼선(FR→완칼 모양)=**V-1 ref_param_json 연동**(V-1 선행/병행)·입력모드 게이팅=**V-4 RULE_TYPE.04(match)**. → `ddl-proposal-shape-axis.sql`. **V-1(공정파라미터)·#13(사이즈 PASS)과 연동 설계.**
 
 ### Wave 3 — 선택적/조건부 (도메인 결정 후)
 4. **V-3 `mat_facet_cd` 컬럼** — upr_mat_cd 계층으로 부족 입증 시만(search-before-mint 잔여).
@@ -103,8 +115,23 @@
 - **형태 variant(T-D)** — 티켓 M/I/보딩·캘린더 탁상/벽걸이 = 사이즈/공정(칼틀) 기존 축 흡수.
 - **특수인쇄(T-E)** — 화이트(PROC_000008)·클리어(009)·박(033~049)·별색(007) 라이브 보유·PASS(별색=공정 경계 준수). 미싱=공정·넘버링=VDP(#16) 귀속. 신규 vessel 불요.
 
+## 4-ST. ST facet "기존 흡수" 기록 (신규 그릇 0 — V-12 형상만 신축)
+- **재단입자(S-3 반칼/완칼/낱장)** — `PROC_000053 완칼`·`PROC_000054 반칼`·`PROC_000055 스티커완칼` 라이브 실재 → **PASS**(공정#2 멤버 무손실). vessel 조치 0.
+- **칼선 2메커니즘(S-2 THO_GRA/THO_DFT)** — 프리셋칼틀=완칼/반칼 공정+사이즈 cascade(PASS)·자유칼선(도무송)=완칼 PROC_053+`{"모양"}` 파라미터(**V-1 ref_param_json**)·형상=FR→자유칼선 강제(**V-12 게이팅**). 별 vessel 0.
+- **점착/내후 소재(S-4)** — V-3 자재 분해축의 추가 차원(adhesion_grade/weather_grade·색상/두께 동형). V-3 설계 시 함께 고려(신규 V 0). ST 자재는 `.11 스티커용지` 클린 버킷(파우치 .09 오염 아님).
+- **인쇄방식(S-5 UV/DTF/후지)** — V-2 인쇄방식 게이팅(#12)의 자재/도수/화이트강제/가격엔진 게이팅 면. PR P-4/P-7과 횡단 합류. V-2 설계 시 ST enum(UV/DTF/후지) 포함(신규 V 0).
+- **disable 227건 룰엔진(S-8)** — `logic jsonb` 스케일 견딤(227건 OK)·RULE_TYPE disable 전용 유형 부재 = V-4(#5) 유형 확장. ST가 disable 정점 케이스로 룰엔진 스케일 검증. V-4에 흡수(코드행 경량·신규 V 0).
+- **가격엔진 3종(S-6 판/die-cut/정가)** — pricing_model 6종이 ST 3엔진(digital/vTmpl/tmpl) 흡수 = V-7 frm_typ_cd 라우팅. 가격 트랙 위임(V-7 최하·신규 V 0).
+
+## 3-ST. ST open decision (인간 결정 남김·날조 금지)
+1. **②a 상품 shape_cd vs ②b junction shape_cd 중복 운영** — 상품분기형(원형 스티커)은 ②a만·5형상 superset(STDCFBR)은 ②b만(②a NULL)·둘 다 보유는 파생 일관(정합 규칙 `prd.shape_cd NOT NULL ⇒ junction.shape_cd ∈ {NULL,동일값}`). ST 적재 실측 후 단순화 판정(상품분기형만이면 ②a·옵션형만이면 ②b).
+2. **EL(타원·SHAPE.03) 칼틀 enum** — 원형(CL001~010)·라운드(RC001~025) reverse 실측·EL 프리셋 목록 unobserved. 칼틀 행 *데이터*=dbmap 적재(그릇은 ②b로 충분·EL 코드행만 선존재).
+3. **자유칼선 전용 process row 신설 여부** — 라이브 칼선=완칼/반칼/스티커완칼 3행만·자유칼선(도무송) 전용 row 부재. FR=완칼(PROC_000053)+`{"모양"}`(V-1) 환원이 현 설계. 별 공정 행 신설은 공정 마스터 정책(dbmap·vessel 범위 밖).
+4. **형상축 적용 경계 [HARD]** — 1:1 흡수 카테고리(BN/GS/TP/PR)는 shape_cd NULL·size 프리셋 유지. 형상축 전면 강제 = 오모델(이전 흡수 판정 번복 금지).
+5. 실 적용 = 인간 승인 + dbmap 적재 트랙.
+
 ## 3. rpm-validator(M-gate) 인계
-- **검증 요청:** ① search-before-mint 누락 없는지(특히 V-3 두께/무게 PASS·V-4 essential PASS 재분류·**V-10 editor_yn+file_upload_yn 2-불리언 환원 한계 증명**·**V-11 신규 테이블 mint 정당성[1:N·이중의미]**·8건 "그릇 불요" 정당성) ② V-1 영향분석이 라이브 469행 반영했는지(기존 제안 0행 stale 교정) ③ 컨벤션 정합(코드 cod_cd 형식·jsonb 관용·FK·**reg_dt NOT NULL DEFAULT 트랩**) ④ 정규화(무손실·무중복·함수종속·**V-10 editor_yn↔channel 파생 중복 아님 검증**) ⑤ **신규 테이블 mint 2(V-11)의 적정성**(over-modeling 아닌지·완제SKU 컬럼 흡수가 진짜 불가한지) + 나머지 mint 0 적정성(과소설계 아닌지) ⑥ **V-10 위젯 정규화 계약 정합**(그릇=어댑터 슬롯·DB⊥계약 직교 주장 타당성).
-- **DRY-RUN 증거:** V-10/V-11 양 DDL = 라이브 BEGIN..ROLLBACK 실증(ALTER ×4+FK ×3+백필 UPDATE 3행 일치·CREATE ×2+FK·0 leaked). 구문 유효성·FK 무결성·롤백 무위험 확인됨.
+- **검증 요청:** ① search-before-mint 누락 없는지(특히 V-3 두께/무게 PASS·V-4 essential PASS 재분류·**V-10 editor_yn+file_upload_yn 2-불리언 환원 한계 증명**·**V-11 신규 테이블 mint 정당성[1:N·이중의미]**·**V-12 형상 siz 흡수 불가 1:多 증명·junction 재사용이 테이블 mint 거부 정당한지**·9건 "그릇 불요" 정당성) ② V-1 영향분석이 라이브 469행 반영했는지(기존 제안 0행 stale 교정) ③ 컨벤션 정합(코드 cod_cd 형식·jsonb 관용·FK·**reg_dt NOT NULL DEFAULT 트랩**·**use_yn DEFAULT 부재→명시**) ④ 정규화(무손실·무중복·함수종속·**V-10 editor_yn↔channel 파생 중복 아님**·**V-12 ②a상품/②b junction shape_cd 이중 함수종속 무중복·siz_sizes 마스터 아닌 junction에 매는 이행종속 회피 검증**) ⑤ **신규 테이블 mint 2(V-11)의 적정성** + 나머지 mint 0 적정성(특히 **V-12 1:多인데 junction 선재→컬럼 정당·과소설계 아닌지**) ⑥ **V-10 위젯 정규화 계약 정합** ⑦ **V-12 dbmap round-3 siz_cd 흡수 권고 정정이 충돌 아닌 정밀화인지**(1:多 증거 타당성·G-SK-2 진단 보존).
+- **DRY-RUN 증거:** V-10/V-11/**V-12** 3 DDL = 라이브 BEGIN..ROLLBACK 실증. V-12: 코드행 6 INSERT + ALTER ×2 + FK ×2 + 백필 smoke(UPDATE 1) 일치·**post-rollback 0 leaked**(SHAPE 코드 0·shape_cd 컬럼 0 확인). 구문 유효성·FK 무결성·롤백 무위험 확인됨.
 - **NEVER:** 라이브 CREATE/ALTER/COMMIT. M-gate FAIL 시 해당 vessel만 수정·재산출.
-- **DDL 위임:** 정밀 SQL = dbm-ddl-proposer(`ref-param-json-proposal.sql`·`ddl-proposal-goods-pouch-nondim-size.sql` 패턴 재사용). TP 산출 = `ddl-proposal-design-input-channel.sql`·`ddl-proposal-template-asset.sql`(11_ddl_proposals/). 본 하네스는 *which vessel & why* + 라이브 영향 갱신 + DRY-RUN 유효성.
+- **DDL 위임:** 정밀 SQL = dbm-ddl-proposer(`ref-param-json-proposal.sql`·`ddl-proposal-goods-pouch-nondim-size.sql` 패턴 재사용). TP 산출 = `ddl-proposal-design-input-channel.sql`·`ddl-proposal-template-asset.sql`. **ST 산출 = `ddl-proposal-shape-axis.sql`**(11_ddl_proposals/·design-input-channel 패턴 동형). 본 하네스는 *which vessel & why* + 라이브 영향 갱신 + DRY-RUN 유효성.

@@ -47,3 +47,6 @@ INSERT INTO t_cod_base_codes (cod_cd, cod_nm, upr_cod_cd, disp_seq, use_yn, reg_
 1. **match/min-max를 별 RULE_TYPE 코드로 vs logic 내부 컨벤션만:** 권고 = 코드행(실무진 거버넌스·필터). 다만 후니가 "logic만으로 충분, 분류 불요"로 보면 코드행도 생략 가능(그릇 0).
 2. **min-max 범위 그릇을 제약(여기) vs 사이즈 행(V-6):** V-6과 통합 — designer 권고는 제약(RULE_TYPE.05)으로 일원화(V-6 §참조).
 3. 실 적용 = 인간 승인.
+
+## 7. ST facet 메모 (v5.0 — S-8 disable 룰엔진 정점·신규 그릇 0)
+- **ST S-8(disable_pcs 227건)이 V-4(#5)에서 룰엔진 스케일 정점 케이스**(`vessel-shape-axis.md §5`·`gap-matrix XIII-2`). `pdt_disable_pcs_info` 227건(26소재×후가공) = BN 강제(0)·PR disable(24)의 정점 — 특수소재(PET/금속/한지)→코팅/박/형압/미싱/부분UV/접지 비활성. **`logic jsonb`(라이브 실재)가 227건 스케일을 견딤이 입증**(스케일 결손 아님). 부족한 건 표현력이 아니라 **disable 전용 RULE_TYPE 분류 코드**(현 `.02 금지`로 환원 시 disable/exclude 의미 구분 소실 가능). → §2 코드행에 (필요 시) `RULE_TYPE.06 disable` 추가 검토(실무진이 disable과 일반 금지를 분리 거버넌스할 때만·경량). **신규 테이블/컬럼 0·V-4 흡수.** ST가 disable 정점으로 룰엔진 일반화를 검증 — logic jsonb 그릇이 충분함을 ST 227건이 실증(그릇 신설 불요).

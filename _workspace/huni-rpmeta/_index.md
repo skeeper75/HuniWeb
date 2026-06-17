@@ -60,6 +60,18 @@
 > 나머지 53종(포스터군10·카드엽서16·책자18·용도별책자6·평면POP5)은 reverse.md §4 그룹 A~E에 묶어 횡단 태깅(접지/제본/인쇄방식 동형, 답습 회피).
 > **★인쇄방식 분기축(BN/GS/TP 미발굴)**: 윤전(PRBKY*)/토너(PRBKO*)/인디고(PRIDPRT)/리소(PRPORSO) — 같은 책자가 인쇄방식별 별 pdtCode. 제본방식{무선/스프링/트윈링/스테플러/실제본}×도수{컬러/흑백}와 함께 3축 매트릭스를 19 pdtCode로 펼침.
 
+## 커버리지 맵 — ST(스티커, 36상품·★형상×칼선×점착소재×인쇄방식 4축 본질)
+
+| pdtCode | 상품명 | 구조 다양성 | 축 수 | 형상/칼선 | 재단입자 | 소재(점착) | 인쇄방식 | 가격모델 | 출처 |
+|---------|--------|------------|-------|----------|---------|-----------|---------|---------|------|
+| STTHUSR | 자유형 스티커 | ★형상FR·자유칼선·소재정점 | 11 | FR / THO_GRA(자유) | 반칼/낱장(CUT_DFT 2) | 26종(리무버블/유포/메탈/한지) | 일반(digital) | **digital** | `[reuse:productInfo]` 풀 |
+| STCUXXX | 사각반칼 스티커 | ★반칼/완칼·프리셋칼틀 | 10 | SQ / THO_DFT(프리셋) | 반칼/낱장(CUT_DFT 2) | 19종 | 일반(digital) | **digital** | `[reuse:productInfo]`+`[reuse:price]` |
+| STPADPN | DTF 열전사 판스티커 | ★인쇄방식분기·판단위·완제SKU형 | 7 | (형 무)/판단위재단 | 판전체 | DTF전용필름(단일) | **DTF**(화이트강제·도수숨김) | **vTmpl** | `[reuse:productInfo]`+`[reuse:price]` |
+
+> STTHUSR·STCUXXX·STPADPN은 ★풀 productInfo 실측(shape_info·THO_GRA/THO_DFT·CUT_DFT 반칼/개별·소재19~26·disable 227·PAK_POL). STCUXXX/STPADPN priceCall까지(칼틀·재단·화이트 PCS 전달 확정). 보조 실측 5(STTHCIC 원형 CL칼틀11·STTHSQU 라운드 RC칼틀25·STDCFBR 5형상 superset·STPADIY 정가tmpl·STPADNM DTF네임).
+> 나머지 33종(형상칼선5·다양한모양/패브릭4·점착특화7·특수후가공/소재5·인쇄방식분기7·기타형태4)은 reverse.md §4 그룹 A~F에 묶어 횡단 태깅(형상/칼선/점착/인쇄방식 동형, 답습 회피). 모집단=catalog category=ST 36상품(전부 /item/ST/·코드접두≠카테고리 누수 없음).
+> **★ST 신규 발굴축(BN/GS/TP/PR 미발굴)**: ① 형상(shape_info SQ/CL/EL/RC/FR enum·directive #1) ② 칼선 2메커니즘(THO_GRA 자유 vs THO_DFT 프리셋칼틀 enum 수십종) ③ 재단입자(묶음재단=반칼시트/개별재단=완칼낱장·directive #2) ④ 점착/내후 소재차원(directive #3). 인쇄방식(일반/UV STPAU*/DTF STPAD*/후지 STBP*) 분기는 PR 윤전/토너/인디고와 합류 → **16축 포화 유지 가설은 ST에서 깨질 후보**(형상·칼선·재단입자가 distinct 신규).
+
 ## 재사용 vs 라이브 비율
 ### BN(7상품)
 - **재사용(reuse:Vue-BFF)**: 2상품(BNBNFBL, BNPTPET) = 29% — huni-widget s3 캡처 풀 옵션트리(productInfo 실응답).
@@ -112,6 +124,21 @@
 - **카드/엽서 특수후가공 상세** — 박색·형압·스코딕스 패턴·레이저커팅 칼틀값 unobserved(상품명만).
 - **PR 전반 PRICE>0 실가** — 책자 8조합(56,000~420,900)만 실가. 포스터 등 PRICE=0(세션결함·구조 무관).
 
+## ST 재사용 vs 라이브 비율 (36상품·대표3+33횡단)
+- **재사용(reuse:productInfo+price)**: 8상품 풀 캡처(STTHUSR·STCUXXX·STPADPN·STPADNM·STTHCIC·STTHSQU·STDCFBR·STPADIY) — huni-widget s2 캡처 풀 infoCall(shape_info·THO_GRA/THO_DFT 칼틀·CUT_DFT 반칼/개별·소재19~26·disable 227·PAK_POL·skinInfo). STCUXXX·STPADPN·STTHCIC priceCall(reqBody/query — 칼틀·재단·화이트 PCS 전달 실측). ★ST 형상/칼선/재단입자/점착소재/인쇄방식 축 1차 증거.
+- **라이브 보강(live:SSR-negative)**: 1상품(STTHCIC) — HTTP 200·306KB이나 신규 Vue client-render(전역 km1_size 샘플+footer만·반칼/모양/자유형은 정적 마케팅 카피·옵션 select 미노출). 구조는 s2 풀 캡처로 확정.
+- **catalog 횡단**: 36종 전부 category=ST·/item/ST/ 확인(PR D-7식 코드접두≠카테고리 누수 0). 28종 catalog 상품명 + 그룹 A~F 횡단 태깅(형상/칼선/점착/인쇄방식 동형 추정·unobserved 정직).
+
+## ST 미관측(unobserved) 요약
+- **UV 스티커(STPAU*) 가격엔진/자재** — DTF(STPAD*) 실측으로 vDigital/vTmpl 추정하나 UV 자재·도수·화이트강제 unobserved.
+- **후지(STBPDFT)·수정(STMDDFT)·타원(STTHELP) 상세** — 후지 은염·수정 불투명백 추정·EL 칼틀 enum unobserved(CL/RC 실측 동형 추정).
+- **점착특화/특수후가공 자재코드** — 자석(STMADFT)·오토바이PVC(STBKDFT)·박색(STFODFT FOI)·형압깊이(STEMDFT)·스크래치층(STSKDFT) unobserved(리무버블/옥외/메탈/한지는 STCUXXX/STTHUSR 소재 enum에 실재).
+- **완제SKU형(STTPMSK 테이프·STTPBND 밴드·STDRCAD 카드스티커·STTBDFT 띠부) 규격** — 롤 폭×길이·밴드·결합형 구조 unobserved.
+- **ST 전반 PRICE>0 실가** — 비로그인 캡처(STCUXXX/STPADPN retCode=999·PRICE=0=세션결함·구조 무관).
+
+## ST 미샘플 상품 (36종 중 33종, 대표3+실측5 외 그룹 횡단)
+형상칼선5(STPADIY·STCUNXT·STTHCIC·STTHELP·STTHSQU·STCUUSR)·다양한모양/패브릭4(STDCFBR·STSHDFT·STRMSHP·STFBDFT)·점착특화7(STRMDFT~STSKDFT)·특수후가공/소재5(STFODFT~STKPDFT)·인쇄방식분기7(STPAU*·STPADDY·STPADNM·STBPDFT·STMDDFT)·기타형태4(STDRCAD·STTBDFT·STTPMSK·STTPBND) — 구조 다양성(형상5·칼선2메커니즘·재단입자2·점착소재 spectrum·인쇄방식4·판/die-cut/완제 3가격엔진)은 대표3+풀실측8로 커버. 검증 시 갭(UV 가격엔진·후지/수정 방식·EL칼틀·자석/메탈 자재·완제SKU 테이프)은 로그인 캡처로 추가.
+
 ## PR 미샘플 상품 (56종 중 53종, 대표3 외 그룹 횡단)
 포스터군10(PRPODAY~PRPOBLT)·카드엽서16(PRCA*/PRKC*/PRCABMK/PRCATCK)·책자18(PRBKY*/PRBKO*/TPRNBND)·용도별책자6(PRBKPSN~POL)·평면POP5(PRCPDFT~PRIDPRT·PRBNDGN) — 구조 다양성(접지7·제본5·인쇄3·표지내지분리·페이지차원·박/형압/스코딕스/레이저커팅·자재분기)은 대표3+풀실측2로 커버. 검증 시 갭(토너↔윤전 차이·제본방식별 PCS·스코딕스 패턴·인디고 낱장)은 로그인 캡처로 추가.
 
@@ -141,3 +168,13 @@ BNBNLOW(특가현수막), BNBNDAY(오늘출발), BNTPSNG(타포린단면), BNFGB
 13. **★제본/인쇄방식 상품분기 vs 옵션화** — 책자 19상품=윤전/토너×무선/스프링/트윈링/스테플러/실제본×컬러/흑백 매트릭스를 개별 pdtCode. 인쇄방식이 자재(YWM)·최소수량·가격모델 동반결정 → 단순 옵션화 위험(P-4·P-7·P-8·TP T-4 동류).
 14. **★규격 인쇄물 vs 면적 산정물 가격엔진 경계** — 포스터 digital_price(좌표→자유사이즈) vs BN 면적매트릭스(좌표→룩업). 같은 좌표 입력·다른 엔진. 사이즈 차원 통합모델·price_gbn 분기 정합. P-6.
 15. **★면지 자재+공정 BUNDLE** — END_PAP(색=컬러지 자재+삽입=공정). GS 제본 bundle·아일렛 동형. P-5.
+
+## 다음 단계 — ST 추가분 (rpm-metamodel-architect 주목 — ★16축 포화 가설 깨질 후보)
+16. **★형상(shape) 1급 기초코드 축 신설** — `option_info.shape_info` SQ/CL/EL/RC/FR enum. BN/GS/TP/PR 전무한 distinct 신규 축(directive #1). 상품분기(원형=STTHCIC)·한상품 옵션(STDCFBR 5형상) 양면 인코딩 모델 결정. S-1.
+17. **★칼선 2메커니즘 + 칼틀 enum** — `THO_GRA`(자유칼선/도무송) vs `THO_DFT`(형상별 사이즈 칼틀 enum: 원형 11·라운드 25). PR THO_GRA(1종)보다 깊다. 칼틀이 사이즈를 겸함. S-2·P-9(레이저커팅) 합류.
+18. **★재단 입자(반칼/완칼/낱장) 축** — `CUT_DFT` 묶음재단(반칼시트)/개별재단(완칼낱장). directive #2 핵심. GS 완칼 THO_CUT과 "분리 입자" 축 통합 검토. S-3.
+19. **★점착/내후 자재 차원** — 강접/리무버블/유포옥외/저온/자석/메탈/한지가 소재 enum + 특화상품 양면. 후니 자재모델(지종×평량)에 점착강도/내후등급 차원 추가(directive #3·GS 본체소재·PR 방수/점착포스터 합류). S-4.
+20. **★인쇄방식 분기 통합(PR과 횡단)** — ST 일반/UV/DTF/후지 + PR 윤전/토너/인디고/리소. pdtCode prefix가 자재·도수노출·화이트강제·가격엔진 동반결정. "인쇄방식=상품분기" 횡단 패턴 통합. S-5·P-4·P-7.
+21. **★판 vs die-cut vs 정가 3가격엔진 경계** — die-cut(digital_price 산정)·판(vTmpl_price 템플릿·완제SKU형)·정가(tmpl_price). price_gbn 분기 기준·GS tmpl/PR digital/book2025와 정합. S-6·P-6.
+22. **disable 룰엔진 정점 케이스(227건)** — ST `pdt_disable_pcs_info`가 BN 강제·PR 24건보다 깊다. JSONLogic constraint vs 자재-후가공 호환매트릭스 그릇 일반화 검증. S-8.
+23. **화이트강제 분기·넘버링 VDP·완제SKU 스티커** — PRT_WHT(일반 선택/DTF 강제·S-7)·NUM_DFT(가변 넘버링 VDP·S-9·TP 티켓 합류)·테이프/밴드 완제SKU(S-10·GS tmpl 합류).

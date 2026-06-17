@@ -1,0 +1,31 @@
+%% ST 갭 히트맵 — 출처: 03_gap/gap-matrix.md §XIII~XIV (라이브 2026-06-17 실측)
+%% 형상 #17 GAP (vessel-gap 신규 V-12) + facet 5항: PASS1/WEAK2/GAP1/부분PASS1
+flowchart TB
+  LEGEND["범례: 🟢 PASS · 🟡 WEAK · 🔴 GAP · 🟢🔵 부분PASS"]
+
+  subgraph NEWGAP["★ST 신축 vessel-gap (1순위)"]
+    G17["🔴 #17 형상 축 = GAP (신규 vessel-gap)<br/>shape 컬럼 0건 · 형상 테이블 0건<br/>base_code SHAPE enum 0건 (3-레벨 확정)<br/>KB G-SK-2 확증 → V-12 (P1)"]
+  end
+
+  subgraph FACET["ST facet 5항 (기존 축 흡수)"]
+    S3["🟢 S-3 재단입자 = PASS (공정 #2)<br/>PROC_000053 완칼·054 반칼·055 스티커완칼<br/>라이브 실재 = 무손실"]
+    S2["🟢🔵 S-2 칼선 2메커니즘 = 부분PASS (공정 #2)<br/>프리셋칼틀 PASS / 자유칼선(도무송) row 부재<br/>→ #9 공정파라미터 의존"]
+    S4["🟡 S-4 점착/내후 = WEAK (기존 #1 자재)<br/>adhesion/weather 분해컬럼 0건<br/>.11 스티커용지 mat_nm 평면 융합"]
+    S8["🟡 S-8 disable 룰엔진 = WEAK (기존 #5 제약)<br/>logic jsonb 스케일 OK / RULE_TYPE 3종만<br/>disable 유형 부재 · 10행 data-gap"]
+    S5["🔴 S-5 인쇄방식 = GAP (기존 #12)<br/>print_method/pool 0건<br/>UV/DTF/후지 횡단 합류 · 신규 아님"]
+  end
+
+  SUMMARY["★종합: 신규 vessel-gap 1건 = 형상 #17<br/>facet 5항 = PASS 1 · 부분PASS 1 · WEAK 2 · GAP 1<br/>(전부 기존 #1/#2/#5/#12 흡수 · 신규 0)"]
+
+  LEGEND --> NEWGAP --> FACET --> SUMMARY
+
+  classDef gap fill:#fca5a5,stroke:#b91c1c,color:#000,stroke-width:2px
+  classDef weak fill:#fde68a,stroke:#b45309,color:#000
+  classDef pass fill:#bbf7d0,stroke:#15803d,color:#000
+  classDef partial fill:#a7f3d0,stroke:#0e7490,color:#000
+  classDef note fill:#e0e7ff,stroke:#4338ca,color:#000
+  class G17,S5 gap
+  class S4,S8 weak
+  class S3 pass
+  class S2 partial
+  class LEGEND,SUMMARY note

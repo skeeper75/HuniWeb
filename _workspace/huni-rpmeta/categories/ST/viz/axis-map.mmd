@@ -1,0 +1,37 @@
+%% ST 메타모델 17축 맵 — 출처: 02_metamodel/_resolved-fragments.md §417~497 + discovered-axes.md D-12
+%% ★16축 포화 → 17축 진화: ST 형상축 #17 distinct 승격 (포화 붕괴)
+flowchart TB
+  BANNER["★16축 포화(PR 입증) → 17축 진화<br/>ST 형상축 #17 distinct 승격 = 포화 정직한 붕괴"]
+
+  subgraph NEW["★ST 신축 (distinct 1종)"]
+    A17["#17 형상 (Shape) ★distinct<br/>shape_info SQ/CL/EL/RC/FR<br/>형상↔사이즈 1:多 · 5형상 superset<br/>(BN/GS/TP/PR 미발굴)"]
+  end
+
+  subgraph STR["ST 강화 facet (기존 축에 흡수)"]
+    F2["공정 #2 — 칼선 2메커니즘 S-2<br/>+ 재단입자 S-3 (반칼/완칼/스티커완칼)"]
+    F1["자재 #1 — 점착/내후 합성차원 S-4<br/>(강접·리무버블·옥외·저온·자석·메탈·한지)"]
+    F12["인쇄방식 #12 — UV/DTF/후지 S-5<br/>(PR 윤전/토너/인디고와 횡단 합류)"]
+    F5["제약 #5 — disable 룰엔진 S-8<br/>227건 (BN 강제·PR 24건의 정점)"]
+    F11["가격기여 #11 — 판/die-cut 가격엔진 S-6<br/>(digital/vTmpl/tmpl 분기)"]
+    F13["사이즈 #13 — 프리셋칼틀 (형상 1:1 흡수분)"]
+    F9["공정파라미터 #9 — 자유칼선 모양 인자 의존"]
+  end
+
+  subgraph IDLE["ST 미행사 축 (회색)"]
+    G["#4 템플릿 · #7 카테고리 · #8 부속물 · #10 수량 · #14 본체형태가공 · #15 생산형태 · #16 디자인입력채널"]
+  end
+
+  BANNER --> NEW
+  BANNER --> STR
+  A17 -.게이팅.-> F2
+  A17 -.게이팅.-> F13
+  A17 -.FR→자유칼선.-> F9
+
+  classDef newaxis fill:#fca5a5,stroke:#b91c1c,color:#000,stroke-width:3px
+  classDef strong fill:#bbf7d0,stroke:#15803d,color:#000
+  classDef idle fill:#e5e7eb,stroke:#6b7280,color:#374151
+  classDef banner fill:#fde68a,stroke:#b45309,color:#000,stroke-width:2px
+  class A17 newaxis
+  class F2,F1,F12,F5,F11,F13,F9 strong
+  class G idle
+  class BANNER banner

@@ -116,3 +116,10 @@ INSERT INTO t_cod_base_codes (cod_cd, cod_nm, upr_cod_cd, disp_seq, use_yn, reg_
 ### 7.5 DDL 참조 / open decision (GS)
 - 코드행 = `dbm-ddl-proposer` 코드그룹 패턴. capacity 컬럼 = ddl-proposer 위임(채택 시).
 - **open decision (GS):** ① capacity 값 슬롯 = weight 재해석 금지 → 전용 `capacity numeric`+단위 코드 vs note 흡수(굿즈 용량상품 수 실측 후) ② brand 슬롯 신설 보류(YAGNI·note) ③ body_color 목적지=§2 open decision과 동일(자재 합성 .03 vs 자유옵션). ④ 실 적용=인간 승인.
+
+---
+
+## ═══ §8. ST 점착/내후 차원 메모 (V-3 ST·v5.0·신규 그릇 0) ═══
+- **ST S-4(점착/내후 소재)가 V-3(#1) 합성 분해축에 합류**(`vessel-shape-axis.md §5`·`gap-matrix XIII-2`). 강접/리무버블/옥외/저온/자석/메탈/한지 = §2.1 MAT_FACET·§7.2 동형의 *추가 합성 차원*(adhesion_grade 점착강도·weather_grade 내후등급) — 색상/두께→material 분해와 같은 패턴. **신규 V 아님**: MAT_FACET 그룹에 `.04 점착강도`·`.05 내후등급` 코드행 추가로 흡수(facet 분류축)·값은 기존 컬럼/note 또는 굿즈 용량 동형 판정(과잉모델 경계·점착 상품 수 실측 후).
+- **★ST 자재는 클린 버킷:** ST 점착 소재는 `.11 스티커용지`(클린)이지 파우치 `.09`/악세사리 `.10` 오염 버킷 아님 — V-3 §1 오염 실증(MAT_TYPE.09)과 달리 ST 자재행은 정상 등록 가능. 점착/내후 차원은 *오염 교정(B-3)이 아니라 facet 추가*(data-gap 아님·분해축 코드만).
+- search-before-mint: 점착강도/내후등급 전용 컬럼 라이브 부재(§7.1 jsonb 0건 동일) → MAT_FACET 코드행이 분류·값은 컬럼/note. **신규 테이블 0·V-3 흡수.**

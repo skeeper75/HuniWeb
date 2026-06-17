@@ -1,0 +1,44 @@
+%% ST 형상 게이팅 다이어그램 — 출처: reverse.md §0.1~0.2 + discovered-axes.md D-12 + gap §XIII-3
+%% 형상(shape)이 칼틀(사이즈)·모양파라미터를 게이팅하는 1:多 구조 + STDCFBR 5형상 superset
+flowchart TB
+  SLOT["★전용 슬롯 option_info.shape_info<br/>(사이즈와 분리된 enum)"]
+
+  SLOT --> FR["FR 자유형"]
+  SLOT --> SQ["SQ 사각형"]
+  SLOT --> CL["CL 원형"]
+  SLOT --> EL["EL 타원형"]
+  SLOT --> RC["RC 사각라운드"]
+
+  %% 자유형 → 자유칼선 + 모양 파라미터 (1:多 게이팅)
+  FR ==>|강제 게이팅| THOGRA["THO_GRA 자유칼선 FRXXX<br/>(도무송 · VIEW_YN=N 자동)"]
+  THOGRA --> MPAR["완칼 + 모양 파라미터<br/>(자유 외곽 = 디자인 칼선)<br/>★모양 슬롯 = #9 공정파라미터 GAP"]
+  FR -.사이즈.-> FRSIZE["자유사이즈 (디자인 외곽 기준)"]
+
+  %% 정형 → 프리셋칼틀 부분집합 게이팅 (1:多)
+  SQ ==>|1:多 게이팅| SQK["THO_DFT / SQXXX 사각 프리셋"]
+  CL ==>|1:多 게이팅| CLK["THO_DFT / CL001~CL010<br/>(10X10~100X100) + CLFRE 자유원형"]
+  EL ==>|1:多 게이팅| ELK["THO_DFT / EL* (추정)"]
+  RC ==>|1:多 게이팅| RCK["THO_DFT / RC001~RC025<br/>(40X20~100X100) + RCFRE"]
+
+  CLK -.프리셋이 사이즈 겸함.-> SIZE["사이즈 #13 프리셋 enum"]
+  RCK -.프리셋이 사이즈 겸함.-> SIZE
+  SQK -.프리셋이 사이즈 겸함.-> SIZE
+
+  %% 5형상 superset 증거
+  SUPER["★STDCFBR 패브릭 데코<br/>= SQ/CL/EL/RC/FR 5형상 전부 한 상품<br/>(형상=사이즈면 5사이즈군 공존 불가<br/>→ 형상이 독립 선택 차원임을 입증)"]
+  SLOT -.superset 증거.-> SUPER
+
+  %% 후니 갭 강조
+  GAP["★후니 갭: 형상 그릇 부재 (V-12)<br/>형상↔사이즈 1:1 흡수 강제 시<br/>'원형이라는 사실' 매 칼틀 중복<br/>= 정규화 붕괴 → 전용 슬롯 필요"]
+  SLOT -.vessel-gap.-> GAP
+
+  classDef slot fill:#fde68a,stroke:#b45309,color:#000,stroke-width:3px
+  classDef shape fill:#fef3c7,stroke:#92400e,color:#000
+  classDef kalteul fill:#bfdbfe,stroke:#1d4ed8,color:#000
+  classDef gap fill:#fca5a5,stroke:#b91c1c,color:#000,stroke-width:2px
+  classDef evidence fill:#ddd6fe,stroke:#6d28d9,color:#000
+  class SLOT slot
+  class FR,SQ,CL,EL,RC shape
+  class THOGRA,SQK,CLK,ELK,RCK,SIZE,MPAR kalteul
+  class GAP gap
+  class SUPER evidence
