@@ -131,3 +131,27 @@ INSERT INTO t_cod_base_codes (cod_cd, cod_nm, upr_cod_cd, disp_seq, use_yn, reg_
 - **★2D 셀 *구조*는 그릇이 견딤(vessel 조치 0):** size×color 매트릭스 셀은 라이브 `t_prd_product_option_items.ref_key1/ref_key2` 2D 페어링이 **활성**(255/469행에 ref_key2 비NULL 실측) → 한 셀=(size,color) 쌍을 `ref_key1`=size·`ref_key2`=color로 무손실 인코딩·`use_yn`=셀 가용성(품절). GS SKU 1D·ST disable 정점과 동형 그릇이 의류 2D variant까지 *구조적으로 수용* — **2D matrix 전용 테이블 mint 불요**(후니 옵션 그릇이 1D→2D 일반화를 견딘다는 vessel-side 검증). 이것이 의류 variant #18 부결의 그릇 측 근거: 새 그릇 없이 기존 옵션 레이어가 담음.
 - **단 두 facet은 V-3 분해축에 귀속(신규 V 0):** ① **색상(body_color)이 OPT_REF_DIM 7종에 별 ref 타입 없음** → §2.2대로 자재 CLR 라우팅(본체색=재질행 합성 또는 option_items) — §1 색=option 위임 정답 계승 ② **의류 원단(SXSRT/SXZSB) MAT_TYPE 버킷 부재**(라이브 `.09`/`.10`은 파우치/악세사리 상품군명 버킷이지 의류 원단 버킷 아님) → V-3 §6 open decision "버킷 재정의"에 의류 원단 계열(자체 SXSRT/브랜드 SXZSB·평량 oz) 추가 검토. 단 CL은 자체/브랜드/단체 3분기 = *원단 라이브러리/모집단* 차이(옵션 모델 동일·clothes2025 단일) → 버킷이 아니라 자재 *행* 분리(자체 원단 vs 브랜드 원단 mat_cd)로도 환원 가능 → designer 실측 후 판정(과잉 버킷 mint 경계).
 - search-before-mint: 의류 size×color 2D 셀=ref_key1/ref_key2 기존 그릇 PASS·색=option 위임·원단=mat 행/버킷(기존 또는 코드행). **신규 테이블 0·V-3 흡수.** ★주의: 의류 평량(oz)·형태(반팔/긴팔/후드)는 §7 thickness/weight 동형 + 자재 행 분리 — 분해축 grain은 자재 행/MAT_FACET이지 새 그릇 아님.
+
+---
+
+## ═══ §10. AC 자재 분해축 3차원 확장 메모 (V-3 AC·v7.0·신규 그릇 0) ═══
+> AC 갭 분석(`categories/AC/reverse.md`·`02_metamodel/_resolved-fragments.md` A-1~A-9·`gap-matrix §XVII`·`vessel-needs.md AC 흡수 매핑`). 후니 대조 = `_workspace/huni-dbmap/31_acrylic-price-link/`. **AC distinct 신축 0(가공방식 그룹핑 #18 부결·17축 재포화) — AC facet 6항 중 WEAK 3항(두께·surface-finish·부자재 횡단공유)이 본 V-3(#1) 분해축에 합류·신규 V-번호 0.** AC가 V-3를 **3차원으로 확장**(별 그릇 mint 0·전부 facet 강화):
+
+### 10.1 차원 ① 두께 measure_type 구분 (WGT 슬롯 다의)
+- **AC #1(3T/5T 두께)가 §7 thickness/weight 동형에 합류**: 아크릴 두께(3mm/5mm)는 종이 평량(g/㎡)·텀블러 용량(oz)과 **같은 WGT(무게/두께) 분해 슬롯을 다의(多義)로 사용** — 평량 g vs 두께 mm vs 용량 ml/oz가 한 슬롯에 혼재. 라이브 실측: `t_mat_materials.weight`/`depth` 컬럼은 아크릴 행에서 **NULL**·두께는 `mat_nm` 텍스트 융합("아크릴 투명 3mm").
+- **그릇 조치:** §2.1 `MAT_FACET.02 두께/무게(WGT)` 코드가 *분류*는 이미 담음 → AC가 더하는 것은 **measure_type 구분 차원**(평량/두께/용량 중 무엇인지 측정유형 라벨). 사다리 = `MAT_FACET.02`를 measure_type별로 세분(`.02 평량`·신규 `.06 두께`·GS `.03 용량` 이미 존재) 또는 facet 코드에 measure_unit 속성 부착. **신규 테이블 0.** ★dbmap CLEAR3T(투명 1.5T=3T×0.8을 mat_cd 통합) 동형 확증 — 두께는 자재 mat_cd 차원으로 무손실(`31_acrylic-price-link/acrylic-chain-design`).
+- search-before-mint: 두께 전용 컬럼은 `depth`(NULL·재활용 가능)·`weight`(NULL) 존재하나 measure_type을 구별하는 슬롯 부재 → MAT_FACET 코드의 measure_type 세분으로 닫음(값은 depth/weight 재해석 또는 note). 과잉모델 경계 — measure_type은 facet 분류이지 새 수치 컬럼 아님.
+
+### 10.2 차원 ② surface_finish 합성 차원 (ST S-4와 통합)
+- **AC #2(소재 surface-finish: 글리터/거울/자개/홀로그램)가 §8 ST 점착/내후 차원과 *동근***(`vessel-shape-axis.md §5`·gap-matrix XIII-2). 라이브 실측: `surface`/`finish`/`glitter`/`mirror`/`holo` 컬럼 **전역 0건**·`mat_nm` 텍스트 융합("아크릴 글리터") → §8 adhesion_grade/weather_grade와 같은 *추가 합성 차원* = **`surface_finish`**.
+- **그릇 조치:** §8 ST 점착/내후를 MAT_FACET `.04 점착강도`·`.05 내후등급` 코드행으로 흡수한 패턴과 **통합** — `MAT_FACET`에 `surface_finish`(표면마감) facet 코드 추가(글리터/거울/자개/홀로/무광/유광). **AC surface_finish ≡ ST adhesion/weather = 동일 합성-차원 패턴**(별 그릇 아님·한 MAT_FACET 그룹이 점착·내후·표면마감을 다 담음). 거울 별 가격공식(`PRF_MIRROR_ACRYL`)은 §C/V-7 라우팅(가격 트랙·여기 아님). **신규 테이블 0·V-3 흡수.**
+- search-before-mint: surface/finish 전용 컬럼 전역 0건(§7.1 jsonb 0건·§8 동일) → MAT_FACET 코드행이 분류·값은 컬럼/note. 색상/두께/점착/내후/표면마감이 *한 합성-분해축의 차원들*임이 BN→GS→ST→AC 4카테고리 누적으로 확증.
+
+### 10.3 차원 ③ 단일 부자재 마스터 (버킷 재정의·data 강결합·신중)
+- **AC #4(부자재 횡단 공유: 고리 KR/CN/CR·받침 AB)가 V-3 §6 "MAT_TYPE 버킷 재정의"에 합류** — ★라이브 실측 핵심: 고리/받침/자석/와이어링이 **`MAT_TYPE.04`(링)/`.07`(핀·자석·고리)/`.10`(와이어링)/`.02`(D링) 4버킷 분산**·**D링이 `.02`/`.04`/`.07` 3중복.** RP는 KR/CN/CR 코드를 ST/GS/AC 횡단 **단일 부자재 카탈로그**로 공유 → 후니는 단일화 미달(같은 D링이 3행·횡단 재사용 불가).
+- **★vessel-gap이 아니라 버킷 정합(주로 data·일부 vessel):** 부자재 *행* 자체는 `t_mat_materials`에 존재(그릇 PASS)·문제는 **버킷 배치(mat_typ_cd 오라벨)와 횡단 중복** → 주로 **data 교정**(round-22 ④자재 B-3 축이동·`vessel-mat-type-relabel.md`와 동일 결의 분류축 결함)·vessel 측은 **V-3 §6 버킷 재정의 검토**(부자재 횡단 단일 카탈로그가 MAT_TYPE 버킷 재배치만으로 닫히는지). **신규 테이블 0.**
+- **★[HARD] round-22 ④자재 B-3과 조율 필요 (우선순위 중·신중):** 단일 부자재 마스터는 ① vessel 측(고리/받침/자석을 한 버킷으로 재정의·MAT_TYPE 분류축 교정)과 ② data 측(D링 3중복 행 통합·`use_yn='N'` 선이동) **양면** — `vessel-needs.md AC 흡수 매핑 ④`·`dbmap-axis-staged-load-round22` B-3과 **조율**해야 안전. **행 영향 큼**(80/82 상품 BOM이 부자재 link 의존 → 통합 시 본체-부자재 link 재배선 필요) → vessel 선행(버킷 정의) → data 이동(round-22 B-3) 순서 [HARD]. designer 단독 mint 금지·dbmap B-3 강결합으로 노트(`vessel-mat-type-relabel.md §open decision` 동형). **신규 V 아님·신규 테이블 0.**
+
+### 10.4 종합 (AC V-3 3차원)
+- AC가 V-3에 더한 것 = **3 facet 차원(measure_type·surface_finish·단일 부자재 마스터)**, 전부 `MAT_FACET` 코드행·버킷 재정의로 흡수 = **신규 테이블/컬럼/V-번호 0.** ① 두께 measure_type = MAT_FACET measure_type 세분(`.06 두께` 등) ② surface_finish = MAT_FACET 표면마감 코드(★ST adhesion/weather와 통합·동근) ③ 단일 부자재 마스터 = V-3 §6 버킷 재정의 *검토*(우선순위 중·★round-22 B-3 조율·행 영향 큼·designer 단독 mint 금지). search-before-mint: 두께/surface/부자재 전용 컬럼 전부 라이브 부재(NULL·텍스트 융합·버킷 분산) → MAT_FACET 코드행·버킷 재정의가 분류·값은 기존 컬럼/note/data 교정. **신규 그릇 0·V-3 흡수.**
+- ★dbmap 31_acrylic 라이브 산출과 **구조 동형 확증**(CLEAR3T가 3T/1.5T를 mat_cd로 통합·MIRROR3T 별 comp·화이트=`PROC_000008` 공정). Q-ACR-7(prc_typ `.02` 엔진계산 미확정)·미러 GAP은 **가격 트랙 범위 외**(vessel 아님·`vessel-quantity-size-pricing §C5`).

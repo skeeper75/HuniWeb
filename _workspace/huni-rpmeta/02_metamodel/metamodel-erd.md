@@ -1,8 +1,9 @@
 # RedPrinting 옵션 관리 메타모델 ERD (mermaid)
 
-> rpm-metamodel-architect. **v6.0 (CL 통합):** 17 관리 축과 그 관계를 그린 ERD. 가치는 *관계*에 집중(SKILL §4).
+> rpm-metamodel-architect. **v7.0 (AC 통합):** 17 관리 축과 그 관계를 그린 ERD. 가치는 *관계*에 집중(SKILL §4).
 > 정초 = `metamodel-dictionary.md`(축 사전 17축) + `discovered-axes.md`(발굴 근거 D-1~D-12).
-> 추상 메타모델 — 후니 비종속(특정 t_* 컬럼명 아닌 패턴). RedPrinting BN(면적)+GS(완제/입체)+TP(디자인입력)+PR(다면/제본/접지)+ST(형상/칼선/점착)+CL(의류 variant) 역공학 권위.
+> 추상 메타모델 — 후니 비종속(특정 t_* 컬럼명 아닌 패턴). RedPrinting BN(면적)+GS(완제/입체)+TP(디자인입력)+PR(다면/제본/접지)+ST(형상/칼선/점착)+CL(의류 variant)+AC(아크릴 두께/입체/가공방식) 역공학 권위.
+> **★AC 신규 반영(distinct 신축 0·★가공방식 그룹핑 A-8 #18 부결·17축 재포화):** **새 엔티티/축 0** — AC reverse가 강하게 제기한 "가공방식 그룹핑 슬롯=#18 강후보"를 적대 판정 후 facet 부결(공정#2 라미 + 자재#1 합성 + 옵션#3 cascade로 분해). AC가 더한 것은 *기존 엔티티 강화*: ① MATERIAL에 surface_finish 합성 차원(글리터/거울/자개/홀로그램·ST S-4 점착/내후 동형) + WGT 슬롯 다의성(평량/두께·measure_type·[huni-ref] mat_cd 통합 동형) + 라미 결과 합성 자재행 ② OPTION→MATERIAL polymorphic cascade(production_method 일반/라미→자재 subset 게이팅·G-4 채널 동형) ③ ADDON에 받침(AB 12 SKU·입체/스탠드=부속물#8 not 3D축) + 고리(KR/CN/CR ST 공유=단일 부자재 마스터) ④ PRICING_MODEL enum에 acrylic2025(소재/형태별 공식 라우팅·[huni-ref] PRF_CLR_ACRYL/MIRROR/COROTTO/CARABINER) ⑤ DESIGN_INPUT_CHANNEL→TEMPLATE_ASSET에 ACTPKEY(T-A 이중의미). **★A-8이 ST 형상(#17)과 정반대로 부결 — 형상=KB G-SK-2 결함이 distinct 강제·가공방식=기존 축이 왜곡 없이 담음(라미=공정 멤버 이미 수용). 7번째 카테고리 distinct 0 = 17축 재포화(PR·CL 패턴 반복·모델 안정성 재확인).**
 > **★CL 신규 반영(distinct 신축 0·★의류 variant #18 부결·17축 재포화):** **새 엔티티/축 0** — CL reverse가 강하게 제기한 "의류 variant=#18"를 적대 판정 후 facet 부결. CL이 더한 것은 *기존 엔티티 강화*: ① MATERIAL에 size×color 2D SKU 매트릭스 facet(GS variant G-4 1D의 2D 일반화·셀→단일 MTRL_COD=G-1 본체 SKU 동형·apparel_fabric/color/size 분해) ② CONSTRAINT 2D 셀가용성 정점(size×color 227셀 HIDE_YN = ST disable 227=S-8의 2D subject) ③ PRINT_METHOD method_cd enum에 의류 상품내옵션 표현(PTP_DTF/DIR/SLK·삼면 표현) ④ PROCESS_MEMBER 인쇄위치 멀티슬롯(print_area 6·위치별 가산·GS 귀돌이 동형) + KOI_NME→DESIGN_INPUT_CHANNEL. **item_gbn=clothes2025=구현 discriminator(엔티티 아님)·apparel_info=구현 컨테이너 뷰(여러 축 담음·D-8 동형). 6번째 카테고리 distinct 0 = 17축 재포화(PR 패턴 반복·모델 안정성 재확인).**
 > **GS 반영:** 생산형태(#15 governing) · 본체 형태가공(#14) · 완제 본체 두 표현 facet · 가격모델 4종.
 > **TP 반영:** 디자인 입력 채널(#16 본체옵션과 직교·가격0) · 템플릿 자산(에디터 디자인 시안·#4 완제SKU와 별 엔티티 분리) · 입력채널→수량(디자인수 게이팅).
@@ -60,6 +61,7 @@ erDiagram
 
     OPTION_GROUP ||--o{ OPTION : "택1/택N"
     OPTION }o--o| MATERIAL : "polymorphic ref"
+    OPTION }o--o{ MATERIAL : "AC A-8 가공방식 cascade(production_method 일반/라미→자재 subset 게이팅·G-4 채널)"
     OPTION }o--o| PROCESS_MEMBER : "polymorphic ref"
     OPTION }o--o| SIZE_PRESET : "polymorphic ref"
     OPTION ||--o{ CONSTRAINT : "옵션 제약"
@@ -106,6 +108,9 @@ erDiagram
         enum adhesion_grade "ST S-4 점착(일반/초강접/리무버블·자재 합성 차원)"
         enum weather_grade "ST S-4 내후(옥외방수/저온·자재 합성 차원)"
         enum apparel_sku_matrix "CL C-2/C-3 size×color 2D→단일 MTRL_COD(GS variant G-4 2D 일반화·{fabric/PTT,color/CLR,size/WGT} 분해·#18 부결)"
+        enum surface_finish "AC A-2 광학효과(투명/홀로그램/글리터/거울/자개/렌티큘러·자재 합성 차원·ST S-4 동형·거울가격=#11 라우팅)"
+        enum measure_type "AC A-1 WGT 슬롯 다의성(평량 종이g / 두께 아크릴mm·[huni-ref] mat_cd 통합 1.5T=3T×0.8)"
+        enum lamination_synth "AC A-8 라미 결과 합성 자재행(3T→2T+1T 두께+홀로그램 surface·라미=공정#2·그룹핑=옵션#3 cascade)"
         tag price_flag "면적단가키"
     }
     PRODUCTION_TYPE {
@@ -133,9 +138,10 @@ erDiagram
         text value_domain
     }
     ADDON {
-        code addon_cd "독립 SKU"
-        text label "실내외+종류"
+        code addon_cd "독립 SKU(BN거치대PT/RLU·AC받침AB12·고리KR/CN/CR=ST공유 단일 부자재마스터)"
+        text label "실내외+종류 / AC받침 형상(원·타원·사각·육각)×크기(S/M/L) / 고리(자물쇠·하트·카라비너)"
         enum size_variant
+        bool essential "AC 등신대 받침=필수(ESN=Y)·키링 고리=선택(ESN=N)"
     }
     QUANTITY_SLOT {
         enum slot_type "건수ORD/수량PRN/묶음/공정종속/내지페이지(PR)"
@@ -170,8 +176,8 @@ erDiagram
         text team
     }
     PRICING_MODEL {
-        enum model "면적SizeMatrix2D(BN) / tmpl / vTmpl / tiered(GS) / digital원자합산(PR) / book2025표지내지분리(PR)"
-        code price_gbn "라우팅키(완제본체 유무·digital vs 면적: 같은좌표 다른엔진)"
+        enum model "면적SizeMatrix2D(BN) / tmpl / vTmpl / tiered(GS) / digital원자합산(PR) / book2025표지내지분리(PR) / acrylic2025(AC 아크릴 전용 면적·두께·소재 산정)"
+        code price_gbn "라우팅키(완제본체 유무·digital vs 면적: 같은좌표 다른엔진·AC 소재/형태별: 투명PRF_CLR/미러PRF_MIRROR/코롯토PRF_COROTTO/카라비너고정가)"
     }
     CATEGORY {
         code cat_cd
@@ -258,6 +264,8 @@ graph TB
     SHAPE ==>|gates 칼틀/사이즈 1:多| SIZE
     SHAPE ==>|gates 칼선 FR→자유/정형→프리셋| PROC
     SHAPE -.->|⊥사이즈치수·상위분류| SIZE
+
+    OPT ==>|AC 가공방식 cascade 일반/라미→자재subset(G-4 채널)| MAT
 
     METHOD -.->|gates 가능공정| PROC
     METHOD -.->|자재 facet 인코딩| MAT
@@ -369,4 +377,5 @@ flowchart TD
 - **★형상(#17·ST)은 사이즈와 분리된 상위 분류축 = 16축 포화 붕괴** — `shape_info` 전용 슬롯이 사이즈를 1:1 흡수해온 전제를 깸(CL 형상↔CL001~100 칼틀 1:多·STDCFBR 5형상 superset). SHAPE gates SizePreset(칼틀 부분집합) + gates ProcessMember(칼선 FR→자유/정형→프리셋). 후니 KB G-SK-2 "형상 어느 축에도 없음"이 size축 미수용 확증. **단 1:1 흡수 카테고리(BN/GS/TP/PR)는 사이즈 프리셋 유지(형상축 강제 금지·오모델 회피).** 5번째 카테고리가 distinct 1 도입 = 모델이 카테고리 증거에 정직(포화도 진화도 증거 강제·오버피팅 아님).
 - **★ST 칼선/재단입자/점착은 facet** — 칼선(THO_GRA/THO_DFT)·반칼/완칼(CUT_DFT)은 후니 KB(반칼 PROC_054·완칼 053·스티커완칼 055·도무송)로 공정#2 멤버 확정(관계 강화·신축 아님)·점착/내후=자재#1 합성 차원(adhesion_grade/weather_grade 속성)·인쇄방식 UV/DTF/후지=#12 PR 합류·die-cut/판/정가=#11 라우팅(pricing_model 6종 흡수).
 - **★의류 variant(#18)는 facet 부결·17축 재포화(CL·v6.0)** — 의류 본체 size×color 2D 매트릭스(→단일 MTRL_COD)는 GS variant 축(G-4 1D-per-channel)의 *2D 일반화 facet*·자재#1 SKU matrix(G-1 본체 SKU 동형)·셀가용성=제약#5(ST disable 227=S-8 정점의 2D판). item_gbn=clothes2025=구현 discriminator(정책패턴·엔티티/축 아님)·apparel_info=구현 컨테이너 뷰(여러 축 담음·D-8 동형). 인쇄방식=#12(상품내 옵션 인코딩=삼면 표현)·인쇄위치=공정#2 멀티슬롯(GS 귀돌이 동형)·Pantone=별색 공정#2·GBN=사이즈#13/#6 하위. **6번째 카테고리 distinct 0 = 17축 재포화(PR 패턴 반복) — 의류처럼 전용 그릇·전용 모델 가진 가장 이질적 카테고리조차 새 엔티티 0으로 흡수(모델 안정성 재확인). ★[HARD] MTRL_COD를 {fabric/PTT,color/CLR,size/WGT} 분해(G-1 동일 처방).**
-- **6 상품군 미관측(갱신): 카테고리 트리 깊이·template_selections·vTmpl 분기조건 + TP 템플릿 자산 카탈로그·VDP 스키마·INN_PAGE↔가격 + PR 토너/인디고 자재풀·리플렛 접지강제·스코딕스/칼틀값 + ST UV 가격엔진·후지/수정 방식·EL 칼틀 enum·자석/메탈 자재코드·완제SKU 테이프 규격 + CL 다중선택 인쇄위치 가격합산·실크/조합 가격·CLST 가방/모자 굿즈형 확정(item_gbn)·CLDF 브랜드완제 옵션상세** — reuse + 로그인 캡처로 보강 필요(discovered-axes 갭).
+- **★가공방식 그룹핑(#18)은 facet 부결·17축 재포화(AC·v7.0)** — `production_method`(일반/라미)·GRP_OPTION_CD가 자재행을 가공그룹으로 묶으나 세 기존 축으로 분해: 라미네이션=공정#2(합지 family)·라미 결과(라미된 자재행)=자재#1 합성(두께 3T→2T+1T·홀로그램 surface)·그룹핑(production_method→자재 subset 게이팅)=옵션#3 polymorphic cascade(G-4 채널·CL 매트릭스 동형). **★ST 형상#17과 정반대로 부결 — 형상=KB G-SK-2 "어느 축에도 없음" 결함이 distinct 강제(기존 축이 왜곡 없이 못 담음)·가공방식=기존 축(공정#2·자재#1·옵션#3)이 왜곡 없이 담음(라미=공정 멤버 이미 수용·KB 결함 없음).** 두께(3T/5T)=자재#1 WGT facet([huni-ref] mat_cd 통합 동형·measure_type 다의성)·소재variant(글리터/거울/자개)=자재#1 surface-finish facet(ST S-4 동형·거울 별공식=#11 라우팅)·입체/스탠드=분산 facet(받침=부속물#8·코롯토 두께블록=자재·양면=옵션·조형=공정·생산형태#15/형태가공#14 둘 다 아님)·받침/고리(KR/CN/CR ST 공유)=부속물#8(단일 부자재 마스터)·acrylic2025=가격#11 라우팅(소재/형태별 공식)·명찰 PET+합지=자재#1+공정#2(G-1/CL 라벨 융합)·ACTPKEY=#16 TemplateAsset(T-A). **7번째 카테고리 distinct 0 = 17축 재포화(PR 4번째·CL 6번째 패턴 반복) — 가장 강한 새 후보 A-8조차 무손실 흡수.**
+- **7 상품군 미관측(갱신): 카테고리 트리 깊이·template_selections·vTmpl 분기조건 + TP 템플릿 자산 카탈로그·VDP 스키마·INN_PAGE↔가격 + PR 토너/인디고 자재풀·리플렛 접지강제·스코딕스/칼틀값 + ST UV 가격엔진·후지/수정 방식·EL 칼틀 enum·자석/메탈 자재코드·완제SKU 테이프 규격 + CL 다중선택 인쇄위치 가격합산·실크/조합 가격·CLST 가방/모자 굿즈형 확정(item_gbn)·CLDF 브랜드완제 옵션상세 + AC 소재특화 키링(글리터/거울/자개/유색/렌티큘러/파스텔) 자재코드·WGT·가격·코롯토 입체조형(FCO)/두께블록(DCO 8T)·acrylic2025 산정식/prc_typ .02([huni-ref] Q-ACR-7)·ACTPKEY 자산 카탈로그·부착공정/부자재코드** — reuse + 로그인 캡처로 보강 필요(discovered-axes 갭).

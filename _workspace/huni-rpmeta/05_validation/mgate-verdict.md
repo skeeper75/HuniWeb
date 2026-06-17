@@ -979,3 +979,108 @@ option_groups **134**·option_items **469**·constraints **10**·template_select
 - BN/GS/TP/PR/ST verdict 보존. 라이브 재실측 세션 권위(2026-06-17·psql 직접 SELECT + 캡처 raw 파싱).
 - **★의류 variant #18 부결 = VALIDATED(역방향 오류 없음)** — 캡처(227셀 Cartesian·MTRL_COD 인코딩) + 라이브(ref_key1/ref_key2 2D 페어링 255·PRD_000071 33×4) 독립 재현으로 "distinct를 facet으로 숨김" 적대 검정 4/4 깨기 실패. size×color=사이즈#13×색상 Cartesian·셀가용성=제약#5 2D subject·기존 축이 *왜곡 없이* 담음. **6번째 카테고리 distinct 0=17축 재포화(PR 패턴 반복)는 모델 안정성 재확인이지 distinct 은폐 아님 — 검증됨.**
 - **CL 핵심 직답:** CL facet 5항 = **PASS 1**(Pantone 별색 C-7·PROC_000007 family 라이브 실재)·**WEAK 3**(size×color 2D C-2/C-3=기존 #1/#5·인쇄위치 C-4=기존 #2/#9·item_gbn C-5=기존 #15)·**GAP 1**(인쇄방식 C-6=기존 #12) · **distinct 신축 0(의류 variant #18 부결)=신규 vessel-gap 0** · 신규 테이블/컬럼/V번호 0(2D 페어링 라이브 활성이 search-before-mint 정당화) · deepcheck 13후보 채택 0.
+
+---
+
+# AC 카테고리 M2~M6 게이트 (rpm-validator·2026-06-17·라이브 read-only psql + 캡처 raw 직접 파싱)
+
+> M1 이미 GO(위). 본 섹션 = M2~M6 독립 재측정. 7번째 카테고리·distinct 0·17축 재포화. 최중요 검증 = M3 A-8(가공방식 그룹핑)·D-13(layer-stack) 부결이 역방향 오류(distinct를 facet으로 숨김)가 아닌지 적대 재검(ST 형상#17 승격과 일관 기준).
+> 재측정 방식: 라이브 `information_schema`/`t_*` 직접 SELECT(railway DB·conn 확인) + AC 3캡처(ACNTHAP/ACTHDKY/ACPDSTD) raw JSON 직접 파싱(생성자 주장 비신뢰·필드 실재성 재확인).
+
+## M2 — 메타모델 정합 (GO)
+
+**검증 대상:** discovered-axes v7.0(AC distinct 0)·metamodel-dictionary v7.0(17축 유지)·metamodel-erd(새 엔티티 0)·_resolved-fragments A-1~A-9.
+
+**재측정 결과 — 전건 일치:**
+1. **17축 카운트 일관** — dictionary v7.0(`:14·:17`)·discovered-axes(`:29·:31`)·gap-matrix §XVIII·vessel-needs v7.0 모두 "17축 유지·신규 축 0·AC distinct 0" 동일 진술. 카운트 드리프트 0(7정적+4관계+2횡단+GS2+TP1+ST1=17).
+2. **새 엔티티 0** — AC가 metamodel-erd에 새 엔티티/관계 추가 안 함(facet 강화만). dictionary v7.0이 명시("총 17축 유지"). FK/composition 모순 0.
+3. **A-1~A-9 증거 도출성** — 9 fragment 전부 reverse 실측(§0.1~§0.6·§1~§4) + [huni-ref] dbmap 31_acrylic 대조로 귀속. domain-researcher 신규 호출 0(추정 0·두께/라미/표면효과/코롯토 전부 후니 KB+[huni-ref] 확정 존재).
+4. **오버피팅 경계** — AC 단일 카테고리 특이를 distinct 승격한 것 0(가장 강한 A-8조차 부결). 7군 누적 증거로만 판정.
+
+**M2 판정: GO.** AC facet 9 판정이 reverse 증거+후니 dbmap 대조에서 도출·17축 카운트 4파일 일관·관계 무모순·새 엔티티 0.
+
+## M3 — facet 부결 타당성 (GO·★최중요·역방향 오류 없음 VALIDATED)
+
+**검증 대상:** A-1(두께)·A-2(surface-finish)·A-3(입체)·A-8(가공방식 그룹핑·★강후보)·D-13(layer-stack·codex)·기존 축이 왜곡 없이 담는지 직접 재확인.
+
+### A-8 가공방식 그룹핑 #18 부결 — VALIDATED (캡처 직접 파싱)
+ACTHDKY 캡처 raw 직접 파싱(`major_radius_ACTHDKY.json`):
+- `option_info.production_method` = **2값 enum**(`{COD:MTG_DFT,일반}`·`{COD:MTG_LAM,라미}`) — 전용 "그룹핑 엔티티" 아닌 단순 옵션 select.
+- `pdt_mtrl_info` 6행의 `GRP_OPTION_CD` = **자재행 속성**: PXAATD01/D02(MTG_DFT)·PXAATL01~04(MTG_LAM). 라미 선택→라미 자재행(PXAATL01 "아크릴_3T 투명 라미(2T+1T)") subset 게이팅.
+- **무손실 분해 직접 확인:** ① 라미네이션=공정#2(라미 후가공) ② 라미 결과(PXAATL01~04)=자재#1 합성 행(WGT_CD L01~04·홀로그램 surface) ③ production_method→자재 subset=옵션#3 polymorphic cascade(GRP_OPTION_CD가 자재행에 매달림). **별 관리 객체/lifecycle 없음** — production_method는 자재행 필드 + 옵션 enum이지 distinct 슬롯 아님.
+
+### D-13 layer-stack #18 (codex) — REFUTED-for-RP VALIDATED (캡처 직접 파싱)
+3캡처 전수 raw 파싱:
+- `layer/레이어/sequence/stack/적층/z-index/depth` 필드명 매치 = **0건**(전 3캡처 독립 grep 재현).
+- `print_data` = **2값 enum 배열**(`[{O,앞뒤같음},{X,앞뒤다름}]`)·순서화 레이어 배열 아님(ACTHDKY)·ACNTHAP/ACPDSTD는 null.
+- 화이트(PRT_WHT)·합지(BON_PAP)=평면 PCS 1행(레이어 위치 슬롯 부재). 라미 적층(2T+1T)=MTRL_NM 텍스트에만.
+- **판정 일관성:** ST 형상#17은 `option_info.shape_info` 전용 슬롯 실재(독립 확인=GSTGMIC 등 ST 캡처에 shape_info 존재) + 후니 KB G-SK-2 "형상 어느 축에도 없음"(entity-semantic-model 실재 verbatim 확인) → 기존 축 못 담아 승격. A-8/D-13은 정반대 — 기존 축이 왜곡 없이 담음·후니 KB에 "어느 축에도 없음" 결함 없음(라미=공정 멤버 이미 수용). **승격/부결 비대칭이 일관 기준(전용 슬롯+KB 결함 유무)으로 정당.**
+
+### A-1/A-2/A-3 부결 재확인
+- A-1 두께: `mat_nm` 텍스트 융합(라이브 "아크릴 투명 3mm" 실측)·dbmap CLEAR3T가 1.5T/3T를 mat_cd 통합(라이브 comp 실재) = 자재 WGT facet 동형 확증. distinct 아님 정당.
+- A-2 surface-finish: surface/finish/glitter/mirror/holo 컬럼 전역 0건(라이브 재현)·ST S-4 점착/내후와 동근 자재 합성 차원. facet 정당.
+- A-3 입체/스탠드: 받침=부속물(`t_prd_product_addons` 실재)·코롯토 두께=자재·양면=옵션 분산. 생산형태#15(본체 평면 유지)·형태가공#14(본체 생성 아님) 둘 다 아님 — 분산 facet 정당.
+
+**M3 판정: GO.** ★A-8/D-13 부결 = VALIDATED — 캡처 직접 파싱(production_method=자재행 속성+옵션 enum·layer 필드 0건·print_data=2값 플래그)으로 "기존 축이 왜곡 없이 담음" 재현. ST 형상#17(전용 슬롯+KB 결함)과 일관 기준 적용·**역방향 오류(distinct를 facet으로 숨김) 없음 — 적대 검정 4/4 깨기 실패.**
+
+## M4 — 갭 판정 정확 (GO·라이브 information_schema 직접 재실측)
+
+**검증 대상:** §XVII AC facet 6항 PASS2/WEAK4/GAP0. 라이브 read-only psql 직접 SELECT로 양면 재실측.
+
+| # | facet | gap 판정 | 라이브 재측정(독립) | 재현 |
+|---|---|:---:|---|:---:|
+| 1 | 두께(A-1) | WEAK | MAT_TYPE.03 아크릴 14행·`weight`/`depth` 컬럼 실재하나 아크릴 전부 **공백/NULL**·두께=`mat_nm` 텍스트("아크릴 투명 3mm")·CLEAR3T(mat_cd 통합) 실재 | ✅ |
+| 2 | surface-finish(A-2) | WEAK | `surface/finish/glitter/mirror/holo/effect` 컬럼 전 t_* **0건** | ✅ |
+| 3 | 입체/받침(A-3) | PASS | `t_prd_product_addons`(prd_cd·disp_seq·note·tmpl_cd FK)·**5행** 실재 | ✅ |
+| 4 | 부자재 횡단(A-4) | WEAK | D링이 MAT_TYPE.02(MAT_000249 56mm)·.04(MAT_000017~020)·.07(MAT_000247 31mm/248 42mm) **3버킷 중복**·고리/자석/와이어링 .04/.07/.10 분산 | ✅(주장보다 강함) |
+| 5 | acrylic2025(A-6) | WEAK | `PRF_CLR_ACRYL` 1행·CLEAR3T prc_typ `.02`(84행)·MIRROR3T `.01`(37행)·`frm_typ_cd` 컬럼 **부재** | ✅(수치 정확) |
+| 6 | 인쇄면+화이트(A-5) | PASS | `PROC_000008 화이트` 실재 | ✅ |
+
+**중요:** 6항 전부 라이브 재측정과 **정확 일치**(행수 84/37, 컬럼 부재/존재 둘 다 확인). PASS가 비존재 컬럼 인용 0건·GAP 주장 없음(전부 기존 §I~§XVI 축에 흡수·신규 vessel-gap 0). A-4는 gap 주장(D링 3중복)이 라이브에서 더 명확히 재현(.02/.04/.07).
+
+**M4 판정: GO.** AC facet 6항 PASS2/WEAK4/GAP0 전건 라이브 information_schema 재실측 일치·dbmap 31_acrylic(CLEAR3T mat_cd 통합·MIRROR3T 별 comp·Q-ACR-7 .02) 정합·양면 검증(컬럼 존재+값 NULL/0건).
+
+## M5 — 그릇 건전성 (GO·신규 그릇 0 정당·B-3 조율 신중함 타당)
+
+**검증 대상:** vessel-material-axis §10(V-3 3차원)·vessel-quantity-size-pricing §C5·vessel-template-asset §8·_vessel-roadmap.
+
+**재측정:**
+1. **신규 그릇 0 = search-before-mint 정당 결과** — AC facet 6항 전부 기존 V-3(자재)·V-7(가격)·V-10/V-11(TemplateAsset)·부속물 PASS(addons)에 흡수. 라이브 재측정이 이를 뒷받침: addons 그릇 실재(A-3 PASS)·화이트 공정 실재(A-5 PASS)·두께 `depth`/`weight` 컬럼 실재(채우기=data)·surface 컬럼 0건이나 MAT_FACET 코드행으로 분류 가능. 새 테이블 mint 0 정당(over-modeling 회피).
+2. **V-3 3차원 확장 적정** — ① 두께 measure_type(WGT 슬롯 다의·MAT_FACET 세분) ② surface_finish(ST S-4 adhesion/weather와 통합·동근) ③ 단일 부자재 마스터. 전부 MAT_FACET 코드행/버킷 재정의로 닫음·신규 테이블/컬럼 0(또는 조건부 1 NULL). 무손실·컨벤션 정합(t_cod_base_codes 코드그룹 패턴).
+3. **★A-4 단일 부자재 마스터 = round-22 B-3 조율 노트 (신중함 타당)** — vessel-material-axis §10.3가 명시: "designer 단독 mint 금지·dbmap B-3 강결합으로 노트·vessel 선행(버킷 정의)→data 이동(B-3) 순서 [HARD]·행 영향 큼(80/82 상품 BOM 의존)". 라이브 재측정(D링 3버킷 중복 실재)이 이 강결합/위험을 뒷받침 — designer가 독립 mint하지 않고 B-3 조율로 노트한 것은 타당(데이터 강결합·재배선 위험 인식).
+
+**M5 판정: GO.** AC 신규 그릇 0 = search-before-mint 정당 결과(기존 V 흡수·라이브 그릇 실재 확인). V-3 3차원 확장 적정(코드행/버킷·신규 테이블 0·무손실·컨벤션 정합). A-4 단일 부자재 마스터를 B-3 조율로 노트한 신중함 타당(designer 단독 mint 안 함·행 강결합 인식).
+
+## M6 — 생성-검증 독립성 (GO)
+
+**검증 대상:** deepcheck codex 18후보 무검증 채택 0·D-13 REFUTED 정직 분류·HIGH 후보 unverified 정직성·dodge-hunt.
+
+1. **채택 0 확인** — deepcheck `:160` "채택 0·전부 unverified". metamodel(discovered-axes·_resolved-fragments)·gap(§XVII)에 codex 후보 반영 0건 교차 확인(A-1~A-9는 reverse 실측 기반·codex 라우팅은 검증 트리거로만).
+2. **D-13 정직 분류** — codex가 layer-stack #18을 강하게 밀었으나(HIGH·confidence HIGH) deepcheck가 캡처 직접 파싱으로 REFUTED-for-RP 분류(`:33-42`). 본 validator 독립 재현(layer 필드 0·print_data 2값 enum) = 정직 분류 검증됨.
+3. **HIGH 후보 unverified 정직성** — 엣지가공(H-3)·hole-geometry(H-2)·렌티큘러(H-6)·화이트 순서(H-4) 전부 unverified/라이브 검증 필요로 분류·채택 0. codex "no live access" 자기admission 기록·라이브 권위 명시.
+4. **codex A-8 동조 기록** — deepcheck `:14` codex가 A-8 가공방식 그룹핑에 동조한 점 기록하되, "codex 동의는 근거 아님·라이브 권위" 명시(D-13으로 별 각도 제기). 본 validator는 라이브/캡처로 A-8 부결 독립 재검(production_method=자재행 속성).
+5. **dodge-hunt(가장 위험한 주장 깨기 시도):** M3 A-8 부결(가장 강한 distinct 후보 부결)을 깨려 시도 — production_method가 전용 그룹핑 엔티티라면 distinct였을 것. 캡처 직접 파싱 결과 자재행 속성(GRP_OPTION_CD)+옵션 enum으로 무손실 분해 = 깨기 실패. M4 acrylic2025 84행/37행 라이브 직접 카운트 = 생성자 수치 echo 아닌 독립 재측정 일치.
+
+**M6 판정: GO.** 무검증 채택 0·D-13 REFUTED 정직 분류(독립 재현)·HIGH 후보 unverified 정직·codex A-8 동조는 근거 아님으로 기록·라이브 재측정으로 핵심 사실 재도출(echo 아님).
+
+## AC 종합 verdict
+
+| 게이트 | 판정 | 핵심 근거(독립 재측정) |
+|---|:---:|---|
+| M1 | **GO**(기존) | 캡처 4종 실재·수치/코드/헤더 전건 일치·D-AC-1 Low |
+| M2 | **GO** | 17축 4파일 일관·새 엔티티 0·증거 도출·오버피팅 0 |
+| M3 | **GO** ★ | A-8/D-13 부결 VALIDATED(캡처 직접 파싱·ST#17 일관 기준)·역방향 오류 없음 |
+| M4 | **GO** | facet 6항 라이브 information_schema 전건 재실측 일치(84/37행·컬럼 부재 확인) |
+| M5 | **GO** | 신규 그릇 0 정당(기존 V 흡수)·V-3 3차원 적정·A-4 B-3 조율 신중함 타당 |
+| M6 | **GO** | 채택 0·D-13 정직 분류 독립 재현·dodge-hunt 깨기 실패 |
+
+**★종합: AC M2~M6 전건 GO. NO-GO 0. 재게이트 불요.**
+
+**★A-8/D-13 부결 검증 직답(directive 최중요):** **역방향 오류(distinct를 facet으로 숨김) 없음 — VALIDATED.**
+- **A-8(가공방식 그룹핑)**: 캡처 직접 파싱으로 `production_method`=2값 옵션 enum + `GRP_OPTION_CD`=자재행 속성(라미 선택→PXAATL01~04 라미 자재 subset 게이팅) 확인. 라미네이션=공정#2·라미 결과 자재행=자재#1 합성·그룹핑=옵션#3 cascade로 **무손실 분해**·별 관리 객체/lifecycle 없음 → facet 정당.
+- **D-13(codex layer-stack)**: 3캡처 layer/sequence/stack/적층 필드 **0건**·print_data=2값 플래그(순서 배열 아님)·화이트/합지=평면 PCS(위치 슬롯 부재) → RP 미운영·REFUTED-for-RP 정당.
+- **ST 형상#17 일관 기준**: 형상은 전용 `shape_info` 슬롯 실재 + 후니 KB "어느 축에도 없음"(verbatim 확인) = 기존 축 못 담아 승격. A-8/D-13은 정반대(전용 슬롯 없음·KB 결함 없음·기존 축이 담음) = 부결. **승격/부결 비대칭이 동일 기준(전용 슬롯+KB 결함 유무)으로 일관 — 진짜 distinct를 숨긴 것 아님.** 적대 검정 4/4(A-1·A-2·A-3·A-8) 깨기 실패.
+
+## AC 인계
+- 결함 라우팅 = `_defects.md` AC 섹션(D-AC-1 M1 Low·판정 무영향 외 M2~M6 신규 결함 0). **NO-GO 0 — 재게이트 불요. AC M2~M6 GO 비준.**
+- BN/GS/TP/PR/ST/CL verdict 보존. 라이브 재실측 세션 권위(2026-06-17·railway DB read-only psql 직접 SELECT + 3캡처 raw JSON 파싱).

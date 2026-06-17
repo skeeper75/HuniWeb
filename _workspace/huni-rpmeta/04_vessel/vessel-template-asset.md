@@ -116,3 +116,7 @@ CREATE TABLE IF NOT EXISTS t_prd_product_template_assets (
 
 ## 7. DDL 위임
 - CREATE TABLE ×2 정밀 SQL = `dbm-ddl-proposer`(`ddl-proposal-goods-pouch-nondim-size.sql` 마스터+링크 패턴 동형·reg_dt NOT NULL DEFAULT now() 트랩 준수). 본 §2가 설계 권위, forward/rollback/적용순서 SQL은 ddl-proposer 산출 인용.
+
+## 8. AC facet 메모 (v7.0 — ACTPKEY 키링 템플릿 동형·신규 그릇 0)
+> AC 갭 분석(`categories/AC/reverse.md`·`gap-matrix §XVII (부)`·`vessel-needs.md AC 흡수 매핑 (부)`). **AC distinct 신축 0 — 본 V-11 TemplateAsset에 새 그릇 수요 추가 없음(기존 그릇 흡수 확증).**
+- **ACTPKEY(아크릴 키링 템플릿)가 #16 TemplateAsset(T-A)와 동형:** "아크릴 키링 템플릿"은 에디터 디자인 자산(가격0 디자인 시안)이지 완제 주문단위 SKU가 아님 → **`t_prd_templates`(봉투 OTC 12행 완제SKU) 적재 금지**(이중의미 분리 [HARD]·§4 완제SKU 오염 방지 동일). 본 §2 `t_prd_template_assets` 그릇이 ACTPKEY 키링 시안을 무손실 수용(channel FK→V-10·price=0). **신규 테이블/컬럼 0 — V-11이 이미 담음.** 이것이 17축 재포화의 TemplateAsset-side 증거: 7번째 카테고리(AC)가 디자인 자산 그릇에 새 수요를 더하지 않고 V-10/V-11 동형으로 흡수.

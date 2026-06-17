@@ -1,0 +1,30 @@
+%% AC 갭 히트맵 — 출처: gap-matrix.md §XVII-XVIII (라이브 information_schema 직접 SELECT + dbmap 31_acrylic 대조 2026-06-17)
+%% AC facet 6항 PASS2/WEAK4/GAP0 · ★신규 vessel-gap 0 (전부 기존 #1/#5/#8/#11 흡수)
+flowchart TB
+  BANNER["★AC distinct 신축 0(가공방식 그룹핑 #18 부결) → 신규 vessel-gap 0<br/>facet 6항 전부 기존 §I~§XVI 판정에 흡수 · dbmap 31_acrylic 라이브 산출과 구조 동형 확증"]
+
+  subgraph FACET["AC facet 6항 (directive 1~6)"]
+    direction TB
+    F3["🟢 PASS — ③ 입체/받침 부속물 (A-3)<br/>귀속: 부속물#8<br/>t_prd_product_addons(addon→tmpl_cd FK)·받침=부속물 표현<br/>(BN 거치대 D-1 동형·입체성 분산 facet 전부 기존 축 보유)"]
+    F6["🟢 PASS — ⑥ 인쇄면+화이트 투명소재종속 (A-5)<br/>귀속: 옵션#3(인쇄면)+공정#2(화이트)+제약#5(투명종속)<br/>PROC_000008 화이트 별색 family 라이브 실재<br/>(ST S-7 DTF→화이트 force cascade 동형)"]
+    F1["🟡 WEAK — ① 두께 자재WGT 차원 (A-1)<br/>귀속: 자재#1 WGT 차원<br/>MAT_TYPE.03 14행·두께=mat_nm 텍스트 융합·weight/depth 아크릴 전부 NULL<br/>★dbmap CLEAR3T mat_cd 통합 확증(1.5T=3T×0.8)·WGT measure_type 구분 부재(V-3)"]
+    F2["🟡 WEAK — ② 소재 surface-finish (A-2)<br/>귀속: 자재#1 surface-finish 합성차원<br/>surface/finish/glitter/mirror/holo 컬럼 전역 0건·mat_nm 융합<br/>(ST S-4 점착/내후 동근·거울=MIRROR3T 별 comp=#11 라우팅·V-3)"]
+    F4["🟡 WEAK — ④ 부자재 횡단공유 (A-4)<br/>귀속: 부속물#8+공정#2 부착 bundle<br/>★단일 부자재 마스터 부재·D링 .02/.04/.07 3버킷 중복·고리/자석/와이어링 4버킷 분산<br/>(그릇 ⓐ 보유 · 단일마스터/버킷정합 ⓑ 부재 = #1 버킷 재정의·V-3)"]
+    F5["🟡 WEAK — ⑤ acrylic2025 가격엔진 (A-6)<br/>귀속: 가격기여역할#11 pricing_model 라우팅<br/>PRF_CLR_ACRYL 1행·CLEAR3T prc_typ .02(84행)·MIRROR3T .01(37행)<br/>★dbmap Q-ACR-7(.02 엔진계산법) 라이브 확증·frm_typ_cd 부재(기존 #11)"]
+  end
+
+  BANNER --> FACET
+  FACET --> SUM["v7.0 종합 카운트 (17축·카운트 불변)<br/>PASS 5 · WEAK 8 · GAP 5<br/>★AC가 추가하는 vessel-needs = 0건 (V-1~V-12 불변)"]
+
+  LEGEND["범례 — 🟢 PASS(동등 표현력) · 🟡 WEAK(그릇 있으나 미정규화/축혼동/오염) · 🔴 GAP(관리 그릇 부재)<br/>★AC facet GAP 0 — 후니 dbmap 아크릴 동형 확증(CLEAR3T mat_cd·MIRROR3T 별 comp·화이트=공정)"]
+  SUM --> LEGEND
+
+  style BANNER fill:#ffe0b2,stroke:#e65100,stroke-width:3px
+  style F3 fill:#c8e6c9,stroke:#2e7d32,stroke-width:2px
+  style F6 fill:#c8e6c9,stroke:#2e7d32,stroke-width:2px
+  style F1 fill:#fff9c4,stroke:#f9a825
+  style F2 fill:#fff9c4,stroke:#f9a825
+  style F4 fill:#fff9c4,stroke:#f9a825
+  style F5 fill:#fff9c4,stroke:#f9a825
+  style SUM fill:#e1f5fe,stroke:#0277bd,stroke-width:2px
+  style LEGEND fill:#fafafa,stroke:#9e9e9e

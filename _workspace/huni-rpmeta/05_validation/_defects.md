@@ -182,3 +182,35 @@
 - **D-CL-3 (Low·전역) — gap §III 전역 공정 카운트 드리프트.** `03_gap/gap-matrix.md:56`(추정 인용) `t_proc_processes` 96·`t_prd_product_processes` 196 기록이나 라이브 재측 = **97·270**(데이터 진화). **CL §XV 판정 무영향**(load-bearing 수치 option_items 469/255·ref_dim 분포·PROC_000007 family·print_method 0·PK는 전부 정확). 단 BN/GS 등 다른 섹션이 96/196 절대수를 인용하면 stale. **조치(선택·전역):** §III 공정 카운트를 97/270으로 갱신. CL 게이트 재게이트 불요.
 
 > **CL M2~M6 종합: NO-GO 0.** 결함 D-CL-1/D-CL-2/D-CL-3 전부 Low·메타모델/갭/그릇 판정 무영향. **의류 variant #18 부결 = VALIDATED(역방향 오류 없음).** 라우팅: D-CL-1→reverse-engineer·D-CL-2/D-CL-3→gap-analyst(선택 정정·재게이트 불요).
+
+---
+
+## AC-M1 결함 (추출 충실성 — rpm-reverse-engineer) — 판정 GO (날조 0)
+
+검증자 독립 재실측(캡처 직접 Read/grep, 2026-06-17). 대조 결과 **핵심 수치·코드·구조 전건 일치**. 단일 Low 1건.
+
+### 재실측 일치 증거 (날조 0)
+- **ACTHDKY 두께×소재 자재 6행** [`major_radius_ACTHDKY.json` pdt_mtrl_info] — PXAATD01/D02(3T/5T 투명)·PXAATL01~L04(라미·홀로그램 깨진유리/격자), WGT_CD=D01/D02/L01~04, GRP_OPTION_CD=MTG_DFT/MTG_LAM **전건 일치**.
+- **고리 SUB_MTR** — SUB_MTRL_YN=Y 79행 실측: 카라비너고리(BN001)·열쇠고리 41(KR001~)·컬러구슬줄 22(CN)·컬러와이어링 15(CR). reverse "80+ KR/CN/CR" **일치**(79 SUB_MTR + 카라비너 ≈ 80, 라운딩 정직). STICKER_TYPE=FR·FRXXX·LAS_DFT 실재.
+- **production_method**(MTG_DFT 일반/MTG_LAM 라미)·**print_data**(O 앞뒤같음/X 앞뒤다름) — option_info 리터럴 **일치**.
+- **ACPDSTD 받침 12 SKU** [`major_acc_ACPDSTD.json`] — AB005~016(원형/타원/사각/육각×S/M/L), MTRL_CD=SXAPR005~016, ESN_YN=Y·QTY_INPUT_YN=Y·SUB_MTRL_YN=Y **전건 일치**. 본체 PXACR016 3T투명·edicus_item/tmpl_price 일치.
+- **ACNTHAP** [`product_ACNTHAP.json`] — vDigital_item/vTmpl_price·RXIGC075(고투명 PET 리무버블 75g)·ACXXS 아크릴합지·DFXXX 레이저·NBPIN(SXANB001)/NBMGN(SXANB002) 뒷면자재·disable 3건(COT_DFT/MIS_DFT/SCO_DFT)·size 소70X25(WRK72X27 DFT=Y)/중75X25(WRK77X27) **전건 일치**.
+- **qtysweep_ACNTHAP.json** — vTmpl_price·PRN_CNT·WRK_MTR/NBPIN ATTB·ORD_CNT_echo 실재(수량 가격 sweep 실재).
+- **디자인 입력 플래그**(useKoiEditor/usePDF/price_table_yn/able_paper_yn) 3캡처 전건 일치.
+- **catalog AC=20** — 20 pdtCode(ACNTHAP·ACPD*4·ACTH*13·ACTPKEY) 전부 category=AC·접두 누수 0. reverse 로스터(대표3+17)와 정확 일치. **전수 추적성 OK.**
+- **A-8(GRP_OPTION_CD 가공방식 그룹핑)·A-4(SUB_MTR ST KR/CN/CR 코드 공유)** — 메타모델 판정 토대 근거 **캡처 실재 확인**.
+- **`unobserved` 정직성** — 소재특화 키링(글리터/거울/자개/유색/렌티큘러/파스텔) 자재코드·코롯토 입체옵션을 전부 `[live:catalog]` unobs로 정직 표기. 아크릴 도메인 지식 날조 없음. `[live:SSR-negative]`(ACTHFCO Vue 정적카피) 정직.
+
+### D-AC-1 (Low) — `PTT=AAT` 필드 표기 정밀도 [M1 → rpm-reverse-engineer]
+- **위치:** `categories/AC/reverse.md:29-36`(§0.1 표 헤더 `PTT(소재)` 열·값 "AAT 투명아크릴")·`:151`(§2 `base_data_tag: 자재(소재 PTT=AAT ...)`).
+- **결함:** 캡처(`major_radius_ACTHDKY.json` pdt_mtrl_info)에 **`PTT` 필드 부재**(grep 결과 `"PTT"` 0건). reverse는 PTT를 마치 자재행 필드처럼 표기하나, 실제로는 **MTRL_CD 접두(`PXAAT...`)에서 유도한 약어**(`AAT` 문자열은 코드 내 26회 출현·소재계열 추론). WGT_CD/MTRL_NM/GRP_OPTION_CD는 전부 리터럴 필드로 실재하나 PTT만 유도값.
+- **심각도:** Low — **날조 아님**(AAT는 실제 MTRL_CD에 인코딩된 소재계열 식별자·"투명아크릴" 해석도 MTRL_NM "아크릴_3T 투명"과 정합). 단 리터럴 필드(WGT_CD 등)와 같은 표에 병기되어 *관측 필드처럼* 보일 소지. BN/ST의 PTT 표기 관행 계승으로 추정.
+- **조치(선택):** PTT 열에 "(MTRL_CD 접두 유도)" 주석 또는 `PTT(유도)` 라벨. 메타모델 두께=자재 facet 판정(A-1)은 WGT_CD 리터럴이 근거이므로 **판정 무영향**.
+
+> **AC M1 종합: GO.** 인용 캡처 4종 전부 실재·핵심 수치(두께6·고리79/80+·받침12·disable3·size2)·코드(D01/D02·KR/CN/CR·AB005~016·SXANB·SXAPR)·헤더(item_gbn/price_gbn 3종) **전건 캡처 일치·날조 0**. 전수 추적성(AC=20·누수0)·`unobserved`/`[live:SSR-negative]` 정직성 충족. 결함 D-AC-1 단 1건 Low(PTT 유도값 표기 정밀도·판정 무영향). 라우팅: D-AC-1→reverse-engineer(선택 정정·재게이트 불요).
+
+### AC M2~M6 — 신규 결함 0 (Low 후속만)
+- **M2/M3/M4/M5/M6 신규 결함 0건.** AC M2~M6 전건 GO. 라이브 재실측(railway read-only psql)·캡처 raw 직접 파싱으로 §XVII facet 6항(84/37행·컬럼 부재/존재)·A-8/D-13 부결(production_method=자재행 속성·layer 필드 0건)·신규 그릇 0(search-before-mint)·채택 0(deepcheck) 전건 재현·일치.
+- **★A-8/D-13 역방향 오류 없음 VALIDATED** — distinct를 facet으로 숨긴 흔적 0(ST 형상#17 일관 기준·전용 슬롯+KB 결함 유무로 승격/부결 비대칭 정당). 적대 검정 4/4 깨기 실패. owning agent(metamodel-architect) 정정 불요.
+- **잔여 = D-AC-1(Low·M1·reverse-engineer·PTT 유도값 표기 정밀도·판정 무영향) 단 1건**(위 AC M1 섹션). M2~M6 게이트는 추가 결함 없음.
+- **dbmap 가격 트랙 위임 사항(vessel 범위 외·결함 아님):** Q-ACR-7(CLEAR3T prc_typ .02 엔진계산 미확정·라이브 84행 확증)·미러/코롯토/카라비너 공식 미신설은 `dbmap 31_acrylic` Q-ACR/GAP-CHAIN 범위(돈 크리티컬·인간 승인). rpmeta 그릇 결함 아님(frm_typ_cd는 기존 V-7).

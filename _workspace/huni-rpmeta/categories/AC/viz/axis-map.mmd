@@ -1,0 +1,43 @@
+%% AC 메타모델 17축 맵 — 출처: 02_metamodel/discovered-axes.md(AC distinct 0·v7.0)·_resolved-fragments.md(A-1~A-9)·gap §XVII
+%% ★AC = 가공방식 그룹핑 #18 부결 → 17축 재포화 (7번째 카테고리 distinct 0)
+flowchart TB
+  BANNER["★가공방식 그룹핑(A-8) #18 부결 → 17축 재포화<br/>AC = 7번째 카테고리 · distinct 신축 0 · 가장 강한 새 후보 A-8조차 무손실 흡수<br/>(형상#17은 KB 결함이 distinct 강제 ↔ 가공방식은 기존 축이 왜곡 없이 담음 — 정반대)"]
+
+  subgraph REJECT["A-8 가공방식 그룹핑 부결 — 3 기존 축 무손실 분해"]
+    direction LR
+    R1["라미네이션 = 공정#2 (합지 family)"]
+    R2["라미 결과(라미된 자재행) = 자재#1 합성(D-2·두께/표면)"]
+    R3["GRP_OPTION_CD 그룹핑 = 옵션#3 polymorphic cascade"]
+  end
+
+  subgraph STRONG["AC 강화 facet (기존 축에 흡수·A-1~A-9)"]
+    direction TB
+    M1["자재 #1 — A-1 두께(WGT 차원)·A-2 surface-finish·A-4 부자재 버킷·A-7 명찰 PET+합지 라벨융합"]
+    M2["공정 #2 — A-5 화이트(PROC_000008)·완칼 자유형레이저(LAS_DFT)·라미"]
+    M3["옵션 #3 — A-5 인쇄면(앞뒤같음/다름)·가공방식 cascade"]
+    M5["제약 #5 — disable(명찰 PET→코팅/미싱/부분UV)·투명소재→화이트 종속"]
+    M8["부속물 #8 — A-3 받침(addon→tmpl_cd·BN 거치대 동형)·스탠드"]
+    M11["가격기여역할 #11 — A-6 acrylic2025 가격엔진(면적·두께·소재 산정·Q-ACR-7 .02)"]
+    M16["디자인입력채널 #16 — A-9 ACTPKEY 키링템플릿=TemplateAsset(T-A 동형)"]
+  end
+
+  subgraph IDLE["AC 미행사 축 (회색)"]
+    direction LR
+    IX["#4 템플릿 · #6 기초코드 · #7 카테고리 · #9 공정파라미터 · #10 수량모델 · #12 인쇄방식레시피 · #13 사이즈 · #14 형태가공 · #15 생산형태 · #17 형상"]
+  end
+
+  BANNER --> REJECT
+  REJECT --> STRONG
+  STRONG --> IDLE
+
+  style BANNER fill:#ffe0b2,stroke:#e65100,stroke-width:3px
+  style REJECT fill:#ffcdd2,stroke:#c62828,stroke-width:2px
+  style M1 fill:#f3e5f5,stroke:#6a1b9a
+  style M2 fill:#e8f5e9,stroke:#2e7d32
+  style M3 fill:#e8f5e9,stroke:#2e7d32
+  style M5 fill:#fff9c4,stroke:#f9a825
+  style M8 fill:#c8e6c9,stroke:#2e7d32,stroke-width:2px
+  style M11 fill:#fff9c4,stroke:#f9a825
+  style M16 fill:#ffcdd2,stroke:#c62828
+  style IDLE fill:#fafafa,stroke:#9e9e9e
+  style IX fill:#fafafa,stroke:#9e9e9e

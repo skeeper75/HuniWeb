@@ -1,7 +1,7 @@
 # RP 추출 커버리지 인덱스
 
 > 후니 RP-Meta 하네스 파이프라인 ① — 샘플 커버리지 맵 (rpm-reverse-engineer).
-> 실행 이력: ① BN(현수막류) 파일럿 6+1상품. ② GS(굿즈/잡화) 확장 12상품. ③ TP(디자인템플릿) 확장 대표3+20횡단. ④ PR(인쇄물·책자) 확장 대표3+53횡단. ⑤ ST(스티커) 확장 대표3+33횡단. ⑥ CL(의류) 확장 대표3+27횡단. 대표 샘플링(답습 전수수집 아님).
+> 실행 이력: ① BN(현수막류) 파일럿 6+1상품. ② GS(굿즈/잡화) 확장 12상품. ③ TP(디자인템플릿) 확장 대표3+20횡단. ④ PR(인쇄물·책자) 확장 대표3+53횡단. ⑤ ST(스티커) 확장 대표3+33횡단. ⑥ CL(의류) 확장 대표3+27횡단. ⑦ AC(아크릴·키링·코롯토·명찰·등신대) 확장 대표3+17횡단. 대표 샘플링(답습 전수수집 아님).
 
 ## 커버리지 맵 — BN(현수막류) (상품 → 축 → 출처)
 
@@ -84,6 +84,44 @@
 > CLSTSHS·CLTMSHS는 ★풀 productInfo 실측(★`apparel_info` 전용 6키 구조: print_type 3·print_area 6·apparel_color 54/6·size_info 7/9·size_color_info 227/54셀→MTRL_COD·pantone 1124). CLSTSHS는 가격(본체16200+위치3700·DTF/DIR·M/L) 추가 실측. CLAPDFT는 ★유일 SSR-positive(레거시 jQuery·paper8/size5/sodu2 select·print_area radio chip·tmpl_price).
 > 나머지 26종(자체의류12·자체가방모자에이프런4·브랜드완제8·단체2)은 reverse.md §5/§6/§14에 그룹 횡단 태깅(원단평량/형태/원단출처 동형, 답습 회피).
 > **★CL 신규 발굴축(BN/GS/TP/PR/ST 미발굴)**: ① **의류 variant = `clothes2025` 전용 item_gbn + `apparel_info` 전용 그릇**(GS variant facet 아님 — 1차 예측 distinct #18) ② **size×color = MTRL_COD 2D 매트릭스**(variant 4번째 인코딩·GS 3채널 초과) ③ **사이즈 grid(GBN 성인/아동)** ④ **인쇄위치 6 다중선택 공정(PDT_WRK·KOI_NME 에디터매핑)** ⑤ **카테고리 내부 2모델(clothes2025 티셔츠 vs tmpl 앞치마/가방)** ⑥ **원단 출처 3분기(자체/브랜드/단체)** ⑦ **Pantone 1124 별색 라이브러리**. 인쇄방식(DTF/직접/실크)은 ST/PR(상품분기)과 달리 CL은 상품내 ORD_INFO 옵션 → 인쇄방식 축 2표현 합류. 모집단=catalog category=CL 30상품(전부 /item/CL/·코드접두=CL≠카테고리 누수 0). **★17축 안정성: CL에서 의류 variant(#18 후보)가 깨질 강한 후보** — item_gbn·apparel_info·size×color·Pantone 모두 별도 그릇.
+
+## 커버리지 맵 — AC(아크릴·키링·코롯토·명찰·등신대, 20상품·★두께×소재variant·완칼·부착물·입체/받침 본질)
+
+| pdtCode | 상품명 | 구조 다양성 | 축 수 | 본체(두께×소재) | 완칼/부착물 | 입체 | 가격엔진 | 출처 |
+|---------|--------|------------|-------|----------------|------------|------|---------|------|
+| ACNTHAP | 아크릴 명찰 | ★라벨형·PET+아크릴합지·뒷면부착 | 7 | RXIGC075 고투명PET리무버블(합지로 아크릴화) | 레이저·WRK_MTR 옷핀/마그넷 | - | **vTmpl_price** | `[reuse:productInfo]` 풀 |
+| ACTHDKY | 아크릴 키링 | ★두께×소재정점·완칼·고리80+·전용엔진 | 11 | 6종(3T/5T×일반/라미/홀로그램·WGT 슬롯) | 자유형레이저(완칼)·SUB_MTR 고리/구슬/와이어 80+ | (평면) | **acrylic2025_price** | `[reuse:productInfo]` 풀 |
+| ACPDSTD | 아크릴 등신대 | ★입체/스탠드·받침12 SKU·대형자유 | 6 | PXACR016 3T투명 단일 | 레이저·SUB_MTR 받침12(원형/타원/사각/육각×S/M/L·필수) | ★받침이 평면을 세움 | **tmpl_price** | `[reuse:productInfo]` 풀 |
+
+> ACNTHAP·ACTHDKY·ACPDSTD ★풀 productInfo 실측(두께×소재 6/단일·프리셋/자유사이즈·BON_PAP합지·LAS_DFT완칼·SUB_MTR 고리80+/받침12·WRK_MTR뒷면·PRT_WHT·production_method 일반/라미·print_data 앞뒤·disable·widgetDump select). item_gbn 3종(vDigital/acrylic2025/edicus)·price_gbn 3종(vTmpl/acrylic2025/tmpl) 헤더 실측.
+> 나머지 17종(키링류8 ACTH*KY·코롯토4 ACTH*CO·부착물4 ACPD*·템플릿1 ACTPKEY)은 reverse.md §4 그룹 A~D 횡단 태깅(소재variant/입체/부착 동형 추정·unobserved 정직). 모집단=catalog category=AC 20상품(전부 /item/AC/·코드접두 AC≠카테고리 누수 0).
+> **★AC 신규 발굴 후보축 + 1차 distinct/facet 판정**: ① **두께(3T/5T/8T)=자재#1 WGT 슬롯 facet**(distinct #19 아님 — MTRL_CD WGT_CD 인코딩·[huni-ref] mat_cd 차원 동형) ② **소재 variant(홀로그램/글리터/거울/자개/렌티큘러/유색/파스텔)=자재 surface-finish facet**(ST 점착소재 동형·거울만 [huni-ref] MIRROR3T 별 가격공식) ③ **입체/스탠드=분산 facet**(받침=부자재 SUB_MTR·두께블록=자재·양면=print_data·distinct #19 아님·단 "평면→입체 변환"은 round-15 생산형태 검토) ④ **가공방식(일반/라미 GRP_OPTION_CD)=신규 자재 그룹핑 슬롯 가설** ⑤ **완칼(자유형레이저 FRXXX)=ST 재단입자축 합류** ⑥ **부착물(고리 KR/CN/CR 80+)=ST SUB_MTR 코드 공유·부자재 카탈로그 횡단**. **★17축 안정성: AC에서 두께·입체 모두 distinct 아님(facet)으로 1차 판정 → 17축 안정 유지 가설 강화**(신규 강후보 가공방식 그룹핑 슬롯·표면효과 차원은 자재모델 내부 확장).
+
+## 재사용 vs 라이브 비율
+### AC(20상품·대표3+17횡단)
+- **재사용(reuse:productInfo)**: 3상품(ACNTHAP·ACTHDKY·ACPDSTD) — huni-widget `01_reverse/captures/product_ACNTHAP.json` + `05_qa/captures/major_radius_ACTHDKY.json`·`major_acc_ACPDSTD.json` 풀 rawProductData+widgetDump. ★AC 두께/소재variant/완칼/부착물(고리80+·받침12)/가공방식/인쇄면/3가격엔진 축 1차 증거. (qtysweep_ACNTHAP.json 수량가격 보조.)
+- **라이브 보강(live:SSR-negative)**: 1상품(ACTHFCO 입체코롯토) — HTTP 200·354KB이나 신규 Vue client-render(전역 km1_size 샘플 2 select만·거울/글리터/두께/받침/스탠드/입체/코롯토/투명은 정적 마케팅 카피·옵션 select 미노출). 입체/받침 구조는 ACPDSTD 풀 캡처로 확정.
+- **catalog 횡단**: 20종 전부 category=AC·/item/AC/ 확인(코드접두≠카테고리 누수 0). 16종 catalog 상품명 + 그룹 A~D 횡단 태깅(소재variant/입체/부착 동형 추정·unobserved 정직).
+- **[huni-ref] 대조**: `_workspace/huni-dbmap/31_acrylic-price-link/` — 후니 아크릴 두께(투명3T/1.5T mat_cd 분기)·미러(MIRROR3T 별 공식)·코롯토(B06 6×6 면적매트릭스)·카라비너(고정가) 모델 = 갭/메타모델 단계 대조용(여기선 RP 추출에 집중).
+
+## AC 미관측(unobserved) 요약
+- **소재특화 키링(ACTHGKY 글리터·ACTHMKY 거울·ACTHPKY 자개·ACTHCKY 유색·ACTHLKY 렌티큘러·ACTHPAM/PAA 파스텔) 자재코드·두께** — ACTHDKY 6소재(투명/홀로그램) 실측, 표면효과 variant MTRL_CD·WGT 두께·가격 unobserved(동형 추정·거울은 [huni-ref] MIRROR3T 실재).
+- **코롯토(ACTHDCO/BCO/FCO/LCO) 입체 옵션/두께/공정** — [huni-ref] 코롯토 6×6 매트릭스(30~80mm)만 참조. 입체조형(FCO)·양면(BCO)·두께블록(DCO 8T)·렌티큘러(LCO) MTRL_CD·자립방식 unobserved.
+- **마그넷/뱃지/조이톡/젤펜(ACPDAMG/MGN/PIN/JOY·ACTHPEN) 부착 공정·부자재코드** — 통자석합지(ST STMADFT 동형)·자석부착·뱃지핀·그립톡·펜토퍼 unobserved.
+- **ACTPKEY 키링 템플릿** — 에디터 디자인 자산형 추정(TP #16), 템플릿 자산 카탈로그·VDP unobserved.
+- **두께 8T(8mm) 가격** — [huni-ref] 8T 자재(MAT_000044) 마스터 존재·가격표 본체 8T 매트릭스 부재(가격 미정). RP 측 8T 상품 매핑 unobserved.
+- **AC 전반 PRICE>0 실가** — 비로그인 캡처(PRICE 미캡처·세션결함·구조 무관). acrylic2025_price 산정식은 [huni-ref] 면적매트릭스 참조.
+
+## AC 미샘플 상품 (20종 중 대표3+17 그룹 횡단)
+키링류8(ACTHCKY·ACTHGKY·ACTHMKY·ACTHPKY·ACTHLKY·ACTHPAM·ACTHPAA·ACTHPEN)·코롯토4(ACTHDCO·ACTHBCO·ACTHFCO·ACTHLCO)·부착물4(ACPDAMG·ACPDMGN·ACPDPIN·ACPDJOY)·템플릿1(ACTPKEY) — 구조 다양성(두께×소재6·소재variant7표면·입체3방식·완칼·부착물80+·가공방식라미·인쇄면·화이트·3가격엔진)은 대표3(명찰=라벨/합지·키링=두께/소재/완칼/고리·등신대=입체/받침) 풀 실측으로 커버. 검증 시 갭(소재특화 자재코드·코롯토 입체공정·마그넷/뱃지 부착·8T 가격)은 로그인 캡처로 추가.
+
+## 다음 단계 — AC 추가분 (rpm-metamodel-architect 주목 — ★두께·입체 distinct 판정 핵심)
+30. **★두께(3T/5T/8T) distinct #19 vs 자재 WGT facet 최종 판정** — 1차 예측=**facet(자재#1 WGT 차원)**. MTRL_CD WGT_CD(D01/D02) 인코딩·widget select "3T/5T" 노출·[huni-ref] mat_cd 차원 통합 동형. distinct #19 아님. 단 WGT 슬롯이 평량(종이g)·두께(아크릴mm) 다의 사용 → 후니 자재모델 "WGT 슬롯 다의성"(GS 텀블러 용량 DTL 동류) 검토. A-1.
+31. **★입체/스탠드 distinct #19 vs 분산 facet 판정** — 1차 예측=**분산 facet**(받침=부자재 SUB_MTR·두께블록=자재·양면=print_data·입체조형=공정). distinct 3D축 아님. 단 "받침이 평면을 입체로 변환"·"코롯토=자립블록"은 round-15 생산형태(평면 vs 입체)·BN 거치대 부속물과 합류 검토. A-3.
+32. **★가공방식 그룹핑 슬롯(GRP_OPTION_CD) 신규 가설** — `option_info.production_method`(일반/라미)가 자재행을 가공그룹으로 묶음(라미=두께합성·홀로그램 부여). 후니 미발굴 "자재를 가공방식으로 그룹핑하는 슬롯". GS 제본·PR 면지·ST 합지 BUNDLE과 경계. A-8.
+33. **★표면효과/광학효과 자재 차원(소재variant)** — 홀로그램/글리터/거울/자개/렌티큘러/파스텔/유색이 자재 surface-finish. ST 점착/내후(S-4)와 자재 variant 동형 합류 — 후니 자재모델 "표면/광학 효과" 차원. 거울만 별 가격공식([huni-ref] MIRROR3T) → variant vs 별계열 경계. A-2.
+34. **★부자재 카탈로그 횡단 공유(SUB_MTR KR/CN/CR)** — AC 고리(80+)·받침(12)·뒷면(SXANB)이 ST SUB_MTR_KR/CN/CR과 코드 공유 = 굿즈/스티커/아크릴 횡단 단일 부자재 마스터 시사. 받침=필수(ESN=Y)·고리=선택 부자재 필수성 차원. 메모리 "옵션=자재+공정 BUNDLE" 정점. A-4.
+35. **★3 가격엔진(acrylic2025_price) 패턴** — AC 한 카테고리 3엔진(vTmpl/acrylic2025/tmpl). 전용 acrylic2025_price=면적매트릭스([huni-ref])·CL clothes2025·ST 3엔진과 "2025세대 형태/카테고리 전용 가격엔진" 통합. 상품명 소재≠본체자재(명찰 PET+합지·A-7)·인쇄면/화이트 투명소재 종속(A-5)·ACTPKEY 템플릿 AC vs TP(A-9) 동반. A-5·A-6·A-7·A-9.
 
 ## 재사용 vs 라이브 비율
 ### BN(7상품)

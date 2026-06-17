@@ -1,0 +1,29 @@
+%% AC 옵션 구성 트리 — 출처: reverse.md §0~§4 (대표3: ACNTHAP 명찰·ACTHDKY 키링·ACPDSTD 등신대)
+%% AC 핵심 = 아크릴 본체(두께×소재variant) × 자유형레이저(완칼) × 부착물(고리/받침/마그넷) × 인쇄면+화이트 (투명소재 종속)
+flowchart TB
+  AC["아크릴 카테고리 (AC·20상품)<br/>★3 가격엔진 공존(item_gbn/price_gbn)"]
+
+  AC --> SOJAE["소재 variant (자재#1 PTT × surface-finish)<br/>투명 / 거울 / 글리터 / 자개 / 렌티큘러 / 파스텔 / 유색 / 홀로그램<br/>① 한 상품 자재 enum(ACTHDKY 6종) ② 소재특화 pdtCode(ACTH*KY 9종)"]
+  SOJAE --> THICK["두께 (WGT_CD 슬롯·자재 facet)<br/>D01=3T · D02=5T · L01~04 라미(2T+1T 등)<br/>★별 옵션 아님 — MTRL_CD WGT_CD에 인코딩"]
+  THICK --> GRP["가공방식 그룹핑 (GRP_OPTION_CD / production_method)<br/>MTG_DFT 일반 / MTG_LAM 라미<br/>★자재행을 가공방식 그룹으로 묶음 (A-8·#18 부결 → facet)"]
+  GRP --> CUT["완칼 / 자유형 레이저 (LAS_DFT·FRXXX)<br/>ESN_YN=Y · STICKER_TYPE=FR · 디자인 외곽 절단<br/>(ST THO_GRA/FRXXX 동형) [공정·가격입력]"]
+  CUT --> SHAPE3D["입체/스탠드 (분산 인코딩·A-3)<br/>받침 부자재(ACPDSTD 12 SKU)·코롯토 두께블록(DCO)<br/>·양면(BCO=print_data)·입체조형(FCO)"]
+  SHAPE3D --> ATTACH["부착물 (SUB_MTR / WRK_MTR 부자재+공정 BUNDLE·A-4 정점)<br/>고리 KR001~040/CN/CR 80+ (ST 코드공유) · 받침 AB005~016 12<br/>· 명찰 뒷면 옷핀(SXANB001)/마그넷(SXANB002) · 자석/핀/그립톡"]
+  ATTACH --> PRN["인쇄면 (print_data·옵션#3)<br/>O 앞뒤 인쇄 같음 / X 앞뒤 인쇄 다름<br/>★투명 양면 시야 종속"]
+  PRN --> WHT["화이트인쇄 (PRT_WHT·공정#2 화이트언더베이스)<br/>VIEW_YN=Y · 투명/유색 위 색표현<br/>★불투명 명찰엔 없음(투명소재→화이트 캐스케이드)"]
+
+  WHT --> DISABLE["캐스케이드 제약 (pdt_disable_pcs_info·제약#5)<br/>명찰 PET(RXIGC075) → 코팅/미싱/부분UV disable 3건<br/>키링/등신대 0건 (소재→후가공 호환)"]
+
+  AC -.그룹.-> GRPS["상품 그룹<br/>A 키링류 ACTH*KY 9 · B 코롯토/스탠드 ACTH*CO 4<br/>C 부착물/마그넷/뱃지 ACPD* 5 · D 명찰+템플릿 3(ACTPKEY)"]
+
+  style AC fill:#e1f5fe,stroke:#0277bd,stroke-width:3px
+  style SOJAE fill:#f3e5f5,stroke:#6a1b9a,stroke-width:2px
+  style THICK fill:#f3e5f5,stroke:#6a1b9a,stroke-width:2px
+  style GRP fill:#fff9c4,stroke:#f9a825,stroke-width:2px
+  style CUT fill:#ffe0b2,stroke:#e65100
+  style SHAPE3D fill:#fff9c4,stroke:#f9a825
+  style ATTACH fill:#ffe0b2,stroke:#e65100,stroke-width:2px
+  style PRN fill:#e8f5e9,stroke:#2e7d32
+  style WHT fill:#e8f5e9,stroke:#2e7d32
+  style DISABLE fill:#ffcdd2,stroke:#c62828
+  style GRPS fill:#fafafa,stroke:#9e9e9e

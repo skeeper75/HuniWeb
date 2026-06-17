@@ -1,0 +1,43 @@
+%% AC 아크릴 BOM 다이어그램 — 출처: reverse.md §0.1~§0.4·§2(ACTHDKY 6 자재 실측) + gap §XVII (dbmap 31_acrylic 대조)
+%% 두께(WGT)×소재(surface-finish)×가공(라미 합성) 자재 합성 + 부속물 bundle + acrylic2025 가격엔진 / 후니 CLEAR3T 대조
+flowchart TB
+  PROD["아크릴 키링 ACTHDKY (acrylic2025_item/price)"]
+
+  subgraph MAT["★자재 합성 (pdt_mtrl_info 6종·MTRL_CD = PTT × WGT × surface × GRP_OPTION)"]
+    direction TB
+    M1["PXAATD01 — 아크릴 3T 투명 / WGT=D01 / GRP=MTG_DFT 일반"]
+    M2["PXAATD02 — 아크릴 5T 투명 / WGT=D02 / GRP=MTG_DFT 일반"]
+    M3["PXAATL01 — 3T 투명 라미(2T+1T) / WGT=L01 / GRP=MTG_LAM"]
+    M4["PXAATL02 — 5T 투명 라미(4T+1T) / WGT=L02 / GRP=MTG_LAM"]
+    M5["PXAATL03 — 홀로그램 3T 깨진유리 라미(1T+2T) / L03 / MTG_LAM"]
+    M6["PXAATL04 — 홀로그램 3T 격자 라미(1T+2T) / L04 / MTG_LAM"]
+  end
+
+  PROD --> MAT
+  MAT --> LAM["★라미 = 자재 합성 공정(GRP_OPTION_CD MTG_LAM)<br/>3T → 2T + 1T 합성 · 홀로그램 표면 부여<br/>(공정#2 합지 + 자재#1 합성 결과)"]
+
+  PROD --> SUB["★부속물 bundle (SUB_MTR / WRK_MTR)<br/>고리 KR001~040/CN/CR 80+ (ST 코드공유)<br/>받침 AB005~016 12 SKU · 자석/핀/그립톡<br/>= 부자재 + 부착/조립 공정 BUNDLE"]
+
+  PROD --> WHT["화이트언더베이스 (PRT_WHT·PROC_000008)<br/>투명/유색 위 색표현 베이스 레이어"]
+
+  PROD --> PRICE["★acrylic2025 가격엔진<br/>입력: 두께(WGT)·소재(PTT)·인쇄면·고리<br/>면적매트릭스 산정 (PRF_CLR_ACRYL)"]
+
+  subgraph HUNI["후니 dbmap 31_acrylic 대조 (라이브 확증)"]
+    direction TB
+    H1["COMP_ACRYL_CLEAR3T · prc_typ .02 · 84행<br/>3T(MAT_000043) + 1.5T(MAT_000042) mat_cd 통합<br/>★1.5T = 3T × 0.8 (RP WGT 슬롯과 동형·두께=자재차원)"]
+    H2["COMP_ACRYL_MIRROR3T · prc_typ .01 · 37행<br/>거울 = 별 comp / 별 가격공식(소재계열별 가격엔진 #11)"]
+    H3["Q-ACR-7 미해소 — .02 합가형 엔진계산법 미확정(돈-크리티컬)<br/>미러/코롯토/카라비너 공식 미신설(GAP-CHAIN·가격 트랙 범위)"]
+  end
+
+  PRICE -.정합 대조.-> HUNI
+
+  style PROD fill:#e1f5fe,stroke:#0277bd,stroke-width:3px
+  style MAT fill:#f3e5f5,stroke:#6a1b9a,stroke-width:2px
+  style LAM fill:#fff9c4,stroke:#f9a825,stroke-width:2px
+  style SUB fill:#ffe0b2,stroke:#e65100,stroke-width:2px
+  style WHT fill:#e8f5e9,stroke:#2e7d32
+  style PRICE fill:#fff9c4,stroke:#f9a825,stroke-width:2px
+  style HUNI fill:#e8eaf6,stroke:#3949ab,stroke-width:2px
+  style H1 fill:#c8e6c9,stroke:#2e7d32
+  style H2 fill:#fff9c4,stroke:#f9a825
+  style H3 fill:#ffcdd2,stroke:#c62828

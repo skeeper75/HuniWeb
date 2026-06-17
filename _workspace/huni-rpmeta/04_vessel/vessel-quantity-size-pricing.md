@@ -85,6 +85,13 @@
 - **그릇 조치:** **신규 그릇 0 — 가격 트랙 위임(V-7 최하·C2 권고 불변).** frm_typ_cd 거버넌스 코드그룹이 신설되면 digital/면적/tmpl/vTmpl/tiered 라우팅을 동시 해소. 본 하네스는 그릇 mint 안 함 — `dbmap-price-formula-types-authority`(면적매트릭스형 vs 고정가형)·`dbmap-digitalprint-atomic-formula-unbuilt`(digital 원자합산형)가 권위인 **dbmap 가격 트랙(round-16/17)** 결정 사안. 사이즈#13 면(프리셋+자유 동일·가격엔진만 분기)은 B절(V-6) RULE_TYPE.05로 이미 정합.
 - **판정:** P-6(digital_price 라우팅) = WEAK → **V-7과 함께 가격 트랙 위임.** frm_typ_cd 그릇이 digital/면적 라우팅을 해소(돈 크리티컬·인간 승인).
 
+### C5. AC facet 보강 (v7.0 — acrylic2025 가격엔진 prc_typ .02 흡수·신규 그릇 0)
+> AC 갭 분석(`categories/AC/reverse.md` A-5·`gap-matrix §XVII`·`vessel-needs.md AC 흡수 매핑 ⑤`). 후니 대조 = `_workspace/huni-dbmap/31_acrylic-price-link/`. **신규 vessel-gap 0 — AC #5(acrylic2025 가격엔진)는 본 V-7(#11)의 frm_typ_cd 라우팅키 결손과 동일.** 새 테이블/컬럼/V-번호 추가 없음.
+- **AC #5 = acrylic2025 가격엔진:** 라이브 실측 — `PRF_CLR_ACRYL` **1행**·`frm_typ_cd` 부재·★**Q-ACR-7(prc_typ `.02` 엔진계산법 미확정) 라이브 확증**(`COMP_ACRYL_CLEAR3T` prc_typ `.02`·**84행**)·`MIRROR3T` prc_typ `.01`·**37행**. CLEAR3T가 투명 3T+1.5T를 mat_cd로 통합(`.02`)·미러는 별 comp(`.01`) → 같은 아크릴 본체가 두 prc_typ로 갈리는데 어느 가격엔진(`.02` 통합형 vs `.01` 면적룩업)으로 보낼지 결정하는 *유형 분류축*(frm_typ_cd)이 라이브에 없음.
+- **V-7 연결:** AC #5의 acrylic2025 엔진 라우팅 = C1~C2에서 결손으로 본 **`frm_typ_cd`(PricingModel 유형) 라이브 부재**와 동일 갭(PR P-6 digital/면적·ST S-6 판/die-cut/정가와 횡단 합류). acrylic2025가 ST 3엔진·GS tmpl·PR digital과 같은 frm_typ_cd 라우팅 결손에 합류.
+- **그릇 조치:** **신규 그릇 0 — 가격 트랙 위임(V-7 최하·C2 권고 불변).** ★**Q-ACR-7(.02 엔진계산 정합)·미러/코롯토/카라비너 공식 신설은 dbmap 31_acrylic Q-ACR/GAP-CHAIN 범위**(돈 크리티컬·`dbmap-acrylic-price-chain-link`·인간 승인). 본 하네스는 그릇 mint 안 함. frm_typ_cd 거버넌스 코드그룹이 신설되면 digital/면적/tmpl/vTmpl/tiered/acrylic2025 라우팅을 동시 해소(`dbmap-price-formula-audit-round17`·`dbmap-price-formula-types-authority` 권위).
+- **판정:** AC #5(acrylic2025 prc_typ .02) = WEAK → **V-7과 함께 가격 트랙 위임.** frm_typ_cd 그릇이 acrylic2025 라우팅을 해소(돈 크리티컬·인간 승인). ★거울 surface_finish는 자재 분해축(`vessel-material-axis §10.2`)·거울 별 *가격공식*(PRF_MIRROR_ACRYL)은 여기 V-7 라우팅 — 분리.
+
 ---
 
 ## 종합 (P3 3축)
