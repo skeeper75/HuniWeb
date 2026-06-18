@@ -10,7 +10,10 @@ description: >
   트랙(dbm-load-execution·dbm-axis-staged-load)에 위임. '기초코드 등록', '기초코드 등록 필요분 도출', '기초코드
   거버넌스', '기초코드 개선/보완/수정', '자재 사이즈 도수 인쇄옵션 공정 기초코드 정리', '잘못된 매핑 도출', '등록
   명세 마스터', '권위 정답 사전', '4-way 진단', 'basecode 하네스 실행/재실행/업데이트/보완', '특정 축만 등록명세',
-  '자재 등록명세', '카테고리 등록명세', 'huni-basecode' 등 본 도메인 요청 시 사용. 단순 질문은 직접 응답.
+  '자재 등록명세', '카테고리 등록명세', 'huni-basecode' 등 본 도메인 요청 시 사용. **교정 실행 트랙(Phase 5·
+  hbg-remediation-planner)**: '교정 우선순위', '라이브 실제 교정', '교정 순서', '교정 로드맵', '교정 실행 계획',
+  '안전 가역성 우선', '가격사슬 영향', '교정 경로 혼합', '단계별 승인 큐', '실제 교정 진행', '우선순위로 교정' 등은
+  교정 우선순위 로드맵 산출(실 COMMIT은 dbmap 트랙 위임·인간 승인). 단순 질문은 직접 응답.
 ---
 
 # Huni-Basecode-Governance 오케스트레이터
@@ -77,6 +80,18 @@ FK 위상·webadmin 적재경로·코드 채번 규칙·영향분석. vessel/DDL
 ## Phase 4: B1~B6 게이트 (hbg-validator)
 
 등록 명세 마스터를 라이브 직접 재실측으로 독립 검증 → `04_gate/gate-verdict.md`. GO/NO-GO. FAIL 시 해당 Phase 재산출.
+
+## Phase 5: 교정 실행 우선순위 (hbg-remediation-planner) — 실 라이브 교정 트랙
+
+Phase 1~4로 GO된 등록 명세를 **라이브에서 실제 교정**하기 위한 트랙. 트리거 = "교정 우선순위/라이브 실제 교정/
+교정 로드맵/우선순위로 교정" 등. 등록 명세 GO가 선행 조건(없으면 Phase 1~4 먼저).
+
+1. **로드맵 설계** (hbg-remediation-planner): 전 교정 항목을 5축 스코어링(가역성·위험·효과·FK 의존·돈 크리티컬) → **안전·가역성 우선** 정렬 → wave 그룹핑 → 교정 경로 혼합(가역=라이브 직접 / 근본=경로 Y) → `05_remediation/remediation-roadmap.md`.
+2. **가격사슬 영향 분석** [HARD]: 6축 기초코드 교정이 가격공식/구성요소(t_prc_*)에 미칠 영향 라이브 실측 → `05_remediation/price-chain-impact.md`. 깊은 정합은 `dbm-price-arbiter` 협업.
+3. **단계별 승인 큐**: wave 단위 인간 승인 카드 → `05_remediation/_approval-queue.md`. 사용자가 wave 단위 GO/STOP.
+4. **GO분 실 적재 위임**: 승인 wave를 dbmap 트랙에 위임 — 경로 Y=`dbm-axis-staged-load`, 라이브 직접 멱등 UPSERT=`dbm-load-execution`, 검증=`dbm-validator`+`hbg-validator`, DDL=`dbm-ddl-proposer`. 백업·롤백전용 DRY-RUN 선행.
+
+[HARD] 실 라이브 COMMIT은 wave 단위 인간 승인 후에만. 돈 크리티컬(가격사슬)은 특히 신중. del_yn 권위·P-TRUNCATE 가드 준수.
 
 ## 데이터 전달 프로토콜
 
