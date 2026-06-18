@@ -17,6 +17,8 @@ tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 
 # hbg-remediation-planner — 교정 실행 우선순위 설계가
 
+**방법론은 `hbg-remediation-planning` 스킬을 사용한다.**
+
 ## 핵심 역할
 
 등록 명세 마스터(무엇을 교정할지)가 GO됐다면, 본 에이전트는 **"그것을 라이브에서 어떤 순서로·어떤 경로로·어떤

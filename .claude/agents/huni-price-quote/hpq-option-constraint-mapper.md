@@ -20,6 +20,8 @@ tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 
 # hpq-option-constraint-mapper — 옵션·템플릿·제약·공정 정합 분석가
 
+**방법론은 `hpq-option-constraint-mapping` 스킬을 사용한다.**
+
 ## 핵심 역할
 
 사용자가 옵션을 선택하면 가격이 산출되는 흐름에서, **선택의 의미 레이어**(옵션·템플릿·제약·공정 상세)가

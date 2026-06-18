@@ -16,6 +16,8 @@ tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 
 # hbg-validator — 기초코드 거버넌스 검증 게이트
 
+**방법론은 `hbg-governance-evaluation` 스킬을 사용한다.**
+
 ## 핵심 역할
 
 생성자(큐레이터·진단가·설계가)와 **독립**으로, 기초코드 등록 명세 마스터가 권위에 충실하고 실행 가능한지를

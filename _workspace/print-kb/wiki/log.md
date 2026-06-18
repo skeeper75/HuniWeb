@@ -4,6 +4,20 @@
 
 ---
 
+## 2026-06-18
+
+- **[LINT·게이트] L-GATE-PE2 — 가격엔진 축 W1~W8 독립 검증 → CONDITIONAL-GO** — `pkw-wiki-qa`(writer 독립·자기승인 아님). 대상 `huni/price-engine.md`(33 원자블록). **W1~W5·W8 PASS / W6·W7 PASS(Low)**. ★Dodge-hunt: SOT4 "formula_components prd_cd 부재"를 라이브 information_schema로 재실측 → 컬럼 6개·prd_cd 없음 **TRUE(날조 아님)**. clr_cd dead(0행)·print_opt_cd 1431행·10차원·행수(7293/146/301/48·바인딩76·직접0·템플릿0)·prc_typ 143/3·할인7/35/102·등급0·addtn_yn N 2행·CLEAR3T 165행 min_qty=1 **전건 라이브 일치(수치 날조 0)**. pricing.py:38-49/177-192/247 라인 의미·gate-verdict 골든(20000/11750/3100/2480) 일치. STALE/v03 인용 0. linkcheck BROKEN 0. **확정 finding 2(Low)**: QA-PE-L1 index 배지분포 +1 drift(주장 ✅18·🟡5 → 실측 ✅17·🟡4·🔴12)·QA-PE-L2 cq-registry.md 부재(CQ 커버리지 독립검증 불가). FABRICATED/SCHEMA-MISMATCH/STALE-CITED 0 → 본문 사용가능·Low 보정 후 GO 승격. 판정서 `_qa/price-engine-gate.md`.
+
+- **[INGEST·델타] D-INGEST-PE2 — 가격엔진 축 본문 FRESH 재확정(권위 반전)** — `pkw-recipe-writer`(집필·검증은 pkw-wiki-qa 별도). 부분 재실행: 가격 횡단 축 본문 갱신·확장.
+  - 원천(FRESH·2026-06-18 라이브 information_schema + pricing.py 570줄 실측): `huni-price-engine-diag/01_mechanism/{sot-definitions,device-roles}.md`·`02_code_schema/{constraint-mechanism-gap,price-source-intent,code-schema-matrix,design-artifact-trace}.md`·`03_synthesis/{known-vs-unknown,sot-reconciliation,engine-comprehension}.md` + `huni-price-quote/01_engine/engine-contract.md`·`05_gate/gate-verdict.md`. 큐레이션 팩 `_curation/axis-price-engine.md`(§0·§0c·STALE 함정 7).
+  - 갱신 페이지: `huni/price-engine.md`(156줄→대폭 확장). 단일 축 1장 유지(공식/구성요소/할인 분리 과함 → 섹션으로·README §3.2).
+  - 편입 블록(총 29 원자블록): ★신규 §0 SOT 7(PE-SOT-1~7·badge `✅ SOT` 최상위 권위) + §1 5장치(PE-DEV-1~5·✅) + §2 거동 4(PE-001~004) + §3 공식유형 5(PE-005~009) + §4 앱계산(PE-010) + §5 STALE 2(PE-STALE·신규 PE-STALE2) + §6 GAP 10(PE-GAP-1~10·신규 6~10). badge 분포 ✅18·🟡5·🔴12(PE-STALE/STALE2 포함 시 🔴).
+  - ★권위 반전(HARD): prcx01-pricing-model.md·pricing-erd.md → STALE 강등(8차원·clr_cd·frm_typ_cd) → 신규 [PE-STALE2]. 8차원→10차원·clr_cd 폐기(도수=print_opt_cd)·"evaluate_price 미구현"→라이브 구현 정정·합가형 3건 확정(기존 "144행 전부 .01" STALE)·제약장치 부재=오적재 단일병인 명문화. 기존 PE-001~010 전부 🟡→라이브 코드근거 확보분 ✅ 승격.
+  - 교차참조: 신규 CQ-PRICE-11~22 12건·기존 레시피 사용처 링크 보존(digital-print·sticker·silsa·acrylic·goods-pouch·calendar·photobook·booklet·stationery·product-accessory)·cpq-options(fn_chk_opt_item_ref·옵션=BUNDLE)·processes(별색=공정)·widget-contract(strict 재검증) 교차링크. index.md price-engine 요약·상태분포 갱신.
+  - 남긴 🔴 GAP: PE-GAP-1(합가형 전수식별)·PE-GAP-3(6상품군 가격 0행)·PE-GAP-4(박·plate)·PE-GAP-6(clr_cd 폐기 의도 컨펌)·PE-GAP-7(엽서 합산형 N-1 검증미완)·PE-GAP-8(수량축 출력매수 vs 주문수량 컨펌)·PE-GAP-9(배선 제약장치 신규설계)·PE-GAP-10(addtn_yn 차감 컨펌). **신규 GAP(원천 부재) 0.**
+
+---
+
 ## 2026-06-12
 
 - **[FIX] Phase 4 전역 lint Low 보강 GL-1·GL-2 (finding 한정) → BROKEN 0·gap 0** — `pkw-recipe-writer`. `_qa/global-lint.md` 잔존 Low 2건 한정 보정(신규 집필·구조 변경 0). **GL-1 [BIDIR-INCOMPLETE] RESOLVED:** recipe→axis 정방향 링크를 `_qa/scripts/linkcheck.py` 로직으로 역추출(recipe 블록 스코프 + Sources/state 섹션 스코프 2-pass) → 7 축 페이지(materials·processes·price-engine·cpq-options·widget-contract·load-path·modeling-axioms)의 원자 항목 `- 사용처:` 슬롯에 누락 역링크만 추가(기존 보존·중복 0). **batch-1**: 사용처 슬롯 보유 anchor 34종에 missing recipe 백링크 추가(고팬인: CPQ-GAP-1 +4·MAT-005 +5·LP-STALE+PE-STALE 등 STALE/GAP 앵커는 `- tags:` 직전에 신규 `- 사용처:` 슬롯 삽입). **batch-2**: recipe 블록 외부(Sources STALE-선언 라인·§7 state 라인)에 위치한 14 forward 링크(CPQ-STALE/PE-STALE/LP-007/LP-GAP-4)를 nearest 표준 헤딩 슬러그(`#sources`) 또는 인접 항목ID(PB-LP-002·BK-LP-002·DGP-LP-002·SL-DEF-007 등)로 귀속해 역링크 등재. **결과: anchor 42종 보강·역링크 125건 추가**(batch-1 38anchor/110 + batch-2 4anchor/15). 백링크 감사 재실행 → **missing 0·anchor w/ gaps 0**(60/60 anchor 완전 양방향, 직전 26/60). 동일-페이지 단일슬롯 중복 0. **GL-2 [COVERAGE-GAP Low] RESOLVED:** CQ-PROC-06(제본 N종 물리 차이·책등/링/면지 기초데이터)→`recipes/booklet#BK-BOM-002`(제본 공정 home·BOM-001 자재 슬롯 교차 명시) answers_cq 추가·CQ-PROD-07(선택 가능 사이즈 목록·비규격 사용자입력 허용 여부)→`recipes/booklet#BK-DIM-001`(비규격=작업치수 별도 적재 언급)·`recipes/photobook#PB-DIM-001`(4 이산 variant·비규격 미허용) answers_cq 추가 — 본문 내용 변경 0·둘 다 cq-registry 실재. **검증: `_qa/scripts/linkcheck.py` 재실행 → BROKEN 0(exit 0)·백링크 gap 0·신규 CQ 태그 2종 registry 정합.** finding 외 변경·신규 집필·구조 변경 0.

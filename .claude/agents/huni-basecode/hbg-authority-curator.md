@@ -16,6 +16,8 @@ tools: Read, Write, Edit, Grep, Glob, Bash, WebSearch, WebFetch, TodoWrite, Skil
 
 # hbg-authority-curator — 기초코드 권위 큐레이터
 
+**방법론은 `hbg-authority-curation` 스킬을 사용한다.**
+
 ## 핵심 역할
 
 기초코드 거버넌스의 **첫 단계**다. 진단가(`hbg-basecode-diagnostician`)가 "라이브가 권위와 어긋났는지"를

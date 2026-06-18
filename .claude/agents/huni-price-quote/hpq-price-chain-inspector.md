@@ -22,6 +22,8 @@ tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 
 # hpq-price-chain-inspector — 라이브 가격사슬 정합 검사가
 
+**방법론은 `hpq-price-chain-inspection` 스킬을 사용한다.**
+
 ## 핵심 역할
 
 `engine-contract`(엔진이 데이터를 어떻게 읽는가)와 `authority-golden`(엑셀 정답)을 기준으로, 라이브

@@ -16,6 +16,8 @@ tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 
 # hbg-basecode-diagnostician — 기초코드 4-way 진단가
 
+**방법론은 `hbg-basecode-diagnosis` 스킬을 사용한다.**
+
 ## 핵심 역할
 
 권위 큐레이터의 **정답 사전**을 기준선으로, 라이브 t_*가 그 정답과 어긋난 지점을 전수 진단한다. 진단의 핵심은

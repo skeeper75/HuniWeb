@@ -233,7 +233,41 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 ---
 
-## 14. MoAI Framework (gated — rarely used here)
+## 14. Harness: Huni-Price-Engine-Diag (가격엔진 이해·진단)
+
+**목표:** 가격계산엔진을 이루는 5개 장치(① 가격공식 ② 가격구성요소 ③ 할인테이블=수량구간 ④ 가격뷰어 ⑤ 가격시뮬레이터)의 역할·조합 메커니즘을 원리적으로 정의하고, 프로그램 코드(`raw/webadmin` `pricing.py`·`price_views.py`)가 DB 엔티티 각 속성(t_prc_*/t_dsc_* 컬럼·타입·제약·코드값·FK·트리거)에 맞게 제대로 구현됐는지 진단하며, **결론을 내리기 전에 "원리상 아는 것 vs 모르는 것"을 지식맵으로 분리**한다. §13 huni-price-quote(검증·게이트·결론)와 분리된 **선행 이해·진단 트랙** — 장치 역할을 정확히 정의하지 않으면 잘못 적재된다는 전제(직전 검증에서 검증자조차 도수축 오해·SIZ 오선택). 2인 에이전트 팀(`hped-mechanism-researcher` 장치 역할 원리 정의·지식격차 / `hped-code-schema-auditor` 코드↔DB 속성 정합·설계 산출물 3-way 추적)이 팬아웃+교차참조.
+
+**트리거:** "가격엔진 이해", "가격엔진 진단", "가격 장치 역할", "공식/구성요소/할인/뷰어/시뮬레이터 역할", "가격엔진 원리", "조합 메커니즘", "코드 DB 정합", "속성 단위 구현 진단", "설계 산출물 반영", "아는것 모르는것", "지식격차 리서치", "가격엔진 이해 하네스 실행/재실행/업데이트/보완", "특정 장치만 진단" 등 본 도메인 요청 시 `huni-price-engine-diag-orchestrator` 스킬을 사용. 권위 엑셀 대비 정합 검증·P1~P7 게이트·결함 교정은 §13 검증 트랙. 단순 질문은 직접 응답.
+
+**산출물 루트:** `_workspace/huni-price-engine-diag/` (01_mechanism·02_code_schema·03_synthesis). 권위 순서: ① 라이브 코드(동작) ② 설계 산출물(docs/prcx01-pricing-model.md·pricing-erd.md=의도) ③ 라이브 스키마/데이터 ④ 인쇄 도메인(보강). 라이브 읽기전용 SELECT만·DB 미적재(검증·교정은 §13/dbmap 위임).
+
+**변경 이력:**
+| 날짜 | 변경 내용 | 대상 | 사유 |
+|------|----------|------|------|
+| 2026-06-18 | 하네스 초기 구성 — 2 에이전트(hped-mechanism-researcher·code-schema-auditor) + 3 스킬(orchestrator + mechanism-research·code-schema-audit). §13 검증 트랙의 선행 이해·진단 레이어(5장치 역할 원리 정의·코드↔DB 속성 정합·아는것/모르는것 분리). 신규 독립 하네스 | `.claude/agents/huni-price-engine-diag/`·`.claude/skills/{huni-price-engine-diag-orchestrator,hped-*}`·CLAUDE.md §14 | 사용자(`/harness:harness` — 5장치 역할 정의+코드/DB 정합 진단+지식격차) |
+| 2026-06-18 | U-7 트랙 추가 — 에이전트 `hped-binding-validity-designer` + 스킬 `hped-binding-validity-mapping`. 오적재 단일병인(formula_components prd_cd 부재→시트밖 구성요소 silent 합산)을 닫는 구성요소↔상품군 유효성 정합 설계(Phase 3). ★초점=코드(트리거/DDL) 구현 아닌 데이터 정합(제대로된 가격 결과)·SOT 1 권위·DDL은 dbm-ddl-proposer 위임 | `.claude/agents/huni-price-engine-diag/hped-binding-validity-designer`·`.claude/skills/hped-binding-validity-mapping`·오케스트레이터 Phase3·CLAUDE.md §14 | 사용자(`/harness:harness` — U-7 배선레벨 제약 데이터 정합 설계) |
+| 2026-06-18 | **전 하네스 전수 감사 + 정리(운영/유지보수·문서·배선만·코드/DB/삭제 0)** — 2 감사관 병렬(인벤토리·드리프트 / 가격 클러스터). ★결론: 가격 4하네스(§7·§13·§14·§15)=**중복 아닌 의도적 상보 레이어**(이해→게이트→온디맨드→적재·재병합 금지). 실행: A-1 STALE 정정("evaluate_price 미구현"→실재·§13/§15 실호출·dbm-price-engine-verifier/verify·dbm 오케스트레이터 round-18 4곳·prcx01 STALE 가드) · A-2 dbm-schema-analyst 29→44테이블 · B-1 round-24 dbm-category 오케스트레이터 등재 · B-3 방법론 스킬 12 에이전트 durable 배선 · C 경계 명문화(cartographer↔mechanism·§13↔§15). ★B-2 유령토큰=오탐(grep `pq-`가 `cpq-` 부분매칭). 보류: frm_typ/clr_cd는 dbm-price-formula-audit 결판 후 | `_workspace/_harness-audit/`·dbm/hpq/hped/hqv/hbg 에이전트·스킬·CLAUDE.md §14·[[harness-audit-maintenance]] | 사용자(`/harness:harness` — 전수 감사·중복/이전버전 정리) |
+
+---
+
+## 15. Harness: Huni-Quote-Verify (상품 가격계산 검증 · Claude+Codex 병행)
+
+**목표:** 사용자가 **"상품군(카테고리)+상품명"**(예: "프린트엽서 가격계산 검증해줘")을 주면, 그 상품이 자기 가격공식으로 **가격계산이 되는지** 검증하고 개선/수정/보완안을 도출한다. 검증 3축[HARD]: ① **SOT 일치**(상품마스터 260610 ↔ 인쇄상품 가격표 260527 데이터 일치) ② **가격공식 속 가격구성요소 매핑 정합**(시트 차원경계 SOT 안에서 제대로 배선) ③ **가격구성요소 차원 ↔ 가격테이블 차원 매칭**. 한 줄 명령이 무엇을 뜻하는지를 분해가가 해독(상품 요소 전수+공식사슬+골든)해 목표를 푼다. §13(대표 상품군 파일럿 냉철 게이트)·§14(5장치 이해·진단)의 산출을 입력으로 재사용하는 **단일 상품 온디맨드 검증+개선** 트랙.
+
+**★Claude+Codex 병행(독립 교차검증):** Claude(라이브 실측·evaluate_price 실호출)가 1차 검증, **Codex gpt-5.5**(`codex exec` 읽기전용·ChatGPT 구독 OAuth·API 종량과금 없음)가 같은 work-spec으로 독립 2nd opinion → reconcile(합의=고신뢰·불일치=조사). ★Codex 주장=가설(라이브/권위 검증 전 채택 금지·환각 경계). codex-preflight로 가용성 판정·미가용 시 "Claude 단독" 명시 폴백(pending 금지).
+
+**트리거:** "가격계산 검증", "상품 가격 검증", "프린트엽서 가격검증", "이 상품 가격계산 되는지", "가격공식 검증", "SOT 일치 검증", "공식/구성요소 매핑 검증", "차원 매칭 검증", "codex 병행 검증", "가격검증 하네스 실행/재실행/업데이트/보완", "특정 상품만 검증", "검증 다시" 등 본 도메인 요청 시 `huni-quote-verify-orchestrator` 스킬을 사용. 5장치 역할 이해·진단은 §14, 대표 상품군 냉철 게이트는 §13. 단순 질문은 직접 응답.
+
+**산출물 루트:** `_workspace/huni-quote-verify/<product>/` (01_decompose·02_verify·03_codex·04_remediation). 생성≠검증·라이브 읽기전용 SELECT만·DB 미적재(실 교정은 인간 승인 후 dbmap 위임). 자격증명 `.env.local RAILWAY_DB_*`.
+
+**변경 이력:**
+| 날짜 | 변경 내용 | 대상 | 사유 |
+|------|----------|------|------|
+| 2026-06-18 | 하네스 초기 구성 — 3 에이전트(hqv-product-decomposer·quote-verifier·codex-cross-verifier) + 4 스킬(orchestrator + product-decompose·quote-verification·codex-cross-verify) + codex-review.sh. Claude+Codex 병행 독립 교차검증(구독=ChatGPT OAuth 실측·종량과금 없음). 단일 상품 온디맨드 "가격계산 되는지" 3축 검증+개선. dbm-price-arbiter 재사용(개선 심의) | `.claude/agents/huni-quote-verify/`·`.claude/skills/{huni-quote-verify-orchestrator,hqv-*}`·CLAUDE.md §15 | 사용자(`/harness:harness` — codex 병행 단일상품 가격계산 검증+개선) |
+
+---
+
+## 16. MoAI Framework (gated — rarely used here)
 
 The MoAI-ADK orchestration framework (SPEC plan/run/sync, TRUST 5, DDD/TDD, Agent Teams,
 design GAN loop) is installed but not the primary workflow in this repo. Its detailed

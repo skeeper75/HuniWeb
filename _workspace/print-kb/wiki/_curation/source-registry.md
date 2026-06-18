@@ -36,7 +36,8 @@
 | A-LOADDISC | `raw/webadmin/tools/load_discounts.py` | 구간할인 적재 로직 | FRESH | price-engine(discount) |
 | A-DEPLOY | `raw/webadmin/tools/deploy.py` | SQL_FILES 17~23·객체 기대치(테이블45·FK73·인덱스62·트리거37) | FRESH | schema |
 | A-INITDIMS | `raw/webadmin/tools/init_use_dims.py` | use_dims 백필 스크립트(신규) | FRESH | price-engine |
-| A-WEBADMIN-DOCS | `raw/webadmin/docs/{pricing-erd.md,prcx01-pricing-model.md,entity-table-map.md,naming-guide.md,fk-action-policy.md,handoff-2026-06-11.md}` | webadmin 측 ERD·가격모델·명명. handoff-06-11=Phase10/11 후 | FRESH(handoff-06-11)·pricing-erd는 PARTIAL-STALE 가능 | price-engine·load-path |
+| A-WEBADMIN-DOCS | `raw/webadmin/docs/{entity-table-map.md,naming-guide.md,fk-action-policy.md,handoff-2026-06-11.md}` | webadmin 측 명명·FK·핸드오프. handoff-06-11=Phase10/11 후 | FRESH(handoff-06-11) | load-path |
+| A-WEBADMIN-PRICEDOC | `raw/webadmin/docs/{pricing-erd.md,prcx01-pricing-model.md}` | webadmin 측 가격 ERD·가격모델 설계 문서 | **STALE(델타 2026-06-18)** — 8차원·`clr_cd`(도수)·`frm_typ_cd` 시절. 신규 A-PED-CODE(design-artifact-trace)가 엔진 미참조·라이브 부재 확정. **구조·차원·단가유형·도수 인용 금지**, 의도 배경(직접단가 vs 공식 등) only. 대체=A-PED-* + A-PQ-CONTRACT + pricing.py 직접 | price-engine |
 
 ---
 
@@ -160,6 +161,22 @@
 | C-REMED | `huni-dbmap/08_remediation/` | round-3 결함 처리 적재 설계 | PARTIAL-STALE | load-path |
 | C-COV | `huni-dbmap/12_coverage/` | round-7 입체 커버리지 209셀 매트릭스 | PARTIAL-STALE(I-10·I-11·option_items 0행 당시) | coverage |
 
+### C10. ★가격엔진 실측 하네스 (2026-06-18 — 라이브 information_schema + pricing.py 실측) — tier A·FRESH
+
+> 두 하네스는 round 산출(tier C)이 아니라 **라이브 코드·스키마 직접 실측**이므로 tier A로 등재. 가격 축의 **최상위 FRESH 권위**(구조·차원·엔진 거동). 기존 round-2 가격 매핑 산출(C-MAP-*) 및 prcx01/pricing-erd 설계 문서를 **supersede**(구조·차원·단가유형·도수 한정).
+
+| src_id | 경로 | 내용 요약 | freshness | 담당 |
+|--------|------|-----------|-----------|------|
+| A-PED-SOT | `huni-price-engine-diag/01_mechanism/sot-definitions.md` | **사용자 7 SOT(권위 도메인 정의)** — 11시트=허용 차원 경계(SOT1)·결합/독립 구성요소(SOT2)·10차원(SOT3b)·옵션 BUNDLE 가격없음(SOT3a)·제약 부재=오적재 근본(SOT4)·가격소스 우선순위(SOT5)·수량×단가 두 갈래(SOT6) | FRESH·**최상위 권위** | price-engine |
+| A-PED-DEVICE | `huni-price-engine-diag/01_mechanism/device-roles.md`·`combination-mechanism.md`·`knowledge-map.md` | 5 가격 장치 역할·결합 메커니즘·지식맵(SOT 반영) | FRESH | price-engine |
+| A-PED-CODE | `huni-price-engine-diag/02_code_schema/{code-schema-matrix,price-source-intent,constraint-mechanism-gap,impl-gap-board,design-artifact-trace}.md` | 코드↔스키마 정합 매트릭스·가격소스 의도·**배선 제약 부재 실증**·구현 갭 보드·**prcx01/erd STALE 추적** | FRESH | price-engine |
+| A-PED-SYN | `huni-price-engine-diag/03_synthesis/{known-vs-unknown,sot-reconciliation,engine-comprehension,verify-handoff}.md` | **K-1~8 확정/U-1~6 미지/C-1~3 컨펌큐**·SOT 정합·종합 이해 | FRESH | price-engine |
+| A-PQ-CONTRACT | `huni-price-quote/01_engine/{engine-contract,price-flow-map,widget-price-contract}.md` | **`evaluate_price` 권위 계약(검증의 자·pricing.py:line 인용 C1~C9)**·흐름도·위젯 가격 계약 | FRESH·**엔진 거동 권위** | price-engine·widget-contract |
+| A-PQ-AUTH | `huni-price-quote/02_authority/{authority-golden,golden-cases,authority-gaps}.md` | **골든 케이스(권위 엑셀 기대값)**·적재 갭 | FRESH | price-engine |
+| A-PQ-CHAIN | `huni-price-quote/03_chain/{dimension-mapping-matrix,chain-defect-board,size-dedup-report}.md` | 10차원↔단가행 3원 대조·**가격사슬 결함보드 D-1~D-7**·사이즈 무중복 | FRESH | price-engine |
+| A-PQ-OPTION | `huni-price-quote/04_option/{option-bundle-board,process-json-report,template-constraint-board}.md` | 옵션 BUNDLE 무결성·공정 dim_vals·템플릿/제약 정합 | FRESH | price-engine·cpq-options |
+| A-PQ-GATE | `huni-price-quote/05_gate/{gate-verdict,arbiter-deliberation-N1,confirmed-defects,recompute-log}.md` | **P1~P7 CONDITIONAL-GO(면적매트릭스 GO·합산형 엽서 NO-GO N-1)**·arbiter 심의·확정 결함·재계산 로그 | FRESH·**검증 판정** | price-engine |
+
 ---
 
 ## D. 역공학/외부 (tier D — 후보)
@@ -189,14 +206,17 @@
 
 ## 인벤토리 건수 요약
 
-- tier A: 약 12 그룹(라이브 덤프·ref-csv 17종·sql 23·tools 7+)
+- tier A: 약 14 그룹(라이브 덤프·ref-csv 17종·sql 23·tools 7+ · **★신규 가격엔진 실측 2 하네스 = A-PED-* 4 + A-PQ-* 5 = 9 그룹·29 파일**)
 - tier B: 약 11 L1(family) + 15 price-L1 + aux 4 + 컨펌·PDF
 - tier C: 약 60 분석 산출(00·02·09·10·13·14·15·16·17·18·04·05·08·12)
 - tier D: 약 15 역공학/외부
 - 금지: 1(v03)
 
+> 델타 2026-06-18(가격 축): 신규 등재 9 그룹(29 파일, 전부 tier A·FRESH) · 강등 1(A-WEBADMIN-PRICEDOC = pricing-erd·prcx01 → STALE).
+
 ## freshness 분포 (대표)
 
-- STALE(인용 금지): `price-engine-ddl.md`(C-PRICEENG) — 대체=A-SQL(21·22)+webadmin pricing-erd.
+- STALE(인용 금지): `price-engine-ddl.md`(C-PRICEENG) — 대체=§0 신규 하네스+A-SQL(21·22). **★`pricing-erd.md`·`prcx01-pricing-model.md`(A-WEBADMIN-PRICEDOC) 신규 STALE 강등(8차원·clr_cd·frm_typ_cd)** — 대체=A-PED-*·A-PQ-CONTRACT+pricing.py. v03(FORBID-V03).
+- ★FRESH 최상위(가격 구조·차원·엔진 거동): A-PED-SOT(사용자 7 SOT)·A-PQ-CONTRACT(evaluate_price 계약)·A-PQ-GATE(P1~P7 판정). 2026-06-18 라이브 실측.
 - PARTIAL-STALE 다수: I-5(constraint_json 삭제) 참조 = `cpq-schema.md`·`schema-design-intent-map.md`·`16_*/digital-print/mapping-final.md`·`_loadspec/loadspec.md`. I-6(dep_proc_cd) = `_loadspec/loadspec.md`·`17_*/digital-print/extraction-plan.md`·`schema-design-intent-map.md`.
-- FRESH: 전 17_correctness(round-13)·15_domain-spec 본문·06_extract L1·raw/webadmin/sql.
+- FRESH: 전 17_correctness(round-13)·15_domain-spec 본문·06_extract L1·raw/webadmin/sql · **신규 가격엔진 실측 2 하네스(A-PED-*·A-PQ-*)**.

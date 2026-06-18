@@ -20,7 +20,7 @@ triggers:
 
 ## 1. 클래스별 정합 심층 검토 (mapping-integrity) — **계산 선행 게이트 G-DATA (round-18+)**
 
-**[HARD] mapping-integrity는 가격계산의 *선행 하드 게이트*다(베스트프랙티스 CPQ data integrity→config→pricing).** 구성요소가 엑셀대로 라이브에 맞게 적재됐는지 **계산 전에** 판정하고, NO-GO 클래스는 계산(G-CALC) 진입 차단 → 본 정립(§2/§3) 직행. "행 존재≠적재"(round-7 D-1): 변형 조합별 단가행 존재 + **값일치(셀단위 source-to-target reconciliation)**까지. **실 적재 DB 검증(A-2) = round-13 재사용**: 가격 차원 키가 참조하는 마스터 행(자재·공정·사이즈)이 round-13에서 MIS-LOADED면 가격도 틀린 행을 조회하므로 G-DATA NO-GO.
+**[HARD] mapping-integrity는 가격계산의 *선행 하드 게이트*다(베스트프랙티스 CPQ data integrity→config→pricing).** 구성요소가 엑셀대로 라이브에 맞게 적재됐는지 **계산 전에** 판정하고, NO-GO 클래스는 계산(G-CALC) 진입 차단 → 본 정립(§2/§3) 직행. "행 존재≠적재"(round-7 D-1): 변형 조합별 단가행 존재 + **값일치(셀단위 source-to-target reconciliation)**까지. **실 적재 DB 검증(A-2) = round-13 재사용**: 가격 차원 키가 참조하는 마스터 행(자재·공정·사이즈)이 round-13에서 MIS-LOADED면 가격도 틀린 행을 조회하므로 G-DATA NO-GO. **[HARD·C-1 확정 2026-06-14] A-2 통과 기준 = "round-13 게이트 GO"가 아니라 "그 클래스가 실제 참조하는 가격 차원 마스터(siz/mat/proc/clr/opt)가 *라이브 실측*상 MIS-LOADED·고아 0"**(게이트 GO ≠ 라이브 교정완료 — 실 교정 인간승인·부분적용 잔존 입증됨). **클래스-스코프**: 그 클래스가 실제 참조하는 마스터에만 적용, 미교정·미감사면 그 클래스만 차단(round-13 라이브 적용 선행 라우팅), 무관 시트 미감사는 막지 않음(184 정체 회피). 권위 `26_price-engine-verify/_gate/C-1-decision.md`.
 
 각 가격공식 클래스에 대해, 권위 엑셀이 규정한 "이 상품 가격 = f(자재·공정·사이즈·도수·옵션·수량)"를 기준으로 라이브 적재가 그 구성을 정확·완전 반영하는지 판정:
 - **구성요소 완전성**: 엑셀이 정한 가격 구성요소가 공식(formula_components)에 다 배선됐나(누락·잉여).

@@ -20,6 +20,8 @@ tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 
 # hpq-quote-gate-validator — 독립 재계산·냉철한 게이트 평가가
 
+**방법론은 `hpq-quote-gate-validation` 스킬을 사용한다.**
+
 ## 핵심 역할
 
 사용자가 강조한 **"냉철한 평가와 검증"의 최종 관문**. 생성측이 만든 결함 보드와 권위 골든값을

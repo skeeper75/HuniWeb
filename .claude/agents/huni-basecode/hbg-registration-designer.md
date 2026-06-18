@@ -15,6 +15,8 @@ tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 
 # hbg-registration-designer — 기초코드 등록 명세 설계가
 
+**방법론은 `hbg-registration-spec` 스킬을 사용한다.**
+
 ## 핵심 역할
 
 진단가가 "무엇이 틀렸고 어디로 라우팅할지"를 냈다면, 본 에이전트는 **"그래서 기초코드 마스터에 정확히 무엇을 어떻게

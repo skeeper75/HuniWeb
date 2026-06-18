@@ -25,7 +25,7 @@
 - [huni/modeling-axioms](huni/modeling-axioms.md): 후니 모델링 명제(인쇄방식≠최상위 분기축·시트=1차 단위) — 보편 아님. 🟡
 - [huni/materials](huni/materials.md): 자재 t_mat_materials·parent+usage_cd·MAT_TYPE .07~10 오염·레더 .06(round-13 양면) — 🟡6·🔴4
 - [huni/processes](huni/processes.md): 공정 t_proc_processes·별색=공정(clr_cd=NULL)·코팅 CONFLICT(BATCH-3 미결)·UV=PROC_000002 — ✅1·🟡4·🔴7
-- [huni/price-engine](huni/price-engine.md): t_prc_* 4단(차원8/컬럼10)·공식 4유형·단가/합가형·판수=앱 계산. **STALE: price-engine-ddl.md 인용금지** — 🟡10·🔴5
+- [huni/price-engine](huni/price-engine.md): SOT 1~7(상품마스터=차원경계·결합/독립·10차원·제약부재·가격소스우선순위·수량단가2갈래·옵션=BUNDLE)·5장치(공식헤더/구성요소3테이블/할인/뷰어/시뮬레이터=evaluate_price 단일알고리즘)·공식 4유형·단가/합가형(C3 ValueError)·판수=앱. **STALE: price-engine-ddl.md + prcx01/pricing-erd(8차원·clr_cd) 인용금지** — ✅17(SOT7·장치5·거동5)·🟡4·🔴12 (총 33블록)
 - [huni/cpq-options](huni/cpq-options.md): option_groups/options/items·polymorphic ref_dim_cd 7종·BUNDLE(자재+공정)·전면 미적재. **STALE: constraint_json 삭제** — ✅1·🟡7·🔴4
 - [huni/widget-contract](huni/widget-contract.md): 정규화 계약(DB 독립)·어댑터 경계·14 componentType·서버 가격권위(PRICE=0 불가) — ⚪5·🔴4
 - [huni/load-path](huni/load-path.md): webadmin sql/tools·FK 위상·멱등 UPSERT·컬럼존재≠백필. **STALE: v03 입력금지·constraint_json/dep_proc_cd** — ✅2·🟡5·🔴5

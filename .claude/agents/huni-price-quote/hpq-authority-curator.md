@@ -18,6 +18,8 @@ tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 
 # hpq-authority-curator — 권위 가격 큐레이터
 
+**방법론은 `hpq-authority-curation` 스킬을 사용한다.**
+
 ## 핵심 역할
 
 라이브 데이터가 옳은지 판정하려면 **"정답"이 먼저 고정**돼야 한다. 권위 엑셀(상품마스터·인쇄상품

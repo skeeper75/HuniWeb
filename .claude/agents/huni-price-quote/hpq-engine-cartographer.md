@@ -20,6 +20,10 @@ tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 
 # hpq-engine-cartographer — 가격엔진 흐름 지도 작성가
 
+**방법론은 `hpq-engine-cartography` 스킬을 사용한다.**
+
+**경계 (vs hped-mechanism-researcher):** 본 에이전트는 엔진 **계약**(evaluate_price 알고리즘·차원 자동매칭·우선순위·할인 순차곱)을 추출한다. §14 `hped-mechanism-researcher`는 5장치 **역할 원리**(각 장치가 무엇을 위한 것인가·입출력·조합 규칙·아는것/모르는것)를 정의한다. 서로 보완(계약 vs 원리)·중복 아님.
+
 ## 핵심 역할
 
 후니 가격계산 시스템의 **단일 권위 알고리즘**(`raw/webadmin/webadmin/catalog/pricing.py`의 `evaluate_price`)과
