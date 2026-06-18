@@ -197,3 +197,250 @@
 | B6 생성-검증 독립성 | GO | **GO** |
 
 **1순위 자재·카테고리 기초코드 등록 명세 마스터 = GO.** 실 적재(축이동·교정·소프트삭제)는 `dbm-axis-staged-load`(경로 Y 우선)/`dbm-load-execution` 인간 승인 후. 컨펌 큐 5건은 사용자 결정 대기(GO와 독립). FAIL 게이트 없음.
+
+---
+---
+
+# 2차 회차(4축) 검증 — 사이즈·도수·인쇄옵션·공정 (2026-06-18 append)
+
+> **계기:** hbg 2차 회차 Phase 4. 축 = **② 사이즈·③ 도수·인쇄옵션·⑤ 공정**. 1차(자재·카테고리)와 별개.
+> **방법:** 생성자(큐레이터·진단가·설계가) 산출을 신뢰하지 않고 **라이브 Railway DB 읽기전용 SELECT로 직접 재실측**(2-pass). 정직 규율 — 일부만 검증 가능하면 CONDITIONAL.
+> **종합 평결(4축):** **CONDITIONAL-GO** — 도수(🟢)·사이즈(SZ-1 무비용 교정)·인쇄옵션(UV 63행)·공정 마스터 건전성은 라이브와 셀 단위 일치. **단 B4(search-before-mint) NO-GO 1건** — 공정 PR-1 `ref_param_json` 신규 jsonb 컬럼이 **기존 `t_prd_product_option_items.dtl_opt` jsonb(동일 테이블·이미 param 값 저장 중)를 사다리에서 평가하지 않음** → 신규 그릇 정당성 미입증. 재산출 대상.
+
+## 라이브 재실측 원장 (4축 — 생성자 인용 ↔ 라이브 2026-06-18)
+
+| 측정 | 라이브 실측값 | 생성자 인용 | 일치 |
+|------|--------------|-------------|:--:|
+| **③도수** t_clr_color_counts | **5행**·CLR_000001~005·chnl 0~4·전건 del N/use Y | 5행 SEED | ✅ |
+| 도수 별색 혼입(clr_nm ~ 화이트\|클리어\|금\|은\|별색\|핑크) | **0** | 혼입 0 | ✅ |
+| **⑤공정** t_proc_processes count/max | **102 / PROC_000102** | 102·MAX 102 | ✅ |
+| 공정 family head(001 인쇄·007 별색·008 화이트~012 은색·017 제본·025 레이플랫·033 박·053/054/055 완칼/반칼/스티커완칼) | **전건 실재**·upr_proc_cd 정합 | family head 정합 | ✅ |
+| **PROC_000084 열재단** | **실재**(del N·use Y·family head·upr 없음) | C-PROC-1 해소·실재 | ✅ |
+| 공정 마스터 오염(del<>N or use<>Y) | **0 / 0** | 오염 0 | ✅ |
+| PROC_000002 prcs_dtl_opt | `{"변형":enum["일반","배면양면","풀빼다","투명테두리","단면"]}` | 동일 | ✅ |
+| **②사이즈** t_siz_sizes count | **520**·impos Y=15·del Y=65 | 520·15·65 | ✅ 전건 |
+| t_siz_sizes 컬럼 = work/cut_width만(siz_width/height 부재) | **확인**(siz_width/height는 t_prc_component_prices에만) | "siz 마스터엔 없음·cp에만" | ✅ |
+| cp siz_width 채움 | **922 / 7293** | 922/7293 | ✅ |
+| SZ-1 색오염 SIZ_000104/105 | "화이트/블랙165x115mm(10장)"·del N | 동일 | ✅ |
+| **SZ-1 104/105 component_prices 참조** | **0** | 0(무비용) | ✅ |
+| **인쇄옵션** t_prd_product_print_options total | **166** | 166 | ✅ |
+| print_side 분포 | 단면 62·양면 41·**풀빼다 21·배면양면 21·투명테두리 21** | 동일 | ✅ 전건 |
+| UV 변형 = **63행 / distinct 21상품** | **63 / 21** | 63행·21상품 | ✅ |
+| colrcnt 별색 혼입(front/back CLR 밖) | **0 / 0** | 혼입 0 | ✅ |
+| **★UV 21상품 중 PROC_000002(UV) 실연결** | **14 / 21**(7상품 무연결: 아크릴명찰·지비츠·코스터·코롯토·포카코롯토·카라비너·지비츠★) | "21상품 **전건** UV(PROC_000002)" | ⚠️ **과장**(전건 아님·14) |
+| ref_param_json 컬럼(option_items) | **부재**(information_schema 0) | "미구현 GAP" | ✅(정직) |
+| option_items 행수 | **477** | 469/477 | ✅ |
+| **★기존 option_items.dtl_opt jsonb** | **실재·param값 저장 중**(`{"유형":"봉미싱(7cm)","폭":7.0}`·키=유형/폭) | (사다리에서 **미평가**) | ❌ **search-before-mint 누락** |
+| 라이브 jsonb 컬럼 수 | **9건**(dim_vals·use_dims·logic·**dtl_opt**·options.tags·dtl_opt(template_sel)·templates.tags·prcs_dtl_opt·sizes.tags) | "7건·8번째 동종" | ⚠️ option_items.dtl_opt·template_selections.dtl_opt 누락→실제 9 |
+| shape_cd 컬럼·nonspec 테이블 | **부재**(t_prd_product_sizes shape_cd 0·nonspec/nondim 테이블 0) | "DDL 후 확정·미상" | ✅(정직) |
+| bundle_qtys | **28** | 28 | ✅ |
+
+---
+
+## B1 권위 충실성 — GO
+
+- **검증:** 4축 정답 사전(color/size/printoption/process) 각 정답값 ↔ 라이브 셀 대조. 특히 ① 도수 5행 SEED ② 별색=공정 경계(PROC_000007 family·clr_cd 없음) ③ UV 변형 저장 위치(print_side ✗·prcs_dtl_opt param ✓).
+- **증거:**
+  - 도수 5행 = 권위 SEED와 byte 일치·별색 혼입 0. **별색=공정 경계** 라이브 입증: PROC_000007(별색인쇄)→008 화이트·012 은색 family·도수칸 혼입 0. 권위 §2 "별색은 도수 아님·공정"과 정합. **날조 0.**
+  - UV 변형(풀빼다/배면양면/투명테두리) = PROC_000002 prcs_dtl_opt `{"변형":enum}` 값과 byte 일치 → 권위 §2 "UV 변형=print_side 금지·PROC_000002 param" 정합. 인쇄옵션이 권위를 덮어쓴 게 아니라 권위가 규정한 오적재를 라이브가 재현.
+  - SZ-1 색오염 2행이 OM-1 "siz=물리치수만" 권위 위반임을 라이브 셀이 확인.
+- **판정:** **GO.** 역공학/경쟁사가 권위 침묵 아닌데 정답 단정한 항목 0. 날조 0.
+
+---
+
+## B2 진단 정확성 — CONDITIONAL-GO (1건 과장)
+
+- **검증:** 지정 5항목(① 공정 102행·PROC_000084·family head ② siz 520·cp 922 ③ 도수 5행·혼입 0 ④ print_side UV 63행·아크릴 21상품 ⑤ 공정 마스터 오염 0)을 라이브 information_schema·실데이터로 재실측. round-13/22/23 기진단 중복/stale 오판 탐색.
+- **증거(PASS):**
+  - ① 공정 102행·MAX PROC_000102·PROC_000084 열재단 실재(C-PROC-1 종결)·family head 6종 전건 실재·마스터 오염 0/0 라이브 재현.
+  - ② siz 520·impos 15·del 65·cp siz_width 922/7293 전건 일치. **diagnosis-size §0 "siz 마스터엔 siz_width/height 없음(cp에만)" = 라이브 정확**(t_siz_sizes 컬럼 전수 = work/cut_width만 확인).
+  - ③ 도수 5행·별색 혼입 0·colrcnt 혼입 0(즉시 어긋남 게이트 통과).
+  - ④ print_side UV 63행(각 21)·distinct 21상품·colrcnt 혼입 0 라이브 재현.
+  - round-13 print_side UV 오적재 = **잔존 CONFIRMED**(재진단 아님·현재 상태 인용). round-22 ②사이즈/⑤공정 종단·round-23 구간차원/별색 dedup 기COMMIT을 미교정 오판하지 않음(stale 0).
+- **증거(과장 1건):**
+  - ⚠️ **diagnosis-printoption §1 "UV 21상품 전건 PROC_000002 UV"는 라이브와 불일치** — 21상품 중 **14만** t_prd_product_processes에 PROC_000002 연결, 나머지 **7상품(아크릴명찰·지비츠·코스터·코롯토·포카코롯토·카라비너·지비츠★)은 공정 연결 0건**. 이들도 아크릴 도메인·UV 변형 print_side를 갖지만 "전건 UV" 단정은 라이브 미실측 과장. B-PO-1 일괄결정("21상품 전건 UV라 풀빼다 유력")의 전제도 약화.
+- **판정:** **CONDITIONAL-GO.** 핵심 행수·family·혼입 0은 전건 정확. **단 "21상품 전건 PROC_000002 UV" 과장 1건 → 진단가 정정 필요**(14 실연결·7 무연결 구분). 결함 라우팅 자체(UV 변형 축이동)는 영향 적으나 권위 정확성 흠.
+
+---
+
+## B3 라우팅 타당성 — GO
+
+- **검증:** 도수 0(정상)·사이즈 교정 2(SZ-1)·UV 축이동 63·공정 ref_param_json 1·판정불가 31(SZ-2 30·PR-2 1)이 결함과 논리 정합한지.
+- **증거:**
+  - 도수 라우팅 0 = 폐쇄 SEED 정상(라이브 5행 무오염)과 정합.
+  - SZ-1 색→옵션/자재·수량→bundle·siz_nm 정규화 = OM-1 위반 교정으로 의미 정합. cp 0참조 라이브 확인 → "무비용" 라우팅 정당.
+  - UV 63행 print_side→param 축이동 = print_side 도메인 오류(인쇄면 vs UV처리 평면화)와 정합. ⓐ v03 전파 + ⓑ 그릇 부재 원인유형 정합.
+  - 판정불가 31(SZ-2 형상+EA·PR-2 레이플랫)을 자동 단정하지 않고 정직 보류(dodge 아님).
+- **판정:** **GO.** 라우팅 논리 정합. 경계 모호분 컨펌 큐 분리.
+
+---
+
+## B4 search-before-mint 준수 — NO-GO (재산출)
+
+- **검증:** 신규 코드행 0·신규 그릇 ref_param_json jsonb 1(V-1 vessel-gap)이 정당한지 — **기존 코드행/컬럼/JSONB/junction으로 표현 불가임을 입증했는지** 라이브 그릇 실재로 검증.
+- **증거(PASS):**
+  - 신규 코드행 0 라이브 확인: 도수 SEED 폐쇄·print_side 5종 도메인 기존·열재단 PROC_000084/미싱(086)/봉제(088)/에폭시(095) **라이브 실재**(재제안 금지 정당)·siz SZ-1은 기존 행 정규화(채번 0).
+  - shape_cd 컬럼·nonspec 테이블 라이브 부재 확인(자재 회차 V-12·비치수 마스터는 진짜 vessel-gap).
+- **증거(NO-GO 핵심):**
+  - ❌ **ref_param_json 신규 jsonb 컬럼의 search-before-mint 사다리가 불완전.** 공정 PR-1·vessel-process-parameter §2 사다리는 ① 코드행 ② 고정 컬럼 N개 ③ **신규** jsonb 컬럼 ④ 자식 테이블만 평가하고 **"기존 jsonb 컬럼 재사용"을 빠뜨림.**
+  - 라이브 실측: `t_prd_product_option_items.dtl_opt jsonb`가 **동일 테이블에 이미 존재하며 param 선택값을 이미 저장 중** — `{"유형":"봉미싱(7cm)","폭":7.0}`·`{"유형":"오버로크+리본끈"}`(린넨 가공옵션, round-23). 키 = `유형`/`폭`. 제안하는 UV `{"변형":"풀빼다"}`·`{"줄수":2}`·`{"조각수":4}`와 **구조 동형**(prcs_dtl_opt 스키마↔값 instance).
+  - `t_prd_template_selections.dtl_opt`도 `{"면":"양면"}` 저장 중(완전 동형).
+  - 사다리 "8번째 동종 jsonb·라이브 7건" 주장도 **라이브 9건**(option_items.dtl_opt·template_selections.dtl_opt 누락) → 두 dtl_opt가 정확히 param-value 용도라는 사실을 놓침.
+  - 즉 명세는 "신규 컬럼이 기존 dtl_opt로 표현 불가"임을 **입증하지 못함**(평가조차 안 함). dtl_opt가 "옵션 유형 전용·공정 param 부적합"이라는 의미 분리 논거가 있다면 정당할 수 있으나, 그 논거가 명세에 0.
+- **판정:** **NO-GO.** ref_param_json 신규 그릇은 **기존 `dtl_opt` jsonb 재사용 가능성을 사다리에 추가해 재입증**해야 함. 두 경로 중 하나:
+  - (a) dtl_opt가 공정 param 값을 담을 수 있으면 → **신규 컬럼 mint 0**(dtl_opt 재사용·진짜 search-before-mint 통과).
+  - (b) dtl_opt가 의미상 분리돼야 하면(예: dtl_opt=옵션 표시용·ref_param_json=공정 검증용) → 그 **분리 논거를 명세에 명시**해야 vessel-gap 정당.
+  - **재산출 대상: `hbg-registration-designer`(regspec-process §1 사다리 + vessel-process-parameter §2) + `hbg-basecode-diagnostician`(diagnosis-process PR-1 "슬롯 없음" → "dtl_opt 있으나 의미 분리 검토" 재진단).**
+
+---
+
+## B5 등록 명세 실행가능성 — CONDITIONAL-GO
+
+- **검증:** ★FK 위상(ref_param_json 신설이 UV 축이동에 선행)·단가행 byte 불변·colrcnt 무접촉·적재경로 "미상" 정직 표기·dry walk-through.
+- **증거(PASS):**
+  - **FK 위상 순서 정합:** PO-1 = ① param 슬롯 그릇 선결 → ② UV 변형값 이관 → ③ print_side 정규화. 순서 위반 시 변형값 소실 논거 타당. (단 B4 결과에 따라 ①의 "신규 컬럼" 여부는 dtl_opt 재검토 후 확정.)
+  - **colrcnt 무접촉:** front/back colrcnt 혼입 0 라이브 확인·명세가 "도수 손대지 않음" 명시. 정합.
+  - **적재경로 정직 표기:** regspec-process §1 "현재 admin UI에 ref_param_json 입력 위젯 미구현 → 적재경로 미상(DDL 후 pvEdit 폼 확장)" 정직. shape_cd/비치수 마스터도 "미상" 표기.
+  - **영향분석:** ADD COLUMN NULL 백필 0·무잠금·트리거 fn_chk_opt_item_ref 미참조·롤백 DROP+백업 권고. 멱등 가드 정합.
+- **증거(보완 필요):**
+  - ⚠️ **돈 크리티컬 가격사슬 영향분석이 간접 경로 미규명.** 명세는 "UV print_side 63행이 round-23 아크릴 가격사슬에 묶임"이라 하나, 라이브 `t_prc_component_prices`는 **prd_cd 컬럼 부재**(comp/proc/siz/clr 키)·해당 아크릴 21상품의 option_items=0(샘플 6건). print_side→가격 결합은 **직접 아님**(formula PRF_CLR_ACRYL/PRF_COROTTO_ACRYL 경유 간접). "단가행 byte 불변" 보장은 옳으나(print_side 정규화가 component_prices 미접촉) **결합 경로 자체가 명세에 정밀 규명 안 됨** → 운영자 dry walk-through 시 "왜 print_side 교정이 가격에 영향?" 불명확.
+  - ⚠️ **option_items 목적지 부재.** PO-1은 변형값을 option_items.ref_param_json으로 이관하나, 라이브 해당 아크릴 상품 option_items=0행. **컬럼만 신설해선 담을 행이 없음** — 변형값 이관 전 option_items 행 INSERT가 선행돼야(명세 누락). OM-6 "option_items 대부분 미적재"와 충돌.
+- **판정:** **CONDITIONAL-GO.** FK 위상·colrcnt·적재경로 정직·영향분석 골격은 실행가능. **단 ① 가격 결합 간접경로 규명 ② option_items 행 선적재(목적지 행 부재) 2건 보완 후 GO.** (B4 dtl_opt 재검토와 연동.)
+
+---
+
+## B6 생성-검증 독립성 — GO (validator 적발 2건)
+
+- **검증:** 생성자 인용 수치를 베끼지 않고 라이브 직접 재실측. self-approve·dodge(UV 63행·형상+EA 30 건너뜀) 탐색.
+- **증거:**
+  - 본 게이트는 원장 24행 전부 라이브 psql 재측정(베끼기 0). 도수·공정·사이즈·인쇄옵션 핵심 수치 전건 라이브 대조.
+  - **dodge-hunt:** 진단가가 UV 63행·SZ-2 형상+EA를 건너뛰지 않고 처리(판정불가 정직 분류). self-approve 0.
+  - **★validator 독립 적발 2건(생성자 미관측):**
+    1. **option_items.dtl_opt jsonb가 이미 param 값 저장 중**(B4) — 생성자 3개 산출(diagnosis·regspec·vessel) 전부 미관측. 독립 재실측이 아니었으면 묻혔을 핵심 결함.
+    2. **UV 21상품 전건 PROC_000002 아님**(14 실연결·7 무연결·B2) — 생성자 "전건 UV" 과장. 라이브 process JOIN으로 적발.
+  - 추가 정직: SZ-2 "형상+EA 30행"은 라이브 패턴(정사각/원형/하트+EA) **44행**(별/꽃 포함)·30은 좁은 서브셋 추정 → 카운트 정밀 흠(판정불가 라우팅엔 무영향).
+- **판정:** **GO.** 독립 재실측 수행·self-approve 0·dodge 0. 적발 2건은 생성자 환류(B4/B2 재산출).
+
+---
+
+## 종합 평결 (4축) — CONDITIONAL-GO
+
+**도수(🟢 폐쇄 SEED·byte 일치)·사이즈(SZ-1 무비용 교정·기계적 삭제 금지)·인쇄옵션(UV 63행 오적재 잔존)·공정 마스터 건전성(102행·family·열재단·param 스키마)은 라이브와 셀 단위 일치하며 날조·권위 덮어쓰기·stale 오판이 전건 0.** 그러나 **B4(search-before-mint)가 NO-GO** — 핵심 신규 그릇 `ref_param_json`이 동일 테이블의 기존 `dtl_opt` jsonb(이미 param 값 저장 중)를 사다리에서 평가하지 않아 정당성 미입증. B2(UV 전건 과장)·B5(가격 간접경로·option_items 목적지 부재) 보완 동반.
+
+| 게이트 | 판정 |
+|--------|:--:|
+| B1 권위 충실성 | **GO** |
+| B2 진단 정확성 | **CONDITIONAL-GO**(UV 전건 과장 1건) |
+| B3 라우팅 타당성 | **GO** |
+| **B4 search-before-mint** | **NO-GO**(ref_param_json ↔ dtl_opt 미평가) |
+| B5 실행가능성 | **CONDITIONAL-GO**(가격 간접경로·option_items 목적지 2건) |
+| B6 생성-검증 독립성 | **GO**(validator 적발 2건) |
+
+**4축 등록 명세 = CONDITIONAL-GO + B4 NO-GO 재산출 필요.** 도수·사이즈·공정 마스터·인쇄옵션 진단/라우팅 골격은 건전하나, ref_param_json 신규 그릇은 dtl_opt 재사용 재검토 전 BLOCKED.
+
+### 재산출 지시 (4축)
+
+| 게이트 | 항목 | 지시 대상 | 지시 |
+|--------|------|-----------|------|
+| **B4** | ref_param_json ↔ 기존 dtl_opt jsonb 미평가 | `hbg-registration-designer`(regspec-process §1·vessel-process-parameter §2) + `hbg-basecode-diagnostician`(diagnosis-process PR-1) | 사다리에 **"기존 jsonb 컬럼 재사용(option_items.dtl_opt)"** 단계 추가. 라이브 dtl_opt=`{"유형":"봉미싱(7cm)","폭":7.0}` param값 저장 중. (a) dtl_opt 재사용 가능 → 신규 mint 0 / (b) 의미 분리 필요 → 분리 논거 명시. 둘 중 하나로 재입증. |
+| **B2** | "UV 21상품 전건 PROC_000002" 과장 | `hbg-basecode-diagnostician`(diagnosis-printoption §1) | 라이브: 14상품만 PROC_000002 실연결·7상품(아크릴명찰/지비츠/코스터/코롯토/포카코롯토/카라비너/지비츠★) 공정 연결 0. "전건 UV"→"14 실연결·7 무연결(아크릴 도메인이나 미연결)"로 정정. B-PO-1 전제도 보정. |
+| **B5** | 가격 간접경로·option_items 목적지 부재 | `hbg-registration-designer`(regspec-printoption §2·regspec-process) | ① print_side→가격 결합 = component_prices 직접 아님(prd_cd 부재·formula PRF_CLR_ACRYL 경유 간접) 규명 ② 변형값 이관 전 해당 아크릴 option_items 행 INSERT 선행(현재 0행) 명세 추가. |
+
+### 미검증 항목 (정직 명시 — NO-GO 아님)
+
+- **SZ-2 형상+EA siz 칼틀 매칭**(30~44행) — 상품별 t_prd_product_sizes 칼틀 실측 미수행(판정불가 정당·다음 회차).
+- **PR-2 레이플랫 PROC_000025 운영 여부** — 연결 상품 실측 미수행(AX-6 컨펌·라이브 활성만 확인).
+- **컨펌 큐 4건**(AX-5·B-PO-1·AX-6·SZ-2) — 사용자/실무진 결정 큐·검증 대상 아님.
+- **round-23 아크릴 가격 골든값 byte 불변** — dbmap 적재 트랙 권위(본 게이트는 print_side 정규화의 component_prices 미접촉만 확인).
+- **webadmin 소스 라인 직접 재독**(admin.py·price_views.py·load_master.py) — 라이브 거동 정합으로 간접 확인까지(레포 접근 시 정밀 대조).
+
+### 첨부 — 라이브 SELECT 로그 (읽기전용·자격증명 비노출)
+
+전 수치는 Railway `railway` DB 읽기전용 SELECT로 2026-06-18 측정(쓰기 0). 측정 쿼리:
+`t_clr_color_counts` · `t_proc_processes(count/max/family/del/use)` · `t_siz_sizes(count/impos/del/columns)` ·
+`t_prc_component_prices(siz_width filled·104/105 ref)` · `t_prd_product_print_options(print_side·colrcnt·UV distinct)` ·
+`t_prd_product_processes JOIN(UV PROC_000002 실연결)` · `t_prd_product_option_items(dtl_opt keys/values)` ·
+`t_prd_template_selections(dtl_opt)` · `information_schema.columns(ref_param_json·jsonb 전수·shape_cd·nonspec 테이블)` · `t_prd_product_bundle_qtys`.
+
+---
+---
+
+# 2차 회차 재검증 — B4 NO-GO / B2 과장 / B5 보완 정정 (2026-06-18 append)
+
+> **계기:** 직전 4축 검증의 B4 NO-GO + B2 과장 + B5 보완 2건에 대해 진단가·설계가가 정정 완료 통지. 정정 파일 6종 정독 + **인용 수치를 라이브 읽기전용 SELECT로 직접 재실측**해 날조·dodge 여부 대조.
+> **방법:** 정정 골격(B4 dtl_opt 재사용·B2 14/7 분기·B5 행 선적재/간접경로)을 라이브로 grounding. 쓰기 0.
+
+## 라이브 재실측 원장 (정정 검증 — 생성자 인용 ↔ 라이브 2026-06-18)
+
+| 측정 | 라이브 실측값 | 생성자 인용 | 일치 |
+|------|--------------|-------------|:--:|
+| **B4** option_items.dtl_opt jsonb 컬럼 | **실재**(data_type=jsonb) | "기존 컬럼 라이브 실재" | ✅ |
+| dtl_opt 채움 행 | **6 / 477** | 6행 실사용 | ✅ |
+| dtl_opt 실값 = 공정 param 인스턴스 | **전건 OPT_REF_DIM.04 → PROC_000080**(`{"유형":"봉미싱(7cm)","폭":7.0}`·오버로크·말아박기) | 공정 param 선택값·동형 | ✅ |
+| jsonb 컬럼 전수 | **9건**(dim_vals·use_dims·logic·**option_items.dtl_opt**·options.tags·**template_sel.dtl_opt**·templates.tags·prcs_dtl_opt·sizes.tags) | 정정문 3슬롯(prcs_dtl_opt·dtl_opt·template_sel) 명시 | ✅ |
+| **B2** UV 변형 보유 21상품 | **21** | 21 | ✅ |
+| ├ PROC_000002 실연결 | **14** | 14 | ✅ |
+| ├ 공정 연결 전무(zero) | **7** | 7 | ✅ |
+| 14 실연결 prd_cd | **146·147·148·149·150·151·152·155·157·158·160·161·162·163** | 동일 14 | ✅ 전건 |
+| 7 무연결 prd_cd/nm | **153 명찰골드실버·156 지비츠·159 코스터·164 코롯토·165 포카코롯토·166 카라비너·171 지비츠★**(각 proc_links=0·uv_rows=3) | 동일 7(코롯토164·카라비너166 BLOCKED) | ✅ 전건 |
+| **B5** 21상품 option_items 행 | **0** | "현재 0행·선적재 선결" | ✅ |
+| component_prices.prd_cd 컬럼 | **부재**(0) | "prd_cd 부재·formula 간접" | ✅ |
+| PRF_CLR_ACRYL / PRF_COROTTO_ACRYL formula | **실재** | "formula 경유 간접" | ✅ |
+
+---
+
+## B4 search-before-mint — NO-GO → **GO**
+
+- **검증:** ref_param_json 신규 컬럼 철회·기존 dtl_opt 재사용이 라이브 실재 그릇으로 정당한지(신규 mint 0)·search-before-mint "0단 dtl_opt 재사용" 단계가 추가됐는지.
+- **증거:**
+  - `t_prd_product_option_items.dtl_opt` jsonb **라이브 실재**·**6행이 공정 param 선택값을 이미 저장**(전건 OPT_REF_DIM.04→PROC_000080 봉제 옵션·`{"유형":"봉미싱(7cm)","폭":7.0}`). 내가 1차에서 적발한 바로 그 그릇.
+  - 목표 UV `{"변형":"풀빼다"}`와 **키-값 jsonb 동형**·같은 의미축(공정 param 선택값). 의미 분리 불요 → 판정 (a) **재사용 가능·신규 mint 0** 정당.
+  - regspec-process §1·diagnosis-process §6.1·_routing-summary §13·_registration-master §5 전부 **search-before-mint 0단(dtl_opt 재사용 검증) 명시 추가**. rpmeta V-1 vessel-gap → **data-gap 격하** 일관 반영. ref-param-json-proposal.sql ALTER 철회.
+  - **dodge 0:** 신규 컬럼 철회를 회피 없이 6파일 전반 반영(ALTER 0·DROP COLUMN 위험 소멸·영향분석 갱신).
+- **판정:** **GO.** 1차 NO-GO 핵심(기존 jsonb 미평가)이 해소. dtl_opt 재사용이 라이브로 grounding되고 사다리 0단 명시됨. **4축 신규 mint = 0** 확정.
+
+## B2 진단 정확성 — CONDITIONAL-GO → **GO**
+
+- **검증:** UV 14 실연결/7 무연결 분기가 라이브 t_prd_product_processes와 일치하는지·"전건 UV" 과장이 철회됐는지.
+- **증거:**
+  - 라이브 분기 **14/7 전건 일치**: UV 보유 21 → PROC_000002 실연결 14·공정 연결 전무 7(with_any_process=14가 7의 무연결 입증). 14 prd_cd·7 prd_cd/prd_nm **명단 byte 일치**(dodge-hunt 전수 대조).
+  - 7 무연결 = 각 proc_links=0·uv_rows=3(7×3=21=PO-1b 행수와 정합). 코롯토164·카라비너166 = round-22 B-10 BLOCKED와 정합.
+  - PO-1 → PO-1a(14·~42행 즉시)/PO-1b(7·~21행 PROC_000002 링크 선행) 분기 전 파일 반영. B-PO-1 전제 = **14 실연결 한정**으로 보정. PO-1b 정체 신규 컨펌 큐 추가.
+- **판정:** **GO.** "전건 UV" 과장 철회·14/7 분기 라이브 전건 일치·명단 정확. 과장 0.
+
+## B5 등록 명세 실행가능성 — CONDITIONAL-GO → **GO**
+
+- **검증:** option_items 행 선적재가 FK 위상에 명시됐는지·가격 간접경로가 규명됐는지.
+- **증거:**
+  - **FK 위상 정정 grounding:** 21상품 option_items **0행** 라이브 확인 → "진짜 선결 = option_items 행 선적재(신규 컬럼 ALTER 아님)" 정당. PO-1a = ① option_items 행 선적재 → ② dtl_opt 이관 → ③ print_side 정규화·PO-1b = ⓪ PROC_000002 링크 선적재 추가. 순서 위반 시 고아 param 논거 타당.
+  - **가격 간접경로 규명:** `component_prices.prd_cd` **부재** 라이브 확인 → print_side는 단가행 직접 키 없음. 가격 결합 = `PRF_CLR_ACRYL`/`PRF_COROTTO_ACRYL` formula 경유 간접(실재 확인). regspec-printoption §2가 "단가행 byte 불변·colrcnt 무접촉·formula 분기 입력 골든 유지 3중 보장"으로 정밀 규명.
+  - **dodge 0:** 1차 적발 2건(목적지 행 부재·간접경로) 모두 회피 없이 라이브 grounding + 명세 반영.
+- **판정:** **GO.** option_items 행 선적재 FK 위상 명시·가격 간접경로 규명 완료. dry walk-through 성립(운영자가 선적재→이관→정규화 순서·가격 영향 경로 인지 가능).
+
+---
+
+## 종합 평결 (4축·재검증 후) — GO
+
+**1차 B4 NO-GO + B2 과장 + B5 보완 2건이 진단가·설계가 정정으로 전건 해소됐고, 정정 골격(dtl_opt 재사용·14/7 분기·행 선적재/간접경로)이 라이브와 셀 단위 일치(날조·dodge 0)함을 독립 재실측으로 확인했다.** B1~B6 4축 전 게이트 GO:
+
+| 게이트 | 1차(4축) | 최종(4축) |
+|--------|:--:|:--:|
+| B1 권위 충실성 | GO | **GO** |
+| B2 진단 정확성 | CONDITIONAL-GO(UV 전건 과장) | **GO**(14/7 분기 정정·전건 일치) |
+| B3 라우팅 타당성 | GO | **GO** |
+| **B4 search-before-mint** | **NO-GO**(ref_param_json↔dtl_opt 미평가) | **GO**(dtl_opt 재사용·신규 mint 0·0단 추가) |
+| B5 실행가능성 | CONDITIONAL-GO(목적지 행·간접경로) | **GO**(option_items 선적재·formula 간접 규명) |
+| B6 생성-검증 독립성 | GO(validator 적발 2건) | **GO**(정정 라이브 grounding·dodge 0) |
+
+**4축(사이즈·도수·인쇄옵션·공정) 기초코드 등록 명세 = GO.** 핵심: **4축 신규 mint = 0**(ref_param_json 신설 철회·기존 dtl_opt 재사용 grounding)·UV 14/7 분기 정확·option_items 행 선적재 FK 위상 명시·가격 formula 간접경로 규명. 실 적재(SZ-1 색오염 2·PO-1a 14·PO-1b 7 dtl_opt 이관·print_side 정규화)는 `dbm-axis-staged-load`/`dbm-load-execution` 인간 승인 후. FAIL 게이트 없음.
+
+### 잔존 미검증 (정직 — NO-GO 아님)
+
+- **컨펌 큐 5건**(AX-5 dtl_opt 이관 범위·B-PO-1 underbase[UV 14 한정]·PO-1b 정체[7 무연결 공정 연결]·AX-6 레이플랫·SZ-2 형상 칼틀) — 사용자/실무진 결정 큐·검증 대상 아님.
+- **SZ-2 형상+EA 칼틀 매칭·PR-2 레이플랫 연결 상품** — 라이브 칼틀/연결 실측 다음 회차(판정불가 정당).
+- **round-23 아크릴 골든값 byte 불변·option_items 행 적재 적정성** — dbmap 적재 트랙 권위(본 게이트는 print_side 정규화의 component_prices 미접촉·선적재 선결만 확인).
+- **webadmin UV 변형 입력 폼 적재경로** — 명세 "미상" 정직 표기(admin 위젯 미확인).
+
+### 첨부 — 라이브 SELECT 로그 (재검증·읽기전용)
+
+`information_schema.columns(dtl_opt·jsonb 전수·component_prices.prd_cd)` · `t_prd_product_option_items(dtl_opt 채움·OPT_REF_DIM.04 PROC_000080)` · `t_prd_product_print_options × t_prd_product_processes(UV 21→14/7 분기·명단)` · `t_prd_products(7 무연결 prd_nm·proc_links)` · `t_prc_price_formulas(PRF_CLR_ACRYL·PRF_COROTTO_ACRYL)`. 쓰기 0.

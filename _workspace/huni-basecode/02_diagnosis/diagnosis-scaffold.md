@@ -1,8 +1,31 @@
-# 진단 스캐폴드 보드 — 나머지 4축 (사이즈·도수·인쇄옵션·공정) 요약
+# 진단 요약 인덱스 — 4축 (사이즈·도수·인쇄옵션·공정)
 
-> **하네스** hbg Phase 2 진단가. **작성** 2026-06-18.
-> **지위:** 1순위(자재·카테고리)는 `diagnosis-material.md`·`diagnosis-category.md` 전수. 본 문서는 나머지 4축 **요약 보드**(라이브 행수 실측 + 결함 상태 + 라우팅 윤곽). 전수 진단은 후속 회차.
-> **라이브 실측:** 2026-06-18 읽기전용 SELECT(행수·SEED만). dbmap round-13·round-22 진단은 인용.
+> **하네스** hbg Phase 2 진단가. **작성** 2026-06-18 · **갱신** 2026-06-18(Phase 2 전수 진단 완료).
+> **지위:** 4축 **전수 진단 완료** → 각 축 전수 보드 = `diagnosis-{size,color,printoption,process}.md`. 본 문서는 그 **요약 인덱스**(4-way·상태·라우팅 윤곽 + 컨펌 해소 결과). 1순위(자재·카테고리)는 `diagnosis-material.md`·`diagnosis-category.md`.
+> **라이브 실측:** 2026-06-18 읽기전용 SELECT(행수·SEED·오염·param·FK 참조 전수). dbmap round-13·round-22·round-23 진단은 인용.
+
+---
+
+## ★ 컨펌 해소 결과 (D.2 — 라이브 직접 실측)
+
+| ID | 충돌/모호 | 라이브 실측 해소 |
+|----|-----------|------------------|
+| **C-PROC-1** | t_proc_processes 83 vs 84(열재단) | **102행·MAX PROC_000102**(이미 진화). **PROC_000084 열재단 실재**(del_yn='N'·family head). 83/84 논쟁 종결 |
+| **C-SIZ-2** | t_siz_sizes 500 vs 510 + round-23 구간차원 | **520행**. siz_width/siz_height는 siz 마스터엔 **없음** → `t_prc_component_prices`에 922행(round-23 구간차원 **라이브 COMMIT 확정**·좌표 채번 폐기) |
+| **C-PO-3** | print_options 166 vs 172 | **166행**(권위 일치·ref-csv 172는 del 전 stale) |
+| **C-CLR** (즉시 어긋남 게이트) | 5행 SEED·별색 혼입 시 즉시 어긋남 | **5행 정확·별색 혼입 0·colrcnt 혼입 0** → 게이트 통과(🟢) |
+
+## ★ 4축 상태 한눈 + 핵심 결함
+
+| 축 | t_* | 라이브 | 상태 | 핵심 결함 | 전수 보드 |
+|----|-----|:--:|:--:|-----------|-----------|
+| ② 사이즈 | t_siz_sizes | 520 | 🟡 | 색오염 2행(가격0참조·교정가능)·nonspec 25/275 채움(data-gap)·형상+EA 30행 판정불가 | `diagnosis-size.md` |
+| ③ 도수 | t_clr_color_counts | 5 | 🟢 | **결함 0**(SEED 정확·혼입 0) | `diagnosis-color.md` |
+| 인쇄옵션 | t_prd_product_print_options | 166 | 🔴 | **print_side에 UV 변형 enum 63행 오적재**(round-13 CONFIRMED). [B2] **14 UV 실연결·7 공정연결 전무** | `diagnosis-printoption.md` |
+| ⑤ 공정 | t_proc_processes | 102 | 🟢→🟡 | 마스터 오염 0(family·별색·열재단 정상)·param 선택값 = **기존 `option_items.dtl_opt` 재사용**(B4·신규 mint 0) | `diagnosis-process.md` |
+
+> **★Phase 2 1줄 요약:** 도수·공정 마스터 = 건전(오염 0). 실 결함 2건 = **인쇄옵션 print_side UV 오적재 63행(🔴)** + 사이즈 색오염 2행(가격 안전).
+> **★검증자 보완(B2·B4·라이브 재실측):** [B4] UV 변형 목적지 = **기존 `t_prd_product_option_items.dtl_opt` jsonb 재사용**(라이브 6행 실사용·`{"유형":"봉미싱(7cm)"}` 동형 입증) → ref_param_json 신규 mint **철회(0)**·rpmeta V-1 vessel-gap→**data-gap** 격하. [B2] UV 21상품 = **14 실연결 + 7 공정연결 전무**(PO-1a 즉시·PO-1b 연결선행 BLOCKED).
 
 ---
 
@@ -59,11 +82,12 @@
 | ③역공학 | UV=PROC_000002 param(OM-5)·별색=PROC_000007 — print_side에 금지 |
 | ④경쟁사 | (도수 축에 흡수) |
 
-**결함 상태(인용):**
-- **별색을 도수칸 금지·UV 변형을 print_side 금지**(OM-5). round-13 진단: 아크릴 print_side에 UV 오적재 전역(MISSING/오염).
-- **자재 .09 print_side 14행 유입 목적지**(본 진단 자재 보드) — 인쇄면(단면/양면/가로형/세로형)이 print_side로 축이동.
+**결함 상태(전수 진단 — `diagnosis-printoption.md`):** 🔴
+- **PO-1 print_side에 UV 변형 enum 63행 오적재**(라이브 실측): print_side ∈ {단면 62·양면 41·**풀빼다 21·배면양면 21·투명테두리 21**}. 후자 63행 = `PROC_000002`(UV) prcs_dtl_opt 변형 enum값. round-13 "UV 전역 오적재" **CONFIRMED 잔존**.
+- 대상 21상품 = **아크릴 굿즈**. [B2 정정] **14만 UV(PROC_000002) 실연결·7 공정연결 전무**(명찰골드153·지비츠156·코스터159·코롯토164·포카코롯토165·카라비너166·지비츠★171). front_colrcnt=CLR_000005(도수 정확)·**colrcnt 별색 혼입 0**(✅).
+- ★교정 무비용 아님(14상품 가격사슬 묶임). [B4 정정] 변형 목적지 = **기존 `option_items.dtl_opt` 재사용**(라이브 실재·신규 mint 0).
 
-**라우팅 윤곽:** 자재→print_side 14행 수신. UV/별색 위치 교정(round-13 인용). **컨펌:** OM-5(UV/별색 위치)·CONFIRM-DP-4(별색 proc_cd 정합).
+**라우팅 윤곽 [B2·B4 정정]:** 교정(변형→dtl_opt 이관 + print_side 정규화). **PO-1a 14 실연결=즉시**(그릇=dtl_opt 실재) / **PO-1b 7 무연결=PROC_000002 링크 선행**(정체 BLOCKED). ~~ref_param_json 신설~~ 철회. **컨펌:** B-PO-1(14 한정 화이트 underbase 일괄결정).
 
 ---
 
@@ -72,16 +96,17 @@
 | 4-way | 내용 |
 |-------|------|
 | ①권위 | 공정+인쇄방식(self-ref PROC_000001)+별색(PROC_000007)+prcs_dtl_opt JSON param |
-| ②라이브 | **102행·root 22·MAX PROC_000102 실측**(정답사전 84→102 진화·round-22 ⑤·round-23 신규 공정 적재). 자식 분포: PROC_000056(18)·033(16)·017(13)·007 별색(5)·001 인쇄(4) |
+| ②라이브 | **102행·MAX PROC_000102 실측**(정답사전 84→102 진화·round-22 ⑤·round-23 신규 공정 적재). family head 전건 정합(인쇄001·별색007·박033·제본017·완칼053/반칼054/스티커완칼055·열재단084). 신규 085~102 = per-product 인스턴스(전건 upr_proc_cd로 head 참조·위상 건전) |
 | ③역공학 | vessel-process-parameter(param 저장)·vessel-print-method-recipe(인쇄방식 레시피) |
 | ④경쟁사 | GAP-MAT-4 RP/WP 캐스케이드 제약(자재/사이즈→공정 disable) — 후니 constraints 거의 미적재(**빈칸 후보**) |
 
-**결함 상태(인용):**
-- **누락 지배**(round-13/round-22 ⑤): 봉제/보드/삼각대/미싱제본 자식 공정. round-22 ⑤=에폭시 PRD_000169 1건 COMMIT·봉제↔부착 6 경로Y·신규 mint3 BLOCKED. 라이브 MAX 102로 진화 = 일부 신규 공정 적재됨.
-- **MIS-LOADED 소수:** 봉제→부착 오연결(GP-C-06)·코팅=자재 오적재(스티커 8상품)·삼각대=자재→공정.
-- **자재명 코팅(공정) 흡수**(자재 보드 §5): `아트250+무광코팅` → 자재+⑤공정 분해(PROC_000015).
+**결함 상태(전수 진단 — `diagnosis-process.md`):**
+- **마스터 오염 0**(🟢): family head·별색 분리(008~012 clr_cd 없음)·열재단(084)·prcs_dtl_opt 스키마(UV 변형·오시 줄수·반칼 조각수) 전건 건전. param 비대화(구수별 별 proc) 없음.
+- **누락→대부분 적재됨**: 봉제(088)·부착(089)·에폭시(095)·미싱(086)·캘린더 제본(098~102) 라이브 신규 적재 확인(round-22 ⑤·round-23). MAX 102로 진화 = 누락 지배 → 해소 진행.
+- **실 결함 = PR-1 data-gap** [B4 정정]: 공정 param **선택값** 저장처 = **기존 `t_prd_product_option_items.dtl_opt`**(라이브 6행 실사용·`{"유형":"봉미싱(7cm)"}`). prcs_dtl_opt=스키마. **ⓒ data-gap**(그릇 실재·UV 변형 미적재) ← vessel-gap 오판 철회. PO-1 UV값 목적지 = dtl_opt(PO-1↔PR-1 합류).
+- **판정불가 PR-2**: 레이플랫 PROC_000025 권위=미운영(Q10) vs 라이브 del_yn='N'·use_yn='Y' 활성 → AX-6 컨펌.
 
-**라우팅 윤곽:** 신규 공정 등록(봉제/보드/미싱 — round-22 일부 진행). 자재→⑤ 축이동(코팅 분해). 캐스케이드 제약 빈칸(GAP-MAT-4·constraints). **컨펌:** AX-5(param 저장처)·AX-6(PUR)·AX-7(캐스케이드)·B-7(신규 공정).
+**라우팅 윤곽 [B4 정정]:** ~~신규등록 ref_param_json 컬럼~~ **철회(mint 0)** → dtl_opt 이관(data-gap 채움). 캐스케이드 제약 빈칸(GAP-PROC-2·constraints). 마스터 신규 공정 등록·교정·축이동 = **0**(이미 적재·건전). **컨펌:** AX-5(이관 범위)·AX-6(레이플랫). 자재명 코팅(공정) 흡수 자재 §5는 다음 회차.
 
 ---
 

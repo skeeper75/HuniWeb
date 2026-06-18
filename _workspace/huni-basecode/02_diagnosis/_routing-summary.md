@@ -127,3 +127,108 @@
 | 카테고리 재연결(BLOCKED 해소) | 302/304(★활성 상품 유일 main·del_yn='N' 유지) | 2 | **소프트삭제 금지·트리 부모 재연결**(부모 의미매칭 판정보강) |
 
 > **★등록 명세 §1 필수 보정:** "오염행/고아 삭제 = use_yn='N'" → **"= del_yn='Y'(+del_dt)"**. round-22도 use_yn으로 규정(03 §:127)했으나 del_yn 처리 기록 없음 → 본 보완이 권위 정정(중복 아님).
+
+---
+
+# ===== Phase 2 append: 4축(사이즈·도수·인쇄옵션·공정) 라우팅 집계 (2026-06-18) =====
+
+> 1차 자재·카테고리 집계(§0~§6)는 위에 보존. 아래는 4축 전수 진단(`diagnosis-{size,color,printoption,process}.md`)의 라우팅. 라이브 실측 2026-06-18.
+
+## 7. 컨펌 해소 (D.2 — 라이브 직접 실측)
+
+| ID | 해소 결과 |
+|----|-----------|
+| **C-PROC-1** | t_proc_processes = **102행·MAX PROC_000102**(이미 진화). **열재단 PROC_000084 실재**(del_yn='N'·family head). 83/84 escalate 불요(라이브 종결). |
+| **C-SIZ-2** | t_siz_sizes = **520행**. siz_width/height는 siz 마스터 **부재** → t_prc_component_prices에 922행(round-23 구간차원 **라이브 COMMIT 확정**·좌표 채번 폐기). |
+| **C-PO-3** | t_prd_product_print_options = **166행**(권위 일치·ref-csv 172 stale). |
+| **C-CLR**(즉시 어긋남 게이트) | t_clr_color_counts = **5행 정확·별색 혼입 0·colrcnt 혼입 0** → 게이트 통과(🟢). |
+
+## 8. 4축 라우팅 집계
+
+### 8.1 축이동 (값을 다른 축으로) [B2·B4 정정]
+
+| 목적지 | 대상 | 행수 | 결함 보드 | 컨펌 |
+|--------|------|:--:|----------|:--:|
+| print_side → 공정 param **선택값**(기존 `option_items.dtl_opt`·B4) | UV 변형 enum(**UV 실연결 14상품**) | **~42** | printoption PO-1a | **B-PO-1**(14 한정·그릇=dtl_opt 실재) |
+| print_side → 공정 param(연결 선행 후) | UV 변형(**공정연결 0 7상품**) | **~21** | printoption PO-1b | ★PROC_000002 링크 선결+정체 컨펌(코롯토164/카라비너166 BLOCKED) |
+| siz_nm 색·수량 → 옵션/자재·bundle | SIZ_000104/105 카드봉투 화이트/블랙(10장) | **2** | size SZ-1 | — (가격 cp 0참조·무비용) |
+| **4축 축이동 소계** | | **~65** | (1차 자재 89행과 별개) |
+
+> **★[B4] dtl_opt 재사용 판정 (a):** print_side UV 변형값 목적지 = 기존 `t_prd_product_option_items.dtl_opt` jsonb(라이브 6행 공정 param 실사용·`{"유형":"봉미싱(7cm)","폭":7.0}` 동형). **신규 ref_param_json mint 철회(0).** rpmeta V-1 vessel-gap → **data-gap** 격하(dtl_opt 미관측 오류).
+> **★[B2] UV 14/7 정정:** "21상품 전건 UV" 과장 → 라이브 재실측 = **14 PROC_000002 실연결 + 7 공정연결 전무**(명찰골드실버153·지비츠156·코스터159·코롯토164·포카코롯토165·카라비너166·지비츠★171).
+
+### 8.2 교정 (값 정규화) [B4 정정]
+
+| 대상 | 내용 | 행수 | 결함 보드 | 컨펌 |
+|------|------|:--:|----------|:--:|
+| print_side 정규화 | UV변형 dtl_opt 이관 후 단면/양면만 | ~63행(14 즉시·7 연결선행) | printoption PO-1a/b | dtl_opt 재사용(신규 그릇 불요) |
+| siz 색오염 정규화 | siz_nm="화이트165x115mm"→165x115 | 2 | size SZ-1 | — |
+
+### 8.3 신규 등록 [B4 정정 — ref_param_json mint 철회]
+
+| 대상 | 내용 | 수 | 결함 보드 | 권고 |
+|------|------|:--:|----------|------|
+| ~~ref_param_json jsonb 컬럼~~ **철회** | 기존 `option_items.dtl_opt` 재사용(라이브 실재·B4) | **0**(mint 철회) | process PR-1 | **신규 컬럼 불요.** dtl_opt 이관만(data-gap 채움) |
+| nonspec_* 채움 | 비규격 상품(실사/현수막) 입력UX 범위 | (data-gap·~250상품) | size SZ-3 | GAP-SIZ-1(② 축 확장 트랙·자재 아님) |
+| 캐스케이드 제약(constraints) | 자재/사이즈→공정 disable | 0(빈칸 후보) | process §4 | GAP-PROC-2(공정 축 확장 시) |
+| 형상축 SHAPE(V-12) | 형상 전용 base_code·shape_cd | 0(보류) | size §1 | GAP-SIZ-2(설계가 결정·1:1흡수는 NULL) |
+| nonspec_* 채움 | 비규격 상품(실사/현수막) 입력UX 범위 | (data-gap·~250상품) | size SZ-3 | GAP-SIZ-1(② 축 확장 트랙·자재 아님) |
+| 캐스케이드 제약(constraints) | 자재/사이즈→공정 disable | 0(빈칸 후보) | process §4 | GAP-PROC-2(공정 축 확장 시) |
+| 형상축 SHAPE(V-12) | 형상 전용 base_code·shape_cd | 0(보류) | size §1 | GAP-SIZ-2(설계가 결정·1:1흡수는 NULL) |
+
+### 8.4 삭제 / 정리
+
+| 라우팅 | 대상 | 수 | 권위 플래그 |
+|--------|------|:--:|------|
+| 도수 | 0(SEED 폐쇄·전건 활성) | 0 | — |
+| 공정 마스터 | 0(전건 del_yn='N'·use_yn='Y') | 0 | — |
+| 사이즈 폐기 siz | 이미 del_yn='Y' 65행(처리완료) | 0(신규) | del_yn='Y'(기처리) |
+
+## 9. 4축 전체 집계 (라우팅 유형별)
+
+| 라우팅 유형 | 4축 총 | 즉시 가능 | 컨펌/선결 의존 |
+|-------------|:--:|:--:|------|
+| **축이동** | **~65행** | 2(siz 색·가격안전) + ~42(UV 14상품·dtl_opt 실재) | ~21(UV 7상품 공정연결 선행·정체 BLOCKED) |
+| **교정** | print_side ~63 + siz 2 | siz 2 + UV 14상품(~42) | UV 7상품(~21·연결 선행) |
+| **신규 등록** | nonspec 채움(data-gap) only — **ref_param_json mint 철회(B4)** | 0 | nonspec(②확장)·SHAPE(보류)·constraints(빈칸) |
+| **삭제/정리** | **0**(도수·공정 건전·siz 기처리) | 0 | 0 |
+
+## 10. FK 위상 / 가격사슬 안전 (4축) [HARD]
+
+| 사실(라이브 실측) | 함의 |
+|-------------------|------|
+| siz 색오염 2행(104/105) **component_prices 참조 0** | SZ-1 교정 무비용(가격 파손 없음) |
+| print_side UV(14 실연결 + 7 무연결) = round-23 가격사슬·option 연결 | **PO-1 교정 무비용 아님** — [B4] 그릇=기존 dtl_opt 실재(신설 불요). 순서: ① UV 14상품 dtl_opt 이관 → print_side 정규화(즉시) / ② UV 7상품 PROC_000002 링크 선행 후 이관(정체 BLOCKED). 위반 시 변형 정보 손실 |
+| t_prc_component_prices.siz_cd CASCADE FK·round-22 ② 116siz 2,601행 | size↔option 기계적 삭제 절대 금지(AX-2·round-22 ② 종단 인용) |
+
+## 11. 리더 escalate (4축 — 컨펌 없이 어긋남 단정 금지)
+
+| ID | 항목 | 막힌 진단 | 권고 |
+|----|------|-----------|------|
+| **AX-5** [B4 정정] | 공정 param 선택값 저장처 — **기존 `option_items.dtl_opt` 재사용 확정**(신설 불요). 잔여=이관 범위·트리거 정합 | print_side UV값 이관 범위(14 즉시·7 연결선행) | dtl_opt 이관(컬럼 신설 철회) |
+| **B-PO-1** [B2 보정] | 화이트/클리어 underbase 귀속 — **UV 실연결 14상품 한정**(7 무연결은 연결 선행이 선행) | UV 풀빼다(화이트 발색)가 별색 PROC_000008인지 UV param인지 인쇄방식 분기 | 미회신 5시트(SK-1/SL-2/G-SL-2) 일괄결정·14상품 한정 적용 |
+| **PO-1b**(신규) | UV 공정연결 0 7상품(명찰골드153·지비츠156·코스터159·코롯토164·포카코롯토165·카라비너166·지비츠★171) | print_side에 UV 변형값 있으나 PROC_000002 연결 전무 | PROC_000002 링크 선결 + 정체 컨펌(코롯토/카라비너 round-22 BLOCKED) |
+| **AX-6** | 레이플랫 PROC_000025 미운영 vs 활성 | 라이브 del_yn='N'·use_yn='Y'(권위=미운영) | t_prd_product_processes 연결 상품 실측 + 실무진 컨펌 |
+| **AX-3**(해소) | 실사 비규격 좌표 vs 면적함수 | **라이브 COMMIT으로 해소** — siz_width/height 구간차원(cp 922행) 확정 | 재진단 불요 |
+| **SZ-2**(판정불가) | 형상+EA siz 30행 칼틀존재 여부 | 상품별 칼틀 매칭 미실측 | 다음 회차 t_prd_product_sizes 전수 |
+
+> **권위 모호로 진단 막힌 4축 = AX-5·B-PO-1·AX-6(3건) + 판정불가 SZ-2.** AX-3는 라이브 COMMIT으로 해소. 큐레이터 되돌림 보고 + 리더 escalate(서브에이전트 직접 질문 금지).
+
+## 12. 다음(설계가) 통지 요약 — 4축 [B2·B4 정정]
+
+- **신규등록:** ~~ref_param_json mint~~ **철회(B4)** → 기존 `option_items.dtl_opt` 재사용. nonspec data-gap 채움(②확장) + SHAPE/constraints(보류·빈칸 후보)만.
+- **교정/축이동:** print_side UV **14상품(~42행) 즉시**(dtl_opt 이관·그릇 실재) + **7상품(~21행) 공정연결 선행**(정체 BLOCKED) + siz 색오염 2행(즉시·가격 안전).
+- **삭제/정리 0** — 도수·공정 마스터 건전.
+- **재진단 금지(인용):** round-13 print_side UV(잔존 확인)·round-22 ②사이즈/⑤공정 종단·round-23 구간차원/별색 dedup·C-PROC-1 102행 열재단.
+
+---
+
+## 13. ★검증자 적발 해소 (B4 NO-GO·B2 과장 — 라이브 재실측 2026-06-18)
+
+| 항목 | 적발 | 라이브 재실측 해소 | 라우팅 변화 |
+|------|------|---------------------|-------------|
+| **B4** dtl_opt 재실측 (search-before-mint 누락) | 우리가 신규 ref_param_json mint 제안했으나 `t_prd_product_option_items.dtl_opt` jsonb 이미 실재·공정 param 6행 실사용 | **판정 (a) 재사용 가능** — dtl_opt `{"유형":"봉미싱(7cm)","폭":7.0}` ↔ 목표 `{"변형":"풀빼다"}` 동형. UV 변형 담을 수 있음 | **신규 mint 0**(ref_param_json 철회). rpmeta V-1 vessel-gap → **data-gap** 격하 |
+| **B2** UV 21상품 과장 | "전건 UV PROC_000002"라 했으나 14만 실연결 | **14 UV 실연결 / 7 공정연결 전무** 정정(t_prd_product_processes 조인 실측) | PO-1 → **PO-1a(14 즉시)·PO-1b(7 연결선행 BLOCKED)** 분기. B-PO-1 전제 = 14 한정으로 보정 |
+
+> **재실측 근거(읽기전용 SELECT):** ① jsonb 컬럼 = `t_proc_processes.prcs_dtl_opt`(스키마)·`t_prd_product_option_items.dtl_opt`(인스턴스·6행)·`t_prd_template_selections.dtl_opt`. ② UV 14/7 = print_side UV값 보유 21상품 × PROC_000002 EXISTS + total_proc_links 집계. **쓰기 0.**
+- **🟢 결함 0 축:** 도수(SEED 정확·혼입 0)·공정 마스터(family·별색·열재단·param 스키마 건전).

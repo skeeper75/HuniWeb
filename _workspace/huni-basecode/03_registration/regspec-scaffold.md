@@ -1,85 +1,81 @@
-# 등록 명세 스캐폴드 — 나머지 4축 (사이즈·도수·인쇄옵션·공정)
+# 등록 명세 인덱스 — 4축 (사이즈·도수·인쇄옵션·공정)
 
-> **하네스** hbg Phase 3 설계가. **작성** 2026-06-18.
-> **지위:** 1순위(자재·카테고리)는 `regspec-material.md`·`regspec-category.md` 전수. 본 문서는 나머지 4축 **명세 틀**(scaffold) — 진단 스캐폴드(`diagnosis-scaffold.md`) 윤곽 + 자재 축이동 수신 정합. 전수 등록 명세는 후속 회차.
-> **공통 채번/적재경로 규약:** `regspec-material.md §0` 인용.
-
----
-
-## 0. 4축 라이브 행수 (진단 스캐폴드 §0 인용·2026-06-18)
-
-| 축 | t_* | 라이브 행수 | 등록 명세 상태 |
-|----|-----|:--:|------|
-| ② 사이즈 | `t_siz_sizes` | 520 | 자재 축이동 29행 수신 그릇(틀) |
-| ③ 도수 | `t_clr_color_counts` | 5(SEED 폐쇄) | 신규/교정 0(틀만) |
-| 인쇄옵션 | `t_prd_product_print_options` | 166 | 자재 print_side 14행 수신 그릇(틀) |
-| ⑤ 공정 | `t_proc_processes` | 102 | 신규 공정 등록 틀(코팅 분해·봉제) |
+> **하네스** hbg Phase 3 설계가. **갱신** 2026-06-18(2차 회차 — scaffold 틀 → **전수 명세 요약 인덱스**로 승격).
+> **지위:** 1순위(자재·카테고리)는 `regspec-material.md`·`regspec-category.md` 전수. 본 4축은 `regspec-{size,color,printoption,process}.md` 전수 완성 → 본 문서는 **요약 인덱스**.
+> **공통 채번/적재경로 규약:** `regspec-material.md §0`·`_registration-master.md §1` 인용.
 
 ---
 
-## ② 사이즈 등록 명세 틀 (`t_siz_sizes`)
+## 0. 4축 라이브 행수 (2026-06-18 라이브 실측)
 
-| 명세 단위 | 내용(틀) |
-|-----------|---------|
-| **대상 t_* + 코드값** | `t_siz_sizes` siz_cd=`SIZ_NNNNNN`(MAX+1) · 비치수=`t_siz_nonspec_sizes` nsiz_cd=`NSIZ_NNNNNN`(신규 마스터·goods-pouch-nondim-size DDL) |
-| **올바른 의미** | 물리 치수만(작업/재단 이중축). 색·형상·수량·출력판형 인코딩 금지(OM-1). |
-| **수신(자재 축이동)** | 자재 .09 shape 18 + size 11 = **29행 수신**(regspec-material §3.1/§3.2). 치수보유→siz·비치수→nondim 마스터·형상 분류→shape_cd(SHAPE 코드). |
-| **search-before-mint** | 치수 siz=기존 그릇. 비치수=신규 마스터 정당(work/cut NULL 라벨 0건 입증·goods-pouch-nondim-size §2). 형상=shape_cd 컬럼(기존 junction 재사용·테이블 0). |
-| **FK 위상** | 비치수 = NONDIM_SIZE_KIND 코드행 → t_siz_nonspec_sizes·연결 DDL → 라벨/연결 적재. SHAPE = 코드행 + shape_cd 컬럼 DDL 선행. |
-| **적재경로** | `pvEdit(prd_cd, sizes)`. 비치수/형상 컬럼 = **DDL 적용 후 catalog 모델 노출(현재 미상)**. |
-| **영향분석** | **★기계적 size 삭제 금지**(component_prices 116siz 2,601행 CASCADE·전부 가격종속·round-22 ② CORRECT 반증). 자재 수신은 신규 추가(기존 siz 무손상). nonspec NULL=data-gap(GAP-MAT-1). |
-| **컨펌** | AX-2(size→option 사슬 보존)·AX-3(실사 비규격 좌표 vs 면적함수). |
+| 축 | t_* | 라이브 행수 | 등급 | 전수 명세 |
+|----|-----|:--:|:--:|------|
+| ② 사이즈 | `t_siz_sizes` | 520 | 🟡 | `regspec-size.md` |
+| ③ 도수 | `t_clr_color_counts` | 5(SEED 폐쇄) | 🟢 | `regspec-color.md` |
+| 인쇄옵션 | `t_prd_product_print_options` | 166 | 🔴 | `regspec-printoption.md` |
+| ⑤ 공정 | `t_proc_processes` | 102 | 🟡 | `regspec-process.md` |
 
 ---
 
-## ③ 도수 등록 명세 틀 (`t_clr_color_counts`) 🟢
+## 1. 축별 등록 명세 요약 (1줄)
 
-| 명세 단위 | 내용(틀) |
-|-----------|---------|
-| **대상 t_* + 코드값** | `t_clr_color_counts` — **5행 폐쇄 SEED**(CLR_000001~005·0~4도). 신규 발급 없음. |
-| **올바른 의미** | 잉크 채널수 0~4. 별색=공정(PROC_000007·clr_cd=NULL)으로 분리(정상). |
-| **수신(자재 축이동)** | 자재 .10 잉크색 8행 = **수신 여부 컨펌(AX-1)**. 도수=CMYK 채널수 SEED라 잉크색 7종 부적합 가능 → 별색공정/자유옵션 유력. |
-| **search-before-mint** | SEED 폐쇄 — 신규 코드행 0. 잉크색은 도수 아닐 가능성(채널수≠색). |
-| **FK 위상** | 신규 0. |
-| **적재경로** | (해당 시) — 잉크색은 도수 칸 부적합 → regspec-material §4.3 별색공정/옵션 분기 우선. |
-| **영향분석** | 결함 없음(🟢). 별색 분리 정상(라이브 SEED 무변형 실측). |
-| **컨펌** | AX-1(잉크색 귀속·도수 부적합 판단). |
+| 축 | 핵심 실 조치 | 신규 mint | FK 위상 | 컨펌 |
+|----|-------------|:--:|------|------|
+| ② **사이즈** 🟡 | SZ-1 색오염 2행 교정(siz_nm 정규화·무비용·가격 0참조) | 0 | 색/수량 축이동 → siz_nm UPDATE(삭제 아님) | SZ-2 |
+| ③ **도수** 🟢 | **0건**(폐쇄 SEED·정상·빈 라우팅) | 0 | N/A | 없음 |
+| **인쇄옵션** 🔴 | PO-1 UV 변형 63행 축이동(print_side→**기존 dtl_opt**·PO-1a 14/PO-1b 7) | 0(dtl_opt 재사용·B4) | **★option_items 행/PROC 링크 선적재 → 축이동** | B-PO-1(14)·PO-1b 정체 |
+| ⑤ **공정** 🟡 | **기존 dtl_opt 재사용**(param 선택값 채움·신규 컬럼 철회·B4) | 0(data-gap) | option_items 행 적재 → dtl_opt 채움 | AX-5(이관 범위)·AX-6 |
 
 ---
 
-## (인쇄옵션) 등록 명세 틀 (`t_prd_product_print_options`)
+## 2. ★ FK 위상 핵심 — 기존 dtl_opt 재사용·행 선적재 [HARD·B4·B5]
 
-| 명세 단위 | 내용(틀) |
-|-----------|---------|
-| **대상 t_* + 코드값** | `t_prd_product_print_options`(opt_id PK·print_side 5종 도메인·166행). OPT_REF_DIM.06(도수=opt_id NOT clr_cd). |
-| **올바른 의미** | 인쇄면 도수(단/양면·앞뒷면 color count). **별색/UV는 print_side 금지**(OM-5). |
-| **수신(자재 축이동)** | 자재 .09 print_side 14행 = **수신**(regspec-material §3.4). 단면/양면/가로형/세로형 → print_side. |
-| **search-before-mint** | 기존 그릇 PASS(print_side 5종·166행). 신규 0. "양면유광"의 유광=코팅(공정) 분해 검토. |
-| **FK 위상** | print_option 등록 → 자재 BOM 재배선 → .09 print_side use_yn='N'. |
-| **적재경로** | `pvEdit(prd_cd, print_options)`. |
-| **영향분석** | UV/별색 위치 교정(round-13 아크릴 print_side에 UV 오적재 전역). 자재 수신은 즉시 가능(컨펌 무관). |
-| **컨펌** | OM-5(UV/별색 위치)·CONFIRM-DP-4(별색 proc_cd 정합). |
+```
+[목적지 = 기존 t_prd_product_option_items.dtl_opt (신규 컬럼 ALTER 아님·B4)]
+[PO-1a UV 14 실연결 — 즉시]
+ ① 해당 14상품 option_items 행 선적재 (현재 0행·B5)   ← 진짜 선결
+ ② UV 변형값을 기존 dtl_opt로 이관 ({"변형":"풀빼다"} 등)
+ ③ print_side를 단면/양면 정규화(UPDATE)
+[PO-1b UV 7 무연결 — 공정 링크 선행]
+ ⓪ PROC_000002 product_processes 링크 선적재 + 정체 컨펌(코롯토164/카라비너166)
+ ①~③ 이후 동일
+   ※ 행/링크 선결 위반 시 고아 param·변형 구분 소실 → round-23 아크릴 가격사슬 손실(formula 간접·골든 불변)
+```
 
----
-
-## ⑤ 공정 등록 명세 틀 (`t_proc_processes`) 🟡
-
-| 명세 단위 | 내용(틀) |
-|-----------|---------|
-| **대상 t_* + 코드값** | `t_proc_processes` proc_cd=`PROC_NNNNNN`(라이브 MAX 102·MAX+1). self-ref PROC_000001(인쇄방식)·별색 PROC_000007·prcs_dtl_opt JSON param. |
-| **올바른 의미** | 공정+인쇄방식+별색+param. 봉제/보드/삼각대/미싱제본 자식 공정 누락 지배. |
-| **수신(자재)** | 자재명 코팅 흡수 분해(regspec-material §5): `아트250+무광코팅`→자재+⑤공정(무광 PROC_000015). 코팅=공정. |
-| **신규 등록** | 봉제/보드/미싱 신규 공정(round-22 ⑤ 일부 진행·에폭시 PRD_000169 COMMIT·봉제↔부착 6 경로Y·신규 mint 3 BLOCKED). 캐스케이드 제약(GAP-MAT-4·constraints 빈칸). |
-| **search-before-mint** | 신규 공정 코드행=PROC mint(정당·누락). 열재단 PROC_000084 등 기제안(heat-cut-process-proposal). param=prcs_dtl_opt JSON 슬롯(컬럼 재사용). 캐스케이드=constraints.logic JSONLogic(기존 그릇). |
-| **FK 위상** | base_codes → proc(self-ref 부모 먼저) → product_processes. |
-| **적재경로** | `pvEdit(prd_cd, processes)`. 신규 공정 코드는 `tcodbasecodes`/공정 마스터. |
-| **영향분석** | MIS-LOADED 소수(봉제→부착 오연결 GP-C-06·코팅=자재 오적재 스티커 8상품·삼각대=자재→공정). |
-| **컨펌** | AX-5(param 저장처)·AX-6(PUR)·AX-7(캐스케이드)·B-7(신규 공정). |
+- **★[B4] 신규 ref_param_json 컬럼 신설 철회** — `t_prd_product_option_items.dtl_opt` jsonb 라이브 실재(6행 실사용)·재사용. vessel-gap→data-gap. **진짜 선결 = option_items 행 적재(PO-1a)·PROC_000002 링크(PO-1b)**(B5).
+- 사이즈 SZ-1은 독립(색 0참조·무비용). 도수는 변경 0.
 
 ---
 
-## 후속 회차 주의 (전 축)
+## 3. 4축 건수 집계
+
+| 축 | 교정 | 축이동 | 신규 컬럼 | 소프트삭제 | 판정불가(컨펌) |
+|----|:--:|:--:|:--:|:--:|:--:|
+| ② 사이즈 | 2(SZ-1) | (색/수량→타축·material) | 0 | 0 | 30(SZ-2 형상+EA) |
+| ③ 도수 | 0 | 0 | 0 | 0 | 0 |
+| 인쇄옵션 | (63 정규화) | 63(PO-1a 14 / PO-1b 7·→dtl_opt) | 0 | 0 | 0 |
+| ⑤ 공정 | 0 | 0 | **0(dtl_opt 재사용·B4)** | 0(AX-6 보류) | 1(PR-2 레이플랫) |
+| **4축 계** | **2 즉시** | **63(행/링크 선결 의존)** | **0** | **0** | **31** |
+
+> **★4축 신규 그릇 = 0**(B4·ref_param_json 컬럼 신설 철회·기존 dtl_opt 재사용·data-gap). 신규 코드행·컬럼·테이블 0. 자재 수신 그릇(비치수 마스터·SHAPE 코드)은 material §3 처리(중복 명세 금지).
+
+---
+
+## 4. data-gap / dbmap 위임 (본 회차 등록 0)
+
+| 항목 | 축 | 위임처 |
+|------|----|--------|
+| nonspec 25/275 채움(SZ-3) | 사이즈 | dbmap 적재 트랙(그릇 있음·미적재) |
+| 캐스케이드 제약(GAP-PROC-2) | 공정 | dbmap CPQ constraints(constraints.logic 기존 그릇) |
+| 자재 29행 수신(siz/shape/nondim) | 사이즈 | `regspec-material.md §3.1/§3.2`(material 처리) |
+| 자재 14행 수신(print_side) | 인쇄옵션 | `regspec-material.md §3.4` |
+| 아크릴 두께 분리(AC-2) | 사이즈 인접 | dbmap 31_acrylic |
+
+---
+
+## 5. 후속 회차 주의 (전 4축)
 
 1. **라이브 재실측 필수** — ⑤공정 84→102·②사이즈 510→520 진화. 후속 진단 착수 시 stale 위험.
-2. **자재 축이동 수신 정합** — ②(29행)·print_side(14행)·⑤(코팅)·③(잉크색 AX-1)이 자재 보드 라우팅의 목적지. 등록 명세 시 수신분 FK 위상(본체 선적재 → 목적지 적재 → 오염 use_yn='N') 준수.
-3. **추정 0** — 권위 침묵분은 가설+컨펌ID 분리.
+2. **[B4·B5] 행 선적재 강제** — 인쇄옵션 PO-1 적재 시 신규 컬럼 ALTER 아님(기존 dtl_opt). 진짜 선결 = option_items 행 적재(PO-1a)·PROC_000002 링크(PO-1b)·순서 위반 = 고아 param.
+3. **기계적 size 삭제 금지** — component_prices CASCADE(116siz 2,601행)·round-22 ② CORRECT 반증.
+4. **추정 0** — 권위 침묵분(SZ-2·AX-5·AX-6·B-PO-1·PO-1b 정체)은 가설+컨펌ID 분리·평이한 한국어 질문 첨부.

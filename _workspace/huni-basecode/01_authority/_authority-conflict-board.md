@@ -50,11 +50,64 @@
 
 ---
 
+---
+
+# ===== 2차 회차 append: 사이즈·도수·인쇄옵션·공정 4축 (2026-06-18) =====
+
+> 1차 보드(A~D, 자재·카테고리)는 위에 보존. 아래는 4축 정답 사전(`axis-authority-{size,color,printoption,process}.md`) 작성 중 발견된 충돌/모호/빈칸.
+
+## A2. 권위 충돌 (스냅샷/문서 간 불일치) — 4축
+
+| ID | 충돌 내용 | 자료 A | 자료 B | 영향 축 | 진단 영향 | escalate |
+|----|-----------|--------|--------|---------|-----------|----------|
+| **C-PROC-1** | **`t_proc_processes` 행수 83 vs 84**(열재단 PROC_000084 존재 여부) | `schema-design-intent-map §0`(2026-06-06): **83행**(라이브 MAX 000083) | `32_axis-staged-load/01 §0`(2026-06-16): **84행·22 공정유형**. CLAUDE.md §7 = 열재단 PROC_000084 컨펌해소 기록 | ⑤ 공정 | PROC_000084(열재단) 라이브 실재 여부가 갈림. 진단가가 "MAX 코드" 기준 어긋남 판정 시 흔들림 | 라이브 `t_proc_processes` 재실측(읽기전용 SELECT) — 83 vs 84 + 열재단 행 확정 |
+| **C-SIZ-2** | **`t_siz_sizes` 행수 500 vs 510** | `schema-design-intent-map §0`: **500**(2026-06-06 재실측, ref-csv 497) | `32_axis-staged-load/01 §2`: **510**(del 53·impos_yn=Y 79). round-23 신안 siz_width/height 구간 차원 COMMIT 반영분 | ② 사이즈 | round-23 면적매트릭스 COMMIT(siz_width/height 추가·좌표 채번 변동) 후 현재 행수가 500과 다를 수 있음 | 라이브 현재 행수 + siz_width/height 컬럼 채움 상태 재확인 |
+| **C-PO-3** | **`t_prd_product_print_options` 행수 166 vs 172** | `schema-design-intent-map §0`: **166**(2026-06-06) | `ref-csv`: 172(del 6) | (인쇄옵션) | 미미(del 반영분) — 진단 영향 낮음 | 행수 권위=166(재실측). 추가 확인 불요 |
+
+## B2. 권위 모호 / 빈칸 (엑셀 침묵 — 도메인 유추만) — 4축
+
+| ID | 모호 항목 | 가설 | 출처 | 컨펌 질문 | 확정도 |
+|----|-----------|------|------|-----------|--------|
+| **AX-1** (재게시) | 잉크색(만년스탬프 7색·볼펜색) 귀속 | 별색공정 vs 자유옵션 vs 도수. **도수 칸은 거의 아님**(CMYK 채널수 아님) | `schema-design-intent-map §5.5`·`01 §3.3` · ③도수 사전 §4 | "만년스탬프 잉크색 7종은 별색공정인가 자유선택옵션인가?(도수는 배제)" | 가설 |
+| **AX-3** (재게시) | 실사/현수막 비규격 사이즈 좌표 vs 면적함수 | 입력UX=nonspec_* / 가격=포스터사인 이산 면적매트릭스. round-23 신안=siz_width/height 구간 차원(좌표 채번 폐기) | OM-3·`schema-relationship-analysis §5` · [[dbmap-area-matrix-wh-dimension]] | "실사 비규격 가격은 좌표 siz 채번인가 siz_width/height 구간 차원인가?(라이브 진화 반영 확인)" | 가설(라이브 COMMIT됨) |
+| **AX-5** (재게시) | 공정 param 선택값 저장처(OM-7/GAP-PARAM) | `t_prd_product_option_items.ref_param_json` 신규 jsonb 컬럼(미구현) | OM-7 · `vessel-process-parameter §2`(`ref-param-json-proposal.sql`) | "타공 구수·오시 줄수 등 공정 param 선택값을 ref_param_json 신규 컬럼으로 신설하나, prcs_dtl_opt로 충분한가?" | 컨펌(저장처 미구현) |
+| **AX-6** (재게시) | 제본 PUR(PROC_000020) vs 레이플랫(PROC_000025) | 후니 운영=PUR만, 025=미운영 마스터 | `process-recipe-tree §3.3`·Q10 | "PROC_000025 레이플랫은 미운영 마스터인가? 라이브 잔존 시 어긋남인가 정상 SEED인가?" | 가설 |
+| **B-PO-1** | 화이트/클리어 underbase 귀속(투명·홀로 소재) | 별색공정 PROC_000008(디지털/실사) vs UV변형 PROC_000002 풀빼다(UV). print_option·자재 아님 | `schema-design-intent-map line 476`(SK-1/SL-2/G-SL-2 일괄결정 후보)·`01 §5.3` | "화이트별색 투명 underbase는 별색공정으로 일괄 확정하나?(미회신 5시트 SK-1/SL-2/G-SL-2)" | 가설(일괄결정 후보) |
+
+## C2. 경쟁사 갭헌팅 후보 — 4축 (후니 빈칸 후보 — 도입은 설계가/사용자 결정)
+
+> 경쟁사가 가진 정답 분류축이 후니 권위에 **없거나 약한** 것만. 후니가 흡수·능가하는 축은 갭 아님(제외). naming/codes 유입 금지.
+
+| ID | 경쟁사/표준 축 | 후니 현황 | 갭 판정 | 출처 | 도입 권고 |
+|----|----------------|-----------|---------|------|-----------|
+| **GAP-SIZ-1** | WowPress `non_standard:0/1`+`req_width/height`·RP `MIN/MAX_CUT` 비규격 슬롯 | 후니 `nonspec_*` 컬럼 **실재하나 NULL**(미채움) | **data-gap**(그릇 있음·미적재) | `01 §2.4` 사이즈 벤치마크 | 사이즈 축 확장 시 채움. 그릇 부재 아님 |
+| **GAP-SIZ-2 (=V-12)** | RP `Shape`(shape_info enum SQ/CL/EL/RC/FR·형상↔칼틀 1:多 게이팅) | 후니 형상 전용 컬럼/테이블/base_code enum **3-레벨 전건 0건**(라이브 실측) | **vessel-gap**(축 부재·신규 그릇) | `vessel-shape-axis §1` G-SK-2 | 최소 그릇=SHAPE base_code 1 + `shape_cd` 컬럼 2(테이블 mint 0). **1:1 흡수 카테고리는 shape_cd NULL**. 도입=설계가 결정 |
+| **GAP-PROC-1 (=V-1)** | RP PCS(`PCS_DTL_COD`+`QTY_INPUT_YN`)·CIP4 Process+Parameter 노드 | 후니 prcs_dtl_opt=스키마 보유·선택값 저장 `ref_param_json` **미구현** | **그릇 빈칸**(스키마 있음·인스턴스 슬롯 없음) | `vessel-process-parameter` · OM-7 | jsonb 컬럼 1개 신설(`ref-param-json-proposal.sql` 재사용·mint 0). AX-5 컨펌 |
+| **GAP-PROC-2** | RP `disable_pcs`·WP `rst_awkjob` 캐스케이드 제약(자재/사이즈→공정 disable) | 후니 `t_prd_product_constraints`(JSONLogic) 거의 미적재 | **빈칸 후보**(공정 축 약점) | `01 §5.4` 흡수판정·AX-7 | 공정 축 확장 시 검토. 후니 공정 모델 자체는 RP/WP/JDF 흡수·능가 |
+| (제외) | RP `dosu`+`PRT_WHT`·WP `colorno`+`addtype`·CIP4 ColorantControl(Process/Spot 분리) | 후니 도수(CLR)/별색(PROC_000007) 분리 | **흡수·능가**(CIP4와 정확히 동형) | `01 §3.4·§3.6` | 갭 아님 — 표준이 후니 분리 검증 |
+| (제외) | RP/WP 인쇄방식 1급 게이팅 | 후니 인쇄방식=공정 행(PROC_000002~006)+제약 게이팅 | **흡수**(조건부·1급화 보류) | `vessel-print-method-recipe` | 갭 아님 — 강제 1급화 금지(메모리 권위) |
+
+> **갭헌팅 결론(4축):** ① 도수 모델은 CIP4/경쟁사를 **흡수·능가**(갭 0) ② 사이즈·인쇄옵션도 그릇은 충분 — 실 갭은 사이즈 **data-gap**(nonspec NULL) + **형상축 vessel-gap**(V-12·도입 보류 권장) ③ 공정은 **param 인스턴스 슬롯 빈칸**(V-1·AX-5)과 **캐스케이드 제약 빈칸**(GAP-PROC-2). **4축 결함은 대부분 모델 부재가 아니라 오염 적재·미적재**(별색→도수칸·UV→print_side·param 비대화).
+
+---
+
 ## D. 진단가에게 — 컨펌 없이 "어긋남" 판정하면 안 되는 항목
+
+### D.1 1순위 축(자재·카테고리)
 
 1. **C-MAT-1** — MAT_TYPE 라벨/행수가 미확정. 자재 mat_typ_cd 어긋남 판정 전 라이브 재실측 + 라벨 확정 필수.
 2. **AX-1 잉크색** — 도수/별색/옵션 셋 중 정답 미확정. 만년스탬프 잉크색 자재 오적재를 어느 축으로 교정할지 컨펌 전 보류.
 3. **C-CAT-1** — 명함/상품권/단품형 고아의 정상노드 미확인. 재연결 대상 확정 전 BLOCKED.
 4. **B-MAT-3 / AC-2** — 비소재 자재행 처리·두께 분리는 **가격사슬·FK 위상 의존**(기계적 삭제 금지). 교정방향은 확정이나 실행은 컨펌.
+
+### D.2 2차 축(사이즈·도수·인쇄옵션·공정)
+
+5. **C-PROC-1** — `t_proc_processes` 83 vs 84(열재단 PROC_000084). MAX 코드·열재단 행 어긋남 판정 전 라이브 재실측 필수.
+6. **C-SIZ-2** — `t_siz_sizes` 500 vs 510 + round-23 siz_width/height 구간 차원 COMMIT 반영. 사이즈 행수·면적 차원 어긋남 판정 전 현재 라이브 확인.
+7. **AX-3** — 실사 비규격 사이즈 가격이 좌표 채번인가 siz_width/height 구간 차원인가(라이브 COMMIT됨). 진단 기준=라이브 현재 모델 확인 후.
+8. **AX-5 / B-PO-1** — 공정 param 선택값 저장처(ref_param_json 미구현)·화이트 underbase 귀속(별색 일괄결정 후보). param 비대화·underbase 오적재 판정은 가설 확정 전 보류.
+9. **C-CLR(정상 확인)** — `t_clr_color_counts` 5행은 고정 SEED(충돌 없음). 6행 이상이거나 별색이 섞이면 **즉시 어긋남**(컨펌 불요·HARD).
+
+> **모두 리더에게 escalate** — 사용자에게 직접 묻지 않는다(서브에이전트 금지). 정답 사전 완료는 `hbg-basecode-diagnostician`에 파일 경로로 통지.
 
 > **모두 리더에게 escalate** — 사용자에게 직접 묻지 않는다(서브에이전트 금지). 정답 사전 완료는 `hbg-basecode-diagnostician`에 파일 경로로 통지.
