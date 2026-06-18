@@ -1,0 +1,48 @@
+---
+name: dbm-category-mapping
+description: 후니프린팅 MAP 시트 검증(round-24 1단계) 결과를 받아, 카테고리(t_cat_categories)와 실제 상품(t_prd_products)을 실제로 매핑하는 설계 방법론 스킬(round-24 2단계). dbm-category-audit이 산출한 매칭 매트릭스·출시상태 3분류를 입력으로, ① MAP 1차/하위 카테고리를 라이브 t_cat_categories 노드에 매핑(신규 노드 필요분·고아 정리 round-22 ⑥ 정합) ② 각 실상품(prd_cd)을 올바른 카테고리(cat_cd)에 귀속(다중분류 허용·별칭 교차참조 처리) ③ 정상등록가능(✅) 상품 우선 매핑, 옵션부족(🟡)·미출시(❌)는 라우팅·보류 표기하는 카테고리-상품 매핑 명세를 설계한다. search-before-mint(기존 cat_cd로 표현 가능하면 신규 금지)·FK 위상(카테고리 선적재→상품 귀속)·코드 채번 규칙(MAX+1·separator '_')을 준수한다. DB 직접 적재(COMMIT)는 하지 않고 매핑 명세 + 적재순서까지만 — 실 적재는 인간 승인. '카테고리 매핑', '카테고리 상품 매핑', '상품 카테고리 귀속', 'cat_cd 매핑', '카테고리 노드 매핑', '다중분류 매핑', 'round-24 2단계', '카테고리 매핑 다시', '매핑 설계' 작업 시 반드시 이 스킬을 사용. MAP 검증·출시상태 분류(1단계)는 dbm-category-audit, CPQ 옵션 매핑은 dbm-cpq-option-mapping, 실 적재는 dbm-load-execution이 담당하므로 그 작업에는 트리거하지 않는다.
+---
+
+# dbm-category-mapping — 카테고리↔상품 매핑 설계 방법론 (round-24 2단계)
+
+1단계(`dbm-category-audit`)에서 검증된 카테고리 분류와 상품 매칭·출시상태를 받아, **라이브
+카테고리 노드(t_cat_categories)와 실상품(t_prd_products)의 실제 매핑 명세**를 설계한다.
+
+## 1. 입력 (1단계 산출 재사용·재유도 금지)
+
+- `35_category-map/02_matching-matrix.md` — MAP 엔트리 × 데이터시트 × 라이브 prd_cd.
+- `35_category-map/03_release-status.md` — 출시상태 3분류(✅/🟡/❌).
+- `35_category-map/04_unmatched-board.md` — 미매칭 양방향 보드.
+- 라이브 `t_cat_categories` 현재 트리(read-only).
+
+## 2. 두 레이어 매핑
+
+**레이어 A — 카테고리 노드 매핑 (MAP IA → t_cat_categories)**
+- MAP 1차 카테고리(11) + `▶︎`하위분류 → 라이브 `t_cat_categories` 노드에 대응.
+- 기존 노드로 표현 가능하면 재사용(**search-before-mint**). 부족분만 신규 노드 제안.
+- round-22 ⑥ 고아 노드 진단([[dbmap-axis-staged-load-round22]])과 정합 — 고아/중복 노드는 정리 라우팅(여기서 삭제 안 함).
+- 다중분류: 한 상품이 여러 MAP 위치(`→`별칭)에 노출되면 다대다 귀속 허용.
+
+**레이어 B — 상품 귀속 (prd_cd → cat_cd)**
+- 각 실상품을 올바른 카테고리 노드에 귀속.
+- **✅정상등록가능 우선** 매핑. 🟡옵션부족은 "매핑 가능하나 출시 전 옵션보완 필요"로 표기, ❌미출시는 보류(노드만 예약).
+- 별칭(`→`)은 본체 prd_cd를 추가 카테고리에 연결(중복 상품 생성 금지).
+
+## 3. 설계 규칙
+
+1. **search-before-mint** — 신규 cat_cd 제안 전, 기존 노드/트리로 무손실 표현 불가임을 입증.
+2. **FK 위상** — 카테고리 노드 선적재 → 상품 귀속(cat_cd FK) 후적재. 적재순서 명시.
+3. **코드 채번** — `t_cat_categories` 컨벤션(MAX+1·separator `_`) 준수([[dbmap-code-identifier-strategy]]).
+4. **출시상태 게이팅** — 매핑 명세에 상태별 적재 우선순위(✅ 즉시 / 🟡 옵션보완 후 / ❌ 보류) 부여.
+5. **DB 미적재** — 매핑 명세 + 적재순서 + 영향분석(기존 귀속·FK·롤백)까지만. 실 COMMIT은 인간 승인.
+
+## 4. 산출물 (`_workspace/huni-dbmap/35_category-map/`)
+
+- `05_category-node-mapping.md` — MAP IA ↔ t_cat_categories 노드 매핑(재사용/신규/정리).
+- `06_product-category-mapping.md` + `product-cat.csv` — prd_cd → cat_cd 귀속(다중분류·별칭·출시상태).
+- `07_mapping-load-plan.md` — FK 위상 적재순서 + 상태별 우선순위 + 영향분석.
+
+## 5. 검증 연계
+
+설계 후 `dbm-validator`로 경계면 교차검증(카테고리 노드 실재·prd_cd 실재·FK 무모순·search-before-mint
+준수·다중분류 무결성). 생성자≠검증자([[dbmap-correctness-audit-round13]]).
