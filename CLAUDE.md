@@ -299,6 +299,7 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 | 날짜 | 변경 내용 | 대상 | 사유 |
 |------|----------|------|------|
 | 2026-06-19 | 하네스 초기 구성 — 4 에이전트(hbd-source-harvester·dedup-analyst·codex-verifier·load-executor) + 5 스킬(orchestrator + source-harvest·dedup-analysis·codex-cross-verify·load-execution). 토큰효율 추출(엑셀 1회→CSV 캐시)·표시중복 4축 검수·Claude생성+codex 2차 교차·안전적재(백업→DRY-RUN→승인→COMMIT·BLOCKED 가드). 사이즈 파일럿 우선·6축 범용 | `.claude/agents/huni-basedata-dedup/`·`.claude/skills/{huni-basedata-dedup-orchestrator,hbd-*}`·CLAUDE.md §17 | 사용자(`/harness:harness` — SOT 엑셀 사이즈 중복 정리·codex 교차 적재) |
+| 2026-06-19 | **사이즈 파일럿 GO·라이브 COMMIT + 기초데이터 축 DB 실측 확정·핸드오프** — 사이즈: stale 캐시 적발(ref-sizes 497→520)·1차 Claude PASS(NO-OP)를 **codex 2차가 false-negative 적발**(카드봉투 사이즈 화면 이중default SIZ_104/105 byte-identical 진짜중복·pd=N)→라이브 COMMIT(105 논리삭제+바인딩 제거·정본104·V1~V5 GO·가격무영향·undo). **★축 확정[DB 실측]: 6축(추정 일치)·우선순위 교정**(표시중복 관점 공정13·카테고리11 HIGH·자재 가격종속68 MEDIUM·도수/기초코드 LOW)·EXCLUDE 5(t_prc_*·t_dsc_*·t_prd_products/templates). **다음 시작점=공정(t_proc_processes) 파일럿**. 핸드오프=`HANDOFF.md`·축 레지스트리=`_registry/basedata-axes.md` | `_workspace/huni-basedata-dedup/{sizes,_registry,HANDOFF.md}`·`.gitignore`(hbd-*·huni-basedata-dedup 화이트리스트)·CLAUDE.md §17·[[huni-basedata-dedup-harness]] | 사용자(사이즈 적재 승인 + DB 스키마 기준 확장·핸드오프) |
 
 ---
 

@@ -1,0 +1,12 @@
+table,kor_meaning,verdict,display_name_cols,code_pk,live_total,live_active,live_notdel,dedup_sniff_groups,price_dependent,priority,note
+t_siz_sizes,사이즈(작업/재단/판형 마스터),BASEDATA,siz_nm,siz_cd,520,520,454,1,Y(component_prices 84 siz_cd),DONE-PILOT,파일럿 GO. siz_nm 1 raw 중복(잠정/병렬 의미축)=의미구분 가드 대상. del_yn=N 454행. 가격종속(component_prices·plate_sizes)→적재 안전경계 주의
+t_proc_processes,공정(인쇄/후가공 마스터),BASEDATA,proc_nm,proc_cd,102,102,101,13,N(component_prices에 proc_cd 컬럼 없음),HIGH,표시중복 최다(UV×3·반칼/봉제/부착/오시/완칼/미싱/핑크 등 ×2). 가격 직접 비종속→정리 안전. 단 upr_proc_cd 트리·prcs_dtl_opt JSON·product_processes 45 proc 참조 영향 표기
+t_cat_categories,카테고리(고객 노출 IA·자기참조 트리),BASEDATA,cat_nm,cat_cd,326,315,-1,11,N,HIGH,표시중복 11(부자재/명함/특수스티커/하드커버책자/레더에코백/탁상형캘린더/엽서북 등). round-22⑥·round-24 정리 진행분과 정합 필요. del_yn 권위(use_yn 보조). product_categories junction·grade_discount 참조 영향
+t_mat_materials,자재(본체소재·부자재 마스터),BASEDATA,mat_nm,mat_cd,340,340,192,1,Y(component_prices 68 mat_cd),MEDIUM,del_yn=N 192행(오염·논리삭제 多). 표시중복 raw 1(삼각대그레이). 가격종속→정리 시 component_prices 영향 점검 필수. round-22④ 자재오염 교정 트랙과 정합
+t_clr_color_counts,도수(색상/채널 도수),BASEDATA,clr_nm,clr_cd,5,5,5,0,N(component_prices clr_cd 0행 사용),LOW,5행 소규모·중복 0. print_options front/back_colrcnt_cd 참조. 표시중복 거의 없음(정리 우선순위 낮음)
+t_cod_base_codes,기초코드(enum 사전·자기참조),cod_nm,BASEDATA,cod_cd,85,84,-1,0,N(직접 단가행 아님·전 도메인 typ_cd FK 대상),LOW,부모그룹(upr_cod_cd)별 중복 0. 전 t_*의 *_typ_cd FK 권위→변경 영향 광범위. 표시중복 없어 정리 우선순위 낮음
+t_prc_price_components,가격구성요소(공식 부품),EXCLUDE-PRICE-CHAIN,comp_nm,comp_cd,147,130,-1,1,SELF(가격사슬 본체),N/A,기초데이터 아님(가격 사슬). 단 comp_nm 네이밍 표준화는 별 트랙(round naming). formula_components 84·component_prices 7288행 의존
+t_prc_price_formulas,가격공식,EXCLUDE-PRICE-CHAIN,frm_nm,frm_cd,48,48,-1,0,SELF,N/A,기초데이터 아님(가격 사슬). product_price_formulas 76 바인딩
+t_prd_products,상품마스터,EXCLUDE-PRODUCT-MASTER,prd_nm,prd_cd,275,249,-1,0,N(전 t_prd_* 의존 본체),N/A,기초데이터 아님(상품 본체·JOIN KEY prd_nm). 표시중복 0. 이 하네스 대상 아님
+t_prd_templates,구성템플릿(SKU),EXCLUDE-TXN,tmpl_nm,tmpl_cd,13,13,7,0,N,N/A,기초데이터 아님(SKU 조합·base_prd_cd 종속). 소규모·중복 0
+t_dsc_discount_tables,수량구간할인 마스터(헤더),EXCLUDE-PRICE-CHAIN,dsc_tbl_nm,dsc_tbl_cd,7,7,-1,0,SELF(할인 사슬),N/A,기초데이터 경계(코드+표시명 있으나 사용자 화면 선택 아닌 가격 적용 헤더). discount_details·product_discount_tables 의존
