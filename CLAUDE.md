@@ -218,7 +218,22 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 ---
 
-## 13. MoAI Framework (gated — rarely used here)
+## 13. Harness: Huni-Price-Quote (옵션 선택→가격계산 검증·뼈대)
+
+**목표:** 라이브 가격엔진(`raw/webadmin` `catalog/pricing.py`의 `evaluate_price` **단일 권위 알고리즘**)과 라이브 `t_prc_*` 가격 데이터(공식 48·formula_components 301·구성요소 146·단가행 7,293·상품-공식 바인딩 76·사이즈 520, 직접단가 0=전 상품 공식기반)가 **권위 엑셀**(상품마스터 260610·인쇄상품 가격표 260527)에 맞게 적재됐는지 **냉철하게 평가·검증**하고, 옵션선택→가격구성요소→가격공식→시뮬레이터 검증→위젯 계약의 **단단한 뼈대**를 명세한다. 4구성물(가격공식·가격구성요소·가격뷰어·가격시뮬레이터) 역할·흐름 도해 + evaluate_price 계약 추출이 검증의 자(尺). 5인 에이전트 팀(`hpq-engine-cartographer`→기준점 / `hpq-authority-curator`→기준점 / `hpq-price-chain-inspector`→생성 / `hpq-option-constraint-mapper`→생성 / `hpq-quote-gate-validator`→검증)으로 기준점 팬아웃→생성 검사 팬아웃→P1~P7 냉철한 게이트. **생성≠검증 분리·권위 엑셀 절대 권위·라이브 읽기전용·DB 미적재**(실 교정은 인간 승인 후 dbmap 위임)·대표 상품군 파일럿 우선. 기존 `dbm-price-*` 6종을 입력·도구로 재사용.
+
+**트리거:** "가격계산 하네스", "옵션 가격 검증", "가격엔진 검증", "가격공식/가격구성요소 검증", "가격 정합 평가", "권위 엑셀 매핑 검증", "인쇄상품가격테이블 차원 검증", "시뮬레이터 검증", "옵션/템플릿/제약 검증", "사이즈 중복 점검", "가격 뼈대", "가격계산 하네스 실행/재실행/업데이트/보완", "특정 상품군만 가격검증" 등 본 도메인 요청 시 `huni-price-quote-orchestrator` 스킬을 사용. 단순 질문은 직접 응답.
+
+**산출물 루트:** `_workspace/huni-price-quote/` (01_engine·02_authority·03_chain·04_option·05_gate). 자격증명: `.env.local` `RAILWAY_DB_*`(읽기전용 SELECT)·`HUNI_ADMIN_*`(라이브 화면 읽기 탐색만, 저장/삭제 금지·admin/test1234).
+
+**변경 이력:**
+| 날짜 | 변경 내용 | 대상 | 사유 |
+|------|----------|------|------|
+| 2026-06-18 | 하네스 초기 구성 — 5 에이전트(hpq-engine-cartographer·authority-curator·price-chain-inspector·option-constraint-mapper·quote-gate-validator) + 6 스킬(orchestrator + 5 방법론). 라이브 evaluate_price 권위 알고리즘 실측(공식 48·단가행 7,293·직접단가 0=전 상품 공식기반)·webadmin pricing.py/price_views.py 흐름 파악. 생성≠검증 분리(P1~P7 게이트)·권위 엑셀 절대 권위·DB 미적재·대표 상품군 파일럿 우선(사용자 4결정) | `.claude/agents/huni-price-quote/`·`.claude/skills/{huni-price-quote-orchestrator,hpq-*}`·CLAUDE.md §13 | 사용자(`/harness:harness` — 옵션 선택→가격계산 검증·뼈대 하네스) |
+
+---
+
+## 14. MoAI Framework (gated — rarely used here)
 
 The MoAI-ADK orchestration framework (SPEC plan/run/sync, TRUST 5, DDD/TDD, Agent Teams,
 design GAN loop) is installed but not the primary workflow in this repo. Its detailed

@@ -171,6 +171,7 @@ secret-*.*
 !.claude/skills/pkw-*/
 !.claude/skills/rpm-*/
 !.claude/skills/hbg-*/
+!.claude/skills/hpq-*/
 # Custom harness agents (moai/ framework agents stay untracked).
 !.claude/agents/
 .claude/agents/*
@@ -181,6 +182,7 @@ secret-*.*
 !.claude/agents/print-kb/
 !.claude/agents/huni-rpmeta/
 !.claude/agents/huni-basecode/
+!.claude/agents/huni-price-quote/
 .claude/settings.local.json
 .claude/settings.local.*.json
 .claude/.env.local*
