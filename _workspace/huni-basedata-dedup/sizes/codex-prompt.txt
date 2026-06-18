@@ -1,0 +1,94 @@
+You are an independent 2nd-opinion auditor (gpt-5.5) cross-checking another model's
+data-deduplication judgment for a Korean print-shop's SIZE master table (t_siz_sizes,
+520 rows). READ-ONLY analysis. Your job is adversarial: find FALSE-NEGATIVES.
+
+=== CONTEXT ===
+Claude (1st pass) audited the size axis on 4 checks and concluded **PASS (NO-OP)**:
+zero rows to merge, zero to newly load, zero mis-loads to fix. Because the load target
+is 0, there is no "wrong load" risk. So the ONLY risk left is the OPPOSITE direction:
+did Claude wrongly classify a TRUE duplicate (or true mis-load) as a "legitimate
+distinction" and thus miss a real cleanup? Your task = stress-test the PASS(NO-OP).
+
+=== THE 4 CHECKS & canonical RULE ===
+canonical = (semantic_axis, norm_w, norm_h, unit). Dimensions in mm (cm labels ×10).
+Dimension priority: cut(재단/final) > work(작업) > label.
+Check1 표시↔내부 정합 (mis-load): does the displayed name match the internal dims?
+Check2 표시중복 (display duplicate): same dims shown different ways.
+Check3 내부값중복 (internal-value duplicate): different siz_cd, identical internal dims.
+Check4 ④의미구분 보존 GUARD: a collision is KEPT (not merged) if members differ by a
+  legitimate sub-axis: 형상 shape(원형/정사각/사각/직사각=cut-die, round-23 [HARD]:
+  same dims but different shape die ⇒ different price ⇒ separate siz_cd), 입수/팩 pack
+  (NEA/N장=order&price unit baked into name), 반칼/완칼 half-cut vs full-cut
+  (round-23 intentional separate codes), 판형/임포지션 plate/imposition (role row with
+  impos_yn=Y / plate>0 / 전지 / 판걸이 — merging would destroy imposition metadata),
+  작업전용 work-only (plate>0 with empty cut).
+price_dependent=Y rows are BLOCKED from any live merge/delete (component_prices CASCADE);
+they can only be fixed via "path Y" (developer re-load of corrected input excel).
+del_yn='Y' rows are already logically deleted — status only, not reprocessed.
+
+=== EVIDENCE: 38 internal-value collision groups (siz_cd | display | price_dep | bindings | note) ===
+[100x100] SIZ_000083 '100x100mm(50장)' N prd1/plate0 ; SIZ_000099 '100x100mm(20장)' N ; SIZ_000100 '100x100mm(40장)' N ; SIZ_000101 '100x100mm(100장)' N ; SIZ_000113 '100x100' N prd0/plate5 ; SIZ_000355 '100x100mm원형' N ; SIZ_000356 '100x100mm사각' N
+[297x420] SIZ_000052 'A3 (297X420)' N plate19 ; SIZ_000174 'A3(297x420mm)' Y prd22 cp12 ; SIZ_000295 'A3세로(297x420mm)' N del_yn=Y ; SIZ_000315 'A3' Y prd1 cp18
+[20x20] SIZ_000111 '20x20(20개입)' N ; SIZ_000214 '정사각20x20mm(6EA)' Y cp10 ; SIZ_000336 '20x20' N prd4 ; SIZ_000503 '원형20x20' Y cp10
+[420x594] SIZ_000197 'A2(420x594mm)' Y prd19 cp12 ; SIZ_000198 'A2 (420X594)' N plate18 ; SIZ_000297 'A2세로(420x594mm)' N del_yn=Y ; SIZ_000317 'A2' Y cp12
+[30x30] SIZ_000216 '정사각30x30mm(2EA)' Y cp10 ; SIZ_000330 '30x30' N prd8/plate1 ; SIZ_000423 '사각30x30' N ; SIZ_000505 '원형30x30' Y cp10
+[148x210] SIZ_000007 'A5 (148X210)' N prd8/plate9 ; SIZ_000170 'A5(148x210mm)' Y del_yn=Y cp180 ; SIZ_000426 'A5' Y cp5
+[50x50] SIZ_000011 '50x50' Y prd10/plate1 cp2 ; SIZ_000220 '정사각50x50mm(1EA)' Y cp10 ; SIZ_000508 '원형50x50' Y cp10
+[210x297] SIZ_000050 'A4 (210X297)' N plate13 ; SIZ_000172 'A4(210x297mm)' Y prd19 cp12 ; SIZ_000258 'A4' Y prd2 cp12
+[60x90] SIZ_000089 '60x90mm(20장)' N ; SIZ_000090 '60x90mm(50장)' N ; SIZ_000372 '60x90' N
+[160x110] SIZ_000096 '160x110mm(20장)' N prd2 ; SIZ_000097 '160x110mm(40장)' N ; SIZ_000098 '160x110mm(100장)' N
+[70x100] SIZ_000102 '70x100mm(30장)' N ; SIZ_000103 '70x100mm(100장)' N ; SIZ_000448 '70x100' N plate1
+[165x115] SIZ_000104 '165x115mm(10장)' N ; SIZ_000105 '165x115mm(10장)' N ; SIZ_000500 '165x115' N prd2
+  ^^^ NOTE: SIZ_000104 and SIZ_000105 have IDENTICAL display strings '165x115mm(10장)', same dims, same flags.
+[60x60] SIZ_000148 '60x60' N prd5/plate2 ; SIZ_000222 '정사각60x60mm(1EA)' Y cp10 ; SIZ_000510 '원형60x60' Y cp10
+[55x55] SIZ_000210 '55x55' N plate1 ; SIZ_000221 '정사각55x55mm(1EA)' Y cp10 ; SIZ_000509 '원형55x55' Y cp10
+[15x15] SIZ_000213 '정사각15x15mm(8EA)' Y cp10 ; SIZ_000352 '15x15' N ; SIZ_000502 '원형15x15' Y cp10
+[25x25] SIZ_000215 '정사각25x25mm(3EA)' Y cp10 ; SIZ_000353 '25x25' N ; SIZ_000504 '원형25x25' Y cp10
+[35x35] SIZ_000217 '정사각35x35mm(2EA)' Y cp10 ; SIZ_000354 '35x35' N ; SIZ_000422 '원형35x35' Y cp10
+[40x40] SIZ_000218 '정사각40x40mm(2EA)' Y cp10 ; SIZ_000333 '40x40' N prd7/plate1 ; SIZ_000506 '원형40x40' Y cp10
+[594x841] SIZ_000293 'A1(594x841mm)' N del_yn=Y ; SIZ_000294 'A1 (594X841)' N plate12 ; SIZ_000300 'A1세로(594x841mm)' N del_yn=Y
+[90x50] SIZ_000008 '90x50' Y prd10/plate1 cp2 ; SIZ_000244 '직사각90x50mm(1EA)' Y cp10
+[210x148] SIZ_000049 '210x148' N prd0/plate0 ; SIZ_000253 'A5(210x148mm)' N del_yn=Y
+[297x210] SIZ_000051 '297x210' N prd0/plate0 ; SIZ_000255 'A4(297x210mm)' N del_yn=Y
+[300x440] SIZ_000053 '300x440' N del_yn=Y ; SIZ_000176 'A3+(300x440mm)' N
+[420x297] SIZ_000054 '420x297' N plate1 ; SIZ_000296 'A3가로(420x297mm)' N del_yn=Y
+[105x148] SIZ_000057 'A6 (105X148)' N plate3 ; SIZ_000196 'A6(105x148mm)' N del_yn=Y
+[75x110] SIZ_000068 '75x110' Y plate1 cp1 ; SIZ_000110 'PP투명케이스75x110x15mm(10개)' N
+[160x230] SIZ_000087 '160x230mm(50장)' N ; SIZ_000417 '160x230' N plate1
+[90x90] SIZ_000119 '90x90' Y cp56 ; SIZ_000223 '정사각90x90mm(1EA)' Y cp10
+[10x10] SIZ_000212 '정사각10x10mm(8EA)' Y cp10 ; SIZ_000501 '원형10x10' Y cp10
+[45x45] SIZ_000219 '정사각45x45mm(1EA)' Y cp10 ; SIZ_000507 '원형45x45' Y cp10
+[50x30] SIZ_000232 '직사각50x30mm(2EA)' Y cp10 ; SIZ_000493 '50x30' N plate1
+[203x203] SIZ_000270 '203x203' N plate1 ; SIZ_000308 '8x8(203x203mm)' N (inch dual-label)
+[594x420] SIZ_000298 'A2가로(594x420mm)' N del_yn=Y ; SIZ_000299 '594x420' N plate1
+[841x594] SIZ_000301 'A1가로(841x594mm)' N del_yn=Y ; SIZ_000302 '841x594' N plate1
+[24x24] SIZ_000337 '24x24' N plate3 ; SIZ_000421 '원형24x24' N
+[450x450] SIZ_000396 '45x45cm' N ; SIZ_000397 '450x450' N plate1
+[1000x700] SIZ_000399 '100x70cm(1인용)' N ; SIZ_000400 '1000x700' N plate1
+[230x330] SIZ_000415 'A4용(230x330mm)' N ; SIZ_000418 '230x330' N plate1
+
+=== SPECIAL mis-load candidates Claude marked "정합 (not mis-load)" ===
+- inch×mm dual-label 6 rows e.g. '8x8(203x203mm)','5x5(127x127mm)': label=inch, internal=mm correct ⇒ Claude says OK.
+- SIZ_000499 '316x467': label=full-sheet plate name, internal 306x457=printable work area, impos_yn=Y plate=32 ⇒ Claude says intentional plate modeling (not mis-load). price_dependent=Y ⇒ BLOCKED anyway.
+
+=== YOUR ADVERSARIAL QUESTIONS — answer each explicitly ===
+Q1. Of these 38 collision groups, is there ANY group where the guard flags
+   (shape/pack/half-cut/plate) are NOT actually present on the members — i.e. the
+   "legitimate distinction" is asserted but the data shows two PLAIN members that
+   should merge? Cite siz_cd + the missing evidence.
+Q2. SIZ_000104 vs SIZ_000105 have byte-identical display '165x115mm(10장)', same dims,
+   same flags (both N, plate0). Is this a TRUE duplicate Claude missed? If merge is
+   warranted, note both are price_dependent=N (so not CASCADE-blocked).
+Q3. Several groups are pure-numeric (e.g. '210x148'/'A4(297x210mm)') where the A-named
+   twin is del_yn='Y' (already logically deleted). Does treating these as "kept distinct"
+   hide a real cleanup, or is the del_yn='Y' twin correctly out of scope?
+Q4. Is the inch×mm dual-label judgment (label=inch, internal=mm = correct) sound, or
+   could any be a real mis-load (label and internal disagree on actual size)?
+Q5. Is SIZ_000499 (label 316x467 / internal 306x457) really intentional plate modeling,
+   or a genuine mis-load where the wrong number was stored?
+Q6. Overall: is PASS(NO-OP) premature? Name the single strongest case (if any) where a
+   merge or fix SHOULD have been flagged. If you find none, say so plainly.
+
+Ground every claim in the siz_cd evidence above. Do NOT invent siz_cd or dims not listed.
+If you cannot verify a claim from the given data, label it "hypothesis, needs live check".
+Output a short verdict per question + a final 1-line GO/divergence recommendation.

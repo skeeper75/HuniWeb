@@ -267,7 +267,42 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 ---
 
-## 16. MoAI Framework (gated — rarely used here)
+## 16. Harness: Huni-Recipe-Viz (상품 구성요소 시각화·레시피 검증 · codex 중심)
+
+**목표:** 상품마스터 각 시트의 각 상품을 이루는 구성요소(자재·공정·옵션·사이즈·도수)를 **한눈에 보는 시각화**로 만들고, 그 구성요소를 중심으로 가격이 만들어지는데 **누락되면 제대로된 결과값을 확인할 수 없는** 문제를, **codex-cli(레시피 생성·연결 검증)와 codex-imgage(mermaid→이미지 2단계 시각화)** 로 산출해, 상품마다 구성요소가 제대로 연결됐는지·상품에 연결할 가격공식의 가격구성요소가 제대로 설계됐는지 확인한다. 작업지시서/생산지시서형 **레시피**(도출: 상품마스터+가격표+round-11 BOM+라이브 t_*)를 토대로 인쇄자동견적이 가능하기 위한 모든 요소를 만든다. **★[HARD] 산출 본문은 Claude보다 codex로 만든다(사용자 directive)·생성=codex/검증=Claude.**
+
+**트리거:** "상품 구성요소 시각화", "레시피 시각화", "구성요소 연결 확인", "가격구성요소 설계 확인", "작업지시서 레시피", "생산지시서", "인쇄자동견적 요소", "codex 레시피 시각화", "구성요소 한눈에", "상품마스터 시트 시각화", "레시피·시각화 하네스 실행/재실행/업데이트/보완", "특정 시트만 레시피", "시각화 다시", "연결검증 다시" 등 본 도메인 요청 시 `huni-recipe-viz-orchestrator` 스킬을 사용. 단일 상품 가격계산 검증은 §15, 상품군 위키 집필은 §9. 단순 질문은 직접 응답.
+
+**산출물 루트:** `_workspace/huni-recipe-viz/<sheet>/` (01_recipe·02_viz·03_audit·04_validation). 4 에이전트(`hrv-recipe-builder` codex-cli 레시피 / `hrv-component-visualizer` mermaid→codex-imgage 2단계 / `hrv-connection-auditor` codex-cli 연결·가격공식 설계 검증 / `hrv-validator` Claude R1~R6 독립 게이트) + 5 스킬. codex 헬퍼=`rpm-visualize/scripts/codex-preflight.sh`·`hqv-codex-cross-verify/scripts/codex-review.sh` 재사용. 라이브 읽기전용 SELECT만·codex `-s read-only`·DB 미적재(실 교정 인간 승인 후 dbmap/§15 위임).
+
+**핵심 결정:** ① codex 중심(산출 본문 codex·Claude는 큐레이션·호출·검증) ② **시각화 2단계: mermaid 진실 소스 먼저 → codex-imgage 이미지 → mermaid 기준 정합 검증**(사용자) ③ 레시피=도출(작업지시서 문서 부재) ④ 생성=codex/검증=Claude(codex 주장=가설·환각 경계) ⑤ 디지털인쇄 시트 파일럿 우선.
+
+**변경 이력:**
+| 날짜 | 변경 내용 | 대상 | 사유 |
+|------|----------|------|------|
+| 2026-06-18 | 하네스 초기 구성 — 4 에이전트(hrv-recipe-builder·component-visualizer·connection-auditor·validator) + 5 스킬(orchestrator + recipe-build·component-visualize·connection-audit·recipe-validation). codex 중심(codex-cli 레시피·연결검증 + codex-imgage mermaid→이미지 2단계)·생성=codex/검증=Claude. 디지털인쇄 파일럿 | `.claude/agents/huni-recipe-viz/`·`.claude/skills/{huni-recipe-viz-orchestrator,hrv-*}`·CLAUDE.md §16 | 사용자(`/harness:harness` — 상품 구성요소 시각화·레시피·codex 중심) |
+| 2026-06-18 | 디지털인쇄 파일럿 완주(GO·운영검증) + R7 freshness 게이트 추가(진화). codex가 31상품 레시피·mermaid 4·이미지 3·연결진단 생성, Claude 검증, **메인 원천 재측정이 라이브 드리프트 적발**(PRF_DGP_A 배선 upd_dt 2026-06-18 21:11 변경=S2 제거·del_yn=Y). ★교훈: 라이브는 작업 중 변하는 표적·upd_dt freshness 필수·검증자도 드리프트를 "날조"로 오인 가능 | `04_validation/divergence-final-adjudication.md`·`hrv-recipe-validation`(R7)·[[huni-recipe-viz-harness]] | 파일럿 운영검증 + 진화 |
+
+---
+
+## 17. Harness: Huni-Basedata-Dedup (기초데이터 표시중복 정리·검수·적재 · Claude+codex 교차)
+
+**목표:** 두 SOT 권위 엑셀(상품마스터 260610·인쇄상품 가격표 260527)을 **토큰효율적으로 탐색**(1회 추출→CSV 캐시, 엑셀 반복 Read 금지)해, 6축 기초데이터(사이즈·공정·자재·기초코드·인쇄옵션·도수) 중 **사용자 화면 표시명/내부값이 중복**이거나 **표시↔실제가 불일치(오적재)**인 데이터를 검수하고, 정리/적재할 매핑데이터를 만들어 승인 후 라이브에 안전 적재한다. 중복의 본질[사용자 정의]=키는 고유하나 화면 표시가 중복으로 보이는 것(예 "60x60" 여러 코드). **★Claude 생성 + codex cli 2차 교차검증으로 오적재 방지. 정리/적재할 것 없으면 통과(NO-OP).** §12(basecode 정확성 거버넌스)·§7(dbmap 전체 매핑)과 별개의 표시중복+codex 안전적재 전용 트랙.
+
+**검수 4축[HARD]:** ① 권위추출+표시↔실제 정합(siz_nm 등 라벨 ↔ 내부 치수값 일치·불일치=오적재) ② 표시 중복(화면 라벨 동일·코드 다름) ③ 내부값 중복(실제값 동일·코드 다름) ④ 의미구분 보존(작업/재단/판형/단위/상품전용은 중복 제외=false-positive 가드). 판정=권위에서 canonical(의미축+정규치수+단위) 도출→라이브 환원→충돌·불일치 검출.
+
+**트리거:** "기초데이터 중복 정리", "사이즈 중복 정리", "표시명 중복", "사이즈정보 검수", "SOT 엑셀 사이즈 정리", "DB 적재 사이즈 매핑", "codex 교차 적재", "기초데이터 정합 검수", "공정/자재/도수 중복", "기초데이터 정리 하네스 실행/재실행/업데이트/보완", "특정 축만 중복 정리" 등 본 도메인 요청 시 `huni-basedata-dedup-orchestrator` 스킬을 사용. 단순 질문은 직접 응답.
+
+**산출물 루트:** `_workspace/huni-basedata-dedup/<axis>/` (index/authority/live.csv·dedup-report·mapping.csv·reconcile.md·_exec). 4인 팀(`hbd-source-harvester`→`hbd-dedup-analyst`→`hbd-codex-verifier`→`hbd-load-executor`)·D1~D6 게이트·**사이즈 파일럿 우선**. 기존 `00_schema/ref-*.csv`·`24_master-extract-260610`·codex-review.sh 재사용. 라이브 읽기전용 기본(`.env.local RAILWAY_DB_*`)·실 적재는 승인 후·가격종속(component_prices)은 BLOCKED 보류.
+
+**변경 이력:**
+| 날짜 | 변경 내용 | 대상 | 사유 |
+|------|----------|------|------|
+| 2026-06-19 | 하네스 초기 구성 — 4 에이전트(hbd-source-harvester·dedup-analyst·codex-verifier·load-executor) + 5 스킬(orchestrator + source-harvest·dedup-analysis·codex-cross-verify·load-execution). 토큰효율 추출(엑셀 1회→CSV 캐시)·표시중복 4축 검수·Claude생성+codex 2차 교차·안전적재(백업→DRY-RUN→승인→COMMIT·BLOCKED 가드). 사이즈 파일럿 우선·6축 범용 | `.claude/agents/huni-basedata-dedup/`·`.claude/skills/{huni-basedata-dedup-orchestrator,hbd-*}`·CLAUDE.md §17 | 사용자(`/harness:harness` — SOT 엑셀 사이즈 중복 정리·codex 교차 적재) |
+
+---
+
+## 18. MoAI Framework (gated — rarely used here)
 
 The MoAI-ADK orchestration framework (SPEC plan/run/sync, TRUST 5, DDD/TDD, Agent Teams,
 design GAN loop) is installed but not the primary workflow in this repo. Its detailed
