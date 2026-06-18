@@ -1,7 +1,7 @@
 # 후가공_박(소형) import 그릇 — 독립 검증 게이트 (round-16)
 
 > 검증자: dbm-validator (생성자≠검증자). 빌더 산출을 의심·라이브 information_schema + openpyxl 원본 직접 실측.
-> 일시: 2026-06-13. 라이브 read-only(`-d railway` @ zephyr.proxy.rlwy.net:45948). 원본 openpyxl data_only.
+> 일시: 2026-06-13. 라이브 read-only(`-d railway` @ __RAILWAY_DB_HOST__:45948). 원본 openpyxl data_only.
 > 대상: `20_price-import/foil-small/` (structure·decomposition·grade-axis·import.xlsx·mapping-flow)
 > 검증점: P1~P6 + 박 시트 최대 쟁점(단가/합가·등급 A~E·181 카운트·면적→등급 앱분리·세트형 여부)
 

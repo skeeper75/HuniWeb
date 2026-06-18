@@ -1,7 +1,7 @@
 # 후가공_박(대형) import 그릇 — 독립 검증 게이트 (round-16)
 
 > 검증자: dbm-validator (생성자≠검증자). 빌더 산출을 의심·라이브 information_schema + openpyxl 원본 직접 실측.
-> 일시: 2026-06-13. 라이브 read-only(`-d railway` @ zephyr.proxy.rlwy.net:45948). 원본 openpyxl data_only.
+> 일시: 2026-06-13. 라이브 read-only(`-d railway` @ __RAILWAY_DB_HOST__:45948). 원본 openpyxl data_only.
 > 대상: `20_price-import/foil-large/` (structure·decomposition·import.xlsx·mapping-flow)
 > 박소형 게이트(`_gate/foil-small-gate.md`) 동형 — 박대형이 2단 룩업 + 동판 면적매트릭스 패턴인지 평결.
 

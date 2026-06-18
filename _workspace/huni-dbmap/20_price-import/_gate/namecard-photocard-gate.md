@@ -2,7 +2,7 @@
 
 > **검증자** dbm-validator (생성자 아님·빌더 의심·직접 실측) · 2026-06-13
 > **대상** `_workspace/huni-dbmap/20_price-import/namecard-photocard/`(structure·decomposition·import.xlsx·mapping-flow)
-> **권위** 원본 `docs/huni/후니프린팅_인쇄상품_가격표_260527.xlsx` 시트 `명함포토카드`(openpyxl `data_only`·R1:R134, max_row 1067은 빈 꼬리) + 라이브 `t_prc_*`·`t_mat_materials` information_schema(`.env.local` `RAILWAY_DB_*` 읽기전용·`db railway`·port 45948·host zephyr.proxy.rlwy.net).
+> **권위** 원본 `docs/huni/후니프린팅_인쇄상품_가격표_260527.xlsx` 시트 `명함포토카드`(openpyxl `data_only`·R1:R134, max_row 1067은 빈 꼬리) + 라이브 `t_prc_*`·`t_mat_materials` information_schema(`.env.local` `RAILWAY_DB_*` 읽기전용·`db railway`·port 45948·host __RAILWAY_DB_HOST__).
 > **방법** openpyxl 직접 재카운트 + 라이브 psql 실측. 빌더 주장은 재현하지 않고 원천에서 독립 산출.
 
 ---

@@ -1113,7 +1113,7 @@ ACTHDKY 캡처 raw 직접 파싱(`major_radius_ACTHDKY.json`):
 
 # PD 카테고리 M1 재확인 + M2~M6 게이트 (rpm-validator·2026-06-17·라이브 read-only 재실측)
 
-> D-PD-1 정정(밑창색 six_clr→SUB_MTR 재귀속)이 reverse·metamodel에 반영된 뒤의 종합 게이트. M4는 railway DB(zephyr.proxy.rlwy.net:45948/railway) `information_schema`/`t_*` 직접 SELECT(read-only·2026-06-17)로 생성자 숫자 비신뢰 재측정. distinct 0 부결·PD-4 data-gap을 최엄격 적대 검증.
+> D-PD-1 정정(밑창색 six_clr→SUB_MTR 재귀속)이 reverse·metamodel에 반영된 뒤의 종합 게이트. M4는 railway DB(__RAILWAY_DB_HOST__:45948/railway) `information_schema`/`t_*` 직접 SELECT(read-only·2026-06-17)로 생성자 숫자 비신뢰 재측정. distinct 0 부결·PD-4 data-gap을 최엄격 적대 검증.
 
 ## M1 재확인 (CONDITIONAL → GO 승격)
 
