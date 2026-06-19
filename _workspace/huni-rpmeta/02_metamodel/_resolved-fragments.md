@@ -939,3 +939,49 @@
 **OT 강제 분류 회피(SKILL §3·§5):** **distinct 승급 0건(★전개도/dieline #18 부결·★재단/작업 2치수=size#13+plate_size data-gap) = 17축 재포화(PR·CL·AC·PD·PH·FS·NC 패턴 반복).** 4 fragment(O-1~O-4) 전부 기존 17축 facet/data-gap. ★directive 최강 적대 프로브(전개도가 distinct #18인가) 적대 판정: **박스 옵션 모델은 평면 인쇄물(PR/NC)과 100% 동일 슬롯** — 전개도·접지·3D치수 *전용 관리 슬롯 0건*·전개도=사이즈#13(작업치수)+공정#2(도무송 칼틀·오시 접지)+카테고리#7(박스형태 분기) 무손실 분배. **★재포화 정당성(HARD 기준 양방향 점검):** 형상(#17·ST)은 ① 전용 슬롯(shape_info) + ② KB 결함 둘 다 충족(승격), 전개도 #18은 **① 전용 슬롯 부재(100% 동일 base-data 슬롯·새 슬롯 0) + ② KB 결함 부재(작업/재단=size#13+plate_size·도무송/오시=공정#2가 왜곡 없이 담음) 둘 다 불충족** → 부결. ★PH-2 거치·FS-1 타일링(둘 다 ①OBSERVED·②불충족)보다 **OT는 ①조차 불충족**(전용 슬롯 자체 부재) = *더 약한 후보의 더 깨끗한 부결*. **★핵심 비대칭(HARD): 형태가공#14(GS/PD)=RP가 평면→입체 *생성*(없으면 본체 부재) ↔ 박스=평면(접지 평면지)까지만 RP 생산·입체 조립은 고객 수작업("납작하게 접힌 상태 배송") = #14의 *정반대*** → 박스 접합/조립은 흡수처조차 불요(RP 생산 범위 밖). 12번째 카테고리(상자/패키징·평면 인쇄물에 전무했던 입체/전개 차원)가 새 관리축 0 = 모델 안정성 재확인.
 **OT가 더한 것(축 신설 아닌 *강화*):** ① **17축 재포화** — 12번째 카테고리 distinct 0(입체/전개 #18 후보 정면 격파·①전용 슬롯조차 부재한 가장 깨끗한 부결). ② 사이즈#13 + plate_size 2축 분리 재확인(박스 재단/작업 2치수가 두 축에 정확 매핑·O-3 data-gap·박스가 두 축 분리 설계를 입체물에서 역검증). ③ 공정#2 도무송 칼틀·오시 접지=ST 칼선/PR 접지의 박스 인스턴스(같은 공정 멤버 상품군별 다른 관리 위치). ④ ★형태가공#14 비대칭 명시(박스 입체화=고객 수작업·RP 공정 아님·#14가 "본체 생성"이지 "모든 입체화" 아님을 음의 사례로 확정). ⑤ #16 TemplateAsset(D-11) dieline 자산(구조 sub-type 여부=O-2 unobserved). ⑥ 3D 제품치수 미저장 파생=앱 계산 패턴 재확인(O-1·`dbmap-compute-in-app-db-stores-lookup` 동형).
 **검증 라우팅 요약:** 메타모델 해소 ✅ = O-1·O-2·O-4(축 귀속 확정·전개도 #18 부결) / data-gap 🟡 = O-3(재단/작업 2치수 size#13+plate_size 묶음 표현력 적재). 라이브/실측 검증 필요분 = size#13↔plate_size 박스 2치수 묶음 수용력(O-3 → gap data-gap)·3D 제품치수 파생/저장(O-1 → gap)·`makers.../templates/{code}` dieline 응답 스키마(O-2 → #16 단일 vs 구조 sub-type·validator 실측)·OTPKENV 커스텀 소량 정책(O-4 → unobserved)·OTCPHOL 에어홀더(미캡처·클래퍼류 동형 추정). **★O-3 재단/작업 2치수 = data-gap(size#13+plate_size 표현력 미적재)이지 vessel-gap(축 부재) 아님 — 갭분석가 핵심 구분(NC 이산tier·PD-4·PH-2·FS-1 data-gap 동형).** **★dbmap 정합: rpmeta "전개도=size#13+plate_size 2축 data-gap·신축 #18 부결" = dbmap `dbmap-platesize-is-output-paper`·G-GP-2 "size(재단)↔plate_size(작업) 이미 별개 t_* 축" — 같은 결론, 다른 렌즈·상호 보강(박스가 두 축 분리 설계를 입체물에서 역검증).**
+
+---
+
+## ═══ PO 모호 fragment 판정 (포맥스/폼보드·등신대·피켓 — 기재마운팅(제작방식)·자립구조 #18 적대 프로브) ═══
+
+> `categories/PO/reverse.md` PO-1~PO-4 판정. **13 상품군(BN·GS·TP·PR·ST·CL·AC·PD·PH·FS·NC·OT·PO) 증거.** ★directive 최대 관전 2건(기재마운팅·자립구조) 적대 판정 — **둘 다 #18 부결.** ★PO 결정적 우월점 = PH(client-render)·AC(SSR-negative)와 달리 7상품 전부 *SSR 완전노출* → 관측 기반 부결(추정 0·1회 GET 실측).
+
+## PO-1. ★제작방식(합지 HAP vs 직접출력 PRT) — 인쇄방식레시피#12(D-7) + 자재#1 검정 variant + 공정#2 코팅 게이팅 [facet·#12 재확인·★#18 부결]
+
+- **판정:** **인쇄방식레시피#12(D-7)의 합지/라미 인스턴스 + 자재#1 검정 variant + 공정#2 코팅 가용성 게이팅 분산** — 한 상품 내 "제작방식 select" 부재(pdtCode 분기)·NC 인쇄방식 #18 부결과 정확히 동형(이미 #12로 등재된 축의 중복 신축 금지).
+- **근거:**
+  - reverse §0.1 실측: POMXPRT(직접출력)·POMXHAP(합지)는 *별 pdtCode 상품*이고 한 상품 내 제작방식 옵션 슬롯이 **없음**. 차이=① paper select 값(검정포맥스/검정폼보드 variant 추가·기존 자재 슬롯의 다른 값) ② 코팅 옵션아이콘 활성/비활성(HAP=True/PRT=False·기존 공정 슬롯) ③ 상품명 "파인아트"(종이 인쇄→보드 라미네이트 마감) — **새 스키마 축(슬롯) 추가 0.**
+  - **★승격 기준 ① 전용 슬롯 = 불충족:** pdtCode/item_gbn=상품 *discriminator enum*(NC offset2023·CL clothes2025·ST/PR pdtCode prefix 동형·명제 #19 "분기 discriminator는 축 아님"). ST 형상 `shape_info`(사이즈와 분리된 전용 슬롯) 같은 제작방식 전용 슬롯 0건.
+  - **★승격 기준 ② KB 무왜곡 흡수 불가 = 불충족:** 제작방식=#12 D-7(`process-recipe-tree.md §1` 인쇄방식 PROC_000002~6 최상위 레시피·합지/라미=공정 멤버·게이팅 lifecycle)·검정 variant=자재#1(AC 소재 variant·GS 코스터 G-2 동형)·코팅 가용성=공정#2+#12 게이팅(인쇄방식이 가능 후가공 게이팅). 후니 KB에 "제작방식 어느 축에도 없음" 결함 명시 **없음**(ST 형상 G-SK-2와 정반대) → ②불충족.
+  - **★결정적 — 제작방식=인쇄방식의 일종 → 이미 #12다:** 신축 #18 제안은 *이미 등재된 축의 중복*(같은 개념 2축=메타모델 일관성 붕괴·NC와 동일 논거). #12의 5번째 인코딩(BN 자재 facet·ST/PR pdtCode prefix·CL 상품내 옵션·NC item_gbn 토큰·PO 제작방식 pdtCode+paper variant).
+- **결론:** 인쇄방식레시피#12(D-7) 라미 인스턴스 + 자재#1 검정 variant + 공정#2 코팅 게이팅 분산. → facet(거부·#12 재확인·#18 부결). **★코팅 가용성 캐스케이드(HAP=True/PRT=False)=#12가 후가공 게이팅하는 D-7 lifecycle PO 인스턴스(NC P-7 자재풀 게이팅 동형).**
+
+## PO-2. ★등신대 거치대(CDL_DFT) 다중 귀속(PO add-on vs GS 독립 SKU) — 부속물#8 add-on(독립 부자재 SKU 참조) [facet·★#18 부결·자립구조 핵심]
+
+- **판정:** **부속물#8(D-1) add-on — 본상품에 결합되는 *독립 부자재 SKU*를 참조** — 자립구조(등신대 거치대/피켓 손잡이)는 형상#17(모양재단)+부속물#8(거치대 add-on)로 분해·PH 거치 부결 동형이되 PO는 명시 부자재 SKU로 더 강한 분리관리.
+- **근거:**
+  - reverse §0.3 실측: 거치대=`opt_use_yn('CDL_DFT')` 선택형 부자재 토글(부자재 섹션 `sub_opt2_tr`·`<th>부자재</th>`)·700/1200/1500mm select·**별 상품 `GS/GSSBMTL/detail/54`(굿즈 부자재 독립 SKU)으로도 존재** = 한 부자재 두 경로(본상품 add-on + 독립 SKU).
+  - 후니 KB `entity-semantic-model.md:30` addl_product "완제 부속: 거치대·우드봉·볼체인·부착공정과 축 분리"·D-1 부속물 distinct가 정확히 이것(BN 거치대·AC 등신대 받침·PD 다리/받침 횡단 동형). 거치대=GS/GSSBMTL 독립 SKU로 후니 addl_product에 정확히 매핑.
+  - **자립방식이 상품 가름(등신대 vs 피켓)** = 부속물#8 유무 facet — 피켓(POFMPCK)은 거치대(CDL)·와이어(WIR) 부자재 *없음*(실측 `cdl거치대=False·와이어=False`·손잡이 보드라 자립 add-on 불필요·모양재단만)·등신대는 거치대 add-on 결합. 자립방식=형상#17(컷)+부속물#8(거치대 유무) 조합이지 별 "자립구조 축" 아님.
+  - **★승격 기준 ① 거치대 전용 슬롯 OBSERVED(CDL_DFT·SSR 실측·충족)이나 ② KB 결함 부재**(형상#17·부속물#8이 왜곡 없이 담음) → ②불충족 부결. **★PH 거치(옵션 캐스케이드)보다 강한 부속물 SKU 분리관리** — PH가 §0.5 재캡처로 OBSERVED 격상한 것을 PO는 1회 GET으로 + 명시 독립 SKU.
+- **결론:** 부속물#8 add-on(독립 부자재 SKU 참조)·와이어(WIR_DFT/MTR)=부속물#8 걸이(BN 고리/아일렛). → facet(거부·#18 부결). **★"add-on이 독립 SKU를 참조"하는 정규화(template_selections 결합 vs 옵션값 복제)는 그릇 단계 판정(아키텍트→갭분석가/그릇).**
+
+## PO-3. number4_sel(1배~10배 면적배수) — 수량#10 / 가격기여역할#11(면적계수) 경계 [facet·★data-gap]
+
+- **판정:** **수량#10(D-5) / 가격기여역할#11(D-6 곱수형) 경계 + data-gap** — number1_sel(디자인 수/건수)와 별도 number4_sel(1배~10배)·real_price 면적 기반이라 "배수"=출력 면적 배수(가격계수) 가능성·real_price 엔진 실측 unobserved(huni-widget 영역).
+- **근거:**
+  - reverse PO-3: number1_sel=본 수량 슬롯(수량#10)·number4=별도. PO=real_price(대형실사·면적 기반)·"1배~10배"=출력 면적 배수 가능성(BN 현수막 면적×배수 동형·D-6 곱수형 price_flag).
+  - 둘 중 무엇이든 기존 축(#10 수량 다중 슬롯·#11 곱수형 가격기여)이 담음 — 새 축 부재.
+- **결론:** #10/#11 경계 + data-gap(vessel-gap 아님). → facet(거부). **★real_price 엔진 실측 후 확정할 표현력/적재 문제(NC 이산tier·OT 2치수·PD-4 내재BOM data-gap 동형). 갭분석가: number4가 수량(`product_prices` qty)인지 면적 곱수(formula 계수)인지 라이브 확인.**
+
+## PO-4. "사이즈 직접입력"(비규격 면적) — 사이즈#13 면적 연속차원(가로×세로 구간) [facet·★BN 동형·data-gap]
+
+- **판정:** **사이즈#13(D)의 면적 연속차원 모드(가로×세로 구간)** — 이산 siz_cd enum 아니라 비규격 면적 연속차원·BN 현수막/실사 면적매트릭스 동형.
+- **근거:**
+  - reverse PO-4: size select=`1000X1000` 1개 고정 + `사이즈 직접입력`(CUT_WDT_SEL/CUT_HGH_SEL 가로/세로 직접) = 이산 규격 거의 없음·사실상 비규격 연속.
+  - 면적 연속차원=dbmap 면적매트릭스 `siz_width`/`siz_height` 구간(메모리 `dbmap-area-matrix-wh-dimension`)·이산 siz_cd 채번 불요·`{siz_width, siz_height}` 구간 단가(BN/실사 동형).
+- **결론:** 면적축(BN 동형)·data-gap — 사이즈#13이 *이산 프리셋·면적 연속 두 모드*(OT 박스 2치수·NC 이산 부수와 같은 사이즈 표현력 계열). → facet(거부). **★후니가 PO류 취급 시 면적매트릭스 그릇에 적재=data-gap이지 vessel-gap 아님. distinct 아님(BN과 동형).**
+
+**PO 강제 분류 회피(SKILL §3·§5):** **distinct 승급 0건(★기재마운팅(제작방식)·자립구조 #18 둘 다 부결·★number4=#10/#11 경계 data-gap·사이즈 직접입력=면적 연속차원 data-gap) = 17축 재포화(PR·CL·AC·PD·PH·FS·NC·OT 패턴 반복).** 4 fragment(PO-1~PO-4) 전부 기존 17축 facet/data-gap. ★directive 최대 관전 2건 적대 판정: **제작방식=한 상품 내 "제작방식 select" 부재·이미 #12(NC 동형·중복 신축 금지)·자립구조=형상#17(모양재단)+부속물#8(거치대 add-on·GS/GSSBMTL 독립 SKU)** 무손실 분배. **★재포화 정당성(HARD 기준 양방향 점검):** 형상(#17·ST)은 ① 전용 슬롯(shape_info) + ② KB 결함 둘 다 충족(승격), **제작방식 #18 = ①전용 슬롯 부재(pdtCode 분기 enum·새 슬롯 0) + ②KB 결함 부재(=#12로 이미 1급) 둘 다 불충족(NC 인쇄방식과 정확히 동형 부결)·자립구조 #18 = ①거치대 슬롯 OBSERVED(CDL_DFT) + ②KB 결함 부재(형상#17·부속물#8이 담음) → ②불충족(PH 거치 동형 부결)**. **★PO 결정적 우월점 = 관측 기반 양방향 부결** — PH 거치는 §0.5 client-render 재캡처로 OBSERVED 격상 필요(SSR-negative 블로커)였으나 PO는 7상품 전부 SSR 완전노출 1회 GET으로 거치대/모양재단/제작방식 직접 실측 → 가장 깨끗한 관측 기반 부결. 13번째 카테고리(경질 기재 POP·등신대·피켓·directive 최대 관전 2건)가 새 관리축 0 = 모델 안정성 재확인.
+**PO가 더한 것(축 신설 아닌 *강화*):** ① **17축 재포화** — 13번째 카테고리 distinct 0(기재마운팅/자립구조 #18 후보 2건 정면 격파·관측 기반 양방향 부결). ② 인쇄방식#12(D-7) 5번째 인코딩(제작방식 합지/직접출력 pdtCode+paper variant·합지=라미 공정 게이팅 멤버·코팅 게이팅 D-7 lifecycle). ③ 자재#1 검정 variant + 기재×두께×색 합성(`{substrate, thickness, color}` 분해·AC 두께 mat_cd 직교 동형). ④ 부속물#8 "거치대 add-on이 독립 부자재 SKU(GS/GSSBMTL) 참조" 강화(D-1 가장 명시적 인스턴스·BN 거치대/AC 받침/PD 다리 합류). ⑤ 형상#17 모양재단(CUT_ZUN_ZDFRM)=ST 완칼 PO 인스턴스·자립=형상+부속물 분해(별 자립구조 축 불필요). ⑥ 사이즈#13 면적 연속차원(PO-4)·공정#2 타일링(TIL 대형 분할출력·BN/FS 동형)·인쇄면(sodu 단면/양면·등신대 단면 고정)=도수#3/공정#2.
+**검증 라우팅 요약:** 메타모델 해소 ✅ = PO-1·PO-2(축 귀속 확정·제작방식/자립구조 #18 부결) / data-gap 🟡 = PO-3(number4 #10/#11)·PO-4(면적 연속차원). 라이브/실측 검증 필요분 = number4_sel 수량 vs 면적 곱수(PO-3 → real_price 엔진 실측·huni-widget 영역·gap data-gap)·사이즈 직접입력 면적매트릭스 수용력(PO-4 → siz_width/siz_height 구간·gap data-gap)·거치대 add-on의 독립 SKU 참조 정규화(PO-2 → template_selections vs 옵션값 복제·그릇 단계). **★PO-3/PO-4 = data-gap(축 충분·표현력/엔진 실측 미적재)이지 vessel-gap(축 부재) 아님 — 갭분석가 핵심 구분(NC 이산tier·OT 2치수·PD-4·PH-2·FS-1 data-gap 동형).** **★dbmap 정합: rpmeta "제작방식=#12·자립=형상#17+부속물#8·면적=사이즈#13 면적축 data-gap·신축 #18 부결" = dbmap `dbmap-print-method-not-absolute-axis`(인쇄방식≠절대축)·`dbmap-area-matrix-wh-dimension`(면적매트릭스 siz_width/siz_height) — 같은 결론, 다른 렌즈·상호 보강(PO 합지가 별 가격엔진 없이 real_price 공유=제작방식이 시트 속성).**

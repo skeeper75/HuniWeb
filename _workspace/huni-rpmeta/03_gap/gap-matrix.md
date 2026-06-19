@@ -819,3 +819,57 @@ NC는 directive 최강 적대 프로브(인쇄방식 옵셋 vs 디지털이 dist
 - **★최강 #18 후보 정면 격파:** ST(distinct 1·17축)에 이어 PR(4)·CL(6)·AC(7)·PD(8)·PH(9)·FS(10)에 이어 **NC가 11번째 카테고리 distinct 0** — directive 최강 적대 프로브 "인쇄방식(옵셋 vs 디지털)"이 별도 가격엔진·이산 tier·전용 자재풀·item_gbn 토큰까지 가진 *가장 강력한 #18 후보*였으나 ① 전용 슬롯 부재(enum 토큰·새 슬롯 0) ② KB 결함 부재(#12로 이미 1급) 둘 다 불충족=가장 깨끗한 부결·모델 안정성 재확인.
 
 > 모든 판정 양쪽 증거 보유(메타모델 N-항목 + 후니 t_* 라이브 실측·2026-06-19 read-only psql 직접 SELECT — `t_prd_products.min_qty/max_qty/qty_incr/dflt_qty` 연속 increment 슬롯·`t_prd_product_bundle_qtys` bdl_qty 묶음수(28행·자재종속 tier 아님)·자재×부수 전용 테이블 0건·`t_prd_product_price_formulas` 76행/76상품/45공식 바인딩 그릇 작동·`price_formulas` frm_typ/pricing_model 라우팅키 부재·price_gbn/item_gbn 전역 0건·`t_mat_materials` 인쇄방식/호환 컬럼 0건·`t_prd_product_constraints.logic` jsonb(RULE_TYPE 3종·10행)·`t_prd_product_option_items` 폴리모픽 ref_key1/ref_key2(469행)·`t_dsc_discount_details.min_qty/max_qty` 부수구간 그릇 실재 전건 실측). **NC distinct 신축 0(인쇄방식 옵셋 vs 디지털 #18 부결=이미 #12)=신규 vessel-gap 0·facet 4항+N-5 신규 vessel-gap 0(기존 #5/#10/#11/#12/#13/#2 흡수)·★N-2 이산 부수 tier(directive 핵심)=data-gap not vessel-gap 라이브 확정(option_items/constraints.logic/t_dsc_* 그릇 실재·후니 KB 결함 부재·ST G-SK-2와 정반대)·기존 판정 전부 보존(17축 재포화·11번째 카테고리·최강 #18 후보 정면 격파).**
+
+---
+
+## XXVII. ★PO facet 갭 판정 — distinct 0(기재마운팅/자립구조 #18 부결)·facet 강화 4항 (라이브 2026-06-20 실측·v13.0·13번째 카테고리)
+
+> PO(포맥스·폼보드·등신대·피켓 = 경질 기재 인쇄물 POP·7상품)가 발굴한 PO-1~PO-4는 **전부 facet/관계 간선(distinct 신축 0·★기재마운팅/자립구조 #18 부결)** → 갭의 핵심 = "PO가 강화한 facet들을 후니가 같은 표현력으로 담는가 + 신규 vessel-gap이 진짜 필요한가(예상 0)"(PR·CL·AC·PD·PH·FS·NC·OT 패턴 반복). 입력 directive 4항을 라이브 information_schema 직접 SELECT(read-only 2026-06-20)로 판별. **신규 축 없음 = 신규 vessel-gap 없음**(전부 기존 §I~§XXVI 축 판정에 매핑·중복 계상 안 함). ★PO 결정적 우월점 = PH(client-render)·AC(SSR-negative)와 달리 7상품 전부 **SSR 완전노출** → distinct 판정이 *관측 기반*(추정 0).
+
+### XXVII-0. 라이브 실측 결과 (psql read-only 2026-06-20 — PO 4항 핵심 그릇 직접 조회)
+
+| 측정 | 라이브 결과 | facet |
+|---|---|---|
+| **`t_prd_product_addons` 컬럼** | `prd_cd·disp_seq·note·reg_dt·upd_dt·**tmpl_cd**`(addon→tmpl_cd FK→templates) — ★`addon_prd_cd` 컬럼 **부재**(cpq-schema 변경 흔적·현 라이브는 tmpl_cd 단일 참조) | PO-2 거치대 독립 SKU 참조 |
+| **addons 실데이터** | 5행·**PRD_000016이 TMPL-000005/006/009/010/011 5개 SKU 참조**(disp_seq 1~5) = ★한 본체 상품이 *여러 독립 SKU(template) add-on을 다중 귀속* 라이브 실증 | PO-2 다중 귀속 정규화 |
+| **합지/라미/코팅 공정 행** | `PROC_000013 코팅·014 유광·015 무광·038 금유광·039 은유광·040 먹유광·048 금무광·049 은무광` 라이브 실재 | PO-1 합지=라미/코팅 공정#2 |
+| **타일링/분할 공정 행** | 타일링/분할 *전용 row 0건*(`PROC_000084/096 열재단`만 매치=대형 분할출력 직접 row 부재) | PO §0.4 타일링=공정#2 배치 파라미터(FS-1 동형 data-gap) |
+| **`t_siz_sizes` 면적 2치수** | `work_width·work_height·cut_width·cut_height·margin_top/bot/lft/rgt` 보유 + 실데이터 work≠cut(SIZ_000007 A5: work150×212/cut148×210·SIZ_000051 work303×216/cut297×210) | PO-4 면적 연속차원·재단/작업 2치수 |
+| **`t_prd_products` nonspec 면적 범위** | `nonspec_yn·nonspec_width_min/max·nonspec_height_min/max·**nonspec_width_incr·nonspec_height_incr**` 7컬럼 실재 | PO-4 사이즈 직접입력(비규격 면적 연속) |
+| **인쇄방식 게이팅 컬럼** | `print_method/prn_mtd/allowed/pool/item_gbn/pricing_model` 전역 검색 **0건** | PO-1 제작방식#12 게이팅 |
+
+### XXVII-1. PO facet 4항 판정 (입력 directive 1~4)
+
+| # | PO facet (입력 directive) | 귀속 축(메타모델) | 판정 | 후니 t_* 실측 근거 | dbmap 교차 |
+|---|---|---|:---:|---|---|
+| **1** | **제작방식(합지 HAP vs 직접출력 PRT)** | 인쇄방식레시피#12(D-7·라미 게이팅) + 자재#1 검정 variant + 공정#2 코팅 캐스케이드 (§III-12·§I-1·§I-2) | **분산: GAP 1면(#12) + PASS 2면(#1·#2)** ❌/✅ | ★**합지=라미/코팅 공정#2 PASS**: `PROC_000013 코팅·014 유광·015 무광` 라이브 실재 → 합지(종이 인쇄→보드 라미네이트→코팅)의 후가공이 공정 행으로 표현됨(코팅 가용성 HAP=True/PRT=False 캐스케이드=제약#5). **검정포맥스/검정폼보드=자재#1 색 variant**(usage 본체소재 행 PASS·분해축 CLR은 §I-1 WEAK·V-3). **단 "제작방식→가능 후가공 부분집합 게이팅"(직접출력=코팅 불가) lifecycle은 #12 GAP**(`print_method/pool` 전역 0건). **★핵심: 제작방식 자체가 별 distinct 축 아님**(한 상품 내 "제작방식 select" 부재·pdtCode 분기·NC item_gbn 동형) → 인쇄방식#12의 *라미네이트 인스턴스*로 흡수. **기존 #12 GAP(게이팅 lifecycle)·#1 WEAK(검정 variant 분해축)·#2 PASS(코팅 공정)에 전부 분산**(신규 vessel 0·NC N-1/N-4 동형). | §III-12·§I-1·§I-2·`dbmap-print-method-not-absolute-axis`·round-22 ⑤공정 |
+| **2** | **★등신대 거치대(CDL_DFT) 다중 귀속 — add-on이 독립 SKU 참조하는가** | 부속물#8 add-on(독립 SKU=template 참조) (§II-8) | **PASS** ✅ | ★**라이브 실증: `t_prd_product_addons.tmpl_cd`(addon→template FK)로 add-on이 독립 SKU(template)를 참조**. **PRD_000016이 TMPL-000005/006/009/010/011 5개 독립 SKU를 다중 귀속**(disp_seq 1~5) = directive 핵심 질의("add-on이 독립 부자재 SKU를 참조하는 구조인가") **직답 = YES**. 거치대(700/1200/1500mm)·와이어가 독립 부자재 SKU(GS/GSSBMTL)로 카탈로그 존재하고 PO 본체에 add-on 결합되는 *다중 귀속*을 `addons(prd_cd→tmpl_cd)`이 무손실 표현. BN 거치대 D-1·AC 등신대 받침·PD 다리/받침 동형 PASS. **★단 옵션값 복제 아닌 SKU 참조 정규화 PASS**(템플릿 경유 독립 lifecycle). | §II-8·`cpq-schema.md`(addon addon_prd_cd→tmpl_cd 변경·현 라이브 tmpl_cd 단일)·`dbmap-acrylic-price-chain-link`(완제SKU=addons/templates) |
+| **3** | **number4_sel(1배~10배 면적배수) 수량 vs 가격계수** | 수량#10 / 가격기여역할#11(면적계수) 경계 (§II-10·§III-11) | **WEAK / data-gap** 🟡 | number1_sel(디자인 수/건수)와 별도 number4_sel(1배~10배)·real_price=면적 기반 → "배수"=출력 면적 배수(가격계수) 가능성. **후니 수량모델 ⑩ WEAK**(ORD_CNT 건수×면적배수 이중 의미 슬롯 분리 미확인·§II-10 동일)·면적계수는 가격#11 component_prices 차원(가격 사슬). **real_price 가격엔진 실제 계산(면적단가·배수 의미)=unobserved**(huni-widget 가격역공학 영역·이번 미확보). **기존 #10 WEAK·#11 WEAK 경계에 흡수·실 계산값=data-gap**(NC N-2 이산 tier·BN 면적×배수 동형). | §II-10·§III-11·`dbmap-compute-in-app-db-stores-lookup`(면적계수=앱/룩업) |
+| **4** | **"사이즈 직접입력"(비규격 면적) 사이즈#5 enum vs 면적 연속차원** | 사이즈#13 면적 연속차원(가로×세로 구간) (§III-13) | **PASS** ✅ | ★**면적 연속차원 그릇 PASS**: `t_prd_products.nonspec_yn·nonspec_width_min/max·nonspec_height_min/max·nonspec_width_incr·nonspec_height_incr` 7컬럼 실재 → "사이즈 직접입력"(가로/세로 비규격 면적)을 **이산 siz_cd 아닌 연속 범위(min/max/incr)로 표현**. size 프리셋(1000X1000)+자유입력 혼합은 `t_siz_sizes`(work/cut 2치수)+nonspec 범위 병용으로 무손실. **BN 현수막·실사 면적매트릭스(siz_width/siz_height 구간)·OT 박스 2치수 동형 PASS**(§VI GS 정정으로 nonspec 범위 vessel 존재 확정·OT O-3 PASS 재확인). **★distinct 아님·면적축은 후니 그릇 보유.** | §III-13·§VI(nonspec 범위 GS 정정)·§XXIII(OT O-3 면적 2치수 PASS)·`dbmap-platesize-is-output-paper` |
+
+> **★결론(입력 4항 직답):** PO facet 4건 = **PASS 2 (#2 거치대 독립 SKU·#4 면적 연속차원) · WEAK/분산 2 (#1 제작방식=#12 GAP+#1 WEAK+#2 PASS 분산·#3 number4=#10/#11 WEAK·data-gap)**. ① **거치대 독립 SKU 참조**(PO-2·directive 핵심)=★`t_prd_product_addons.tmpl_cd`로 add-on이 독립 SKU(template)를 참조하고 **PRD_000016이 5개 SKU 다중 귀속** 라이브 실증 = "add-on이 독립 부자재 SKU 참조"가 **무손실 PASS**(옵션값 복제 아닌 정규화). ② **면적 연속차원**(PO-4)=`nonspec_width/height_min/max/incr` + `t_siz_sizes` work/cut 2치수로 사이즈 직접입력을 연속 범위로 **PASS**(이산 siz_cd 아님·BN/실사/OT 동형). ③ **제작방식**(PO-1)=한 상품 내 "제작방식 select" 부재·합지=라미/코팅 공정#2 PASS·검정 variant=#1 WEAK·게이팅 lifecycle=#12 GAP으로 **3축 분산 흡수**(NC item_gbn 동형·신규 축 아님). ④ **number4 면적배수**(PO-3)=#10/#11 WEAK 경계·real_price 계산=data-gap(huni-widget). **★핵심: PO가 distinct 신축 0(기재마운팅/자립구조 #18 부결)이므로 신규 vessel-gap도 0 — PASS 2·WEAK/분산 2는 전부 기존 판정(#1·#2·#8·#10·#11·#12·#13)에 이미 잡힌 것을 PO facet이 재확인. PO가 더한 것은 새 그릇 수요가 아니라 *기존 그릇(부속물#8 독립 SKU 참조·면적 연속차원·라미 공정)이 경질 기재 POP/등신대/자립구조를 견딘다는 관측 기반 검증 신호*(13번째 카테고리 재포화).**
+
+### XXVII-2. 거치대 독립 SKU 다중 귀속 — 미묘점 (PO-2 directive 핵심·PASS 정규화)
+
+PO directive 최대 관전 = "거치대 add-on(CDL_DFT)이 옵션값 복제인가, 독립 부자재 SKU를 참조하는 정규화 구조인가". **라이브 실측 = 후자(정규화 PASS)**: `t_prd_product_addons`는 `prd_cd→tmpl_cd`(template FK) 구조로, add-on이 **독립 template SKU를 참조**(옵션값 인라인 복제 아님). PRD_000016이 5개 독립 TMPL을 disp_seq로 다중 귀속하는 실데이터가 이를 입증 — 한 부자재(거치대/와이어)가 GS/GSSBMTL 독립상품으로도 존재하면서 PO 본체에 add-on으로 결합되는 *두 경로(독립 SKU + 본체 add-on)*를 후니가 `addons.tmpl_cd`로 **무손실 정규화 표현**. ★단 cpq-schema가 기록한 `addon_prd_cd→tmpl_cd` 변경 흔적이 라이브에 반영됨(현 컬럼=tmpl_cd 단일·addon_prd_cd 부재) → addon이 *상품(prd)*이 아닌 *template(SKU)*를 참조하는 모델로 확정. BN 거치대 D-1·AC 받침·PD 다리/받침 횡단 부속물#8 동형 PASS — **새 "자립구조 축" 불필요**(부속물#8이 독립 SKU 참조까지 담음).
+
+### XXVII-3. 타일링(분할출력) — 미묘점 (FS-1 타일링 data-gap 동형)
+
+PO 타일링(TIL_NON/HGH/WDT 세로/가로 분할출력)은 대형실사(real_item) 고유 생산옵션. 라이브 `t_proc_processes`에 **타일링/분할 전용 row 0건**(열재단만 매치) → 타일링은 공정#2 인쇄 배치 파라미터(FS-1 타일링 TILL_WH_GBN·접지 면분할·plate_size 임포지션 동근)로 흡수되나 *공정 행 미적재*=**data-gap**(vessel-gap 아님·FS-1·판걸이수≠타일링 경계 동일). 후니가 PO 대형출력 취급 시 공정#2 배치 파라미터(#9)에 타일링 멤버 적재 = data·축 부재 아님.
+
+---
+
+## XXVIII. v13.0 종합 카운트 (PO 통합 — 신규 축 0·카운트 불변·17축 재포화·13번째 카테고리)
+
+| 판정 | 개수 | 축 | PO 영향 |
+|---|---:|---|---|
+| **PASS** | 5 | ②공정 · ③옵션 · ⑥기초코드 · ⑦카테고리 · ⑧부속물 (+ ①usage·④template_prices·⑬nonspec·T-C page_rules·T-E 특수인쇄·S-3 재단입자·C-7 Pantone 별색·A-3 받침·A-5 화이트·PD-3 단수/형상·PH-1/PH-2 거치·FS 별색/완제부자재·N-5 접지·O-3 박스2치수·**PO-2 거치대 독립 SKU 다중 귀속[부속물#8]·PO-4 면적 연속차원[사이즈#13]·합지=코팅 공정[#2]** = PASS 측면) | **PO-2 거치대 독립 SKU 참조가 ⑧부속물 PASS 강화(addons.tmpl_cd 다중 귀속 라이브 실증)·PO-4 면적 연속차원이 ⑬사이즈 nonspec 범위 PASS 강화·합지=코팅 공정이 ②공정 강화** — 17축 재포화 재입증(관측 기반) |
+| **WEAK** | 8 | ①자재(분해축·**PO-1 검정 variant**) · ④템플릿 · ⑤제약(**PO-1 코팅 가용성 캐스케이드**) · ⑩수량모델(**PO-3 number4 면적배수**) · ⑪가격기여역할(**PO-3 면적계수**) · ⑬사이즈 · #15 생산형태 · T-A 템플릿 자산 | **PO-1 검정 variant가 ①에·코팅 캐스케이드가 ⑤에·PO-3 number4가 ⑩/⑪에 재확인** — 신규 WEAK 0 |
+| **GAP** | 5 | ⑨공정파라미터 · ⑫인쇄방식레시피(**PO-1 제작방식 게이팅 lifecycle**) · #14 본체형태가공 · #16 디자인 입력 채널 · #17 형상 | **PO-1 제작방식(합지/직접출력)→가능 후가공 게이팅이 ⑫에 재확인**(NC item_gbn·PR P-7 합류·신규 아님) |
+
+- **PO 판정 요지:** distinct 신축 0(기재마운팅/자립구조 #18 부결) → **신규 PASS/WEAK/GAP 축 0**. PO facet 4항 = PASS 2(#2 거치대 독립 SKU=부속물#8·#4 면적 연속차원=사이즈#13)·WEAK/분산 2(#1 제작방식=#1 WEAK/#2 PASS/#12 GAP 분산·#3 number4=#10/#11 WEAK·data-gap). PO가 한 일 = ① PO-2 거치대 독립 SKU 다중 귀속(addons.tmpl_cd)·PO-4 면적 연속차원(nonspec 범위) PASS로 기존 그릇 견딤 **검증**(17축 재포화·PR·CL·AC·PD·PH·FS·NC·OT 패턴 반복) ② WEAK/분산 2건이 기존 #1·#10·#11·#12에 이미 잡혔음 **재확인**(중복 계상 안 함) ③ ★PO-2 거치대 독립 SKU 참조(directive 핵심)가 vessel-gap 아닌 **부속물#8 PASS 라이브 실측 확정**(addons.tmpl_cd 다중 귀속·옵션값 복제 아닌 정규화).
+- **PO가 추가하는 vessel-needs = 0건** — 전부 기존 V-항목(자재 V-3[검정 variant 분해축]·인쇄방식 V-2[제작방식 게이팅]·가격 V-7[면적계수])에 흡수. PO-2 거치대 독립 SKU·PO-4 면적 연속차원은 **PASS(그릇 실재)·vessel 불요**. 타일링·real_price 면적계수 실계산=**data-gap**(dbmap/huni-widget 트랙). PO 통합으로 vessel-needs 신규 항목 없음(BN/GS/TP/PR/ST/CL/AC/PD/PH/FS/NC/OT V-1~V-12 불변·★신규 mint V-11/V-12 불변).
+- **PO가 BN~OT 정정 안 함:** PO는 경질 기재 POP/등신대/피켓을 기존 축 facet으로 흡수한 *재포화*라 기존 판정 불변(보존). PO-1~PO-4는 기존 #1/#2/#8/#10/#11/#12/#13 판정 측면 강화·신규 갭 아님.
+- **★기재마운팅/자립구조 #18 후보 부결(관측 기반):** ST(distinct 1·17축)에 이어 PR(4)·CL(6)·AC(7)·PD(8)·PH(9)·FS(10)·NC(11)·OT(12)에 이어 **PO가 13번째 카테고리 distinct 0** — directive 최대 관전 "기재마운팅(합지/직접출력)·자립구조(등신대 거치대/피켓)"가 평면 인쇄물에 없던 입체 차원 + 거치대 독립 SKU까지 가진 강력한 #18 후보였으나 ① 전용 슬롯 부재(제작방식=pdtCode 분기·거치대=부속물#8 독립 SKU 참조 그릇 실재) ② KB 결함 부재(인쇄방식=#12로 이미 1급·부속물#8이 독립 SKU 다중 귀속 무손실 표현) 둘 다 불충족=부결. ★PO 우월점 = SSR 완전노출로 PH(§0.5 재캡처 필요)와 달리 *1회 GET 관측 기반 부결*. 모델 안정성 재확인.
+
+> 모든 판정 양쪽 증거 보유(메타모델 PO-항목 + 후니 t_* 라이브 실측·2026-06-20 read-only psql 직접 SELECT — `t_prd_product_addons` 컬럼[prd_cd·disp_seq·tmpl_cd·addon_prd_cd 부재]·addons 5행 PRD_000016 5 SKU 다중 귀속·`PROC_000013 코팅/014 유광/015 무광` 합지 공정 실재·타일링 전용 row 0건·`t_siz_sizes` work/cut/margin 2치수 + work≠cut 실데이터·`t_prd_products` nonspec_width/height_min/max/incr 7컬럼·print_method/pool/item_gbn 전역 0건 전건 실측). **PO distinct 신축 0(기재마운팅/자립구조 #18 부결)=신규 vessel-gap 0·facet 4항 신규 vessel-gap 0(기존 #1/#2/#8/#10/#11/#12/#13 흡수)·★PO-2 거치대 독립 SKU 다중 귀속=부속물#8 PASS 라이브 확정(addons.tmpl_cd)·PO-4 면적 연속차원=사이즈#13 PASS(nonspec 범위)·기존 판정 전부 보존(17축 재포화·13번째 카테고리·기재마운팅/자립구조 #18 관측 기반 부결).**
