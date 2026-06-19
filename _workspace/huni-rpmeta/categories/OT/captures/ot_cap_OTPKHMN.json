@@ -1,0 +1,147 @@
+{
+  "code": "OTPKHMN",
+  "url": "https://www.redprinting.co.kr/ko/product/item/OT/OTPKHMN/detail",
+  "infoCallCount": 0,
+  "retCode": null,
+  "option": null,
+  "product_data": null,
+  "raw_keys": [],
+  "otherApis": [
+    {
+      "u": "https://makers.redprinting.net/v1/templates/OTPKHMN",
+      "len": 5758,
+      "snip": "{\"list\":[{\"template_uri\":\"gcs://template/partners/redp/res/template/798066.json\",\"layout_uris\":[],\"unresolved_font_group_ids\":[],\"resource_id\":798066,\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJw"
+    },
+    {
+      "u": "https://makers.redprinting.net/v1/templates/OTPKHMN?lang=ko",
+      "len": 5758,
+      "snip": "{\"list\":[{\"template_uri\":\"gcs://template/partners/redp/res/template/798066.json\",\"layout_uris\":[],\"unresolved_font_group_ids\":[],\"resource_id\":798066,\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJw"
+    },
+    {
+      "u": "https://makers.redprinting.net/editor",
+      "len": 8271,
+      "snip": "{\"product\":{\"productCode\":\"OTPKHMN\",\"allowDivisionList\":[],\"division\":\"host\",\"productName\":\"반달상자\",\"cateCode\":\"R8\",\"divCode_master\":\"host\",\"dpName\":\"반달상자\",\"dpNameLn\":{\"en\":\"Pillow Box\",\"ko\":\"반달 상자\"},\"e"
+    }
+  ],
+  "dom": {
+    "specKw": {
+      "오시": 1,
+      "사이즈": 9,
+      "높이": 1,
+      "코팅": 2,
+      "수량": 2,
+      "후가공": 2,
+      "박": 1,
+      "용지": 3,
+      "날개": 1
+    },
+    "selects": [
+      {
+        "label": "paper",
+        "opts": [
+          "BV"
+        ]
+      },
+      {
+        "label": "paper_sub_select",
+        "opts": [
+          "350"
+        ]
+      },
+      {
+        "label": "sodu",
+        "opts": [
+          "단면"
+        ]
+      },
+      {
+        "label": "size",
+        "opts": [
+          "반달상자(소) (195 X 245)",
+          "반달상자(중) (285 X 377)",
+          "반달상자(대) (390 X 470)"
+        ]
+      },
+      {
+        "label": "number2_sel",
+        "opts": [
+          "건수직접입력",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14"
+        ]
+      },
+      {
+        "label": "number1_sel",
+        "opts": [
+          "수량 직접 입력",
+          "10",
+          "30",
+          "50",
+          "100",
+          "150",
+          "200",
+          "500",
+          "1000",
+          "1500",
+          "2000",
+          "2500",
+          "3000",
+          "3500",
+          "4000"
+        ]
+      },
+      {
+        "label": "",
+        "opts": [
+          "PARTNER SITE",
+          "반크",
+          "Redprinting Singapore",
+          "OnePrint",
+          "잇츠카드(카드의 모든 것)",
+          "베러웨이시스템즈 회사소개"
+        ]
+      }
+    ],
+    "optBlocks": [
+      "BV",
+      "BV",
+      "BV",
+      "350",
+      "350",
+      "350",
+      "단면",
+      "단면",
+      "단면",
+      "반달상자(소) (195 X 245)반달상자(중) (285 X 377)반달상자(대) (390 X 470)",
+      "반달상자(소) (195 X 245)",
+      "반달상자(소) (195 X 245)",
+      "반달상자(중) (285 X 377)",
+      "반달상자(중) (285 X 377)",
+      "반달상자(대) (390 X 470)",
+      "반달상자(대) (390 X 470)",
+      "건수직접입력12345678910111213141516171819202122232425262728293031323334353637383940414",
+      "건수직접입력",
+      "건수직접입력",
+      "1",
+      "1",
+      "2",
+      "2",
+      "3",
+      "3"
+    ],
+    "bodyLen": 4121,
+    "snip": "디지털 인쇄 옵셋 공장 쉬운주문 대형 실사출력 성수동 사진관 성수동 문방구 0 명함 홍보물 스티커 스테이셔너리 책의 완성 스탬프 가게 용품 패브릭/잡화 의류/가방 라이프 러브팝 신제품 반달상자 커스텀 제품 반달상자 사이즈 소 중 대 제품사이즈 : 110 X 150mm (높이:35mm ) 재단사이즈 : 185 X 235mm 작업사이즈 : 195 X 245mm 용지 BV 주문가능용지 수량 10 개 직접 입력하기 사용자 입력은 기본 올림되어 수량이 선택되며, 200매 초과 입력 시 500매 단위 선택만 가능합니다. 파일 업로드 파일 업로드 방법을 바꾸면 이전 것은 초기화됩니다 템플릿 PDF ONLY 에디터 PDF ONLY 1개의 PDF파일(*.PDF)만 업로드 가능 * MS-OF"
+  }
+}
