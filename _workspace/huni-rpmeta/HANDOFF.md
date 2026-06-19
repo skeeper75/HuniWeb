@@ -2,11 +2,17 @@
 
 > RedPrinting 옵션 관리 메타모델 역공학 → 후니 기초데이터 관리 "그릇" 설계 하네스.
 > 트리거·변경이력 = CLAUDE.md §11 · 메모리 [[huni-rpmeta-harness]].
-> 최종 갱신: 2026-06-17 (PH 종단 GO — gstack client-render 재캡처로 마운팅 블로커 해소·9 카테고리·17축 수렴)
+> 최종 갱신: 2026-06-19 (하네스 강화 codex 게이트 교차검증 레인 신설 Phase 6.5 + FS 패브릭 종단 GO·10 카테고리·17축 수렴)
 
 ---
 
-## 진행 현황 (9 종단 GO · 26 카테고리 중)
+## 하네스 강화 (2026-06-19) — codex 게이트 교차검증 레인 (Phase 6.5)
+
+신규 에이전트 `rpm-codex-validator` + 스킬 `rpm-codex-validate` 신설 → **8인 팀**. rpm-validator(Claude)의 M1~M6·distinct 승격/부결 *판정(결론)* 을 codex(gpt-5.5)로 독립 재판정 후 reconcile. **deepcheck(누락 발굴·Phase 4.5)와 구분 = 결론 검증.** ★독립성[HARD]: codex 프롬프트에 우리 verdict 비노출(echo 방지) + workdir=`categories/{CAT}/` 격리(05_validation 접근 차단). codex 판정=가설(환각 경계·자동 flip 금지·라이브 우선). 미가용 시 "codex 미가용·Claude 단독"(pending 금지). FS에서 첫 실증 성공(ABSORBED 전건 합의·divergence 0). **★codex 호출 함정: codex-review.sh 내부 preflight를 백그라운드로 부르면 행(hang·exit 144)·`timeout` 미설치 시 exit 127 → `codex exec -m gpt-5.5 --sandbox read-only --output-last-message <out>` foreground 직접 호출로 우회.** 출력: `categories/{CAT}/codex-verdict.md` + `05_validation/codex-reconcile-{CAT}.md`.
+
+---
+
+## 진행 현황 (10 종단 GO · 26 카테고리 중)
 
 | # | 카테고리 | 상품 | distinct 판정 | 게이트 |
 |---|---------|------|--------------|--------|
@@ -18,20 +24,20 @@
 | 6 | CL 의류 | 30 | distinct 0 (의류 variant 부결·17축 재포화) | M1~M6 GO |
 | 7 | AC 아크릴 | 20 | distinct 0 (두께/입체/가공방식·layer-stack 부결) | M1~M6 GO |
 | 8 | PD 스툴·구조물 | 3 | distinct 0 (봉제/내재BOM 부결) | M1~M6 GO |
-| 9 | **PH 포토보드·액자·사진인화** | 30 | **distinct 0 (마운팅/거치 #18 부결·17축 재포화 9번째)** | **M1~M6 GO** |
+| 9 | PH 포토보드·액자·사진인화 | 30 | distinct 0 (마운팅/거치 #18 부결·17축 재포화 9번째) | M1~M6 GO |
+| 10 | **FS 패브릭(직물 풀프린팅+봉제 완제)** | 21 | **distinct 0 (타일링·패널 cut-and-sew #18 둘 다 부결·17축 재포화 10번째)** | **M1~M6 GO + Phase 6.5 codex ABSORBED 합의** |
 
-상품 커버리지 누적 ≈ 357/479 (75%). 메타모델 = **17축**(7정적 + 발굴 10; #16 TP·#17 ST). 신규 그릇 mint 누적 = V-11(TemplateAsset)·V-12(SHAPE) 2건뿐.
+상품 커버리지 누적 ≈ 378/479 (79%). 메타모델 = **17축**(7정적 + 발굴 10; #16 TP·#17 ST). 신규 그릇 mint 누적 = V-11(TemplateAsset)·V-12(SHAPE) 2건뿐(search-before-mint 10연속 통과).
 
 ---
 
 ## 다음 시작점 (fresh 세션이 바로 할 것)
 
-PH 종단 완료. PH 1순위 블로커 해소(gstack 재캡처). 남은 작업은 "신규 축 가능성 높은 것만 선별" 모드.
+FS 종단 완료(타일링·패널 둘 다 #18 부결·distinct 0·codex 교차검증 합의). 남은 작업은 "신규 축 가능성 높은 것만 선별" 모드.
 
 ### 1순위 — 선별 잔여 카테고리 (사용자 "신규 축 가능성 높은 것만 선별" 모드)
-- **FS 패브릭(21)** — 직물/봉제 굿즈. CL 의류·PD 봉제·GS 소재 facet과 겹침 예상(distinct 가능성 낮음·17축 검증 성격).
-- 그 외 ~16개 미분석은 17축 검증 성격(새 축 가능성 낮음). 전수는 사용자가 보류함.
-- **경량 패턴**(PR/CL/AC/PD/PH): reverse → metamodel(summary.md) → gap(03_gap 확장) → deepcheck(codex gpt-5.5) → vessel(신규 0 확인) → visualize(codex-image/mermaid) → M1~M6(validator).
+- ~16개 미분석은 17축 검증 성격(새 축 가능성 낮음·전수는 사용자가 보류). FS(직물/봉제)까지 재포화로 17축 강건성 강한 신호 — 잔여는 사용자가 선별 요청 시만.
+- **경량 패턴 + Phase 6.5(신규)**: reverse → metamodel(summary.md) → gap(03_gap 확장) → deepcheck(codex gpt-5.5·발굴) → vessel(신규 0 확인) → visualize(codex-image/mermaid·경량 시 deferred) → M1~M6(rpm-validator) → **Phase 6.5 codex 교차검증(rpm-codex-validator·결론 검증·reconcile)**.
 
 ### 2순위 — carry-forward 미검증 후보 (라이브 실측 대상)
 - **PH deepcheck**: H-1 content-container(완제 그릇 이중성·#18 최강 적대 후보)·H-2 매팅/패스파르투(mat board 색/폭/창)·H-3 aperture/창 기하(듀얼·멀티 프레임)·M-4 glazing 다형성·M-6 포토북 페이지 모델 = **전부 unobserved-pending**. §0.5에서 미캡처(원목/알루미늄 "스타일" 진입형·한나무/멀티 액자·포토북 면수). 별 슬롯으로 OBSERVED되면 그때 그릇 검토 — **현재 mint 0**.

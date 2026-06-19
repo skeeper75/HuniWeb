@@ -738,3 +738,113 @@
 **PH 강제 분류 회피(SKILL §3·§5):** **distinct 승급 0건(★완제 액자 그릇/마운팅 PH-1·PH-2 #18 부결) = 17축 재포화(PR 4번째·CL 6번째·AC 7번째·PD 8번째 distinct 0 패턴 반복).** 6 fragment(PH-1~PH-6) 전부 기존 17축 facet/family/cascade/정책. ★directive 최대 관전(완제 프레임·마운팅/거치·전면 보호재가 distinct #18인가) 적대 판정: ① 완제 프레임=완제SKU#4(거치+마감+사이즈 인코딩)+자재#1 프레임재질 variant+생산형태#15(AC variant·GS 완제SKU G-1 동형) · ② 거치(탁상용/벽걸이)=옵션#3 캐스케이드 상위 차원(★§0.5 RESOLVED OBSERVED·블로커 해소·옵션 구현이지 별 그릇 아님)·전면재=자재#1 내재(디아섹 상품내재) · ③ 인화지×마감=자재#1 surface-finish(ST S-4/AC A-2 동형) · ④ set 단위=수량#10+완제SKU#4 base_quant(GS 동형) · ⑤ 머그·화분=카테고리#7 다중분류(GS 동형) · ⑥ 형태(일반/정사각/파노라마)=사이즈#13 비율 프리셋 흡수(★형상#17 부결·1:1·형상축 강제 금지). **★재포화 정당성(HARD 기준 양방향 점검):** 형상(#17·ST)은 후니 KB G-SK-2 "어느 축에도 없음" 결함이 distinct 강제(① 전용 슬롯 + ② KB 결함 둘 다 충족·승격)했으나, PH 6 fragment(완제 프레임·마운팅 포함)는 **① 전용 슬롯 OBSERVED(거치 버튼 토글)되었으나 ② 후니 KB 결함 명시 없음**(완제SKU#4·옵션#3·자재#1·사이즈#13이 왜곡 없이 담음) → ②가 불충족 → distinct 0 정직. §0.5 재캡처가 블로커를 OBSERVED로 해소했음에도 거치가 옵션 캐스케이드 + 완제 SKU variant로 구현됨이 실측 → facet 결론이 미싱데이터 해소 후에도 강화. 9번째 카테고리(완제 액자/출력매체)가 새 관리축 0 도입 = 모델 안정성 재확인(가장 distinct로 보이던 2-파트 완제 그릇·directive 최대 관전 마운팅/거치도 무손실 흡수).
 **PH가 더한 것(축 신설 아닌 *강화*):** ① **17축 재포화** — 9번째 카테고리 distinct 0(PR·CL·AC·PD 패턴 반복). ② 완제SKU#4 "거치+마감+사이즈 인코딩 완제 SKU combobox" 강화(AC 두께/소재 variant·GS 완제 본체 SKU G-1 합류·라벨 융합 분해 처방). ③ 자재#1 프레임재질 variant 확장(한나무/애쉬/원목/알루미늄/종이/아크릴/디아섹·AC 소재 variant 합류)·인화지×마감 surface-finish(ST S-4/AC A-2 합류·V-3). ④ 옵션#3 "거치방식 캐스케이드 상위 차원" 강화(거치→마감→완제SKU사이즈→수량·AC GRP_OPTION_CD cascade 동형). ⑤ 사이즈#13 비율(aspect ratio) 프리셋 흡수 입증(형상 1:1·형상#17 강제 금지 재확인·PD-3 합류). ⑥ 제약#5 [재고부족]disable(§0.5 PHPRDFT OBSERVED·ST disable·AC 명찰 cascade 합류). ⑦ 카테고리#7 출력매체 vs 물성 다중분류(GS G-2 합류). ⑧ 가격#11 tmpl/digital_price 라우팅·생산형태#15 완제품 governing 재확인.
 **검증 라우팅 요약:** 메타모델 해소 ✅ = PH-1·PH-2·PH-3·PH-5·PH-6(축 귀속 확정·거치 블로커 §0.5 RESOLVED) / 부분 🟡 = PH-4(set base_quant unobserved 상세). 라이브/엑셀 검증 필요분 = 거치 캐스케이드 polymorphic ref 매핑(PH-1/PH-2 → gap data-gap)·전면 보호재 별옵션 액자(한나무/멀티 미캡처)·후면 받침 부속물#8(PH-2 → unobserved 재캡처)·인화지×마감 surface-finish 분해 그릇(PH-3 → V-3 ST/AC 합류)·포토북 면수/제본 client-render(PHBK* 미캡처). **★PH-1/PH-2 = data-gap(완제 SKU/거치 캐스케이드 그릇 미적재)이지 vessel-gap(축 부재) 아님 — 갭분석가 핵심 구분(PD-4 data-gap·AC A-3 PASS 동형).**
+
+---
+
+# FS(패브릭·봉제 완제 직물 굿즈) fragment 판정 (v10.0 — 면직물·타일링·마감봉제·완제 부자재)
+
+> `categories/FS/reverse.md`의 FS-1~FS-8 판정. **10 상품군(BN·GS·TP·PR·ST·CL·AC·PD·PH·FS) 증거.** ★directive 1순위 = 타일링(FS-1) distinct #18 적대 판정. 과잉 일반화 경계(SKILL §5): FS 한 군만의 특이는 facet 강등. distinct 승급 = 10 상품군 견디는 governing/lifecycle + 후니 KB 결함(무왜곡 흡수 불가) 둘 다 충족 시만.
+> 도메인 정초 = `07_domain/{entity-semantic-model.md(plate_size 임포지션/판걸이 #6·자재 usage·두께=자재),pdf-domain-knowledge.md(조판/임포지션 §4-2·판걸이=원판당 작업물 개수)}` + PD/CL/AC/BN/GS 직접 대조. domain-researcher 신규 호출 불요(타일링=인쇄 배치/조판 파라미터·면직물=자재 PTT·면사 수=WGT 번수·마감봉제=공정 전부 후니 KB에 확정 존재).
+
+## FS-1. ★타일링(TILL_WH_GBN 없음/세로/가로) — 공정#2 인쇄 배치 파라미터#9 [distinct #18 부결] ★directive 1순위 핵심 의사결정
+
+- **판정:** **공정#2 인쇄 배치(조판/임포지션) 파라미터(#9 종속) facet. distinct #18 거부.**
+- **양면 트레이드오프 펼침(침묵 선택 거부):** discovered-axes FS-1 참조 — (가) 별도 "타일링/반복 배치 축 #18" 신설 vs (나) 공정#2 인쇄 배치 파라미터 facet. **(나) 채택.**
+- **★ST 형상(#17)·PH 거치와 같은 HARD 양방향 기준 적용:** ① 전용 슬롯 라이브 실재(TILL_WH_GBN 명시 라디오·5상품 전수 OBSERVED=**충족**) + ② 후니 KB가 기존 축으로 무왜곡 흡수 불가(결함)=**불충족** → distinct 0.
+  - **① 충족:** TILL_WH_GBN(TIL_NON/TIL_HGH/TIL_WDT)이 BN/GS/TP/PR/ST/CL/AC/PD/PH 전 9 카테고리 어디에도 없던 *전용 라디오 슬롯*·5상품 전수(`[live:SSR]`). ST 형상 shape_info처럼 "전용 슬롯=distinct 신호" 형식 충족.
+  - **② 불충족(결정적):** 후니 KB `plate_size`(#6·`entity-semantic-model.md:27` "작업/전지 판형·**임포지션·판걸이**·돔보")·`pdf-domain-knowledge.md:146` "조판(임포지션)=작업물을 원판에 판걸이 개수만큼 앉히는 행위"가 *인쇄 배치를 이미 1급 모델링*. 타일링(직물 풀프린팅 세로/가로 반복 배치)=그 배치 차원의 고객 선택값이 공정#2 인쇄 배치 파라미터(#9·접지 FLD_DFT 면분할·오시 줄수·UV 변형 동근)로 *왜곡 없이 담김*. 후니 KB에 "패턴 반복/배치 어느 축에도 없음" 같은 결함 명시 **없음**(ST 형상 G-SK-2 "형상 어느 축에도 없음" 결함과 정반대) → ②불충족.
+- **★핵심 경계(HARD) — 타일링 ≠ 판걸이수:** 타일링은 *고객측 디자인 반복 배치 입력 파라미터*(없음/세로/가로 라디오·공정 파라미터#9 등재)이고, **판걸이수(imposition count)=앱 계산 파생값**(`pdf-domain-knowledge.md:149` "판걸이=원판당 앉히는 작업물 개수"·메모리 `dbmap-compute-in-app-db-stores-lookup` "판걸이수=앱계산 DB미저장·파라미터에 넣지 말 것"). 임포지션=N개 *다른* 작업물을 한 원판에(다도안 판걸이), 타일링=한 디자인 *반복* 배치(직물 면 채움)·둘 다 plate_size/조판 도메인의 facet이나 — 타일링=입력 파라미터(등재), 판걸이수=그 입력+사이즈로 앱이 계산하는 파생값(DB 미저장·등재 금지). **★타일링은 입력이므로 공정 파라미터#9로 등재(판걸이수처럼 앱계산 파생값과 혼동 금지).**
+- **역방향 오류(distinct를 facet으로 숨김) 점검:** "전 9 카테고리 미관측 전용 슬롯"이 유일 잔여 후보였으나 plate_size(#6 임포지션)·공정 파라미터(#9 접지/오시)가 인쇄 배치를 왜곡 없이 담음 → facet 정당(숨김 아님·새 관리 관심사 없음). 가격 영향(반복=인쇄 면적/방식 변화)은 모든 공정 파라미터가 가짐(가격기여역할#11)이지 distinct 사유 아님·unobserved(infoCall 후행).
+- **메타모델 해소:** ✅ 공정#2 인쇄 배치 파라미터#9 귀속 확정(distinct #18 부결). **★RP가 타일링을 공정 배치 라디오로 둠 = data-gap(후니가 직물 타일링 취급 시 공정#2 인쇄 배치 파라미터#9에 적재해야 할 반복 배치 선택을 미적재)이지 vessel-gap(축 부재) 아님** — 갭분석가 핵심 구분(PD-4 data-gap·PH-1/PH-2 동형). **검증 필요분: 타일링↔가격(반복 배치 가산) infoCall 캡처 → gap/validation.**
+
+## FS-2. 방향(PAPER_WH W/H) — 사이즈#13 방향 facet [distinct 거부]
+
+- **판정:** **사이즈 축(#13)의 방향 facet. distinct 거부.**
+- **근거:** FSSQPST PAPER_WH=W(가로)/H(세로)(`[live:SSR]`)=본체 직물 방향(가로/세로 치수 매핑). 사이즈 직접입력 시 가로/세로 치수 입력(icon_txt "가로"·"세로"). entity-semantic #1 size=재단치수의 방향 facet. **★타일방향(TILL_WH_GBN)과 분리 슬롯 = 방향(본체)≠타일방향(패턴):** PAPER_WH=본체 직물의 가로/세로(사이즈#13), TILL_WH_GBN=디자인 패턴 반복 방향(공정#2 배치 param·FS-1) — 둘은 다른 의미축(본체 방향 vs 패턴 반복 방향)·분리 슬롯 정당.
+- **메타모델 해소:** ✅ 사이즈#13 방향 facet 귀속 확정.
+
+## FS-3. 면직물 자재(면사 수 PXFBW0NN) — 자재#1 PTT 직물 + WGT 다의(번수) [distinct 거부]
+
+- **판정:** **자재 축(#1)의 PTT 직물 차원 + WGT 슬롯 다의(번수). distinct 거부.**
+- **근거:** 면10수/20수/40수/60수 화이트(MTRL_CD=PXFBW0NN·FB=fabric·W=white·NN=수)=비종이 면직물(cotton)·면사 수=직물 굵기/질감 차원이 종이 평량(g/m²)·아크릴 두께(mm·AC A-1)·CL oz·PD 번수와 같은 WGT 슬롯 다의. entity-semantic #2 "두께=자재 식별자" 원칙의 직물판. AC/CL/PD 비종이 자재 합류(별 "면사 축" 거부).
+- **모호 지점(갭분석가):** 후니 자재모델(지종×평량 g/m²)이 직물의 *물성 차원*(면사 수·신축성·짜임)을 담는가 = round-22 굿즈 본체소재 부재 결함과 연결. `measure_type`(평량/두께/oz/번수) 구분 vessel 검토(AC A-1 합류).
+- **메타모델 해소:** ✅ 자재#1 PTT/WGT 다의 귀속 확정. **검증 필요분: 직물 물성 차원 그릇(measure_type) → gap/vessel.**
+
+## FS-4. 별색(SID_FBR 6색×3농도) — 공정#2 별색 family + 기초코드#6 색 enum [distinct 거부]
+
+- **판정:** **공정 축(#2)의 별색 family + 기초코드#6 색 도메인. distinct 거부.**
+- **근거:** clr_info_SID_FBR 6색(BLK/WHT/RED/YEL/SKY/GRE)×DF001/002/003 농도(`[live:SSR]`)=패브릭 별색(spot color) 직물 날염. round-22 경계규칙 "별색=공정"(PROC_000007 family·HARD)·CL Pantone 1124와 같은 공정#2 별색 그릇. **★색 enum이 직물 날염 6 기본색 제한 도메인**(ST/PR/CL 전체 Pantone과 다른 모집단·6×3 농도)=기초코드#6 색 도메인 거버넌스 관점(별색 라이브러리가 매체별 다름)이나 *축은 공정#2*. **★별색을 도수/자재로 오적재 금지(HARD).**
+- **메타모델 해소:** ✅ 공정#2 별색 family 귀속 확정(CL Pantone 축소 도메인).
+
+## FS-5. 마감봉제(SEW_FBR)·제품가공(PDT_WRK 상품별 명칭)·FBR-접미 슬롯 — 공정#2/형태가공#14 family [distinct 거부]
+
+- **판정:** **마감봉제=공정#2 봉제 family·제품가공=본체형태가공#14 family·라벨/끈/포켓/자석=자재+공정 BUNDLE(부속물#8). distinct 거부.**
+- **근거:** SEW_FBR(오버로크 RNDFT/말아박기 RNRIN/작은마감 RNSML/벨크로 RNVEL·icon_txt "얇은오버로크2mm/두꺼운오버로크4mm/말아박기1cm")=직물 *가장자리 마감(edge finish)* 봉제 = PD SEW_LTR(레더재봉)·CL 봉제 동형 공정#2 봉제 family 멤버. PDT_WRK(쿠션/에코백/파우치/스크런치 가공)=본체형태가공#14(GS PDT_WRK·PD 동형).
+- **모호 지점 해소(FS-5·PD-1 합류):** PDT_WRK가 상품마다 다른 icon_txt(쿠션가공≠에코백가공)인데 **DB상 동일 PCS_COD(PDT_WRK)·상품별 라벨/단가 인스턴스** — 후니 공정모델은 "동일 형태가공 슬롯(PDT_WRK)·상품별 가공 인스턴스(라벨/단가/공정 레시피)"로 관리(공정 유형 enum=PDT_WRK, 인스턴스=상품별 봉제 레시피). 별 "제품별 가공 축" 아님(동일 슬롯·GS/PD/FS 횡단).
+- **메타모델 해소:** ✅ 공정#2 봉제 family + 형태가공#14 family 귀속 확정. LAB_FBR/LIN_PRT/POC_FBR/WRK_MTR=자재(라벨/끈/자석)+공정(부착)+부속물#8 BUNDLE(AC/ST/PD SUB_MTR 동형·FS-6).
+
+## FS-6. 솜 충전(SUB_MTR TN001)·끈·자석·라벨·포켓(완제 부자재) — 자재#1 sub_mtrl + 부속물#8 선택형 [distinct 거부]
+
+- **판정:** **자재 축(#1) sub_mtrl(솜) + 부속물 축(#8) 선택형(옵션 노출) facet. distinct 거부.**
+- **근거:** 쿠션 솜(TN001 사각쿠션솜·선택안함 가능)=충전 자재 sub_mtrl(usage)·끈(LIN_PRT)/자석(WRK_MTR·AC 동형)=부속물#8·라벨/포켓=자재+공정#2(부착 봉제) BUNDLE. PD-4 완제 내재BOM(솜/지퍼=자재 sub_mtrl·다리/논슬립=부속물#8) 동형.
+- **★directive 핵심(PD-4 합류) — 선택형 vs 고정 부자재:** FS 직물 굿즈 부자재(솜/끈/자석)는 PD-4 고정 부속(다리/논슬립=옵션 미노출·ESN=Y·view_yn=N)과 달리 **일부가 옵션 노출**(솜 선택안함·끈 커스텀·view_yn=Y) → "완제 부자재가 옵션이냐 고정BOM이냐"가 상품별 분기. = 부속물#8이 (a)고정 부속(PD-4·AC 받침 ESN=Y) (b)선택형 부자재(FS 끈/자석/솜 view_yn=Y) 두 *노출 모드*를 가짐(필수성×노출 차원 facet)이지 새 축 아님. 후니 `t_prd_product_addons`(완제 부속)·옵션 노출 경계(ESN_YN·view_yn)가 "선택형 vs 고정 부자재" 그릇으로 담음.
+- **메타모델 해소:** ✅ 자재#1 sub_mtrl + 부속물#8 선택형 facet 귀속 확정. **검증 필요분: 부속물#8 노출 모드(ESN_YN·view_yn) 그릇 → gap(data-gap).**
+
+## FS-7. 가격모델 분기(real_price 포스터 vs real_calc_price 봉제완제) — 가격#11 라우팅 [distinct 거부]
+
+- **판정:** **가격기여역할 축(#11)의 가격모델 라우팅. distinct 거부.**
+- **근거:** FSSQPST=real_price(패브릭 현수막·면적·BN/실사 동형)·나머지4=real_calc_price(완제 봉제 굿즈·실계산)(`[live:SSR]`). PD(tmpl_price 완제 SKU)와 다른 면적/실계산 — 가격모델 다양성=도메인 현실(매체/생산형태로 라우팅). 메모리 `dbmap-price-formula-types-authority`(면적매트릭스형 vs 고정가형) 정합.
+- **메타모델 해소:** ✅ 가격#11 라우팅 귀속 확정(완제 봉제 굿즈도 real_calc_price). **검증 필요분: real_price↔real_calc_price 차이(면적 함수·가산 규칙) infoCall 캡처 → 가격검증/갭.**
+
+## FS-8. PCS 상세 enum·단가·infoCall 가격 결합 — unobserved [축 판정 무영향]
+
+- **판정:** **unobserved — 축 판정 무영향(SSR 슬롯/라디오/체크박스로 distinct 0~1 확정).**
+- **근거:** PDT_WRK/SUB_MTR/SEW_FBR/타일링 상세 enum·단가는 infoCall AJAX 후행이라 SSR 미노출. 메타모델 핵심 판정(타일링 distinct #18 부결·17축 재포화)은 SSR 슬롯만으로 확정. 라이브 infoCall 캡처(node monitor)로 보강 가능(이번 세션 미수행·날조 금지).
+- **메타모델 해소:** 🟡 부분(축 귀속 확정·단가/enum 상세 unobserved). **검증 필요분: infoCall 캡처(타일링/마감봉제/솜 단가) → gap/validation.**
+
+---
+
+## FS-A1. ★패널 구성(cut-and-sew panel semantics) — codex 제기 distinct #18 강도전 [unobserved-pending → 부결] ★Phase 4.5 적대 재검증
+
+> **출처:** `categories/FS/deepcheck.md` 핵심 도전 — codex(gpt-5.5): "TILING보다 더 위험한 누락 후보는 **cut-and-sew construction / panel semantics**(앞판/뒤판/옆판/안감/손잡이/심지/충전재를 따로 자르고 봉제하는 순간 종이 인쇄식 17축이 갈라진다)." front/back/side/gusset/handle/label 면별 독립 디자인·원단·공정 = 봉제완제 굿즈가 면(panel)별 독립 아트워크/소재/공정을 가진다는 주장. 우리 "봉제완제=카테고리#7·봉제=공정#2·풀프린팅 단일면" 부결에 대한 반론.
+
+- **판정:** **부결 — distinct #18 아님. facet 클러스터(디자인입력채널#16 다중면 + 자재#1 usage 안감/심지 + 공정#2 봉제/포켓 + 부속물#8 끈/자석/라벨).** ★FS-1 타일링과 별개의 codex 신규 도전이나 동일 결론.
+
+- **★① 전용 슬롯 라이브 OBSERVED 검증 (승격 1조건) — UNOBSERVED → pending:**
+  - **FS reverse 실측(2026-06-19 `[live:SSR]` 5상품 전수·legacySelects 44~61)에 면별(panel) 독립 디자인 입력 슬롯 부재.** FS 정체 = **면직물에 *풀프린팅*(단일면 래핑) 후 재단·봉제·마감**(reverse §0·§7 명시). 디자인 입력은 *단일 풀프린팅 업로드* — front_design/back_design/side/gusset/handle/label 분리 디자인 슬롯이 SSR productOrder에 **관측되지 않음**(panel_info·면별 디자인 라디오/select 0건).
+  - **쿠션 양면(`sodu`=SID_D)이 유일한 "두 면" 신호이나 면별 디자인 슬롯 아님** — `sodu`는 단일 **도수(기초코드#6) 토글**(단면/양면)이지 앞면-디자인 vs 뒷면-디자인 분리 업로드가 아니다(reverse §0.2 "쿠션 앞뒤 두 면을 봉제해 양면 인쇄"=도수 차원 1슬롯). 양면 인쇄여도 디자인 입력은 단일 풀프린팅.
+  - **codex 인용=산업추론(미관측):** deepcheck 명시대로 codex 외부 출처(Contrado fabrics/tote/wall-hanging·FTC)는 **codex 자체 인용이며 본 하네스 미검증**. RP FS 라이브 슬롯이 권위 — Contrado류 "패널별 독립 디자인 업로드 UI"는 RP FS에 *실재하지 않음*(라이브 읽기전용 재확인: curl 직접 GET이 WAF로 0바이트 차단되나 reverse가 gstack 인증 GET으로 44~61 legacySelects 전수 실측한 것이 권위·panel 슬롯 부재 확정).
+  - **→ ① UNOBSERVED.** PH H-1(content-container)·PD-4(완제 내재BOM) unobserved-pending 패턴과 동일 — 면별 독립 슬롯이 라이브에 없으므로 ①불충족.
+
+- **★② 후니 KB 무왜곡 흡수 불가 검증 (승격 2조건·①충족 시에만 적용이나, 보강 판정) — 흡수 가능(결함 없음):**
+  - codex가 든 "면별 독립 디자인·원단·공정"의 *각 부분*은 RP FS가 실제 쓰는 만큼은 전부 기존 축이 왜곡 없이 담음:
+    - **면별 디자인(만약 노출된다면)** = 디자인입력채널#16의 *다중면 facet*(TP 에디터 채널이 면/페이지를 캔버스로 다루는 것의 직물판·T-A 템플릿자산·VDP T-B와 동근) — 새 "패널 축"이 아니라 입력채널의 다중-canvas facet. CL 인쇄위치(C-4 print_area 6위치 멀티슬롯·공정#2+#16 KOI 매핑)가 *이미* "한 본체의 여러 영역에 독립 디자인 배치"를 기존 축으로 담는 검증된 선례.
+    - **안감(lining·A-4)/심지(interfacing·A-5)** = 자재#1 sub_mtrl(usage_cd 슬롯·겉감/안감 = 두 usage 인스턴스) — PR 표지/내지 usage_cd 역할 전파(P-2)·FS 솜 충전(FS-6)과 동형. 별 "패널 원단 축" 불요.
+    - **포켓/거싯/손잡이 봉제** = 공정#2 봉제 family/형태가공#14(FS-5 SEW_FBR·PDT_WRK·POC_FBR·PD SEW_LTR 동형) + 부속물#8(끈 LIN_PRT·자석 WRK_MTR·라벨 LAB_FBR — FS reverse §0.8 실측·AC/ST/PD SUB_MTR BUNDLE 동형).
+  - **후니 KB에 "면별 독립 구성(panel)이 어느 축에도 없음" 같은 결함 명시 없음** — ST 형상 G-SK-2("형상 enum 어느 축에도 없음")가 distinct를 *강제*한 것과 정반대. 디자인입력채널#16·자재 usage#1·공정#2·부속물#8이 cut-and-sew 구성을 *이미 1급 모델링*(결함 없음). → ② 흡수 가능(②불충족 = 부결 보강).
+
+- **★ST 형상(#17)과의 결정적 차이 (승격/부결 일관 기준 HARD):** 형상은 **① 전용 shape_info 슬롯 OBSERVED + ② 후니 KB G-SK-2 결함 둘 다 충족** → 승격. 패널 구성은 **① 면별 디자인 슬롯 UNOBSERVED(라이브 부재) + ② KB 결함 없음** → *양쪽 다 불충족* → 부결. PH-2 거치(①OBSERVED·②결함없음→부결)보다 더 약함(패널은 ①조차 미관측). codex의 "panel semantics" 도전은 *산업적으로 그럴듯하나 RP FS 라이브 모집단(면직물 풀프린팅 굿즈)에는 실재하지 않는* 모집단 오추정(deepcheck (C) flammability 모집단 오추정과 동류).
+
+- **★PD/PH 봉제·완제 부결과의 일관성 점검(directive 요구):** PD(스툴/슬리퍼 봉제 구조물·PD-4 완제 내재BOM)·PH(완제 액자·PH-1)에서 "봉제 완제=카테고리#7·봉제=공정#2/형태가공#14·완제 부속=부속물#8" 부결한 판정과 **정확히 일관**. cut-and-sew는 PD가 이미 적대 검증한 "봉제 구조물 완제품" 패턴의 직물판 — PD-1(SEW_LTR=형태가공#14 family 멤버)·FS-5(SEW_FBR 동형)로 흡수됨. 면별 독립 아트워크는 PD에도 없고(스툴=단일 본체 디자인) FS에도 없음(풀프린팅 단일면). → 부결 일관.
+
+- **메타모델 해소:** ✅ 부결 확정(unobserved-pending → 라이브 미관측 기반 부결·추정 아님). **만약 후속 infoCall 캡처(FS-8)나 후니 직물 굿즈 취급 시 면별 디자인 입력이 *실재 관측*되면 = 디자인입력채널#16 다중면 facet으로 적재(data-gap)이지 신축 아님** — 갭분석가/validator 재확인 대상(라이브 panel 슬롯 실재성). codex 인용(Contrado/FTC) 신뢰 금지·RP FS 라이브가 권위.
+
+---
+
+## FS 판정 요약표
+
+| Fragment | 1차 귀속 축 | 판정 | distinct/facet | 등재 | 검증 라우팅 |
+|---|---|---|---|---|---|
+| FS-1 ★타일링(TILL_WH_GBN) | **공정#2 인쇄 배치 파라미터#9** | 전 9 카테고리 미관측 전용 슬롯이나 plate_size(임포지션) 이미 1급·KB 결함 없음·타일링≠판걸이수 | **facet(거부·#18 부결)** ★유일 강후보 | #2·#9 | 타일링↔가격 infoCall → gap(data-gap) |
+| FS-2 방향(PAPER_WH) | 사이즈#13 방향 facet | 본체 방향(가로/세로)·타일방향과 분리 슬롯(본체≠패턴) | facet(거부) | #13 | — |
+| FS-3 면직물 자재(면사 수) | 자재#1 PTT 직물 + WGT 다의(번수) | CL oz·AC mm·PD 번수 동형·비종이 자재 | facet(거부) | #1 | 직물 물성 measure_type → gap/vessel |
+| FS-4 별색(SID_FBR 6색×3농도) | 공정#2 별색 family + 기초코드#6 색 | CL Pantone 축소판·직물 날염 제한·round-22 별색=공정 | facet(거부) | #2·#6 | — |
+| FS-5 마감봉제/제품가공/FBR슬롯 | 공정#2 봉제 family·형태가공#14·부속물#8 | PD SEW_LTR·GS PDT_WRK 동형·동일 PCS 슬롯·상품별 인스턴스 | facet(거부) | #2·#14·#8 | — |
+| FS-6 솜/끈/자석(완제 부자재) | 자재#1 sub_mtrl + 부속물#8 선택형 | 옵션 노출(view_yn=Y)=PD-4 고정 ESN=Y와 노출 차원만 분기 | facet(거부) | #1·#8 | 부속물 노출 모드 그릇 → gap(data-gap) |
+| FS-7 가격모델(real_price/calc) | 가격#11 라우팅 | 완제 봉제 굿즈도 면적/실계산·PD tmpl과 분기 | facet(거부) | #11 | 면적함수/가산 infoCall → gap |
+| FS-8 PCS 상세/단가/infoCall | unobserved | infoCall 후행·축 판정 무영향 | facet(거부·unobserved) | — | infoCall 캡처 → gap/validation |
+| FS-A1 ★패널 구성(codex panel semantics) | 디자인입력채널#16 다중면 + 자재#1 usage + 공정#2 + 부속물#8 | 면별 디자인 슬롯 라이브 UNOBSERVED(풀프린팅 단일면)·KB 결함 없음·①②둘 다 불충족 | **facet(거부·#18 부결)** ★codex 강도전 | #16·#1·#2·#8 | 면별 슬롯 실재성 infoCall → gap(data-gap) |
+
+**FS 강제 분류 회피(SKILL §3·§5):** **distinct 승급 0건(★타일링 TILL_WH_GBN #18 부결 + ★codex 패널 구성 FS-A1 #18 부결) = 17축 재포화(PR 4번째·CL 6번째·AC 7번째·PD 8번째·PH 9번째 distinct 0 패턴 반복).** 8 fragment(FS-1~FS-8) 전부 기존 17축 facet/family/cascade. ★directive 1순위 관전(타일링이 distinct #18인가) 적대 판정: 타일링=공정#2 인쇄 배치(조판/임포지션) 파라미터#9(접지 면분할·오시 줄수 동근·후니 plate_size #6 이미 1급)이지 별 반복배치축 아님. **★재포화 정당성(HARD 기준 양방향 점검):** 형상(#17·ST)은 ① 전용 슬롯(shape_info) + ② 후니 KB G-SK-2 결함 둘 다 충족(승격), 타일링은 **① TILL_WH_GBN 전용 슬롯 OBSERVED(충족)이나 ② 후니 KB 결함 명시 없음**(plate_size/공정 파라미터가 인쇄 배치 담음) → ②불충족 → distinct 0 정직(PH-2 거치 부결과 동일 구조). **★핵심 경계(HARD): 타일링(고객 입력 파라미터·공정#9 등재) ≠ 판걸이수(앱계산 파생·DB미저장·등재 금지).** 10번째 카테고리(직물 풀프린팅+봉제 완제 굿즈)가 새 관리축 0 도입 = 모델 안정성 재확인(유일 신규 후보 타일링조차 무손실 흡수).
+**FS가 더한 것(축 신설 아닌 *강화*):** ① **17축 재포화** — 10번째 카테고리 distinct 0(PR·CL·AC·PD·PH 패턴 반복). ② 공정#2 인쇄 배치 파라미터#9 "타일링(반복 배치)" 멤버 추가(접지/오시/UV 합류·plate_size 임포지션 도메인·타일링≠판걸이수 경계). ③ 자재#1 직물 물성 차원 입증(면직물 PTT·면사 수 WGT 번수 다의·CL oz·AC mm·PD 번수 합류). ④ 공정#2 마감봉제(edge finish) family 멤버(오버로크/말아박기/벨크로)·형태가공#14 직물 굿즈 봉제 완제 횡단(PDT_WRK·GS/PD 합류). ⑤ 부속물#8 선택형(옵션 노출 view_yn=Y) facet — PD-4 고정 부속(ESN=Y·view_yn=N)과 노출 차원만 분기. ⑥ 가격#11 라우팅(완제 봉제 굿즈도 real_calc_price·PD tmpl과 분기). ⑦ 공정#2 현수막 가공 BN family 상속(패브릭 포스터=천 현수막·행잉/봉/고리).
+**검증 라우팅 요약:** 메타모델 해소 ✅ = FS-1~FS-7(축 귀속 확정·타일링 #18 부결) / 부분 🟡 = FS-8(infoCall enum/단가 unobserved). 라이브/엑셀 검증 필요분 = 타일링↔가격 가산 매핑(FS-1 → gap data-gap·후니 공정 배치 파라미터#9 적재)·직물 물성 measure_type 그릇(FS-3 → vessel)·부속물#8 노출 모드 ESN_YN/view_yn 그릇(FS-6 → gap data-gap)·real_price↔real_calc_price 면적함수(FS-7 → 가격검증)·infoCall enum/단가(FS-8 → validation). **★FS-1 타일링 = data-gap(공정#2 인쇄 배치 파라미터#9 그릇 미적재)이지 vessel-gap(축 부재) 아님 — 갭분석가 핵심 구분(PD-4·PH-1/PH-2 data-gap 동형).**

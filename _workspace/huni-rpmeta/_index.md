@@ -1,7 +1,7 @@
 # RP 추출 커버리지 인덱스
 
 > 후니 RP-Meta 하네스 파이프라인 ① — 샘플 커버리지 맵 (rpm-reverse-engineer).
-> 실행 이력: ① BN(현수막류) 파일럿 6+1상품. ② GS(굿즈/잡화) 확장 12상품. ③ TP(디자인템플릿) 확장 대표3+20횡단. ④ PR(인쇄물·책자) 확장 대표3+53횡단. ⑤ ST(스티커) 확장 대표3+33횡단. ⑥ CL(의류) 확장 대표3+27횡단. ⑦ AC(아크릴·키링·코롯토·명찰·등신대) 확장 대표3+17횡단. ⑧ PD(스툴·슬리퍼·강아지계단·봉제 구조물) 전수 3상품. ⑨ PH(포토보드·액자·사진인화·포토북·포토굿즈) 확장 대표3+27횡단(★§0.5 client-render 재캡처로 거치/마운팅 블로커 해소). 대표 샘플링(답습 전수수집 아님). **메타모델 = 17축(9 카테고리·distinct: TP #16·ST #17·나머지 0·PH 재포화 9번째).**
+> 실행 이력: ① BN(현수막류) 파일럿 6+1상품. ② GS(굿즈/잡화) 확장 12상품. ③ TP(디자인템플릿) 확장 대표3+20횡단. ④ PR(인쇄물·책자) 확장 대표3+53횡단. ⑤ ST(스티커) 확장 대표3+33횡단. ⑥ CL(의류) 확장 대표3+27횡단. ⑦ AC(아크릴·키링·코롯토·명찰·등신대) 확장 대표3+17횡단. ⑧ PD(스툴·슬리퍼·강아지계단·봉제 구조물) 전수 3상품. ⑨ PH(포토보드·액자·사진인화·포토북·포토굿즈) 확장 대표3+27횡단(★§0.5 client-render 재캡처로 거치/마운팅 블로커 해소). ⑩ FS(패브릭·봉제 완제 직물 굿즈) 확장 대표5+16횡단(★타일링 신규 fragment 발굴·신규축 선별 모드). 대표 샘플링(답습 전수수집 아님). **메타모델 = 17축(10 카테고리·distinct: TP #16·ST #17·나머지 0·PH 재포화 9번째·FS 재포화 10번째·★FS 타일링 #18 후보 1건 판정보류→아키텍트/갭).**
 
 ## 커버리지 맵 — BN(현수막류) (상품 → 축 → 출처)
 
@@ -279,6 +279,18 @@ BNBNLOW(특가현수막), BNBNDAY(오늘출발), BNTPSNG(타포린단면), BNFGB
 > 5개 이질 상품군: ① 액자 PHFR*(11·프레임재질=pdtCode 분기) ② 사진인화 PHPT*/PHPR*/PHPK*(8) ③ 보드·판 PHPTPRM·PHST*(4) ④ 포토북 PHBK*(5) ⑤ 포토굿즈 PHMG/PHPO(2). 나머지 24종은 reverse.md §4 그룹 A~E에 묶어 횡단 태깅(답습 회피). 모집단=catalog category=PH 30상품(전부 /item/PH/).
 > **★§0.5 client-render 재캡처(gstack browse 2026-06-17·블로커 해소)**: reverse 1차의 SSR-negative(액자/사진인화 Vue client-render 옵션 미노출) 블로커를 OBSERVED로 해소 — PHFRDIA 거치(탁상용/벽걸이) 캐스케이드·PHPTEDT 인화지×마감 합성+형태축·PHPRDFT [재고부족]disabled 실측.
 > **★PH 발굴 fragment(전부 facet·distinct 0)**: PH-1 완제 프레임=완제SKU#4(거치+마감+사이즈 인코딩)+자재#1 variant+생산형태#15(★directive 최대 관전·1차 예측 facet 강화) · PH-2 거치=옵션#3 캐스케이드 상위 차원(★RESOLVED OBSERVED)·전면재=자재#1 내재·후면받침=부속물#8(미관측) · PH-3 인화지×마감=자재#1 surface-finish(ST S-4/AC A-2) · PH-4 set 단위=수량#10+완제SKU#4 base_quant · PH-5 머그·화분=카테고리#7 다중분류 · PH-6 형태(일반/정사각/파노라마)=사이즈#13 비율 프리셋(형상#17 부결). **★17축 안정성: PH가 9번째 카테고리로 재포화 — §0.5 거치 OBSERVED(미싱데이터 해소)되었으나 옵션 캐스케이드 + 완제 SKU variant 구현 → ST 형상#17 같은 KB 결함 부재로 distinct #18 부결.**
+
+## 커버리지 맵 — FS(패브릭·봉제 완제 직물 굿즈, 21상품·★면직물(면사 수)+타일링+마감봉제+완제 봉제가공 본질)
+| pdtCode | 상품 | 구조 다양성 | 축수 | 자재(면사 수) | 타일링 | 봉제/가공 | 가격모델 | 출처 |
+|---|---|---|---|---|---|---|---|---|
+| FSSQPST | 패브릭 포스터 | ★패브릭 현수막·풀슬롯 | 9 | 면10/20/40/60수 | TIL_NON/세로/가로 | SEW_FBR(오버로크/말아박기/벨크로)+행잉/봉/고리(BN 상속)+별색 6색×3농도 | real_price(면적) | `[live:SSR]` 풀 |
+| FSCUDFT | 패브릭 쿠션 | ★양면 봉제·솜 충전 | 8 | 면10/20수 | 동형 | 솜(TN001)+PDT_WRK(쿠션가공)+라벨 | real_calc_price | `[live:SSR]` 풀 |
+| FSBGECO | 에코백(풀프린팅) | ★완제 가방·끈/포켓/자석 | 11 | 면10/20수 | 동형 | 끈(LIN_PRT)+포켓(POC_FBR)+자석(WRK_MTR)+에코백가공 | real_calc_price | `[live:SSR]` 풀 |
+| FSPUSTR | 스트링 파우치 | 파우치 완제 | 8 | 면20/40수 | 동형 | PDT_WRK(스트링파우치가공)+라벨 | real_calc_price | `[live:SSR]` 풀 |
+| FSBDSCR | 스크런치(곱창머리끈) | 소형 봉제 variant | 8 | 면60수 | 동형 | PDT_WRK(스크런치가공)+포장 | real_calc_price | `[live:SSR]` 풀 |
+
+> 5개 이질 구조: 평면 현수막형(FSSQPST·real_price·BN 행잉/봉 상속) · 양면봉제+솜(FSCUDFT) · 완제 가방(FSBGECO·끈/포켓/자석) · 파우치(FSPUSTR) · 소형 봉제 variant(FSBDSCR). 나머지 16종(코스터/엽서/노렌/테이블류·쿠션/커버·파우치/필통·가방·스카프)은 reverse.md §9에 소재/형태/부자재만 다른 동형으로 묶음(답습 회피). 모집단=catalog category=FS 21상품(전부 /item/FS/). ★전 5상품 레거시 productOrder SSR(vueMarkers=0·라이브 추출 성공·PH 같은 client-render 블로커 없음).
+> **★FS 발굴 fragment(★directive 1순위=신규축 선별 모드)**: **FS-1 ★타일링(TILL_WH_GBN: 없음/세로/가로)=distinct #18 후보 1건·판정보류** — 전 9 카테고리 전무 + 명시 슬롯 실재(승격기준 ①충족)이나 후니 KB "인쇄 레이아웃/반복" 흡수처 실재 여부 미확정(②미확정)→1차 예측 공정#2(인쇄 배치) facet 흡수 우세이나 ST 형상#17·CL 인쇄위치 승격과 대조해 아키텍트/갭분석가 결정. FS-2 방향(PAPER_WH W/H)=사이즈#13 facet · FS-3 면직물(면사 수 綿絲 count)=자재#1 평량 차원(CL oz·PD 원단·GS 코스터 소재 동형) · FS-4 별색(SID_FBR 6색×3농도)=공정#2 별색 family(CL Pantone 1124 축소 직물 도메인) · FS-5 마감봉제(SEW_FBR 오버로크/말아박기/벨크로)·제품가공(PDT_WRK 상품별 명칭)·FBR-접미 슬롯=공정#2 family(PD SEW_LTR 동형)+부속물#8(라벨/끈/자석 BUNDLE·AC/ST/PD SUB_MTR) · FS-6 솜/끈/자석=완제 부자재(옵션 노출 vs 고정BOM·PD-4 vessel-gap 합류) · FS-7 가격모델 분기(real_price 현수막형 vs real_calc_price 봉제완제·PD tmpl 아님). **★17축 안정성: FS가 10번째 카테고리로 재포화(타일링 1건 제외 무손실 흡수) — 가장 이질적 "직물 풀프린팅+봉제 완제 굿즈"조차 17축 흡수. FS 진짜 기여: 자재#1에 "면직물·면사 수" 평량 단위 추가·공정#2에 "마감봉제(edge finish)" family 추가·★타일링이라는 반복-배치 차원을 metamodel/validator 흡수 vs 신축 판정에 던짐(PD 봉제 #18 부결과 일관하나 "전 카테고리 부재+명시 슬롯"이라 적대검증 대상).**
 
 ## 다음 단계 — PH 추가분 (rpm-gap-analyst 주목 — ★전부 facet·data-gap)
 30. **★완제 SKU/거치 캐스케이드 그릇(data-gap)** — PH-1/PH-2. `t_prd_templates`/완제SKU 그릇 실재·거치방식 polymorphic ref(옵션#3·AC GRP_OPTION_CD cascade 동형)·거치+마감+사이즈 완제 variant 적재만(축 부재 아님·vessel-gap 아님). [HARD] 완제 SKU 라벨 분해 {mount_type,finish,frame_material,size}(G-1/AC variant 동일 처방).

@@ -1,6 +1,6 @@
 ---
 name: huni-rpmeta-orchestrator
-description: 후니 RP-Meta 하네스 오케스트레이터. RedPrinting 라이브 사이트(redprinting.co.kr, 479상품/26카테고리)의 주문옵션 구성을 대표 샘플로 역공학하여 "옵션 관리 메타모델"(자재/공정/옵션/템플릿/제약/기초코드/카테고리 + 추가 발굴 축)을 도출하고, 후니 실제 t_* 현황과 갭 분석한 뒤, 후니에 필요한 기초데이터 관리 "그릇"(스키마/관리축)을 설계 제안하고, 각 카테고리를 codex-image로 시각화하고 codex-cli로 분석 외 누락 정보를 심층 발굴하는 7인 에이전트 팀(rpm-reverse-engineer / rpm-metamodel-architect / rpm-gap-analyst / rpm-vessel-designer / rpm-deepcheck / rpm-visualizer / rpm-validator)을 조율한다. 산출은 카테고리별 폴더(categories/{CAT}/reverse·deepcheck·summary·viz)로 집약하고 메타모델·갭·그릇은 단계별 폴더(02~05)에 횡단 누적한다. 대표샘플→메타모델→확대 순(답습 전수수집 금지), 라이브 읽기전용, DB 미적재(그릇=설계 제안·실 적용 인간 승인). dbm-schema-analyst·dbm-ddl-proposer·dbm-domain-researcher를 필요시 재사용. '레드프린팅 옵션 분석', 'RP 메타모델', '옵션 관리 메타모델', '기초데이터 관리 체계', '자재 공정 옵션 관리 그릇', '관리 메타모델 발굴', 'RedPrinting 벤치마크 메타모델', '후니 기초데이터 그릇 설계', '현수막 옵션 구성 분석', '카테고리 시각화', 'codex 시각화', 'codex 심층보강', '누락 정보 확인', 'RP-Meta 하네스 실행/재실행/업데이트/보완', '특정 상품군만 메타모델', '특정 카테고리만 시각화/심층보강' 등 본 도메인 요청 시 사용. 단순 질문은 직접 응답. 위젯 구현 역공학은 huni-widget, 후니 t_* 실 적재/매핑은 huni-dbmap 하네스가 담당한다.
+description: 후니 RP-Meta 하네스 오케스트레이터. RedPrinting 라이브 사이트(redprinting.co.kr, 479상품/26카테고리)의 주문옵션 구성을 대표 샘플로 역공학하여 "옵션 관리 메타모델"(자재/공정/옵션/템플릿/제약/기초코드/카테고리 + 추가 발굴 축)을 도출하고, 후니 실제 t_* 현황과 갭 분석한 뒤, 후니에 필요한 기초데이터 관리 "그릇"(스키마/관리축)을 설계 제안하고, 각 카테고리를 codex-image로 시각화하고 codex-cli로 분석 외 누락 정보를 심층 발굴하며, **rpm-validator의 M1~M6 게이트 판정·distinct 승격/부결 결론을 codex-cli(gpt-5.5)로 독립 교차검증(2nd opinion)하고 reconcile하는** 8인 에이전트 팀(rpm-reverse-engineer / rpm-metamodel-architect / rpm-gap-analyst / rpm-vessel-designer / rpm-deepcheck / rpm-visualizer / rpm-validator / rpm-codex-validator)을 조율한다. 산출은 카테고리별 폴더(categories/{CAT}/reverse·deepcheck·summary·viz)로 집약하고 메타모델·갭·그릇은 단계별 폴더(02~05)에 횡단 누적한다. 대표샘플→메타모델→확대 순(답습 전수수집 금지), 라이브 읽기전용, DB 미적재(그릇=설계 제안·실 적용 인간 승인). dbm-schema-analyst·dbm-ddl-proposer·dbm-domain-researcher를 필요시 재사용. '레드프린팅 옵션 분석', 'RP 메타모델', '옵션 관리 메타모델', '기초데이터 관리 체계', '자재 공정 옵션 관리 그릇', '관리 메타모델 발굴', 'RedPrinting 벤치마크 메타모델', '후니 기초데이터 그릇 설계', '현수막 옵션 구성 분석', '카테고리 시각화', 'codex 시각화', 'codex 심층보강', '누락 정보 확인', 'codex 게이트 검증', 'codex 교차검증', '판정 2nd opinion', 'distinct 독립 재판정', 'reconcile', 'RP-Meta 하네스 실행/재실행/업데이트/보완', '특정 상품군만 메타모델', '특정 카테고리만 시각화/심층보강' 등 본 도메인 요청 시 사용. 단순 질문은 직접 응답. 위젯 구현 역공학은 huni-widget, 후니 t_* 실 적재/매핑은 huni-dbmap 하네스가 담당한다.
 ---
 
 # huni-rpmeta-orchestrator — RP-Meta Harness Orchestrator
@@ -95,22 +95,42 @@ codex-image PNG (`-m <m>`, N≤5 parallel) → `categories/<CAT>/viz/*.png`; gpt
 hallucination) so visualization **always completes** — a codex outage never blocks Phase 5.5. Embed PNG or
 mermaid block in `categories/<CAT>/summary.md`. Diagrams depict the analysis exactly (no unsourced structure).
 
+## Phase 6.5 — codex cross-validation (rpm-codex-validator)  ← codex-cli, 2nd opinion on the verdict
+
+After rpm-validator emits a category's `mgate-verdict-<CAT>.md`, rpm-codex-validator independently re-checks
+the **verdict** (distinct 승격/부결 + M1~M6 GO/NO-GO) with codex (gpt-5.5). It feeds codex the *evidence only*
+(reverse + discovered-axes context + gap rows) — **never rpm-validator's verdict** (independence: a leaked
+verdict makes codex echo it). codex renders its own NEW-AXIS/ABSORBED call + soundness flags; rpm-codex-validator
+reconciles codex ↔ rpm-validator → `05_validation/codex-reconcile-<CAT>.md`. **Agreement** = high-confidence
+confirm; **divergence** = investigation signal routed to rpm-validator (live re-measure) — the gate stays
+CONDITIONAL until resolved. This is distinct from Phase 4.5 deepcheck: deepcheck mines "what we missed"
+(generative); Phase 6.5 verifies "is our conclusion correct" (verification of the verdict). codex output is an
+`unverified` hypothesis (hallucination boundary) — it never auto-flips our verdict; live wins on conflict.
+**Gate prerequisite:** runs **after** rpm-validator's M-gate for that category (verdict must exist to reconcile).
+**Runs foreground** (invokes `codex exec` via Bash; never background — background auto-denies). On codex
+unavailable (preflight `DEADLOCK`/`AUTH_STALE`/`UNAVAILABLE`) → records **"codex 미가용·Claude 단독"** and the
+rpm-validator verdict stands (fallback, **not** pending — never a fake codex agreement).
+
 ## Phase 6 — Consolidate
 
-Each category's `summary.md` rolls up its reverse + viz + deepcheck + analysis links. rpm-validator emits
-`05_validation/mgate-verdict.md`. Orchestrator synthesizes the final report + updates `_index.md` progress board:
-discovered metamodels, gap summary, vessel roadmap, surviving deep-check candidates, open decisions.
+Each category's `summary.md` rolls up its reverse + viz + deepcheck + codex cross-validation + analysis links.
+rpm-validator emits `05_validation/mgate-verdict.md`; rpm-codex-validator emits `05_validation/codex-reconcile-<CAT>.md`.
+Orchestrator synthesizes the final report + updates `_index.md` progress board: discovered metamodels, gap
+summary, vessel roadmap, surviving deep-check candidates, **codex reconcile result (agreement/divergence)**,
+open decisions.
 
 ## Execution mode & data flow
 
 - **Mode:** agent team (hybrid). `TeamCreate` the rpm-* agents; `TaskCreate` per phase with dependencies; agents
-  self-coordinate via `SendMessage`. Pipeline is staged but verification is incremental. **rpm-visualizer and
-  rpm-deepcheck run foreground** (they invoke `codex exec` via Bash; never background — background auto-denies).
-  Reused dbm-* agents spawned via Agent within the relevant phase.
+  self-coordinate via `SendMessage`. Pipeline is staged but verification is incremental. **rpm-visualizer,
+  rpm-deepcheck, and rpm-codex-validator run foreground** (they invoke `codex exec` via Bash; never background —
+  background auto-denies). Reused dbm-* agents spawned via Agent within the relevant phase.
 - **Data passing:** file-based (per-category folder + cross-cutting stages) + task-based status + message-based
   cross-agent questions (ambiguous fragments, deep-check candidates, schema concretization).
 - **Generation ≠ verification:** rpm-validator never validates its own work; no generator self-approves; codex
-  candidates are verified by the owning rpm-* agent, not adopted by rpm-deepcheck itself.
+  candidates are verified by the owning rpm-* agent, not adopted by rpm-deepcheck itself. rpm-codex-validator is
+  a *second verification lane* on rpm-validator's verdict — independent (codex never sees our verdict), and its
+  codex verdict is itself an `unverified` hypothesis that never auto-flips ours (live wins).
 - **codex prerequisite + model fallback:** `codex login` (ChatGPT OAuth) is needed for Phase 4.5/5.5, but a
   codex deadlock is often a *model* problem, not a token one (gpt-5-codex/gpt-5 are 400 on a ChatGPT account;
   gpt-5.5 works) — `scripts/codex-preflight.sh` probes supported models and distinguishes the two. If codex is
@@ -122,7 +142,7 @@ discovered metamodels, gap summary, vessel roadmap, surviving deep-check candida
 - An agent fails: retry once with a tightened prompt; on second failure proceed without it and record the gap
   in the final report (never silently drop a stage).
 - Live unreachable: fall back to reuse assets / dbmap snapshot; mark affected outputs CONDITIONAL.
-- codex unavailable (preflight `DEADLOCK`/`AUTH_STALE`/`UNAVAILABLE`): **Phase 5.5 falls back to mermaid `.mmd`** (still completes); **Phase 4.5 marks `deepcheck pending`** (no fallback). `DEADLOCK` = all model candidates failed (add a newer model to the preflight); `AUTH_STALE` = ask user to re-run `codex login`. Never fabricate candidates or fake images.
+- codex unavailable (preflight `DEADLOCK`/`AUTH_STALE`/`UNAVAILABLE`): **Phase 5.5 falls back to mermaid `.mmd`** (still completes); **Phase 4.5 marks `deepcheck pending`** (no fallback); **Phase 6.5 records "codex 미가용·Claude 단독"** and the rpm-validator verdict stands as-is (fallback, **not** pending — never a fake codex agreement). `DEADLOCK` = all model candidates failed (add a newer model to the preflight); `AUTH_STALE` = ask user to re-run `codex login`. Never fabricate candidates, images, or codex verdicts.
 - Conflicting evidence (RP axis vs 후니 defect; codex claim vs live finding): surface both with sources; live wins; never delete one.
 - A validator NO-GO: route `_defects.md` to the owning agent, revise, re-gate that stage only.
 
@@ -141,6 +161,10 @@ discovered metamodels, gap summary, vessel roadmap, surviving deep-check candida
   using existing analysis; no re-analysis. Validator confirms diagrams match source.
 - **Partial re-run (deepcheck only):** "BN 심층보강만" → rpm-deepcheck on categories/BN; surviving candidates
   routed to metamodel/gap for verification.
+- **codex cross-validation (Phase 6.5):** "FS codex 검증" → after rpm-validator's M-gate, rpm-codex-validator
+  feeds FS evidence (not our verdict) to codex → codex NEW-AXIS/ABSORBED call → reconcile vs rpm-validator →
+  `05_validation/codex-reconcile-FS.md`. Agreement → high-confidence confirm; divergence → route to rpm-validator
+  for live re-measure (gate CONDITIONAL until resolved).
 - **Error (codex off):** preflight returns non-AVAILABLE → **Phase 5.5 completes via mermaid `.mmd`** (viz not
   blocked), **Phase 4.5 marks `deepcheck pending`** (no fallback), analysis pipeline (reverse→vessel) completes
   normally. On `AUTH_STALE` ask the user to re-run `codex login` to restore PNG + deep-check.
