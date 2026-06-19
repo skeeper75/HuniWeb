@@ -17,7 +17,7 @@
 | `t_siz_sizes` | 사이즈(작업/재단/판형) | siz_nm | siz_cd | 520 / 520 / 454 | **1** (raw) | **Y** (component_prices 84 siz_cd) | **DONE-PILOT** |
 | `t_proc_processes` | 공정(인쇄/후가공) | proc_nm | proc_cd | 102 / 102 / 101 | **13** | **Y ★정정** (component_prices.proc_cd 1,919행/25코드) | **DONE-PILOT** (9건 논리삭제 COMMIT·BLOCKED 3) |
 | `t_cat_categories` | 카테고리(고객 IA·트리) | cat_nm | cat_cd | 326 / 315 / **활성79** | 11→**3 실측** | N (확정·grade cat_cd 0행) | **DONE-PILOT** (rename1+디자인캘린더 동형교정) |
-| `t_mat_materials` | 자재(본체/부자재) | mat_nm | mat_cd | 340 / 340 / 192 | **1** (raw) | **Y** (component_prices 68 mat_cd) | **MEDIUM** |
+| `t_mat_materials` | 자재(본체/부자재) | mat_nm | mat_cd | 340 / 340 / **활성192** | **1 실측**(삼각대그레이) | **Y** (component_prices 3,342행/68 mat_cd·확정) | **Phase1~3 GO·032 승인보류** |
 | `t_clr_color_counts` | 도수(색상/채널) | clr_nm | clr_cd | 5 / 5 / 5 | 0 | N (단가행 clr_cd 0) | **LOW** |
 | `t_cod_base_codes` | 기초코드(enum 사전) | cod_nm | cod_cd | 85 / 84 / — | 0 (부모그룹 기준) | N | **LOW** |
 

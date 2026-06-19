@@ -1,0 +1,5 @@
+authority_source,source_file,prd_nm,prd_cd,column,authority_value,live_mat_cd,live_mat_typ_cd,note
+master-260610,24_master-extract-260610/calendar-l1.csv,탁상형캘린더,PRD_000108,캘린더가공(필수)_삼각대컬러,삼각대(그레이),MAT_000252,MAT_TYPE.07,authority=삼각대컬러 옵션값(완성품 거치 선택)·라이브 BOM 바인딩 1(USAGE.07)
+master-260610,24_master-extract-260610/calendar-l1.csv,미니탁상형캘린더,PRD_000109,캘린더가공(필수)_삼각대컬러,삼각대(블랙),MAT_000254,MAT_TYPE.07,형제값(블랙)·삼각대(그레이) 그룹과 무관·라이브 BOM 바인딩 1
+master-260610,24_master-extract-260610/design-calendar-l1.csv,디자인캘린더(탁상형),,캘린더가공_삼각대컬러,삼각대(그레이),,,디자인캘린더 시트도 삼각대(그레이)/블랙 옵션값 보유(고정가 완성품)·자재 BOM 미연결(가격포함)
+master-260610,(부재),,MAT_000032,,,MAT_000032,MAT_TYPE.02,★권위 카운터파트 없음 — MAT_000032(.02 링제본부자재·부모 MAT_000031 캘린더부자재)는 상품마스터/디자인캘린더 어느 행에도 대응 없음·라이브 BOM 0·가격 0 = stale 카탈로그 잔재
