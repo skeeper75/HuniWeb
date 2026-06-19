@@ -1,0 +1,127 @@
+# Codex 독립 2차 교차검증 — 후니프린팅 기초데이터 공정축(t_proc_processes) 표시중복 정리
+
+너는 독립 검증자다. Claude가 만든 "표시중복 정리/적재 매핑"이 라이브 DB에 데이터를 잘못 적재(논리삭제)하지 않도록, 적대적으로 2nd opinion을 낸다. 기본 태도는 "의심". 합의가 목적이 아니라 결함 적발이 목적이다.
+
+너는 읽기전용 샌드박스다(파일 쓰기·DB 접속 없음). 아래 실측 데이터만으로 판정하라. 추측 금지·근거 명시.
+
+================================================================
+## 0. work-spec — 무엇을/어떻게 정리하나
+
+### 검수 4축 [HARD]
+① 표시↔실제 정합: 화면 표시명(proc_nm)이 실제 내부값/구조와 일치하는가. 불일치=오적재.
+② 표시 중복: 화면 라벨 동일·코드(proc_cd) 다름.
+③ 내부값 중복: 실제 구조 동일·코드 다름.
+④ 의미구분 보존(false-positive 가드): 부모공정(upr_proc_cd)·의미축이 다르면 표시명 같아도 중복 아님.
+
+### canonical 정의
+공정에는 proc_typ_cd 컬럼이 없다. 의미축 핵심 = upr_proc_cd(부모공정). 표시명(proc_nm)이 같아도 부모가 다르면 다른 공정.
+권위 = 상품마스터(260610) process crosswalk — 공정명당 단일 proc_cd를 상품에 매핑.
+
+### 무손실 원칙 [HARD]
+정리 = 논리삭제(del_yn='Y')만. 물리삭제·단가행 이동·바인딩 재배선 금지. 외부참조(상품바인딩·component_prices·option_items·자식공정)가 0이어야 안전.
+
+### 가격종속 BLOCKED [HARD]
+component_prices가 proc_cd를 키로 단가행을 보유하면, 그 행을 논리삭제하면 가격이 전손된다. 가역 교정 불가 → BLOCKED(적재 금지).
+
+================================================================
+## 1. 라이브 실측 데이터 (2026-06-19 read-only SELECT, 권위)
+
+### t_proc_processes 핵심 행 (proc_cd, proc_nm, upr_proc_cd, prcs_dtl_opt유무, disp_seq, use_yn, note, reg_dt, upd_dt, del_yn)
+
+부모(rich) 공정:
+- PROC_000002 UV   upr=NULL  dtl_opt=O(변형 enum 5종)  reg 2026-06-03  del=N
+- PROC_000007 별색인쇄 upr=NULL  reg 2026-06-03  del=N (자식: 008화이트 009클리어 010핑크 011금색 012은색)
+- PROC_000013 코팅  upr=NULL  dtl_opt=O(면 enum)  del=N (자식: 014유광 015무광 016UV)
+- PROC_000029 오시  upr=NULL  dtl_opt=O(줄수 0~3)  del=N
+- PROC_000030 미싱  upr=NULL  dtl_opt=O(줄수 0~3)  del=N
+- PROC_000033 박    upr=NULL  dtl_opt=O(크기mm)  del=N (자식: 034금~049은무광, 036핑크)
+- PROC_000053 완칼  upr=NULL  dtl_opt=O(모양)  del=N
+- PROC_000054 반칼  upr=NULL  dtl_opt=O(모양,조각수)  del=N
+- PROC_000055 스티커완칼 upr=NULL  dtl_opt=O(조각수)  del=N
+- PROC_000079 타공  upr=NULL  dtl_opt=O(구수 1~8)  del=N
+- PROC_000080 봉제  upr=NULL  dtl_opt=O(유형 enum 5종,폭)  del=N
+- PROC_000081 부착  upr=NULL  dtl_opt=O(대상 enum)  del=N
+- PROC_000082 족자제작 upr=NULL  dtl_opt=O(모양 enum)  del=N
+- PROC_000083 에폭시 upr=NULL  del=N
+- PROC_000084 열재단 upr=NULL  reg 2026-06-08 (silsa 열재단 권위)  del=N
+
+자식(thin) 공정 — 전부 2026-06-17 00:54:46~49 일괄 INSERT (097만 01:41), dtl_opt 공란, note 공란, disp_seq=1:
+- PROC_000086 미싱  upr=PROC_000030
+- PROC_000087 반칼  upr=PROC_000054
+- PROC_000088 봉제  upr=PROC_000080
+- PROC_000089 부착  upr=PROC_000081
+- PROC_000090 오시  upr=PROC_000029
+- PROC_000091 완칼  upr=PROC_000053
+- PROC_000092 타공  upr=PROC_000079
+- PROC_000093 족자제작 upr=PROC_000082
+- PROC_000094 스티커완칼 upr=PROC_000055
+- PROC_000095 에폭시 upr=PROC_000083
+- PROC_000096 열재단 upr=PROC_000084
+- PROC_000097 UV    upr=PROC_000002
+
+코팅의 UV 자식:
+- PROC_000016 UV   upr=PROC_000013(코팅)  del=N  (참조 0)
+
+### 외부참조 실측 (라이브 카운트)
+
+component_prices.proc_cd 보유 행수 (단가행) — 이 코드들만 가격행 있음:
+  PROC_000086(미싱)=30 · PROC_000090(오시)=50 · PROC_000092(타공)=18
+  [087/088/089/091/093/094/095/096/097/016 = component_prices 0행 — 단가행 전혀 없음]
+  (참고: 부모 030/029/079 자신도 component_prices 0행. 가격행은 자식 086/090/092 밑에만 있음)
+
+option_items.ref_key1 (옵션이 어느 proc를 참조하나):
+  미싱 옵션 → PROC_000030(부모) 7건 / 오시 옵션 → PROC_000029(부모) 7건 / 타공 옵션 → PROC_000079(부모) 8건
+  price_components.use_dims = "proc_grp:PROC_000029/030/079" (부모 그룹)
+
+상품바인딩(t_prd_product_processes, del=N) 부모는 보유, 자식 9개+086/090/092는 전부 0:
+  087/088/089/091/093/094/095/096/097 = prd_proc 0 · comp 0 · opt 0 · child 0 · authority crosswalk 부재
+  086/090/092 = prd_proc 0 · opt 0 · child 0 · authority 부재 · BUT comp_prices 30/50/18
+
+================================================================
+## 2. Claude의 Phase 2 판정 (네가 독립 검토할 대상)
+
+13 표시중복 그룹:
+
+### A. 진짜중복 9 — safe merge(논리삭제 del_yn=Y 제안), price_dependent=N
+087·088·089·091·093·094·095·096(thin mirror 8) + 097(UV 빈 자식).
+근거: 전부 00:54 일괄 INSERT thin-mirror·dtl_opt 공란·authority 부재·총참조 0(prd_proc+comp+opt+child=0)·leaf·정본=같은이름 부모(rich). 외부참조 0 → 무손실. 정본 부모 논리삭제 안 함.
+
+### B. 정당구분 2 — keep(false-positive 가드)
+- 핑크 010(upr=007 별색인쇄·comp 212행 COMP_PRINT_SPOT_PINK) vs 036(upr=033 박·comp 0): 부모/의미축 완전 상이(분홍 별색잉크≠분홍 박). 통합 금지(가격사슬 212행 파손).
+- UV 002(root 독립 UV·prd14) vs 016(upr=013 코팅의 UV옵션·참조0): 부모 상이. keep. (016은 참조 0이나 "코팅 옵션축 보존" 위해 유지.)
+
+### C. 오적재 BLOCKED 3 — 적재 금지, price_dependent=Y
+미싱 030/086 · 오시 029/090 · 타공 079/092.
+근거: 자식(086/090/092)이 component_prices(30/50/18행) 보유 = 가격행이 자식 키. 동시에 option_items는 부모(030/029/079) 참조. 엔진 흐름 단절: 사용자 선택→옵션이 부모 해소→엔진이 WHERE proc_cd=부모 조회→0행=가격 미산출. 자식 논리삭제 시 가격 98행 전손. 가역 교정 불가 → BLOCKED·재배선 escalate(dbm-price-arbiter/경로Y).
+
+================================================================
+## 3. 네가 집중 적대 검토할 의심 지점 (양방향)
+
+### Q1. false-negative (진짜중복 놓침)
+9건 외에 추가 진짜중복이 있나? 특히:
+- (a) PROC_000016 UV(코팅 자식): 참조 0인데 Claude는 "코팅 UV타입 보존"으로 keep했다. 016이 097처럼 빈 미러라 merge 대상 아닌가? 016과 097의 차이가 뭔가? (097 upr=002 독립UV / 016 upr=013 코팅 — 부모가 다르다. 016 형제 014유광/015무광은 상품바인딩 21/30·단가행 보유=코팅 옵션축 active. 016만 빈 슬롯.) 016 keep이 맞나 merge가 맞나 독립 판정.
+- (b) PROC_000085 가변데이타(upr=NULL, 2026-06-17 00:54 INSERT), PROC_000031 가변텍스트/032 가변이미지 upr=PROC_000085. 이건 표시중복 후보인가? (가변데이타는 별개 부모로 보임)
+
+### Q2. false-positive (정당구분 오판)
+- 핑크 010/036을 "부모 상이"만으로 정당구분한 게 안전한가? 부모 상이 + 한쪽만 가격행 보유 = 충분한 근거인가? 만약 036(박 핑크)이 실제로는 사용 안 되는 죽은 자식이면? (036은 comp 0·prd_proc 0. 그러나 형제 034금~049 박색들도 대부분 prd_proc 0. 박은 dtl_opt 크기축으로 운영되는 색 enum.) 통합하면 위험한 이유를 독립 재확인.
+
+### Q3. 가격사슬 단절 (최우선·돈 크리티컬)
+미싱/오시/타공: option_items.ref_key1=부모, component_prices.proc_cd=자식. 엔진이 부모로 조회 시 0행.
+- (a) 이게 진짜 실결함(가격 미산출 단절)인가, 아니면 엔진에 부모→자식 fallback/조인 경로가 따로 있어 런타임에 해소되나? 주어진 실측만으로 단정 가능한가, 아니면 webadmin pricing.py 코드 확인이 더 필요한가?
+- (b) 만약 단절이 맞다면 자식(086/090/092) "논리삭제 금지" 결론이 타당한가? (자식 삭제=가격행 고아) 더 안전한 교정 방향은? (자식 comp.proc_cd를 부모로 옮기기 vs option을 자식으로 재배선 — 어느 쪽이 손실 적나)
+- (c) 역설 점검: 자식 086/090/092는 086 upr=030처럼 부모를 가리키는 thin row인데도 가격행을 가졌다. 087~097 다른 thin들과 구조 동일(같은 00:54 배치·dtl_opt 공란)인데 왜 086/090/092에만 가격행이 붙었나? 이게 의도(가격을 자식에 적재)인가 사고(잘못된 키 적재)인가? 판정에 영향 주나?
+
+================================================================
+## 4. 출력 형식 (반드시 따르라)
+
+각 그룹/질문에 대해:
+- VERDICT: AGREE / DISAGREE / UNCERTAIN
+- 근거: 위 실측 데이터의 어느 사실에 기반했는지 명시(날조 금지)
+- 만약 DISAGREE면 Claude 판정의 무엇이 틀렸고 대안이 뭔지
+
+마지막에:
+- SAFE-TO-MERGE 최종 목록 (네 의견)
+- BLOCKED 최종 목록 (네 의견)
+- KEEP 최종 목록 (네 의견)
+- 추가로 발굴한 결함(있으면)
+- 한 줄 총평: Claude 판정을 신뢰하는가?

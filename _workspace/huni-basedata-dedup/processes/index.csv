@@ -1,0 +1,103 @@
+code,display_name,raw_value_json,unit,semantic_axis,product_bindings,price_dependent,source,note
+PROC_000001,인쇄,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": null, ""disp_seq"": ""1""}",,인쇄/표면,0,N,live,
+PROC_000002,UV,"{""prcs_dtl_opt"": {""inputs"": [{""key"": ""변형"", ""type"": ""enum"", ""values"": [""일반"", ""배면양면"", ""풀빼다"", ""투명테두리"", ""단면""]}]}, ""upr_proc_cd"": null, ""disp_seq"": ""23""}",,인쇄/표면,14,N,live,
+PROC_000003,옵셋,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000001"", ""disp_seq"": ""2""}",,후가공/기타,0,N,live,upr=PROC_000001
+PROC_000004,디지털,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000001"", ""disp_seq"": ""3""}",,후가공/기타,0,Y,live,upr=PROC_000001; price_cp=424
+PROC_000005,실크,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000001"", ""disp_seq"": ""4""}",,후가공/기타,0,N,live,upr=PROC_000001
+PROC_000006,실사,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000001"", ""disp_seq"": ""5""}",,후가공/기타,0,N,live,upr=PROC_000001
+PROC_000007,별색인쇄,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": null, ""disp_seq"": ""2""}",,후가공/기타,0,N,live,
+PROC_000008,화이트,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000007"", ""disp_seq"": ""1""}",,후가공/기타,5,Y,live,upr=PROC_000007; price_cp=159
+PROC_000009,클리어,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000007"", ""disp_seq"": ""2""}",,후가공/기타,0,Y,live,upr=PROC_000007; price_cp=212
+PROC_000010,핑크,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000007"", ""disp_seq"": ""3""}",,인쇄/표면,0,Y,live,upr=PROC_000007; price_cp=212
+PROC_000011,금색,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000007"", ""disp_seq"": ""4""}",,후가공/기타,0,Y,live,upr=PROC_000007; price_cp=212
+PROC_000012,은색,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000007"", ""disp_seq"": ""5""}",,후가공/기타,0,Y,live,upr=PROC_000007; price_cp=212
+PROC_000013,코팅,"{""prcs_dtl_opt"": {""inputs"": [{""key"": ""면"", ""type"": ""enum"", ""values"": [""단면"", ""양면""]}]}, ""upr_proc_cd"": null, ""disp_seq"": ""3""}",,후가공/기타,0,N,live,
+PROC_000014,유광,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000013"", ""disp_seq"": ""1""}",,후가공/기타,21,N,live,upr=PROC_000013
+PROC_000015,무광,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000013"", ""disp_seq"": ""2""}",,후가공/기타,30,N,live,upr=PROC_000013
+PROC_000016,UV,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000013"", ""disp_seq"": ""3""}",,인쇄/표면,0,N,live,upr=PROC_000013
+PROC_000017,제본,"{""prcs_dtl_opt"": {""inputs"": [{""key"": ""방향"", ""help"": ""좌철/상철"", ""type"": ""string""}, {""key"": ""묶음단위"", ""help"": ""50장1권/100장1권 — 떡제본"", ""type"": ""string""}, {""key"": ""책등"", ""type"": ""number"", ""unit"": ""mm""}, {""key"": ""고리형"", ""help"": ""트윈링 고리 변형"", ""type"": ""boolean"", ""default"": false}]}, ""upr_proc_cd"": null, ""disp_seq"": ""4""}",,후가공/기타,0,N,live,
+PROC_000018,중철제본,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000017"", ""disp_seq"": ""1""}",,후가공/기타,2,Y,live,upr=PROC_000017; price_cp=16
+PROC_000019,무선제본,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000017"", ""disp_seq"": ""2""}",,후가공/기타,1,Y,live,upr=PROC_000017; price_cp=16
+PROC_000020,PUR제본,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000017"", ""disp_seq"": ""3""}",,후가공/기타,2,Y,live,upr=PROC_000017; price_cp=16
+PROC_000021,트윈링제본,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000017"", ""disp_seq"": ""4""}",,후가공/기타,5,Y,live,upr=PROC_000017; price_cp=8
+PROC_000022,떡제본,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000017"", ""disp_seq"": ""5""}",,후가공/기타,3,N,live,upr=PROC_000017
+PROC_000023,하드커버무선제본,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000017"", ""disp_seq"": ""6""}",,후가공/기타,4,Y,live,upr=PROC_000017; price_cp=12
+PROC_000024,하드커버트윈링제본,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000017"", ""disp_seq"": ""7""}",,후가공/기타,1,Y,live,upr=PROC_000017; price_cp=12
+PROC_000025,레이플랫제본,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000017"", ""disp_seq"": ""8""}",,후가공/기타,0,N,live,upr=PROC_000017; del
+PROC_000026,귀돌이,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": null, ""disp_seq"": ""5""}",,후가공/기타,0,N,live,
+PROC_000027,직각,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000026"", ""disp_seq"": ""1""}",,후가공/기타,13,Y,live,upr=PROC_000026; price_cp=9
+PROC_000028,둥근,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000026"", ""disp_seq"": ""2""}",,후가공/기타,13,Y,live,upr=PROC_000026; price_cp=18
+PROC_000029,오시,"{""prcs_dtl_opt"": {""inputs"": [{""key"": ""줄수"", ""max"": 3, ""min"": 0, ""type"": ""integer"", ""unit"": ""줄""}]}, ""upr_proc_cd"": null, ""disp_seq"": ""6""}",,후가공/접지절취,4,N,live,
+PROC_000030,미싱,"{""prcs_dtl_opt"": {""inputs"": [{""key"": ""줄수"", ""max"": 3, ""min"": 0, ""type"": ""integer"", ""unit"": ""줄""}]}, ""upr_proc_cd"": null, ""disp_seq"": ""7""}",,후가공/접지절취,4,N,live,
+PROC_000031,가변텍스트,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000085"", ""disp_seq"": ""1""}",,후가공/기타,11,Y,live,upr=PROC_000085; price_cp=115
+PROC_000032,가변이미지,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000085"", ""disp_seq"": ""2""}",,후가공/기타,11,Y,live,upr=PROC_000085; price_cp=115
+PROC_000033,박,"{""prcs_dtl_opt"": {""inputs"": [{""key"": ""크기"", ""type"": ""number"", ""unit"": ""mm""}]}, ""upr_proc_cd"": null, ""disp_seq"": ""10""}",,후가공/기타,0,N,live,
+PROC_000034,금,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000033"", ""disp_seq"": ""1""}",,후가공/기타,0,N,live,upr=PROC_000033
+PROC_000035,은,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000033"", ""disp_seq"": ""2""}",,후가공/기타,0,N,live,upr=PROC_000033
+PROC_000036,핑크,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000033"", ""disp_seq"": ""3""}",,인쇄/표면,0,N,live,upr=PROC_000033
+PROC_000037,홀로그램,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000033"", ""disp_seq"": ""4""}",,후가공/기타,8,N,live,upr=PROC_000033
+PROC_000038,금유광,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000033"", ""disp_seq"": ""5""}",,후가공/기타,8,N,live,upr=PROC_000033
+PROC_000039,은유광,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000033"", ""disp_seq"": ""6""}",,후가공/기타,8,N,live,upr=PROC_000033
+PROC_000040,먹유광,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000033"", ""disp_seq"": ""7""}",,후가공/기타,8,N,live,upr=PROC_000033
+PROC_000041,동박,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000033"", ""disp_seq"": ""8""}",,후가공/기타,8,N,live,upr=PROC_000033
+PROC_000042,적박,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000033"", ""disp_seq"": ""9""}",,후가공/기타,8,N,live,upr=PROC_000033
+PROC_000043,청박,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000033"", ""disp_seq"": ""10""}",,후가공/기타,8,N,live,upr=PROC_000033
+PROC_000044,트윙클,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000033"", ""disp_seq"": ""11""}",,후가공/기타,8,N,live,upr=PROC_000033
+PROC_000045,펄박,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000033"", ""disp_seq"": ""12""}",,후가공/기타,0,N,live,upr=PROC_000033
+PROC_000046,백박,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000033"", ""disp_seq"": ""13""}",,후가공/기타,0,N,live,upr=PROC_000033
+PROC_000047,녹박,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000033"", ""disp_seq"": ""14""}",,후가공/기타,0,N,live,upr=PROC_000033
+PROC_000048,금무광,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000033"", ""disp_seq"": ""15""}",,후가공/기타,0,N,live,upr=PROC_000033
+PROC_000049,은무광,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000033"", ""disp_seq"": ""16""}",,후가공/기타,0,N,live,upr=PROC_000033
+PROC_000050,형압,"{""prcs_dtl_opt"": {""inputs"": [{""key"": ""크기"", ""type"": ""number"", ""unit"": ""mm""}]}, ""upr_proc_cd"": null, ""disp_seq"": ""11""}",,후가공/기타,0,N,live,
+PROC_000051,양각,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000050"", ""disp_seq"": ""1""}",,후가공/기타,2,N,live,upr=PROC_000050
+PROC_000052,음각,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000050"", ""disp_seq"": ""2""}",,후가공/기타,2,N,live,upr=PROC_000050
+PROC_000053,완칼,"{""prcs_dtl_opt"": {""inputs"": [{""key"": ""모양"", ""type"": ""string"", ""required"": false}]}, ""upr_proc_cd"": null, ""disp_seq"": ""12""}",,재단/칼선,3,N,live,
+PROC_000054,반칼,"{""prcs_dtl_opt"": {""inputs"": [{""key"": ""모양"", ""type"": ""string""}, {""key"": ""조각수"", ""min"": 1, ""type"": ""integer"", ""unit"": ""개""}]}, ""upr_proc_cd"": null, ""disp_seq"": ""13""}",,재단/칼선,4,N,live,
+PROC_000055,스티커완칼,"{""prcs_dtl_opt"": {""inputs"": [{""key"": ""조각수"", ""min"": 1, ""type"": ""integer""}]}, ""upr_proc_cd"": null, ""disp_seq"": ""14""}",,재단/칼선,7,N,live,
+PROC_000056,접지,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": null, ""disp_seq"": ""15""}",,후가공/기타,0,N,live,
+PROC_000057,가로접지,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000056"", ""disp_seq"": ""1""}",,후가공/기타,0,N,live,upr=PROC_000056
+PROC_000058,세로접지,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000056"", ""disp_seq"": ""2""}",,후가공/기타,0,N,live,upr=PROC_000056
+PROC_000059,2단접지,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000056"", ""disp_seq"": ""3""}",,후가공/기타,0,N,live,upr=PROC_000056
+PROC_000060,3단접지,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000056"", ""disp_seq"": ""4""}",,후가공/기타,1,N,live,upr=PROC_000056
+PROC_000061,4단접지,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000056"", ""disp_seq"": ""5""}",,후가공/기타,0,N,live,upr=PROC_000056
+PROC_000062,5단접지,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000056"", ""disp_seq"": ""6""}",,후가공/기타,0,N,live,upr=PROC_000056
+PROC_000063,6단접지,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000056"", ""disp_seq"": ""7""}",,후가공/기타,0,N,live,upr=PROC_000056
+PROC_000064,8단접지,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000056"", ""disp_seq"": ""8""}",,후가공/기타,0,N,live,upr=PROC_000056
+PROC_000065,2단가로접지,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000056"", ""disp_seq"": ""9""}",,후가공/기타,1,N,live,upr=PROC_000056
+PROC_000066,2단세로접지,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000056"", ""disp_seq"": ""10""}",,후가공/기타,1,N,live,upr=PROC_000056
+PROC_000067,3단가로접지,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000056"", ""disp_seq"": ""11""}",,후가공/기타,1,N,live,upr=PROC_000056
+PROC_000068,3단세로접지,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000056"", ""disp_seq"": ""12""}",,후가공/기타,1,N,live,upr=PROC_000056
+PROC_000069,4단가로접지,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000056"", ""disp_seq"": ""13""}",,후가공/기타,0,N,live,upr=PROC_000056
+PROC_000070,4단세로접지,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000056"", ""disp_seq"": ""14""}",,후가공/기타,0,N,live,upr=PROC_000056
+PROC_000071,병풍접지,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000056"", ""disp_seq"": ""15""}",,후가공/기타,1,N,live,upr=PROC_000056
+PROC_000072,롤접지,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000056"", ""disp_seq"": ""16""}",,후가공/기타,0,N,live,upr=PROC_000056
+PROC_000073,6단오시접지,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000056"", ""disp_seq"": ""17""}",,후가공/기타,1,N,live,upr=PROC_000056
+PROC_000074,6단미싱접지,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000056"", ""disp_seq"": ""18""}",,후가공/기타,1,N,live,upr=PROC_000056
+PROC_000075,포장,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": null, ""disp_seq"": ""16""}",,후가공/기타,0,N,live,
+PROC_000076,수축포장,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000075"", ""disp_seq"": ""1""}",,후가공/기타,11,N,live,upr=PROC_000075
+PROC_000077,낱개,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000075"", ""disp_seq"": ""2""}",,후가공/기타,0,N,live,upr=PROC_000075
+PROC_000078,묶음,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000075"", ""disp_seq"": ""3""}",,후가공/기타,0,N,live,upr=PROC_000075
+PROC_000079,타공,"{""prcs_dtl_opt"": {""inputs"": [{""key"": ""구수"", ""max"": 8, ""min"": 1, ""type"": ""integer"", ""unit"": ""개""}]}, ""upr_proc_cd"": null, ""disp_seq"": ""17""}",,후가공/타공,6,N,live,
+PROC_000080,봉제,"{""prcs_dtl_opt"": {""inputs"": [{""key"": ""유형"", ""type"": ""enum"", ""values"": [""오버로크"", ""오버로크+리본끈"", ""말아박기"", ""말아박기+면끈"", ""봉미싱(7cm)""]}, {""key"": ""폭"", ""type"": ""number"", ""unit"": ""mm""}]}, ""upr_proc_cd"": null, ""disp_seq"": ""18""}",,후가공/조립,5,Y,live,price_cp=5
+PROC_000081,부착,"{""prcs_dtl_opt"": {""inputs"": [{""key"": ""대상"", ""type"": ""enum"", ""values"": [""라벨"", ""맥세이프"", ""끈"", ""테입""]}]}, ""upr_proc_cd"": null, ""disp_seq"": ""19""}",,후가공/조립,10,N,live,
+PROC_000082,족자제작,"{""prcs_dtl_opt"": {""inputs"": [{""key"": ""모양"", ""type"": ""enum"", ""values"": [""사각"", ""원형""]}]}, ""upr_proc_cd"": null, ""disp_seq"": ""20""}",,완제/제작,1,N,live,
+PROC_000083,에폭시,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": null, ""disp_seq"": ""21""}",,후가공/코팅,1,N,live,
+PROC_000084,열재단,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": null, ""disp_seq"": null}",,재단/열절단,2,N,live,
+PROC_000085,가변데이타,"{""prcs_dtl_opt"": {""inputs"": [{""key"": ""개수"", ""max"": 3, ""min"": 0, ""type"": ""integer"", ""unit"": ""개""}]}, ""upr_proc_cd"": null, ""disp_seq"": ""22""}",,후가공/기타,0,N,live,
+PROC_000086,미싱,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000030"", ""disp_seq"": ""1""}",,후가공/접지절취,0,Y,live,upr=PROC_000030; price_cp=30
+PROC_000087,반칼,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000054"", ""disp_seq"": ""1""}",,재단/칼선,0,N,live,upr=PROC_000054
+PROC_000088,봉제,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000080"", ""disp_seq"": ""1""}",,후가공/조립,0,N,live,upr=PROC_000080
+PROC_000089,부착,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000081"", ""disp_seq"": ""1""}",,후가공/조립,0,N,live,upr=PROC_000081
+PROC_000090,오시,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000029"", ""disp_seq"": ""1""}",,후가공/접지절취,0,Y,live,upr=PROC_000029; price_cp=50
+PROC_000091,완칼,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000053"", ""disp_seq"": ""1""}",,재단/칼선,0,N,live,upr=PROC_000053
+PROC_000092,타공,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000079"", ""disp_seq"": ""1""}",,후가공/타공,0,Y,live,upr=PROC_000079; price_cp=18
+PROC_000093,족자제작,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000082"", ""disp_seq"": ""1""}",,완제/제작,0,N,live,upr=PROC_000082
+PROC_000094,스티커완칼,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000055"", ""disp_seq"": ""1""}",,재단/칼선,0,N,live,upr=PROC_000055
+PROC_000095,에폭시,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000083"", ""disp_seq"": ""1""}",,후가공/코팅,0,N,live,upr=PROC_000083
+PROC_000096,열재단,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000084"", ""disp_seq"": ""1""}",,재단/열절단,0,N,live,upr=PROC_000084
+PROC_000097,UV,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000002"", ""disp_seq"": ""1""}",,인쇄/표면,0,N,live,upr=PROC_000002
+PROC_000098,싸바리바인더,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000017"", ""disp_seq"": ""9""}",,후가공/기타,0,Y,live,upr=PROC_000017; price_cp=6
+PROC_000099,벽걸이캘리더제본,"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000017"", ""disp_seq"": ""10""}",,후가공/기타,0,Y,live,upr=PROC_000017; price_cp=6
+PROC_000100,탁상형캘린더제본(220),"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000017"", ""disp_seq"": ""11""}",,후가공/기타,0,Y,live,upr=PROC_000017; price_cp=12
+PROC_000101,탁상형캘린더제본(130),"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000017"", ""disp_seq"": ""12""}",,후가공/기타,0,Y,live,upr=PROC_000017; price_cp=12
+PROC_000102,탁상형캘린더제본(미니),"{""prcs_dtl_opt"": null, ""upr_proc_cd"": ""PROC_000017"", ""disp_seq"": ""13""}",,후가공/기타,0,Y,live,upr=PROC_000017; price_cp=12
