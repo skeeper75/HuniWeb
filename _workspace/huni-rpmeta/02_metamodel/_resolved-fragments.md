@@ -848,3 +848,49 @@
 **FS 강제 분류 회피(SKILL §3·§5):** **distinct 승급 0건(★타일링 TILL_WH_GBN #18 부결 + ★codex 패널 구성 FS-A1 #18 부결) = 17축 재포화(PR 4번째·CL 6번째·AC 7번째·PD 8번째·PH 9번째 distinct 0 패턴 반복).** 8 fragment(FS-1~FS-8) 전부 기존 17축 facet/family/cascade. ★directive 1순위 관전(타일링이 distinct #18인가) 적대 판정: 타일링=공정#2 인쇄 배치(조판/임포지션) 파라미터#9(접지 면분할·오시 줄수 동근·후니 plate_size #6 이미 1급)이지 별 반복배치축 아님. **★재포화 정당성(HARD 기준 양방향 점검):** 형상(#17·ST)은 ① 전용 슬롯(shape_info) + ② 후니 KB G-SK-2 결함 둘 다 충족(승격), 타일링은 **① TILL_WH_GBN 전용 슬롯 OBSERVED(충족)이나 ② 후니 KB 결함 명시 없음**(plate_size/공정 파라미터가 인쇄 배치 담음) → ②불충족 → distinct 0 정직(PH-2 거치 부결과 동일 구조). **★핵심 경계(HARD): 타일링(고객 입력 파라미터·공정#9 등재) ≠ 판걸이수(앱계산 파생·DB미저장·등재 금지).** 10번째 카테고리(직물 풀프린팅+봉제 완제 굿즈)가 새 관리축 0 도입 = 모델 안정성 재확인(유일 신규 후보 타일링조차 무손실 흡수).
 **FS가 더한 것(축 신설 아닌 *강화*):** ① **17축 재포화** — 10번째 카테고리 distinct 0(PR·CL·AC·PD·PH 패턴 반복). ② 공정#2 인쇄 배치 파라미터#9 "타일링(반복 배치)" 멤버 추가(접지/오시/UV 합류·plate_size 임포지션 도메인·타일링≠판걸이수 경계). ③ 자재#1 직물 물성 차원 입증(면직물 PTT·면사 수 WGT 번수 다의·CL oz·AC mm·PD 번수 합류). ④ 공정#2 마감봉제(edge finish) family 멤버(오버로크/말아박기/벨크로)·형태가공#14 직물 굿즈 봉제 완제 횡단(PDT_WRK·GS/PD 합류). ⑤ 부속물#8 선택형(옵션 노출 view_yn=Y) facet — PD-4 고정 부속(ESN=Y·view_yn=N)과 노출 차원만 분기. ⑥ 가격#11 라우팅(완제 봉제 굿즈도 real_calc_price·PD tmpl과 분기). ⑦ 공정#2 현수막 가공 BN family 상속(패브릭 포스터=천 현수막·행잉/봉/고리).
 **검증 라우팅 요약:** 메타모델 해소 ✅ = FS-1~FS-7(축 귀속 확정·타일링 #18 부결) / 부분 🟡 = FS-8(infoCall enum/단가 unobserved). 라이브/엑셀 검증 필요분 = 타일링↔가격 가산 매핑(FS-1 → gap data-gap·후니 공정 배치 파라미터#9 적재)·직물 물성 measure_type 그릇(FS-3 → vessel)·부속물#8 노출 모드 ESN_YN/view_yn 그릇(FS-6 → gap data-gap)·real_price↔real_calc_price 면적함수(FS-7 → 가격검증)·infoCall enum/단가(FS-8 → validation). **★FS-1 타일링 = data-gap(공정#2 인쇄 배치 파라미터#9 그릇 미적재)이지 vessel-gap(축 부재) 아님 — 갭분석가 핵심 구분(PD-4·PH-1/PH-2 data-gap 동형).**
+
+---
+
+## ═══ NC 모호 fragment 판정 (옵셋 명함/카드 — 인쇄방식(옵셋 vs 디지털) #18 적대 프로브) ═══
+
+> `categories/NC/reverse.md` Ambiguous fragments 1~5 해소. **선별 모드 핵심 프로브 = "인쇄방식(옵셋 vs 디지털)이 distinct #18 관리축인가" — 부결(이미 #12 D-7).** 도메인 정초 = `process-recipe-tree.md §1`(인쇄방식 5종 최상위 레시피 축) + BC fixture 직접 대조 + 메모리 `dbmap-print-method-not-absolute-axis`. domain-researcher 신규 호출 불요(추정 0).
+
+## N-1. `item_gbn`/`price_gbn` 토큰(`offset2023_item`/`offset2023_price`) — 인쇄방식레시피#12(D-7) + 가격#11 라우팅 [facet·#12 재확인]
+
+- **판정:** **인쇄방식레시피#12(D-7)의 토큰 레벨 인코딩 + 가격#11 라우팅 키 + 기초코드#6 값 도메인**. ★distinct #18 신축 부결 — 인쇄방식은 *이미 #12로 등재됨*(중복 신축 금지).
+- **근거:**
+  - reverse 차이표 7행 전부 "❌ 같은 슬롯, 값만 다름" — 옵셋 NC와 디지털 BC가 `pdt_mtrl_info`/`pdt_size_info`/`pdt_dosu_info`/`pdt_prn_cnt_info`/`pdt_pcs_info` 100% 동형 공유·**새 스키마 축(슬롯) 0**. `item_gbn`=상품에 박힌 *discriminator enum*(CL item_gbn=clothes2025·PR pdtCode prefix·ST 인쇄방식 prefix 동형 정책패턴·명제 #19 "분기 discriminator는 축 아님").
+  - `price_gbn=offset2023_price`는 가격엔진 선택자 = **가격#11 pricing_model 라우팅 키**(digital_price/vTmpl/real_price/tmpl/acrylic2025와 같은 전용 엔진 패턴 추가). 별도 가격엔진 존재가 *전용 관리 슬롯*을 만들지 않음 — price_gbn enum 값일 뿐(ST 3엔진·AC 3엔진 라우팅 입증).
+  - 인쇄방식은 v2.0(BN)에서 D-7로 *조건부 distinct* 승급됨(RP=자재 facet 인코딩/후니=1급 게이팅 축·process-recipe §1 PROC_000002~6). NC는 그 양면 표현의 *4번째 인코딩*(item_gbn/price_gbn 토큰 bundle)을 추가·강화이지 신축 아님.
+- **★승격 양방향 기준 둘 다 불충족:** ① 전용 슬롯 부재(enum 토큰·같은 base-data 슬롯의 다른 값) ② KB 결함 부재(인쇄방식=#12로 이미 1급·왜곡 없이 담음·G-SK-2 같은 "어느 축에도 없음" 명시 없음). ST 형상(#17·둘 다 충족=승격)과 정반대. → **facet(거부·#12 재확인).** 가장 깨끗한 부결(신후보가 아니라 *이미 등재된 축의 토큰 재확인*).
+
+## N-2. `pdt_exp_prn_cnt_info`(MTRL_CD×PRN_CNT 이산 부수 tier) — 수량#10 + 제약#5 + 가격#11 분산 [facet·★data-gap 결정적 분기]
+
+- **판정:** **수량#10(이산 슬롯) + 제약#5(자재→허용부수) + 가격#11(부수 tier=단가구간) 분산 facet.** ★결정적 분기: 인쇄방식 #18 축 증거가 아니라 **수량 모델 표현력 data-gap**(vessel-gap 아님).
+- **근거:**
+  - 이산 tier는 *같은 `pdt_prn_cnt_info`/`pdt_exp_prn_cnt_info` 슬롯의 채움 방식 차이*(디지털=연속 FIR/INC/STEP·옵셋=이산 exp_prn_cnt 매트릭스)이지 인쇄방식 고유 슬롯 아님 — 디지털과 100% 공유 슬롯.
+  - 한 슬롯에 3 의미 합성: ① 허용 부수 집합(자재→{100~500})=수량#10 이산 슬롯+제약#5(자재가 허용부수 제약) ② 부수 tier=단가구간=가격#11(round-1 t_dsc_*·tiered_price 동근·NCCDPHO "대량"=이 tier) ③ 자재종속=제약#5 cascade+#12 인쇄방식이 부수 이산화 게이팅(옵셋 판/대수 임포지션 경제성).
+  - **(a) 인쇄방식 축 증거 = 기각**(고유 슬롯 아님·공유 슬롯의 채움 차이). **(b) data-gap = 채택** — 후니 수량모델이 "연속 increment"만 가정하면 옵셋 이산 tier를 못 담을 수 있으나, 이는 *수량축#10의 이산 모드 표현력 부재·제약#5의 자재→허용부수 매트릭스 미적재·가격#11의 부수구간 단가 미적재*(세 기존 축의 표현력 data-gap)이지 새 축 부재 아님.
+- **결론: data-gap(PD-4 내재BOM·FS-1 타일링 data-gap 동일 계열·축 충분·표현력 미적재).** 갭분석가: 수량축#10이 이산 tier(연속 vs 이산 모드)를 수용하는지·제약#5가 자재→허용부수를 담는지 라이브 확인. → facet(거부).
+
+## N-3. 별도 가격엔진 `offset2023_price` — 가격#11 pricing_model 라우팅 [facet]
+
+- **판정:** **가격#11(D-6) pricing_model 라우팅** — digital_price/vTmpl/real_price/tmpl/tiered/book2025/acrylic2025와 같은 "전용 가격엔진(세대)" 패턴 추가. 라우팅 키=price_gbn(인쇄방식 종속).
+- **근거:** ST die-cut/판/정가 3엔진(S-6)·AC acrylic2025(A-6)·GS tmpl/vTmpl(G-7)가 이미 "형태/소재/인쇄방식별 전용 가격엔진" 패턴으로 #11에 흡수됨. offset2023_price=옵셋 자재×부수 룩업(이산 단가구간)·디지털 볼륨디스카운트 곡선과 대비 — pricing_model enum 추가이지 새 축 아님. 가격 reqBody/result는 unobserved(주문플로 회피) → 가격 *값/공식*은 dbmap 가격 트랙·갭분석가 영역(메타모델은 라우팅 분류까지). → facet(거부).
+
+## N-4. 옵셋전용 자재 pool(3종 vs 디지털 5종·RXWMO220) — 인쇄방식#12 → 자재#1 게이팅 [facet·P-7 간선]
+
+- **판정:** **인쇄방식#12의 gates-material-pool 관계 간선(P-7 합류)** — 인쇄방식이 가능 자재 부분집합을 게이팅. 자재#1로 흡수되나 "어느 자재가 어느 인쇄방식에서 가능한가"는 #12→#1 게이팅 간선.
+- **근거:** PR 윤전 책자→YWM pool(P-7) 동형 — 윤전→백색모조 전용, 옵셋→RXWMO220 모조지 전용(디지털 아트지/스노우/얼스팩과 다른 풀). 인쇄방식이 자재코드에 *인코딩*될 뿐 아니라 *가능 자재 부분집합을 게이팅*. 후니 자재 마스터가 인쇄방식 차원을 갖는지(자재↔인쇄방식 호환)는 갭분석가 라이브 확인. → facet(거부·P-7 자재풀 게이팅 간선 강화).
+
+## N-5. 접지(NCDFFLD 사이즈 SKU)·오시(OSI_DFT)·귀돌이(ROU_DFT) — 사이즈#13 + 공정#2 + 제약#5 cascade [facet]
+
+- **판정:** **사이즈#13(접지치수 SKU 흡수) + 공정#2(오시/귀돌이 멤버) + 제약#5(사이즈↔오시 cascade).** PR 리플렛=FLD_DFT 독립 옵션축 vs NC 명함=접지를 사이즈 SKU+오시 공정으로 분해 — *같은 "접는다" 개념을 상품군별로 다른 관리축에 매핑*(둘 다 기존 축).
+- **근거:**
+  - NCDFFLD 접지(2단/3단×세로/가로×규격)가 `pdt_size_info` 16종 SKU로 베이크(펼친 크기 WRK/CUT가 접지수 비례·2단세로=높이2배). 일반 명함(WDT_HGH_GBN_YN=Y 자유사이즈)과 달리 접지 명함은 WDT_HGH_GBN_YN=N(접지 SKU만 허용) → 접지=사이즈#13 프리셋 흡수(PR FLD_DFT 독립 옵션축과 다른 관리 위치이나 둘 다 기존 축).
+  - 오시(OSI_DFT 접는 선 누름)=공정#2 멤버 + *사이즈↔오시 cascade*(접지 SKU 선택→오시 동반·일반 명함엔 오시 그룹 없음)=제약#5 match. 귀돌이(ROU_DFT 둥근모서리)=공정#2 멤버.
+  - **상품군별 관리축 분기:** 명함=치수 프리셋이 강해 SKU 흡수·리플렛=면 분할이 본질이라 옵션축(FLD_DFT) — RedPrinting이 같은 접지 개념을 상품군별 다른 축에 매핑. 메타모델은 둘 다 표현 가능(사이즈 SKU 또는 FLD_DFT 옵션·둘 다 기존 축). → facet(거부).
+
+**NC 강제 분류 회피(SKILL §3·§5):** **distinct 승급 0건(★인쇄방식(옵셋 vs 디지털) #18 부결·★이산 부수 tier=data-gap) = 17축 재포화(PR·CL·AC·PD·PH·FS 패턴 반복).** 5 fragment(N-1~N-5) 전부 기존 17축 facet/관계 간선. ★directive 최강 적대 프로브(인쇄방식이 distinct #18인가) 적대 판정: **인쇄방식은 *이미 #12(D-7)로 조건부 등재*** — 별도 가격엔진(offset2023_price=#11 라우팅)·이산 부수 tier(수량#10/제약#5/가격#11 분산 data-gap)·전용 자재 pool(#12→#1 게이팅 P-7)까지 가진 *가장 강력한 후보*조차 신축이 아니라 *기존 축의 토큰 재확인*. **★재포화 정당성(HARD 기준 양방향 점검):** 형상(#17·ST)은 ① 전용 슬롯 + ② KB 결함 둘 다 충족(승격), 인쇄방식 #18은 **① 전용 슬롯 부재(enum 토큰·새 슬롯 0) + ② KB 결함 부재(#12로 이미 1급) 둘 다 불충족** → 부결(가장 깨끗한 부결·이미 등재된 축의 중복 방지). 11번째 카테고리(옵셋 명함/카드)가 새 관리축 0 = 모델 안정성 재확인.
+**NC가 더한 것(축 신설 아닌 *강화*):** ① **17축 재포화** — 11번째 카테고리 distinct 0(최강 #18 후보 정면 격파). ② 인쇄방식#12(D-7) 토큰 레벨 + 4번째 인코딩(item_gbn/price_gbn 토큰 bundle·BN 자재facet/ST·PR pdtCode/CL 상품내옵션/NC 토큰). ③ 가격#11 offset2023_price 라우팅 추가(옵셋 자재×부수 룩업·이산 단가구간). ④ 수량#10 이산 tier 모드 data-gap 명시(디지털 연속 vs 옵셋 이산·후니 적재 표현력 과제). ⑤ #12 자재풀 게이팅(P-7) 재확인(RXWMO220 옵셋전용). ⑥ 사이즈#13 접지 SKU 흡수+공정#2 오시 cascade(상품군별 접지 관리축 분기).
+**검증 라우팅 요약:** 메타모델 해소 ✅ = N-1·N-3·N-4·N-5(축 귀속 확정·인쇄방식 #18 부결) / data-gap 🟡 = N-2(이산 tier 수량/제약/가격 표현력 적재). 라이브/엑셀 검증 필요분 = 수량축#10 이산 tier 모드 수용력(N-2 → gap data-gap)·제약#5 자재→허용부수 매트릭스(N-2 → gap)·자재#1 인쇄방식 차원/호환(N-4 → gap)·offset2023_price 산정식(N-3 → dbmap 가격 트랙·unobserved)·박/형압 NCDFFOI/NCCDFOI 출시 후 재캡처(공정 vs 별SKU·unobserved). **★N-2 이산 부수 tier = data-gap(수량#10/제약#5/가격#11 표현력 미적재)이지 vessel-gap(축 부재) 아님 — 갭분석가 핵심 구분(PD-4·PH-1/PH-2·FS-1 data-gap 동형).** **★dbmap 정합: rpmeta "인쇄방식=#12 게이팅 축·신축 #18 부결" = dbmap `print-method-not-absolute-axis` "인쇄방식≠절대 최상위 축·시트가 1차 단위" — 같은 결론, 다른 렌즈(메타모델 추상화 vs 적재/이해 단위)·상호 보강.**

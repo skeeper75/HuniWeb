@@ -1,7 +1,7 @@
 # RP 추출 커버리지 인덱스
 
 > 후니 RP-Meta 하네스 파이프라인 ① — 샘플 커버리지 맵 (rpm-reverse-engineer).
-> 실행 이력: ① BN(현수막류) 파일럿 6+1상품. ② GS(굿즈/잡화) 확장 12상품. ③ TP(디자인템플릿) 확장 대표3+20횡단. ④ PR(인쇄물·책자) 확장 대표3+53횡단. ⑤ ST(스티커) 확장 대표3+33횡단. ⑥ CL(의류) 확장 대표3+27횡단. ⑦ AC(아크릴·키링·코롯토·명찰·등신대) 확장 대표3+17횡단. ⑧ PD(스툴·슬리퍼·강아지계단·봉제 구조물) 전수 3상품. ⑨ PH(포토보드·액자·사진인화·포토북·포토굿즈) 확장 대표3+27횡단(★§0.5 client-render 재캡처로 거치/마운팅 블로커 해소). ⑩ FS(패브릭·봉제 완제 직물 굿즈) 확장 대표5+16횡단(★타일링 신규 fragment 발굴·신규축 선별 모드). 대표 샘플링(답습 전수수집 아님). **메타모델 = 17축(10 카테고리·distinct: TP #16·ST #17·나머지 0·PH 재포화 9번째·FS 재포화 10번째·★FS 타일링 #18 후보 1건 판정보류→아키텍트/갭).**
+> 실행 이력: ① BN(현수막류) 파일럿 6+1상품. ② GS(굿즈/잡화) 확장 12상품. ③ TP(디자인템플릿) 확장 대표3+20횡단. ④ PR(인쇄물·책자) 확장 대표3+53횡단. ⑤ ST(스티커) 확장 대표3+33횡단. ⑥ CL(의류) 확장 대표3+27횡단. ⑦ AC(아크릴·키링·코롯토·명찰·등신대) 확장 대표3+17횡단. ⑧ PD(스툴·슬리퍼·강아지계단·봉제 구조물) 전수 3상품. ⑨ PH(포토보드·액자·사진인화·포토북·포토굿즈) 확장 대표3+27횡단(★§0.5 client-render 재캡처로 거치/마운팅 블로커 해소). ⑩ FS(패브릭·봉제 완제 직물 굿즈) 확장 대표5+16횡단(★타일링 신규 fragment 발굴·신규축 선별 모드). ⑪ NC([옵셋] 명함·카드·쿠폰·포토카드) 라이브 대표3(★선별 모드 핵심 프로브 — "인쇄방식 옵셋 vs 디지털"이 distinct #18 관리축인가 → **1차 예측 부결[흡수]**). 대표 샘플링(답습 전수수집 아님). **메타모델 = 17축(11 카테고리·distinct: TP #16·ST #17·나머지 0·PH 재포화 9번째·FS 재포화 10번째·NC 재포화 11번째·★FS 타일링 #18 후보 1건 판정보류→아키텍트/갭·★NC 인쇄방식 #18 후보 1차 부결[전용 슬롯 부재·KB 결함 부재·기존 #11가격모델/기초코드 흡수]).**
 
 ## 커버리지 맵 — BN(현수막류) (상품 → 축 → 출처)
 
@@ -291,6 +291,22 @@ BNBNLOW(특가현수막), BNBNDAY(오늘출발), BNTPSNG(타포린단면), BNFGB
 
 > 5개 이질 구조: 평면 현수막형(FSSQPST·real_price·BN 행잉/봉 상속) · 양면봉제+솜(FSCUDFT) · 완제 가방(FSBGECO·끈/포켓/자석) · 파우치(FSPUSTR) · 소형 봉제 variant(FSBDSCR). 나머지 16종(코스터/엽서/노렌/테이블류·쿠션/커버·파우치/필통·가방·스카프)은 reverse.md §9에 소재/형태/부자재만 다른 동형으로 묶음(답습 회피). 모집단=catalog category=FS 21상품(전부 /item/FS/). ★전 5상품 레거시 productOrder SSR(vueMarkers=0·라이브 추출 성공·PH 같은 client-render 블로커 없음).
 > **★FS 발굴 fragment(★directive 1순위=신규축 선별 모드)**: **FS-1 ★타일링(TILL_WH_GBN: 없음/세로/가로)=distinct #18 후보 1건·판정보류** — 전 9 카테고리 전무 + 명시 슬롯 실재(승격기준 ①충족)이나 후니 KB "인쇄 레이아웃/반복" 흡수처 실재 여부 미확정(②미확정)→1차 예측 공정#2(인쇄 배치) facet 흡수 우세이나 ST 형상#17·CL 인쇄위치 승격과 대조해 아키텍트/갭분석가 결정. FS-2 방향(PAPER_WH W/H)=사이즈#13 facet · FS-3 면직물(면사 수 綿絲 count)=자재#1 평량 차원(CL oz·PD 원단·GS 코스터 소재 동형) · FS-4 별색(SID_FBR 6색×3농도)=공정#2 별색 family(CL Pantone 1124 축소 직물 도메인) · FS-5 마감봉제(SEW_FBR 오버로크/말아박기/벨크로)·제품가공(PDT_WRK 상품별 명칭)·FBR-접미 슬롯=공정#2 family(PD SEW_LTR 동형)+부속물#8(라벨/끈/자석 BUNDLE·AC/ST/PD SUB_MTR) · FS-6 솜/끈/자석=완제 부자재(옵션 노출 vs 고정BOM·PD-4 vessel-gap 합류) · FS-7 가격모델 분기(real_price 현수막형 vs real_calc_price 봉제완제·PD tmpl 아님). **★17축 안정성: FS가 10번째 카테고리로 재포화(타일링 1건 제외 무손실 흡수) — 가장 이질적 "직물 풀프린팅+봉제 완제 굿즈"조차 17축 흡수. FS 진짜 기여: 자재#1에 "면직물·면사 수" 평량 단위 추가·공정#2에 "마감봉제(edge finish)" family 추가·★타일링이라는 반복-배치 차원을 metamodel/validator 흡수 vs 신축 판정에 던짐(PD 봉제 #18 부결과 일관하나 "전 카테고리 부재+명시 슬롯"이라 적대검증 대상).**
+
+## 커버리지 맵 — NC([옵셋] 명함·카드·쿠폰·포토카드, 9상품·★인쇄방식 프로브)
+
+| pdtCode | 상품 | 구조 다양성 | 축 수 | item/price_gbn | 자재(수) | 수량 모델 | 후가공 | 출처 |
+|---------|------|------------|-------|----------------|---------|----------|--------|------|
+| NCDFDFT | [옵셋] 일반 명함 | ★옵셋 baseline | 5 | **offset2023** | 스노우/모조(3) | **이산 tier(자재×100~500)** | 재단/코팅/타공/귀돌이/SUB_MTR | `[live:API]` 풀 |
+| NCDFFLD | [옵셋] 2단/3단 명함 | ★접지 SKU+오시 | 5 | offset2023 | 동형(3) | 이산 tier(기본200) | 재단/오시(OSI_DFT) | `[live:API]` 풀 |
+| NCCDPHO | [옵셋] 대량 포토카드 | ★대량 단가구간 | 4 | offset2023 | 스노우300(1) | 이산 tier(★"대량"=tier) | 재단 | `[live:API]` 풀 |
+
+> 6 동형 미캡처: NCDFQLT/NCCDQLT(고급지=자재 superset)·NCDFCPN(쿠폰=명함동형)·NCCDDFT(일반카드=포토카드동형)·NCDFFOI/NCCDFOI([Coming soon] 박/형압=미출시·order_yn 미관측). 모집단=catalog category=NC 9상품(전부 [옵셋]). ★3상품 전부 playwright 라이브 infoCall 인터셉트 성공(retCode 200·주문 0건·read-only). 디지털 카운터파트=BC fixture(BCSPDFT `digital_item`/`digital_price`) 동형 대비.
+> **★NC 발굴 — 인쇄방식 #18 1차 예측: 부결(흡수).** NC=BC와 동일 명함 상품군이되 옵셋 인쇄방식. 옵셋 vs 디지털 차이가 **전부 기존 슬롯의 다른 값/다른 채움으로 흡수·새 관리 슬롯 0**: **NC-1 `item_gbn`/`price_gbn` 토큰(`offset2023_*` vs `digital_*`)=기초코드(인쇄방식 enum)+가격엔진 선택자**(PR §0.4 pdtCode 분기축이 토큰 레벨로 재확인) · **NC-2 ★수량 의미 분기(디지털=연속 increment FIR100/INC100/MIN1 vs 옵셋=`pdt_exp_prn_cnt_info` MTRL_CD×PRN_CNT 이산 tier 100~500·자유입력 불가)**=옵션#3(수량)+제약(자재×부수 허용)+가격#11(구간단가)·디지털은 exp_prn_cnt=null로 미사용 → 같은 슬롯 옵셋만 활성 · **NC-3 가격엔진 `offset2023_price`**=#11 가격모델의 세 번째 엔진 토큰(digital_price·면적매트릭스에 이은)·가격엔진 선택자가 인쇄방식 종속 · **NC-4 접지(NCDFFLD)=사이즈 SKU(2단/3단×세로/가로 16종)+오시(OSI_DFT)공정**(PR 리플렛 FLD_DFT 독립옵션축 vs NC 명함 사이즈/공정 흡수 — 같은 "접기" 다른 관리축) · **NC-5 자재 pool 인쇄방식 종속(옵셋 3종/옵셋전용 RXWMO220 vs 디지털 5종)**=자재#1 흡수. **★승격 기준 둘 다 불충족(ST 형상#17 대조): ① 전용 슬롯 라이브 부재(item_gbn은 enum 토큰·새 슬롯 아님) ② 후니 KB "담지 못함" 결함 부재(가격모델#11+기초코드+옵션/제약 무왜곡 흡수)** → 인쇄방식 #18 **부결**. 단 metamodel 적대검증 nuance 2: (N-1) 가격엔진 선택자(price_gbn)가 후니 product_price_formulas 바인딩으로 흡수되는지 명시 확인 · (N-2) 후니 옵션/제약이 "자재종속 이산 부수 tier"를 수용하는지(연속만 가정 시 data-gap·축 아님). ★메모리 교훈 `dbmap-print-method-not-absolute-axis`("인쇄방식 절대축 아님")와 정합. **11번째 카테고리로 17축 재포화(distinct 0)·옵셋이라는 가장 강력한 #18 후보(별도 가격엔진 보유)조차 부결 — 선별 모드 핵심 프로브 통과.**
+
+## 다음 단계 — NC 추가분 (rpm-metamodel-architect / rpm-gap-analyst 주목)
+33. **★인쇄방식 = (기초코드 enum) + (가격엔진 선택자) bundle 확정** — NC-1/NC-3. `item_gbn`/`price_gbn` 토큰을 후니가 어디에 담는가(기초코드 축인가·상품-공식 바인딩 product_price_formulas인가·둘 다인가). N-1 흡수 경로 명시. distinct 신축 아님(부결)·흡수 경로 검증만.
+34. **★수량 모델 = 연속 increment vs 자재종속 이산 tier 수용력(data-gap 후보)** — NC-2. 후니 옵션/제약 슬롯이 `pdt_exp_prn_cnt_info`(MTRL_CD×PRN_CNT 이산 허용 매트릭스)를 담는지. 못 담으면 **인쇄방식 축이 아니라 "수량 모델 표현력" data-gap**(옵션값+참조제약+가격행 3분해). N-2 검증.
+35. **★박/형압 명함·카드([Coming soon] NCDFFOI/NCCDFOI) 라이브 재캡처** — 미출시·order_yn 미관측. 출시 후 박/형압이 NC에서 공정 add-on인지 별 SKU인지 확인(BC BCFOXXX 박/형압 명함 대조).
 
 ## 다음 단계 — PH 추가분 (rpm-gap-analyst 주목 — ★전부 facet·data-gap)
 30. **★완제 SKU/거치 캐스케이드 그릇(data-gap)** — PH-1/PH-2. `t_prd_templates`/완제SKU 그릇 실재·거치방식 polymorphic ref(옵션#3·AC GRP_OPTION_CD cascade 동형)·거치+마감+사이즈 완제 variant 적재만(축 부재 아님·vessel-gap 아님). [HARD] 완제 SKU 라벨 분해 {mount_type,finish,frame_material,size}(G-1/AC variant 동일 처방).
