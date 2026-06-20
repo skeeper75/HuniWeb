@@ -180,3 +180,55 @@ E5·E6 FAIL → 전건 통과 미충족 → **NO-GO**.
 - **G-S1 후가공 배선 + 배너 후가공 판별차원 충전(돈크리티컬·Q-SB-PUNCH-DIM·PROC-QTY)** → dbm-price-arbiter 심의(1건당 vs ×수량 확정) + 인간 승인 후 dbmap(dbm-axis-staged-load·dbm-load-execution·dbm-ddl-proposer opt_cd 채번). 미충전 배선 절대 금지.
 - **본체 = confirmed-good** — 28공식·바인딩·동형결합·신안 WH 전환 라이브 COMMIT. 건드리지 말 것.
 - **codex 2차(Phase 5.5)** → 오케스트레이터 reconcile(본 판정은 독립·codex 비참조).
+
+---
+
+# 문구 고정가형+수량구간할인 / 매트릭스형 설계 종합 검증 판정 (2026-06-20·carry-forward)
+
+> 상세: `gate-verdict-stationery.md`·`recompute-log-stationery.md`. 라이브 읽기전용 재실측·pricing.py 충실 재구현 재계산.
+
+## 종합 판정: **GO (조건부 컨펌큐 동반)**
+
+| 게이트 | 판정 |
+|--------|------|
+| E1 공식 추출 충실성 | PASS |
+| E2 구성요소 분해 정합 | PASS |
+| E3 경쟁사 흡수 타당성 | PASS |
+| E4 엔진 설계 건전성 | PASS (LOW 정정 1) |
+| E5 세트 조합 정합 | PASS |
+| E6 골든 재현 | PASS (15/15·허용오차 0) |
+| E7 생성-검증 독립성 | PASS |
+
+전건 PASS → **GO**. 첫 게이트부터 GO(디지털 NO-GO·보정 폐루프와 대조, 아크릴 GO 동류). 4번째 종단.
+
+## 핵심 한 줄
+
+문구는 **두 가격 클래스**(본체 9=고정가 product_prices·떡메모 1=매트릭스 FORMULA), 둘 다 DSC_STAT_QTY 곱. 라이브 실측이 cartographer↔designer 충돌 2종을 designer 손으로 결판: **① 떡메모 ×qty 폭발 없음**(unit=권당가·단가 사다리 단조 하락 실증·.01 단가형 ÷min_qty 미발생) **② DSC 링크 누락 4건**(173/174/175/097=과청구·계산불가). 신규 mint 0. 골든 15/15 허용오차 0.
+
+## 충돌 결판 라이브 confirm (cartographer 가설 → 반증·designer 옳음)
+
+- **DT-2 떡메모 ×qty**: cartographer "unit=묶음총액·교정안 A(÷min_qty) 필요" → **반증**. 라이브 COMP_TTEOKME 사다리(90x90 100장1권: 6권 3200→600권 1050 단조 하락)가 unit=권당가 증명(묶음총액이면 권수↑에 단가↓ 불가). pricing.py :192 단가형 ÷min_qty 미발생 코드 확정. ÷min_qty 적용 시 GC-ST10이 3,200≠19,200(골든 모순).
+- **DT-4 DSC 링크**: 라이브 6/9 실재·누락 4건(173/174/175/097) 전수 SELECT 확인. designer 정확. 과청구(GC-ST4 +150,000)·바인딩 0 계산불가(GC-ST12) 실증.
+
+## 보정 요구
+
+**없음(차단 결함 0).** LOW 정정 2건(가격 무영향·문서만):
+- E4 LOW: 설계 §6 "option_items 전역 0행" → 라이브 전역 477행(stale)·**문구 상품 0행**으로 표현 정정(문구 결론은 유효).
+- E1 LOW: 본체 사이즈 표기 정밀화(먼슬리 A5·중철노트 A6·스프링수첩 90x145·권위 엑셀).
+
+## 컨펌큐 (designer 큐 + 검증 보강)
+
+| # | 미해소 | 누가 | 영향 |
+|---|--------|------|------|
+| Q-ST-DSC-LINK | ★링크 누락 4(173/174/175/097)=과청구. 상품마스터 "구간할인적용테이블" 재대조 후 INSERT | dbmap round-1 | 돈크리티컬·검증 실증 |
+| Q-ST-DSC-DOUBLE | 떡메모 unit 사다리(내장 볼륨할인) 위 DSC_STAT_QTY 곱=이중할인 의도 여부 | dbm-price-arbiter | 이중할인 방지 |
+| Q-ST-MEMO1 | 메모패드 2사이즈 2가격=사이즈 차원 공식 vs 별 prd_cd(라이브=단일 prd) | 실무 | 메모패드 그릇 |
+| Q-ST-OPT1 | 떡메모 사이즈/권당장수 옵션→차원 주입(문구 상품 option_items 0행) | round-6 | 0원 침묵 회피 |
+| DT-BIND | 책자(부품 합산형)·D-BIND-SCOPE | dbm-price-arbiter·사용자 | 스코프 밖·다음 종단 |
+
+## 라우팅
+
+- **본체 9 product_prices INSERT(verbatim) + DSC 링크 3 보완(173/174/175)** → 인간 승인 후 dbmap. 돈크리티컬.
+- **떡메모 바인딩(097→PRF_TTEOKME_FIXED) + DSC 링크 1(097)** → 인간 승인 후 dbmap. Q-ST-DSC-DOUBLE arbiter 선결.
+- **설계 LOW 정정 2** → designer 폐루프(문서만).
+- **codex 2차(Phase 5.5·문구)** → 오케스트레이터 reconcile(본 판정 독립·codex 비참조).

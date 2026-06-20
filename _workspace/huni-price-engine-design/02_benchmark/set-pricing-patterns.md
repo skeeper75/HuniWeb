@@ -135,3 +135,35 @@
 
 ### naming 유입 가드 [HARD]
 `book2025_price`·`MTRL_CD`(RXART250 등)·접지 SKU 라벨 후니 유입 금지. 후니 `frm_cd`/`comp_cd`/`mat_cd`/`siz_cd` 컨벤션으로 번역(dbmap-naming-standardization 권위순서).
+
+---
+
+## P-6. 문구·제본물 세트/반제품 합성 ★ (다부품 합성형 종단 — 세트 각도의 핵심 사례)
+
+> 출처 `[red:book]` = `raw/widget_monitor/red_captures/v2_PRBKORD_capture.json`(트윈링책자·`book2025`·INN_PAGE·표지/내지 WGT 분리·seneca) · `[red:TP]` = `_workspace/huni-rpmeta/categories/TP/reverse.md` · `[wow:booklet]` = `raw/widget_monitor/wow_capture/fresh_booklet_capture.json`(paperno3/4/5·jobcost0) · `[huni:book]` = 라이브 `t_prd_*`(`t_prd_product_sets` 28행·`t_prd_product_page_rules` 11행·제본 comp 11종) · `[huni:dwire]` = `_workspace/huni-dbmap/02_mapping/dwire-bind-namecard-photocard-remodel/`.
+
+제본물은 **§0 P-1(다부품 합성)의 가장 본격적인 사례** — 평면 인쇄물(명함/엽서)이 단일 부품이라면, 제본물은 표지·내지·제본이 각자 사양과 단가를 갖는 진짜 다부품 세트다. ★후니가 **이 세트 구조를 전용 그릇으로 이미 보유**(아크릴/실사의 "부속 합산"보다 한 단계 명시적).
+
+### P-6a. 책자 = 표지+내지+제본 다부품 합성 (P-1의 본격 사례)
+- **레드** `[red:book]`: 한 책자 안에 표지자재(ART250·COV_MIN_WGT 200) + 내지(INN_MAX_WGT 1000) **분리** + 제본방향/PVC커버. 가격 = 표지(자재×인쇄×후가공) + 내지(자재×인쇄×**페이지수**) + 제본 + 박. `book2025_price`가 부품 단가 합산.
+- **와우** `[wow:booklet]`: `paperno3/4/5` 다단 용지(표지 vs 내지) + colorno/colorno_add + 박앞뒤. `jobcost0`이 작업량 환산 후 합산.
+- **★후니 매핑 (전용 세트 그릇 보유)**: `t_prd_product_sets`(`[huni:book]` 28행) — 하드커버책자(072) = 세트 부모, sub_prd로 **표지(073 전용지) + 면지(074화이트/075블랙/076그레이)**. 표지·면지를 **각각 별 prd_cd 반제품**으로 두고 세트로 묶는다(RedPrinting WGT 분리·WowPress 용지 분리보다 명시적). 가격 = 부품 prd별 자재 단가 + 제본비 Σ(`addtn_yn` 합산형).
+- **★현황 (배선 gap)**: 후니 라이브는 `PRF_BIND_SUM` 공유공식이 **제본비 단일항(중철)만** 배선(`[huni:dwire]` D-WIRE 4/1 broken). 표지/내지/인쇄 comp 미배선. → **세트 구조(구성)는 보유, 가격 합산(배선)은 미완**. 흡수 = 부품 comp 단가행 확보 + 합산 배선.
+
+### P-6b. 페이지수 계층 = 내지 단가 비례 (P-3 변형 SKU와 구분)
+- **레드** `[red:book·TP]`: INN_PAGE 2~130(STEP1)·캘린더 2~200. 내지 단가 = 1면(또는 1대) × 페이지수.
+- **★후니 매핑**: `t_prd_product_page_rules`(`[huni:book]` 11행·page_min/max/incr) **라이브 실재** — RedPrinting INN_PAGE 1:1 동형. ★페이지수 = **입력 차원**·내지 단가 곱 = **앱 런타임 계산**(메모리 `compute-in-app-db-stores-lookup`). 접지(P-3)는 변형을 SKU에 베이크하지만 **책자 페이지수는 SKU 아닌 입력 차원**(2~300면 SKU 폭발 금지). 흡수 불요(그릇 보유)·앱 계산 명시.
+
+### P-6c. 책등(seneca) = 페이지수 파생 (off-grid ceiling 동류)
+- **레드** `[red:book]`: `seneca=0.64`·max 1000 = 페이지수×내지두께 파생. 무선/하드커버 표지 재단·인쇄 영역에 영향.
+- **★후니 매핑**: 앱 런타임 계산(판수·박 등급·off-grid ceiling과 동일 철학)·DB 미저장. 신규 축/단가행 불요. 표지 면적이 책등에 의존하면 페이지수에서 앱 계산.
+
+### P-6d. 떡메/메모패드 = 풀제본 묶음 (소량 세트·미바인딩)
+- **레드** `[red:TP 그룹E]`: 떡메(TPBLMEO)·점메(TPBLPST) = 메모지 풀제본(점착) + 권/묶음 판매.
+- **★후니 매핑**: 떡메모지(097)·메모패드(179) = `frm_cd=NULL`(`[huni:book]` 가격사슬 전무). 그릇은 보유(page_rules 097=3~3·`bdl_qty`·`bundle_qtys` QTY_UNIT 권/묶음·`t_prd_product_sets` 떡메=점착커버+내지 가능). 흡수 = 풀제본비 comp + 내지비 + 묶음 단가 신규 설계(권위 가격표 단가).
+
+### 문구·제본물 합성 가드
+- **책자(P-6a)** = 다부품 합산형(표지+내지+제본 Σ·세트 그릇 보유·**배선 미완**)·**페이지수(P-6b)** = 입력 차원+앱 계산(SKU 폭발 금지)·**책등(P-6c)** = 앱 계산 파생·**떡메(P-6d)** = 풀제본+묶음 단가(미바인딩). 넷을 한 공식으로 강제 금지(메모리 `dbmap-print-domain-recipe-philosophy`).
+- **★세트 "구성"(`t_prd_product_sets` 표지+면지) 과 세트 "가격"(부품 합산 공식) 분리** = §0 P-1b 원칙의 가장 명확한 후니 사례. 후니는 구성 그릇을 보유하나 가격 합산을 미배선 → designer가 **구성 그릇 → 합산 공식 배선**을 설계.
+- **★D-BIND-SCOPE 인간 결정**: "책자 = 제본비 단일 합산"(라이브) vs "표지+내지+인쇄+제본 부품 합산"(경쟁사 동형·세트 그릇 보유). 권위 가격표가 부품별 단가 주면 부품 합산이 정답.
+- **★돈-크리티컬**: 제본비 `COMP_BIND_*` .01(min_qty 1/4/10 구간 = .02 합가형 성격)이 "부수당×수량 vs 묶음 총액" — 엔진 계약 확정 선결(디지털·아크릴 종단 동일 클래스).

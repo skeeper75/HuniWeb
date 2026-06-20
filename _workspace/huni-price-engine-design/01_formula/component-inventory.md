@@ -157,3 +157,21 @@
 | COMP_POSTEROPT_PET_BANNER_STAND_IN/OUT·CANVAS_HANGING_WOODHANGER·LINEN_WOODBONG_WOODBONG·JOKJA_CEILHOOK·LINEN_FINISH | 거치/우드행거/우드봉/천정고리/린넨마감 | siz_cd/opt_cd/bdl_qty |
 
 **[HARD] 면적=siz_width/siz_height·고정가=siz_cd·수량구간=siz_cd+min_qty·후가공=합산형(addtn_yn=Y)** — designer는 면적/규격 축 혼동 금지, 후가공은 본체와 직교 합산. **재사용 후보: 후가공 comp 전부 실재(아크릴보다 우월·신규 mint 거의 0)**.
+
+---
+
+## 문구 절 (라이브 실측 2026-06-20) — formula-map-stationery.md 참조
+
+문구는 디지털 원자합산 comp를 쓰지 않는다(재분류 §0). 라이브 comp는 **떡메모지 1개뿐**, 본체 9상품은 comp 전무(고정가 inline·미적재).
+
+| comp_cd | comp_nm | comp_typ | prc_typ | use_dims (차원) | 단가행수 | 쓰는 공식 |
+|---------|---------|----------|---------|-----------------|---------|-----------|
+| COMP_TTEOKME | 떡메모지 완제품가(권당장수) | (고정·완제품) | **PRICE_TYPE.01 단가** | siz_cd, bdl_qty, min_qty | **112**(verbatim·NULL min_qty 0건) | PRF_TTEOKME_FIXED |
+
+- 단가 소스: 인쇄상품 가격표 `엽서북떡메` 시트 (사이즈 90x90/70x120 × 권당장수 50/100 × 장수구간 6~600 28구간 = 112셀). unit_price 850~3200.
+- siz_cd: SIZ_000119(90x90)·SIZ_000266(70x120). bdl_qty: 50/100(권당장수).
+- ★prc_typ=.01 단가형이나 unit_price(3200)=묶음(권) 총액 → 엔진 unit×qty 시 ×qty 폭발 위험(디지털 동형·교정안 A `(unit÷min_qty)×qty` 후보). designer 골든 확정 필요(gap-board G-ST-3).
+
+**본체 9상품(만년다이어리 4·먼슬리·스프링노트/수첩·메모패드·중철노트) = comp·고정가·바인딩 전무.** 가격 소스=상품마스터 AC열 inline 고정가(product_prices 0행). 재사용 후보 comp 없음 — designer가 고정가 그릇(product_prices 직접가 or 명함 PRF_NAMECARD_FIXED식 고정가 공식) 신설 결정(gap-board G-ST-1).
+
+**재사용 후보(문구→타 종단):** COMP_TTEOKME use_dims=[siz_cd,bdl_qty,min_qty]는 디지털 COMP_PHOTOCARD_SET와 **동일 차원 구조**(세트/묶음 매트릭스). 떡메모·포토카드·엽서북 = 같은 "묶음(권/세트) 단가형" 패밀리.

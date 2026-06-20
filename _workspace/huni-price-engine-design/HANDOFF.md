@@ -1,13 +1,14 @@
 # Huni-Price-Engine-Design 하네스 — HANDOFF
 
-> CLAUDE.md §18 · 갱신 2026-06-20 · 종단 GO 3건(디지털인쇄·아크릴·실사·현수막)
+> CLAUDE.md §18 · 갱신 2026-06-20 · 종단 GO 4건(디지털인쇄·아크릴·실사·현수막·문구)
 
 ## 다음 시작점
 
-**다음 상품군 동형 전파 또는 실 적재 승인** — 3개 종단(원자합산+고정가형 / 면적매트릭스형 / 면적+고정가+수량구간 3계산방식) 검증 GO 완료. 남은 상품군을 동형 클래스(`frm_cd`/계산방식 기준)로 전파하거나, 누적된 컨펌큐·교정안을 인간 승인 후 dbmap 적재 트랙으로 위임.
+**책자(반제품 세트) 종단 또는 다음 동형 전파 또는 실 적재 승인** — 4개 종단(원자합산+고정가 / 면적매트릭스 / 면적+고정가+수량구간 / 고정가+수량구간할인+매트릭스) 검증 GO 완료.
 
-- **동형 전파 후보**: 굿즈/파우치·문구·캘린더 등 미설계 상품군 → 디지털(원자합산)·아크릴(면적)·실사(3계산방식) 중 어느 동형 클래스인지 분류 후 cartographer→designer→validator→codex 순.
-- **실 적재 승인 대기**: 디지털 prc_typ 교정(.01→.02)·아크릴 G-A1 바인딩·실사 후가공 배선 — 전부 인간 승인 후 dbm-axis-staged-load/dbm-load-execution 위임.
+- **★책자 종단(반제품 세트·우선 후보)**: §18 directive의 "반제품 세트상품" 각도를 처음 본격 다룸. 후니 세트 그릇 이미 보유(t_prd_product_sets 28행·page_rules 11행·COMP_BIND 11종)=배선-gap. benchmark가 분석해둔 set-pricing-patterns P-6 재사용. 결정 2건=DT-BIND-SCOPE(제본비 단일항 vs 표지+내지+제본 부품 합산)·제본비 COMP_BIND prc_typ(.01 min_qty 구간=.02 합가형 성격 의심·돈크리티컬).
+- **남은 동형 전파 후보**: 굿즈/파우치·스티커·상품악세사리·캘린더 → 기존 동형 클래스 분류 후 cartographer→designer→validator→codex 순.
+- **실 적재 승인 대기**: 디지털 prc_typ 교정(.01→.02)·아크릴 G-A1 바인딩·실사 후가공 배선·문구(본체 product_prices INSERT·떡메모 바인딩·DSC 링크 4건) — 전부 인간 승인 후 dbm-axis-staged-load/dbm-load-execution 위임.
 
 ## 진행 현황
 
@@ -16,6 +17,7 @@
 | 디지털인쇄 | 원자합산형+고정가형 | NO-GO→보정→**재게이트 GO** | NO-GO 지지(medium) |
 | 아크릴 | 면적매트릭스형 | **첫 게이트 GO**(보정 0) | GO 지지(**high**) |
 | 실사·현수막 | 면적+고정가+수량구간(3방식) | **E1~E7 전건 PASS·GO**(차단0·LOW2) | GO 지지(**high**·divergence 0) |
+| 문구 | 고정가+수량구간할인+매트릭스 | **E1~E7 전건 PASS·GO**(차단0·보정0·mint0) | GO 지지(**high**·divergence 0) |
 
 ## 미해결 / 블로커 (전부 DB 미적재·인간 승인 후 dbmap 위임)
 
@@ -24,6 +26,12 @@
 - Q-SB-PROC-QTY(돈크리티컬): 후가공/거치 1건당 vs ×수량 prc_typ 확정(거치대 ×qty=250,000 과청구 가능).
 - Q-SB-CH1: CANVAS_HANGING 차원 정합(validator 라이브 900×900=8,000 확정·셀 표기 분리).
 - G-S1: 후가공 배선 0건(PRF_POSTER disp_seq 2~) → 위 컨펌큐 해소 후 배선.
+
+**문구(GO·차단 아님):**
+- Q-ST-DSC-LINK(돈크리티컬): DSC_STAT_QTY 링크 누락 4건(PRD_000173/174/175 만년다이어리 하드/레더+097 떡메모) INSERT → 누락 시 +150,000 과청구 실증.
+- Q-ST-MEMO1: 메모패드 2사이즈 2가격 = 사이즈 차원 공식 vs 별 prd_cd.
+- Q-ST-DSC-DOUBLE: 떡메모 unit 내장 볼륨할인 위 DSC_STAT_QTY 추가 = 의도된 추가할인 vs 이중할인(dbm-price-arbiter 심의).
+- 본체 9 product_prices INSERT·떡메모 PRD_000097 바인딩.
 
 **디지털인쇄:** 박 동판 정액(차선A qty=1 격리 vs B 정액 prc_typ 신설)·인쇄면 통합 단가행 병합·G-7 옵션 자동주입.
 **아크릴:** CA-1 미러 합류(mat_cd 판별차원 선결·돈크리티컬)·CA-4 후가공 개당/×수량·CA-3 카라비너 신설.
