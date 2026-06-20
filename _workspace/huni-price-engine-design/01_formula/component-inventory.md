@@ -1,0 +1,83 @@
+# component-inventory.md — 디지털인쇄 가격구성요소 통합 인벤토리
+
+> 디지털인쇄가 가격에 쓰는 구성요소(comp)의 통합 인벤토리. 요소·차원(use_dims)·단가소스·재사용 후보.
+> 권위: calc-formula-draft(요소 분해) + 라이브 t_prc_price_components(실측 use_dims·단가행수, 2026-06-20).
+> 산출자: hpe-formula-cartographer. 단가행수=`t_prc_component_prices` COUNT(실측).
+
+---
+
+## 1. 라이브 실재 comp (디지털인쇄 6공식 + 고정가 2공식)
+
+| comp_cd | comp_nm | comp_typ | prc_typ | use_dims (차원) | 단가행수 | 쓰는 공식 |
+|---------|---------|----------|---------|-----------------|---------|-----------|
+| COMP_PRINT_DIGITAL_S1 | 디지털인쇄비 | .01 인쇄 | .01 단가 | proc_cd, plt_siz_cd, print_opt_cd, min_qty, proc_grp:PROC_000001 | **212** | A·B·C·D·E·F |
+| COMP_PRINT_SPOT_WHITE_S1 | 별색인쇄비(정본) | .01 인쇄 | .01 | plt_siz_cd, proc_cd, print_opt_cd, min_qty, proc_grp:PROC_000007 | **530** | A |
+| COMP_PAPER | 용지비(종이별 절가) | .03 소재 | .01 | siz_cd, mat_cd | 56 | A·B·C·D·E·F |
+| COMP_COAT_GLOSSY | 유광코팅비 | .02 코팅 | .01 | siz_cd, coat_side_cnt, min_qty | (D/E 공용) | A·D·E |
+| COMP_COAT_MATTE | 무광코팅비 | .02 코팅 | .01 | siz_cd, coat_side_cnt, min_qty | 92 | A·D·E |
+| COMP_CUT_FULL_DIECUT | 커팅 완칼(모양엽서·라벨택) | .06 커팅 | .01 | siz_cd, min_qty | 36 | B·F |
+| COMP_FOLD_CARD_2H | 접지비 카드 2단 | .04 후가공 | .01 | min_qty | 48 | C |
+| COMP_CUT_PERF_1H6 | 타공비(6mm) | .04 | .01 | proc_cd, min_qty, proc_grp:PROC_000079 | — | C·D·E |
+| COMP_FOLD_LEAF_HALF/3FOLD/4ACC/4GATE | 접지비 리플렛(반/3단/4아코/4게이트) | .04 | .01 | min_qty | — | E |
+| COMP_PP_CORNER_RIGHT | 귀돌이비 | .04 | .01 | proc_cd, min_qty, proc_grp:PROC_000026 | — | A·D |
+| COMP_PP_CREASE_1L | 오시비 | .04 | .01 | proc_cd, min_qty, proc_grp:PROC_000029 | — | A·D |
+| COMP_PP_PERF_1L | 미싱비 | .04 | .01 | proc_cd, min_qty, proc_grp:PROC_000030 | — | A·D |
+| COMP_PP_VARTEXT_1EA | 가변텍스트 | .04 | .01 | proc_cd, min_qty, proc_grp:PROC_000085 | — | A·D |
+| COMP_PP_VARIMG_1EA | 가변이미지 | .04 | .01 | proc_cd, min_qty, proc_grp:PROC_000085 | — | A·D |
+| COMP_NAMECARD_STD_S1 | 스탠다드명함 완제품가 단면(용지포함) | (고정) | .01 | mat_cd, min_qty | **2** | NAMECARD_FIXED |
+| COMP_NAMECARD_STD_S2 | 스탠다드명함 완제품가 양면(용지포함) | (고정) | .01 | mat_cd, min_qty | **2** | NAMECARD_FIXED |
+| COMP_PHOTOCARD_SET | 포토카드 완제품가 일반세트 | (고정) | .01 | siz_cd, bdl_qty, min_qty | **1** | PHOTOCARD_FIXED |
+| COMP_PHOTOCARD_CLEAR_SET | 포토카드 완제품가 투명세트 | (고정) | .01 | siz_cd, bdl_qty, min_qty | **1** | PHOTOCARD_FIXED |
+
+★ 단가행 결손 의심: NAMECARD S1/S2(각 2행)·PHOTOCARD(각 1행) — mat_cd/siz_cd×수량 매트릭스 대비 너무 적음. designer/검증 확인 필요(gap-board G-3).
+
+---
+
+## 2. 별색인쇄 형제 comp (논리삭제 — 정본 흡수)
+
+| comp_cd | use_yn | del_yn | 처리 |
+|---------|--------|--------|------|
+| COMP_PRINT_SPOT_CLEAR_S1/S2 · GOLD_S1/S2 · PINK_S1/S2 · SILVER_S1/S2 · WHITE_S2 | N | **Y** | 정본 COMP_PRINT_SPOT_WHITE_S1로 dedup(530행이 5색×2면 통합·proc_cd/print_opt_cd 차원 분기) |
+
+**[HARD] 별색=단일 comp + 차원** — designer는 색·면을 별 comp로 분할 금지(round-23 dedup 정합·[[dbmap-price-component-grouping]]).
+
+---
+
+## 3. 구성요소 유형별 차원 패턴 (재사용 후보)
+
+| 비목 | 대표 comp | 차원 패턴 | 재사용 |
+|------|-----------|-----------|--------|
+| **인쇄비** | COMP_PRINT_DIGITAL_S1 | plt_siz_cd(출력판형)·print_opt_cd(도수)·min_qty(수량행)·proc_grp | 전 디지털인쇄 공유 |
+| **별색** | COMP_PRINT_SPOT_WHITE_S1 | + proc_cd(색)·print_opt_cd(면) | 엽서류 |
+| **용지비** | COMP_PAPER | siz_cd·mat_cd (종이별 절가, 손지율+5장 가설) | 전 디지털인쇄 공유 |
+| **코팅비** | COMP_COAT_GLOSSY/MATTE | siz_cd·coat_side_cnt·min_qty | 엽서·전단·접지 |
+| **커팅비(완칼)** | COMP_CUT_FULL_DIECUT | siz_cd·min_qty | 모양엽서·라벨택·썬캡 |
+| **접지비** | COMP_FOLD_* | min_qty (타입=별 comp) | 카드·리플렛 |
+| **타공비** | COMP_CUT_PERF_1H6 | proc_cd·min_qty | 배경지·전단·접지 |
+| **후가공(낱개)** | COMP_PP_* | proc_cd·min_qty·proc_grp | 엽서·전단 |
+| **완제품 고정가** | COMP_NAMECARD_*·PHOTOCARD_* | mat_cd 또는 siz_cd×bdl_qty × min_qty | 명함·포토카드(용지 통합) |
+
+---
+
+## 4. 단가 소스 셀 (가격표 매핑)
+
+| comp | 단가 소스(가격표 시트·축) |
+|------|---------------------------|
+| 인쇄비 | 디지털인쇄비 시트 — [수량행][출력판형(국4절/3절)]×도수 |
+| 별색 | 디지털인쇄 시트 — 인쇄비단가 + [출력매수 수량행]×[칼라열] (3절 별색 상품 없음) |
+| 코팅 | 코팅 시트 — [수량행]×[코팅타입] |
+| 용지비 | 출력소재 시트 — [크기별 기준단가] |
+| 커팅 | 커팅/타공 시트 — 2000원[커팅가격테이블] |
+| 접지 | 접지옵션 시트(카드)·인쇄후가공>오시(배경지) — [제작수량행 단가] |
+| 타공 | 커팅/타공 시트 — 장당 1000원[타공가격테이블] |
+| 후가공박(대형/소형) | 후가공_박 시트 — [면적별 동판비]+[면적별 A~E군 합가] |
+| 명함 완제품가 | 명함/포토카드 시트 — [수량행][소재×면열](용지 포함) |
+| 포토카드 | 명함/포토카드 시트 — [세트당 고정단가] |
+
+---
+
+## 5. designer를 위한 재사용 권고
+
+- **공유 comp 4종**(인쇄비·별색·용지비·코팅비)이 디지털인쇄 전 원자합산 공식의 뼈대 → 신규 comp mint 금지, 차원으로 흡수.
+- **고정가형은 "완제품 통합단가" comp 패턴** — 명함/포토카드는 용지·인쇄·코팅을 1개 단가행에 통합. 분해형(원자합산)으로 재모델 금지(상품마스터 권위 = 고정가).
+- 후가공박(대형/소형)·접지리플렛·오리지널박명함은 **calc-draft가 요구하나 라이브 미배선** → designer 신설 큐(gap-board).
