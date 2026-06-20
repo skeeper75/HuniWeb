@@ -232,3 +232,62 @@ E5·E6 FAIL → 전건 통과 미충족 → **NO-GO**.
 - **떡메모 바인딩(097→PRF_TTEOKME_FIXED) + DSC 링크 1(097)** → 인간 승인 후 dbmap. Q-ST-DSC-DOUBLE arbiter 선결.
 - **설계 LOW 정정 2** → designer 폐루프(문서만).
 - **codex 2차(Phase 5.5·문구)** → 오케스트레이터 reconcile(본 판정 독립·codex 비참조).
+
+---
+
+# 책자(반제품 세트·다부품 합산형) 설계 종합 검증 판정 (2026-06-20·5번째 종단·§18 directive "반제품 세트" 첫 본격)
+
+> 상세: `gate-verdict-booklet.md`·`recompute-log-booklet.md`. 라이브 읽기전용 재실측·pricing.py+models.py 코드 검증·engine 충실 재구현 재계산.
+
+## 종합 판정: **GO (조건부 컨펌큐 동반)**
+
+| 게이트 | 판정 |
+|--------|------|
+| E1 공식 추출 충실성 | PASS (LOW: freshness reg_dt/upd_dt 표기·값 verbatim 동일) |
+| E2 구성요소 분해 정합 | PASS |
+| E3 경쟁사 흡수 타당성 | PASS (신규 가격축 0·naming 유입 0·jobqty 2단 부결) |
+| E4 엔진 설계 건전성 | PASS (★del_yn 필터 부재 코드 확정·proc_cd 분기·combo_key 가드) |
+| E5 세트 조합 정합 | PASS (sub_prd 가격 비기여·면지 합산 금지·088 BLOCKED 정직) |
+| E6 골든 재현(허용오차 0) | PASS (GC-BK1~6 6/6 일치·corrupt/corrected 양면·GC-BK7/8 구조) |
+| E7 생성-검증 독립성 | PASS |
+
+**E1~E7 전건 PASS → GO.** 아크릴·실사·문구 GO 동류(첫 게이트부터)·디지털 NO-GO와 대조. 책자=§18 directive "반제품 세트" 첫 본격 종단인데 결함이 **데이터(오염·stale 배선)이지 설계 골든값 오류 아님**을 라이브·코드·재계산으로 입증(디지털 NO-GO와 결정적 차이).
+
+## 핵심 한 줄
+
+책자 제본비 가격사슬은 **두 데이터 결함**(G-BK-1 중철 단가행 오염=트윈링값 byte-복사·G-BK-2 PRF_BIND_SUM이 삭제 JUNGCHEOL 참조)을 보유하나 designer가 둘 다 정확히 적발·교정 명세. **돈크리티컬 `.01` 부당단가 해소도 PUR 사다리 단조 하락(5000→1500) 실측으로 비준**(디지털 묶음총액 무비판 전이 금지 정확). 설계의 핵심 작업=신규 mint 아닌 **재배선(W1) + 단가행 교정(W2·B01 verbatim 8행) + 세트 부모 바인딩(W4)**. 골든 GC-BK1~6 허용오차 0(corrupt 12,000 vs corrected 8,000 양면 실증·과청구 50%). 표지/내지 합산(W3·DT-BIND-SCOPE=부품 합산)은 단가 소스 미확정(Q-BK-COVER)이라 `확신도: 중`으로 정직 보류·GO 막지 않음.
+
+## ★검증가 발굴 — del_yn 필터 부재 코드 결판 (설계 "검증 인계" 질문 답)
+
+- pricing.py에 `del_yn` 참조 0건·모델 기본 매니저(del 필터 없음). `_evaluate_formula`/`_component_rows`가 del_yn 미필터 → **삭제 comp(JUNGCHEOL del='Y')도 평가됨**. 설계의 "필터 적용 시 0원" 가설은 코드상 발생 안 함(misfire/0원[proc 미주입] 분기만)이나 **결론(4상품 정상 가격 불가→W1 재배선 필수) 불변**. 정정 권고 LOW(표현 정밀화·designer 폐루프).
+
+## min_qty / prc_typ 계약 라이브 confirm (designer 주장 → 반증 실패=옳음)
+
+- COMP_BIND 11종 전건 `.01 단가형`·min_qty NULL 0건 → ÷min_qty 구조적 미발생·ValueError 0.
+- PUR 단가 사다리 단조 하락(직접 SELECT) = 부당단가 + 볼륨할인 입증 → `.01 × qty` 정합·교정 불요. 디지털 명함 묶음총액 ×qty 폭발과 단가 의미 정반대.
+
+## 보정 요구
+
+**차단 결함(NO-GO) 0건. 보정 요구 없음.** 정정 권고 1(LOW·가격 무영향·designer 폐루프):
+- §2.1·DB-4 "del 필터 적용 시 0원" 가설 → 코드상 미발생(필터 부재) 표현 정밀화 + freshness "upd_dt 2026-06-17"→"reg_dt 2026-06-17·upd_dt NULL".
+
+## 컨펌큐 (designer 큐 6건 유지 + 검증 보강 2)
+
+| # | 미해소 | 누가 | 영향 |
+|---|--------|------|------|
+| Q-BK-COVER | ★표지/내지 단가 소스(디지털 종이비 vs 책자 전용)·COMP_PAPER 2회 배선 combo_key 충돌→전용 comp 분리 | 가격표·dbm-price-arbiter | DB-6·돈크리티컬 |
+| Q-BK-COVER(+검증) | ★COMP_PRINT_DIGITAL_S1 use_dims `proc_grp:PROC_000001`(디지털인쇄 공정)이 책자 표지/내지 인쇄에 정합한지(불일치=0원 침묵 또는 전용 인쇄 comp) | dbm-price-arbiter | 재사용 무손실성 |
+| Q-BK-PROC | ★제본방식→proc_cd 주입(미주입 시 0원 침묵·행 proc non-NULL이라 silent 합산 아님) | round-6 dbm-option-mapper | W1 재배선 선결·돈크리티컬 |
+| Q-BK-PHOTO | 포토북 제본방식·표지 6 variant 단가·면지 104 가격기여 | 실무·가격표 | 포토북 바인딩 |
+| Q-BK-BINDER | 레더 링바인더(088) "(보류중)"·제본방식 | 실무·상품마스터 | 088 BLOCKED |
+| Q-BK-MYUNJI | 면지 색별 단가차 여부 | 실무·가격표 | 이중계상 가드 |
+| Q-BK-DSC | 책자 수량구간할인 링크 유효성(미점검) | dbmap round-1 | 할인 적용 |
+| CV-BK-FRESH(검증) | freshness reg_dt 2026-06-17·upd_dt NULL | designer | LOW·문서만 |
+
+## 라우팅
+
+- **W1 재배선 + W2 중철 단가행 교정(B01 verbatim 8행)** → dbm-price-arbiter + 인간 승인 후 dbmap. 돈크리티컬·과청구 50%·멱등·백업·undo.
+- **W3 표지/내지 합산(Q-BK-COVER 확정 후) + W4 세트 부모 바인딩(072/077/082/100)** → dbm-price-arbiter(단가 소스·combo_key·proc_grp 정합) + 인간 승인 후 dbmap. 088 BLOCKED.
+- **Q-BK-PROC proc_cd 주입** → round-6 dbm-option-mapper(W1 선결).
+- **설계 정정-1(LOW)** → designer 폐루프(문서만).
+- **codex 2차(Phase 5.5·책자)** → 오케스트레이터 reconcile(본 판정 독립·codex 비참조).

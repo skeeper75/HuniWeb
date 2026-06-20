@@ -1,14 +1,13 @@
 # Huni-Price-Engine-Design 하네스 — HANDOFF
 
-> CLAUDE.md §18 · 갱신 2026-06-20 · 종단 GO 4건(디지털인쇄·아크릴·실사·현수막·문구)
+> CLAUDE.md §18 · 갱신 2026-06-20 · 종단 GO 5건(디지털인쇄·아크릴·실사·현수막·문구·책자)
 
 ## 다음 시작점
 
-**책자(반제품 세트) 종단 또는 다음 동형 전파 또는 실 적재 승인** — 4개 종단(원자합산+고정가 / 면적매트릭스 / 면적+고정가+수량구간 / 고정가+수량구간할인+매트릭스) 검증 GO 완료.
+**다음 동형 전파 또는 실 적재 승인** — 5개 종단(원자합산+고정가 / 면적매트릭스 / 면적+고정가+수량구간 / 고정가+수량구간할인+매트릭스 / 반제품 세트 부품 합산) 검증 GO 완료.
 
-- **★책자 종단(반제품 세트·우선 후보)**: §18 directive의 "반제품 세트상품" 각도를 처음 본격 다룸. 후니 세트 그릇 이미 보유(t_prd_product_sets 28행·page_rules 11행·COMP_BIND 11종)=배선-gap. benchmark가 분석해둔 set-pricing-patterns P-6 재사용. 결정 2건=DT-BIND-SCOPE(제본비 단일항 vs 표지+내지+제본 부품 합산)·제본비 COMP_BIND prc_typ(.01 min_qty 구간=.02 합가형 성격 의심·돈크리티컬).
-- **남은 동형 전파 후보**: 굿즈/파우치·스티커·상품악세사리·캘린더 → 기존 동형 클래스 분류 후 cartographer→designer→validator→codex 순.
-- **실 적재 승인 대기**: 디지털 prc_typ 교정(.01→.02)·아크릴 G-A1 바인딩·실사 후가공 배선·문구(본체 product_prices INSERT·떡메모 바인딩·DSC 링크 4건) — 전부 인간 승인 후 dbm-axis-staged-load/dbm-load-execution 위임.
+- **남은 동형 전파 후보**: 굿즈/파우치·스티커·상품악세사리·캘린더 → 기존 동형 클래스 분류 후 cartographer→designer→validator→codex 순. (굿즈/파우치=103상품·본체 자재 합성·복잡·dbmap round-11/13 참조 / 스티커=면적매트릭스+이산 siz·dbmap round-23 풍부 / 상품악세사리=OTC 템플릿 이중등록·사이즈 3축 / 캘린더=공정택일그룹)
+- **실 적재 승인 대기(누적)**: 디지털 prc_typ 교정(.01→.02)·아크릴 G-A1 바인딩·실사 후가공 배선·문구(본체 product_prices INSERT·떡메모 바인딩·DSC 링크 4건)·책자(W1 제본비 재배선·W2 중철 단가행 교정=돈크리티컬 과청구 50%) — 전부 인간 승인 후 dbm-axis-staged-load/dbm-load-execution/dbm-price-arbiter 위임.
 
 ## 진행 현황
 
@@ -18,6 +17,7 @@
 | 아크릴 | 면적매트릭스형 | **첫 게이트 GO**(보정 0) | GO 지지(**high**) |
 | 실사·현수막 | 면적+고정가+수량구간(3방식) | **E1~E7 전건 PASS·GO**(차단0·LOW2) | GO 지지(**high**·divergence 0) |
 | 문구 | 고정가+수량구간할인+매트릭스 | **E1~E7 전건 PASS·GO**(차단0·보정0·mint0) | GO 지지(**high**·divergence 0) |
+| 책자 | 반제품 세트 부품 합산(두 갈래) | **E1~E7 전건 PASS·GO**(첫 게이트·차단0·보정0) | GO 지지(**high**·divergence 0) |
 
 ## 미해결 / 블로커 (전부 DB 미적재·인간 승인 후 dbmap 위임)
 
@@ -32,6 +32,11 @@
 - Q-ST-MEMO1: 메모패드 2사이즈 2가격 = 사이즈 차원 공식 vs 별 prd_cd.
 - Q-ST-DSC-DOUBLE: 떡메모 unit 내장 볼륨할인 위 DSC_STAT_QTY 추가 = 의도된 추가할인 vs 이중할인(dbm-price-arbiter 심의).
 - 본체 9 product_prices INSERT·떡메모 PRD_000097 바인딩.
+
+**책자(GO·차단 아님):**
+- W1 제본비 재배선(PRF_BIND_SUM→활성 COMP_BIND_TWINRING)·W2 중철 단가행 교정(트윈링값 오염→정답 중철값·삭제 JUNGCHEOL 보유) = **돈크리티컬 과청구 50%** → dbm-price-arbiter+인간 승인.
+- ★del_yn 필터 부재 확정(삭제 comp도 가격 평가에 포함) — 교훈: 삭제 데이터가 가격에 새는지 코드 확인 필수.
+- 완성가(W3/W4 표지+내지 부품 합산)는 codex DV-BK2(component별 effective quantity 엔진 계약)·DV-BK3(역할별 selection 차원)·DV-BK4(저청구 위험)+Q-BK-COVER(표지/내지 단가 소스) 닫은 후. 제본비 .01 정당(교정 불요·디지털 무비판 전이 금지).
 
 **디지털인쇄:** 박 동판 정액(차선A qty=1 격리 vs B 정액 prc_typ 신설)·인쇄면 통합 단가행 병합·G-7 옵션 자동주입.
 **아크릴:** CA-1 미러 합류(mat_cd 판별차원 선결·돈크리티컬)·CA-4 후가공 개당/×수량·CA-3 카라비너 신설.
