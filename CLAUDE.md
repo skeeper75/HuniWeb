@@ -305,7 +305,22 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 ---
 
-## 18. MoAI Framework (gated — rarely used here)
+## 18. Harness: Huni-Price-Engine-Design (가격계산 엔진 설계·구축)
+
+**목표:** 역공학 자료(`raw/widget_monitor`·`docs/reversing`·`_workspace/huni-rpmeta`) + 상품마스터(260610) 가격계산공식 + 인쇄상품 가격표(260527) + 경쟁사(와우프레스·레드프린팅) 가격계산 방식을 종합해, **모든 상품군 완제품·반제품(세트상품)이 어떤 가격구성요소를 토대로 어떤 가격공식을 이루는지**를 설계한다. 산출=라이브 `evaluate_price` 단일 권위 알고리즘이 그대로 먹는 t_prc_* 그릇 설계 명세(공식→formula_components→price_components→component_prices·use_dims 차원·세트 조합). **기존 가격 5하네스(§7 적재·§13 게이트·§14 이해·§15 온디맨드검증·§16 시각화)와 달리 "설계·구축" 각도 — 아직 없는/불완전한 가격공식을 경쟁사 흡수+역공학으로 새로 설계**(재병합 금지·상보). 5인 팀(`hpe-formula-cartographer`·`hpe-benchmark-analyst` 기준점 팬아웃 → `hpe-engine-designer` 설계 → `hpe-validator` E1~E7 게이트 → `hpe-codex-validator` codex 독립 2차 교차 Phase5.5). 대표 상품군 파일럿→동형 전파·생성≠검증·codex 주장=가설(환각 경계)·권위 엑셀 절대권위·라이브 읽기전용·**DB 미적재**(실 COMMIT/DDL은 인간 승인 후 dbmap 위임·webadmin 코드 직접수정 금지).
+
+**트리거:** "가격계산 엔진 설계", "가격엔진 구현", "가격공식 설계", "가격구성요소 설계", "완제품 반제품 세트 가격", "경쟁사 가격계산 흡수", "와우프레스 레드 가격 분석", "codex 설계 검증", "t_prc 그릇 설계", "가격엔진 설계 하네스 실행/재실행/업데이트/보완", "특정 상품군만 엔진 설계" 등 본 도메인 요청 시 `huni-price-engine-design-orchestrator` 스킬을 사용. 단순 질문은 직접 응답.
+
+**산출물 루트:** `_workspace/huni-price-engine-design/` (`_meta`·`01_formula`·`02_benchmark`·`03_design`·`04_validation`·`05_codex`). 자격증명 `.env.local RAILWAY_DB_*`(읽기전용 SELECT). codex 헬퍼=`hqv-codex-cross-verify/scripts/codex-review.sh`(내부에서 `rpm-visualize/scripts/codex-preflight.sh` 호출) 재사용. 기존 `dbm-price-arbiter`·`dbm-ddl-proposer`·`dbm-schema-extract`·`dbm-excel-parse` 재사용.
+
+**변경 이력:**
+| 날짜 | 변경 내용 | 대상 | 사유 |
+|------|----------|------|------|
+| 2026-06-20 | 하네스 초기 구성 — 5 에이전트(hpe-formula-cartographer·benchmark-analyst·engine-designer·validator·codex-validator) + 6 스킬(orchestrator + 5 방법론). 역공학+상품마스터 공식+경쟁사 흡수→전 상품군 완제품·반제품 가격공식+구성요소 설계. 기존 가격 5하네스와 "설계·구축" 각도로 분리(재병합 금지)·생성≠검증·codex 독립 2차 교차(Phase5.5)·대표 파일럿→동형 전파·DB 미적재 | `.claude/agents/huni-price-engine-design/`·`.claude/skills/{huni-price-engine-design-orchestrator,hpe-*}`·CLAUDE.md §18 | 사용자(`/harness:harness` — 역공학+상품마스터+경쟁사로 가격계산 엔진 설계·codex 검증) |
+
+---
+
+## 19. MoAI Framework (gated — rarely used here)
 
 The MoAI-ADK orchestration framework (SPEC plan/run/sync, TRUST 5, DDD/TDD, Agent Teams,
 design GAN loop) is installed but not the primary workflow in this repo. Its detailed
