@@ -195,3 +195,23 @@
 **표지/내지/면지/인쇄 가격구성요소 = 0행(전무).** 책자 다부품 합산(DT-BIND-SCOPE 부품 합산 방향) 시 표지 인쇄·용지비 + 내지 인쇄·용지비(×페이지) comp 신설 필요 — 단가 소스=디지털인쇄 종이비(COMP_PAPER 계열)·인쇄비. 그 comp의 prc_typ는 디지털 종단 묶음총액 ×qty 결함 상속 위험(교정 전파 점검).
 
 **재사용 후보(책자→타 종단):** COMP_BIND_* 통합 comp 패턴(단일 comp + proc_cd 종류축)은 캘린더 제본·기타 공정비 통합에 동형. 엽서북(PRF_PCB_FIXED)·떡메모지·먼슬리는 떡제본/단일 고정가로 별도(문구 종단). 세트 그릇(t_prd_product_sets)은 하드커버/포토북/엽서북 횡단 공유(구성 BOM·가격축 아님).
+
+---
+
+## 굿즈/파우치 절 (고정가형 + 변형단가 · 라이브 실측 2026-06-20) — formula-map-goods-pouch.md 참조
+
+굿즈/파우치는 **comp(가격구성요소) 자체를 쓰지 않는 가능성이 가장 큰 종단**이다. 계산방식이 고정가형이라 엔진 경로가 `PRODUCT_PRICE`(`t_prd_product_prices.unit_price × qty`·pricing.py:312-317)이며 component_prices/formula를 경유하지 않는다.
+
+### 라이브 실재 comp = 0 (굿즈/파우치 전용 comp 전무)
+- 98 활성상품(PRD_000183~280) 전부 `t_prd_product_price_formulas` 바인딩 0·`t_prd_product_prices` 0행·`option_items` 0. 굿즈 전용 가격구성요소(comp)는 라이브에 **하나도 없다.**
+- 단 **인접 그릇 절반 실재(comp 아님)**: 수량구간할인 테이블 4종(DSC_GOODSA_QTY·DSC_GOODSB_QTY·DSC_SQUISHY_QTY·DSC_FABRIC_QTY)·구간할인 바인딩 82링크·자재 BOM 76상품/164링크(round-1·round-22 적재분).
+
+### 가격 그릇 패턴 (designer 재사용 후보)
+| 서브클래스 | 그릇 후보 | 차원 | 비고 |
+|-----------|----------|------|------|
+| **GP-1 단일고정가**(55상품) | `t_prd_product_prices` unit_price 1행 | (차원 없음·prd_cd당 1) | 명함/포토카드 PRODUCT_PRICE 동형이나 굿즈는 **공식 미경유**(완제품 통합단가도 아닌 순수 inline 고정가). 신규 comp mint 불요 |
+| **GP-2 변형고정가**(31상품·★그릇 부재) | (b) PRF_GOODS_SIZED + COMP_GOODS_VARIANT | use_dims=[opt_cd] 또는 [siz_cd] (단축) | **아크릴 면적매트릭스(siz_width×siz_height)의 1축 축소판** — variant당 단가행 1개. component_prices 기존 그릇 재사용·엔진 변경 0. ★min_qty=1 명시 가드(.02 시 ÷min_qty) |
+| **가공 가산** | 본체 + 정액(addtn_yn) 또는 option add | opt_cd | 라벨부착+300·맥세이프+6500·에폭시0. 소액 정액 |
+| **추가상품(addon)** | `t_prd_product_addons`+`t_prd_templates`(SKU) | tmpl_cd | 잉크 5cc+2500·볼체인+1000(색상 variant)·아크릴스탠드 |
+
+**★굿즈/파우치는 종단 중 유일하게 "comp가 정답이 아닐 수 있는" 종단.** GP-1은 PRODUCT_PRICE 직접가(comp 없음)가 정답·GP-2만 그릇 부재로 (b)formula+comp 도입 검토(컨펌 Q-GP-1). 디지털/아크릴/실사/책자의 comp 합산 모델을 굿즈에 답습하면 과설계(고정가형 권위 위반). 색상 variant는 가격 비기여(동가·재질행 합성 BOM만·[[dbmap-material-option-normalization]]).

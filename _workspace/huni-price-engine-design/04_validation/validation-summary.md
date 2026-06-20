@@ -291,3 +291,49 @@ E5·E6 FAIL → 전건 통과 미충족 → **NO-GO**.
 - **Q-BK-PROC proc_cd 주입** → round-6 dbm-option-mapper(W1 선결).
 - **설계 정정-1(LOW)** → designer 폐루프(문서만).
 - **codex 2차(Phase 5.5·책자)** → 오케스트레이터 reconcile(본 판정 독립·codex 비참조).
+
+---
+
+# 굿즈/파우치 (goods-pouch) — 종합 판정: **GO** (6번째 종단·E1~E7 전건 PASS)
+
+> hpe-validator 독립 검증 2026-06-20(라이브 읽기전용 SELECT·pricing.py 코드 직접·골든 15건 충실 재구현). 상세 = `gate-verdict-goods-pouch.md`·`recompute-log-goods-pouch.md`.
+
+굿즈/파우치는 **첫 게이트부터 GO**(디지털 NO-GO·보정 폐루프와 대조·아크릴/실사/문구/책자 GO 동류). 5종단 중 **계산방식 가장 단순(전건 고정가형)·라이브 가장 미완성(product_prices 0행)**. 핵심 4결판(GP-1 PRODUCT_PRICE 동형·GP-2 (b)formula 그릇·G-GP-3 평탄화 가드·4타입 구간할인) 전부 라이브로 designer 정확 확인. 신규 가격축/테이블 0.
+
+| 게이트 | 판정 | 핵심 근거 |
+|--------|------|-----------|
+| E1 공식 추출 | PASS | calc-draft 고정가형 단일유형·4종 구간 byte-verbatim·완성도 수치(0/88/0/82) 전건 일치·날조0 |
+| E2 구성요소 분해 | PASS | GP-1 PRODUCT_PRICE(차원없는 단일가·comp 침입 불가)·GP-2 comp 1배선(opt_cd/siz_cd)·본체소재 BOM≠가격축 |
+| E3 흡수 타당 | PASS | 신규 가격축0·naming 유입0·자재오염 dbmap 위임 스코프분리 적절·rpmeta GS distinct 부결 정합 |
+| E4 엔진 건전성 | PASS | PRODUCT_PRICE/FORMULA 경로 코드 확정·opt_cd·siz_cd 둘다 NON_QTY_DIMS(:38)·LINEN_FINISH 선례 실재·option_items add_price 부재 확인·`.01` min_qty·평탄화 가드 |
+| E5 세트 조합 | PASS | t_prd_product_sets 굿즈 0행·세트 레이어 불요 확정·완제 개당단가·이중계상 구조적 부재 |
+| E6 골든 재현 | PASS | GC-GP1~12 **12/12 일치(허용오차 0)**·GC-GP13~15 rate 재현·평탄화 양면 5500↔5000/6000 독립 재현 |
+| E7 독립성 | PASS | 핵심 4결판 라이브 독립 재실측·평탄화 양면 자체 재계산·골든 충실 재구현·dodge/self-approve 없음 |
+
+## 라이브 confirm 핵심 (designer 주장 → 직접 반증 실패=옳음)
+
+- **GP-2 (b)formula 선례 라이브 실재**: `COMP_POSTEROPT_LINEN_FINISH` use_dims=`["opt_cd","min_qty"]`·comp_typ .06·prc_typ .01·use_yn=Y·del_yn=N. search-before-mint 강하게 충족·신규 mint=공식2+comp2뿐.
+- **option_items add_price 부재**: information_schema 직접 — add_price/amt 컬럼 없음 → (c)DDL안 부결 정확.
+- **4종 구간할인 byte-verbatim**: GOODSA/GOODSB/FABRIC/SQUISHY 디테일 전건 일치·DSC_TYPE.01 정률·바인딩 82.
+- **세트/CPQ/formula/product_prices 굿즈 전무**: 현 source=NONE·0원·진원=고정가 본체 미적재(단가값 결함 아님·C열 verbatim 옳음).
+
+## 보정 요구
+
+**차단 결함(NO-GO) 0건. 보정 요구 없음.** 정정 권고 1(LOW·가격 무영향): engine-design §0 자재 BOM "78상품"→라이브 실측 "76상품" 정밀화.
+
+## 컨펌큐
+
+| # | 미해소 | 누가 | 영향 |
+|---|--------|------|------|
+| Q-GP-FIN1 | 가공 가산(라벨 +300·맥세이프 +6500) 개당 1회 vs ×수량 | dbm-price-arbiter·실무 | 돈크리티컬 |
+| Q-GP-OPT1 | GP-2 variant option_items 적재 선결(현 0행·0원 침묵 회피) | round-6 dbm-option-mapper | GP-2 가격계산 직결 |
+| Q-GP-DSC-TYPE | 할인타입 바인딩 권위=상품마스터 "구간할인적용테이블"·FABRIC 카테고리단위 누락 점검 | dbmap round-1 | 4타입 곱·과청구 |
+| Q-GP-CFLAT | GP-1 ~48상품·FABRIC C열 단가 dbmap 전수 추출 | dbmap C열 추출 | 골든 수치 |
+| Q-GP-7 | 폰케이스 기종(Sheet-only·미등록) 등록 선행 후 바인딩 | round-24·실무 | GP-2 확장 |
+| CV-GP-MAT(검증) | 자재 BOM 78→76 정밀화 | designer | LOW·문서만 |
+
+## 라우팅
+
+- **GP-1 product_prices INSERT·GP-2 공식2+comp2+단가행·바인딩·할인 링크** → dbm-price-arbiter + 인간 승인 후 dbmap. 평탄화 가드·min_qty=1·멱등·백업·undo. 돈크리티컬.
+- **Q-GP-FIN1** → dbm-price-arbiter. **Q-GP-OPT1** → round-6 dbm-option-mapper(선결). **자재오염 정리** → dbm-axis-staged-load ④자재·ddl-proposer(스코프 밖).
+- **설계 정정-1(LOW)** → designer 폐루프. **codex 2차(Phase 5.5·굿즈/파우치)** → 오케스트레이터 reconcile(본 판정 독립·codex 비참조).
