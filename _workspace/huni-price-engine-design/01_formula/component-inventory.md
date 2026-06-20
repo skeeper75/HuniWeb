@@ -119,3 +119,41 @@
 | MIRROR3T | B03 미러아크릴3T [세로행]×[가로열](셀 formula `=투명3T×2`) |
 | COROTTO | B06 코롯토 [가로×세로] 21조합 |
 | CARABINER | B07 4형상 고정가(5,800~6,900·치수=명칭설명) |
+
+---
+
+## 7. 실사·현수막(포스터사인) 구성요소 (라이브 실측 2026-06-20)
+
+### 7-1. 면적매트릭스 본체 comp (use_dims=[siz_width,siz_height]·prc_typ=.01 단가형·동형결합 후 정본/단독)
+
+| comp(정본) | 결합 소재 | 차원 | 단가행 | 골든(라이브 verbatim) |
+|-----------|----------|------|:--:|----------|
+| COMP_POSTER_CANVAS_FABRIC(정본A) | 캔버스·레더·메쉬프린트·타이벡 | siz_width·siz_height | 52 | 600×1800=37,800 |
+| COMP_POSTER_ARTPRINT_PHOTO(정본B) | 아트프린트·방수·접착방수·아트패브릭 | siz_width·siz_height(·min_qty 선언잔류) | 52 | 600×1800=21,600 |
+| COMP_POSTER_ADH_CLEAR_PVC(단독) | 접착투명 | siz_width·siz_height | 52 | 600×1800=59,400 |
+| COMP_POSTER_LINEN_FABRIC(단독) | 린넨 | siz_width·siz_height | 52 | 600×600=17,000 |
+| COMP_POSTER_ARTPAPER_MATTE(단독) | 아트페이퍼 | siz_width·siz_height | 39 | — |
+| COMP_POSTER_BANNER_NORMAL(단독) | 일반현수막 | siz_width·siz_height | 79 | min_qty=1 전건 |
+| COMP_POSTER_BANNER_MESH(단독) | 메쉬현수막 | siz_width·siz_height | 46 | — |
+| (use_yn=N 레거시 6) | ADH_WP/ARTFABRIC/WATERPROOF/LEATHER_ARTPRINT/MESH_PRINT/TYVEK_PRINT | — | 52×6(보존) | 정본으로 배선 재지정·DELETE 0 |
+
+### 7-2. 고정가/수량구간 본체 comp (use_dims=[siz_cd] 또는 [siz_cd,min_qty])
+
+| comp | 상품 | 차원 | 비고 |
+|------|------|------|------|
+| FOAMBOARD_WHITE/BLACK·FOMEXBOARD_WHITE3MM/5MM | 폼보드·포맥스 | siz_cd | 규격 2행 |
+| FRAMELESS_WOOD·LEATHER_FRAME·JOKJA·LINEN_WOODBONG·PET_BANNER·MESH_BANNER | 액자·족자·배너 | siz_cd·min_qty | 규격 |
+| SHEETCUT_MATTE/HOLO·ACRYLSTK_GLOSS/MIRROR | 시트커팅·아크릴스티커 | siz_cd | 규격 3~4행 |
+| CANVAS_HANGING | 캔버스행잉 | [siz_w,siz_h,min_qty] 선언↔실데이터 NULL·고정3종(G-S3) | 차원 정합 컨펌 |
+| **MINI_BANNER·MINI_STANDBOARD** | 미니배너·미니보드 | **siz_cd·min_qty(수량밴드)** | ★수량구간형(4/19/49/99/10000 개당가 하락) |
+
+### 7-3. 후가공/추가옵션 comp (라이브 실재·★formula 미배선=직교 단절 G-S1)
+
+| comp | 의미 | 차원 |
+|------|------|------|
+| COMP_PP_CREASE_1L 오시·COMP_PP_PERF_1L 미싱·COMP_PP_CORNER_ROUND/RIGHT 귀돌이·COMP_PP_VARTEXT_1EA/VARIMG_1EA 가변 | 공통 후가공 | proc_cd·dim_vals(줄수/개수)·(미싱만 opt_cd 부정합 G-S2) |
+| COMP_PRINT_SPOT_WHITE_S1/S2 별색 | 별색인쇄 | plt_siz_cd·proc_cd·print_opt_cd |
+| COMP_POSTEROPT_BANNER_NORMAL_PROC_PUNCH_4/6/8·BONGSEW·CUTEDGE·DTAPE·ADD_QBANG_4·ADD_STRING_4 | 현수막 가공(타공/봉미싱/열재단/큐방/끈) | opt_cd/proc_cd·min_qty |
+| COMP_POSTEROPT_PET_BANNER_STAND_IN/OUT·CANVAS_HANGING_WOODHANGER·LINEN_WOODBONG_WOODBONG·JOKJA_CEILHOOK·LINEN_FINISH | 거치/우드행거/우드봉/천정고리/린넨마감 | siz_cd/opt_cd/bdl_qty |
+
+**[HARD] 면적=siz_width/siz_height·고정가=siz_cd·수량구간=siz_cd+min_qty·후가공=합산형(addtn_yn=Y)** — designer는 면적/규격 축 혼동 금지, 후가공은 본체와 직교 합산. **재사용 후보: 후가공 comp 전부 실재(아크릴보다 우월·신규 mint 거의 0)**.

@@ -83,3 +83,26 @@
 1. **가격 수식 권위 = 가격표 [가로×세로] 매트릭스 + calc-draft `면적매트릭스형`** — 역공학은 면적축을 외부검증할 뿐 수식 권위 아님.
 2. **naming/codes 유입 금지** — RP의 형상/두께 라벨을 후니 mat_cd/opt_cd로 직역 금지. 후니 컨벤션(COMP_ACRYL_*·MAT_000043) 유지.
 3. 아크릴에서 역공학이 던지는 새 갭은 **소재선택(투명/미러) CPQ·형상 opt_cd(카라비너)** — 가격축은 후니가 이미 표현(면적매트릭스).
+
+---
+
+## 6. 실사·현수막 역공학 가격계약 (rpmeta 배너/실사 + widget_monitor)
+
+> 역공학은 후보(갭헌팅)·권위 아님. 가격축 권위 = calc-draft `[면적매트릭스형:실사,현수막]` + 가격표 [가로×세로].
+
+| 역공학 구성요소 축 | 후니 t_prc_* 대응(라이브) | 흡수 판정 |
+|--------------------|--------------------------|----------|
+| 면적 가격(가로×세로 입력→대형 m 단위) | 면적매트릭스 siz_width/siz_height 구간 + 엔진 TIER ceiling | **이미 표현**(아크릴 동형·신안 라이브 COMMIT) |
+| 소재 선택(실사 방수/아트패브릭/레더/메쉬·현수막 일반/메쉬/린넨) | 소재별 PRF_POSTER_<MAT>·동형결합 정본(byte-identical만) | **이미 표현**(13→7 정본·결합 COMMIT) |
+| 비규격 증가단위(임의 가로/세로·rpmeta TILL_WH_GBN 발상) | nonspec_yn·width/height_min/max/incr(현수막 100mm·포스터 200mm) | **이미 표현**(라이브 백필 완료·아크릴은 incr GAP였음) |
+| 현수막 후가공(타공/아일렛·봉미싱·큐방·끈·열재단·D테이프) | COMP_POSTEROPT_BANNER_*(라이브 실재) | comp 실재·**배선 GAP**(G-S1) |
+| 거치/스탠드(PET배너·미니류·캔버스행잉·족자·우드봉) | COMP_POSTEROPT_*_STAND/WOODHANGER/WOODBONG/CEILHOOK | comp 실재·**배선 GAP**(G-S1)·세트 아닌 add-on |
+| 수량 볼륨할인(현수막 다량 주문 개당가↓) | 미니류 min_qty tier(수량구간형) + t_dsc 구간할인(본체) | **이미 표현**(미니 단가밴드·면적은 t_dsc) |
+
+**흡수 판정**: 후니 t_prc_*(면적매트릭스 siz_width/height + 엔진 TIER ceiling + nonspec_incr + 동형결합 + 미니 수량밴드)가 RP/widget 실사·현수막 가격축을 **이미 표현**. 신규 그릇 불요. **갭은 전부 후가공/거치 배선(G-S1)**(가격축 신규 아님·comp는 실재).
+
+### 6-1. designer 권고 (실사·현수막)
+
+1. **가격축 권위 = 가격표 [가로×세로] 포스터사인 매트릭스 + calc-draft `면적매트릭스형:실사,현수막`** ([[dbmap-silsa-price-via-poster-sign]]·실사 inline price 아님). 역공학은 면적/후가공 축을 외부검증할 뿐 수식 권위 아님.
+2. **naming/codes 유입 금지** — RP 배너 라벨(TILL_WH_GBN 등)을 후니 comp/proc/opt_cd로 직역 금지. 후니 컨벤션(COMP_POSTER_*·COMP_POSTEROPT_*) 유지.
+3. 역공학이 던지는 실 갭은 **후가공/거치 add-on 배선(G-S1)**(타공/봉미싱/큐방/끈/거치)·가격축은 후니가 이미 표현. 아크릴(G-A1 본체 미바인딩)과 달리 실사·현수막은 본체 완성·후가공만 단절.

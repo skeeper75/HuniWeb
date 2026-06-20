@@ -103,3 +103,19 @@
 
 **★아크릴 핵심**: 단가행은 풍부(238행 가격표 verbatim)·**갭=배선/바인딩**(단가값 결손 아님). 디지털인쇄 동형결함(×qty 폭발·silent 이중합산)은 **없음**(면적단가=개당가·공식당 comp 1개·formula-map-acrylic §6). 유일 가드=신규 면적행 INSERT 시 .02 comp(CLEAR3T) min_qty=1 명시.
 **우선순위**: G-A1(미바인딩)>G-A2(미러·BLOCKED)>G-A3(코롯토 바인딩)>G-A4/G-A5. search-before-mint(COROTTO 실재·MIRROR 단가행 실재·CARABINER 부재) 후.
+
+---
+
+## 실사·현수막 절 (라이브 실측 2026-06-20)
+
+| ID | 갭 | 유형 | 심각도 | designer 작업 |
+|----|----|------|--------|---------------|
+| G-S1 | **후가공 add-on formula 미배선**(오시·미싱·귀돌이·가변·별색 + 배너 타공/봉미싱/큐방/끈/거치 + 거치/우드봉/우드행거/천정고리/린넨마감 comp 전부 라이브 실재하나 PRF_POSTER 공식 disp2~ 배선 **0건**) | 가격사슬 직교 단절 | 🔴 High | gd2-wiring W4: 각 PRF에 후가공 comp(addtn_yn=Y) 배선. 엔진 addtn_yn 미참조·매칭 시만 합산·본체 동시매칭은 U6 공식분리(라이브 완료)로 차단. **현재 후가공 선택해도 가격 반영 0** |
+| G-S2 | **미싱(PERF) 차원축 opt_cd 부정합**(다른 후가공 proc_cd 모델과 불일치) | 모델 불일치 | 🟡 Med | gd2-wiring W5: PERF opt_cd→proc_cd·dim_vals.줄수 이설·prc_typ .02→.01·2L/3L use_yn=N. 이설(값동일) 후 배선 |
+| G-S3 | **CANVAS_HANGING use_dims 선언↔실데이터 불일치**(siz_width/height 선언이나 실 NULL·min_qty=1 고정3종)·동일 의심 ARTPRINT/CANVAS_FABRIC min_qty 선언잔류 | 차원 선언 오류 | 🟡 Med | use_dims 정정 vs 단가행 채움(실무 컨펌·가격축 정확성) |
+| G-S4 | **별색 WHITE 중복행**(silsa-quote U5·dbmap round-23 dedup 트랙·잔류 재실측) | 데이터 정합 | 🟡 Med | 정본 2개(S1/S2)만 배선·형제색 use_yn=N(상당수 COMMIT)·잔류분 재실측 |
+| G-S5 | 고정가 단가행 결손 가능성(메쉬배너 1행·PET배너 1행 sparse) | 단가행 결손 | ⚪ Low | 가격표 규격 전건 대조·결손 INSERT(verbatim·import 트랙) |
+| G-S6 | CPQ 옵션레이어 전무(소재선택·후가공 택1/택N·거치) | 옵션 미적재 | 🟡 Med | round-6 dbm-option-mapper. 후가공=합산형(가격축)·CPQ=선택 UI |
+
+**★실사·현수막 핵심(아크릴과 정반대)**: 본체 가격사슬은 **거의 완성**(28공식 바인딩+동형결합+신안 전환 라이브 COMMIT·골든 verbatim). **핵심 갭=후가공 배선(G-S1)**·신규 mint 거의 0(후가공 comp 전부 실재). 동형결함(출력매수 곱셈·×qty 폭발·silent 이중합산) **없음**(개당가·.01 단가형·공식당 1 comp·formula-map-silsa-banner §6). 비동형점=수량구간형(미니류)·대형면적 nonspec_incr 차등(현수막 100mm).
+**우선순위**: G-S1(후가공 배선)>G-S2(미싱 전환·G-S1 선행)>G-S3/G-S4(차원·별색)>G-S5/G-S6.

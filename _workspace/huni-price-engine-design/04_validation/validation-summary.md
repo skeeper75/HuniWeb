@@ -129,3 +129,54 @@ E5·E6 FAIL → 전건 통과 미충족 → **NO-GO**.
 - **미러·후가공 가산 의미(CA-1·CA-4)** → dbm-price-arbiter 심의 + 사용자 컨펌(돈크리티컬·추측 적재 금지).
 - **카라비너 신설·채번(CA-3)** → PRD 활성화 시·채번 트랙.
 - **codex 2차(Phase 5.5)** → 오케스트레이터 reconcile(본 판정은 독립·codex 비참조).
+
+---
+
+# 실사·현수막 면적매트릭스형 설계 종합 검증 판정 (2026-06-20·carry-forward)
+
+> 상세: `gate-verdict-silsa-banner.md`·`recompute-log-silsa-banner.md`. 라이브 읽기전용 재실측·engine 충실 재구현 재계산.
+
+## 종합 판정: **GO (조건부 컨펌큐 동반)**
+
+| 게이트 | 판정 |
+|--------|------|
+| E1 공식 추출 충실성 | PASS |
+| E2 구성요소 분해 정합 | PASS |
+| E3 경쟁사 흡수 타당성 | PASS (신규 vessel 0·naming 유입 0) |
+| E4 엔진 건전성 + min_qty 계약 | PASS (LOW F-S-1: 배너 후가공 use_dims 라이브 이질성 under-statement) |
+| E5 세트/바인딩 + G-S1 | PASS |
+| E6 골든 재현(허용오차 0) | PASS (13건+에러 2건 일치) |
+| E7 생성-검증 독립성 | PASS |
+
+**E1~E7 전건 PASS → GO.** 아크릴 동형(GO)·디지털 NO-GO와 대조 — 실사·현수막은 본체 가격사슬이 라이브에 **완성**(28공식·28상품 1:1 바인딩·동형결합 13→7 COMMIT)되어 있고, ×qty 폭발·silent 이중합산이 본체에 **구조적으로 없음**(전건 .01 단가형·1장당가·공식당 comp 1개)을 라이브·코드·재계산으로 입증.
+
+## 핵심 한 줄
+
+본체(면적 13·고정가 13·수량구간 2)는 라이브 무결(골든 13건 허용오차 0 재현). 설계의 핵심 작업은 **신규 mint가 아니라 후가공 배선**(G-S1: 전 PRF가 comp 1개뿐·후가공 disp_seq 2~ 0건=견적 시 후가공 가격 반영 0). 단 **배너 후가공(PUNCH/QBANG/STRING/거치 use_dims=[])은 판별차원 충전이 배선의 절대 선결**(미충전 배선 시 타공 4+6+8 silent 합산 20,000 과청구 재계산 실증). designer가 이를 정확히 식별하고 선결로 명시 → 돈크리티컬 결함을 설계 단계에서 차단.
+
+## min_qty / prc_typ 계약 라이브 confirm (designer 주장 → 반증 실패=옳음)
+
+- 면적/고정가/수량구간 본체 28 comp 전건 `PRICE_TYPE.01`·면적 본체 min_qty NULL/1·직접단가 override 0행 → ÷min_qty 구조적 미발생·×qty가 곧 정답(1장당가).
+- 디지털 ×qty 결함·아크릴 .02 미확정 위험 둘 다 **부재**(단가 의미가 1장당 완제품가·.01)·재계산 입증.
+
+## 보정 요구
+
+**차단 결함(NO-GO) 0건.** 보정 요구 없음. LOW 2건은 컨펌큐(가격 무영향).
+- F-S-1(LOW): 배너 후가공 use_dims 라이브 부분 백필 3건(MESH_PUNCH_6·NORMAL_QBANG_4·MESH_PROC_OPT)을 "일괄 []"로 평탄화 기술·단 단가행 컬럼 NULL이라 여전히 silent 위험·designer 처방이 닫음. Q-SB-PUNCH-DIM에 명시 추가 권고.
+
+## 컨펌큐 (designer 큐 9건 유지 + 검증 보강)
+
+| # | 미해소 | 누가 | 영향 |
+|---|--------|------|------|
+| Q-SB-PROC-QTY | ★거치/배너 후가공(우드행거 20,000·PET거치 25,000) 가산=1주문건당 통액 vs ×수량(.01 ×qty 과청구 위험) | dbm-price-arbiter·실무 | 돈크리티컬·배선 전 확정 |
+| Q-SB-PUNCH-DIM(+보강) | 배너 후가공 판별차원 충전(택1 타공 4/6/8 통합+opt_cd·택N 각 opt_cd) + **부분 백필 3건 단가행 컬럼 충전**(use_dims만 채운 잔류=거짓 안전감·F-S-1) | 실무·채번 | G-S1 배선 선결·돈크리티컬 |
+| Q-SB-MINI-DSC | 미니류 수량밴드(본체 내장 볼륨할인)+t_dsc 이중할인 금지 | dbmap round-1 | 이중할인 방지 |
+| Q-SB-CH1 | 캔버스행잉 use_dims=[siz_w,h,min_qty] vs 실 3행 NULL 고정3규격 정합 | 실무 | 가격축 정확성 |
+| Q-SB-FIXED-LEGACY | 레거시 PRF_POSTER_FIXED(고아·바인딩 0) 정리 | 개발자 | 정리·가격 무관 |
+| (designer 큐 유지) | Q-SB-MINI-MIN·DIM1·NSPEC1·DSC1 | 실무/개발자 | 경계 확정 |
+
+## 라우팅
+
+- **G-S1 후가공 배선 + 배너 후가공 판별차원 충전(돈크리티컬·Q-SB-PUNCH-DIM·PROC-QTY)** → dbm-price-arbiter 심의(1건당 vs ×수량 확정) + 인간 승인 후 dbmap(dbm-axis-staged-load·dbm-load-execution·dbm-ddl-proposer opt_cd 채번). 미충전 배선 절대 금지.
+- **본체 = confirmed-good** — 28공식·바인딩·동형결합·신안 WH 전환 라이브 COMMIT. 건드리지 말 것.
+- **codex 2차(Phase 5.5)** → 오케스트레이터 reconcile(본 판정은 독립·codex 비참조).
