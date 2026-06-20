@@ -76,3 +76,56 @@ E5·E6 FAIL → 전건 통과 미충족 → **NO-GO**.
 
 본 검증은 라이브 읽기전용 SELECT만 수행·DB 쓰기 0. 모든 결함 교정(prc_typ 전환·인쇄면 차원 통합·PRF 신설·
 바인딩)은 **인간 승인 후 dbmap 위임**. 검증 산출은 분석·판정 전용.
+
+---
+
+# 아크릴 면적매트릭스형 설계 종합 검증 판정 (2026-06-20·carry-forward)
+
+> 상세: `gate-verdict-acrylic.md`·`recompute-log-acrylic.md`. 라이브 읽기전용 재실측·engine 충실 재구현 재계산.
+
+## 종합 판정: **GO (조건부 컨펌큐 동반)**
+
+| 게이트 | 판정 |
+|--------|------|
+| E1 공식 추출 충실성 | PASS (LOW F-A-1: B-label 원천 불일치·값 verbatim 동일) |
+| E2 구성요소 분해 정합 | PASS |
+| E3 경쟁사 흡수 타당성 | PASS (신규 vessel 0) |
+| E4 엔진 건전성 + min_qty 계약 | PASS (LOW F-A-2: comp_typ 시맨틱) |
+| E5 세트/바인딩 + G-A1 | PASS |
+| E6 골든 재현(허용오차 0) | PASS (8/8 일치) |
+| E7 생성-검증 독립성 | PASS |
+
+**E1~E7 전건 PASS → GO.** 디지털인쇄 NO-GO와 대조적 — 아크릴은 ×qty 폭발·silent 이중합산이 **구조적으로 없음**(단가=개당가·공식당 comp 1개)을 라이브·코드·재계산으로 입증.
+
+## 핵심 한 줄
+
+본체(투명/코롯토) 가격사슬은 라이브에 무결 적재(단가행 238·골든 8건 허용오차 0 재현). 설계의 핵심 작업은 **신규 mint가 아니라 바인딩**(G-A1: 활성 17상품 중 16 미바인딩=가격계산 불가, PRF_CLR_ACRYL/COROTTO 재사용 INSERT로 해소·신규 0). 신규 mint(미러 공식·카라비너 comp/공식·후가공 comp)는 전부 컨펌 대기로 정직 분리되어 GO를 막지 않음.
+
+## min_qty 계약 라이브 confirm (designer 주장 → 반증 실패=옳음)
+
+- CLEAR3T: 165행 전건 min_qty=1(NULL 0)·.02 → ÷1=개당가 ✅
+- COROTTO: 21행 전건 min_qty=1·.01 ✅
+- MIRROR3T: 52행 전건 min_qty=**NULL**·.01 → ÷ 미발생·ValueError 0 ✅
+- ×qty 위험 0: 단가=개당 완제품가(디지털 묶음총액과 정반대)·`component_subtotal`(pricing.py:177-192) 코드+재계산 증명.
+
+## 보정 요구
+
+**차단 결함(NO-GO) 0건.** 보정 요구 없음. LOW 2건은 컨펌큐(가격 무영향).
+
+## 컨펌큐 (designer 큐 유지 + 검증 추가)
+
+| # | 미해소 | 누가 | 영향 |
+|---|--------|------|------|
+| CA-1 | 미러 = 별 공식(PRF_MIRROR_ACRYL) vs 본체 소재옵션(투명/미러 택1) 합류 — 합류 시 MIRROR3T에 mat_cd 판별차원 충전 선결(silent 이중합산 가드)·미러 본체 상품 0개 | dbm-price-arbiter·사용자 | 미러 바인딩 방식(Q-ACR-MIR1) |
+| CA-2 | 코롯토 정체 — 입체(168)/포카(165)/쉐이커(226)가 모두 B06 단일 면적매트릭스인가(별 단가체계면 별 comp) | 사용자·실무 | 코롯토 바인딩 동형 가정(Q-ACR-CO1) |
+| CA-3 | 카라비너 형상 opt_cd 채번 + comp/공식 신설(PRD_000166 비활성·LOW)·comp_typ .06 시맨틱(F-A-2) | 채번 트랙·개발자 | 활성화 시 일괄 |
+| CA-4 | 후가공(고리/자석) 가산 = 개당 1회 vs ×수량(B05) — COMP_ACRYL_FINISH prc_typ 설계(추측 적재 금지·디지털 동형 위험) | dbm-price-arbiter·사용자 | Q-ACR-FIN1 |
+| CA-5 | 두께 선택 UI → mat_cd 주입(option_items→mat_cd) — 미선택 시 no_match 0원 침묵 가드 | round-6 CPQ | Q-ACR-MAT1 |
+| CA-6 | B-label 인용 통일(추출본 vs 체인설계 doc) | designer | F-A-1·가격 무영향 |
+
+## 라우팅
+
+- **본체 17상품 바인딩(G-A1)** → 신규 mint 0·인간 승인 후 dbmap(dbm-load-execution) 위임. 1순위(가격계산 불가 직결).
+- **미러·후가공 가산 의미(CA-1·CA-4)** → dbm-price-arbiter 심의 + 사용자 컨펌(돈크리티컬·추측 적재 금지).
+- **카라비너 신설·채번(CA-3)** → PRD 활성화 시·채번 트랙.
+- **codex 2차(Phase 5.5)** → 오케스트레이터 reconcile(본 판정은 독립·codex 비참조).

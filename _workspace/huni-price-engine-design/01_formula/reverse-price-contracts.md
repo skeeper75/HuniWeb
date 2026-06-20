@@ -52,3 +52,34 @@
 2. **rpmeta D-6(면적/곱수/고정/단가)가 후니 계산방식 분류를 외부 검증** — 후니 원자합산형=단가합·고정가형=룩업이 RP price_flag 패턴과 정합. 신규 계산방식 도입 불요.
 3. **naming/codes 유입 금지** — RP의 `price_flag`·`item_gbn` 등을 후니 comp_cd/prc_typ_cd로 번역 금지. 후니 컨벤션 유지.
 4. 디지털인쇄에서 역공학이 새로 던지는 갭은 **면적별 박(대형/소형)** 뿐 — 나머지는 후니 t_prc_* 가 이미 표현.
+
+---
+
+## 5. 아크릴 절 — 역공학 가격계약 (면적매트릭스형)
+
+### 5-1. widget_monitor / RedPrinting 아크릴
+
+| 항목 | 실측 | 확신도 |
+|------|------|--------|
+| RP 아크릴 가격모델 | rpmeta AC 카테고리(아크릴20상품) 종단 — distinct 0 재포화(`huni-rpmeta/categories/AC/`) | 중 |
+| 가격기여 축 | RP도 아크릴=**면적(width×height)** 단가 + 두께/소재 facet — 후니 면적매트릭스(siz_width/siz_height)+mat_cd와 동형 | 중 |
+| 함의 | RP 아크릴이 면적축으로 가격 짜는 것이 후니 calc-draft `[면적매트릭스형]`을 외부 검증. 신규 계산방식 도입 불요 |
+
+### 5-2. rpmeta 메타모델 — 아크릴 가격축 흡수 판정
+
+| RP/경쟁사 축 | 후니 흡수 위치 | 갭? |
+|--------------|---------------|-----|
+| 면적(가로×세로) 단가 | COMP_ACRYL_CLEAR3T use_dims=[siz_width,siz_height]·엔진 TIER off-grid | 흡수 완료 |
+| 두께(thickness) | mat_cd 직교차원(MAT_000043 3mm·MAT_000042 1.5mm) | 흡수 완료 |
+| 소재(투명/미러) | 투명=CLEAR3T·미러=MIRROR3T(별 comp) — ★소재 택1 CPQ 미구현 | **GAP**(G-A5·미러 바인딩 G-A2 선결) |
+| 형상(shape) — rpmeta #17 distinct 축 | 카라비너=opt_cd(형상)·완칼은 단가통합 | 카라비너 opt_cd 채번 GAP(G-A4) |
+| 후가공(고리/자석/바디·조각수) | 상품마스터 `가공(옵션)`·`조각수(옵션)` → CPQ option(미적재) | **GAP**(G-A5) |
+| 외주 완제품 고정가(코롯토/카라비너) | COROTTO=면적매트릭스·CARABINER=opt_cd 고정가 | COROTTO 흡수·CARABINER 미설계 |
+
+**흡수 판정**: 후니 t_prc_* 면적매트릭스(siz_width/siz_height numeric + 엔진 TIER ceiling)가 RP 아크릴 면적가격을 **이미 표현**·두께=mat_cd로 정규화. 신규 그릇 불요. **갭은 전부 배선/바인딩/CPQ 옵션레이어**(가격축 신규 아님).
+
+### 5-3. designer 권고 (아크릴)
+
+1. **가격 수식 권위 = 가격표 [가로×세로] 매트릭스 + calc-draft `면적매트릭스형`** — 역공학은 면적축을 외부검증할 뿐 수식 권위 아님.
+2. **naming/codes 유입 금지** — RP의 형상/두께 라벨을 후니 mat_cd/opt_cd로 직역 금지. 후니 컨벤션(COMP_ACRYL_*·MAT_000043) 유지.
+3. 아크릴에서 역공학이 던지는 새 갭은 **소재선택(투명/미러) CPQ·형상 opt_cd(카라비너)** — 가격축은 후니가 이미 표현(면적매트릭스).

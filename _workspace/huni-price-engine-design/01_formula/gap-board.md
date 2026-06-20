@@ -79,3 +79,27 @@
 2. **G-1/G-2(박 미배선)** = calc-draft 요구 비목 누락 → High.
 3. **G-5(엽서북 세트)** + **G-6(권위 컨펌)** = 구조/경계 → Med.
 4. 신규 comp mint는 search-before-mint(FOIL·박 comp 일부 실재) 후.
+
+---
+
+## 아크릴 절 (면적매트릭스형) — 라이브 실측 2026-06-20 · formula-map-acrylic.md 참조
+
+```
+아크릴 가격공식 baseline (라이브 실재):
+🟢 PRF_CLR_ACRYL(투명 본체·CLEAR3T 165행) · PRF_COROTTO_ACRYL(코롯토·21행)
+🟡 COMP_ACRYL_MIRROR3T(52행 단가행만·공식 0) · COMP_ACRYL_CARABINER(부재·미설계)
+바인딩: BOUND 1 상품(PRD_000146 아크릴키링) / UNBOUND 29 상품
+```
+
+| ID | 갭 | 유형 | 심각도 | designer 작업 |
+|----|----|------|--------|---------------|
+| G-A1 | **본체 29상품 미바인딩**(키링만 BOUND) | 바인딩 누락 | 🔴 High | 투명 본체 24상품→PRF_CLR_ACRYL(소재=mat_cd 흡수)·미러 본체→PRF_MIRROR_ACRYL. **29상품 evaluate_price source=NONE·가격계산 불가** |
+| G-A2 | **미러 공식/배선/바인딩 전무**(MIRROR3T 52행 단가행만) | 가격사슬 단절 | 🔴 High | PRF_MIRROR_ACRYL 신설+배선. ★**바인딩 대상 상품 불명 BLOCKED**(라이브 미러3T 본체 0개·미러=소재옵션 가능성·CPQ 소재레이어 선결·dbmap Q-ACR-9) |
+| G-A3 | **코롯토 바인딩 0**(comp/공식 실재·배선됨) | 바인딩 누락 | 🟡 Med | 코롯토 4상품(164/168/165/226)→PRF_COROTTO_ACRYL. ★정체 컨펌(입체/쉐이커/포카=같은 매트릭스? Q-ACR-CO1)·활성 168 우선 |
+| G-A4 | **카라비너 comp/공식 전무 + 형상 opt_cd 미채번** | 미설계(2중) | 🟡 Med | COMP_ACRYL_CARABINER 신설(.01·.06·use_dims=[opt_cd])+형상 4 opt_cd 채번+단가행 4(B07 verbatim)+PRF_CARABINER_ACRYL+PRD_000166. 비활성=LOW |
+| G-A5 | **CPQ 옵션레이어 전무**(조각수·가공[고리/자석/바디]·소재선택·추가상품) | 옵션 미적재 | 🟡 Med | 상품마스터 옵션칸→CPQ option_groups/items(round-6). 미러 소재선택이 G-A2 선결 |
+| G-A6 | nonspec 증가단위(incr) 미백필(11상품 min/max 보유·incr NULL) | 미검증 규칙 | ⚪ Low | nonspec_*_incr 백필(입력 step·가격축 아님)·값=실무진 컨펌(Q-ACR-AC2) |
+| G-A7 | 공식 권위 이원화(calc-draft 코롯토=고정가형 vs 가격표 B06=면적매트릭스) | 권위 충돌 | ⚪ Low | 가격표 구조(면적매트릭스) 우선(라이브 COROTTO use_dims 정합)·컨펌큐 |
+
+**★아크릴 핵심**: 단가행은 풍부(238행 가격표 verbatim)·**갭=배선/바인딩**(단가값 결손 아님). 디지털인쇄 동형결함(×qty 폭발·silent 이중합산)은 **없음**(면적단가=개당가·공식당 comp 1개·formula-map-acrylic §6). 유일 가드=신규 면적행 INSERT 시 .02 comp(CLEAR3T) min_qty=1 명시.
+**우선순위**: G-A1(미바인딩)>G-A2(미러·BLOCKED)>G-A3(코롯토 바인딩)>G-A4/G-A5. search-before-mint(COROTTO 실재·MIRROR 단가행 실재·CARABINER 부재) 후.
