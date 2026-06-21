@@ -1,12 +1,16 @@
 # Huni-Price-Engine-Design 하네스 — HANDOFF
 
-> CLAUDE.md §18 · 갱신 2026-06-20 · 종단 GO 6건(디지털인쇄·아크릴·실사·현수막·문구·책자·굿즈/파우치) · 5가지 계산방식 전부 커버
+> CLAUDE.md §18 · 갱신 2026-06-21 · 종단 GO 6건 + 스티커 진행중(조건부 GO·보정 미완)
 
 ## 다음 시작점
 
-**남은 상품군 동형 전파 또는 실 적재 승인** — 6개 종단 검증 GO 완료. 5가지 계산방식(원자합산·면적매트릭스·수량구간·고정가+구간할인·반제품 세트) 전부 커버.
+**★스티커 designer 보정부터 재개**(세션 한도로 중단) — 스티커는 Phase1·3·4 완료·**조건부 GO**(E1 CONDITIONAL·보정 요구 1·돈크리티컬)·designer 보정 미실행(세션 limit 0토큰)·codex(Phase5.5) 미실행.
 
-- **남은 동형 전파 후보**: 스티커·상품악세사리·캘린더 → 기존 동형 클래스 분류 후 cartographer→designer→validator→codex 순. (스티커=면적매트릭스+이산 siz·dbmap round-23 풍부 / 상품악세사리=OTC 템플릿 이중등록·사이즈 3축 / 캘린더=공정택일그룹)
+재개 절차:
+1. **designer 보정**(SendMessage로 보낸 지시 미실행·재전송): PRD_053(반칼투명·active)·054(홀로그램·active)의 **mat162/163 단가행이 반칼정사각 SIZ_059/060에만 적재**됐는데 상품은 A5/A4/A6(SIZ_170/172/196)에 바인딩 → **054 전 바인딩 no_match(가격 불가·active 긴급)**. G-STK-2 교정안(SIZ_172→SIZ_520)을 053/054에 적용해도 SIZ_520×mat162/163 단가행 부재로 여전히 no_match → **052(5소재 정상)와 분리된 교정 경로** 산출(라이브 053/054 siz×mat 단가행 매트릭스 재실측 + 권위 가격표 260527 대조: siz 재바인딩 vs 단가행 적재·추측 INSERT 금지). G-STK-2를 052 / 053·054 두 경로로 분리해 카탈로그 명시. + LOW 정정(GC-STK1 unit_price≠최종가 표기).
+2. **재게이트**(hpe-validator E1 재검증) → 3. **codex Phase5.5**(high) → 4. GO 시 박제·이력·커밋.
+
+**그 다음 남은 동형 전파 후보**: 상품악세사리(OTC 템플릿 이중등록·사이즈 3축)·캘린더(공정택일그룹).
 - **실 적재 승인 대기(누적)**: 디지털 prc_typ 교정(.01→.02)·아크릴 G-A1 바인딩·실사 후가공 배선·문구(본체 product_prices·떡메모 바인딩·DSC 링크 4건)·책자(W1 제본비 재배선·W2 중철 단가행 교정=과청구 50%)·굿즈/파우치(GP-1 product_prices·GP-2 formula+variant 단가·★GP-2 product_prices INSERT 금지 가드·구간할인 base) — 전부 인간 승인 후 dbm-axis-staged-load/dbm-load-execution/dbm-price-arbiter 위임.
 
 ## 진행 현황
@@ -19,6 +23,7 @@
 | 문구 | 고정가+수량구간할인+매트릭스 | **E1~E7 전건 PASS·GO**(차단0·보정0·mint0) | GO 지지(**high**·divergence 0) |
 | 책자 | 반제품 세트 부품 합산(두 갈래) | **E1~E7 전건 PASS·GO**(첫 게이트·차단0·보정0) | GO 지지(**high**·divergence 0) |
 | 굿즈/파우치 | 고정가형 2서브유형(GP-1 단일/GP-2 변형) | **E1~E7 전건 PASS·GO**(첫 게이트·차단0·LOW1) | GO 지지(**high**·divergence 0) |
+| 스티커 | 이산 siz_cd 단가형+세트 합가형(면적 직교) | **조건부 GO**(E1 CONDITIONAL·보정 요구1 돈크리티컬·**보정 미완**) | 미실행(보정 후) |
 
 ## 미해결 / 블로커 (전부 DB 미적재·인간 승인 후 dbmap 위임)
 
@@ -38,6 +43,11 @@
 - W1 제본비 재배선(PRF_BIND_SUM→활성 COMP_BIND_TWINRING)·W2 중철 단가행 교정(트윈링값 오염→정답 중철값·삭제 JUNGCHEOL 보유) = **돈크리티컬 과청구 50%** → dbm-price-arbiter+인간 승인.
 - ★del_yn 필터 부재 확정(삭제 comp도 가격 평가에 포함) — 교훈: 삭제 데이터가 가격에 새는지 코드 확인 필수.
 - 완성가(W3/W4 표지+내지 부품 합산)는 codex DV-BK2(component별 effective quantity 엔진 계약)·DV-BK3(역할별 selection 차원)·DV-BK4(저청구 위험)+Q-BK-COVER(표지/내지 단가 소스) 닫은 후. 제본비 .01 정당(교정 불요·디지털 무비판 전이 금지).
+
+**스티커(조건부 GO·보정 미완·재개 1순위):**
+- ★G-STK-2 분리: 053/054 mat162/163 단가행이 SIZ_059/060에만 적재·상품은 SIZ_170/172/196 바인딩 → 054 전 no_match·052와 다른 교정 경로 필요(designer 보정 미실행).
+- 정합 결함(WIRE형·단가값 결손 아님): G-STK-1(MAT_154 del_yn=Y→153/162 재바인딩)·G-STK-3(SIZ_196/058 단가행 0행·추측 INSERT 금지)·G-STK-4(064 잠정·굿즈 siz 재사용 혼선).
+- 확정(라이브 결판): B06 팩/타투 prc_typ=.02(cartographer 정확·benchmark 54배 왜곡은 round-23 이전 stale)·이산 siz_cd 단가형(면적 직교·siz_width 0행)·형상=가격축 아님·신규 mint 0(전부 재바인딩).
 
 **굿즈/파우치(GO·차단 아님):**
 - ★GP-2 PRODUCT_PRICE 선점 가드(돈크리티컬·codex 독립 발견): GP-2 상품에 product_prices 1건이라도 있으면 FORMULA 우회→variant 단가 영영 안 먹힘. **적재 가드: GP-2 product_prices INSERT 금지·formula 바인딩만**.

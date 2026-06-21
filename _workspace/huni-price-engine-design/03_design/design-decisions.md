@@ -621,3 +621,87 @@ GP-1 55상품은 신규 mint **0**(product_prices INSERT만·공식/comp 불요)
 | **Q-GP-PHONE** | 폰케이스 기종(슬림하드/블랙젤리/임팩트/에어팟/버즈·Sheet-only·라이브 미등록) 상품 등록 선행 후 GP-2 PRF_GOODS_VARIANT 바인딩 | round-24·실무 | G-GP-7 상품 등록(가격 적재 선행) |
 
 ★ 본 설계는 **구조 레벨 확신도 높음**(라이브 SELECT 실측 + 상품마스터 C열 verbatim + LINEN_FINISH opt_cd 그릇 선례 + pricing.py 코드 검증·돈크리티컬 평탄화 가드 확정). **GP-2 variant축 의미(siz_cd vs opt_cd)·가공 가산 의미는 확신도 중**(Q-GP-1·Q-GP-FIN1 실무 재대조 후 확정). 실 적용(product_prices INSERT·GP-2 공식/comp/단가행·바인딩·할인 링크)은 **DB 미적재·인간 승인 후 dbmap 위임**(dbm-load-execution·dbm-axis-staged-load·dbm-ddl-proposer·dbm-price-arbiter·webadmin 코드 직접수정 금지). 본체 소재/색/형상/구수 오염 정리는 **dbmap 자재축 트랙 위임**(가격엔진 스코프 밖·라우팅만).
+
+---
+
+# 스티커 절 — 설계 결정·흡수 적용·search-before-mint 근거·컨펌큐 (이산 siz_cd 단가형+세트 합가형·바인딩 정합 교정 종단·7번째·2026-06-20 라이브 실측)
+
+> `engine-design-sticker.md`·`golden-cases-sticker.md` 종단 결정 요약. 스티커 = **6종단 중 라이브 완성도 최고**(dbmap round-23 적재 완주·공식 4·comp 4·단가행 3,066·바인딩 16/16). 핵심 = **단가행 적재 아닌 "바인딩 siz/mat ↔ 단가행 siz/mat 키 정합 교정"**(WIRE형 결함 4종·G-STK-1~4). 신규 mint 0(전부 재바인딩·이미 실재 코드).
+
+## STK-1. ★스티커 = "구조 완성·정합 미완" — 정합 교정 종단 (단가행 적재 아님) `확신도: 높음`
+
+라이브 실측(2026-06-20)이 cartographer 지도를 전건 확인. 공식·comp·단가행(3,066·가격표 verbatim·값결함 0)·바인딩(16/16 전건) 4계층 모두 실재. 디지털(미배선)·아크릴(미바인딩)·문구/굿즈(고정가 0행)·책자(다부품 미합산)와 결정적으로 다른 **정합 교정 종단** — 결함은 전부 **바인딩 siz/mat이 단가행 siz/mat과 어긋나 evaluate_price no_match/오청구**(formula-map-sticker §6). designer 작업 = 재바인딩/유효성 처리이지 단가 충전 아님.
+
+## STK-2. ★B06 팩 prc_typ 결판 — .02 확정(cartographer 정확·benchmark stale) `확신도: 높음(라이브 실측)`
+
+cartographer "팩/타투 .02 교정 완료" vs benchmark "B06 .01 오적재→.02 선결(54배 왜곡)" 충돌을 **2026-06-20 라이브 직접 실측으로 결판**: COMP_STK_PACK·COMP_STK_TATTOO 모두 **`PRICE_TYPE.02`**. → cartographer 정확, benchmark는 dbmap round-23 COMMIT(2026-06-17/18 문서) 이전 stale 인용. **팩 54배 왜곡(216,000) 위험 부재**(GC-STK3: 4000÷54×54=4,000 재현). 디지털 명함 prc_typ 결판(가격표 행축 "제작수량") 패턴 동형 — 라이브가 자(尺).
+
+## STK-3. ★가격축 3축뿐 — 형상·칼선·재단 = 옵션축(가격직교) [HARD·directive #6 가드] `확신도: 높음`
+
+가격축 = 사이즈(이산 siz_cd) × 소재(mat_cd 7종) × 수량(min_qty)뿐. **형상(원형/정사각/팬시)·칼선·재단입자 = 가격축 아님**(058~063 라이브 실측 = 같은 siz/mat면 형상 달라도 동일 단가). component_prices에 형상 차원 baked-in = 오모델(부결). rpmeta ST 형상 #17 distinct 승격(V-12)은 *옵션 관리 그릇* vessel-gap이지 *가격* vessel-gap 아님(**option-axis ≠ price-axis**·benchmark §2). 형상별 고정사이즈 단가 예외(합판도무송 066)는 별 상품/별 comp(COMP_GANGPAN_PRINT·형상=siz_cd)이지 형상=가격축 아님.
+
+★ **단, 재단입자가 단가 가르면 siz_cd 분리[돈크리티컬]**: 반칼 A4(SIZ_520·5000) vs 완칼 낱장 A4(SIZ_172·4000) — 같은 치수 다른 단가 → siz_cd 별 채번이 정답(dbmap round-23 SIZ_520 분리 COMMIT·G-STK-2 진원).
+
+## STK-4. ★G-STK-1 — 055/056/057 소재 재바인딩(154→153·243→162)이 정답 [HARD·🔴최우선] `확신도: 높음(라이브 3중 증거)`
+
+상품 055/057이 **MAT_000154(유포지·del_yn=Y 논리삭제)**·056이 **MAT_000243(투명전용지)**을 바인딩하나 COMP_STK_PRINT 단가행은 154/243 **0행** → no_match(가격 0). **정답=상품 mat 재바인딩이지 단가행 추가 아님** — 3중 증거: ① MAT_000154 del_yn=Y(이미 삭제·정본 유포=153) ② 형제 058~061·052가 정본 153 바인딩(같은 family 정답 패턴) ③ 단가행 153/162는 가격표 verbatim·옳음(154/243에 단가행 추가하면 deleted/오류 자재에 가격 = 스키마 의도 위반). 교정: 055/057 mat 154→153·056 243→162. dbmap 위임 + dbm-price-arbiter 심의(Q-STK-MAT1: 낱장 B02 단가 정합 확인).
+
+## STK-5. ★G-STK-2 — 052/053/054 SIZ_172→SIZ_520 재바인딩 [돈크리티컬] `확신도: 높음(058~061 precedent)`
+
+반칼 052/053/054가 A4를 SIZ_172(B02 낱장 4000) 바인딩 → 반칼 5000 아닌 4000 오청구(장당 −1,000원). 058~061(같은 반칼 family)은 이미 SIZ_520(A4 반칼·5000) 바인딩(라이브 precedent·SIZ_520 note "B02 낱장 SIZ_172와 분리·반칼 전용가") — 052~054만 dbmap round-23 분리에서 누락. 교정: SIZ_172→SIZ_520(이미 실재 siz·신규 채번 0). dbm-axis-staged-load(②사이즈) 위임.
+
+## STK-6. G-STK-3 — A6/100x140 단가행 0 = 바인딩 유효성(추측 INSERT 금지) `확신도: 높음(가격표 부재 실측)`
+
+052~054 SIZ_196(A6)·062/063 SIZ_058(100x140) = 모든 comp 단가행 0행. 가격표 B01 6사이즈(A5/90x190/100x148/90x110/A4반칼/A3)에 **A6·100x140 부재** → 단가행 0은 결손이 아니라 binding-validity 위반(가격표에 없는 사이즈 바인딩). 교정 택1: (a) 바인딩 제거(권고·가격표 권위에 사이즈 없음) / (b) 단가 출처 확인 후 verbatim INSERT(현재 출처 미확인 → **추측 적용 금지[HARD·돈크리티컬]**). Q-STK-SIZ1·dbm-price-arbiter.
+
+## STK-7. G-STK-4 — 064 잠정 단가·굿즈 siz 의미혼선 (use_yn=N·긴급도 낮음) `확신도: 높음(BLOCKED)`
+
+064(소량자유형·use_yn=N) 7사이즈 전건 [잠정] B01 col1 규격가(6000/7000) 사이즈무관 복사(실측 미수령)·SIZ_036/043 note=인쇄배경지/인쇄해더택(굿즈 siz 재사용·스티커 의미 충돌). 사용자 "우선 적용·추후변경"(CLAUDE.md §7). 비활성이라 긴급도 낮음 — 활성화 전 실측 소형반칼 단가 + 064 전용 siz 별 채번(굿즈 siz 해소) 선결. Q-STK-064.
+
+## STK-8. 동형결함 3종 모두 구조적 부재 (디지털/아크릴 대조) `확신도: 높음`
+
+- **×qty 폭발 없음**: 단가형(.01)=개당/장당 단가·합가형(.02)=÷min_qty 환산(prc_typ↔단가의미 정합). 디지털 명함(단가의미=세트총액인데 .01) 결함과 정반대.
+- **silent 이중합산 없음**: 각 공식 comp 1개(addtn_yn=Y·합산대상 1·라이브 formula_components 실측).
+- **min_qty NULL ValueError 안전**: 타투 3·팩 54 명시. ★신규 .02 행 INSERT 시 min_qty 명시 가드 필수(NULL→ValueError·아크릴 CLEAR3T/디지털 박 SETUP 동형).
+
+## STK-9. 세트조합 레이어 불요 (단일본체 묶음단위) `확신도: 높음`
+
+타투(3장세트)·팩(54장세트)=단일 본체의 묶음단위(.02 ÷환산)이지 책자/엽서북 같은 다본체 조합 아님(set-pricing P-8b·문구 DT-5·굿즈 GP-DEC-5 동형). **set-product-design.md엔 "스티커=세트조합 없음(단일본체 묶음단위만)" 기록만**(designer 혼동 방지).
+
+## STK-10. 흡수 적용 (absorption-candidates-sticker C-S1~C-S8 — 신규 가격축/테이블 0건) `확신도: 높음`
+
+| 흡수 후보 | 처리 | 근거 |
+|----------|------|------|
+| C-S1 형상=가격축 아님·C-S2 재단=공정 | ✅ **가드 채택**(STK-3·가격엔진 형상 차원 부결) | option-axis≠price-axis |
+| C-S3 사이즈=이산 siz_cd(면적매트릭스 아님) | ✅ **설계 원칙 못박음**(use_dims=siz_cd·wh_rows 0) | benchmark 동의·dbmap area-dim 제외 |
+| C-S4 점착소재 mat_cd 7종 | ✅ 이미 라이브 전개 완료(dbmap "3 collapse" stale) | 라이브 7 mat 실측 |
+| C-S5 소재→후가공 disable 227건 | ➡️ **round-6 CPQ constraints 위임**(가격축 아님·data-gap) | dbm-cpq-option-mapping |
+| C-S6 형태별 frm_cd 분기 | ✅ frm_cd+prc_typ 데이터 분기(엔진 코드 분기 부결·과분화 경계) | PRF_STK_FIXED/TATTOO/PACK/GANGPAN |
+| C-S7 인쇄방식(UV/DTF) | ➡️ 후니 스티커 미실재·watchlist(상품정체+mat_cd) | 권위 엑셀 확인 |
+| C-S8 세트형 .02 합가형 | ✅ 이미 라이브 .02(STK-2·타투/팩) | 라이브 실측 |
+
+신규 가격축/테이블 0건(rpmeta ST distinct #18 부결 정합·6종단 누적 결론 일관). naming 가드[HARD]: shape_info·CUT_DFT·MTRL_CD·digital_price/vTmpl_price 후니 유입 금지.
+
+## STK-11. search-before-mint 결과 — 신규 mint 0건 (전 종단 중 최우월) `확신도: 높음`
+
+| 결함 | 처리 | 신규 mint |
+|------|------|----------|
+| G-STK-1 | 상품 mat 재바인딩(153/162 이미 실재) | 0 |
+| G-STK-2 | 상품 siz 재바인딩(SIZ_520 이미 실재) | 0 |
+| G-STK-3 | 바인딩 제거 or 단가행 verbatim INSERT | 0(신규 코드 아님) |
+| G-STK-4 | 잠정 교체·전용 siz 채번 검토(064 활성화 시) | 0(현재)·채번 시 MAX+1 |
+
+신규 공식/comp/축 = 0. 디지털(박 comp 신설)·아크릴(미러 공식·카라비너 comp/형상 opt_cd)·책자(표지/내지 comp)보다 우월(전부 재바인딩 중심).
+
+## 스티커 컨펌큐 (인간/실무·dbm-price-arbiter 라우팅·미지를 정답으로 위장 안 함)
+
+| ID | 컨펌 | 라우팅 | 사유 |
+|----|------|--------|------|
+| **Q-STK-MAT1** | 055/057 mat 153 재바인딩 시 SIZ_172(A4)×MAT_153 단가행이 낱장 B02 4000을 반환하는지(반칼 SIZ_520 5000 아님) 확인 | dbm-price-arbiter·dbmap | 완칼 낱장 단가체계(B02) 정합 |
+| **Q-STK-SIZ1** | A6(SIZ_196)·100x140(SIZ_058) 실판매 사이즈인가(바인딩 제거 vs 단가 출처) — 가격표 B01 부재 | dbm-price-arbiter | G-STK-3 추측 적용 금지 |
+| **Q-STK-064** | 064 소형반칼 실측 단가 + 굿즈 siz(036/043) 재사용 해소(전용 siz 채번) — 활성화 전 | 실무·채번 트랙 | G-STK-4 의미충돌·use_yn=N |
+| **Q-STK-DSC1** | 단가행 min_qty 구간(36단) + t_dsc 구간할인 이중할인 점검(같은 수량축 2번 안 깎이는지)·스티커 t_dsc 바인딩 여부 | dbmap round-1·dbm-price-arbiter | 할인 적용 순서 정합 |
+| **Q-STK-TAT1** | 타투 base 2000(1~2장) 미반영(min_qty=3·qty_incr=3 정상주문 base 무발현)·1~2장 주문 허용 여부 | 실무 | G-STK-5 컨펌·정상 경로 GO |
+| **Q-STK-PACK1** | 팩 수량 입력 = 장(min_qty=54·÷54)인가 세트(세트당 4000)인가 위젯 UX | 실무·dbmap | G-STK-6 컨펌·현 라이브=장 |
+
+★ 본 설계는 **구조 레벨 확신도 높음**(라이브 SELECT 실측 + 가격표 verbatim + del_yn=Y/형제 precedent 3중 증거 + pricing.py 코드 검증·B06 prc_typ .02 결판·동형결함 3종 부재 확정). **G-STK-3 단가 출처·064 실측 단가는 BLOCKED**(권위 미수령·추측 적용 금지). 실 적용(소재 재바인딩·siz 재바인딩·바인딩 제거)은 **DB 미적재·인간 승인 후 dbmap 위임**(dbm-axis-staged-load·dbm-load-execution·dbm-price-arbiter·webadmin 코드 직접수정 금지). 형상/칼선/재단 = 가격축 밖(상품정체·proc_cd·CPQ·라우팅만).

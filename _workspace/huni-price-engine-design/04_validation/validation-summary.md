@@ -337,3 +337,66 @@ E5·E6 FAIL → 전건 통과 미충족 → **NO-GO**.
 - **GP-1 product_prices INSERT·GP-2 공식2+comp2+단가행·바인딩·할인 링크** → dbm-price-arbiter + 인간 승인 후 dbmap. 평탄화 가드·min_qty=1·멱등·백업·undo. 돈크리티컬.
 - **Q-GP-FIN1** → dbm-price-arbiter. **Q-GP-OPT1** → round-6 dbm-option-mapper(선결). **자재오염 정리** → dbm-axis-staged-load ④자재·ddl-proposer(스코프 밖).
 - **설계 정정-1(LOW)** → designer 폐루프. **codex 2차(Phase 5.5·굿즈/파우치)** → 오케스트레이터 reconcile(본 판정 독립·codex 비참조).
+
+---
+
+# 스티커 (sticker) — 종합 판정: **조건부 GO** (7번째 종단·E1 CONDITIONAL·E2~E7 PASS·보정 1[돈크리티컬 정합])
+
+> hpe-validator 독립 검증 2026-06-20(라이브 읽기전용 SELECT·pricing.py 코드 직접·골든 GC-STK1~8 충실 재구현·허용오차 0). 상세 = `gate-verdict-sticker.md`·`recompute-log-sticker.md`.
+
+스티커는 **6종단 중 라이브 완성도 최고**(공식 4·comp 4·단가행 3,066·바인딩 16/16 전건 실재·dbmap round-23 적재 완주). designer 핵심 명제(이산 siz_cd 단가형·B06 팩 .02 결판·동형결함 3종 부재·G-STK-1~4 바인딩 교정·세트조합 불요·신규 mint 0)를 라이브로 독립 재실측해 **stated 전건 정확**. **단, 독립 교차바인딩 실측이 design 결함 카탈로그 누락 1건(053/054 siz↔mat 교차 no_match·돈크리티컬)을 적발** → 조건부 GO(보정 폐루프). 날조·산식 오류 0.
+
+| 게이트 | 판정 | 핵심 근거 |
+|--------|------|-----------|
+| E1 공식 추출 | **CONDITIONAL** | 가격표 7블록·prc_typ·use_dims·단가행·바인딩 전건 verbatim·v03 미인용·날조0. **단 053/054 siz↔mat 교차바인딩 no_match 결함 카탈로그 누락** |
+| E2 구성요소 분해 | PASS | 가격축 3축뿐(siz/mat/수량)·형상/칼선/재단=가격직교(option-axis≠price-axis)·공식당 comp 1개·시트경계 SOT 1 |
+| E3 흡수 타당 | PASS | 신규 가격축0·naming(shape_info/THO/CUT/digital_price…) 유입0·형상 #17 옵션 distinct≠가격축 분리·후니 표현력 동형 |
+| E4 엔진 건전성 | PASS | NON_QTY_DIMS 정확매칭·.01 unit×qty·.02 ÷min_qty(코드 검증)·.02 NULL min_qty 0행(ValueError 안전)·재바인딩 교정 search-before-mint(신규 mint0) |
+| E5 세트 조합 | PASS | sets 0행·타투/팩=단일본체 묶음단위(부품 합산 아님)·이중계상 구조적 부재·세트레이어 불요 확정 |
+| E6 골든 재현 | PASS | GC-STK1~8 라이브 verbatim 일치(허용오차0)·타투12,000/팩4,000 .02 재계산·B06 54배 왜곡 부재 입증 |
+| E7 독립성 | PASS | B06 prc_typ·del_yn·교차바인딩 라이브 독립 재실측·골든 충실 재구현·053/054 누락 dodge-hunt 적발·self-approve 없음 |
+
+## 라이브 confirm 핵심 (designer 주장 → 직접 재실측)
+
+- **B06 팩 prc_typ 결판**: `COMP_STK_PACK` = **PRICE_TYPE.02**(직접 SELECT) → cartographer/designer 정확·benchmark "54배 왜곡" round-23 이전 stale. 팩 qty54 = 4000÷54×54 = 4,000(폭발 부재).
+- **계산방식**: COMP_STK_PRINT siz_width 0행·siz_cd 2,694행 → 이산 siz_cd 단가형 확정(면적매트릭스 직교·off-grid ceiling 불요).
+- **소재 7종 전개**: mat {153·084·155·156·242·162·163}(3-collapse stale 해소 확인).
+- **G-STK-1**: MAT_000154(유포지) **del_yn=Y**·154/243/167 STK_PRINT 단가행 0행·055/057→154·056→243 바인딩 → no_match. 재바인딩(154→153·243→162) 정답(형제 058~061/052 정본 153·신규 mint0).
+- **G-STK-2 돈크리티컬**: SIZ_172(A4)=4000(낱장)·SIZ_520(A4 반칼)=5000·052~054 SIZ_172 잔존·058~061 SIZ_520 적용 → 장당 1,000 과소청구. 재바인딩(이미 실재 siz).
+- **G-STK-3**: SIZ_196(A6)·SIZ_058(100x140) 전 comp 0행(062 active 보강)·가격표 B01 부재 → binding-validity(추측 INSERT 금지).
+- **16/16 바인딩·공식당 comp 1개·sets 0·t_dsc 0**: 동형결함 3종(×qty/silent/min_qty NULL) 구조적 부재·세트 레이어 불요 확정.
+
+## ★검증 추가 발굴 (design 미카탈로그·E1 누락·보정 요구)
+
+- **053/054 siz↔mat 교차바인딩 no_match**: 053(반칼투명·active)·054(홀로그램·active)의 mat162/163 단가행은 **반칼정사각 사이즈(059/060)에 적재**돼 있으나 상품은 **A5/A4/A6(170/172/196)에 바인딩**.
+  - 053: SIZ_172만 매칭(낱장6행)·170/196 no_match.
+  - 054: **170/172/196 전건 no_match**(mat163 단가행이 059/060/518/519에만) → 054 어느 바인딩 사이즈로도 가격 불가.
+  - **G-STK-2 교정안(052/053/054 SIZ_172→SIZ_520)을 053/054에 그대로 적용 시 SIZ_520×mat162/163 단가행 부재로 여전히 no_match** → **052와 다른 교정 경로**(siz 170/172/196→059/060 재바인딩 or mat162/163 단가행 520/170 적재). 권위 가격표(B01 투명/홀로 사이즈)로 정답 판정. 054 active라 긴급.
+
+## 보정 요구 (재게이트 조건)
+
+**차단 결함(NO-GO) 0건. 보정 요구 1건(🔴 돈크리티컬·E1):**
+- **보정-1**: 053/054 siz↔mat 교차바인딩 no_match를 design 결함 카탈로그(G-STK)에 명시 추가 + 052와 분리된 교정 경로 산출(권위 가격표 대조). 054 active 가격불가 → 긴급. designer 폐루프 + dbm-price-arbiter.
+
+정정 권고 1(LOW·가격 무영향):
+- **정정-1(LOW)**: GC-STK1 골든표 "기대 골든 5,900/6,000"을 "단가행 unit_price(가격표 셀)"로 명시(.01 최종가=×qty와 구분·GC-STK2/3 .02 최종가와 의미 다름·산식은 정확).
+
+## 컨펌큐
+
+| # | 미해소 | 누가 | 영향 |
+|---|--------|------|------|
+| CV-STK-053/054(검증·보정) | 053/054 교차바인딩 no_match·052와 다른 교정경로 | dbm-price-arbiter·designer | 🔴 돈크리티컬(054 active) |
+| Q-STK-MAT1 | 055/057 mat153 재바인딩 시 SIZ_172×153=4000(B02 낱장) — 라이브 검증 완료(정합) | dbm-price-arbiter | 확인됨 |
+| Q-STK-SIZ1 | A6/100x140 실판매 사이즈(바인딩 제거 vs 단가 출처)·062 active no_match | dbm-price-arbiter | 추측 금지 |
+| Q-STK-064 | 064 소형반칼 실측 단가·굿즈 siz(036/043) 재사용 해소·활성화 전 | 실무·채번 | use_yn=N·긴급도 낮음 |
+| Q-STK-DSC1 | 단가행 min_qty 36단 + t_dsc 이중할인 점검(현 t_dsc 0행) | dbmap round-1 | 할인 순서 |
+| Q-STK-TAT1/PACK1 | 타투 base 2000(1~2장)·팩 수량 장/세트 UX | 실무 | 정상 경로 GO |
+| CV-STK-G1(검증·LOW) | GC-STK1 골든=단가행값(최종가 ×qty 아님)·표기 정밀화 | designer | LOW·산식 정확 |
+
+## 라우팅
+
+- **보정-1(053/054 교차바인딩)** → designer 폐루프(카탈로그 보강·교정경로 분리) + dbm-price-arbiter(권위 가격표 대조·추측 금지). 🔴 돈크리티컬.
+- **G-STK-1/2 재바인딩(154→153·243→162·SIZ_172→SIZ_520)** → 인간 승인 후 dbmap(dbm-axis-staged-load ②사이즈·④자재·dbm-load-execution). 멱등·백업·undo·신규 mint0.
+- **G-STK-3/064(Q-STK-SIZ1·Q-STK-064)** → dbm-price-arbiter·실무(추측 적용 금지).
+- **정정-1(LOW)·CV-STK-G1** → designer 폐루프(문서만·가격 무영향).
+- **codex 2차(Phase 5.5·스티커)** → 오케스트레이터 reconcile(본 판정 독립·codex 비참조).
