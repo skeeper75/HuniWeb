@@ -400,3 +400,59 @@ E5·E6 FAIL → 전건 통과 미충족 → **NO-GO**.
 - **G-STK-3/064(Q-STK-SIZ1·Q-STK-064)** → dbm-price-arbiter·실무(추측 적용 금지).
 - **정정-1(LOW)·CV-STK-G1** → designer 폐루프(문서만·가격 무영향).
 - **codex 2차(Phase 5.5·스티커)** → 오케스트레이터 reconcile(본 판정 독립·codex 비참조).
+
+---
+
+# 캘린더 종단 검증 종합 (9번째 종단 · 2026-06-22 · hpe-validator 독립)
+
+## 종합 판정: **GO** (E1~E7 전건 PASS · 차단 0 · 보정 0 · LOW 1)
+
+캘린더 = 디지털 PRF_DGP 원자합산 직계 동형 + 캘린더가공 add-on(LINEN_FINISH opt_cd 그릇) + 제본비 부당가 단가행(.01 tier). designer 설계를 라이브 직접 SELECT + pricing.py 코드 + python 골든 독립 재산출로 재실측 → 돈크리티컬 4종 전부 라이브+코드 입증·골든 9/9 허용오차 0·inline BLOCKED 정당.
+
+| 게이트 | verdict |
+|--------|---------|
+| E1 공식 추출 충실성 | PASS (calc-draft r94~98 원자합산·두 시트 매핑·v03 0) |
+| E2 구성요소 분해 정합 | PASS (4비목 시트경계·proc 이원화 정합·페이지수 곱 차원) |
+| E3 경쟁사 흡수 타당성 | PASS (naming 유입 0건 실측·새 축 0·갭헌팅만) |
+| E4 엔진 설계 건전성 | PASS (제본비 .01 라이브+코드 입증·search-before-mint 9연속·선점가드 코드입증) |
+| E5 세트 조합 정합 | PASS (sets 0행·본체단일+가공가산·봉투 addon 위임·이중계상 0) |
+| E6 골든 재현 | PASS (제본 6/6 + 가공 3/3 허용오차 0·inline BLOCKED 정당) |
+| E7 생성검증 독립성 | PASS (직접 재실측·dodge 0·WALL 행수 1건 정정) |
+
+## ★inline 골든 BLOCKED 재판정 결론
+
+**designer BLOCKED = 정당(추측 회피=정직·designer 산식 오류 아님).** 독립 python 역산: inline 5상품 전부 인쇄+용지 잔여가 출력판수 정수해 없음(1.31/0.49/1.29/1.57). inline = 에디터형 1부 정찰가 스냅샷이지 단가행 합산 결과 아님. 추측 단가 product_prices INSERT 회피 옳음(INSERT 시 G-CAL-2 선점 우회 이중 위험). Q-CAL-GOLDEN 인간 컨펌 라우팅 정합.
+
+## 돈크리티컬 가드 실재성 (라이브+pricing.py 코드 입증)
+
+- **G-CAL-BIND**(.01 유지): 라이브 4 comp PRICE_TYPE.01·pricing.py:180/186 단가형 ×qty·GC-CAL-2 .02오답=4000 붕괴 → 실재.
+- **G-CAL-PAGE**(페이지수 곱): calc-draft r96 명문·누락 시 4~16배 과소청구 → 실재.
+- **G-CAL-1 평탄화**: GC-CAL-7(4000) vs 8(1000) opt_cd 판별·NON_QTY_DIMS에 opt_cd 포함 → 실재.
+- **G-CAL-2 선점**: pricing.py:315-330 product_prices 선점→FORMULA 우회 silent·라이브 0행 자동충족 → 실재.
+
+## 보정 요구 (재게이트 조건)
+
+**차단 결함(NO-GO) 0건 · 보정 폐루프 항목 0건 · designer 재설계 불요.**
+
+정정 권고 1(LOW·가격 무영향):
+- **LOW-1**: designer §0·§3.5 "WALL 통합 42행" → 라이브 실측 **24행**(4 proc × 6 tier). 행수 오기·가격 결과 무관(단가 verbatim 동일·구조 판정[4 proc 통합]은 정확). 적재 시 행수 표기만 정정.
+
+## 컨펌큐 (차단 아님·designer 정직 표기 8건 검증가 동의)
+
+| # | 미해소 | 누가 |
+|---|--------|------|
+| Q-CAL-GOLDEN | inline 정찰가 vs 단가행 산식 권위(BLOCKED) | 상품마스터↔가격표·인간 |
+| Q-CAL-BIND-DELYN | WALL 통합 사용 vs DESK(del_yn=Y) 부활 | dbm-price-arbiter·인간 |
+| Q-CAL-FIN | 가공 add-on 개당 ×수량 vs 주문당 정액 | calc-draft=개당 가설·인간 |
+| Q-CAL-PROC-INJECT | 사이즈→제본비 proc_cd 자동주입 option_items 적재 | round-6 dbm-option-mapper |
+| Q-CAL-DESK130 | 탁상형 220/130 한 공식 proc 분기 vs 별 공식 | designer |
+| Q-CAL-PLATE | 와이드 plate(SIZ_000292)↔인쇄비 단가행(SIZ_000077 3절) 정합 | 가격표 대조 |
+| Q-CAL-PKG | 수축포장/개별포장 가격 영향(공란·무료 vs 가산) | 상품마스터·인간 |
+| Q-CAL-ENVELOPE | 캘린더봉투(PRD_000005·PRD_TYPE.03) addon vs 독립 | 봉투제작 트랙 위임 |
+
+## 라우팅
+
+- **GO 설계 실 적용** → 인간 승인 후 dbmap(dbm-load-execution PRF_CAL_* 신설·formula_components 배선·product_price_formulas 바인딩·COMP_CALOPT_STAND 단가행·OPV 채번). 제본비 단가행 무변경(이미 .01 verbatim).
+- **LOW-1** → designer 폐루프(문서 행수 표기만·가격 무영향).
+- **컨펌큐 8건** → 해당 트랙(dbm-price-arbiter·dbm-option-mapper·봉투제작·인간).
+- **codex 2차(Phase 5.5·캘린더)** → 오케스트레이터 reconcile(본 판정 독립·codex 비참조).

@@ -809,3 +809,77 @@ cartographer "팩/타투 .02 교정 완료" vs benchmark "B06 .01 오적재→.0
 | **Q-AC-OTC-CASCADE** | 봉투 addon 단가가 본체(엽서) 사이즈와 캐스케이드(봉투 규격↔엽서 규격 매칭)? 현 캐스케이드 0. | rpmeta PO addon·designer |
 
 ★ 본 설계는 **구조 레벨 확신도 높음**(라이브 SELECT 실측 + 상품마스터 I열 verbatim L1 67행 + LINEN_FINISH 그릇 선례 + pricing.py 코드 검증·굿즈 GP-1/GP-2 직계 동형). **Q-AC-TMPL 카드봉투 50장 묶음 단가는 BLOCKED**(시트 부재·추측 금지). 실 적용(AC-1 product_prices·AC-2 공식/comp/단가행/바인딩·addon template_prices)은 **DB 미적재·인간 승인 후 dbmap 위임**(dbm-load-execution·dbm-price-arbiter·dbm-axis-staged-load·webadmin 코드 직접수정 금지). 신규 mint=공식 3+comp 3 뿐·신규 테이블/가격축/할인테이블 0. 색상/형상=가격축 밖(상품정체·자재축·라우팅만).
+
+---
+
+# 캘린더 종단 설계 결정 (9번째 종단 · 2026-06-22)
+
+> 캘린더 5 완제품(탁상형·미니탁상형·엽서·벽걸이·와이드벽걸이). 계산방식=원자합산형(디지털 PRF_DGP 직계). 라이브 읽기전용 SELECT 2026-06-22. 권위=상품마스터260610+가격표260527 절대.
+
+## D-CAL-1. 계산방식 = 원자합산형 (디지털 PRF_DGP_A/E 직계 chassis) `확신도: 높음`
+
+**결정**: 캘린더 = 원자합산형(`판매가 = 인쇄비 + 용지비 + (제본비 or 캘린더가공비)`). 디지털 PRF_DGP_A/E chassis 재사용 — 인쇄비(COMP_PRINT_DIGITAL_S1)·용지비(COMP_PAPER) comp 100% 재사용·신규 mint 금지.
+
+**근거**: calc-formula-draft-l1.csv r94 `[원자합산형: 캘린더]` 절대 권위 명문. 1차 가설(variant 고정가형=굿즈 GP-2)은 cartographer가 이미 반증(디자인캘린더 inline=합산 결과 스냅샷이지 매트릭스 단가표 아님). 라이브 COMP_BIND_CAL_*가 제본비를 별 비목 단가행으로 적재한 사실이 합산형 입증. 차이는 페이지수 곱 하나뿐(엽서=1장·캘린더=4~16장).
+
+## D-CAL-2. ★제본비 prc_typ = .01 단가형 ×qty (부당가) — 라이브 결판 `확신도: 높음`
+
+**결정**: 캘린더 제본비(COMP_BIND_CAL_*) = **PRICE_TYPE.01 단가형 ×qty**. 단가=부당(권당)·min_qty(1/4/10/50/100/1000)=tier 룩업 키이지 분모 아님. **합가형(.02) ÷min_qty 적용 절대 금지**(G-CAL-BIND·돈크리티컬).
+
+**근거 (3원 정합·라이브 실측 2026-06-22)**:
+- 라이브 COMP_BIND_CAL_DESK130/220/MINI/WALL 4 comp **전부 prc_typ_cd=PRICE_TYPE.01**(직접 SELECT).
+- 가격표 B03 = "부당(권당) 단가·수량↑→단가↓ 볼륨디스카운트"(benchmark §4.2 라벨).
+- RedPrinting 실측 = 삼각대/제본이 사이즈/수량 종속 단가(297,000@500부=594원/부 ≈ 개당가×수량).
+- ★cartographer "수량구간형"·benchmark "부당×수량 .01" 충돌 종결 = **둘 다 같은 것**(.01 단가형 + min_qty tier). cartographer GAP-3 컨펌큐 해소.
+- ★디지털 명함과 결정적 다름: 명함 STD 3,500은 "100매 묶음총액"이라 .01→.02 **교정** 필요했으나, 캘린더 제본비는 진짜 **개당가**라 .01이 정답(교정 불요). qty=4 주문 시 16,000(정답) vs 4,000(합가형 붕괴) — GC-CAL-2 입증.
+
+## D-CAL-3. ★페이지수(장수) 곱 = 인쇄비·용지비 load-bearing 차원 `확신도: 높음`
+
+**결정**: 출력매수 = 주문수량 × **페이지수** / 판걸이수(앱 임포지션 계산·DB 미저장). 인쇄비·용지비가 출력판형당 단가 × 총출력판수이고, 캘린더 페이지수(4~16장)가 곱해짐. 누락 시 인쇄비·용지비 4~16배 과소청구(G-CAL-PAGE·돈크리티컬).
+
+**근거**: calc-draft r96 `인쇄비 = [총출력장수/판걸이수] × 인쇄비`·총출력장수=주문수량×페이지수. comp 자체는 페이지수 차원 미보유(디지털 엽서 chassis와 동일·페이지수=수량 배수로 앱이 출력매수에 반영). 판걸이수=앱 계산([[dbmap-compute-in-app-db-stores-lookup]]).
+
+## D-CAL-4. 캘린더가공 add-on = LINEN_FINISH 그릇 직계 (search-before-mint) `확신도: 높음`
+
+**결정**: 캘린더가공 add-on(우드거치대4000·1구타공+끈1000·2구타공+끈1500) = 신규 comp COMP_CALOPT_STAND 1개·use_dims=[opt_cd, min_qty]·.01 단가형 ×qty. opt_cd 차원으로 가공별 단가(평탄화 가드 G-CAL-1). 트윈링제본(2000)은 제본비(COMP_BIND_CAL_WALL)로 분기(가공 아님·제본방식).
+
+**근거 (search-before-mint)**: 라이브 COMP_POSTEROPT_LINEN_FINISH(dbmap round-23 린넨 COMMIT) = use_dims=["opt_cd","min_qty"]·.01·min_qty NULL(×qty)·OPV opt_cd로 가공별 단가(800/1000/2000). 캘린더가공이 정확히 이 그릇 — **신규 테이블/가격축 0**. 신규 = comp 1(CALOPT_STAND)+opt_cd 채번(OPV MAX+1)뿐. 굿즈 GP-2·상품악세사리 AC-2 평탄화 가드 동형.
+
+## D-CAL-5. ★PRODUCT_PRICE 선점 가드 = product_prices 0행 자동 충족 `확신도: 높음`
+
+**결정**: 캘린더 본체 = formula(PRF_CAL_*) 바인딩만·product_prices INSERT 금지. 현 product_prices 0행이라 선점 위험 0이나 적재 시 박제.
+
+**근거**: 라이브 t_prd_product_prices(108~112) 0행 실측. pricing.py 가격소스 우선순위 PRODUCT_PRICE→FORMULA. 본체를 product_prices에 1건이라도 INSERT하면 FORMULA(원자합산) 통째 우회 silent(GP-2 G-GP-3 선례·codex 독립발견). ★디자인캘린더 inline 정찰가를 product_prices에 박으려는 유혹이 위험(D-CAL-7 BLOCKED와 연결).
+
+## D-CAL-6. 공식 분할 = 제본방식(사이즈)별 전용 PRF + proc_cd 판별 `확신도: 중`
+
+**결정**: PRF_CAL_DESK220/DESKMINI/POSTCARD/WALL/WALLWIDE 5 공식 신설. 제본비 comp가 사이즈별 분리(DESK220/130/MINI/WALL)라 한 공식에 다 배선하면 동시매칭 → 제본방식별 전용 PRF + proc_cd(99~102) 판별차원으로 분기(디지털 명함 variant별 PRF 교훈 동형).
+
+**근거**: 제본비 use_dims=[proc_cd, min_qty]·룩업 키=proc_cd(99~102). 상품 공정 바인딩 proc(21트윈링/79타공/76수축포장)과 **완전 별개**(GAP-5 이원화·실측). 상품 proc=생산 BOM·MES / 제본비 proc=가격 룩업. WALL comp는 4 proc 통합(42행)이라 벽걸이/와이드가 어느 제본 골라도 proc_cd 주입으로 정확 1행 매칭.
+
+## D-CAL-7. ★디자인캘린더 inline 합산 골든 = BLOCKED (재현 불가·추측 단가 금지) `확신도: 높음`
+
+**결정**: 디자인캘린더(가격포함) inline 가격(탁상220=10,400·미니=6,500·엽서=4,000·벽걸이=9,900·와이드=24,000)을 §2 원자합산 공식으로 재계산 → **단가행 산식과 깨끗이 재현 안 됨 → BLOCKED 정직 표기**. 추측 단가 INSERT 금지.
+
+**근거 (역산 실측·python 재계산 2026-06-22)**: inline에서 제본비(라이브 verbatim) 빼도 인쇄+용지 잔여(미니2000·엽서4000·탁상5400·벽걸이4900·와이드19000)가 출력판형당 단가×페이지수×판걸이수 산식으로 **깨끗한 정수해를 안 줌**. inline = 에디터형 디자인 상품의 1부 정찰가 스냅샷(장수 칸 공란·소비자 표시가)으로 보임 — 단가행 합산 결과 아님(formula-map §6 정합). benchmark CQ-1(제본/가공 그릇 이중성) 정합. ★두 그릇 충돌(단가행 산식 vs inline 정찰가) → 인간 컨펌(어느 게 권위인지). 1차 설계=단가행 산식(FORMULA), inline은 BLOCKED. inline을 product_prices로 박으면 D-CAL-5 선점 우회까지 발동(이중 위험).
+
+## D-CAL-8. del_yn 정합 — DESK 논리삭제·WALL 통합 (컨펌큐) `확신도: 중`
+
+**결정**: COMP_BIND_CAL_DESK130/220/MINI = del_yn='Y'(논리삭제)·WALL = del_yn='N'(활성·4 proc 통합). 설계 권장 = (a) WALL 통합 comp 단독 사용(전 캘린더 제본비를 WALL 하나로·proc_cd 분기). DESK 부활 불요. 단가 양쪽 동일(verbatim)→가격 불변·배선 경로만 다름.
+
+**근거**: 라이브 실측 del_yn. WALL이 99/100/101/102 단가행 42행 통합 보유. ★권위 미확정(WALL 통합 의도 vs DESK 분리 의도) → 인간 컨펌(Q-CAL-BIND-DELYN). dbm-price-arbiter 심의.
+
+## 컨펌큐 (캘린더·인간/designer·차단 아님)
+
+| ID | 질문 | 권위 후보 |
+|----|------|-----------|
+| **Q-CAL-GOLDEN** | ★디자인캘린더 inline 정찰가(10,400 등) vs 단가행 산식 — 어느 게 권위? inline을 product_prices(GP-1)로 갈지 단가행 산식(FORMULA)로 갈지 | 상품마스터↔가격표 교차·인간(BLOCKED) |
+| **Q-CAL-BIND-DELYN** | COMP_BIND_CAL_DESK130/220/MINI(del_yn=Y) — WALL 통합 사용(부활 불요) vs DESK 부활? | dbm-price-arbiter·인간 |
+| **Q-CAL-FIN** | 캘린더가공 add-on(우드4000·타공1000) 개당 가산(×수량) vs 주문당 정액? | calc-draft r98=개당 가설·상품마스터 명시 부족·인간(굿즈 Q-GP-FIN1 동일) |
+| **Q-CAL-PROC-INJECT** | 사이즈→제본비 proc_cd(99~102) 자동주입 option_items 적재 선결(현 0행)·미연결 시 디폴트 제본방식? | round-6 dbm-option-mapper |
+| **Q-CAL-DESK130** | 탁상형(108) 220/130 두 사이즈 — 한 공식 proc 분기 vs 별 상품/공식 분리? | designer·라이브 사이즈 구조 |
+| **Q-CAL-PLATE** | 와이드 plate=SIZ_000292(304x629)인데 인쇄비 단가행 plt_siz=SIZ_000077(3절·300x625) — 와이드 인쇄비 룩업 판형 정합? | 가격표·plate↔단가행 대조 |
+| **Q-CAL-PKG** | 수축포장(PROC_000076·탁상형)·개별포장 가격 영향(추가가격 칸 공란·무료 vs 가산)? | 상품마스터·인간 |
+| **Q-CAL-ENVELOPE** | 캘린더봉투(PRD_000005·012-0008·2400~2500) addon vs 독립상품 경계? | 봉투제작 트랙 위임(엽서 봉투 동형) |
+
+★ 본 설계는 **구조 레벨 확신도 높음**(라이브 SELECT 실측 + 제본비 prc_typ 라이브 결판 + LINEN_FINISH 그릇 선례 + 디지털 PRF_DGP 직계 동형 + product_prices 0행 선점 가드 자동 충족). **★디자인캘린더 inline 합산 골든은 BLOCKED**(역산 비정합·추측 단가 0·Q-CAL-GOLDEN). 신규 mint = **공식 5(PRF_CAL_*) + comp 1(COMP_CALOPT_STAND) + opt_cd 채번뿐**·신규 테이블/가격축/할인테이블 0·search-before-mint 9연속 통과. 실 적용(PRF_CAL_* 신설·formula_components 배선·product_price_formulas 바인딩·COMP_CALOPT 단가행)은 **DB 미적재·인간 승인 후 dbmap 위임**(dbm-load-execution·dbm-price-arbiter·dbm-axis-staged-load·webadmin 코드 직접수정 금지). 제본비 단가행 무변경(이미 .01·verbatim).

@@ -1,14 +1,12 @@
 # Huni-Price-Engine-Design 하네스 — HANDOFF
 
-> CLAUDE.md §18 · 갱신 2026-06-22 · 종단 GO 8건(상품악세사리 첫 게이트 GO 완료)
+> CLAUDE.md §18 · 갱신 2026-06-22 · 종단 GO 9건(캘린더 첫 게이트 GO 완료)
 
 ## 다음 시작점
 
-**★상품악세사리 GO 완료**(2026-06-22·첫 게이트 GO→codex high divergence 0→박제·이력·커밋). 굿즈 GP-1/GP-2 직계 동형(inline 고정가형)·신규 mint=공식3+comp3·OTC 이중등록 사실무근 정정. 8종단 완주 = 계산방식 전수 커버.
+**★캘린더 GO 완료**(2026-06-22·첫 게이트 GO→codex high divergence 0→박제·이력·커밋). **원자합산형(디지털인쇄 직계 동형)·1차 가설 variant 고정가형 반증.** 차별차원=페이지수(4~16장)·제본비 .01 부당가 확정(디지털 합가형과 정반대)·신규 mint=공식5+comp1·inline 합산 골든 BLOCKED 정직(정수해 없음=정찰가 스냅샷)·process_excl_groups 테이블 라이브 부재 정정. **9종단 완주 = 계산방식 전수 커버.**
 
-**다음 후보(동형 전파)**: 캘린더(공정택일그룹). Phase1(cartographer 지도)→benchmark→designer→validator E1~E7→codex Phase5.5 순.
-
-**그 다음 남은 동형 전파 후보**: 캘린더(공정택일그룹) 외 미종단 상품군.
+**다음 후보(동형 전파)**: 포토북(가격포함)·디자인캘린더(가격포함·캘린더 inline 권위 결판 Q-CAL-GOLDEN 연계) 외 미종단 상품군. Phase1(cartographer 지도)→benchmark→designer→validator E1~E7→codex Phase5.5 순.
 - **실 적재 승인 대기(누적)**: 디지털 prc_typ 교정(.01→.02)·아크릴 G-A1 바인딩·실사 후가공 배선·문구(본체 product_prices·떡메모 바인딩·DSC 링크 4건)·책자(W1 제본비 재배선·W2 중철 단가행 교정=과청구 50%)·굿즈/파우치(GP-1 product_prices·GP-2 formula+variant 단가·★GP-2 product_prices INSERT 금지 가드·구간할인 base) — 전부 인간 승인 후 dbm-axis-staged-load/dbm-load-execution/dbm-price-arbiter 위임.
 
 ## 진행 현황
@@ -23,6 +21,7 @@
 | 굿즈/파우치 | 고정가형 2서브유형(GP-1 단일/GP-2 변형) | **E1~E7 전건 PASS·GO**(첫 게이트·차단0·LOW1) | GO 지지(**high**·divergence 0) |
 | 스티커 | 이산 siz_cd 단가형+세트 합가형(면적 직교) | **재게이트 GO**(E1 CONDITIONAL→PASS·보정-1 RESOLVED·차단0) | GO 지지(**high**·divergence 0) |
 | 상품악세사리 | inline 고정가형(굿즈 GP-1/GP-2 동형) | **첫 게이트 GO**(E1~E7 전건·차단0·보정0·LOW1) | GO 지지(**high**·divergence 0) |
+| 캘린더 | 원자합산형(디지털인쇄 직계 동형·페이지수 곱·제본비 .01 부당가) | **첫 게이트 GO**(E1~E7 전건·차단0·보정0·LOW1) | GO 지지(**high**·divergence 0) |
 
 ## 미해결 / 블로커 (전부 DB 미적재·인간 승인 후 dbmap 위임)
 
@@ -53,6 +52,13 @@
 - G-GP-3 평탄화 함정: GP-2 variant축 use_dims 판별차원 충전(평탄화 시 M주문 S가격 오청구).
 - Q-GP-FIN1(가공 가산 개당/×수량·돈크리티컬)·Q-GP-OPT1(GP-2 option_items 적재 선결)·Q-GP-CFLAT(C열 단가 추출)·Q-GP-7(폰케이스 등록).
 - 자재 오염(.09 74행)·3GAP(SHAPE/COUNT/OPT)은 가격엔진 스코프 밖 → dbmap 자재축 트랙 위임.
+
+**캘린더(GO·차단 아님):**
+- ★Q-CAL-GOLDEN(BLOCKED): 디자인캘린더 inline 가격(탁상10400 등)이 단가행 합산과 정수해로 안 맞음(정찰가 스냅샷 추정) → inline vs 산식 어느 게 권위인지 상품마스터↔가격표 교차대조+인간 결판. 추측 단가 INSERT 금지.
+- ★G-CAL-PAGE 양방향(codex CX-CAL-A): 페이지수(4~16) 곱을 전역 qty로 넣으면 제본비/가공비도 ×페이지수 과대청구 → 인쇄/용지에만 적용되는 컴포넌트별 수량 산식 필요(양방향 명문화).
+- ★Q-CAL-TWINRING-DOUBLE(codex CX-CAL-B): 트윈링제본 가공칸(2000) vs WALL 제본비(5000) 이중계상 경계 → COMP_CALOPT opt_cd에 트윈링 넣지 말 것 박제.
+- Q-CAL-BIND-DELYN(WALL 통합 사용 vs DESK130/220/MINI del_yn=Y 부활)·Q-CAL-FIN(가공 add-on 개당 ×수량 vs 정액)·Q-CAL-PROC-INJECT·Q-CAL-DESK130·Q-CAL-PLATE(와이드 SIZ_292↔인쇄비 SIZ_077)·Q-CAL-PKG·Q-CAL-ENVELOPE(캘린더봉투 PRD_000005 addon vs 독립).
+- 실 적용=PRF_CAL_* 5공식 신설·formula_components 배선·product_price_formulas 바인딩·COMP_CALOPT_STAND 단가행·OPV 채번. 제본비 단가행 무변경(이미 .01 verbatim). 전부 인간 승인 후 dbm-load-execution/dbm-price-arbiter 위임.
 
 **디지털인쇄:** 박 동판 정액(차선A qty=1 격리 vs B 정액 prc_typ 신설)·인쇄면 통합 단가행 병합·G-7 옵션 자동주입.
 **아크릴:** CA-1 미러 합류(mat_cd 판별차원 선결·돈크리티컬)·CA-4 후가공 개당/×수량·CA-3 카라비너 신설.
