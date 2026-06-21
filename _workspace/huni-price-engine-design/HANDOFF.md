@@ -1,14 +1,14 @@
 # Huni-Price-Engine-Design 하네스 — HANDOFF
 
-> CLAUDE.md §18 · 갱신 2026-06-22 · 종단 GO 7건(스티커 보정-1 폐루프 후 재게이트 GO 완료)
+> CLAUDE.md §18 · 갱신 2026-06-22 · 종단 GO 8건(상품악세사리 첫 게이트 GO 완료)
 
 ## 다음 시작점
 
-**★스티커 GO 완료**(2026-06-22·보정-1 폐루프→재게이트 GO→codex high divergence 0→박제·이력·커밋). 7종단 완주 = 계산방식 전수 커버(원자합산·면적매트릭스·수량구간·고정가+구간할인·반제품 세트·이산 siz_cd 단가형).
+**★상품악세사리 GO 완료**(2026-06-22·첫 게이트 GO→codex high divergence 0→박제·이력·커밋). 굿즈 GP-1/GP-2 직계 동형(inline 고정가형)·신규 mint=공식3+comp3·OTC 이중등록 사실무근 정정. 8종단 완주 = 계산방식 전수 커버.
 
-**다음 후보(동형 전파)**: 상품악세사리(OTC 템플릿 이중등록·사이즈 3축)·캘린더(공정택일그룹). 둘 중 사용자 지정 상품군부터 Phase1(cartographer 지도)→benchmark→designer→validator E1~E7→codex Phase5.5 순.
+**다음 후보(동형 전파)**: 캘린더(공정택일그룹). Phase1(cartographer 지도)→benchmark→designer→validator E1~E7→codex Phase5.5 순.
 
-**그 다음 남은 동형 전파 후보**: 상품악세사리(OTC 템플릿 이중등록·사이즈 3축)·캘린더(공정택일그룹).
+**그 다음 남은 동형 전파 후보**: 캘린더(공정택일그룹) 외 미종단 상품군.
 - **실 적재 승인 대기(누적)**: 디지털 prc_typ 교정(.01→.02)·아크릴 G-A1 바인딩·실사 후가공 배선·문구(본체 product_prices·떡메모 바인딩·DSC 링크 4건)·책자(W1 제본비 재배선·W2 중철 단가행 교정=과청구 50%)·굿즈/파우치(GP-1 product_prices·GP-2 formula+variant 단가·★GP-2 product_prices INSERT 금지 가드·구간할인 base) — 전부 인간 승인 후 dbm-axis-staged-load/dbm-load-execution/dbm-price-arbiter 위임.
 
 ## 진행 현황
@@ -22,6 +22,7 @@
 | 책자 | 반제품 세트 부품 합산(두 갈래) | **E1~E7 전건 PASS·GO**(첫 게이트·차단0·보정0) | GO 지지(**high**·divergence 0) |
 | 굿즈/파우치 | 고정가형 2서브유형(GP-1 단일/GP-2 변형) | **E1~E7 전건 PASS·GO**(첫 게이트·차단0·LOW1) | GO 지지(**high**·divergence 0) |
 | 스티커 | 이산 siz_cd 단가형+세트 합가형(면적 직교) | **재게이트 GO**(E1 CONDITIONAL→PASS·보정-1 RESOLVED·차단0) | GO 지지(**high**·divergence 0) |
+| 상품악세사리 | inline 고정가형(굿즈 GP-1/GP-2 동형) | **첫 게이트 GO**(E1~E7 전건·차단0·보정0·LOW1) | GO 지지(**high**·divergence 0) |
 
 ## 미해결 / 블로커 (전부 DB 미적재·인간 승인 후 dbmap 위임)
 

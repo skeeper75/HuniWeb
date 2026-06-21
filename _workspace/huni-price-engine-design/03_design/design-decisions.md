@@ -721,3 +721,91 @@ cartographer "팩/타투 .02 교정 완료" vs benchmark "B06 .01 오적재→.0
 | **Q-STK-PACK1** | 팩 수량 입력 = 장(min_qty=54·÷54)인가 세트(세트당 4000)인가 위젯 UX | 실무·dbmap | G-STK-6 컨펌·현 라이브=장 |
 
 ★ 본 설계는 **구조 레벨 확신도 높음**(라이브 SELECT 실측 + 가격표 verbatim + del_yn=Y/형제 precedent 3중 증거 + pricing.py 코드 검증·B06 prc_typ .02 결판·동형결함 3종 부재 확정). **G-STK-3 단가 출처·064 실측 단가는 BLOCKED**(권위 미수령·추측 적용 금지). 실 적용(소재 재바인딩·siz 재바인딩·바인딩 제거)은 **DB 미적재·인간 승인 후 dbmap 위임**(dbm-axis-staged-load·dbm-load-execution·dbm-price-arbiter·webadmin 코드 직접수정 금지). 형상/칼선/재단 = 가격축 밖(상품정체·proc_cd·CPQ·라우팅만).
+
+---
+
+# 상품악세사리 — 설계 결정 (AC-1/AC-2 + 이중역할 SKU·7번째 종단·굿즈 GP-1/GP-2 직계 동형)
+
+> 7번째 종단(디지털·아크릴·실사현수막·문구·책자·굿즈/파우치 다음). 굿즈/파우치 GO 설계(GP-1/GP-2·G-GP-1 variant-매트릭스·G-GP-3 평탄화·GP-2 PRODUCT_PRICE 선점 가드)를 직계 전파. 라이브 실측 2026-06-22. 각 결정 출처+확신도.
+
+## D-AC-1. AC = inline 고정가형 단일 유형 (계산공식집초안 row 부재·시트가 권위) `확신도: 높음`
+
+**결정**: 상품악세사리 14상품(67 variant행)을 전부 inline 고정가형으로 설계 — AC-1 단일고정가 3 + AC-2 변형고정가 11. 면적매트릭스·원자합산·세트조합·**수량구간할인 전부 0**.
+
+**근거(실측)**: calc-formula-draft-l1.csv에 상품악세사리 전용 공식 row 부재. 상품마스터 상품악세사리(가격포함) 시트 `가격`(I열)이 가격 권위(L1 67행 inline verbatim). 부자재=인쇄 BOM(자재/공정/도수/판형) 없는 완제 부속 → 공식 합산이 아니라 variant당 고정 단가표. 라이브 product_prices/formula/template_prices 전부 0행(6종단 통틀어 가격사슬 최저).
+
+**흡수**: benchmark C-AC1(레드 tmpl_price·와우 jobcost unit=개) — 개당 고정단가형이 가격공식 클래스로 굿즈 GP-1과 동형. naming(`tmpl_price`/`jobcost`) 유입 금지.
+
+## D-AC-2. AC-1 = PRODUCT_PRICE 직접 고정가 (통합 comp 공식 부결·굿즈 GP-1·문구 DT-1 동형) `확신도: 높음`
+
+**결정**: AC-1 3상품(볼체인1000/와이어링500/리필잉크2500)을 `t_prd_product_prices` unit_price 1행 INSERT(PRODUCT_PRICE 경로). 명함식 통합 comp 공식 부결(과설계).
+
+**근거**: AC-1은 단일 고정가(색상 variant 동가·distinct 가격=1·L1 실측 볼체인 8색 전부 1000). product_prices 1행이 무손실 표현. 소재/사이즈/세트 단가 분기 없어 comp 매트릭스 불필요. 굿즈 GP-1·문구 DT-1 동형 결판.
+
+**★굿즈와 결정적 차이[HARD]**: AC-1엔 **수량구간할인 없음**(부자재 미해당·라이브 t_prd_product_discount_tables 0행 정당). 굿즈 GP-1은 DSC_GOODSA/B 등 4타입 택1이 본질이었으나 부자재는 구간할인 미바인딩 → `_quantity_discount` no-op이 정상. **할인 링크 발명 금지.**
+
+## D-AC-3. AC-2 = (b)variant-매트릭스 formula (G-AC-1 결판·굿즈 G-GP-1 전파·LINEN_FINISH 선례) `확신도: 높음`
+
+**결정**: AC-2 11상품 변형단가를 variant-매트릭스 formula로 — 공식 3(PRF_ACC_SIZED/BUNDLE/VARIANT)·comp 3(COMP_ACC_SIZED/BUNDLE/VARIANT)·use_dims=[siz_cd]/[siz_cd,bdl_qty]/[opt_cd]·variant당 단가행 1행. variant별 별 prd_cd(a)·option_items add_price(c) 부결.
+
+**근거(라이브 search-before-mint 2026-06-22)**: `t_prc_component_prices`에 siz_cd·opt_cd·bdl_qty 차원 컬럼 실재(information_schema). `COMP_POSTEROPT_LINEN_FINISH` use_dims=["opt_cd","min_qty"]·PRICE_TYPE.01 라이브 실작동(dbmap round-23 린넨 COMMIT)=GP-2 그릇 선례. 무손실 표현=vessel-gap 해소(신규 mint=공식 3+comp 3 뿐·신규 테이블/축 0). add_price 컬럼은 라이브 부재(부결).
+
+**흡수**: benchmark C-AC1(b)·굿즈 GP-2 전파. 아크릴 면적매트릭스 1축 축소판.
+
+**trade-off**: 공식 3 vs 상품별 공식 11. 3공식 공유(맛간장 철학)·variant 단가행만 상품별. variant축 의미(규격/묶음/색상)로만 갈라 최소 mint.
+
+## D-AC-4. ★G-AC-2 묶음 .01 팩단가 가드 (합가형 절대 금지·돈크리티컬) `확신도: 높음`
+
+**결정**: COMP_ACC_* prc_typ_cd=`PRICE_TYPE.01`(단가형) 강제. "(50장)"·"(20장)" 묶음수를 합가형(.02·÷min_qty)으로 처리 금지.
+
+**근거(코드)**: inline 가격=1팩 단가(OPP 70x200 1100=50장 1팩당). 단가형(.01)이면 component_subtotal(:177-183)=unit×qty(÷ 미발생). 합가형(.02)이면 unit÷min_qty×qty(:181)로 1100원이 22원/장 환산되어 묶음수 다른 variant 가격 전손(98% 손실·golden GC-AC §2-2 양면). 봉투제작(PRD_000050 별 상품군)은 합가형이나 상품악세사리 봉투는 inline 고정가형으로 정반대.
+
+**★bdl_qty는 식별차원이지 ÷ 분모 아님[HARD]**: 트래싱지 bdl_qty=20/40/100은 단가행 룩업 판별차원(어느 묶음팩이냐)이지 component_subtotal의 ÷min_qty 분모가 아니다(분모는 .02 tier_min_qty·:181). bdl_qty=100 단가행 28000="100장 1팩당"·×qty(팩수) 정당. 책자 제본비 .01 정당 단가·디지털 명함 .01→.02 무비판 전이 금지 교훈 동형.
+
+## D-AC-5. ★G-AC-1 평탄화 가드 + GP-2 PRODUCT_PRICE 선점 가드 (둘 다 돈크리티컬·굿즈 codex 발견 재적용) `확신도: 높음`
+
+**결정**: ① AC-2 variant 각 행을 component_prices 1행+use_dims 판별차원(siz_cd/opt_cd/bdl_qty) 충전(평탄화 절대 금지). ② AC-2 11상품 product_prices INSERT 금지·formula 바인딩만(AC-1 3상품만 product_prices).
+
+**근거(코드)**: ① 평탄 적재 시 OPP 230x350 주문에 70x200 가격(66% 과소)·트래싱지 100장에 20장 가격(78% 과소·golden §2-1 양면). ② 엔진 우선순위 PRODUCT_PRICE→FORMULA(:316→324)로 AC-2에 product_prices 1건이라도 있으면 FORMULA 우회되어 variant 단가 영영 안 먹힘(평탄화보다 더 silent·경고 없음·굿즈 codex Phase5.5 독립 발견). AC-1/AC-2 INSERT 트랙 명확 분리.
+
+## D-AC-6. ★G-AC-3 봉투 addon = TEMPLATE_PRICE 이중역할 (가격 권위 충돌 없음·부자재 고유·굿즈엔 없음) `확신도: 높음`
+
+**결정**: 봉투(001/002/281/282/283)는 독립판매(PRODUCT_PRICE/FORMULA) + 본체 addon(TEMPLATE_PRICE) 이중역할. 양 경로 단가 일관 적재(template_prices INSERT). 동일 variant면 동일 단가 verbatim.
+
+**근거(라이브)**: addon 5행 실재(PRD_000016 엽서→TMPL-000005/006/009/010/011)·template 5행 실재·template_prices 0행. 엔진 우선순위 TEMPLATE_PRICE(:296)→PRODUCT_PRICE(:316)라 다른 테이블·다른 경로(충돌 없음·F-PA-1). template_prices 미적재 시 fallback(:299-300 "기준 상품 가격으로 계산")→product_prices도 0이면 0원 → template 단가 적재가 addon 0원 회피 핵심.
+
+**★template = 단일 variant 인코딩(라이브 핵심)**: 봉투 template은 tmpl_cd에 variant baked-in("OPP접착봉투 110x160mm 50장"). template_prices는 차원 없는 단일 단가(tmpl_cd+apply_ymd PK·unit_price 1) → AC-2 variant-매트릭스를 template 경로에 끌어올 불요(template 자체가 1 variant).
+
+**★돈크리티컬 묶음수 불일치(Q-AC-TMPL·BLOCKED)**: TMPL-000010/011 라벨 "50장"인데 시트 카드봉투(004)는 "10장 1000/1500". template 50장 묶음 단가가 시트에 없음 → 추측 적재 금지·컨펌큐(addon 봉투 실제 묶음 단가 권위 필요). OPP(50장)·트레싱지(20장)는 template 묶음수가 시트 행과 일치 → verbatim 적재 가능.
+
+## D-AC-7. ★OTC 이중등록 사실무근 정정 (cartographer 정정 비준·과업 입력 가설 폐기) `확신도: 높음`
+
+**결정**: "거울/키링류 아크릴↔악세사리 이중등록·가격 권위 충돌" 과업 입력 가설 **폐기**. 상품악세사리 시트(PRD_000001~015 + 281~283)엔 거울/키링 **없음**(봉투/케이스 + 우드/리필 부속뿐).
+
+**근거(라이브 2026-06-22)**: 과업 입력의 "아크릴키링 PRD_146·틴거울183·아크릴뱃지148"은 아크릴/굿즈 시트 상품이지 상품악세사리 시트 상품 아님. 굿즈 거울(183/184/185)은 굿즈 종단 스코프(별도 종단). 상품악세사리 18상품 전수 PRD_TYPE.03(기성품)·prd_nm=봉투/케이스/볼체인/와이어링/천정고리/투명케이스/행택끈/자석/우드/리필잉크. 진짜 이중등록=봉투류 "이중역할 SKU"(D-AC-6)뿐.
+
+**★round-13 정정**: round-13 product-identity가 281/282/283을 PRD_TYPE.05(추가상품)로 기록했으나 라이브 2026-06-22 실측은 셋 다 PRD_TYPE.03(기성품). 라이브 권위 우선(round-13 이후 변화 또는 오기).
+
+## D-AC-8. 색상/형상/용량 = dbmap 자재축 위임 (가격엔진 스코프 밖·굿즈 §5 동형) `확신도: 높음`
+
+**결정**: 색상=자재 오염(볼체인8/리필7 MAT_TYPE.10)·형상/용량 융합 정리는 가격엔진 밖·dbmap 위임. 가격엔진은 inline 고정가 verbatim만.
+
+**근거**: AC-1 색상 동가→가격 비기여. AC-2 카드봉투 색상은 가격축이나 opt_cd variant(자재 아님). 형상/용량(우드길이·3D케이스·5cc)은 siz_cd variant 단가행으로 충분(별 형상축 금지·과분할). ★드리프트: round-13 GATE-1이 와이어링007·행택끈010을 색상자재 오염으로 기록했으나 2026-06-22 라이브 둘 다 0행(stale·라이브 권위).
+
+## D-AC-9. 세트조합 레이어 불요 (완제품·addon은 세트 아님·굿즈/아크릴/실사 동형) `확신도: 높음`
+
+**결정**: 상품악세사리 세트조합 레이어 불요. 부속물(우드 등)은 독립 완제 고정가(C-AC1) + 본체 addon 귀속(A-3) 두 경로로 모델링(세트 분해 아님).
+
+**근거**: t_prd_product_sets sub_prd_cd 0행(라이브). 봉투-엽서·우드행거-포스터 결합은 세트 부품 합산이 아니라 본체+옵션 별 라인(addon). 부속물 BUNDLE(우드+면끈+부착)은 가격이 완제 고정가에 baked-in·자재/공정 분해는 생산 BOM(dbmap·set-pricing A-4). set-product-design 악세사리 절 참조.
+
+## 컨펌큐 (상품악세사리·인간/designer·차단 아님)
+
+| ID | 질문 | 권위 후보 |
+|----|------|-----------|
+| **Q-AC-PRICE** | 동일 봉투의 독립가(product/formula) vs addon가(template)가 같아야 하나, addon은 별 마진/번들가인가? | pricing.py 경로 분리·designer 결판 |
+| **Q-AC-TMPL** | ★카드봉투 template(TMPL-000010/011) "50장"과 시트 카드봉투(004) "10장 1000/1500" 묶음수 불일치. addon 50장 묶음 단가 권위? | 시트에 50장가 부재·실무 권위 필요(BLOCKED) |
+| **Q-AC-OPT** | AC-2 variant 룩업 작동 위해 option_items(ref_dim_cd=siz_cd/opt_cd/bdl_qty) 적재 선결(round-6). 미연결 시 디폴트 variant? | round-6 dbm-option-mapper |
+| **Q-AC-CEIL** | 천정고리(PRD_000008·use_yn=N·6500) 판매중지 의도? 가격 적재 제외? | round-13 Q-PA-3 미결·라이브 use_yn=N |
+| **Q-AC-OTC-CASCADE** | 봉투 addon 단가가 본체(엽서) 사이즈와 캐스케이드(봉투 규격↔엽서 규격 매칭)? 현 캐스케이드 0. | rpmeta PO addon·designer |
+
+★ 본 설계는 **구조 레벨 확신도 높음**(라이브 SELECT 실측 + 상품마스터 I열 verbatim L1 67행 + LINEN_FINISH 그릇 선례 + pricing.py 코드 검증·굿즈 GP-1/GP-2 직계 동형). **Q-AC-TMPL 카드봉투 50장 묶음 단가는 BLOCKED**(시트 부재·추측 금지). 실 적용(AC-1 product_prices·AC-2 공식/comp/단가행/바인딩·addon template_prices)은 **DB 미적재·인간 승인 후 dbmap 위임**(dbm-load-execution·dbm-price-arbiter·dbm-axis-staged-load·webadmin 코드 직접수정 금지). 신규 mint=공식 3+comp 3 뿐·신규 테이블/가격축/할인테이블 0. 색상/형상=가격축 밖(상품정체·자재축·라우팅만).
