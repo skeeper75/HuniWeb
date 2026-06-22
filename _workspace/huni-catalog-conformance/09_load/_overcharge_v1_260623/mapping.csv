@@ -1,0 +1,9 @@
+oc_id,prd_cd,comp_cd,print_side,print_opt_cd,opt_nm,table,column,action,rows_affected,verbatim_sum,note
+OC-01/02,PRD_000031;PRD_000032;PRD_000033,COMP_NAMECARD_STD_S1,단면,POPT_000001,단면,t_prc_component_prices,print_opt_cd,charge,2,7300.00,명함 단면 단가행(3500/3800)에 단면코드 충전
+OC-01/02,PRD_000031;PRD_000032;PRD_000033,COMP_NAMECARD_STD_S2,양면,POPT_000002,양면,t_prc_component_prices,print_opt_cd,charge,2,9300.00,명함 양면 단가행(4500/4800)에 양면코드 충전
+OC-01/02,PRD_000031;PRD_000032;PRD_000033,COMP_NAMECARD_STD_S1,단면,,,t_prc_price_components,use_dims,add_token,1,,use_dims에 print_opt_cd 토큰 등재
+OC-01/02,PRD_000031;PRD_000032;PRD_000033,COMP_NAMECARD_STD_S2,양면,,,t_prc_price_components,use_dims,add_token,1,,use_dims에 print_opt_cd 토큰 등재
+OC-03,PRD_000094,COMP_PCB_S1_20P,단면,POPT_000001,단면,t_prc_component_prices,print_opt_cd,charge,117,505980.00,엽서북 단면 단가행에 단면코드 충전(양방향)
+OC-03,PRD_000094,COMP_PCB_S2_20P,양면,POPT_000002,양면,t_prc_component_prices,print_opt_cd,charge,117,526540.00,엽서북 양면 단가행에 양면코드 충전(양방향)
+OC-03,PRD_000094,COMP_PCB_S1_20P,단면,,,t_prc_price_components,use_dims,add_token,1,,use_dims에 print_opt_cd 토큰 등재
+OC-03,PRD_000094,COMP_PCB_S2_20P,양면,,,t_prc_price_components,use_dims,add_token,1,,use_dims에 print_opt_cd 토큰 등재

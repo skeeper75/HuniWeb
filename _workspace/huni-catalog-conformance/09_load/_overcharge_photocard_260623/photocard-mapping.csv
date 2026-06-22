@@ -1,0 +1,8 @@
+oc_id,prd_cd,prd_nm,action,target_table,key,before,after,unit_price_change,rationale
+OC-07,PRD_000024,포토카드,INSERT_FORMULA,t_prc_price_formulas,frm_cd=PRF_PHOTOCARD_NORMAL,(none),frm_nm=일반포토카드 세트 고정가;use_yn=Y,0,일반포토카드 전용 신규 공식(공식분리 권고①)
+OC-07,PRD_000024,포토카드,WIRE_FC,t_prc_formula_components,(PRF_PHOTOCARD_NORMAL;COMP_PHOTOCARD_SET),(none),disp_seq=1;addtn_yn=Y,0,NORMAL 공식에 일반세트 comp만 배선(SET=6000 재사용)
+OC-07,PRD_000024,포토카드,REBIND,t_prd_product_price_formulas,(PRD_000024;2026-06-01),frm_cd=PRF_PHOTOCARD_FIXED,frm_cd=PRF_PHOTOCARD_NORMAL,0,024 바인딩 NORMAL로 재배선(PK prd_cd+apply_bgn_ymd 불변·frm_cd만 UPDATE)
+OC-08,PRD_000025,투명포토카드,INSERT_FORMULA,t_prc_price_formulas,frm_cd=PRF_PHOTOCARD_CLEAR,(none),frm_nm=투명포토카드 세트 고정가;use_yn=Y,0,투명포토카드 전용 신규 공식(공식분리 권고①)
+OC-08,PRD_000025,투명포토카드,WIRE_FC,t_prc_formula_components,(PRF_PHOTOCARD_CLEAR;COMP_PHOTOCARD_CLEAR_SET),(none),disp_seq=1;addtn_yn=Y,0,CLEAR 공식에 투명세트 comp만 배선(CLEAR_SET=8500 재사용)
+OC-08,PRD_000025,투명포토카드,REBIND,t_prd_product_price_formulas,(PRD_000025;2026-06-01),frm_cd=PRF_PHOTOCARD_FIXED,frm_cd=PRF_PHOTOCARD_CLEAR,0,025 바인딩 CLEAR로 재배선
+ORPHAN,PRF_PHOTOCARD_FIXED,(고아처리),DEPRECATE,t_prc_price_formulas,frm_cd=PRF_PHOTOCARD_FIXED,use_yn=Y,use_yn=N,0,024/025 재배선 후 바인딩 0 → 고아 공식 use_yn=N 논리비활성(del_yn 컬럼 부재·use_yn만 존재). FC 배선은 보존(가역)

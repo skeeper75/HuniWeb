@@ -59,7 +59,13 @@
   - 적재경로=catalog admin /tprocprocesses/add/·FK 위상 Phase A(코드 선등록)→Phase B(단가행 충전)
 - ★2026-06-23 **라이브 COMMIT 완료**(인간 승인 후·되돌리지말것): PROC_000106(4단대문접지)·PROC_000107(반접지) 신규등록 + 4 comp proc_cd 충전(060/071/106/107)+use_dims 토큰. 사후검증 25,000→6,000 실증·verbatim 단가 0변경·멱등 no-op·undo 보유(`undo.sql`)·백업(`backup-20260623_012612.sql`)
 - 잔여: PRD_000028 옵션그룹 0행(접지방식 UI 부재)=별 CPQ 트랙(dbm-cpq-option-mapping). 가격 데이터는 완료
-- 미COMMIT 과대청구 잔여 7건: 명함031/032·엽서북094(V1·print_opt_cd 충전)·포토카드024/025(V3·공식분리·클래스A). 명세는 06_gate/overcharge-remediation-spec.md
+
+### ★전 카탈로그 과대청구 8건 전부 라이브 COMMIT 완료 (2026-06-23·되돌리지말것)
+- V2 접지카드 027/028/029 — 25,000→6,000 (PROC_000106/107 신규+proc_cd 충전)·`09_load/_overcharge_foldcard_260623/`
+- V3 포토카드 024/025 — 14,500→6,000/8,500 (공식분리 PRF_PHOTOCARD_NORMAL/CLEAR·기존 FIXED use_yn=N)·`09_load/_overcharge_photocard_260623/`
+- V1 명함 031/032/**033**·엽서북 094 — 명함 8,000→3,500/4,500·094 22,500→11,000/11,500 (print_opt_cd 충전 POPT_000001단면/002양면+use_dims 토큰)·`09_load/_overcharge_v1_260623/`. ★033도 공유 comp라 동시 해소
+- 전부 단가 verbatim 불변·멱등·백업·undo 보유. ★print_opt_cd FK=t_prt_print_options(t_cod_base_codes 아님)·t_prc_price_formulas엔 del_yn 없음(논리비활성=use_yn=N)
+- 돈 새는 면 전부 차단 완료. 미검증 4시트엔 과대청구 0(스캔 확인)
 
 ## 미해결/블로커
 - **HUNI_ADMIN_PW stale** — K6 product-viewer 3원 대조 디지털+배치1 2연속 BLOCKED. 갱신 후 일괄 재실행.
