@@ -192,6 +192,43 @@ flowchart LR
 
 ---
 
+## D-pre. 패시브 채널 배선 (공식 from-edicus 실배선 vs KOI-Passive 잔재)
+
+후니 런타임은 **공식 `from-edicus` 채널(14 action)** 만 배선돼 있고, RedEditorSDK **KOI-Passive 4 type**(`From-KOI-Passive`)은 `src/lib/red-editor/`에 **잔재**(import 0건)다. 권위=`passive-channel-binding.md:8-20,28-39,79-86`. 두 레이어 비교·트리거 체인 도해는 → `03_passive-layers.md`.
+
+```mermaid
+flowchart LR
+  subgraph live["실배선 (런타임) — 공식 from-edicus"]
+    direction TB
+    cb["편집기 핸들러<br/>data.action ?? data.type<br/>EdicusEditor.tsx:89 · MobileEditor.tsx:90 · VdpEditor.tsx:85 · huni-editor-sdk.ts:288"]
+    sdkc["EdicusClient (window.edicusSDK)<br/>create_project/open_project(params,cb)<br/>client.ts:158,185,234"]
+    rm["passive 진입: run_mode='passive'<br/>huni-editor-sdk.ts:129-131 · types/edicus.ts:111"]
+  end
+
+  subgraph zombie["잔재 (런타임 미배선) — KOI-Passive"]
+    direction TB
+    q["리스너 q: e.target==='From-KOI-Passive'<br/>switch(e.type) load/save/error/close<br/>analyzed/es6-converted.js:14003-14016"]
+    wrap["RedEditorWrapper (window.RedEditorSDK)<br/>wrapper.ts:320-338"]
+  end
+
+  cb --> sdkc
+  sdkc -.-> rm
+
+  %% 잔재: From-KOI-Passive·fromKOIPassive·hideToolbar 는 src/lib/red-editor/analyzed/* 에만 매칭, 런타임 import 0건 (passive-channel-binding.md:18,43,73,81)
+  %% 잔재: window.RedEditorSDK 는 window.edicusSDK 와 다른 전역 — 어떤 라우트/컴포넌트도 new 하지 않음 (passive-channel-binding.md:82)
+
+  classDef rt fill:#E8F5E9,stroke:#2E7D32,color:#13340d;
+  classDef leg fill:#ECEFF1,stroke:#90A4AE,color:#37474F,stroke-dasharray:5 5;
+  class cb,sdkc,rm rt;
+  class q,wrap leg;
+```
+
+**추적 메모**
+- 후니 식별 키는 `target` 문자열 비교가 아니라 `data.action ?? data.type`(`passive-channel-binding.md:43-50`). 후니 어디에도 `e.target === 'From-KOI-Passive'` 없음.
+- 실런타임 Edicus 배선=`src/lib/edicus/`(client.ts·huni-editor-sdk.ts), `src/lib/red-editor/`=역공학 참조/타입 출처(`passive-channel-binding.md:86`). 라우트→훅→채널 매핑은 `passive-channel-binding.md:88-95`.
+
+---
+
 ## D. 코드 ↔ 계약 불일치 종합 (`%% 불일치` 목록)
 
 | # | 불일치 | 코드 근거 | 계약/기대 | 영향 |
@@ -199,7 +236,7 @@ flowchart LR
 | 1 | **README zustand/react-query 부재** | grep 0건: `create()` store·`useQuery`/`useMutation`/`QueryClientProvider` 없음. 실제=로컬 `useState`+RSC/`fetch`(`module-map.md:134`; `data-flow.md:81`) | README 기술스택표 "Zustand 5 / TanStack React Query 5"(`README.md:138-139`) | 두 패키지는 `package.json` deps에만 존재. 루트에 Provider 없음(`layout.tsx:29`) |
 | 2 | **토큰 발급 body 불일치** | `HuniEditorSDK._fetchToken`(`huni-editor-sdk.ts:263`)·`EdicusEditor.fetchUserToken`(`EdicusEditor.tsx:35-37`)·`MobileEditor.fetchEditorToken`(`MobileEditor.tsx:35`)·`VdpEditor.fetchUserToken`(`VdpEditor.tsx:41`)=**body 없이 POST** | `auth/route.ts`는 `uid` 필수(`auth/route.ts:11-13,21`). `useAuth.fetchEdicusToken`만 `{uid}` 전달(`useAuth.ts:50-53`) | 400 위험(`hooks-and-edicus-wiring.md:102`) |
 | 3 | **useOrder 엔드포인트 불일치** | `useOrder`가 `/orders/tentative\|definitive\|cancel` 서브경로 POST(`useOrder.ts:134,144,155`) | 대응 route 파일 없음 — 구현은 `orders/route.ts`(POST type 분기·DELETE 취소)뿐(`hooks-and-edicus-wiring.md:103`) | 서브경로 핸들러 부재 |
-| 4 | **RedEditorWrapper 미사용** | `lib/red-editor/wrapper.ts`(`window.RedEditorSDK` 가정)·`.d.ts`·`analyzed/*` import 0건(`module-map.md:130-131`) | 런타임 경로는 `EdicusClient`(`window.edicusSDK`) | 두 SDK 추상 공존·wrapper는 역공학 잔재(미배선) |
+| 4 | **RedEditorWrapper·KOI-Passive 4 type 미사용** | `lib/red-editor/wrapper.ts`(`window.RedEditorSDK` 가정)·`.d.ts`·`analyzed/*` import 0건; `From-KOI-Passive`/`fromKOIPassive`/`hideToolbar`는 `analyzed/*`에만 매칭(`passive-channel-binding.md:18,43,73,81`) | 런타임 경로는 `EdicusClient`(`window.edicusSDK`)·공식 `from-edicus` 14 action(식별 키 `data.action ?? data.type`) | 두 패시브 레이어 중 후니=공식 14 action 채택, KOI-Passive 4 type은 역공학 잔재(미배선) — 상세 `03_passive-layers.md` |
 | 5 | **/api/edicus/css POST = stub** | DB 저장 미구현·성공 응답만(`css/route.ts:43,61-63` `@MX:TODO`)(`module-map.md:127`) | 저장 동작 기대 | 미저장(no-op) |
 | 6 | **save 명령 이름 차이** | `useHuniEditor.save()`→`postToEditor('save-doc',{})`(`huni-editor-sdk.ts:208-210`) | PDF `post_to_editor('command',{type:'save'})`(`SDK PDF p.15`) | 패시브 save 경로 이름 비표준(코드는 'save-doc' 사용) |
 | 7 | **이벤트 정규화 비대칭** | `useEdicus` 콜백=`action ?? type`(`EdicusEditor.tsx:89`), `HuniEditorSDK`=`type ?? action`(`huni-editor-sdk.ts:138-139`)(`hooks-and-edicus-wiring.md:105`) | 단일 정규화 기대 | 두 경로 우선순위 반대 |

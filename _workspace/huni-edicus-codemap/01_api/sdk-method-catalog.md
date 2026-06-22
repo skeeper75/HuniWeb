@@ -1,10 +1,10 @@
-# Edicus JS SDK — 메서드 계약 카탈로그
+# Edicus JS SDK — 메서드 계약 카탈로그 (Edicus 공식 면)
 
-권위[HARD]: `docs/edicus.man/docs/Edicus JS SDK.pdf` (38p, Copyright 2018 모션원). 모든 계약에 `PDF p.N` 근거.
-보조 대조: `docs/edicus.man/docs/red-editor-sdk-analysis.md`(역공학 RedEditorSDK v6.6.48 / EdicusSDK v2). 역공학은 PDF를 덮어쓰지 않으며 버전 차이만 주석으로 표기.
+권위[HARD·양면 1급]: 본 문서는 **Edicus 공식 면**(`docs/edicus.man/docs/Edicus JS SDK.pdf`, 38p, Copyright 2018 모션원). 모든 계약에 `PDF p.N` 근거.
+**역공학 면은 별도 1급 카탈로그**: RedPrinting `RedEditorSDK` v6.6.48 45메서드 = `rededitor-sdk-catalog.md`(근거 `deob_editor_sdk.js:라인`). 두 면은 상보(보조로 깎지 않음) — Edicus 공식=후니가 통합할 대상, RedEditorSDK=RedPrinting의 검증된 래퍼 레퍼런스. 패시브는 양면 `passive-mode-events.md`.
 
 > 본 SDK = **EdicusSDK v2** (스크립트 `edicus-sdk-v2.js`). `init()`이 반환한 `editor` 객체로 나머지 메서드를 호출한다.
-> 역공학 자료의 `RedEditorSDK`(v6.6.48: createProject/openProject/on/save/close...)는 RedPrinting이 v2 위에 올린 별도 래퍼이며, 본 카탈로그의 권위는 PDF(v2)다.
+> `RedEditorSDK`(v6.6.48: createProject/openProject/on/save/close...)는 RedPrinting이 Edicus 위에 올린 래퍼다. 그 45메서드 전수는 `rededitor-sdk-catalog.md`에 별도 1급 카탈로그로 분리했다(이전 실행이 누락한 KOI-Passive 래퍼 포함).
 
 ---
 

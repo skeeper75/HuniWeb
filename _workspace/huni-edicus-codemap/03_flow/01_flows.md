@@ -85,6 +85,8 @@ sequenceDiagram
 
 패시브 모드 = edicus를 canvas만 보이게 띄우고 postMessage로 부모↔iframe 연동(`passive-mode-events.md:7`). 진입=`create_project`/`open_project`의 `run_mode='passive'`(`SDK PDF p.19`). edicus→고객사 콜백 `function(err,data)`의 `data.action`으로 상태 전이를 본다.
 
+> **[HARD] 후니는 공식 from-edicus 채널(14 action)을 따른다.** 이 라이프사이클은 **공식 Edicus passive**(`from-edicus*`, 14 action)이며, 후니 edicus.man 런타임이 실제로 보는 채널이다(식별 키 `data.action ?? data.type`·`passive-channel-binding.md:8-20`). RedEditorSDK의 **KOI-Passive 4 type**(load/save/error/close)은 이 14 action을 N:1로 재포장한 별개 레이어로, 후니에서는 `src/lib/red-editor/`에 **잔재**(import 0건)다. 두 레이어 비교·14↔4 매핑·후니 채택 경로 도해는 → **[03_passive-layers.md](./03_passive-layers.md)**.
+
 ```mermaid
 stateDiagram-v2
   [*] --> Initializing : run_mode='passive' (SDK PDF p.19)
@@ -117,6 +119,7 @@ stateDiagram-v2
 - action enum 권위=`passive-mode-events.md:22-38`(ready-to-listen·load-project-report·doc-changed·page-changed·var-*·state-history·save-doc-report·error-report·close 등). 코드는 정확한 케밥 문자열로 매칭(`passive-mode-events.md:40`).
 - 코드 진입점: `MobileEditor` passive 콜백 `ready-to-listen→onReadyToListen`·`doc-changed→onDocChanged`(`data-flow.md:57`; `MobileEditor.tsx:112-120`); 툴바 `undo/redo/save-doc` `postToEditor` 직접 호출(`MobileEditor.tsx:218-222`). `HuniEditorSDK`는 `ready`/`ready-to-listen`/`close`/`doc-changed`/`save-complete`/`error` 매핑(`huni-editor-sdk.ts:135-158`).
 - save 전이: `state-history.doc_dirty`로 Save 버튼 enable/disable(`PDF p.23`). save-doc-report `docInfo@end`는 일반상품/사진인화 두 형태(`PDF p.21-23`).
+- **KOI-Passive 참조**: 위 14 action 중 RedEditorSDK는 `load-project-report(end)`/`project-id-created`/`doc-changed`→`load`, `save-doc-report`→`save`, `error-report`/`change-*(error)`→`error`, `close`→`close`로 묶어 4 type만 부모에 노출한다(`passive-mode-events.md:130-138`). 후니는 이 래퍼를 쓰지 않고 14 action을 직접 본다 — 상세 → `03_passive-layers.md` A.
 - `%% 불일치`: `ready-to-listen` info/의미는 **PDF 미기재(모름)**(`passive-mode-events.md:177`); `save()`가 `postToEditor('save-doc')`로 보내나 PDF command type은 `save`(`huni-editor-sdk.ts:208-210`; `SDK PDF p.15`) — 이름 차이는 `02_code-api-wiring.md`에 상세.
 
 ---

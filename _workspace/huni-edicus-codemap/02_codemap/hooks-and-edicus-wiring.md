@@ -103,3 +103,7 @@ Firebase/Edicus 배선:
 2. **useOrder 엔드포인트 불일치**: 호출 경로(`/orders/tentative|definitive|cancel`)에 대응하는 route 파일이 없음. 구현은 `orders/route.ts`(POST type 분기·DELETE 취소).
 3. **origin 검증 범위**: `HuniEditorSDK`만 message origin 검증(`huni-editor-sdk.ts:278`). `useEdicus` 경로의 콜백은 SDK 내부(window.edicusSDK)에 의존 — 검증 위치 SDK 내부(코드 미가시, 외부 SDK).
 4. **이벤트 이름 표기 차이**: `useEdicus` 콜백 data는 `action ?? type`(`EdicusEditor.tsx:89`), HuniEditorSDK는 `type ?? action`(`huni-editor-sdk.ts:138-139`) — 정규화 비대칭.
+
+## 6. passive 채널 대조 (재실행 핵심)
+
+후니 런타임은 **공식 Edicus `from-edicus*` 채널만** 본다(식별키 = `data.action ?? data.type`, target 문자열 비교 없음). RedEditorSDK `From-KOI-Passive` 4-type(load/save/error/close) 핸들러는 역공학 잔재 `src/lib/red-editor/analyzed/*.js`에만 존재하며 런타임 미사용. `src/lib/red-editor/`(wrapper.ts·analyzed/*·.d.ts) 전체가 잔재(런타임 import 0건; 타입 1건만 `types/edicus.ts:347`). passive 진입=공식 `run_mode='passive'` URL 파라미터(`huni-editor-sdk.ts:129-131`·`MobileEditor.tsx:160-162`·`types/edicus.ts:111`). 상세 대조표·라우트→훅→채널 매핑·증거는 → `passive-channel-binding.md`.

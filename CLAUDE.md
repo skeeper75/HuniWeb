@@ -280,9 +280,19 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 **산출물 루트:** `_workspace/huni-edicus-codemap/` (01_api·02_codemap·03_flow·04_validation). 4 에이전트(`hec-api-cartographer` 공식 SDK/API+env ∥ `hec-code-cartographer` Next.js 코드맵 → `hec-flow-author` mermaid 통합 → `hec-validator` C1~C6 독립검증)·하이브리드(팬아웃→통합→검증)·생성≠검증·PDF=1차권위·코드=권위·근거(`PDF p.N`/`파일:라인`)·**비밀값 비노출[HARD]**(env 키 이름·역할만, 값 금지)·읽기전용. 최종 mermaid 통합본은 인간 확인 후 `docs/edicus.man/docs/codemap/`로 모을 수 있음.
 
-**변경이력:** 최신: 2026-06-22 하네스 초기 구성(4 에이전트+5 스킬·Edicus 공식 SDK/API+edicus.man Next.js 코드맵 권위 확정) → 첫 실행 시 CHANGELOG 생성
+**변경이력:** 최신: 2026-06-22 역공학 양면 권위 진화+재실행 GO(RedEditorSDK 45메서드 카탈로그·passive 양면=공식 from-edicus 14↔KOI-Passive 4·후니=공식 from-edicus 전용/KOI=잔재 코드실증) → `_workspace/huni-edicus-codemap/`
 
-## 21. MoAI Framework (gated — rarely used here)
+## 21. Harness: Huni-Catalog-Conformance (전 상품 카탈로그 종단 정합 검증 + 교정 명세)
+
+**목표:** 전 라이브 DB 상품에 등록된 12축(사이즈코드·도수·인쇄옵션·판형·자재·공정·묶음수·추가상품·페이지룰·옵션그룹·제약규칙·추가상품 템플릿) + **가격엔진 항목**이 두 권위 엑셀(상품마스터 260610·인쇄상품 가격표 260527)과 일치하는지 **누락 0으로 종단 정합 검증**하고 개선/보완/수정 명세를 산출. **옵션→차원 연결(polymorphic ref_dim_cd)·템플릿→추가상품 연결**까지 잇고, `옵션 선택→차원 환원→단가행→final_price` 종단 e2e 골든 추적으로 정석을 보인다. ★[HARD] 인쇄 도메인 지식 먼저·★기존 가격엔진 5하네스(§13·§14·§15·§16·§18) 산출물 재사용(조사 반복 금지)·codex-cli 독립 2차 교차검증·gstack browse로 product-viewer 라이브 3원 대조(엑셀↔DB↔화면). §7 Coverage(존재만)·§13(대표 파일럿)·§15(단일 상품)·§17(표시중복)과 별개의 **전 상품×전 축 종단 정합** 트랙. 6인 팀(`hcc-authority-curator` 기준점 → `hcc-basedata-inspector`·`hcc-cpq-link-inspector`·`hcc-price-engine-inspector` 생성 팬아웃 → `hcc-codex-verifier` 독립 2차 → `hcc-conformance-gate` K1~K8 검증). 생성≠검증·codex 주장=가설(환각 경계)·권위 엑셀 절대권위·라이브 읽기전용 SELECT만·검증+교정명세+codex합의까지(실 COMMIT/DDL은 인간 승인 후 dbmap 트랙 위임·webadmin 코드 직접수정 금지).
+
+**트리거:** "카탈로그 정합 검증", "전 상품 등록 데이터 정합 검증", "등록 데이터 권위 일치 확인", "12축 정합", "옵션 차원 연결 검증", "템플릿 추가상품 연결 검증", "가격엔진 항목 정합", "누락 없는 검증", "codex 교차 정합", "product-viewer 확인 검증", "정합 하네스 실행/재실행/업데이트/보완", "특정 축/상품만 정합 검증" 등 본 도메인 요청 시 `huni-catalog-conformance-orchestrator` 스킬을 사용. 단일 상품 온디맨드는 §15, 대표 파일럿 가격 게이트는 §13, 표시중복은 §17, 위젯 코드 동작 정합은 §6. 단순 질문은 직접 응답.
+
+**산출물 루트:** `_workspace/huni-catalog-conformance/` (01_authority·02_basedata·03_cpq_link·04_price_engine·05_codex·06_gate·_meta). 누락 0의 자=`01_authority/conformance-checklist.csv`(전 상품×12축). 자격증명 `.env.local RAILWAY_DB_*`(읽기전용 SELECT)·`HUNI_ADMIN_*`(gstack 읽기 탐색만). codex 헬퍼=`hqv-codex-cross-verify/scripts/codex-review.sh` 재사용.
+
+**변경이력:** 최신: 2026-06-22 하네스 초기 구성(6 에이전트+6 스킬·12축 종단 정합·codex 교차·gstack product-viewer·K1~K8) → 첫 실행 시 CHANGELOG 생성
+
+## 22. MoAI Framework (gated — rarely used here)
 
 The MoAI-ADK orchestration framework (SPEC plan/run/sync, TRUST 5, DDD/TDD, Agent Teams,
 design GAN loop) is installed but not the primary workflow in this repo. Its detailed

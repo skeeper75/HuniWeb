@@ -64,3 +64,15 @@ component,src/components/admin/Sidebar.tsx,Sidebar,관리자 사이드바,none,s
 type,src/types/edicus.ts,EdicusContext,SDK init 반환 컨텍스트+메서드 타입,create_project/open_project/post_to_editor 등 시그니처,src/types/edicus.ts:11
 type,src/types/edicus.ts,CreateProjectParams/OpenProjectParams,프로젝트 파라미터 타입,ps_code/token/prjid/parent_element,src/types/edicus.ts:149
 type,src/types/order.ts,Order/OrderStatus,주문 도메인 모델,none,src/types/order.ts:10
+passive-channel,src/lib/edicus/huni-editor-sdk.ts,_setupMessageListener,passive 메시지 식별키=data.action ?? data.type(target 비교 없음),공식 from-edicus,src/lib/edicus/huni-editor-sdk.ts:288
+passive-channel,src/lib/edicus/huni-editor-sdk.ts,createProject-callback,콜백 식별키=data.type ?? data.action,공식 from-edicus,src/lib/edicus/huni-editor-sdk.ts:138
+passive-channel,src/components/editor/EdicusEditor.tsx,handleSdkEvent,식별키=data.action ?? data.type,공식 from-edicus,src/components/editor/EdicusEditor.tsx:89
+passive-channel,src/components/mobile/MobileEditor.tsx,handleSdkEvent,식별키=data.action ?? data.type,공식 from-edicus,src/components/mobile/MobileEditor.tsx:90
+passive-channel,src/components/editor/VdpEditor.tsx,handleSdkEvent,식별키=data.action ?? data.type,공식 from-edicus,src/components/editor/VdpEditor.tsx:85
+passive-entry,src/lib/edicus/huni-editor-sdk.ts,init,passive 진입=run_mode='passive' 공식 URL 파라미터,공식 passive,src/lib/edicus/huni-editor-sdk.ts:130
+passive-entry,src/components/mobile/MobileEditor.tsx,passiveMode,run_mode='passive' extraParams,공식 passive,src/components/mobile/MobileEditor.tsx:161
+passive-entry,src/types/edicus.ts,EdicusCommonUrlParams.run_mode,run_mode .. / passive 타입 계약,공식 passive,src/types/edicus.ts:111
+type-fact,src/types/edicus.ts,EdicusCallbackData,type=from-edicus-* 메시지로 명시 정의,공식 from-edicus,src/types/edicus.ts:70
+residual,src/lib/red-editor/analyzed/es6-converted.js,q-handler,From-KOI-Passive 4-type(load/save/error/close) 핸들러=역공학 잔재 런타임 미사용,KOI-Passive(잔재),src/lib/red-editor/analyzed/es6-converted.js:14003
+residual,src/lib/red-editor/wrapper.ts,RedEditorWrapper,window.RedEditorSDK 래퍼 런타임 import 0건(잔재),N/A 잔재,src/lib/red-editor/wrapper.ts:208
+residual,src/lib/red-editor,import-audit,red-editor 런타임 import 0건; types/edicus.ts:347 타입 주석 1건만,N/A 잔재,src/types/edicus.ts:347
