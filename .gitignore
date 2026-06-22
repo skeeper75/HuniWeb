@@ -260,3 +260,6 @@ dist-ssr/
 .netlify/
 .firebase/
 .gstack/
+
+# Figma 바이너리 원본 (대용량 — GitHub 100MB 초과, 로컬 보존·_ds 추출물만 추적)
+docs/figma/*.fig
