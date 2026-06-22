@@ -1,0 +1,140 @@
+---
+title: "MemberModificationProvider"
+depth: 5
+path: "오로라 리액트 스킨개발가이드 > 개발 프로세스 > 2️⃣Aurora React 샘플스킨 확인 > @shopby/react-components > auth > MemberModificationProvider"
+---
+
+# MemberModificationProvider
+
+* 회원의 정보를 수정하는 기능을 제공합니다. 
+
+## 속성
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | ---- | --- | ---- | --- |
+| children | true | ReactNode | - |  |
+
+## 상태
+
+* `memberModificationState` 는 `useMemberModificationStateContext` 를 호출해 사용합니다.
+
+```typescript
+const memberModificationState = useMemberModificationStateContext();
+```
+
+| 이름 | 타입 | 기본 값 | 설명 |
+| --- | --- | ---- | --- |
+| memberModificationInfo | [request](https://docs.shopby.co.kr/?url.primaryName=member/#/Profile/put-profile)
+ㄴ회원 정보 수정 request 타입과 동일함. |  | 수정할 회원 정보 |
+| newMobileNo | string | '' | 새로운 휴대폰 번호 |
+| carrierNumber | string | '' | 휴대폰 앞 번호 |
+| firstSerial | string | '' | 휴대폰 중간 번호 |
+| secondSerial | string | '' | 휴대폰 뒷 번호 |
+| newEmail | string | '' | 새로운 이메일 주소 |
+| receiveAgreementInfo |  |  | 수신동의 정보 |
+| ㄴsmsDisagreeYmdt | string \| null | null | 단문메시지서비스 거부 일시 |
+| ㄴdirectMailDisagreeYmdt | string \| null | null | 광고 우편물(DM) 수신 거부 일시 |
+| ㄴsmsAgreeYmdt | string \| null | null | 단문메시지서비스(SNS) 동의 일시 |
+| ㄴdirectMailAgreeYmdt | string \| null | null | 광고 우편물(DM) 수신 동의 일시 |
+| termStatus | object[] | [] | 약관 동의 상태 |
+| ㄴ id | TermsType | - | 약관 항목은 하기 타입과 동일함.
+ㄴ [agreedTermsInfos\[0\]. termsType](https://docs.shopby.co.kr/?url.primaryName=member/#/Profile/put-profile)
+ㄴ 소문자로 변환함 |
+| ㄴ label | string | - | termsType 을 하기 형태로 치환함
+ㄴ [선택] 혹은 [필수] TERMS\_TYPE[termsType] |
+| ㄴ checked | boolean | - | 선택 여부 |
+| ㄴ required | boolean | - | 필수 여부 |
+| ㄴ termsType | TermsType | - | 약관 항목은 하기 타입과 동일함.
+ㄴ [agreedTermsInfos\[0\]. termsType](https://docs.shopby.co.kr/?url.primaryName=member/#/Profile/put-profile) |
+| authenticationsRemainTimeBySeconds | number |  | 인증번호 만료까지 남은 시간 (초) |
+| certificatedNumber | number |  | 인증번호 |
+| isAuthenticationReSend | boolean |  | 재인증 여부 |
+| validationStatus | object |  | 회원정보 검증 상태정보 |
+| ㄴ email | ValidationStatus |  | 이메일 유효성 검증 상태정보 |
+| ㄴ mobileNo | ValidationStatus |  | 휴대폰번호 유효성 검증 상태정보 |
+| ㄴ certificatedNumber | ValidationStatus |  | 인증번호 유효성 검증 상태정보 |
+| termsInfo |  |  | 약관 상세보기 모달에 노출될 약관 상세내용 |
+| ㄴ title | string | '' | 약관 타이틀 |
+| ㄴ contents | string | '' | 약관 내용 |
+| isTermsContentFullModalOpen | boolean | false | 약관 상세 보기 모달 오픈 여부 |
+
+[ValidationStatus](https://nhnent.dooray.com/#ValidationStatus)
+
+| 이름 | 타입 | 기본 값 | 설명 |
+| --- | --- | ---- | --- |
+| ㄴ result | boolean | true | 유효한 정보 여부
+ㄴ true - 유효한 정보
+ㄴ false - 무효한 정보 |
+| ㄴ message | string | '' | 검증 결과 메시지 |
+
+## 액션
+
+* `memberModificationAction` 은 `useMemberModificationContext` 를 호출해 사용합니다.
+
+```typescript
+const memberModification: MemberModification = useMemberModificationContext();
+```
+
+| 이름 | 인자타입 | 필수여부 | 기본 값 | 설명 | 관리하는 상태 |
+| --- | ---- | ---- | ---- | --- | ------- |
+| fetchProfile | - |  |  | 회원정보를 조회함. | ㄴ memberModificationInfo
+ㄴ newEmail
+ㄴ newMobileNo
+ㄴ receiveAgreementInfo |
+| validateMobile |  |  |  | 휴대폰 정보가 형식에 맞는지 검증함. | ㄴ validationStatus |
+| validateEmail |  |  |  | 이메일 정보가 형식에 맞는지 검증함. | ㄴ validationStatus |
+| authenticateMobile | string |  |  | 휴대폰 번호를 받아 인증번호를 발송함. | ㄴ authenticationsRemainTimeBySeconds |
+| confirmAuthenticationMobileNo | string |  |  | 입력한 인증번호를 검증함. |  |
+| verifyExistEmail | string |  |  | 이메일을 받아 중복여부를 확인함. | ㄴ validationStatus |
+| authenticateEmail | strubg |  |  | 이메일을 받아 인증번호를 발송함. |  |
+| confirmAuthenticationEmail | string |  |  | 입력한 인증번호를 확인함. |  |
+| getTerms | object |  |  | 인자로 받은 약관타입 정보를 반환함. |  |
+| ㄴ termsTypes | TermsType |  |  | 약관타입 |  |
+| checkSingle | object |  |  | 약관 체크박스 체크여부를 갱신함. | ㄴ termStatus |
+| ㄴisChecked | boolean |  |  | 체크여부 |  |
+| ㄴlabel | string |  |  | 체크박스 라벨 |  |
+| validateTerms |  |  |  | 필수 동의 약관에 동의 여부를 검증함.
+ㄴ 필수 약관 미동의 시 false 반환
+ㄴ 필수 약관 모두 동의 시 true 반환 |  |
+| validateKey |  |  |  | validationStatus 상태 검증
+ㄴvalidationStatus result 가 모두 true 인 경우, true 반환 |  |
+| modifyProfile | - |  |  | MemberModificationState 에서 관리하는 상태를 기준으로 회원정보를 수정함 |  |
+| updateMemberModificationInfo |  |  |  | 회원정보 상태를 갱신함. | ㄴ memberModificationInfo |
+| updateTermStatus |  |  |  | 약관동의 상태를 갱신함. | ㄴ termStatus |
+| updateCertificatedNumber |  |  |  | 입력한 인증번호로 갱신함. | ㄴ certificatedNumber |
+| updateIsAuthenticationReSend |  |  |  | 재인증 상태를 갱신함. | ㄴ isAuthenticationReSend |
+| updateValidationStatus |  |  |  | 회원정보 검증상태를 갱신함. | ㄴ validationStatus |
+| updateNewMobileNo |  |  |  | 새로운 휴대폰 번호를 갱신함. | ㄴ newMobileNo |
+| updateNewEmail |  |  |  | 새로운 이메일을 갱신함. | ㄴ newEmail |
+| updateIsTermsContentFullModalOpen |  |  |  | 약관상세보기 모달 오픈 여부 상태를 갱신함. | ㄴ isTermsContentFullModalOpen |
+| updateTermsInfo |  |  |  | 약관상세보기 모달에 노출될 상세약관을 갱신함. | ㄴ termsInfo |
+| updateCarrierNumber |  |  |  | 휴대폰 앞번호를 갱신함. | ㄴ carrierNumber |
+| updateFirstSerial |  |  |  | 휴대폰 중간번호를 갱신함. | ㄴ firstSerial |
+| updateSecondSerial |  |  |  | 휴대폰 뒷번호를 갱신함. | ㄴ secondSerial |
+
+## 사용 예시
+
+```typescript
+const Example = () => (
+  
+      
+        
+          
+            {isPasswordCheckModalOpen && (
+               {
+                  location.href = 'my-page';
+                }}
+              >
+                 {
+                    setIsPasswordCheckModalOpen(false);
+                  }}
+                />
+              
+            )}
+            
+          
+        
+      
+    
+)
+```

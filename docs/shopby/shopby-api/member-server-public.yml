@@ -1,0 +1,3953 @@
+openapi: 3.0.1
+info:
+  title: member-server
+  description: ' 쇼핑몰 회원(member) 관련 server API입니다.'
+  version: '1.0'
+servers:
+  - url: https://server-api.e-ncp.com
+tags:
+  - name: Profile
+    description: 프로필
+  - name: Member
+    description: 회원
+  - name: MemberGrade
+    description: 회원등급
+paths:
+  /configurations/member/app-card:
+    patch:
+      tags:
+        - Configuration
+      summary: 앱카드 storeId 수정
+      description: 앱카드 storeId 수정
+      operationId: patch-app-card-store-id
+      parameters:
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer authorizationToken"
+          required: false
+          schema:
+            type: string
+          example: Bearer authorizationToken
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\
+            \ (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ^|각 어드민에서 복\
+            사된 값"
+          required: false
+          schema:
+            type: string
+          example: test-mall-key
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/configurations-member-app-card-743079106'
+            examples:
+              patch-app-card-store-id:
+                value: '{"storeId":"test-storeId"}'
+      responses:
+        '204':
+          description: '204'
+  /configurations/member/common-join-config:
+    get:
+      tags:
+        - Configuration
+      summary: 회원가입항목 config 조회
+      description: 회원가입항목 config 조회
+      operationId: get-common-join-config
+      parameters:
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer authorizationToken"
+          required: false
+          schema:
+            type: string
+          example: Bearer authorizationToken
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\
+            \ (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ^|각 어드민에서 복\
+            사된 값"
+          required: false
+          schema:
+            type: string
+          example: test-mall-key
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/configurations-member-common-join-config18446488'
+              examples:
+                get-common-join-config:
+                  value: "{\"used\":true,\"memberId\":\"REQUIRED\",\"memberName\"\
+                    :\"REQUIRED\",\"nickname\":\"NOT_USED\",\"password\":\"REQUIRED\"\
+                    ,\"email\":\"REQUIRED\",\"emailAgreement\":\"USED\",\"mobileNo\"\
+                    :\"REQUIRED\",\"smsAgreement\":\"USED\",\"address\":\"USED\",\"\
+                    phoneNo\":\"NOT_USED\",\"birthday\":\"NOT_USED\",\"sex\":\"NOT_USED\"\
+                    }"
+  /configurations/member/extra-info-config:
+    get:
+      tags:
+        - Configuration
+      summary: 추가항목 config 조회
+      description: 추가항목 config 조회
+      operationId: get-extra-info-config
+      parameters:
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer authorizationToken"
+          required: false
+          schema:
+            type: string
+          example: Bearer authorizationToken
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\
+            \ (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ^|각 어드민에서 복\
+            사된 값"
+          required: false
+          schema:
+            type: string
+          example: test-mall-key
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/configurations-member-extra-info-config-1692811019'
+              examples:
+                get-extra-info-config:
+                  value: "{\"extraInfoContents\":[{\"extraInfoNo\":1,\"extraInfoName\"\
+                    :\"추가항목 항목명\",\"status\":\"USED\",\"extraInfoType\":\"TEXTBOX\"\
+                    ,\"extraInfoOptions\":[{\"extraInfoOptionNo\":10,\"extraInfoOptionName\"\
+                    :\"옵션명-1\"},{\"extraInfoOptionNo\":11,\"extraInfoOptionName\"\
+                    :\"옵션명-2\"}]}]}"
+  /configurations/member/open-id/{providerType}:
+    get:
+      tags:
+        - Configuration
+      summary: 프로바이더별 간편회원가입 config 조회
+      description: 프로바이더별 간편회원가입 config 조회
+      operationId: get-openid-config-by-provider
+      parameters:
+        - name: providerType
+          in: path
+          description: "프로바이더 타입(PAYCO, NAVER, KAKAO, KAKAO_SYNC, FACEBOOK, LINE, APPLE,\
+            \ GOOGLE)"
+          required: true
+          schema:
+            type: string
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer authorizationToken"
+          required: false
+          schema:
+            type: string
+          example: Bearer authorizationToken
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\
+            \ (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ^|각 어드민에서 복\
+            사된 값"
+          required: false
+          schema:
+            type: string
+          example: test-mall-key
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/configurations-member-open-id-providerType351872100'
+              examples:
+                get-openid-config-by-provider:
+                  value: "{\"clientId\":\"\",\"clientSecret\":null,\"scopes\":null,\"\
+                    appleConfig\":{\"keyId\":null,\"teamId\":null,\"encKey\":null}}"
+    patch:
+      tags:
+        - Configuration
+      summary: 프로바이더별 간편회원가입 config 수정
+      description: 프로바이더별 간편회원가입 config 수정
+      operationId: patch-openid-config-by-provider
+      parameters:
+        - name: providerType
+          in: path
+          description: "프로바이더 타입(PAYCO, NAVER, KAKAO, KAKAO_SYNC, FACEBOOK, LINE, APPLE,\
+            \ GOOGLE, APP_CARD)"
+          required: true
+          schema:
+            type: string
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer authorizationToken"
+          required: false
+          schema:
+            type: string
+          example: Bearer authorizationToken
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\
+            \ (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ^|각 어드민에서 복\
+            사된 값"
+          required: false
+          schema:
+            type: string
+          example: test-mall-key
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/configurations-member-open-id-providerType-371719732'
+            examples:
+              patch-openid-config-by-provider:
+                value: "{\"clientId\":\"123\",\"clientSecret\":\"456\",\"scopes\"\
+                  :[\"id\",\"name\"],\"appleConfig\":{\"keyId\":\"test-keyId\",\"\
+                  teamId\":\"test-teamId\",\"encKey\":\"key\"}}"
+      responses:
+        '204':
+          description: '204'
+  /grades:
+    get:
+      tags:
+        - MemberGrade
+      summary: 회원등급 목록 조회하기
+      description: |2-
+
+        ## 부가설명 및 특이사항
+         회원등급 목록을 조회합니다.
+      operationId: get-grades
+      parameters:
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer authorizationToken"
+          required: false
+          schema:
+            type: string
+          example: Bearer authorizationToken
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\
+            \ (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ^|각 어드민에서 복\
+            사된 값"
+          required: false
+          schema:
+            type: string
+          example: test-mall-key
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/grades1273037573'
+              examples:
+                get-grades:
+                  value: "[{\"gradeNo\":1,\"gradeName\":\"\",\"used\":false,\"image\"\
+                    :{\"originalFileName\":null,\"uploadedFileName\":null}}]"
+  /member-groups:
+    get:
+      tags:
+        - Group
+      summary: 회원 그룹 목록 조회
+      description: |2-
+
+        ## 부가설명 및 특이사항
+         회원 그룹 목록을 조회합니다.
+      operationId: get-all-member-group-list
+      parameters:
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer authorizationToken"
+          required: false
+          schema:
+            type: string
+          example: Bearer authorizationToken
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\
+            \ (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ^|각 어드민에서 복\
+            사된 값"
+          required: false
+          schema:
+            type: string
+          example: test-mall-key
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/member-groups-969948294'
+              examples:
+                get-all-member-group-list:
+                  value: "[{\"no\":1,\"name\":\"임직원\",\"description\":\"임직원 확인용 그룹\
+                    \",\"reserveBenefit\":{\"used\":false,\"reserveRate\":0}}]"
+    post:
+      tags:
+        - Group
+      summary: 회원 그룹 생성
+      description: |2-
+
+        ## 부가설명 및 특이사항
+         회원 그룹을 생성합니다.
+      operationId: create-member-group
+      parameters:
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer authorizationToken"
+          required: false
+          schema:
+            type: string
+          example: Bearer authorizationToken
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\
+            \ (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ^|각 어드민에서 복\
+            사된 값"
+          required: false
+          schema:
+            type: string
+          example: test-mall-key
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/member-groups-67331454'
+            examples:
+              create-member-group:
+                value:
+                  "{\"name\":\"임직원\",\"description\":\"임직원 확인용 그룹\",\"reserveBenefit\"\
+                  :{\"used\":false,\"reserveRate\":0}}"
+      responses:
+        '201':
+          description: '201'
+  /member-groups/{groupNo}:
+    get:
+      tags:
+        - Group
+      summary: 회원 그룹 단건 조회
+      description: |2-
+
+        ## 부가설명 및 특이사항
+         회원 그룹을 조회합니다.
+      operationId: get-member-group
+      parameters:
+        - name: groupNo
+          in: path
+          description: 회원 그룹 번호
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer authorizationToken"
+          required: false
+          schema:
+            type: string
+          example: Bearer authorizationToken
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\
+            \ (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ^|각 어드민에서 복\
+            사된 값"
+          required: false
+          schema:
+            type: string
+          example: test-mall-key
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/member-groups-groupNo-1944155955'
+              examples:
+                get-member-group:
+                  value: "{\"no\":1,\"name\":\"임직원\",\"description\":\"임직원 확인용 그룹\"\
+                    ,\"reserveBenefit\":{\"used\":false,\"reserveRate\":0}}"
+    put:
+      tags:
+        - Group
+      summary: 회원 그룹 수정
+      description: |2-
+
+        ## 부가설명 및 특이사항
+         회원 그룹을 수정합니다.
+      operationId: update-member-group
+      parameters:
+        - name: groupNo
+          in: path
+          description: ''
+          required: true
+          schema:
+            type: string
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer authorizationToken"
+          required: false
+          schema:
+            type: string
+          example: Bearer authorizationToken
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\
+            \ (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ^|각 어드민에서 복\
+            사된 값"
+          required: false
+          schema:
+            type: string
+          example: test-mall-key
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/member-groups-67331454'
+            examples:
+              update-member-group:
+                value:
+                  "{\"name\":\"임직원\",\"description\":\"임직원 확인용 그룹\",\"reserveBenefit\"\
+                  :{\"used\":false,\"reserveRate\":0}}"
+      responses:
+        '204':
+          description: '204'
+    delete:
+      tags:
+        - Group
+      summary: 회원 그룹 삭제
+      description: |2-
+
+        ## 부가설명 및 특이사항
+         회원 그룹을 삭제합니다.
+      operationId: delete-member-group
+      parameters:
+        - name: groupNo
+          in: path
+          description: ''
+          required: true
+          schema:
+            type: string
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer authorizationToken"
+          required: false
+          schema:
+            type: string
+          example: Bearer authorizationToken
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\
+            \ (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ^|각 어드민에서 복\
+            사된 값"
+          required: false
+          schema:
+            type: string
+          example: test-mall-key
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      responses:
+        '204':
+          description: '204'
+  /members:
+    get:
+      tags:
+        - Member
+      summary: 회원 목록 조회하기 V1.2
+      description:
+        "\n## 부가설명 및 특이사항\n 회원 목록을 조회합니다.\n - searchType 기본설정값은 `USER_ID`\
+        \ 입니다.\n - 가입일자, 수정일자 둘 중 하나는 반드시 입력해야 합니다.\n - 마지막 로그인일자 기간 검색 시, 회원 가입일자\
+        \ 기간을 필수로 입력해야 하고 각각 1년 이내 범위만 검색이 가능합니다.\n## V1.2\n - header의 Version을 1.2로\
+        \ 해주세요\n - includesCount 값을 false 로 하면 조회 속도가 향상됩니다.\n - keySet search 방식\
+        \ 지원 : searchAfter 필수 (최초 조회 시 생략 가능. response의 lastId 값 사용.)          "
+      operationId: get-members-v-1-2
+      parameters:
+        - name: includesCount
+          in: query
+          description: totalCount 포함 여부 - 기본값 false - 1.2에서만 지원 (nullable)
+          required: false
+          schema:
+            type: string
+        - name: searchAfter
+          in: query
+          description:
+            keySet search 방식 검색의 경우 searchAfter 값 필수(첫 페이지 검색시 생략 가능) - 1.2에서만
+            지원 (nullable)
+          required: false
+          schema:
+            type: string
+        - name: searchType
+          in: query
+          description: '검색 유형 (MEMBER_NO, USER_ID, EMAIL, MOBILE, NAME, NICKNAME) (nullable)'
+          required: false
+          schema:
+            type: string
+        - name: startSignUpDate
+          in: query
+          description: 가입일자 검색 시작일 (yyyy-MM-dd) (nullable)
+          required: false
+          schema:
+            type: string
+        - name: endSignUpDate
+          in: query
+          description: 가입일자 검색 종료일 (yyyy-MM-dd) (nullable)
+          required: false
+          schema:
+            type: string
+        - name: startUpdateDate
+          in: query
+          description: 수정일자 검색 시작일 (yyyy-MM-dd) (nullable)
+          required: false
+          schema:
+            type: string
+        - name: endUpdateDate
+          in: query
+          description: 수정일자 검색 종료일 (yyyy-MM-dd) (nullable)
+          required: false
+          schema:
+            type: string
+        - name: startLastLoginDate
+          in: query
+          description: 마지막로그인일자 검색 시작일 (yyyy-MM-dd) (nullable)
+          required: false
+          schema:
+            type: string
+        - name: endLastLoginDate
+          in: query
+          description: 마지막로그인일자 검색 종료일 (yyyy-MM-dd) (nullable)
+          required: false
+          schema:
+            type: string
+        - name: keywords
+          in: query
+          description: 검색어 (최대 100개) (nullable)
+          required: false
+          schema:
+            type: string
+        - name: status
+          in: query
+          description: 회원상태 (nullable)
+          required: false
+          schema:
+            type: string
+            enum:
+              - 'WAITING: 가입대기'
+              - 'ACTIVE: 가입완료'
+              - 'WITHDRAWN: 회원 탈퇴'
+              - 'FREEZE: 휴면'
+              - 'DORMANT: 휴면'
+              - 'PAUSED: 일시 이용정지'
+              - 'PENDING: 승인대기'
+        - name: type
+          in: query
+          description: 회원타입 (nullable)
+          required: false
+          schema:
+            type: string
+            enum:
+              - 'MALL: 일반 회원'
+              - 'SYNC_ID: 연동형 회원'
+              - 'OPEN_ID: 간편로그인 회원'
+        - name: blacklisted
+          in: query
+          description: 블랙리스트 여부 (nullable)
+          required: false
+          schema:
+            type: boolean
+        - name: emailAgreed
+          in: query
+          description: 이메일 수신 동의 여부 (nullable)
+          required: false
+          schema:
+            type: boolean
+        - name: smsAgreed
+          in: query
+          description: SMS 수신 동의 여부 (nullable)
+          required: false
+          schema:
+            type: boolean
+        - name: gradeNo
+          in: query
+          description: 등급 번호 (nullable)
+          required: false
+          schema:
+            type: number
+        - name: groupNo
+          in: query
+          description: 그룹 번호 (nullable)
+          required: false
+          schema:
+            type: number
+        - name: pageNumber
+          in: query
+          description: 페이지 번호 - 1.2에서만 지원 (nullable)
+          required: false
+          schema:
+            type: number
+        - name: pageSize
+          in: query
+          description: '페이지 사이즈 (기본 10, 최대 10000) - 1.2에서만 지원 (nullable)'
+          required: false
+          schema:
+            type: number
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer authorizationToken"
+          required: false
+          schema:
+            type: string
+          example: Bearer authorizationToken
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\
+            \ (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ^|각 어드민에서 복\
+            사된 값"
+          required: false
+          schema:
+            type: string
+          example: test-mall-key
+        - name: Version
+          in: header
+          description: API 버전^|1.2
+          required: true
+          schema:
+            type: string
+          example: '1.2'
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/members1756520566'
+              examples:
+                get-members-v-1-2:
+                  value: "{\"totalCount\":5,\"lastId\":\"5\",\"contents\":[{\"memberNo\"\
+                    :1,\"memberName\":\"백종원1\",\"firstName\":\"종원1\",\"lastName\"\
+                    :\"백\",\"nickname\":\"nickname1\",\"memberGradeName\":\"테스트 등급\
+                    \",\"memberGroupName\":\"테스트 그룹\",\"memberGroupCount\":1,\"memberId\"\
+                    :\"tester1\",\"mobileCountryCode\":null,\"mobileNo\":\"01012341234\"\
+                    ,\"phoneNo\":\"\",\"email\":\"tu1@nhn.com\",\"countryCode\":\"\
+                    KR\",\"address\":\"\",\"detailAddress\":\"\",\"jibunAddress\"\
+                    :\"\",\"jibunDetailAddress\":\"\",\"zipCode\":\"\",\"city\":\"\
+                    \",\"state\":\"\",\"memberStatus\":\"ACTIVE\",\"providerType\"\
+                    :\"KAKAO\",\"memberProvider\":\"KAKAO\",\"openIdProviders\":[],\"\
+                    birthday\":\"19660904\",\"sex\":\"M\",\"joinYmdt\":\"2025-10-28\
+                    \ 10:09:29\",\"lastLoginYmdt\":\"2025-10-28 10:09:29\",\"lastUpdateYmdt\"\
+                    :\"2025-10-28 10:09:29\",\"loginCount\":10,\"memberType\":\"MALL\"\
+                    ,\"linked\":false,\"linkYmdt\":null,\"isPushNotificationAgreed\"\
+                    :false,\"isSmsAgreed\":false,\"isDirectMailAgreed\":false,\"representativeMemberNo\"\
+                    :null,\"providerTypeLabel\":\"카카오\",\"memberStatusName\":\"가입완\
+                    료\",\"linkedYn\":\"N\"},{\"memberNo\":2,\"memberName\":\"백종원2\"\
+                    ,\"firstName\":\"종원2\",\"lastName\":\"백\",\"nickname\":\"nickname2\"\
+                    ,\"memberGradeName\":\"테스트 등급\",\"memberGroupName\":\"테스트 그룹\"\
+                    ,\"memberGroupCount\":1,\"memberId\":\"tester2\",\"mobileCountryCode\"\
+                    :null,\"mobileNo\":\"01012341234\",\"phoneNo\":\"\",\"email\"\
+                    :\"tu2@nhn.com\",\"countryCode\":\"KR\",\"address\":\"\",\"detailAddress\"\
+                    :\"\",\"jibunAddress\":\"\",\"jibunDetailAddress\":\"\",\"zipCode\"\
+                    :\"\",\"city\":\"\",\"state\":\"\",\"memberStatus\":\"ACTIVE\"\
+                    ,\"providerType\":\"KAKAO\",\"memberProvider\":\"KAKAO\",\"openIdProviders\"\
+                    :[],\"birthday\":\"19660904\",\"sex\":\"M\",\"joinYmdt\":\"2025-10-28\
+                    \ 10:09:29\",\"lastLoginYmdt\":\"2025-10-28 10:09:29\",\"lastUpdateYmdt\"\
+                    :\"2025-10-28 10:09:29\",\"loginCount\":10,\"memberType\":\"MALL\"\
+                    ,\"linked\":false,\"linkYmdt\":null,\"isPushNotificationAgreed\"\
+                    :false,\"isSmsAgreed\":false,\"isDirectMailAgreed\":false,\"representativeMemberNo\"\
+                    :null,\"providerTypeLabel\":\"카카오\",\"memberStatusName\":\"가입완\
+                    료\",\"linkedYn\":\"N\"},{\"memberNo\":3,\"memberName\":\"백종원3\"\
+                    ,\"firstName\":\"종원3\",\"lastName\":\"백\",\"nickname\":\"nickname3\"\
+                    ,\"memberGradeName\":\"테스트 등급\",\"memberGroupName\":\"테스트 그룹\"\
+                    ,\"memberGroupCount\":1,\"memberId\":\"tester3\",\"mobileCountryCode\"\
+                    :null,\"mobileNo\":\"01012341234\",\"phoneNo\":\"\",\"email\"\
+                    :\"tu3@nhn.com\",\"countryCode\":\"KR\",\"address\":\"\",\"detailAddress\"\
+                    :\"\",\"jibunAddress\":\"\",\"jibunDetailAddress\":\"\",\"zipCode\"\
+                    :\"\",\"city\":\"\",\"state\":\"\",\"memberStatus\":\"ACTIVE\"\
+                    ,\"providerType\":\"KAKAO\",\"memberProvider\":\"KAKAO\",\"openIdProviders\"\
+                    :[],\"birthday\":\"19660904\",\"sex\":\"M\",\"joinYmdt\":\"2025-10-28\
+                    \ 10:09:29\",\"lastLoginYmdt\":\"2025-10-28 10:09:29\",\"lastUpdateYmdt\"\
+                    :\"2025-10-28 10:09:29\",\"loginCount\":10,\"memberType\":\"MALL\"\
+                    ,\"linked\":false,\"linkYmdt\":null,\"isPushNotificationAgreed\"\
+                    :false,\"isSmsAgreed\":false,\"isDirectMailAgreed\":false,\"representativeMemberNo\"\
+                    :null,\"providerTypeLabel\":\"카카오\",\"memberStatusName\":\"가입완\
+                    료\",\"linkedYn\":\"N\"},{\"memberNo\":4,\"memberName\":\"백종원4\"\
+                    ,\"firstName\":\"종원4\",\"lastName\":\"백\",\"nickname\":\"nickname4\"\
+                    ,\"memberGradeName\":\"테스트 등급\",\"memberGroupName\":\"테스트 그룹\"\
+                    ,\"memberGroupCount\":1,\"memberId\":\"tester4\",\"mobileCountryCode\"\
+                    :null,\"mobileNo\":\"01012341234\",\"phoneNo\":\"\",\"email\"\
+                    :\"tu4@nhn.com\",\"countryCode\":\"KR\",\"address\":\"\",\"detailAddress\"\
+                    :\"\",\"jibunAddress\":\"\",\"jibunDetailAddress\":\"\",\"zipCode\"\
+                    :\"\",\"city\":\"\",\"state\":\"\",\"memberStatus\":\"ACTIVE\"\
+                    ,\"providerType\":\"KAKAO\",\"memberProvider\":\"KAKAO\",\"openIdProviders\"\
+                    :[],\"birthday\":\"19660904\",\"sex\":\"M\",\"joinYmdt\":\"2025-10-28\
+                    \ 10:09:29\",\"lastLoginYmdt\":\"2025-10-28 10:09:29\",\"lastUpdateYmdt\"\
+                    :\"2025-10-28 10:09:29\",\"loginCount\":10,\"memberType\":\"MALL\"\
+                    ,\"linked\":false,\"linkYmdt\":null,\"isPushNotificationAgreed\"\
+                    :false,\"isSmsAgreed\":false,\"isDirectMailAgreed\":false,\"representativeMemberNo\"\
+                    :null,\"providerTypeLabel\":\"카카오\",\"memberStatusName\":\"가입완\
+                    료\",\"linkedYn\":\"N\"},{\"memberNo\":5,\"memberName\":\"백종원5\"\
+                    ,\"firstName\":\"종원5\",\"lastName\":\"백\",\"nickname\":\"nickname5\"\
+                    ,\"memberGradeName\":\"테스트 등급\",\"memberGroupName\":\"테스트 그룹\"\
+                    ,\"memberGroupCount\":1,\"memberId\":\"tester5\",\"mobileCountryCode\"\
+                    :null,\"mobileNo\":\"01012341234\",\"phoneNo\":\"\",\"email\"\
+                    :\"tu5@nhn.com\",\"countryCode\":\"KR\",\"address\":\"\",\"detailAddress\"\
+                    :\"\",\"jibunAddress\":\"\",\"jibunDetailAddress\":\"\",\"zipCode\"\
+                    :\"\",\"city\":\"\",\"state\":\"\",\"memberStatus\":\"ACTIVE\"\
+                    ,\"providerType\":\"KAKAO\",\"memberProvider\":\"KAKAO\",\"openIdProviders\"\
+                    :[],\"birthday\":\"19660904\",\"sex\":\"M\",\"joinYmdt\":\"2025-10-28\
+                    \ 10:09:29\",\"lastLoginYmdt\":\"2025-10-28 10:09:29\",\"lastUpdateYmdt\"\
+                    :\"2025-10-28 10:09:29\",\"loginCount\":10,\"memberType\":\"MALL\"\
+                    ,\"linked\":false,\"linkYmdt\":null,\"isPushNotificationAgreed\"\
+                    :false,\"isSmsAgreed\":false,\"isDirectMailAgreed\":false,\"representativeMemberNo\"\
+                    :null,\"providerTypeLabel\":\"카카오\",\"memberStatusName\":\"가입완\
+                    료\",\"linkedYn\":\"N\"}]}"
+  /members/expelled-members:
+    get:
+      tags:
+        - Member
+      summary: 탈퇴 회원 조회하기 V1.1
+      description:
+        "\n## 부가설명 및 특이사항\n 특정 날짜에 탈퇴한 회원을 조회합니다. \n 응답 목록은 탈퇴시간 순으로 정렬\
+        되어 노출됩니다.\n 회원 탈퇴 후 5일이 지나면 회원 정보를 파기하기 때문에 과거 날짜로 검색할 시 결과가 없을 수 있습니다.\n\
+        \ \n## Ver 1.0\n- MemberType = [MALL: 쇼핑몰 회원, OPENID: 연동형 회원, NEOID: 간편로그인\
+        \ 회원]\n- MemberStatus = [WAITING: 대기, ACTIVE: 가입완료, FREEZE or DORMANT: 휴면\
+        \ , PAUSED :이용정지]\n \n## Ver 1.1\n- MemberType = [MALL: 쇼핑몰 회원, SYNC_ID: 연\
+        동형 회원, OPEN_ID: 간편로그인 회원]\n- MemberStatus = [WAITING: 대기, ACTIVE: 가입완료, WITHDRAWN:\
+        \ 탈퇴, FREEZE or DORMANT: 휴면 , PAUSED :이용정지, PENDING: 승인대기]"
+      operationId: get-members-expelled-members-v-1-1
+      parameters:
+        - name: targetDate
+          in: query
+          description: 회원 탈퇴일시^|2025-10-28
+          required: true
+          schema:
+            type: string
+        - name: memberType
+          in: query
+          description: 회원 타입 (nullable)
+          required: false
+          schema:
+            type: string
+        - name: additionalInfoUsed
+          in: query
+          description: 추가 정보 사용 여부^|true
+          required: false
+          schema:
+            type: boolean
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer authorizationToken"
+          required: false
+          schema:
+            type: string
+          example: Bearer authorizationToken
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\
+            \ (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ^|각 어드민에서 복\
+            사된 값"
+          required: false
+          schema:
+            type: string
+          example: test-mall-key
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.1'
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/members-expelled-members-520853343'
+              examples:
+                get-members-expelled-members-v-1-1:
+                  value: "[{\"memberNo\":1000000,\"memberId\":\"test\",\"memberType\"\
+                    :\"MALL\",\"providerType\":null,\"memberStatus\":\"WITHDRAWN\"\
+                    ,\"joinTypeName\":\"PC\",\"joinYmdt\":\"2021-01-01 00:00:00\"\
+                    ,\"lastLoginYmdt\":null,\"lastLoginIp\":null,\"loginCount\":0,\"\
+                    additionalInfo\":null,\"memberGradeName\":\"기본등급\",\"memberGroupNames\"\
+                    :\"그룹1, 그룹2\",\"withdrawalDateTime\":\"2021-01-01 00:00:00\",\"\
+                    withdrawalReason\":\"탙퇴 사유\",\"nickname\":null,\"pushNotificationAgreeYmdt\"\
+                    :null,\"smsAgreeYmdt\":null,\"directMailAgreeYmdt\":null,\"oauthIdNo\"\
+                    :null,\"adultCertificatedYmdt\":null,\"pushNotificationAgreed\"\
+                    :false,\"directMailAgreed\":false,\"smsAgreed\":false,\"principalCertificated\"\
+                    :false,\"adultCertificated\":false}]"
+  /members/external:
+    post:
+      tags:
+        - Member
+      summary: 외부회원연동 회원가입
+      description: |+
+        ## 부가설명 및 특이사항
+        외부회원연동 회원가입
+
+
+        자체회원연동(=외부회원연동) 을 사용하는 몰의 회원을 직접 가입시키는 API 입니다.
+
+        자체회원연동 이후, 아래 가이드의 응답값을 이용하여 쇼핑몰 회원가입을 진행합니다.
+        [자체회원 연동 가이드](https://workspace-help.nhn-commerce.com/recommendedcontents/contents/prm_member_guide)
+
+      operationId: create-external-member
+      parameters:
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer authorizationToken"
+          required: false
+          schema:
+            type: string
+          example: Bearer authorizationToken
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\
+            \ (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ^|각 어드민에서 복\
+            사된 값"
+          required: false
+          schema:
+            type: string
+          example: test-mall-key
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/members-external1437284076'
+            examples:
+              create-external-member:
+                value: |2-
+                                  {
+                      "id": "member_id",
+                      "name": "회원명",
+                      "nickname": "닉네임",
+                      "email": "test@gmail.com",
+                      "phone": "010-1111-2222",
+                      "ci": "testCi-4557",
+                      "birthday": "19000101",
+                      "gender": "M",
+                      "gradeNo": 123,
+                      "groupNos": [],
+                      "adultCertified": false,
+                      "privacyPolicyAgreed": false,
+                      "pushPolicyAgreed": false,
+                      "smsPolicyAgreed": false,
+                      "emailPolicyAgreed": false,
+                      "extraJson": "{\"job\":\"가수\",\"hobby\":[\"운동하기\",\"영화보기\"]}",
+                      "businessName": "사업자명",
+                      "businessRegistrationNumber": "1234567891",
+                      "nation": "KR",
+                      "zipCode": "1234",
+                      "streetAddress": "테스트 도로명 주소",
+                      "streetAddressDetail": "도로명 상세 주소",
+                      "landLotAddress": "테스트 지번 주소",
+                      "landLotAddressDetail": "지번 상세 주소",
+                      "city": "서울시",
+                      "state": "구로구"
+                  }
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/members-external-562353168'
+              examples:
+                create-external-member:
+                  value: '{"memberNo":1}'
+  /members/prohibit:
+    post:
+      tags:
+        - Member
+      summary: 회원 이용 정지
+      description:
+        "## 부가설명 및 특이사항\n회원 이용 정지\n\n* 알림 종류 : KAKAO | SMS | EMAIL | ALL,\n\
+        * 변경시킬 회원 상태: \n    PAUSED : 일시정지\n    BLOCKED : 영구정지\n"
+      operationId: member-prohibit-v1.0
+      parameters:
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer authorizationToken"
+          required: false
+          schema:
+            type: string
+          example: Bearer authorizationToken
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\
+            \ (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ^|각 어드민에서 복\
+            사된 값"
+          required: false
+          schema:
+            type: string
+          example: test-mall-key
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/members-prohibit-849892994'
+            examples:
+              member-prohibit-v1.0:
+                value: |-
+                  {
+                    "memberNos": [1, 2, 3],
+                    "notificationTypes": ["SMS","EMAIL"],
+                    "prohibition": true,
+                    "status": "PAUSED",
+                    "expireDate": "2020-09-18",
+                    "reason": "test"
+                  }
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/members-prohibit1975347019'
+              examples:
+                member-prohibit-v1.0:
+                  value: "{\"value\":\"일시 이용정지\",\"rows\":[{\"memberNo\":1,\"success\"\
+                    :true,\"message\":\"\"}]}"
+  /profile:
+    get:
+      tags:
+        - Profile
+      summary: 회원 정보 조회하기
+      description: |2-
+
+        ## 부가설명 및 특이사항
+         회원 정보를 조회합니다.
+      operationId: get-profile
+      parameters:
+        - name: memberId
+          in: query
+          description: 아이디 (회원 조회용) (nullable)
+          required: false
+          schema:
+            type: string
+        - name: memberNo
+          in: query
+          description: 회원 번호 (회원 조회용) (nullable)
+          required: false
+          schema:
+            type: number
+        - name: oauthIdNo
+          in: query
+          description: oauth 인증번호 (회원 조회용) (nullable)
+          required: false
+          schema:
+            type: string
+        - name: email
+          in: query
+          description: 이메일 (회원 조회용) (nullable)
+          required: false
+          schema:
+            type: string
+        - name: representativeMemberNo
+          in: query
+          description: 대표몰회원번호 (회원 조회용) (nullable)
+          required: false
+          schema:
+            type: number
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer authorizationToken"
+          required: false
+          schema:
+            type: string
+          example: Bearer authorizationToken
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\
+            \ (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ^|각 어드민에서 복\
+            사된 값"
+          required: false
+          schema:
+            type: string
+          example: test-mall-key
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/profile1753227609'
+              examples:
+                get-profile:
+                  value: "{\"memberNo\":12345,\"memberName\":\"홍길동\",\"memberGradeNo\"\
+                    :1,\"memberGradeName\":\"테스트 등급\",\"memberGroupNames\":\"그룹 1\"\
+                    ,\"memberGroups\":[{\"memberGroupNo\":1,\"memberGroupName\":\"\
+                    그룹 1\",\"memberGroupDescription\":\"그룹 설명\"}],\"memberId\":\"\
+                    test\",\"ci\":\"ci\",\"gender\":\"UNKNOWN\",\"memberStatus\":\"\
+                    ACTIVE\",\"memberType\":\"MALL\",\"nickname\":\"taejun\",\"birthday\"\
+                    :\"2000-01-01\",\"mobileCountryCode\":null,\"mobileNo\":\"01012341234\"\
+                    ,\"email\":\"ttttt@nhn.com\",\"joinTypeName\":\"PC\",\"joinYmdt\"\
+                    :\"2021-01-01 00:00:00\",\"lastLoginYmdt\":\"2021-01-02 12:34:00\"\
+                    ,\"lastLoginIp\":\"127.0.0.1\",\"loginCount\":10,\"pushNotificationAgreeYmdt\"\
+                    :\"2021-01-01 00:00:00\",\"smsAgreeYmdt\":\"2021-01-01 00:00:00\"\
+                    ,\"directMailAgreeYmdt\":\"2021-01-01 00:00:00\",\"oauthIdNo\"\
+                    :\"123456789\",\"additionalInfo\":\"{}\",\"adultCertificatedYmdt\"\
+                    :\"2021-01-01 00:00:00\",\"providerType\":\"PAYCO\",\"pushNotificationAgreed\"\
+                    :true,\"directMailAgreed\":true,\"smsAgreed\":true,\"principalCertificated\"\
+                    :true,\"adultCertificated\":true,\"blacklisted\":false,\"representativeMemberNo\"\
+                    :null,\"businessName\":null,\"registrationNo\":null,\"extraInfo\"\
+                    :[{\"extraInfoNo\":1,\"extraInfoOptionNos\":[10,11,12],\"extraInfoOptionTextContent\"\
+                    :\"내용\"}],\"agreedTerms\":[{\"termsNo\":2,\"termsType\":\"TRANSFER_AGREE\"\
+                    ,\"isAgree\":true,\"agreementYmdt\":\"2025-10-28 10:09:32\"}],\"\
+                    customAgreedTerms\":[{\"customTermsNo\":20,\"isAgree\":true,\"\
+                    agreementYmdt\":\"2025-10-28 10:09:32\"}]}"
+    put:
+      tags:
+        - Profile
+      summary: 회원 정보 수정하기
+      description: |2-
+
+        ## 부가설명 및 특이사항
+         회원 정보를 수정합니다.
+      operationId: put-profile
+      parameters:
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer authorizationToken"
+          required: false
+          schema:
+            type: string
+          example: Bearer authorizationToken
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\
+            \ (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ^|각 어드민에서 복\
+            사된 값"
+          required: false
+          schema:
+            type: string
+          example: test-mall-key
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/profile1934915172'
+            examples:
+              put-profile:
+                value: "{\"memberId\":\"test@test.com\",\"memberNo\":12345,\"memberName\"\
+                  :\"테스트0\",\"firstName\":null,\"lastName\":null,\"mobileCountryCode\"\
+                  :null,\"mobileNo\":\"01063169349\",\"telephoneNo\":\"0213243422\"\
+                  ,\"ci\":\"test-ci\",\"birthday\":\"19820407\",\"sex\":\"M\",\"email\"\
+                  :\"abc1234@abc.com\",\"zipCd\":\"12345\",\"address\":\"서울특별시 여의도\
+                  \",\"detailAddress\":\"상세주소입니다\",\"jibunAddress\":\"서울특별시 여의도\"\
+                  ,\"jibunDetailAddress\":\"여의대방로 24다길 9\",\"city\":\"\",\"state\"\
+                  :\"\",\"countryCode\":null,\"nickname\":\"닉네임\",\"pushNotificationAgreed\"\
+                  :false,\"smsAgreed\":false,\"directMailAgreed\":false,\"businessName\"\
+                  :\"회사명\",\"registrationNo\":\"1234567890\",\"refundBank\":\"ANONYMOUS\"\
+                  ,\"refundBankAccount\":\"\",\"refundBankDepositorName\":\"\",\"\
+                  certificated\":true,\"joinTermsAgreements\":[\"USE\"],\"customTermsNos\"\
+                  :[1],\"additionalInfo\":\"{ \\\"companyCode\\\" : \\\"TEST\\\" }\"\
+                  ,\"extraInfo\":[{\"extraInfoNo\":1,\"extraInfoOptionNos\":[10,11,12],\"\
+                  extraInfoOptionTextContent\":null}]}"
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/profile-1775399877'
+              examples:
+                put-profile:
+                  value: '{"memberNo":90001}'
+    delete:
+      tags:
+        - Profile
+      summary: 회원 탈퇴 시키기
+      description: |2-
+
+        ## 부가설명 및 특이사항
+         특정 회원을 탈퇴시킵니다.
+         memberNo 혹은 memberId 혹은 oauthIdNo 셋중 하나는 필수입니다
+      operationId: delete-profile
+      parameters:
+        - name: memberId
+          in: query
+          description: 회원 아이디 (nullable)
+          required: false
+          schema:
+            type: string
+        - name: memberNo
+          in: query
+          description: 회원 번호 (nullable)
+          required: false
+          schema:
+            type: number
+        - name: oauthIdNo
+          in: query
+          description: oauth 인증 일련번호 (nullable)
+          required: false
+          schema:
+            type: string
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer authorizationToken"
+          required: false
+          schema:
+            type: string
+          example: Bearer authorizationToken
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\
+            \ (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ^|각 어드민에서 복\
+            사된 값"
+          required: false
+          schema:
+            type: string
+          example: test-mall-key
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      responses:
+        '204':
+          description: '204'
+  /profile/blocked-release:
+    put:
+      tags:
+        - Profile
+      summary: 차단 회원 해제
+      description:
+        "\n## 부가설명 및 특이사항\n 차단자(=blocker)가 차단한 회원(=blocked)을 차단 해제합니다.\n\
+        \ 대상 회원번호(=targetMemberNo) 혹은 대상 회원아이디(=targetMemberId) 둘 중 하나는 존재해야합니다.\n\
+        \ \n## \n name  | type  | required | default value | description |\n :----\
+        \ | :---: | :------: | :-----------: | :---------- |\n memberNo        | integer\
+        \   | Y | -     | 차단자 회원번호 |\n targetMemberNo         | integer  | N | - \
+        \    | 차단 대상 회원 번호 |\n targetMemberId         | string  | N | -     | 차단 대\
+        상 회원 아이디 |"
+      operationId: release-blocked-member
+      parameters:
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer authorizationToken"
+          required: false
+          schema:
+            type: string
+          example: Bearer authorizationToken
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\
+            \ (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ^|각 어드민에서 복\
+            사된 값"
+          required: false
+          schema:
+            type: string
+          example: test-mall-key
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/profile-blocked-release452550290'
+            examples:
+              release-blocked-member:
+                value: "{\"memberNo\":1,\"targetMemberId\":\"memberId\",\"targetMemberNo\"\
+                  :null}"
+      responses:
+        '204':
+          description: '204'
+  /profile/bulk:
+    put:
+      tags:
+        - Profile
+      summary: 대량 회원 정보 수정하기
+      description: |2-
+
+        ## 부가설명 및 특이사항
+         대량의 회원 정보를 수정합니다.
+         최대 1000명의 회원까지 가능합니다.
+      operationId: put-profile-bulk
+      parameters:
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer authorizationToken"
+          required: false
+          schema:
+            type: string
+          example: Bearer authorizationToken
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\
+            \ (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ^|각 어드민에서 복\
+            사된 값"
+          required: false
+          schema:
+            type: string
+          example: test-mall-key
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/profile-bulk1699245403'
+            examples:
+              put-profile-bulk:
+                value: "[{\"memberId\":\"test@test.com\",\"memberNo\":1,\"memberName\"\
+                  :\"테스트0\",\"firstName\":null,\"lastName\":null,\"mobileCountryCode\"\
+                  :null,\"mobileNo\":\"01063169349\",\"telephoneNo\":\"0213243422\"\
+                  ,\"ci\":\"test-ci\",\"birthday\":\"19820407\",\"sex\":\"M\",\"email\"\
+                  :\"abc1234@abc.com\",\"zipCd\":\"12345\",\"address\":\"서울특별시 여의도\
+                  \",\"detailAddress\":\"상세주소입니다\",\"jibunAddress\":\"서울특별시 여의도\"\
+                  ,\"jibunDetailAddress\":\"여의대방로 24다길 9\",\"city\":\"\",\"state\"\
+                  :\"\",\"countryCode\":null,\"nickname\":\"닉네임\",\"pushNotificationAgreed\"\
+                  :false,\"smsAgreed\":false,\"directMailAgreed\":false,\"businessName\"\
+                  :\"회사명\",\"registrationNo\":\"1234567890\",\"refundBank\":\"ANONYMOUS\"\
+                  ,\"refundBankAccount\":\"\",\"refundBankDepositorName\":\"\",\"\
+                  certificated\":true,\"joinTermsAgreements\":[\"USE\"],\"customTermsNos\"\
+                  :[],\"additionalInfo\":\"{ \\\"companyCode\\\" : \\\"TEST\\\" }\"\
+                  ,\"extraInfo\":[{\"extraInfoNo\":1,\"extraInfoOptionNos\":[10,11,12],\"\
+                  extraInfoOptionTextContent\":null}]},{\"memberId\":\"test2@test.com\"\
+                  ,\"memberNo\":12346,\"memberName\":\"테스트1\",\"firstName\":null,\"\
+                  lastName\":null,\"mobileCountryCode\":null,\"mobileNo\":\"01000000000\"\
+                  ,\"telephoneNo\":\"021234567\",\"ci\":\"test-ci\",\"birthday\":\"\
+                  19820408\",\"sex\":\"M\",\"email\":\"abc12345@abc.com\",\"zipCd\"\
+                  :\"123456\",\"address\":\"서울특별시 여의도\",\"detailAddress\":\"상세주소입니\
+                  다\",\"jibunAddress\":\"서울특별시 여의도\",\"jibunDetailAddress\":\"여의대방\
+                  로 24다길 9\",\"city\":\"\",\"state\":\"\",\"countryCode\":null,\"\
+                  nickname\":\"닉네임2\",\"pushNotificationAgreed\":false,\"smsAgreed\"\
+                  :false,\"directMailAgreed\":false,\"businessName\":\"회사명\",\"registrationNo\"\
+                  :\"1234567890\",\"refundBank\":\"ANONYMOUS\",\"refundBankAccount\"\
+                  :\"\",\"refundBankDepositorName\":\"\",\"certificated\":true,\"\
+                  joinTermsAgreements\":[\"USE\"],\"customTermsNos\":[],\"additionalInfo\"\
+                  :\"{ \\\"companyCode\\\" : \\\"TEST2\\\" }\",\"extraInfo\":[{\"\
+                  extraInfoNo\":2,\"extraInfoOptionNos\":[],\"extraInfoOptionTextContent\"\
+                  :\"추가항목 텍스트 답변\"}]}]"
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/profile-bulk-786404190'
+              examples:
+                put-profile-bulk:
+                  value: '{"memberNos":[90001,90002]}'
+  /profile/bulk-delete:
+    post:
+      tags:
+        - Profile
+      summary: 복수의 회원 탈퇴 처리하기
+      description: |2-
+
+        ## 부가설명 및 특이사항
+         최대 500명의 회원을 동시에 탈퇴시킵니다.
+      operationId: delete-bulk-profile
+      parameters:
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer authorizationToken"
+          required: false
+          schema:
+            type: string
+          example: Bearer authorizationToken
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\
+            \ (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ^|각 어드민에서 복\
+            사된 값"
+          required: false
+          schema:
+            type: string
+          example: test-mall-key
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/profile-bulk-delete-722054971'
+            examples:
+              delete-bulk-profile:
+                value: '{"memberNos":[1004]}'
+      responses:
+        '204':
+          description: '204'
+  /profile/dormant:
+    get:
+      tags:
+        - Profile
+      summary: 휴면 회원 조회하기 V1.1
+      description:
+        "\n## 부가설명 및 특이사항\n 휴면 상태의 회원을 조회합니다\n\n개인정보 보호법에 따라 2021년 8월 1일\
+        부터 분리보관된 휴면 회원의 개인정보를 제공하지 않도록 변경됩니다.\n - 아이디: 일반 아이디는 기존과 동일하게 제공되지만, 이메일\
+        \ 형식의 아이디는 '@' 이후의 도메인이 마스킹되어 제공됩니다.\n - 이메일: 삭제\n \n## Ver 1.0\n- MemberType\
+        \ = [MALL: 쇼핑몰 회원, OPENID: 연동형 회원, NEOID: 간편로그인 회원]\n- MemberStatus = [WAITING:\
+        \ 대기, ACTIVE: 가입완료, FREEZE or DORMANT: 휴면 , PAUSED :이용정지]\n- page = 페이지 번호\
+        \n- pageSize = 페이지 사이즈\n \n## Ver 1.1\n- MemberType = [MALL: 쇼핑몰 회원, SYNC_ID:\
+        \ 연동형 회원, OPEN_ID: 간편로그인 회원]\n- MemberStatus = [WAITING: 대기, ACTIVE: 가입완료\
+        , WITHDRAWN: 탈퇴, FREEZE or DORMANT: 휴면 , PAUSED :이용정지, PENDING: 승인대기]\n- page\
+        \ = 페이지 번호 (Ver 1.0 과 동일)\n- size = 페이지 사이즈 (pageSize -> size 로 변동)"
+      operationId: get-profile-dormant-v-1-1
+      parameters:
+        - name: page
+          in: query
+          description: 페이지 번호 (1 based index)
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: size
+          in: query
+          description: 페이지 사이즈
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: startDormantDate
+          in: query
+          description: 휴면전환일시 검색 시작일^|2025-10-28
+          required: true
+          schema:
+            type: string
+        - name: endDormantDate
+          in: query
+          description: 휴면전환일시 검색 종료일^|2025-10-28
+          required: true
+          schema:
+            type: string
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer authorizationToken"
+          required: false
+          schema:
+            type: string
+          example: Bearer authorizationToken
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\
+            \ (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ^|각 어드민에서 복\
+            사된 값"
+          required: false
+          schema:
+            type: string
+          example: test-mall-key
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.1'
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/profile-dormant9804281'
+              examples:
+                get-profile-dormant-v-1-1:
+                  value: "{\"content\":[{\"memberNo\":1000000,\"memberId\":\"test@************\"\
+                    ,\"memberName\":\"샵바이\",\"dormantYmdt\":\"2021-01-01 02:05:00\"\
+                    ,\"member\":{\"memberNo\":1000000,\"memberType\":\"MALL\",\"providerType\"\
+                    :null,\"joinYmdt\":\"2019-01-01 00:00:00\"}},{\"memberNo\":1000001,\"\
+                    memberId\":\"\",\"memberName\":\"페이코\",\"dormantYmdt\":\"2021-01-02\
+                    \ 02:05:00\",\"member\":{\"memberNo\":1000001,\"memberType\":\"\
+                    OPEN_ID\",\"providerType\":\"PAYCO\",\"joinYmdt\":\"2019-02-02\
+                    \ 00:00:00\"}}],\"pageable\":{\"pageSize\":10,\"sort\":{\"sorted\"\
+                    :false,\"unsorted\":true,\"empty\":true},\"pageNumber\":1,\"offset\"\
+                    :0,\"paged\":true,\"unpaged\":false},\"totalPages\":1,\"totalElements\"\
+                    :2,\"last\":true,\"numberOfElements\":2,\"first\":false,\"size\"\
+                    :10,\"number\":1,\"sort\":{\"sorted\":false,\"unsorted\":true,\"\
+                    empty\":true},\"empty\":false}"
+    put:
+      tags:
+        - Profile
+      summary: 휴면 회원 전환하기
+      description: |2-
+
+        ## 부가설명 및 특이사항
+         휴면 회원으로 전환합니다.
+      operationId: put-profile-dormant
+      parameters:
+        - name: memberId
+          in: query
+          description: 회원 아이디 (회원 조회용)
+          required: false
+          schema:
+            type: string
+        - name: memberNo
+          in: query
+          description: 회원 번호 (회원 조회용)
+          required: false
+          schema:
+            type: number
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer authorizationToken"
+          required: false
+          schema:
+            type: string
+          example: Bearer authorizationToken
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\
+            \ (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ^|각 어드민에서 복\
+            사된 값"
+          required: false
+          schema:
+            type: string
+          example: test-mall-key
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      responses:
+        '204':
+          description: '204'
+  /profile/dormant-release:
+    put:
+      tags:
+        - Profile
+      summary: 휴면 회원 해제
+      description:
+        "\n## 부가설명 및 특이사항\n 회원의 휴면 상태를 해제합니다.\n 회원 아이디 혹은 회원번호, 둘 중 하나는\
+        \ 존재해야합니다.\n \n## \n name  | type  | required | default value | description\
+        \ |\n :---- | :---: | :------: | :-----------: | :---------- |\n mallNo  \
+        \         | integer | Y | -     | 쇼핑몰 번호 |\n memberId       | string  | N\
+        \ | -   | 회원 아이디|\n memberNo          | integer  | N | -     | 회원 번호 |"
+      operationId: release-dormant-member
+      parameters:
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer authorizationToken"
+          required: false
+          schema:
+            type: string
+          example: Bearer authorizationToken
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\
+            \ (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ^|각 어드민에서 복\
+            사된 값"
+          required: false
+          schema:
+            type: string
+          example: test-mall-key
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/profile-dormant-release909502051'
+            examples:
+              release-dormant-member:
+                value: '{"memberId":"memberId","memberNo":null}'
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/profile-dormant-release486549215'
+              examples:
+                release-dormant-member:
+                  value: '{}'
+  /profile/grades:
+    put:
+      tags:
+        - MemberGrade
+      summary: 회원등급 수정하기
+      description:
+        "\n## 부가설명 및 특이사항\n 회원들의 회원등급을 수정합니다. (최대: 1000명)\n issueCoupon이\
+        \ true 인 경우, 회원등급 쿠폰을 발행합니다. \n issueCoupon이 null 인 경우, false로 간주합니다. (default:\
+        \ null)"
+      operationId: put-profile-grades
+      parameters:
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer authorizationToken"
+          required: false
+          schema:
+            type: string
+          example: Bearer authorizationToken
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\
+            \ (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ^|각 어드민에서 복\
+            사된 값"
+          required: false
+          schema:
+            type: string
+          example: test-mall-key
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/profile-grades508071144'
+            examples:
+              put-profile-grades:
+                value: "{\"gradeNo\":2,\"members\":[{\"memberNo\":1,\"memberId\":\"\
+                  test\"}],\"issueCoupon\":true}"
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/profile-grades1340609570'
+              examples:
+                put-profile-grades:
+                  value: '{"memberNos":[1]}'
+  /profile/groups:
+    get:
+      tags:
+        - Profile
+      summary: 회원의 그룹 조회
+      description: "\n## 부가설명 및 특이사항\n 회원의 그룹을 조회합니다.\n "
+      operationId: get-profile-groups
+      parameters:
+        - name: memberNo
+          in: query
+          description: 회원 번호 (회원 조회용) (nullable)
+          required: false
+          schema:
+            type: string
+        - name: memberId
+          in: query
+          description: 회원 아이디 (회원 조회용) (nullable)
+          required: false
+          schema:
+            type: string
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer authorizationToken"
+          required: false
+          schema:
+            type: string
+          example: Bearer authorizationToken
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\
+            \ (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ^|각 어드민에서 복\
+            사된 값"
+          required: false
+          schema:
+            type: string
+          example: test-mall-key
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/profile-groups-1410096186'
+              examples:
+                get-profile-groups:
+                  value: "{\"memberNo\":123,\"items\":[{\"memberGroupNo\":1,\"memberGroupName\"\
+                    :\"vip\"}]}"
+    post:
+      tags:
+        - Profile
+      summary: 회원을 그룹에 추가하기
+      description: "\n## 부가설명 및 특이사항\n 회원을 그룹을 추가합니다.\n "
+      operationId: post-profile-groups
+      parameters:
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer authorizationToken"
+          required: false
+          schema:
+            type: string
+          example: Bearer authorizationToken
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\
+            \ (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ^|각 어드민에서 복\
+            사된 값"
+          required: false
+          schema:
+            type: string
+          example: test-mall-key
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/profile-groups-1583052347'
+            examples:
+              post-profile-groups:
+                value: "{\"memberGroupNo\":1234,\"memberId\":\"younghee\",\"memberNo\"\
+                  :111}"
+      responses:
+        '201':
+          description: '201'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/profile-groups-64494364'
+              examples:
+                post-profile-groups:
+                  value: '{"memberNo":111}'
+    delete:
+      tags:
+        - Profile
+      summary: 회원을 그룹에서 삭제하기
+      description: "\n## 부가설명 및 특이사항\n 회원을 그룹에서 삭제합니다.\n "
+      operationId: delete-profile-groups
+      parameters:
+        - name: memberNo
+          in: query
+          description: 회원 번호 (회원 조회용) (nullable)
+          required: false
+          schema:
+            type: string
+        - name: memberId
+          in: query
+          description: 회원 아이디 (회원 조회용) (nullable)
+          required: false
+          schema:
+            type: string
+        - name: memberGroupNo
+          in: query
+          description: 회원 그룹 번호 (nullable)
+          required: false
+          schema:
+            type: string
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer authorizationToken"
+          required: false
+          schema:
+            type: string
+          example: Bearer authorizationToken
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\
+            \ (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ^|각 어드민에서 복\
+            사된 값"
+          required: false
+          schema:
+            type: string
+          example: test-mall-key
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/profile-groups-64494364'
+              examples:
+                delete-profile-groups:
+                  value: '{"memberNo":111}'
+  /profile/logout:
+    delete:
+      tags:
+        - Profile
+      summary: 회원 로그아웃 시키기
+      description:
+        "\n## 부가설명 및 특이사항\n 회원을 로그아웃 처리 합니다.\n 회원번호 혹은 oauthId 둘 중 하나는\
+        \ 존재해야합니다.\n \n## \n name  | type  | required | default value | description\
+        \ |\n :---- | :---: | :------: | :-----------: | :---------- |\n oauthIdNo\
+        \        | string   | N | -     | oauth 인증 일련번호 |\n memberNo         | integer\
+        \  | N | -     | 회원 번호 |"
+      operationId: logout-profile
+      parameters:
+        - name: oauthIdNo
+          in: query
+          description: oauth 인증 일련번호 (nullable)
+          required: false
+          schema:
+            type: string
+        - name: memberNo
+          in: query
+          description: 회원 번호 (nullable)
+          required: false
+          schema:
+            type: number
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer authorizationToken"
+          required: false
+          schema:
+            type: string
+          example: Bearer authorizationToken
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\
+            \ (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ^|각 어드민에서 복\
+            사된 값"
+          required: false
+          schema:
+            type: string
+          example: test-mall-key
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      responses:
+        '204':
+          description: '204'
+  /profile/restore:
+    put:
+      tags:
+        - Profile
+      summary: 회원 탈퇴 철회시키기
+      description: |2-
+
+        ## 부가설명 및 특이사항
+         특정 회원의 탈퇴를 철회 시킵니다.
+         (단, 이미 삭제된 회원인 경우, 탈퇴 철회가 불가능합니다.)
+         memberNo 혹은 memberId 혹은 oauthIdNo 셋중 하나는 필수입니다
+      operationId: restore-profile
+      parameters:
+        - name: memberId
+          in: query
+          description: 회원 아이디 (nullable)
+          required: false
+          schema:
+            type: string
+        - name: memberNo
+          in: query
+          description: 회원 번호 (nullable)
+          required: false
+          schema:
+            type: number
+        - name: oauthIdNo
+          in: query
+          description: oauth 인증 일련번호 (nullable)
+          required: false
+          schema:
+            type: string
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer authorizationToken"
+          required: false
+          schema:
+            type: string
+          example: Bearer authorizationToken
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\
+            \ (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ^|각 어드민에서 복\
+            사된 값"
+          required: false
+          schema:
+            type: string
+          example: test-mall-key
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      responses:
+        '204':
+          description: '204'
+components:
+  schemas:
+    configurations-member-common-join-config18446488:
+      required:
+        - address
+        - birthday
+        - email
+        - emailAgreement
+        - memberId
+        - memberName
+        - mobileNo
+        - nickname
+        - password
+        - phoneNo
+        - sex
+        - smsAgreement
+        - used
+      type: object
+      properties:
+        birthday:
+          type: string
+          description: 생년월일^|NOT_USED
+        address:
+          type: string
+          description: 주소^|USED
+        sex:
+          type: string
+          description: 성별^|NOT_USED
+        memberName:
+          type: string
+          description: 이름^|REQUIRED
+        mobileNo:
+          type: string
+          description: 휴대폰번호^|REQUIRED
+        used:
+          type: boolean
+          description: 설정 사용 여부^|true
+        phoneNo:
+          type: string
+          description: 전화번호^|NOT_USED
+        emailAgreement:
+          type: string
+          description: 이메일 수신 동의 사용^|USED
+        password:
+          type: string
+          description: 비밀번호^|REQUIRED
+        smsAgreement:
+          type: string
+          description: SMS 수신 동의 사용^|USED
+        nickname:
+          type: string
+          description: 닉네임^|NOT_USED
+        email:
+          type: string
+          description: 이메일^|REQUIRED
+        memberId:
+          type: string
+          description: 아이디^|REQUIRED
+    profile-bulk-786404190:
+      required:
+        - memberNos
+      type: object
+      properties:
+        memberNos:
+          type: array
+          description: '회원 번호 목록^|[90001, 90002]'
+          items:
+            oneOf:
+              - type: object
+              - type: boolean
+              - type: string
+              - type: number
+    profile-groups-64494364:
+      required:
+        - memberNo
+      type: object
+      properties:
+        memberNo:
+          type: number
+          description: 회원 번호^|111
+    members1756520566:
+      required:
+        - contents
+      type: object
+      properties:
+        contents:
+          type: array
+          description: 조회 결과
+          items:
+            required:
+              - countryCode
+              - firstName
+              - isDirectMailAgreed
+              - isPushNotificationAgreed
+              - isSmsAgreed
+              - joinYmdt
+              - lastName
+              - linked
+              - linkedYn
+              - loginCount
+              - memberGradeName
+              - memberGroupCount
+              - memberId
+              - memberName
+              - memberNo
+              - memberStatus
+              - memberType
+              - mobileNo
+              - nickname
+              - openIdProviders
+              - phoneNo
+              - providerTypeLabel
+              - sex
+            type: object
+            properties:
+              birthday:
+                type: string
+                description: 생년월일 (nullable)
+                nullable: true
+              zipCode:
+                type: string
+                description: 우편번호 (nullable)
+                nullable: true
+              memberGroupName:
+                type: string
+                description: 회원그룹 (nullable)
+                nullable: true
+              lastName:
+                type: string
+                description: 성^|성
+              city:
+                type: string
+                description: '(국내, 해외 겸용) 도시 (nullable)'
+                nullable: true
+              memberStatus:
+                type: string
+                description: 회원 상태^|ACTIVE
+                enum:
+                  - 'WAITING: 가입대기'
+                  - 'ACTIVE: 가입완료'
+                  - 'WITHDRAWN: 회원 탈퇴'
+                  - 'FREEZE: 휴면'
+                  - 'DORMANT: 휴면'
+                  - 'PAUSED: 일시 이용정지'
+                  - 'PENDING: 승인대기'
+              memberName:
+                type: string
+                description: 이름^|홍길동
+              representativeMemberNo:
+                type: number
+                description: 대표몰 회원번호 (nullable)
+                nullable: true
+              linkYmdt:
+                type: string
+                description: 회원 연동일자 (nullable)
+                nullable: true
+              providerType:
+                type: string
+                description: 마지막 연동 SNS (nullable)
+                nullable: true
+                enum:
+                  - 'PAYCO: 페이코'
+                  - 'NAVER: 네이버'
+                  - 'KAKAO: 카카오'
+                  - 'KAKAO_SYNC: 카카오싱크'
+                  - 'FACEBOOK: 페이스북'
+                  - 'LINE: 라인'
+                  - 'APPLE: 애플'
+                  - 'GOOGLE: 구글'
+                  - 'APP_CARD: 앱카드'
+                  - 'IAMSCHOOL: 아이엠스쿨'
+                  - 'UNIONE: 유니원'
+                  - 'NCPSTORE: NCP스토어'
+              phoneNo:
+                type: string
+                description: 전화번호^|0212345678
+              lastUpdateYmdt:
+                type: string
+                description: 최종업데이트일자 (nullable)
+                nullable: true
+              countryCode:
+                type: string
+                description: 거주 국가^|KR
+              nickname:
+                type: string
+                description: 이름^|활빈당
+              isDirectMailAgreed:
+                type: boolean
+                description: email 알림 동의 여부^|false
+              joinYmdt:
+                type: string
+                description: 회원가입일자^|2025-10-28 10:09
+              state:
+                type: string
+                description: '(국내, 해외 겸용) 국내: 군/구, 해외: 주 (nullable)'
+                nullable: true
+              email:
+                type: string
+                description: 이메일 (nullable)
+                nullable: true
+              memberStatusName:
+                type: string
+                description: 회원 상태 표기 (nullable)
+                nullable: true
+              linked:
+                type: boolean
+                description: 회원 연동여부^|false
+              jibunDetailAddress:
+                type: string
+                description: 지번 상세주소 (nullable)
+                nullable: true
+              memberId:
+                type: string
+                description: 아이디^|test-id
+              isPushNotificationAgreed:
+                type: boolean
+                description: 푸시 알림 동의 여부^|false
+              memberGroupCount:
+                type: number
+                description: 회원그룹 갯수^|1
+              lastLoginYmdt:
+                type: string
+                description: 최종로그인일자 (nullable)
+                nullable: true
+              address:
+                type: string
+                description: 도로명 주소 (nullable)
+                nullable: true
+              mobileCountryCode:
+                type: string
+                description: 국제전화번호 코드 (nullable)
+                nullable: true
+              sex:
+                type: string
+                description: 성별(M/F)^|F
+              jibunAddress:
+                type: string
+                description: 지번주소 (nullable)
+                nullable: true
+              memberProvider:
+                type: string
+                description: 회원 OpenID (nullable)
+                nullable: true
+              mobileNo:
+                type: string
+                description: 휴대전화번호^|01011111111
+              providerTypeLabel:
+                type: string
+                description: 연동 SNS 명^|페이코
+              loginCount:
+                type: number
+                description: 로그인 횟수^|1
+              firstName:
+                type: string
+                description: 이름^|이름
+              memberNo:
+                type: number
+                description: 회원번호^|1
+              isSmsAgreed:
+                type: boolean
+                description: SMS 알림 동의 여부^|false
+              memberGradeName:
+                type: string
+                description: 회원등급명^|서자
+              detailAddress:
+                type: string
+                description: 도로명 상세주소 (nullable)
+                nullable: true
+              openIdProviders:
+                type: array
+                description: '연동된 오픈아이디 리스트^|[]'
+                items:
+                  type: object
+                  properties:
+                    provider:
+                      type: string
+                      description: 오픈아이디 명^|null
+                      nullable: true
+                    oauthIdNo:
+                      type: string
+                      description: 오픈아이디의 oauthIdNo^|null
+                      nullable: true
+              linkedYn:
+                type: string
+                description: 연동 여부^|N
+              memberType:
+                type: string
+                description: 회원 유형^|MALL
+                enum:
+                  - 'MALL: 일반 회원'
+                  - 'SYNC_ID: 연동형 회원'
+                  - 'OPEN_ID: 간편로그인 회원'
+        lastId:
+          type: string
+          description: keySet 조회시 사용. searchAfter 파라미터 값으로 사용
+          nullable: true
+        totalCount:
+          type: number
+          description: 전체 조회건수 - includesCount false의 경우 null
+          nullable: true
+    members-external1437284076:
+      required:
+        - id
+      type: object
+      properties:
+        birthday:
+          type: string
+          description: 생년월일 (nullable)
+          nullable: true
+        zipCode:
+          type: string
+          description: 우편번호 (nullable)
+          nullable: true
+        gender:
+          type: string
+          description: 성별 (nullable)
+          nullable: true
+        city:
+          type: string
+          description: '도, 시 (nullable)'
+          nullable: true
+        nation:
+          type: string
+          description: 국가 코드 (nullable)
+          nullable: true
+        businessName:
+          type: string
+          description: 사업자 명 (nullable)
+          nullable: true
+        gradeNo:
+          type: number
+          description: 회원 등급 (nullable)
+          nullable: true
+        smsPolicyAgreed:
+          type: boolean
+          description: 광고성 SMS 수신동의 여부 (nullable)
+          nullable: true
+        adultCertified:
+          type: boolean
+          description: 성인 인증 여부 (nullable)
+          nullable: true
+        nickname:
+          type: string
+          description: '사용자 별명, 별칭 (nullable)'
+          nullable: true
+        state:
+          type: string
+          description: '구, 군, 읍 (nullable)'
+          nullable: true
+        id:
+          type: string
+          description: 회원 아이디(업체에서 관리하는 회원의 유일값)^|test1234
+        landLotAddress:
+          type: string
+          description: 지번 주소 (nullable)
+          nullable: true
+        streetAddressDetail:
+          type: string
+          description: 도로명 상세 주소 (nullable)
+          nullable: true
+        privacyPolicyAgreed:
+          type: boolean
+          description: 본인 인증 여부 (nullable)
+          nullable: true
+        email:
+          type: string
+          description: 이메일 (nullable)
+          nullable: true
+        pushPolicyAgreed:
+          type: boolean
+          description: 앱푸시 동의 여부 (nullable)
+          nullable: true
+        ci:
+          type: string
+          description: ci (nullable)
+          nullable: true
+        emailPolicyAgreed:
+          type: boolean
+          description: 광고성 Email 수신동의 여부 (nullable)
+          nullable: true
+        streetAddress:
+          type: string
+          description: 도로명 주소 (nullable)
+          nullable: true
+        phone:
+          type: string
+          description: 휴대전화번호 (nullable)
+          nullable: true
+        businessRegistrationNumber:
+          type: string
+          description: 사업자 등록번호 (nullable)
+          nullable: true
+        name:
+          type: string
+          description: 사용자 이름 (nullable)
+          nullable: true
+        landLotAddressDetail:
+          type: string
+          description: 지번 상세 주소 (nullable)
+          nullable: true
+        extraJson:
+          type: string
+          description: 추가정보 (입점사 회원 커스텀 정보) (nullable)
+          nullable: true
+        groupNos:
+          type: array
+          description: 회원 그룹 (nullable)
+          nullable: true
+          items:
+            oneOf:
+              - type: object
+              - type: boolean
+              - type: string
+              - type: number
+    profile-grades1340609570:
+      required:
+        - memberNos
+      type: object
+      properties:
+        memberNos:
+          type: array
+          description: '등급 변경완료 회원번호목록^|[1]'
+          items:
+            type: string
+    members-external-562353168:
+      required:
+        - memberNo
+      type: object
+      properties:
+        memberNo:
+          type: number
+          description: 가입된 회원 번호
+    configurations-member-app-card-743079106:
+      type: object
+      properties:
+        storeId:
+          type: string
+          description: 앱카드 store id (nullable)
+          nullable: true
+    profile-bulk1699245403:
+      type: array
+      items:
+        type: object
+        properties:
+          birthday:
+            type: string
+            description: 생일 yyyyMMdd (nullable)
+            nullable: true
+          lastName:
+            type: string
+            description: 성 (nullable)
+            nullable: true
+          city:
+            type: string
+            description: '(국내, 해외 겸용) 도시 (nullable)'
+            nullable: true
+          businessName:
+            type: string
+            description: 회사명 (nullable)
+            nullable: true
+          memberName:
+            type: string
+            description: 회원 성명 (nullable)
+            nullable: true
+          zipCd:
+            type: string
+            description: 우편번호 (nullable)
+            nullable: true
+          pushNotificationAgreed:
+            type: boolean
+            description: 푸시 알림 동의 여부 (nullable)
+            nullable: true
+          countryCode:
+            type: string
+            description: 거주 국가 (nullable)
+            nullable: true
+          directMailAgreed:
+            type: boolean
+            description: 이메일 알림 동의 여부 (nullable)
+            nullable: true
+          additionalInfo:
+            type: string
+            description: 추가 정보 (JSON) (nullable)
+            nullable: true
+          nickname:
+            type: string
+            description: 닉네임 (nullable)
+            nullable: true
+          customTermsNos:
+            type: array
+            description: 추가 선택 동의 항목 (nullable)
+            nullable: true
+            items:
+              oneOf:
+                - type: object
+                - type: boolean
+                - type: string
+                - type: number
+          state:
+            type: string
+            description: '(국내, 해외 겸용) 국내: 군/구, 해외: 주 (nullable)'
+            nullable: true
+          email:
+            type: string
+            description: 이메일 주소 (nullable)
+            nullable: true
+          jibunDetailAddress:
+            type: string
+            description: 도로명 주소 상세 (지번 주소) (nullable)
+            nullable: true
+          memberId:
+            type: string
+            description: 회원 아이디 (nullable)
+            nullable: true
+          address:
+            type: string
+            description: 도로명 주소 (nullable)
+            nullable: true
+          mobileCountryCode:
+            type: string
+            description: 국제전화번호 코드 (nullable)
+            nullable: true
+          certificated:
+            type: boolean
+            description: 인증확인 여부 (nullable)
+            nullable: true
+          ci:
+            type: string
+            description: CI (nullable)
+            nullable: true
+          smsAgreed:
+            type: boolean
+            description: SMS 알림 동의 여부 (nullable)
+            nullable: true
+          sex:
+            type: string
+            description: 성별 (F:여성/M:남성) (nullable)
+            nullable: true
+          jibunAddress:
+            type: string
+            description: 도로명 주소 (지번 주소) (nullable)
+            nullable: true
+          mobileNo:
+            type: string
+            description: 휴대전화번호 (nullable)
+            nullable: true
+          refundBank:
+            type: string
+            description: 환불 계좌 은행 (nullable)
+            nullable: true
+          firstName:
+            type: string
+            description: 이름 (nullable)
+            nullable: true
+          memberNo:
+            type: number
+            description: 회원 번호 (nullable)
+            nullable: true
+          refundBankDepositorName:
+            type: string
+            description: 환불 계좌 예금주명 (nullable)
+            nullable: true
+          telephoneNo:
+            type: string
+            description: 일반전화번호 (nullable)
+            nullable: true
+          registrationNo:
+            type: string
+            description: 사업자 등록 번호 (nullable)
+            nullable: true
+          joinTermsAgreements:
+            type: string
+            description: 선택동의항목
+            nullable: true
+            enum:
+              - '쇼핑몰/회사 소개: MALL_INTRODUCTION'
+              - '이용약관: USE'
+              - '전자금융거래 이용약관: E_COMMERCE'
+              - '개인정보처리방침: PI_PROCESS'
+              - '회원가입시 개인정보 수집/이용(필수): PI_COLLECTION_AND_USE_REQUIRED'
+              - '회원가입시 개인정보 수집/이용(선택): PI_COLLECTION_AND_USE_OPTIONAL'
+              - '개인정보 처리/위탁: PI_PROCESS_CONSIGNMENT'
+              - '개인정보 제3자 제공: PI_THIRD_PARTY_PROVISION'
+              - '비회원 게시글/문의글 작성 시 개인정보 수집/이용: PI_COLLECTION_AND_USE_FOR_GUEST_ON_ARTICLE'
+              - '이용 안내: ACCESS_GUIDE'
+              - '탈퇴 안내: WITHDRAWAL_GUIDE'
+              - '개인정보 판매자 제공: PI_SELLER_PROVISION'
+              - '회원 주문 시 개인정보 수집/이용: PI_COLLECTION_AND_USE_ON_ORDER'
+              - '주문정보 동의: ORDER_INFO_AGREE'
+              - '통관정보 수집/이용: CLEARANCE_INFO_COLLECTION_AND_USE'
+              - '개인정보 국외이전 동의: TRANSFER_AGREE'
+          detailAddress:
+            type: string
+            description: 도로명 주소 상세 (nullable)
+            nullable: true
+          refundBankAccount:
+            type: string
+            description: 환불 계좌 번호 (nullable)
+            nullable: true
+          extraInfo:
+            type: array
+            description: 추가 항목 정보
+            items:
+              required:
+                - extraInfoNo
+                - extraInfoOptionNos
+              type: object
+              properties:
+                extraInfoOptionNos:
+                  type: array
+                  description: '추가항목 옵션 번호 목록^|[]'
+                  items:
+                    oneOf:
+                      - type: object
+                      - type: boolean
+                      - type: string
+                      - type: number
+                extraInfoOptionTextContent:
+                  type: string
+                  description: 추가항목 옵션 텍스트 답변 내용^|추가항목 텍스트 답변
+                  nullable: true
+                extraInfoNo:
+                  type: number
+                  description: 추가항목 번호^|2
+    member-groups-groupNo-1944155955:
+      required:
+        - description
+        - name
+        - 'no'
+        - reserveBenefit
+      type: object
+      properties:
+        'no':
+          type: number
+          description: 회원 그룹 번호^|1
+        name:
+          type: string
+          description: 회원 그룹 이름^|임직원
+        description:
+          type: string
+          description: 회원 그룹 상세 설명^|임직원 확인용 그룹
+        reserveBenefit:
+          required:
+            - reserveRate
+            - used
+          type: object
+          properties:
+            reserveRate:
+              type: number
+              description: 적립금 혜택 적립률^|0
+            used:
+              type: boolean
+              description: 적립금 혜택 사용 여부^|false
+          description: 적립금 혜택 정보
+    configurations-member-open-id-providerType-371719732:
+      required:
+        - clientId
+      type: object
+      properties:
+        clientId:
+          type: string
+          description: 간편로그인 client id^|123
+        clientSecret:
+          type: string
+          description: 간편로그인 clientSecret - 마스킹^|456
+          nullable: true
+        scopes:
+          type: array
+          description: '간편로그인 scopes^|[id, name]'
+          nullable: true
+          items:
+            oneOf:
+              - type: object
+              - type: boolean
+              - type: string
+              - type: number
+        appleConfig:
+          type: object
+          properties:
+            encKey:
+              type: string
+              description: 애플인 경우 config 의 시크릿 - 마스킹 안함^|key
+              nullable: true
+            teamId:
+              type: string
+              description: 애플인 경우 config 의 teamId^|test-teamId
+              nullable: true
+            keyId:
+              type: string
+              description: 애플인 경우 config 의 keyId^|test-keyId
+              nullable: true
+          description: 애플인 경우 config^|com.ncp.member.presentation.request.OpenIdConfigClientRequest$AppleLoginConfigRequest@338179fe
+    member-groups-969948294:
+      type: array
+      items:
+        required:
+          - description
+          - name
+          - 'no'
+          - reserveBenefit
+        type: object
+        properties:
+          'no':
+            type: number
+            description: 회원 그룹 번호^|1
+          name:
+            type: string
+            description: 회원 그룹 이름^|임직원
+          description:
+            type: string
+            description: 회원 그룹 상세 설명^|임직원 확인용 그룹
+          reserveBenefit:
+            required:
+              - reserveRate
+              - used
+            type: object
+            properties:
+              reserveRate:
+                type: number
+                description: 적립금 혜택 적립률^|0
+              used:
+                type: boolean
+                description: 적립금 혜택 사용 여부^|false
+            description: 적립금 혜택 정보
+    members-expelled-members-520853343:
+      type: array
+      items:
+        required:
+          - joinYmdt
+          - loginCount
+          - memberGradeName
+          - memberGroupNames
+          - memberId
+          - memberNo
+          - memberStatus
+          - memberType
+          - withdrawalDateTime
+          - withdrawalReason
+        type: object
+        properties:
+          lastLoginYmdt:
+            type: string
+            description: 최근 접속 시간 (nullable) (nullable)
+            nullable: true
+          joinTypeName:
+            type: string
+            description: 가입 경로 (nullable)
+            nullable: true
+          memberStatus:
+            type: string
+            description: 회원 상태^|WITHDRAWN
+            enum:
+              - 'WAITING: 가입대기'
+              - 'ACTIVE: 가입완료'
+              - 'WITHDRAWN: 회원 탈퇴'
+              - 'FREEZE: 휴면'
+              - 'DORMANT: 휴면'
+              - 'PAUSED: 일시 이용정지'
+              - 'PENDING: 승인대기'
+          withdrawalDateTime:
+            type: string
+            description: 탈퇴 일시^|2021-01-01T00:00
+          loginCount:
+            type: number
+            description: 로그인 횟수^|0
+          providerType:
+            type: string
+            description: 마지막 연동 SNS (nullable)
+            nullable: true
+          lastLoginIp:
+            type: string
+            description: 마지막 접속 IP (nullable)
+            nullable: true
+          memberNo:
+            type: number
+            description: 회원번호^|1000000
+          memberGradeName:
+            type: string
+            description: 회원등급이름^|기본등급
+          additionalInfo:
+            type: string
+            description: 추가 정보(JSON) (nullable)
+            nullable: true
+          withdrawalReason:
+            type: string
+            description: 탈퇴 사유^|탙퇴 사유
+          joinYmdt:
+            type: string
+            description: 가입 일시^|2025-10-28 10:09
+          memberType:
+            type: string
+            description: 회원 구분^|MALL
+            enum:
+              - 'MALL: 일반 회원'
+              - 'SYNC_ID: 연동형 회원'
+              - 'OPEN_ID: 간편로그인 회원'
+          memberGroupNames:
+            type: string
+            description: '회원그룹이름^|그룹1, 그룹2'
+          memberId:
+            type: string
+            description: 아이디^|test
+    profile-1775399877:
+      required:
+        - memberNo
+      type: object
+      properties:
+        memberNo:
+          type: number
+          description: 회원 번호^|90001
+    profile-dormant-release909502051:
+      type: object
+      properties:
+        memberNo:
+          type: number
+          description: 회원 번호 (nullable)
+          nullable: true
+        memberId:
+          type: string
+          description: 회원 아이디 (nullable)
+          nullable: true
+    profile1753227609:
+      required:
+        - adultCertificated
+        - agreedTerms
+        - blacklisted
+        - customAgreedTerms
+        - directMailAgreed
+        - extraInfo
+        - joinYmdt
+        - lastLoginIp
+        - loginCount
+        - memberGradeName
+        - memberGradeNo
+        - memberGroupNames
+        - memberGroups
+        - memberId
+        - memberNo
+        - memberStatus
+        - memberType
+        - principalCertificated
+        - pushNotificationAgreed
+        - smsAgreed
+      type: object
+      properties:
+        birthday:
+          type: string
+          description: 생년월일 (nullable)
+          nullable: true
+        gender:
+          type: string
+          description: 성별 (nullable)
+          nullable: true
+        businessName:
+          type: string
+          description: 사업자 회원 회사명 (nullable)
+          nullable: true
+        memberStatus:
+          type: string
+          description: "회원 상태 (대기: WAITING, 가입완료: ACTIVE, 휴면: FREEZE or DORMANT, 이\
+            용정지: PAUSED)^|ACTIVE"
+        memberName:
+          type: string
+          description: 회원이름 (nullable)
+          nullable: true
+        representativeMemberNo:
+          type: number
+          description: 대표몰 회원번호 (nullable)
+          nullable: true
+        pushNotificationAgreed:
+          type: boolean
+          description: 푸시 알림 동의 여부^|true
+        providerType:
+          type: string
+          description: 마지막 연동 SNS (nullable)
+          nullable: true
+        principalCertificated:
+          type: boolean
+          description: 본인인증 여부(true|false)^|true
+        lastLoginIp:
+          type: string
+          description: 마지막 접속 IP^|127.0.0.1
+        directMailAgreeYmdt:
+          type: string
+          description: 광고 우편물(DM) 수신 동의 시각 (nullable)
+          nullable: true
+        directMailAgreed:
+          type: boolean
+          description: 광고 우편물(DM) 수신 동의 여부^|true
+        additionalInfo:
+          type: string
+          description: 추가 정보 (nullable)
+          nullable: true
+        nickname:
+          type: string
+          description: 닉네임 (nullable)
+          nullable: true
+        joinYmdt:
+          type: string
+          description: 가입 일시^|2021-01-01 00:00
+        memberGroups:
+          type: array
+          description: 회원 그룹 목록
+          items:
+            required:
+              - memberGroupDescription
+              - memberGroupName
+              - memberGroupNo
+            type: object
+            properties:
+              memberGroupName:
+                type: string
+                description: 회원 그룹 이름^|그룹 1
+              memberGroupDescription:
+                type: string
+                description: 회원 그룹 설명^|그룹 설명
+              memberGroupNo:
+                type: number
+                description: 회원 그룹 번호^|1
+        email:
+          type: string
+          description: 이메일 (nullable)
+          nullable: true
+        memberId:
+          type: string
+          description: 아이디^|test
+        agreedTerms:
+          type: array
+          description: "기본 동의 항목 목록^|[AgreedTerms(termsNo=2, termsType=TRANSFER_AGREE,\
+            \ isAgree=true, agreementYmdt=2025-10-28T10:09:32.810446202)]"
+          items:
+            required:
+              - agreementYmdt
+              - isAgree
+              - termsNo
+              - termsType
+            type: object
+            properties:
+              isAgree:
+                type: boolean
+                description: 기본 동의 항목 동의 여부^|true
+              agreementYmdt:
+                type: string
+                description: 기본 동의 항목 동의 시각^|2025-10-28T10:09:32.810446202
+              termsType:
+                type: string
+                description: "동의 타입 (MALL_INTRODUCTION, USE, E_COMMERCE, PI_PROCESS,\
+                  \ PI_COLLECTION_AND_USE_REQUIRED, PI_COLLECTION_AND_USE_OPTIONAL,\
+                  \ PI_PROCESS_CONSIGNMENT, PI_THIRD_PARTY_PROVISION, PI_COLLECTION_AND_USE_FOR_GUEST_ON_ARTICLE,\
+                  \ ACCESS_GUIDE, WITHDRAWAL_GUIDE, PI_SELLER_PROVISION, PI_COLLECTION_AND_USE_ON_ORDER,\
+                  \ ORDER_INFO_AGREE, CLEARANCE_INFO_COLLECTION_AND_USE, TRANSFER_AGREE,\
+                  \ PI_RESTOCK_NOTICE, PI_14_AGE)^|TRANSFER_AGREE"
+              termsNo:
+                type: number
+                description: 기본 동의 항목 번호^|2
+        lastLoginYmdt:
+          type: string
+          description: 최근 접속 시간 (nullable)
+          nullable: true
+        adultCertificated:
+          type: boolean
+          description: 성인 인증 여부^|true
+        mobileCountryCode:
+          type: string
+          description: 국제전화번호 코드 (nullable)
+          nullable: true
+        ci:
+          type: string
+          description: CI (nullable)
+          nullable: true
+        adultCertificatedYmdt:
+          type: string
+          description: 성인 인증 일시 (nullable)
+          nullable: true
+        smsAgreed:
+          type: boolean
+          description: 단문메시지서비스(SMS) 동의 여부^|true
+        joinTypeName:
+          type: string
+          description: 가입 경로 (nullable)
+          nullable: true
+        smsAgreeYmdt:
+          type: string
+          description: 단문메시지서비스(SMS) 동의 시각 (nullable)
+          nullable: true
+        customAgreedTerms:
+          type: array
+          description: "추가 동의 항목 목록^|[CustomAgreedTerms(customTermsNo=20, isAgree=true,\
+            \ agreementYmdt=2025-10-28T10:09:32.810419189)]"
+          items:
+            required:
+              - agreementYmdt
+              - customTermsNo
+              - isAgree
+            type: object
+            properties:
+              isAgree:
+                type: boolean
+                description: 추가 동의 항목 동의 여부^|true
+              agreementYmdt:
+                type: string
+                description: 추가 동의 항목 동의 시각^|2025-10-28T10:09:32.810419189
+              customTermsNo:
+                type: number
+                description: 추가 동의 항목 번호^|20
+        mobileNo:
+          type: string
+          description: 휴대폰번호 (nullable)
+          nullable: true
+        loginCount:
+          type: number
+          description: 로그인 횟수^|10
+        memberNo:
+          type: number
+          description: 회원번호^|12345
+        blacklisted:
+          type: boolean
+          description: 블랙리스트 여부^|false
+        memberGradeName:
+          type: string
+          description: 회원 등급 이름^|테스트 등급
+        memberGradeNo:
+          type: number
+          description: 회원 등급 번호^|1
+        registrationNo:
+          type: string
+          description: 사업자 회원 사업자등록번호 (nullable)
+          nullable: true
+        oauthIdNo:
+          type: string
+          description: 외부 서비스 고유 식별값 (nullable)
+          nullable: true
+        pushNotificationAgreeYmdt:
+          type: string
+          description: 푸시 알림 동의 시각 (nullable)
+          nullable: true
+        memberType:
+          type: string
+          description: 회원 구분^|MALL
+        extraInfo:
+          type: array
+          description: 회원 추가항목 정보
+          items:
+            required:
+              - extraInfoNo
+              - extraInfoOptionNos
+            type: object
+            properties:
+              extraInfoOptionNos:
+                type: array
+                description: '추가항목 옵션 번호 목록^|[10, 11, 12]'
+                items:
+                  oneOf:
+                    - type: object
+                    - type: boolean
+                    - type: string
+                    - type: number
+              extraInfoOptionTextContent:
+                type: string
+                description: 추가항목 옵션 텍스트 답변 내용^|내용
+                nullable: true
+              extraInfoNo:
+                type: number
+                description: 추가항목 번호^|1
+        memberGroupNames:
+          type: string
+          description: 회원 그룹 이름^|그룹 1
+    configurations-member-open-id-providerType351872100:
+      required:
+        - clientId
+      type: object
+      properties:
+        clientId:
+          type: string
+          description: 간편로그인 client id^|123
+        clientSecret:
+          type: string
+          description: 간편로그인 clientSecret - 마스킹^|456
+          nullable: true
+        scopes:
+          type: array
+          description: '간편로그인 scopes^|[id, name]'
+          nullable: true
+          items:
+            oneOf:
+              - type: object
+              - type: boolean
+              - type: string
+              - type: number
+        appleConfig:
+          type: object
+          properties:
+            encKey:
+              type: string
+              description: 애플인 경우 config 의 시크릿 - 마스킹^|key
+              nullable: true
+            teamId:
+              type: string
+              description: 애플인 경우 config 의 teamId^|test-teamId
+              nullable: true
+            keyId:
+              type: string
+              description: 애플인 경우 config 의 keyId^|test-keyId
+              nullable: true
+          description: 애플인 경우 config^|com.ncp.member.presentation.response.OpenIdConfigClientResponse$AppleLoginConfigResponse@4df0ae40
+    profile-dormant-release486549215:
+      type: object
+    profile-grades508071144:
+      required:
+        - gradeNo
+      type: object
+      properties:
+        issueCoupon:
+          type: boolean
+          description: 쿠폰 발행 여부 (nullable)
+          nullable: true
+        members:
+          type: array
+          items:
+            required:
+              - memberId
+              - memberNo
+            type: object
+            properties:
+              memberNo:
+                type: number
+                description: 등급 변경대상 회원 번호(memberId와 배타적으로 필수)^|1
+              memberId:
+                type: string
+                description: 등급 변경대상 회원 번호(memberNo와 배타적으로 필수)^|test
+        gradeNo:
+          type: number
+          description: 변경 등급 번호^|2
+    profile-groups-1583052347:
+      required:
+        - memberGroupNo
+        - memberId
+        - memberNo
+      type: object
+      properties:
+        memberNo:
+          type: number
+          description: 회원 번호^|111
+        memberId:
+          type: string
+          description: 회원 아이디^|younghee
+        memberGroupNo:
+          type: number
+          description: 회원 그룹번호^|1234
+    grades1273037573:
+      type: array
+      items:
+        required:
+          - gradeName
+          - gradeNo
+          - image
+          - used
+        type: object
+        properties:
+          image:
+            type: object
+            properties:
+              originalFileName:
+                type: string
+                description: 원본 파일명 (nullable)
+                nullable: true
+              uploadedFileName:
+                type: string
+                description: 업로드 파일명 (nullable)
+                nullable: true
+            description: 등급 이미지
+          gradeName:
+            type: string
+            description: 등급 이름^|VIP
+          gradeNo:
+            type: number
+            description: 등급 번호^|1
+          used:
+            type: boolean
+            description: 사용 여부^|true
+    members-prohibit-849892994:
+      required:
+        - memberNos
+        - prohibition
+      type: object
+      properties:
+        reason:
+          type: string
+          description: 정지 사유 (nullable)
+          nullable: true
+        memberNos:
+          type: array
+          description: '정지시킬 회원번호 리스트^|1,2,3'
+          items:
+            oneOf:
+              - type: object
+              - type: boolean
+              - type: string
+              - type: number
+        prohibition:
+          type: boolean
+          description: '회원 정지 (true), 정지 해제 (false)^|true'
+        expireDate:
+          type: string
+          description: 회원 이용 정지 기간 (nullable)
+          nullable: true
+        notificationTypes:
+          type: array
+          description: 알림 종류 (nullable)
+          nullable: true
+          items:
+            oneOf:
+              - type: object
+              - type: boolean
+              - type: string
+              - type: number
+        status:
+          type: string
+          description: 변경시킬 회원 상태 (nullable)
+          nullable: true
+    profile-blocked-release452550290:
+      required:
+        - memberNo
+      type: object
+      properties:
+        memberNo:
+          type: number
+          description: 차단자 회원 번호^|1
+        targetMemberId:
+          type: string
+          description: 차단 대상 회원 아이디 (nullable)
+          nullable: true
+        targetMemberNo:
+          type: number
+          description: 차단 대상 회원 번호 (nullable)
+          nullable: true
+    configurations-member-extra-info-config-1692811019:
+      required:
+        - extraInfoContents
+      type: object
+      properties:
+        extraInfoContents:
+          type: array
+          description:
+            "회원정보 추가항목 목록^|[ExtraInfoSummaryContent(extraInfoNo=1, extraInfoName=추\
+            가항목 항목명, status=USED, extraInfoType=TEXTBOX, extraInfoOptions=[ExtraInfoOptionSummary(extraInfoOptionNo=10,\
+            \ extraInfoOptionName=옵션명-1), ExtraInfoOptionSummary(extraInfoOptionNo=11,\
+            \ extraInfoOptionName=옵션명-2)])]"
+          items:
+            required:
+              - extraInfoName
+              - extraInfoNo
+              - extraInfoOptions
+              - extraInfoType
+              - status
+            type: object
+            properties:
+              extraInfoNo:
+                type: number
+                description: 항목 번호^|1
+              extraInfoName:
+                type: string
+                description: 항목 명^|추가항목 항목명
+              extraInfoType:
+                type: string
+                description: 항목 타입^|TEXTBOX
+              extraInfoOptions:
+                type: array
+                description: "옵션 목록^|[ExtraInfoOptionSummary(extraInfoOptionNo=10,\
+                  \ extraInfoOptionName=옵션명-1), ExtraInfoOptionSummary(extraInfoOptionNo=11,\
+                  \ extraInfoOptionName=옵션명-2)]"
+                items:
+                  required:
+                    - extraInfoOptionName
+                    - extraInfoOptionNo
+                  type: object
+                  properties:
+                    extraInfoOptionName:
+                      type: string
+                      description: 옵션 명^|옵션명-1
+                    extraInfoOptionNo:
+                      type: number
+                      description: 옵션 번호^|10
+              status:
+                type: string
+                description: 사용 상태^|USED
+    profile-dormant9804281:
+      required:
+        - content
+        - totalElements
+        - totalPages
+      type: object
+      properties:
+        totalPages:
+          type: number
+          description: 전체 페이지 수
+        content:
+          type: array
+          description: 조회 결과
+          items:
+            required:
+              - dormantYmdt
+              - memberId
+              - memberName
+              - memberNo
+            type: object
+            properties:
+              dormantYmdt:
+                type: string
+                description: 휴면전환일시^|2025-10-28 10:09
+              memberNo:
+                type: number
+                description: 회원 번호^|1000000
+              member:
+                required:
+                  - joinYmdt
+                  - memberNo
+                  - memberType
+                type: object
+                properties:
+                  memberNo:
+                    type: number
+                    description: 회원 번호^|1000000
+                  joinYmdt:
+                    type: string
+                    description: 가입일시^|2025-10-28 10:09
+                  memberType:
+                    type: string
+                    description: 회원 유형^|MALL
+                    enum:
+                      - 'MALL: 일반 회원'
+                      - 'SYNC_ID: 연동형 회원'
+                      - 'OPEN_ID: 간편로그인 회원'
+                  providerType:
+                    type: string
+                    description: 연동 유형 (nullable)
+                    nullable: true
+                    enum:
+                      - 'PAYCO: 페이코'
+                      - 'NAVER: 네이버'
+                      - 'KAKAO: 카카오'
+                      - 'KAKAO_SYNC: 카카오싱크'
+                      - 'FACEBOOK: 페이스북'
+                      - 'LINE: 라인'
+                      - 'APPLE: 애플'
+                      - 'GOOGLE: 구글'
+                      - 'APP_CARD: 앱카드'
+                      - 'IAMSCHOOL: 아이엠스쿨'
+                      - 'UNIONE: 유니원'
+                      - 'NCPSTORE: NCP스토어'
+              memberName:
+                type: string
+                description: 이름^|샵바이
+              memberId:
+                type: string
+                description: 아이디^|test@************
+        totalElements:
+          type: number
+          description: 전체 조회건수
+    profile1934915172:
+      type: object
+      properties:
+        birthday:
+          type: string
+          description: 생일 yyyyMMdd (nullable)
+          nullable: true
+        lastName:
+          type: string
+          description: 성 (nullable)
+          nullable: true
+        city:
+          type: string
+          description: '(국내, 해외 겸용) 도시 (nullable)'
+          nullable: true
+        businessName:
+          type: string
+          description: 회사명 (nullable)
+          nullable: true
+        memberName:
+          type: string
+          description: 회원 성명 (nullable)
+          nullable: true
+        zipCd:
+          type: string
+          description: 우편번호 (nullable)
+          nullable: true
+        pushNotificationAgreed:
+          type: boolean
+          description: 푸시 알림 동의 여부 (nullable)
+          nullable: true
+        countryCode:
+          type: string
+          description: 거주 국가 (nullable)
+          nullable: true
+        directMailAgreed:
+          type: boolean
+          description: 이메일 알림 동의 여부 (nullable)
+          nullable: true
+        additionalInfo:
+          type: string
+          description: 추가 정보 (JSON) (nullable)
+          nullable: true
+        nickname:
+          type: string
+          description: 닉네임 (nullable)
+          nullable: true
+        customTermsNos:
+          type: array
+          description: 추가 선택 동의 항목 (nullable)
+          nullable: true
+          items:
+            oneOf:
+              - type: object
+              - type: boolean
+              - type: string
+              - type: number
+        state:
+          type: string
+          description: '(국내, 해외 겸용) 국내: 군/구, 해외: 주 (nullable)'
+          nullable: true
+        email:
+          type: string
+          description: 이메일 주소 (nullable)
+          nullable: true
+        jibunDetailAddress:
+          type: string
+          description: 도로명 주소 상세 (지번 주소) (nullable)
+          nullable: true
+        memberId:
+          type: string
+          description: 회원 아이디 (nullable)
+          nullable: true
+        address:
+          type: string
+          description: 도로명 주소 (nullable)
+          nullable: true
+        mobileCountryCode:
+          type: string
+          description: 국제전화번호 코드 (nullable)
+          nullable: true
+        certificated:
+          type: boolean
+          description: 인증확인 여부 (nullable)
+          nullable: true
+        ci:
+          type: string
+          description: CI (nullable)
+          nullable: true
+        smsAgreed:
+          type: boolean
+          description: SMS 알림 동의 여부 (nullable)
+          nullable: true
+        sex:
+          type: string
+          description: 성별 (F:여성/M:남성) (nullable)
+          nullable: true
+        jibunAddress:
+          type: string
+          description: 도로명 주소 (지번 주소) (nullable)
+          nullable: true
+        mobileNo:
+          type: string
+          description: 휴대전화번호 (nullable)
+          nullable: true
+        refundBank:
+          type: string
+          description: 환불 계좌 은행 (nullable)
+          nullable: true
+        firstName:
+          type: string
+          description: 이름 (nullable)
+          nullable: true
+        memberNo:
+          type: number
+          description: 회원 번호 (nullable)
+          nullable: true
+        refundBankDepositorName:
+          type: string
+          description: 환불 계좌 예금주명 (nullable)
+          nullable: true
+        telephoneNo:
+          type: string
+          description: 일반전화번호 (nullable)
+          nullable: true
+        registrationNo:
+          type: string
+          description: 사업자 등록 번호 (nullable)
+          nullable: true
+        joinTermsAgreements:
+          type: string
+          description: 선택동의항목
+          nullable: true
+          enum:
+            - '쇼핑몰/회사 소개: MALL_INTRODUCTION'
+            - '이용약관: USE'
+            - '전자금융거래 이용약관: E_COMMERCE'
+            - '개인정보처리방침: PI_PROCESS'
+            - '회원가입시 개인정보 수집/이용(필수): PI_COLLECTION_AND_USE_REQUIRED'
+            - '회원가입시 개인정보 수집/이용(선택): PI_COLLECTION_AND_USE_OPTIONAL'
+            - '개인정보 처리/위탁: PI_PROCESS_CONSIGNMENT'
+            - '개인정보 제3자 제공: PI_THIRD_PARTY_PROVISION'
+            - '비회원 게시글/문의글 작성 시 개인정보 수집/이용: PI_COLLECTION_AND_USE_FOR_GUEST_ON_ARTICLE'
+            - '이용 안내: ACCESS_GUIDE'
+            - '탈퇴 안내: WITHDRAWAL_GUIDE'
+            - '개인정보 판매자 제공: PI_SELLER_PROVISION'
+            - '회원 주문 시 개인정보 수집/이용: PI_COLLECTION_AND_USE_ON_ORDER'
+            - '주문정보 동의: ORDER_INFO_AGREE'
+            - '통관정보 수집/이용: CLEARANCE_INFO_COLLECTION_AND_USE'
+            - '개인정보 국외이전 동의: TRANSFER_AGREE'
+        detailAddress:
+          type: string
+          description: 도로명 주소 상세 (nullable)
+          nullable: true
+        refundBankAccount:
+          type: string
+          description: 환불 계좌 번호 (nullable)
+          nullable: true
+        extraInfo:
+          type: array
+          description: 추가 항목 정보
+          items:
+            required:
+              - extraInfoNo
+              - extraInfoOptionNos
+            type: object
+            properties:
+              extraInfoOptionNos:
+                type: array
+                description: '추가항목 옵션 번호 목록^|[10, 11, 12]'
+                items:
+                  oneOf:
+                    - type: object
+                    - type: boolean
+                    - type: string
+                    - type: number
+              extraInfoOptionTextContent:
+                type: string
+                description: 추가항목 옵션 텍스트 답변 내용^|null
+                nullable: true
+              extraInfoNo:
+                type: number
+                description: 추가항목 번호^|1
+    profile-bulk-delete-722054971:
+      required:
+        - memberNos
+      type: object
+      properties:
+        memberNos:
+          type: array
+          description: '회원 번호 리스트^|[1004]'
+          items:
+            type: number
+    profile-groups-1410096186:
+      required:
+        - memberNo
+      type: object
+      properties:
+        memberNo:
+          type: number
+          description: 회원 번호^|123
+        items:
+          type: array
+          items:
+            required:
+              - memberGroupName
+              - memberGroupNo
+            type: object
+            properties:
+              memberGroupName:
+                type: string
+                description: '회원 그룹 이름^|[vip]'
+              memberGroupNo:
+                type: number
+                description: '회원 그룹 번호^|[1]'
+    members-prohibit1975347019:
+      required:
+        - rows
+        - value
+      type: object
+      properties:
+        rows:
+          type: array
+          description: 회원 정지(정지 해제) 결과
+          items:
+            required:
+              - memberNo
+              - message
+              - success
+            type: object
+            properties:
+              memberNo:
+                type: number
+                description: 회원 번호^|1
+              success:
+                type: boolean
+                description: 회원 정지(정지 해제) 성공 여부^|false
+              message:
+                type: string
+                description: 회원 정지(정지 해제) 살패했을 때 사유 (성공 시 빈 문자열)^|이용정지 상태가 아닙니다.
+        value:
+          type: string
+          description: 회원 정지 / 정지 해제^|일시 이용정지
+    member-groups-67331454:
+      required:
+        - description
+        - name
+        - reserveBenefit
+      type: object
+      properties:
+        name:
+          type: string
+          description: 회원 그룹 이름^|임직원
+        description:
+          type: string
+          description: 회원 그룹 상세 설명^|임직원 확인용 그룹
+        reserveBenefit:
+          required:
+            - reserveRate
+            - used
+          type: object
+          properties:
+            reserveRate:
+              type: number
+              description: 적립금 혜택 적립률^|0
+            used:
+              type: boolean
+              description: 적립금 혜택 사용 여부^|false
+          description: 적립금 혜택 정보

@@ -1,19 +1,12 @@
 ---
 name: hpq-engine-cartographer
 description: >-
-  후니프린팅 가격계산 검증 하네스의 가격엔진 흐름 지도 작성가. raw/webadmin의 가격엔진
-  소스(catalog/pricing.py `evaluate_price` 단일 권위·price_views.py 뷰어/시뮬레이터/그리드 뷰·
-  price_simulator.html·price_viewer.html·price_diagram.html 템플릿)와 라이브 t_prc_* 스키마를
-  읽어, ① 가격공식(t_prc_price_formulas·t_prd_product_price_formulas 바인딩)·② 가격구성요소
-  (t_prc_price_components·formula_components 배선·component_prices 단가행)·③ 가격뷰어(price_viewer
-  — 적재 확인 UI)·④ 가격시뮬레이터(evaluate_price 호출 — 선택값+수량→견적 재계산)의 각 역할과
-  서로 연결된 흐름을 권위 명세(engine-contract)로 도해한다. 또한 evaluate_price 계약(차원 자동매칭
-  규칙 NON_QTY_DIMS/TIER_DIMS·가격 우선순위 템플릿단가>직접단가>공식·단가형/합가형 환산·동시매칭
-  데이터오류·수량구간·시계열·할인 순차곱)을 추출해, 사용자가 옵션을 선택하면 가격이 산출되는
-  "단단한 뼈대"의 위젯 가격계약(옵션선택→정규화 selections→evaluate_price→final_price)을 명세한다.
-  소스 읽기 전용·라이브 읽기전용 SELECT만(파괴적 쓰기 0). DB 미적재. '가격엔진 흐름', '엔진 지도',
-  '공식 구성요소 뷰어 시뮬레이터 역할', '가격 흐름 도해', 'evaluate_price 계약', '위젯 가격계약',
-  '가격 뼈대 명세', '엔진 카토그래피', '흐름 분석 다시' 작업 시 사용.
+  후니프린팅 가격계산 검증 하네스의 가격엔진 흐름 지도 작성가. webadmin 가격엔진 소스(pricing.py
+  evaluate_price·price_views.py·뷰어/시뮬레이터 템플릿)와 라이브 t_prc_* 스키마를 읽어 가격공식·
+  가격구성요소·가격뷰어·가격시뮬레이터의 역할과 연결 흐름을 engine-contract로 도해하고, evaluate_price
+  계약(차원 자동매칭·가격 우선순위·단가/합가·할인)과 위젯 가격계약(옵션선택→evaluate_price→final_price)을
+  명세한다. 소스·라이브 읽기전용·DB 미적재. '가격엔진 흐름', '엔진 지도', '가격 흐름 도해',
+  'evaluate_price 계약', '위젯 가격계약', '가격 뼈대 명세', '흐름 분석 다시' 작업 시 사용.
 model: opus
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 ---

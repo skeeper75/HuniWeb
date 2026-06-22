@@ -1,6 +1,11 @@
 ---
 name: huni-admin-live-capture
-description: 라이브 후니 Django admin(huni-admin-production.up.railway.app/admin/)을 gstack browse로 안전하게 순회·캡처하는 방법론 스킬. .env.local HUNI_ADMIN_* 자격증명 로그인, 화면 맵의 화면 목록을 작업 큐로 삼아 changelist(목록)·changeform(추가/수정 폼)·인라인·커스텀 상품뷰어·옵션/SKU 드릴다운·제약 화면을 읽기 탐색만으로 스크린샷 캡처하는 절차, 화면 내 항목(메뉴·컬럼·필터·필드·버튼) 위치 인덱싱, 파일명 규약, 쓰기 금지(저장/삭제 버튼 클릭 금지) 안전 규칙을 제공한다. '라이브 화면 캡처', 'admin 스크린샷', 'gstack 캡처', '화면 항목 인덱스', '실제 화면 확인', '캡처 재실행' 작업 시 반드시 사용. 소스 화면 맵 도출은 huni-admin-source-map, 매뉴얼 집필은 huni-admin-manual-authoring가 담당한다.
+description: >
+  라이브 후니 Django admin을 gstack browse로 안전하게 순회·캡처하는 방법론. .env.local HUNI_ADMIN_*
+  로그인, 화면 맵을 작업 큐로 changelist·changeform·인라인·상품뷰어·옵션/SKU 드릴다운·제약 화면을 읽기
+  탐색만으로 캡처, 화면 항목(메뉴·컬럼·필터·필드·버튼) 위치 인덱싱, 파일명 규약, 쓰기 금지(저장/삭제 클릭 금지).
+  트리거: 라이브 화면 캡처, admin 스크린샷, gstack 캡처, 화면 항목 인덱스, 실제 화면 확인, 캡처 재실행.
+  화면 맵 도출은 huni-admin-source-map, 집필은 huni-admin-manual-authoring 담당.
 ---
 
 # Huni Admin 라이브 캡처

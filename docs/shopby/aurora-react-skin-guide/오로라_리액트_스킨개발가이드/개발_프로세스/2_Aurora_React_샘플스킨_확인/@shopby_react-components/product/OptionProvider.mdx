@@ -1,0 +1,54 @@
+---
+title: "OptionProvider"
+depth: 5
+path: "오로라 리액트 스킨개발가이드 > 개발 프로세스 > 2️⃣Aurora React 샘플스킨 확인 > @shopby/react-components > product > OptionProvider"
+---
+
+# OptionProvider
+
+## 속성
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | --- | --- | --- | --- |
+| children | false | ReactNode |  |  |
+
+## 상태
+
+* optionState 는 useOptionStateContext 를 호출해 사용한다.
+
+``` typescript
+const optionState = useOptionStateContext();
+```
+
+* [response](https://docs.shopby.co.kr/?url.primaryName=product/#/Product/get-product-options) 타입과 동일하다.
+
+## 액션
+
+* optionAction 은 useOptionActionContext 를 호출해 사용한다.
+
+``` typescript
+const optionAction = useOptionActionContext();
+```
+
+| 이름 | 인자타입 | 필수여부 | 기본값 | 설명 | 관리하는 상태 |
+| --- | --- | --- | --- | --- | --- |
+| fetchProductOption | object | true |  | 옵션목록을 조회함 | optionState |
+| ㄴproductNo | number | true |  |  |  |
+
+## 사용예시
+
+``` typescript
+const Example = () => {
+   return (
+      
+        
+          
+            {displayType === THUMB_LIST_TYPE.CART && (
+              
+            )}
+          
+        
+      
+   )
+}
+```

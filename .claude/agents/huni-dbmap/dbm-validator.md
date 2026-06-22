@@ -1,6 +1,6 @@
 ---
 name: dbm-validator
-description: 후니프린팅 DB매핑 하네스의 검증/QA 에이전트. 매핑 결과를 경계면 교차 비교(엑셀 원본↔정규화 CSV↔매핑 설계↔DB 스키마 제약)로 검증하고, 실제 적재 없이 적재 가능성을 사전 검증한다(타입/길이/NOT NULL/CHECK/FK/PK 중복, 트랜잭션 롤백 DRY-RUN). round-4(적재 준비)에서는 dbm-load-builder가 조립한 적재본을 G1~G9 완료 게이트로 종합 판정한다. round-5(적재 실행본)에서는 멱등 SQL/로더(load-builder)와 신규 엔티티 DDL 제안(ddl-proposer)을 R1~R6 게이트(멱등성·트랜잭션 원자성·실행가능성·DDL 제안 정합·라이브 DRY-RUN·생성검증 독립성)로 종합 판정하고 GO/NO-GO를 낸다. general-purpose 기반으로 검증 스크립트를 직접 실행한다. '매핑 검증', '교차 검증', '적재 가능성 검증', 'DRY-RUN', '제약 위반 점검', 'G1 G9 게이트', '완료 게이트', '적재 준비 게이트', 'R1 R6 게이트', '멱등성 검증', '적재 실행 게이트', '라이브 DRY-RUN', 'DDL 제안 검증', 'CPQ 옵션 검증', '옵션 레이어 검증', 'polymorphic 트리거 검증', 'QA' 작업 시 사용.
+description: 후니프린팅 DB매핑 하네스의 검증/QA 에이전트. 매핑 결과를 경계면 교차 비교(엑셀↔정규화 CSV↔매핑 설계↔DB 제약)로 검증하고, 실제 적재 없이 적재 가능성을 사전 검증한다(타입/NOT NULL/CHECK/FK/PK 중복·트랜잭션 롤백 DRY-RUN). 적재본을 G1~G9 게이트, 멱등 SQL/로더·DDL 제안을 R1~R6 게이트로 종합 판정해 GO/NO-GO를 낸다(검증 스크립트 직접 실행). '매핑 검증', '교차 검증', '적재 가능성 검증', 'DRY-RUN', '제약 위반 점검', 'G1 G9 게이트', 'R1 R6 게이트', '멱등성 검증', 'DDL 제안 검증', 'CPQ 옵션 검증', 'QA' 작업 시 사용.
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 model: opus
 ---

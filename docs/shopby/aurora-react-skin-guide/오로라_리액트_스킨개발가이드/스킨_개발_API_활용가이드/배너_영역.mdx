@@ -1,0 +1,128 @@
+---
+title: "> 배너 영역"
+depth: 2
+path: "오로라 리액트 스킨개발가이드 > 스킨 개발_API 활용가이드 > > 배너 영역"
+---
+
+# > 배너 영역
+
+## 이해하기
+
+> 이 문서는 쇼핑몰 메인페이지 화면 내 '배너(Banner)'영역에 대한 정책과 기능, 사용할 수 있는 API를 소개합니다.
+
+* 용어 소개
+* 배너그룹(Banner Group)
+
+***
+
+## 용어 소개
+
+* `배너(Banner)`
+    * 쇼핑몰에서 로고 혹은 프로모션 이벤트를 노출하기 위한 공간이자 이미지입니다.
+    * 아래 어드민에서 배너를 조회/등록/삭제/수정 가능합니다.
+        * shop by pro: 디자인> 디자인설정> 스킨 배너관리
+        * shop by premium: 전시관리> 스킨 배너관리
+
+
+
+* `배너그룹(Banner Group)`
+    * 각각의 배너를 유형별로 분류한 개념입니다.
+    * 모든 배너는 배너그룹으로 그룹핑하여 사용해야 하며, 하나의 배너그룹 안에 여러 개의 배너가 추가될 수 있습니다.
+
+
+
+***
+
+## 배너그룹(Banner Group)
+
+배너그룹은 각각의 배너를 유형별로 분류한 개념입니다. 
+아래 예시는, 기본 샘플스킨인 Aurora React를 기준으로한 분류입니다.
+
+> 아래 소개 드릴 배너그룹의 각 위치를 자유롭게 변경하여 스킨을 제작할 수 있습니다.
+
+
+
+>  :exclamation:단 , Aurora React 기본스킨의 경우, 프론트소스 직접 수정 및 배너그룹 위치변경이 불가합니다.
+> 만약 수정이 필요한 경우, [디자인>디자인관리>디자인 스킨리스트]에서 기본스킨을 '복사'후, 복사한 스킨에서 [수정] 기능을 이용하여 Gitlab에서 소스수정이 가능합니다
+
+### 배너그룹 분류
+
+| bannerGroupCode
+배너그룹코드 | bannerGroupName
+배너그룹명 | bannerGroupType
+배너그룹타입 | platformType | 비고 |
+| --------------------- | -------------------- | --------------------- | ------------ | --- |
+| LOGO | (예시) 로고전용 - 상단로고 | LOGO | RESPONSIVE | \- 메인화면
+\- 화면이 바뀌어도 유지되는 공통 영역 |
+| BNSLIDE | (예시) 움직이는 배너- 메인 상단배너 | SLIDE | RESPONSIVE | 메인화면 |
+| BANNER 01 | (예시) 일반 배너- 메인 중간배너1 | NORMAL | RESPONSIVE | 메인화면 |
+| BANNER 02 | (예시) 일반 배너- 메인 중간배너2 | NORMAL | RESPONSIVE | 메인화면 |
+| BANNER 03 | (예시) 일반 배너- 메인 중간배너3 | NORMAL | RESPONSIVE | 메인화면 |
+| BANNER 04 | (예시) 일반 배너- 메인 중간배너4 | NORMAL | RESPONSIVE | 메인화면 |
+| BANNER 05 | (예시) 일반 배너- 메인 중간배너5 | NORMAL | RESPONSIVE | 메인화면 |
+| BNBOTTOM | (예시) 일반 배너- 메인 하단배너 | NORMAL | RESPONSIVE | 메인화면 |
+| BNBGLEFT | (예시) 일반 배너- PC배경 좌측 배너 | NORMAL | RESPONSIVE | \- PC로 접근 시\, 좌측 배경영역으로 노출됨
+\- 화면이 바뀌어도 유지되는 공통 영역 |
+| BNDETAIL | (예시) 일반 배너- 상품상세 배너 | NORMAL | RESPONSIVE | 상품상세페이지 화면 내 노출됨 |
+
+
+
+:heavy_check_mark: **bannerGroupCode (배너그룹코드)**
+     각 배너그룹은 고유의 배너그룹 코드(bannerGroupCode)를 통해 구분됩니다.
+     위 도표에 기재된 고정된 10가지 배너그룹코드만 사용 가능합니다.
+
+:heavy_check_mark: **bannerGroupName (배너그룹명)**
+   기본 스킨 Aurora에서는 10개의 배너그룹의 배너그룹명(bannerGroupName)을
+   상단로고, 메인 상단배너, 메인 중간배너 1\~5, 메인 하단배너, PC 배경 좌측배너, 상품 상세배너로 사용하고 있습니다.
+   해당 배너그룹명은 스킨 제작 시 [bannerGroup.csv](https://nhnent.dooray.com/share/pages/WoOk8q6KT1K3MZcLSuyZsw/3524126083456407491)에 자유롭게 입력할 수 있습니다.
+
+
+
+:heavy_check_mark: **bannerGroupType (배너그룹타입)**
+   배너그룹은 배너그룹 노출 유형에 따라 3가지 배너그룹타입(bannerGroupType)으로 분류됩니다. ( LOGO, SLIDE, NORMAL로 제공)
+   LOGO배너그룹은 LOGO (로고배너)로 타입이 고정되어있으며, 나머지 배너그룹은 SLIDE (움직이는 배너) 혹은 NORMAL(일반배너)로 타입을 설정 가능합니다.
+
+ㄴ LOGO- 메인 상단에 노출되는 로고 유형
+  ㄴ SLIDE- 슬라이드 효과가 추가된 배너 유형 (멀티 배너)
+  ㄴ NORMAL- 배너 이미지를 노출해주는 기본 배너 유형 (단일 배너)
+
+:heavy_check_mark: **platformType (스킨유형)**
+    스킨유형에는 (1) 통합형 (2) 개별형-PC스킨 (3)개별형- 모바일 스킨, 총 3가지 유형이 있습니다.
+    단, 오로라 리액트 스킨은 통합형스킨으로서 `platformType`이 `통합형(responsive)` 하나로 고정됩니다.
+    (즉 PC/모바일 배너그룹 각각 등록 및 노출이 불가합니다)
+
+
+
+> [GET /skin-banners/groups-by-skin](https://docs.shopby.co.kr/?url.primaryName=display/#/SkinBanner/get-skin-banners-groups-by-skin)
+
+```
+▶ 사용 중 스킨 조회하기
+(쇼핑몰에서 사용중인 스킨정보 및 배너그룹 정보를 조회합니다)
+```
+
+해당 API에서 리턴값으로 조회한 `groupCode` 정보를 바탕으로,
+아래 소개드릴 `GET /skin-banners` API 에서 배너 정보를 조회하여 고객들이 보는 쇼핑몰 화면에 배너를 노출합니다.
+
+ㄴ `groupCode`: 앞서 설명 드린 배너그룹코드(bannerGroupCode)입니다. 참고로 bannerGroup.csv파일에서는 bannerGroupCode로 정의 하며, API 스키마에서는 groupcode로 정의하고 있습니다.
+ㄴ `isLiveSkin(사용스킨)`: 현재 쇼핑몰에 적용되어 있는 스킨을 의미합니다. 사용중이지 않은 그 외 스킨은 '보유한 스킨'이 됩니다.
+
+
+
+
+
+> [GET /skin-banners](https://docs.shopby.co.kr/?url.primaryName=display/#/SkinBanner/get-skin-banners)
+
+```
+▶ 전체 배너 조회하기
+(쇼핑몰의 모든 배너 정보를 조회합니다)
+```
+
+`groupCode`(=즉 bannerGroupCode) 에 연동되어 있는 쇼핑몰의 배너 정보를 조회합니다. (요청한 배너그룹 코드에 매칭되는 배너 정보만 조회합니다.)
+만약 `groupCode`로 전체 배너 리스트 정보를 조회하기 위해서는 `GET /skin-banners/groups-by-skin`API 에서 리턴 값으로 내려주는 `groupCode`를 모두 요청하여야만 전체 배너 리스트 정보를 조회할 수 있습니다.
+
+배너 정보는 어드민(관리자) 에서 [디자인 > 디자인설정 > 스킨 배너관리] 화면에서 관리중이며, 해당 API를 통해 고객들이 보는 쇼핑몰 화면에 배너를 노출합니다.
+
+해당 배너 리스트 데이터에 쇼핑몰 로고(Logo)가 포함되어 있습니다.
+로고의 경우 화면이 바뀌어도 대부분의 스킨에서 고정된 자리에 위치해있기 때문에, 사실상 모든 화면에서 지속적으로 사용되는 API 입니다.
+
+따라서 기본 스킨에서는 API 호출 횟수를 줄이고자 응답값을 localStorage에 캐싱 주기를 5분으로 설정하였습니다.

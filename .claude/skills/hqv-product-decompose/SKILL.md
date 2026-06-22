@@ -1,6 +1,11 @@
 ---
 name: hqv-product-decompose
-description: 후니프린팅 "상품군+상품명" 한 줄 명령을 가격계산 검증용 work-spec으로 해독하는 방법론 스킬. 상품 정체 확정(prd_nm→prd_cd·라이브 1:1·동명이품 주의), 요소 전수 분해(자재·공정·사이즈·도수·인쇄옵션·묶음수·코팅면수·옵션·차원·각 출처), 가격공식 사슬 식별(상품-공식 바인딩→공식→formula_components→price_components→component_prices), 기대 골든 케이스 도출(가격표 verbatim), 3축 검증 작업명세(work-spec) 작성, 확신도 표기를 제공한다. '상품 분해', '명령 해독', '상품 요소 파악', 'prd_cd 식별', '가격공식 바인딩 파악', '골든 케이스 도출', '검증 work-spec', '상품 분해 다시' 작업 시 반드시 이 스킬을 사용. 3축 실측 검증은 hqv-quote-verification, codex 교차검증은 hqv-codex-cross-verify가 담당하므로 그 작업에는 트리거하지 않는다.
+description: >
+  후니프린팅 "상품군+상품명" 한 줄 명령을 가격계산 검증용 work-spec으로 해독하는 방법론. 상품 정체
+  확정(prd_nm→prd_cd·1:1·동명이품 주의), 요소 전수 분해(자재·공정·사이즈·도수·옵션·차원·출처), 가격공식
+  사슬 식별(바인딩→공식→formula_components→price_components→component_prices), 골든 케이스 도출(verbatim),
+  3축 검증 work-spec 작성. 트리거: 상품 분해, 명령 해독, 상품 요소 파악, prd_cd 식별, 가격공식 바인딩 파악,
+  골든 케이스 도출, 검증 work-spec, 상품 분해 다시. 3축 실측은 hqv-quote-verification, codex 교차는 hqv-codex-cross-verify 담당.
 ---
 
 # hqv-product-decompose — 명령 해독·상품 분해 방법론

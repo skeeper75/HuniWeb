@@ -1,6 +1,11 @@
 ---
 name: rpm-metamodel-design
-description: RedPrinting 옵션 구성 추출 데이터에서 "옵션 관리 메타모델"(자재/공정/옵션/템플릿/제약/기초코드/카테고리를 어떤 관리 축·엔티티·관계·제약/캐스케이드 패턴으로 분리·정규화하는가)을 추상화하는 방법론 스킬(후니 RP-Meta 하네스). 핵심 = 알려진 7버킷 외 추가 메타모델(관리 축) 심층 발굴(자재 usage·합성, 공정 param/순서, 옵션 캐스케이드 그래프, 템플릿 계층, 제약 논리유형, 코드 도메인 거버넌스, 카테고리 트리/다중분류/생산형태). 인스턴스 vs 메타모델 구분, 관계 우선 ERD(mermaid), 오버피팅 거부, 인쇄 도메인 정초(dbm-domain KB), distinct 축 vs facet 판정 절차를 제공한다. '메타모델 설계', '옵션 관리 메타모델', '관리 축 도출', '메타모델 발굴', '추가 메타모델', '메타모델 ERD', '메타모델 추상화', '메타모델 다시', 'distinct 축 판정' 작업 시 반드시 이 스킬을 사용. 라이브 추출은 rpm-live-reverse, 후니 갭/그릇은 rpm-gap-vessel이 담당한다.
+description: >
+  RedPrinting 옵션 구성 추출 데이터에서 "옵션 관리 메타모델"(자재/공정/옵션/템플릿/제약/기초코드/카테고리를 어떤 관리 축·
+  엔티티·관계·캐스케이드 패턴으로 분리·정규화하는가)을 추상화하는 방법론 스킬(후니 RP-Meta 하네스). 핵심=7버킷 외 추가 관리 축
+  심층 발굴. 인스턴스 vs 메타모델 구분·관계 우선 ERD·오버피팅 거부·distinct 축 vs facet 판정. 트리거: 메타모델 설계,
+  옵션 관리 메타모델, 관리 축 도출, 메타모델 발굴, 추가 메타모델, 메타모델 ERD, distinct 축 판정, 메타모델 다시.
+  라이브 추출은 rpm-live-reverse, 후니 갭/그릇은 rpm-gap-vessel이 담당.
 ---
 
 # rpm-metamodel-design — Option-Management Metamodel Abstraction

@@ -1,12 +1,11 @@
 ---
 name: hbd-load-execution
 description: >
-  후니프린팅 기초데이터 표시중복 정리 하네스의 승인 후 안전 적재 실행 방법론. 승인+codex 합의+가격
-  비종속 매핑 행만을 라이브 t_*에 정리(정본+논리삭제+재배선)·정규화·신규 적재로 안전하게 COMMIT하는
-  절차를 제공한다. 물리 백업 선행→롤백전용 DRY-RUN(멱등·제약위반0·delta 실증)→사용자 최종 승인→COMMIT
-  →사후 라이브 재실측→undo 보유. dryrun/apply 분리(내장 BEGIN/COMMIT 금지), BLOCKED·divergence 미실행,
-  멱등 가드(NOT EXISTS·del_yn 가드), 무손실 통합, 통과(NO-OP)를 다룬다. '안전 적재', '정리 실행', '멱등
-  UPSERT', '논리삭제 재배선', 'DRY-RUN', '백업', '사후검증', '적재 다시' 작업 시 사용.
+  후니프린팅 기초데이터 표시중복 정리 하네스의 승인 후 안전 적재 실행 방법론. 승인+codex 합의+가격비종속
+  행만 라이브 t_*에 정리(정본+논리삭제+재배선)·정규화·신규 적재로 COMMIT. 물리 백업→롤백전용 DRY-RUN
+  (멱등·제약위반0·delta 실증)→최종 승인→COMMIT→사후 재실측→undo 보유. dryrun/apply 분리(내장 BEGIN/COMMIT
+  금지), BLOCKED·divergence 미실행, 멱등 가드, NO-OP. 트리거: 안전 적재, 정리 실행, 멱등 UPSERT,
+  논리삭제 재배선, DRY-RUN, 백업, 사후검증, 적재 다시.
 license: Apache-2.0
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite
 metadata:

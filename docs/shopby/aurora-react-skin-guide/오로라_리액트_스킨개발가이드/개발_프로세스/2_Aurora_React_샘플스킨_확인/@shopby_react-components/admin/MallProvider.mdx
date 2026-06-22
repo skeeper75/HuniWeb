@@ -1,0 +1,97 @@
+---
+title: "MallProvider"
+depth: 5
+path: "오로라 리액트 스킨개발가이드 > 개발 프로세스 > 2️⃣Aurora React 샘플스킨 확인 > @shopby/react-components > admin > MallProvider"
+---
+
+# MallProvider
+
+* `clientId` 와 `mallProfile` 은 결제모듈, 방문자 통계 등에서 사용합니다.
+    * `clientId` 는 쇼핑몰 사이트를 출력하기 위해 할당된 각 상점의 쇼핑몰 구분 값입니다.
+    * [shop api](https://docs.shopby.co.kr/#/Mall/get-malls) 호출 시 해당하는 쇼핑몰을 판단할 수 있는 `key` 값입니다.
+    * `도메인/environment.json` 으로 확인할 수 있습니다.
+        * 예) `example.shopby.co.kr/environment.json`
+
+## 속성
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | ---- | --- | ---- | --- |
+| clientId | o | string | - | environment.json > clientId |
+| mallProfile | o | alpha \| real | - | environment.json > profile |
+| children | x | ReactNode | - |  |
+
+## 상태
+
+* `mallState` 는 `useMallStateContext` 를 호출해 사용합니다.
+
+```typescript
+const mallState: MallState = useMallStateContext();
+```
+
+* [getMalls response](https://docs.shopby.co.kr/?url.primaryName=admin/#/Mall/get-malls) 타입에 하기 타입이 추가됩니다.
+
+| 이름 | 타입 | 기본 값 | 설명 |
+| --- | --- | ---- | --- |
+| clientId | string |  | eonvironment.json
+ㄴ clientId
+쇼핑몰 키 |
+| mallProfile | alpha \| real | real | environment.json
+ㄴ profile |
+| accumulationConfig | object |  | 적립금 설정 정보
+[mall.accumulationConfig](https://docs.shopby.co.kr/#/Mall/get-malls) 에 하기 `unit` 타입이 추가됨 |
+| ㄴunit | string | '' | 적립금 단위 |
+| businessRegistrationNumberInformation | object \| null | null | 사업자 정보 |
+| ㄴ url | string | '' | 사업자등록번호 확인 url
+하기 예시와 같이 조합된 url 로 제공됨
+ㄴ//[www.ftc.go.kr/bizCommPop.do?wrkr\_no=${사업자등록번호](http://www.ftc.go.kr/bizCommPop.do?wrkr_no=$%7B%EC%82%AC%EC%97%85%EC%9E%90%EB%93%B1%EB%A1%9D%EB%B2%88%ED%98%B8)} |
+| ㄴ no | string | '' | 사업자등록번호 |
+| since | string | '' | 쇼핑몰 생성 연도 |
+| inquiryTypes | object[] | [] | 1:1 문의 유형 목록 |
+| ㄴinquiryTypeNo | number | - | 1:1 문의 유형 번호 |
+| ㄴ inquiryTypeName | string | - | 1:1 문의 유형 이름 |
+| ㄴ inquiryTypeDescription | string | - | 1:1 문의 유형 설명
+ㄴ 예) 네이버페이 사용 시 네이버페이를 통해 접수되는 문의가 연동되는 유형임 |
+| bankTypes | object[] | [] | 은행목록 |
+| ㄴ kcpCode | string |  | KCP 은행 관리 코드 |
+| ㄴ code | string |  | 은행 코드 |
+| ㄴ name | string |  | 은행명 |
+| ㄴ value | string |  | 은행 영문 관리명 |
+| orderStatusTypes | LabelAndValue[] | [] | 주문상태 목록
+ㄴ label: 주문상태 명칭
+ㄴ value: 주문상태 값 |
+| claimStatusTypes | LabelAndValue[] | [] | 클레임상태 목록
+ㄴ label: 클레임상태 명칭
+ㄴ value: 클레임상태 값 |
+| claimReasonTypes | LabelAndValue[] | [] | 클레임 사유 목록
+ㄴ label: 클레임 사유 명칭
+ㄴ value: 클레임 사유 값 |
+| productInquiryTypes | LabelAndValue[] | [] | 상품문의 유형목록
+ㄴ label: 상품문의 유형 명칭
+ㄴ value: 상품문의 유형 값 |
+| productReviewReportTypes | LabelAndValue[] | [] | 상품명 신고 유형 목록
+ㄴ label: 상품평 신고 유형 명칭
+ㄴ value: 상품평 신고 유형 값 |
+| mallInternationalization | object | { languages: ['KO'], currencies: [{ exchangeTo: 'KRW', exchangeRate: 1 }] } | 현재 몰의 다국어, 환율 |
+| exchangeTo | string | KRW | 통화 |
+| exchangeRate | number | 1 | 1 통화(exchangeTo) 당 기준통화(KRW) 비율
+ex) 1 USD 는 KRW 로 1100원 |
+| isGlobalForm | boolean | false | Form 영역 글로벌 폼 여부 |
+
+LabelAndValue
+
+| 이름 | 타입 | 기본 값 | 설명 |
+| --- | --- | ---- | --- |
+| ㄴ label | string | - |  |
+| ㄴ value | string | - |  |
+
+## 액션
+
+## 사용 예시
+
+```typescript
+const App = ({ clientId, profile }) => (
+  
+    
+  
+)
+```

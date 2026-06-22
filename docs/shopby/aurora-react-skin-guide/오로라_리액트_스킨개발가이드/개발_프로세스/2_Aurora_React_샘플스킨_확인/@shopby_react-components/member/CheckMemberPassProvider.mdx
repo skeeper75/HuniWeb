@@ -1,0 +1,59 @@
+---
+title: "CheckMemberPassProvider"
+depth: 5
+path: "오로라 리액트 스킨개발가이드 > 개발 프로세스 > 2️⃣Aurora React 샘플스킨 확인 > @shopby/react-components > member > CheckMemberPassProvider"
+---
+
+# CheckMemberPassProvider
+
+* 비밀번호가 올바른지 인증하는 기능을 수행함.
+
+
+
+## 속성
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | --- | --- | --- | --- |
+| children | true | ReactNode | - |  |
+
+## 상태
+
+* CheckMemberPasswordState 는 useCheckMemberPasswordStateContext 를 호출해 사용한다.
+
+``` typescript
+const checkMemberPasswordState = useCheckMemberPasswordStateContext();
+```
+
+| 이름 | 타입 | 기본 값 | 설명 |
+| --- | --- | --- | --- |
+| checkPasswordMemberInfo | object |  |  |
+| ㄴmemberId | string | '' | 사용자 Id |
+| ㄴpassword | string | '' | 사용자 비밀번호 |
+
+## 액션
+
+* CheckMemberPasswordAction 은 useCheckMemberPasswordActionContext 를 호출해 사용한다.
+
+``` typescript
+const checkMemberPasswordAction = useCheckMemberPasswordActionContext();
+```
+
+| 이름 | 인자타입 | 필수여부 | 기본값 | 설명 | 관리하는 상태 |
+| --- | --- | --- | --- | --- | --- |
+| checkPassword | string | true |  | 입력된 비밀번호가 맞는지 체크함. |  |
+| updateCheckPasswordMemberInfo | object | true |  | 아이디와 비밀번호 값 갱신함. | checkMemberPasswordState.checkPasswordMemberInfo |
+| ㄴ password | string | false |  | 비밀번호 값 갱신함. |  |
+| ㄴ memberId | string | false |  | 아이디 값 갱신함. |  |
+
+## 사용예시
+
+``` typescript
+const Example = () => (
+  
+     {
+        setIsPasswordCheckModalOpen(false);
+      }}
+    />
+  
+);
+```

@@ -1,0 +1,85 @@
+---
+title: "SignInProvider"
+depth: 5
+path: "오로라 리액트 스킨개발가이드 > 개발 프로세스 > 2️⃣Aurora React 샘플스킨 확인 > @shopby/react-components > auth > SignInProvider"
+---
+
+# SignInProvider
+
+* 로그인 기능을 제공합니다.
+
+## 속성
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | ---- | --- | ---- | --- |
+| children | true | ReactNode | - | - |
+
+## 상태
+
+* signInValueState 는 useSignInValueContext 를 호출해 사용합니다.
+
+```typescript
+const signInValueState = useSignInValueContext();
+```
+
+| 이름 | 타입 | 기본 값 | 설명 |
+| --- | --- | ---- | --- |
+| signInInfo | object |  | 회원 정보 |
+| ㄴ memberId | string | '' | 회원 아이디 |
+| ㄴ password | string | '' | 회원 비밀번호 |
+| hasGuestOrderSheetUrl | boolean | false | 비회원 주문서 url 존재여부 |
+| guestOrderInfo | object |  | 비회원 주문정보 |
+| ㄴ orderNo | string | '' | 주문번호 |
+| ㄴ orderPassword | string | '' | 주문번호 비밀번호 |
+| isSignedIn | boolean | false | 로그인 여부 |
+| dormantMemberResponse | object |  | 휴면 회원 정보 |
+| ㄴ memberName | null \| string | null | 휴면 회원명 |
+| ㄴ mobileNo | null \| string | null | 휴면 회원 휴대폰 번호 |
+| ㄴ email | null \| string | null | 휴면 회원 이메일 |
+| daysFromLastPasswordChange | null \| number | null | 비밀번호 변경일로부터 경과된 일 수 |
+
+
+
+
+## 액션
+
+* signInAction 은 useSignInActionContext 를 호출해 사용합니다.
+
+```typescript
+const signInAction = useSignInActionContext();
+```
+
+| 이름 | 인자타입 | 필수여부 | 기본 값 | 설명 | 관리하는 상태 |
+| --- | ---- | ---- | ---- | --- | ------- |
+| updateSignInInfo | object | true |  | 회원 정보를 갱신함. | SignInInfo |
+| updateHasGuestOrderSheetUrl |  |  |  | 비회원 주문서 url 존재여부 상태를 갱신함. | HasGuestOrderSheetUrl |
+| updateGuestOrderInfo |  |  |  | 비회원 주문정보를 갱신함. | GuestOrderInfo |
+| setIsSignedIn |  |  |  | 로그인 여부 상태를 갱신함. | setIsSignedIn |
+| setDaysFromLastPasswordChange |  |  |  | 비밀번호 변경이로부터 경과된 일 수를 갱신함. | setDaysFromLastPasswordChange |
+| setDormantMemberResponse |  |  |  | 휴면회원 정보를 갱신함. | setDormantMemberResponse |
+| signIn |  |  |  | 로그인함. | setDormantMemberResponsesetDaysFromLastPasswordChangesetIsSignedIn |
+| searchGuestOrders | object | true | - | 주문번호, 패스워드, 이름, 핸드폰번호, 이메일로 주문 상세를 조회할 수 있음. | [request](https://docs.shopby.co.kr/?url.primaryName=order/#/GuestOrder/post-guest-orders-order-no) 타입과 동일함. |
+| changePassword | object |  |  | 비밀번호를 변경함.ㄴ 마지막 비밀번호 변경일이 90일 경과 시 비밀번호 변경함. |  |
+| ㄴ willChangeNextTime | boolean | false | false | 다음에 변경함 여부.ㄴ true : 해당 시점으로 갱신되어 해당 시점을 기준으로 90일이 재계산됨.ㄴ false: 현재 비밀번호를 변경함. |  |
+| ㄴ currentPassword | string | false | - | 현재 비밀번호.ㄴ willChangeNextTime 가 false 인 경우만 필수로 입력해야함. |  |
+| ㄴ newPassword | string | false | - | 변경할 비밀번호.ㄴ willChangeNextTime 가 false 인 경우만 필수로 입력해야함. |  |
+| reactivateDormantAccount | object |  |  | 휴면회원 활성화함. |  |
+| ㄴauthType | NONE \| SMS \| EMAIL | true |  | 인증타입
+NONE: 인증 사용 안함
+SMS: SMS 인증
+EMAIL: 이메일 인증 |  |
+| ㄴcertificationNumber | string | true |  | 인증번호 |  |
+| ㄴ mobileNo | string | false |  | 휴대폰 번호 |  |
+| ㄴemail | string | false |  | 이메일 주소 |  |
+
+## 사용 예시
+
+```typescript
+const Example = () => (
+  
+    
+      
+    
+  
+)
+```

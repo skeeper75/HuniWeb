@@ -1,17 +1,14 @@
 ---
 name: dbm-correctness-audit
 description: >
-  후니프린팅 라이브 DB의 적재 정확성을 감사·교정하는 round-13 방법론 스킬. round-10/12가 "라이브=권위"로
-  본 전제를 역전 — 라이브 실데이터를 "교정 대상"으로 보고, raw/webadmin 적재 oracle(적재 SQL sql/01a~15·
-  적재 로직 tools/load_master.py 등·논리 ERD 문서 docs/)과 스키마 설계의도·엑셀 원본·확정 도메인(round-11/12)을
-  "정답 기준"으로 삼아, 각 상품의 칼럼에서 size·자재·공정·도수·인쇄옵션을 어떻게 추출해야 정확한지 상품별
-  추출규칙을 도출하고, 라이브를 상품별 전수 diff해 무엇이 왜 틀렸고 어떻게 고칠지 교정 매니페스트를 산출한다.
-  핵심 = webadmin 적재 로직이 엑셀 칼럼을 t_*로 변환한 규칙을 재구성하고 그 규칙이 옳은지 판정(옳으면 유지,
-  틀리면 교정). DB 직접 쓰기는 하지 않는다. '라이브 정합 교정', '교정 감사', '적재 정확성 점검', 'webadmin
-  적재로직 감사', '상품별 추출규칙', '라이브 데이터 교정', '교정 매니페스트', 'round-13', '정합 교정 다시',
-  '교정 감사 다시', '특정 상품 교정만', '추출 계획 점검' 작업 시 반드시 이 스킬을 사용. 매핑 확정(round-12)은
-  dbm-mapping-research, 컬럼 의미(round-11)는 dbm-column-domain, 적재본 조립/실행은 dbm-load-readiness/
-  dbm-load-execution이 담당하므로 그 작업에는 트리거하지 않는다.
+  후니프린팅 라이브 DB의 적재 정확성을 감사·교정하는 round-13 방법론 스킬. round-10/12의 "라이브=권위" 전제를
+  역전 — 라이브 실데이터를 "교정 대상"으로 보고, raw/webadmin 적재 oracle(적재 SQL·load_master.py·논리 ERD)+
+  스키마 설계의도+엑셀 원본+확정 도메인(round-11/12)을 정답 기준으로, 각 상품 칼럼에서 size·자재·공정·도수·
+  인쇄옵션을 어떻게 추출해야 정확한지 상품별 추출규칙을 도출하고, 라이브를 상품별 전수 diff해 교정 매니페스트를
+  산출한다. 핵심=webadmin 적재 로직의 엑셀→t_* 변환 규칙을 재구성·옳은지 판정·DB 직접 쓰기 없음. 트리거: 라이브
+  정합 교정, 교정 감사, 적재 정확성 점검, webadmin 적재로직 감사, 상품별 추출규칙, 교정 매니페스트, round-13,
+  특정 상품 교정만, 정합 교정 다시. 매핑 확정(round-12)은 dbm-mapping-research, 컬럼 의미(round-11)는
+  dbm-column-domain, 적재본 조립/실행은 dbm-load-readiness/dbm-load-execution이 담당.
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 metadata:
   version: "1.0.0"

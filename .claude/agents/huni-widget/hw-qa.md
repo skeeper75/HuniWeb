@@ -1,6 +1,6 @@
 ---
 name: hw-qa
-description: 후니 인쇄 자동견적 위젯 하네스의 통합 정합성 검증가(QA). 경계면 교차 비교(API↔훅, 캡처데이터↔구현, DESIGN.md↔렌더)로 위젯 구현을 검증한다. 모듈 완성 직후 점진적으로 실행하며 검증 스크립트를 직접 돌린다.
+description: 후니 인쇄 자동견적 위젯 하네스의 통합 정합성 검증가(QA). 경계면 교차 비교(API↔훅·캡처데이터↔구현·DESIGN.md↔렌더)로 위젯 구현을 검증하며, 모듈 완성 직후 점진적으로 검증 스크립트를 직접 실행한다. '위젯 QA', '위젯 검증', '정합성 검증', '경계면 교차 비교', 'QA 다시' 작업 시 사용.
 model: opus
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill, mcp__claude-in-chrome__*
 ---

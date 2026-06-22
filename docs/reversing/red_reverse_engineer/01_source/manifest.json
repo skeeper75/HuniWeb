@@ -1,0 +1,101 @@
+{
+  "source": "widget.js",
+  "total_lines": 22747,
+  "beautified_from": "450469 bytes, 24 lines (minified)",
+  "split_date": "2026-03-30",
+  "modules": [
+    {
+      "file": "mod_01_vendor_vue_core.js",
+      "lines": [1, 4700],
+      "line_count": 4700,
+      "category": "vendor",
+      "library": "@vue/shared + @vue/reactivity + @vue/runtime-core v3.5.21",
+      "deobfuscate": false,
+      "reason": "Well-known open source library. Label only."
+    },
+    {
+      "file": "mod_02_vendor_vue_dom.js",
+      "lines": [4701, 7700],
+      "line_count": 3000,
+      "category": "vendor",
+      "library": "@vue/runtime-dom v3.5.21 + compiler helpers",
+      "deobfuscate": false,
+      "reason": "Well-known open source library. Label only."
+    },
+    {
+      "file": "mod_03_vendor_pinia.js",
+      "lines": [7701, 9100],
+      "line_count": 1400,
+      "category": "vendor",
+      "library": "Pinia 2.x state management",
+      "deobfuscate": false,
+      "reason": "Well-known open source library. Label only."
+    },
+    {
+      "file": "mod_04_vendor_query_purify.js",
+      "lines": [9101, 11704],
+      "line_count": 2604,
+      "category": "vendor",
+      "library": "TanStack Query + vue-dompurify-html",
+      "deobfuscate": false,
+      "reason": "Well-known open source libraries. Label only."
+    },
+    {
+      "file": "mod_05_app_api.js",
+      "lines": [11705, 14389],
+      "line_count": 2685,
+      "category": "application",
+      "description": "RedWidgetSDK application utilities + API layer. Contains fetch calls to pricing/product APIs, S3 upload, error handling, lodash helpers.",
+      "deobfuscate": true,
+      "priority": "high",
+      "key_features": ["fetch API calls", "pricing API", "product info API", "S3 presigned URL", "error handling"]
+    },
+    {
+      "file": "mod_06_app_widget_sdk.js",
+      "lines": [14390, 18500],
+      "line_count": 4111,
+      "category": "application",
+      "description": "RedWidgetSDK class (F1), Shadow DOM initialization, Pinia store definitions (config/product/order/exterior), app bootstrap.",
+      "deobfuscate": true,
+      "priority": "high",
+      "key_features": ["class F1 (RedWidgetSDK)", "attachShadow", "4 Pinia stores", "createApp", "Vue app mount"]
+    },
+    {
+      "file": "mod_07_app_components.js",
+      "lines": [18501, 22747],
+      "line_count": 4247,
+      "category": "application",
+      "description": "Vue 3 UI components for the order widget. 14 fieldsets, 9 select dropdowns, icon checkboxes, file upload, editor integration.",
+      "deobfuscate": true,
+      "priority": "high",
+      "key_features": ["14 fieldset components", "9 select dropdowns", "icon checkbox/radio", "S3 file uploader", "RedEditorSDK integration"]
+    }
+  ],
+  "additional_files": [
+    {
+      "file": "beautified_editor_sdk.js",
+      "line_count": 12245,
+      "category": "application",
+      "description": "RedEditorSDK - online design editor SDK with 45 prototype methods.",
+      "deobfuscate": true,
+      "priority": "medium"
+    },
+    {
+      "file": "beautified_widget.css",
+      "line_count": 1624,
+      "category": "style",
+      "deobfuscate": false,
+      "reason": "CSS is already readable after beautification."
+    }
+  ],
+  "deobfuscation_targets": {
+    "total_app_lines": 11043,
+    "editor_sdk_lines": 12245,
+    "grand_total": 23288,
+    "team_assignments": {
+      "worker_1_stores_api": ["mod_05_app_api.js", "mod_06_app_widget_sdk.js"],
+      "worker_2_components": ["mod_07_app_components.js"],
+      "worker_3_editor_sdk": ["beautified_editor_sdk.js"]
+    }
+  }
+}

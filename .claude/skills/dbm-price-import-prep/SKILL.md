@@ -1,6 +1,11 @@
 ---
 name: dbm-price-import-prep
-description: 후니프린팅 인쇄상품 가격표(다차원 매트릭스·복합셀)를 webadmin Phase11 가격엔진(evaluate_price)이 먹는 t_prc_* 4테이블 그릇으로 분해·정리하고, webadmin 복붙용 작업 엑셀(.xlsx) + DB 매핑 절차 mermaid 시각화를 산출하는 round-16 방법론 스킬. 한 셀에 여러 요소가 복합된 다차원 가격표를 단가형/합가형(prc_typ_cd)·10차원 매칭(component_prices)·공식 합산(price_formulas) 구조로 평면화한다. 라이브 t_prc_* + Phase11 시뮬레이터 설계가 source of truth(round-2 산출은 round-14 Phase11 변경으로 stale — 8→10차원·단가/합가·template_prices 반영 필수). '가격표 정리', '가격표 엑셀 분해', 'webadmin 가격 그릇', '가격 import 엑셀', '가격표 평면화', '단가형 합가형 분류', '가격 매핑 절차', '가격 mermaid', 'round-16', '가격표 시트 분석', '복합셀 분리', '가격엔진 그릇', '가격 적재 준비', '스티커 가격 정리', '가격표 다시 정리' 작업 시 반드시 이 스킬을 사용. 가격 공식 엔진 자체 fit-gap·평면화 설계(단일 스냅샷)는 dbm-price-formula(round-2), 적재본 조립·실행은 dbm-load-readiness/dbm-load-execution이 담당하므로 그 작업에는 트리거하지 않는다.
+description: >
+  후니프린팅 인쇄상품 가격표(다차원 매트릭스·복합셀)를 webadmin Phase11 가격엔진(evaluate_price)이 먹는 t_prc_*
+  4테이블 그릇으로 분해·정리하고 webadmin 복붙용 작업 엑셀(.xlsx)+DB 매핑 절차 mermaid를 산출하는 방법론(round-16).
+  복합셀을 단가형/합가형(prc_typ_cd)·10차원 매칭·공식 합산 구조로 평면화. 라이브 t_prc_*+Phase11 설계=권위(round-2 산출 stale).
+  트리거: 가격표 정리, 가격표 엑셀 분해, webadmin 가격 그릇, 가격 import 엑셀, 가격표 평면화, 단가형 합가형 분류, 가격 mermaid, round-16, 복합셀 분리, 가격표 다시 정리.
+  공식 fit-gap·평면화(단일 스냅샷)는 dbm-price-formula(round-2), 적재 조립·실행은 dbm-load-readiness/dbm-load-execution.
 ---
 
 # 가격표 → Phase11 가격엔진 그릇 import 준비 (round-16)

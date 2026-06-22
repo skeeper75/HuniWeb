@@ -2,17 +2,12 @@
 name: rpm-codex-validate
 description: >
   후니 RP-Meta 하네스의 게이트 판정을 Codex(gpt-5.5)로 독립 교차검증(2nd opinion)하고 rpm-validator(Claude)
-  판정과 reconcile하는 방법론 스킬(Phase 6.5). `codex exec` 읽기전용 비대화 호출
-  (hqv-codex-cross-verify/scripts/codex-review.sh 재사용)로 카테고리 분석(reverse+metamodel+gap+vessel)을
-  넘겨 "distinct 축 승격/부결과 M1~M6 GO/NO-GO 결론이 옳은가"를 Claude와 독립으로 판정받고, 합의/불일치를
-  reconcile한다. ★핵심 경계[HARD] = Codex 판정은 외부 의견·가설(라이브/권위 검증 전 채택 금지·환각 경계·
-  rpm-deepcheck 계승). ★독립성[HARD] = codex 프롬프트에 rpm-validator의 verdict를 넣지 않는다(같은 입력 독립
-  판정). 검증 초점은 deepcheck(누락 발굴)와 다르다 — 결론(승격/부결·GO/NO-GO)의 정확성을 검증. codex-preflight로
-  가용성 판정(AUTH_STALE 인증만료 vs DEADLOCK 모델데드락 구분), 미가용 시 "codex 미가용·Claude 단독" 명시 폴백
-  (pending 금지). 구독=ChatGPT OAuth(종량과금 없음)·codex 읽기전용(파일쓰기·DB 없음)·비밀값 비노출.
-  'codex 게이트 검증', 'codex 교차검증', '판정 2nd opinion', 'distinct 독립 재판정', 'reconcile',
-  'M게이트 codex 검증', 'codex 검증 다시' 작업 시 반드시 이 스킬을 사용. 누락 정보 발굴(deepcheck)은
-  rpm-deep-augment, Claude측 M1~M6 게이트는 rpm-validation이 담당하므로 그 작업에는 트리거하지 않는다.
+  판정과 reconcile하는 방법론 스킬(Phase 6.5). codex exec 읽기전용 호출(codex-review.sh 재사용)로 카테고리 분석
+  (reverse+metamodel+gap+vessel)을 넘겨 "distinct 축 승격/부결과 M1~M6 GO/NO-GO 결론이 옳은가"를 독립 판정받고
+  합의/불일치 reconcile. Codex 판정=가설(라이브/권위 검증 전 채택 금지·환각 경계)·독립성[HARD]=우리 verdict 비노출·
+  검증 초점=결론 정확성(누락 발굴 아님)·미가용 시 "Claude 단독" 명시 폴백(pending 금지)·읽기전용. 트리거: codex
+  게이트 검증, codex 교차검증, 판정 2nd opinion, distinct 독립 재판정, reconcile, M게이트 codex 검증, codex 검증
+  다시. 누락 발굴(deepcheck)은 rpm-deep-augment, Claude측 M1~M6 게이트는 rpm-validation이 담당.
 ---
 
 # rpm-codex-validate — Codex Independent Gate Cross-Validation Method

@@ -1,6 +1,6 @@
 ---
 name: rpm-gap-analyst
-description: 후니 RP-Meta 하네스의 후니 기초데이터 관리 갭 분석가. rpm-metamodel-architect가 도출한 RedPrinting 옵션 관리 메타모델을, 후니 실제 현황(라이브 t_* 스키마 + huni-dbmap 산출물 누적: 자재/공정/옵션/템플릿/제약/코드/카테고리 관리 현황)과 축 단위로 대조하여, 후니에 ① 없는 관리 축(그릇 부재) ② 있으나 약한/오염된 그릇(정규화 미흡·축 혼동) ③ 이미 충분한 축을 식별한다. 후니 스키마 현황은 dbm-schema-analyst 산출(00_schema)·라이브 information_schema를 권위로 한다(추측 금지). 핵심 판정 = "RedPrinting의 이 관리 축을 후니가 같은 표현력으로 담을 수 있는가" — 담을 수 있으면 PASS, 없으면 GAP(그릇 필요), 약하면 WEAK(보강 필요). huni-dbmap의 기존 갭 진단(자재 오염 MAT_TYPE.08~10·카테고리 고아·CPQ 미적재 등)과 정합·중복 회피. 산출 = 축별 갭 매트릭스 + 그릇 필요 항목 우선순위. DB 미적재(분석 전용). '갭 분석', '후니 갭', '관리 축 대조', '그릇 부재 식별', '후니 현황 대조', '갭 매트릭스', '갭 분석 다시' 작업 시 사용.
+description: 후니 RP-Meta 하네스의 기초데이터 관리 갭 분석가. RedPrinting 옵션 관리 메타모델을 후니 실제 현황(라이브 t_* + huni-dbmap 산출)과 축 단위로 대조해, 각 축을 후니가 같은 표현력으로 담는지 PASS/WEAK(보강)/GAP(그릇 필요)로 판정하고 축별 갭 매트릭스+우선순위를 낸다. 후니 현황 권위=라이브 information_schema(추측 금지)·DB 미적재. '갭 분석', '후니 갭', '관리 축 대조', '그릇 부재 식별', '갭 매트릭스', '갭 분석 다시' 작업 시 사용.
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 model: opus
 color: yellow

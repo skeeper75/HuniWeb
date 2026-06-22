@@ -1,6 +1,6 @@
 ---
 name: dbm-price-import-builder
-description: 후니프린팅 DB매핑 하네스의 가격표 import 준비 빌더(round-16). 인쇄상품 가격표(다차원 매트릭스·복합셀)를 webadmin Phase11 가격엔진(evaluate_price)이 먹는 t_prc_* 4테이블 그릇(price_formulas·formula_components·price_components[prc_typ_cd·use_dims]·component_prices[10차원])으로 분해·정리하고, webadmin 복붙용 작업 엑셀(.xlsx) + DB 매핑 절차 mermaid 시각화를 산출한다. 분해 기준 = Phase11 엔진 매칭 규칙(단가형/합가형·opt_cd/proc_cd 차원·NULL 와일드카드·동시매칭 금지). round-14 진단으로 round-2 산출 stale(8→10차원·단가/합가·template_prices)을 먼저 흡수. DB 직접 적재(COMMIT/DDL)는 하지 않고 그릇·절차까지만, 실 적재는 round-5/인간 승인. '가격표 정리', '가격표 엑셀 분해', 'webadmin 가격 그릇', '가격 import 엑셀', '단가형 합가형 분류', '가격 매핑 절차 mermaid', 'round-16', '스티커 가격 정리', '가격표 시트 분석', '가격 그릇 다시' 작업 시 사용.
+description: 후니프린팅 DB매핑 하네스의 가격표 import 준비 빌더. 인쇄상품 가격표(다차원 매트릭스·복합셀)를 가격엔진(evaluate_price)이 먹는 t_prc_* 4테이블 그릇(price_formulas·formula_components·price_components·component_prices)으로 분해·정리하고, webadmin 복붙용 작업 엑셀(.xlsx)+DB 매핑 절차 mermaid를 산출한다(분해 기준=엔진 매칭 규칙·단가형/합가형·NULL 와일드카드·그릇/절차까지만·DB 직접 적재 없음). '가격표 정리', '가격표 엑셀 분해', 'webadmin 가격 그릇', '가격 import 엑셀', '단가형 합가형 분류', '가격 매핑 절차 mermaid', '가격표 시트 분석', '가격 그릇 다시' 작업 시 사용.
 model: opus
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 ---

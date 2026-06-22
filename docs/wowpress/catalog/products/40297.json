@@ -1,0 +1,48 @@
+{
+  "productId": 40297,
+  "fetchedAt": "2025-10-14T22:24:39.966Z",
+  "categoryPath": ["자석제품"],
+  "meta": {
+    "name": "종이자석광고지(패턴)_TEST",
+    "slug": "종이자석광고지-패턴-_test-40297",
+    "url": "https://devshop.wowpress.co.kr/prodt/40297",
+    "keywords": ["자석제품", "종이자석광고지", "패턴", "_TEST"],
+    "useCases": [],
+    "fileTypes": [],
+    "selType": null,
+    "unit": null
+  },
+  "delivery": {
+    "cutoffTime": null,
+    "prepayRequired": null,
+    "group": {
+      "id": null,
+      "name": null
+    },
+    "regions": []
+  },
+  "options": {
+    "orderQuantities": [],
+    "coverTypes": [],
+    "additionalOptions": []
+  },
+  "availability": {
+    "cutoffTime": null,
+    "maxOrdersPerUpload": null,
+    "message": null
+  },
+  "pricing": {
+    "currency": "KRW",
+    "source": "/std/prod/jobcost",
+    "status": "requires-configuration",
+    "template": null,
+    "quotes": []
+  },
+  "raw": {
+    "prod_info": {
+      "status": 400,
+      "errno": 401,
+      "errmsg": "생산되지 않는 제품입니다. 제품번호를 확인해 주세요."
+    }
+  }
+}

@@ -1,0 +1,70 @@
+---
+title: "DesignPopupProvider"
+depth: 5
+path: "오로라 리액트 스킨개발가이드 > 개발 프로세스 > 2️⃣Aurora React 샘플스킨 확인 > @shopby/react-components > display > DesignPopupProvider"
+---
+
+# DesignPopupProvider
+
+## 속성
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | ---- | --- | ---- | --- |
+| children | true | ReactNode | - |  |
+
+## 상태
+
+* `designPopupState`는 `useDesignPopupStateContext`를 호출해 사용합니다.
+
+```jsx
+const designPopupState = useDesignPopupStateContext();
+```
+
+| 이름 | 타입 | 기본 값 | 설명 |
+| --- | --- | ---- | --- |
+| designPopups | DesignPopupResponse[] | `[]` | [https://docs.shopby.co.kr/?url.primaryName=display/#/Popup/get-design-popup](https://docs.shopby.co.kr/?url.primaryName=display/#/Popup/get-design-popup)
+`POST /design-popups 디자인 팝업 조회하기` 응답값과 동일 |
+| displayPopups | DesignPopupResponse[] | `[]` | [https://docs.shopby.co.kr/?url.primaryName=display/#/Popup/get-popups](https://docs.shopby.co.kr/?url.primaryName=display/#/Popup/get-popups)
+`GET /display/popups 전체 팝업 목록 조회하기` 응답값과 동일 |
+| displayPopupsByPopupNos | DesignPopupResponse[] | `[]` | [https://docs.shopby.co.kr/?url.primaryName=display/#/Popup/get-popups-by-popup-nos](https://docs.shopby.co.kr/?url.primaryName=display/#/Popup/get-popups-by-popup-nos)
+`GET /display/popups/{popupNos} 팝업 목록 조회하기` 응답값과 동일 |
+
+### 
+
+## 액션
+
+* `designPopupAction`는 `useDesignPopupActionContext`를 호출해 사용합니다.
+
+```jsx
+const designPopupAction = useDesignPopupActionContext();
+```
+
+| 이름 | 인자타입 | 기본 값 | 설명 | 관리하는 상태 |
+| --- | ---- | ---- | --- | ------- |
+| fetchDesignPopups | object |  | 디자인 팝업 목록을 조회하는 액션 | designPopups |
+| ㄴ displayUrl | string | '' | 노출 URL
+`POST /design-popups > request body > displayUrl`
+[https://docs.shopby.co.kr/?url.primaryName=display/#/Popup/get-design-popup](https://docs.shopby.co.kr/?url.primaryName=display/#/Popup/get-design-popup) |  |
+| ㄴ parameter | string | '' | 파라미터
+`POST /design-popups > request body > parameter`
+[https://docs.shopby.co.kr/?url.primaryName=display/#/Popup/get-design-popup](https://docs.shopby.co.kr/?url.primaryName=display/#/Popup/get-design-popup) |  |
+| fetchDisplayPopups | object | - | 전체 팝업 목록을 조회하는 액션 | displayPopups |
+| ㄴ pageType | string | - | 페이지 유형
+`GET /display/popups > parameters > pageType`
+[https://docs.shopby.co.kr/?url.primaryName=display/#/Popup/get-popups](https://docs.shopby.co.kr/?url.primaryName=display/#/Popup/get-popups) |  |
+| ㄴ targetNo | number | - | 페이지 번호
+`GET /display/popups > parameters > targetNo`
+[https://docs.shopby.co.kr/?url.primaryName=display/#/Popup/get-popups](https://docs.shopby.co.kr/?url.primaryName=display/#/Popup/get-popups) |  |
+| putVisibleTodayBy | object | false | `오늘 하루 보이지 않음` 항목 체크 시 호출하는 액션
+
+예시)
+`putVisibleTodayBy({ popupNo, shouldHide: true })` |  |
+| ㄴ popupNo | number | - | 선택한 팝업 번호 |  |
+| ㄴ shouldHide | boolean | false | 숨김 여부 |  |
+| deleteDesignPopupBy | object |  | 팝업 닫기 버튼을 클릭 했을 때 호출하는 액션
+
+예시 )
+`deleteDesignPopupBy({ popupNo });` | designPopups
+displayPopups
+displayPopupsByPopupNos |
+| ㄴ popupNo | number | - | 선택한 팝업 번호 |  |

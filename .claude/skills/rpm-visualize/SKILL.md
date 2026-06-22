@@ -1,6 +1,11 @@
 ---
 name: rpm-visualize
-description: RedPrinting 카테고리별 리버싱/메타모델/갭 분석 자료를 codex-image로 한눈에 보는 다이어그램 이미지로 만드는 방법론 스킬(후니 RP-Meta 하네스). 시각화 4종 표준(옵션 구성 트리·메타모델 축 매핑·갭 히트맵·자재/공정 BOM), 분석 충실 도해 원칙(없는 사실 그리기 금지), spec→prompt→render 절차, codex 가용성 사전점검+모델 폴백(scripts/codex-preflight.sh·gpt-5.5 우선·토큰문제 vs 모델데드락 구분), codex-image 위임(codex exec workspace-write·N≤5 병렬·run_in_background)·폴백 ladder(codex-image→gpt-image2→**mermaid 자동 폴백**·codex 데드락/미설치 시 .mmd로 항상 도해·환각0·pending 아님), 카테고리 폴더 출력(categories/{CAT}/viz/)·안정 파일명·summary.md 임베드, 렌더 검증·viz pending 정직 처리를 제공한다. 'RP 시각화', '카테고리 시각화', '리버싱 이미지', '메타모델 다이어그램', '갭 히트맵 이미지', '옵션구조 도해', 'codex-image 시각화', '시각화 다시', '시각화 보강' 작업 시 반드시 이 스킬을 사용. 실제 codex 이미지 생성 명령 상세는 codex-image 스킬이, 분석 자체 생성은 rpm-live-reverse/rpm-metamodel-design/rpm-gap-vessel이 담당한다.
+description: >
+  RedPrinting 카테고리별 리버싱/메타모델/갭 분석 자료를 codex-image로 한눈에 보는 다이어그램 이미지로 만드는 방법론
+  (후니 RP-Meta 하네스). 시각화 4종(옵션 구성 트리·메타모델 축 매핑·갭 히트맵·BOM)·분석 충실 도해(없는 사실 금지)·
+  spec→prompt→render 절차·codex 가용성 사전점검·폴백 ladder(codex-image→gpt-image2→mermaid 자동 폴백·pending 아님)·렌더 검증.
+  트리거: RP 시각화, 카테고리 시각화, 메타모델 다이어그램, 갭 히트맵 이미지, 옵션구조 도해, codex-image 시각화, 시각화 다시.
+  이미지 생성 명령 상세는 codex-image, 분석 생성은 rpm-live-reverse/rpm-metamodel-design/rpm-gap-vessel.
 ---
 
 # rpm-visualize — Per-Category Visualization Method

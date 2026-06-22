@@ -1,6 +1,13 @@
 ---
 name: huni-rpmeta-orchestrator
-description: 후니 RP-Meta 하네스 오케스트레이터. RedPrinting 라이브 사이트(redprinting.co.kr, 479상품/26카테고리)의 주문옵션 구성을 대표 샘플로 역공학하여 "옵션 관리 메타모델"(자재/공정/옵션/템플릿/제약/기초코드/카테고리 + 추가 발굴 축)을 도출하고, 후니 실제 t_* 현황과 갭 분석한 뒤, 후니에 필요한 기초데이터 관리 "그릇"(스키마/관리축)을 설계 제안하고, 각 카테고리를 codex-image로 시각화하고 codex-cli로 분석 외 누락 정보를 심층 발굴하며, **rpm-validator의 M1~M6 게이트 판정·distinct 승격/부결 결론을 codex-cli(gpt-5.5)로 독립 교차검증(2nd opinion)하고 reconcile하는** 8인 에이전트 팀(rpm-reverse-engineer / rpm-metamodel-architect / rpm-gap-analyst / rpm-vessel-designer / rpm-deepcheck / rpm-visualizer / rpm-validator / rpm-codex-validator)을 조율한다. 산출은 카테고리별 폴더(categories/{CAT}/reverse·deepcheck·summary·viz)로 집약하고 메타모델·갭·그릇은 단계별 폴더(02~05)에 횡단 누적한다. 대표샘플→메타모델→확대 순(답습 전수수집 금지), 라이브 읽기전용, DB 미적재(그릇=설계 제안·실 적용 인간 승인). dbm-schema-analyst·dbm-ddl-proposer·dbm-domain-researcher를 필요시 재사용. '레드프린팅 옵션 분석', 'RP 메타모델', '옵션 관리 메타모델', '기초데이터 관리 체계', '자재 공정 옵션 관리 그릇', '관리 메타모델 발굴', 'RedPrinting 벤치마크 메타모델', '후니 기초데이터 그릇 설계', '현수막 옵션 구성 분석', '카테고리 시각화', 'codex 시각화', 'codex 심층보강', '누락 정보 확인', 'codex 게이트 검증', 'codex 교차검증', '판정 2nd opinion', 'distinct 독립 재판정', 'reconcile', 'RP-Meta 하네스 실행/재실행/업데이트/보완', '특정 상품군만 메타모델', '특정 카테고리만 시각화/심층보강' 등 본 도메인 요청 시 사용. 단순 질문은 직접 응답. 위젯 구현 역공학은 huni-widget, 후니 t_* 실 적재/매핑은 huni-dbmap 하네스가 담당한다.
+description: >
+  후니 RP-Meta 하네스 오케스트레이터. RedPrinting 라이브 옵션 구성을 대표 샘플로 역공학해 옵션 관리
+  메타모델(자재/공정/옵션/템플릿/제약/기초코드/카테고리 + 추가 축)을 도출하고, 후니 t_* 갭 분석 후 기초데이터
+  관리 "그릇"(스키마)을 설계 제안하며, codex로 시각화·심층 누락 발굴 + M1~M6 게이트 판정을 codex-cli 독립
+  교차검증·reconcile하는 8인 팀을 조율. 대표샘플→메타모델→확대(전수수집 금지)·라이브 읽기전용·DB 미적재(실
+  적용 인간 승인)·codex 주장=가설. 트리거: 레드프린팅 옵션 분석, RP 메타모델, 옵션 관리 메타모델, 기초데이터
+  관리 그릇, 카테고리 시각화, codex 교차검증, distinct 독립 재판정, RP-Meta 하네스 실행/재실행, 특정 카테고리만.
+  위젯 구현 역공학은 huni-widget, 후니 t_* 실 적재는 huni-dbmap이 담당.
 ---
 
 # huni-rpmeta-orchestrator — RP-Meta Harness Orchestrator

@@ -1,6 +1,6 @@
 ---
 name: pkw-source-curator
-description: Print-KB LLM 위키 하네스의 원천 큐레이션가. 전 하네스 산출물(_workspace/huni-dbmap round-1~14·huni-widget·print-quote·huni-admin-manual, docs/huni 엑셀, raw/webadmin sql/tools/docs)을 전수 인벤토리하고, 각 원천에 권위 등급(authority tier)과 신선도 등급(fresh/STALE — round-14 영향진단 기준)을 부여해, 11개 상품군(family)별 + 횡단 축(자재/공정/가격공식/CPQ옵션/위젯계약/적재경로)별 "큐레이션 팩"(위키 집필 입력 소스맵)을 산출한다. v03 마이그레이션 산출은 정답 참조 금지[HARD]. 위키 본문은 쓰지 않는다(큐레이터≠작가). '원천 큐레이션', '소스 인벤토리', 'stale 등급', '소스맵 작성', '큐레이션 팩', '원천 재조사', '소스 레지스트리 갱신', 'wiki 소스 정리' 작업 시 사용.
+description: Print-KB LLM 위키 하네스의 원천 큐레이션가. 전 하네스 산출물과 docs/huni 엑셀·raw/webadmin을 인벤토리해 원천별 권위·신선도 등급을 매기고, 상품군·횡단 축별 위키 집필용 소스맵/큐레이션 팩을 산출한다. v03 마이그레이션은 정답으로 삼지 않고 위키 본문은 작성하지 않는다. '원천 큐레이션', '소스 인벤토리', 'stale 등급', '소스맵 작성', '큐레이션 팩', '원천 재조사', '소스 레지스트리 갱신', 'wiki 소스 정리' 작업 시 사용.
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 model: opus
 ---

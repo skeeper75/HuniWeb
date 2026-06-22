@@ -1,0 +1,63 @@
+---
+title: "ProductInquiryFormProvider"
+depth: 5
+path: "오로라 리액트 스킨개발가이드 > 개발 프로세스 > 2️⃣Aurora React 샘플스킨 확인 > @shopby/react-components > display > ProductInquiryFormProvider"
+---
+
+# ProductInquiryFormProvider
+
+## 속성
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | ---- | --- | ---- | --- |
+| children | true | ReactNode |  |  |
+
+## 상태
+
+* productInquiryFormState 는 useProductInquiryFormStateContext 를 호출해 사용합니다.
+
+```typescript
+const productInquiryFormState = useProductInquiryFormStateContext();
+```
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | ---- | --- | ---- | --- |
+| inquiryDetail | true | object |  | [response](https://docs.shopby.co.kr/?url.primaryName=display/#/ProductInquiry/get-product-inquiry) 과 동일함 |
+
+## 액션
+
+* productInquiryFormAction 은 useProductInquiryFormActionContext 를 호출해 사용합니다.
+
+```typescript
+const productInquiryFormAction = useProductInquiryFormActionContext();
+```
+
+| 이름 | 인자타입 | 필수여부 | 기본값 | 설명 | 관리하는 상태 |
+| --- | ---- | ---- | --- | --- | ------- |
+| fetchProductInquiryBy | object | true |  | 상품번호로 상품문의를 조회함. | productInquiryFormState.inquiryDetail |
+| ㄴ productNo | number | true |  |  |  |
+| ㄴ inquiryNo | number | true |  |  |  |
+| postProductInquiryBy | object | true |  | [request](https://docs.shopby.co.kr/?url.primaryName=display/#/ProductInquiry/post-product-inquiries) 타입에 하기 타입이 추가됨 |  |
+| ㄴ productNo | number | true |  |  |  |
+| ㄴisSecreted | boolean | true |  |  |  |
+| putProductInquiryBy | object | true |  | 상품문의를 수정함.
+ㄴ작성자 본인만 수정 가능함
+ㄴ 제목, 내용, 문의유형만 수정 가능함.
+[request](https://docs.shopby.co.kr/?url.primaryName=display/#/ProductInquiry/put-product-inquiry) 타입에 하기 타입이 추가됨 |  |
+| ㄴ inquiryNo | number | true |  |  |  |
+| ㄴ isSecreted | boolean | true |  |  |  |
+| deleteProductInquiryBy | object |  |  | 상품문의를 삭제함.
+ㄴ 작성자 본인만 삭제 가능함. |  |
+| ㄴ inquiryNo | number | true |  |  |  |
+
+## 사용예시
+
+```jsx
+const Example = () => {
+    return (
+        
+          
+        
+    )
+}
+```

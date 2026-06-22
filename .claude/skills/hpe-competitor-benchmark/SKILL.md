@@ -1,15 +1,11 @@
 ---
 name: hpe-competitor-benchmark
 description: >
-  후니프린팅 가격계산 엔진 설계를 위한 경쟁사 가격계산 *방식* 흡수 방법론. 와우프레스(buysangsang/wowpress·공개 API)·
-  레드프린팅(사용자 본인 계정·역공학)이 가격을 어떤 구성요소 축·계산식 패턴(합산/곱셈/매트릭스/구간/기본가+가산)·옵션 의존
-  캐스케이드·세트/번들 합성으로 만드는지 라이브 읽기전용으로 분석해, 후니 t_prc_*에 적용 가능한 흡수 후보로 정리한다.
-  ★흡수≠답습(메커니즘·표현력만 흡수·naming/codes 후니 유입 금지·권위 엑셀 덮어쓰기 금지·경쟁사=갭헌팅 보강). 기존 캡처
-  (raw/widget_monitor·_workspace/huni-rpmeta·print-quote) 1차 재사용·저트래픽 읽기전용(주문/결제/POST 금지). 이 벤치마크는
-  가격차 합리성 판정(dbm-competitor-benchmark)이 아니라 계산 메커니즘 흡수다. '경쟁사 가격계산 방식', '와우프레스 가격 분석',
-  '레드프린팅 가격 분석', '가격계산 벤치마크', '흡수 가능 방법', '경쟁사 구성요소 축', '세트 가격 패턴', '벤치마크 다시'
-  작업 시 반드시 이 스킬을 사용. 후니 내부 공식 지도는 hpe-formula-cartography, 엔진 설계는 hpe-engine-design,
-  우리 가격차 합리성 대조는 dbm-competitor-benchmark가 담당하므로 그 작업에는 트리거하지 않는다.
+  후니프린팅 가격엔진 설계용 경쟁사 가격계산 방식 흡수 방법론. 와우프레스·레드프린팅이 가격을 어떤 구성요소 축·
+  계산식 패턴·옵션 캐스케이드·세트 합성으로 만드는지 라이브 읽기전용 분석해 후니 t_prc_* 흡수 후보로 정리.
+  흡수≠답습(naming/codes 유입 금지·권위 엑셀 덮어쓰기 금지). 라이브 읽기전용(주문/결제/POST 금지).
+  트리거: 경쟁사 가격계산 방식, 와우프레스 가격 분석, 레드프린팅 가격 분석, 가격계산 벤치마크, 흡수 가능 방법, 세트 가격 패턴, 벤치마크 다시.
+  내부 공식 지도는 hpe-formula-cartography, 엔진 설계는 hpe-engine-design, 가격차 합리성 대조는 dbm-competitor-benchmark.
 metadata:
   version: "1.0.0"
   category: "domain"

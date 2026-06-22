@@ -1,0 +1,85 @@
+---
+title: "기획전"
+depth: 2
+path: "오로라 리액트 스킨개발가이드 > 스킨 개발_API 활용가이드 > 기획전"
+---
+
+# 기획전
+
+## 이해하기
+
+```
+샵바이 패키지(shared)를 이용하지 않는 경우, 참고하실 수 있는 문서입니다.
+```
+
+> 기획전 화면에 대해 소개합니다.
+
+### ◼︎ 기획전 상세
+
+기획전 목록에서 기획전을 클릭하면 기획전 상세 페이지로 이동합니다.
+진행 중이 아닌 기획전은 상세 페이지로 이동이 불가합니다.
+
+![Inline-image-2025-11-14 11.24.00.814.png](https://nhnent.dooray.com/share/tree/WoOk8q6KT1K3MZcLSuyZsw/pages/4204400232807503112/attach-files/4204400688745586958)
+
+#### 기획전 상세 정보 조회
+
+> [GET /display/events/{eventKey}](https://docs.shopby.co.kr/?url.primaryName=display/#/Event/get-event-v2)
+>
+> [GET /display/events/ids/{eventId}](https://docs.shopby.co.kr/?url.primaryName=display/#/Event/get-event-by-id-v2)
+
+```
+► 기획전 상세 조회하기 v2.0
+기획전 상세 정보를 조회할 수 있습니다.
+```
+
+* eventKey: 기획전 번호, 기획전 ID로 모두 조회 가능
+* eventId: 기획전 ID로만 조회 가능
+
+
+
+
+기획전 상세에서는 아래 항목을 제공합니다.
+
+* `top`: 기획전 상세 이미지를 화면에 노출합니다.
+    * 상세 이미지 미 등록 시 출력되지 않습니다.
+* `coupon`: 쿠폰 정보를 화면에 노출합니다.
+    * [쿠폰받기] 버튼 클릭 시 해당 기획전에 설정된 쿠폰을 다운받을 수 있습니다.
+* `section`: 기획전에 설정된 상품 진열 정보가 조회됩니다.
+    * 상품 진열 내 상품 리스트는 제공되지 않습니다.
+
+
+
+
+#### 기획전 상품진열 상품 조회
+
+상품진열의 상품 리스트는 [기획전 상품진열 상품 조회하기 API](https://docs.shopby.co.kr/?url.primaryName=display/#/Event/get-event-section-products)를 통해 조회합니다.
+
+> [GET /display/events/{eventNo}/sections/{sectionNo}](https://docs.shopby.co.kr/?url.primaryName=display/#/Event/get-event-section-products)
+
+```
+► 기획전 상품진열 상품 조회하기
+기획전 상품진열에 있는 상품 리스트를 조회할 수 있습니다.
+```
+
+기획전 상세에서 응답된 기획전 번호(`eventNo`)와 상품진열 번호(`section[].sectionNo`)로
+
+원하는 상품 진열의 상품 리스트를 조회할 수 있습니다.
+
+
+
+
+`products` 값을 활용하여 화면에 상품을 노출할 수 있습니다.
+
+
+
+
+#### 미리보기
+
+진행 중이 아닌 기획전은 기획전 정보가 조회되지 않습니다.
+
+다만, 진행 중이 아닌 기획전 상세 내용을 미리보기 하고 싶다면 다음 API 호출 시 `preview` 값을 전달하여 미리보기가 가능합니다.
+
+* [기획전 상세 조회하기 v2.0](https://docs.shopby.co.kr/?url.primaryName=display/#/Event/get-event-v2)
+* [기획전 상품진열 상품 조회하기](https://docs.shopby.co.kr/?url.primaryName=display/#/Event/get-event-section-products)
+
+자세한 내용은 API 문서에서 참고하실 수 있습니다.

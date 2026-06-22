@@ -1,0 +1,552 @@
+{
+  "category": {
+    "id": "cat-500e3108",
+    "slug": "시스템상품-3108",
+    "path": ["시스템상품"],
+    "displayName": "시스템상품",
+    "productCount": 3,
+    "keywords": ["시스템상품", "기존-NCR지", "ai", "eps", "jpg", "기존-양식지", "기존-영수증"],
+    "summary": "시스템상품 · 3개 상품",
+    "pricing": {
+      "templated": 0,
+      "quoted": 0
+    }
+  },
+  "products": [
+    {
+      "productId": 40072,
+      "name": "기존-NCR지",
+      "slug": "기존-ncr지-40072",
+      "categories": ["시스템상품"],
+      "keywords": [
+        "시스템상품",
+        "기존-NCR지",
+        "ai",
+        "eps",
+        "jpg",
+        "png",
+        "cdr",
+        "psd",
+        "zip",
+        "alz",
+        "pdf"
+      ],
+      "useCases": [],
+      "url": "https://devshop.wowpress.co.kr/prodt/40072",
+      "fileTypes": ["AI", "EPS", "JPG", "PNG", "CDR", "PSD", "ZIP", "ALZ", "PDF"],
+      "delivery": {
+        "cutoffTime": null,
+        "prepayRequired": true,
+        "group": {
+          "id": null,
+          "name": null
+        },
+        "regions": []
+      },
+      "orderQuantities": [
+        {
+          "type": "select",
+          "values": [10, 20, 30, 40, 50, 60, 80, 100, 120, 160, 200, 240],
+          "minimum": 10,
+          "maximum": 240,
+          "interval": null,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": 5634,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [
+            10, 20, 30, 40, 50, 60, 80, 100, 120, 160, 200, 240, 280, 320, 360, 400, 440, 480
+          ],
+          "minimum": 10,
+          "maximum": 480,
+          "interval": null,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": 5635,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [
+            10, 20, 30, 40, 50, 60, 80, 100, 120, 160, 200, 240, 280, 320, 360, 400, 440, 480, 520,
+            560, 600
+          ],
+          "minimum": 10,
+          "maximum": 600,
+          "interval": null,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": 5636,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [
+            10, 20, 30, 40, 50, 60, 80, 100, 120, 160, 200, 240, 280, 320, 360, 400, 440, 480, 520,
+            560, 600, 640
+          ],
+          "minimum": 10,
+          "maximum": 640,
+          "interval": null,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": 5637,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [10, 20, 30, 40, 50, 60, 80, 100, 120],
+          "minimum": 10,
+          "maximum": 120,
+          "interval": null,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": 5638,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [10, 20, 30, 40, 50, 60, 80, 100, 120, 160, 200, 240],
+          "minimum": 10,
+          "maximum": 240,
+          "interval": null,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": 5639,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [
+            10, 20, 30, 40, 50, 60, 80, 100, 120, 160, 200, 240, 280, 320, 360, 400, 440, 480
+          ],
+          "minimum": 10,
+          "maximum": 480,
+          "interval": null,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": 5640,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [10, 20, 30, 40, 50, 60, 80, 100, 120, 160, 200, 240, 280, 320, 360],
+          "minimum": 10,
+          "maximum": 360,
+          "interval": null,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": 5641,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        }
+      ],
+      "coverTypes": [
+        {
+          "code": 0,
+          "name": "통합",
+          "pages": [
+            {
+              "code": 1,
+              "name": "전면"
+            },
+            {
+              "code": 2,
+              "name": "후면"
+            }
+          ],
+          "pageConstraints": {
+            "min": null,
+            "max": null,
+            "interval": null
+          }
+        }
+      ],
+      "detailFile": "../products/40072.json",
+      "pricing": {
+        "hasTemplate": false,
+        "status": "requires-configuration",
+        "sampleQuote": null,
+        "error": null
+      }
+    },
+    {
+      "productId": 40098,
+      "name": "기존-양식지",
+      "slug": "기존-양식지-40098",
+      "categories": ["시스템상품"],
+      "keywords": [
+        "시스템상품",
+        "기존-양식지",
+        "ai",
+        "eps",
+        "jpg",
+        "png",
+        "cdr",
+        "psd",
+        "zip",
+        "alz",
+        "pdf"
+      ],
+      "useCases": [],
+      "url": "https://devshop.wowpress.co.kr/prodt/40098",
+      "fileTypes": ["AI", "EPS", "JPG", "PNG", "CDR", "PSD", "ZIP", "ALZ", "PDF"],
+      "delivery": {
+        "cutoffTime": null,
+        "prepayRequired": true,
+        "group": {
+          "id": null,
+          "name": null
+        },
+        "regions": []
+      },
+      "orderQuantities": [
+        {
+          "type": "select",
+          "values": [
+            1000, 2000, 3000, 4000, 8000, 12000, 16000, 20000, 24000, 28000, 32000, 36000, 40000
+          ],
+          "minimum": 1000,
+          "maximum": 40000,
+          "interval": null,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": null,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [
+            1000, 2000, 3000, 4000, 8000, 12000, 16000, 20000, 24000, 28000, 32000, 36000, 40000
+          ],
+          "minimum": 1000,
+          "maximum": 40000,
+          "interval": null,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": null,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        }
+      ],
+      "coverTypes": [
+        {
+          "code": 0,
+          "name": "통합",
+          "pages": [
+            {
+              "code": 1,
+              "name": "전면"
+            },
+            {
+              "code": 2,
+              "name": "후면"
+            }
+          ],
+          "pageConstraints": {
+            "min": null,
+            "max": null,
+            "interval": null
+          }
+        }
+      ],
+      "detailFile": "../products/40098.json",
+      "pricing": {
+        "hasTemplate": false,
+        "status": "requires-configuration",
+        "sampleQuote": null,
+        "error": null
+      }
+    },
+    {
+      "productId": 40099,
+      "name": "기존-영수증",
+      "slug": "기존-영수증-40099",
+      "categories": ["시스템상품"],
+      "keywords": [
+        "시스템상품",
+        "기존-영수증",
+        "ai",
+        "eps",
+        "jpg",
+        "png",
+        "cdr",
+        "psd",
+        "zip",
+        "alz",
+        "pdf"
+      ],
+      "useCases": [],
+      "url": "https://devshop.wowpress.co.kr/prodt/40099",
+      "fileTypes": ["AI", "EPS", "JPG", "PNG", "CDR", "PSD", "ZIP", "ALZ", "PDF"],
+      "delivery": {
+        "cutoffTime": null,
+        "prepayRequired": true,
+        "group": {
+          "id": null,
+          "name": null
+        },
+        "regions": []
+      },
+      "orderQuantities": [
+        {
+          "type": "select",
+          "values": [10, 20, 30, 40, 50, 60, 70, 80],
+          "minimum": 10,
+          "maximum": 80,
+          "interval": null,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": 5634,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [10, 20, 30, 40, 50, 60, 70, 80],
+          "minimum": 10,
+          "maximum": 80,
+          "interval": null,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": 5634,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [10, 20, 30, 40, 50, 60, 70, 80, 100, 120, 160],
+          "minimum": 10,
+          "maximum": 160,
+          "interval": null,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": 5635,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [10, 20, 30, 40, 50, 60, 70, 80, 100, 120, 160],
+          "minimum": 10,
+          "maximum": 160,
+          "interval": null,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": 5635,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [10, 20, 30, 40, 50, 60, 70, 80, 100, 120, 160, 240],
+          "minimum": 10,
+          "maximum": 240,
+          "interval": null,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": 5636,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [10, 20, 30, 40, 50, 60, 70, 80, 100, 120, 160, 240],
+          "minimum": 10,
+          "maximum": 240,
+          "interval": null,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": 5636,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [10, 20, 30, 40, 50, 60, 70, 80, 100, 120, 160, 240, 320],
+          "minimum": 10,
+          "maximum": 320,
+          "interval": null,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": 5637,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [10, 20, 30, 40, 50, 60, 70, 80, 100, 120, 160, 240, 320],
+          "minimum": 10,
+          "maximum": 320,
+          "interval": null,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": 5637,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [10, 20, 30, 40],
+          "minimum": 10,
+          "maximum": 40,
+          "interval": null,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": 5638,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [10, 20, 30, 40],
+          "minimum": 10,
+          "maximum": 40,
+          "interval": null,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": 5638,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [10, 20, 30, 40, 50, 60, 70, 80],
+          "minimum": 10,
+          "maximum": 80,
+          "interval": null,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": 5639,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [10, 20, 30, 40, 50, 60, 70, 80],
+          "minimum": 10,
+          "maximum": 80,
+          "interval": null,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": 5639,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [10, 20, 30, 40, 50, 60, 70, 80, 100, 120, 160],
+          "minimum": 10,
+          "maximum": 160,
+          "interval": null,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": 5640,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [10, 20, 30, 40, 50, 60, 70, 80, 100, 120, 160],
+          "minimum": 10,
+          "maximum": 160,
+          "interval": null,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": 5640,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [10, 20, 30, 40, 50, 60, 70, 80, 100, 120],
+          "minimum": 10,
+          "maximum": 120,
+          "interval": null,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": 5641,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [10, 20, 30, 40, 50, 60, 70, 80, 100, 120],
+          "minimum": 10,
+          "maximum": 120,
+          "interval": null,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": 5641,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        }
+      ],
+      "coverTypes": [
+        {
+          "code": 0,
+          "name": "통합",
+          "pages": [
+            {
+              "code": 1,
+              "name": "전면"
+            },
+            {
+              "code": 2,
+              "name": "후면"
+            }
+          ],
+          "pageConstraints": {
+            "min": null,
+            "max": null,
+            "interval": null
+          }
+        }
+      ],
+      "detailFile": "../products/40099.json",
+      "pricing": {
+        "hasTemplate": false,
+        "status": "requires-configuration",
+        "sampleQuote": null,
+        "error": null
+      }
+    }
+  ]
+}

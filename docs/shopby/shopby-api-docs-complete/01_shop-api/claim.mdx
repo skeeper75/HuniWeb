@@ -1,0 +1,729 @@
+---
+title: "claim-shop"
+description: "클레임(claim) 관련 shop API입니다."
+version: "unspecified"
+category: "Shop API"
+---
+
+# claim-shop
+
+:::info API 소개
+ 클레임(claim) 관련 shop API입니다.
+:::
+
+## 서버 정보
+
+| 환경 | Base URL |
+|------|----------|
+| Production | `https://shop-api.e-ncp.com` |
+
+## API 엔드포인트
+
+## Guest
+
+### 🔵 `POST` `/guest/claims/cancel`
+
+**옵션취소 신청하기(복수옵션)**
+
+> operationId: `post-guest-claims-cancel`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `ClientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `guestToken` | header | ✅ | `string` | 비회원 토큰^|test-guest-token |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🔵 `POST` `/guest/claims/estimate`
+
+**클레임시 변경되는 주문 환불 예상금액 계산하기(복수옵션)**
+
+> operationId: `post-guest-claims-estimate`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `ClientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `guestToken` | header | ✅ | `string` | 비회원 토큰^|test-guest-token |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🔵 `POST` `/guest/claims/return`
+
+**반품 신청하기(복수옵션)**
+
+> operationId: `post-guest-claims-return`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `ClientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `guestToken` | header | ✅ | `string` | 비회원 토큰^|test-guest-token |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🔵 `POST` `/guest/claims/free-gifts/satisfy`
+
+**사은품 지급 조건 충족 여부 조회하기**
+
+> operationId: `post-guest-free-gifts-satisfy`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `ClientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `guestToken` | header | ✅ | `string` | 비회원 토큰^|test-guest-token |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🟡 `PUT` `/guest/claims/{claimNo}/account`
+
+**환불 계좌 정보 수정하기**
+
+> operationId: `put-guest-claims-no-account`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `claimNo` | path | ✅ | `integer` | 클레임 번호^|1 |
+| `ClientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `guestToken` | header | ✅ | `string` | 비회원 토큰^|test-guest-token |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🟢 `GET` `/guest/claims/{claimNo}/check-withdraw`
+
+**클레임 철회시 유효성 검증 타입 조회하기**
+
+> operationId: `get-guest-claims-no-check-withdraw`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `claimNo` | path | ✅ | `integer` | 클레임 번호^|1 |
+| `ClientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `guestToken` | header | ✅ | `string` | 비회원 토큰^|test-guest-token |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🟢 `GET` `/guest/claims/{claimNo}/result`
+
+**클레임 상세보기(클레임 번호)**
+
+> operationId: `get-guest-claims-no-result`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `claimNo` | path | ✅ | `integer` | 클레임 번호^|1 |
+| `ClientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `guestToken` | header | ✅ | `string` | 비회원 토큰^|test-guest-token |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🟡 `PUT` `/guest/claims/{claimNo}/withdraw`
+
+**클레임 철회하기(클레임번호)**
+
+> operationId: `put-guest-claims-no-withdraw`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `claimNo` | path | ✅ | `integer` | 클레임 번호^|1 |
+| `ClientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `guestToken` | header | ✅ | `string` | 비회원 토큰^|test-guest-token |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🟢 `GET` `/guest/order-options/{orderOptionNo}/claims`
+
+**클레임 신청을 위한 정보 조회하기**
+
+> operationId: `get-guest-order-options-no-claims`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderOptionNo` | path | ✅ | `integer` | 주문 상품 옵션 번호^|1 |
+| `claimType` | query | ✅ | `string` | "클레임 타입(CANCEL: 취소, RETURN: 반품, EXCHANGE: 교환)^|CANCEL" |
+| `ClientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `guestToken` | header | ✅ | `string` | 비회원 토큰^|test-guest-token |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+## 부가설명 및 특이사항
+클레임 목록을 조회하는 비회원용 API입니다.
+
+## 화면 예시
+[![](https://image.toast.com/aaaaahb/api-description/order/guest/[GET]%20guest_order-options_claim%20%ED%81%B4%EB%A0%88%EC%9E%84%20%EC%8B%A0%EC%B2%AD%EA%B0%80%EB%8A%A5%20%EC%A0%95%EB%B3%B4%EC%A1%B0%ED%9A%8C%201-1.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/guest/[GET]%20guest_order-options_claim%20%ED%81%B4%EB%A0%88%EC%9E%84%20%EC%8B%A0%EC%B2%AD%EA%B0%80%EB%8A%A5%20%EC%A0%95%EB%B3%B4%EC%A1%B0%ED%9A%8C%201-1.png)
+\
+        [![](https://image.toast.com/aaaaahb/api-description/order/guest/[GET]%20guest_order-options_claim%20%ED%81%B4%EB%A0%88%EC%9E%84%20%EC%8B%A0%EC%B2%AD%EA%B0%80%EB%8A%A5%20%EC%A0%95%EB%B3%B4%EC%A1%B0%ED%9A%8C%201-2.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/guest/[GET]%20guest_order-options_claim%20%ED%81%B4%EB%A0%88%EC%9E%84%20%EC%8B%A0%EC%B2%AD%EA%B0%80%EB%8A%A5%20%EC%A0%95%EB%B3%B4%EC%A1%B0%ED%9A%8C%201-2.png)\
+        \
+
+---
+
+### 🔵 `POST` `/guest/later-input/shippings/claims/cancel`
+
+**"[샵바이 엔터프라이즈 전용] 나중 배송 입력 주문 취소하기"**
+
+> operationId: `post-guest-later-input-shippings-claims-cancel`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `ClientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `encryptedShippingNo` | header | ✅ | `string` | 암호화된 배송 번호^|UFE3Ylo2aUlkSWVuZHVGQjYyS2pZZz09 |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🔵 `POST` `/guest/order-options/{orderOptionNo}/claims/cancel`
+
+**옵션취소 신청하기**
+
+> operationId: `post-guest-order-options-order-option-no-claims-cancel`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderOptionNo` | path | ✅ | `integer` | 주문 상품 옵션 번호^|1 |
+| `ClientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `guestToken` | header | ✅ | `string` | 비회원 토큰^|test-guest-token |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🟢 `GET` `/guest/order-options/{orderOptionNo}/claims/estimate`
+
+**클레임시 변경되는 주문 환불금액 계산하기(단일옵션)**
+
+> operationId: `get-guest-order-options-no-claims-estimate`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderOptionNo` | path | ✅ | `integer` | 주문 상품 옵션 번호^|1 |
+| `claimReasonType` | query | ✅ | `string` | "클레임사유(CHANGE_MIND: 단순변심(색상,사이즈 등), DEFECTIVE_PRODUCT: 상품불량/파\ |
+| `claimType` | query | ✅ | `string` | "클레임타입(CANCEL: 취소, RETURN: 반품, EXCHANGE: 교환)^|CANCEL" |
+| `exchangeCnt` | query | - | `string` | 교환할수량(claimType이 EXCHANGE인 경우)^|1 |
+| `exchangeOptionNo` | query | - | `string` | 교환할옵션번호(claimType이 EXCHANGE인 경우)^|1 |
+| `exchangeProductNo` | query | - | `string` | 교환할상품번호(claimType이 EXCHANGE인 경우)^|1 |
+| `productCnt` | query | ✅ | `string` | 취소/반품할 제품수량^|1 |
+| `responsibleObjectType` | query | - | `string` | "귀책 - responsibleObjectType이 null이면 ClaimReasonType에 매핑되는 귀책\ |
+| `returnWayType` | query | - | `string` | "반품상품 수거방법(SELLER_COLLECT: 판매자수거요청, BUYER_DIRECT_RETURN: 구매자직\ |
+| `ClientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `guestToken` | header | ✅ | `string` | 비회원 토큰^|test-guest-token |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🔵 `POST` `/guest/order-options/{orderOptionNo}/claims/exchange`
+
+**교환 신청하기**
+
+> operationId: `post-guest-order-options-no-claims-exchange`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderOptionNo` | path | ✅ | `integer` | 주문 상품 옵션 번호^|1 |
+| `ClientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `guestToken` | header | ✅ | `string` | 비회원 토큰^|test-guest-token |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🟢 `GET` `/guest/order-options/{orderOptionNo}/claims/result`
+
+**클레임 상세보기(주문상품 옵션번호)**
+
+> operationId: `get-guest-order-options-no-claims-result`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderOptionNo` | path | ✅ | `integer` | 주문 상품 옵션 번호^|1 |
+| `ClientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `guestToken` | header | ✅ | `string` | 비회원 토큰^|test-guest-token |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🔵 `POST` `/guest/order-options/{orderOptionNo}/claims/return`
+
+**반품 신청하기(단일옵션)**
+
+> operationId: `post-guest-order-options-no-claims-return`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderOptionNo` | path | ✅ | `integer` | 주문 상품 옵션 번호^|1 |
+| `ClientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `guestToken` | header | ✅ | `string` | 비회원 토큰^|test-guest-token |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🟡 `PUT` `/guest/order-options/{orderOptionNo}/claims/withdraw`
+
+**클레임 철회하기(주문상품 옵션번호)**
+
+> operationId: `put-guest-order-options-no-claims-withdraw`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderOptionNo` | path | ✅ | `integer` | 주문 상품 옵션 번호^|1 |
+| `ClientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `guestToken` | header | ✅ | `string` | 비회원 토큰^|test-guest-token |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🔵 `POST` `/guest/orders/{orderNo}/claims/cancel`
+
+**주문취소 신청하기**
+
+> operationId: `post-guest-orders-order-no-claims-cancel`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderNo` | path | ✅ | `string` | 주문 번호^|1 |
+| `ClientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `guestToken` | header | ✅ | `string` | 비회원 토큰^|test-guest-token |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+## Member
+
+### 🟢 `GET` `/profile/claims`
+
+**회원 클레임 목록 조회하기**
+
+> operationId: `get-profile-claims`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `claimTypes` | query | - | `string` | 클레임 구분(null인 경우 전체)^|CANCEL |
+| `endYmd` | query | - | `string` | 조회 종료일(null인 경우 오늘)^|yyyy-mm-dd |
+| `hasTotalCount` | query | - | `string` | "목록 카운트 포함 여부(default: false)^|false" |
+| `pageNumber` | query | - | `string` | 페이지 번호 (1 이상)^|1 |
+| `pageSize` | query | - | `string` | 한 페이지당 노출 수^|10 |
+| `startYmd` | query | - | `string` | 조회 시작일(null인 경우 3개월 전)^|yyyy-mm-dd |
+| `ClientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `accessToken` | header | - | `string` | 로그인 인증키^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+## 부가설명 및 특이사항
+클레임 목록을 조회하는 API입니다.
+
+## 화면 예시
+[![](https://image.toast.com/aaaaahb/api-description/order/myorder/[GET]%20profile_claims%20%ED%81%B4%EB%A0%88%EC%9E%84%20%EB%AA%A9%EB%A1%9D%20%EC%A1%B0%ED%9A%8C.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/myorder/[GET]%20profile_claims%20%ED%81%B4%EB%A0%88%EC%9E%84%20%EB%AA%A9%EB%A1%9D%20%EC%A1%B0%ED%9A%8C.png)\
+        \
+
+---
+
+### 🔵 `POST` `/profile/claims/cancel`
+
+**회원 옵션취소 신청하기(복수옵션)**
+
+> operationId: `post-profile-claims-cancel`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `ClientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `accessToken` | header | - | `string` | 로그인 인증키^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🔵 `POST` `/profile/claims/estimate`
+
+**회원 클레임시 변경되는 주문의 환불 예상금액 계산하기(복수옵션)**
+
+> operationId: `post-profile-claims-estimate`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `ClientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `accessToken` | header | - | `string` | 로그인 인증키^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🔵 `POST` `/profile/claims/return`
+
+**회원 반품 신청하기(복수옵션)**
+
+> operationId: `post-profile-claims-return`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `ClientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `accessToken` | header | - | `string` | 로그인 인증키^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🔵 `POST` `/profile/claims/free-gifts/satisfy`
+
+**사은품 지급 조건 충족 여부 조회하기**
+
+> operationId: `post-profile-free-gifts-satisfy`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `ClientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `accessToken` | header | - | `string` | 로그인 인증키^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🟡 `PUT` `/profile/claims/{claimNo}/account`
+
+**회원 환불 계좌 정보 수정하기**
+
+> operationId: `put-profile-claims-no-account`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `claimNo` | path | ✅ | `integer` | 클레임 번호^|1 |
+| `ClientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `accessToken` | header | - | `string` | 로그인 인증키^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🟢 `GET` `/profile/claims/{claimNo}/check-withdraw`
+
+**회원 클레임 철회시 유효성 검증 타입 조회하기**
+
+> operationId: `get-pofile-claims-no-check-withdraw`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `claimNo` | path | ✅ | `integer` | 클레임 번호^|1 |
+| `ClientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `accessToken` | header | - | `string` | 로그인 인증키^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🟢 `GET` `/profile/claims/{claimNo}/result`
+
+**회원 클레임 상세보기(클레임 번호)**
+
+> operationId: `get-profile-claims-no-result`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `claimNo` | path | ✅ | `integer` | 클레임 번호^|1 |
+| `ClientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `accessToken` | header | - | `string` | 로그인 인증키^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🟡 `PUT` `/profile/claims/{claimNo}/withdraw`
+
+**회원 클레임 철회하기(클레임번호)**
+
+> operationId: `put-profile-claims-no-withdraw`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `claimNo` | path | ✅ | `integer` | 클레임 번호^|1 |
+| `ClientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `accessToken` | header | - | `string` | 로그인 인증키^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🟢 `GET` `/profile/order-options/{orderOptionNo}/claims`
+
+**회원 클레임 신청을 위한 정보 조회하기**
+
+> operationId: `get-profile-order-options-no-claims`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderOptionNo` | path | ✅ | `integer` | 주문 상품 옵션 번호^|1 |
+| `claimType` | query | ✅ | `string` | "클레임 타입(CANCEL: 취소, RETURN: 반품, EXCHANGE: 교환)^|CANCEL" |
+| `ClientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `accessToken` | header | - | `string` | 로그인 인증키^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+## 부가설명 및 특이사항
+선택옵션에 대한 클레임을 신청할 때 필요한 정보를 조회합니다.
+
+## 화면\
+        \ 예시
+[![](https://image.toast.com/aaaaahb/api-description/order/myorder/[GET]%20profile_order-options_claim%20%ED%81%B4%EB%A0%88%EC%9E%84%20%EC%8B%A0%EC%B2%AD%EA%B0%80%EB%8A%A5%20%EC%A0%95%EB%B3%B4%20%EC%A1%B0%ED%9A%8C%201-1.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/myorder/[GET]%20profile_order-options_claim%20%ED%81%B4%EB%A0%88%EC%9E%84%20%EC%8B%A0%EC%B2%AD%EA%B0%80%EB%8A%A5%20%EC%A0%95%EB%B3%B4%20%EC%A1%B0%ED%9A%8C%201-1.png)
+\
+        [![](https://image.toast.com/aaaaahb/api-description/order/myorder/[GET]%20profile_order-options_claim%20%ED%81%B4%EB%A0%88%EC%9E%84%20%EC%8B%A0%EC%B2%AD%EA%B0%80%EB%8A%A5%20%EC%A0%95%EB%B3%B4%20%EC%A1%B0%ED%9A%8C%201-2.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/myorder/[GET]%20profile_order-options_claim%20%ED%81%B4%EB%A0%88%EC%9E%84%20%EC%8B%A0%EC%B2%AD%EA%B0%80%EB%8A%A5%20%EC%A0%95%EB%B3%B4%20%EC%A1%B0%ED%9A%8C%201-2.png)
+\
+        \
+
+---
+
+### 🔵 `POST` `/profile/order-options/{orderOptionNo}/claims/cancel`
+
+**회원 옵션취소 신청하기(단일옵션)**
+
+> operationId: `post-profile-order-options-no-claims-cancel`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderOptionNo` | path | ✅ | `integer` | 주문 상품 옵션 번호^|1 |
+| `ClientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `accessToken` | header | - | `string` | 로그인 인증키^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🟢 `GET` `/profile/order-options/{orderOptionNo}/claims/estimate`
+
+**회원 클레임시 변경되는 주문의 환불 예상금액 계산하기(단일옵션)**
+
+> operationId: `get-profile-order-options-no-claims-estimate`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderOptionNo` | path | ✅ | `integer` | 주문 상품 옵션 번호^|1 |
+| `claimReasonType` | query | ✅ | `string` | "클레임사유(CHANGE_MIND: 단순변심(색상,사이즈 등), DEFECTIVE_PRODUCT: 상품불량/파\ |
+| `claimType` | query | ✅ | `string` | "클레임타입(CANCEL: 취소, RETURN: 반품, EXCHANGE: 교환)^|CANCEL" |
+| `exchangeCnt` | query | - | `string` | 교환할수량(claimType이 EXCHANGE인 경우)^|1 |
+| `exchangeOptionNo` | query | - | `string` | 교환할옵션번호(claimType이 EXCHANGE인 경우)^|1 |
+| `exchangeProductNo` | query | - | `string` | 교환할상품번호(claimType이 EXCHANGE인 경우)^|1 |
+| `productCnt` | query | ✅ | `string` | 취소/반품할 제품수량^|1 |
+| `responsibleObjectType` | query | - | `string` | "귀책 - responsibleObjectType이 null이면 ClaimReasonType에 매핑되는 귀책\ |
+| `returnWayType` | query | - | `string` | "반품상품 수거방법(SELLER_COLLECT: 판매자수거요청, BUYER_DIRECT_RETURN: 구매자직\ |
+| `ClientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `accessToken` | header | - | `string` | 로그인 인증키^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🔵 `POST` `/profile/order-options/{orderOptionNo}/claims/exchange`
+
+**회원 클레임 교환 신청하기**
+
+> operationId: `post-profile-order-options-no-claims-exchange`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderOptionNo` | path | ✅ | `integer` | 주문 상품 옵션 번호^|1 |
+| `ClientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `accessToken` | header | - | `string` | 로그인 인증키^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🟢 `GET` `/profile/order-options/{orderOptionNo}/claims/result`
+
+**회원 클레임 상세보기(주문상품 옵션번호)**
+
+> operationId: `get-profile-order-options-no-claims-result`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderOptionNo` | path | ✅ | `integer` | 주문 상품 옵션 번호^|1 |
+| `ClientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `accessToken` | header | - | `string` | 로그인 인증키^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🔵 `POST` `/profile/order-options/{orderOptionNo}/claims/return`
+
+**회원 반품 신청하기(단일옵션)**
+
+> operationId: `post-profile-order-options-no-claims-return`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderOptionNo` | path | ✅ | `integer` | 주문 상품 옵션 번호^|1 |
+| `ClientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `accessToken` | header | - | `string` | 로그인 인증키^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🟡 `PUT` `/profile/order-options/{orderOptionNo}/claims/withdraw`
+
+**회원 클레임 철회하기(주문상품 옵션번호)**
+
+> operationId: `put-profile-order-options-no-claims-withdraw`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderOptionNo` | path | ✅ | `integer` | 주문 상품 옵션 번호^|1 |
+| `ClientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `accessToken` | header | - | `string` | 로그인 인증키^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🔵 `POST` `/profile/orders/{orderNo}/claims/cancel`
+
+**회원 주문취소 신청하기**
+
+> operationId: `post-profile-orders-order-no-claims-cancel`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderNo` | path | ✅ | `string` | 주문 번호^|1 |
+| `ClientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `accessToken` | header | - | `string` | 로그인 인증키^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+

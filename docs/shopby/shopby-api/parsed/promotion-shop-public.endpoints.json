@@ -1,0 +1,1550 @@
+[
+  {
+    "method": "GET",
+    "path": "/coupons",
+    "summary": "내 쿠폰 가져오기",
+    "description": " ## 부가설명 및 특이사항\n 로그인한 사용자가 보유한 쿠폰중 사용가능한 쿠폰과 이미 사용한 쿠폰을 구분하여 조회합니다.\n\n ## 화면 예시\n <a target='_blank' href='http://image.toast.com/aaaaahb/api-description/order/coupon/[GET]%20coupons%20%EB%82%B4%20%EC%BF%A0%ED%8F%B0%20%EA%B0%80%EC%A0%B8%EC%98%A4%EA%B8%B0(%EB%A7%88%EC%9D%B4%ED%8E%98%EC%9D%B4%EC%A7%80).png'><img src='http://image.toast.com/aaaaahb/api-description/order/coupon/[GET]%20coupons%20%EB%82%B4%20%EC%BF%A0%ED%8F%B0%20%EA%B0%80%EC%A0%B8%EC%98%A4%EA%B8%B0(%EB%A7%88%EC%9D%B4%ED%8E%98%EC%9D%B4%EC%A7%80).png?autox150'></a>",
+    "tags": ["Coupon"],
+    "parameters": [
+      {
+        "name": "couponNos",
+        "in": "query",
+        "description": "쿠폰 번호^|[1, 2, 3]",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "desc",
+        "in": "query",
+        "description": "내림차순 정렬 여부^|false",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "endYmd",
+        "in": "query",
+        "description": "검색 종료 일 (지정 하지 않을 시 오늘 날짜까지 조회)^|yyyy-MM-dd",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "pageNumber",
+        "in": "query",
+        "description": "페이지 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "pageSize",
+        "in": "query",
+        "description": "한 페이지당 노출 수^|30",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "searchDateType",
+        "in": "query",
+        "description": "기간 검색타입 (REGISTER_YMD: 등록일(default), USE_END_YMD: 사용 종료일)^|REGISTER_YMD",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "startYmd",
+        "in": "query",
+        "description": "검색 시작 일 (지정 하지 않을 시 3개월 전 오늘 날짜부터 조회)^|yyyy-MM-dd",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "usable",
+        "in": "query",
+        "description": "사용가능 여부 (true: 사용 가능 / false: 사용 불가능 / null: 조건 없음)^|true",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "로그인 인증키^|test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-access-token"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본 값: ko)^|PC",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/coupons239781785"
+            },
+            "examples": {
+              "get-my-coupons": {
+                "value": "{\"items\":[{\"couponIssueNo\":1,\"couponName\":\"쿠폰 이름!\",\"reason\":null,\"couponNo\":3,\"couponType\":\"PRODUCT\",\"couponSubType\":\"NONE\",\"discountAmt\":1,\"discountRate\":0,\"fixedAmt\":true,\"issueYmdt\":\"2025-10-23 15:45:34\",\"limitPayType\":\"NAVER_PAY\",\"limitPayTypes\":[\"NAVER_PAY\"],\"maxDiscountAmt\":0,\"maxSalePrice\":0,\"minSalePrice\":0,\"otherCouponUsable\":true,\"cartCouponUsable\":true,\"productCouponUsable\":true,\"skipsAccumulation\":true,\"usablePlatforms\":[\"PC\"],\"useEndYmdt\":\"2025-10-23 15:45:34\",\"useYmdt\":\"2025-10-23 15:45:34\",\"used\":true,\"couponTargetType\":\"CATEGORY\",\"memberGradeNames\":[\"VIP\"],\"memberGroupNames\":[\"임원\"],\"benefitAmt\":0,\"accumulationUnit\":\"\",\"freeDelivery\":false,\"minDeliveryAmt\":null,\"fiexdAmt\":true}],\"totalCount\":1}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/coupons/download",
+    "summary": "쿠폰 일괄 다운로드하기",
+    "description": " ## 부가설명 및 특이사항\n 쿠폰번호 리스트를 입력 받아 다운로드 쿠폰을 발급 받습니다.\n\n ",
+    "tags": ["Coupon"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "로그인 인증키^|test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-access-token"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본 값: ko)^|PC",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/coupons-download486549215"
+          },
+          "examples": {
+            "post-download-coupons-bulk": {
+              "value": "{\"channelType\":null,\"couponNos\":[1,2]}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/coupons-products-download-465497517"
+            },
+            "examples": {
+              "post-download-coupons-bulk": {
+                "value": "{\"issuedCoupons\":[{\"couponIssueNo\":1,\"couponNo\":1,\"couponName\":\"쿠폰쿠폰쿠폰\",\"useEndYmdt\":\"2025-10-25 15:45:36\"}],\"issueFailCoupons\":[{\"couponNo\":2,\"failMessage\":\"할인쿠폰이 모두 매진 되었습니다.\",\"errorCode\":\"C1004\"}]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/coupons/issuable",
+    "summary": "발급 가능한 쿠폰 조회하기",
+    "description": " ## 부가설명 및 특이사항\n 상품과 상관없이 오늘 날짜 기준으로 다운로드 가능한 쿠폰을 모두 조회합니다.\n\n ## 화면 예시\n <a target='_blank' href='http://image.toast.com/aaaaahb/api-description/order/coupon/[GET]%20coupons_issuable%20%EC%98%A4%EB%8A%98%20%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C%20%EA%B0%80%EB%8A%A5%ED%95%9C%20%EC%BF%A0%ED%8F%B0%20%EC%A1%B0%ED%9A%8C.png'><img src='http://image.toast.com/aaaaahb/api-description/order/coupon/[GET]%20coupons_issuable%20%EC%98%A4%EB%8A%98%20%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C%20%EA%B0%80%EB%8A%A5%ED%95%9C%20%EC%BF%A0%ED%8F%B0%20%EC%A1%B0%ED%9A%8C.png?autox150'></a>",
+    "tags": ["Coupon"],
+    "parameters": [
+      {
+        "name": "channelType",
+        "in": "query",
+        "description": "채널 타입^|NAVER_EP, FACEBOOK",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "로그인 인증키^|test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-access-token"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본 값: ko)^|PC",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/coupons-targets-issuable-coupons-1350435564"
+            },
+            "examples": {
+              "get-issuable-coupons": {
+                "value": "[{\"couponNo\":1,\"couponName\":\"쿠폰테스트\",\"couponType\":\"CART\",\"couponSubType\":\"CART\",\"couponTargetType\":\"ALL_PRODUCT\",\"allianceRefererType\":null,\"discountInfo\":{\"fixedAmt\":true,\"discountAmt\":2000,\"discountRate\":null,\"maxDiscountAmt\":null,\"freeDelivery\":false,\"useOtherCoupon\":true,\"useCartCoupon\":true,\"useProductCoupon\":true,\"skippedAccumulationAmt\":false},\"dateInfo\":{\"issueStartYmdt\":\"2025-10-23 15:45:29\",\"issueEndYmdt\":\"2025-10-24 15:45:29\",\"issueStartHour\":0,\"issueEndHour\":24,\"issueDaysOfWeek\":\"[\\\"1\\\",\\\"2\\\",\\\"3\\\",\\\"4\\\",\\\"5\\\",\\\"6\\\",\\\"7\\\"]\"},\"useConstraint\":{\"useEndYmdt\":\"2025-10-24 15:45:29\",\"useDays\":-1,\"minSalePrice\":5000,\"maxSalePrice\":100000,\"minDeliveryAmt\":0,\"limitPayType\":null,\"limitPayTypes\":[],\"usablePlatformTypes\":[\"PC\",\"MOBILE_WEB\",\"MOBILE_APP\"]},\"issueConstraint\":{\"memberGradeName\":\"VIP\",\"memberGradeNames\":[\"VIP\"],\"memberGroupNames\":[\"임직원\"],\"issuablePlatformTypes\":[\"PC\",\"MOBILE_WEB\",\"MOBILE_APP\"],\"dailyIssueLimit\":false,\"dailyIssueLimitCnt\":-1,\"issuePerPersonLimit\":false,\"issuePerPersonLimitCnt\":-1,\"dailyIssuePerPersonLimitCnt\":-1,\"channelTypes\":null},\"couponStatus\":{\"totalIssuableCnt\":999,\"totalIssuedCnt\":1,\"totalIssuedCntToday\":5,\"issuableCnt\":998,\"myIssuedCnt\":1,\"myIssuedCntToday\":1},\"benefitInfo\":null,\"downloadable\":true}]"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/coupons/summary",
+    "summary": "내 쿠폰 요약정보 가져오기",
+    "description": " ## 부가설명 및 특이사항\n 로그인한 사용자가 보유한 쿠폰의 정보를 요약하여 조회합니다.\n\n ## 화면 예시\n <a target='_blank' href='http://image.toast.com/aaaaahb/api-description/order/coupon/[GET]%20coupons_summary%20%EB%82%B4%20%EC%BF%A0%ED%8F%B0%20%EC%9A%94%EC%95%BD%EC%A0%95%EB%B3%B4.png'><img src='http://image.toast.com/aaaaahb/api-description/order/coupon/[GET]%20coupons_summary%20%EB%82%B4%20%EC%BF%A0%ED%8F%B0%20%EC%9A%94%EC%95%BD%EC%A0%95%EB%B3%B4.png?autox150'></a>",
+    "tags": ["Coupon"],
+    "parameters": [
+      {
+        "name": "expireDay",
+        "in": "query",
+        "description": "현재 ~ (현재 + 만료일) 기준으로 검색됩니다.^|7",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "로그인 인증키^|test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-access-token"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본 값: ko)^|PC",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/coupons-summary678060369"
+            },
+            "examples": {
+              "get-my-coupon-summary": {
+                "value": "{\"usableCouponCnt\":3,\"expiringCouponCnt\":6}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/coupons/products/download",
+    "summary": "상품번호 리스트로 쿠폰 일괄 다운로드하기",
+    "description": " ## 부가설명 및 특이사항\n 상품번호 리스트를 입력받아 다운로드 쿠폰을 발급 받습니다. \n (특정 상품 상세 페이지에 추가상품이 설정된 경우, \n 해당 API를 사용하시면 해당 상품뿐만 아니라 추가상품에도 적용할 수 있는 쿠폰을 지급받을 수 있습니다.)",
+    "tags": ["Coupon"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "로그인 인증키^|test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-access-token"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본 값: ko)^|PC",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/coupons-products-download-465497517"
+            },
+            "examples": {
+              "post-download-coupons-bulk-by-product-nos": {
+                "value": "{\"issuedCoupons\":[{\"couponIssueNo\":1,\"couponNo\":1,\"couponName\":\"쿠폰쿠폰쿠폰\",\"useEndYmdt\":\"2025-10-25 15:45:35\"}],\"issueFailCoupons\":[{\"couponNo\":2,\"failMessage\":\"할인쿠폰이 모두 매진 되었습니다.\",\"errorCode\":\"C1004\"}]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/coupons/register-code/{promotionCode}",
+    "summary": "코드 쿠폰 발급하기",
+    "description": " ## 부가설명 및 특이사항\n 등록된 프로모션 코드를 이용해 쿠폰을 발급받습니다.\n\n ## 화면 예시\n <a target='_blank' href='http://image.toast.com/aaaaahb/api-description/order/coupon/[POST]%20coupons_register-code_%EC%BF%A0%ED%8F%B0%EC%BD%94%EB%93%9C%EB%A1%9C%20%EC%BF%A0%ED%8F%B0%20%EB%B0%9C%EA%B8%89.png'><img src='http://image.toast.com/aaaaahb/api-description/order/coupon/[POST]%20coupons_register-code_%EC%BF%A0%ED%8F%B0%EC%BD%94%EB%93%9C%EB%A1%9C%20%EC%BF%A0%ED%8F%B0%20%EB%B0%9C%EA%B8%89.png?autox150'></a>",
+    "tags": ["Coupon"],
+    "parameters": [
+      {
+        "name": "promotionCode",
+        "in": "path",
+        "description": "프로모션 코드^|2020EVENT",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "로그인 인증키^|test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-access-token"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본 값: ko)^|PC",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/coupons-register-code-promotionCode-442452913"
+            },
+            "examples": {
+              "post-register-code-download": {
+                "value": "{\"couponIssueNo\":1,\"couponNo\":1,\"couponName\":\"쿠폰쿠폰쿠폰\",\"useEndYmdt\":\"2025-10-25 15:45:33\"}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/coupons/{couponNo}/download",
+    "summary": "쿠폰 발급하기",
+    "description": " ## 부가설명 및 특이사항\n 선택한 쿠폰번호에 해당하는 다운로드 쿠폰을 발급받습니다.\n\n ## 화면 예시\n <a target='_blank' href='http://image.toast.com/aaaaahb/api-description/order/coupon/[POST]%20coupons_download%20%EC%BF%A0%ED%8F%B0%20%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C.png'><img src='http://image.toast.com/aaaaahb/api-description/order/coupon/[POST]%20coupons_download%20%EC%BF%A0%ED%8F%B0%20%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C.png?autox150'></a>",
+    "tags": ["Coupon"],
+    "parameters": [
+      {
+        "name": "couponNo",
+        "in": "path",
+        "description": "쿠폰번호^|1",
+        "required": true,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "로그인 인증키^|test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-access-token"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본 값: ko)^|PC",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/coupons-couponNo-download1775340182"
+          },
+          "examples": {
+            "post-download-coupons": {
+              "value": "{\"channelType\":\"NAVER_EP\"}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/coupons-register-code-promotionCode-442452913"
+            },
+            "examples": {
+              "post-download-coupons": {
+                "value": "{\"couponIssueNo\":1,\"couponNo\":1,\"couponName\":\"쿠폰쿠폰쿠폰\",\"useEndYmdt\":\"2025-10-25 15:45:37\"}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/coupons/{couponNo}/exclude-targets",
+    "summary": "쿠폰번호로 제외 대상 조회하기",
+    "description": " ## 부가설명 및 특이사항\n 선택한 쿠폰번호에 해당하는 제외 대상의 목록을 조회합니다.",
+    "tags": ["Coupon"],
+    "parameters": [
+      {
+        "name": "couponNo",
+        "in": "path",
+        "description": "쿠폰 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "pageNumber",
+        "in": "query",
+        "description": "페이지 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "pageSize",
+        "in": "query",
+        "description": "한 페이지당 노출 수^|50",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "로그인 인증키^|test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-access-token"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본 값: ko)^|PC",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/coupons-couponNo-targets-75282699"
+            },
+            "examples": {
+              "get-coupon-exclude-target": {
+                "value": "{\"items\":[{\"targetNo\":3,\"targetName\":\"생일 케이크\",\"targetType\":\"PRODUCT\"},{\"targetNo\":4,\"targetName\":\"생일 선물\",\"targetType\":\"BRAND\"}],\"totalCount\":2}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/coupons/{couponNo}/targets",
+    "summary": "쿠폰번호로 대상 조회하기",
+    "description": " ## 부가설명 및 특이사항\n 선택한 쿠폰번호에 해당하는 대상의 목록을 조회합니다.",
+    "tags": ["Coupon"],
+    "parameters": [
+      {
+        "name": "couponNo",
+        "in": "path",
+        "description": "쿠폰 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "pageNumber",
+        "in": "query",
+        "description": "페이지 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "pageSize",
+        "in": "query",
+        "description": "한 페이지당 노출 수^|50",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "로그인 인증키^|test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-access-token"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본 값: ko)^|PC",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/coupons-couponNo-targets-75282699"
+            },
+            "examples": {
+              "get-coupon-target": {
+                "value": "{\"items\":[{\"targetNo\":3,\"targetName\":\"생일 케이크\",\"targetType\":\"PRODUCT\"},{\"targetNo\":4,\"targetName\":\"생일 선물\",\"targetType\":\"BRAND\"}],\"totalCount\":2}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/coupons/events/{eventNo}/download",
+    "summary": "기획전 번호로 쿠폰 발급하기",
+    "description": " ## 부가설명 및 특이사항\n 해당 기획전에서 다운로드받을 수 있는 모든 쿠폰을 발급합니다.\n\n ## 화면 예시\n <a target='_blank' href='http://image.toast.com/aaaaahb/api-description/order/coupon/[POST]%20coupons_events_download%20%EB%AA%A8%EB%93%A0%20%EC%BF%A0%ED%8F%B0%20%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C(%EC%9D%B4%EB%B2%A4%ED%8A%B8%ED%8E%98%EC%9D%B4%EC%A7%80).png'><img src='http://image.toast.com/aaaaahb/api-description/order/coupon/[POST]%20coupons_events_download%20%EB%AA%A8%EB%93%A0%20%EC%BF%A0%ED%8F%B0%20%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C(%EC%9D%B4%EB%B2%A4%ED%8A%B8%ED%8E%98%EC%9D%B4%EC%A7%80).png?autox150'></a>",
+    "tags": ["Coupon"],
+    "parameters": [
+      {
+        "name": "eventNo",
+        "in": "path",
+        "description": "기획전 번호^|123",
+        "required": true,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "로그인 인증키^|test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-access-token"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본 값: ko)^|PC",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/coupons-products-download-465497517"
+            },
+            "examples": {
+              "post-download-coupon-by-event": {
+                "value": "{\"issuedCoupons\":[{\"couponIssueNo\":1,\"couponNo\":1,\"couponName\":\"쿠폰쿠폰쿠폰\",\"useEndYmdt\":\"2025-10-25 15:45:37\"}],\"issueFailCoupons\":[{\"couponNo\":2,\"failMessage\":\"할인쿠폰이 모두 매진 되었습니다.\",\"errorCode\":\"C1004\"}]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/coupons/issues/{couponIssueNo}/use",
+    "summary": "쿠폰 사용하기",
+    "description": " ## 부가설명 및 특이사항\n 기프트 쿠폰만 사용 처리 가능하며, <br />\n 기프트 쿠폰 사용 처리 시 혜택이 지급됩니다. (예, 적립금)\n ",
+    "tags": ["CouponIssue"],
+    "parameters": [
+      {
+        "name": "couponIssueNo",
+        "in": "path",
+        "description": "쿠폰 지급 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "로그인 인증키^|test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-access-token"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본 값: ko)^|PC",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/coupons/products/issuable/coupons",
+    "summary": "상품번호 리스트로 발급 가능한 쿠폰 조회하기",
+    "description": " ## 부가설명 및 특이사항\n 상품번호 리스트를 입력받아 발급 가능한 쿠폰 리스트를 조회합니다.\n (특정 상품 상세 페이지에 추가상품이 설정된 경우\n 해당 API를 사용하시면 해당 상품뿐만 아니라 추가상품에도 적용할 수 있는 쿠폰을 조회할 수 있습니다.)",
+    "tags": ["Coupon"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "로그인 인증키^|test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-access-token"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본 값: ko)^|PC",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/coupons-targets-issuable-coupons-1350435564"
+            },
+            "examples": {
+              "get-issuable-coupons-by-product-nos": {
+                "value": "[{\"couponNo\":1,\"couponName\":\"쿠폰테스트\",\"couponType\":\"CART\",\"couponSubType\":\"CART\",\"couponTargetType\":\"ALL_PRODUCT\",\"allianceRefererType\":null,\"discountInfo\":{\"fixedAmt\":true,\"discountAmt\":2000,\"discountRate\":null,\"maxDiscountAmt\":null,\"freeDelivery\":false,\"useOtherCoupon\":true,\"useCartCoupon\":true,\"useProductCoupon\":true,\"skippedAccumulationAmt\":false},\"dateInfo\":{\"issueStartYmdt\":\"2025-10-23 15:45:29\",\"issueEndYmdt\":\"2025-10-24 15:45:29\",\"issueStartHour\":0,\"issueEndHour\":24,\"issueDaysOfWeek\":\"[\\\"1\\\",\\\"2\\\",\\\"3\\\",\\\"4\\\",\\\"5\\\",\\\"6\\\",\\\"7\\\"]\"},\"useConstraint\":{\"useEndYmdt\":\"2025-10-24 15:45:29\",\"useDays\":-1,\"minSalePrice\":5000,\"maxSalePrice\":100000,\"minDeliveryAmt\":0,\"limitPayType\":null,\"limitPayTypes\":[],\"usablePlatformTypes\":[\"PC\",\"MOBILE_WEB\",\"MOBILE_APP\"]},\"issueConstraint\":{\"memberGradeName\":\"VIP\",\"memberGradeNames\":[\"VIP\"],\"memberGroupNames\":[\"임직원\"],\"issuablePlatformTypes\":[\"PC\",\"MOBILE_WEB\",\"MOBILE_APP\"],\"dailyIssueLimit\":false,\"dailyIssueLimitCnt\":-1,\"issuePerPersonLimit\":false,\"issuePerPersonLimitCnt\":-1,\"dailyIssuePerPersonLimitCnt\":-1,\"channelTypes\":null},\"couponStatus\":{\"totalIssuableCnt\":999,\"totalIssuedCnt\":1,\"totalIssuedCntToday\":5,\"issuableCnt\":998,\"myIssuedCnt\":1,\"myIssuedCntToday\":1},\"benefitInfo\":null,\"downloadable\":true}]"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/coupons/products/{productNo}/download",
+    "summary": "상품 번호로 쿠폰 발급하기",
+    "description": " ## 부가설명 및 특이사항\n 해당 상품에서 다운로드받을 수 있는 모든 쿠폰을 발급합니다.\n\n ## 화면 예시\n <a target='_blank' href='http://image.toast.com/aaaaahb/api-description/order/coupon/[POST]%20coupons_products_download%20%EB%AA%A8%EB%93%A0%20%EC%BF%A0%ED%8F%B0%20%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C(%EC%83%81%ED%92%88%ED%8E%98%EC%9D%B4%EC%A7%80).png'><img src='http://image.toast.com/aaaaahb/api-description/order/coupon/[POST]%20coupons_products_download%20%EB%AA%A8%EB%93%A0%20%EC%BF%A0%ED%8F%B0%20%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C(%EC%83%81%ED%92%88%ED%8E%98%EC%9D%B4%EC%A7%80).png?autox150'></a>",
+    "tags": ["Coupon"],
+    "parameters": [
+      {
+        "name": "productNo",
+        "in": "path",
+        "description": "상품번호^|123412",
+        "required": true,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "로그인 인증키^|test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-access-token"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본 값: ko)^|PC",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/coupons-products-productNo-download1023351296"
+          },
+          "examples": {
+            "post-download-coupon-by-product": {
+              "value": "{\"channelType\":null}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/coupons-products-download-465497517"
+            },
+            "examples": {
+              "post-download-coupon-by-product": {
+                "value": "{\"issuedCoupons\":[{\"couponIssueNo\":1,\"couponNo\":1,\"couponName\":\"쿠폰쿠폰쿠폰\",\"useEndYmdt\":\"2025-10-25 15:45:37\"}],\"issueFailCoupons\":[{\"couponNo\":2,\"failMessage\":\"할인쿠폰이 모두 매진 되었습니다.\",\"errorCode\":\"C1004\"}]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/coupons/targets/issuable/coupons",
+    "summary": "특정 할인대상으로 발급 가능한 쿠폰 조회하기",
+    "description": " ## 부가설명 및 특이사항\n 특정 할인대상으로 발급 가능한 쿠폰 조회하기\n (할인대상: 브랜드/카테고리/파트너)\n \n `targetNo` 또는 `targetNos` 중 하나는 반드시 입력해야 합니다.",
+    "tags": ["Coupon"],
+    "parameters": [
+      {
+        "name": "channelType",
+        "in": "query",
+        "description": "채널 타입^|NAVER_EP, FACEBOOK",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "couponTargetType",
+        "in": "query",
+        "description": "쿠폰 할인 대상^|BRAND, CATEGORY, PARTNER",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "targetNo",
+        "in": "query",
+        "description": "할인 대상 번호^|123",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "targetNos",
+        "in": "query",
+        "description": "할인 대상 번호 리스트^|123,456",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "로그인 인증키^|test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-access-token"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본 값: ko)^|PC",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/coupons-targets-issuable-coupons-1350435564"
+            },
+            "examples": {
+              "get-issuable-coupons-by-target-no": {
+                "value": "[{\"couponNo\":1,\"couponName\":\"쿠폰테스트\",\"couponType\":\"CART\",\"couponSubType\":\"CART\",\"couponTargetType\":\"ALL_PRODUCT\",\"allianceRefererType\":null,\"discountInfo\":{\"fixedAmt\":true,\"discountAmt\":2000,\"discountRate\":null,\"maxDiscountAmt\":null,\"freeDelivery\":false,\"useOtherCoupon\":true,\"useCartCoupon\":true,\"useProductCoupon\":true,\"skippedAccumulationAmt\":false},\"dateInfo\":{\"issueStartYmdt\":\"2025-10-23 15:45:29\",\"issueEndYmdt\":\"2025-10-24 15:45:29\",\"issueStartHour\":0,\"issueEndHour\":24,\"issueDaysOfWeek\":\"[\\\"1\\\",\\\"2\\\",\\\"3\\\",\\\"4\\\",\\\"5\\\",\\\"6\\\",\\\"7\\\"]\"},\"useConstraint\":{\"useEndYmdt\":\"2025-10-24 15:45:29\",\"useDays\":-1,\"minSalePrice\":5000,\"maxSalePrice\":100000,\"minDeliveryAmt\":0,\"limitPayType\":null,\"limitPayTypes\":[],\"usablePlatformTypes\":[\"PC\",\"MOBILE_WEB\",\"MOBILE_APP\"]},\"issueConstraint\":{\"memberGradeName\":\"VIP\",\"memberGradeNames\":[\"VIP\"],\"memberGroupNames\":[\"임직원\"],\"issuablePlatformTypes\":[\"PC\",\"MOBILE_WEB\",\"MOBILE_APP\"],\"dailyIssueLimit\":false,\"dailyIssueLimitCnt\":-1,\"issuePerPersonLimit\":false,\"issuePerPersonLimitCnt\":-1,\"dailyIssuePerPersonLimitCnt\":-1,\"channelTypes\":null},\"couponStatus\":{\"totalIssuableCnt\":999,\"totalIssuedCnt\":1,\"totalIssuedCntToday\":5,\"issuableCnt\":998,\"myIssuedCnt\":1,\"myIssuedCntToday\":1},\"benefitInfo\":null,\"downloadable\":true}]"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/coupons/products/{productNo}/issuable/coupons",
+    "summary": "상품 번호로 발급 가능한 쿠폰 조회하기",
+    "description": " ## 부가설명 및 특이사항\n 해당 상품 상세정보에서 다운로드 할수 있는 모든 쿠폰을 조회합니다.\n 상품번호 뿐만 아니라 해당 상품의 브랜드, 파트너, 카테고리로 할인대상 설정된 쿠폰도 조회합니다.\n\n ## 화면 예시\n <a target='_blank' href='http://image.toast.com/aaaaahb/api-description/order/coupon/[GET]%20coupons_products_issuable_coupons%20%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C%20%EA%B0%80%EB%8A%A5%ED%95%9C%20%EC%BF%A0%ED%8F%B0%20%EA%B0%80%EC%A0%B8%EC%98%A4%EA%B8%B0.png'><img src='http://image.toast.com/aaaaahb/api-description/order/coupon/[GET]%20coupons_products_issuable_coupons%20%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C%20%EA%B0%80%EB%8A%A5%ED%95%9C%20%EC%BF%A0%ED%8F%B0%20%EA%B0%80%EC%A0%B8%EC%98%A4%EA%B8%B0.png?autox150'></a>",
+    "tags": ["Coupon"],
+    "parameters": [
+      {
+        "name": "productNo",
+        "in": "path",
+        "description": "상품번호^|1",
+        "required": true,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "channelType",
+        "in": "query",
+        "description": "채널 타입^|NAVER_EP, FACEBOOK",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "로그인 인증키^|test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-access-token"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본 값: ko)^|PC",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/coupons-targets-issuable-coupons-1350435564"
+            },
+            "examples": {
+              "get-issuable-coupon-by-products": {
+                "value": "[{\"couponNo\":1,\"couponName\":\"쿠폰테스트\",\"couponType\":\"CART\",\"couponSubType\":\"CART\",\"couponTargetType\":\"ALL_PRODUCT\",\"allianceRefererType\":null,\"discountInfo\":{\"fixedAmt\":true,\"discountAmt\":2000,\"discountRate\":null,\"maxDiscountAmt\":null,\"freeDelivery\":false,\"useOtherCoupon\":true,\"useCartCoupon\":true,\"useProductCoupon\":true,\"skippedAccumulationAmt\":false},\"dateInfo\":{\"issueStartYmdt\":\"2025-10-23 15:45:29\",\"issueEndYmdt\":\"2025-10-24 15:45:29\",\"issueStartHour\":0,\"issueEndHour\":24,\"issueDaysOfWeek\":\"[\\\"1\\\",\\\"2\\\",\\\"3\\\",\\\"4\\\",\\\"5\\\",\\\"6\\\",\\\"7\\\"]\"},\"useConstraint\":{\"useEndYmdt\":\"2025-10-24 15:45:29\",\"useDays\":-1,\"minSalePrice\":5000,\"maxSalePrice\":100000,\"minDeliveryAmt\":0,\"limitPayType\":null,\"limitPayTypes\":[],\"usablePlatformTypes\":[\"PC\",\"MOBILE_WEB\",\"MOBILE_APP\"]},\"issueConstraint\":{\"memberGradeName\":\"VIP\",\"memberGradeNames\":[\"VIP\"],\"memberGroupNames\":[\"임직원\"],\"issuablePlatformTypes\":[\"PC\",\"MOBILE_WEB\",\"MOBILE_APP\"],\"dailyIssueLimit\":false,\"dailyIssueLimitCnt\":-1,\"issuePerPersonLimit\":false,\"issuePerPersonLimitCnt\":-1,\"dailyIssuePerPersonLimitCnt\":-1,\"channelTypes\":null},\"couponStatus\":{\"totalIssuableCnt\":999,\"totalIssuedCnt\":1,\"totalIssuedCntToday\":5,\"issuableCnt\":998,\"myIssuedCnt\":1,\"myIssuedCntToday\":1},\"benefitInfo\":null,\"downloadable\":true}]"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+]

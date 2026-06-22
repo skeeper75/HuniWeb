@@ -1,17 +1,11 @@
 ---
 name: dbm-change-tracking
 description: >
-  후니프린팅 상품마스터·가격표 엑셀의 **버전 간 변경분을 추적하고 라이브 t_* DB에 델타로 적용**하는
-  방법론 스킬 (round-10). 두 버전(이전 baseline → 신규)을 키 기반(prd_nm/prd_cd)으로 cell-level
-  diff 하여 ADDED/REMOVED/MODIFIED/UNCHANGED로 분류하고, 각 변경을 영향 t_* 엔티티/컬럼/라이브 행에
-  매핑하고, 사람이 읽는 변경 매니페스트(행 단위 diff 감사본) + 멱등 델타 UPSERT(ON CONFLICT, upd_dt
-  변경로그 반영) + 롤백전용 라이브 DRY-RUN을 산출한다. 3-way(baseline/new/라이브) 정합으로 적용분을
-  결정하고, REMOVED는 hard-delete 금지(논리삭제 제안·escalate), 신규 코드값은 선적재 제안, 실 COMMIT은
-  인간 승인. '변경 추적', '버전 diff', '버전 비교', '변경분 적용', '신규 버전 적용', '상품마스터 업데이트',
-  '가격표 업데이트', '변경 매니페스트', '델타 적재', '엑셀 변경 추적', '260527 260610', 'change tracking',
-  'round-10', '변경 추적 다시', '델타 다시', '변경 추적 업데이트' 작업 시 반드시 이 스킬을 사용. 단일 스냅샷
-  매핑 설계는 dbm-mapping/dbm-price-formula, 적재본 조립·실행은 dbm-load-readiness/dbm-load-execution,
-  이미 적재된 DB↔엑셀 단건 정합은 dbm-mapping-audit이 담당하므로 그 작업에는 트리거하지 않는다.
+  후니프린팅 상품마스터·가격표 엑셀의 버전 간 변경분을 키 기반 cell-level diff(ADDED/REMOVED/MODIFIED)로
+  추적해 라이브 t_*에 델타 적용하는 방법론(round-10). 변경 매니페스트 + 멱등 델타 UPSERT + 롤백전용 DRY-RUN
+  산출. 3-way(baseline/new/라이브) 정합·REMOVED는 논리삭제 제안(hard-delete 금지)·실 COMMIT 인간 승인.
+  트리거: 변경 추적, 버전 diff, 변경분 적용, 신규 버전 적용, 변경 매니페스트, 델타 적재, 260527 260610, round-10, 변경 추적 다시.
+  단일 스냅샷 매핑은 dbm-mapping/dbm-price-formula, 적재 조립·실행은 dbm-load-readiness/dbm-load-execution, 단건 정합은 dbm-mapping-audit.
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 metadata:
   version: "1.0.0"

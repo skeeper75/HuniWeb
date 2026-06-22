@@ -1,0 +1,60 @@
+/* ───────────────────────────────────────────────────────────────
+   Huni printing — Color tokens
+   Sourced from the Figma "Color Palette" + "Typography" specimens.
+   Main color #5538B6 (purple). Warm "warning" accents from the
+   경고칼라 group. Neutrals are a 7-step warm-cool gray ramp.
+   ─────────────────────────────────────────────────────────────── */
+:root {
+  /* ── Brand / main color (purple) ── */
+  --huni-purple-50:  #EEEBF9;  /* lightest tint — hover surfaces */
+  --huni-purple-100: #DED7F4;  /* tint */
+  --huni-purple-200: #C9C2DF;  /* muted tint */
+  --huni-purple-400: #9580D9;  /* light brand */
+  --huni-purple-600: #5538B6;  /* MAIN COLOR */
+  --huni-purple-800: #351D87;  /* deep / pressed / hover-fill */
+
+  /* ── Neutrals (gray ramp) ── */
+  --huni-white:   #FFFFFF;
+  --huni-gray-50: #F6F6F6;  /* page / muted surface */
+  --huni-gray-100:#E9E9E9;  /* hairline tint */
+  --huni-gray-200:#CACACA;  /* default border */
+  --huni-gray-400:#979797;  /* secondary / placeholder text */
+  --huni-gray-600:#565656;  /* strong body text */
+  --huni-gray-800:#424242;  /* heading / primary text */
+  --huni-black:   #000000;
+
+  /* ── Accent (경고칼라 / label & status) ── */
+  --huni-amber:  #E6B93F;  /* highlight / NEW label */
+  --huni-teal:   #7AC8C4;  /* UP label / calm status */
+  --huni-orange: #DF7939;  /* DESIGN label / attention */
+  --huni-red:    #E60012;  /* error / warning */
+
+  /* ── Semantic aliases ── */
+  --color-brand:           var(--huni-purple-600);
+  --color-brand-strong:    var(--huni-purple-800);
+  --color-brand-soft:      var(--huni-purple-400);
+  --color-brand-surface:   var(--huni-purple-50);
+
+  --text-heading:    var(--huni-gray-800);
+  --text-body:       var(--huni-gray-600);
+  --text-secondary:  var(--huni-gray-400);
+  --text-placeholder:var(--huni-gray-400);
+  --text-on-brand:   var(--huni-white);
+  --text-brand:      var(--huni-purple-600);
+
+  --surface-page:    var(--huni-white);
+  --surface-muted:   var(--huni-gray-50);
+  --surface-card:    var(--huni-white);
+  --surface-hover:   var(--huni-gray-50);
+  --surface-brand-hover: var(--huni-purple-50);
+
+  --border-default:  var(--huni-gray-200);
+  --border-hairline: var(--huni-gray-100);
+  --border-strong:   var(--huni-gray-400);
+  --border-brand:    var(--huni-purple-600);
+
+  --color-disabled-fill:  var(--huni-gray-200);
+  --color-disabled-text:  var(--huni-gray-400);
+  --color-error:          var(--huni-red);
+  --color-success:        var(--huni-teal);
+}

@@ -1,0 +1,75 @@
+---
+title: "CategoriesProvider"
+depth: 5
+path: "오로라 리액트 스킨개발가이드 > 개발 프로세스 > 2️⃣Aurora React 샘플스킨 확인 > @shopby/react-components > display > CategoriesProvider"
+---
+
+# CategoriesProvider
+
+* categoryNo와 depth(카테고리 계층현재 카테고리 번호가 속한 계층의 depth)를 이용해
+    전시 카테고리 목록을 계층별 데이터로 관리합니다.
+* depth가 없을 경우 categoryNo가 최상위 카테고리 계층이라고 판단합니다.
+
+## 속성
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | ---- | --- | ---- | --- |
+| children | true | ReactNode | - |  |
+
+## 상태
+
+* `categoriesState`는 `useCategoriesStateContext`를 호출해 사용합니다.
+
+```jsx
+const categoriesState = useCategoriesStateContext();
+```
+
+| 이름 | 타입 | 기본 값 | 설명 |
+| --- | --- | ---- | --- |
+| parentCategories | [/categories/{categoryNo}](https://docs.shopby.co.kr/?url.primaryName=display/#/Category/get-category)
+multiLevelCategories 타입과 동일 |  | 상위 카테고리 목록
+(depth가 없거나, 1일 경우 현재 카테고리 목록이 상위 카테고리가 된다.) |
+| currentCategories | [/categories/{categoryNo}](https://docs.shopby.co.kr/?url.primaryName=display/#/Category/get-category)
+multiLevelCategories 타입과 동일 |  | 현재 선택된 카테고리 목록
+(depth가 없거나 1일 경우 하위 카테고리 목록이 현재 카테고리가 된다.) |
+| childCategories | [/categories/{categoryNo}](https://docs.shopby.co.kr/?url.primaryName=display/#/Category/get-category)
+multiLevelCategories 타입과 동일 |  | 선택된 현재 카테고리의 하위 카테고리 목록 |
+| originCategories | [/categories/{categoryNo}](https://docs.shopby.co.kr/?url.primaryName=display/#/Category/get-category) |  | 카테고리 계층 목록, 카테고리 목록 response와 동일 |
+| isVisibleCallout | boolean | false | 하위 카테고리 메뉴 목록 show/hide |
+
+### [category (parentCategories, currentCategories, childCategories) 하위 타입](https://docs.shopby.co.kr/?url.primaryName=display/#/Category/get-category)
+
+| 이름 | 타입 | 기본 값 | 설명 |
+| --- | --- | ---- | --- |
+| categories | array | [/categories/{categoryNo}](https://docs.shopby.co.kr/?url.primaryName=display/#/Category/get-category)
+multiLevelCategories 타입과 동일 | 선택된 카테고리 번호의 (상위, 현재, 하위)목록들 |
+| categoryInfo | object | [/categories/{categoryNo}](https://docs.shopby.co.kr/?url.primaryName=display/#/Category/get-category)
+multiLevelCategories[0] 타입과 동일 | 선택된 카테고리 정보 |
+
+## 액션
+
+* `categoriesAction`는 `useCategoriesActionContext`를 호출해 사용합니다.
+
+```jsx
+const categoriesAction = useCategoriesActionContext();
+```
+
+| 이름 | 인자타입 | 기본 값 | 설명 | 관리하는 상태 |
+| --- | ---- | ---- | --- | ------- |
+| searchCategoryMenu | object |  | 카테고리 번호와 카테고리 계층(depth)번호로 카테고리 검색 | @rows=3:parentCategories,
+currentCategories,
+childCategories,
+originCategories, |
+| ㄴ categoryNo | number | - | 카테고리 번호 |
+| ㄴ depth | number | - | 카테고리 계층 번호 ( 계층 번호 없을 경우 categoryNo를 1depth로 처리) |
+| toggleCallout | boolean | false | 하위 카테고리 메뉴 목록 show/hide | isVisibleCallout |
+
+## 사용 예시
+
+```jsx
+const Example = () => (
+  
+    
+  
+);
+```

@@ -1,25 +1,13 @@
 ---
 name: dbm-axis-staged-load
 description: >
-  후니프린팅 상품마스터를 6개 기초데이터 축(① 기초코드 t_cod_base_codes · ② 사이즈 t_siz_sizes ·
-  ③ 도수 t_clr_color_counts · ④ 자재 t_mat_materials · ⑤ 공정 t_proc_processes · ⑥ 카테고리
-  t_cat_categories) 기준으로 단계별 교정·적재하는 round-22 방법론 스킬. 라이브에 이미 적재됐으나 매핑
-  오류가 있는 상태(자재축 색/형상/사이즈 오염·도수↔별색 혼동·카테고리 고아·prd_typ 오귀속)를 교정한다.
-  **★핵심 판정(03 분석): 6축 오류 진원은 전부 ⓐ(입력 v03 엑셀) — webadmin load_master는 무변환 전파기로
-  도메인 변환 없이 v03 셀값을 TRUNCATE 후 그대로 INSERT.** 따라서 교정 = 라이브 직접 SQL(경로 X·임시·재적재
-  시 소멸)이 아니라 **입력 v03을 권위(상품마스터/인쇄상품가격표)로 바로잡은 교정 입력 엑셀을 재적재(경로 Y·근본·
-  P-TRUNCATE 안전)**가 정답. [HARD] webadmin 소스 코드 수정 금지(개발자 GitHub 배포·read-only oracle).
-  권위=상품마스터+인쇄상품가격표(v03 배제). 6축 정답 규칙은 인쇄도메인+경쟁사(WowPress/RedPrinting/CIP4)
-  흡수 판정으로 정립. 경로 Y 3조건(시트명/헤더 v03 동일·행순/surrogate 코드 보존[삭제=use_yn N·신규=말미
-  append]·개발자가 입력파일 교체+재적재). 산출=교정 입력 엑셀 + 검증(롤백 DRY-RUN/라이브 대조) + 개발자
-  ⓑ 코드 백로그(C-1~C-6). X1~X6 게이트. 실 재적재는 개발자 협업·실 COMMIT 인간 승인. '6축 적재', '6축 교정',
-  '기초데이터 단계 적재', '기초코드 사이즈 도수 자재 공정 카테고리', '축별 매핑 교정', '상품마스터 단계별 적재',
-  '매핑 오류 교정', '교정 엑셀', 'webadmin 재적재', '경로 X 경로 Y', 'v03 교정', '라이브 6축 재실측',
-  '축 우선 종단', 'round-22', '6축 적재 다시', '특정 축만 교정', '자재 오염 교정', '카테고리 재연결',
-  'P-TRUNCATE 가드' 작업 시 반드시 이 스킬을 사용. 단일 스냅샷 매핑 설계는 dbm-mapping, 라이브 정합 교정
-  일반은 dbm-correctness-audit, 적재본 조립·실행은 dbm-load-readiness/dbm-load-execution, CPQ 옵션 레이어는
-  dbm-cpq-option-mapping이 담당하므로 그 단독 작업에는 트리거하지 않는다. 본 스킬은 그것들을 6축 staged·
-  교정엑셀 재적재 렌즈로 조율하는 메타 트랙이다.
+  후니프린팅 상품마스터를 6개 기초데이터 축(기초코드·사이즈·도수·자재·공정·카테고리) 기준으로 단계별
+  교정·적재하는 round-22 방법론 스킬. 라이브 매핑 오류(자재 색/형상/사이즈 오염·도수↔별색 혼동·카테고리
+  고아·prd_typ 오귀속)를 교정. 진원=입력 v03 엑셀(load_master는 무변환 전파기)이므로 정답=교정 입력 엑셀
+  재적재(경로 Y·근본). webadmin 코드 수정 금지·권위=상품마스터+가격표·실 재적재 인간 승인. 트리거: 6축 적재,
+  6축 교정, 축별 매핑 교정, 자재 오염 교정, 카테고리 재연결, P-TRUNCATE 가드, round-22, 6축 교정 다시,
+  특정 축만 교정. 단일 스냅샷 매핑은 dbm-mapping, 라이브 정합 교정 일반은 dbm-correctness-audit, 적재 실행은
+  dbm-load-readiness/dbm-load-execution이 담당.
 license: Apache-2.0
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 metadata:

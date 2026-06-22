@@ -1,0 +1,136 @@
+---
+title: "4️⃣배너 정보(asset파일)란?"
+depth: 2
+path: "오로라 리액트 스킨개발가이드 > 개발 프로세스 > 4️⃣배너 정보(asset파일)란?"
+---
+
+# 4️⃣배너 정보(asset파일)란?
+
+## 이해하기
+
+> 스킨을 모두 개발한 뒤, 실제 스킨을 워크스페이스에 등록하기 위해서는 배너(banner)파일이 필요합니다.
+> 해당 "배너정보(asset zip파일)"에 대해 안내하는 문서입니다.
+
+ :heavy_check_mark: 배너정보(asset) zip 파일 이란?
+
+* 개념
+    * 스킨에서 사용하는 배너그룹을 정의하는 메타정보, 배너에 사용되는 샘플 이미지가 포함된 정보입니다.
+* 필요한 이유
+    * 아래서 설명드리는 배너정보(asset파일)은 20MB 이내의 zip파일 형태로 업로가 필요합니다. 
+    * 이를 통해 해당 메타 정보가 쇼핑몰 어드민(관리자)에 바로 노출되며, 이후 배너를 조회하는 API를 호출 할 수 있는 개념입니다. 
+    * 따라서 스킨이 사용할 배너와 배너그룹에 대한 정확한 정보를 반드시 bannerGroup.csv , banner.csv 에 입력하여야 합니다. 
+
+> ※단, **csv파일 작성 후 저장 시, 한글이 깨질 수 있으니 반드시 utf-8로 저장**해야하는 점을 확인부탁드립니다.
+> (참고) csv파일 utf-8 저장방법
+> 엑셀파일 > 다른 이름으로 저장> 팝업창 우측하단 '도구(L)'메뉴버튼 > '웹 옵션(W)'선택 > 웹 옵션 창에서 '인코딩' 탭 진입하여 '문서를 다음 형식으로 저장(S)' 내 '유니코드(UTF-8) 선택
+
+ :heavy_check_mark: 스킨 유형 (platformType)별 zip파일 구조
+
+앞선 문서에서 안내드린 대로, 스킨은 적용되는 환경에 따라 아래와 같은 유형이 있습니다.
+각 유형별로 아래와 같은 zip파일 구조를 갖춰야합니다.
+
+> 참고로, 오로라 리액트 스킨은 통합형(combine) 스킨이며, 본 스킨개발가이드는 통합형을 기준으로 가이드하고 있습니다.
+
+* ```통합형 스킨(combile)```
+    * pc스킨과 mobile 스킨이 소스코드 하나로 개발된 형태의 스킨
+    * \>\> [예시 zip파일 다운받기](https://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_69db659103894b00aa9f8b28aa62fe8e/guide/workspace-skin-asset/%28%E1%84%8B%E1%85%A8%E1%84%89%E1%85%B5%29asset%E1%84%91%E1%85%A1%E1%84%8B%E1%85%B5%E1%86%AF_%E1%84%90%E1%85%A9%E1%86%BC%E1%84%92%E1%85%A1%E1%86%B8%E1%84%92%E1%85%A7%E1%86%BC.zip)
+* ```개별형(pc+mobile)```
+    * 하나의 gitlab 프로젝트내 pc 스킨과 mobile 스킨의 소스코드가 모두 개발된 경우
+    * 최상위 root 폴더가 pc, mobile 각각 필요합니다 \>\> [예시 zip파일 다운받기](https://kr1-api-object-storage.nhncloudservice.com/v1/AUTH_69db659103894b00aa9f8b28aa62fe8e/workspace-public/pc%2Bmobile.zip)
+* ```개별형(pc)```
+    * pc 스킨만 개발된 경우
+    * 위 개별형(pc+mobile) 예시zip파일에서 pc만 참고부탁드립니다. 
+* ```개별형(mobile)```
+    * mobile 스킨만 개발된 경우
+    * 위 개별형(pc+mobile) 예시zip파일에서 mobile만 참고부탁드립니다. 
+
+***
+
+## ⓐ asset 최상위 폴더
+
+각 유형별로 아래와 같이 asset 최상위 폴더를 생성해야 합니다.
+
+```
+/assets
+ └ /img
+    └ /banner
+        └ 이미지 파일
+```
+
+***
+
+## ⓑ bannerGroup.csv
+
+스킨에서 사용할 각 배너그룹을 정의하는 메타정보 파일입니다.
+
+### :heavy_check_mark:platformType
+
+bannerGroup.csv 의 platformType 은 아래와 같이 작성해주셔야 합니다.
+
+* 통합형 스킨: `RESPONSIVE`
+* 개별형(pc+mobile): `pc/banner.csv`,`mobile/banner.csv`
+* 개별형(pc) : `PC`
+* 개별형(mobile) ex) `MOBILE_WEB`
+
+### :heavy_check_mark:bannerGroupType/ bannerGroupCode/bannerGroupName
+
+[배너그룹(Banner Group) 가이드](https://nhnent.dooray.com/share/pages/WoOk8q6KT1K3MZcLSuyZsw/3520339109559697129)를 참고하시길 바랍니다.
+
+* (참고) `bannerGroupCode`: 쇼핑몰 스킨 내 배너의 위치와 bannerGroupCode 는 무관 (ex) BANNER03 을 BANNER04 보다 쇼핑몰 상단에 배치 가능
+* (참고) `bannerGroupName`: 자유롭게 입력가능
+* 예제코드 (오로라 리액트 통합형 기준)
+
+```csv
+,platformType,bannerGroupType,bannerGroupCode,bannerGroupName
+,RESPONSIVE,LOGO,LOGO,로고 전용 - 상단로고
+,RESPONSIVE,SLIDE,BNSLIDE,움직이는 배너 - 메인 상단 배너
+,RESPONSIVE,NORMAL,BANNER01,일반 배너 - 메인 중간 배너 1
+,RESPONSIVE,NORMAL,BANNER02,일반 배너 - 메인 중간 배너 2
+,RESPONSIVE,NORMAL,BANNER03,일반 배너 - 메인 중간 배너 3
+,RESPONSIVE,NORMAL,BANNER04,일반 배너 - 메인 중간 배너 4
+,RESPONSIVE,NORMAL,BANNER05,일반 배너 - 메인 중간 배너 5
+,RESPONSIVE,NORMAL,BNBOTTOM,일반 배너 - 메인 하단 배너
+,RESPONSIVE,NORMAL,BNBGLEFT,일반 배너 - PC 배경 좌측 배너
+,RESPONSIVE,NORMAL,BNDETAIL,일반 배너 - 상품상세 배너
+```
+
+***
+
+## ⓒ banner.csv
+
+스킨에서 사용하는 최초의 initial sample data를 입력하는 파일입니다.
+initial sample data란, 개발된 스킨이 배포되었을 때 샘플로서 보여지는 배너(즉 배너 이미지) 정보를 의미합니다.
+
+> 하나의 배너그룹 안에 여러 개의 배너가 추가될 수 있으므로, `banner.csv`는 입력행 수 제한이 없습니다.
+
+* bannerGroupCode
+    * 해당 배너가 포함될 배너그룹 코드
+    * bannerGroup.csv파일 내 bannerGroupCode 정의 선행 필수
+* bannerTitle: 배너명
+* bannerImage
+    * 배너에서 사용할 배너 이미지 파일명 (경로 포함)
+    * 스킨 내 이미지가 존재해야함
+    * bannerGroupType 이 SLIDE 인 경우, 행 추가를 통해 여러 개의 이미지 등록가능
+* displayOrder
+    * 동일한 배너그룹에 속한 배너들 간 노출 순서 
+    * ex. 배너그룹 내 배너가 1개만 존재할 경우 default값은 *,1* 으로 입력
+* 예제코드 (오로라 리액트 통합형 기준)
+
+```csv
+,bannerGroupCode,bannerTitle,bannerImage,displayOrder
+,LOGO,로고 전용 - 상단로고,/assets/img/banner/header-logo.png,1
+,BNSLIDE,움직이는 배너 - 메인 상단 배너,/assets/img/banner/main_slide_banner01.png,1
+,BNSLIDE,움직이는 배너 - 메인 상단 배너,/assets/img/banner/main_slide_banner02.png,2
+,BNSLIDE,움직이는 배너 - 메인 상단 배너,/assets/img/banner/main_slide_banner03.png,3
+,BNSLIDE,움직이는 배너 - 메인 상단 배너,/assets/img/banner/main_slide_banner04.png,4
+,BNSLIDE,움직이는 배너 - 메인 상단 배너,/assets/img/banner/main_slide_banner05.png,5
+,BNSLIDE,움직이는 배너 - 메인 상단 배너,/assets/img/banner/main_slide_banner06.png,6
+,BANNER01,일반 배너 - 메인 중간 배너 1,/assets/img/banner/main_banner01.png,1
+,BANNER02,일반 배너 - 메인 중간 배너 2,/assets/img/banner/main_banner02.png,1
+,BANNER03,일반 배너 - 메인 중간 배너 3,/assets/img/banner/main_banner03.png,1
+,BANNER04,일반 배너 - 메인 중간 배너 4,/assets/img/banner/main_banner04.png,1
+,BANNER05,일반 배너 - 메인 중간 배너 5,/assets/img/banner/main_banner05.png,1
+,BNBOTTOM,일반 배너 - 메인 하단 배너,/assets/img/banner/main_bottom_banner.png,1
+,BNBGLEFT,일반 배너 - PC 배경 좌측 배너,/assets/img/banner/pc_left_banner.png,1
+,BNDETAIL,일반 배너 - 상품상세 배너,/assets/img/banner/productdetail_banner.png,1
+```

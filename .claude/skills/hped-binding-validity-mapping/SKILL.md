@@ -1,6 +1,12 @@
 ---
 name: hped-binding-validity-mapping
-description: 후니프린팅 가격엔진의 구성요소↔상품군 유효성 정합을 SOT 1(상품마스터 시트=차원경계) 권위로 설계하는 방법론 스킬(U-7 배선레벨 제약). 오적재 단일병인(formula_components에 prd_cd 부재→시트 밖 구성요소 silent 합산)을 닫는 정답 데이터를 만든다. 각 가격구성요소를 단가행 출처 시트·10차원으로 상품군에 귀속시키는 절차, 결합형(차원 공유→복수 상품군 유효)/독립형(차원 비공유→단일) 판별, 라이브 formula_components 배선을 SOT 경계와 대조해 오배선 전수 적발, 개발자용 유효성 정답 매트릭스 산출법을 제공한다. ★초점[HARD]=코드(트리거/DDL) 구현이 아니라 데이터 정합(구성요소·데이터가 정합해 제대로된 가격이 나오는 것). DDL 형태는 dbm-ddl-proposer 위임. '배선 유효성', '구성요소 상품군 유효성', 'comp 상품 정합', '오배선 적발', '시트 차원경계 위반', '제약 정합 명세', 'U-7', '배선제약 설계', '유효성 매핑 다시' 작업 시 반드시 이 스킬을 사용. 5장치 역할 정의는 hped-mechanism-research, 코드↔DB 속성 진단은 hped-code-schema-audit, 권위 엑셀 대비 검증은 huni-price-quote 트랙이 담당하므로 그 작업에는 트리거하지 않는다.
+description: >
+  후니프린팅 가격엔진의 구성요소↔상품군 유효성 정합을 SOT 1(상품마스터 시트=차원경계) 권위로 설계하는 방법론(U-7).
+  오적재 단일병인(formula_components에 prd_cd 부재→시트 밖 구성요소 silent 합산)을 닫는 정답 데이터 — comp를 단가행
+  출처 시트·10차원으로 상품군에 귀속, 결합형/독립형 판별, 라이브 배선 오배선 전수 적발, 유효성 정답 매트릭스.
+  초점[HARD]=코드 구현 아닌 데이터 정합·DDL은 dbm-ddl-proposer 위임.
+  트리거: 배선 유효성, 구성요소 상품군 유효성, 오배선 적발, 시트 차원경계 위반, 제약 정합 명세, U-7, 배선제약 설계, 유효성 매핑 다시.
+  5장치 역할은 hped-mechanism-research, 코드↔DB 진단은 hped-code-schema-audit, 권위 엑셀 검증은 huni-price-quote 트랙.
 ---
 
 # hped-binding-validity-mapping — 구성요소↔상품군 유효성 정합 방법론 (U-7)

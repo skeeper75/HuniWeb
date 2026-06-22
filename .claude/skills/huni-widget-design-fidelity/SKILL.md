@@ -1,10 +1,11 @@
 ---
 name: huni-widget-design-fidelity
 description: >
-  이미 빌드된 후니 인쇄 자동견적 위젯(04_build)의 외형을 후니 디자인에 픽셀 단위로 정합시키는 시각재현 방법론 스킬.
-  레이아웃·옵션 캐스케이드·인터랙션 흐름은 RedPrinting 구조 권위를 보존하고, 색·폰트·간격·컴포넌트 외형만 후니 스킨(huni-design-system 스펙 + DESIGN.md)으로 입힌다.
-  베이스라인 스크린샷·computed style 추출 → 후니 기준 대조 → 외형 레벨 스킨 정합 → 구조 무변경 회귀 가드 → 스크린샷 diff + 수치 재대조 절차를 제공한다.
-  '위젯 시각재현', '시각 정합', '디자인 정합', 'Figma 시각재현', '후니 스킨 입히기', 'DESIGN.md 정합', '스크린샷 diff', 'computed style 대조', '외형 정합', '픽셀 정합' 요청 시 반드시 사용.
+  이미 빌드된 후니 인쇄 자동견적 위젯(04_build)의 외형을 후니 디자인에 픽셀 단위로 정합시키는 시각재현
+  방법론. 레이아웃·옵션 캐스케이드·인터랙션 흐름은 RedPrinting 구조 권위 보존, 색·폰트·간격·컴포넌트 외형만
+  후니 스킨(huni-design-system+DESIGN.md)으로 입힘. 베이스라인 스크린샷·computed style 추출→후니 기준
+  대조→스킨 정합→구조 무변경 회귀 가드→스크린샷 diff+수치 재대조. 트리거: 위젯 시각재현, 시각 정합,
+  디자인 정합, 후니 스킨 입히기, DESIGN.md 정합, 스크린샷 diff, computed style 대조, 외형 정합, 픽셀 정합.
 license: Apache-2.0
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, mcp__claude-in-chrome__*, mcp__pencil__batch_get, mcp__pencil__get_screenshot, mcp__pencil__open_document, mcp__pencil__get_variables
 metadata:

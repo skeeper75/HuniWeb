@@ -1,6 +1,11 @@
 ---
 name: rpm-deep-augment
-description: RedPrinting 카테고리별 분석 자료(reverse+metamodel+gap)를 codex-cli(OpenAI 모델)에 주고 "분석이 놓친 옵션/자재/공정/관리축/제약/엣지케이스/도메인 정보"를 독립 second-opinion으로 심층 발굴하는 방법론 스킬(후니 RP-Meta 하네스). 환각 경계(codex 제안=unverified 가설·라이브/엑셀 권위 검증 전 사실 아님), codex exec read-only 안전 호출(codex-cli 위임·output-last-message 수집), 갭발굴 질문 설계(checkable 주장 강제), 결과 triage(신규 후보→stage 라우팅/기존→폐기/오류→거부), summary 포인터를 제공한다. 'codex 심층보강', '누락 정보 확인', 'codex second opinion', '분석 외 정보', 'codex-cli 검토', '심층 발굴', 'deepcheck', '심층보강 다시', '추가 정보 확인' 작업 시 반드시 이 스킬을 사용. 실제 codex exec 명령 상세는 codex-cli 스킬이, 발굴 후보의 라이브 검증은 rpm-gap-vessel/rpm-validation이 담당한다.
+description: >
+  RedPrinting 카테고리 분석 자료(reverse+metamodel+gap)를 codex-cli에 주고 분석이 놓친
+  옵션/자재/공정/관리축/제약/엣지케이스를 독립 second-opinion으로 발굴(후니 RP-Meta 하네스).
+  codex 제안=가설·라이브/엑셀 검증 전 사실 아님(환각 경계). 트리거: codex 심층보강, 누락 정보 확인,
+  second opinion, 분석 외 정보, deepcheck, 심층 발굴, 심층보강 다시. codex exec 상세는 codex-cli,
+  후보 라이브 검증은 rpm-gap-vessel/rpm-validation 담당.
 ---
 
 # rpm-deep-augment — codex-cli Deep-Augmentation Method

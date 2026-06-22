@@ -1,0 +1,74 @@
+---
+title: "FindAccountProvider"
+depth: 5
+path: "오로라 리액트 스킨개발가이드 > 개발 프로세스 > 2️⃣Aurora React 샘플스킨 확인 > @shopby/react-components > member > FindAccountProvider"
+---
+
+# FindAccountProvider
+
+계정찾기(id, password) 기능을 수행함.
+
+## 속성
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | --- | --- | --- | --- |
+| children | true | ReactNode | - |  |
+
+## 상태
+
+* findAccountState 는 useFindAccountStateContext 를 호출해 사용한다.
+
+``` typescript
+const findAccountState = useFindAccountStateContext();
+```
+
+| 이름 | 타입 | 기본 값 | 설명 |
+| --- | --- | --- | --- |
+| findAccountInfo | object |  |  |
+| ㄴ carrierNumber | string | 010 | 휴대전화 앞번호 세자리 |
+| ㄴ firstSerial | string |  | 휴대전화 중간번호  네자리 (휴대전화 번호로 찾기 할때 필수) |
+| ㄴ secondSerial | string |  | 휴대전화 뒷번호 뒤 네자리 (휴대전화 번호로 찾기 할때 필수) |
+| ㄴ emailId | string |  | 이메일 아이디 (이메일로 찾기 할때 필수) |
+| ㄴ emailDomain | string |  | 이메일 도메인 (이메일로 찾기 할때 필수 - 직접 입력) |
+| ㄴ domainSelectorValue | string |  | 이메일 도메인 (select에서 선택) |
+| ㄴ memberName | string |  | 회원이름 |
+| ㄴ memberId | string |  | 회원아이디 |
+| resultAccountInfo | object |  | 아이디찾기 결과 |
+| ㄴ memberId | string |  | 회원아이디 |
+| ㄴ status | string |  | 회원상태 |
+| isNotExistMemberInfo | boolean | false | 회원존재여부 |
+| isFindIdFullModalOpen | boolean | false | 아이디 찾기 풀모달 오픈 여부 |
+| memberNo | number | 0 | 회원번호 |
+| isFindPasswordFullModalOpen | boolean | false | 비밀번호 찾기 풀모달 오픈 여부 |
+
+## 액션
+
+* findAccountAction 은 useFindAccountActionContext 를 호출해 사용한다.
+
+``` typescript
+const findAccountAction = useFindAccountActionContext();
+```
+
+| 이름 | 인자타입 | 필수여부 | 기본값 | 설명 | 관리하는 상태 |
+| --- | --- | --- | --- | --- | --- |
+| setIsFindIdFullModalOpen | boolean | true | false | 아이디 찾기 모달 오픈 여부를 갱신함. | findAccountState.isFindIdFullModalOpen |
+| findId | object | true |  | 아이디를 찾을 수 있음.
+ㄴ [request](https://docs.shopby.co.kr/?url.primaryName=member/#/Profile/post-profile-find-id) 타입과 동일 | findAccountState.isNotExistMemberInfo
+findAccountState.resultAccountInfo
+findAccountState.isFindIdFullModalOpen |
+| searchAccount | object | true |  | 아이디로 멤버번호를 찾을 수 있음. | findAccountState.memberNo
+findAccountState.isFindPasswordFullModalOpen |
+| ㄴ memberId | string | true |  | 회원아이디 |  |
+| changePassword | string | true |  | 비밀번호를 변경함. |  |
+| setIsFindPasswordFullModalOpen | boolean | true | false | 비밀번호 찾기 모달 오픈 여부를 갱신함. | findAccountState.isFindPasswordFullModalOpen |
+| updateFindAccountInfo | boolean | true |  | 계정찾기 회원정보를 갱신함. | findAccountInfo |
+
+## 사용예시
+
+``` typescript
+const Example = () => (
+  
+    
+  
+);
+```

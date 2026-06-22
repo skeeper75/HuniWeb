@@ -1,0 +1,2011 @@
+[
+  {
+    "method": "GET",
+    "path": "/cs",
+    "summary": "CS 처리내역 조회",
+    "description": "CS 처리내역 조회",
+    "tags": ["OrderCs"],
+    "parameters": [
+      {
+        "name": "orderNo",
+        "in": "query",
+        "description": "주문번호^|order-no",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "csNos",
+        "in": "query",
+        "description": "CS 번호^|[1, 2, 3]",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "startYmd",
+        "in": "query",
+        "description": "조회 시작 일자 (기본값: 3개월 전)^|2025-10-28",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "endYmd",
+        "in": "query",
+        "description": "조회 종료 일자 (기본값: 오늘)^|2025-10-31",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "page",
+        "in": "query",
+        "description": "페이지 번호 (기본값: 1)^|1",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "size",
+        "in": "query",
+        "description": "페이지 크기 (기본값: 30)^|30",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "czFERzFSRGZQY3hwZjQxZTNZd2NTZz09"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "M21OMm8zU1JHUEU1NGFqUURvUklGQlc5NHViTTBaNlI"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/cs1493835005"
+            },
+            "examples": {
+              "get-cs": {
+                "value": "{\"totalCount\":1,\"contents\":[{\"csNo\":0,\"mallNo\":0,\"orderNo\":\"\",\"orderOptionNo\":0,\"productName\":\"\",\"registerAudit\":{\"timestamp\":\"\",\"adminNo\":0,\"name\":\"\",\"clientIp\":\"\"},\"csChannelType\":\"SERVICE\",\"csType\":\"PAY\",\"csPathType\":\"IN_BOUND\",\"csStatusType\":\"PROCESSING\",\"title\":\"\",\"content\":\"\",\"memberNo\":0,\"ordererName\":\"\",\"claimWithdrawReason\":\"\",\"deliveryExpectedYmdt\":\"\",\"holdDeliveryReason\":\"\",\"fromAppName\":\"\",\"registerNameAsAppName\":false,\"deleted\":false,\"updateAudit\":null,\"csAutoType\":null}]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/orders/sales",
+    "summary": "쇼핑몰 정산 데이터 조회하기",
+    "description": "\n## 부가설명 및 특이사항\n쇼핑몰 매출 데이터 조회를 위한 API입니다.\n\n items[].productInfo 의 purchaseYn, commissionRate, purchasePrice 는 데이터가 있는 경우에만 조회됩니다.\n",
+    "tags": ["Settlements"],
+    "parameters": [
+      {
+        "name": "endYmd",
+        "in": "query",
+        "description": "조회 종료일^|yyyy-mm-dd",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "includesDeliveryAmt",
+        "in": "query",
+        "description": "배송비 매출 포함 여부^|true",
+        "required": true,
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      {
+        "name": "page",
+        "in": "query",
+        "description": "페이지 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "size",
+        "in": "query",
+        "description": "페이지 사이즈^|10",
+        "required": true,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "startYmd",
+        "in": "query",
+        "description": "조회 시작일^|yyyy-mm-dd",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "czFERzFSRGZQY3hwZjQxZTNZd2NTZz09"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "M21OMm8zU1JHUEU1NGFqUURvUklGQlc5NHViTTBaNlI"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/orders-sales547821119"
+            },
+            "examples": {
+              "get-orders-sales": {
+                "value": "{\"totalCount\":1,\"items\":[{\"seq\":1,\"orderNo\":\"201905131143378311\",\"payYmdt\":\"2025-10-31 11:09:13\",\"registerYmdt\":\"2025-10-31 11:09:13\",\"salesRegisterType\":\"ADD_SALES\",\"orderProductNo\":259798,\"orderProductOptionNo\":220240,\"claimNo\":null,\"orderCnt\":1,\"refundCnt\":0,\"refundYmdt\":null,\"orderStatusType\":\"DELIVERY_ING\",\"memo\":\"\",\"memberInfo\":{\"memberNo\":1,\"externalMembershipKey\":\"\",\"memberGradeName\":\"기본등급\",\"additionalInfoJson\":\"\",\"memberGroupInfos\":[]},\"productInfo\":{\"mallProductNo\":1,\"productManagementCd\":\"cd\",\"productName\":\"[휴먼큐어] 히즈클린 포맨 남성용품 모음전\",\"mallOptionNo\":35786417,\"mallAdditionalProductNo\":0,\"optionManagementCd\":\"102-1\",\"option\":\"사이즈:90\",\"purchaseYn\":\"N\",\"commissionRate\":\"0%\",\"purchasePrice\":0,\"sku\":\"\",\"setOptions\":[],\"globalProductNo\":null},\"priceInfo\":{\"salePrice\":1000,\"immediateDiscountAmt\":1000,\"addPrice\":1000,\"additionalDiscountAmt\":100,\"productCouponDiscountAmt\":100,\"deliveryCouponDiscountAmt\":50,\"cartCouponDiscountAmt\":0,\"adjustedAmt\":0},\"paymentInfo\":{\"pgType\":\"KCP\",\"payType\":\"KAKAO_PAY\",\"pgPayAmt\":0,\"accumulationUseAmt\":0,\"externalPointUseAmt\":0},\"couponInfo\":{\"cartCouponNo\":1,\"cartCouponIssueNo\":10,\"productCouponNo\":5,\"productCouponIssueNo\":12},\"channelType\":\"PAYCO\",\"accumulationAmt\":null,\"externalPayAmt\":null,\"salesRegisterTypeForDisplay\":\"\"}]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/settlement",
+    "summary": "파트너 정산 데이터 조회하기",
+    "description": "\n## 부가설명 및 특이사항\n정산 데이터 조회를 위한 API입니다.\n",
+    "tags": ["Settlements"],
+    "parameters": [
+      {
+        "name": "month",
+        "in": "query",
+        "description": "월^|1",
+        "required": true,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "settlementPartnerType",
+        "in": "query",
+        "description": "파트너 구분(DOMESTIC: 국내파트너, OVERSEAS: 해외파트너)^|DOMESTIC",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "year",
+        "in": "query",
+        "description": "연도^|2022",
+        "required": true,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "czFERzFSRGZQY3hwZjQxZTNZd2NTZz09"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "M21OMm8zU1JHUEU1NGFqUURvUklGQlc5NHViTTBaNlI"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/settlement292649878"
+            },
+            "examples": {
+              "get-settlement": {
+                "value": "[{\"partnerNo\":1,\"partnerName\":\"좋은파트너\",\"partnerType\":\"국내파트너\",\"orderCnt\":1,\"salesAmt\":0,\"commissionAmt\":0,\"deliveryAmt\":0,\"mallDiscountAmt\":0,\"partnerDiscountAmt\":0,\"mallProductAdjustAmt\":0,\"partnerProductAdjustAmt\":0,\"mallDeliveryAdjustAmt\":0,\"partnerDeliveryAdjustAmt\":0,\"mallDeliveryAmt\":0,\"refundAdjustAmt\":0,\"settlementAmt\":0,\"bankName\":\"신한은행\",\"tradeBankAccount\":\"11111111111\",\"tradeBankDepositorName\":\"김고도\",\"businessRegistrationNo\":\"1\",\"settlementManagerName\":\"매니저명\",\"settlementManagerEmail\":\"manager@godo.co.kr\",\"settlementManagerPhoneNo\":\"01011111111\"}]"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/settlement/detail",
+    "summary": "파트너 정산 상세 데이터 조회하기 v1.1",
+    "description": "\n## 부가설명 및 특이사항\n매출 데이터 조회를 위한 API입니다.\n\n### v1.0\n페이징을 지원하지 않습니다.\nrequest 의 page와 size 는 사용하지 않습니다.\n응답값은 v1.1 응답의 contents[] 필드와 동일합니다.\n```\n[\n  {\n    \"companyType\": \"회사이름\",\n    \"mallName\": \"쇼핑몰명\",\n    ...\n  }\n]\n```\n\n### v1.1\n페이징 처리를 위한 totalCount 를 제공합니다.\n\nrequest 의 page와 size 를 입력해야 합니다.\n\n응답값 중, contents[] 하위 필드는 기존 v1.0 API 의 응답과 일치합니다.\n",
+    "tags": ["Settlements"],
+    "parameters": [
+      {
+        "name": "endYmd",
+        "in": "query",
+        "description": "종료일^|2018-03-04",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "page",
+        "in": "query",
+        "description": "검색할 페이지 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "settlementPartnerType",
+        "in": "query",
+        "description": "파트너 구분(DOMESTIC: 국내파트너, OVERSEAS: 해외파트너)^|DOMESTIC",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "size",
+        "in": "query",
+        "description": "1회에 조회할 데이터 개수 (default: 100)^|100",
+        "required": true,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "startYmd",
+        "in": "query",
+        "description": "시작일^|2018-03-04",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "czFERzFSRGZQY3hwZjQxZTNZd2NTZz09"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "M21OMm8zU1JHUEU1NGFqUURvUklGQlc5NHViTTBaNlI"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.1"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/settlement-detail-1949787227"
+            },
+            "examples": {
+              "get-settlement-detail": {
+                "value": "{\"totalCount\":12,\"contents\":[{\"companyName\":\"회사이름\",\"mallName\":\"쇼핑몰명\",\"optionManagementCd\":\"\",\"orderNo\":\"202001100000000001\",\"orderProductNo\":1001,\"orderProductOptionNo\":100001,\"partnerNo\":1,\"partnerName\":\"파트너명\",\"partnerType\":\"DOMESTIC\",\"valueAddedTaxTypeLabel\":\"\",\"mallProductNo\":12312,\"mallOptionNo\":10101,\"productName\":\"대방어\",\"option\":\"옵션\",\"settlementDeliveryTypeLabel\":\"\",\"immediateDiscountedPrice\":0,\"orderCnt\":1,\"refundCnt\":0,\"salesAmt\":0,\"purchasePrice\":0,\"commissionRate\":0,\"commissionAmt\":0,\"mallDiscountAmt\":0,\"partnerDiscountAmt\":0,\"mallProductAdjustAmt\":0,\"partnerProductAdjustAmt\":0,\"mallDeliveryAdjustAmt\":0,\"partnerDeliveryAdjustAmt\":0,\"mallDeliveryAmt\":0,\"deliveryAmt\":0,\"refundAdjustAmt\":0,\"settlementAmt\":0,\"payYmdt\":\"2025-10-31 11:08:47\",\"settlementYmdt\":\"2025-10-31 11:08:47\",\"refundYmdt\":\"2025-10-31 11:08:47\",\"memo\":\"\",\"seq\":1,\"purchaseYn\":null}],\"totalPage\":2}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/statistics/promotions",
+    "summary": "프로모션 통계 - 쿠폰 내역 조회",
+    "description": "## 부가설명 및 특이사항\n프로모션 통계 - 쿠폰 목록 조회를 위한 API 입니다.",
+    "tags": ["Statistic"],
+    "parameters": [
+      {
+        "name": "couponType",
+        "in": "query",
+        "description": "쿠폰 타입(PRODUCT, CART, GIFT)^|PRODUCT,CART",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "displayBrandNo",
+        "in": "query",
+        "description": "전시브랜드 번호^|1",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "endYmd",
+        "in": "query",
+        "description": "조회종료일(yyyy-MM-dd)^|2020-04-22",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "genderTypes",
+        "in": "query",
+        "description": "회원 성별^|MALE,FEMALE,UNKNOWN",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "includesClaim",
+        "in": "query",
+        "description": "클레임구분 (클레임 포함, 클레임 제외)^|false",
+        "required": false,
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      {
+        "name": "keyword",
+        "in": "query",
+        "description": "단일 검색어^|1",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "memberGradeNo",
+        "in": "query",
+        "description": "회원 등급^|1",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "memberGroupNo",
+        "in": "query",
+        "description": "회원 그룹^|1",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "memberJoinType",
+        "in": "query",
+        "description": "회원 구분(MEMBER, NON_MEMBER)^|MEMBER,NON_MEMBER",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "memberType",
+        "in": "query",
+        "description": "회원 가입유형(ALL, MALL, PAYCO, NAVER, KAKAO, FACEBOOK, IAMSCHOOL, LIIVMATE, NHN, NHNENT, UNIONE, LINE, NCPSTORE, KAKAO_SYNC, GOOGLE, APPLE, APP_CARD)^|ALL,MALL,PAYCO,NAVER,KAKAO,FACEBOOK,IAMSCHOOL,LIIVMATE,NHN",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "page",
+        "in": "query",
+        "description": "페이지 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "partnerNo",
+        "in": "query",
+        "description": "파트너번호^|1",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "platformTypes",
+        "in": "query",
+        "description": "플랫폼구분^|PC,MOBILE_WEB,MOBILE_APP",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "promotionKeywordType",
+        "in": "query",
+        "description": "프로모션 검색 키워드 타입(NO, NAME, REGISTRANT)^|NO,NAME,REGISTRANT",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "size",
+        "in": "query",
+        "description": "페이지 사이즈^|10",
+        "required": true,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "startYmd",
+        "in": "query",
+        "description": "조회시작일(yyyy-MM-dd)^|2020-04-22",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "czFERzFSRGZQY3hwZjQxZTNZd2NTZz09"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "M21OMm8zU1JHUEU1NGFqUURvUklGQlc5NHViTTBaNlI"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/statistics-promotions-337367269"
+            },
+            "examples": {
+              "get-statistics-promotions-coupons": {
+                "value": "{\"totalCount\":1,\"contents\":[{\"couponName\":\"\",\"couponNo\":1,\"couponType\":\"PRODUCT\",\"currencyCode\":\"KRW\",\"orderCnt\":1,\"normalOrderCnt\":1,\"claimedOrderCnt\":1,\"cartCouponAmt\":10,\"deliveryCouponAmt\":10,\"payAmt\":1000,\"saleAmt\":0,\"saleCnt\":0,\"mallProductCouponAmt\":0,\"partnerProductCouponAmt\":0}]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/statistics/promotions/detail",
+    "summary": "프로모션 통계 - 쿠폰 판매 현황 상세 조회",
+    "description": "## 부가설명 및 특이사항\n프로모션 통계 - 쿠폰 판매 현황 상세 조회를 위한 API 입니다.",
+    "tags": ["Statistic"],
+    "parameters": [
+      {
+        "name": "couponType",
+        "in": "query",
+        "description": "쿠폰 타입(PRODUCT, CART, GIFT)^|PRODUCT,CART",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "displayBrandNo",
+        "in": "query",
+        "description": "전시브랜드 번호^|1",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "endYmd",
+        "in": "query",
+        "description": "조회종료일(yyyy-MM-dd)^|2020-04-22",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "genderTypes",
+        "in": "query",
+        "description": "회원 성별^|MALE,FEMALE,UNKNOWN",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "includesClaim",
+        "in": "query",
+        "description": "클레임구분 (클레임 포함, 클레임 제외)^|false",
+        "required": false,
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      {
+        "name": "keyword",
+        "in": "query",
+        "description": "단일 검색어^|1",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "memberGradeNo",
+        "in": "query",
+        "description": "회원 등급^|1",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "memberGroupNo",
+        "in": "query",
+        "description": "회원 그룹^|1",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "memberJoinType",
+        "in": "query",
+        "description": "회원 구분(MEMBER, NON_MEMBER)^|MEMBER,NON_MEMBER",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "memberType",
+        "in": "query",
+        "description": "회원 가입유형(ALL, MALL, PAYCO, NAVER, KAKAO, FACEBOOK, IAMSCHOOL, LIIVMATE, NHN, NHNENT, UNIONE, LINE, NCPSTORE, KAKAO_SYNC, GOOGLE, APPLE, APP_CARD)^|ALL,MALL,PAYCO,NAVER,KAKAO,FACEBOOK,IAMSCHOOL,LIIVMATE,NHN",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "page",
+        "in": "query",
+        "description": "페이지 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "partnerNo",
+        "in": "query",
+        "description": "파트너번호^|1",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "platformTypes",
+        "in": "query",
+        "description": "플랫폼구분^|PC,MOBILE_WEB,MOBILE_APP",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "promotionKeywordType",
+        "in": "query",
+        "description": "프로모션 검색 키워드 타입(NO, NAME, REGISTRANT)^|NO,NAME,REGISTRANT",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "size",
+        "in": "query",
+        "description": "페이지 사이즈^|10",
+        "required": true,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "startYmd",
+        "in": "query",
+        "description": "조회시작일(yyyy-MM-dd)^|2020-04-22",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "czFERzFSRGZQY3hwZjQxZTNZd2NTZz09"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "M21OMm8zU1JHUEU1NGFqUURvUklGQlc5NHViTTBaNlI"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/statistics-promotions-detail999899910"
+            },
+            "examples": {
+              "get-statistics-promotions-detail": {
+                "value": "[{\"addPrice\":0,\"brandName\":\"Sample Brand\",\"cartCouponAmt\":500,\"claimCompleteYmdt\":null,\"claimNo\":null,\"claimStatusType\":null,\"commissionAmt\":100,\"commissionRate\":0.1,\"deliveryAmt\":200,\"deliveryCouponAmt\":50,\"displayBrandNo\":1,\"displayOptionName\":\"Sample Option\",\"exchangeDeliveryAdjustAmt\":null,\"exchangeDeliveryAmt\":null,\"exchangeProductAdjustAmt\":null,\"exchangedClaimNo\":null,\"externalPayAmt\":1000,\"fullCategoryName\":\"Category > Subcategory\",\"globalProductNo\":123456,\"immediateDiscountAmt\":100,\"immediateDiscountedAmt\":900,\"mainPayAmt\":1000,\"mallAdditionalDiscountAmt\":50,\"partnerAdditionalDiscountAmt\":30,\"mallFreeGiftAmt\":0,\"partnerFreeGiftAmt\":0,\"mallName\":null,\"mallNo\":1,\"mallOptionNo\":456,\"mallProductAdminName\":\"Admin Name\",\"mallProductCouponAmt\":50,\"partnerProductCouponAmt\":50,\"mallProductNo\":123,\"mallProfitAmt\":200,\"memberGradeName\":\"VIP\",\"memberGradeNo\":1,\"memberGroupNames\":[\"Group1\",\"Group2\"],\"memberGroupNos\":[1,2,3],\"memberId\":\"member123\",\"memberNo\":123,\"memberYn\":\"Y\",\"memberType\":\"MALL\",\"optionManagementCd\":null,\"orderCnt\":1,\"orderNo\":\"ORDER123\",\"orderOptionNo\":123456,\"orderProductNo\":654321,\"partnerName\":\"Sample Partner\",\"partnerNo\":1,\"payType\":\"CREDIT_CARD\",\"payYmdt\":\"2025-10-31 11:09:09\",\"platformType\":\"MOBILE_APP\",\"productManagementCd\":\"PRODUCT123\",\"productName\":\"Sample Product\",\"purchaseAmt\":800,\"purchaseYn\":\"Y\",\"recurringImmediateDiscountAmt\":null,\"refundAdjustAmt\":null,\"returnDeliveryAdjustAmt\":null,\"returnDeliveryAmt\":null,\"saleMethodType\":null,\"salePrice\":1000,\"serviceNo\":1,\"sex\":\"M\",\"subPayAmt\":100,\"supplyPrice\":800}]"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/statistics/sales/period",
+    "summary": "판매통계 기간별 목록 조회",
+    "description": "## 부가설명 및 특이사항\n판매통계 기간별 목록 조회를 위한 API 입니다.",
+    "tags": ["Statistic"],
+    "parameters": [
+      {
+        "name": "categoryDepth",
+        "in": "query",
+        "description": "검색될 카테고리 뎁스^|1",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "categoryNo",
+        "in": "query",
+        "description": "카테고리 번호^|1000002",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "displayBrandNo",
+        "in": "query",
+        "description": "전시브랜드 번호^|1",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "displayCategoryNo",
+        "in": "query",
+        "description": "전시카테고리 번호^|1",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "endYmd",
+        "in": "query",
+        "description": "조회종료일(yyyy-MM-dd)^|2020-04-22",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "genderTypes",
+        "in": "query",
+        "description": "회원 성별^|MALE,FEMALE,UNKNOWN",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "includesClaim",
+        "in": "query",
+        "description": "클레임구분 (클레임 포함, 클레임 제외)^|false",
+        "required": false,
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      {
+        "name": "keyword",
+        "in": "query",
+        "description": "단일 검색어^|1",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "keywords",
+        "in": "query",
+        "description": "복수검색어^|123,456",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "memberGradeNo",
+        "in": "query",
+        "description": "회원 등급^|1",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "memberGroupNo",
+        "in": "query",
+        "description": "회원 그룹^|1",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "memberJoinType",
+        "in": "query",
+        "description": "회원 구분(MEMBER, NON_MEMBER)^|MEMBER,NON_MEMBER",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "memberType",
+        "in": "query",
+        "description": "회원 가입유형(ALL, MALL, PAYCO, NAVER, KAKAO, FACEBOOK, IAMSCHOOL, LIIVMATE, NHN, NHNENT, UNIONE, LINE, NCPSTORE, KAKAO_SYNC, GOOGLE, APPLE, APP_CARD)^|ALL,MALL,PAYCO,NAVER,KAKAO,FACEBOOK,IAMSCHOOL,LIIVMATE,NHN",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "page",
+        "in": "query",
+        "description": "페이지 번호 (1 이상)^|1",
+        "required": true,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "payType",
+        "in": "query",
+        "description": "결제수단(CREDIT_CARD: 신용카드, ACCOUNT: 무통장입금, MOBILE: 휴대폰결제, REALTIME_ACCOUNT_TRANSFER: 실시간계좌이체, VIRTUAL_ACCOUNT: 가상계좌, GIFT: 상품권, ATM: ATM, PAYCO: PAYCO, ZERO_PAY: 0원결제, ACCUMULATION: 적립금 전액 사용, PHONE_BILL: 전화결제, POINT: 포인트결제, YPAY: 옐로페이, KPAY: 케이페이, PAYPIN: 페이핀, INIPAY: INIPay 간편결제, PAYPAL: PayPal, STRIPE: STRIPE, NAVER_PAY: 네이버페이 주문형, KAKAO_PAY: 카카오페이, NAVER_EASY_PAY: 네이버페이 결제형, SAMSUNG_PAY: 삼성페이, CHAI: 차이, VERITRANS_CARD: Veritrans CreditCard, TOASTCAM: 토스트캠, ETC: 기타결제수단, ESCROW_REALTIME_ACCOUNT_TRANSFER: 실시간계좌이체-에스크로, ESCROW_VIRTUAL_ACCOUNT: 가상계좌-에스크로, TOSS_PAY: 토스페이, SK_PAY: SK페이, APPLE_PAY: 애플페이, LPAY: 엘페이, RENTAL: 렌탈결제, UNION_PAY: UnionPay, ALIPAY: Alipay Plus, WECHAT_PAY: WeChat Pay, PINPAY: 핀페이, EXTERNAL_PAY: 외부 결제 전액 사용, HMG_PAY: HMG pay, APP_CARD: 앱카드, PAY_PAY: 페이페이, E_CONTEXT: 일본 편의점결제, HAPPY_VOUCHER: 국민행복바우처)^|CREDIT_CARD,ACCOUNT,MOBILE,REALTIME_ACCOUNT_TRANSFER,VIRTUAL_ACCOUNT,GIFT,ATM,PAYCO,ZERO_PAY,ACCUMULATION,PHONE_BILL,POINT,YPAY,KPAY,PAYPIN,INIPAY,PAYPAL,STRIPE,NAVER_PAY,KAKAO_PAY,NAVER_EASY_PAY,ESCROW_REALTIME_ACCOUNT_TRANSFER,ESCROW_VIRTUAL_ACCOUNT",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "payTypes",
+        "in": "query",
+        "description": "결제수단 리스트^|CREDIT_CARD,ACCOUNT,MOBILE,REALTIME_ACCOUNT_TRANSFER,VIRTUAL_ACCOUNT,GIFT,ATM,PAYCO,ZERO_PAY,ACCUMULATION,PHONE_BILL,POINT,YPAY,KPAY,PAYPIN,INIPAY,PAYPAL,STRIPE,NAVER_PAY,KAKAO_PAY,NAVER_EASY_PAY,ESCROW_REALTIME_ACCOUNT_TRANSFER,ESCROW_VIRTUAL_ACCOUNT",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "platformTypes",
+        "in": "query",
+        "description": "플랫폼구분^|PC,MOBILE_WEB,MOBILE_APP",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "productKeywordType",
+        "in": "query",
+        "description": "상품 검색 키워드 타입(NO, NAME, MANAGEMENT_CD)^|NO,NAME,MANAGEMENT_CD",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "productNos",
+        "in": "query",
+        "description": "상품번호 목록^|123,456",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "productType",
+        "in": "query",
+        "description": "상품조회기준(판매통계 상품별 API 에서는 필수 항목입니다.)(PRODUCT, OPTION)^|PRODUCT,OPTION",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "saleMethodType",
+        "in": "query",
+        "description": "판매방식구분(위탁,사입)(PURCHASE: 사입, CONSIGNMENT: 위탁)^|PURCHASE,CONSIGNMENT",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "size",
+        "in": "query",
+        "description": "페이지 사이즈^|10",
+        "required": true,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "startYmd",
+        "in": "query",
+        "description": "조회시작일(yyyy-MM-dd)^|2020-04-22",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "pageNumber",
+        "in": "query",
+        "description": "페이지 번호 (1 이상)^|1",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "pageSize",
+        "in": "query",
+        "description": "페이지 사이즈^|100",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "czFERzFSRGZQY3hwZjQxZTNZd2NTZz09"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "M21OMm8zU1JHUEU1NGFqUURvUklGQlc5NHViTTBaNlI"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/statistics-sales-period163244397"
+            },
+            "examples": {
+              "get-statistics-sale-period": {
+                "value": "{\"contents\":[{\"ymd\":\"20240207\",\"totalOrderCnt\":1000,\"totalNormalOrderCnt\":1000,\"totalClaimedOrderCnt\":0,\"totalSaleCnt\":1000,\"totalSaleAmt\":1000,\"totalAdditionalDiscountAmt\":1000,\"totalProductCouponAmt\":1000,\"totalCartCouponAmt\":1000,\"totalDeliveryCouponAmt\":0,\"totalAccumulationAmt\":1000,\"totalDeliveryAmt\":1000,\"totalRefundAmt\":100,\"totalFreeGiftAmt\":0,\"totalExternalPayAmt\":0,\"totalPromotionDiscountAmt\":3000,\"totalSalesAmt\":-2100,\"totalPayAmt\":-2000}],\"totalCount\":1}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/statistics/sales/product",
+    "summary": "판매통계 상품별 목록 조회",
+    "description": "## 부가설명 및 특이사항\n판매통계 상품별 목록 조회를 위한 API 입니다.",
+    "tags": ["Statistic"],
+    "parameters": [
+      {
+        "name": "categoryDepth",
+        "in": "query",
+        "description": "검색될 카테고리 뎁스^|1",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "categoryNo",
+        "in": "query",
+        "description": "카테고리 번호^|1000002",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "displayBrandNo",
+        "in": "query",
+        "description": "전시브랜드 번호^|1",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "displayCategoryNo",
+        "in": "query",
+        "description": "전시카테고리 번호^|1",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "endYmd",
+        "in": "query",
+        "description": "조회종료일(yyyy-MM-dd)^|2020-04-22",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "genderTypes",
+        "in": "query",
+        "description": "회원 성별^|MALE,FEMALE,UNKNOWN",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "includesClaim",
+        "in": "query",
+        "description": "클레임구분 (클레임 포함, 클레임 제외)^|false",
+        "required": false,
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      {
+        "name": "keyword",
+        "in": "query",
+        "description": "단일 검색어^|1",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "keywords",
+        "in": "query",
+        "description": "복수검색어^|123,456",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "memberGradeNo",
+        "in": "query",
+        "description": "회원 등급^|1",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "memberGroupNo",
+        "in": "query",
+        "description": "회원 그룹^|1",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "memberJoinType",
+        "in": "query",
+        "description": "회원 구분(MEMBER, NON_MEMBER)^|MEMBER,NON_MEMBER",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "memberType",
+        "in": "query",
+        "description": "회원 가입유형(ALL, MALL, PAYCO, NAVER, KAKAO, FACEBOOK, IAMSCHOOL, LIIVMATE, NHN, NHNENT, UNIONE, LINE, NCPSTORE, KAKAO_SYNC, GOOGLE, APPLE, APP_CARD)^|ALL,MALL,PAYCO,NAVER,KAKAO,FACEBOOK,IAMSCHOOL,LIIVMATE,NHN",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "page",
+        "in": "query",
+        "description": "페이지 번호 (1 이상)^|1",
+        "required": true,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "payType",
+        "in": "query",
+        "description": "결제수단(CREDIT_CARD: 신용카드, ACCOUNT: 무통장입금, MOBILE: 휴대폰결제, REALTIME_ACCOUNT_TRANSFER: 실시간계좌이체, VIRTUAL_ACCOUNT: 가상계좌, GIFT: 상품권, ATM: ATM, PAYCO: PAYCO, ZERO_PAY: 0원결제, ACCUMULATION: 적립금 전액 사용, PHONE_BILL: 전화결제, POINT: 포인트결제, YPAY: 옐로페이, KPAY: 케이페이, PAYPIN: 페이핀, INIPAY: INIPay 간편결제, PAYPAL: PayPal, STRIPE: STRIPE, NAVER_PAY: 네이버페이 주문형, KAKAO_PAY: 카카오페이, NAVER_EASY_PAY: 네이버페이 결제형, SAMSUNG_PAY: 삼성페이, CHAI: 차이, VERITRANS_CARD: Veritrans CreditCard, TOASTCAM: 토스트캠, ETC: 기타결제수단, ESCROW_REALTIME_ACCOUNT_TRANSFER: 실시간계좌이체-에스크로, ESCROW_VIRTUAL_ACCOUNT: 가상계좌-에스크로, TOSS_PAY: 토스페이, SK_PAY: SK페이, APPLE_PAY: 애플페이, LPAY: 엘페이, RENTAL: 렌탈결제, UNION_PAY: UnionPay, ALIPAY: Alipay Plus, WECHAT_PAY: WeChat Pay, PINPAY: 핀페이, EXTERNAL_PAY: 외부 결제 전액 사용, HMG_PAY: HMG pay, APP_CARD: 앱카드, PAY_PAY: 페이페이, E_CONTEXT: 일본 편의점결제, HAPPY_VOUCHER: 국민행복바우처)^|CREDIT_CARD,ACCOUNT,MOBILE,REALTIME_ACCOUNT_TRANSFER,VIRTUAL_ACCOUNT,GIFT,ATM,PAYCO,ZERO_PAY,ACCUMULATION,PHONE_BILL,POINT,YPAY,KPAY,PAYPIN,INIPAY,PAYPAL,STRIPE,NAVER_PAY,KAKAO_PAY,NAVER_EASY_PAY,ESCROW_REALTIME_ACCOUNT_TRANSFER,ESCROW_VIRTUAL_ACCOUNT",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "payTypes",
+        "in": "query",
+        "description": "결제수단 리스트^|CREDIT_CARD,ACCOUNT,MOBILE,REALTIME_ACCOUNT_TRANSFER,VIRTUAL_ACCOUNT,GIFT,ATM,PAYCO,ZERO_PAY,ACCUMULATION,PHONE_BILL,POINT,YPAY,KPAY,PAYPIN,INIPAY,PAYPAL,STRIPE,NAVER_PAY,KAKAO_PAY,NAVER_EASY_PAY,ESCROW_REALTIME_ACCOUNT_TRANSFER,ESCROW_VIRTUAL_ACCOUNT",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "platformTypes",
+        "in": "query",
+        "description": "플랫폼구분^|PC,MOBILE_WEB,MOBILE_APP",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "productKeywordType",
+        "in": "query",
+        "description": "상품 검색 키워드 타입(NO, NAME, MANAGEMENT_CD)^|NO,NAME,MANAGEMENT_CD",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "productNos",
+        "in": "query",
+        "description": "상품번호 목록^|123,456",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "productType",
+        "in": "query",
+        "description": "상품조회기준(판매통계 상품별 API 에서는 필수 항목입니다.)(PRODUCT, OPTION)^|PRODUCT,OPTION",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "saleMethodType",
+        "in": "query",
+        "description": "판매방식구분(위탁,사입)(PURCHASE: 사입, CONSIGNMENT: 위탁)^|PURCHASE,CONSIGNMENT",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "size",
+        "in": "query",
+        "description": "페이지 사이즈^|10",
+        "required": true,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "startYmd",
+        "in": "query",
+        "description": "조회시작일(yyyy-MM-dd)^|2020-04-22",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "pageNumber",
+        "in": "query",
+        "description": "페이지 번호 (1 이상)^|1",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "pageSize",
+        "in": "query",
+        "description": "페이지 사이즈^|100",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "czFERzFSRGZQY3hwZjQxZTNZd2NTZz09"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "M21OMm8zU1JHUEU1NGFqUURvUklGQlc5NHViTTBaNlI"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/statistics-sales-product1026505609"
+            },
+            "examples": {
+              "get-statistics-sale-product": {
+                "value": "{\"contents\":[{\"mallNo\":0,\"mallName\":\"-\",\"mallProductNo\":11,\"mallOptionNo\":22,\"productManagementCd\":null,\"productName\":\"상품상품\",\"partnerNo\":1,\"partnerName\":\"영혼의 파트너\",\"saleMethodType\":null,\"commissionRateType\":\"PURCHASE_PRICE\",\"commissionRate\":10,\"totalOrderCnt\":1000,\"totalNormalOrderCnt\":1000,\"totalClaimedOrderCnt\":0,\"totalSaleCnt\":1000,\"totalPurchaseAmt\":0,\"totalSupplyAmt\":0,\"totalSaleAmt\":1000,\"totalCommissionAmt\":100,\"totalMallAdditionalDiscountAmt\":1000,\"totalPartnerAdditionalDiscountAmt\":1000,\"totalMallProductCouponAmt\":1000,\"totalPartnerProductCouponAmt\":1000,\"totalMallFreeGiftAmt\":100,\"totalPartnerFreeGiftAmt\":100,\"adminNo\":0,\"brandNo\":1,\"brandName\":\"중간보스 브랜드\",\"displayBrandNo\":0,\"categoryNo\":0,\"fullCategoryName\":\"-\",\"usesOption\":null,\"optionName\":null,\"optionValue\":null,\"freeGift\":false,\"saleMethodTypeLabel\":\"-\",\"totalMallProfitAmt\":-2000,\"totalMallPromotionAmt\":2100,\"totalPartnerPromotionAmt\":2100,\"displayOptionName\":null,\"totalPurchasePrice\":\"0\",\"totalSupplyPrice\":\"-\",\"purchaseYn\":\"Y\",\"optionNameForDisplay\":null,\"totalPayAmt\":-3200,\"productNameForDisplay\":\"\"}],\"totalCount\":1}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/statistics/sales/period/summary",
+    "summary": "판매통계 기간별 요약 조회",
+    "description": "## 부가설명 및 특이사항\n판매통계 기간별 요약 조회를 위한 API 입니다.",
+    "tags": ["Statistic"],
+    "parameters": [
+      {
+        "name": "categoryDepth",
+        "in": "query",
+        "description": "검색될 카테고리 뎁스^|1",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "categoryNo",
+        "in": "query",
+        "description": "카테고리 번호^|1000002",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "displayBrandNo",
+        "in": "query",
+        "description": "전시브랜드 번호^|1",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "displayCategoryNo",
+        "in": "query",
+        "description": "전시카테고리 번호^|1",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "endYmd",
+        "in": "query",
+        "description": "조회종료일(yyyy-MM-dd)^|2020-04-22",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "genderTypes",
+        "in": "query",
+        "description": "회원 성별^|MALE,FEMALE,UNKNOWN",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "includesClaim",
+        "in": "query",
+        "description": "클레임구분 (클레임 포함, 클레임 제외)^|false",
+        "required": false,
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      {
+        "name": "keyword",
+        "in": "query",
+        "description": "단일 검색어^|1",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "keywords",
+        "in": "query",
+        "description": "복수검색어^|123,456",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "memberGradeNo",
+        "in": "query",
+        "description": "회원 등급^|1",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "memberGroupNo",
+        "in": "query",
+        "description": "회원 그룹^|1",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "memberJoinType",
+        "in": "query",
+        "description": "회원 구분(MEMBER, NON_MEMBER)^|MEMBER,NON_MEMBER",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "memberType",
+        "in": "query",
+        "description": "회원 가입유형(ALL, MALL, PAYCO, NAVER, KAKAO, FACEBOOK, IAMSCHOOL, LIIVMATE, NHN, NHNENT, UNIONE, LINE, NCPSTORE, KAKAO_SYNC, GOOGLE, APPLE, APP_CARD)^|ALL,MALL,PAYCO,NAVER,KAKAO,FACEBOOK,IAMSCHOOL,LIIVMATE,NHN",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "page",
+        "in": "query",
+        "description": "페이지 번호 (1 이상)^|1",
+        "required": true,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "payType",
+        "in": "query",
+        "description": "결제수단(CREDIT_CARD: 신용카드, ACCOUNT: 무통장입금, MOBILE: 휴대폰결제, REALTIME_ACCOUNT_TRANSFER: 실시간계좌이체, VIRTUAL_ACCOUNT: 가상계좌, GIFT: 상품권, ATM: ATM, PAYCO: PAYCO, ZERO_PAY: 0원결제, ACCUMULATION: 적립금 전액 사용, PHONE_BILL: 전화결제, POINT: 포인트결제, YPAY: 옐로페이, KPAY: 케이페이, PAYPIN: 페이핀, INIPAY: INIPay 간편결제, PAYPAL: PayPal, STRIPE: STRIPE, NAVER_PAY: 네이버페이 주문형, KAKAO_PAY: 카카오페이, NAVER_EASY_PAY: 네이버페이 결제형, SAMSUNG_PAY: 삼성페이, CHAI: 차이, VERITRANS_CARD: Veritrans CreditCard, TOASTCAM: 토스트캠, ETC: 기타결제수단, ESCROW_REALTIME_ACCOUNT_TRANSFER: 실시간계좌이체-에스크로, ESCROW_VIRTUAL_ACCOUNT: 가상계좌-에스크로, TOSS_PAY: 토스페이, SK_PAY: SK페이, APPLE_PAY: 애플페이, LPAY: 엘페이, RENTAL: 렌탈결제, UNION_PAY: UnionPay, ALIPAY: Alipay Plus, WECHAT_PAY: WeChat Pay, PINPAY: 핀페이, EXTERNAL_PAY: 외부 결제 전액 사용, HMG_PAY: HMG pay, APP_CARD: 앱카드, PAY_PAY: 페이페이, E_CONTEXT: 일본 편의점결제, HAPPY_VOUCHER: 국민행복바우처)^|CREDIT_CARD,ACCOUNT,MOBILE,REALTIME_ACCOUNT_TRANSFER,VIRTUAL_ACCOUNT,GIFT,ATM,PAYCO,ZERO_PAY,ACCUMULATION,PHONE_BILL,POINT,YPAY,KPAY,PAYPIN,INIPAY,PAYPAL,STRIPE,NAVER_PAY,KAKAO_PAY,NAVER_EASY_PAY,ESCROW_REALTIME_ACCOUNT_TRANSFER,ESCROW_VIRTUAL_ACCOUNT",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "payTypes",
+        "in": "query",
+        "description": "결제수단 리스트^|CREDIT_CARD,ACCOUNT,MOBILE,REALTIME_ACCOUNT_TRANSFER,VIRTUAL_ACCOUNT,GIFT,ATM,PAYCO,ZERO_PAY,ACCUMULATION,PHONE_BILL,POINT,YPAY,KPAY,PAYPIN,INIPAY,PAYPAL,STRIPE,NAVER_PAY,KAKAO_PAY,NAVER_EASY_PAY,ESCROW_REALTIME_ACCOUNT_TRANSFER,ESCROW_VIRTUAL_ACCOUNT",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "platformTypes",
+        "in": "query",
+        "description": "플랫폼구분^|PC,MOBILE_WEB,MOBILE_APP",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "productKeywordType",
+        "in": "query",
+        "description": "상품 검색 키워드 타입(NO, NAME, MANAGEMENT_CD)^|NO,NAME,MANAGEMENT_CD",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "productNos",
+        "in": "query",
+        "description": "상품번호 목록^|123,456",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "productType",
+        "in": "query",
+        "description": "상품조회기준(판매통계 상품별 API 에서는 필수 항목입니다.)(PRODUCT, OPTION)^|PRODUCT,OPTION",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "saleMethodType",
+        "in": "query",
+        "description": "판매방식구분(위탁,사입)(PURCHASE: 사입, CONSIGNMENT: 위탁)^|PURCHASE,CONSIGNMENT",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "size",
+        "in": "query",
+        "description": "페이지 사이즈^|10",
+        "required": true,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "startYmd",
+        "in": "query",
+        "description": "조회시작일(yyyy-MM-dd)^|2020-04-22",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "pageNumber",
+        "in": "query",
+        "description": "페이지 번호 (1 이상)^|1",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "pageSize",
+        "in": "query",
+        "description": "페이지 사이즈^|100",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "czFERzFSRGZQY3hwZjQxZTNZd2NTZz09"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "M21OMm8zU1JHUEU1NGFqUURvUklGQlc5NHViTTBaNlI"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/statistics-sales-period-summary2027962557"
+            },
+            "examples": {
+              "get-statistics-sales-period-summary": {
+                "value": "{\"startYmd\":\"2024-02-07\",\"endYmd\":\"2024-02-07\",\"mallNo\":1,\"partnerNo\":1,\"displayBrandNo\":1,\"summary\":{\"totalOrderCnt\":10,\"totalNormalOrderCnt\":10,\"totalClaimedOrderCnt\":0,\"totalProductCnt\":0,\"totalNormalProductCnt\":0,\"totalClaimedProductCnt\":0,\"totalSaleCnt\":10,\"totalSaleAmt\":10000,\"totalAdditionalDiscountAmt\":1000,\"totalProductCouponAmt\":1000,\"totalCartCouponAmt\":1000,\"totalAccumulationAmt\":1000,\"totalDeliveryAmt\":1000,\"totalRefundAmt\":1000,\"totalFreeGiftAmt\":1000,\"totalExternalPayAmt\":1000,\"totalPromotionDiscountAmt\":4000,\"totalProductSaleAmt\":7000,\"totalSalesAmt\":4000,\"totalProductPromotionDiscountAmt\":3000,\"totalPayAmt\":5000},\"promotionSummary\":{\"totalMallFreeGiftAmt\":10000,\"totalPartnerFreeGiftAmt\":10000,\"totalFreeGiftAmt\":10000,\"totalMallAdditionalDiscountAmt\":10000,\"totalPartnerAdditionalDiscountAmt\":1000,\"totalAdditionalDiscountAmt\":1000,\"totalMallProductCouponAmt\":1000,\"totalPartnerProductCouponAmt\":1000,\"totalProductCouponAmt\":1000,\"totalCartCouponAmt\":1000}}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/statistics/sales/product/summary",
+    "summary": "판매통계 상품별 요약 조회",
+    "description": "## 부가설명 및 특이사항\n판매통계 상품별 요약 조회를 위한 API 입니다.",
+    "tags": ["Statistic"],
+    "parameters": [
+      {
+        "name": "categoryDepth",
+        "in": "query",
+        "description": "검색될 카테고리 뎁스^|1",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "categoryNo",
+        "in": "query",
+        "description": "카테고리 번호^|1000002",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "displayBrandNo",
+        "in": "query",
+        "description": "전시브랜드 번호^|1",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "displayCategoryNo",
+        "in": "query",
+        "description": "전시카테고리 번호^|1",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "endYmd",
+        "in": "query",
+        "description": "조회종료일(yyyy-MM-dd)^|2020-04-22",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "genderTypes",
+        "in": "query",
+        "description": "회원 성별^|MALE,FEMALE,UNKNOWN",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "includesClaim",
+        "in": "query",
+        "description": "클레임구분 (클레임 포함, 클레임 제외)^|false",
+        "required": false,
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      {
+        "name": "keyword",
+        "in": "query",
+        "description": "단일 검색어^|1",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "keywords",
+        "in": "query",
+        "description": "복수검색어^|123,456",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "memberGradeNo",
+        "in": "query",
+        "description": "회원 등급^|1",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "memberGroupNo",
+        "in": "query",
+        "description": "회원 그룹^|1",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "memberJoinType",
+        "in": "query",
+        "description": "회원 구분(MEMBER, NON_MEMBER)^|MEMBER,NON_MEMBER",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "memberType",
+        "in": "query",
+        "description": "회원 가입유형(ALL, MALL, PAYCO, NAVER, KAKAO, FACEBOOK, IAMSCHOOL, LIIVMATE, NHN, NHNENT, UNIONE, LINE, NCPSTORE, KAKAO_SYNC, GOOGLE, APPLE, APP_CARD)^|ALL,MALL,PAYCO,NAVER,KAKAO,FACEBOOK,IAMSCHOOL,LIIVMATE,NHN",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "page",
+        "in": "query",
+        "description": "페이지 번호 (1 이상)^|1",
+        "required": true,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "payType",
+        "in": "query",
+        "description": "결제수단(CREDIT_CARD: 신용카드, ACCOUNT: 무통장입금, MOBILE: 휴대폰결제, REALTIME_ACCOUNT_TRANSFER: 실시간계좌이체, VIRTUAL_ACCOUNT: 가상계좌, GIFT: 상품권, ATM: ATM, PAYCO: PAYCO, ZERO_PAY: 0원결제, ACCUMULATION: 적립금 전액 사용, PHONE_BILL: 전화결제, POINT: 포인트결제, YPAY: 옐로페이, KPAY: 케이페이, PAYPIN: 페이핀, INIPAY: INIPay 간편결제, PAYPAL: PayPal, STRIPE: STRIPE, NAVER_PAY: 네이버페이 주문형, KAKAO_PAY: 카카오페이, NAVER_EASY_PAY: 네이버페이 결제형, SAMSUNG_PAY: 삼성페이, CHAI: 차이, VERITRANS_CARD: Veritrans CreditCard, TOASTCAM: 토스트캠, ETC: 기타결제수단, ESCROW_REALTIME_ACCOUNT_TRANSFER: 실시간계좌이체-에스크로, ESCROW_VIRTUAL_ACCOUNT: 가상계좌-에스크로, TOSS_PAY: 토스페이, SK_PAY: SK페이, APPLE_PAY: 애플페이, LPAY: 엘페이, RENTAL: 렌탈결제, UNION_PAY: UnionPay, ALIPAY: Alipay Plus, WECHAT_PAY: WeChat Pay, PINPAY: 핀페이, EXTERNAL_PAY: 외부 결제 전액 사용, HMG_PAY: HMG pay, APP_CARD: 앱카드, PAY_PAY: 페이페이, E_CONTEXT: 일본 편의점결제, HAPPY_VOUCHER: 국민행복바우처)^|CREDIT_CARD,ACCOUNT,MOBILE,REALTIME_ACCOUNT_TRANSFER,VIRTUAL_ACCOUNT,GIFT,ATM,PAYCO,ZERO_PAY,ACCUMULATION,PHONE_BILL,POINT,YPAY,KPAY,PAYPIN,INIPAY,PAYPAL,STRIPE,NAVER_PAY,KAKAO_PAY,NAVER_EASY_PAY,ESCROW_REALTIME_ACCOUNT_TRANSFER,ESCROW_VIRTUAL_ACCOUNT",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "payTypes",
+        "in": "query",
+        "description": "결제수단 리스트^|CREDIT_CARD,ACCOUNT,MOBILE,REALTIME_ACCOUNT_TRANSFER,VIRTUAL_ACCOUNT,GIFT,ATM,PAYCO,ZERO_PAY,ACCUMULATION,PHONE_BILL,POINT,YPAY,KPAY,PAYPIN,INIPAY,PAYPAL,STRIPE,NAVER_PAY,KAKAO_PAY,NAVER_EASY_PAY,ESCROW_REALTIME_ACCOUNT_TRANSFER,ESCROW_VIRTUAL_ACCOUNT",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "platformTypes",
+        "in": "query",
+        "description": "플랫폼구분^|PC,MOBILE_WEB,MOBILE_APP",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "productKeywordType",
+        "in": "query",
+        "description": "상품 검색 키워드 타입(NO, NAME, MANAGEMENT_CD)^|NO,NAME,MANAGEMENT_CD",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "productNos",
+        "in": "query",
+        "description": "상품번호 목록^|123,456",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "productType",
+        "in": "query",
+        "description": "상품조회기준(판매통계 상품별 API 에서는 필수 항목입니다.)(PRODUCT, OPTION)^|PRODUCT,OPTION",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "saleMethodType",
+        "in": "query",
+        "description": "판매방식구분(위탁,사입)(PURCHASE: 사입, CONSIGNMENT: 위탁)^|PURCHASE,CONSIGNMENT",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "size",
+        "in": "query",
+        "description": "페이지 사이즈^|10",
+        "required": true,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "startYmd",
+        "in": "query",
+        "description": "조회시작일(yyyy-MM-dd)^|2020-04-22",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "pageNumber",
+        "in": "query",
+        "description": "페이지 번호 (1 이상)^|1",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "pageSize",
+        "in": "query",
+        "description": "페이지 사이즈^|100",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "czFERzFSRGZQY3hwZjQxZTNZd2NTZz09"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "M21OMm8zU1JHUEU1NGFqUURvUklGQlc5NHViTTBaNlI"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/statistics-sales-period-summary2027962557"
+            },
+            "examples": {
+              "get-statistics-sales-product-summary": {
+                "value": "{\"startYmd\":\"2024-02-07\",\"endYmd\":\"2024-02-07\",\"mallNo\":1,\"partnerNo\":1,\"displayBrandNo\":1,\"summary\":{\"totalOrderCnt\":10,\"totalNormalOrderCnt\":10,\"totalClaimedOrderCnt\":0,\"totalProductCnt\":0,\"totalNormalProductCnt\":0,\"totalClaimedProductCnt\":0,\"totalSaleCnt\":10,\"totalSaleAmt\":10000,\"totalAdditionalDiscountAmt\":1000,\"totalProductCouponAmt\":1000,\"totalCartCouponAmt\":1000,\"totalAccumulationAmt\":1000,\"totalDeliveryAmt\":1000,\"totalRefundAmt\":1000,\"totalFreeGiftAmt\":1000,\"totalExternalPayAmt\":1000,\"totalPromotionDiscountAmt\":4000,\"totalProductSaleAmt\":7000,\"totalSalesAmt\":4000,\"totalProductPromotionDiscountAmt\":3000,\"totalPayAmt\":5000},\"promotionSummary\":{\"totalMallFreeGiftAmt\":10000,\"totalPartnerFreeGiftAmt\":10000,\"totalFreeGiftAmt\":10000,\"totalMallAdditionalDiscountAmt\":10000,\"totalPartnerAdditionalDiscountAmt\":1000,\"totalAdditionalDiscountAmt\":1000,\"totalMallProductCouponAmt\":1000,\"totalPartnerProductCouponAmt\":1000,\"totalProductCouponAmt\":1000,\"totalCartCouponAmt\":1000}}"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+]

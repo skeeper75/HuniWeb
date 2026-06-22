@@ -1,6 +1,14 @@
 ---
 name: huni-quote-verify-orchestrator
-description: 후니프린팅 상품 가격계산 검증 하네스 오케스트레이터 — Claude+Codex 병행. 사용자가 "상품군(카테고리)+상품명"(예: "프린트엽서 가격계산 검증해줘")을 주면, 그 상품이 자기 가격공식으로 가격계산이 되는지를 검증하고 개선/수정/보완안을 도출한다. 검증 3축[HARD]: ① SOT 일치(상품마스터 260610↔인쇄상품 가격표 260527 데이터 일치) ② 가격공식 속 가격구성요소 매핑 정합(시트 차원경계 안에서 제대로 배선) ③ 가격구성요소 차원↔가격테이블 차원 매칭. 흐름: 분해(hqv-product-decomposer가 한 줄 명령을 상품 요소 전수+공식사슬+골든 work-spec으로 해독) → 병행 검증(hqv-quote-verifier 라이브 실측 1차 + hqv-codex-cross-verifier Codex gpt-5.5 독립 2nd opinion, 같은 work-spec·다른 모델) → reconcile(합의=고신뢰·불일치=조사) → 개선(dbm-price-arbiter 심의). Codex=ChatGPT 구독(OAuth·종량과금 없음)·읽기전용·주장은 가설(환각 경계). 생성≠검증·라이브 읽기전용·DB 미적재(실 교정은 인간 승인 후 dbmap 위임). '가격계산 검증', '상품 가격 검증', '프린트엽서 가격검증', '이 상품 가격계산 되는지', '가격공식 검증', 'SOT 일치 검증', '공식 구성요소 매핑 검증', '차원 매칭 검증', 'codex 병행 검증', '가격검증 하네스 실행/재실행/업데이트/보완', '특정 상품만 검증', '검증 다시', '개선 수정 보완' 작업 시 반드시 이 스킬을 사용. 가격엔진 5장치 역할 이해·진단은 huni-price-engine-diag, 대표 상품군 파일럿 냉철 게이트는 huni-price-quote가 담당하므로 그 작업에는 트리거하지 않는다. 본 스킬은 그 둘의 산출을 입력으로 재사용해 "단일 상품 온디맨드 검증+개선(Claude+Codex 병행)"을 수행한다.
+description: >
+  후니프린팅 상품 가격계산 검증 하네스 오케스트레이터(Claude+Codex 병행). "상품군+상품명"(예: "프린트엽서
+  가격계산 검증") 한 줄을 받아 그 상품이 자기 가격공식으로 가격계산 되는지 3축[HARD] 검증(① SOT 일치 상품마스터
+  260610↔가격표 260527 ② 공식↔구성요소 매핑 정합 ③ 가격구성요소 차원↔가격테이블 차원 매칭) + 개선안 도출. 흐름:
+  분해(product-decomposer) → 병행 검증(quote-verifier 라이브 실측 + codex-cross-verifier gpt-5.5 독립 2nd
+  opinion·같은 work-spec) → reconcile → 개선(dbm-price-arbiter). codex 주장=가설(환각 경계)·생성≠검증·라이브
+  읽기전용·DB 미적재(실 교정 인간 승인). 트리거: 가격계산 검증, 상품 가격 검증, 프린트엽서 가격검증, SOT 일치
+  검증, 공식 구성요소 매핑 검증, 차원 매칭 검증, codex 병행 검증, 특정 상품만 검증, 검증 다시, 개선 수정 보완.
+  5장치 이해·진단은 huni-price-engine-diag, 대표 상품군 냉철 게이트는 huni-price-quote가 담당.
 ---
 
 # huni-quote-verify-orchestrator — 상품 가격계산 검증 하네스 (Claude+Codex 병행)

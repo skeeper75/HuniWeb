@@ -1,0 +1,100 @@
+---
+title: "TermsProvider"
+depth: 5
+path: "오로라 리액트 스킨개발가이드 > 개발 프로세스 > 2️⃣Aurora React 샘플스킨 확인 > @shopby/react-components > manage > TermsProvider"
+---
+
+# TermsProvider
+
+# TermsProvider
+
+## 속성
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | ---- | --- | ---- | --- |
+| termsTypes | false | string[] | [] | 약관 타입
+ㄴ[request](https://docs.shopby.co.kr/?url.primaryName=manage/#/Terms/search-used-terms).termsTypes 타입 참고 |
+| termsHistoryTypes | false | string[] | [] | 약관 변경이력 타입
+ㄴ [request](https://docs.shopby.co.kr/?url.primaryName=manage/#/Terms/search-terms-histories).termsType 타입 참고 |
+| futureDaysToShow | false | string | '' | 조회할 현재부터 미래 날짜 |
+| hasOnlyUsedTerms | false | boolean | false | 조회된 약관 중 현재 사용중인 약관만 필터링 여부 |
+| children | true | ReactNode |  |  |
+
+## 상태
+
+* termsState 는 useTermsStateContext 를 호출해 사용한다.
+
+```typescript
+const termsState = useTermsStateContext();
+```
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | ---- | --- | ---- | --- |
+| terms | false | object |  | 해당 쇼핑몰의 약관 정보
+[response](https://docs.shopby.co.kr/?url.primaryName=manage/#/Terms/search-used-terms) 타입과 동일 |
+| termsDetail | false | object |  | 특정 약관(약관번호 기준)의 상세정보
+[response](https://docs.shopby.co.kr/?url.primaryName=manage/#/Terms/get-term) 타입과 동일 |
+| termsHistory | false | object[] | [] | 해당 쇼핑몰 약관의 변경이력 정보
+[response](https://docs.shopby.co.kr/?url.primaryName=manage/#/Terms/search-terms-histories) 타입과 동일 |
+| customTerms | false | object[] | [] | 해당 쇼핑몰의 추가 약관 정보
+[response](https://docs.shopby.co.kr/?url.primaryName=manage/#/Terms/get-custom-terms) 타입과 동일 |
+| termsUsed | false | object |  | 해당 쇼핑몰의 현재 적용 중인 약관
+[response](https://docs.shopby.co.kr/?url.primaryName=manage/#/Terms/search-used-terms-only-used) 타입과 동일 |
+
+## 액션
+
+* termsAction 은 useTermsActionContext 를 호출해 사용한다.
+
+```typescript
+const termsAction = useTermsActionContext();
+```
+
+| 이름 | 인자타입 | 필수여부 | 기본값 | 설명 | 관리하는 상태 |
+| --- | ---- | ---- | --- | --- | ------- |
+| fetchTerms | string | true |  | 해당 쇼핑몰의 약관을 조회함.
+ㄴ [request](https://docs.shopby.co.kr/?url.primaryName=manage/#/Terms/search-used-terms).termsTypes 와 동일한 타입 | termsState.terms |
+| fetchTermsHistory | object |  |  | 해당 쇼핑몰 약관의 변경이력을 조회함. | termsState.termsHistories |
+| ㄴ termsHistoryTypes | string | true | - | [request.termsType](https://docs.shopby.co.kr/?url.primaryName=manage/#/Terms/search-terms-histories) 과 동일 |  |
+| ㄴ futureDaysToShow | string | false | - | 조회할 현재부터 미래 날짜 |  |
+| ㄴ cacheOption | [object](#cacheOption) |  | - | 브라우저 캐시 옵션 관련 설정
+[cacheOption](#cacheOption)과 동일함. |  |
+| fetchTermsDetail(deprecated) | number | true |  | 약관번호로 약관 상세정보를 조회함.
+ㄴ 인자로 약관번호를 받음. | termsState.termsDetail |
+| fetchTermsDetailV2 | object |  |  | 약관번호로 약관 상세정보를 조회함.
+ | termsState.termsDetail |
+|  ㄴ termsNo | number | true | - | [request.termsNo](https://docs.shopby.co.kr/?url.primaryName=manage/#/Terms/get-term) 과 동일 |  |
+| ㄴ cacheOption | [object](#cacheOption) |  | - | 브라우저 캐시 옵션 관련 설정
+[cacheOption](#cacheOption)과 동일함. |  |
+| fetchCustomTerms | object |  |  | 해당 쇼핑몰의 추가 약관을 조회함. | termsState.customTerms |
+| ㄴ customCategoryType | [object](#cacheOption) |  | - | [request.customCategoryType](https://docs.shopby.co.kr/?url.primaryName=manage/#/Terms/get-custom-terms)과 동일함. |  |
+| ㄴ replacementPhrase | [object](#cacheOption) |  | - | [request.replacementPhrase](https://docs.shopby.co.kr/?url.primaryName=manage/#/Terms/get-custom-terms)과 동일함. |  |
+| ㄴ cacheOption | [object](#cacheOption) |  | - | 브라우저 캐시 옵션 관련 설정
+[cacheOption](#cacheOption)과 동일함. |  |
+| fetchTermsUsed | array | false |  | 해당 쇼핑몰의 현재 적용 중인 약관을 조회함.
+ㄴ 인자로 조회할 약관 타입 리스트를 받음. | termsState.termsUsed |
+
+### cacheOption[#](#cacheOption) 
+
+| 이름 | 타입 | 기본값 | 설명 |
+| --- | --- | --- | --- |
+| key | string |  | 캐시 설정 시 활용할 키 값 |
+| type | string |  | 캐시 설정 시 저장할 저장소 종류
+MEMORY: 메모리에 저장, LOCAL\_STORAGE: 로컬스토리지에 저장, SESSION\_STORAGE: 세션스토리지에 저장, null |
+| timeBySeconds | string |  | 캐시 설정 시 저장할 시간(초 단위) |
+
+## 사용예시
+
+```jsx
+const Example = () => {
+    return (
+       
+        
+          
+            
+            
+          
+        
+      
+    )
+}
+```

@@ -1,0 +1,41 @@
+---
+title: "ProductSectionProvider"
+depth: 5
+path: "오로라 리액트 스킨개발가이드 > 개발 프로세스 > 2️⃣Aurora React 샘플스킨 확인 > @shopby/react-components > display > ProductSectionProvider"
+---
+
+# ProductSectionProvider
+
+* 메인 섹션(=상품 메인 분류) 조회 기능을 제공합니다.
+
+## 속성
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | ---- | --- | ---- | --- |
+| platformType | true | PC, MOBILE\_WEB | - | PC 또는 MOBILE\_WEB의 섹션코드를 얻기 위한 타입 |
+| children | true | ReactNode | - |  |
+
+## 상태
+
+* `productSectionState`는 `useProductSectionStateContext`를 호출해 사용합니다.
+
+```tsx
+const productSectionState = useProductSectionStateContext();
+```
+
+| 이름 | 타입 | 기본 값 | 설명 |
+| --- | --- | ---- | --- |
+| sectionData | map | new Map | 전체 메인 섹션(=상품 메인 분류) 데이터 |
+
+## 사용 예시
+
+```jsx
+const Example = () => (
+  
+    // sectionId
+    // PC: SCPC0001 ~ SCPC0005
+    // MOBILE_WEB: SCMO0001 ~ SCMO0005
+    
+  
+);
+```

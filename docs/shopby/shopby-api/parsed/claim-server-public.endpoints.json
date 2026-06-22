@@ -1,0 +1,1291 @@
+[
+  {
+    "method": "POST",
+    "path": "/cancel-exchanges",
+    "summary": "취소교환 신청",
+    "description": "\n## 부가설명 및 특이사항\n옵션 취소 교환을 신청하는 API입니다.\n\n",
+    "tags": ["CancelExchange"],
+    "parameters": [
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-mall-key"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/cancel-exchanges1646626756"
+          },
+          "examples": {
+            "post-cancel-exchanges": {
+              "value": "{\"calculateParam\":{\"orderNo\":\"202001100000000001\",\"cancelOrderOptionNo\":1,\"cancelCnt\":1,\"exchangeProductNo\":1,\"exchangeOptionNo\":1,\"exchangeCnt\":1,\"responsibleObjectType\":\"BUYER\",\"sellerPaysClaimedDelivery\":false,\"productAdjustAmt\":0,\"refundType\":\"PG\",\"complexRefundAdjust\":null},\"additionalPayType\":null,\"reasonDetail\":\"test\",\"reasonType\":\"CHANGE_MIND\",\"refundBankAccount\":null,\"additionalPayBankAccount\":null,\"purchaserInputs\":[{\"inputLabel\":\"test label\",\"inputValue\":\"test value\"}],\"additionalPayRemitter\":null,\"productAdjustReason\":null}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/cancel-exchanges/{no}/confirm-deposit",
+    "summary": "취소교환 추가결제 입금확인",
+    "description": "\n## 부가설명 및 특이사항\n추가 결제 내역을 입금 확인처리 합니다.\n       ",
+    "tags": ["CancelExchange"],
+    "parameters": [
+      {
+        "name": "no",
+        "in": "path",
+        "description": "",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-mall-key"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/return-exchanges-no-confirm-deposit934552446"
+          },
+          "examples": {
+            "put-cancel-exchanges-no-confirm-deposit": {
+              "value": "{\"additionalPayBankAccount\":{\"bank\":\"KB\",\"account\":\"136584\",\"depositorName\":\"와쳡맨\",\"bankName\":\"국민은행\"},\"additionalPayRemitter\":\"홍길맨\"}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/claims",
+    "summary": "클레임 목록 조회하기",
+    "description": "\n## 부가설명 및 특이사항\n다수의 클레임 정보를 조회합니다.\n\n## 클레임 상태 값 정의\n- ## 취소\n    |상태 값|한글 정의|\n    |---|---|\n    |CANCEL_NO_REFUND|취소완료[환불없음]|\n    |CANCEL_REQUEST|취소신청[승인대기]|\n    |CANCEL_PROC_REQUEST_REFUND|취소처리[환불보류]|\n    |CANCEL_PROC_WAITING_REFUND|취소처리[환불대기]|\n    |CANCEL_DONE|취소완료[환불완료]|\n\n- ## 교환\n    |상태 값|한글 정의|\n    |---|---|\n    |EXCHANGE_REQUEST|교환신청[승인대기]|\n    |EXCHANGE_REJECT_REQUEST|교환처리[철회대기]|\n    |EXCHANGE_PROC_BEFORE_RECEIVE|교환처리[수거진행]|\n    |EXCHANGE_PROC_REQUEST_PAY|교환처리[결제대기]|\n    |EXCHANGE_PROC_REQUEST_REFUND|교환처리[환불보류]|\n    |EXCHANGE_PROC_WAITING|교환처리[처리대기]|\n    |EXCHANGE_PROC_WAITING_PAY|교환처리[입금처리대기]|\n    |EXCHANGE_PROC_WAITING_REFUND|교환처리[환불대기]|\n    |EXCHANGE_DONE_PAY_DONE|교환완료[결제완료]|\n    |EXCHANGE_DONE_REFUND_DONE|교환완료[환불완료]|\n    |EXCHANGE_DONE|교환완료[차액없음]|\n\n- ## 반품\n    |상태 값|한글 정의|\n    |---|---|\n    |RETURN_NO_REFUND|반품완료[환불없음]|\n    |RETURN_REQUEST|반품신청[승인대기]|\n    |RETURN_REJECT_REQUEST|반품신청[철회대기]|\n    |RETURN_PROC_BEFORE_RECEIVE|반품처리[수거진행]|\n    |RETURN_PROC_REQUEST_REFUND|반품처리[환불보류]|\n    |RETURN_PROC_WAITING_REFUND|반품처리[환불대기]|\n    |RETURN_DONE|반품완료[환불완료]|\n    |RETURN_REFUND_AMT_ADJUST_REQUESTED|반품처리[조정요청]|\n",
+    "tags": ["Claim"],
+    "parameters": [
+      {
+        "name": "claimStatusTypes",
+        "in": "query",
+        "description": "클레임 상태 리스트^|CANCEL_REQUEST, CANCEL_DONE",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "endYmd",
+        "in": "query",
+        "description": "조회종료일^|yyyy-mm-dd",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "page",
+        "in": "query",
+        "description": "페이지 번호 (1 이상)^|1",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "searchDateType",
+        "in": "query",
+        "description": "검색일자타입(APPLY_YMDT: 클레임일자, COMPLETE_YMDT: 클레임완료일자)^|APPLY_YMDT",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "searchType",
+        "in": "query",
+        "description": "클레임 검색 타입(ALL: 전체, CLAIM_NO: 클레임번호, ORDER_NO: 주문번호, MEMBER_NO: 회원번호)^|ORDER_NO",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "searchValues",
+        "in": "query",
+        "description": "클레임 검색 값^|1,2,3",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "size",
+        "in": "query",
+        "description": "페이지 사이즈^|30",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "startYmd",
+        "in": "query",
+        "description": "조회시작일^|yyyy-mm-dd",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "treatmentStatusTypes",
+        "in": "query",
+        "description": "클레임 처리 상태 리스트^|WITHDRAW, WITHDRAW_APPROVE",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-mall-key"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/claims-694067701"
+            },
+            "examples": {
+              "get-claims": {
+                "value": "{\"contents\":[{\"claimNo\":1,\"claimYmdt\":\"2025-10-31 10:13:54\",\"claimCompleteYmdt\":\"2025-10-31 10:13:54\",\"mallNo\":1,\"memberNo\":1,\"claimType\":\"CANCEL\",\"orderNo\":\"1\",\"refundPayType\":\"CREDIT_CARD\",\"refundType\":\"PG\",\"claimStatusType\":\"CANCEL_REQUEST\",\"treatmentStatusType\":null,\"claimAmt\":0,\"returnWayType\":null,\"returnAddress\":{\"name\":\"홍길동\",\"contact1\":\"010-1234-1234\",\"contact2\":null,\"mobileCountryCd\":\"82\",\"zipCd\":\"01234\",\"address\":\"서울특별시 구로구 구로동\",\"jibunAddress\":\"서울특별시 구로구 구로동 구로아파트\",\"detailAddress\":\"101동 101호\",\"receiverCity\":null,\"receiverState\":null,\"note\":null,\"customsIdNumber\":null,\"countryCd\":\"KR\",\"shippingEtcInfo\":null,\"addressView\":\"(01234) 서울특별시 구로구 구로동 101동 101호\"},\"returnDeliveryCompanyType\":null,\"returnInvoiceNo\":null,\"orderOptionNos\":[1],\"claimedOptions\":[],\"responsibleObjectType\":\"BUYER\",\"treatmentAdminNo\":0,\"partnerNo\":null,\"claimReasonType\":\"CHANGE_MIND\",\"claimReasonDetail\":\"변심\",\"claimImageUrls\":[],\"claimData\":{\"amounts\":{\"before\":{\"order\":{\"payAmt\":0,\"accumulationPayAmt\":0,\"standardAmt\":0,\"immediateDiscountAmt\":0,\"additionalDiscountAmt\":0,\"remainingPgPayAmt\":0,\"remainingMainPayAmt\":0,\"freeGiftDiscountAmt\":0,\"externalPayAmt\":0,\"externalPayInfos\":[],\"mainPayAmt\":0},\"delivery\":{\"deliveryGroupAmounts\":{\"deliveryAmt\":0,\"remoteDeliveryAmt\":0,\"prepaidDeliveryAmt\":0,\"prepaidRemoteDeliveryAmt\":0,\"payOnDeliveryAmt\":0,\"payOnRemoteDeliveryAmt\":0,\"alreadyPaidTotalDeliveryAmt\":0,\"totalDeliveryAmt\":0,\"totalPrepaidDeliveryAmt\":0},\"deliveryAmt\":0,\"remoteDeliveryAmt\":0,\"totalDeliveryAmt\":0},\"accumulation\":{\"accumulationAmt\":0},\"coupon\":{\"cartCouponDiscountAmt\":0,\"productCouponDiscountAmt\":0,\"productCouponDiscountAmounts\":[{\"orderProductNo\":0,\"couponDiscountAmt\":0}]}},\"after\":{\"order\":{\"payAmt\":0,\"accumulationPayAmt\":0,\"standardAmt\":0,\"immediateDiscountAmt\":0,\"additionalDiscountAmt\":0,\"remainingPgPayAmt\":0,\"remainingMainPayAmt\":0,\"freeGiftDiscountAmt\":0,\"externalPayAmt\":0,\"externalPayInfos\":[],\"mainPayAmt\":0},\"delivery\":{\"deliveryGroupAmounts\":{\"deliveryAmt\":0,\"remoteDeliveryAmt\":0,\"prepaidDeliveryAmt\":0,\"prepaidRemoteDeliveryAmt\":0,\"payOnDeliveryAmt\":0,\"payOnRemoteDeliveryAmt\":0,\"alreadyPaidTotalDeliveryAmt\":0,\"totalDeliveryAmt\":0,\"totalPrepaidDeliveryAmt\":0},\"deliveryAmt\":0,\"remoteDeliveryAmt\":0,\"totalDeliveryAmt\":0},\"accumulation\":{\"accumulationAmt\":0},\"coupon\":{\"cartCouponDiscountAmt\":0,\"productCouponDiscountAmt\":0,\"productCouponDiscountAmounts\":[{\"orderProductNo\":0,\"couponDiscountAmt\":0}]}},\"returnDelivery\":{\"returnDeliveryAmt\":0,\"returnRemoteDeliveryAmt\":0,\"processedDeliveryAmt\":0,\"prepaid\":true,\"totalPureReturnDeliveryAmt\":0,\"prepaidReturnDeliveryAmt\":0,\"prepaidReturnRemoteDeliveryAmt\":0,\"prepaidTotalReturnDeliveryAmt\":0,\"prepaidTotalPureReturnDeliveryAmt\":0,\"prepaidProcessedDeliveryAmt\":0,\"totalReturnDeliveryAmt\":0},\"exchangeDelivery\":{\"deliveryAmt\":0,\"remoteDeliveryAmt\":0,\"prepaidDeliveryAmt\":0,\"prepaidRemoteDeliveryAmt\":0,\"totalDeliveryAmt\":0,\"totalPrepaidDeliveryAmt\":0},\"deliveryAdjustAmt\":0,\"refundDeliveryAmt\":0,\"adjustedAmounts\":{\"payAmt\":0,\"mainPayAmt\":0,\"accumulationPayAmt\":0,\"additionalPayAmt\":0,\"externalPayAmt\":0,\"externalPayInfos\":[],\"complexRefundPgAmt\":0,\"complexRefundAccountAmt\":0,\"claimAmt\":0},\"productAdjustAmt\":0,\"returnDeliveryAdjustAmt\":0,\"exchangeDeliveryAdjustAmt\":0,\"initialDeliveryAmt\":0,\"refund\":{\"order\":{\"payAmt\":0,\"accumulationPayAmt\":0,\"standardAmt\":0,\"immediateDiscountAmt\":0,\"additionalDiscountAmt\":0,\"remainingPgPayAmt\":0,\"remainingMainPayAmt\":0,\"freeGiftDiscountAmt\":0,\"externalPayAmt\":0,\"externalPayInfos\":[],\"mainPayAmt\":0},\"delivery\":{\"deliveryGroupAmounts\":{\"deliveryAmt\":0,\"remoteDeliveryAmt\":0,\"prepaidDeliveryAmt\":0,\"prepaidRemoteDeliveryAmt\":0,\"payOnDeliveryAmt\":0,\"payOnRemoteDeliveryAmt\":0,\"alreadyPaidTotalDeliveryAmt\":0,\"totalDeliveryAmt\":0,\"totalPrepaidDeliveryAmt\":0},\"deliveryAmt\":0,\"remoteDeliveryAmt\":0,\"totalDeliveryAmt\":0},\"accumulation\":{\"accumulationAmt\":0},\"coupon\":{\"cartCouponDiscountAmt\":0,\"productCouponDiscountAmt\":0,\"productCouponDiscountAmounts\":[{\"orderProductNo\":0,\"couponDiscountAmt\":0}]}}},\"shipping\":{\"originalShippingNo\":0,\"shippingNo\":0,\"deliveryGroupNo\":0,\"deliveryTemplateNo\":0,\"deliveryType\":\"PARCEL_DELIVERY\",\"requiresShipping\":true,\"combined\":false,\"divided\":false,\"prepaid\":true,\"hasAdjustedExchangeDeliveryAmt\":false,\"address\":{\"zipCd\":\"\",\"address\":\"\",\"jibunAddress\":null,\"receiverCity\":null,\"receiverState\":null,\"name\":\"\",\"detailAddress\":null,\"contact1\":\"\",\"contact2\":null,\"mobileCountryCd\":null,\"customsIdNumber\":null,\"countryCd\":\"KR\",\"shippingEtcInfo\":null},\"invoiceNo\":null,\"deliveryCompanyType\":null,\"customsIdNumber\":null},\"exchangeShipping\":{\"originalShippingNo\":0,\"shippingNo\":0,\"deliveryGroupNo\":0,\"deliveryTemplateNo\":0,\"deliveryType\":\"PARCEL_DELIVERY\",\"requiresShipping\":true,\"combined\":false,\"divided\":false,\"prepaid\":true,\"address\":{\"zipCd\":\"\",\"address\":\"\",\"jibunAddress\":null,\"receiverCity\":null,\"receiverState\":null,\"name\":\"\",\"detailAddress\":null,\"contact1\":\"\",\"contact2\":null,\"mobileCountryCd\":null,\"customsIdNumber\":null,\"countryCd\":\"KR\",\"shippingEtcInfo\":null},\"deliveryAmt\":0,\"remoteDeliveryAmt\":0,\"returnDeliveryAmt\":0,\"receiverInputLater\":false},\"coupon\":{\"cartCoupon\":{\"couponNo\":1,\"couponIssueNo\":1,\"couponName\":\"쿠폰\",\"couponSubType\":\"NONE\",\"orderProductNo\":1,\"restores\":false},\"productCoupons\":[{\"couponNo\":1,\"couponIssueNo\":1,\"couponName\":\"쿠폰\",\"couponSubType\":\"NONE\",\"orderProductNo\":1,\"restores\":false}]},\"exchangeProduct\":{\"additionalDiscountAmt\":0},\"cancelProduct\":{\"adjustedAmt\":0},\"refundType\":\"ZERO_REFUND\",\"overflowsPgAmt\":false},\"additionalPayType\":null,\"additionalPayBankAccount\":null,\"additionalPayRemitter\":null,\"sellerPaysClaimedDelivery\":true,\"firstOrderOptionNo\":null,\"returnDeliveryCompanyTypeLabel\":null}],\"totalCount\":1}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/claims/{claimNo}/already-delivery",
+    "summary": "이미출고",
+    "description": "\n## 부가설명 및 특이사항\n옵션취소, 취소교환 신청된 클레임의 배송이 이미 출고된 경우 호출합니다.\n신청된 클레임을 철회하고, 배송정보를 저장하여 배송중 상태로 변경합니다.\n    ",
+    "tags": ["Claim"],
+    "parameters": [
+      {
+        "name": "claimNo",
+        "in": "path",
+        "description": "클레임 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "QUZjUHlHV0JtdUFrSWVyUmhnRUFTcUt1SzR3ckFRSk0"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/claims-claimNo-already-delivery-235042226"
+          },
+          "examples": {
+            "put-claims-no-already-delivery": {
+              "value": "{\"releaseYmd\":\"2020-01-01\",\"invoiceNo\":\"123456\",\"deliveryCompanyType\":\"CJ\"}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/claims/{claimNo}/approve",
+    "summary": "클레임 승인",
+    "description": "\n## 부가설명 및 특이사항\n클레임 신청을 승인하는 API 입니다.\n클레임 종류별로 이후 진행 단계가 상이하니, 아래 항목을 반드시 숙지해주세요.\n특히, 승인 즉시 환불이 되는 경우가 있으니 유의 바랍니다.\n\n - 반품\n   - 배송안함 상품 : API 호출에 성공하는 즉시 클레임이 완료(반품이 완료)됩니다. \n   - 그 외 상품 : API 호출에 성공하면, 클레임이 완료되지 않고 수거진행 상태가 됩니다.\n\n - 옵션 취소\n   - API 호출에 성공하는 즉시 클레임이 완료(옵션이 취소)됩니다.\n\n - 주문 취소\n   - API 호출에 성공하는 즉시 클레임이 완료(주문이 취소)됩니다.\n\n - 옵션 취소 교환\n   - API 호출에 성공하는 즉시 클레임이 완료(옵션이 교환)됩니다.\n\n - 반품 교환\n   - API 호출 성공 이후, 클레임이 완료되지 않고 수거 진행 상태가 됩니다.\n    ",
+    "tags": ["Claim"],
+    "parameters": [
+      {
+        "name": "claimNo",
+        "in": "path",
+        "description": "",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-mall-key"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/claims/{claimNo}/assign-return-invoice",
+    "summary": "반품 송장번호 할당",
+    "description": "\n## 부가설명 및 특이사항\n반품 송장번호를 할당하는 API 입니다.\n클레임이 반품, 반품교환인 경우만 사용 가능합니다.\n    ",
+    "tags": ["Claim"],
+    "parameters": [
+      {
+        "name": "claimNo",
+        "in": "path",
+        "description": "클레임 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "QUZjUHlHV0JtdUFrSWVyUmhnRUFTcUt1SzR3ckFRSk0"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/claims-claimNo-assign-return-invoice1153638030"
+          },
+          "examples": {
+            "put-claims-no-assign-return-invoice": {
+              "value": "{\"deliveryCompanyType\":\"CJ\",\"returnInvoiceNo\":\"\"}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/claims/{claimNo}/withdraw",
+    "summary": "클레임 철회",
+    "description": "\n## 부가설명 및 특이사항\n클레임을 철회하는 API 입니다.\n    ",
+    "tags": ["Claim"],
+    "parameters": [
+      {
+        "name": "claimNo",
+        "in": "path",
+        "description": "",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "QUZjUHlHV0JtdUFrSWVyUmhnRUFTcUt1SzR3ckFRSk0"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/claims/{orderNo}/exchange-infos",
+    "summary": "교환 전/후 정보 조회",
+    "description": "\n## 부가설명 및 특이사항\n교환 완료된 클레임의 전/후 옵션 정보를 반환합니다.\n\n - 철회된 클레임은 조회되지 않습니다.\n - 응답값 중, exchangedOrderCnt 는 `현재 상태` 기준입니다. (스냅샷 X)\n   - 교환출고 옵션 `전체`를 다시 클레임하는 경우는 exchangedOrderCnt 가 교환출고된 개수와 동일합니다. \n   - 교환출고 옵션의 일부를 다시 클레임하여 옵션이 쪼개지는 경우, exchangeOrderCnt 가 최초 교환출고된 개수와 달라질 수 있습니다.",
+    "tags": ["Claim"],
+    "parameters": [
+      {
+        "name": "orderNo",
+        "in": "path",
+        "description": "",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "QUZjUHlHV0JtdUFrSWVyUmhnRUFTcUt1SzR3ckFRSk0"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/claims-orderNo-exchange-infos-1914356139"
+            },
+            "examples": {
+              "get-claims-order-no-exchange-infos": {
+                "value": "[{\"claimNo\":1,\"claimedOrderProductOptionNo\":1234,\"exchangedOrderProductOptionNo\":5678,\"claimYmdt\":\"2024-12-17 00:00:00\",\"claimCompleteYmdt\":\"2024-12-24 12:34:56\",\"claimedMallProductNo\":1001,\"claimedMallOptionNo\":2222,\"claimedProductName\":\"난닝구\",\"claimedOptionName\":\"색상\",\"claimedOptionValue\":\"빨강 (100)\",\"claimedCnt\":1,\"exchangedMallProductNo\":1001,\"exchangedMallOptionNo\":3333,\"exchangedProductName\":\"난닝구\",\"exchangedOptionName\":\"색상\",\"exchangedOptionValue\":\"회색 (105)\",\"exchangedCnt\":2}]"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/option-cancels",
+    "summary": "옵션 취소 신청하기",
+    "description": "\n## 부가설명 및 특이사항\n옵션 취소 신청 API입니다.\n       ",
+    "tags": ["OptionCancel"],
+    "parameters": [
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-mall-key"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/option-cancels-1028891945"
+          },
+          "examples": {
+            "post-option-cancels": {
+              "value": "{\"orderNo\":\"202003141914010000\",\"orderOptionParams\":[{\"orderOptionNo\":1,\"claimCnt\":1,\"reasonType\":null,\"reasonDetail\":null}],\"responsibleObjectType\":\"SELLER\",\"sellerPaysClaimedDelivery\":true,\"reasonType\":null,\"reasonDetail\":null,\"refundBankAccount\":{\"bank\":\"KB\",\"account\":\"\",\"depositorName\":\"\",\"bankName\":\"국민은행\"},\"complexRefundAdjust\":null}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/option-cancels/sold-out",
+    "summary": "품절 취소처리하기",
+    "description": "\n## 부가설명 및 특이사항\n선택한 주문옵션을 품절 취소하고 금액을 환불하는 API입니다.\n\n### 특이사항\n이벤트 처리 방식으로 주문을 취소처리하는 API입니다.\n요청 완료 후 실제로 품절 취소되는데 일정 시간이 소요될 수 있습니다. \n       ",
+    "tags": ["OptionCancel"],
+    "parameters": [
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-mall-key"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/option-cancels-sold-out2041411915"
+          },
+          "examples": {
+            "post-option-cancels-sold-out": {
+              "value": "{\"orderOptionNos\":[1,2]}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/option-cancels/sold-out/set-option",
+    "summary": "세트옵션 품절취소처리하기",
+    "description": "\n## 부가설명 및 특이사항\n선택한 주문옵션의 세트구성옵션을 품절 취소하고 금액을 환불하는 API입니다.\n       ",
+    "tags": ["OptionCancel"],
+    "parameters": [
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-mall-key"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/option-cancels-sold-out-set-option1925829967"
+          },
+          "examples": {
+            "post-option-cancels-sold-out-set-option": {
+              "value": "{\"orderOptions\":[{\"orderOptionNo\":1,\"soldOutMallOptionNos\":[1,2]},{\"orderOptionNo\":2,\"soldOutMallOptionNos\":[1,2]}]}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/order-cancels",
+    "summary": "주문 취소하기",
+    "description": "\n## 부가설명 및 특이사항\n주문 취소 신청 API입니다.\n주문 취소 신청은 입금대기, 결제완료 상태에서 가능합니다.\n",
+    "tags": ["OrderCancel"],
+    "parameters": [
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-mall-key"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/order-cancels1915139160"
+          },
+          "examples": {
+            "post-order-cancels": {
+              "value": "{\"orderNo\":\"202003141914010000\",\"reasonType\":\"CHANGE_MIND\",\"reasonDetail\":\"\",\"responsibleObjectType\":\"SELLER\",\"refundType\":\"ZERO_REFUND\",\"refundBankAccount\":{\"bank\":null,\"account\":null,\"depositorName\":null,\"bankName\":\"\"}}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/return-exchanges",
+    "summary": "반품교환 신청",
+    "description": "\n## 부가설명 및 특이사항\n반품 교환을 신청하는 API입니다.\n배송안함 상품에는 사용할 수 없습니다.\n",
+    "tags": ["ReturnExchange"],
+    "parameters": [
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-mall-key"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/return-exchanges925138161"
+          },
+          "examples": {
+            "post-return-exchanges": {
+              "value": "{\"calculateParam\":{\"orderNo\":\"202001100000000001\",\"cancelOrderOptionNo\":1,\"cancelCnt\":1,\"exchangeProductNo\":1,\"exchangeOptionNo\":1,\"exchangeCnt\":1,\"responsibleObjectType\":\"BUYER\",\"sellerPaysClaimedDelivery\":false,\"productAdjustAmt\":0,\"returnDeliveryProposedAmt\":0,\"exchangeDeliveryProposedAmt\":0,\"returnWayType\":\"SELLER_COLLECT\",\"returnAddress\":{\"zipCd\":\"12312\",\"address\":\"test\",\"jibunAddress\":\"test\",\"receiverCity\":null,\"receiverState\":null,\"name\":\"hello\",\"detailAddress\":\"my address\",\"contact1\":\"01012341234\",\"contact2\":null,\"mobileCountryCd\":\"82\",\"customsIdNumber\":null,\"countryCd\":\"KR\",\"receiverFirstName\":null,\"receiverLastName\":null},\"exchangeAddress\":{\"zipCd\":\"12312\",\"address\":\"test\",\"jibunAddress\":\"test\",\"receiverCity\":null,\"receiverState\":null,\"name\":\"hello\",\"detailAddress\":\"my address\",\"contact1\":\"01012341234\",\"contact2\":null,\"mobileCountryCd\":\"82\",\"customsIdNumber\":null,\"countryCd\":\"KR\",\"receiverFirstName\":null,\"receiverLastName\":null},\"refundType\":\"PG\",\"complexRefundAdjust\":null},\"invoiceNo\":\"\",\"deliveryCompanyType\":null,\"additionalPayType\":null,\"reasonDetail\":\"test\",\"reasonType\":\"CHANGE_MIND\",\"refundBankAccount\":null,\"additionalPayBankAccount\":null,\"additionalPayRemitter\":null,\"productAdjustReason\":null,\"returnDeliveryAdjustReason\":\"test\",\"exchangeDeliveryAdjustReason\":\"test\",\"returnExchangeImages\":[],\"returnDeliveryNote\":null,\"exchangeDeliveryNote\":null,\"purchaserInputs\":[{\"inputLabel\":\"test label\",\"inputValue\":\"test value\"}]}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/return-exchanges/{no}/collect",
+    "summary": "반품교환 수거완료",
+    "description": "\n## 부가설명 및 특이사항\n반품교환에서 클레임된 상품의 수거를 완료처리하는 API입니다.\n",
+    "tags": ["ReturnExchange"],
+    "parameters": [
+      {
+        "name": "no",
+        "in": "path",
+        "description": "",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "QUZjUHlHV0JtdUFrSWVyUmhnRUFTcUt1SzR3ckFRSk0"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/return-exchanges-no-collect-1943409195"
+          },
+          "examples": {
+            "put-return-exhcnages-no-collect": {
+              "value": "{\"restoresStock\":true}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/return-exchanges/{no}/confirm-deposit",
+    "summary": "반품교환 추가결제 입금확인",
+    "description": "\n## 부가설명 및 특이사항\n추가 결제 내역을 입금 확인처리 합니다.\n       ",
+    "tags": ["ReturnExchange"],
+    "parameters": [
+      {
+        "name": "no",
+        "in": "path",
+        "description": "",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-mall-key"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/return-exchanges-no-confirm-deposit934552446"
+          },
+          "examples": {
+            "put-return-exchanges-no-confirm-deposit": {
+              "value": "{\"additionalPayBankAccount\":{\"bank\":\"KB\",\"account\":\"136584\",\"depositorName\":\"와쳡맨\",\"bankName\":\"국민은행\"},\"additionalPayRemitter\":\"홍길맨\"}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/returns",
+    "summary": "반품신청하기",
+    "description": "\n## 부가설명 및 특이사항\n반품 신청 API입니다.\n       ",
+    "tags": ["Return"],
+    "parameters": [
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-mall-key"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/returns209153868"
+          },
+          "examples": {
+            "post-returns": {
+              "value": "{\"claimImageUrls\":null,\"claimReasonType\":\"CHANGE_MIND\",\"claimReasonDetail\":null,\"bankAccountInfo\":null,\"saveBankAccountInfo\":false,\"returnAddress\":{\"receiverName\":\"\",\"receiverZipCd\":\"\",\"receiverAddress\":\"\",\"receiverJibunAddress\":\"\",\"receiverDetailAddress\":\"\",\"receiverCity\":null,\"receiverState\":null,\"receiverContact1\":\"\",\"receiverContact2\":\"\",\"receiverMobileCountryCd\":\"82\",\"customsIdNumber\":null,\"countryCd\":null,\"deliveryMemo\":\"\",\"receiverFirstName\":null,\"receiverLastName\":null},\"returnWayType\":\"SELLER_COLLECT\",\"claimedProductOptions\":[{\"orderProductOptionNo\":1,\"productCnt\":1,\"reasonType\":null,\"reasonDetail\":null}],\"deliveryCompanyType\":\"CJ\",\"invoiceNo\":\"12312312\",\"responsibleObjectType\":\"BUYER\",\"complexRefundRequest\":null,\"refundAdjustRequestAmt\":null,\"refundAdjustReason\":null,\"isRefundAdjust\":null}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/returns/{no}/collect",
+    "summary": "반품수거 완료하기",
+    "description": "\n## 부가설명 및 특이사항\n반품 수거 완료처리를 위한 API입니다.\n       ",
+    "tags": ["Return"],
+    "parameters": [
+      {
+        "name": "no",
+        "in": "path",
+        "description": "클레임 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-mall-key"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/returns-no-collect-880281392"
+          },
+          "examples": {
+            "put-returns-no-collect": {
+              "value": "{\"restoreStockOrderOptionNos\":[1,2],\"refundOnHold\":true,\"refundHoldProposedAmt\":2000,\"refundOnHoldReason\":\"테스트\"}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  }
+]

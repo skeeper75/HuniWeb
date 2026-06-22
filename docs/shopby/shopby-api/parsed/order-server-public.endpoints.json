@@ -1,0 +1,2806 @@
+[
+  {
+    "method": "GET",
+    "path": "/accounts/orders",
+    "summary": "무통장 미입금 주문 리스트 조회",
+    "description": "PG연동을 하지 않고 쇼핑몰의 계좌로 입금을 받는 무통장입금 주문에 대한 주문 조회입니다.",
+    "tags": ["Orders"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json;charset=UTF-8": {
+            "schema": {
+              "$ref": "#/components/schemas/accounts-orders-1300752720"
+            },
+            "examples": {
+              "get-account-orders": {
+                "value": "[{\"orderNo\":\"1\",\"ordererName\":\"홍길동\",\"ordererEmail\":\"sungjun.cho@nhn.com\",\"ordererContact\":\"010-0000-4870\",\"registerYmdt\":\"2025-10-27T11:17:26.639549327\",\"remitterName\":\"-\",\"account\":\"-\",\"bankName\":\"-\",\"bankAmt\":0,\"products\":[{\"productName\":\"TEST_PRODUCT|TEST_OPTION0: option val\"}]}]"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/accounts/orders/confirmation",
+    "summary": "무통장 입금 확인",
+    "description": "무통장 입금 확인",
+    "tags": ["Orders"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/accounts-orders-confirmation-1567762679"
+          },
+          "examples": {
+            "put-account-orders-confirmation": {
+              "value": "[{\"orderNo\":\"123456789\"}]"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json;charset=UTF-8": {
+            "schema": {
+              "$ref": "#/components/schemas/accounts-orders-confirmation1583574419"
+            },
+            "examples": {
+              "put-account-orders-confirmation": {
+                "value": "[{\"orderNo\":\"2020042100000001\",\"result\":true,\"description\":\"OK\"}]"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/accounts/orders/{orderNo}",
+    "summary": "무통장 미입금 주문 조회",
+    "description": "무통장 미입금 주문 조회",
+    "tags": ["Orders"],
+    "parameters": [
+      {
+        "name": "orderNo",
+        "in": "path",
+        "description": "주문번호^|2020042100000001",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json;charset=UTF-8": {
+            "schema": {
+              "$ref": "#/components/schemas/accounts-orders-orderNo-1794504581"
+            },
+            "examples": {
+              "get-account-orders-order-no": {
+                "value": "{\"orderNo\":\"1\",\"ordererName\":\"홍길동\",\"ordererEmail\":\"sungjun.cho@nhn.com\",\"ordererContact\":\"010-0000-4870\",\"registerYmdt\":\"2025-10-27T11:17:22.160532135\",\"remitterName\":\"-\",\"account\":\"-\",\"bankName\":\"-\",\"bankAmt\":0,\"products\":[{\"productName\":\"TEST_PRODUCT|TEST_OPTION0: option val\"}]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/cart",
+    "summary": "장바구니 가져오기",
+    "description": "\n## 부가설명 및 특이사항\n장바구니를 조회하는 API 입니다.\n\n조회기간은 최대 3개월까지 설정 가능합니다.",
+    "tags": ["Cart"],
+    "parameters": [
+      {
+        "name": "memberNos",
+        "in": "query",
+        "description": "회원 번호 리스트^|1,2,3",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "searchDateType",
+        "in": "query",
+        "description": "[개발중] 날짜 검색 조건 (REGISTER_YMDT, UPDATE_YMDT)^|REGISTER_YMDT",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "startYmdt",
+        "in": "query",
+        "description": "조회 시작일시^|2025-10-24 11:17:29",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "endYmdt",
+        "in": "query",
+        "description": "조회 종료일시^|2025-10-27 11:17:29",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "groupId",
+        "in": "query",
+        "description": "장바구니 그룹 아이디^|cartGroupId",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "page",
+        "in": "query",
+        "description": "페이지 번호^|1",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "size",
+        "in": "query",
+        "description": "페이지당 노출 개수(최대 200)^|20",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/cart-1890208080"
+            },
+            "examples": {
+              "get-carts": {
+                "value": "{\"totalCount\":1,\"contents\":[{\"cartNo\":0,\"memberNo\":0,\"mallProductNo\":0,\"mallOptionNo\":0,\"orderOptionType\":\"NORMAL_OPTION\",\"paymentPeriodType\":\"NORMAL\",\"orderCnt\":0,\"purchaserInputs\":[{\"inputNo\":null,\"inputLabel\":null,\"inputValue\":null,\"required\":null}],\"registerYmdt\":\"2025-10-27T11:17:28.270842981\",\"updateYmdt\":\"2025-10-27T11:17:28.270877417\",\"groupId\":\"cartGroupId\"}]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/orders",
+    "summary": "주문 조회하기 v1.1",
+    "description": "\n## 부가설명 및 특이사항\n주문 리스트 조회하는 API 입니다.\n\n응답 데이터는 주문번호의 내림차순으로 정렬됩니다.\n\n### v1.0\n페이징 처리를 위한 totalCount를 제공하지 않습니다. \n응답은 리스트 형식으로 되어 있습니다. 아래 내용 참고 바랍니다. \n```\n[\n {\n \"orderNo\": \"\",\n ...\n },\n ...\n]\n```\n\n### v1.1\n페이징 처리를 위한 totalCount를 제공합니다.\n주문 리스트는 contents 파라미터에 포함됩니다.\n자세한 정보는 Responses 항목 참고 바랍니다.",
+    "tags": ["Orders"],
+    "parameters": [
+      {
+        "name": "startYmd",
+        "in": "query",
+        "description": "시작일(YYYY-MM-DD) [default: 3개월 전]^|2020-12-30",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "endYmd",
+        "in": "query",
+        "description": "종료일(YYYY-MM-DD) [default: 오늘]^|2020-12-30",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "startYmdt",
+        "in": "query",
+        "description": "종료일시(YYYY-MM-DD HH:mm:ss) (startYmd 보다 우선순위 높음) [default: 3개월 전]^|2020-12-30 00:00:00",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "endYmdt",
+        "in": "query",
+        "description": "종료일시(YYYY-MM-DD HH:mm:ss) (endYmd 보다 우선순위 높음) [default: 오늘]^|2020-12-30 00:00:00",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "orderOptionNos",
+        "in": "query",
+        "description": "주문 옵션 번호 리스트^|360001,360002",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "orderRequestTypes",
+        "in": "query",
+        "description": "주문상태 타입 (DEPOSIT_WAIT: Deposit Wait, PAY_DONE: Pay Done, PRODUCT_PREPARE: Product Prepare, DELIVERY_PREPARE: Delivery Prepare, DELIVERY_ING: Delivering, DELIVERY_DONE: Delivery Done, BUY_CONFIRM: Buy Confirm, CANCEL_DONE: Cancel Done, RETURN_DONE: Return Done, EXCHANGE_DONE: Exchange Done, CANCEL_PROCESSING: 취소처리중, RETURN_PROCESSING: 반품처리중, EXCHANGE_WAITING: 교환대기중, EXCHANGE_PROCESSING: 교환처리중)^|DEPOSIT_WAIT,CANCEL_DONE",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "searchDateType",
+        "in": "query",
+        "description": "조회하려는 주문일시 유형 [default: ORDER_START] (ORDER_START: 주문 발생일, PAY_DONE: 입금 확인일, PRODUCT_PREPARE: 주문 접수일, DELIVERY_PREPARE: 출고 준비일, DELIVERY_ING: 출고일, DELIVERY_DONE: 배송 완료일, BUY_CONFIRM: 구매확정일, STATUS_CHANGE: 최종 상태 변경일)^|ORDER_START",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "memberNo",
+        "in": "query",
+        "description": "회원번호^|1",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "searchType",
+        "in": "query",
+        "description": "검색 유형(주문번호, 상품번호) (ALL, ORDER_NO, MALL_PRODUCT_NO)^|ALL",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "searchValues",
+        "in": "query",
+        "description": "검색 값^|11111111,2222222",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "deliveryCompanyType",
+        "in": "query",
+        "description": "택배사 타입 (CJ: CJ Logistics, POST: Post Office, HANJIN: Hanjin Transportation, GTX: GTX LOGIS, LOTTE: Lotte Global Logistics Corporation, KGB: KGB LOGIS, LOGEN: Logen, GSI: gsi Express, KGL: KG LOGIS, INTRAS: INTRAS, UPS: UPS, CHUNIL: Chunil Express, KDEXP: Kyungdong Express, HDEXP: Hapdong Express, ILYANG: Ilyang Logis, POST_EMS: Post Office EMS, DAESIN: daesin, CVS: CVS Convenience Shop Delivery Service, DHL: DHL, FEDEX: FEDEX, GSM: GSM International Courier, WARPEX: WarpEx, WIZWA: WIZWA, ACI: ACI Express, PANTOS: LX Pantos, CJ_INTERNATIONAL: CJ Logistics(international courier), TNT: TNT, CU: CU Convenience Shop Delivery Service, KUNYOUNG: Geonyoung Express, LOTTE_INTERNATIONAL: Lotte Global Logistics Corporation(international courier), HONAM: Honam Express, HANIPS: Hanui Sarang Express, IPARCEL: i-Parcel, SLX: SLX Express, USPS: USPS, WONDERS: wonders quick, REGISTPOST: Regist Post, DHLDE: DHL(germany), EZUSA: EZUSA, SWGEXP: Sungwon Global, DAEWOON: Daewoon Global, DODOFLEX: dodoFlex, NH_LOGIS: NongHyup Logis, UFO: UFO, TODAY_PICKUP: Today Pickup, QEXPRESS: Q Express, PINGPONG: PingPong, CR_LOGITECH: CR Logitech, TODAY: Today, SELLUV: Selluv, EXMATE: EXMATE, WINION_LOGIS: Winion Logistics, ETC: ETC)^|CJ",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "ordererContact1",
+        "in": "query",
+        "description": "주문자 연락처^|010-0000-0000",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "receiverContact1",
+        "in": "query",
+        "description": "수령자 연락처^|010-0000-0000",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "shippingAreaType",
+        "in": "query",
+        "description": "배송구분 (PARTNER_SHIPPING_AREA: Partner Delivery, MALL_SHIPPING_AREA: Shipping Mall Delivery)^|PARTNER_SHIPPING_AREA",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "payType",
+        "in": "query",
+        "description": "결제수단 (CREDIT_CARD: Credit Card, ACCOUNT: Deposit without bankbook, MOBILE: Mobile payment, REALTIME_ACCOUNT_TRANSFER: Real-time bank transfer, VIRTUAL_ACCOUNT: Virtual account, GIFT: Gift card, ATM: ATM, PAYCO: PAYCO, ZERO_PAY: Zero payment, ACCUMULATION: Accumulation, PHONE_BILL: Phone payment, POINT: Point payment, YPAY: Yello Pay, KPAY: K Pay, PAYPIN: Paypin, INIPAY: INIPay, PAYPAL: PAYPAL, STRIPE: STRIPE, NAVER_PAY: Naver Pay, KAKAO_PAY: Kakao Pay, NAVER_EASY_PAY: Naver Pay, SAMSUNG_PAY: Samsung Pay, CHAI: Chai, TOSS_PAY: Toss Pay, SK_PAY: SK Pay, APPLE_PAY: Apple Pay, LPAY: L Pay, ESCROW_REALTIME_ACCOUNT_TRANSFER: Real-time bank transfer - Escrow, ESCROW_VIRTUAL_ACCOUNT: Virtual account - Escrow, RENTAL: Rental payment, VERITRANS_CARD: Veritrans CreditCard, TOASTCAM: ToastCam, UNION_PAY: UnionPay, ALIPAY: AliPay Plus, WECHAT_PAY: WeChat Pay, PINPAY: Pin Pay, EXTERNAL_PAY: 외부 결제 전액 사용, HMG_PAY: HMG pay, APP_CARD: App Card, PAY_PAY: Pay Pay, E_CONTEXT: E Context, HAPPY_VOUCHER: National Happiness Card, ETC: Other payment methods)^|CREDIT_CARD",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "pageNumber",
+        "in": "query",
+        "description": "페이지 번호 (1 이상) [default: 1]^|1",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "pageSize",
+        "in": "query",
+        "description": "페이지 크기(최대 200) [default: 20]^|20",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "partnerNo",
+        "in": "query",
+        "description": "파트너 번호^|1",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "desc",
+        "in": "query",
+        "description": "정렬 기준 (true: 내림차순, false: 오름차순)^|true",
+        "required": false,
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.1",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.1"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json;charset=UTF-8": {
+            "schema": {
+              "$ref": "#/components/schemas/orders1248582396"
+            },
+            "examples": {
+              "get-orders": {
+                "value": "{\"totalCount\":0,\"contents\":[{\"orderNo\":\"\",\"orderYmdt\":\"\",\"mallNo\":0,\"ordererName\":\"\",\"ordererContact1\":null,\"ordererContact2\":null,\"orderMemo\":\"\",\"firstCartCouponDiscountAmt\":0,\"firstPayAmt\":null,\"firstSubPayAmt\":null,\"firstExternalPayAmt\":0,\"firstExternalPayInfos\":[],\"lastCartCouponDiscountAmt\":0,\"lastPayAmt\":null,\"lastSubPayAmt\":null,\"lastExternalPayAmt\":0,\"lastExternalPayInfos\":[],\"currencyCode\":\"KRW\",\"exchangeRate\":null,\"extraData\":null,\"memberAdditionalInfoJson\":\"\",\"trackingKey\":\"\",\"memberNo\":0,\"platformType\":\"PC\",\"ordererEmail\":null,\"orderSheetInfo\":{\"orderSheetId\":\"\",\"payProducts\":[{\"productNo\":0,\"optionNo\":0,\"orderCnt\":0,\"optionInputs\":[],\"baseMallProductNo\":0,\"recurringPaymentDelivery\":{\"cycleType\":\"MONTH\",\"cycle\":0,\"date\":0,\"dayOfWeek\":\"MONDAY\"},\"recurringPaymentLastRound\":0,\"recurringPaymentNo\":0,\"rentalInfos\":[],\"isExtraProduct\":false}],\"applyCoupon\":{\"cartCouponIssueNo\":0,\"promotionCode\":\"\",\"cartCouponLimitPayType\":\"CREDIT_CARD\",\"productCoupons\":[],\"hasCouponIssueNo\":false,\"cartCouponUseKey\":{\"couponIssueNo\":0,\"promotionCode\":\"\"}}},\"payType\":\"CREDIT_CARD\",\"pgType\":\"DUMMY\",\"channelType\":\"\",\"firstPayYmdt\":\"2025-10-27 11:17:40\",\"bankInfo\":{\"bank\":\"ANONYMOUS\",\"bankCode\":\"\",\"bankName\":\"\",\"account\":\"\",\"bankAmt\":0,\"depositAmt\":0,\"depositYmdt\":\"\",\"remitterName\":\"\",\"depositorName\":\"\",\"paymentExpirationYmdt\":\"\"},\"firstImmediateDiscountAmt\":0,\"firstAdditionalDiscountAmt\":0,\"firstProductCouponDiscountAmt\":0,\"lastImmediateDiscountAmt\":0,\"lastAdditionalDiscountAmt\":0,\"lastProductCouponDiscountAmt\":0,\"deliveryGroups\":[{\"deliveryNo\":0,\"invoiceNo\":\"\",\"invoiceRegisterYmdt\":\"\",\"deliveryTemplateGroupNo\":0,\"deliveryTemplateNo\":0,\"deliveryConditionNo\":0,\"deliveryAmt\":null,\"returnDeliveryAmt\":null,\"remoteDeliveryAmt\":null,\"adjustedAmt\":null,\"deliveryCompanyType\":\"CJ\",\"receiverName\":\"\",\"countryCd\":\"AX\",\"receiverZipCd\":\"\",\"receiverAddress\":null,\"receiverJibunAddress\":null,\"receiverDetailAddress\":null,\"receiverState\":null,\"receiverCity\":null,\"receiverContact1\":null,\"receiverContact2\":null,\"deliveryMemo\":\"\",\"deliveryType\":\"PARCEL_DELIVERY\",\"shippingMethodType\":\"\",\"customsIdNumber\":\"\",\"deliveryAmtInAdvanceYn\":\"\",\"deliveryYn\":\"\",\"combineDeliveryYn\":\"\",\"divideDeliveryYn\":\"\",\"originalDeliveryNo\":0,\"usesShippingInfoLaterInput\":false,\"orderProducts\":[],\"encryptedShippingNo\":\"\",\"deliveryCombinationYn\":\"\"}],\"firstMainPayAmt\":null,\"lastMainPayAmt\":null,\"memberId\":\"\",\"oauthIdNo\":\"\",\"cartCouponIssueNo\":0,\"firstTotalDiscountAmt\":0,\"lastTotalDiscountAmt\":0,\"payTypeLabel\":\"\",\"cashReceiptIssueNo\":\"\",\"cashReceiptIssueYmdt\":\"\",\"cashReceiptStatus\":\"\",\"taxInvoiceIssueNo\":\"\",\"taxInvoiceIssueYmdt\":\"\",\"taxInvoiceStatus\":\"\",\"ip\":\"\",\"paymentInfo\":{\"payType\":\"CREDIT_CARD\",\"cardInfo\":{\"cardCompany\":\"ANONYMOUS\",\"cardCode\":\"\",\"cardName\":\"\",\"approveYmdt\":\"\",\"cardNo\":\"\",\"cardApprovalNumber\":\"\",\"noInterest\":false,\"installmentPeriod\":0,\"cardAmt\":null},\"bankInfo\":{\"bank\":\"ANONYMOUS\",\"bankCode\":\"\",\"bankName\":\"\",\"account\":\"\",\"bankAmt\":0,\"depositAmt\":0,\"depositYmdt\":\"\",\"remitterName\":\"\",\"depositorName\":\"\",\"paymentExpirationYmdt\":\"\"},\"naverPayInfo\":{\"paymentMeans\":\"\",\"paymentDueDate\":\"\",\"paymentNumber\":\"\",\"orderDiscountAmount\":null,\"generalPaymentAmount\":null,\"naverMileagePaymentAmount\":null,\"chargeAmountPaymentAmount\":null,\"checkoutAccumulationPaymentAmount\":null,\"orderType\":\"\",\"payLocationType\":\"\",\"paymentCoreType\":\"\",\"payLaterPaymentAmount\":null},\"cashAuthNo\":null,\"cashNo\":null,\"tradeNo\":null,\"escrowYn\":\"N\",\"payAmt\":0,\"sellerCouponAmt\":0,\"pgCouponAmt\":0,\"cardCouponAmt\":null,\"pointAmt\":0,\"taxType\":null,\"mobileInfo\":null,\"rentalInfo\":{\"rentalPeriod\":1,\"monthlyRentalAmount\":1},\"complexPayInfo\":{\"extraPayAmt\":0,\"mainPayAmt\":0},\"recurringPaymentDate\":\"2025-10-27\"},\"firstDeliveryAmt\":0,\"lastDeliveryAmt\":0,\"cashReceiptIssued\":false,\"taxInvoiceIssued\":false}]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/orders/cash-receipt",
+    "summary": "현금영수증 발행결과 업데이트",
+    "description": "## 부가설명 및 특이사항\n현금영수증 발행 결과를 업데이트하는 API 입니다.",
+    "tags": ["Orders"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/orders-cash-receipt1742593779"
+          },
+          "examples": {
+            "update-cash-receipt-issuance-result": {
+              "value": "[{\"orderNo\":\"202308031057170048\",\"cashReceiptIssueNo\":\"1782628783\",\"sendState\":\"31\"}]"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/orders/confirm",
+    "summary": "구매확정 상태 변경 요청하기",
+    "description": "\n## 부가설명 및 특이사항\n입력한 optionList의 상태를 구매확정으로 변경하는 API 입니다.\n\nBody엔 orderOptionNo 리스트를 입력합니다. <br /> ex) [1, 2, 3]\n\n서비스 어드민 권한으로만 호출 가능합니다.\n\n요청한 옵션 중 하나라도 실패하면 나머지 옵션도 변경되지 않습니다.\n\n실패한 첫 번째 옵션 번호는 에러 메시지에서 확인할 수 있습니다.\n",
+    "tags": ["Orders"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/orders-prepare-delivery486549215"
+          },
+          "examples": {
+            "put-orders-confirm-purchase": {
+              "value": "[1]"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/orders/deliveries",
+    "summary": "주문 조회하기 (배송번호 기준)",
+    "description": "\n## 부가설명 및 특이사항\n배송번호 기준 주문 리스트 조회하는 API 입니다.\n\n주문 리스트는 contents 파라미터에 포함됩니다.\n자세한 정보는 Responses 항목 참고 바랍니다.",
+    "tags": ["Orders"],
+    "parameters": [
+      {
+        "name": "startYmd",
+        "in": "query",
+        "description": "시작일(YYYY-MM-DD)^|2020-12-30",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "endYmd",
+        "in": "query",
+        "description": "종료일(YYYY-MM-DD)^|2020-12-30",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "startYmdt",
+        "in": "query",
+        "description": "종료일시(YYYY-MM-DD HH:mm:ss) (startYmd 보다 우선순위 높음)^|2020-12-30 00:00:00",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "endYmdt",
+        "in": "query",
+        "description": "종료일시(YYYY-MM-DD HH:mm:ss) (endYmd 보다 우선순위 높음)^|2020-12-30 00:00:00",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "orderRequestTypes",
+        "in": "query",
+        "description": "주문상태 타입 (DEPOSIT_WAIT: Deposit Wait, PAY_DONE: Pay Done, PRODUCT_PREPARE: Product Prepare, DELIVERY_PREPARE: Delivery Prepare, DELIVERY_ING: Delivering, DELIVERY_DONE: Delivery Done, BUY_CONFIRM: Buy Confirm, CANCEL_DONE: Cancel Done, RETURN_DONE: Return Done, EXCHANGE_DONE: Exchange Done, CANCEL_PROCESSING: 취소처리중, RETURN_PROCESSING: 반품처리중, EXCHANGE_WAITING: 교환대기중, EXCHANGE_PROCESSING: 교환처리중)^|DEPOSIT_WAIT,CANCEL_DONE",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "searchDateType",
+        "in": "query",
+        "description": "조회하려는 주문일시 유형 (ORDER_START: 주문 발생일, PAY_DONE: 입금 확인일, PRODUCT_PREPARE: 주문 접수일, DELIVERY_PREPARE: 출고 준비일, DELIVERY_ING: 출고일, DELIVERY_DONE: 배송 완료일, BUY_CONFIRM: 구매확정일, STATUS_CHANGE: 최종 상태 변경일)^|ORDER_START",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "memberNo",
+        "in": "query",
+        "description": "회원번호^|1",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "searchType",
+        "in": "query",
+        "description": "검색 유형(배송번호, 주문번호, 상품번호) (ALL, DELIVERY_NO, ORDER_NO, MALL_PRODUCT_NO, ORDER_OPTION_NO)^|ALL",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "searchValues",
+        "in": "query",
+        "description": "검색 값^|11111111,2222222",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "excludeOptionNos",
+        "in": "query",
+        "description": "검색 시 제외할 주문옵션번호^|11111111,2222222",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "excludeDeliveryNos",
+        "in": "query",
+        "description": "검색 시 제외할 배송번호^|11111111,2222222",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "deliveryCompanyType",
+        "in": "query",
+        "description": "택배사 타입 (CJ: CJ Logistics, POST: Post Office, HANJIN: Hanjin Transportation, GTX: GTX LOGIS, LOTTE: Lotte Global Logistics Corporation, KGB: KGB LOGIS, LOGEN: Logen, GSI: gsi Express, KGL: KG LOGIS, INTRAS: INTRAS, UPS: UPS, CHUNIL: Chunil Express, KDEXP: Kyungdong Express, HDEXP: Hapdong Express, ILYANG: Ilyang Logis, POST_EMS: Post Office EMS, DAESIN: daesin, CVS: CVS Convenience Shop Delivery Service, DHL: DHL, FEDEX: FEDEX, GSM: GSM International Courier, WARPEX: WarpEx, WIZWA: WIZWA, ACI: ACI Express, PANTOS: LX Pantos, CJ_INTERNATIONAL: CJ Logistics(international courier), TNT: TNT, CU: CU Convenience Shop Delivery Service, KUNYOUNG: Geonyoung Express, LOTTE_INTERNATIONAL: Lotte Global Logistics Corporation(international courier), HONAM: Honam Express, HANIPS: Hanui Sarang Express, IPARCEL: i-Parcel, SLX: SLX Express, USPS: USPS, WONDERS: wonders quick, REGISTPOST: Regist Post, DHLDE: DHL(germany), EZUSA: EZUSA, SWGEXP: Sungwon Global, DAEWOON: Daewoon Global, DODOFLEX: dodoFlex, NH_LOGIS: NongHyup Logis, UFO: UFO, TODAY_PICKUP: Today Pickup, QEXPRESS: Q Express, PINGPONG: PingPong, CR_LOGITECH: CR Logitech, TODAY: Today, SELLUV: Selluv, EXMATE: EXMATE, WINION_LOGIS: Winion Logistics, ETC: ETC)^|CJ",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "assignsInvoice",
+        "in": "query",
+        "description": "송장할당여부^|false",
+        "required": false,
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      {
+        "name": "includeNoneDeliveryCompanyType",
+        "in": "query",
+        "description": "택배사가 입력되지 않은 주문 포함 여부 (택배사를 조회할 때 적용됨)^|false",
+        "required": false,
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      {
+        "name": "partnerNo",
+        "in": "query",
+        "description": "파트너 번호^|0",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "pageNumber",
+        "in": "query",
+        "description": "페이지 번호 (1 이상)^|1",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "pageSize",
+        "in": "query",
+        "description": "페이지 크기(최대 200)^|20",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json;charset=UTF-8": {
+            "schema": {
+              "$ref": "#/components/schemas/orders-deliveries1896881641"
+            },
+            "examples": {
+              "get-orders-deliveries": {
+                "value": "{\"totalCount\":0,\"contents\":[{\"deliveryNo\":0,\"invoiceNo\":\"\",\"invoiceRegisterYmdt\":\"\",\"deliveryTemplateGroupNo\":0,\"deliveryTemplateNo\":0,\"deliveryConditionNo\":0,\"deliveryAmt\":null,\"returnDeliveryAmt\":null,\"remoteDeliveryAmt\":null,\"adjustedAmt\":null,\"deliveryCompanyType\":\"CJ\",\"receiverName\":\"\",\"countryCd\":\"AX\",\"receiverZipCd\":\"\",\"receiverAddress\":null,\"receiverJibunAddress\":null,\"receiverDetailAddress\":null,\"receiverCity\":null,\"receiverState\":null,\"shippingEtcInfo\":{\"receiverFirstName\":\"\",\"receiverLastName\":\"\",\"orderAdditionalInfo\":\"\"},\"receiverContact1\":null,\"receiverContact2\":null,\"deliveryMemo\":\"\",\"deliveryType\":\"PARCEL_DELIVERY\",\"shippingMethodType\":\"\",\"customsIdNumber\":\"\",\"deliveryAmtInAdvanceYn\":\"\",\"deliveryYn\":\"\",\"combineDeliveryYn\":\"\",\"divideDeliveryYn\":\"\",\"deliveryCombinationYn\":\"\",\"originalDeliveryNo\":0,\"orders\":[{\"orderNo\":\"\",\"orderYmdt\":\"\",\"mallNo\":0,\"ordererName\":\"\",\"ordererContact1\":null,\"ordererContact2\":null,\"orderMemo\":\"\",\"firstCartCouponDiscountAmt\":null,\"firstPayAmt\":null,\"firstSubPayAmt\":null,\"firstExternalPayAmt\":null,\"firstExternalPayInfos\":[],\"lastCartCouponDiscountAmt\":null,\"lastPayAmt\":null,\"lastSubPayAmt\":null,\"lastExternalPayAmt\":null,\"lastExternalPayInfos\":[],\"currencyCode\":\"KRW\",\"exchangeRate\":null,\"extraData\":null,\"memberAdditionalInfoJson\":\"\",\"trackingKey\":\"\",\"memberNo\":0,\"platformType\":\"PC\",\"ordererEmail\":null,\"orderSheetInfo\":{\"orderSheetId\":\"\",\"payProducts\":[{\"productNo\":0,\"optionNo\":0,\"orderCnt\":0,\"optionInputs\":[],\"baseMallProductNo\":0,\"recurringPaymentDelivery\":{\"cycleType\":\"MONTH\",\"cycle\":0,\"date\":0,\"dayOfWeek\":\"MONDAY\"},\"recurringPaymentLastRound\":0,\"recurringPaymentNo\":0,\"rentalInfos\":[],\"isExtraProduct\":false}],\"applyCoupon\":{\"cartCouponIssueNo\":0,\"promotionCode\":\"\",\"cartCouponLimitPayType\":\"CREDIT_CARD\",\"productCoupons\":[],\"hasCouponIssueNo\":false,\"cartCouponUseKey\":{\"couponIssueNo\":0,\"promotionCode\":\"\"}}},\"payType\":\"CREDIT_CARD\",\"pgType\":\"DUMMY\",\"channelType\":\"\",\"orderProducts\":[{\"orderProductNo\":0,\"mallProductNo\":0,\"productName\":\"\",\"productNameEn\":\"\",\"productManagementCd\":\"\",\"imageUrl\":\"\",\"hsCode\":\"\",\"firstProductCouponDiscountAmt\":null,\"lastProductCouponDiscountAmt\":null,\"orderProductOptions\":[],\"productCouponIssueNo\":0,\"taxType\":\"DUTY\"}],\"firstMainPayAmt\":null,\"lastMainPayAmt\":null,\"memberId\":\"\",\"oauthIdNo\":\"\",\"cartCouponIssueNo\":0}],\"usesShippingInfoLaterInput\":false,\"encryptedShippingNo\":\"\"}]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/orders/delivery",
+    "summary": "상품준비중 상태 목록을 배송중 상태로 변경하기",
+    "description": "\n## 부가설명 및 특이사항\n\n입력한 '상품준비중 optionList'의 상태를 '배송중'으로 변경하는 API 입니다\n\nAPI 를 통해 '상품준비중→배송중'으로 변경 요청 시\n\n시스템상으로는 '상품준비중→배송준비중→배송중'으로 변경됩니다.\n\nAPI 요청 시 '배송준비중'으로 변경되며, alpha 서버에서는 30분 간격 / real 서버에서는 1분 간격으로 요청 건을 수집하여 '배송중'으로 일괄 변경처리합니다.\n\n'배송중' 처리 시까지 시간차가 발생할 수 있습니다\n\n요청한 옵션 중 하나라도 실패하면 나머지 옵션도 변경되지 않습니다.\n\n실패한 첫 번째 옵션 번호는 에러 메시지에서 확인할 수 있습니다.\n",
+    "tags": ["Orders"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/orders-delivery839290676"
+          },
+          "examples": {
+            "put-orders-delivery": {
+              "value": "[{\"orderProductOptionNo\":1,\"deliveryCompanyType\":\"CJ\",\"invoiceNo\":\"1234\"}]"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/orders/delivery-ing",
+    "summary": "배송준비중 상태를 목록을 배송중 상태로 변경하기",
+    "description": "\n## 부가설명 및 특이사항\n입력한 배송준비중 optionList 의 상태를 배송중으로 변경하는 API 입니다.\n\n요청한 옵션 중 하나라도 실패하면 나머지 옵션도 변경되지 않습니다.\n\n실패한 첫 번째 옵션 번호는 에러 메시지에서 확인할 수 있습니다.\n",
+    "tags": ["Orders"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/orders-delivery839290676"
+          },
+          "examples": {
+            "put-orders-delivery-ing": {
+              "value": "[{\"orderProductOptionNo\":1,\"deliveryCompanyType\":\"CJ\",\"invoiceNo\":\"1234\"}]"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/orders/extra-data",
+    "summary": "주문의 추가 정보 입력",
+    "description": "\n## 부가설명 및 특이사항\n주문의 부가 정보를 저장합니다.\n\nextraData 필드에 key, value 형태로 저장됩니다.",
+    "tags": ["Orders"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/orders-extra-data-1305470581"
+          },
+          "examples": {
+            "put-order-extra-data": {
+              "value": "[{\"orderNo\":\"12121212\",\"key\":\"key\",\"value\":\"value\"}]"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/orders/prepare-delivery",
+    "summary": "배송준비중 상태 변경 요청하기",
+    "description": "\n## 부가설명 및 특이사항\n결제완료 및 상품준비중 옵션을 배송준비중 상태로 변경하는 API 입니다.\n\nBody에는 orderOptionNo 리스트를 입력합니다. <br /> ex) [1, 2, 3]\n\n요청한 옵션 중 하나라도 실패하면 나머지 옵션도 변경되지 않습니다.\n\n실패한 첫 번째 옵션 번호는 에러 메시지에서 확인할 수 있습니다.\n",
+    "tags": ["Orders"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/orders-prepare-delivery486549215"
+          },
+          "examples": {
+            "put-orders-prepare-delivery": {
+              "value": "[1]"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/orders/prepare-product",
+    "summary": "상품준비중 상태 변경 요청하기",
+    "description": "\n## 부가설명 및 특이사항\n결제완료된 상품을 상품준비중 상태로 변경하는 API 입니다.\n\nBody에는 orderOptionNo 리스트를 입력합니다. <br /> ex) [1, 2, 3]\n\n요청한 옵션 중 하나라도 실패하면 나머지 옵션도 변경되지 않습니다.\n\n실패한 첫 번째 옵션 번호는 에러 메시지에서 확인할 수 있습니다.\n",
+    "tags": ["Orders"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/orders-prepare-delivery486549215"
+          },
+          "examples": {
+            "put-orders-prepare-product": {
+              "value": "[1]"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/orders/receive",
+    "summary": "주문상품 수취확인처리 요청하기",
+    "description": "\n## 부가설명 및 특이사항\n입력한 optionList의 상태를 수취확인으로 변경하는 API 입니다.(배송완료처리)\n\nBody엔 orderOptionNo 리스트를 입력합니다. <br /> ex) [1, 2, 3]\n\n요청한 옵션 중 하나라도 실패하면 나머지 옵션도 변경되지 않습니다.\n\n실패한 첫 번째 옵션 번호는 에러 메시지에서 확인할 수 있습니다.\n",
+    "tags": ["Orders"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/orders-prepare-delivery486549215"
+          },
+          "examples": {
+            "put-orders-receive": {
+              "value": "[1]"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/orders/reserve-to-normal",
+    "summary": "예약 주문 일반주문으로 변경 요청하기",
+    "description": "\n## 부가설명 및 특이사항\n예약주문을 일반주문으로 변경하는 API 입니다.",
+    "tags": ["Orders"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/orders-reserve-to-normal395982850"
+          },
+          "examples": {
+            "put-orders-reserve-to-normal": {
+              "value": "{\"orderOptionNos\":[1]}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/orders/tax-invoice",
+    "summary": "세금계산서 발행결과 업데이트",
+    "description": "## 부가설명 및 특이사항\n세금계산서 발행 결과를 업데이트하는 API 입니다.",
+    "tags": ["Orders"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/orders-tax-invoice-872144232"
+          },
+          "examples": {
+            "update-tax-invoice-issuance-result": {
+              "value": "[{\"orderNo\":\"202308031057170048\",\"taxInvoiceIssueNo\":\"2021053140000212100000030\",\"sendState\":\"31\"}]"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/orders/update-invoices",
+    "summary": "송장번호 변경",
+    "description": "송장번호 변경",
+    "tags": ["Orders"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/orders-update-invoices-96635585"
+          },
+          "examples": {
+            "put-orders-update-invoice": {
+              "value": "[{\"shippingNo\":240093,\"invoiceNo\":\"12345678\",\"deliveryCompanyType\":\"CJ\"}]"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/orders-update-invoices-1079341162"
+            },
+            "examples": {
+              "put-orders-update-invoice": {
+                "value": "[{\"shippingNo\":240093,\"invoiceNo\":\"12345678\",\"deliveryCompanyType\":\"CJ\",\"success\":true,\"failMessage\":null}]"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/orders/{orderNo}",
+    "summary": "주문 상세 조회",
+    "description": "\n## 부가설명 및 특이사항\n주문에 대한 상세를 조회하는 API 입니다.\n",
+    "tags": ["Orders"],
+    "parameters": [
+      {
+        "name": "orderNo",
+        "in": "path",
+        "description": "주문 번호^|202206151234567890",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json;charset=UTF-8": {
+            "schema": {
+              "$ref": "#/components/schemas/orders-orderNo-792507223"
+            },
+            "examples": {
+              "get-orders-order-no": {
+                "value": "{\"orderNo\":\"\",\"mallNo\":1,\"pgType\":\"DUMMY\",\"payType\":\"CREDIT_CARD\",\"platformType\":\"PC\",\"memberNo\":0,\"isMemberOrder\":false,\"lastMainPayAmt\":null,\"currencyCode\":\"KRW\",\"exchangeRate\":null,\"orderer\":{\"name\":\"\",\"contact1\":\"\",\"contact2\":\"\",\"email\":\"\",\"refundAccount\":\"\"},\"firstBalance\":{\"payAmt\":0,\"subPayAmt\":0,\"standardAmt\":0,\"deliveryAmt\":0,\"remoteDeliveryAmt\":0,\"immediateDiscountAmt\":0,\"additionalDiscountAmt\":0,\"cartCouponDiscountAmt\":0,\"productCouponDiscountAmt\":0,\"deliveryCouponDiscountAmt\":0,\"externalPayAmt\":0,\"mainPayAmt\":0,\"totalDiscountAmt\":0},\"lastBalance\":{\"payAmt\":0,\"subPayAmt\":0,\"standardAmt\":0,\"deliveryAmt\":0,\"remoteDeliveryAmt\":0,\"immediateDiscountAmt\":0,\"additionalDiscountAmt\":0,\"cartCouponDiscountAmt\":0,\"productCouponDiscountAmt\":0,\"deliveryCouponDiscountAmt\":0,\"externalPayAmt\":0,\"mainPayAmt\":0,\"totalDiscountAmt\":0},\"registerYmdt\":\"\",\"updateYmdt\":\"\",\"extraJson\":\"\",\"channelType\":\"\",\"trackingKey\":\"\",\"externalOrderNo\":\"\",\"orderMemo\":\"\",\"orderProducts\":[],\"shippings\":[{\"shippingNo\":1,\"mallNo\":0,\"partnerNo\":0,\"deliveryTemplateGroupNo\":0,\"deliveryTemplateNo\":0,\"deliveryAmt\":null,\"adjustedAmt\":null,\"returnDeliveryAmt\":null,\"remoteDeliveryAmt\":null,\"receiver\":{\"zipCd\":\"\",\"address\":\"\",\"detailAddress\":\"\",\"jibunAddress\":\"\",\"contact1\":\"\",\"contact2\":\"\",\"name\":\"\"},\"deliveryType\":\"PARCEL_DELIVERY\",\"prepaid\":true,\"requiresShipping\":true,\"combined\":true,\"devided\":true,\"originalShippingNo\":1,\"invoiceNo\":\"\",\"customsIdNumber\":\"\",\"deliveryCompanyType\":\"CJ\",\"usesShippingInfoLaterInput\":false,\"memo\":\"\",\"deliveryCompanyTypeLabel\":\"\"}],\"payments\":[{\"no\":1,\"balance\":{\"payAmt\":0,\"mainPayAmt\":0,\"subPayAmt\":0},\"paymentInfo\":{\"payType\":\"CREDIT_CARD\",\"cardInfo\":{\"cardCompany\":\"ANONYMOUS\",\"cardCode\":\"\",\"cardName\":\"\",\"approveYmdt\":\"\",\"cardNo\":\"\",\"cardApprovalNumber\":\"\",\"noInterest\":false,\"installmentPeriod\":0,\"cardAmt\":null},\"bankInfo\":{\"bank\":\"ANONYMOUS\",\"bankCode\":\"\",\"bankName\":\"\",\"account\":\"\",\"bankAmt\":0,\"depositAmt\":0,\"depositYmdt\":\"\",\"remitterName\":\"\",\"depositorName\":\"\",\"paymentExpirationYmdt\":\"\"},\"naverPayInfo\":{\"paymentMeans\":\"\",\"paymentDueDate\":\"\",\"paymentNumber\":\"\",\"orderDiscountAmount\":null,\"generalPaymentAmount\":null,\"naverMileagePaymentAmount\":null,\"chargeAmountPaymentAmount\":null,\"checkoutAccumulationPaymentAmount\":null,\"orderType\":\"\",\"payLocationType\":\"\",\"paymentCoreType\":\"\",\"payLaterPaymentAmount\":null},\"cashAuthNo\":null,\"cashNo\":null,\"tradeNo\":null,\"escrowYn\":\"N\",\"payAmt\":0,\"sellerCouponAmt\":0,\"pgCouponAmt\":0,\"cardCouponAmt\":null,\"pointAmt\":0,\"taxType\":null,\"mobileInfo\":null,\"rentalInfo\":{\"rentalPeriod\":1,\"monthlyRentalAmount\":1},\"complexPayInfo\":{\"extraPayAmt\":0,\"mainPayAmt\":0},\"recurringPaymentDate\":\"\"}}],\"claimInfos\":[{\"claimNo\":0,\"claimYmdt\":\"\",\"claimCompleteYmdt\":\"\",\"claimType\":\"CANCEL\",\"mallNo\":0,\"memberNo\":0,\"orderNo\":\"\",\"refundPayType\":\"CREDIT_CARD\",\"claimStatusType\":\"CANCEL_NO_REFUND\",\"claimAmt\":null,\"returnWayType\":\"SELLER_COLLECT\",\"orderOptionNos\":[],\"responsibleObjectType\":\"BUYER\",\"claimReasonType\":\"CHANGE_MIND\",\"claimReasonDetail\":\"\",\"accumulationPayAmt\":0,\"claimedOptions\":[{\"orderOptionNo\":0,\"claimReasonType\":\"CHANGE_MIND\",\"claimReasonDetail\":\"\"}],\"withdrawReason\":\"\",\"treatmentStatusType\":\"REQUEST\",\"treatmentYmdt\":\"\"}],\"firstExternalPayInfos\":[{\"externalPayKey\":\"\",\"externalPayName\":\"\",\"payAmt\":0}],\"lastExternalPayInfos\":[],\"firstPayYmdt\":\"\"}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/orders/change-status/by-shipping-no",
+    "summary": "주문 상태 일괄 변경 요청하기",
+    "description": "\n## 부가설명 및 특이사항 \n주문 상태를 일괄로 변경하는 API 입니다. 배송번호 단위로 처리 됩니다.\n\n상태 변경 대상 목록(changeStatusList)은 최대 100개까지 입력할 수 있습니다.\n\n송장정보는 배송중 이전 [PAY_DONE, PRODUCT_PREPARE, DELIVERY_PREPARE] 상태에서,\n배송중 이후 [DELIVERY_ING, DELIVERY_DONE, BUY_CONFIRM] 상태로 변경 시\n입력 가능합니다.\n",
+    "tags": ["Orders"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/orders-change-status-by-shipping-no-236918478"
+          },
+          "examples": {
+            "put-orders-change-status-by-shipping-no": {
+              "value": "{\"changeStatusList\":[{\"shippingNo\":123456,\"deliveryCompanyType\":\"CJ\",\"invoiceNo\":\"INV123456\"},{\"shippingNo\":123456}],\"orderStatusType\":\"DELIVERY_ING\"}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/orders-change-status-by-shipping-no1542267718"
+            },
+            "examples": {
+              "put-orders-change-status-by-shipping-no": {
+                "value": "{\"totalCount\":2,\"successCount\":1,\"failCount\":1,\"failures\":[{\"originalRequest\":{\"shippingNo\":456,\"deliveryCompanyType\":\"CJ\",\"invoiceNo\":\"56789\"},\"errorCode\":\"OD0010\",\"errorMessage\":\"error\"}]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/previous-orders",
+    "summary": "이전주문 검색",
+    "description": "이전주문 검색",
+    "tags": ["PreviousOrder"],
+    "parameters": [
+      {
+        "name": "searchType",
+        "in": "query",
+        "description": "검색 타입^|ORDER_NO, ORDERER_NAME, ORDERER_CONTACT1, PRODUCT_NAME, RECEIVER_NAME, RECEIVER_CONTACT1, MEMBER_NO",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "keyword",
+        "in": "query",
+        "description": "검색어^|홍길동",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "startYmd",
+        "in": "query",
+        "description": "조회시작일^|2025-07-27",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "endYmd",
+        "in": "query",
+        "description": "조회종료일^|2025-10-27",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "page",
+        "in": "query",
+        "description": "페이지 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "size",
+        "in": "query",
+        "description": "페이지당 노출 개수^|30",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/previous-orders276177791"
+            },
+            "examples": {
+              "get-previous-orders": {
+                "value": "{\"totalCount\":1,\"contents\":[{\"orderNo\":\"202402271234567890\",\"mallNo\":1,\"orderProduct\":[{\"partnerName\":\"파트너이름\",\"productName\":\"상품명\",\"optionNo\":1,\"optionName\":\"옵션명\",\"optionValue\":\"옵션값\",\"purchaserInputs\":[{\"inputNo\":null,\"inputLabel\":null,\"inputValue\":null,\"required\":null}],\"orderCnt\":1,\"salePrice\":0,\"purchasePrice\":0,\"orderStatusType\":\"DELIVERY_DONE\",\"deliveryAmt\":0,\"remoteDeliveryAmt\":0,\"deliveryCompanyType\":\"CJ\",\"invoiceNo\":\"12345\"}],\"firstPayment\":{\"standardAmt\":0,\"deliveryAmt\":0,\"discountAmt\":0,\"payAmt\":0,\"subPayAmt\":0,\"mainPayAmt\":0},\"lastPayment\":{\"standardAmt\":0,\"deliveryAmt\":0,\"discountAmt\":0,\"payAmt\":0,\"subPayAmt\":0,\"mainPayAmt\":0},\"refund\":{\"refundType\":\"VIRTUAL_ACCOUNT\",\"refundTypeLabel\":\"Virtual account\",\"refundAmt\":0,\"refundCompleteYmdt\":\"2025-10-27T11:17:46.954380402\",\"refundBankAccount\":{\"bank\":\"KB\",\"account\":\"12345678909876\",\"depositorName\":\"예금주\"}},\"paymentMethod\":{\"payType\":\"CREDIT_CARD\",\"payTypeLabel\":\"Credit Card\",\"payDetail\":{\"bank\":\"KB\",\"account\":\"12345678909876\",\"accountHolder\":\"예금주\",\"discountAmt\":0,\"depositor\":\"입금자\"},\"orderYmdt\":\"2025-10-27T11:17:46.956378649\",\"payYmdt\":\"2025-10-27T11:17:46.956397147\"},\"orderer\":{\"ordererName\":\"주문자명\",\"memberNo\":1,\"memberId\":\"member123\",\"memberGradeNames\":[\"브론즈\",\"실버\"],\"ordererMobileNumber\":\"01012345678\",\"ordererPhoneNumber\":\"0212345678\",\"ordererEmail\":\"member@email.com\",\"orderMemo\":\"주문메모\"},\"accumulationAmt\":0,\"receiver\":[{\"deliveryCompanyType\":\"CJ\",\"invoiceNo\":\"12345\",\"deliveryInfo\":\"메인 배송지\",\"receiverName\":\"수령자명\",\"receiverMobileNumber\":\"01012345678\",\"receiverPhoneNumber\":\"0212345678\",\"customsIdNumber\":\"P123412341234\",\"receiverZipCd\":\"12345\",\"receiverAddress\":\"경기도 성남시 분당구 대왕판교로645번길 14\",\"receiverDetailAddress\":\"경기도 성남시 분당구 대왕판교로645번길 14 301호\",\"deliveryMemo\":\"배송메모\",\"productName\":\"상품명\",\"optionName\":\"옵션명\",\"optionValue\":\"옵션값\",\"purchaserInputs\":[{\"inputNo\":null,\"inputLabel\":null,\"inputValue\":null,\"required\":null}]}],\"adminMemo\":[{\"no\":1,\"name\":\"홍길동\",\"registerYmdt\":\"2025-10-27 11:17:46\",\"deletable\":false,\"memo\":\"관리자 메모1\"},{\"no\":2,\"name\":\"홍길순\",\"registerYmdt\":\"2025-10-26 11:17:46\",\"deletable\":true,\"memo\":\"관리자 메모2\"}]}]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/previous-orders",
+    "summary": "이전주문 등록",
+    "description": "이전주문 등록",
+    "tags": ["PreviousOrder"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/previous-orders-1326242519"
+          },
+          "examples": {
+            "post-previous-orders": {
+              "value": "[{\"orderNo\":\"202402271234567890\",\"orderYmdt\":\"2025-10-27 11:17:46\",\"platformType\":\"PC\",\"productName\":\"상품명\",\"optionName\":\"옵션명\",\"optionValue\":\"옵션값\",\"purchaserInputs\":[{\"inputLabel\":\"구매자 입력형 옵션 - 이름\",\"inputValue\":\"구매자 입력형 옵션 - 값\"}],\"orderCnt\":1,\"salePrice\":0,\"purchasePrice\":0,\"orderStatusType\":\"DELIVERY_DONE\",\"deliveryAmt\":0,\"remoteDeliveryAmt\":0,\"deliveryCompanyType\":\"CJ\",\"deliveryInfo\":\"우리집\",\"invoiceNo\":\"12345\",\"firstStandardAmt\":0,\"firstDeliveryAmt\":0,\"firstRemoteDeliveryAmt\":0,\"firstDiscountAmt\":0,\"firstPayAmt\":0,\"firstSubPayAmt\":0,\"firstMainPayAmt\":0,\"lastStandardAmt\":0,\"lastDeliveryAmt\":0,\"lastRemoteDeliveryAmt\":0,\"lastDiscountAmt\":0,\"lastPayAmt\":0,\"lastSubPayAmt\":0,\"lastMainPayAmt\":0,\"refundType\":\"VIRTUAL_ACCOUNT\",\"refundAmt\":0,\"refundCompleteYmdt\":\"2025-10-27 11:17:46\",\"refundBank\":\"KB\",\"refundBankAccount\":\"123454321\",\"refundBankDepositorName\":\"예금주\",\"payType\":\"CREDIT_CARD\",\"payDetail\":{\"bank\":\"KB\",\"account\":\"12345678909876\",\"accountHolder\":\"예금주\",\"discountAmt\":0,\"depositor\":\"입금자\"},\"payYmdt\":\"2025-10-27 11:17:46\",\"ordererName\":\"주문자명\",\"ordererMobileNumber\":\"01012345678\",\"ordererPhoneNumber\":\"0212345678\",\"ordererEmail\":\"member@email.com\",\"orderMemo\":\"주문메모\",\"receiverName\":\"수령자명\",\"receiverMobileNumber\":\"01012345678\",\"receiverPhoneNumber\":\"0212345678\",\"customsIdNumber\":\"P123412341234\",\"receiverZipCd\":\"12345\",\"receiverAddress\":\"경기도 성남시 분당구 대왕판교로645번길 14\",\"receiverDetailAddress\":\"경기도 성남시 분당구 대왕판교로645번길 14 301호\",\"deliveryMemo\":\"배송메모\",\"accumulationAmt\":0,\"memberNo\":1,\"memberId\":\"member123\",\"memberGradeNames\":[\"브론즈\",\"실버\"],\"adminMemo\":[{\"no\":1,\"name\":\"홍길동\",\"registerYmdt\":\"2025-10-27 11:17:46\",\"deletable\":false,\"memo\":\"관리자 메모1\"},{\"no\":2,\"name\":\"홍길순\",\"registerYmdt\":\"2025-10-26 11:17:46\",\"deletable\":true,\"memo\":\"관리자 메모2\"}],\"temporaryPassword\":\"임시 비밀번호\"}]"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/previous-orders-2097246096"
+            },
+            "examples": {
+              "post-previous-orders": {
+                "value": "{\"count\":1}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/previous-orders/delete",
+    "summary": "이전주문 전체 삭제",
+    "description": "이전주문 전체 삭제",
+    "tags": ["PreviousOrder"],
+    "parameters": [
+      {
+        "name": "mallName",
+        "in": "query",
+        "description": "쇼핑몰 이름^|mall-name",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/previous-orders-delete-1499897203"
+            },
+            "examples": {
+              "delete-previous-orders": {
+                "value": "{\"count\":1}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/previous-orders/delete/by-order-nos",
+    "summary": "이전주문 삭제",
+    "description": "이전주문 삭제",
+    "tags": ["PreviousOrder"],
+    "parameters": [
+      {
+        "name": "mallName",
+        "in": "query",
+        "description": "쇼핑몰 이름^|mall-name",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/previous-orders-delete-by-order-nos-565536975"
+          },
+          "examples": {
+            "delete-previous-orders-by-order-nos": {
+              "value": "{\"orderNos\":[\"202402271234567890\"]}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/previous-orders-delete-1499897203"
+            },
+            "examples": {
+              "delete-previous-orders-by-order-nos": {
+                "value": "{\"count\":1}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/recurring-payments",
+    "summary": "정기결제(배송) 조회",
+    "description": "정기결제(배송) 조회",
+    "tags": ["RecurringPayment"],
+    "parameters": [
+      {
+        "name": "memberNos",
+        "in": "query",
+        "description": "회원번호 리스트^|[1]",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "searchType",
+        "in": "query",
+        "description": "검색 타입|(RECURRING_PAYMENT_NO)^|RECURRING_PAYMENT_NO",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "keywords",
+        "in": "query",
+        "description": "검색어(리스트)^|[]",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "statusTypes",
+        "in": "query",
+        "description": "상태(리스트)^|[ACTIVE]",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "page",
+        "in": "query",
+        "description": "페이지 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "size",
+        "in": "query",
+        "description": "사이즈^|30",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/recurring-payments-20916618"
+            },
+            "examples": {
+              "get-recurring-payments": {
+                "value": "{\"totalCount\":1,\"contents\":[{\"recurringPaymentNo\":1,\"mallNo\":1,\"registerYmd\":\"2025-10-27\",\"memberNo\":1,\"productNo\":1,\"productName\":\"test-product\",\"deliveryCycleType\":\"MONTH\",\"deliveryCycle\":1,\"deliveryDate\":1,\"deliveryDayOfWeek\":\"MONDAY\",\"round\":1,\"lastRound\":5,\"closeYmd\":\"2025-10-27\",\"recurringPaymentStatusType\":\"ACTIVE\",\"closeReason\":\"해지사유\",\"closeReasonDetail\":\"상세사유\",\"recurringPaymentGroupNo\":\"202404261645301234\",\"orderCnt\":1,\"optionNo\":1,\"optionName\":\"\",\"optionValue\":\"\",\"standardAmt\":2000,\"discountAmt\":1000,\"buyAmt\":1000,\"nextRecurringPaymentDate\":\"2024-01-01\",\"pauseYmd\":null}]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/shipping-addresses",
+    "summary": "배송지 조회하기",
+    "description": "\n## 부가설명 및 특이사항\n배송지를 조회하는 API 입니다.\n",
+    "tags": ["ShippingAddress"],
+    "parameters": [
+      {
+        "name": "memberNos",
+        "in": "query",
+        "description": "회원 번호 리스트^|[1]",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "addressType",
+        "in": "query",
+        "description": "배송지 타입^|BOOK,RECENT,RECURRING_PAYMENT,RECURRING_PAYMENT_PRESENT",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "page",
+        "in": "query",
+        "description": "페이지 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "size",
+        "in": "query",
+        "description": "페이지 크기^|30",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/shipping-addresses60484751"
+            },
+            "examples": {
+              "get-shipping-addresses": {
+                "value": "{\"totalCount\":1,\"contents\":[{\"addressNo\":1,\"memberNo\":1,\"mallNo\":1,\"registerYmdt\":\"2025-10-27T11:16:59.441574625\",\"addressType\":\"RECENT\",\"default\":false,\"addressName\":\"배송지 주소\",\"receiverName\":\"김받음\",\"receiverZipCd\":\"13487\",\"receiverAddress\":\"경기도 성남시 분당구 대왕판교로645번길\",\"receiverJibunAddress\":\"경기도 성남시 분당구 대왕판교로645번길\",\"receiverDetailAddress\":\"16 NHN 플레이뮤지엄\",\"receiverCity\":null,\"receiverState\":null,\"receiverContact1\":\"010-0000-0000\",\"receiverContact2\":\"010-0000-0000\",\"customsIdNumber\":\"custom\",\"countryCd\":\"KR\",\"lastUseYmdt\":\"2025-10-27T11:16:59.441549146\",\"externalMemberNo\":\"external\",\"shippingEtcInfo\":null,\"addressMemo\":\"공동현관 비밀번호: 1234\"}]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/task-messages",
+    "summary": "업무 메세지 조회하기",
+    "description": "\n## 부가설명 및 특이사항\n업무메세지를 조회하는 API 입니다.\n",
+    "tags": ["TaskMessage"],
+    "parameters": [
+      {
+        "name": "dateType",
+        "in": "query",
+        "description": "기간 검색 타입 (REGISTER: Registration date, UPDATE: Modification date, COMPLETE: Completion date)^|REGISTER",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "startDateTime",
+        "in": "query",
+        "description": "조회 시작 일시^|YYYY-MM-DD HH:mm:ss",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "endDateTime",
+        "in": "query",
+        "description": "조회 종료 일시^|YYYY-MM-DD HH:mm:ss",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "page",
+        "in": "query",
+        "description": "페이지 번호 (1 이상)^|1",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "size",
+        "in": "query",
+        "description": "페이지당 노출 개수^|10",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/task-messages103273964"
+            },
+            "examples": {
+              "get-task-messages": {
+                "value": "{\"totalCount\":1,\"items\":[{\"no\":1,\"orderNo\":\"123123123\",\"taskMessageChannelType\":\"SERVICE\",\"fromTargetType\":\"SERVICE\",\"fromTargetNo\":1,\"registerInfo\":{\"registerAdminName\":\"홍길동\",\"registerAdminNo\":1,\"registerAdminIp\":\"127.0.0.1\",\"registerYmdt\":\"2025-10-27T11:17:04.653805351\"},\"orderProductOptionNo\":1,\"taskMessageStatusType\":\"PROCESSING\",\"taskMessageType\":\"DELIVERY\",\"toTargetType\":\"PARTNER\",\"toTargetNo\":1,\"productName\":\"테스트상품\",\"content\":\"배송이 어떻게 된거죠?\",\"updateYmdt\":\"2025-10-27T11:17:04.662461694\",\"completedInfo\":{\"completedAdminName\":\"홍길동\",\"completedAdminNo\":1,\"completedAdminIp\":\"127.0.0.1\",\"completedYmdt\":\"2025-10-27T11:17:04.713427964\"},\"uploadedFileInfos\":[],\"taskMessageDetails\":[{\"no\":1,\"taskMessageChannelType\":\"SERVICE\",\"registerInfo\":{\"registerAdminName\":\"홍길동\",\"registerAdminNo\":1,\"registerAdminIp\":\"127.0.0.1\",\"registerYmdt\":\"2025-10-27T11:17:04.726311191\"},\"content\":\"내용\",\"updateYmdt\":\"2025-10-27T11:17:04.726343264\",\"uploadedFileInfos\":[]}]}]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/task-messages",
+    "summary": "업무 메시지 등록",
+    "description": "업무 메시지 등록",
+    "tags": ["TaskMessage"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/task-messages-1424864304"
+          },
+          "examples": {
+            "post-task-messages": {
+              "value": "{\"orderNo\":\"1\",\"orderProductOptionNo\":1,\"taskMessageStatusType\":\"DONE\",\"taskMessageType\":\"CLAIM\",\"content\":\"content\",\"fromTargetType\":\"SERVICE\",\"fromTargetNo\":null,\"toTargetType\":\"PARTNER\",\"toTargetNo\":null,\"productName\":\"productName\",\"registerAdminNo\":1,\"uploadedFileInfos\":[]}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/task-messages27727223"
+            },
+            "examples": {
+              "post-task-messages": {
+                "value": "{\"taskMessageNo\":1}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/task-messages/{taskMessageNo}",
+    "summary": "업무 메시지 수정",
+    "description": "업무 메시지 수정",
+    "tags": ["TaskMessage"],
+    "parameters": [
+      {
+        "name": "taskMessageNo",
+        "in": "path",
+        "description": "업무 메시지 번호^|1813",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/task-messages-taskMessageNo-452177317"
+          },
+          "examples": {
+            "put-task-messages-task-message-no": {
+              "value": "{\"taskMessageType\":\"CLAIM\",\"orderProductOptionNo\":1,\"content\":\"content\",\"toTargetType\":\"PARTNER\",\"toTargetNo\":1,\"uploadedFileInfos\":[]}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/task-messages/{taskMessageNo}/details",
+    "summary": "상세 업무 메시지 등록",
+    "description": "상세 업무 메시지 등록",
+    "tags": ["TaskMessage"],
+    "parameters": [
+      {
+        "name": "taskMessageNo",
+        "in": "path",
+        "description": "업무 메시지 번호^|1813",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/task-messages-taskMessageNo-details-1223057146"
+          },
+          "examples": {
+            "post-task-messages-task-message-no-details": {
+              "value": "{\"content\":\"내용\",\"completion\":false,\"registerAdminName\":\"홍길동\",\"registerAdminNo\":1,\"uploadedFileInfos\":[]}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/task-messages-taskMessageNo-details326404204"
+            },
+            "examples": {
+              "post-task-messages-task-message-no-details": {
+                "value": "{\"taskMessageDetailNo\":1}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/task-messages/{taskMessageNo}/details/{taskMessageDetailNo}",
+    "summary": "상세 업무 메시지 수정",
+    "description": "상세 업무 메시지 수정",
+    "tags": ["TaskMessage"],
+    "parameters": [
+      {
+        "name": "taskMessageNo",
+        "in": "path",
+        "description": "업무 메시지 번호^|1813",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "taskMessageDetailNo",
+        "in": "path",
+        "description": "상세 메시지 번호^|5123",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/task-messages-taskMessageNo-details-taskMessageDetailNo-637914009"
+          },
+          "examples": {
+            "put-task-messages-task-message-no-details-task-message-detail-no": {
+              "value": "{\"content\":\"content\",\"uploadedFileInfos\":[]}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/wish",
+    "summary": "위시리스트 가져오기",
+    "description": "\n## 부가설명 및 특이사항\n위시리스트를 조회하는 API 입니다.\n\n조회기간은 최대 3개월까지 설정 가능합니다.",
+    "tags": ["Wish"],
+    "parameters": [
+      {
+        "name": "startYmdt",
+        "in": "query",
+        "description": "조회 시작일시^|2025-10-24 11:17:23",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "endYmdt",
+        "in": "query",
+        "description": "조회 종료일시^|2025-10-27 11:17:23",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "page",
+        "in": "query",
+        "description": "페이지 번호 (1 이상)^|1",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "size",
+        "in": "query",
+        "description": "페이지당 노출 개수^|20",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/wish53840767"
+            },
+            "examples": {
+              "get-wishes": {
+                "value": "{\"totalCount\":1,\"contents\":[{\"wishNo\":0,\"memberNo\":0,\"mallProductNo\":0,\"mallOptionNo\":0,\"orderOptionType\":\"NORMAL_OPTION\",\"orderCnt\":0,\"purchaserInputs\":[{\"inputNo\":null,\"inputLabel\":null,\"inputValue\":null,\"required\":null}],\"registerYmdt\":\"2025-10-27T11:17:23.25369308\",\"updateYmdt\":\"2025-10-27T11:17:23.25372261\"}]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+]

@@ -1,15 +1,11 @@
 ---
 name: hpe-engine-design
 description: >
-  후니프린팅 가격계산 엔진 설계의 핵심 생성 방법론. 가격공식 지도(hpe-formula-cartography)+경쟁사 흡수 후보
-  (hpe-competitor-benchmark)를 종합해 각 상품군 완제품·반제품(세트상품)의 가격공식+가격구성요소+t_prc_* 그릇 매핑+세트
-  조합 가격 모델을 설계 명세로 산출한다. 산출=라이브 evaluate_price 단일 권위 알고리즘이 그대로 먹는 형태
-  (price_formulas→formula_components→price_components→component_prices·use_dims 차원·product_price_formulas 바인딩).
-  search-before-mint(기존 공식/구성요소 재사용 우선·동종 그룹핑·신규 mint는 무손실 불가 입증 후·채번 MAX+1·separator '_')·
-  evaluate_price 계약 정합(시트 차원경계 안 배선·silent 합산 방지·U-7 계승)·단가값=가격표 verbatim(날조 0)·DB 미적재
-  (실 적용 인간 승인). '가격엔진 설계', '가격공식 설계', '가격구성요소 설계', 't_prc 그릇 설계', '세트상품 가격 설계',
-  '골든 케이스 도출', '엔진 설계 다시' 작업 시 반드시 이 스킬을 사용. 후니 공식 지도는 hpe-formula-cartography,
-  경쟁사 흡수는 hpe-competitor-benchmark, 설계 검증은 hpe-design-validation이 담당하므로 그 작업에는 트리거하지 않는다.
+  후니프린팅 가격계산 엔진 설계의 핵심 생성 방법론. 가격공식 지도+경쟁사 흡수 후보를 종합해 각 상품군 완제품·반제품
+  (세트상품)의 가격공식+가격구성요소+t_prc_* 그릇 매핑+세트 조합 가격 모델을 라이브 evaluate_price가 그대로 먹는
+  형태로 설계 명세화. search-before-mint·evaluate_price 계약 정합(silent 합산 방지·U-7 계승)·단가값 verbatim(날조 0)·DB 미적재.
+  트리거: 가격엔진 설계, 가격공식 설계, 가격구성요소 설계, t_prc 그릇 설계, 세트상품 가격 설계, 골든 케이스 도출, 엔진 설계 다시.
+  공식 지도는 hpe-formula-cartography, 경쟁사 흡수는 hpe-competitor-benchmark, 설계 검증은 hpe-design-validation.
 metadata:
   version: "1.0.0"
   category: "domain"

@@ -1,0 +1,47 @@
+---
+title: "상품준비중 주문"
+slug: "/order/product-prepare"
+---
+
+# 상품준비중 주문
+
+<Callout type="info">
+**운영자가 주문 내역을 확인하고 상품을 준비하고 있는 단계인 상품준비 상태의 주문 건을 조회합니다.**&#x20;
+
+**상품준비중 상태의 주문 건은 결제완료 상태부터 구매확정 상태까지 모든 단계의 변경(이동)이 가능합니다.**\ <mark style="color:red;">단, 에스크로 정책에 의해, 상품준비중 상태의 에스크로 결제 주문 건은 '결제완료\~배송중' 상태로 수동 변경(이동)은 가능하고, '배송완료'와 '구매확정' 상태로 변경이 불가한 점을 참고해 주세요.</mark>
+</Callout>
+
+## 상품준비중 주문
+
+<figure><img src="/images/order/product-prepare/spaces%2F5MtRLrF338WdIfIJP9jq%2Fuploads%2FHf5kCnEvtrsGDRABWpU1%2F%EC%83%81%ED%92%88%EC%A4%80%EB%B9%84%EC%A4%91%EC%A3%BC%EB%AC%B8%20%EB%B3%B5%EC%82%AC.png" alt=""/><figcaption><p>&#x3C;상품준비중 주문></p></figcaption></figure>
+
+<Callout type="warning">
+<mark style="background-color:green;">**상품준비중 상태로 변경(이동)한 날로부터 1영업일 이상 경과**</mark>된 주문 건은 발송지연 주문 건으로 \
+자동 집계됩니다.
+</Callout>
+
+## 상품준비중 주문리스트
+
+<figure><img src="/images/order/product-prepare/spaces%2F5MtRLrF338WdIfIJP9jq%2Fuploads%2FszFWqF2Ql2KauXL3Imvm%2F%EC%83%81%ED%92%88%EC%A4%80%EB%B9%84%EC%A4%91%20%EC%A3%BC%EB%AC%B8%EB%A6%AC%EC%8A%A4%ED%8A%B8%20%EB%B3%B5%EC%82%AC.png" alt=""/><figcaption><p>&#x3C;상품준비중 주문리스트></p></figcaption></figure>
+
+**① 주문상태 선택**\
+주문상태 업데이트(변경)를 위해 주문상태 선택에서 변경을 희망하는 주문상태를 선택합니다.
+
+**② 일괄처리**\
+복수 주문 건을 선택한 주문상태로 일괄변경 처리 할 수 있습니다.&#x20;
+
+**③ 배송준비중** \
+\[배송준비중]을 클릭하면 상품준비중 다음 단계인 배송준비중 상태로 변경(이동)되며, 배송준비중 주문리스트에서 해당 주문 건을 조회합니다.&#x20;
+
+**④** [**배송보류 처리**](#undefined-2)\
+배송준비가 어려운 경우 등 배송준비중 상태로 변경(이동)이 불가한 주문 건을 수동으로 '배송보류 처리' 합니다.&#x20;
+
+***
+
+#### &#x20;<mark style="color:blue;">■</mark> <mark style="color:blue;"></mark><mark style="color:blue;">**배송보류 처리**</mark>
+
+* 배송보류 처리 창에서 출고예정일, 배송보류처리 사유, 배송보류 안내 알림 등을 설정하고 배송보류 처리 합니다.&#x20;
+* 배송보류 처리 주문 건은 '상품준비중\_배송보류' 상태로 변경되어, [배송보류 관리](https://nhn-commerce.gitbook.io/shopby_enterprise_manual/order/hold-delivery) 메뉴에서 별도 관리됩니다.&#x20;
+* 배송준비가 가능해진 배송보류 처리 주문 건은 배송보류 해제 처리할 수 있습니다. 해당 주문 건은 다시상품준비중 상태로 변경(이동)됩니다.
+
+<div align="left"><figure><img src="/images/order/product-prepare/spaces%2F5MtRLrF338WdIfIJP9jq%2Fuploads%2FhFIUcwEtQsYYABnsu8QM%2F%EB%B0%B0%EC%86%A1%EC%A4%80%EB%B9%84%EC%A4%91%EC%A3%BC%EB%AC%B8_%EB%B0%B0%EC%86%A1%EB%B3%B4%EB%A5%98%EC%B2%98%EB%A6%AC%20%EB%B3%B5%EC%82%AC.png" alt="" width="449"/><figcaption><p>&#x3C;배송보류 처리></p></figcaption></figure></div>

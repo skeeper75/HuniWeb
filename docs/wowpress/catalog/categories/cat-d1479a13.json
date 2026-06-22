@@ -1,0 +1,457 @@
+{
+  "category": {
+    "id": "cat-d1479a13",
+    "slug": "선거홍보물-9a13",
+    "path": ["선거홍보물"],
+    "displayName": "선거홍보물",
+    "productCount": 5,
+    "keywords": [
+      "선거홍보물",
+      "현수막",
+      "ai",
+      "eps",
+      "jpg",
+      "어깨띠",
+      "종이썬캡",
+      "캠페인버튼",
+      "선거명함"
+    ],
+    "summary": "선거홍보물 · 5개 상품",
+    "pricing": {
+      "templated": 0,
+      "quoted": 0
+    }
+  },
+  "products": [
+    {
+      "productId": 40448,
+      "name": "현수막",
+      "slug": "현수막-40448",
+      "categories": ["선거홍보물"],
+      "keywords": [
+        "선거홍보물",
+        "현수막",
+        "ai",
+        "eps",
+        "jpg",
+        "png",
+        "cdr",
+        "psd",
+        "sit",
+        "zip",
+        "alz",
+        "pdf"
+      ],
+      "useCases": ["banner", "large-format"],
+      "url": "https://devshop.wowpress.co.kr/prodt/40448",
+      "fileTypes": ["AI", "EPS", "JPG", "PNG", "CDR", "PSD", "SIT", "ZIP", "ALZ", "PDF"],
+      "delivery": {
+        "cutoffTime": null,
+        "prepayRequired": false,
+        "group": {
+          "id": null,
+          "name": null
+        },
+        "regions": []
+      },
+      "orderQuantities": [
+        {
+          "type": "select",
+          "values": [
+            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
+            25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46,
+            47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68,
+            69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90,
+            91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000,
+            2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000
+          ],
+          "minimum": 1,
+          "maximum": 10000,
+          "interval": null,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": null,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        }
+      ],
+      "coverTypes": [
+        {
+          "code": 0,
+          "name": "통합",
+          "pages": [
+            {
+              "code": 0,
+              "name": "양면"
+            }
+          ],
+          "pageConstraints": {
+            "min": null,
+            "max": null,
+            "interval": null
+          }
+        }
+      ],
+      "detailFile": "../products/40448.json",
+      "pricing": {
+        "hasTemplate": false,
+        "status": "requires-configuration",
+        "sampleQuote": null,
+        "error": null
+      }
+    },
+    {
+      "productId": 40449,
+      "name": "어깨띠",
+      "slug": "어깨띠-40449",
+      "categories": ["선거홍보물"],
+      "keywords": [
+        "선거홍보물",
+        "어깨띠",
+        "ai",
+        "eps",
+        "jpg",
+        "png",
+        "cdr",
+        "psd",
+        "sit",
+        "zip",
+        "alz",
+        "pdf"
+      ],
+      "useCases": [],
+      "url": "https://devshop.wowpress.co.kr/prodt/40449",
+      "fileTypes": ["AI", "EPS", "JPG", "PNG", "CDR", "PSD", "SIT", "ZIP", "ALZ", "PDF"],
+      "delivery": {
+        "cutoffTime": null,
+        "prepayRequired": false,
+        "group": {
+          "id": null,
+          "name": null
+        },
+        "regions": []
+      },
+      "orderQuantities": [
+        {
+          "type": "select",
+          "values": [
+            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
+            25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46,
+            47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68,
+            69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90,
+            91, 92, 93, 94, 95, 96, 97, 98, 99, 100
+          ],
+          "minimum": 1,
+          "maximum": 100,
+          "interval": null,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": null,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        }
+      ],
+      "coverTypes": [
+        {
+          "code": 0,
+          "name": "통합",
+          "pages": [
+            {
+              "code": 0,
+              "name": "양면"
+            }
+          ],
+          "pageConstraints": {
+            "min": null,
+            "max": null,
+            "interval": null
+          }
+        }
+      ],
+      "detailFile": "../products/40449.json",
+      "pricing": {
+        "hasTemplate": false,
+        "status": "requires-configuration",
+        "sampleQuote": null,
+        "error": null
+      }
+    },
+    {
+      "productId": 40450,
+      "name": "종이썬캡",
+      "slug": "종이썬캡-40450",
+      "categories": ["선거홍보물"],
+      "keywords": [
+        "선거홍보물",
+        "종이썬캡",
+        "ai",
+        "eps",
+        "jpg",
+        "png",
+        "cdr",
+        "psd",
+        "sit",
+        "zip",
+        "alz",
+        "pdf"
+      ],
+      "useCases": [],
+      "url": "https://devshop.wowpress.co.kr/prodt/40450",
+      "fileTypes": ["AI", "EPS", "JPG", "PNG", "CDR", "PSD", "SIT", "ZIP", "ALZ", "PDF"],
+      "delivery": {
+        "cutoffTime": null,
+        "prepayRequired": false,
+        "group": {
+          "id": null,
+          "name": null
+        },
+        "regions": []
+      },
+      "orderQuantities": [
+        {
+          "type": "select",
+          "values": [
+            200, 300, 400, 500, 600, 700, 800, 900, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000,
+            9000, 10000
+          ],
+          "minimum": 200,
+          "maximum": 10000,
+          "interval": null,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": null,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        }
+      ],
+      "coverTypes": [
+        {
+          "code": 0,
+          "name": "통합",
+          "pages": [
+            {
+              "code": 0,
+              "name": "양면"
+            }
+          ],
+          "pageConstraints": {
+            "min": null,
+            "max": null,
+            "interval": null
+          }
+        }
+      ],
+      "detailFile": "../products/40450.json",
+      "pricing": {
+        "hasTemplate": false,
+        "status": "requires-configuration",
+        "sampleQuote": null,
+        "error": null
+      }
+    },
+    {
+      "productId": 40451,
+      "name": "캠페인버튼",
+      "slug": "캠페인버튼-40451",
+      "categories": ["선거홍보물"],
+      "keywords": [
+        "선거홍보물",
+        "캠페인버튼",
+        "ai",
+        "eps",
+        "jpg",
+        "png",
+        "cdr",
+        "psd",
+        "sit",
+        "zip",
+        "alz",
+        "pdf"
+      ],
+      "useCases": [],
+      "url": "https://devshop.wowpress.co.kr/prodt/40451",
+      "fileTypes": ["AI", "EPS", "JPG", "PNG", "CDR", "PSD", "SIT", "ZIP", "ALZ", "PDF"],
+      "delivery": {
+        "cutoffTime": null,
+        "prepayRequired": true,
+        "group": {
+          "id": 1,
+          "name": "명함,스티커 묶음"
+        },
+        "regions": []
+      },
+      "orderQuantities": [
+        {
+          "type": "select",
+          "values": [
+            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 120, 140, 160, 180,
+            200, 300, 400, 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000
+          ],
+          "minimum": 1,
+          "maximum": 5000,
+          "interval": null,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": null,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        }
+      ],
+      "coverTypes": [
+        {
+          "code": 0,
+          "name": "통합",
+          "pages": [
+            {
+              "code": 0,
+              "name": "양면"
+            }
+          ],
+          "pageConstraints": {
+            "min": null,
+            "max": null,
+            "interval": null
+          }
+        }
+      ],
+      "detailFile": "../products/40451.json",
+      "pricing": {
+        "hasTemplate": false,
+        "status": "requires-configuration",
+        "sampleQuote": null,
+        "error": null
+      }
+    },
+    {
+      "productId": 40453,
+      "name": "선거명함",
+      "slug": "선거명함-40453",
+      "categories": ["선거홍보물"],
+      "keywords": [
+        "선거홍보물",
+        "선거명함",
+        "ai",
+        "eps",
+        "jpg",
+        "png",
+        "cdr",
+        "psd",
+        "sit",
+        "zip",
+        "alz",
+        "pdf"
+      ],
+      "useCases": ["business-card", "corporate-identity"],
+      "url": "https://devshop.wowpress.co.kr/prodt/40453",
+      "fileTypes": ["AI", "EPS", "JPG", "PNG", "CDR", "PSD", "SIT", "ZIP", "ALZ", "PDF"],
+      "delivery": {
+        "cutoffTime": null,
+        "prepayRequired": true,
+        "group": {
+          "id": 1,
+          "name": "명함,스티커 묶음"
+        },
+        "regions": []
+      },
+      "orderQuantities": [
+        {
+          "type": "select",
+          "values": [
+            1000, 1200, 1500, 1800, 2100, 2400, 2700, 3000, 3300, 3600, 3900, 4200, 4500, 4800,
+            5100, 5400, 5700, 6000, 7000, 8000, 9000, 10000, 11000, 12000, 13000, 14000, 15000,
+            16000, 17000, 18000, 19000, 20000, 21000, 22000, 23000, 24000, 25000, 26000, 27000,
+            28000, 29000, 30000
+          ],
+          "minimum": 1000,
+          "maximum": 30000,
+          "interval": null,
+          "materialPaperNo": 20369,
+          "jobPresetNo": null,
+          "sizeNo": null,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [
+            1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 15000, 20000, 25000, 30000,
+            35000, 40000, 45000, 50000, 55000, 60000, 65000, 70000, 75000, 80000, 85000, 90000,
+            95000, 100000
+          ],
+          "minimum": 1000,
+          "maximum": 100000,
+          "interval": null,
+          "materialPaperNo": 22904,
+          "jobPresetNo": null,
+          "sizeNo": null,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [
+            1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 15000, 20000, 25000, 30000,
+            35000, 40000, 45000, 50000, 55000, 60000, 65000, 70000, 75000, 80000, 85000, 90000,
+            95000, 100000
+          ],
+          "minimum": 1000,
+          "maximum": 100000,
+          "interval": null,
+          "materialPaperNo": 22907,
+          "jobPresetNo": null,
+          "sizeNo": null,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [
+            1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 15000, 20000, 25000, 30000,
+            35000, 40000, 45000, 50000, 55000, 60000, 65000, 70000, 75000, 80000, 85000, 90000,
+            95000, 100000
+          ],
+          "minimum": 1000,
+          "maximum": 100000,
+          "interval": null,
+          "materialPaperNo": 22908,
+          "jobPresetNo": null,
+          "sizeNo": null,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        }
+      ],
+      "coverTypes": [
+        {
+          "code": 0,
+          "name": "통합",
+          "pages": [
+            {
+              "code": 0,
+              "name": "양면"
+            }
+          ],
+          "pageConstraints": {
+            "min": null,
+            "max": null,
+            "interval": null
+          }
+        }
+      ],
+      "detailFile": "../products/40453.json",
+      "pricing": {
+        "hasTemplate": false,
+        "status": "requires-configuration",
+        "sampleQuote": null,
+        "error": null
+      }
+    }
+  ]
+}

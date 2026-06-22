@@ -1,0 +1,199 @@
+---
+title: "기획전 등록"
+slug: "/appearance/event/addform"
+---
+
+# 기획전 등록
+
+## 기본정보
+
+**✅ 기획전 유형에 따라 설정하는 기본정보 항목이 상이합니다.**
+
+### 일반유형
+
+<figure><img src="/images/appearance/event/addform/spaces%2F5MtRLrF338WdIfIJP9jq%2Fuploads%2Fh69ZuAr5HMpRYke0DeZe%2F%EA%B8%B0%ED%9A%8D%EC%A0%84%EA%B4%80%EB%A6%AC%20%EA%B8%B0%ED%9A%8D%EC%A0%84%EB%93%B1%EB%A1%9D%20%EC%9D%BC%EB%B0%98%EC%9C%A0%ED%98%95%20%EA%B8%B0%EB%B3%B8%EC%A0%95%EB%B3%B4%20%EB%B3%B5%EC%82%AC.png" alt=""/><figcaption><p>&#x3C;일반유형></p></figcaption></figure>
+
+**① 쇼핑몰**\
+기획전을 등록하는 쇼핑몰을 선택합니다.
+
+**② 기획전 유형**\
+기획전 운영 형태인 기획전 유형을 '일반' 유형으로 선택합니다.&#x20;
+
+<Callout type="success">
+이벤트<img src="/images/appearance/event/addform/spaces%2F5MtRLrF338WdIfIJP9jq%2Fuploads%2FoTe3FZtVw7Vx0YwMW055%2Fapi2.png" alt="" data-size="line"/> : 프로모션 진행 시 기획전과 이벤트로 구분이 필요한 경우, 샵바이 shop API를 통해 별도 구분이 가능하도록 제공되는 항목으로 기타 기능구현은 없습니다.
+</Callout>
+
+**③ 기획전명**\
+등록하는 기획전의 주제 및 특성에 맞는이름을 입력합니다.\
+기획전명은 쇼핑몰에서 고객에게 노출되므로 작성에 유의해 주세요.<br>
+
+**④ 기획전 번호**\
+기획전 등록 시 자동으로 생성되는 고유한 번호로, 기획전 호출 및 조회에 사용됩니다.
+
+<Callout type="warning">
+오로라 기본 스킨 사용 시,\
+'**쇼핑몰 URL/event/기획전 번호**’로 기획전 페이지가 조회(노출) 됩니다.
+</Callout>
+
+**⑤ 기획전 ID**\
+API 호출 및 조회가 가능하도록 기획전 ID를 지정할 수 있습니다.
+
+* 기획전 ID는 숫자로만 구성할 수 없습니다.\
+  📍 숫자+문자/숫자+특수문자의 혼합 구성 가능 (최대 20자)
+* 기획전마다 다른 값을 지정해야 하므로, \[중복확인] 버튼을 클릭 해 사용여부를 확인해 주세요.
+
+<Callout type="warning">
+오로라 기본 스킨 사용 시,\
+'**쇼핑몰 URL/event/기획전 ID**’로 기획전 페이지가 조회(노출) 됩니다.
+</Callout>
+
+**⑥ URL 직접입력** <img src="/images/appearance/event/addform/spaces%2F5MtRLrF338WdIfIJP9jq%2Fuploads%2FfCtrqbCqqHtkUFZ6PsUe%2FAPI1.png" alt="" data-size="line"/>\
+등록하는 기획전에 사용할 기획전 상세 URL을 설정할 수 있습니다.
+
+* 기획전의 전시 기간 시작일 이후에는 상세 URL 변경이 불가합니다.
+* 영문/숫자/특수문자(-, \_, /)만 입력이 가능하며, 상세 URL은 <mark style="color:red;">영문 또는 숫자 시작</mark> 으로 구성해야 합니다.\
+  📍 예 : <http://abc.com/><mark style="color:red;">2024kidsspecial</mark>
+* 기획전마다 다른 값을 지정해야 하므로, \[중복확인] 버튼을 클릭 해 사용여부를 확인해 주세요.
+
+<Callout type="danger">
+쇼핑몰 운영방식이 '헤드리스'인 경우에만 'URL 직접입력' 으로 API 호출 및 조회가 가능합니다.
+</Callout>
+
+**⑦ 전시기간**\
+기획전 전시 진행을 '상시'와 '기간지정' 중에서 선택합니다.\
+전시 시작일과 전시종료일로 전시기간을 지정해 주세요.
+
+**⑧ 전시카테고리** <img src="/images/appearance/event/addform/spaces%2F5MtRLrF338WdIfIJP9jq%2Fuploads%2FfCtrqbCqqHtkUFZ6PsUe%2FAPI1.png" alt="" data-size="line"/>\
+등록하는 기획전을 특정 전시 카테고리에 노출할 수 있습니다.&#x20;
+
+**⑨ 대표 이미지**\
+여러 개의 기획전을 한 페이지에 노출하고,  해당 페이지에 대표 이미지를 PC웹과 모바일로 구분하여 등록할 수 있습니다.\
+📍 최대 1MB의 1개 이미지만 등록 가능합니다.
+
+**⑩ 태그** <img src="/images/appearance/event/addform/spaces%2F5MtRLrF338WdIfIJP9jq%2Fuploads%2FfCtrqbCqqHtkUFZ6PsUe%2FAPI1.png" alt="" data-size="line"/>\
+쇼핑몰 검색창에 기획전 검색 시 활용되는 태그를 등록할 수 있습니다.
+
+### 외부링크 유형
+
+<figure><img src="/images/appearance/event/addform/spaces%2F5MtRLrF338WdIfIJP9jq%2Fuploads%2FN30kuPqNppOYuRXpQDZI%2F%EA%B8%B0%ED%9A%8D%EC%A0%84%EA%B4%80%EB%A6%AC%20%EA%B8%B0%ED%9A%8D%EC%A0%84%EB%93%B1%EB%A1%9D%20%EC%99%B8%EB%B6%80%EB%A7%81%ED%81%AC%EC%9C%A0%ED%98%95%20%EA%B8%B0%EB%B3%B8%EC%A0%95%EB%B3%B4%20%EB%B3%B5%EC%82%AC.png" alt=""/><figcaption><p>&#x3C;외부링크 유형></p></figcaption></figure>
+
+**① 기획전 유형**\
+기획전 운영 형태인 기획전 유형을 '외부링크' 유형으로 선택합니다.&#x20;
+
+<Callout type="danger">
+기획전 유형을 '외부링크' 로 선택하면, 상단이미지/쿠폰/상품 진열설정이 불가하므로 설정된 정보는 초기화 처리 됩니다.
+</Callout>
+
+**② 기획전 상세 URL**\
+등록하는 기획전에 연동할 외부 기획전의 주소를 입력합니다.
+
+## 노출정보
+
+<figure><img src="/images/appearance/event/addform/spaces%2F5MtRLrF338WdIfIJP9jq%2Fuploads%2F97UAy7aF3nCyj06S5oYx%2F%EA%B8%B0%ED%9A%8D%EC%A0%84%EA%B4%80%EB%A6%AC%20%EA%B8%B0%ED%9A%8D%EC%A0%84%EB%93%B1%EB%A1%9D%20%EB%85%B8%EC%B6%9C%EC%A0%95%EB%B3%B4%20%EB%B3%B5%EC%82%AC.png" alt=""/><figcaption><p>&#x3C;노출정보></p></figcaption></figure>
+
+**① 플랫폼 구분**\
+기획전을 노출할  플랫폼플을 설정할 수 있습니다. '설정'을 선택하고 플랫폼을 선택합니다.
+
+**② 회원등급 노출 설정**\
+기획전에 접근할 수 있는 회원등급을 별도 설정할 수 있습니다. \
+전체 회원등급 및 특정 회원등급의 선택이 가능합니다.
+
+**③ 회원그룹 노출 설정**\
+기획전에 접근할 수 있는 회원그룹을 별도 설정할 수 있습니다. \
+전체 회원그룹 및 특정 회원그룹의 선택이 가능합니다.
+
+## 상단이미지 설정
+
+**✅ '외부링크' 유형에는 사용하지 않는 설정 항목입니다.**
+
+<figure><img src="/images/appearance/event/addform/spaces%2F5MtRLrF338WdIfIJP9jq%2Fuploads%2FHUiiRt9UVbLGoBgplW1e%2F%EA%B8%B0%ED%9A%8D%EC%A0%84%EA%B4%80%EB%A6%AC%20%EA%B8%B0%ED%9A%8D%EC%A0%84%EB%93%B1%EB%A1%9D%20%EC%83%81%EB%8B%A8%EC%9D%B4%EB%AF%B8%EC%A7%80%EC%84%A4%EC%A0%95%20%EB%B3%B5%EC%82%AC2.png" alt=""/><figcaption><p>&#x3C;상단이미지 설정></p></figcaption></figure>
+
+**①** 기획전 페이지 상단에 노출되는 상단이미지는 PC와 모바일로 구분하여 등록할 수 있습니다.
+
+**② 이미지로 등록**\
+\[+] 를 클릭 해 상세이미지를 첨부합니다.\
+📍 최대 1MB의 1개 이미지만 등록이 가능합니다.
+
+**③ HTML로 등록**\
+에디터 기능을 활용하여 상세이미지를 등록할 수 있습니다.\
+에디터 창 내 \[이미지 아이콘] 을 클릭해 이미지 삽입이 가능합니다.\
+📍 에디터에는 최대 10MB의 이미지 등록이 가능합니다.
+
+## 쿠폰 설정
+
+**✅ '외부링크' 유형에는 사용하지 않는 설정 항목입니다.**
+
+<figure><img src="/images/appearance/event/addform/spaces%2F5MtRLrF338WdIfIJP9jq%2Fuploads%2FWbdbMN8bvrrduVvOzIky%2F%EA%B8%B0%ED%9A%8D%EC%A0%84%EA%B4%80%EB%A6%AC%20%EA%B8%B0%ED%9A%8D%EC%A0%84%EB%93%B1%EB%A1%9D%20%EC%BF%A0%ED%8F%B0%EC%84%A4%EC%A0%95%20%EB%B3%B5%EC%82%AC.png" alt=""/><figcaption><p>&#x3C;쿠폰설정></p></figcaption></figure>
+
+**① 쿠폰개수**\
+기획전 페이지에 노출할 쿠폰 개수를 1\~10건 중에서 선택할 수 있습니다.
+
+**② 쿠폰 등록 안함**\
+등록하는 기획전에 쿠폰 사용을 하지 않을 경우, '쿠폰 등록 안함'을 설정해 주세요.
+
+**③ 쿠폰리스트**\
+선택한 쿠폰개수에 따라 쿠폰 등록 입력란이 노출됩니다.
+
+**④ 쿠폰번호**\
+\[쿠폰 찾기] 버튼을 클릭하면, 쇼핑몰에 등록된 쿠폰을 조회할 수 있는 '쿠폰 조회' 창이 노출됩니다.\
+기획전에 노출할 쿠폰을 추가하면 해당 쿠폰의 '쿠폰 번호’를 확인할 수 있습니다.
+
+<Callout type="warning">
+기획전에 노출할 쿠폰은 [할인쿠폰 관리 > 할인쿠폰 발행관리 > 쿠폰등록 ](https://nhn-commerce.gitbook.io/shopby_enterprise_manual/promotion/coupon/list/addform)메뉴에 먼저 등록되어 있어야 합니다.\
+다운로드 발급유형 쿠폰만 기획전에 노출할 수 있습니다.\
+기획전 쿠폰은 기획전 페이지 상단이미지 아래에 바로 노출됩니다. (오로라 기본 스킨 사용 기준)
+</Callout>
+
+**⑤ 발급수량**\
+등록한 쿠폰의 발급수량을 확인할 수 있습니다.
+
+**⑥ 발급기간**\
+등록한 쿠폰의 발급기간을 확인할 수 있습니다.
+
+**⑦ 쿠폰이미지**\
+쿠폰 이미지를 제작하여 등록할 수 있습니다.\
+\[이미지 찾기] 버튼을 클릭해 쿠폰이미지를 등록합니다.\
+📍 최대 1MB의 1개 이미지만 등록이 가능합니다.
+
+<Callout type="warning">
+쿠폰 이미지를 등록하지 않으면 기본으로 제공되는 쿠폰 이미지가 노출됩니다.
+</Callout>
+
+**⑧ 공통 이미지** <img src="/images/appearance/event/addform/spaces%2F5MtRLrF338WdIfIJP9jq%2Fuploads%2FfCtrqbCqqHtkUFZ6PsUe%2FAPI1.png" alt="" data-size="line"/>\
+쿠폰의  발급상태에 따른 쿠폰 이미지를 제작하여 공통으로 사용할 수 있습니다.
+
+## 상품 진열 설정
+
+**✅ '외부링크' 유형에는 사용하지 않는 설정 항목입니다.**
+
+<figure><img src="/images/appearance/event/addform/spaces%2F5MtRLrF338WdIfIJP9jq%2Fuploads%2FqwqrlrzF3725cKvQReOL%2F%EA%B8%B0%ED%9A%8D%EC%A0%84%EA%B4%80%EB%A6%AC%20%EA%B8%B0%ED%9A%8D%EC%A0%84%EB%93%B1%EB%A1%9D%20%EC%83%81%ED%92%88%EC%A7%84%EC%97%B4%EC%84%A4%EC%A0%95%20%EB%B3%B5%EC%82%AC.png" alt=""/><figcaption><p>&#x3C;상품 진열 설정></p></figcaption></figure>
+
+**① 진열 개수**\
+기획전 페이지에서 상품이 노출되는 진열 영역의 개수를 1\~10건 중에서 선택할 수 있습니다.\
+선택한 개수만큼 진열 영역이 탭으로 제공됩니다 .
+
+**② 상품 진열 없음**\
+등록하는 기획전에 상품이 없는경우, '상품 진열 없음'을 설정해 주세요.
+
+**③ 상품진열**\
+선택한 진열개수에 따라 상품 등록 입력란이 노출됩니다.
+
+**④ 행당상품 노출**\
+기획전 페이지 상품진열 영역에 노출되는 상품의 가로 개수를플랫폼별로 설정할 수 있습니다.
+
+* PC 웹 : 2\~10개 중에서 설정
+* 모바일 : 1\~5개 중에서 설정
+
+**⑤ 상품 진열명**\
+기획전 페이지 상품 진열영역 이름을 텍스트로 입력하거나, 이미지로 등록할 수 있습니다.
+
+**⑥ 대상상품 설정**\
+기획전에 해당하는 상품을 설정합니다. \[상품조회] 버튼을 클릭 해 상품을 검색하여 개별 등록할 수 있고, 상품번호를 직접 입력하여 등록하거나, 엑셀파일로 일괄등록 하는 등 상품 진열 영역에 기획전 상품을 등록합니다.
+
+**⑦ 진열상품 리스트**\
+기획전 상품으로 전시(노출)할 상품을 확인합니다.
+
+* 진열 순서 및 위치를 상/하 이동 아이콘으로 변경할 수 있고, 상품을 선택하고 순서(위치)를 입력하여 이동할 수도 있습니다.
+* 기획전 상품 전시(노출) 여부를 '전시'와  '전시 안 함'으로 설정합니다.
+* \[선택상품 삭제] 버튼으로 기획전 진열상품 리스트에서 제외할 수 있습니다.\
+  &#x20;📍 쇼핑몰에서  상품이 삭제처리 되지는 않습니다.

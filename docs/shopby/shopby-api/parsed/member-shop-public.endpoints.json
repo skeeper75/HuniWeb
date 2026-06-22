@@ -1,0 +1,3764 @@
+[
+  {
+    "method": "GET",
+    "path": "/companies/business-exist",
+    "summary": "사업자회원 사업자등록번호 중복체크",
+    "description": "\n## 부가설명 및 특이사항\n 사업자등록번호 중복체크하는 API 입니다.\n",
+    "tags": ["Company"],
+    "parameters": [
+      {
+        "name": "registration",
+        "in": "query",
+        "description": "사업자등록번호 (10자리)^|1234567890",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/companies-business-exist-1571895320"
+            },
+            "examples": {
+              "check-duplicated-business": {
+                "value": "{\"exist\":true}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/config/member-extra-info",
+    "summary": "회원정보 추가항목 Config 조회",
+    "description": "\n쇼핑몰 회원정보 추가항목 관련된 설정을 조회합니다\n* 타입종류 : 텍스트박스(TEXTBOX), 라디오버튼(RADIOBUTTON), 체크박스(CHECKBOX), 드롭다운(DROPDOWN), 이미지(IMAGE)\n* 상태종류 : 필수(REQUIRED), 사용(USED)\n\n## Response\n\n| name                                  | type  | description             |\n| :-----------------------------------: | :---: | :---------------------- |\n| extraInfoContents                     | array | 회원정보 추가항목 목록        |\n| extraInfoNo                           | number| 항목 번호                  |\n| extraInfoName                         | string| 항목 명                   |\n| status                                | string| 사용 상태                 |\n| extraInfoType                         | string| 항목 타입                 |\n| extraInfoOptions                      | array | 옵션 목록                 |\n| extraInfoOptionNo                     | number| 옵션 번호                 |\n| extraInfoOptionName                   | string| 옵션 명                   |\n|",
+    "tags": ["Member-Config"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/config-member-extra-info495587874"
+            },
+            "examples": {
+              "get-member-extra-info-config": {
+                "value": "{\"extraInfoContents\":[{\"extraInfoNo\":1,\"extraInfoName\":\"항목명\",\"status\":\"USED\",\"extraInfoType\":\"DROPDOWN\",\"extraInfoOptions\":[{\"extraInfoOptionNo\":10,\"extraInfoOptionName\":\"옵션값-1\"},{\"extraInfoOptionNo\":11,\"extraInfoOptionName\":\"옵션값-2\"}]}]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/member-grades",
+    "summary": "회원 등급 정보 조회하기",
+    "description": "\n## 부가설명 및 특이사항\n 회원 등급 번호를 통해 회원 등급 정보를 조회하는 API 입니다. <br>\n 회원 등급 번호 미 입력 시 쇼핑몰에 등록된 모든 회원 등급 정보를 조회합니다.",
+    "tags": ["Member-Grade"],
+    "parameters": [
+      {
+        "name": "gradeNos",
+        "in": "query",
+        "description": "회원 등급 번호 리스트 (미 입력 시 쇼핑몰에 등록된 모든 회원 등급 정보를 조회합니다.)^|1,2,3",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/member-grades494184672"
+            },
+            "examples": {
+              "get-member-grades": {
+                "value": "[{\"no\":0,\"label\":\"name\",\"description\":\"description\",\"memberGradeImageUrl\":null,\"isEvaluationExempt\":true,\"evaluationCondition\":{\"minimumCount\":0,\"minimumPayment\":0},\"reserveAutoSupplying\":{\"used\":false,\"amount\":0,\"type\":\"NONE\"},\"reserveBenefit\":{\"used\":false,\"reserveRate\":0},\"couponAutoSupplying\":{\"used\":false,\"type\":\"NONE\"}}]"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/member-groups",
+    "summary": "회원 그룹 정보 조회하기",
+    "description": "\n## 부가설명 및 특이사항\n 회원 그룹 번호를 통해 회원 그룹 정보를 조회하는 API 입니다. <br>\n 회원 그룹 번호 미 입력 시 쇼핑몰에 등록된 모든 그룹 정보를 조회합니다.",
+    "tags": ["Member-Group"],
+    "parameters": [
+      {
+        "name": "groupNos",
+        "in": "query",
+        "description": "회원 그룹 번호 리스트 (미 입력 시 쇼핑몰에 등록된 모든 그룹 정보를 조회합니다.)^|1,2,3",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/member-groups-2025495528"
+            },
+            "examples": {
+              "get-member-groups": {
+                "value": "[{\"no\":0,\"name\":\"name\",\"description\":\"description\",\"reserveBenefit\":{\"used\":false,\"reserveRate\":0}}]"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/profile",
+    "summary": "회원정보 조회하기",
+    "description": "\n## 부가설명 및 특이사항\n 회원 정보를 조회합니다.\n \n## OAUTH2 참고사항 \n* [Oauth2 API](https://docs.shopby.co.kr/?url.primaryName=auth/#/OAUTH2/post-oauth2-token) 를 사용하여 토큰을 발급받은 경우,\n* 기존 accessToken 대신 Shop-By-Authorization 로 액세스 토큰을 전달해야합니다.\n* ex) Shop-By-Authorization : Bearer test-access-token",
+    "tags": ["Profile"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "액세스 토큰^|accessToken",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-access-token"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/profile-1232778972"
+            },
+            "examples": {
+              "get-profile": {
+                "value": "{\"memberNo\":12345,\"memberGradeName\":\"VVIP\",\"memberGradeImageUrl\":\"uploadedFileName.jpg\",\"memberGradeNo\":1,\"memberGroupNames\":\"샘플그룹\",\"memberGroups\":[{\"memberGroupNo\":0,\"memberGroupName\":\"샘플그룹\",\"memberGroupDescription\":\"설명\"}],\"memberName\":\"홍길동\",\"firstName\":null,\"lastName\":null,\"memberId\":\"hongman1\",\"mobileNo\":\"01012341234\",\"mobileCountryCode\":null,\"telephoneNo\":\"01012341234\",\"memberStatus\":\"ACTIVE\",\"memberType\":\"MALL\",\"principalCertificated\":true,\"certificationType\":null,\"birthday\":\"19900406\",\"sex\":\"M\",\"email\":\"hong@nhn.com\",\"zipCd\":\"우편번호\",\"countryCd\":\"KR\",\"address\":\"도로명 주소\",\"detailAddress\":\"도로명 상세 주소\",\"jibunAddress\":\"지번 주소\",\"jibunDetailAddress\":\"지번 상세 주소\",\"state\":null,\"city\":null,\"nickname\":\"hongman\",\"mallName\":\"테스트 몰\",\"joinTypeName\":\"PC_WEB\",\"joinYmdt\":\"2025-10-29 17:04:53\",\"lastLoginYmdt\":\"2025-10-29 17:04:53\",\"lastLoginIp\":\"127.0.0.1\",\"loginCount\":10,\"pushNotificationAgreed\":true,\"pushNotificationAgreeYmdt\":\"2025-10-29 17:04:53\",\"pushNotificationDisagreeYmdt\":null,\"smsAgreed\":true,\"smsAgreeYmdt\":\"2025-10-29 17:04:53\",\"smsDisagreeYmdt\":null,\"directMailAgreed\":true,\"directMailAgreeYmdt\":\"2025-10-29 17:04:53\",\"directMailDisagreeYmdt\":null,\"oauthIdNo\":\"123456789\",\"additionalInfo\":\"{}\",\"adultCertificated\":true,\"adultCertificatedYmdt\":\"2025-10-29 17:04:53\",\"refundBank\":\"KB\",\"refundBankAccount\":\"12345\",\"refundBankDepositorName\":\"홍길동\",\"agreedTerms\":[\"ACCESS_GUIDE\",\"CLEARANCE_INFO_COLLECTION_AND_USE\"],\"agreedTermsInfos\":[{\"termsType\":\"ACCESS_GUIDE\",\"agreementYmdt\":\"2025-10-29 17:04:53\",\"customTermsNo\":null},{\"termsType\":\"CLEARANCE_INFO_COLLECTION_AND_USE\",\"agreementYmdt\":\"2025-10-29 17:04:53\",\"customTermsNo\":null}],\"customTermsAgreement\":[{\"customTermsNo\":1,\"isAgree\":null,\"updateYmdt\":\"2025-10-29 17:04:53\"}],\"providerType\":\"PAYCO\",\"providerTypes\":[\"PAYCO\",\"NAVER\"],\"businessName\":\"(주)새회사\",\"registrationNo\":\"1231212345\",\"recommender\":null,\"extraInfo\":[{\"extraInfoNo\":1,\"extraInfoOptionNos\":[10,11,12],\"extraInfoOptionTextContent\":null}]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/profile",
+    "summary": "프로필 생성하기",
+    "description": "\n## 부가설명 및 특이사항\n회원 프로필 등록 시 사용하는 API 입니다.\n\n회원가입 화면구현 관련 자세한 내용은 [스킨개발가이드](https://workspace.nhn-commerce.com/guide/skin/dev-cover/join?lv=11) 참고하시길 바랍니다.\n\n* 회원가입 항목 관리 기능 설정에 따라 필수/선택값이 달라질 수 있습니다. 해당 내용은 2024년 3월 27일 적용 예정입니다.\n 회원가입 항목관리 설정 내용은 GET /malls 의 memberJoinConfig 에서 확인할 수 있습니다.\n## OAUTH2 참고사항 \n* [Oauth2 API](https://docs.shopby.co.kr/?url.primaryName=auth/#/OAUTH2/post-oauth2-token) 를 사용하여 토큰을 발급받은 경우,\n* 기존 accessToken 대신 Shop-By-Authorization 로 액세스 토큰을 전달해야합니다.\n* ex) Shop-By-Authorization : Bearer test-access-token",
+    "tags": ["Profile"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/profile1847516858"
+          },
+          "examples": {
+            "post-profile": {
+              "value": "{\"mobileCountryCode\":null,\"mobileNo\":\"01012344321\",\"telephoneNo\":\"0213243422\",\"memberName\":\"홍길동\",\"birthday\":\"19881115\",\"sex\":\"M\",\"email\":\"abcd@abc.com\",\"countryCd\":\"KR\",\"zipCd\":\"13487\",\"address\":\"성남시 분당구 대왕판교로 15\",\"detailAddress\":\"NHN 플레이 뮤지엄\",\"jibunAddress\":\"성남시 분당구 삼평동\",\"jibunDetailAddress\":\"629 NHN 플레이뮤지엄\",\"city\":null,\"state\":null,\"nickname\":\"닉네임\",\"pushNotificationAgreed\":false,\"smsAgreed\":false,\"directMailAgreed\":false,\"joinTermsAgreements\":[\"PI_COLLECTION_AND_USE_OPTIONAL\"],\"customTermsNos\":[1],\"recommenderId\":\"추천인01\",\"memberId\":\"test01\",\"password\":\"asdf!@#123\",\"firstName\":\"길동\",\"lastName\":\"홍\",\"ci\":\"test-ci\",\"certificated\":false,\"groupNo\":null,\"openIdAccessToken\":\"test-access-token\",\"registrationNo\":null,\"businessName\":null,\"companyNo\":null,\"additionalInfo\":\"{ \\\"key\\\" : \\\"value\\\" }\",\"extraInfo\":[{\"extraInfoNo\":1,\"extraInfoOptionNos\":[10,11,12],\"extraInfoOptionTextContent\":null}]}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/profile-1232778972"
+            },
+            "examples": {
+              "post-profile": {
+                "value": "{\"memberNo\":12345,\"memberGradeName\":\"VVIP\",\"memberGradeImageUrl\":\"uploadedFileName.jpg\",\"memberGradeNo\":1,\"memberGroupNames\":\"샘플그룹\",\"memberGroups\":[{\"memberGroupNo\":0,\"memberGroupName\":\"샘플그룹\",\"memberGroupDescription\":\"설명\"}],\"memberName\":\"홍길동\",\"firstName\":null,\"lastName\":null,\"memberId\":\"hongman1\",\"mobileNo\":\"01012341234\",\"mobileCountryCode\":null,\"telephoneNo\":\"01012341234\",\"memberStatus\":\"ACTIVE\",\"memberType\":\"MALL\",\"principalCertificated\":true,\"certificationType\":null,\"birthday\":\"19900406\",\"sex\":\"M\",\"email\":\"hong@nhn.com\",\"zipCd\":\"우편번호\",\"countryCd\":\"KR\",\"address\":\"도로명 주소\",\"detailAddress\":\"도로명 상세 주소\",\"jibunAddress\":\"지번 주소\",\"jibunDetailAddress\":\"지번 상세 주소\",\"state\":null,\"city\":null,\"nickname\":\"hongman\",\"mallName\":\"테스트 몰\",\"joinTypeName\":\"PC_WEB\",\"joinYmdt\":\"2025-10-29 17:04:53\",\"lastLoginYmdt\":\"2025-10-29 17:04:53\",\"lastLoginIp\":\"127.0.0.1\",\"loginCount\":10,\"pushNotificationAgreed\":true,\"pushNotificationAgreeYmdt\":\"2025-10-29 17:04:53\",\"pushNotificationDisagreeYmdt\":null,\"smsAgreed\":true,\"smsAgreeYmdt\":\"2025-10-29 17:04:53\",\"smsDisagreeYmdt\":null,\"directMailAgreed\":true,\"directMailAgreeYmdt\":\"2025-10-29 17:04:53\",\"directMailDisagreeYmdt\":null,\"oauthIdNo\":\"123456789\",\"additionalInfo\":\"{}\",\"adultCertificated\":true,\"adultCertificatedYmdt\":\"2025-10-29 17:04:53\",\"refundBank\":\"KB\",\"refundBankAccount\":\"12345\",\"refundBankDepositorName\":\"홍길동\",\"agreedTerms\":[\"ACCESS_GUIDE\",\"CLEARANCE_INFO_COLLECTION_AND_USE\"],\"agreedTermsInfos\":[{\"termsType\":\"ACCESS_GUIDE\",\"agreementYmdt\":\"2025-10-29 17:04:53\",\"customTermsNo\":null},{\"termsType\":\"CLEARANCE_INFO_COLLECTION_AND_USE\",\"agreementYmdt\":\"2025-10-29 17:04:53\",\"customTermsNo\":null}],\"customTermsAgreement\":[{\"customTermsNo\":1,\"isAgree\":null,\"updateYmdt\":\"2025-10-29 17:04:53\"}],\"providerType\":\"PAYCO\",\"providerTypes\":[\"PAYCO\",\"NAVER\"],\"businessName\":\"(주)새회사\",\"registrationNo\":\"1231212345\",\"recommender\":null,\"extraInfo\":[{\"extraInfoNo\":1,\"extraInfoOptionNos\":[10,11,12],\"extraInfoOptionTextContent\":null}]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/profile",
+    "summary": "회원정보 수정하기 v1.0",
+    "description": "\n## 부가설명 및 특이사항\n회원정보를 수정합니다.\n\n * V1.0 - 회원 정보를 수정합니다.\n * V1.1 - 회원의 현재 비밀번호를 입력받아 비밀번호 확인을 한 후 회원의 정보를 수정합니다.\n 리퀘스트는 Examples에서 확인해주세요.\n## OAUTH2 참고사항 \n* [Oauth2 API](https://docs.shopby.co.kr/?url.primaryName=auth/#/OAUTH2/post-oauth2-token) 를 사용하여 토큰을 발급받은 경우,\n* 기존 accessToken 대신 Shop-By-Authorization 로 액세스 토큰을 전달해야합니다.\n* ex) Shop-By-Authorization : Bearer test-access-token\n",
+    "tags": ["Profile"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "액세스 토큰^|accessToken",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-access-token"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/profile-1202369534"
+          },
+          "examples": {
+            "put-profile": {
+              "value": "{\"countryCd\":null,\"zipCd\":\"12345\",\"address\":\"경기도 성남시 대왕판교로645번길 16\",\"detailAddress\":\"NHN\",\"jibunAddress\":\"성남시 분당구 삼평동 629\",\"jibunDetailAddress\":\"NHN\",\"joinTermsAgreements\":[\"PI_COLLECTION_AND_USE_OPTIONAL\"],\"customTermsNos\":[1],\"city\":null,\"state\":null,\"birthday\":\"19950403\",\"certificated\":false,\"email\":\"gildong@nhn.com\",\"memberName\":\"홍길동\",\"firstName\":null,\"lastName\":null,\"mobileCountryCode\":null,\"mobileNo\":\"01012345678\",\"nickname\":\"길동\",\"password\":\"1q2w3e4r1!\",\"refundBank\":\"WOORI\",\"refundBankAccount\":\"100010001000\",\"refundBankDepositorName\":\"홍길동\",\"sex\":\"F\",\"pushNotificationAgreed\":false,\"smsAgreed\":false,\"directMailAgreed\":false,\"smsAuthKey\":\"123456\",\"telephoneNo\":\"03111112222\",\"additionalInfo\":null,\"businessName\":null,\"extraInfo\":[{\"extraInfoNo\":1,\"extraInfoOptionNos\":[10,11,12],\"extraInfoOptionTextContent\":null}]}"
+            },
+            "put-profile-v-1-1": {
+              "value": "{\"currentPassword\":\"12345678\",\"countryCd\":null,\"address\":\"경기도 성남시 대왕판교로645번길 16\",\"birthday\":\"19950403\",\"certificated\":false,\"detailAddress\":\"NHN\",\"email\":\"gildong@nhn.com\",\"jibunAddress\":\"성남시 분당구 삼평동 629\",\"jibunDetailAddress\":\"NHN\",\"joinTermsAgreements\":[\"PI_COLLECTION_AND_USE_OPTIONAL\"],\"customTermsNos\":[1,2,3],\"city\":null,\"state\":null,\"memberName\":\"홍길동\",\"firstName\":null,\"lastName\":null,\"mobileCountryCode\":null,\"mobileNo\":\"01012345678\",\"nickname\":\"길동\",\"password\":\"1q2w3e4r1!\",\"refundBank\":\"WOORI\",\"refundBankAccount\":\"100010001000\",\"refundBankDepositorName\":\"홍길동\",\"sex\":\"F\",\"pushNotificationAgreed\":false,\"smsAgreed\":false,\"directMailAgreed\":false,\"smsAuthKey\":\"123456\",\"telephoneNo\":\"03111112222\",\"zipCd\":\"12345\",\"additionalInfo\":null,\"extraInfo\":[{\"extraInfoNo\":1,\"extraInfoOptionNos\":[10,11,12],\"extraInfoOptionTextContent\":null}]}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/profile-1900618566"
+            },
+            "examples": {
+              "put-profile": {
+                "value": "{\"memberNo\":1,\"memberGradeName\":\"VVIP\",\"memberGradeImageUrl\":\"uploadedFileName.jpg\",\"memberGradeNo\":1,\"memberGroupNames\":\"테스트그룹\",\"memberGroups\":[{\"memberGroupNo\":0,\"memberGroupName\":\"테스트그룹\",\"memberGroupDescription\":\"설명\"}],\"memberName\":\"홍길동\",\"firstName\":null,\"lastName\":null,\"memberId\":\"gildong\",\"mobileNo\":\"01011112222\",\"mobileCountryCode\":null,\"telephoneNo\":\"03111111111\",\"memberStatus\":\"ACTIVE\",\"memberType\":\"MALL\",\"principalCertificated\":true,\"certificationType\":null,\"birthday\":null,\"sex\":\"X\",\"email\":\"gildong2@nhn.com\",\"zipCd\":null,\"countryCd\":null,\"address\":null,\"detailAddress\":null,\"jibunAddress\":null,\"jibunDetailAddress\":null,\"state\":null,\"city\":null,\"nickname\":null,\"mallName\":\"길동몰\",\"joinTypeName\":\"PC_WEB\",\"joinYmdt\":\"2025-10-29 17:04:59\",\"lastLoginYmdt\":\"2025-10-29 17:04:59\",\"lastLoginIp\":\"127.0.0.1\",\"loginCount\":1,\"pushNotificationAgreed\":true,\"pushNotificationAgreeYmdt\":\"2025-10-29 17:04:59\",\"pushNotificationDisagreeYmdt\":null,\"smsAgreed\":true,\"smsAgreeYmdt\":\"2025-10-29 17:04:59\",\"smsDisagreeYmdt\":null,\"directMailAgreed\":true,\"directMailAgreeYmdt\":\"2025-10-29 17:04:59\",\"directMailDisagreeYmdt\":null,\"oauthIdNo\":\"123456\",\"additionalInfo\":null,\"adultCertificated\":false,\"adultCertificatedYmdt\":null,\"refundBank\":null,\"refundBankAccount\":null,\"refundBankDepositorName\":null,\"agreedTerms\":[\"PI_PROCESS_CONSIGNMENT\",\"PI_PROCESS_CONSIGNMENT\"],\"agreedTermsInfos\":[{\"termsType\":\"PI_PROCESS_CONSIGNMENT\",\"agreementYmdt\":\"2025-10-29 17:04:59\",\"customTermsNo\":null}],\"customTermsAgreement\":[{\"customTermsNo\":10,\"isAgree\":true,\"updateYmdt\":\"2025-10-29 17:04:59\"}],\"providerType\":\"NAVER\",\"providerTypes\":[\"NAVER\"],\"businessName\":null,\"registrationNo\":null,\"recommender\":null,\"extraInfo\":[{\"extraInfoNo\":1,\"extraInfoOptionNos\":[10,11,12],\"extraInfoOptionTextContent\":null}]}"
+              },
+              "put-profile-v-1-1": {
+                "value": "{\"memberNo\":1,\"memberGradeName\":\"VVIP\",\"memberGradeImageUrl\":\"uploadedFileName.jpg\",\"memberGradeNo\":1,\"memberGroupNames\":\"테스트그룹\",\"memberGroups\":[{\"memberGroupNo\":0,\"memberGroupName\":\"테스트그룹\",\"memberGroupDescription\":\"설명\"}],\"memberName\":\"홍길동\",\"firstName\":null,\"lastName\":null,\"memberId\":\"gildong\",\"mobileNo\":\"01011112222\",\"mobileCountryCode\":null,\"telephoneNo\":\"03111111111\",\"memberStatus\":\"ACTIVE\",\"memberType\":\"MALL\",\"principalCertificated\":true,\"certificationType\":null,\"birthday\":null,\"sex\":\"X\",\"email\":\"gildong2@nhn.com\",\"zipCd\":null,\"countryCd\":null,\"address\":null,\"detailAddress\":null,\"jibunAddress\":null,\"jibunDetailAddress\":null,\"state\":null,\"city\":null,\"nickname\":null,\"mallName\":\"길동몰\",\"joinTypeName\":\"PC_WEB\",\"joinYmdt\":\"2025-10-29 17:05:00\",\"lastLoginYmdt\":\"2025-10-29 17:05:00\",\"lastLoginIp\":\"127.0.0.1\",\"loginCount\":1,\"pushNotificationAgreed\":true,\"pushNotificationAgreeYmdt\":\"2025-10-29 17:05:00\",\"pushNotificationDisagreeYmdt\":null,\"smsAgreed\":true,\"smsAgreeYmdt\":\"2025-10-29 17:05:00\",\"smsDisagreeYmdt\":null,\"directMailAgreed\":true,\"directMailAgreeYmdt\":\"2025-10-29 17:05:00\",\"directMailDisagreeYmdt\":null,\"oauthIdNo\":\"123456\",\"additionalInfo\":null,\"adultCertificated\":false,\"adultCertificatedYmdt\":null,\"refundBank\":null,\"refundBankAccount\":null,\"refundBankDepositorName\":null,\"agreedTerms\":[\"PI_PROCESS_CONSIGNMENT\"],\"agreedTermsInfos\":[{\"termsType\":null,\"agreementYmdt\":\"2025-10-29 17:05:00\",\"customTermsNo\":null}],\"customTermsAgreement\":[{\"customTermsNo\":1,\"isAgree\":true,\"updateYmdt\":\"2025-10-29 17:05:00\"}],\"providerType\":\"NAVER\",\"providerTypes\":[\"NAVER\"],\"businessName\":null,\"registrationNo\":null,\"recommender\":null,\"extraInfo\":[{\"extraInfoNo\":1,\"extraInfoOptionNos\":[10,11,12],\"extraInfoOptionTextContent\":null}]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "DELETE",
+    "path": "/profile",
+    "summary": "회원 탈퇴하기",
+    "description": "\n## 부가설명 및 특이사항\n회원 탈퇴 시 사용하는 API 입니다.\n\n## OAUTH2 참고사항 \n* [Oauth2 API](https://docs.shopby.co.kr/?url.primaryName=auth/#/OAUTH2/post-oauth2-token) 를 사용하여 토큰을 발급받은 경우,\n* 기존 accessToken 대신 Shop-By-Authorization 로 액세스 토큰을 전달해야합니다.\n* ex) Shop-By-Authorization : Bearer test-access-token\n",
+    "tags": ["Profile"],
+    "parameters": [
+      {
+        "name": "reason",
+        "in": "query",
+        "description": "탈퇴 사유^|테스트용",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "액세스 토큰^|accessToken",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-access-token"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/profile/address",
+    "summary": "프로필 주소 변경하기",
+    "description": "\n## 부가설명 및 특이사항\n회원의 주소를 변경하는 API 입니다.\n## OAUTH2 참고사항 \n* [Oauth2 API](https://docs.shopby.co.kr/?url.primaryName=auth/#/OAUTH2/post-oauth2-token) 를 사용하여 토큰을 발급받은 경우,\n* 기존 accessToken 대신 Shop-By-Authorization 로 액세스 토큰을 전달해야합니다.\n* ex) Shop-By-Authorization : Bearer test-access-token\n\n",
+    "tags": ["Profile"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "액세스 토큰^|accessToken",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-access-token"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/profile-address-1789523818"
+          },
+          "examples": {
+            "put-profile-address": {
+              "value": "{\"countryCode\":\"KR\",\"zipCd\":\"13487\",\"streetAddress\":\"경기도 성남시 대왕판교로645번길 16\",\"streetAddressDetail\":\"(삼평동, NHN 플레이뮤지엄)\",\"jibunAddress\":\"경기도 성남시 분당구 삼평동 629\",\"jibunAddressDetail\":\"NHN\",\"city\":null,\"state\":null}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/profile/blocked-members",
+    "summary": "차단된 회원 조회하기",
+    "description": "\n## 부가설명 및 특이사항\n내가 차단한 회원의 목록을 조회합니다.\n\n## OAUTH2 참고사항 \n* [Oauth2 API](https://docs.shopby.co.kr/?url.primaryName=auth/#/OAUTH2/post-oauth2-token) 를 사용하여 토큰을 발급받은 경우,\n* 기존 accessToken 대신 Shop-By-Authorization 로 액세스 토큰을 전달해야합니다.\n* ex) Shop-By-Authorization : Bearer test-access-token\n\n",
+    "tags": ["Profile"],
+    "parameters": [
+      {
+        "name": "pageNumber",
+        "in": "query",
+        "description": "페이지 번호^|1",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "pageSize",
+        "in": "query",
+        "description": "한 페이지당 노출 수^|1",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "hasTotalCount",
+        "in": "query",
+        "description": "목록 카운트 포함 여부(false: 미포함(default), true: 포함)^|false",
+        "required": false,
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "액세스 토큰^|accessToken",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-access-token"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/profile-blocked-members1076412467"
+            },
+            "examples": {
+              "get-profile-blocked-member": {
+                "value": "{\"totalCount\":1,\"items\":[{\"blockedMemberNo\":2}]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/profile/blocked-members",
+    "summary": "회원 차단하기",
+    "description": "\n## 부가설명 및 특이사항\n회원을 차단합니다. 차단 시 즉시 차단한 회원이 작성한 상품평, 게시글, 1:1문의 등의 내용을 차단합니다.\n\n## OAUTH2 참고사항 \n* [Oauth2 API](https://docs.shopby.co.kr/?url.primaryName=auth/#/OAUTH2/post-oauth2-token) 를 사용하여 토큰을 발급받은 경우,\n* 기존 accessToken 대신 Shop-By-Authorization 로 액세스 토큰을 전달해야합니다.\n* ex) Shop-By-Authorization : Bearer test-access-token\n\n",
+    "tags": ["Profile"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "액세스 토큰^|accessToken",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-access-token"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/profile-blocked-members-605522724"
+          },
+          "examples": {
+            "post-profile-blocked-member": {
+              "value": "{\"blockedMemberNo\":123}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "200"
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/profile/brand-oauth",
+    "summary": "브랜드 회원 회원가입 처리하기 Ver1.1",
+    "description": "\n## 부가설명 및 특이사항\n브랜드 회원의 회원 가입 처리 API입니다.\n\n브랜드 로그인으로 서브몰에서 최초 로그인한 회원인 경우 위 API를 호출하여 가입 완료 처리를 해야합니다.\n가입 처리시 약관 및 수신 동의 여부를 받을 수 있습니다.\n\n## OAUTH2 참고사항 \n* [Oauth2 API](https://docs.shopby.co.kr/?url.primaryName=auth/#/OAUTH2/post-oauth2-token) 를 사용하여 토큰을 발급받은 경우,\n* 기존 accessToken 대신 Shop-By-Authorization 로 액세스 토큰을 전달해야합니다.\n* ex) Shop-By-Authorization : Bearer test-access-token\n\n## Ver 1.0\n- MemberType = [MALL: 쇼핑몰 회원, OPENID: 연동형 회원, NEOID: 간편로그인 회원]\n- MemberStatus = [WAITING: 대기, ACTIVE: 가입완료, FREEZE or DORMANT: 휴면 , PAUSED :이용정지]\n \n## Ver 1.1\n- MemberType = [MALL: 쇼핑몰 회원, SYNC_ID: 연동형 회원, OPEN_ID: 간편로그인 회원]\n- MemberStatus = [WAITING: 대기, ACTIVE: 가입완료, WITHDRAWN: 탈퇴, FREEZE or DORMANT: 휴면 , PAUSED :이용정지, PENDING: 승인대기]",
+    "tags": ["Profile"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.1"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "액세스 토큰^|accessToken",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-access-token"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/profile-brand-oauth-355872038"
+          },
+          "examples": {
+            "post-profile-brand-oauth": {
+              "value": "{\"pushNotificationAgreed\":null,\"smsAgreed\":null,\"directMailAgreed\":null,\"joinTermsAgreements\":[\"PERSONAL_PROCESS_CONSIGNMENT\",\"PERSONAL_THIRD_PARTY_PROVISION\"]}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/profile-brand-oauth330380794"
+            },
+            "examples": {
+              "post-profile-brand-oauth": {
+                "value": "{\"memberNo\":1000,\"memberId\":\"\",\"oauthIdNo\":\"12345678\",\"memberName\":\"홍길동\",\"nickname\":null,\"memberStatus\":\"ACTIVE\",\"memberType\":\"OPEN_ID\",\"providerType\":null,\"providerTypes\":[],\"mobileNo\":null,\"mobileCountryCode\":null,\"telephoneNo\":null,\"email\":\"01012345678\",\"birthday\":\"19900101\",\"sex\":\"X\",\"principalCertificated\":false,\"adultCertificated\":false,\"adultCertificatedYmdt\":null,\"pushNotificationAgreed\":false,\"pushNotificationAgreeYmdt\":null,\"smsAgreed\":false,\"smsAgreeYmdt\":null,\"directMailAgreed\":false,\"directMailAgreeYmdt\":null,\"countryCd\":null,\"zipCd\":null,\"address\":null,\"detailAddress\":null,\"jibunAddress\":null,\"jibunDetailAddress\":null,\"city\":null,\"state\":null,\"refundBank\":null,\"refundBankAccount\":null,\"refundBankDepositorName\":null,\"joinTypeName\":\"PC\",\"joinYmdt\":\"2021-03-08 13:42:26\",\"lastLoginYmdt\":\"2021-03-08 13:42:26\",\"lastLoginIp\":\"127.0.0.1\",\"loginCount\":1,\"additionalInfo\":null,\"mallName\":\"테스트몰\",\"memberGradeName\":\"기본등급\",\"memberGroups\":[{\"memberGroupNo\":201,\"memberGroupName\":\"신규회원\",\"memberGroupDescription\":\"신규\"}],\"agreedTermsInfos\":[{\"termsType\":\"PI_PROCESS_CONSIGNMENT\",\"agreementYmdt\":\"2021-03-08 13:42:26\",\"customTermsNo\":null},{\"termsType\":\"PI_THIRD_PARTY_PROVISION\",\"agreementYmdt\":\"2021-03-08 13:42:26\",\"customTermsNo\":null}],\"agreedTerms\":[\"PI_PROCESS_CONSIGNMENT\",\"PI_THIRD_PARTY_PROVISION\"],\"memberGroupNames\":\"신규회원\"}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/profile/change-password-after-cert",
+    "summary": "비밀번호 변경",
+    "description": "\n## 부가설명 및 특이사항\n 회원 인증 후 비밀번호를 변경합니다. 기존에 사용중이던 비밀번호와 동일한 비밀번호로 변경할 수 없습니다.\n",
+    "tags": ["Profile"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/profile-change-password-after-cert-1055517755"
+          },
+          "examples": {
+            "post-profile-change-password-after-cert": {
+              "value": "{\"findMethod\":\"SMS\",\"memberId\":\"nhncommerce\",\"newPassword\":\"password\",\"certificationNumber\":\"123456\",\"findMethod\":\"SMS\"}"
+            },
+            "post-profile-change-password-after-cert-by-email": {
+              "value": "{\"findMethod\":\"EMAIL\",\"memberId\":\"nhncommerce\",\"newPassword\":\"password\",\"certificationNumber\":\"123456\",\"findMethod\":\"EMAIL\"}"
+            },
+            "post-profile-change-password-after-cert-by-mobile": {
+              "value": "{\"findMethod\":\"MOBILE\",\"key\":\"ABCDEFGH\",\"newPassword\":\"passowrd\",\"findMethod\":\"MOBILE\"}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/profile/check-password",
+    "summary": "비밀번호 확인하기",
+    "description": "\n## 부가설명 및 특이사항\n 현재 로그인한 사용자가 맞는지 비밀번호를 한번 더 체크할 때 사용하는 API 입니다.\n## OAUTH2 참고사항 \n* [Oauth2 API](https://docs.shopby.co.kr/?url.primaryName=auth/#/OAUTH2/post-oauth2-token) 를 사용하여 토큰을 발급받은 경우,\n* 기존 accessToken 대신 Shop-By-Authorization 로 액세스 토큰을 전달해야합니다.\n* ex) Shop-By-Authorization : Bearer test-access-token\n \n\n## 화면 예시\n ![img](http://image.toast.com/aaaaahb/api-description/member/profile/post_profile_check-password.png?autox150)",
+    "tags": ["Profile"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "액세스 토큰^|accessToken",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-access-token"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/profile-non-masking-1321884890"
+          },
+          "examples": {
+            "post-profile-check-password-failed": {
+              "value": "{\"password\":\"password\"}"
+            },
+            "post-profile-check-password": {
+              "value": "{\"password\":\"password\"}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      },
+      "400": {
+        "description": "400",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/profile-check-password-1287854604"
+            },
+            "examples": {
+              "post-profile-check-password-failed": {
+                "value": "{\"timestamp\":\"2025-10-29 17:05:00\",\"path\":\"POST /shop/profile/check-password\",\"status\":400,\"error\":\"Bad Request\",\"code\":\"M0306\",\"key\":\"member:PasswordCheck:mallNo:id\",\"message\":\"로그인을 {0}회 이상 실패하였습니다. 자동등록방지 문자 입력 후 다시 시도해주세요.\"}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/profile/dormancy",
+    "summary": "휴면 회원 조회하기",
+    "description": "\n## 부가설명 및 특이사항\n 휴면 해제 화면에 노출할 휴면 계정 정보를 조회합니다.\n## OAUTH2 참고사항 \n* [Oauth2 API](https://docs.shopby.co.kr/?url.primaryName=auth/#/OAUTH2/post-oauth2-token) 를 사용하여 토큰을 발급받은 경우,\n* 기존 accessToken 대신 Shop-By-Authorization 로 액세스 토큰을 전달해야합니다.\n* ex) Shop-By-Authorization : Bearer test-access-token",
+    "tags": ["Profile"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "액세스 토큰^|accessToken",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-access-token"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/profile-dormancy436655230"
+            },
+            "examples": {
+              "get-profile-dormancy": {
+                "value": "{\"memberName\":\"홍길동\",\"dormantDateTime\":\"2021-02-02 02:05:00\",\"signUpDateTime\":\"2020-01-01 00:00:00\",\"lastLoginDateTime\":\"2020-02-01 13:42:00\",\"dormantDate\":\"2021-02-02 02:05:00\",\"joinDate\":\"2020-01-01 00:00:00\"}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/profile/dormancy",
+    "summary": "휴면 해제하기",
+    "description": "\n## 부가설명 및 특이사항\n회원의 휴면 상태를 해제합니다.\n## OAUTH2 참고사항 \n* [Oauth2 API](https://docs.shopby.co.kr/?url.primaryName=auth/#/OAUTH2/post-oauth2-token) 를 사용하여 토큰을 발급받은 경우,\n* 기존 accessToken 대신 Shop-By-Authorization 로 액세스 토큰을 전달해야합니다.\n* ex) Shop-By-Authorization : Bearer test-access-token\n",
+    "tags": ["Profile"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "액세스 토큰^|accessToken",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-access-token"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/profile-dormancy1343096684"
+          },
+          "examples": {
+            "put-profile-dormancy": {
+              "value": "{\"authType\":\"NONE\",\"mobileNo\":\"\",\"email\":\"\",\"certificationNumber\":\"\"}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/profile/expel",
+    "summary": "비밀번호 검증 후 회원 탈퇴하기",
+    "description": "\n## 부가설명 및 특이사항\n\n 쇼핑몰 회원일 경우 비밀번호 검증 후 회원 탈퇴합니다.\n## OAUTH2 참고사항 \n* [Oauth2 API](https://docs.shopby.co.kr/?url.primaryName=auth/#/OAUTH2/post-oauth2-token) 를 사용하여 토큰을 발급받은 경우,\n* 기존 accessToken 대신 Shop-By-Authorization 로 액세스 토큰을 전달해야합니다.\n* ex) Shop-By-Authorization : Bearer test-access-token\n ",
+    "tags": ["Profile"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "액세스 토큰^|accessToken",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-access-token"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/profile-expel1984732883"
+          },
+          "examples": {
+            "put-profile-expel": {
+              "value": "{\"password\":\"password\",\"reason\":\"테스트\"}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/profile/find-id",
+    "summary": "아이디 찾기",
+    "description": "\n## 부가설명 및 특이사항\n회원가입시 입력한 정보로 내 아이디를 검색합니다.\n\n\n - 운영자가 이름을 필수 항목으로 설정한 경우 회원 이름을 같이 전달해야합니다.\n - 이름의 경우, memberName 혹은 firstName,lastName 중 하나의 조합으로 전달해야합니다.\n - 운영자가 인증번호 확인을 필수로 설정한 경우 인증번호를 같이 전달해야합니다.\n - 인증번호 확인 또는 휴대폰 본인인증을 사용하지 않은 경우 아이디, 이름, 휴대폰번호, 이메일은 마스킹된 결과가 노출됩니다.\n",
+    "tags": ["Profile"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/profile-find-id2068054830"
+          },
+          "examples": {
+            "post-profile-find-id": {
+              "value": "{\"findMethod\":\"SMS\",\"mobileNo\":\"01012345678\",\"memberName\":\"이쇼핑\",\"firstName\":null,\"lastName\":null,\"certificationNo\":null,\"findMethod\":\"SMS\"}"
+            },
+            "post-profile-find-id-by-email": {
+              "value": "{\"findMethod\":\"EMAIL\",\"email\":\"commerce@nhn-commerce.com\",\"memberName\":\"이쇼핑\",\"firstName\":null,\"lastName\":null,\"certificationNo\":null,\"findMethod\":\"EMAIL\"}"
+            },
+            "post-profile-find-id-by-mobile": {
+              "value": "{\"findMethod\":\"MOBILE\",\"key\":\"asdf\",\"findMethod\":\"MOBILE\"}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/profile-find-id-372189944"
+            },
+            "examples": {
+              "post-profile-find-id": {
+                "value": "[{\"id\":\"nhncommerce\",\"memberName\":\"이쇼핑\",\"mobileNo\":\"01012345678\",\"email\":\"commerce@nhn-commerce.com\",\"joinYmdt\":\"2021-07-29 00:00:00\",\"status\":\"ACTIVE\"}]"
+              },
+              "post-profile-find-id-by-email": {
+                "value": "[{\"id\":\"nhncommerce\",\"memberName\":\"이쇼핑\",\"mobileNo\":\"01012345678\",\"email\":\"commerce@nhn-commerce.com\",\"joinYmdt\":\"2021-07-29 00:00:00\",\"status\":\"ACTIVE\"}]"
+              },
+              "post-profile-find-id-by-mobile": {
+                "value": "[{\"id\":\"nhncommerce\",\"memberName\":\"이쇼핑\",\"mobileNo\":\"01012345678\",\"email\":\"commerce@nhn-commerce.com\",\"joinYmdt\":\"2021-07-29 00:00:00\",\"status\":\"ACTIVE\"}]"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/profile/find-password",
+    "summary": "비밀번호 찾기",
+    "description": "\n## 부가설명 및 특이사항\n 회원 정보의 이메일로 비밀번호 재설정 주소 전달\n\n## 화면 예시\n [![img](http://image.toast.com/aaaaahb/api-description/member/profile/put_profile_password_sending-email-with-url.png?autox150)](http://image.toast.com/aaaaahb/api-description/member/profile/put_profile_password_sending-email-with-url.png)",
+    "tags": ["Profile"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/profile-find-password1588305481"
+          },
+          "examples": {
+            "post-profile-find-password": {
+              "value": "{\"memberId\":\"memberId\",\"uri\":\"https://www.shoppingmall.com/member/resetPassword\",\"content\":null,\"receiveType\":\"EMAIL\",\"inputType\":\"ID\",\"authType\":\"INIT\"}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/profile-find-password-260111847"
+            },
+            "examples": {
+              "post-profile-find-password": {
+                "value": "{\"email\":\"te****@nhn.com\",\"mobileNo\":\"\"}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/profile/grade",
+    "summary": "내 등급 조회하기",
+    "description": "\n## 부가설명 및 특이사항\n내 등급 정보를 가져옵니다.\n\n## OAUTH2 참고사항 \n* [Oauth2 API](https://docs.shopby.co.kr/?url.primaryName=auth/#/OAUTH2/post-oauth2-token) 를 사용하여 토큰을 발급받은 경우,\n* 기존 accessToken 대신 Shop-By-Authorization 로 액세스 토큰을 전달해야합니다.\n* ex) Shop-By-Authorization : Bearer test-access-token\n",
+    "tags": ["Profile"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "액세스 토큰^|accessToken",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "access-token"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/profile-grade-1017060239"
+            },
+            "examples": {
+              "get-profile-grade": {
+                "value": "{\"label\":\"\",\"description\":\"\",\"memberGradeImageUrl\":null,\"evaluationCondition\":{\"minimumCount\":0,\"minimumPayment\":0},\"reserveAutoSupplying\":{\"used\":false,\"amount\":0,\"type\":\"NONE\"},\"reserveBenefit\":{\"used\":false,\"reserveRate\":0},\"coupons\":[{\"couponNo\":123,\"couponName\":\"기본쿠폰\",\"issueType\":\"INSERT\",\"discountType\":\"AMOUNT\",\"discountAmount\":1000,\"discountPercent\":0,\"maximumDiscountAmount\":0}],\"gradeDescription\":\"\",\"accumulationRate\":0,\"pointRate\":0,\"minOrderCnt\":0,\"minOrderAmt\":0}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/profile/id",
+    "summary": "아이디 찾기 v1.1",
+    "description": "\n## 부가설명 및 특이사항\n모바일 or 이메일 인중 후 아이디를 조회할 수 있는 API 입니다. (version 1.1)\n",
+    "tags": ["Profile"],
+    "parameters": [
+      {
+        "name": "companyNo",
+        "in": "query",
+        "description": "법인번호^|123",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "memberName",
+        "in": "query",
+        "description": "이름 (쇼핑몰 회원가입 정보 설정에서 회원명을 사용함 또는 필수로 지정한 경우 필수입력)^|홍길동",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mobileNo",
+        "in": "query",
+        "description": "휴대전화 번호 (SMS 인증 찾기로 인증번호 전송시 입력)^|01012341234",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "email",
+        "in": "query",
+        "description": "이메일 (이메일 찾기로 인증번호 전송시 입력)^|aaa@bbb.ccc",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "ci",
+        "in": "query",
+        "description": "CI^|ASDF1234",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "certificationNumber",
+        "in": "query",
+        "description": "인증번호^|123123",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.1",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.1"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/profile-id-1482004638"
+            },
+            "examples": {
+              "get-profile-id-1-1": {
+                "value": "[{\"id\":\"tester***\",\"memberName\":\"테*터\",\"mobileNo\":\"010-12**-12**\",\"email\":\"te*******@nhn.com\",\"joinYmdt\":\"2025-10-29 17:04:58\",\"status\":\"ACTIVE\"}]"
+              },
+              "get-profile-id-1-0": {
+                "value": "{\"id\":\"tester***\",\"memberName\":\"테*터\",\"mobileNo\":\"010-12**-12**\",\"email\":\"te*******@nhn.com\",\"joinYmdt\":\"2025-10-29 17:04:59\",\"status\":\"ACTIVE\"}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/profile/id",
+    "summary": "회원 아이디 변경하기",
+    "description": "\n## 부가설명 및 특이사항\n인증 후 회원 아이디를 변경할 수 있는 API 입니다.\n",
+    "tags": ["Profile"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/profile-id414893891"
+          },
+          "examples": {
+            "put-profile-id": {
+              "value": "{\"currentMemberId\":\"memberId\",\"newMemberId\":\"newMemberId\",\"certificationNumber\":\"123456\",\"updatesEmail\":false}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/profile/next-grade",
+    "summary": "내 다음 등급 조회하기",
+    "description": "\n## 부가설명 및 특이사항\n내 다음 예상 등급 정보를 가져옵니다.\n몰의 전체 등급 리스트와 현재 실적도 같이 내려줍니다.\n\n## OAUTH2 참고사항 \n* [Oauth2 API](https://docs.shopby.co.kr/?url.primaryName=auth/#/OAUTH2/post-oauth2-token) 를 사용하여 토큰을 발급받은 경우,\n* 기존 accessToken 대신 Shop-By-Authorization 로 액세스 토큰을 전달해야합니다.\n* ex) Shop-By-Authorization : Bearer test-access-token\n",
+    "tags": ["Profile"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "액세스 토큰^|accessToken",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "access-token"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/profile-next-grade221226160"
+            },
+            "examples": {
+              "get-profile-next-grade": {
+                "value": "{\"gradeEvaluationConfig\":{\"evaluationCondition\":\"AMT_OR_CNT\",\"evaluationDetailCondition\":\"BUY_CONFIRM\",\"evaluationPeriod\":0,\"validPeriod\":1,\"dayOfAdjustment\":1},\"currentGradeNo\":10,\"currentPerformance\":{\"orderCount\":1,\"orderAmount\":0},\"nextGradeNo\":11,\"nextGradeEvaluationDate\":\"2025-10-29\"}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/profile/non-masking",
+    "summary": "마스킹 해제된 회원정보 조회하기",
+    "description": "\n## 부가설명 및 특이사항\n 비밀번호 인증으로 마스킹 해제된 회원정보를 조회합니다.\n 오픈아이디의 경우, 재인증을 통해 마스킹 해제된 회원정보를 조회할 수 있습니다.\n \n * Oauth 스펙 - [오픈아이디 토큰 발급하기 - POST](https://docs.shopby.co.kr/?url.primaryName=auth/#/Authentication/post-oauth-openid)\n   -> reauthenticate 인자값 사용\n * Oauth2 스펙 - [오픈아이디 토큰 재인증 처리하기](https://docs.shopby.co.kr/?url.primaryName=auth/#/OAUTH2/put-oauth2-openid-reauthenticate)\n## 쇼핑몰 회원인 경우 Request Body\n| name      | type      | required  | default value | description      |\n|-----------|-----------|-----------|---------------|------------------|\n| password   | String    | Y         |               | 비밀번호         |\n## 오픈아이디 회원의 경우 Request Body\n### Body 값 없이 POST 요청\n\n## 화면 예시\n ![img](http://image.toast.com/aaaaahb/api-description/member/profile/post_profile_check-password.png?autox150)",
+    "tags": ["Profile"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "액세스 토큰^|accessToken",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-access-token"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/profile-non-masking-1321884890"
+          },
+          "examples": {
+            "post-profile-non-masking": {
+              "value": "{\"password\":\"password\"}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/profile-non-masking355828953"
+            },
+            "examples": {
+              "post-profile-non-masking": {
+                "value": "{\"memberNo\":12345,\"memberGradeName\":\"VVIP\",\"memberGradeImageUrl\":\"uploadedFileName.jpg\",\"memberGradeNo\":1,\"memberGroupNames\":\"샘플그룹\",\"memberGroups\":[{\"memberGroupNo\":0,\"memberGroupName\":\"샘플그룹\",\"memberGroupDescription\":\"설명\"}],\"memberName\":\"홍길동\",\"firstName\":null,\"lastName\":null,\"memberId\":\"hongman1\",\"mobileNo\":\"01012341234\",\"mobileCountryCode\":null,\"telephoneNo\":\"01012341234\",\"memberStatus\":\"ACTIVE\",\"memberType\":\"MALL\",\"principalCertificated\":true,\"certificationType\":null,\"birthday\":\"19900406\",\"sex\":\"M\",\"email\":\"hong@nhn.com\",\"zipCd\":\"우편번호\",\"countryCd\":\"KR\",\"address\":\"도로명 주소\",\"detailAddress\":\"도로명 상세 주소\",\"jibunAddress\":\"지번 주소\",\"jibunDetailAddress\":\"지번 상세 주소\",\"state\":null,\"city\":null,\"nickname\":\"hongman\",\"mallName\":\"테스트 몰\",\"joinTypeName\":\"PC_WEB\",\"joinYmdt\":\"2025-10-29 17:04:53\",\"lastLoginYmdt\":\"2025-10-29 17:04:53\",\"lastLoginIp\":\"127.0.0.1\",\"loginCount\":10,\"pushNotificationAgreed\":true,\"pushNotificationAgreeYmdt\":\"2025-10-29 17:04:53\",\"pushNotificationDisagreeYmdt\":null,\"smsAgreed\":true,\"smsAgreeYmdt\":\"2025-10-29 17:04:53\",\"smsDisagreeYmdt\":null,\"directMailAgreed\":true,\"directMailAgreeYmdt\":\"2025-10-29 17:04:53\",\"directMailDisagreeYmdt\":null,\"oauthIdNo\":\"123456789\",\"additionalInfo\":\"{}\",\"adultCertificated\":true,\"adultCertificatedYmdt\":\"2025-10-29 17:04:53\",\"refundBank\":\"KB\",\"refundBankAccount\":\"12345\",\"refundBankDepositorName\":\"홍길동\",\"agreedTerms\":[\"ACCESS_GUIDE\",\"CLEARANCE_INFO_COLLECTION_AND_USE\"],\"agreedTermsInfos\":[{\"termsType\":\"ACCESS_GUIDE\",\"agreementYmdt\":\"2025-10-29 17:04:53\",\"customTermsNo\":null},{\"termsType\":\"CLEARANCE_INFO_COLLECTION_AND_USE\",\"agreementYmdt\":\"2025-10-29 17:04:53\",\"customTermsNo\":null}],\"customTermsAgreement\":[{\"customTermsNo\":1,\"isAgree\":null,\"updateYmdt\":\"2025-10-29 17:04:53\"}],\"providerType\":\"PAYCO\",\"providerTypes\":[\"PAYCO\",\"NAVER\"],\"businessName\":\"(주)새회사\",\"registrationNo\":\"1231212345\",\"recommender\":null,\"extraInfo\":[{\"extraInfoNo\":1,\"extraInfoOptionNos\":[10,11,12],\"extraInfoOptionTextContent\":null}]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/profile/openid",
+    "summary": "오픈 아이디 회원가입 처리하기 Ver1.1",
+    "description": "\n## 부가설명 및 특이사항\n오픈 아이디를 사용한 회원 가입 처리입니다.\n\n간편 로그인으로 신규 가입을 하는 회원인 경우 위 API를 호출하여 가입 완료 처리를 해야합니다.<br/>\n가입 처리시 추가적인 사용자 정보를 받을 수 있습니다.<br/>\n\n카카오싱크 회원의 경우 약관은 카카오싱크 연동과 동시에 저장되기 때문에 joinTermsAgreements는 null로 보내주시면 됩니다.\n\n## OAUTH2 참고사항 \n* [Oauth2 API](https://docs.shopby.co.kr/?url.primaryName=auth/#/OAUTH2/post-oauth2-token) 를 사용하여 토큰을 발급받은 경우,\n* 기존 accessToken 대신 Shop-By-Authorization 로 액세스 토큰을 전달해야합니다.\n* ex) Shop-By-Authorization : Bearer test-access-token\n\n## Ver 1.0\n- MemberType = [MALL: 쇼핑몰 회원, OPENID: 연동형 회원, NEOID: 간편로그인 회원]\n- MemberStatus = [WAITING: 대기, ACTIVE: 가입완료, FREEZE or DORMANT: 휴면 , PAUSED :이용정지]\n \n## Ver 1.1\n- MemberType = [MALL: 쇼핑몰 회원, SYNC_ID: 연동형 회원, OPEN_ID: 간편로그인 회원]\n- MemberStatus = [WAITING: 대기, ACTIVE: 가입완료, WITHDRAWN: 탈퇴, FREEZE or DORMANT: 휴면 , PAUSED :이용정지, PENDING: 승인대기]",
+    "tags": ["Profile"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.1"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "액세스 토큰^|accessToken",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-access-token"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/profile-openid-858639222"
+          },
+          "examples": {
+            "post-profile-openid": {
+              "value": "{\"mobileCountryCode\":null,\"mobileNo\":null,\"telephoneNo\":null,\"memberName\":null,\"firstName\":null,\"lastName\":null,\"birthday\":null,\"sex\":null,\"email\":null,\"countryCd\":null,\"zipCd\":null,\"address\":null,\"detailAddress\":null,\"jibunAddress\":null,\"jibunDetailAddress\":null,\"city\":null,\"state\":null,\"nickname\":null,\"pushNotificationAgreed\":null,\"smsAgreed\":null,\"directMailAgreed\":null,\"joinTermsAgreements\":[\"PERSONAL_PROCESS_CONSIGNMENT\",\"PERSONAL_THIRD_PARTY_PROVISION\"],\"customTermsNos\":[],\"certificated\":null}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/profile-brand-oauth330380794"
+            },
+            "examples": {
+              "post-profile-openid": {
+                "value": "{\"memberNo\":1000,\"memberId\":\"\",\"oauthIdNo\":\"12345678\",\"memberName\":\"홍길동\",\"nickname\":null,\"memberStatus\":\"ACTIVE\",\"memberType\":\"OPEN_ID\",\"providerType\":null,\"providerTypes\":[],\"mobileNo\":null,\"mobileCountryCode\":null,\"telephoneNo\":null,\"email\":\"01012345678\",\"birthday\":\"19900101\",\"sex\":\"X\",\"principalCertificated\":false,\"adultCertificated\":false,\"adultCertificatedYmdt\":null,\"pushNotificationAgreed\":false,\"pushNotificationAgreeYmdt\":null,\"smsAgreed\":false,\"smsAgreeYmdt\":null,\"directMailAgreed\":false,\"directMailAgreeYmdt\":null,\"countryCd\":null,\"zipCd\":null,\"address\":null,\"detailAddress\":null,\"jibunAddress\":null,\"jibunDetailAddress\":null,\"city\":null,\"state\":null,\"refundBank\":null,\"refundBankAccount\":null,\"refundBankDepositorName\":null,\"joinTypeName\":\"PC\",\"joinYmdt\":\"2021-03-08 13:42:26\",\"lastLoginYmdt\":\"2021-03-08 13:42:26\",\"lastLoginIp\":\"127.0.0.1\",\"loginCount\":1,\"additionalInfo\":null,\"mallName\":\"테스트몰\",\"memberGradeName\":\"기본등급\",\"memberGroups\":[{\"memberGroupNo\":201,\"memberGroupName\":\"신규회원\",\"memberGroupDescription\":\"신규\"}],\"agreedTermsInfos\":[{\"termsType\":\"PI_PROCESS_CONSIGNMENT\",\"agreementYmdt\":\"2021-03-08 13:42:26\",\"customTermsNo\":null},{\"termsType\":\"PI_THIRD_PARTY_PROVISION\",\"agreementYmdt\":\"2021-03-08 13:42:26\",\"customTermsNo\":null}],\"agreedTerms\":[\"PI_PROCESS_CONSIGNMENT\",\"PI_THIRD_PARTY_PROVISION\"],\"memberGroupNames\":\"신규회원\"}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/profile/password",
+    "summary": "비밀번호 변경하기",
+    "description": "\n## 부가설명 및 특이사항\n 인증이 완료된 사용자의 비밀번호를 변경합니다. (version 1.1)\n## OAUTH2 참고사항 \n* [Oauth2 API](https://docs.shopby.co.kr/?url.primaryName=auth/#/OAUTH2/post-oauth2-token) 를 사용하여 토큰을 발급받은 경우,\n* 기존 accessToken 대신 Shop-By-Authorization 로 액세스 토큰을 전달해야합니다.\n* ex) Shop-By-Authorization : Bearer test-access-token\n ",
+    "tags": ["Profile"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.1",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.1"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "액세스 토큰^|accessToken",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-access-token"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/profile-password-1031112528"
+          },
+          "examples": {
+            "put-profile-password-1-1": {
+              "value": "{\"currentPassword\":\"password\",\"newPassword\":\"password1\",\"willChangeNextTime\":false}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/profile/rename",
+    "summary": "NHN KCP 본인인증으로 회원 개인정보 갱신하기",
+    "description": "\n## 부가설명 및 특이사항\n NHN KCP에서 보내준 본인인증 확인키를 파라미터로 보내, 회원의 이름/성별/생년월일/CI 등의 정보를 본인인증 정보로 업데이트합니다.\n\n (※ 본인인증 키는 KCP 본인확인 절차를 참고바랍니다)\n\n 단, 만약 이미 동일한 실명으로 인증된 회원이 있을 경우(자기 자신 제외) 본인인증 정보가 갱신되지 않습니다.\n\n## OAUTH2 참고사항 \n* [Oauth2 API](https://docs.shopby.co.kr/?url.primaryName=auth/#/OAUTH2/post-oauth2-token) 를 사용하여 토큰을 발급받은 경우,\n* 기존 accessToken 대신 Shop-By-Authorization 로 액세스 토큰을 전달해야합니다.\n* ex) Shop-By-Authorization : Bearer test-access-token\n",
+    "tags": ["Profile"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "액세스 토큰^|accessToken",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "access-token"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/profile-rename-29683380"
+          },
+          "examples": {
+            "post-profile-rename": {
+              "value": "{\"key\":\"20210101000000\"}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "200"
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/profile/report",
+    "summary": "회원 신고하기",
+    "description": "\n## 부가설명 및 특이사항\n회원을 신고합니다.\n\n## OAUTH2 참고사항 \n* [Oauth2 API](https://docs.shopby.co.kr/?url.primaryName=auth/#/OAUTH2/post-oauth2-token) 를 사용하여 토큰을 발급받은 경우,\n* 기존 accessToken 대신 Shop-By-Authorization 로 액세스 토큰을 전달해야합니다.\n* ex) Shop-By-Authorization : Bearer test-access-token\n\n",
+    "tags": ["Profile"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "액세스 토큰^|accessToken",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-access-token"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/profile-report724740315"
+          },
+          "examples": {
+            "post-profile-report": {
+              "value": "{\"accusedMemberNo\":1001,\"reportType\":\"ETC\",\"reportReason\":\"신고 이유\"}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "200"
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/profile/synchronize",
+    "summary": "기존 회원을 오픈 아이디 회원으로 전환하기(카카오싱크 전용)",
+    "description": "\n## 부가설명 및 특이사항\n기존 회원을 오픈 아이디 회원으로 전환합니다.\n\n오픈 아이디 회원으로 가입시, 같은 이메일을 가진 기존 일반 회원을 합칠 때 사용합니다.\n\n일반 회원에서 오픈 아이디 회원으로 전환이 완료되면 가입 완료 처리가 됩니다.\n\n전환 완료시, 기존 토큰은 만료처리되고 새로운 토큰이 발급됩니다.\n\n이후, ID/PW 로그인을 불가능하며 전환한 오픈 아이디 회원으로 로그인이 가능합니다.\n\n현재는 카카오싱크 회원만 지원합니다.\n\n## OAUTH2 참고사항 \n* [Oauth2 API](https://docs.shopby.co.kr/?url.primaryName=auth/#/OAUTH2/post-oauth2-token) 를 사용하여 토큰을 발급받은 경우,\n* 기존 accessToken 대신 Shop-By-Authorization 로 액세스 토큰을 전달해야합니다.\n* ex) Shop-By-Authorization : Bearer test-access-token\n",
+    "tags": ["Profile"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "액세스 토큰^|accessToken",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-access-token"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/profile-synchronize-1039092624"
+          },
+          "examples": {
+            "synchronize": {
+              "value": "{\"id\":\"account\",\"password\":\"password\"}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/profile-synchronize391953204"
+            },
+            "examples": {
+              "synchronize": {
+                "value": "{\"tokenType\":null,\"accessToken\":\"test-access-token\",\"expiresIn\":10000,\"refreshToken\":null,\"refreshTokenExpiresIn\":null}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/profile/ci/exists",
+    "summary": "CI 중복확인하기",
+    "description": "\n## 부가설명 및 특이사항\n 쇼핑몰에 동일한 CI를 사용중인 회원이 있는지 확인합니다.\n 현재 회원이 로그인중인 경우, 엑세스 토큰을 함께 전달하면 본인을 제외하고 동일한 CI를 사용중인 회원이 있는지 확인합니다.\n\n 휴대폰 본인인증을 사용하는 경우 여러 사용자가 동일한 CI로 회원가입할 수 없습니다.\n 회원가입 / 수정 전 CI를 반드시 확인해주세요.\n\n 요청 CI 값은 [KCP 본인인증 결과 조회하기 API](https://docs.shopby.co.kr/?url.primaryName=auth/#/KCPCertification/get-kcp-id-verification-response) Response 객체의 CI 값을 이용합니다.\n CI는 특수문자를 포함하고 있기때문에, [URL 인코딩](https://www.urlencoder.org/ko/) 을 한 뒤에 전달해야합니다.\n",
+    "tags": ["Profile"],
+    "parameters": [
+      {
+        "name": "ci",
+        "in": "query",
+        "description": "CI^|abcde",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "회원 엑세스 토큰",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/profile-ci-exists768970653"
+            },
+            "examples": {
+              "get-profile-ci-exists": {
+                "value": "{\"exist\":false,\"status\":null}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/profile/ci/myself",
+    "summary": "CI 일치 확인하기",
+    "description": "\n## 부가설명 및 특이사항\n 쇼핑몰 회원의 CI와 요청 CI 값이 일치하는지 확인합니다.\n 엑세스 토큰을 함께 전달하여 본인의 CI 값과 요청 CI를 비교하여 일치하는지 확인합니다.\n\n 요청 CI 값은 [KCP 본인인증 결과 조회하기 API](https://docs.shopby.co.kr/?url.primaryName=auth/#/KCPCertification/get-kcp-id-verification-response) Response 객체의 CI 값을 이용합니다.\n CI는 특수문자를 포함하고 있기때문에, [URL 인코딩](https://www.urlencoder.org/ko/) 을 한 뒤에 전달해야합니다.\n",
+    "tags": ["Profile"],
+    "parameters": [
+      {
+        "name": "ci",
+        "in": "query",
+        "description": "임의로 생성된 개인인증 값^|abcde",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "회원 엑세스 토큰",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-access-token"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/profile-ci-myself2067648940"
+            },
+            "examples": {
+              "get-profile-ci-myself": {
+                "value": "{\"matched\":true}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/profile/email/exist",
+    "summary": "해당 쇼핑몰에 이메일 중복여부 체크하기",
+    "description": "\n## 부가설명 및 특이사항\n 해당 쇼핑몰에 입력한 이메일을 가진 회원이 있는지 확인합니다.\n true가 회신되는 경우 이미 해당 이메일로 가입한 회원이 존재합니다. (이메일 중복 입력)\n\n## Parameters\n| name | type | required | default value | description |\n| :---: | :---: | :---: | :---: | :--- |\n| email           | string   | Y | - | 이메일 |\n| memberTypes      | string    | N | - | 회원 유형(list) <br> MALL: 일반 회원<br>SYNC_ID: 연동형 회원<br>OPEN_ID: 간편로그인 회원 |\n\n## 화면 예시\n ![img](http://image.toast.com/aaaaahb/api-description/member/profile/get_profile_email_exist.png?autox150)",
+    "tags": ["Profile"],
+    "parameters": [
+      {
+        "name": "email",
+        "in": "query",
+        "description": "회원 이메일 주소^|test@test.com",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "memberTypes",
+        "in": "query",
+        "description": "회원유형 리스트 (기본 - 쇼핑몰 회원(MALL)",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "enum": ["MALL: 일반 회원", "SYNC_ID: 연동형 회원", "OPEN_ID: 간편로그인 회원"]
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/profile-email-exist1345433695"
+            },
+            "examples": {
+              "get-profile-email-exist": {
+                "value": "{\"exist\":false,\"status\":null}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/profile/external-member/exist",
+    "summary": "외부회원 중복확인하기",
+    "description": "\n## 부가설명 및 특이사항\n 전달 받은 openAccessToken을 활용하여 해당 토큰에 해당하는 회원이 이미 가입되어있는지 확인합니다.\n 외부회원연동을 사용하는 몰에서만 사용가능합니다.\n",
+    "tags": ["Profile"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/profile-external-member-exist1934641967"
+          },
+          "examples": {
+            "post-profile-external-member-exists": {
+              "value": "{\"openAccessToken\":\"test-access-token\"}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/profile-external-member-exist19885919"
+            },
+            "examples": {
+              "post-profile-external-member-exists": {
+                "value": "{\"result\":\"true\"}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/profile/id/email",
+    "summary": "ID 변경 메일 발송하기",
+    "description": "\n## 부가설명 및 특이사항\nID를 변경할 수 있는 내용을 첨부한 email을 발송하는 API 입니다.\n## OAUTH2 참고사항 \n* [Oauth2 API](https://docs.shopby.co.kr/?url.primaryName=auth/#/OAUTH2/post-oauth2-token) 를 사용하여 토큰을 발급받은 경우,\n* 기존 accessToken 대신 Shop-By-Authorization 로 액세스 토큰을 전달해야합니다.\n* ex) Shop-By-Authorization : Bearer test-access-token\n\n",
+    "tags": ["Profile"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "액세스 토큰^|accessToken",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-access-token"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/profile-id-email1633415553"
+          },
+          "examples": {
+            "post-profile-id-email": {
+              "value": "{\"url\":\"https://www.shoppingmall.com/member/id\"}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/profile-id-email1770998150"
+            },
+            "examples": {
+              "post-profile-id-email": {
+                "value": "{\"result\":\"email@nhn.com\"}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/profile/id/exist",
+    "summary": "해당 쇼핑몰에 아이디 중복여부 체크하기",
+    "description": "\n## 부가설명 및 특이사항\n 해당 쇼핑몰에 입력한 아이디로 가진 회원이 있는지 확인합니다.\n true가 회신되는 경우 이미 해당 아이디로 가입한 회원이 존재합니다. (아이디 중복 입력)\n\n## 화면 예시\n ![img](http://image.toast.com/aaaaahb/api-description/member/profile/get_profile_id_exist.png?autox150)",
+    "tags": ["Profile"],
+    "parameters": [
+      {
+        "name": "memberId",
+        "in": "query",
+        "description": "회원 ID^|memberId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/profile-email-exist1345433695"
+            },
+            "examples": {
+              "get-profile-id-exist": {
+                "value": "{\"exist\":false,\"status\":null}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/profile/member/extra-infos",
+    "summary": "회원별 추가항목 조회",
+    "description": "\n## 부가설명 및 특이사항\n회원별 추가항목 정보를 조회합니다.\n추가항목 공개여부가 Y 인 항목들만 조회가 가능합니다.\n",
+    "tags": ["Profile"],
+    "parameters": [
+      {
+        "name": "memberNos",
+        "in": "query",
+        "description": "회원 번호 목록^|1,2,3",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/profile-member-extra-infos-1686285859"
+            },
+            "examples": {
+              "get-extra-info-members": {
+                "value": "{\"memberSummaryExtraInfos\":[{\"memberNo\":1000,\"memberExtraInfos\":[{\"extraInfoName\":\"추가 항목 명\",\"extraInfoOptionNames\":[\"추가항목 옵션명\"],\"extraInfoTextContent\":null}]}]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/profile/mobile/exist",
+    "summary": "해당 쇼핑몰에 휴대폰 번호 중복여부 확인하기",
+    "description": "\n## 부가설명 및 특이사항\n해당 쇼핑몰에 입력한 휴대폰번호가 있는지 확인하는 API 입니다.\n",
+    "tags": ["Profile"],
+    "parameters": [
+      {
+        "name": "mobileNo",
+        "in": "query",
+        "description": "휴대전화 번호^|01012345678",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/profile-mobile-exist578354644"
+            },
+            "examples": {
+              "get-profile-mobile-exist": {
+                "value": "{\"mobileNoExist\":true,\"status\":\"ACTIVE\",\"memberId\":\"membe***\"}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/profile/nickname/exist",
+    "summary": "해당 쇼핑몰에 닉네임 중복여부 체크하기",
+    "description": "\n## 부가설명 및 특이사항\n 해당 쇼핑몰에 입력한 닉네임으로 가진 회원이 있는지 확인합니다.\n true가 회신되는 경우 이미 해당 닉네임으로 가입한 회원이 존재합니다. (닉네임 중복 입력)",
+    "tags": ["Profile"],
+    "parameters": [
+      {
+        "name": "nickname",
+        "in": "query",
+        "description": "회원 닉네임^|jinsu",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/profile-email-exist1345433695"
+            },
+            "examples": {
+              "get-profile-nickname-exist": {
+                "value": "{\"exist\":false,\"status\":null}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/profile/password/search-account",
+    "summary": "비밀번호 찾기를 위한 계정 조회하기",
+    "description": "\n## 부가설명 및 특이사항\n 비밀번호 찾기를 위한 계정 정보를 조회합니다.\n 개인정보 항목인 이름, 휴대폰번호, 이메일은 마스킹된 값으로 조회됩니다.\n",
+    "tags": ["Profile"],
+    "parameters": [
+      {
+        "name": "memberId",
+        "in": "query",
+        "description": "검색할 회원 아이디^|memberId",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/profile-password-search-account784713147"
+            },
+            "examples": {
+              "get-profile-password-search-account": {
+                "value": "{\"memberNo\":1,\"status\":\"ACTIVE\",\"name\":\"테*터\",\"mobileNo\":\"01012**56**\",\"email\":\"em***@email.com\",\"hasCI\":false}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/profile/password/sending-email-with-url",
+    "summary": "비밀번호 변경/초기화 URL의 이메일 발송하기",
+    "description": "\n## 부가설명 및 특이사항\n 비밀번호 변경 또는 초기화하는 URL을 해당 사용자의 이메일로 발송합니다\n\n## 화면 예시\n ![img](http://image.toast.com/aaaaahb/api-description/member/profile/put_profile_password_sending-email-with-url.png?autox150)",
+    "tags": ["Profile"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/profile-password-sending-email-with-url-1261280262"
+          },
+          "examples": {
+            "put-profile-password-sending-email-with-url": {
+              "value": "{\"memberId\":\"memberId\",\"url\":\"https://www.shoppingmall.com/member/resetPassword\",\"content\":\"\"}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/profile/member/equals/with-email",
+    "summary": "해당 쇼핑몰 아이디, 이름, 이메일 검증하기",
+    "description": "\n## 부가설명 및 특이사항\n 해당 쇼핑몰에 입력한 아이디, 이름, 이메일과 동일한 회원이 있는지 여부 확인합니다.\n true이면 회원이 존재합니다.\n\n## 화면 예시\n ![img](http://image.toast.com/aaaaahb/api-description/member/profile/get_profile_member_equals_with-mobile1.png?autox150)\n ![img](http://image.toast.com/aaaaahb/api-description/member/profile/get_profile_member_equals_with-mobile2.png?autox150)",
+    "tags": ["Profile"],
+    "parameters": [
+      {
+        "name": "memberId",
+        "in": "query",
+        "description": "아이디",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "memberName",
+        "in": "query",
+        "description": "이름",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "email",
+        "in": "query",
+        "description": "이메일",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/profile-email-exist1345433695"
+            },
+            "examples": {
+              "get-profile-member-equals-with-email": {
+                "value": "{\"exist\":false,\"status\":null}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/profile/member/equals/with-mobile",
+    "summary": "해당 쇼핑몰 아이디, 이름, 휴대폰 번호 검증하기",
+    "description": "\n## 부가설명 및 특이사항\n 해당 쇼핑몰에 입력한 아이디, 이름, 휴대폰 번호와 동일한 사용자가 있는지 여부 확인합니다.\n true이면 회원이 존재합니다.\n\n## 화면 예시\n ![img](http://image.toast.com/aaaaahb/api-description/member/profile/get_profile_member_equals_with-mobile1.png?autox150)\n ![img](http://image.toast.com/aaaaahb/api-description/member/profile/get_profile_member_equals_with-mobile2.png?autox150)",
+    "tags": ["Profile"],
+    "parameters": [
+      {
+        "name": "memberId",
+        "in": "query",
+        "description": "아이디^|test001",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "memberName",
+        "in": "query",
+        "description": "이름^|홍길동",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mobileNo",
+        "in": "query",
+        "description": "휴대폰 번호^|aaa@bbb.ccc",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/profile-email-exist1345433695"
+            },
+            "examples": {
+              "get-profile-member-equals-with-mobile": {
+                "value": "{\"exist\":false,\"status\":null}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/profile/password/no-authentication/after-certification",
+    "summary": "본인인증 후 비밀번호 변경하기",
+    "description": "\n## 부가설명 및 특이사항\n 로그인하지 않음 사용자의 비밀번호를 변경합니다.\n 본인인증 후의 단계 이므로 이전단계인 본인인증 관련 API는 본인인증 API링크 참고 바랍니다. [본인인증](https://docs.shopby.co.kr/?urls.primaryName=auth#/%5BProfile%5D%20%3E%20KCPCertification/render_kcp_form)\n\n## 화면 예시\n [![sample](https://image.toast.com/aaaaahb/api-description/member/profile/put_profile_password_no-authenication_after-certification.png?autox150)](https://image.toast.com/aaaaahb/api-description/member/profile/put_profile_password_no-authenication_after-certification.png)",
+    "tags": ["Profile"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/profile-password-no-authentication-after-certification1510601967"
+          },
+          "examples": {
+            "put-profile-password-no-authentication-after-certification": {
+              "value": "{\"newPassword\":\"password\",\"key\":\"ABCDEFGH\"}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/profile/password/no-authentication/certificated-by-email",
+    "summary": "이메일 인증 후 패스워드 변경하기.",
+    "description": "\n## 부가설명 및 특이사항\n 로그인하지 않음 사용자의 비밀번호를 변경합니다.\n 본인인증 후의 단계 이므로 이전단계인 본인인증 관련 API는 본인인증 API링크 참고 바랍니다. [본인인증](https://docs.shopby.co.kr/?urls.primaryName=auth#/%5BProfile%5D%20%3E%20KCPCertification/render_kcp_form)\n",
+    "tags": ["Profile"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/profile-password-no-authentication-certificated-by-email-645209750"
+          },
+          "examples": {
+            "put-profile-password-no-authentication-certificated-by-email": {
+              "value": "{\"certificationNumber\":\"123456\",\"memberId\":\"Upz1Vx7EFkcVrt6LzTNO+g==\",\"newPassword\":\"newPassword\"}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/profile/password/no-authentication/certificated-by-sms",
+    "summary": "SMS 인증 후 패스워드 변경하기",
+    "description": "\n## 부가설명 및 특이사항\n 로그인하지않은 사용자의 비밀번호를 변경합니다. (SMS 인증 사용)\n",
+    "tags": ["Profile"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/profile-password-no-authentication-certificated-by-email-645209750"
+          },
+          "examples": {
+            "put-profile-password-no-authentication-certificated-by-sms": {
+              "value": "{\"certificationNumber\":\"123456\",\"memberId\":\"memberId\",\"newPassword\":\"newPassword\"}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  }
+]

@@ -1,0 +1,131 @@
+---
+title: "상품재고관리"
+slug: "/product/stock-management"
+---
+
+# 상품재고관리
+
+<Callout type="info">
+**등록 및 승인완료 상태 상품의 재고확인 및 재고관리, 상품 옵션관리코드 수정 등이 가능한 상품재고관리 메뉴입니다.**
+</Callout>
+
+## 상품재고관리 검색조건
+
+<figure><img src="/images/product/stock-management/spaces%2F5MtRLrF338WdIfIJP9jq%2Fuploads%2FFXxd4oDuK08xyLEpboYv%2F%EC%83%81%ED%92%88%EC%9E%AC%EA%B3%A0%EA%B4%80%EB%A6%AC%20%EA%B2%80%EC%83%89%EC%A1%B0%EA%B1%B4%20%EB%B3%B5%EC%82%AC.jpg" alt=""/><figcaption><p>&#x3C;상품재고관리검색조건></p></figcaption></figure>
+
+**① 검색어**\
+상품번호, 상품명, 상품관리코드, 재고번호, 옵션관리코드 등 다양한 검색어로 상품을 조회합니다. 일부 검색어는 지원하지 않으며 정확한 검색어를 입력해 주세요.\
+📍다수의 상품을 검색하는 경우 검색어 사이에 'Enter ' 또는 ' , ' 를 입력해주세요.
+
+**② 판매상태**\
+상품의 판매현황을 의미하는 판매상태 값으로 검색할 수 있습니다.
+
+**③ 판매설정**\
+상품 판매가능 여부인 판매설정 값으로 상품을 검색할 수 있습니다.
+
+**④ 브랜드명**\
+동일한 브랜드의 이름으로 상품을 검색할 수 있습니다.
+
+**⑤ 파트너사**\
+동일한 파트너사의 이름으로 상품을 검색할 수 있습니다.
+
+**⑥ 카테고리**\
+표준 카테고리와 전시 카테고리에 매칭된 상품을 검색할 수 있습니다.
+
+**⑦ 기간**\
+상품등록일, 판매시작일, 판매종료일, 최종수정일등을 기준으로 상품을  검색할 수 있습니다.
+
+**⑧ 상세검색**\
+수량 별 재고여부 및 PC/모바일 앱 ,모바일 웹 등의 플랫폼 구분 조건으로 상세한 상품 검색이 가능합니다.
+
+## 상품재고관리 조회결과
+
+<figure><img src="/images/product/stock-management/spaces%2F5MtRLrF338WdIfIJP9jq%2Fuploads%2F8In4r3zH09OymOBGQgXM%2F%EC%83%81%ED%92%88%EC%9E%AC%EA%B3%A0%EA%B4%80%EB%A6%AC%20%EC%A1%B0%ED%9A%8C%EA%B2%B0%EA%B3%BC.png" alt=""/><figcaption><p>&#x3C;상품재고관리 조회결과></p></figcaption></figure>
+
+**①** 특정상품을 선택하면 옵션관리코드, 추가관리코드, 조정재고, 수정재고 입력란이 활성화 됩니다.
+
+**②** [**조정재고 일괄적용**](#undefined-4)\
+선택한 상품의 조정재고를 일괄적용 할 수 있습니다. \
+\[조정재고 일괄적용] 버튼을 클릭하면 '조정재고 일괄변경' 창이 노출됩니다.
+
+<details>
+
+<summary><strong>🤚 조정재고란?</strong> </summary>
+
+* 현재 재고 수량에서 추가되거나 차감된 재고를 반영해 조정된 최종 재고 수량으로 '0' 이하의 수량은 입력이 불가합니다.
+* 재고 수정 중 상품의 주문 접수로 재고 수량이 변동되어도 입력된 조정재고 수량으로 변경됩니다.
+* 조정재고를 입력하지 않은 공란의 상태로 최종 저장을 하게되면 기존 재고 수량이 유지됩니다.
+
+</details>
+
+**③** [**수정재고 일괄적용**](#undefined-5)\
+선택한 상품의 수정재고를 일괄적용 할 수 있습니다. \
+\[수정재고 일괄적용] 버튼을 클릭하면 '수정재고 일괄변경' 창이 노출됩니다.
+
+<details>
+
+<summary><strong>🤚 수정재고란?</strong></summary>
+
+* 현재 재고 수량에서 증감(+) 및  차감(-)이 필요한 재고 수량을 의미합니다.
+* 재고 수정 중 상품 주문 접수로 재고 수량에 변동이 생기면, 상품재고관리 리스트의 재고 수량과 관계없이 변동된 수량에서 수정재고 항목에 입력된 값이 증/차감 되어 변경됩니다.
+* 수정재고를 입력하지 않은 공란의 상태로 최종 저장을 하게되면 기존 재고 수량이 유지됩니다.
+
+</details>
+
+<Callout type="warning">
+**수정재고를 입력하면 해당 값을 반영한 조정재고가 자동 계산되어 노출되고, 조정재고를 입력하면 현재 재고수량에서 해당 값이 나오기 위한 수정재고가 마찬가지로 자동 계산되어 노출됩니다.**
+</Callout>
+
+**④ 최종저장**\
+옵션관리코드, 추가관리코드, 조정재고, 수정재고를 변경하고 \[최종저장] 버튼을 클릭해야 설정한 입력값으로 최종 저장됩니다.
+
+**⑤ 상품재고 변경 이력**\
+\[보기] 클릭하면 해당 상품의 재고 변경 이력 확인이 가능한 '상품 재고 변경 이력' 창이 노출됩니다.
+
+***
+
+#### <mark style="color:blue;">■ 조정재고 일괄변경</mark>
+
+* 선택한 상품의 조정재고 수량을 일괄 변경할 수 있습니다.
+* 조정재고 개수 입력란에 변경 재고 수량을 입력하고 \[입력] 버튼을 클릭하면, 조정재고 수량으로 재고수량(판매가능재고)이 변경됩니다.
+
+<div align="left"><figure><img src="/images/product/stock-management/spaces%2F5MtRLrF338WdIfIJP9jq%2Fuploads%2FCNV30y1KTwQluTSXJLRv%2F%EC%A1%B0%EC%A0%95%EC%9E%AC%EA%B3%A0%20%EC%9D%BC%EA%B4%84%EB%B3%80%EA%B2%BD%20%EB%B3%B5%EC%82%AC.jpg" alt="" width="531"/><figcaption><p>&#x3C;조정재고 일괄변경></p></figcaption></figure></div>
+
+***
+
+#### <mark style="color:blue;">■ 수정재고 일괄변경</mark>
+
+* 선택한 상품의 수정재고 수량을 일괄 변경할 수 있습니다.
+* 수정재고 개수 입력란에 변경 재고 수량을 입력하고 \[입력] 버튼을 클릭하면, 입력한 수정재고가 가감되어 재고수량에 일괄 반영됩니다.
+
+<div align="left"><figure><img src="/images/product/stock-management/spaces%2F5MtRLrF338WdIfIJP9jq%2Fuploads%2FMzuy33w79cj3JHiWOuCD%2F%EC%88%98%EC%A0%95%EC%9E%AC%EA%B3%A0%20%EC%9D%BC%EA%B4%84%EB%B3%80%EA%B2%BD%20%EB%B3%B5%EC%82%AC.jpg" alt="" width="531"/><figcaption><p>&#x3C;수정재고 일괄변경></p></figcaption></figure></div>
+
+***
+
+#### <mark style="color:blue;">■ 상품 재고 변경 이력</mark>
+
+* 해당 상품의 재고수량 변경일시, 변경 재고 수량, 최종재고 수량, 재고 변경 담당자 등 재고 변경 이력을 모두 확인할 수 있습니다.
+
+<div align="left"><figure><img src="/images/product/stock-management/spaces%2F5MtRLrF338WdIfIJP9jq%2Fuploads%2F2EEk3WsC2IeYFAsZSwPE%2F%EC%83%81%ED%92%88%EC%9E%AC%EA%B3%A0%20%EB%B3%80%EA%B2%BD%EC%9D%B4%EB%A0%A5%20%EB%B3%B5%EC%82%AC.jpg" alt="" width="563"/><figcaption><p>&#x3C;상품 재고 변경 이력></p></figcaption></figure></div>
+
+***
+
+**✅&#x20;**<mark style="color:green;background-color:yellow;">**조정 재고 변경 예시**</mark>
+
+* **조정재고 - 재고수량 = 수정재고**
+
+| 수정재고                                | 조정재고                                     | 재고수량 |
+| ----------------------------------- | ---------------------------------------- | ---- |
+| <mark style="color:red;">40</mark>  | <mark style="color:red;">**60**</mark>   | 100  |
+| <mark style="color:blue;">20</mark> | <mark style="color:blue;">**120**</mark> | 100  |
+
+**✅** <mark style="color:green;background-color:yellow;">**수정 재고 변경 예시**</mark>
+
+* **재고수량 + 수정재고 = 조정재고**
+
+| 수정재고                                     | 조정재고                                | 재고수량 |
+| ---------------------------------------- | ----------------------------------- | ---- |
+| <mark style="color:red;">**10**</mark>   | <mark style="color:red;">110</mark> | 100  |
+| <mark style="color:blue;">**-10**</mark> | <mark style="color:blue;">90</mark> | 100  |
+
+&#x20;

@@ -1,0 +1,1173 @@
+---
+title: "manage-shop"
+description: "쇼핑몰 운영(manage) 관련 shop API입니다."
+version: "1.0"
+category: "Shop API"
+---
+
+# manage-shop
+
+:::info API 소개
+ 쇼핑몰 운영(manage) 관련 shop API입니다.
+:::
+
+## 서버 정보
+
+| 환경 | Base URL |
+|------|----------|
+| Production | `https://shop-api.e-ncp.com` |
+
+## 리소스 목록
+
+| 리소스 | 설명 |
+|--------|------|
+| **Address** | 주소 |
+| **Board** | 게시판 |
+| **Holiday** | 공휴일 |
+| **Inquiry** | 1:1 문의 |
+| **Page** | 외부스크립트 |
+| **Accumulation** | 적립금 |
+| **Instagram** | 인스타그램 |
+| **Terms** | 약관 |
+
+## API 엔드포인트
+
+## Address — 주소
+
+### 🟢 `GET` `/addresses/search`
+
+**주소 조회하기**
+
+> operationId: `search-addresses`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `pageNumber` | query | - | `number` | 페이지 번호^|1 |
+| `pageSize` | query | - | `number` | 페이지 사이즈^|10 |
+| `keyword` | query | ✅ | `string` | "검색 키워드^|디지털로26길 43, 대륭포스트타워 8차 R동 6~7층" |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🟢 `GET` `/addresses/search/jp`
+
+**일본 주소 검색**
+
+> operationId: `search-jp-address`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `zipCode` | query | ✅ | `string` | 우편번호 |
+
+일본 주소 검색
+ 
+ ### 3.2 **응답 필드 설명**
+ **필드** | **타입** | **설명**\
+        \ | 예제 값 |
+ --- | --- | --- | ---- |
+ zipCode | String | 우편번호 (하이픈 제거) |\
+        \ 1056322 |
+ prefCode | String | 도도부현 코드 (2자리) | 13 |
+ jisCode | String\
+        \ | JIS 코드 | 130001 |
+ address | String | 전체 주소 | 東京都港区虎ノ門虎ノ門ヒルズ森タワー２２階 |
+\
+        \ addressEnglish | String | 전체 주소 (영문) | TORANOMON TORANOMONHIRUZUMORITAWA,\
+        \ MINATO KU, TOKYO TO |
+ addressList | Array | 입력된 우편번호에 해당하는 복수의 주소 리스트\
+        \ | ['宮城県 伊具郡丸森町 赤堀', '宮城県 伊具郡丸森町 泉'] |
+ state | String | 도도부현 이름 | 東京都 |
+\
+        \ city | String | 시/구/읍/면 이름 | 港区 |
+ streetAddress | String | 상세 주소 | 虎ノ門\
+        虎ノ門ヒルズ森タワー２２階 |
+
+---
+
+## Board — 게시판
+
+### 🟢 `GET` `/boards/configurations`
+
+**게시판 설정 조회하기**
+
+> operationId: `get-board-config`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+## 부가설명 및 특이사항
+전체 게시판의 설정정보를 조회하는 API 입니다.
+
+---
+
+### 🔵 `POST` `/boards/posts`
+
+**게시글 리스트 조회하기(버전2)**
+
+> operationId: `get-posts-v2`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `page` | query | - | `integer` | 페이지 번호 (default:1)^|1 |
+| `pageSize` | query | - | `integer` | 한 페이지당 노출 수 (default:10)^|10 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)^|PC" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|accessToken |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+## 부가설명 및 특이사항
+특정 게시판(게시판 번호 기준) or 몰 단위의 게시글 리스트를 조회하는 API\
+        \ version2 입니다.
+
+Request Body에 boardNoOrId값을 null 보낼 시 몰 단위로 게시글 리스트를 검색\
+        할 수 있습니다.
+
+---
+
+### 🟢 `GET` `/boards/{boardNo}/articles`
+
+**게시글 리스트 조회하기**
+
+> operationId: `search-posts`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `boardNo` | path | ✅ | `string` | 조회할 게시판 번호(숫자) 또는 게시판id(문자열)^|1 또는 boardId |
+| `pageNumber` | query | - | `integer` | 페이지 번호^|1 |
+| `pageSize` | query | - | `integer` | 한 페이지당 노출 수^|1 |
+| `hasTotalCount` | query | - | `boolean` | "목록 카운트 포함 여부(false: 미포함(default), true: 포함)^|false" |
+| `keyword` | query | - | `string` | 검색어^|keyword |
+| `searchType` | query | - | `string` | "검색유형 (ALL: 전체, TITLE: 제목, CONTENT: 내용, WRITER: 작성자)^|ALL" |
+| `categoryNo` | query | - | `integer` | 게시판 카테고리^|1 |
+| `startYmd` | query | - | `string` | "조회일 시작일(yyyy-MM-dd, default: 3개월)^|YYYY-MM-DD" |
+| `endYmd` | query | - | `string` | "조회일 종료일(yyyy-MM-dd, default: 오늘)^|YYYY-MM-DD" |
+| `withReplied` | query | - | `boolean` | "답글도 리스트에 같이 조회할지 여부 (false: 답글 미포함(default), true: 답글 포함)^|false" |
+| `direction` | query | - | `string` | "정렬방식(ASC: 오래된 순, DESC: 최신 순, RECOMMEND_COUNT: 추천수 많은 순, READ_COUNT:\ |
+| `isMine` | query | - | `boolean` | "본인이 작성한 글만 조회 여부(false: 전체 조회(default), true: 본인 글만 조회)^|true" |
+| `myRecommendOnly` | query | - | `boolean` | "본인이 추천한 게시글만 조회 여부(false: 전체 조회(default), true: 추천한 게시글만 조회\ |
+| `includeRecommended` | query | - | `boolean` | "본인이 해당 게시글을 추천했는지 여부(false: 본인 추천 포함x(default), true: 본인 추천\ |
+| `isNoticed` | query | - | `boolean` | "공지글 조회 여부(null: 공지+일반 게시글 전체 조회(default), false: 일반 게시글만 조회\ |
+| `isSecreted` | query | - | `boolean` | "비밀글 조회 여부(null: 공개+비밀 게시글 전체 조회(default), false: 공개 게시글만 조회\ |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)^|PC" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|accessToken |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🔵 `POST` `/boards/{boardNo}/articles`
+
+**게시글 작성하기**
+
+> operationId: `add-post`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `boardNo` | path | ✅ | `string` | 조회할 게시판 번호(숫자) 또는 게시판id(문자열)^|1 또는 boardId |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)^|PC" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|accessToken |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+## 부가설명 및 특이사항
+게시글을 작성하는 API 입니다.
+
+images 값은 조회 시, '게시글 상\
+        세 조회 하기 API의 'attachments로 조회됩니다. 
+
+첨부파일은 최대 10개까지 업로드 가능합니다.
+
+ | 저장 시\
+        \                    | 조회 시(게시글 상세 조회 하기 API)  | 설명           | 예시       \
+        \            |
+ |--------------------------|------------------------------|--------------|-----------------------|
+\
+        \ | images.originalFileName  | attachments.originalFileName | 원본 파일명     |\
+        \ 홍길동.jpg              |
+ | images.uploadedFileName  | attachments.uploadedFileName\
+        \ | 업로드 된 파일명 | https://mycdn/hong.jpg |
+ | images.uploadedFileName  | attachments.downloadFileUrl\
+        \  | 업로드 된 파일명 | https://mycdn/hong.jpg |
+
+### thumbnailUrl는 조회 시, 게시글 상\
+        세 조회 하기 API의 'imageUrl'로 조회됩니다.
+
+---
+
+### 🟢 `GET` `/boards/{boardNo}/categories`
+
+**게시판 카테고리 목록 조회하기**
+
+> operationId: `get-board-categories`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `boardNo` | path | ✅ | `string` | 조회할 게시판 번호(숫자) 또는 게시판id(문자열)^|1 또는 boardId |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🔵 `POST` `/boards/posts/scrap/{postNo}`
+
+**게시글 스크랩**
+
+> operationId: `scrap-post`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `postNo` | path | ✅ | `number` | 스크랩할 게시글 번호^|1 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)^|PC" |
+| `accessToken` | header | ✅ | `string` | 회원 엑세스 토큰^|accessToken |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+게시글 스크랩
+
+---
+
+### 🔴 `DELETE` `/boards/posts/scrap/{postNo}`
+
+**게시글 스크랩 취소**
+
+> operationId: `cancel-scrap-post`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `postNo` | path | ✅ | `number` | 스크랩할 게시글 번호^|1 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)^|PC" |
+| `accessToken` | header | ✅ | `string` | 회원 엑세스 토큰^|accessToken |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+게시글 스크랩 취소
+
+---
+
+### 🟢 `GET` `/boards/{boardNo}/articles/{articleNo}`
+
+**게시글 상세 조회하기**
+
+> operationId: `get-post`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `boardNo` | path | ✅ | `string` | 조회할 게시판 번호(숫자) 또는 게시판id(문자열)^|1 또는 boardId |
+| `articleNo` | path | ✅ | `integer` | 조회할 게시글 번호^|0 |
+| `password` | query | - | `string` | 비회원 글 확인용 비밀번호^|string |
+| `withReplied` | query | - | `boolean` | "답글도 리스트에 같이 조회할지 여부 (false: 답글 미포함, true: 답글 포함(default))^|true" |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)^|PC" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|accessToken |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🟡 `PUT` `/boards/{boardNo}/articles/{articleNo}`
+
+**게시글 수정하기**
+
+> operationId: `modify-post`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `boardNo` | path | ✅ | `string` | 조회할 게시판 번호(숫자) 또는 게시판id(문자열)^|1 또는 boardId |
+| `articleNo` | path | ✅ | `integer` | 수정할 게시글 번호^|0 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)^|PC" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|accessToken |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🔴 `DELETE` `/boards/{boardNo}/articles/{articleNo}`
+
+**게시글 삭제하기**
+
+> operationId: `remove-post`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `boardNo` | path | ✅ | `string` | 조회할 게시판 번호(숫자) 또는 게시판id(문자열)^|1 또는 boardId |
+| `articleNo` | path | ✅ | `integer` | 삭제할 게시글 번호^|INTEGER |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)^|PC" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|accessToken |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🔵 `POST` `/boards/{boardNo}/posts/previews`
+
+**게시글 프리뷰 목록 조회**
+
+> operationId: `get-post-previews`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `boardNo` | path | ✅ | `string` | 게시판 번호(숫자) 또는 게시판ID(문자열)^|1 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)^|PC" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|accessToken |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+게시글 번호 목록을 받아 해당하는 게시글의 미리보기 정보를 조회합니다. (부모글/답글 권한 체크 포함)
+\
+        \ 
+ - 한 번에 조회 가능한 게시글 수는 1개 이상, 100개 이하입니다.
+ - 게시글 하나당 content(내용 미리보기)는\
+        \ 최대 3000자까지 반환됩니다.
+ - 게시글이 비밀글인 경우 title, content가  "비밀글입니다" 로 반환됩니다.
+\
+        \ - 게시글이 차단된 경우 title, content가 빈문자("") 로 반환됩니다.
+ - 게시글에 html이 포함되어 있는경\
+        우 깨질 수 있습니다.
+
+---
+
+### 🟢 `GET` `/boards/{boardNo}/posts/{postNo}`
+
+**게시글 상세 조회하기(버전2)**
+
+> operationId: `get-post-v2`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `boardNo` | path | ✅ | `string` | 조회할 게시판 번호(숫자) 또는 게시판id(문자열)^|1 또는 boardId |
+| `postNo` | path | ✅ | `integer` | 조회할 게시글 번호^|1 |
+| `password` | query | - | `string` | 비회원 글 확인용 비밀번호^|string |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)^|PC" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|accessToken |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🟡 `PUT` `/boards/{boardNo}/articles/{articleNo}/editable`
+
+**게시글 수정가능 여부 확인하기**
+
+> operationId: `check-post-editable`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `boardNo` | path | ✅ | `string` | 조회할 게시판 번호(숫자) 또는 게시판id(문자열)^|1 또는 boardId |
+| `articleNo` | path | ✅ | `integer` | 확인할 게시글 번호^|INTEGER |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)^|PC" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|accessToken |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🔵 `POST` `/boards/{boardNo}/articles/{articleNo}/recommend`
+
+**게시글 추천**
+
+> operationId: `recommend-article`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `boardNo` | path | ✅ | `number` | 게시판 번호^|1 |
+| `articleNo` | path | ✅ | `number` | 추천할 게시글 번호^|1 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)^|PC" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|accessToken |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+게시글 추천
+
+---
+
+### 🔴 `DELETE` `/boards/{boardNo}/articles/{articleNo}/recommend`
+
+**게시글 추천 취소**
+
+> operationId: `cancel-recommend-article`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `boardNo` | path | ✅ | `number` | 게시판 번호^|1 |
+| `articleNo` | path | ✅ | `number` | 추천할 게시글 번호^|13 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)^|PC" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|accessToken |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+게시글 추천 취소
+
+---
+
+### 🟢 `GET` `/boards/{boardNo}/articles/{articleNo}/replies`
+
+**게시글 답글 리스트 조회하기**
+
+> operationId: `reply-posts`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `boardNo` | path | ✅ | `string` | 조회할 게시판 번호(숫자) 또는 게시판id(문자열)^|1 또는 boardId |
+| `articleNo` | path | ✅ | `integer` | 조회할 게시글 번호^|1 |
+| `page` | query | - | `integer` | 페이지 번호 (default:1)^|1 |
+| `pageSize` | query | - | `integer` | 한 페이지당 노출 수 (default:10)^|10 |
+| `includeRecommended` | query | - | `boolean` | "본인이 해당 게시글을 추천했는지 여부(false: 본인 추천 포함x(default), true: 본인 추천\ |
+| `direction` | query | - | `string` | "정렬방식(ASC: 오래된 순, DESC: 최신 순, RECOMMEND_COUNT: 추천수 많은 순, READ_COUNT:\ |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🔵 `POST` `/boards/{boardNo}/articles/{articleNo}/report`
+
+**게시글 신고하기**
+
+> operationId: `report-posts`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `boardNo` | path | ✅ | `string` | 신고할 게시판 번호(숫자) 또는 게시판id(문자열)^|1 또는 boardId |
+| `articleNo` | path | ✅ | `number` | 신고할 게시글 번호^|1 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)^|PC" |
+| `accessToken` | header | ✅ | `string` | 회원 엑세스 토큰^|accessToken |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🔴 `DELETE` `/boards/{boardNo}/articles/{articleNo}/report`
+
+**게시글 신고 취소**
+
+> operationId: `cancel-report-article`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `boardNo` | path | ✅ | `number` | 게시판 번호^|1 |
+| `articleNo` | path | ✅ | `number` | 신고 취소할 게시글 번호^|13 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)^|PC" |
+| `accessToken` | header | ✅ | `string` | 회원 엑세스 토큰^|accessToken |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+게시글 신고 취소
+
+---
+
+### 🟢 `GET` `/boards/{boardNo}/posts/{postNo}/file`
+
+**게시글 첨부파일 다운로드**
+
+> operationId: `download-board-article-file`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `boardNo` | path | ✅ | `string` | 조회할 게시판 번호(숫자) 또는 게시판id(문자열)^|1 또는 boardId |
+| `postNo` | path | ✅ | `integer` | 조회할 게시글 번호^|1 |
+| `uploadedFileName` | query | ✅ | `string` | 업로드한 파일이름^|uploadFileName.txt |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)^|PC" |
+| `accessToken` | header | ✅ | `string` | 회원 엑세스 토큰^|accessToken |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🟢 `GET` `/boards/{boardNo}/posts/{postNo}/replies`
+
+**게시글 답글 리스트 조회하기(버전2)**
+
+> operationId: `get-reply-posts-v2`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `boardNo` | path | ✅ | `string` | 조회할 게시판 번호(숫자) 또는 게시판id(문자열)^|1 또는 boardId |
+| `postNo` | path | ✅ | `integer` | 조회할 게시글 번호^|1 |
+| `page` | query | - | `integer` | 페이지 번호 (default:1)^|1 |
+| `pageSize` | query | - | `integer` | 한 페이지당 노출 수 (default:10)^|10 |
+| `direction` | query | - | `string` | "정렬방식(ASC: 오래된 순, DESC: 최신 순, RECOMMEND_COUNT: 추천수 많은 순, READ_COUNT:\ |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)^|PC" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|accessToken |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+## Holiday — 공휴일
+
+### 🟢 `GET` `/holiday`
+
+**요청한 달에 해당하는 공휴일 조회하기**
+
+> operationId: `search-holiday`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `year` | query | - | `number` | 검색할 연도^|2022 |
+| `month` | query | - | `number` | 검색할 월^|1 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+## Inquiry — 1:1 문의
+
+### 🟢 `GET` `/inquiries`
+
+**1:1 문의 내역 조회하기**
+
+> operationId: `search-inquiries`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `pageNumber` | query | - | `integer` | 페이지 번호^|1 |
+| `pageSize` | query | - | `integer` | 한 페이지당 노출 수^|1 |
+| `hasTotalCount` | query | - | `boolean` | "목록 카운트 포함 여부(false: 미포함(default), true: 포함)^|false" |
+| `inquiryTypeNo` | query | - | `number` | 1:1 문의 유형 번호^|123 |
+| `inquiryStatus` | query | - | `string` | "1:1 문의 상태 (ISSUED(ASKED-이전버전 호환용): 답변대기, IN_PROGRESS: 답변 진행중\ |
+| `inquiryStatuses` | query | - | `string` | "1:1 문의 상태 복수개 지정 (ISSUED(ASKED-이전버전 호환용): 답변대기, IN_PROGRESS:\ |
+| `startYmd` | query | - | `string` | 조회기간 시작시간^|YYYY-MM-DD |
+| `endYmd` | query | - | `string` | 조회기간 종료시간^|YYYY-MM-DD |
+| `keyword` | query | - | `string` | 검색어^|keyword |
+| `searchType` | query | - | `string` | "검색 타입 (ALL: 전체, TITLE: 제목, CONTENT: 내용)^|ALL" |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)^|PC" |
+| `accessToken` | header | ✅ | `string` | 회원 엑세스 토큰^|accessToken |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+## 부가설명 및 특이사항
+1:1 문의글 목록을 전체 검색하는 API 입니다.
+
+문의 상태 : inquiryStatus와\
+        \ inqiryStatuses가 있으며, 두 개를 동시에 요청파라미터로 넣으면 그 둘을 합한 상태를 조회합니다.
+- inquiryStatus:\
+        \ 하나의 1:1문의 상태에 대해서 조회 가능. 
+- inquiryStatuses, 여러 개의 1:1문의 상태 조회 가능. ','로\
+        \ 구분.
+- (ASKED: 레거시 호환용, ISSUED와 같다.)
+
+## 화면 예시
+<a target='_blank' href='http://image.toast.com/aaaaahb/api-description/member/inquiry/get_inquiries.png'><img\
+        \ src='http://image.toast.com/aaaaahb/api-description/member/inquiry/get_inquiries.png?autox150'></a>
+
+---
+
+### 🔵 `POST` `/inquiries`
+
+**1:1 문의 등록하기**
+
+> operationId: `add-inquiry`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)^|PC" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|accessToken |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+## 부가설명 및 특이사항
+1:1 문의를 등록하는 API 입니다.
+
+샵바이엔터프라이즈 쇼핑몰에서만 비회원\
+        \ 1:1문의가 가능합니다.
+비회원 등록 시에는 email을 필수로 입력해야 합니다.
+
+## 화면 예시
+<a target='_blank'\
+        \ href='http://image.toast.com/aaaaahb/api-description/member/inquiry/post_inquiries.png'><img\
+        \ src='http://image.toast.com/aaaaahb/api-description/member/inquiry/post_inquiries.png?autox150'></a>
+\
+        
+<hr>
+
+## 참고: 이미지 파일(첨부파일) 업로드 방법 안내
+이미지파일 업로드 API를 호출하여 이미지 등록 이후 1:1문\
+        의 등록 시 업로드 된 파일명 항목에 등록한 image url 을 입력하여 호출해 주시면 됩니다.
+
+참고로 이미지 업로드 시 이미\
+        지 업로드되는 도메인인 base url은 shopby-images.cdn-nhncommerce.com입니다.
+
+이미지 업로드는 관\
+        련해서는 아래 내용으로 참고 부탁드립니다.
+
+※해당 API는 별도 API문서가 없습니다.(하이퍼링크 연결 안되는것이 맞음)
+
+\
+        
+POST http://shop-api.e-ncp.com/files/images (리얼)
+
+### header 정보
+ - Version\
+        \ : 1.0
+ - clientId : {몰의 clientId}
+ - platform : (PC, MOBILE_WEB, IOS,\
+        \ AOS 중 하나로 해당 API 를 호출하는 플랫폼의 유형)
+ - Content-Type : multipart/form-data
+\
+        \ 
+### Body :
+ - file:'image data'
+
+### Request
+
+imageUrl : 이미지 URL
+\
+        
+originName : 원본 파일명
+
+파일명의 경우 2~255자 범위내에 있어야합니다.
+
+파일 용량의 경우, 12MB 이하\
+        의 이미지 파일만 업로드 가능합니다.
+
+지원하는 확장자는 아래와 같습니다.
+
+bmp, tif, tiff, miff, gif,\
+        \ jpe, jpeg, jpg, jps, pjpeg, jng, mng, png
+
+---
+
+### 🟢 `GET` `/inquiries/configurations`
+
+**1:1 문의 설정 조회하기**
+
+> operationId: `get-inquiry-configuration`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)^|PC" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|accessToken |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🟢 `GET` `/inquiries/types`
+
+**1:1 문의 유형 조회**
+
+> operationId: `get-inquiry-types`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `direction` | query | - | `string` | "정렬방식(default: ADMIN)^|ADMIN" |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+## 부가설명 및 특이사항
+1:1 문의 유형을 조회하는 API 입니다.
+
+
+## request parameters direction 설명
+- ADMIN: 서비스 어드민에서 정렬한 순서
+- CREATED_ASC: 최초 등록순
+- CREATED_DESC: 최신 등록순
+
+---
+
+### 🟢 `GET` `/inquiries/{inquiryNo}`
+
+**1:1 문의 상세 조회하기 (문의번호 기준)**
+
+> operationId: `get-inquiry`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `inquiryNo` | path | ✅ | `integer` | 1:1 문의 번호^|141 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)^|PC" |
+| `accessToken` | header | ✅ | `string` | 회원 엑세스 토큰^|accessToken |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🟡 `PUT` `/inquiries/{inquiryNo}`
+
+**1:1 문의 변경하기**
+
+> operationId: `modify-inquiry`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `inquiryNo` | path | ✅ | `integer` | 1:1 문의 번호^|141 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)^|PC" |
+| `accessToken` | header | ✅ | `string` | 회원 엑세스 토큰^|accessToken |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+## 부가설명 및 특이사항
+특정 1:1 문의(문의번호 기준)를 수정하는 API 입니다.
+
+image 삭제는\
+        \ '1:1 문의 부분 변경하기' API를 통해 해야합니다. 
+
+## 화면 예시
+<a target='_blank' href='http://image.toast.com/aaaaahb/api-description/member/inquiry/put_inquiries_inquiryNo.png'><img\
+        \ src='http://image.toast.com/aaaaahb/api-description/member/inquiry/put_inquiries_inquiryNo.png?autox150'></a>
+
+---
+
+### 🔴 `DELETE` `/inquiries/{inquiryNo}`
+
+**1:1문의 삭제하기**
+
+> operationId: `remove-inquiry`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `inquiryNo` | path | ✅ | `integer` | 1:1 문의 번호^|141 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)^|PC" |
+| `accessToken` | header | ✅ | `string` | 회원 엑세스 토큰^|accessToken |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🟠 `PATCH` `/inquiries/{inquiryNo}`
+
+**1:1 문의 부분 변경하기**
+
+> operationId: `part-update-inquiry`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `inquiryNo` | path | ✅ | `integer` | 1:1 문의 번호^|141 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)^|PC" |
+| `accessToken` | header | ✅ | `string` | 회원 엑세스 토큰^|accessToken |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+## 부가설명 및 특이사항
+특정 1:1 문의(문의번호 기준)를 부분 수정하는 API 입니다.
+
+originalFileNames,\
+        \ uploadedFileNames 이 null 인 경우 첨부파일은 수정되지 않습니다.
+
+   ex) {
+       "originalFileNames"\
+        \ : null,
+       "uploadedFileNames" : null
+   }
+ 
+originalFileNames,\
+        \ uploadedFileNames 이 빈 리스트일 경우 첨부파일은 모두 삭제 됩니다.
+
+   ex) {
+       "originalFileNames"\
+        \ : [],
+       "uploadedFileNames" : []
+   }
+
+## 화면 예시
+<a target='_blank'\
+        \ href='http://image.toast.com/aaaaahb/api-description/member/inquiry/put_inquiries_inquiryNo.png'><img\
+        \ src='http://image.toast.com/aaaaahb/api-description/member/inquiry/put_inquiries_inquiryNo.png?autox150'></a>
+
+---
+
+### 🟢 `GET` `/inquiries/{inquiryNo}/file`
+
+**1:1 문의 및 답변 파일 다운로드**
+
+> operationId: `download-inquiry-file`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `inquiryNo` | path | ✅ | `integer` | 1:1 문의 번호^|141 |
+| `uploadedFileName` | query | ✅ | `string` | 업로드한 파일이름^|uploadedFileName.xlsx |
+| `type` | query | ✅ | `string` | "파일 다운로드 타입(INQUIRY: 일대일 문의, INQUIRY_ANSWER: 일대일 문의 답변)^|INQUIRY" |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)^|PC" |
+| `accessToken` | header | ✅ | `string` | 회원 엑세스 토큰^|accessToken |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+## Page — 외부스크립트
+
+### 🟢 `GET` `/page/scripts`
+
+**외부스크립트 조회하기**
+
+> operationId: `search-external-script`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `pageTypes` | query | ✅ | `string` | "페이지타입 리스트.  \",\" 구분자 복수개 요청 가능. (MAIN: 메인 페이지, COMMON_HEAD:\ |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+## Accumulation — 적립금
+
+### 🟢 `GET` `/profile/accumulations`
+
+**적립금 이력 조회하기**
+
+> operationId: `search-accumulation-histories`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `pageNumber` | query | - | `number` | 페이지 번호^|1 |
+| `pageSize` | query | - | `number` | 페이지 사이즈^|10 |
+| `accumulationReason` | query | - | `string` | "적립 유형(ADD: 지급, SUB: 차감)^|ADD" |
+| `startYmd` | query | - | `string` | "조회일 시작일(yyyy-MM-dd, default: 3개월)^|YYYY-MM-DD" |
+| `endYmd` | query | - | `string` | "조회일 종료일(yyyy-MM-dd, default: 오늘)^|YYYY-MM-DD" |
+| `direction` | query | - | `string` | "정렬방식(DESC:내림차순(default), ASC:오름차순)^|DESC" |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)^|PC" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|accessToken |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+## 부가설명 및 특이사항
+적립금 이력을 전체 검색하는 API 입니다.
+
+기본 적립금 단위는 정수형으로 지원합니다. ex) 1000
+Global Mall의 경우, 적립금은 소수점 2자리까지 지원합니다. ex) 1000.00
+
+## 화면 예시
+<a target='_blank' href='http://image.toast.com/aaaaahb/api-description/member/accumulation/get_profile_accumulations_summary.png'><img src='http://image.toast.com/aaaaahb/api-description/member/accumulation/get_profile_accumulations_summary.png?autox150'></a>
+
+---
+
+### 🟢 `GET` `/profile/accumulations/expiration`
+
+**만료 예정 적립금 조회하기**
+
+> operationId: `search-accumulations-expiration`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `startYmdt` | query | - | `string` | "만료 조회 시작일(YYYY-MM-DD HH:mm:ss, default: 현재 시간 한달 전)^|2024-10-21\ |
+| `endYmdt` | query | - | `string` | "만료 조회 종료일(YYYY-MM-DD HH:mm:ss, default: 현재 시간 한달 후)^|2024-12-21\ |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)^|PC" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|accessToken |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🟢 `GET` `/profile/accumulations/summary`
+
+**적립금 요약 조회하기**
+
+> operationId: `search-accumulations-summary`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `expireStartYmdt` | query | - | `string` | "만료 조회 시작일(YYYY-MM-DD HH:mm:ss, default: 한달)^|YYYY-MM-DD HH:mm:ss" |
+| `expireEndYmdt` | query | - | `string` | "만료 조회 종료일(YYYY-MM-DD HH:mm:ss, default: 한달)^|YYYY-MM-DD HH:mm:ss" |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)^|PC" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|accessToken |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+## 부가설명 및 특이사항
+적립금 요약정보를 조회하는 API 입니다.
+
+## 화면 예시
+<a target='_blank' href='http://image.toast.com/aaaaahb/api-description/member/accumulation/get_profile_accumulations.png'><img src='http://image.toast.com/aaaaahb/api-description/member/accumulation/get_profile_accumulations.png?autox150'></a>
+
+---
+
+### 🟢 `GET` `/profile/accumulations/waiting`
+
+**해당 회원의 예상 적립금 조회하기**
+
+> operationId: `search-estimated-accumulations`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)^|PC" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|accessToken |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+## 부가설명 및 특이사항 
+해당 회원의 예상 적립금(적립대기)을 조회하는 API 입니다.
+
+몰 화폐\
+        \ 설정에 따라서 적립 금액의 단위가 다릅니다.
+
+기본 적립금 단위는 정수형으로 지원합니다. ex) 1000
+Global Mall의\
+        \ 경우, 적립금은 소수점 2자리까지 지원합니다. ex) 1000.00
+
+## 화면 예시
+<a target='_blank' href='http://image.toast.com/aaaaahb/api-description/member/accumulation/get_profile_accumulations_waiting.png'><img\
+        \ src='http://image.toast.com/aaaaahb/api-description/member/accumulation/get_profile_accumulations_waiting.png?autox150'></a>
+
+---
+
+## Instagram — 인스타그램
+
+### 🟢 `GET` `/shopby/instagram/media`
+
+**instagram 피드(게시글 목록) 조회하기**
+
+> operationId: `get-instagram-media`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+## 부가설명 및 특이사항 
+해당 쇼핑몰의 인스타그램 게시글 목록을 조회하는 API 입니다.
+
+조회간\
+        \ 에러 발생시, 에러 정보가 Response 객체에 포함됩니다.
+
+---
+
+## Terms — 약관
+
+### 🟢 `GET` `/terms`
+
+**적용 중인 몰 약관 조회하기**
+
+> operationId: `search-used-terms`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `termsTypes` | query | ✅ | `string` | "조회할 약관 타입 리스트 (MALL_INTRODUCTION: 쇼핑몰/회사 소개, USE: 이용약관, E_COMMERCE:\ |
+| `usedOnly` | query | - | `boolean` | "사용중인 약관만 노출 여부 (default : false)^|false" |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🔵 `POST` `/terms`
+
+**적용 중인 몰 약관 조회하기 (ver 1.1)**
+
+> operationId: `post-search-used-terms`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.1 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🔵 `POST` `/terms/custom`
+
+**추가 약관 조회하기**
+
+> operationId: `get-custom-terms`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🟢 `GET` `/terms/history`
+
+**약관 변경이력 조회하기**
+
+> operationId: `search-terms-histories`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `termsType` | query | ✅ | `string` | "조회할 약관 타입 리스트 (USE: 이용약관, E_COMMERCE: 전자금융거래 이용약관, PI_PROCESS:\ |
+| `futureDaysToShow` | query | - | `string` | 조회할 현재부터 미래 날짜^|0 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🟢 `GET` `/terms/used`
+
+**적용 중인 몰 약관 조회하기**
+
+> operationId: `search-used-terms-only-used`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `termsTypes` | query | ✅ | `string` | "조회할 약관 타입 리스트 (MALL_INTRODUCTION: 쇼핑몰/회사 소개, USE: 이용약관, E_COMMERCE:\ |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🟢 `GET` `/terms/{termsNo}`
+
+**약관 상세 조회하기**
+
+> operationId: `get-term`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `termsNo` | path | ✅ | `integer` | 조회할 약관 번호^|1 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🔵 `POST` `/terms/{termsNo}`
+
+**약관 상세 조회하기 (ver 1.1)**
+
+> operationId: `post-terms`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `termsNo` | path | ✅ | `integer` | 조회할 약관 번호^|1 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+

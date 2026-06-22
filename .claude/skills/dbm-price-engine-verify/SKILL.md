@@ -1,6 +1,14 @@
 ---
 name: dbm-price-engine-verify
-description: 후니프린팅 라이브에 적재된 가격 데이터의 가격사슬 완전성을 상품군별로 전수 실증검토하는 round-18 방법론 스킬. [정정 2026-06-18] 라이브 evaluate_price는 실재·구현됨(pricing.py 가격엔진 @line247·§13 huni-price-quote/§15 huni-quote-verify가 실호출 검증) — "엔진 미구현" 전제는 STALE. 이 트랙은 ① 가격사슬 완전성을 라이브 실측(가격소스 바인딩·공식→formula_components 배선→price_components→component_prices 단가행·t_dsc 수량구간 할인 연결·등급)에 집중하고, 골든 재계산(얼마인가)은 §13/§15의 evaluate_price 실호출에 양보(중복 회피)한다. 보조로 ② 사슬이 막힌 클래스에 한해 라이브 pricing.py 코드(+11-CONTEXT 보조)대로 진단용 계산기를 재구현해 결함 크기를 입증(단가형/합가형 환산·NULL 와일드카드·동시매칭 오류·수량구간·시계열·할인 순차곱·우선순위) ③ 재계산값을 가격표 엑셀 known값·가격뷰어와 수치 대조 ④ 가격뷰어 표시 정합을 검증한다. 생성(dbm-price-engine-verifier)·게이트(dbm-validator PE1~PE6) 분리. 상품군 아크릴·문구·굿즈/파우치 + 가격뷰어. DB 직접 쓰기 없음(라이브 읽기전용·실 적재/배선/엔진구현은 인간 승인). '가격엔진 실증', '가격계산 검증', '가격공식 매핑 실증', '가격사슬 완전성', '재계산 검증', '단가형 합가형 계산', '수량구간 할인 계산', '가격뷰어 정합', '아크릴 가격 검증', '문구 가격 검증', '굿즈 파우치 가격 검증', 'round-18', '가격엔진 검증 다시', '실증검토' 작업 시 반드시 이 스킬을 사용. 가격표→그릇 분해(round-16)는 dbm-price-import-prep, 가격공식 정리 정적검증(round-17)은 dbm-price-formula-audit, 가격공식 엔진 fit-gap(round-2)은 dbm-price-formula가 담당하므로 그 작업에는 트리거하지 않는다.
+description: >
+  후니프린팅 라이브 적재 가격 데이터의 가격사슬 완전성을 상품군별로 전수 실증검토하는 round-18 방법론 스킬.
+  가격소스 바인딩→공식→formula_components 배선→price_components→component_prices 단가행→t_dsc 수량구간 할인
+  연결을 라이브 실측(골든 재계산=얼마인가는 §13/§15 evaluate_price 실호출에 양보). 막힌 클래스만 pricing.py
+  대로 진단용 계산기 재구현해 결함 크기 입증(단가형/합가형·NULL 와일드카드·수량구간·할인 순차곱)·가격뷰어 정합
+  검증. 생성≠게이트(PE1~PE6)·라이브 읽기전용·실 적재/엔진구현 인간 승인. 상품군 아크릴·문구·굿즈/파우치.
+  트리거: 가격엔진 실증, 가격사슬 완전성, 재계산 검증, 단가형 합가형 계산, 수량구간 할인 계산, 가격뷰어 정합,
+  round-18, 실증검토, 가격엔진 검증 다시. 가격표→그릇 분해는 dbm-price-import-prep, 공식 정적정리는
+  dbm-price-formula-audit, 공식 fit-gap은 dbm-price-formula가 담당.
 ---
 
 # dbm-price-engine-verify — 가격엔진 실증검토 (round-18)

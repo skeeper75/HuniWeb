@@ -1,6 +1,11 @@
 ---
 name: huni-admin-manual-authoring
-description: 비개발자 운영자용 admin 사용 매뉴얼을 국내외 베스트프랙티스(Diátaxis 문서 프레임워크·task-oriented 절차서·위키독스/기술문서 스타일·Anthropic 명료성 원칙·웹 접근성)로 집필하는 방법론 스킬. 화면 맵·DB 도메인·라이브 캡처를 종합해 단계별 따라하기(step-by-step)+스크린샷 임베드+항목별 입력 설명+용어집+문제해결로 구성하는 문서 구조, 절차 서식 표준, 운영자 언어 번역 규칙(NOT NULL→필수, FK→선등록 등), 스크린샷 번호 안내 규칙, 콜아웃(주의/팁) 사용법을 제공한다. '매뉴얼 작성', '운영자 가이드 작성', '사용 설명서 작성', 'admin 매뉴얼 집필', '절차서 작성', '매뉴얼 구조 설계', '매뉴얼 보완' 작업 시 반드시 사용. 소스 화면 맵은 huni-admin-source-map, 라이브 캡처는 huni-admin-live-capture가 담당한다.
+description: >
+  비개발자 운영자용 admin 사용 매뉴얼을 베스트프랙티스(Diátaxis·task-oriented 절차서·Anthropic 명료성·접근성)로
+  집필하는 방법론. 화면 맵·DB 도메인·라이브 캡처를 종합해 step-by-step+스크린샷 임베드+항목별 입력 설명+용어집+
+  문제해결 문서 구조, 절차 서식, 운영자 언어 번역(NOT NULL→필수·FK→선등록), 콜아웃 규칙. 트리거: 매뉴얼 작성,
+  운영자 가이드 작성, 사용 설명서, admin 매뉴얼 집필, 절차서 작성, 매뉴얼 구조 설계, 매뉴얼 보완. 화면 맵은
+  huni-admin-source-map, 캡처는 huni-admin-live-capture 담당.
 ---
 
 # Huni Admin 운영자 매뉴얼 집필

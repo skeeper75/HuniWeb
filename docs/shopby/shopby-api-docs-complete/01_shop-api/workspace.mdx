@@ -1,0 +1,52 @@
+---
+title: "workspace-shop"
+description: "워크스페이스 (https-//workspace.nhn-commerce.com) 관련 shop API 입니다."
+version: "1.0"
+category: "Shop API"
+---
+
+# workspace-shop
+
+:::info API 소개
+ 워크스페이스 (https://workspace.nhn-commerce.com) 관련 shop API 입니다.
+:::
+
+## 서버 정보
+
+| 환경 | Base URL |
+|------|----------|
+| Production | `https://shop-api.e-ncp.com` |
+
+## 리소스 목록
+
+| 리소스 | 설명 |
+|--------|------|
+| **ExternalScript** | 외부스크립트 |
+
+## API 엔드포인트
+
+## ExternalScript — 외부스크립트
+
+### 🟢 `GET` `/external-scripts`
+
+**외부스크립트 조회하기**
+
+> operationId: `get-external-scripts`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)^|PC" |
+
+## 부가설명 및 특이사항
+ 외부스크립트 조회
+ 
+ 몰에서 사용중인 외부 스크립트 리스트를 불러옵니다.
+\
+        \
+
+---
+

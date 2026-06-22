@@ -1,0 +1,156 @@
+---
+title: "marketing-server"
+description: "샵바이 마케팅 Server to Server API"
+version: "1.0"
+category: "Server API"
+---
+
+# marketing-server
+
+:::info API 소개
+샵바이 마케팅 Server to Server API
+:::
+
+## 서버 정보
+
+| 환경 | Base URL |
+|------|----------|
+| Production | `https://server-api.e-ncp.com` |
+
+## API 엔드포인트
+
+## Campaign
+
+### 🔵 `POST` `/campaigns`
+
+**연동정보로 캠페인 수정**
+
+> operationId: `campaign-post-update`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `systemKey` | header | ✅ | `string` | API 연동 키 |
+
+외부 연동정보로 캠페인을 수정합니다.
+
+**현재는 shop by의 상점번호를 이용한 수정만 가능합니다.**
+\
+        
+## request
+
+- godosno: shop by 상점번호
+- status: 변경할 캠페인 상태. 중지 요청(PAUSED_BY_SYSTEM)만\
+        \ 가능 
+
+## response
+
+- campaignNo: 캠페인 번호
+- name: 캠페인 이름
+- status: 캠페\
+        인 상태
+- dailyBudget: 일 단위의 캠페인 평균 예산
+- mallNo: 캠페인이 속한 쇼핑몰 번호
+- startDate:\
+        \ 캠페인 시작일(yyyy-MM-dd)
+- startDateTime: 캠페인 시작일시(yyyy-MM-ddTHH:mm:ss)
+- endDate:\
+        \ 캠페인 종료일(yyyy-MM-dd)
+- endDateTime: 캠페인 종료일시(yyyy-MM-ddTHH:mm:ss)
+
+##\
+        \ Enums
+
+### status
+- PENDING: 대기중
+- PAUSED_BY_SYSTEM: 중지됨(시스템에 의한 강제\
+        \ 중지)
+- PAUSED: 중지됨
+- ENABLED: 진행중
+- PENDING_BY_PRODUCT: 상품 연동 대기중
+- READY:\
+        \ 준비중
+- REMOVED: 삭제
+
+---
+
+## Marketing
+
+### 🟡 `PUT` `/marketing/display`
+
+**마케팅 상품 일괄 노출여부 변경**
+
+> operationId: `마케팅 상품 노출설정 일괄 변경하기`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `partnerId` | header | - | `string` | "\n 파트너 아이디 (파트너사 로그인계정)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+            
+마케팅 상품 일괄 노출여부 변경
+
+---
+
+### 🟡 `PUT` `/marketing/product`
+
+**마케팅 상품 등록/수정하기**
+
+> operationId: `마케팅 상품 등록/수정하기`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `partnerId` | header | - | `string` | "\n 파트너 아이디 (파트너사 로그인계정)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+            
+마케팅 상품 등록/수정하기
+
+ ## 부가설명 및 특이사\
+        항
+ * channelType NAVER_SHOPPING 인 경우에만 additionalInfo 정보 기입 가능합니다.
+ * 도서\
+        \ 카테고리인 상품은, 네이버 포인트 적립 불가합니다.
+
+---
+
+### 🟢 `GET` `/marketing/products/settings`
+
+**상품 번호로 네이버 쇼핑 설정 정보 조회하기**
+
+> operationId: `상품 번호로 네이버 쇼핑 설정 정보 조회하기`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `productNos` | query | ✅ | `number` | "상품 번호^|10000001,10000002" |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `partnerId` | header | - | `string` | "\n 파트너 아이디 (파트너사 로그인계정)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+            
+상품 번호로 네이버 쇼핑 설정 정보 조회하는 API 입니다\
+        .
+
+상품 번호는 최대 200개 까지 조회 가능합니다.
+
+---
+

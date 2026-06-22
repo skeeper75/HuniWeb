@@ -1,0 +1,756 @@
+---
+title: "외부회원 연동 가이드"
+depth: 1
+path: "오로라 리액트 스킨개발가이드 > 외부회원 연동 가이드"
+---
+
+# 외부회원 연동 가이드
+
+# 기본 FLOW
+
+![Inline-image-2025-05-12 13.48.03.331.png](https://nhnent.dooray.com/share/tree/WoOk8q6KT1K3MZcLSuyZsw/pages/4203044366893619754/attach-files/4203045961695002865)
+
+# 1. 쇼핑몰(FE)  고객사 회원 시스템
+
+![Inline-image-2025-05-12 13.49.14.195.png](https://nhnent.dooray.com/share/tree/WoOk8q6KT1K3MZcLSuyZsw/pages/4203044366893619754/attach-files/4203045962109645310)
+
+* Shopby의 엑세스 토큰을 발급 받기 위해서는 고객사의 회원 정보를 조회할 수 있는 API와 `엑세스 토큰`이 필요합니다.
+* 쇼핑몰에서 고객사 회원 시스템을 통해 엑세스 토큰을 발급받는 방식은 고객사 회원 시스템에서 개발 된 방식에 따라 달라지며 크게 3가지 분류로 나뉩니다.
+    1. 쇼핑몰에서 로그인폼을 통해 고객사 API를 직접 호출하여 고객사의 회원 엑세스 토큰을 발급받는 방식
+    2. 쇼핑몰에서 고객사 회원 시스템으로 이동. 로그인 처리 후 고객사의 엑세스 토큰을 쇼핑몰의 콜백 URL로 전달받는 방법
+    3. 쇼핑몰에서 고객사 회원 시스템으로 이동. 로그인 처리 후 승인 코드를 쇼핑몰의 콜백 URL로 전달. 승인코드로 고객사 회원 시스템 API를 통해 엑세스 토큰을 발급받는 방식(OAuth2)
+
+# 2. 쇼핑몰(FE)  샵바이 서버
+
+* `1. 쇼핑몰(FE)  고객사 회원 시스템`단계 에서 발급 받은 엑세스 토큰으로 Shopby API를 통해 Shopby용 엑세스 토큰을 발급합니다.
+    * [POST /oauth2/openid 오픈아이디 토큰 발급하기](https://docs.shopby.co.kr/?url.primaryName=auth/#/OAUTH2/post-oauth2-openid-token)
+        * provider: `ncpstore`
+        * openAccessToken: `고객사 엑세스 토큰`
+    * Shopby API에서 엑세스 토큰을 발급하는 과정에서 Shopby 서버는 `openAccessToken` 필드로 전달 받은 엑세스 토큰으로 고객사 회원정보 조회 API를 통해 회원 정보를 조회 하며([참고: Response](https://workspace-help.nhn-commerce.com/recommendedcontents/contents/prm_member_guide#response)), Shopby 회원 정보를 갱신하는 프로세스를 수행합니다.
+        이때 수행하는 과정에서 문제가 발생 할 경우 400 응답을 내려주며([참고: (2) 기타 고객사 API 측 오류인 경우](https://workspace-help.nhn-commerce.com/recommendedcontents/contents/prm_member_guide#id-2-api)), 정상일 경우 200 응답과 함께 토큰을 발급합니다.
+    * 고객사의 회원정보 조회 API 등록은 1:1문의를 통해 등록 요청해야 합니다. ([참고: 2. 쇼핑몰 사용자 인증](https://workspace-help.nhn-commerce.com/recommendedcontents/contents/prm_member_guide#ea-b8-b0-eb-b3-b8-flow-1))
+* 2. 발급 받은 Shopby용 엑세스 토큰을 관리합니다. ([참고: OAuth 2.0 적용 가이드](https://workspace-help.nhn-commerce.com/aurora-guide/api/shopbyapi/oauth2.0))
+    * 기본 스킨을 사용하시는 경우
+        * shop API를 호출하실 때, 기본 스킨에서 제공하고 있는 ```fetchHttpRequest```를 사용해 주시면 OAuth 2.0을 별도 처리 없이 적용하실 수 있습니다. ```(참고:``` ```4. 기본 스킨 유틸리티``````)```
+        * refreshToken 만료 시 토큰 만료 alert가 노출되지 않는다면 try/catch로 catchError 처리가 필요할 수 있습니다.
+
+# 3. 스킨 커스텀
+
+## 외부 회원 연동 프로세스
+
+### Case 01: 직접 API 호출 방식
+
+쇼핑몰에서 고객사 API를 직접 호출하여 액세스 토큰을 발급받는 방식입니다.
+
+1. 사용자 로그인 버튼 클릭
+2. 고객사 회원 시스템 API 호출
+
+```jsx
+import { fetchHttpRequest } from '../../utils/api';
+// 고객사 회원 시스템 API 호출
+const response = await fetchHttpRequest({
+  url: 'api/sign-in',
+  baseURL: 'http://example.com', // 고객사 회원 시스템 API Base URL
+  method: 'POST',
+  requestBody: {
+    userId: 'test',
+    userPassword: 'password123',
+  },
+});
+
+// 서버에서 받은 accessToken
+const { accessToken: openIdAccessToken } = response;
+/**
+ 고객사 인증 액세스 토큰 응답
+ {
+   "accessToken": "az4W4YXNfwDmPltVXT2h9yAPpfH6IX",
+ }
+*/
+```
+
+3. Shop API 호출
+    * API: `POST` [`https://shop-api.e-ncp.com/oauth2/openid`](https://shop-api.e-ncp.com/oauth2/openid)[](https://shop-api.e-ncp.com/oauth2/openid)
+    * `fetchHttpRequest` 사용 예시:
+
+```jsx
+import { fetchHttpRequest } from '../../utils/api';
+
+// Shopby 회원 시스템 API 호출
+const response = await fetchHttpRequest({
+  url: 'oauth2/openid',
+  method: 'POST',
+  requestBody: {
+    provider: 'ncpstore',
+    openAccessToken: openIdAccessToken, // 고객사에서 받은 accessToken
+  },
+});
+
+const { accessToken, refreshToken, expiresIn, refreshTokenExpiresIn } = response;
+/**
+응답: Shopby 액세스 토큰
+{  
+  "accessToken": "Kj9xP2mN5vR8tL3qW7hY4cF6bD1sA",  
+  "refreshToken": "Xk9pL2mN4vR7tQ3wH5yC8fB1sD6aE",  
+  "expiresIn": 1800,  
+  "refreshTokenExpiresIn": 86400,  
+  "tokenType": "Bearer"
+}
+*/
+```
+
+4. 토큰 저장 및 로그인 완료
+    * Shopby 액세스 토큰과 리프레시 토큰을 브라우저 토큰으로 저장
+
+```jsx
+import { getTokenExpiryConfig, memberAuth, refreshAuth } from '@shopby/shared';
+
+// 만료시간 설정
+const expires = getTokenExpiryConfig({  refreshTokenExpiresIn,  expires: expiresIn,});
+
+// Shopby 토큰 저장
+accessToken && memberAuth.set({ value: accessToken, ...expires });
+refreshToken && refreshAuth.set({ value: refreshToken, expires: refreshTokenExpiresIn });
+```
+
+### Case 02: 고객사 회원 페이지로 이동 후 인증 코드 방식
+
+고객사 회원 페이지로 이동 후 로그인 처리하고, 승인 코드를 받아 처리하는 방식입니다.
+
+1. 사용자 로그인 버튼 클릭
+2. 고객사 인증 페이지로 리다이렉트
+    * URL: [`http://example.com/oauth2/authorize?redirect_uri={콜백URL}&reauthenticate=false`](http://example.com/oauth2/authorize?redirect_uri={콜백URL}&reauthenticate=false)
+        * 콜백 URL: `{쇼핑몰도메인}/callback/auth-callback` \* ```쇼핑몰의 콜백URL 정책에 따라 변경 가능```
+        * 경로 정보를 localStorage에 저장 : 로그인 완료 이후 이동할 페이지 정보
+
+```javascript
+const redirectUri = `${window.location.origin}/callback/auth-callback`;
+const customerAuthUrl = `/oauth2/authorize?redirect_uri=${encodeURIComponent(redirectUri)}`;
+
+localStorage.setItem('pathData', JSON.stringify({
+  previousPath,
+  nextPath,
+  orderSheetPath,
+}));
+
+window.location.href = customerAuthUrl;
+```
+
+3. 고객사 회원 시스템에서 로그인 처리
+    * 사용자가 고객사 회원 시스템에서 로그인
+    * 고객사가 승인 코드 생성
+4. 콜백 URL로 승인 코드 전달
+    * 쿼리스트링으로 code 값 전달
+5. 승인 코드로 고객사 액세스 토큰 발급
+    * API: `POST` [`http://example.com/oauth2/token`](http://example.com/oauth2/token)
+    * `fetchHttpRequest` 사용 예시:
+
+```javascript
+import { fetchHttpRequest } from '../../utils/api';
+
+// step 02: 승인코드로 고객사 API에서 access_token 발급
+const urlencoded = new URLSearchParams();
+urlencoded.append('client_id', 'client_id');
+urlencoded.append('client_secret', 'client_secret');
+urlencoded.append('code', code); // 승인 코드
+urlencoded.append('grant_type', 'authorization_code');
+urlencoded.append('redirect_uri', redirectUri);
+
+const tokenResponse = await fetchHttpRequest({
+  url: 'oauth2/token',
+  baseURL: 'http://example.com', // 고객사 회원 시스템 API Base URL
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded',
+  },
+  requestBody: urlencoded.toString(), // URLSearchParams를 문자열로 변환
+});
+
+const { access_token: accessToken, expires_in: expiresIn, refresh_token: refreshToken } = tokenResponse;
+/**
+응답: 고객사 액세스 토큰
+{  
+  "access_token": "az4W4YXNfwDmPltVXT2h9yAPpfH6IX",  
+  "refresh_token": "I4IQ4dwUPPyqaemGWBmO1BRZvahRtQ"
+}
+*/
+```
+
+6. Shopby 회원 시스템 API 호출
+    * API: `POST` [`https://shop-api.e-ncp.com/oauth2/openid`](https://shop-api.e-ncp.com/oauth2/openid)[](https://shop-api.e-ncp.com/oauth2/openid)
+    * `fetchHttpRequest` 사용 예시:
+
+```javascript
+import { fetchHttpRequest } from '../../utils/api';
+
+// step 03: Shopby 회원 시스템 API 호출
+const response = await fetchHttpRequest({
+  url: 'oauth2/openid',
+  method: 'POST',
+  requestBody: {
+    provider: 'ncpstore',
+    openAccessToken: accessToken, // 고객사에서 받은 accessToken
+  },
+});
+
+const { accessToken, refreshToken, expiresIn, refreshTokenExpiresIn, isDormantMember } = response;
+/**
+응답: Shopby 액세스 토큰
+{  
+  "accessToken": "Kj9xP2mN5vR8tL3qW7hY4cF6bD1sA",  
+  "refreshToken": "Xk9pL2mN4vR7tQ3wH5yC8fB1sD6aE",  
+  "expiresIn": 1800,  
+  "refreshTokenExpiresIn": 86400,  
+  "tokenType": "Bearer"
+}
+*/
+```
+
+
+
+
+## 로그인 및 인증 커스텀 가이드
+
+오로라 통합형 스킨 기반으로 커스텀 하실 경우,
+외부 인증 정책에 따라 다음 두 가지 방식 중 하나를 선택할 수 있습니다.
+
+* **① 외부 인증 API 방식**
+* **② 외부 인증 페이지 이동 후 콜백 방식**
+
+두 방식 모두 최종적으로 **Shop API 인증(토큰 발급 및 토큰 생성)** 을 수행하지만, 인증 토큰을 받는 프로세스가 다릅니다.
+
+> 💡 첨부된 아래 예시 프로젝트를 실행하면 ```콘솔 로그```를 통해
+> 인증 토큰 발급 과정과 실행 프로세스를 단계별로 확인할 수 있습니다.
+
+### 인증 방식 개요
+
+| 구분 | 인증 절차 | 주요 특징 | 참고 |
+| --- | ----- | ----- | --- |
+| **① 외부 인증 API 방식** | ① 로그인 폼에서 외부 회원 API로 사용자 인증
+② 인증 성공 시 Shop API로 토큰 요청 및 로그인 처리 | \- 외부 인증 페이지 이동 없음
+\- 스킨 내 로그인 폼에서 외부 회원 시스템과 Shop API를 연계
+\- 인증 완료 및 로그인 처리 | 파일 위치 : `/pages/SignIn` |
+| **② 외부 인증 페이지 이동 후 콜백 방식** | ① 로그인 폼에서 외부 인증 페이지로 이동
+② 외부 인증 페이지에서 로그인 완료 후
+③ 콜백 페이지에서 인증 코드/토큰 수신
+④ Shop API로 토큰 요청 및 로그인 처리 | \- 외부 인증 페이지 이동
+\- 외부 로그인 완료 후 콜백 페이지로 리다이렉트
+\- 콜백 페이지에서 외부 인증 코드 수신 및 Shop API 인증 수행
+\- 인증 완료 및 로그인 처리 | 파일 위치 :`/pages/SignIn`, `/pages/OpenIdCallback`콜백 페이지 URL은 개발하시는 쇼핑몰의 정책에 따라 변경 가능하며, 기본값은 다음과 같습니다.기본 값 : ```{쇼핑몰 주소}/callback/auth-callback``` |
+
+### 인증 흐름 요약
+
+```
+① 자체 로그인 방식
+사용자 → [SignIn 페이지]
+      → 외부 회원 API 인증 요청
+      → 인증 성공 시 Shop API 로그인 요청
+      → 토큰 발급 및 세션 생성
+      → 홈 또는 이전 페이지로 이동
+
+
+② 외부 인증 페이지 이동 후 콜백 방식
+사용자 → [SignIn 페이지]
+      → 외부 인증 페이지로 리다이렉트
+      → 사용자 로그인 완료
+      → 콜백 페이지로 리다이렉트 (코드/토큰 포함)
+      → Shop API로 인증 요청
+      → 토큰 발급 및 세션 생성
+      → 홈 또는 지정 페이지로 이동
+```
+
+
+
+
+## 4\. 기본 스킨 유틸리티
+
+### 1. `fetchHttpRequest`
+
+Shopby 기본 스킨에서 제공하는 **Shop API 호출 전용 유틸리티 함수**입니다.
+`@shopby/shared` 패키지의 `apiCreator`를 기반으로 구성되어 있으며, **인증/헤더/에러 처리**를 자동화하여 API 호출을 간편하게 만들어줍니다.
+
+> ⚠️ **주의:** 이 함수는 Shopby **기본 스킨을 사용하는 프로젝트에서만** 사용할 수 있습니다.
+
+### 사용 방법
+
+#### 1\. 초기화 확인
+
+`src/index.js` 파일에서 아래와 같이 `initializeShopApi()`가 호출되고 있는지 확인하세요.
+
+```js
+
+import { initializeShopApi } from './utils';
+
+const renderApp = async () => {
+  const { clientId, profile, tc } = await initializeShopApi(); // 필수 초기화
+  // ... 나머지 코드
+};
+```
+
+#### 2\. 함수 import
+
+```js
+// 기본 스킨의 utils/api.js에서 import
+import { fetchHttpRequest } from './utils/api'; // 파일 위치에 따라 경로 조정
+```
+
+#### 3\. 기본 호출 예시
+
+```js
+fetchHttpRequest({
+  url,           // required: API 엔드포인트 경로
+  method,        // optional: HTTP 메서드 (기본값: GET)
+  requestBody,   // optional: 요청 본문 데이터
+  query,         // optional: 쿼리 파라미터
+  baseURL,       // optional: 외부 API 호출 시 사용
+  headers        // optional: 추가 헤더
+});
+```
+
+***
+
+### 파라미터 설명
+
+| 파라미터 | 타입 | 필수 | 기본값 | 설명 |
+| ---- | --- | --- | --- | --- |
+| `url` | string | ✓ | - | API 엔드포인트 경로 |
+| `method` | string | ✗ | `'GET'` | HTTP 메서드 (GET, POST, PUT, DELETE, PATCH) |
+| `requestBody` | Object \| FormData | ✗ | `''` | 요청 본문 데이터 |
+| `query` | Object | ✗ | `{}` | URL 쿼리 파라미터 |
+| `baseURL` | string | ✗ | Shop API URL | 외부 API 호출 시 사용할 기본 URL |
+| `headers` | Object | ✗ | `{}` | 추가 HTTP 헤더 |
+
+***
+
+### 자동 헤더 설정
+
+| 헤더 | 설명 |
+| --- | --- |
+| `version` | 기본값: `1.0` |
+| `clientId` | `environment.json`에서 자동 로드 |
+| `platform` | `MOBILE_WEB` 또는 `PC` 자동 감지 |
+| `Authorization` | 로그인 시 자동 추가 |
+| `Content-Type` | `application/json` (FormData 사용 시 자동 제거) |
+
+> 대부분의 헤더는 자동으로 설정되지만, 필요 시 커스텀 헤더를 추가할 수 있습니다.
+
+***
+
+### 사용 예시
+
+```js
+import { fetchHttpRequest } from './utils/api';
+import { useEffect } from 'react';
+
+const fetchData = async (query) => {
+  try {
+    const response = await fetchHttpRequest({
+      url: 'your/endpoint',
+      method: 'POST',
+      baseURL: 'https://custom-api.example.com',
+      query: {
+        page: 1,
+        size: 20,
+        sort: 'created_at'
+      },
+      headers: {
+        'Accept-Language': 'ko-KR',
+        'X-Custom-Header': 'custom-value',
+        'X-Request-Id': 'req-12345'
+      },
+      requestBody: {
+        key1: 'value1',
+        key2: 'value2'
+      }
+    });
+
+    console.log(response);
+  } catch (error) {
+    console.error('API 호출 실패:', error);
+  }
+};
+
+function MyComponent() {
+  useEffect(() => {
+    fetchData({ pageNumber: 1, pageSize: 10 });
+  }, []);
+
+  return ...;
+}
+```
+
+***
+
+### ⚠️ 주의사항
+
+| 항목 | 설명 |
+| --- | --- |
+| **초기화 필수** | `src/index.js`에서 `initializeShopApi()`가 반드시 호출되어야 합니다. |
+| **비동기 처리** | 모든 API 호출은 `async/await` 또는 `Promise`를 사용해야 합니다. |
+| **에러 처리** | 실패 시 예외가 발생하므로 `try-catch` 구문 사용을 권장합니다. |
+| **URL 경로** | `url` 파라미터에 **앞 슬래시(`/`)를 포함하지 마세요.** |
+| **헤더 시그니처** | 커스텀 헤더의 대소문자를 정확히 지켜야 합니다 (`Content-Type`, `clientId` 등). |
+
+***
+
+### 2\. 인증 유틸리티 \(`@@@Auth`)
+
+Shopby 기본 스킨에서는 회원·비회원·성인·휴면 회원 등 다양한 인증 정보를
+일관성 있게 관리하기 위해 공통 구조의 인증 유틸리티(`@@@Auth`)를 제공합니다.
+
+모든 인증 유틸리티 객체는 **`set` / `get` / `remove`** 메서드를 공통으로 가지며,
+엑세스 토큰 또는 인증 관련 데이터를 저장, 조회, 삭제할 수 있습니다.
+
+#### guestAuth
+
+**비회원 인증 정보**를 관리합니다.
+
+```js
+const guestAuth = {
+  set({ value }) {
+    // value : (필수) 엑세스 토큰
+  },
+  get() {
+    // set 으로 세팅한 토큰을 조회함
+  },
+  remove() {
+    // set 으로 세팅한 인증 정보를 제거함
+  }
+};
+```
+
+***
+
+#### memberAuth
+
+**회원 인증 정보**를 관리합니다.
+
+```js
+const memberAuth = {
+  set({ value, expires }) {
+    // value : (필수) 엑세스 토큰
+    // expires : (선택) 만료 시간, // 안보내는 경우 세션 쿠키로 저장.
+  },
+  get() {
+    // set으로 세팅한 토큰을 조회함
+  },
+  remove() {
+    // set으로 세팅한 인증 정보를 제거함
+  },
+  defaultExpires() {
+    // 기본 만료 시간 조회    
+  }
+};
+```
+
+***
+
+**refreshAuth**
+
+**회원 재인증 정보**를 관리합니다.
+
+```js
+const refreshAuth = {
+  set({ value, expires }) {
+    // value : (필수) 엑세스 토큰
+    // expires : (선택) 만료 시간, // 안보내는 경우 세션 쿠키로 저장. 
+  },
+  get() {
+    // set으로 세팅한 토큰을 조회함
+  },
+  getExpiresIn() {
+    // 만료 시간 조회
+  },
+  remove() {
+    // set으로 세팅한 인증 정보를 제거함
+  },
+};
+```
+
+***
+
+#### ageAuth
+
+**성인 인증 정보**를 관리합니다.
+
+```js
+const ageAuth = {
+  set({ ageVerifiedYmdt, isValidVerifiedYmdtByAge }) {
+    // ageVerifiedYmdt : (필수) 성인 인증 완료 일시
+    // isValidVerifiedYmdtByAge : (선택) 성인 인증 유효성 검증 함수
+  },
+  get() {
+    // set 으로 세팅한 ageVerifiedYmdt 값을 조회함
+  },
+  remove() {
+    // set 으로 세팅한 인증 정보를 제거함
+  },
+  isValidVerifiedYmdtByAge(isValidVerifiedYmdtFnByAge?) {
+    // 성인인증 여부 판단
+    // isValidVerifiedYmdtFnByAge: 성인인증 로직 커스텀 함수
+    
+    const date = cookie.get(AGE_COOKIE_KEY_NAME);
+    if (!date) return false;
+
+    if(isValidVerifiedYmdtFnByAge) {
+      return isValidVerifiedYmdtFnByAge(date);
+    }
+    
+    return _isValidVerifiedYmdtByAge(date); //Shopby 성인 인증 로직 함수 실행
+  }
+};
+```
+
+***
+
+#### dormancyAuth
+
+**휴면 회원 인증 정보**를 관리합니다.
+
+```js
+const dormancyAuth = {
+  set({ value, expires }) {
+    // value : (필수) 휴면 해제 시 발급되는 엑세스 토큰
+    // expires : (선택) 만료 시간, // 안보내는 경우 세션 쿠키로 저장
+  },
+  get() {
+    // set 으로 세팅한 토큰을 조회함
+  },
+  remove() {
+    // set 으로 세팅한 인증 정보를 제거함
+  },
+  getExpiresIn() {
+    // 만료 시간 조회
+  }
+};
+```
+
+***
+
+**removeAuthTokens**
+
+Shopby 인증 토큰 정보 제거 (memberAuth, dormancyAuth, ageAuth, refreshAuth)
+
+```js
+const removeAuthTokens = ( => {
+  memberAuth.remove();
+  dormancyAuth.remove();
+  ageAuth.remove();
+  refreshAuth.remove();
+};
+```
+
+#### signOut
+
+모든 인증 정보를 제거하고 로그아웃 처리합니다.
+
+```js
+const signOut = ({ redirect = '', replace = false }) => {
+  // redirect: 로그아웃 이후 리다이렉트 경로
+  // replace: replace 여부 
+  removeAuthTokens();
+  
+  if (redirect) {
+    // redirect 값이 있을 경우 해당 경로로 리다이렉트
+   if(replace) {
+      location.replace(redirect); 
+   } else {
+      location.href = redirect;     
+   }
+  } else {
+    // redirect 값이 없을 경우 현재 페이지 reload
+    location.reload();
+  }
+};
+```
+
+***
+
+#### 사용법
+
+##### guestAuth
+
+```jsx
+import { guestAuth } from '@shopby/shared';
+
+// 게스트 토큰 저장
+const handleGuestAuth = async ({ guestToken }) => {
+  guestAuth.set({ value: guestToken });
+};
+
+// 게스트 토큰 조회
+const getGuestToken = () => {
+  const token = guestAuth.get();
+  return token;
+};
+
+// 게스트 토큰 제거
+const removeGuestToken = () => {
+  guestAuth.remove();
+};
+
+// 게스트 주문 조회 시 사용 예시
+const checkGuestOrder = () => {
+  const guestToken = guestAuth.get();
+  if (guestToken) {
+    // 게스트 주문 조회 API 호출
+    console.log('게스트 토큰이 있습니다:', guestToken);
+  }
+};
+```
+
+##### memberAuth
+
+```jsx
+import { memberAuth } from '@shopby/shared/utils';
+
+ useEffect(() => {
+    const currentAuth = memberAuth.get();
+
+    if (!currentAuth) return;
+
+    memberAuth.set({
+      value: currentAuth,
+      expires: memberAuth.defaultExpires(), // 엑세스 토큰 기본 유효 기간
+    });
+  }, [location.pathname, profile]);
+```
+
+**refreshAuth**
+
+```jsx
+import { refreshAuth } from '@shopby/shared';
+
+// 리프레시 토큰 저장
+const handleRefreshToken = async ({ refreshToken, refreshTokenExpiresIn }) => {
+  refreshAuth.set({ 
+    value: refreshToken, 
+    expires: refreshTokenExpiresIn 
+  });
+};
+
+// 리프레시 토큰 조회
+const getRefreshToken = () => {
+  const refreshToken = refreshAuth.get();
+  return refreshToken;
+};
+
+// 리프레시 토큰 만료 시간 조회 (Unix timestamp)
+const getRefreshExpiresIn = () => {
+  const expiresIn = refreshAuth.getExpiresIn();
+  return expiresIn;
+};
+```
+
+##### ageAuth
+
+```jsx
+import { ageAuth } from '@shopby/shared';
+
+// 연령 인증 저장
+const handleAgeVerification = ({ ageVerifiedYmdt }) => {
+  ageAuth.set({ ageVerifiedYmdt });
+};
+
+// 연령 인증 조회
+const getAgeVerifiedDate = () => {
+  const date = ageAuth.get();
+  return date;
+};
+
+// 연령 인증 유효성 확인
+const checkAgeVerification = () => {
+  const isValid = ageAuth.isValidVerifiedYmdtByAge();
+  if (isValid) {
+    console.log('연령 인증이 유효합니다.');
+  } else {
+    console.log('연령 인증이 만료되었거나 없습니다.');
+  }
+};
+
+// 성인 인증 페이지에서 사용 예시
+const AdultCertificationPage = () => {
+  const handleAgeVerification = async () => {
+    try {      
+      // 인증 날짜 저장
+      ageAuth.set({ ageVerifiedYmdt });
+      
+      // 성인 콘텐츠 페이지로 이동
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  return (
+    
+      성인 인증하기
+    
+  );
+};
+```
+
+##### dormancyAuth
+
+```jsx
+import { dormancyAuth } from '@shopby/shared';
+
+// 휴면 계정 토큰 저장
+const handleDormancyAuth = async ({ accessToken, expiresIn }) => {
+  dormancyAuth.set({ 
+    value: accessToken, 
+    expires: expiresIn 
+  });
+};
+
+// 휴면 계정 토큰 조회
+const getDormancyToken = () => {
+  const token = dormancyAuth.get();
+  return token;
+};
+
+// 휴면 계정 토큰 만료 시간 조회
+const getDormancyExpiresIn = () => {
+  const expiresIn = dormancyAuth.getExpiresIn();
+  return expiresIn;
+};
+
+// 휴면 계정 토큰 제거
+const removeDormancyToken = () => {
+  dormancyAuth.remove();
+};
+
+// 로그인 시 휴면 계정 처리 예시
+const handleSignInWithDormancy = async (response) => {
+  const { accessToken, isDormantMember, expiresIn } = response;
+
+  if (isDormantMember) {
+    // 휴면 계정 토큰 저장
+    dormancyAuth.set({ 
+      value: accessToken, 
+      expires: expiresIn 
+    });
+    
+    // 휴면 해제 안내 모달 표시
+    openConfirm({
+      message: '장기 미접속으로 인해 휴면회원 전환 상태입니다. 휴면해제 하시겠습니까?',
+      onConfirm: async () => {
+        await reactivateDormantAccount();
+        // 휴면 해제 후 일반 회원 토큰으로 변경
+        memberAuth.set({ value: accessToken, expires: expiresIn });
+        dormancyAuth.remove();
+      },
+    });
+  }
+};
+```
+
+***
+
+#### ⚠️ 주의사항
+
+| 항목 | 설명 |
+| --- | --- |
+| **공통 구조 유지** | 모든 Auth 객체는 `set`, `get`, `remove`를 동일한 방식으로 제공합니다. |
+| **로그아웃 처리** | `signOut()`은 내부적으로 모든 인증 정보를 초기화하므로, 커스텀 처리 시 주의가 필요합니다. |
+| **토큰 만료 관리** | `expires`(memberAuth)는 로그인 만료 시간과 동기화되어야 합니다. |
+
+***

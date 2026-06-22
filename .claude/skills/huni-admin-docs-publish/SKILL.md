@@ -1,6 +1,11 @@
 ---
 name: huni-admin-docs-publish
-description: 후니 admin 운영자 매뉴얼(Markdown)을 Material for MkDocs 문서 사이트로 발행하고, GitHub Actions로 빌드·배포를 자동화(docs-as-code)하는 방법론 스킬. 매뉴얼 md를 MkDocs docs_dir 구조로 정규화(이미지 경로 변환·멱등·원본 보존)하는 빌드 스크립트, mkdocs.yml 핵심 설정(Material 테마·한글 lang/검색·nav·admonition·코드복사), GitHub Actions 워크플로(push→build→GitHub Pages), requirements 고정, venv 로컬 빌드 검증, webadmin 코드 배포 연동(cross-repo repository_dispatch) 옵션을 제공한다. 'mkdocs', '문서 사이트', '문서 발행', '매뉴얼 사이트', 'docs 빌드', 'docs-as-code', 'GitHub Pages 배포', '문서 CI', '매뉴얼 배포 자동화', 'Material for MkDocs' 작업 시 반드시 이 스킬을 사용. 매뉴얼 집필 자체는 huni-admin-manual-authoring가 담당한다.
+description: >
+  후니 admin 운영자 매뉴얼(Markdown)을 Material for MkDocs 사이트로 발행하고 GitHub Actions로 빌드·배포를
+  자동화(docs-as-code)하는 방법론. 매뉴얼 md를 docs_dir로 정규화(이미지 경로·멱등·원본 보존)하는 빌드 스크립트,
+  mkdocs.yml 핵심 설정, push→build→Pages 워크플로, venv 로컬 빌드 검증, webadmin 배포 연동 옵션. 트리거: mkdocs,
+  문서 사이트, 문서 발행, 매뉴얼 사이트, docs 빌드, docs-as-code, GitHub Pages 배포, 문서 CI, Material for MkDocs.
+  매뉴얼 집필은 huni-admin-manual-authoring 담당.
 ---
 
 # Huni Admin 매뉴얼 → MkDocs 문서 사이트 발행

@@ -1,0 +1,69 @@
+---
+title: "AuthenticationProvider"
+depth: 5
+path: "오로라 리액트 스킨개발가이드 > 개발 프로세스 > 2️⃣Aurora React 샘플스킨 확인 > @shopby/react-components > auth > AuthenticationProvider"
+---
+
+# AuthenticationProvider
+
+* 회원 인증을 관리합니다.
+* 인증번호 발송 기능을 제공합니다.
+
+## 속성
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | ---- | --- | ---- | --- |
+| children | true | ReactNode | - |  |
+
+## 상태
+
+* `authenticationState` 는 `useAuthenticationStateContext` 를 호출해 사용합니다.
+
+```typescript
+const authenticationState: AuthenticationState = useAuthenticationStateContext();
+```
+
+| 이름 | 타입 | 기본 값 | 설명 |
+| --- | --- | ---- | --- |
+| authenticationInfo | object |  | 회원 인증 정보 |
+| ㄴcertificatedNumber | string |  | 인증번호 |
+| ㄴmemberNo | number \| null |  | 회원번호 |
+| ㄴnotiAccount | string | '' | 이메일주소 혹은 휴대전화번호 |
+| ㄴmemberName | string | '' | 회원 이름 |
+| ci | string \| null | null | CI
+동일인 식별확인을 위한 값 |
+| authenticationsRemainTimeBySeconds | number \| null | null | 인증번호 만료까지 남은 시간 (초) |
+| isAuthenticationReSend | boolean | false | 재인증 여부 |
+
+## 액션
+
+* `authenticationAction` 은 `useAuthenticationActionContext` 를 호출해 사용합니다.
+
+```typescript
+const authenticationAction = useAuthenticationActionContext();
+```
+
+| 이름 | 인자타입 | 필수여부 | 기본 값 | 설명 | 관리하는 상태 |
+| --- | ---- | ---- | ---- | --- | ------- |
+| updateIsAuthenticationReSend | boolean | o | - | 재인증 여부 상태를 갱신함. | `authenticationState.isAuthenticationReSend` |
+| updateAuthenticationsRemainTimeBySeconds | number | o | - | 인증번호 만료까지 남은 시간을 갱신함. | `authenticationState.authenticationsRemainTimeBySeconds` |
+| updateAuthenticationInfo | object | x |  | 인증상태를 갱신함. | `authenticationState.authenticationInfo` |
+| ㄴ authenticationInfo | object | x |  | `authenticationInfo` 의 상태중 갱신이 필요한 프로퍼티만 전달할 수 있음. |  |
+| updateCi | string | o | - | CI 를 갱신함 | `authenticationState.ci` |
+| confirmAuthentication | object | o |  | 연락처로 전달받은 인증번호를 확인할 수 있음.
+인자 타입은 [api parameters](https://docs.shopby.co.kr/?url.primaryName=auth/#/Authentication/get-authentications) 값과 동일함. |  |
+| sendAuthentication | object | o |  | 회원의 연락처 또는 입력한 연락처로 인증번호를 발송함.
+인자 타입은 [api parameters](https://docs.shopby.co.kr/?url.primaryName=auth/#/Authentication/SendAuthenticationNumber) 값과 동일함. | `authenticationState.authenticationsRemainTimeBySeconds`
+`authenticationState.isAuthenticationReSend` |
+
+## 사용 예시
+
+```typescript
+const Example = () => (
+  
+    
+      
+    
+  
+);
+```

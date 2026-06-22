@@ -1,0 +1,49 @@
+---
+title: "ProductExtraInfoProvider"
+depth: 5
+path: "오로라 리액트 스킨개발가이드 > 개발 프로세스 > 2️⃣Aurora React 샘플스킨 확인 > @shopby/react-components > product > ProductExtraInfoProvider"
+---
+
+# ProductExtraInfoProvider
+
+## 속성
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | ---- | --- | ---- | --- |
+| children | false | ReactNode |  |  |
+
+## 상태
+
+* productExtraInfoState 는 useProductExtraInfoStateContext 를 호출해 사용한다.
+
+```
+const productExtraInfoState = useProductExtraInfoStateContext();
+```
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | ---- | --- | ---- | --- |
+| productsExtraInfo |  | Object | [] | 상품
+ㄴ [response](https://docs.shopby.co.kr/?url.primaryName=product/#/Product/get-product-extraInfos) 값과 동일함. |
+
+## 액션
+
+* productExtraInfoActionContext 은 useProductExtraInfoActionContext 를 호출해 사용한다.
+
+```
+const productExtraInfoActionContext = useProductExtraInfoActionContext();
+```
+
+| 이름 | 인자타입 | 필수여부 | 기본값 | 설명 | 관리하는 상태 |
+| --- | ---- | ---- | --- | --- | ------- |
+| fetchProductsExtraInfo | string | true |  | 상품의 추가정보 조회를 조회함. | productExtraInfoState.productsExtraInfo |
+| ㄴ productNos | string | true |  |  |  |
+
+## 사용예시
+
+```
+const Example = () => (
+  
+    
+  
+);
+```

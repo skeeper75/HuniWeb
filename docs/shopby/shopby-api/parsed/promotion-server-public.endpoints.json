@@ -1,0 +1,1402 @@
+[
+  {
+    "method": "GET",
+    "path": "/coupons",
+    "summary": "쿠폰 검색하기",
+    "description": " ## 부가설명 및 특이사항\n 검색 조건을 기반으로 쇼핑몰이 가지고 있는 쿠폰 정보를 검색합니다.\n \n couponNos에 입력한 쿠폰번호 리스트와 keyword로 입력한 쿠폰번호는 AND 조건으로 검색됩니다.",
+    "tags": ["Coupon"],
+    "parameters": [
+      {
+        "name": "page",
+        "in": "query",
+        "description": "페이지 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "size",
+        "in": "query",
+        "description": "페이지 크기^|30",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "searchDateType",
+        "in": "query",
+        "description": "날짜 검색 타입(REGISTER_YMD: 등록일, ISSUE_START_YMD: 발행시작일, ISSUE_END_YMD: 발행종료일, UPDATE_YMD: 수정일)^|REGISTER_YMD",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "startYmd",
+        "in": "query",
+        "description": "조회 시작일^|2025-06-29",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "endYmd",
+        "in": "query",
+        "description": "조회 종료일^|2025-09-29",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "issueType",
+        "in": "query",
+        "description": "쿠폰 발급 타입(DOWNLOAD: 다운로드 발급, CODE_DESIGNATE: 지정코드 발급, CODE_RANDOM: 난수코드 발급, INSERT: 인서트 발급, CODE_DESIGNATE_ADMIN_ONLY: 지정코드 발급(어드민 전용))^|DOWNLOAD",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "couponType",
+        "in": "query",
+        "description": "혜택 구분 타입(PRODUCT: 상품적용 쿠폰, PRODUCT_PLUS: 상품 금액 할인(플러스), CART: 주문적용 쿠폰, CART_DELIVERY: 장바구니 배송비 할인, GIFT: 기프트 쿠폰)^|CART",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "statusTypes",
+        "in": "query",
+        "description": "쿠폰 상태 타입 리스트(ISSUE_READY: 발급대기, ISSUE_ING: 발급 중, ISSUE_STOP: 발급중지, ISSUE_END: 발급종료)^|ISSUE_ING,ISSUE_END",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "searchKeywordType",
+        "in": "query",
+        "description": "검색어 타입(ALL: 전체, COUPON_NAME: 쿠폰명, COUPON_NO: 쿠폰번호, REGISTER_ADMIN: 등록자)^|COUPON_NO",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "keyword",
+        "in": "query",
+        "description": "검색어^|검색어",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "couponNos",
+        "in": "query",
+        "description": "쿠폰번호 리스트^|1,2,3",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "exceptIssueEndCoupon",
+        "in": "query",
+        "description": "사용불가 쿠폰 제외 여부 (true: 사용불가 쿠폰 제외, false: 사용불가 쿠폰 포함)^|false",
+        "required": false,
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      {
+        "name": "memberGradeNo",
+        "in": "query",
+        "description": "회원 등급 번호^|1",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "memberGroupNo",
+        "in": "query",
+        "description": "회원 그룹 번호^|1",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n Authorization을 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/coupons-186158211"
+            },
+            "examples": {
+              "get-search-coupon": {
+                "value": "{\"totalCount\":10,\"contents\":[{\"no\":1,\"mallName\":\"몰이름\",\"couponName\":\"쿠폰이름\",\"couponType\":\"CART\",\"couponSubType\":\"CART\",\"issueType\":\"DOWNLOAD\",\"usesMinLimit\":true,\"minSalePrice\":0,\"usesMaxLimit\":true,\"maxSalePrice\":0,\"fixed\":true,\"discountAmt\":0,\"discountPercent\":0,\"maxDiscountAmt\":0,\"issueLimitCnt\":10,\"usesDailyIssueLimit\":false,\"dailyIssueLimitCnt\":1,\"usesPersonalIssueLimit\":false,\"issuePerPersonLimitCnt\":1,\"dailyIssuePerPersonLimitCnt\":1,\"totalIssueCnt\":9,\"totalIssueCntByAdmin\":0,\"totalUseCnt\":1,\"issueStartYmdt\":\"2025-06-29 17:53:21\",\"issueEndYmdt\":\"2025-09-29 17:53:21\",\"serviceShareRate\":100,\"registerYmdt\":\"2025-06-29 17:53:21\",\"updateYmdt\":\"2025-09-29 17:53:21\",\"couponStatusType\":\"ISSUE_END\",\"promotionCode\":\"CODE\",\"issueStopped\":false,\"scheduledIssuePlan\":false,\"memberGradeNos\":[1,2,3],\"memberGroupNos\":[1,2,3],\"benefitAmt\":null}]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/coupons",
+    "summary": "쿠폰 생성하기",
+    "description": " ## 부가설명 및 특이사항\n 쿠폰을 신규 생성합니다.",
+    "tags": ["Coupon"],
+    "parameters": [
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n Authorization을 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/coupons-2077927525"
+          },
+          "examples": {
+            "post-coupon": {
+              "value": "{\"mallNo\":1,\"couponName\":\"test-coupon\",\"reason\":\"test-reason\",\"usableConstraint\":{\"usablePlatformTypes\":[\"PC\",\"MOBILE_WEB\",\"MOBILE_APP\"],\"useEndYmdt\":\"2025-12-29 17:53:21\",\"useDays\":1,\"limitPayType\":null,\"limitPayTypes\":[],\"useStopped\":false},\"issuableConstraint\":{\"issueType\":\"DOWNLOAD\",\"issueStartYmdt\":\"2025-09-29 17:53:21\",\"issueEndYmdt\":\"2025-12-29 17:53:21\",\"memberGradeNo\":0,\"memberGradeNos\":[0,1],\"memberGroupNos\":[2,3],\"issueLimitCnt\":999,\"issueStartHour\":0,\"issueEndHour\":24,\"issueStopped\":false,\"finishesIssuing\":false,\"usesDailyIssueLimit\":false,\"dailyIssueLimitCnt\":0,\"usesPersonalIssueLimit\":false,\"issuePerPersonLimitCnt\":0,\"dailyIssuePerPersonLimitCnt\":0,\"issuablePlatformTypes\":[\"PC\",\"MOBILE_WEB\",\"MOBILE_APP\"],\"channelTypes\":[\"NAVER_EP\"],\"possibleDaysOfWeek\":[1,2,3,4,5,6,7],\"promotionCode\":null,\"couponCodeLength\":0,\"isPeriodEnd\":false},\"discount\":{\"usesMinLimit\":true,\"minSalePrice\":1000,\"usesMaxLimit\":true,\"maxSalePrice\":10000,\"fixed\":true,\"discountAmt\":500,\"discountPercent\":null,\"maxDiscountAmt\":null},\"couponType\":\"CART\",\"couponSubType\":\"CART\",\"cartCouponDetail\":{\"usableOtherCoupon\":false,\"skipsAccumulation\":false,\"couponIssueLimitTypes\":[\"PRODUCT_DETAIL\"],\"couponTargetType\":\"BRAND\",\"couponTargets\":[{\"couponTargetType\":\"BRAND\",\"targetNo\":1,\"targetName\":\"할인대상브랜드명\"}],\"excludesTarget\":false,\"couponExcludeTargets\":[{\"couponTargetType\":\"PRODUCT\",\"targetNo\":1,\"targetName\":\"할인제외대상이름\"}]},\"productCouponDetail\":{\"skipsAccumulation\":false,\"usableCartCoupon\":true,\"serviceSharePercent\":100,\"couponIssueLimitTypes\":[\"PRODUCT_DETAIL\"],\"couponTargetType\":\"ALL_PRODUCT\",\"couponTargets\":[{\"couponTargetType\":\"PRODUCT\",\"targetNo\":1,\"targetName\":\"할인대상이름\"}],\"excludesTarget\":false,\"couponExcludeTargets\":[{\"couponTargetType\":\"PRODUCT\",\"targetNo\":1,\"targetName\":\"할인제외대상이름\"}]},\"giftCouponDetail\":{\"benefitEndYmdt\":null,\"benefitExpirationDays\":1,\"benefitAmt\":0,\"giftCouponType\":\"ACCUMULATION\"}}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/coupons-1711516014"
+            },
+            "examples": {
+              "post-coupon": {
+                "value": "{\"couponNo\":1}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/coupons/codes",
+    "summary": "쿠폰 랜덤코드 조회하기 (개발중)",
+    "description": " ## 부가설명 및 특이사항\n 코드 발급(자동생성) 유형의 쿠폰 랜덤코드를 조회합니다.\n ",
+    "tags": ["Coupon"],
+    "parameters": [
+      {
+        "name": "couponNos",
+        "in": "query",
+        "description": "쿠폰 번호 리스트^|1",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "page",
+        "in": "query",
+        "description": "페이지 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "size",
+        "in": "query",
+        "description": "페이지 크기^|30",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "issued",
+        "in": "query",
+        "description": "회원 발급 여부 (true: 발급, false: 미발급)^|true",
+        "required": true,
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n Authorization을 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/coupons-codes-958981943"
+            },
+            "examples": {
+              "get-coupon-random-codes": {
+                "value": "{\"totalCount\":1,\"contents\":[{\"couponNo\":1,\"couponCode\":\"11232\",\"couponCodeStatusType\":\"ISSUED\",\"couponIssueNo\":1,\"memberNo\":1}]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/coupons/exclude-targets",
+    "summary": "쿠폰의 제외 대상 조회",
+    "description": " ## 부가설명 및 특이사항\n 쿠폰 번호를 입력받아 쿠폰의 제외 대상을 조회합니다.\n \n 쿠폰 번호를 입력하지 않는 경우, 해당 쇼핑몰 전체를 대상으로 조회합니다.",
+    "tags": ["Coupon"],
+    "parameters": [
+      {
+        "name": "couponNos",
+        "in": "query",
+        "description": "쿠폰 번호 목록^|1,2,3",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "page",
+        "in": "query",
+        "description": "페이지 번호 (1 이상)^|1",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "size",
+        "in": "query",
+        "description": "페이지 크기^|30",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n Authorization을 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/coupons-targets616348469"
+            },
+            "examples": {
+              "get-coupon-exclude-targets": {
+                "value": "{\"totalCount\":1,\"totalPage\":1,\"contents\":[{\"couponNo\":0,\"targetNo\":0,\"targetName\":\"exclude-target-name\",\"targetType\":\"PRODUCT\"}]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/coupons/issues",
+    "summary": "지급된 쿠폰 검색하기",
+    "description": " ## 부가설명 및 특이사항\n 회원에게 지급된 쿠폰 정보를 조회합니다.\n \n memberNos, memberIds, couponNos, couponIssueNos 중 적어도 하나의 필드에는 값을 입력해야 합니다.\n couponIssueNos (쿠폰 지급 번호) 입력 시 startYmd/endYmd 값을 입력하지 않아도 조회할 수 있습니다.\n couponIssueNos 입력하지 않는 경우 startYmd/endYmd 값을 필수로 입력해야 합니다.",
+    "tags": ["CouponIssue"],
+    "parameters": [
+      {
+        "name": "memberNos",
+        "in": "query",
+        "description": "회원 번호 목록^|1,2,3",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "memberIds",
+        "in": "query",
+        "description": "회원 ID 목록^|test1,test2,test3",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "couponNos",
+        "in": "query",
+        "description": "쿠폰 번호 목록^|1,2,3",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "couponIssueNos",
+        "in": "query",
+        "description": "쿠폰 지급 번호 목록^|1,2,3",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "searchDateType",
+        "in": "query",
+        "description": "날짜검색타입(ISSUE_START_YMD: 쿠폰발행시작일, ISSUE_END_YMD: 쿠폰발행종료일, ISSUE_YMD: 쿠폰지급일, USE_END_YMD: 쿠폰만료일)^|ISSUE_YMD",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "startYmd",
+        "in": "query",
+        "description": "조회 시작일^|2025-06-29",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "endYmd",
+        "in": "query",
+        "description": "조회 종료일^|2025-09-29",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "page",
+        "in": "query",
+        "description": "페이지 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "size",
+        "in": "query",
+        "description": "페이지 크기 (최대 10,000)^|30",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n Authorization을 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/coupons-issues-1004695170"
+            },
+            "examples": {
+              "get-search-coupon-issue": {
+                "value": "{\"totalCount\":0,\"contents\":[{\"memberNo\":1,\"couponNo\":1,\"couponName\":\"할인 쿠폰\",\"couponType\":\"PRODUCT\",\"couponSubType\":\"NONE\",\"issueType\":\"DOWNLOAD\",\"fixed\":true,\"discountAmt\":5000,\"discountRate\":0,\"maxDiscountAmt\":5000,\"useEndYmdt\":\"2025-09-29 17:52:55\",\"couponIssueNo\":1,\"couponDiscountAmt\":5000,\"registerYmdt\":\"2025-09-29 17:52:55\",\"used\":false,\"useYmdt\":\"2025-09-29 17:52:55\",\"withdrawn\":false,\"adminIssued\":false,\"benefitAmt\":0}]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/coupons/issues",
+    "summary": "회원번호와 쿠폰번호로 쿠폰 발급하기",
+    "description": " ## 부가설명 및 특이사항\n 회원정보, 쿠폰번호를 기반으로 쿠폰을 발행합니다.\n \n 해당 API로 쿠폰 발급하는 경우에는 쿠폰 발급 상태, 쿠폰 발급 제한 수량을 검증하지 않습니다.\n \n memberNos 필드와 memberIds 필드는 동시 요청 시 400 error가 발생합니다. 하나의 필드에만 값을 입력해야 합니다.\n \n response의 크기는 request의 (회원 수 * 쿠폰 수)와 같거나 작을 수 있습니다.",
+    "tags": ["CouponIssue"],
+    "parameters": [
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n Authorization을 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/coupons-issues-1903045413"
+          },
+          "examples": {
+            "post-coupon-issue": {
+              "value": "{\"couponNo\":1,\"couponNos\":[1,2,3],\"memberNos\":[1,2,3],\"memberIds\":[],\"issueCount\":1,\"reason\":\"쿠폰 지급\",\"isAdminIssue\":false}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/coupons-issues-194375905"
+            },
+            "examples": {
+              "post-coupon-issue": {
+                "value": "[{\"couponNo\":1,\"memberNo\":1,\"couponIssueNo\":1,\"useEndYmdt\":\"2025-09-29 17:52:55\",\"issueFail\":false}]"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/coupons/targets",
+    "summary": "쿠폰의 대상 조회",
+    "description": " ## 부가설명 및 특이사항\n 쿠폰 번호를 입력받아 쿠폰의 대상을 조회합니다.\n \n 쿠폰 번호를 입력하지 않는 경우, 해당 쇼핑몰 전체를 대상으로 조회합니다.",
+    "tags": ["Coupon"],
+    "parameters": [
+      {
+        "name": "couponNos",
+        "in": "query",
+        "description": "쿠폰 번호 목록^|1,2,3",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "page",
+        "in": "query",
+        "description": "페이지 번호 (1 이상)^|1",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "size",
+        "in": "query",
+        "description": "페이지 크기^|30",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n Authorization을 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/coupons-targets616348469"
+            },
+            "examples": {
+              "get-coupon-targets": {
+                "value": "{\"totalCount\":1,\"totalPage\":1,\"contents\":[{\"couponNo\":0,\"targetNo\":0,\"targetName\":\"target-name\",\"targetType\":\"PRODUCT\"}]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/coupons/use",
+    "summary": "사용된 쿠폰 정보 검색하기",
+    "description": " ## 부가설명 및 특이사항\n 이미 사용된 쿠폰 정보를 검색합니다.",
+    "tags": ["CouponUse"],
+    "parameters": [
+      {
+        "name": "keyword",
+        "in": "query",
+        "description": "검색어^|123",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "searchKeywordType",
+        "in": "query",
+        "description": "검색어타입[ORDER_NO, COUPON_NO]^|ORDER_NO",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "page",
+        "in": "query",
+        "description": "페이지 번호 (1 이상)^|1",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "size",
+        "in": "query",
+        "description": "페이지 사이즈^|100",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "searchDateType",
+        "in": "query",
+        "description": "날짜 검색 타입^|[ISSUE_YMD: 지급일, USE_YMD: 사용일]",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "startYmd",
+        "in": "query",
+        "description": "검색 시작일^|2024-09-12",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "endYmd",
+        "in": "query",
+        "description": "검색 종료일^|2024-09-14",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n Authorization을 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/coupons-use-1764910307"
+            },
+            "examples": {
+              "get-coupons-use": {
+                "value": "[{\"couponNo\":1,\"couponIssueNo\":0,\"couponName\":\"쿠폰이름\",\"couponType\":\"CART\",\"couponSubType\":\"CART\",\"issueType\":\"DOWNLOAD\",\"usesMinLimit\":true,\"minSalePrice\":0,\"usesMaxLimit\":true,\"maxSalePrice\":0,\"fixed\":true,\"discountAmt\":0,\"discountPercent\":0,\"maxDiscountAmt\":0,\"issueStartYmdt\":\"2025-06-29T17:53:15.359653447\",\"issueEndYmdt\":\"2025-09-29T17:53:15.35973858\",\"serviceShareRate\":100,\"registerYmdt\":\"2025-06-29T17:53:15.359772537\",\"updateYmdt\":\"2025-09-29T17:53:15.359815497\",\"useYmdt\":\"2025-09-29T17:53:15.359837603\",\"couponStatusType\":\"ISSUE_END\",\"issueStopped\":false,\"promotionCode\":\"CODE\",\"orderNo\":\"123\",\"orderProductNo\":0,\"payAmt\":0}]"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/coupons/use",
+    "summary": "쿠폰 사용하기",
+    "description": " ## 부가설명 및 특이사항\n 발급된 쿠폰을 사용처리하여 이후에 주문에 사용하지 못하도록 할때 사용합니다.",
+    "tags": ["CouponUse"],
+    "parameters": [
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n Authorization을 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/coupons-use-458945078"
+          },
+          "examples": {
+            "post-use-coupon": {
+              "value": "[{\"couponIssueNo\":1,\"couponDiscountAmt\":1}]"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/coupons/withdraw",
+    "summary": "쿠폰 철회",
+    "description": " ## 부가설명 및 특이사항\n 쿠폰 지급 번호를 입력받아 발급된 쿠폰을 철회합니다.\n \n `사용 가능` 상태인 쿠폰이면 발급된 위치에 상관없이 철회할 수 있습니다.",
+    "tags": ["Coupon"],
+    "parameters": [
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n Authorization을 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/coupons-withdraw187298523"
+          },
+          "examples": {
+            "withdraw-coupon": {
+              "value": "{\"couponIssueNo\":0,\"reason\":\"withdraw-reason\"}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/coupons/withdraw-bulk",
+    "summary": "쿠폰 번호로 쿠폰 지급 철회하기",
+    "description": " ## 부가설명 및 특이사항\n 입력받은 쿠폰번호로 지급된 모든 쿠폰을 철회합니다.\n 10만건 이상은 해당 api 사용하지 마시고 1:1 문의 요청 바랍니다.",
+    "tags": ["Coupon"],
+    "parameters": [
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n Authorization을 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/coupons-withdraw-bulk765073540"
+          },
+          "examples": {
+            "put-coupon-issue-withdraw-in-bulk": {
+              "value": "{\"couponNo\":1,\"issueStartYmd\":\"2025-09-29\",\"issueEndYmd\":\"2025-09-29\",\"withdrawReason\":\"withdraw-reason\"}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/coupons/{couponNo}",
+    "summary": "쿠폰 정보 조회하기",
+    "description": " ## 부가설명 및 특이사항\n 하나의 쿠폰에 대한 상세 정보를 조회합니다.",
+    "tags": ["Coupon"],
+    "parameters": [
+      {
+        "name": "couponNo",
+        "in": "path",
+        "description": "쿠폰 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n Authorization을 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/coupons-couponNo-1535876060"
+            },
+            "examples": {
+              "get-coupons-coupon-no": {
+                "value": "{\"couponName\":\"test-coupon\",\"statusType\":\"ISSUE_READY\",\"reason\":\"test-reason\",\"usableConstraint\":{\"usablePlatformTypes\":[\"PC\",\"MOBILE_WEB\",\"MOBILE_APP\"],\"useEndYmdt\":\"2025-12-29 17:53:21\",\"useDays\":1,\"limitPayType\":null,\"limitPayTypes\":[],\"useStopped\":false},\"issuableConstraint\":{\"issueType\":\"DOWNLOAD\",\"issueStartYmdt\":\"2025-09-29 17:53:21\",\"issueEndYmdt\":\"2025-12-29 17:53:21\",\"memberGradeNo\":0,\"memberGradeNos\":[0,1],\"memberGroupNos\":null,\"issueLimitCnt\":999,\"issueStartHour\":0,\"issueEndHour\":24,\"issueStopped\":false,\"finishesIssuing\":false,\"usesDailyIssueLimit\":false,\"dailyIssueLimitCnt\":0,\"usesPersonalIssueLimit\":false,\"issuePerPersonLimitCnt\":0,\"dailyIssuePerPersonLimitCnt\":0,\"issuablePlatformTypes\":[\"PC\",\"MOBILE_WEB\",\"MOBILE_APP\"],\"channelTypes\":[\"NAVER_EP\"],\"possibleDaysOfWeek\":[1,2,3,4,5,6,7],\"promotionCode\":null,\"couponCodeLength\":0,\"isPeriodEnd\":false},\"couponSummary\":{\"totalIssueCnt\":100,\"totalUseCnt\":15,\"totalNormalIssueCnt\":100,\"totalIssueCntByAdmin\":0},\"discount\":{\"usesMinLimit\":true,\"minSalePrice\":1000,\"usesMaxLimit\":true,\"maxSalePrice\":10000,\"fixed\":true,\"discountAmt\":500,\"discountPercent\":null,\"maxDiscountAmt\":null},\"couponType\":\"PRODUCT\",\"couponSubType\":\"NONE\",\"cartCouponDetail\":{\"usableOtherCoupon\":false,\"skipsAccumulation\":false,\"couponIssueLimitTypes\":[\"PRODUCT_DETAIL\"],\"couponTargetType\":\"BRAND\",\"couponTargets\":[{\"couponTargetType\":\"BRAND\",\"targetNo\":1,\"targetName\":\"브랜드할인대상이름\",\"registerYmdt\":\"2024-04-20 09:39:00\"}],\"excludesTarget\":false,\"couponExcludeTargets\":[{\"couponTargetType\":\"PRODUCT\",\"targetNo\":1,\"targetName\":\"할인제외대상이름\"}]},\"productCouponDetail\":{\"skipsAccumulation\":false,\"usableCartCoupon\":true,\"serviceSharePercent\":100,\"couponIssueLimitTypes\":[\"PRODUCT_DETAIL\"],\"couponTargetType\":\"ALL_PRODUCT\",\"couponTargets\":[{\"couponTargetType\":\"PRODUCT\",\"targetNo\":1,\"targetName\":\"할인대상이름\",\"registerYmdt\":\"2025-09-29 17:53:21\"}],\"excludesTarget\":false,\"couponExcludeTargets\":[{\"couponTargetType\":\"PRODUCT\",\"targetNo\":1,\"targetName\":\"할인제외대상이름\"}]},\"giftCouponDetail\":{\"benefitEndYmdt\":null,\"benefitExpirationDays\":null,\"benefitAmt\":0,\"giftCouponType\":\"ACCUMULATION\"},\"todayIssueCnt\":1,\"isScheduledIssuePlan\":false,\"isCountOver\":false}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/coupons/{couponNo}",
+    "summary": "쿠폰 수정하기",
+    "description": " ## 부가설명 및 특이사항\n 쿠폰 상세 정보를 수정합니다.\n \n 발행 전/후 수정할 수 있는 항목이 다릅니다.",
+    "tags": ["Coupon"],
+    "parameters": [
+      {
+        "name": "couponNo",
+        "in": "path",
+        "description": "쿠폰 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n Authorization을 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/coupons-couponNo-1369532420"
+          },
+          "examples": {
+            "put-coupons-coupon-no": {
+              "value": "{\"couponName\":\"test-coupon\",\"reason\":\"test-reason\",\"usableConstraint\":{\"usablePlatformTypes\":[\"PC\",\"MOBILE_WEB\",\"MOBILE_APP\"],\"useEndYmdt\":\"2025-12-29 17:53:21\",\"useDays\":1,\"limitPayType\":null,\"limitPayTypes\":[],\"useStopped\":false},\"issuableConstraint\":{\"issueType\":\"DOWNLOAD\",\"issueStartYmdt\":\"2025-09-29 17:53:21\",\"issueEndYmdt\":\"2025-12-29 17:53:21\",\"memberGradeNo\":0,\"memberGradeNos\":[0,1],\"memberGroupNos\":null,\"issueLimitCnt\":999,\"issueStartHour\":0,\"issueEndHour\":24,\"issueStopped\":false,\"finishesIssuing\":false,\"usesDailyIssueLimit\":false,\"dailyIssueLimitCnt\":0,\"usesPersonalIssueLimit\":false,\"issuePerPersonLimitCnt\":0,\"dailyIssuePerPersonLimitCnt\":0,\"issuablePlatformTypes\":[\"PC\",\"MOBILE_WEB\",\"MOBILE_APP\"],\"channelTypes\":null,\"possibleDaysOfWeek\":[1,2,3,4,5,6,7],\"promotionCode\":null,\"couponCodeLength\":0,\"isPeriodEnd\":false},\"discount\":{\"usesMinLimit\":true,\"minSalePrice\":1000,\"usesMaxLimit\":true,\"maxSalePrice\":10000,\"fixed\":true,\"discountAmt\":500,\"discountPercent\":null,\"maxDiscountAmt\":null},\"couponType\":\"PRODUCT\",\"cartCouponDetail\":{\"usableOtherCoupon\":false,\"skipsAccumulation\":false,\"couponIssueLimitTypes\":[\"PRODUCT_DETAIL\"],\"couponTargetType\":\"ALL_PRODUCT\",\"couponTargets\":[{\"couponTargetType\":\"PRODUCT\",\"targetNo\":1,\"targetName\":\"할인대상이름\"}],\"excludesTarget\":false,\"couponExcludeTargets\":[{\"couponTargetType\":\"PRODUCT\",\"targetNo\":1,\"targetName\":\"할인제외대상이름\"}]},\"productCouponDetail\":{\"skipsAccumulation\":false,\"usableCartCoupon\":false,\"serviceSharePercent\":100,\"couponIssueLimitTypes\":[\"PRODUCT_DETAIL\"],\"couponTargetType\":\"ALL_PRODUCT\",\"couponTargets\":[{\"couponTargetType\":\"PRODUCT\",\"targetNo\":1,\"targetName\":\"할인대상이름\"}],\"excludesTarget\":false,\"couponExcludeTargets\":[{\"couponTargetType\":\"PRODUCT\",\"targetNo\":1,\"targetName\":\"할인제외대상이름\"}]},\"giftCouponDetail\":{\"benefitEndYmdt\":\"2025-12-29 17:53:21\",\"benefitExpirationDays\":30,\"benefitAmt\":1000,\"giftCouponType\":\"ACCUMULATION\"}}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/coupons/use/rollback",
+    "summary": "쿠폰 취소하기(오프라인 전용)",
+    "description": "쿠폰 취소하기(오프라인 전용)",
+    "tags": ["CouponUse"],
+    "parameters": [
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n Authorization을 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/coupons-use-rollback-141309845"
+          },
+          "examples": {
+            "post-rollback-coupon": {
+              "value": "{\"couponIssueNos\":[1]}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/coupons/{couponNo}/use-stop",
+    "summary": "쿠폰 사용 중지/재개",
+    "description": " ## 부가설명 및 특이사항\n 쿠폰을 사용 중지 또는 재개 처리 합니다",
+    "tags": ["Coupon"],
+    "parameters": [
+      {
+        "name": "couponNo",
+        "in": "path",
+        "description": "",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n Authorization을 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/coupons-couponNo-use-stop1789105598"
+          },
+          "examples": {
+            "put-use-stop-coupon": {
+              "value": "{\"useStopped\":true}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  }
+]

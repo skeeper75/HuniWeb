@@ -1,16 +1,11 @@
 ---
 name: hbg-remediation-planning
 description: >
-  후니프린팅 기초코드 거버넌스 하네스의 교정 실행 우선순위 방법론 스킬. 검증 GO된 등록 명세 마스터의 전 교정
-  항목(축이동·BOM link 제거·소프트삭제·재연결·.10→.07·색오염)을 라이브 실제 적재 내용·구조 재분석으로 "어떤
-  순서로 라이브에서 실제 교정할지" 로드맵화하는 절차를 제공한다. 5축 스코어링(가역성·위험·효과·FK 의존·돈
-  크리티컬), 안전·가역성 우선 정렬, ★가격사슬 영향 분석(t_prc_price_formulas·formula_components·component_prices
-  교정 영향·dbm-price-arbiter 협업), 교정 경로 혼합(가역=라이브 직접 / 근본=경로 Y v03 재적재 병기·TRUNCATE 휘발
-  경고), wave 배치 그룹핑, 단계별 인간 승인 큐, dbmap 적재 트랙 위임 인터페이스를 정의한다. '교정 우선순위',
-  '교정 로드맵', '라이브 교정 순서', '교정 실행 계획', '안전 가역성 우선', '가격사슬 영향', '교정 경로 혼합',
-  '단계별 승인 큐', 'wave 그룹핑', '교정 로드맵 다시' 작업 시 반드시 이 스킬을 사용. 등록 명세 자체 설계는
-  hbg-registration-spec, 진단은 hbg-basecode-diagnosis, 실 적재 실행은 dbmap dbm-axis-staged-load/
-  dbm-load-execution이 담당하므로 그 작업에는 트리거하지 않는다.
+  후니프린팅 기초코드 거버넌스의 교정 실행 우선순위 방법론. 검증 GO된 등록 명세의 전 교정 항목을 5축 스코어링
+  (가역성·위험·효과·FK 의존·돈 크리티컬)으로 안전·가역성 우선 정렬하고, 가격사슬 영향 분석 + 교정 경로 혼합
+  (가역=라이브 직접/근본=경로 Y v03 재적재) + wave 배치 + 단계별 인간 승인 큐로 로드맵화. 실 COMMIT은 dbmap 위임.
+  트리거: 교정 우선순위, 교정 로드맵, 라이브 교정 순서, 교정 실행 계획, 안전 가역성 우선, 가격사슬 영향, wave 그룹핑, 교정 로드맵 다시.
+  등록 명세 설계는 hbg-registration-spec, 진단은 hbg-basecode-diagnosis, 실 적재는 dbm-axis-staged-load/dbm-load-execution.
 ---
 
 # 교정 실행 우선순위 방법론

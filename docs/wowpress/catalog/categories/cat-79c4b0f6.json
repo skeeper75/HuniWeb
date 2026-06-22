@@ -1,0 +1,328 @@
+{
+  "category": {
+    "id": "cat-79c4b0f6",
+    "slug": "와우기획상품-b0f6",
+    "path": ["와우기획상품"],
+    "displayName": "와우기획상품",
+    "productCount": 4,
+    "keywords": [
+      "와우기획상품",
+      "명함샘플팩",
+      "ai",
+      "eps",
+      "jpg",
+      "핫템샘플팩",
+      "배쑝와쑝박스",
+      "인쇄레시피"
+    ],
+    "summary": "와우기획상품 · 4개 상품",
+    "pricing": {
+      "templated": 0,
+      "quoted": 0
+    }
+  },
+  "products": [
+    {
+      "productId": 40024,
+      "name": "명함샘플팩",
+      "slug": "명함샘플팩-40024",
+      "categories": ["와우기획상품"],
+      "keywords": [
+        "와우기획상품",
+        "명함샘플팩",
+        "ai",
+        "eps",
+        "jpg",
+        "png",
+        "cdr",
+        "psd",
+        "sit",
+        "zip",
+        "alz",
+        "pdf"
+      ],
+      "useCases": ["business-card", "corporate-identity"],
+      "url": "https://devshop.wowpress.co.kr/prodt/40024",
+      "fileTypes": ["AI", "EPS", "JPG", "PNG", "CDR", "PSD", "SIT", "ZIP", "ALZ", "PDF"],
+      "delivery": {
+        "cutoffTime": null,
+        "prepayRequired": true,
+        "group": {
+          "id": 1,
+          "name": "명함,스티커 묶음"
+        },
+        "regions": []
+      },
+      "orderQuantities": [
+        {
+          "type": "select",
+          "values": [
+            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
+            25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46,
+            47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68,
+            69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90,
+            91, 92, 93, 94, 95, 96, 97, 98, 99, 100
+          ],
+          "minimum": 1,
+          "maximum": 100,
+          "interval": null,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": null,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        }
+      ],
+      "coverTypes": [
+        {
+          "code": 0,
+          "name": "통합",
+          "pages": [
+            {
+              "code": 0,
+              "name": "양면"
+            }
+          ],
+          "pageConstraints": {
+            "min": null,
+            "max": null,
+            "interval": null
+          }
+        }
+      ],
+      "detailFile": "../products/40024.json",
+      "pricing": {
+        "hasTemplate": false,
+        "status": "requires-configuration",
+        "sampleQuote": null,
+        "error": null
+      }
+    },
+    {
+      "productId": 40191,
+      "name": "핫템샘플팩",
+      "slug": "핫템샘플팩-40191",
+      "categories": ["와우기획상품"],
+      "keywords": [
+        "와우기획상품",
+        "핫템샘플팩",
+        "ai",
+        "eps",
+        "jpg",
+        "png",
+        "cdr",
+        "psd",
+        "sit",
+        "zip",
+        "alz",
+        "pdf"
+      ],
+      "useCases": [],
+      "url": "https://devshop.wowpress.co.kr/prodt/40191",
+      "fileTypes": ["AI", "EPS", "JPG", "PNG", "CDR", "PSD", "SIT", "ZIP", "ALZ", "PDF"],
+      "delivery": {
+        "cutoffTime": null,
+        "prepayRequired": true,
+        "group": {
+          "id": 1,
+          "name": "명함,스티커 묶음"
+        },
+        "regions": []
+      },
+      "orderQuantities": [
+        {
+          "type": "select",
+          "values": [
+            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
+            25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46,
+            47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68,
+            69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90,
+            91, 92, 93, 94, 95, 96, 97, 98, 99, 100
+          ],
+          "minimum": 1,
+          "maximum": 100,
+          "interval": null,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": null,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        }
+      ],
+      "coverTypes": [
+        {
+          "code": 0,
+          "name": "통합",
+          "pages": [
+            {
+              "code": 0,
+              "name": "양면"
+            }
+          ],
+          "pageConstraints": {
+            "min": null,
+            "max": null,
+            "interval": null
+          }
+        }
+      ],
+      "detailFile": "../products/40191.json",
+      "pricing": {
+        "hasTemplate": false,
+        "status": "requires-configuration",
+        "sampleQuote": null,
+        "error": null
+      }
+    },
+    {
+      "productId": 40471,
+      "name": "배쑝와쑝박스",
+      "slug": "배쑝와쑝박스-40471",
+      "categories": ["와우기획상품"],
+      "keywords": [
+        "와우기획상품",
+        "배쑝와쑝박스",
+        "ai",
+        "eps",
+        "jpg",
+        "png",
+        "cdr",
+        "psd",
+        "sit",
+        "zip",
+        "alz",
+        "pdf"
+      ],
+      "useCases": [],
+      "url": "https://devshop.wowpress.co.kr/prodt/40471",
+      "fileTypes": ["AI", "EPS", "JPG", "PNG", "CDR", "PSD", "SIT", "ZIP", "ALZ", "PDF"],
+      "delivery": {
+        "cutoffTime": null,
+        "prepayRequired": false,
+        "group": {
+          "id": null,
+          "name": null
+        },
+        "regions": []
+      },
+      "orderQuantities": [
+        {
+          "type": "select",
+          "values": [1],
+          "minimum": 1,
+          "maximum": 1,
+          "interval": null,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": null,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        }
+      ],
+      "coverTypes": [
+        {
+          "code": 0,
+          "name": "통합",
+          "pages": [
+            {
+              "code": 0,
+              "name": "양면"
+            }
+          ],
+          "pageConstraints": {
+            "min": null,
+            "max": null,
+            "interval": null
+          }
+        }
+      ],
+      "detailFile": "../products/40471.json",
+      "pricing": {
+        "hasTemplate": false,
+        "status": "requires-configuration",
+        "sampleQuote": null,
+        "error": null
+      }
+    },
+    {
+      "productId": 40524,
+      "name": "인쇄레시피",
+      "slug": "인쇄레시피-40524",
+      "categories": ["와우기획상품"],
+      "keywords": [
+        "와우기획상품",
+        "인쇄레시피",
+        "ai",
+        "eps",
+        "jpg",
+        "png",
+        "cdr",
+        "psd",
+        "sit",
+        "zip",
+        "alz",
+        "pdf"
+      ],
+      "useCases": [],
+      "url": "https://devshop.wowpress.co.kr/prodt/40524",
+      "fileTypes": ["AI", "EPS", "JPG", "PNG", "CDR", "PSD", "SIT", "ZIP", "ALZ", "PDF"],
+      "delivery": {
+        "cutoffTime": null,
+        "prepayRequired": true,
+        "group": {
+          "id": 44,
+          "name": "인쇄레시피 묶음"
+        },
+        "regions": []
+      },
+      "orderQuantities": [
+        {
+          "type": "select",
+          "values": [
+            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
+            25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46,
+            47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68,
+            69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90,
+            91, 92, 93, 94, 95, 96, 97, 98, 99, 100
+          ],
+          "minimum": 1,
+          "maximum": 100,
+          "interval": null,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": null,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        }
+      ],
+      "coverTypes": [
+        {
+          "code": 0,
+          "name": "통합",
+          "pages": [
+            {
+              "code": 0,
+              "name": "양면"
+            }
+          ],
+          "pageConstraints": {
+            "min": null,
+            "max": null,
+            "interval": null
+          }
+        }
+      ],
+      "detailFile": "../products/40524.json",
+      "pricing": {
+        "hasTemplate": false,
+        "status": "requires-configuration",
+        "sampleQuote": null,
+        "error": null
+      }
+    }
+  ]
+}

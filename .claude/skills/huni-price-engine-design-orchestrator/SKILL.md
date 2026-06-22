@@ -1,19 +1,14 @@
 ---
 name: huni-price-engine-design-orchestrator
 description: >
-  후니프린팅 가격계산 엔진 설계 하네스 오케스트레이터. 역공학 자료(raw/widget_monitor·docs/reversing·_workspace/huni-rpmeta)
-  + 상품마스터(260610) 가격계산공식 + 인쇄상품 가격표(260527) + 경쟁사(와우프레스·레드프린팅) 가격계산 방식을 종합해,
-  모든 상품군 완제품·반제품(세트상품)이 어떤 가격구성요소를 토대로 어떤 가격공식을 이루는지 설계 명세로 산출한다.
-  산출=라이브 evaluate_price 단일 권위 알고리즘이 그대로 먹는 t_prc_* 그릇 설계(공식→formula_components→price_components→
-  component_prices·use_dims 차원·세트 조합). 5인 팀(hpe-formula-cartographer·hpe-benchmark-analyst 기준점 팬아웃 →
-  hpe-engine-designer 설계 → hpe-validator E1~E7 게이트 → hpe-codex-validator codex 독립 2차 교차검증 Phase5.5).
-  대표 상품군 파일럿 → 동형 전파. 생성≠검증·codex 주장=가설(환각 경계)·권위 엑셀 절대권위·라이브 읽기전용·DB 미적재
-  (실 COMMIT/DDL은 인간 승인 후 dbmap 위임). '가격계산 엔진 설계', '가격엔진 구현', '가격공식 설계', '가격구성요소 설계',
-  '완제품 반제품 세트 가격', '경쟁사 가격계산 흡수', '와우프레스 레드 가격 분석', 'codex 설계 검증', 't_prc 그릇 설계',
-  '가격엔진 설계 하네스 실행/재실행/업데이트/보완', '특정 상품군만 엔진 설계', '설계 다시' 작업 시 반드시 이 스킬을 사용.
-  이미 적재된 가격 정합 검증·게이트는 huni-price-quote(§13), 5장치 역할 이해·진단은 huni-price-engine-diag(§14),
-  단일 상품 온디맨드 검증은 huni-quote-verify(§15), 구성요소 시각화·레시피는 huni-recipe-viz(§16)가 담당하므로
-  그 작업에는 트리거하지 않는다. 본 하네스는 그 둘과 달리 아직 없는/불완전한 가격공식을 경쟁사 흡수+역공학으로 새로 설계·구축한다.
+  후니프린팅 가격계산 엔진 설계·구축 하네스 오케스트레이터. 역공학 자료+상품마스터(260610) 가격계산공식+인쇄상품
+  가격표(260527)+경쟁사(와우프레스·레드프린팅)를 종합해, 모든 상품군 완제품·반제품(세트상품)의 가격공식+가격구성요소를
+  라이브 evaluate_price가 먹는 t_prc_* 그릇 설계 명세로 산출(아직 없는/불완전한 가격공식을 새로 설계). 5인 팀(formula-cartographer·
+  benchmark-analyst 기준점 → engine-designer 설계 → validator E1~E7 게이트 → codex-validator Phase5.5). 대표 파일럿→동형 전파·
+  생성≠검증·codex 주장=가설·권위 엑셀 절대권위·라이브 읽기전용·DB 미적재(실 COMMIT/DDL 인간 승인). 트리거: 가격계산 엔진 설계,
+  가격공식/가격구성요소 설계, 완제품 반제품 세트 가격, 경쟁사 가격계산 흡수, t_prc 그릇 설계, codex 설계 검증, 엔진 설계
+  하네스 실행/재실행, 특정 상품군만 엔진 설계. 이미 적재된 가격 검증·게이트는 huni-price-quote(§13), 5장치 이해·진단은
+  huni-price-engine-diag(§14), 단일 상품 온디맨드 검증은 huni-quote-verify(§15), 시각화는 huni-recipe-viz(§16)가 담당.
 ---
 
 # huni-price-engine-design-orchestrator — 가격계산 엔진 설계 하네스

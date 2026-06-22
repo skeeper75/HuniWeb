@@ -1,6 +1,13 @@
 ---
 name: dbm-price-formula-audit
-description: 후니프린팅 라이브 webadmin admin "가격관리 > 가격공식"에 적재된 가격공식(t_prc_price_formulas)이 제대로 정리됐는지 검증하고 실무진용 정리표·개선안을 산출하는 round-17 방법론 스킬. 한 공식을 ① 라이브 DB(information_schema 실측) ② webadmin 소스(price_views.py·가격허브/뷰어 mockup) ③ admin 실제 화면(gstack) 3중 대조해, 4축(정리 상태·실무진 가독성·가격구성요소 배선 사용가능성·가격뷰어 노출)으로 판정한다. 공식명(frm_nm)/비고(note)가 비개발자 실무진이 즉시 알아볼 수 있는지(쉬운 한국어 라벨), 가격공식이 formula_components에 배선되어 가격구성요소에서 쓰이고 가격뷰어에서 확인되는지를 핵심 검사한다. 산출 = 실무진 가격공식 정리표 + 가독성/배선/뷰어 결함 보드 + 공식명/비고 개선안. round-16 가격공식 그릇(16시트)·가격사슬 단절 진단을 입력 재사용. DB 직접 쓰기는 하지 않는다. '가격공식 정리 검증', '가격공식 정리 확인', '공식명 비고 정리', '실무진 가격공식 정리표', '가격공식 가독성', '가격공식 사용가능성', '가격뷰어 확인', '가격공식 배선 검증', '가격관리 가격공식 점검', 'round-17', '가격공식 검증 다시', '가격공식 개선안' 작업 시 반드시 이 스킬을 사용. 가격표→그릇 분해(round-16)는 dbm-price-import-prep, 가격 공식 엔진 fit-gap(round-2)은 dbm-price-formula가 담당하므로 그 작업에는 트리거하지 않는다.
+description: >
+  후니프린팅 라이브 webadmin "가격관리 > 가격공식"의 가격공식(t_prc_price_formulas)이 실무진 운영 품질로
+  정리됐는지 검증하고 정리표·개선안을 산출하는 round-17 방법론. 한 공식을 ① 라이브 DB(information_schema)
+  ② webadmin 소스(price_views.py) ③ admin 화면(gstack) 3중 대조해 4축(정리 상태·실무진 가독성·formula_components
+  배선 사용가능성·가격뷰어 노출)으로 판정. 공식명(frm_nm)/비고(note) 쉬운 한국어 라벨·배선·뷰어 노출이 핵심.
+  DB 직접 쓰기 안 함. 트리거: 가격공식 정리 검증, 공식명 비고 정리, 실무진 가격공식 정리표, 가격공식 가독성,
+  가격공식 배선 검증, 가격뷰어 확인, round-17, 가격공식 검증 다시. 가격표→그릇 분해(round-16)는
+  dbm-price-import-prep, 공식 엔진 fit-gap(round-2)은 dbm-price-formula 담당.
 ---
 
 # dbm-price-formula-audit — 가격공식 정리 검증 (round-17)

@@ -1,17 +1,14 @@
 ---
 name: hpq-price-chain-inspection
 description: >-
-  라이브 t_prc_* 가격사슬이 권위 엑셀·엔진 계약에 맞는지 전수 대조하는 방법론 스킬(가격계산 검증
-  하네스). 검사 축 = ① 공식↔구성요소 배선·상품-공식 바인딩 정합 ② 가격구성요소·가격공식에 불필요하게
-  들어간 부분(판별차원 없는 구성요소[항상 매칭]·동시매칭 유발 중복행·중복 단가행·고아/미사용 공식·
-  배선됐으나 단가행 0·권위에 없는 차원 배선) ③ 인쇄상품가격테이블 각 차원(siz_cd·mat_cd·proc_cd·opt_cd·
-  print_opt_cd·coat_side_cnt·bdl_qty·siz_width/height·min_qty)↔component_prices 데이터 매핑(use_dims 선언↔
-  단가행 충전↔권위 가격축 3원 정합) ④ 사이즈 중복(t_siz_sizes 동의어 중복·siz_cd 이산축↔siz_width/height
-  구간축 혼동·비규격 가로/세로 정합). 라이브 price_dup_check·price_comp_usage·price_diagram 진단 뷰 재사용·
-  3원 정합(권위↔엔진↔라이브)·결함마다 재현 쿼리 첨부·결함 보드까지만(교정은 인간 승인 후 dbmap 위임).
-  '가격사슬 검사', '가격사슬 정합', '불필요 구성요소', '불필요 공식', '판별차원 없음', '차원 매핑 검사',
-  '사이즈 중복 검사', '가격 결함 보드', '가격사슬 다시' 작업 시 반드시 이 스킬을 사용. 옵션/제약 검사는
-  hpq-option-constraint-mapping, 독립 재계산·게이트는 hpq-quote-gate-validation이 담당한다.
+  라이브 t_prc_* 가격사슬이 권위 엑셀·엔진 계약에 맞는지 전수 대조하는 방법론 스킬(가격계산 검증 하네스).
+  검사 축: ① 공식↔구성요소 배선·상품-공식 바인딩 정합 ② 불필요분(판별차원 없는 구성요소·동시매칭 유발 중복행·
+  중복 단가행·고아 공식·배선됐으나 단가행 0·권위에 없는 차원 배선) ③ 가격테이블 각 차원(siz_cd·mat_cd·proc_cd·
+  opt_cd·print_opt_cd·bdl_qty·siz_width/height·min_qty)↔component_prices 매핑(use_dims↔단가행↔권위 가격축 3원)
+  ④ 사이즈 중복(동의어 중복·siz_cd 이산축↔siz_width/height 구간축 혼동·비규격). 진단 뷰(price_dup_check·
+  price_comp_usage·price_diagram) 재사용·결함마다 재현 쿼리·생성측·결함 보드까지만(교정 인간 승인). 트리거:
+  가격사슬 검사, 가격사슬 정합, 불필요 구성요소, 판별차원 없음, 차원 매핑 검사, 사이즈 중복 검사, 가격 결함 보드,
+  가격사슬 다시. 옵션/제약 검사는 hpq-option-constraint-mapping, 독립 재계산·게이트는 hpq-quote-gate-validation이 담당.
 ---
 
 # hpq-price-chain-inspection — 라이브 가격사슬 정합 검사 방법론

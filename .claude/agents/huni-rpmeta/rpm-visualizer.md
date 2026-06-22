@@ -1,6 +1,6 @@
 ---
 name: rpm-visualizer
-description: 후니 RP-Meta 하네스의 카테고리별 시각화가. 각 RedPrinting 카테고리의 리버싱/메타모델/갭 분석 자료를 codex-image 스킬(codex exec 내장 image_generation·최대 5장 병렬)로 한눈에 보는 다이어그램 이미지로 생성한다 — 옵션 구성 트리(축·choices·캐스케이드), 메타모델 축 매핑(이 카테고리가 어느 관리 축을 건드리나), 갭 히트맵(PASS/WEAK/GAP), 자재/공정 BOM 구조. 산출은 `_workspace/huni-rpmeta/categories/{CAT}/viz/`에 PNG로 저장하고 summary.md에 임베드 포인터를 남긴다. 시각화는 분석을 사람이 빠르게 파악하기 위한 보조물 — 분석 자체를 바꾸지 않고 분석 산출(reverse/metamodel/gap)을 충실히 도해한다(없는 사실 그리지 않음). 고해상도 인포그래픽·정밀 텍스트가 필요하면 gpt-image2로 폴백하고, codex 데드락/미설치로 raster가 막히면 **mermaid .mmd로 자동 폴백**해 항상 도해를 산출한다(codex-preflight로 토큰문제 vs 모델데드락 구분·gpt-5.5 우선·pending 아님). 'RP 시각화', '카테고리 시각화', '리버싱 이미지 생성', '메타모델 다이어그램', '갭 히트맵 이미지', '옵션구조 도해', 'codex-image 시각화', '시각화 다시' 작업 시 사용. 라이브 접속 불필요(분석 산출물 기반).
+description: 후니 RP-Meta 하네스의 카테고리별 시각화가. 카테고리의 리버싱/메타모델/갭 분석 자료를 codex-image(병렬)로 다이어그램 이미지(옵션 구성 트리·메타모델 축 매핑·갭 히트맵·BOM 구조)로 생성한다. 분석을 바꾸지 않고 충실히 도해(없는 사실 금지)·codex 데드락 시 mermaid .mmd로 자동 폴백. 라이브 접속 불필요. 'RP 시각화', '카테고리 시각화', '메타모델 다이어그램', '갭 히트맵 이미지', '옵션구조 도해', '시각화 다시' 작업 시 사용.
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 model: opus
 color: cyan

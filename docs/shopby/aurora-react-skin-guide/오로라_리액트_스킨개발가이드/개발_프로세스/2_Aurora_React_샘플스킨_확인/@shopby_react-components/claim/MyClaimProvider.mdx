@@ -1,0 +1,63 @@
+---
+title: "MyClaimProvider"
+depth: 5
+path: "오로라 리액트 스킨개발가이드 > 개발 프로세스 > 2️⃣Aurora React 샘플스킨 확인 > @shopby/react-components > claim > MyClaimProvider"
+---
+
+# MyClaimProvider
+
+## 속성
+
+| 이름 | 타입 | 기본 값 | 설명 |
+| --- | --- | ---- | --- |
+| willClaimsBeAccumulated | boolean | false | 내 클레임 목록 조회 시 목록 데이터를 누적할지 여부
+ ㄴtrue : claimsWithAccumulation 상태값은 누적값이 저장 됨
+ ㄴfalse : claimsWithAccumulation 상태값은 현재 조회된 목록 값이 저장 됨 (claims 상태값과 동일) |
+| children | ReactNode | - | - |
+
+## 상태
+
+* `myClaimState` 는 `useMyClaimStateContext` 를 호출해 사용합니다.
+
+```typescript
+const myClaimState = useMyClaimStateContext();
+```
+
+| 이름 | 타입 | 기본 값 | 설명 |
+| --- | --- | ---- | --- |
+| totalClaimsCount | number | 0 | 회원 클레임 목록의 총 수 |
+| claims | [response.items 요소 타입](https://docs.shopby.co.kr/?url.primaryName=claim/#/Member/get-profile-claims) \| null | null | 회원 클레임 목록 |
+| claimsWithAccumulation | [response.items 요소 타입](https://docs.shopby.co.kr/?url.primaryName=claim/#/Member/get-profile-claims) \| null | null | 회원 클레임 목록 (응답 누적값) |
+| flattenedClaimsWithAccumulation | object\[\] \| null | null | 노출에 용이하도록  claimdOption 별로 정제된 클레임 목록 데이터 |
+| @cols=4:ㄴ [response.items 요소 타입](https://docs.shopby.co.kr/?url.primaryName=claim/#/Member/get-profile-claims) (claimdOptions, orderNo 제외) + [response.items > claimedOptions 요소 타입](https://docs.shopby.co.kr/?url.primaryName=claim/#/Member/get-profile-claims) |
+
+## 액션
+
+* `myClaimAction` 은 `useMyClaimActionContext` 를 호출해 사용합니다.
+
+```typescript
+const myClaimAction = useMyClaimActionContext();
+```
+
+| 이름 | 인자타입 | 필수 여부 | 기본 값 | 설명 | 관리하는 상태 |
+| --- | ---- | ----- | ---- | --- | ------- |
+| fetchClaims | object | O | - | 회원 클레임 목록을 가져옵니다. | claims, claimsWithAccumulation,
+totalClaimsCount, flattenedClaimsWithAccumulation |
+| ㄴ pageSize | number | O | - | 페이지별 목록 개수 | - |
+| ㄴ pageNumber | number | O | - | 조회할 페이지 번호 | - |
+| ㄴ claimTypes | Array | X | - | 조회할 클레임 타입
+ㄴ 'CANCEL' : 취소
+ㄴ 'RETURN' : 반품
+ㄴ 'EXCHANGE' : 교환 | - |
+| ㄴ startYmd | string (YYYY-MM-DD) | X | 3개월 전 날짜 | 조회할 기간의 시작 날짜 | - |
+| ㄴ endYmd | string (YYYY-MM-DD) | X | 오늘 날짜 | 조회할 기간의 마지막 날짜 | - |
+
+## 사용 예시
+
+```typescript
+const App = ({ clientId, profile }) => (
+  
+    
+  
+)
+```

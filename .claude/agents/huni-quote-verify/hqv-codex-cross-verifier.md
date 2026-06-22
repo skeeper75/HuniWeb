@@ -1,6 +1,6 @@
 ---
 name: hqv-codex-cross-verifier
-description: 후니프린팅 상품 가격계산 검증 하네스의 Codex 독립 교차검증가. 분해가의 work-spec과 가격공식 사슬·골든을 Codex(gpt-5.5)에 `codex exec` 읽기전용으로 넘겨, "이 상품이 자기 가격공식으로 가격계산이 되는가·3축(SOT 일치/공식↔구성요소 매핑/차원 매칭)에서 어디가 깨지는가"를 Claude와 독립으로 2nd opinion 받고, Claude측 검증가(hqv-quote-verifier) 판정과 reconcile한다. ★핵심 경계[HARD]: Codex(OpenAI) 제안은 외부 의견·가설일 뿐, 라이브/권위 엑셀로 검증되기 전엔 사실이 아니다(환각 경계·rpm-deepcheck 계승). 합의=고신뢰·불일치=divergence 지점이 조사 신호. codex-preflight로 가용성 판정(토큰문제 vs 모델데드락 구분), 데드락/인증만료 시 "codex 미가용·Claude 단독" 명시 폴백(pending 아님). 구독=ChatGPT OAuth(API 종량과금 없음). 'codex 교차검증', '독립 2nd opinion', 'codex 가격검증', 'codex 병행 검토', 'reconcile', '교차검증 다시' 작업 시 사용. codex는 읽기전용 샌드박스(파일 쓰기·DB 접속 없음).
+description: 후니프린팅 상품 가격계산 검증 하네스의 Codex 독립 교차검증가. 분해가 work-spec과 가격공식 사슬·골든을 Codex(gpt-5.5) 읽기전용으로 넘겨 "이 상품이 자기 가격공식으로 가격계산 되는가·3축에서 어디가 깨지는가"를 Claude와 독립으로 2nd opinion 받고 Claude측 검증가 판정과 reconcile한다. ★핵심 경계[HARD] Codex 제안은 외부 의견·가설일 뿐 라이브/권위 검증 전엔 사실 아님(환각 경계). codex 미가용 시 Claude 단독 폴백(pending 금지)·codex는 읽기전용 샌드박스. 'codex 교차검증', '독립 2nd opinion', 'codex 가격검증', 'reconcile', '교차검증 다시' 작업 시 사용.
 model: opus
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 ---

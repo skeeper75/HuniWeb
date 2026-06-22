@@ -1,0 +1,122 @@
+---
+title: "알림톡 템플릿 관리"
+slug: "/management/kakao-notification/undefined-1"
+---
+
+# 알림톡 템플릿 관리
+
+<Callout type="info">
+**카카오 알림톡 발송에 사용할 템플릿을 신규 등록하여 쇼핑몰에 적용할 수 있습니다.**
+
+**신규 등록한 알림톡 템플릿은 카카오측에 검수요청을 해야 합니다.**\
+**카카오 내부 기준에 의해 검수 및 심사가 진행되고, 카카오에서 승인완료한 템플릿만 쇼핑몰에서 발송이 가능합니다.**
+
+**보다 자세한 내용은 카카오에서 제공하는** [**카카오 알림톡 심사가이드**](https://kakaobusiness.gitbook.io/main/ad/bizmessage/notice-friend/audit)**에서 참고해 주세요.**
+</Callout>
+
+## 알림톡 템플릿 관리 검색조건
+
+<figure><img src="/images/management/kakao-notification/undefined-1/spaces%2F5MtRLrF338WdIfIJP9jq%2Fuploads%2F0LeTFhtqYGvsCG3mWPd4%2F%EC%B9%B4%EC%B9%B4%EC%98%A4%EC%95%8C%EB%A6%BC%ED%86%A1%EC%82%AC%EC%9A%A9%EC%84%A4%EC%A0%95_%ED%85%9C%ED%94%8C%EB%A6%BF%EA%B4%80%EB%A6%AC_%20%EA%B2%80%EC%83%89%EC%A1%B0%EA%B1%B4%20%EB%B3%B5%EC%82%AC.jpg" alt=""/><figcaption><p>&#x3C;알림톡 템플릿 관리 검색조건></p></figcaption></figure>
+
+**① 검색어** \
+템플릿 코드, 템플릿명,  템플릿 내용 등의 검색어로 등록한 알림톡 템플릿을 조회합니다. 일부 검색어는 지원하지 않으며 정확한 검색어를 입력해 주세요.
+
+**② 등록일**\
+등록한 알림톡 템플릿은 최대 1년까지의 기간으로 검색이 가능합니다.
+
+**③ 상세검색**\
+등록한 알림톡 템플릿을 템플릿 유형, 템플릿 상태, 템플릿 적용여부 등의 여러 상세 조건을 기준으로 검색합니다.
+
+* 템플릿 유형 : 발송하는 알림톡 메시지 유형으로 회원, 주문배송, 문의, 운영자 안내로 구분됩니다.
+* 템플릿 상태 : 등록한 템플릿의 카카오  검수상태를 의미합니다.
+* 템플릿 적용여부 : 알림톡 템플릿 설정에서 '승인' 상태 템플릿의 적용여부입니다.
+
+<details>
+
+<summary>🤚 <strong>템플릿 상태</strong></summary>
+
+* 등록 : 템플릿을 등록하고, 검수요청은 하지 않은 상태
+* 검수요청 : 템플릿을 등록하고, 카카오에 검수를 요청한 상태
+* 승인 : 카카오에서 템플릿을 심사한 검수결과가 '승인'인 상태 (알림톡 발송 가능)
+* 반려 : 카카오에서 템플릿을 심사한 검수결과가 '반려'인 상태
+
+</details>
+
+## 알림톡 템플릿 관리 검색결과(리스트)
+
+<figure><img src="/images/management/kakao-notification/undefined-1/spaces%2F5MtRLrF338WdIfIJP9jq%2Fuploads%2F4rLDgH1HqD0qlaiUuLZG%2F%EC%B9%B4%EC%B9%B4%EC%98%A4%EC%95%8C%EB%A6%BC%ED%86%A1%EC%82%AC%EC%9A%A9%EC%84%A4%EC%A0%95_%ED%85%9C%ED%94%8C%EB%A6%BF%EA%B4%80%EB%A6%AC%20%EB%B3%B5%EC%82%AC%202.jpg" alt=""/><figcaption><p>&#x3C;알림톡 템플릿 관리 검색결과></p></figcaption></figure>
+
+**①** [**템플릿 등록 (알림톡 탬플릿 등록)**](#undefined-3)\
+\[템플릿 등록] 버튼을 클릭하면 신규 템플릿을 등록할 수 있는 '알림톡 템플릿 등록' 창이 노출됩니다.
+
+**②** [**템플릿 코드 / 템플릿명 (알림톡 템플릿 수정)**](#undefined-5)\
+템플릿 코드는 템플릿 등록 시 자동으로 부여되는 고정값입니다.\
+\[템플릿 코드]와 \[템플릿명]을 클릭하면 '알림톡 템플릿 수정' 창이 노출됩니다.\
+📍<mark style="color:red;">템플릿 상태에 따라 템플릿 검수요청 / 수정 / 삭제 가능 여부가 상이한 점을 참고해 주세요.</mark>
+
+<table><thead><tr><th width="192" align="center">구분</th><th align="center">등록 </th><th align="center">반려</th><th align="center">검수요청</th><th align="center">승인</th></tr></thead><tbody><tr><td align="center">템플릿 수정</td><td align="center">O</td><td align="center">O</td><td align="center">X</td><td align="center">X</td></tr><tr><td align="center">템플릿 삭제</td><td align="center">O</td><td align="center">O</td><td align="center">X</td><td align="center">X</td></tr><tr><td align="center">템플릿 검수요청</td><td align="center">O</td><td align="center">O</td><td align="center">-</td><td align="center">-</td></tr></tbody></table>
+
+**③ 템플릿 상태**\
+등록한 템플릿의 검수상태가 확인됩니다. '승인' 상태 템플릿만 쇼핑몰에 적용할 수 있습니다.
+
+**④ 적용여부**\
+등록한 템플릿의 적용여부가 확인됩니다.&#x20;
+
+### **알림톡 템플릿 등록**
+
+<figure><img src="/images/management/kakao-notification/undefined-1/spaces%2F5MtRLrF338WdIfIJP9jq%2Fuploads%2Fd6Cxr0V4yAvUbJmHjpVz%2F%EC%B9%B4%EC%B9%B4%EC%98%A4%EC%95%8C%EB%A6%BC%ED%86%A1%ED%85%9C%ED%94%8C%EB%A6%BF%EA%B4%80%EB%A6%AC_%ED%85%9C%ED%94%8C%EB%A6%BF%EB%93%B1%EB%A1%9D.jpg" alt=""/><figcaption><p>&#x3C;알림톡 템플릿 등록></p></figcaption></figure>
+
+① 템플릿 유형을 회원, 주문배송, 문의, 운영자 안내 중에서 선택합니다.\
+&#x20;   📍템플릿 유형은 자동 SMS 발송 / 자동 알림톡 발송 유형과 동일합니다.
+
+② 템플릿명을 입력해 주세요.
+
+③ 템플릿 내용의 템플릿 카테고리를 설정하고, 치환 텍스트를 활용해 발송 내용을 입력해 주세요.\
+&#x20;   치환 텍스트의 \[추가] 버튼을 클릭하면 템플릿 내용 입력란에 바로 적용됩니다.\
+&#x20;   \[미리보기] 버튼을 클릭하면 치환 텍스트가 적용된 알림톡 본문 내용이 확인됩니다.
+
+<Callout type="warning">
+템플릿 카테고리는 템플릿 유형과 관계없이 설정이 가능합니다.\
+등록하는 템플릿 메시지 내용에 맞는 카테고리 종류를 선택해 주세요.\
+예 : 템플릿 유형 ⇀  회원\
+&#x20;      템플릿 카테고리 ⇀ 구매 / 구매완료
+</Callout>
+
+④ 인증번호 및 비밀번호(재설정, 임시 비밀번호 등) 등의 보안정보 내용을 포함하는 보안 템플릿 사용 여부를 설정할 수 있습니다.
+
+⑤ 알림톡 내용 본문에 버튼을 추가할 수 있습니다.  '사용함'을 선택하면 버튼 상세 설정 영역이 노출됩니다.
+
+<details>
+
+<summary><strong>🤚 알림톡 템플릿 버튼 상세 설정</strong></summary>
+
+* **버튼 타입**\
+  특정 페이지로 이동하는 '웹 링크' 버튼과 상품의 베송조회가 가능한 '배송조회' 버튼을 \
+  설정할 수 있습니다.
+* **버튼명**\
+  버튼 타입별 버튼 이름을 입력합니다.
+* **웹 링크 버튼 링크**\
+  버튼을 클릭하면 이동하는 페이지 주소를 모바일과 PC 각각 설정할 수 있습니다.
+* **배송조회 버튼 링크**\
+  **-** 템플릿 내용에 택배사명과 송장번호를 포함한 알림톡은 카카오 배송조회 링크가 제공됩니다. (치환 텍스트 활용)\
+  \- 카카오 배송조회 페이지의 미지원 택배사는 배송조회가 불가합니다.\
+  \- 지원 택배사 : 우체국, 한진택배, GTX로지스, 롯데택배, KGB택배, 로젠택배, 천일택배, 경동택배, 일양로지스, FEDEX, 합동택배, 농협택배, 호남택배, CU편의점 택배, CVSnet편의점택배, TNT , DHL, 대신택배, 건영택배, 한덱스, 굿투럭
+* \[추가]와 \[삭제] 버튼을 클릭해 버튼 타입의 추가 및 삭제가 가능합니다.\
+  📍버튼은 최대 5개까지 설정할 수 있습니다.<br>
+
+</details>
+
+⑥ \[등록] 버튼을 클릭해 알림톡 템플릿 신규 등록을 완료해 주세요.
+
+<Callout type="danger">
+**신규 등록한 알림톡 템플릿의 검수상태는 '등록' 상태입니다.** \
+**반드시 '알림톡 템플릿 수정' 창에서 검수요청을 완료해 주세요.**
+
+\[템플릿 코드] 또는 \[템플릿명]을 클릭하면 '[알림톡 템플릿 수정](#undefined-5)' 창이 노출됩니다.
+</Callout>
+
+***
+
+#### <mark style="color:blue;">■</mark>  <mark style="color:blue;"></mark><mark style="color:blue;">**템플릿 수정 (알림톡 탬플릿 수정)**</mark>
+
+<figure><img src="/images/management/kakao-notification/undefined-1/spaces%2F5MtRLrF338WdIfIJP9jq%2Fuploads%2FgmObHFWd5uQ2sjwPWxzA%2F%EC%B9%B4%EC%B9%B4%EC%98%A4%EC%95%8C%EB%A6%BC%ED%86%A1%ED%85%9C%ED%94%8C%EB%A6%BF%EA%B4%80%EB%A6%AC_%ED%85%9C%ED%94%8C%EB%A6%BF%EC%88%98%EC%A0%95%20%EB%B3%B5%EC%82%AC.jpg" alt=""/><figcaption><p>&#x3C;알림톡 템플릿 수정></p></figcaption></figure>

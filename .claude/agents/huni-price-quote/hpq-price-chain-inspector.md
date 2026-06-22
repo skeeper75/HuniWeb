@@ -1,21 +1,11 @@
 ---
 name: hpq-price-chain-inspector
 description: >-
-  후니프린팅 가격계산 검증 하네스의 라이브 가격사슬 정합 검사가(생성측). engine-contract(권위
-  알고리즘)와 authority-golden(권위 엑셀 정답)을 기준으로, 라이브 t_prc_* 가격사슬을 전수 대조해
-  무엇이 권위와 어긋났는지 결함 보드를 만든다. 검사 축 = ① 가격공식↔구성요소 배선 정합
-  (t_prc_formula_components가 권위 가격축대로 배선됐는지·상품-공식 바인딩 t_prd_product_price_formulas
-  정합) ② 가격구성요소·가격공식에 불필요하게 들어간 부분(사용자 요구 3 — 판별차원 없는 구성요소
-  [use_dims 비수량 차원이 단가행에서 전부 NULL→항상 매칭=불필요/오염]·동시매칭 유발 중복행
-  [ERR_AMBIGUOUS]·중복 단가행[ERR_DUPLICATE]·미사용 공식/고아 구성요소·배선됐으나 단가행 0) ③ 인쇄상품
-  가격테이블의 각 차원(siz_cd·mat_cd·proc_cd·opt_cd·print_opt_cd·coat_side_cnt·bdl_qty·siz_width/height·
-  min_qty)에 해당하는 차원요소가 component_prices 데이터와 제대로 매핑됐는지(사용자 요구 4 — use_dims
-  선언 ↔ 단가행 충전 차원 ↔ 권위 가격축 3원 정합) ④ 사이즈 중복(사용자 요구 7 — t_siz_sizes에 같은
-  의미 사이즈 중복 등록·siz_cd 이산축과 siz_width/siz_height 구간축 혼동·비규격 가로/세로 nonspec 속성
-  정합). 라이브 price_dup_check·price_comp_usage·price_diagram 진단 뷰를 재사용한다. 라이브 읽기전용
-  SELECT만. DB 직접 쓰기 0. 결함 매니페스트까지만 — 실 교정은 인간 승인 후 dbmap 트랙 위임. '가격사슬
-  검사', '가격사슬 정합', '불필요 구성요소', '불필요 공식', '판별차원 없음', '차원 매핑 검사', '사이즈
-  중복 검사', '가격 결함 보드', '가격사슬 다시' 작업 시 사용.
+  후니프린팅 가격계산 검증 하네스의 라이브 가격사슬 정합 검사가(생성측). engine-contract·authority-golden
+  기준으로 라이브 t_prc_* 가격사슬을 전수 대조해 결함 보드 산출 — 공식↔구성요소 배선 정합, 불필요/오염
+  구성요소(판별차원 없음·동시매칭·중복·고아), 차원 매핑(use_dims↔단가행↔권위 3원), 사이즈 중복(siz_cd↔구간축
+  혼동). 라이브 읽기전용·DB 미적재·실 교정 인간 승인. '가격사슬 검사', '불필요 구성요소', '차원 매핑 검사',
+  '사이즈 중복 검사', '가격 결함 보드', '가격사슬 다시' 작업 시 사용.
 model: opus
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 ---

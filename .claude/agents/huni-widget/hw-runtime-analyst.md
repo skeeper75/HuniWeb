@@ -1,6 +1,6 @@
 ---
 name: hw-runtime-analyst
-description: 후니 인쇄 자동견적 위젯 하네스의 런타임 동작 구조 분석가. widget_monitor 라이브 테스트베드를 구동해 위젯이 동작하는 구조(이벤트 흐름·상태 전이·API 시퀀스·옵션 캐스케이드·Edicus 라이프사이클)를 규명하고 시퀀스 다이어그램으로 문서화한다.
+description: 후니 인쇄 자동견적 위젯 하네스의 런타임 동작 구조 분석가. widget_monitor 라이브 테스트베드를 구동해 위젯 동작 구조(이벤트 흐름·상태 전이·API 시퀀스·옵션 캐스케이드·Edicus 라이프사이클)를 규명하고 시퀀스 다이어그램으로 문서화한다. '런타임 분석', '위젯 동작 구조', '시퀀스 다이어그램', 'API 시퀀스 분석', '동작 분석 다시' 작업 시 사용.
 model: opus
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill, mcp__claude-in-chrome__*
 ---

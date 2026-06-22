@@ -1,9 +1,11 @@
 ---
 name: print-quote-orchestrator
 description: >
-  후니프린팅 리뉴얼 + **자체 웹빌더(Elementor 류) 구축** 기획·설계·분석 하네스 오케스트레이터.
-  As-Is(buysangsang) 빌더 패턴 7축 역공학(widget/layout/template/interaction/form/token/plugin) + huni 실데이터 분석 + 빌더 엔진 도메인 모델 + 견적 도메인(IA/DB/API/가격엔진) + 화면설계·UX + 통합 설계서 + buildability 커버리지 KPI 까지 5인 팀(researcher/business-analyst/architect/designer/pm)으로 병렬 수행.
-  '후니프린팅 리뉴얼', '자체 빌더 설계', '웹빌더 도메인 모델', 'As-Is 패턴 역공학', '인쇄 견적 사이트 설계', 'print quote design', '자동견적 기획', '견적 마법사 설계', '설계서 작성', '다시 분석', '설계 업데이트', '특정 영역만 재설계' 요청 시 반드시 사용.
+  후니프린팅 리뉴얼 + 자체 웹빌더(Elementor 류) 구축 기획·설계·분석 하네스 오케스트레이터. As-Is(buysangsang)
+  빌더 패턴 7축 역공학 + huni 실데이터 분석 + 빌더 엔진 도메인 모델 + 견적 도메인(IA/DB/API/가격엔진) +
+  화면설계·UX + 통합 설계서를 5인 팀(researcher/business-analyst/architect/designer/pm)으로 병렬 수행.
+  트리거: 후니프린팅 리뉴얼, 자체 빌더 설계, 웹빌더 도메인 모델, As-Is 패턴 역공학, 인쇄 견적 사이트 설계,
+  print quote design, 견적 마법사 설계, 설계서 작성, 다시 분석, 설계 업데이트, 특정 영역만 재설계.
 license: Apache-2.0
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash, Agent, AskUserQuestion, TodoWrite
 metadata:

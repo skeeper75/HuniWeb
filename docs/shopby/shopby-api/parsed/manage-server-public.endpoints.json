@@ -1,0 +1,1956 @@
+[
+  {
+    "method": "GET",
+    "path": "/accumulations",
+    "summary": "적립금 조회하기",
+    "description": "## 부가설명 및 특이사항\n등록일/시작일/만료일로 적립금 상태를 검색/조회하는 API 입니다.\n\n기본 적립금 단위는 정수형으로 지원합니다. ex) 1000\nGlobal Mall의 경우, 적립금은 소수점 2자리까지 지원합니다. ex) 1000.00\n",
+    "tags": ["Accumulations"],
+    "parameters": [
+      {
+        "name": "page",
+        "in": "query",
+        "description": "페이지 번호",
+        "required": false,
+        "schema": {
+          "type": "number"
+        },
+        "example": "1"
+      },
+      {
+        "name": "pageSize",
+        "in": "query",
+        "description": "페이지 사이즈 (최대 10000)",
+        "required": false,
+        "schema": {
+          "type": "number"
+        },
+        "example": "10"
+      },
+      {
+        "name": "periodType",
+        "in": "query",
+        "description": "기간 설정 타입 (REGISTER : 등록일 | START : 생성일 | EXPIRE : 만료일)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "REGISTER"
+      },
+      {
+        "name": "accumulationNos",
+        "in": "query",
+        "description": "적립금 번호 리스트",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1,2,3"
+      },
+      {
+        "name": "startYmd",
+        "in": "query",
+        "description": "검색 시작일",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "YYYY-MM-DD"
+      },
+      {
+        "name": "endYmd",
+        "in": "query",
+        "description": "검색 종료일",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "YYYY-MM-DD"
+      },
+      {
+        "name": "isOnlyAvailable",
+        "in": "query",
+        "description": "사용가능한 적립금만 조회 여부 ( default : false )",
+        "required": false,
+        "schema": {
+          "type": "boolean"
+        },
+        "example": "false"
+      },
+      {
+        "name": "externalKey",
+        "in": "query",
+        "description": "외부 키(조회용)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "abraded"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "partnerId",
+        "in": "header",
+        "description": "\n 파트너 아이디 (파트너사 로그인계정)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\n (Authorization 입력했을 경우, partnerId와 mallKey는 null로 보내시길 바랍니다.)<br>\n\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "pingdamallpartner"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드) - Authorization 사용 시 안보내도 됩니다.\n\n- 파트너 : 파트너관리 > 파트너 정보 조회 > 거래쇼핑몰 > 외부시스템 연동코드\n- 서비스 : 서비스관리 > 쇼핑몰관리 > 개발 연동 정보 > 외부 연동 키\n- 샵바이 프로 : 설정 > 기본정책 > 외부서비스 설정 > 외부 API 연동 정보 > 외부 API 연동 Key\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "각 어드민에서 복사된 값"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/accumulations177281248"
+            },
+            "examples": {
+              "get-accumulations-by-condition": {
+                "value": "{\"items\":[{\"memberNo\":90001,\"accumulationNo\":1,\"accumulationAmt\":1000,\"registerYmdt\":\"2025-10-27 12:05:07\",\"startYmdt\":\"2025-10-27 12:05:07\",\"expireYmdt\":\"2025-10-27 12:05:07\",\"accumulationReserveReason\":\"ADD_MANUAL\",\"reasonDetail\":\"상세사유\",\"accumulationStatus\":\"GIVE\",\"orderNo\":\"orderNo\",\"productDisplayName\":\"기저귀\",\"restAmount\":100.0,\"externalKey\":\"abcdedd\"}],\"totalCount\":100}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/accumulations/assembles",
+    "summary": "어셈블 적립금 요청 목록 조회",
+    "description": "필터(회원번호, 상태 등)로 적립금 어셈블 요청을 페이지 조회합니다.",
+    "tags": ["Accumulations"],
+    "parameters": [
+      {
+        "name": "page",
+        "in": "query",
+        "description": "페이지 번호",
+        "required": false,
+        "schema": {
+          "type": "number"
+        },
+        "example": "1"
+      },
+      {
+        "name": "pageSize",
+        "in": "query",
+        "description": "페이지 사이즈 (최대 10000)",
+        "required": false,
+        "schema": {
+          "type": "number"
+        },
+        "example": "10"
+      },
+      {
+        "name": "mallNos",
+        "in": "query",
+        "description": "쇼핑몰 번호",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "searchType",
+        "in": "query",
+        "description": "검색 유형",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ALL"
+      },
+      {
+        "name": "keyword",
+        "in": "query",
+        "description": "검색 내용",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "이벤트A"
+      },
+      {
+        "name": "periodType",
+        "in": "query",
+        "description": "검색 기간 유형",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "REGISTER"
+      },
+      {
+        "name": "startDateTime",
+        "in": "query",
+        "description": "시작일",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "endDateTime",
+        "in": "query",
+        "description": "종료일",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "immediately",
+        "in": "query",
+        "description": "즉시지급 여부",
+        "required": false,
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      {
+        "name": "requestGroupType",
+        "in": "query",
+        "description": "전체/지급/차감",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ALL/ADD/SUB"
+      },
+      {
+        "name": "requestTypes",
+        "in": "query",
+        "description": "예약지급/즉시지급/즉시차감",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "DIRECT_ADD,DIRECT_SUB"
+      },
+      {
+        "name": "statuses",
+        "in": "query",
+        "description": "지급요청 유형 리스트",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "WAITING,COMPLETED"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "partnerId",
+        "in": "header",
+        "description": "\n 파트너 아이디 (파트너사 로그인계정)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\n (Authorization 입력했을 경우, partnerId와 mallKey는 null로 보내시길 바랍니다.)<br>\n\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "pingdamallpartner"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드) - Authorization 사용 시 안보내도 됩니다.\n\n- 파트너 : 파트너관리 > 파트너 정보 조회 > 거래쇼핑몰 > 외부시스템 연동코드\n- 서비스 : 서비스관리 > 쇼핑몰관리 > 개발 연동 정보 > 외부 연동 키\n- 샵바이 프로 : 설정 > 기본정책 > 외부서비스 설정 > 외부 API 연동 정보 > 외부 API 연동 Key\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "각 어드민에서 복사된 값"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/accumulations-assembles1635087197"
+            },
+            "examples": {
+              "get-assembles-search": {
+                "value": "{\"totalCount\":1,\"contents\":[{\"no\":10,\"mallNo\":2173,\"mallName\":\"베타 쇼핑몰\",\"requestType\":\"DIRECT_ADD\",\"requestGroup\":\"ADD\",\"requestGroupLabel\":\"지급\",\"requestDateTime\":\"2020-10-20 08:00:00\",\"immediately\":false,\"amount\":2500.0,\"reason\":\"ADD_MANUAL\",\"reasonLabel\":\"지급사유 라벨\",\"reasonDetail\":\"적립금 상세 - 주문 지급 적립금 시 사용\",\"validPeriodType\":\"NO_LIMIT\",\"validPeriod\":0,\"expireDateTime\":\"2026-10-27 12:05:02\",\"targets\":[{\"type\":\"MEMBER_NO\",\"values\":[1,2,3]}],\"excludeMemberNos\":[4,5],\"orderRequest\":{\"orderNo\":null,\"orderProductOptionNo\":null},\"reviewNo\":null,\"productDisplayName\":null,\"registerAdminNo\":13,\"registerDateTime\":\"2002-10-17 13:42:31\",\"registerAdminName\":\"홍길동\",\"registerAdminStatus\":\"등록완료\",\"updateAdminNo\":null,\"updateDateTime\":null,\"updateAdminName\":null,\"updateAdminStatus\":null,\"paymentDateTime\":\"2020-10-20 08:01:21\",\"paymentCount\":34,\"tryCount\":34,\"status\":\"COMPLETED\",\"statusLabel\":\"상태 라벨\"}]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/accumulations/externals",
+    "summary": "외부적립금 연동 이력 조회",
+    "description": "## 부가설명 및 특이사항\n외부적립금 연동을 사용하는 몰에서 적립금 연동 이력을 조회합니다.\n",
+    "tags": ["Accumulations"],
+    "parameters": [
+      {
+        "name": "page",
+        "in": "query",
+        "description": "페이지 번호",
+        "required": false,
+        "schema": {
+          "type": "number"
+        },
+        "example": "1"
+      },
+      {
+        "name": "pageSize",
+        "in": "query",
+        "description": "페이지 사이즈 (최대 10000)",
+        "required": false,
+        "schema": {
+          "type": "number"
+        },
+        "example": "10"
+      },
+      {
+        "name": "startYmdt",
+        "in": "query",
+        "description": "조회 시작일",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "2023-01-10T01:21:00.000Z"
+      },
+      {
+        "name": "endYmdt",
+        "in": "query",
+        "description": "조회 종료일",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "2023-01-10T01:21:00.000Z"
+      },
+      {
+        "name": "success",
+        "in": "query",
+        "description": "성공여부",
+        "required": false,
+        "schema": {
+          "type": "boolean"
+        },
+        "example": "true"
+      },
+      {
+        "name": "requestType",
+        "in": "query",
+        "description": "요청타입 (ADD, SUB, SUB_ROLLBACK)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ADD"
+      },
+      {
+        "name": "mappingKeyType",
+        "in": "query",
+        "description": "매핑키 종류 - mappingKeys 와 같이 보내야 함. (REVIEW, ORDER, ORDER_OPTION)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ORDER"
+      },
+      {
+        "name": "mappingKeys",
+        "in": "query",
+        "description": "매핑키 값 - mappingKeyType과 같이 보내야 함. 컴마로 연결",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1,2,3"
+      },
+      {
+        "name": "externalNos",
+        "in": "query",
+        "description": "외부연동키. 컴마로 연결",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1,2,3"
+      },
+      {
+        "name": "seqs",
+        "in": "query",
+        "description": "트랜잭션 ID 리스트",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1,2,3"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "partnerId",
+        "in": "header",
+        "description": "\n 파트너 아이디 (파트너사 로그인계정)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\n (Authorization 입력했을 경우, partnerId와 mallKey는 null로 보내시길 바랍니다.)<br>\n\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "pingdamallpartner"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드) - Authorization 사용 시 안보내도 됩니다.\n\n- 파트너 : 파트너관리 > 파트너 정보 조회 > 거래쇼핑몰 > 외부시스템 연동코드\n- 서비스 : 서비스관리 > 쇼핑몰관리 > 개발 연동 정보 > 외부 연동 키\n- 샵바이 프로 : 설정 > 기본정책 > 외부서비스 설정 > 외부 API 연동 정보 > 외부 API 연동 Key\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "각 어드민에서 복사된 값"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/accumulations-externals320580630"
+            },
+            "examples": {
+              "get-accumulations-externals": {
+                "value": "{\"items\":[{\"seq\":0,\"requestType\":\"ADD\",\"mappingKeyType\":\"ORDER\",\"mappingKey\":\"123\",\"memberKey\":\"hong123\",\"requestJson\":\"{}\",\"amount\":1000,\"requestDateTime\":\"2025-10-27 12:05:10\",\"externalNo\":null,\"success\":false,\"responseJson\":null}],\"totalCount\":1}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/accumulations/settlement",
+    "summary": "적립금 지급/차감 이력 조회",
+    "description": "## 부가설명 및 특이사항\n적립금 지금/차감/차감롤백 이력을 조회합니다.\n\n기본 적립금 단위는 정수형으로 지원합니다. ex) 1000\nGlobal Mall의 경우, 적립금은 소수점 2자리까지 지원합니다. ex) 1000.00\n",
+    "tags": ["Accumulations"],
+    "parameters": [
+      {
+        "name": "page",
+        "in": "query",
+        "description": "페이지 번호",
+        "required": false,
+        "schema": {
+          "type": "number"
+        },
+        "example": "1"
+      },
+      {
+        "name": "pageSize",
+        "in": "query",
+        "description": "페이지 사이즈 (최대 10000)",
+        "required": false,
+        "schema": {
+          "type": "number"
+        },
+        "example": "10"
+      },
+      {
+        "name": "startYmd",
+        "in": "query",
+        "description": "조회 시작일",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "2023-01-10T01:21:00.000Z"
+      },
+      {
+        "name": "endYmd",
+        "in": "query",
+        "description": "조회 종료일",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "2023-01-10T01:21:00.000Z"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "partnerId",
+        "in": "header",
+        "description": "\n 파트너 아이디 (파트너사 로그인계정)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\n (Authorization 입력했을 경우, partnerId와 mallKey는 null로 보내시길 바랍니다.)<br>\n\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "pingdamallpartner"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드) - Authorization 사용 시 안보내도 됩니다.\n\n- 파트너 : 파트너관리 > 파트너 정보 조회 > 거래쇼핑몰 > 외부시스템 연동코드\n- 서비스 : 서비스관리 > 쇼핑몰관리 > 개발 연동 정보 > 외부 연동 키\n- 샵바이 프로 : 설정 > 기본정책 > 외부서비스 설정 > 외부 API 연동 정보 > 외부 API 연동 Key\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "각 어드민에서 복사된 값"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/accumulations-settlement345426681"
+            },
+            "examples": {
+              "get-accumulations-history": {
+                "value": "{\"items\":[{\"seq\":1,\"registerYmdt\":\"2025-10-27 12:05:07\",\"accumulationStatus\":\"GIVE\",\"reason\":\"운영자 지급\",\"reasonDetail\":\"운영자 테스트 지급 (113122)\",\"amount\":1000,\"memberNo\":10001,\"accumulationNo\":113122,\"relatedAccumulationNo\":112331,\"couponNo\":null,\"couponIssueNo\":null,\"mappingType\":\"\",\"mappingValue\":\"\",\"description\":\"지급번호 112331 - 1000.0 지급\"}],\"totalCount\":1}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/accumulations/usage",
+    "summary": "적립금 사용처 추적하기",
+    "description": "## 부가설명 및 특이사항\n적립된 적립금의 번호를 넘기면 해당 적립금을 사용자가 어떤 주문에 사용했는지 추적해 줍니다.\ninput 으로 넘긴 적립금 번호가 차감일 경우 제외되고 조회됩니다.\n\n기본 적립금 단위는 정수형으로 지원합니다. ex) 1000\nGlobal Mall의 경우, 적립금은 소수점 2자리까지 지원합니다. ex) 1000.00\n",
+    "tags": ["Accumulations"],
+    "parameters": [
+      {
+        "name": "accumulationNos",
+        "in": "query",
+        "description": "적립금 번호 리스트(최대 1000개)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1,2,3"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "partnerId",
+        "in": "header",
+        "description": "\n 파트너 아이디 (파트너사 로그인계정)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\n (Authorization 입력했을 경우, partnerId와 mallKey는 null로 보내시길 바랍니다.)<br>\n\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "pingdamallpartner"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드) - Authorization 사용 시 안보내도 됩니다.\n\n- 파트너 : 파트너관리 > 파트너 정보 조회 > 거래쇼핑몰 > 외부시스템 연동코드\n- 서비스 : 서비스관리 > 쇼핑몰관리 > 개발 연동 정보 > 외부 연동 키\n- 샵바이 프로 : 설정 > 기본정책 > 외부서비스 설정 > 외부 API 연동 정보 > 외부 API 연동 Key\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "각 어드민에서 복사된 값"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/accumulations-usage-1532805667"
+            },
+            "examples": {
+              "get-accumulations-usage": {
+                "value": "[{\"accumulationNo\":1,\"startAmount\":1000,\"restAmount\":800,\"usages\":[{\"accumulationNo\":2,\"orderNo\":\"20210101000111000001\",\"useDateTime\":\"2025-10-27 12:05:06\",\"useAmount\":200}]}]"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/accumulations/members/available",
+    "summary": "회원 보유 적립금 조회(다건)",
+    "description": "memberId 리스트로 회원 보유(가용) 적립금을 조회합니다.",
+    "tags": ["Accumulations"],
+    "parameters": [
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "partnerId",
+        "in": "header",
+        "description": "\n 파트너 아이디 (파트너사 로그인계정)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\n (Authorization 입력했을 경우, partnerId와 mallKey는 null로 보내시길 바랍니다.)<br>\n\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "pingdamallpartner"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드) - Authorization 사용 시 안보내도 됩니다.\n\n- 파트너 : 파트너관리 > 파트너 정보 조회 > 거래쇼핑몰 > 외부시스템 연동코드\n- 서비스 : 서비스관리 > 쇼핑몰관리 > 개발 연동 정보 > 외부 연동 키\n- 샵바이 프로 : 설정 > 기본정책 > 외부서비스 설정 > 외부 API 연동 정보 > 외부 API 연동 Key\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "각 어드민에서 복사된 값"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/accumulations-members-available634575164"
+          },
+          "examples": {
+            "post-accumulations-member-available": {
+              "value": "{\"memberIds\":[\"alpha\",\"bravo\"]}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/accumulations-members-available-1413144932"
+            },
+            "examples": {
+              "post-accumulations-member-available": {
+                "value": "{\"items\":[{\"memberId\":\"alpha\",\"memberNo\":1,\"amount\":1500.0},{\"memberId\":\"bravo\",\"memberNo\":2,\"amount\":300.0}],\"count\":2}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/inquiries",
+    "summary": "1:1문의 조회하기",
+    "description": "\n답변 지연 여부는 문의 일시 기준으로 24시간 이내 답변 완료가 되지 않은 경우 **true**\n\n검색 유형의 ISSUER 는 문의자 아이디, 문의자 이메일을 대상으로 검색함\n\n담당자 미지정 여부 (isUnspecified)가 담당자 번호(assigneeNo)보다 우선순위에 있으며, 담당자를 설정하려면 담당자 미지정여부를 false로 설정해야 한다.\n\n담당자 미지정여부가 false이고 assigneeNo를 지정하지 않을 경우에는 담당자 조건을 검사하지 않고 검색한다.\n\n ### 1:1문의 검색 타입\n \n 값 | 설명 |\n---|-----|\n ALL | 전체 |\n INQUIRY_NO | 문의번호 |\n TITLE | 문의제목 |\n CONTENT | 문의내용 |\n ISSUER | 문의자 |\n ASSIGNEE | 담당자명 |\n\n ### 1:1문의 상태\n \n 값 | 설명 |\n---|-----|\n ISSUED | 답변대기 |\n ASKED | 답변대기 |\n IN_PROGRESS | 진행중 |\n ANSWERED | 답변완료 |\n\n ### 문의자 상태\n \n 값 | 설명 |\n---|-----|\n WAITING | 가입대기 |\n ACTIVE | 가입완료 |\n DORMANT | 휴면 |\n PAUSED | 이용정지 |\n WITHDRAWN | 탈퇴 |\n GUEST | 비회원 |\n\n ### 날짜 검색 타입\n \n 값 | 설명 |\n---|-----|\n REGISTER | 등록일 |\n ANSWER | 답변일 |\n\n ### contents[].assignee.assigneeStatus\n \n 값 | 설명 |\n---|-----|\n WAITING | 등록대기 |\n INVESTIGATION | 검토중 |\n ACTIVE | 등록완료 |\n DELETE | 삭제 |\n LOCKED | 로그인 잠금 |\n DORMANT | 휴면 |\n UNASSIGNEED | 담당자미지정 |\n\n ### external\n inquiryTypeChannel이 NCP가 아닌 경우 값이 있다.\n   * inquiryTypeChannel이 NAVER_PAY인 경우: external.naver\n\n ## assignee\n* 담당자 미지정: 답변 완료되지 않은 1:1문의 중 담당자 운영자가 삭제되거나 1:1문의 등록 시점에 담당자가 없는 경우 해당 1:1문의는 담당자 미지정이다.\n  * assigneeNo = 0\n  * assigneeName = 담당자미지정\n  * assigneeStatus = UNASSIGNEED\n* 삭제 상태의 담당자: 답변 완료된 1:1문의 중 담당자 운영자가 삭제 상태에 있는 경우. 이 때는 운영자 정보는 남아있다.\n  * assigneeNo = 운영자 번호\n  * assigneeName = 운영자 이름\n  * assigneeStatus = DELETE\n* 삭제된 담당자: 답변 완료된 1:1문의 중 담당자 운영자가 완전히 삭제되었을 경우 삭제된 어드민이다.\n  * assigneeNo = null\n  * assigneeName = 삭제된 담당자\n  * assigneeStatus = DELETE\n\n ### contents[].assignee.assigneeStatus\n \n 값 | 설명 |\n---|-----|\n WAITING | 등록대기 |\n INVESTIGATION | 검토중 |\n ACTIVE | 등록완료 |\n DELETE | 삭제 |\n LOCKED | 로그인 잠금 |\n DORMANT | 휴면 |\n UNASSIGNEED | 담당자미지정 |\n",
+    "tags": ["Inquiry"],
+    "parameters": [
+      {
+        "name": "page",
+        "in": "query",
+        "description": "페이지 번호",
+        "required": false,
+        "schema": {
+          "type": "number"
+        },
+        "example": "1"
+      },
+      {
+        "name": "pageSize",
+        "in": "query",
+        "description": "페이지 사이즈 (최대 10000)",
+        "required": false,
+        "schema": {
+          "type": "number"
+        },
+        "example": "10"
+      },
+      {
+        "name": "searchType",
+        "in": "query",
+        "description": "검색 유형^|ALL | INQUIRY_NO | TITLE | CONTENT | ISSUER | ASSIGNEE",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "keyword",
+        "in": "query",
+        "description": "키워드",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "keyword"
+      },
+      {
+        "name": "inquiryTypeNo",
+        "in": "query",
+        "description": "문의 유형 번호",
+        "required": false,
+        "schema": {
+          "type": "number"
+        },
+        "example": "1"
+      },
+      {
+        "name": "assigneeNo",
+        "in": "query",
+        "description": "담당자 번호",
+        "required": false,
+        "schema": {
+          "type": "number"
+        },
+        "example": "10"
+      },
+      {
+        "name": "issuerNo",
+        "in": "query",
+        "description": "문의자 번호",
+        "required": false,
+        "schema": {
+          "type": "number"
+        },
+        "example": "0"
+      },
+      {
+        "name": "inquiryStatuses",
+        "in": "query",
+        "description": "문의 상태 (ISSUED(ASKED-이전버전 호환용): 답변대기, IN_PROGRESS: 답변 진행중, ANSWERED: 답변완료)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "[ANSWERED]"
+      },
+      {
+        "name": "startDateTime",
+        "in": "query",
+        "description": "검색 기준 시작일 (미입력 시 현재 기준 3달 전)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "2025-10-27T12:05:21.000Z"
+      },
+      {
+        "name": "endDateTime",
+        "in": "query",
+        "description": "검색 기준 종료일 (미입력 시 현재 시각)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "2025-10-27T12:05:21.000Z"
+      },
+      {
+        "name": "isUnspecified",
+        "in": "query",
+        "description": "담당자 미지정 여부 (assigneeNo보다 우선순위이다. 기본값 = false)",
+        "required": false,
+        "schema": {
+          "type": "boolean"
+        },
+        "example": "false"
+      },
+      {
+        "name": "searchDateType",
+        "in": "query",
+        "description": "검색 날짜 유형 (기본값 = REGISTER(등록일))^|REGISTER | ANSWER",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "partnerId",
+        "in": "header",
+        "description": "\n 파트너 아이디 (파트너사 로그인계정)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\n (Authorization 입력했을 경우, partnerId와 mallKey는 null로 보내시길 바랍니다.)<br>\n\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "pingdamallpartner"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드) - Authorization 사용 시 안보내도 됩니다.\n\n- 파트너 : 파트너관리 > 파트너 정보 조회 > 거래쇼핑몰 > 외부시스템 연동코드\n- 서비스 : 서비스관리 > 쇼핑몰관리 > 개발 연동 정보 > 외부 연동 키\n- 샵바이 프로 : 설정 > 기본정책 > 외부서비스 설정 > 외부 API 연동 정보 > 외부 API 연동 Key\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "각 어드민에서 복사된 값"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/inquiries-714021068"
+            },
+            "examples": {
+              "search-inquiries": {
+                "value": "{\"totalCount\":1,\"contents\":[{\"inquiryNo\":1,\"inquiryTypeNo\":1,\"inquiryTypeName\":\"개발문의\",\"inquiryTypeChannel\":\"NCP\",\"inquiryTitle\":\"문의제목\",\"inquiryContent\":\"문의내용\",\"inquiryStatus\":\"ANSWERED\",\"inquirySendEmail\":true,\"inquirySendSms\":true,\"issuer\":{\"issuerNo\":1,\"issuerId\":\"gildong.hong@nhn.com\",\"issuerType\":\"ADMIN\",\"issuerEmail\":\"gildong.hong@nhn.com\",\"issuerStatus\":\"ACTIVE\",\"issuerTeamName\":\"teamName\"},\"assignee\":{\"assigneeNo\":1,\"assigneeName\":\"성춘향\",\"assigneeStatus\":\"ACTIVE\"},\"delayed\":false,\"issuedDateTime\":\"2020-02-27T11:39:29\",\"answeredDateTime\":\"2020-02-27T13:42:57\",\"answerContent\":\"문의 답변 내용\",\"external\":{\"naverPay\":{\"naverId\":\"naverId\",\"writerName\":\"홍길동\"}},\"imageUrls\":[\"test1\",\"test2\"],\"originalImageUrls\":[\"imageUrl1\",\"imageUrl2\"],\"productNo\":12345,\"orderNo\":\"202405011927482710\",\"orderOptionNo\":123444}]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/inquiries/types",
+    "summary": "1:1문의 유형 조회하기",
+    "description": "\n1:1문의 유형을 조회하는 server api 입니다.\n",
+    "tags": ["Inquiry"],
+    "parameters": [
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "partnerId",
+        "in": "header",
+        "description": "\n 파트너 아이디 (파트너사 로그인계정)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\n (Authorization 입력했을 경우, partnerId와 mallKey는 null로 보내시길 바랍니다.)<br>\n\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "pingdamallpartner"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드) - Authorization 사용 시 안보내도 됩니다.\n\n- 파트너 : 파트너관리 > 파트너 정보 조회 > 거래쇼핑몰 > 외부시스템 연동코드\n- 서비스 : 서비스관리 > 쇼핑몰관리 > 개발 연동 정보 > 외부 연동 키\n- 샵바이 프로 : 설정 > 기본정책 > 외부서비스 설정 > 외부 API 연동 정보 > 외부 API 연동 Key\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "각 어드민에서 복사된 값"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/inquiries-types15782989"
+            },
+            "examples": {
+              "search-inquiries-types": {
+                "value": "[{\"inquiryTypeNo\":2,\"inquiryTypeName\":\"일대일 문의 유형 제목\",\"inquiryTypeDescription\":\"일대일 문의 유형 설명\"}]"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/inquiries/types",
+    "summary": "1:1문의 유형 생성하기",
+    "description": "\n1:1문의 유형을 생성하는 server api 입니다.\n",
+    "tags": ["Inquiry"],
+    "parameters": [
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "partnerId",
+        "in": "header",
+        "description": "\n 파트너 아이디 (파트너사 로그인계정)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\n (Authorization 입력했을 경우, partnerId와 mallKey는 null로 보내시길 바랍니다.)<br>\n\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "pingdamallpartner"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드) - Authorization 사용 시 안보내도 됩니다.\n\n- 파트너 : 파트너관리 > 파트너 정보 조회 > 거래쇼핑몰 > 외부시스템 연동코드\n- 서비스 : 서비스관리 > 쇼핑몰관리 > 개발 연동 정보 > 외부 연동 키\n- 샵바이 프로 : 설정 > 기본정책 > 외부서비스 설정 > 외부 API 연동 정보 > 외부 API 연동 Key\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "각 어드민에서 복사된 값"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/inquiries-types-1290331578"
+          },
+          "examples": {
+            "create-inquiries-type": {
+              "value": "{\"inquiryTypeName\":\"1:1문의 유형 제목\",\"inquiryTypeDescription\":\"1:1문의 유형 설명\"}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/inquiries/{inquiryNo}/answer",
+    "summary": "1:1 문의 답변 등록",
+    "description": "1:1 문의 답변 등록",
+    "tags": ["Inquiry"],
+    "parameters": [
+      {
+        "name": "inquiryNo",
+        "in": "path",
+        "description": "문의번호",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "partnerId",
+        "in": "header",
+        "description": "\n 파트너 아이디 (파트너사 로그인계정)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\n (Authorization 입력했을 경우, partnerId와 mallKey는 null로 보내시길 바랍니다.)<br>\n\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "pingdamallpartner"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드) - Authorization 사용 시 안보내도 됩니다.\n\n- 파트너 : 파트너관리 > 파트너 정보 조회 > 거래쇼핑몰 > 외부시스템 연동코드\n- 서비스 : 서비스관리 > 쇼핑몰관리 > 개발 연동 정보 > 외부 연동 키\n- 샵바이 프로 : 설정 > 기본정책 > 외부서비스 설정 > 외부 API 연동 정보 > 외부 API 연동 Key\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "각 어드민에서 복사된 값"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/inquiries-inquiryNo-answer-495205860"
+          },
+          "examples": {
+            "answer-inquiry": {
+              "value": "{\"content\":\"답변입니다.\",\"email\":\"test@nhn.com\",\"mobileNo\":\"01012341234\",\"completed\":true,\"files\":[{\"originalFileName\":\"1.png\",\"uploadedFileName\":\"uploaded_1.png\"}]}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/kakao/send",
+    "summary": "카카오 알림톡 메시지 수동 전송",
+    "description": "\n## 부가설명 및 특이사항\n-카카오 알림톡 메시지 수동 전송 API입니다.\n\n-몰 설정에 따라서 provider(비즈엠, 샵바이) 적용되어서 전송됩니다.\n-전송에 필요한 치환코드가 모두(본문, 내용, 아이템 리스트, 아이템 요약, 버튼 설정 등) 포함되어야 전송됩니다.\n \n replaceMap 예시\n -\"replaceMap\" : {\n  \"nickName\" : \"홍길동\",\n  \"smsAgreeDate\" : \"2025-01-01 23:59:59\",\n  \"couponName\" : \"수동 지급 쿠폰 (5000원)\"\n}\n",
+    "tags": ["Kakao"],
+    "parameters": [
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "partnerId",
+        "in": "header",
+        "description": "\n 파트너 아이디 (파트너사 로그인계정)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\n (Authorization 입력했을 경우, partnerId와 mallKey는 null로 보내시길 바랍니다.)<br>\n\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "pingdamallpartner"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드) - Authorization 사용 시 안보내도 됩니다.\n\n- 파트너 : 파트너관리 > 파트너 정보 조회 > 거래쇼핑몰 > 외부시스템 연동코드\n- 서비스 : 서비스관리 > 쇼핑몰관리 > 개발 연동 정보 > 외부 연동 키\n- 샵바이 프로 : 설정 > 기본정책 > 외부서비스 설정 > 외부 API 연동 정보 > 외부 API 연동 Key\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "각 어드민에서 복사된 값"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/kakao-send296080162"
+          },
+          "examples": {
+            "send-kakao-message": {
+              "value": "{\"templateCode\":\"custom_member_1111\",\"replaceMap\":{},\"reservedTime\":\"2025-01-01 14:00:00\",\"phoneNum\":\"010-1234-1234\"}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/profile/accumulations",
+    "summary": "적립금 상태 조회하기",
+    "description": "## 부가설명 및 특이사항\n특정 회원의 적립금 상태를 검색/조회하는 API 입니다.\n\n기본 적립금 단위는 정수형으로 지원합니다. ex) 1000\nGlobal Mall의 경우, 적립금은 소수점 2자리까지 지원합니다. ex) 1000.00\n",
+    "tags": ["Accumulations"],
+    "parameters": [
+      {
+        "name": "page",
+        "in": "query",
+        "description": "페이지 번호",
+        "required": false,
+        "schema": {
+          "type": "number"
+        },
+        "example": "1"
+      },
+      {
+        "name": "pageSize",
+        "in": "query",
+        "description": "페이지 사이즈 (최대 10000)",
+        "required": false,
+        "schema": {
+          "type": "number"
+        },
+        "example": "10"
+      },
+      {
+        "name": "memberId",
+        "in": "query",
+        "description": "회원 아이디(회원 조회용)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test"
+      },
+      {
+        "name": "memberNo",
+        "in": "query",
+        "description": "회원 번호(회원 조회용)",
+        "required": false,
+        "schema": {
+          "type": "number"
+        },
+        "example": "1004"
+      },
+      {
+        "name": "startYmd",
+        "in": "query",
+        "description": "검색 시작일",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "YYYY-MM-DD"
+      },
+      {
+        "name": "endYmd",
+        "in": "query",
+        "description": "검색 종료일",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "YYYY-MM-DD"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "partnerId",
+        "in": "header",
+        "description": "\n 파트너 아이디 (파트너사 로그인계정)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\n (Authorization 입력했을 경우, partnerId와 mallKey는 null로 보내시길 바랍니다.)<br>\n\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "pingdamallpartner"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드) - Authorization 사용 시 안보내도 됩니다.\n\n- 파트너 : 파트너관리 > 파트너 정보 조회 > 거래쇼핑몰 > 외부시스템 연동코드\n- 서비스 : 서비스관리 > 쇼핑몰관리 > 개발 연동 정보 > 외부 연동 키\n- 샵바이 프로 : 설정 > 기본정책 > 외부서비스 설정 > 외부 API 연동 정보 > 외부 API 연동 Key\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "각 어드민에서 복사된 값"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/profile-accumulations-301787378"
+            },
+            "examples": {
+              "get-accumulations-by-member": {
+                "value": "{\"totalAmt\":1000.0,\"memberNo\":10004,\"items\":[{\"accumulationNo\":123,\"accumulationAmt\":20000,\"restAccumulationAmt\":1000,\"registerYmdt\":\"2025-10-27 12:05:08\",\"startYmdt\":\"2025-10-27 12:05:08\",\"expireYmdt\":\"2025-10-27 12:05:08\",\"accumulationReserveReason\":\"ADD_MANUAL\",\"reasonDetail\":\"상세사유\",\"accumulationStatus\":\"GIVE\",\"orderNo\":\"String\",\"productDisplayName\":\"기저귀\",\"externalKey\":null}],\"totalCount\":100,\"itemsTotalRestAmt\":1000.0}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/profile/accumulations",
+    "summary": "적립금 지급하기",
+    "description": "## 부가설명 및 특이사항\n특정 회원에게 적립금을 즉시 지급하는 API 입니다.\n",
+    "tags": ["Accumulations"],
+    "parameters": [
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "partnerId",
+        "in": "header",
+        "description": "\n 파트너 아이디 (파트너사 로그인계정)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\n (Authorization 입력했을 경우, partnerId와 mallKey는 null로 보내시길 바랍니다.)<br>\n\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "pingdamallpartner"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드) - Authorization 사용 시 안보내도 됩니다.\n\n- 파트너 : 파트너관리 > 파트너 정보 조회 > 거래쇼핑몰 > 외부시스템 연동코드\n- 서비스 : 서비스관리 > 쇼핑몰관리 > 개발 연동 정보 > 외부 연동 키\n- 샵바이 프로 : 설정 > 기본정책 > 외부서비스 설정 > 외부 API 연동 정보 > 외부 API 연동 Key\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "각 어드민에서 복사된 값"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/profile-accumulations872905094"
+          },
+          "examples": {
+            "create-accumulations-member": {
+              "value": "{\"memberNo\":1,\"memberId\":\"test\",\"accumulationAmt\":1000.0,\"reasonDetail\":null,\"expireYmd\":null,\"externalKey\":\"abduct\",\"notificationChannels\":[]}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/profile-accumulations-339742700"
+            },
+            "examples": {
+              "create-accumulations-member": {
+                "value": "{\"memberNo\":0,\"accumulationNo\":0}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "DELETE",
+    "path": "/profile/accumulations",
+    "summary": "적립금 차감하기",
+    "description": "## 부가설명 및 특이사항\n특정 회원의 적립금을 차감하는 API 입니다.\n\n회원의 보유 적립금 보다 많은 금액 차감 시, 차감 실패   \n\n응답 예시)\n```json\n{\n   \"timestamp\":\"2025-04-28 13:44:57\",\n   \"path\":\"DELETE /server/profile/accumulations\",\n   \"status\":400,\n   \"error\":[ ],\n   \"code\":\"A0002\",\n   \"message\":\"지급 받은 적립금 중 17,900 적립금이 부족하여 처리할 수 없습니다. 부족한 적립금에 대해 확인 후 진행해 주세요.\"\n}   \n",
+    "tags": ["Accumulations"],
+    "parameters": [
+      {
+        "name": "accumulationAmt",
+        "in": "query",
+        "description": "적립금 차감 금액",
+        "required": false,
+        "schema": {
+          "type": "number"
+        },
+        "example": "100.0"
+      },
+      {
+        "name": "entireSubtracted",
+        "in": "query",
+        "description": "전체 적립금 차감 여부",
+        "required": false,
+        "schema": {
+          "type": "boolean"
+        },
+        "example": "false"
+      },
+      {
+        "name": "memberId",
+        "in": "query",
+        "description": "회원 아이디(회원 조회용)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test"
+      },
+      {
+        "name": "memberNo",
+        "in": "query",
+        "description": "회원 번호(회원 조회용)",
+        "required": false,
+        "schema": {
+          "type": "number"
+        },
+        "example": "1"
+      },
+      {
+        "name": "detailReason",
+        "in": "query",
+        "description": "적립금 차감 사유(최대 200자)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "차감 테스트"
+      },
+      {
+        "name": "externalKey",
+        "in": "query",
+        "description": "외부 키(조회용)(최대 60자)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "aaabdcd"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "partnerId",
+        "in": "header",
+        "description": "\n 파트너 아이디 (파트너사 로그인계정)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\n (Authorization 입력했을 경우, partnerId와 mallKey는 null로 보내시길 바랍니다.)<br>\n\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "pingdamallpartner"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드) - Authorization 사용 시 안보내도 됩니다.\n\n- 파트너 : 파트너관리 > 파트너 정보 조회 > 거래쇼핑몰 > 외부시스템 연동코드\n- 서비스 : 서비스관리 > 쇼핑몰관리 > 개발 연동 정보 > 외부 연동 키\n- 샵바이 프로 : 설정 > 기본정책 > 외부서비스 설정 > 외부 API 연동 정보 > 외부 API 연동 Key\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "각 어드민에서 복사된 값"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/profile-accumulations1700228947"
+            },
+            "examples": {
+              "delete-accumulations-member": {
+                "value": "{\"memberNo\":1,\"subtractedAmt\":0,\"subtractionRelatedAccumulations\":[],\"accumulationNo\":1}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/profile/accumulations/{accumulationNo}/expire",
+    "summary": "적립금 만료 처리",
+    "description": "## 부가설명 및 특이사항\n특정 적립금 만료하는 API입니다. \n\n지정한 적립금의 남은 사용 가능한 적립금 금액을 만료 시킵니다.\n \n이미 만료된 적립금은 만료되지 않습니다.\nresponse 예시)\ncode : A0034, message : 이미 만료된 적립금입니다.\n",
+    "tags": ["Accumulations"],
+    "parameters": [
+      {
+        "name": "accumulationNo",
+        "in": "path",
+        "description": "적립금 번호",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1234"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "partnerId",
+        "in": "header",
+        "description": "\n 파트너 아이디 (파트너사 로그인계정)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\n (Authorization 입력했을 경우, partnerId와 mallKey는 null로 보내시길 바랍니다.)<br>\n\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "pingdamallpartner"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드) - Authorization 사용 시 안보내도 됩니다.\n\n- 파트너 : 파트너관리 > 파트너 정보 조회 > 거래쇼핑몰 > 외부시스템 연동코드\n- 서비스 : 서비스관리 > 쇼핑몰관리 > 개발 연동 정보 > 외부 연동 키\n- 샵바이 프로 : 설정 > 기본정책 > 외부서비스 설정 > 외부 API 연동 정보 > 외부 API 연동 Key\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "각 어드민에서 복사된 값"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/terms",
+    "summary": "유형별 약관 조회",
+    "description": "\n유형별 약관 조회\n## termsTypes \n- MALL_INTRODUCTION: 쇼핑몰/회사 소개\n- USE: 이용약관\n- E_COMMERCE: 전자금융거래 이용약관\n- PI_PROCESS: 개인정보처리방침\n- PI_COLLECTION_AND_USE_REQUIRED: 개인정보 수집/이용\n- PI_COLLECTION_AND_USE_OPTIONAL: 개인정보 수집/이용\n- PI_PROCESS_CONSIGNMENT: 개인정보 처리/위탁\n- PI_THIRD_PARTY_PROVISION: 개인정보 제3자 제공\n- PI_COLLECTION_AND_USE_FOR_GUEST_ON_ARTICLE: 개인정보 수집/이용\n- ACCESS_GUIDE: 이용안내\n- WITHDRAWAL_GUIDE: 탈퇴안내\n- PI_SELLER_PROVISION: 개인정보 판매자 제공\n- PI_COLLECTION_AND_USE_ON_ORDER: 개인정보 수집/이용\n- ORDER_INFO_AGREE: 구매 동의\n- CLEARANCE_INFO_COLLECTION_AND_USE: 통관정보 수집/이용\n- TRANSFER_AGREE: 개인정보 국외 이전 동의\n- REGULAR_PAYMENT_USE: 정기결제(배송) 이용약관\n- AUTO_APPROVAL_USE: 자동 승인 이용약관\n- PI_LIQUOR_PURCHASE_PROVISION: 주류구매 개인정보 수집/이용\n- PI_RESTOCK_NOTICE: 개인정보 수집/이용\n- PI_14_AGE: 만 14세 이상 가입 동의\n- PI_GIFT_ACCEPT_COLLECTION_AND_USE: 선물수락 개인정보 수집/이용\n \",\" 구분자 또는 복수 파라미터로 LIST 요청 할 수 있습니다.\n",
+    "tags": ["Terms"],
+    "parameters": [
+      {
+        "name": "termsTypes",
+        "in": "query",
+        "description": "약관 유형 (MALL_INTRODUCTION: 쇼핑몰/회사 소개, USE: 이용약관, E_COMMERCE: 전자금융거래 이용약관, PI_PROCESS: 개인정보처리방침, PI_COLLECTION_AND_USE_REQUIRED: 개인정보 수집/이용, PI_COLLECTION_AND_USE_OPTIONAL: 개인정보 수집/이용, PI_PROCESS_CONSIGNMENT: 개인정보 처리/위탁, PI_THIRD_PARTY_PROVISION: 개인정보 제3자 제공, PI_COLLECTION_AND_USE_FOR_GUEST_ON_ARTICLE: 개인정보 수집/이용, ACCESS_GUIDE: 이용안내, WITHDRAWAL_GUIDE: 탈퇴안내, PI_SELLER_PROVISION: 개인정보 판매자 제공, PI_COLLECTION_AND_USE_ON_ORDER: 개인정보 수집/이용, ORDER_INFO_AGREE: 구매 동의, CLEARANCE_INFO_COLLECTION_AND_USE: 통관정보 수집/이용, TRANSFER_AGREE: 개인정보 국외 이전 동의, REGULAR_PAYMENT_USE: 정기결제(배송) 이용약관, AUTO_APPROVAL_USE: 자동 승인 이용약관, PI_LIQUOR_PURCHASE_PROVISION: 주류구매 개인정보 수집/이용, PI_RESTOCK_NOTICE: 개인정보 수집/이용, PI_14_AGE: 만 14세 이상 가입 동의, PI_GIFT_ACCEPT_COLLECTION_AND_USE: 선물수락 개인정보 수집/이용)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "partnerId",
+        "in": "header",
+        "description": "\n 파트너 아이디 (파트너사 로그인계정)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\n (Authorization 입력했을 경우, partnerId와 mallKey는 null로 보내시길 바랍니다.)<br>\n\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "pingdamallpartner"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드) - Authorization 사용 시 안보내도 됩니다.\n\n- 파트너 : 파트너관리 > 파트너 정보 조회 > 거래쇼핑몰 > 외부시스템 연동코드\n- 서비스 : 서비스관리 > 쇼핑몰관리 > 개발 연동 정보 > 외부 연동 키\n- 샵바이 프로 : 설정 > 기본정책 > 외부서비스 설정 > 외부 API 연동 정보 > 외부 API 연동 Key\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "각 어드민에서 복사된 값"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/terms1632415514"
+            },
+            "examples": {
+              "get-terms-by-types": {
+                "value": "[{\"termsType\":\"MALL_INTRODUCTION\",\"used\":true,\"contents\":\"약관내용\"}]"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/terms/custom/{customTermsNo}/members",
+    "summary": "추가 약관 동의 회원 목록 조회",
+    "description": "추가 약관에 동의한 회원 목록 조회",
+    "tags": ["Terms"],
+    "parameters": [
+      {
+        "name": "customTermsNo",
+        "in": "path",
+        "description": "추가 약관 번호",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "page",
+        "in": "query",
+        "description": "페이지 번호",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "pageSize",
+        "in": "query",
+        "description": "페이지 크기",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "partnerId",
+        "in": "header",
+        "description": "\n 파트너 아이디 (파트너사 로그인계정)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\n (Authorization 입력했을 경우, partnerId와 mallKey는 null로 보내시길 바랍니다.)<br>\n\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "pingdamallpartner"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드) - Authorization 사용 시 안보내도 됩니다.\n\n- 파트너 : 파트너관리 > 파트너 정보 조회 > 거래쇼핑몰 > 외부시스템 연동코드\n- 서비스 : 서비스관리 > 쇼핑몰관리 > 개발 연동 정보 > 외부 연동 키\n- 샵바이 프로 : 설정 > 기본정책 > 외부서비스 설정 > 외부 API 연동 정보 > 외부 API 연동 Key\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "각 어드민에서 복사된 값"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/terms-custom-customTermsNo-members2042102439"
+            },
+            "examples": {
+              "get-custom-terms-agree-members": {
+                "value": "{\"totalCount\":2,\"contents\":[{\"customTermsNo\":123,\"memberNo\":1001,\"mallNo\":1,\"agree\":true,\"agreeDateTime\":\"2025-10-27 12:05:39\",\"mobileNo\":\"010-1234-5678\",\"email\":\"user1@email.com\"},{\"customTermsNo\":123,\"memberNo\":1002,\"mallNo\":1,\"agree\":true,\"agreeDateTime\":\"2025-10-27 12:05:39\",\"mobileNo\":\"010-5678-1234\",\"email\":\"user2@email.com\"}]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+]

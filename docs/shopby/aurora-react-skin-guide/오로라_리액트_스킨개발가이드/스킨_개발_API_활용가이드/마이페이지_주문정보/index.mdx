@@ -1,0 +1,182 @@
+---
+title: "마이페이지_주문정보"
+depth: 2
+path: "오로라 리액트 스킨개발가이드 > 스킨 개발_API 활용가이드 > 마이페이지_주문정보"
+---
+
+# 마이페이지_주문정보
+
+## 이해하기
+
+```
+샵바이 패키지(shared)를 이용하지 않는 경우, 참고하실 수 있는 문서입니다.
+```
+
+> 회원 혹은 비회원이 쇼핑몰에서 활동한  내역을 볼 수 있는 마이페이지 입니다.
+
+* ? 주문/배송조회
+    * 주문/배송조회 `>` [주문/배송 상세페이지](https://nhnent.dooray.com/share/pages/WoOk8q6KT1K3MZcLSuyZsw/3524954026467555996)
+* ? 주문 AS 내역 (클레임 내역)
+* ? 좋아요 상품 리스트
+
+![Group 4.png](https://nhnent.dooray.com/share/tree/WoOk8q6KT1K3MZcLSuyZsw/pages/3519672284532356682/attach-files/3525561651776941659)
+
+***
+
+## ? ```주문/배송 조회```
+
+
+
+
+![Group 1.png](https://nhnent.dooray.com/share/tree/WoOk8q6KT1K3MZcLSuyZsw/pages/3519672284532356682/attach-files/3534090876600561773)
+기본 스킨에서 주문/배송 조회 페이지는 아래와 같은 항목으로 구성되어 있습니다.
+
+* 주문일자 : 주문이 발생한 일자 (YYYY.MM.DD) 와 주문번호가 노출되며, 해당 주문 클릭시 주문 상세 페이지로 이동 가능합니다.
+* ⓐ 상품정보 : 동일 주문 번호 내 대표 상품의 썸네일과, 상품명이 출력됩니다.
+* ⓑ 진행상태 : 주문 상품 기준으로 조회 시점의 주문상태와 클레임 상태가 출력됩니다.
+* 주문금액 : 주문의 총 금액이 출력됩니다.
+
+### ![](https://nhnent.dooray.com/static_images/emoji/2714-fe0f.png)주문/배송조회 내 추가상품이 포함된 화면
+
+![Inline-image-2025-10-31 12.09.31.287.png](https://nhnent.dooray.com/share/tree/WoOk8q6KT1K3MZcLSuyZsw/pages/3519672284532356682/attach-files/4190807839190680185)
+
+* 추가상품 정보 : 동일 주문 번호 내 상품 옵션 기준으로 상품 정보와 추가상품 구분 표시([추가] 라벨, 엮인 본 상품명)이 출력됩니다.
+
+
+
+
+비회원의 경우 비회원 인증 후(주문번호 및 주문비밀번호 입력) 주문 목록 접근 시 주문 상세 페이지로 이동됩니다.
+비회원 주문상세 페이지에 대해서는 아래 비회원 주문상세에서 확인 하실 수 있습니다.
+
+기본 스킨의 경우 아래 API 를 통해 아래와 같이 주문 목록 화면을 제공하고 있습니다.
+
+
+
+
+> [GET /profile/orders](https://docs.shopby.co.kr/?url.primaryName=order/#/MyOrder/get-profile-orders)
+
+```
+▶ 주문 리스트 조회하기
+회원 기준으로 일정 기간 동안 생성한 주문리스트를 조회합니다
+```
+
+회원이 일정 기간 (시작일\~종료일) 에 생성한 주문리스트를 조회하는 것으로 `accessToken`(회원 엑세스 토큰)을 기준으로 호출하여 주문리스트 데이터를 응답 받을 수 있습니다.
+주문 리스트 조회 API의 경우 시작일\~종료일을 지정하여 주문리스트를 호출하거나, 주문상태를 지정하여 주문리스트를 호출 할 수도 있습니다.
+
+
+
+
+* 기본 스킨의 경우 당일로 부터 이전 7일 까지의 주문리스트를 Default로 제공합니다.
+    주문번호 내 상품 옵션기준으로 상품정보가 노출되므로, 1개의 주문번호에 주문한 다수 개의 상품 정보가 출력될 수 있습니다.
+* 오로라 기본 스킨에는 인피니티 스크롤링이 적용되었습니다.
+
+
+
+
+### :heavy_check_mark: ⓐ 상품정보
+
+주문리스트 조회 API `GET/ profile/orders`에서는 상품 정보를 주문번호`itms`\>옵션주문번호`orderOptions` 기준으로 2Depth 배열로 데이터 제공하며,
+기본 스킨에서는 위의 2Depth 데이터인 `orderOptions` 값을 옵션 단위의 1Depth 배열로 구성하여 화면을 출력하고 있습니다.
+
+### 기본스킨 1Depth 배열 예시코드
+
+![배열 예시코드.png](https://nhnent.dooray.com/share/tree/WoOk8q6KT1K3MZcLSuyZsw/pages/3519672284532356682/attach-files/3524015806331244622)
+`react-components` 라이브러리에서는 회원 주문데이터를 관리하는 `MyOrderProvider` 컴포넌트를 제공합니다.
+`MyOrderProvider`의 `fetchOrders` 액션을 통해 회원 주문데이터를 요청하고, `orders` 혹은 `ordersWithAccumlation` 값을 사용해 주문 데이터를 렌더링 할 수 있습니다.
+
+
+
+
+### :heavy_check_mark: ⓑ 진행상태
+
+진행상태 영역에서는 해당 주문 건의 주문상태 및 클레임 상태를 출력합니다.
+
+* ㉠ 주문 상태 : 입금대기 , 결제완료, 상품준비중, 배송준비중, 배송중, 배송완료, 구매확정
+* ㉡ 클레임 상태 : 취소신청, 취소대기, 취소완료, 교환신청, 교환처리, 교환완료, 반품신청, 반품처리, 반품완료
+
+주문 상태 , 클레임 상태의 출력은 주문리스트 조회 API 의 응답값 중  `clameStatusType` (클레임 상태 정보), `orderStatusTypeLabel` (주문 상태 정보) `nextAction` (다음에 할 수 있는 작업)등을 사용하여 진행상태 텍스트와 버튼을 제공할 수 있습니다.
+ `clameStatusType` (클레임 상태 정보)의 응답 여부에 따라 진행상태 값을 출력합니다.
+
+
+
+
+### ㉠ 주문 상태
+
+클레임 정보가 없는 경우 주문 상태 정보를 출력 합니다.
+즉, `clameStatusType = null` 일 때, `orderStatusTypeLabel` 값을 주문 상태 정보로 출력할 수 있습니다.
+
+
+
+
+### ㉡클레임 상태
+
+클레임 정보가 있는 경우 클레임 상태 정보를 출력 합니다.
+즉, `clameStatusType` 값이 null이 아닐 때, `claimStatusType` , `claimNo`, `claimStatusTypeLabel` 값을 사용하여 진행상태를 출력합니다.
+
+***
+
+## ? ```주문/배송 조회```  > ```주문/배송 상세```
+
+기본 스킨에서는 회원의 경우 [마이페이지 > 주문/배송목록 조회] 에서 '주문'을 클릭한 경우 **주문/배송 상세 페이지**로 이동하며
+비회원의 경우 로그인 페이지에서 비회원 주문 조회 (주문번호 , 주문 비밀번호 입력) 유효성 검증 후 입력한 주문번호의 주문상세 페이지로 바로 이동됩니다.
+
+해당 페이지에 대한 안내는 [주문/배송 상세페이지](https://nhnent.dooray.com/share/pages/WoOk8q6KT1K3MZcLSuyZsw/3524954026467555996) 가이드를 확인바랍니다.
+
+***
+
+## ? ```주문 AS 내역(클레임 내역)```
+
+![스크린샷 2023-04-20 140011.png](https://nhnent.dooray.com/share/tree/WoOk8q6KT1K3MZcLSuyZsw/pages/3519672284532356682/attach-files/3520504839500945106)
+주문 AS 내역 리스트는 주문/배송 조회와 동일한 API를 사용하여 리스트 화면을 제공합니다.
+`orderRequestType`의 값으로 클레임에 해당하는 주문상태값을 지정하여 호출하여 클레임 리스트만 구매자에게 제공할 수 있습니다.
+
+
+
+
+* 클레임 주문 상태
+    * 취소신청[승인대기] `CANCEL_PROCESSING`
+    * 취소완료 `CANCEL_DONE`
+    * 교환신청[승인대기] `EXCHANGE_PROCESSING`
+    * 교환완료 `EXCHANGE_DONE`
+    * 반품신청[승인대기 ] `RETURN_PROCESSING`
+    * 반품완료 `RETURN_DONE`
+
+***
+
+## ? ```좋아요 상품 리스트```
+
+![스크린샷 2023-04-20 140306.png](https://nhnent.dooray.com/share/tree/WoOk8q6KT1K3MZcLSuyZsw/pages/3519672284532356682/attach-files/3520504838506883933)
+
+상품 섹션 또는 상품리스트, 상품 상세에서 좋아요한 상품의 목록을 확인 할 수 있는 페이지 입니다.
+로그인한 회원에게만 좋아요 기능을 제공하고 있으므로 좋아요한 상품리스트는 회원인 경우에만 확인 가능합니다.
+좋아요 상품 리스트 에서는 '상품 정보', '상품 문의', '삭제', '합계금액' 을 제공합니다.
+
+
+
+
+> [GET /profile/like-products](https://docs.shopby.co.kr/?url.primaryName=product/#/Profile/get-profile-like-products)
+
+```
+▶ 회원이 좋아하는 상품목록 조회하기
+회원이 좋아요한 상품 목록을 조회합니다
+```
+
+
+
+
+좋아요 상품 리스트에서 좋아요한 상품을 삭제할 수 있습니다.
+
+
+
+
+> [POST /profile/like-products](https://docs.shopby.co.kr/?url.primaryName=product/#/Profile/post-profile-like-products)
+
+```
+▶ 회원이 상품을 좋아한다고 추가/삭제하기
+회원이 좋아요한 상품을 목록에 추가하거나 삭제합니다
+```
+
+
+
+
+좋아요 상품으로 추가된 이력이 없는 경우 좋아요 목록에 추가되며, 좋아요한 상품으로 기 등록되어 있는 경우 삭제 처리 됩니다.

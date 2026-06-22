@@ -1,0 +1,222 @@
+{
+  "category": {
+    "id": "cat-0ee3b8e6",
+    "slug": "홍보물-포스터-b8e6",
+    "path": ["홍보물", "포스터"],
+    "displayName": "홍보물 > 포스터",
+    "productCount": 2,
+    "keywords": ["홍보물", "포스터", "대량포스터", "ai", "eps", "방수포스터"],
+    "summary": "홍보물 > 포스터 · 2개 상품",
+    "pricing": {
+      "templated": 0,
+      "quoted": 0
+    }
+  },
+  "products": [
+    {
+      "productId": 40022,
+      "name": "대량포스터",
+      "slug": "대량포스터-40022",
+      "categories": ["홍보물", "포스터"],
+      "keywords": [
+        "홍보물",
+        "포스터",
+        "대량포스터",
+        "ai",
+        "eps",
+        "jpg",
+        "png",
+        "cdr",
+        "psd",
+        "sit",
+        "zip",
+        "alz",
+        "pdf"
+      ],
+      "useCases": ["flyer", "poster"],
+      "url": "https://devshop.wowpress.co.kr/prodt/40022",
+      "fileTypes": ["AI", "EPS", "JPG", "PNG", "CDR", "PSD", "SIT", "ZIP", "ALZ", "PDF"],
+      "delivery": {
+        "cutoffTime": null,
+        "prepayRequired": true,
+        "group": {
+          "id": null,
+          "name": null
+        },
+        "regions": []
+      },
+      "orderQuantities": [
+        {
+          "type": "input",
+          "values": [],
+          "minimum": 50,
+          "maximum": 50000,
+          "interval": 1,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": 5428,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        },
+        {
+          "type": "input",
+          "values": [],
+          "minimum": 100,
+          "maximum": 100000,
+          "interval": 1,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": 5429,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        },
+        {
+          "type": "input",
+          "values": [],
+          "minimum": 200,
+          "maximum": 200000,
+          "interval": 1,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": 5430,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        },
+        {
+          "type": "input",
+          "values": [],
+          "minimum": 100,
+          "maximum": 100000,
+          "interval": 1,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": 5434,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        },
+        {
+          "type": "input",
+          "values": [],
+          "minimum": 200,
+          "maximum": 200000,
+          "interval": 1,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": 5435,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        },
+        {
+          "type": "input",
+          "values": [],
+          "minimum": 400,
+          "maximum": 400000,
+          "interval": 1,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": 5436,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        }
+      ],
+      "coverTypes": [
+        {
+          "code": 0,
+          "name": "통합",
+          "pages": [
+            {
+              "code": 1,
+              "name": "전면"
+            },
+            {
+              "code": 2,
+              "name": "후면"
+            }
+          ],
+          "pageConstraints": {
+            "min": null,
+            "max": null,
+            "interval": null
+          }
+        }
+      ],
+      "detailFile": "../products/40022.json",
+      "pricing": {
+        "hasTemplate": false,
+        "status": "requires-configuration",
+        "sampleQuote": null,
+        "error": null
+      }
+    },
+    {
+      "productId": 40293,
+      "name": "방수포스터",
+      "slug": "방수포스터-40293",
+      "categories": ["홍보물", "포스터"],
+      "keywords": ["홍보물", "포스터", "방수포스터", "ai", "eps", "jpg", "png", "zip", "alz"],
+      "useCases": ["flyer", "poster"],
+      "url": "https://devshop.wowpress.co.kr/prodt/40293",
+      "fileTypes": ["AI", "EPS", "JPG", "PNG", "ZIP", "ALZ"],
+      "delivery": {
+        "cutoffTime": null,
+        "prepayRequired": false,
+        "group": {
+          "id": null,
+          "name": null
+        },
+        "regions": []
+      },
+      "orderQuantities": [
+        {
+          "type": "select",
+          "values": [
+            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
+            25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46,
+            47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68,
+            69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90,
+            91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 200, 300, 400, 500
+          ],
+          "minimum": 1,
+          "maximum": 500,
+          "interval": null,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": null,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        }
+      ],
+      "coverTypes": [
+        {
+          "code": 0,
+          "name": "통합",
+          "pages": [
+            {
+              "code": 0,
+              "name": "양면"
+            }
+          ],
+          "pageConstraints": {
+            "min": null,
+            "max": null,
+            "interval": null
+          }
+        }
+      ],
+      "detailFile": "../products/40293.json",
+      "pricing": {
+        "hasTemplate": false,
+        "status": "requires-configuration",
+        "sampleQuote": null,
+        "error": null
+      }
+    }
+  ]
+}

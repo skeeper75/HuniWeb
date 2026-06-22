@@ -1,0 +1,107 @@
+---
+title: "ProductSectionListProvider"
+depth: 5
+path: "오로라 리액트 스킨개발가이드 > 개발 프로세스 > 2️⃣Aurora React 샘플스킨 확인 > @shopby/react-components > display > ProductSectionListProvider"
+---
+
+# ProductSectionListProvider
+
+* 메인페이지 섹션 더보기 클릭시 상품 목록을 제공합니다.
+
+## 속성
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | ---- | --- | ---- | --- |
+| children | true | ReactNode | - |  |
+| platformType | true | PC, MOBILE\_WEB |  | PC 또는 MOBILE\_WEB의 섹션코드를 얻기 위한 타입 |
+
+## 상태
+
+* `productSectionListState`는 `useProductSectionListStateContext` 를 호출해 사용합니다.
+
+```ts
+const productSectionListState = useProductSectionListStateContext();
+```
+
+| 이름 | 타입 | 기본 값 | 설명 |
+| --- | --- | ---- | --- |
+| displaySectionResponse | object | null | 진열 상품 목록 전체 응답 값 |
+| productTotalCount | number | 0 | 전체 상품 수 |
+| label | string | - | 진열 명 |
+| products | [object\[\]](https://nhnent.dooray.com/#products)아래 products 참조 | [] | 상품 목록 |
+| accumulationProducts | [object\[\]](https://nhnent.dooray.com/#products)아래 products 참조 | [] |  |
+| pageNumber | number | 1 | 페이지 번호 |
+| sortType | SALE, LOW\_PRICE, HIGH\_PRICE, REVIEW, REGISTER | SALE | 상품 목록 정렬 타입
+SALE(판매량 순), LOW\_PRICE(낮은 가격순), HIGH\_PRICE(높은 가격순), REVIEW(상품후기순), REGISTER(등록일순) |
+
+### products
+
+| 이름 | 타입 | 기본 값 | 설명 |
+| --- | --- | ---- | --- |
+| products | object[] | [] | 상품 목록 |
+| ㄴ groupManagementCodeName | string | '' | 그룹 관리 코드 |
+| ㄴ minSalePrice | number | 0 | 추가할인 최소 기준 금액 |
+| ㄴ groupManagementCode | string | '' | 그룹관리코드 |
+| ㄴ likeCount | number | 0 | 좋아요 수 |
+| ㄴ canAddToCart | boolean | true | 장바구니 사용 여부 |
+| ㄴ totalReviewCount | number | 0 | 총 상품평 수 |
+| ㄴ reviewRating | number | 0 | 상품평 평균 점수 |
+| ㄴ liked | boolean | false | 좋아요 여부 |
+| ㄴ productName | string | '' | 상품 명 |
+| ㄴ couponDiscountAmt | number | 0 | 쿠폰 할인가 |
+| ㄴ additionDiscountAmt | number | 0 | 추가 상품 할인가 |
+| ㄴ brandNo | number | 0 | 브랜드 번호 |
+| ㄴ brandName | string | '' | 브랜드 명 |
+| ㄴ listImageUrls | string | '' | 리스트 이미지 url |
+| ㄴ immediateDiscountAmt | number | 0 | 즉시 할인가 |
+| ㄴ stickerLabels | array | [] | 스티커 라벨 |
+| ㄴ hasCoupons | [object](https://nhnent.dooray.com/#hasCoupons)아래 hasCoupons 참조 |  |  |
+
+**hasCoupons**
+
+| 이름 | 타입 | 기본 값 | 설명 |
+| --- | --- | ---- | --- |
+| hasCoupons | object |  |  |
+| ㄴ product | boolean | true | 상품 쿠폰 여부 |
+| ㄴ partner | boolean | true | 파트너 쿠폰 여부 |
+| ㄴ event | boolean | true | 이벤트 쿠폰 여부 |
+| ㄴ category | boolean | true | 카테고리 쿠폰 여부 |
+| ㄴ brand | boolean | true | 브랜드 쿠폰 여부 |
+
+## 액션
+
+* `productSectionListAction`은 `useProductSectionListActionContext`를 호출해 사용합니다.
+
+```tsx
+const productSectionListAction = useProductSectionListActionContext();
+```
+
+| 이름 | 인자타입 | 기본 값 | 설명 | 관리하는 상태 |
+| --- | ---- | ---- | --- | ------- |
+| fetchProductSectionList | object |  |  |  |
+| ㄴ sectionId | string |  | 섹션 id | @rows=6:displaySectionResponse
+pageNumber
+label
+productTotalCount
+accumulationProducts
+products |
+| ㄴ pageNumber | number | 1 | 페이지 리스트 넘버 |
+| ㄴ soldOut | boolean | false | 품절 상품 포함 여부 |
+| ㄴ saleStatus | string | 'ONSALE' | 상품 상태 |
+| ㄴ hasTotalCount | boolean | false | 목록 카운트 포함 여부 |
+| ㄴ hasOptionValues | boolean | false | 옵션 리스트 포함 여부 |
+| updateSortType | ONSALE, READY\_ONSALE, RESERVATION\_AND\_ONSALE | 'ONSALE' | 정렬 타입
+READY\_ONSALE(판매대기, 판매중 상품만 조회),
+ONSALE(판매중인 상품만 조회),
+RESERVATION\_AND\_ONSALE(예약판매중인 상품과 판매중인 상품만 조회)
+보내지 않으면 판매금지를 제외한 모든 상품이 전송 | sortType |
+
+## 사용 예시
+
+```jsx
+const Example = () => (
+  
+    
+  
+);
+```

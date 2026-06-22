@@ -1,0 +1,58 @@
+---
+title: "@shopby/react-components"
+depth: 3
+path: "오로라 리액트 스킨개발가이드 > 개발 프로세스 > 2️⃣Aurora React 샘플스킨 확인 > @shopby/react-components"
+---
+
+# @shopby/react-components
+
+## 이해하기
+
+> NHN커머스에서 제공하는 @shopby 패키지를 활용하여 보다 손 쉬운 개발이 가능합니다.
+> @shopby 패키지 중 '@shopby/react-components'에 대해 안내합니다.
+
+* `@shopby/react-components`
+    * 리액트 기반의 `ui 컴포넌트`와 `프로바이더`를 제공합니다.
+    * [https://skins.shopby.co.kr/shopby/react-components/-/releases](https://skins.shopby.co.kr/shopby/react-components/-/releases)
+
+## UI 컴포넌트
+
+* ui 컴포넌트는 하기 링크를 통해 확인할 수 있습니다.
+* [ui 컴포넌트 storybook 문서](https://nhn-commerce-fe.github.io/skin-react-components-docs/?path=/story/common-accordion--accordion-comp)
+
+## [Context](https://legacy.reactjs.org/docs/context.html)
+
+* [컨텍스트 프로바이더](https://legacy.reactjs.org/docs/context.html#contextprovider)에서는 `useStateContext` 와 `useActionContext` [커스텀 훅](https://legacy.reactjs.org/docs/hooks-custom.html)을 제공합니다.
+
+### useStateContext
+
+* 프로바이더에서 제공하는 상태를 사용자 정의 훅을 호출하여 사용할 수 있습니다.
+
+```typescipt
+const state = useStateContext();
+```
+
+### useActionContext
+
+* 프로바이더에서 제공하는 액션을 사용자 정의 훅을 호출하여 사용할 수 있습니다.
+
+```typescript
+const action = useActionContext();
+```
+
+* `update-` 프리픽스를 사용하는 액션은 `useState` 를 맵핑한 함수입니다.
+    * 인자로 넘기는 프로퍼티 상태만 불변성을 유지하며 갱신합니다.
+
+```typesciprt
+ const [termStatus, setTermStatus] = useState(DEFAULT_STATE.termStatus);
+ 
+ const action = () => {
+   return {
+       updateTermStatus: makeStateUpdater(setTermStatus),
+   }
+ }
+```
+
+* 액션은 기본값으로 `ShopbyContext` 를 반환합니다. 
+    * 관련된 상태가 존재하는 경우, `ShopbyContext.data` 값으로 해당 상태가 반환됩니다.
+    * 기본 값이 아닌 다른 값을 반환하는 경우, 문서에 기재합니다. 

@@ -1,0 +1,93 @@
+openapi: 3.0.1
+info:
+  title: workspace-shop
+  description: ' 워크스페이스 (https://workspace.nhn-commerce.com) 관련 shop API 입니다.'
+  version: '1.0'
+servers:
+  - url: https://shop-api.e-ncp.com
+tags:
+  - name: ExternalScript
+    description: 외부스크립트
+paths:
+  /external-scripts:
+    get:
+      tags:
+        - ExternalScript
+      summary: 외부스크립트 조회하기
+      description:
+        " ## 부가설명 및 특이사항\n 외부스크립트 조회\n \n 몰에서 사용중인 외부 스크립트 리스트를 불러옵니다.\n\
+        \ "
+      operationId: get-external-scripts
+      parameters:
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+        - name: clientId
+          in: header
+          description: 쇼핑몰 클라이언트 아이디^|test-client-id
+          required: true
+          schema:
+            type: string
+          example: test-client-id
+        - name: platform
+          in: header
+          description: '클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)^|PC'
+          required: true
+          schema:
+            type: string
+          example: PC
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/external-scripts482409728'
+              examples:
+                get-external-scripts:
+                  value: |-
+                    [ {
+                      "pageType" : "MAIN",
+                      "deviceType" : "PC",
+                      "content" : "<TEST SCRIPT1>",
+                      "pageTypeLabel" : "메인 페이지",
+                      "scriptTypeLabel" : "메인 페이지"
+                    } ]
+components:
+  schemas:
+    external-scripts482409728:
+      type: array
+      items:
+        required:
+          - deviceType
+          - pageType
+          - pageTypeLabel
+          - scriptTypeLabel
+        type: object
+        properties:
+          deviceType:
+            type: string
+            description: '기기 타입 (PC: 피씨, MOBILE: 모바일, BASE: 기본도메인)^|PC'
+          pageType:
+            type: string
+            description:
+              "스크립트 타입 (MAIN: 메인 페이지, COMMON_HEAD: 상단 공통영역, COMMON_FOOTER:\
+              \ 하단 공통영역, PRODUCT: 상품 상세 페이지, PRODUCT_LIST: 상품 리스트 페이지, PRODUCT_SEARCH:\
+              \ 상품 검색결과 페이지, CART: 장바구니 페이지, ORDER: 주문하기 페이지, ORDER_DETAIL: 주문상세 페\
+              이지, ORDER_COMPLETE: 주문완료 페이지, DISPLAY_SECTION: 메인 상품 분류, MEMBER_JOIN_COMPLETE:\
+              \ 회원가입 완료 페이지, MY_PAGE: 마이페이지)^|MAIN"
+          pageTypeLabel:
+            type: string
+            description: 페이지 타입 Label^|메인 페이지
+          scriptTypeLabel:
+            type: string
+            description: (DEPRECATED 예정 pageTypeLabel을 사용해주세요.) 스크립트 타입 Label^|메인
+              페이지
+          content:
+            type: string
+            description: 스크립트^|<TEST SCRIPT1>
+            nullable: true

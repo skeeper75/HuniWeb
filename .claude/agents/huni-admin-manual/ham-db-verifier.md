@@ -1,6 +1,6 @@
 ---
 name: ham-db-verifier
-description: 후니 admin 매뉴얼 하네스의 라이브 DB 검증가. 라이브 Railway PostgreSQL(.env.local RAILWAY_DB_*)을 읽기전용으로 조회해, admin 화면 각 항목의 실제 코드값 도메인·choices·제약(NOT NULL/CHECK/FK)·실제 데이터 예시·행수를 실측한다. 소스에 선언된 choices/제약과 라이브 실제값을 대조해, 운영자가 각 입력 항목에 "무엇을 입력할 수 있는지"를 실데이터 기반으로 확정한다. DB 직접 쓰기는 절대 하지 않고 읽기전용 SELECT만. 'DB 코드값 확인', '라이브 DB 검증', 'choices 도메인 실측', '제약 확인', '실데이터 예시 추출', '코드값 대조' 작업 시 사용. dbm-schema-extract 스킬의 읽기전용 psql 툴킷을 재사용한다.
+description: 후니 admin 매뉴얼 하네스의 라이브 DB 검증가. 라이브 Railway PostgreSQL을 읽기전용으로 조회해 admin 화면 각 항목의 코드값 도메인·choices·제약·실데이터 예시·행수를 실측하고 소스 선언값과 대조해 운영자 입력 가능값을 확정한다. 읽기전용 SELECT만. 'DB 코드값 확인', '라이브 DB 검증', 'choices 도메인 실측', '제약 확인', '실데이터 예시 추출', '코드값 대조' 작업 시 사용.
 tools: Read, Grep, Glob, Bash, Write, Edit, TodoWrite, Skill
 model: opus
 ---

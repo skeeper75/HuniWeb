@@ -1,6 +1,10 @@
 ---
 name: print-kb-wiki-orchestrator
-description: 후니프린팅 Print-KB LLM 위키(Karpathy 모델) 하네스 오케스트레이터. 전 하네스 산출물(huni-dbmap round-1~14·huni-widget·print-quote·huni-admin-manual·docs/huni·raw/webadmin)을 원천으로, 상품군(11시트) 단위 "레시피 페이지"(정체→차원→자재/공정 BOM→가격공식 사슬→CPQ 옵션→위젯 계약→webadmin 적재 경로→결함 현황)와 횡단 축 페이지를 _workspace/print-kb/wiki/에 집필한다. 페이지 뼈대=라이브 DB 스키마(t_*·webadmin) 기준. 4인 에이전트(pkw-source-curator 원천 큐레이션·stale 등급 / pkw-researcher 방법론+검증 리서치 / pkw-recipe-writer 집필 / pkw-wiki-qa W1~W8 엄밀 게이트) 하이브리드 파이프라인. 'LLM 위키', 'llm wiki', 'kapasy 위키', 'karpathy 위키', '레시피 위키', '인쇄 레시피', '상품 레시피 페이지', '위키 구축', '위키 집필', '위키 확장', 'print-kb', '위키 하네스 실행', '위키 재실행', '위키 업데이트', '위키 보완', '특정 상품군만 위키', '위키 검증', '위키 lint', '큐레이션 다시', '위키 방법론 리서치' 요청 시 반드시 이 스킬을 사용. 단순 질문(위키 내용 조회)은 wiki/index.md 직접 조회로 응답.
+description: >
+  후니프린팅 Print-KB LLM 위키(Karpathy 모델) 하네스 오케스트레이터 — 전 하네스 산출물을 원천으로
+  상품군(11시트) 단위 레시피 페이지+횡단 축 페이지를 _workspace/print-kb/wiki/에 집필(4인 pkw-* 파이프라인·W1~W8 게이트).
+  페이지 뼈대=라이브 DB 스키마·stale/v03 인용 금지. 트리거: LLM 위키, karpathy 위키, 레시피 위키, 상품 레시피 페이지,
+  위키 구축/집필/확장, print-kb, 위키 검증/lint, 큐레이션 다시, 위키 재실행/업데이트/보완. 위키 내용 단순 조회는 wiki/index.md 직접.
 ---
 
 # Print-KB Wiki Orchestrator

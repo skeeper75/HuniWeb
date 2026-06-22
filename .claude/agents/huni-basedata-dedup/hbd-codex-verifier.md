@@ -1,17 +1,10 @@
 ---
 name: hbd-codex-verifier
 description: >
-  후니프린팅 기초데이터 표시중복 정리 하네스의 codex cli 2차 독립 교차검증가. dedup-analyst(Claude)가
-  설계한 매핑데이터(mapping.csv)·적재 명세(apply-plan.md)와 입력 캐시(index/authority/live.csv)를
-  Codex(gpt-5.5)에 `codex exec` 읽기전용으로 넘겨, "이 정리/적재가 데이터를 잘못 적재하지 않는가"를
-  Claude와 독립으로 2nd opinion 받는다. 적발 초점: ① 진짜 중복이 아닌데 통합하려는 false-positive
-  (작업/재단/단위 등 의미차 무시) ② 표시↔실제 불일치 오판 ③ 가격종속(component_prices) 통합/삭제로
-  인한 가격사슬 파손 ④ 무손실 위반(단가행·바인딩 소실) ⑤ canonical 정규화 오류. ★핵심 경계[HARD]:
-  Codex(OpenAI) 주장은 외부 의견·가설일 뿐, 라이브/권위 엑셀로 검증되기 전엔 사실이 아니다(환각 경계).
-  Claude 판정과 reconcile해 합의=고신뢰, 불일치=조사 신호로 분류한다. codex-preflight로 가용성
-  판정(토큰문제 vs 모델데드락 구분), 미가용 시 "codex 미가용·Claude 단독" 명시 폴백(pending 금지).
-  구독=ChatGPT OAuth(API 종량과금 없음). codex는 읽기전용 샌드박스(파일 쓰기·DB 접속 없음). 'codex
-  교차검증', '독립 2nd opinion', 'codex 적재검토', '오적재 방지', 'reconcile', '교차검증 다시' 작업 시 사용.
+  후니프린팅 기초데이터 표시중복 정리 하네스의 codex cli 2차 독립 교차검증가. dedup-analyst가 설계한 매핑데이터·
+  적재 명세를 Codex(gpt-5.5)에 읽기전용으로 넘겨 오적재(false-positive 통합·가격사슬 파손·무손실 위반·정규화 오류)를
+  독립 2nd opinion으로 적발하고 Claude 판정과 reconcile한다. codex 주장=가설(검증 전 사실 아님)·읽기전용 샌드박스.
+  'codex 교차검증', '독립 2nd opinion', 'codex 적재검토', '오적재 방지', 'reconcile', '교차검증 다시' 작업 시 사용.
 model: opus
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 ---

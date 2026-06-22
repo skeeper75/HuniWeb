@@ -1,0 +1,162 @@
+---
+title: "OpenldSignInProvider"
+depth: 5
+path: "오로라 리액트 스킨개발가이드 > 개발 프로세스 > 2️⃣Aurora React 샘플스킨 확인 > @shopby/react-components > auth > OpenldSignInProvider"
+---
+
+# OpenldSignInProvider
+
+* 간편회원 로그인 기능을 제공합니다.
+
+## 속성
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | ---- | --- | ---- | --- |
+| children | true | ReactNode | - |  |
+| terms | true | Record\ | - | 약관 정보
+ㄴ TermsType은 [termsTypes](https://docs.shopby.co.kr/?url.primaryName=manage/#/Terms/search-used-terms)와 동일함.
+ㄴ TermsKey는 [key](https://docs.shopby.co.kr/?url.primaryName=manage/#/Terms/search-used-terms)와 동일함. |
+| PI\_TERMS\_MAP | true | Record\ | - | 회원가입 약관의 key와 key에 따른 약관명을 가짐.
+ㄴ key, value는 [termsTypes 참조](https://docs.shopby.co.kr/?url.primaryName=manage/#/Terms/search-used-terms)
+`ex) { PI_COLLECTION_AND_USE_OPTIONAL: '개인정보 수집/이용' }` |
+
+## 상태
+
+* openIdSignInValueState 는 useOpenIdSignInValueContext 를 호출해 사용합니다.
+
+```typescript
+const openIdSignInValueState = useOpenIdSignInValueContext();
+```
+
+| 이름 | 타입 | 기본 값 | 설명 |
+| --- | --- | ---- | --- |
+| openIdInfo | null \| OpenIdInfo | null | 간편회원 정보 |
+| isAgreement | boolean | false | 약관 여부 |
+| isKakaosync | boolean | false | 카카오싱크 여부 |
+| profileInfo | null \| ProfileInfo | null | 회원정보
+[response](https://docs.shopby.co.kr/?url.primaryName=member/#/Profile/get-profile) 타입과 동일함. |
+| termsInfo | object | - | 약관정보 |
+| ㄴ title | string | '' | 약관 제목 |
+| ㄴ contents | string | '' | 약관 내용 |
+| isTermsContentFullModalOpen | boolean | false | 약관상세보기 모달 오픈여부 |
+| termStatus | TermsStatus[] | [] | 약관동의 상태 |
+| allChecked | boolean | false | 약관 전체 동의 여부 |
+| kakaosyncSignUpMemberInfo | object | - | 카카오싱크 회원가입 시 회원정보 |
+| ㄴ id | string | '' | 카카오싱크 회원 아이디 |
+| ㄴ password | string | '' | 카카오싱크 회원 비밀번호 |
+| appCardOpenIdInfo | object |  | 앱카드 로그인 시 필요한 정보
+ㄴ [앱카드 QR Code 생성하기](https://docs.shopby.co.kr/?url.primaryName=auth/#/Authentication/get-app-card-qr-code) + [앱카드 거래번호 및 토큰 발급하기](https://docs.shopby.co.kr/?url.primaryName=auth/#/Authentication/get-app-card-trans-no) response의 타입과 동일함 |
+| ㄴ token | string | '' | 인증거래 확인 토큰 |
+| ㄴ transNo | string | '' | 인증 거래번호 |
+| ㄴ qr | string | '' | QR code |
+| timerTime | object |  | 앱카드 인증 관련 타이머 시간 |
+| ㄴ minute | string | null | 타이머 - 분 |
+| ㄴ second | string | null | 타이머 - 초 |
+| authenticationsRemainTimeBySeconds | number | 0 | 초단위 인증 유효시간 |
+| isExpireAuthenticate | boolean | false | 인증 만료 여부 |
+
+OpneIdInfo
+
+| 이름 | 타입 | 기본 값 | 설명 |
+| --- | --- | ---- | --- |
+| ㄴ dormantMemberResponse | null \| DormantMemberResponse | null | 휴면회원 정보 |
+| ㄴprovider | string | - | 간편로그인 제공사
+ㄴ [간편로그인 제공사에 대해 자세히 보기](https://docs.shopby.co.kr/?url.primaryName=auth/#/Authentication/get-oauth-openid) |
+| ㄴ ordinaryMemberResponse | null \| OrdinaryMemberResponse | null | 회원 정보 |
+
+DormantMemberResponse
+
+| 이름 | 타입 | 기본 값 | 설명 |
+| --- | --- | ---- | --- |
+| ㄴ memberName | null \| string | null | 휴면회원 명 |
+| ㄴ email | null \| string | null | 휴면회원 이메일 |
+| ㄴ mobileNo | null \| string | null | 휴면회원 휴대폰번호 |
+
+OrdinaryMemberResponse
+
+| 이름 | 타입 | 기본 값 | 설명 |
+| --- | --- | ---- | --- |
+| ㄴsignUpDateTime | null \| string | null | 회원가입일 |
+| ㄴ email | null \| string | null | 회원 이메일 |
+
+TermsStatus
+
+| 이름 | 타입 | 기본 값 | 설명 |
+| --- | --- | ---- | --- |
+| ㄴ id | TermsType | - | 약관 항목은 하기 타입과 동일함.
+ㄴ [agreedTermsInfos\[0\]. termsType](https://docs.shopby.co.kr/?url.primaryName=member/#/Profile/put-profile)
+ㄴ 소문자로 변환함 |
+| ㄴ label | string | - | termsType 을 하기 형태로 치환함
+ㄴ [선택] 혹은 [필수] TERMS\_TYPE[termsType] |
+| ㄴ checked | boolean | - | 체크 여부 |
+| ㄴ required | boolean | - | 필수 여부 |
+| ㄴ termsType | TermsType | - | 약관 항목은 하기 타입과 동일함.
+ㄴ [agreedTermsInfos\[0\]. termsType](https://docs.shopby.co.kr/?url.primaryName=member/#/Profile/put-profile) |
+
+## 액션
+
+* openIdSignInAction 은 useOpenIdSignInActionContext 를 호출해 사용합니다.
+
+```typescript
+const openIdSignInAction = useOpenIdSignInActionContext();
+```
+
+| 이름 | 인자타입 | 필수여부 | 기본 값 | 설명 | 관리하는 상태 |
+| --- | ---- | ---- | ---- | --- | ------- |
+| updateIsAgreement | boolean | true | - | 약관 여부 상태를 갱신함. | isAgreement |
+| updateTermsInfo | TermsInfo `partial` | true | - | 약관 동의여부 상태를 갱신함. | termsInfo |
+| updateAllChecked | boolean | true | - | 약관 모두 동의여부 상태를 갱신함. | allChecked |
+| updateKakaosyncSignUpMemberInfo | KakaosyncSignUpMemberInfo `partial` | true | - | 카카오싱크 회원가입정보를 갱신함. | kakaosyncSignUpMemberInfo |
+| updateIsTermsContentFullModalOpen | boolean | true | - | 약관 상세보기 모달 오픈여부 상태를 갱신함. | isTermsContentFullModalOpen |
+| setTermStatus | TermsStatus | true | - | 약관 검증상태를 갱신함. | termStatus |
+| openIdSignIn | object |  |  | 오픈 id 로그인 url 을 조회함. |  |
+| ㄴ provider | string | true | - | 간편로그인 제공사 |  |
+| ㄴ redirectUri | string | true | - | 개발자센터에 등록된 redirect URI |  |
+| getOauthOpenId | object | true | - |  | openIdeInfo |
+| ㄴ code | string | true |  | IdP(Identity Provider, 아이디 제공자)로부터 받은 인증코드 |  |
+| ㄴ redirectUri | string | true |  | 개발자센터에 등록된 redirect URI |  |
+| getTerms | object | - | - | 약관을 조회함. | termsInfo
+isTermsContentFullModalOpen |
+| ㄴ termsTypes | TermsType | true | - | 약관타입 |  |
+| singleCheck | object |  |  | 약관 별 동의 여부 상태를 갱신함. | termsTatus |
+| ㄴ isChecked | boolean | true | - | 약관 동의 여부 |  |
+| ㄴ label | string | true | - | 약관 타입 라벨 |  |
+| allCheck | boolean | true | - | 모든 약관 동의 여부 |  |
+| openIdSignUp | - | - | - | 간편 회원가입ㄴ 입력한 회원 정보를 기반으로 간편회원가입을 함. |  |
+| kakaosyncSignUp | - | - | - | 카카오싱크 회원가입ㄴ 입력한 회원 정보를 기반으로 간편회원가입을 함. |  |
+| synchronizeOpenId | - | - | - | 기존회원을 오픈아이디 회원으로 전환함 (카카오싱크 전용) |  |
+| ㄴ id | string | true | - | 회원 아이디 |  |
+| ㄴ password | string | true | - | 회원 비밀번호 |  |
+| setPathToLocalStorage | object |  |  | 라우팅경로를 로컬스토리지에 저장함. |  |
+| ㄴ previousPath | string | true | - | 간편회원 로그인 페이지 진입 전 경로 |  |
+| ㄴ orderSheetPath | string | false | '' | 주문서 페이지 경로 |  |
+| ㄴ nextPath | string | true | - | 간편회원 완료 후 이동 경로 |  |
+| getPathFromLocalStorage | - | - | - | setPathToLocalStorage 호출 시 로컬스토리지에 저장한 경로 정보를 반환함. |  |
+| removePath | - | - | - | setPathToLocalStorage 호출 시 로컬스토리지에 저장한 경로 정보를 삭제함. |  |
+| setOauthIdNoToLocalStorage | string | true |  | 간편 아이디 키를 로컬스토리지에 저장함. |  |
+| getOauthIdNoToLocalStorage | - | - | - | setOauthIdNoToLocalStorage 호출 시 로컬스토리지에 저장한 정보를 반환함. |  |
+| removeOauthIdNo | - | - | - | setOauthIdNoToLocalStorage 호출 시 로컬스토리지에 저장한 정보를 삭제함. |  |
+| setOauthCompareResultToLocalStorage | boolean | true | - | 회원탈퇴 시 간편 아이디 키 인증 결과를 로컬스토리지에 저장함. |  |
+| getOauthCompareResultToLocalStorage | - | - | - | setOauthCompareResultToLocalStorage 호출 시 로컬스토리지에 저장한 정보를 반환함. |  |
+| removeOauthCompareResultToLocalStorage | - | - | - | setOauthCompareResultToLocalStorage 호출 시 로컬스토리지에 저장한 정보를 삭제함. |  |
+| fetchOauthOpenIdAppCard | - | - |  | 앱카드 로그인 정보를 세팅함. | appCardOpenIdInfo |
+| fetchOauthOpenIdAppCardTransNo | - | - |  | 앱카드 거래번호 및 토큰을 발급함. | appCardOpenIdInfo |
+| appCardSignIn | object |  |  | 앱카드 인증 확인 및 로그인 처리 |  |
+| ㄴ provider | string | true | - | 간편로그인 제공사 |  |
+| ㄴ redirectUri | string | true | - | 개발자센터에 등록된 redirect URI |  |
+| setTimerTime | timerTime | true |  | 인증번호 유효시간을 갱신함. | timerTime |
+| setAuthenticationsRemainTimeBySeconds | number | true | - | 초단위 인증 유효시간을 갱신함. | authenticationsRemainTimeBySeconds |
+| setIsExpireAuthenticate | boolean | true | - | 인증 만료 여부를 갱신함. | isExpireAuthenticate |
+| updateOauthOpenId | object | true | - | [오픈아이디 토큰 재인증 처리함.](https://docs.shopby.co.kr/?url.primaryName=auth/#/OAUTH2/put-oauth2-openid-reauthenticate) |  |
+
+## 사용 예시
+
+```typescript
+const App = ({ clientId, profile }) => (
+  
+      
+        
+      
+    
+)
+```

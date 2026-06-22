@@ -1,0 +1,31 @@
+%% 대표 3 — 투명엽서 PRD_000019 / MES 001-0004 (G-1 미바인딩 archetype — 견적 완전 불가)
+%% 출처: recipe-디지털인쇄.md §(2)4 + gap-board G-1 (10 미바인딩 상품 대표)
+%% 강조: frm_cd 부재 → 옵션은 풍부하나 어떤 comp도 발화 못함 → 가격 0 → 견적불가
+flowchart LR
+    classDef product fill:#e3f2fd,stroke:#1565c0,color:#0d47a1
+    classDef opt fill:#ede7f6,stroke:#5e35b1,color:#311b92
+    classDef missing fill:#ffebee,stroke:#c62828,color:#b71c1c,stroke-width:3px
+
+    PRD["투명엽서<br/>PRD_000019"]:::product
+
+    subgraph OPT["옵션은 상품마스터에 풍부 (선택 가능)"]
+        O_SIZ["사이즈 4종 siz_cd"]:::opt
+        O_PRINT["단면 print_opt_cd"]:::opt
+        O_PAPER["투명/반투명PET 260g mat_cd"]:::opt
+        O_WHITE["화이트 별색 없음/단/양"]:::opt
+        O_VAR["variant 투명/반투명"]:::opt
+    end
+
+    F_MISSING["frm_cd 부재<br/>t_prd_product_price_formulas 미바인딩"]:::missing
+    RESULT["가격 0 → 견적 불가"]:::missing
+
+    PRD --> O_SIZ & O_PRINT & O_PAPER & O_WHITE & O_VAR
+    O_SIZ -.->|"바인딩 끊김"| F_MISSING
+    O_PRINT -.-> F_MISSING
+    O_PAPER -.-> F_MISSING
+    O_WHITE -.-> F_MISSING
+    O_VAR -.-> F_MISSING
+    F_MISSING -.->|"어떤 comp도 발화 못함"| RESULT
+
+    NOTE["G-1 동류 10상품:<br/>019·030·034·035·036·037·038·039·040·049<br/>→ 공식 바인딩 신규 적재(dbmap round-5) 인간승인"]:::missing
+    RESULT -.-> NOTE

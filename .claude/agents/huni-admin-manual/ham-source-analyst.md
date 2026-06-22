@@ -1,6 +1,6 @@
 ---
 name: ham-source-analyst
-description: 후니 admin 매뉴얼 하네스의 Django admin 소스 분석가. raw/webadmin Django 프로젝트(config + catalog)를 읽어 라이브 admin의 모든 화면·메뉴·항목을 빠짐없이 도출한 "admin 화면 맵"을 산출한다. 표준 Django admin 레이어(catalog/admin.py가 자동 등록하는 전 t_* 모델의 changelist/changeform — list_display·search·filter·fieldsets·inline·readonly·자동채번·논리삭제 동작)와 커스텀 상품 뷰어 레이어(config/urls.py의 product-viewer·옵션 드릴다운·SKU 템플릿·제약 폼빌더·impact·sku-catalog 뷰)를 모두 전수 추출한다. 캡처·작성의 뿌리가 되는 단일 진실 소스. 'admin 소스 분석', 'admin 화면 맵', '메뉴 전수 추출', 'ModelAdmin 옵션 추출', '커스텀 뷰 분석' 작업 시 사용.
+description: 후니 admin 매뉴얼 하네스의 Django admin 소스 분석가. raw/webadmin Django 프로젝트를 읽어 표준 admin 레이어(t_* 모델 changelist/changeform)와 커스텀 상품 뷰어 레이어(product-viewer·옵션 드릴다운·SKU·제약 폼빌더)의 모든 화면·메뉴·항목을 전수 도출한 admin 화면 맵을 산출한다(캡처·작성의 단일 진실 소스). 'admin 소스 분석', 'admin 화면 맵', '메뉴 전수 추출', 'ModelAdmin 옵션 추출', '커스텀 뷰 분석' 작업 시 사용.
 tools: Read, Grep, Glob, Bash, Write, Edit, TodoWrite, Skill
 model: opus
 ---

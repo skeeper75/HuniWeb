@@ -1,6 +1,11 @@
 ---
 name: huni-admin-manual-orchestrator
-description: 후니 라이브 Django admin(huni-admin-production.up.railway.app/admin/) 운영자 사용 매뉴얼 작성 하네스 오케스트레이터. raw/webadmin 소스 분석 → 라이브 DB 코드값 검증 ∥ 라이브 화면 스크린샷 캡처 → 운영자 step-by-step 매뉴얼 집필(스크린샷 임베드) → 전수 커버리지·정합 QA 까지 5인 에이전트 팀(ham-source-analyst / ham-db-verifier / ham-live-capturer / ham-manual-writer / ham-manual-qa)으로 수행한다. 표준 Django admin 레이어(전 t_* 모델 changelist/changeform)와 커스텀 상품뷰어 레이어(옵션 드릴다운·SKU 템플릿·제약·impact·sku-catalog)를 모두 전수한다. 'admin 매뉴얼', '관리자 매뉴얼 작성', 'webadmin 매뉴얼', '라이브 사이트 사용 설명서', '운영자 가이드', 'admin 사용법 문서', '화면 캡처 매뉴얼', '매뉴얼 하네스 실행', '매뉴얼 다시 작성', '매뉴얼 재실행', '매뉴얼 업데이트', '매뉴얼 보완', '특정 화면만 매뉴얼', '캡처만 다시', '매뉴얼 검증', '문서 사이트 발행', 'mkdocs', 'docs 빌드', '문서 배포', 'docs-as-code', '문서 시스템 보강' 요청 시 반드시 이 스킬을 사용한다. 단순 질문은 직접 응답.
+description: >
+  후니 라이브 Django admin 운영자 사용 매뉴얼 작성 하네스 오케스트레이터 — raw/webadmin 소스 분석→라이브 DB 코드값 검증∥
+  화면 스크린샷 캡처→step-by-step 매뉴얼 집필(스크린샷 임베드)→전수 커버리지 QA→MkDocs 발행까지 6인 ham-* 팀.
+  표준 Django admin·커스텀 상품뷰어 양 레이어 전수. 라이브 읽기 탐색만(저장/삭제 금지). 트리거: admin 매뉴얼,
+  관리자/운영자 매뉴얼, webadmin 매뉴얼, 화면 캡처 매뉴얼, 매뉴얼 검증, 문서 사이트 발행/mkdocs/docs-as-code,
+  특정 화면만 매뉴얼, 매뉴얼 재실행/업데이트/보완. 단순 질문은 직접 응답.
 ---
 
 # Huni Admin 매뉴얼 하네스 오케스트레이터

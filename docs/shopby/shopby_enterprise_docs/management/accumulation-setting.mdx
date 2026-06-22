@@ -1,0 +1,184 @@
+---
+title: "적립금 설정 관리"
+slug: "/management/accumulation-setting"
+---
+
+# 적립금 설정 관리
+
+<Callout type="info">
+**회원가입, 상품구매, 상품후기작성, 기타 이벤트 진행 시 회원에게 혜택으로 제공되는 적립금의 주요 정책을 설정하고 관리합니다.**
+
+**적립금은 회원이 상품 구매 시 결제금액으로 사용할 수 있는 현금성 포인트로, 적립금 사용 관련 기준 및 유효기간 만료 등을 설정할 수 있습니다.**
+
+**적립금 관리와 관련 기능은 본사 어드민에만 제공되는 메뉴로 파트너사는 적립금 관련 권한이 없습니다.**
+</Callout>
+
+## 적립금 기본 설정
+
+<figure><img src="/images/management/accumulation-setting/spaces%2F5MtRLrF338WdIfIJP9jq%2Fuploads%2F0kviqG3lhpUDZWjZuUYA%2F%EC%A0%81%EB%A6%BD%EA%B8%88%EC%84%A4%EC%A0%95%EA%B4%80%EB%A6%AC_%EC%A0%81%EB%A6%BD%EA%B8%88%EA%B8%B0%EB%B3%B8%EC%84%A4%EC%A0%95%20%EB%B3%B5%EC%82%AC.png" alt=""/><figcaption><p>&#x3C;적립금 기본 설정></p></figcaption></figure>
+
+**① 적립금 명칭/표시단위**\
+쇼핑몰에서 회원에게 노출되는 적립금의 명칭과 표시단위를 설정할 수 있습니다.
+
+* 적립금 명칭 기본값은 '적립금', 표시단위 기본값은 '원' 입니다. 기본값을 그대로 사용하거나 변경할 수 있습니다.&#x20;
+* 해당 적립금 명칭과 표시단위는 쇼핑몰에만 반영되며, 어드민에는 미반영됩니다.
+
+**② 적립금 유효기간**\
+적립금 사용에 기간제한을 설정할 수 있습니다.
+
+* 적립금 지급일 기준, 최소 1개월부터 최대 5년 11개월(71개월) 까지 유효기간 만료를 설정합니다.&#x20;
+* 유효기간 만료의 ‘제한없음’ 설정이 가능합니다.&#x20;
+
+<Callout type="warning">
+적립금 유효기간 또는 소멸 관련 정책은 공정거래위원회 약관의 규제에 관한 법률에 따라 쇼핑몰 이용약관에 안내되어야 하는 점을 참고해 주세요.
+</Callout>
+
+**③ 적립금 만료**\
+적립금 유효기간 만료 전, 적립금 만료 알림을 SMS와 이메일로 발송하는 기능입니다.
+
+* 알림 시점 : 적립금 유효기간 만료일 기준 2일, 7일,14일, 20일, 30일 전 중에서 알림 시점을 설정합니다.
+* 알림 수단 : 알림 발송은 SMS와 이메일 중에서 선택 가능하며, 또는 모두 사용할 수 있습니다.
+
+<Callout type="danger">
+각각의 어드민 관리 메뉴에서 SMS와 이메일 사용여부가 모두 '사용함'으로 설정되어 있어야 하며, 자동발송항목에 포함되어 있어야 자동발송 처리됩니다.
+
+SMS 알림의 경우 포인트 충전이 되어 있어야 발송 가능한 점을 유의해 주세요.
+</Callout>
+
+## 적립금 지급 설정
+
+<figure><img src="/images/management/accumulation-setting/spaces%2F5MtRLrF338WdIfIJP9jq%2Fuploads%2FIsGiB4CJczybnDXdm2qB%2F%EC%A0%81%EB%A6%BD%EA%B8%88%EC%84%A4%EC%A0%95%EA%B4%80%EB%A6%AC_%EC%A0%81%EB%A6%BD%EA%B8%88%EC%A7%80%EA%B8%89%EC%84%A4%EC%A0%95%20%EB%B3%B5%EC%82%AC.png" alt=""/><figcaption><p>&#x3C;적립금 지급 설정></p></figcaption></figure>
+
+**① 구매 적립금**\
+상품 구매 시 지급되는 적립금으로 상품별, 회원등급별 구매 적립금 설정이 가능합니다.
+
+* 상품 구매 적립금 지급\
+  상품 개별 적립률과 기본 적립률(상품 공통) 적용으로 구분되며, 지급 여부를 설정합니다.\
+  '사용함'으로 설정하면 상품 등록 시 설정한 상품 개별 적립금이 지급됩니다. \
+  📍 [상품관리 > 상품등록 > 판매정보 > 개별 적립금 설정](https://nhn-commerce.gitbook.io/shopby_enterprise_manual/product/add-list)
+* 회원 구매 적립금 지급\
+  회원 등급 등록 시 설정한 구매 지급 적립금 지급 여부를 설정합니다.\
+  '사용함'으로 설정하면 회원등급별 설정에 따른 구매 적립금이 지급됩니다.\
+  📍 [회원관리 > 회원등급관리 > 등급추가 > 구매 시 지급 적립금 설정](https://nhn-commerce.gitbook.io/shopby_enterprise_manual/member/grade)
+* 구매 적립금 기준 금액\
+  적립률 산정의 기준이 되는 최종 구매금액을 설정합니다.\
+  판매가는 적립률산정 기준 금액의 고정값으로 판매가에 즉시할인금액, 옵션가, 프로모션(추가할인/쿠폰/사은품) 할인을 포함 또는 제외하여 설정할 수 있습니다.
+* 구매 적립금 기준 시점\
+  적립금 지급 시점을 주문상태값인 구매확정 상태 이후 '즉시, 익일, 2일, 7일, 14일, 20일, 30일' 중에서 선택합니다.&#x20;
+* 구매 시 적립 제한\
+  구매 시 보유한 적립금을 사용하거나, 쿠폰을 사용한 경우 구매 적립금 지급이 불가하도록 제한하는 기능입니다.
+
+<Callout type="warning">
+상품 개별 적립금을 설정하지 않은 상품의 경우, 기본 적립률을 등록하면 기본 적립률이 적용되어 적립금이 지급됩니다.\
+상품 개별 적립률과 기본 적립률이 동시에 설정되어 있다면, 상품 개별 적립률이 적용되어 적립금이 지급되는 점을 유의해 주세요.&#x20;
+</Callout>
+
+**② 회원가입 적립금**\
+신규 회원 가입 시 지급되는 적립금 사용 여부를 설정합니다.
+
+* '사용함'을 선택하고, 회원가입 적립금을 '원' 단위로 입력합니다.
+* 회원가입 적립금은 회원가입 즉시 자동지급되는 점을 참고해 주세요.
+
+**③ 상품후기 적립금**\
+상품후기 작성 시 지급되는 적립금 사용 여부를 설정합니다.
+
+* 일반 상품후기와, 포토 상품후기로 구분하여 지급할 적립금을 설정할 수 있습니다.&#x20;
+* 상품후기 작성 글자수를 설정하여, 설정한 글자수를 충족하여 작성한 경우에만 적립금이 지급됩니다. \
+  📍 글자수에 공백은 제외
+* 상품후기 작성 시점에 글자수 조건을 충족하지 못했더라도, 수정 시점에 글자수를 충족하여 작성 완료한 경우 적립금이 지급됩니다. \
+  📍 글자수 충족 시점 최종 1회 지급
+* 일반 상품후기와 포토 상품후기 적립금은 중복 지급이 불가하며, 글자수를 모두 만족하여 작성한 경우 포토 상품후기 적립금으로 지급되는 점을 참고해 주세요.
+* 상품후기 적립금은 상품후기 작성 완료 즉시 자동지급됩니다.
+
+**④ 생일 적립금**\
+회원의 생일 당일에 지급되는 적립금 사용 여부를 설정합니다.&#x20;
+
+* '사용함'을 선택하고, 생일 적립금을 '원' 단위로 입력합니다.&#x20;
+* 생일 적립금은회원 ID 1개당 1년에 1회 지급됩니다.
+* 회원 정보 수정으로 생일정보를 변경하더라도, 당해 년도에 생일 적립금이 지급된 회원에게는 중복 지급이 되지 않는 점을 참고해  주세요.
+
+## 적립금 사용 설정
+
+<figure><img src="/images/management/accumulation-setting/spaces%2F5MtRLrF338WdIfIJP9jq%2Fuploads%2FC75IZJIWXzU4b7RoOQlF%2F%EC%A0%81%EB%A6%BD%EA%B8%88%EC%84%A4%EC%A0%95%EA%B4%80%EB%A6%AC_%EC%A0%81%EB%A6%BD%EA%B8%88%EC%82%AC%EC%9A%A9%EC%84%A4%EC%A0%95%20%EB%B3%B5%EC%82%AC.png" alt=""/><figcaption><p>&#x3C;적립금 지급 설정></p></figcaption></figure>
+
+**① 최소 기준 금액**
+
+* 상품 구매 시 적립금 사용을 위해 충족해야 하는 최종 결제금액의 최소값을 설정할 수 있습니다.
+* '기준 금액'을 선택하고 '원' 단위로 최종 결제금액의 최소 금액을 입력합니다.
+
+**② 최소 사용 적립금 설정**
+
+* 상품 구매 시 사용 가능한 적립금의 최소 금액으로, 설정한 금액 미만으로는 적립금 사용이 불가합니다.
+* '적립금'을 선택하고 '원' 단위로 적립금 최소 사용 금액을합니다.
+
+**③ 최대 사용 적립금 설정**
+
+* 상품 구매시 사용 가능한 적립금의 최대 금액으로, 설정한 금액을 초과한 적립금은 사용이 불가합니다.
+* 최대 사용 적립금은 기준금액(최종 결제금액)의 %로 설정합니다.
+
+<Callout type="warning">
+적립금 사용의 기준금액은 '최종 결제금액'을 의미합니다. \
+이 때 최종 결제금액은 주문/결제 페이지에서 쿠폰할인 적용 및 배송비를 포함한 최종 금액입니다.
+</Callout>
+
+***
+
+#### <mark style="color:blue;">**■ 쇼핑몰 적립금 명칭/표시단위 노출**</mark>
+
+<div align="left"><figure><img src="/images/management/accumulation-setting/spaces%2F5MtRLrF338WdIfIJP9jq%2Fuploads%2FNlaRKBsqySvc5IQ4Mbtr%2F%EC%A0%81%EB%A6%BD%EA%B8%88%EC%84%A4%EC%A0%95%EA%B4%80%EB%A6%AC_%EC%A0%81%EB%A6%BD%EA%B8%88%EA%B8%B0%EB%B3%B8%EC%84%A4%EC%A0%95_%ED%94%84%EB%9F%B0%ED%8A%B8%20%EB%B3%B5%EC%82%AC.png" alt="" width="375"/><figcaption><p>&#x3C;쇼핑몰 - <strong>적립금 명칭/표시단위></strong></p></figcaption></figure></div>
+
+***
+
+#### <mark style="color:orange;">**■**</mark> <mark style="color:orange;background-color:yellow;">**적립금 지급 설정 예시**</mark>
+
+<Callout type="warning">
+ⓐ 기본 적립금 **:** 1%\
+ⓑ 상품 개별 적립금 : 2%&#x20;
+
+**⇀  상품 개별 적립금 지급 (중복지급 불가) = 2%**\ <mark style="color:blue;background-color:orange;">기본 적립금과 상품 개별 적립금이 함께 설정되어 있으면, 상품 개별 적립금을 우선으로 적용(지급)합니다.</mark>
+</Callout>
+
+<Callout type="warning">
+ⓐ 기본 적립금 : 1%\
+ⓑ 상품 개별 적립금 : 없음\
+ⓒ 회원그룹 적립금 : 3%\
+ⓓ 회원등급 적립금 : 4%
+
+**⇀  기본 적립금과 회원등급 적립금 지급 = 5% (1%+ 4%)**  \ <mark style="color:blue;background-color:orange;">회원그룹 적립금과 회원등급 적립금이 모두 설정되어 있으면, 혜택을 더 크게 설정한 적립금을 지급합니다.</mark>
+</Callout>
+
+<Callout type="warning">
+ⓐ 기본 적립금 : 1%\
+ⓑ 상품 개별 적립금 : 2%\
+ⓒ 회원그룹 적립금 : 5%\
+ⓓ 회원등급 적립금 : 4%
+
+**⇀  상품 적립금과 회원그룹 적립금 지급 = 7% (2%+ 5%)**  \ <mark style="color:blue;background-color:orange;">우선으로 적용(지급)하는 상품 개별 적립금과 회원그룹/회원등급 적립금 중에서 혜택을 더 크게 설정한 적립금을 지급합니다.</mark>
+</Callout>
+
+***
+
+#### <mark style="color:green;">**■**</mark>**&#x20;**<mark style="color:green;background-color:yellow;">**적립금 사용 설정 예시**</mark>
+
+<table data-view="cards"><thead><tr><th></th><th></th><th></th><th data-hidden data-card-cover data-type="files"></th></tr></thead><tbody><tr><td><strong>A고객</strong><br><br>보유 적립금  :  33,000원<br>최종 결제 금액  : 48,000원</td><td></td><td></td><td><a href="https://4017039665-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F5MtRLrF338WdIfIJP9jq%2Fuploads%2Fgv60IwTCg067RQmQz0Tr%2Fcard-3%20%EB%B3%B5%EC%82%AC.png?alt=media&#x26;token=4ebf37a7-1cc4-4fb4-8dd3-5a7e02693478">card-3 복사.png</a></td></tr></tbody></table>
+
+<Callout type="success">
+**최소 기준 금액 설정**
+
+ⓐ 50,000원  →  최종 결제 금액  〈  최소 기준 금액  :  적립금 사용 불가\
+ⓑ 35,000원  →  최종 결제 금액   〉 최소 기준 금액  :  적립금 사용 가능
+</Callout>
+
+<Callout type="success">
+**최소 사용 적립금**
+
+ⓐ 2,500원  →  보유 적립금   〉  최소 사용 적립금  :  적립금 사용 가능\
+ⓑ 4,000원  →  보유 적립금  〈   최소 사용 적립금  :  적립금 사용 불가
+</Callout>
+
+<Callout type="success">
+**최대 사용 적립금**
+
+ⓐ  5%   →  최종 결제금액  X   5%  :  2,400원\
+ⓑ 10%  →  최종 결제금액  X  10%  :  3,300원
+</Callout>

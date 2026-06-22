@@ -1,0 +1,456 @@
+# workspace-server
+
+**버전**: 1.0
+**서버**: https://server-api.e-ncp.com
+
+워크스페이스 (https://workspace.nhn-commerce.com) 관련 server API 입니다.
+
+---
+
+## app-installed
+
+### PUT /app-installed/extend
+
+**요약**: 설치 앱 만료일 연장하기
+
+**설명**:
+
+## 부가설명 및 특이사항
+
+인앱 결제 완료 시 설치한 앱 만료일을 '최초 세팅' 또는 '연장'합니다.  
+워크스페이스는 판매사로부터 전달받은 '만료일(requestDateTime)'까지, 쇼핑몰 운영자들이 해당 앱을 실행 가능하도록 허용합니다.<br>
+만료일 이후에는 앱이 동작하지 않습니다.
+
+**파라미터**:
+
+| 이름      | 위치   | 타입   | 필수 | 설명 |
+| --------- | ------ | ------ | ---- | ---- |
+| systemKey | header | string | ✅   |
+
+시스템 키 (외부시스템 연동을 위한 server API 호출 키)
+
+- 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능
+- 앱 기준으로 systemKey 발급됨
+  ^|test-system-key |
+  | Authorization | header | string | ✅ |  
+   인증토큰 (Bearer 발급받은 엑세스 토큰)
+- 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)
+
+- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token
+  ^|Bearer ABCDERAdjflaskjdfosiaetlkfs |
+  | Version | header | string | ✅ | API 버전^|1.0 |
+
+**응답**:
+
+- **204**: 204
+
+---
+
+### GET /app-installed/status
+
+**요약**: 앱 사용 상태 조회하기
+
+**설명**:
+
+## 부가설명 및 특이사항
+
+앱 사용 상태를 조회 할 수 있는 API입니다.
+
+앱의 설치 상태를 가져옵니다.
+
+### currentStatus
+
+## 만료(결제대기) EXPIRED
+
+- 앱 실행을 위해 결제가 필요한 앱을 의미합니다.
+  앱 만료일(requestDateTime)이 연장되지 않아 사용할 수 없는 상태의 앱입니다. 쇼핑몰 운영자의 결제 등의 액션에 따른 판매사의 앱 만료일 연장API 호출이 필요합니다.
+- case1. 앱이 초기 설치 되어, 앱 만료일API을 호출하지 않아 앱을 실행할 수 없는 상태.
+- case2. 만료일을 연장하지 않았거나, 환불 등으로 판매사가 앱의 만료일을 초기화한 상태
+
+## 사용 중 ACTIVE
+
+- 앱 사용 중인 상태로, 정상적으로 앱 기능을 사용할 수 있습니다.
+- 무료앱의 경우, 앱을 설치하자마자 active 상태가 됩니다.
+
+## 삭제 DELETED
+
+- 쇼핑몰 운영자가 설치한 앱을 삭제한 상태를 의미합니다. 앱을 다시 사용하려면 쇼핑몰 운영자의 재설치가 필요합니다.
+
+**파라미터**:
+
+| 이름      | 위치   | 타입   | 필수 | 설명 |
+| --------- | ------ | ------ | ---- | ---- |
+| systemKey | header | string | ✅   |
+
+시스템 키 (외부시스템 연동을 위한 server API 호출 키)
+
+- 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능
+- 앱 기준으로 systemKey 발급됨
+  ^|test-system-key |
+  | Authorization | header | string | ✅ |  
+   인증토큰 (Bearer 발급받은 엑세스 토큰)
+- 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)
+
+- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token
+  ^|Bearer ABCDERAdjflaskjdfosiaetlkfs |
+  | Version | header | string | ✅ | API 버전^|1.0 |
+
+**응답**:
+
+- **200**: 200
+
+---
+
+## Auth
+
+### GET /auth/me
+
+**요약**: access_token을 발급한 어드민/몰 정보 조회하기
+
+**설명**:
+
+## 부가설명 및 특이사항
+
+access_token을 발급한 로그인한 어드민의 정보와 몰 정보를 조회합니다.
+
+해당 API를 통해, 앱 개발사가 쇼핑몰 관리자의 정보를 조회할 수 있으며,<br>
+수집하는 정보는 앱 스토어(Appstore)에서 앱 설치 시 구매자들에게 노출됩니다.<br>
+데이터 수집에 대해 동의한 구매자에 한해 앱 설치가 가능하며, 권한 사용 미동의 시 설치 및 판매되지 않습니다.<br>
+
+쇼핑몰 솔루션 타입에 따른 필드 값<br>
+
+## 샵바이
+
+- 상점 고유 번호 : mall.mallNo
+- 어드민 롤 (adminRole): MASTER, NORMAL  
+  <br>
+
+## 고도몰
+
+- 상점 고유 번호 : mall.shopNo
+- 어드민 롤 (adminRole): SUPER_ADMIN, CS, ADMIN
+
+**파라미터**:
+
+| 이름      | 위치   | 타입   | 필수 | 설명 |
+| --------- | ------ | ------ | ---- | ---- |
+| systemKey | header | string | ✅   |
+
+시스템 키 (외부시스템 연동을 위한 server API 호출 키)
+
+- 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능
+- 앱 기준으로 systemKey 발급됨
+  ^|test-system-key |
+  | Authorization | header | string | ✅ |  
+   인증토큰 (Bearer 발급받은 엑세스 토큰)
+- 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)
+
+- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token
+  ^|Bearer ABCDERAdjflaskjdfosiaetlkfs |
+  | Version | header | string | ✅ | API 버전^|1.0 |
+
+**응답**:
+
+- **200**: 200
+
+---
+
+### POST /auth/token
+
+**요약**: authorization code로 단기 토큰발급하기
+
+**설명**:
+
+## 부가설명 및 특이사항
+
+authorization code를 이용해서 단기 access Token(5분)을 발급 받습니다
+
+- 화면 단에서 server API 통신 시 호출하는 API로, 해당 화면을 접속한 클라이언트에 종속되는 토큰입니다.<br>
+- 토큰을 발급한 장비의 IP 에서만 server API 를 호출할 수 있습니다.
+  ex. 고객이 쇼핑몰에 접속한경우 프론트에서 서버 API 호출 바로 할 때
+
+- 만약 서버단에서 데이터를 주기적으로 동기화 하거나 server to server 통신 하기 위할 경우,
+  POST /auth/token/long-lived를 호출하여 장기토큰을 발급받으시길 바랍니다.
+
+- 단기토큰(access_token)의 유효기간: 5분
+  expire_in(토큰 유효기간)이 만료될 경우, 함께 리턴받은 refresh_token을 파라미터로 다시 access_token을 갱신할 수 있습니다.
+
+- 단기토큰(access_token)을 발급받는 방법
+  : 2가지 grant_type에 따라, Request body에 입력해야할 파라미터가 상이합니다.
+- case① authorization_code (authorization code를 통해 access_token을 응답받고자하는 경우)
+- case② refresh_token (발급된 refresh_token을 통해 만료된 access_token을 응답받고자 하는경우)
+
+**파라미터**:
+
+| 이름    | 위치   | 타입   | 필수 | 설명      |
+| ------- | ------ | ------ | ---- | --------- | --- |
+| Version | header | string | ✅   | API 버전^ | 1.0 |
+
+**응답**:
+
+- **200**: 200
+
+---
+
+### POST /auth/token/long-lived
+
+**요약**: authorization code로 장기 토큰발급하기
+
+**설명**:
+
+## 부가설명 및 특이사항
+
+authorization code를 이용해서 장기 access Token(100년)을 발급 받습니다
+
+- 서버단에서 데이터를 주기적으로 동기화 하거나 server to server 통신 시 호출하는 API입니다.
+- 앱에 등록된 IP에서만 server API 를 호출할 수 있습니다.
+- 장기토큰(access_token)의 유효기간: 100년 (사실상 무기한이며, 별도 refresh_token이 없습니다)
+
+-장기토큰(access_token)을 발급받는 방법
+authorization_code (authorization code를 통해 access_token을 응답받을 수 있습니다.
+
+**파라미터**:
+
+| 이름    | 위치   | 타입   | 필수 | 설명      |
+| ------- | ------ | ------ | ---- | --------- | --- |
+| Version | header | string | ✅   | API 버전^ | 1.0 |
+
+**응답**:
+
+- **200**: 200
+
+---
+
+### POST /auth/token/revoke
+
+**요약**: 장기 토큰 제거하기
+
+**설명**:
+
+## 부가설명 및 특이사항
+
+발급된 access_token(장기토큰)을 제거합니다.
+
+**파라미터**:
+
+| 이름      | 위치   | 타입   | 필수 | 설명 |
+| --------- | ------ | ------ | ---- | ---- |
+| systemKey | header | string | ✅   |
+
+시스템 키 (외부시스템 연동을 위한 server API 호출 키)
+
+- 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능
+- 앱 기준으로 systemKey 발급됨
+  ^|test-system-key |
+  | Authorization | header | string | ✅ |  
+   인증토큰 (Bearer 발급받은 엑세스 토큰)
+- 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)
+
+- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token
+  ^|Bearer ABCDERAdjflaskjdfosiaetlkfs |
+  | Version | header | string | ✅ | API 버전^|1.0 |
+
+**응답**:
+
+- **204**: 204
+
+---
+
+## ExternalScript
+
+### GET /external-script
+
+**요약**: 외부스크립트 조회하기
+
+**설명**:
+
+## 부가설명 및 특이사항
+
+등록된 외부스크립트를 조회합니다.
+
+**파라미터**:
+
+| 이름        | 위치   | 타입   | 필수 | 설명                                                                                                                                                                                  |
+| ----------- | ------ | ------ | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---- |
+| scriptTypes | query  | string | ❌   | 스크립트 타입 - (MAIN, COMMON_HEAD, COMMON_FOOTER, PRODUCT, PRODUCT_LIST, PRODUCT_SEARCH, CART, ORDER, ORDER_DETAIL, ORDER_COMPLETE, DISPLAY_SECTION, MEMBER_JOIN_COMPLETE, MY_PAGE)^ | MAIN |
+| deviceTypes | query  | string | ❌   | 디바이스 타입 - (PC, MOBILE)^                                                                                                                                                         | PC   |
+| systemKey   | header | string | ✅   |
+
+시스템 키 (외부시스템 연동을 위한 server API 호출 키)
+
+- 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능
+- 앱 기준으로 systemKey 발급됨
+  ^|test-system-key |
+  | Authorization | header | string | ✅ |  
+   인증토큰 (Bearer 발급받은 엑세스 토큰)
+- 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)
+
+- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token
+  ^|Bearer ABCDERAdjflaskjdfosiaetlkfs |
+  | Version | header | string | ✅ | API 버전^|1.0 |
+
+**응답**:
+
+- **200**: 200
+
+---
+
+### POST /external-script
+
+**요약**: 외부스크립트 등록하기
+
+**설명**:
+
+## 부가설명 및 특이사항
+
+쇼핑몰 운영자가 본인 몰에 앱 최초 실행시점에,
+발급받은 access_token (POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token) 으로
+권한체크를 진행하여, 권한이 있다면 해당 API를 통해 외부스크립트를 mall에 저장합니다.
+
+### ENUM
+
+- MAIN: 메인 페이지
+- COMMON_HEAD: 상단 공통영역
+- COMMON_FOOTER: 하단 공통영역
+- PRODUCT: 상품 상세 페이지
+- PRODUCT_LIST: 상품 리스트 페이지
+- PRODUCT_SEARCH: 상품 검색결과 페이지
+- CART: 장바구니 페이지
+- ORDER: 주문하기 페이지
+- ORDER_DETAIL: 주문상세 페이지
+- ORDER_COMPLETE: 주문완료 페이지
+- DISPLAY_SECTION: 메인 상품 분류
+- MEMBER_JOIN_COMPLETE: 회원가입 완료 페이지
+- MY_PAGE: 마이페이지
+
+## 외부스크립트에서 사용할 수 있는 글로벌 변수는 아래와 같습니다.
+
+| 페이지                    | 설명                      | 변수               | 상세보기                                                                                                                                                                                                                       |
+| ------------------------- | ------------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 공통                      | 디바이스 정보             | sb.getPlatform()   | -                                                                                                                                                                                                                              |
+|                           | 회원정보                  | sb.profile         | [회원정보 조회 API](https://docs.shopby.co.kr/?url.primaryName=member/#/Profile/get-profile)                                                                                                                                   |
+| 상품상세 페이지           | -                         | sb.product         | [상품 상세 조회 API](https://docs.shopby.co.kr/?url.primaryName=product/#/Product/get-products-product)                                                                                                                        |
+| 상품 검색결과 페이지      | -                         | sb.searchedProduct | [상품 검색 API](https://docs.shopby.co.kr/?url.primaryName=product/#/Product/get-products-search)                                                                                                                              |
+| 카테고리 상품조회 페이지  | -                         | sb.searchedProduct | [상품 검색 API](https://docs.shopby.co.kr/?url.primaryName=product/#/Product/get-products-search)                                                                                                                              |
+|                           | 선택된 상품 카테고리 정보 | sb.currentCategory | [카테고리 조회하기 API](https://docs.shopby.co.kr/?url.primaryName=display/#/Category/get-category)                                                                                                                            |
+| 메인분류 상품조회 페이지  | -                         | sb.displaySection  | [상품 디자인 섹션 조회 API](https://docs.shopby.co.kr/?url.primaryName=display/#/ProductSection/get-sections-by-section-id)                                                                                                    |
+| 장바구니 페이지           | -                         | sb.cart            | [회원 장바구니 조회 API](https://docs.shopby.co.kr/?url.primaryName=order/#/Cart/get-cart)<br>[비회원 장바구니 조회 API](https://docs.shopby.co.kr/?url.primaryName=order/#/GuestOrder/post-guest-cart)                        |
+| 주문서 작성/결제 페이지   | -                         | sb.orderSheet      | [주문서 조회 API](https://docs.shopby.co.kr/?url.primaryName=order/#/OrderSheet/get-order-sheet)                                                                                                                               |
+| 주문완료, 주문상세 페이지 | -                         | sb.order           | [회원 주문 조회 API](https://docs.shopby.co.kr/?url.primaryName=order/#/MyOrder/get-profile-orders-order-no)<br>[비회원 주문 조회 API](https://docs.shopby.co.kr/?url.primaryName=order/#/MyOrder/get-profile-orders-order-no) |
+| 회원가입 완료 페이지      | -                         | -                  | -                                                                                                                                                                                                                              |
+| 마이 페이지               | -                         | -                  | -                                                                                                                                                                                                                              |
+
+**파라미터**:
+
+| 이름      | 위치   | 타입   | 필수 | 설명 |
+| --------- | ------ | ------ | ---- | ---- |
+| systemKey | header | string | ✅   |
+
+시스템 키 (외부시스템 연동을 위한 server API 호출 키)
+
+- 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능
+- 앱 기준으로 systemKey 발급됨
+  ^|test-system-key |
+  | Authorization | header | string | ✅ |  
+   인증토큰 (Bearer 발급받은 엑세스 토큰)
+- 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)
+
+- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token
+  ^|Bearer ABCDERAdjflaskjdfosiaetlkfs |
+  | Version | header | string | ✅ | API 버전^|1.0 |
+
+**응답**:
+
+- **204**: 204
+
+---
+
+### DELETE /external-script
+
+**요약**: 외부스크립트 삭제하기
+
+**설명**:
+
+## 부가설명 및 특이사항
+
+발급받은 access_token (POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token) 으로
+권한체크를 진행하여, 권한이 있다면 해당 API를 통해 외부스크립트를 mall에서 제거합니다
+
+기기 및 스크립트 타입 별로 앱에 등록된 외부스크립트 삭제가 가능합니다.<br>
+ex) 기기타입: PC, 스크립트 타입: MAIN 으로 요청 시, 기기 타입이 PC이면서 스크립트 타입이 MAIN(쇼핑몰 메인화면 위치)인 외부스크립트만 제거됩니다.
+
+**파라미터**:
+
+| 이름       | 위치   | 타입   | 필수 | 설명                                                                                                                                                                                  |
+| ---------- | ------ | ------ | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---- |
+| deviceType | query  | string | ❌   | 기기 타입 - (PC, MOBILE)^                                                                                                                                                             | PC   |
+| scriptType | query  | string | ❌   | 스크립트 타입 - (MAIN, COMMON_HEAD, COMMON_FOOTER, PRODUCT, PRODUCT_LIST, PRODUCT_SEARCH, CART, ORDER, ORDER_DETAIL, ORDER_COMPLETE, DISPLAY_SECTION, MEMBER_JOIN_COMPLETE, MY_PAGE)^ | MAIN |
+| systemKey  | header | string | ✅   |
+
+시스템 키 (외부시스템 연동을 위한 server API 호출 키)
+
+- 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능
+- 앱 기준으로 systemKey 발급됨
+  ^|test-system-key |
+  | Authorization | header | string | ✅ |  
+   인증토큰 (Bearer 발급받은 엑세스 토큰)
+- 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)
+
+- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token
+  ^|Bearer ABCDERAdjflaskjdfosiaetlkfs |
+  | Version | header | string | ✅ | API 버전^|1.0 |
+
+**응답**:
+
+- **204**: 204
+
+---
+
+## Webhook
+
+### GET /webhooks/failed
+
+**요약**: 실패한 웹훅 조회하기
+
+**설명**:
+
+## 부가설명 및 특이사항
+
+웹훅 발송 시 실패했던 내역을 조회합니다.
+
+7일 이내의 검색 기간에 한해서만 조회가 가능합니다.
+
+웹훅 실패 내역의 보관기간은 생성일로부터 6개월 입니다.
+
+**파라미터**:
+
+| 이름          | 위치   | 타입   | 필수 | 설명                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| ------------- | ------ | ------ | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------- |
+| page          | query  | number | ❌   | 페이지 번호^                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | 1                   |
+| pageSize      | query  | number | ❌   | 페이지 사이즈^                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | 10                  |
+| startDateTime | query  | string | ✅   | 검색 시작 일시^                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | 2025-10-27 11:37:18 |
+| endDateTime   | query  | string | ✅   | 검색 종료 일시^                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | 2025-11-03 11:37:18 |
+| mallNos       | query  | string | ❌   | 샵바이 쇼핑몰 번호 리스트(`샵바이 전용`)^                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | 1,2                 |
+| shopNos       | query  | string | ❌   | 고도몰 상점 번호 리스트(`고도몰 전용`)^                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | 1,2                 |
+| eventType     | query  | string | ❌   | 웹훅 이벤트 타입 - (CHANGE_APP_STATUS: 앱 설치/삭제, PRODUCT_INQUIRY_ADDED: 상품문의 등록, PRODUCT_INQUIRY_DELETED: 상품문의 삭제, PRODUCT_REVIEW_ADDED: 상품 후기 등록, PRODUCT_REVIEW_DELETED: 상품 후기 삭제, INQUIRY_ADDED: 1:1문의 등록, INQUIRY_MODIFIED: 1:1문의 변경, INQUIRY_DELETED: 1:1문의 삭제, ACCUMULATION_ADDED: 적립금 지급, ACCUMULATION_SUBTRACTED: 적립금 차감, ACCUMULATION_SUBTRACT_ROLLBACK: 적립금 차감 취소, MEMBER_CREATED: 회원가입, MEMBER_INFO_CHANGED: 회원정보변경, MEMBER_GRADE_CHANGED: 회원등급변경, MEMBER_GROUP_CHANGED: 회원그룹변경, MEMBER_WITHDRAW: 회원탈퇴, MEMBER_DORMANT: 휴면회원 전환, MEMBER_RELEASED: 휴면회원 해제, CREATE_ORDER: 주문생성, CHANGE_ORDER_STATUS: 주문상태변경, UPDATE_RECEIVER: 수령자 정보 변경, ADD_TASK_MESSAGE: 업무메세지 등록, UPDATE_TASK_MESSAGE: 업무메세지 수정, PRODUCT_UPDATED: 상품 등록/수정/삭제, GD_MEMBER_LOGGED_IN: 회원 로그인, GD_MEMBER_CREATED: 회원 가입, GD_MEMBER_GRADE_CHANGED: 회원 등급 변경, GD_MEMBER_INFO_CHANGED: 회원 정보 변경, GD_MEMBER_WITHDRAW: 회원 탈퇴, GD_ORDER_COMPLETED: 주문 완료, GD_ORDER_CREATED: 입금대기 주문 생성, GD_ORDER_GOODS_STATUS_CHANGED: 주문 상품 상태 변경, GD_PRODUCT_UPDATED: 상품 등록/수정/삭제)^ | CHANGE_APP_STATUS   |
+| direction     | query  | string | ❌   | 정렬 방향 (기본값: DESC)^                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | DESC                |
+| systemKey     | header | string | ✅   |
+
+시스템 키 (외부시스템 연동을 위한 server API 호출 키)
+
+- 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능
+- 앱 기준으로 systemKey 발급됨
+  ^|test-system-key |
+  | Authorization | header | string | ✅ |  
+   인증토큰 (Bearer 발급받은 엑세스 토큰)
+- 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)
+
+- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token
+  ^|Bearer ABCDERAdjflaskjdfosiaetlkfs |
+  | Version | header | string | ✅ | API 버전^|1.0 |
+
+**응답**:
+
+- **200**: 200
+
+---

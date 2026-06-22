@@ -1,0 +1,62 @@
+---
+title: "AgeVerificationProvider"
+depth: 5
+path: "오로라 리액트 스킨개발가이드 > 개발 프로세스 > 2️⃣Aurora React 샘플스킨 확인 > @shopby/react-components > auth > AgeVerificationProvider"
+---
+
+# AgeVerificationProvider
+
+* 회원 성인인증 여부를 갱신하는 프로바이더입니다.
+    * 성인인증 기록은 1년동안 유지됩니다.
+    * 기간 내 다시 인증에 성공할 경우 성인인증 일시와 만료일은 갱신됩니다.
+
+## 속성
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | ---- | --- | ---- | --- |
+| children | o | ReactNode | - |  |
+
+## 상태
+
+* `ageVerificationState` 는 `useAgeVerificationStateContext` 를 호출해 사용합니다.
+
+```typescript
+const ageVerificationState = useAgeVerificationStateContext();
+```
+
+| 이름 | 타입 | 기본 값 | 설명 |
+| --- | --- | ---- | --- |
+| ageVerificationDetail | object |  | 본인인증 완료 시 응답되는 값 |
+| ㄴ birthday | string | '' | 생년월일 |
+| ㄴ verified | boolean | false | 성인인증 완료 여부 |
+| ㄴ verifiedDateTime | string | '' | 성인인증 일시
+예) 2023-04-17T15:39:32.373159 |
+
+## 액션
+
+* `ageVerificationAction` 은 `useAgeVerificationActionContext` 를 호출해 사용합니다.
+
+```typescript
+const ageVerificationAction = useAgeVerificationActionContext();
+```
+
+| 이름 | 필수여부 | 인자타입 | 기본 값 | 설명 | 관리하는 상태 |
+| --- | ---- | ---- | ---- | --- | ------- |
+| postKcpAgeVerification | o | object | - | - | ageVerificationState.ageVerificationDetail |
+| ㄴ key | o | string | - | 본인인증 키 | - |
+
+## 사용 예시
+
+```typescript
+const Example = () => (
+  
+    
+       {
+          navigate('/');
+        }}
+      />
+      
+    
+  
+);
+```

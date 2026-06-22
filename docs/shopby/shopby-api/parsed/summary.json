@@ -1,0 +1,185 @@
+{
+  "totalSpecs": 22,
+  "totalEndpoints": 635,
+  "specs": [
+    {
+      "name": "admin-server",
+      "endpointCount": 21,
+      "categories": ["Admin", "Mall-Domain", "Contract", "Currency", "Mall", "Partner", "Service"]
+    },
+    {
+      "name": "admin-shop",
+      "endpointCount": 4,
+      "categories": ["Mall"]
+    },
+    {
+      "name": "claim-server",
+      "endpointCount": 17,
+      "categories": [
+        "CancelExchange",
+        "Claim",
+        "OptionCancel",
+        "OrderCancel",
+        "ReturnExchange",
+        "Return"
+      ]
+    },
+    {
+      "name": "claim-shop",
+      "endpointCount": 34,
+      "categories": ["Guest", "Member"]
+    },
+    {
+      "name": "delivery-server",
+      "endpointCount": 15,
+      "categories": ["AreaFee", "Delivery", "Warehouse"]
+    },
+    {
+      "name": "display-server",
+      "endpointCount": 29,
+      "categories": ["Banner", "Category", "Event", "ProductInquiry", "Review", "Sticker"]
+    },
+    {
+      "name": "display-shop",
+      "endpointCount": 68,
+      "categories": [
+        "Category",
+        "Review",
+        "Popup",
+        "Event",
+        "ProductSection",
+        "Banner",
+        "ProductInquiry",
+        "SkinBanner",
+        "[Sticker]"
+      ]
+    },
+    {
+      "name": "manage-server",
+      "endpointCount": 17,
+      "categories": ["Accumulations", "Inquiry", "Kakao", "Terms"]
+    },
+    {
+      "name": "manage-shop",
+      "endpointCount": 44,
+      "categories": [
+        "Address",
+        "Board",
+        "Holiday",
+        "Inquiry",
+        "Page",
+        "Accumulation",
+        "Instagram",
+        "Terms"
+      ]
+    },
+    {
+      "name": "marketing-server",
+      "endpointCount": 4,
+      "categories": ["Campaign", "Marketing"]
+    },
+    {
+      "name": "marketing-shop",
+      "endpointCount": 1,
+      "categories": ["Marketing"]
+    },
+    {
+      "name": "member-server",
+      "endpointCount": 30,
+      "categories": ["Configuration", "MemberGrade", "Group", "Member", "Profile"]
+    },
+    {
+      "name": "member-shop",
+      "endpointCount": 45,
+      "categories": ["Company", "Member-Config", "Member-Grade", "Member-Group", "Profile"]
+    },
+    {
+      "name": "order-friends-server",
+      "endpointCount": 10,
+      "categories": ["OrderCs", "Settlements", "Statistic"]
+    },
+    {
+      "name": "order-server",
+      "endpointCount": 31,
+      "categories": [
+        "Orders",
+        "Cart",
+        "PreviousOrder",
+        "RecurringPayment",
+        "ShippingAddress",
+        "TaskMessage",
+        "Wish"
+      ]
+    },
+    {
+      "name": "order-shop",
+      "endpointCount": 121,
+      "categories": [
+        "AppCard",
+        "Cart",
+        "GuestOrder",
+        "LaterShippingInput",
+        "MyPay",
+        "OrderConfiguration",
+        "OrderSheet",
+        "Purchase",
+        "NaverPay",
+        "PreviousOrder",
+        "MyOrder",
+        "ShippingAddress",
+        "RecurringPayment",
+        "UnidentifiedDepositors",
+        "Wish"
+      ]
+    },
+    {
+      "name": "product-server",
+      "endpointCount": 53,
+      "categories": [
+        "Brand",
+        "Custom Property",
+        "Duty Category",
+        "Profile",
+        "Product",
+        "Product Guide",
+        "Product Option",
+        "Purchase Permission"
+      ]
+    },
+    {
+      "name": "product-shop",
+      "endpointCount": 50,
+      "categories": [
+        "Additional Discount",
+        "Brand",
+        "Free Gift",
+        "Profile",
+        "Product",
+        "Custom Property",
+        "Product Option",
+        "Configuration"
+      ]
+    },
+    {
+      "name": "promotion-server",
+      "endpointCount": 15,
+      "categories": ["Coupon", "CouponIssue", "CouponUse"]
+    },
+    {
+      "name": "promotion-shop",
+      "endpointCount": 15,
+      "categories": ["Coupon", "CouponIssue"]
+    },
+    {
+      "name": "workspace-server",
+      "endpointCount": 10,
+      "categories": ["app-installed", "Auth", "ExternalScript", "Webhook"]
+    },
+    {
+      "name": "workspace-shop",
+      "endpointCount": 1,
+      "categories": ["ExternalScript"]
+    }
+  ],
+  "generatedAt": "2025-11-02T17:37:26.517Z"
+}

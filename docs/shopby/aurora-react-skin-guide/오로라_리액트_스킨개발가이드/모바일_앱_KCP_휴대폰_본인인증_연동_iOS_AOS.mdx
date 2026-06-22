@@ -1,0 +1,277 @@
+---
+title: "[모바일 앱] KCP 휴대폰 본인인증 연동(iOS/AOS)"
+depth: 1
+path: "오로라 리액트 스킨개발가이드 > [모바일 앱] KCP 휴대폰 본인인증 연동(iOS/AOS)"
+---
+
+# [모바일 앱] KCP 휴대폰 본인인증 연동(iOS/AOS)
+
+## 이해하기
+`본 문서는 KCP 휴대폰 본인인증 모듈을 모바일 앱(iOS/AOS)에 연동 시 참고하실 수 있는 문서입니다.`
+>  휴대폰 본인인증 모듈은 iOS/AOS 어플리케이션 내 webview를 이용하여 연동합니다.
+
+
+
+* iOS 매뉴얼
+* Android 매뉴얼
+
+
+
+휴대폰 본인인증 모듈에 대한 가이드는 [휴대폰 본인인증 가이드](https://nhnent.dooray.com/share/pages/WoOk8q6KT1K3MZcLSuyZsw/3519672146931610790)를 참고하세요.
+
+
+***
+
+
+## ```iOS 매뉴얼```
+### ? Xcode 설정 (iOS PASS 앱 관련 스키마 등록)
+통신사의 PASS 앱(간편본인확인 앱)이 업데이트됨에 따라 iOS에서 가맹점 앱 서비스를 제공하는 경우, iOS9부터 보안을 강화하는 목적으로 앱을 호출할 때 앱 스키마를 등록해주어야 합니다.
+| 통신사 | 앱 스키마 |
+| --- | ----- |
+| SKT | tauthlink |
+| KT | ktauthexternalcall |
+| LG | upluscorporation |
+
+
+**ⓐ Info.plist 파일에 LSApplicationQueriesSchemes 배열을 정의하여 앱 스키마를 등록합니다.**
+*  ㉠ Information Property List에 LSApplicationQueriesSchemes를 `Array` 타입으로 추가합니다.
+* ㉡ LSApplicationQueriesSchemes 하위 리스트에 String 타입으로 `Item`을 추가합니다.
+* ㉢ `Item` 마다 앱 스키마를 입력합니다.
+![kcp_cert_ios_2.jpg](https://nhnent.dooray.com/share/tree/WoOk8q6KT1K3MZcLSuyZsw/pages/3615381963904646601/attach-files/3615919774070825515)
+
+
+
+**ⓑ KCP 휴대폰 본인인증 완료 후 `key`값을 넘겨받기 위해 스키마를 등록합니다.**
+![kcp_cert_ios_1.jpg](https://nhnent.dooray.com/share/tree/WoOk8q6KT1K3MZcLSuyZsw/pages/3615381963904646601/attach-files/3615919773962314739)
+
+
+
+### ?HTML form 획득
+KCP 휴대폰 본인인증 모듈 팝업을 출력하기 위해서 `GET /kcp/id-verification`을 통해  KCP로 제출할 HTML form을 요청해야 합니다.
+
+> [GET /kcp/id-verification/form](https://docs.shopby.co.kr/?url.primaryName=auth/#/KCPCertification/get-kcp-id-verification-form)
+```
+▶ KCP 본인인증 요청하기
+본인 인증을 위한 form을 생성합니다.
+```
+
+
+> ❗ 주의사항
+> 위 API가 아닌 임의로 form을 작성할 경우, NHN커머스 샵바이 측으로 callback을 받을 수 없습니다.
+> 반드시 위 API 응답값으로 받은 form을 사용하시길 바랍니다.
+* 응답값은 text/html 형식의 html form 양식입니다.
+* returnURI는 `scheme:// `형식으로 작성합니다. (예 `shopbyexample://form` ? - ⓑ 이미지 참고)
+* 해당 API 호출시 `request header`내  `platform` 정보에 반드시 iOS를 입력하셔야 PASS 앱을 위한 아래의 추가변수가 form양식에 넘어옵니다.
+
+
+
+**예시코드**
+```
+
+```
+
+
+
+### ? 구현하기
+**ⓐ WKWebview 구성**
+KCP 휴대폰본인인증 모듈은 웹으로 지원되기 때문에 WKWebview로 구성해야 합니다.
+```
+wkWebView.navigationDelegate = self
+wkWebView.uiDelegate = self
+wkWebView.configuration.preferences.javaScriptCanOpenWindowsAutomatically = true
+```
+
+
+**ⓑ webview - LoadData**
+`GET /kcp/id-verification`호출로 전달받은 form을 webview에 로드합니다.
+```
+var htmlString = """
+KCPCert
+\(formData)  // formData 는 html form 양식입니다.
+
+"""wkWebView.loadHTMLString(htmlString, baseURL: Bundle.main.bundleURL)
+```
+
+
+**ⓒ form.submit()**
+webview의 `evaluateJavaScript`을 이용하여 form을 submit합니다.
+form이 submit되면 webview에서 새 창으로 KCP 휴대폰 본인인증 페이지가 노출됩니다.
+>❗ 주의사항
+> 휴대폰 본인인증 화면은 WKWebview에서 새 창으로 열릴 수 있도록 구성해 주셔야 합니다. (ⓒ참고)
+> `evaluateJavaScript`는 html 폼 양식이 완전히 로드된 후( `webview didFinish`시점) 호출해 주시면 됩니다.
+```
+let injectJavaScript: String = """
+// form id : form_auth
+document.getElementById("form_auth").submit();
+"""
+var jsStr = injectJavaScript.trimmingCharacters(in: .whitespaces)
+jsStr = jsStr.trimmingCharacters(in: .whitespacesAndNewlines)
+jsStr = jsStr.trimmingCharacters(in: .newlines)
+wkWebView.evaluateJavaScript(jsStr, completionHandler: nil)
+```
+
+
+**ⓓ WKWebview 구현**
+WKWebview를 새 창으로 구현합니다.
+>아래 구현방식은 KCP 휴대폰 본인인증 연동을 위한 샘플이며, 개발 시 참고용으로 사용하시길 바랍니다.
+```
+func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+    let createWebView = WKWebView(frame: self.wkWebView.frame, configuration: configuration)
+    createWebView.navigationDelegate = self
+    createWebView.uiDelegate = self
+    self.view.addSubview(createWebView)
+    return createWebView
+}
+```
+
+
+**ⓔ Key 파라미터 획득**
+ `returnURI`로 전달받은 `URI`를 parsing하여  `key`값을 추출합니다.
+WKWebview Delegate (WKNavigationDelegate)
+```
+public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, preferences: WKWebpagePreferences, decisionHandler: @escaping (WKNavigationActionPolicy, WKWebpagePreferences) -> Void) {
+    var policy = WKNavigationActionPolicy.allow
+    if let requestURL = navigationAction.request.url {
+        if requestURL.scheme == "shopbyexample"  {
+                        if let host = requestURL.host, host == "form" {
+                            if let _ = requestURL.query as String? {
+                                if let urlComponent = URLComponents(url: requestURL, resolvingAgainstBaseURL: true) {
+                                    let queryItems = urlComponent.queryItems
+                                    if let key = queryItems?.first(where: { $0.name == "key" })?.value {
+                                        print("key : \(key)")
+                                    }
+                                }
+                            }
+                            policy = .allow
+                            decisionHandler(policy, preferences)
+                            return
+                        }
+                    }
+                    UIApplication.shared.open(requestURL, options: [:], completionHandler: nil)
+                    policy = .cancel
+    }
+    decisionHandler(policy, preferences)
+}
+```
+
+
+### ? 본인인증 결과 조회
+해당 `key`로 본인인증 인증 성공 및 실패 여부를 판단한 뒤, 화면에 성공 및 실패 결과를 전달합니다.
+>[GET /kcp/id-verification/response](https://docs.shopby.co.kr/?url.primaryName=auth/#/KCPCertification/get-kcp-id-verification-response)
+```
+▶ KCP 본인인증 결과 조회하기
+NHN KCP 본인인증 결과를 확인합니다.
+```
+
+
+### ? 샘플코드(참고)
+[KCPCertViewController.swift](/share/tree/WoOk8q6KT1K3MZcLSuyZsw/pages/3615381963904646601/files/3615931128094936280?disposition=attachment)  참고
+
+
+
+
+***
+
+
+
+
+## ```Android 매뉴얼```
+### ? webview 세팅
+KCP 본인인증을 모바일로 사용하기 위해 webview를 세팅합니다.
+```kotlin
+binding.webView.apply {
+    settings.apply {
+        javaScriptEnabled = true
+        javaScriptCanOpenWindowsAutomatically = true
+        supportMultipleWindows()
+    }
+}
+```
+
+
+### ? HTML form 획득
+KCP 휴대폰 본인인증 모듈 팝업을 출력하기 위해서 `GET /kcp/id-verification`을 통해 KCP로 제출할 HTML form을 요청해야 합니다.
+>[GET /kcp/id-verification/form](https://docs.shopby.co.kr/?url.primaryName=auth/#/KCPCertification/get-kcp-id-verification-form)
+```
+▶ KCP 본인인증 요청하기
+본인 인증을 위한 form을 생성합니다.
+```
+
+
+> ❗ 주의사항
+> 위 API가 아닌 임의로 form을 작성할 경우, NHN커머스 샵바이 측으로 callback을 받을 수 없습니다.
+> 반드시 위 API 응답값으로 받은 form을 사용하시길 바랍니다.
+* 응답값은 text/html 형식의 html form 양식입니다.
+* returnURI는 `scheme:// `형식으로 작성합니다. (예 `shopbyexample://form.html`)
+
+
+### ? 구현하기
+**ⓐ webview - LoadData**
+`GET /kcp/id-verification`을 호출하여 전달받은 form을 webview에 로드합니다.
+```kotlin
+loadDataWithBaseURL(baseUrl, apiResponseData, "text/html", "UTF-8", "")
+```
+
+
+**ⓑ form.submit()**
+webview의 `evaluateJavaScript`을 이용하여 form을 submit합니다.
+form이 submit되면 webview에서 KCP 휴대폰 본인인증 페이지로 리다이렉트 됩니다.
+```kotlin
+binding.webView.evaluateJavascript("document.form_auth.submit()") {}
+```
+`evaluateJavaScript`는 html 폼 양식이 완전히 로드된 후 `WebViewClient`를 이용하여 호출할 수 있습니다.
+```kotlin
+binding.webView.apply {
+    webViewClient = object : WebViewClient() {
+        override fun onPageFinished(view: WebView?, url: String?) {
+            super.onPageFinished(view, url)
+            if (url?.startsWith(baseUrl) == true) {
+                binding.webView.evaluateJavascript("document.form_auth.submit()") {}
+            }
+
+        }
+    }
+}
+```
+
+
+**ⓒ Key 파라미터 획득**
+본인인증이 정상적으로 끝났다면, `returnURI`로 `key`값을 전달 받습니다.
+```
+{YOUR_RETURN_URL}?key=XXXXXXXXXX
+```
+
+`WebViewClient`의 `shouldOverrideUrlLoading`을 통해 `key`값을 추출할 수 있습니다.
+```kotlin
+binding.webView.apply {
+    webViewClient = object : WebViewClient() {
+        override fun shouldOverrideUrlLoading(
+            view: WebView?,
+            request: WebResourceRequest?
+        ): Boolean {
+            if (request?.url.toString().startsWith(returnUrl)) {
+                val uri = Uri.parse(request?.url.toString())
+                val isContainsKey = uri.queryParameterNames.contains("key") // 파라미터에 key가 포함되어있는지 확인
+                if (isContainsKey) println("key = ${uri.getQueryParameter("key")}") // key 추출
+
+                //TODO:  key 추출 이후 과정을 이 곳에서 진행하시면 됩니다.
+                return isContainsKey
+            }
+            return super.shouldOverrideUrlLoading(view, request)
+        }
+    }
+}
+```
+
+
+### ? 본인인증 결과 조회
+해당 `key`로 본인인증 인증 성공 및 실패 여부를 판단한 뒤, 화면에 성공 및 실패 결과를 전달합니다.
+>[GET /kcp/id-verification/response](https://docs.shopby.co.kr/?url.primaryName=auth/#/KCPCertification/get-kcp-id-verification-response)
+```
+▶ KCP 본인인증 결과 조회하기
+NHN KCP 본인인증 결과를 확인합니다.
+```
+
+
+### ? 샘플코드(참고)
+[MainActivity.kt](/share/tree/WoOk8q6KT1K3MZcLSuyZsw/pages/3615381963904646601/files/3615929480452935780?disposition=attachment)  참고

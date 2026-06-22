@@ -1,0 +1,62 @@
+---
+title: "토큰 갱신 콜백 옵션 가이드"
+depth: 1
+path: "오로라 리액트 스킨개발가이드 > 토큰 갱신 콜백 옵션 가이드"
+---
+
+# 토큰 갱신 콜백 옵션 가이드
+
+## :robot_face: 기능
+
+OAuth 2.0을 사용하는 경우, Access Token 갱신 시 핸들링 가능한 콜백 옵션이 추가되었습니다.
+
+### :linked_paperclips: 관련 문서
+
+* 릴리즈 노트
+    * 통합형 스킨 - [v1.16.0 ✨ 대표전시카테고리 추가 외 4건](https://skins.shopby.co.kr/shopby/aurora-skin/-/releases/v1.16.0)
+* [OAuth2.0 적용 가이드](https://nhnent.dooray.com/share/pages/WoOk8q6KT1K3MZcLSuyZsw/3921105861495547542)
+
+## :memo: 내용
+
+Access Token이 갱신 될 때 실행되는 콜백 옵션을 관리하는 방법을 안내합니다.
+
+## :man-shrugging: 사용법
+
+`src/utils/api.js` 파일에서 `apiCreator` 실행시 콜백 옵션을 추가할 수 있습니다.
+
+```js
+// src/utils/api.js
+...
+
+await apiCreator({
+    ...,
+    handlers: {
+      onTokenRefresh: (data) => {
+        // 토큰 갱신 시 실행할 동작 정의
+      },
+    },
+  });
+```
+
+
+
+
+### 예시
+
+```js
+// src/utils/api.js
+...
+
+await apiCreator({
+    ...,
+    handlers: {
+      onTokenRefresh: (data) => {
+        console.log('토큰 갱신', data);
+      },
+    },
+  });
+```
+
+### 결과
+
+![Inline-image-2025-11-18 17.01.07.286.png](https://nhnent.dooray.com/share/tree/WoOk8q6KT1K3MZcLSuyZsw/pages/4204305727359460452/attach-files/4204306283503264770)

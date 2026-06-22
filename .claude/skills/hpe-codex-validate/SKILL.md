@@ -1,15 +1,12 @@
 ---
 name: hpe-codex-validate
 description: >
-  후니프린팅 가격계산 엔진 설계를 Codex(gpt-5.5)로 독립 2차 교차검증(2nd opinion)하고 hpe-validator(Claude) 판정과
-  reconcile하는 방법론 스킬(Phase 5.5). `codex exec` 읽기전용 비대화 호출(hqv-codex-cross-verify/scripts/codex-review.sh)로
-  engine-designer 설계+cartographer 지도+benchmark 흡수후보+golden-cases를 넘겨 "이 가격공식+구성요소 설계가 상품을 실제
-  가격계산 가능하게 하는가·흡수가 답습/overfit 아닌가·골든이 재현되는가"를 Claude와 독립으로 판정받고 합의/불일치를 reconcile.
-  ★핵심 경계[HARD]=Codex 제안은 외부 의견·가설(라이브/권위 검증 전 채택 금지·환각 경계). codex 프롬프트에 hpe-validator
-  판정 비노출(독립성). codex-preflight로 가용성 판정(AUTH_STALE vs DEADLOCK), 미가용 시 "Claude 단독" 명시 폴백(pending 금지)·
-  codex 읽기전용(-s read-only·파일/DB 쓰기 0)·비밀값 프롬프트 비노출. 'codex 설계검증', 'codex 교차검증', '설계 2nd opinion',
-  'E게이트 독립 재판정', 'reconcile', 'codex 검증 다시' 작업 시 반드시 이 스킬을 사용. 설계 생성은 hpe-engine-design,
-  Claude측 E게이트 검증은 hpe-design-validation이 담당하므로 그 작업에는 트리거하지 않는다.
+  후니프린팅 가격엔진 설계를 Codex(gpt-5.5)로 독립 2차 교차검증하고 hpe-validator(Claude) 판정과 reconcile하는
+  방법론(Phase 5.5). codex exec 읽기전용으로 designer 설계+지도+흡수후보+golden을 넘겨 가격계산 가능성·흡수 타당성·
+  골든 재현을 독립 판정·합의/불일치 reconcile. Codex 주장=가설·환각 경계(검증 전 채택 금지)·validator 판정 비노출(독립성)·
+  미가용 시 Claude 단독 폴백(pending 금지)·읽기전용.
+  트리거: codex 설계검증, codex 교차검증, 설계 2nd opinion, E게이트 독립 재판정, reconcile, codex 검증 다시.
+  설계 생성은 hpe-engine-design, Claude측 E게이트 검증은 hpe-design-validation.
 metadata:
   version: "1.0.0"
   category: "domain"

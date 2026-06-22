@@ -1,0 +1,1217 @@
+---
+title: "member-shop"
+description: "쇼핑몰 회원(member) 관련 shop API입니다."
+version: "1.0"
+category: "Shop API"
+---
+
+# member-shop
+
+:::info API 소개
+ 쇼핑몰 회원(member) 관련 shop API입니다.
+:::
+
+## 서버 정보
+
+| 환경 | Base URL |
+|------|----------|
+| Production | `https://shop-api.e-ncp.com` |
+
+## 리소스 목록
+
+| 리소스 | 설명 |
+|--------|------|
+| **Company** | 법인 |
+| **Profile** | 프로필 |
+
+## API 엔드포인트
+
+## Company — 법인
+
+### 🟢 `GET` `/companies/business-exist`
+
+**사업자회원 사업자등록번호 중복체크**
+
+> operationId: `check-duplicated-business`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `registration` | query | ✅ | `string` | 사업자등록번호 (10자리)^|1234567890 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+## Member-Config
+
+### 🟢 `GET` `/config/member-extra-info`
+
+**회원정보 추가항목 Config 조회**
+
+> operationId: `get-member-extra-info-config`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+## Member-Grade
+
+### 🟢 `GET` `/member-grades`
+
+**회원 등급 정보 조회하기**
+
+> operationId: `get-member-grades`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `gradeNos` | query | - | `string` | "회원 등급 번호 리스트 (미 입력 시 쇼핑몰에 등록된 모든 회원 등급 정보를 조회합니다.)^|1,2,3" |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+## Member-Group
+
+### 🟢 `GET` `/member-groups`
+
+**회원 그룹 정보 조회하기**
+
+> operationId: `get-member-groups`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `groupNos` | query | - | `string` | "회원 그룹 번호 리스트 (미 입력 시 쇼핑몰에 등록된 모든 그룹 정보를 조회합니다.)^|1,2,3" |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+## My
+
+### 🟢 `GET` `/my/marketing-privacy`
+
+**마케팅 개인정보 수집/이용 동의 여부 조회 - 미동의**
+
+> operationId: `get-marketing-privacy-`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 액세스 토큰^|accessToken |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+## 마케팅 개인정보 수집/이용 동의 여부 조회
+
+### 응답 값
+- `isAgreed = true`: 동의
+- `isAgreed = false`: 미동의
+- `isAgreed = null`: 동의/미동의 설정 전 <-- 마케팅 목적의 개인정보 수집/이용 동의 약관 알림 노출 필요
+
+### 동의 여부 판단 기준
+SA 서비스 관리 > 약관/개인정보처리방침 관리 > 개인정보 수집/동의 항목(탭) > **마케팅 목적의 개인정보 수집/이용 동의** 설정에 따라 결정됩니다.
+
+#### 조건별 반환 값
+| 사용 여부 | 안내 노출 여부 | 반환 값 |
+|:--------:|:------------:|:------:|
+| 사용함    | 사용함        | `true(동의)` / `false(비동의)` / `null(동의/비동의 설정 전)` (회원 동의 데이터 기준) |
+| 그 외     | -            | `false` |
+
+---
+
+## Profile — 프로필
+
+### 🟢 `GET` `/profile`
+
+**회원정보 조회하기**
+
+> operationId: `get-profile`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 액세스 토큰^|accessToken |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+## 부가설명 및 특이사항
+ 회원 정보를 조회합니다.
+ 
+## OAUTH2 참고사항 
+* [Oauth2\
+        \ API](https://docs.shopby.co.kr/?url.primaryName=auth/#/OAUTH2/post-oauth2-token)\
+        \ 를 사용하여 토큰을 발급받은 경우,
+* 기존 accessToken 대신 Shop-By-Authorization 로 액세스 토큰을\
+        \ 전달해야합니다.
+* ex) Shop-By-Authorization : Bearer test-access-token
+
+---
+
+### 🟡 `PUT` `/profile`
+
+**회원정보 수정하기 v1.0**
+
+> operationId: `put-profile`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 액세스 토큰^|accessToken |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+## 부가설명 및 특이사항
+회원정보를 수정합니다.
+
+ * V1.0 - 회원 정보를 수정합니다.
+ *\
+        \ V1.1 - 회원의 현재 비밀번호를 입력받아 비밀번호 확인을 한 후 회원의 정보를 수정합니다.
+ 리퀘스트는 Examples에서\
+        \ 확인해주세요.
+## OAUTH2 참고사항 
+* [Oauth2 API](https://docs.shopby.co.kr/?url.primaryName=auth/#/OAUTH2/post-oauth2-token)\
+        \ 를 사용하여 토큰을 발급받은 경우,
+* 기존 accessToken 대신 Shop-By-Authorization 로 액세스 토큰을\
+        \ 전달해야합니다.
+* ex) Shop-By-Authorization : Bearer test-access-token
+
+---
+
+### 🔵 `POST` `/profile`
+
+**프로필 생성하기**
+
+> operationId: `post-profile`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+## 부가설명 및 특이사항
+회원 프로필 등록 시 사용하는 API 입니다.
+
+회원가입 화면구현 관련 자세\
+        한 내용은 [스킨개발가이드](https://workspace.nhn-commerce.com/guide/skin/dev-cover/join?lv=11)\
+        \ 참고하시길 바랍니다.
+
+* 회원가입 항목 관리 기능 설정에 따라 필수/선택값이 달라질 수 있습니다.
+ 회원가입 항목관리 설정\
+        \ 내용은 GET /malls 의 memberJoinConfig 에서 확인할 수 있습니다.
+## OAUTH2 참고사항 
+* [Oauth2\
+        \ API](https://docs.shopby.co.kr/?url.primaryName=auth/#/OAUTH2/post-oauth2-token)\
+        \ 를 사용하여 토큰을 발급받은 경우,
+* 기존 accessToken 대신 Shop-By-Authorization 로 액세스 토큰을\
+        \ 전달해야합니다.
+* ex) Shop-By-Authorization : Bearer test-access-token
+
+---
+
+### 🔴 `DELETE` `/profile`
+
+**회원 탈퇴하기**
+
+> operationId: `delete-profile`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `reason` | query | - | `string` | 탈퇴 사유^|테스트용 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 액세스 토큰^|accessToken |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+## 부가설명 및 특이사항
+회원 탈퇴 시 사용하는 API 입니다.
+
+## OAUTH2 참고사항 
+*\
+        \ [Oauth2 API](https://docs.shopby.co.kr/?url.primaryName=auth/#/OAUTH2/post-oauth2-token)\
+        \ 를 사용하여 토큰을 발급받은 경우,
+* 기존 accessToken 대신 Shop-By-Authorization 로 액세스 토큰을\
+        \ 전달해야합니다.
+* ex) Shop-By-Authorization : Bearer test-access-token
+
+---
+
+### 🟡 `PUT` `/profile/address`
+
+**프로필 주소 변경하기**
+
+> operationId: `put-profile-address`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 액세스 토큰^|accessToken |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+## 부가설명 및 특이사항
+회원의 주소를 변경하는 API 입니다.
+## OAUTH2 참고사항 
+* [Oauth2\
+        \ API](https://docs.shopby.co.kr/?url.primaryName=auth/#/OAUTH2/post-oauth2-token)\
+        \ 를 사용하여 토큰을 발급받은 경우,
+* 기존 accessToken 대신 Shop-By-Authorization 로 액세스 토큰을\
+        \ 전달해야합니다.
+* ex) Shop-By-Authorization : Bearer test-access-token
+
+---
+
+### 🟢 `GET` `/profile/blocked-members`
+
+**차단된 회원 조회하기**
+
+> operationId: `get-profile-blocked-member`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `pageNumber` | query | - | `integer` | 페이지 번호^|1 |
+| `pageSize` | query | - | `integer` | 한 페이지당 노출 수^|1 |
+| `hasTotalCount` | query | - | `boolean` | "목록 카운트 포함 여부(false: 미포함(default), true: 포함)^|false" |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 액세스 토큰^|accessToken |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+## 부가설명 및 특이사항
+내가 차단한 회원의 목록을 조회합니다.
+
+## OAUTH2 참고사항 
+*\
+        \ [Oauth2 API](https://docs.shopby.co.kr/?url.primaryName=auth/#/OAUTH2/post-oauth2-token)\
+        \ 를 사용하여 토큰을 발급받은 경우,
+* 기존 accessToken 대신 Shop-By-Authorization 로 액세스 토큰을\
+        \ 전달해야합니다.
+* ex) Shop-By-Authorization : Bearer test-access-token
+
+---
+
+### 🔵 `POST` `/profile/blocked-members`
+
+**회원 차단하기**
+
+> operationId: `post-profile-blocked-member`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 액세스 토큰^|accessToken |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+## 부가설명 및 특이사항
+회원을 차단합니다. 차단 시 즉시 차단한 회원이 작성한 상품평, 게시글, 1:1문\
+        의 등의 내용을 차단합니다.
+
+## OAUTH2 참고사항 
+* [Oauth2 API](https://docs.shopby.co.kr/?url.primaryName=auth/#/OAUTH2/post-oauth2-token)\
+        \ 를 사용하여 토큰을 발급받은 경우,
+* 기존 accessToken 대신 Shop-By-Authorization 로 액세스 토큰을\
+        \ 전달해야합니다.
+* ex) Shop-By-Authorization : Bearer test-access-token
+
+---
+
+### 🔵 `POST` `/profile/brand-oauth`
+
+**브랜드 회원 회원가입 처리하기 Ver1.1**
+
+> operationId: `post-profile-brand-oauth`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 액세스 토큰^|accessToken |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+## 부가설명 및 특이사항
+브랜드 회원의 회원 가입 처리 API입니다.
+
+브랜드 로그인으로 서브몰에서\
+        \ 최초 로그인한 회원인 경우 위 API를 호출하여 가입 완료 처리를 해야합니다.
+가입 처리시 약관 및 수신 동의 여부를 받을 수\
+        \ 있습니다.
+
+## OAUTH2 참고사항 
+* [Oauth2 API](https://docs.shopby.co.kr/?url.primaryName=auth/#/OAUTH2/post-oauth2-token)\
+        \ 를 사용하여 토큰을 발급받은 경우,
+* 기존 accessToken 대신 Shop-By-Authorization 로 액세스 토큰을\
+        \ 전달해야합니다.
+* ex) Shop-By-Authorization : Bearer test-access-token
+
+## Ver\
+        \ 1.0
+- MemberType = [MALL: 쇼핑몰 회원, OPENID: 연동형 회원, NEOID: 간편로그인 회원]
+- MemberStatus\
+        \ = [WAITING: 대기, ACTIVE: 가입완료, FREEZE or DORMANT: 휴면 , PAUSED :이용정지]
+ 
+\
+        ## Ver 1.1
+- MemberType = [MALL: 쇼핑몰 회원, SYNC_ID: 연동형 회원, OPEN_ID: 간편로그인\
+        \ 회원]
+- MemberStatus = [WAITING: 대기, ACTIVE: 가입완료, WITHDRAWN: 탈퇴, FREEZE\
+        \ or DORMANT: 휴면 , PAUSED :이용정지, PENDING: 승인대기]
+
+---
+
+### 🔵 `POST` `/profile/change-password-after-cert`
+
+**비밀번호 변경**
+
+> operationId: `post-profile-change-password-after-cert`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🔵 `POST` `/profile/check-password`
+
+**비밀번호 확인하기**
+
+> operationId: `post-profile-check-password`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 액세스 토큰^|accessToken |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+## 부가설명 및 특이사항
+ 현재 로그인한 사용자가 맞는지 비밀번호를 한번 더 체크할 때 사용하는 API\
+        \ 입니다.
+## OAUTH2 참고사항 
+* [Oauth2 API](https://docs.shopby.co.kr/?url.primaryName=auth/#/OAUTH2/post-oauth2-token)\
+        \ 를 사용하여 토큰을 발급받은 경우,
+* 기존 accessToken 대신 Shop-By-Authorization 로 액세스 토큰을\
+        \ 전달해야합니다.
+* ex) Shop-By-Authorization : Bearer test-access-token
+ 
+
+\
+        ## 화면 예시
+ ![img](https://image.toast.com/aaaaahb/api-description/member/profile/post_profile_check-password.png?autox150)
+
+---
+
+### 🟢 `GET` `/profile/dormancy`
+
+**휴면 회원 조회하기**
+
+> operationId: `get-profile-dormancy`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 액세스 토큰^|accessToken |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+## 부가설명 및 특이사항
+ 휴면 해제 화면에 노출할 휴면 계정 정보를 조회합니다.
+## OAUTH2 참\
+        고사항 
+* [Oauth2 API](https://docs.shopby.co.kr/?url.primaryName=auth/#/OAUTH2/post-oauth2-token)\
+        \ 를 사용하여 토큰을 발급받은 경우,
+* 기존 accessToken 대신 Shop-By-Authorization 로 액세스 토큰을\
+        \ 전달해야합니다.
+* ex) Shop-By-Authorization : Bearer test-access-token
+
+---
+
+### 🟡 `PUT` `/profile/dormancy`
+
+**휴면 해제하기**
+
+> operationId: `put-profile-dormancy`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 액세스 토큰^|accessToken |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+## 부가설명 및 특이사항
+회원의 휴면 상태를 해제합니다.
+## OAUTH2 참고사항 
+* [Oauth2\
+        \ API](https://docs.shopby.co.kr/?url.primaryName=auth/#/OAUTH2/post-oauth2-token)\
+        \ 를 사용하여 토큰을 발급받은 경우,
+* 기존 accessToken 대신 Shop-By-Authorization 로 액세스 토큰을\
+        \ 전달해야합니다.
+* ex) Shop-By-Authorization : Bearer test-access-token
+
+---
+
+### 🟡 `PUT` `/profile/expel`
+
+**비밀번호 검증 후 회원 탈퇴하기**
+
+> operationId: `put-profile-expel`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 액세스 토큰^|accessToken |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+## 부가설명 및 특이사항
+
+ 쇼핑몰 회원일 경우 비밀번호 검증 후 회원 탈퇴합니다.
+## OAUTH2\
+        \ 참고사항 
+* [Oauth2 API](https://docs.shopby.co.kr/?url.primaryName=auth/#/OAUTH2/post-oauth2-token)\
+        \ 를 사용하여 토큰을 발급받은 경우,
+* 기존 accessToken 대신 Shop-By-Authorization 로 액세스 토큰을\
+        \ 전달해야합니다.
+* ex) Shop-By-Authorization : Bearer test-access-token
+
+---
+
+### 🔵 `POST` `/profile/find-id`
+
+**아이디 찾기**
+
+> operationId: `post-profile-find-id`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🔵 `POST` `/profile/find-password`
+
+**비밀번호 찾기**
+
+> operationId: `post-profile-find-password`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🟢 `GET` `/profile/grade`
+
+**내 등급 조회하기**
+
+> operationId: `get-profile-grade`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 액세스 토큰^|accessToken |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+## 부가설명 및 특이사항
+내 등급 정보를 가져옵니다.
+
+## OAUTH2 참고사항 
+* [Oauth2\
+        \ API](https://docs.shopby.co.kr/?url.primaryName=auth/#/OAUTH2/post-oauth2-token)\
+        \ 를 사용하여 토큰을 발급받은 경우,
+* 기존 accessToken 대신 Shop-By-Authorization 로 액세스 토큰을\
+        \ 전달해야합니다.
+* ex) Shop-By-Authorization : Bearer test-access-token
+
+---
+
+### 🟢 `GET` `/profile/id`
+
+**아이디 찾기 v1.1**
+
+> operationId: `get-profile-id-1-`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `companyNo` | query | - | `number` | 법인번호^|123 |
+| `memberName` | query | - | `string` | 이름 (쇼핑몰 회원가입 정보 설정에서 회원명을 사용함 또는 필수로 지정한 경우 필수입력)^|홍길동 |
+| `mobileNo` | query | - | `string` | 휴대전화 번호 (SMS 인증 찾기로 인증번호 전송시 입력)^|01012341234 |
+| `email` | query | - | `string` | 이메일 (이메일 찾기로 인증번호 전송시 입력)^|aaa@bbb.ccc |
+| `ci` | query | - | `string` | CI^|ASDF1234 |
+| `certificationNumber` | query | - | `string` | 인증번호^|123123 |
+| `Version` | header | ✅ | `string` | API 버전^|1.1 |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🟡 `PUT` `/profile/id`
+
+**회원 아이디 변경하기**
+
+> operationId: `put-profile-id`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🟢 `GET` `/profile/next-grade`
+
+**내 다음 등급 조회하기**
+
+> operationId: `get-profile-next-grade`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 액세스 토큰^|accessToken |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+## 부가설명 및 특이사항
+내 다음 예상 등급 정보를 가져옵니다.
+몰의 전체 등급 리스트와 현재 실적도\
+        \ 같이 내려줍니다.
+
+## OAUTH2 참고사항 
+* [Oauth2 API](https://docs.shopby.co.kr/?url.primaryName=auth/#/OAUTH2/post-oauth2-token)\
+        \ 를 사용하여 토큰을 발급받은 경우,
+* 기존 accessToken 대신 Shop-By-Authorization 로 액세스 토큰을\
+        \ 전달해야합니다.
+* ex) Shop-By-Authorization : Bearer test-access-token
+
+---
+
+### 🔵 `POST` `/profile/non-masking`
+
+**마스킹 해제된 회원정보 조회하기**
+
+> operationId: `post-profile-non-masking`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 액세스 토큰^|accessToken |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+## 부가설명 및 특이사항
+ 비밀번호 인증으로 마스킹 해제된 회원정보를 조회합니다.
+ 오픈아이디의 경우\
+        , 재인증을 통해 마스킹 해제된 회원정보를 조회할 수 있습니다.
+ 
+ * Oauth 스펙 - [오픈아이디 토큰 발급하기 - POST](https://docs.shopby.co.kr/?url.primaryName=auth/#/Authentication/post-oauth-openid)
+\
+        \   -> reauthenticate 인자값 사용
+ * Oauth2 스펙 - [오픈아이디 토큰 재인증 처리하기](https://docs.shopby.co.kr/?url.primaryName=auth/#/OAUTH2/put-oauth2-openid-reauthenticate)
+\
+        ## 쇼핑몰 회원인 경우 Request Body
+| name      | type      | required  | default\
+        \ value | description      |
+|-----------|-----------|-----------|---------------|------------------|
+\
+        | password   | String    | Y         |               | 비밀번호         |
+##\
+        \ 오픈아이디 회원의 경우 Request Body
+### Body 값 없이 POST 요청
+
+## 화면 예시
+ ![img](https://image.toast.com/aaaaahb/api-description/member/profile/post_profile_check-password.png?autox150)
+
+---
+
+### 🔵 `POST` `/profile/openid`
+
+**오픈 아이디 회원가입 처리하기 Ver1.1**
+
+> operationId: `post-profile-openid`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 액세스 토큰^|accessToken |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+## 부가설명 및 특이사항
+오픈 아이디를 사용한 회원 가입 처리입니다.
+
+간편 로그인으로 신규 가입을\
+        \ 하는 회원인 경우 위 API를 호출하여 가입 완료 처리를 해야합니다.<br/>
+가입 처리시 추가적인 사용자 정보를 받을 수 있습\
+        니다.<br/>
+
+카카오싱크 회원의 경우 약관은 카카오싱크 연동과 동시에 저장되기 때문에 joinTermsAgreements는 null로\
+        \ 보내주시면 됩니다.
+
+## OAUTH2 참고사항 
+* [Oauth2 API](https://docs.shopby.co.kr/?url.primaryName=auth/#/OAUTH2/post-oauth2-token)\
+        \ 를 사용하여 토큰을 발급받은 경우,
+* 기존 accessToken 대신 Shop-By-Authorization 로 액세스 토큰을\
+        \ 전달해야합니다.
+* ex) Shop-By-Authorization : Bearer test-access-token
+
+## Ver\
+        \ 1.0
+- MemberType = [MALL: 쇼핑몰 회원, OPENID: 연동형 회원, NEOID: 간편로그인 회원]
+- MemberStatus\
+        \ = [WAITING: 대기, ACTIVE: 가입완료, FREEZE or DORMANT: 휴면 , PAUSED :이용정지]
+ 
+\
+        ## Ver 1.1
+- MemberType = [MALL: 쇼핑몰 회원, SYNC_ID: 연동형 회원, OPEN_ID: 간편로그인\
+        \ 회원]
+- MemberStatus = [WAITING: 대기, ACTIVE: 가입완료, WITHDRAWN: 탈퇴, FREEZE\
+        \ or DORMANT: 휴면 , PAUSED :이용정지, PENDING: 승인대기]
+
+---
+
+### 🟡 `PUT` `/profile/password`
+
+**비밀번호 변경하기**
+
+> operationId: `put-profile-password-1-1`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.1 |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `accessToken` | header | ✅ | `string` | 액세스 토큰^|accessToken |
+
+## 부가설명 및 특이사항
+ 인증이 완료된 사용자의 비밀번호를 변경합니다. (version 1.1)
+##\
+        \ OAUTH2 참고사항 
+* [Oauth2 API](https://docs.shopby.co.kr/?url.primaryName=auth/#/OAUTH2/post-oauth2-token)\
+        \ 를 사용하여 토큰을 발급받은 경우,
+* 기존 accessToken 대신 Shop-By-Authorization 로 액세스 토큰을\
+        \ 전달해야합니다.
+* ex) Shop-By-Authorization : Bearer test-access-token
+
+---
+
+### 🔵 `POST` `/profile/rename`
+
+**NHN KCP 본인인증으로 회원 개인정보 갱신하기**
+
+> operationId: `post-profile-rename`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 액세스 토큰^|accessToken |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+## 부가설명 및 특이사항
+ NHN KCP에서 보내준 본인인증 확인키를 파라미터로 보내, 회원의 이름/성별\
+        /생년월일/CI 등의 정보를 본인인증 정보로 업데이트합니다.
+
+ (※ 본인인증 키는 KCP 본인확인 절차를 참고바랍니다)
+
+\
+        \ 단, 만약 이미 동일한 실명으로 인증된 회원이 있을 경우(자기 자신 제외) 본인인증 정보가 갱신되지 않습니다.
+
+## OAUTH2\
+        \ 참고사항 
+* [Oauth2 API](https://docs.shopby.co.kr/?url.primaryName=auth/#/OAUTH2/post-oauth2-token)\
+        \ 를 사용하여 토큰을 발급받은 경우,
+* 기존 accessToken 대신 Shop-By-Authorization 로 액세스 토큰을\
+        \ 전달해야합니다.
+* ex) Shop-By-Authorization : Bearer test-access-token
+
+---
+
+### 🔵 `POST` `/profile/report`
+
+**회원 신고하기**
+
+> operationId: `post-profile-report`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 액세스 토큰^|accessToken |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+## 부가설명 및 특이사항
+회원을 신고합니다.
+
+## OAUTH2 참고사항 
+* [Oauth2 API](https://docs.shopby.co.kr/?url.primaryName=auth/#/OAUTH2/post-oauth2-token)\
+        \ 를 사용하여 토큰을 발급받은 경우,
+* 기존 accessToken 대신 Shop-By-Authorization 로 액세스 토큰을\
+        \ 전달해야합니다.
+* ex) Shop-By-Authorization : Bearer test-access-token
+
+---
+
+### 🔵 `POST` `/profile/synchronize`
+
+**기존 회원을 오픈 아이디 회원으로 전환하기(카카오싱크 전용)**
+
+> operationId: `synchronize`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 액세스 토큰^|accessToken |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+## 부가설명 및 특이사항
+기존 회원을 오픈 아이디 회원으로 전환합니다.
+
+오픈 아이디 회원으로 가입시\
+        , 같은 이메일을 가진 기존 일반 회원을 합칠 때 사용합니다.
+
+일반 회원에서 오픈 아이디 회원으로 전환이 완료되면 가입 완료 처\
+        리가 됩니다.
+
+전환 완료시, 기존 토큰은 만료처리되고 새로운 토큰이 발급됩니다.
+
+이후, ID/PW 로그인을 불가능하며 전환\
+        한 오픈 아이디 회원으로 로그인이 가능합니다.
+
+현재는 카카오싱크 회원만 지원합니다.
+
+## OAUTH2 참고사항 
+* [Oauth2\
+        \ API](https://docs.shopby.co.kr/?url.primaryName=auth/#/OAUTH2/post-oauth2-token)\
+        \ 를 사용하여 토큰을 발급받은 경우,
+* 기존 accessToken 대신 Shop-By-Authorization 로 액세스 토큰을\
+        \ 전달해야합니다.
+* ex) Shop-By-Authorization : Bearer test-access-token
+
+---
+
+### 🟢 `GET` `/profile/ci/exists`
+
+**CI 중복확인하기**
+
+> operationId: `get-profile-ci-exists`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `ci` | query | ✅ | `string` | CI^|abcde |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰 |
+
+---
+
+### 🟢 `GET` `/profile/ci/myself`
+
+**CI 일치 확인하기**
+
+> operationId: `get-profile-ci-myself`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `ci` | query | ✅ | `string` | 임의로 생성된 개인인증 값^|abcde |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+| `accessToken` | header | ✅ | `string` | 회원 엑세스 토큰 |
+
+---
+
+### 🟢 `GET` `/profile/email/exist`
+
+**해당 쇼핑몰에 이메일 중복여부 체크하기**
+
+> operationId: `get-profile-email-exist`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `email` | query | ✅ | `string` | 회원 이메일 주소^|test@test.com |
+| `memberTypes` | query | - | `string` | 회원유형 리스트 (기본 - 쇼핑몰 회원(MALL) |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🔵 `POST` `/profile/external-member/exist`
+
+**외부회원 중복확인하기**
+
+> operationId: `post-profile-external-member-exists`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🔵 `POST` `/profile/id/email`
+
+**ID 변경 메일 발송하기**
+
+> operationId: `post-profile-id-email`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 액세스 토큰^|accessToken |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+## 부가설명 및 특이사항
+ID를 변경할 수 있는 내용을 첨부한 email을 발송하는 API 입니다.
+\
+        ## OAUTH2 참고사항 
+* [Oauth2 API](https://docs.shopby.co.kr/?url.primaryName=auth/#/OAUTH2/post-oauth2-token)\
+        \ 를 사용하여 토큰을 발급받은 경우,
+* 기존 accessToken 대신 Shop-By-Authorization 로 액세스 토큰을\
+        \ 전달해야합니다.
+* ex) Shop-By-Authorization : Bearer test-access-token
+
+---
+
+### 🟢 `GET` `/profile/id/exist`
+
+**해당 쇼핑몰에 아이디 중복여부 체크하기**
+
+> operationId: `get-profile-id-exist`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `memberId` | query | ✅ | `string` | 회원 ID^|memberId |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🟢 `GET` `/profile/member/extra-infos`
+
+**회원별 추가항목 조회**
+
+> operationId: `get-extra-info-members`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `memberNos` | query | ✅ | `string` | "회원 번호 목록^|1,2,3" |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🟢 `GET` `/profile/mobile/exist`
+
+**해당 쇼핑몰에 휴대폰 번호 중복여부 확인하기**
+
+> operationId: `get-profile-mobile-exist`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `mobileNo` | query | ✅ | `string` | 휴대전화 번호^|01012345678 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🟢 `GET` `/profile/nickname/exist`
+
+**해당 쇼핑몰에 닉네임 중복여부 체크하기**
+
+> operationId: `get-profile-nickname-exist`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `nickname` | query | ✅ | `string` | 회원 닉네임^|jinsu |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🟢 `GET` `/profile/password/search-account`
+
+**비밀번호 찾기를 위한 계정 조회하기**
+
+> operationId: `get-profile-password-search-account`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `memberId` | query | ✅ | `string` | 검색할 회원 아이디^|memberId |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🟡 `PUT` `/profile/password/sending-email-with-url`
+
+**비밀번호 변경/초기화 URL의 이메일 발송하기**
+
+> operationId: `put-profile-password-sending-email-with-url`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🟢 `GET` `/profile/member/equals/with-email`
+
+**"해당 쇼핑몰 아이디, 이름, 이메일 검증하기"**
+
+> operationId: `get-profile-member-equals-with-email`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `memberId` | query | ✅ | `string` | 아이디 |
+| `memberName` | query | ✅ | `string` | 이름 |
+| `email` | query | ✅ | `string` | 이메일 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🟢 `GET` `/profile/member/equals/with-mobile`
+
+**"해당 쇼핑몰 아이디, 이름, 휴대폰 번호 검증하기"**
+
+> operationId: `get-profile-member-equals-with-mobile`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `memberId` | query | ✅ | `string` | 아이디^|test001 |
+| `memberName` | query | ✅ | `string` | 이름^|홍길동 |
+| `mobileNo` | query | ✅ | `string` | 휴대폰 번호^|aaa@bbb.ccc |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🟡 `PUT` `/profile/password/no-authentication/after-certification`
+
+**본인인증 후 비밀번호 변경하기**
+
+> operationId: `put-profile-password-no-authentication-after-certification`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🟡 `PUT` `/profile/password/no-authentication/certificated-by-email`
+
+**이메일 인증 후 패스워드 변경하기.**
+
+> operationId: `put-profile-password-no-authentication-certificated-by-email`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+
+### 🟡 `PUT` `/profile/password/no-authentication/certificated-by-sms`
+
+**SMS 인증 후 패스워드 변경하기**
+
+> operationId: `put-profile-password-no-authentication-certificated-by-sms`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `language` | header | - | `string` | "언어 (기본값: ko)^|ko" |
+
+---
+

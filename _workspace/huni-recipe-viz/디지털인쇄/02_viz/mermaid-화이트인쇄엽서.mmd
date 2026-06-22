@@ -1,0 +1,47 @@
+%% 대표 2 — 화이트인쇄엽서 PRD_000020 / MES 001-0006 (PRF_DGP_A + 별색 + G-3 silent 누락)
+%% 출처: recipe-디지털인쇄.md §(2)5 + gap-board G-3
+%% 강조: 자유형 커팅 옵션이 상품마스터엔 있으나 PRF_DGP_A comp 사슬에 없음 → 선택해도 가격 미반영
+flowchart LR
+    classDef product fill:#e3f2fd,stroke:#1565c0,color:#0d47a1
+    classDef opt fill:#ede7f6,stroke:#5e35b1,color:#311b92
+    classDef formula fill:#fff8e1,stroke:#f9a825,color:#e65100
+    classDef comp fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20
+    classDef missing fill:#ffebee,stroke:#c62828,color:#b71c1c,stroke-width:3px
+
+    PRD["화이트인쇄엽서<br/>PRD_000020"]:::product
+
+    subgraph OPT["옵션 → 차원값"]
+        O_SIZ["사이즈 5종 siz_cd"]:::opt
+        O_PRINT["단/양면 print_opt_cd"]:::opt
+        O_PAPER["큐리어스스킨·몽블랑 7종 mat_cd"]:::opt
+        O_SPOT["별색: 화이트/클리어/핑크/금/은<br/>없음·단·양 (proc PROC_000007)"]:::opt
+        O_CUT["자유형 커팅<br/>proc_cd (상품마스터 명시)"]:::missing
+        O_QTY["수량 min_qty"]:::opt
+    end
+
+    F_A["PRF_DGP_A<br/>원자합산형"]:::formula
+
+    subgraph COMP["가격구성요소 (배선)"]
+        C_S1["COMP_PRINT_DIGITAL_S1/S2<br/>디지털인쇄비"]:::comp
+        C_SPOT["COMP_PRINT_SPOT_WHITE_S1<br/>별색인쇄비 PROC_000007"]:::comp
+        C_PAPER["COMP_PAPER 용지비"]:::comp
+        C_CUT_MISSING["(커팅 comp 부재)<br/>PRF_DGP_A 목록에 없음"]:::missing
+    end
+
+    PRD --> O_SIZ & O_PRINT & O_PAPER & O_SPOT & O_CUT & O_QTY
+    O_SIZ --> F_A
+    O_PRINT --> F_A
+    O_PAPER --> F_A
+    O_SPOT --> F_A
+    O_QTY --> F_A
+    F_A --> C_S1
+    F_A --> C_SPOT
+    F_A --> C_PAPER
+
+    %% G-3: 커팅 옵션 → comp 단절 (점선 + missing)
+    O_CUT -.->|"G-3 silent 누락<br/>선택해도 가격 0 반영"| C_CUT_MISSING
+    C_CUT_MISSING -.->|"단가행 없음"| F_A
+
+    %% G-4 패밀리 결함 (DGP 공통)
+    DEF["G-4 DGP 공통: print_opt_cd 도수↔면 충돌<br/>S1/S2 이중배선·출력매수 환산 호출측"]:::missing
+    DEF -.-> C_S1

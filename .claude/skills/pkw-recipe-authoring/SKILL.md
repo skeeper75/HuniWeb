@@ -1,6 +1,11 @@
 ---
 name: pkw-recipe-authoring
-description: 후니프린팅 Print-KB LLM 위키(Karpathy 모델)의 레시피 페이지 집필 방법론 스킬. 상품군(11시트) 단위 레시피 페이지의 DB-anchored 뼈대 템플릿(정체→차원→BOM→가격사슬→CPQ옵션→위젯계약→적재경로→결함현황), 원자 블록 컨벤션(출처·badge ✅🟡🔴⚪·[[교차참조]]·answers_cq), 횡단 축 페이지와의 단일 사실 원칙(one fact, one place), index.md/log.md 유지 워크플로, stale/v03 인용 금지 규칙을 제공한다. '레시피 페이지 작성', '위키 집필', '레시피 템플릿', '위키 페이지 구조', '상품군 위키 작성', '횡단 축 페이지', '위키 컨벤션', '레시피 보완', '위키 갱신' 작업 시 반드시 이 스킬을 사용. 원천 큐레이션은 pkw-source-curator의 영역, 검증 게이트는 pkw-wiki-evaluation이 담당하므로 그 작업에는 트리거하지 않는다.
+description: >
+  후니프린팅 Print-KB LLM 위키(Karpathy 모델)의 레시피 페이지 집필 방법론. 상품군(11시트) 레시피의
+  DB-anchored 뼈대(정체→차원→BOM→가격사슬→CPQ옵션→위젯계약→적재경로→결함), 원자 블록 컨벤션(출처·badge·
+  [[교차참조]]), 단일 사실 원칙, index/log 워크플로, stale/v03 인용 금지. 트리거: 레시피 페이지 작성, 위키 집필,
+  레시피 템플릿, 상품군 위키 작성, 횡단 축 페이지, 위키 컨벤션, 레시피 보완, 위키 갱신. 원천 큐레이션은
+  pkw-source-curator, 검증 게이트는 pkw-wiki-evaluation 담당.
 ---
 
 # Recipe Authoring — Print-KB LLM Wiki

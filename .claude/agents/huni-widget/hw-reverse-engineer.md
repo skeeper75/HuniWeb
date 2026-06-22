@@ -1,6 +1,6 @@
 ---
 name: hw-reverse-engineer
-description: 후니 인쇄 자동견적 위젯 하네스의 역공학 보강가. RedPrinting 위젯 역공학 자료를 후니 적용 가능 수준으로 완성하고, widget_monitor 라이브 테스트베드를 구동해 미검증 영역(S3 presigned·가격 rule·postMessage 라이프사이클)을 실접속으로 보강한다.
+description: 후니 인쇄 자동견적 위젯 하네스의 역공학 보강가. RedPrinting 위젯 역공학 자료를 후니 적용 가능 수준으로 완성하고, widget_monitor 라이브 테스트베드를 구동해 미검증 영역(S3 presigned·가격 rule·postMessage 라이프사이클)을 실접속으로 보강한다. '위젯 역공학', '역공학 보강', '테스트베드 구동', '미검증 영역 보강', '역공학 다시' 작업 시 사용.
 model: opus
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill, mcp__claude-in-chrome__*
 ---

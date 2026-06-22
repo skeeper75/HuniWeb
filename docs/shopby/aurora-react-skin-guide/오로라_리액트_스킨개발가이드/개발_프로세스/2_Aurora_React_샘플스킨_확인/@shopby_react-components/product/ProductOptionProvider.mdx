@@ -1,0 +1,171 @@
+---
+title: "ProductOptionProvider"
+depth: 5
+path: "오로라 리액트 스킨개발가이드 > 개발 프로세스 > 2️⃣Aurora React 샘플스킨 확인 > @shopby/react-components > product > ProductOptionProvider"
+---
+
+# ProductOptionProvider
+
+* 첨부 이미지와 같이 선택 가능한 옵션과 텍스트 옵션 관리 기능을 제공한다.
+
+[선택 가능한 옵션 이미지]
+![image](https://github.nhnent.com/storage/user/2230/files/ba658380-e994-11ed-95c4-158d455bb102)
+
+
+
+[텍스트 옵션 이미지]
+![image](https://github.nhnent.com/storage/user/2230/files/e7199b00-e994-11ed-956a-3514142a42f9)
+
+
+
+## 속성
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | --- | --- | --- | --- |
+| productNo | false | number |  | 상품번호 |
+| initialState | false | productOptionState | productOptionState | productOptionState 타입과 동일함.
+ㄴ 기본값은 하기 productOptionState 초기 상태와 동일함 |
+| children | false | ReactNode | - |  |
+
+## 상태
+
+* productOptionState 는 useProductOptionStateContext 를 호출해 사용한다.
+
+``` typescript
+const productOptionState = useProductOptionStateContext();
+```
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | --- | --- | --- | --- |
+| selectorOptions | true | selectorOption[] | [] | 상품의 옵션 정보 |
+| quantities | true | quantity[] | [] | selectorOptions 에서 최하위 뎁스까지 선택된 옵션 정보의 배열 |
+| ㄴ selectedKey | true | string | - | 현재 선택된 옵션의 키 |
+| ㄴ quantity | true | quantity | - | 현재 선택된 옵션의 수량정보 |
+| textOptionMapByOption | false | [Map](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Map) | - |  |
+| ㄴ textOptionKey | true |  | - | 텍스트 옵션 키 |
+| ㄴ ...textOption | true | textOption | - |  |
+| textOptionsByProduct | false | object[] | - |  |
+| ㄴ textOptionKey | true | string |  |  |
+| ㄴ textOption | true | textOption |  |  |
+| totalPrice | true | number | 0 | 선택된 옵션의 총 합계금 |
+| flatOptions | true | object[] | [] | [response.flatOptions](https://docs.shopby.co.kr/?url.primaryName=product/#/Product/get-product-options) 와 동일한 타입 |
+| originOption | false | null \| object | null | [response](https://docs.shopby.co.kr/?url.primaryName=product/#/Product/get-product-options) 와 동일한 타입 |
+
+
+
+
+[selectorOption](https://nhnent.dooray.com/#selectorOption)
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | --- | --- | --- | --- |
+| ㄴ depthKey | true | string | - | 뎁스별 고유한 옵션 키 |
+| ㄴ option | true | object | - |  |
+| ㄴ selectedOptionDepthKey | true | string | - | 현재 뎁스의 옵션중에서 사용자에의해 선택된 옵션의 고유한 옵션 키
+ㄴ `options` 중 선택된 `optionDepthKey` |
+| ㄴ emptyOptionLabel | true | string | - | `select` 에 `placeholder` 로 들어갈 값
+ㄴ 멀티옵션인 경우 `{이전 뎁스 옵션 라벨}을/를 {먼저/''}을/를 선택하세요.` 
+ㄴ 상단에 `선택 가능한 옵션 이미지` 첨부이미지의 `placeholder` 값 참고 |
+| ㄴ options | false | option[] | - |  |
+
+[option](https://nhnent.dooray.com/#option)
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | --- | --- | --- | --- |
+| ㄴ disabled | true | boolean | - | 현재 옵션 선택 가능여부
+ ㄴ `true` : 선택불가
+ ㄴ `false` : 선택가능
+ ㄴ `임시품절/품절`인 경우 `true` (하위 뎁스가 `임시품절/품절`인 경우에도 `true`) |
+| ㄴ displayLabel | true | string | - | `disabled` 상태에 따라 노출
+ㄴ `disabled = false` 인 경우 `''` 
+ㄴ `disabled = true` 인 경우 옵션 상태에 따라 `임시품절/품절` 값을 가짐
+![image](https://github.nhnent.com/storage/user/2230/files/fd2a5a00-e99a-11ed-9cd5-0eed30394cb9) |
+| ㄴ optionDepthKey | true | string | - | 옵션의 고유 키 |
+
+[quantity](https://nhnent.dooray.com/quantity)
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | --- | --- | --- | --- |
+| ㄴcount | false | number |  |  |
+| ㄴ selectedOptionValues | false | string[] |  | 뎁스별로 선택된 옵션 값을 담은 배열
+ㄴ 사용예시 `quantity``?.``selectedOptionValues``.``join``(`\`' |
+| ㄴ totalPrice | false | number |  | 선택된 옵션의 가격
+ㄴ 수량에 따라 값이 변경됨.
+ㄴ [response.multiLevelOptions.children.buyPrice](https://docs.shopby.co.kr/?url.primaryName=product/#/Product/get-product-options) 할인적용가를 사용함 (flatoption 의 경우 flatoption.buyPrice 를 사용함) |
+
+
+[textOption](https://nhnent.dooray.com/textOption)
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | --- | --- | --- | --- |
+| inputLabel | true |  | - | 텍스트 옵션명 |
+| required | true |  | - | 텍스트 옵션 필수여부 |
+
+
+
+
+## 액션
+
+* productOptionAction 은 useProductOptionActionContext 를 호출해 사용한다.
+
+``` typescript
+const productOptionAction = useProductOptionActionContext();
+```
+
+| 이름 | 인자타입 | 필수여부 | 기본값 | 설명 | 관리하는 상태 |
+| --- | --- | --- | --- | --- | --- |
+| fetchSelectorOptions | object | false | - | 상품 옵션목록을 조회함.
+ㄴ 프로바이더 속성으로 productNo 를 넘기지 않은 경우, productNo 인자는 필수임. | productOptionState.selectorOptions
+productOptionState.quantities
+productOptionState.textOptionMapByOption
+productOptionState.textOptionsByProduct
+productOptionState.flatOptions
+productOptionState.originOption |
+| ㄴ productNo | number | false | - | productNo 를 따로 넘기지 않으면 속성의 productNo 로 옵션목록을 조회함. |  |
+| selectOptionBy | object | true | - |  | productOptionState.selectorOptions
+productOptionState.quantities
+productOptionState.textOptionMapByOption
+productOptionState.textOptionsByProduct |
+| ㄴ depthKey | string | true |  | 현재 옵션의 뎁스키
+`productOptionState.selectorOptions[n].depthKey` |  |
+| ㄴ optionDepthKey | string | true |  | 현재 뎁스 옵션의 고유한 옵션키
+`productOptionState.selectorOptions[n].option.options[n].optionDepthKey` |  |
+| changeQuantityCount | object | true | - |  | productOptionState.selectorOptions
+productOptionState.totalPrice |
+| ㄴ selectedKey | string | true | - | 선택된 옵션의 키(`quantities[n].selectedKey`)와 수량을 인자로 받아 수량과 해당 옵션의 `totalPrice` 값을 재계산함. |  |
+| ㄴ count | number | true | 1 | 옵션 수량 |  |
+| deleteQuantityBy | string | true | - | 선택된 옵션의 키(`quantities[n].selectedKey`)를 인자로 받아 해당 옵션을 `productOptionState.quantities` 목록에서 삭제함. | productOptionState.selectorOptions
+productOptionState.totalPrice |
+| changeTextOptionByOption | object | true | - | 현재 입력된 옵션의 옵션별 텍스트 옵션 값을 갱신함. | productOptionState.textOptionMapByOption |
+| ㄴ selectedOptionKey | string | true | - | 선택된 옵션의 키
+`quantities[n].selectedKey` |  |
+| ㄴ textOptionKey | string | true | - | 현재 옵션의 텍스트 옵션키 |  |
+| ㄴ value | string | true | - | 텍스트 옵션 입력 값 |  |
+| changeTextOptionByProduct | object | true | - |  | productOptionState.textOptionsByProduct |
+| ㄴ textOptionKey | string | true | - | 현재 옵션의 텍스트 옵션키 |  |
+| ㄴ value | string | true | - | 텍스트 옵션 입력 값 |  |
+| fetchOptionToMakeOrder | object | false | - | 현재 선택된 옵션값을 기준으로 주문서 작성 시 필요한 request 값을 만들어 반환함.
+ㄴ 인자 타입의 상세항목에 대한 설명은 [request](https://docs.shopby.co.kr/?url.primaryName=order/#/OrderSheet/post-order-sheet) 타입 참고 |  |
+| ㄴ channelType | null \| string | null |  |  |  |
+| ㄴ cartNos | null \| string | null |  |  |  |
+| ㄴ productCoupons | null \| string | null |  |  |  |
+| ㄴ trackingKey | null \| string | null |  |  |  |
+| fetchOptionsToAddToCart | object | false | - | 현재 선택된 옵션값을 기준으로 장바구니 담기에 필요한 request 값을 만들어 반환함. |  |
+| ㄴ channelType | null \| string | null |  |  |  |
+
+
+
+
+## 사용예시
+
+``` jsx
+const Example = () => {
+    return (
+        
+            
+              
+            
+            
+        
+    )
+}
+```

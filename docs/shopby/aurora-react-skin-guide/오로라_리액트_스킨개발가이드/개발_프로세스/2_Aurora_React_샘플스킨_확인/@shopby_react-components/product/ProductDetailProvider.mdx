@@ -1,0 +1,69 @@
+---
+title: "ProductDetailProvider"
+depth: 5
+path: "오로라 리액트 스킨개발가이드 > 개발 프로세스 > 2️⃣Aurora React 샘플스킨 확인 > @shopby/react-components > product > ProductDetailProvider"
+---
+
+# ProductDetailProvider
+
+## 속성
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | ---- | --- | ---- | --- |
+| productNo | true | number |  | 상품번호 |
+| children | false | ReactNode |  |  |
+
+## 상태
+
+* productDetailState 는 useProductDetailStateContext 를 호출해 사용한다.
+
+```typescript
+const productDetailState = useProductDetailStateContext();
+```
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | ---- | --- | ---- | --- |
+| originProductDetail | true | null \| object | null | 원본 상품상세
+ㄴ [response](https://docs.shopby.co.kr/?url.primaryName=product/#/Product/get-products-product) 값과 동일함. |
+| productDetail | true | object |  | 상품상세 (원본 상품상세에 하기 타입 추가함)
+ㄴ [response](https://docs.shopby.co.kr/?url.primaryName=product/#/Product/get-products-product) 타입에 하기타입 추가함. |
+| ㄴ likeStatus | true | object |  |  |
+| ㄴ isLiked | true | boolean | false | 해당 상품 좋아요 여부
+ㄴ 로그인한 경우 : 회원 정보에 따라 좋아요 여부 노출
+ㄴ 비로그인 경우: false |
+| ㄴ count | true | number | 0 | 해당 상품의 좋아요 수 |
+| relatedProducts | true | object[] | [] | 관련상품 목록
+ㄴ[response 값과 동일함](https://docs.shopby.co.kr/?url.primaryName=product/#/Product/get-products-related-products) |
+| productExtraInfo |  | Object |  | 상품
+ㄴ [response](https://docs.shopby.co.kr/?url.primaryName=product/#/Product/get-product-extraInfos) 응답 중 단일값. |
+| ㄴ productNo |  | number | 0 |  |
+| ㄴ extraInfo |  | string | null |  |
+
+## 액션
+
+* productDetailAction 은 useProductDetailActionContext 를 호출해 사용한다.
+
+```typescript
+const productDetailAction = useProductDetailActionContext();
+```
+
+| 이름 | 인자타입 | 필수여부 | 기본값 | 설명 | 관리하는 상태 |
+| --- | ---- | ---- | --- | --- | ------- |
+| updateLikeStatus | likeStatus | true |  | 로그인 상태인 경우
+ㄴ 해당 상품을 좋아요 혹은 취소
+ㄴ 상태의 likeStatus 타입과 동일 | productDetailState.productDetail |
+| fetchProductDetail | object | true |  | 해당 상품의 상세정보를 조회함. | productDetailState.originProductDetail |
+| ㄴ productNo | number | true |  |  |  |
+| fetchRelatedProducts | object | true |  | 해당 상품에 등록된 관련상품 목록을 조회함. | productDetailState.relatedProducts |
+| ㄴ productNo | number | true |  |  |  |
+| fetchProductExtraInfo |  |  |  | 상품상세의 추가정보를 조회 | productDetailState.productExtraInfo |
+
+## 사용예시
+
+```typescript
+const Example = () => (
+  
+    
+  
+);
+```

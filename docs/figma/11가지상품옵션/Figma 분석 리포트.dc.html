@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap">
+  <style>
+    body { margin: 0; background: #F0EFF8; font-family: 'Noto Sans KR', sans-serif; }
+    * { box-sizing: border-box; }
+  </style>
+</helmet>
+
+<!-- Header -->
+<div style="background:#5538B6; padding:48px 60px 40px; position:relative; overflow:hidden;">
+  <div style="position:absolute;top:-40px;right:-40px;width:300px;height:300px;border-radius:50%;background:rgba(255,255,255,0.05);"></div>
+  <div style="position:absolute;bottom:-60px;right:100px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,0.04);"></div>
+  <div style="display:flex;align-items:flex-start;justify-content:space-between;max-width:1100px;margin:0 auto;">
+    <div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+        <div style="background:rgba(255,255,255,0.2);border-radius:6px;padding:4px 12px;">
+          <span style="color:#fff;font-size:12px;font-weight:600;letter-spacing:0.05em;">FIGMA FILE ANALYSIS</span>
+        </div>
+      </div>
+      <div style="font-size:32px;font-weight:700;color:#fff;letter-spacing:-0.03em;line-height:1.2;margin-bottom:8px;">HuniPrinting_option_New.fig</div>
+      <div style="font-size:15px;color:rgba(255,255,255,0.7);font-weight:400;">후니프린팅 · 상품 옵션 설정 화면 디자인 파일 분석 리포트</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;">
+      <div style="background:rgba(255,255,255,0.12);border-radius:10px;padding:16px 24px;text-align:right;">
+        <div style="font-size:36px;font-weight:700;color:#fff;line-height:1;">2,038</div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.65);margin-top:2px;">총 노드 수</div>
+      </div>
+      <div style="display:flex;gap:8px;">
+        <div style="background:rgba(255,255,255,0.12);border-radius:8px;padding:10px 16px;text-align:center;">
+          <div style="font-size:20px;font-weight:700;color:#fff;">1</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.6);">페이지</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.12);border-radius:8px;padding:10px 16px;text-align:center;">
+          <div style="font-size:20px;font-weight:700;color:#fff;">34</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.6);">프레임</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.12);border-radius:8px;padding:10px 16px;text-align:center;">
+          <div style="font-size:20px;font-weight:700;color:#fff;">13</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.6);">제품 화면</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="max-width:1100px;margin:0 auto;padding:40px 60px 80px;">
+
+  <!-- 01 파일 구조 -->
+  <div style="margin-bottom:40px;">
+    <div style="font-size:11px;font-weight:700;color:#5538B6;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:16px;">01 · 파일 구조</div>
+    <div style="display:grid;grid-template-columns:1fr 2fr;gap:16px;">
+      <div style="background:#fff;border-radius:12px;padding:24px;border:1px solid #E9E9E9;">
+        <div style="font-size:13px;font-weight:600;color:#424242;margin-bottom:16px;">페이지 구성</div>
+        <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:#EEEBF9;border-radius:8px;margin-bottom:8px;">
+          <div style="width:8px;height:8px;border-radius:50%;background:#5538B6;"></div>
+          <span style="font-size:13px;font-weight:600;color:#5538B6;">option_New</span>
+          <span style="margin-left:auto;font-size:11px;color:#9580D9;font-weight:500;">34 프레임</span>
+        </div>
+        <div style="font-size:12px;color:#979797;line-height:1.6;margin-top:12px;">단일 페이지로 구성된 파일입니다. OVERVIEW 컴포넌트 설명부터 13종의 제품 옵션 화면, 공통 UI 요소들이 모두 한 페이지에 배치되어 있습니다.</div>
+      </div>
+      <div style="background:#fff;border-radius:12px;padding:24px;border:1px solid #E9E9E9;">
+        <div style="font-size:13px;font-weight:600;color:#424242;margin-bottom:16px;">노드 타입 분포 (총 2,038개)</div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <sc-for list="{{ nodeTypes }}" as="node" hint-placeholder-count="6">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div style="font-size:12px;color:#424242;width:160px;flex-shrink:0;">{{ node.name }}</div>
+              <div style="flex:1;height:8px;background:#F0EFF8;border-radius:4px;overflow:hidden;">
+                <div style="{{ node.barStyle }}"></div>
+              </div>
+              <div style="font-size:12px;font-weight:600;color:#5538B6;width:36px;text-align:right;">{{ node.count }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02 제품 화면 목록 -->
+  <div style="margin-bottom:40px;">
+    <div style="font-size:11px;font-weight:700;color:#5538B6;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:16px;">02 · 제품 옵션 화면 목록</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;">
+      <sc-for list="{{ products }}" as="p" hint-placeholder-count="13">
+        <div style="background:#fff;border-radius:10px;padding:20px 20px 20px 24px;border:1px solid #E9E9E9;position:relative;overflow:hidden;">
+          <div style="{{ p.accentStyle }}"></div>
+          <div style="font-size:11px;font-weight:600;color:#979797;letter-spacing:0.05em;margin-bottom:6px;">{{ p.type }}</div>
+          <div style="font-size:15px;font-weight:700;color:#424242;margin-bottom:4px;letter-spacing:-0.03em;">{{ p.name }}</div>
+          <div style="font-size:11px;color:#CACACA;margin-bottom:10px;">{{ p.frame }}</div>
+          <div style="display:flex;flex-wrap:wrap;gap:4px;">
+            <sc-for list="{{ p.options }}" as="opt" hint-placeholder-count="4">
+              <span style="font-size:11px;color:#5538B6;background:#EEEBF9;border-radius:4px;padding:2px 8px;font-weight:500;">{{ opt }}</span>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- 03 레이아웃 구조 -->
+  <div style="margin-bottom:40px;">
+    <div style="font-size:11px;font-weight:700;color:#5538B6;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:16px;">03 · 공통 레이아웃 구조</div>
+    <div style="background:#fff;border-radius:12px;padding:28px;border:1px solid #E9E9E9;">
+      <div style="border:2px dashed #CACACA;border-radius:8px;padding:16px;margin-bottom:20px;position:relative;">
+        <div style="position:absolute;top:-10px;left:12px;background:#fff;padding:0 6px;font-size:11px;color:#979797;font-weight:600;">전체 캔버스 2158px</div>
+        <div style="display:flex;gap:12px;height:120px;">
+          <div style="flex:1;background:#F0EFF8;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;">
+            <div style="font-size:13px;font-weight:600;color:#5538B6;">갤러리 영역</div>
+            <div style="font-size:11px;color:#9580D9;">~700px · 이미지 슬라이더</div>
+          </div>
+          <div style="width:2px;background:#CACACA;"></div>
+          <div style="width:200px;min-width:200px;background:#EEEBF9;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;border:2px solid #5538B6;">
+            <div style="font-size:13px;font-weight:600;color:#5538B6;">옵션 패널</div>
+            <div style="font-size:11px;color:#9580D9;">466px 고정</div>
+          </div>
+        </div>
+        <div style="text-align:center;margin-top:8px;font-size:11px;color:#979797;">1180px 컨테이너 내부</div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;">
+        <sc-for list="{{ layoutSpecs }}" as="spec" hint-placeholder-count="8">
+          <div style="background:#F6F6F6;border-radius:8px;padding:14px;text-align:center;">
+            <div style="font-size:18px;font-weight:700;color:#5538B6;letter-spacing:-0.03em;">{{ spec.value }}</div>
+            <div style="font-size:11px;color:#979797;margin-top:4px;">{{ spec.label }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 옵션 UI 패턴 -->
+  <div style="margin-bottom:40px;">
+    <div style="font-size:11px;font-weight:700;color:#5538B6;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:16px;">04 · 옵션 UI 패턴 (8종)</div>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;">
+      <sc-for list="{{ uiPatterns }}" as="pattern" hint-placeholder-count="8">
+        <div style="background:#fff;border-radius:10px;padding:20px;border:1px solid #E9E9E9;display:flex;gap:16px;align-items:flex-start;">
+          <div style="width:40px;height:40px;border-radius:8px;background:#EEEBF9;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px;">{{ pattern.icon }}</div>
+          <div style="flex:1;">
+            <div style="font-size:14px;font-weight:700;color:#424242;margin-bottom:4px;">{{ pattern.name }}</div>
+            <div style="font-size:12px;color:#979797;line-height:1.6;margin-bottom:8px;">{{ pattern.desc }}</div>
+            <span style="font-size:11px;color:#5538B6;background:#EEEBF9;border-radius:4px;padding:2px 8px;font-weight:500;">{{ pattern.usage }}</span>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <!-- 05 색상 팔레트 -->
+  <div style="margin-bottom:40px;">
+    <div style="font-size:11px;font-weight:700;color:#5538B6;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:16px;">05 · 색상 팔레트</div>
+    <div style="background:#fff;border-radius:12px;padding:24px;border:1px solid #E9E9E9;">
+      <div style="display:flex;flex-wrap:wrap;gap:12px;">
+        <sc-for list="{{ colors }}" as="c" hint-placeholder-count="10">
+          <div style="display:flex;align-items:center;gap:10px;background:#F6F6F6;border-radius:8px;padding:10px 14px;">
+            <div style="{{ c.swatchStyle }}"></div>
+            <div>
+              <div style="font-size:13px;font-weight:600;color:#424242;font-family:monospace;">{{ c.hex }}</div>
+              <div style="font-size:11px;color:#979797;margin-top:1px;">{{ c.label }} · {{ c.count }}</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="margin-top:20px;padding-top:20px;border-top:1px solid #E9E9E9;font-size:12px;color:#979797;line-height:1.7;">
+        <strong style="color:#424242;">색상 구조 분석:</strong> 브랜드 퍼플 <span style="background:#EEEBF9;color:#5538B6;padding:1px 6px;border-radius:3px;font-family:monospace;">#5538B6</span>이 선택/인터랙션의 모든 시각 신호를 담당합니다. 흰색·회색·중성 배경 위에 퍼플 단 하나로 선택 상태를 표현하는 "아웃라인 셀렉트" 패턴이 시스템 전체를 관통합니다.
+      </div>
+    </div>
+  </div>
+
+  <!-- 06 타이포그래피 -->
+  <div style="margin-bottom:40px;">
+    <div style="font-size:11px;font-weight:700;color:#5538B6;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:16px;">06 · 타이포그래피</div>
+    <div style="background:#fff;border-radius:12px;padding:24px;border:1px solid #E9E9E9;">
+      <div style="font-size:12px;color:#979797;margin-bottom:16px;">단일 서체 <strong style="color:#424242;">Noto Sans / Noto Sans KR</strong> — 4가지 굵기, 자간 −5% (버튼 −7%) 일관 적용</div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <sc-for list="{{ typeScale }}" as="t" hint-placeholder-count="6">
+          <div style="display:flex;align-items:center;gap:20px;padding:14px 16px;background:#F6F6F6;border-radius:8px;">
+            <div style="width:160px;flex-shrink:0;">
+              <div style="font-size:11px;color:#424242;font-weight:500;">{{ t.role }}</div>
+              <div style="font-size:11px;color:#CACACA;margin-top:2px;font-family:monospace;">{{ t.spec }}</div>
+            </div>
+            <div style="{{ t.previewStyle }}">{{ t.sample }}</div>
+            <div style="margin-left:auto;font-size:11px;color:#CACACA;font-family:monospace;">{{ t.count }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <!-- 07 사용자 흐름 -->
+  <div style="margin-bottom:40px;">
+    <div style="font-size:11px;font-weight:700;color:#5538B6;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:16px;">07 · 사용자 흐름 구조</div>
+    <div style="background:#fff;border-radius:12px;padding:24px;border:1px solid #E9E9E9;">
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:24px;flex-wrap:wrap;">
+        <sc-for list="{{ userFlow }}" as="step" hint-placeholder-count="6">
+          <div style="display:flex;align-items:center;gap:6px;">
+            <div style="background:#F0EFF8;border-radius:10px;padding:14px 16px;text-align:center;min-width:100px;">
+              <div style="font-size:20px;margin-bottom:4px;">{{ step.icon }}</div>
+              <div style="font-size:12px;font-weight:600;color:#424242;">{{ step.name }}</div>
+              <div style="font-size:10px;color:#979797;margin-top:2px;">{{ step.sub }}</div>
+            </div>
+            <div style="{{ step.arrowStyle }}">→</div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div style="background:#EEEBF9;border-radius:8px;padding:16px;">
+          <div style="font-size:12px;font-weight:600;color:#5538B6;margin-bottom:10px;">주요 CTA 버튼</div>
+          <div style="display:flex;flex-direction:column;gap:6px;">
+            <div style="background:#5538B6;border-radius:5px;padding:10px;text-align:center;font-size:13px;font-weight:600;color:#fff;letter-spacing:-0.05em;">에디터로 디자인하기</div>
+            <div style="background:#fff;border:1px solid #5538B6;border-radius:5px;padding:10px;text-align:center;font-size:13px;font-weight:600;color:#5538B6;letter-spacing:-0.05em;">PDF파일 직접 올리기</div>
+            <div style="background:#5538B6;border-radius:5px;padding:10px;text-align:center;font-size:13px;font-weight:600;color:#fff;letter-spacing:-0.05em;">장바구니 담기</div>
+          </div>
+        </div>
+        <div style="background:#F6F6F6;border-radius:8px;padding:16px;">
+          <div style="font-size:12px;font-weight:600;color:#424242;margin-bottom:10px;">가격 요약 구조</div>
+          <div style="font-size:12px;color:#979797;line-height:2;">
+            <div style="display:flex;justify-content:space-between;"><span>인쇄비</span><span>50,000원</span></div>
+            <div style="display:flex;justify-content:space-between;"><span>후가공</span><span>25,000원</span></div>
+            <div style="display:flex;justify-content:space-between;"><span>추가상품</span><span>1,100원</span></div>
+            <div style="height:1px;background:#CACACA;margin:6px 0;"></div>
+            <div style="display:flex;justify-content:space-between;font-size:16px;font-weight:700;color:#5538B6;"><span>합계금액</span><span>82,500원</span></div>
+            <div style="font-size:10px;color:#CACACA;text-align:right;">상품가 75,000원  부가세 7,500원</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 08 핵심 인사이트 -->
+  <div>
+    <div style="font-size:11px;font-weight:700;color:#5538B6;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:16px;">08 · 핵심 디자인 인사이트</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;">
+      <sc-for list="{{ insights }}" as="insight" hint-placeholder-count="6">
+        <div style="background:#fff;border-radius:10px;padding:20px;border:1px solid #E9E9E9;">
+          <div style="font-size:24px;margin-bottom:10px;">{{ insight.icon }}</div>
+          <div style="font-size:13px;font-weight:700;color:#424242;margin-bottom:6px;">{{ insight.title }}</div>
+          <div style="font-size:12px;color:#979797;line-height:1.7;">{{ insight.body }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    const nodeTypes = [
+      { name: 'TEXT', count: 669, pct: 669/2038 },
+      { name: 'ROUNDED_RECTANGLE', count: 571, pct: 571/2038 },
+      { name: 'VECTOR', count: 443, pct: 443/2038 },
+      { name: 'FRAME', count: 243, pct: 243/2038 },
+      { name: 'ELLIPSE', count: 95, pct: 95/2038 },
+      { name: 'SECTION', count: 13, pct: 13/2038 },
+    ].map(n => ({
+      ...n,
+      barStyle: { width: Math.round(n.pct * 100) + '%', height: '100%', background: '#5538B6', borderRadius: '4px' }
+    }));
+
+    const products = [
+      { type: 'OVERVIEW', name: '옵션 컴포넌트 개요', frame: 'OVERVIEW', options: ['버튼형', '셀렉트형', '수량입력', '후가공', '색상칩', '요약'], accent: '#9580D9' },
+      { type: '디지털인쇄', name: '디지털인쇄 상품명', frame: 'PRODUCT_PRINT_OPTION', options: ['사이즈', '종이', '인쇄', '별색인쇄', '커팅', '접지', '후가공', '박', '수량'], accent: '#5538B6' },
+      { type: '스티커', name: '스티커 상품명', frame: 'PRODUCT_STICKER_OPTION', options: ['사이즈', '유포스티커', '별색인쇄', '커팅', '조각수', '후가공'], accent: '#5538B6' },
+      { type: '책자/제책', name: '책자 상품명', frame: 'PRODUCT_BOOK_OPTION', options: ['사이즈', '종이', '인쇄', '제책방식', '커버', '수량'], accent: '#5538B6' },
+      { type: '캘린더', name: '캘린더 상품명', frame: 'PRODUCT_CALENDAR_OPTION', options: ['사이즈', '종이', '인쇄', '제작수량'], accent: '#5538B6' },
+      { type: '디자인 캘린더', name: '디자인 캘린더', frame: 'PRODUCT_DESIGN-CALENDAR_OPTION', options: ['사이즈', '종이', '인쇄', '수량'], accent: '#5538B6' },
+      { type: '굿즈', name: '굿즈 상품명', frame: 'PRODUCT_GOODS_OPTION', options: ['사이즈', '재질', '인쇄', '수량'], accent: '#5538B6' },
+      { type: '포토북', name: '포토북 상품명', frame: 'PRODUCT_PHOTOBOOK_OPTION', options: ['사이즈', '종이', '인쇄', '커버', '수량'], accent: '#5538B6' },
+      { type: '포토북 v2', name: '포토북 상품명 2', frame: 'PRODUCT_PHOTOBOOK_OPTION2', options: ['사이즈', '종이', '제책', '수량'], accent: '#5538B6' },
+      { type: '사인/포스터', name: '사인·포스터 상품명', frame: 'PRODUCT_SIGN-POSTER_OPTION', options: ['사이즈', '직접입력', '종이', '인쇄', '수량'], accent: '#7AC8C4' },
+      { type: '문구류', name: '문구류 상품명', frame: 'PRODUCT_STAITIONERY_OPTION', options: ['사이즈', '종이', '인쇄', '수량'], accent: '#DF7939' },
+      { type: '액세서리', name: '액세서리 상품명', frame: 'PRODUCT_ACCESSORIES_OPTION', options: ['사이즈', '재질', '수량'], accent: '#E6B93F' },
+      { type: '아크릴', name: '아크릴 상품명', frame: 'PRODUCT_ARRYLIC_OPTION', options: ['사이즈', '두께', '인쇄', '수량'], accent: '#9580D9' },
+    ].map(p => ({
+      ...p,
+      accentStyle: { position: 'absolute', top: 0, left: 0, width: '4px', height: '100%', borderRadius: '4px 0 0 4px', background: p.accent }
+    }));
+
+    const layoutSpecs = [
+      { value: '2158px', label: '전체 캔버스 폭' },
+      { value: '466px', label: '옵션 패널 폭 (고정)' },
+      { value: '1180px', label: '컨테이너 폭' },
+      { value: '50px', label: '컨트롤 높이' },
+      { value: '5504px', label: '화면 세로 길이' },
+      { value: '24px', label: '옵션 그룹 간격' },
+      { value: '5px', label: '버튼 라운드' },
+      { value: '4px', label: '기본 그리드' },
+    ];
+
+    const uiPatterns = [
+      { icon: '⬜', name: 'OptionButtonGroup', desc: '격자형 단일 선택 버튼. 선택 시 테두리+텍스트 퍼플 전환(배경은 흰색 유지). 사이즈·인쇄·커팅에 사용.', usage: '사이즈 / 인쇄 / 커팅 / 귀돌이' },
+      { icon: '▽', name: 'SelectBox', desc: '드롭다운 선택. 긴 옵션 목록이나 문자열이 긴 항목에 사용. 열리면 퍼플 테두리 + 그림자 목록.', usage: '종이 / 봉투 / 수량대' },
+      { icon: '⌨', name: 'TextField (mm)', desc: '직접 크기 입력 필드. mm·원·장 등 단위 suffix 표시. 포커스 시 퍼플 테두리, 오류 시 빨간 테두리.', usage: '가로·세로 크기 직접입력' },
+      { icon: '±', name: 'QuantityStepper', desc: '−/값/+ 결합 컨트롤. 가운데 셀은 직접 입력 가능. min/max에서 버튼 비활성화.', usage: '제작수량 / 조각수' },
+      { icon: '●', name: 'ColorChip', desc: '원형 색상 샘플 + 하단 라벨 태그. 선택 시 퍼플 링으로 강조. 박 칼라 선택에 사용.', usage: '박(앞면/뒷면) 칼라' },
+      { icon: '▾', name: 'FinishSection', desc: '열기/닫기 토글이 달린 접이식 영역. 후가공 옵션들을 감싸 필요할 때만 노출.', usage: '후가공 영역 전체' },
+      { icon: '₩', name: 'PriceSummary', desc: '인쇄비·후가공·추가상품 항목별 금액 + 합계를 큰 퍼플 텍스트로 표시. 부가세 안내 포함.', usage: '주문 가격 요약' },
+      { icon: '↑', name: 'UploadButton', desc: '업로드 아이콘이 붙은 보조 버튼. PDF 직접 올리기 및 에디터 연결 CTA에 사용.', usage: 'PDF 업로드 / 에디터 진입' },
+    ];
+
+    const colors = [
+      { hex: '#FFFFFF', label: '배경/표면', count: '386×', swatchStyle: { width: '32px', height: '32px', borderRadius: '6px', background: '#fff', border: '1px solid #E9E9E9' } },
+      { hex: '#CACACA', label: '기본 테두리', count: '381×', swatchStyle: { width: '32px', height: '32px', borderRadius: '6px', background: '#CACACA' } },
+      { hex: '#5538B6', label: '브랜드 퍼플', count: '322×', swatchStyle: { width: '32px', height: '32px', borderRadius: '6px', background: '#5538B6' } },
+      { hex: '#979797', label: '보조 텍스트', count: '270×', swatchStyle: { width: '32px', height: '32px', borderRadius: '6px', background: '#979797' } },
+      { hex: '#D9D9D9', label: '플레이스홀더', count: '175×', swatchStyle: { width: '32px', height: '32px', borderRadius: '6px', background: '#D9D9D9' } },
+      { hex: '#424242', label: '본문/제목', count: '144×', swatchStyle: { width: '32px', height: '32px', borderRadius: '6px', background: '#424242' } },
+      { hex: '#000000', label: '강조/아이콘', count: '84×',  swatchStyle: { width: '32px', height: '32px', borderRadius: '6px', background: '#000' } },
+      { hex: '#4B3F96', label: '퍼플 호버', count: '48×',  swatchStyle: { width: '32px', height: '32px', borderRadius: '6px', background: '#4B3F96' } },
+      { hex: '#F6F6F6', label: '연배경', count: '27×',  swatchStyle: { width: '32px', height: '32px', borderRadius: '6px', background: '#F6F6F6', border: '1px solid #E9E9E9' } },
+      { hex: '#EE00CE', label: '핑크 강조', count: '14×',  swatchStyle: { width: '32px', height: '32px', borderRadius: '6px', background: '#EE00CE' } },
+    ];
+
+    const typeScale = [
+      { role: 'Display / 상품명', spec: 'SemiBold · 36px · -5%', sample: '스티커 상품명', previewStyle: { fontSize: '28px', fontWeight: 600, color: '#000', letterSpacing: '-0.05em', fontFamily: "'Noto Sans KR', sans-serif" }, count: '12×' },
+      { role: 'Heading', spec: 'Bold · 20px', sample: '상품 제목', previewStyle: { fontSize: '20px', fontWeight: 700, color: '#424242', fontFamily: "'Noto Sans KR', sans-serif" }, count: '13×' },
+      { role: '옵션 그룹 타이틀', spec: 'Medium · 16px · -5%', sample: '사이즈', previewStyle: { fontSize: '16px', fontWeight: 500, color: '#424242', letterSpacing: '-0.05em', fontFamily: "'Noto Sans KR', sans-serif" }, count: '122×' },
+      { role: 'Body / 옵션 레이블', spec: 'Regular · 14px · -5%', sample: '135 x 135 mm', previewStyle: { fontSize: '14px', fontWeight: 400, color: '#424242', letterSpacing: '-0.05em', fontFamily: "'Noto Sans KR', sans-serif" }, count: '323×' },
+      { role: '보조 텍스트', spec: 'Medium · 13px · -5%', sample: '간략한 설명이 있다면 여기에', previewStyle: { fontSize: '13px', fontWeight: 500, color: '#979797', letterSpacing: '-0.05em', fontFamily: "'Noto Sans KR', sans-serif" }, count: '57×' },
+      { role: '배지 / 라벨', spec: 'SemiBold · 8px', sample: '추천', previewStyle: { fontSize: '11px', fontWeight: 600, color: '#5538B6', background: '#EEEBF9', padding: '2px 8px', borderRadius: '4px', fontFamily: "'Noto Sans KR', sans-serif" }, count: '8×' },
+    ];
+
+    const userFlow = [
+      { icon: '🏠', name: '브레드크럼', sub: '홈>Shop>카테고리', arrowStyle: { color: '#CACACA', fontSize: '16px', padding: '0 4px' } },
+      { icon: '🖼️', name: '갤러리', sub: '제품 이미지 슬라이더', arrowStyle: { color: '#CACACA', fontSize: '16px', padding: '0 4px' } },
+      { icon: '📐', name: '옵션 선택', sub: '사이즈·종이·인쇄', arrowStyle: { color: '#CACACA', fontSize: '16px', padding: '0 4px' } },
+      { icon: '✨', name: '후가공', sub: '접이식 섹션', arrowStyle: { color: '#CACACA', fontSize: '16px', padding: '0 4px' } },
+      { icon: '💰', name: '가격 확인', sub: '실시간 합계', arrowStyle: { color: '#CACACA', fontSize: '16px', padding: '0 4px' } },
+      { icon: '🛒', name: '장바구니', sub: 'CTA 버튼', arrowStyle: { display: 'none' } },
+    ];
+
+    const insights = [
+      { icon: '🎨', title: '아웃라인 셀렉트 패턴', body: '선택 상태를 배경색 변경 없이 테두리+텍스트 색상만 퍼플로 바꾸는 방식. 화면 전체가 흰색을 유지하면서도 선택 상태가 명확하게 구분됩니다.' },
+      { icon: '📦', title: '13종 제품 화면 통일성', body: '디지털인쇄부터 아크릴까지 제품별로 옵션 구성이 달라도 동일한 OptionField + 컨트롤 조합으로 일관된 사용자 경험을 제공합니다.' },
+      { icon: '🔒', title: '후가공 접이식 구조', body: '열기/닫기 토글로 후가공 영역을 감춰 옵션이 복잡해도 화면이 압도적이지 않게 설계. 사용자가 필요할 때만 확장할 수 있습니다.' },
+      { icon: '💜', title: '단일 브랜드 컬러 운용', body: '#5538B6 퍼플 하나로 선택, 포커스, CTA, 가격 표시까지 모든 인터랙티브 신호를 통일. 서비스 신뢰도에 잘 맞는 절제된 색상 전략입니다.' },
+      { icon: '📏', title: '466px 고정 옵션 패널', body: '갤러리와 옵션 패널을 좌우로 분리하고 옵션 패널을 466px로 고정. 1180px 컨테이너 내에서 일관된 레이아웃을 유지합니다.' },
+      { icon: '🔤', title: 'Noto Sans 단일 서체', body: '한국어(Noto Sans KR)와 영문·숫자(Noto Sans)를 하나의 서체로 통일. 자간 −5% 일관 적용으로 타이트하고 정제된 인상을 만듭니다.' },
+    ];
+
+    return { nodeTypes, products, layoutSpecs, uiPatterns, colors, typeScale, userFlow, insights };
+  }
+}
+
+</script>
+</body>
+</html>

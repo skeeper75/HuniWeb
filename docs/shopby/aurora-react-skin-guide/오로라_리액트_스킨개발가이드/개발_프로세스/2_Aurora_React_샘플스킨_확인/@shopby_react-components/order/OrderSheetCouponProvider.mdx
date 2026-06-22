@@ -1,0 +1,79 @@
+---
+title: "OrderSheetCouponProvider"
+depth: 5
+path: "오로라 리액트 스킨개발가이드 > 개발 프로세스 > 2️⃣Aurora React 샘플스킨 확인 > @shopby/react-components > order > OrderSheetCouponProvider"
+---
+
+# OrderSheetCouponProvider
+
+## 속성
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | --- | --- | --- | --- |
+| children | O | ReactNode | - | - |
+
+## 상태
+
+* orderSheetCouponState 는 useOrderSheetCouponStateContext 를 호출해 사용한다.
+
+``` typescript
+const orderSheetCouponState = useOrderSheetCouponStateContext();
+```
+
+| 이름 | 타입 | 기본 값 | 설명 |
+| --- | --- | --- | --- |
+| couponStatus | object \| null | null | 쿠폰 적용 정보 |
+| ㄴcartCoupons | [response.cartCoupons 타입](https://docs.shopby.co.kr/?url.primaryName=order/#/OrderSheet/get-order-sheets-order-sheet-no-coupons) | - | 장바구니 쿠폰 정보 |
+| ㄴproducts | [response.products 타입](https://docs.shopby.co.kr/?url.primaryName=order/#/OrderSheet/get-order-sheets-order-sheet-no-coupons) | - | 상품 정보 |
+| ㄴorderSheetNo | [response.orderSheetNo 타입](https://docs.shopby.co.kr/?url.primaryName=order/#/OrderSheet/get-order-sheets-order-sheet-no-coupons) | - | 주문서 번호 |
+| couponAmount | object | - | 쿠폰 할인 금액 정보 |
+| ㄴ cartAmt | [response.cartAmt 타입](https://docs.shopby.co.kr/?url.primaryName=order/#/OrderSheet/get-order-sheets-order-sheet-no-coupons) | 0 | 장바구니 금액 |
+| ㄴ cartCouponDiscountAmt | [response.cartCouponDiscountAmt 타입](https://docs.shopby.co.kr/?url.primaryName=order/#/OrderSheet/get-order-sheets-order-sheet-no-coupons) | 0 | 장바구니 쿠폰 할인 금액 |
+| ㄴ productCouponDiscountAmt | [response.productCouponDiscountAmt 타입](https://docs.shopby.co.kr/?url.primaryName=order/#/OrderSheet/get-order-sheets-order-sheet-no-coupons) | 0 | 상품 쿠폰 할인 금액 |
+| selectedCoupon | object \| null | null | 선택된 쿠폰 정보 |
+| ㄴ productCoupons | object[] | - | 상품 쿠폰 |
+| ㄴ couponIssueNo | number | - | 쿠폰 발행 번호 |
+| ㄴ productNo | number | - | 적용된 상품 번호 |
+| ㄴ cartCouponIssueNo | number | - | 장바구니 쿠폰 발행 번호 |
+
+## 액션
+
+* orderSheetCouponAction 은 useOrderSheetCouponActionContext 를 호출해 사용한다.
+
+``` typescript
+const orderSheetCouponAction = useOrderSheetCouponActionContext();
+```
+
+| 이름 | 인자타입 | 필수여부 | 기본값 | 설명 | 관리하는 상태 |
+| --- | --- | --- | --- | --- | --- |
+| fetchCouponStatus | 인자 2개 |  |  | 쿠폰 정보 가져오기 | couponStatus, couponAmount |
+| ㄴ orderSheetNo | string | O | - | 주문서 번호 | - |
+| ㄴ initialCoupon | [requestBody.couponRequest 타입](https://docs.shopby.co.kr/?url.primaryName=order/#/OrderSheet/post-order-sheets-order-sheet-no-calculate) | X | - | 초기에 선택된 상태로 만들 쿠폰 | - |
+| selectCoupons | object[] | O | - | 쿠폰 한 번에 선택하기 | couponStatus, couponAmount |
+| ㄴ productCoupons | object[] | X | - | 상품 쿠폰 | - |
+| ㄴ couponIssueNo | number | O | - | 쿠폰 발행 번호 | - |
+| ㄴ productNo | number | O | - | 적용된 상품 번호 | - |
+| ㄴ cartCouponIssueNo | number | X | - | 장바구니 쿠폰 발행 번호 | - |
+| selectCouponIndividually | object | O | - | 쿠폰 하나씩 선택하기 | couponStatus, couponAmount |
+| ㄴ couponIssueNo | number \| null | O | - | 쿠폰 발행 번호 | - |
+| ㄴ type | 'PRODUCT' \| 'CART' | O | - | 쿠폰 종류 | - |
+| ㄴ productNo | number | X | - | 적용할 상품 번호
+
+(type이 'PRODUCT' 일 때만 유효합니다.) | - |
+| applySelectedCouponToOrderSheet | - | - | - | 선택된 쿠폰을 주문서에 적용하기 | - |
+| isUsingCoupon | 인자 2개 | - | - | 쿠폰을 사용 중인지 확인하기 | - |
+| ㄴ type | 'PRODUCT' \| 'CART' | X | - | 'PRODUCT': 상품 쿠폰을 사용중인지 확인합니다.
+'CART': 장바구니 쿠폰을 사용 중인지 확인합니다.
+
+(아무 값도 넣지 않을 경우, 종류에 상관없이 쿠폰을 사용 중인지 확인합니다.) | - |
+| ㄴ productNo | number | X | - | 해당 상품번호를 갖는 상품에 상품 쿠폰이 적용되었는지 확인합니다. 
+
+(type이 'PRODUCT' 일 때만 유효합니다.) | - |
+
+## 사용예시
+
+``` typescript
+const Example = () => {
+
+}
+```

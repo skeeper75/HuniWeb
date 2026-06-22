@@ -1,6 +1,11 @@
 ---
 name: rpm-gap-vessel
-description: RedPrinting 옵션 관리 메타모델을 후니 실제 현황(라이브 t_* + huni-dbmap 산출)과 축 단위로 대조해 갭(없는/약한 그릇)을 식별하고, 그 갭을 담을 후니 스키마 그릇을 설계 제안하는 방법론 스킬(후니 RP-Meta 하네스). 갭 판정(PASS/WEAK/GAP·라이브 information_schema 권위·dbmap 정합·중복 회피·vessel-gap vs data-gap 구분), 그릇 설계(search-before-mint·코드행<컬럼<JSONB<테이블 사다리·t_* 컨벤션 정합·정규화 무손실·영향분석·dbm-ddl-proposer 위임), 정비 로드맵(leverage+FK 의존 순서)을 제공한다. '갭 분석', '후니 갭', '관리 축 대조', '갭 매트릭스', '그릇 설계', '관리 스키마 설계', '그릇 제안', '기초데이터 그릇', '관리체계 정비안', '갭 분석 다시', '그릇 설계 다시' 작업 시 반드시 이 스킬을 사용. RedPrinting 메타모델 추상화는 rpm-metamodel-design, 실 적재는 huni-dbmap 적재 트랙이 담당한다.
+description: >
+  RedPrinting 옵션 관리 메타모델을 후니 현황(라이브 t_* + huni-dbmap 산출)과 축 단위로 대조해 갭(없는/약한 그릇)을 식별하고,
+  그 갭을 담을 후니 스키마 그릇을 설계 제안하는 방법론 스킬(후니 RP-Meta 하네스). 갭 판정(PASS/WEAK/GAP·information_schema 권위·
+  vessel-gap vs data-gap 구분)·그릇 설계(search-before-mint·코드행<컬럼<JSONB<테이블 사다리·정규화 무손실·영향분석)·정비 로드맵.
+  설계≠적재. 트리거: 갭 분석, 후니 갭, 관리 축 대조, 갭 매트릭스, 그릇 설계, 관리 스키마 설계, 그릇 제안, 기초데이터 그릇,
+  갭/그릇 설계 다시. 메타모델 추상화는 rpm-metamodel-design, 실 적재는 huni-dbmap 적재 트랙이 담당.
 ---
 
 # rpm-gap-vessel — Huni Gap Assessment & Vessel Design

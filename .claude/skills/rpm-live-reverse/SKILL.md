@@ -1,6 +1,11 @@
 ---
 name: rpm-live-reverse
-description: RedPrinting 라이브 사이트의 주문옵션 구성을 "기초데이터 관리 렌즈"로 역공학하는 방법론 스킬(후니 RP-Meta 하네스). 대표 샘플링 전략(26 카테고리 대표 추출·답습 전수수집 금지), huni-widget 기존 역공학 자산 재사용 우선, raw/widget_monitor 캡처 도구·gstack 읽기전용 라이브 보강, 상품별 옵션 원자 추출 포맷(축·choices·캐스케이드·가격플래그), 7버킷 base-data 태깅(자재/공정/옵션/템플릿/제약/기초코드/카테고리), 모호 fragment 분리, 출처 강제·날조 금지를 제공한다. 'RedPrinting 역공학', 'RP 옵션 추출', '라이브 옵션 캡처', '대표 샘플 역공학', '현수막 옵션 분석', '상품군 옵션 추출', 'RP 역공학 다시', 'base-data 태깅' 작업 시 반드시 이 스킬을 사용. 위젯 런타임/가격엔진 구현 역공학은 huni-widget 하네스가 담당하므로 그 작업에는 트리거하지 않는다. 메타모델 추상화는 rpm-metamodel-design이 담당한다.
+description: >
+  RedPrinting 라이브 사이트의 주문옵션 구성을 "기초데이터 관리 렌즈"로 역공학하는 방법론 스킬(후니 RP-Meta 하네스).
+  대표 샘플링(26 카테고리 대표 추출·전수수집 금지)·huni-widget 역공학 자산 재사용·gstack 읽기전용 라이브 보강·상품별 옵션 원자 추출·
+  7버킷 base-data 태깅·모호 fragment 분리·출처 강제·날조 금지. 트리거: RedPrinting 역공학, RP 옵션 추출, 라이브 옵션 캡처,
+  대표 샘플 역공학, 상품군 옵션 추출, base-data 태깅, RP 역공학 다시. 위젯 런타임/가격엔진 역공학은 huni-widget,
+  메타모델 추상화는 rpm-metamodel-design이 담당.
 ---
 
 # rpm-live-reverse — RedPrinting Option Reverse-Engineering (base-data lens)

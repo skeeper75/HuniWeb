@@ -1,6 +1,11 @@
 ---
 name: dbm-category-mapping
-description: 후니프린팅 MAP 시트 검증(round-24 1단계) 결과를 받아, 카테고리(t_cat_categories)와 실제 상품(t_prd_products)을 실제로 매핑하는 설계 방법론 스킬(round-24 2단계). dbm-category-audit이 산출한 매칭 매트릭스·출시상태 3분류를 입력으로, ① MAP 1차/하위 카테고리를 라이브 t_cat_categories 노드에 매핑(신규 노드 필요분·고아 정리 round-22 ⑥ 정합) ② 각 실상품(prd_cd)을 올바른 카테고리(cat_cd)에 귀속(다중분류 허용·별칭 교차참조 처리) ③ 정상등록가능(✅) 상품 우선 매핑, 옵션부족(🟡)·미출시(❌)는 라우팅·보류 표기하는 카테고리-상품 매핑 명세를 설계한다. search-before-mint(기존 cat_cd로 표현 가능하면 신규 금지)·FK 위상(카테고리 선적재→상품 귀속)·코드 채번 규칙(MAX+1·separator '_')을 준수한다. DB 직접 적재(COMMIT)는 하지 않고 매핑 명세 + 적재순서까지만 — 실 적재는 인간 승인. '카테고리 매핑', '카테고리 상품 매핑', '상품 카테고리 귀속', 'cat_cd 매핑', '카테고리 노드 매핑', '다중분류 매핑', 'round-24 2단계', '카테고리 매핑 다시', '매핑 설계' 작업 시 반드시 이 스킬을 사용. MAP 검증·출시상태 분류(1단계)는 dbm-category-audit, CPQ 옵션 매핑은 dbm-cpq-option-mapping, 실 적재는 dbm-load-execution이 담당하므로 그 작업에는 트리거하지 않는다.
+description: >
+  후니프린팅 카테고리(t_cat_categories)↔실상품(t_prd_products) 매핑 설계 방법론(round-24 2단계).
+  dbm-category-audit의 매칭 매트릭스·출시상태 3분류를 입력으로 MAP IA→cat_cd 노드 매핑(search-before-mint)
+  + prd_cd→cat_cd 귀속(다중분류·별칭)을 FK 위상·채번 규칙대로 명세까지만. DB 미적재·실 적재 인간 승인.
+  트리거: 카테고리 매핑, 카테고리 상품 매핑, 상품 카테고리 귀속, cat_cd 매핑, 다중분류 매핑, round-24 2단계, 매핑 설계, 카테고리 매핑 다시.
+  MAP 검증·출시상태 분류(1단계)는 dbm-category-audit, CPQ 옵션은 dbm-cpq-option-mapping, 실 적재는 dbm-load-execution.
 ---
 
 # dbm-category-mapping — 카테고리↔상품 매핑 설계 방법론 (round-24 2단계)

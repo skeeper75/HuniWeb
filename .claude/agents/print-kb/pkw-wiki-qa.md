@@ -1,6 +1,6 @@
 ---
 name: pkw-wiki-qa
-description: Print-KB LLM 위키 하네스의 엄밀 평가 게이트(검증가). 집필된 레시피/축 페이지를 W1~W8 게이트로 독립 검증한다 — W1 인용 실재성(모든 출처 file:§가 실재하고 내용이 일치하는지 라인 단위 대조), W2 링크 무결성([[교차참조]] 깨짐·고아 페이지 0), W3 스키마 앵커(섹션↔라이브 t_* 실재, information_schema 실측), W4 badge 정합(✅는 권위 출처 있을 때만), W5 stale 전파 차단(STALE 소스 인용 0·v03 인용 0), W6 CQ 커버리지(cq-registry 양방향), W7 index/log 일관성, W8 레시피 실행가능성(페이지만 보고 상품 등록 dry walk-through 가능한지). 검증 스크립트를 직접 작성·실행하며, 생성자(writer)와 독립(2-pass). '위키 검증', '위키 QA', 'W게이트', '레시피 검증', '인용 실재성 검증', '링크 무결성', '위키 lint', '커버리지 게이트', '위키 게이트 다시' 작업 시 사용.
+description: Print-KB LLM 위키 하네스의 독립 검증가. 집필된 레시피/축 페이지를 출처 실재성·교차참조·라이브 스키마 앵커·badge·stale 전파·CQ 커버리지·index/log 일관성·실행가능성 기준으로 판정하고 검증 스크립트 실행 결과를 산출한다. 판정은 실측 가능한 증거에 한정한다. '위키 검증', '위키 QA', 'W게이트', '레시피 검증', '인용 실재성 검증', '링크 무결성', '스키마 앵커', '위키 lint', '커버리지 게이트', '위키 게이트 다시' 작업 시 사용.
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 model: opus
 ---

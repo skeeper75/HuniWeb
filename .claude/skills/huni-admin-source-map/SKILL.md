@@ -1,6 +1,11 @@
 ---
 name: huni-admin-source-map
-description: 후니 webadmin(Django + Unfold admin) 소스에서 라이브 admin 사이트의 모든 화면·메뉴·항목을 빠짐없이 도출해 "admin 화면 맵"을 만드는 방법론 스킬. 제너릭 ModelAdmin 자동 등록(catalog/admin.py)이 만들어내는 표준 모델 화면(changelist/changeform)을 정적으로 전개하는 법, list_display·search·filter·inline·자동채번·논리삭제 규칙 추출, 커스텀 뷰(config/urls.py·views.py의 product-viewer·옵션·SKU·제약·impact·sku-catalog) 인벤토리, verbose_name 한글 라벨 해석, 화면 목록 표 산출 표준을 제공한다. 'admin 소스 분석', 'admin 화면 맵', '메뉴 전수 추출', 'ModelAdmin 옵션 추출', '커스텀 뷰 인벤토리', '화면 인벤토리' 작업 시 반드시 사용. 라이브 화면 캡처는 huni-admin-live-capture, 매뉴얼 집필은 huni-admin-manual-authoring가 담당하므로 그 작업에는 트리거하지 않는다.
+description: >
+  후니 webadmin(Django+Unfold admin) 소스에서 라이브 admin의 모든 화면·메뉴·항목을 전수 도출해
+  "admin 화면 맵"을 만드는 방법론. 제너릭 ModelAdmin 자동등록(changelist/changeform) 정적 전개,
+  list_display/search/filter/inline/자동채번/논리삭제 규칙 추출, 커스텀 뷰(product-viewer·옵션·SKU·제약)
+  인벤토리, 화면 목록 표 산출. 트리거: admin 소스 분석, admin 화면 맵, 메뉴 전수 추출, ModelAdmin 옵션 추출,
+  커스텀 뷰 인벤토리, 화면 인벤토리. 라이브 캡처는 huni-admin-live-capture, 집필은 huni-admin-manual-authoring 담당.
 ---
 
 # Huni Admin 소스 화면 맵 추출

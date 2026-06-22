@@ -1,0 +1,226 @@
+---
+title: "2️⃣Aurora React 샘플스킨 확인"
+depth: 2
+path: "오로라 리액트 스킨개발가이드 > 개발 프로세스 > 2️⃣Aurora React 샘플스킨 확인"
+---
+
+# 2️⃣Aurora React 샘플스킨 확인
+
+## 오로라 리액트(Aurora React) 스킨 소스코드
+
+shop by 라인업의 쇼핑몰 신규 생성 시, 기본스킨으로 ```NHN커머스에서 제작한 샘플스킨 (스킨명: Aurora React)```가 세팅됩니다.
+해당 Aurora React 기본스킨은 누구나 참고할 수 있도록 스킨 저장소에 스킨 소스코드가 공개되어었습니다.
+
+>  :bangbang:[AURORA REACT(오로라 리액트) 스킨소스 확인하기 ](https://skins.shopby.co.kr/shopby/aurora-skin)
+
+>  :exclamation:[동영상 활용가이드](https://nhnent.dooray.com/share/pages/WoOk8q6KT1K3MZcLSuyZsw/3524081956753040600)를 참고해보세요. javascript와 react만 안다면 쉽게 화면 커스텀이 가능합니다.
+
+***
+
+## 특징1. `@shopby` 패키지 제공
+
+NHN커머스에서 제공하는 `@ shopby 패키지`를 활용하여 보다 손 쉬운 개발이 가능합니다
+
+* 🚀 `@shopby/shared`
+    * 서버상태 관리와 복잡한 비즈니스 로직을 처리하는 타입스크립트 기반 패키지를 제공합니다
+    * [@shopby/shared 가이드 확인하기](https://nhnent.dooray.com/share/pages/WoOk8q6KT1K3MZcLSuyZsw/3530450496872329186)
+* 🚀 `@shopby/react-components`
+    * 리액트 기반의 `ui 컴포넌트`와 `프로바이더`를 제공합니다.
+    * [@shopby/react-components 가이드 확인하기](https://nhnent.dooray.com/share/pages/WoOk8q6KT1K3MZcLSuyZsw/3530467794042524642)
+
+`.npmrc` 에 `@shopby` 패키지 레지스트리 정보가 존재합니다.
+해당 파일에 토큰을 삽입한 후 패키지를 설치할 수 있습니다. 해당 파일은 패키지 레지스트리 정보가 담긴 파일로 삭제 시 정상적으로 의존성을 설치할 수 없기 때문에 주의해야합니다.
+
+***
+
+## 특징2. 통합형 스킨
+
+스킨을 개발하기 전에 스킨 유형을 (통합형/개별형)선택하여 개발해 주시기 바랍니다.
+오로라 리액트 스킨은 `통합형`(모바일 퍼스트)으로 개발되었으며, 본 가이드는 통합형을 기준으로 하고 있습니다.
+
+### 용어설명
+
+:heavy_check_mark:**통합형**
+
+* pc스킨과 mobile 스킨이 소스코드 하나로 개발된 형태의 스킨
+* 반응형으로 개발된 스킨도 통합형 스킨으로 분류
+
+:heavy_check_mark: **개별형**
+
+* pc스킨과 mobile 스킨의 소스코드가 각각 개발된 형태의 스킨
+* 개별형(pc+mobile): 하나의 gitlab 프로젝트내 pc 스킨과 mobile 스킨의 소스코드가 모두 개발된 경우
+* 개별형(pc): pc 스킨만 개발된 경우
+* 개별형(mobile): mobile 스킨만 개발된 경우
+
+***
+
+## 특징3. 주요 디렉토리 안내
+
+### :heavy_check_mark: 플랫폼(pc,mobile)별
+
+통합형(오로라 리액트)스킨 의 경우, pc, mobile 을 따로 분리하지 않습니다.
+
+> 단, 개별형 스킨은 pc 와 mobile 을 분리하여 배포하기 때문에 pc/mobile 과 같이 규정된 폴더구조가 필요합니다.
+
+### :heavy_check_mark:개발 환경 설정
+
+`config` 디렉토리 내 설정파일을 사용해 env 혹은 webpack 설정을 커스텀할 수 있습니다.
+![image](https://github.nhnent.com/storage/user/2230/files/83128080-e6cf-11ed-9403-d18f2c5fc0be)
+
+### :heavy_check_mark: environment.json 이란?
+
+스킨 디렉토리 내 `enviroment.json` 은 각 쇼핑몰에 맞는 정보를 서버에서 동적으로 주입해주기 때문에 연결된 도메인의 /environment.json  루트경로에 존재합니다.
+
+> 
+> environment.json는 서버에서 주입하기 때문에 디렉토리 내 존재할 필요가 없지만, 로컬에서 테스트 시 사용하기 위해 개발 환경에서만 `public` 디렉토리 하위에 위치하도록 설정하여 사용합니다.
+> webpack.dev.js 에서 아래와 같이 설정하실 수 있습니다.
+> ![image.png](https://nhnent.dooray.com/share/tree/WoOk8q6KT1K3MZcLSuyZsw/pages/3524081956753040600/attach-files/3530449302097367016)
+
+ environment.json 은 각 쇼핑몰 스킨 동작에 필수적인 정보인 아래 2가지 환경 변수를 포함하고 있습니다.
+
+* `clientId`
+    * 쇼핑몰 사이트를 출력하기 위해 할당된 각 상점의 쇼핑몰 구분 값을 의미합니다. shop API 호출 시 필수 request 값입니다. (프론트에서 API호출 시 해당하는 쇼핑몰을 판단할 수 있는 key값)
+    * shop by pro : 도메인/environment.json 으로 확인 가능
+        * 예) `example.shopby.co.kr/environment.json`
+    * shop by premium
+        * (방법1) 서비스어드민 > 서비스관리 > 쇼핑몰관리 > (쇼핑몰 선택) > 개발연동정보 > 클라이언트 아이디에서 확인 가능
+        * (방법2) 스킨 사용할 경우 : 스킨 도메인/environment.json 으로 확인 가능
+            * 예) `example.shopby.co.kr/environment.json`
+* `profile` : 쇼핑몰이 실행된 환경을 구분해주는 값입니다. `real` 환경만 제공하고 있습니다.
+
+아래는 기본 스킨에서 enviroment.json 을 불러오는 코드입니다.
+
+```
+1
+2            const result = await fetch('/environment.json');
+3            const {(clientId, profile)} = await result.json();
+4
+```
+
+아래는 api 연동 예시입니다.
+
+```typesciprt
+// src > index.js
+
+import { apiCreator } from '@shopby/shared';
+
+// shop-api url 정보 (https://docs.shopby.co.kr)
+const URL_MAP = {
+  API: {
+    real: 'https://shop-api.e-ncp.com',
+  },
+  STORAGE: {
+    real: 'https://storage.e-ncp.com',
+  },
+};
+
+const getEnvironmentInformation = async () => {
+  const result = await fetch('/environment.json');
+  const { clientId, profile } = await result.json();
+
+  return {
+    clientId,
+    profile
+  }
+}
+
+const initializeApi = async ({ clientId, profile }) => {
+  await apiCreator({
+    baseURL: URL_MAP.API[profile],
+    storageURL: URL_MAP.STORAGE[profile],
+    headerOption: {
+      clientId,
+      platform: isMobile ? PLATFORM_TYPE.MOBILE_WEB : PLATFORM_TYPE.PC,
+    },
+  });
+
+};
+
+const renderApp = async () => {
+  const environmentInformation = await getEnvironmentInformation();
+  await initializeApi(environmentInformation);
+
+  const app = document.getElementById('app');
+  const root = createRoot(app);
+
+  root.render(
+    
+      
+    
+  );
+};
+
+renderApp();
+```
+
+
+
+
+
+
+
+### :heavy_check_mark: '수정 불가' 디렉토리 정보
+
+워크스페이스에서 제공하는 서비스가 정상적으로 반영되기 위해 지켜야하는 구조 변경이 불가한 부분이 있습니다.
+아래 언급되는 디렉토리나 파일은 각 환경에 맞게 내용 수정은 가능하나 파일명이나 구조와 같은 부분은 수정할 수 없습니다. 수정 시 정상적으로 동작하지 않을 수 있습니다.
+
+* `root` 디렉토리 기준
+    * pubilic > environment.json - 개발하는 쇼핑몰 정보를 입력필요
+    * combine - 배너 정보를 입력필요
+    * `.npmrc` - shopby 패키지 레포지토리 정보를 의미
+
+### :heavy_check_mark: 전역 [컨텍스트](https://legacy.reactjs.org/docs/context.html)
+
+오로라 리액트 스킨이 정상적으로 동작하기 위해 컨텍스트가 필요합니다. 해당 컨텍스트에 접근하기 위해 하기 `App.jsx` 에 하기 예시와 같이 [프로바이더](https://legacy.reactjs.org/docs/context.html#contextprovider)로 감싸야 한다.
+
+> 프로바이더를 임의로 삭제 혹은 이동 시 오류가 발생할 수 있음에 유의해주시길 바랍니다.
+
+```typescript
+// src > App.jsx
+
+const App = ({ clientId, profile }) => (
+  
+    
+      
+        
+          
+            
+              
+                
+                  
+                    
+                    
+                  
+                
+              
+            
+          
+        
+      
+    
+  
+);
+```
+
+### :heavy_check_mark: 전역 오류 핸들링
+
+* `/src/components/ErrorBoundary`
+
+[unhandledrejection](https://developer.mozilla.org/en-US/docs/Web/API/Window/unhandledrejection_event) 이벤트 바인딩으로 비동기 오류를 핸들링합니다.
+아래 정의된 오류는 내부 정책으로 정의되어 사용하기 때문에,  라우팅경로 변경 시 정상적으로 동작하지 않을 수 있음을 유의해야합니다.
+
+| 상태 | 오류 코드 | 라우팅 경로 | 설명 |
+| --- | ----- | ------ | --- |
+| 400 | M009 | /expired-mall | 만료된 쇼핑몰 |
+| 402 | - | /expired-mall | 만료된 쇼핑몰 |
+| 404 | - | /not-found | 페이지 없음 |
+| 5xx | - | /service-check | 서버점검 |
+
+### :heavy_check_mark: '수정 가능' 디렉토리 정보
+
+페이지 커스텀을 위해 수정할 수 있는 디렉토리 정보는 아래와 같습니다.
+
+* `/src` 하위
+    * 단, `index.js` 에 존재하는 하위 부분은 수정 시 shopby-shop api 가 정상적으로 동작하지 않을 수 있으니 주의 필요
+
+![image.png](https://nhnent.dooray.com/share/tree/WoOk8q6KT1K3MZcLSuyZsw/pages/3524081956753040600/attach-files/3524119727741307592)

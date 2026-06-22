@@ -1,0 +1,116 @@
+---
+title: "마이페이지_혜택관리"
+depth: 2
+path: "오로라 리액트 스킨개발가이드 > 스킨 개발_API 활용가이드 > 마이페이지_혜택관리"
+---
+
+# 마이페이지_혜택관리
+
+## 이해하기
+
+```
+샵바이 패키지(shared)를 이용하지 않는 경우, 참고하실 수 있는 문서입니다.
+```
+
+> 회원이 쇼핑몰에서 제공하는 쿠폰, 적립금 등 제공 받은 혜택을 확인할 수 있습니다.
+
+* ? 쿠폰
+* ? 적립금
+
+![Group 3.png](https://nhnent.dooray.com/share/tree/WoOk8q6KT1K3MZcLSuyZsw/pages/3519672420985537222/attach-files/3525559323642900444)
+
+- - -
+
+## ? 보유 쿠폰
+
+아래 2가지 유형의 쿠폰 리스트를 제공합니다.
+
+ⓐ사용 가능 쿠폰: 발급 받은 쿠폰 중 사용기간이 남아 있는 쿠폰
+ⓑ 사용 불가 쿠폰: 발급 받은 쿠폰 중 사용이 불가한 쿠폰 (기간 만료 및 사용 완료)
+
+
+### :heavy_check_mark:**ⓐ** 사용 가능 쿠폰
+
+![쿠폰1.JPG](https://nhnent.dooray.com/share/tree/WoOk8q6KT1K3MZcLSuyZsw/pages/3519672420985537222/attach-files/3520505105518050358)
+
+
+### :heavy_check_mark:**ⓑ** 사용 불가 쿠폰
+
+![쿠폰2.JPG](https://nhnent.dooray.com/share/tree/WoOk8q6KT1K3MZcLSuyZsw/pages/3519672420985537222/attach-files/3520505105593414477)
+
+
+
+### :heavy_check_mark:**쿠폰 리스트**
+
+> [GET /coupons](https://docs.shopby.co.kr/?url.primaryName=promotion/#/Coupon/get-my-coupons)
+
+```
+▶ 내 쿠폰 가져오기
+회원의 사용가능 쿠폰과 사용불가 쿠폰을 구분하여 조회합니다
+```
+
+API 호출 시 요청 파라미터 `usable` 의 값에 따라 사용 가능 쿠폰 혹은 사용 불가 쿠폰 정보를 조회 할 수 있습니다.
+
+`usable=true` 인 경우에는 조회 시점 기준으로 사용 가능한 쿠폰의 정보를 확인 가능하며,
+`usable=false`인 경우에는 조회 시점 기준으로 사용불가한 쿠폰의 정보를 확인할 수 있습니다.
+
+기본 스킨의 경우 사용가능 쿠폰 리스트에서는 '만료일'을 출력하고, 사용불가 쿠폰리스트에서는 '사용일' 또는 '만료일'을 출력합니다.
+각 날짜 출력 구분은 아래의 내용으로 처리 하시면 됩니다.
+
+```
+사용가능 쿠폰리스트의 만료일은 'used'가 false일 때 'useEndYmdt' 값을 만료일으로 출력
+사용불가 쿠폰리스트의 사용일은 'used'가 true일 때 'useYmdt'값을 사용일으로 출력
+사용불가 쿠폰리스트의 만료일은 'used'가 false이고, 조회일 기준으로 'useEndYmdt'가 초과한 경우 'useEndYmdt' 값을 만료일으로 출력
+```
+
+
+### :heavy_check_mark: 쿠폰 등록 하기
+
+> [POST /coupons/register-code/{promotionCode}](https://docs.shopby.co.kr/?url.primaryName=promotion/#/Coupon/post-register-code-download)
+
+```
+▶ 코드 쿠폰 발급하기
+등록된 프로모션 코드를 입력하여 회원에게 쿠폰을 발급합니다.
+```
+
+기본 스킨에서는 쿠폰 등록 버튼을 통해 쿠폰코드를 입력하여 쿠폰을 추가할 수 있는 기능을 제공합니다.
+쿠폰 등록 가능한 쿠폰 발급은 shop by pro 어드민 [프로모션 > 쿠폰 관리] 에서
+발급 유형을 '코드발급'으로 등록한 쿠폰을 추가 할 수 있습니다.
+쿠폰 코드는 쇼핑몰 운영자가 쿠폰 등록 시 입력한 프로모션 코드를 입력하면 쿠폰 추가가 가능합니다.
+
+![스크린샷 2023-04-20 143850.png](https://nhnent.dooray.com/share/tree/WoOk8q6KT1K3MZcLSuyZsw/pages/3519672420985537222/attach-files/3520505105676732625)
+
+- - -
+
+## ?  적립금
+
+회원이 보유한 적립금 리스트를 제공합니다.
+기본 스킨에서는 1개의 적립금 리스트에서 '지급된 적립금'과 '차감된 적립금'이 각 행으로 제공되고 있습니다.
+지금/차감이 실행된 일시와 지금/차감 사유가 노출되는 내용 영역, 지급/차감 금액, 적립금의 유효기간(있는 경우)이 출력됩니다.
+
+![적립금.JPG](https://nhnent.dooray.com/share/tree/WoOk8q6KT1K3MZcLSuyZsw/pages/3519672420985537222/attach-files/3520505105398181386)
+
+
+
+> [GET /profile/accumulations](https://docs.shopby.co.kr/?url.primaryName=manage/#/Accumulation/search-accumulation-histories)
+
+```
+▶ 적립금 이력 조회하기
+회원의 적립금 내역을 모두 조회합니다
+```
+
+response 스키마 내 `accumulationStatusGroupType` 의 값에 따라 지급, 차감 여부를 구분 할 수 있으며, 적립 사유는 `accumulationReserveReason` 코드를 통해 확인 할 수 있습니다.
+유효기간은 `registerYmdt`\~ `expireYmdt` 의 값에 따라 출력하시면 됩니다.
+
+회원의 적립금 요약 내용(사용 가능한 총 적립금, 만료된 총 적립금)을 조회 하기 위해서는 아래의 API를 통해 확인 가능합니다.
+
+> [GET /profile/accumulations/summary](https://docs.shopby.co.kr/?url.primaryName=manage/#/Accumulation/search-accumulations-summary)
+
+```
+▶ 적립금 요약 조회하기
+등록된 프로모션 코드를 입력하여 회원에게 쿠폰을 발급합니다.
+```
+
+
+
+

@@ -1,0 +1,1564 @@
+[
+  {
+    "method": "GET",
+    "path": "/admins",
+    "summary": "샵바이 어드민 권한 조회",
+    "description": "샵바이에 등록된 어드민의 권한 정보를 조회한다.\nMASTER 어드민일 경우 권한이 존재하지 않습니다.\nMASTER 어드민을 조회 할 경우 권한그룹: \"\", 개인정보 권한: true 로 응답됩니다.\n\nAuthorization 은 필수값입니다.",
+    "tags": ["Admin"],
+    "parameters": [
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "각 어드민에서 복사된 값"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/admins1091512367"
+            },
+            "examples": {
+              "get-admins-authority": {
+                "value": "{\n  \"authorityGroupName\" : \"권한그룹명\",\n  \"permitsPrivateInformation\" : false\n}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/admins/merchandisers",
+    "summary": "쇼핑몰 상품담당 MD 운영자 조회",
+    "description": "특정 쇼핑몰의 상품담당 MD 운영자를 조회하는 API 입니다.\n",
+    "tags": ["Admin"],
+    "parameters": [
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "각 어드민에서 복사된 값"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/admins-merchandisers-1458267913"
+            },
+            "examples": {
+              "get-md-admins": {
+                "value": "[ {\n  \"adminNo\" : 1,\n  \"name\" : \"test\",\n  \"id\" : \"test\"\n}, {\n  \"adminNo\" : 2,\n  \"name\" : \"test2\",\n  \"id\" : \"test2\"\n} ]"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/admins/{adminNo}",
+    "summary": "샵바이 어드민 조회",
+    "description": "### 어드민 상태\n- WAITING: 등록대기\n- INVESTIGATION: 검토중\n- ACTIVE: 등록완료\n- DELETE: 삭제\n- LOCKED: 로그인 잠금\n- DORMANT: 휴면\n\n### 어드민 권한\n- MASTER: 마스터\n- NORMAL: 일반\n\n### 어드민 타입\n- PLATFORM: 플랫폼 어드민\n- SERVICE: 서비스 어드민\n- PARTNER: 파트너 어드민\n- SHOPBY: 샵바이 어드민\n- DEVELOPER: 개발자\n\n샵바이에 등록된 어드민 정보를 조회한다.",
+    "tags": ["Admin"],
+    "parameters": [
+      {
+        "name": "adminNo",
+        "in": "path",
+        "description": "어드민 번호",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "각 어드민에서 복사된 값"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/admins-adminNo933950945"
+            },
+            "examples": {
+              "get-admins": {
+                "value": "{\n  \"adminNo\" : 1,\n  \"adminName\" : \"test\",\n  \"adminId\" : \"test\",\n  \"jobPositionName\" : \"\",\n  \"departmentName\" : \"\",\n  \"jobDutyName\" : \"\",\n  \"email\" : \"nhn@nhncommerce.com\",\n  \"phoneNo\" : \"010-1111-1111\",\n  \"mobileNo\" : \"010-1111-1111\",\n  \"externalAccessEnabled\" : false,\n  \"permittedIpAddresses\" : [ ],\n  \"phoneCertificationYn\" : false,\n  \"expireDateTime\" : null,\n  \"adminStatus\" : \"ACTIVE\",\n  \"adminType\" : \"SERVICE\",\n  \"adminRole\" : \"MASTER\",\n  \"serviceNo\" : 3,\n  \"partnerNo\" : null\n}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/configurations/admin/domains",
+    "summary": "몰 도메인 조회",
+    "description": "### 몰 도메인 정보를 조회 합니다.\n",
+    "tags": ["Mall-Domain"],
+    "parameters": [
+      {
+        "name": "deviceType",
+        "in": "query",
+        "description": "디바이스 타입. 없으면 전체검색 (PC / MOBILE)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "각 어드민에서 복사된 값"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/configurations-admin-domains1790762806"
+            },
+            "examples": {
+              "get-mall-domains": {
+                "value": "[ {\n  \"mallNo\" : 1,\n  \"mallId\" : \"abc\",\n  \"domain\" : \"abc.com\",\n  \"deviceType\" : \"PC\",\n  \"ssl\" : true\n} ]"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/contracts",
+    "summary": "계약서 조회하기",
+    "description": "계약서를 조회한다.\n\n #### 정산 유형\n - DAY: 일 정산\n- WEEK: 주 정산\n- MONTH: 월 정산\n \n #### 정산 타입\n - TOMORROW: 전일\n- YESTERDAY: 익일\n \n #### 정산요일\n [MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY]\n ",
+    "tags": ["Contract"],
+    "parameters": [
+      {
+        "name": "page",
+        "in": "query",
+        "description": "페이지 번호",
+        "required": false,
+        "schema": {
+          "type": "number"
+        },
+        "example": "1"
+      },
+      {
+        "name": "pageSize",
+        "in": "query",
+        "description": "페이지 사이즈",
+        "required": false,
+        "schema": {
+          "type": "number"
+        },
+        "example": "10"
+      },
+      {
+        "name": "partnerNos",
+        "in": "query",
+        "description": "파트너 번호들(미입력 시, 전체 조회)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "[1, 2, 3]"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "각 어드민에서 복사된 값"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/contracts-1572845133"
+            },
+            "examples": {
+              "get-contract-list": {
+                "value": "{\n  \"totalCount\" : 1,\n  \"contents\" : [ {\n    \"contractNo\" : 1,\n    \"mallNo\" : 1,\n    \"partnerNo\" : 1,\n    \"merchandiserNo\" : 1,\n    \"commissionRate\" : 0,\n    \"memo\" : null,\n    \"contractType\" : null,\n    \"promotionAgreed\" : false,\n    \"status\" : \"ACTIVE\",\n    \"additionalInfo\" : \"{\\\"key\\\": \\\"value\\\"}\",\n    \"settlementConfig\" : {\n      \"settlementPeriodType\" : \"MONTH\",\n      \"domesticProvisionRate\" : 100,\n      \"domesticSettlementDay\" : 5,\n      \"domesticSettlementHolidayType\" : \"YESTERDAY\",\n      \"domesticSettlementDayOfWeek\" : \"FRIDAY\",\n      \"overseasProvisionRate\" : 100,\n      \"overseasSettlementDay\" : 5,\n      \"overseasSettlementHolidayType\" : \"YESTERDAY\",\n      \"overseasSettlementDayOfWeek\" : \"MONDAY\"\n    }\n  } ]\n}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/contracts",
+    "summary": "신규 계약 등록하기",
+    "description": "\n등록되어있는 파트너와 신규 계약을 등록한다.\n이미 쇼핑몰 - 파트너간 계약관계가 존재한다면 새로 등록할 수 없다.\n\n- memo 는 필수값이 아님\n- contractContent는 입점계약서를 사용할 경우 필수\n\n #### 정산 유형\n - DAY: 일 정산\n- WEEK: 주 정산\n- MONTH: 월 정산\n \n #### 정산 타입\n - TOMORROW: 전일\n- YESTERDAY: 익일\n \n #### 정산요일\n [MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY]\n ",
+    "tags": ["Contract"],
+    "parameters": [
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "각 어드민에서 복사된 값"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/contracts594295227"
+          },
+          "examples": {
+            "post-new-contract": {
+              "value": "{\n  \"partnerNo\" : 5,\n  \"merchandiserNo\" : 10,\n  \"commissionRate\" : 10,\n  \"contractContent\" : \"<p>입점계약서</p>\",\n  \"memo\" : null,\n  \"contractType\" : null,\n  \"additionalInfo\" : \"{\\\"key\\\": \\\"value\\\"}\",\n  \"settlementConfig\" : {\n    \"settlementPeriodType\" : \"MONTH\",\n    \"domesticSettlementDay\" : 5,\n    \"domesticSettlementHolidayType\" : \"YESTERDAY\",\n    \"domesticSettlementDayOfWeek\" : \"FRIDAY\",\n    \"overseasSettlementDay\" : 5,\n    \"overseasSettlementHolidayType\" : \"YESTERDAY\",\n    \"overseasSettlementDayOfWeek\" : \"MONDAY\"\n  }\n}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/contracts",
+    "summary": "계약서 상태 수정하기",
+    "description": "몰과 파트너간의 계약 상태를 수정한다.\n\n #### 계약 상태\n - APPROVAL: 계약 동의\n- DISAPPROVAL: 계약 반려\n- SUSPEND: 계약 일시정지\n- UNSUSPEND: 계약 일시정지 해제\n ",
+    "tags": ["Contract"],
+    "parameters": [
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "각 어드민에서 복사된 값"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/contracts-925074272"
+          },
+          "examples": {
+            "put-contract-status": {
+              "value": "{\n  \"status\" : \"APPROVAL\",\n  \"contractNos\" : [ 1, 2 ]\n}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/contracts/{partnerNo}",
+    "summary": "계약서 상세 조회하기",
+    "description": "\n쇼핑몰 - 파트너간의 계약정보 상세 조회\n\n### 거래 유형\n- ELECTRONIC: 전자계약\n- HANDWRITING: 수기계약\n\n### 거래 상태\n- WAITING: 거래대기\n- INVESTIGATION: 검토중\n- ACTIVE: 거래중\n- SUSPEND: 일시중지\n\n #### 정산 유형\n - DAY: 일 정산\n- WEEK: 주 정산\n- MONTH: 월 정산\n \n #### 정산 타입\n - TOMORROW: 전일\n- YESTERDAY: 익일\n \n #### 정산요일\n [MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY]\n ",
+    "tags": ["Contract"],
+    "parameters": [
+      {
+        "name": "partnerNo",
+        "in": "path",
+        "description": "",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "각 어드민에서 복사된 값"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/contracts-partnerNo-51369225"
+            },
+            "examples": {
+              "get-contract-info-detail": {
+                "value": "{\n  \"contractNo\" : 1,\n  \"mallNo\" : 1,\n  \"partnerNo\" : 1,\n  \"merchandiserNo\" : 1,\n  \"contractType\" : \"ELECTRONIC\",\n  \"contractStatus\" : \"ACTIVE\",\n  \"commissionRate\" : 1.1,\n  \"promotionAgreed\" : true,\n  \"createdDateTime\" : \"2023-12-11T17:46:57\",\n  \"startedDateTime\" : \"2023-12-11T18:25:34\",\n  \"entryContracts\" : [ {\n    \"contents\" : \"<p>입점계약서</p>\",\n    \"changeReason\" : \"\",\n    \"agreed\" : true,\n    \"createdDateTime\" : \"2023-12-11T17:46:57\",\n    \"agreedDateTime\" : \"2023-12-11T19:04:22\"\n  } ],\n  \"externalApiKey\" : \"key\",\n  \"settlementConfig\" : {\n    \"settlementPeriodType\" : \"MONTH\",\n    \"domesticProvisionRate\" : 100,\n    \"domesticSettlementDay\" : 5,\n    \"domesticSettlementHolidayType\" : \"YESTERDAY\",\n    \"domesticSettlementDayOfWeek\" : \"FRIDAY\",\n    \"overseasProvisionRate\" : 100,\n    \"overseasSettlementDay\" : 5,\n    \"overseasSettlementHolidayType\" : \"YESTERDAY\",\n    \"overseasSettlementDayOfWeek\" : \"MONDAY\"\n  }\n}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/contracts/{partnerNo}",
+    "summary": "계약서 수정하기",
+    "description": "계약서를 수정한다.\n\n #### 정산 유형\n - DAY: 일 정산\n- WEEK: 주 정산\n- MONTH: 월 정산\n \n #### 정산 타입\n - TOMORROW: 전일\n- YESTERDAY: 익일\n \n #### 정산요일\n [MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY]\n ",
+    "tags": ["Contract"],
+    "parameters": [
+      {
+        "name": "partnerNo",
+        "in": "path",
+        "description": "",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "각 어드민에서 복사된 값"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/contracts-partnerNo-1265137783"
+          },
+          "examples": {
+            "put-contract": {
+              "value": "{\n  \"merchandiserNo\" : 10,\n  \"commissionRate\" : 10,\n  \"contractContent\" : \"<p>입점계약서</p>\",\n  \"memo\" : null,\n  \"contractType\" : null,\n  \"additionalInfo\" : \"{\\\"key\\\": \\\"value\\\"}\",\n  \"settlementConfig\" : {\n    \"settlementPeriodType\" : \"MONTH\",\n    \"domesticSettlementDay\" : 5,\n    \"domesticSettlementHolidayType\" : \"YESTERDAY\",\n    \"domesticSettlementDayOfWeek\" : \"FRIDAY\",\n    \"overseasSettlementDay\" : 5,\n    \"overseasSettlementHolidayType\" : \"YESTERDAY\",\n    \"overseasSettlementDayOfWeek\" : \"MONDAY\"\n  }\n}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/currencies",
+    "summary": "몰 환율 설정 조회",
+    "description": "\n몰의 환율 설정을 조회한다.",
+    "tags": ["Currency"],
+    "parameters": [
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "각 어드민에서 복사된 값"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/currencies495944049"
+            },
+            "examples": {
+              "get-currencies": {
+                "value": "[ {\n  \"exchangeTo\" : \"KRW\",\n  \"exchangeRate\" : 1\n} ]"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/currencies/{currencyCode}",
+    "summary": "몰 환율 설정 수정",
+    "description": "\n몰의 환율 설정을 수정한다.",
+    "tags": ["Currency"],
+    "parameters": [
+      {
+        "name": "currencyCode",
+        "in": "path",
+        "description": "통화 - CNY, USD, JPY, KRW",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "usd"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "각 어드민에서 복사된 값"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/currencies-currencyCode-1479264625"
+          },
+          "examples": {
+            "update-currencies": {
+              "value": "{\n  \"exchangeRate\" : 1.356\n}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/malls",
+    "summary": "쇼핑몰 상세 조회",
+    "description": "### Mall 정보를 조회 합니다.\n",
+    "tags": ["Mall"],
+    "parameters": [
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "각 어드민에서 복사된 값"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/malls-1901494364"
+            },
+            "examples": {
+              "get-mall-detail": {
+                "value": "{\n  \"mallName\" : \"몰 이름\",\n  \"mallType\" : \"NCP\",\n  \"url\" : {\n    \"pc\" : \"pc\",\n    \"mobile\" : \"mobile\",\n    \"android\" : \"android\",\n    \"ios\" : \"ios\"\n  },\n  \"productDetailUrl\" : {\n    \"pc\" : \"pc\",\n    \"mobile\" : \"mobile\"\n  }\n}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/malls/shopby-partner",
+    "summary": "쇼핑몰 자체 파트너 조회",
+    "description": "### 몰의 쇼핑몰 자체 파트너를 조회하는 API입니다.\n",
+    "tags": ["Mall"],
+    "parameters": [
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "각 어드민에서 복사된 값"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/malls-shopby-partner1061824175"
+            },
+            "examples": {
+              "get-shopby-partner": {
+                "value": "{\n  \"partnerNo\" : 101,\n  \"partnerName\" : \"쇼핑몰 자체 상품\"\n}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/malls/contracts/partners",
+    "summary": "계약된 파트너 정보 조회하기",
+    "description": "\n## 부가설명 및 특이사항\nmallKey를 기준으로 계약된 파트너 정보를 조회하는 API 입니다.\n\nmallKey는 반드시 입력해야하며 파트너 번호가 없는 경우 모든 파트너에 대해 조회합니다.\n\n #### 정산 유형\n - DAY: 일 정산\n- WEEK: 주 정산\n- MONTH: 월 정산\n \n #### 정산 타입\n - TOMORROW: 전일\n- YESTERDAY: 익일\n \n #### 정산 요일\n [MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY]\n ",
+    "tags": ["Partner"],
+    "parameters": [
+      {
+        "name": "partnerNos",
+        "in": "query",
+        "description": "파트너 번호 목록",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1,2"
+      },
+      {
+        "name": "partnerMappingKeys",
+        "in": "query",
+        "description": "파트너 매핑키",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1,2"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "각 어드민에서 복사된 값"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/malls-contracts-partners-1832611812"
+            },
+            "examples": {
+              "get-contracted-partners": {
+                "value": "[ {\n  \"partnerNo\" : 1,\n  \"partnerName\" : \"test\",\n  \"companyName\" : \"testCompany\",\n  \"partnerMappingKey\" : null,\n  \"commissionRate\" : 12.1,\n  \"promotionAgreed\" : true,\n  \"startedDateTime\" : \"2025-10-27T12:03:26.261124261\",\n  \"externalApiKey\" : \"encryptedApiKey\",\n  \"partnerType\" : \"NORMAL\",\n  \"agreementDateTime\" : \"2025-10-22T12:03:26.261159669\",\n  \"settlementConfig\" : {\n    \"settlementPeriodType\" : \"MONTH\",\n    \"domesticProvisionRate\" : 100,\n    \"domesticSettlementDay\" : 5,\n    \"domesticSettlementHolidayType\" : \"YESTERDAY\",\n    \"domesticSettlementDayOfWeek\" : \"FRIDAY\",\n    \"overseasProvisionRate\" : 100,\n    \"overseasSettlementDay\" : 5,\n    \"overseasSettlementHolidayType\" : \"YESTERDAY\",\n    \"overseasSettlementDayOfWeek\" : \"MONDAY\"\n  }\n} ]"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/partners",
+    "summary": "파트너 등록하기",
+    "description": "## 부가설명 및 특이사항\n 쇼핑몰에 파트너를 등록하는 API 입니다.\n\n * 국내 파트너사에 경우에만 API로 파트너 등록 가능합니다. 해외 파트너사는 서비스어드민을 통해서 등록하시기 바랍니다.\n * API로 파트너를 등록하는 경우 개인정보 수집 및 이용 동의 절차를 진행하지 않기에 파트너사에 별도로 개인정보 수집 및 이용 동의를 받아야 합니다.\n * API로 파트너 등록 시 입점 계약서는 '사용 안 함' 상태로 등록됩니다.\n   * 입점 계약서 사용을 원하시는 경우 파트너 등록 후 [서비스어드민> 파트너관리> 파트너조회]에서 해당 파트너사의 거래쇼핑몰 '계약등록'하시면 됩니다. \n * API로 파트너 등록 시 마스터운영자 휴대폰 번호는 본인인증 절차 없이 등록됩니다.\n   * 휴대폰 번호를 잘못 입력한 경우 '운영자 휴대폰 인증'이 되지 않기에 유효하지 않은 휴대폰번호가 등록되는 일이 없도록 꼭 확인하시기 바랍니다.\n * 비밀번호가 공유되지 않도록 파트너 등록 후 파트너사 운영자에게 비밀번호를 수정할 수 있도록 안내 부탁드립니다.\n \n \n## 참고\n 입력 항목에 대한 설명은 'API업데이트 > [신규] 파트너 등록하기 API - 추가'에서 확인하실 수 있습니다. [API업데이트 게시판 바로가기 >](https://workspace.nhn-commerce.com/apiUpdate)\n  \n * merchandiserNo(담당MD) :운영자번호 번호 입력 (거래쇼핑몰 권한 + 상품MD 권한이 있는 운영자만 지정 가능)\n   * 서비스어드민> 서비스관리> 운영자 관리에서 운영자번호 확인 가능합니다.   \n  \n * id(마스터 운영자 어드민 아이디) : \n   * 중복불가 [어드민 아이디 중복 체크하기 API >](https://server-docs.shopby.co.kr/#/Partner/get-partners-exist-admin-id)\n   * id 시작은 소문자로시작해야 합니다.\n   * 그 뒤에는 영문 대소문자와 숫자로 구성된 4자에서 19자 사이의 문자열이 와야 합니다.\n   * 전체 길이는 최소 5자(첫 소문자 + 4자)에서 최대 20자(첫 소문자 + 19자)입니다.\n * partnerName(파트너명) : 중복불가  : [파트너명 중복 체크하기 API >](https://server-docs.shopby.co.kr/#/Partner/get-partners-exist-partner-name)  \n * bank(은행코드) : [은행코드 바로가기 >](https://workspace.nhn-commerce.com/support/recommendedContents/193355)  \n   * 은행코드를 제공하지 않는 은행인 경우 null로 입력 후 bankName(은행명)에 은행명을 기입하시기 바랍니다.\n  \n * bankName(은행명) :\n   * bank(은행코드)에 은행코드를 입력한 경우 null로 입력\n   * bank(은행코드) null로 입력한 경우 은행명 입력\n   \n * 이메일 유효성 검사 조건\n   * 로컬 파트(@ 앞쪽): 허용되는 특수 문자(.!#-'*+/-9=?A-Z^-~), 대문자, 숫자 등을 포함하는 0에서 64자 길이의 문자열.\n   * 도메인 파트(@ 뒤쪽): 첫 글자는 영문자나 숫자로 시작하고, 중간에 하이픈을 포함할 수 있으며, 최대 63자 길이의 도메인 라벨.\n   * ex) test@example.com, john.doe\"@example.com, user.name+tag@sub.domain.com\n\n * 전화번호 유효성 검사 조건\n   * 숫자 2-4자리, 하이픈, 숫자 3-5자리, 하이픈, 숫자 4자리 (예: 123-456-7890)\n   * 숫자 4자리, 하이픈, 숫자 4자리 (예: 1234-5678)\n   * 숫자 8-12자리 연속된 숫자 (예: 12345678, 123456789012)\n \n #### 과세형태\n - NORMAL: 일반과세자\n- SIMPLE: 간이과세자\n- VAT_FREE: 부가세 면세사업자\n- CORPORATION: 법인사업자\n- FREE_CORPORATION: 면세법인사업자\n- ETC: 기타\n \n #### 정산 유형\n - DAY: 일 정산\n- WEEK: 주 정산\n- MONTH: 월 정산\n \n #### 정산 타입\n - TOMORROW: 전일\n- YESTERDAY: 익일\n ",
+    "tags": ["Partner"],
+    "parameters": [
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "각 어드민에서 복사된 값"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/partners-669982228"
+          },
+          "examples": {
+            "post-partners": {
+              "value": "{\n  \"partnerName\" : \"partner-name\",\n  \"merchandiserNo\" : 2345,\n  \"promotionAgreedYn\" : true,\n  \"commissionRate\" : 0,\n  \"companyName\" : \"test-company\",\n  \"faxNo\" : \"01234567890\",\n  \"sellerTaxationType\" : \"NORMAL\",\n  \"business\" : {\n    \"registrationNo\" : \"1234567890\",\n    \"condition\" : \"업태\",\n    \"type\" : \"업종\",\n    \"onlineMarketingDeclarationNo\" : \"111\"\n  },\n  \"office\" : {\n    \"zipCode\" : \"12345\",\n    \"streetAddress1\" : \"서울시 구로구 디지털로 26길\",\n    \"streetAddress2\" : \"72\",\n    \"jibunAddress1\" : \"도로명 주소\",\n    \"jibunAddress2\" : \"도로명 주소 상세\"\n  },\n  \"representative\" : {\n    \"name\" : \"대표자이름\",\n    \"phoneNo\" : \"01012341234\",\n    \"email\" : \"abcd@gmail.com\"\n  },\n  \"settlementManager\" : {\n    \"name\" : \"정산담당자\",\n    \"phoneNo\" : \"01012341234\",\n    \"email\" : \"abcd@gmail.com\"\n  },\n  \"settlementConfig\" : {\n    \"settlementPeriodType\" : \"MONTH\",\n    \"domesticSettlementDay\" : 5,\n    \"domesticSettlementHolidayType\" : \"YESTERDAY\",\n    \"domesticSettlementDayOfWeek\" : \"FRIDAY\",\n    \"overseasSettlementDay\" : 5,\n    \"overseasSettlementHolidayType\" : \"YESTERDAY\",\n    \"overseasSettlementDayOfWeek\" : \"MONDAY\"\n  },\n  \"tradeBank\" : {\n    \"bank\" : \"KB\",\n    \"bankName\" : \"국민은행\",\n    \"account\" : \"12341234\",\n    \"depositorName\" : \"홍길동\"\n  },\n  \"privacyManager\" : {\n    \"name\" : \"개인정보책임자\",\n    \"phoneNo\" : \"01012341234\"\n  },\n  \"manager\" : {\n    \"name\" : \"최매니저\",\n    \"jobDuty\" : \"매니저\",\n    \"jobPosition\" : \"대리\",\n    \"department\" : \"전자판매A\",\n    \"phoneNo\" : \"010-1111-1111\",\n    \"email\" : \"\"\n  },\n  \"csManager\" : {\n    \"csManagerName\" : \"홍길동\",\n    \"csManagerPhoneNo\" : \"1800-3859\",\n    \"csManagerEmail\" : \"nhn@nhn.com\",\n    \"csManagerOperationInfo\" : \"평일 10:00 ~ 19:00\"\n  },\n  \"admin\" : {\n    \"id\" : \"adminTest\",\n    \"password\" : \"admin!@#123\",\n    \"name\" : \"admin-test\",\n    \"email\" : \"email@aa.cc\",\n    \"jobDuty\" : \"jobDuty\",\n    \"departmentName\" : \"개발부\",\n    \"jobPosition\" : \"대리\",\n    \"phoneNo\" : \"010-1234-1234\",\n    \"mobileNo\" : \"010-1234-1234\",\n    \"externalAccessEnabled\" : false\n  },\n  \"partnerMappingKey\" : null\n}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/partners-temp970273924"
+            },
+            "examples": {
+              "post-partners": {
+                "value": "{\n  \"partnerNo\" : 1\n}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/partners/temp",
+    "summary": "임시 파트너 등록하기",
+    "description": "## 부가설명 및 특이사항\n 쇼핑몰에 임시 파트너를 등록하는 API 입니다.\n \n## 참고\n * merchandiserNo(담당MD) :운영자번호 번호 입력 (거래쇼핑몰 권한 + 상품MD 권한이 있는 운영자만 지정 가능)\n   * 서비스어드민> 서비스관리> 운영자 관리에서 운영자번호 확인 가능합니다.   \n  \n * partnerName(파트너명) : 중복불가  : [파트너명 중복 체크하기 API >](https://server-docs.shopby.co.kr/#/Partner/get-partners-exist-partner-name)  \n   \n * 이메일 유효성 검사 조건\n   * 로컬 파트(@ 앞쪽): 허용되는 특수 문자(.!#-'*+/-9=?A-Z^-~), 대문자, 숫자 등을 포함하는 0에서 64자 길이의 문자열.\n   * 도메인 파트(@ 뒤쪽): 첫 글자는 영문자나 숫자로 시작하고, 중간에 하이픈을 포함할 수 있으며, 최대 63자 길이의 도메인 라벨.\n   * ex) test@example.com, john.doe\"@example.com, user.name+tag@sub.domain.com\n",
+    "tags": ["Partner"],
+    "parameters": [
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "각 어드민에서 복사된 값"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/partners-temp-486261392"
+          },
+          "examples": {
+            "post-temp-partners": {
+              "value": "{\n  \"partnerName\" : \"신규 파트너\",\n  \"adminName\" : \"홍길동\",\n  \"adminEmail\" : \"gildong.hong@nhn.com\",\n  \"merchandiserNo\" : 10,\n  \"memo\" : \"각 항목들을 정확히 입력해주세요\",\n  \"commissionRate\" : 1,\n  \"contractContent\" : \"<p>입점 계약 내용</p>\",\n  \"dependencyYn\" : false,\n  \"settlementConfig\" : {\n    \"settlementPeriodType\" : \"MONTH\",\n    \"domesticSettlementDay\" : 5,\n    \"domesticSettlementHolidayType\" : \"YESTERDAY\",\n    \"domesticSettlementDayOfWeek\" : \"FRIDAY\",\n    \"overseasSettlementDay\" : 5,\n    \"overseasSettlementHolidayType\" : \"YESTERDAY\",\n    \"overseasSettlementDayOfWeek\" : \"MONDAY\"\n  }\n}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/partners-temp970273924"
+            },
+            "examples": {
+              "post-temp-partners": {
+                "value": "{\n  \"partnerNo\" : 1\n}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/partners/{partnerNo}",
+    "summary": "몰과 계약된 파트너 조회",
+    "description": "## 부가설명 및 특이사항\n 쇼핑몰과 계약 파트너를 조회하는 api 입니다.\n \n### 파트너 상태\n- WAITING: 등록대기\n- INVESTIGATION: 검토중\n- ACTIVE: 등록완료\n\n### 파트너 유형\n- NORMAL: 일반\n- MALLDELIVERY: 배송파트너 (deprecated)\n- DELIVERY: 배송파트너\n- SHOPBY: 샵바이 파트너\n\n### 과세 형태\n- NORMAL: 일반과세자\n- SIMPLE: 간이과세자\n- VAT_FREE: 부가세 면세사업자\n- CORPORATION: 법인사업자\n- FREE_CORPORATION: 면세법인사업자\n- ETC: 기타\n\n### 어드민 상태\n- WAITING: 등록대기\n- INVESTIGATION: 검토중\n- ACTIVE: 등록완료\n- DELETE: 삭제\n- LOCKED: 로그인 잠금\n- DORMANT: 휴면\n\n### 어드민 권한\n- MASTER: 마스터\n- NORMAL: 일반\n\n### 어드민 타입\n- PLATFORM: 플랫폼 어드민\n- SERVICE: 서비스 어드민\n- PARTNER: 파트너 어드민\n- SHOPBY: 샵바이 어드민\n- DEVELOPER: 개발자",
+    "tags": ["Partner"],
+    "parameters": [
+      {
+        "name": "partnerNo",
+        "in": "path",
+        "description": "파트너 번호",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "각 어드민에서 복사된 값"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/partners-partnerNo-1680407816"
+            },
+            "examples": {
+              "get-mall-contracted-partner-info": {
+                "value": "{\n  \"partnerNo\" : 1,\n  \"partnerType\" : \"NORMAL\",\n  \"partnerName\" : \"홍길동\",\n  \"companyName\" : \"NCP\",\n  \"partnerStatus\" : \"ACTIVE\",\n  \"faxNo\" : \"\",\n  \"sampleUrl\" : \"https://www.e-ncp.com.com/\",\n  \"permittedIpAddress\" : \"\",\n  \"countryCode\" : \"KR\",\n  \"sellerTaxationType\" : \"NORMAL\",\n  \"supportsInternationalShipping\" : false,\n  \"business\" : {\n    \"registrationNo\" : \"1234567890\",\n    \"onlineMarketingDeclarationNo\" : \"2023-경기성남-0001\",\n    \"condition\" : \"도소매\",\n    \"type\" : \"전자상거래업\"\n  },\n  \"office\" : {\n    \"country\" : \"KR\",\n    \"zipCode\" : \"13487\",\n    \"address\" : \"경기도 성남시 분당구 대왕판교로645번길 16\",\n    \"detailAddress\" : \"(삼평동, NHN) 7층\",\n    \"jibun\" : \"경기도 성남시 분당구 삼평동 629\",\n    \"jibunDetail\" : \"NHN 플레이뮤지엄 7층\",\n    \"city\" : \"\",\n    \"stateOrRegion\" : \"\"\n  },\n  \"representative\" : {\n    \"name\" : \"김대표\",\n    \"phoneNo\" : \"01012341234\",\n    \"email\" : \"representative.kim@nhn.com\"\n  },\n  \"manager\" : {\n    \"name\" : \"이관리\",\n    \"department\" : \"커머스 사업본부\",\n    \"jobDuty\" : \"담당자\",\n    \"jobPosition\" : \"선임\",\n    \"phoneNo\" : \"01056785678\",\n    \"email\" : \"manager.lee@nhn.com\"\n  },\n  \"privacyManager\" : {\n    \"name\" : \"박보호\",\n    \"phoneNo\" : \"01013572468\"\n  },\n  \"settlementManager\" : {\n    \"name\" : \"최정산\",\n    \"phoneNo\" : \"01024681357\",\n    \"email\" : \"settlement.choi@nhn.com\"\n  },\n  \"tradeBank\" : {\n    \"bank\" : \"SHINHAN\",\n    \"bankName\" : \"신한은행\",\n    \"account\" : \"110123123456\",\n    \"depositorName\" : \"최정산\"\n  },\n  \"internationalCode\" : {\n    \"swiftCode\" : \"\",\n    \"abaRoutingNo\" : \"\",\n    \"ibanCode\" : \"\",\n    \"bsbCode\" : \"\"\n  },\n  \"masterAdminNo\" : 1,\n  \"masterAdminSummary\" : {\n    \"adminNo\" : 1,\n    \"adminName\" : \"test\",\n    \"adminId\" : \"test\",\n    \"jobPositionName\" : \"\",\n    \"departmentName\" : \"\",\n    \"jobDutyName\" : \"\",\n    \"email\" : \"nhn@nhncommerce.com\",\n    \"phoneNo\" : \"010-1111-1111\",\n    \"mobileNo\" : \"010-1111-1111\",\n    \"externalAccessEnabled\" : false,\n    \"permittedIpAddresses\" : [ ],\n    \"phoneCertificationYn\" : false,\n    \"expireDateTime\" : null,\n    \"adminStatus\" : \"ACTIVE\",\n    \"adminType\" : \"SERVICE\",\n    \"adminRole\" : \"MASTER\",\n    \"serviceNo\" : 3,\n    \"partnerNo\" : null\n  },\n  \"settlementConfig\" : {\n    \"settlementPeriodType\" : \"MONTH\",\n    \"domesticProvisionRate\" : 100,\n    \"domesticSettlementDay\" : 5,\n    \"domesticSettlementHolidayType\" : \"YESTERDAY\",\n    \"domesticSettlementDayOfWeek\" : null,\n    \"overseasProvisionRate\" : 100,\n    \"overseasSettlementDay\" : 5,\n    \"overseasSettlementHolidayType\" : \"YESTERDAY\",\n    \"overseasSettlementDayOfWeek\" : null\n  },\n  \"csManager\" : {\n    \"name\" : \"홍길동\",\n    \"phoneNo\" : \"1800-3859\",\n    \"email\" : \"nhn@nhn.com\",\n    \"operationInfo\" : \"평일 10:00 ~ 19:00\"\n  }\n}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/partners/{partnerNo}",
+    "summary": "파트너 수정하기",
+    "description": "## 부가설명 및 특이사항\n 쇼핑몰에 파트너를 수정하는 API 입니다.\n\n * bank(은행코드) : [은행코드 바로가기 >](https://workspace.nhn-commerce.com/support/recommendedContents/193355)  \n   * 은행코드를 제공하지 않는 은행인 경우 null로 입력 후 bankName(은행명)에 은행명을 기입하시기 바랍니다.\n  \n * bankName(은행명) :\n   * bank(은행코드)에 은행코드를 입력한 경우 null로 입력\n   * bank(은행코드) null로 입력한 경우 은행명 입력\n   \n * 이메일 유효성 검사 조건\n   * 로컬 파트(@ 앞쪽): 허용되는 특수 문자(.!#-'*+/-9=?A-Z^-~), 대문자, 숫자 등을 포함하는 0에서 64자 길이의 문자열.\n   * 도메인 파트(@ 뒤쪽): 첫 글자는 영문자나 숫자로 시작하고, 중간에 하이픈을 포함할 수 있으며, 최대 63자 길이의 도메인 라벨.\n   * ex) test@example.com, john.doe\"@example.com, user.name+tag@sub.domain.com\n\n * 전화번호 유효성 검사 조건\n   * 숫자 2-4자리, 하이픈, 숫자 3-5자리, 하이픈, 숫자 4자리 (예: 123-456-7890)\n   * 숫자 4자리, 하이픈, 숫자 4자리 (예: 1234-5678)\n   * 숫자 8-12자리 연속된 숫자 (예: 12345678, 123456789012)\n \n #### 과세형태\n - NORMAL: 일반과세자\n- SIMPLE: 간이과세자\n- VAT_FREE: 부가세 면세사업자\n- CORPORATION: 법인사업자\n- FREE_CORPORATION: 면세법인사업자\n- ETC: 기타\n ",
+    "tags": ["Partner"],
+    "parameters": [
+      {
+        "name": "partnerNo",
+        "in": "path",
+        "description": "파트너 번호",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "각 어드민에서 복사된 값"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/partners-partnerNo-12575770"
+          },
+          "examples": {
+            "put-partner": {
+              "value": "{\n  \"office\" : {\n    \"zipCode\" : \"12345\",\n    \"address\" : \"서울시 구로구 디지털로 26길\",\n    \"detailAddress\" : \"72\",\n    \"jibun\" : \"도로명 주소\",\n    \"jibunDetail\" : \"도로명 주소 상세\"\n  },\n  \"companyName\" : \"test-company\",\n  \"sellerTaxationType\" : \"NORMAL\",\n  \"faxNo\" : \"01234567890\",\n  \"representative\" : {\n    \"name\" : \"대표자이름\",\n    \"phoneNo\" : \"01012341234\",\n    \"email\" : \"abcd@gmail.com\"\n  },\n  \"business\" : {\n    \"registrationNo\" : \"1234567890\",\n    \"condition\" : \"업태\",\n    \"type\" : \"업종\",\n    \"onlineMarketingDeclarationNo\" : \"111\"\n  },\n  \"settlementManager\" : {\n    \"name\" : \"정산담당자\",\n    \"phoneNo\" : \"01012341234\",\n    \"email\" : \"abcd@gmail.com\"\n  },\n  \"tradeBank\" : {\n    \"bank\" : \"KB\",\n    \"bankName\" : \"국민은행\",\n    \"account\" : \"12341234\",\n    \"depositorName\" : \"홍길동\"\n  },\n  \"permittedIpAddress\" : \"\",\n  \"privacyManager\" : {\n    \"name\" : \"개인정보책임자\",\n    \"phoneNo\" : \"01012341234\"\n  },\n  \"manager\" : {\n    \"name\" : \"최매니저\",\n    \"jobDuty\" : \"매니저\",\n    \"jobPosition\" : \"대리\",\n    \"department\" : \"전자판매A\",\n    \"phoneNo\" : \"010-1111-1111\",\n    \"email\" : \"\"\n  },\n  \"sampleUrl\" : \"sampleUrl\",\n  \"csManager\" : {\n    \"name\" : \"홍길동\",\n    \"phoneNo\" : \"1800-3859\",\n    \"email\" : \"nhn@nhn.com\",\n    \"operationInfo\" : \"평일 10:00 ~ 19:00\"\n  }\n}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/partners/exist/admin-id",
+    "summary": "어드민아이디 중복 체크하기",
+    "description": "## 부가설명 및 특이사항\n 어드민아이디 중복 체크하는 API입니다.",
+    "tags": ["Partner"],
+    "parameters": [
+      {
+        "name": "adminId",
+        "in": "query",
+        "description": "어드민아이디",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "adminId"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "각 어드민에서 복사된 값"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/partners-exist-admin-id1887798343"
+            },
+            "examples": {
+              "get-partners-exist-admin-id": {
+                "value": "{\n  \"result\" : false\n}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/partners/exist/partner-name",
+    "summary": "파트너명 중복 체크하기",
+    "description": "## 부가설명 및 특이사항\n 파트너명 중복 체크하는 API입니다.",
+    "tags": ["Partner"],
+    "parameters": [
+      {
+        "name": "partnerName",
+        "in": "query",
+        "description": "파트너명",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "partnerTest"
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "각 어드민에서 복사된 값"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/partners-exist-admin-id1887798343"
+            },
+            "examples": {
+              "get-partners-exist-partner-name": {
+                "value": "{\n  \"result\" : false\n}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/services",
+    "summary": "서비스 상세 조회",
+    "description": "서비스 상세 조회",
+    "tags": ["Service"],
+    "parameters": [
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-system-key"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "Bearer ABCDERAdjflaskjdfosiaetlkfs"
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다.<br>\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n ",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "각 어드민에서 복사된 값"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/services-1386425601"
+            },
+            "examples": {
+              "get-service-detail": {
+                "value": "{\n  \"serviceName\" : \"서비스 이름\",\n  \"servicePlan\" : \"PRO\",\n  \"representative\" : {\n    \"name\" : \"name\",\n    \"phoneNo\" : null,\n    \"email\" : null\n  },\n  \"address\" : {\n    \"zipCode\" : \"zipCode\",\n    \"address\" : \"address\",\n    \"detailAddress\" : \"detailAddress\",\n    \"jibun\" : \"jibun\",\n    \"jibunDetail\" : \"jibunDetail\"\n  },\n  \"business\" : {\n    \"registrationNo\" : \"\",\n    \"onlineMarketingDeclarationNo\" : \"\",\n    \"condition\" : \"\",\n    \"type\" : \"\"\n  }\n}"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+]

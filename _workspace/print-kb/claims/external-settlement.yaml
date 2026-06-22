@@ -1,0 +1,51 @@
+# 외주/정산 claim 레지스트리 — group: 외주
+# 출처: D 인터뷰 (Claude=인터뷰어, 지니=전문가). source_ref=인터뷰ID D-R1 (2026-06-05).
+# 정책/결정류는 owner(지니)가 terminal authority → verification=단일출처지만 권위 확정.
+
+- claim_id: KC-EXT-0001
+  statement: 외주 상품 주문이 들어오면 담당자가 수동으로 외주사에 발주한다(자동 발주 아님).
+  group: 외주
+  source_type: 1차-암묵지
+  source_ref: D-R1
+  verification: 단일출처
+  answers_cq: [CQ-SUB-03]
+
+- claim_id: KC-EXT-0002
+  statement: 외주 상품의 판매가(고객가)는 매입원가 기반 일괄 마크업이 아니라 상품별로 개별 책정한다.
+  group: 외주
+  source_type: 1차-암묵지
+  source_ref: D-R1
+  verification: 단일출처
+  answers_cq: [CQ-SUB-04, CQ-PRICE-12]
+
+- claim_id: KC-EXT-0003
+  statement: 외주사 정산은 월 단위 마감 정산이다.
+  group: 외주
+  source_type: 1차-암묵지
+  source_ref: D-R1
+  verification: 단일출처
+  answers_cq: [CQ-SUB-07]
+
+- claim_id: KC-EXT-0004
+  statement: 외주 제작물 불량 시 재작업·책임은 고정 규칙 없이 케이스별로 외주사와 협의해 처리한다.
+  group: 외주
+  source_type: 1차-암묵지
+  source_ref: D-R1
+  verification: 단일출처
+  answers_cq: [CQ-SUB-09]
+
+- claim_id: KC-EXT-0005
+  statement: 외주사에서 입고된 제작물은 후니가 자체 전수 검수한 뒤 출고한다.
+  group: 외주
+  source_type: 1차-암묵지
+  source_ref: D-R2
+  verification: 단일출처
+  answers_cq: [CQ-SUB-05]
+
+- claim_id: KC-EXT-0006
+  statement: 선택적 외주(자체 캐파 초과 시 톰슨/중철 등) 전환은 자동 규칙이 아니라 담당자의 현장 판단으로 결정한다.
+  group: 외주
+  source_type: 1차-암묵지
+  source_ref: D-R2
+  verification: 단일출처
+  answers_cq: [CQ-SUB-06]

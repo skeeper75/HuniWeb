@@ -1,0 +1,23 @@
+%% 프리미엄엽서 견적 — 현재 라이브(결함) vs 교정 후(골든)
+%% 진실소스: recompute_fixed.py 실측 (baseline 26,250 / fixed 20,000)
+flowchart LR
+    Q["칼라 단면<br/>출력매수 25"] --> NOW & FIX
+
+    subgraph NOW["❌ 현재 라이브 (결함)"]
+        direction TB
+        N1["S1 흑백단면<br/>350 × 25 = 8,750"] --> N3
+        N2["S2 흑백양면<br/>700 × 25 = 17,500"] --> N3
+        N3["합산 = 26,250 원<br/>F-1 축충돌 + F-2 이중배선"]
+    end
+
+    subgraph FIX["✅ 교정 후 (데이터 재배선)"]
+        direction TB
+        F1["S1 단일 comp<br/>칼라단면 D25 = 800"] --> F2["800 × 25<br/>= 20,000 원<br/>골든 PASS"]
+    end
+
+    classDef q fill:#e3f2fd,stroke:#1565c0,color:#0d47a1
+    classDef bad fill:#ffebee,stroke:#c62828,color:#b71c1c
+    classDef good fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20
+    class Q q
+    class N1,N2,N3 bad
+    class F1,F2 good

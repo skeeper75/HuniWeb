@@ -1,6 +1,11 @@
 ---
 name: hped-code-schema-audit
-description: 후니프린팅 가격엔진 프로그램 코드(pricing.py evaluate_price·price_views.py 뷰어/시뮬레이터·가격 admin 템플릿)가 DB 엔티티 각 속성(t_prc_price_formulas·price_components·formula_components·component_prices·t_dsc_* 할인의 컬럼·타입·제약·코드값·FK·트리거)에 맞게 제대로 구현됐는지를 속성 단위로 대조 진단하는 방법론 스킬. 설계 산출물(docs/prcx01-pricing-model.md·pricing-erd.md·sql DDL Phase7~10)이 코드·라이브 스키마에 충실히 반영됐는지 3-way(설계 의도↔코드 구현↔라이브 적용) 추적 절차, 컬럼별 코드 사용처(file:line) 대조, use_dims 선언↔component_prices 충전 차원↔evaluate_price NON_QTY_DIMS/TIER_DIMS 3원 정합 검사, dead(선언됐으나 미사용)·phantom(코드가 쓰나 미선언) 속성 적발, 트리거 가정 충돌 진단을 제공한다. '코드 DB 정합', '코드 스키마 대조', '속성 단위 구현 진단', '엔티티 속성 정합', '설계 산출물 추적', 'prcx01 반영 점검', 'use_dims 정합', 'dead phantom 속성', '코드 구현 진단 다시' 작업 시 반드시 이 스킬을 사용. 장치 역할 원리 정의는 hped-mechanism-research, 권위 엑셀 대비 정합 검증은 huni-price-quote 트랙이 담당하므로 그 작업에는 트리거하지 않는다.
+description: >
+  후니프린팅 가격엔진 코드(pricing.py·price_views.py·admin 템플릿)가 DB 엔티티 각 속성(t_prc_*·t_dsc_* 컬럼·
+  타입·제약·코드값·FK·트리거)에 맞게 구현됐는지 속성 단위로 대조 진단하는 방법론. 설계 산출물(prcx01·pricing-erd·DDL)
+  반영을 3-way(설계 의도↔코드↔라이브) 추적 + use_dims↔component_prices↔NON_QTY_DIMS/TIER_DIMS 3원 정합 + dead/phantom 속성 적발.
+  트리거: 코드 DB 정합, 코드 스키마 대조, 속성 단위 구현 진단, 설계 산출물 추적, prcx01 반영 점검, use_dims 정합, dead phantom 속성, 코드 구현 진단 다시.
+  장치 역할 원리는 hped-mechanism-research, 권위 엑셀 대비 검증은 huni-price-quote 트랙.
 ---
 
 # hped-code-schema-audit — 코드↔DB 엔티티 속성 정합 진단 방법론

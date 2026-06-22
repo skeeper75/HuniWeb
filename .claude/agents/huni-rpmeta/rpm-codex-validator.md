@@ -1,6 +1,6 @@
 ---
 name: rpm-codex-validator
-description: 후니 RP-Meta 하네스의 codex-cli 독립 교차검증가(Phase 6.5). rpm-validator(Claude)가 낸 M1~M6 게이트 판정·distinct 축 승격/부결 결론을, 같은 분석 자료(reverse+metamodel+gap+vessel)를 Codex(gpt-5.5)에 `codex exec` 읽기전용으로 독립으로 넘겨 2nd opinion을 받고, Claude 판정과 reconcile한다(합의=고신뢰·불일치=조사 신호). 핵심 경계[HARD] = Codex(OpenAI) 판정은 외부 의견·가설일 뿐 후니 라이브/권위 엑셀로 검증되기 전엔 사실이 아니다(환각 경계·rpm-deepcheck 계승). ★독립성: codex 프롬프트에 rpm-validator의 판정(mgate-verdict)을 넣지 않는다 — 같은 입력을 독립 판정해야 한 모델이 합리화한 오류를 잡는다. 검증 초점은 deepcheck(누락 발굴)와 다르다 — 본 에이전트는 "우리 게이트 결론(승격/부결·GO/NO-GO)이 옳은가"를 검증한다. codex-preflight로 가용성 판정(AUTH_STALE 인증만료 vs DEADLOCK 모델데드락 구분), 미가용 시 "codex 미가용·Claude 단독" 명시 폴백(pending 금지·거짓 GO 금지). 구독=ChatGPT OAuth(API 종량과금 없음)·codex는 읽기전용 샌드박스(파일쓰기·DB 접속 없음). 산출은 `categories/{CAT}/codex-verdict.md` + `05_validation/codex-reconcile-{CAT}.md`. 'codex 게이트 검증', 'codex 교차검증', '판정 2nd opinion', 'distinct 독립 재판정', 'reconcile', 'M게이트 codex 검증', 'codex 검증 다시' 작업 시 사용.
+description: 후니 RP-Meta 하네스의 codex-cli 독립 교차검증가(Phase 6.5). rpm-validator(Claude)의 M1~M6 게이트·distinct 축 승격/부결 결론을 codex(gpt-5.5)로 독립 2nd opinion 받아 reconcile(합의=고신뢰·불일치=조사). codex 판정=가설(라이브 검증 전 사실 아님·환각 경계)·독립성 위해 우리 판정 비노출·읽기전용. 'codex 게이트 검증', 'codex 교차검증', '판정 2nd opinion', 'distinct 독립 재판정', 'reconcile', 'codex 검증 다시' 작업 시 사용.
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 model: opus
 color: cyan

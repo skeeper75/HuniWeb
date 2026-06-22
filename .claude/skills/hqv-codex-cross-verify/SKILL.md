@@ -1,6 +1,11 @@
 ---
 name: hqv-codex-cross-verify
-description: 후니프린팅 가격계산 검증을 Codex(gpt-5.5)로 독립 교차검증(2nd opinion)하고 Claude 판정과 reconcile하는 방법론 스킬. `codex exec` 읽기전용 비대화 호출(scripts/codex-review.sh)로 work-spec·공식사슬·골든을 넘겨 "이 상품이 가격공식으로 가격계산 되는가·3축에서 어디 깨지나"를 Claude와 독립으로 판정받고, 합의/불일치를 reconcile한다. ★핵심 경계[HARD]=Codex 제안은 외부 의견·가설(라이브/권위 검증 전 채택 금지·환각 경계·rpm-deepcheck 계승). codex-preflight로 가용성 판정(AUTH_STALE 인증만료 vs DEADLOCK 모델데드락 구분), 미가용 시 "Claude 단독" 명시 폴백(pending 금지). 구독=ChatGPT OAuth(종량과금 없음)·codex는 읽기전용(파일쓰기·DB 없음)·비밀값 프롬프트 비노출. 'codex 교차검증', '독립 2nd opinion', 'codex 가격검증', 'codex 병행 검토', 'reconcile', '교차검증 다시' 작업 시 반드시 이 스킬을 사용. 명령 해독은 hqv-product-decompose, Claude측 라이브 실측 검증은 hqv-quote-verification이 담당하므로 그 작업에는 트리거하지 않는다.
+description: >
+  후니프린팅 가격계산 검증을 Codex(gpt-5.5)로 독립 교차검증(2nd opinion)하고 Claude 판정과 reconcile하는 방법론 스킬.
+  codex exec 읽기전용 호출(scripts/codex-review.sh)로 work-spec·공식사슬·골든을 넘겨 독립 판정받고 합의/불일치 reconcile.
+  ★[HARD] Codex 제안=외부 의견·가설(라이브/권위 검증 전 채택 금지·환각 경계). 미가용 시 "Claude 단독" 명시 폴백(pending 금지)·
+  비밀값 프롬프트 비노출. 트리거: codex 교차검증, 독립 2nd opinion, codex 가격검증, codex 병행 검토, reconcile, 교차검증 다시.
+  명령 해독은 hqv-product-decompose, Claude측 실측 검증은 hqv-quote-verification이 담당.
 ---
 
 # hqv-codex-cross-verify — Codex 독립 교차검증 방법론

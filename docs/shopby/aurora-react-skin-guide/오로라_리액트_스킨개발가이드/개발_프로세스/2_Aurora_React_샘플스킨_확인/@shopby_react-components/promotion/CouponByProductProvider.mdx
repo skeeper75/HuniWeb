@@ -1,0 +1,65 @@
+---
+title: "CouponByProductProvider"
+depth: 5
+path: "오로라 리액트 스킨개발가이드 > 개발 프로세스 > 2️⃣Aurora React 샘플스킨 확인 > @shopby/react-components > promotion > CouponByProductProvider"
+---
+
+# CouponByProductProvider
+
+## 속성
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | ---- | --- | ---- | --- |
+| productNo | true | number |  | 상품번호 |
+| children | false | ReactNode | - |  |
+
+## 상태
+
+* couponByProductState 는 useCouponByProductStateContext 를 호출해 사용한다.
+
+```typescript
+const couponByProductState = useCouponByProductStateContext();
+```
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | ---- | --- | ---- | --- |
+| coupons | false | object[] | [] | [response](https://docs.shopby.co.kr/?url.primaryName=promotion/#/Coupon/get-issuable-coupon-by-products) 타입과 동일 |
+| issuedCouponNos | false | object[] | [] | [response](https://docs.shopby.co.kr/?url.primaryName=promotion/#/Coupon/post-download-coupons)[] 타입과 동일 |
+| downloadedCouponResult | false | object |  | [response](https://docs.shopby.co.kr/?url.primaryName=promotion/#/Coupon/post-download-coupons) 타입과 동일 |
+| downloadedAllCouponResult | false | object |  | [response](https://docs.shopby.co.kr/?url.primaryName=promotion/#/Coupon/post-download-coupon-by-product) 타입과 동일 |
+
+## 액션
+
+* couponByProductAction 은 useCouponByProductActionContext 를 호출해 사용한다.
+
+```typescript
+const couponByProductAction = useCouponByProductActionContext();
+```
+
+| 이름 | 인자타입 | 필수여부 | 기본값 | 설명 | 관리하는 상태 |
+| --- | ---- | ---- | --- | --- | ------- |
+| fetchIssuableCouponsByProductNo | object | false |  | 상품 상세정보에서 다운로드 할 수 있는 모든 쿠폰을 조회함. | couponByProductState.coupons |
+| ㄴ productNo | number | false |  | 상품번호 |  |
+| ㄴ channelType | string | false |  | 채널타입
+ㄴ 예: NAVER\_RP, FACEBOOK |  |
+| downloadCouponByCouponNo | object | true |  | 선택한 쿠폰번호에 해당하는 다운로드 쿠폰을 발급함. | couponByProductState.downloadedCouponResultcouponByProductState.coupons |
+| ㄴ couponNo | number | true |  | 쿠폰번호 |  |
+| ㄴ channelType | string | false | '' | 채널타입
+ㄴ 예: NAVER\_RP, FACEBOOK |  |
+| downloadCouponsByProductNo | object | false |  | 해당 상품에서 다운로드 받을 수 있는 모든 쿠폰을 발급함. | couponByProductState.downloadedAllCouponResultcouponByProductState.coupons |
+| ㄴ productNo | number | false |  | 상품번호 |  |
+| ㄴ includesCartCoupon | boolean | false |  | 장바구니 쿠폰 포함여부 |  |
+| ㄴ channelType | string | false |  | 채널타입
+ㄴ 예: NAVER\_RP, FACEBOOK |  |
+
+## 사용예시
+
+```typescript
+const Example = () => {
+  return (
+    
+      
+    
+  )
+}
+```

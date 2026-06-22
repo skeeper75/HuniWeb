@@ -1,0 +1,209 @@
+{
+  "category": {
+    "id": "cat-1a9081df",
+    "slug": "사인제품-사각보드-81df",
+    "path": ["사인제품", "사각보드"],
+    "displayName": "사인제품 > 사각보드",
+    "productCount": 3,
+    "keywords": ["사인제품", "사각보드", "아크릴보드", "ai", "eps", "폼보드", "포맥스보드"],
+    "summary": "사인제품 > 사각보드 · 3개 상품",
+    "pricing": {
+      "templated": 0,
+      "quoted": 0
+    }
+  },
+  "products": [
+    {
+      "productId": 40023,
+      "name": "아크릴보드",
+      "slug": "아크릴보드-40023",
+      "categories": ["사인제품", "사각보드"],
+      "keywords": ["사인제품", "사각보드", "아크릴보드", "ai", "eps", "jpg", "png", "zip", "alz"],
+      "useCases": [],
+      "url": "https://devshop.wowpress.co.kr/prodt/40023",
+      "fileTypes": ["AI", "EPS", "JPG", "PNG", "ZIP", "ALZ"],
+      "delivery": {
+        "cutoffTime": null,
+        "prepayRequired": true,
+        "group": {
+          "id": null,
+          "name": null
+        },
+        "regions": []
+      },
+      "orderQuantities": [
+        {
+          "type": "select",
+          "values": [
+            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
+            25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46,
+            47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68,
+            69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90,
+            91, 92, 93, 94, 95, 96, 97, 98, 99, 100
+          ],
+          "minimum": 1,
+          "maximum": 100,
+          "interval": null,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": null,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        }
+      ],
+      "coverTypes": [
+        {
+          "code": 0,
+          "name": "통합",
+          "pages": [
+            {
+              "code": 0,
+              "name": "양면"
+            }
+          ],
+          "pageConstraints": {
+            "min": null,
+            "max": null,
+            "interval": null
+          }
+        }
+      ],
+      "detailFile": "../products/40023.json",
+      "pricing": {
+        "hasTemplate": false,
+        "status": "requires-configuration",
+        "sampleQuote": null,
+        "error": null
+      }
+    },
+    {
+      "productId": 40163,
+      "name": "폼보드",
+      "slug": "폼보드-40163",
+      "categories": ["사인제품", "사각보드"],
+      "keywords": ["사인제품", "사각보드", "폼보드", "ai", "eps", "jpg", "png", "zip", "alz"],
+      "useCases": [],
+      "url": "https://devshop.wowpress.co.kr/prodt/40163",
+      "fileTypes": ["AI", "EPS", "JPG", "PNG", "ZIP", "ALZ"],
+      "delivery": {
+        "cutoffTime": null,
+        "prepayRequired": true,
+        "group": {
+          "id": null,
+          "name": null
+        },
+        "regions": []
+      },
+      "orderQuantities": [
+        {
+          "type": "select",
+          "values": [
+            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
+            25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46,
+            47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68,
+            69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90,
+            91, 92, 93, 94, 95, 96, 97, 98, 99, 100
+          ],
+          "minimum": 1,
+          "maximum": 100,
+          "interval": null,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": null,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        }
+      ],
+      "coverTypes": [
+        {
+          "code": 0,
+          "name": "통합",
+          "pages": [
+            {
+              "code": 0,
+              "name": "양면"
+            }
+          ],
+          "pageConstraints": {
+            "min": null,
+            "max": null,
+            "interval": null
+          }
+        }
+      ],
+      "detailFile": "../products/40163.json",
+      "pricing": {
+        "hasTemplate": false,
+        "status": "requires-configuration",
+        "sampleQuote": null,
+        "error": null
+      }
+    },
+    {
+      "productId": 40164,
+      "name": "포맥스보드",
+      "slug": "포맥스보드-40164",
+      "categories": ["사인제품", "사각보드"],
+      "keywords": ["사인제품", "사각보드", "포맥스보드", "ai", "eps", "jpg", "png", "zip", "alz"],
+      "useCases": [],
+      "url": "https://devshop.wowpress.co.kr/prodt/40164",
+      "fileTypes": ["AI", "EPS", "JPG", "PNG", "ZIP", "ALZ"],
+      "delivery": {
+        "cutoffTime": null,
+        "prepayRequired": true,
+        "group": {
+          "id": null,
+          "name": null
+        },
+        "regions": []
+      },
+      "orderQuantities": [
+        {
+          "type": "select",
+          "values": [
+            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
+            25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46,
+            47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68,
+            69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90,
+            91, 92, 93, 94, 95, 96, 97, 98, 99, 100
+          ],
+          "minimum": 1,
+          "maximum": 100,
+          "interval": null,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": null,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        }
+      ],
+      "coverTypes": [
+        {
+          "code": 0,
+          "name": "통합",
+          "pages": [
+            {
+              "code": 0,
+              "name": "양면"
+            }
+          ],
+          "pageConstraints": {
+            "min": null,
+            "max": null,
+            "interval": null
+          }
+        }
+      ],
+      "detailFile": "../products/40164.json",
+      "pricing": {
+        "hasTemplate": false,
+        "status": "requires-configuration",
+        "sampleQuote": null,
+        "error": null
+      }
+    }
+  ]
+}

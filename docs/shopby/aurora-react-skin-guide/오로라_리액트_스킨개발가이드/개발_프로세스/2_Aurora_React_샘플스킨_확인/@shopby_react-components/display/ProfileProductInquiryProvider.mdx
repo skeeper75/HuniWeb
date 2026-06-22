@@ -1,0 +1,64 @@
+---
+title: "ProfileProductInquiryProvider"
+depth: 5
+path: "오로라 리액트 스킨개발가이드 > 개발 프로세스 > 2️⃣Aurora React 샘플스킨 확인 > @shopby/react-components > display > ProfileProductInquiryProvider"
+---
+
+# ProfileProductInquiryProvider
+
+## 속성
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | ---- | --- | ---- | --- |
+| children | true | ReactNode |  |  |
+
+## 상태
+
+* profileProductInquiryState 는 useProfileProductInquiryStateContext 를 호출해 사용합니다.
+
+```
+const profileProductInquiryState = useProfileProductInquiryStateContext()
+```
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | ---- | --- | ---- | --- |
+| profileProductInquiry |  |  |  | [response](https://docs.shopby.co.kr/?url.primaryName=display/#/ProductInquiry/get-profile-product-inquiries) 타입에 하기 타입 추가 |
+| ㄴ hasBeenReplied | false | boolean | - | 답변 여부 |
+| ㄴ hasBeenBlocked | false | boolean | - | 차단 여부 |
+| ㄴ hasBeenWithdrawn | false | boolean | - | 작성자 탈퇴 여부 |
+| ㄴ isAdministrator | false | boolean | - | 상품문의 답변 관리자 여부 |
+| ㄴ isMine | false | boolean | - | 내 상품문의 여부 |
+| ㄴ isSecreted | false | boolean | - | 비밀글 여부 |
+| ㄴ canModify | false | boolean | - | 수정가능 여부 |
+| profileProductInquiryCount | false | boolean | 0 | 내 상품문의 횟수 |
+
+## 액션
+
+* profileProductInquiryAction 은 useProfileProductInquiryActionContext 를 호출해 사용합니다. 
+
+```
+const profileProductInquiryAction = useProfileProductInquiryActionContext();
+```
+
+| 이름 | 인자타입 | 필수여부 | 기본값 | 설명 | 관리하는 상태 |
+| --- | ---- | ---- | --- | --- | ------- |
+| fetchProfileProductInquiries | object |  |  | 내 상품문의를 조회함.
+[request](https://docs.shopby.co.kr/?url.primaryName=display/#/ProductInquiry/get-profile-product-inquiries) 타입에 하기 타입 추가 | profileProductInquiryState.profileProductInquiry |
+| ㄴ hasAnswers | boolean | false |  | [request.answered](https://docs.shopby.co.kr/?url.primaryName=display/#/ProductInquiry/get-profile-product-inquiries)
+답변 유무 조건
+ㄴ true: 답변이 달린 문의 목록
+ㄴ false: 답변이 달리지 않은 목록
+ㄴ undefined: 전체 |  |
+| ㄴ sortType | CONTENT \| PRODUCT\_NAME \| ALL | false |  | [request.searchType](https://docs.shopby.co.kr/?url.primaryName=display/#/ProductInquiry/get-profile-product-inquiries) |  |
+| fetchProfileProductInquiryCount | object |  |  | 내 상품문의 횟수를 조회함.
+[request](https://docs.shopby.co.kr/?url.primaryName=display/#/ProductInquiry/get-product-inquiries-count) 와 동일 | profileProductInquiryState.profileProductInquiryCount |
+
+## 사용예시
+
+```
+const Example = () => {
+    return (
+                                                                          
+    )
+}
+```

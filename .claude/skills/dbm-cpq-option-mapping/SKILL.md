@@ -1,6 +1,12 @@
 ---
 name: dbm-cpq-option-mapping
-description: 후니프린팅 상품마스터·가격표의 옵션성 속성을 라이브 CPQ 옵션 레이어(t_prd_product_option_groups/options/option_items·templates/template_selections·constraints)에 매핑하는 L2 설계·검증 방법론 스킬. 이미 적재된 차원행을 polymorphic ref_dim_cd(OPT_REF_DIM 7종)로 참조해 option_groups(택1/택N)→options→option_items로 재구성하는 절차, 속성→엔티티(차원/CPQ옵션/가격/제약) 결정 규칙, WowPress 흡수원칙(형상→규격·본체색→재질 합성, 과분할 금지)+RedPrinting 캐스케이드 6종→JSONLogic constraints 변환, 검증 트리거 fn_chk_opt_item_ref 무결성 준수, ref_param_json/hidden-essential GAP 처리, FK 위상정렬(차원행 선적재), 경계면 교차검증을 제공한다. DB 직접 적재는 하지 않는다. 'CPQ 옵션 매핑', '옵션 레이어 매핑', '속성 엔티티 매핑 지도', 'option_groups 설계', 'polymorphic ref_dim_cd 매핑', '옵션 캐스케이드 매핑', '상품군 옵션 파일럿', 'CPQ 옵션 검증', 'CPQ 매핑 다시', '옵션 매핑 검증' 작업 시 반드시 이 스킬을 사용. 차원·가격 매핑(L1)은 dbm-mapping/dbm-price-formula, 이미 적재된 DB↔엑셀 정합 검증은 dbm-mapping-audit이 담당하므로 그 작업에는 트리거하지 않는다.
+description: >
+  후니프린팅 상품마스터·가격표의 옵션성 속성을 라이브 CPQ 옵션 레이어(t_prd_product_option_groups/options/option_items·
+  templates·constraints)에 매핑하는 L2 설계·검증 방법론. 적재된 차원행을 polymorphic ref_dim_cd로 참조해 옵션 재구성,
+  속성→엔티티(차원/CPQ옵션/가격/제약) 결정 규칙, WowPress 흡수+RedPrinting 캐스케이드→JSONLogic constraints,
+  fn_chk_opt_item_ref 무결성, FK 위상정렬. DB 미적재(실 적재 별도 인간 승인).
+  트리거: CPQ 옵션 매핑, 옵션 레이어 매핑, 속성 엔티티 매핑 지도, option_groups 설계, polymorphic ref_dim_cd 매핑, 옵션 캐스케이드 매핑, 상품군 옵션 파일럿, CPQ 매핑 다시.
+  차원·가격 매핑(L1)은 dbm-mapping/dbm-price-formula, 단건 정합 검증은 dbm-mapping-audit.
 ---
 
 # CPQ Option-Layer (L2) Mapping Methodology

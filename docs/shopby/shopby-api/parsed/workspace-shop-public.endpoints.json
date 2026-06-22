@@ -1,0 +1,58 @@
+[
+  {
+    "method": "GET",
+    "path": "/external-scripts",
+    "summary": "외부스크립트 조회하기",
+    "description": " ## 부가설명 및 특이사항\n 외부스크립트 조회\n \n 몰에서 사용중인 외부 스크립트 리스트를 불러옵니다.\n ",
+    "tags": ["ExternalScript"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/external-scripts482409728"
+            },
+            "examples": {
+              "get-external-scripts": {
+                "value": "[ {\n  \"pageType\" : \"MAIN\",\n  \"deviceType\" : \"PC\",\n  \"content\" : \"<TEST SCRIPT1>\",\n  \"pageTypeLabel\" : \"메인 페이지\",\n  \"scriptTypeLabel\" : \"메인 페이지\"\n} ]"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+]

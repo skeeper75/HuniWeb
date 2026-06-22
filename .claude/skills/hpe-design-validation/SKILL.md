@@ -1,14 +1,11 @@
 ---
 name: hpe-design-validation
 description: >
-  후니프린팅 가격계산 엔진 설계의 Claude측 독립 검증 게이트 방법론(생성≠검증). engine-designer의 가격공식+구성요소+세트
-  설계를 라이브 t_prc_*·권위 엑셀로 독립 재실측해 E1~E7 게이트로 GO/NO-GO를 낸다 — E1 공식 추출 충실성·E2 구성요소 분해
-  정합(시트 차원경계·완제품/반제품)·E3 경쟁사 흡수 타당성(답습/유입 가드)·E4 엔진 설계 건전성(evaluate_price 계약·
-  search-before-mint·채번·FK)·E5 세트 조합 정합(이중계상)·E6 골든 재현(설계 공식으로 골든 실제 재계산·허용오차 0)·
-  E7 생성검증 독립성(self-approve·dodge-hunt). 단일 FAIL=NO-GO. 생성자 주장 비신뢰·라이브 읽기전용·DB 미적재.
-  '가격엔진 설계 검증', 'E1 E7 게이트', '골든 재현 검증', '설계 교차검증', 'search-before-mint 검증', '검증 게이트 다시'
-  작업 시 반드시 이 스킬을 사용. 설계 생성은 hpe-engine-design, codex 독립 2차 교차는 hpe-codex-validate가 담당하므로
-  그 작업에는 트리거하지 않는다.
+  후니프린팅 가격계산 엔진 설계의 Claude측 독립 검증 게이트 방법론(생성≠검증). engine-designer 설계(공식+구성요소+세트)를
+  라이브 t_prc_*·권위 엑셀로 독립 재실측해 E1~E7 게이트로 GO/NO-GO(공식 추출 충실성·구성요소 분해 정합·경쟁사 흡수 타당성·
+  엔진 설계 건전성·세트 조합 정합·골든 재현 허용오차 0·생성검증 독립성). 단일 FAIL=NO-GO·생성자 주장 비신뢰·라이브 읽기전용·
+  DB 미적재. 트리거: 가격엔진 설계 검증, E1 E7 게이트, 골든 재현 검증, 설계 교차검증, search-before-mint 검증, 검증 게이트 다시.
+  설계 생성은 hpe-engine-design, codex 2차 교차는 hpe-codex-validate가 담당.
 metadata:
   version: "1.0.0"
   category: "domain"

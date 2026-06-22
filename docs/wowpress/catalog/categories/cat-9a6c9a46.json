@@ -1,0 +1,1301 @@
+{
+  "category": {
+    "id": "cat-9a6c9a46",
+    "slug": "명함-프리미엄명함-9a46",
+    "path": ["명함", "프리미엄명함"],
+    "displayName": "명함 > 프리미엄명함",
+    "productCount": 7,
+    "keywords": [
+      "명함",
+      "프리미엄명함",
+      "고평량명함",
+      "ai",
+      "eps",
+      "카드명함",
+      "반투명명함",
+      "색지명함",
+      "합지명함",
+      "고평량",
+      "에코명함",
+      "미니명함"
+    ],
+    "summary": "명함 > 프리미엄명함 · 7개 상품",
+    "pricing": {
+      "templated": 0,
+      "quoted": 0
+    }
+  },
+  "products": [
+    {
+      "productId": 40066,
+      "name": "고평량명함",
+      "slug": "고평량명함-40066",
+      "categories": ["명함", "프리미엄명함"],
+      "keywords": [
+        "명함",
+        "프리미엄명함",
+        "고평량명함",
+        "ai",
+        "eps",
+        "jpg",
+        "png",
+        "cdr",
+        "psd",
+        "sit",
+        "zip",
+        "alz",
+        "pdf"
+      ],
+      "useCases": ["business-card", "corporate-identity"],
+      "url": "https://devshop.wowpress.co.kr/prodt/40066",
+      "fileTypes": ["AI", "EPS", "JPG", "PNG", "CDR", "PSD", "SIT", "ZIP", "ALZ", "PDF"],
+      "delivery": {
+        "cutoffTime": null,
+        "prepayRequired": true,
+        "group": {
+          "id": 1,
+          "name": "명함,스티커 묶음"
+        },
+        "regions": []
+      },
+      "orderQuantities": [
+        {
+          "type": "select",
+          "values": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": null,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        }
+      ],
+      "coverTypes": [
+        {
+          "code": 0,
+          "name": "통합",
+          "pages": [
+            {
+              "code": 0,
+              "name": "양면"
+            }
+          ],
+          "pageConstraints": {
+            "min": null,
+            "max": null,
+            "interval": null
+          }
+        }
+      ],
+      "detailFile": "../products/40066.json",
+      "pricing": {
+        "hasTemplate": false,
+        "status": "requires-configuration",
+        "sampleQuote": null,
+        "error": null
+      }
+    },
+    {
+      "productId": 40067,
+      "name": "카드명함",
+      "slug": "카드명함-40067",
+      "categories": ["명함", "프리미엄명함"],
+      "keywords": [
+        "명함",
+        "프리미엄명함",
+        "카드명함",
+        "ai",
+        "eps",
+        "jpg",
+        "png",
+        "cdr",
+        "psd",
+        "sit",
+        "zip",
+        "alz"
+      ],
+      "useCases": ["business-card", "corporate-identity"],
+      "url": "https://devshop.wowpress.co.kr/prodt/40067",
+      "fileTypes": ["AI", "EPS", "JPG", "PNG", "CDR", "PSD", "SIT", "ZIP", "ALZ"],
+      "delivery": {
+        "cutoffTime": null,
+        "prepayRequired": true,
+        "group": {
+          "id": 1,
+          "name": "명함,스티커 묶음"
+        },
+        "regions": []
+      },
+      "orderQuantities": [
+        {
+          "type": "select",
+          "values": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": 21144,
+          "jobPresetNo": null,
+          "sizeNo": 5458,
+          "optionNo": null,
+          "colorNo": 255,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": 21144,
+          "jobPresetNo": null,
+          "sizeNo": 5458,
+          "optionNo": null,
+          "colorNo": 256,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [200, 400, 600, 800, 1000, 3000, 5000],
+          "minimum": 200,
+          "maximum": 5000,
+          "interval": null,
+          "materialPaperNo": 21130,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 255,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [200, 400, 600, 800, 1000, 3000, 5000],
+          "minimum": 200,
+          "maximum": 5000,
+          "interval": null,
+          "materialPaperNo": 21130,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 256,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [200, 400, 600, 800, 1000, 3000, 5000],
+          "minimum": 200,
+          "maximum": 5000,
+          "interval": null,
+          "materialPaperNo": 21132,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 255,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [200, 400, 600, 800, 1000, 3000, 5000],
+          "minimum": 200,
+          "maximum": 5000,
+          "interval": null,
+          "materialPaperNo": 21132,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 256,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [200, 400, 600, 800, 1000, 3000, 5000],
+          "minimum": 200,
+          "maximum": 5000,
+          "interval": null,
+          "materialPaperNo": 21134,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 255,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [200, 400, 600, 800, 1000, 3000, 5000],
+          "minimum": 200,
+          "maximum": 5000,
+          "interval": null,
+          "materialPaperNo": 21136,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 255,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [200, 400, 600, 800, 1000, 3000, 5000],
+          "minimum": 200,
+          "maximum": 5000,
+          "interval": null,
+          "materialPaperNo": 21136,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 256,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [200, 400, 600, 800, 1000, 3000, 5000],
+          "minimum": 200,
+          "maximum": 5000,
+          "interval": null,
+          "materialPaperNo": 21138,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 255,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [200, 400, 600, 800, 1000, 3000, 5000],
+          "minimum": 200,
+          "maximum": 5000,
+          "interval": null,
+          "materialPaperNo": 21140,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 255,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [200, 400, 600, 800, 1000, 3000, 5000],
+          "minimum": 200,
+          "maximum": 5000,
+          "interval": null,
+          "materialPaperNo": 21140,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 256,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [200, 400, 600, 800, 1000, 3000, 5000],
+          "minimum": 200,
+          "maximum": 5000,
+          "interval": null,
+          "materialPaperNo": 21142,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 255,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [200, 400, 600, 800, 1000, 3000, 5000],
+          "minimum": 200,
+          "maximum": 5000,
+          "interval": null,
+          "materialPaperNo": 21142,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 256,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [200, 400, 600, 800, 1000, 3000, 5000],
+          "minimum": 200,
+          "maximum": 5000,
+          "interval": null,
+          "materialPaperNo": 21146,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 255,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [200, 400, 600, 800, 1000, 3000, 5000],
+          "minimum": 200,
+          "maximum": 5000,
+          "interval": null,
+          "materialPaperNo": 21146,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 256,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": 21169,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 1302,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [100, 200, 400, 600, 800, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": 21169,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 255,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [100, 200, 400, 600, 800, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": 21169,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 256,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": 21169,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 301,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": 21170,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 1302,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [100, 200, 400, 600, 800, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": 21170,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 255,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [100, 200, 400, 600, 800, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": 21170,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 256,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": 21170,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 301,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": 21171,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 1302,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [100, 200, 400, 600, 800, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": 21171,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 255,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [100, 200, 400, 600, 800, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": 21171,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 256,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": 21171,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 301,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": 21172,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 1302,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [100, 200, 400, 600, 800, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": 21172,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 255,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [100, 200, 400, 600, 800, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": 21172,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 256,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": 21172,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 301,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": 21173,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 1302,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [100, 200, 400, 600, 800, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": 21173,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 255,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [100, 200, 400, 600, 800, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": 21173,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 256,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": 21173,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 301,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": 21174,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 1302,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [100, 200, 400, 600, 800, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": 21174,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 255,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [100, 200, 400, 600, 800, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": 21174,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 256,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": 21174,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 301,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": 21175,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 1302,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [100, 200, 400, 600, 800, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": 21175,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 255,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [100, 200, 400, 600, 800, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": 21175,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 256,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": 21175,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 301,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": 21181,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 1301,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": 21181,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 1302,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": 21181,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 1303,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": 21181,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 301,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": 21182,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 1301,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": 21182,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 1302,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": 21182,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 1303,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": 21182,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 301,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": 21183,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 1301,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": 21183,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 1302,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": 21183,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 1303,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": 21183,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 301,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": 21184,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 1301,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": 21184,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 1302,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": 21184,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 1303,
+          "colorExtra": null
+        },
+        {
+          "type": "select",
+          "values": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": 21184,
+          "jobPresetNo": null,
+          "sizeNo": 5461,
+          "optionNo": null,
+          "colorNo": 301,
+          "colorExtra": null
+        }
+      ],
+      "coverTypes": [
+        {
+          "code": 0,
+          "name": "통합",
+          "pages": [
+            {
+              "code": 0,
+              "name": "양면"
+            }
+          ],
+          "pageConstraints": {
+            "min": null,
+            "max": null,
+            "interval": null
+          }
+        }
+      ],
+      "detailFile": "../products/40067.json",
+      "pricing": {
+        "hasTemplate": false,
+        "status": "requires-configuration",
+        "sampleQuote": null,
+        "error": null
+      }
+    },
+    {
+      "productId": 40068,
+      "name": "반투명명함",
+      "slug": "반투명명함-40068",
+      "categories": ["명함", "프리미엄명함"],
+      "keywords": [
+        "명함",
+        "프리미엄명함",
+        "반투명명함",
+        "ai",
+        "eps",
+        "jpg",
+        "png",
+        "cdr",
+        "psd",
+        "sit",
+        "zip",
+        "alz",
+        "pdf"
+      ],
+      "useCases": ["business-card", "corporate-identity"],
+      "url": "https://devshop.wowpress.co.kr/prodt/40068",
+      "fileTypes": ["AI", "EPS", "JPG", "PNG", "CDR", "PSD", "SIT", "ZIP", "ALZ", "PDF"],
+      "delivery": {
+        "cutoffTime": null,
+        "prepayRequired": true,
+        "group": {
+          "id": 1,
+          "name": "명함,스티커 묶음"
+        },
+        "regions": []
+      },
+      "orderQuantities": [
+        {
+          "type": "select",
+          "values": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": null,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        }
+      ],
+      "coverTypes": [
+        {
+          "code": 0,
+          "name": "통합",
+          "pages": [
+            {
+              "code": 0,
+              "name": "양면"
+            }
+          ],
+          "pageConstraints": {
+            "min": null,
+            "max": null,
+            "interval": null
+          }
+        }
+      ],
+      "detailFile": "../products/40068.json",
+      "pricing": {
+        "hasTemplate": false,
+        "status": "requires-configuration",
+        "sampleQuote": null,
+        "error": null
+      }
+    },
+    {
+      "productId": 40069,
+      "name": "색지명함",
+      "slug": "색지명함-40069",
+      "categories": ["명함", "프리미엄명함"],
+      "keywords": [
+        "명함",
+        "프리미엄명함",
+        "색지명함",
+        "ai",
+        "eps",
+        "jpg",
+        "png",
+        "cdr",
+        "psd",
+        "sit",
+        "zip",
+        "alz",
+        "pdf"
+      ],
+      "useCases": ["business-card", "corporate-identity"],
+      "url": "https://devshop.wowpress.co.kr/prodt/40069",
+      "fileTypes": ["AI", "EPS", "JPG", "PNG", "CDR", "PSD", "SIT", "ZIP", "ALZ", "PDF"],
+      "delivery": {
+        "cutoffTime": null,
+        "prepayRequired": true,
+        "group": {
+          "id": 1,
+          "name": "명함,스티커 묶음"
+        },
+        "regions": []
+      },
+      "orderQuantities": [
+        {
+          "type": "select",
+          "values": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": null,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        }
+      ],
+      "coverTypes": [
+        {
+          "code": 0,
+          "name": "통합",
+          "pages": [
+            {
+              "code": 0,
+              "name": "양면"
+            }
+          ],
+          "pageConstraints": {
+            "min": null,
+            "max": null,
+            "interval": null
+          }
+        }
+      ],
+      "detailFile": "../products/40069.json",
+      "pricing": {
+        "hasTemplate": false,
+        "status": "requires-configuration",
+        "sampleQuote": null,
+        "error": null
+      }
+    },
+    {
+      "productId": 40192,
+      "name": "합지명함",
+      "slug": "합지명함-40192",
+      "categories": ["명함", "프리미엄명함"],
+      "keywords": [
+        "명함",
+        "프리미엄명함",
+        "합지명함",
+        "ai",
+        "eps",
+        "jpg",
+        "png",
+        "cdr",
+        "psd",
+        "sit",
+        "zip",
+        "alz",
+        "pdf"
+      ],
+      "useCases": ["business-card", "corporate-identity"],
+      "url": "https://devshop.wowpress.co.kr/prodt/40192",
+      "fileTypes": ["AI", "EPS", "JPG", "PNG", "CDR", "PSD", "SIT", "ZIP", "ALZ", "PDF"],
+      "delivery": {
+        "cutoffTime": null,
+        "prepayRequired": true,
+        "group": {
+          "id": 1,
+          "name": "명함,스티커 묶음"
+        },
+        "regions": []
+      },
+      "orderQuantities": [
+        {
+          "type": "select",
+          "values": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": null,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        }
+      ],
+      "coverTypes": [
+        {
+          "code": 0,
+          "name": "통합",
+          "pages": [
+            {
+              "code": 0,
+              "name": "양면"
+            }
+          ],
+          "pageConstraints": {
+            "min": null,
+            "max": null,
+            "interval": null
+          }
+        }
+      ],
+      "detailFile": "../products/40192.json",
+      "pricing": {
+        "hasTemplate": false,
+        "status": "requires-configuration",
+        "sampleQuote": null,
+        "error": null
+      }
+    },
+    {
+      "productId": 40446,
+      "name": "고평량 에코명함",
+      "slug": "고평량-에코명함-40446",
+      "categories": ["명함", "프리미엄명함"],
+      "keywords": [
+        "명함",
+        "프리미엄명함",
+        "고평량",
+        "에코명함",
+        "ai",
+        "eps",
+        "jpg",
+        "png",
+        "cdr",
+        "psd",
+        "sit",
+        "zip",
+        "alz",
+        "pdf"
+      ],
+      "useCases": ["business-card", "corporate-identity"],
+      "url": "https://devshop.wowpress.co.kr/prodt/40446",
+      "fileTypes": ["AI", "EPS", "JPG", "PNG", "CDR", "PSD", "SIT", "ZIP", "ALZ", "PDF"],
+      "delivery": {
+        "cutoffTime": null,
+        "prepayRequired": true,
+        "group": {
+          "id": 1,
+          "name": "명함,스티커 묶음"
+        },
+        "regions": []
+      },
+      "orderQuantities": [
+        {
+          "type": "select",
+          "values": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": null,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        }
+      ],
+      "coverTypes": [
+        {
+          "code": 0,
+          "name": "통합",
+          "pages": [
+            {
+              "code": 0,
+              "name": "양면"
+            }
+          ],
+          "pageConstraints": {
+            "min": null,
+            "max": null,
+            "interval": null
+          }
+        }
+      ],
+      "detailFile": "../products/40446.json",
+      "pricing": {
+        "hasTemplate": false,
+        "status": "requires-configuration",
+        "sampleQuote": null,
+        "error": null
+      }
+    },
+    {
+      "productId": 40599,
+      "name": "미니명함",
+      "slug": "미니명함-40599",
+      "categories": ["명함", "프리미엄명함"],
+      "keywords": [
+        "명함",
+        "프리미엄명함",
+        "미니명함",
+        "ai",
+        "eps",
+        "jpg",
+        "png",
+        "cdr",
+        "psd",
+        "sit",
+        "zip",
+        "alz",
+        "pdf"
+      ],
+      "useCases": ["business-card", "corporate-identity"],
+      "url": "https://devshop.wowpress.co.kr/prodt/40599",
+      "fileTypes": ["AI", "EPS", "JPG", "PNG", "CDR", "PSD", "SIT", "ZIP", "ALZ", "PDF"],
+      "delivery": {
+        "cutoffTime": null,
+        "prepayRequired": true,
+        "group": {
+          "id": 1,
+          "name": "명함,스티커 묶음"
+        },
+        "regions": []
+      },
+      "orderQuantities": [
+        {
+          "type": "select",
+          "values": [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+          "minimum": 100,
+          "maximum": 1000,
+          "interval": null,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": null,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        }
+      ],
+      "coverTypes": [
+        {
+          "code": 0,
+          "name": "통합",
+          "pages": [
+            {
+              "code": 0,
+              "name": "양면"
+            }
+          ],
+          "pageConstraints": {
+            "min": null,
+            "max": null,
+            "interval": null
+          }
+        }
+      ],
+      "detailFile": "../products/40599.json",
+      "pricing": {
+        "hasTemplate": false,
+        "status": "requires-configuration",
+        "sampleQuote": null,
+        "error": null
+      }
+    }
+  ]
+}

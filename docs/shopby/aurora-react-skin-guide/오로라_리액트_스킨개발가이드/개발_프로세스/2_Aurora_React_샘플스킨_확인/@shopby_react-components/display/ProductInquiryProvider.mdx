@@ -1,0 +1,57 @@
+---
+title: "ProductInquiryProvider"
+depth: 5
+path: "오로라 리액트 스킨개발가이드 > 개발 프로세스 > 2️⃣Aurora React 샘플스킨 확인 > @shopby/react-components > display > ProductInquiryProvider"
+---
+
+# ProductInquiryProvider
+
+## 속성
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | ---- | --- | ---- | --- |
+| productNo | true | number |  |  |
+| children | true | ReactNode |  |  |
+
+## 상태
+
+* productInquiryState 는 useProductInquiryStateContext 를 호출해 사용합니다.
+
+```typescript
+const productInquiryState = useProductInquiryStateContext();
+```
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | ---- | --- | ---- | --- |
+| totalCount | true | number | 0 | [response.totalCount](https://docs.shopby.co.kr/?url.primaryName=display/#/ProductInquiry/get-products-inquiries) |
+| inquiries | true | object[] | [] | [response.items](https://docs.shopby.co.kr/?url.primaryName=display/#/ProductInquiry/get-products-inquiries) |
+| inquiryConfig | false | object |  | [response](https://docs.shopby.co.kr/?url.primaryName=display/#/ProductInquiry/get-inquiries-configurations) |
+
+## 액션
+
+* productInquiryAction 은 useProductInquiryActionContext 를 호출해 사용합니다.
+
+```typescript
+const productInquiryAction = useProductInquiryActionContext();
+```
+
+| 이름 | 인자타입 | 필수여부 | 기본값 | 설명 | 관리하는 상태 |
+| --- | ---- | ---- | --- | --- | ------- |
+| searchInquiries | object | false |  | 상품문의 목록을 조회함.
+[request](https://docs.shopby.co.kr/?url.primaryName=display/#/ProductInquiry/get-products-inquiries) 타입과 동일함. | productInquiryState.totalCount
+productInquiryState.inquiries |
+| fetchConfiguration | - | - |  | 상품문의 게시판 설정을 조회함. | productInquiryState.inquiryConfig |
+
+## 사용예시
+
+```jsx
+const Example = () => {
+    return (
+        
+            
+              
+            
+        
+    )
+}
+```

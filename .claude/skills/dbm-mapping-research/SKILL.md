@@ -1,16 +1,11 @@
 ---
 name: dbm-mapping-research
 description: >
-  후니프린팅 상품마스터 11시트의 각 컬럼 데이터가 라이브 t_* 기초데이터에 "정확히 어디로, 어떻게" 매핑되는지를
-  확정하는 round-12 매핑 확정 리서치 방법론 스킬. 4개 내부 권위(round-11 시트별 4산출 + 실무진 확정 Q1~Q15 +
-  schema-design-intent-map + webadmin 적재명세)를 결합해 컬럼별 매핑 후보를 도출하고, 국내 10·해외 10 경쟁사와
-  CIP4(JDF/XJDF)·ISO 인쇄표준·인쇄용어를 갭헌팅 리서치해 "우리가 놓칠 우려가 있는 정보"를 적발하고, 라이브 DB
-  실측(읽기전용)으로 대조해 시트별 매핑 확정 데이터(mapping-final)를 산출한다. DB 직접 적재는 하지 않는다.
-  '매핑 확정', '매핑 확정 리서치', '정확한 매핑데이터', '컬럼 기초데이터 매핑', '11시트 매핑 확정', '경쟁사 리서치
-  매핑', 'CIP4', '인쇄표준 리서치', '갭헌팅', '놓친 정보 리서치', 'round-12', '매핑 리서치 다시', '매핑 확정 업데이트',
-  '특정 시트 매핑 확정만' 작업 시 반드시 이 스킬을 사용. 컬럼 의미 정리(round-11)는 dbm-column-domain,
-  적재본 조립/실행은 dbm-load-readiness/dbm-load-execution, CPQ 옵션 레이어는 dbm-cpq-option-mapping이
-  담당하므로 그 작업에는 트리거하지 않는다.
+  후니프린팅 상품마스터 11시트 각 컬럼이 라이브 t_* 기초데이터에 어디로·어떻게 매핑되는지 확정하는 리서치 방법론
+  (round-12). 4개 내부 권위(round-11 산출·실무진 Q1~Q15·schema-design-intent-map·webadmin 적재명세) 결합 +
+  경쟁사·CIP4/ISO 인쇄표준 갭헌팅 + 라이브 실측 대조로 시트별 mapping-final 산출. DB 미적재.
+  트리거: 매핑 확정, 매핑 확정 리서치, 컬럼 기초데이터 매핑, 11시트 매핑 확정, CIP4, 인쇄표준 리서치, 갭헌팅, round-12, 매핑 리서치 다시.
+  컬럼 의미(round-11)는 dbm-column-domain, 적재 조립/실행은 dbm-load-readiness/dbm-load-execution, CPQ 옵션은 dbm-cpq-option-mapping.
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash, WebSearch, WebFetch, TodoWrite
 metadata:
   version: "1.0.0"

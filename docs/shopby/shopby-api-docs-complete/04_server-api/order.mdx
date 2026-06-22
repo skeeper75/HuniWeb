@@ -1,0 +1,772 @@
+---
+title: "order-server"
+description: "주문(order) 관련 server API입니다."
+version: "0.1.0-SNAPSHOT"
+category: "Server API"
+---
+
+# order-server
+
+:::info API 소개
+ 주문(order) 관련 server API입니다.
+:::
+
+## 서버 정보
+
+| 환경 | Base URL |
+|------|----------|
+| Production | `https://server-api.e-ncp.com` |
+
+## 리소스 목록
+
+| 리소스 | 설명 |
+|--------|------|
+| **Orders** | 주문 |
+| **ShippingAddress** | 배송지 |
+| **TaskMessage** | 업무메세지 |
+
+## API 엔드포인트
+
+## Orders — 주문
+
+### 🟢 `GET` `/accounts/orders`
+
+**무통장 미입금 주문 리스트 조회**
+
+> operationId: `get-account-orders`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+
+PG연동을 하지 않고 쇼핑몰의 계좌로 입금을 받는 무통장입금 주문에 대한 주문 조회입니다.
+
+---
+
+### 🟡 `PUT` `/accounts/orders/confirmation`
+
+**무통장 입금 확인**
+
+> operationId: `put-account-orders-confirmation`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+
+무통장 입금 확인
+
+---
+
+### 🟢 `GET` `/accounts/orders/{orderNo}`
+
+**무통장 미입금 주문 조회**
+
+> operationId: `get-account-orders-order-no`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderNo` | path | ✅ | `string` | 주문번호^|2020042100000001 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+
+무통장 미입금 주문 조회
+
+---
+
+### 🟢 `GET` `/orders`
+
+**주문 조회하기 v1.1**
+
+> operationId: `get-orders`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `startYmd` | query | - | `string` | "시작일(YYYY-MM-DD) [default: 3개월 전]^|2020-12-30" |
+| `endYmd` | query | - | `string` | "종료일(YYYY-MM-DD) [default: 오늘]^|2020-12-30" |
+| `startYmdt` | query | - | `string` | "종료일시(YYYY-MM-DD HH:mm:ss) (startYmd 보다 우선순위 높음) [default: 3개\ |
+| `endYmdt` | query | - | `string` | "종료일시(YYYY-MM-DD HH:mm:ss) (endYmd 보다 우선순위 높음) [default: 오늘]^|2020-12-30\ |
+| `orderOptionNos` | query | - | `string` | "주문 옵션 번호 리스트^|360001,360002" |
+| `orderRequestTypes` | query | - | `string` | "주문상태 타입 (DEPOSIT_WAIT: Deposit Wait, PAY_DONE: Pay Done, PRODUCT_PREPARE:\ |
+| `searchDateType` | query | - | `string` | "조회하려는 주문일시 유형 [default: ORDER_START] (ORDER_START: 주문 발생일, PAY_DONE:\ |
+| `memberNo` | query | - | `number` | 회원번호^|1 |
+| `searchType` | query | - | `string` | "검색 유형(주문번호, 상품번호) (ALL, ORDER_NO, MALL_PRODUCT_NO)^|ALL" |
+| `searchValues` | query | - | `string` | "검색 값^|11111111,2222222" |
+| `deliveryCompanyType` | query | - | `string` | "택배사 타입 (CJ: CJ Logistics, POST: Post Office, HANJIN: Hanjin\ |
+| `ordererContact1` | query | - | `string` | 주문자 연락처^|010-0000-0000 |
+| `receiverContact1` | query | - | `string` | 수령자 연락처^|010-0000-0000 |
+| `shippingAreaType` | query | - | `string` | "배송구분 (PARTNER_SHIPPING_AREA: Partner Delivery, MALL_SHIPPING_AREA:\ |
+| `payType` | query | - | `string` | "결제수단 (CREDIT_CARD: Credit Card, ACCOUNT: Deposit without bankbook,\ |
+| `pageNumber` | query | - | `number` | "페이지 번호 (1 이상) [default: 1]^|1" |
+| `pageSize` | query | - | `number` | "페이지 크기(최대 200) [default: 20]^|20" |
+| `partnerNo` | query | - | `number` | 파트너 번호^|1 |
+| `desc` | query | - | `boolean` | "정렬 기준 (true: 내림차순, false: 오름차순)^|true" |
+| `Version` | header | ✅ | `string` | API 버전^|1.1 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+
+## 부가설명 및 특이사항
+주문 리스트 조회하는 API 입니다.
+
+응답 데이터는 주문번호의 내림차순으로\
+        \ 정렬됩니다.
+
+### v1.0
+페이징 처리를 위한 totalCount를 제공하지 않습니다. 
+응답은 리스트 형식으로 되어\
+        \ 있습니다. 아래 내용 참고 바랍니다. 
+```
+[
+ {
+ "orderNo": "",
+ ...
+ },
+ ...
+\
+        ]
+```
+
+### v1.1
+페이징 처리를 위한 totalCount를 제공합니다.
+주문 리스트는 contents 파라미터에\
+        \ 포함됩니다.
+자세한 정보는 Responses 항목 참고 바랍니다.
+
+---
+
+### 🟡 `PUT` `/orders/cash-receipt`
+
+**현금영수증 발행결과 업데이트**
+
+> operationId: `update-cash-receipt-issuance-result`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+
+## 부가설명 및 특이사항
+현금영수증 발행 결과를 업데이트하는 API 입니다.
+
+---
+
+### 🟡 `PUT` `/orders/confirm`
+
+**구매확정 상태 변경 요청하기**
+
+> operationId: `put-orders-confirm-purchase`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+
+---
+
+### 🟢 `GET` `/orders/deliveries`
+
+**주문 조회하기 (배송번호 기준)**
+
+> operationId: `get-orders-deliveries`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `startYmd` | query | - | `string` | 시작일(YYYY-MM-DD)^|2020-12-30 |
+| `endYmd` | query | - | `string` | 종료일(YYYY-MM-DD)^|2020-12-30 |
+| `startYmdt` | query | - | `string` | 종료일시(YYYY-MM-DD HH:mm:ss) (startYmd 보다 우선순위 높음)^|2020-12-30 00:00:00 |
+| `endYmdt` | query | - | `string` | 종료일시(YYYY-MM-DD HH:mm:ss) (endYmd 보다 우선순위 높음)^|2020-12-30 00:00:00 |
+| `orderRequestTypes` | query | - | `string` | "주문상태 타입 (DEPOSIT_WAIT: Deposit Wait, PAY_DONE: Pay Done, PRODUCT_PREPARE:\ |
+| `searchDateType` | query | - | `string` | "조회하려는 주문일시 유형 (ORDER_START: 주문 발생일, PAY_DONE: 입금 확인일, PRODUCT_PREPARE:\ |
+| `memberNo` | query | - | `number` | 회원번호^|1 |
+| `searchType` | query | - | `string` | "검색 유형(배송번호, 주문번호, 상품번호) (ALL, DELIVERY_NO, ORDER_NO, MALL_PRODUCT_NO,\ |
+| `searchValues` | query | - | `string` | "검색 값^|11111111,2222222" |
+| `excludeOptionNos` | query | - | `string` | "검색 시 제외할 주문옵션번호^|11111111,2222222" |
+| `excludeDeliveryNos` | query | - | `string` | "검색 시 제외할 배송번호^|11111111,2222222" |
+| `deliveryCompanyType` | query | - | `string` | "택배사 타입 (CJ: CJ Logistics, POST: Post Office, HANJIN: Hanjin\ |
+| `assignsInvoice` | query | - | `boolean` | 송장할당여부^|false |
+| `includeNoneDeliveryCompanyType` | query | - | `boolean` | 택배사가 입력되지 않은 주문 포함 여부 (택배사를 조회할 때 적용됨)^|false |
+| `partnerNo` | query | - | `number` | 파트너 번호^|0 |
+| `pageNumber` | query | - | `number` | 페이지 번호 (1 이상)^|1 |
+| `pageSize` | query | - | `number` | 페이지 크기(최대 200)^|20 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+
+---
+
+### 🟡 `PUT` `/orders/delivery`
+
+**상품준비중 상태 목록을 배송중 상태로 변경하기**
+
+> operationId: `put-orders-delivery`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+
+---
+
+### 🟡 `PUT` `/orders/delivery-ing`
+
+**배송준비중 상태를 목록을 배송중 상태로 변경하기**
+
+> operationId: `put-orders-delivery-ing`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+
+---
+
+### 🟡 `PUT` `/orders/extra-data`
+
+**주문의 추가 정보 입력**
+
+> operationId: `put-order-extra-data`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+
+---
+
+### 🟡 `PUT` `/orders/prepare-delivery`
+
+**배송준비중 상태 변경 요청하기**
+
+> operationId: `put-orders-prepare-delivery`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+
+---
+
+### 🟡 `PUT` `/orders/prepare-product`
+
+**상품준비중 상태 변경 요청하기**
+
+> operationId: `put-orders-prepare-product`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+
+---
+
+### 🟡 `PUT` `/orders/receive`
+
+**주문상품 수취확인처리 요청하기**
+
+> operationId: `put-orders-receive`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+
+---
+
+### 🟡 `PUT` `/orders/reserve-to-normal`
+
+**예약 주문 일반주문으로 변경 요청하기**
+
+> operationId: `put-orders-reserve-to-normal`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+
+---
+
+### 🟡 `PUT` `/orders/tax-invoice`
+
+**세금계산서 발행결과 업데이트**
+
+> operationId: `update-tax-invoice-issuance-result`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+
+## 부가설명 및 특이사항
+세금계산서 발행 결과를 업데이트하는 API 입니다.
+
+---
+
+### 🟡 `PUT` `/orders/update-invoices`
+
+**송장번호 변경**
+
+> operationId: `put-orders-update-invoice`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+
+송장번호 변경
+
+---
+
+### 🟢 `GET` `/orders/{orderNo}`
+
+**주문 상세 조회**
+
+> operationId: `get-orders-order-no`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderNo` | path | ✅ | `string` | 주문 번호^|202206151234567890 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+
+---
+
+### 🟡 `PUT` `/orders/change-status/by-shipping-no`
+
+**주문 상태 일괄 변경 요청하기**
+
+> operationId: `put-orders-change-status-by-shipping-no`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+
+## 부가설명 및 특이사항 
+주문 상태를 일괄로 변경하는 API 입니다. 배송번호 단위로 처리 됩니다.
+\
+        
+상태 변경 대상 목록(changeStatusList)은 최대 100개까지 입력할 수 있습니다.
+
+송장정보는 배송중 이전 [PAY_DONE,\
+        \ PRODUCT_PREPARE, DELIVERY_PREPARE] 상태에서,
+배송중 이후 [DELIVERY_ING, DELIVERY_DONE,\
+        \ BUY_CONFIRM] 상태로 변경 시
+입력 가능합니다.
+
+---
+
+## AppCard
+
+### 🟠 `PATCH` `/app-card/available`
+
+**앱카드 사용여부 수정**
+
+> operationId: `patch-app-card-available`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+
+---
+
+## Cart
+
+### 🟢 `GET` `/cart`
+
+**장바구니 가져오기**
+
+> operationId: `get-carts`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `memberNos` | query | - | `string` | "회원 번호 리스트^|1,2,3" |
+| `searchDateType` | query | - | `string` | "날짜 검색 조건 (REGISTER_YMDT, UPDATE_YMDT)^|REGISTER_YMDT" |
+| `startYmdt` | query | - | `string` | 조회 시작일시^|2026-02-08 09:50:30 |
+| `endYmdt` | query | - | `string` | 조회 종료일시^|2026-02-11 09:50:30 |
+| `groupId` | query | - | `string` | 장바구니 그룹 아이디^|cartGroupId |
+| `page` | query | - | `integer` | 페이지 번호^|1 |
+| `size` | query | - | `integer` | 페이지당 노출 개수(최대 200)^|20 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+
+---
+
+## Coupon
+
+### 🔵 `POST` `/coupons/available`
+
+**사용 가능 쿠폰 리스트 조회(개발중)**
+
+> operationId: `post-coupons-available`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+
+---
+
+### 🔵 `POST` `/coupons/calculate`
+
+**쿠폰 적용 금액 계산(개발중)**
+
+> operationId: `post-coupons-calculate`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+
+---
+
+## PreviousOrder
+
+### 🟢 `GET` `/previous-orders`
+
+**이전주문 검색**
+
+> operationId: `get-previous-orders`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `searchType` | query | - | `string` | "검색 타입^|ORDER_NO, ORDERER_NAME, ORDERER_CONTACT1, PRODUCT_NAME,\ |
+| `keyword` | query | - | `string` | 검색어^|홍길동 |
+| `startYmd` | query | - | `string` | 조회시작일^|2025-11-11 |
+| `endYmd` | query | - | `string` | 조회종료일^|2026-02-11 |
+| `page` | query | ✅ | `integer` | 페이지 번호^|1 |
+| `size` | query | ✅ | `integer` | 페이지당 노출 개수^|30 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+
+이전주문 검색
+
+---
+
+### 🔵 `POST` `/previous-orders`
+
+**이전주문 등록**
+
+> operationId: `post-previous-orders`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+
+이전주문 등록
+
+---
+
+### 🔵 `POST` `/previous-orders/delete`
+
+**이전주문 전체 삭제**
+
+> operationId: `delete-previous-orders`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `mallName` | query | ✅ | `string` | 쇼핑몰 이름^|mall-name |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+
+이전주문 전체 삭제
+
+---
+
+### 🔵 `POST` `/previous-orders/delete/by-order-nos`
+
+**이전주문 삭제**
+
+> operationId: `delete-previous-orders-by-order-nos`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `mallName` | query | ✅ | `string` | 쇼핑몰 이름^|mall-name |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+
+이전주문 삭제
+
+---
+
+## RecurringPayment
+
+### 🟢 `GET` `/recurring-payments`
+
+**정기결제(배송) 조회**
+
+> operationId: `get-recurring-payments`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `memberNos` | query | - | `number` | "회원번호 리스트^|[1]" |
+| `searchType` | query | - | `string` | 검색 타입|(RECURRING_PAYMENT_NO)^|RECURRING_PAYMENT_NO |
+| `keywords` | query | - | `string` | "검색어(리스트)^|[]" |
+| `statusTypes` | query | - | `string` | "상태(리스트)^|[ACTIVE]" |
+| `page` | query | ✅ | `integer` | 페이지 번호^|1 |
+| `size` | query | ✅ | `integer` | 사이즈^|30 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+
+정기결제(배송) 조회
+
+---
+
+## ShippingAddress — 배송지
+
+### 🟢 `GET` `/shipping-addresses`
+
+**배송지 조회하기**
+
+> operationId: `get-shipping-addresses`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `memberNos` | query | ✅ | `string` | "회원 번호 리스트^|[1]" |
+| `addressType` | query | ✅ | `string` | "배송지 타입^|BOOK,RECENT,RECURRING_PAYMENT,RECURRING_PAYMENT_PRESENT" |
+| `page` | query | ✅ | `integer` | 페이지 번호^|1 |
+| `size` | query | ✅ | `integer` | 페이지 크기^|30 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+
+---
+
+## TaskMessage — 업무메세지
+
+### 🟢 `GET` `/task-messages`
+
+**업무 메세지 조회하기**
+
+> operationId: `get-task-messages`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `dateType` | query | ✅ | `string` | "기간 검색 타입 (REGISTER: Registration date, UPDATE: Modification\ |
+| `startDateTime` | query | ✅ | `string` | 조회 시작 일시^|YYYY-MM-DD HH:mm:ss |
+| `endDateTime` | query | ✅ | `string` | 조회 종료 일시^|YYYY-MM-DD HH:mm:ss |
+| `page` | query | - | `number` | 페이지 번호 (1 이상)^|1 |
+| `size` | query | - | `number` | 페이지당 노출 개수^|10 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+
+---
+
+### 🔵 `POST` `/task-messages`
+
+**업무 메시지 등록**
+
+> operationId: `post-task-messages`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+
+업무 메시지 등록
+
+---
+
+### 🟡 `PUT` `/task-messages/{taskMessageNo}`
+
+**업무 메시지 수정**
+
+> operationId: `put-task-messages-task-message-no`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `taskMessageNo` | path | ✅ | `integer` | 업무 메시지 번호^|1813 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+
+업무 메시지 수정
+
+---
+
+### 🔵 `POST` `/task-messages/{taskMessageNo}/details`
+
+**상세 업무 메시지 등록**
+
+> operationId: `post-task-messages-task-message-no-details`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `taskMessageNo` | path | ✅ | `integer` | 업무 메시지 번호^|1813 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+
+상세 업무 메시지 등록
+
+---
+
+### 🟡 `PUT` `/task-messages/{taskMessageNo}/details/{taskMessageDetailNo}`
+
+**상세 업무 메시지 수정**
+
+> operationId: `put-task-messages-task-message-no-details-task-message-detail-no`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `taskMessageNo` | path | ✅ | `integer` | 업무 메시지 번호^|1813 |
+| `taskMessageDetailNo` | path | ✅ | `integer` | 상세 메시지 번호^|5123 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+
+상세 업무 메시지 수정
+
+---
+
+## Wish
+
+### 🟢 `GET` `/wish`
+
+**위시리스트 가져오기**
+
+> operationId: `get-wishes`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `startYmdt` | query | - | `string` | 조회 시작일시^|2026-02-08 09:50:25 |
+| `endYmdt` | query | - | `string` | 조회 종료일시^|2026-02-11 09:50:25 |
+| `page` | query | - | `integer` | 페이지 번호 (1 이상)^|1 |
+| `size` | query | - | `integer` | 페이지당 노출 개수^|20 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+
+---
+

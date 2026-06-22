@@ -1,0 +1,44 @@
+---
+title: "[활용]PC 버전 커스텀 가이드"
+depth: 1
+path: "오로라 리액트 스킨개발가이드 > [활용]PC 버전 커스텀 가이드"
+---
+
+# [활용]PC 버전 커스텀 가이드
+
+반응형 웹 오로라 리액트 스킨을 `PC/MOBILE` 용으로 따로 제작하여 적응형으로 제공할 수 있는 방법에 대해 알아봅니다.
+
+❗ 주의사항
+본 가이드는 개별형 스킨에 대한 내용입니다.
+스킨 상품 유형(개별형/통합형)은 수정 불가한 항목이므로 반드시 개별형 스킨으로 작업해 주시기 바랍니다.
+
+* 오로라 스킨 저장소 바로가기 : [https://skins.shopby.co.kr/shopby/aurora-skin](https://skins.shopby.co.kr/shopby/aurora-skin)
+* 오로라 스킨 PC 버전 브랜치 바로가기: [https://skins.shopby.co.kr/shopby/aurora-skin/-/tree/feat/pc-main](https://skins.shopby.co.kr/shopby/aurora-skin/-/tree/feat/pc-main)
+
+## 1편 패치하기
+
+
+
+* `remote` 저장소 등록하기
+
+```shell
+$ git remote add {별칭} {저장소}
+$ git remote add upstream https://skins.shopby.co.kr/shopby/aurora-skin.git
+```
+
+## 2편 환경 설정 및 필수 요건 확인하기
+
+
+
+* `remote` 저장소 확인하기
+
+```shell
+$ git remote -v
+```
+
+* 🚨 주의사항
+    `$ git push` 할 때 대상 저장소를 확인하세요.
+    `aurora-skin` 기본 스킨 저장소에 `push` 하는 경우 권한오류가 발생합니다.
+
+## 3편 최근 본 상품 기능 추가하기
+

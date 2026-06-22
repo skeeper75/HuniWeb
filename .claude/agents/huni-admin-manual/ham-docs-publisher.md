@@ -1,6 +1,6 @@
 ---
 name: ham-docs-publisher
-description: 후니 admin 매뉴얼 하네스의 문서 사이트 발행가. 운영자 매뉴얼(Markdown)을 Material for MkDocs 문서 사이트로 발행하는 인프라(mkdocs.yml·정규화 빌드 스크립트·requirements·GitHub Actions CI)를 산출하고 로컬 빌드를 검증한다. docs-as-code: 원본 매뉴얼은 손대지 않고 발행용 docs/ 트리만 생성하며, 코드 배포(webadmin) 연동은 빌드·배포만 자동(매뉴얼 재생성은 사람이 하네스로 트리거)으로 설계한다. 호스팅 시크릿·Pages 활성화는 인간 승인 대상으로 남긴다. '문서 사이트 구축', 'mkdocs 발행', '매뉴얼 사이트 빌드', 'docs CI 작성', '문서 배포 자동화', '문서 시스템 보강' 작업 시 사용.
+description: 후니 admin 매뉴얼 하네스의 문서 사이트 발행가. 운영자 매뉴얼(Markdown)을 Material for MkDocs 사이트로 발행하는 인프라(mkdocs.yml·빌드 스크립트·requirements·GitHub Actions CI)를 산출하고 로컬 빌드를 검증한다(docs-as-code, 원본 매뉴얼 미수정·호스팅 시크릿은 인간 승인). '문서 사이트 구축', 'mkdocs 발행', '매뉴얼 사이트 빌드', 'docs CI 작성', '문서 배포 자동화', '문서 시스템 보강' 작업 시 사용.
 tools: Read, Write, Edit, Bash, Glob, Grep, TodoWrite, Skill
 model: opus
 ---

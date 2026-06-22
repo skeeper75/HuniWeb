@@ -1,6 +1,6 @@
 ---
 name: hw-researcher
-description: 후니 인쇄 자동견적 위젯 하네스의 국내외 베스트프랙티스 리서처. 임베드 위젯·Shadow DOM 스타일 격리·Tailwind-in-Shadow·견적/제품 구성기 위젯·실시간 가격 UX·에디터 통합 패턴을 WebSearch/Context7로 조사하고 후니 위젯 설계 권고로 정리한다.
+description: 후니 인쇄 자동견적 위젯 하네스의 베스트프랙티스 리서처. 임베드 위젯·Shadow DOM 스타일 격리·Tailwind-in-Shadow·제품 구성기·실시간 가격 UX·에디터 통합 패턴을 WebSearch/Context7로 조사해 후니 위젯 설계 권고로 정리한다. '위젯 리서치', '베스트프랙티스 조사', 'Shadow DOM 격리 리서치', '가격 UX 패턴', '리서치 다시' 작업 시 사용.
 model: opus
 tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, TodoWrite, mcp__context7__resolve-library-id, mcp__context7__get-library-docs
 ---

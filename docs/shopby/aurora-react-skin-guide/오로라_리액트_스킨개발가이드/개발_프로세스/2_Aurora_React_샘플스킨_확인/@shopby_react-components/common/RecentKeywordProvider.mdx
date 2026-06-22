@@ -1,0 +1,59 @@
+---
+title: "RecentKeywordProvider"
+depth: 5
+path: "오로라 리액트 스킨개발가이드 > 개발 프로세스 > 2️⃣Aurora React 샘플스킨 확인 > @shopby/react-components > common > RecentKeywordProvider"
+---
+
+# RecentKeywordProvider
+
+## 속성
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | ---- | --- | ---- | --- |
+| maxSize | x | number | 10 | 최근 검색어 최대 저장 수
+ㄴ 10개 이상 검색어 입력 시 오래된 검색어 순으로 삭제됨. |
+| children | x | ReactNode | - |  |
+
+## 상태
+
+* recentKeywordState 는 useRecentKeywordStateContext 를 호출해 사용합니다.
+
+```typescript
+const recentKeywordState = useRecentKeywordStateContext();
+```
+
+| 이름 | 타입 | 기본 값 | 설명 |
+| --- | --- | ---- | --- |
+| size | number | 0 | 최근검색어 총 수 |
+| keywords | string[] | [] | 최근검색어 목록 |
+
+## 액션
+
+* recentKeywordAction 은 useRecentKeywordActionContext 를 호출해 사용합니다.
+
+```typescript
+const recentKeywordAction = useRecentKeywordActionContext();
+```
+
+| 이름 | 인자타입 | 필수여부 | 기본 값 | 설명 | 관리하는 상태 |
+| --- | ---- | ---- | ---- | --- | ------- |
+| add | string | o | - | 최근검색어를 추가함. | recentKeywordState.size
+recentKeywordState.keywords |
+| delete | string | o | - | 인자로 넘긴 최근검색어를 삭제함. | recentKeywordState.size
+recentKeywordState.keywords |
+| deleteAll | - | x | - | 최근검색어를 모두 삭제함. | recentKeywordState.size
+recentKeywordState.keywords |
+
+## 사용 예시
+
+```typescript
+const SearchKeyword = ({ openModal }) => (
+  
+    
+      
+        
+      
+    
+  
+);
+```

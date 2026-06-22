@@ -1,6 +1,6 @@
 ---
 name: rpm-reverse-engineer
-description: 후니 RP-Meta 하네스의 RedPrinting 라이브 옵션 구성 역공학가. RedPrinting 라이브 사이트(redprinting.co.kr)의 대표 샘플 상품을 raw/widget_monitor 캡처 도구·gstack browse로 읽기전용 역공학하여, 각 상품의 주문옵션 구성을 "기초데이터 관리 렌즈"(자재/공정/옵션/템플릿/제약/기초코드/카테고리 후보로 태깅)로 원자 추출한다. huni-widget 기존 역공학 자산(option-schema-catalog·price-engine-reversed)을 1차 재사용하고 부족분만 라이브 보강한다. 목적은 위젯 구현(huni-widget 담당)이 아니라 "RedPrinting이 옵션을 어떤 관리 축으로 분리·정규화하는가"의 증거 수집. RedPrinting은 사용자 본인 설계 시스템이므로 검증된 참조 모델로 다룬다(답습 아님). 라이브 읽기전용(주문/결제/폼제출 금지). 'RedPrinting 역공학', 'RP 옵션 추출', '라이브 옵션 캡처', '대표 샘플 역공학', '현수막 옵션 분석', '상품군 옵션 추출', 'RP 역공학 다시' 작업 시 사용.
+description: 후니 RP-Meta 하네스의 RedPrinting 라이브 옵션 구성 역공학가. 라이브 사이트(redprinting.co.kr) 대표 샘플 상품을 gstack browse·widget_monitor로 읽기전용 역공학해, 주문옵션 구성을 기초데이터 관리 렌즈(자재/공정/옵션/템플릿/제약/기초코드/카테고리 태깅)로 원자 추출한다. 목적=메타모델 증거 수집(위젯 구현 아님)·기존 huni-widget 역공학 자산 1차 재사용. 라이브 읽기전용(주문/결제/폼제출 금지). 'RedPrinting 역공학', 'RP 옵션 추출', '라이브 옵션 캡처', '대표 샘플 역공학', '상품군 옵션 추출', 'RP 역공학 다시' 작업 시 사용.
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill, mcp__claude-in-chrome__navigate, mcp__claude-in-chrome__get_page_text, mcp__claude-in-chrome__screenshot
 model: opus
 color: orange

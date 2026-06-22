@@ -1,6 +1,11 @@
 ---
 name: dbm-loadspec-extract
-description: 후니프린팅 라이브 admin 소스(raw/webadmin Django catalog)를 읽어 각 t_* 엔티티가 "무엇을 어떻게 적재하는가"(컬럼·폼 위젯·검증·코드값 그룹·자동채번·감사컬럼·논리삭제·FK·드릴다운 적재경로)를 코드 근거(file:line)로 추출하는 방법론 스킬(round-11). models.py(db_table·필드)·admin.py(BaseAdmin 제너릭·exclude·autocomplete·BaseCodeAdminForm)·basecodes.py(BASE_CODE_GROUP 코드값 그룹)·views.py(상품뷰어 section/drilldown 적재경로)·cfg_utils.py(트리 드롭다운)를 추출 대상으로, 두 적재 surface(표준 admin changeform·커스텀 상품뷰어)와 필수여부 도출(NOT NULL+no default+not excluded)·코드값 enum 열거 절차를 제공한다. DB 미접속(소스 읽기 전용). 'webadmin 적재명세', '적재 로직 추출', 't_* 적재방법', 'Django admin 적재 분석', 'BaseAdmin 폼 분석', '코드값 그룹 추출', '상품뷰어 적재경로', '적재 surface', '적재명세 추출 다시', 'round-11 적재명세' 작업 시 반드시 이 스킬을 사용. 라이브 DB DDL 런타임 사실 추출은 dbm-schema-extract(dbm-schema-analyst), 컬럼 도메인 의미·상품 BOM은 dbm-column-domain이 담당하므로 그 작업에는 트리거하지 않는다.
+description: >
+  후니프린팅 라이브 admin 소스(raw/webadmin Django catalog)를 읽어 각 t_* 엔티티가 무엇을 어떻게 적재하는가(컬럼·폼
+  위젯·검증·코드값 그룹·자동채번·감사컬럼·논리삭제·FK·드릴다운 적재경로)를 코드 근거(file:line)로 추출하는 방법론
+  (round-11). models.py·admin.py(BaseAdmin)·basecodes.py·views.py 대상·두 적재 surface(표준 changeform·상품뷰어)·필수여부 도출·코드값 enum 열거. DB 미접속.
+  트리거: webadmin 적재명세, 적재 로직 추출, t_* 적재방법, Django admin 적재 분석, BaseAdmin 폼 분석, 코드값 그룹 추출, 상품뷰어 적재경로, round-11 적재명세.
+  라이브 DB DDL 사실 추출은 dbm-schema-extract, 컬럼 도메인 의미·상품 BOM은 dbm-column-domain.
 ---
 
 # dbm-loadspec-extract — raw/webadmin 적재명세 추출 방법론

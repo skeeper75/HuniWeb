@@ -1,0 +1,4153 @@
+[
+  {
+    "method": "GET",
+    "path": "/addresses/search",
+    "summary": "주소 조회하기",
+    "description": "\n## 부가설명 및 특이사항\n검색 키워드로 주소정보를 검색하는 API 입니다.\n\n##Request 요청\n| name      | type      | required  | default value | description      |\n|-----------|-----------|-----------|---------------|------------------|\n| keyword   | String    | Y         |               | 검색 키워드         |\n| pageNumber| Int       | N         | 1             | 페이지 번호         |\n| pageSize  | Int       | N         | 10(MAX = 1000)| 한 페이지당 노출 수   |\n## pageSize가 최대 사이즈(1000)를 초과할 경우 최대 사이즈 만큼 조회됩니다.",
+    "tags": ["Address"],
+    "parameters": [
+      {
+        "name": "pageNumber",
+        "in": "query",
+        "description": "페이지 번호",
+        "required": false,
+        "schema": {
+          "type": "number"
+        },
+        "example": "1"
+      },
+      {
+        "name": "pageSize",
+        "in": "query",
+        "description": "페이지 사이즈",
+        "required": false,
+        "schema": {
+          "type": "number"
+        },
+        "example": "10"
+      },
+      {
+        "name": "keyword",
+        "in": "query",
+        "description": "검색 키워드",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "디지털로26길 43, 대륭포스트타워 8차 R동 6~7층"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/addresses-search-1159150621"
+            },
+            "examples": {
+              "search-addresses": {
+                "value": "{\n  \"totalCount\" : 1,\n  \"groupByStates\" : [ ],\n  \"items\" : [ {\n    \"address\" : \"서울특별시 구로구 디지털로26길 43, 대륭포스트타워 8차 R동 6~7층 (NHN KCP)\",\n    \"detailAddress\" : \"\",\n    \"roadAddress\" : \"서울특별시 구로구 디지털로26길 43, 대륭포스트타워 8차 R동 6~7층 (NHN KCP)\",\n    \"roadAddressExtra\" : \"\",\n    \"jibunAddress\" : \"서울특별시 구로구 구로동 222-22 NHN KCP\",\n    \"relatedJibun\" : \"\",\n    \"zipCode\" : \"08393\",\n    \"oldZipCode\" : \"\",\n    \"engAddress\" : \"72 Digital-ro 26-gil, Guro-gu, Seoul\"\n  } ]\n}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/addresses/search/jp",
+    "summary": "일본 주소 검색",
+    "description": " 일본 주소 검색\n \n ### 3.2 **응답 필드 설명**\n **필드** | **타입** | **설명** | 예제 값 |\n --- | --- | --- | ---- |\n zipCode | String | 우편번호 (하이픈 제거) | 1056322 |\n prefCode | String | 도도부현 코드 (2자리) | 13 |\n jisCode | String | JIS 코드 | 130001 |\n address | String | 전체 주소 | 東京都港区虎ノ門虎ノ門ヒルズ森タワー２２階 |\n addressEnglish | String | 전체 주소 (영문) | TORANOMON TORANOMONHIRUZUMORITAWA, MINATO KU, TOKYO TO |\n addressList | Array | 입력된 우편번호에 해당하는 복수의 주소 리스트 | ['宮城県 伊具郡丸森町 赤堀', '宮城県 伊具郡丸森町 泉'] |\n state | String | 도도부현 이름 | 東京都 |\n city | String | 시/구/읍/면 이름 | 港区 |\n streetAddress | String | 상세 주소 | 虎ノ門虎ノ門ヒルズ森タワー２２階 |\n",
+    "tags": ["Address"],
+    "parameters": [
+      {
+        "name": "zipCode",
+        "in": "query",
+        "description": "우편번호",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/addresses-search-jp-808900162"
+            },
+            "examples": {
+              "search-jp-address": {
+                "value": "{\n  \"zipCode\" : \"6068341\",\n  \"prefCode\" : \"26\",\n  \"jisCode\" : \"26103\",\n  \"address\" : \"京都府京都市左京区岡崎西天王町\",\n  \"addressEnglish\" : \"\",\n  \"addressList\" : [ ],\n  \"state\" : \"京都府\",\n  \"city\" : \"京都市左京区\",\n  \"streetAddress\" : \"岡崎西天王町\"\n}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/boards/configurations",
+    "summary": "게시판 설정 조회하기",
+    "description": "\n## 부가설명 및 특이사항\n전체 게시판의 설정정보를 조회하는 API 입니다. \n",
+    "tags": ["Board"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/boards-configurations333053723"
+            },
+            "examples": {
+              "get-board-config": {
+                "value": "{\n  \"boardConfigs\" : [ {\n    \"boardNo\" : 1,\n    \"boardId\" : \"test\",\n    \"name\" : \"공지사항\",\n    \"categories\" : [ {\n      \"categoryNo\" : 1,\n      \"label\" : \"공지\"\n    } ],\n    \"memberPostingUsed\" : false,\n    \"guestPostingUsed\" : false,\n    \"secretPostingUsed\" : false,\n    \"replyUsed\" : false,\n    \"used\" : false,\n    \"thumbnailUsed\" : false,\n    \"categoryUsed\" : false,\n    \"displayType\" : \"LIST\",\n    \"imageDisplayType\" : \"NOT_USED\",\n    \"attachmentUsed\" : false,\n    \"order\" : 1,\n    \"writerDisplayType\" : \"MEMBER_NAME\",\n    \"authorityConfig\" : {\n      \"boardReadConfig\" : {\n        \"type\" : \"ALL\",\n        \"groupNos\" : [ ],\n        \"gradeNos\" : [ ]\n      },\n      \"postReadConfig\" : {\n        \"type\" : \"MEMBER_ONLY\",\n        \"groupNos\" : [ ],\n        \"gradeNos\" : [ ]\n      },\n      \"postWriteConfig\" : {\n        \"type\" : \"SPECIFIC_MEMBERS\",\n        \"groupNos\" : [ 1, 2, 3 ],\n        \"gradeNos\" : [ 10 ]\n      },\n      \"replyPostReadConfig\" : {\n        \"type\" : \"NOT_USED\",\n        \"groupNos\" : [ ],\n        \"gradeNos\" : [ ]\n      },\n      \"replyPostWriteConfig\" : {\n        \"type\" : \"ADMIN\",\n        \"groupNos\" : [ ],\n        \"gradeNos\" : [ ]\n      }\n    }\n  } ],\n  \"inquiryConfig\" : {\n    \"displayType\" : \"LIST\",\n    \"imageDisplayType\" : \"NOT_USED\",\n    \"used\" : false,\n    \"name\" : \"1:1문의\",\n    \"description\" : \"설명\",\n    \"memberPostingUsed\" : false,\n    \"guestPostingUsed\" : false,\n    \"secretPostingUsed\" : false,\n    \"replyUsed\" : false,\n    \"attachmentUsed\" : false,\n    \"smsUsed\" : false,\n    \"emailUsed\" : false,\n    \"answerSmsTemplateUsed\" : false,\n    \"answerMailTemplateUsed\" : false\n  },\n  \"productReviewConfig\" : {\n    \"displayType\" : \"LIST\",\n    \"used\" : false,\n    \"name\" : \"상품리뷰\",\n    \"memberPostingUsed\" : false,\n    \"guestPostingUsed\" : false,\n    \"secretPostingUsed\" : false,\n    \"replyUsed\" : false,\n    \"attachmentUsed\" : false,\n    \"imageDisplayType\" : \"NOT_USED\",\n    \"reviewAccumulation\" : {\n      \"use\" : true,\n      \"normalReview\" : {\n        \"amount\" : 500,\n        \"contentLength\" : 100\n      },\n      \"photoReview\" : {\n        \"amount\" : 1000,\n        \"contentLength\" : 10\n      }\n    }\n  },\n  \"productInquiryConfig\" : {\n    \"displayType\" : \"LIST\",\n    \"used\" : false,\n    \"name\" : \"상품문의\",\n    \"memberPostingUsed\" : false,\n    \"guestPostingUsed\" : false,\n    \"secretPostingUsed\" : false,\n    \"replyUsed\" : false,\n    \"attachmentUsed\" : false,\n    \"imageDisplayType\" : \"NOT_USED\"\n  }\n}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/boards/posts",
+    "summary": "게시글 리스트 조회하기(버전2)",
+    "description": "\n## 부가설명 및 특이사항\n특정 게시판(게시판 번호 기준) or 몰 단위의 게시글 리스트를 조회하는 API version2 입니다.\n\nRequest Body에 boardNoOrId값을 null 보낼 시 몰 단위로 게시글 리스트를 검색할 수 있습니다. \n",
+    "tags": ["Board"],
+    "parameters": [
+      {
+        "name": "page",
+        "in": "query",
+        "description": "페이지 번호 (default:1)",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "example": "1"
+      },
+      {
+        "name": "pageSize",
+        "in": "query",
+        "description": "한 페이지당 노출 수 (default:10)",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "example": "10"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "회원 엑세스 토큰",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "accessToken"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/boards-posts-408790453"
+          },
+          "examples": {
+            "get-posts-v2": {
+              "value": "{\n  \"boardNoOrId\" : \"1\",\n  \"keyword\" : \"keyword\",\n  \"searchType\" : \"TITLE\",\n  \"categoryNo\" : null,\n  \"startYmdt\" : null,\n  \"endYmdt\" : null,\n  \"direction\" : \"DESC\",\n  \"isMine\" : false,\n  \"myRecommendOnly\" : true,\n  \"memberNos\" : [ 1, 2, 3 ],\n  \"postSearchTags\" : [ \"post\", \"test\" ],\n  \"myScrapedOnly\" : false,\n  \"memberGroupNo\" : null,\n  \"isNoticed\" : null,\n  \"skipBlinded\" : false,\n  \"isSecreted\" : null\n}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/boards-posts928791127"
+            },
+            "examples": {
+              "get-posts-v2": {
+                "value": "{\n  \"totalCount\" : 1,\n  \"items\" : [ {\n    \"boardNo\" : 1,\n    \"postNo\" : 1,\n    \"title\" : \"title\",\n    \"imageUrl\" : \"image-url.jpg\",\n    \"categoryNo\" : 1,\n    \"categoryLabel\" : null,\n    \"registerNo\" : 12,\n    \"registerName\" : \"등록자 이름\",\n    \"registerType\" : \"MEMBER\",\n    \"registerYmdt\" : \"2025-10-27T12:10:33.439562568\",\n    \"modifierNo\" : 13,\n    \"modifierName\" : \"변경자 이름\",\n    \"modifierType\" : \"MEMBER\",\n    \"modifyYmdt\" : \"2025-10-27T12:10:33.439586171\",\n    \"modifiable\" : false,\n    \"secreted\" : false,\n    \"noticed\" : false,\n    \"recommended\" : true,\n    \"scraped\" : false,\n    \"reported\" : true,\n    \"attached\" : false,\n    \"viewCnt\" : 1,\n    \"recommendedCnt\" : 12,\n    \"reportedCnt\" : 10,\n    \"repliedCnt\" : 11,\n    \"tags\" : [ ],\n    \"postSearchTags\" : [ \"검색용 태그\", \"test\" ],\n    \"displayStatusType\" : \"DISPLAY\",\n    \"memberGroupNo\" : null\n  } ]\n}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/boards/{boardNo}/articles",
+    "summary": "게시글 리스트 조회하기",
+    "description": "\n## 부가설명 및 특이사항\n특정 게시판(게시판 번호 기준)의 게시글 리스트를 조회하는 API 입니다.\n",
+    "tags": ["Board"],
+    "parameters": [
+      {
+        "name": "boardNo",
+        "in": "path",
+        "description": "조회할 게시판 번호(숫자) 또는 게시판id(문자열)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1 또는 boardId"
+      },
+      {
+        "name": "pageNumber",
+        "in": "query",
+        "description": "페이지 번호",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "example": "1"
+      },
+      {
+        "name": "pageSize",
+        "in": "query",
+        "description": "한 페이지당 노출 수",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "example": "1"
+      },
+      {
+        "name": "hasTotalCount",
+        "in": "query",
+        "description": "목록 카운트 포함 여부(false: 미포함(default), true: 포함)",
+        "required": false,
+        "schema": {
+          "type": "boolean"
+        },
+        "example": "false"
+      },
+      {
+        "name": "keyword",
+        "in": "query",
+        "description": "검색어",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "keyword"
+      },
+      {
+        "name": "searchType",
+        "in": "query",
+        "description": "검색유형 (ALL: 전체, TITLE: 제목, CONTENT: 내용, WRITER: 작성자)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ALL"
+      },
+      {
+        "name": "categoryNo",
+        "in": "query",
+        "description": "게시판 카테고리",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "example": "1"
+      },
+      {
+        "name": "startYmd",
+        "in": "query",
+        "description": "조회일 시작일(yyyy-MM-dd, default: 3개월)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "YYYY-MM-DD"
+      },
+      {
+        "name": "endYmd",
+        "in": "query",
+        "description": "조회일 종료일(yyyy-MM-dd, default: 오늘)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "YYYY-MM-DD"
+      },
+      {
+        "name": "withReplied",
+        "in": "query",
+        "description": "답글도 리스트에 같이 조회할지 여부 (false: 답글 미포함(default), true: 답글 포함)",
+        "required": false,
+        "schema": {
+          "type": "boolean"
+        },
+        "example": "false"
+      },
+      {
+        "name": "direction",
+        "in": "query",
+        "description": "정렬방식(ASC: 오래된 순, DESC: 최신 순, RECOMMEND_COUNT: 추천수 많은 순, READ_COUNT: 조회수 많은 순)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "DESC"
+      },
+      {
+        "name": "isMine",
+        "in": "query",
+        "description": "본인이 작성한 글만 조회 여부(false: 전체 조회(default), true: 본인 글만 조회)",
+        "required": false,
+        "schema": {
+          "type": "boolean"
+        },
+        "example": "true"
+      },
+      {
+        "name": "myRecommendOnly",
+        "in": "query",
+        "description": "본인이 추천한 게시글만 조회 여부(false: 전체 조회(default), true: 추천한 게시글만 조회)",
+        "required": false,
+        "schema": {
+          "type": "boolean"
+        },
+        "example": "true"
+      },
+      {
+        "name": "includeRecommended",
+        "in": "query",
+        "description": "본인이 해당 게시글을 추천했는지 여부(false: 본인 추천 포함x(default), true: 본인 추천 포함)",
+        "required": false,
+        "schema": {
+          "type": "boolean"
+        },
+        "example": "true"
+      },
+      {
+        "name": "isNoticed",
+        "in": "query",
+        "description": "공지글 조회 여부(null: 공지+일반 게시글 전체 조회(default), false: 일반 게시글만 조회, true: 공지글만 조회",
+        "required": false,
+        "schema": {
+          "type": "boolean"
+        },
+        "example": "true"
+      },
+      {
+        "name": "isSecreted",
+        "in": "query",
+        "description": "비밀글 조회 여부(null: 공개+비밀 게시글 전체 조회(default), false: 공개 게시글만 조회, true: 비밀 게시글만 조회)",
+        "required": false,
+        "schema": {
+          "type": "boolean"
+        },
+        "example": "true"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "회원 엑세스 토큰",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "accessToken"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/boards-boardNo-articles-565179227"
+            },
+            "examples": {
+              "search-posts": {
+                "value": "{\n  \"totalCount\" : 1,\n  \"items\" : [ {\n    \"articleNo\" : 1,\n    \"title\" : \"title\",\n    \"content\" : null,\n    \"imageUrl\" : null,\n    \"viewCnt\" : 1,\n    \"categoryNo\" : 1,\n    \"categoryLabel\" : \"category\",\n    \"registerName\" : \"등록자\",\n    \"registerYmdt\" : null,\n    \"registerNo\" : 1,\n    \"registerType\" : \"ADMIN\",\n    \"modifierName\" : \"변경자\",\n    \"modifyYmdt\" : null,\n    \"modifierNo\" : 1,\n    \"modifierType\" : \"ADMIN\",\n    \"modifiable\" : false,\n    \"secreted\" : false,\n    \"hasReplies\" : false,\n    \"repliedCnt\" : 0,\n    \"replied\" : false,\n    \"notice\" : false,\n    \"attached\" : false,\n    \"recommendCount\" : 1,\n    \"tags\" : [ ],\n    \"memberId\" : \"memberId\",\n    \"memberEmail\" : \"nhn@nhn-commerce.com\",\n    \"memberNickname\" : \"nickname\",\n    \"recommended\" : false,\n    \"reportCount\" : 0,\n    \"displayStatusType\" : \"DISPLAY\",\n    \"reported\" : false\n  } ]\n}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/boards/{boardNo}/articles",
+    "summary": "게시글 작성하기",
+    "description": "\n## 부가설명 및 특이사항\n게시글을 작성하는 API 입니다.\n\nimages 값은 조회 시, '게시글 상세 조회 하기 API의 'attachments로 조회됩니다. \n\n첨부파일은 최대 10개까지 업로드 가능합니다.\n\n | 저장 시                    | 조회 시(게시글 상세 조회 하기 API)  | 설명           | 예시                   |\n |--------------------------|------------------------------|--------------|-----------------------|\n | images.originalFileName  | attachments.originalFileName | 원본 파일명     | 홍길동.jpg              |\n | images.uploadedFileName  | attachments.uploadedFileName | 업로드 된 파일명 | https://mycdn/hong.jpg |\n | images.uploadedFileName  | attachments.downloadFileUrl  | 업로드 된 파일명 | https://mycdn/hong.jpg |\n\n### thumbnailUrl는 조회 시, 게시글 상세 조회 하기 API의 'imageUrl'로 조회됩니다.\n",
+    "tags": ["Board"],
+    "parameters": [
+      {
+        "name": "boardNo",
+        "in": "path",
+        "description": "조회할 게시판 번호(숫자) 또는 게시판id(문자열)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1 또는 boardId"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "회원 엑세스 토큰",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "accessToken"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/boards-boardNo-articles1572956845"
+          },
+          "examples": {
+            "add-post": {
+              "value": "{\n  \"articleTitle\" : \"title\",\n  \"articleContent\" : \"content\",\n  \"parentBoardArticleNo\" : 1,\n  \"password\" : \"password\",\n  \"secreted\" : false,\n  \"boardCategoryNo\" : 1,\n  \"images\" : [ {\n    \"originalFileName\" : \"originalFile\",\n    \"uploadedFileName\" : \"uploadedFile\"\n  } ],\n  \"guestName\" : \"\",\n  \"tags\" : [ ],\n  \"thumbnailUrl\" : \"http://image.co.kr/image02.jpg\",\n  \"postSearchTags\" : [ \"검색용 태그\", \"test\" ],\n  \"memberGroupNo\" : null\n}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/boards/{boardNo}/categories",
+    "summary": "게시판 카테고리 목록 조회하기",
+    "description": "\n## 부가설명 및 특이사항\n특정 게시판(게시판 번호 기준)의 카테고리를 조회하는 API 입니다.\n",
+    "tags": ["Board"],
+    "parameters": [
+      {
+        "name": "boardNo",
+        "in": "path",
+        "description": "조회할 게시판 번호(숫자) 또는 게시판id(문자열)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1 또는 boardId"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/boards-boardNo-categories2026858948"
+            },
+            "examples": {
+              "get-board-categories": {
+                "value": "[ {\n  \"categoryNo\" : 1,\n  \"label\" : \"category\"\n} ]"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/boards/posts/scrap/{postNo}",
+    "summary": "게시글 스크랩",
+    "description": "게시글 스크랩",
+    "tags": ["Board"],
+    "parameters": [
+      {
+        "name": "postNo",
+        "in": "path",
+        "description": "스크랩할 게시글 번호",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "회원 엑세스 토큰",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "accessToken"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "DELETE",
+    "path": "/boards/posts/scrap/{postNo}",
+    "summary": "게시글 스크랩 취소",
+    "description": "게시글 스크랩 취소",
+    "tags": ["Board"],
+    "parameters": [
+      {
+        "name": "postNo",
+        "in": "path",
+        "description": "스크랩할 게시글 번호",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "회원 엑세스 토큰",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "accessToken"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/boards/{boardNo}/articles/{articleNo}",
+    "summary": "게시글 상세 조회하기",
+    "description": "\n## 부가설명 및 특이사항\n특정 게시글(게시글 번호 기준)을 상세 조회하는 API 입니다.\n\nimageUrl은 게시글 작성하기 API의 thumbnailUrl과 동일합니다.\n\nattachments는 게시글 작성하기 API의 images와 동일합니다.\n\n | 조회 시                        | 저장 시(게시글 작성하기 API)   | 설명          | 예시                     |\n |------------------------------|--------------------------|--------------|------------------------|\n | attachments.originalFileName | images.originalFileName  | 원본 파일명     | 홍길동.jpg               |\n | attachments.uploadedFileName | images.uploadedFileName  | 업로드 된 파일명 | https://mycdn/hong.jpg |\n | attachments.downloadFileUrl  | images.uploadedFileName  | 업로드 된 파일명 | https://mycdn/hong.jpg |\n\n",
+    "tags": ["Board"],
+    "parameters": [
+      {
+        "name": "boardNo",
+        "in": "path",
+        "description": "조회할 게시판 번호(숫자) 또는 게시판id(문자열)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1 또는 boardId"
+      },
+      {
+        "name": "articleNo",
+        "in": "path",
+        "description": "조회할 게시글 번호",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "0"
+      },
+      {
+        "name": "password",
+        "in": "query",
+        "description": "비회원 글 확인용 비밀번호",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "string"
+      },
+      {
+        "name": "withReplied",
+        "in": "query",
+        "description": "답글도 리스트에 같이 조회할지 여부 (false: 답글 미포함, true: 답글 포함(default))",
+        "required": false,
+        "schema": {
+          "type": "boolean"
+        },
+        "example": "true"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "회원 엑세스 토큰",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "accessToken"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/boards-boardNo-articles-articleNo656562113"
+            },
+            "examples": {
+              "get-post": {
+                "value": "{\n  \"articleNo\" : 1,\n  \"title\" : \"title\",\n  \"content\" : \"content\",\n  \"imageUrl\" : \"image-url.com\",\n  \"viewCnt\" : 0,\n  \"categoryNo\" : 1,\n  \"categoryLabel\" : \"테스트카테고리\",\n  \"attachments\" : [ {\n    \"fileName\" : \"filename.png\",\n    \"uploadedFileName\" : \"fileName.png\",\n    \"downloadFileUrl\" : \"downloadurl.com\"\n  } ],\n  \"registerName\" : \"배현수\",\n  \"registerGroupNames\" : null,\n  \"registerYmdt\" : \"2025-10-27T12:10:29.289881814\",\n  \"registerNo\" : 1,\n  \"registerType\" : \"MEMBER\",\n  \"modifierName\" : \"변경자\",\n  \"modifyYmdt\" : \"2025-10-27T12:10:29.289919552\",\n  \"modifierNo\" : 1,\n  \"modifierType\" : \"MEMBER\",\n  \"memberId\" : \"fpdjsns1004\",\n  \"memberNickname\" : \"nickname\",\n  \"modifiable\" : true,\n  \"childArticles\" : [ ],\n  \"secreted\" : false,\n  \"notice\" : true,\n  \"parentArticle\" : null,\n  \"recommendCount\" : 1,\n  \"tags\" : [ ],\n  \"recommendable\" : false,\n  \"reportCount\" : 0,\n  \"displayStatusType\" : \"DISPLAY\",\n  \"reported\" : false\n}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/boards/{boardNo}/articles/{articleNo}",
+    "summary": "게시글 수정하기",
+    "description": "\n## 부가설명 및 특이사항\n\n특정 게시글(게시글 번호 기준)을 수정하는 API 입니다.\n\n첨부파일은 최대 10개까지 업로드 가능합니다.\n",
+    "tags": ["Board"],
+    "parameters": [
+      {
+        "name": "boardNo",
+        "in": "path",
+        "description": "조회할 게시판 번호(숫자) 또는 게시판id(문자열)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1 또는 boardId"
+      },
+      {
+        "name": "articleNo",
+        "in": "path",
+        "description": "수정할 게시글 번호",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "0"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "회원 엑세스 토큰",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "accessToken"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/boards-boardNo-articles-articleNo2081539190"
+          },
+          "examples": {
+            "modify-post": {
+              "value": "{\n  \"articleTitle\" : \"title\",\n  \"articleContent\" : \"content\",\n  \"boardCategoryNo\" : 1,\n  \"password\" : null,\n  \"secreted\" : false,\n  \"images\" : [ ],\n  \"guestName\" : \"\",\n  \"tags\" : null,\n  \"thumbnailUrl\" : \"http://image.co.kr/image02.jpg\",\n  \"postSearchTags\" : null\n}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "DELETE",
+    "path": "/boards/{boardNo}/articles/{articleNo}",
+    "summary": "게시글 삭제하기",
+    "description": "\n## 부가설명 및 특이사항\n특정 게시글(게시글 번호 기준)을 삭제하는 API 입니다.\n\n비회원으로 작성한 경우, 해당 게시글 작성 비밀번호를 전달해야 합니다.\n",
+    "tags": ["Board"],
+    "parameters": [
+      {
+        "name": "boardNo",
+        "in": "path",
+        "description": "조회할 게시판 번호(숫자) 또는 게시판id(문자열)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1 또는 boardId"
+      },
+      {
+        "name": "articleNo",
+        "in": "path",
+        "description": "삭제할 게시글 번호",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "INTEGER"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "회원 엑세스 토큰",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "accessToken"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/boards-boardNo-articles-articleNo-1875198411"
+          },
+          "examples": {
+            "remove-post": {
+              "value": "{\n  \"password\" : null\n}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/boards/{boardNo}/posts/{postNo}",
+    "summary": "게시글 상세 조회하기(버전2)",
+    "description": "\n## 부가설명 및 특이사항\n특정 게시글(게시글 번호 기준)을 상세 조회하는 Version2 API 입니다.\n해당 api에서는 서비스 어드민의 게시판 권한 설정이 적용됩니다.\n\nimageUrl은 게시글 작성하기 API의 thumbnailUrl과 동일합니다.\n\nattachments는 게시글 작성하기 API의 images와 동일합니다.\n\n | 조회 시                        | 저장 시(게시글 작성하기 API)   | 설명          | 예시                     |\n |------------------------------|--------------------------|--------------|------------------------|\n | attachments.originalFileName | images.originalFileName  | 원본 파일명     | 홍길동.jpg               |\n | attachments.uploadedFileName | images.uploadedFileName  | 업로드 된 파일명 | https://mycdn/hong.jpg |\n | attachments.downloadFileUrl  | images.uploadedFileName  | 업로드 된 파일명 | https://mycdn/hong.jpg |\n\n",
+    "tags": ["Board"],
+    "parameters": [
+      {
+        "name": "boardNo",
+        "in": "path",
+        "description": "조회할 게시판 번호(숫자) 또는 게시판id(문자열)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1 또는 boardId"
+      },
+      {
+        "name": "postNo",
+        "in": "path",
+        "description": "조회할 게시글 번호",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1"
+      },
+      {
+        "name": "password",
+        "in": "query",
+        "description": "비회원 글 확인용 비밀번호",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "string"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "회원 엑세스 토큰",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "accessToken"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/boards-boardNo-posts-postNo1598826317"
+            },
+            "examples": {
+              "get-post-v2": {
+                "value": "{\n  \"postNo\" : 1,\n  \"title\" : \"post title\",\n  \"content\" : \"post content\",\n  \"imageUrl\" : \"post-image-url\",\n  \"categoryNo\" : 1,\n  \"categoryLabel\" : \"카테고리\",\n  \"registerName\" : \"등록자 이름\",\n  \"registerYmdt\" : \"2025-10-27T12:10:33.025880543\",\n  \"registerNo\" : 12,\n  \"registerType\" : \"MEMBER\",\n  \"modifierName\" : \"변경자 이름\",\n  \"modifyYmdt\" : \"2025-10-27T12:10:33.025903215\",\n  \"modifierNo\" : 13,\n  \"modifierType\" : \"MEMBER\",\n  \"modifiable\" : false,\n  \"secreted\" : false,\n  \"noticed\" : false,\n  \"recommended\" : false,\n  \"scraped\" : true,\n  \"reported\" : true,\n  \"replyEnabled\" : false,\n  \"viewCnt\" : 1,\n  \"recommendedCnt\" : 2,\n  \"reportedCnt\" : 1,\n  \"repliedCnt\" : 1,\n  \"memberGroupNo\" : null,\n  \"displayStatusType\" : \"DISPLAY\",\n  \"tags\" : [ ],\n  \"postSearchTags\" : [ \"검색용 태그\", \"12345\" ],\n  \"attachments\" : [ {\n    \"fileName\" : \"filename.png\",\n    \"uploadedFileName\" : \"fileName.png\",\n    \"downloadFileUrl\" : \"downloadurl.com\"\n  } ],\n  \"parentArticle\" : null\n}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/boards/{boardNo}/articles/{articleNo}/editable",
+    "summary": "게시글 수정가능 여부 확인하기",
+    "description": "\n## 부가설명 및 특이사항\n특정 게시글(게시글 번호 기준)의 수정가능 여부를 확인하는 API 입니다.\n\n비회원으로 작성한 경우, 해당 게시글 작성 비밀번호를 전달해야 합니다.\n",
+    "tags": ["Board"],
+    "parameters": [
+      {
+        "name": "boardNo",
+        "in": "path",
+        "description": "조회할 게시판 번호(숫자) 또는 게시판id(문자열)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1 또는 boardId"
+      },
+      {
+        "name": "articleNo",
+        "in": "path",
+        "description": "확인할 게시글 번호",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "INTEGER"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "회원 엑세스 토큰",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "accessToken"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/boards-boardNo-articles-articleNo-editable-149444152"
+          },
+          "examples": {
+            "check-post-editable": {
+              "value": "{\n  \"password\" : null\n}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/boards/{boardNo}/articles/{articleNo}/recommend",
+    "summary": "게시글 추천",
+    "description": "게시글 추천",
+    "tags": ["Board"],
+    "parameters": [
+      {
+        "name": "boardNo",
+        "in": "path",
+        "description": "게시판 번호",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1"
+      },
+      {
+        "name": "articleNo",
+        "in": "path",
+        "description": "추천할 게시글 번호",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "회원 엑세스 토큰",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "accessToken"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "DELETE",
+    "path": "/boards/{boardNo}/articles/{articleNo}/recommend",
+    "summary": "게시글 추천 취소",
+    "description": "게시글 추천 취소",
+    "tags": ["Board"],
+    "parameters": [
+      {
+        "name": "boardNo",
+        "in": "path",
+        "description": "게시판 번호",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1"
+      },
+      {
+        "name": "articleNo",
+        "in": "path",
+        "description": "추천할 게시글 번호",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "13"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "회원 엑세스 토큰",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "accessToken"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/boards/{boardNo}/articles/{articleNo}/replies",
+    "summary": "게시글 답글 리스트 조회하기",
+    "description": "\n## 부가설명 및 특이사항\n특정 게시판(게시판 번호 기준)의 게시글 리스트를 조회하는 API 입니다.\n",
+    "tags": ["Board"],
+    "parameters": [
+      {
+        "name": "boardNo",
+        "in": "path",
+        "description": "조회할 게시판 번호(숫자) 또는 게시판id(문자열)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1 또는 boardId"
+      },
+      {
+        "name": "articleNo",
+        "in": "path",
+        "description": "조회할 게시글 번호",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1"
+      },
+      {
+        "name": "page",
+        "in": "query",
+        "description": "페이지 번호 (default:1)",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "example": "1"
+      },
+      {
+        "name": "pageSize",
+        "in": "query",
+        "description": "한 페이지당 노출 수 (default:10)",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "example": "10"
+      },
+      {
+        "name": "includeRecommended",
+        "in": "query",
+        "description": "본인이 해당 게시글을 추천했는지 여부(false: 본인 추천 포함x(default), true: 본인 추천 포함)",
+        "required": false,
+        "schema": {
+          "type": "boolean"
+        },
+        "example": "false"
+      },
+      {
+        "name": "direction",
+        "in": "query",
+        "description": "정렬방식(ASC: 오래된 순, DESC: 최신 순, RECOMMEND_COUNT: 추천수 많은 순, READ_COUNT: 조회수 많은 순)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "DESC"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/boards-boardNo-articles-articleNo-replies1064969085"
+            },
+            "examples": {
+              "reply-posts": {
+                "value": "{\n  \"totalCount\" : 1,\n  \"items\" : [ {\n    \"articleNo\" : 1,\n    \"title\" : \"title\",\n    \"content\" : \"content\",\n    \"imageUrl\" : \"image\",\n    \"viewCnt\" : 1,\n    \"categoryNo\" : 1,\n    \"categoryLabel\" : \"category\",\n    \"registerName\" : \"register\",\n    \"registerYmdt\" : \"2025-10-27T12:10:29.703751296\",\n    \"registerNo\" : 1,\n    \"registerType\" : \"ADMIN\",\n    \"modifierName\" : \"modifier\",\n    \"modifyYmdt\" : \"2025-10-27T12:10:29.703780921\",\n    \"modifierNo\" : 1,\n    \"modifierType\" : \"ADMIN\",\n    \"modifiable\" : false,\n    \"secreted\" : false,\n    \"hasReplies\" : false,\n    \"repliedCnt\" : 0,\n    \"replied\" : false,\n    \"notice\" : false,\n    \"attached\" : false,\n    \"recommendCount\" : 1,\n    \"tags\" : [ ],\n    \"memberId\" : \"memberId\",\n    \"memberEmail\" : \"nhn@nhn-commerce.com\",\n    \"memberNickname\" : \"nickname\",\n    \"recommended\" : false,\n    \"reportCount\" : 1,\n    \"displayStatusType\" : \"DISPLAY\",\n    \"reported\" : false\n  } ]\n}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/boards/{boardNo}/articles/{articleNo}/report",
+    "summary": "게시글 신고하기",
+    "description": "## 부가설명 및 특이사항\n특정 게시글을 신고하는 API 입니다.\n",
+    "tags": ["Board"],
+    "parameters": [
+      {
+        "name": "boardNo",
+        "in": "path",
+        "description": "신고할 게시판 번호(숫자) 또는 게시판id(문자열)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1 또는 boardId"
+      },
+      {
+        "name": "articleNo",
+        "in": "path",
+        "description": "신고할 게시글 번호",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "회원 엑세스 토큰",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "accessToken"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/boards-boardNo-articles-articleNo-report-808776058"
+          },
+          "examples": {
+            "report-posts": {
+              "value": "{\n  \"reportReasonType\" : \"SLANDER\",\n  \"content\" : \"욕설\"\n}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "DELETE",
+    "path": "/boards/{boardNo}/articles/{articleNo}/report",
+    "summary": "게시글 신고 취소",
+    "description": "게시글 신고 취소",
+    "tags": ["Board"],
+    "parameters": [
+      {
+        "name": "boardNo",
+        "in": "path",
+        "description": "게시판 번호",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1"
+      },
+      {
+        "name": "articleNo",
+        "in": "path",
+        "description": "신고 취소할 게시글 번호",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "13"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "회원 엑세스 토큰",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "accessToken"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/boards/{boardNo}/posts/{postNo}/file",
+    "summary": "게시글 첨부파일 다운로드",
+    "description": "## 부가설명 및 특이사항\n게시글 등록된 첨부파일을 다운로드하는 API 입니다.\n",
+    "tags": ["Board"],
+    "parameters": [
+      {
+        "name": "boardNo",
+        "in": "path",
+        "description": "조회할 게시판 번호(숫자) 또는 게시판id(문자열)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1 또는 boardId"
+      },
+      {
+        "name": "postNo",
+        "in": "path",
+        "description": "조회할 게시글 번호",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1"
+      },
+      {
+        "name": "uploadedFileName",
+        "in": "query",
+        "description": "업로드한 파일이름",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "uploadFileName.txt"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "회원 엑세스 토큰",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "accessToken"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "headers": {
+          "Content-Type": {
+            "description": "application/octet-stream",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/boards/{boardNo}/posts/{postNo}/replies",
+    "summary": "게시글 답글 리스트 조회하기(버전2)",
+    "description": "\n## 부가설명 및 특이사항\n특정 게시판(게시판 번호 기준)의 게시글 리스트를 조회하는 API V2 입니다.\n",
+    "tags": ["Board"],
+    "parameters": [
+      {
+        "name": "boardNo",
+        "in": "path",
+        "description": "조회할 게시판 번호(숫자) 또는 게시판id(문자열)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1 또는 boardId"
+      },
+      {
+        "name": "postNo",
+        "in": "path",
+        "description": "조회할 게시글 번호",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1"
+      },
+      {
+        "name": "page",
+        "in": "query",
+        "description": "페이지 번호 (default:1)",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "example": "1"
+      },
+      {
+        "name": "pageSize",
+        "in": "query",
+        "description": "한 페이지당 노출 수 (default:10)",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "example": "10"
+      },
+      {
+        "name": "direction",
+        "in": "query",
+        "description": "정렬방식(ASC: 오래된 순, DESC: 최신 순, RECOMMEND_COUNT: 추천수 많은 순, READ_COUNT: 조회수 많은 순)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "DESC"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "회원 엑세스 토큰",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "accessToken"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/boards-boardNo-posts-postNo-replies778887145"
+            },
+            "examples": {
+              "get-reply-posts-v2": {
+                "value": "{\n  \"totalCount\" : 1,\n  \"items\" : [ {\n    \"boardNo\" : 1,\n    \"postNo\" : 1,\n    \"title\" : \"title\",\n    \"imageUrl\" : \"image-url.jpg\",\n    \"categoryNo\" : 1,\n    \"categoryLabel\" : null,\n    \"registerNo\" : 12,\n    \"registerName\" : \"등록자 이름\",\n    \"registerType\" : \"MEMBER\",\n    \"registerYmdt\" : \"2025-10-27T12:10:32.71723333\",\n    \"modifierNo\" : 13,\n    \"modifierName\" : \"변경자 이름\",\n    \"modifierType\" : \"MEMBER\",\n    \"modifyYmdt\" : \"2025-10-27T12:10:32.717265366\",\n    \"modifiable\" : false,\n    \"secreted\" : false,\n    \"noticed\" : false,\n    \"recommended\" : true,\n    \"scraped\" : false,\n    \"reported\" : true,\n    \"attached\" : false,\n    \"viewCnt\" : 1,\n    \"recommendedCnt\" : 12,\n    \"reportedCnt\" : 10,\n    \"repliedCnt\" : 11,\n    \"tags\" : [ ],\n    \"postSearchTags\" : [ \"검색용 태그\", \"test\" ],\n    \"displayStatusType\" : \"DISPLAY\",\n    \"memberGroupNo\" : null\n  } ]\n}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/holiday",
+    "summary": "요청한 달에 해당하는 공휴일 조회하기",
+    "description": "\n## 부가설명 및 특이사항\n해당 연도와 월에 존재하는 공휴일을 조회하는 API 입니다.\n",
+    "tags": ["Holiday"],
+    "parameters": [
+      {
+        "name": "year",
+        "in": "query",
+        "description": "검색할 연도",
+        "required": false,
+        "schema": {
+          "type": "number"
+        },
+        "example": "2022"
+      },
+      {
+        "name": "month",
+        "in": "query",
+        "description": "검색할 월",
+        "required": false,
+        "schema": {
+          "type": "number"
+        },
+        "example": "1"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/holiday-736675939"
+            },
+            "examples": {
+              "search-holiday": {
+                "value": "[ 5, 6, 12, 13, 19, 20, 25, 26, 27 ]"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/inquiries",
+    "summary": "1:1 문의 내역 조회하기",
+    "description": "## 부가설명 및 특이사항\n1:1 문의글 목록을 전체 검색하는 API 입니다.\n\n문의 상태 : inquiryStatus와 inqiryStatuses가 있으며, 두 개를 동시에 요청파라미터로 넣으면 그 둘을 합한 상태를 조회합니다.\n- inquiryStatus: 하나의 1:1문의 상태에 대해서 조회 가능. \n- inquiryStatuses, 여러 개의 1:1문의 상태 조회 가능. ','로 구분.\n- (ASKED: 레거시 호환용, ISSUED와 같다.)\n\n## 화면 예시\n<a target='_blank' href='http://image.toast.com/aaaaahb/api-description/member/inquiry/get_inquiries.png'><img src='http://image.toast.com/aaaaahb/api-description/member/inquiry/get_inquiries.png?autox150'></a>",
+    "tags": ["Inquiry"],
+    "parameters": [
+      {
+        "name": "pageNumber",
+        "in": "query",
+        "description": "페이지 번호",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "example": "1"
+      },
+      {
+        "name": "pageSize",
+        "in": "query",
+        "description": "한 페이지당 노출 수",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "example": "1"
+      },
+      {
+        "name": "hasTotalCount",
+        "in": "query",
+        "description": "목록 카운트 포함 여부(false: 미포함(default), true: 포함)",
+        "required": false,
+        "schema": {
+          "type": "boolean"
+        },
+        "example": "false"
+      },
+      {
+        "name": "inquiryTypeNo",
+        "in": "query",
+        "description": "1:1 문의 유형 번호",
+        "required": false,
+        "schema": {
+          "type": "number"
+        },
+        "example": "123"
+      },
+      {
+        "name": "inquiryStatus",
+        "in": "query",
+        "description": "1:1 문의 상태 (ISSUED(ASKED-이전버전 호환용): 답변대기, IN_PROGRESS: 답변 진행중, ANSWERED: 답변완료)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ISSUED"
+      },
+      {
+        "name": "inquiryStatuses",
+        "in": "query",
+        "description": "1:1 문의 상태 복수개 지정 (ISSUED(ASKED-이전버전 호환용): 답변대기, IN_PROGRESS: 답변 진행중, ANSWERED: 답변완료)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ISSUED,ASKED,IN_PROGRESS,ANSWERED"
+      },
+      {
+        "name": "startYmd",
+        "in": "query",
+        "description": "조회기간 시작시간",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "YYYY-MM-DD"
+      },
+      {
+        "name": "endYmd",
+        "in": "query",
+        "description": "조회기간 종료시간",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "YYYY-MM-DD"
+      },
+      {
+        "name": "keyword",
+        "in": "query",
+        "description": "검색어",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "keyword"
+      },
+      {
+        "name": "searchType",
+        "in": "query",
+        "description": "검색 타입 (ALL: 전체, TITLE: 제목, CONTENT: 내용)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ALL"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "회원 엑세스 토큰",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "accessToken"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/inquiries195434980"
+            },
+            "examples": {
+              "search-inquiries": {
+                "value": "{\n  \"totalCount\" : 1,\n  \"items\" : [ {\n    \"inquiryNo\" : 11234,\n    \"orderNo\" : \"String\",\n    \"orderOptionNo\" : 12314,\n    \"productNo\" : 12345,\n    \"productName\" : \"테스트 상품\",\n    \"productNameEn\" : \"testProduct\",\n    \"inquiryTitle\" : \"title\",\n    \"inquiryContent\" : \"content\",\n    \"answerSmsSend\" : false,\n    \"answerEmailSend\" : false,\n    \"registerNo\" : 13,\n    \"registerYmdt\" : \"2025-10-27T12:10:20.800042407\",\n    \"inquiryStatus\" : \"ISSUED\",\n    \"inquiryType\" : {\n      \"inquiryTypeNo\" : 0,\n      \"inquiryTypeName\" : \"\",\n      \"inquiryTypeDescription\" : \"\"\n    },\n    \"answer\" : {\n      \"answerNo\" : 0,\n      \"answerContent\" : \"\",\n      \"answerRegisterYmdt\" : \"2025-10-27T12:10:20.800042407\"\n    },\n    \"imageUrls\" : [ ],\n    \"originalImageUrls\" : [ ],\n    \"issuerName\" : \"문의자\"\n  } ]\n}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/inquiries",
+    "summary": "1:1 문의 등록하기",
+    "description": "## 부가설명 및 특이사항\n1:1 문의를 등록하는 API 입니다.\n\n샵바이엔터프라이즈 쇼핑몰에서만 비회원 1:1문의가 가능합니다.\n비회원 등록 시에는 email을 필수로 입력해야 합니다.\n\n## 화면 예시\n<a target='_blank' href='http://image.toast.com/aaaaahb/api-description/member/inquiry/post_inquiries.png'><img src='http://image.toast.com/aaaaahb/api-description/member/inquiry/post_inquiries.png?autox150'></a>\n\n<hr>\n\n## 참고: 이미지 파일(첨부파일) 업로드 방법 안내\n이미지파일 업로드 API를 호출하여 이미지 등록 이후 1:1문의 등록 시 업로드 된 파일명 항목에 등록한 image url 을 입력하여 호출해 주시면 됩니다.\n\n참고로 이미지 업로드 시 이미지 업로드되는 도메인인 base url은 shopby-images.cdn-nhncommerce.com입니다.\n\n이미지 업로드는 관련해서는 아래 내용으로 참고 부탁드립니다.\n\n※해당 API는 별도 API문서가 없습니다.(하이퍼링크 연결 안되는것이 맞음)\n\n\nPOST http://shop-api.e-ncp.com/files/images (리얼)\n\n### header 정보\n - Version : 1.0\n - clientId : {몰의 clientId}\n - platform : (PC, MOBILE_WEB, IOS, AOS 중 하나로 해당 API 를 호출하는 플랫폼의 유형)\n - Content-Type : multipart/form-data\n \n### Body :\n - file:'image data'\n\n### Request\n\nimageUrl : 이미지 URL\n\noriginName : 원본 파일명\n\n파일명의 경우 2~255자 범위내에 있어야합니다.\n\n파일 용량의 경우, 12MB 이하의 이미지 파일만 업로드 가능합니다.\n\n지원하는 확장자는 아래와 같습니다.\n\nbmp, tif, tiff, miff, gif, jpe, jpeg, jpg, jps, pjpeg, jng, mng, png\n",
+    "tags": ["Inquiry"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "회원 엑세스 토큰",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "accessToken"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/inquiries-1704095907"
+          },
+          "examples": {
+            "add-inquiry": {
+              "value": "{\n  \"inquiryTypeNo\" : 0,\n  \"inquiryTitle\" : \"test Title\",\n  \"inquiryContent\" : \"test Content\",\n  \"originalFileName\" : [ \"test.jpg\" ],\n  \"uploadedFileName\" : [ \"테스트.jpg\" ],\n  \"productNo\" : 12345,\n  \"orderNo\" : \"12345\",\n  \"orderOptionNo\" : 123499,\n  \"answerSmsSendYn\" : false,\n  \"answerEmailSendYn\" : false,\n  \"email\" : \"test@test.com\",\n  \"captcha\" : \"string\",\n  \"mobileNo\" : \"01012341234\"\n}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/inquiries1602970542"
+            },
+            "examples": {
+              "add-inquiry": {
+                "value": "{\n  \"inquiryNo\" : 12345\n}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/inquiries/configurations",
+    "summary": "1:1 문의 설정 조회하기",
+    "description": "## 부가설명 및 특이사항\n1:1 문의 설정을 조회하는 API 입니다.\n\n",
+    "tags": ["Inquiry"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "회원 엑세스 토큰",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "accessToken"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/inquiries-configurations-784433679"
+            },
+            "examples": {
+              "get-inquiry-configuration": {
+                "value": "{\n  \"displayType\" : \"LIST\",\n  \"imageDisplayType\" : \"ATTACHMENT\",\n  \"used\" : false,\n  \"name\" : \"1:1문의\",\n  \"description\" : \"1:1문의\",\n  \"memberPostingUsed\" : true,\n  \"guestPostingUsed\" : true,\n  \"secretPostingUsed\" : false,\n  \"replyUsed\" : false,\n  \"attachmentUsed\" : false,\n  \"smsUsed\" : false,\n  \"emailUsed\" : false,\n  \"answerSmsTemplateUsed\" : true,\n  \"answerMailTemplateUsed\" : false\n}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/inquiries/types",
+    "summary": "1:1 문의 유형 조회",
+    "description": "## 부가설명 및 특이사항\n1:1 문의 유형을 조회하는 API 입니다.\n\n\n## request parameters direction 설명\n- ADMIN: 서비스 어드민에서 정렬한 순서\n- CREATED_ASC: 최초 등록순\n- CREATED_DESC: 최신 등록순",
+    "tags": ["Inquiry"],
+    "parameters": [
+      {
+        "name": "direction",
+        "in": "query",
+        "description": "정렬방식(default: ADMIN)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ADMIN"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/inquiries-types-754076919"
+            },
+            "examples": {
+              "get-inquiry-types": {
+                "value": "[ {\n  \"inquiryTypeNo\" : 1,\n  \"inquiryTypeName\" : \"name\",\n  \"inquiryTypeDescription\" : \"des\",\n  \"displayOrder\" : 0\n} ]"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/inquiries/{inquiryNo}",
+    "summary": "1:1 문의 상세 조회하기 (문의번호 기준)",
+    "description": "## 부가설명 및 특이사항\n특정 1:1 문의(문의번호 기준)를 상세 조회하는 API 입니다.\n\n## 화면 예시\n<a target='_blank' href='http://image.toast.com/aaaaahb/api-description/member/inquiry/get_inquiries_inquiryNo.png'><img src='http://image.toast.com/aaaaahb/api-description/member/inquiry/get_inquiries_inquiryNo.png?autox150'></a>\n",
+    "tags": ["Inquiry"],
+    "parameters": [
+      {
+        "name": "inquiryNo",
+        "in": "path",
+        "description": "1:1 문의 번호",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "141"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "회원 엑세스 토큰",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "accessToken"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/inquiries-inquiryNo849373678"
+            },
+            "examples": {
+              "get-inquiry": {
+                "value": "{\n  \"inquiryNo\" : 11234,\n  \"orderNo\" : \"String\",\n  \"orderOptionNo\" : 12355,\n  \"productNo\" : 12345,\n  \"productName\" : \"테스트 상품\",\n  \"productNameEn\" : \"testProduct\",\n  \"inquiryTitle\" : \"title\",\n  \"inquiryContent\" : \"content\",\n  \"answerSmsSend\" : false,\n  \"answerEmailSend\" : false,\n  \"registerNo\" : 13,\n  \"registerYmdt\" : \"2025-10-27T12:10:20.800042407\",\n  \"inquiryStatus\" : \"ASKED\",\n  \"inquiryType\" : {\n    \"inquiryTypeNo\" : 0,\n    \"inquiryTypeName\" : \"상품문의\",\n    \"inquiryTypeDescription\" : \"상품문의 입니다\"\n  },\n  \"answer\" : {\n    \"answerNo\" : 0,\n    \"answerContent\" : \"답변 내용\",\n    \"files\" : [ {\n      \"originalFileName\" : \"file.png\",\n      \"uploadedFileName\" : \"uploaded_file.png\"\n    } ],\n    \"answerRegisterYmdt\" : \"2025-10-27T12:10:20.800042407\"\n  },\n  \"imageUrls\" : [ ],\n  \"originalImageUrls\" : [ ],\n  \"issuerName\" : \"문의자\"\n}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/inquiries/{inquiryNo}",
+    "summary": "1:1 문의 변경하기",
+    "description": "## 부가설명 및 특이사항\n특정 1:1 문의(문의번호 기준)를 수정하는 API 입니다.\n\nimage 삭제는 '1:1 문의 부분 변경하기' API를 통해 해야합니다. \n\n## 화면 예시\n<a target='_blank' href='http://image.toast.com/aaaaahb/api-description/member/inquiry/put_inquiries_inquiryNo.png'><img src='http://image.toast.com/aaaaahb/api-description/member/inquiry/put_inquiries_inquiryNo.png?autox150'></a>\n",
+    "tags": ["Inquiry"],
+    "parameters": [
+      {
+        "name": "inquiryNo",
+        "in": "path",
+        "description": "1:1 문의 번호",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "141"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "회원 엑세스 토큰",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "accessToken"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/inquiries-inquiryNo482104634"
+          },
+          "examples": {
+            "modify-inquiry": {
+              "value": "{\n  \"inquiryTitle\" : \"test Title\",\n  \"inquiryContent\" : \"test Content\",\n  \"answerSmsSendYn\" : true,\n  \"answerEmailSendYn\" : true,\n  \"originalFileName\" : [ \"test.jpg\" ],\n  \"uploadedFileName\" : [ \"테스트.jpg\" ]\n}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "DELETE",
+    "path": "/inquiries/{inquiryNo}",
+    "summary": "1:1문의 삭제하기",
+    "description": "## 부가설명 및 특이사항\n특정 1:1 문의(문의번호 기준)를 삭제하는 API 입니다.\n\n## 화면 예시\n<a target='_blank' href='http://image.toast.com/aaaaahb/api-description/member/inquiry/delete_inquiries_inquiryNo.png'><img src='http://image.toast.com/aaaaahb/api-description/member/inquiry/delete_inquiries_inquiryNo.png?autox150'></a>\n",
+    "tags": ["Inquiry"],
+    "parameters": [
+      {
+        "name": "inquiryNo",
+        "in": "path",
+        "description": "1:1 문의 번호",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "141"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "회원 엑세스 토큰",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "accessToken"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "PATCH",
+    "path": "/inquiries/{inquiryNo}",
+    "summary": "1:1 문의 부분 변경하기",
+    "description": "## 부가설명 및 특이사항\n특정 1:1 문의(문의번호 기준)를 부분 수정하는 API 입니다.\n\noriginalFileNames, uploadedFileNames 이 null 인 경우 첨부파일은 수정되지 않습니다.\n\n   ex) {\n       \"originalFileNames\" : null,\n       \"uploadedFileNames\" : null\n   }\n \noriginalFileNames, uploadedFileNames 이 빈 리스트일 경우 첨부파일은 모두 삭제 됩니다.\n\n   ex) {\n       \"originalFileNames\" : [],\n       \"uploadedFileNames\" : []\n   }\n\n## 화면 예시\n<a target='_blank' href='http://image.toast.com/aaaaahb/api-description/member/inquiry/put_inquiries_inquiryNo.png'><img src='http://image.toast.com/aaaaahb/api-description/member/inquiry/put_inquiries_inquiryNo.png?autox150'></a>\n",
+    "tags": ["Inquiry"],
+    "parameters": [
+      {
+        "name": "inquiryNo",
+        "in": "path",
+        "description": "1:1 문의 번호",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "141"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "회원 엑세스 토큰",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "accessToken"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/inquiries-inquiryNo1319745130"
+          },
+          "examples": {
+            "part-update-inquiry": {
+              "value": "{\n  \"inquiryTitle\" : \"test Title\",\n  \"inquiryContent\" : \"test Content\",\n  \"answerSmsSendYn\" : true,\n  \"answerEmailSendYn\" : true,\n  \"originalFileNames\" : [ \"test.jpg\" ],\n  \"uploadedFileNames\" : [ \"테스트.jpg\" ]\n}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/inquiries/{inquiryNo}/file",
+    "summary": "1:1 문의 및 답변 파일 다운로드",
+    "description": "## 부가설명 및 특이사항\n1:1 문의 및 답변 첨부 파일을 다운로드하는 API 입니다.\n\n",
+    "tags": ["Inquiry"],
+    "parameters": [
+      {
+        "name": "inquiryNo",
+        "in": "path",
+        "description": "1:1 문의 번호",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "141"
+      },
+      {
+        "name": "uploadedFileName",
+        "in": "query",
+        "description": "업로드한 파일이름",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "uploadedFileName.xlsx"
+      },
+      {
+        "name": "type",
+        "in": "query",
+        "description": "파일 다운로드 타입(INQUIRY: 일대일 문의, INQUIRY_ANSWER: 일대일 문의 답변)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "INQUIRY"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "회원 엑세스 토큰",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "accessToken"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "headers": {
+          "Content-Type": {
+            "description": "application/octet-stream",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/page/scripts",
+    "summary": "외부스크립트 조회하기",
+    "description": "## 부가설명 및 특이사항\n외부 스크립트를 조회하는 API 입니다.\n\n",
+    "tags": ["Page"],
+    "parameters": [
+      {
+        "name": "pageTypes",
+        "in": "query",
+        "description": "페이지타입 리스트.  \",\" 구분자 복수개 요청 가능. (MAIN: 메인 페이지, COMMON_HEAD: 상단 공통영역, COMMON_FOOTER: 하단 공통영역, PRODUCT: 상품 상세 페이지, PRODUCT_LIST: 상품 리스트 페이지, PRODUCT_SEARCH: 상품 검색결과 페이지, CART: 장바구니 페이지, ORDER: 주문하기 페이지, ORDER_DETAIL: 주문상세 페이지, ORDER_COMPLETE: 주문완료 페이지, DISPLAY_SECTION: 메인 싱품 분류지, MEMBER_JOIN_COMPLETE: 회원가입완료 페이지, MY_PAGE: 마이 페이지)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "CART"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/page-scripts807368217"
+            },
+            "examples": {
+              "search-external-script": {
+                "value": "[ {\n  \"pageType\" : \"CART\",\n  \"deviceType\" : \"PC\",\n  \"content\" : \"aaa\",\n  \"pageTypeLabel\" : \"장바구니 페이지\"\n} ]"
+              },
+              "search-external-script-V1.1": {
+                "value": "[ {\n  \"pageType\" : \"CART\",\n  \"deviceType\" : \"PC\",\n  \"content\" : \"aaa\",\n  \"pageTypeLabel\" : \"장바구니 페이지\"\n} ]"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/profile/accumulations",
+    "summary": "적립금 이력 조회하기",
+    "description": "## 부가설명 및 특이사항\n적립금 이력을 전체 검색하는 API 입니다.\n\n기본 적립금 단위는 정수형으로 지원합니다. ex) 1000\nGlobal Mall의 경우, 적립금은 소수점 2자리까지 지원합니다. ex) 1000.00\n\n## 화면 예시\n<a target='_blank' href='http://image.toast.com/aaaaahb/api-description/member/accumulation/get_profile_accumulations_summary.png'><img src='http://image.toast.com/aaaaahb/api-description/member/accumulation/get_profile_accumulations_summary.png?autox150'></a>",
+    "tags": ["Accumulation"],
+    "parameters": [
+      {
+        "name": "pageNumber",
+        "in": "query",
+        "description": "페이지 번호",
+        "required": false,
+        "schema": {
+          "type": "number"
+        },
+        "example": "1"
+      },
+      {
+        "name": "pageSize",
+        "in": "query",
+        "description": "페이지 사이즈",
+        "required": false,
+        "schema": {
+          "type": "number"
+        },
+        "example": "10"
+      },
+      {
+        "name": "accumulationReason",
+        "in": "query",
+        "description": "적립 유형(ADD: 지급, SUB: 차감)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ADD"
+      },
+      {
+        "name": "startYmd",
+        "in": "query",
+        "description": "조회일 시작일(yyyy-MM-dd, default: 3개월)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "YYYY-MM-DD"
+      },
+      {
+        "name": "endYmd",
+        "in": "query",
+        "description": "조회일 종료일(yyyy-MM-dd, default: 오늘)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "YYYY-MM-DD"
+      },
+      {
+        "name": "direction",
+        "in": "query",
+        "description": "정렬방식(DESC:내림차순(default), ASC:오름차순)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "DESC"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "회원 엑세스 토큰",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "accessToken"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/profile-accumulations-258238611"
+            },
+            "examples": {
+              "search-accumulation-histories": {
+                "value": "{\n  \"items\" : [ {\n    \"accumulationNo\" : 0,\n    \"accumulationAmt\" : 0,\n    \"registerYmdt\" : \"2025-10-27T12:10:08.057835067\",\n    \"startYmdt\" : \"2025-10-27T12:10:08.057857048\",\n    \"expireYmdt\" : \"2025-10-27T12:10:08.057863028\",\n    \"accumulationReserveReason\" : \"ADD_MANUAL\",\n    \"accumulationReserveReasonDisplay\" : \"string\",\n    \"reasonDetail\" : \"string\",\n    \"accumulationStatus\" : \"GIVE_AVAILABLE\",\n    \"accumulationStatusGroupType\" : \"PAYMENT\",\n    \"orderNo\" : \"\",\n    \"totalAvailableAmt\" : 0,\n    \"accumulationRestAmt\" : 0,\n    \"mappingKey\" : \"\"\n  } ],\n  \"memberNo\" : 5114391,\n  \"totalCount\" : 0,\n  \"totalAmt\" : 0\n}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/profile/accumulations/expiration",
+    "summary": "만료 예정 적립금 조회하기",
+    "description": "## 부가설명 및 특이사항\n만료 예정 적립금을 조회하는 API 입니다.\n\n기본 적립금 단위는 정수형으로 지원합니다. ex) 1000\nGlobal Mall의 경우, 적립금은 소수점 2자리까지 지원합니다. ex) 1000.00\n",
+    "tags": ["Accumulation"],
+    "parameters": [
+      {
+        "name": "startYmdt",
+        "in": "query",
+        "description": "만료 조회 시작일(YYYY-MM-DD HH:mm:ss, default: 현재 시간 한달 전)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "2024-10-21T23:59:59.000Z"
+      },
+      {
+        "name": "endYmdt",
+        "in": "query",
+        "description": "만료 조회 종료일(YYYY-MM-DD HH:mm:ss, default: 현재 시간 한달 후)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "2024-12-21T23:59:59.000Z"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "회원 엑세스 토큰",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "accessToken"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/profile-accumulations-expiration-345917270"
+            },
+            "examples": {
+              "search-accumulations-expiration": {
+                "value": "{\n  \"expiresAmount\" : 1000,\n  \"expirations\" : [ {\n    \"accumulationNo\" : 1,\n    \"expirationYmdt\" : \"2025-10-27T12:10:06.268044937\",\n    \"accumulationReserveReasonDisplay\" : \"운영자 지급\",\n    \"reasonDetail\" : \"운영자 테스트 지급\",\n    \"amount\" : 1000\n  } ]\n}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/profile/accumulations/summary",
+    "summary": "적립금 요약 조회하기",
+    "description": "## 부가설명 및 특이사항\n적립금 요약정보를 조회하는 API 입니다.\n\n## 화면 예시\n<a target='_blank' href='http://image.toast.com/aaaaahb/api-description/member/accumulation/get_profile_accumulations.png'><img src='http://image.toast.com/aaaaahb/api-description/member/accumulation/get_profile_accumulations.png?autox150'></a>",
+    "tags": ["Accumulation"],
+    "parameters": [
+      {
+        "name": "expireStartYmdt",
+        "in": "query",
+        "description": "만료 조회 시작일(YYYY-MM-DD HH:mm:ss, default: 한달)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "YYYY-MM-DD HH:mm:ss"
+      },
+      {
+        "name": "expireEndYmdt",
+        "in": "query",
+        "description": "만료 조회 종료일(YYYY-MM-DD HH:mm:ss, default: 한달)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "YYYY-MM-DD HH:mm:ss"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "회원 엑세스 토큰",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "accessToken"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/profile-accumulations-summary-1470401351"
+            },
+            "examples": {
+              "search-accumulations-summary": {
+                "value": "{\n  \"totalAvailableAmt\" : 0,\n  \"totalExpireAmt\" : 0\n}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/profile/accumulations/waiting",
+    "summary": "해당 회원의 예상 적립금 조회하기",
+    "description": "\n## 부가설명 및 특이사항 \n해당 회원의 예상 적립금(적립대기)을 조회하는 API 입니다.\n\n몰 화폐 설정에 따라서 적립 금액의 단위가 다릅니다.\n\n기본 적립금 단위는 정수형으로 지원합니다. ex) 1000\nGlobal Mall의 경우, 적립금은 소수점 2자리까지 지원합니다. ex) 1000.00\n\n## 화면 예시\n<a target='_blank' href='http://image.toast.com/aaaaahb/api-description/member/accumulation/get_profile_accumulations_waiting.png'><img src='http://image.toast.com/aaaaahb/api-description/member/accumulation/get_profile_accumulations_waiting.png?autox150'></a>\n",
+    "tags": ["Accumulation"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "회원 엑세스 토큰",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "accessToken"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/profile-accumulations-waiting211812153"
+            },
+            "examples": {
+              "search-estimated-accumulations": {
+                "value": "{\n  \"waitingAccumulation\" : 0\n}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/shopby/instagram/media",
+    "summary": "instagram 피드(게시글 목록) 조회하기",
+    "description": "\n## 부가설명 및 특이사항 \n해당 쇼핑몰의 인스타그램 게시글 목록을 조회하는 API 입니다.\n\n조회간 에러 발생시, 에러 정보가 Response 객체에 포함됩니다.",
+    "tags": ["Instagram"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/shopby-instagram-media-297972756"
+            },
+            "examples": {
+              "get-instagram-media": {
+                "value": "{\n  \"data\" : [ {\n    \"media_url\" : \"https://fb-s-b-a.akamaihd.net/...\",\n    \"permalink\" : \"https://www.instagram.com/p/.../\",\n    \"thumbnail_url\" : \"https://fb-s-b-a.akamaihd.net/...\",\n    \"media_type\" : \"IMAGE\",\n    \"username\" : \"test88\"\n  } ],\n  \"error\" : {\n    \"message\" : \"Message describing the error\",\n    \"type\" : \"OAuthException\",\n    \"code\" : 190,\n    \"fbtrace_id\" : \"EJplcsCTest\"\n  }\n}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/terms",
+    "summary": "적용 중인 몰 약관 조회하기",
+    "description": "## 부가설명 및 특이사항\n해당 쇼핑몰의 약관을 조회하는 API 입니다.\n",
+    "tags": ["Terms"],
+    "parameters": [
+      {
+        "name": "termsTypes",
+        "in": "query",
+        "description": "조회할 약관 타입 리스트 (MALL_INTRODUCTION: 쇼핑몰/회사 소개, USE: 이용약관, E_COMMERCE: 전자금융거래 이용약관, PI_PROCESS: 개인정보처리방침, PI_COLLECTION_AND_USE_REQUIRED: 개인정보 수집/이용, PI_COLLECTION_AND_USE_OPTIONAL: 개인정보 수집/이용, PI_PROCESS_CONSIGNMENT: 개인정보 처리/위탁, PI_THIRD_PARTY_PROVISION: 개인정보 제3자 제공, PI_COLLECTION_AND_USE_FOR_GUEST_ON_ARTICLE: 개인정보 수집/이용, ACCESS_GUIDE: 이용안내, WITHDRAWAL_GUIDE: 탈퇴안내, PI_SELLER_PROVISION: 개인정보 판매자 제공, PI_COLLECTION_AND_USE_ON_ORDER: 개인정보 수집/이용, ORDER_INFO_AGREE: 구매 동의, CLEARANCE_INFO_COLLECTION_AND_USE: 통관정보 수집/이용, TRANSFER_AGREE: 개인정보 국외 이전 동의, REGULAR_PAYMENT_USE: 정기결제(배송) 이용약관, AUTO_APPROVAL_USE: 자동 승인 이용약관, PI_LIQUOR_PURCHASE_PROVISION: 주류구매 개인정보 수집/이용, PI_RESTOCK_NOTICE: 개인정보 수집/이용, PI_14_AGE: 만 14세 이상 가입 동의, PI_GIFT_ACCEPT_COLLECTION_AND_USE: 선물수락 개인정보 수집/이용)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "[USE, ACCESS_GUIDE]"
+      },
+      {
+        "name": "usedOnly",
+        "in": "query",
+        "description": "사용중인 약관만 노출 여부 (default : false)",
+        "required": false,
+        "schema": {
+          "type": "boolean"
+        },
+        "example": "false"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/terms-1849610091"
+            },
+            "examples": {
+              "search-used-terms": {
+                "value": "{\n  \"key\" : {\n    \"used\" : true,\n    \"contents\" : \"content\",\n    \"enforcementDate\" : \"2025-10-27\"\n  }\n}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/terms",
+    "summary": "적용 중인 몰 약관 조회하기 (ver 1.1)",
+    "description": "## 부가설명 및 특이사항\n해당 쇼핑몰의 약관을 조회하는 API 입니다. (ver 1.1)\n치환하고 싶은 문구를 replacementPhrase 항목에 [key:value]형태로 넣어서 치환할 수 있습니다.\n",
+    "tags": ["Terms"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.1"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/terms-545033491"
+          },
+          "examples": {
+            "post-search-used-terms": {
+              "value": "{\n  \"termsType\" : [ \"USE\" ],\n  \"replacementPhrase\" : {\n    \"key\" : \"value\"\n  },\n  \"usedOnly\" : false\n}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/terms-1849610091"
+            },
+            "examples": {
+              "post-search-used-terms": {
+                "value": "{\n  \"key\" : {\n    \"used\" : true,\n    \"contents\" : \"content\",\n    \"enforcementDate\" : \"2025-10-27\"\n  }\n}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/terms/custom",
+    "summary": "추가 약관 조회하기",
+    "description": "## 부가설명 및 특이사항\n해당 쇼핑몰의 추가 약관을 조회하는 API 입니다.\n",
+    "tags": ["Terms"],
+    "parameters": [
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/terms-custom1116014589"
+          },
+          "examples": {
+            "get-custom-terms": {
+              "value": "{\n  \"customCategoryType\" : \"MEMBER\",\n  \"replacementPhrase\" : null\n}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/terms-custom933790498"
+            },
+            "examples": {
+              "get-custom-terms": {
+                "value": "[ {\n  \"no\" : 1,\n  \"termsName\" : \"항목명\",\n  \"termsNameEng\" : \"English..\",\n  \"used\" : true,\n  \"required\" : true,\n  \"contents\" : \"...\"\n} ]"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/terms/history",
+    "summary": "약관 변경이력 조회하기",
+    "description": "## 부가설명 및 특이사항\n해당 쇼핑몰 약관의 변경이력을 조회하는 API 입니다.\n\n## 화면 예시\n<a target='_blank' href='http://image.toast.com/aaaaahb/api-description/member/common/get_terms_history.png'><img src='http://image.toast.com/aaaaahb/api-description/member/common/get_terms_history.png?autox150'></a>\n",
+    "tags": ["Terms"],
+    "parameters": [
+      {
+        "name": "termsType",
+        "in": "query",
+        "description": "조회할 약관 타입 리스트 (USE: 이용약관, E_COMMERCE: 전자금융거래 이용약관, PI_PROCESS: 개인정보처리방침, REGULAR_PAYMENT_USE: 정기결제(배송) 이용약관, AUTO_APPROVAL_USE: 자동 승인 이용약관)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "USE"
+      },
+      {
+        "name": "futureDaysToShow",
+        "in": "query",
+        "description": "조회할 현재부터 미래 날짜",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "0"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/terms-history143648857"
+            },
+            "examples": {
+              "search-terms-histories": {
+                "value": "[ {\n  \"termsNo\" : 1,\n  \"enforcementDate\" : \"2025-10-27\",\n  \"termsEnforcementStatusLabel\" : \"현재 시행중\"\n} ]"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/terms/used",
+    "summary": "적용 중인 몰 약관 조회하기",
+    "description": "## 부가설명 및 특이사항\n해당 쇼핑몰의 현재 적용중인 약관타입만 조회하는 API 입니다.\n",
+    "tags": ["Terms"],
+    "parameters": [
+      {
+        "name": "termsTypes",
+        "in": "query",
+        "description": "조회할 약관 타입 리스트 (MALL_INTRODUCTION: 쇼핑몰/회사 소개, USE: 이용약관, E_COMMERCE: 전자금융거래 이용약관, PI_PROCESS: 개인정보처리방침, PI_COLLECTION_AND_USE_REQUIRED: 개인정보 수집/이용, PI_COLLECTION_AND_USE_OPTIONAL: 개인정보 수집/이용, PI_PROCESS_CONSIGNMENT: 개인정보 처리/위탁, PI_THIRD_PARTY_PROVISION: 개인정보 제3자 제공, PI_COLLECTION_AND_USE_FOR_GUEST_ON_ARTICLE: 개인정보 수집/이용, ACCESS_GUIDE: 이용안내, WITHDRAWAL_GUIDE: 탈퇴안내, PI_SELLER_PROVISION: 개인정보 판매자 제공, PI_COLLECTION_AND_USE_ON_ORDER: 개인정보 수집/이용, ORDER_INFO_AGREE: 구매 동의, CLEARANCE_INFO_COLLECTION_AND_USE: 통관정보 수집/이용, TRANSFER_AGREE: 개인정보 국외 이전 동의, REGULAR_PAYMENT_USE: 정기결제(배송) 이용약관, AUTO_APPROVAL_USE: 자동 승인 이용약관, PI_LIQUOR_PURCHASE_PROVISION: 주류구매 개인정보 수집/이용, PI_RESTOCK_NOTICE: 개인정보 수집/이용, PI_14_AGE: 만 14세 이상 가입 동의, PI_GIFT_ACCEPT_COLLECTION_AND_USE: 선물수락 개인정보 수집/이용)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "[USE, ACCESS_GUIDE]"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/terms-used1135317778"
+            },
+            "examples": {
+              "search-used-terms-only-used": {
+                "value": "{\n  \"termsList\" : [ \"USE\" ]\n}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/terms/{termsNo}",
+    "summary": "약관 상세 조회하기",
+    "description": "## 부가설명 및 특이사항\n특정 약관(약관번호 기준)을 상세 조회하는 API 입니다.\n\n## 화면 예시\n<a target='_blank' href='http://image.toast.com/aaaaahb/api-description/member/common/get_terms_termsno.png'><img src='http://image.toast.com/aaaaahb/api-description/member/common/get_terms_termsno.png?autox150'></a>\n",
+    "tags": ["Terms"],
+    "parameters": [
+      {
+        "name": "termsNo",
+        "in": "path",
+        "description": "조회할 약관 번호",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/terms-termsNo-1990424634"
+            },
+            "examples": {
+              "get-term": {
+                "value": "{\n  \"used\" : true,\n  \"contents\" : \"contents\",\n  \"enforcementDate\" : \"enforcementDate\"\n}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/terms/{termsNo}",
+    "summary": "약관 상세 조회하기 (ver 1.1)",
+    "description": "## 부가설명 및 특이사항\n특정 약관(약관번호 기준)을 상세 조회하는 API 입니다. (ver 1.1)\n치환하고 싶은 문구를 replacementPhrase 항목에 [key:value]형태로 넣어서 치환할 수 있습니다.\n\n## 화면 예시\n<a target='_blank' href='http://image.toast.com/aaaaahb/api-description/member/common/get_terms_termsno.png'><img src='http://image.toast.com/aaaaahb/api-description/member/common/get_terms_termsno.png?autox150'></a>\n",
+    "tags": ["Terms"],
+    "parameters": [
+      {
+        "name": "termsNo",
+        "in": "path",
+        "description": "조회할 약관 번호",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "test-client-id"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼 (PC, MOBILE_WEB, IOS, AOS)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/terms-custom1116014589"
+          },
+          "examples": {
+            "post-terms": {
+              "value": "{\n  \"termsNo\" : 1010,\n  \"replacementPhrase\" : {\n    \"key\" : \"value\"\n  }\n}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/terms-termsNo-1990424634"
+            },
+            "examples": {
+              "post-terms": {
+                "value": "{\n  \"used\" : true,\n  \"contents\" : \"contents\",\n  \"enforcementDate\" : \"2025-10-27\"\n}"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+]

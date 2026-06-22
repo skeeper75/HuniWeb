@@ -1,0 +1,129 @@
+---
+title: "SignUpProvider"
+depth: 5
+path: "오로라 리액트 스킨개발가이드 > 개발 프로세스 > 2️⃣Aurora React 샘플스킨 확인 > @shopby/react-components > auth > SignUpProvider"
+---
+
+# SignUpProvider
+
+* 회원가입하는 기능을 제공합니다.
+
+## 속성
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | ---- | --- | ---- | --- |
+| children | true | ReactNode | - |  |
+| terms | true | Record\ | - | 약관 정보
+ㄴ TermsType은 [termsTypes](https://docs.shopby.co.kr/?url.primaryName=manage/#/Terms/search-used-terms)와 동일함.
+ㄴ TermsKey는 [key](https://docs.shopby.co.kr/?url.primaryName=manage/#/Terms/search-used-terms)와 동일함. |
+| PI\_TERMS\_MAP | true | Record\ | - | 회원가입 약관의 key와 key에 따른 약관명을 가짐.
+ㄴ key, value는 [termsTypes 참조](https://docs.shopby.co.kr/?url.primaryName=manage/#/Terms/search-used-terms)
+`ex) { PI_COLLECTION_AND_USE_OPTIONAL: '개인정보 수집/이용' }` |
+
+## 상태
+
+* `signUpState` 는 `useSignUpStateContext` 를 호출해 사용합니다.
+
+```typescript
+const signUpState = useSignUpStateContext();
+```
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | ---- | --- | ---- | --- |
+| signUpMemberInfo | true | object |  |  |
+| ㄴ memberId | true | string | '' | 회원 아이디 |
+| ㄴ password | true | string | '' | 회원 비밀번호 |
+| ㄴ passwordCheck | true | string | '' | 회원 비밀번호 재입력 |
+| ㄴ memberName | true | string | '' | 회원 이름 |
+| ㄴ carrierNumber | true | string | 010 | 휴대폰 앞 번호 |
+| ㄴ firstSerial | true | string | '' | 휴대폰 중간 번호 |
+| ㄴ secondSerial | true | string | '' | 휴대폰 뒷 번호 |
+| ㄴ emailId | true | string | '' | 이메일 아이디 |
+| ㄴ emailDomain | true | string | '' | 이메일 도메인 |
+| ㄴ domainSelectorValue | true | string | 직접 입력 | 이메일 도메인 셀렉트 옵션 선택 값 |
+| ㄴ certificatedNumber | true | string | '' | 인증번호 |
+| ci |  |  |  | CI |
+| smsReceiveInfo | false | object |  | sms 수신 동의 여부 |
+| ㄴ id | flase | string | '' | 항목 아이디 |
+| ㄴ title | false | string | '' | 항목명 |
+| ㄴ checked | false | boolean | false | 수신 동의 여부 |
+| emailReceiveInfo | false | object |  | email 수신 동의 여부 |
+| ㄴ id | false | string | '' | 항목 아이디 |
+| ㄴ title | false | string | '' | 항목명 |
+| ㄴ checked | false | boolean | false | 수신 동의 여부 |
+| termStatus | false | array | [] | 약관 동의 여부 |
+| validationStatus | false | object |  | signUpMemberInfo 의 검증 상태 |
+| authenticationsRemainTimeBySeconds | false | number | 0 | 인증 번호 입력 만료시간 (초 단위) |
+| authenticationReSend | false | boolean | false | 재인증 여부 |
+| termsModalInfo | false | object |  | 약관 상세보기 정보 |
+| ㄴ termsType | false | null \| TermsType | null | 약관 타입 |
+| ㄴ title | false | null \| string | null | 약관명 |
+| ㄴ contents | false | null \| string | null | 약관 내용 |
+| timerTime | false | object |  | 인증 번호 입력 만료시간 |
+| ㄴ minute | false | null \| number | null | 분 |
+| ㄴ second | false | null \| number | null | 초 |
+| isSignedUp | false | boolean | false | 회원가입 여부 |
+| isCertificated | false | boolean | false | 인증 여부 |
+
+
+
+## 액션
+
+* `signUpAction` 은 `useSignUpActionContext` 를 호출해 사용합니다.
+
+```typescript
+const signUpAction = useSignUpActionContext();
+```
+
+| 이름 | 인자타입 | 필수여부 | 기본 값 | 설명 | 관리하는 상태 |
+| --- | ---- | ---- | ---- | --- | ------- |
+| setSignUpMemberInfo | signUpMemberInfo | true | - | 가입자 정보의 상태를 갱신함. | signUpState.signUpMemberInfo |
+| setValidationStatus | validationStatus | true |  | 가입자 정보 검증 상태를 갱신함. | signUpState.validationStatus |
+| setTermsModalInfo | termsModalInfo | true |  | 약관 모달 정보 상태를 갱신함. | signUpState.termsModalInfo |
+| setTimerTime | timerTime | true |  | 인증번호 유효시간을 갱신함. | signUpState.timerTime |
+| setEmailReceiveInfo | emailReceiveInfo | true |  | 이메일 수신 동의 여부 상태를 갱신함. | signUpState.emailReceiveInfo |
+| setSmsReceiveInfo | smsReceiveInfo | true |  | sms 수신 동의 여부 상태를 갱신함. | signUpState.smsReceiveInfo |
+| setAuthenticationReSend | boolean | true |  | 재인증 여부 상태를 갱신함. | signUpState.authenticationReSend |
+| setCi | string | true |  | CI 값을 갱신함. | [signUpState.ci](http://signupstate.ci/) |
+| setTermStatus | termStatus | true |  | 약관 동의여부 상태를 갱신함. | signUpState.termStatus |
+| verifyUserId |  |  |  |  | signUpState.validationStatus |
+| verifyUserPassword |  |  |  |  | signUpState.validationStatus |
+| confirmUserPassword |  |  |  |  | signUpState.validationStatus |
+| verifyUserName |  |  |  |  | signUpState.validationStatus |
+| validateEmail |  |  |  |  | signUpState.validationStatus |
+| verifyUserEmail |  |  |  |  | signUpState.validationStatus |
+| validateMobile |  |  |  |  | signUpState.validationStatus |
+| verifyUserMobile |  |  |  |  | signUpState.validationStatus |
+| postAuthenticationsMobile |  |  |  |  | signUpState.authenticationReSend |
+| confirmAuthentication |  |  |  |  | signUpState.validationStatus |
+| postAuthenticationsEmail | - | - | - | 이메일로 인증번호를 발송함. | signUpState.authenticationReSend |
+| getAuthenticationsEmail | - | - | - | 이메일로 전달받은 인증번호를 확인함.
+ㄴ { result: boolean } 을 반환함. |  |
+| checkboxModalToggle | true | string | - | 약관 상세보기 선택한 모달을 오픈함. | signUpState.termStatussignUpState.termsModalInfo |
+| checkboxSingleCheck | true |  |  | 약관 동의 여부 상태를 갱신함. |  |
+| ㄴ checked | true | boolean | - | 약관 동의 여부 |  |
+| ㄴ id | true | string | - | 약관 아이디 |  |
+| checkboxAllCheck | true | boolean |  | 약관 모두 동의 여부 상태를 갱신함. | signUpState.termStatus |
+| getTerms | true | object |  | 약관 정보를 반환함. |  |
+| ㄴ temsTypes | true | TermsTypes |  | 약관 타입 |  |
+| postProfile | - | - | - | signUpMemberInfo 정보로 회원 가입함. |  |
+| getConfigMemberExtraInfo |  |  |  | 회원정보 추가항목 설정을 조회함. | signUpState.signUpMemberInfo |
+
+## 사용 예시
+
+```typescript
+const Example = () => (
+  
+      
+        
+          
+            
+             setIsTermsFullModalOpen(true)} />
+            
+          
+          {isTermsFullModalOpen &&  setIsTermsFullModalOpen(false)} />}
+        
+      
+    
+)
+```

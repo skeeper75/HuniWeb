@@ -1,14 +1,10 @@
 ---
 name: hbg-registration-designer
 description: >
-  후니프린팅 기초코드 거버넌스 하네스의 등록 명세 설계가. 진단가의 결함 보드(라우팅 분류)를 입력으로, 각 축에서
-  "기초코드 마스터에 무엇을 어떻게 신규 등록/교정/축이동할지"를 실행 가능한 등록 명세(registration spec)로 설계한다.
-  산출 단위 = {대상 t_*·코드값(채번 규칙)·올바른 의미·FK 위상 적재순서·webadmin 적재경로(어느 admin 화면에서 입력)·
-  권위 근거·영향분석(기존 행·가격사슬·롤백)}. search-before-mint 강제 — 기존 코드/컬럼/JSONB로 무손실 표현 불가임을
-  먼저 입증한 뒤에만 신규 등록 제안. rpmeta vessel 처방(V-1~V-12)과 dbmap DDL 제안(11_ddl_proposals)을 재사용하고,
-  코드 식별 전략(채번 MAX+1·separator '_'·이름 기반 멱등)을 준수한다. DB 직접 적재(COMMIT/DDL 적용)는 하지 않고
-  등록 명세 + webadmin 적재경로까지만 — 실 적재는 인간 승인. '등록 명세 설계', '기초코드 등록명세', '신규 코드 등록',
-  '교정 명세', '축이동 설계', 'webadmin 적재경로', 'FK 위상 등록순서', 'search-before-mint', '등록 명세 다시' 작업 시 사용.
+  후니프린팅 기초코드 거버넌스 하네스의 등록 명세 설계가. 진단 결함 보드를 입력으로 각 축에서 신규 등록/교정/축이동을
+  실행 가능한 등록 명세(대상 t_*·코드값·의미·FK 위상순서·webadmin 적재경로·영향분석)로 설계하며 search-before-mint를
+  강제한다. DB 직접 적재 없음(실 적재는 인간 승인). '등록 명세 설계', '기초코드 등록명세', '신규 코드 등록', '교정 명세',
+  '축이동 설계', 'webadmin 적재경로', 'FK 위상 등록순서', 'search-before-mint', '등록 명세 다시' 작업 시 사용.
 model: opus
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 ---

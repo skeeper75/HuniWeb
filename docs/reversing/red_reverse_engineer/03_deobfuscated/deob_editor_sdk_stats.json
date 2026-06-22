@@ -1,0 +1,222 @@
+{
+  "originalFile": "beautified_editor_sdk.js",
+  "originalLines": 12245,
+  "deobfuscatedFile": "deob_editor_sdk.js",
+  "deobfuscatedLines": 12630,
+  "deobfuscatedSizeKB": 425,
+  "koreanCommentLinesAdded": 331,
+  "syntaxValid": true,
+  "sdkVersion": "6.6.48",
+  "totalPrototypeMethods": 45,
+  "uniqueMethodsDocumented": 44,
+  "methodsDocumented": [
+    "setCurrentTemplate",
+    "getCurrentTemplate",
+    "getTemplateList",
+    "changeTemplate",
+    "editTemplate",
+    "createProject",
+    "openProject",
+    "reformProject",
+    "changeProject",
+    "cloneProject",
+    "getProjectId",
+    "getProjectOwnerId",
+    "openFullyFunctionalUI",
+    "remoteEditor",
+    "remoteEditorBulk",
+    "changeLayout",
+    "copyPageContent",
+    "openVdpViewer",
+    "setVariableData",
+    "getCurrentTemplateVdpList",
+    "save",
+    "saveThenClose",
+    "close",
+    "destroy",
+    "checkOrderable",
+    "setToken",
+    "setUserId",
+    "setPrice",
+    "setEdicusStageUrl",
+    "getCustomCss",
+    "on",
+    "editorEventHandler",
+    "getProductInfo",
+    "getProductList",
+    "getResourceList",
+    "getSceneInfo",
+    "getActiveSceneInfo",
+    "getImposeCount",
+    "getCustomTabSelectInfo",
+    "getResourceWithId",
+    "remotePageTnViewer",
+    "prepareOrder",
+    "getProjectList",
+    "getProjectThumbnails"
+  ],
+  "renamedIdentifiers": {
+    "globalScope": {
+      "We": "windowRef (window 참조)",
+      "Qe": "editorBridge (에디터 iframe 통신 브릿지)",
+      "A": "isEditorBusy (에디터 사용중 플래그)",
+      "i (Sentry)": "sentryLib (Sentry 에러 추적 라이브러리)",
+      "a (class)": "ApiClient (HTTP API 클라이언트)",
+      "en": "apiClientInstance (API 클라이언트 인스턴스)",
+      "t (SDK class)": "RedEditorSDK (메인 SDK 클래스)",
+      "X (class)": "CustomTabManager (커스텀 탭 매니저)"
+    },
+    "utilityFunctions": {
+      "D": "sessionStorageManager (Base64 인코딩 sessionStorage 관리)",
+      "U": "validateRequiredParams (필수 파라미터 검증)",
+      "c": "buildQueryString (URL 쿼리스트링 빌더)",
+      "B": "getAuthState (인증 상태 조회)",
+      "z": "buildPluginParams (플러그인 파라미터 빌더)",
+      "G": "ddpBlockBuilder (DDP 명령 블록 빌더)",
+      "tn": "objectToQueryParam (객체→쿼리파라미터 변환)"
+    },
+    "stateVariables": {
+      "K": "sdkState (SDK 내부 상태 객체)",
+      "Y": "customTabRawData (커스텀 탭 원본 데이터)",
+      "$": "noStockCombinations (품절 조합 목록)",
+      "F": "vdpCatalogData (VDP 카탈로그 데이터)",
+      "V": "sentryHubInstance (Sentry Hub)",
+      "J": "sentryLogger (Sentry 로거)",
+      "M": "autoSaveIntervalId (자동 저장 interval ID)",
+      "W": "autoSaveIntervalMinutes (자동 저장 간격)",
+      "N": "sceneInfoCallback (씬 정보 콜백)",
+      "u": "koiContainerElement (KOI 컨테이너)",
+      "L": "koiIframeElement (KOI iframe)"
+    },
+    "eventCallbacks": {
+      "l": "onCreateCallback (프로젝트 생성)",
+      "f": "onLoadCallback (에디터 로드)",
+      "p": "onChangeCallback (문서 변경)",
+      "d": "onCloseCallback (에디터 닫기)",
+      "h": "onSaveCallback (저장 완료)",
+      "v": "onSelectCallback (선택 변경)",
+      "g": "onHistoryStateCallback (히스토리 상태)",
+      "_": "onHistoryLabelCallback (히스토리 라벨)",
+      "y": "onPromoReportCallback (프로모션 리포트)",
+      "m": "onGroupCaptionCallback (그룹 캡션)",
+      "b": "commandPromiseHandlers (명령 Promise)",
+      "H": "onErrorCallback (에러)",
+      "x": "onAllEventsCallback (전체 이벤트)",
+      "k": "onDdpExecuteCompleteCallback (DDP 실행 완료)",
+      "w": "onImagePoolCallback (이미지 풀)",
+      "S": "onPreviewCloseCallback (프리뷰 닫기)",
+      "E": "onFontListCallback (폰트 목록)",
+      "I": "onChangeModeCallback (모드 변경)",
+      "T": "onPageCountChangeCallback (페이지 수 변경)",
+      "P": "onPageChangeCallback (페이지 변경)",
+      "O": "onImposeOpenedCallback (임포즈 열림)",
+      "j": "onPrintCountChangeCallback (인쇄 수량)",
+      "C": "onCustomTabSelectionChangeCallback (커스텀 탭 선택)",
+      "R": "onDocReportCallback (문서 리포트)"
+    },
+    "messageListeners": {
+      "s": "koiTokenRefreshListener (KOI 토큰 갱신)",
+      "q": "koiPassiveMessageListener (KOI 패시브 메시지)"
+    }
+  },
+  "fileSections": [
+    {
+      "name": "Babel Transpile Helpers",
+      "lines": "1-66",
+      "description": "_slicedToArray, _extends, _createClass, _typeof 등"
+    },
+    {
+      "name": "Sentry Error Tracking",
+      "lines": "67-2534",
+      "description": "@sentry/browser v5.22.0 (서드파티, 리네이밍 제외)"
+    },
+    {
+      "name": "EditorBridge (Qe)",
+      "lines": "2535-2732",
+      "description": "iframe 통신 관리자 (20+ 메서드)"
+    },
+    {
+      "name": "ApiClient (a)",
+      "lines": "2733-2887",
+      "description": "HTTP API 래퍼 (12 메서드)"
+    },
+    {
+      "name": "Babel Polyfill + regeneratorRuntime",
+      "lines": "2888-9527",
+      "description": "async/await 지원 (서드파티, 리네이밍 제외)"
+    },
+    {
+      "name": "SDK Utility Functions",
+      "lines": "9528-9653",
+      "description": "sessionStorage, 검증, 쿼리스트링, 이벤트 콜백 변수"
+    },
+    {
+      "name": "DDP Block Builder (G)",
+      "lines": "9654-10346",
+      "description": "고수준 명령 → DDP 블록 변환 (23가지 명령 타입)"
+    },
+    {
+      "name": "SDK State + Sentry Logger",
+      "lines": "10347-10397",
+      "description": "상태 변수, Sentry 로깅, KOI 리스너"
+    },
+    {
+      "name": "RedEditorSDK Class",
+      "lines": "10398-11801",
+      "description": "생성자 + 45개 프로토타입 메서드"
+    },
+    {
+      "name": "CustomTabManager (X)",
+      "lines": "11803-12244",
+      "description": "커스텀 탭 UI 데이터 가공 헬퍼 클래스"
+    },
+    {
+      "name": "Global Export",
+      "lines": "12245",
+      "description": "window.RedEditorSDK = t"
+    }
+  ],
+  "apiEndpoints": [
+    {
+      "endpoint": "POST /editor",
+      "method": "call()",
+      "description": "범용 API (target 파라미터로 구분)"
+    },
+    {
+      "endpoint": "GET /v1/templates",
+      "method": "getProductList()",
+      "description": "전체 상품 목록"
+    },
+    {
+      "endpoint": "GET /v1/templates/{code}",
+      "method": "getTemplateList()",
+      "description": "상품별 템플릿 목록"
+    },
+    {
+      "endpoint": "GET /v1/resources/resource/query",
+      "method": "getResourceList()",
+      "description": "리소스 목록"
+    },
+    {
+      "endpoint": "GET /v2/template/resource/{id}",
+      "method": "getResourceWithId()",
+      "description": "단일 리소스"
+    },
+    {
+      "endpoint": "PUT /v1/template/{uri}/{type}",
+      "method": "updateTemplateCount()",
+      "description": "사용 횟수 갱신"
+    },
+    {
+      "endpoint": "POST /token",
+      "method": "verifyToken/refreshAccessToken",
+      "description": "토큰 검증/갱신"
+    },
+    {
+      "endpoint": "GET /v1/project/{id}/ownerId",
+      "method": "getProjectOwnerId()",
+      "description": "소유자 조회"
+    }
+  ],
+  "generatedAt": "2026-03-30T04:04:21.445Z"
+}

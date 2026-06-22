@@ -1,0 +1,112 @@
+---
+title: "ProfileLikeProvider"
+depth: 5
+path: "오로라 리액트 스킨개발가이드 > 개발 프로세스 > 2️⃣Aurora React 샘플스킨 확인 > @shopby/react-components > product > ProfileLikeProvider"
+---
+
+# ProfileLikeProvider
+
+* 회원이 `좋아요` 한 상품을 관리하는 기능을 제공한다.
+
+## 속성
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | --- | --- | --- | --- |
+| children | true | ReactNode | - |  |
+
+## 상태
+
+* profileLikeProductState 는 useProfileLikeStateContext 를 호출해 사용한다.
+
+``` typescript
+const profileLikeProductState = useProfileLikeStateContext();
+```
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | --- | --- | --- | --- |
+| profileLikeProduct | true | object |  |  |
+| ㄴ totalCount | true | number | 0 | 좋아요한 상품개수 |
+| ㄴ items | true | ProfileLikeProductItem[] | [] | 좋아요한 상품리스트 |
+| ㄴ canDisplayStock | true | boolean | true | 재고 노출 여부 |
+| likedCount | true | number | 0 | 좋아요 선택된 수 |
+
+
+[ProfileLikeProductItem](https://nhnent.dooray.com/#ProfileLikeProductItem)
+
+
+* [response.items](https://docs.shopby.co.kr/?url.primaryName=product/#/Profile/get-profile-like-products) 타입에 하기 타입이 추가된다.
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | --- | --- | --- | --- |
+| ProfileLikeProductItem | true | object |  |  |
+| ㄴ isLiked | true | boolean |  | 좋아요 여부 |
+| ㄴ isMainBestProduct | true | boolean |  | 메인 베스트 상품 여부 |
+| ㄴ myCouponInformation | false | object |  | 사용가능한 쿠폰 정보 |
+| ㄴ canDisplay | true | boolean |  | 전시 가능 여부 |
+| ㄴ isAdultProduct | true | boolean |  | 성인 상품 여부 |
+| ㄴ hasAvailableCoupons | true | boolean |  | 사용가능한 쿠폰 존재 여부 |
+
+
+
+
+[MyCouponInformation](https://nhnent.dooray.com/#MyCouponInformation)
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | --- | --- | --- | --- |
+|  ㄴhasBrandCoupon | false | boolean |  | 브랜드 쿠폰 |
+| ㄴhasPartnerCoupon | false | boolean |  | 파트너 쿠폰 |
+| ㄴhasCategoryCoupon | false | boolean |  | 카테고리 쿠폰 |
+| ㄴhasEventCoupon | false | boolean |  | 기획전 쿠폰 |
+| ㄴhasProductCoupon | false | boolean |  | 상품 쿠폰 |
+
+
+
+
+## 액션
+
+* `profileLikeProductAction` 은 `useProfileLikeActionContext` 를 호출해 사용한다.
+
+``` typescript
+const profileLikeProductAction = useProfileLikeActionContext();
+```
+
+| 이름 | 인자타입 | 필수여부 | 기본값 | 설명 | 관리하는 상태 |
+| --- | --- | --- | --- | --- | --- |
+| fetchProfileLikeProduct | object | false | - | 회원이 좋아요한 상품 목록을 조회함. | profileLikeProductsState.profileLikeProduct |
+| ㄴ pageNumber | number | false | 1 |  |  |
+| ㄴ pageSize | number | false | 6 |  |  |
+| ㄴ hasTotalCount | boolean | false |  |  |  |
+| ㄴ hasMaxCouponAmt | boolean | false |  |  |  |
+| fetchProfileLikeProductCount | - |  |  | 회원이 좋아하는 상품 수 조회 | profileLikeProductsState.likedCount |
+| postProfileLikeByProductNos | object | true |  | 회원이 좋아하는 상품목록에서 특정 상품 추가/삭제 |  |
+
+## 사용예시
+
+``` jsx
+const Example = () => {
+    return (
+          const LikeList = () => {
+          const { profileLikeProduct } = useProfileLikeStateContext();
+
+          return (
+            
+              {profileLikeProduct.items.map(item => (
+                
+                  {item.productName}
+                
+              ))}
+            
+          )
+        }
+
+        const Example = () => (
+          
+            
+              
+              
+            
+          
+        );
+    )
+}
+```

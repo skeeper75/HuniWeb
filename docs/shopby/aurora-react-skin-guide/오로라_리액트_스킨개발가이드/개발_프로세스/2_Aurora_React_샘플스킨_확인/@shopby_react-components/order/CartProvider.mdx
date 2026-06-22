@@ -1,0 +1,104 @@
+---
+title: "CartProvider"
+depth: 5
+path: "오로라 리액트 스킨개발가이드 > 개발 프로세스 > 2️⃣Aurora React 샘플스킨 확인 > @shopby/react-components > order > CartProvider"
+---
+
+# CartProvider
+
+## 속성
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | ---- | --- | ---- | --- |
+| dividesInvalidProducts | X | boolean | true | 장바구니 데이터를 끌어올 때 구매불가 상품을 따로 분리된 Array로 받을지 여부 |
+| debouncingTimeOfCartModification | X | number | 300 | 장바구니 수량 및 선택 상태 변경 시마다 진행되는 금액 계산 api 에 대한 debounce time |
+| defaultCheckStatus | X | boolean | true | 처음 렌더링될 때, 모든 장바구니 상품이 선택 되어 있을지, 선택 되어 있지 않을지에 대한 결정 여부 
+
+(dividesInvalidProducts === true 일 경우, 구매불가 상품의 선택 초기값은 defaultCheckStatus에 영향받지 않고 항상 '선택 해제' 입니다) |
+| guestCartOption | X | object | - | 비회원 장바구니에 대한 옵션값 |
+| ㄴ storagePeriodByDays | X | number | 7 | 장바구니에 담긴 상품을 보관할 기간 |
+| ㄴ storageMaxQuantity | X | number | 10 | 장바구니에 최대로 담을 수 있는 상품 개수 |
+| children | X | ReactNode | - | CartProdider 하위 컴포넌트 |
+
+## 상태
+
+* cartState는 useCartStateContext 를 호출해 사용한다.
+
+```typescript
+const cartState = useCartStateContext();
+```
+
+| 이름 | 타입 | 기본 값 | 설명 |
+| --- | --- | ---- | --- |
+| cartDetail | null \| [response](https://docs.shopby.co.kr/?url.primaryName=order/#/Cart/get-cart) 타입 | null | 장바구니 데이터 |
+| paymentInfo | object | - | 장바구니에서 선택된 상품에 대한 예상 결제 금액 |
+| ㄴ buyAmt | number | 0 | 구매금액 합 |
+| ㄴ discountAmt | number | 0 | 할인 금액 합 |
+| ㄴ totalAmt | number | 0 | 구매금액 합 + 총 선불 배송비 합 |
+| ㄴ accumulationAmtWhenBuyConfirm | number | 0 | 구매확정 시 적립금 합 |
+| ㄴ standardAmt | number | 0 | (상품 판매가 + 옵션 추가 금액) \* 주문 수량 |
+| ㄴ totalPayOnDeliveryAmt | number | 0 | 총 착불배송비 합 |
+| ㄴ totalPrePaidDeliveryAmt | number | 0 | 총 선불 배송비 합 |
+| ㄴ totalDeliveryAmt | number | 0 | 총 배송비 합 |
+| checkingStatus | {
+  [deliveryGroupIdx: string]: {
+    [cartNo: string]: boolean
+  }
+} | {} | 배송지 그룹별, cartNo별 선택 여부
+
+예를 들어 상품이 하나 담겨있고, 해당 상품의 장바구니
+번호가 2번이고, 현재 선택된 상태라면 다음과 같은 값이
+담겨 있습니다
+
+{
+   '0': {
+      '2': true
+    }
+} |
+| checkingStatusPerDeliveryGroup | {
+  [deliveryGroupIdx: string]: boolean
+} | {} | 배송지 그룹별, 그룹 내 상품이 전체 선택되었는지 여부
+
+예를 들어 상품이 두 개 담겨있고 같은 배송지 그룹이면서,
+두 상품을 모두 선택한 상태라면 다음과 같은 값이 담깁니다. 
+
+{
+   '0': true
+} |
+| checkingStatusPerCartNo | {
+   [cartNo: string]: boolean
+} | {} | 장바구니 상품별(cartNo 별) 선택 여부 |
+| isAllChecked | boolean | false | 전부 체크된 상태인지 여부 |
+| checkedCartNos | Array\ | [] | 선택된 장바구니 상품들의 cartNo |
+| checkedProducts | [requestBody](https://docs.shopby.co.kr/?url.primaryName=order/#/OrderSheet/post-order-sheet).products 타입 | [] | 선택된 장바구니 상품들의 정보 |
+| cartCount | number | 0 | 장바구니에 담긴 상품 개수 |
+
+## 액션
+
+* cartAction 은 useCartActionContext 를 호출해 사용한다.
+
+```typescript
+const cartAction = useCartActionContext();
+```
+
+| 이름 | 인자타입 | 필수여부 | 기본값 | 설명 | 관리하는 상태 |
+| --- | ---- | ---- | --- | --- | ------- |
+| fetchCartDetail | - | - | - | 장바구니 정보를 불러옵니다. | cartDetail, checkingStatus,isAllChecked, checkingStatusPerDeliveryGroup, checkingStatusPerCartNo, paymentInfo, checkedCartNos, checkedProducts |
+| fetchCartCount | - | - | - | 장바구니 개수를 불러옵니다. | cartCount |
+| updateIsAllChecked | boolean | O | - | 모든 장바구니 상품에 대해
+선택 여부를 결정합니다. | checkingStatus,isAllChecked, checkingStatusPerDeliveryGroup, checkingStatusPerCartNo, paymentInfo, checkedCartNos, checkedProducts |
+| updateIsCartNoChecked | { cartNo: number, isChecked: boolean } | O | - | 특정 cartNo 상품에 대해 선택 여부를 결정합니다. | checkingStatus,isAllChecked, checkingStatusPerDeliveryGroup, checkingStatusPerCartNo, paymentInfo, checkedCartNos, checkedProducts |
+| updateIsDeliveryGroupChecked | { deliveryGroupIdx: number, isChecked: boolean } | O | - | 특정 배송지 그룹에 대해 선택 여부를 결정합니다. | checkingStatus,isAllChecked, checkingStatusPerDeliveryGroup, checkingStatusPerCartNo, paymentInfo, checkedCartNos, checkedProducts |
+| deleteCartNos | Array\ | O | - | 몇몇 상품을 장바구니에서 제외합니다. 
+제외하고 싶은 상품들의 cartNo 를 인자에 담습니다. | cartDetail, checkingStatus,isAllChecked, checkingStatusPerDeliveryGroup, checkingStatusPerCartNo, paymentInfo, checkedCartNos, checkedProducts |
+| modifyCart | [requestBody](https://docs.shopby.co.kr/?url.primaryName=order/#/Cart/put-cart) 와 같습니다. | O | - | 장바구니를 수정합니다. | cartDetail, checkingStatus,isAllChecked, checkingStatusPerDeliveryGroup, checkingStatusPerCartNo, paymentInfo, checkedCartNos, checkedProducts |
+| addCart | [requestBody](https://docs.shopby.co.kr/?url.primaryName=order/#/Cart/post-cart) 와 같습니다. | O | - | 장바구니에 상품을 추가합니다. | - |
+| getDeletableRequiredOption | - | - | - | [deletableRequiredOption 상세 기능 확인하기](https://nhnent.dooray.com/share/pages/ZFGBGIwoTfaI2aCYB0ih2g/4026354643280252609) | - |
+
+## 사용예시
+
+```typescript
+const Example = () => {
+
+}
+```

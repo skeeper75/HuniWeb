@@ -1,0 +1,103 @@
+---
+title: ">추가상품"
+depth: 3
+path: "오로라 리액트 스킨개발가이드 > 스킨 개발_API 활용가이드 > 상품 상세 > >추가상품"
+---
+
+# >추가상품
+
+## 이해하기
+
+> 이 문서는 추가상품 기능 구현을 위해 사용할 수 있는 API를 소개합니다.
+
+* 🅐 추가상품 설정
+* 🅑 추가상품 전용
+
+![Inline-image-2025-10-31 14.29.27.100.png](https://nhnent.dooray.com/share/tree/WoOk8q6KT1K3MZcLSuyZsw/pages/4190804859609386951/attach-files/4190819100151185415)
+
+***
+
+### 🅐 추가상품 설정
+
+어드민에서 설정한 추가상품 목록을 본 상품의 상세페이지에 노출합니다.
+
+![Inline-image-2025-10-31 08.43.39.898.png](https://nhnent.dooray.com/share/tree/WoOk8q6KT1K3MZcLSuyZsw/pages/4190804859609386951/attach-files/4190805287513631012)
+
+ⓐ **상품 선택**
+
+추가상품에 설정된 옵션이 없을 경우, 상품 선택 여부를 결정할 수 있는 영역이 노출됩니다.
+
+ⓑ **옵션 선택**
+
+추가상품에 설정된 옵션이 있을 경우, 옵션 선택 여부를 결정할 수 있는 영역이 노출됩니다.
+
+
+
+
+아래 어드민 경로에서 추가상품을 설정할 수 있습니다.
+
+```
+shop by basic/pro : 상품 > 상품관리 > 상품 등록/수정 > 판매정보 - 추가상품 설정
+shop by premium : 상품관리 > 상품 등록/수정 > 판매정보 - 추가상품 설정
+```
+
+> [GET/products/{productNo}/extra-products](https://docs.shopby.co.kr/?url.primaryName=product/#/Product/get-extra-products)
+
+```
+► 추가상품 조회하기
+상품번호에 대한 추가상품을 조회할 수 있습니다.
+```
+
+
+
+
+선택된 추가상품의 노출 순서는 어드민에 저장된 순서가 반영되며, 최초에는 상품 등록일 기준 오름차순으로 정렬됩니다.
+
+[!] 선택한 상품에 저장된 노출 설정에 따라, 최종적으로 쇼핑몰 표시 여부가 결정됩니다.
+
+[!] 기본스킨에서는 노출 가능한 상품이더라도, 본 상품과 같이 결제 가능한 수단이 없다면 추가상품이 미노출됩니다.
+
+API에서는 결제 수단에 따른 추가상품의 노출여부를 필터링하지 않으며, 결제 수단 정보만 전달합니다.
+
+
+
+
+따라서 기본스킨에서는 [`상품 상세 조회하기 API`](https://docs.shopby.co.kr/?url.primaryName=product/#/Product/get-products-product)의 `baseInfo.paymentMeans` 와 [`추가상품 조회하기 API`](https://docs.shopby.co.kr/?url.primaryName=product/#/Product/get-extra-products)의 `extraProducts[].paymentMeans` 를 비교하여
+일치하는 결제 수단이 1개 이상 없을 경우, 해당 본상품에 설정된 추가상품을 노출하지 않도록 처리합니다.
+
+
+
+
+[!] 추가상품의 옵션을 조회할 때는 본 상품과 다르게 [`옵션 조회하기 API`](https://docs.shopby.co.kr/?url.primaryName=product/#/Product%20Option/get-product-options)를 활용하지 않고, [`추가상품 조회하기 API`](https://docs.shopby.co.kr/?url.primaryName=product/#/Product%20Option/get-product-options)에서 제공하는 `extraProducts[].optionInfo` 를 활용합니다.
+
+다만, [`추가상품 조회하기 API`](https://docs.shopby.co.kr/?url.primaryName=product/#/Product/get-extra-products)에서 제공하는 옵션 정보는 기존 [`옵션 조회하기 API`](https://docs.shopby.co.kr/?url.primaryName=product/#/Product%20Option/get-product-options)의 필드 구성 및 데이터 구조와 **상이한 부분**이 있습니다.
+
+만약 일반 상품 상세 옵션과 동일한 로직으로 처리해야 하는 경우, 필드명 및 데이터 구조가 기존과 **호환되도록 변환 처리**가 필요할 수 있습니다.
+
+
+
+
+자세한 필드 구성 및 응답 구조는 **API 문서**를 참고하시기 바랍니다.
+
+***
+
+### 🅑 추가상품 전용
+
+어드민에서 설정한 추가상품을 추가상품 전용으로만 사용합니다.
+
+
+
+
+아래 어드민 경로에서 추가상품 전용여부를 설정할 수 있습니다.
+
+```
+shop by basic/pro : 상품 > 상품관리 > 상품 등록/수정 > 판매정보 - 추가상품 전용
+shop by premium : 상품관리 > 상품 등록/수정 > 판매정보 - 추가상품 전용
+```
+
+
+
+
+[추가상품 전용 : 사용함]으로 설정된 상품은 본 상품과 함께 구매만 가능합니다.
+
+[!] 쇼핑몰에서 검색 시 노출이 제한되며, 상품의 상세 페이지 진입 시 '접근 불가' 알럿을 출력합니다.

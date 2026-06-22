@@ -1,13 +1,11 @@
 ---
 name: dbm-load-readiness
 description: >
-  후니프린팅 DB매핑 하네스의 적재 준비(load-readiness) 트랙 방법론. 상품마스터·인쇄상품 가격표의
-  검증된 매핑을 라이브 t_* 스키마용 적재본으로 조립(FK 위상정렬·코드행 선적재 제안·적재 매니페스트)하고,
-  실제 INSERT 없이 적재 가능성을 G1~G9 완료 게이트 + 트랜잭션 롤백 DRY-RUN으로 증명한다. dbm-load-builder와
-  dbm-validator가 공유한다. '적재 준비', '적재본 빌드', '적재 조립', 'FK 위상정렬', '적재 순서', '코드행 선적재',
-  '적재 매니페스트', 'DRY-RUN', '적재 가능성 검증', 'G1 G9 게이트', '완료 게이트', 'load-readiness', 'round-4',
-  't_* 화이트리스트', '적재 게이트 다시', '적재 검증 재실행' 작업 시 반드시 이 스킬을 사용. 매핑 규칙 자체 설계는
-  dbm-mapping/dbm-price-formula, 정합 audit은 dbm-mapping-audit이 담당하므로 그 작업에는 트리거하지 않는다.
+  후니프린팅 DB매핑 하네스의 적재 준비(load-readiness·round-4) 트랙 방법론 — 검증된 매핑을 라이브 t_*
+  적재본으로 조립(FK 위상정렬·코드행 선적재·적재 매니페스트)하고 실제 INSERT 없이 적재 가능성을 G1~G9
+  게이트+롤백 DRY-RUN으로 증명. 트리거: 적재 준비, 적재본 빌드, FK 위상정렬, 코드행 선적재, 적재 매니페스트,
+  DRY-RUN, G1 G9 게이트, round-4, 적재 게이트 다시. 매핑 설계는 dbm-mapping/dbm-price-formula, 정합 audit은
+  dbm-mapping-audit 담당.
 license: Apache-2.0
 metadata:
   version: "1.0.0"

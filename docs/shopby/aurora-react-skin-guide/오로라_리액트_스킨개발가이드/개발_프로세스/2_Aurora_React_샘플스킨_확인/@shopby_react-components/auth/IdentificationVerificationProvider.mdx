@@ -1,0 +1,61 @@
+---
+title: "IdentificationVerificationProvider"
+depth: 5
+path: "오로라 리액트 스킨개발가이드 > 개발 프로세스 > 2️⃣Aurora React 샘플스킨 확인 > @shopby/react-components > auth > IdentificationVerificationProvider"
+---
+
+# IdentificationVerificationProvider
+
+* 본인인증 기능을 제공합니다.
+
+## 속성
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | ---- | --- | ---- | --- |
+| children | true | ReactNode | - |  |
+
+## 상태
+
+* `identificationVerificationState` 는 `useIdentificationVerificationStateContext` 를 호출해 사용합니다.
+
+```typescript
+const identificationVerificationState = useIdentificationVerificationStateContext();
+```
+
+| 이름 | 타입 | 기본 값 | 설명 |
+| --- | --- | ---- | --- |
+| isCiExist | boolean | false | CI 중복 여부 |
+| isIdentificationVerificationReSend | boolean | false | 재인증 여부 |
+| kcpForm | string \| null | null | KCP 본인인증을 위한 form |
+| ci | string | '' | CI |
+
+## 액션
+
+* `identificationVerificationAction` 은 `useIdentificationVerificationActionContext` 를 호출해 사용합니다.
+
+```typescript
+const identificationVerificationAction = useIdentificationVerificationActionContext();
+```
+
+| 이름 | 인자타입 | 필수여부 | 기본 값 | 설명 | 관리하는 상태 |
+| --- | ---- | ---- | ---- | --- | ------- |
+| updateIsIdentificationVerificationReSend | boolean | true |  | 재인증 여부를 갱신함 | `identificationVerificationState.isIdentificationVerificationReSend` |
+| updateIsCiExist | boolean | true |  | ci 중복 여부를 갱신함 | `identificationVerificationState.isCiExist` |
+| updateCi | string | true |  | ci 값을 갱신함 | `identificationVerificationState.ci` |
+| moveIdVerification | object | true |  | KCP 본인인증을 위한 form 을 생성함 | `identificationVerificationState.kcpForm` |
+| ㄴ returnUrl | string | true |  | 본인인증 완료 후 호출할 클라이언트 페이지 | - |
+| getIdVerificationResponse | object | true |  | KCP 본인인증 결과를 조회함
+ㄴ [response](https://docs.shopby.co.kr/?url.primaryName=auth/#/KCPCertification/get-kcp-id-verification-response) 를 반환함. | - |
+| ㄴ key | string | true |  | kcp 본인인증 이후 받는 key값 | - |
+| verifyCi | object | true |  | CI 중복을 확인함 | - |
+| ㄴ ci | string | true |  | CI | - |
+
+## 사용 예시
+
+```typescript
+const Example = () => (
+  
+    
+  
+);
+```

@@ -1,0 +1,39 @@
+# 제품·가격·파일 claim 레지스트리 — D-R3 (2026-06-05)
+
+- claim_id: KC-PRICE-0001
+  statement: 주문 최소수량·기본 셋업료(판비 등)는 전역 단일 규칙이 아니라 상품별로 상이하다.
+  group: 가격
+  source_type: 1차-암묵지
+  source_ref: D-R3
+  verification: 단일출처
+  answers_cq: [CQ-PRICE-09]
+  note: 구조=상품별. 구체 값은 pricing-rules.md per-product(예 §5.2 박명함 동판비). 카테고리별 세분 수집 대상.
+
+- claim_id: KC-PRICE-0002
+  statement: 당일/익일 특급 제작 할증도 전역 규칙 없이 상품별로 상이하다.
+  group: 가격
+  source_type: 1차-암묵지
+  source_ref: D-R3
+  verification: 단일출처
+  answers_cq: [CQ-PRICE-11]
+  note: 디지털=특급 가능, 외주·특수공정=불가 등 상품군 종속. 카테고리별 세분 수집 대상.
+
+- claim_id: KC-PROD-0001
+  statement: 수량 판매단위는 상품군별로 고정 정의된다(명함=통/건, 떡메모=권, 스티커=장/판). 고객은 그 단위로 주문한다.
+  group: 제품
+  source_type: 1차-암묵지
+  source_ref: D-R3
+  verification: 단일출처
+  answers_cq: [CQ-PROD-11]
+  note: >
+    dbm round-3 '묶음수 도메인 미확정'(MAJOR) 해소 — 묶음수=상품군별 고정 판매단위(플래그/자유값 아님).
+    dbm/07_domain/entity-semantic-model.md §1(#7 bundle_qty) 의미축과 정합. 위젯 수량 입력 단위의 권위.
+
+- claim_id: KC-FILE-0001
+  statement: 고객이 주문 후 파일을 재업로드/수정하면 버전 이력을 보관한다(덮어쓰기 아님).
+  group: 파일
+  source_type: 1차-암묵지
+  source_ref: D-R3
+  verification: 단일출처
+  answers_cq: [CQ-FILE-08]
+  note: 어떤 파일로 제작했는지 추적 가능. CQ-POL-08(보관기간 무정책)과 구별 — 버전이력은 보관하나 기간 정책은 미정.

@@ -1,0 +1,27 @@
+%% 프리미엄엽서(PRD_000016) 가상주문 → 자동견적 발행 흐름
+%% 진실소스: pricing.py verbatim recompute (단면25=20,000 PASS)
+flowchart TD
+    A["🧾 가상 주문서<br/>프리미엄엽서 PRD_000016<br/>100x150 · 칼라 단면 · 200매"] --> B
+
+    subgraph CALLER["① 호출측 환산 (앱/위젯 · 개발자 백로그)"]
+        B["work→plate 임포지션<br/>100x150 → 국4절<br/>plt_siz_cd=SIZ_000499"] --> C["출력매수 환산<br/>ceil(200 ÷ 판걸이수 8)<br/>= 25"]
+    end
+
+    C --> D{"공식 바인딩<br/>PRD_000016<br/>→ PRF_DGP_A"}
+
+    subgraph ENGINE["② 가격엔진 pricing.py (구성요소 룩업·합산)"]
+        D --> E["구성요소<br/>COMP_PRINT_DIGITAL_S1<br/>키: 국4절·단면·매수티어25"]
+        E --> F["단가 룩업<br/>칼라단면 D25<br/>= 800 원/매"]
+        F --> G["소계 = 단가 × 출력매수<br/>800 × 25"]
+    end
+
+    G --> H["💰 자동견적 발행<br/>인쇄비 = 20,000 원<br/>✅ 골든 PASS"]
+
+    classDef order fill:#e3f2fd,stroke:#1565c0,stroke-width:2px,color:#0d47a1
+    classDef caller fill:#fff8e1,stroke:#f9a825,stroke-width:1px,color:#5d4037
+    classDef engine fill:#e8f5e9,stroke:#2e7d32,stroke-width:1px,color:#1b5e20
+    classDef result fill:#ede7f6,stroke:#5e35b1,stroke-width:2px,color:#311b92
+    class A order
+    class B,C caller
+    class E,F,G engine
+    class H result

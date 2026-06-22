@@ -1,0 +1,3337 @@
+[
+  {
+    "method": "POST",
+    "path": "/guest/claims/cancel",
+    "summary": "옵션취소 신청하기(복수옵션)",
+    "description": "\n## 부가설명 및 특이사항\n다수의 선택옵션을 취소신청하는 비회원용 API입니다.\n\n## API Version\n### 1.0\n기존 방식으로, API 요청에 성공 시 204 No Content를 응답합니다.\n### 1.1 (개발중)\n변경된 방식으로, API 요청에 성공 시 200 Ok 와 신청된 클레임과 옵션에 대한 정보를 응답합니다. (문서 참조)\n\n## 화면 예시\n[![](http://image.toast.com/aaaaahb/api-description/order/guest/[POST]%20guest_claim_cancle%20%EC%A3%BC%EB%AC%B8%EC%B7%A8%EC%86%8C.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/guest/[POST]%20guest_claim_cancle%20%EC%A3%BC%EB%AC%B8%EC%B7%A8%EC%86%8C.png)\n",
+    "tags": ["Guest"],
+    "parameters": [
+      {
+        "name": "ClientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_CLIENTID"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC, MOBILE_WEB"
+      },
+      {
+        "name": "guestToken",
+        "in": "header",
+        "description": "비회원 토큰^|test-guest-token",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_GUEST_TOKEN"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.1"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/profile-claims-cancel-2023591141"
+          },
+          "examples": {
+            "post-guest-claims-cancel": {
+              "value": "{\"claimType\":\"CANCEL\",\"claimReasonType\":\"CHANGE_MIND\",\"claimReasonDetail\":\"사유\",\"bankAccountInfo\":null,\"saveBankAccountInfo\":false,\"responsibleObjectType\":null,\"claimedProductOptions\":[{\"orderProductOptionNo\":10001,\"productCnt\":1}],\"refundsImmediately\":true}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/guest-order-options-orderOptionNo-claims-return1157243429"
+            },
+            "examples": {
+              "post-guest-claims-cancel": {
+                "value": "{\"claimNo\":1,\"claimedOptions\":[{\"originOrderOptionNo\":1,\"originOrderCnt\":2,\"orderOptionNo\":2,\"orderCnt\":3}]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/guest/claims/estimate",
+    "summary": "클레임시 변경되는 주문 환불 예상금액 계산하기(복수옵션)",
+    "description": "\n## 부가설명 및 특이사항\n다수의 선택옵션을 취소할 경우 환불 예상금액을 미리 계산하는 비회원용 API입니다.\n\n## 화면 예시\n[![](http://image.toast.com/aaaaahb/api-description/order/guest/[POST]%20guest_claim_estimate%20클레임%20시%20변경되는%20주문%20환불계산%201-1.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/guest/[POST]%20guest_claim_estimate%20클레임%20시%20변경되는%20주문%20환불계산%201-1.png)\n[![](http://image.toast.com/aaaaahb/api-description/order/guest/[POST]%20guest_claim_estimate%20클레임%20시%20변경되는%20주문%20환불계산%201-2.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/guest/[POST]%20guest_claim_estimate%20클레임%20시%20변경되는%20주문%20환불계산%201-2.png)\n",
+    "tags": ["Guest"],
+    "parameters": [
+      {
+        "name": "ClientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_CLIENTID"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC, MOBILE_WEB"
+      },
+      {
+        "name": "guestToken",
+        "in": "header",
+        "description": "비회원 토큰^|test-guest-token",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_GUEST_TOKEN"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/profile-claims-estimate-373007703"
+          },
+          "examples": {
+            "post-guest-claims-estimate": {
+              "value": "{\"claimType\":\"RETURN\",\"productCnt\":1,\"claimReasonType\":\"CANCEL_BEFORE_PAY\",\"returnWayType\":\"BUYER_DIRECT_RETURN\",\"claimedProductOptions\":[{\"orderProductOptionNo\":1,\"productCnt\":1}],\"responsibleObjectType\":null}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json;charset=UTF-8": {
+            "schema": {
+              "$ref": "#/components/schemas/guest-order-options-orderOptionNo-claims-estimate974114982"
+            },
+            "examples": {
+              "post-guest-claims-estimate": {
+                "value": "{\"productAmtInfo\":{\"standardPrice\":0,\"immediateDiscountAmt\":0,\"additionalDiscountAmt\":0,\"productCouponDiscountAmt\":0,\"exchangeAdjustAmt\":0,\"freeGiftDiscountAmt\":0,\"exchangeImmediateDiscountedPrice\":0,\"exchangeDiscountAmt\":0,\"totalAmt\":0,\"discountAmt\":0,\"immediateDiscountedPrice\":0},\"deliveryAmtInfo\":{\"beforeDeliveryAmt\":0,\"afterDeliveryAmt\":0,\"refundDeliveryAmt\":0,\"payOnDelivery\":true,\"sellerFault\":false,\"returnDeliveryAmt\":0,\"returnAdjustAmt\":0,\"buyerReturn\":false,\"exchangeDeliveryAmt\":0,\"exchangeAdjustAmt\":0,\"beforeRemoteDeliveryAmt\":0,\"afterRemoteDeliveryAmt\":0,\"totalAmt\":0},\"subtractionAmtInfo\":{\"cartCouponAmt\":0,\"deliveryCouponAmt\":0,\"refundAdjustAmt\":0,\"refundAdjustReason\":\"걍\",\"totalAmt\":0},\"refundPayAmt\":0,\"refundSubPayAmt\":0,\"refundExternalPayAmt\":0,\"refundExternalPayInfos\":[],\"refundType\":\"PAYCO\",\"refundPayType\":\"CREDIT_CARD\",\"refundTypeLabel\":\"신용카드\",\"additionalPayAmt\":0,\"refundMainPayAmt\":0}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/guest/claims/return",
+    "summary": "반품 신청하기(복수옵션)",
+    "description": "\n## 부가설명 및 특이사항\n다수의 선택옵션을 반품하는 비회원용 API입니다.\n\n## API Version\n### 1.0\n기존 방식으로, API 요청에 성공 시 204 No Content를 응답합니다.\n### 1.1 (개발중)\n변경된 방식으로, API 요청에 성공 시 200 Ok 와 신청된 클레임과 옵션에 대한 정보를 응답합니다. (문서 참조)\n\n## 화면 예시\n[![](http://image.toast.com/aaaaahb/api-description/order/guest/[POST]%20guest_claims_return%20%EB%B0%98%ED%92%88%EC%8B%A0%EC%B2%AD%201-1.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/guest/[POST]%20guest_claims_return%20%EB%B0%98%ED%92%88%EC%8B%A0%EC%B2%AD%201-1.png)\n[![](http://image.toast.com/aaaaahb/api-description/order/guest/[POST]%20guest_claims_return%20%EB%B0%98%ED%92%88%EC%8B%A0%EC%B2%AD%201-2.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/guest/[POST]%20guest_claims_return%20%EB%B0%98%ED%92%88%EC%8B%A0%EC%B2%AD%201-2.png)\n",
+    "tags": ["Guest"],
+    "parameters": [
+      {
+        "name": "ClientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_CLIENTID"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC, MOBILE_WEB"
+      },
+      {
+        "name": "guestToken",
+        "in": "header",
+        "description": "비회원 토큰^|test-guest-token",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_GUEST_TOKEN"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.1"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/guest-claims-return537786107"
+          },
+          "examples": {
+            "post-guest-claims-return": {
+              "value": "{\"claimImageUrls\":null,\"claimType\":\"RETURN\",\"claimReasonType\":\"CHANGE_MIND\",\"claimReasonDetail\":\"변심\",\"bankAccountInfo\":{\"bank\":\"CU\",\"bankAccount\":\"123456789\",\"bankDepositorName\":\"예금주\",\"bankName\":\"신협\"},\"saveBankAccountInfo\":true,\"returnAddress\":{\"receiverName\":\"test\",\"receiverZipCd\":\"123456\",\"receiverAddress\":\"경기도 성남시 분당구 대왕판교로645번길 12\",\"receiverJibunAddress\":\"경기도 성남시 분당구 삼평동 629번지 NHN 플레이뮤지엄\",\"receiverDetailAddress\":\"16 NHN 플레이뮤지엄\",\"receiverCity\":null,\"receiverState\":null,\"receiverContact1\":\"010-0000-0000\",\"receiverContact2\":\"010-0000-0000\",\"receiverMobileCountryCd\":\"82\",\"customsIdNumber\":\"1\",\"countryCd\":\"KR\",\"deliveryMemo\":\"test\",\"receiverFirstName\":null,\"receiverLastName\":null},\"returnWayType\":\"SELLER_COLLECT\",\"claimedProductOptions\":[{\"orderProductOptionNo\":1,\"productCnt\":1}],\"deliveryCompanyType\":\"CJ\",\"invoiceNo\":\"1234\",\"responsibleObjectType\":null}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/guest-order-options-orderOptionNo-claims-return1157243429"
+            },
+            "examples": {
+              "post-guest-claims-return": {
+                "value": "{\"claimNo\":1,\"claimedOptions\":[{\"originOrderOptionNo\":1,\"originOrderCnt\":2,\"orderOptionNo\":2,\"orderCnt\":3}]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/guest/claims/free-gifts/satisfy",
+    "summary": "사은품 지급 조건 충족 여부 조회하기",
+    "description": "\n## 부가설명 및 특이사항\n클레임 이후에 사은품 지급 조건이 충족하는지 여부를 조회할 수 있는 API입니다.\n정상상태의 옵션 금액의 합계로만 사은품 지급 여부를 판단합니다. (교환 출고 옵션도 계산에서 제외)\n",
+    "tags": ["Guest"],
+    "parameters": [
+      {
+        "name": "ClientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_CLIENTID"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC, MOBILE_WEB"
+      },
+      {
+        "name": "guestToken",
+        "in": "header",
+        "description": "비회원 토큰^|test-guest-token",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_GUEST_TOKEN"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/profile-claims-free-gifts-satisfy1138615305"
+          },
+          "examples": {
+            "post-guest-free-gifts-satisfy": {
+              "value": "[{\"orderProductOptionNo\":1,\"productCnt\":1}]"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json;charset=UTF-8": {
+            "schema": {
+              "$ref": "#/components/schemas/profile-claims-free-gifts-satisfy-23813812"
+            },
+            "examples": {
+              "post-guest-free-gifts-satisfy": {
+                "value": "[{\"conditionNo\":1,\"targetOrderProductNo\":1,\"targetOrderNo\":\"2025062581914010000\",\"freeGifts\":[{\"orderProductOptionNo\":1,\"satisfy\":true}]}]"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/guest/claims/{claimNo}/account",
+    "summary": "환불 계좌 정보 수정하기",
+    "description": "\n## 부가설명 및 특이사항\n환불 계좌 정보를 수정하는 비회원용 API입니다.\n\n## API Version\n### 1.0\n기존 방식으로, API 요청에 성공 시 204 No Content를 응답합니다.\n### 1.1 (개발중)\n변경된 방식으로, API 요청에 성공 시 200 Ok 와 신청된 클레임과 옵션에 대한 정보를 응답합니다. (문서 참조)\n\n## Request\n### 참고사항\n- responsibleObjectType이 null이면 클레임 사유에 해당되는 귀책이 들어갑니다.\n",
+    "tags": ["Guest"],
+    "parameters": [
+      {
+        "name": "claimNo",
+        "in": "path",
+        "description": "클레임 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "ClientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_CLIENTID"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC, MOBILE_WEB"
+      },
+      {
+        "name": "guestToken",
+        "in": "header",
+        "description": "비회원 토큰^|test-guest-token",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_GUEST_TOKEN"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/profile-claims-claimNo-account1993194450"
+          },
+          "examples": {
+            "put-guest-claims-no-account": {
+              "value": "{\"bank\":\"KDB\",\"account\":\"123456789\",\"depositorName\":\"예금주\"}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/guest/claims/{claimNo}/check-withdraw",
+    "summary": "클레임 철회시 유효성 검증 타입 조회하기",
+    "description": "\n## 부가설명 및 특이사항\n클레임 철회시 유효성 검증 타입 조회하는 비회원용 API입니다.\n\n## 화면 예시\n[![](http://image.toast.com/aaaaahb/api-description/order/guest/[PUT]%20guest_claims_withdraw%20%ED%81%B4%EB%A0%88%EC%9E%84%20%EC%B2%A0%ED%9A%8C.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/guest/[PUT]%20guest_claims_withdraw%20%ED%81%B4%EB%A0%88%EC%9E%84%20%EC%B2%A0%ED%9A%8C.png)\n",
+    "tags": ["Guest"],
+    "parameters": [
+      {
+        "name": "claimNo",
+        "in": "path",
+        "description": "클레임 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "ClientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_CLIENTID"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC, MOBILE_WEB"
+      },
+      {
+        "name": "guestToken",
+        "in": "header",
+        "description": "비회원 토큰^|test-guest-token",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_GUEST_TOKEN"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json;charset=UTF-8": {
+            "schema": {
+              "$ref": "#/components/schemas/guest-claims-claimNo-check-withdraw-980884798"
+            },
+            "examples": {
+              "get-guest-claims-no-check-withdraw": {
+                "value": "{\"claimNo\":1,\"validationType\":\"WITHDRAWABLE\",\"afterClaimNos\":[],\"shippingNos\":[]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/guest/claims/{claimNo}/result",
+    "summary": "클레임 상세보기(클레임 번호)",
+    "description": "\n## 부가설명 및 특이사항\n비회원을 위한 클레임 번호로 클레임 세부 내역을 조회하는 API입니다.\n\n## 화면 예시\n[![](http://image.toast.com/aaaaahb/api-description/order/guest/[GET]%20guest_claim_result%20클레임%20상세보기.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/guest/[GET]%20guest_claim_result%20클레임%20상세보기.png)\n",
+    "tags": ["Guest"],
+    "parameters": [
+      {
+        "name": "claimNo",
+        "in": "path",
+        "description": "클레임 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "ClientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_CLIENTID"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC, MOBILE_WEB"
+      },
+      {
+        "name": "guestToken",
+        "in": "header",
+        "description": "비회원 토큰^|test-guest-token",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_GUEST_TOKEN"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json;charset=UTF-8": {
+            "schema": {
+              "$ref": "#/components/schemas/guest-order-options-orderOptionNo-claims-result380162098"
+            },
+            "examples": {
+              "get-guest-claims-no-result": {
+                "value": "{\"orderProductOptionNo\":1,\"claimNo\":1,\"claimType\":\"CANCEL\",\"refundType\":\"PAYCO\",\"claimedOption\":{\"orderNo\":\"1\",\"orderOptionNo\":1,\"productNo\":1,\"optionNo\":1,\"additionalProductNo\":1,\"imageUrl\":\"\",\"brandName\":\"brand-name\",\"productName\":\"상품1\",\"productNameEn\":null,\"optionName\":\"옵션1\",\"optionValue\":\"\",\"orderCnt\":1,\"orderStatusType\":\"BUY_CONFIRM\",\"claimStatusType\":\"CANCEL_DONE\",\"claimNo\":1,\"accumulationAmt\":0,\"refundable\":false,\"cancelable\":true,\"exchangeable\":true,\"returnable\":true,\"deliveryInternationalYn\":true,\"reservationDeliveryYmdt\":\"2025-10-31 09:56:09\",\"exchangeYn\":\"y\",\"deliverable\":true,\"delivery\":{\"invoiceNo\":\"1\",\"deliveryCompanyType\":\"ACI\",\"retrieveInvoiceUrl\":\"1\",\"deliveryCompanyTypeLabel\":\"1\",\"receiverInputLater\":false},\"price\":{\"salePrice\":0,\"addPrice\":0,\"immediateDiscountAmt\":0,\"additionalDiscountAmt\":0,\"accumulationRate\":0,\"standardPrice\":0,\"immediateDiscountedPrice\":0,\"buyPrice\":0,\"standardAmt\":0,\"immediateDiscountedAmt\":0,\"buyAmt\":0},\"orderStatusDate\":{\"registerYmdt\":\"2025-10-31 09:56:09\",\"buyConfirmYmdt\":\"2025-10-31 09:56:09\",\"reviewableYmdt\":\"2025-10-31 09:56:09\"},\"optionManagementCd\":null,\"brandNameEn\":\"1\",\"reservation\":true,\"optionTitle\":\"1\",\"inputs\":[{\"inputLabel\":\"1\",\"inputValue\":\"1\"}],\"nextActions\":[{\"nextActionType\":\"1\",\"uri\":\"1\"}],\"optionType\":\"1\",\"member\":true,\"optionUsed\":true,\"pgType\":\"PAYCO\",\"payType\":\"PAYCO\",\"claimReasonType\":null,\"claimReasonDetail\":null,\"isFreeGift\":false,\"isQuantityDiscount\":false,\"shippingAreaType\":\"MALL_SHIPPING_AREA\",\"claimStatusTypeLabel\":\"취소완료[환불완료]\",\"imageUrlInfo\":[{\"isMain\":true,\"imageUrlType\":\"IMAGE_URL\",\"url\":\"\"}],\"listImageUrlInfo\":{\"isMain\":true,\"imageUrlType\":\"IMAGE_URL\",\"url\":\"\"},\"isExtraProduct\":true,\"baseProductName\":\"추가상품의 본상품\",\"baseProductNo\":123,\"isRecurringPayment\":false},\"claimedOptions\":[{\"orderNo\":\"1\",\"orderOptionNo\":1,\"productNo\":1,\"optionNo\":1,\"additionalProductNo\":1,\"imageUrl\":\"\",\"brandName\":\"brand-name\",\"productName\":\"상품1\",\"productNameEn\":null,\"optionName\":\"옵션1\",\"optionValue\":\"\",\"orderCnt\":1,\"orderStatusType\":\"BUY_CONFIRM\",\"claimStatusType\":\"CANCEL_DONE\",\"claimNo\":1,\"accumulationAmt\":0,\"refundable\":false,\"cancelable\":true,\"exchangeable\":true,\"returnable\":true,\"deliveryInternationalYn\":true,\"reservationDeliveryYmdt\":\"2025-10-31 09:56:09\",\"exchangeYn\":\"y\",\"deliverable\":true,\"delivery\":{\"invoiceNo\":\"1\",\"deliveryCompanyType\":\"ACI\",\"retrieveInvoiceUrl\":\"1\",\"deliveryCompanyTypeLabel\":\"1\",\"receiverInputLater\":false},\"price\":{\"salePrice\":0,\"addPrice\":0,\"immediateDiscountAmt\":0,\"additionalDiscountAmt\":0,\"accumulationRate\":0,\"standardPrice\":0,\"immediateDiscountedPrice\":0,\"buyPrice\":0,\"standardAmt\":0,\"immediateDiscountedAmt\":0,\"buyAmt\":0},\"orderStatusDate\":{\"registerYmdt\":\"2025-10-31 09:56:09\",\"buyConfirmYmdt\":\"2025-10-31 09:56:09\",\"reviewableYmdt\":\"2025-10-31 09:56:09\"},\"optionManagementCd\":null,\"brandNameEn\":\"1\",\"reservation\":true,\"optionTitle\":\"1\",\"inputs\":[{\"inputLabel\":\"1\",\"inputValue\":\"1\"}],\"nextActions\":[{\"nextActionType\":\"1\",\"uri\":\"1\"}],\"optionType\":\"1\",\"member\":true,\"optionUsed\":true,\"pgType\":\"PAYCO\",\"payType\":\"PAYCO\",\"claimReasonType\":null,\"claimReasonDetail\":null,\"isFreeGift\":false,\"isQuantityDiscount\":false,\"shippingAreaType\":\"MALL_SHIPPING_AREA\",\"claimStatusTypeLabel\":\"취소완료[환불완료]\",\"imageUrlInfo\":[{\"isMain\":true,\"imageUrlType\":\"IMAGE_URL\",\"url\":\"\"}],\"listImageUrlInfo\":{\"isMain\":true,\"imageUrlType\":\"IMAGE_URL\",\"url\":\"\"},\"isExtraProduct\":true,\"baseProductName\":\"추가상품의 본상품\",\"baseProductNo\":123,\"isRecurringPayment\":false}],\"exchangedOption\":{\"orderNo\":\"1\",\"orderOptionNo\":1,\"productNo\":1,\"optionNo\":1,\"additionalProductNo\":1,\"imageUrl\":\"\",\"brandName\":\"brand-name\",\"productName\":\"상품1\",\"productNameEn\":null,\"optionName\":\"옵션1\",\"optionValue\":\"\",\"orderCnt\":1,\"orderStatusType\":\"BUY_CONFIRM\",\"claimStatusType\":\"CANCEL_DONE\",\"claimNo\":1,\"accumulationAmt\":0,\"refundable\":false,\"cancelable\":true,\"exchangeable\":true,\"returnable\":true,\"deliveryInternationalYn\":true,\"reservationDeliveryYmdt\":\"2025-10-31 09:56:09\",\"exchangeYn\":\"y\",\"deliverable\":true,\"delivery\":{\"invoiceNo\":\"1\",\"deliveryCompanyType\":\"ACI\",\"retrieveInvoiceUrl\":\"1\",\"deliveryCompanyTypeLabel\":\"1\",\"receiverInputLater\":false},\"price\":{\"salePrice\":0,\"addPrice\":0,\"immediateDiscountAmt\":0,\"additionalDiscountAmt\":0,\"accumulationRate\":0,\"standardPrice\":0,\"immediateDiscountedPrice\":0,\"buyPrice\":0,\"standardAmt\":0,\"immediateDiscountedAmt\":0,\"buyAmt\":0},\"orderStatusDate\":{\"registerYmdt\":\"2025-10-31 09:56:09\",\"buyConfirmYmdt\":\"2025-10-31 09:56:09\",\"reviewableYmdt\":\"2025-10-31 09:56:09\"},\"optionManagementCd\":null,\"brandNameEn\":\"1\",\"reservation\":true,\"optionTitle\":\"1\",\"inputs\":[{\"inputLabel\":\"1\",\"inputValue\":\"1\"}],\"nextActions\":[{\"nextActionType\":\"1\",\"uri\":\"1\"}],\"optionType\":\"1\",\"member\":true,\"optionUsed\":true,\"pgType\":\"PAYCO\",\"payType\":\"PAYCO\",\"claimReasonType\":null,\"claimReasonDetail\":null,\"isFreeGift\":false,\"isQuantityDiscount\":false,\"shippingAreaType\":\"MALL_SHIPPING_AREA\",\"claimStatusTypeLabel\":\"취소완료[환불완료]\",\"imageUrlInfo\":[{\"isMain\":true,\"imageUrlType\":\"IMAGE_URL\",\"url\":\"\"}],\"listImageUrlInfo\":{\"isMain\":true,\"imageUrlType\":\"IMAGE_URL\",\"url\":\"\"},\"isExtraProduct\":true,\"baseProductName\":\"추가상품의 본상품\",\"baseProductNo\":123,\"isRecurringPayment\":false},\"claimReasonType\":\"CHANGE_MIND\",\"claimReasonDetail\":\"뿡뿡빵빵\",\"refundBankAccount\":{\"bank\":\"KB\",\"bankAccount\":\"123\",\"bankDepositorName\":\"홍디파\",\"bankName\":\"국민은행\"},\"claimClassType\":\"OPTION_CANCEL\",\"claimYmdt\":\"2025-10-31 09:56:10\",\"returnDelivery\":null,\"claimPriceInfo\":{\"productAmtInfo\":{\"standardPrice\":0,\"immediateDiscountAmt\":0,\"additionalDiscountAmt\":0,\"productCouponDiscountAmt\":0,\"exchangeAdjustAmt\":0,\"freeGiftDiscountAmt\":0,\"exchangeImmediateDiscountedPrice\":0,\"exchangeDiscountAmt\":0,\"totalAmt\":0,\"discountAmt\":0,\"immediateDiscountedPrice\":0},\"deliveryAmtInfo\":{\"beforeDeliveryAmt\":0,\"afterDeliveryAmt\":0,\"refundDeliveryAmt\":0,\"payOnDelivery\":true,\"sellerFault\":false,\"returnDeliveryAmt\":0,\"returnAdjustAmt\":0,\"buyerReturn\":false,\"exchangeDeliveryAmt\":0,\"exchangeAdjustAmt\":0,\"beforeRemoteDeliveryAmt\":0,\"afterRemoteDeliveryAmt\":0,\"totalAmt\":0},\"subtractionAmtInfo\":{\"cartCouponAmt\":0,\"deliveryCouponAmt\":0,\"refundAdjustAmt\":0,\"refundAdjustReason\":\"걍\",\"totalAmt\":0},\"refundPayAmt\":0,\"refundSubPayAmt\":0,\"refundExternalPayAmt\":0,\"refundExternalPayInfos\":[],\"refundType\":\"PAYCO\",\"refundPayType\":\"CREDIT_CARD\",\"refundTypeLabel\":\"신용카드\",\"additionalPayAmt\":0,\"refundMainPayAmt\":0},\"returnWayType\":\"BUYER_DIRECT_RETURN\",\"returnAddress\":{\"zipCd\":\"123\",\"address\":\"이매동\",\"jibunAddress\":\"삼매동\",\"name\":\"김어드\",\"detailAddress\":\"사매동\",\"contact1\":\"010-1234-1235\",\"contact2\":\"010-1234-1235\",\"mobileCountryCd\":\"82\",\"note\":null,\"countryCd\":\"KR\",\"addressStr\":\"(123) 이매동 사매동\"},\"exchangeAddress\":{\"zipCd\":\"123\",\"address\":\"이매동\",\"jibunAddress\":\"삼매동\",\"name\":\"김어드\",\"detailAddress\":\"사매동\",\"contact1\":\"010-1234-1235\",\"contact2\":\"010-1234-1235\",\"mobileCountryCd\":\"82\",\"note\":null,\"countryCd\":\"KR\",\"addressStr\":\"(123) 이매동 사매동\"},\"exchangePayInfo\":{\"exchangePayAmt\":0,\"payType\":\"CASH\",\"bankAccount\":{\"bank\":\"KB\",\"bankAccount\":\"123\",\"bankDepositorName\":\"홍디파\",\"bankName\":\"국민은행\"},\"remitter\":\"임래밋\"},\"exchangeBeforeDelivery\":true,\"claimImageUrls\":null}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/guest/claims/{claimNo}/withdraw",
+    "summary": "클레임 철회하기(클레임번호)",
+    "description": "\n## 부가설명 및 특이사항\n클레임 번호로 신청된 클레임을 철회하는 비회원용 API입니다.\n\n## 화면 예시\n[![](http://image.toast.com/aaaaahb/api-description/order/guest/[PUT]%20guest_claims_withdraw%20%ED%81%B4%EB%A0%88%EC%9E%84%20%EC%B2%A0%ED%9A%8C.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/guest/[PUT]%20guest_claims_withdraw%20%ED%81%B4%EB%A0%88%EC%9E%84%20%EC%B2%A0%ED%9A%8C.png)\n",
+    "tags": ["Guest"],
+    "parameters": [
+      {
+        "name": "claimNo",
+        "in": "path",
+        "description": "클레임 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "ClientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_CLIENTID"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC, MOBILE_WEB"
+      },
+      {
+        "name": "guestToken",
+        "in": "header",
+        "description": "비회원 토큰^|test-guest-token",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_GUEST_TOKEN"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/guest/order-options/{orderOptionNo}/claims",
+    "summary": "클레임 신청을 위한 정보 조회하기",
+    "description": "\n## 부가설명 및 특이사항\n클레임 목록을 조회하는 비회원용 API입니다.\n\n## 화면 예시\n[![](http://image.toast.com/aaaaahb/api-description/order/guest/[GET]%20guest_order-options_claim%20%ED%81%B4%EB%A0%88%EC%9E%84%20%EC%8B%A0%EC%B2%AD%EA%B0%80%EB%8A%A5%20%EC%A0%95%EB%B3%B4%EC%A1%B0%ED%9A%8C%201-1.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/guest/[GET]%20guest_order-options_claim%20%ED%81%B4%EB%A0%88%EC%9E%84%20%EC%8B%A0%EC%B2%AD%EA%B0%80%EB%8A%A5%20%EC%A0%95%EB%B3%B4%EC%A1%B0%ED%9A%8C%201-1.png)\n[![](http://image.toast.com/aaaaahb/api-description/order/guest/[GET]%20guest_order-options_claim%20%ED%81%B4%EB%A0%88%EC%9E%84%20%EC%8B%A0%EC%B2%AD%EA%B0%80%EB%8A%A5%20%EC%A0%95%EB%B3%B4%EC%A1%B0%ED%9A%8C%201-2.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/guest/[GET]%20guest_order-options_claim%20%ED%81%B4%EB%A0%88%EC%9E%84%20%EC%8B%A0%EC%B2%AD%EA%B0%80%EB%8A%A5%20%EC%A0%95%EB%B3%B4%EC%A1%B0%ED%9A%8C%201-2.png) \n            ",
+    "tags": ["Guest"],
+    "parameters": [
+      {
+        "name": "orderOptionNo",
+        "in": "path",
+        "description": "주문 상품 옵션 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "claimType",
+        "in": "query",
+        "description": "클레임 타입(CANCEL: 취소, RETURN: 반품, EXCHANGE: 교환)^|CANCEL",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "ClientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_CLIENTID"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC, MOBILE_WEB"
+      },
+      {
+        "name": "guestToken",
+        "in": "header",
+        "description": "비회원 토큰^|test-guest-token",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_GUEST_TOKEN"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json;charset=UTF-8": {
+            "schema": {
+              "$ref": "#/components/schemas/profile-order-options-orderOptionNo-claims-1445504772"
+            },
+            "examples": {
+              "get-guest-order-options-no-claims": {
+                "value": "{\"claimType\":\"EXCHANGE\",\"originalOption\":{\"orderNo\":\"1\",\"orderOptionNo\":1,\"productNo\":1,\"optionNo\":1,\"additionalProductNo\":1,\"imageUrl\":\"\",\"brandName\":\"brand-name\",\"productName\":\"상품1\",\"productNameEn\":null,\"optionName\":\"옵션1\",\"optionValue\":\"\",\"orderCnt\":1,\"orderStatusType\":\"BUY_CONFIRM\",\"claimStatusType\":\"CANCEL_DONE\",\"claimNo\":1,\"accumulationAmt\":0,\"refundable\":false,\"cancelable\":true,\"exchangeable\":true,\"returnable\":true,\"deliveryInternationalYn\":true,\"reservationDeliveryYmdt\":\"2025-10-31 09:56:09\",\"exchangeYn\":\"y\",\"deliverable\":true,\"delivery\":{\"invoiceNo\":\"1\",\"deliveryCompanyType\":\"ACI\",\"retrieveInvoiceUrl\":\"1\",\"deliveryCompanyTypeLabel\":\"1\",\"receiverInputLater\":false},\"price\":{\"salePrice\":0,\"addPrice\":0,\"immediateDiscountAmt\":0,\"additionalDiscountAmt\":0,\"accumulationRate\":0,\"standardPrice\":0,\"immediateDiscountedPrice\":0,\"buyPrice\":0,\"standardAmt\":0,\"immediateDiscountedAmt\":0,\"buyAmt\":0},\"orderStatusDate\":{\"registerYmdt\":\"2025-10-31 09:56:09\",\"buyConfirmYmdt\":\"2025-10-31 09:56:09\",\"reviewableYmdt\":\"2025-10-31 09:56:09\"},\"optionManagementCd\":null,\"brandNameEn\":\"1\",\"reservation\":true,\"optionTitle\":\"1\",\"inputs\":[{\"inputLabel\":\"1\",\"inputValue\":\"1\"}],\"nextActions\":[{\"nextActionType\":\"1\",\"uri\":\"1\"}],\"optionType\":\"1\",\"member\":true,\"optionUsed\":true,\"pgType\":\"PAYCO\",\"payType\":\"PAYCO\",\"claimReasonType\":null,\"claimReasonDetail\":null,\"isFreeGift\":false,\"isQuantityDiscount\":false,\"shippingAreaType\":\"MALL_SHIPPING_AREA\",\"claimStatusTypeLabel\":\"취소완료[환불완료]\",\"imageUrlInfo\":[{\"isMain\":true,\"imageUrlType\":\"IMAGE_URL\",\"url\":\"\"}],\"listImageUrlInfo\":{\"isMain\":true,\"imageUrlType\":\"IMAGE_URL\",\"url\":\"\"},\"isExtraProduct\":true,\"baseProductName\":\"추가상품의 본상품\",\"baseProductNo\":123,\"isRecurringPayment\":false},\"claimableOptions\":[{\"orderNo\":\"1\",\"orderOptionNo\":1,\"productNo\":1,\"optionNo\":1,\"additionalProductNo\":1,\"imageUrl\":\"\",\"brandName\":\"brand-name\",\"productName\":\"상품1\",\"productNameEn\":null,\"optionName\":\"옵션1\",\"optionValue\":\"\",\"orderCnt\":1,\"orderStatusType\":\"BUY_CONFIRM\",\"claimStatusType\":\"CANCEL_DONE\",\"claimNo\":1,\"accumulationAmt\":0,\"refundable\":false,\"cancelable\":true,\"exchangeable\":true,\"returnable\":true,\"deliveryInternationalYn\":true,\"reservationDeliveryYmdt\":\"2025-10-31 09:56:09\",\"exchangeYn\":\"y\",\"deliverable\":true,\"delivery\":{\"invoiceNo\":\"1\",\"deliveryCompanyType\":\"ACI\",\"retrieveInvoiceUrl\":\"1\",\"deliveryCompanyTypeLabel\":\"1\",\"receiverInputLater\":false},\"price\":{\"salePrice\":0,\"addPrice\":0,\"immediateDiscountAmt\":0,\"additionalDiscountAmt\":0,\"accumulationRate\":0,\"standardPrice\":0,\"immediateDiscountedPrice\":0,\"buyPrice\":0,\"standardAmt\":0,\"immediateDiscountedAmt\":0,\"buyAmt\":0},\"orderStatusDate\":{\"registerYmdt\":\"2025-10-31 09:56:09\",\"buyConfirmYmdt\":\"2025-10-31 09:56:09\",\"reviewableYmdt\":\"2025-10-31 09:56:09\"},\"optionManagementCd\":null,\"brandNameEn\":\"1\",\"reservation\":true,\"optionTitle\":\"1\",\"inputs\":[{\"inputLabel\":\"1\",\"inputValue\":\"1\"}],\"nextActions\":[{\"nextActionType\":\"1\",\"uri\":\"1\"}],\"optionType\":\"1\",\"member\":true,\"optionUsed\":true,\"pgType\":\"PAYCO\",\"payType\":\"PAYCO\",\"claimReasonType\":null,\"claimReasonDetail\":null,\"isFreeGift\":false,\"isQuantityDiscount\":false,\"shippingAreaType\":\"MALL_SHIPPING_AREA\",\"claimStatusTypeLabel\":\"취소완료[환불완료]\",\"imageUrlInfo\":[{\"isMain\":true,\"imageUrlType\":\"IMAGE_URL\",\"url\":\"\"}],\"listImageUrlInfo\":{\"isMain\":true,\"imageUrlType\":\"IMAGE_URL\",\"url\":\"\"},\"isExtraProduct\":true,\"baseProductName\":\"추가상품의 본상품\",\"baseProductNo\":123,\"isRecurringPayment\":false}],\"claimReasonTypes\":[{\"claimReasonType\":\"CHANGE_MIND\",\"responsibleObjectType\":\"BUYER\",\"label\":\"단순변심(색상,사이즈 등)\"}],\"responsibleObjectTypes\":[\"BUYER\",\"SELLER\"],\"payType\":\"CREDIT_CARD\",\"refundAccount\":null,\"availableBanks\":[{\"bank\":\"KDB\",\"label\":\"산업은행\"},{\"bank\":\"IBK\",\"label\":\"기업은행\"},{\"bank\":\"KB\",\"label\":\"국민은행\"},{\"bank\":\"SUHYUP\",\"label\":\"수협\"},{\"bank\":\"KEXIM\",\"label\":\"수출입은행\"},{\"bank\":\"NH\",\"label\":\"NH농협은행\"},{\"bank\":\"NHLOCAL\",\"label\":\"지역농축협\"},{\"bank\":\"WOORI\",\"label\":\"우리은행\"},{\"bank\":\"SC\",\"label\":\"SC제일은행\"},{\"bank\":\"CITY\",\"label\":\"한국씨티은행\"},{\"bank\":\"SUHYUP_LOCAL_BANK\",\"label\":\"수협중앙회\"},{\"bank\":\"DAEGU\",\"label\":\"대구은행\"},{\"bank\":\"PUSAN\",\"label\":\"부산은행\"},{\"bank\":\"GWANGJU\",\"label\":\"광주은행\"},{\"bank\":\"JEJU\",\"label\":\"제주은행\"},{\"bank\":\"JEONBUK\",\"label\":\"전북은행\"},{\"bank\":\"GYEONGNAM\",\"label\":\"경남은행\"},{\"bank\":\"KFCC\",\"label\":\"새마을금고\"},{\"bank\":\"CU\",\"label\":\"신협\"},{\"bank\":\"SANGHO\",\"label\":\"상호저축은행\"},{\"bank\":\"HSBC\",\"label\":\"HSBC은행\"},{\"bank\":\"DEUTSCHE\",\"label\":\"도이치은행\"},{\"bank\":\"NFCF\",\"label\":\"산림조합중앙회\"},{\"bank\":\"EPOST\",\"label\":\"우체국\"},{\"bank\":\"KEBHANA\",\"label\":\"KEB하나은행\"},{\"bank\":\"SHINHAN\",\"label\":\"신한은행\"},{\"bank\":\"KBANK\",\"label\":\"케이뱅크\"},{\"bank\":\"KAKAO\",\"label\":\"카카오뱅크\"},{\"bank\":\"TOSS\",\"label\":\"토스뱅크\"},{\"bank\":\"YUANTA\",\"label\":\"유안타증권\"},{\"bank\":\"KBSEC\",\"label\":\"KB증권\"},{\"bank\":\"MIRAEDAEWOO\",\"label\":\"미래에셋대우증권\"},{\"bank\":\"SAMSUNG\",\"label\":\"삼성증권\"},{\"bank\":\"HANKOOK\",\"label\":\"한국투자증권\"},{\"bank\":\"NH_INVEST\",\"label\":\"NH투자증권\"},{\"bank\":\"KYOBO\",\"label\":\"교보증권\"},{\"bank\":\"HI_INVEST\",\"label\":\"하이투자증권\"},{\"bank\":\"HMC_INVEST\",\"label\":\"HMC투자증권\"},{\"bank\":\"KIWOOM\",\"label\":\"키움증권\"},{\"bank\":\"EBEST\",\"label\":\"이베스트투자증권\"},{\"bank\":\"SK\",\"label\":\"SK증권\"},{\"bank\":\"DAISHIN\",\"label\":\"대신증권\"},{\"bank\":\"HANHWA\",\"label\":\"한화투자증권\"},{\"bank\":\"HANA_INVEST\",\"label\":\"하나금융투자\"},{\"bank\":\"SHINHAN_INVEST\",\"label\":\"신한금융투자\"},{\"bank\":\"DONGBU\",\"label\":\"DB금융투자\"},{\"bank\":\"EUGENE_INVEST\",\"label\":\"유진투자증권\"},{\"bank\":\"MERITZ_COMPREHENSIVE\",\"label\":\"메리츠종합금융증권\"},{\"bank\":\"BOOKOOK\",\"label\":\"부국증권\"},{\"bank\":\"SHINYOUNG\",\"label\":\"신영증권\"},{\"bank\":\"CAPE\",\"label\":\"케이프투자증권\"}],\"returnAddress\":{\"receiverName\":\"홍길동\",\"receiverZipCd\":\"12345\",\"receiverAddress\":\"서울시\",\"receiverJibunAddress\":\"지번주소\",\"receiverDetailAddress\":\"상세주소\",\"receiverCity\":null,\"receiverState\":null,\"receiverContact1\":\"010-1234-5678\",\"receiverContact2\":\"010-1234-5678\",\"receiverMobileCountryCd\":\"82\",\"customsIdNumber\":\"P111111111111\",\"countryCd\":\"KR\",\"deliveryMemo\":\"배송메모\",\"shippingEtcInfo\":null,\"addressView\":\"(12345) 서울시 상세주소\"},\"returnWarehouse\":{\"zipCd\":\"12345\",\"address\":\"서울시\",\"jibunAddress\":\"지번주소\",\"detailAddress\":\"상세주소\",\"receiverName\":\"홍길동\",\"contact\":\"010-1234-5678\",\"substitutionText\":\"\",\"summary\":\"\"},\"exchangeAddress\":{\"receiverName\":\"홍길동\",\"receiverZipCd\":\"12345\",\"receiverAddress\":\"서울시\",\"receiverJibunAddress\":\"지번주소\",\"receiverDetailAddress\":\"상세주소\",\"receiverCity\":null,\"receiverState\":null,\"receiverContact1\":\"010-1234-5678\",\"receiverContact2\":\"010-1234-5678\",\"receiverMobileCountryCd\":\"82\",\"customsIdNumber\":\"P111111111111\",\"countryCd\":\"KR\",\"deliveryMemo\":\"배송메모\",\"shippingEtcInfo\":null,\"addressView\":\"(12345) 서울시 상세주소\"},\"deliveryCompanyTypeWithLabels\":[{\"deliveryCompanyType\":\"CJ\",\"label\":\"CJ대한통운\"},{\"deliveryCompanyType\":\"POST\",\"label\":\"우체국택배\"},{\"deliveryCompanyType\":\"HANJIN\",\"label\":\"한진택배\"},{\"deliveryCompanyType\":\"GTX\",\"label\":\"gtx로지스\"},{\"deliveryCompanyType\":\"LOTTE\",\"label\":\"롯데택배\"},{\"deliveryCompanyType\":\"KGB\",\"label\":\"kgb택배\"},{\"deliveryCompanyType\":\"LOGEN\",\"label\":\"로젠택배\"},{\"deliveryCompanyType\":\"GSI\",\"label\":\"gsi Express\"},{\"deliveryCompanyType\":\"KGL\",\"label\":\"KG로지스\"},{\"deliveryCompanyType\":\"INTRAS\",\"label\":\"INTRAS\"},{\"deliveryCompanyType\":\"UPS\",\"label\":\"UPS\"},{\"deliveryCompanyType\":\"CHUNIL\",\"label\":\"천일택배\"},{\"deliveryCompanyType\":\"KDEXP\",\"label\":\"경동택배\"},{\"deliveryCompanyType\":\"HDEXP\",\"label\":\"합동택배\"},{\"deliveryCompanyType\":\"ILYANG\",\"label\":\"일양택배\"},{\"deliveryCompanyType\":\"POST_EMS\",\"label\":\"우체국 EMS\"},{\"deliveryCompanyType\":\"DAESIN\",\"label\":\"대신택배\"},{\"deliveryCompanyType\":\"CVS\",\"label\":\"GSPostbox택배\"},{\"deliveryCompanyType\":\"DHL\",\"label\":\"DHL\"},{\"deliveryCompanyType\":\"FEDEX\",\"label\":\"FEDEX\"},{\"deliveryCompanyType\":\"GSM\",\"label\":\"GSM국제택배\"},{\"deliveryCompanyType\":\"WARPEX\",\"label\":\"WarpEx\"},{\"deliveryCompanyType\":\"WIZWA\",\"label\":\"WIZWA\"},{\"deliveryCompanyType\":\"ACI\",\"label\":\"ACI Express\"},{\"deliveryCompanyType\":\"PANTOS\",\"label\":\"범한판토스\"},{\"deliveryCompanyType\":\"CJ_INTERNATIONAL\",\"label\":\"CJ대한통운(국제택배)\"},{\"deliveryCompanyType\":\"TNT\",\"label\":\"TNT\"},{\"deliveryCompanyType\":\"CU\",\"label\":\"CU편의점택배\"},{\"deliveryCompanyType\":\"KUNYOUNG\",\"label\":\"건영택배\"},{\"deliveryCompanyType\":\"LOTTE_INTERNATIONAL\",\"label\":\"롯데택배(국제택배)\"},{\"deliveryCompanyType\":\"HONAM\",\"label\":\"호남택배\"},{\"deliveryCompanyType\":\"HANIPS\",\"label\":\"한의사랑\"},{\"deliveryCompanyType\":\"IPARCEL\",\"label\":\"i-Parcel\"},{\"deliveryCompanyType\":\"SLX\",\"label\":\"SLX택배\"},{\"deliveryCompanyType\":\"USPS\",\"label\":\"USPS\"},{\"deliveryCompanyType\":\"WONDERS\",\"label\":\"원더스퀵\"},{\"deliveryCompanyType\":\"REGISTPOST\",\"label\":\"우편등기\"},{\"deliveryCompanyType\":\"DHLDE\",\"label\":\"DHL(독일)\"},{\"deliveryCompanyType\":\"EZUSA\",\"label\":\"EZUSA\"},{\"deliveryCompanyType\":\"SWGEXP\",\"label\":\"성원글로벌\"},{\"deliveryCompanyType\":\"DAEWOON\",\"label\":\"대운글로벌\"},{\"deliveryCompanyType\":\"DODOFLEX\",\"label\":\"도도플렉스\"},{\"deliveryCompanyType\":\"NH_LOGIS\",\"label\":\"농협택배\"},{\"deliveryCompanyType\":\"UFO\",\"label\":\"유에프오\"},{\"deliveryCompanyType\":\"TODAY_PICKUP\",\"label\":\"카카오 T 당일배송\"},{\"deliveryCompanyType\":\"QEXPRESS\",\"label\":\"큐익스프레스\"},{\"deliveryCompanyType\":\"PINGPONG\",\"label\":\"핑퐁\"},{\"deliveryCompanyType\":\"CR_LOGITECH\",\"label\":\"CR Logitech\"},{\"deliveryCompanyType\":\"TODAY\",\"label\":\"투데이\"},{\"deliveryCompanyType\":\"SELLUV\",\"label\":\"셀럽\"},{\"deliveryCompanyType\":\"EXMATE\",\"label\":\"이엑스메이트\"},{\"deliveryCompanyType\":\"WINION_LOGIS\",\"label\":\"위니온로지스\"},{\"deliveryCompanyType\":\"ETC\",\"label\":\"기타\"}],\"nonClaimReason\":null,\"deliveryCompanyTypes\":[\"CJ\",\"POST\",\"HANJIN\",\"GTX\",\"LOTTE\",\"KGB\",\"LOGEN\",\"GSI\",\"KGL\",\"INTRAS\",\"UPS\",\"CHUNIL\",\"KDEXP\",\"HDEXP\",\"ILYANG\",\"POST_EMS\",\"DAESIN\",\"CVS\",\"DHL\",\"FEDEX\",\"GSM\",\"WARPEX\",\"WIZWA\",\"ACI\",\"PANTOS\",\"CJ_INTERNATIONAL\",\"TNT\",\"CU\",\"KUNYOUNG\",\"LOTTE_INTERNATIONAL\",\"HONAM\",\"HANIPS\",\"IPARCEL\",\"SLX\",\"USPS\",\"WONDERS\",\"REGISTPOST\",\"DHLDE\",\"EZUSA\",\"SWGEXP\",\"DAEWOON\",\"DODOFLEX\",\"NH_LOGIS\",\"UFO\",\"TODAY_PICKUP\",\"QEXPRESS\",\"PINGPONG\",\"CR_LOGITECH\",\"TODAY\",\"SELLUV\",\"EXMATE\",\"WINION_LOGIS\",\"ETC\"]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/guest/later-input/shippings/claims/cancel",
+    "summary": "[샵바이 엔터프라이즈 전용] 나중 배송 입력 주문 취소하기",
+    "description": "\n## 부가설명 및 특이사항\n나중 배송 입력 주문을 취소하는 API입니다.\n",
+    "tags": ["Guest"],
+    "parameters": [
+      {
+        "name": "ClientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_CLIENTID"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC, MOBILE_WEB"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "encryptedShippingNo",
+        "in": "header",
+        "description": "암호화된 배송 번호^|UFE3Ylo2aUlkSWVuZHVGQjYyS2pZZz09",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "UFE3Ylo2aUlkSWVuZHVGQjYyS2pZZz09"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/guest/order-options/{orderOptionNo}/claims/cancel",
+    "summary": "옵션취소 신청하기",
+    "description": "\n## 부가설명 및 특이사항\n단일옵션을 취소신청하는 비회원용 API입니다.\n\n## API Version\n### 1.0\n기존 방식으로, API 요청에 성공 시 204 No Content를 응답합니다.\n### 1.1 (개발중)\n변경된 방식으로, API 요청에 성공 시 200 Ok 와 신청된 클레임과 옵션에 대한 정보를 응답합니다. (문서 참조)\n\n## 화면 예시\n[![](http://image.toast.com/aaaaahb/api-description/order/guest/[POST]%20guest_order-options_claim_cancle%20%EC%A3%BC%EB%AC%B8%EC%B7%A8%EC%86%8C%201-1.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/guest/[POST]%20guest_order-options_claim_cancle%20%EC%A3%BC%EB%AC%B8%EC%B7%A8%EC%86%8C%201-1.png)\n[![](http://image.toast.com/aaaaahb/api-description/order/guest/[POST]%20guest_order-options_claim_cancle%20%EC%A3%BC%EB%AC%B8%EC%B7%A8%EC%86%8C%201-2.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/guest/[POST]%20guest_order-options_claim_cancle%20%EC%A3%BC%EB%AC%B8%EC%B7%A8%EC%86%8C%201-2.png)\n",
+    "tags": ["Guest"],
+    "parameters": [
+      {
+        "name": "orderOptionNo",
+        "in": "path",
+        "description": "주문 상품 옵션 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "ClientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_CLIENTID"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC, MOBILE_WEB"
+      },
+      {
+        "name": "guestToken",
+        "in": "header",
+        "description": "비회원 토큰^|test-guest-token",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_GUEST_TOKEN"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.1"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/profile-order-options-orderOptionNo-claims-cancel-1041878093"
+          },
+          "examples": {
+            "post-guest-order-options-order-option-no-claims-cancel": {
+              "value": "{\"claimType\":\"CANCEL\",\"claimReasonType\":\"CHANGE_MIND\",\"claimReasonDetail\":\"사유\",\"bankAccountInfo\":null,\"saveBankAccountInfo\":false,\"responsibleObjectType\":null,\"productCnt\":1,\"refundsImmediately\":true}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/guest-order-options-orderOptionNo-claims-return1157243429"
+            },
+            "examples": {
+              "post-guest-order-options-order-option-no-claims-cancel": {
+                "value": "{\"claimNo\":1,\"claimedOptions\":[{\"originOrderOptionNo\":1,\"originOrderCnt\":2,\"orderOptionNo\":2,\"orderCnt\":3}]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/guest/order-options/{orderOptionNo}/claims/estimate",
+    "summary": "클레임시 변경되는 주문 환불금액 계산하기(단일옵션)",
+    "description": "\n## 부가설명 및 특이사항\n선택옵션을 취소할 경우 환불 예상금액을 미리 계산하는 비회원용 API입니다.\n\n## 화면 예시\n[![](http://image.toast.com/aaaaahb/api-description/order/guest/[GET]%20guest_order-options_claim_estimate%20클레임%20시%20변경되는%20주문%20환불%20계산%201-1.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/guest/[GET]%20guest_order-options_claim_estimate%20클레임%20시%20변경되는%20주문%20환불%20계산%201-1.png)\n[![](http://image.toast.com/aaaaahb/api-description/order/guest/[GET]%20guest_order-options_claim_estimate%20클레임%20시%20변경되는%20주문%20환불%20계산%201-2.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/guest/[GET]%20guest_order-options_claim_estimate%20클레임%20시%20변경되는%20주문%20환불%20계산%201-2.png)\n",
+    "tags": ["Guest"],
+    "parameters": [
+      {
+        "name": "orderOptionNo",
+        "in": "path",
+        "description": "주문 상품 옵션 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "claimReasonType",
+        "in": "query",
+        "description": "클레임사유(CHANGE_MIND: 단순변심(색상,사이즈 등), DEFECTIVE_PRODUCT: 상품불량/파손, WRONG_DELIVERY: 배송누락/오배송, OUT_OF_STOCK_SYSTEM: 재고부족(품절취소), CANCEL_BEFORE_PAY: 입금전취소, WRONG_PRODUCT_DETAIL: 상품상세 정보와 다름, DELAY_DELIVERY: 판매자 배송 지연, OTHERS_SELLER: 기타(판매자 귀책), OTHERS_BUYER: 기타(구매자 귀책), OUT_OF_STOCK: 상품 품절/재고 없음, LATER_INPUT_ORDER: 배송지 미입력 취소, LATER_INPUT_ORDER_RECEIVER_CANCEL: 선물거절취소)^|CHANGE_MIND",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "claimType",
+        "in": "query",
+        "description": "클레임타입(CANCEL: 취소, RETURN: 반품, EXCHANGE: 교환)^|CANCEL",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "exchangeCnt",
+        "in": "query",
+        "description": "교환할수량(claimType이 EXCHANGE인 경우)^|1",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "exchangeOptionNo",
+        "in": "query",
+        "description": "교환할옵션번호(claimType이 EXCHANGE인 경우)^|1",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "exchangeProductNo",
+        "in": "query",
+        "description": "교환할상품번호(claimType이 EXCHANGE인 경우)^|1",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "productCnt",
+        "in": "query",
+        "description": "취소/반품할 제품수량^|1",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "responsibleObjectType",
+        "in": "query",
+        "description": "귀책 - responsibleObjectType이 null이면 ClaimReasonType에 매핑되는 귀책 적용(CHANGE_MIND, CANCEL_BEFORE_PAY, OTHERS_BUYER -> BUYER / DEFECTIVE_PRODUCT, WRONG_DELIVERY, OUT_OF_STOCK_SYSTEM, WRONG_PRODUCT_DETAIL, DELAY_DELIVERY, OUT_OF_STOCK, OTHERS_SELLER -> SELLER)(BUYER: 구매자귀책, SELLER: 판매자귀책)^|BUYER",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "returnWayType",
+        "in": "query",
+        "description": "반품상품 수거방법(SELLER_COLLECT: 판매자수거요청, BUYER_DIRECT_RETURN: 구매자직접반품)^|SELLER_COLLECT",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "ClientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_CLIENTID"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC, MOBILE_WEB"
+      },
+      {
+        "name": "guestToken",
+        "in": "header",
+        "description": "비회원 토큰^|test-guest-token",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_GUEST_TOKEN"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json;charset=UTF-8": {
+            "schema": {
+              "$ref": "#/components/schemas/guest-order-options-orderOptionNo-claims-estimate974114982"
+            },
+            "examples": {
+              "get-guest-order-options-no-claims-estimate": {
+                "value": "{\"productAmtInfo\":{\"standardPrice\":0,\"immediateDiscountAmt\":0,\"additionalDiscountAmt\":0,\"productCouponDiscountAmt\":0,\"exchangeAdjustAmt\":0,\"freeGiftDiscountAmt\":0,\"exchangeImmediateDiscountedPrice\":0,\"exchangeDiscountAmt\":0,\"totalAmt\":0,\"discountAmt\":0,\"immediateDiscountedPrice\":0},\"deliveryAmtInfo\":{\"beforeDeliveryAmt\":0,\"afterDeliveryAmt\":0,\"refundDeliveryAmt\":0,\"payOnDelivery\":true,\"sellerFault\":false,\"returnDeliveryAmt\":0,\"returnAdjustAmt\":0,\"buyerReturn\":false,\"exchangeDeliveryAmt\":0,\"exchangeAdjustAmt\":0,\"beforeRemoteDeliveryAmt\":0,\"afterRemoteDeliveryAmt\":0,\"totalAmt\":0},\"subtractionAmtInfo\":{\"cartCouponAmt\":0,\"deliveryCouponAmt\":0,\"refundAdjustAmt\":0,\"refundAdjustReason\":\"걍\",\"totalAmt\":0},\"refundPayAmt\":0,\"refundSubPayAmt\":0,\"refundExternalPayAmt\":0,\"refundExternalPayInfos\":[],\"refundType\":\"PAYCO\",\"refundPayType\":\"CREDIT_CARD\",\"refundTypeLabel\":\"신용카드\",\"additionalPayAmt\":0,\"refundMainPayAmt\":0}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/guest/order-options/{orderOptionNo}/claims/exchange",
+    "summary": "교환 신청하기",
+    "description": "\n## 부가설명 및 특이사항\n비회원을 위한 선택옵션을 교환하는 API입니다.\n\n## API Version\n### 1.0\n기존 방식으로, API 요청에 성공 시 204 No Content를 응답합니다.\n### 1.1 (개발중)\n변경된 방식으로, API 요청에 성공 시 200 Ok 와 신청된 클레임과 옵션에 대한 정보를 응답합니다. (문서 참조)\n\n## Request\n### 참고사항\n- responsibleObjectType이 null이면 클레임 사유에 해당되는 귀책이 들어갑니다.\n",
+    "tags": ["Guest"],
+    "parameters": [
+      {
+        "name": "orderOptionNo",
+        "in": "path",
+        "description": "주문 상품 옵션 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "ClientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_CLIENTID"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      },
+      {
+        "name": "guestToken",
+        "in": "header",
+        "description": "비회원 토큰^|test-guest-token",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_GUEST_TOKEN"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.1"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/profile-order-options-orderOptionNo-claims-exchange-42712885"
+          },
+          "examples": {
+            "post-guest-order-options-no-claims-exchange": {
+              "value": "{\"claimImageUrls\":[\"url1\",\"url2\",\"url3\"],\"productCnt\":1,\"claimReasonType\":\"CANCEL_BEFORE_PAY\",\"claimReasonDetail\":\"상세사유\",\"bankAccountInfo\":{\"bank\":\"KB\",\"bankAccount\":\"111111111111\",\"bankDepositorName\":\"홍길동\",\"bankName\":\"국민은행\"},\"saveBankAccountInfo\":false,\"returnAddress\":{\"receiverName\":\"홍길동\",\"receiverZipCd\":\"000000\",\"receiverAddress\":\"경기도 성남시 분당구 대왕판교로645번길 12\",\"receiverJibunAddress\":\"경기도 성남시 분당구 삼평동 629번지 NHN 플레이뮤지엄\",\"receiverDetailAddress\":\"16 NHN 플레이뮤지엄\",\"receiverCity\":null,\"receiverState\":null,\"receiverContact1\":\"010-000-0000\",\"receiverContact2\":\"010-000-0000\",\"receiverMobileCountryCd\":\"82\",\"customsIdNumber\":\"P12341234\",\"countryCd\":\"KR\",\"deliveryMemo\":\"택배실에 맡겨 주세요.\",\"receiverFirstName\":null,\"receiverLastName\":null},\"returnWayType\":\"BUYER_DIRECT_RETURN\",\"exchangeOption\":{\"additionalProductNo\":1,\"inputTexts\":[{\"inputLabel\":\"사이즈\",\"inputValue\":\"14호\"}],\"optionNo\":1,\"orderCnt\":1,\"productNo\":1},\"exchangeAddress\":{\"receiverName\":\"홍길동\",\"receiverZipCd\":\"000000\",\"receiverAddress\":\"경기도 성남시 분당구 대왕판교로645번길 12\",\"receiverJibunAddress\":\"경기도 성남시 분당구 삼평동 629번지 NHN 플레이뮤지엄\",\"receiverDetailAddress\":\"16 NHN 플레이뮤지엄\",\"receiverCity\":null,\"receiverState\":null,\"receiverContact1\":\"010-000-0000\",\"receiverContact2\":\"010-000-0000\",\"receiverMobileCountryCd\":\"82\",\"customsIdNumber\":\"P12341234\",\"countryCd\":\"KR\",\"deliveryMemo\":\"택배실에 맡겨 주세요.\",\"receiverFirstName\":null,\"receiverLastName\":null},\"responsibleObjectType\":\"BUYER\",\"invoiceNo\":null,\"deliveryCompanyType\":null,\"additionalPayType\":null,\"additionalPayBankAccount\":null,\"additionalPayRemitter\":null,\"orderStatusType\":null}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/guest-order-options-orderOptionNo-claims-return1157243429"
+            },
+            "examples": {
+              "post-guest-order-options-no-claims-exchange": {
+                "value": "{\"claimNo\":1,\"claimedOptions\":[{\"originOrderOptionNo\":1,\"originOrderCnt\":2,\"orderOptionNo\":2,\"orderCnt\":3}]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/guest/order-options/{orderOptionNo}/claims/result",
+    "summary": "클레임 상세보기(주문상품 옵션번호)",
+    "description": "\n## 부가설명 및 특이사항\n주문상품 옵션번호로 클레임 세부 내역을 조회하는 비회원용 API입니다.\n\n## 화면 예시\n[![](http://image.toast.com/aaaaahb/api-description/order/guest/[GET]%20guest_order-options_claim_result%20클레임%20상세보기.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/guest/[GET]%20guest_order-options_claim_result%20클레임%20상세보기.png)\n",
+    "tags": ["Guest"],
+    "parameters": [
+      {
+        "name": "orderOptionNo",
+        "in": "path",
+        "description": "주문 상품 옵션 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "ClientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_CLIENTID"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC, MOBILE_WEB"
+      },
+      {
+        "name": "guestToken",
+        "in": "header",
+        "description": "비회원 토큰^|test-guest-token",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_GUEST_TOKEN"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json;charset=UTF-8": {
+            "schema": {
+              "$ref": "#/components/schemas/guest-order-options-orderOptionNo-claims-result380162098"
+            },
+            "examples": {
+              "get-guest-order-options-no-claims-result": {
+                "value": "{\"orderProductOptionNo\":1,\"claimNo\":1,\"claimType\":\"CANCEL\",\"refundType\":\"PAYCO\",\"claimedOption\":{\"orderNo\":\"1\",\"orderOptionNo\":1,\"productNo\":1,\"optionNo\":1,\"additionalProductNo\":1,\"imageUrl\":\"\",\"brandName\":\"brand-name\",\"productName\":\"상품1\",\"productNameEn\":null,\"optionName\":\"옵션1\",\"optionValue\":\"\",\"orderCnt\":1,\"orderStatusType\":\"BUY_CONFIRM\",\"claimStatusType\":\"CANCEL_DONE\",\"claimNo\":1,\"accumulationAmt\":0,\"refundable\":false,\"cancelable\":true,\"exchangeable\":true,\"returnable\":true,\"deliveryInternationalYn\":true,\"reservationDeliveryYmdt\":\"2025-10-31 09:56:09\",\"exchangeYn\":\"y\",\"deliverable\":true,\"delivery\":{\"invoiceNo\":\"1\",\"deliveryCompanyType\":\"ACI\",\"retrieveInvoiceUrl\":\"1\",\"deliveryCompanyTypeLabel\":\"1\",\"receiverInputLater\":false},\"price\":{\"salePrice\":0,\"addPrice\":0,\"immediateDiscountAmt\":0,\"additionalDiscountAmt\":0,\"accumulationRate\":0,\"standardPrice\":0,\"immediateDiscountedPrice\":0,\"buyPrice\":0,\"standardAmt\":0,\"immediateDiscountedAmt\":0,\"buyAmt\":0},\"orderStatusDate\":{\"registerYmdt\":\"2025-10-31 09:56:09\",\"buyConfirmYmdt\":\"2025-10-31 09:56:09\",\"reviewableYmdt\":\"2025-10-31 09:56:09\"},\"optionManagementCd\":null,\"brandNameEn\":\"1\",\"reservation\":true,\"optionTitle\":\"1\",\"inputs\":[{\"inputLabel\":\"1\",\"inputValue\":\"1\"}],\"nextActions\":[{\"nextActionType\":\"1\",\"uri\":\"1\"}],\"optionType\":\"1\",\"member\":true,\"optionUsed\":true,\"pgType\":\"PAYCO\",\"payType\":\"PAYCO\",\"claimReasonType\":null,\"claimReasonDetail\":null,\"isFreeGift\":false,\"isQuantityDiscount\":false,\"shippingAreaType\":\"MALL_SHIPPING_AREA\",\"claimStatusTypeLabel\":\"취소완료[환불완료]\",\"imageUrlInfo\":[{\"isMain\":true,\"imageUrlType\":\"IMAGE_URL\",\"url\":\"\"}],\"listImageUrlInfo\":{\"isMain\":true,\"imageUrlType\":\"IMAGE_URL\",\"url\":\"\"},\"isExtraProduct\":true,\"baseProductName\":\"추가상품의 본상품\",\"baseProductNo\":123,\"isRecurringPayment\":false},\"claimedOptions\":[{\"orderNo\":\"1\",\"orderOptionNo\":1,\"productNo\":1,\"optionNo\":1,\"additionalProductNo\":1,\"imageUrl\":\"\",\"brandName\":\"brand-name\",\"productName\":\"상품1\",\"productNameEn\":null,\"optionName\":\"옵션1\",\"optionValue\":\"\",\"orderCnt\":1,\"orderStatusType\":\"BUY_CONFIRM\",\"claimStatusType\":\"CANCEL_DONE\",\"claimNo\":1,\"accumulationAmt\":0,\"refundable\":false,\"cancelable\":true,\"exchangeable\":true,\"returnable\":true,\"deliveryInternationalYn\":true,\"reservationDeliveryYmdt\":\"2025-10-31 09:56:09\",\"exchangeYn\":\"y\",\"deliverable\":true,\"delivery\":{\"invoiceNo\":\"1\",\"deliveryCompanyType\":\"ACI\",\"retrieveInvoiceUrl\":\"1\",\"deliveryCompanyTypeLabel\":\"1\",\"receiverInputLater\":false},\"price\":{\"salePrice\":0,\"addPrice\":0,\"immediateDiscountAmt\":0,\"additionalDiscountAmt\":0,\"accumulationRate\":0,\"standardPrice\":0,\"immediateDiscountedPrice\":0,\"buyPrice\":0,\"standardAmt\":0,\"immediateDiscountedAmt\":0,\"buyAmt\":0},\"orderStatusDate\":{\"registerYmdt\":\"2025-10-31 09:56:09\",\"buyConfirmYmdt\":\"2025-10-31 09:56:09\",\"reviewableYmdt\":\"2025-10-31 09:56:09\"},\"optionManagementCd\":null,\"brandNameEn\":\"1\",\"reservation\":true,\"optionTitle\":\"1\",\"inputs\":[{\"inputLabel\":\"1\",\"inputValue\":\"1\"}],\"nextActions\":[{\"nextActionType\":\"1\",\"uri\":\"1\"}],\"optionType\":\"1\",\"member\":true,\"optionUsed\":true,\"pgType\":\"PAYCO\",\"payType\":\"PAYCO\",\"claimReasonType\":null,\"claimReasonDetail\":null,\"isFreeGift\":false,\"isQuantityDiscount\":false,\"shippingAreaType\":\"MALL_SHIPPING_AREA\",\"claimStatusTypeLabel\":\"취소완료[환불완료]\",\"imageUrlInfo\":[{\"isMain\":true,\"imageUrlType\":\"IMAGE_URL\",\"url\":\"\"}],\"listImageUrlInfo\":{\"isMain\":true,\"imageUrlType\":\"IMAGE_URL\",\"url\":\"\"},\"isExtraProduct\":true,\"baseProductName\":\"추가상품의 본상품\",\"baseProductNo\":123,\"isRecurringPayment\":false}],\"exchangedOption\":{\"orderNo\":\"1\",\"orderOptionNo\":1,\"productNo\":1,\"optionNo\":1,\"additionalProductNo\":1,\"imageUrl\":\"\",\"brandName\":\"brand-name\",\"productName\":\"상품1\",\"productNameEn\":null,\"optionName\":\"옵션1\",\"optionValue\":\"\",\"orderCnt\":1,\"orderStatusType\":\"BUY_CONFIRM\",\"claimStatusType\":\"CANCEL_DONE\",\"claimNo\":1,\"accumulationAmt\":0,\"refundable\":false,\"cancelable\":true,\"exchangeable\":true,\"returnable\":true,\"deliveryInternationalYn\":true,\"reservationDeliveryYmdt\":\"2025-10-31 09:56:09\",\"exchangeYn\":\"y\",\"deliverable\":true,\"delivery\":{\"invoiceNo\":\"1\",\"deliveryCompanyType\":\"ACI\",\"retrieveInvoiceUrl\":\"1\",\"deliveryCompanyTypeLabel\":\"1\",\"receiverInputLater\":false},\"price\":{\"salePrice\":0,\"addPrice\":0,\"immediateDiscountAmt\":0,\"additionalDiscountAmt\":0,\"accumulationRate\":0,\"standardPrice\":0,\"immediateDiscountedPrice\":0,\"buyPrice\":0,\"standardAmt\":0,\"immediateDiscountedAmt\":0,\"buyAmt\":0},\"orderStatusDate\":{\"registerYmdt\":\"2025-10-31 09:56:09\",\"buyConfirmYmdt\":\"2025-10-31 09:56:09\",\"reviewableYmdt\":\"2025-10-31 09:56:09\"},\"optionManagementCd\":null,\"brandNameEn\":\"1\",\"reservation\":true,\"optionTitle\":\"1\",\"inputs\":[{\"inputLabel\":\"1\",\"inputValue\":\"1\"}],\"nextActions\":[{\"nextActionType\":\"1\",\"uri\":\"1\"}],\"optionType\":\"1\",\"member\":true,\"optionUsed\":true,\"pgType\":\"PAYCO\",\"payType\":\"PAYCO\",\"claimReasonType\":null,\"claimReasonDetail\":null,\"isFreeGift\":false,\"isQuantityDiscount\":false,\"shippingAreaType\":\"MALL_SHIPPING_AREA\",\"claimStatusTypeLabel\":\"취소완료[환불완료]\",\"imageUrlInfo\":[{\"isMain\":true,\"imageUrlType\":\"IMAGE_URL\",\"url\":\"\"}],\"listImageUrlInfo\":{\"isMain\":true,\"imageUrlType\":\"IMAGE_URL\",\"url\":\"\"},\"isExtraProduct\":true,\"baseProductName\":\"추가상품의 본상품\",\"baseProductNo\":123,\"isRecurringPayment\":false},\"claimReasonType\":\"CHANGE_MIND\",\"claimReasonDetail\":\"뿡뿡빵빵\",\"refundBankAccount\":{\"bank\":\"KB\",\"bankAccount\":\"123\",\"bankDepositorName\":\"홍디파\",\"bankName\":\"국민은행\"},\"claimClassType\":\"OPTION_CANCEL\",\"claimYmdt\":\"2025-10-31 09:56:10\",\"returnDelivery\":null,\"claimPriceInfo\":{\"productAmtInfo\":{\"standardPrice\":0,\"immediateDiscountAmt\":0,\"additionalDiscountAmt\":0,\"productCouponDiscountAmt\":0,\"exchangeAdjustAmt\":0,\"freeGiftDiscountAmt\":0,\"exchangeImmediateDiscountedPrice\":0,\"exchangeDiscountAmt\":0,\"totalAmt\":0,\"discountAmt\":0,\"immediateDiscountedPrice\":0},\"deliveryAmtInfo\":{\"beforeDeliveryAmt\":0,\"afterDeliveryAmt\":0,\"refundDeliveryAmt\":0,\"payOnDelivery\":true,\"sellerFault\":false,\"returnDeliveryAmt\":0,\"returnAdjustAmt\":0,\"buyerReturn\":false,\"exchangeDeliveryAmt\":0,\"exchangeAdjustAmt\":0,\"beforeRemoteDeliveryAmt\":0,\"afterRemoteDeliveryAmt\":0,\"totalAmt\":0},\"subtractionAmtInfo\":{\"cartCouponAmt\":0,\"deliveryCouponAmt\":0,\"refundAdjustAmt\":0,\"refundAdjustReason\":\"걍\",\"totalAmt\":0},\"refundPayAmt\":0,\"refundSubPayAmt\":0,\"refundExternalPayAmt\":0,\"refundExternalPayInfos\":[],\"refundType\":\"PAYCO\",\"refundPayType\":\"CREDIT_CARD\",\"refundTypeLabel\":\"신용카드\",\"additionalPayAmt\":0,\"refundMainPayAmt\":0},\"returnWayType\":\"BUYER_DIRECT_RETURN\",\"returnAddress\":{\"zipCd\":\"123\",\"address\":\"이매동\",\"jibunAddress\":\"삼매동\",\"name\":\"김어드\",\"detailAddress\":\"사매동\",\"contact1\":\"010-1234-1235\",\"contact2\":\"010-1234-1235\",\"mobileCountryCd\":\"82\",\"note\":null,\"countryCd\":\"KR\",\"addressStr\":\"(123) 이매동 사매동\"},\"exchangeAddress\":{\"zipCd\":\"123\",\"address\":\"이매동\",\"jibunAddress\":\"삼매동\",\"name\":\"김어드\",\"detailAddress\":\"사매동\",\"contact1\":\"010-1234-1235\",\"contact2\":\"010-1234-1235\",\"mobileCountryCd\":\"82\",\"note\":null,\"countryCd\":\"KR\",\"addressStr\":\"(123) 이매동 사매동\"},\"exchangePayInfo\":{\"exchangePayAmt\":0,\"payType\":\"CASH\",\"bankAccount\":{\"bank\":\"KB\",\"bankAccount\":\"123\",\"bankDepositorName\":\"홍디파\",\"bankName\":\"국민은행\"},\"remitter\":\"임래밋\"},\"exchangeBeforeDelivery\":true,\"claimImageUrls\":null}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/guest/order-options/{orderOptionNo}/claims/return",
+    "summary": "반품 신청하기(단일옵션)",
+    "description": "\n## 부가설명 및 특이사항\n단일옵션을 반품하는 비회원용 API입니다.\n\n## API Version\n### 1.0\n기존 방식으로, API 요청에 성공 시 204 No Content를 응답합니다.\n### 1.1 (개발중)\n변경된 방식으로, API 요청에 성공 시 200 Ok 와 신청된 클레임과 옵션에 대한 정보를 응답합니다. (문서 참조)\n\n## 화면 예시\n[![](http://image.toast.com/aaaaahb/api-description/order/guest/[POST]%20guest_order-options_claim_return%20%EB%B0%98%ED%92%88%EC%8B%A0%EC%B2%AD%201-1.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/guest/[POST]%20guest_order-options_claim_return%20%EB%B0%98%ED%92%88%EC%8B%A0%EC%B2%AD%201-1.png)\n[![](http://image.toast.com/aaaaahb/api-description/order/guest/[POST]%20guest_order-options_claim_return%20%EB%B0%98%ED%92%88%EC%8B%A0%EC%B2%AD%201-2.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/guest/[POST]%20guest_order-options_claim_return%20%EB%B0%98%ED%92%88%EC%8B%A0%EC%B2%AD%201-2.png)\n",
+    "tags": ["Guest"],
+    "parameters": [
+      {
+        "name": "orderOptionNo",
+        "in": "path",
+        "description": "주문 상품 옵션 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "ClientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_CLIENTID"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC, MOBILE_WEB"
+      },
+      {
+        "name": "guestToken",
+        "in": "header",
+        "description": "비회원 토큰^|test-guest-token",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_GUEST_TOKEN"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.1"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/guest-order-options-orderOptionNo-claims-return-1392338352"
+          },
+          "examples": {
+            "post-guest-order-options-no-claims-return": {
+              "value": "{\"claimImageUrls\":null,\"claimType\":\"RETURN\",\"productCnt\":1,\"claimReasonType\":\"CHANGE_MIND\",\"claimReasonDetail\":\"변심\",\"bankAccountInfo\":{\"bank\":\"CU\",\"bankAccount\":\"123456789\",\"bankDepositorName\":\"예금주\",\"bankName\":\"신협\"},\"saveBankAccountInfo\":true,\"returnAddress\":{\"receiverName\":\"test\",\"receiverZipCd\":\"123456\",\"receiverAddress\":\"경기도 성남시 분당구 대왕판교로645번길 12\",\"receiverJibunAddress\":\"경기도 성남시 분당구 삼평동 629번지 NHN 플레이뮤지엄\",\"receiverDetailAddress\":\"16 NHN 플레이뮤지엄\",\"receiverCity\":null,\"receiverState\":null,\"receiverContact1\":\"010-0000-0000\",\"receiverContact2\":\"010-0000-0000\",\"receiverMobileCountryCd\":\"82\",\"customsIdNumber\":\"1\",\"countryCd\":\"KR\",\"deliveryMemo\":\"test\",\"receiverFirstName\":null,\"receiverLastName\":null},\"returnWayType\":\"SELLER_COLLECT\",\"deliveryCompanyType\":\"CJ\",\"invoiceNo\":\"1234\",\"responsibleObjectType\":null}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/guest-order-options-orderOptionNo-claims-return1157243429"
+            },
+            "examples": {
+              "post-guest-order-options-no-claims-return": {
+                "value": "{\"claimNo\":1,\"claimedOptions\":[{\"originOrderOptionNo\":1,\"originOrderCnt\":2,\"orderOptionNo\":2,\"orderCnt\":3}]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/guest/order-options/{orderOptionNo}/claims/withdraw",
+    "summary": "클레임 철회하기(주문상품 옵션번호)",
+    "description": "\n## 부가설명 및 특이사항\n주문상품 옵션번호로 신청된 클레임을 철회하는 비회원용 API입니다.\n\n## 화면 예시\n[![](http://image.toast.com/aaaaahb/api-description/order/guest/[PUT]%20guest_order-options_claim_withdraw%20%ED%81%B4%EB%A0%88%EC%9E%84%20%EC%B2%A0%ED%9A%8C.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/guest/[PUT]%20guest_order-options_claim_withdraw%20%ED%81%B4%EB%A0%88%EC%9E%84%20%EC%B2%A0%ED%9A%8C.png)\n",
+    "tags": ["Guest"],
+    "parameters": [
+      {
+        "name": "orderOptionNo",
+        "in": "path",
+        "description": "주문 상품 옵션 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "ClientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_CLIENTID"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC, MOBILE_WEB"
+      },
+      {
+        "name": "guestToken",
+        "in": "header",
+        "description": "비회원 토큰^|test-guest-token",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_GUEST_TOKEN"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/guest/orders/{orderNo}/claims/cancel",
+    "summary": "주문취소 신청하기",
+    "description": "\n## 부가설명 및 특이사항\n주문을 취소신청하는 비회원용 API입니다.\n\n## 화면 예시\n[![](http://image.toast.com/aaaaahb/api-description/order/guest/[POST]%20guest_claim_cancle%20%EC%A3%BC%EB%AC%B8%EC%B7%A8%EC%86%8C.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/guest/[POST]%20guest_claim_cancle%20%EC%A3%BC%EB%AC%B8%EC%B7%A8%EC%86%8C.png)\n",
+    "tags": ["Guest"],
+    "parameters": [
+      {
+        "name": "orderNo",
+        "in": "path",
+        "description": "주문 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "ClientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_CLIENTID"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC, MOBILE_WEB"
+      },
+      {
+        "name": "guestToken",
+        "in": "header",
+        "description": "비회원 토큰^|test-guest-token",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_GUEST_TOKEN"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/profile-orders-orderNo-claims-cancel-744213769"
+          },
+          "examples": {
+            "post-guest-orders-order-no-claims-cancel": {
+              "value": "{\"claimType\":\"CANCEL\",\"claimReasonType\":\"CHANGE_MIND\",\"claimReasonDetail\":\"사유\",\"bankAccountInfo\":null,\"saveBankAccountInfo\":false,\"responsibleObjectType\":null,\"refundsImmediately\":true}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/profile/claims",
+    "summary": "회원 클레임 목록 조회하기",
+    "description": "\n## 부가설명 및 특이사항\n클레임 목록을 조회하는 API입니다.\n\n## 화면 예시\n[![](http://image.toast.com/aaaaahb/api-description/order/myorder/[GET]%20profile_claims%20%ED%81%B4%EB%A0%88%EC%9E%84%20%EB%AA%A9%EB%A1%9D%20%EC%A1%B0%ED%9A%8C.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/myorder/[GET]%20profile_claims%20%ED%81%B4%EB%A0%88%EC%9E%84%20%EB%AA%A9%EB%A1%9D%20%EC%A1%B0%ED%9A%8C.png) \n",
+    "tags": ["Member"],
+    "parameters": [
+      {
+        "name": "claimTypes",
+        "in": "query",
+        "description": "클레임 구분(null인 경우 전체)^|CANCEL",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "endYmd",
+        "in": "query",
+        "description": "조회 종료일(null인 경우 오늘)^|yyyy-mm-dd",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "hasTotalCount",
+        "in": "query",
+        "description": "목록 카운트 포함 여부(default: false)^|false",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "pageNumber",
+        "in": "query",
+        "description": "페이지 번호 (1 이상)^|1",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "pageSize",
+        "in": "query",
+        "description": "한 페이지당 노출 수^|10",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "startYmd",
+        "in": "query",
+        "description": "조회 시작일(null인 경우 3개월 전)^|yyyy-mm-dd",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "ClientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_CLIENTID"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC, MOBILE_WEB"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "로그인 인증키^|test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_ACCESS_TOKEN"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json;charset=UTF-8": {
+            "schema": {
+              "$ref": "#/components/schemas/profile-claims145926277"
+            },
+            "examples": {
+              "get-profile-claims": {
+                "value": "{\"totalCount\":1,\"items\":[{\"claimNo\":1,\"orderNo\":\"1\",\"claimType\":\"CANCEL\",\"claimYmdt\":\"2025-10-31 09:56:15\",\"claimReasonType\":\"CANCEL_BEFORE_PAY\",\"claimReasonDetail\":\"1\",\"orderYmdt\":\"2025-10-31 09:56:15\",\"claimedOptions\":[{\"orderNo\":\"1\",\"orderOptionNo\":1,\"productNo\":1,\"optionNo\":1,\"additionalProductNo\":1,\"imageUrl\":\"\",\"brandName\":\"brand-name\",\"productName\":\"상품1\",\"productNameEn\":null,\"optionName\":\"옵션1\",\"optionValue\":\"\",\"orderCnt\":1,\"orderStatusType\":\"BUY_CONFIRM\",\"claimStatusType\":\"CANCEL_DONE\",\"claimNo\":1,\"accumulationAmt\":0,\"refundable\":false,\"cancelable\":true,\"exchangeable\":true,\"returnable\":true,\"deliveryInternationalYn\":true,\"reservationDeliveryYmdt\":\"2025-10-31 09:56:15\",\"exchangeYn\":\"y\",\"deliverable\":true,\"delivery\":{\"invoiceNo\":\"1\",\"deliveryCompanyType\":\"ACI\",\"retrieveInvoiceUrl\":\"1\",\"deliveryCompanyTypeLabel\":\"1\",\"receiverInputLater\":false},\"price\":{\"salePrice\":0,\"addPrice\":0,\"immediateDiscountAmt\":0,\"additionalDiscountAmt\":0,\"accumulationRate\":0,\"standardPrice\":0,\"immediateDiscountedPrice\":0,\"buyPrice\":0,\"standardAmt\":0,\"immediateDiscountedAmt\":0,\"buyAmt\":0},\"orderStatusDate\":{\"registerYmdt\":\"2025-10-31 09:56:15\",\"buyConfirmYmdt\":\"2025-10-31 09:56:15\",\"reviewableYmdt\":\"2025-10-31 09:56:15\"},\"optionManagementCd\":null,\"brandNameEn\":\"1\",\"reservation\":true,\"optionTitle\":\"1\",\"inputs\":[{\"inputLabel\":\"1\",\"inputValue\":\"1\"}],\"nextActions\":[{\"nextActionType\":\"1\",\"uri\":\"1\"}],\"optionType\":\"1\",\"member\":true,\"optionUsed\":true,\"pgType\":\"PAYCO\",\"payType\":\"PAYCO\",\"claimReasonType\":null,\"claimReasonDetail\":null,\"isFreeGift\":false,\"isQuantityDiscount\":false,\"shippingAreaType\":\"MALL_SHIPPING_AREA\",\"claimStatusTypeLabel\":\"취소완료[환불완료]\",\"imageUrlInfo\":[{\"isMain\":true,\"imageUrlType\":\"IMAGE_URL\",\"url\":\"\"}],\"listImageUrlInfo\":{\"isMain\":true,\"imageUrlType\":\"IMAGE_URL\",\"url\":\"\"},\"isExtraProduct\":true,\"baseProductName\":\"추가상품의 본상품\",\"baseProductNo\":123,\"isRecurringPayment\":false}],\"claimPriceInfo\":{\"productAmtInfo\":{\"standardPrice\":12500,\"immediateDiscountAmt\":1000,\"additionalDiscountAmt\":500,\"productCouponDiscountAmt\":2000,\"exchangeAdjustAmt\":0,\"freeGiftDiscountAmt\":0,\"exchangeImmediateDiscountedPrice\":0,\"exchangeDiscountAmt\":0,\"immediateDiscountedPrice\":11500,\"discountAmt\":2500,\"totalAmt\":9000},\"deliveryAmtInfo\":{\"beforeDeliveryAmt\":0,\"afterDeliveryAmt\":2500,\"refundDeliveryAmt\":-2500,\"payOnDelivery\":false,\"sellerFault\":false,\"returnDeliveryAmt\":0,\"returnAdjustAmt\":0,\"buyerReturn\":false,\"exchangeDeliveryAmt\":0,\"exchangeAdjustAmt\":0,\"beforeRemoteDeliveryAmt\":0,\"afterRemoteDeliveryAmt\":0,\"totalAmt\":-2500},\"subtractionAmtInfo\":{\"cartCouponAmt\":0,\"deliveryCouponAmt\":0,\"refundAdjustAmt\":0,\"refundAdjustReason\":null,\"totalAmt\":0},\"refundPayAmt\":6500,\"refundSubPayAmt\":0,\"refundExternalPayAmt\":0,\"refundExternalPayInfos\":[],\"refundType\":\"PAYCO\",\"refundPayType\":\"PAYCO\",\"refundTypeLabel\":\"PAYCO\",\"additionalPayAmt\":0,\"refundMainPayAmt\":6500}}]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/profile/claims/cancel",
+    "summary": "회원 옵션취소 신청하기(복수옵션)",
+    "description": "\n## 부가설명 및 특이사항\n다수의 선택옵션을 취소신청하는 API입니다.\n\n## API Version\n### 1.0\n기존 방식으로, API 요청에 성공 시 204 No Content를 응답합니다.\n### 1.1 (개발중)\n변경된 방식으로, API 요청에 성공 시 200 Ok 와 신청된 클레임과 옵션에 대한 정보를 응답합니다. (문서 참조)\n\n## 화면 예시\n[![](http://image.toast.com/aaaaahb/api-description/order/myorder/[POST]%20profile_claim_cancle%20%EC%A3%BC%EB%AC%B8%EC%B7%A8%EC%86%8C.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/myorder/[POST]%20profile_claim_cancle%20%EC%A3%BC%EB%AC%B8%EC%B7%A8%EC%86%8C.png)\n",
+    "tags": ["Member"],
+    "parameters": [
+      {
+        "name": "ClientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_CLIENTID"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC, MOBILE_WEB"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "로그인 인증키^|test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_ACCESS_TOKEN"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.1"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/profile-claims-cancel-2023591141"
+          },
+          "examples": {
+            "post-profile-claims-cancel": {
+              "value": "{\"claimType\":\"CANCEL\",\"claimReasonType\":\"CHANGE_MIND\",\"claimReasonDetail\":\"사유\",\"bankAccountInfo\":null,\"saveBankAccountInfo\":false,\"responsibleObjectType\":null,\"claimedProductOptions\":[{\"orderProductOptionNo\":10001,\"productCnt\":1}],\"refundsImmediately\":true}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/guest-order-options-orderOptionNo-claims-return1157243429"
+            },
+            "examples": {
+              "post-profile-claims-cancel": {
+                "value": "{\"claimNo\":1,\"claimedOptions\":[{\"originOrderOptionNo\":1,\"originOrderCnt\":2,\"orderOptionNo\":2,\"orderCnt\":3}]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/profile/claims/estimate",
+    "summary": "회원 클레임시 변경되는 주문의 환불 예상금액 계산하기(복수옵션)",
+    "description": "\n## 부가설명 및 특이사항\n다수의 선택옵션을 취소할 경우 환불 예상금액을 미리 계산하는 API입니다.\n\n## 화면 예시\n[![](http://image.toast.com/aaaaahb/api-description/order/myorder/[POST]%20profile_claim_estimate%20클레임%20시%20변경되는%20주문%20환불계산%201-1.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/myorder/[POST]%20profile_claim_estimate%20클레임%20시%20변경되는%20주문%20환불계산%201-1.png)\n[![](http://image.toast.com/aaaaahb/api-description/order/myorder/[POST]%20profile_claim_estimate%20클레임%20시%20변경되는%20주문%20환불계산%201-2.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/myorder/[POST]%20profile_claim_estimate%20클레임%20시%20변경되는%20주문%20환불계산%201-2.png)\n",
+    "tags": ["Member"],
+    "parameters": [
+      {
+        "name": "ClientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_CLIENTID"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC, MOBILE_WEB"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "로그인 인증키^|test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_ACCESS_TOKEN"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/profile-claims-estimate-373007703"
+          },
+          "examples": {
+            "post-profile-claims-estimate": {
+              "value": "{\"claimType\":\"RETURN\",\"productCnt\":1,\"claimReasonType\":\"CANCEL_BEFORE_PAY\",\"returnWayType\":\"BUYER_DIRECT_RETURN\",\"claimedProductOptions\":[{\"orderProductOptionNo\":1,\"productCnt\":1}],\"responsibleObjectType\":null}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json;charset=UTF-8": {
+            "schema": {
+              "$ref": "#/components/schemas/guest-order-options-orderOptionNo-claims-estimate974114982"
+            },
+            "examples": {
+              "post-profile-claims-estimate": {
+                "value": "{\"productAmtInfo\":{\"standardPrice\":0,\"immediateDiscountAmt\":0,\"additionalDiscountAmt\":0,\"productCouponDiscountAmt\":0,\"exchangeAdjustAmt\":0,\"freeGiftDiscountAmt\":0,\"exchangeImmediateDiscountedPrice\":0,\"exchangeDiscountAmt\":0,\"immediateDiscountedPrice\":0,\"discountAmt\":0,\"totalAmt\":0},\"deliveryAmtInfo\":{\"beforeDeliveryAmt\":0,\"afterDeliveryAmt\":0,\"refundDeliveryAmt\":0,\"payOnDelivery\":true,\"sellerFault\":false,\"returnDeliveryAmt\":0,\"returnAdjustAmt\":0,\"buyerReturn\":false,\"exchangeDeliveryAmt\":0,\"exchangeAdjustAmt\":0,\"beforeRemoteDeliveryAmt\":0,\"afterRemoteDeliveryAmt\":0,\"totalAmt\":0},\"subtractionAmtInfo\":{\"cartCouponAmt\":0,\"deliveryCouponAmt\":0,\"refundAdjustAmt\":0,\"refundAdjustReason\":\"걍\",\"totalAmt\":0},\"refundPayAmt\":0,\"refundSubPayAmt\":0,\"refundExternalPayAmt\":0,\"refundExternalPayInfos\":[],\"refundType\":\"PAYCO\",\"refundPayType\":\"CREDIT_CARD\",\"refundTypeLabel\":\"신용카드\",\"additionalPayAmt\":0,\"refundMainPayAmt\":0}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/profile/claims/return",
+    "summary": "회원 반품 신청하기(복수옵션)",
+    "description": "\n## 부가설명 및 특이사항\n다수의 선택옵션을 반품하는 API입니다.\n\n## API Version\n### 1.0\n기존 방식으로, API 요청에 성공 시 204 No Content를 응답합니다.\n### 1.1 (개발중)\n변경된 방식으로, API 요청에 성공 시 200 Ok 와 신청된 클레임과 옵션에 대한 정보를 응답합니다. (문서 참조)\n\n## 화면 예시\n[![](http://image.toast.com/aaaaahb/api-description/order/myorder/[POST]%20profile_claim_return%20%EB%B0%98%ED%92%88%EC%8B%A0%EC%B2%AD%201-1.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/myorder/[POST]%20profile_claim_return%20%EB%B0%98%ED%92%88%EC%8B%A0%EC%B2%AD%201-1.png)\n[![](http://image.toast.com/aaaaahb/api-description/order/myorder/[POST]%20profile_claim_return%20%EB%B0%98%ED%92%88%EC%8B%A0%EC%B2%AD%201-2.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/myorder/[POST]%20profile_claim_return%20%EB%B0%98%ED%92%88%EC%8B%A0%EC%B2%AD%201-2.png)\n",
+    "tags": ["Member"],
+    "parameters": [
+      {
+        "name": "ClientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_CLIENTID"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC, MOBILE_WEB"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "로그인 인증키^|test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_ACCESS_TOKEN"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.1"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/guest-claims-return537786107"
+          },
+          "examples": {
+            "post-profile-claims-return": {
+              "value": "{\"claimImageUrls\":null,\"claimType\":\"RETURN\",\"claimReasonType\":\"CHANGE_MIND\",\"claimReasonDetail\":\"변심\",\"bankAccountInfo\":{\"bank\":\"CU\",\"bankAccount\":\"123456789\",\"bankDepositorName\":\"예금주\",\"bankName\":\"신협\"},\"saveBankAccountInfo\":true,\"returnAddress\":{\"receiverName\":\"test\",\"receiverZipCd\":\"123456\",\"receiverAddress\":\"경기도 성남시 분당구 대왕판교로645번길 12\",\"receiverJibunAddress\":\"경기도 성남시 분당구 삼평동 629번지 NHN 플레이뮤지엄\",\"receiverDetailAddress\":\"16 NHN 플레이뮤지엄\",\"receiverCity\":null,\"receiverState\":null,\"receiverContact1\":\"010-0000-0000\",\"receiverContact2\":\"010-0000-0000\",\"receiverMobileCountryCd\":\"82\",\"customsIdNumber\":\"1\",\"countryCd\":\"KR\",\"deliveryMemo\":\"test\",\"receiverFirstName\":null,\"receiverLastName\":null},\"returnWayType\":\"SELLER_COLLECT\",\"claimedProductOptions\":[{\"orderProductOptionNo\":1,\"productCnt\":1}],\"deliveryCompanyType\":\"CJ\",\"invoiceNo\":\"1234\",\"responsibleObjectType\":null}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/guest-order-options-orderOptionNo-claims-return1157243429"
+            },
+            "examples": {
+              "post-profile-claims-return": {
+                "value": "{\"claimNo\":1,\"claimedOptions\":[{\"originOrderOptionNo\":1,\"originOrderCnt\":2,\"orderOptionNo\":2,\"orderCnt\":3}]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/profile/claims/free-gifts/satisfy",
+    "summary": "사은품 지급 조건 충족 여부 조회하기",
+    "description": "\n## 부가설명 및 특이사항\n클레임 이후에 사은품 지급 조건이 충족하는지 여부를 조회할 수 있는 API입니다.\n정상상태의 옵션 금액의 합계로만 사은품 지급 여부를 판단합니다. (교환 출고 옵션도 계산에서 제외)\n",
+    "tags": ["Member"],
+    "parameters": [
+      {
+        "name": "ClientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_CLIENTID"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC, MOBILE_WEB"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "로그인 인증키^|test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_ACCESS_TOKEN"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/profile-claims-free-gifts-satisfy1138615305"
+          },
+          "examples": {
+            "post-profile-free-gifts-satisfy": {
+              "value": "[{\"orderProductOptionNo\":1,\"productCnt\":1}]"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json;charset=UTF-8": {
+            "schema": {
+              "$ref": "#/components/schemas/profile-claims-free-gifts-satisfy-23813812"
+            },
+            "examples": {
+              "post-profile-free-gifts-satisfy": {
+                "value": "[{\"conditionNo\":1,\"targetOrderProductNo\":1,\"targetOrderNo\":\"2025062581914010000\",\"freeGifts\":[{\"orderProductOptionNo\":1,\"satisfy\":true}]}]"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/profile/claims/{claimNo}/account",
+    "summary": "회원 환불 계좌 정보 수정하기",
+    "description": "\n## 부가설명 및 특이사항\n환불 계좌 정보를 수정하는 API입니다.\n",
+    "tags": ["Member"],
+    "parameters": [
+      {
+        "name": "claimNo",
+        "in": "path",
+        "description": "클레임 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "ClientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_CLIENTID"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC, MOBILE_WEB"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "로그인 인증키^|test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_ACCESS_TOKEN"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/profile-claims-claimNo-account1993194450"
+          },
+          "examples": {
+            "put-profile-claims-no-account": {
+              "value": "{\"bank\":\"KDB\",\"account\":\"123456789\",\"depositorName\":\"예금주\"}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/profile/claims/{claimNo}/check-withdraw",
+    "summary": "회원 클레임 철회시 유효성 검증 타입 조회하기",
+    "description": "\n## 부가설명 및 특이사항\n클레임 철회시 유효성 검증 타입 조회하는 API입니다.\n\n## 화면 예시\n[![](http://image.toast.com/aaaaahb/api-description/order/myorder/[PUT]%20profile_claims_withdraw%20%ED%81%B4%EB%A0%88%EC%9E%84%20%EC%B2%A0%ED%9A%8C%201-1.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/myorder/[PUT]%20profile_claims_withdraw%20%ED%81%B4%EB%A0%88%EC%9E%84%20%EC%B2%A0%ED%9A%8C%201-1.png)\n[![](http://image.toast.com/aaaaahb/api-description/order/myorder/[PUT]%20profile_claims_withdraw%20%ED%81%B4%EB%A0%88%EC%9E%84%20%EC%B2%A0%ED%9A%8C%201-2.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/myorder/[PUT]%20profile_claims_withdraw%20%ED%81%B4%EB%A0%88%EC%9E%84%20%EC%B2%A0%ED%9A%8C%201-2.png)\n",
+    "tags": ["Member"],
+    "parameters": [
+      {
+        "name": "claimNo",
+        "in": "path",
+        "description": "클레임 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "ClientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_CLIENTID"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC, MOBILE_WEB"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "로그인 인증키^|test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_ACCESS_TOKEN"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json;charset=UTF-8": {
+            "schema": {
+              "$ref": "#/components/schemas/guest-claims-claimNo-check-withdraw-980884798"
+            },
+            "examples": {
+              "get-pofile-claims-no-check-withdraw": {
+                "value": "{\"claimNo\":1,\"validationType\":\"WITHDRAWABLE\",\"afterClaimNos\":[],\"shippingNos\":[]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/profile/claims/{claimNo}/result",
+    "summary": "회원 클레임 상세보기(클레임 번호)",
+    "description": "\n## 부가설명 및 특이사항\n클레임 번호로 클레임 세부 내역을 조회합니다.\n\n## 화면 예시\n[![](http://image.toast.com/aaaaahb/api-description/order/myorder/[GET]%20profile_claims_result%20클레임%20상세보기%201-1.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/myorder/[GET]%20profile_claims_result%20클레임%20상세보기%201-1.png)\n[![](http://image.toast.com/aaaaahb/api-description/order/myorder/[GET]%20profile_claims_result%20클레임%20상세보기%201-2.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/myorder/[GET]%20profile_claims_result%20클레임%20상세보기%201-2.png)\n[![](http://image.toast.com/aaaaahb/api-description/order/myorder/[GET]%20profile_claims_result%20클레임%20상세보기%201-3.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/myorder/[GET]%20profile_claims_result%20클레임%20상세보기%201-3.png)\n[![](http://image.toast.com/aaaaahb/api-description/order/myorder/[GET]%20profile_claims_result%20클레임%20상세보기%201-4.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/myorder/[GET]%20profile_claims_result%20클레임%20상세보기%201-4.png)\n",
+    "tags": ["Member"],
+    "parameters": [
+      {
+        "name": "claimNo",
+        "in": "path",
+        "description": "클레임 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "ClientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_CLIENTID"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC, MOBILE_WEB"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "로그인 인증키^|test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_ACCESS_TOKEN"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json;charset=UTF-8": {
+            "schema": {
+              "$ref": "#/components/schemas/guest-order-options-orderOptionNo-claims-result380162098"
+            },
+            "examples": {
+              "get-profile-claims-no-result": {
+                "value": "{\"orderProductOptionNo\":1,\"claimNo\":1,\"claimType\":\"CANCEL\",\"refundType\":\"PAYCO\",\"claimedOption\":{\"orderNo\":\"1\",\"orderOptionNo\":1,\"productNo\":1,\"optionNo\":1,\"additionalProductNo\":1,\"imageUrl\":\"\",\"brandName\":\"brand-name\",\"productName\":\"상품1\",\"productNameEn\":null,\"optionName\":\"옵션1\",\"optionValue\":\"\",\"orderCnt\":1,\"orderStatusType\":\"BUY_CONFIRM\",\"claimStatusType\":\"CANCEL_DONE\",\"claimNo\":1,\"accumulationAmt\":0,\"refundable\":false,\"cancelable\":true,\"exchangeable\":true,\"returnable\":true,\"deliveryInternationalYn\":true,\"reservationDeliveryYmdt\":\"2025-10-31 09:56:15\",\"exchangeYn\":\"y\",\"deliverable\":true,\"delivery\":{\"invoiceNo\":\"1\",\"deliveryCompanyType\":\"ACI\",\"retrieveInvoiceUrl\":\"1\",\"deliveryCompanyTypeLabel\":\"1\",\"receiverInputLater\":false},\"price\":{\"salePrice\":0,\"addPrice\":0,\"immediateDiscountAmt\":0,\"additionalDiscountAmt\":0,\"accumulationRate\":0,\"standardPrice\":0,\"immediateDiscountedPrice\":0,\"buyPrice\":0,\"standardAmt\":0,\"immediateDiscountedAmt\":0,\"buyAmt\":0},\"orderStatusDate\":{\"registerYmdt\":\"2025-10-31 09:56:15\",\"buyConfirmYmdt\":\"2025-10-31 09:56:15\",\"reviewableYmdt\":\"2025-10-31 09:56:15\"},\"optionManagementCd\":null,\"brandNameEn\":\"1\",\"reservation\":true,\"optionTitle\":\"1\",\"inputs\":[{\"inputLabel\":\"1\",\"inputValue\":\"1\"}],\"nextActions\":[{\"nextActionType\":\"1\",\"uri\":\"1\"}],\"optionType\":\"1\",\"member\":true,\"optionUsed\":true,\"pgType\":\"PAYCO\",\"payType\":\"PAYCO\",\"claimReasonType\":null,\"claimReasonDetail\":null,\"isFreeGift\":false,\"isQuantityDiscount\":false,\"shippingAreaType\":\"MALL_SHIPPING_AREA\",\"claimStatusTypeLabel\":\"취소완료[환불완료]\",\"imageUrlInfo\":[{\"isMain\":true,\"imageUrlType\":\"IMAGE_URL\",\"url\":\"\"}],\"listImageUrlInfo\":{\"isMain\":true,\"imageUrlType\":\"IMAGE_URL\",\"url\":\"\"},\"isExtraProduct\":true,\"baseProductName\":\"추가상품의 본상품\",\"baseProductNo\":123,\"isRecurringPayment\":false},\"claimedOptions\":[{\"orderNo\":\"1\",\"orderOptionNo\":1,\"productNo\":1,\"optionNo\":1,\"additionalProductNo\":1,\"imageUrl\":\"\",\"brandName\":\"brand-name\",\"productName\":\"상품1\",\"productNameEn\":null,\"optionName\":\"옵션1\",\"optionValue\":\"\",\"orderCnt\":1,\"orderStatusType\":\"BUY_CONFIRM\",\"claimStatusType\":\"CANCEL_DONE\",\"claimNo\":1,\"accumulationAmt\":0,\"refundable\":false,\"cancelable\":true,\"exchangeable\":true,\"returnable\":true,\"deliveryInternationalYn\":true,\"reservationDeliveryYmdt\":\"2025-10-31 09:56:15\",\"exchangeYn\":\"y\",\"deliverable\":true,\"delivery\":{\"invoiceNo\":\"1\",\"deliveryCompanyType\":\"ACI\",\"retrieveInvoiceUrl\":\"1\",\"deliveryCompanyTypeLabel\":\"1\",\"receiverInputLater\":false},\"price\":{\"salePrice\":0,\"addPrice\":0,\"immediateDiscountAmt\":0,\"additionalDiscountAmt\":0,\"accumulationRate\":0,\"standardPrice\":0,\"immediateDiscountedPrice\":0,\"buyPrice\":0,\"standardAmt\":0,\"immediateDiscountedAmt\":0,\"buyAmt\":0},\"orderStatusDate\":{\"registerYmdt\":\"2025-10-31 09:56:15\",\"buyConfirmYmdt\":\"2025-10-31 09:56:15\",\"reviewableYmdt\":\"2025-10-31 09:56:15\"},\"optionManagementCd\":null,\"brandNameEn\":\"1\",\"reservation\":true,\"optionTitle\":\"1\",\"inputs\":[{\"inputLabel\":\"1\",\"inputValue\":\"1\"}],\"nextActions\":[{\"nextActionType\":\"1\",\"uri\":\"1\"}],\"optionType\":\"1\",\"member\":true,\"optionUsed\":true,\"pgType\":\"PAYCO\",\"payType\":\"PAYCO\",\"claimReasonType\":null,\"claimReasonDetail\":null,\"isFreeGift\":false,\"isQuantityDiscount\":false,\"shippingAreaType\":\"MALL_SHIPPING_AREA\",\"claimStatusTypeLabel\":\"취소완료[환불완료]\",\"imageUrlInfo\":[{\"isMain\":true,\"imageUrlType\":\"IMAGE_URL\",\"url\":\"\"}],\"listImageUrlInfo\":{\"isMain\":true,\"imageUrlType\":\"IMAGE_URL\",\"url\":\"\"},\"isExtraProduct\":true,\"baseProductName\":\"추가상품의 본상품\",\"baseProductNo\":123,\"isRecurringPayment\":false}],\"exchangedOption\":{\"orderNo\":\"1\",\"orderOptionNo\":1,\"productNo\":1,\"optionNo\":1,\"additionalProductNo\":1,\"imageUrl\":\"\",\"brandName\":\"brand-name\",\"productName\":\"상품1\",\"productNameEn\":null,\"optionName\":\"옵션1\",\"optionValue\":\"\",\"orderCnt\":1,\"orderStatusType\":\"BUY_CONFIRM\",\"claimStatusType\":\"CANCEL_DONE\",\"claimNo\":1,\"accumulationAmt\":0,\"refundable\":false,\"cancelable\":true,\"exchangeable\":true,\"returnable\":true,\"deliveryInternationalYn\":true,\"reservationDeliveryYmdt\":\"2025-10-31 09:56:15\",\"exchangeYn\":\"y\",\"deliverable\":true,\"delivery\":{\"invoiceNo\":\"1\",\"deliveryCompanyType\":\"ACI\",\"retrieveInvoiceUrl\":\"1\",\"deliveryCompanyTypeLabel\":\"1\",\"receiverInputLater\":false},\"price\":{\"salePrice\":0,\"addPrice\":0,\"immediateDiscountAmt\":0,\"additionalDiscountAmt\":0,\"accumulationRate\":0,\"standardPrice\":0,\"immediateDiscountedPrice\":0,\"buyPrice\":0,\"standardAmt\":0,\"immediateDiscountedAmt\":0,\"buyAmt\":0},\"orderStatusDate\":{\"registerYmdt\":\"2025-10-31 09:56:15\",\"buyConfirmYmdt\":\"2025-10-31 09:56:15\",\"reviewableYmdt\":\"2025-10-31 09:56:15\"},\"optionManagementCd\":null,\"brandNameEn\":\"1\",\"reservation\":true,\"optionTitle\":\"1\",\"inputs\":[{\"inputLabel\":\"1\",\"inputValue\":\"1\"}],\"nextActions\":[{\"nextActionType\":\"1\",\"uri\":\"1\"}],\"optionType\":\"1\",\"member\":true,\"optionUsed\":true,\"pgType\":\"PAYCO\",\"payType\":\"PAYCO\",\"claimReasonType\":null,\"claimReasonDetail\":null,\"isFreeGift\":false,\"isQuantityDiscount\":false,\"shippingAreaType\":\"MALL_SHIPPING_AREA\",\"claimStatusTypeLabel\":\"취소완료[환불완료]\",\"imageUrlInfo\":[{\"isMain\":true,\"imageUrlType\":\"IMAGE_URL\",\"url\":\"\"}],\"listImageUrlInfo\":{\"isMain\":true,\"imageUrlType\":\"IMAGE_URL\",\"url\":\"\"},\"isExtraProduct\":true,\"baseProductName\":\"추가상품의 본상품\",\"baseProductNo\":123,\"isRecurringPayment\":false},\"claimReasonType\":\"CHANGE_MIND\",\"claimReasonDetail\":\"뿡뿡빵빵\",\"refundBankAccount\":{\"bank\":\"KB\",\"bankAccount\":\"123\",\"bankDepositorName\":\"홍디파\",\"bankName\":\"국민은행\"},\"claimClassType\":\"OPTION_CANCEL\",\"claimYmdt\":\"2025-10-31 09:56:16\",\"returnDelivery\":null,\"claimPriceInfo\":{\"productAmtInfo\":{\"standardPrice\":0,\"immediateDiscountAmt\":0,\"additionalDiscountAmt\":0,\"productCouponDiscountAmt\":0,\"exchangeAdjustAmt\":0,\"freeGiftDiscountAmt\":0,\"exchangeImmediateDiscountedPrice\":0,\"exchangeDiscountAmt\":0,\"immediateDiscountedPrice\":0,\"discountAmt\":0,\"totalAmt\":0},\"deliveryAmtInfo\":{\"beforeDeliveryAmt\":0,\"afterDeliveryAmt\":0,\"refundDeliveryAmt\":0,\"payOnDelivery\":true,\"sellerFault\":false,\"returnDeliveryAmt\":0,\"returnAdjustAmt\":0,\"buyerReturn\":false,\"exchangeDeliveryAmt\":0,\"exchangeAdjustAmt\":0,\"beforeRemoteDeliveryAmt\":0,\"afterRemoteDeliveryAmt\":0,\"totalAmt\":0},\"subtractionAmtInfo\":{\"cartCouponAmt\":0,\"deliveryCouponAmt\":0,\"refundAdjustAmt\":0,\"refundAdjustReason\":\"걍\",\"totalAmt\":0},\"refundPayAmt\":0,\"refundSubPayAmt\":0,\"refundExternalPayAmt\":0,\"refundExternalPayInfos\":[],\"refundType\":\"PAYCO\",\"refundPayType\":\"CREDIT_CARD\",\"refundTypeLabel\":\"신용카드\",\"additionalPayAmt\":0,\"refundMainPayAmt\":0},\"returnWayType\":\"BUYER_DIRECT_RETURN\",\"returnAddress\":{\"zipCd\":\"123\",\"address\":\"이매동\",\"jibunAddress\":\"삼매동\",\"name\":\"김어드\",\"detailAddress\":\"사매동\",\"contact1\":\"010-1234-1235\",\"contact2\":\"010-1234-1235\",\"mobileCountryCd\":\"82\",\"note\":null,\"countryCd\":\"KR\",\"addressStr\":\"(123) 이매동 사매동\"},\"exchangeAddress\":{\"zipCd\":\"123\",\"address\":\"이매동\",\"jibunAddress\":\"삼매동\",\"name\":\"김어드\",\"detailAddress\":\"사매동\",\"contact1\":\"010-1234-1235\",\"contact2\":\"010-1234-1235\",\"mobileCountryCd\":\"82\",\"note\":null,\"countryCd\":\"KR\",\"addressStr\":\"(123) 이매동 사매동\"},\"exchangePayInfo\":{\"exchangePayAmt\":0,\"payType\":\"CASH\",\"bankAccount\":{\"bank\":\"KB\",\"bankAccount\":\"123\",\"bankDepositorName\":\"홍디파\",\"bankName\":\"국민은행\"},\"remitter\":\"임래밋\"},\"exchangeBeforeDelivery\":true,\"claimImageUrls\":null}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/profile/claims/{claimNo}/withdraw",
+    "summary": "회원 클레임 철회하기(클레임번호)",
+    "description": "\n## 부가설명 및 특이사항\n클레임 번호로 신청된 클레임을 철회하는 API입니다.\n\n## 화면 예시\n[![](http://image.toast.com/aaaaahb/api-description/order/myorder/[PUT]%20profile_claims_withdraw%20%ED%81%B4%EB%A0%88%EC%9E%84%20%EC%B2%A0%ED%9A%8C%201-1.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/myorder/[PUT]%20profile_claims_withdraw%20%ED%81%B4%EB%A0%88%EC%9E%84%20%EC%B2%A0%ED%9A%8C%201-1.png)\n[![](http://image.toast.com/aaaaahb/api-description/order/myorder/[PUT]%20profile_claims_withdraw%20%ED%81%B4%EB%A0%88%EC%9E%84%20%EC%B2%A0%ED%9A%8C%201-2.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/myorder/[PUT]%20profile_claims_withdraw%20%ED%81%B4%EB%A0%88%EC%9E%84%20%EC%B2%A0%ED%9A%8C%201-2.png)\n",
+    "tags": ["Member"],
+    "parameters": [
+      {
+        "name": "claimNo",
+        "in": "path",
+        "description": "클레임 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "ClientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_CLIENTID"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC, MOBILE_WEB"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "로그인 인증키^|test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_ACCESS_TOKEN"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/profile/order-options/{orderOptionNo}/claims",
+    "summary": "회원 클레임 신청을 위한 정보 조회하기",
+    "description": "\n## 부가설명 및 특이사항\n선택옵션에 대한 클레임을 신청할 때 필요한 정보를 조회합니다.\n\n## 화면 예시\n[![](http://image.toast.com/aaaaahb/api-description/order/myorder/[GET]%20profile_order-options_claim%20%ED%81%B4%EB%A0%88%EC%9E%84%20%EC%8B%A0%EC%B2%AD%EA%B0%80%EB%8A%A5%20%EC%A0%95%EB%B3%B4%20%EC%A1%B0%ED%9A%8C%201-1.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/myorder/[GET]%20profile_order-options_claim%20%ED%81%B4%EB%A0%88%EC%9E%84%20%EC%8B%A0%EC%B2%AD%EA%B0%80%EB%8A%A5%20%EC%A0%95%EB%B3%B4%20%EC%A1%B0%ED%9A%8C%201-1.png)\n[![](http://image.toast.com/aaaaahb/api-description/order/myorder/[GET]%20profile_order-options_claim%20%ED%81%B4%EB%A0%88%EC%9E%84%20%EC%8B%A0%EC%B2%AD%EA%B0%80%EB%8A%A5%20%EC%A0%95%EB%B3%B4%20%EC%A1%B0%ED%9A%8C%201-2.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/myorder/[GET]%20profile_order-options_claim%20%ED%81%B4%EB%A0%88%EC%9E%84%20%EC%8B%A0%EC%B2%AD%EA%B0%80%EB%8A%A5%20%EC%A0%95%EB%B3%B4%20%EC%A1%B0%ED%9A%8C%201-2.png)\n            ",
+    "tags": ["Member"],
+    "parameters": [
+      {
+        "name": "orderOptionNo",
+        "in": "path",
+        "description": "주문 상품 옵션 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "claimType",
+        "in": "query",
+        "description": "클레임 타입(CANCEL: 취소, RETURN: 반품, EXCHANGE: 교환)^|CANCEL",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "ClientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_CLIENTID"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC, MOBILE_WEB"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "로그인 인증키^|test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_ACCESS_TOKEN"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json;charset=UTF-8": {
+            "schema": {
+              "$ref": "#/components/schemas/profile-order-options-orderOptionNo-claims-1445504772"
+            },
+            "examples": {
+              "get-profile-order-options-no-claims": {
+                "value": "{\"claimType\":\"EXCHANGE\",\"originalOption\":{\"orderNo\":\"1\",\"orderOptionNo\":1,\"productNo\":1,\"optionNo\":1,\"additionalProductNo\":1,\"imageUrl\":\"\",\"brandName\":\"brand-name\",\"productName\":\"상품1\",\"productNameEn\":null,\"optionName\":\"옵션1\",\"optionValue\":\"\",\"orderCnt\":1,\"orderStatusType\":\"BUY_CONFIRM\",\"claimStatusType\":\"CANCEL_DONE\",\"claimNo\":1,\"accumulationAmt\":0,\"refundable\":false,\"cancelable\":true,\"exchangeable\":true,\"returnable\":true,\"deliveryInternationalYn\":true,\"reservationDeliveryYmdt\":\"2025-10-31 09:56:15\",\"exchangeYn\":\"y\",\"deliverable\":true,\"delivery\":{\"invoiceNo\":\"1\",\"deliveryCompanyType\":\"ACI\",\"retrieveInvoiceUrl\":\"1\",\"deliveryCompanyTypeLabel\":\"1\",\"receiverInputLater\":false},\"price\":{\"salePrice\":0,\"addPrice\":0,\"immediateDiscountAmt\":0,\"additionalDiscountAmt\":0,\"accumulationRate\":0,\"standardPrice\":0,\"immediateDiscountedPrice\":0,\"buyPrice\":0,\"standardAmt\":0,\"immediateDiscountedAmt\":0,\"buyAmt\":0},\"orderStatusDate\":{\"registerYmdt\":\"2025-10-31 09:56:15\",\"buyConfirmYmdt\":\"2025-10-31 09:56:15\",\"reviewableYmdt\":\"2025-10-31 09:56:15\"},\"optionManagementCd\":null,\"brandNameEn\":\"1\",\"reservation\":true,\"optionTitle\":\"1\",\"inputs\":[{\"inputLabel\":\"1\",\"inputValue\":\"1\"}],\"nextActions\":[{\"nextActionType\":\"1\",\"uri\":\"1\"}],\"optionType\":\"1\",\"member\":true,\"optionUsed\":true,\"pgType\":\"PAYCO\",\"payType\":\"PAYCO\",\"claimReasonType\":null,\"claimReasonDetail\":null,\"isFreeGift\":false,\"isQuantityDiscount\":false,\"shippingAreaType\":\"MALL_SHIPPING_AREA\",\"claimStatusTypeLabel\":\"취소완료[환불완료]\",\"imageUrlInfo\":[{\"isMain\":true,\"imageUrlType\":\"IMAGE_URL\",\"url\":\"\"}],\"listImageUrlInfo\":{\"isMain\":true,\"imageUrlType\":\"IMAGE_URL\",\"url\":\"\"},\"isExtraProduct\":true,\"baseProductName\":\"추가상품의 본상품\",\"baseProductNo\":123,\"isRecurringPayment\":false},\"claimableOptions\":[{\"orderNo\":\"1\",\"orderOptionNo\":1,\"productNo\":1,\"optionNo\":1,\"additionalProductNo\":1,\"imageUrl\":\"\",\"brandName\":\"brand-name\",\"productName\":\"상품1\",\"productNameEn\":null,\"optionName\":\"옵션1\",\"optionValue\":\"\",\"orderCnt\":1,\"orderStatusType\":\"BUY_CONFIRM\",\"claimStatusType\":\"CANCEL_DONE\",\"claimNo\":1,\"accumulationAmt\":0,\"refundable\":false,\"cancelable\":true,\"exchangeable\":true,\"returnable\":true,\"deliveryInternationalYn\":true,\"reservationDeliveryYmdt\":\"2025-10-31 09:56:15\",\"exchangeYn\":\"y\",\"deliverable\":true,\"delivery\":{\"invoiceNo\":\"1\",\"deliveryCompanyType\":\"ACI\",\"retrieveInvoiceUrl\":\"1\",\"deliveryCompanyTypeLabel\":\"1\",\"receiverInputLater\":false},\"price\":{\"salePrice\":0,\"addPrice\":0,\"immediateDiscountAmt\":0,\"additionalDiscountAmt\":0,\"accumulationRate\":0,\"standardPrice\":0,\"immediateDiscountedPrice\":0,\"buyPrice\":0,\"standardAmt\":0,\"immediateDiscountedAmt\":0,\"buyAmt\":0},\"orderStatusDate\":{\"registerYmdt\":\"2025-10-31 09:56:15\",\"buyConfirmYmdt\":\"2025-10-31 09:56:15\",\"reviewableYmdt\":\"2025-10-31 09:56:15\"},\"optionManagementCd\":null,\"brandNameEn\":\"1\",\"reservation\":true,\"optionTitle\":\"1\",\"inputs\":[{\"inputLabel\":\"1\",\"inputValue\":\"1\"}],\"nextActions\":[{\"nextActionType\":\"1\",\"uri\":\"1\"}],\"optionType\":\"1\",\"member\":true,\"optionUsed\":true,\"pgType\":\"PAYCO\",\"payType\":\"PAYCO\",\"claimReasonType\":null,\"claimReasonDetail\":null,\"isFreeGift\":false,\"isQuantityDiscount\":false,\"shippingAreaType\":\"MALL_SHIPPING_AREA\",\"claimStatusTypeLabel\":\"취소완료[환불완료]\",\"imageUrlInfo\":[{\"isMain\":true,\"imageUrlType\":\"IMAGE_URL\",\"url\":\"\"}],\"listImageUrlInfo\":{\"isMain\":true,\"imageUrlType\":\"IMAGE_URL\",\"url\":\"\"},\"isExtraProduct\":true,\"baseProductName\":\"추가상품의 본상품\",\"baseProductNo\":123,\"isRecurringPayment\":false}],\"claimReasonTypes\":[{\"claimReasonType\":\"CHANGE_MIND\",\"responsibleObjectType\":\"BUYER\",\"label\":\"단순변심(색상,사이즈 등)\"}],\"responsibleObjectTypes\":[\"BUYER\",\"SELLER\"],\"payType\":\"CREDIT_CARD\",\"refundAccount\":null,\"availableBanks\":[{\"bank\":\"KDB\",\"label\":\"산업은행\"},{\"bank\":\"IBK\",\"label\":\"기업은행\"},{\"bank\":\"KB\",\"label\":\"국민은행\"},{\"bank\":\"SUHYUP\",\"label\":\"수협\"},{\"bank\":\"KEXIM\",\"label\":\"수출입은행\"},{\"bank\":\"NH\",\"label\":\"NH농협은행\"},{\"bank\":\"NHLOCAL\",\"label\":\"지역농축협\"},{\"bank\":\"WOORI\",\"label\":\"우리은행\"},{\"bank\":\"SC\",\"label\":\"SC제일은행\"},{\"bank\":\"CITY\",\"label\":\"한국씨티은행\"},{\"bank\":\"SUHYUP_LOCAL_BANK\",\"label\":\"수협중앙회\"},{\"bank\":\"DAEGU\",\"label\":\"대구은행\"},{\"bank\":\"PUSAN\",\"label\":\"부산은행\"},{\"bank\":\"GWANGJU\",\"label\":\"광주은행\"},{\"bank\":\"JEJU\",\"label\":\"제주은행\"},{\"bank\":\"JEONBUK\",\"label\":\"전북은행\"},{\"bank\":\"GYEONGNAM\",\"label\":\"경남은행\"},{\"bank\":\"KFCC\",\"label\":\"새마을금고\"},{\"bank\":\"CU\",\"label\":\"신협\"},{\"bank\":\"SANGHO\",\"label\":\"상호저축은행\"},{\"bank\":\"HSBC\",\"label\":\"HSBC은행\"},{\"bank\":\"DEUTSCHE\",\"label\":\"도이치은행\"},{\"bank\":\"NFCF\",\"label\":\"산림조합중앙회\"},{\"bank\":\"EPOST\",\"label\":\"우체국\"},{\"bank\":\"KEBHANA\",\"label\":\"KEB하나은행\"},{\"bank\":\"SHINHAN\",\"label\":\"신한은행\"},{\"bank\":\"KBANK\",\"label\":\"케이뱅크\"},{\"bank\":\"KAKAO\",\"label\":\"카카오뱅크\"},{\"bank\":\"TOSS\",\"label\":\"토스뱅크\"},{\"bank\":\"YUANTA\",\"label\":\"유안타증권\"},{\"bank\":\"KBSEC\",\"label\":\"KB증권\"},{\"bank\":\"MIRAEDAEWOO\",\"label\":\"미래에셋대우증권\"},{\"bank\":\"SAMSUNG\",\"label\":\"삼성증권\"},{\"bank\":\"HANKOOK\",\"label\":\"한국투자증권\"},{\"bank\":\"NH_INVEST\",\"label\":\"NH투자증권\"},{\"bank\":\"KYOBO\",\"label\":\"교보증권\"},{\"bank\":\"HI_INVEST\",\"label\":\"하이투자증권\"},{\"bank\":\"HMC_INVEST\",\"label\":\"HMC투자증권\"},{\"bank\":\"KIWOOM\",\"label\":\"키움증권\"},{\"bank\":\"EBEST\",\"label\":\"이베스트투자증권\"},{\"bank\":\"SK\",\"label\":\"SK증권\"},{\"bank\":\"DAISHIN\",\"label\":\"대신증권\"},{\"bank\":\"HANHWA\",\"label\":\"한화투자증권\"},{\"bank\":\"HANA_INVEST\",\"label\":\"하나금융투자\"},{\"bank\":\"SHINHAN_INVEST\",\"label\":\"신한금융투자\"},{\"bank\":\"DONGBU\",\"label\":\"DB금융투자\"},{\"bank\":\"EUGENE_INVEST\",\"label\":\"유진투자증권\"},{\"bank\":\"MERITZ_COMPREHENSIVE\",\"label\":\"메리츠종합금융증권\"},{\"bank\":\"BOOKOOK\",\"label\":\"부국증권\"},{\"bank\":\"SHINYOUNG\",\"label\":\"신영증권\"},{\"bank\":\"CAPE\",\"label\":\"케이프투자증권\"}],\"returnAddress\":{\"receiverName\":\"홍길동\",\"receiverZipCd\":\"12345\",\"receiverAddress\":\"서울시\",\"receiverJibunAddress\":\"지번주소\",\"receiverDetailAddress\":\"상세주소\",\"receiverCity\":null,\"receiverState\":null,\"receiverContact1\":\"010-1234-5678\",\"receiverContact2\":\"010-1234-5678\",\"receiverMobileCountryCd\":\"82\",\"customsIdNumber\":\"P111111111111\",\"countryCd\":\"KR\",\"deliveryMemo\":\"배송메모\",\"shippingEtcInfo\":null,\"addressView\":\"(12345) 서울시 상세주소\"},\"returnWarehouse\":{\"zipCd\":\"12345\",\"address\":\"서울시\",\"jibunAddress\":\"지번주소\",\"detailAddress\":\"상세주소\",\"receiverName\":\"홍길동\",\"contact\":\"010-1234-5678\",\"substitutionText\":\"\",\"summary\":\"\"},\"exchangeAddress\":{\"receiverName\":\"홍길동\",\"receiverZipCd\":\"12345\",\"receiverAddress\":\"서울시\",\"receiverJibunAddress\":\"지번주소\",\"receiverDetailAddress\":\"상세주소\",\"receiverCity\":null,\"receiverState\":null,\"receiverContact1\":\"010-1234-5678\",\"receiverContact2\":\"010-1234-5678\",\"receiverMobileCountryCd\":\"82\",\"customsIdNumber\":\"P111111111111\",\"countryCd\":\"KR\",\"deliveryMemo\":\"배송메모\",\"shippingEtcInfo\":null,\"addressView\":\"(12345) 서울시 상세주소\"},\"deliveryCompanyTypeWithLabels\":[{\"deliveryCompanyType\":\"CJ\",\"label\":\"CJ대한통운\"},{\"deliveryCompanyType\":\"POST\",\"label\":\"우체국택배\"},{\"deliveryCompanyType\":\"HANJIN\",\"label\":\"한진택배\"},{\"deliveryCompanyType\":\"GTX\",\"label\":\"gtx로지스\"},{\"deliveryCompanyType\":\"LOTTE\",\"label\":\"롯데택배\"},{\"deliveryCompanyType\":\"KGB\",\"label\":\"kgb택배\"},{\"deliveryCompanyType\":\"LOGEN\",\"label\":\"로젠택배\"},{\"deliveryCompanyType\":\"GSI\",\"label\":\"gsi Express\"},{\"deliveryCompanyType\":\"KGL\",\"label\":\"KG로지스\"},{\"deliveryCompanyType\":\"INTRAS\",\"label\":\"INTRAS\"},{\"deliveryCompanyType\":\"UPS\",\"label\":\"UPS\"},{\"deliveryCompanyType\":\"CHUNIL\",\"label\":\"천일택배\"},{\"deliveryCompanyType\":\"KDEXP\",\"label\":\"경동택배\"},{\"deliveryCompanyType\":\"HDEXP\",\"label\":\"합동택배\"},{\"deliveryCompanyType\":\"ILYANG\",\"label\":\"일양택배\"},{\"deliveryCompanyType\":\"POST_EMS\",\"label\":\"우체국 EMS\"},{\"deliveryCompanyType\":\"DAESIN\",\"label\":\"대신택배\"},{\"deliveryCompanyType\":\"CVS\",\"label\":\"GSPostbox택배\"},{\"deliveryCompanyType\":\"DHL\",\"label\":\"DHL\"},{\"deliveryCompanyType\":\"FEDEX\",\"label\":\"FEDEX\"},{\"deliveryCompanyType\":\"GSM\",\"label\":\"GSM국제택배\"},{\"deliveryCompanyType\":\"WARPEX\",\"label\":\"WarpEx\"},{\"deliveryCompanyType\":\"WIZWA\",\"label\":\"WIZWA\"},{\"deliveryCompanyType\":\"ACI\",\"label\":\"ACI Express\"},{\"deliveryCompanyType\":\"PANTOS\",\"label\":\"범한판토스\"},{\"deliveryCompanyType\":\"CJ_INTERNATIONAL\",\"label\":\"CJ대한통운(국제택배)\"},{\"deliveryCompanyType\":\"TNT\",\"label\":\"TNT\"},{\"deliveryCompanyType\":\"CU\",\"label\":\"CU편의점택배\"},{\"deliveryCompanyType\":\"KUNYOUNG\",\"label\":\"건영택배\"},{\"deliveryCompanyType\":\"LOTTE_INTERNATIONAL\",\"label\":\"롯데택배(국제택배)\"},{\"deliveryCompanyType\":\"HONAM\",\"label\":\"호남택배\"},{\"deliveryCompanyType\":\"HANIPS\",\"label\":\"한의사랑\"},{\"deliveryCompanyType\":\"IPARCEL\",\"label\":\"i-Parcel\"},{\"deliveryCompanyType\":\"SLX\",\"label\":\"SLX택배\"},{\"deliveryCompanyType\":\"USPS\",\"label\":\"USPS\"},{\"deliveryCompanyType\":\"WONDERS\",\"label\":\"원더스퀵\"},{\"deliveryCompanyType\":\"REGISTPOST\",\"label\":\"우편등기\"},{\"deliveryCompanyType\":\"DHLDE\",\"label\":\"DHL(독일)\"},{\"deliveryCompanyType\":\"EZUSA\",\"label\":\"EZUSA\"},{\"deliveryCompanyType\":\"SWGEXP\",\"label\":\"성원글로벌\"},{\"deliveryCompanyType\":\"DAEWOON\",\"label\":\"대운글로벌\"},{\"deliveryCompanyType\":\"DODOFLEX\",\"label\":\"도도플렉스\"},{\"deliveryCompanyType\":\"NH_LOGIS\",\"label\":\"농협택배\"},{\"deliveryCompanyType\":\"UFO\",\"label\":\"유에프오\"},{\"deliveryCompanyType\":\"TODAY_PICKUP\",\"label\":\"카카오 T 당일배송\"},{\"deliveryCompanyType\":\"QEXPRESS\",\"label\":\"큐익스프레스\"},{\"deliveryCompanyType\":\"PINGPONG\",\"label\":\"핑퐁\"},{\"deliveryCompanyType\":\"CR_LOGITECH\",\"label\":\"CR Logitech\"},{\"deliveryCompanyType\":\"TODAY\",\"label\":\"투데이\"},{\"deliveryCompanyType\":\"SELLUV\",\"label\":\"셀럽\"},{\"deliveryCompanyType\":\"EXMATE\",\"label\":\"이엑스메이트\"},{\"deliveryCompanyType\":\"WINION_LOGIS\",\"label\":\"위니온로지스\"},{\"deliveryCompanyType\":\"ETC\",\"label\":\"기타\"}],\"nonClaimReason\":null,\"deliveryCompanyTypes\":[\"CJ\",\"POST\",\"HANJIN\",\"GTX\",\"LOTTE\",\"KGB\",\"LOGEN\",\"GSI\",\"KGL\",\"INTRAS\",\"UPS\",\"CHUNIL\",\"KDEXP\",\"HDEXP\",\"ILYANG\",\"POST_EMS\",\"DAESIN\",\"CVS\",\"DHL\",\"FEDEX\",\"GSM\",\"WARPEX\",\"WIZWA\",\"ACI\",\"PANTOS\",\"CJ_INTERNATIONAL\",\"TNT\",\"CU\",\"KUNYOUNG\",\"LOTTE_INTERNATIONAL\",\"HONAM\",\"HANIPS\",\"IPARCEL\",\"SLX\",\"USPS\",\"WONDERS\",\"REGISTPOST\",\"DHLDE\",\"EZUSA\",\"SWGEXP\",\"DAEWOON\",\"DODOFLEX\",\"NH_LOGIS\",\"UFO\",\"TODAY_PICKUP\",\"QEXPRESS\",\"PINGPONG\",\"CR_LOGITECH\",\"TODAY\",\"SELLUV\",\"EXMATE\",\"WINION_LOGIS\",\"ETC\"]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/profile/order-options/{orderOptionNo}/claims/cancel",
+    "summary": "회원 옵션취소 신청하기(단일옵션)",
+    "description": "\n## 부가설명 및 특이사항\n단일옵션을 취소신청하는 API입니다.\n\n## API Version\n### 1.0\n기존 방식으로, API 요청에 성공 시 204 No Content를 응답합니다.\n### 1.1 (개발중)\n변경된 방식으로, API 요청에 성공 시 200 Ok 와 신청된 클레임과 옵션에 대한 정보를 응답합니다. (문서 참조)\n\n## 화면 예시\n[![](http://image.toast.com/aaaaahb/api-description/order/myorder/[POST]%20profile_order-options_claim_cancle%20%EC%A3%BC%EB%AC%B8%EC%B7%A8%EC%86%8C%201-1.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/myorder/[POST]%20profile_order-options_claim_cancle%20%EC%A3%BC%EB%AC%B8%EC%B7%A8%EC%86%8C%201-1.png)\n[![](http://image.toast.com/aaaaahb/api-description/order/myorder/[POST]%20profile_order-options_claim_cancle%20%EC%A3%BC%EB%AC%B8%EC%B7%A8%EC%86%8C%201-2.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/myorder/[POST]%20profile_order-options_claim_cancle%20%EC%A3%BC%EB%AC%B8%EC%B7%A8%EC%86%8C%201-2.png)\n",
+    "tags": ["Member"],
+    "parameters": [
+      {
+        "name": "orderOptionNo",
+        "in": "path",
+        "description": "주문 상품 옵션 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "ClientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_CLIENTID"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC, MOBILE_WEB"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "로그인 인증키^|test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_ACCESS_TOKEN"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.1"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/profile-order-options-orderOptionNo-claims-cancel-1041878093"
+          },
+          "examples": {
+            "post-profile-order-options-no-claims-cancel": {
+              "value": "{\"claimType\":\"CANCEL\",\"claimReasonType\":\"CHANGE_MIND\",\"claimReasonDetail\":\"사유\",\"bankAccountInfo\":null,\"saveBankAccountInfo\":false,\"responsibleObjectType\":null,\"productCnt\":1,\"refundsImmediately\":true}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/guest-order-options-orderOptionNo-claims-return1157243429"
+            },
+            "examples": {
+              "post-profile-order-options-no-claims-cancel": {
+                "value": "{\"claimNo\":1,\"claimedOptions\":[{\"originOrderOptionNo\":1,\"originOrderCnt\":2,\"orderOptionNo\":2,\"orderCnt\":3}]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/profile/order-options/{orderOptionNo}/claims/estimate",
+    "summary": "회원 클레임시 변경되는 주문의 환불 예상금액 계산하기(단일옵션)",
+    "description": "\n## 부가설명 및 특이사항\n선택옵션을 취소할 경우 환불 예상금액을 미리 계산하는 API입니다.\n\n## 참고\nClaimType을 EXCHANGE로 요청 시 exchangeProductNo, exchangeOptionNo, exchangeCnt가 null일 경우\n동일상품, 동일옵션, 교환수량으로 환불예상금액을 조회합니다.\n\n## 화면 예시\n[![](http://image.toast.com/aaaaahb/api-description/order/myorder/[GET]%20profile_order-options_claim_estimate%20클레임%20시%20변경되는%20주문%20환불계산%201-1.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/myorder/[GET]%20profile_order-options_claim_estimate%20클레임%20시%20변경되는%20주문%20환불계산%201-1.png)\n[![](http://image.toast.com/aaaaahb/api-description/order/myorder/[GET]%20profile_order-options_claim_estimate%20클레임%20시%20변경되는%20주문%20환불계산%201-2.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/myorder/[GET]%20profile_order-options_claim_estimate%20클레임%20시%20변경되는%20주문%20환불계산%201-2.png)\n",
+    "tags": ["Member"],
+    "parameters": [
+      {
+        "name": "orderOptionNo",
+        "in": "path",
+        "description": "주문 상품 옵션 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "claimReasonType",
+        "in": "query",
+        "description": "클레임사유(CHANGE_MIND: 단순변심(색상,사이즈 등), DEFECTIVE_PRODUCT: 상품불량/파손, WRONG_DELIVERY: 배송누락/오배송, OUT_OF_STOCK_SYSTEM: 재고부족(품절취소), CANCEL_BEFORE_PAY: 입금전취소, WRONG_PRODUCT_DETAIL: 상품상세 정보와 다름, DELAY_DELIVERY: 판매자 배송 지연, OTHERS_SELLER: 기타(판매자 귀책), OTHERS_BUYER: 기타(구매자 귀책), OUT_OF_STOCK: 상품 품절/재고 없음, LATER_INPUT_ORDER: 배송지 미입력 취소, LATER_INPUT_ORDER_RECEIVER_CANCEL: 선물거절취소)^|CHANGE_MIND",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "claimType",
+        "in": "query",
+        "description": "클레임타입(CANCEL: 취소, RETURN: 반품, EXCHANGE: 교환)^|CANCEL",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "exchangeCnt",
+        "in": "query",
+        "description": "교환할수량(claimType이 EXCHANGE인 경우)^|1",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "exchangeOptionNo",
+        "in": "query",
+        "description": "교환할옵션번호(claimType이 EXCHANGE인 경우)^|1",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "exchangeProductNo",
+        "in": "query",
+        "description": "교환할상품번호(claimType이 EXCHANGE인 경우)^|1",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "productCnt",
+        "in": "query",
+        "description": "취소/반품할 제품수량^|1",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "responsibleObjectType",
+        "in": "query",
+        "description": "귀책 - responsibleObjectType이 null이면 ClaimReasonType에 매핑되는 귀책 적용(CHANGE_MIND, CANCEL_BEFORE_PAY, OTHERS_BUYER -> BUYER / DEFECTIVE_PRODUCT, WRONG_DELIVERY, OUT_OF_STOCK_SYSTEM, WRONG_PRODUCT_DETAIL, DELAY_DELIVERY, OUT_OF_STOCK, OTHERS_SELLER -> SELLER)(BUYER: 구매자귀책, SELLER: 판매자귀책)^|BUYER",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "returnWayType",
+        "in": "query",
+        "description": "반품상품 수거방법(SELLER_COLLECT: 판매자수거요청, BUYER_DIRECT_RETURN: 구매자직접반품)^|SELLER_COLLECT",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "ClientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_CLIENTID"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC, MOBILE_WEB"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "로그인 인증키^|test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_ACCESS_TOKEN"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json;charset=UTF-8": {
+            "schema": {
+              "$ref": "#/components/schemas/guest-order-options-orderOptionNo-claims-estimate974114982"
+            },
+            "examples": {
+              "get-profile-order-options-no-claims-estimate": {
+                "value": "{\"productAmtInfo\":{\"standardPrice\":0,\"immediateDiscountAmt\":0,\"additionalDiscountAmt\":0,\"productCouponDiscountAmt\":0,\"exchangeAdjustAmt\":0,\"freeGiftDiscountAmt\":0,\"exchangeImmediateDiscountedPrice\":0,\"exchangeDiscountAmt\":0,\"immediateDiscountedPrice\":0,\"discountAmt\":0,\"totalAmt\":0},\"deliveryAmtInfo\":{\"beforeDeliveryAmt\":0,\"afterDeliveryAmt\":0,\"refundDeliveryAmt\":0,\"payOnDelivery\":true,\"sellerFault\":false,\"returnDeliveryAmt\":0,\"returnAdjustAmt\":0,\"buyerReturn\":false,\"exchangeDeliveryAmt\":0,\"exchangeAdjustAmt\":0,\"beforeRemoteDeliveryAmt\":0,\"afterRemoteDeliveryAmt\":0,\"totalAmt\":0},\"subtractionAmtInfo\":{\"cartCouponAmt\":0,\"deliveryCouponAmt\":0,\"refundAdjustAmt\":0,\"refundAdjustReason\":\"걍\",\"totalAmt\":0},\"refundPayAmt\":0,\"refundSubPayAmt\":0,\"refundExternalPayAmt\":0,\"refundExternalPayInfos\":[],\"refundType\":\"PAYCO\",\"refundPayType\":\"CREDIT_CARD\",\"refundTypeLabel\":\"신용카드\",\"additionalPayAmt\":0,\"refundMainPayAmt\":0}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/profile/order-options/{orderOptionNo}/claims/exchange",
+    "summary": "회원 클레임 교환 신청하기",
+    "description": "\n## 부가설명 및 특이사항\n선택옵션을 교환하는 API입니다.\n\n## API Version\n### 1.0\n기존 방식으로, API 요청에 성공 시 204 No Content를 응답합니다.\n### 1.1 (개발중)\n변경된 방식으로, API 요청에 성공 시 200 Ok 와 신청된 클레임과 옵션에 대한 정보를 응답합니다. (문서 참조)",
+    "tags": ["Member"],
+    "parameters": [
+      {
+        "name": "orderOptionNo",
+        "in": "path",
+        "description": "주문 상품 옵션 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "ClientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_CLIENTID"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC, MOBILE_WEB"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "로그인 인증키^|test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_ACCESS_TOKEN"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.1"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/profile-order-options-orderOptionNo-claims-exchange-42712885"
+          },
+          "examples": {
+            "post-profile-order-options-no-claims-exchange": {
+              "value": "{\"claimImageUrls\":[\"url1\",\"url2\",\"url3\"],\"productCnt\":1,\"claimReasonType\":\"CANCEL_BEFORE_PAY\",\"claimReasonDetail\":\"상세사유\",\"bankAccountInfo\":{\"bank\":\"KB\",\"bankAccount\":\"111111111111\",\"bankDepositorName\":\"홍길동\",\"bankName\":\"국민은행\"},\"saveBankAccountInfo\":false,\"returnAddress\":{\"receiverName\":\"홍길동\",\"receiverZipCd\":\"000000\",\"receiverAddress\":\"경기도 성남시 분당구 대왕판교로645번길 12\",\"receiverJibunAddress\":\"경기도 성남시 분당구 삼평동 629번지 NHN 플레이뮤지엄\",\"receiverDetailAddress\":\"16 NHN 플레이뮤지엄\",\"receiverCity\":null,\"receiverState\":null,\"receiverContact1\":\"010-000-0000\",\"receiverContact2\":\"010-000-0000\",\"receiverMobileCountryCd\":\"82\",\"customsIdNumber\":\"P12341234\",\"countryCd\":\"KR\",\"deliveryMemo\":\"택배실에 맡겨 주세요.\",\"receiverFirstName\":null,\"receiverLastName\":null},\"returnWayType\":\"BUYER_DIRECT_RETURN\",\"exchangeOption\":{\"additionalProductNo\":1,\"inputTexts\":[{\"inputLabel\":\"사이즈\",\"inputValue\":\"14호\"}],\"optionNo\":1,\"orderCnt\":1,\"productNo\":1},\"exchangeAddress\":{\"receiverName\":\"홍길동\",\"receiverZipCd\":\"000000\",\"receiverAddress\":\"경기도 성남시 분당구 대왕판교로645번길 12\",\"receiverJibunAddress\":\"경기도 성남시 분당구 삼평동 629번지 NHN 플레이뮤지엄\",\"receiverDetailAddress\":\"16 NHN 플레이뮤지엄\",\"receiverCity\":null,\"receiverState\":null,\"receiverContact1\":\"010-000-0000\",\"receiverContact2\":\"010-000-0000\",\"receiverMobileCountryCd\":\"82\",\"customsIdNumber\":\"P12341234\",\"countryCd\":\"KR\",\"deliveryMemo\":\"택배실에 맡겨 주세요.\",\"receiverFirstName\":null,\"receiverLastName\":null},\"responsibleObjectType\":\"BUYER\",\"invoiceNo\":null,\"deliveryCompanyType\":null,\"additionalPayType\":null,\"additionalPayBankAccount\":null,\"additionalPayRemitter\":null,\"orderStatusType\":null}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/guest-order-options-orderOptionNo-claims-return1157243429"
+            },
+            "examples": {
+              "post-profile-order-options-no-claims-exchange": {
+                "value": "{\"claimNo\":1,\"claimedOptions\":[{\"originOrderOptionNo\":1,\"originOrderCnt\":2,\"orderOptionNo\":2,\"orderCnt\":3}]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/profile/order-options/{orderOptionNo}/claims/result",
+    "summary": "회원 클레임 상세보기(주문상품 옵션번호)",
+    "description": "\n## 부가설명 및 특이사항\n주문상품 옵션번호로 클레임 세부 내역을 조회하는 API입니다.\n\n## 화면 예시\n[![](http://image.toast.com/aaaaahb/api-description/order/myorder/[PUT]%20profile_order-options_claim_result%20%ED%81%B4%EB%A0%88%EC%9E%84%20%EC%83%81%EC%84%B8%EB%B3%B4%EA%B8%B0%201-1.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/myorder/[PUT]%20profile_order-options_claim_result%20%ED%81%B4%EB%A0%88%EC%9E%84%20%EC%83%81%EC%84%B8%EB%B3%B4%EA%B8%B0%201-1.png)\n[![](http://image.toast.com/aaaaahb/api-description/order/myorder/[PUT]%20profile_order-options_claim_result%20%ED%81%B4%EB%A0%88%EC%9E%84%20%EC%83%81%EC%84%B8%EB%B3%B4%EA%B8%B0%201-2.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/myorder/[PUT]%20profile_order-options_claim_result%20%ED%81%B4%EB%A0%88%EC%9E%84%20%EC%83%81%EC%84%B8%EB%B3%B4%EA%B8%B0%201-2.png)\n",
+    "tags": ["Member"],
+    "parameters": [
+      {
+        "name": "orderOptionNo",
+        "in": "path",
+        "description": "주문 상품 옵션 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "ClientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_CLIENTID"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC, MOBILE_WEB"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "로그인 인증키^|test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_ACCESS_TOKEN"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json;charset=UTF-8": {
+            "schema": {
+              "$ref": "#/components/schemas/guest-order-options-orderOptionNo-claims-result380162098"
+            },
+            "examples": {
+              "get-profile-order-options-no-claims-result": {
+                "value": "{\"orderProductOptionNo\":1,\"claimNo\":1,\"claimType\":\"CANCEL\",\"refundType\":\"PAYCO\",\"claimedOption\":{\"orderNo\":\"1\",\"orderOptionNo\":1,\"productNo\":1,\"optionNo\":1,\"additionalProductNo\":1,\"imageUrl\":\"\",\"brandName\":\"brand-name\",\"productName\":\"상품1\",\"productNameEn\":null,\"optionName\":\"옵션1\",\"optionValue\":\"\",\"orderCnt\":1,\"orderStatusType\":\"BUY_CONFIRM\",\"claimStatusType\":\"CANCEL_DONE\",\"claimNo\":1,\"accumulationAmt\":0,\"refundable\":false,\"cancelable\":true,\"exchangeable\":true,\"returnable\":true,\"deliveryInternationalYn\":true,\"reservationDeliveryYmdt\":\"2025-10-31 09:56:15\",\"exchangeYn\":\"y\",\"deliverable\":true,\"delivery\":{\"invoiceNo\":\"1\",\"deliveryCompanyType\":\"ACI\",\"retrieveInvoiceUrl\":\"1\",\"deliveryCompanyTypeLabel\":\"1\",\"receiverInputLater\":false},\"price\":{\"salePrice\":0,\"addPrice\":0,\"immediateDiscountAmt\":0,\"additionalDiscountAmt\":0,\"accumulationRate\":0,\"standardPrice\":0,\"immediateDiscountedPrice\":0,\"buyPrice\":0,\"standardAmt\":0,\"immediateDiscountedAmt\":0,\"buyAmt\":0},\"orderStatusDate\":{\"registerYmdt\":\"2025-10-31 09:56:15\",\"buyConfirmYmdt\":\"2025-10-31 09:56:15\",\"reviewableYmdt\":\"2025-10-31 09:56:15\"},\"optionManagementCd\":null,\"brandNameEn\":\"1\",\"reservation\":true,\"optionTitle\":\"1\",\"inputs\":[{\"inputLabel\":\"1\",\"inputValue\":\"1\"}],\"nextActions\":[{\"nextActionType\":\"1\",\"uri\":\"1\"}],\"optionType\":\"1\",\"member\":true,\"optionUsed\":true,\"pgType\":\"PAYCO\",\"payType\":\"PAYCO\",\"claimReasonType\":null,\"claimReasonDetail\":null,\"isFreeGift\":false,\"isQuantityDiscount\":false,\"shippingAreaType\":\"MALL_SHIPPING_AREA\",\"claimStatusTypeLabel\":\"취소완료[환불완료]\",\"imageUrlInfo\":[{\"isMain\":true,\"imageUrlType\":\"IMAGE_URL\",\"url\":\"\"}],\"listImageUrlInfo\":{\"isMain\":true,\"imageUrlType\":\"IMAGE_URL\",\"url\":\"\"},\"isExtraProduct\":true,\"baseProductName\":\"추가상품의 본상품\",\"baseProductNo\":123,\"isRecurringPayment\":false},\"claimedOptions\":[{\"orderNo\":\"1\",\"orderOptionNo\":1,\"productNo\":1,\"optionNo\":1,\"additionalProductNo\":1,\"imageUrl\":\"\",\"brandName\":\"brand-name\",\"productName\":\"상품1\",\"productNameEn\":null,\"optionName\":\"옵션1\",\"optionValue\":\"\",\"orderCnt\":1,\"orderStatusType\":\"BUY_CONFIRM\",\"claimStatusType\":\"CANCEL_DONE\",\"claimNo\":1,\"accumulationAmt\":0,\"refundable\":false,\"cancelable\":true,\"exchangeable\":true,\"returnable\":true,\"deliveryInternationalYn\":true,\"reservationDeliveryYmdt\":\"2025-10-31 09:56:15\",\"exchangeYn\":\"y\",\"deliverable\":true,\"delivery\":{\"invoiceNo\":\"1\",\"deliveryCompanyType\":\"ACI\",\"retrieveInvoiceUrl\":\"1\",\"deliveryCompanyTypeLabel\":\"1\",\"receiverInputLater\":false},\"price\":{\"salePrice\":0,\"addPrice\":0,\"immediateDiscountAmt\":0,\"additionalDiscountAmt\":0,\"accumulationRate\":0,\"standardPrice\":0,\"immediateDiscountedPrice\":0,\"buyPrice\":0,\"standardAmt\":0,\"immediateDiscountedAmt\":0,\"buyAmt\":0},\"orderStatusDate\":{\"registerYmdt\":\"2025-10-31 09:56:15\",\"buyConfirmYmdt\":\"2025-10-31 09:56:15\",\"reviewableYmdt\":\"2025-10-31 09:56:15\"},\"optionManagementCd\":null,\"brandNameEn\":\"1\",\"reservation\":true,\"optionTitle\":\"1\",\"inputs\":[{\"inputLabel\":\"1\",\"inputValue\":\"1\"}],\"nextActions\":[{\"nextActionType\":\"1\",\"uri\":\"1\"}],\"optionType\":\"1\",\"member\":true,\"optionUsed\":true,\"pgType\":\"PAYCO\",\"payType\":\"PAYCO\",\"claimReasonType\":null,\"claimReasonDetail\":null,\"isFreeGift\":false,\"isQuantityDiscount\":false,\"shippingAreaType\":\"MALL_SHIPPING_AREA\",\"claimStatusTypeLabel\":\"취소완료[환불완료]\",\"imageUrlInfo\":[{\"isMain\":true,\"imageUrlType\":\"IMAGE_URL\",\"url\":\"\"}],\"listImageUrlInfo\":{\"isMain\":true,\"imageUrlType\":\"IMAGE_URL\",\"url\":\"\"},\"isExtraProduct\":true,\"baseProductName\":\"추가상품의 본상품\",\"baseProductNo\":123,\"isRecurringPayment\":false}],\"exchangedOption\":{\"orderNo\":\"1\",\"orderOptionNo\":1,\"productNo\":1,\"optionNo\":1,\"additionalProductNo\":1,\"imageUrl\":\"\",\"brandName\":\"brand-name\",\"productName\":\"상품1\",\"productNameEn\":null,\"optionName\":\"옵션1\",\"optionValue\":\"\",\"orderCnt\":1,\"orderStatusType\":\"BUY_CONFIRM\",\"claimStatusType\":\"CANCEL_DONE\",\"claimNo\":1,\"accumulationAmt\":0,\"refundable\":false,\"cancelable\":true,\"exchangeable\":true,\"returnable\":true,\"deliveryInternationalYn\":true,\"reservationDeliveryYmdt\":\"2025-10-31 09:56:15\",\"exchangeYn\":\"y\",\"deliverable\":true,\"delivery\":{\"invoiceNo\":\"1\",\"deliveryCompanyType\":\"ACI\",\"retrieveInvoiceUrl\":\"1\",\"deliveryCompanyTypeLabel\":\"1\",\"receiverInputLater\":false},\"price\":{\"salePrice\":0,\"addPrice\":0,\"immediateDiscountAmt\":0,\"additionalDiscountAmt\":0,\"accumulationRate\":0,\"standardPrice\":0,\"immediateDiscountedPrice\":0,\"buyPrice\":0,\"standardAmt\":0,\"immediateDiscountedAmt\":0,\"buyAmt\":0},\"orderStatusDate\":{\"registerYmdt\":\"2025-10-31 09:56:15\",\"buyConfirmYmdt\":\"2025-10-31 09:56:15\",\"reviewableYmdt\":\"2025-10-31 09:56:15\"},\"optionManagementCd\":null,\"brandNameEn\":\"1\",\"reservation\":true,\"optionTitle\":\"1\",\"inputs\":[{\"inputLabel\":\"1\",\"inputValue\":\"1\"}],\"nextActions\":[{\"nextActionType\":\"1\",\"uri\":\"1\"}],\"optionType\":\"1\",\"member\":true,\"optionUsed\":true,\"pgType\":\"PAYCO\",\"payType\":\"PAYCO\",\"claimReasonType\":null,\"claimReasonDetail\":null,\"isFreeGift\":false,\"isQuantityDiscount\":false,\"shippingAreaType\":\"MALL_SHIPPING_AREA\",\"claimStatusTypeLabel\":\"취소완료[환불완료]\",\"imageUrlInfo\":[{\"isMain\":true,\"imageUrlType\":\"IMAGE_URL\",\"url\":\"\"}],\"listImageUrlInfo\":{\"isMain\":true,\"imageUrlType\":\"IMAGE_URL\",\"url\":\"\"},\"isExtraProduct\":true,\"baseProductName\":\"추가상품의 본상품\",\"baseProductNo\":123,\"isRecurringPayment\":false},\"claimReasonType\":\"CHANGE_MIND\",\"claimReasonDetail\":\"뿡뿡빵빵\",\"refundBankAccount\":{\"bank\":\"KB\",\"bankAccount\":\"123\",\"bankDepositorName\":\"홍디파\",\"bankName\":\"국민은행\"},\"claimClassType\":\"OPTION_CANCEL\",\"claimYmdt\":\"2025-10-31 09:56:16\",\"returnDelivery\":null,\"claimPriceInfo\":{\"productAmtInfo\":{\"standardPrice\":0,\"immediateDiscountAmt\":0,\"additionalDiscountAmt\":0,\"productCouponDiscountAmt\":0,\"exchangeAdjustAmt\":0,\"freeGiftDiscountAmt\":0,\"exchangeImmediateDiscountedPrice\":0,\"exchangeDiscountAmt\":0,\"immediateDiscountedPrice\":0,\"discountAmt\":0,\"totalAmt\":0},\"deliveryAmtInfo\":{\"beforeDeliveryAmt\":0,\"afterDeliveryAmt\":0,\"refundDeliveryAmt\":0,\"payOnDelivery\":true,\"sellerFault\":false,\"returnDeliveryAmt\":0,\"returnAdjustAmt\":0,\"buyerReturn\":false,\"exchangeDeliveryAmt\":0,\"exchangeAdjustAmt\":0,\"beforeRemoteDeliveryAmt\":0,\"afterRemoteDeliveryAmt\":0,\"totalAmt\":0},\"subtractionAmtInfo\":{\"cartCouponAmt\":0,\"deliveryCouponAmt\":0,\"refundAdjustAmt\":0,\"refundAdjustReason\":\"걍\",\"totalAmt\":0},\"refundPayAmt\":0,\"refundSubPayAmt\":0,\"refundExternalPayAmt\":0,\"refundExternalPayInfos\":[],\"refundType\":\"PAYCO\",\"refundPayType\":\"CREDIT_CARD\",\"refundTypeLabel\":\"신용카드\",\"additionalPayAmt\":0,\"refundMainPayAmt\":0},\"returnWayType\":\"BUYER_DIRECT_RETURN\",\"returnAddress\":{\"zipCd\":\"123\",\"address\":\"이매동\",\"jibunAddress\":\"삼매동\",\"name\":\"김어드\",\"detailAddress\":\"사매동\",\"contact1\":\"010-1234-1235\",\"contact2\":\"010-1234-1235\",\"mobileCountryCd\":\"82\",\"note\":null,\"countryCd\":\"KR\",\"addressStr\":\"(123) 이매동 사매동\"},\"exchangeAddress\":{\"zipCd\":\"123\",\"address\":\"이매동\",\"jibunAddress\":\"삼매동\",\"name\":\"김어드\",\"detailAddress\":\"사매동\",\"contact1\":\"010-1234-1235\",\"contact2\":\"010-1234-1235\",\"mobileCountryCd\":\"82\",\"note\":null,\"countryCd\":\"KR\",\"addressStr\":\"(123) 이매동 사매동\"},\"exchangePayInfo\":{\"exchangePayAmt\":0,\"payType\":\"CASH\",\"bankAccount\":{\"bank\":\"KB\",\"bankAccount\":\"123\",\"bankDepositorName\":\"홍디파\",\"bankName\":\"국민은행\"},\"remitter\":\"임래밋\"},\"exchangeBeforeDelivery\":true,\"claimImageUrls\":null}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/profile/order-options/{orderOptionNo}/claims/return",
+    "summary": "회원 반품 신청하기(단일옵션)",
+    "description": "\n## 부가설명 및 특이사항\n단일옵션을 반품하는 API입니다.\n\n## API Version\n### 1.0\n기존 방식으로, API 요청에 성공 시 204 No Content를 응답합니다.\n### 1.1 (개발중)\n변경된 방식으로, API 요청에 성공 시 200 Ok 와 신청된 클레임과 옵션에 대한 정보를 응답합니다. (문서 참조)\n\n## 화면 예시\n[![](http://image.toast.com/aaaaahb/api-description/order/myorder/[POST]%20profile_order-options_claim_return%20%EB%B0%98%ED%92%88%EC%8B%A0%EC%B2%AD%201-1.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/myorder/[POST]%20profile_order-options_claim_return%20%EB%B0%98%ED%92%88%EC%8B%A0%EC%B2%AD%201-1.png)\n[![](http://image.toast.com/aaaaahb/api-description/order/myorder/[POST]%20profile_order-options_claim_return%20%EB%B0%98%ED%92%88%EC%8B%A0%EC%B2%AD%201-2.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/myorder/[POST]%20profile_order-options_claim_return%20%EB%B0%98%ED%92%88%EC%8B%A0%EC%B2%AD%201-2.png)\n",
+    "tags": ["Member"],
+    "parameters": [
+      {
+        "name": "orderOptionNo",
+        "in": "path",
+        "description": "주문 상품 옵션 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "ClientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_CLIENTID"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC, MOBILE_WEB"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "로그인 인증키^|test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_ACCESS_TOKEN"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.1"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/guest-order-options-orderOptionNo-claims-return-1392338352"
+          },
+          "examples": {
+            "post-profile-order-options-no-claims-return": {
+              "value": "{\"claimImageUrls\":null,\"claimType\":\"RETURN\",\"productCnt\":1,\"claimReasonType\":\"CHANGE_MIND\",\"claimReasonDetail\":\"변심\",\"bankAccountInfo\":{\"bank\":\"CU\",\"bankAccount\":\"123456789\",\"bankDepositorName\":\"예금주\",\"bankName\":\"신협\"},\"saveBankAccountInfo\":true,\"returnAddress\":{\"receiverName\":\"test\",\"receiverZipCd\":\"123456\",\"receiverAddress\":\"경기도 성남시 분당구 대왕판교로645번길 12\",\"receiverJibunAddress\":\"경기도 성남시 분당구 삼평동 629번지 NHN 플레이뮤지엄\",\"receiverDetailAddress\":\"16 NHN 플레이뮤지엄\",\"receiverCity\":null,\"receiverState\":null,\"receiverContact1\":\"010-0000-0000\",\"receiverContact2\":\"010-0000-0000\",\"receiverMobileCountryCd\":\"82\",\"customsIdNumber\":\"1\",\"countryCd\":\"KR\",\"deliveryMemo\":\"test\",\"receiverFirstName\":null,\"receiverLastName\":null},\"returnWayType\":\"SELLER_COLLECT\",\"deliveryCompanyType\":\"CJ\",\"invoiceNo\":\"1234\",\"responsibleObjectType\":null}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/guest-order-options-orderOptionNo-claims-return1157243429"
+            },
+            "examples": {
+              "post-profile-order-options-no-claims-return": {
+                "value": "{\"claimNo\":1,\"claimedOptions\":[{\"originOrderOptionNo\":1,\"originOrderCnt\":2,\"orderOptionNo\":2,\"orderCnt\":3}]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/profile/order-options/{orderOptionNo}/claims/withdraw",
+    "summary": "회원 클레임 철회하기(주문상품 옵션번호)",
+    "description": "\n## 부가설명 및 특이사항\n주문상품 옵션번호로 신청된 클레임을 철회하는 API입니다.\n\n## 화면 예시\n[![](http://image.toast.com/aaaaahb/api-description/order/myorder/[PUT]%20profile_order-options_claim_withdraw%20%ED%81%B4%EB%A0%88%EC%9E%84%20%EC%B2%A0%ED%9A%8C%201-1.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/myorder/[PUT]%20profile_order-options_claim_withdraw%20%ED%81%B4%EB%A0%88%EC%9E%84%20%EC%B2%A0%ED%9A%8C%201-1.png)\n[![](http://image.toast.com/aaaaahb/api-description/order/myorder/[PUT]%20profile_order-options_claim_withdraw%20%ED%81%B4%EB%A0%88%EC%9E%84%20%EC%B2%A0%ED%9A%8C%201-2.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/myorder/[PUT]%20profile_order-options_claim_withdraw%20%ED%81%B4%EB%A0%88%EC%9E%84%20%EC%B2%A0%ED%9A%8C%201-2.png)\n",
+    "tags": ["Member"],
+    "parameters": [
+      {
+        "name": "orderOptionNo",
+        "in": "path",
+        "description": "주문 상품 옵션 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      {
+        "name": "ClientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_CLIENTID"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC, MOBILE_WEB"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "로그인 인증키^|test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_ACCESS_TOKEN"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/profile/orders/{orderNo}/claims/cancel",
+    "summary": "회원 주문취소 신청하기",
+    "description": "\n## 부가설명 및 특이사항\n주문을 취소신청하는 API입니다.\n\n## 화면 예시\n[![](http://image.toast.com/aaaaahb/api-description/order/myorder/[POST]%20profile_orders_claim_cancle%20%EC%A3%BC%EB%AC%B8%EC%B7%A8%EC%86%8C%201-1.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/myorder/[POST]%20profile_orders_claim_cancle%20%EC%A3%BC%EB%AC%B8%EC%B7%A8%EC%86%8C%201-1.png)\n[![](http://image.toast.com/aaaaahb/api-description/order/myorder/[POST]%20profile_orders_claim_cancle%20%EC%A3%BC%EB%AC%B8%EC%B7%A8%EC%86%8C%201-2.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/myorder/[POST]%20profile_orders_claim_cancle%20%EC%A3%BC%EB%AC%B8%EC%B7%A8%EC%86%8C%201-2.png)\n",
+    "tags": ["Member"],
+    "parameters": [
+      {
+        "name": "orderNo",
+        "in": "path",
+        "description": "주문 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "ClientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디^|test-client-id",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_CLIENTID"
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)^|PC",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC, MOBILE_WEB"
+      },
+      {
+        "name": "accessToken",
+        "in": "header",
+        "description": "로그인 인증키^|test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "TEST_ACCESS_TOKEN"
+      },
+      {
+        "name": "Shop-By-Authorization",
+        "in": "header",
+        "description": "액세스 토큰(Oauth2 스펙)^|Bearer test-access-token",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "language",
+        "in": "header",
+        "description": "언어 (기본값: ko)^|ko",
+        "required": false,
+        "schema": {
+          "type": "string"
+        },
+        "example": "ko"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/profile-orders-orderNo-claims-cancel-744213769"
+          },
+          "examples": {
+            "post-profile-orders-order-no-claims-cancel": {
+              "value": "{\"claimType\":\"CANCEL\",\"claimReasonType\":\"CHANGE_MIND\",\"claimReasonDetail\":\"사유\",\"bankAccountInfo\":null,\"saveBankAccountInfo\":false,\"responsibleObjectType\":null,\"refundsImmediately\":true}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  }
+]

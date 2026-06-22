@@ -1,16 +1,12 @@
 ---
 name: hpq-engine-cartography
-description: >-
-  후니 가격엔진의 흐름과 권위 계약을 추출하는 방법론 스킬(가격계산 검증 하네스). raw/webadmin
-  catalog/pricing.py(evaluate_price 단일 권위)·price_views.py(뷰어/시뮬레이터/그리드 뷰)·price_*.html
-  템플릿을 읽어, 가격공식/가격구성요소/가격뷰어/가격시뮬레이터의 각 역할과 데이터 흐름(권위엑셀→적재→
-  공식/구성요소/단가행→뷰어→시뮬레이터→위젯)을 mermaid로 도해하고, evaluate_price 계약(NON_QTY_DIMS/
-  TIER_DIMS 차원 자동매칭·가격 우선순위·단가형/합가형·동시매칭 오류·수량구간·시계열·할인 순차곱·
-  lenient/strict)을 검증 가능한 명제로 추출하며, 옵션선택→가격계산 위젯 가격계약을 명세하는 절차를
-  제공한다. 모든 규칙은 pricing.py:line 인용. '가격엔진 흐름', '엔진 지도', '공식 구성요소 뷰어
-  시뮬레이터 역할', 'evaluate_price 계약', '위젯 가격계약', '가격 흐름 도해', '엔진 카토그래피', '흐름
-  분석 다시' 작업 시 반드시 이 스킬을 사용. 권위 골든값 추출은 hpq-authority-curation, 가격사슬 정합
-  검사는 hpq-price-chain-inspection이 담당하므로 그 작업에는 트리거하지 않는다.
+description: >
+  후니 가격엔진의 흐름과 권위 계약을 추출하는 방법론(가격계산 검증 하네스). raw/webadmin pricing.py(evaluate_price
+  단일 권위)·price_views.py·price_*.html을 읽어 가격공식/구성요소/뷰어/시뮬레이터 역할과 데이터 흐름을 mermaid로
+  도해하고, evaluate_price 계약(NON_QTY_DIMS/TIER_DIMS 차원 자동매칭·가격 우선순위·단가형/합가형·수량구간·할인 순차곱)을
+  검증 가능한 명제로 추출(pricing.py:line 인용)·위젯 가격계약 명세.
+  트리거: 가격엔진 흐름, 엔진 지도, 공식 구성요소 뷰어 시뮬레이터 역할, evaluate_price 계약, 위젯 가격계약, 가격 흐름 도해, 흐름 분석 다시.
+  권위 골든값은 hpq-authority-curation, 가격사슬 정합 검사는 hpq-price-chain-inspection.
 ---
 
 # hpq-engine-cartography — 가격엔진 흐름·계약 추출 방법론

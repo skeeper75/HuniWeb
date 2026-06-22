@@ -1,0 +1,144 @@
+---
+title: "OrderSheetProvider"
+depth: 5
+path: "오로라 리액트 스킨개발가이드 > 개발 프로세스 > 2️⃣Aurora React 샘플스킨 확인 > @shopby/react-components > order > OrderSheetProvider"
+---
+
+# OrderSheetProvider
+
+|  |  |
+| --- | --- |
+| ㄴ constraintInfo |  |
+|    ㄴ availabilityDays |  |
+
+
+
+
+## 속성
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | --- | --- | --- | --- |
+| clientId | O | string | - | 몰 clientId |
+| mallProfile | X | string | real | 몰 서빙 환경 |
+| debouncingTimeOfFetchingPaymentInfo | X | number | 200(ms) | 액션에 의해 발동되는 결제 금액 갱신 함수 호출에 대한 debouncing time |
+| customTerms | X | object[] | [] | 어드민에서 다루는 약관을 제외하고 추가하고 싶은 약관들 |
+| ㄴ label | O | string | - | 약관 제목 라벨 |
+| ㄴ termsType | O | string | - | 약관 식별값 |
+| ㄴ isRequired | O | boolean | - | 필수 여부 |
+| ㄴ contents | X | string | - | 약관 내용 |
+| termTypesToExclude | X | string[] | - | 주문서에서 노출하고 싶지 않은 약관의 식별값 |
+| children | O | ReactNode | - | - |
+
+## 상태
+
+* orderSheetState 는 useOrderSheetStateContext 를 호출해 사용한다.
+
+``` typescript
+const orderSheetState = useOrderSheetStateContext();
+```
+
+| 이름 | 타입 | 기본 값 | 설명 |
+| --- | --- | --- | --- |
+| orderSheetNo | string \| null | null | 주문서 번호 |
+| orderSheet | [response 타입](https://docs.shopby.co.kr/?url.primaryName=order/#/OrderSheet/get-order-sheet) \| null | null | 주문서 api 응답 데이터 |
+| hasInternationalShippingProduct | boolean | false | 국제(해외) 배송 상품 포함 여부 |
+| ordererInfo | object | - | 주문자 정보 |
+| ㄴ ordererName | string | '' | 주문자 이름 |
+| ㄴ emailId | string | '' | 주문자 이메일 id |
+| ㄴ emailDomain | string | '' | 주문자 이메일 도메인 (ex: [google.com](http://google.com/) etc.) |
+| ㄴ domainSelectorValue | string | '' | 주문자 이메일 도메인 선택 값 (select 박스 용도) |
+| ㄴ phoneNumber | object | - | 주문자 전화번호 |
+| ㄴ carrierNumber | string | '' | 통신사 번호 (ex: 010, 011 ...) |
+| ㄴ firstSerial | string | '' | 첫 번째 식별번호 (전화번호 가운데 식별번호) |
+| ㄴ secondSerial | string | '' | 두 번째 식별번호 (전화번호 끝 식별번호) |
+| ㄴ guestInfo | object \| null | null | 비회원 정보 |
+| ㄴ password | string | - | 비회원 주문 비밀번호 입력 값 |
+| ㄴ passwordForConfirmation | string | - | 비회원 주문 비밀번호 확인 입력 값 |
+| shippingAddressInfo | object | - | 배송지 정보 |
+| ㄴ addressNo | string | 0 | 배송지 식별값 (0인 경우 새로운 배송지로 취급됩니다) |
+| ㄴ addressName | string | '' | 배송지명 |
+| ㄴ receiverName | string | '' | 수령인 이름 |
+| ㄴ zipCode | string | '' | 우편번호 |
+| ㄴ roadAddress | string | '' | 도로명 주소 |
+| ㄴ jibunAddress | string | '' | 지번 주소 |
+| ㄴ addressDetail | string | '' | 상세 주소 |
+| ㄴ mobilePhoneNumber | object |  | 휴대폰 번호 |
+| ㄴ carrierNumber | string | '' | 통신사 번호 (ex: 010, 011 ...) |
+| ㄴ firstSerial | string | '' | 첫 번째 식별번호 (전화번호 가운데 식별번호) |
+| ㄴ secondSerial | string | '' | 두 번째 식별번호 (전화번호 끝 식별번호) |
+| ㄴ phoneNumber | object |  | 전화 번호 |
+| ㄴ carrierNumber | string | '' | 통신사 번호 (ex: 010, 011 ...) |
+| ㄴ firstSerial | string | '' | 첫 번째 식별번호 (전화번호 가운데 식별번호) |
+| ㄴ secondSerial | string | '' | 두 번째 식별번호 (전화번호 끝 식별번호) |
+| ㄴ countryCd | string | 'KR' | 국가코드 |
+| ㄴ deliveryMemo | string | '' | 배송 메모 |
+| ㄴ customsIdNumber | string | '' | 개인통관고유부호 입력 값 |
+| paymentInfo | [response.paymentInfo 타입](https://docs.shopby.co.kr/?url.primaryName=order/#/OrderSheet/get-order-sheet) | - | 결제 금액 정보 |
+| willAddressBeSaved | boolean | false | 배송지 저장 여부 |
+| willBeSavedAsDefaultAddress | boolean | false | 기본(디폴트) 배송지 저장 여부 |
+| flattenedOrderProductOptions | object[] | [] | 주문 상품 정보 (노출에 용이하도록 orderProductOptionNo 별로 정제된 데이터입니다) |
+| @cols=4:ㄴ [reponse.deliveryGroups 요소 타입](https://docs.shopby.co.kr/?url.primaryName=order/#/OrderSheet/get-order-sheet) ( orderProducts 프로퍼티 제외)
+   +  [response.deliveryGroups > orderProducts 요소 타입](https://docs.shopby.co.kr/?url.primaryName=order/#/OrderSheet/get-order-sheet) ( orderProductOptions, buyAmt 프로퍼티 제외)
+   +  [response.deliveryGroups > orderProducts > orderProtuctOptions 요소 타입](https://docs.shopby.co.kr/?url.primaryName=order/#/OrderSheet/get-order-sheet) |
+| accumulationInputValue | number | 0 | 적립금 사용 금액 입력 값 |
+| selectedCoupon | [requestBody.couponRequest 타입](https://docs.shopby.co.kr/?url.primaryName=order/#/OrderSheet/post-order-sheets-order-sheet-no-calculate) | - | 선택된 쿠폰 정보 |
+| availablePayMethods | object[] | [] | 사용 가능한 결제 방법 |
+| ㄴ payType | string | - | 결제수단 |
+| ㄴ pgType | string | - | PG사 |
+| selectedPayMethod | object \| null | null | 선택된 결제 방법 |
+| ㄴ payType | string | - | 결제수단 |
+| ㄴ pgType | string | - | PG사 |
+| bankAccountToDeposit | object | - | 입금 은행 정보 |
+| ㄴ bankAccount | string | '' | 계좌 번호 |
+| ㄴ backCode | string | '' | 은행 식별값 |
+| ㄴ bankDepositorName | string | '' | 예금주 이름 |
+| ㄴ bankName | string | '' | 은행 이름 |
+| remitterName | string | '' | 입금자 명 |
+| termsStatus | object | {} | 약관 정보 (선택 여부 포함) |
+| ㄴ [termsType: string] | object | - | 약관 식별 값 |
+| ㄴ isChecked | boolean | - | 선택 여부 |
+| ㄴ isRequired | boolean | - | 필수 여부 |
+| ㄴ title | string | - | 약관 제목 |
+| ㄴ contents | string | - | 약관 내용 |
+| needsDepositBankForm | boolean | false | 입급 은행 정보 입력 폼 필요 여부 |
+
+## 액션
+
+* orderSheetAction 은 useOrderSheetActionContext 를 호출해 사용한다.
+
+``` typescript
+const orderSheetAction = useOrderSheetActionContext();
+```
+
+| 이름 | 인자타입 | 필수여부 | 기본값 | 설명 | 관리하는 상태 |
+| --- | --- | --- | --- | --- | --- |
+| updateOrdererInfo | [Partial](https://www.typescriptlang.org/ko/docs/handbook/utility-types.html#partialtype)\ | O | - | 주문자 정보 수정하기 | ordererInfo |
+| updateShippingAddressInfo | [Partial](https://www.typescriptlang.org/ko/docs/handbook/utility-types.html#partialtype)\ | O | - | 배송지 정보 수정하기 | shippingAddressInfo |
+| updateWillAddressBeSaved | boolean | O | - | 배송지 저장 여부 수정하기 | willAddressBeSaved |
+| updateWillBeSavedAsDefaultAddress | boolean | O | - | 기본(디폴트) 배송지 저장 여부 수정하기 | willBeSavedAsDefaultAddress |
+| updateAccumulationInputValue | number | O | - | 적립금 사용 금액 수정하기 | accumulationInputValue |
+| updateSelectedCoupon | selectedCoupon 상태값 타입 | O | - | 쿠폰 선택하기 | selectedCoupon |
+| updateTermsStatus | [Partial](https://www.typescriptlang.org/ko/docs/handbook/utility-types.html#partialtype)\ | O | - | 약관 정보 수정하기 | termsStatus |
+| updateSelectedPayMethod | [Partial](https://www.typescriptlang.org/ko/docs/handbook/utility-types.html#partialtype)\ | O | - | 결제수단 선택하기 | selectedPayMethod |
+| updateBankAccountToDeposit | [Partial](https://www.typescriptlang.org/ko/docs/handbook/utility-types.html#partialtype)\ | O | - | 입금 은행 정보 수정하기 | bankAccountToDeposit |
+| resetOrdererInfo | - | - | - | 주문자 정보 초기화 | ordererInfo |
+| resetShippingAddressInfo | - | - | - | 배송지 정보 초기화 | shippingAddressInfo |
+| order | object | O | - | 주문하기 | - |
+| ㄴ confirmUrl | string | O | - | 주문 완료 후 이동할 페이지 URL | - |
+| ㄴ platform | [requestHeader.platform 타입](https://docs.shopby.co.kr/?url.primaryName=order/#/Purchase/post-payments-reserve) | O | - | 클라이언트 플랫폼 | - |
+| fetchOrderSheet | object | O | - | 주문서 정보 가져오기 | flattenedOrderProductOptions, orderSheet,
+bankAccountToDeposit, termsStatus,
+hasInternationalShippingProduct, availablePayMethods,
+orderSheetNo, selectedPayMethod |
+| ㄴ orderSheetNo | string | O | - | 주문서 번호 |  |
+| ㄴ includesMemberAddress | boolean | X | - | 회원 주소 포함 여부 |  |
+| makeOrderSheet | [requestBody 타입](https://docs.shopby.co.kr/?url.primaryName=order/#/OrderSheet/post-order-sheet) | - | - | 주문서 생성하기 |  |
+| resetBankAccountToDeposit | - | - | - | 입금 은행 정보 초기화 | bankAccountToDeposit |
+
+## 사용예시
+
+``` typescript
+const Example = () => {
+
+}
+```

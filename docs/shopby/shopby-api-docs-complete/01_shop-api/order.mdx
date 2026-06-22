@@ -1,0 +1,2665 @@
+---
+title: "order-shop"
+description: "주문(order) 관련 shop API입니다."
+version: "0.1.0-SNAPSHOT"
+category: "Shop API"
+---
+
+# order-shop
+
+:::info API 소개
+ 주문(order) 관련 shop API입니다.
+:::
+
+## 서버 정보
+
+| 환경 | Base URL |
+|------|----------|
+| Production | `https://shop-api.e-ncp.com` |
+
+## 리소스 목록
+
+| 리소스 | 설명 |
+|--------|------|
+| **Cart** | 장바구니 |
+| **GuestOrder** | 비회원 주문 |
+| **OrderConfiguration** | 주문 설정 값 |
+| **OrderSheet** | 주문서 |
+| **Purchase** | 주문 |
+| **NaverPay** | 네이버페이 |
+| **MyOrder** | 내 주문 |
+| **ShippingAddress** | 배송지 |
+| **RecurringPayment** | 정기결제 |
+| **LaterShippingInput** | 나중 입력 배송 |
+| **UnidentifiedDepositors** | 미확인 입금자 |
+| **Wish** | 위시리스트 (찜하기) |
+| **MyPay** | 마이페이 |
+
+## API 엔드포인트
+
+## AppCard
+
+### 🟢 `GET` `/app-card/cards`
+
+**"[개발중] 앱카드 간편결제 카드사 목록 조회"**
+
+> operationId: `get-app-card-cards`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `cardCode` | query | - | `string` | 특정 카드사^|2088 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+
+---
+
+### 🟢 `GET` `/app-card/inst-plan`
+
+**"[개발중] 앱카드 할부정보 조회"**
+
+> operationId: `get-app-card-inst-plan`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `amount` | query | - | `number` | 상품금액^|50000 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+
+---
+
+### 🟢 `GET` `/app-card/pay-cards`
+
+**"[개발중] 앱카드 간편결제카드 목록 조회"**
+
+> operationId: `get-app-card-pay-cards`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `cardCode` | query | - | `string` | 특정 카드사^|2088 |
+| `amount` | query | - | `number` | 상품금액^|50000 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🟢 `GET` `/app-card/auth/{orderNo}`
+
+**"[개발중] 앱카드 인증결과 조회"**
+
+> operationId: `get-app-card-auth-order-no`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderNo` | path | ✅ | `string` | 주문번호^|test-order-no |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🔴 `DELETE` `/app-card/pay-cards/{acntId}`
+
+**"[개발중] 앱카드 간편결제 카드 삭제"**
+
+> operationId: `delete-app-card-pay-cards-card-id`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `acntId` | path | ✅ | `string` | 간편결제 계정 아이디^|test-acnt-id |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🟢 `GET` `/app-card/qr/{orderNo}`
+
+**"[개발중] 앱카드 결제 QR 생성"**
+
+> operationId: `get-app-card-qr-order-no`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderNo` | path | ✅ | `string` | 주문번호^|test-order-no |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+## Cart — 장바구니
+
+### 🟢 `GET` `/cart`
+
+**장바구니 가져오기**
+
+> operationId: `get-cart`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `divideInvalidProducts` | query | - | `boolean` | 구매하지 못하는 상품 분할여부^|true |
+| `groupId` | query | - | `string` | 장바구니 그룹 아이디^|cartGroupId |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🟡 `PUT` `/cart`
+
+**장바구니 수정하기**
+
+> operationId: `put-cart`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+## 부가설명 및 특이사항
+로그인된 유저의 장바구니의 상품 중 구매 수량과 사용자 입력형 옵션을 수정하는\
+        \ API 입니다.
+
+옵션 종류는 변경할 수 없습니다.
+
+옵션변경은 변경할 옵션을 삭제한 후 신규등록하는 방법으로 수정합니다\
+        .
+
+---
+
+### 🔵 `POST` `/cart`
+
+**장바구니 등록하기**
+
+> operationId: `post-cart`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🔴 `DELETE` `/cart`
+
+**장바구니 삭제하기**
+
+> operationId: `delete-cart`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `cartNo` | query | ✅ | `string` | "장바구니 번호^|1,2,3" |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🟢 `GET` `/cart/calculate`
+
+**장바구니에서 선택된 상품금액 계산하기**
+
+> operationId: `get-cart-calculate`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `cartNo` | query | - | `string` | "선택된 장바구니 번호^|1,2,3" |
+| `divideInvalidProducts` | query | - | `boolean` | 구매하지 못하는 상품 분할여부^|true |
+| `groupId` | query | - | `string` | 장바구니 그룹 아이디^|cartGroupId |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+## 부가설명 및 특이사항
+장바구니에서 선택된 상품만 계산하여 금액만 리턴하는 API 입니다.
+
+아래\
+        \ 화면예시에서 상품/옵션별 배송비는 업데이트(재계산)하지 못합니다.
+
+cartNo 파라미터 자체를 넘기지 않는 경우 : 장바구니\
+        \ 전체
+
+cartNo 에 빈 값을 넘기는 경우 : 0원        
+
+## 화면예시
+[![](https://image.toast.com/aaaaahb/api-description/order/cart/[GET]%20cart_calculate%20%EC%9E%A5%EB%B0%94%EA%B5%AC%EB%8B%88%20%EC%84%A0%ED%83%9D%20%EA%B3%84%EC%82%B0.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/cart/[GET]%20cart_calculate%20%EC%9E%A5%EB%B0%94%EA%B5%AC%EB%8B%88%20%EC%84%A0%ED%83%9D%20%EA%B3%84%EC%82%B0.png)
+
+---
+
+### 🟢 `GET` `/cart/count`
+
+**장바구니에 담긴 상품 개수 가져오기**
+
+> operationId: `get-cart-count`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🟢 `GET` `/cart/subset`
+
+**장바구니에서 선택된 항목만 장바구니 그룹별로 재계산하기**
+
+> operationId: `get-cart-subset`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `cartNo` | query | - | `string` | "선택된 장바구니 번호^|1,2,3" |
+| `divideInvalidProducts` | query | - | `boolean` | 구매하지 못하는 상품 분할여부^|true |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+## 부가설명 및 특이사항
+장바구니에서 선택된 상품만 계산하여 장바구니 상품들과 금액까지 포함해서 리턴하는\
+        \ API 입니다.
+
+아래 화면예시에서 상품/옵션별 배송비를 함께 업데이트(재계산)할 수 있습니다.
+
+cartNo 파라미터 자\
+        체를 넘기지 않는 경우 : 장바구니 전체
+
+cartNo 에 빈 값을 넘기는 경우 : 0원
+        
+## 화면예시
+[![](https://image.toast.com/aaaaahb/api-description/order/cart/[GET]%20cart_subset%20%EC%9E%A5%EB%B0%94%EA%B5%AC%EB%8B%88%EC%97%90%EC%84%9C%20%EC%84%A0%ED%83%9D%EB%90%9C%20%ED%95%AD%EB%AA%A9%EB%A7%8C%20%EC%9E%A5%EB%B0%94%EA%B5%AC%EB%8B%88%20%EA%B7%B8%EB%A3%B9%EB%B3%84%EB%A1%9C%20%EC%9E%AC%20%EA%B3%84%EC%82%B0.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/cart/[GET]%20cart_subset%20%EC%9E%A5%EB%B0%94%EA%B5%AC%EB%8B%88%EC%97%90%EC%84%9C%20%EC%84%A0%ED%83%9D%EB%90%9C%20%ED%95%AD%EB%AA%A9%EB%A7%8C%20%EC%9E%A5%EB%B0%94%EA%B5%AC%EB%8B%88%20%EA%B7%B8%EB%A3%B9%EB%B3%84%EB%A1%9C%20%EC%9E%AC%20%EA%B3%84%EC%82%B0.png)
+
+---
+
+### 🟢 `GET` `/cart/validate`
+
+**장바구니에 저장된 모든 상품 구매 가능 여부 확인하기**
+
+> operationId: `get-cart-validate`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🟢 `GET` `/cart/coupons/maximum`
+
+**장바구니 기준 최대 쿠폰 할인 금액 가져오기**
+
+> operationId: `get-cart-coupons-maximum`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `cartNo` | query | ✅ | `string` | 장바구니 번호^|1 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+## GuestOrder — 비회원 주문
+
+### 🔵 `POST` `/guest/cart`
+
+**비회원 장바구니 계산하기**
+
+> operationId: `post-guest-cart`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `divideInvalidProducts` | query | - | `boolean` | 구매하지 못하는 상품 분할여부^|true |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+
+## 부가설명 및 특이사항
+비회원의 장바구니금액 및 합배송 상품을 계산하여 목록을 가져오는 API 입니다\
+        .
+
+쇼핑몰배송의 경우, 파트너명을 '쇼핑몰배송'으로 내려줍니다. 
+
+## 화면예시
+[![](https://image.toast.com/aaaaahb/api-description/order/guest/[POST]%20guest_cart%20%EA%B2%8C%EC%8A%A4%ED%8A%B8%20%EC%9E%A5%EB%B0%94%EA%B5%AC%EB%8B%88%20%EA%B3%84%EC%82%B0%201-1.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/guest/[POST]%20guest_cart%20%EA%B2%8C%EC%8A%A4%ED%8A%B8%20%EC%9E%A5%EB%B0%94%EA%B5%AC%EB%8B%88%20%EA%B3%84%EC%82%B0%201-1.png)
+\
+        [![](https://image.toast.com/aaaaahb/api-description/order/guest/[POST]%20guest_cart%20%EA%B2%8C%EC%8A%A4%ED%8A%B8%20%EC%9E%A5%EB%B0%94%EA%B5%AC%EB%8B%88%20%EA%B3%84%EC%82%B0%201-2.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/guest/[POST]%20guest_cart%20%EA%B2%8C%EC%8A%A4%ED%8A%B8%20%EC%9E%A5%EB%B0%94%EA%B5%AC%EB%8B%88%20%EA%B3%84%EC%82%B0%201-2.png)
+
+---
+
+### 🟢 `GET` `/guest/orders/{orderNo}`
+
+**비회원 주문 상세 조회하기**
+
+> operationId: `get-guest-orders-order-no`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderNo` | path | ✅ | `string` | "" |
+| `orderRequestType` | query | - | `string` | "주문옵션타입 (ALL: 전체, CLAIM: 클레임진행, NORMAL: 클레임미진행)^|CLAIM" |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `guestToken` | header | ✅ | `string` | guestToken^|12121a3-123123-1213 |
+
+---
+
+### 🔵 `POST` `/guest/orders/{orderNo}`
+
+**비회원 주문 토큰 발급하기**
+
+> operationId: `post-guest-orders-order-no`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderNo` | path | ✅ | `string` | 주문번호^|2020010101012 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+
+---
+
+### 🟡 `PUT` `/guest/order-options/{orderOptionNo}/confirm`
+
+**비회원 상품 주문 구매확정 처리하기**
+
+> operationId: `put-guest-order-options-order-option-no-confirm`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderOptionNo` | path | ✅ | `number` | 주문번호^|121212 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `guestToken` | header | ✅ | `string` | guestToken^|12121a3-123123-1213 |
+
+---
+
+### 🟡 `PUT` `/guest/order-options/{orderOptionNo}/delivery-done`
+
+**비회원 상품 주문 배송완료 처리하기**
+
+> operationId: `put-guest-order-options-order-option-no-delivery-done`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderOptionNo` | path | ✅ | `number` | 주문번호^|121212 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `guestToken` | header | ✅ | `string` | guestToken^|12121a3-123123-1213 |
+
+---
+
+### 🟡 `PUT` `/guest/orders/{orderNo}/cashReceipt`
+
+**현금영수증 신청정보 수정 (무통장 입금 주문)**
+
+> operationId: `put-guest-orders-order-no-cash-receipt`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderNo` | path | ✅ | `string` | 주문번호^|2020042100000001 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `guestToken` | header | ✅ | `string` | guestToken^|12121a3-123123-1213 |
+
+---
+
+### 🔵 `POST` `/guest/orders/{orderNo}/cashReceipt`
+
+**비회원 현금영수증 신청하기**
+
+> operationId: `post-guest-orders-order-no-cash-receipt`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderNo` | path | ✅ | `string` | 주문번호^|2020042100000001 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `guestToken` | header | ✅ | `string` | guestToken^|12121a3-123123-1213 |
+
+---
+
+### 🟢 `GET` `/guest/orders/{orderNo}/claim`
+
+**비회원 주문 상세 조회하기 (클레임 상세사유 포함)**
+
+> operationId: `get-guest-orders-order-no-claim`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderNo` | path | ✅ | `string` | "" |
+| `orderRequestType` | query | - | `string` | "주문옵션타입 (ALL: 전체, CLAIM: 클레임진행, NORMAL: 클레임미진행)^|CLAIM" |
+| `claimType` | query | - | `string` | "클레임타입 (CANCEL, RETURN, EXCHANGE, NONE)^|CANCEL" |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+
+---
+
+### 🟡 `PUT` `/guest/orders/{orderNo}/deliveries`
+
+**비회원 주문단위 배송정보 수정하기**
+
+> operationId: `put-guest-orders-order-no-deliveries`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderNo` | path | ✅ | `string` | 주문옵션번호^|2010121010 |
+| `add` | query | - | `boolean` | 주소지 추가 여부^|true |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `guestToken` | header | ✅ | `string` | guestToken^|12121a3-123123-1213 |
+
+---
+
+### 🟢 `GET` `/guest/orders/{orderNo}/forgot-password`
+
+**비회원 초기화된 주문 패스워드 전송하기**
+
+> operationId: `get-guest-orders-order-no-forgot-password`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderNo` | path | ✅ | `string` | 주문번호^|202110081443456213 |
+| `replyType` | query | ✅ | `string` | "비밀번호 받을 방식 (EMAIL: 이메일, SMS: sms)^|EMAIL" |
+| `mobileNo` | query | - | `string` | 주문자 핸드폰 번호^|01012345678 |
+| `email` | query | - | `string` | 주문자 이메일^|test@nhn.com |
+| `name` | query | - | `string` | 주문자명^|홍길동 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+
+---
+
+## LaterShippingInput — 나중 입력 배송
+
+### 🟢 `GET` `/later-input/areafees`
+
+**"[샵바이 엔터프라이즈 전용] 지역별 추가 배송비 목록 조회하기 (배송비템플릿 번호 또는 암호화된 배송 번호 리스트 사용\**
+
+> operationId: `get-later-input-areafees`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `templateNo` | query | - | `string` | 배송비 템플릿 번호^|12345 |
+| `encryptedShippingNo` | query | - | `string` | 암호화된 배송 번호 리스트^|UFE3Ylo2aUlkSWVuZHVGQjYyS2pZZz09 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+
+## 부가설명 및 특이사항
+배송비템플릿 번호 또는 암호화된 배송번호 리스트로 지역별 추가 배송비 목록을 조\
+        회하는 API 입니다. 
+(두 필드 중 하나만 입력해야 합니다.)
+
+암호화 된 배송 번호 리스트(encryptedShippingNo):\
+        \ 선물하는 시점에 동일한 수령자 연락처를 입력한 배송번호 목록
+
+배송번호 리스트 중 1개 이상의 배송에 추가 배송비를 부과하는\
+        \ 주소가 응답됩니다.
+
+---
+
+### 🟢 `GET` `/later-input/order`
+
+**"[샵바이 엔터프라이즈 전용] 나중배송입력 주문 상세 조회하기"**
+
+> operationId: `get-order-encrypted-shipping-no-later-input`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderRequestType` | query | - | `string` | "주문옵션타입 (ALL: 전체, CLAIM: 클레임진행, NORMAL: 클레임미진행)^|ALL" |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `encryptedShippingNo` | header | ✅ | `string` | 암호화된 배송 번호 리스트^|RDFlU2czQ3dZeGM1YXlMYm9XSklidz09 |
+
+---
+
+### 🟢 `GET` `/later-input/shippings`
+
+**"[샵바이 엔터프라이즈 전용] 나중 입력 배송지 조회하기"**
+
+> operationId: `get-later-input-shippings`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `encryptedShippingNo` | header | ✅ | `string` | 암호화된 배송 번호 리스트^|UFE3Ylo2aUlkSWVuZHVGQjYyS2pZZz09 |
+
+---
+
+### 🟡 `PUT` `/later-input/shippings`
+
+**"[샵바이 엔터프라이즈 전용] 나중 입력 배송지 정보 수정하기"**
+
+> operationId: `put-later-input-shippings`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `encryptedShippingNo` | header | ✅ | `string` | 암호화된 배송 번호 리스트^|UFE3Ylo2aUlkSWVuZHVGQjYyS2pZZz09 |
+
+---
+
+### 🟢 `GET` `/shippings/{encryptedShippingNo}/later-input`
+
+**"[샵바이 엔터프라이즈 전용] 나중 입력 배송지 조회하기"**
+
+> operationId: `get-shippings-encrypted-shipping-no-later-input`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `encryptedShippingNo` | path | ✅ | `string` | 암호화된 배송 번호 리스트^|UFE3Ylo2aUlkSWVuZHVGQjYyS2pZZz09 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+
+---
+
+### 🟡 `PUT` `/shippings/{encryptedShippingNo}/later-input`
+
+**"[샵바이 엔터프라이즈 전용] 나중 입력 배송지 정보 수정하기"**
+
+> operationId: `put-shippings-encrypted-shipping-no-later-input`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `encryptedShippingNo` | path | ✅ | `string` | 암호화된 배송 번호 리스트^|UFE3Ylo2aUlkSWVuZHVGQjYyS2pZZz09 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+
+---
+
+## MyPay — 마이페이
+
+### 🔵 `POST` `/my-pay/modify-main-payment`
+
+**(마이페이 PG용)주 결제수단 설정하기**
+
+> operationId: `post-modify-main-payment`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🟢 `GET` `/my-pay/modify-password`
+
+**(마이페이 PG용)비밀번호 변경 파라미터 조회하기**
+
+> operationId: `post-modify-password`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `clientReturnUrl` | query | ✅ | `string` | 결제수단 등록 완료 후 client 이동 url^|https://www.nhn-commerce.com |
+| `ci` | query | - | `string` | 고객의 CI |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🟢 `GET` `/my-pay/payment-infos`
+
+**(마이페이 PG용)등록된 결제수단 조회하기**
+
+> operationId: `get-payment-infos`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `payMethod` | query | - | `string` | "결제수단 코드 (신용카드: 01, 계좌: 16)^|01" |
+| `bankCardCode` | query | - | `string` | "신용카드 : 카드사 코드, 계좌 : 은행 코드^|16" |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🔴 `DELETE` `/my-pay/payment-infos`
+
+**(마이페이 PG용)록된 결제수단 삭제하기**
+
+> operationId: `delete-payment-infos-pay-token`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `payToken` | query | ✅ | `string` | 이니시스에서 발행한 SEED wpaytoken^|LL3E994QcmzSFH0JCiZOFw== |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🟢 `GET` `/my-pay/register-payment`
+
+**(마이페이 PG용)결제수단 등록 webUrl를 위한 정보 조회하기**
+
+> operationId: `get-register-payment`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `clientReturnUrl` | query | ✅ | `string` | 결제수단 등록 완료 후 client 이동 url^|https://www.nhn-commerce.com |
+| `payMethod` | query | ✅ | `string` | "결제수단 코드 (신용카드: 01, 계좌: 16)^|01" |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🟢 `GET` `/my-pay/register-user`
+
+**(마이페이 PG용)회원등록 webUrl를 위한 정보 조회하기**
+
+> operationId: `get-register-user`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `clientReturnUrl` | query | ✅ | `string` | 회원등록 완료 후 client 이동 url^|https://www.nhn-commerce.com |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🟢 `GET` `/my-pay/register-user-with-payment`
+
+**(마이페이 PG용)회원등록후 결제수단 등록으로 바로 넘어갈 수 있도록 필요한 값 조회하기**
+
+> operationId: `get-register-user-with-payment`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `clientReturnUrl` | query | ✅ | `string` | "회원등록, 결제수단 등록 완료 후 client 이동 url^|https://www.nhn-commerce.com" |
+| `clientBridgeUrl` | query | ✅ | `string` | 회원등록 후 결제수단 등록에 필요한 파라미터와 함께 redirect될 url^|https://www.register-payment-bridge.com |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🔴 `DELETE` `/my-pay/user`
+
+**(마이페이 PG용)회원서비스 해제하기**
+
+> operationId: `delete-user`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🔴 `DELETE` `/my-pay/user/by-key`
+
+**(마이페이 PG용)마이페이 회원 서비스 해지하기**
+
+> operationId: `delete-user-by-key`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `deleteKey` | query | ✅ | `string` | 회원 서비스 해지할 유저의 deleteKey^|delete-key |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+
+---
+
+## OrderConfiguration — 주문 설정 값
+
+### 🟢 `GET` `/order-configs`
+
+**주문 설정 값 가져오기**
+
+> operationId: `get-order-configuration`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+
+---
+
+## OrderSheet — 주문서
+
+### 🔵 `POST` `/order-sheets`
+
+**주문서 작성하기**
+
+> operationId: `post-order-sheet`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+## 부가설명 및 특이사항
+주문을 진행 할 상품정보를 전달하는 API 입니다.
+
+주문서 페이지 진입전에\
+        \ 실행합니다. 
+
+비회원 주문인 경우 accessToken을 null로 보냅니다.
+
+## 화면예시
+[![](https://image.toast.com/aaaaahb/api-description/order/ordersheet/[POST]%20order-sheets%20%EC%A3%BC%EB%AC%B8%EC%84%9C%20%EC%83%9D%EC%84%B1.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/ordersheet/[POST]%20order-sheets%20%EC%A3%BC%EB%AC%B8%EC%84%9C%20%EC%83%9D%EC%84%B1.png)
+
+---
+
+### 🟢 `GET` `/order-sheets/{orderSheetNo}`
+
+**주문서 조회하기**
+
+> operationId: `get-order-sheet`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderSheetNo` | path | ✅ | `string` | "" |
+| `includeMemberAddress` | query | - | `boolean` | 회원주소포함여부^|false |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+| `currency` | header | - | `string` | 통화 코드^|KRW |
+
+---
+
+### 🔵 `POST` `/order-sheets/{orderSheetNo}/calculate`
+
+**쿠폰 및 배송지 정보가 적용된 금액 조회하기**
+
+> operationId: `post-order-sheets-order-sheet-no-calculate`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderSheetNo` | path | ✅ | `string` | "" |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+| `currency` | header | - | `string` | 통화 코드^|KRW |
+
+---
+
+### 🟢 `GET` `/order-sheets/{orderSheetNo}/coupons`
+
+**적용할 수 있는 쿠폰 정보 조회하기**
+
+> operationId: `get-order-sheets-order-sheet-no-coupons`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderSheetNo` | path | ✅ | `string` | "" |
+| `channelType` | query | - | `string` | 채널타입^|NAVER_EP |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🔵 `POST` `/order-sheets/{orderSheetNo}/coupons/apply`
+
+**쿠폰 적용하기**
+
+> operationId: `post-order-sheets-order-sheet-no-coupons-apply`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderSheetNo` | path | ✅ | `string` | "" |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+| `currency` | header | - | `string` | 통화 코드^|KRW |
+
+---
+
+### 🔵 `POST` `/order-sheets/{orderSheetNo}/coupons/calculate`
+
+**쿠폰적용금액 계산하기**
+
+> operationId: `post-order-sheets-order-sheet-no-coupons-calculate`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderSheetNo` | path | ✅ | `string` | "" |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🔵 `POST` `/order-sheets/{orderSheetNo}/coupons/maximum`
+
+**최대쿠폰적용금액 계산하기**
+
+> operationId: `post-order-sheets-order-sheet-no-coupons-maximum`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderSheetNo` | path | ✅ | `string` | "" |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+## Purchase — 주문
+
+### 🔵 `POST` `/payments/reserve`
+
+**주문 예약하기**
+
+> operationId: `post-payments-reserve`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+| `currency` | header | - | `string` | 통화 코드(해외 결제 시 필수)^|KRW |
+
+---
+
+## NaverPay — 네이버페이
+
+### 🔵 `POST` `/payments/naver/ordersheet`
+
+**네이버페이 주문서 생성하기**
+
+> operationId: `post-payments-naver-ordersheet`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🟡 `PUT` `/payments/naver/validate`
+
+**네이버페이 상품구매 검증하기**
+
+> operationId: `put-payments-naver-validate`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🔵 `POST` `/payments/naver/wish-list`
+
+**네이버페이 찜 등록하기**
+
+> operationId: `post-payments-naver-wish-list`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+
+---
+
+## PreviousOrder
+
+### 🟢 `GET` `/previous-orders`
+
+**이전주문 검색**
+
+> operationId: `get-previous-orders`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `searchType` | query | - | `string` | "검색 타입^|ORDER_NO, ORDERER_NAME, PRODUCT_NAME" |
+| `keyword` | query | - | `string` | 검색어^|홍길동 |
+| `startYmd` | query | - | `string` | 조회시작일^|2025-11-04 |
+| `endYmd` | query | - | `string` | 조회종료일^|2026-02-04 |
+| `page` | query | ✅ | `integer` | 페이지 번호^|1 |
+| `size` | query | ✅ | `integer` | 페이지당 노출 개수(최대 200)^|30 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+이전주문 검색
+
+---
+
+### 🟢 `GET` `/previous-orders/{orderNo}`
+
+**이전주문 상세조회**
+
+> operationId: `get-previous-order-details`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderNo` | path | ✅ | `string` | 주문 번호^|202206151234567890 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+이전주문 상세조회
+
+---
+
+### 🟢 `GET` `/previous-orders/guest/{orderNo}`
+
+**비회원 이전주문 상세조회**
+
+> operationId: `get-guest-previous-order-details`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderNo` | path | ✅ | `string` | 주문 번호^|202206151234567890 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `guestToken` | header | ✅ | `string` | guestToken^|test-guest-token |
+
+비회원 이전주문 상세조회
+
+---
+
+### 🔵 `POST` `/previous-orders/guest/{orderNo}`
+
+**이전주문 비회원 토큰 발급**
+
+> operationId: `get-previous-order-guest-token`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderNo` | path | ✅ | `string` | 주문 번호^|202206151234567890 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+
+이전주문 비회원 토큰 발급
+
+---
+
+## MyOrder — 내 주문
+
+### 🟢 `GET` `/profile/orders`
+
+**주문 리스트 조회하기**
+
+> operationId: `get-profile-orders`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderRequestTypes` | query | - | `string` | "주문상태 (DEPOSIT_WAIT: Deposit Wait, PAY_DONE: Pay Done, PRODUCT_PREPARE:\ |
+| `pageNumber` | query | - | `number` | 페이지 번호 (1 이상)^|1 |
+| `pageSize` | query | - | `number` | 한 페이지당 노출 수(최대 200)^|10 |
+| `hasTotalCount` | query | - | `boolean` | "목록 카운트 포함 여부(default: false)^|false" |
+| `startYmd` | query | - | `string` | "조회 시작일(yyyy-MM-dd), null인 경우 3개월 전 날짜로 조회^|YYYY-MM-DD" |
+| `endYmd` | query | - | `string` | "조회 종료일(yyyy-MM-dd), null인 경우 오늘 날짜로 조회^|YYYY-MM-DD" |
+| `searchType` | query | - | `string` | 검색 타입^|PRODUCT_NAME |
+| `keyword` | query | - | `string` | 검색어 |
+| `requiresShipping` | query | - | `string` | 배송여부^|true |
+| `orderType` | query | - | `string` | "주문유형^|NORMAL(일반주문),LATER_SHIPPING_INPUT(선물주문)" |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🟢 `GET` `/profile/orders/{orderNo}`
+
+**주문 상세 조회하기**
+
+> operationId: `get-profile-orders-order-no`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderNo` | path | ✅ | `string` | "" |
+| `orderRequestType` | query | - | `string` | "주문옵션타입 (ALL: 전체, CLAIM: 클레임진행, NORMAL: 클레임미진행)^|CLAIM" |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🟢 `GET` `/profile/previous-orders/summary`
+
+**마이페이지용 이전주문 수량 조회하기**
+
+> operationId: `get-profile-previous-orders-summary`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `startYmd` | query | - | `string` | "조회 시작일(yyyy-MM-dd), null인 경우 3개월 전 날짜로 조회^|YYYY-MM-DD" |
+| `endYmd` | query | - | `string` | "조회 종료일(yyyy-MM-dd), null인 경우 오늘 날짜로 조회^|YYYY-MM-DD" |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+## 부가설명 및 특이사항
+시작일 종료일 사이의 이전주문 수량을 조회하는 API 입니다.
+
+시작일과 종료일을 입력하지 않으면 최근 3개월의 이전주문 수량이 조회됩니다.
+
+---
+
+### 🟢 `GET` `/profile/order-options/summary/status`
+
+**주문 상태별 주문 옵션별 수량 조회하기**
+
+> operationId: `get-profile-order-options-summary-status`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `startYmd` | query | - | `string` | "조회 시작일(yyyy-MM-dd), null인 경우 3개월 전 날짜로 조회^|YYYY-MM-DD" |
+| `endYmd` | query | - | `string` | "조회 종료일(yyyy-MM-dd), null인 경우 오늘 날짜로 조회^|YYYY-MM-DD" |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🟡 `PUT` `/profile/order-options/{orderOptionNo}/confirm`
+
+**상품 주문 구매 확정하기**
+
+> operationId: `put-profile-order-options-order-option-no-confirm`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderOptionNo` | path | ✅ | `string` | 주문옵션번호^|123 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🟡 `PUT` `/profile/order-options/{orderOptionNo}/delivery-done`
+
+**상품 주문 배송완료 처리하기**
+
+> operationId: `put-profile-order-options-order-option-no-delivery-done`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderOptionNo` | path | ✅ | `string` | 주문옵션번호^|123 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🟢 `GET` `/profile/orders/summary/amount`
+
+**주문 상태별 주문 수량 및 금액 조회하기**
+
+> operationId: `get-profile-orders-summary-amount`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderStatusType` | query | - | `string` | "주문 상태 (DEPOSIT_WAIT: Deposit Wait, PAY_DONE: Pay Done, PRODUCT_PREPARE:\ |
+| `startYmd` | query | - | `string` | "조회 시작일(yyyy-MM-dd), null인 경우 3개월 전 날짜로 조회^|YYYY-MM-DD" |
+| `endYmd` | query | - | `string` | "조회 종료일(yyyy-MM-dd), null인 경우 오늘 날짜로 조회^|YYYY-MM-DD" |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+## 부가설명 및 특이사항
+시작일과 종료일 사이의 주문 상태별 주문 수량과 결제 금액 조회하는 API 입니\
+        다.
+
+---
+
+### 🟢 `GET` `/profile/orders/summary/status`
+
+**주문 상태별 주문 수량 조회하기**
+
+> operationId: `get-profile-orders-summary-status`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `startYmd` | query | - | `string` | "조회 시작일(yyyy-MM-dd), null인 경우 3개월 전 날짜로 조회^|YYYY-MM-DD" |
+| `endYmd` | query | - | `string` | "조회 종료일(yyyy-MM-dd), null인 경우 오늘 날짜로 조회^|YYYY-MM-DD" |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🟡 `PUT` `/profile/orders/{orderNo}/cashReceipt`
+
+**현금영수증 신청정보 수정 (무통장 입금 주문)**
+
+> operationId: `put-profile-orders-order-cash-receipt`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderNo` | path | ✅ | `string` | 주문번호^|2020042100000001 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🔵 `POST` `/profile/orders/{orderNo}/cashReceipt`
+
+**현금영수증 신청하기**
+
+> operationId: `post-profile-orders-order-no-cash-receipts`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderNo` | path | ✅ | `string` | 주문번호^|2020042100000001 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🟢 `GET` `/profile/orders/{orderNo}/claim`
+
+**전체 주문취소를 위한 주문 상세 조회하기 (클레임 상세사유 포함)**
+
+> operationId: `get-profile-orders-order-no-claim`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderNo` | path | ✅ | `string` | "" |
+| `orderRequestType` | query | - | `string` | "주문옵션타입 (DEPOSIT_WAIT: Deposit Wait, PAY_DONE: Pay Done, PRODUCT_PREPARE:\ |
+| `claimType` | query | ✅ | `string` | "클레임타입 (CANCEL, RETURN, EXCHANGE, NONE)^|CANCEL,RETURN,EXCHANGE" |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🟡 `PUT` `/profile/orders/{orderNo}/deliveries`
+
+**주문단위 배송정보 수정하기**
+
+> operationId: `put-profile-orders-order-no-deliveries`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderNo` | path | ✅ | `string` | 주문옵션번호^|2010121010 |
+| `add` | query | - | `boolean` | 주소지 추가 여부^|true |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🟢 `GET` `/profile/orders/{orderNo}/payment-receipt-url`
+
+**결제 영수증 조회**
+
+> operationId: `get-profile-orders-order-no-payment-receipt-url`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderNo` | path | ✅ | `string` | 주문번호^|1234567890 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+결제 영수증 조회
+
+---
+
+### 🟢 `GET` `/profile/orders/{orderNo}/simple-receipt`
+
+**간이 영수증 조회**
+
+> operationId: `get-profile-orders-order-no-simple-receipt`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderNo` | path | ✅ | `string` | 주문번호^|1234567890 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+간이 영수증 조회
+
+---
+
+### 🟢 `GET` `/profile/orders/{orderNo}/specifications`
+
+**거래 명세서 조회 (주문 기준)**
+
+> operationId: `get-profile-orders-order-no-specifications`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderNo` | path | ✅ | `string` | 주문번호^|1234567890 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+거래 명세서 조회 (주문 기준)
+
+---
+
+### 🔵 `POST` `/profile/orders/{orderNo}/cashReceipt/cancel`
+
+**"[샵바이 스탠다드 전용] 현금영수증 취소하기"**
+
+> operationId: `post-profile-orders-order-no-cash-receipts-cancel`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderNo` | path | ✅ | `string` | 주문번호^|2020042100000001 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+|
+  |## 부가설명 및 특이사항
+  |구매자가 현금영수증 발행된 주문의 현금영수증 발행 취소하는 API입니다.
+  |
+
+---
+
+## ShippingAddress — 배송지
+
+### 🟢 `GET` `/profile/shipping-addresses`
+
+**배송지 목록 가져오기**
+
+> operationId: `get-profile-shipping-addresses`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🔵 `POST` `/profile/shipping-addresses`
+
+**배송지 등록하기**
+
+> operationId: `post-profile-shipping-addresses`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+## 부가설명 및 특이사항
+주소지정보를 추가하는 API 입니다.
+
+주소록 배송지(AddressType.BOOK)는\
+        \ 제한없이 등록이 가능하고 최근 배송지(AddressType.RECENT)는 최대 10개 까지 등록이 됩니다. 
+
+최근 배송지가\
+        \ 10개가 등록된 상태에서 추가로 최근 배송지를 등록하면 기본 배송지가 아닌 최근 배송지중에 사용한지 가장 오래된 최근 배송지가 삭\
+        제 됩니다.
+
+## 화면예시
+[![](https://image.toast.com/aaaaahb/api-description/order/shipping-address/[GET]%20profile_shipping-addresses%20%EB%B0%B0%EC%86%A1%EC%A7%80%20%EB%AA%A9%EB%A1%9D%20%EA%B0%80%EC%A0%B8%EC%98%A4%EA%B8%B0.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/shipping-address/[GET]%20profile_shipping-addresses%20%EB%B0%B0%EC%86%A1%EC%A7%80%20%EB%AA%A9%EB%A1%9D%20%EA%B0%80%EC%A0%B8%EC%98%A4%EA%B8%B0.png)
+
+---
+
+### 🟢 `GET` `/profile/shipping-addresses/booked`
+
+**저장 된 배송지 목록 가져오기**
+
+> operationId: `get-profile-booked-shipping-addresses`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `page` | query | ✅ | `integer` | 페이지 번호 (1 이상)^|1 |
+| `size` | query | ✅ | `integer` | 페이지당 노출 개수^|30 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+## 부가설명 및 특이사항
+저장 된 주소지정보를 조회하는 API 입니다.
+
+---
+
+### 🟢 `GET` `/profile/shipping-addresses/recent`
+
+**최근 배송지 가져오기**
+
+> operationId: `get-profile-shipping-address-recent`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🟢 `GET` `/profile/shipping-addresses/{addressNo}`
+
+**배송지 가져오기**
+
+> operationId: `get-profile-shipping-addresses-address-no`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `addressNo` | path | ✅ | `number` | 배송지 번호^|1 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🟡 `PUT` `/profile/shipping-addresses/{addressNo}`
+
+**배송지 수정하기**
+
+> operationId: `put-profile-shipping-addresses-address-no`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `addressNo` | path | ✅ | `number` | 배송지 번호^|1 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+## 부가설명 및 특이사항
+선택한 배송지 주소를 수정하는 API 입니다.
+
+[참고사항]
+주소지 정보\
+        \ 중 'nullable'한 값은 해당 값을 입력하지 않은 경우에 기존 값이 유지되고, 공백을 넣어 요청할 경우 공백으로 수정됩니다\
+        . 
+
+## 화면예시
+[![](https://image.toast.com/aaaaahb/api-description/order/shipping-address/[PUT]%20profile_shipping-addresses%20%EB%B0%B0%EC%86%A1%EC%A7%80%20%EC%88%98%EC%A0%95.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/shipping-address/[PUT]%20profile_shipping-addresses%20%EB%B0%B0%EC%86%A1%EC%A7%80%20%EC%88%98%EC%A0%95.png)
+
+---
+
+### 🔴 `DELETE` `/profile/shipping-addresses/{addressNo}`
+
+**배송지 삭제하기**
+
+> operationId: `delete-profile-shipping-addresses-address-no`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `addressNo` | path | ✅ | `number` | 배송지 번호^|1 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🟡 `PUT` `/profile/shipping-addresses/{addressNo}/default`
+
+**기본 배송지 수정하기**
+
+> operationId: `put-profile-shipping-addresses-address-no-default`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `addressNo` | path | ✅ | `number` | 배송지 번호^|1 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🟢 `GET` `/shippings/enums`
+
+**배송 enum 정보 조회**
+
+> operationId: `get-shippings-enums`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+
+배송 enum 정보 조회
+
+---
+
+## RecurringPayment — 정기결제
+
+### 🟢 `GET` `/recurring-payments`
+
+**정기결제 조회하기**
+
+> operationId: `get-recurring-payments`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `startYmd` | query | - | `string` | 시작일^|YYYY-MM-DD |
+| `endYmd` | query | - | `string` | 종료일^|YYYY-MM-DD |
+| `statusTypes` | query | - | `string` | "정기결제 상태 리스트^|ACTIVE,SYSTEM_PAUSED" |
+| `page` | query | - | `number` | 페이지 번호 (1 이상)^|1 |
+| `size` | query | - | `number` | 페이지당 노출 개수^|30 |
+| `Version` | header | ✅ | `string` | API 버전^|1.1 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+## 부가설명 및 특이사항
+정기결제를 조회하는 API 입니다.
+
+### v1.0 
+페이징 처리를 위한\
+        \ totalCount를 제공하지 않습니다.
+```
+[
+ {
+  "recurringPaymentId": "",
+  ...
+\
+        \ },
+ ...
+]
+```
+
+### v1.1
+페이징 처리를 위한 totalCount를 제공합니다.
+자세한 정보는 Responses\
+        \ 항목 참고 바랍니다.
+
+---
+
+### 🔵 `POST` `/recurring-payments`
+
+**정기결제 신청하기**
+
+> operationId: `post-recurring-payments`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🟢 `GET` `/recurring-payments/card`
+
+**가장 최근에 등록된 정기결제 카드 조회하기**
+
+> operationId: `get-recurring-payments-card`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🔵 `POST` `/recurring-payments/card`
+
+**정기결제 카드 등록하기**
+
+> operationId: `post-recurring-payments-card`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🔴 `DELETE` `/recurring-payments/card`
+
+**회원의 모든 정기결제 카드 삭제하기**
+
+> operationId: `delete-recurring-payments-card`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🟢 `GET` `/recurring-payments/cards`
+
+**정기결제 카드 조회하기**
+
+> operationId: `get-recurring-payments-cards`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🟢 `GET` `/recurring-payments/cart`
+
+**정기결제 장바구니 조회하기**
+
+> operationId: `get-recurring-payments-cart`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `divideInvalidProducts` | query | - | `boolean` | 구매하지 못하는 상품 분할여부^|true |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🟡 `PUT` `/recurring-payments/cart`
+
+**정기결제 장바구니 수정하기**
+
+> operationId: `put-recurring-payments-cart`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+## 부가설명 및 특이사항
+로그인된 유저의 장바구니의 상품 중 구매 수량과 사용자 입력형 옵션을 수정하는\
+        \ API 입니다.
+
+옵션 종류는 변경할 수 없습니다.
+
+옵션변경은 변경할 옵션을 삭제한 후 신규등록하는 방법으로 수정합니다\
+        .
+
+---
+
+### 🔵 `POST` `/recurring-payments/cart`
+
+**정기결제 장바구니에 추가하기**
+
+> operationId: `post-recurring-payments-cart`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🔴 `DELETE` `/recurring-payments/cart`
+
+**정기결제 장바구니 삭제하기**
+
+> operationId: `delete-recurring-payments-cart`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `cartNo` | query | ✅ | `string` | "장바구니 번호^|1,2,3" |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🟡 `PUT` `/recurring-payments/close`
+
+**정기결제 해지하기 (bulk)**
+
+> operationId: `put-recurring-payments-close`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🟡 `PUT` `/recurring-payments/gifts`
+
+**정기 결제 사은품 변경**
+
+> operationId: `put-recurring-payments-gifts`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🟢 `GET` `/recurring-payments/next-recurring-date`
+
+**정기결제 다음배송일자 조회하기**
+
+> operationId: `get-recurring-payments-next-recurring-date`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `recurringPaymentId` | query | - | `string` | 정기결제 신청번호^|202108251705594 |
+| `cycle` | query | ✅ | `number` | 정기결제 주기^|1 |
+| `cycleDate` | query | - | `number` | 정기결제 일시^|1 |
+| `cycleDayOfWeek` | query | - | `string` | 정기결제 요일^|MONDAY |
+| `cycleType` | query | - | `string` | "정기결제 배송주기 타입^|(MONTH: 월, WEEK: 주)" |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🔵 `POST` `/recurring-payments/order-sheets`
+
+**정기결제 주문서 작성하기**
+
+> operationId: `post-recurring-payments-order-sheets`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🟡 `PUT` `/recurring-payments/status`
+
+**정기결제 상태 변경 (bulk)**
+
+> operationId: `put-recurring-payments-status`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🟢 `GET` `/recurring-payments/{recurringPaymentId}`
+
+**정기 결제 상세 조회**
+
+> operationId: `get-recurring-payments-recurring-payment-id`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `recurringPaymentId` | path | ✅ | `string` | "" |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🟡 `PUT` `/recurring-payments/card/priority`
+
+**정기결제 카드 우선순위 변경**
+
+> operationId: `put-recurring-payments-card`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🔴 `DELETE` `/recurring-payments/card/{cardNo}`
+
+**정기결제 카드 삭제하기**
+
+> operationId: `delete-recurring-payments-card-card-no`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `cardNo` | path | ✅ | `string` | "" |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🟢 `GET` `/recurring-payments/cart/calculate`
+
+**정기결제 장바구니에서 선택된 상품금액 계산하기**
+
+> operationId: `get-recurring-payments-cart-calculate`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `cartNo` | query | ✅ | `string` | "선택된 장바구니 번호^|1,2,3" |
+| `divideInvalidProducts` | query | - | `boolean` | 구매하지 못하는 상품 분할여부^|true |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+## 부가설명 및 특이사항
+장바구니에서 선택된 상품만 계산하여 금액만 리턴하는 API 입니다.
+
+아래\
+        \ 화면예시에서 상품/옵션별 배송비는 업데이트(재계산)하지 못합니다.
+
+cartNo 파라미터 자체를 넘기지 않는 경우 : 장바구니\
+        \ 전체
+
+cartNo 에 빈 값을 넘기는 경우 : 0원        
+
+## 화면예시
+[![](https://image.toast.com/aaaaahb/api-description/order/cart/[GET]%20cart_calculate%20%EC%9E%A5%EB%B0%94%EA%B5%AC%EB%8B%88%20%EC%84%A0%ED%83%9D%20%EA%B3%84%EC%82%B0.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/cart/[GET]%20cart_calculate%20%EC%9E%A5%EB%B0%94%EA%B5%AC%EB%8B%88%20%EC%84%A0%ED%83%9D%20%EA%B3%84%EC%82%B0.png)
+
+---
+
+### 🟢 `GET` `/recurring-payments/cart/subset`
+
+**정기결제 장바구니에서 선택된 항목만 장바구니 그룹별로 재계산하기**
+
+> operationId: `get-recurring-payments-cart-subset`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `cartNo` | query | ✅ | `string` | "선택된 장바구니 번호^|1,2,3" |
+| `divideInvalidProducts` | query | - | `boolean` | 구매하지 못하는 상품 분할여부^|true |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+## 부가설명 및 특이사항
+장바구니에서 선택된 상품만 계산하여 장바구니 상품들과 금액까지 포함해서 리턴하는\
+        \ API 입니다.
+
+아래 화면예시에서 상품/옵션별 배송비를 함께 업데이트(재계산)할 수 있습니다.
+
+cartNo 파라미터 자\
+        체를 넘기지 않는 경우 : 장바구니 전체
+
+cartNo 에 빈 값을 넘기는 경우 : 0원
+        
+## 화면예시
+[![](https://image.toast.com/aaaaahb/api-description/order/cart/[GET]%20cart_subset%20%EC%9E%A5%EB%B0%94%EA%B5%AC%EB%8B%88%EC%97%90%EC%84%9C%20%EC%84%A0%ED%83%9D%EB%90%9C%20%ED%95%AD%EB%AA%A9%EB%A7%8C%20%EC%9E%A5%EB%B0%94%EA%B5%AC%EB%8B%88%20%EA%B7%B8%EB%A3%B9%EB%B3%84%EB%A1%9C%20%EC%9E%AC%20%EA%B3%84%EC%82%B0.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/cart/[GET]%20cart_subset%20%EC%9E%A5%EB%B0%94%EA%B5%AC%EB%8B%88%EC%97%90%EC%84%9C%20%EC%84%A0%ED%83%9D%EB%90%9C%20%ED%95%AD%EB%AA%A9%EB%A7%8C%20%EC%9E%A5%EB%B0%94%EA%B5%AC%EB%8B%88%20%EA%B7%B8%EB%A3%B9%EB%B3%84%EB%A1%9C%20%EC%9E%AC%20%EA%B3%84%EC%82%B0.png)
+
+---
+
+### 🟡 `PUT` `/recurring-payments/close/{recurring-payment-id}`
+
+**정기결제 해지하기**
+
+> operationId: `put-recurring-payments-close-recurring-payment-id`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `recurring-payment-id` | path | ✅ | `string` | "" |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🔵 `POST` `/recurring-payments/guest/cart`
+
+**정기결제 비회원 장바구니 계산하기**
+
+> operationId: `post-recurring-payments-guest-cart`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `divideInvalidProducts` | query | - | `boolean` | 구매하지 못하는 상품 분할여부^|true |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+
+## 부가설명 및 특이사항
+비회원의 장바구니금액 및 합배송 상품을 계산하여 목록을 가져오는 API 입니다\
+        .
+
+쇼핑몰배송의 경우, 파트너명을 '쇼핑몰배송'으로 내려줍니다. 
+
+## 화면예시
+[![](https://image.toast.com/aaaaahb/api-description/order/guest/[POST]%20guest_cart%20%EA%B2%8C%EC%8A%A4%ED%8A%B8%20%EC%9E%A5%EB%B0%94%EA%B5%AC%EB%8B%88%20%EA%B3%84%EC%82%B0%201-1.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/guest/[POST]%20guest_cart%20%EA%B2%8C%EC%8A%A4%ED%8A%B8%20%EC%9E%A5%EB%B0%94%EA%B5%AC%EB%8B%88%20%EA%B3%84%EC%82%B0%201-1.png)
+\
+        [![](https://image.toast.com/aaaaahb/api-description/order/guest/[POST]%20guest_cart%20%EA%B2%8C%EC%8A%A4%ED%8A%B8%20%EC%9E%A5%EB%B0%94%EA%B5%AC%EB%8B%88%20%EA%B3%84%EC%82%B0%201-2.png?autox150)](http://image.toast.com/aaaaahb/api-description/order/guest/[POST]%20guest_cart%20%EA%B2%8C%EC%8A%A4%ED%8A%B8%20%EC%9E%A5%EB%B0%94%EA%B5%AC%EB%8B%88%20%EA%B3%84%EC%82%B0%201-2.png)
+
+---
+
+### 🟢 `GET` `/recurring-payments/later-input/shippings`
+
+**정기결제 선물하기 나중 입력 배송지 정보 조회하기**
+
+> operationId: `get-recurring-payments-later-input-shippings`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+| `recurringPaymentGroupNo` | header | ✅ | `string` | 암호화된 정기결제 그룹 번호^|RDFlU2czQ3dZeGM1YXlMYm9XSklidz09 |
+
+---
+
+### 🟡 `PUT` `/recurring-payments/later-input/shippings`
+
+**정기결제 선물하기 나중 입력 배송지 정보 수정하기**
+
+> operationId: `put-recurring-payments-later-input-shippings`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+| `recurringPaymentGroupNo` | header | ✅ | `string` | 암호화된 정기결제 그룹 번호^|RDFlU2czQ3dZeGM1YXlMYm9XSklidz09 |
+
+---
+
+### 🟢 `GET` `/recurring-payments/order-sheets/{orderSheetNo}`
+
+**정기결제 주문서 가져오기**
+
+> operationId: `get-recurring-payments-order-sheets-order-sheets-no`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderSheetNo` | path | ✅ | `string` | "" |
+| `includeMemberAddress` | query | - | `boolean` | 회원주소포함여부^|false |
+| `isPresent` | query | - | `boolean` | 정기결제 선물하기 여부^|false |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🔵 `POST` `/recurring-payments/skip/next`
+
+**정기결제 회차 건너뛰기 (bulk)**
+
+> operationId: `post-recurring-payments-skip-next`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🟢 `GET` `/recurring-payments/{recurringPaymentGroupNo}/guest`
+
+**정기결제 선물하기 수령자 주문 상세 조회하기**
+
+> operationId: `get-recurring-payments-group-for-guest`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `recurringPaymentGroupNo` | path | ✅ | `string` | "" |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `guestToken` | header | ✅ | `string` | guestToken^|test-guest-token |
+
+---
+
+### 🔵 `POST` `/recurring-payments/{recurringPaymentGroupNo}/guest`
+
+**정기결제 선물하기 수령자 주문 토큰 발급하기**
+
+> operationId: `post-recurring-payments-group-for-guest`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `recurringPaymentGroupNo` | path | ✅ | `string` | "" |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🟢 `GET` `/recurring-payments/{recurringPaymentId}/gifts`
+
+**정기 결제 사은품 조회**
+
+> operationId: `get-recurring-payments-recurring-payment-id-gifts`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `recurringPaymentId` | path | ✅ | `string` | "" |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🟡 `PUT` `/recurring-payments/{recurringPaymentId}/info`
+
+**정기 결제 배송 정보 변경**
+
+> operationId: `put-recurring-payments-delivery`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `recurringPaymentId` | path | ✅ | `string` | "" |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🟡 `PUT` `/recurring-payments/{recurringPaymentId}/status`
+
+**정기결제 상태 변경**
+
+> operationId: `put-recurring-payments-recurring-payment-id-status`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `recurringPaymentId` | path | ✅ | `string` | "" |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🟡 `PUT` `/recurring-payments/card/{cardNo}/main`
+
+**정기결제 메인 카드 설정**
+
+> operationId: `put-recurring-payments-card-card-no-main`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `cardNo` | path | ✅ | `string` | "" |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🔵 `POST` `/recurring-payments/{recurringPaymentId}/skip/next`
+
+**정기결제 회차 건너뛰기**
+
+> operationId: `put-recurring-payments-recurring-payment-id-skip-next`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `recurringPaymentId` | path | ✅ | `string` | "" |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+## UnidentifiedDepositors — 미확인 입금자
+
+### 🟢 `GET` `/unidentifiedDepositors`
+
+**"[샵바이프로 전용] 미확인 입급자 조회하기"**
+
+> operationId: `get-unidentified-depositors`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `mallNo` | query | ✅ | `string` | 쇼핑몰 번호^|1 |
+| `depositYmd` | query | ✅ | `string` | 입금일^|YYYY-MM-DD |
+| `name` | query | ✅ | `string` | 입금자명^|test |
+| `page` | query | ✅ | `string` | 페이지 번호 (1 이상)^|1 |
+| `size` | query | ✅ | `string` | 페이지당 노출 개수^|30 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+
+---
+
+### 🟢 `GET` `/unidentifiedDepositors/config`
+
+**"[샵바이프로 전용] 미확인 입금자 설정 조회하기"**
+
+> operationId: `get-unidentified-depositors-config`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+
+---
+
+## Wish — 위시리스트 (찜하기)
+
+### 🟢 `GET` `/wish`
+
+**위시리스트 리스트 가져오기**
+
+> operationId: `get-wish`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🟡 `PUT` `/wish`
+
+**위시리스트 수정하기**
+
+> operationId: `put-wish`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🔵 `POST` `/wish`
+
+**위시리스트 등록하기**
+
+> operationId: `post-wish`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🔴 `DELETE` `/wish`
+
+**위시리스트 삭제하기**
+
+> operationId: `delete-wish`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `wishNos` | query | ✅ | `number` | "위 번호^|1,2,3" |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+
+### 🟢 `GET` `/wish/count`
+
+**위시리스트 개수 가져오기**
+
+> operationId: `get-wish-count`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|test-client-id |
+| `platform` | header | ✅ | `string` | "클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)^|PC" |
+| `language` | header | - | `string` | "언어 (기본 값: ko)^|ko" |
+| `accessToken` | header | - | `string` | 회원 엑세스 토큰^|test-access-token |
+| `Shop-By-Authorization` | header | - | `string` | 액세스 토큰(Oauth2 스펙)^|Bearer test-access-token |
+
+---
+

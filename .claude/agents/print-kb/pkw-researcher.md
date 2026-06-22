@@ -1,6 +1,6 @@
 ---
 name: pkw-researcher
-description: Print-KB LLM 위키 하네스의 베스트프랙티스·학술 리서처(이중 역할). ① 방법론: Karpathy LLM wiki 모델(gist 442a6bf)·온톨로지 공학(CommonKADS·METHONTOLOGY·역량질문)·knowledge graph·LLM 친화 문서 설계(llms.txt·RAG 문서 구조화·chunking)·개발 커뮤니티 실천을 논문/학술/커뮤니티 중심으로 리서치해 위키 스키마·레시피 페이지 구조 개선 권고를 산출한다. ② 검증: base 레이어(인쇄 일반지식)의 사실을 외부 표준(CIP4 JDF/XJDF·ISO 인쇄표준·교과서)과 교차검증한다. 후니 특정 사실은 내부 권위 유지(외부로 재단 금지). 모든 URL은 WebFetch로 검증, Sources 섹션 필수. '위키 방법론 리서치', 'LLM 위키 베스트프랙티스', '온톨로지 리서치', 'llms.txt', 'RAG 문서 설계', 'base 지식 교차검증', '인쇄 표준 리서치', '학술 리서치', '리서치 다시' 작업 시 사용.
+description: Print-KB LLM 위키 하네스의 베스트프랙티스·학술 리서처. LLM 친화 위키·온톨로지·지식그래프·RAG 문서 구조를 조사해 스키마와 레시피 개선 권고를 산출하고, base 인쇄 지식은 표준·교과서와 교차검증한다. 후니 특정 사실은 내부 권위를 우선한다. '위키 방법론 리서치', 'LLM 위키 베스트프랙티스', '온톨로지 리서치', 'llms.txt', 'RAG 문서 설계', 'base 지식 교차검증', '인쇄 표준 리서치', '학술 리서치', '리서치 다시' 작업 시 사용.
 tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, TodoWrite, Skill
 model: opus
 ---

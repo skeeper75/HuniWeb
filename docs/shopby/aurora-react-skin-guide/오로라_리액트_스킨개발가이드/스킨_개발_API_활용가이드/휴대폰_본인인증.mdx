@@ -1,0 +1,178 @@
+---
+title: "휴대폰 본인인증"
+depth: 2
+path: "오로라 리액트 스킨개발가이드 > 스킨 개발_API 활용가이드 > 휴대폰 본인인증"
+---
+
+# 휴대폰 본인인증
+
+## 이해하기
+
+```
+샵바이 패키지(shared)를 이용하지 않는 경우, 참고하실 수 있는 문서입니다.
+```
+
+> 회원 본인인증 방법: (1) 이메일 인증 (2) SMS 인증 (3)휴대폰 인증
+> 본 문서는 이 중 '휴대폰 인증'으로 설정한 경우 노출되는 NHN KCP 휴대폰 인증 모듈에 대해 소개합니다.
+
+
+
+
+
+> 참고: 회원 본인 인증의 경우, 아래와 같은 화면에서 활용됩니다.
+
+* 성인 인증 필요 시(성인인증 사용 상품 구매 및 성인인증 인트로페이지)
+* 마이페이지 회원정보 수정 시
+* 쇼핑몰 회원가입 시
+
+***
+
+## ? 휴대본 본인인증 버튼
+
+어드민 설정 경로는 아래와 같습니다.
+
+* shop by pro : [설정> 기본정책 >쇼핑몰관리> 회원 인증 설정]
+* shop by premium : [서비스 관리 > 쇼핑몰 관리]
+
+'휴대폰 인증'으로 설정한 경우, 화면 내 '휴대폰 인증 버튼'이 노출 됩니다.
+
+
+
+> [GET /malls](https://docs.shopby.co.kr/?url.primaryName=admin/#/Mall/get-malls) 
+
+```
+▶ 몰 정보 조회하기
+쇼핑몰 전반에 대한 기본 정보와 설정 데이터를 조회할 수 있습니다.
+```
+
+[샵바이 API 호출가이드](https://nhnent.dooray.com/share/pages/WoOk8q6KT1K3MZcLSuyZsw/3520338751321947577) 문서에서 소개한 `GET /malls` 내 `mallJoinConfig` 값을 통해
+어드민의 휴대폰 인증 사용함 여부를 확인합니다.
+
+아래 코드를 만족했을 때 휴대폰 본인 인증이 가능하며, 휴대폰 인증 버튼이 노출됩니다.
+
+```
+1
+2    const { authenticationTimeType, authenticationType } = shopby.cache.getMall().mallJoinConfig;
+3    this.isAuthPhoneConfig = authenticationTimeType === 'JOIN_TIME' && authenticationType === 'AUTHENTICATION_BY_PHONE';
+4
+```
+
+
+
+***
+
+## ?  NHN KCP 인증모듈 로직
+
+
+
+### ⓐ 휴대폰 본인인증 버튼 클릭
+
+휴대폰 본인인증 버튼이 노출된 쇼핑몰 화면에서 버튼 클릭 시,
+`/callback/kcp-auth-callback` 을 통해 URI key 값 여부를 확인합니다.
+
+### ⓑ HTML form 획득
+
+KCP 인증 모듈 팝업을 출력하기 위해서 `GET /kcp/id-verification` 을 통해 HTML form을 요청해야 합니다.
+해당 API를 통해 HTML form 생성 시, 화면 내 'NHN KCP 인증 팝업 (외부모듈)'이 노출됩니다.
+
+> [GET /kcp/id-verification/form](https://docs.shopby.co.kr/?url.primaryName=auth/#/KCPCertification/get-kcp-id-verification-form)
+
+```
+▶ KCP 본인인증 요청하기
+본인 인증을 위한 form을 생성합니다
+```
+
+
+
+### ⓒ Key 파라미터 획득
+
+'NHN KCP 인증팝업(외부 모듈)'을 통해 사용자가 인증에 성공하면, callback 주소로 본인인증 키 `key` 가 전달됩니다.
+
+**예시 코드**
+
+```
+https://{쇼핑몰 도메인}/callback/kcp-auth-callback?key=XXXXXXXXXX
+```
+
+
+
+### ⓓ 본인인증 결과 조회
+
+해당 `key` 를 파라미터 값으로 본인인증 인증 성공 및 실패 여부를 판단한 뒤, 화면에 성공 및 실패 결과를 전달합니다.
+성공 시 다음 화면으로 리다이렉트 되며 팝업이 종료됩니다.
+
+> [GET /kcp/id-verification/response](https://docs.shopby.co.kr/?url.primaryName=auth/#/KCPCertification/get-kcp-id-verification-response)
+
+```
+▶ KCP 본인인증 결과 조회하기
+NHN KCP 본인인증 결과를 확인합니다
+```
+
+### ⓔ 본인인증 결과 획득
+
+성공 시 다음 화면으로 리다이렉트 되며 팝업이 종료됩니다.
+
+**㉠ 회원가입 진행 중 이루어진 본인인증이었을 경우**
+만약 '[회원가입 화면](https://nhnent.dooray.com/share/pages/WoOk8q6KT1K3MZcLSuyZsw/3519671841187655806)'에서 휴대폰 본인 인증을 진행한 경우였다면,
+본인인증 성공 시 해당 API 응답 값 중, `ci` 값을 회원가입 화면으로 전달하여 CI 중복 확인을 추가적으로 진행해야 하며
+`phone `핸드폰 번호 값을 회원정보 입력화면에 자동 출력합니다.
+
+
+
+**㉡성인 인증 여부 갱신**
+NHN KCP 본인인증 결과 조회 이후 로그인 여부를 판단하여
+만약 해당 회원이 로그인 상태였을 경우(`accessToken`을 가지고 있었을 경우), 성인인증 여부를 갱신해야 합니다.
+
+> [POST /kcp/age-verification](https://docs.shopby.co.kr/?url.primaryName=auth/#/KCPCertification/post-kcp-age-verification)
+
+```
+▶ 회원 성인인증 하기
+회원 성인인증 여부를 갱신합니다
+```
+
+이전 단계에서 획득한 `key` 파라미터로 사용합니다.
+
+한 번 성인인증을 완료한 회원은 인증을 완료한 시점부터 1년간 인증 기록이 유지됩니다.
+기간 내 다시 본인인증에 성공할 경우 성인인증 일시가 갱신됩니다.
+
+### ⓕ 팝업 차단 여부 체크
+
+사용자의 브라우저 환경에서 팝업 차단 설정이 활성화되어 있는 경우, 인증 모듈이 정상적으로 동작하지 않을 수 있습니다.
+이 경우, 팝업 차단 여부를 확인하고 사용자에게 팝업 허용 안내 메시지를 제공하여 정상적인 인증 절차를 진행할 수 있도록 해야 합니다.
+
+브라우저에서는 특정 사이트에 대한 팝업 허용 설정 상태를 직접적으로 확인할 수 있는 방법은 제공하지 않습니다.
+다만, `window.open()` 함수를 통해 팝업 호출 시, 팝업이 정상적으로 열렸는지 여부를 아래와 같은 방식으로 확인할 수 있습니다.
+
+**예시 코드**
+
+```javascript
+const popup = window.open('https://example.com', '_blank');
+if (!popup || popup.closed || typeof popup.closed === 'undefined') {
+  alert('팝업이 차단되어 인증을 진행할 수 없습니다. 브라우저의 팝업 허용 설정을 확인해주세요.');
+}
+```
+
+
+
+KCP 인증 모듈은 HTML form 태그를 이용해 팝업 창을 호출하는 방식을 사용하므로, 이를 응용하여 팝업 차단 여부를 확인할 수 있습니다.
+일반적인 `window.open()` 호출 외에도, form을 통한 팝업 호출 시 반환되는 팝업 객체를 활용하여 팝업이 정상적으로 열렸는지 여부를 체크할 수 있습니다.
+
+**예시 코드**
+
+```javascript
+const response = await fetch("/kcp/id-verification/form");  // 인증모듈 form 요청(예시)
+const source = await response.text();
+
+const parser = new DOMParser();
+const doc = parser.parseFromString(source, "text/html"); //DOM Document로 변환
+
+const formElement = doc.querySelector("form#form_auth");  // 응답받은 form 데이터의 name 값 참조
+document.body.appendChild(formElement);
+
+const popup = window.open("", formElement.target);  // 응답받은 form 데이터의 target 값 참조
+formElement.submit();
+
+if (!popup || popup.closed || typeof popup.closed === 'undefined') {
+  alert('팝업이 차단되어 인증을 진행할 수 없습니다. 브라우저의 팝업 허용 설정을 확인해주세요.');
+}
+```

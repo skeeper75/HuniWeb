@@ -1,0 +1,99 @@
+{
+  "high_severity_fixes": [
+    {
+      "id": "NC-01",
+      "title": "Fix Pinia store name conflicts in deob_07 header mapping table",
+      "severity": "HIGH",
+      "file": "deob_07_app_components.js",
+      "lines": "52-72",
+      "description": "The header mapping table in deob_07 uses different names for Pinia store composables than the actual definitions in deob_06. This causes confusion when cross-referencing modules.",
+      "current_values": {
+        "Dt()": "useI18n() -- 다국어 컴포저블",
+        "Ve()": "useEditorStore() -- Pinia 에디터 스토어",
+        "zr()": "useOrderDataStore() -- 주문 데이터 스토어",
+        "Ml()": "useOrderStore() -- Pinia 주문 스토어"
+      },
+      "correct_values": {
+        "Dt()": "useConfigStore() -- Pinia config 스토어 (locale 관리). Note: translate/x() 함수가 내부적으로 useConfigStore를 호출하므로 useI18n은 간접적 별칭",
+        "Ve()": "useExteriorStore() -- Pinia exterior 스토어 (uploadType, editorData)",
+        "zr()": "useOrderStore() -- Pinia order 스토어 (orderData)",
+        "Ml()": "useAccOrderStore() -- Pinia acc-order 스토어 (부자재 주문)"
+      },
+      "fix_action": "Update the composableMapping section in the deob_07 header comment block (lines 52-72) to match the canonical store names defined in deob_06_app_widget_sdk.js lines 717-850. Add a note that x() wraps useConfigStore internally.",
+      "estimated_effort": "10 minutes"
+    },
+    {
+      "id": "COMP-03",
+      "title": "Add JSDoc comments to deob_07 component definitions",
+      "severity": "HIGH",
+      "file": "deob_07_app_components.js",
+      "lines": "97-2506",
+      "description": "Only 1 JSDoc block exists in 2506 lines. The 38 Vue components (Apparel, Book, Acc, 25 post-process, 4 quantity, etc.) have section header comments but no JSDoc on their defineComponent() calls.",
+      "fix_action": "For each component's defineComponent() call, add a JSDoc block with: (1) Korean description of the component's purpose, (2) @component tag, (3) @prop descriptions for each prop, (4) @emits for each emit event. Prioritize the 3 main components (Apparel, Book, Acc) and 10 sub-components first. The 25 post-process components follow a repeating pattern and can share a template JSDoc.",
+      "priority_components": [
+        {"name": "Apparel", "line": 676, "desc": "의류 주문 메인 컴포넌트"},
+        {"name": "Book", "line": 1375, "desc": "책자 주문 메인 컴포넌트"},
+        {"name": "Acc", "line": 1582, "desc": "부자재 주문 메인 컴포넌트"},
+        {"name": "ApparelSizeGbn", "line": 189, "desc": "의류 사이즈 구분"},
+        {"name": "ApparelSingleSizeQty", "line": 121, "desc": "단일 사이즈 수량"},
+        {"name": "ApparelMultiSizeQty", "line": 268, "desc": "멀티 사이즈 수량"},
+        {"name": "PantoneChipModal", "line": 434, "desc": "팬톤 컬러 모달"},
+        {"name": "BookQty", "line": 921, "desc": "책자 수량"},
+        {"name": "DosuColor", "line": 1037, "desc": "인쇄도수+색상"},
+        {"name": "Paper", "line": 1093, "desc": "용지 선택"},
+        {"name": "CoverGuide", "line": 1267, "desc": "표지 가이드"}
+      ],
+      "estimated_effort": "2 hours"
+    }
+  ],
+  "medium_severity_fixes": [
+    {
+      "id": "NC-02",
+      "title": "Harmonize component names between deob_06 and deob_07",
+      "severity": "MEDIUM",
+      "description": "Choose one canonical name per component and update both files. Recommendation: use deob_06 names (ImageButton, Selector, ButtonRadio, ColorPicker, RadioList) as canonical since they are the defining module.",
+      "affected_identifiers": {
+        "je": {"deob_06": "ImageButton", "deob_07": "IconCheckbox", "recommended": "ImageButton"},
+        "Fo": {"deob_06": "Selector", "deob_07": "BasicSelect", "recommended": "Selector"},
+        "Sn": {"deob_06": "ButtonRadio", "deob_07": "SizeSelector", "recommended": "ButtonRadio"},
+        "sh": {"deob_06": "ColorPicker", "deob_07": "ColorChipSelector", "recommended": "ColorPicker"},
+        "Dn": {"deob_06": "RadioList", "deob_07": "RadioGroup", "recommended": "RadioList"}
+      },
+      "estimated_effort": "30 minutes"
+    },
+    {
+      "id": "NC-03",
+      "title": "Harmonize utility function names between deob_06 and deob_07",
+      "severity": "MEDIUM",
+      "description": "Same function appears under different names in different modules.",
+      "affected_identifiers": {
+        "qr": {"deob_06": "useOrderState", "deob_07": "useOrderComposable", "recommended": "useOrderState"},
+        "Wr": {"deob_06": "buildUploadConfig", "deob_07": "useUploadConfig", "recommended": "buildUploadConfig"},
+        "Ql": {"deob_06": "classifyPostProcessOptions", "deob_07": "parsePostProcessOptions", "recommended": "classifyPostProcessOptions"},
+        "Nl": {"deob_05": "fetchAvailableMaterials", "deob_07": "fetchMaterialInfo", "recommended": "fetchAvailableMaterials"}
+      },
+      "estimated_effort": "20 minutes"
+    },
+    {
+      "id": "COMP-01",
+      "title": "Add inline rename comments for editor SDK single-letter variables",
+      "severity": "MEDIUM",
+      "description": "62 single-letter variable patterns in deob_editor_sdk.js have comment-only documentation. Consider adding /* renamed: X = originalName */ inline annotations at each usage site, or at minimum expanding the comment block at lines 10447-10500.",
+      "estimated_effort": "1 hour"
+    },
+    {
+      "id": "COMP-02",
+      "title": "Document Vue render helper retention rationale",
+      "severity": "MEDIUM",
+      "description": "deob_07 retains minified Vue helper names (g, V, M, S, etc.) in render functions. Add a rationale comment explaining why these are not renamed (would break code / no semantic value in renaming framework internals).",
+      "estimated_effort": "5 minutes"
+    },
+    {
+      "id": "COMP-05",
+      "title": "Include TRANSLATIONS_KO dictionary",
+      "severity": "MEDIUM",
+      "description": "The Korean translation dictionary (HT/TRANSLATIONS_KO) is referenced as TODO at deob_05:1503 but not included. Since keys and values are identical Korean strings, include it for completeness.",
+      "estimated_effort": "15 minutes"
+    }
+  ]
+}

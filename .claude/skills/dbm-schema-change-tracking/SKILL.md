@@ -1,19 +1,15 @@
 ---
 name: dbm-schema-change-tracking
 description: >
-  후니프린팅 라이브 DB의 스키마+적재 소스 오브 트루스인 raw/webadmin(HuniProductPrice2) 코드가 변경됐을 때,
-  그 변경을 추적해 ① DB 스키마 구조 변경이력(테이블·컬럼·FK·트리거·인덱스·코드값·적재로직의 add/modify/drop
-  타임라인)과 ② 그 변경이 우리 huni-dbmap 매핑 산출(round-2 가격·round-6 CPQ·round-11 loadspec/
-  intent-map·round-12 mapping-final·round-13 correctness)을 얼마나 stale하게 만드는지 영향/갱신을 처리하는
-  round-14 방법론 스킬. 핵심 = 3-way 정합(webadmin git 선언 / 라이브 information_schema 적용 / 우리 산출
-  참조)을 대조하고, DDL 레벨(컬럼 존재)과 데이터 백필 레벨(행 채움)을 분리 추적("컬럼 존재 ≠ 적용 완료")한다.
-  베이스라인↔HEAD git diff로 변경을 분류하고, 라이브 실측으로 적용 여부를 확인하고, 영향 매트릭스 + 갱신
-  매니페스트를 산출한다. DB·webadmin·우리 산출 직접 수정은 하지 않는다(추적·영향·갱신 라우팅까지).
-  'webadmin 변경 추적', '스키마 변경 추적', '스키마 변경이력', 'DB 구조 변경', 'webadmin 코드 변경',
-  'sql 변경 추적', '스키마 버전 diff', '스키마 영향 분석', '매핑 stale 점검', 'round-14', '스키마 변경 다시',
-  'webadmin 동기화', '스키마 변경 업데이트', 'Phase 변경 추적' 작업 시 반드시 이 스킬을 사용. 엑셀 상품마스터/
-  가격표의 버전 변경 추적은 dbm-change-tracking(round-10), 라이브 데이터 적재 정확성 교정은
-  dbm-correctness-audit(round-13)이 담당하므로 그 작업에는 트리거하지 않는다.
+  후니프린팅 라이브 DB 스키마+적재 소스 오브 트루스인 raw/webadmin(HuniProductPrice2) 코드가 변경됐을 때
+  그 변경을 추적해 ① DB 스키마 구조 변경이력(테이블·컬럼·FK·트리거·인덱스·코드값·적재로직 add/modify/drop)과
+  ② 그 변경이 우리 huni-dbmap 매핑 산출(round-2/6/11/12/13)을 얼마나 stale하게 만드는지 영향/갱신을 처리하는
+  round-14 방법론 스킬. 핵심=3-way 정합(webadmin git 선언 / 라이브 information_schema 적용 / 우리 산출 참조) +
+  DDL 레벨(컬럼 존재)과 백필 레벨(행 채움) 분리 추적("컬럼 존재 ≠ 적용 완료"). git diff 분류→라이브 실측→영향
+  매트릭스+갱신 매니페스트. 직접 수정 없음(추적·영향·라우팅까지). 트리거: webadmin 변경 추적, 스키마 변경 추적,
+  스키마 변경이력, DB 구조 변경, sql 변경 추적, 스키마 버전 diff, 매핑 stale 점검, round-14, webadmin 동기화,
+  스키마 변경 다시. 엑셀 버전 변경 추적은 dbm-change-tracking(round-10), 라이브 데이터 정확성 교정은
+  dbm-correctness-audit(round-13)이 담당.
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite
 metadata:
   version: "1.0.0"

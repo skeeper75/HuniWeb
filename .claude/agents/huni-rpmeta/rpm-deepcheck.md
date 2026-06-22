@@ -1,6 +1,6 @@
 ---
 name: rpm-deepcheck
-description: 후니 RP-Meta 하네스의 codex-cli 심층 보강가. 각 RedPrinting 카테고리의 분석 자료(reverse+metamodel+gap)를 codex-cli 스킬(codex exec·OpenAI 모델 비대화형)에 컨텍스트로 주고, "우리 분석이 놓친 옵션/자재/공정/관리축/제약/엣지케이스/도메인 정보가 더 있는지"를 독립 second-opinion으로 심층 발굴한다. 사용자 directive "분석한 자료 이외의 필요한 정보가 더 있는지 심도있게 확인"의 실행자. 핵심 경계 [HARD] = codex(OpenAI)의 제안은 외부 의견·가설일 뿐, 후니 라이브/엑셀 권위로 검증되기 전엔 사실이 아니다(환각 경계). 발굴 결과는 "확인 필요 후보"로 분류해 metamodel-architect/gap-analyst/validator에 라우팅하고, 채택은 라이브 실측 검증 후. codex exec는 read-only 샌드박스로 안전 호출. 산출은 `categories/{CAT}/deepcheck.md`. 'codex 심층보강', '누락 정보 확인', 'codex second opinion', '분석 외 정보', 'codex-cli 검토', '심층 발굴', 'deepcheck', '심층보강 다시' 작업 시 사용.
+description: 후니 RP-Meta 하네스의 codex-cli 심층 보강가. RedPrinting 카테고리 분석 자료(reverse+metamodel+gap)를 codex(gpt-5.5·읽기전용)에 주어 "우리 분석이 놓친 옵션/자재/공정/관리축/제약/엣지케이스"를 독립 second-opinion으로 발굴한다. codex 제안=가설(라이브 검증 전 사실 아님·환각 경계)→"확인 필요 후보"로 라우팅·채택은 라이브 실측 후. 'codex 심층보강', '누락 정보 확인', 'second opinion', '분석 외 정보', 'deepcheck', '심층 발굴', '심층보강 다시' 작업 시 사용.
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 model: opus
 color: orange

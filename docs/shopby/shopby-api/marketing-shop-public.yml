@@ -1,0 +1,227 @@
+openapi: 3.0.1
+info:
+  title: marketing-shop
+  description: 마케팅(marketing) 관련 shop API입니다.
+  version: '1.0'
+servers:
+  - url: https://shop-api.e-ncp.com
+tags:
+  - name: Marketing
+    description: 마케팅
+paths:
+  /marketing/sns-share:
+    get:
+      tags:
+        - Marketing
+      summary: SNS 공유 설정 조회하기
+      description: "## 부가설명 및 특이사항\n            \nSNS 공유 설정 조회하는 API 입니다\n"
+      operationId: get-sns-share
+      parameters:
+        - name: productNo
+          in: query
+          description: 상품 번호
+          required: true
+          schema:
+            type: number
+          example: '1111222233'
+        - name: Version
+          in: header
+          description: API 버전
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+        - name: clientId
+          in: header
+          description: 쇼핑몰 클라이언트 아이디
+          required: true
+          schema:
+            type: string
+          example: f7IuuZPHwmeYilw03ow8Uw==
+        - name: platform
+          in: header
+          description: '클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)'
+          required: true
+          schema:
+            type: string
+          example: PC
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/marketing-sns-share-1540372606'
+              examples:
+                get-sns-share:
+                  value: "{\"snsShareUsed\":false,\"productUrlCopyUsed\":false,\"\
+                    representativeImage\":\"\",\"representativeTitle\":\"\",\"representativeDescription\"\
+                    :\"\",\"snsShareImageType\":\"PRODUCT_IMAGE\",\"kakao\":{\"used\"\
+                    :false,\"kakaoScriptKey\":\"\",\"content\":{\"title\":\"\",\"\
+                    imageUrl\":\"\"},\"commerce\":{\"regularPrice\":0,\"discountPrice\"\
+                    :0,\"discountRate\":0,\"fixedDiscountPrice\":0},\"buttons\":[{\"\
+                    title\":\"\",\"link\":\"\"}]},\"kakaoStory\":{\"used\":false,\"\
+                    url\":\"\",\"text\":\"\",\"urlInfo\":{\"title\":\"\",\"description\"\
+                    :\"\",\"image\":[\"\"]}},\"facebook\":{\"used\":false,\"linkTitle\"\
+                    :\"\",\"linkSummary\":\"\",\"image\":\"\"},\"twitter\":{\"used\"\
+                    :false,\"shareMessage\":\"\",\"url\":\"\"}}"
+components:
+  schemas:
+    marketing-sns-share-1540372606:
+      type: object
+      properties:
+        representativeDescription:
+          type: string
+          description: 대표 설명
+          example: 설명입니다.
+        representativeImage:
+          type: string
+          description: 대표 이미지
+          example: http://asdf.jpg
+        twitter:
+          type: object
+          properties:
+            shareMessage:
+              type: string
+              description: 트위터 - 공유 메세지
+              example: shareMsg
+            used:
+              type: boolean
+              description: 트위터 공유하기 설정
+              example: true
+            url:
+              type: string
+              description: 트위터 - 상품 상세 페이지 url
+              example: url
+          description: ''
+        kakao:
+          type: object
+          properties:
+            kakaoScriptKey:
+              type: string
+              description: 카카오 개발자센터 script key
+              example: script-key
+            buttons:
+              type: array
+              description: ''
+              items:
+                type: object
+                properties:
+                  link:
+                    type: string
+                    description: 카카오 - 버튼 링크
+                    example: www.aaa.com
+                  title:
+                    type: string
+                    description: 카카오 - 버튼 텍스
+                    example: 클릭하세요
+            used:
+              type: boolean
+              description: 카카오 공유하기 설정 여부
+              example: true
+            commerce:
+              type: object
+              properties:
+                discountRate:
+                  type: number
+                  description: 카카오 - 즉시할인 할인율 - fixedDiscountPrice와 동시 사용 불가
+                  example: 10
+                regularPrice:
+                  type: number
+                  description: 카카오 - 상품판매가
+                  example: 1000.0
+                discountPrice:
+                  type: number
+                  description: 카카오 - 상품 즉시할인가 (=판매가– 즉시할인)
+                  example: 1000.0
+                fixedDiscountPrice:
+                  type: number
+                  description: 카카오 - 즉시할인 정액할인 - discountRate와 동시 사용 불가
+              description: ''
+            content:
+              type: object
+              properties:
+                imageUrl:
+                  type: string
+                  description: 카카오 - 콘텐츠 이미지 URL (대표 이미지 or 상품 대표 이미지 url)
+                  example: http://asdf.jpg
+                title:
+                  type: string
+                  description: 카카오 - 콘텐츠 제목
+                  example: 콘텐츠 제목
+              description: ''
+          description: ''
+        representativeTitle:
+          type: string
+          description: 대표 제목
+          example: TITLE
+        snsShareUsed:
+          type: boolean
+          description: SNS 공유하기 설정 여부
+          example: true
+        snsShareImageType:
+          type: string
+          description: 이미지 설정
+          example: PRODUCT_IMAGE
+          enum:
+            - 'PRODUCT_IMAGE: 상품 이미지'
+            - 'REPRESENTATIVE_IMAGE: 대표 이미지'
+        facebook:
+          type: object
+          properties:
+            image:
+              type: string
+              description: 페이스북 - 대표이미지 혹은 상품 대표 이미지
+              example: image
+            linkTitle:
+              type: string
+              description: 페이스북 - 링크 타이틀
+              example: title
+            linkSummary:
+              type: string
+              description: 페이스북 - 링크 요약
+              example: summary
+            used:
+              type: boolean
+              description: 페이스북 공유하기 설정
+              example: true
+          description: ''
+        productUrlCopyUsed:
+          type: boolean
+          description: 상품 URL 복사 사용 설정 (사용함일 경우 상품 url 복사 버튼 노출)
+          example: true
+        kakaoStory:
+          type: object
+          properties:
+            urlInfo:
+              type: object
+              properties:
+                image:
+                  type: array
+                  description: 카카오스토리 - 웹 페이지 대표 이미지 URL
+                  example: http://asdf.jpg
+                  items:
+                    type: string
+                description:
+                  type: string
+                  description: 카카오스토리 - 웹 페이지 설명
+                  example: urlInfo - description
+                title:
+                  type: string
+                  description: 카카오스토리 - 웹 페이지 타이틀
+                  example: urlInfo - title
+              description: ''
+            text:
+              type: string
+              description: 카카오스토리 - 공유하기 웹뷰에 자동으로 입력되게할 본문 내용
+              example: text
+            used:
+              type: boolean
+              description: 카카오스토리 공유하기 설정
+              example: true
+            url:
+              type: string
+              description: 카카오스토리 - 공유할 웹 페이지 URL
+              example: http://asdf.jpg
+          description: ''
+      description: ''

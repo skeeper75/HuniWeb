@@ -1,0 +1,163 @@
+---
+title: "상품 진열 등록"
+slug: "/appearance/product-main/add"
+---
+
+# 상품 진열 등록
+
+**✅** <mark style="background-color:yellow;">새로운 상품 진열 등록은 쇼핑몰 운영방식에 따라 활용하는 방법이 상이해요.</mark>
+
+* 새로운 상품 진열 등록 → 신규 진열 ID 생성
+  * 헤드리스 운영방식 : 신규 진열 ID > API 호출
+  * 스킨 운영방식 - 오로라 개별형 : 스킨 복사 > 직접관리 스킨 > [에디터 > 모듈추가 > 상품 진열 모듈 > 신규 진열 ID 복사](https://nhn-commerce.gitbook.io/shopby_premium_manual/appearance/skin/editor#undefined) > 노출할 페이지에 붙여넣기
+
+## 기본 정보
+
+<figure><img src="/images/appearance/product-main/add/spaces%2F5MtRLrF338WdIfIJP9jq%2Fuploads%2FwTFUyCj34V83TjqiHV8f%2F%EC%83%81%ED%92%88%EC%A7%84%EC%97%B4%EA%B4%80%EB%A6%AC%20%EC%83%81%ED%92%88%EC%A7%84%EC%97%B4%EB%93%B1%EB%A1%9D%20%EA%B8%B0%EB%B3%B8%EC%A0%95%EB%B3%B4%20%EB%B3%B5%EC%82%AC.png" alt=""/><figcaption><p>&#x3C;기본 정보></p></figcaption></figure>
+
+**① 쇼핑몰** \
+상품 진열 영역을 등록하는 쇼핑몰을 선택합니다.
+
+**② 진열번호**\
+상품 진열 등록 시 자동으로 생성되는 고유한 번호로, 상품 진열 영역 호출 및 조회에 사용할 수 있습니다.
+
+**③ 진열ID** \
+API 호출 및 조회가 가능하도록 상품 진열ID를 지정할 수 있습니다. (최대 20자까지 입력 가능)\
+📍 상품 진열 영역마다 다른 값을 지정해야 하므로, \[중복확인] 버튼을 클릭 해 사용여부를 확인해 주세요.
+
+<Callout type="warning">
+진열 ID로 상품 진열 영역을 노출(조회)할 수 있습니다. → '**쇼핑몰 URL/display/진열ID'**\
+진열 ID 미 설정 시, 진열번호로 API 호출 및 조회가 가능합니다.
+</Callout>
+
+**④ 진열명** \
+등록하는 상품 진열 영역의 주제 및 특성에 맞는 이름으로 입력합니다. \
+상품 진열 영역명은 쇼핑몰에서 고객에게 노출되므로 작성에 유의해 주세요.
+
+<Callout type="warning">
+상품 진열 영역명 앞에 노출되는 홍보문구를 등록할 수 있습니다.
+</Callout>
+
+**⑤ 진열 상세설명** \
+상품 진열 영역 용도 등 진열 영역 관련 부가설명을 입력할 수 있습니다. 운영자 관리 목적의 입력 항목으로 쇼핑몰에 노출되지 않습니다.
+
+**⑥ 배경 이미지**\
+상품 진열 영역의 배경 이미지를 설정할 수 있습니다.
+
+## 노출정보
+
+<figure><img src="/images/appearance/product-main/add/spaces%2F5MtRLrF338WdIfIJP9jq%2Fuploads%2FxhlKgFuN61yzWzXxtYLO%2F%EC%83%81%ED%92%88%EC%A7%84%EC%97%B4%EA%B4%80%EB%A6%AC%20%EC%83%81%ED%92%88%EC%A7%84%EC%97%B4%EB%93%B1%EB%A1%9D%20%EB%85%B8%EC%B6%9C%EC%A0%95%EB%B3%B4%20%EB%B3%B5%EC%82%AC.png" alt=""/><figcaption><p>&#x3C;노출정보></p></figcaption></figure>
+
+**① 노출여부** \
+등록하는 상품 진열 영역의 노출여부를 설정합니다.
+
+**② 플랫폼구분** \
+등록하는 상품 진열 영역이 노출되는 플랫폼을 설정합니다.&#x20;
+
+**③ 회원등급 노출 설정** \
+등록하는 상품 진열 영역에 접근할 수 있는 회원등급을 별도 설정할 수 있습니다. \
+전체 회원등급 및 특정 회원등급의 선택이 가능합니다.
+
+**④ 회원그룹 노출 설정**\
+등록하는 상품 진열 영역에 접근할 수 있는 회원그룹을 별도 설정할 수 있습니다. \
+전체 회원등급 및 특정 회원등급의 선택이 가능합니다.
+
+## 상품 진열 설정
+
+<figure><img src="/images/appearance/product-main/add/spaces%2F5MtRLrF338WdIfIJP9jq%2Fuploads%2FQpHsBe2BY37mH0EMbNZ3%2F%EC%83%81%ED%92%88%EC%A7%84%EC%97%B4%EA%B4%80%EB%A6%AC%20%EC%88%98%EC%A0%95%20%EC%83%81%ED%92%88%EC%A7%84%EC%97%B4%EC%84%A4%EC%A0%95%20%EB%B3%B5%EC%82%AC.png" alt=""/><figcaption></figcaption></figure>
+
+**① 대상 상품 설정** \
+등록하는 상품 진열 영역에 진열할 상품을 설정합니다. \[상품조회] 버튼을 클릭 해 상품을 검색하여 개별 등록할 수 있고, 상품번호를 직접 입력하여 등록하거나, 엑셀파일로 일괄등록 하는 등 상품 진열 영역에 상품을 등록합니다.
+
+**② 진열순서** \
+상품의 진열 순서를 자동진열과 수동진열 중에서 선택합니다.
+
+* 자동진열 : 상품 최근등록순, 상품 판매량순, 상품후기순에서 설정합니다.
+* 수동진열 : 특정 상품을 진열 영역 상단에 고정하여 노출할 수 있고, 진열 순서 및 위치를 상/하 이동 아이콘으로 변경할 수 있습니다.  또한 상품을 선택하고 순서(위치)를 입력하여 이동할 수도 있습니다.
+
+**③ 선택상품 삭제** \
+상품 진열 영역에서 상품을 제외할 수 있습니다. \
+📍 쇼핑몰에서 상품이 삭제처리 되지는 않습니다.
+
+## 플랫폼 별 진열 설정
+
+<figure><img src="/images/appearance/product-main/add/spaces%2F5MtRLrF338WdIfIJP9jq%2Fuploads%2F79yf9NPQKCwa7CwpCH19%2F%EC%83%81%ED%92%88%EC%A7%84%EC%97%B4%EA%B4%80%EB%A6%AC%20%EC%83%81%ED%92%88%EC%A7%84%EC%97%B4%EB%93%B1%EB%A1%9D%20%ED%94%8C%EB%9E%AB%ED%8F%BC%20%EC%A7%84%EC%97%B4%EC%84%A4%EC%A0%95%EC%A0%95%EB%B3%B4%20%EB%B3%B5%EC%82%AC.png" alt=""/><figcaption><p>&#x3C;(노출 플랫폼별) 진열 설정></p></figcaption></figure>
+
+**① 진열 유형** \
+등록하는 상품 진열 영역에 상품이 전시되는 형태인 진열 유형을 설정할 수 있습니다.
+
+**② 상품노출 개수** \
+설정한 진열 유형에 노출되는 상품 노출 개수를 설정합니다.
+
+<Callout type="warning">
+**상품 진열 영역 노출 플랫폼에 따라 설정 가능한 진열 유형과 상품 개수가 각기 다릅니다.**\
+**진열 유형에 따라 가로와 세로에 배치할 수 있는 상품노출 개수가 각각 다르게 설정되는 점을 참고해 주세요.**
+</Callout>
+
+***
+
+### PC웹 진열 설정&#x20;
+
+
+
+
+<div align="center" data-full-width="true"><figure><img src="/images/appearance/product-main/add/spaces%2F5MtRLrF338WdIfIJP9jq%2Fuploads%2F80Hl3TeOUxXfHaREPX8E%2F7-1.%20PC%20%EA%B0%A4%EB%9F%AC%EB%A6%AC%ED%98%95_%EC%87%BC%ED%95%91%EB%AA%B0.png" alt="" width="380"/><figcaption><p>&#x3C;PC 웹 갤러리형 - 쇼핑몰 화면 예시></p></figcaption></figure></div>
+
+* 상품 이미지와 상품 기본 정보가 노출되는 기본 진열유형으로, 가로 개수는 4개로 고정되어 있어 세로 개수만 설정 가능합니다.&#x20;
+  
+
+
+
+<figure><img src="/images/appearance/product-main/add/spaces%2F5MtRLrF338WdIfIJP9jq%2Fuploads%2FxJWYSl60z0bgSAdHlg8j%2F8-1.%20PC%20%EB%A6%AC%EC%8A%A4%ED%8A%B8%ED%98%95_%EC%87%BC%ED%95%91%EB%AA%B0.png" alt="" width="253"/><figcaption><p>&#x3C;PC 웹 리스트형 - 쇼핑몰 화면 예시></p></figcaption></figure>
+
+* 상품이 목록처럼 세로로 진열되는 유형으로 상품 이미지와 상품 기본 정보가 노출되며, 가로 개수가 1개로 고정되어 있어 세로 개수만 설정 가능합니다.
+  
+
+
+
+<figure><img src="/images/appearance/product-main/add/spaces%2F5MtRLrF338WdIfIJP9jq%2Fuploads%2FS32TzCzICWkq3DTu0am4%2F9-1.%20PC%20%EC%9E%A5%EB%B0%94%EA%B5%AC%EB%8B%88%ED%98%95_%EC%87%BC%ED%95%91%EB%AA%B0.png" alt="" width="379"/><figcaption><p>&#x3C;PC 웹 장바구니형 - 쇼핑몰 화면 예시></p></figcaption></figure>
+
+* 상품 이미지에 마우스 오버 시 찜하기와 장바구니 아이콘이 노출되는 진열유형으로, 가로 개수는 4개로 고정되어 있어 세로 개수만 설정 가능합니다.&#x20;
+  
+
+
+
+<figure><img src="/images/appearance/product-main/add/spaces%2F5MtRLrF338WdIfIJP9jq%2Fuploads%2FTHeJdSxwv7lvZAcpwDan%2F10-1.%20PC%20%EC%83%81%ED%92%88%EC%9D%B4%EB%AF%B8%EC%A7%80%ED%98%95_%EC%87%BC%ED%95%91%EB%AA%B0.png" alt="" width="380"/><figcaption><p>&#x3C;PC 웹 심플 이미지형 - 쇼핑몰 화면 예시></p></figcaption></figure>
+
+* 상품 이미지만 노출되어 상품 이미지에 마우스 오버 시 상품 기본정보가 노출되는 진열유형으로, 가로 개수는 4개로 고정되어 있어 세로 개수만 설정 가능합니다.&#x20;
+  
+
+
+
+<figure><img src="/images/appearance/product-main/add/spaces%2F5MtRLrF338WdIfIJP9jq%2Fuploads%2FXqLVrhDjTrXUpTGkozdc%2F11-1.%20PC%20%EC%83%81%ED%92%88%EC%9D%B4%EB%8F%99%ED%98%95_%EC%87%BC%ED%95%91%EB%AA%B0.png" alt="" width="379"/><figcaption><p>&#x3C;PC 웹 상품 이동형 - 쇼핑몰 화면 예시></p></figcaption></figure>
+
+* 마우스로 상품을 좌우 이동할 수 있는 진열유형으로, 상품 이미지와 상품 기본 정보가 노출되며세로 개수가 1개로 고정되어 있어 가로 개수만 설정 가능합니다.
+  
+  
+
+### 모바일 웹/앱 진열 설정
+
+
+
+
+<figure><img src="/images/appearance/product-main/add/spaces%2F5MtRLrF338WdIfIJP9jq%2Fuploads%2Fi83kRxtJuMVgJr6poHr5%2F12-1.%20%EB%AA%A8%EB%B0%94%EC%9D%BC%20%EA%B0%A4%EB%9F%AC%EB%A6%AC%ED%98%95.png" alt="" width="326"/><figcaption><p>&#x3C;모바일 웹/앱 갤러리형></p></figcaption></figure>
+
+* 상품 이미지와 상품 기본 정보가 노출되는 기본 진열유형으로, 가로 개수는 2개로 고정되어 있어 세로 개수만 설정 가능합니다.&#x20;
+  
+
+
+
+<figure><img src="/images/appearance/product-main/add/spaces%2F5MtRLrF338WdIfIJP9jq%2Fuploads%2FC7JResu96TODfIUOyb6f%2F13-1.%20%EB%AA%A8%EB%B0%94%EC%9D%BC%20%EB%A6%AC%EC%8A%A4%ED%8A%B8%ED%98%95.png" alt="" width="327"/><figcaption><p>&#x3C;모바일 웹/앱 리스트형></p></figcaption></figure>
+
+* 상품이 목록처럼 세로로 진열되는 유형으로 상품 이미지와 상품 기본 정보가 노출되며, 가로 개수가 1개로 고정되어 있어 세로 개수만 설정 가능합니다.
+  
+
+
+
+<figure><img src="/images/appearance/product-main/add/spaces%2F5MtRLrF338WdIfIJP9jq%2Fuploads%2Fu3XEC3s7VMrPTB7IcRT9%2F14-1.%20%EB%AA%A8%EB%B0%94%EC%9D%BC%20%EC%8A%A4%EC%99%80%EC%9D%B4%ED%94%84%ED%98%95.png" alt="" width="327"/><figcaption><p>&#x3C;모바일 웹/앱 스와이프형></p></figcaption></figure>
+
+* 화면 터치로 상품을 좌우 이동할 수 있는 진열유형으로, 상품 이미지와 상품 기본 정보가 노출되며  세로 개수가 1개로 고정되어 있어 가로 개수만 설정 가능합니다.
+  
+  
+
+##

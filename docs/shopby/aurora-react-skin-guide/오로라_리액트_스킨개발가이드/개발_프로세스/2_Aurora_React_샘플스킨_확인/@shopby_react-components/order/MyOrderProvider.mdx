@@ -1,0 +1,126 @@
+---
+title: "MyOrderProvider"
+depth: 5
+path: "오로라 리액트 스킨개발가이드 > 개발 프로세스 > 2️⃣Aurora React 샘플스킨 확인 > @shopby/react-components > order > MyOrderProvider"
+---
+
+# MyOrderProvider
+
+## 속성
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | ---- | --- | ---- | --- |
+| willOrdersBeAccumulated | X | boolean | false | 주문 목록 조회값을 누적시킬 지 여부 |
+| orderRequestType | X | 'ALL' \| 'CLAIM' \| 'NORMAL' | 'ALL' | 주문 상세를 조회할 때 사용되는 값 |
+| children | O | ReactNode | - | - |
+
+## 상태
+
+* myOrderState 는 useMyOrderStateContext 를 호출해 사용한다.
+
+```typescript
+const myOrderState = useMyOrderStateContext();
+```
+
+| 이름 | 타입 | 기본 값 | 설명 |
+| --- | --- | ---- | --- |
+| totalOrdersCount | number | 0 | 전체 주문 건수 |
+| orders | object\[\] \| null | null | 주문 내역 조회 값 |
+| ordersWithAccumulation | object\[\] \| null | null | 주문 내역 조회 누적 값 |
+| orderDetail | object \| null | null | 주문 상세 조회 값 |
+| flattenedOrderOptions | object[] | [] | 주문한 상품 정보를 노출하기 용이하도록 orderOptionNo 별로 정제된 상품 정보 데이터 |
+| @cols=4:ㄴ [response.orderOptionsGroupByPartner 요소 타입](https://docs.shopby.co.kr/?url.primaryName=order/#/MyOrder/get-profile-orders-order-no) (orderOptionsGroupByDelivery 프로퍼티 제외)
+    + [response.orderOptionsGroupByPartner > orderOptionsGroupByDelivery 요소 타입](https://docs.shopby.co.kr/?url.primaryName=order/#/MyOrder/get-profile-orders-order-no) (orderOptions 프로퍼티 제외)
+    + [ response.orderOptionsGroupByPartner > orderOptionsGroupByDelivery > orderOptions 요소 타입](https://docs.shopby.co.kr/?url.primaryName=order/#/MyOrder/get-profile-orders-order-no) |
+| ordersSummaryStatus | object \| null | null | [주문 상태별 주문 수량 조회 API](https://docs.shopby.co.kr/?url.primaryName=order/#/MyOrder/get-profile-orders-summary-status) 응답 값 |
+| orderSpecifications | object | - | [거래명세서 조회 API](https://docs.shopby.co.kr/?url.primaryName=order/#/MyOrder/get-profile-orders-order-no-specifications) 응답 값과 총 수량, 쿠폰 할인 금액, 총 합계, 출력 일자(오늘 일자)
+ㄴ API 응답 값 
+     + 총 수량 (totalOrderCount)
+     + 쿠폰 할인 금액 (totalCouponDiscountAmount)
+     + 총 합계 (totalOrderAmount)
+     + 출력 일자 (printYmd) |
+| @cols=4:ㄴ totalOrderCount : 총 수량 
+     (api 응답 값 중 orderOptions의 orderCnt 합계)
+ㄴ totalCouponDiscountAmount : 쿠폰 할인 금액
+     (api 응답 값 중 deliveryCouponDiscountAmt + cartCouponDiscountAmt + productCouponDiscountAmt) 
+ㄴ totalOrderAmount : 총 합계  \*합계 금액은 0원 미만이 될 수 없습니다.
+     (orderOptionsTotalAmount + totalDeliveryAmount - totalCouponDiscountAmount - additionalDiscountAmt - subPayAmt - totalExternalPayAmount 으로 계산한 값)
+      ㄴ orderOptionsTotalAmount : 주문 상품 금액 합계 
+          (api 응답 값 중 orderOptions에서 주문 금액 합계)
+             ㄴ 주문 금액 : 주문 금액 x 주문 수량 \*사은품은 합계에 포함되지 않습니다. (isFreeGift ? 0 : immediateDiscountedPrice) \* orderCnt
+      ㄴ totalDeliveryAmount : 배송비 합계 
+           (api 응답 값 중 deliveryAmt + remoteDeliveryAmt)
+      ㄴ totalCouponDiscountAmount : 쿠폰 할인 금액 
+           (api 응답 값 중 deliveryCouponDiscountAmt + cartCouponDiscountAmt + productCouponDiscountAmt)
+      ㄴ additionalDiscountAmt : 추가 할인 금액 
+           (api 응답 값 중 additionalDiscountAmt 와 동일)
+      ㄴ subPayAmt : 적립금 
+           (api 응답 값 중 subPayAmt 와 동일)
+      ㄴ totalExternalPayAmount : 외부 결제 금액 합계 
+           (api 응답 값 중 externalPayInfo의 payAmt 합계)  |
+| orderSimpleReceipt | object | - | [간이영수증 조회 API](https://docs.shopby.co.kr/?url.primaryName=order/#/MyOrder/get-profile-orders-order-no-simple-receipt) 응답 값 총 수량, 쿠폰 할인 금액, 총 합계, 출력 일자(오늘 일자)
+ㄴ API 응답 값
+     + 총 수량 (totalOrderCount)
+     + 쿠폰 할인 금액 (totalCouponDiscountAmount)
+     + 총 합계 (totalOrderAmount)
+     + 출력 일자 (printYmd)
+
+\* 총 수량, 쿠폰 할인 금액, 총 합계 계산식은 위와 동일 |
+| orderPaymentReceiptUrl | object | - | [거래 영수증 조회 API](https://docs.shopby.co.kr/?url.primaryName=order/#/MyOrder/get-profile-orders-order-no-payment-receipt-url) 응답 값 |
+
+
+
+
+
+## 액션
+
+* myOrderAction 은 useMyOrderContext 를 호출해 사용한다.
+
+```typescript
+const myOrderAction = useMyOrderContext();
+```
+
+| 이름 | 인자타입 | 필수여부 | 기본값 | 설명 | 관리하는 상태 |
+| --- | ---- | ---- | --- | --- | ------- |
+| fetchOrderDetail | 인자 1개 | O | - | 주문 상세 조회하기 | orderDetail
+flattenedOrderOptions |
+| ㄴ   orderNo | string | O | - | 주문 번호 | - |
+| confirmOrder | 인자 1개 | O | - | (비)회원 구매 확정하기 | - |
+| ㄴ  orderOptionNo | string | O | - | 주문 옵션 번호 | - |
+| fetchOrders | object | O | - | 회원 주문 목록 조회하기 | orders
+orderWithAccumulation
+totalOrdersCount |
+| ㄴ orderRequestTypes | OrderRequestType[] | X | - | 조회할 주문 목록의 주문 상태
+(값을 넣지 않으면 모든 주문 상태의 주문들을 조회합니다) | - |
+| @cols=6:ㄴ OrderReqeustType : DEPOSIT\_WAIT \| PAY\_DONE \| PRODUCT\_PREPARE \| DELIVERY\_PREPARE \| DELIVERY\_ING \|DELIVERY\_DONE \| BUY\_CONFIRM \| CANCEL\_DONE \| RETURN\_DONE \| EXCHANGE\_DONE \| PAY\_WAIT \| PAY\_CANCEL \| PAY\_FAIL \| DELETE \| EXCHANGE\_WAIT \| REFUND\_DONE \| CANCEL\_PROCESSING \| RETURN\_PROCESSING \| EXCHANGE\_WAITING \| EXCHANGE\_PROCESSING
+
+( [requestQueryString.orderRequestType](https://docs.shopby.co.kr/?url.primaryName=order/#/MyOrder/get-profile-orders) 참고) |
+| ㄴ pageSize | number | O | - | 페이지별 목록 개수 | - |
+| ㄴ pageNumber | number | O | - | 조회할 페이지 번호 | - |
+| ㄴ  startYmd | string (YYYY-MM-DD) | X | 3개월 전 날짜 | 조회할 기간의 시작 날짜 | - |
+| ㄴ  endYmd | string (YYYY-MM-DD) | X | 오늘 날짜 | 조회할 기간의 마지막 날짜 | - |
+| ㄴ  searchType | string | X | - | 검색 타입 | - |
+| ㄴ  keyword | string | X | - | 검색어 | - |
+| fetchProfileOrdersSummaryStatus | object | X | - | 주문 상태별 주문 수량 조회하기 | ordersSummaryStatus |
+| ㄴ  startYmd | string (YYYY-MM-DD) | X | 3개월 전 날짜 | 조회할 기간의 시작 날짜 |  |
+| ㄴ  endYmd | string (YYYY-MM-DD) | X | 오늘 날짜 | 조회할 기간의 마지막 날짜 |  |
+| fetchProfileOrdersSpecificationsByOrderNo | object | O | - | 거래명세서 조회하기 | orderSpecifications |
+| ㄴ  orderNo | string | O | - | 주문 번호 |  |
+| fetchProfileOrdersSimpleReceiptByOrderNo | object | O | - | 간이 영수증 조회하기 | orderSimpleReceipt |
+| ㄴ  orderNo | string | O | - | 주문 번호 |  |
+| fetchProfileOrdersPaymentReceiptUrlByOrderNo | object | O | - | 결제 영수증 조회하기 | orderPaymentReceiptUrl |
+| ㄴ  orderNo | string | O | - | 주문 번호 |  |
+
+
+
+
+
+## 사용예시
+
+```jsx
+const Example = () => (
+    
+    
+  
+)
+```

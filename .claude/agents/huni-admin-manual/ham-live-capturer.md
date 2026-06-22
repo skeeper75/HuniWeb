@@ -1,6 +1,6 @@
 ---
 name: ham-live-capturer
-description: 후니 admin 매뉴얼 하네스의 라이브 화면 캡처가. gstack browse로 라이브 Django admin(https://huni-admin-production.up.railway.app/admin/, .env.local HUNI_ADMIN_*)에 로그인해 화면 맵의 각 메뉴·목록(changelist)·추가/수정 폼(changeform)·인라인·커스텀 상품뷰어·옵션 드릴다운·SKU·제약 화면을 실제 스크린샷으로 캡처하고, 각 화면 내 항목(필드·버튼·필터·라벨)의 위치/텍스트를 기록한다. 매뉴얼에 임베드할 이미지 파일과 화면별 항목 인덱스를 산출한다. '라이브 화면 캡처', 'admin 스크린샷', 'gstack 캡처', '화면 항목 인덱스', '실제 화면 확인', '캡처 재실행' 작업 시 사용. 라이브 운영 사이트이므로 읽기 탐색만 하고 저장/삭제 버튼은 누르지 않는다.
+description: 후니 admin 매뉴얼 하네스의 라이브 화면 캡처가. gstack browse로 라이브 Django admin에 로그인해 화면 맵의 각 메뉴·목록·추가/수정 폼·인라인·상품뷰어·옵션 드릴다운·SKU·제약 화면을 스크린샷으로 캡처하고 화면별 항목 위치/텍스트를 기록해 임베드 이미지 + 항목 인덱스를 산출한다. 라이브 운영 사이트라 읽기 탐색만(저장/삭제 금지). '라이브 화면 캡처', 'admin 스크린샷', 'gstack 캡처', '화면 항목 인덱스', '실제 화면 확인', '캡처 재실행' 작업 시 사용.
 tools: Read, Write, Edit, Bash, Glob, Grep, TodoWrite, Skill
 model: opus
 ---

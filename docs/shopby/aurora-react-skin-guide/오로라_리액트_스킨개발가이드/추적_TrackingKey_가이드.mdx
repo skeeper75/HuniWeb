@@ -1,0 +1,71 @@
+---
+title: "추적(TrackingKey)가이드"
+depth: 1
+path: "오로라 리액트 스킨개발가이드 > 추적(TrackingKey)가이드"
+---
+
+# 추적(TrackingKey)가이드
+
+## TrackingKey란?
+
+카카오 친구톡, 마이앱 앱 푸시 알림 등을 통해 쇼핑몰 접근 시 쇼핑몰 주소(URL)에 trackingKey가 포함됩니다.
+trackingKey 정보를 로그인, 주문서 생성 시 API에 포함시키면 로그인/구매 등을  추적하고 통계까지 내릴 수 있습니다.
+
+*\* 활용 가능 서비스 : 카카오 친구톡, 마이앱*
+
+## 활용하기
+
+### 카카오 친구톡
+
+1. 카카오 친구톡 알림 발송
+![Inline-image-2025-04-28 15.59.39.363.png](https://nhnent.dooray.com/share/tree/ZFGBGIwoTfaI2aCYB0ih2g/pages/4053817577514799265/attach-files/4056056213471024347)
+
+* 사용자는 카카오 친구톡을 통한 쇼핑몰 앱에 진입
+
+
+
+2. 쇼핑몰 앱 진입 시 쇼핑몰 URL에는 **trackingKey**가 포함
+![Inline-image-2025-04-28 16.01.16.978.png](https://nhnent.dooray.com/share/tree/ZFGBGIwoTfaI2aCYB0ih2g/pages/4053817577514799265/attach-files/4056057033817748297)
+
+3. 앱 진입 시 전달 받은 **trackingKey**를 **로그인API의 query-string** 과 **주문서 작성하기 API의 body**에 추가
+
+* 로그인 API 예시
+    * [POST /oauth2](https://docs.shopby.co.kr/?url.primaryName=auth/#/OAUTH2/post-oauth2-token)
+    * [POST /oauth2/openid](https://docs.shopby.co.kr/?url.primaryName=auth/#/OAUTH2/post-oauth2-openid-token)
+    * [POST /oauth/token](https://docs.shopby.co.kr/?url.primaryName=auth/#/Authentication/post-oauth-token-1-success)
+    * [POST /oauth/openid](https://docs.shopby.co.kr/?url.primaryName=auth/#/Authentication/post-oauth-openid)
+    * ![Inline-image-2025-04-28 16.05.29.875.png](https://nhnent.dooray.com/share/tree/ZFGBGIwoTfaI2aCYB0ih2g/pages/4053817577514799265/attach-files/4056059155966299280)
+* 주문서 작성하기 API 예시
+    * [POST /order-sheet](https://docs.shopby.co.kr/?url.primaryName=order/#/OrderSheet/post-order-sheet)
+    * ![Inline-image-2025-04-28 16.05.52.783.png](https://nhnent.dooray.com/share/tree/ZFGBGIwoTfaI2aCYB0ih2g/pages/4053817577514799265/attach-files/4056059346029875831)
+
+
+
+4. 로그인 또는 주문 이후 : 카카오 친구톡 > 캠페인 통계 > 상세
+![Inline-image-2025-04-28 16.16.16.880.png](https://nhnent.dooray.com/share/tree/ZFGBGIwoTfaI2aCYB0ih2g/pages/4053817577514799265/attach-files/4056064580943621735)
+
+### 마이앱
+
+1. 앱 푸시 알림 발송
+![Inline-image-2025-04-25 15.28.07.144.png](https://nhnent.dooray.com/share/tree/ZFGBGIwoTfaI2aCYB0ih2g/pages/4053817577514799265/attach-files/4053866014820007471)
+
+* 사용자는 푸시 알림을 통해 쇼핑몰 앱에 진입
+
+
+
+2. 쇼핑몰 앱 진입 시 쇼핑몰 URL에는 **trackingKey**가 포함
+![Inline-image-2025-04-28 16.09.49.349.png](https://nhnent.dooray.com/share/tree/ZFGBGIwoTfaI2aCYB0ih2g/pages/4053817577514799265/attach-files/4056061331487930609)
+
+3. 쇼핑몰 앱 진입 시 전달 받은 **trackingKey**를 **주문서 작성하기 API의 body**에 추가
+
+* 주문서 작성하기 API 예시
+    * [POST /order-sheet](https://docs.shopby.co.kr/?url.primaryName=order/#/OrderSheet/post-order-sheet)
+    * ![Inline-image-2025-04-28 16.10.00.491.png](https://nhnent.dooray.com/share/tree/ZFGBGIwoTfaI2aCYB0ih2g/pages/4053817577514799265/attach-files/4056061423980449172)
+
+    
+
+    
+
+
+4. 주문 이후 : 마이앱 관리자 > 앱 푸시 통계
+![Inline-image-2025-04-28 17.47.03.433.png](https://nhnent.dooray.com/share/tree/ZFGBGIwoTfaI2aCYB0ih2g/pages/4053817577514799265/attach-files/4056110269952339061)

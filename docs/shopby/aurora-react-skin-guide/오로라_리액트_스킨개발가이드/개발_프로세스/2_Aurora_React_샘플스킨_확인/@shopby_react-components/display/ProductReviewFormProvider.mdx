@@ -1,0 +1,66 @@
+---
+title: "ProductReviewFormProvider"
+depth: 5
+path: "오로라 리액트 스킨개발가이드 > 개발 프로세스 > 2️⃣Aurora React 샘플스킨 확인 > @shopby/react-components > display > ProductReviewFormProvider"
+---
+
+# ProductReviewFormProvider
+
+## 속성
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | ---- | --- | ---- | --- |
+| children | true | ReactNode |  |  |
+
+## 상태
+
+* productReviewFormState 는 useProductReviewFormStateContext 를 호출해 사용합니다.
+
+```typescript
+const productReviewFormState = useProductReviewFormStateContext();
+```
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | ---- | --- | ---- | --- |
+| reviewDetail | true | object |  | [response](https://docs.shopby.co.kr/?url.primaryName=display/#/Review/get-products-product-reviews) 와 동일 |
+| reviewableOption | true | object |  | [response](https://docs.shopby.co.kr/?url.primaryName=display/#/Review/get-product-reviews-configurations) 와 동일 |
+
+## 액션
+
+* productReviewFormAction 은 useProductReviewFormActionContext 를 호출해 사용합니다.
+
+```typescript
+const productReviewFormAction = useProductReviewFormActionContext();
+```
+
+| 이름 | 인자타입 | 필수여부 | 기본값 | 설명 | 관리하는 상태 |
+| --- | ---- | ---- | --- | --- | ------- |
+| fetchReviewBy | object | true |  | 상품평을 조회함.
+[request](https://docs.shopby.co.kr/?url.primaryName=display/#/Review/get-products-product-reviews) 타입과 동일 | productInquiryFormState.reviewDetail |
+| fetchReviewableOptionsBy | object | true |  | 상품평을 작성할 수 있는 상품옵션을 조회함.
+[request](https://docs.shopby.co.kr/?url.primaryName=display/#/Review/get-products-reviewable-options) 타입과 동일 | productInquiryFormState.reviewableOption |
+| postReviewBy | object | true |  | 상품평을 등록함.
+[request](https://docs.shopby.co.kr/?url.primaryName=display/#/Review/post-product-reviews) 타입과 동일 |  |
+| putReviewBy | object | true |  | 상품평을 수정함.
+ㄴ 작성자만 수정 가능함.
+[request](https://docs.shopby.co.kr/?url.primaryName=display/#/Review/put-product-review) 타입과 동일 |  |
+| deleteReviewBy | object |  |  | 상품평을 삭제함. |  |
+| ㄴ productNo | number | true |  |  |  |
+| ㄴ reviewNo | number | true |  |  |  |
+
+## 사용예시
+
+```jsx
+const Example = () => {
+    return (
+        
+            
+              
+                
+                
+              
+            
+          
+    )
+}
+```

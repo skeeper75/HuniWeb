@@ -1,0 +1,57 @@
+---
+title: "AuthProvider"
+depth: 5
+path: "오로라 리액트 스킨개발가이드 > 개발 프로세스 > 2️⃣Aurora React 샘플스킨 확인 > @shopby/react-components > auth > AuthProvider"
+---
+
+# AuthProvider
+
+* 회원 정보를 관리합니다.
+
+## 속성
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | ---- | --- | ---- | --- |
+| children | true | ReactNode | - |  |
+
+## 상태
+
+* `authState` 는 `useAuthStateContext` 를 호출해 사용합니다.
+
+```typescript
+const authState = useAuthStateContext();
+```
+
+| 이름 | 타입 | 기본 값 | 설명 |
+| --- | --- | ---- | --- |
+| profile | null \| Profile | null | 회원정보
+ㄴ [response](https://docs.shopby.co.kr/?url.primaryName=member/#/Profile/get-profile) 회원정보 조회 response 와 동일한 타입임. |
+| isProfileLoading | boolean | true | 회원정보 로딩 여부 |
+| isAdultCertificated | boolean | false | 해당 회원의 성인인증 여부 |
+
+
+## 액션
+
+* `authAction` 은 `useAuthActionContext` 를 호출해 사용합니다.
+
+```typescript
+const authAction = useAuthActionContext();
+```
+
+| 이름 | 인자타입 | 기본 값 | 설명 | 관리하는 상태 |
+| --- | ---- | ---- | --- | ------- |
+| fetchProfile | - | - | 회원정보를 조회함 | `authState.profile`
+`authState.isProfileLoading`
+`authState.isAdultCertificated` |
+| isSignedIn | - | - | 로그인 여부 |  |
+| signOut |  |  | 로그아웃 |  |
+
+## 사용 예시
+
+```typescript
+const App = () => (
+  
+    
+  
+)
+```

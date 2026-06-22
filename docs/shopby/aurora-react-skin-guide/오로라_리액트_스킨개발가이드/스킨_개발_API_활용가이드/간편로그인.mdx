@@ -1,0 +1,236 @@
+---
+title: "간편로그인"
+depth: 2
+path: "오로라 리액트 스킨개발가이드 > 스킨 개발_API 활용가이드 > 간편로그인"
+---
+
+# 간편로그인
+
+## 이해하기
+
+```
+샵바이 패키지(shared)를 이용하지 않는 경우, 참고하실 수 있는 문서입니다.
+```
+
+> 간편 로그인 기능 및 간편로그인 회원가입에 대해 소개합니다.
+
+
+
+* 🅐 간편 로그인 연동 프로세스
+* 🅑 간편 로그인 회원가입
+
+![Group 8.png](https://nhnent.dooray.com/share/tree/WoOk8q6KT1K3MZcLSuyZsw/pages/3519672015534013498/attach-files/3525576960166311644)
+
+간편로그인 연동 로직에 대해 소개합니다.
+OAuth 프로토콜 중 간편회원 로그인 기능을 통해 accessToken 을 획득하는 방식입니다.
+
+기본 스킨에서 간편 로그인을 구현한 연동 시나리오는 위 다이어그램과 같습니다.
+이를 아래 문서에서 각 프로세스 별 상세 설명합니다.
+
+***
+
+## 🅐 간편로그인 연동 프로세스
+
+### ⓐ 간편 회원 로그인 버튼
+
+![간편로그인.png](https://nhnent.dooray.com/share/tree/WoOk8q6KT1K3MZcLSuyZsw/pages/3519672015534013498/attach-files/3521114266268524765)
+
+회원가입 페이지, 로그인 페이지 등에서 노출되는 간편로그인 기능입니다.
+현재 제공하는 간편 로그인은 페이코, 네이버, 카카오, 페이스북 총 4개 입니다.
+
+![콜백 url 변경.png](https://nhnent.dooray.com/share/tree/WoOk8q6KT1K3MZcLSuyZsw/pages/3519672015534013498/attach-files/3523179233156006352)
+
+어드민 에서 각 간편 로그인 제공사 개발자센터에서 발급 받은 Client ID와 Client Secret 키를 입력하여 연동이 가능합니다.
+
+* shop by pro : [설정 > 기본 정책 > 외부서비스 설정]
+* shop by premium : [서비스 관리 > 쇼핑몰 관리]
+
+어드민에서 연동 설정된 제공사에 한해, 회원가입 페이지 및 로그인 페이지에서 간편 로그인 기능이 제공됩니다.
+
+> [GET /malls](https://docs.shopby.co.kr/?url.primaryName=admin/#/Mall/get-malls) 
+
+```
+▶ 몰 정보 조회하기
+쇼핑몰 전반에 대한 기본 정보와 설정 데이터를 조회할 수 있습니다
+```
+
+
+
+어드민에 연동 설정이 되어있는 간편로그인 제공사 정보를 조회합니다. 연동되어 있지 않은 간편로그인 제공사의 로그인 버튼은 노출되지 않습니다.
+해당 API 응답 값 중 `openIdJoinConfig` 내  `providers` 값을 통해 확인 가능합니다.
+
+### ⓑ 간편로그인 연동 URI 획득
+
+간편 로그인 제공사(provider)이 각각 다르므로, provider 별 외부 화면을 노출하기 위해서는
+먼저 아래 API를 호출하여 간편 로그인 연동 URI를 조회합니다.
+
+> [GET /oauth/login-url](https://docs.shopby.co.kr/?url.primaryName=auth/#/Authentication/get-oauth-login-url)
+
+```
+▶ Openid 로그인 URI 조회하기
+OpenID 로그 URI를 조회합니다
+```
+
+해당 API 호출 시 3개 파라미터가 필요하며 각 파라미터에 대한 설명은 아래와 같습니다.
+
+* `provider`
+    ㄴ 간편 로그인 제공사
+    ㄴ 각 제공사 id 앞에 'ncp\_' 를 추가 (ex) ncp\_naver, ncp\_payco, ncp\_kakao, ncp\_facebook)
+* `state`ㄴ CSRF 공격 방지용 토큰
+    ㄴ client에서 생성한 숫자, 영문 대소문자로 이루어진 6자리의 random string
+* `redirectUri`
+    ㄴ 인증 성공 후 이동할 쇼핑몰의 리다이렉트 URI (인코딩 필수)
+    ㄴ 형식: [`https://{쇼핑몰`](https://%7B%EC%87%BC%ED%95%91%EB%AA%B0)` 도메인/callback/auth-callback`
+
+
+
+**✔ 예시 코드**
+
+* Request URI
+
+```
+https://alpha-shop-api.e-ncp.com/oauth/login-url?provider=ncp_payco&redirectUri=https%3A%2F%2Fdevfe.shopby.co.kr%3A8283%2Fcallback%2Fauth-callback&state=Ixihzt
+```
+
+* Responses
+
+```
+1
+2    {
+3        "loginUrl":"https://demo-id.payco.com/oauth2.0/authorize?serviceProviderCode=FRIENDS&userLocale=ko_KR&client_id=3RDuVJewHrYNLwHLVfHK&redirect_uri=https://devfe.shopby.co.kr:8283/callback/auth-callback.html&response_type=code",
+4        "sessionKey":null
+5    }
+6
+```
+
+
+
+### ⓒ 간편 로그인 제공사 (Provider) 화면 노출
+
+
+
+획득한 간편 로그인 연동 URI 을 통해 간편 로그인 제공사 화면을 노출합니다.
+기본 스킨의 경우 팝업 형태로 간편 로그인 제공사 화면을 제공합니다.
+
+이후 각 간편 로그인 제공사(provider) 정책에 따라, 인증 절차를 수행합니다.
+![image.png](https://nhnent.dooray.com/share/tree/WoOk8q6KT1K3MZcLSuyZsw/pages/3519672015534013498/attach-files/3520504449779821724)
+
+### ⓓ 쇼핑몰 redirectUri로 이동
+
+간편 로그인 제공사 화면에서 인증에 성공 후, code 값과 함께 쇼핑몰 redirectUri 로 이동합니다.
+이를 통해 프론트 화면에도 각 간편 로그인 제공사에서의 인증 성공 여부를 전달합니다.
+
+**✔ 예시 코드**
+
+```
+https://{쇼핑몰 도메인}/callback/auth-callback?code=XXXXXXXXXX
+```
+
+
+
+### ⓔ accessToken 획득
+
+
+
+쇼핑몰 redirectURI에서 아래 API를 호출하여 accessToken과 refrehshToken을 획득합니다.
+
+> [POST /oauth2/openid](https://docs.shopby.co.kr/?url.primaryName=auth/#/OAUTH2/post-oauth2-openid-token)
+
+```
+► OpenId AccessToken/RefreshToken 발급하기
+OpenId 회원의 액세스 토큰 (accessToken) / 리프레시 토큰 (refreshToken)을 발급합니다.
+```
+
+액세스 기반의 로그인 방식을 사용하는 경우 아래 API를 호출하여 accessToken을 획득합니다.
+
+> [GET /oauth/openid](https://docs.shopby.co.kr/?url.primaryName=auth/#/Authentication/get-oauth-openid)
+
+```
+▶ OpenId AccessToken 발급하기
+OpenId 액세스 토큰(accessToken)을 발급합니다
+```
+
+
+
+### ⓕ 회원 가입 여부 확인
+
+해당 간편 로그인 계정이 현재 쇼핑몰에 가입한 상태인지 아닌지 여부를 확인합니다.
+
+> [GET /profile](https://docs.shopby.co.kr/?url.primaryName=member/#/Profile/get-profile)
+
+```
+▶ 회원정보 조회하기
+회원 정보를 조회합니다
+```
+
+
+
+응답 값 중 `memberStatus` 값이 `WAITING` 인 경우 쇼핑몰 미가입 상태로 판단합니다.
+
+* **간편 로그인 회원인 경우**
+    해당 간편 로그인 계정으로 로그인합니다.
+* **간편 로그인 회원이 아닌 경우 (미가입 상태)**
+    아래 문서에서 소개 드릴, 간편 로그인 회원가입 로직을 진행합니다.
+
+
+
+***
+
+## 🅑 간편 로그인 회원가입
+
+간편 로그인 회원가입에 대해 소개합니다.
+간편 로그인을 통해 신규 가입을 하는 회원의 경우, 아래 화면을 통해 회원가입을 진행합니다.
+
+### ⓐ 간편로그인 회원가입 팝업
+
+이전 단계에서 이미 호출한 `GET /profile` 응답 값을 활용하여 `memberName`, `email` 등을 화면에 노출합니다.
+
+![스크린샷 2023-04-28 095847.png](https://nhnent.dooray.com/share/tree/WoOk8q6KT1K3MZcLSuyZsw/pages/3519672015534013498/attach-files/3526065414608047910)
+
+### ⓑ 약관 데이터 호출
+
+약관 내용은 어드민에 따라
+shop by pro [설정> 기본 정책 > 약관/개인 정보처리방침]
+shop by premium [서비스 관리 > 약관/개인정보처리방침]
+에서 관리할 수 있습니다.
+
+> [GET /terms](https://docs.shopby.co.kr/?url.primaryName=manage/#/Terms/search-used-terms)
+
+```
+▶ 적용 중인 몰 약관 조회하기
+해당 쇼핑몰에 적용 중인 약관을 조회합니다.
+```
+
+
+
+아래 약관 데이터를 불러와서, 약관 사용 여부가 `true` 인 항목들에 한하여 화면에 노출합니다.
+
+* [필수] 이용약관 `USE`
+* [필수] 회원가입 시 개인정보 수집/이용 약관 `PI_COLLECTION_AND_USE_REQUIRED`
+* [선택] 회원가입 시 개인정보 수집/이용 약관 `PI_COLLECTION_AND_USE_OPTIONAL`
+* [선택] 개인정보 처리/위탁 약관 `PI_PROCESS_CONSIGNMENT`
+* [선택] 개인정보 제3자 제공 약관 `PI_THIRD_PARTY_PROVISION`
+
+
+
+### ⓒ 동의하고 가입하기
+
+해당 버튼 클릭 시 아래 API를 호출하여 간편 로그인 회원 가입을 완료합니다.
+
+> [POST /profile/openid](https://docs.shopby.co.kr/?url.primaryName=member/#/Profile/post-profile-openid)
+
+```
+▶ 오픈 아이디 회원가입 처리하기
+OpenId 회원 프로필이 등록됩니다.
+```
+
+
+
+***
+
+## 🅒 카카오 싱크
+
+* 카카오싱크 세팅 방법
+
+ㄴ shop by pro : [https://workspace.nhn-commerce.com/support/recommendedContents/189897](https://workspace.nhn-commerce.com/support/recommendedContents/189897) 
+ㄴ shop by premium : [https://workspace.nhn-commerce.com/support/recommendedContents/186321](https://workspace.nhn-commerce.com/support/recommendedContents/186321)

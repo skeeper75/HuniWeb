@@ -1,0 +1,98 @@
+---
+title: "CouponProvider"
+depth: 5
+path: "오로라 리액트 스킨개발가이드 > 개발 프로세스 > 2️⃣Aurora React 샘플스킨 확인 > @shopby/react-components > promotion > CouponProvider"
+---
+
+# CouponProvider
+
+## 속성
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | ---- | --- | ---- | --- |
+| children | false | ReactNode | - | - |
+
+## 상태
+
+* couponState 는 useCouponStateContext 를 호출해 사용한다.
+
+```typescript
+const couponState = useCouponStateContext();
+```
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | ---- | --- | ---- | --- |
+| profileCouponSummary | false | object |  | 회원의 쿠폰 요약정보 |
+| ㄴusableCouponCnt |  | number | 0 | 사용가능한 쿠폰 수 |
+| ㄴexpiringCouponCnt |  | number | 0 | 사용/기간만료인 쿠폰 수 |
+| issuableCoupons | false | object[] | [] | [response](https://docs.shopby.co.kr/?url.primaryName=promotion/#/Coupon/get-issuable-coupons) 에 하기 타입들이 추가됨. |
+| ㄴ canDownload |  | boolean |  | 다운로드 가능여부
+ㄴ true: 다운로드 가능
+ㄴ false: 다운로드 불가능 |
+| ㄴ constraintInfo |  | object |  | [response.useConstraint](https://docs.shopby.co.kr/?url.primaryName=promotion/#/Coupon/get-issuable-coupons) 에 하기 타입들이 추가됨. |
+|    ㄴ availabilityDays |  | number |  | 사용가능 기간
+ㄴ 쿠폰을 발급받은 날부터 (31은 월말까지, -1 은 제한 없음) |
+|    ㄴ expireYmdt |  | string |  | 사용종료일 |
+| ㄴ discountInfo |  | object |  | [response.useConstraint](https://docs.shopby.co.kr/?url.primaryName=promotion/#/Coupon/get-issuable-coupons) 에 하기 타입들이 추가됨. |
+|    ㄴ canAccumulatePoint |  | boolean |  | 적립금 지급 가능 여부
+ㄴ true: 지급 가능
+ㄴ false: 지급 불가능 |
+|    ㄴ isFreeDelivery |  | boolean |  | 배송비 무료 여부 |
+|    ㄴ isFixedAmount |  | boolean |  | 정액 여부 |
+| ㄴ issueConstraint |  | object |  | [response.useConstraint](https://docs.shopby.co.kr/?url.primaryName=promotion/#/Coupon/get-issuable-coupons) 에 하기 타입들이 추가됨. |
+|    ㄴ hasDailyIssueLimit |  | boolean |  | 1일내 발급 수량 제한 여부 |
+|    ㄴ hasPerPersonLimit |  | boolean |  | 1인당 발급 수량 제한 여부 (총기간) |
+| coupon |  | object |  |  |
+| ㄴ totalCount |  |  |  | 쿠폰 총 수 |
+| ㄴ items |  | object[] | [] | [response.items](https://docs.shopby.co.kr/?url.primaryName=promotion/#/Coupon/get-my-coupons) 에 하기 타입들이 추가됨. |
+|    ㄴ isFreeDelivery |  | boolean |  | 배송비 무료 여부 |
+|    ㄴ canUse |  | boolean |  | 사용여부 |
+|    ㄴ expireYmdt |  | string |  | 사용종료일 |
+|    ㄴ canUseCartCoupon |  | boolean |  | 장바구니 쿠폰 사용 가능여부 |
+|    ㄴ canUseProductCoupon |  | boolean |  | 상품쿠폰 사용 가능여부 |
+|    ㄴ isFixedAmount |  | boolean |  | 정액 여부
+ㄴ true: 정액
+ㄴ false: 정률 |
+|    ㄴ shouldSkipAccumulation |  | boolean |  | 적립금 적립 불가 여부
+ㄴ true: 적립 불가능
+ㄴ false: 적립 가능 |
+
+## 액션
+
+* couponAction 은 useCouponActionContext 를 호출해 사용한다.
+
+```typescript
+const couponAction = useCouponActionContext();
+```
+
+| 이름 | 인자타입 | 필수여부 | 기본값 | 설명 | 관리하는 상태 |
+| --- | ---- | ---- | --- | --- | ------- |
+| fetchCoupons | object | true |  | 로그인한 사용자가 보유한 쿠폰중 사용가능한 쿠폰과 이미 사용한 쿠폰을 구분하여 조회함. | couponState.coupon |
+| ㄴ pageNumber | number | true | 1 |  |  |
+| ㄴ pageSize | number | true | 10 |  |  |
+| ㄴ sortDirection | DESC \| ASC | false | DESC | 내림차순 정렬 |  |
+| ㄴ canUse | null \| boolean | false | - | 사용가능 여부 
+ㄴ true: 사용 가능
+ㄴ false: 사용 불가능
+ㄴ null: 조건 없음 |  |
+| ㄴstartYmd | string | false | '' | 검색 시작 일 |  |
+| fetchProfileCouponSummary | object | false |  | 로그인한 사용자가 보유한 쿠폰의 정보를 요약하여 조회함. | couponState.profileCouponSummary |
+| ㄴ expireDay | string | false |  | 만료일
+ㄴ (현재 + 만료일)이 검색 조건에 포함됨. |  |
+| fetchIssuableCoupons | - |  |  | 상품과 상관없이 오늘 날짜 기준으로 다운로드 가능한 쿠폰을 모두 조회함. | couponState.issuableCoupons |
+| couponIssueNoUse | string | true |  | 쿠폰 사용 (혜택 지급) |  |
+
+## 사용예시
+
+```typescript
+const Example = () => (
+  
+    
+      
+        
+        
+      
+    
+  
+);
+```

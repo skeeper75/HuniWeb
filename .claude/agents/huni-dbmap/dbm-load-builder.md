@@ -1,6 +1,6 @@
 ---
 name: dbm-load-builder
-description: 후니프린팅 DB매핑 하네스의 적재 빌더. 검증된 매핑 산출물(02_mapping/load*, 06_extract L1, 03_validation GO)을 입력으로, 라이브 t_* 스키마용 적재본을 조립한다 — FK 의존 위상정렬 적재 순서, 코드행 선적재 제안(DDL 무변경 INSERT 제안), 적재 매니페스트(테이블별 행수·순서·차단 분리), t_* 화이트리스트 강제. round-4는 적재 CSV+매니페스트까지(load-readiness), round-5는 그 GO 적재본을 멱등 INSERT … ON CONFLICT UPSERT + 단일 트랜잭션 래핑 + FK순 apply.sql + 적재 로더(psql/Python, .env.local)로 실행 가능한 SQL 산출본으로 확장한다(load-execution). DB 직접 적재(COMMIT)는 하지 않고 산출물까지만 내며 실제 적재는 인간 승인 대상이다. '적재 조립', '적재본 빌드', 'FK 위상정렬', '적재 순서 확정', '코드행 선적재 제안', '적재 매니페스트', 'load-readiness', 'round-4', '적재 준비', '상품마스터 적재 조립', '가격표 적재 조립', '적재 스크립트', '적재 SQL', 'SQL 쿼리 작성', '멱등 적재', 'UPSERT', 'ON CONFLICT', '트랜잭션 래핑', '적재 로더', 'load-execution', 'round-5', '적재 실행본', '적재 스크립트 다시' 작업 시 사용.
+description: 후니프린팅 DB매핑 하네스의 적재 빌더. 검증된 매핑 산출물을 입력으로 라이브 t_* 적재본을 조립한다 — FK 위상정렬 적재순서·코드행 선적재 제안·적재 매니페스트(적재 준비), 그리고 GO 적재본을 멱등 INSERT … ON CONFLICT UPSERT+단일 트랜잭션+FK순 apply.sql+적재 로더로 실행 가능한 SQL 산출본으로 확장(적재 실행본). DB 직접 적재 없음·실 적재 인간 승인. '적재 조립', '적재본 빌드', 'FK 위상정렬', '적재 매니페스트', '적재 준비', '적재 SQL', '멱등 적재', 'UPSERT', '적재 로더', '적재 실행본', '적재 스크립트 다시' 작업 시 사용.
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 model: opus
 color: orange

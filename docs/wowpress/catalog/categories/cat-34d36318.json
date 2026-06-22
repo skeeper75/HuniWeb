@@ -1,0 +1,163 @@
+{
+  "category": {
+    "id": "cat-34d36318",
+    "slug": "명함-핫딜명함-6318",
+    "path": ["명함", "핫딜명함"],
+    "displayName": "명함 > 핫딜명함",
+    "productCount": 2,
+    "keywords": ["명함", "핫딜명함", "일반명함", "핫딜", "ai", "UV코팅명함"],
+    "summary": "명함 > 핫딜명함 · 2개 상품",
+    "pricing": {
+      "templated": 0,
+      "quoted": 0
+    }
+  },
+  "products": [
+    {
+      "productId": 40062,
+      "name": "일반명함(핫딜)",
+      "slug": "일반명함-핫딜-40062",
+      "categories": ["명함", "핫딜명함"],
+      "keywords": [
+        "명함",
+        "핫딜명함",
+        "일반명함",
+        "핫딜",
+        "ai",
+        "eps",
+        "jpg",
+        "png",
+        "cdr",
+        "psd",
+        "sit",
+        "zip",
+        "alz",
+        "pdf"
+      ],
+      "useCases": ["business-card", "corporate-identity"],
+      "url": "https://devshop.wowpress.co.kr/prodt/40062",
+      "fileTypes": ["AI", "EPS", "JPG", "PNG", "CDR", "PSD", "SIT", "ZIP", "ALZ", "PDF"],
+      "delivery": {
+        "cutoffTime": null,
+        "prepayRequired": true,
+        "group": {
+          "id": 1,
+          "name": "명함,스티커 묶음"
+        },
+        "regions": []
+      },
+      "orderQuantities": [
+        {
+          "type": "select",
+          "values": [500],
+          "minimum": 500,
+          "maximum": 500,
+          "interval": null,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": null,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        }
+      ],
+      "coverTypes": [
+        {
+          "code": 0,
+          "name": "통합",
+          "pages": [
+            {
+              "code": 0,
+              "name": "양면"
+            }
+          ],
+          "pageConstraints": {
+            "min": null,
+            "max": null,
+            "interval": null
+          }
+        }
+      ],
+      "detailFile": "../products/40062.json",
+      "pricing": {
+        "hasTemplate": false,
+        "status": "requires-configuration",
+        "sampleQuote": null,
+        "error": null
+      }
+    },
+    {
+      "productId": 40142,
+      "name": "UV코팅명함(핫딜)",
+      "slug": "uv코팅명함-핫딜-40142",
+      "categories": ["명함", "핫딜명함"],
+      "keywords": [
+        "명함",
+        "핫딜명함",
+        "UV코팅명함",
+        "핫딜",
+        "ai",
+        "eps",
+        "jpg",
+        "png",
+        "cdr",
+        "psd",
+        "sit",
+        "zip",
+        "alz",
+        "pdf"
+      ],
+      "useCases": ["business-card", "corporate-identity"],
+      "url": "https://devshop.wowpress.co.kr/prodt/40142",
+      "fileTypes": ["AI", "EPS", "JPG", "PNG", "CDR", "PSD", "SIT", "ZIP", "ALZ", "PDF"],
+      "delivery": {
+        "cutoffTime": null,
+        "prepayRequired": true,
+        "group": {
+          "id": 1,
+          "name": "명함,스티커 묶음"
+        },
+        "regions": []
+      },
+      "orderQuantities": [
+        {
+          "type": "select",
+          "values": [200],
+          "minimum": 200,
+          "maximum": 200,
+          "interval": null,
+          "materialPaperNo": null,
+          "jobPresetNo": null,
+          "sizeNo": null,
+          "optionNo": null,
+          "colorNo": null,
+          "colorExtra": null
+        }
+      ],
+      "coverTypes": [
+        {
+          "code": 0,
+          "name": "통합",
+          "pages": [
+            {
+              "code": 0,
+              "name": "양면"
+            }
+          ],
+          "pageConstraints": {
+            "min": null,
+            "max": null,
+            "interval": null
+          }
+        }
+      ],
+      "detailFile": "../products/40142.json",
+      "pricing": {
+        "hasTemplate": false,
+        "status": "requires-configuration",
+        "sampleQuote": null,
+        "error": null
+      }
+    }
+  ]
+}

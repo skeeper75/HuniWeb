@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>후니프린팅 디자인시스템 — 실무진 검토용</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600&family=Noto+Sans:wght@400;500;600&display=swap');
+
+:root{
+  /* Purple Family */
+  --primary:#553886;
+  --primary-dark:#3B2573;
+  --primary-secondary:#9580D9;
+  --primary-light-1:#C9C2DF;
+  --primary-light-2:#DED7F4;
+  --primary-light-3:#EEEBF9;
+  /* Neutral / Gray */
+  --text-dark:#1E1E1E;
+  --text-label:#424242;
+  --text-body:#616161;
+  --text-medium:#565656;
+  --text-muted:#979797;
+  --border-default:#CACACA;
+  --divider:#E8E8E8;
+  --bg-light:#E9E9E9;
+  --bg-section:#F5F5F5;
+  --bg-white:#FFFFFF;
+  /* Accent */
+  --accent-gold:#E6B93F;
+  --accent-teal:#7AC8C4;
+  --badge-recommend:#FF66CC;
+  --badge-best:#3B2573;
+  --badge-new:#FF1493;
+  --badge-up:#00BCD4;
+  /* radius */
+  --r-sm:4px;
+  --r-cta:5px;
+  --r-checkbox:3px;
+  --r-slider:2px;
+  --r-full:9999px;
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  font-family:'Noto Sans','Noto Sans KR',system-ui,-apple-system,sans-serif;
+  letter-spacing:-0.7px;
+  color:var(--text-label);
+  background:#fafafa;
+  line-height:1.6;
+}
+
+/* ===== Layout ===== */
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px 80px;}
+header.site{
+  background:linear-gradient(135deg,#553886 0%,#3B2573 100%);
+  color:#fff;padding:40px 24px 36px;
+}
+header.site .inner{max-width:1080px;margin:0 auto;}
+header.site h1{
+  font-size:36px;font-weight:600;letter-spacing:-1.8px;margin:0 0 10px;
+}
+header.site .meta{font-size:13px;opacity:.85;letter-spacing:-0.6px;line-height:1.8;}
+header.site .meta code{background:rgba(255,255,255,.18);padding:1px 7px;border-radius:4px;font-size:12px;}
+
+/* ===== TOC nav ===== */
+nav.toc{
+  position:sticky;top:0;z-index:100;background:#fff;
+  border-bottom:1px solid var(--divider);
+  box-shadow:0 1px 6px rgba(0,0,0,.05);
+}
+nav.toc .inner{max-width:1080px;margin:0 auto;padding:10px 24px;
+  display:flex;gap:6px;flex-wrap:wrap;}
+nav.toc a{
+  font-size:13px;font-weight:500;letter-spacing:-0.6px;
+  color:var(--text-body);text-decoration:none;
+  padding:6px 12px;border-radius:var(--r-full);transition:.15s;
+}
+nav.toc a:hover{background:var(--primary-light-3);color:var(--primary);}
+
+/* ===== Sections ===== */
+section{margin-top:56px;scroll-margin-top:64px;}
+section > h2{
+  font-size:24px;font-weight:600;letter-spacing:-1.2px;color:var(--text-label);
+  margin:0 0 6px;padding-bottom:10px;border-bottom:2px solid var(--primary-light-2);
+}
+section > h2 .num{color:var(--primary);margin-right:8px;}
+section .lead{font-size:14px;color:var(--text-body);margin:0 0 24px;letter-spacing:-0.7px;}
+h3.sub{font-size:16px;font-weight:600;letter-spacing:-0.8px;color:var(--text-label);
+  margin:28px 0 14px;}
+
+.card{background:#fff;border:1px solid var(--divider);border-radius:8px;padding:24px;margin-bottom:18px;}
+
+/* ===== Colors ===== */
+.swatch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;}
+.swatch{
+  border:1px solid var(--divider);border-radius:8px;overflow:hidden;background:#fff;
+  cursor:pointer;transition:.15s;
+}
+.swatch:hover{box-shadow:0 3px 10px rgba(0,0,0,.1);transform:translateY(-2px);}
+.swatch .box{height:64px;width:100%;border-bottom:1px solid var(--divider);}
+.swatch .info{padding:10px 12px;}
+.swatch .tname{font-size:12px;font-weight:600;letter-spacing:-0.6px;color:var(--text-label);}
+.swatch .hex{font-size:11px;font-family:'Noto Sans',monospace;color:var(--text-muted);margin:2px 0;}
+.swatch .use{font-size:11px;color:var(--text-body);letter-spacing:-0.55px;line-height:1.4;}
+.copied{outline:2px solid var(--primary);}
+
+.warn-banner{
+  background:#FFF8E6;border:1px solid var(--accent-gold);border-left:4px solid var(--accent-gold);
+  border-radius:6px;padding:14px 18px;margin:18px 0;font-size:13px;color:var(--text-label);
+}
+.warn-banner b{color:#B8860B;}
+table.contrast{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:12px;}
+table.contrast th,table.contrast td{border:1px solid var(--divider);padding:8px 10px;text-align:left;letter-spacing:-0.6px;}
+table.contrast th{background:var(--bg-section);font-weight:600;}
+.wcag-badge{display:inline-block;background:#FBE9E7;color:#C62828;font-size:11px;font-weight:600;
+  padding:2px 8px;border-radius:var(--r-full);}
+
+/* ===== Typography demo ===== */
+.type-row{display:flex;align-items:baseline;gap:20px;padding:14px 0;border-bottom:1px dashed var(--divider);}
+.type-row:last-child{border-bottom:none;}
+.type-demo{flex:1;color:var(--text-label);}
+.type-spec{font-size:11px;color:var(--text-muted);font-family:monospace;white-space:nowrap;letter-spacing:0;min-width:230px;text-align:right;}
+.type-name{font-size:12px;color:var(--primary);font-weight:600;min-width:120px;}
+
+/* ===== Layout zone diagram ===== */
+.zone-diagram{display:grid;grid-template-columns:1fr 1fr;gap:0;border:2px solid var(--primary);border-radius:8px;overflow:hidden;}
+.zone{padding:16px;border:1px solid var(--divider);background:#fff;}
+.zone .ztitle{font-size:13px;font-weight:600;color:var(--primary);margin-bottom:6px;}
+.zone .zbody{font-size:12px;color:var(--text-body);line-height:1.7;}
+.panel-stack{border:1px dashed var(--border-default);border-radius:6px;padding:14px;background:var(--bg-section);font-size:12px;color:var(--text-body);line-height:2;}
+.panel-stack .pl{color:var(--primary);font-weight:600;}
+
+/* ===== Shapes ===== */
+.shape-row{display:flex;gap:24px;align-items:center;flex-wrap:wrap;}
+.shape-demo{text-align:center;}
+.shape-demo .lbl{font-size:11px;color:var(--text-muted);margin-top:8px;}
+.box-r4{width:80px;height:50px;border:1px solid var(--border-default);border-radius:4px;background:#fff;}
+.box-r5{width:80px;height:50px;border:1px solid var(--primary);border-radius:5px;background:#fff;}
+.chip-demo{width:50px;height:50px;border-radius:50%;background:#CC1523;}
+
+/* ===== Components ===== */
+.comp-block{border:1px solid var(--divider);border-radius:8px;padding:20px;margin-bottom:16px;background:#fff;}
+.comp-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;flex-wrap:wrap;gap:8px;}
+.comp-name{font-size:15px;font-weight:600;color:var(--text-label);letter-spacing:-0.7px;}
+.comp-type{font-size:11px;color:var(--text-muted);font-family:monospace;letter-spacing:0;}
+.comp-rule{display:inline-block;background:var(--primary-light-3);color:var(--primary);font-size:11px;font-weight:600;padding:2px 9px;border-radius:var(--r-full);}
+.comp-demo{display:flex;gap:20px;align-items:flex-end;flex-wrap:wrap;padding:8px 0;}
+.demo-item{text-align:center;}
+.demo-item .state-lbl{font-size:11px;color:var(--text-muted);margin-top:8px;letter-spacing:-0.5px;}
+
+/* OptionButton */
+.opt-btn{width:155px;height:50px;display:flex;align-items:center;justify-content:center;
+  background:#fff;border:1px solid var(--border-default);border-radius:var(--r-sm);
+  font-size:14px;font-weight:400;letter-spacing:-0.7px;color:var(--text-muted);cursor:pointer;transition:.12s;}
+.opt-btn.selected{border:2px solid var(--primary);color:var(--primary);font-weight:500;}
+.opt-btn.disabled{background:var(--bg-section);color:var(--border-default);border:1px solid var(--border-default);cursor:not-allowed;}
+
+/* CounterInput */
+.counter{width:223px;height:50px;display:flex;border:1px solid var(--border-default);border-radius:var(--r-sm);overflow:hidden;background:#fff;}
+.counter .side{width:34px;height:50px;display:flex;align-items:center;justify-content:center;
+  font-size:18px;color:var(--text-label);cursor:pointer;}
+.counter .center{width:155px;height:50px;display:flex;align-items:center;justify-content:center;
+  font-size:14px;font-weight:500;color:var(--text-muted);
+  border-left:1px solid var(--border-default);border-right:1px solid var(--border-default);}
+
+/* ColorChip */
+.color-chip{width:50px;height:50px;border-radius:50%;cursor:pointer;position:relative;border:none;}
+.color-chip.selected{background:#fff !important;box-shadow:0 0 0 2px var(--primary);}
+.color-chip.selected::after{content:"";position:absolute;inset:7px;border-radius:50%;background:var(--chipcolor);}
+
+/* SelectBox */
+.select-box{width:348px;max-width:100%;height:50px;display:flex;align-items:center;justify-content:space-between;
+  background:#fff;border:1px solid var(--border-default);border-radius:var(--r-sm);padding:0 16px;
+  font-size:14px;color:var(--text-label);cursor:pointer;}
+.select-box.open{border:1px solid var(--primary);}
+.select-box .caret{font-size:12px;color:var(--text-muted);}
+.select-list{width:348px;max-width:100%;border:1px solid var(--border-default);border-radius:0 0 4px 4px;
+  background:#fff;box-shadow:0 8px 20px rgba(0,0,0,.12);margin-top:-1px;}
+.select-list .opt{padding:12px 16px;font-size:14px;color:var(--text-label);cursor:pointer;}
+.select-list .opt:hover{background:var(--bg-section);}
+
+/* Slider */
+.slider{width:300px;position:relative;height:16px;display:flex;align-items:center;}
+.slider .track{height:4px;width:100%;border-radius:2px;background:var(--border-default);position:relative;}
+.slider .range{height:4px;border-radius:2px;background:var(--primary);width:55%;}
+.slider .thumb{width:16px;height:16px;border-radius:50%;background:#fff;border:2px solid var(--primary);
+  position:absolute;left:55%;top:50%;transform:translate(-50%,-50%);}
+.slider-labels{display:flex;justify-content:space-between;width:300px;font-size:11px;color:var(--text-muted);margin-top:6px;}
+
+/* Tab */
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--divider);}
+.tab{padding:10px 20px;font-size:14px;color:var(--text-muted);cursor:pointer;border-bottom:2px solid transparent;}
+.tab.active{color:var(--primary);font-weight:600;border-bottom:2px solid var(--primary);}
+
+/* TextField */
+.text-field{height:44px;width:280px;max-width:100%;border:1px solid var(--border-default);border-radius:var(--r-sm);
+  padding:0 12px;display:flex;align-items:center;font-size:14px;color:var(--text-medium);background:#fff;}
+.text-field.active{border:2px solid var(--primary);color:var(--text-label);}
+.text-field.disabled{background:var(--bg-light);border:1px solid var(--bg-light);color:var(--border-default);}
+
+/* Checkbox / Radio */
+.cb{width:20px;height:20px;border:2px solid var(--border-default);border-radius:3px;background:#fff;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;}
+.cb.checked{background:var(--primary);border-color:var(--primary);color:#fff;font-size:13px;}
+.rb{width:20px;height:20px;border:2px solid var(--border-default);border-radius:50%;background:#fff;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;}
+.rb.checked{border-color:var(--primary);}
+.rb.checked::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--primary);}
+
+/* Badge */
+.badge{height:14px;min-width:32px;padding:0 6px;display:inline-flex;align-items:center;justify-content:center;
+  font-size:9px;font-weight:600;color:#fff;border-radius:3px;letter-spacing:-0.3px;}
+
+/* FinishButton */
+.finish-btn{width:116px;height:50px;display:flex;align-items:center;justify-content:center;background:#fff;
+  border:1px solid var(--border-default);border-radius:var(--r-sm);font-size:12px;color:var(--text-muted);cursor:pointer;}
+.finish-btn.selected{border:2px solid var(--primary);color:var(--primary);font-weight:600;}
+
+/* AreaInput */
+.area-input{display:flex;align-items:center;gap:10px;}
+.area-field{width:140px;height:50px;border:1px solid var(--border-default);border-radius:var(--r-sm);
+  padding:0 16px;display:flex;align-items:center;font-size:14px;color:var(--border-default);background:#fff;}
+.area-sep{font-size:14px;color:var(--text-label);}
+.area-help{font-size:11px;color:var(--text-muted);margin-top:8px;}
+
+/* PriceSummary */
+.summary{width:360px;max-width:100%;border:1px solid var(--divider);border-radius:8px;padding:18px;background:#fff;}
+.summary .row{display:flex;justify-content:space-between;font-size:12px;color:var(--text-body);padding:4px 0;}
+.summary .row .val{color:var(--text-label);}
+.summary .div{height:1px;background:var(--divider);margin:10px 0;}
+.summary .total{display:flex;justify-content:space-between;align-items:baseline;}
+.summary .total .tl{font-size:16px;font-weight:600;color:var(--text-dark);}
+.summary .total .tv{font-size:24px;font-weight:600;color:var(--primary);letter-spacing:-1.2px;}
+
+/* Upload CTA */
+.cta-stack{display:flex;flex-direction:column;gap:10px;width:465px;max-width:100%;}
+.cta{height:50px;border-radius:var(--r-cta);display:flex;align-items:center;justify-content:center;
+  font-size:14px;font-weight:600;letter-spacing:-0.7px;cursor:pointer;}
+.cta.outline{background:#fff;border:1px solid var(--primary);color:var(--text-label);}
+.cta.filled{background:var(--primary);color:#fff;}
+.cta.dark{background:var(--primary-dark);color:#fff;}
+
+/* PageCounter */
+.page-counter{height:50px;display:inline-flex;align-items:center;gap:4px;border:1px solid var(--border-default);
+  border-radius:var(--r-sm);padding:0 10px;background:#fff;}
+.page-counter .pnum{width:34px;height:34px;display:flex;align-items:center;justify-content:center;
+  font-size:14px;color:var(--text-label);border-radius:var(--r-sm);cursor:pointer;}
+.page-counter .pnum.sel{box-shadow:0 0 0 2px var(--primary);color:var(--primary);font-weight:600;}
+.page-counter .pnav{font-size:16px;color:var(--text-muted);padding:0 4px;cursor:pointer;}
+
+/* toggle button */
+.toggle-state{margin-left:auto;font-size:12px;font-weight:500;color:var(--primary);background:var(--primary-light-3);
+  border:1px solid var(--primary-light-2);border-radius:var(--r-full);padding:5px 14px;cursor:pointer;letter-spacing:-0.6px;}
+
+/* Do / Don't */
+.dd-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.dd-card{border-radius:8px;padding:18px;border:1px solid;}
+.dd-do{background:#F0FAF3;border-color:#7AC8A4;}
+.dd-dont{background:#FDF2F2;border-color:#E6A0A0;}
+.dd-card .dd-h{font-size:14px;font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:6px;}
+.dd-do .dd-h{color:#2E7D4F;}
+.dd-dont .dd-h{color:#C0392B;}
+.dd-card .dd-body{font-size:13px;color:var(--text-body);line-height:1.7;letter-spacing:-0.6px;}
+.dd-card code{background:rgba(0,0,0,.06);padding:1px 6px;border-radius:3px;font-size:12px;}
+.rule-title{font-size:15px;font-weight:600;color:var(--text-label);margin:26px 0 12px;}
+.rule-title .tag{font-size:11px;background:var(--primary);color:#fff;padding:2px 8px;border-radius:var(--r-full);margin-right:8px;}
+
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--text-dark);color:#fff;
+  font-size:13px;padding:10px 20px;border-radius:var(--r-full);opacity:0;transition:.25s;pointer-events:none;z-index:999;}
+.toast.show{opacity:1;}
+
+footer{margin-top:64px;padding-top:24px;border-top:1px solid var(--divider);font-size:12px;color:var(--text-muted);text-align:center;}
+
+@media (max-width:720px){
+  .zone-diagram{grid-template-columns:1fr;}
+  .dd-grid{grid-template-columns:1fr;}
+  .type-row{flex-wrap:wrap;}
+  .type-spec{text-align:left;min-width:0;}
+}
+@media print{
+  nav.toc{position:static;box-shadow:none;}
+  header.site{background:var(--primary) !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .swatch,.card,.comp-block,.dd-card,.zone{break-inside:avoid;}
+  body{background:#fff;}
+  .toggle-state{display:none;}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="inner">
+    <h1>후니프린팅 디자인시스템 — 실무진 검토용</h1>
+    <div class="meta">
+      단일 디자인 소스(Single Source of Truth) · 자동견적 사이트 상품 옵션 UI<br>
+      출처: <code>DESIGN.md</code> · Figma REST API <code>gEJhQRtmKI66BPhOpqoW3j</code> 검증(2026-03-10) ·
+      skill <code>innojini-huni-design-system v5.0.0</code><br>
+      Gap Analysis 2026-03-05 적용: primary <code>#553886</code> · primary-dark <code>#3B2573</code>
+    </div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="inner">
+    <a href="#overview">1. Overview</a>
+    <a href="#colors">2. Colors</a>
+    <a href="#typography">3. Typography</a>
+    <a href="#layout">4. Layout</a>
+    <a href="#shapes">5/6. Shapes</a>
+    <a href="#components">7. Components</a>
+    <a href="#dosdonts">8. Do's & Don'ts</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- 1. Overview -->
+<section id="overview">
+  <h2><span class="num">1.</span>Overview — 디자인 컨셉</h2>
+  <div class="card">
+    <p style="margin:0;font-size:14px;color:var(--text-body);line-height:1.8;">
+      후니프린팅의 디자인은 <b style="color:var(--primary)">보라(Purple) 브랜드 컬러를 중심으로 한 절제된 인쇄 주문 UI</b>입니다.
+      핵심은 <b>"선택의 명확성"</b>. 사용자는 사이즈·종이·수량·후가공 등 수십 개의 옵션을 빠르게 탐색·선택해야 하므로,
+      모든 선택 컴포넌트는 <b style="color:var(--primary)">흰 배경 + 보라 테두리</b>로 선택 상태를 표현하여(채워진 배경 금지)
+      시각적 소음을 최소화하고 어떤 항목이 선택되었는지 한눈에 구분되게 합니다.
+      타이포는 Noto Sans 단일 패밀리에 <code style="background:var(--bg-section);padding:1px 5px;border-radius:3px;">-5%</code> 자간을 일관 적용,
+      모든 조작 컴포넌트는 50px 고정 높이와 4px(컴포넌트)/5px(CTA) 라운드로 통일된 리듬을 만듭니다.
+      옵션 라벨·값은 절대 하드코딩하지 않고 DB/API에서 동적 주입됩니다.
+    </p>
+  </div>
+</section>
+
+<!-- 2. Colors -->
+<section id="colors">
+  <h2><span class="num">2.</span>Colors — 팔레트 (22색)</h2>
+  <p class="lead">색상 칩을 클릭하면 HEX 값이 클립보드에 복사됩니다.</p>
+
+  <h3 class="sub">2.1 Purple Family — Primary Brand (6색)</h3>
+  <div class="swatch-grid" id="grid-purple"></div>
+
+  <h3 class="sub">2.2 Neutral / Gray Family (11색)</h3>
+  <div class="swatch-grid" id="grid-neutral"></div>
+
+  <h3 class="sub">2.3 Accent Colors (5색 + 골드/틸 = 6 마커)</h3>
+  <div class="swatch-grid" id="grid-accent"></div>
+
+  <h3 class="sub">2.4 텍스트 색상 대비 규칙 (WCAG)</h3>
+  <div class="warn-banner">
+    <b>본문/콘텐츠 텍스트 허용 색상:</b> #424242(text-label) · #553886(primary) · #979797(text-muted) · #000000.
+    #FFFFFF 텍스트는 반드시 컬러 배경 위에서만 사용. 콘텐츠 텍스트에 컬러 폰트(#FF00FF 등) 금지 — 색상은 배지·아이콘 등 비콘텐츠 요소에 한함.
+  </div>
+  <p style="font-size:13px;color:var(--text-label);margin-bottom:4px;"><b>알려진 WCAG 대비 예외</b> (의도된 디자인, Figma 검증 브랜드 고정값 — 변경 불가, 콘텐츠 텍스트 아님):</p>
+  <table class="contrast">
+    <thead><tr><th>컴포넌트</th><th>조합</th><th>비율</th><th>사유</th></tr></thead>
+    <tbody>
+      <tr><td>option-button / finish-button</td><td>#979797 on #FFFFFF</td><td><span class="wcag-badge">2.92:1</span></td><td>미선택(placeholder 수준) 전용. 선택 시 #553886(충분)로 전환</td></tr>
+      <tr><td>badge-recommend</td><td>흰색 on #FF66CC</td><td><span class="wcag-badge">2.62:1</span></td><td>추천 배지(장식성 마커, 32×14px). 브랜드 형광 핑크 고정</td></tr>
+      <tr><td>badge-new</td><td>흰색 on #FF1493</td><td><span class="wcag-badge">3.64:1</span></td><td>NEW 배지(장식성 마커). 브랜드 고정</td></tr>
+      <tr><td>badge-up</td><td>흰색 on #00BCD4</td><td><span class="wcag-badge">2.30:1</span></td><td>UP 배지(장식성 마커). 브랜드 고정</td></tr>
+      <tr><td>badge-gold</td><td>흰색 on #E6B93F</td><td><span class="wcag-badge">1.85:1</span></td><td>골드 배지(장식성 마커). 브랜드 고정</td></tr>
+      <tr><td>badge-teal</td><td>흰색 on #7AC8C4</td><td><span class="wcag-badge">1.93:1</span></td><td>틸 배지(장식성 마커). 브랜드 고정</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- 3. Typography -->
+<section id="typography">
+  <h2><span class="num">3.</span>Typography — 타이포그래피</h2>
+  <p class="lead">Font Family: Noto Sans ONLY (400/500/600) · Letter Spacing: -5% 범용 (letterSpacing = fontSize × -0.05)</p>
+  <div class="card" id="type-demo"></div>
+  <div class="warn-banner"><b>[CRITICAL]</b> 폰트는 반드시 Noto Sans. Lucide 등 외부 아이콘 폰트로 캐럿(▼) 대체 금지 — 캐럿은 텍스트 문자.</div>
+</section>
+
+<!-- 4. Layout -->
+<section id="layout">
+  <h2><span class="num">4.</span>Layout — 4-Zone 옵션 패널 구조</h2>
+  <p class="lead">상품 옵션 페이지(option_New)는 4개 기능 존으로 구성됩니다.</p>
+  <div class="zone-diagram">
+    <div class="zone">
+      <div class="ztitle">Zone 1 — 옵션 선택 (사이즈 + 종이)</div>
+      <div class="zbody">OptionButton(155×50, 3-column)<br>SelectBox(348×50)<br>추천 배지(32×14)</div>
+    </div>
+    <div class="zone">
+      <div class="ztitle">Zone 2 — 수량 + 후가공 헤더</div>
+      <div class="zbody">CounterInput(223×50)<br>FinishTitleBar(466×50, 열기/닫기 토글)</div>
+    </div>
+    <div class="zone">
+      <div class="ztitle">Zone 3 — 후가공 옵션</div>
+      <div class="zbody">FinishButton(116×50)<br>AreaInput(140×50, X 구분자)<br>ColorChip(50×50)</div>
+    </div>
+    <div class="zone">
+      <div class="ztitle">Zone 4 — 부자재 + 합계 + 업로드</div>
+      <div class="zbody">FinishSelect(461×50)<br>Summary(가격 요약)<br>Upload 3종(465×50)</div>
+    </div>
+  </div>
+  <h3 class="sub">4.3 상품 페이지 공통 구조</h3>
+  <div class="panel-stack">
+    Header: HuniPrinting 로고 + 네비게이션<br>
+    상품 이미지 (좌) │ 옵션 패널 (우)<br>
+    &nbsp;&nbsp;├── <span class="pl">사이즈</span> (OptionButton 3-col, 선택=흰배경+보라테두리)<br>
+    &nbsp;&nbsp;├── <span class="pl">종이/지질</span> (HuniCustomSelect 드롭다운)<br>
+    &nbsp;&nbsp;├── <span class="pl">인쇄방식/도수</span> (OptionButton / RadioGroup)<br>
+    &nbsp;&nbsp;├── <span class="pl">코팅/귀돌이/커팅</span> (FinishButton)<br>
+    &nbsp;&nbsp;├── <span class="pl">제작수량</span> (CounterInput 3-part)<br>
+    &nbsp;&nbsp;├── [접기] <span class="pl">후가공</span> (FinishTitleBar collapse) → 박/색상 (ColorChip 50×50 원형)<br>
+    &nbsp;&nbsp;├── <span class="pl">부자재</span> (FinishSelect 461×50)<br>
+    &nbsp;&nbsp;├── <span class="pl">합계금액</span> (24px/600 #553886)<br>
+    &nbsp;&nbsp;└── <span class="pl">CTA 3종</span> (PDF업로드 / 디자인주문 / 장바구니, 465×50)<br>
+    <br>
+    섹션 좌우 패딩 20px · 버튼 그리드 3-col / gap 0px(border-adjacency) · 컴포넌트 높이 50px 공통
+  </div>
+</section>
+
+<!-- 5/6. Shapes -->
+<section id="shapes">
+  <h2><span class="num">5/6.</span>Elevation &amp; Shapes — 형태 / 라운드</h2>
+  <p class="lead">플랫(flat) 지향 — 표면 그림자 최소화, 테두리·면 분할로 깊이 표현. (Elevation 명시값: 드롭다운 shadow-lg 1종)</p>
+  <div class="card">
+    <div class="shape-row">
+      <div class="shape-demo"><div class="box-r4"></div><div class="lbl">radius sm <b>4px</b><br>OptionButton·Counter·Select</div></div>
+      <div class="shape-demo"><div class="box-r5"></div><div class="lbl">radius cta <b>5px</b><br>OrderCTA 3종</div></div>
+      <div class="shape-demo"><div class="chip-demo"></div><div class="lbl">ColorChip <b>50×50 원형</b><br>(full 9999px)</div></div>
+      <div class="shape-demo"><div style="width:32px;height:32px;border-radius:50%;background:#0099CC;margin:9px auto;"></div><div class="lbl">MiniColorChip<br><b>32×32 원형</b></div></div>
+      <div class="shape-demo"><div style="width:20px;height:20px;border:2px solid var(--border-default);border-radius:3px;margin:15px auto;"></div><div class="lbl">Checkbox<br>radius <b>3px</b></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. Components -->
+<section id="components">
+  <h2><span class="num">7.</span>Components — 14 componentType</h2>
+  <p class="lead">실제 렌더링 + 상태별 표현. <b style="color:var(--primary)">핵심: 선택상태 = 흰 배경 + 보라(#553886) 테두리 2px</b>. 토글 버튼으로 default↔selected 전환 가능.</p>
+
+  <!-- 7.1 OptionButton -->
+  <div class="comp-block">
+    <div class="comp-head">
+      <div><span class="comp-name">7.1 OptionButton</span> <span class="comp-rule">RULE-2</span></div>
+      <span class="comp-type">ButtonType · OptionButton.tsx · 155×50</span>
+    </div>
+    <div class="comp-demo">
+      <div class="demo-item"><div class="opt-btn">90×50</div><div class="state-lbl">기본 (#CACACA / #979797)</div></div>
+      <div class="demo-item"><div class="opt-btn selected">90×50</div><div class="state-lbl">선택 (흰배경+#553886 2px)</div></div>
+      <div class="demo-item"><div class="opt-btn disabled">90×50</div><div class="state-lbl">disabled (#F5F5F5 / #CACACA)</div></div>
+      <button class="toggle-state" data-toggle="opt">default ↔ selected 토글</button>
+    </div>
+  </div>
+
+  <!-- 7.2 SelectBox -->
+  <div class="comp-block">
+    <div class="comp-head">
+      <div><span class="comp-name">7.2 SelectBox (HuniCustomSelect)</span> <span class="comp-rule">RULE-1</span></div>
+      <span class="comp-type">SelectBoxType · PaperDropdown.tsx · 348×50</span>
+    </div>
+    <div class="comp-demo" style="flex-direction:column;align-items:flex-start;gap:0;">
+      <div class="select-box open" style="border-radius:4px 4px 0 0;"><span>아트지 250g</span><span class="caret">▼</span></div>
+      <div class="select-list">
+        <div class="opt">아트지 250g</div>
+        <div class="opt">스노우지 200g</div>
+        <div class="opt">모조지 100g</div>
+      </div>
+      <div class="state-lbl" style="margin-top:8px;">open 상태 (테두리 #553886) · 캐럿 ▼ 텍스트 문자(#979797) · native select 금지 · 옵션 hover #F5F5F5</div>
+    </div>
+  </div>
+
+  <!-- 7.3 CounterInput -->
+  <div class="comp-block">
+    <div class="comp-head">
+      <div><span class="comp-name">7.3 CounterInput</span> <span class="comp-rule">RULE-3</span></div>
+      <span class="comp-type">CounterInputType · CounterInput.tsx · 223×50 = [34][155][34]</span>
+    </div>
+    <div class="comp-demo">
+      <div class="demo-item">
+        <div class="counter"><div class="side">−</div><div class="center">1,000</div><div class="side">+</div></div>
+        <div class="state-lbl">직사각형 3분할 · divider 1px #CACACA · 원형/native input 금지</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7.4 ColorChip -->
+  <div class="comp-block">
+    <div class="comp-head">
+      <div><span class="comp-name">7.4 ColorChip</span> <span class="comp-rule">RULE-4</span></div>
+      <span class="comp-type">ColorChipType · ColorChip.tsx · 50×50 원형</span>
+    </div>
+    <div class="comp-demo" id="colorchip-demo">
+      <!-- filled by JS, 박칼라 8색 -->
+    </div>
+    <div class="state-lbl" style="margin-top:4px;">선택 시 흰 채움 + #553886 ring 2px (칩 클릭으로 선택 전환)</div>
+  </div>
+
+  <!-- 7.5 Slider -->
+  <div class="comp-block">
+    <div class="comp-head">
+      <div><span class="comp-name">7.5 PriceSlider</span> <span class="comp-rule">RULE-5-EXT</span></div>
+      <span class="comp-type">PriceSliderType · PriceSlider.tsx (Radix) · track 4px / thumb 16×16</span>
+    </div>
+    <div class="comp-demo" style="flex-direction:column;align-items:flex-start;">
+      <div class="slider"><div class="track"><div class="range"></div></div><div class="thumb"></div></div>
+      <div class="slider-labels"><span>1</span><span>10</span><span>50</span><span>100</span><span>500</span><span>1000</span></div>
+      <div class="state-lbl" style="margin-top:6px;">thumb 테두리 #553886 2px+흰채움 · active track #553886 · @radix-ui/react-slider 필수</div>
+    </div>
+  </div>
+
+  <!-- 7.6 / 7.7 / 7.8 Image / Mini / Large chip -->
+  <div class="comp-block">
+    <div class="comp-head">
+      <div><span class="comp-name">7.6–7.8 ImageChip / MiniColorChip / LargeColorChip</span> <span class="comp-rule">RULE-6/7/8-EXT</span></div>
+      <span class="comp-type">50×50 / 32×32 / 50×50 grid-cols-5 · 원형 · 선택 #553886 ring 2px</span>
+    </div>
+    <div class="comp-demo">
+      <div class="demo-item">
+        <div style="width:50px;height:50px;border-radius:50%;background:var(--bg-section);box-shadow:0 0 0 2px var(--primary);"></div>
+        <div class="state-lbl">ImageChip 50×50<br>(선택, placeholder #F5F5F5)</div>
+      </div>
+      <div class="demo-item">
+        <div style="width:32px;height:32px;border-radius:50%;background:#CC1523;box-shadow:0 0 0 2px var(--primary);margin:9px auto;"></div>
+        <div class="state-lbl">MiniColorChip 32×32<br>(선택)</div>
+      </div>
+      <div class="demo-item">
+        <div style="display:grid;grid-template-columns:repeat(5,32px);gap:6px;">
+          <div style="width:32px;height:32px;border-radius:50%;background:#D4AF37;"></div>
+          <div style="width:32px;height:32px;border-radius:50%;background:#C0C0C0;"></div>
+          <div style="width:32px;height:32px;border-radius:50%;background:#CC1523;box-shadow:0 0 0 2px var(--primary);"></div>
+          <div style="width:32px;height:32px;border-radius:50%;background:#0099CC;"></div>
+          <div style="width:32px;height:32px;border-radius:50%;background:#1A1A1A;"></div>
+        </div>
+        <div class="state-lbl">LargeColorChip grid-cols-5<br>(DB 동적 로드)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7.9 AreaInput -->
+  <div class="comp-block">
+    <div class="comp-head">
+      <div><span class="comp-name">7.9 AreaInput</span></div>
+      <span class="comp-type">AreaInputType · FinishInput.tsx · 140×50 each</span>
+    </div>
+    <div class="comp-demo" style="flex-direction:column;align-items:flex-start;">
+      <div class="area-input">
+        <div class="area-field">가로</div><span class="area-sep">X</span><div class="area-field">세로</div>
+      </div>
+      <div class="area-help">가로 30~125mm / 세로 30~170mm · placeholder #CACACA · X 구분자 #424242</div>
+    </div>
+  </div>
+
+  <!-- 7.10 PageCounter -->
+  <div class="comp-block">
+    <div class="comp-head">
+      <div><span class="comp-name">7.10 PageCounterInput</span></div>
+      <span class="comp-type">PageCounterInputType · PageCounterInput.tsx · h50</span>
+    </div>
+    <div class="comp-demo">
+      <div class="page-counter">
+        <span class="pnav">&lt;</span>
+        <span class="pnum">1</span><span class="pnum sel">2</span><span class="pnum">3</span>
+        <span class="pnav">&gt;</span>
+      </div>
+      <div class="state-lbl">선택 #553886 ring 2px · min/max/step 동적</div>
+    </div>
+  </div>
+
+  <!-- 7.11 FinishButton -->
+  <div class="comp-block">
+    <div class="comp-head">
+      <div><span class="comp-name">7.11 FinishButton</span> <span class="comp-rule">RULE-2</span></div>
+      <span class="comp-type">FinishButtonType · FinishButton.tsx · 116×50</span>
+    </div>
+    <div class="comp-demo">
+      <div class="demo-item"><div class="finish-btn">둥근모서리</div><div class="state-lbl">기본 (#979797 12px)</div></div>
+      <div class="demo-item"><div class="finish-btn selected">직각모서리</div><div class="state-lbl">선택 (#553886 2px / 600)</div></div>
+      <button class="toggle-state" data-toggle="finish">default ↔ selected 토글</button>
+    </div>
+  </div>
+
+  <!-- 7.12 FinishSelect -->
+  <div class="comp-block">
+    <div class="comp-head">
+      <div><span class="comp-name">7.12 FinishSelectBox</span> <span class="comp-rule">RULE-1</span></div>
+      <span class="comp-type">FinishSelectBoxType · FinishSelect.tsx · 461×50</span>
+    </div>
+    <div class="comp-demo">
+      <div class="select-box" style="width:461px;"><span>엽서봉투 (100매)</span><span class="caret">▼</span></div>
+    </div>
+    <div class="state-lbl">SelectBox와 동일 규칙 · native &lt;select&gt; 금지 · ▼ 텍스트 캐럿</div>
+  </div>
+
+  <!-- 7.13 PriceSummary -->
+  <div class="comp-block">
+    <div class="comp-head">
+      <div><span class="comp-name">7.13 PriceSummary</span></div>
+      <span class="comp-type">SummaryType · PriceResult.tsx</span>
+    </div>
+    <div class="comp-demo">
+      <div class="summary">
+        <div class="row"><span>상품가</span><span class="val">45,000원</span></div>
+        <div class="row"><span>후가공(박)</span><span class="val">8,000원</span></div>
+        <div class="row"><span>부가세</span><span class="val">5,300원</span></div>
+        <div class="div"></div>
+        <div class="total"><span class="tl">합계금액</span><span class="tv">58,300원</span></div>
+      </div>
+    </div>
+    <div class="state-lbl">합계금액 24px/600 #553886 · 항목 12px #616161 / 금액 #424242</div>
+  </div>
+
+  <!-- 7.14 UploadCTA -->
+  <div class="comp-block">
+    <div class="comp-head">
+      <div><span class="comp-name">7.14 UploadCTA (3종)</span></div>
+      <span class="comp-type">UploadType · OrderCTA.tsx · 465×50 · radius 5px</span>
+    </div>
+    <div class="comp-demo">
+      <div class="cta-stack">
+        <div class="cta outline">PDF 업로드 (outline · #553886 테두리)</div>
+        <div class="cta filled">디자인 에디터 (filled · #553886)</div>
+        <div class="cta dark">장바구니 (dark · #3B2573)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 보조: Tab / TextField / Checkbox / Radio / Badge -->
+  <div class="comp-block">
+    <div class="comp-head">
+      <div><span class="comp-name">보조 컴포넌트 — Tab / TextField / Checkbox / Radio / Badge</span></div>
+      <span class="comp-type">Component 페이지</span>
+    </div>
+    <h3 class="sub" style="margin-top:0;">Tab (활성 = 보라 + 하단 라인 2px)</h3>
+    <div class="tabs">
+      <div class="tab active">진행중</div><div class="tab">완료</div><div class="tab">취소</div>
+    </div>
+
+    <h3 class="sub">TextField (h44 · active 테두리 2px #553886)</h3>
+    <div class="comp-demo">
+      <div class="demo-item"><div class="text-field">기본 입력</div><div class="state-lbl">default (#CACACA 1px)</div></div>
+      <div class="demo-item"><div class="text-field active">활성 입력</div><div class="state-lbl">active (#553886 2px)</div></div>
+      <div class="demo-item"><div class="text-field disabled">비활성</div><div class="state-lbl">disabled (#E9E9E9)</div></div>
+    </div>
+
+    <h3 class="sub">Checkbox / Radio (20×20)</h3>
+    <div class="comp-demo">
+      <div class="demo-item"><span class="cb"></span><div class="state-lbl">checkbox 기본</div></div>
+      <div class="demo-item"><span class="cb checked">✓</span><div class="state-lbl">checked #553886</div></div>
+      <div class="demo-item"><span class="rb"></span><div class="state-lbl">radio 기본</div></div>
+      <div class="demo-item"><span class="rb checked"></span><div class="state-lbl">selected #553886</div></div>
+    </div>
+
+    <h3 class="sub">Badge (32×14)</h3>
+    <div class="comp-demo">
+      <div class="demo-item"><span class="badge" style="background:var(--badge-recommend)">추천</span><div class="state-lbl">recommend</div></div>
+      <div class="demo-item"><span class="badge" style="background:var(--badge-best)">BEST</span><div class="state-lbl">best</div></div>
+      <div class="demo-item"><span class="badge" style="background:var(--badge-new)">NEW</span><div class="state-lbl">new</div></div>
+      <div class="demo-item"><span class="badge" style="background:var(--badge-up)">UP</span><div class="state-lbl">up</div></div>
+      <div class="demo-item"><span class="badge" style="background:var(--accent-gold)">GOLD</span><div class="state-lbl">gold</div></div>
+      <div class="demo-item"><span class="badge" style="background:var(--accent-teal)">TEAL</span><div class="state-lbl">teal</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. Do's and Don'ts -->
+<section id="dosdonts">
+  <h2><span class="num">8.</span>Do's and Don'ts — Critical Rules</h2>
+  <p class="lead">후니 디자인의 8개 핵심 규칙. ✅ 좋은 예 vs ❌ 나쁜 예.</p>
+
+  <div class="rule-title"><span class="tag">RULE-1</span>SelectBox: native &lt;select&gt; 금지</div>
+  <div class="dd-grid">
+    <div class="dd-card dd-do">
+      <div class="dd-h">✅ DO</div>
+      <div class="dd-body">custom div 드롭다운(<code>HuniCustomSelect</code>), 캐럿은 <code>▼</code> 텍스트 문자 오버레이, 외부 클릭 감지 + 키보드 접근성.
+        <div style="margin-top:10px;"><div class="select-box open" style="width:100%;"><span>아트지 250g</span><span class="caret">▼</span></div></div>
+      </div>
+    </div>
+    <div class="dd-card dd-dont">
+      <div class="dd-h">❌ DON'T</div>
+      <div class="dd-body"><code>&lt;select&gt;&lt;option&gt;...&lt;/option&gt;&lt;/select&gt;</code> 사용 — 크로스브라우저 스타일 불가, Figma 스펙 위반.
+        <div style="margin-top:10px;"><select style="width:100%;height:40px;border:1px solid #ccc;border-radius:4px;font-family:inherit;"><option>네이티브 셀렉트 (금지)</option></select></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rule-title"><span class="tag">RULE-2</span>선택 상태 = 흰 배경 + 보라 테두리</div>
+  <div class="dd-grid">
+    <div class="dd-card dd-do">
+      <div class="dd-h">✅ DO</div>
+      <div class="dd-body">선택 시 <code>bg-white border-2 border-[#553886] text-[#553886]</code>
+        <div style="margin-top:10px;"><div class="opt-btn selected">선택됨</div></div>
+      </div>
+    </div>
+    <div class="dd-card dd-dont">
+      <div class="dd-h">❌ DON'T</div>
+      <div class="dd-body">선택 시 컬러 배경 채움 <code>bg-[#553886] text-white</code> 또는 #EEE8FF 채움
+        <div style="margin-top:10px;"><div style="width:155px;height:50px;background:#553886;color:#fff;display:flex;align-items:center;justify-content:center;border-radius:4px;font-size:14px;">채운 배경 (금지)</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rule-title"><span class="tag">RULE-3</span>CounterInput: 직사각형 3-part</div>
+  <div class="dd-grid">
+    <div class="dd-card dd-do">
+      <div class="dd-h">✅ DO</div>
+      <div class="dd-body"><code>[34px −] [155px 값] [34px +]</code> = 223×50px, divider 1px #CACACA
+        <div style="margin-top:10px;"><div class="counter"><div class="side">−</div><div class="center">1,000</div><div class="side">+</div></div></div>
+      </div>
+    </div>
+    <div class="dd-card dd-dont">
+      <div class="dd-h">❌ DON'T</div>
+      <div class="dd-body">원형 버튼(<code>rounded-full</code>)·native number input·증감 화살표 스피너
+        <div style="margin-top:10px;display:flex;gap:8px;align-items:center;"><span style="width:36px;height:36px;border-radius:50%;background:#553886;color:#fff;display:inline-flex;align-items:center;justify-content:center;">−</span><input type="number" value="1000" style="width:70px;height:36px;"><span style="width:36px;height:36px;border-radius:50%;background:#553886;color:#fff;display:inline-flex;align-items:center;justify-content:center;">+</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rule-title"><span class="tag">RULE-4</span>ColorChip: 50×50 원형</div>
+  <div class="dd-grid">
+    <div class="dd-card dd-do">
+      <div class="dd-h">✅ DO</div>
+      <div class="dd-body">50×50px ellipse, 선택 시 흰 채움 + #553886 ring 2px
+        <div style="margin-top:10px;"><div style="width:50px;height:50px;border-radius:50%;background:#fff;box-shadow:0 0 0 2px #553886;position:relative;"><span style="position:absolute;inset:7px;border-radius:50%;background:#CC1523;"></span></div></div>
+      </div>
+    </div>
+    <div class="dd-card dd-dont">
+      <div class="dd-h">❌ DON'T</div>
+      <div class="dd-body">32×32 등 다른 크기로 ColorChip 렌더 (32px는 MiniColorChip 별도)
+        <div style="margin-top:10px;"><div style="width:32px;height:32px;border-radius:50%;background:#CC1523;"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rule-title"><span class="tag">RULE-5</span>옵션 라벨 하드코딩 금지 (동적 데이터)</div>
+  <div class="dd-grid">
+    <div class="dd-card dd-do">
+      <div class="dd-h">✅ DO</div>
+      <div class="dd-body">모든 옵션 라벨/값/구조를 DB/API에서 동적 로드 후 <code>.map()</code> 렌더.<br>우선순위: Option Schema API → Zustand store → props.</div>
+    </div>
+    <div class="dd-card dd-dont">
+      <div class="dd-h">❌ DON'T</div>
+      <div class="dd-body"><code>&lt;OptionButton&gt;무광코팅(단면)&lt;/OptionButton&gt;</code> 같이 한국어 옵션 라벨을 JSX에 직접 작성.</div>
+    </div>
+  </div>
+
+  <div class="rule-title"><span class="tag">RULE-5/6/7/8-EXT</span>Slider Radix 필수 · ImageChip 50×50 · MiniChip 32×32 · LargeChip grid</div>
+  <div class="dd-grid">
+    <div class="dd-card dd-do">
+      <div class="dd-h">✅ DO</div>
+      <div class="dd-body"><code>@radix-ui/react-slider</code> 사용 · ImageChip 50×50 원형 · MiniColorChip 정확히 <code>w-8 h-8</code>(32px) · LargeColorChip <code>grid-cols-5</code> DB 동적 로드(상한 없음).</div>
+    </div>
+    <div class="dd-card dd-dont">
+      <div class="dd-h">❌ DON'T</div>
+      <div class="dd-body"><code>native input[type=range]</code> 사용 · ImageChip 사각 큰 썸네일 · MiniChip을 <code>w-12 h-12</code>(48px)와 혼동 · 색상 개수 코드 하드코딩.</div>
+    </div>
+  </div>
+
+  <div class="rule-title"><span class="tag">공통</span>타이포 / 색상</div>
+  <div class="dd-grid">
+    <div class="dd-card dd-do">
+      <div class="dd-h">✅ DO</div>
+      <div class="dd-body">Noto Sans only, 자간 -5%, 본문 텍스트 색상은 <code>#424242</code>/<code>#553886</code>/<code>#979797</code>/<code>#000000</code>.</div>
+    </div>
+    <div class="dd-card dd-dont">
+      <div class="dd-h">❌ DON'T</div>
+      <div class="dd-body">다른 폰트 패밀리, 컬러 폰트(<code>#FF00FF</code> 등) 콘텐츠 텍스트 사용, 흰 텍스트를 컬러 배경 없이 사용.</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  후니프린팅 디자인시스템 프리뷰 · DESIGN.md 단일 진실 소스 기반 · self-contained (외부 의존성: Google Fonts만)<br>
+  토큰 값은 Figma REST API 검증치 — 임의 변경 금지
+</footer>
+
+</div>
+
+<div class="toast" id="toast">복사됨</div>
+
+<script>
+// ===== Color data from DESIGN.md =====
+const purple=[
+  ["primary","#553886","선택 테두리, CTA, 가격, 활성 탭"],
+  ["primary-dark","#3B2573","다크 CTA, 장바구니 버튼 배경"],
+  ["primary-secondary","#9580D9","Hover, 보조 액센트"],
+  ["primary-light-1","#C9C2DF","옅은 보라 배경"],
+  ["primary-light-2","#DED7F4","매우 옅은 보라, 틴트"],
+  ["primary-light-3","#EEEBF9","Hover 배경 오버레이"]
+];
+const neutral=[
+  ["text-dark","#1E1E1E","합계금액 라벨 등 강조"],
+  ["text-label","#424242","섹션 라벨, 기본 본문"],
+  ["text-body","#616161","Summary 항목 설명"],
+  ["text-medium","#565656","본문 텍스트(보조)"],
+  ["text-muted","#979797","미선택 버튼, placeholder, 캐럿"],
+  ["border-default","#CACACA","기본 테두리, 미체크"],
+  ["divider","#E8E8E8","구분선"],
+  ["bg-light","#E9E9E9","옅은 배경, disabled 입력 테두리"],
+  ["bg-section","#F5F5F5","FinishTitleBar, 섹션, hover"],
+  ["bg-white","#FFFFFF","카드 배경, 버튼 채움"]
+];
+// text-medium은 §2.2에 별도 행이 있으나 표는 11색; bg-white 포함 11색
+const accent=[
+  ["accent-gold","#E6B93F","골드 배지, 하이라이트"],
+  ["accent-teal","#7AC8C4","틸 액센트, 보조 CTA"],
+  ["badge-recommend","#FF66CC","\"추천\" 배지 배경"],
+  ["badge-best","#3B2573","\"BEST\" 배지 배경"],
+  ["badge-new","#FF1493","\"NEW\" 배지 배경"],
+  ["badge-up","#00BCD4","\"UP\" 배지 배경"]
+];
+
+function lum(hex){
+  const c=hex.replace('#','');
+  const r=parseInt(c.substr(0,2),16),g=parseInt(c.substr(2,2),16),b=parseInt(c.substr(4,2),16);
+  return (0.299*r+0.587*g+0.114*b);
+}
+function renderSwatches(arr,id){
+  const el=document.getElementById(id);
+  arr.forEach(([name,hex,use])=>{
+    const d=document.createElement('div');
+    d.className='swatch';
+    d.dataset.hex=hex;
+    const border=lum(hex)>235?'border:1px solid var(--divider);':'';
+    d.innerHTML=`<div class="box" style="background:${hex};${border}"></div>
+      <div class="info"><div class="tname">${name}</div><div class="hex">${hex}</div><div class="use">${use}</div></div>`;
+    d.addEventListener('click',()=>copyHex(hex,d));
+    el.appendChild(d);
+  });
+}
+renderSwatches(purple,'grid-purple');
+renderSwatches(neutral,'grid-neutral');
+renderSwatches(accent,'grid-accent');
+
+// ===== copy hex =====
+const toast=document.getElementById('toast');
+function copyHex(hex,el){
+  const done=()=>{
+    el.classList.add('copied');
+    toast.textContent=hex+' 복사됨';
+    toast.classList.add('show');
+    setTimeout(()=>{el.classList.remove('copied');toast.classList.remove('show');},1100);
+  };
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(hex).then(done).catch(()=>fallbackCopy(hex,done));
+  }else{fallbackCopy(hex,done);}
+}
+function fallbackCopy(text,cb){
+  const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);
+  ta.select();try{document.execCommand('copy');}catch(e){}document.body.removeChild(ta);cb();
+}
+
+// ===== Typography demo =====
+const types=[
+  ["Heading H1","36px","600","-1.8px","후니프린팅 디자인시스템"],
+  ["Heading H2","24px","600","-1.2px","섹션 제목 텍스트"],
+  ["Body SemiBold","16px","600","-0.8px","강조 본문 텍스트"],
+  ["Section Label","16px","500","-0.8px","사이즈 / 종이 / 수량"],
+  ["Body Medium","14px","500","-0.7px","옵션 값 텍스트"],
+  ["Body Regular","14px","400","-0.7px","일반 본문 및 옵션 라벨"],
+  ["Caption","12px","400","-0.6px","보조 설명 캡션 텍스트"],
+  ["Help Text","11px","400","-0.55px","가로 30~125mm / 세로 30~170mm"],
+  ["Total Amount","24px","600","-1.2px","58,300원"],
+  ["Button / UI","14px","600","-0.7px","주문하기"]
+];
+const td=document.getElementById('type-demo');
+types.forEach(([name,size,weight,ls,sample])=>{
+  const isTotal=name==='Total Amount';const isBtn=name==='Button / UI';
+  const color=isTotal?'var(--primary)':(isBtn?'#fff':'var(--text-label)');
+  const bg=isBtn?'background:var(--primary);padding:2px 12px;border-radius:4px;display:inline-block;':'';
+  const row=document.createElement('div');
+  row.className='type-row';
+  row.innerHTML=`<div class="type-name">${name}</div>
+    <div class="type-demo"><span style="font-size:${size};font-weight:${weight};letter-spacing:${ls};color:${color};${bg}">${sample}</span></div>
+    <div class="type-spec">${size} / ${weight} / ${ls}</div>`;
+  td.appendChild(row);
+});
+
+// ===== ColorChip demo (박칼라 8색) =====
+const foils=[
+  ["금유광","#D4AF37"],["은유광","#C0C0C0"],["적박","#CC1523"],["청박","#0099CC"],
+  ["먹유광","#1A1A1A"],["홀로그램박","#E8E8E8"],["트윙클박","#CC66BB"],["동박","#B87333"]
+];
+const ccd=document.getElementById('colorchip-demo');
+foils.forEach(([nm,hex],i)=>{
+  const wrap=document.createElement('div');wrap.className='demo-item';
+  const chip=document.createElement('button');
+  chip.className='color-chip'+(i===2?' selected':'');
+  chip.style.background=hex;
+  chip.style.setProperty('--chipcolor',hex);
+  chip.addEventListener('click',()=>{
+    ccd.querySelectorAll('.color-chip').forEach(c=>c.classList.remove('selected'));
+    chip.classList.add('selected');
+  });
+  wrap.appendChild(chip);
+  const lbl=document.createElement('div');lbl.className='state-lbl';lbl.textContent=nm;
+  wrap.appendChild(lbl);
+  ccd.appendChild(wrap);
+});
+
+// ===== toggle buttons =====
+document.querySelectorAll('.toggle-state').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const key=btn.dataset.toggle;
+    const sel=key==='opt'?'.opt-btn:not(.disabled)':'.finish-btn';
+    const block=btn.closest('.comp-block');
+    block.querySelectorAll(sel).forEach(el=>el.classList.toggle('selected'));
+  });
+});
+</script>
+</body>
+</html>

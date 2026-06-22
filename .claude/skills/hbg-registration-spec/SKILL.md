@@ -1,14 +1,11 @@
 ---
 name: hbg-registration-spec
 description: >
-  후니프린팅 기초코드 거버넌스 하네스의 등록 명세 설계 방법론 스킬. 진단 결함 라우팅을 "기초코드 마스터에 무엇을
-  어떻게 신규 등록/교정/축이동할지"의 실행 가능한 등록 명세로 변환하는 절차를 제공한다. 명세 단위(대상 t_*·코드값
-  채번규칙·의미·FK 위상 적재순서·webadmin 적재경로·권위 근거·영향분석), search-before-mint 사다리(코드행<컬럼<
-  JSONB<junction<신규테이블), 코드 식별 전략(MAX+1·separator '_'·이름 기반 멱등·신규 DDL 0 지향), vessel/DDL 재사용
-  (rpmeta 04_vessel·dbmap 11_ddl_proposals), 돈 크리티컬 가격사슬 영향 명시를 정의한다. '등록 명세 설계',
-  '기초코드 등록명세', '신규 코드 등록', '교정 명세', '축이동 설계', 'webadmin 적재경로', 'search-before-mint',
-  'FK 위상 등록순서' 작업 시 반드시 이 스킬을 사용. 진단은 hbg-basecode-diagnosis, 검증은 hbg-governance-evaluation이
-  담당하므로 그 작업에는 트리거하지 않는다. 실 라이브 적재(COMMIT/DDL)는 dbmap 적재 트랙이 담당(본 스킬은 명세까지).
+  후니프린팅 기초코드 거버넌스 하네스의 등록 명세 설계 방법론 스킬. 진단 결함 라우팅을 "기초코드 마스터에 무엇을 어떻게
+  신규 등록/교정/축이동할지" 실행 명세로 변환(대상 t_*·코드값 채번·의미·FK 위상 적재순서·webadmin 적재경로·권위 근거·영향분석).
+  search-before-mint 사다리·코드 식별 전략·돈 크리티컬 가격사슬 영향 명시. 분석·명세 전용(실 COMMIT/DDL은 dbmap 위임).
+  트리거: 등록 명세 설계, 기초코드 등록명세, 신규 코드 등록, 교정 명세, 축이동 설계, webadmin 적재경로, search-before-mint,
+  FK 위상 등록순서. 진단은 hbg-basecode-diagnosis, 검증은 hbg-governance-evaluation이 담당.
 ---
 
 # 등록 명세 설계 방법론

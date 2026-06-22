@@ -1,0 +1,57 @@
+---
+title: "BannerProvider"
+depth: 5
+path: "오로라 리액트 스킨개발가이드 > 개발 프로세스 > 2️⃣Aurora React 샘플스킨 확인 > @shopby/react-components > display > BannerProvider"
+---
+
+# BannerProvider
+
+* 쇼핑몰 메인페이지, 상세페이지 내 배너를 제공 합니다.
+
+## 속성
+
+| 이름 |  | 타입 | 기본 값 | 설명 |
+| --- | --- | --- | ---- | --- |
+| children | true | ReactNode | - |  |
+
+## 상태
+
+`BannerProviderState`는 `useBannerStateContext`를 호출해 사용합니다.
+
+```tsx
+const bannerState= useBannerStateContext();
+```
+
+| 이름 | 타입 | 기본 값 | 설명 |
+| --- | --- | ---- | --- |
+| bannerMap | Map
+{ [배너그룹 코드: 배너 정보](https://docs.shopby.co.kr/?url.primaryName=display/#/Banner/get-banners) } | - | 배너 그룹 코드와 배너 그룹 코드에 따른 배너 정보를 객체로 갖고 있다.
+`bannerMap.get('배너그룹 코드')`로 배너 그룹 코드에 따른 배너 정보를 얻을 수 있다. |
+
+### [group-code](https://nhnent.dooray.com/#group-code)
+
+`'LOGO' | 'BNSLIDE' | 'BANNER01' | 'BANNER02' | 'BANNER03' | 'BANNER04' | 'BANNER05' | 'BNBOTTOM' | 'BNBGLEFT' | 'BNDETAIL' | 'BNSCL' | 'BNSCR' | 'BNMAINL'`
+
+### [banner-info](https://nhnent.dooray.com/#banner-info)
+
+{
+    [bannerData](https://docs.shopby.co.kr/?url.primaryName=display/#/SkinBanner/get-skin-banners) 외부 링크,
+    imageSize: {
+        width: string (px / % 또는 auto),
+        height: string (px / % 또는 auto),
+    }
+}
+
+## 액션
+
+`-`
+
+## 사용 예시
+
+```tsx
+const Example = () => (
+  
+    
+  
+);
+```

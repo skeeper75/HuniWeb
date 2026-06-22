@@ -1,0 +1,72 @@
+---
+title: "InquiryFormProvider"
+depth: 5
+path: "오로라 리액트 스킨개발가이드 > 개발 프로세스 > 2️⃣Aurora React 샘플스킨 확인 > @shopby/react-components > manage > InquiryFormProvider"
+---
+
+# InquiryFormProvider
+
+## 속성
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | --- | --- | --- | --- |
+| children | true | ReactNode |  |  |
+
+## 상태
+
+* inquiryFormState 는 useInquiryFormStateContext 를 호출해 사용한다.
+
+``` typescript
+const inquiryFormState = useInquiryFormStateContext();
+```
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | --- | --- | --- | --- |
+| inquiryDetail |  |  |  | [response](https://docs.shopby.co.kr/?url.primaryName=manage/#/Inquiry/get-inquiry) 타입에 하기 타입 추가 |
+| ㄴ usesSmsNotificationWhenRegisteringAnswer | false | boolean |  | 답변 등록시 SMS 수신 여부 |
+| ㄴ usesEmailNotificationWhenRegisteringAnswer | false | boolean |  | 답변 등록시 메일 수신 여부 |
+| ㄴ inquiryTypeInformation | false | object |  | 1:1 문의 유형정보 |
+| ㄴ no | false | number |  | 1:1 문의 유형 번호 |
+| ㄴ name | false | string |  | 1:1 문의 유형 이름 |
+| ㄴ description | false | string |  | 1:1 문의 유형 설명 |
+| ㄴ answerInformation | false | object |  | 문의 답변정보 |
+| ㄴ no | false | number |  | 답변 번호 |
+| ㄴ content | false | string |  | 답변 내용 |
+| ㄴ registerYmdt | false | string |  | 답변 일자 |
+
+## 액션
+
+* inquiryFormAction 은 useInquiryFormActionContext 를 호출해 사용한다.
+
+``` typescript
+const inquiryFormAction = useInquiryFormActionContext();
+```
+
+| 이름 | 인자타입 | 필수여부 | 기본값 | 설명 | 관리하는 상태 |
+| --- | --- | --- | --- | --- | --- |
+| fetchInquiryBy | object | true |  | 특정 1:1 문의(문의번호 기준)를 상세 조회함.
+[request](https://docs.shopby.co.kr/?url.primaryName=manage/#/Inquiry/get-inquiry) 타입과 동일 | inquiryFormState.inquiryDetail |
+| postInquiry | object |  |  | 1:1 문의를 등록함.
+[request](https://docs.shopby.co.kr/?url.primaryName=manage/#/Inquiry/add-inquiry) 에 하기 타입 추가 |  |
+| ㄴ usesSmsNotificationWhenRegisteringAnswer | boolean | true | false | 답변 등록시 SMS 수신 여부 |  |
+| ㄴ usesEmailNotificationWhenRegisteringAnswer | boolean | true | false | 답변 등록시 메일 수신 여부 |  |
+| putInquiryByInquiryNo | obejct | true |  | 1:1 문의를 수정함.
+[request](https://docs.shopby.co.kr/?url.primaryName=manage/#/Inquiry/modify-inquiry) 에 하기 타입 추가 |  |
+| ㄴ usesSmsNotificationWhenRegisteringAnswer | boolean | true | false | 답변 등록시 SMS 수신 여부 |  |
+| ㄴ usesEmailNotificationWhenRegisteringAnswer | boolean | true | false | 답변 등록시 메일 수신 여부 |  |
+| deleteInquiryByInquiryNo | object | true |  | 1:1문의를 삭제함.
+[request](https://docs.shopby.co.kr/?url.primaryName=manage/#/Inquiry/remove-inquiry) 타입과 동일 |  |
+
+## 사용예시
+
+``` jsx
+const Example = () => {
+    return (
+      
+        
+          
+        
+      
+    )
+}
+```

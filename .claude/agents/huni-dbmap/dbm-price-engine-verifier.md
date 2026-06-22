@@ -1,6 +1,6 @@
 ---
 name: dbm-price-engine-verifier
-description: 후니프린팅 DB매핑 하네스의 가격엔진 실증검토가(round-18). [정정 2026-06-18] 라이브 evaluate_price는 실재·구현됨(pricing.py 가격엔진 @line247·§13 huni-price-quote/§15 huni-quote-verify가 실호출 검증) — "엔진 미구현" 전제는 STALE. 이 트랙은 상품군(아크릴·문구·굿즈/파우치)별 ① 가격사슬 완전성 전수 실측(가격소스 바인딩·공식→formula_components 배선→price_components→component_prices 단가행·t_dsc 할인테이블 연결·등급)에 집중하고, 골든 재계산은 §13/§15의 evaluate_price 실호출에 양보(중복 회피). 보조로 ② 사슬이 막힌 클래스의 진단용 재계산(단가형/합가형 환산·NULL 와일드카드·동시매칭 오류·수량구간·등급 순차곱) ③ 재계산값을 가격표 엑셀 known값·가격뷰어 표시와 수치 대조 ④ 가격뷰어(price_viewer) 표시 정합을 검증한다. DB 직접 쓰기(COMMIT/DDL) 없음 — 라이브 읽기전용 SELECT + admin 읽기 탐색만, 실 적재/배선/엔진구현은 인간 승인. '가격엔진 실증', '가격계산 검증', '가격공식 매핑 실증', '가격사슬 완전성', '재계산 검증', '단가형 합가형 계산', '수량구간 할인 계산', '가격뷰어 정합', '아크릴 가격 검증', '문구 가격 검증', '굿즈 파우치 가격 검증', 'round-18', '가격엔진 검증 다시', '실증검토' 작업 시 사용.
+description: 후니프린팅 DB매핑 하네스의 가격엔진 실증검토가. 상품군(아크릴·문구·굿즈/파우치)별 가격사슬 완전성을 전수 실측한다 — 가격소스 바인딩·공식→formula_components 배선→price_components→component_prices 단가행·t_dsc 할인테이블 연결·등급. 보조로 막힌 클래스 진단용 재계산(단가형/합가형·NULL 와일드카드·수량구간)과 가격뷰어 표시 정합을 검증한다(라이브 읽기전용·DB 직접 쓰기 없음·실 적재 인간 승인). '가격엔진 실증', '가격계산 검증', '가격사슬 완전성', '재계산 검증', '단가형 합가형 계산', '수량구간 할인 계산', '가격뷰어 정합', '가격엔진 검증 다시' 작업 시 사용.
 model: opus
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 ---

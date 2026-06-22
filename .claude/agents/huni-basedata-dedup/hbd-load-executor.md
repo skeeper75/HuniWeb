@@ -1,16 +1,10 @@
 ---
 name: hbd-load-executor
 description: >
-  후니프린팅 기초데이터 표시중복 정리 하네스의 승인 후 안전 적재 실행가(general-purpose 기반). 사용자
-  승인을 받은 매핑데이터(mapping.csv)와 codex 교차검증 합의분(reconcile.md)만을 입력으로, 라이브
-  t_* DB에 정리(정본 채택+논리삭제+참조 재배선)·정규화(표시명만)·신규 적재(미적재 사이즈 등)를 실제
-  COMMIT한다. ★안전 프로토콜[HARD]: ① 물리 백업(bak_* 테이블) 선행 ② 롤백전용 DRY-RUN으로 멱등·
-  제약위반0·예상 delta 실증 ③ 사용자 최종 승인 후에만 COMMIT ④ 가격종속(BLOCKED)·codex divergence·
-  미합의 행은 절대 실행 금지 ⑤ COMMIT 후 라이브 재실측으로 delta·FK고아·멱등(2-pass) 사후검증 ⑥
-  undo 스크립트 보유. 멱등 = WHERE del_yn='N' 가드 + NOT EXISTS. apply SQL에 내장 BEGIN/COMMIT
-  금지(dryrun/apply 분리·비인가 COMMIT 방지). 정리/적재할 것이 없으면 실행 없이 "통과" 보고. 라이브
-  쓰기는 승인분에 한함. '적재 실행', '정리 실행', '안전 적재', '멱등 UPSERT', '논리삭제 재배선', 'DRY-RUN',
-  '백업', '사후검증', '적재 다시' 작업 시 사용.
+  후니프린팅 기초데이터 표시중복 정리 하네스의 승인 후 안전 적재 실행가. 승인된 매핑데이터와 codex 합의분만 입력으로
+  라이브 t_* DB에 정리(정본 채택·논리삭제·재배선)·정규화·신규 적재를 COMMIT한다. 물리 백업·DRY-RUN 멱등 실증·최종
+  승인 후 COMMIT·BLOCKED/미합의 행 실행 금지·사후검증·undo 보유의 안전 프로토콜을 따른다(없으면 NO-OP). '적재 실행',
+  '정리 실행', '안전 적재', '멱등 UPSERT', '논리삭제 재배선', 'DRY-RUN', '백업', '사후검증', '적재 다시' 작업 시 사용.
 model: opus
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 ---

@@ -1,0 +1,175 @@
+---
+title: "OAuth 2.0 적용 가이드"
+depth: 3
+path: "오로라 리액트 스킨개발가이드 > 스킨 개발_API 활용가이드 > [기본] 샵바이 API > OAuth 2.0 적용 가이드"
+---
+
+# OAuth 2.0 적용 가이드
+
+샵바이 API 호출 시 OAuth 2.0 적용 방법을 안내합니다.
+
+## 🤖 기능
+
+OAuth 2.0은 accessToken과 refreshToken을 사용하여 인증 상태를 관리하게 됩니다.
+기본 스킨에서 OAuth 2.0은 다음과 같이 동작합니다.
+![](https://workspace-help.nhn-commerce.com/~gitbook/image?url=https%3A%2F%2F67612295-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FLt0GowPleXLWRjzGIAiV%252Fuploads%252Fv6tcWMzKfPvp3dfjMMCa%252F%25E1%2584%2589%25E1%2585%25B3%25E1%2584%258F%25E1%2585%25B5%25E1%2586%25AB%25E1%2584%2580%25E1%2585%25A1%25E1%2584%258B%25E1%2585%25B5%25E1%2584%2583%25E1%2585%25B3.png%3Falt%3Dmedia%26token%3D860aed31-b98e-4fdd-a10d-7a2fa19b0448&width=768&dpr=4&quality=100&sign=4858a7f&sv=1)
+
+* 만료된 accessToken으로 shop API 요청을 보내는 경우, accessToken을 갱신하고 갱신된 accessToken으로 API를 호출하게 됩니다.
+* accessToken과 refreshToken이 모두 만료된 경우, 토큰이 갱신되지 않으며, 만료된 리프레시 토큰입니다. 라는 문구가 노출되고 로그인 페이지로 이동합니다.
+
+기본 스킨에서 제공하는 것을 사용하지 않고 직접 shop API를 호출하는 경우, OAuth 2.0의 토큰 갱신/재요청 처리를 위해 별도로 처리가 필요합니다.
+
+#### **🖇️ 관련 문서**
+
+* 오로라(PC+모바일) 개별형 스킨
+    [v.1.4.3 릴리즈노 노트 바로가기](https://nhnent.dooray.com/share/pages/mBkooLTRTNCCyxUNdS9_HA/3920961448422344871)
+* 오로라 리액트 통합형 스킨
+    [v.1.7.2 릴리즈 노트 바로가기](https://skins.shopby.co.kr/shopby/aurora-skin/-/releases/v1.7.2)
+    [v.1.7.3 릴리즈 노트 바로가기](https://skins.shopby.co.kr/shopby/aurora-skin/-/releases/v1.7.3)
+* shop API 문서
+    [OAuth 2.0 API 바로가기](https://docs.shopby.co.kr/?url.primaryName=auth/#/OAUTH2)
+
+shop API를 직접 호출하여 사용하는 경우, OAuth 2.0 적용 방법에 관한 내용입니다. 오로라 스킨을 기준으로 OAuth 2.0을 위해 별도 처리가 필요한 부분 위주로 안내합니다.
+오로라 리액트 스킨을 사용하시는 경우, shop API를 호출하실 때, fetchHttpRequest를 사용해 주시면 OAuth 2.0을 별도 처리 없이 적용하실 수 있습니다.
+refreshToken 만료 시 토큰 만료 alert가 노출되지 않는다면 try/catch로 catchError 처리가 필요할 수 있습니다.
+
+## 📝 내용
+
+shop API를 직접 호출하여 사용하는 경우, OAuth 2.0 적용 방법에 관한 내용입니다. 오로라 스킨을 기준으로 OAuth 2.0을 위해 별도 처리가 필요한 부분 위주로 안내합니다.
+오로라 리액트 스킨을 사용하시는 경우, shop API를 호출하실 때, fetchHttpRequest를 사용해 주시면 OAuth 2.0을 별도 처리 없이 적용하실 수 있습니다.
+refreshToken 만료 시 토큰 만료 alert가 노출되지 않는다면 try/catch로 catchError 처리가 필요할 수 있습니다.
+
+***
+
+### **개별형 스킨**
+
+shopby의 API는 baseURL 값으로 shop API인지 구분합니다. shop API 요청 시 옵션으로 보내는 baseURL 값에 따라서 OAuth 2.0 적용을 위해 처리해야 하는 범위가 달라집니다.
+
+### 1\. baseURL이 shop API인 경우
+
+**제공범위**
+
+* shop API 요청 시 `Shop-By-Authorization` 헤더를 보내지 않더라도, `Shop-By-Authorization` 헤더로 accessToken 값을 보내줍니다.
+* 만료된 accessToken으로 API를 요청한 경우, accessToken이 갱신됩니다.
+
+**추가 처리 필요 범위**
+
+1. accessToken이 갱신된 이후, 재요청 처리가 필요합니다.
+    * API의 응답이 401 에러로 발생할 때, 요청한 API를 동일하게 다시 호출해 주시면 갱신된 토큰으로 재요청됩니다.
+2. 토큰 갱신 시도 시 accessToken/refreshToken이 모두 만료된 경우, 토큰 만료 alert가 노출되어야 합니다.
+    * 만약 토큰 만료 alert가 노출되지 않는다면 try/catch에서 해당 에러에 대한 처리가 필요할 수 있습니다.
+
+**유의 사항**
+
+* accessToken 갱신의 경우, API가 초기화된 이후에 실행해야 에러 없이 동작하게 됩니다.
+    만약 `Cannot read properties of null (reading 'auth')`과 같은 에러가 발생하게 된다면 이는 API가 초기화되지 않은 시점에 실행된 것입니다.
+* 해당 경우에는 아래 코드 예시와 같이 EventManager에서 'PAGE\_LOAD\_COMPLETED' 라는 이벤트에 등록하여 처리해 주시면 됩니다.
+
+**✓ 예시코드**
+
+```
+...
+const fetchShopApiWithBaseURL = async () => {
+  const fetchProfileApi = async () => {
+    const host = 'https://shop-api.e-ncp.com';
+    
+    // baseURL이 shop API인 경우
+    const res = await fetch(`${host}/profile`, {
+      ...
+      baseURL: host,
+    });
+    if (!res.ok) {
+      throw await res.json();
+    }
+
+    return res;
+  };
+  try {
+    await fetchProfileApi();
+  } catch (error) {
+    if (error.status === 401) {
+      // API 재요청
+      await fetchProfileApi();
+    } else {
+      throw error;
+    }
+  }
+}; 
+  
+...
+
+// API가 초기화되지 않은 시점에서 실행 시 에러가 발생할 수 있습니다. 에러가 발생한다면 아래와 같이 API 초기화 이후에 실행될 수 있도록 처리하실 수 있습니다.
+ShopbySkin.EventManager.on('PAGE_LOAD_COMPLETED', () => {
+  fetchShopApiWithBaseURL();
+});
+...
+```
+
+### 2\. baseURL이 다른 값이거나 미포함 시
+
+**제공범위**
+
+* 일반적인 API 호출과 동일하게 동작합니다.
+    * `Shop-By-Authorization` 헤더에 accessToken 값이 자동으로 보내지지 않습니다.
+    * 만료된 accessToken으로 API를 요청하더라도, accessToken 갱신이 되지 않습니다.
+
+**추가 처리 필요 범위**
+
+1. shop API 요청 시 `Shop-By-Authorization` 헤더에 accessToken을 보내줘야 합니다.
+2. accessToken이 만료된 경우, accessToken 갱신이 필요합니다.
+    * accessToken 갱신을 처리하실 때 해당 함수를 사용하여 처리해 주시면 됩니다.
+        * `ShopbySkin.utils.renewAccessToken()`
+3. accessToken이 갱신된 이후, 재요청 처리를 해줘야 합니다.
+4. 토큰 갱신 시도 시 accessToken/refreshToken 이 모두 만료된 경우, 토큰 만료 alert가 노출되어야 합니다.
+    * 만약 토큰 만료 alert가 노출되지 않는다면 try/catch에서 해당 에러에 대한 처리가 필요할 수 있습니다.
+
+**유의사항**
+
+* accessToken 갱신의 경우, API가 초기화된 이후에 실행해야 에러 없이 동작하게 됩니다.
+    만약 `Cannot read properties of null (reading 'auth')`과 같은 에러가 발생하게 된다면 이는 API가 초기화되지 않은 시점에 실행된 것입니다.
+* 해당 경우에는 아래 코드 예시와 같이 EventManager에서 'PAGE\_LOAD\_COMPLETED' 라는 이벤트에 등록하여 처리해 주시면 됩니다.
+
+**✓ 예시코드**
+
+```
+...
+const fetchShopApiWithOutBaseURL = async () => {
+  const fetchProfileApi = async () => {
+    const headers = {
+      'Shop-By-Authorization': `Bearer ${accessToken}`,
+      ...,
+    };
+    
+    const host = 'https://shop-api.e-ncp.com';
+    
+    // baseURL이 없는 경우
+    const res = await fetch(`${host}/profile`, {
+      headers,
+    });
+    if (!res.ok) throw await res.json();
+
+    return res;
+  };
+  try {
+    await fetchProfileApi();
+  } catch (error) {
+    if (error.status === 401) {
+      // 토큰 갱신 처리 - PUT /oauth2 토큰 갱신하기 shop api 호출
+      await ShopbySkin.utils.renewAccessToken();
+        
+      // API 재요청 처리
+      await fetchProfileApi();
+    } else {
+      throw error;
+    }
+  }
+};
+
+...
+
+// API가 초기화되지 않은 시점에서 실행 시 에러가 발생할 수 있습니다. 에러가 발생한다면 아래와 같이 API 초기화 이후에 실행될 수 있도록 처리하실 수 있습니다.
+ShopbySkin.EventManager.on('PAGE_LOAD_COMPLETED', () => {
+  fetchShopApiWithOutBaseURL();
+});
+...
+```

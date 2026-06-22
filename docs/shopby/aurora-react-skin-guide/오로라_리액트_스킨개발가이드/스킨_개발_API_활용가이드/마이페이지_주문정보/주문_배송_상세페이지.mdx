@@ -1,0 +1,495 @@
+---
+title: ">주문/배송 상세페이지"
+depth: 3
+path: "오로라 리액트 스킨개발가이드 > 스킨 개발_API 활용가이드 > 마이페이지_주문정보 > >주문/배송 상세페이지"
+---
+
+# >주문/배송 상세페이지
+
+##  ```주문/배송 조회``` > ```주문/배송 상세```
+
+기본 스킨에서는 회원의 경우 [마이페이지 > 주문/배송목록 조회] 에서 '주문'을 클릭한 경우 **주문/배송 상세 페이지**로 이동하며
+비회원의 경우 로그인 페이지에서 비회원 주문 조회 (주문번호 , 주문 비밀번호 입력) 유효성 검증 후 입력한 주문번호의 주문상세 페이지로 바로 이동됩니다.
+
+![123.png](https://nhnent.dooray.com/share/tree/WoOk8q6KT1K3MZcLSuyZsw/pages/3524954026467555996/attach-files/3534187001098038239)
+
+주문상세 페이지에서는 🅐 주문/배송 상세 🅑주문자정보 🅒 배송지정보 🅓 결제정보 🅔추가 결제 정보 🅕반품 수거 정보 🅖 교환 출고 정보 🅗 환불정보 8개의 정보가 제공됩니다.
+각 영역 별 상세 내용은 아래 내용을 참고해주세요.
+
+> [GET /profile/orders/{orderNo} ](https://docs.shopby.co.kr/?url.primaryName=order/#/MyOrder/get-profile-orders-order-no)
+
+```
+▶ 회원 주문 상세조회하기
+주문번호 기준으로 주문 상세 페이지의 데이터를 조회합니다.
+```
+
+> [GET /guest/orders/{orderNo} ](https://docs.shopby.co.kr/?url.primaryName=order/#/GuestOrder/get-guest-orders-order-no)
+
+```
+▶ 비회원 주문 상세 조회하기
+비회원 주문조회 시 주문 상세 페이지의 데이터를 확인할 수 있습니다.
+```
+
+***
+
+## 🅐 주문 / 배송 상세
+
+![스크린샷 2023-05-09 172632 1.png](https://nhnent.dooray.com/share/tree/WoOk8q6KT1K3MZcLSuyZsw/pages/3524954026467555996/attach-files/3534261721328035189)
+기본 스킨에서는 동일한 화면으로 제공되고 있습니다.
+다만, 주문번호를 클릭 시에는 주문 상세에서는 별도의 액션은 제공하지 않습니다.
+
+### :heavy_check_mark: ⓐ 다음에 할 수 있는 작업 버튼
+
+다음에 할 수 있는 작업 값을 통해 진행 상태 값에 따른 구매자 액션 버튼을 제공합니다.
+예를 들어, 진행상태가 배송완료 상태 인 경우, 배송완료에서 구매자가 할 수 있는 액션인 `배송조회`, `구매확정`, `후기작성`*,*`교환신청`*,*`반품신청` 에 대한 버튼을 제공합니다.
+
+`nextActions` 의 응답 값으로 회신 되는 값에 맞는 버튼을 노출하여 구매자에게 쇼핑몰 기능을 제공할 수 있습니다.
+`nextActions` 의 값으로는 진행상태 정보에 따라 아래의 표의 액션을 할 수 있습니다.
+
+* 주문번호`items` 기준
+
+입금대기와 결제완료 상태에서만 주문단위 action이 가능합니다.
+
+| 주문상태/클레임상태 | nextAction | 제공 필요 버튼 |
+| ---------- | ---------- | -------- |
+| DEPOSIT\_WAIT 입금대기 | CANCEL\_ALL 주문번호 내 전체상품 취소
+CHANGE\_ADDRESS 배송지변경 | 취소신청
+배송지변경 |
+| PAY\_DONE 결제완료 | CANCEL\_ALL 주문번호 내 전체상품 취소
+CHANGE\_ADDRESS 배송지변경 | 취소신청
+배송지변경 |
+
+* 옵션주문번호`orderOptions` 기준
+
+| 주문상태/클레임상태 | nextAction | 제공 필요 버튼 |
+| ---------- | ---------- | -------- |
+| DEPOSIT\_WAIT 입금대기 | CANCEL (옵션별) 취소 | 취소신청 |
+| PAY\_DONE 결제완료 | EXCHANGE 교환
+CANCEL 취소 | 교환신청
+취소신청 |
+| PRODUCT\_PREPARE 상품준비중 | EXCHANGE 교환
+CANCEL 취소 | 교환신청
+취소신청 |
+| DELIVERY\_PREPARE 배송준비중 | EXCHANGE 교환
+CANCEL 취소 | 교환신청
+취소신청 |
+| DELIVERY\_ING 배송중 | DELIVERY\_DONE 수취확인
+VIEW\_DELIVERY 배송조회
+RETURN 반품
+EXCHANGE 교환
+CONFIRM\_ORDER 구매확정
+WRITE\_REVIEW 후기작성(추가상품 전용인 경우 제공X) | 배송조회
+반품신청
+교환신청
+구매확정
+후기작성(추가상품 전용인 경우 제공X) |
+| DELIVERY\_DONE 배송완료 | VIEW\_DELIVERY 배송조회
+CONFIRM\_ORDER 구매확정
+RETURN 반품
+EXCHANGE 교환
+WRITE\_REVIEW 후기작성(추가상품 전용인 경우 제공X) | 배송조회
+구매확정
+교환신청
+반품신청
+후기작성(추가상품 전용인 경우 제공X) |
+| BUY\_CONFIRM 구매확정 | WRITE\_REVIEW 후기작성(추가상품 전용인 경우 제공X) | 후기작성(추가상품 전용인 경우 제공X) |
+| CANCEL\_REQUEST 취소신청(승인대기) | VIEW\_CLAIM 클레임조회
+WITHDRAW\_CANCEL 취소신청 취소 | 취소신청(=진행상태 조회버튼)
+취소신청철회 |
+| CANCEL\_PROC\_REQUEST\_REFUND 취소처리(환불보류)
+CANCEL\_PROC\_WAITING\_REFUND 취소처리(환불대기) | - | 취소처리중(=진행상태 조회 버튼) |
+| CANCEL\_DONE 취소완료 (환불완료)
+CANCEL\_NO\_REFUND 취소완료(환불없음) | VIEW\_CLAIM 클레임조회 | 취소완료(=진행상태 조회 버튼) |
+| EXCHANGE\_REQUEST 교환신청(승인대기) | VIEW\_CLAIM 클레임조회
+WITHDRAW\_EXCHANGE교환신청 취소 | 교환신청(=진행상태 조회 버튼)
+교환신청철회 |
+| EXCHANGE\_REJECT\_REQUEST 교환처리(철회대기) | VIEW\_CLAIM 클레임조회 | 교환신청(=진행상태 조회 버튼) |
+| EXCHANGE\_PROC\_BEFORE\_RECEIVE 교환처리(수거진행)
+EXCHANGE\_PROC\_REQUEST\_PAY 교환처리(결제대기)
+EXCHANGE\_PROC\_REQUEST\_REFUND 교환처리(환불보류)
+EXCHANGE\_PROC\_WAITING 교환처리(처리대기)
+EXCHANGE\_PROC\_WAITING\_PAY 교환처리(입금처리대기)
+EXCHANGE\_PROC\_WAITING\_REFUND 교환처리(환불대기) | - | 교환처리중(=진행상태 조회 버튼) |
+| EXCHANGE\_DONE 교환완료 (차액없음)
+EXCHANGE\_DONE\_PAY\_DONE 교환완료 (결제완료)
+EXCHANGE\_DONE\_REFUND\_DONE 교환완료(환불완료) | VIEW\_CLAIM 클레임조회 | 교환완료(=진행상태 조회 버튼) |
+| RETURN\_REQUEST 반품신청(승인대기) | VIEW\_CLAIM 클레임조회
+WITHDRAW\_RETURN 반품신청 취소 | 반품신청(=진행상태 조회 버튼)
+반품신청철회 |
+| RETURN\_REJECT\_REQUEST 반품신청 (철회대기) | VIEW\_CLAIM 클레임조회 | 반품신청(=진행상태 조회 버튼) |
+| RETURN\_PROC\_BEFORE\_RECEIVE 반품처리(수거진행)
+RETURN\_PROC\_REQUEST\_REFUND 반품처리(환불보류)
+RETURN\_PROC\_WAITING\_REFUND 반품처리(환불대기)
+RETURN\_REFUND\_AMT\_ADJUST\_REQUESTED 반품처리(조정요청) | - | 반품처리중(=진행상태 조회 버튼) |
+| RETURN\_DONE 반품완료(환불완료)
+RETURN\_NO\_REFUND 반품완료(환불없음) | VIEW\_CLAIM 클레임조회 | 반품완료(=진행상태 조회 버튼) |
+
+
+
+
+* **배송조회 버튼**
+    * 배송조회 팝업을 출력합니다.
+    * 배송조회 팝업은 `nextActions` 의 `URL` 를 참고하여 출력합니다.
+* **구매확정 버튼**
+    * 구매확정 버튼 클릭 시 아래 구매확정 API를 호출 하여 구매확정 처리를 합니다.
+    * 에스크로 결제 건의 경우, 배송완료 시 PG사에서 발송한 이메일을 통해 구매확정 처리가 가능하므로 구매확정 버튼을 제공하지 않습니다.
+
+> [PUT /profile/order-options/{orderOptionNo}/confirm](https://docs.shopby.co.kr/?url.primaryName=order/#/MyOrder/put-profile-order-options-order-option-no-confirm)
+
+```
+▶ 상품 주문 구매 확정하기
+상품 주문을 구매확정 처리합니다
+```
+
+* **후기작성 버튼**
+    * 후기(상품평) 작성 버튼 클릭 시 후기를 작성할 수 있는 페이지를 제공합니다.
+    * 기본 스킨에서는 후기작성 페이지를 레이어팝업으로 제공하고 있습니다. 페이지 형식은 스킨 개발 시 자유롭게 처리 가능합니다.
+
+> [POST /products/{productNo}/product-reviews](https://docs.shopby.co.kr/?url.primaryName=display/#/Review/post-product-reviews)
+
+```
+▶ 상품평 등록하기
+상품평을 등록합니다
+```
+
+주문 옵션 번호와 옵션 번호 기준으로 상품평을 작성할 수 있으며, 상품평 평점, 상품평 내용, 첨부파일을 등록할 수 있습니다.
+API 호출 시 상품번호와 회원 엑세 스토큰을 통해 작성할 상품을 지정하여 상품평을 등록 받을 수 있습니다.
+또한, 비회원의 경우 상품평 등록 시 작성자명과 비밀번호를 입력 받아 작성자 검증을 할 수 있습니다.
+등록된 후기는 각 상품의 상품 상세 페이지 및 [마이페이지\_나의 게시글](https://nhnent.dooray.com/share/pages/WoOk8q6KT1K3MZcLSuyZsw/3519672646767576896)의 상품 후기메뉴에서 확인 가능합니다.
+
+> :exclamation:네이버페이 주문의 구매확정 이후 후기 작성이 가능합니다.
+> \* 구매확정 이전 상태에서 후기 작성 요청 시 에러 메시지 회신됩니다.
+>
+> :exclamation:에스크로 주문건은 구매확정 이후 후기 작성이 가능합니다.
+> \* 구매확정 이전 상태에서 후기작성 요청 시 에러 메시지가 회신됩니다.
+>
+> :exclamation:[추가상품 전용 : 사용함]인 상품은 후기 작성이 불가능합니다.
+> \* 위 API를 통해 기능을 구현하여도, 후기 작성 버튼 자체가 노출되지 않습니다.
+
+* **클레임 상태 정보 버튼**
+    * 클레임 상태 정보는 주문번호 내 진행 중이거나 완료된 클레임이 있는 경우 클레임 신청 내역을 확인할 수 있는 페이지 입니다.
+    * 기본 스킨 기준으로 클레임 상태 정보는 레이어 팝업으로 제공되고 있습니다.
+
+
+
+
+> [GET /profile/claims/{claimNo}/result](https://docs.shopby.co.kr/?url.primaryName=claim/#/Member/get-profile-claims-no-result)
+
+```
+▶ 회원 클레임 상세보기(클레임 번호)
+클레임 번호로 해당 회원의 클레임 신청 내역의 세부 정보를 확인합니다
+```
+
+> [GET /guest/claims/{claimNo}/result](https://docs.shopby.co.kr/?url.primaryName=claim/#/Guest/get-guest-claims-no-result)
+
+```
+▶ 클레임 상세보기 (클레임 번호)
+클레임 번호로 비회원의 클레임 신청 내역의 세부 정보를 확인합니다
+```
+
+클레임 상세 보기는 회원/비회원 여부에 따라 호출하는 API 가 다릅니다.
+회원의 경우 회원 클레임 상세 보기  API를 통해, 비회원의 경우 비회원 클레임 상세보기 API 를 통해 호출바랍니다.
+
+### :heavy_check_mark: ⓑ 클레임 접수
+
+주문 목록 내 접수 항목은 주문상태에 따라 구매자가 신청 가능한 클레임 단계 (취소,반품,교환,신청 철회 등) 버튼이 출력됩니다.
+주문상태에 따른 클레임 신청 버튼은 [GET /profile/orders](https://docs.shopby.co.kr/?urls.primaryName=order#/%5BProfile%5D%20%3E%20MyOrder/%EC%A3%BC%EB%AC%B8%20%EB%A6%AC%EC%8A%A4%ED%8A%B8%20%EC%A1%B0%ED%9A%8C) 내 `nextActions` 의 값이 아래의 값을 가질 때 각 값에 따른 버튼을 노출해주시면 됩니다.
+
+| nextAction | 다음 단계 액션명 | 버튼 |
+| ---------- | --------- | --- |
+| CANCEL | 취소신청 | [취소신청] 버튼이미지 |
+| CANCEL\_ALL | 주문번호 내 전체 상품 취소신청 | [취소신청] 버튼이미지 |
+| WITHDRAW\_CANCEL | 취소신청 철회 | [취소신청철회] 버튼이미지 |
+| EXCHANGE | 교환신청 | [교환신청] 버튼이미지 |
+| WITHDRAW\_EXCHANGE | 교환신청 철회 | [교환신청철회] 버튼이미지 |
+| RETURN | 반품신청 | [반품신청] 버튼이미지 |
+| WITHDRAW\_RETURN | 반품신청 철회 | [반품신청철회] 버튼이미지 |
+
+### **에스크로 주문건 접수 주의사항**
+
+```
+에스크로 결제 주문건의 경우, nextAction에 아무 값도 없는 경우에는 '교환신청' 혹은 '반품신청' 버튼이 제공되어야 합니다.
+이에 대한 예외처리 코드는 아래와 같습니다.
+```
+
+### 에스크로 결제건 예외 처리 코드
+
+```
+1
+2    //에스크로 : 결제완료 이후 주문건이 있는 경우
+3    if (orderOption.escrow && orderOption.nextActions.length === 0) {
+4        const deliveryDoneTypes = ['DELIVERY_ING', 'DELIVERY_DONE', 'BUY_CONFIRM'];
+5        if (deliveryDoneTypes.includes(orderStatusType)) {
+6            canClaims = true;
+7            orderOption.nextActions.push({nextActionType: 'RETURN',uri: '',});
+8        } else {
+9            orderOption.nextActions.push(
+10                {nextActionType: 'NO_CANCEL',},
+11                { nextActionType: 'EXCHANGE', uri: '' },
+12            );
+13        }
+14    }
+15
+```
+
+### 클레임 버튼 구현 방법
+
+클레임 신청 버튼인 `취소신청` , `교환신청`, `반품신청` 버튼 클릭 시 클레임 신청 화면으로 이동합니다.
+`orderOptionNo`, `claimType`의 값에 따라 클레임 신청 API를 호출하며, 클레임 신청 시 회원/비회원에 따라 제공되는 API가 다릅니다.
+
+* 회원 : [\[GET\]회원 클레임 신청 정보 조회 API](https://docs.shopby.co.kr/?urls.primaryName=claim#/Member/get-profile-order-options-no-claims)
+* 비회원 : [\[GET\] 클레임 신청 정보 조회 API](https://docs.shopby.co.kr/?urls.primaryName=claim#/Guest/get-guest-order-options-no-claims)
+
+클레임 신청 화면은 아래 페이지에서 더 자세히 확인해주세요.
+
+### 에스크로 클레임 신청 주의사항
+
+> :exclamation: 에스크로 결제 주문은 주문번호에 포함된 상품의 전체 취소 또는 전체 반품 신청만 가능하며, 부분 취소, 전체 교환, 부분 교환, 부분 반품 신청은 불가하도록 작업해야 합니다.
+> \* 부분 취소, 전체 교환, 부분 교환, 부분 반품 요청 시 오류 메시지를 응답하고 있습니다.
+
+
+
+
+### 네이버 페이 주문건 처리 방법
+
+네이버페이 주문건의 경우 결제취소 (결제 완료, 배송전 취소 요청) 와 반품 신청은 쇼핑몰에서 요청 가능하나
+그 외의 클레임 건은 네이버페이 판매자센터에서 처리해야 합니다.
+
+***
+
+## 🅑 주문자 정보
+
+![주문자정보-모자이크.png](https://nhnent.dooray.com/share/tree/WoOk8q6KT1K3MZcLSuyZsw/pages/3524954026467555996/attach-files/3526073528135022605)
+주문자 정보는 주문서 작성 시 입력한 주문자의 정보를 노출합니다.
+주문자 정보로는 '주문자이름', '이메일' '휴대폰 번호' 정보가 있습니다.
+주문자 정보는 `orderer (주문자정보)` 값을 통해 데이터를 확인 할 수 있습니다.
+
+***
+
+## 🅒 배송지 정보
+
+![배송지 정보-모자이크.png](https://nhnent.dooray.com/share/tree/WoOk8q6KT1K3MZcLSuyZsw/pages/3524954026467555996/attach-files/3526073748621341569)
+배송지 정보는 `shippingAddress(배송지 정보)`를 활용하여 화면을 노출합니다.
+
+***
+
+## 🅓 결제 정보
+
+![결제정보- 모자이크.png](https://nhnent.dooray.com/share/tree/WoOk8q6KT1K3MZcLSuyZsw/pages/3524954026467555996/attach-files/3526035112043557526)
+주문 시에 결제한 결제 수단이나 상품결제 금액, 할인혜택, 적립금 정보에 대해 출력합니다.
+주문 상세 정보의  `firstOrderAmount(최초 주문 금액 정보)`, `payInfo(결제 정보)`, `accumulationAmtWhenBuyConfirm(구매확정 시 적립예정 적립금)`, `payTypeLabel(결제수단)` 데이터를 사용합니다.
+
+* 배송비의 경우 지역별 배송비가 있는 경우 별도로 표기하지 않고 배송비 금액에 포함되어 하나의 금액으로만 표기됩니다.
+    * 네이버페이 주문의 경우에도 주문한 상품에 지역별 배송비가 있는 경우 동일하게 출력됩니다. (shop by premium 한정)
+* 할인 및 적립금 사용은 주문서 작성 시 선택한 쿠폰(즉시 할인, 상품쿠폰할인, 장바구니 쿠폰, 주문쿠폰)에 따르며,
+    * 적립금의 경우도 주문서 작성 시 입력한 적립금 사용 금액에 따릅니다
+    * 네이버페이 주문의 경우 즉시할인만 적용이 가능하므로, 쿠폰 할인은 모두 0원으로 출력됩니다. (shop by premium 한정)
+* 입금 정보는 주문시 선택한 결제 수단이 '무통장 입금'인 경우 어드민 버전에 따라 shop by pro는 [기본정책 >쇼핑몰 관리], shop by premium은 [서비스 관리 > 쇼핑몰 관리]에서 설정한 계좌 정보가 출력됩니다.
+* 적립 정보는 주문에 포함된 상품이 구매확정된 이후 적립이 될 예정금액에 대해 표시 합니다.
+    * 네이버페이 주문건도 적립정보는 동일하게 적용됩니다. (shop by premium 한정)
+
+***
+
+## 🅔 추가 결제 정보 (교환 시)
+
+해당 정보들은 클레임이 존재할 경우에만 노출됩니다.
+
+***
+
+## 🅕 반품 수거 정보 (출고 후 교환/ 반품 시)
+
+해당 정보들은 클레임이 존재할 경우에만 노출됩니다.
+
+***
+
+## 🅖  교환 출고 정보 (출고 후 교환 시)
+
+해당 정보들은 클레임이 존재할 경우에만 노출됩니다.
+
+***
+
+## 🅗 환불정보
+
+![스크린샷 2023-04-20 133822.png](https://nhnent.dooray.com/share/tree/WoOk8q6KT1K3MZcLSuyZsw/pages/3524954026467555996/attach-files/3524954353075781358)
+취소/반품/교환이 발생한 주문의 경우, 주문상세 페이지 내 환불정보 영역이 추가됩니다.
+환불 정보 영역의 경우 환불에 대한 주문 정보들을 노출 하며, 환불상품/ 환불 상품금액/ 환불배송비/ 환불차감 금액/ 환불 적립금/ 환불금액/ 환불 수단에 대한 정보를 구매자에게 제공합니다.
+취소,교환,반품 으로 인한 환불 정보는 주문 상세 조회하기 API ([/profile/orders/{orderNo}](https://docs.shopby.co.kr/?urls.primaryName=claim#/Member/get-profile-claims-no-result))의 `refundInfos` 값으로 확인 가능합니다.
+취소,교환,반품으로 인해 추가 결제 금액이 발생하는 경우, 주문 상세 조회하기 API ([/profile/orders/{orderNo}](https://docs.shopby.co.kr/?urls.primaryName=claim#/Member/get-profile-claims-no-result))의 `additionalPayInfos` 값을 활용하여 제공합니다.
+
+***
+
+## ```취소/반품/교환 신청```
+
+주문에 대한 취소/반품/교환을 신청할 수 있는 페이지를 제공합니다.
+취소/반품/교환 신청 페이지는 회원 및 비회원 에 따라 API가 각각 제공되며, 아래의 API를 통해 신청 페이지를 생성하여 제공할 수 있습니다.
+
+### 예시 페이지 (반품 신청)
+
+![반품신청 - 모자이크.png](https://nhnent.dooray.com/share/tree/WoOk8q6KT1K3MZcLSuyZsw/pages/3524954026467555996/attach-files/3526040075504446680)
+
+> [GET /profile/order-options/{orderOptionNo}/claims](https://docs.shopby.co.kr/?url.primaryName=claim/#/Member/get-profile-order-options-no-claims)
+
+```
+▶ 회원 클레임 신청을 위한 정보 조회하기
+회원이 구매한 주문 중 주문상품옵션 기준으로 클레임(취소/반품/교환)을 신청할 수 있도록 정보를 조회합니다
+```
+
+> [GET /guest/order-options/{orderOptionNo}/claims](https://docs.shopby.co.kr/?url.primaryName=claim/#/Guest/get-guest-order-options-no-claims)
+
+```
+▶ 클레임 신청을 위한 정보 조회하기
+비회원이 구매한 주문 중 클레임(취소/반품/교환)을 신청할 수 있도록 정보 조회합니다
+```
+
+
+
+
+### 클레임 (취소/반품/교환) 신청 가능 주문상품 리스트
+
+주문 내 주문상품옵션 기준으로 취소/반품/교환하려는 상품과 수량을 선택할 수 있습니다.
+클레임(취소/반품/교환)은 주문상품옵션 기준으로 하기 때문에 API 호출 시 `orderOptionNo` 기준으로 주문상품 리스트를 가져옵니다.
+
+> :exclamation: 취소/반품의 경우 동일 주문번호 내 클레임 신청 1회에 다수의 주문상품옵션을 선택하여 복수 신청이 가능합니다.
+> 교환의 경우에는 클레임 1회 신청 시 동일 주문번호 내 클레임 복수 신청이 불가하니 교환 기능 제공 시 주문상품옵션 별로 각각 교환 신청이 가능하도록 기능 제공해야 합니다.
+> (네이버페이 주문의 경우 네이버페이 정책 상 각 주문상품옵션 별로 클레임 신청해야 합니다.)
+
+
+
+
+클레임 신청 시 복수 신청이 가능한 주문상품옵션번호의 경우 `claimableOptions` 값으로 주문상품옵션 정보를 확인할 수 있습니다.
+복수 신청이 불가한 주문상품의 경우 `claimableOptions`값은 전송되지 않습니다.
+
+본 상품과 같이 주문된 추가상품의 상품 정보는 상품명 앞에 [추가] 라벨을, 상품명 상단에 본 상품명을 노출합니다.
+
+추가상품 여부는 `originalOption` 내 `isExtraProduct` , 추가상품의 본 상품명은 `baseProductName` 로 노출합니다.
+
+
+
+
+
+
+
+### 클레임 (취소/반품/교환) 상세 사유
+
+취소/반품/교환 신청 하는 사유를 입력할 수 있는 영역입니다. 입력한 귀책 사유에 따라 반품 배송비 등이 구매자 혹은 판매자에게 부과 됩니다.
+
+![스크린샷 2023-04-20 134742.png](https://nhnent.dooray.com/share/tree/WoOk8q6KT1K3MZcLSuyZsw/pages/3524954026467555996/attach-files/3524954352830394791)
+
+* 클레임 신청 시 선택한 사유에 따라 구매자 귀책, 판매자 귀책으로 신청처리가 진행됩니다.
+
+| **구분** | **귀책 대상** |
+| --- | ----- |
+| 단순변심(색상, 사이즈) | 구매자 |
+| 상품상세 정보와 다름 | 판매자 |
+| 상품 품절/재고 없음 | 판매자 |
+| 판매자 배송 지연 | 판매자 |
+| 상품 불량/파손 | 판매자 |
+| 배송 누락/오배송 | 판매자 |
+| 기타(구매자 귀책) | 구매자 |
+| 기타(판매자 귀책) | 판매자 |
+
+
+
+
+* 귀책 사유
+    * select-box로 제공하며, `claimReasonTypes` 스키마 ENUM으로 클레임 사유 출력
+    * 귀책 사유의 경우에도 귀책 대상과 동일하게 결제 완료 주문건에 대해 입력 항목 제공(입금 대기 미제공)하며, 에스크로 주문건의 경우 노출하지 않음
+* 상세 사유
+    * input 으로 입력 항목 제공
+    * 모든 클레임 상태에서 사유에 대해 자유 입력 가능함
+
+
+
+
+### 환불 계좌 정보
+
+![스크린샷 2023-04-20 134846.png](https://nhnent.dooray.com/share/tree/WoOk8q6KT1K3MZcLSuyZsw/pages/3524954026467555996/attach-files/3524954353848108105)
+무통장 및 가상계좌 입금을 통해 주문한 경우, 환불 금액을 받을 계좌 정보를 입력할 수 있습니다.
+'취소', '반품' 신청페이지에서만 해당 영역을 제공합니다.
+환불 계좌 정보 내 은행은 select-box로 제공하며 선택 값은 `availableBanks`의 값을 사용하여 노출합니다.
+
+### 반품 수거 정보
+
+![반품 수거 정보.png](https://nhnent.dooray.com/share/tree/WoOk8q6KT1K3MZcLSuyZsw/pages/3524954026467555996/attach-files/3526040592438413023)
+배송이후 (주문상태값 : 배송중, 배송완료) '교환', '반품' 을 신청하는 경우에 주문상품의 수거에 대한 정보를 입력할 수 있는 영역입니다.
+반품 수거 방법으로는 `판매자 수거요청` 과 `구매자 직접 반품` 2가지 항목을 제공하며, 선택한 수거 방법에 따라 입력 항목은 다르게 제공합니다.
+
+* 판매자 수거 요청
+    * 교환,반품 신청 시 배송된 상품을 판매자가 택배사에 연락하여 수거 하는 방식입니다.
+    * 반품 수거 방법, 반품자명, 수거지 주소, 휴대폰번호, 연락처, 수거시 참고사항을 입력할 수 있습니다.
+* `returnAddress` 의 값을 입력 화면에 출력합니다.
+* 구매자 직접 반품
+    * 교환, 반품 시 배송된 상품을 구매자가 알아서 택배사를 통해 쇼핑몰에 상품을 배송합니다.
+    * 반품 수거 방법 , 반품 접수 정보를 입력 할 수 있습니다.
+    * 반품 접수 정보 내 택배사 선택은 select-box로 제공되며, 택배사 값은 `deliveryCompanyTypeWithLabels` 값을 통해 제공합니다.
+
+
+
+
+### 클레임(주문취소/반품/교환) 신청
+
+![스크린샷 2023-04-20 135155.png](https://nhnent.dooray.com/share/tree/WoOk8q6KT1K3MZcLSuyZsw/pages/3524954026467555996/attach-files/3524954353166682652)
+신청 버튼 클릭 시, 실제 클레임 신청 페이지에서 입력한 내용을 확인 (유효성 체크) 하고, 각 클레임 타입(주문취소/교환/반품)에 맞는 API를 호출 하여 클레임을 신청합니다.
+
+주문 취소에 대한 API 호출 경로는 아래와 같습니다.
+주문 취소는 부분 취소 요청 가능하며 1개의 클레임 신청 시 복수신청 가능하므로 회원/비회원에 따라 아래의 API 경로를 통해 요청하시면 됩니다.
+
+> [POST /profile/claims/cancle](https://docs.shopby.co.kr/?url.primaryName=claim/#/Member/post-profile-claims-cancel)
+
+```
+▶ 회원 주문취소 신청하기
+회원의 주문을 취소 신청합니다
+```
+
+> [POST /guest/claims/cancle](https://docs.shopby.co.kr/?url.primaryName=claim/#/Guest/post-guest-claims-cancel)
+
+```
+▶ 비회원 주문취소 신청하기
+비회원의 주문을 취소 신청합니다
+```
+
+에스크로 주문건의 경우 회원/비회원 여부에 따라 별도 API를 통해 취소 신청이 가능합니다.
+에스크로 주문건은 전체 취소만 지원하므로, 아래의 API 를 통해 취소 신청을 해야 합니다.
+
+> [POST /profile/orders/{orderNo}/claims/cancle](https://docs.shopby.co.kr/?url.primaryName=claim/#/Member/post-profile-orders-order-no-claims-cancel)
+
+```
+▶ 회원 주문취소 신청하기
+회원의  에스크로 주문을 취소 신청합니다.
+```
+
+> [POST /guest/order/{orderNo}/claims/cancle](https://docs.shopby.co.kr/?url.primaryName=claim/#/Guest/post-guest-orders-order-no-claims-cancel)
+
+
+
+
+```
+▶ 비회원 주문취소 신청하기
+비회원의 에스크로 주문을 취소 신청합니다
+```
+
+반품 요청 또한 1회 클레임 신청 시 복수 주문상품 옵션에 대해 반품 신청할 수 있으므로 회원/비회원 여부에 따라 아래의 API를 통해 신청해주시면 됩니다.
+
+> [POST /profile/claims/return](https://docs.shopby.co.kr/?url.primaryName=claim/#/Member/post-profile-claims-return)
+
+```
+▶ 회원 반품 신청
+회원의 주문을 반품 신청합니다
+```
+
+> [POST /guest/claims/return](https://docs.shopby.co.kr/?url.primaryName=claim/#/Guest/post-guest-claims-return)
+
+```
+▶ 비회원 반품 신청
+비회원의 주문을 반품 신청합니다
+```
+
+교환 신청은 회원만 가능하며, 비회원은 교환 신청이 불가합니다.
+교환 신청은 1회 클레임 신청 시 1개의 주문상품옵션번호만 신청 가능합니다.
+
+> [POST /profile/order-options/{orderOptionNo}/claims/exchange](https://docs.shopby.co.kr/?url.primaryName=claim/#/Member/post-profile-order-options-no-claims-exchange)
+
+```
+▶ 회원 교환 신청하기
+회원의 주문에 대한 교환을 신청합니다
+```

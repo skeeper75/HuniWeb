@@ -1,0 +1,60 @@
+---
+title: "ProfileAccumulationProvider"
+depth: 5
+path: "오로라 리액트 스킨개발가이드 > 개발 프로세스 > 2️⃣Aurora React 샘플스킨 확인 > @shopby/react-components > manage > ProfileAccumulationProvider"
+---
+
+# ProfileAccumulationProvider
+
+## 속성
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | --- | --- | --- | --- |
+| children | true | ReactNode |  |  |
+
+## 상태
+
+* profileAccumulationState 는 useProfileAccumulationStateContext 를 호출해 사용한다.
+
+``` typescript
+const profileAccumulationState = useProfileAccumulationStateContext();
+```
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | --- | --- | --- | --- |
+| profileAccumulation | false | null \| object | null | 적립금 이력정보
+[response](https://docs.shopby.co.kr/?url.primaryName=manage/#/Accumulation/search-accumulation-histories) 타입과 동일 |
+| profileAccumulationSummary | false | null \| object | null | 적립금 요약정보
+[response](https://docs.shopby.co.kr/?url.primaryName=manage/#/Accumulation/search-accumulations-summary) 타입과 동일 |
+| profileEstimatedAccumulation | false | null \| object | null | 해당 회원의 예상 적립금(적립대기) 정보 |
+| ㄴ waitingAccumulation | false | number | - | 해당 회원의 예상 적립금 |
+
+## 액션
+
+* profileAccumulationAction 은 useProfileAccumulationActionContext 를 호출해 사용한다.
+
+``` typescript
+const profileAccumulationAction = useProfileAccumulationActionContext();
+```
+
+| 이름 | 인자타입 | 필수여부 | 기본값 | 설명 | 관리하는 상태 |
+| --- | --- | --- | --- | --- | --- |
+| fetchProfileAccumulation | object | true |  | 적립금 이력을 조회함.
+ㄴ [request](https://docs.shopby.co.kr/?url.primaryName=manage/#/Accumulation/search-accumulation-histories) 타입에 하기 타입 추가 | profileAccumulationState.profileAccumulation |
+| ㄴ accumulationReasonType | [request.accumulationReason](https://docs.shopby.co.kr/?url.primaryName=manage/#/Accumulation/search-accumulation-histories) | false | - | 적립유형 |  |
+| ㄴ sortDirectionType | [request.direction](https://docs.shopby.co.kr/?url.primaryName=manage/#/Accumulation/search-accumulation-histories) | false | - | 정렬방식 |  |
+| fetchAccumulationSummary | object | false | - | 적립금 요약정보를 조회함.
+ㄴ [request](https://docs.shopby.co.kr/?url.primaryName=manage/#/Accumulation/search-accumulations-summary) 타입과 동일 | profileAccumulationState.profileAccumulationSummary |
+| fetchProfileEstimatedAccumulation | - | - | - | 해당 회원의 예상 적립금을 조회함. | profileAccumulationState.profileEstimatedAccumulation |
+
+## 사용예시
+
+``` jsx
+const Example = () => {
+    return (
+      
+        
+      
+    )
+}
+```

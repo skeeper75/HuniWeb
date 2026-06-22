@@ -1,0 +1,68 @@
+[
+  {
+    "method": "GET",
+    "path": "/marketing/sns-share",
+    "summary": "SNS 공유 설정 조회하기",
+    "description": "## 부가설명 및 특이사항\n            \nSNS 공유 설정 조회하는 API 입니다\n",
+    "tags": ["Marketing"],
+    "parameters": [
+      {
+        "name": "productNo",
+        "in": "query",
+        "description": "상품 번호",
+        "required": true,
+        "schema": {
+          "type": "number"
+        },
+        "example": "1111222233"
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      },
+      {
+        "name": "clientId",
+        "in": "header",
+        "description": "쇼핑몰 클라이언트 아이디",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "f7IuuZPHwmeYilw03ow8Uw=="
+      },
+      {
+        "name": "platform",
+        "in": "header",
+        "description": "클라이언트 플랫폼(PC, MOBILE_WEB, AOS, IOS)",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "PC"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/marketing-sns-share-1540372606"
+            },
+            "examples": {
+              "get-sns-share": {
+                "value": "{\"snsShareUsed\":false,\"productUrlCopyUsed\":false,\"representativeImage\":\"\",\"representativeTitle\":\"\",\"representativeDescription\":\"\",\"snsShareImageType\":\"PRODUCT_IMAGE\",\"kakao\":{\"used\":false,\"kakaoScriptKey\":\"\",\"content\":{\"title\":\"\",\"imageUrl\":\"\"},\"commerce\":{\"regularPrice\":0,\"discountPrice\":0,\"discountRate\":0,\"fixedDiscountPrice\":0},\"buttons\":[{\"title\":\"\",\"link\":\"\"}]},\"kakaoStory\":{\"used\":false,\"url\":\"\",\"text\":\"\",\"urlInfo\":{\"title\":\"\",\"description\":\"\",\"image\":[\"\"]}},\"facebook\":{\"used\":false,\"linkTitle\":\"\",\"linkSummary\":\"\",\"image\":\"\"},\"twitter\":{\"used\":false,\"shareMessage\":\"\",\"url\":\"\"}}"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+]

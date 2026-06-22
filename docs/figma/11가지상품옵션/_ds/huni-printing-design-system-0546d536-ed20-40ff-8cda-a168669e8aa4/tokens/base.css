@@ -1,0 +1,32 @@
+/* ───────────────────────────────────────────────────────────────
+   Huni printing — base element defaults
+   Applies the brand face + tight tracking globally so any consumer
+   surface inherits the right feel. Kept light on purpose.
+   ─────────────────────────────────────────────────────────────── */
+:root {
+  color-scheme: light;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  letter-spacing: var(--tracking-tight);
+  color: var(--text-body);
+  background: var(--surface-page);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+h1, h2, h3, h4 {
+  color: var(--text-heading);
+  letter-spacing: var(--tracking-tight);
+  margin: 0;
+}
+
+button { font-family: inherit; letter-spacing: var(--tracking-tighter); }
+input, select, textarea { font-family: inherit; letter-spacing: var(--tracking-tight); }
+
+::selection { background: var(--huni-purple-100); color: var(--huni-purple-800); }

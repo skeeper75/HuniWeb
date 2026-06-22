@@ -1,0 +1,2200 @@
+---
+title: "product-server"
+description: "상품(product)관련 server API입니다."
+version: "0.0.1-SNAPSHOT"
+category: "Server API"
+---
+
+# product-server
+
+:::info API 소개
+ 상품(product)관련 server API입니다.
+:::
+
+## 서버 정보
+
+| 환경 | Base URL |
+|------|----------|
+| Production | `https://server-api.e-ncp.com` |
+
+## 리소스 목록
+
+| 리소스 | 설명 |
+|--------|------|
+| **Brand** | 브랜드 |
+| **Configuration** | 설정 |
+| **Product** | 상품 |
+| **Custom Property** | 상품 추가 항목 |
+| **Duty Category** | 상품 정보 고시 |
+| **Profile** | 프로필 (회원) |
+| **Product Guide** | 상품 이용 안내 |
+| **Purchase Permission** | 구매 권한 |
+
+## API 엔드포인트
+
+## Brand — 브랜드
+
+### 🟢 `GET` `/brands`
+
+**브랜드 전체 조회하기(트리 구조) version 2.0**
+
+> operationId: `get-brands`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `version` | header | ✅ | `string` | API 버전^|2.0 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+
+## 부가설명 및 특이사항
+            
+브랜드 전체 조회(트리 구조)하는 API입니다
+
+---
+
+### 🟡 `PUT` `/brands`
+
+**브랜드 수정하기**
+
+> operationId: `modify-brands`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+            
+브랜드를 수정하는 API 입니다.
+
+한 번에 최대 500개\
+        까지 수정할 수 있습니다.
+
+---
+
+### 🔵 `POST` `/brands`
+
+**브랜드 생성하기**
+
+> operationId: `create-brands`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+            
+브랜드를 생성하는 API 입니다.
+
+한 번에 최대 500개\
+        까지 생성할 수 있습니다.
+
+브랜드명 타입(`NAME_KO`, `NAME_EN`)에 따라 한글 또는 영문 브랜드명이 표시됩니다.
+\
+        
+* 동일한 타입에 대해 동일한 브랜드명이 있는 경우, 브랜드 생성이 되지 않고 기존 브랜드가 응답에 포함됩니다.
+
+* 예시:\
+        \ `NAME_KO` 타입의 `나이키`라는 한글 브랜드명이 기존에 존재할 때, 동일하게 `NAME_KO` 타입의 한글 브랜드명 `나이\
+        키`를 요청한 경우
+
+---
+
+### 🔴 `DELETE` `/brands`
+
+**브랜드 삭제하기**
+
+> operationId: `delete-brands`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `displayBrandNos` | query | ✅ | `number` | "삭제할 전시브랜드번호 ','로 다수건 삭제 (1,122,31)" |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+            
+브랜드를 삭제하는 API 입니다.
+
+한 번에 최대 500개\
+        까지 삭제할 수 있습니다.
+
+---
+
+### 🟢 `GET` `/brands/{displayBrandNo}`
+
+**브랜드 상세 조회하기**
+
+> operationId: `get-brand-detail`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `displayBrandNo` | path | ✅ | `number` | 전시브랜드 번호^|1 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+            
+브랜드 상세 조회하는 API입니다
+
+* 조회하고자하는\
+        \ 브랜드의 depth 순서와는 무관하게 조회 가능합니다.
+
+---
+
+## Custom Property — 상품 추가 항목
+
+### 🟢 `GET` `/custom-properties`
+
+**상품 추가항목 전체 조회하기**
+
+> operationId: `get-custom-property`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+            
+전체 상품 추가항목을 조회하는 API입니다
+
+---
+
+## Duty Category — 상품 정보 고시
+
+### 🟢 `GET` `/duty-categories`
+
+**상품 정보 고시 항목 조회하기**
+
+> operationId: `get-duty-categories`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+            
+상품 정보 고시 항목 조회하는 API입니다
+
+---
+
+## Profile — 프로필 (회원)
+
+### 🟢 `GET` `/like-products`
+
+**회원이 좋아하는 상품목록 조회하기**
+
+> operationId: `get-like-products`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `mallNo` | query | ✅ | `number` | 몰 번호 |
+| `memberId` | query | ✅ | `string` | 회원 id |
+| `memberNo` | query | ✅ | `number` | 회원 번호 |
+| `platform` | query | ✅ | `string` | "플랫폼 타입(PC, MOBILE_WEB, MOBILE)" |
+| `hasTotalCount` | query | ✅ | `boolean` | "전체 상품 수 포함 여부(default: false)" |
+| `hasMaxCouponAmt` | query | ✅ | `boolean` | "최대쿠폰 할인가격 포함여부(default: false)" |
+| `pageNumber` | query | ✅ | `number` | 페이지 번호 |
+| `pageSize` | query | ✅ | `number` | 한 페이지당 노출 수 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+            
+회원이 좋아한 상품을 조회하는 API입니다
+
+memberId와\
+        \ memberNo 둘 중 하나 필수 값이며 memberId가 우선 적용되어 조회됩니다.
+
+---
+
+## Configuration — 설정
+
+### 🔵 `POST` `/naver-shopping/{sno}/config`
+
+**"[샵바이 전용] 네이버 쇼핑 인증키 설정하기"**
+
+> operationId: `post-naver-shipping-auth-key`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `sno` | path | ✅ | `string` | "" |
+| `version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+            
+네이버 쇼핑 인증키 설정하는 API입니다
+
+인증키는 중\
+        복될 수 없으며, 최대 20자까지 입력 가능합니다.
+
+## 응답
+
+* 수정 성공: 204(NO_CONTENT)
+
+* 인증키\
+        \ 중복 발생시: 409(CONFLICT)
+
+---
+
+## Product — 상품
+
+### 🟢 `GET` `/products`
+
+**판매자 관리코드로 상품 조회하기**
+
+> operationId: `get-products-by-product-management-code`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `productManagementCd` | query | ✅ | `string` | 상품 관리 코드 |
+| `partnerNo` | query | - | `number` | 파트너 번호(설명란 참조)^|0 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+            
+판매자 관리코드로 상품 조회하는 API입니다
+
+* partnerNo\
+        \ 파라미터는 자사파트너(쇼핑몰배송)의 경우에만 사용 가능합니다. 그 외의 경우(일반파트너사)는 사용 불가능합니다.
+
+* partnerNo를\
+        \ 요청 파라미터에 넣는 경우, 해당 파트너사의 상품만 조회됩니다.
+
+* 단, 일반파트너사의 경우에는 partnerNo를 사용하지\
+        \ 않아도 해당 파트너사의 상품만 조회합니다.
+    
+## [상품 금액 적용]
+### 기본 상품 판매가
+* 옵션이 없는 상품\
+        
+  * 상품 등록 시, 기입한 판매가 그대로 적용
+* 옵션이 있는 상품
+  * 상품 등록 시, 기입한 판매가 + 옵션가 적용
+\
+        \  * 예\\) A상품\\(판매가10000원\\)에 옵션 1\\(\\+0원\\) \\| 옵션2\\(\\+1000원\\) 인 경우\\\
+        |\\, 옵션1 구매가격은 10000원 옵션2 구매가격은 11000원
+* 세트 상품
+  * 세트 상품의 옵션에 구성된 옵션(옵션있\
+        는 상품들의 옵션으로 세트 옵션 구성)의 구매가격의 합
+  * 세트 옵션 구성이 달라질 수 있기때문에 당연히 옵션마다 가격 상이 함\
+        
+
+### 즉시 할인
+* 옵션이 없는 상품
+  * 판매가에 즉시할인이 적용된 가격
+* 옵션있는 상품\\, 세트 상품
+  *\
+        \ 판매가에 즉시할인이 적용된 가격 + 옵션가 가 최종 가격
+  * 예\\) A상품\\(판매가10000원\\)에 옵션 1\\(\\\
+        +0원\\) \\| 옵션2\\(\\+1000원\\) \\| 옵션3\\(\\+2000원\\) 이고 즉시 할인율 10% 인 경우\\,
+\
+        \    옵션별 가격은 판매가 \\*0.8 + 옵션가 이므로 따라서
+    옵션 1 의 판매가격은 9000원, 옵션 2의 판매가격은\
+        \ 10000원, 옵션3의 판매가격은 11000원
+    
+\\* **옵션가격에서 즉시 할인이 적용 되는 것이 아님**
+
+###\
+        \ 추가 할인
+* 할인 적용 순서 : 즉시 할인 -> 추가 할인
+* 즉시 할인 적용 된 판매가격에 추가 할인 적용
+  * 예)\
+        \ 10000원 상품에 즉시 할인으로 1000원일 할인된다면, 9000원에서 추가 할인 설정에 따라 할인 적용
+  
+**즉시 할인\
+        **과의 차이점이라면 적용되는 가격인데 즉시 할인의 경우 상품을 등록 할 때에 입력한 판매가 적용하지만, **추가 할인**은 실제 해\
+        당 상품의 구매 가격에 적용 (상품등록 시에 판매가에 적용되는 것이 아닌 실제 구매 금액에 적용)
+
+* 예) A상품(판매가15000원\
+        )
+
+    \\- 옵션 1\\(\\+0원\\) \\| 옵션2\\(\\+1000원\\) \\| 옵션3\\(\\+2000원\\)
+\
+        \    
+    \\- 즉시 할인 : 5000원
+    
+    \\- 추가 할인 : 10%
+    
+    옵션 1 구매\
+        가격 : ((15000-5000) + 0)\\*0.9 = 9000
+    
+    옵션 2 구매가격 : ((15000-5000)\
+        \ + 1000)\\*0.9 = 9900
+    
+    옵션 2 구매가격 : ((15000-5000) + 2000)\\*0.9\
+        \ = 10800
+
+---
+
+### 🟡 `PUT` `/products`
+
+**상품 (옵션포함) 수정하기**
+
+> operationId: `put-product`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+ 
+ 상품 단건, 옵션 복수건 (등록 OR 수정)
+ * 기본 템플릿 사용을 원\
+        할 경우, 템플릿 타입 type 값만 입력하여 호출
+ * 기본 템플릿 사용을 원하지 않는 경우, 템플릿 타입 type 값과 안내 내\
+        용은 content에 넣어 전달
+ * 단, 표준 카테고리가 "주류"인 경우 주류 기본 템플릿(=주류 통신판매 위임고시)이 필수이\
+        므로 content 가 null 인 경우 주류 기본 템플릿 저장
+ * 템플릿 타입 값의 경우, DELIVERY:배송, AFTER_SERVICE:A/S,\
+        \ REFUND:환불, EXCHANGE:교환, DELEGATION_BY_LIQUOR:주류
+ 
+ ## 판매방식, 판매수수료 Valid\
+        \ Flow
+ 
+ | SaleMethodType  | CommissionType     | possible | description\
+        \               |
+ | ----------------|--------------------|----------|---------------------------|
+\
+        \ | PURCHASE        | NULL               | true     | purchasePrice 설정O  \
+        \      |
+ |                 | PRODUCT            | true     | purchasePrice\
+        \ 설정O        |
+ |                 | CATEGORY           | false    |     \
+        \                      |
+ |                 | PARTNER            | false\
+        \    |                           |
+ |                 | PURCHASE_PRICE  \
+        \   | false    |                           |
+ | CONSIGNMENT     | NULL  \
+        \             | false    |                           |
+ |               \
+        \  | PRODUCT            | true     | commissionRate 설정O       |
+ |      \
+        \           | CATEGORY           | true     | 카테고리 수수료율로 자동 설정    |
+ |  \
+        \               | PARTNER            | true     | 계약된 파트너 수수료율로 자동 설정|
+ |\
+        \                 | PURCHASE_PRICE     | true     | purchasePrice 설정O    \
+        \    |
+ | NULL            | NULL               | true     | default 값 으로\
+        \ 저장         |
+ |                 | PRODUCT            | false    |     \
+        \                      |
+ |                 | CATEGORY           | false\
+        \    |                           |
+ |                 | PARTNER         \
+        \   | false    |                           |
+ |                 | PURCHASE_PRICE\
+        \     | false    |                           |
+ 
+ ## extraJson - 네이버 쇼핑\
+        \ EP 및 네이버 페이 설정
+ 
+ ## dutyInfo - 상품정보제공고시
+ * dutyInfo.contents 항목에서 key값\
+        에 아래 '상품정보고시항목 조회하기'의 dutyCategoryContents.displayOrder 요청시 dutyCategoryContents.contentName\
+        \ 값으로 대치됩니다.
+ * https://server-docs.shopby.co.kr/?url.primaryName=product/#/DUTY_CATEGORY/get-duty-categories
+\
+        \ ex) 
+ * input : "contents": [{"1":"상품상세 참조"},{"2":"상품상세 참조"},{"\
+        3":"상품상세 참조"},{"4":"상품상세 참조"},{"5":"상품상세 참조"},{"6":"상품상세 참조"\
+        },{"7":"상품상세 참조"},{"8":"상품상세 참조"},{"9":"상품상세 참조"},{"10":"상품\
+        상세 참조"},{"11":"상품상세 참조"},{"12":"상품상세 참조"}]}"
+ * output : "contents"\
+        : [{"품명": "상품상세 참조"}, {"KC 인증정보": "상품상세 참조"}, {"색상": "상품상세 참조"\
+        }, {"구성품": "상품상세 참조"}, {"주요 소재": "상품상세 참조"}, {"제조자": "상품상세 참조"\
+        }, {"제조국": "상품상세 참조"}, {"크기": "상품상세 참조"}, {"배송·설치비용": "상품상세 참조"\
+        }, {"품질보증기준": "상품상세 참조"}, {"재공급 사유 및 하자 부위에 관한 정보": "상품상세 참조"}, {"\
+        A/S 책임자와 전화번호": "상품상세 참조"}]
+ 
+ 
+ ### extraJson - 렌탈 상품의 경우 아래의 값을 추가\
+        로 입력 받습니다.
+ key                   | value                               \
+        \ | description                                   |
+ ---------------------\
+        \ | ------------------------------------ | --------------------------------------------\
+        \  |
+ manufactureName       | String                               | 제조사명\
+        \ - 필수 / 영문,숫자,한글 최대 15자 (공백 가능)    |
+ productModelName      | String   \
+        \                            | 제품모델명 - 필수 / 영문,숫자,한글 최대 20자  (공백 가능)  |
+\
+        \ serialNumber          | String                               | 시리얼 번호 -\
+        \ 선택 / 숫자,영문 최대 20자 (공백 불가)     |
+ 
+ * PRO 의 경우, extraJson 에 네이버 쇼핑 EP 정\
+        보 입력 가능
+ * 도서 카테고리의 경우, 네이버 포인트 적립 불가
+ 
+ ## 상품 안내 정보 (productGuides)
+\
+        \ * 배송비 템플릿 type 값만 입력하여 호출 시 해당 파트너에 등록된 상품 안내 정보 템플릿 정보로 저장됩니다.
+ * 템플릿이\
+        \ 아닌 직접 정보를 입력하고 싶은 경우, type과 content 를 입력하여 호출합니다.
+ 
+ ## extraInfo - 임의\
+        로 활용 가능한 String 타입의 필드입니다. 최대 8000자까지 저장 가능하고, 요청 온 값을 조회 시에 그대로 반환합니다.
+
+\
+        \ ## 필수/선택형 옵션
+ * 해당 옵션을 사용할 경우 optionData.options[].optionType = REQUIRED\
+        \ 의 옵션 타입 요청이 필요합니다.
+ * 해당 옵션은 최소 1개 이상의 필수옵션이 필요합니다.
+ * optionData.options[].isRequiredOption의\
+        \ Boolean값을 통해 필수/선택 옵션 여부를 설정할 수 있습니다.
+ * optionName은 `필수옵션` or `선택옵션`으로\
+        \ 고정 되기 때문에 `필수옵션` or `선택옵션`으로 요청해주세요.
+
+---
+
+### 🔵 `POST` `/products`
+
+**상품(옵션포함) 등록하기 version 2.0**
+
+> operationId: `post-product`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `version` | header | ✅ | `string` | API 버전^|2.0 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+
+## 부가설명 및 특이사항
+ 
+ 상품 단건, 옵션 복수건 등록
+ * 기본 템플릿 사용을 원할 경우, 템플\
+        릿 타입 type 값만 입력하여 호출
+ * 기본 템플릿 사용을 원하지 않는 경우, 템플릿 타입 type 값과 안내 내용은 content에\
+        \ 넣어 전달
+ * 단, 표준 카테고리가 "주류"인 경우 주류 기본 템플릿(=주류 통신판매 위임고시)이 필수이므로 content\
+        \ 가 null 인 경우 주류 기본 템플릿 저장
+ * 템플릿 타입 값의 경우, DELIVERY:배송, AFTER_SERVICE:A/S,\
+        \ REFUND:환불, EXCHANGE:교환, DELEGATION_BY_LIQUOR:주류
+ 
+ ## 플랜별 상품 등록 제한
+ *\
+        \ basic : 50 건
+ * pro : 30,000 건
+ * enterprise : 무제한
+ 
+ ## 판매방식, 판매수수료\
+        \ Valid Flow
+ 
+ | SaleMethodType  | commissionRateType | possible | description\
+        \               |
+ | ----------------|--------------------|----------|---------------------------|
+\
+        \ | PURCHASE        | NULL               | true     | purchasePrice 설정O  \
+        \      |
+ |                 | PRODUCT            | false    |           \
+        \                |
+ |                 | CATEGORY           | false    | \
+        \                          |
+ |                 | PARTNER            | false\
+        \    |                           |
+ |                 | PURCHASE_PRICE  \
+        \   | false    |                           |
+ | CONSIGNMENT     | NULL  \
+        \             | false    |                           |
+ |               \
+        \  | PRODUCT            | true     | commissionRate 설정O       |
+ |      \
+        \           | CATEGORY           | true     | 카테고리 수수료율로 자동 설정    |
+ |  \
+        \               | PARTNER            | true     | 계약된 파트너 수수료율로 자동 설정|
+ |\
+        \                 | PURCHASE_PRICE     | true     | purchasePrice 설정O    \
+        \    |
+ | NULL            | NULL               | true     | default 값 으로\
+        \ 저장         |
+ |                 | PRODUCT            | false    |     \
+        \                      |
+ |                 | CATEGORY           | false\
+        \    |                           |
+ |                 | PARTNER         \
+        \   | false    |                           |
+ |                 | PURCHASE_PRICE\
+        \     | false    |                           |
+ 
+ ### extraJson - 렌탈 상품의\
+        \ 경우 아래의 값을 추가로 입력 받습니다.
+ | key                   | value               \
+        \                 | description                                   |
+ | ---------------------\
+        \ | ------------------------------------ | --------------------------------------------\
+        \  |
+ | manufactureName       | String                               | 제조\
+        사명 - 필수 / 영문,숫자,한글 최대 15자 (공백 가능)    |
+ | productModelName      | String\
+        \                               | 제품모델명 - 필수 / 영문,숫자,한글 최대 20자  (공백 가능)  |
+\
+        \ | serialNumber          | String                               | 시리얼 번호\
+        \ - 선택 / 숫자,영문 최대 20자 (공백 불가)     |
+ 
+ ## dutyInfo - 상품정보제공고시
+ * dutyInfo.contents\
+        \ 항목에서 key값에 아래 '상품정보고시항목 조회하기'의 dutyCategoryContents.displayOrder 요청시 dutyCategoryContents.contentName\
+        \ 값으로 대치됩니다.
+ * https://server-docs.shopby.co.kr/?url.primaryName=product/#/DUTY_CATEGORY/get-duty-categories
+\
+        \ ex) 
+ * input : "contents": [{"1":"상품상세 참조"},{"2":"상품상세 참조"},{"\
+        3":"상품상세 참조"},{"4":"상품상세 참조"},{"5":"상품상세 참조"},{"6":"상품상세 참조"\
+        },{"7":"상품상세 참조"},{"8":"상품상세 참조"},{"9":"상품상세 참조"},{"10":"상품\
+        상세 참조"},{"11":"상품상세 참조"},{"12":"상품상세 참조"}]}"
+ * output : "contents"\
+        : [{"품명": "상품상세 참조"}, {"KC 인증정보": "상품상세 참조"}, {"색상": "상품상세 참조"\
+        }, {"구성품": "상품상세 참조"}, {"주요 소재": "상품상세 참조"}, {"제조자": "상품상세 참조"\
+        }, {"제조국": "상품상세 참조"}, {"크기": "상품상세 참조"}, {"배송·설치비용": "상품상세 참조"\
+        }, {"품질보증기준": "상품상세 참조"}, {"재공급 사유 및 하자 부위에 관한 정보": "상품상세 참조"}, {"\
+        A/S 책임자와 전화번호": "상품상세 참조"}]
+ 
+ ## 주문환불 가능 설정
+ * refundableInfo.refundable\
+        \ 값이 true이면 모두 환불가능, 환불불가능 세부 설정은 refundableInfo.nonRefundTypes 항목 확인해주세요\
+        .
+ 
+ ## 상품 안내 정보 (productGuides)
+ * 배송비 템플릿 type 값만 입력하여 호출 시 해당 파트너에 등\
+        록된 상품 안내 정보 템플릿 정보로 저장됩니다.
+ * 템플릿이 아닌 직접 정보를 입력하고 싶은 경우, type과 content 를\
+        \ 입력하여 호출합니다.
+ 
+ ## extraInfo - 임의로 활용 가능한 String 타입의 필드입니다. 최대 8000자까지\
+        \ 저장 가능하고, 요청 온 값을 조회 시에 그대로 반환합니다.
+ 
+ ## 필수/선택형 옵션
+ * 해당 옵션을 사용할 경우 optionData.options[].optionType\
+        \ = REQUIRED 의 옵션 타입 요청이 필요합니다.
+ * 해당 옵션은 최소 1개 이상의 필수옵션이 필요합니다.
+ * option.options[].isRequiredOption의\
+        \ Boolean값을 통해 필수/선택 옵션 여부를 설정할 수 있습니다.
+ * optionName은 `필수옵션` or `선택옵션`으로\
+        \ 고정 되기 때문에 `필수옵션` or `선택옵션`으로 요청해주세요.
+
+---
+
+### 🟢 `GET` `/products/by-stickers`
+
+**스티커 번호로 상품 정보 조회하기**
+
+> operationId: `get-product-by-sticker-nos`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `stickerNos` | query | ✅ | `string` | "스티커 번호(쉼표 구분)^|1,2" |
+| `size` | query | - | `number` | "조회할 상품 개수(default: 10)^|10" |
+| `searchAfter` | query | ✅ | `number` | 검색 기준 값(response의 lastId)^|10000002 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+            
+스티커 번호로 상품 정보를 조회하는 API입니다
+
+---
+
+### 🟢 `GET` `/products/changed`
+
+**변경된 상품 번호 목록 조회**
+
+> operationId: `get-product-changed`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `asOf` | query | ✅ | `string` | 조회 기준시점^|yyyy-MM-dd HH:mm:ss |
+| `sortBy` | query | ✅ | `string` | "정렬 기준 Enum: [ REGISTERED_AT: 등록일, UPDATED_AT: 수정일 ]^|REGISTERED_AT" |
+| `direction` | query | - | `string` | "정렬 방향 Enum: [ ASC: 오름차순, DESC: 내림차순 ]^|ASC" |
+| `includingStockChanges` | query | - | `boolean` | "재고변경이력 포함여부 (default: true, 정렬기준이 UPDATED_AT 일때만 적용가능)^|false" |
+| `page` | query | - | `number` | "페이지 번호(default: 1)^|1" |
+| `size` | query | ✅ | `number` | 페이지 사이즈^|100 |
+| `searchAfter` | query | - | `string` | 검색 기준 값(lastId)^|1 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `version` | header | ✅ | `string` | API 버전^|1.0 |
+
+---
+
+### 🟢 `GET` `/products/deleted`
+
+**삭제된 상품 정보 조회하기**
+
+> operationId: `get-deleted-products`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `startYmdt` | query | ✅ | `string` | 조회기간 시작 범위^|2026-01-26 00:00:00 |
+| `endYmdt` | query | ✅ | `string` | 조회기간 종료 범위^|2026-03-26 00:00:00 |
+| `page` | query | - | `number` | "페이지 번호(default: 1)^|1" |
+| `size` | query | - | `number` | "페이지 사이즈(default: 10)^|10" |
+| `partnerNo` | query | - | `number` | 파트너 번호(설명란 참조)^|0 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+            
+삭제된 상품 정보를 조회하는 API입니다
+
+* partnerNo\
+        \ 파라미터는 자사파트너(쇼핑몰배송)의 경우에만 사용 가능합니다. 그 외의 경우(일반파트너사)는 사용 불가능합니다.
+
+* partnerNo를\
+        \ 요청 파라미터에 넣는 경우, 해당 파트너사의 상품만 조회됩니다.
+
+* 단, 일반파트너사의 경우에는 partnerNo를 사용하지\
+        \ 않아도 해당 파트너사의 상품만 조회합니다.
+
+* ## 검색 방식
+- 조회기간(startYmdt ~ endYmdt) 내에 삭제\
+        된 상품만 조회합니다.
+- 단, 삭제된 상품 정보는 현재 시점 기준 최대 1년 이내인 데이터만 조회할 수 있습니다.
+
+---
+
+### 🟢 `GET` `/products/extraInfo`
+
+**추가정보 조회하기**
+
+> operationId: `get-product-extraInfos`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `productNos` | query | ✅ | `string` | "상품 번호(쉼표 구분)^|10000001,10000002" |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+            
+상품번호로 추가정보를 조회하는 API입니다
+
+* 최대\
+        \ 100개의 상품을 동시 조회 가능합니다.
+
+---
+
+### 🟡 `PUT` `/products/options`
+
+**옵션(구매자작성형) 수정하기**
+
+> operationId: `put-product-options`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+            
+옵션(구매자작성형) 수정하는 API입니다
+
+mallOptionNo가\
+        \ 있으면 수정 0이면 등록, 사용안함은 use_yn = 'N’으로 업데이트 해야합니다.
+
+---
+
+### 🟡 `PUT` `/products/partial`
+
+**"상품 부분(판매상태, 전시상태, 품절처리, 옵션) 수정하기"**
+
+> operationId: `put-product-partial`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+            
+상품 수정하는 API입니다
+
+상품 상태를 수정합니다(판\
+        매상태, 전시상태 변경 API, 품절처리 등)
+
+request 에 옵션번호가 있을 경우 옵션번호로, 옵션번호가 없고 옵션관리코드가\
+        \ 있는 경우에는 옵션관리코드가 동일한 옵션을 수정하게 됩니다.
+
+옵션번호 옵션관리코드는 변경대상이 아닙니다.
+
+---
+
+### 🟡 `PUT` `/products/sale-agreements`
+
+**상품 판매합의 승인/거절하기**
+
+> operationId: `put-sale-agreement`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+            
+상품 합의판매 승인/거절하는 API입니다
+
+합의판매 승\
+        인/거절 가능 최대 상품 수: 50개
+
+message 내용에 따라 상품 정보 확인 및 수정해 주세요 
+ 아래는 메시지 내용의 일\
+        부 입니다.
+
+* 상품의 판매합의정보가 존재하지 않습니다.
+
+* 판매합의진행 상태가 아닙니다.
+
+---
+
+### 🟢 `GET` `/products/search`
+
+**상품 검색하기**
+
+> operationId: `get-product-search`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `page` | query | - | `number` | "페이지 번호(default: 1)^|1" |
+| `size` | query | ✅ | `number` | "페이지 사이즈(default: 20)^|10" |
+| `partnerNo` | query | - | `number` | 파트너 번호(설명란 참조)^|0 |
+| `searchAfter` | query | - | `number` | 검색 기준 값(lastId - 상품번호)^|1 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+            
+상품 검색하는 API입니다
+
+* partnerNo 파라\
+        미터는 자사파트너(쇼핑몰배송)의 경우에만 사용 가능합니다. 그 외의 경우(일반파트너사)는 사용 불가능합니다.
+
+* partnerNo를\
+        \ 요청 파라미터에 넣는 경우, 해당 파트너사의 상품만 조회됩니다.
+
+* 단, 일반파트너사의 경우에는 partnerNo를 사용하지\
+        \ 않아도 해당 파트너사의 상품만 조회합니다.
+
+검색 방식
+
+* 아래 두 가지 검색방식을 모두 지원합니다.
+
+* (기존)\
+        \ paging search : page 값 필수 (최초 조회 시 생략 가능)
+
+* (신규) keySet search : searchAfter\
+        \ 필수 (최초 조회 시 생략 가능. response의 lastId 값 사용.)
+    
+## [상품 금액 적용]
+### 기본\
+        \ 상품 판매가
+* 옵션이 없는 상품
+  * 상품 등록 시, 기입한 판매가 그대로 적용
+* 옵션이 있는 상품
+  * 상품 등록\
+        \ 시, 기입한 판매가 + 옵션가 적용
+  * 예\\) A상품\\(판매가10000원\\)에 옵션 1\\(\\+0원\\) \\| 옵션\
+        2\\(\\+1000원\\) 인 경우\\|\\, 옵션1 구매가격은 10000원 옵션2 구매가격은 11000원
+* 세트 상품
+  *\
+        \ 세트 상품의 옵션에 구성된 옵션(옵션있는 상품들의 옵션으로 세트 옵션 구성)의 구매가격의 합
+  * 세트 옵션 구성이 달라질 수\
+        \ 있기때문에 당연히 옵션마다 가격 상이 함
+
+### 즉시 할인
+* 옵션이 없는 상품
+  * 판매가에 즉시할인이 적용된 가격
+\
+        * 옵션있는 상품\\, 세트 상품
+  * 판매가에 즉시할인이 적용된 가격 + 옵션가 가 최종 가격
+  * 예\\) A상품\\(판매\
+        가10000원\\)에 옵션 1\\(\\+0원\\) \\| 옵션2\\(\\+1000원\\) \\| 옵션3\\(\\+2000원\\) 이고\
+        \ 즉시 할인율 10% 인 경우\\,
+    옵션별 가격은 판매가 \\*0.8 + 옵션가 이므로 따라서
+    옵션 1 의 판매가\
+        격은 9000원, 옵션 2의 판매가격은 10000원, 옵션3의 판매가격은 11000원
+    
+\\* **옵션가격에서 즉시 할인이\
+        \ 적용 되는 것이 아님**
+
+### 추가 할인
+* 할인 적용 순서 : 즉시 할인 -> 추가 할인
+* 즉시 할인 적용 된 판매\
+        가격에 추가 할인 적용
+  * 예) 10000원 상품에 즉시 할인으로 1000원일 할인된다면, 9000원에서 추가 할인 설정에 따라\
+        \ 할인 적용
+  
+**즉시 할인**과의 차이점이라면 적용되는 가격인데 즉시 할인의 경우 상품을 등록 할 때에 입력한 판매가 적용\
+        하지만, **추가 할인**은 실제 해당 상품의 구매 가격에 적용 (상품등록 시에 판매가에 적용되는 것이 아닌 실제 구매 금액에 적용\
+        )
+
+* 예) A상품(판매가15000원)
+
+    \\- 옵션 1\\(\\+0원\\) \\| 옵션2\\(\\+1000원\\)\
+        \ \\| 옵션3\\(\\+2000원\\)
+    
+    \\- 즉시 할인 : 5000원
+    
+    \\- 추가 할인\
+        \ : 10%
+    
+    옵션 1 구매가격 : ((15000-5000) + 0)\\*0.9 = 9000
+    
+   \
+        \ 옵션 2 구매가격 : ((15000-5000) + 1000)\\*0.9 = 9900
+    
+    옵션 2 구매가격 : ((15000-5000)\
+        \ + 2000)\\*0.9 = 10800
+
+---
+
+### 🟢 `GET` `/products/search-by-nos`
+
+**상품 리스트로 상품 검색하기**
+
+> operationId: `get-product-search-by-nos`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `productNos` | query | ✅ | `string` | 검색 할 상품 번호들 |
+| `partnerNo` | query | - | `number` | 파트너 번호(설명란 참조)^|0 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+            
+상품 리스트로 상품 검색하는 API입니다
+
+* partnerNo\
+        \ 파라미터는 자사파트너(쇼핑몰배송)의 경우에만 사용 가능합니다. 그 외의 경우(일반파트너사)는 사용 불가능합니다.
+
+* partnerNo를\
+        \ 요청 파라미터에 넣는 경우, 해당 파트너사의 상품만 조회됩니다.
+
+* 단, 일반파트너사의 경우에는 partnerNo를 사용하지\
+        \ 않아도 해당 파트너사의 상품만 조회합니다.
+
+* 상품 리스트 내 상품 최대 개수는 100개로 제한됩니다.
+    
+## [상\
+        품 금액 적용]
+### 기본 상품 판매가
+* 옵션이 없는 상품
+  * 상품 등록 시, 기입한 판매가 그대로 적용
+* 옵션이 있\
+        는 상품
+  * 상품 등록 시, 기입한 판매가 + 옵션가 적용
+  * 예\\) A상품\\(판매가10000원\\)에 옵션 1\\(\\\
+        +0원\\) \\| 옵션2\\(\\+1000원\\) 인 경우\\|\\, 옵션1 구매가격은 10000원 옵션2 구매가격은 11000원
+\
+        * 세트 상품
+  * 세트 상품의 옵션에 구성된 옵션(옵션있는 상품들의 옵션으로 세트 옵션 구성)의 구매가격의 합
+  * 세트 옵\
+        션 구성이 달라질 수 있기때문에 당연히 옵션마다 가격 상이 함
+
+### 즉시 할인
+* 옵션이 없는 상품
+  * 판매가에 즉시할\
+        인이 적용된 가격
+* 옵션있는 상품\\, 세트 상품
+  * 판매가에 즉시할인이 적용된 가격 + 옵션가 가 최종 가격
+  * 예\\\
+        ) A상품\\(판매가10000원\\)에 옵션 1\\(\\+0원\\) \\| 옵션2\\(\\+1000원\\) \\| 옵션3\\(\\+2000원\
+        \\) 이고 즉시 할인율 10% 인 경우\\,
+    옵션별 가격은 판매가 \\*0.8 + 옵션가 이므로 따라서
+    옵션 1\
+        \ 의 판매가격은 9000원, 옵션 2의 판매가격은 10000원, 옵션3의 판매가격은 11000원
+    
+\\* **옵션가격에서\
+        \ 즉시 할인이 적용 되는 것이 아님**
+
+### 추가 할인
+* 할인 적용 순서 : 즉시 할인 -> 추가 할인
+* 즉시 할인\
+        \ 적용 된 판매가격에 추가 할인 적용
+  * 예) 10000원 상품에 즉시 할인으로 1000원일 할인된다면, 9000원에서 추가\
+        \ 할인 설정에 따라 할인 적용
+  
+**즉시 할인**과의 차이점이라면 적용되는 가격인데 즉시 할인의 경우 상품을 등록 할 때에\
+        \ 입력한 판매가 적용하지만, **추가 할인**은 실제 해당 상품의 구매 가격에 적용 (상품등록 시에 판매가에 적용되는 것이 아닌 실\
+        제 구매 금액에 적용)
+
+* 예) A상품(판매가15000원)
+
+    \\- 옵션 1\\(\\+0원\\) \\| 옵션2\\(\\\
+        +1000원\\) \\| 옵션3\\(\\+2000원\\)
+    
+    \\- 즉시 할인 : 5000원
+    
+    \\\
+        - 추가 할인 : 10%
+    
+    옵션 1 구매가격 : ((15000-5000) + 0)\\*0.9 = 9000
+   \
+        \ 
+    옵션 2 구매가격 : ((15000-5000) + 1000)\\*0.9 = 9900
+    
+    옵션 2 구매가\
+        격 : ((15000-5000) + 2000)\\*0.9 = 10800
+
+---
+
+### 🟡 `PUT` `/products/stock-with-product-management-code`
+
+**상품 관리코드로 재고 변경하기**
+
+> operationId: `put-product-stock-by-product-management-code`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `version` | header | ✅ | `string` | API 버전^|1.0 |
+
+---
+
+### 🟡 `PUT` `/products/stock-with-product-no`
+
+**상품 번호로 재고 변경하기**
+
+> operationId: `put-product-stock-by-product-no`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `version` | header | ✅ | `string` | API 버전^|1.0 |
+
+---
+
+### 🔵 `POST` `/products/temporary`
+
+**상품 임시 등록하기**
+
+> operationId: `post-product-temporary`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+            
+상품을 임시 등록하는 API입니다
+
+상품을 등록대기 상\
+        태로 등록합니다
+
+## 플랜별 상품 등록 제한
+
+* basic : 50 건
+
+* pro : 30,000 건
+
+* enterprise\
+        \ : 무제한
+
+## 상품 안내 정보 (productGuides)
+
+* templateNo 를 모르는 경우 type 값만 입력\
+        하여 호출 시 해당 파트너에 등록된 상품 안내 정보 템플릿 정보로 저장됩니다.
+
+* 템플릿이 아닌 직접 정보를 입력하고 싶은 경우\
+        , type, content 를 입력하여 호출합니다.
+
+---
+
+### 🟢 `GET` `/products/{mallProductNo}`
+
+**상품 상세 조회하기**
+
+> operationId: `get-product`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `mallProductNo` | path | ✅ | `number` | 상품번호^|100000 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+            
+상품 상세 조회하는 API입니다
+
+* partnerNo\
+        \ 파라미터는 자사파트너(쇼핑몰배송)의 경우에만 사용 가능합니다. 그 외의 경우(일반파트너사)는 사용 불가능합니다.
+
+* partnerNo를\
+        \ 요청 파라미터에 넣는 경우, 해당 파트너사의 상품만 조회됩니다.
+
+* 단, 일반파트너사의 경우에는 partnerNo를 사용하지\
+        \ 않아도 해당 파트너사의 상품만 조회합니다.
+    
+## [상품 금액 적용]
+### 기본 상품 판매가
+* 옵션이 없는 상품\
+        
+  * 상품 등록 시, 기입한 판매가 그대로 적용
+* 옵션이 있는 상품
+  * 상품 등록 시, 기입한 판매가 + 옵션가 적용
+\
+        \  * 예\\) A상품\\(판매가10000원\\)에 옵션 1\\(\\+0원\\) \\| 옵션2\\(\\+1000원\\) 인 경우\\\
+        |\\, 옵션1 구매가격은 10000원 옵션2 구매가격은 11000원
+* 세트 상품
+  * 세트 상품의 옵션에 구성된 옵션(옵션있\
+        는 상품들의 옵션으로 세트 옵션 구성)의 구매가격의 합
+  * 세트 옵션 구성이 달라질 수 있기때문에 당연히 옵션마다 가격 상이 함\
+        
+
+### 즉시 할인
+* 옵션이 없는 상품
+  * 판매가에 즉시할인이 적용된 가격
+* 옵션있는 상품\\, 세트 상품
+  *\
+        \ 판매가에 즉시할인이 적용된 가격 + 옵션가 가 최종 가격
+  * 예\\) A상품\\(판매가10000원\\)에 옵션 1\\(\\\
+        +0원\\) \\| 옵션2\\(\\+1000원\\) \\| 옵션3\\(\\+2000원\\) 이고 즉시 할인율 10% 인 경우\\,
+\
+        \    옵션별 가격은 판매가 \\*0.8 + 옵션가 이므로 따라서
+    옵션 1 의 판매가격은 9000원, 옵션 2의 판매가격은\
+        \ 10000원, 옵션3의 판매가격은 11000원
+    
+\\* **옵션가격에서 즉시 할인이 적용 되는 것이 아님**
+
+###\
+        \ 추가 할인
+* 할인 적용 순서 : 즉시 할인 -> 추가 할인
+* 즉시 할인 적용 된 판매가격에 추가 할인 적용
+  * 예)\
+        \ 10000원 상품에 즉시 할인으로 1000원일 할인된다면, 9000원에서 추가 할인 설정에 따라 할인 적용
+  
+**즉시 할인\
+        **과의 차이점이라면 적용되는 가격인데 즉시 할인의 경우 상품을 등록 할 때에 입력한 판매가 적용하지만, **추가 할인**은 실제 해\
+        당 상품의 구매 가격에 적용 (상품등록 시에 판매가에 적용되는 것이 아닌 실제 구매 금액에 적용)
+
+* 예) A상품(판매가15000원\
+        )
+
+    \\- 옵션 1\\(\\+0원\\) \\| 옵션2\\(\\+1000원\\) \\| 옵션3\\(\\+2000원\\)
+\
+        \    
+    \\- 즉시 할인 : 5000원
+    
+    \\- 추가 할인 : 10%
+    
+    옵션 1 구매\
+        가격 : ((15000-5000) + 0)\\*0.9 = 9000
+    
+    옵션 2 구매가격 : ((15000-5000)\
+        \ + 1000)\\*0.9 = 9900
+    
+    옵션 2 구매가격 : ((15000-5000) + 2000)\\*0.9\
+        \ = 10800
+
+---
+
+### 🟠 `PATCH` `/products/{mallProductNo}`
+
+**상품 부분 수정하기 (Version 3.0)**
+
+> operationId: `patch-product-v3`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `mallProductNo` | path | ✅ | `number` | 상품번호^|10000001 |
+| `version` | header | ✅ | `string` | API 버전^|3.0 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+
+## Version 3.0 변경점 안내
+ 
+ 상품 상세 조회하기(Version 3.0) API는 상품 부분\
+        \ 수정하기(Version 3.0)의 요청 모델을 바탕으로 구성되어, 모델 간 일관성을 유지하고 사용자의 요청 작성 편의성을 높였습니\
+        다
+ ## 부가설명 및 특이사항
+            
+상품의 일부를 수정하는 API입니다 (Version 3.0)
+
+수정을\
+        \ 원하는 일부의 값만 수정합니다.
+
+수정이 필요한 필드의 키와 값만 넣습니다.(nullable 한 필드값에 `null` 값으로\
+        \ 요청하는 경우, `null` 값이 반영됩니다.
+
+객체를 수정하는 경우, 객체 내에 수정할 정보를 제외한 나머지는 기존 정보 그\
+        대로 입력해야합니다.
+
+* 상품 부분 수정 API는 request body의 1depth를 기준으로 수정이 됩니다.
+
+* 예를\
+        \ 들어 상품 이미지(request body에서 `mallProductImages.imageUrl`)를 수정하려고 하는 경우, 수정하\
+        는 값(`mallProductImages.imageUrl`) 외에 다른 값(`mallProductImages.mainYn`, `mallProductImages.imageUrlType`\
+        \ 등은 기존 값을 그대로 입력해야합니다.
+
+* 따라서 `mallProductImages.imageUrl`만 수정해서 요청하는 경\
+        우, 다른 값(imageUrlType) 등은 기본 값으로 대체됩니다.
+
+## 상품 안내 정보 (productGuides)
+
+\
+        * templateNo 를 모르는 경우 type 값만 입력하여 호출 시 해당 파트너에 등록된 상품 안내 정보 템플릿 정보로 저장됩니다\
+        .
+
+* 템플릿이 아닌 직접 정보를 입력하고 싶은 경우, type, content 를 입력하여 호출합니다.
+
+## 필수/선택형\
+        \ 옵션
+
+* 해당 옵션을 사용할 경우 optionType = REQUIRED 의 옵션 타입 요청이 필요합니다.
+
+* 해당 옵\
+        션은 최소 1개 이상의 필수옵션이 필요합니다.
+
+* options[].isRequiredOption의 Boolean값을 통해 필수\
+        /선택 옵션 여부를 설정할 수 있습니다.
+
+* optionName은 `필수옵션` or `선택옵션`으로 고정 되기 때문에 `필수옵션\
+        ` or `선택옵션`으로 요청해주세요.
+
+---
+
+### 🟡 `PUT` `/products/{productNo}`
+
+**상품 (옵션포함) 수정하기 version 2.0**
+
+> operationId: `put-product-v2`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `productNo` | path | ✅ | `string` | "" |
+| `version` | header | ✅ | `string` | API 버전^|2.0 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+
+## 부가설명 및 특이사항
+ 
+ 상품 단건, 옵션 복수건 등록
+ * 기본 템플릿 사용을 원할 경우, 템플\
+        릿 타입 type 값만 입력하여 호출
+ * 기본 템플릿 사용을 원하지 않는 경우, 템플릿 타입 type 값과 안내 내용은 content에\
+        \ 넣어 전달
+ * 단, 표준 카테고리가 "주류"인 경우 주류 기본 템플릿(=주류 통신판매 위임고시)이 필수이므로 content\
+        \ 가 null 인 경우 주류 기본 템플릿 저장
+ * 템플릿 타입 값의 경우, DELIVERY:배송, AFTER_SERVICE:A/S,\
+        \ REFUND:환불, EXCHANGE:교환, DELEGATION_BY_LIQUOR:주류
+
+ ## 판매방식, 판매수수료 Valid\
+        \ Flow
+ 
+ | SaleMethodType  | CommissionType     | possible | description\
+        \               |
+ | ----------------|--------------------|----------|---------------------------|
+\
+        \ | PURCHASE        | NULL               | true     | purchasePrice 설정O  \
+        \      |
+ |                 | PRODUCT            | true     | purchasePrice\
+        \ 설정O        |
+ |                 | CATEGORY           | false    |     \
+        \                      |
+ |                 | PARTNER            | false\
+        \    |                           |
+ |                 | PURCHASE_PRICE  \
+        \   | false    |                           |
+ | CONSIGNMENT     | NULL  \
+        \             | false    |                           |
+ |               \
+        \  | PRODUCT            | true     | commissionRate 설정O       |
+ |      \
+        \           | CATEGORY           | true     | 카테고리 수수료율로 자동 설정    |
+ |  \
+        \               | PARTNER            | true     | 계약된 파트너 수수료율로 자동 설정|
+ |\
+        \                 | PURCHASE_PRICE     | true     | purchasePrice 설정O    \
+        \    |
+ | NULL            | NULL               | true     | default 값 으로\
+        \ 저장         |
+ |                 | PRODUCT            | false    |     \
+        \                      |
+ |                 | CATEGORY           | false\
+        \    |                           |
+ |                 | PARTNER         \
+        \   | false    |                           |
+ |                 | PURCHASE_PRICE\
+        \     | false    |                           |
+ 
+ ### extraJson - 렌탈 상품의\
+        \ 경우 아래의 값을 추가로 입력 받습니다.
+ key                   | value                 \
+        \               | description                                   |
+ ---------------------\
+        \ | ------------------------------------ | --------------------------------------------\
+        \  |
+ manufactureName       | String                               | 제조사명\
+        \ - 필수 / 영문,숫자,한글 최대 15자 (공백 가능)    |
+ productModelName      | String   \
+        \                            | 제품모델명 - 필수 / 영문,숫자,한글 최대 20자  (공백 가능)  |
+\
+        \ serialNumber          | String                               | 시리얼 번호 -\
+        \ 선택 / 숫자,영문 최대 20자 (공백 불가)     |
+ 
+ ## 상품 안내 정보 (productGuides)
+ * 배송비\
+        \ 템플릿 type 값만 입력하여 호출 시 해당 파트너에 등록된 상품 안내 정보 템플릿 정보로 저장됩니다.
+ * 템플릿이 아닌 직접\
+        \ 정보를 입력하고 싶은 경우, type과 content 를 입력하여 호출합니다.
+ 
+ ## extraInfo - 임의로 활용 가\
+        능한 String 타입의 필드입니다. 최대 8000자까지 저장 가능하고, 요청 온 값을 조회 시에 그대로 반환합니다.
+ 
+ ##\
+        \ dutyInfo - 상품정보제공고시
+ * dutyInfo.contents 항목에서 key값에 아래 '상품정보고시항목 조회하기'의\
+        \ dutyCategoryContents.displayOrder 요청시 dutyCategoryContents.contentName 값\
+        으로 대치됩니다.
+ * https://server-docs.shopby.co.kr/?url.primaryName=product/#/DUTY_CATEGORY/get-duty-categories
+\
+        \ ex) 
+ * input : "contents": [{"1":"상품상세 참조"},{"2":"상품상세 참조"},{"\
+        3":"상품상세 참조"},{"4":"상품상세 참조"},{"5":"상품상세 참조"},{"6":"상품상세 참조"\
+        },{"7":"상품상세 참조"},{"8":"상품상세 참조"},{"9":"상품상세 참조"},{"10":"상품\
+        상세 참조"},{"11":"상품상세 참조"},{"12":"상품상세 참조"}]}"
+ * output : "contents"\
+        : [{"품명": "상품상세 참조"}, {"KC 인증정보": "상품상세 참조"}, {"색상": "상품상세 참조"\
+        }, {"구성품": "상품상세 참조"}, {"주요 소재": "상품상세 참조"}, {"제조자": "상품상세 참조"\
+        }, {"제조국": "상품상세 참조"}, {"크기": "상품상세 참조"}, {"배송·설치비용": "상품상세 참조"\
+        }, {"품질보증기준": "상품상세 참조"}, {"재공급 사유 및 하자 부위에 관한 정보": "상품상세 참조"}, {"\
+        A/S 책임자와 전화번호": "상품상세 참조"}]
+ 
+ ## 필수/선택형 옵션
+ * 해당 옵션을 사용할 경우 optionData.options[].optionType\
+        \ = REQUIRED 의 옵션 타입 요청이 필요합니다.
+ * 해당 옵션은 최소 1개 이상의 필수옵션이 필요합니다.
+ * option.options[].isRequiredOption의\
+        \ Boolean값을 통해 필수/선택 옵션 여부를 설정할 수 있습니다.
+ * optionName은 `필수옵션` or `선택옵션`으로\
+        \ 고정 되기 때문에 `필수옵션` or `선택옵션`으로 요청해주세요.
+
+---
+
+### 🔵 `POST` `/products/{productNo}`
+
+**재고연동상품 등록하기**
+
+> operationId: `post-copied-product`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `productNo` | path | ✅ | `number` | 상품번호^|100000 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+            
+상품 재고연동 생성하는 API입니다
+
+기존 상품의 재고\
+        를 연동하여 상품을 새로 생성할 수 있습니다.
+
+## 플랜별 상품 등록 제한
+
+* basic : 50 건
+
+* pro :\
+        \ 30,000 건
+
+* enterprise : 무제한
+
+## 상품 안내 정보 (productGuides)
+
+* templateNo\
+        \ 를 모르는 경우 type 값만 입력하여 호출 시 해당 파트너에 등록된 상품 안내 정보 템플릿 정보로 저장됩니다.
+
+* 템플릿이\
+        \ 아닌 직접 정보를 입력하고 싶은 경우, type, content 를 입력하여 호출합니다.
+
+---
+
+### 🟠 `PATCH` `/products/{productNo}`
+
+**상품 부분 수정하기**
+
+> operationId: `patch-product`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `productNo` | path | ✅ | `string` | "" |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+            
+상품의 일부를 수정하는 API입니다
+
+수정을 원하는 일\
+        부의 값만 수정합니다.
+
+수정이 필요한 필드의 키와 값만 넣습니다.(nullable 한 필드값에 `null` 값으로 요청하는 경우\
+        , `null` 값이 반영됩니다.
+
+객체를 수정하는 경우, 객체 내에 수정할 정보를 제외한 나머지는 기존 정보 그대로 입력해야합니\
+        다.
+
+* 예를 들어, `productImages`에서 `imageUrl`만 수정하려면 `mallImageNo`, `order`,\
+        \ `mainYn` 등은 기존 정보를 입력합니다.
+
+## 상품 안내 정보 (productGuides)
+
+* templateNo\
+        \ 를 모르는 경우 type 값만 입력하여 호출 시 해당 파트너에 등록된 상품 안내 정보 템플릿 정보로 저장됩니다.
+
+* 템플릿이\
+        \ 아닌 직접 정보를 입력하고 싶은 경우, type, content 를 입력하여 호출합니다.
+
+## 필수/선택형 옵션
+
+* 해\
+        당 옵션을 사용할 경우 optionData.options[].optionType = REQUIRED 의 옵션 타입 요청이 필요합니다\
+        .
+
+* 해당 옵션은 최소 1개 이상의 필수옵션이 필요합니다.
+
+* optionData.options[].isRequiredOption의\
+        \ Boolean값을 통해 필수/선택 옵션 여부를 설정할 수 있습니다.
+
+* optionName은 `필수옵션` or `선택옵션`으\
+        로 고정 되기 때문에 `필수옵션` or `선택옵션`으로 요청해주세요.
+
+---
+
+### 🟢 `GET` `/products/global/by-global-nos`
+
+**글로벌 번호로 상품 번호 조회하기**
+
+> operationId: `get-product-nos-by-global-product-nos`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `globalProductNos` | query | ✅ | `number` | 글로벌 상품 번호 리스트^|200000 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+            
+글로벌 번호로 상품 번호를 조회하는 API입니다
+
+*\
+        \ globalProductNo는 최대 100 개까지 조회할 수 있습니다.
+
+* productNo가 있는 globalProductNo만\
+        \ 조회됩니다.
+
+* partnerNo는 자사파트너(쇼핑몰배송)의 경우에만 사용 가능합니다. 그 외의 경우(일반파트너사)는 사용\
+        \ 불가능합니다.
+
+* partnerNo를 요청 바디에 넣는 경우, 해당 파트너사의 상품만 조회됩니다.
+
+* 단, 일반파트너사\
+        의 경우에는 partnerNo를 사용하지 않아도 해당 파트너사의 상품만 조회합니다.
+
+---
+
+### 🟢 `GET` `/products/global/by-product-nos`
+
+**상품 번호로 글로벌 번호 조회하기**
+
+> operationId: `get-global-nos-by-product-nos`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `productNos` | query | ✅ | `number` | 상품 번호 리스트^|100000 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+            
+상품 번호로 글로벌 번호를 조회하는 API입니다
+
+*\
+        \ productNos는 최대 100 개까지 조회할 수 있습니다.
+
+* globalProductNo가 있는 productNo만 조\
+        회됩니다.
+
+* partnerNo는 자사파트너(쇼핑몰배송)의 경우에만 사용 가능합니다. 그 외의 경우(일반파트너사)는 사용 불가능\
+        합니다.
+
+* partnerNo를 요청 바디에 넣는 경우, 해당 파트너사의 상품만 조회됩니다.
+
+* 단, 일반파트너사의 경우에\
+        는 partnerNo를 사용하지 않아도 해당 파트너사의 상품만 조회합니다.
+
+---
+
+### 🟢 `GET` `/products/inspections/approval-waiting`
+
+**심사대상 상품 조회**
+
+> operationId: `get-inspections-approval-waiting`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `partnerNo` | query | - | `number` | 파트너 번호^|10196 |
+| `adminNo` | query | - | `number` | 담당자 번호^|3 |
+| `applyStatus` | query | - | `string` | 승인 상태^|APPROVAL_READY |
+| `keywords` | query | - | `string` | "검색어^|나이스,아디도스" |
+| `keywordType` | query | - | `string` | 검색어 종류^|MALL_PRODUCT_NO |
+| `periodType` | query | ✅ | `string` | 검색기간 종류^|REGISTER_DATE |
+| `searchStartDate` | query | ✅ | `string` | 검색기간 시작일^|2002-08-11 |
+| `searchEndDate` | query | ✅ | `string` | 검색기간 종료일^|2999-01-22 |
+| `page` | query | ✅ | `number` | 조회할 페이지 번호^|1 |
+| `size` | query | ✅ | `number` | 한번에 조회할 상품수^|30 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+            
+심사대상 상품 조회 조회 API
+
+* partnerNo\
+        \ 파라미터는 자사파트너(쇼핑몰배송)의 경우에만 사용 가능합니다. 그 외의 경우(일반파트너사)는 사용 불가능합니다.
+
+* partnerNo를\
+        \ 요청 파라미터에 넣는 경우, 해당 파트너사의 상품만 조회됩니다.
+
+* 단, 일반파트너사의 경우에는 partnerNo를 사용하지\
+        \ 않아도 해당 파트너사의 상품만 조회합니다.
+
+* 심사대상 상품을 조회할 수 있습니다.<br />
+심사 상태는 컴마(,)로 구\
+        분하여 복수 상태로 조회가능합니다.
+
+### 심사 상태
+ * APPROVAL_READY: 심사대기
+ * AFTER_APPROVAL_READY:\
+        \ 수정후 심사대기
+### 검색어 종류
+- MALL_PRODUCT_NO: 상품번호
+- PRODUCT_NAME: 상품명
+- PRODUCT_MANAGEMENT_CD:\
+        \ 상품관리코드
+- PRODUCT_MANAGEMENT_CD_LIKE: 상품관리코드|부분검색
+- GROUP_MANAGEMENT_CODE:\
+        \ 그룹관리코드
+- GLOBAL_PRODUCT_NO: 글로벌번호
+### 검색 기간 종류
+ * REGISTER_DATE: 등록일
+\
+        \ * SALE_START_DATE: 판매시작일
+ * SALE_END_DATE: 판매종료일
+ * LAST_UPDATE_DATE:\
+        \ 최종수정일
+
+---
+
+### 🟡 `PUT` `/products/inspections/confirm`
+
+**상품 심사 승인하기**
+
+> operationId: `put-inspection-confirm`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+            
+상품 심사 승인하는 API입니다
+
+심사승인 가능 최대\
+        \ 상품 수: 50개
+
+errorCode 는 NON_EDITABLE_PRODUCT 로 통일되어있으며, message 내용에 따라\
+        \ 상품 정보 확인 및 수정해 주세요 
+ 아래는 메시지 내용의 일부 입니다.
+
+* 해당 상품은 수정이 불가능한 상태 입니다. (실\
+        제 없는 상품 번호의 경우)
+
+* 상품번호[xxxxxx] 상품심사정보가 존재하지 않습니다.
+
+* 상품번호[xxxxxx]는 상품\
+        심사진행 상태가 아닙니다.
+
+---
+
+### 🟡 `PUT` `/products/inspections/reject`
+
+**상품 심사 거절하기**
+
+> operationId: `put-inspection-reject`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+            
+상품 심사 거절 API입니다
+
+심사 거절 가능 최대 상\
+        품 수: 50개
+
+상품 심사 거절 API의 승인 거절 사유는 `별도 승인거부 의견`으로 고정됩니다.
+
+errorCode 는 NON_EDITABLE_PRODUCT\
+        \ 로 통일되어있으며, message 내용에 따라 상품 정보 확인 및 수정해 주세요 
+ 아래는 메시지 내용의 일부 입니다.
+
+\
+        * 해당 상품은 수정이 불가능한 상태 입니다. (실제 없는 상품 번호의 경우)
+
+* 상품번호[xxxxxx] 상품심사정보가 존재하지\
+        \ 않습니다.
+
+* 상품번호[xxxxxx]는 상품심사진행 상태가 아닙니다.
+
+---
+
+### 🟡 `PUT` `/products/options/stock-with-id`
+
+**옵션 번호로 재고 변경하기**
+
+> operationId: `put-product-stock-by-option-no`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `version` | header | ✅ | `string` | API 버전^|1.0 |
+
+---
+
+### 🟡 `PUT` `/products/options/stock-with-management-code`
+
+**옵션 관리코드로 재고 변경하기**
+
+> operationId: `put-product-stock-by-option-management-code`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `version` | header | ✅ | `string` | API 버전^|1.0 |
+
+---
+
+### 🟢 `GET` `/products/options/stocks`
+
+**상품재고관리 옵션 리스트 조회**
+
+> operationId: `get-option-stocks`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `partnerNo` | query | ✅ | `integer` | "파트너 번호 (SA: nullable, BPC: 사용하지 않음)^|10196" |
+| `brandNo` | query | ✅ | `integer` | 브랜드 번호^|1 |
+| `periodType` | query | ✅ | `string` | 검색 기간 조건 종류 ()^|UPDATE_YMDT |
+| `startYmdt` | query | ✅ | `string` | 조회기간 시작 일자^|2020-01-01 12:00:00 |
+| `endYmdt` | query | ✅ | `string` | "조회기간 종료 일자 (default: 현재)^|2020-03-01 12:59:59" |
+| `saleStatusTypes` | query | ✅ | `string` | "판매 상태, (ON_PRE_SALE: 예약판매중, WAITING_SALE: 판매대기, ON_SALE: 판매중\ |
+| `saleSettingStatusTypes` | query | ✅ | `string` | "판매 설정, (AVAILABLE_FOR_SALE: 판매가능, STOP_SELLING: 판매중지, PROHIBITION_SALE:\ |
+| `allowsFrontDisplay` | query | ✅ | `string` | "전시 여부(default: ALL), (ALL: 전체, Y: 가능, N: 불가능)^|ALL" |
+| `page` | query | ✅ | `integer` | 페이지 번호^|1 |
+| `size` | query | ✅ | `integer` | 페이지 사이즈^|10 |
+| `searchAfter` | query | - | `integer` | 검색 기준 값(lastId)^|1 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `version` | header | ✅ | `string` | API 버전^|1.0 |
+
+상품재고관리 옵션 리스트 조회 API 입니다.
+
+---
+
+### 🟠 `PATCH` `/products/partial/quick`
+
+**"상품 부분수정 (상품별 요청값 부분수정, 벌크 가능)"**
+
+> operationId: `put-product-partial-quick`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+            
+상품을 부분수정 하는 API입니다
+
+변경하고자 하는 항\
+        목들만 전달받고, 벌크로 빠르게 수정처리 해줍니다. (최대 100개)
+
+승인 완료된 상품만 업데이트 가능하며, 심사를 타지 않는\
+        \ 항목 또는 요청자만 사용 가능합니다.
+
+---
+
+### 🟢 `GET` `/products/search/engine`
+
+**상품 검색하기 (검색엔진)**
+
+> operationId: `get-products-search-engine`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `filter.discountedPrices` | query | - | `number` | "판매가 - 즉시할인 - 추가상품할인이 적용된 \"최종 할인가격\", between 검색일 경우 입력값 2개\ |
+| `filter.keywords` | query | - | `string` | 검색어(여러 검색어일 경우 space 로 구분 AND 연산)^|검색어1 검색어2 |
+| `filter.keywordInResult` | query | - | `string` | 결과내 검색(결과 내 검색의 검색어 space 구분 AND 연산)^|검색어1 검색어2 |
+| `filter.discountedComparison` | query | - | `string` | "최종 할인가격 검색 조건 (GT: 초과 - GREATER THAN, LTE: 미만 -LESS GREATER\ |
+| `filter.deliveryConditionType` | query | - | `string` | "배송비 타입 Enum: [ FREE: 무료, CONDITIONAL: 조건부 무료, FIXED_FEE: 유료\ |
+| `filter.saleStatus` | query | - | `string` | "판매 상태  (default:ONSALE) (전체 판매 상태 조회: ALL_CONDITIONS, 판매대기와\ |
+| `filter.soldout` | query | - | `boolean` | "품절 상품 포함 여부(default: false)^|false" |
+| `filter.totalReviewCount` | query | - | `boolean` | "총 상품평 수 포함 여부(default: false, false 설정 시 무조건 0)^|false" |
+| `filter.familyMalls` | query | - | `boolean` | "서비스에 계약된 모든 쇼핑몰 조회 여부 (default: false)^|false" |
+| `filter.productManagementCd` | query | - | `string` | 판매자관리코드 같은 상품 검색^|managementcode |
+| `filter.excludeMallProductNo` | query | - | `integer` | 조회시 제외할 상품번호^|10001 |
+| `filter.includeMallProductNo` | query | - | `integer` | 조회할 상품번호^|10000 |
+| `order.by` | query | - | `string` | "POPULAR:판매인기순, SALE_YMD:판매일자, DISCOUNTED_PRICE:가격순, REVIEW:상\ |
+| `order.direction` | query | - | `string` | "정렬기준(default : DESC)^|DESC" |
+| `order.soldoutPlaceEnd` | query | - | `boolean` | 품절상품 뒤로 배치 여부(default = false)^|false |
+| `displayCategoryNos` | query | - | `string` | "전시 카테고리 번호(여러개 일 경우 항목 추가)^|1,2,3" |
+| `displayBrandNos` | query | - | `string` | "전시 브랜드 번호(여러개 일 경우 항목 추가)^|1,2,3" |
+| `partnerNo` | query | - | `integer` | 파트너 번호(상품 공급업체 번호)^|1 |
+| `clientKey` | query | - | `integer` | 클라이언트 키^|test-client-key |
+| `pageNumber` | query | - | `integer` | "페이지 번호(default: 1)^|1" |
+| `pageSize` | query | - | `integer` | 한 페이지당 노출 수^|10 |
+| `onlySaleProduct` | query | - | `boolean` | "세일 상품만 조회 여부(default: false)^|false" |
+| `hasMaxCouponAmt` | query | - | `boolean` | "목록에 최대 할인 쿠폰 가격 포함 여부(default: false)^|false" |
+| `hasTotalCount` | query | - | `boolean` | "전체 상품 수 포함 여부(default: false)^|false" |
+| `hasOptionValues` | query | - | `boolean` | "목록에 옵션 value 포함 여부(default: false)^|false" |
+| `includeSummaryInfo` | query | - | `boolean` | "summary 정보 포함 여부(default: false)^|false" |
+| `shippingAreaType` | query | - | `string` | "배송 구분 (Enum: [ PARTNER: 파트너 배송, MALL: 쇼핑몰 배송 ])^|MALL" |
+| `platformType` | query | - | `string` | "플랫폼 타입 (Enum: [ PC: PC, MOBILE_WEB: 모바일 웹, MOBILE: 모바일 앱 ])^|PC" |
+| `memberNo` | query | - | `number` | 회원번호 (비회원인 경우 null)^|1 |
+| `frontDisplay` | query | - | `string` | "전시 여부 (default: Y) - Y(전시함), N(전시안함), ALL(전체)^|Y" |
+| `searchAfter` | query | - | `string` | 검색 기준 값(lastId)^|1 |
+| `partnerNos` | query | - | `string` | "파트너 번호(상품 공급업체 번호, 여러개 일 경우 항목 추가)^|1,2,3" |
+| `urlDirectDisplay` | query | - | `string` | "프론트 미노출 여부 (default: ALL) - Y(노출안함), N(노출함), ALL(전체)^|ALL" |
+| `registrationPeriod.startYmdt` | query | - | `string` | 등록일 - 시작일^|2022-01-01 12:00:00 |
+| `registrationPeriod.endYmdt` | query | - | `string` | 등록일 - 종료일^|2022-01-01 13:00:00 |
+| `modificationPeriod.startYmdt` | query | - | `string` | 수정일 - 시작일^|2025-01-01 12:00:00 |
+| `modificationPeriod.endYmdt` | query | - | `string` | 수정일 - 종료일^|2025-01-01 13:00:00 |
+| `saleSettingTypes` | query | - | `string` | "판매설정타입 (빈값인 경우 전체 조회 - Enum: [ AVAILABLE_FOR_SALE: 판매가능, STOP_SELLING:\ |
+| `applyStatusType` | query | - | `string` | "승인상태(default: ALL), Enum: [ ALL: 전체, REGISTRATION_READY: 등록대\ |
+| `saleMethodType` | query | - | `string` | "판매방식(default: ALL), Enum: [ ALL: 전체, PURCHASE: 사입, CONSIGNMENT:\ |
+| `stockRange.type` | query | - | `string` | "재고조건 - 재고 범위 종류, Enum: [ ALL: 전체, NONE: 재고없음, EXIST: 재고있음, EQ:\ |
+| `stockRange.stockCnt` | query | - | `number` | 재고조건 - 재고 수^|100 |
+| `stockRange.minStockCnt` | query | - | `number` | 재고조건 - RANGE 일시 최소 수량^|0 |
+| `stockRange.maxStockCnt` | query | - | `number` | 재고조건 - RANGE 일시 최대 수량^|9999 |
+| `customPropertyValueNos` | query | - | `string` | "추가항목^|1,2,3" |
+| `adminNo` | query | - | `number` | 담당자번호^|1 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `version` | header | ✅ | `string` | API 버전^|1.0 |
+| `useCache` | header | ✅ | `string` | 캐시 사용 여부^|true |
+
+## 부가설명 및 특이사항
+            
+검색엔진을 사용하여 상품을 검색하는 API 입니다
+
+\
+        **승인 이전 상품**, **판매 불가(금지, 중지, 종료) 상품**은 노출되지 않습니다.
+
+페이지 사이즈는 최대 100건까지 가\
+        능합니다.
+
+검색 방식
+
+* 아래 두 가지 검색방식을 모두 지원합니다.
+
+* (기존) paging search : pageNumber\
+        \ 필수 (최초 조회 시 생략 가능)
+
+* (신규) keySet search : searchAfter 필수 (최초 조회 시 생략\
+        \ 가능. response의 lastId 값 사용.)
+    
+## [상품 금액 적용]
+### 기본 상품 판매가
+* 옵션이 없\
+        는 상품
+  * 상품 등록 시, 기입한 판매가 그대로 적용
+* 옵션이 있는 상품
+  * 상품 등록 시, 기입한 판매가 + 옵션가\
+        \ 적용
+  * 예\\) A상품\\(판매가10000원\\)에 옵션 1\\(\\+0원\\) \\| 옵션2\\(\\+1000원\\) 인\
+        \ 경우\\|\\, 옵션1 구매가격은 10000원 옵션2 구매가격은 11000원
+* 세트 상품
+  * 세트 상품의 옵션에 구성된\
+        \ 옵션(옵션있는 상품들의 옵션으로 세트 옵션 구성)의 구매가격의 합
+  * 세트 옵션 구성이 달라질 수 있기때문에 당연히 옵션마다\
+        \ 가격 상이 함
+
+### 즉시 할인
+* 옵션이 없는 상품
+  * 판매가에 즉시할인이 적용된 가격
+* 옵션있는 상품\\, 세\
+        트 상품
+  * 판매가에 즉시할인이 적용된 가격 + 옵션가 가 최종 가격
+  * 예\\) A상품\\(판매가10000원\\)에 옵션\
+        \ 1\\(\\+0원\\) \\| 옵션2\\(\\+1000원\\) \\| 옵션3\\(\\+2000원\\) 이고 즉시 할인율 10% 인\
+        \ 경우\\,
+    옵션별 가격은 판매가 \\*0.8 + 옵션가 이므로 따라서
+    옵션 1 의 판매가격은 9000원, 옵션\
+        \ 2의 판매가격은 10000원, 옵션3의 판매가격은 11000원
+    
+\\* **옵션가격에서 즉시 할인이 적용 되는 것이 아\
+        님**
+
+### 추가 할인
+* 할인 적용 순서 : 즉시 할인 -> 추가 할인
+* 즉시 할인 적용 된 판매가격에 추가 할인 적용\
+        
+  * 예) 10000원 상품에 즉시 할인으로 1000원일 할인된다면, 9000원에서 추가 할인 설정에 따라 할인 적용
+  
+\
+        **즉시 할인**과의 차이점이라면 적용되는 가격인데 즉시 할인의 경우 상품을 등록 할 때에 입력한 판매가 적용하지만, **추가 할인\
+        **은 실제 해당 상품의 구매 가격에 적용 (상품등록 시에 판매가에 적용되는 것이 아닌 실제 구매 금액에 적용)
+
+* 예) A상품\
+        (판매가15000원)
+
+    \\- 옵션 1\\(\\+0원\\) \\| 옵션2\\(\\+1000원\\) \\| 옵션3\\(\\\
+        +2000원\\)
+    
+    \\- 즉시 할인 : 5000원
+    
+    \\- 추가 할인 : 10%
+    
+\
+        \    옵션 1 구매가격 : ((15000-5000) + 0)\\*0.9 = 9000
+    
+    옵션 2 구매가격 : ((15000-5000)\
+        \ + 1000)\\*0.9 = 9900
+    
+    옵션 2 구매가격 : ((15000-5000) + 2000)\\*0.9\
+        \ = 10800
+
+---
+
+### 🟡 `PUT` `/products/{mallProductNo}/status`
+
+**상품 상태 변경하기**
+
+> operationId: `put-product-status`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `mallProductNo` | path | ✅ | `number` | 상품번호^|100000 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+            
+상품 상태 변경하는 API입니다
+
+---
+
+### 🟢 `GET` `/products/{productNo}/histories`
+
+**상품 변경 히스토리 조회**
+
+> operationId: `get-product-histories`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `productNo` | path | ✅ | `number` | 상품번호 |
+| `partnerNo` | query | - | `number` | 파트너 번호(설명란 참조)^|0 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+            
+상품 변경 히스토리 조회 API
+
+* partnerNo\
+        \ 파라미터는 자사파트너(쇼핑몰배송)의 경우에만 사용 가능합니다. 그 외의 경우(일반파트너사)는 사용 불가능합니다.
+
+* partnerNo를\
+        \ 요청 파라미터에 넣는 경우, 해당 파트너사의 상품만 조회됩니다.
+
+* 단, 일반파트너사의 경우에는 partnerNo를 사용하지\
+        \ 않아도 해당 파트너사의 상품만 조회합니다.
+
+---
+
+### 🟢 `GET` `/products/{productNo}/options`
+
+**옵션 조회하기**
+
+> operationId: `get-product-options`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `productNo` | path | ✅ | `number` | 상품 번호^|1 |
+| `partnerNo` | query | - | `number` | 파트너 번호(설명란 참조)^|0 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+            
+해당 상품 번호에 대한 옵션 정보를 조회하는 API입니다
+\
+        
+2가지 옵션 목록(계층, 원본)을 제공합니다
+
+* partnerNo 파라미터는 자사파트너(쇼핑몰배송)의 경우에만 사용 가능합니\
+        다. 그 외의 경우(일반파트너사)는 사용 불가능합니다.
+
+* partnerNo를 요청 파라미터에 넣는 경우, 해당 파트너사의 상품\
+        만 조회됩니다.
+
+* 단, 일반파트너사의 경우에는 partnerNo를 사용하지 않아도 해당 파트너사의 상품만 조회합니다.
+
+---
+
+### 🟢 `GET` `/products/inspections/{productNo}/view`
+
+**상품 심사 상세 조회**
+
+> operationId: `get-inspections-mallProductNo-view`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `productNo` | path | ✅ | `number` | 상품번호^|10000001 |
+| `partnerNo` | query | - | `number` | 파트너 번호^|10196 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+            
+상품 심사 상세 조회 API
+
+* partnerNo 파\
+        라미터는 자사파트너(쇼핑몰배송)의 경우에만 사용 가능합니다. 그 외의 경우(일반파트너사)는 사용 불가능합니다.
+
+* partnerNo를\
+        \ 요청 파라미터에 넣는 경우, 해당 파트너사의 상품만 조회됩니다.
+
+* 단, 일반파트너사의 경우에는 partnerNo를 사용하지\
+        \ 않아도 해당 파트너사의 상품만 조회합니다.
+
+---
+
+## Product Guide — 상품 이용 안내
+
+### 🔵 `POST` `/products/guides`
+
+**상품 이용안내 템플릿 등록 및 수정**
+
+> operationId: `products-guide`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `version` | header | ✅ | `string` | API 버전^|1.0 |
+
+---
+
+## Purchase Permission — 구매 권한
+
+### 🔵 `POST` `/purchase-permission`
+
+**상품우선구매권한 생성하기**
+
+> operationId: `post-purchase-permission`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+            
+상품 우선구매권한 생성 API 입니다.
+
+---
+
+### 🔴 `DELETE` `/purchase-permission/{permissionNo}`
+
+**상품우선구매권한 삭제하기**
+
+> operationId: `delete-purchase-permission`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `permissionNo` | path | ✅ | `number` | 구매권한번호^|1 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+            
+상품 우선구매권한 삭제 API 입니다.
+
+---
+
+### 🟢 `GET` `/purchase-permission/{productNo}`
+
+**상품우선구매권한 조회하기**
+
+> operationId: `get-purchase-permission`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `productNo` | path | ✅ | `number` | 상품번호^|1 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+            
+상품 우선구매권한 조회 API 입니다.
+
+---
+
+### 🟡 `PUT` `/purchase-permission/member/{permissionNo}`
+
+**회원우선구매권한 수정하기**
+
+> operationId: `put-purchase-permission-member`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `permissionNo` | path | ✅ | `number` | 구매권한번호^|1 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+            
+회원 우선구매권한 수정 API 입니다.
+
+---
+
+### 🟡 `PUT` `/purchase-permission/product/{permissionNo}`
+
+**상품우선구매권한 수정하기**
+
+> operationId: `put-purchase-permission-product`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `permissionNo` | path | ✅ | `number` | 구매권한번호^|1 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+            
+상품 우선구매권한 수정 API 입니다.
+
+---
+
+### 🔴 `DELETE` `/purchase-permission/{permissionNo}/members`
+
+**회원우선구매권한 삭제하기**
+
+> operationId: `delete-purchase-permission-member`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `permissionNo` | path | ✅ | `number` | 구매권한번호^|1 |
+| `memberNos` | query | ✅ | `string` | "회원번호^|[1, 2, 3]" |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 전달받은 토큰)\n \n - 형식: Bearer + 발급받은 access_token\n\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+            
+회원 우선구매권한 삭제 API 입니다.
+
+---
+

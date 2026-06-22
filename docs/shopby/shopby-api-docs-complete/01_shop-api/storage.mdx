@@ -1,0 +1,62 @@
+---
+title: "storage"
+description: "파일 저장소(storage) 관련 shop API입니다."
+version: "1.0-SNAPSHOT"
+category: "Shop API"
+---
+
+# storage
+
+:::info API 소개
+ 파일 저장소(storage) 관련 shop API입니다.
+:::
+
+## 서버 정보
+
+| 환경 | Base URL |
+|------|----------|
+| Production | `https://shop-api.e-ncp.com` |
+
+## 리소스 목록
+
+| 리소스 | 설명 |
+|--------|------|
+| **Image** | 이미지 |
+| **File** | 파일 |
+
+## API 엔드포인트
+
+## File — 파일
+
+### 🔵 `POST` `/storage/temporary-files`
+
+**파일 업로드**
+
+> operationId: `upload-file`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디 |
+
+---
+
+## Image — 이미지
+
+### 🔵 `POST` `/storage/temporary-images`
+
+**이미지 업로드**
+
+> operationId: `upload-image`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `Version` | header | ✅ | `string` | API 버전 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디 |
+
+---
+

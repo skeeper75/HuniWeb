@@ -1,0 +1,61 @@
+---
+title: "CurrencyProvider"
+depth: 5
+path: "오로라 리액트 스킨개발가이드 > 개발 프로세스 > 2️⃣Aurora React 샘플스킨 확인 > @shopby/react-components > admin > CurrencyProvider"
+---
+
+# CurrencyProvider
+
+# CurrencyProvider
+
+## 속성
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | ---- | --- | ---- | --- |
+| currencyCode | x | string | KRW | 화폐 단위를 결정할 코드 |
+| currencySymbolMap | x | object | { KRW: '원', USD: '$', JPY: '¥' } | 화폐 단위를 결정할 코드 맵 |
+| children | x | ReactNode | - |  |
+
+
+
+
+## 상태
+
+* currencyState 는 useCurrencyStateContext 를 호출해 사용합니다.
+
+```javascript
+const currencyState = useCurrencyStateContext();
+```
+
+| 이름 | 타입 | 기본 값 | 설명 |
+| --- | --- | ---- | --- |
+| currencySymbol | string | 원 | 화폐 단위 |
+
+
+
+
+## 액션
+
+* currencyAction 은 useCurrencyActionContext 를 호출해 사용합니다.
+
+```javascript
+const currencyAction = useCurrencyActionContext();
+```
+
+| 이름 | 인자타입 | 필수여부 | 기본 값 | 설명 |
+| --- | ---- | ---- | ---- | --- |
+| changeCurrencyCode | string | O | - | 화폐 단위 변경
+ex) changeCurrencyCode('KRW'); |
+
+
+
+
+## 사용 예시
+
+```jsx
+const Example = ({ children }) => (
+    
+        {children}
+    
+);
+```

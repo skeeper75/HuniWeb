@@ -1,0 +1,107 @@
+---
+title: "카카오 간편가입"
+slug: "/service/mall/modification/sns-kakao"
+---
+
+# 카카오 간편가입
+
+<Callout type="info">
+**카카오 간편 회원가입을 설정하여 쇼핑몰에서 회원 가입을 진행할 수 있어요.** \
+**등록(저장)한 Client ID / (Client)Secret Key 값의 수정은 서비스 관리 > 외부 서비스 설정 > 간편로그인 연동 항목에서 가능해요.**
+</Callout>
+
+**① 개발자센터**\
+[Kakao Developers - 카카오(카카오 개발자센터)](https://developers.kakao.com/)에 접속해 주세요.
+
+**② 내 애플리케이션 로그인**\
+개발자센터 페이지 > 상단 '내 애플리케이션' 메뉴를 클릭하고 로그인 해 주세요.\
+📍카카오 간편가입 연동 설정은 카카오 회원만 가능합니다. 카카오 로그인 정보가 없다면 먼저 회원가입을\
+&#x20;    진행하고 로그인 해 주세요.
+
+**③ 애플리케이션 추가**\
+내 애플리케이션 화면에서 \[+ 애플리케이션 추가하기] 버튼을 클릭해 주세요.
+
+* 앱 아이콘 : 고객이 카카오 간편 회원가입 단계에서 확인하는 쇼핑몰 로고를 등록합니다.\
+  📍128 X 128 사이즈의 JPG, GIF, PNG 이미지 파일을 업로드 해주세요.
+* 앱 이름 : 카카오 간편 회원가입 및 로그인, 개인정보 제공 동의 내용 등에서 고객에게 노출되는 정보입니다.
+* 회사명 : 회사명을 입력해 주세요.
+* 카테고리 : 쇼핑몰 운영 카테고리를 선택해 주세요.
+* [서비스 이용이 제한되는 카테고리](https://developers.kakao.com/terms/latest/ko/site-policies#restricted-category), [금지된 내용](https://developers.kakao.com/terms/latest/ko/site-policies#prohibited-content) 및 [금지된 행동](https://developers.kakao.com/terms/latest/ko/site-policies#prohibited-activity) 관련 카카오 운영 정책을 확인하고,\
+  '위반하지 않는 앱' 임을 확인하는 필수 체크박스를 선택합니다.&#x20;
+* \[저장] 버튼을 클릭해 애플리케이션 추가를 완료합니다.
+* 전체 애플리케이션 리스트에서 추가한 애플리케이션을 확인해 주세요.
+* 추가한 애플리케이션을 클릭해, 내 애플리케이션 > 앱 설정 > 플랫폼 화면으로 이동해 주세요.
+
+**④ 플랫폼 등록**\
+'Web'의 \[Web 플랫폼 등록] 버튼을 클릭하고, 사이트 도메인 입력란에 쇼핑몰 도메인을 입력한 다음 \
+\[저장] 버튼으로 등록을 완료합니다.\
+📍Android 및 iOS에서 설치하는 별도 네이티브앱 없이, 샵바이 쇼핑몰에서 카카오 간편가입을 사용하면 \
+&#x20;    'Web' 항목만 등록해 주세요.
+
+* 사이트 도메인 : 카카오 간편가입 연동을 사용할 쇼핑몰 도메인을 입력해 주세요. (복수 등록 가능)\
+  예) <https://쇼핑몰도메인> ⇀ <https://abcde.com>
+* 기본 도메인 : 사이트 도메인 입력란에 첫 번째로 등한 쇼핑몰 도메인이 자동 연동되어 노출됩니다.<br>
+
+**⑤ Redirect URI 등록**\
+등록한 사이트 도메인 항목 아래, '카카오 로그인 사용 시 Redirect URI를 등록해야 합니다. \[등록하러 가기]' 를 클릭해 제품 설정 > 카카오 로그인 화면으로 이동해 주세요.\
+📍내 애플리케이션 > 제품 설정 > 카카오 로그인
+
+Redirect URI는 카카카오 로그인 이후 고객 인증 결과를 전달받기 위한 주소입니다.\
+'Redirect URI'의 \[Redirect URI 등록] 버튼을 클릭하고,\
+쇼핑몰 도메인을 포함하여 아래와 같이 작성한 다음, \[저장] 버튼을 클릭해 등록을 완료합니다.
+
+<Callout type="warning">
+사용하는 스킨에 따라 Redirect URI가 상이하므로, 반드시 스킨 종류를 확인해 주세요. \
+기본 스킨 외 별도의 스킨을 구매하여 사용하는 경우, 스킨 제작사에게  Redirect URI를 문의해 주세요. \
+헤드리스 운영방식은 자체 사용중인 Redirect URI를 입력합니다.\ <br>
+
+<mark style="color:blue;background-color:yellow;">오로라, 어나더 : 개별형 스킨은 PC와 모바일 각각 총 2개의</mark> <mark style="background-color:yellow;">Redirect URI를 입</mark><mark style="color:blue;background-color:yellow;">력해 주세요.</mark>
+
+* PC : <https://쇼핑몰도메인/callback/auth-callback.html>
+* 모바일 \
+  ⓐ 도메인 m. : <https://m.쇼핑몰도메인/callback/auth-callback.html> \
+  ⓑ 도메인 m- : <https://m-쇼핑몰도메인/callback/auth-callback.html> \
+  ⓒ 도메인 /m : <https://쇼핑몰도메인/m/callback/auth-callback.html><br>
+
+<mark style="color:blue;background-color:yellow;">오로라(리액트) : 통합형 스킨은 PC와 모바일 모두 동일합니다.</mark>
+
+* PC/모바일 : <https://쇼핑몰도메인/callback/auth-callback>
+</Callout>
+
+**⑥ 카카오 로그인 활성화 (ON)**\
+제품 설정 > 카카오 로그인 화면에서 '활성화 설정'의 상태 \[OFF] 버튼을 클릭해, 카카오 로그인 상태를 \
+활성화 처리 \[ON] 해 주세요.
+
+**⑦ 카카오 로그인 동의항목 설정**\
+제품 설정 > 카카오 로그인 > 동의항목 화면으로 이동합니다.\
+카카오 로그인 서비스 시작 단계에서 고객에게 동의받는 개인정보 항목을 설정해 주세요.\
+📍개인정보 항목의 \[설정] 버튼을 클릭해 동의 항목 별 설정이 가능합니다.\
+📍동의 목적은 '쇼핑몰 회원가입'으로 작해 주세요.
+
+**⑧ Client Secret 코드 생성** \
+제품 설정 > 카카오 로그인 > 보안 화면으로 이동해 주세요.  \
+'Client Secret'의 \[코드 생성] 버튼을 클릭해 Client Secret 코드를 생성합니다.
+
+**⑨ Client Secret 코드 복사 및 활성화**\
+생성된 Client Secret 코드를 복사합니다.\
+Client Secret 코드 '활성화 상태'의 \[설정] 버튼을 클릭해, 활성화 상태를 '사용함'으로 설정해 주세요.
+
+**⑩ Client Secret 입력** \
+shop by 어드민 > 서비스 관리 > 쇼핑몰 수정 > SNS 간편 회원가입 설정 항목으로 이동합니다. \
+카카오 간편가입 '선택' 체크박스를 선택하면 입력란이 활성화 되고, \
+복사한 <mark style="background-color:orange;">Client Secret 코드를 Secret Key</mark> 입력란에 붙여넣기 해 주세요.
+
+**⑪ 앱 키 복사**\
+앱 설정 > 앱 키 화면으로 이동해 주세요. '앱 키'의 REST API 키를 \[복사] 합니다.
+
+**⑫ Client ID 입력**\
+shop by 어드민 > 서비스 관리 > 쇼핑몰 수정 > SNS 간편 회원가입 설정 항목으로 이동합니다. \
+복사한 <mark style="background-color:green;">REST API 키를 Client ID</mark> 입력란에 붙여넣기 해 주세요.
+
+**⑬** 쇼핑몰 수정 화면, 하단 \[변경사항 저장] 버튼을 클릭해 설정을 완료합니다.
+
+**⑭** 쇼핑몰에서 적용된 카카오 회원가입 및 로그인을 확인해 주세요. \
+📍쇼핑몰 회원가입 페이지 : 간편 회원가입 > \[카카오 아이디로 회원가입] \
+&#x20;    쇼핑몰 로그인 페이지 : 간편로그인 > \[카카오 아이디로 로그인]
+
+<div align="left"><figure><img src="/images/service/mall/modification/sns-kakao/spaces%2F5MtRLrF338WdIfIJP9jq%2Fuploads%2Fm7kPgbbN0oMGwHqMouJx%2F%EC%B9%B4%EC%B9%B4%EC%98%A4%20%20%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85.jpg" alt="" width="563"/><figcaption><p>&#x3C;쇼핑몰 회원가입 - 카카오 간편 회원가입></p></figcaption></figure></div>

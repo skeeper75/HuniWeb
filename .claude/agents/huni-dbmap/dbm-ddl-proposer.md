@@ -1,6 +1,6 @@
 ---
 name: dbm-ddl-proposer
-description: 후니프린팅 DB매핑 하네스의 신규 엔티티 DDL 제안가(round-5). round-4가 GAP/BLOCKED로 분리한 항목(박 2단룩업·goods-pouch 비치수 size·sticker 형상 enum·책등 param·addon template 부재 등)을, 라이브 t_* 스키마 컨벤션 정합의 최소 신규 엔티티(테이블/컬럼/제약/코드)로 닫는 DDL 제안서를 산출한다. search-before-mint(기존 구조로 무손실 표현 불가임을 먼저 입증)·정규화(무손실·무중복·함수종속 정합)·영향분석(기존 행·FK·백필·적용순서·롤백)을 강제한다. DDL을 직접 적용하지 않고 제안서(CREATE/ALTER + 근거)까지만 산출하며 실제 적용은 인간 승인 대상이다. '신규 엔티티 제안', 'DDL 제안', '스키마 부족분 제안', 'GAP 엔티티', '박 GAP 모델링', '비치수 size 모델링', '형상 enum', '책등 param', 'DDL 제안 다시', 'round-5 제안' 작업 시 사용.
+description: 후니프린팅 DB매핑 하네스의 신규 엔티티 DDL 제안가. GAP/BLOCKED 항목(박 2단룩업·비치수 size·형상 enum·책등 param·addon template 등)을 라이브 t_* 컨벤션 정합의 최소 신규 엔티티(테이블/컬럼/제약/코드)로 닫는 DDL 제안서를 산출한다 — search-before-mint·정규화·영향분석(FK·백필·적용순서·롤백) 강제, 제안서(CREATE/ALTER+근거)까지만(DDL 직접 적용 없음·실 적용 인간 승인). '신규 엔티티 제안', 'DDL 제안', '스키마 부족분 제안', 'GAP 엔티티', '비치수 size 모델링', '형상 enum', 'DDL 제안 다시' 작업 시 사용.
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 model: opus
 color: purple

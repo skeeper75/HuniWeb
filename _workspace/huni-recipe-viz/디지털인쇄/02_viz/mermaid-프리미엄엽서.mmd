@@ -1,0 +1,60 @@
+%% 대표 1 — 프리미엄엽서 PRD_000016 / MES 001-0001 (PRF_DGP_A 패밀리 대표)
+%% 출처: recipe-디지털인쇄.md §(2)1 + §(1) PRF_DGP_A + gap-board G-3/G-4
+%% 강조: :::missing = 견적 결과값 왜곡/누락
+flowchart LR
+    classDef product fill:#e3f2fd,stroke:#1565c0,color:#0d47a1
+    classDef opt fill:#ede7f6,stroke:#5e35b1,color:#311b92
+    classDef formula fill:#fff8e1,stroke:#f9a825,color:#e65100
+    classDef comp fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20
+    classDef price fill:#e0f2f1,stroke:#00897b,color:#004d40
+    classDef missing fill:#ffebee,stroke:#c62828,color:#b71c1c,stroke-width:3px
+
+    PRD["프리미엄엽서<br/>PRD_000016"]:::product
+
+    subgraph OPT["옵션 → 차원값"]
+        O_SIZ["사이즈 7종<br/>siz_cd"]:::opt
+        O_PRINT["인쇄 단/양면<br/>print_opt_cd"]:::opt
+        O_PAPER["용지 공통풀<br/>mat_cd *별도설정"]:::opt
+        O_PP["후가공: 모서리·오시·미싱·가변텍스트<br/>proc_cd"]:::opt
+        O_QTY["수량<br/>min_qty"]:::opt
+        O_ADDON["봉투 6종<br/>addon template"]:::opt
+    end
+
+    F_A["PRF_DGP_A<br/>원자합산형<br/>(t_prd_product_price_formulas)"]:::formula
+
+    subgraph COMP["가격구성요소 (formula_components 배선)"]
+        C_S1["COMP_PRINT_DIGITAL_S1<br/>디지털인쇄비 단면"]:::comp
+        C_S2["COMP_PRINT_DIGITAL_S2<br/>디지털인쇄비 양면"]:::comp
+        C_PAPER["COMP_PAPER 용지비"]:::comp
+        C_PP["COMP_PP_* 후가공비"]:::comp
+    end
+
+    subgraph PRICE["단가행 component_prices (차원키)"]
+        CP_S1["plt_siz_cd·print_opt_cd·min_qty<br/>212행 ✅"]:::price
+        CP_S2["siz_cd·print_opt_cd·min_qty<br/>212행 ✅"]:::price
+        CP_PAPER["siz_cd·mat_cd<br/>56행 ✅"]:::price
+        CP_PP["proc_cd·min_qty"]:::price
+    end
+
+    PRD --> O_SIZ & O_PRINT & O_PAPER & O_PP & O_QTY & O_ADDON
+    O_SIZ --> F_A
+    O_PRINT --> F_A
+    O_PAPER --> F_A
+    O_PP --> F_A
+    O_QTY --> F_A
+    O_ADDON -.->|"addon (가격사슬 외)"| PRD
+
+    F_A --> C_S1 & C_S2 & C_PAPER & C_PP
+    C_S1 --> CP_S1
+    C_S2 --> CP_S2
+    C_PAPER --> CP_PAPER
+    C_PP --> CP_PP
+
+    %% G-4 결함 강조
+    DEF1["G-4 F-1: print_opt_cd 축 이중의미<br/>가격데이터=도수 / 상품선=면 → 단가 오매칭"]:::missing
+    DEF2["G-4 F-2: S1(plt_siz_cd)+S2(siz_cd)<br/>동시 발화 → 인쇄비 이중합산"]:::missing
+    DEF3["G-4 F-3: 출력매수 환산<br/>엔진 imposition 부재 → 호출측 환산 필수"]:::missing
+    DEF1 -.-> O_PRINT
+    DEF2 -.-> C_S1
+    DEF2 -.-> C_S2
+    DEF3 -.-> O_QTY

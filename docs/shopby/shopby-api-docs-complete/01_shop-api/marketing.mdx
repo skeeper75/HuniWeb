@@ -1,0 +1,50 @@
+---
+title: "marketing-shop"
+description: "마케팅(marketing) 관련 shop API입니다."
+version: "1.0"
+category: "Shop API"
+---
+
+# marketing-shop
+
+:::info API 소개
+마케팅(marketing) 관련 shop API입니다.
+:::
+
+## 서버 정보
+
+| 환경 | Base URL |
+|------|----------|
+| Production | `https://shop-api.e-ncp.com` |
+
+## 리소스 목록
+
+| 리소스 | 설명 |
+|--------|------|
+| **Marketing** | 마케팅 |
+
+## API 엔드포인트
+
+## Marketing — 마케팅
+
+### 🟢 `GET` `/marketing/sns-share`
+
+**SNS 공유 설정 조회하기**
+
+> operationId: `get-sns-share`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `productNo` | query | ✅ | `number` | 상품 번호^|1111222233 |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+| `clientId` | header | ✅ | `string` | 쇼핑몰 클라이언트 아이디^|f7IuuZPHwmeYilw03ow8Uw== |
+| `platform` | header | ✅ | `string` | "PC - PC 웹 브라우저에서 접근 시, MOBILE_WEB - 모바일 웹 브라우저에서 접근 시, AOS -\ |
+
+## 부가설명 및 특이사항
+            
+SNS 공유 설정 조회하는 API 입니다
+
+---
+

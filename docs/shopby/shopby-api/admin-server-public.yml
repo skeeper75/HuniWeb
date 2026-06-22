@@ -1,0 +1,3701 @@
+openapi: 3.0.1
+info:
+  title: admin-server
+  description: |2-
+     server API란? 외부 시스템에서 shop by와 연동하는 등 shop by서버에 저장된 데이터를 또 따른 서버에서 호출할 때 사용할 수 있는 API입니다.
+     기본 정보 관리(admin) 관련 server API입니다.
+  version: '1.0'
+servers:
+  - url: https://server-api.e-ncp.com
+tags:
+  - name: Partner
+    description: 파트너
+paths:
+  /admins:
+    get:
+      tags:
+        - Admin
+      summary: 샵바이 어드민 권한 조회
+      description: |-
+        샵바이에 등록된 어드민의 권한 정보를 조회한다.
+        MASTER 어드민일 경우 권한이 존재하지 않습니다.
+        MASTER 어드민을 조회 할 경우 권한그룹: "", 개인정보 권한: true 로 응답됩니다.
+
+        Authorization 은 필수값입니다.
+      operationId: get-admins-authority
+      parameters:
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n"
+          required: false
+          schema:
+            type: string
+          example: Bearer ABCDERAdjflaskjdfosiaetlkfs
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다\
+            .<br>\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n "
+          required: false
+          schema:
+            type: string
+          example: 각 어드민에서 복사된 값
+        - name: Version
+          in: header
+          description: API 버전
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/admins1091512367'
+              examples:
+                get-admins-authority:
+                  value: |-
+                    {
+                      "authorityGroupName" : "권한그룹명",
+                      "permitsPrivateInformation" : false
+                    }
+  /admins/merchandisers:
+    get:
+      tags:
+        - Admin
+      summary: 쇼핑몰 상품담당 MD 운영자 조회
+      description: |
+        특정 쇼핑몰의 상품담당 MD 운영자를 조회하는 API 입니다.
+      operationId: get-md-admins
+      parameters:
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n"
+          required: false
+          schema:
+            type: string
+          example: Bearer ABCDERAdjflaskjdfosiaetlkfs
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다\
+            .<br>\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n "
+          required: false
+          schema:
+            type: string
+          example: 각 어드민에서 복사된 값
+        - name: Version
+          in: header
+          description: API 버전
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/admins-merchandisers-1458267913'
+              examples:
+                get-md-admins:
+                  value: |-
+                    [ {
+                      "adminNo" : 1,
+                      "name" : "test",
+                      "id" : "test"
+                    }, {
+                      "adminNo" : 2,
+                      "name" : "test2",
+                      "id" : "test2"
+                    } ]
+  /admins/{adminNo}:
+    get:
+      tags:
+        - Admin
+      summary: 샵바이 어드민 조회
+      description: |-
+        ### 어드민 상태
+        - WAITING: 등록대기
+        - INVESTIGATION: 검토중
+        - ACTIVE: 등록완료
+        - DELETE: 삭제
+        - LOCKED: 로그인 잠금
+        - DORMANT: 휴면
+
+        ### 어드민 권한
+        - MASTER: 마스터
+        - NORMAL: 일반
+
+        ### 어드민 타입
+        - PLATFORM: 플랫폼 어드민
+        - SERVICE: 서비스 어드민
+        - PARTNER: 파트너 어드민
+        - SHOPBY: 샵바이 어드민
+        - DEVELOPER: 개발자
+
+        샵바이에 등록된 어드민 정보를 조회한다.
+      operationId: get-admins
+      parameters:
+        - name: adminNo
+          in: path
+          description: 어드민 번호
+          required: true
+          schema:
+            type: string
+          example: '1'
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n"
+          required: false
+          schema:
+            type: string
+          example: Bearer ABCDERAdjflaskjdfosiaetlkfs
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다\
+            .<br>\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n "
+          required: false
+          schema:
+            type: string
+          example: 각 어드민에서 복사된 값
+        - name: Version
+          in: header
+          description: API 버전
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/admins-adminNo933950945'
+              examples:
+                get-admins:
+                  value: |-
+                    {
+                      "adminNo" : 1,
+                      "adminName" : "test",
+                      "adminId" : "test",
+                      "jobPositionName" : "",
+                      "departmentName" : "",
+                      "jobDutyName" : "",
+                      "email" : "nhn@nhncommerce.com",
+                      "phoneNo" : "010-1111-1111",
+                      "mobileNo" : "010-1111-1111",
+                      "externalAccessEnabled" : false,
+                      "permittedIpAddresses" : [ ],
+                      "phoneCertificationYn" : false,
+                      "expireDateTime" : null,
+                      "adminStatus" : "ACTIVE",
+                      "adminType" : "SERVICE",
+                      "adminRole" : "MASTER",
+                      "serviceNo" : 3,
+                      "partnerNo" : null
+                    }
+  /configurations/admin/domains:
+    get:
+      tags:
+        - Mall-Domain
+      summary: 몰 도메인 조회
+      description: |
+        ### 몰 도메인 정보를 조회 합니다.
+      operationId: get-mall-domains
+      parameters:
+        - name: deviceType
+          in: query
+          description: 디바이스 타입. 없으면 전체검색 (PC / MOBILE)
+          required: false
+          schema:
+            type: string
+          example: PC
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n"
+          required: false
+          schema:
+            type: string
+          example: Bearer ABCDERAdjflaskjdfosiaetlkfs
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다\
+            .<br>\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n "
+          required: false
+          schema:
+            type: string
+          example: 각 어드민에서 복사된 값
+        - name: Version
+          in: header
+          description: API 버전
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/configurations-admin-domains1790762806'
+              examples:
+                get-mall-domains:
+                  value: |-
+                    [ {
+                      "mallNo" : 1,
+                      "mallId" : "abc",
+                      "domain" : "abc.com",
+                      "deviceType" : "PC",
+                      "ssl" : true
+                    } ]
+  /contracts:
+    get:
+      tags:
+        - Contract
+      summary: 계약서 조회하기
+      description:
+        "계약서를 조회한다.\n\n #### 정산 유형\n - DAY: 일 정산\n- WEEK: 주 정산\n- MONTH:\
+        \ 월 정산\n \n #### 정산 타입\n - TOMORROW: 전일\n- YESTERDAY: 익일\n \n #### 정산요일\n\
+        \ [MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY]\n "
+      operationId: get-contract-list
+      parameters:
+        - name: page
+          in: query
+          description: 페이지 번호
+          required: false
+          schema:
+            type: number
+          example: '1'
+        - name: pageSize
+          in: query
+          description: 페이지 사이즈
+          required: false
+          schema:
+            type: number
+          example: '10'
+        - name: partnerNos
+          in: query
+          description: '파트너 번호들(미입력 시, 전체 조회)'
+          required: false
+          schema:
+            type: string
+          example: '[1, 2, 3]'
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n"
+          required: false
+          schema:
+            type: string
+          example: Bearer ABCDERAdjflaskjdfosiaetlkfs
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다\
+            .<br>\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n "
+          required: false
+          schema:
+            type: string
+          example: 각 어드민에서 복사된 값
+        - name: Version
+          in: header
+          description: API 버전
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contracts-1572845133'
+              examples:
+                get-contract-list:
+                  value: |-
+                    {
+                      "totalCount" : 1,
+                      "contents" : [ {
+                        "contractNo" : 1,
+                        "mallNo" : 1,
+                        "partnerNo" : 1,
+                        "merchandiserNo" : 1,
+                        "commissionRate" : 0,
+                        "memo" : null,
+                        "contractType" : null,
+                        "promotionAgreed" : false,
+                        "status" : "ACTIVE",
+                        "additionalInfo" : "{\"key\": \"value\"}",
+                        "settlementConfig" : {
+                          "settlementPeriodType" : "MONTH",
+                          "domesticProvisionRate" : 100,
+                          "domesticSettlementDay" : 5,
+                          "domesticSettlementHolidayType" : "YESTERDAY",
+                          "domesticSettlementDayOfWeek" : "FRIDAY",
+                          "overseasProvisionRate" : 100,
+                          "overseasSettlementDay" : 5,
+                          "overseasSettlementHolidayType" : "YESTERDAY",
+                          "overseasSettlementDayOfWeek" : "MONDAY"
+                        }
+                      } ]
+                    }
+    put:
+      tags:
+        - Contract
+      summary: 계약서 상태 수정하기
+      description:
+        "몰과 파트너간의 계약 상태를 수정한다.\n\n #### 계약 상태\n - APPROVAL: 계약 동의\n- DISAPPROVAL:\
+        \ 계약 반려\n- SUSPEND: 계약 일시정지\n- UNSUSPEND: 계약 일시정지 해제\n "
+      operationId: put-contract-status
+      parameters:
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n"
+          required: false
+          schema:
+            type: string
+          example: Bearer ABCDERAdjflaskjdfosiaetlkfs
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다\
+            .<br>\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n "
+          required: false
+          schema:
+            type: string
+          example: 각 어드민에서 복사된 값
+        - name: Version
+          in: header
+          description: API 버전
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/contracts-925074272'
+            examples:
+              put-contract-status:
+                value: |-
+                  {
+                    "status" : "APPROVAL",
+                    "contractNos" : [ 1, 2 ]
+                  }
+      responses:
+        '204':
+          description: '204'
+    post:
+      tags:
+        - Contract
+      summary: 신규 계약 등록하기
+      description:
+        "\n등록되어있는 파트너와 신규 계약을 등록한다.\n이미 쇼핑몰 - 파트너간 계약관계가 존재한다면 새로 등록할 수\
+        \ 없다.\n\n- memo 는 필수값이 아님\n- contractContent는 입점계약서를 사용할 경우 필수\n\n #### 정산\
+        \ 유형\n - DAY: 일 정산\n- WEEK: 주 정산\n- MONTH: 월 정산\n \n #### 정산 타입\n - TOMORROW:\
+        \ 전일\n- YESTERDAY: 익일\n \n #### 정산요일\n [MONDAY, TUESDAY, WEDNESDAY, THURSDAY,\
+        \ FRIDAY, SATURDAY, SUNDAY]\n "
+      operationId: post-new-contract
+      parameters:
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n"
+          required: false
+          schema:
+            type: string
+          example: Bearer ABCDERAdjflaskjdfosiaetlkfs
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다\
+            .<br>\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n "
+          required: false
+          schema:
+            type: string
+          example: 각 어드민에서 복사된 값
+        - name: Version
+          in: header
+          description: API 버전
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/contracts594295227'
+            examples:
+              post-new-contract:
+                value: |-
+                  {
+                    "partnerNo" : 5,
+                    "merchandiserNo" : 10,
+                    "commissionRate" : 10,
+                    "contractContent" : "<p>입점계약서</p>",
+                    "memo" : null,
+                    "contractType" : null,
+                    "additionalInfo" : "{\"key\": \"value\"}",
+                    "settlementConfig" : {
+                      "settlementPeriodType" : "MONTH",
+                      "domesticSettlementDay" : 5,
+                      "domesticSettlementHolidayType" : "YESTERDAY",
+                      "domesticSettlementDayOfWeek" : "FRIDAY",
+                      "overseasSettlementDay" : 5,
+                      "overseasSettlementHolidayType" : "YESTERDAY",
+                      "overseasSettlementDayOfWeek" : "MONDAY"
+                    }
+                  }
+      responses:
+        '204':
+          description: '204'
+  /contracts/{partnerNo}:
+    get:
+      tags:
+        - Contract
+      summary: 계약서 상세 조회하기
+      description:
+        "\n쇼핑몰 - 파트너간의 계약정보 상세 조회\n\n### 거래 유형\n- ELECTRONIC: 전자계약\n- HANDWRITING:\
+        \ 수기계약\n\n### 거래 상태\n- WAITING: 거래대기\n- INVESTIGATION: 검토중\n- ACTIVE: 거래중\n\
+        - SUSPEND: 일시중지\n\n #### 정산 유형\n - DAY: 일 정산\n- WEEK: 주 정산\n- MONTH: 월 정산\n\
+        \ \n #### 정산 타입\n - TOMORROW: 전일\n- YESTERDAY: 익일\n \n #### 정산요일\n [MONDAY,\
+        \ TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY]\n "
+      operationId: get-contract-info-detail
+      parameters:
+        - name: partnerNo
+          in: path
+          description: ''
+          required: true
+          schema:
+            type: string
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n"
+          required: false
+          schema:
+            type: string
+          example: Bearer ABCDERAdjflaskjdfosiaetlkfs
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다\
+            .<br>\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n "
+          required: false
+          schema:
+            type: string
+          example: 각 어드민에서 복사된 값
+        - name: Version
+          in: header
+          description: API 버전
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/contracts-partnerNo-51369225'
+              examples:
+                get-contract-info-detail:
+                  value: |-
+                    {
+                      "contractNo" : 1,
+                      "mallNo" : 1,
+                      "partnerNo" : 1,
+                      "merchandiserNo" : 1,
+                      "contractType" : "ELECTRONIC",
+                      "contractStatus" : "ACTIVE",
+                      "commissionRate" : 1.1,
+                      "promotionAgreed" : true,
+                      "createdDateTime" : "2023-12-11T17:46:57",
+                      "startedDateTime" : "2023-12-11T18:25:34",
+                      "entryContracts" : [ {
+                        "contents" : "<p>입점계약서</p>",
+                        "changeReason" : "",
+                        "agreed" : true,
+                        "createdDateTime" : "2023-12-11T17:46:57",
+                        "agreedDateTime" : "2023-12-11T19:04:22"
+                      } ],
+                      "externalApiKey" : "key",
+                      "settlementConfig" : {
+                        "settlementPeriodType" : "MONTH",
+                        "domesticProvisionRate" : 100,
+                        "domesticSettlementDay" : 5,
+                        "domesticSettlementHolidayType" : "YESTERDAY",
+                        "domesticSettlementDayOfWeek" : "FRIDAY",
+                        "overseasProvisionRate" : 100,
+                        "overseasSettlementDay" : 5,
+                        "overseasSettlementHolidayType" : "YESTERDAY",
+                        "overseasSettlementDayOfWeek" : "MONDAY"
+                      }
+                    }
+    put:
+      tags:
+        - Contract
+      summary: 계약서 수정하기
+      description:
+        "계약서를 수정한다.\n\n #### 정산 유형\n - DAY: 일 정산\n- WEEK: 주 정산\n- MONTH:\
+        \ 월 정산\n \n #### 정산 타입\n - TOMORROW: 전일\n- YESTERDAY: 익일\n \n #### 정산요일\n\
+        \ [MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY]\n "
+      operationId: put-contract
+      parameters:
+        - name: partnerNo
+          in: path
+          description: ''
+          required: true
+          schema:
+            type: string
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n"
+          required: false
+          schema:
+            type: string
+          example: Bearer ABCDERAdjflaskjdfosiaetlkfs
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다\
+            .<br>\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n "
+          required: false
+          schema:
+            type: string
+          example: 각 어드민에서 복사된 값
+        - name: Version
+          in: header
+          description: API 버전
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/contracts-partnerNo-1265137783'
+            examples:
+              put-contract:
+                value: |-
+                  {
+                    "merchandiserNo" : 10,
+                    "commissionRate" : 10,
+                    "contractContent" : "<p>입점계약서</p>",
+                    "memo" : null,
+                    "contractType" : null,
+                    "additionalInfo" : "{\"key\": \"value\"}",
+                    "settlementConfig" : {
+                      "settlementPeriodType" : "MONTH",
+                      "domesticSettlementDay" : 5,
+                      "domesticSettlementHolidayType" : "YESTERDAY",
+                      "domesticSettlementDayOfWeek" : "FRIDAY",
+                      "overseasSettlementDay" : 5,
+                      "overseasSettlementHolidayType" : "YESTERDAY",
+                      "overseasSettlementDayOfWeek" : "MONDAY"
+                    }
+                  }
+      responses:
+        '204':
+          description: '204'
+  /currencies:
+    get:
+      tags:
+        - Currency
+      summary: 몰 환율 설정 조회
+      description: |2-
+
+        몰의 환율 설정을 조회한다.
+      operationId: get-currencies
+      parameters:
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n"
+          required: false
+          schema:
+            type: string
+          example: Bearer ABCDERAdjflaskjdfosiaetlkfs
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다\
+            .<br>\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n "
+          required: false
+          schema:
+            type: string
+          example: 각 어드민에서 복사된 값
+        - name: Version
+          in: header
+          description: API 버전
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/currencies495944049'
+              examples:
+                get-currencies:
+                  value: |-
+                    [ {
+                      "exchangeTo" : "KRW",
+                      "exchangeRate" : 1
+                    } ]
+  /currencies/{currencyCode}:
+    put:
+      tags:
+        - Currency
+      summary: 몰 환율 설정 수정
+      description: |2-
+
+        몰의 환율 설정을 수정한다.
+      operationId: update-currencies
+      parameters:
+        - name: currencyCode
+          in: path
+          description: '통화 - CNY, USD, JPY, KRW'
+          required: true
+          schema:
+            type: string
+          example: usd
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n"
+          required: false
+          schema:
+            type: string
+          example: Bearer ABCDERAdjflaskjdfosiaetlkfs
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다\
+            .<br>\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n "
+          required: false
+          schema:
+            type: string
+          example: 각 어드민에서 복사된 값
+        - name: Version
+          in: header
+          description: API 버전
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/currencies-currencyCode-1479264625'
+            examples:
+              update-currencies:
+                value: |-
+                  {
+                    "exchangeRate" : 1.356
+                  }
+      responses:
+        '204':
+          description: '204'
+  /malls:
+    get:
+      tags:
+        - Mall
+      summary: 쇼핑몰 상세 조회
+      description: |
+        ### Mall 정보를 조회 합니다.
+      operationId: get-mall-detail
+      parameters:
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n"
+          required: false
+          schema:
+            type: string
+          example: Bearer ABCDERAdjflaskjdfosiaetlkfs
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다\
+            .<br>\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n "
+          required: false
+          schema:
+            type: string
+          example: 각 어드민에서 복사된 값
+        - name: Version
+          in: header
+          description: API 버전
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/malls-1901494364'
+              examples:
+                get-mall-detail:
+                  value: |-
+                    {
+                      "mallName" : "몰 이름",
+                      "mallType" : "NCP",
+                      "url" : {
+                        "pc" : "pc",
+                        "mobile" : "mobile",
+                        "android" : "android",
+                        "ios" : "ios"
+                      },
+                      "productDetailUrl" : {
+                        "pc" : "pc",
+                        "mobile" : "mobile"
+                      }
+                    }
+  /malls/shopby-partner:
+    get:
+      tags:
+        - Mall
+      summary: 쇼핑몰 자체 파트너 조회
+      description: |
+        ### 몰의 쇼핑몰 자체 파트너를 조회하는 API입니다.
+      operationId: get-shopby-partner
+      parameters:
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n"
+          required: false
+          schema:
+            type: string
+          example: Bearer ABCDERAdjflaskjdfosiaetlkfs
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다\
+            .<br>\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n "
+          required: false
+          schema:
+            type: string
+          example: 각 어드민에서 복사된 값
+        - name: Version
+          in: header
+          description: API 버전
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/malls-shopby-partner1061824175'
+              examples:
+                get-shopby-partner:
+                  value: |-
+                    {
+                      "partnerNo" : 101,
+                      "partnerName" : "쇼핑몰 자체 상품"
+                    }
+  /malls/contracts/partners:
+    get:
+      tags:
+        - Partner
+      summary: 계약된 파트너 정보 조회하기
+      description:
+        "\n## 부가설명 및 특이사항\nmallKey를 기준으로 계약된 파트너 정보를 조회하는 API 입니다.\n\n\
+        mallKey는 반드시 입력해야하며 파트너 번호가 없는 경우 모든 파트너에 대해 조회합니다.\n\n #### 정산 유형\n - DAY:\
+        \ 일 정산\n- WEEK: 주 정산\n- MONTH: 월 정산\n \n #### 정산 타입\n - TOMORROW: 전일\n- YESTERDAY:\
+        \ 익일\n \n #### 정산 요일\n [MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY,\
+        \ SUNDAY]\n "
+      operationId: get-contracted-partners
+      parameters:
+        - name: partnerNos
+          in: query
+          description: 파트너 번호 목록
+          required: false
+          schema:
+            type: string
+          example: '1,2'
+        - name: partnerMappingKeys
+          in: query
+          description: 파트너 매핑키
+          required: false
+          schema:
+            type: string
+          example: '1,2'
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n"
+          required: false
+          schema:
+            type: string
+          example: Bearer ABCDERAdjflaskjdfosiaetlkfs
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다\
+            .<br>\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n "
+          required: false
+          schema:
+            type: string
+          example: 각 어드민에서 복사된 값
+        - name: Version
+          in: header
+          description: API 버전
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/malls-contracts-partners-1832611812'
+              examples:
+                get-contracted-partners:
+                  value: |-
+                    [ {
+                      "partnerNo" : 1,
+                      "partnerName" : "test",
+                      "companyName" : "testCompany",
+                      "partnerMappingKey" : null,
+                      "commissionRate" : 12.1,
+                      "promotionAgreed" : true,
+                      "startedDateTime" : "2025-10-27T12:03:26.261124261",
+                      "externalApiKey" : "encryptedApiKey",
+                      "partnerType" : "NORMAL",
+                      "agreementDateTime" : "2025-10-22T12:03:26.261159669",
+                      "settlementConfig" : {
+                        "settlementPeriodType" : "MONTH",
+                        "domesticProvisionRate" : 100,
+                        "domesticSettlementDay" : 5,
+                        "domesticSettlementHolidayType" : "YESTERDAY",
+                        "domesticSettlementDayOfWeek" : "FRIDAY",
+                        "overseasProvisionRate" : 100,
+                        "overseasSettlementDay" : 5,
+                        "overseasSettlementHolidayType" : "YESTERDAY",
+                        "overseasSettlementDayOfWeek" : "MONDAY"
+                      }
+                    } ]
+  /partners:
+    post:
+      tags:
+        - Partner
+      summary: 파트너 등록하기
+      description:
+        "## 부가설명 및 특이사항\n 쇼핑몰에 파트너를 등록하는 API 입니다.\n\n * 국내 파트너사에 경우에만 API로\
+        \ 파트너 등록 가능합니다. 해외 파트너사는 서비스어드민을 통해서 등록하시기 바랍니다.\n * API로 파트너를 등록하는 경우 개인정\
+        보 수집 및 이용 동의 절차를 진행하지 않기에 파트너사에 별도로 개인정보 수집 및 이용 동의를 받아야 합니다.\n * API로 파트너\
+        \ 등록 시 입점 계약서는 '사용 안 함' 상태로 등록됩니다.\n   * 입점 계약서 사용을 원하시는 경우 파트너 등록 후 [서비스어\
+        드민> 파트너관리> 파트너조회]에서 해당 파트너사의 거래쇼핑몰 '계약등록'하시면 됩니다. \n * API로 파트너 등록 시 마스터운영\
+        자 휴대폰 번호는 본인인증 절차 없이 등록됩니다.\n   * 휴대폰 번호를 잘못 입력한 경우 '운영자 휴대폰 인증'이 되지 않기에 유\
+        효하지 않은 휴대폰번호가 등록되는 일이 없도록 꼭 확인하시기 바랍니다.\n * 비밀번호가 공유되지 않도록 파트너 등록 후 파트너사 운\
+        영자에게 비밀번호를 수정할 수 있도록 안내 부탁드립니다.\n \n \n## 참고\n 입력 항목에 대한 설명은 'API업데이트 > [신\
+        규] 파트너 등록하기 API - 추가'에서 확인하실 수 있습니다. [API업데이트 게시판 바로가기 >](https://workspace.nhn-commerce.com/apiUpdate)\n\
+        \  \n * merchandiserNo(담당MD) :운영자번호 번호 입력 (거래쇼핑몰 권한 + 상품MD 권한이 있는 운영자만 지정\
+        \ 가능)\n   * 서비스어드민> 서비스관리> 운영자 관리에서 운영자번호 확인 가능합니다.   \n  \n * id(마스터 운영자\
+        \ 어드민 아이디) : \n   * 중복불가 [어드민 아이디 중복 체크하기 API >](https://server-docs.shopby.co.kr/#/Partner/get-partners-exist-admin-id)\n\
+        \   * id 시작은 소문자로시작해야 합니다.\n   * 그 뒤에는 영문 대소문자와 숫자로 구성된 4자에서 19자 사이의 문자열이\
+        \ 와야 합니다.\n   * 전체 길이는 최소 5자(첫 소문자 + 4자)에서 최대 20자(첫 소문자 + 19자)입니다.\n * partnerName(파\
+        트너명) : 중복불가  : [파트너명 중복 체크하기 API >](https://server-docs.shopby.co.kr/#/Partner/get-partners-exist-partner-name)\
+        \  \n * bank(은행코드) : [은행코드 바로가기 >](https://workspace.nhn-commerce.com/support/recommendedContents/193355)\
+        \  \n   * 은행코드를 제공하지 않는 은행인 경우 null로 입력 후 bankName(은행명)에 은행명을 기입하시기 바랍니다.\n\
+        \  \n * bankName(은행명) :\n   * bank(은행코드)에 은행코드를 입력한 경우 null로 입력\n   * bank(은\
+        행코드) null로 입력한 경우 은행명 입력\n   \n * 이메일 유효성 검사 조건\n   * 로컬 파트(@ 앞쪽): 허용되는 특수\
+        \ 문자(.!#-'*+/-9=?A-Z^-~), 대문자, 숫자 등을 포함하는 0에서 64자 길이의 문자열.\n   * 도메인 파트(@\
+        \ 뒤쪽): 첫 글자는 영문자나 숫자로 시작하고, 중간에 하이픈을 포함할 수 있으며, 최대 63자 길이의 도메인 라벨.\n   * ex)\
+        \ test@example.com, john.doe\"@example.com, user.name+tag@sub.domain.com\n\
+        \n * 전화번호 유효성 검사 조건\n   * 숫자 2-4자리, 하이픈, 숫자 3-5자리, 하이픈, 숫자 4자리 (예: 123-456-7890)\n\
+        \   * 숫자 4자리, 하이픈, 숫자 4자리 (예: 1234-5678)\n   * 숫자 8-12자리 연속된 숫자 (예: 12345678,\
+        \ 123456789012)\n \n #### 과세형태\n - NORMAL: 일반과세자\n- SIMPLE: 간이과세자\n- VAT_FREE:\
+        \ 부가세 면세사업자\n- CORPORATION: 법인사업자\n- FREE_CORPORATION: 면세법인사업자\n- ETC: 기타\n\
+        \ \n #### 정산 유형\n - DAY: 일 정산\n- WEEK: 주 정산\n- MONTH: 월 정산\n \n #### 정산 타입\
+        \n - TOMORROW: 전일\n- YESTERDAY: 익일\n "
+      operationId: post-partners
+      parameters:
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n"
+          required: false
+          schema:
+            type: string
+          example: Bearer ABCDERAdjflaskjdfosiaetlkfs
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다\
+            .<br>\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n "
+          required: false
+          schema:
+            type: string
+          example: 각 어드민에서 복사된 값
+        - name: Version
+          in: header
+          description: API 버전
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/partners-669982228'
+            examples:
+              post-partners:
+                value: |-
+                  {
+                    "partnerName" : "partner-name",
+                    "merchandiserNo" : 2345,
+                    "promotionAgreedYn" : true,
+                    "commissionRate" : 0,
+                    "companyName" : "test-company",
+                    "faxNo" : "01234567890",
+                    "sellerTaxationType" : "NORMAL",
+                    "business" : {
+                      "registrationNo" : "1234567890",
+                      "condition" : "업태",
+                      "type" : "업종",
+                      "onlineMarketingDeclarationNo" : "111"
+                    },
+                    "office" : {
+                      "zipCode" : "12345",
+                      "streetAddress1" : "서울시 구로구 디지털로 26길",
+                      "streetAddress2" : "72",
+                      "jibunAddress1" : "도로명 주소",
+                      "jibunAddress2" : "도로명 주소 상세"
+                    },
+                    "representative" : {
+                      "name" : "대표자이름",
+                      "phoneNo" : "01012341234",
+                      "email" : "abcd@gmail.com"
+                    },
+                    "settlementManager" : {
+                      "name" : "정산담당자",
+                      "phoneNo" : "01012341234",
+                      "email" : "abcd@gmail.com"
+                    },
+                    "settlementConfig" : {
+                      "settlementPeriodType" : "MONTH",
+                      "domesticSettlementDay" : 5,
+                      "domesticSettlementHolidayType" : "YESTERDAY",
+                      "domesticSettlementDayOfWeek" : "FRIDAY",
+                      "overseasSettlementDay" : 5,
+                      "overseasSettlementHolidayType" : "YESTERDAY",
+                      "overseasSettlementDayOfWeek" : "MONDAY"
+                    },
+                    "tradeBank" : {
+                      "bank" : "KB",
+                      "bankName" : "국민은행",
+                      "account" : "12341234",
+                      "depositorName" : "홍길동"
+                    },
+                    "privacyManager" : {
+                      "name" : "개인정보책임자",
+                      "phoneNo" : "01012341234"
+                    },
+                    "manager" : {
+                      "name" : "최매니저",
+                      "jobDuty" : "매니저",
+                      "jobPosition" : "대리",
+                      "department" : "전자판매A",
+                      "phoneNo" : "010-1111-1111",
+                      "email" : ""
+                    },
+                    "csManager" : {
+                      "csManagerName" : "홍길동",
+                      "csManagerPhoneNo" : "1800-3859",
+                      "csManagerEmail" : "nhn@nhn.com",
+                      "csManagerOperationInfo" : "평일 10:00 ~ 19:00"
+                    },
+                    "admin" : {
+                      "id" : "adminTest",
+                      "password" : "admin!@#123",
+                      "name" : "admin-test",
+                      "email" : "email@aa.cc",
+                      "jobDuty" : "jobDuty",
+                      "departmentName" : "개발부",
+                      "jobPosition" : "대리",
+                      "phoneNo" : "010-1234-1234",
+                      "mobileNo" : "010-1234-1234",
+                      "externalAccessEnabled" : false
+                    },
+                    "partnerMappingKey" : null
+                  }
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partners-temp970273924'
+              examples:
+                post-partners:
+                  value: |-
+                    {
+                      "partnerNo" : 1
+                    }
+  /partners/temp:
+    post:
+      tags:
+        - Partner
+      summary: 임시 파트너 등록하기
+      description:
+        "## 부가설명 및 특이사항\n 쇼핑몰에 임시 파트너를 등록하는 API 입니다.\n \n## 참고\n * merchandiserNo(담\
+        당MD) :운영자번호 번호 입력 (거래쇼핑몰 권한 + 상품MD 권한이 있는 운영자만 지정 가능)\n   * 서비스어드민> 서비스관리\
+        > 운영자 관리에서 운영자번호 확인 가능합니다.   \n  \n * partnerName(파트너명) : 중복불가  : [파트너명 중복\
+        \ 체크하기 API >](https://server-docs.shopby.co.kr/#/Partner/get-partners-exist-partner-name)\
+        \  \n   \n * 이메일 유효성 검사 조건\n   * 로컬 파트(@ 앞쪽): 허용되는 특수 문자(.!#-'*+/-9=?A-Z^-~),\
+        \ 대문자, 숫자 등을 포함하는 0에서 64자 길이의 문자열.\n   * 도메인 파트(@ 뒤쪽): 첫 글자는 영문자나 숫자로 시작하고\
+        , 중간에 하이픈을 포함할 수 있으며, 최대 63자 길이의 도메인 라벨.\n   * ex) test@example.com, john.doe\"\
+        @example.com, user.name+tag@sub.domain.com\n"
+      operationId: post-temp-partners
+      parameters:
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n"
+          required: false
+          schema:
+            type: string
+          example: Bearer ABCDERAdjflaskjdfosiaetlkfs
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다\
+            .<br>\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n "
+          required: false
+          schema:
+            type: string
+          example: 각 어드민에서 복사된 값
+        - name: Version
+          in: header
+          description: API 버전
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/partners-temp-486261392'
+            examples:
+              post-temp-partners:
+                value: |-
+                  {
+                    "partnerName" : "신규 파트너",
+                    "adminName" : "홍길동",
+                    "adminEmail" : "gildong.hong@nhn.com",
+                    "merchandiserNo" : 10,
+                    "memo" : "각 항목들을 정확히 입력해주세요",
+                    "commissionRate" : 1,
+                    "contractContent" : "<p>입점 계약 내용</p>",
+                    "dependencyYn" : false,
+                    "settlementConfig" : {
+                      "settlementPeriodType" : "MONTH",
+                      "domesticSettlementDay" : 5,
+                      "domesticSettlementHolidayType" : "YESTERDAY",
+                      "domesticSettlementDayOfWeek" : "FRIDAY",
+                      "overseasSettlementDay" : 5,
+                      "overseasSettlementHolidayType" : "YESTERDAY",
+                      "overseasSettlementDayOfWeek" : "MONDAY"
+                    }
+                  }
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partners-temp970273924'
+              examples:
+                post-temp-partners:
+                  value: |-
+                    {
+                      "partnerNo" : 1
+                    }
+  /partners/{partnerNo}:
+    get:
+      tags:
+        - Partner
+      summary: 몰과 계약된 파트너 조회
+      description:
+        "## 부가설명 및 특이사항\n 쇼핑몰과 계약 파트너를 조회하는 api 입니다.\n \n### 파트너 상태\n-\
+        \ WAITING: 등록대기\n- INVESTIGATION: 검토중\n- ACTIVE: 등록완료\n\n### 파트너 유형\n- NORMAL:\
+        \ 일반\n- MALLDELIVERY: 배송파트너 (deprecated)\n- DELIVERY: 배송파트너\n- SHOPBY: 샵바이\
+        \ 파트너\n\n### 과세 형태\n- NORMAL: 일반과세자\n- SIMPLE: 간이과세자\n- VAT_FREE: 부가세 면세사업\
+        자\n- CORPORATION: 법인사업자\n- FREE_CORPORATION: 면세법인사업자\n- ETC: 기타\n\n### 어드민\
+        \ 상태\n- WAITING: 등록대기\n- INVESTIGATION: 검토중\n- ACTIVE: 등록완료\n- DELETE: 삭제\n\
+        - LOCKED: 로그인 잠금\n- DORMANT: 휴면\n\n### 어드민 권한\n- MASTER: 마스터\n- NORMAL: 일반\
+        \n\n### 어드민 타입\n- PLATFORM: 플랫폼 어드민\n- SERVICE: 서비스 어드민\n- PARTNER: 파트너 어드\
+        민\n- SHOPBY: 샵바이 어드민\n- DEVELOPER: 개발자"
+      operationId: get-mall-contracted-partner-info
+      parameters:
+        - name: partnerNo
+          in: path
+          description: 파트너 번호
+          required: true
+          schema:
+            type: string
+          example: '1'
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n"
+          required: false
+          schema:
+            type: string
+          example: Bearer ABCDERAdjflaskjdfosiaetlkfs
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다\
+            .<br>\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n "
+          required: false
+          schema:
+            type: string
+          example: 각 어드민에서 복사된 값
+        - name: Version
+          in: header
+          description: API 버전
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partners-partnerNo-1680407816'
+              examples:
+                get-mall-contracted-partner-info:
+                  value: |-
+                    {
+                      "partnerNo" : 1,
+                      "partnerType" : "NORMAL",
+                      "partnerName" : "홍길동",
+                      "companyName" : "NCP",
+                      "partnerStatus" : "ACTIVE",
+                      "faxNo" : "",
+                      "sampleUrl" : "https://www.e-ncp.com.com/",
+                      "permittedIpAddress" : "",
+                      "countryCode" : "KR",
+                      "sellerTaxationType" : "NORMAL",
+                      "supportsInternationalShipping" : false,
+                      "business" : {
+                        "registrationNo" : "1234567890",
+                        "onlineMarketingDeclarationNo" : "2023-경기성남-0001",
+                        "condition" : "도소매",
+                        "type" : "전자상거래업"
+                      },
+                      "office" : {
+                        "country" : "KR",
+                        "zipCode" : "13487",
+                        "address" : "경기도 성남시 분당구 대왕판교로645번길 16",
+                        "detailAddress" : "(삼평동, NHN) 7층",
+                        "jibun" : "경기도 성남시 분당구 삼평동 629",
+                        "jibunDetail" : "NHN 플레이뮤지엄 7층",
+                        "city" : "",
+                        "stateOrRegion" : ""
+                      },
+                      "representative" : {
+                        "name" : "김대표",
+                        "phoneNo" : "01012341234",
+                        "email" : "representative.kim@nhn.com"
+                      },
+                      "manager" : {
+                        "name" : "이관리",
+                        "department" : "커머스 사업본부",
+                        "jobDuty" : "담당자",
+                        "jobPosition" : "선임",
+                        "phoneNo" : "01056785678",
+                        "email" : "manager.lee@nhn.com"
+                      },
+                      "privacyManager" : {
+                        "name" : "박보호",
+                        "phoneNo" : "01013572468"
+                      },
+                      "settlementManager" : {
+                        "name" : "최정산",
+                        "phoneNo" : "01024681357",
+                        "email" : "settlement.choi@nhn.com"
+                      },
+                      "tradeBank" : {
+                        "bank" : "SHINHAN",
+                        "bankName" : "신한은행",
+                        "account" : "110123123456",
+                        "depositorName" : "최정산"
+                      },
+                      "internationalCode" : {
+                        "swiftCode" : "",
+                        "abaRoutingNo" : "",
+                        "ibanCode" : "",
+                        "bsbCode" : ""
+                      },
+                      "masterAdminNo" : 1,
+                      "masterAdminSummary" : {
+                        "adminNo" : 1,
+                        "adminName" : "test",
+                        "adminId" : "test",
+                        "jobPositionName" : "",
+                        "departmentName" : "",
+                        "jobDutyName" : "",
+                        "email" : "nhn@nhncommerce.com",
+                        "phoneNo" : "010-1111-1111",
+                        "mobileNo" : "010-1111-1111",
+                        "externalAccessEnabled" : false,
+                        "permittedIpAddresses" : [ ],
+                        "phoneCertificationYn" : false,
+                        "expireDateTime" : null,
+                        "adminStatus" : "ACTIVE",
+                        "adminType" : "SERVICE",
+                        "adminRole" : "MASTER",
+                        "serviceNo" : 3,
+                        "partnerNo" : null
+                      },
+                      "settlementConfig" : {
+                        "settlementPeriodType" : "MONTH",
+                        "domesticProvisionRate" : 100,
+                        "domesticSettlementDay" : 5,
+                        "domesticSettlementHolidayType" : "YESTERDAY",
+                        "domesticSettlementDayOfWeek" : null,
+                        "overseasProvisionRate" : 100,
+                        "overseasSettlementDay" : 5,
+                        "overseasSettlementHolidayType" : "YESTERDAY",
+                        "overseasSettlementDayOfWeek" : null
+                      },
+                      "csManager" : {
+                        "name" : "홍길동",
+                        "phoneNo" : "1800-3859",
+                        "email" : "nhn@nhn.com",
+                        "operationInfo" : "평일 10:00 ~ 19:00"
+                      }
+                    }
+    put:
+      tags:
+        - Partner
+      summary: 파트너 수정하기
+      description:
+        "## 부가설명 및 특이사항\n 쇼핑몰에 파트너를 수정하는 API 입니다.\n\n * bank(은행코드) : [은\
+        행코드 바로가기 >](https://workspace.nhn-commerce.com/support/recommendedContents/193355)\
+        \  \n   * 은행코드를 제공하지 않는 은행인 경우 null로 입력 후 bankName(은행명)에 은행명을 기입하시기 바랍니다.\n\
+        \  \n * bankName(은행명) :\n   * bank(은행코드)에 은행코드를 입력한 경우 null로 입력\n   * bank(은\
+        행코드) null로 입력한 경우 은행명 입력\n   \n * 이메일 유효성 검사 조건\n   * 로컬 파트(@ 앞쪽): 허용되는 특수\
+        \ 문자(.!#-'*+/-9=?A-Z^-~), 대문자, 숫자 등을 포함하는 0에서 64자 길이의 문자열.\n   * 도메인 파트(@\
+        \ 뒤쪽): 첫 글자는 영문자나 숫자로 시작하고, 중간에 하이픈을 포함할 수 있으며, 최대 63자 길이의 도메인 라벨.\n   * ex)\
+        \ test@example.com, john.doe\"@example.com, user.name+tag@sub.domain.com\n\
+        \n * 전화번호 유효성 검사 조건\n   * 숫자 2-4자리, 하이픈, 숫자 3-5자리, 하이픈, 숫자 4자리 (예: 123-456-7890)\n\
+        \   * 숫자 4자리, 하이픈, 숫자 4자리 (예: 1234-5678)\n   * 숫자 8-12자리 연속된 숫자 (예: 12345678,\
+        \ 123456789012)\n \n #### 과세형태\n - NORMAL: 일반과세자\n- SIMPLE: 간이과세자\n- VAT_FREE:\
+        \ 부가세 면세사업자\n- CORPORATION: 법인사업자\n- FREE_CORPORATION: 면세법인사업자\n- ETC: 기타\n\
+        \ "
+      operationId: put-partner
+      parameters:
+        - name: partnerNo
+          in: path
+          description: 파트너 번호
+          required: true
+          schema:
+            type: string
+          example: '1'
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n"
+          required: false
+          schema:
+            type: string
+          example: Bearer ABCDERAdjflaskjdfosiaetlkfs
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다\
+            .<br>\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n "
+          required: false
+          schema:
+            type: string
+          example: 각 어드민에서 복사된 값
+        - name: Version
+          in: header
+          description: API 버전
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/partners-partnerNo-12575770'
+            examples:
+              put-partner:
+                value: |-
+                  {
+                    "office" : {
+                      "zipCode" : "12345",
+                      "address" : "서울시 구로구 디지털로 26길",
+                      "detailAddress" : "72",
+                      "jibun" : "도로명 주소",
+                      "jibunDetail" : "도로명 주소 상세"
+                    },
+                    "companyName" : "test-company",
+                    "sellerTaxationType" : "NORMAL",
+                    "faxNo" : "01234567890",
+                    "representative" : {
+                      "name" : "대표자이름",
+                      "phoneNo" : "01012341234",
+                      "email" : "abcd@gmail.com"
+                    },
+                    "business" : {
+                      "registrationNo" : "1234567890",
+                      "condition" : "업태",
+                      "type" : "업종",
+                      "onlineMarketingDeclarationNo" : "111"
+                    },
+                    "settlementManager" : {
+                      "name" : "정산담당자",
+                      "phoneNo" : "01012341234",
+                      "email" : "abcd@gmail.com"
+                    },
+                    "tradeBank" : {
+                      "bank" : "KB",
+                      "bankName" : "국민은행",
+                      "account" : "12341234",
+                      "depositorName" : "홍길동"
+                    },
+                    "permittedIpAddress" : "",
+                    "privacyManager" : {
+                      "name" : "개인정보책임자",
+                      "phoneNo" : "01012341234"
+                    },
+                    "manager" : {
+                      "name" : "최매니저",
+                      "jobDuty" : "매니저",
+                      "jobPosition" : "대리",
+                      "department" : "전자판매A",
+                      "phoneNo" : "010-1111-1111",
+                      "email" : ""
+                    },
+                    "sampleUrl" : "sampleUrl",
+                    "csManager" : {
+                      "name" : "홍길동",
+                      "phoneNo" : "1800-3859",
+                      "email" : "nhn@nhn.com",
+                      "operationInfo" : "평일 10:00 ~ 19:00"
+                    }
+                  }
+      responses:
+        '204':
+          description: '204'
+  /partners/exist/admin-id:
+    get:
+      tags:
+        - Partner
+      summary: 어드민아이디 중복 체크하기
+      description: |-
+        ## 부가설명 및 특이사항
+         어드민아이디 중복 체크하는 API입니다.
+      operationId: get-partners-exist-admin-id
+      parameters:
+        - name: adminId
+          in: query
+          description: 어드민아이디
+          required: true
+          schema:
+            type: string
+          example: adminId
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n"
+          required: false
+          schema:
+            type: string
+          example: Bearer ABCDERAdjflaskjdfosiaetlkfs
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다\
+            .<br>\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n "
+          required: false
+          schema:
+            type: string
+          example: 각 어드민에서 복사된 값
+        - name: Version
+          in: header
+          description: API 버전
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partners-exist-admin-id1887798343'
+              examples:
+                get-partners-exist-admin-id:
+                  value: |-
+                    {
+                      "result" : false
+                    }
+  /partners/exist/partner-name:
+    get:
+      tags:
+        - Partner
+      summary: 파트너명 중복 체크하기
+      description: |-
+        ## 부가설명 및 특이사항
+         파트너명 중복 체크하는 API입니다.
+      operationId: get-partners-exist-partner-name
+      parameters:
+        - name: partnerName
+          in: query
+          description: 파트너명
+          required: true
+          schema:
+            type: string
+          example: partnerTest
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n"
+          required: false
+          schema:
+            type: string
+          example: Bearer ABCDERAdjflaskjdfosiaetlkfs
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다\
+            .<br>\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n "
+          required: false
+          schema:
+            type: string
+          example: 각 어드민에서 복사된 값
+        - name: Version
+          in: header
+          description: API 버전
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/partners-exist-admin-id1887798343'
+              examples:
+                get-partners-exist-partner-name:
+                  value: |-
+                    {
+                      "result" : false
+                    }
+  /services:
+    get:
+      tags:
+        - Service
+      summary: 서비스 상세 조회
+      description: 서비스 상세 조회
+      operationId: get-service-detail
+      parameters:
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n"
+          required: false
+          schema:
+            type: string
+          example: Bearer ABCDERAdjflaskjdfosiaetlkfs
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br>\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니다\
+            .<br>\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br>\n\n "
+          required: false
+          schema:
+            type: string
+          example: 각 어드민에서 복사된 값
+        - name: Version
+          in: header
+          description: API 버전
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/services-1386425601'
+              examples:
+                get-service-detail:
+                  value: |-
+                    {
+                      "serviceName" : "서비스 이름",
+                      "servicePlan" : "PRO",
+                      "representative" : {
+                        "name" : "name",
+                        "phoneNo" : null,
+                        "email" : null
+                      },
+                      "address" : {
+                        "zipCode" : "zipCode",
+                        "address" : "address",
+                        "detailAddress" : "detailAddress",
+                        "jibun" : "jibun",
+                        "jibunDetail" : "jibunDetail"
+                      },
+                      "business" : {
+                        "registrationNo" : "",
+                        "onlineMarketingDeclarationNo" : "",
+                        "condition" : "",
+                        "type" : ""
+                      }
+                    }
+components:
+  schemas:
+    admins1091512367:
+      type: object
+      properties:
+        authorityGroupName:
+          type: string
+          description: 권한그룹명
+          example: 권한그룹명
+        permitsPrivateInformation:
+          type: boolean
+          description: 개인정보 열람가능 여부
+          example: false
+      description: ''
+    partners-exist-admin-id1887798343:
+      type: object
+      properties:
+        result:
+          type: boolean
+          description: 중복 확인 결과
+      description: ''
+    services-1386425601:
+      type: object
+      properties:
+        address:
+          type: object
+          properties:
+            zipCode:
+              type: string
+              description: 우편번호
+              example: zipCode
+            address:
+              type: string
+              description: 도로명주소
+              example: address
+            jibunDetail:
+              type: string
+              description: 지번주소 상세 (nullable)
+              example: jibunDetail
+            detailAddress:
+              type: string
+              description: 도로명주소 상세 (nullable)
+              example: detailAddress
+            jibun:
+              type: string
+              description: 지번주소
+              example: jibun
+          description: ''
+        servicePlan:
+          type: string
+          description: 서비스 플랜
+          example: |-
+            - STANDARD: 스탠다드
+            - PRO: 프로
+            - PREMIUM: 엔터프라이즈
+            - BASIC: 베이직
+        business:
+          type: object
+          properties:
+            condition:
+              type: string
+              description: 업태
+              example: ''
+            registrationNo:
+              type: string
+              description: 사업자 등록번호
+              example: ''
+            type:
+              type: string
+              description: 업종
+              example: ''
+            onlineMarketingDeclarationNo:
+              type: string
+              description: 통신판매신고번호
+              example: ''
+          description: ''
+        serviceName:
+          type: string
+          description: 서비스 이름
+          example: 서비스 이름
+        representative:
+          type: object
+          properties:
+            name:
+              type: string
+              description: 대표자명
+              example: name
+            email:
+              type: string
+              description: 대표 이메일
+              example: 'null'
+            phoneNo:
+              type: string
+              description: 대표 전화번호
+              example: 'null'
+          description: ''
+      description: ''
+    admins-merchandisers-1458267913:
+      type: array
+      description: ''
+      items:
+        type: object
+        properties:
+          adminNo:
+            type: number
+            description: 운영자 번호
+            example: 1
+          name:
+            type: string
+            description: 운영자 이름
+            example: test
+          id:
+            type: string
+            description: 운영자 아이디
+            example: test
+    malls-shopby-partner1061824175:
+      type: object
+      properties:
+        partnerNo:
+          type: number
+          description: 파트너 번호
+          example: 101
+        partnerName:
+          type: string
+          description: 파트너 이름
+          example: 쇼핑몰 자체 상품
+      description: ''
+    partners-partnerNo-12575770:
+      type: object
+      properties:
+        csManager:
+          type: object
+          properties:
+            operationInfo:
+              type: string
+              description: '파트너 CS 운영시간(제약조건 - 최대길이: 255) (nullable)'
+              example: 평일 10:00 ~ 19:00
+            name:
+              type: string
+              description: '파트너 CS 담당자명(제약조건 - 최대길이: 30) (nullable)'
+              example: 홍길동
+            email:
+              type: string
+              description: 파트너 CS 담당자 email (nullable)
+              example: nhn@nhn.com
+            phoneNo:
+              type: string
+              description: 파트너 CS 담당자 전화번호 (nullable)
+              example: 1800-3859
+          description: "고객 CS 운영자 정보 (nullable)^|CsManagerUpdateRequest(name=홍길동,\
+            \ phoneNo=1800-3859, email=nhn@nhn.com, operationInfo=평일 10:00 ~ 19:00)"
+        manager:
+          type: object
+          properties:
+            jobDuty:
+              type: string
+              description: '담당자 직책(제약조건 - 최대길이: 50) (nullable)'
+              example: 매니저
+            name:
+              type: string
+              description: '담당자 이름(제약조건 - 최대길이: 30) (nullable)'
+              example: 최매니저
+            department:
+              type: string
+              description: '담당자 부서(제약조건 - 최대길이: 50) (nullable)'
+              example: 전자판매A
+            email:
+              type: string
+              description: 담당자 이메일 (nullable)
+              example: ''
+            phoneNo:
+              type: string
+              description: 담당자 전화번호 (nullable)
+              example: 010-1111-1111
+            jobPosition:
+              type: string
+              description: '담당자 직급(제약조건 - 최대길이: 50) (nullable)'
+              example: 대리
+          description: "담당자 정보 (nullable)^|ManagerUpdateRequest(name=최매니저, jobDuty=매\
+            니저, jobPosition=대리, department=전자판매A, phoneNo=010-1111-1111, email=)"
+        business:
+          type: object
+          properties:
+            condition:
+              type: string
+              description: '업태(제약조건 - 최대길이: 50) (nullable)'
+              example: 업태
+            registrationNo:
+              type: string
+              description: '사업자 등록번호(제약조건 - 최대길이: 30) (nullable)'
+              example: '1234567890'
+            type:
+              type: string
+              description: '업종(제약조건 - 최대길이: 50) (nullable)'
+              example: 업종
+            onlineMarketingDeclarationNo:
+              type: string
+              description: '통신판매 신고번호(제약조건 - 최대길이: 50) (nullable)'
+              example: '111'
+          description: "사업자 정보 (nullable)^|BusinessUpdateRequest(registrationNo=1234567890,\
+            \ condition=업태, type=업종, onlineMarketingDeclarationNo=111)"
+        permittedIpAddress:
+          type: string
+          description: 접속 허용 IP 주소 (nullable)
+          example: ''
+        privacyManager:
+          type: object
+          properties:
+            name:
+              type: string
+              description: '개인정보 관리 담당자명(제약조건 - 최대길이: 45) (nullable)'
+              example: 개인정보책임자
+            phoneNo:
+              type: string
+              description: 개인정보 관리 담당자 전화번호 (nullable)
+              example: '01012341234'
+          description: "개인정보 관리 책임자 정보 (nullable)^|PrivacyManagerUpdateRequest(name=개\
+            인정보책임자, phoneNo=01012341234)"
+        sellerTaxationType:
+          type: string
+          description: 과세 형태 (nullable)
+          example: NORMAL
+          enum:
+            - 'NORMAL: 일반과세자'
+            - 'SIMPLE: 간이과세자'
+            - 'VAT_FREE: 부가세 면세사업자'
+            - 'CORPORATION: 법인사업자'
+            - 'FREE_CORPORATION: 면세법인사업자'
+            - 'ETC: 기타'
+        companyName:
+          type: string
+          description: '회사명(제약조건 - 최대길이: 45) (nullable)'
+          example: test-company
+        settlementManager:
+          type: object
+          properties:
+            name:
+              type: string
+              description: '정산담당자 이름(제약조건 - 최대길이: 50) (nullable)'
+              example: 정산담당자
+            email:
+              type: string
+              description: 정산담당자 이메일 (nullable)
+              example: abcd@gmail.com
+            phoneNo:
+              type: string
+              description: 정산담당자 전화번호 (nullable)
+              example: '01012341234'
+          description: "정산 담당자 정보 (nullable)^|SettlementManagerUpdateRequest(name=정\
+            산담당자, phoneNo=01012341234, email=abcd@gmail.com)"
+        office:
+          type: object
+          properties:
+            zipCode:
+              type: string
+              description: 우편번호 (nullable)
+              example: '12345'
+            address:
+              type: string
+              description: 도로명주소 (nullable)
+              example: 서울시 구로구 디지털로 26길
+            jibunDetail:
+              type: string
+              description: 지번주소 상세 (nullable)
+              example: 도로명 주소 상세
+            detailAddress:
+              type: string
+              description: 도로명주소 상세 (nullable)
+              example: '72'
+            jibun:
+              type: string
+              description: 지번주소 (nullable)
+              example: 도로명 주소
+          description: "사무실 주소 정보 (nullable)^|PartnerAddressUpdateRequest(zipCode=12345,\
+            \ address=서울시 구로구 디지털로 26길, detailAddress=72, jibun=도로명 주소, jibunDetail=도\
+            로명 주소 상세)"
+        sampleUrl:
+          type: string
+          description: 샘플 URL (nullable)
+          example: sampleUrl
+        faxNo:
+          type: string
+          description: '팩스 번호(제약조건 -최대길이: 50 ) (nullable)'
+          example: '01234567890'
+        tradeBank:
+          type: object
+          properties:
+            depositorName:
+              type: string
+              description: '예금주 명(제약조건 - 최대길이: 50) (nullable)'
+              example: 홍길동
+            bank:
+              type: string
+              description: 은행코드 (nullable)
+              example: KB
+              enum:
+                - 'ANONYMOUS: 미확인은행'
+                - 'KDB: 산업은행'
+                - 'IBK: 기업은행'
+                - 'KB: 국민은행'
+                - 'KEB: 외환은행'
+                - 'SUHYUP: 수협'
+                - 'SUHYUB_LOCAL_BANK: 수협중앙회'
+                - 'KEXIM: 수출입은행'
+                - 'NH: NH농협은행'
+                - 'NHLOCAL: 지역농축협'
+                - 'WOORI: 우리은행'
+                - 'SC: SC제일은행'
+                - 'CITY: 한국씨티은행'
+                - 'DAEGU: 대구은행'
+                - 'PUSAN: 부산은행'
+                - 'GWANGJU: 광주은행'
+                - 'JEJU: 제주은행'
+                - 'JEONBUK: 전북은행'
+                - 'GYEONGNAM: 경남은행'
+                - 'KFCC: 새마을금고'
+                - 'CU: 신협'
+                - 'SANGHO: 상호저축은행'
+                - 'HSBC: HSBC은행'
+                - 'DEUTSCHE: 도이치은행'
+                - 'NFCF: 산림조합중앙회'
+                - 'EPOST: 우체국'
+                - 'KEBHANA: KEB하나은행'
+                - 'SHINHAN: 신한은행'
+                - 'KBANK: 케이뱅크'
+                - 'KAKAO: 카카오뱅크'
+                - 'TOSS: 토스뱅크'
+                - 'YUANTA: 유안타증권'
+                - 'KBSEC: KB증권'
+                - 'MIRAE: 미래에셋증권'
+                - 'MIRAEDAEWOO: 미래에셋대우증권'
+                - 'SAMSUNG: 삼성증권'
+                - 'HANKOOK: 한국투자증권'
+                - 'NH_INVEST: NH투자증권'
+                - 'KYOBO: 교보증권'
+                - 'HI_INVEST: 하이투자증권'
+                - 'HMC_INVEST: HMC투자증권'
+                - 'KIWOOM: 키움증권'
+                - 'EBEST: 이베스트투자증권'
+                - 'SK: SK증권'
+                - 'DAISHIN: 대신증권'
+                - 'SOLOMON_INVEST: 솔로몬증권'
+                - 'HANHWA: 한화투자증권'
+                - 'HANA_INVEST: 하나금융투자'
+                - 'SHINHAN_INVEST: 신한금융투자'
+                - 'DONGBU: DB금융투자'
+                - 'EUGENE_INVEST: 유진투자증권'
+                - 'MERITZ_COMPREHENSIVE: 메리츠종합금융증권'
+                - 'BOOKOOK: 부국증권'
+                - 'SHINYOUNG: 신영증권'
+                - 'CAPE: 케이프투자증권'
+                - 'MIZUHO: 미즈호은행'
+                - 'UFJ: UFJ은행'
+                - 'SMBC: 미쓰이스미토모은행'
+                - 'RESONA: 리소나은행'
+            bankName:
+              type: string
+              description: '은행명(제약조건 - 최대길이: 50) (nullable)'
+              example: 국민은행
+            account:
+              type: string
+              description: '계좌번호(제약조건 - 최대길이: 100) (nullable)'
+              example: '12341234'
+          description: "계좌정보 (nullable)^|BankUpdateRequest(bank=KB, bankName=국민은행\
+            , account=12341234, depositorName=홍길동)"
+        representative:
+          type: object
+          properties:
+            name:
+              type: string
+              description: '대표자 이름(제약조건 - 최대길이: 50) (nullable)'
+              example: 대표자이름
+            email:
+              type: string
+              description: 대표자 이메일 (nullable)
+              example: abcd@gmail.com
+            phoneNo:
+              type: string
+              description: 대표자 전화번호 (nullable)
+              example: '01012341234'
+          description: "대표자 정보 (nullable)^|RepresentativeUpdateRequest(name=대표자이름\
+            , phoneNo=01012341234, email=abcd@gmail.com)"
+      description: ''
+    contracts-partnerNo-51369225:
+      type: object
+      properties:
+        startedDateTime:
+          type: string
+          description: 거래일시 (nullable)
+          example: 2023-12-11 18:25:34
+        commissionRate:
+          type: number
+          description: 수수료율
+          example: 1.100000000000000088817841970012523233890533447265625
+        merchandiserNo:
+          type: number
+          description: 담당MD 번호
+          example: 1
+        contractStatus:
+          type: string
+          description: 거래 상태
+          example: ACTIVE
+        contractType:
+          type: string
+          description: 거래 유형 (nullable)
+          example: ELECTRONIC
+        contractNo:
+          type: number
+          description: 계약번호
+          example: 1
+        promotionAgreed:
+          type: boolean
+          description: 프로모션 동의 여부
+          example: true
+        createdDateTime:
+          type: string
+          description: 생성일시
+          example: 2023-12-11 17:46:57
+        externalApiKey:
+          type: string
+          description: 쇼핑몰 외부 연동 키
+          example: key
+        partnerNo:
+          type: number
+          description: 파트너 번호
+          example: 1
+        settlementConfig:
+          type: object
+          properties:
+            overseasSettlementDayOfWeek:
+              type: string
+              description: 해외파트너 주 정산요일 (nullable)
+              example: MONDAY
+            domesticProvisionRate:
+              type: number
+              description: 국내파트너 지급비율
+              example: 100
+            domesticSettlementDay:
+              type: number
+              description: 국내파트너 정산예정일 (nullable)
+              example: 5
+            domesticSettlementHolidayType:
+              type: string
+              description: 국내파트너 휴일 정산타입 (nullable)
+              example: YESTERDAY
+              enum:
+                - 'TOMORROW: 전일'
+                - 'YESTERDAY: 익일'
+            overseasSettlementDay:
+              type: number
+              description: 해외파트너 정산예정일 (nullable)
+              example: 5
+            overseasSettlementHolidayType:
+              type: string
+              description: 해외파트너 휴일 정산타입 (nullable)
+              example: YESTERDAY
+              enum:
+                - 'TOMORROW: 전일'
+                - 'YESTERDAY: 익일'
+            domesticSettlementDayOfWeek:
+              type: string
+              description: 국내파트너 주 정산요일 (nullable)
+              example: FRIDAY
+            overseasProvisionRate:
+              type: number
+              description: 해외파트너 지급비율
+              example: 100
+            settlementPeriodType:
+              type: string
+              description: 정산유형
+              example: MONTH
+              enum:
+                - 'DAY: 일 정산'
+                - 'WEEK: 주 정산'
+                - 'MONTH: 월 정산'
+          description: 정산 설정
+        entryContracts:
+          type: array
+          description: ''
+          items:
+            type: object
+            properties:
+              agreedDateTime:
+                type: string
+                description: 동의일시 (nullable)
+                example: 2023-12-11 19:04:22
+              changeReason:
+                type: string
+                description: 입점계액서 변경 사유
+                example: ''
+              contents:
+                type: string
+                description: 입점계약서 내용
+                example: <p>입점계약서</p>
+              createdDateTime:
+                type: string
+                description: 생성일시
+                example: 2023-12-11 17:46:57
+              agreed:
+                type: boolean
+                description: 입점계약서 동의 여부
+                example: true
+        mallNo:
+          type: number
+          description: 쇼핑몰 번호
+          example: 1
+      description: ''
+    configurations-admin-domains1790762806:
+      type: array
+      description: ''
+      items:
+        type: object
+        properties:
+          deviceType:
+            type: string
+            description: 디바이스 타입
+            example: PC
+          mallId:
+            type: string
+            description: 쇼핑몰 ID
+            example: abc
+          domain:
+            type: string
+            description: 대표 도메인
+            example: abc.com
+          mallNo:
+            type: number
+            description: 쇼핑몰 번호
+            example: 1
+          ssl:
+            type: boolean
+            description: 보안서버 사용여부
+            example: true
+    admins-adminNo933950945:
+      type: object
+      properties:
+        departmentName:
+          type: string
+          description: 부서
+          example: ''
+        expireDateTime:
+          type: string
+          description: 만료일 (nullable)
+          example: 'null'
+        adminNo:
+          type: number
+          description: 어드민 번호
+          example: 1
+        adminType:
+          type: string
+          description: 어드민 타입
+          example: SERVICE
+        adminRole:
+          type: string
+          description: 어드민 권한
+          example: MASTER
+        mobileNo:
+          type: string
+          description: 휴대전화번호
+          example: 010-1111-1111
+        jobPositionName:
+          type: string
+          description: 직급
+          example: ''
+        phoneNo:
+          type: string
+          description: 전화번호
+          example: 010-1111-1111
+        adminName:
+          type: string
+          description: 운영자명
+          example: test
+        partnerNo:
+          type: number
+          description: 파트너 번호 (nullable)
+        permittedIpAddresses:
+          type: array
+          description: 접속 가능 IP
+          example: '[]'
+          items:
+            oneOf:
+              - type: object
+              - type: boolean
+              - type: string
+              - type: number
+        phoneCertificationYn:
+          type: boolean
+          description: 휴대폰 인증 여부
+          example: false
+        adminStatus:
+          type: string
+          description: 어드민 상태
+          example: ACTIVE
+        adminId:
+          type: string
+          description: 어드민 Id
+          example: test
+        serviceNo:
+          type: number
+          description: 서비스 번호 (nullable)
+          example: 3
+        jobDutyName:
+          type: string
+          description: 직책
+          example: ''
+        email:
+          type: string
+          description: 이메일
+          example: nhn@nhncommerce.com
+        externalAccessEnabled:
+          type: boolean
+          description: 외부접속 가능 여부
+          example: false
+      description: ''
+    malls-1901494364:
+      type: object
+      properties:
+        productDetailUrl:
+          type: object
+          properties:
+            pc:
+              type: string
+              description: PC 상품 상세페이지 URL (nullable)
+              example: pc
+            mobile:
+              type: string
+              description: 모바일 상품 상세페이지 URL (nullable)
+              example: mobile
+          description: ''
+        mallName:
+          type: string
+          description: 몰 이름
+          example: 몰 이름
+        url:
+          type: object
+          properties:
+            pc:
+              type: string
+              description: PC 웹 도메인 (nullable)
+              example: pc
+            android:
+              type: string
+              description: AOS 모바일 앱 정보 (nullable)
+              example: android
+            mobile:
+              type: string
+              description: 모바일 웹 도메인 (nullable)
+              example: mobile
+            ios:
+              type: string
+              description: iOS 모바일 앱 정보 (nullable)
+              example: ios
+          description: ''
+        mallType:
+          type: string
+          description: 몰 타입(deprecated)
+          example: NCP
+      description: ''
+    partners-partnerNo-1680407816:
+      type: object
+      properties:
+        csManager:
+          type: object
+          properties:
+            operationInfo:
+              type: string
+              description: CS 운영시간(개발중 - 현재 사용불가)
+              example: 평일 10:00 ~ 19:00
+            name:
+              type: string
+              description: 담당자명(개발중 - 현재 사용불가)
+              example: 홍길동
+            email:
+              type: string
+              description: 담당자 email(개발중 - 현재 사용불가)
+              example: nhn@nhn.com
+            phoneNo:
+              type: string
+              description: 담당자 전화번호(개발중 - 현재 사용불가)
+              example: 1800-3859
+          description:
+            "고객 CS 운영자 정보(개발중 - 현재 사용불가)^|PartnerCsManager(name=홍길동, phoneNo=1800-3859,\
+            \ email=nhn@nhn.com, operationInfo=평일 10:00 ~ 19:00)"
+        partnerStatus:
+          type: string
+          description: 파트너 상태
+          example: ACTIVE
+        masterAdminNo:
+          type: number
+          description: 계약 담당자(마스터 어드민) 번호 (nullable)
+          example: 1
+        manager:
+          type: object
+          properties:
+            jobDuty:
+              type: string
+              description: 담당자 직책 (nullable)
+              example: 담당자
+            name:
+              type: string
+              description: 담당자명 (nullable)
+              example: 이관리
+            department:
+              type: string
+              description: 담당자 부서 (nullable)
+              example: 커머스 사업본부
+            email:
+              type: string
+              description: 담당자 e메일 주소 (nullable)
+              example: manager.lee@nhn.com
+            phoneNo:
+              type: string
+              description: 담당자 전화번호
+              example: '01056785678'
+            jobPosition:
+              type: string
+              description: 담당자 직급 (nullable)
+              example: 선임
+          description: ''
+        business:
+          type: object
+          properties:
+            condition:
+              type: string
+              description: 업태 (nullable)
+              example: 도소매
+            registrationNo:
+              type: string
+              description: 사업자 등록번호 (nullable)
+              example: '1234567890'
+            type:
+              type: string
+              description: 업종 (nullable)
+              example: 전자상거래업
+            onlineMarketingDeclarationNo:
+              type: string
+              description: 통신판매 신고번호 (nullable)
+              example: 2023-경기성남-0001
+          description: ''
+        permittedIpAddress:
+          type: string
+          description: 접속 허용 IP 주소
+          example: ''
+        partnerName:
+          type: string
+          description: 파트너명 (nullable)
+          example: 홍길동
+        internationalCode:
+          type: object
+          properties:
+            ibanCode:
+              type: string
+              description: IBAN Code (nullable)
+              example: ''
+            abaRoutingNo:
+              type: string
+              description: ABA / Routing No. (nullable)
+              example: ''
+            swiftCode:
+              type: string
+              description: SWIFT Code (nullable)
+              example: ''
+            bsbCode:
+              type: string
+              description: BSB Code (nullable)
+              example: ''
+          description: ''
+        privacyManager:
+          type: object
+          properties:
+            name:
+              type: string
+              description: 개인정보 관리 담당자명 (nullable)
+              example: 박보호
+            phoneNo:
+              type: string
+              description: 개인정보 관리 담당자 전화번호
+              example: '01013572468'
+          description: ''
+        sellerTaxationType:
+          type: string
+          description: 과세 형태 (nullable)
+          example: NORMAL
+        companyName:
+          type: string
+          description: 회사명 (nullable)
+          example: NCP
+        settlementManager:
+          type: object
+          properties:
+            name:
+              type: string
+              description: 정산담당자 (nullable)
+              example: 최정산
+            email:
+              type: string
+              description: 정산담당자 e메일 (nullable)
+              example: settlement.choi@nhn.com
+            phoneNo:
+              type: string
+              description: 정산담당자 전화번호
+              example: '01024681357'
+          description: ''
+        office:
+          type: object
+          properties:
+            stateOrRegion:
+              type: string
+              description: 주 (해외) (nullable)
+              example: ''
+            zipCode:
+              type: string
+              description: 우편번호 (nullable)
+              example: '13487'
+            country:
+              type: string
+              description: 국가
+              example: KR
+            address:
+              type: string
+              description: 도로명주소 (한국) (nullable)
+              example: 경기도 성남시 분당구 대왕판교로645번길 16
+            jibunDetail:
+              type: string
+              description: 지번주소 상세 (한국) (nullable)
+              example: NHN 플레이뮤지엄 7층
+            city:
+              type: string
+              description: 도시 (해외) (nullable)
+              example: ''
+            detailAddress:
+              type: string
+              description: '도로명주소 상세 (한국) (nullable)^|(삼평동, NHN) 7층'
+            jibun:
+              type: string
+              description: 지번주소 (한국) (nullable)
+              example: 경기도 성남시 분당구 삼평동 629
+          description: ''
+        supportsInternationalShipping:
+          type: boolean
+          description: 해외배송 여부
+          example: false
+        partnerNo:
+          type: number
+          description: 파트너 번호
+          example: 1
+        sampleUrl:
+          type: string
+          description: 샘플 URL (nullable)
+          example: https://www.e-ncp.com.com/
+        settlementConfig:
+          type: object
+          properties:
+            overseasSettlementDayOfWeek:
+              type: string
+              description: 해외파트너 주 정산요일 (nullable)
+              example: 'null'
+            domesticProvisionRate:
+              type: number
+              description: 국내파트너 지급비율
+              example: 100
+            domesticSettlementDay:
+              type: number
+              description: 국내파트너 정산예정일 (nullable)
+              example: 5
+            domesticSettlementHolidayType:
+              type: string
+              description: 국내파트너 휴일 정산타입 (nullable)
+              example: YESTERDAY
+              enum:
+                - 'TOMORROW: 전일'
+                - 'YESTERDAY: 익일'
+            overseasSettlementDay:
+              type: number
+              description: 해외파트너 정산예정일 (nullable)
+              example: 5
+            overseasSettlementHolidayType:
+              type: string
+              description: 해외파트너 휴일 정산타입 (nullable)
+              example: YESTERDAY
+              enum:
+                - 'TOMORROW: 전일'
+                - 'YESTERDAY: 익일'
+            domesticSettlementDayOfWeek:
+              type: string
+              description: 국내파트너 주 정산요일 (nullable)
+              example: 'null'
+            overseasProvisionRate:
+              type: number
+              description: 해외파트너 지급비율
+              example: 100
+            settlementPeriodType:
+              type: string
+              description: 정산유형
+              example: MONTH
+              enum:
+                - 'DAY: 일 정산'
+                - 'WEEK: 주 정산'
+                - 'MONTH: 월 정산'
+          description: "정산 설정^|SettlementConfigDetail(settlementPeriodType=MONTH,\
+            \ domesticProvisionRate=100, domesticSettlementDay=5, domesticSettlementHolidayType=YESTERDAY,\
+            \ domesticSettlementDayOfWeek=null, overseasProvisionRate=100, overseasSettlementDay=5,\
+            \ overseasSettlementHolidayType=YESTERDAY, overseasSettlementDayOfWeek=null)"
+        faxNo:
+          type: string
+          description: 팩스 번호 (nullable)
+          example: ''
+        countryCode:
+          type: string
+          description: 국가 코드
+          example: KR
+        masterAdminSummary:
+          type: object
+          properties:
+            departmentName:
+              type: string
+              description: 부서
+              example: ''
+            expireDateTime:
+              type: string
+              description: 만료일 (nullable)
+              example: 'null'
+            adminNo:
+              type: number
+              description: 어드민 번호
+              example: 1
+            adminType:
+              type: string
+              description: 어드민 타입
+              example: SERVICE
+            adminRole:
+              type: string
+              description: 어드민 권한
+              example: MASTER
+            mobileNo:
+              type: string
+              description: 휴대전화번호
+              example: 010-1111-1111
+            jobPositionName:
+              type: string
+              description: 직급
+              example: ''
+            phoneNo:
+              type: string
+              description: 전화번호
+              example: 010-1111-1111
+            adminName:
+              type: string
+              description: 운영자명
+              example: test
+            partnerNo:
+              type: number
+              description: 파트너 번호 (nullable)
+            permittedIpAddresses:
+              type: array
+              description: 접속 가능 IP
+              example: '[]'
+              items:
+                oneOf:
+                  - type: object
+                  - type: boolean
+                  - type: string
+                  - type: number
+            phoneCertificationYn:
+              type: boolean
+              description: 휴대폰 인증 여부
+              example: false
+            adminStatus:
+              type: string
+              description: 어드민 상태
+              example: ACTIVE
+            adminId:
+              type: string
+              description: 어드민 Id
+              example: test
+            serviceNo:
+              type: number
+              description: 서비스 번호 (nullable)
+              example: 3
+            jobDutyName:
+              type: string
+              description: 직책
+              example: ''
+            email:
+              type: string
+              description: 이메일
+              example: nhn@nhncommerce.com
+            externalAccessEnabled:
+              type: boolean
+              description: 외부접속 가능 여부
+              example: false
+          description: ''
+        tradeBank:
+          type: object
+          properties:
+            depositorName:
+              type: string
+              description: 예금주명 (nullable)
+              example: 최정산
+            bank:
+              type: string
+              description: 은행 코드 (nullable)
+              example: SHINHAN
+            bankName:
+              type: string
+              description: 은행명 (nullable)
+              example: 신한은행
+            account:
+              type: string
+              description: 계좌번호 (nullable)
+              example: '110123123456'
+          description: ''
+        partnerType:
+          type: string
+          description: 파트너 타입
+          example: NORMAL
+        representative:
+          type: object
+          properties:
+            name:
+              type: string
+              description: 대표자명 (nullable)
+              example: 김대표
+            email:
+              type: string
+              description: 대표 e메일 (nullable)
+              example: representative.kim@nhn.com
+            phoneNo:
+              type: string
+              description: 대표전화번호
+              example: '01012341234'
+          description: ''
+      description: ''
+    partners-temp970273924:
+      type: object
+      properties:
+        partnerNo:
+          type: number
+          description: 생성된 파트너 번호
+          example: 1
+      description: ''
+    contracts-1572845133:
+      type: object
+      properties:
+        contents:
+          type: array
+          description: 조회 결과
+          items:
+            type: object
+            properties:
+              partnerNo:
+                type: number
+                description: 파트너 번호
+                example: 1
+              commissionRate:
+                type: number
+                description: "수수료율(기본수수료 사용(usesDefaultCommissionRate == true) 시,\
+                  \ pureCommissionRate와 동일 / 미사용 시, 0으로 노출)"
+                example: 0
+              merchandiserNo:
+                type: number
+                description: 담당MD 번호
+                example: 1
+              settlementConfig:
+                type: object
+                properties:
+                  overseasSettlementDayOfWeek:
+                    type: string
+                    description: 해외파트너 주 정산요일 (nullable)
+                    example: MONDAY
+                  domesticProvisionRate:
+                    type: number
+                    description: 국내파트너 지급비율
+                    example: 100
+                  domesticSettlementDay:
+                    type: number
+                    description: 국내파트너 정산예정일 (nullable)
+                    example: 5
+                  domesticSettlementHolidayType:
+                    type: string
+                    description: 국내파트너 휴일 정산타입 (nullable)
+                    example: YESTERDAY
+                    enum:
+                      - 'TOMORROW: 전일'
+                      - 'YESTERDAY: 익일'
+                  overseasSettlementDay:
+                    type: number
+                    description: 해외파트너 정산예정일 (nullable)
+                    example: 5
+                  overseasSettlementHolidayType:
+                    type: string
+                    description: 해외파트너 휴일 정산타입 (nullable)
+                    example: YESTERDAY
+                    enum:
+                      - 'TOMORROW: 전일'
+                      - 'YESTERDAY: 익일'
+                  domesticSettlementDayOfWeek:
+                    type: string
+                    description: 국내파트너 주 정산요일 (nullable)
+                    example: FRIDAY
+                  overseasProvisionRate:
+                    type: number
+                    description: 해외파트너 지급비율
+                    example: 100
+                  settlementPeriodType:
+                    type: string
+                    description: 정산유형
+                    example: MONTH
+                    enum:
+                      - 'DAY: 일 정산'
+                      - 'WEEK: 주 정산'
+                      - 'MONTH: 월 정산'
+                description: 정산 설정
+              contractType:
+                type: number
+                description: |-
+                  거래 유형 (- ELECTRONIC: 전자계약
+                  - HANDWRITING: 수기계약) (nullable)
+              contractNo:
+                type: number
+                description: 계약서 번호
+                example: 1
+              additionalInfo:
+                type: string
+                description: 추가 정보(jsonString 형식)  (nullable)
+                example: '{"key": "value"}'
+              promotionAgreed:
+                type: boolean
+                description: 프로모션 동의 여부 (nullable)
+                example: false
+              memo:
+                type: string
+                description: 전달할 메모 (옵션) (nullable)
+                example: 'null'
+              mallNo:
+                type: number
+                description: 쇼핑몰 번호
+                example: 1
+              status:
+                type: string
+                description: |-
+                  계약서 상태 (- WAITING: 거래대기
+                  - INVESTIGATION: 검토중
+                  - ACTIVE: 거래중
+                  - SUSPEND: 일시중지
+                example: ACTIVE
+        totalCount:
+          type: number
+          description: 전체 조회건수
+      description: ''
+    partners-temp-486261392:
+      type: object
+      properties:
+        adminName:
+          type: string
+          description: 운영자명
+          example: 홍길동
+        commissionRate:
+          type: number
+          description: 수수료율
+          example: 1
+        merchandiserNo:
+          type: number
+          description: 담당MD 운영자 번호
+          example: 10
+        settlementConfig:
+          type: object
+          properties:
+            overseasSettlementDayOfWeek:
+              type: string
+              description: 해외파트너 주 정산요일 (nullable)
+              example: MONDAY
+            domesticSettlementDay:
+              type: number
+              description: 국내파트너 정산예정일 (nullable)
+              example: 5
+            domesticSettlementHolidayType:
+              type: string
+              description: 국내파트너 휴일 정산타입 (nullable)
+              example: YESTERDAY
+              enum:
+                - 'TOMORROW: 전일'
+                - 'YESTERDAY: 익일'
+            overseasSettlementDay:
+              type: number
+              description: 해외파트너 정산예정일 (nullable)
+              example: 5
+            overseasSettlementHolidayType:
+              type: string
+              description: 해외파트너 휴일 정산타입 (nullable)
+              example: YESTERDAY
+              enum:
+                - 'TOMORROW: 전일'
+                - 'YESTERDAY: 익일'
+            domesticSettlementDayOfWeek:
+              type: string
+              description: 국내파트너 주 정산요일 (nullable)
+              example: FRIDAY
+            settlementPeriodType:
+              type: string
+              description: 정산유형
+              example: MONTH
+              enum:
+                - 'DAY: 일 정산'
+                - 'WEEK: 주 정산'
+                - 'MONTH: 월 정산'
+          description: 정산 설정
+        partnerName:
+          type: string
+          description: 파트너명
+          example: 신규 파트너
+        dependencyYn:
+          type: boolean
+          description:
+            "파트너 노출 설정 여부(해당 파트너가 몰에 종속적인지 여부, true: 노출안함, false: 노출함)\
+            \ (nullable)"
+          example: false
+        memo:
+          type: string
+          description: 전달 메모 (nullable)
+          example: 각 항목들을 정확히 입력해주세요
+        contractContent:
+          type: string
+          description: 입점 계약서 (nullable)
+          example: <p>입점 계약 내용</p>
+        adminEmail:
+          type: string
+          description: 운영자 이메일
+          example: gildong.hong@nhn.com
+      description: ''
+    contracts594295227:
+      type: object
+      properties:
+        partnerNo:
+          type: number
+          description: 파트너 번호
+          example: 5
+        commissionRate:
+          type: number
+          description: 수수료율
+          example: 10
+        merchandiserNo:
+          type: number
+          description: 신규 거래 진행 쇼핑몰 MD 의 운영자 번호 - null인 경우 해당 몰의 대표 운영자로 지정 (nullable)
+          example: 10
+        settlementConfig:
+          type: object
+          properties:
+            overseasSettlementDayOfWeek:
+              type: string
+              description: 해외파트너 주 정산요일 (nullable)
+              example: MONDAY
+            domesticSettlementDay:
+              type: number
+              description: 국내파트너 정산예정일 (nullable)
+              example: 5
+            domesticSettlementHolidayType:
+              type: string
+              description: 국내파트너 휴일 정산타입 (nullable)
+              example: YESTERDAY
+              enum:
+                - 'TOMORROW: 전일'
+                - 'YESTERDAY: 익일'
+            overseasSettlementDay:
+              type: number
+              description: 해외파트너 정산예정일 (nullable)
+              example: 5
+            overseasSettlementHolidayType:
+              type: string
+              description: 해외파트너 휴일 정산타입 (nullable)
+              example: YESTERDAY
+              enum:
+                - 'TOMORROW: 전일'
+                - 'YESTERDAY: 익일'
+            domesticSettlementDayOfWeek:
+              type: string
+              description: 국내파트너 주 정산요일 (nullable)
+              example: FRIDAY
+            settlementPeriodType:
+              type: string
+              description: 정산유형
+              example: MONTH
+              enum:
+                - 'DAY: 일 정산'
+                - 'WEEK: 주 정산'
+                - 'MONTH: 월 정산'
+          description: 정산 설정
+        contractType:
+          type: string
+          description: '계약 유형 - (ELECTRONIC: 전자계약, HANDWRITING: 수기계약) (nullable)'
+          example: 'null'
+        additionalInfo:
+          type: string
+          description: 추가 정보(jsonString 형식) (nullable)
+          example: '{"key": "value"}'
+        memo:
+          type: string
+          description: 전달 메모 (nullable)
+          example: 'null'
+        contractContent:
+          type: string
+          description: 입점 계약서 (nullable)
+          example: <p>입점계약서</p>
+      description: ''
+    malls-contracts-partners-1832611812:
+      type: array
+      description: ''
+      items:
+        type: object
+        properties:
+          startedDateTime:
+            type: string
+            description: 거래일시 (nullable)
+            example: YYYY-MM-DD HH:mm:ss
+          partnerNo:
+            type: number
+            description: 파트너 번호
+            example: 1
+          commissionRate:
+            type: number
+            description: 수수료율
+            example: 12.0999999999999996447286321199499070644378662109375
+          settlementConfig:
+            type: object
+            properties:
+              overseasSettlementDayOfWeek:
+                type: string
+                description: 해외파트너 주 정산요일 (nullable)
+                example: MONDAY
+              domesticProvisionRate:
+                type: number
+                description: 국내파트너 지급비율
+                example: 100
+              domesticSettlementDay:
+                type: number
+                description: 국내파트너 정산예정일 (nullable)
+                example: 5
+              domesticSettlementHolidayType:
+                type: string
+                description: 국내파트너 휴일 정산타입 (nullable)
+                example: YESTERDAY
+                enum:
+                  - 'TOMORROW: 전일'
+                  - 'YESTERDAY: 익일'
+              overseasSettlementDay:
+                type: number
+                description: 해외파트너 정산예정일 (nullable)
+                example: 5
+              overseasSettlementHolidayType:
+                type: string
+                description: 해외파트너 휴일 정산타입 (nullable)
+                example: YESTERDAY
+                enum:
+                  - 'TOMORROW: 전일'
+                  - 'YESTERDAY: 익일'
+              domesticSettlementDayOfWeek:
+                type: string
+                description: 국내파트너 주 정산요일 (nullable)
+                example: FRIDAY
+              overseasProvisionRate:
+                type: number
+                description: 해외파트너 지급비율
+                example: 100
+              settlementPeriodType:
+                type: string
+                description: 정산유형
+                example: MONTH
+                enum:
+                  - 'DAY: 일 정산'
+                  - 'WEEK: 주 정산'
+                  - 'MONTH: 월 정산'
+            description: 정산 설정
+          partnerName:
+            type: string
+            description: 파트너 이름
+            example: test
+          companyName:
+            type: string
+            description: 회사 이름
+            example: testCompany
+          promotionAgreed:
+            type: boolean
+            description: '프로모션 동의 여부(false: 미동의, true: 동의)'
+            example: true
+          partnerMappingKey:
+            type: string
+            description: 파트너 매핑키 (nullable)
+            example: 'null'
+          externalApiKey:
+            type: string
+            description: 외부시스템 연동코드
+            example: encryptedApiKey
+          partnerType:
+            type: string
+            description: 파트너 타입
+            example: NORMAL
+          agreementDateTime:
+            type: string
+            description: 최종 입점 계약서 동의 날짜 (nullable)
+            example: YYYY-MM-DD HH:mm:ss
+        description: 파트너 정보 목록
+    currencies-currencyCode-1479264625:
+      type: object
+      properties:
+        exchangeRate:
+          type: number
+          description: 비율
+          example: 1.3560000000000000941469124882132746279239654541015625
+      description: ''
+    partners-669982228:
+      type: object
+      properties:
+        csManager:
+          type: object
+          properties:
+            csManagerEmail:
+              type: string
+              description: 파트너 CS 담당자 email (nullable)
+              example: nhn@nhn.com
+            csManagerOperationInfo:
+              type: string
+              description: '파트너 CS 운영시간(제약조건 - 최대길이: 255) (nullable)'
+              example: 평일 10:00 ~ 19:00
+            csManagerName:
+              type: string
+              description: '파트너 CS 담당자명(제약조건 - 최대길이: 30) (nullable)'
+              example: 홍길동
+            csManagerPhoneNo:
+              type: string
+              description: 파트너 CS 담당자 전화번호 (nullable)
+              example: 1800-3859
+          description: ''
+        commissionRate:
+          type: number
+          description: '수수료율 (default : 0, 졔약조건 - 최소: 0.00, 최대:99.9)'
+          example: 0
+        merchandiserNo:
+          type: number
+          description: 담당 MD
+          example: 2345
+        manager:
+          type: object
+          properties:
+            jobDuty:
+              type: string
+              description: '담당자 직책(제약조건 - 최대길이: 50) (nullable)'
+              example: 매니저
+            name:
+              type: string
+              description: '담당자 이름(제약조건 - 최대길이: 30) (nullable)'
+              example: 최매니저
+            department:
+              type: string
+              description: '담당자 부서(제약조건 - 최대길이: 50) (nullable)'
+              example: 전자판매A
+            email:
+              type: string
+              description: 담당자 이메일 (nullable)
+              example: ''
+            phoneNo:
+              type: string
+              description: 담당자 전화번호 (nullable)
+              example: 010-1111-1111
+            jobPosition:
+              type: string
+              description: '담당자 직급(제약조건 - 최대길이: 50) (nullable)'
+              example: 대리
+          description: ''
+        business:
+          type: object
+          properties:
+            condition:
+              type: string
+              description: '업태(제약조건 - 최대길이: 50)'
+              example: 업태
+            registrationNo:
+              type: string
+              description: '사업자 등록번호(제약조건 - 최대길이: 30)'
+              example: '1234567890'
+            type:
+              type: string
+              description: '업종(제약조건 - 최대길이: 50)'
+              example: 업종
+            onlineMarketingDeclarationNo:
+              type: string
+              description: '통신판매 신고번호(제약조건 - 최대길이: 50)'
+              example: '111'
+          description: ''
+        partnerName:
+          type: string
+          description: 파트너명(제약 조건 - 파트너명 최대길이:63
+          example: partner-name
+        privacyManager:
+          type: object
+          properties:
+            name:
+              type: string
+              description: '개인정보 관리 담당자명(제약조건 - 최대길이: 45) (nullable)'
+              example: 개인정보책임자
+            phoneNo:
+              type: string
+              description: 개인정보 관리 담당자 전화번호 (nullable)
+              example: '01012341234'
+          description: ''
+        sellerTaxationType:
+          type: string
+          description: 과세 형태 (nullable)
+          example: NORMAL
+          enum:
+            - 'NORMAL: 일반과세자'
+            - 'SIMPLE: 간이과세자'
+            - 'VAT_FREE: 부가세 면세사업자'
+            - 'CORPORATION: 법인사업자'
+            - 'FREE_CORPORATION: 면세법인사업자'
+            - 'ETC: 기타'
+        companyName:
+          type: string
+          description: '회사명(제약조건 - 최대길이: 45)'
+          example: test-company
+        admin:
+          type: object
+          properties:
+            departmentName:
+              type: string
+              description: 마스터 부서 (nullable)
+              example: 개발부
+            password:
+              type: string
+              description: '마스터 패스워드(제약조건 - 최소길이: 8, 최대길이: 20)'
+              example: admin!@#123
+            jobDuty:
+              type: string
+              description: 마스터 어드민 직책
+              example: jobDuty
+            name:
+              type: string
+              description: '마스터 어드민 이름(제약조건 - 최대길이: 50)'
+              example: admin-test
+            mobileNo:
+              type: string
+              description: 마스터 어드민 핸드폰번호
+              example: 010-1234-1234
+            id:
+              type: string
+              description: '마스터 어드민 아이디(제약조건 - 최소길이: 5, 최대길이: 20)'
+              example: adminTest
+            phoneNo:
+              type: string
+              description: 마스터 어드민 전화번호
+              example: 010-1234-1234
+            email:
+              type: string
+              description: 마스터 어드민 이메일
+              example: email@aa.cc
+            externalAccessEnabled:
+              type: boolean
+              description: '마스터 어드민 외부 접속 허용 여부 (default : true)'
+              example: false
+            jobPosition:
+              type: string
+              description: 마스터 직급 (nullable)
+              example: 대리
+          description: ''
+        partnerMappingKey:
+          type: string
+          description: 파트너 매핑키 (nullable)
+          example: 'null'
+        settlementManager:
+          type: object
+          properties:
+            name:
+              type: string
+              description: '정산담당자 이름(제약조건 - 최대길이: 50)'
+              example: 정산담당자
+            email:
+              type: string
+              description: 정산담당자 이메일
+              example: abcd@gmail.com
+            phoneNo:
+              type: string
+              description: 정산담당자 전화번호
+              example: '01012341234'
+          description: ''
+        office:
+          type: object
+          properties:
+            jibunAddress1:
+              type: string
+              description: 지번주소 (nullable)
+              example: 도로명 주소
+            zipCode:
+              type: string
+              description: 우편번호
+              example: '12345'
+            jibunAddress2:
+              type: string
+              description: 지번주소 상세 (nullable)
+              example: 도로명 주소 상세
+            streetAddress1:
+              type: string
+              description: 도로명주소
+              example: 서울시 구로구 디지털로 26길
+            streetAddress2:
+              type: string
+              description: 도로명주소 상세
+              example: '72'
+          description: ''
+        settlementConfig:
+          type: object
+          properties:
+            overseasSettlementDayOfWeek:
+              type: string
+              description: 해외파트너 주 정산요일 (nullable)
+              example: MONDAY
+            domesticSettlementDay:
+              type: number
+              description: 국내파트너 정산예정일 (nullable)
+              example: 5
+            domesticSettlementHolidayType:
+              type: string
+              description: 국내파트너 휴일 정산타입 (nullable)
+              example: YESTERDAY
+              enum:
+                - 'TOMORROW: 전일'
+                - 'YESTERDAY: 익일'
+            overseasSettlementDay:
+              type: number
+              description: 해외파트너 정산예정일 (nullable)
+              example: 5
+            overseasSettlementHolidayType:
+              type: string
+              description: 해외파트너 휴일 정산타입 (nullable)
+              example: YESTERDAY
+              enum:
+                - 'TOMORROW: 전일'
+                - 'YESTERDAY: 익일'
+            domesticSettlementDayOfWeek:
+              type: string
+              description: 국내파트너 주 정산요일 (nullable)
+              example: FRIDAY
+            settlementPeriodType:
+              type: string
+              description: 정산유형
+              example: MONTH
+              enum:
+                - 'DAY: 일 정산'
+                - 'WEEK: 주 정산'
+                - 'MONTH: 월 정산'
+          description: ''
+        faxNo:
+          type: string
+          description: '팩스 번호(제약조건 -최대길이: 50 ) (nullable)'
+          example: '01234567890'
+        tradeBank:
+          type: object
+          properties:
+            depositorName:
+              type: string
+              description: '예금주 명(제약조건 - 최대길이: 50)'
+              example: 홍길동
+            bank:
+              type: string
+              description: 은행코드 (nullable)
+              example: KB
+              enum:
+                - 'ANONYMOUS: 미확인은행'
+                - 'KDB: 산업은행'
+                - 'IBK: 기업은행'
+                - 'KB: 국민은행'
+                - 'KEB: 외환은행'
+                - 'SUHYUP: 수협'
+                - 'SUHYUB_LOCAL_BANK: 수협중앙회'
+                - 'KEXIM: 수출입은행'
+                - 'NH: NH농협은행'
+                - 'NHLOCAL: 지역농축협'
+                - 'WOORI: 우리은행'
+                - 'SC: SC제일은행'
+                - 'CITY: 한국씨티은행'
+                - 'DAEGU: 대구은행'
+                - 'PUSAN: 부산은행'
+                - 'GWANGJU: 광주은행'
+                - 'JEJU: 제주은행'
+                - 'JEONBUK: 전북은행'
+                - 'GYEONGNAM: 경남은행'
+                - 'KFCC: 새마을금고'
+                - 'CU: 신협'
+                - 'SANGHO: 상호저축은행'
+                - 'HSBC: HSBC은행'
+                - 'DEUTSCHE: 도이치은행'
+                - 'NFCF: 산림조합중앙회'
+                - 'EPOST: 우체국'
+                - 'KEBHANA: KEB하나은행'
+                - 'SHINHAN: 신한은행'
+                - 'KBANK: 케이뱅크'
+                - 'KAKAO: 카카오뱅크'
+                - 'TOSS: 토스뱅크'
+                - 'YUANTA: 유안타증권'
+                - 'KBSEC: KB증권'
+                - 'MIRAE: 미래에셋증권'
+                - 'MIRAEDAEWOO: 미래에셋대우증권'
+                - 'SAMSUNG: 삼성증권'
+                - 'HANKOOK: 한국투자증권'
+                - 'NH_INVEST: NH투자증권'
+                - 'KYOBO: 교보증권'
+                - 'HI_INVEST: 하이투자증권'
+                - 'HMC_INVEST: HMC투자증권'
+                - 'KIWOOM: 키움증권'
+                - 'EBEST: 이베스트투자증권'
+                - 'SK: SK증권'
+                - 'DAISHIN: 대신증권'
+                - 'SOLOMON_INVEST: 솔로몬증권'
+                - 'HANHWA: 한화투자증권'
+                - 'HANA_INVEST: 하나금융투자'
+                - 'SHINHAN_INVEST: 신한금융투자'
+                - 'DONGBU: DB금융투자'
+                - 'EUGENE_INVEST: 유진투자증권'
+                - 'MERITZ_COMPREHENSIVE: 메리츠종합금융증권'
+                - 'BOOKOOK: 부국증권'
+                - 'SHINYOUNG: 신영증권'
+                - 'CAPE: 케이프투자증권'
+                - 'MIZUHO: 미즈호은행'
+                - 'UFJ: UFJ은행'
+                - 'SMBC: 미쓰이스미토모은행'
+                - 'RESONA: 리소나은행'
+            bankName:
+              type: string
+              description: '은행명(제약조건 - 최대길이: 50) (nullable)'
+              example: 국민은행
+            account:
+              type: string
+              description: '계좌번호(제약조건 - 최대길이: 100)'
+              example: '12341234'
+          description: ''
+        promotionAgreedYn:
+          type: boolean
+          description: '마케팅 수신동의 여부 (default : true)'
+          example: true
+        representative:
+          type: object
+          properties:
+            name:
+              type: string
+              description: '대표자 이름(제약조건 - 최대길이: 50)'
+              example: 대표자이름
+            email:
+              type: string
+              description: 대표자 이메일
+              example: abcd@gmail.com
+            phoneNo:
+              type: string
+              description: 대표자 전화번호
+              example: '01012341234'
+          description: ''
+      description: ''
+    contracts-925074272:
+      type: object
+      properties:
+        contractNos:
+          type: array
+          description: 계약서 번호 목록
+          example: '[1, 2, 3]'
+          items:
+            type: number
+        status:
+          type: string
+          description: "변경할 상태 - (APPROVAL: 계약 동의, DISAPPROVAL: 계약 반려, SUSPEND: 계약\
+            \ 일시정지, UNSUSPEND: 계약 일시정지 해제)"
+          example: APPROVAL
+      description: ''
+    currencies495944049:
+      type: array
+      description: ''
+      items:
+        type: object
+        properties:
+          exchangeTo:
+            type: string
+            description: '통화 - cny, usd, jpy, krw'
+            example: KRW
+          exchangeRate:
+            type: number
+            description: 비율
+            example: 1
+    contracts-partnerNo-1265137783:
+      type: object
+      properties:
+        commissionRate:
+          type: number
+          description: '수수료율 ( null일 시, 변경 없음 ) (nullable)'
+          example: 10
+        merchandiserNo:
+          type: number
+          description: 신규 거래 진행 쇼핑몰 MD 의 운영자 번호
+          example: 10
+        settlementConfig:
+          type: object
+          properties:
+            overseasSettlementDayOfWeek:
+              type: string
+              description: 해외파트너 주 정산요일 (nullable)
+              example: MONDAY
+            domesticSettlementDay:
+              type: number
+              description: 국내파트너 정산예정일 (nullable)
+              example: 5
+            domesticSettlementHolidayType:
+              type: string
+              description: 국내파트너 휴일 정산타입 (nullable)
+              example: YESTERDAY
+              enum:
+                - 'TOMORROW: 전일'
+                - 'YESTERDAY: 익일'
+            overseasSettlementDay:
+              type: number
+              description: 해외파트너 정산예정일 (nullable)
+              example: 5
+            overseasSettlementHolidayType:
+              type: string
+              description: 해외파트너 휴일 정산타입 (nullable)
+              example: YESTERDAY
+              enum:
+                - 'TOMORROW: 전일'
+                - 'YESTERDAY: 익일'
+            domesticSettlementDayOfWeek:
+              type: string
+              description: 국내파트너 주 정산요일 (nullable)
+              example: FRIDAY
+            settlementPeriodType:
+              type: string
+              description: 정산유형
+              example: MONTH
+              enum:
+                - 'DAY: 일 정산'
+                - 'WEEK: 주 정산'
+                - 'MONTH: 월 정산'
+          description: 정산 설정
+        contractType:
+          type: string
+          description: '계약 유형 - (ELECTRONIC: 전자계약, HANDWRITING: 수기계약) (nullable)'
+          example: 'null'
+        additionalInfo:
+          type: string
+          description: 추가 정보(jsonString 형식) (nullable)
+          example: '{"key": "value"}'
+        memo:
+          type: string
+          description: 전달 메모 (nullable)
+          example: 'null'
+        contractContent:
+          type: string
+          description: 입점 계약서 (nullable)
+          example: <p>입점계약서</p>
+      description: ''

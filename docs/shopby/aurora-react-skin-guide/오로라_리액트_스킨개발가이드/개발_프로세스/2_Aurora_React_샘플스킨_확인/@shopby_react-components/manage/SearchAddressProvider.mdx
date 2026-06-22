@@ -1,0 +1,54 @@
+---
+title: "SearchAddressProvider"
+depth: 5
+path: "오로라 리액트 스킨개발가이드 > 개발 프로세스 > 2️⃣Aurora React 샘플스킨 확인 > @shopby/react-components > manage > SearchAddressProvider"
+---
+
+# SearchAddressProvider
+
+## 속성
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | --- | --- | --- | --- |
+| children | true | ReactNode | - |  |
+| pageSize | false | number | 10 |  |
+| useAccumulation | false | boolean | false | 새로운 데이터만 나타낼지 이전 데이터와 같이 나타낼지 여부 |
+
+## 상태
+
+* SearchAddressState 는 useSearchAddressContextState 를 호출해 사용한다.
+
+``` typescript
+const SearchAddressState = useSearchAddressContextState();
+```
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | --- | --- | --- | --- |
+| searchResult | true | object | null | 주소 검색 결과 ({totalCount(총 검색 결과 갯수), items(주소 검색 결과 목록), itemsLength(주소 검색 결과 목록 갯수)}) |
+| pageNumber | true | number | 1 | 검색할 페이지 번호 |
+| keyword | true | string |  | 검색할 주소 |
+
+## 액션
+
+* SearchAddressAction 은 useSearchAddressProviderAction 를 호출해 사용한다.
+
+``` typescript
+const SearchAddressAction = useSearchAddressProviderAction();
+```
+
+| 이름 | 인자타입 | 필수여부 | 기본값 | 설명 | 관리하는 상태 |
+| --- | --- | --- | --- | --- | --- |
+| searchAddress | object |  |  | 검색어로 주소 검색 | pageNumber, searchResult |
+| ㄴ pageNumber | number | true |  | 검색할 페이지 번호 |  |
+| ㄴ keyword | string | true |  | 검색어 |  |
+| updateKeyword | string | true |  | 프로바이더에서 관리하는 검색어 수정 | keyword |
+
+## 사용예시
+
+``` typescript
+const Example = () => (
+  
+    
+  
+);
+```

@@ -1,6 +1,6 @@
 ---
 name: dbm-loadspec-extractor
-description: 후니프린팅 DB매핑 하네스의 라이브 적재명세 추출가(round-11). raw/webadmin Django 소스(catalog/models.py·admin.py·basecodes.py·cfg_utils.py·views.py)를 읽어, 각 라이브 t_* 엔티티가 "무엇을(어느 컬럼) 어떻게(폼 위젯·검증·코드값 그룹·자동채번·감사컬럼·논리삭제·FK·드릴다운 적재경로) 적재되는가"를 코드 근거로 추출해 적재명세(load-spec)로 정리한다. 이는 dbm-schema-analyst(라이브 DB DDL 런타임 사실 추출)와 상보적 — 본 에이전트는 "소스코드가 규정한 적재 방법"을 담당한다. 소스 읽기 전용, DB 미접속. 'webadmin 적재명세', '적재 로직 추출', 't_* 적재방법', 'Django admin 적재 분석', 'BaseAdmin 폼 분석', '코드값 그룹 추출', '상품뷰어 적재경로', '적재명세 추출 다시', 'round-11' 작업 시 사용.
+description: 후니프린팅 DB매핑 하네스의 라이브 적재명세 추출가. raw/webadmin Django 소스를 읽어 각 t_* 엔티티가 무엇을 어떻게(폼 위젯·검증·코드값 그룹·자동채번·논리삭제·FK·드릴다운 적재경로) 적재하는지 코드 근거로 추출해 적재명세(load-spec)로 정리한다(소스 읽기 전용·DB 미접속). 'webadmin 적재명세', '적재 로직 추출', 't_* 적재방법', 'Django admin 적재 분석', 'BaseAdmin 폼 분석', '코드값 그룹 추출', '상품뷰어 적재경로', '적재명세 추출 다시' 작업 시 사용.
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 model: opus
 ---

@@ -1,6 +1,10 @@
 ---
 name: rpm-validation
-description: 후니 RP-Meta 하네스(RedPrinting 메타모델 역공학→갭→그릇) 산출물을 경계면 교차 비교로 독립 검증하는 M1~M6 게이트 방법론 스킬. M1 추출 충실성(소스 재대조·날조 적발), M2 메타모델 정합(증거 도출·오버피팅·관계 무모순), M3 추가 메타모델 타당성(distinct vs facet 재검), M4 갭 판정 정확(라이브 information_schema 재실측·dbmap 정합), M5 그릇 설계 건전성(search-before-mint·정규화·컨벤션·영향분석), M6 생성-검증 독립성(self-approve 적발·dodge-hunt). 라이브 읽기전용 재실측 강제·생성자 주장 비신뢰·점진 게이팅·단일 결함 FAIL·정직 CONDITIONAL을 제공한다. '메타모델 검증', 'RP-Meta 검증', '갭 검증', '그릇 검증', 'M게이트', 'M1 M6', '교차검증', '검증 다시', 'dodge-hunt' 작업 시 반드시 이 스킬을 사용. 생성(역공학/메타모델/갭/그릇)은 각 생성 스킬이 담당하므로 본 스킬은 검증 전용이다.
+description: >
+  후니 RP-Meta 하네스(RedPrinting 메타모델 역공학→갭→그릇) 산출물을 경계면 교차 비교로 독립 검증하는 M1~M6 게이트 방법론 스킬
+  (추출 충실성·메타모델 정합·추가 메타모델 타당성·갭 판정 정확·그릇 설계 건전성·생성-검증 독립성). 라이브 읽기전용 재실측 강제·
+  생성자 주장 비신뢰·단일 결함 FAIL·정직 CONDITIONAL·검증 전용. 트리거: 메타모델 검증, RP-Meta 검증, 갭 검증, 그릇 검증,
+  M게이트, M1 M6, 교차검증, dodge-hunt, 검증 다시. 생성(역공학/메타모델/갭/그릇)은 각 생성 스킬이 담당.
 ---
 
 # rpm-validation — RP-Meta Cross-Boundary Gates (M1~M6)

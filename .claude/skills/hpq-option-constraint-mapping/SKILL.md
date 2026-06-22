@@ -1,18 +1,15 @@
 ---
 name: hpq-option-constraint-mapping
 description: >-
-  라이브 CPQ 레이어(옵션·템플릿·제약·공정 json)가 사용자 정의 의미대로 적재됐는지 검사하는 방법론
-  스킬(가격계산 검증 하네스). 사용자 정의[HARD] 기준 — 옵션=사용자가 선택→자재(mat_cd) or 공정(proc_cd),
-  자재+공정을 생산에 전달 / 템플릿=상품에서 같이 팔고자 하는 상품 연결 / 제약=특정 사이즈 클릭 시 추가
-  상품·특정 사이즈 접지·특정 사이즈 박 최소/최대 / 공정 상세옵션=다양한 상세옵션이 발생해 json. 검사 =
-  ① option_items가 자재·공정 BUNDLE을 올바로 참조(다중 seq·polymorphic ref_dim_cd·트리거 fn_chk_opt_item_ref
-  무결성·순수공정 vs 자재+공정 구분) ② templates/template_selections/template_prices 연결상품·엔진 1순위
-  템플릿단가 정합 ③ product_constraints JSONLogic이 사이즈→추가상품/접지/박 min-max 표현 ④ component_prices.
-  dim_vals·proc_sels 다중공정 평가가 라이브 공정 json 구조와 정합. 권위=상품마스터·가격표+engine-contract.
-  결함마다 재현 쿼리/화면경로·결함 보드까지만(교정은 인간 승인). '옵션 정합', '템플릿 정합', '제약조건
-  검사', '공정 json 검사', '옵션 자재 공정 BUNDLE', '제약 사이즈 추가상품 접지 박', 'dim_vals 공정 상세',
-  '옵션 제약 다시' 작업 시 반드시 이 스킬을 사용. 가격사슬 검사는 hpq-price-chain-inspection, 게이트는
-  hpq-quote-gate-validation이 담당한다.
+  라이브 CPQ 레이어(옵션·템플릿·제약·공정 json)가 사용자 정의 의미대로 적재됐는지 검사하는 방법론 스킬(가격계산
+  검증 하네스). 사용자 정의[HARD]: 옵션=선택→자재(mat_cd)/공정(proc_cd) BUNDLE을 생산에 전달 / 템플릿=같이 팔
+  상품 연결 / 제약=사이즈→추가상품·접지·박 min-max / 공정 상세옵션=json. 검사: ① option_items가 자재·공정 BUNDLE을
+  올바로 참조(다중 seq·polymorphic ref_dim_cd·트리거 fn_chk_opt_item_ref 무결성) ② templates/template_prices
+  연결상품·엔진 1순위 템플릿단가 정합 ③ product_constraints JSONLogic이 사이즈→추가상품/접지/박 min-max 표현 ④
+  component_prices.dim_vals·proc_sels 다중공정 평가 정합. 권위=상품마스터·가격표+engine-contract·결함마다 재현
+  쿼리·생성측·교정 인간 승인. 트리거: 옵션 정합, 템플릿 정합, 제약조건 검사, 공정 json 검사, 옵션 자재 공정
+  BUNDLE, dim_vals 공정 상세, 옵션 제약 다시. 가격사슬 검사는 hpq-price-chain-inspection, 게이트는
+  hpq-quote-gate-validation이 담당.
 ---
 
 # hpq-option-constraint-mapping — 옵션·템플릿·제약·공정 정합 검사 방법론

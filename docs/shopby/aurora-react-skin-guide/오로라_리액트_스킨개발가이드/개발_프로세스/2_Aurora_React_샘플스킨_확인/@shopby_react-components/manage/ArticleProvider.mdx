@@ -1,0 +1,74 @@
+---
+title: "ArticleProvider"
+depth: 5
+path: "오로라 리액트 스킨개발가이드 > 개발 프로세스 > 2️⃣Aurora React 샘플스킨 확인 > @shopby/react-components > manage > ArticleProvider"
+---
+
+# ArticleProvider
+
+## 속성
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | ---- | --- | ---- | --- |
+| children | true | ReactNode |  |  |
+
+## 상태
+
+* articleState 는 useArticleStateContext 를 호출해 사용합니다.
+
+```typescript
+const articleState = useArticleStateContext();
+```
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | ---- | --- | ---- | --- |
+| article | false | object |  | 특정 게시판(게시판 번호 기준)의 게시글 목록 정보
+[response](https://docs.shopby.co.kr/?url.primaryName=manage/#/Board/search-posts) 타입과 동일 |
+| articleDetail | false | object |  | 득정 게시글(게시판 번호 기준)의 상세정보
+[response](https://docs.shopby.co.kr/?url.primaryName=manage/#/Board/get-post) 타입과 동일 |
+
+## 액션
+
+* articleAction 은 useArticleActionContext 를 호출해 사용합니다.
+
+```typescript
+const articleAction = useArticleActionContext();
+```
+
+| 이름 | 인자타입 | 필수여부 | 기본값 | 설명 | 관리하는 상태 |
+| --- | ---- | ---- | --- | --- | ------- |
+| fetchArticles
+(deprecated) | object | true |  | 특정 게시판(게시판 번호 기준)의 게시글 리스트를 조회함.
+[request](https://docs.shopby.co.kr/?url.primaryName=manage/#/Board/search-posts) 타입과 동일 | productInquiryFormState.article |
+| fetchArticleDetailBy
+(deprecated) | object | true |  | 특정 게시글(게시글 번호 기준)을 상세 조회함.
+[request](https://docs.shopby.co.kr/?url.primaryName=manage/#/Board/get-post) 타입과 동일 | productInquiryFormState.articleDetail |
+| fetchBoardArticleReplies
+(deprecated) | Object | true |  | 게시물의 답글 리스트 조회 (V1) | [게시글 답글 리스트 조회하기(버전1) 응답 참고](https://docs.shopby.co.kr/?url.primaryName=manage/#/Board/reply-posts) |
+| ㄴ boardNo | string | true |  | 조회할 게시판 번호 |  |
+| ㄴ articleNo | string | true |  | 조회할 게시글 번호 |  |
+| ㄴ page | number | false | 1 | 페이지 번호 |  |
+| ㄴ pageSize | number | false | 10 | 한 페이지당 노출 수 |  |
+| ㄴ includeRecommended | bool | false | false |  |  |
+| ㄴ direction | ENUM | false |  | 정렬방식 | ASC: 오래된 순, DESC: 최신 순, RECOMMEND\_COUNT: 추천수 많은 순, READ\_COUNT: 조회수 많은 순 |
+| fetchBoardPosts | Object | true |  | 게시판 리스트 조회 (V2) | [게시글 리스트 조회하기(버전2)](https://docs.shopby.co.kr/?url.primaryName=manage/#/Board/get-posts-v2) 문서 참고 |
+| fetchBoardPostDetail | Object | true |  | 게시글 상세 조회하기 (V2) | [게시글 상세 조회하기(버전2)](https://docs.shopby.co.kr/?url.primaryName=manage/#/Board/get-post-v2) 문서 참고 |
+| fetchBoardPostReplies | Object | true |  | 게시물의 답글 리스트 조회 (V2) | [게시글 답글 리스트 조회하기(버전2) ](https://docs.shopby.co.kr/?url.primaryName=manage/#/Board/get-reply-posts-v2)문서  참고 |
+| ㄴ boardNo | string | true |  |  |  |
+| ㄴ postNo | string | true |  |  |  |
+| ㄴ page | number | false | 1 | 페이지 번호 |  |
+| ㄴ pageSize | number | false | 10 | 한 페이지당 노출 수 |  |
+| ㄴ includeRecommended | bool | false | false |  |  |
+| ㄴ direction | ENUM | false |  | 정렬방식 | ASC: 오래된 순, DESC: 최신 순, RECOMMEND\_COUNT: 추천수 많은 순, READ\_COUNT: 조회수 많은 순 |
+
+## 사용예시
+
+```jsx
+const Example = () => {
+    return (
+      
+        
+      
+    )
+}
+```

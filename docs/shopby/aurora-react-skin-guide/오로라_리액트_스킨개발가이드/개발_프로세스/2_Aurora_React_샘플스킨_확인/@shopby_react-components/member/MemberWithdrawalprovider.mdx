@@ -1,0 +1,41 @@
+---
+title: "MemberWithdrawalprovider"
+depth: 5
+path: "오로라 리액트 스킨개발가이드 > 개발 프로세스 > 2️⃣Aurora React 샘플스킨 확인 > @shopby/react-components > member > MemberWithdrawalprovider"
+---
+
+# MemberWithdrawalprovider
+
+회원 탈퇴 기능을 수행함.
+
+## 속성
+
+| 이름 | 필수여부 | 타입 | 기본 값 | 설명 |
+| --- | --- | --- | --- | --- |
+| children | true | ReactNode | - |  |
+
+## 상태
+
+## 액션
+
+* MemberWithdrawalAction 은 useMemberWithdrawalActionContext 를 호출해 사용한다.
+
+``` typescript
+const MemberWithdrawalAction = useMemberWithdrawalActionContext();
+```
+
+| 이름 | 인자타입 | 필수여부 | 기본값 | 설명 | 관리하는 상태 |
+| --- | --- | --- | --- | --- | --- |
+| deleteMember | object | true |  | 회원정보를 삭제한다. |  |
+| ㄴreason | string | true |  | 탈퇴이유 |  |
+| fetchWithdrawalTermsContent | [MALL\_INTRODUCTION, USE, E\_COMMERCE, PI\_PROCESS, PI\_COLLECTION\_AND\_USE\_REQUIRED, PI\_COLLECTION\_AND\_USE\_OPTIONAL, PI\_PROCESS\_CONSIGNMENT, PI\_THIRD\_PARTY\_PROVISION, PI\_COLLECTION\_AND\_USE\_FOR\_GUEST\_ON\_ARTICLE, ACCESS\_GUIDE, WITHDRAWAL\_GUIDE, PI\_SELLER\_PROVISION, PI\_COLLECTION\_AND\_USE\_ON\_ORDER, ORDER\_INFO\_AGREE, CLEARANCE\_INFO\_COLLECTION\_AND\_USE, TRANSFER\_AGREE REGULAR\_PAYMENT\_USE, AUTO\_APPROVAL\_USE, PI\_LIQUOR\_PURCHASE\_PROVISION, PI\_RESTOCK\_NOTICE] | false |  | 약관내용을 조회한다. |  |
+
+## 사용예시
+
+``` jsx
+const Example = () => (
+  
+    
+  
+);
+```

@@ -1,0 +1,149 @@
+---
+title: "[기본] 샵바이 API"
+depth: 2
+path: "오로라 리액트 스킨개발가이드 > 스킨 개발_API 활용가이드 > [기본] 샵바이 API"
+---
+
+# [기본] 샵바이 API
+
+## 이해하기
+
+> 이 문서는 샵바이 API의 기초 정보와 호출 방법을 소개합니다.
+
+* 샵바이 API 호출 및 연동 개념
+* 샵바이 API 공통 파라미터(Parameters)
+* 로그인 상태 구분
+* 쇼핑몰 기본 정보 호출
+
+***
+
+## 샵바이 API 호출 및 연동 개념
+
+![Inline-image-2025-07-29 17.51.19.182.png](https://nhnent.dooray.com/share/tree/WoOk8q6KT1K3MZcLSuyZsw/pages/3520338751321947577/attach-files/4122791783220580068)
+샵바이 API는 RESTful한 아키텍쳐로서 표준 HTTP Request Method, 리소스를 예측할 수 있는 엔드포인트 URL, HTTP 코드 기반의 에러 메시지를 제공합니다.
+스킨은 샵바이 솔루션에서 제공하는 샵바이 API를 RESTful한 방식으로 호출하여 어드민과 연동합니다.
+
+### 용어소개
+
+:heavy_check_mark: **shop API**
+   NHN커머스에서 제공하는 오픈 소스 입니다. 
+   고객들이 접근하는 쇼핑몰 사이트 화면을 구성할 수 있습니다. 
+:heavy_check_mark:**스킨(skin)**
+    쇼핑몰 고객들이 보는 쇼핑몰 프론트 화면 디자인 (템플릿, 레이아웃)을 뜻합니다.
+:heavy_check_mark: **어드민(관리자)**
+    쇼핑몰 운영자님이 사용하는 화면으로 상품, 주문, 회원 관리 등 쇼핑몰을 관리하는 화면입니다.
+
+***
+
+## 샵바이 API 공통 파라미터(Parameters)
+
+모든 샵바이 API 는 Request header 에 아래 3개의 파라미터(Parameters)를 필수 값(required)으로 넣어야 합니다.
+Request 파라미터는 API별로 상이하나, 아래 3가지 항목은 모든 API에서 공통적으로 요구됩니다.
+
+* **`Version`**
+    *  API 버전 (샵바이는 1.0 버전으로 API 제공하고 있으며, 버전이 다른 API의 경우 문서 제목의 버전을 참고 바랍니다.)
+* **`clientId`**
+    * 클라이언트 아이디로서, 쇼핑몰 사이트를 출력하기 위해 할당된 각 상점의 쇼핑몰 구분 값(프론트에서 API호출 시 해당하는 쇼핑몰을 판단할 수 있는 key값)
+    * shop by pro : 도메인/environment.json 으로 확인 가능
+        * 예) `example.shopby.co.kr/environment.json`
+    * shop by premium
+        * (방법1) 서비스어드민 > 서비스관리 > 쇼핑몰관리 > (쇼핑몰 선택) > 개발연동정보 > 클라이언트 아이디에서 확인 가능
+        * (방법2) 스킨 사용할 경우 : 도메인/environment.json 으로 확인 가능
+            * 예) `example.shopby.co.kr/environment.json`
+* **`platform`**
+    * 현재 실행 플랫폼으로서, 쇼핑몰 사이트를 출력하는 디바이스 기준 (PC, MOBILE\_WEB, AOS, IOS)
+
+:heavy_check_mark:**예제코드**
+아래는 Request header 에 필수 값 3개를 입력하여 호출하는 예제 코드이며, 모든 샵바이 API 를 호출할 때 실행됩니다.
+
+```
+1
+2          const requestInit = {
+3            method,
+4            headers: {
+5              platform: 'PC',
+6              clientId: shopby.config.skin.clientId,
+7              Version: '1.0',
+8            }, 
+9            body: isFormData ? requestBody : JSON.stringify(requestBody),
+10          };
+11
+```
+
+***
+
+## 로그인 상태 구분
+
+쇼핑몰에서는 회원(member)과 비회원(guest)을 판별하기 위해, 로그인 상태 여부를 구분하는 것이 중요합니다.
+앞으로 소개 드릴 화면별 설명에서는, 고객이 로그인을 했는지(=회원) 또는 하지 않았는지(=비회원)에 따라 사용되는 API가 다를 수 있으므로,
+로그인 상태 여부를 판단하는 로직에 대해 소개하겠습니다.
+![Inline-image-2024-10-24 11.22.00.943.png](https://nhnent.dooray.com/share/tree/WoOk8q6KT1K3MZcLSuyZsw/pages/3520338751321947577/attach-files/3921108187586921350)
+샵바이에서는 OAuth2 기반의 로그인 방식을 사용합니다. 액세스 토큰(accesssToken)과 리프레시 토큰(refreshToken)을 이용하여 로그인 상태를 구분할 수 있으며, 액세스 토큰과 리프레시 토큰의 유효기간 및 샵바이 API의 에러 응답 값에 따라 로그인 상태가 결정됩니다.
+직접 shop API 호출 시 OAuth 2.0을 적용하는 방법은 [OAuth 2.0 적용 가이드](https://nhnent.dooray.com/share/pages/WoOk8q6KT1K3MZcLSuyZsw/3921105861495547542)에서 확인하실 수 있습니다.
+![](https://rlyfaazj0.toastcdn.net/works/images/api-dev/call2.jpg)
+
+OAuth2 방식이 적용되지 않은 고객들은 액세스 토큰(accessToken) 기반의 로그인 방식을 사용합니다.
+기본적으로 액세스 토큰의 존재 유무에 따라 로그인 상태를 구분할 수 있으며, 그 외 액세스 토큰 의 유효 기간 및 샵바이 API의 에러 응답 값에 따라 로그인 상태가 결정됩니다.
+
+액세스 토큰 발급 API 등 보다 자세한 내용은 [로그인화면](https://nhnent.dooray.com/share/pages/WoOk8q6KT1K3MZcLSuyZsw/3519671880330221332)  문서를 확인하시길 바랍니다.
+
+***
+
+## 쇼핑몰 기본 정보 호출
+
+### API  호출과정
+
+* step1 : CDN에서 몰 정보 조회하기
+* step 2-1: CDN에 몰 정보가 존재하는 경우, 해당 정보를 사용
+* step 2-2: CDN에 몰 정보가 없는 경우, `GET /malls `호출
+
+### CDN 호출 정보
+
+* URI : clientId 와 전체 주소를 모두 인코딩을해야 CDN에 저장된 정보에 올바르게 접근할 수 있습니다.
+
+```
+1
+2            const uri = encodeURI('https://rlgkd0v7e.toastcdn.net/mall-configurations/${profile}/${encodeURIComponent(clientId)}/mallInfo.js')
+3
+```
+
+* dataType: `jsonp`
+* jsonpCallback: `getMalls` (임의 수정 불가)
+
+### 예시코드
+
+```
+1
+2            const cdnUri = encodeURI('https://rlgkd0v7e.toastcdn.net/mall-configurations/real/${encodeURIComponent(상점의 clientId 를 입력하세요)}/mallInfo.js');
+3
+4            $.ajax({
+5              url: cdnUri,
+6              jsonpCallback: 'getMalls',
+7              dataType: 'jsonp',
+8              success: function (malls) }
+9            // cdn 에 정보가 있는 경우 여기서 malls 정보를 처리하세요.
+10            }, error: function () {
+11            // cdn 에 없는 경우 기존에 사용하고 있었던 getMalls api 를 직접 호출하여 malls 정보를 받아 처리하세요. },
+12            });
+13
+```
+
+
+
+### GET /malls
+
+쇼핑몰 기본 정보를 호출할 수 있는 `GET /malls`을 소개합니다.
+해당 API는 쇼핑몰 어느 화면에서든 공통적으로 필요한 기본 API입니다.
+
+
+
+> [GET /malls](https://docs.shopby.co.kr/?url.primaryName=admin/#/Mall/get-malls)
+
+```
+▶ 쇼핑몰 기본 정보 조회하기
+(쇼핑몰 전반에 대한 기본 정보와 설정 데이터를 조회할 수 있습니다.)
+```
+
+해당 API는 쇼핑몰 명, 회원 가입 시 설정 값, 푸터 영역에 명시하는 쇼핑몰 기본 정보, 네이버 웹마스터 설정 값, 구글 에널리틱스 설정 값 등의 데이터를 포함합니다.
+
+기본 스킨에서는 호출된 Responses의 리턴 값을 모두 사용하고 있으며, 각 리턴 값이 어느 화면에서 사용되었는지는 이후 진행될 문서에서 화면별로 다시 소개합니다.

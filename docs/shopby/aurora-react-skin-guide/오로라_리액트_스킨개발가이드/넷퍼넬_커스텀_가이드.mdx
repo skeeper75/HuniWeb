@@ -1,0 +1,64 @@
+---
+title: "넷퍼넬 커스텀 가이드"
+depth: 1
+path: "오로라 리액트 스킨개발가이드 > 넷퍼넬 커스텀 가이드"
+---
+
+# 넷퍼넬 커스텀 가이드
+
+### 대기창 Skin 커스텀 하기
+
+> 개별형 스킨 : **pc(또는 mobile)/libs/netfunnel-initialize.js** 에서 커스텀 가능합니다.
+> 통합형 스킨 : **src/components/Netfunnel.jsx** 에서 커스텀 가능합니다.
+
+
+
+`window.NetFunnel.SkinUtil.add(id, data, type)` : 대기창 Skin 추가 함수
+
+```javascript
+window.NetFunnel.SkinUtil.add(
+    'skin-id', // 대기창 Skin 식별자
+    {
+        prepareCallback() {
+            // 대기창 생성 시 실행되는 함수
+        },
+        updateCallback(percent, nwait, totwait, timeleft) {
+            // 대기창이 갱신될 때 마다 실행되는 함수
+            // percent : 진행률
+            // nwait : 현재 남아있는 대기자수
+            // totwait : 전체 대기자수
+            // timeleft : 남은 대기시간
+        },
+        // htmlStr을 통해 대기창 UI 마크업을 지정할 수 있습니다. 의 어트리부트를 통해 아래와 같은 기능을 활성화 할 수 있습니다.
+        // id="NetFunnel_Loading_Popup_Count"에 본인 앞 대기자 수가 노출됩니다.
+        // id="NetFunnel_Loading_Popup_NextCnt"에 본인 뒤 대기자 수가 노출됩니다.
+        // id="NetFunnel_Loading_Popup_TimeLeft"에 대기시간이 노출됩니다.
+        // id="NetFunnel_Loading_Popup_progressbar"에 progress bar가 노출됩니다.
+        // onclick="NetFunnel.countdown_stop()" 을 통해 대기 중지 함수를 호출 할 수 있습니다.
+        htmlStr: `
+
+    
+        ![대기중 안내 이미지](https://shopby-skin.cdn-nhncommerce.com/assets/images/img-area.gif)
+        
+            사용자가 많아 접속 대기중이에요
+            
+                
+                대기자 수 : 
+
+                
+                남은 시간 : 
+                
+
+            
+            
+                잠시만 기다리시면 순서에 따라 자동 접속됩니다.
+새로고침하면 대기시간이 길어질 수 있어요.
+            
+
+        
+    
+
+    },
+    'normal', // 대기창 Skin 타입 ["normal" | "mobile"]
+);
+```

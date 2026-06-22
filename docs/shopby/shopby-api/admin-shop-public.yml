@@ -1,0 +1,2268 @@
+openapi: 3.0.1
+info:
+  title: admin-shop
+  description: |-
+    | shop API란 ? 쇼핑몰 프런트 화면 제작시 필요한 API입니다.
+     기본 정보 관리(admin) 관련 shop API입니다.
+  version: '1.0'
+servers:
+  - url: https://shop-api.e-ncp.com
+tags:
+  - name: Mall
+    description: 몰
+paths:
+  /malls:
+    get:
+      tags:
+        - Mall
+      summary: 몰 정보 조회하기
+      description: |-
+        ## 부가설명 및 특이사항
+        몰 정보를 조회하는 API입니다.
+
+        몰 진입 시 전체 카테고리 조회 후 응답값을 localStorage(web), SharedPreference(android), NSUserDefaults(ios)와 같은 로컬 저장소에 두고 재사용하는 방식을 권장합니다.
+
+        expire time은 익일 0시로 설정을 권장합니다.
+
+        카테고리는 변경 가능하므로 상품상세 API의 카테고리 번호가 로컬 저장소에는 없을 수 있습니다.
+
+        그런 경우에는 카테고리 조회 API를 이용하여 로컬 저장소를 갱신해 주십시오.
+
+
+        ## CDN으로 대체하면 더 좋은 성능을 낼 수 있습니다.
+        해당 API는 상점 정보를 DB를 통해 조회하며, DB에서 데이터를 가져올 때 트래픽이 발생하는 경우 병목 현상으로 인해 API응답이 지연이 되는 경우가 있습니다.
+
+        하지만 CDN을 활용해 상점 정보를 가져오게 되면 트래픽 대부분을 CDN캐시 서버에서 처리하기 때문에 트래픽 폭주로 인한 서비스 장애를 사전에 방지할 수 있습니다.
+
+        또한 CDN 리소스를  최종 클라이언트에게 전달할 때, 일반 인터넷망이 아닌 전용선을 사용하여 빠르고 안전한 성능을 기대할 수 있습니다.
+
+        CDN경로에는 해당 API의 응답값과 동일한 상점 정보가 포함되어있고 해당 정보가 변경되면 5초이내로 CDN파일을 갱신하고 있습니다.
+
+        기존과 같이 응답값을 localStorage(web), SharedPreference(android), NSUserDefaults(ios)와 같은 로컬저장소에 두고 재사용하는 방식을 권장합니다.
+
+        자세한 개발방법은 아래 링크를 참조하세요.
+
+        [https://workspace.nhn-commerce.com/guide/skin/dev-cover/call-api#call-info](https://workspace.nhn-commerce.com/guide/skin/dev-cover/call-api#call-info)
+      operationId: get-malls
+      parameters:
+        - name: Version
+          in: header
+          description: API 버전
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+        - name: clientId
+          in: header
+          description: 쇼핑몰 클라이언트 아이디
+          required: true
+          schema:
+            type: string
+          example: test-client-id
+        - name: platform
+          in: header
+          description: '클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)'
+          required: true
+          schema:
+            type: string
+          example: PC
+        - name: language
+          in: header
+          description: '언어 (기본값: ko)'
+          required: false
+          schema:
+            type: string
+          example: ko
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/malls1431293416'
+              examples:
+                get-malls:
+                  value: |-
+                    {
+                      "mall" : {
+                        "mallNo" : 1,
+                        "mallName" : "테스트 쇼핑몰",
+                        "url" : {
+                          "pc" : "http://test.e-ncp.com",
+                          "mobile" : "http://test.e-ncp.com",
+                          "android" : "http://and.com/aa23",
+                          "ios" : "http://ios.com/aa23"
+                        },
+                        "grades" : [ {
+                          "used" : true,
+                          "label" : "기본등급",
+                          "description" : "기본등급입니다.",
+                          "evaluationCondition" : {
+                            "minimumCount" : 10,
+                            "minimumPayment" : 100000
+                          },
+                          "reserveAutoSupplying" : {
+                            "used" : true,
+                            "amount" : 100,
+                            "type" : "MONTHLY"
+                          },
+                          "reserveBenefit" : {
+                            "used" : true,
+                            "reserveRate" : 10
+                          },
+                          "coupons" : [ {
+                            "couponNo" : 2345,
+                            "couponName" : "실버쿠폰",
+                            "issueType" : "CODE_DESIGNATE_ADMIN_ONLY",
+                            "discountType" : "PERCENT",
+                            "discountAmount" : 1000,
+                            "discountPercent" : 10,
+                            "maximumDiscountAmount" : 10
+                          } ],
+                          "pointRate" : 0,
+                          "gradeDescription" : "초기등급",
+                          "accumulationRate" : 0,
+                          "minOrderCnt" : 0,
+                          "minOrderAmt" : 0
+                        } ],
+                        "serviceCenter" : {
+                          "email" : "test@test.com",
+                          "phoneNo" : "010-1111-1111"
+                        },
+                        "countryCode" : "KR",
+                        "introRedirection" : {
+                          "pc" : "ONLY_MEMBER",
+                          "mobile" : "ONLY_ADULT"
+                        },
+                        "godoSno" : "1234",
+                        "createdDateTime" : "2025-10-27T12:03:14.103636347",
+                        "escrowLogo" : {
+                          "pgType" : "KCP",
+                          "exposure" : true,
+                          "logoHtml" : "<div>LOGO</div>"
+                        },
+                        "globalMallType" : "SEPARATED_GLOBAL_MAIN",
+                        "globalMallHierarchy" : {
+                          "mainMallNos" : null,
+                          "subMallNos" : [ 1, 2 ]
+                        },
+                        "globalSubMallSummaries" : [ {
+                          "mallNo" : 2,
+                          "url" : {
+                            "pc" : "http://submalltest.e-ncp.com",
+                            "mobile" : "http://submalltest.e-ncp.com",
+                            "android" : "http://submalland.com/aa23",
+                            "ios" : "http://submallios.com/aa23"
+                          },
+                          "i18nConfig" : {
+                            "languages" : [ "EN" ],
+                            "currencies" : [ {
+                              "exchangeTo" : "USD",
+                              "exchangeRate" : 10
+                            } ]
+                          }
+                        } ]
+                      },
+                      "inquiryType" : [ {
+                        "inquiryTypeNo" : 6276,
+                        "inquiryTypeName" : "네이버페이문의",
+                        "inquiryTypeDescription" : "네이버페이 사용 시 네이버페이를 통해서 접수되는 문의가 연동되는 유형입니다."
+                      } ],
+                      "productInquiryType" : [ {
+                        "label" : "상품",
+                        "value" : "PRODUCT"
+                      } ],
+                      "productReviewReportType" : [ {
+                        "label" : "저작권 침해 및 기타사유",
+                        "value" : "COPYRIGHT"
+                      } ],
+                      "claimReasonType" : [ {
+                        "label" : "입금전취소",
+                        "value" : "CANCEL_BEFORE_PAY"
+                      } ],
+                      "claimStatusType" : [ {
+                        "label" : "취소완료[환불없음]",
+                        "value" : "CANCEL_NO_REFUND"
+                      } ],
+                      "orderStatusType" : [ {
+                        "label" : "입금대기",
+                        "value" : "DEPOSIT_WAIT"
+                      } ],
+                      "bankType" : [ {
+                        "value" : "KB",
+                        "name" : "국민은행",
+                        "code" : "004",
+                        "kcpCode" : "04"
+                      } ],
+                      "categories" : {
+                        "multiLevelCategories" : [ {
+                          "categoryNo" : 1,
+                          "label" : "게임",
+                          "depth" : 1,
+                          "icon" : "//image.nhn-commerce.com/icon.png",
+                          "content" : "<div>아이콘</div>",
+                          "children" : [ {
+                            "categoryNo" : 2,
+                            "label" : "게임기 주변기기",
+                            "depth" : 2,
+                            "icon" : "//image.nhn-commerce.com/icon.png",
+                            "content" : "<div>아이콘</div>",
+                            "children" : [ {
+                              "categoryNo" : 3,
+                              "label" : "닌텐도",
+                              "depth" : 3,
+                              "icon" : "//image.nhn-commerce.com/icon.png",
+                              "content" : "<div>아이콘</div>",
+                              "children" : [ {
+                                "categoryNo" : 4,
+                                "label" : "악세사리",
+                                "depth" : 4,
+                                "icon" : "//image.nhn-commerce.com/icon.png",
+                                "content" : "<div>아이콘</div>",
+                                "children" : [ {
+                                  "categoryNo" : 5,
+                                  "label" : "게임기 컨트롤러",
+                                  "depth" : 5,
+                                  "icon" : "//image.nhn-commerce.com/icon.png",
+                                  "content" : "<div>아이콘</div>",
+                                  "children" : null
+                                } ]
+                              } ]
+                            } ]
+                          } ]
+                        } ],
+                        "flatCategories" : [ {
+                          "depth1CategoryNo" : 1,
+                          "depth1Label" : "게임",
+                          "depth1Icon" : "//image.nhn-commerce.com/icon.png",
+                          "depth1Content" : "<div>아이콘</div>",
+                          "depth1DisplayOrder" : 1,
+                          "depth2CategoryNo" : 2,
+                          "depth2Label" : "게임기 주변기기",
+                          "depth2Icon" : "//image.nhn-commerce.com/icon.png",
+                          "depth2Content" : "<div>아이콘</div>",
+                          "depth2DisplayOrder" : 1,
+                          "depth3CategoryNo" : 3,
+                          "depth3Label" : "닌텐도",
+                          "depth3Icon" : "//image.nhn-commerce.com/icon.png",
+                          "depth3Content" : "<div>아이콘</div>",
+                          "depth3DisplayOrder" : 1,
+                          "depth4CategoryNo" : 4,
+                          "depth4Label" : "악세사리",
+                          "depth4Icon" : "//image.nhn-commerce.com/icon.png",
+                          "depth4Content" : "<div>아이콘</div>",
+                          "depth4DisplayOrder" : 1,
+                          "depth5CategoryNo" : 5,
+                          "depth5Label" : "게임기 컨트롤러",
+                          "depth5Icon" : "//image.nhn-commerce.com/icon.png",
+                          "depth5Content" : "<div>아이콘</div>",
+                          "depth5DisplayOrder" : 1,
+                          "fullCategoryName" : "카테고리"
+                        } ]
+                      },
+                      "boardsCategories" : [ {
+                        "boardNo" : 1,
+                        "boardId" : "freeboard",
+                        "boardName" : "자유게시판",
+                        "categories" : [ {
+                          "categoryNo" : 1,
+                          "label" : "질문"
+                        } ],
+                        "memberWrite" : false,
+                        "guestWrite" : false,
+                        "secreted" : false,
+                        "replied" : false,
+                        "used" : true,
+                        "thumbnailUsed" : true,
+                        "categoryUsed" : true,
+                        "displayType" : "LIST",
+                        "imageDisplayType" : "NOT_USED",
+                        "attachmentUsed" : false
+                      } ],
+                      "serviceBasicInfo" : {
+                        "companyName" : "엔에이치엔커머스",
+                        "businessRegistrationNo" : "120-86-46911",
+                        "representativeName" : "이윤식",
+                        "businessType" : "통신판매업",
+                        "businessCondition" : "정보통신업",
+                        "representPhoneNo" : "1688-7662",
+                        "representEmail" : "cs@nhn-commerce.com",
+                        "faxNo" : "02-567-3744",
+                        "onlineMarketingBusinessDeclarationNo" : "2015-서울구로-0049",
+                        "zipCd" : "08393",
+                        "address" : "서울특별시 구로구 구로동 디지털로26길 43, 대륭포스트타워 8차 R동 6~7층",
+                        "addressDetail" : "3층",
+                        "jibunAddress" : "서울특별시 구로구 구로동 222-22",
+                        "jibunAddressDetail" : "3층",
+                        "privacyManagerName" : "김종승",
+                        "privacyManagerPhoneNo" : "1688-7662",
+                        "plan" : "PREMIUM"
+                      },
+                      "bankAccountInfo" : {
+                        "bank" : "WOORI",
+                        "bankName" : "우리은행",
+                        "bankAccount" : "123456789",
+                        "bankDepositorName" : "커머스"
+                      },
+                      "bankAccountInfos" : [ {
+                        "bank" : null,
+                        "bankName" : "우리은행",
+                        "bankAccount" : "123456789",
+                        "bankDepositorName" : "커머스"
+                      } ],
+                      "memberJoinConfig" : {
+                        "memberId" : "NOT_USED",
+                        "birthday" : "NOT_USED",
+                        "password" : "NOT_USED",
+                        "sex" : "NOT_USED",
+                        "memberName" : "NOT_USED",
+                        "email" : "NOT_USED",
+                        "nickname" : "NOT_USED",
+                        "address" : "NOT_USED",
+                        "phoneNo" : "NOT_USED",
+                        "mobileNo" : "NOT_USED",
+                        "emailAgreement" : "NOT_USED",
+                        "smsAgreement" : "NOT_USED"
+                      },
+                      "accumulationConfig" : {
+                        "useProductAccumulation" : false,
+                        "useMemberAccumulation" : false,
+                        "accumulationRate" : 10,
+                        "accumulationName" : "구매 적립금",
+                        "accumulationDisplayFormatType" : "FIXED_AMT",
+                        "accumulationUnit" : "포인트",
+                        "accumulationGivePoint" : "AFTER_A_WEEK",
+                        "accumulationValidPeriod" : 3,
+                        "useExpireNotification" : false,
+                        "expireNotificationPoint" : 30,
+                        "productAccumulationBasisType" : null,
+                        "useSignUpAccumulation" : false,
+                        "signUpAccumulation" : 1000,
+                        "useReviewsAccumulation" : false,
+                        "reviewsAccumulationDetail" : {
+                          "reviewsLength" : 10,
+                          "reviewsAccumulation" : 100,
+                          "photoReviewsLength" : 10,
+                          "photoReviewsAccumulation" : 150
+                        },
+                        "limitMinProductPrice" : false,
+                        "accumulationUseMinProductPrice" : 5000,
+                        "limitMinPrice" : false,
+                        "accumulationUseMinPrice" : 1000,
+                        "limitMaxRate" : false,
+                        "accumulationUseMaxRate" : 100,
+                        "excludingReservePayAccumulation" : false,
+                        "excludingReservePayCoupon" : false,
+                        "adminMemo" : "적립금 지급",
+                        "useBirthdayAccumulation" : true,
+                        "birthdayAccumulation" : 1000
+                      },
+                      "cartConfig" : {
+                        "cartEquivalentOptionUnitType" : "QUANTITY",
+                        "storageMaxQuantity" : 100,
+                        "storagePeriod" : 7,
+                        "storagePeriodNoLimit" : false
+                      },
+                      "mallJoinConfig" : {
+                        "authenticationType" : "SMS_OCCUPANCY_AUTHENTICATION",
+                        "authenticationTimeType" : "JOIN_TIME"
+                      },
+                      "openIdJoinConfig" : {
+                        "authenticationType" : "SMS_OCCUPANCY_AUTHENTICATION",
+                        "authenticationTimeType" : "JOIN_TIME",
+                        "providers" : [ "payco", "kakao" ]
+                      },
+                      "externalServiceConfig" : {
+                        "googleAnalytics" : "googleAnalytics-value",
+                        "naverWebmaster" : "naverWebmaster-value",
+                        "kakaoMap" : {
+                          "kakaoMapKey" : "kakaoMapKey",
+                          "kakaoMapLatitude" : "30",
+                          "kakaoMapLongitude" : "70"
+                        },
+                        "useScript" : false
+                      },
+                      "termsConfig" : {
+                        "fairLogoUrl" : "http://test.com",
+                        "fairLogoUsed" : false
+                      },
+                      "instagramUsed" : false
+                    }
+  /malls/internationalization:
+    get:
+      tags:
+        - Mall
+      summary: '현재 몰의 다국어, 환율 설정 조회'
+      description: |-
+        ## 부가설명 및 특이사항
+        현재 몰의 다국어, 환율 설정 조회을 조회하는 API 입니다.
+      operationId: get-malls-i18n
+      parameters:
+        - name: Version
+          in: header
+          description: API 버전
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+        - name: clientId
+          in: header
+          description: 쇼핑몰 클라이언트 아이디
+          required: true
+          schema:
+            type: string
+          example: test-client-id
+        - name: platform
+          in: header
+          description: '클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)'
+          required: true
+          schema:
+            type: string
+          example: PC
+        - name: language
+          in: header
+          description: '언어 (기본값: ko)'
+          required: false
+          schema:
+            type: string
+          example: ko
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/malls-internationalization-1441815995'
+              examples:
+                get-malls-i18n:
+                  value: |-
+                    {
+                      "languages" : [ "KO" ],
+                      "currencies" : [ {
+                        "exchangeTo" : "KRW",
+                        "exchangeRate" : 1
+                      } ]
+                    }
+  /malls/partners:
+    get:
+      tags:
+        - Mall
+      summary: 몰과 계약한 파트너 목록 조회하기
+      description: |-
+        ## 부가설명 및 특이사항
+        몰과 계약한 파트너 목록을 조회하는 API입니다.
+      operationId: get-malls-partners
+      parameters:
+        - name: partnerNos
+          in: query
+          description: 파트너 번호
+          required: false
+          schema:
+            type: string
+          example: '1,2,3'
+        - name: Version
+          in: header
+          description: API 버전
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+        - name: clientId
+          in: header
+          description: 쇼핑몰 클라이언트 아이디
+          required: true
+          schema:
+            type: string
+          example: test-client-id
+        - name: platform
+          in: header
+          description: '클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)'
+          required: true
+          schema:
+            type: string
+          example: PC
+        - name: language
+          in: header
+          description: '언어 (기본값: ko)'
+          required: false
+          schema:
+            type: string
+          example: ko
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/malls-partners-200843305'
+              examples:
+                get-malls-partners:
+                  value: |-
+                    [ {
+                      "partnerName" : "",
+                      "businessRegistrationNo" : "",
+                      "companyName" : "",
+                      "onlineMarketingBusinessDeclarationNo" : null,
+                      "officeAddressLabel" : "",
+                      "faxNo" : "",
+                      "partnerNo" : 1,
+                      "ownerName" : "",
+                      "email" : "",
+                      "phoneNo" : ""
+                    } ]
+  /malls/ssl:
+    get:
+      tags:
+        - Mall
+      summary: 현재 도메인의 보안서버정보 조회하기
+      description: |-
+        ## 부가설명 및 특이사항
+        현재 도메인의 보안서버정보를 조회하는 API입니다.
+      operationId: get-malls-ssl
+      parameters:
+        - name: Version
+          in: header
+          description: API 버전
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+        - name: clientId
+          in: header
+          description: 쇼핑몰 클라이언트 아이디
+          required: true
+          schema:
+            type: string
+          example: test-client-id
+        - name: platform
+          in: header
+          description: '클라이언트 플랫폼 (PC, MOBILE_WEB, AOS, IOS)'
+          required: true
+          schema:
+            type: string
+          example: PC
+        - name: language
+          in: header
+          description: '언어 (기본값: ko)'
+          required: false
+          schema:
+            type: string
+          example: ko
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/malls-ssl-953646756'
+              examples:
+                get-malls-ssl:
+                  value: |-
+                    [ {
+                      "mallNo" : 1,
+                      "domain" : "aaa.co.kr",
+                      "trustSeal" : "trustSeal-script",
+                      "deviceType" : "PC"
+                    } ]
+components:
+  schemas:
+    malls-partners-200843305:
+      type: array
+      description: ''
+      items:
+        type: object
+        properties:
+          partnerNo:
+            type: number
+            description: 파트너 번호
+            example: 0
+          ownerName:
+            type: string
+            description: 대표자명 (nullable)
+            example: string
+          faxNo:
+            type: string
+            description: FAX 번호 (nullable)
+            example: string
+          partnerName:
+            type: string
+            description: 판매자명 (nullable)
+            example: string
+          officeAddressLabel:
+            type: string
+            description: 사업장 주소
+            example: string
+          companyName:
+            type: string
+            description: 상호명 (nullable)
+            example: string
+          businessRegistrationNo:
+            type: string
+            description: 사업자 번호 (nullable)
+            example: string
+          onlineMarketingBusinessDeclarationNo:
+            type: string
+            description: 통신판매신고번호 (nullable)
+            example: string
+          email:
+            type: string
+            description: 대표 이메일 (nullable)
+            example: string
+          phoneNo:
+            type: string
+            description: 대표번호 (nullable)
+            example: string
+    malls-ssl-953646756:
+      type: array
+      description: ''
+      items:
+        type: object
+        properties:
+          deviceType:
+            type: string
+            description: 디바이스타입
+            example: PC
+          domain:
+            type: string
+            description: 도메인
+            example: aaa.co.kr
+          mallNo:
+            type: number
+            description: 몰번호
+            example: 1
+          trustSeal:
+            type: string
+            description: 보안서버 인증서 씰 스크립트 (nullable)
+            example: trustSeal-script
+    malls1431293416:
+      type: object
+      properties:
+        memberJoinConfig:
+          type: object
+          properties:
+            emailAgreement:
+              type: string
+              description: email 동의 필수 여부 (nullable)
+              example: NOT_USED
+              enum:
+                - 'USED: 사용함'
+                - 'REQUIRED: 필수'
+                - 'NOT_USED: 사용안함'
+            birthday:
+              type: string
+              description: 생년월일 필수 여부 (nullable)
+              example: NOT_USED
+              enum:
+                - 'USED: 사용함'
+                - 'REQUIRED: 필수'
+                - 'NOT_USED: 사용안함'
+            password:
+              type: string
+              description: 비밀번호 필수 여부 (nullable)
+              example: NOT_USED
+              enum:
+                - 'USED: 사용함'
+                - 'REQUIRED: 필수'
+                - 'NOT_USED: 사용안함'
+            address:
+              type: string
+              description: 주소 필수 여부 (nullable)
+              example: NOT_USED
+              enum:
+                - 'USED: 사용함'
+                - 'REQUIRED: 필수'
+                - 'NOT_USED: 사용안함'
+            smsAgreement:
+              type: string
+              description: SMS 동의 필수 여부 (nullable)
+              example: NOT_USED
+              enum:
+                - 'USED: 사용함'
+                - 'REQUIRED: 필수'
+                - 'NOT_USED: 사용안함'
+            sex:
+              type: string
+              description: 성별 필수 여부 (nullable)
+              example: NOT_USED
+              enum:
+                - 'USED: 사용함'
+                - 'REQUIRED: 필수'
+                - 'NOT_USED: 사용안함'
+            nickname:
+              type: string
+              description: 닉네임 필수 여부 (nullable)
+              example: NOT_USED
+              enum:
+                - 'USED: 사용함'
+                - 'REQUIRED: 필수'
+                - 'NOT_USED: 사용안함'
+            memberName:
+              type: string
+              description: 회원명 필수 여부 (nullable)
+              example: NOT_USED
+              enum:
+                - 'USED: 사용함'
+                - 'REQUIRED: 필수'
+                - 'NOT_USED: 사용안함'
+            mobileNo:
+              type: string
+              description: 휴대전화번호 필수 여부 (nullable)
+              example: NOT_USED
+              enum:
+                - 'USED: 사용함'
+                - 'REQUIRED: 필수'
+                - 'NOT_USED: 사용안함'
+            phoneNo:
+              type: string
+              description: 전화번호 필수 여부 (nullable)
+              example: NOT_USED
+              enum:
+                - 'USED: 사용함'
+                - 'REQUIRED: 필수'
+                - 'NOT_USED: 사용안함'
+            email:
+              type: string
+              description: 이메일 필수 여부 (nullable)
+              example: NOT_USED
+              enum:
+                - 'USED: 사용함'
+                - 'REQUIRED: 필수'
+                - 'NOT_USED: 사용안함'
+            memberId:
+              type: string
+              description: 아이디 필수 여부 (nullable)
+              example: NOT_USED
+              enum:
+                - 'USED: 사용함'
+                - 'REQUIRED: 필수'
+                - 'NOT_USED: 사용안함'
+          description: 회원 가입 설정
+        inquiryType:
+          type: array
+          description: 1:1문의 유형 목록
+          items:
+            type: object
+            properties:
+              inquiryTypeDescription:
+                type: string
+                description: 1:1문의 유형 설명
+                example: 네이버페이 사용 시 네이버페이를 통해서 접수되는 문의가 연동되는 유형입니다.
+              inquiryTypeNo:
+                type: number
+                description: 1:1문의 유형 번호
+                example: 6276
+              inquiryTypeName:
+                type: string
+                description: 1:1문의 유형 이름
+                example: 네이버페이문의
+        bankAccountInfo:
+          type: object
+          properties:
+            bankAccount:
+              type: string
+              description: 계좌번호 (nullable)
+              example: '123456789'
+            bankDepositorName:
+              type: string
+              description: 예금주명 (nullable)
+              example: 커머스
+            bank:
+              type: string
+              description: 은행코드 (nullable)
+              example: WOORI
+            bankName:
+              type: string
+              description: 은행명 (nullable)
+              example: 우리은행
+          description: 쇼핑몰 계좌 정보
+        bankType:
+          type: array
+          description: 은행 목록
+          items:
+            type: object
+            properties:
+              kcpCode:
+                type: string
+                description: KCP 은행 관리코드
+                example: '04'
+                enum:
+                  - '02: 산업은행'
+                  - '03: 기업은행'
+                  - '04: 국민은행'
+                  - '05: 외환은행'
+                  - '07: 수협'
+                  - '30: 수협중앙회'
+                  - '08: 수출입은행'
+                  - '11: NH농협은행'
+                  - '12: 지역농축협'
+                  - '20: 우리은행'
+                  - '23: SC제일은행'
+                  - '27: 한국씨티은행'
+                  - '31: 대구은행'
+                  - '32: 부산은행'
+                  - '34: 광주은행'
+                  - '35: 제주은행'
+                  - '37: 전북은행'
+                  - '39: 경남은행'
+                  - '45: 새마을금고'
+                  - '48: 신협'
+                  - '54: HSBC은행'
+                  - '64: 산림조합중앙회'
+                  - '71: 우체국'
+                  - '81: KEB하나은행'
+                  - '26: 신한은행'
+                  - '89: 케이뱅크'
+                  - '90: 카카오뱅크'
+                  - '92: 토스뱅크'
+                  - '209: 유안타증권'
+                  - '218: KB증권'
+                  - '238: 미래에셋증권'
+                  - '238: 미래에셋대우증권'
+                  - '240: 삼성증권'
+                  - '243: 한국투자증권'
+                  - '247: NH투자증권'
+                  - '261: 교보증권'
+                  - '262: 하이투자증권'
+                  - '263: HMC투자증권'
+                  - '264: 키움증권'
+                  - '265: 이베스트투자증권'
+                  - '266: SK증권'
+                  - '267: 대신증권'
+                  - '268: 솔로몬증권'
+                  - '269: 한화투자증권'
+                  - '270: 하나금융투자'
+                  - '278: 신한금융투자'
+                  - '279: DB금융투자'
+                  - '280: 유진투자증권'
+                  - '287: 메리츠종합금융증권'
+                  - '290: 부국증권'
+                  - '291: 신영증권'
+                  - '292: 케이프투자증권'
+              code:
+                type: string
+                description: 은행 코드
+                example: '004'
+                enum:
+                  - '000: 미확인은행'
+                  - '002: 산업은행'
+                  - '003: 기업은행'
+                  - '004: 국민은행'
+                  - '005: 외환은행'
+                  - '007: 수협'
+                  - '030: 수협중앙회'
+                  - '008: 수출입은행'
+                  - '011: NH농협은행'
+                  - '012: 지역농축협'
+                  - '020: 우리은행'
+                  - '023: SC제일은행'
+                  - '027: 한국씨티은행'
+                  - '031: 대구은행'
+                  - '032: 부산은행'
+                  - '034: 광주은행'
+                  - '035: 제주은행'
+                  - '037: 전북은행'
+                  - '039: 경남은행'
+                  - '045: 새마을금고'
+                  - '048: 신협'
+                  - '050: 상호저축은행'
+                  - '054: HSBC은행'
+                  - '055: 도이치은행'
+                  - '064: 산림조합중앙회'
+                  - '071: 우체국'
+                  - '081: KEB하나은행'
+                  - '088: 신한은행'
+                  - '089: 케이뱅크'
+                  - '090: 카카오뱅크'
+                  - '092: 토스뱅크'
+                  - '209: 유안타증권'
+                  - '218: KB증권'
+                  - '230: 미래에셋증권'
+                  - '238: 미래에셋대우증권'
+                  - '240: 삼성증권'
+                  - '243: 한국투자증권'
+                  - '247: NH투자증권'
+                  - '261: 교보증권'
+                  - '262: 하이투자증권'
+                  - '263: HMC투자증권'
+                  - '264: 키움증권'
+                  - '265: 이베스트투자증권'
+                  - '266: SK증권'
+                  - '267: 대신증권'
+                  - '268: 솔로몬증권'
+                  - '269: 한화투자증권'
+                  - '270: 하나금융투자'
+                  - '278: 신한금융투자'
+                  - '279: DB금융투자'
+                  - '280: 유진투자증권'
+                  - '287: 메리츠종합금융증권'
+                  - '290: 부국증권'
+                  - '291: 신영증권'
+                  - '292: 케이프투자증권'
+                  - '901: 미즈호은행'
+                  - '905: UFJ은행'
+                  - '909: 미쓰이스미토모은행'
+                  - '910: 리소나은행'
+              name:
+                type: string
+                description: 은행명
+                example: 국민은행
+                enum:
+                  - 미확인은행
+                  - 산업은행
+                  - 기업은행
+                  - 국민은행
+                  - 외환은행
+                  - 수협
+                  - 수협중앙회
+                  - 수출입은행
+                  - NH농협은행
+                  - 지역농축협
+                  - 우리은행
+                  - SC제일은행
+                  - 한국씨티은행
+                  - 대구은행
+                  - 부산은행
+                  - 광주은행
+                  - 제주은행
+                  - 전북은행
+                  - 경남은행
+                  - 새마을금고
+                  - 신협
+                  - 상호저축은행
+                  - HSBC은행
+                  - 도이치은행
+                  - 산림조합중앙회
+                  - 우체국
+                  - KEB하나은행
+                  - 신한은행
+                  - 케이뱅크
+                  - 카카오뱅크
+                  - 토스뱅크
+                  - 유안타증권
+                  - KB증권
+                  - 미래에셋증권
+                  - 미래에셋대우증권
+                  - 삼성증권
+                  - 한국투자증권
+                  - NH투자증권
+                  - 교보증권
+                  - 하이투자증권
+                  - HMC투자증권
+                  - 키움증권
+                  - 이베스트투자증권
+                  - SK증권
+                  - 대신증권
+                  - 솔로몬증권
+                  - 한화투자증권
+                  - 하나금융투자
+                  - 신한금융투자
+                  - DB금융투자
+                  - 유진투자증권
+                  - 메리츠종합금융증권
+                  - 부국증권
+                  - 신영증권
+                  - 케이프투자증권
+                  - 미즈호은행
+                  - UFJ은행
+                  - 미쓰이스미토모은행
+                  - 리소나은행
+              value:
+                type: string
+                description: 은행 영문 관리명
+                example: KB
+                enum:
+                  - 'ANONYMOUS: 미확인은행'
+                  - 'KDB: 산업은행'
+                  - 'IBK: 기업은행'
+                  - 'KB: 국민은행'
+                  - 'KEB: 외환은행'
+                  - 'SUHYUP: 수협'
+                  - 'SUHYUB_LOCAL_BANK: 수협중앙회'
+                  - 'KEXIM: 수출입은행'
+                  - 'NH: NH농협은행'
+                  - 'NHLOCAL: 지역농축협'
+                  - 'WOORI: 우리은행'
+                  - 'SC: SC제일은행'
+                  - 'CITY: 한국씨티은행'
+                  - 'DAEGU: 대구은행'
+                  - 'PUSAN: 부산은행'
+                  - 'GWANGJU: 광주은행'
+                  - 'JEJU: 제주은행'
+                  - 'JEONBUK: 전북은행'
+                  - 'GYEONGNAM: 경남은행'
+                  - 'KFCC: 새마을금고'
+                  - 'CU: 신협'
+                  - 'SANGHO: 상호저축은행'
+                  - 'HSBC: HSBC은행'
+                  - 'DEUTSCHE: 도이치은행'
+                  - 'NFCF: 산림조합중앙회'
+                  - 'EPOST: 우체국'
+                  - 'KEBHANA: KEB하나은행'
+                  - 'SHINHAN: 신한은행'
+                  - 'KBANK: 케이뱅크'
+                  - 'KAKAO: 카카오뱅크'
+                  - 'TOSS: 토스뱅크'
+                  - 'YUANTA: 유안타증권'
+                  - 'KBSEC: KB증권'
+                  - 'MIRAE: 미래에셋증권'
+                  - 'MIRAEDAEWOO: 미래에셋대우증권'
+                  - 'SAMSUNG: 삼성증권'
+                  - 'HANKOOK: 한국투자증권'
+                  - 'NH_INVEST: NH투자증권'
+                  - 'KYOBO: 교보증권'
+                  - 'HI_INVEST: 하이투자증권'
+                  - 'HMC_INVEST: HMC투자증권'
+                  - 'KIWOOM: 키움증권'
+                  - 'EBEST: 이베스트투자증권'
+                  - 'SK: SK증권'
+                  - 'DAISHIN: 대신증권'
+                  - 'SOLOMON_INVEST: 솔로몬증권'
+                  - 'HANHWA: 한화투자증권'
+                  - 'HANA_INVEST: 하나금융투자'
+                  - 'SHINHAN_INVEST: 신한금융투자'
+                  - 'DONGBU: DB금융투자'
+                  - 'EUGENE_INVEST: 유진투자증권'
+                  - 'MERITZ_COMPREHENSIVE: 메리츠종합금융증권'
+                  - 'BOOKOOK: 부국증권'
+                  - 'SHINYOUNG: 신영증권'
+                  - 'CAPE: 케이프투자증권'
+                  - 'MIZUHO: 미즈호은행'
+                  - 'UFJ: UFJ은행'
+                  - 'SMBC: 미쓰이스미토모은행'
+                  - 'RESONA: 리소나은행'
+        orderStatusType:
+          type: array
+          description: 주문상태 목록
+          items:
+            type: object
+            properties:
+              label:
+                type: string
+                description: 주문상태 명칭
+                example: 입금대기
+                enum:
+                  - 입금대기
+                  - 결제완료
+                  - 상품준비중
+                  - 배송준비중
+                  - 배송중
+                  - 배송완료
+                  - 구매확정
+                  - 취소완료
+                  - 반품완료
+                  - 교환완료
+                  - 결제대기
+                  - 결제포기
+                  - 결제실패
+                  - 삭제
+                  - 교환대기
+                  - 환불완료
+              value:
+                type: string
+                description: 주문상태 값
+                example: DEPOSIT_WAIT
+                enum:
+                  - 'DEPOSIT_WAIT: 입금대기'
+                  - 'PAY_DONE: 결제완료'
+                  - 'PRODUCT_PREPARE: 상품준비중'
+                  - 'DELIVERY_PREPARE: 배송준비중'
+                  - 'DELIVERY_ING: 배송중'
+                  - 'DELIVERY_DONE: 배송완료'
+                  - 'BUY_CONFIRM: 구매확정'
+                  - 'CANCEL_DONE: 취소완료'
+                  - 'RETURN_DONE: 반품완료'
+                  - 'EXCHANGE_DONE: 교환완료'
+                  - 'PAY_WAIT: 결제대기'
+                  - 'PAY_CANCEL: 결제포기'
+                  - 'PAY_FAIL: 결제실패'
+                  - 'DELETE: 삭제'
+                  - 'EXCHANGE_WAIT: 교환대기'
+                  - 'REFUND_DONE: 환불완료'
+        mall:
+          type: object
+          properties:
+            globalMallHierarchy:
+              type: object
+              properties:
+                mainMallNos:
+                  type: array
+                  description: 메인 몰 번호 (nullable)
+                  example: 'null'
+                  items:
+                    type: number
+                subMallNos:
+                  type: array
+                  description: 서브 몰 번호 (nullable)
+                  example: '[1, 2]'
+                  items:
+                    type: number
+              description:
+                "글로벌 몰 메인-서브 관계 (nullable)^|GlobalMallHierarchyConfig(mainMallNos=null,\
+                \ subMallNos=[1, 2])"
+            godoSno:
+              type: string
+              description: 커머스 상점번호
+              example: '1234'
+            mallName:
+              type: string
+              description: 쇼핑몰명
+              example: 테스트 쇼핑몰
+            createdDateTime:
+              type: string
+              description: 쇼핑몰 생성일
+              example: yyyy-MM-dd HH:mm:ss
+            grades:
+              type: array
+              description: 등급
+              items:
+                type: object
+                properties:
+                  reserveAutoSupplying:
+                    type: object
+                    properties:
+                      amount:
+                        type: number
+                        description: 적립금 자동지급 적립금액
+                        example: 100
+                      used:
+                        type: boolean
+                        description: 적립금 자동지급 사용여부
+                        example: true
+                      type:
+                        type: string
+                        description: 적립금 자동지급 유형
+                        example: MONTHLY
+                        enum:
+                          - 'NONE: 사용 안 함'
+                          - 'ONCE: 1회 지급'
+                          - 'MONTHLY: 매월 지급'
+                    description: 적립금 자동지급
+                  evaluationCondition:
+                    type: object
+                    properties:
+                      minimumPayment:
+                        type: number
+                        description: 최소 구매 금액
+                        example: 100000
+                      minimumCount:
+                        type: number
+                        description: 최소 구매 횟수
+                        example: 10
+                    description: 회원 등급 평가 조건
+                  coupons:
+                    type: array
+                    description: 회원 등급에 발급된 쿠폰
+                    items:
+                      type: object
+                      properties:
+                        issueType:
+                          type: string
+                          description: 쿠폰 발급 유형
+                          example: CODE_DESIGNATE_ADMIN_ONLY
+                          enum:
+                            - 'DOWNLOAD: 다운로드'
+                            - 'CODE_DESIGNATE: 지정코드'
+                            - 'CODE_RANDOM: 난수코드'
+                            - 'INSERT: 인서트 발급'
+                            - 'CODE_DESIGNATE_ADMIN_ONLY: 관리자 지정코드'
+                        maximumDiscountAmount:
+                          type: number
+                          description: 최대 할인금액 (정률할인시)
+                          example: 10
+                        couponName:
+                          type: string
+                          description: 쿠폰 이름
+                          example: 실버쿠폰
+                        discountPercent:
+                          type: number
+                          description: 할인률 (정률할인시)
+                          example: 10
+                        discountAmount:
+                          type: number
+                          description: 할인금액 (정액할인시)
+                          example: 1000
+                        discountType:
+                          type: string
+                          description: 쿠폰 할인 유형
+                          example: PERCENT
+                          enum:
+                            - 'AMOUNT: 정액할인'
+                            - 'PERCENT: 정률할인'
+                        couponNo:
+                          type: number
+                          description: 쿠폰 번호
+                          example: 2345
+                  description:
+                    type: string
+                    description: 등급 설명
+                    example: 기본등급입니다.
+                  label:
+                    type: string
+                    description: 등급명
+                    example: 기본등급
+                  used:
+                    type: boolean
+                    description: 등급 사용 여부
+                    example: true
+                  reserveBenefit:
+                    type: object
+                    properties:
+                      reserveRate:
+                        type: number
+                        description: 적립금 혜택 적립률
+                        example: 10
+                      used:
+                        type: boolean
+                        description: 적립금 혜택 사용여부
+                        example: true
+                    description: 적립금 혜택
+            url:
+              type: object
+              properties:
+                pc:
+                  type: string
+                  description: PC 접속 URL
+                  example: http://test.e-ncp.com
+                android:
+                  type: string
+                  description: 안드로이드 마켓 URL
+                  example: http://and.com/aa23
+                mobile:
+                  type: string
+                  description: 모바일웹 접속 URL
+                  example: http://test.e-ncp.com
+                ios:
+                  type: string
+                  description: 앱스토어 URL
+                  example: http://ios.com/aa23
+              description: 접속 URL
+            globalSubMallSummaries:
+              type: array
+              description:
+                "글로벌 서브몰 요약 정보 리스트^|[GlobalSubMallInfos(mallNo=2, url=MallUrl(pc=http://submalltest.e-ncp.com,\
+                \ mobile=http://submalltest.e-ncp.com, android=http://submalland.com/aa23,\
+                \ ios=http://submallios.com/aa23), i18nConfig=I18NConfig(languages=[EN],\
+                \ currencies=[Currency(exchangeTo=USD, exchangeRate=10)]))]"
+              items:
+                type: object
+                properties:
+                  i18nConfig:
+                    type: object
+                    properties:
+                      languages:
+                        type: array
+                        description: '글로벌 서브몰 언어 설정(KO, ZH, JA, EN)'
+                        example: '[EN]'
+                        items:
+                          oneOf:
+                            - type: object
+                            - type: boolean
+                            - type: string
+                            - type: number
+                      currencies:
+                        type: array
+                        description: "글로벌 서브몰 화폐/통화 설정^|[Currency(exchangeTo=USD,\
+                          \ exchangeRate=10)]"
+                        items:
+                          type: object
+                          properties:
+                            exchangeTo:
+                              type: string
+                              description: '통화(KRW, USD, JPY, CNY)'
+                              example: USD
+                            exchangeRate:
+                              type: number
+                              description: 비율
+                              example: 10
+                    description:
+                      "글로벌 서브몰 국제화(internationalization) 설정 (nullable)^|I18NConfig(languages=[EN],\
+                      \ currencies=[Currency(exchangeTo=USD, exchangeRate=10)])"
+                  mallNo:
+                    type: number
+                    description: 글로벌 서브몰 번호
+                    example: 2
+                  url:
+                    type: object
+                    properties:
+                      pc:
+                        type: string
+                        description: 글로벌 서브몰 PC 접속 URL
+                        example: http://submalltest.e-ncp.com
+                      android:
+                        type: string
+                        description: 글로벌 서브몰 안드로이드 마켓 URL
+                        example: http://submalland.com/aa23
+                      mobile:
+                        type: string
+                        description: 글로벌 서브몰 모바일웹 접속 URL
+                        example: http://submalltest.e-ncp.com
+                      ios:
+                        type: string
+                        description: 글로벌 서브몰 앱스토어 URL
+                        example: http://submallios.com/aa23
+                    description: 글로벌 서브몰 접속 URL
+            introRedirection:
+              type: object
+              properties:
+                pc:
+                  type: string
+                  description: 인트로 페이지 PC 웹 설정정보
+                  example: ONLY_MEMBER
+                  enum:
+                    - 'NONE: 사용안함'
+                    - 'NO_ACCESS: 접속 불가'
+                    - 'ONLY_MEMBER: 회원 인증'
+                    - 'ONLY_ADULT: 성인 인증'
+                mobile:
+                  type: string
+                  description: 인트로 페이지 모바일 웹 설정정보
+                  example: ONLY_ADULT
+                  enum:
+                    - 'NONE: 사용안함'
+                    - 'NO_ACCESS: 접속 불가'
+                    - 'ONLY_MEMBER: 회원 인증'
+                    - 'ONLY_ADULT: 성인 인증'
+              description: 인트로 페이지 설정정보
+            globalMallType:
+              type: string
+              description: 글로벌 몰 타입
+              example: SEPARATED_GLOBAL_MAIN
+              enum:
+                - 'LOCAL: 일반몰'
+                - 'INTEGRATED_GLOBAL: 통합형 글로벌 몰'
+                - 'SEPARATED_GLOBAL_MAIN: 분리형 글로벌 메인'
+                - 'SEPARATED_GLOBAL_SUB: 분리형 글로벌 서브'
+            countryCode:
+              type: string
+              description: 쇼핑몰 서비스 국가
+              example: KR
+            serviceCenter:
+              type: object
+              properties:
+                phoneNo:
+                  type: string
+                  description: 서비스센터 전화번호
+                  example: 010-1111-1111
+                email:
+                  type: string
+                  description: 서비스센터 이메일
+                  example: test@test.com
+              description: 서비스센터 정보
+            mallNo:
+              type: number
+              description: 몰번호
+              example: 1
+            escrowLogo:
+              type: object
+              properties:
+                logoHtml:
+                  type: string
+                  description: 로고 노출에 필요한 HTML 코드 (이니시스만 반환됨) (nullable)
+                  example: <div>LOGO</div>
+                pgType:
+                  type: string
+                  description: PG사
+                  example: KCP
+                  enum:
+                    - 'PAYCO: 페이코'
+                    - 'PAYPAL: 페이팔'
+                    - 'STRIPE: 스트라이프'
+                    - 'KCP: KCP'
+                    - 'INICIS: 이니시스'
+                    - 'KCP_MOBILE: KCP 모바일'
+                    - 'KCP_APP: KCP 앱'
+                    - 'NAVER_PAY: 네이버페이'
+                    - 'LIIVMATE: 리브메이트'
+                    - 'PAYPALPRO: 페이팔 프로'
+                    - 'ATHOR_NET: Athonet'
+                    - 'KAKAO_PAY: 카카오페이'
+                    - 'NAVER_EASY_PAY: 이지페이'
+                    - 'TOSS_PAYMENTS: 토스페이먼츠'
+                    - 'CHAI: CHAI'
+                    - 'VERITRANS: VeriTrans'
+                    - 'EXIMBAY_GLOBAL: 엑심베이'
+                    - 'EASY_PAY: 이지페이'
+                    - 'GALAXIA_MONEY_TREE: 갤럭시아머니트리'
+                    - 'EASY_PAY_OVERSEAS: 이지페이 (해외구매대행 전용)'
+                exposure:
+                  type: boolean
+                  description: 에스크로 이미지 노출여부
+                  example: true
+              description: 에스크로 로고정보
+          description: 쇼핑몰 정보
+        claimReasonType:
+          type: array
+          description: 클레임 사유 목록
+          items:
+            type: object
+            properties:
+              label:
+                type: string
+                description: 클레임 사유 명칭
+                example: 입금전취소
+                enum:
+                  - '단순변심(색상,사이즈)'
+                  - 상품불량/파손
+                  - 배송누락/오배송
+                  - 재고부족(시스템)
+                  - 입금전취소
+                  - 상품상세 정보와 다름
+                  - 판매자 배송 지연
+                  - 상품 품절/재고 없음
+                  - 기타(판매자 귀책)
+                  - 기타(구매자 귀책)
+              value:
+                type: string
+                description: 클레임 사유 값
+                example: CANCEL_BEFORE_PAY
+                enum:
+                  - 'CHANGE_MIND: 단순변심(색상,사이즈)'
+                  - 'DEFECTIVE_PRODUCT: 상품불량/파손'
+                  - 'WRONG_DELIVERY: 배송누락/오배송'
+                  - 'OUT_OF_STOCK_SYSTEM: 재고부족(시스템)'
+                  - 'CANCEL_BEFORE_PAY: 입금전취소'
+                  - 'WRONG_PRODUCT_DETAIL: 상품상세 정보와 다름'
+                  - 'DELAY_DELIVERY: 판매자 배송 지연'
+                  - 'OUT_OF_STOCK: 상품 품절/재고 없음'
+                  - 'OTHERS_SELLER: 기타(판매자 귀책)'
+                  - 'OTHERS_BUYER: 기타(구매자 귀책)'
+        serviceBasicInfo:
+          type: object
+          properties:
+            address:
+              type: string
+              description: 주소 (nullable)
+              example: '서울특별시 구로구 구로동 디지털로26길 43, 대륭포스트타워 8차 R동 6~7층'
+            representEmail:
+              type: string
+              description: 대표 이메일 (nullable)
+              example: cs@nhn-commerce.com
+            companyName:
+              type: string
+              description: 회사명 (nullable)
+              example: 엔에이치엔커머스
+            privacyManagerName:
+              type: string
+              description: 개인정보보호 책임자명 (nullable)
+              example: 김종승
+            jibunAddress:
+              type: string
+              description: 지번 주소 (nullable)
+              example: 서울특별시 구로구 구로동 222-22
+            onlineMarketingBusinessDeclarationNo:
+              type: string
+              description: 통신판매업신고 번호 (nullable)
+              example: 2015-서울구로-0049
+            businessCondition:
+              type: string
+              description: 업태 (nullable)
+              example: 정보통신업
+            zipCd:
+              type: string
+              description: 우편번호 (nullable)
+              example: '08393'
+            addressDetail:
+              type: string
+              description: 상세주소 (nullable)
+              example: 3층
+            faxNo:
+              type: string
+              description: 팩스번호 (nullable)
+              example: 02-567-3744
+            privacyManagerPhoneNo:
+              type: string
+              description: 개인정보보호 책임자 전화번호 (nullable)
+              example: 1688-7662
+            businessRegistrationNo:
+              type: string
+              description: 사업자등록번호 (nullable)
+              example: 120-86-46911
+            representPhoneNo:
+              type: string
+              description: 대표 전화번호 (nullable)
+              example: 1688-7662
+            businessType:
+              type: string
+              description: 업종 (nullable)
+              example: 통신판매업
+            plan:
+              type: string
+              description: 샵바이 서비스 플랜명
+              example: PREMIUM
+            jibunAddressDetail:
+              type: string
+              description: 지번 상세주소 (nullable)
+              example: 3층
+            representativeName:
+              type: string
+              description: 대표자명 (nullable)
+              example: 이윤식
+          description: 쇼핑몰 기본정보
+        termsConfig:
+          type: object
+          properties:
+            fairLogoUsed:
+              type: boolean
+              description: 공정거래 로고 사용 여부 (nullable)
+              example: false
+            fairLogoUrl:
+              type: string
+              description: 공정거래 로고 이미지 URL (nullable)
+              example: http://test.com
+          description: 공정거래 로고 정보
+        openIdJoinConfig:
+          type: object
+          properties:
+            authenticationType:
+              type: string
+              description: 오픈아이디 회원인증 수단 (nullable)
+              example: SMS_OCCUPANCY_AUTHENTICATION
+              enum:
+                - 'AUTHENTICATION_BY_PHONE: 휴대폰 본인 인증'
+                - 'SMS_AUTHENTICATION: SMS 비점유 인증'
+                - 'SMS_OCCUPANCY_AUTHENTICATION: SMS 점유 인증'
+                - 'AUTHENTICATION_BY_EMAIL: EMAIL 인증'
+                - 'NOT_USED: 인증 없음'
+            authenticationTimeType:
+              type: string
+              description: 오픈아이디 회원인증 시점 (nullable)
+              example: JOIN_TIME
+              enum:
+                - 'JOIN_TIME: 회원가입 시 인증'
+                - 'PAYMENT_TIME: 최초 상품 구매 시 인증'
+                - 'NONE: 인증하지 않음'
+            providers:
+              type: array
+              description: 지원하는 오픈아이디 (nullable)
+              example: '["payco","kakao"]'
+              items:
+                type: string
+                enum:
+                  - 'PAYCO: 페이코'
+                  - 'NAVER: 네이버'
+                  - 'KAKAO: 카카오'
+                  - 'KAKAO_SYNC: 카카오 싱크'
+                  - 'FACEBOOK: 페이스북'
+                  - 'LINE: 라인'
+                  - 'APPLE: 애플'
+                  - 'GOOGLE: 구글'
+                  - 'APP_CARD: 앱카드'
+          description: 오픈아이디 설정 정보
+        externalServiceConfig:
+          type: object
+          properties:
+            kakaoMap:
+              type: object
+              properties:
+                kakaoMapLongitude:
+                  type: string
+                  description: 카카오맵 경도 (nullable)
+                  example: '70'
+                kakaoMapLatitude:
+                  type: string
+                  description: 카카오맵 위도 (nullable)
+                  example: '30'
+                kakaoMapKey:
+                  type: string
+                  description: 카카오맵 Appkey (nullable)
+                  example: kakaoMapKey
+              description: ''
+            googleAnalytics:
+              type: string
+              description: 구글 통계 추적 ID (nullable)
+              example: googleAnalytics-value
+            useScript:
+              type: boolean
+              description: 외부스크립트 사용여부 (nullable)
+              example: false
+            naverWebmaster:
+              type: string
+              description: 네이버 웹마스터 Appkey (nullable)
+              example: naverWebmaster-value
+          description: 외부 서비스 설정
+        claimStatusType:
+          type: array
+          description: 클레임상태 목록
+          items:
+            type: object
+            properties:
+              label:
+                type: string
+                description: 클레임상태 명칭
+                example: '취소완료[환불없음]'
+                enum:
+                  - '취소완료[환불없음]'
+                  - '취소신청[승인대기]'
+                  - '취소처리[환불보류]'
+                  - '취소처리[환불대기]'
+                  - '취소완료[환불완료]'
+                  - '반품신청[승인대기]'
+                  - '반품신청[철회대기]'
+                  - '반품처리[수거진행]'
+                  - '반품처리[환불보류]'
+                  - '반품처리[환불대기]'
+                  - '반품완료[환불완료]'
+                  - '교환처리[조정요청]'
+                  - '교환신청[승인대기]'
+                  - '교환처리[철회대기]'
+                  - '교환처리[수거진행]'
+                  - '교환처리[결제대기]'
+                  - '교환처리[환불보류]'
+                  - '교환처리[처리대기]'
+                  - 교환완료
+                  - '교환처리[입금처리대기]'
+                  - '교환처리[환불대기]'
+                  - '교환완료[결제완료]'
+                  - '교환완료[환불완료]'
+              value:
+                type: string
+                description: 클레임상태 값
+                example: CANCEL_NO_REFUND
+                enum:
+                  - 'CANCEL_NO_REFUND: 취소완료[환불없음]'
+                  - 'CANCEL_REQUEST: 취소신청[승인대기]'
+                  - 'CANCEL_PROC_REQUEST_REFUND: 취소처리[환불보류]'
+                  - 'CANCEL_PROC_WAITING_REFUND: 취소처리[환불대기]'
+                  - 'CANCEL_DONE: 취소완료[환불완료]'
+                  - 'RETURN_REQUEST: 반품신청[승인대기]'
+                  - 'RETURN_REJECT_REQUEST: 반품신청[철회대기]'
+                  - 'RETURN_PROC_BEFORE_RECEIVE: 반품처리[수거진행]'
+                  - 'RETURN_PROC_REQUEST_REFUND: 반품처리[환불보류]'
+                  - 'RETURN_PROC_WAITING_REFUND: 반품처리[환불대기]'
+                  - 'RETURN_DONE: 반품완료[환불완료]'
+                  - 'RETURN_REFUND_AMT_ADJUST_REQUESTED: 교환처리[조정요청]'
+                  - 'EXCHANGE_REQUEST: 교환신청[승인대기]'
+                  - 'EXCHANGE_REJECT_REQUEST: 교환처리[철회대기]'
+                  - 'EXCHANGE_PROC_BEFORE_RECEIVE: 교환처리[수거진행]'
+                  - 'EXCHANGE_PROC_REQUEST_PAY: 교환처리[결제대기]'
+                  - 'EXCHANGE_PROC_REQUEST_REFUND: 교환처리[환불보류]'
+                  - 'EXCHANGE_PROC_WAITING: 교환처리[처리대기]'
+                  - 'EXCHANGE_DONE: 교환완료'
+                  - 'EXCHANGE_PROC_WAITING_PAY: 교환처리[입금처리대기]'
+                  - 'EXCHANGE_PROC_WAITING_REFUND: 교환처리[환불대기]'
+                  - 'EXCHANGE_DONE_PAY_DONE: 교환완료[결제완료]'
+                  - 'EXCHANGE_DONE_REFUND_DONE: 교환완료[환불완료]'
+        cartConfig:
+          type: object
+          properties:
+            storagePeriod:
+              type: number
+              description: 최대 보관 일수 (nullable)
+              example: 7
+            cartEquivalentOptionUnitType:
+              type: string
+              description: 장바구니 상품 추가 타입 (nullable)
+              example: QUANTITY
+              enum:
+                - 'QUANTITY: 수량 추가'
+                - 'ROW: 행 추가'
+            storagePeriodNoLimit:
+              type: boolean
+              description: 무제한 보관 설정 (nullable)
+              example: false
+            storageMaxQuantity:
+              type: number
+              description: 장바구니 보관 최대 수량 (nullable)
+              example: 100
+          description: 장바구니 설정
+        productReviewReportType:
+          type: array
+          description: 상품평 신고 유형 목록
+          items:
+            type: object
+            properties:
+              label:
+                type: string
+                description: 상품평 신고 유형 명칭
+                example: 저작권 침해 및 기타사유
+                enum:
+                  - 저작권 침해 및 기타사유
+                  - 욕설 또는 비방
+              value:
+                type: string
+                description: 상품평 신고 유형 값
+                example: COPYRIGHT
+                enum:
+                  - 'COPYRIGHT: 저작권 침해 및 기타사유'
+                  - 'SLANDER: 욕설 또는 비방'
+        productInquiryType:
+          type: array
+          description: 상품문의 유형 목록
+          items:
+            type: object
+            properties:
+              label:
+                type: string
+                description: 상품문의 유형 명칭
+                example: 상품
+                enum:
+                  - 상품
+                  - 배송
+                  - 취소
+                  - 반품
+                  - 교환
+                  - 환불
+                  - 기타
+              value:
+                type: string
+                description: 상품문의 유형 값
+                example: PRODUCT
+                enum:
+                  - 'PRODUCT: 상품'
+                  - 'DELIVERY: 배송'
+                  - 'CANCEL: 취소'
+                  - 'RETURN: 반품'
+                  - 'EXCHANGE: 교환'
+                  - 'REFUND: 환불'
+                  - 'OTHER: 기타'
+        mallJoinConfig:
+          type: object
+          properties:
+            authenticationType:
+              type: string
+              description: 쇼핑몰 회원 인증 수단 (nullable)
+              example: SMS_OCCUPANCY_AUTHENTICATION
+              enum:
+                - 'AUTHENTICATION_BY_PHONE: 휴대폰 본인 인증'
+                - 'SMS_AUTHENTICATION: SMS 비점유 인증'
+                - 'SMS_OCCUPANCY_AUTHENTICATION: SMS 점유 인증'
+                - 'AUTHENTICATION_BY_EMAIL: EMAIL 인증'
+                - 'NOT_USED: 인증 없음'
+            authenticationTimeType:
+              type: string
+              description: 쇼핑몰 회원 인증 시점 (nullable)
+              example: JOIN_TIME
+              enum:
+                - 'JOIN_TIME: 회원가입 시 인증'
+                - 'PAYMENT_TIME: 최초 상품 구매 시 인증'
+                - 'NONE: 인증하지 않음'
+          description: 쇼핑몰 회원 인증 수단
+        accumulationConfig:
+          type: object
+          properties:
+            useExpireNotification:
+              type: boolean
+              description: 적립금 만료 알림 사용여부 (nullable)
+              example: false
+            accumulationUnit:
+              type: string
+              description: 적립금 단위 (nullable)
+              example: 포인트
+            limitMaxRate:
+              type: boolean
+              description: 적립금 사용 최대 적립금 제한 여부 (nullable)
+              example: false
+            accumulationUseMinPrice:
+              type: number
+              description: 적립금 사용 최소 적립금 (nullable)
+              example: 1000
+            useProductAccumulation:
+              type: boolean
+              description: 상품 적립 사용여부 (nullable)
+              example: false
+            limitMinPrice:
+              type: boolean
+              description: 적립금 사용 최소 적립금 제한 여부 (nullable)
+              example: false
+            accumulationUseMinProductPrice:
+              type: number
+              description: 적립금 사용 최소 상품금액 (nullable)
+              example: 5000
+            signUpAccumulation:
+              type: number
+              description: 회원가입 적립금 (nullable)
+              example: 1000
+            useReviewsAccumulation:
+              type: boolean
+              description: 상품평 적립금 사용여부 (nullable)
+              example: false
+            productAccumulationBasisType:
+              type: string
+              description: 상품 금액 기준 설정 (nullable)
+              example: 'null'
+              enum:
+                - 'SALE_PRICE: 판매가'
+                - 'SALE_STANDARD_PRICE: 판매가 ± 옵션가'
+                - 'SALE_PROMOTION_PRICE: 판매가 ± 옵션가 - 프로모션할인'
+                - 'DISCOUNTED_PRICE: 할인적용가'
+                - 'DISCOUNTED_STANDARD_PRICE: 할인적용가 ± 옵션가'
+                - 'DISCOUNTED_PROMOTION_PRICE: 할인적용가 ± 옵션가 - 프로모션할인'
+            accumulationName:
+              type: string
+              description: 적립금명 (nullable)
+              example: 구매 적립금
+            useSignUpAccumulation:
+              type: boolean
+              description: 회원가입 적립금 사용여부 (nullable)
+              example: false
+            adminMemo:
+              type: string
+              description: 운영자 메모 (nullable)
+              example: 적립금 지급
+            accumulationGivePoint:
+              type: string
+              description: 적립금 지급 시점 (nullable)
+              example: AFTER_A_WEEK
+              enum:
+                - 'IMMEDIATE: 즉시적립'
+                - 'NEXTDAY: 익일'
+                - 'DAY_AFTER_TOMMOROW: 2일'
+                - 'AFTER_A_WEEK: 7일'
+                - 'AFTER_TWO_WEEK: 14일'
+                - 'AFTER_TWENTY_DAYS: 20일'
+                - 'AFTER_THIRTY_DAYS: 30일'
+                - 'NEXT_MONTH: 익월'
+            accumulationRate:
+              type: number
+              description: 적립금 기본 적립률 (nullable)
+              example: 10
+            limitMinProductPrice:
+              type: boolean
+              description: 적립금 사용 최소 상품금액 제한 여부 (nullable)
+              example: false
+            accumulationDisplayFormatType:
+              type: string
+              description: 적립금 노출 설정 (nullable)
+              example: FIXED_AMT
+              enum:
+                - 'FIXED_AMT: 정액 단일표시'
+                - 'FIXED_RATE: 정률(%) 단일표시 (ex 2%)'
+                - 'FIRST_FIXED_RATE: 정률 정액 동시표시'
+                - 'FIRST_FIXED_AMT: 정액 정률 동시표시'
+            reviewsAccumulationDetail:
+              type: object
+              properties:
+                photoReviewsAccumulation:
+                  type: number
+                  description: 포토 상품평 적립금 (nullable)
+                  example: 150
+                photoReviewsLength:
+                  type: number
+                  description: 포토 상품평 글자수 (nullable)
+                  example: 10
+                reviewsLength:
+                  type: number
+                  description: 상품평 글자수 (nullable)
+                  example: 10
+                reviewsAccumulation:
+                  type: number
+                  description: 상품평 적립금 (nullable)
+                  example: 100
+              description: ''
+            expireNotificationPoint:
+              type: number
+              description: 적립금 만료 알림 시점 (day 기준) (nullable)
+              example: 30
+            accumulationValidPeriod:
+              type: number
+              description: 적립금 유효기간 (month 기준) (nullable)
+              example: 3
+            useBirthdayAccumulation:
+              type: boolean
+              description: 생일 적립금 사용 여부
+              example: true
+            excludingReservePayAccumulation:
+              type: boolean
+              description: 적립금 사용 최대비율 (nullable)
+              example: false
+            accumulationUseMaxRate:
+              type: number
+              description: 적립금 사용 최대비율 (nullable)
+              example: 100
+            birthdayAccumulation:
+              type: number
+              description: 생일 적립금 지급 금액
+              example: 1000
+            excludingReservePayCoupon:
+              type: boolean
+              description: 쿠폰할인 결제시 적립금 지급 제외여부 (nullable)
+              example: false
+            useMemberAccumulation:
+              type: boolean
+              description: 회원 적립 사용여부 (nullable)
+              example: false
+          description: ''
+        categories:
+          type: object
+          properties:
+            multiLevelCategories:
+              type: array
+              description: 카테고리 목록(계층)
+              items:
+                type: object
+                properties:
+                  depth:
+                    type: number
+                    description: 뎁스
+                    example: 1
+                  children:
+                    type: array
+                    description: 2차 카테고리
+                    items:
+                      type: object
+                      properties:
+                        depth:
+                          type: number
+                          description: 카테고리 뎁스 (nullable)
+                          example: 2
+                        children:
+                          type: array
+                          description: 3차 카테고리
+                          items:
+                            type: object
+                            properties:
+                              depth:
+                                type: number
+                                description: 카테고리 뎁스 (nullable)
+                                example: 3
+                              children:
+                                type: array
+                                description: 4차 카테고리
+                                items:
+                                  type: object
+                                  properties:
+                                    depth:
+                                      type: number
+                                      description: 카테고리 뎁스 (nullable)
+                                      example: 4
+                                    children:
+                                      type: array
+                                      description: 5차 카테고리
+                                      items:
+                                        type: object
+                                        properties:
+                                          depth:
+                                            type: number
+                                            description: 카테고리 뎁스 (nullable)
+                                            example: 5
+                                          children:
+                                            type: object
+                                            description: ''
+                                          icon:
+                                            type: string
+                                            description: 카테고리 아이콘 (nullable)
+                                            example: //image.nhn-commerce.com/icon.png
+                                          categoryNo:
+                                            type: number
+                                            description: 카테고리 번호 (nullable)
+                                            example: 5
+                                          label:
+                                            type: string
+                                            description: 카테고리 이름 (nullable)
+                                            example: 게임기 컨트롤러
+                                          content:
+                                            type: string
+                                            description: 카테고리 카테고리 상세(HTML) (nullable)
+                                            example: <div>아이콘</div>
+                                    icon:
+                                      type: string
+                                      description: 카테고리 아이콘 (nullable)
+                                      example: //image.nhn-commerce.com/icon.png
+                                    categoryNo:
+                                      type: number
+                                      description: 카테고리 번호 (nullable)
+                                      example: 4
+                                    label:
+                                      type: string
+                                      description: 카테고리 이름 (nullable)
+                                      example: 악세사리
+                                    content:
+                                      type: string
+                                      description: 카테고리 카테고리 상세(HTML) (nullable)
+                                      example: <div>아이콘</div>
+                              icon:
+                                type: string
+                                description: 카테고리 아이콘 (nullable)
+                                example: //image.nhn-commerce.com/icon.png
+                              categoryNo:
+                                type: number
+                                description: 카테고리 번호 (nullable)
+                                example: 3
+                              label:
+                                type: string
+                                description: 카테고리 이름 (nullable)
+                                example: 닌텐도
+                              content:
+                                type: string
+                                description: 카테고리 카테고리 상세(HTML) (nullable)
+                                example: <div>아이콘</div>
+                        icon:
+                          type: string
+                          description: 카테고리 아이콘 (nullable)
+                          example: //image.nhn-commerce.com/icon.png
+                        categoryNo:
+                          type: number
+                          description: 카테고리 번호 (nullable)
+                          example: 2
+                        label:
+                          type: string
+                          description: 카테고리 이름 (nullable)
+                          example: 게임기 주변기기
+                        content:
+                          type: string
+                          description: 카테고리 카테고리 상세(HTML) (nullable)
+                          example: <div>아이콘</div>
+                  icon:
+                    type: string
+                    description: 아이콘
+                    example: //image.nhn-commerce.com/icon.png
+                  categoryNo:
+                    type: number
+                    description: 카테고리 번호
+                    example: 1
+                  label:
+                    type: string
+                    description: 카테고리 이름
+                    example: 게임
+                  content:
+                    type: string
+                    description: 카테고리 상세(HTML)
+                    example: <div>아이콘</div>
+            flatCategories:
+              type: array
+              description: 카테고리 목록
+              items:
+                type: object
+                properties:
+                  depth5CategoryNo:
+                    type: number
+                    description: 카테고리 번호(5차)
+                    example: 5
+                  depth2DisplayOrder:
+                    type: number
+                    description: 카테고리 순서(2차)
+                    example: 1
+                  depth3Icon:
+                    type: string
+                    description: 카테고리 아이콘(3차) (nullable)
+                    example: //image.nhn-commerce.com/icon.png
+                  depth1DisplayOrder:
+                    type: number
+                    description: 카테고리 순서(1차)
+                    example: 1
+                  depth3CategoryNo:
+                    type: number
+                    description: 카테고리 번호(3차)
+                    example: 3
+                  depth2Icon:
+                    type: string
+                    description: 카테고리 아이콘(2차) (nullable)
+                    example: //image.nhn-commerce.com/icon.png
+                  depth4Label:
+                    type: string
+                    description: 카테고리 명(4차)
+                    example: 악세사리
+                  depth1Label:
+                    type: string
+                    description: 카테고리 명(1차)
+                    example: 게임
+                  depth4Icon:
+                    type: string
+                    description: 카테고리 아이콘(4차) (nullable)
+                    example: //image.nhn-commerce.com/icon.png
+                  depth2Label:
+                    type: string
+                    description: 카테고리 명(2차)
+                    example: 게임기 주변기기
+                  depth5Label:
+                    type: string
+                    description: 카테고리 명(5차)
+                    example: 게임기 컨트롤러
+                  depth5Icon:
+                    type: string
+                    description: 카테고리 아이콘(5차) (nullable)
+                    example: //image.nhn-commerce.com/icon.png
+                  depth2CategoryNo:
+                    type: number
+                    description: 카테고리 번호(2차)
+                    example: 2
+                  depth3Label:
+                    type: string
+                    description: 카테고리 명(3차)
+                    example: 닌텐도
+                  depth1CategoryNo:
+                    type: number
+                    description: 카테고리 번호(1차)
+                    example: 1
+                  depth5Content:
+                    type: string
+                    description: 카테고리 상세 HTML(5차) (nullable)
+                    example: <div>아이콘</div>
+                  depth1Icon:
+                    type: string
+                    description: 카테고리 아이콘(1차) (nullable)
+                    example: //image.nhn-commerce.com/icon.png
+                  fullCategoryName:
+                    type: string
+                    description: 1~5차 카테고리 명
+                    example: 카테고리
+                  depth5DisplayOrder:
+                    type: number
+                    description: 카테고리 순서(5차)
+                    example: 1
+                  depth4DisplayOrder:
+                    type: number
+                    description: 카테고리 순서(4차)
+                    example: 1
+                  depth3Content:
+                    type: string
+                    description: 카테고리 상세 HTML(3차) (nullable)
+                    example: <div>아이콘</div>
+                  depth4CategoryNo:
+                    type: number
+                    description: 카테고리 번호(4차)
+                    example: 4
+                  depth2Content:
+                    type: string
+                    description: 카테고리 상세 HTML(2차) (nullable)
+                    example: <div>아이콘</div>
+                  depth1Content:
+                    type: string
+                    description: 카테고리 상세 HTML(1차) (nullable)
+                    example: <div>아이콘</div>
+                  depth4Content:
+                    type: string
+                    description: 카테고리 상세 HTML(4차) (nullable)
+                    example: <div>아이콘</div>
+                  depth3DisplayOrder:
+                    type: number
+                    description: 카테고리 순서(3차)
+                    example: 1
+          description: ''
+        instagramUsed:
+          type: boolean
+          description: 인스타그램 사용여부
+          example: false
+        bankAccountInfos:
+          type: array
+          description: 쇼핑몰 계좌 정보 목록
+          items:
+            type: object
+            properties:
+              bankAccount:
+                type: string
+                description: 계좌번호 (nullable)
+                example: '123456789'
+              bankDepositorName:
+                type: string
+                description: 예금주명 (nullable)
+                example: 커머스
+              bank:
+                type: string
+                description: 은행코드 (nullable)
+                example: 'null'
+              bankName:
+                type: string
+                description: 은행명 (nullable)
+                example: 우리은행
+        boardsCategories:
+          type: array
+          description: 게시판 카테고리 목록
+          items:
+            type: object
+            properties:
+              thumbnailUsed:
+                type: boolean
+                description: 썸네일 이미지 사용 여부
+                example: true
+              replied:
+                type: boolean
+                description: 답글 작성 가능 여부
+                example: false
+              memberWrite:
+                type: boolean
+                description: 회원 작성 가능 여부
+                example: false
+              used:
+                type: boolean
+                description: 게시판 사용 여부
+                example: true
+              secreted:
+                type: boolean
+                description: 비밀글 작성 가능 여부
+                example: false
+              boardName:
+                type: string
+                description: 게시판 이름
+                example: 자유게시판
+              guestWrite:
+                type: boolean
+                description: 비회원 작성 가능 여부
+                example: false
+              imageDisplayType:
+                type: string
+                description: 리스트 이미지 유형
+                example: NOT_USED
+                enum:
+                  - 'NOT_USED: 사용 안함'
+                  - 'ATTACHMENT: 첨부파일 사용'
+                  - 'PRODUCT: 상품 이미지 사용'
+              displayType:
+                type: string
+                description: 게시판 노출 유형
+                example: LIST
+                enum:
+                  - 'LIST: 리스트형'
+                  - 'CARD: 카드형'
+                  - 'REPLY: 댓글형'
+                  - 'INQUIRY: 문의형'
+              categoryUsed:
+                type: boolean
+                description: 카테고리 사용 여부
+                example: true
+              attachmentUsed:
+                type: boolean
+                description: 첨부파일 사용 여부
+                example: false
+              boardId:
+                type: string
+                description: 게시판 ID (nullable)
+                example: freeboard
+              categories:
+                type: array
+                description: 게시판 카테고리 정보
+                items:
+                  type: object
+                  properties:
+                    categoryNo:
+                      type: number
+                      description: 게시판 카테고리 번호
+                      example: 1
+                    label:
+                      type: string
+                      description: 게시판 카테고리 명칭
+                      example: 질문
+              boardNo:
+                type: number
+                description: 게시판 번호
+                example: 1
+      description: ''
+    malls-internationalization-1441815995:
+      type: object
+      properties:
+        languages:
+          type: array
+          description: 다국어 설정
+          example: '[KO]'
+          items:
+            type: string
+            enum:
+              - 'KO: 한국어'
+              - 'ZH: 중국어'
+              - 'JA: 일본어'
+              - 'EN: 영어'
+        currencies:
+          type: array
+          description: '통화 설정^|[CurrencyResponse(exchangeTo=KRW, exchangeRate=1)]'
+          items:
+            type: object
+            properties:
+              exchangeTo:
+                type: string
+                description: 통화
+                example: USD
+              exchangeRate:
+                type: number
+                description: 1 통화(exchangeTo) 당 기준통화(KRW) 비율 ex) 1 USD 는 KRW 로 1100원
+                example: 1100
+      description: ''

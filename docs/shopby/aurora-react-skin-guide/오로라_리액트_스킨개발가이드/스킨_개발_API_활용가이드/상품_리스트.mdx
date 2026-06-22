@@ -1,0 +1,71 @@
+---
+title: "상품 리스트"
+depth: 2
+path: "오로라 리액트 스킨개발가이드 > 스킨 개발_API 활용가이드 > 상품 리스트"
+---
+
+# 상품 리스트
+
+## 이해하기
+
+> :bangbang:[동영상 활용가이드](https://nhnent.dooray.com/share/pages/WoOk8q6KT1K3MZcLSuyZsw/3524081956753040600)를 참고해보세요. javascript와 react만 안다면 쉽게 화면 커스텀이 가능합니다.
+> 
+> 쇼핑몰에서 판매하는 상품의 리스트를 전시하는 화면입니다.
+
+* 전시 카테고리
+* 상품 리스트 조회영역
+
+***
+
+## ? 전시 카테고리
+
+쇼핑몰 관리자(어드민)에 매핑된 상품 카테고리를 출력하는 영역입니다.
+
+* shop by pro: 상품 > 상품 분류 관리 > 전시 카테고리 관리 
+* shop by premium: 전시관리 > 전시 카테고리 관리
+
+상위 depth의 카테고리의 경우 해당 카테고리 하위 카테고리에 매핑된 전체 상품을 출력합니다.
+
+> [GET /categories](https://docs.shopby.co.kr/?url.primaryName=display/#/Category/get-categories-by-keyword)
+
+```
+▶ 전체 카테고리 조회
+쇼핑몰의 모든 카테고리 정보를 조회합니다.
+```
+
+쇼핑몰 화면에서 카테고리란, 화면이 바뀌어도 대부분의 경우 화면에 상시 노출되는 요소입니다.
+따라서 LocalStorage에 5분 주기로 캐싱하고 있습니다.
+
+아래 2가지 형태의 카테고리 데이터를 제공합니다.
+
+* `flatCategories` : 모든 카테고리를 하나의 배열에 쭉 나열한 형태
+* `multiLevelCategories` : 계층을 가지는 카테고리 형태 (최대 5depth)
+
+기본 스킨에서는 `multiLevelCategories`를 사용하고 있습니다.
+따라서 카테고리는 아래와 같이 계층 구조로 구성되며, 최대 5depth까지 어드민에서 카테고리를 추가할 수 있습니다.
+
+***
+
+## ? 상품 리스트 조회영역
+
+아래 `GET /products/search` 호출을 통해 리턴 값으로 받은 상품 리스트를 노출하는 영역입니다.
+
+> [GET /products/search](https://docs.shopby.co.kr/?url.primaryName=product/#/Product/get-products-search)
+
+```
+▶ 상품 리스트 검색
+다양한 검색 옵션에 맞는 상품 리스트를 조회합니다.
+```
+
+선택 값인 파라미터(Parameters)에 어떤 값을 입력하느냐에 따라 카테고리, 정렬, 검색 등 다양한 조건의 상품 리스트를 가져올 수 있습니다.
+
+* ㉠ 정렬 조건 `order.by`
+    * 인기순(디폴트) : 판매가 및 인기도 기준 [점수 산정 기준 보기 >](https://docs.shopby.co.kr/?url.primaryName=product/#/Product/get-products-search)
+    * 낮은/높은 가격 순: 할인 적용가 기준
+    * 상품 후기 순
+    * 등록일 순
+* ㉡ 카테고리 `categoryNos`
+* ㉢ 키워드 검색 `filter.keywords`
+
+키워드를 검색 창(search engine)에 입력하여 검색 시, 타이틀 영역에 검색어가 표시되며 리스트 상단에 '총 N개' 출력됩니다. 
+만약 검색된 결과가 없는 경우 '검색 결과가 없습니다'라고 상품 리스트 출력 영역에 안내 문구가 노출됩니다.

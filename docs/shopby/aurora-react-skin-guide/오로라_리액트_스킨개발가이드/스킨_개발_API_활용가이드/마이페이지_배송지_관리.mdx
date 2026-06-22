@@ -1,0 +1,102 @@
+---
+title: "마이페이지_배송지 관리"
+depth: 2
+path: "오로라 리액트 스킨개발가이드 > 스킨 개발_API 활용가이드 > 마이페이지_배송지 관리"
+---
+
+# 마이페이지_배송지 관리
+
+## 이해하기
+
+> 회원 기준으로 배송지를 관리할 수 있는 페이지 입니다.
+
+
+
+배송지를 등록하거나 수정, 삭제 할 수 있으며, 배송지는 개수 제한 없이 등록 가능합니다.
+배송지 등록 혹은 수정 시에 `기본배송지`를 설정할 수 있으며 기본배송지는 1개만 설정 가능합니다.
+기본배송지로 등록된 배송지는 주문 페이지 내 배송지데이터로 출력됩니다.
+
+![배송지 관리.png](https://nhnent.dooray.com/share/tree/WoOk8q6KT1K3MZcLSuyZsw/pages/3524859680738514049/attach-files/3526041298891637103)
+
+### :heavy_check_mark:배송지 목록
+
+등록된 배송지 목록 조회는 아래의 API를 통해 확인 가능합니다.
+
+
+> [GET /profile/shipping-addresses](https://docs.shopby.co.kr/?url.primaryName=order/#/ShippingAddress/get-profile-shipping-addresses)
+
+```
+▶ 배송지 목록 조회하기
+배송지 관리에 등록된 배송지 목록을 조회합니다
+```
+
+기본배송지가 가장 상단에 노출되며, 기본배송지는 삭제가 불가능합니다.
+기본배송지로 설정된 주소 삭제를 원하는 경우 기본배송지 설정을 해제하고 삭제해야 합니다.
+배송지 목록 가져오기를 통해 응답된 값 중 `저장된 배송지`값을 배송지 관리 목록에 출력할 수 있습니다.
+
+
+### :heavy_check_mark:배송지 등록
+
+> [POST /profile/shipping-addresses](https://docs.shopby.co.kr/?url.primaryName=order/#/ShippingAddress/post-profile-shipping-addresses)
+
+```
+▶ 배송지 등록하기
+배송지 관리에 배송지를 등록합니다
+```
+
+배송지 목록에 배송지를 추가 하는 기능을 제공할 수 있습니다.
+추가 시 `defaultYn=Y` 로 호출 하는 경우 기본 배송지로 설정됩니다.
+기존에 기본배송지가 설정되어 있는 경우 다른 배송지를 기본배송지로 설정하는 경우 기본 배송지가 변경됩니다.
+개인고유통관부호 입력이 필요한 주소의 경우 request body 값으로 `customsIdNumber` 값을 추가하여 배송지 등록이 가능합니다.
+
+![배송지 등록.png](https://nhnent.dooray.com/share/tree/WoOk8q6KT1K3MZcLSuyZsw/pages/3524859680738514049/attach-files/3524861012312238640)
+
+배송지 추가 버튼을 통해 출력한 나의 배송지 관리 팝업 내 주소찾기 버튼 클릭 시 우편번호 찾기를 통한 주소 검색 기능을 제공합니다.
+
+
+> [GET /addresses/search](https://docs.shopby.co.kr/?url.primaryName=manage/#/Address/search-addresses)
+
+```
+▶ 주소 조회하기
+키워드 검색을 통한 주소정보를 검색합니다
+```
+
+
+### :heavy_check_mark:배송지 수정
+
+등록한 배송지를 수정하고자 하는 경우 아래의 API를 통해 수정 가능합니다.
+배송지 수정 하기를 위해서는 선택한 배송지 정보를 먼저 조회 후 나의 배송지 관리 팝업에서 등록된 정보로 배송지를 먼처 출력하여 제공합니다.
+
+> [GET /profile/shipping-addresses/{addressNo}](https://docs.shopby.co.kr/?url.primaryName=order/#/ShippingAddress/get-profile-shipping-addresses-address-no)
+
+```
+▶ 배송지 가져오기
+선택한 배송지의 세부 정보를 조회합니다
+```
+
+등록된 정보를 기준으로 구매자가 수정을 완료 한 경우 `PUT/ profile/shipping-addresses/{addressNo}` 를 통해 배송지 정보를 수정합니다.
+
+
+> [PUT /profile/shipping-addresses/{addressNo}](https://docs.shopby.co.kr/?url.primaryName=order/#/ShippingAddress/put-profile-shipping-addresses-address-no)
+
+```
+▶ 배송지 수정하기
+선택한 배송지 정보를 수정합니다
+```
+
+배송지 수정하기 API는 나의 배송지 관리 팝업 내 저장 버튼 클릭 시 호출하여 입력 값을 저장합니다.
+
+
+### :heavy_check_mark: 배송지 삭제
+
+배송지 관리 목록 내 [삭제] 버튼 클릭 시 선택한 배송지를 삭제 처리 합니다.
+
+> [DELETE /profile/shipping-addresses/{addressNo}](https://docs.shopby.co.kr/?url.primaryName=order/#/ShippingAddress/delete-profile-shipping-addresses-address-no)
+
+```
+▶ 배송지 삭제하기
+선택한 배송지 정보를 삭제합니다
+```
+
+기본배송지로 설정된 배송지는 삭제할 수 없습니다.
+기본배송지 삭제 시도 시 응답 되는 에러 메시지를 참고 하여 안내해주시면 됩니다.

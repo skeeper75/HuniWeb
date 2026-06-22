@@ -1,0 +1,48 @@
+{
+  "productId": 40078,
+  "fetchedAt": "2025-10-14T22:24:39.966Z",
+  "categoryPath": ["부자재"],
+  "meta": {
+    "name": "LED라이트배너 거치대",
+    "slug": "led라이트배너-거치대-40078",
+    "url": "https://devshop.wowpress.co.kr/prodt/40078",
+    "keywords": ["부자재", "LED라이트배너", "거치대"],
+    "useCases": ["banner", "large-format"],
+    "fileTypes": [],
+    "selType": null,
+    "unit": null
+  },
+  "delivery": {
+    "cutoffTime": null,
+    "prepayRequired": null,
+    "group": {
+      "id": null,
+      "name": null
+    },
+    "regions": []
+  },
+  "options": {
+    "orderQuantities": [],
+    "coverTypes": [],
+    "additionalOptions": []
+  },
+  "availability": {
+    "cutoffTime": null,
+    "maxOrdersPerUpload": null,
+    "message": null
+  },
+  "pricing": {
+    "currency": "KRW",
+    "source": "/std/prod/jobcost",
+    "status": "requires-configuration",
+    "template": null,
+    "quotes": []
+  },
+  "raw": {
+    "prod_info": {
+      "status": 400,
+      "errno": 401,
+      "errmsg": "생산되지 않는 제품입니다. 제품번호를 확인해 주세요."
+    }
+  }
+}

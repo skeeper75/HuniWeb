@@ -1,0 +1,5083 @@
+openapi: 3.0.1
+info:
+  title: claim-server
+  description: ' 클레임(claim) 관련 server API입니다.'
+  version: unspecified
+servers:
+  - url: https://server-api.e-ncp.com
+tags:
+  - name: Claim
+    description: 클레임
+  - name: OptionCancel
+    description: 부분취소
+  - name: Return
+    description: 반품
+paths:
+  /cancel-exchanges:
+    post:
+      tags:
+        - CancelExchange
+      summary: 취소교환 신청
+      description: |2+
+
+        ## 부가설명 및 특이사항
+        옵션 취소 교환을 신청하는 API입니다.
+
+      operationId: post-cancel-exchanges
+      parameters:
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs"
+          required: false
+          schema:
+            type: string
+          example: Bearer ABCDERAdjflaskjdfosiaetlkfs
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br />\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니\
+            다.<br />\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n\n\
+            \ ^|각 어드민에서 복사된 값"
+          required: false
+          schema:
+            type: string
+          example: test-mall-key
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/cancel-exchanges1646626756'
+            examples:
+              post-cancel-exchanges:
+                value: "{\"calculateParam\":{\"orderNo\":\"202001100000000001\",\"\
+                  cancelOrderOptionNo\":1,\"cancelCnt\":1,\"exchangeProductNo\":1,\"\
+                  exchangeOptionNo\":1,\"exchangeCnt\":1,\"responsibleObjectType\"\
+                  :\"BUYER\",\"sellerPaysClaimedDelivery\":false,\"productAdjustAmt\"\
+                  :0,\"refundType\":\"PG\",\"complexRefundAdjust\":null},\"additionalPayType\"\
+                  :null,\"reasonDetail\":\"test\",\"reasonType\":\"CHANGE_MIND\",\"\
+                  refundBankAccount\":null,\"additionalPayBankAccount\":null,\"purchaserInputs\"\
+                  :[{\"inputLabel\":\"test label\",\"inputValue\":\"test value\"}],\"\
+                  additionalPayRemitter\":null,\"productAdjustReason\":null}"
+      responses:
+        '204':
+          description: '204'
+  /cancel-exchanges/{no}/confirm-deposit:
+    put:
+      tags:
+        - CancelExchange
+      summary: 취소교환 추가결제 입금확인
+      description: "\n## 부가설명 및 특이사항\n추가 결제 내역을 입금 확인처리 합니다.\n       "
+      operationId: put-cancel-exchanges-no-confirm-deposit
+      parameters:
+        - name: 'no'
+          in: path
+          description: ''
+          required: true
+          schema:
+            type: string
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs"
+          required: false
+          schema:
+            type: string
+          example: Bearer ABCDERAdjflaskjdfosiaetlkfs
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br />\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니\
+            다.<br />\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n\n\
+            \ ^|각 어드민에서 복사된 값"
+          required: false
+          schema:
+            type: string
+          example: test-mall-key
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/return-exchanges-no-confirm-deposit934552446'
+            examples:
+              put-cancel-exchanges-no-confirm-deposit:
+                value: "{\"additionalPayBankAccount\":{\"bank\":\"KB\",\"account\"\
+                  :\"136584\",\"depositorName\":\"와쳡맨\",\"bankName\":\"국민은행\"},\"\
+                  additionalPayRemitter\":\"홍길맨\"}"
+      responses:
+        '204':
+          description: '204'
+  /claims:
+    get:
+      tags:
+        - Claim
+      summary: 클레임 목록 조회하기
+      description: |2
+
+        ## 부가설명 및 특이사항
+        다수의 클레임 정보를 조회합니다.
+
+        ## 클레임 상태 값 정의
+        - ## 취소
+            |상태 값|한글 정의|
+            |---|---|
+            |CANCEL_NO_REFUND|취소완료[환불없음]|
+            |CANCEL_REQUEST|취소신청[승인대기]|
+            |CANCEL_PROC_REQUEST_REFUND|취소처리[환불보류]|
+            |CANCEL_PROC_WAITING_REFUND|취소처리[환불대기]|
+            |CANCEL_DONE|취소완료[환불완료]|
+
+        - ## 교환
+            |상태 값|한글 정의|
+            |---|---|
+            |EXCHANGE_REQUEST|교환신청[승인대기]|
+            |EXCHANGE_REJECT_REQUEST|교환처리[철회대기]|
+            |EXCHANGE_PROC_BEFORE_RECEIVE|교환처리[수거진행]|
+            |EXCHANGE_PROC_REQUEST_PAY|교환처리[결제대기]|
+            |EXCHANGE_PROC_REQUEST_REFUND|교환처리[환불보류]|
+            |EXCHANGE_PROC_WAITING|교환처리[처리대기]|
+            |EXCHANGE_PROC_WAITING_PAY|교환처리[입금처리대기]|
+            |EXCHANGE_PROC_WAITING_REFUND|교환처리[환불대기]|
+            |EXCHANGE_DONE_PAY_DONE|교환완료[결제완료]|
+            |EXCHANGE_DONE_REFUND_DONE|교환완료[환불완료]|
+            |EXCHANGE_DONE|교환완료[차액없음]|
+
+        - ## 반품
+            |상태 값|한글 정의|
+            |---|---|
+            |RETURN_NO_REFUND|반품완료[환불없음]|
+            |RETURN_REQUEST|반품신청[승인대기]|
+            |RETURN_REJECT_REQUEST|반품신청[철회대기]|
+            |RETURN_PROC_BEFORE_RECEIVE|반품처리[수거진행]|
+            |RETURN_PROC_REQUEST_REFUND|반품처리[환불보류]|
+            |RETURN_PROC_WAITING_REFUND|반품처리[환불대기]|
+            |RETURN_DONE|반품완료[환불완료]|
+            |RETURN_REFUND_AMT_ADJUST_REQUESTED|반품처리[조정요청]|
+      operationId: get-claims
+      parameters:
+        - name: claimStatusTypes
+          in: query
+          description: '클레임 상태 리스트^|CANCEL_REQUEST, CANCEL_DONE'
+          required: false
+          schema:
+            type: string
+        - name: endYmd
+          in: query
+          description: 조회종료일^|yyyy-mm-dd
+          required: true
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: 페이지 번호 (1 이상)^|1
+          required: true
+          schema:
+            type: string
+        - name: searchDateType
+          in: query
+          description: '검색일자타입(APPLY_YMDT: 클레임일자, COMPLETE_YMDT: 클레임완료일자)^|APPLY_YMDT'
+          required: true
+          schema:
+            type: string
+        - name: searchType
+          in: query
+          description:
+            "클레임 검색 타입(ALL: 전체, CLAIM_NO: 클레임번호, ORDER_NO: 주문번호, MEMBER_NO:\
+            \ 회원번호)^|ORDER_NO"
+          required: true
+          schema:
+            type: string
+        - name: searchValues
+          in: query
+          description: '클레임 검색 값^|1,2,3'
+          required: false
+          schema:
+            type: string
+        - name: size
+          in: query
+          description: 페이지 사이즈^|30
+          required: true
+          schema:
+            type: string
+        - name: startYmd
+          in: query
+          description: 조회시작일^|yyyy-mm-dd
+          required: true
+          schema:
+            type: string
+        - name: treatmentStatusTypes
+          in: query
+          description: '클레임 처리 상태 리스트^|WITHDRAW, WITHDRAW_APPROVE'
+          required: false
+          schema:
+            type: string
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs"
+          required: false
+          schema:
+            type: string
+          example: Bearer ABCDERAdjflaskjdfosiaetlkfs
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br />\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니\
+            다.<br />\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n\n\
+            \ ^|각 어드민에서 복사된 값"
+          required: false
+          schema:
+            type: string
+          example: test-mall-key
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/claims-694067701'
+              examples:
+                get-claims:
+                  value: "{\"contents\":[{\"claimNo\":1,\"claimYmdt\":\"2025-10-31\
+                    \ 10:13:54\",\"claimCompleteYmdt\":\"2025-10-31 10:13:54\",\"\
+                    mallNo\":1,\"memberNo\":1,\"claimType\":\"CANCEL\",\"orderNo\"\
+                    :\"1\",\"refundPayType\":\"CREDIT_CARD\",\"refundType\":\"PG\"\
+                    ,\"claimStatusType\":\"CANCEL_REQUEST\",\"treatmentStatusType\"\
+                    :null,\"claimAmt\":0,\"returnWayType\":null,\"returnAddress\"\
+                    :{\"name\":\"홍길동\",\"contact1\":\"010-1234-1234\",\"contact2\"\
+                    :null,\"mobileCountryCd\":\"82\",\"zipCd\":\"01234\",\"address\"\
+                    :\"서울특별시 구로구 구로동\",\"jibunAddress\":\"서울특별시 구로구 구로동 구로아파트\",\"\
+                    detailAddress\":\"101동 101호\",\"receiverCity\":null,\"receiverState\"\
+                    :null,\"note\":null,\"customsIdNumber\":null,\"countryCd\":\"\
+                    KR\",\"shippingEtcInfo\":null,\"addressView\":\"(01234) 서울특별시\
+                    \ 구로구 구로동 101동 101호\"},\"returnDeliveryCompanyType\":null,\"returnInvoiceNo\"\
+                    :null,\"orderOptionNos\":[1],\"claimedOptions\":[],\"responsibleObjectType\"\
+                    :\"BUYER\",\"treatmentAdminNo\":0,\"partnerNo\":null,\"claimReasonType\"\
+                    :\"CHANGE_MIND\",\"claimReasonDetail\":\"변심\",\"claimImageUrls\"\
+                    :[],\"claimData\":{\"amounts\":{\"before\":{\"order\":{\"payAmt\"\
+                    :0,\"accumulationPayAmt\":0,\"standardAmt\":0,\"immediateDiscountAmt\"\
+                    :0,\"additionalDiscountAmt\":0,\"remainingPgPayAmt\":0,\"remainingMainPayAmt\"\
+                    :0,\"freeGiftDiscountAmt\":0,\"externalPayAmt\":0,\"externalPayInfos\"\
+                    :[],\"mainPayAmt\":0},\"delivery\":{\"deliveryGroupAmounts\":{\"\
+                    deliveryAmt\":0,\"remoteDeliveryAmt\":0,\"prepaidDeliveryAmt\"\
+                    :0,\"prepaidRemoteDeliveryAmt\":0,\"payOnDeliveryAmt\":0,\"payOnRemoteDeliveryAmt\"\
+                    :0,\"alreadyPaidTotalDeliveryAmt\":0,\"totalDeliveryAmt\":0,\"\
+                    totalPrepaidDeliveryAmt\":0},\"deliveryAmt\":0,\"remoteDeliveryAmt\"\
+                    :0,\"totalDeliveryAmt\":0},\"accumulation\":{\"accumulationAmt\"\
+                    :0},\"coupon\":{\"cartCouponDiscountAmt\":0,\"productCouponDiscountAmt\"\
+                    :0,\"productCouponDiscountAmounts\":[{\"orderProductNo\":0,\"\
+                    couponDiscountAmt\":0}]}},\"after\":{\"order\":{\"payAmt\":0,\"\
+                    accumulationPayAmt\":0,\"standardAmt\":0,\"immediateDiscountAmt\"\
+                    :0,\"additionalDiscountAmt\":0,\"remainingPgPayAmt\":0,\"remainingMainPayAmt\"\
+                    :0,\"freeGiftDiscountAmt\":0,\"externalPayAmt\":0,\"externalPayInfos\"\
+                    :[],\"mainPayAmt\":0},\"delivery\":{\"deliveryGroupAmounts\":{\"\
+                    deliveryAmt\":0,\"remoteDeliveryAmt\":0,\"prepaidDeliveryAmt\"\
+                    :0,\"prepaidRemoteDeliveryAmt\":0,\"payOnDeliveryAmt\":0,\"payOnRemoteDeliveryAmt\"\
+                    :0,\"alreadyPaidTotalDeliveryAmt\":0,\"totalDeliveryAmt\":0,\"\
+                    totalPrepaidDeliveryAmt\":0},\"deliveryAmt\":0,\"remoteDeliveryAmt\"\
+                    :0,\"totalDeliveryAmt\":0},\"accumulation\":{\"accumulationAmt\"\
+                    :0},\"coupon\":{\"cartCouponDiscountAmt\":0,\"productCouponDiscountAmt\"\
+                    :0,\"productCouponDiscountAmounts\":[{\"orderProductNo\":0,\"\
+                    couponDiscountAmt\":0}]}},\"returnDelivery\":{\"returnDeliveryAmt\"\
+                    :0,\"returnRemoteDeliveryAmt\":0,\"processedDeliveryAmt\":0,\"\
+                    prepaid\":true,\"totalPureReturnDeliveryAmt\":0,\"prepaidReturnDeliveryAmt\"\
+                    :0,\"prepaidReturnRemoteDeliveryAmt\":0,\"prepaidTotalReturnDeliveryAmt\"\
+                    :0,\"prepaidTotalPureReturnDeliveryAmt\":0,\"prepaidProcessedDeliveryAmt\"\
+                    :0,\"totalReturnDeliveryAmt\":0},\"exchangeDelivery\":{\"deliveryAmt\"\
+                    :0,\"remoteDeliveryAmt\":0,\"prepaidDeliveryAmt\":0,\"prepaidRemoteDeliveryAmt\"\
+                    :0,\"totalDeliveryAmt\":0,\"totalPrepaidDeliveryAmt\":0},\"deliveryAdjustAmt\"\
+                    :0,\"refundDeliveryAmt\":0,\"adjustedAmounts\":{\"payAmt\":0,\"\
+                    mainPayAmt\":0,\"accumulationPayAmt\":0,\"additionalPayAmt\":0,\"\
+                    externalPayAmt\":0,\"externalPayInfos\":[],\"complexRefundPgAmt\"\
+                    :0,\"complexRefundAccountAmt\":0,\"claimAmt\":0},\"productAdjustAmt\"\
+                    :0,\"returnDeliveryAdjustAmt\":0,\"exchangeDeliveryAdjustAmt\"\
+                    :0,\"initialDeliveryAmt\":0,\"refund\":{\"order\":{\"payAmt\"\
+                    :0,\"accumulationPayAmt\":0,\"standardAmt\":0,\"immediateDiscountAmt\"\
+                    :0,\"additionalDiscountAmt\":0,\"remainingPgPayAmt\":0,\"remainingMainPayAmt\"\
+                    :0,\"freeGiftDiscountAmt\":0,\"externalPayAmt\":0,\"externalPayInfos\"\
+                    :[],\"mainPayAmt\":0},\"delivery\":{\"deliveryGroupAmounts\":{\"\
+                    deliveryAmt\":0,\"remoteDeliveryAmt\":0,\"prepaidDeliveryAmt\"\
+                    :0,\"prepaidRemoteDeliveryAmt\":0,\"payOnDeliveryAmt\":0,\"payOnRemoteDeliveryAmt\"\
+                    :0,\"alreadyPaidTotalDeliveryAmt\":0,\"totalDeliveryAmt\":0,\"\
+                    totalPrepaidDeliveryAmt\":0},\"deliveryAmt\":0,\"remoteDeliveryAmt\"\
+                    :0,\"totalDeliveryAmt\":0},\"accumulation\":{\"accumulationAmt\"\
+                    :0},\"coupon\":{\"cartCouponDiscountAmt\":0,\"productCouponDiscountAmt\"\
+                    :0,\"productCouponDiscountAmounts\":[{\"orderProductNo\":0,\"\
+                    couponDiscountAmt\":0}]}}},\"shipping\":{\"originalShippingNo\"\
+                    :0,\"shippingNo\":0,\"deliveryGroupNo\":0,\"deliveryTemplateNo\"\
+                    :0,\"deliveryType\":\"PARCEL_DELIVERY\",\"requiresShipping\":true,\"\
+                    combined\":false,\"divided\":false,\"prepaid\":true,\"hasAdjustedExchangeDeliveryAmt\"\
+                    :false,\"address\":{\"zipCd\":\"\",\"address\":\"\",\"jibunAddress\"\
+                    :null,\"receiverCity\":null,\"receiverState\":null,\"name\":\"\
+                    \",\"detailAddress\":null,\"contact1\":\"\",\"contact2\":null,\"\
+                    mobileCountryCd\":null,\"customsIdNumber\":null,\"countryCd\"\
+                    :\"KR\",\"shippingEtcInfo\":null},\"invoiceNo\":null,\"deliveryCompanyType\"\
+                    :null,\"customsIdNumber\":null},\"exchangeShipping\":{\"originalShippingNo\"\
+                    :0,\"shippingNo\":0,\"deliveryGroupNo\":0,\"deliveryTemplateNo\"\
+                    :0,\"deliveryType\":\"PARCEL_DELIVERY\",\"requiresShipping\":true,\"\
+                    combined\":false,\"divided\":false,\"prepaid\":true,\"address\"\
+                    :{\"zipCd\":\"\",\"address\":\"\",\"jibunAddress\":null,\"receiverCity\"\
+                    :null,\"receiverState\":null,\"name\":\"\",\"detailAddress\":null,\"\
+                    contact1\":\"\",\"contact2\":null,\"mobileCountryCd\":null,\"\
+                    customsIdNumber\":null,\"countryCd\":\"KR\",\"shippingEtcInfo\"\
+                    :null},\"deliveryAmt\":0,\"remoteDeliveryAmt\":0,\"returnDeliveryAmt\"\
+                    :0,\"receiverInputLater\":false},\"coupon\":{\"cartCoupon\":{\"\
+                    couponNo\":1,\"couponIssueNo\":1,\"couponName\":\"쿠폰\",\"couponSubType\"\
+                    :\"NONE\",\"orderProductNo\":1,\"restores\":false},\"productCoupons\"\
+                    :[{\"couponNo\":1,\"couponIssueNo\":1,\"couponName\":\"쿠폰\",\"\
+                    couponSubType\":\"NONE\",\"orderProductNo\":1,\"restores\":false}]},\"\
+                    exchangeProduct\":{\"additionalDiscountAmt\":0},\"cancelProduct\"\
+                    :{\"adjustedAmt\":0},\"refundType\":\"ZERO_REFUND\",\"overflowsPgAmt\"\
+                    :false},\"additionalPayType\":null,\"additionalPayBankAccount\"\
+                    :null,\"additionalPayRemitter\":null,\"sellerPaysClaimedDelivery\"\
+                    :true,\"firstOrderOptionNo\":null,\"returnDeliveryCompanyTypeLabel\"\
+                    :null}],\"totalCount\":1}"
+  /claims/{claimNo}/already-delivery:
+    put:
+      tags:
+        - Claim
+      summary: 이미출고
+      description:
+        "\n## 부가설명 및 특이사항\n옵션취소, 취소교환 신청된 클레임의 배송이 이미 출고된 경우 호출합니다.\n신청\
+        된 클레임을 철회하고, 배송정보를 저장하여 배송중 상태로 변경합니다.\n    "
+      operationId: put-claims-no-already-delivery
+      parameters:
+        - name: claimNo
+          in: path
+          description: 클레임 번호^|1
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs"
+          required: false
+          schema:
+            type: string
+          example: Bearer ABCDERAdjflaskjdfosiaetlkfs
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br />\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니\
+            다.<br />\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n\n\
+            \ ^|각 어드민에서 복사된 값"
+          required: false
+          schema:
+            type: string
+          example: QUZjUHlHV0JtdUFrSWVyUmhnRUFTcUt1SzR3ckFRSk0
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/claims-claimNo-already-delivery-235042226'
+            examples:
+              put-claims-no-already-delivery:
+                value: "{\"releaseYmd\":\"2020-01-01\",\"invoiceNo\":\"123456\",\"\
+                  deliveryCompanyType\":\"CJ\"}"
+      responses:
+        '204':
+          description: '204'
+  /claims/{claimNo}/approve:
+    put:
+      tags:
+        - Claim
+      summary: 클레임 승인
+      description:
+        "\n## 부가설명 및 특이사항\n클레임 신청을 승인하는 API 입니다.\n클레임 종류별로 이후 진행 단계가 상이\
+        하니, 아래 항목을 반드시 숙지해주세요.\n특히, 승인 즉시 환불이 되는 경우가 있으니 유의 바랍니다.\n\n - 반품\n   - 배\
+        송안함 상품 : API 호출에 성공하는 즉시 클레임이 완료(반품이 완료)됩니다. \n   - 그 외 상품 : API 호출에 성공하면\
+        , 클레임이 완료되지 않고 수거진행 상태가 됩니다.\n\n - 옵션 취소\n   - API 호출에 성공하는 즉시 클레임이 완료(옵션이\
+        \ 취소)됩니다.\n\n - 주문 취소\n   - API 호출에 성공하는 즉시 클레임이 완료(주문이 취소)됩니다.\n\n - 옵션 취\
+        소 교환\n   - API 호출에 성공하는 즉시 클레임이 완료(옵션이 교환)됩니다.\n\n - 반품 교환\n   - API 호출 성공\
+        \ 이후, 클레임이 완료되지 않고 수거 진행 상태가 됩니다.\n    "
+      operationId: put-claims-no-approve
+      parameters:
+        - name: claimNo
+          in: path
+          description: ''
+          required: true
+          schema:
+            type: string
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs"
+          required: false
+          schema:
+            type: string
+          example: Bearer ABCDERAdjflaskjdfosiaetlkfs
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br />\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니\
+            다.<br />\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n\n\
+            \ ^|각 어드민에서 복사된 값"
+          required: false
+          schema:
+            type: string
+          example: test-mall-key
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      responses:
+        '204':
+          description: '204'
+  /claims/{claimNo}/assign-return-invoice:
+    put:
+      tags:
+        - Claim
+      summary: 반품 송장번호 할당
+      description:
+        "\n## 부가설명 및 특이사항\n반품 송장번호를 할당하는 API 입니다.\n클레임이 반품, 반품교환인 경우만 사\
+        용 가능합니다.\n    "
+      operationId: put-claims-no-assign-return-invoice
+      parameters:
+        - name: claimNo
+          in: path
+          description: 클레임 번호^|1
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs"
+          required: false
+          schema:
+            type: string
+          example: Bearer ABCDERAdjflaskjdfosiaetlkfs
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br />\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니\
+            다.<br />\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n\n\
+            \ ^|각 어드민에서 복사된 값"
+          required: false
+          schema:
+            type: string
+          example: QUZjUHlHV0JtdUFrSWVyUmhnRUFTcUt1SzR3ckFRSk0
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/claims-claimNo-assign-return-invoice1153638030'
+            examples:
+              put-claims-no-assign-return-invoice:
+                value: '{"deliveryCompanyType":"CJ","returnInvoiceNo":""}'
+      responses:
+        '204':
+          description: '204'
+  /claims/{claimNo}/withdraw:
+    put:
+      tags:
+        - Claim
+      summary: 클레임 철회
+      description: "\n## 부가설명 및 특이사항\n클레임을 철회하는 API 입니다.\n    "
+      operationId: put-claims-no-withdraw
+      parameters:
+        - name: claimNo
+          in: path
+          description: ''
+          required: true
+          schema:
+            type: string
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs"
+          required: false
+          schema:
+            type: string
+          example: Bearer ABCDERAdjflaskjdfosiaetlkfs
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br />\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니\
+            다.<br />\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n\n\
+            \ ^|각 어드민에서 복사된 값"
+          required: false
+          schema:
+            type: string
+          example: QUZjUHlHV0JtdUFrSWVyUmhnRUFTcUt1SzR3ckFRSk0
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      responses:
+        '204':
+          description: '204'
+  /claims/{orderNo}/exchange-infos:
+    get:
+      tags:
+        - Claim
+      summary: 교환 전/후 정보 조회
+      description:
+        "\n## 부가설명 및 특이사항\n교환 완료된 클레임의 전/후 옵션 정보를 반환합니다.\n\n - 철회된 클레임은\
+        \ 조회되지 않습니다.\n - 응답값 중, exchangedOrderCnt 는 `현재 상태` 기준입니다. (스냅샷 X)\n   - 교\
+        환출고 옵션 `전체`를 다시 클레임하는 경우는 exchangedOrderCnt 가 교환출고된 개수와 동일합니다. \n   - 교환출고\
+        \ 옵션의 일부를 다시 클레임하여 옵션이 쪼개지는 경우, exchangeOrderCnt 가 최초 교환출고된 개수와 달라질 수 있습니다\
+        ."
+      operationId: get-claims-order-no-exchange-infos
+      parameters:
+        - name: orderNo
+          in: path
+          description: ''
+          required: true
+          schema:
+            type: string
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs"
+          required: false
+          schema:
+            type: string
+          example: Bearer ABCDERAdjflaskjdfosiaetlkfs
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br />\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니\
+            다.<br />\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n\n\
+            \ ^|각 어드민에서 복사된 값"
+          required: false
+          schema:
+            type: string
+          example: QUZjUHlHV0JtdUFrSWVyUmhnRUFTcUt1SzR3ckFRSk0
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/claims-orderNo-exchange-infos-1914356139'
+              examples:
+                get-claims-order-no-exchange-infos:
+                  value: "[{\"claimNo\":1,\"claimedOrderProductOptionNo\":1234,\"\
+                    exchangedOrderProductOptionNo\":5678,\"claimYmdt\":\"2024-12-17\
+                    \ 00:00:00\",\"claimCompleteYmdt\":\"2024-12-24 12:34:56\",\"\
+                    claimedMallProductNo\":1001,\"claimedMallOptionNo\":2222,\"claimedProductName\"\
+                    :\"난닝구\",\"claimedOptionName\":\"색상\",\"claimedOptionValue\":\"\
+                    빨강 (100)\",\"claimedCnt\":1,\"exchangedMallProductNo\":1001,\"\
+                    exchangedMallOptionNo\":3333,\"exchangedProductName\":\"난닝구\"\
+                    ,\"exchangedOptionName\":\"색상\",\"exchangedOptionValue\":\"회색\
+                    \ (105)\",\"exchangedCnt\":2}]"
+  /option-cancels:
+    post:
+      tags:
+        - OptionCancel
+      summary: 옵션 취소 신청하기
+      description: "\n## 부가설명 및 특이사항\n옵션 취소 신청 API입니다.\n       "
+      operationId: post-option-cancels
+      parameters:
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs"
+          required: false
+          schema:
+            type: string
+          example: Bearer ABCDERAdjflaskjdfosiaetlkfs
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br />\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니\
+            다.<br />\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n\n\
+            \ ^|각 어드민에서 복사된 값"
+          required: false
+          schema:
+            type: string
+          example: test-mall-key
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/option-cancels-1028891945'
+            examples:
+              post-option-cancels:
+                value: "{\"orderNo\":\"202003141914010000\",\"orderOptionParams\"\
+                  :[{\"orderOptionNo\":1,\"claimCnt\":1,\"reasonType\":null,\"reasonDetail\"\
+                  :null}],\"responsibleObjectType\":\"SELLER\",\"sellerPaysClaimedDelivery\"\
+                  :true,\"reasonType\":null,\"reasonDetail\":null,\"refundBankAccount\"\
+                  :{\"bank\":\"KB\",\"account\":\"\",\"depositorName\":\"\",\"bankName\"\
+                  :\"국민은행\"},\"complexRefundAdjust\":null}"
+      responses:
+        '204':
+          description: '204'
+  /option-cancels/sold-out:
+    post:
+      tags:
+        - OptionCancel
+      summary: 품절 취소처리하기
+      description:
+        "\n## 부가설명 및 특이사항\n선택한 주문옵션을 품절 취소하고 금액을 환불하는 API입니다.\n\n### 특이\
+        사항\n이벤트 처리 방식으로 주문을 취소처리하는 API입니다.\n요청 완료 후 실제로 품절 취소되는데 일정 시간이 소요될 수 있습니다\
+        . \n       "
+      operationId: post-option-cancels-sold-out
+      parameters:
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs"
+          required: false
+          schema:
+            type: string
+          example: Bearer ABCDERAdjflaskjdfosiaetlkfs
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br />\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니\
+            다.<br />\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n\n\
+            \ ^|각 어드민에서 복사된 값"
+          required: false
+          schema:
+            type: string
+          example: test-mall-key
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/option-cancels-sold-out2041411915'
+            examples:
+              post-option-cancels-sold-out:
+                value: '{"orderOptionNos":[1,2]}'
+      responses:
+        '204':
+          description: '204'
+  /option-cancels/sold-out/set-option:
+    post:
+      tags:
+        - OptionCancel
+      summary: 세트옵션 품절취소처리하기
+      description:
+        "\n## 부가설명 및 특이사항\n선택한 주문옵션의 세트구성옵션을 품절 취소하고 금액을 환불하는 API입니다.\n\
+        \       "
+      operationId: post-option-cancels-sold-out-set-option
+      parameters:
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs"
+          required: false
+          schema:
+            type: string
+          example: Bearer ABCDERAdjflaskjdfosiaetlkfs
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br />\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니\
+            다.<br />\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n\n\
+            \ ^|각 어드민에서 복사된 값"
+          required: false
+          schema:
+            type: string
+          example: test-mall-key
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/option-cancels-sold-out-set-option1925829967'
+            examples:
+              post-option-cancels-sold-out-set-option:
+                value: "{\"orderOptions\":[{\"orderOptionNo\":1,\"soldOutMallOptionNos\"\
+                  :[1,2]},{\"orderOptionNo\":2,\"soldOutMallOptionNos\":[1,2]}]}"
+      responses:
+        '204':
+          description: '204'
+  /order-cancels:
+    post:
+      tags:
+        - OrderCancel
+      summary: 주문 취소하기
+      description: |2
+
+        ## 부가설명 및 특이사항
+        주문 취소 신청 API입니다.
+        주문 취소 신청은 입금대기, 결제완료 상태에서 가능합니다.
+      operationId: post-order-cancels
+      parameters:
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs"
+          required: false
+          schema:
+            type: string
+          example: Bearer ABCDERAdjflaskjdfosiaetlkfs
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br />\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니\
+            다.<br />\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n\n\
+            \ ^|각 어드민에서 복사된 값"
+          required: false
+          schema:
+            type: string
+          example: test-mall-key
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/order-cancels1915139160'
+            examples:
+              post-order-cancels:
+                value: "{\"orderNo\":\"202003141914010000\",\"reasonType\":\"CHANGE_MIND\"\
+                  ,\"reasonDetail\":\"\",\"responsibleObjectType\":\"SELLER\",\"refundType\"\
+                  :\"ZERO_REFUND\",\"refundBankAccount\":{\"bank\":null,\"account\"\
+                  :null,\"depositorName\":null,\"bankName\":\"\"}}"
+      responses:
+        '204':
+          description: '204'
+  /return-exchanges:
+    post:
+      tags:
+        - ReturnExchange
+      summary: 반품교환 신청
+      description: |2
+
+        ## 부가설명 및 특이사항
+        반품 교환을 신청하는 API입니다.
+        배송안함 상품에는 사용할 수 없습니다.
+      operationId: post-return-exchanges
+      parameters:
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs"
+          required: false
+          schema:
+            type: string
+          example: Bearer ABCDERAdjflaskjdfosiaetlkfs
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br />\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니\
+            다.<br />\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n\n\
+            \ ^|각 어드민에서 복사된 값"
+          required: false
+          schema:
+            type: string
+          example: test-mall-key
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/return-exchanges925138161'
+            examples:
+              post-return-exchanges:
+                value: "{\"calculateParam\":{\"orderNo\":\"202001100000000001\",\"\
+                  cancelOrderOptionNo\":1,\"cancelCnt\":1,\"exchangeProductNo\":1,\"\
+                  exchangeOptionNo\":1,\"exchangeCnt\":1,\"responsibleObjectType\"\
+                  :\"BUYER\",\"sellerPaysClaimedDelivery\":false,\"productAdjustAmt\"\
+                  :0,\"returnDeliveryProposedAmt\":0,\"exchangeDeliveryProposedAmt\"\
+                  :0,\"returnWayType\":\"SELLER_COLLECT\",\"returnAddress\":{\"zipCd\"\
+                  :\"12312\",\"address\":\"test\",\"jibunAddress\":\"test\",\"receiverCity\"\
+                  :null,\"receiverState\":null,\"name\":\"hello\",\"detailAddress\"\
+                  :\"my address\",\"contact1\":\"01012341234\",\"contact2\":null,\"\
+                  mobileCountryCd\":\"82\",\"customsIdNumber\":null,\"countryCd\"\
+                  :\"KR\",\"receiverFirstName\":null,\"receiverLastName\":null},\"\
+                  exchangeAddress\":{\"zipCd\":\"12312\",\"address\":\"test\",\"jibunAddress\"\
+                  :\"test\",\"receiverCity\":null,\"receiverState\":null,\"name\"\
+                  :\"hello\",\"detailAddress\":\"my address\",\"contact1\":\"01012341234\"\
+                  ,\"contact2\":null,\"mobileCountryCd\":\"82\",\"customsIdNumber\"\
+                  :null,\"countryCd\":\"KR\",\"receiverFirstName\":null,\"receiverLastName\"\
+                  :null},\"refundType\":\"PG\",\"complexRefundAdjust\":null},\"invoiceNo\"\
+                  :\"\",\"deliveryCompanyType\":null,\"additionalPayType\":null,\"\
+                  reasonDetail\":\"test\",\"reasonType\":\"CHANGE_MIND\",\"refundBankAccount\"\
+                  :null,\"additionalPayBankAccount\":null,\"additionalPayRemitter\"\
+                  :null,\"productAdjustReason\":null,\"returnDeliveryAdjustReason\"\
+                  :\"test\",\"exchangeDeliveryAdjustReason\":\"test\",\"returnExchangeImages\"\
+                  :[],\"returnDeliveryNote\":null,\"exchangeDeliveryNote\":null,\"\
+                  purchaserInputs\":[{\"inputLabel\":\"test label\",\"inputValue\"\
+                  :\"test value\"}]}"
+      responses:
+        '204':
+          description: '204'
+  /return-exchanges/{no}/collect:
+    put:
+      tags:
+        - ReturnExchange
+      summary: 반품교환 수거완료
+      description: |2
+
+        ## 부가설명 및 특이사항
+        반품교환에서 클레임된 상품의 수거를 완료처리하는 API입니다.
+      operationId: put-return-exhcnages-no-collect
+      parameters:
+        - name: 'no'
+          in: path
+          description: ''
+          required: true
+          schema:
+            type: string
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs"
+          required: false
+          schema:
+            type: string
+          example: Bearer ABCDERAdjflaskjdfosiaetlkfs
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br />\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니\
+            다.<br />\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n\n\
+            \ ^|각 어드민에서 복사된 값"
+          required: false
+          schema:
+            type: string
+          example: QUZjUHlHV0JtdUFrSWVyUmhnRUFTcUt1SzR3ckFRSk0
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/return-exchanges-no-collect-1943409195'
+            examples:
+              put-return-exhcnages-no-collect:
+                value: '{"restoresStock":true}'
+      responses:
+        '204':
+          description: '204'
+  /return-exchanges/{no}/confirm-deposit:
+    put:
+      tags:
+        - ReturnExchange
+      summary: 반품교환 추가결제 입금확인
+      description: "\n## 부가설명 및 특이사항\n추가 결제 내역을 입금 확인처리 합니다.\n       "
+      operationId: put-return-exchanges-no-confirm-deposit
+      parameters:
+        - name: 'no'
+          in: path
+          description: ''
+          required: true
+          schema:
+            type: string
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs"
+          required: false
+          schema:
+            type: string
+          example: Bearer ABCDERAdjflaskjdfosiaetlkfs
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br />\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니\
+            다.<br />\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n\n\
+            \ ^|각 어드민에서 복사된 값"
+          required: false
+          schema:
+            type: string
+          example: test-mall-key
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/return-exchanges-no-confirm-deposit934552446'
+            examples:
+              put-return-exchanges-no-confirm-deposit:
+                value: "{\"additionalPayBankAccount\":{\"bank\":\"KB\",\"account\"\
+                  :\"136584\",\"depositorName\":\"와쳡맨\",\"bankName\":\"국민은행\"},\"\
+                  additionalPayRemitter\":\"홍길맨\"}"
+      responses:
+        '204':
+          description: '204'
+  /returns:
+    post:
+      tags:
+        - Return
+      summary: 반품신청하기
+      description: "\n## 부가설명 및 특이사항\n반품 신청 API입니다.\n       "
+      operationId: post-returns
+      parameters:
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs"
+          required: false
+          schema:
+            type: string
+          example: Bearer ABCDERAdjflaskjdfosiaetlkfs
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br />\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니\
+            다.<br />\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n\n\
+            \ ^|각 어드민에서 복사된 값"
+          required: false
+          schema:
+            type: string
+          example: test-mall-key
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/returns209153868'
+            examples:
+              post-returns:
+                value: "{\"claimImageUrls\":null,\"claimReasonType\":\"CHANGE_MIND\"\
+                  ,\"claimReasonDetail\":null,\"bankAccountInfo\":null,\"saveBankAccountInfo\"\
+                  :false,\"returnAddress\":{\"receiverName\":\"\",\"receiverZipCd\"\
+                  :\"\",\"receiverAddress\":\"\",\"receiverJibunAddress\":\"\",\"\
+                  receiverDetailAddress\":\"\",\"receiverCity\":null,\"receiverState\"\
+                  :null,\"receiverContact1\":\"\",\"receiverContact2\":\"\",\"receiverMobileCountryCd\"\
+                  :\"82\",\"customsIdNumber\":null,\"countryCd\":null,\"deliveryMemo\"\
+                  :\"\",\"receiverFirstName\":null,\"receiverLastName\":null},\"returnWayType\"\
+                  :\"SELLER_COLLECT\",\"claimedProductOptions\":[{\"orderProductOptionNo\"\
+                  :1,\"productCnt\":1,\"reasonType\":null,\"reasonDetail\":null}],\"\
+                  deliveryCompanyType\":\"CJ\",\"invoiceNo\":\"12312312\",\"responsibleObjectType\"\
+                  :\"BUYER\",\"complexRefundRequest\":null,\"refundAdjustRequestAmt\"\
+                  :null,\"refundAdjustReason\":null,\"isRefundAdjust\":null}"
+      responses:
+        '204':
+          description: '204'
+  /returns/{no}/collect:
+    put:
+      tags:
+        - Return
+      summary: 반품수거 완료하기
+      description: "\n## 부가설명 및 특이사항\n반품 수거 완료처리를 위한 API입니다.\n       "
+      operationId: put-returns-no-collect
+      parameters:
+        - name: 'no'
+          in: path
+          description: 클레임 번호^|1
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: systemKey
+          in: header
+          description:
+            "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n - 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: test-system-key
+        - name: Authorization
+          in: header
+          description:
+            "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\
+            \ (중간에 띄어쓰기 필수입니다.)\n\n - 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs"
+          required: false
+          schema:
+            type: string
+          example: Bearer ABCDERAdjflaskjdfosiaetlkfs
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br />\n\n Authorization을 입력을 통한 serverAPI 호출방식 권장드립니\
+            다.<br />\n\n (Authorization 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n\n\
+            \ ^|각 어드민에서 복사된 값"
+          required: false
+          schema:
+            type: string
+          example: test-mall-key
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/returns-no-collect-880281392'
+            examples:
+              put-returns-no-collect:
+                value: "{\"restoreStockOrderOptionNos\":[1,2],\"refundOnHold\":true,\"\
+                  refundHoldProposedAmt\":2000,\"refundOnHoldReason\":\"테스트\"}"
+      responses:
+        '204':
+          description: '204'
+components:
+  schemas:
+    cancel-exchanges1646626756:
+      required:
+        - calculateParam
+        - purchaserInputs
+        - reasonType
+      type: object
+      properties:
+        productAdjustReason:
+          type: string
+          description: 상품조정금액입력사유
+          nullable: true
+        additionalPayRemitter:
+          type: string
+          description: 입금자명(추가결제시)
+          nullable: true
+        reasonDetail:
+          type: string
+          description: 클레임사유-상세
+          nullable: true
+        additionalPayBankAccount:
+          required:
+            - bankName
+          type: object
+          properties:
+            depositorName:
+              type: string
+              description: 계좌소유자명 (nullable)^|홍길동
+              nullable: true
+            bank:
+              type: string
+              description: 은행코드 (nullable)^|KB
+              nullable: true
+              enum:
+                - 'ANONYMOUS: 미확인은행'
+                - 'KDB: 산업은행'
+                - 'IBK: 기업은행'
+                - 'KB: 국민은행'
+                - 'KEB: 외환은행'
+                - 'SUHYUP: 수협'
+                - 'KEXIM: 수출입은행'
+                - 'NH: NH농협은행'
+                - 'NHLOCAL: 지역농축협'
+                - 'WOORI: 우리은행'
+                - 'SC: SC제일은행'
+                - 'CITY: 한국씨티은행'
+                - 'SUHYUP_LOCAL_BANK: 수협중앙회'
+                - 'DAEGU: 대구은행'
+                - 'PUSAN: 부산은행'
+                - 'GWANGJU: 광주은행'
+                - 'JEJU: 제주은행'
+                - 'JEONBUK: 전북은행'
+                - 'GYEONGNAM: 경남은행'
+                - 'KFCC: 새마을금고'
+                - 'CU: 신협'
+                - 'SANGHO: 상호저축은행'
+                - 'HSBC: HSBC은행'
+                - 'DEUTSCHE: 도이치은행'
+                - 'NFCF: 산림조합중앙회'
+                - 'EPOST: 우체국'
+                - 'KEBHANA: KEB하나은행'
+                - 'SHINHAN: 신한은행'
+                - 'KBANK: 케이뱅크'
+                - 'KAKAO: 카카오뱅크'
+                - 'TOSS: 토스뱅크'
+                - 'YUANTA: 유안타증권'
+                - 'KBSEC: KB증권'
+                - 'MIRAE: 미래에셋증권'
+                - 'MIRAEDAEWOO: 미래에셋대우증권'
+                - 'SAMSUNG: 삼성증권'
+                - 'HANKOOK: 한국투자증권'
+                - 'NH_INVEST: NH투자증권'
+                - 'KYOBO: 교보증권'
+                - 'HI_INVEST: 하이투자증권'
+                - 'HMC_INVEST: HMC투자증권'
+                - 'KIWOOM: 키움증권'
+                - 'EBEST: 이베스트투자증권'
+                - 'SK: SK증권'
+                - 'DAISHIN: 대신증권'
+                - 'SOLOMON_INVEST: 솔로몬증권'
+                - 'HANHWA: 한화투자증권'
+                - 'HANA_INVEST: 하나금융투자'
+                - 'SHINHAN_INVEST: 신한금융투자'
+                - 'DONGBU: DB금융투자'
+                - 'EUGENE_INVEST: 유진투자증권'
+                - 'MERITZ_COMPREHENSIVE: 메리츠종합금융증권'
+                - 'BOOKOOK: 부국증권'
+                - 'SHINYOUNG: 신영증권'
+                - 'CAPE: 케이프투자증권'
+            bankName:
+              type: string
+              description: 은행명
+            account:
+              type: string
+              description: 계좌번호 (nullable)^|123-12-1234
+              nullable: true
+          description: 추가결제입금계좌(추가결제시) (nullable)^|KB
+        additionalPayType:
+          type: string
+          description: '추가결제방법 (nullable)^|CASH,ACCUMULATION'
+          nullable: true
+          enum:
+            - 'CASH: 무통장입금'
+            - 'ACCUMULATION: 적립금 전액 사용'
+            - 'NAVER_PAY: 네이버페이 주문형'
+        calculateParam:
+          required:
+            - cancelCnt
+            - cancelOrderOptionNo
+            - exchangeCnt
+            - exchangeOptionNo
+            - exchangeProductNo
+            - orderNo
+            - responsibleObjectType
+            - sellerPaysClaimedDelivery
+          type: object
+          properties:
+            cancelOrderOptionNo:
+              type: number
+              description: 취소할 주문옵션번호^|1
+            responsibleObjectType:
+              type: string
+              description: '귀책사유^|BUYER, SELLER'
+              enum:
+                - 'BUYER: 구매자귀책'
+                - 'SELLER: 판매자귀책'
+            refundType:
+              type: string
+              description: '환불방법 (nullable)^|PG,ACCOUNT,ZERO_REFUND'
+              nullable: true
+              enum:
+                - PG
+                - ACCUMULATION
+                - ACCOUNT
+                - ZERO_REFUND
+                - EXTERNAL_PAY
+                - ADMIN_ETC
+            exchangeOptionNo:
+              type: number
+              description: 교환할옵션번호^|1
+            exchangeCnt:
+              type: number
+              description: 교환할수량^|1
+            orderNo:
+              type: string
+              description: 주문번호^|202003171021582677
+            complexRefundAdjust:
+              required:
+                - accumulationRefundAmt
+                - cashRefundAmt
+                - externalPayRefundAmts
+                - pgRefundAmt
+              type: object
+              properties:
+                cashRefundAmt:
+                  type: number
+                  description: 현금 환불 금액 (PG 환불 금액과 동시 사용 불가능)
+                accumulationRefundAmt:
+                  type: number
+                  description: 적립금 환불 금액
+                pgRefundAmt:
+                  type: number
+                  description: PG 환불 금액 (현금과 동시 사용 불가능)
+                externalPayRefundAmts:
+                  type: array
+                  description: 외부 결제 환불 금액
+                  items:
+                    required:
+                      - externalPayKey
+                      - refundAmt
+                    type: object
+                    properties:
+                      externalPayKey:
+                        type: string
+                        description: 외부결제 키^|OK_CASH_BAG
+                      refundAmt:
+                        type: number
+                        description: 금액^|2000
+              description: 결제수단 별 환불금액 (refundType 은 ADMIN_ETC 를 입력해주세요.)
+            cancelCnt:
+              type: number
+              description: 취소수량^|1
+            sellerPaysClaimedDelivery:
+              type: boolean
+              description: 초도배송비 판매자 부담 여부(true이면 판매자가 추가되는 초도배송비를 부담)^|false
+            productAdjustAmt:
+              type: number
+              description: 상품조정금액(추가되는 상품 차액을 쇼핑몰이 부담하는 경우 입력) (nullable)^|0
+              nullable: true
+            exchangeProductNo:
+              type: number
+              description: 교환할상품번호^|1
+          description: 계산값
+        purchaserInputs:
+          type: array
+          description: 구매자 작성형 옵션
+          items:
+            required:
+              - inputLabel
+              - inputValue
+            type: object
+            properties:
+              inputValue:
+                type: string
+                description: 구매자 작성형 입력 값
+              inputLabel:
+                type: string
+                description: 구매자 작성형 입력 이름
+        reasonType:
+          type: string
+          description:
+            "클레임사유^|CHANGE_MIND, DEFECTIVE_PRODUCT, WRONG_DELIVERY, OUT_OF_STOCK_SYSTEM,\
+            \ CANCEL_BEFORE_PAY, WRONG_PRODUCT_DETAIL, DELAY_DELIVERY, OUT_OF_STOCK,\
+            \ OTHERS_SELLER, OTHERS_BUYER, LATER_INPUT_ORDER, LATER_INPUT_ORDER_RECEIVER_CANCEL"
+          enum:
+            - 'CHANGE_MIND: 단순변심(색상,사이즈 등)'
+            - 'DEFECTIVE_PRODUCT: 상품불량/파손'
+            - 'WRONG_DELIVERY: 배송누락/오배송'
+            - 'OUT_OF_STOCK_SYSTEM: 재고부족(품절취소)'
+            - 'CANCEL_BEFORE_PAY: 입금전취소'
+            - 'WRONG_PRODUCT_DETAIL: 상품상세 정보와 다름'
+            - 'DELAY_DELIVERY: 판매자 배송 지연'
+            - 'OTHERS_SELLER: 기타(판매자 귀책)'
+            - 'OTHERS_BUYER: 기타(구매자 귀책)'
+            - 'OUT_OF_STOCK: 상품 품절/재고 없음'
+            - 'LATER_INPUT_ORDER: 배송지 미입력 취소'
+            - 'LATER_INPUT_ORDER_RECEIVER_CANCEL: 선물거절취소'
+        refundBankAccount:
+          required:
+            - bankName
+          type: object
+          properties:
+            depositorName:
+              type: string
+              description: 계좌소유자명 (nullable)^|홍길동
+              nullable: true
+            bank:
+              type: string
+              description: 은행코드 (nullable)^|KB
+              nullable: true
+              enum:
+                - 'ANONYMOUS: 미확인은행'
+                - 'KDB: 산업은행'
+                - 'IBK: 기업은행'
+                - 'KB: 국민은행'
+                - 'KEB: 외환은행'
+                - 'SUHYUP: 수협'
+                - 'KEXIM: 수출입은행'
+                - 'NH: NH농협은행'
+                - 'NHLOCAL: 지역농축협'
+                - 'WOORI: 우리은행'
+                - 'SC: SC제일은행'
+                - 'CITY: 한국씨티은행'
+                - 'SUHYUP_LOCAL_BANK: 수협중앙회'
+                - 'DAEGU: 대구은행'
+                - 'PUSAN: 부산은행'
+                - 'GWANGJU: 광주은행'
+                - 'JEJU: 제주은행'
+                - 'JEONBUK: 전북은행'
+                - 'GYEONGNAM: 경남은행'
+                - 'KFCC: 새마을금고'
+                - 'CU: 신협'
+                - 'SANGHO: 상호저축은행'
+                - 'HSBC: HSBC은행'
+                - 'DEUTSCHE: 도이치은행'
+                - 'NFCF: 산림조합중앙회'
+                - 'EPOST: 우체국'
+                - 'KEBHANA: KEB하나은행'
+                - 'SHINHAN: 신한은행'
+                - 'KBANK: 케이뱅크'
+                - 'KAKAO: 카카오뱅크'
+                - 'TOSS: 토스뱅크'
+                - 'YUANTA: 유안타증권'
+                - 'KBSEC: KB증권'
+                - 'MIRAE: 미래에셋증권'
+                - 'MIRAEDAEWOO: 미래에셋대우증권'
+                - 'SAMSUNG: 삼성증권'
+                - 'HANKOOK: 한국투자증권'
+                - 'NH_INVEST: NH투자증권'
+                - 'KYOBO: 교보증권'
+                - 'HI_INVEST: 하이투자증권'
+                - 'HMC_INVEST: HMC투자증권'
+                - 'KIWOOM: 키움증권'
+                - 'EBEST: 이베스트투자증권'
+                - 'SK: SK증권'
+                - 'DAISHIN: 대신증권'
+                - 'SOLOMON_INVEST: 솔로몬증권'
+                - 'HANHWA: 한화투자증권'
+                - 'HANA_INVEST: 하나금융투자'
+                - 'SHINHAN_INVEST: 신한금융투자'
+                - 'DONGBU: DB금융투자'
+                - 'EUGENE_INVEST: 유진투자증권'
+                - 'MERITZ_COMPREHENSIVE: 메리츠종합금융증권'
+                - 'BOOKOOK: 부국증권'
+                - 'SHINYOUNG: 신영증권'
+                - 'CAPE: 케이프투자증권'
+            bankName:
+              type: string
+              description: 은행명
+            account:
+              type: string
+              description: 계좌번호 (nullable)^|123-12-1234
+              nullable: true
+          description: 환불계좌(환불시) (nullable)^|KB
+    option-cancels-sold-out2041411915:
+      required:
+        - orderOptionNos
+      type: object
+      properties:
+        orderOptionNos:
+          type: array
+          description: '품절 주문 옵션번호^|[1,2,3]'
+          items:
+            type: number
+    option-cancels-sold-out-set-option1925829967:
+      required:
+        - orderOptions
+      type: object
+      properties:
+        orderOptions:
+          type: array
+          description: 품절 주문 옵션
+          items:
+            required:
+              - orderOptionNo
+              - soldOutMallOptionNos
+            type: object
+            properties:
+              soldOutMallOptionNos:
+                type: array
+                description: '품절이 된 세트 상품 옵션번호^|[1,2,3]'
+                items:
+                  type: number
+              orderOptionNo:
+                type: number
+                description: 품절 주문 옵션번호^|1
+    return-exchanges-no-confirm-deposit934552446:
+      type: object
+      properties:
+        additionalPayRemitter:
+          type: string
+          description: 입금자명(추가결제시)
+          nullable: true
+        additionalPayBankAccount:
+          required:
+            - bankName
+          type: object
+          properties:
+            depositorName:
+              type: string
+              description: 계좌소유자명 (nullable)^|홍길동
+              nullable: true
+            bank:
+              type: string
+              description: 은행코드 (nullable)^|KB
+              nullable: true
+              enum:
+                - 'ANONYMOUS: 미확인은행'
+                - 'KDB: 산업은행'
+                - 'IBK: 기업은행'
+                - 'KB: 국민은행'
+                - 'KEB: 외환은행'
+                - 'SUHYUP: 수협'
+                - 'KEXIM: 수출입은행'
+                - 'NH: NH농협은행'
+                - 'NHLOCAL: 지역농축협'
+                - 'WOORI: 우리은행'
+                - 'SC: SC제일은행'
+                - 'CITY: 한국씨티은행'
+                - 'SUHYUP_LOCAL_BANK: 수협중앙회'
+                - 'DAEGU: 대구은행'
+                - 'PUSAN: 부산은행'
+                - 'GWANGJU: 광주은행'
+                - 'JEJU: 제주은행'
+                - 'JEONBUK: 전북은행'
+                - 'GYEONGNAM: 경남은행'
+                - 'KFCC: 새마을금고'
+                - 'CU: 신협'
+                - 'SANGHO: 상호저축은행'
+                - 'HSBC: HSBC은행'
+                - 'DEUTSCHE: 도이치은행'
+                - 'NFCF: 산림조합중앙회'
+                - 'EPOST: 우체국'
+                - 'KEBHANA: KEB하나은행'
+                - 'SHINHAN: 신한은행'
+                - 'KBANK: 케이뱅크'
+                - 'KAKAO: 카카오뱅크'
+                - 'TOSS: 토스뱅크'
+                - 'YUANTA: 유안타증권'
+                - 'KBSEC: KB증권'
+                - 'MIRAE: 미래에셋증권'
+                - 'MIRAEDAEWOO: 미래에셋대우증권'
+                - 'SAMSUNG: 삼성증권'
+                - 'HANKOOK: 한국투자증권'
+                - 'NH_INVEST: NH투자증권'
+                - 'KYOBO: 교보증권'
+                - 'HI_INVEST: 하이투자증권'
+                - 'HMC_INVEST: HMC투자증권'
+                - 'KIWOOM: 키움증권'
+                - 'EBEST: 이베스트투자증권'
+                - 'SK: SK증권'
+                - 'DAISHIN: 대신증권'
+                - 'SOLOMON_INVEST: 솔로몬증권'
+                - 'HANHWA: 한화투자증권'
+                - 'HANA_INVEST: 하나금융투자'
+                - 'SHINHAN_INVEST: 신한금융투자'
+                - 'DONGBU: DB금융투자'
+                - 'EUGENE_INVEST: 유진투자증권'
+                - 'MERITZ_COMPREHENSIVE: 메리츠종합금융증권'
+                - 'BOOKOOK: 부국증권'
+                - 'SHINYOUNG: 신영증권'
+                - 'CAPE: 케이프투자증권'
+            bankName:
+              type: string
+              description: 은행명
+            account:
+              type: string
+              description: 계좌번호 (nullable)^|123-12-1234
+              nullable: true
+          description: 추가결제입금계좌(추가결제시) (nullable)^|KB
+    claims-694067701:
+      required:
+        - contents
+        - totalCount
+      type: object
+      properties:
+        contents:
+          type: array
+          description: 클레임목록
+          items:
+            required:
+              - claimAmt
+              - claimNo
+              - responsibleObjectType
+              - sellerPaysClaimedDelivery
+            type: object
+            properties:
+              responsibleObjectType:
+                type: string
+                description: 귀책 대상^|BUYER | SELLER
+              claimNo:
+                type: number
+                description: 클레임번호
+              claimReasonType:
+                type: string
+                description: "클레임사유(CHANGE_MIND, DEFECTIVE_PRODUCT, WRONG_DELIVERY,\
+                  \ OUT_OF_STOCK_SYSTEM, CANCEL_BEFORE_PAY, WRONG_PRODUCT_DETAIL,\
+                  \ DELAY_DELIVERY, OTHERS_SELLER, OTHERS_BUYER, OUT_OF_STOCK, LATER_INPUT_ORDER,\
+                  \ LATER_INPUT_ORDER_RECEIVER_CANCEL) (nullable)^|CHANGE_MIND"
+                nullable: true
+              sellerPaysClaimedDelivery:
+                type: boolean
+                description: 판매자가 초도배송비를 부담할 지 여부^|true
+              returnWayType:
+                type: string
+                description: 반품수거타입 (nullable)^|SELLER_COLLECT
+                nullable: true
+              claimYmdt:
+                type: string
+                description: 클레임일자 (nullable)^|yyyy-mm-dd hh:mm:ss
+                nullable: true
+              claimImageUrls:
+                type: array
+                description: '첨부파일 url 리스트 (5개까지 가능) (nullable)^|[url1, url2]'
+                nullable: true
+                items:
+                  oneOf:
+                    - type: object
+                    - type: boolean
+                    - type: string
+                    - type: number
+              returnDeliveryCompanyType:
+                type: string
+                description: 반품 택배사 (nullable)^|LOGEN
+                nullable: true
+              returnAddress:
+                required:
+                  - address
+                  - addressView
+                  - contact1
+                  - countryCd
+                  - name
+                  - zipCd
+                type: object
+                properties:
+                  note:
+                    type: string
+                    description: ' (nullable)^|배송지메모'
+                    nullable: true
+                  address:
+                    type: string
+                    description: 주소^|서울특별시 구로구 구로동 구로아파트
+                  customsIdNumber:
+                    type: string
+                    description: 개인통관고유부호 (nullable)^|K123456789012
+                    nullable: true
+                  countryCd:
+                    type: string
+                    description: 국가코드^|KR
+                  jibunAddress:
+                    type: string
+                    description: 지번주소 (nullable)^|서울특별시 구로구 구로동 구로아파트
+                    nullable: true
+                  zipCd:
+                    type: string
+                    description: 우편번호^|01234
+                  receiverCity:
+                    type: string
+                    description: (해외배송) 도시 (nullable)
+                    nullable: true
+                  addressView:
+                    type: string
+                    description:
+                      "(zip코드 포함) 수거지 상세 주소^|(08393) 서울특별시 구로구 디지털로26길\
+                      \ 72 3층 (구로동, NHN한국사이버결제)"
+                  shippingEtcInfo:
+                    type: object
+                    properties:
+                      receiverLastName:
+                        type: string
+                        description: (해외배송 시 필수) 수령인 LastName (nullable)
+                        nullable: true
+                      receiverFirstName:
+                        type: string
+                        description: (해외배송 시 필수) 수령인 FirstName (nullable)
+                        nullable: true
+                    description: 해외배송 관련 기타 필드 (nullable)
+                  mobileCountryCd:
+                    type: string
+                    description: 휴대폰번호 국가 코드 (nullable)^|82
+                    nullable: true
+                  name:
+                    type: string
+                    description: 이름^|홍길동
+                  receiverState:
+                    type: string
+                    description: (해외배송) 주 (nullable)
+                    nullable: true
+                  detailAddress:
+                    type: string
+                    description: 상세주소 (nullable)^|101동 101호
+                    nullable: true
+                  contact1:
+                    type: string
+                    description: 연락처1^|010-1234-1234
+                  contact2:
+                    type: string
+                    description: 연락처2 (nullable)^|010-0000-0000
+                    nullable: true
+                description: 반품 수거지(반품주소가 있는 경우에만 응답) (nullable)
+              claimStatusType:
+                type: string
+                description: 클레임상태 (nullable)^|CANCEL_NO_REFUND
+                nullable: true
+              returnInvoiceNo:
+                type: string
+                description: 반품 송장번호 (nullable)^|1234
+                nullable: true
+              partnerNo:
+                type: number
+                description: 파트너번호 (개발중) (nullable)^|1
+                nullable: true
+              refundType:
+                type: string
+                description: 환불수단 (nullable)^|PG
+                nullable: true
+              claimType:
+                type: string
+                description: 클레임타입 (nullable)^|EXCHANGE
+                nullable: true
+              additionalPayBankAccount:
+                required:
+                  - bankName
+                type: object
+                properties:
+                  depositorName:
+                    type: string
+                    description: 계좌 소유주 명 (nullable)^|김계좌주인
+                    nullable: true
+                  bank:
+                    type: string
+                    description: 은행 코드 (nullable)^|KB
+                    nullable: true
+                  bankName:
+                    type: string
+                    description: 은행 명^|국민은행
+                  account:
+                    type: string
+                    description: 계좌번호 (nullable)^|42200201234567
+                    nullable: true
+                description: 추가결제 - 입금계좌정보 (nullable)
+              returnDeliveryCompanyTypeLabel:
+                type: string
+                description: 반품 택배사명 (nullable)^|로젠택배
+                nullable: true
+              claimAmt:
+                type: number
+                description: 클레임금액^|1
+              treatmentAdminNo:
+                type: number
+                description: 클레임 처리 어드민 번호 (nullable)^|0
+                nullable: true
+              claimReasonDetail:
+                type: string
+                description: 클레임상세사유 (nullable)^|변심
+                nullable: true
+              additionalPayRemitter:
+                type: string
+                description: 추가결제 - 입금자명 (nullable)^|대방어
+                nullable: true
+              claimedOptions:
+                type: array
+                description: 클레임된 옵션 (nullable)
+                items:
+                  required:
+                    - claimCnt
+                    - orderOptionNo
+                  type: object
+                  properties:
+                    claimCnt:
+                      type: number
+                      description: 클레임 수량^|3
+                    originOrderOptionNo:
+                      type: number
+                      description:
+                        원주문옵션번호 - 부분클레임으로 생성된 옵션인 경우 클레임 처리된 옵션의 번호를 가지게
+                        됨 (nullable)^|10000000
+                      nullable: true
+                    orderOptionNo:
+                      type: number
+                      description: 주문옵션번호^|10000001
+              orderNo:
+                type: string
+                description: 주문번호 (nullable)^|1
+                nullable: true
+              claimCompleteYmdt:
+                type: string
+                description: 클레임완료일자 (nullable)^|yyyy-mm-dd hh:mm:ss
+                nullable: true
+              orderOptionNos:
+                type: array
+                description: '주문옵션번호 (nullable)^|[1,2,3]'
+                nullable: true
+                items:
+                  oneOf:
+                    - type: object
+                    - type: boolean
+                    - type: string
+                    - type: number
+              refundPayType:
+                type: string
+                description: 환불수단(결제수단) (nullable)^|CREDIT_CARD
+                nullable: true
+              memberNo:
+                type: number
+                description: 회원번호 (nullable)^|1
+                nullable: true
+              additionalPayType:
+                type: string
+                description: 추가결제 - 결제수단 (nullable)^|CASH
+                nullable: true
+              treatmentStatusType:
+                type: string
+                description: "클레임 처리 상태 (REQUEST, APPROVE, ALREADY_RELEASE, WITHDRAW,\
+                  \ WITHDRAW_REQUEST, WITHDRAW_APPROVE, COLLECT_RETURN_PROD, CONFIRM_DEPOSIT,\
+                  \ REFUND_DONE, DELETE) (nullable)^|REFUND_DONE"
+                nullable: true
+              claimData:
+                required:
+                  - amounts
+                  - overflowsPgAmt
+                  - shipping
+                type: object
+                properties:
+                  refundType:
+                    type: string
+                    description: 환불방법 (nullable)^|PG
+                    nullable: true
+                  coupon:
+                    type: object
+                    properties:
+                      productCoupons:
+                        type: array
+                        description: 상품쿠폰 (nullable)
+                        items:
+                          required:
+                            - couponIssueNo
+                            - couponName
+                            - couponNo
+                            - couponSubType
+                            - orderProductNo
+                            - restores
+                          type: object
+                          properties:
+                            couponName:
+                              type: string
+                              description: 쿠폰명^|쿠폰
+                            couponIssueNo:
+                              type: number
+                              description: 쿠폰이슈번호^|1
+                            couponSubType:
+                              type: string
+                              description:
+                                "쿠폰 하위 타입 - CART(장바구니 쿠폰), DELIVERY_DEFAULT(기\
+                                본 배송비 쿠폰), DELIVERY_ALL(전체 배송비 쿠폰), NONE(장바구니 쿠폰 외\
+                                )^|NONE"
+                            orderProductNo:
+                              type: number
+                              description: 적용주문상품번호^|1
+                            restores:
+                              type: boolean
+                              description: 복원여부^|true
+                            couponNo:
+                              type: number
+                              description: 쿠폰번호^|1
+                      cartCoupon:
+                        required:
+                          - couponIssueNo
+                          - couponName
+                          - couponNo
+                          - couponSubType
+                          - orderProductNo
+                          - restores
+                        type: object
+                        properties:
+                          couponName:
+                            type: string
+                            description: 쿠폰명^|쿠폰
+                          couponIssueNo:
+                            type: number
+                            description: 쿠폰이슈번호^|1
+                          couponSubType:
+                            type: string
+                            description: "쿠폰 하위 타입 - CART(장바구니 쿠폰), DELIVERY_DEFAULT(기\
+                              본 배송비 쿠폰), DELIVERY_ALL(전체 배송비 쿠폰), NONE(장바구니 쿠폰 외)^|NONE"
+                          orderProductNo:
+                            type: number
+                            description: 적용주문상품번호^|1
+                          restores:
+                            type: boolean
+                            description: 복원여부^|true
+                          couponNo:
+                            type: number
+                            description: 쿠폰번호^|1
+                        description: 장바구니쿠폰 (nullable)
+                    description: 쿠폰정보 (nullable)
+                  shipping:
+                    required:
+                      - address
+                      - combined
+                      - deliveryGroupNo
+                      - deliveryTemplateNo
+                      - divided
+                      - hasAdjustedExchangeDeliveryAmt
+                      - originalShippingNo
+                      - prepaid
+                      - requiresShipping
+                      - shippingNo
+                    type: object
+                    properties:
+                      address:
+                        required:
+                          - address
+                          - contact1
+                          - name
+                          - zipCd
+                        type: object
+                        properties:
+                          address:
+                            type: string
+                            description: 주소^|서울시 용산구 신창동
+                          customsIdNumber:
+                            type: string
+                            description: 개인고유통관부호 (nullable)^|P123123123
+                            nullable: true
+                          countryCd:
+                            type: string
+                            description: 국가 코드 (nullable)^|KR
+                            nullable: true
+                          jibunAddress:
+                            type: string
+                            description: 지번주소 (nullable)^|서울시 용산구 신창동
+                            nullable: true
+                          zipCd:
+                            type: string
+                            description: 우편번호^|12345
+                          receiverCity:
+                            type: string
+                            description: (해외) 도시 (nullable)
+                            nullable: true
+                          shippingEtcInfo:
+                            type: object
+                            properties:
+                              receiverLastName:
+                                type: string
+                                description: (해외배송 시 필수) 수령인 LastName (nullable)
+                                nullable: true
+                              receiverFirstName:
+                                type: string
+                                description: (해외배송 시 필수) 수령인 FirstName (nullable)
+                                nullable: true
+                            description: 해외배송 관련 기타 필드 (nullable)
+                          mobileCountryCd:
+                            type: string
+                            description: 휴대폰번호 국가 코드 (nullable)^|82
+                            nullable: true
+                          name:
+                            type: string
+                            description: 수령자명^|홍길동
+                          receiverState:
+                            type: string
+                            description: (해외) 주 (nullable)
+                            nullable: true
+                          detailAddress:
+                            type: string
+                            description: 세부주소 (nullable)^|77-50
+                            nullable: true
+                          contact1:
+                            type: string
+                            description: 연락처1^|01012341234
+                          contact2:
+                            type: string
+                            description: 연락처2 (nullable)^|01012341234
+                            nullable: true
+                        description: 주소
+                      customsIdNumber:
+                        type: string
+                        description: 개인통관고유부호 (nullable)^|P123123123
+                        nullable: true
+                      divided:
+                        type: boolean
+                        description: 나눔배송 여부^|false
+                      deliveryType:
+                        type: string
+                        description: 배송형태 (nullable)^|PARCEL_DELIVERY
+                        nullable: true
+                      deliveryCompanyType:
+                        type: string
+                        description: 택배사 (nullable)^|CJ
+                        nullable: true
+                      prepaid:
+                        type: boolean
+                        description: 선불여부^|false
+                      requiresShipping:
+                        type: boolean
+                        description: 배송여부^|true
+                      hasAdjustedExchangeDeliveryAmt:
+                        type: boolean
+                        description: 교환재배송비 조정 여부^|false
+                      shippingNo:
+                        type: number
+                        description: 배송번호^|1
+                      deliveryGroupNo:
+                        type: number
+                        description: 배송그룹번호^|1
+                      deliveryTemplateNo:
+                        type: number
+                        description: 배송템플릿번호^|1
+                      combined:
+                        type: boolean
+                        description: 일괄 묶음 배송여부^|false
+                      invoiceNo:
+                        type: string
+                        description: 배송번호 (nullable)^|1
+                        nullable: true
+                      originalShippingNo:
+                        type: number
+                        description: 원배송번호^|1
+                    description: 배송정보
+                  amounts:
+                    required:
+                      - adjustedAmounts
+                      - after
+                      - before
+                      - deliveryAdjustAmt
+                      - exchangeDeliveryAdjustAmt
+                      - initialDeliveryAmt
+                      - productAdjustAmt
+                      - refund
+                      - refundDeliveryAmt
+                      - returnDeliveryAdjustAmt
+                    type: object
+                    properties:
+                      deliveryAdjustAmt:
+                        type: number
+                        description: 초도 배송비차액 조정액^|0
+                      exchangeDelivery:
+                        required:
+                          - deliveryAmt
+                          - prepaidDeliveryAmt
+                          - prepaidRemoteDeliveryAmt
+                          - remoteDeliveryAmt
+                          - totalDeliveryAmt
+                          - totalPrepaidDeliveryAmt
+                        type: object
+                        properties:
+                          prepaidRemoteDeliveryAmt:
+                            type: number
+                            description: 교환 출고 지역별 추가배송비^|0
+                          deliveryAmt:
+                            type: number
+                            description: 교환 출고 배송비^|0
+                          remoteDeliveryAmt:
+                            type: number
+                            description: 교환 출고 지역별 추가배송비^|0
+                          totalDeliveryAmt:
+                            type: number
+                            description: 교환 출고 배송비 + 교환 출고 지역별 추가배송비^|0
+                          prepaidDeliveryAmt:
+                            type: number
+                            description: 교환 출고 배송비^|0
+                          totalPrepaidDeliveryAmt:
+                            type: number
+                            description: 선불 (교환 출고 배송비 + 교환 출고 지역별 추가배송비)^|0
+                        description: 교환 배송비 (nullable)
+                      returnDelivery:
+                        required:
+                          - prepaid
+                          - prepaidProcessedDeliveryAmt
+                          - prepaidReturnDeliveryAmt
+                          - prepaidReturnRemoteDeliveryAmt
+                          - prepaidTotalPureReturnDeliveryAmt
+                          - prepaidTotalReturnDeliveryAmt
+                          - processedDeliveryAmt
+                          - returnDeliveryAmt
+                          - returnRemoteDeliveryAmt
+                          - totalPureReturnDeliveryAmt
+                          - totalReturnDeliveryAmt
+                        type: object
+                        properties:
+                          totalReturnDeliveryAmt:
+                            type: number
+                            description: 반품배송비 + 지역별추가배송비 + 기집행배송비^|0
+                          prepaidTotalPureReturnDeliveryAmt:
+                            type: number
+                            description: 반품배송비 + 지역별추가배송비^|0
+                          prepaidProcessedDeliveryAmt:
+                            type: number
+                            description: 선불 기집행 배송비^|0
+                          totalPureReturnDeliveryAmt:
+                            type: number
+                            description: 반품배송비 + 지역별추가배송비^|0
+                          prepaidReturnRemoteDeliveryAmt:
+                            type: number
+                            description: 반품 지역별 배송비 (template에 명시된)^|0
+                          returnRemoteDeliveryAmt:
+                            type: number
+                            description: 반품 지역별 배송비 (template에 명시된)^|0
+                          returnDeliveryAmt:
+                            type: number
+                            description: 반품 배송비 (template에 명시된)^|0
+                          processedDeliveryAmt:
+                            type: number
+                            description: 기집행 배송비^|0
+                          prepaid:
+                            type: boolean
+                            description: 착불여부^|false
+                          prepaidTotalReturnDeliveryAmt:
+                            type: number
+                            description: 반품배송비 + 지역별추가배송비 + 기집행배송비^|0
+                          prepaidReturnDeliveryAmt:
+                            type: number
+                            description: 착불 반품 배송비 (template에 명시된)^|0
+                        description: 반품 배송비 (nullable)
+                      returnDeliveryAdjustAmt:
+                        type: number
+                        description: 반품배송비 조정액^|0
+                      adjustedAmounts:
+                        required:
+                          - accumulationPayAmt
+                          - additionalPayAmt
+                          - claimAmt
+                          - mainPayAmt
+                          - payAmt
+                        type: object
+                        properties:
+                          mainPayAmt:
+                            type: number
+                            description: 실환불액^|0
+                          accumulationPayAmt:
+                            type: number
+                            description: 복원적립금^|0
+                          claimAmt:
+                            type: number
+                            description: '클레임금액(마이너스인 경우 환불, 플러스인경우 추가 결제)^|0'
+                          additionalPayAmt:
+                            type: number
+                            description: 추가결제금액^|0
+                          complexRefundPgAmt:
+                            type: number
+                            description: (관리자 지정 환불시에만 응답) PG 환불금액 (nullable)^|0
+                            nullable: true
+                          payAmt:
+                            type: number
+                            description: 환불금액^|0
+                          complexRefundAccountAmt:
+                            type: number
+                            description: (관리자 지정 환불시에만 응답) 현금 환불금액 (nullable)^|0
+                            nullable: true
+                        description: 최종환불액
+                      before:
+                        required:
+                          - accumulation
+                          - coupon
+                          - delivery
+                          - order
+                        type: object
+                        properties:
+                          delivery:
+                            required:
+                              - deliveryAmt
+                              - deliveryGroupAmounts
+                              - remoteDeliveryAmt
+                              - totalDeliveryAmt
+                            type: object
+                            properties:
+                              deliveryAmt:
+                                type: number
+                                description: 주문 전체의 배송비^|0
+                              remoteDeliveryAmt:
+                                type: number
+                                description: 주문 전체의 지역별 추가 배송비^|0
+                              totalDeliveryAmt:
+                                type: number
+                                description: 배송비 + 지역별 추가배송비^|0
+                              deliveryGroupAmounts:
+                                required:
+                                  - alreadyPaidTotalDeliveryAmt
+                                  - deliveryAmt
+                                  - payOnDeliveryAmt
+                                  - payOnRemoteDeliveryAmt
+                                  - prepaidDeliveryAmt
+                                  - prepaidRemoteDeliveryAmt
+                                  - remoteDeliveryAmt
+                                  - totalDeliveryAmt
+                                  - totalPrepaidDeliveryAmt
+                                type: object
+                                properties:
+                                  prepaidRemoteDeliveryAmt:
+                                    type: number
+                                    description: 선불 지역별 추가배송비^|0
+                                  payOnRemoteDeliveryAmt:
+                                    type: number
+                                    description: 착불 지역별 추가배송비^|0
+                                  deliveryAmt:
+                                    type: number
+                                    description: 배송비^|0
+                                  alreadyPaidTotalDeliveryAmt:
+                                    type: number
+                                    description:
+                                      고객이 낸 배송비 - 지역별추가포함(shipping.adjustedAmt
+                                      기반)^|0
+                                  remoteDeliveryAmt:
+                                    type: number
+                                    description: 지역별 추가배송비^|0
+                                  payOnDeliveryAmt:
+                                    type: number
+                                    description: 착불 배송비^|0
+                                  totalDeliveryAmt:
+                                    type: number
+                                    description: 총 배송비(배송비 + 지역별 추가배송비)^|0
+                                  prepaidDeliveryAmt:
+                                    type: number
+                                    description: 선불 배송비^|0
+                                  totalPrepaidDeliveryAmt:
+                                    type: number
+                                    description: 총 선불배송비(선불 배송비 + 선불 지역별 추가 배송비)^|0
+                                description: 초도배송비정보^|0
+                            description: 배송비금액
+                          coupon:
+                            required:
+                              - cartCouponDiscountAmt
+                              - productCouponDiscountAmt
+                            type: object
+                            properties:
+                              cartCouponDiscountAmt:
+                                type: number
+                                description: 주문쿠폰할인금액^|0
+                              productCouponDiscountAmounts:
+                                type: array
+                                description: 상품쿠폰세부내역 (nullable)^|0
+                                items:
+                                  required:
+                                    - couponDiscountAmt
+                                    - orderProductNo
+                                  type: object
+                                  properties:
+                                    couponDiscountAmt:
+                                      type: number
+                                      description: 쿠폰할인금액^|0
+                                    orderProductNo:
+                                      type: number
+                                      description: 상품번호^|1
+                              productCouponDiscountAmt:
+                                type: number
+                                description: 상품쿠폰할인금액^|0
+                            description: 쿠폰할인금액
+                          accumulation:
+                            required:
+                              - accumulationAmt
+                            type: object
+                            properties:
+                              accumulationAmt:
+                                type: number
+                                description: 예상적립금^|0
+                            description: 예상적립금
+                          order:
+                            required:
+                              - accumulationPayAmt
+                              - additionalDiscountAmt
+                              - freeGiftDiscountAmt
+                              - immediateDiscountAmt
+                              - mainPayAmt
+                              - payAmt
+                              - remainingMainPayAmt
+                              - remainingPgPayAmt
+                              - standardAmt
+                            type: object
+                            properties:
+                              additionalDiscountAmt:
+                                type: number
+                                description: 교환 추가할인금액^|0
+                              immediateDiscountAmt:
+                                type: number
+                                description: 즉시할인금액^|0
+                              standardAmt:
+                                type: number
+                                description: 상품금액(할인제외)^|0
+                              mainPayAmt:
+                                type: number
+                                description: 실결제금액^|0
+                              remainingMainPayAmt:
+                                type: number
+                                description: 주결제 수단 남은 금액^|0
+                              accumulationPayAmt:
+                                type: number
+                                description: 적립금결제금액^|0
+                              freeGiftDiscountAmt:
+                                type: number
+                                description: 사은품 할인 금액^|0
+                              remainingPgPayAmt:
+                                type: number
+                                description: PG 결제 남은 금액^|0
+                              payAmt:
+                                type: number
+                                description: 결제금액 (buyAmt - productCouponDiscountAmt
+                                  - cartCouponDiscountAmt + totalDeliveryAmt)^|0
+                            description: 주문금액
+                        description: 변경 전 금액
+                      productAdjustAmt:
+                        type: number
+                        description: 상품 차액 조정액^|0
+                      refundDeliveryAmt:
+                        type: number
+                        description: 초도 배송비 환불액^|0
+                      after:
+                        required:
+                          - accumulation
+                          - coupon
+                          - delivery
+                          - order
+                        type: object
+                        properties:
+                          delivery:
+                            required:
+                              - deliveryAmt
+                              - deliveryGroupAmounts
+                              - remoteDeliveryAmt
+                              - totalDeliveryAmt
+                            type: object
+                            properties:
+                              deliveryAmt:
+                                type: number
+                                description: 주문 전체의 배송비^|0
+                              remoteDeliveryAmt:
+                                type: number
+                                description: 주문 전체의 지역별 추가 배송비^|0
+                              totalDeliveryAmt:
+                                type: number
+                                description: 배송비 + 지역별 추가배송비^|0
+                              deliveryGroupAmounts:
+                                required:
+                                  - alreadyPaidTotalDeliveryAmt
+                                  - deliveryAmt
+                                  - payOnDeliveryAmt
+                                  - payOnRemoteDeliveryAmt
+                                  - prepaidDeliveryAmt
+                                  - prepaidRemoteDeliveryAmt
+                                  - remoteDeliveryAmt
+                                  - totalDeliveryAmt
+                                  - totalPrepaidDeliveryAmt
+                                type: object
+                                properties:
+                                  prepaidRemoteDeliveryAmt:
+                                    type: number
+                                    description: 선불 지역별 추가배송비^|0
+                                  payOnRemoteDeliveryAmt:
+                                    type: number
+                                    description: 착불 지역별 추가배송비^|0
+                                  deliveryAmt:
+                                    type: number
+                                    description: 배송비^|0
+                                  alreadyPaidTotalDeliveryAmt:
+                                    type: number
+                                    description:
+                                      고객이 낸 배송비 - 지역별추가포함(shipping.adjustedAmt
+                                      기반)^|0
+                                  remoteDeliveryAmt:
+                                    type: number
+                                    description: 지역별 추가배송비^|0
+                                  payOnDeliveryAmt:
+                                    type: number
+                                    description: 착불 배송비^|0
+                                  totalDeliveryAmt:
+                                    type: number
+                                    description: 총 배송비(배송비 + 지역별 추가배송비)^|0
+                                  prepaidDeliveryAmt:
+                                    type: number
+                                    description: 선불 배송비^|0
+                                  totalPrepaidDeliveryAmt:
+                                    type: number
+                                    description: 총 선불배송비(선불 배송비 + 선불 지역별 추가 배송비)^|0
+                                description: 초도배송비정보^|0
+                            description: 배송비금액
+                          coupon:
+                            required:
+                              - cartCouponDiscountAmt
+                              - productCouponDiscountAmt
+                            type: object
+                            properties:
+                              cartCouponDiscountAmt:
+                                type: number
+                                description: 주문쿠폰할인금액^|0
+                              productCouponDiscountAmounts:
+                                type: array
+                                description: 상품쿠폰세부내역 (nullable)^|0
+                                items:
+                                  required:
+                                    - couponDiscountAmt
+                                    - orderProductNo
+                                  type: object
+                                  properties:
+                                    couponDiscountAmt:
+                                      type: number
+                                      description: 쿠폰할인금액^|0
+                                    orderProductNo:
+                                      type: number
+                                      description: 상품번호^|1
+                              productCouponDiscountAmt:
+                                type: number
+                                description: 상품쿠폰할인금액^|0
+                            description: 쿠폰할인금액
+                          accumulation:
+                            required:
+                              - accumulationAmt
+                            type: object
+                            properties:
+                              accumulationAmt:
+                                type: number
+                                description: 예상적립금^|0
+                            description: 예상적립금
+                          order:
+                            required:
+                              - accumulationPayAmt
+                              - additionalDiscountAmt
+                              - freeGiftDiscountAmt
+                              - immediateDiscountAmt
+                              - mainPayAmt
+                              - payAmt
+                              - remainingMainPayAmt
+                              - remainingPgPayAmt
+                              - standardAmt
+                            type: object
+                            properties:
+                              additionalDiscountAmt:
+                                type: number
+                                description: 교환 추가할인금액^|0
+                              immediateDiscountAmt:
+                                type: number
+                                description: 즉시할인금액^|0
+                              standardAmt:
+                                type: number
+                                description: 상품금액(할인제외)^|0
+                              mainPayAmt:
+                                type: number
+                                description: 실결제금액^|0
+                              remainingMainPayAmt:
+                                type: number
+                                description: 주결제 수단 남은 금액^|0
+                              accumulationPayAmt:
+                                type: number
+                                description: 적립금결제금액^|0
+                              freeGiftDiscountAmt:
+                                type: number
+                                description: 사은품 할인 금액^|0
+                              remainingPgPayAmt:
+                                type: number
+                                description: PG 결제 남은 금액^|0
+                              payAmt:
+                                type: number
+                                description: 결제금액 (buyAmt - productCouponDiscountAmt
+                                  - cartCouponDiscountAmt + totalDeliveryAmt)^|0
+                            description: 주문금액
+                        description: 변경 후 금액
+                      initialDeliveryAmt:
+                        type: number
+                        description: 초도 배송비 차액^|0
+                      exchangeDeliveryAdjustAmt:
+                        type: number
+                        description: 교환재발송 배송비 조정액^|0
+                      refund:
+                        required:
+                          - accumulation
+                          - coupon
+                          - delivery
+                          - order
+                        type: object
+                        properties:
+                          delivery:
+                            required:
+                              - deliveryAmt
+                              - deliveryGroupAmounts
+                              - remoteDeliveryAmt
+                              - totalDeliveryAmt
+                            type: object
+                            properties:
+                              deliveryAmt:
+                                type: number
+                                description: 주문 전체의 배송비^|0
+                              remoteDeliveryAmt:
+                                type: number
+                                description: 주문 전체의 지역별 추가 배송비^|0
+                              totalDeliveryAmt:
+                                type: number
+                                description: 배송비 + 지역별 추가배송비^|0
+                              deliveryGroupAmounts:
+                                required:
+                                  - alreadyPaidTotalDeliveryAmt
+                                  - deliveryAmt
+                                  - payOnDeliveryAmt
+                                  - payOnRemoteDeliveryAmt
+                                  - prepaidDeliveryAmt
+                                  - prepaidRemoteDeliveryAmt
+                                  - remoteDeliveryAmt
+                                  - totalDeliveryAmt
+                                  - totalPrepaidDeliveryAmt
+                                type: object
+                                properties:
+                                  prepaidRemoteDeliveryAmt:
+                                    type: number
+                                    description: 선불 지역별 추가배송비^|0
+                                  payOnRemoteDeliveryAmt:
+                                    type: number
+                                    description: 착불 지역별 추가배송비^|0
+                                  deliveryAmt:
+                                    type: number
+                                    description: 배송비^|0
+                                  alreadyPaidTotalDeliveryAmt:
+                                    type: number
+                                    description:
+                                      고객이 낸 배송비 - 지역별추가포함(shipping.adjustedAmt
+                                      기반)^|0
+                                  remoteDeliveryAmt:
+                                    type: number
+                                    description: 지역별 추가배송비^|0
+                                  payOnDeliveryAmt:
+                                    type: number
+                                    description: 착불 배송비^|0
+                                  totalDeliveryAmt:
+                                    type: number
+                                    description: 총 배송비(배송비 + 지역별 추가배송비)^|0
+                                  prepaidDeliveryAmt:
+                                    type: number
+                                    description: 선불 배송비^|0
+                                  totalPrepaidDeliveryAmt:
+                                    type: number
+                                    description: 총 선불배송비(선불 배송비 + 선불 지역별 추가 배송비)^|0
+                                description: 초도배송비정보^|0
+                            description: 배송비금액
+                          coupon:
+                            required:
+                              - cartCouponDiscountAmt
+                              - productCouponDiscountAmt
+                            type: object
+                            properties:
+                              cartCouponDiscountAmt:
+                                type: number
+                                description: 주문쿠폰할인금액^|0
+                              productCouponDiscountAmounts:
+                                type: array
+                                description: 상품쿠폰세부내역 (nullable)^|0
+                                items:
+                                  required:
+                                    - couponDiscountAmt
+                                    - orderProductNo
+                                  type: object
+                                  properties:
+                                    couponDiscountAmt:
+                                      type: number
+                                      description: 쿠폰할인금액^|0
+                                    orderProductNo:
+                                      type: number
+                                      description: 상품번호^|1
+                              productCouponDiscountAmt:
+                                type: number
+                                description: 상품쿠폰할인금액^|0
+                            description: 쿠폰할인금액
+                          accumulation:
+                            required:
+                              - accumulationAmt
+                            type: object
+                            properties:
+                              accumulationAmt:
+                                type: number
+                                description: 예상적립금^|0
+                            description: 예상적립금
+                          order:
+                            required:
+                              - accumulationPayAmt
+                              - additionalDiscountAmt
+                              - freeGiftDiscountAmt
+                              - immediateDiscountAmt
+                              - mainPayAmt
+                              - payAmt
+                              - remainingMainPayAmt
+                              - remainingPgPayAmt
+                              - standardAmt
+                            type: object
+                            properties:
+                              additionalDiscountAmt:
+                                type: number
+                                description: 교환 추가할인금액^|0
+                              immediateDiscountAmt:
+                                type: number
+                                description: 즉시할인금액^|0
+                              standardAmt:
+                                type: number
+                                description: 상품금액(할인제외)^|0
+                              mainPayAmt:
+                                type: number
+                                description: 실결제금액^|0
+                              remainingMainPayAmt:
+                                type: number
+                                description: 주결제 수단 남은 금액^|0
+                              accumulationPayAmt:
+                                type: number
+                                description: 적립금결제금액^|0
+                              freeGiftDiscountAmt:
+                                type: number
+                                description: 사은품 할인 금액^|0
+                              remainingPgPayAmt:
+                                type: number
+                                description: PG 결제 남은 금액^|0
+                              payAmt:
+                                type: number
+                                description: 결제금액 (buyAmt - productCouponDiscountAmt
+                                  - cartCouponDiscountAmt + totalDeliveryAmt)^|0
+                            description: 주문금액
+                        description: 기본환불액
+                    description: 금액정보
+                  exchangeProduct:
+                    required:
+                      - additionalDiscountAmt
+                    type: object
+                    properties:
+                      additionalDiscountAmt:
+                        type: number
+                        description: 추가할인금액^|0
+                  exchangeShipping:
+                    required:
+                      - address
+                      - combined
+                      - deliveryAmt
+                      - deliveryGroupNo
+                      - deliveryTemplateNo
+                      - divided
+                      - originalShippingNo
+                      - prepaid
+                      - receiverInputLater
+                      - remoteDeliveryAmt
+                      - requiresShipping
+                      - returnDeliveryAmt
+                      - shippingNo
+                    type: object
+                    properties:
+                      address:
+                        required:
+                          - address
+                          - contact1
+                          - name
+                          - zipCd
+                        type: object
+                        properties:
+                          address:
+                            type: string
+                            description: 주소^|서울시 용산구 신창동
+                          customsIdNumber:
+                            type: string
+                            description: 개인고유통관부호 (nullable)^|P123123123
+                            nullable: true
+                          countryCd:
+                            type: string
+                            description: 국가 코드 (nullable)^|KR
+                            nullable: true
+                          jibunAddress:
+                            type: string
+                            description: 지번주소 (nullable)^|서울시 용산구 신창동
+                            nullable: true
+                          zipCd:
+                            type: string
+                            description: 우편번호^|12345
+                          receiverCity:
+                            type: string
+                            description: (해외) 도시 (nullable)
+                            nullable: true
+                          shippingEtcInfo:
+                            type: object
+                            properties:
+                              receiverLastName:
+                                type: string
+                                description: (해외배송 시 필수) 수령인 LastName (nullable)
+                                nullable: true
+                              receiverFirstName:
+                                type: string
+                                description: (해외배송 시 필수) 수령인 FirstName (nullable)
+                                nullable: true
+                            description: 해외배송 관련 기타 필드 (nullable)
+                          mobileCountryCd:
+                            type: string
+                            description: 휴대폰번호 국가 코드 (nullable)^|82
+                            nullable: true
+                          name:
+                            type: string
+                            description: 수령자명^|홍길동
+                          receiverState:
+                            type: string
+                            description: (해외) 주 (nullable)
+                            nullable: true
+                          detailAddress:
+                            type: string
+                            description: 세부주소 (nullable)^|77-50
+                            nullable: true
+                          contact1:
+                            type: string
+                            description: 연락처1^|01012341234
+                          contact2:
+                            type: string
+                            description: 연락처2 (nullable)^|01012341234
+                            nullable: true
+                        description: 주소
+                      divided:
+                        type: boolean
+                        description: 나눔배송 여부^|false
+                      deliveryType:
+                        type: string
+                        description: 배송형태 (nullable)^|PARCEL_DELIVERY
+                        nullable: true
+                      remoteDeliveryAmt:
+                        type: number
+                        description: 지역별추가배송비^|CJ
+                      prepaid:
+                        type: boolean
+                        description: 선불여부^|false
+                      requiresShipping:
+                        type: boolean
+                        description: 배송여부^|true
+                      deliveryAmt:
+                        type: number
+                        description: 배송비^|0
+                      receiverInputLater:
+                        type: boolean
+                        description: 나중입력 배송 여부^|true
+                      shippingNo:
+                        type: number
+                        description: 배송번호^|1
+                      returnDeliveryAmt:
+                        type: number
+                        description: 반품배송비^|0
+                      deliveryGroupNo:
+                        type: number
+                        description: 배송그룹번호^|1
+                      deliveryTemplateNo:
+                        type: number
+                        description: 배송템플릿번호^|1
+                      combined:
+                        type: boolean
+                        description: 일괄 묶음 배송여부^|false
+                      originalShippingNo:
+                        type: number
+                        description: 원배송번호^|1
+                    description: 교환배송정보 (nullable)
+                  overflowsPgAmt:
+                    type: boolean
+                    description: PG 환불금액 초과 여부^|false
+                  cancelProduct:
+                    required:
+                      - adjustedAmt
+                    type: object
+                    properties:
+                      adjustedAmt:
+                        type: number
+                        description: 취소/반품 상품정보^|0
+                description: 클레임상세정보 (nullable)
+              mallNo:
+                type: number
+                description: 몰번호 (nullable)^|1
+                nullable: true
+              firstOrderOptionNo:
+                type: number
+                description: (교환 클레임 시 응답) 최초 주문 옵션 번호 (nullable)^|1000
+                nullable: true
+        totalCount:
+          type: number
+          description: 클레임개수^|1
+    claims-claimNo-assign-return-invoice1153638030:
+      required:
+        - deliveryCompanyType
+        - returnInvoiceNo
+      type: object
+      properties:
+        returnInvoiceNo:
+          type: string
+          description: 반품 송장번호
+        deliveryCompanyType:
+          type: string
+          description: 택배사^|CJ
+          enum:
+            - 'CJ: CJ대한통운'
+            - 'POST: 우체국택배'
+            - 'HANJIN: 한진택배'
+            - 'GTX: gtx로지스'
+            - 'LOTTE: 롯데택배'
+            - 'KGB: kgb택배'
+            - 'LOGEN: 로젠택배'
+            - 'GSI: gsi Express'
+            - 'KGL: KG로지스'
+            - 'INTRAS: INTRAS'
+            - 'UPS: UPS'
+            - 'CHUNIL: 천일택배'
+            - 'KDEXP: 경동택배'
+            - 'HDEXP: 합동택배'
+            - 'ILYANG: 일양택배'
+            - 'POST_EMS: 우체국 EMS'
+            - 'DAESIN: 대신택배'
+            - 'CVS: GSPostbox택배'
+            - 'DHL: DHL'
+            - 'FEDEX: FEDEX'
+            - 'GSM: GSM국제택배'
+            - 'WARPEX: WarpEx'
+            - 'WIZWA: WIZWA'
+            - 'ACI: ACI Express'
+            - 'PANTOS: 범한판토스'
+            - 'CJ_INTERNATIONAL: CJ대한통운(국제택배)'
+            - 'TNT: TNT'
+            - 'CU: CU편의점택배'
+            - 'KUNYOUNG: 건영택배'
+            - 'LOTTE_INTERNATIONAL: 롯데택배(국제택배)'
+            - 'HONAM: 호남택배'
+            - 'HANIPS: 한의사랑'
+            - 'IPARCEL: i-Parcel'
+            - 'SLX: SLX택배'
+            - 'USPS: USPS'
+            - 'WONDERS: 원더스퀵'
+            - 'REGISTPOST: 우편등기'
+            - 'DHLDE: DHL(독일)'
+            - 'EZUSA: EZUSA'
+            - 'SWGEXP: 성원글로벌'
+            - 'DAEWOON: 대운글로벌'
+            - 'DODOFLEX: 도도플렉스'
+            - 'NH_LOGIS: 농협택배'
+            - 'UFO: 유에프오'
+            - 'TODAY_PICKUP: 카카오 T 당일배송'
+            - 'QEXPRESS: 큐익스프레스'
+            - 'PINGPONG: 핑퐁'
+            - 'CR_LOGITECH: CR Logitech'
+            - 'TODAY: 투데이'
+            - 'SELLUV: 셀럽'
+            - 'EXMATE: 이엑스메이트'
+            - 'WINION_LOGIS: 위니온로지스'
+            - 'ETC: 기타'
+    claims-orderNo-exchange-infos-1914356139:
+      type: array
+      items:
+        required:
+          - claimCompleteYmdt
+          - claimNo
+          - claimYmdt
+          - claimedCnt
+          - claimedMallOptionNo
+          - claimedMallProductNo
+          - claimedOptionName
+          - claimedOptionValue
+          - claimedOrderProductOptionNo
+          - claimedProductName
+          - exchangedCnt
+          - exchangedMallOptionNo
+          - exchangedMallProductNo
+          - exchangedOptionName
+          - exchangedOptionValue
+          - exchangedOrderProductOptionNo
+          - exchangedProductName
+        type: object
+        properties:
+          exchangedMallProductNo:
+            type: number
+            description: 교환출고된 몰 상품번호^|1001
+          claimedOptionValue:
+            type: string
+            description: 클레임된 옵션값^|빨강 (100)
+          claimNo:
+            type: number
+            description: 클레임 번호^|1
+          claimedOptionName:
+            type: string
+            description: 클레임된 옵션명^|색상
+          claimedProductName:
+            type: string
+            description: 클레임된 상품명^|난닝구
+          claimCompleteYmdt:
+            type: string
+            description: 클레임 완료 시각^|2024-12-24 12:34:56
+          claimedMallProductNo:
+            type: number
+            description: 클레임된 몰 상품번호^|1001
+          claimYmdt:
+            type: string
+            description: 클레임 신청 시각^|2024-12-17 00:00:00
+          claimedCnt:
+            type: number
+            description: 클레임된 개수^|1
+          exchangedOptionName:
+            type: string
+            description: 교환출고된 옵션명^|색상
+          exchangedOrderProductOptionNo:
+            type: number
+            description: 교환출고된 주문옵션번호^|5678
+          claimedOrderProductOptionNo:
+            type: number
+            description: 클레임된 주문옵션번호^|1234
+          claimedMallOptionNo:
+            type: number
+            description: 클레임된 몰 옵션번호^|2222
+          exchangedCnt:
+            type: number
+            description: 교환출고된 개수^|2
+          exchangedProductName:
+            type: string
+            description: 교환출고된 상품명^|난닝구
+          exchangedOptionValue:
+            type: string
+            description: 교환출고된 옵션값^|회색 (105)
+          exchangedMallOptionNo:
+            type: number
+            description: 교환출고된 몰 옵션번호^|3333
+    claims-claimNo-already-delivery-235042226:
+      required:
+        - releaseYmd
+      type: object
+      properties:
+        deliveryCompanyType:
+          type: string
+          description: '택배사 타입 (nullable)^|CJ,POST,HANJIN,GTX,LOTTE,KGB,LOGEN,CJHBL,GSI,KGL,INTRAS,UPS,JAPANPOST,YAMATO,SAGAWA,CHUNIL,KDEXP,HDEXP,ILYANG,POST_EMS,DAESIN,CVS,DHL,FEDEX,GSM,WARPEX,WIZWA,ACI,PANTOS,CJ_INTERNATIONAL,TNT,CU,KUNYOUNG,LOTTE_INTERNATIONAL,HONAM,HANIPS,IPARCEL,SLX,USPS,WONDERS'
+          nullable: true
+          enum:
+            - 'CJ: CJ대한통운'
+            - 'POST: 우체국택배'
+            - 'HANJIN: 한진택배'
+            - 'GTX: gtx로지스'
+            - 'LOTTE: 롯데택배'
+            - 'KGB: kgb택배'
+            - 'LOGEN: 로젠택배'
+            - 'GSI: gsi Express'
+            - 'KGL: KG로지스'
+            - 'INTRAS: INTRAS'
+            - 'UPS: UPS'
+            - 'CHUNIL: 천일택배'
+            - 'KDEXP: 경동택배'
+            - 'HDEXP: 합동택배'
+            - 'ILYANG: 일양택배'
+            - 'POST_EMS: 우체국 EMS'
+            - 'DAESIN: 대신택배'
+            - 'CVS: GSPostbox택배'
+            - 'DHL: DHL'
+            - 'FEDEX: FEDEX'
+            - 'GSM: GSM국제택배'
+            - 'WARPEX: WarpEx'
+            - 'WIZWA: WIZWA'
+            - 'ACI: ACI Express'
+            - 'PANTOS: 범한판토스'
+            - 'CJ_INTERNATIONAL: CJ대한통운(국제택배)'
+            - 'TNT: TNT'
+            - 'CU: CU편의점택배'
+            - 'KUNYOUNG: 건영택배'
+            - 'LOTTE_INTERNATIONAL: 롯데택배(국제택배)'
+            - 'HONAM: 호남택배'
+            - 'HANIPS: 한의사랑'
+            - 'IPARCEL: i-Parcel'
+            - 'SLX: SLX택배'
+            - 'USPS: USPS'
+            - 'WONDERS: 원더스퀵'
+            - 'REGISTPOST: 우편등기'
+            - 'DHLDE: DHL(독일)'
+            - 'EZUSA: EZUSA'
+            - 'SWGEXP: 성원글로벌'
+            - 'DAEWOON: 대운글로벌'
+            - 'DODOFLEX: 도도플렉스'
+            - 'NH_LOGIS: 농협택배'
+            - 'UFO: 유에프오'
+            - 'TODAY_PICKUP: 카카오 T 당일배송'
+            - 'QEXPRESS: 큐익스프레스'
+            - 'PINGPONG: 핑퐁'
+            - 'CR_LOGITECH: CR Logitech'
+            - 'TODAY: 투데이'
+            - 'SELLUV: 셀럽'
+            - 'EXMATE: 이엑스메이트'
+            - 'WINION_LOGIS: 위니온로지스'
+            - 'ETC: 기타'
+        releaseYmd:
+          type: string
+          description: 출고일시(yyyy-MM-dd)^|2020-05-31
+        invoiceNo:
+          type: string
+          description: 송장번호 (nullable)^|123455
+          nullable: true
+    return-exchanges925138161:
+      required:
+        - calculateParam
+        - purchaserInputs
+        - reasonType
+      type: object
+      properties:
+        additionalPayRemitter:
+          type: string
+          description: 입금자명(추가결제시)
+          nullable: true
+        exchangeDeliveryNote:
+          type: string
+          description: 교환 배송메모
+          nullable: true
+        purchaserInputs:
+          type: array
+          description: 구매자 작성형 옵션
+          items:
+            required:
+              - inputLabel
+              - inputValue
+            type: object
+            properties:
+              inputValue:
+                type: string
+                description: 구매자 작성형 입력 값
+              inputLabel:
+                type: string
+                description: 구매자 작성형 입력 이름
+        deliveryCompanyType:
+          type: string
+          description: 택배사
+          nullable: true
+          enum:
+            - 'CJ: CJ대한통운'
+            - 'POST: 우체국택배'
+            - 'HANJIN: 한진택배'
+            - 'GTX: gtx로지스'
+            - 'LOTTE: 롯데택배'
+            - 'KGB: kgb택배'
+            - 'LOGEN: 로젠택배'
+            - 'GSI: gsi Express'
+            - 'KGL: KG로지스'
+            - 'INTRAS: INTRAS'
+            - 'UPS: UPS'
+            - 'CHUNIL: 천일택배'
+            - 'KDEXP: 경동택배'
+            - 'HDEXP: 합동택배'
+            - 'ILYANG: 일양택배'
+            - 'POST_EMS: 우체국 EMS'
+            - 'DAESIN: 대신택배'
+            - 'CVS: GSPostbox택배'
+            - 'DHL: DHL'
+            - 'FEDEX: FEDEX'
+            - 'GSM: GSM국제택배'
+            - 'WARPEX: WarpEx'
+            - 'WIZWA: WIZWA'
+            - 'ACI: ACI Express'
+            - 'PANTOS: 범한판토스'
+            - 'CJ_INTERNATIONAL: CJ대한통운(국제택배)'
+            - 'TNT: TNT'
+            - 'CU: CU편의점택배'
+            - 'KUNYOUNG: 건영택배'
+            - 'LOTTE_INTERNATIONAL: 롯데택배(국제택배)'
+            - 'HONAM: 호남택배'
+            - 'HANIPS: 한의사랑'
+            - 'IPARCEL: i-Parcel'
+            - 'SLX: SLX택배'
+            - 'USPS: USPS'
+            - 'WONDERS: 원더스퀵'
+            - 'REGISTPOST: 우편등기'
+            - 'DHLDE: DHL(독일)'
+            - 'EZUSA: EZUSA'
+            - 'SWGEXP: 성원글로벌'
+            - 'DAEWOON: 대운글로벌'
+            - 'DODOFLEX: 도도플렉스'
+            - 'NH_LOGIS: 농협택배'
+            - 'UFO: 유에프오'
+            - 'TODAY_PICKUP: 카카오 T 당일배송'
+            - 'QEXPRESS: 큐익스프레스'
+            - 'PINGPONG: 핑퐁'
+            - 'CR_LOGITECH: CR Logitech'
+            - 'TODAY: 투데이'
+            - 'SELLUV: 셀럽'
+            - 'EXMATE: 이엑스메이트'
+            - 'WINION_LOGIS: 위니온로지스'
+            - 'ETC: 기타'
+        exchangeDeliveryAdjustReason:
+          type: string
+          description: 교환배송비조정사유
+          nullable: true
+        returnDeliveryNote:
+          type: string
+          description: 반품 배송메모
+          nullable: true
+        reasonType:
+          type: string
+          description:
+            "클레임사유^|CHANGE_MIND, DEFECTIVE_PRODUCT, WRONG_DELIVERY, OUT_OF_STOCK_SYSTEM,\
+            \ CANCEL_BEFORE_PAY, WRONG_PRODUCT_DETAIL, DELAY_DELIVERY, OUT_OF_STOCK,\
+            \ OTHERS_SELLER, OTHERS_BUYER, LATER_INPUT_ORDER, LATER_INPUT_ORDER_RECEIVER_CANCEL"
+          enum:
+            - 'CHANGE_MIND: 단순변심(색상,사이즈 등)'
+            - 'DEFECTIVE_PRODUCT: 상품불량/파손'
+            - 'WRONG_DELIVERY: 배송누락/오배송'
+            - 'OUT_OF_STOCK_SYSTEM: 재고부족(품절취소)'
+            - 'CANCEL_BEFORE_PAY: 입금전취소'
+            - 'WRONG_PRODUCT_DETAIL: 상품상세 정보와 다름'
+            - 'DELAY_DELIVERY: 판매자 배송 지연'
+            - 'OTHERS_SELLER: 기타(판매자 귀책)'
+            - 'OTHERS_BUYER: 기타(구매자 귀책)'
+            - 'OUT_OF_STOCK: 상품 품절/재고 없음'
+            - 'LATER_INPUT_ORDER: 배송지 미입력 취소'
+            - 'LATER_INPUT_ORDER_RECEIVER_CANCEL: 선물거절취소'
+        returnExchangeImages:
+          type: array
+          description: 반품교환 이미지
+          nullable: true
+          items:
+            type: string
+        productAdjustReason:
+          type: string
+          description: 상품조정금액입력사유
+          nullable: true
+        reasonDetail:
+          type: string
+          description: 클레임사유-상세
+          nullable: true
+        additionalPayBankAccount:
+          required:
+            - bankName
+          type: object
+          properties:
+            depositorName:
+              type: string
+              description: 계좌소유자명 (nullable)^|홍길동
+              nullable: true
+            bank:
+              type: string
+              description: 은행코드 (nullable)^|KB
+              nullable: true
+              enum:
+                - 'ANONYMOUS: 미확인은행'
+                - 'KDB: 산업은행'
+                - 'IBK: 기업은행'
+                - 'KB: 국민은행'
+                - 'KEB: 외환은행'
+                - 'SUHYUP: 수협'
+                - 'KEXIM: 수출입은행'
+                - 'NH: NH농협은행'
+                - 'NHLOCAL: 지역농축협'
+                - 'WOORI: 우리은행'
+                - 'SC: SC제일은행'
+                - 'CITY: 한국씨티은행'
+                - 'SUHYUP_LOCAL_BANK: 수협중앙회'
+                - 'DAEGU: 대구은행'
+                - 'PUSAN: 부산은행'
+                - 'GWANGJU: 광주은행'
+                - 'JEJU: 제주은행'
+                - 'JEONBUK: 전북은행'
+                - 'GYEONGNAM: 경남은행'
+                - 'KFCC: 새마을금고'
+                - 'CU: 신협'
+                - 'SANGHO: 상호저축은행'
+                - 'HSBC: HSBC은행'
+                - 'DEUTSCHE: 도이치은행'
+                - 'NFCF: 산림조합중앙회'
+                - 'EPOST: 우체국'
+                - 'KEBHANA: KEB하나은행'
+                - 'SHINHAN: 신한은행'
+                - 'KBANK: 케이뱅크'
+                - 'KAKAO: 카카오뱅크'
+                - 'TOSS: 토스뱅크'
+                - 'YUANTA: 유안타증권'
+                - 'KBSEC: KB증권'
+                - 'MIRAE: 미래에셋증권'
+                - 'MIRAEDAEWOO: 미래에셋대우증권'
+                - 'SAMSUNG: 삼성증권'
+                - 'HANKOOK: 한국투자증권'
+                - 'NH_INVEST: NH투자증권'
+                - 'KYOBO: 교보증권'
+                - 'HI_INVEST: 하이투자증권'
+                - 'HMC_INVEST: HMC투자증권'
+                - 'KIWOOM: 키움증권'
+                - 'EBEST: 이베스트투자증권'
+                - 'SK: SK증권'
+                - 'DAISHIN: 대신증권'
+                - 'SOLOMON_INVEST: 솔로몬증권'
+                - 'HANHWA: 한화투자증권'
+                - 'HANA_INVEST: 하나금융투자'
+                - 'SHINHAN_INVEST: 신한금융투자'
+                - 'DONGBU: DB금융투자'
+                - 'EUGENE_INVEST: 유진투자증권'
+                - 'MERITZ_COMPREHENSIVE: 메리츠종합금융증권'
+                - 'BOOKOOK: 부국증권'
+                - 'SHINYOUNG: 신영증권'
+                - 'CAPE: 케이프투자증권'
+            bankName:
+              type: string
+              description: 은행명
+            account:
+              type: string
+              description: 계좌번호 (nullable)^|123-12-1234
+              nullable: true
+          description: 추가결제입금계좌(추가결제시) (nullable)^|KB
+        additionalPayType:
+          type: string
+          description: '추가결제방법 (nullable)^|CASH,ACCUMULATION'
+          nullable: true
+          enum:
+            - 'CASH: 무통장입금'
+            - 'ACCUMULATION: 적립금 전액 사용'
+            - 'NAVER_PAY: 네이버페이 주문형'
+        calculateParam:
+          required:
+            - cancelCnt
+            - cancelOrderOptionNo
+            - exchangeDeliveryProposedAmt
+            - orderNo
+            - responsibleObjectType
+            - returnDeliveryProposedAmt
+            - returnWayType
+            - sellerPaysClaimedDelivery
+          type: object
+          properties:
+            cancelOrderOptionNo:
+              type: number
+              description: 취소할 주문옵션번호^|1
+            responsibleObjectType:
+              type: string
+              description: '귀책사유^|BUYER, SELLER'
+              enum:
+                - 'BUYER: 구매자귀책'
+                - 'SELLER: 판매자귀책'
+            exchangeCnt:
+              type: number
+              description: 교환할수량 (nullable)^|1
+              nullable: true
+            orderNo:
+              type: string
+              description: 주문번호^|202003171021582677
+            complexRefundAdjust:
+              required:
+                - accumulationRefundAmt
+                - cashRefundAmt
+                - externalPayRefundAmts
+                - pgRefundAmt
+              type: object
+              properties:
+                cashRefundAmt:
+                  type: number
+                  description: 현금 환불 금액 (PG 환불 금액과 동시 사용 불가능)
+                accumulationRefundAmt:
+                  type: number
+                  description: 적립금 환불 금액
+                pgRefundAmt:
+                  type: number
+                  description: PG 환불 금액 (현금과 동시 사용 불가능)
+                externalPayRefundAmts:
+                  type: array
+                  description: 외부 결제 환불 금액
+                  items:
+                    required:
+                      - externalPayKey
+                      - refundAmt
+                    type: object
+                    properties:
+                      externalPayKey:
+                        type: string
+                        description: 외부결제 키^|OK_CASH_BAG
+                      refundAmt:
+                        type: number
+                        description: 금액^|2000
+              description: 결제수단 별 환불금액 (refundType 은 ADMIN_ETC 를 입력해주세요.)
+            cancelCnt:
+              type: number
+              description: 취소수량^|1
+            sellerPaysClaimedDelivery:
+              type: boolean
+              description: 초도배송비 판매자 부담 여부(true이면 판매자가 추가되는 초도배송비를 부담)^|false
+            returnWayType:
+              type: string
+              description: '반품수거 방법^|판매자수거요청 SELLER_COLLECT, 구매자 직접반품 BUYER_DIRECT_RETURN'
+              enum:
+                - 'SELLER_COLLECT: 판매자수거요청'
+                - 'BUYER_DIRECT_RETURN: 구매자직접반품'
+            productAdjustAmt:
+              type: number
+              description: 상품조정금액(추가되는 상품 차액을 쇼핑몰이 부담하는 경우 입력) (nullable)^|0
+              nullable: true
+            returnAddress:
+              required:
+                - address
+                - contact1
+                - name
+                - zipCd
+              type: object
+              properties:
+                receiverLastName:
+                  type: string
+                  description: (해외배송 / 글로벌결제 시 필수) 수령인 LastName
+                  nullable: true
+                address:
+                  type: string
+                  description: 주소^|서울시 용산구 신창동
+                customsIdNumber:
+                  type: string
+                  description: 개인고유통관부호 (nullable)^|P123123123
+                  nullable: true
+                countryCd:
+                  type: string
+                  description: 국가 코드 (nullable)^|KR
+                  nullable: true
+                  enum:
+                    - 'AX: 올랜드 제도'
+                    - 'AD: 안도라'
+                    - 'AU: 호주'
+                    - 'AT: 오스트리아'
+                    - 'BH: 바레인'
+                    - 'BE: 벨기에'
+                    - 'BZ: 벨리즈'
+                    - 'BR: 브라질'
+                    - 'BN: 브루나이'
+                    - 'BG: 불가리아'
+                    - 'CA: 캐나다'
+                    - 'ES_CANARY: 스페인(에스파냐)'
+                    - 'CL: 칠레'
+                    - 'CN: 중국'
+                    - 'CO: 콜롬비아'
+                    - 'CR: 코스타리카'
+                    - 'CY: 키프로스'
+                    - 'CZ: 체코'
+                    - 'DK: 덴마크'
+                    - 'EC: 에콰도르'
+                    - 'EG: 이집트'
+                    - 'SV: 엘살바도르'
+                    - 'EE: 에스토니아'
+                    - 'FR: 프랑스'
+                    - 'GF: 프랑스령 기아나'
+                    - 'DE: 독일'
+                    - 'GR: 그리스'
+                    - 'GL: 덴마크'
+                    - 'GU: 괌'
+                    - 'GT: 과테말라'
+                    - 'GG: 건지'
+                    - 'GY: 가이아나'
+                    - 'HK: 홍콩'
+                    - 'HU: 헝가리'
+                    - 'IS: 아이슬란드'
+                    - 'ID: 인도네시아'
+                    - 'IE: 아일랜드'
+                    - 'IL: 이스라엘'
+                    - 'IT: 이탈리아'
+                    - 'JP: 일본'
+                    - 'JE: 저지'
+                    - 'JO: 요르단'
+                    - 'KR: 대한민국'
+                    - 'KW: 쿠웨이트'
+                    - 'LV: 라트비아'
+                    - 'LB: 레바논'
+                    - 'LI: 리히텐슈타인'
+                    - 'LT: 리투아니아'
+                    - 'LU: 룩셈부르크'
+                    - 'MO: 마카오'
+                    - 'PT_MADEIRA: 포르투갈'
+                    - 'MY: 말레이시아'
+                    - 'NL: 네덜란드'
+                    - 'NZ: 뉴질랜드'
+                    - 'GB_NORTHERN_ISLAND: 영국'
+                    - 'NO: 노르웨이'
+                    - 'PY: 파라과이'
+                    - 'PE: 페루'
+                    - 'PL: 폴란드'
+                    - 'PT: 포르투갈'
+                    - 'RO: 루마니아'
+                    - 'RU: 러시아'
+                    - 'SM: 산마리노'
+                    - 'SA: 사우디아라비아'
+                    - 'GB_SCOTLAND: 영국'
+                    - 'SG: 싱가폴'
+                    - 'SK: 슬로바키아'
+                    - 'SI: 슬로베니아'
+                    - 'ES: 스페인(에스파냐)'
+                    - 'CH: 스위스'
+                    - 'TW: 대만'
+                    - 'TH: 태국'
+                    - 'TR: 터키'
+                    - 'AE: 아랍에미리트'
+                    - 'GB: 영국'
+                    - 'US: 미국(대륙)'
+                    - 'U2: 미국(대륙)'
+                    - 'UY: 우루과이'
+                    - 'VN: 베트남'
+                    - 'GB_WALES: 영국'
+                    - 'YE: 예멘'
+                    - 'HR: 크로아티아'
+                    - 'MT: 몰타'
+                    - 'FI: 핀란드'
+                    - 'SE: 스웨덴'
+                    - 'AF: 아프가니스탄'
+                    - 'AL: 알바니아'
+                    - 'DZ: 알제리'
+                    - 'AS: 아메리칸 사모아'
+                    - 'AO: 앙골라'
+                    - 'AI: 앵귈라'
+                    - 'AQ: 남극대륙'
+                    - 'AG: 앤티가 바부다'
+                    - 'AR: 아르헨티나'
+                    - 'AM: 아르메니아'
+                    - 'AW: 아루바'
+                    - 'AZ: 아제르바이잔'
+                    - 'BS: 바하마'
+                    - 'BD: 방글라데시'
+                    - 'BB: 바베이도스'
+                    - 'BY: 벨라루스'
+                    - 'BJ: 베냉'
+                    - 'BM: 버뮤다'
+                    - 'BT: 부탄'
+                    - 'BO: 볼리비아'
+                    - 'BA: 보스니아 헤르체고비나'
+                    - 'BW: 보츠와나'
+                    - 'IO: 영국령 인도양 지역'
+                    - 'VG: 영국령 버진 아일랜드'
+                    - 'BF: 부르키나파소'
+                    - 'BI: 부룬디'
+                    - 'KH: 캄보디아'
+                    - 'CM: 카메룬'
+                    - 'CV: 카보베르데'
+                    - 'KY: 케이맨 제도'
+                    - 'CF: 중앙 아프리카 공화국'
+                    - 'TD: 차드'
+                    - 'CX: 크리스마스 섬'
+                    - 'CC: 코코스 제도'
+                    - 'KM: 코모로'
+                    - 'CK: 쿡 제도'
+                    - 'CU: 쿠바'
+                    - 'CW: 퀴라소'
+                    - 'CD: 콩고 민주 공화국'
+                    - 'DJ: 지부티'
+                    - 'DM: 도미니카'
+                    - 'DO: 도미니카 공화국'
+                    - 'TL: 동티모르'
+                    - 'GQ: 적도 기니'
+                    - 'ER: 에리트레아'
+                    - 'ET: 에티오피아'
+                    - 'FK: 포클랜드 제도'
+                    - 'FO: 페로 제도'
+                    - 'FJ: 피지'
+                    - 'PF: 프랑스령 폴리네시아'
+                    - 'GA: 가봉'
+                    - 'GM: 감비아'
+                    - 'GE: 그루지야'
+                    - 'GH: 가나'
+                    - 'GI: 지브롤터'
+                    - 'GD: 그레나다'
+                    - 'GN: 기니'
+                    - 'GW: 기니비사우'
+                    - 'HT: 아이티'
+                    - 'HN: 온두라스'
+                    - 'IN: 인도'
+                    - 'IR: 이란'
+                    - 'IQ: 이라크'
+                    - 'IM: 맨 섬'
+                    - 'CI: 상아 해안'
+                    - 'JM: 자메이카'
+                    - 'KZ: 카자흐스탄'
+                    - 'KE: 케냐'
+                    - 'KI: 키리바시'
+                    - 'XK: 코소보'
+                    - 'KG: 키르기스스탄'
+                    - 'LA: 라오스'
+                    - 'LS: 레소토'
+                    - 'LR: 라이베리아'
+                    - 'LY: 리비아'
+                    - 'MK: 마케도니아'
+                    - 'MG: 마다가스카르'
+                    - 'MW: 말라위'
+                    - 'MV: 몰디브'
+                    - 'ML: 말리'
+                    - 'MH: 마셜 제도'
+                    - 'MR: 모리타니'
+                    - 'MU: 모리셔스'
+                    - 'YT: 마요트'
+                    - 'MX: 멕시코'
+                    - 'FM: 미크로네시아'
+                    - 'MD: 몰도바'
+                    - 'MC: 모나코'
+                    - 'MN: 몽골리아'
+                    - 'ME: 몬테네그로'
+                    - 'MS: 몬세라트'
+                    - 'MA: 모로코 가죽'
+                    - 'MZ: 모잠비크'
+                    - 'MM: 미얀마'
+                    - 'NA: 나미비아'
+                    - 'NR: 나우루'
+                    - 'NP: 네팔'
+                    - 'AN: 네덜란드령 안틸레스'
+                    - 'NC: 뉴 칼레도니아'
+                    - 'NI: 니카라과'
+                    - 'NE: 니제르'
+                    - 'NG: 나이지리아'
+                    - 'NU: 니우에'
+                    - 'KP: 북한'
+                    - 'MP: 북마리아나 제도'
+                    - 'OM: 오만'
+                    - 'PK: 파키스탄'
+                    - 'PW: 팔라우'
+                    - 'PS: 팔레스타인'
+                    - 'PA: 파나마'
+                    - 'PG: 파푸아뉴기니'
+                    - 'PH: 필리핀 제도'
+                    - 'PN: 피트케언'
+                    - 'PR: 푸에르토리코'
+                    - 'QA: 카타르'
+                    - 'CG: 콩고 공화국'
+                    - 'RE: 레위니옹'
+                    - 'RW: 르완다'
+                    - 'BL: 생바르텔레미'
+                    - 'SH: 세인트 헬레나'
+                    - 'KN: 세인트키츠네비스'
+                    - 'LC: 세인트 루시아'
+                    - 'MF: 생 마르탱'
+                    - 'PM: 생피에르 미클롱'
+                    - 'VC: 세인트 빈센트 그레나딘'
+                    - 'WS: 사모아'
+                    - 'ST: 상투메 프린시페'
+                    - 'SN: 세네갈'
+                    - 'RS: 세르비아'
+                    - 'SC: 세이셸'
+                    - 'SL: 시에라리온'
+                    - 'SX: 신트마르틴'
+                    - 'SB: 솔로몬 제도'
+                    - 'SO: 소말리아'
+                    - 'ZA: 남아프리카 공화국'
+                    - 'SS: 남수단'
+                    - 'LK: 스리랑카'
+                    - 'SD: 수단'
+                    - 'SR: 수리남'
+                    - 'SJ: 스발바르 얀마옌 제도'
+                    - 'SZ: 스와질랜드'
+                    - 'SY: 시리아'
+                    - 'TJ: 타지키스탄'
+                    - 'TZ: 탄자니아'
+                    - 'TG: 토고'
+                    - 'TK: 토켈라우'
+                    - 'TO: 통가'
+                    - 'TT: 트리니다드 토바고'
+                    - 'TN: 튀니지'
+                    - 'TM: 투르크메니스탄'
+                    - 'TC: 터크스 케이커스 제도'
+                    - 'TV: 투발루'
+                    - 'VI: 미국령 버진 아일랜드'
+                    - 'UG: 우간다'
+                    - 'UA: 우크라이나'
+                    - 'UZ: 우즈베키스탄'
+                    - 'VU: 바누아투'
+                    - 'VA: 바티칸 궁전'
+                    - 'VE: 베네수엘라'
+                    - 'WF: 월리스 푸투나'
+                    - 'EH: 서사하라'
+                    - 'ZM: 잠비아'
+                    - 'ZW: 짐바브웨'
+                jibunAddress:
+                  type: string
+                  description: 지번주소 (nullable)^|서울시 용산구 신창동
+                  nullable: true
+                zipCd:
+                  type: string
+                  description: 우편번호^|12345
+                receiverCity:
+                  type: string
+                  description: (해외) 도시
+                  nullable: true
+                mobileCountryCd:
+                  type: string
+                  description: 휴대폰번호 국가 코드 (nullable)^|82
+                  nullable: true
+                name:
+                  type: string
+                  description: 수령자명^|홍길동
+                receiverState:
+                  type: string
+                  description: (해외) 주
+                  nullable: true
+                detailAddress:
+                  type: string
+                  description: 세부주소 (nullable)^|77-50
+                  nullable: true
+                receiverFirstName:
+                  type: string
+                  description: (해외배송 / 글로벌결제 시 필수) 수령인 FirstName
+                  nullable: true
+                contact1:
+                  type: string
+                  description: 연락처1^|01012341234
+                contact2:
+                  type: string
+                  description: 연락처2 (nullable)^|01012341234
+                  nullable: true
+              description: 반품수거지 주소
+            refundType:
+              type: string
+              description: '환불방법 (nullable)^|PG,ACCOUNT,ZERO_REFUND'
+              nullable: true
+              enum:
+                - PG
+                - ACCUMULATION
+                - ACCOUNT
+                - ZERO_REFUND
+                - EXTERNAL_PAY
+                - ADMIN_ETC
+            exchangeOptionNo:
+              type: number
+              description: 교환할옵션번호 (nullable)^|1
+              nullable: true
+            returnDeliveryProposedAmt:
+              type: number
+              description: 반품배송비조정액(추가되는 반품배송비를 쇼핑몰이 부담하는 경우 입력)^|0
+            exchangeAddress:
+              required:
+                - address
+                - contact1
+                - name
+                - zipCd
+              type: object
+              properties:
+                receiverLastName:
+                  type: string
+                  description: (해외배송 / 글로벌결제 시 필수) 수령인 LastName
+                  nullable: true
+                address:
+                  type: string
+                  description: 주소^|서울시 용산구 신창동
+                customsIdNumber:
+                  type: string
+                  description: 개인고유통관부호 (nullable)^|P123123123
+                  nullable: true
+                countryCd:
+                  type: string
+                  description: 국가 코드 (nullable)^|KR
+                  nullable: true
+                  enum:
+                    - 'AX: 올랜드 제도'
+                    - 'AD: 안도라'
+                    - 'AU: 호주'
+                    - 'AT: 오스트리아'
+                    - 'BH: 바레인'
+                    - 'BE: 벨기에'
+                    - 'BZ: 벨리즈'
+                    - 'BR: 브라질'
+                    - 'BN: 브루나이'
+                    - 'BG: 불가리아'
+                    - 'CA: 캐나다'
+                    - 'ES_CANARY: 스페인(에스파냐)'
+                    - 'CL: 칠레'
+                    - 'CN: 중국'
+                    - 'CO: 콜롬비아'
+                    - 'CR: 코스타리카'
+                    - 'CY: 키프로스'
+                    - 'CZ: 체코'
+                    - 'DK: 덴마크'
+                    - 'EC: 에콰도르'
+                    - 'EG: 이집트'
+                    - 'SV: 엘살바도르'
+                    - 'EE: 에스토니아'
+                    - 'FR: 프랑스'
+                    - 'GF: 프랑스령 기아나'
+                    - 'DE: 독일'
+                    - 'GR: 그리스'
+                    - 'GL: 덴마크'
+                    - 'GU: 괌'
+                    - 'GT: 과테말라'
+                    - 'GG: 건지'
+                    - 'GY: 가이아나'
+                    - 'HK: 홍콩'
+                    - 'HU: 헝가리'
+                    - 'IS: 아이슬란드'
+                    - 'ID: 인도네시아'
+                    - 'IE: 아일랜드'
+                    - 'IL: 이스라엘'
+                    - 'IT: 이탈리아'
+                    - 'JP: 일본'
+                    - 'JE: 저지'
+                    - 'JO: 요르단'
+                    - 'KR: 대한민국'
+                    - 'KW: 쿠웨이트'
+                    - 'LV: 라트비아'
+                    - 'LB: 레바논'
+                    - 'LI: 리히텐슈타인'
+                    - 'LT: 리투아니아'
+                    - 'LU: 룩셈부르크'
+                    - 'MO: 마카오'
+                    - 'PT_MADEIRA: 포르투갈'
+                    - 'MY: 말레이시아'
+                    - 'NL: 네덜란드'
+                    - 'NZ: 뉴질랜드'
+                    - 'GB_NORTHERN_ISLAND: 영국'
+                    - 'NO: 노르웨이'
+                    - 'PY: 파라과이'
+                    - 'PE: 페루'
+                    - 'PL: 폴란드'
+                    - 'PT: 포르투갈'
+                    - 'RO: 루마니아'
+                    - 'RU: 러시아'
+                    - 'SM: 산마리노'
+                    - 'SA: 사우디아라비아'
+                    - 'GB_SCOTLAND: 영국'
+                    - 'SG: 싱가폴'
+                    - 'SK: 슬로바키아'
+                    - 'SI: 슬로베니아'
+                    - 'ES: 스페인(에스파냐)'
+                    - 'CH: 스위스'
+                    - 'TW: 대만'
+                    - 'TH: 태국'
+                    - 'TR: 터키'
+                    - 'AE: 아랍에미리트'
+                    - 'GB: 영국'
+                    - 'US: 미국(대륙)'
+                    - 'U2: 미국(대륙)'
+                    - 'UY: 우루과이'
+                    - 'VN: 베트남'
+                    - 'GB_WALES: 영국'
+                    - 'YE: 예멘'
+                    - 'HR: 크로아티아'
+                    - 'MT: 몰타'
+                    - 'FI: 핀란드'
+                    - 'SE: 스웨덴'
+                    - 'AF: 아프가니스탄'
+                    - 'AL: 알바니아'
+                    - 'DZ: 알제리'
+                    - 'AS: 아메리칸 사모아'
+                    - 'AO: 앙골라'
+                    - 'AI: 앵귈라'
+                    - 'AQ: 남극대륙'
+                    - 'AG: 앤티가 바부다'
+                    - 'AR: 아르헨티나'
+                    - 'AM: 아르메니아'
+                    - 'AW: 아루바'
+                    - 'AZ: 아제르바이잔'
+                    - 'BS: 바하마'
+                    - 'BD: 방글라데시'
+                    - 'BB: 바베이도스'
+                    - 'BY: 벨라루스'
+                    - 'BJ: 베냉'
+                    - 'BM: 버뮤다'
+                    - 'BT: 부탄'
+                    - 'BO: 볼리비아'
+                    - 'BA: 보스니아 헤르체고비나'
+                    - 'BW: 보츠와나'
+                    - 'IO: 영국령 인도양 지역'
+                    - 'VG: 영국령 버진 아일랜드'
+                    - 'BF: 부르키나파소'
+                    - 'BI: 부룬디'
+                    - 'KH: 캄보디아'
+                    - 'CM: 카메룬'
+                    - 'CV: 카보베르데'
+                    - 'KY: 케이맨 제도'
+                    - 'CF: 중앙 아프리카 공화국'
+                    - 'TD: 차드'
+                    - 'CX: 크리스마스 섬'
+                    - 'CC: 코코스 제도'
+                    - 'KM: 코모로'
+                    - 'CK: 쿡 제도'
+                    - 'CU: 쿠바'
+                    - 'CW: 퀴라소'
+                    - 'CD: 콩고 민주 공화국'
+                    - 'DJ: 지부티'
+                    - 'DM: 도미니카'
+                    - 'DO: 도미니카 공화국'
+                    - 'TL: 동티모르'
+                    - 'GQ: 적도 기니'
+                    - 'ER: 에리트레아'
+                    - 'ET: 에티오피아'
+                    - 'FK: 포클랜드 제도'
+                    - 'FO: 페로 제도'
+                    - 'FJ: 피지'
+                    - 'PF: 프랑스령 폴리네시아'
+                    - 'GA: 가봉'
+                    - 'GM: 감비아'
+                    - 'GE: 그루지야'
+                    - 'GH: 가나'
+                    - 'GI: 지브롤터'
+                    - 'GD: 그레나다'
+                    - 'GN: 기니'
+                    - 'GW: 기니비사우'
+                    - 'HT: 아이티'
+                    - 'HN: 온두라스'
+                    - 'IN: 인도'
+                    - 'IR: 이란'
+                    - 'IQ: 이라크'
+                    - 'IM: 맨 섬'
+                    - 'CI: 상아 해안'
+                    - 'JM: 자메이카'
+                    - 'KZ: 카자흐스탄'
+                    - 'KE: 케냐'
+                    - 'KI: 키리바시'
+                    - 'XK: 코소보'
+                    - 'KG: 키르기스스탄'
+                    - 'LA: 라오스'
+                    - 'LS: 레소토'
+                    - 'LR: 라이베리아'
+                    - 'LY: 리비아'
+                    - 'MK: 마케도니아'
+                    - 'MG: 마다가스카르'
+                    - 'MW: 말라위'
+                    - 'MV: 몰디브'
+                    - 'ML: 말리'
+                    - 'MH: 마셜 제도'
+                    - 'MR: 모리타니'
+                    - 'MU: 모리셔스'
+                    - 'YT: 마요트'
+                    - 'MX: 멕시코'
+                    - 'FM: 미크로네시아'
+                    - 'MD: 몰도바'
+                    - 'MC: 모나코'
+                    - 'MN: 몽골리아'
+                    - 'ME: 몬테네그로'
+                    - 'MS: 몬세라트'
+                    - 'MA: 모로코 가죽'
+                    - 'MZ: 모잠비크'
+                    - 'MM: 미얀마'
+                    - 'NA: 나미비아'
+                    - 'NR: 나우루'
+                    - 'NP: 네팔'
+                    - 'AN: 네덜란드령 안틸레스'
+                    - 'NC: 뉴 칼레도니아'
+                    - 'NI: 니카라과'
+                    - 'NE: 니제르'
+                    - 'NG: 나이지리아'
+                    - 'NU: 니우에'
+                    - 'KP: 북한'
+                    - 'MP: 북마리아나 제도'
+                    - 'OM: 오만'
+                    - 'PK: 파키스탄'
+                    - 'PW: 팔라우'
+                    - 'PS: 팔레스타인'
+                    - 'PA: 파나마'
+                    - 'PG: 파푸아뉴기니'
+                    - 'PH: 필리핀 제도'
+                    - 'PN: 피트케언'
+                    - 'PR: 푸에르토리코'
+                    - 'QA: 카타르'
+                    - 'CG: 콩고 공화국'
+                    - 'RE: 레위니옹'
+                    - 'RW: 르완다'
+                    - 'BL: 생바르텔레미'
+                    - 'SH: 세인트 헬레나'
+                    - 'KN: 세인트키츠네비스'
+                    - 'LC: 세인트 루시아'
+                    - 'MF: 생 마르탱'
+                    - 'PM: 생피에르 미클롱'
+                    - 'VC: 세인트 빈센트 그레나딘'
+                    - 'WS: 사모아'
+                    - 'ST: 상투메 프린시페'
+                    - 'SN: 세네갈'
+                    - 'RS: 세르비아'
+                    - 'SC: 세이셸'
+                    - 'SL: 시에라리온'
+                    - 'SX: 신트마르틴'
+                    - 'SB: 솔로몬 제도'
+                    - 'SO: 소말리아'
+                    - 'ZA: 남아프리카 공화국'
+                    - 'SS: 남수단'
+                    - 'LK: 스리랑카'
+                    - 'SD: 수단'
+                    - 'SR: 수리남'
+                    - 'SJ: 스발바르 얀마옌 제도'
+                    - 'SZ: 스와질랜드'
+                    - 'SY: 시리아'
+                    - 'TJ: 타지키스탄'
+                    - 'TZ: 탄자니아'
+                    - 'TG: 토고'
+                    - 'TK: 토켈라우'
+                    - 'TO: 통가'
+                    - 'TT: 트리니다드 토바고'
+                    - 'TN: 튀니지'
+                    - 'TM: 투르크메니스탄'
+                    - 'TC: 터크스 케이커스 제도'
+                    - 'TV: 투발루'
+                    - 'VI: 미국령 버진 아일랜드'
+                    - 'UG: 우간다'
+                    - 'UA: 우크라이나'
+                    - 'UZ: 우즈베키스탄'
+                    - 'VU: 바누아투'
+                    - 'VA: 바티칸 궁전'
+                    - 'VE: 베네수엘라'
+                    - 'WF: 월리스 푸투나'
+                    - 'EH: 서사하라'
+                    - 'ZM: 잠비아'
+                    - 'ZW: 짐바브웨'
+                jibunAddress:
+                  type: string
+                  description: 지번주소 (nullable)^|서울시 용산구 신창동
+                  nullable: true
+                zipCd:
+                  type: string
+                  description: 우편번호^|12345
+                receiverCity:
+                  type: string
+                  description: (해외) 도시
+                  nullable: true
+                mobileCountryCd:
+                  type: string
+                  description: 휴대폰번호 국가 코드 (nullable)^|82
+                  nullable: true
+                name:
+                  type: string
+                  description: 수령자명^|홍길동
+                receiverState:
+                  type: string
+                  description: (해외) 주
+                  nullable: true
+                detailAddress:
+                  type: string
+                  description: 세부주소 (nullable)^|77-50
+                  nullable: true
+                receiverFirstName:
+                  type: string
+                  description: (해외배송 / 글로벌결제 시 필수) 수령인 FirstName
+                  nullable: true
+                contact1:
+                  type: string
+                  description: 연락처1^|01012341234
+                contact2:
+                  type: string
+                  description: 연락처2 (nullable)^|01012341234
+                  nullable: true
+              description: 교환출고지 주소
+            exchangeDeliveryProposedAmt:
+              type: number
+              description: 교환배송비조정액(추가되는 교환재배송배송비를 쇼핑몰이 부담하는 경우 입력)^|0
+            exchangeProductNo:
+              type: number
+              description: 교환할상품번호 (nullable)^|1
+              nullable: true
+          description: 계산값
+        returnDeliveryAdjustReason:
+          type: string
+          description: 반품배송비조정사유
+          nullable: true
+        invoiceNo:
+          type: string
+          description: 반품송장 번호
+          nullable: true
+        refundBankAccount:
+          required:
+            - bankName
+          type: object
+          properties:
+            depositorName:
+              type: string
+              description: 계좌소유자명 (nullable)^|홍길동
+              nullable: true
+            bank:
+              type: string
+              description: 은행코드 (nullable)^|KB
+              nullable: true
+              enum:
+                - 'ANONYMOUS: 미확인은행'
+                - 'KDB: 산업은행'
+                - 'IBK: 기업은행'
+                - 'KB: 국민은행'
+                - 'KEB: 외환은행'
+                - 'SUHYUP: 수협'
+                - 'KEXIM: 수출입은행'
+                - 'NH: NH농협은행'
+                - 'NHLOCAL: 지역농축협'
+                - 'WOORI: 우리은행'
+                - 'SC: SC제일은행'
+                - 'CITY: 한국씨티은행'
+                - 'SUHYUP_LOCAL_BANK: 수협중앙회'
+                - 'DAEGU: 대구은행'
+                - 'PUSAN: 부산은행'
+                - 'GWANGJU: 광주은행'
+                - 'JEJU: 제주은행'
+                - 'JEONBUK: 전북은행'
+                - 'GYEONGNAM: 경남은행'
+                - 'KFCC: 새마을금고'
+                - 'CU: 신협'
+                - 'SANGHO: 상호저축은행'
+                - 'HSBC: HSBC은행'
+                - 'DEUTSCHE: 도이치은행'
+                - 'NFCF: 산림조합중앙회'
+                - 'EPOST: 우체국'
+                - 'KEBHANA: KEB하나은행'
+                - 'SHINHAN: 신한은행'
+                - 'KBANK: 케이뱅크'
+                - 'KAKAO: 카카오뱅크'
+                - 'TOSS: 토스뱅크'
+                - 'YUANTA: 유안타증권'
+                - 'KBSEC: KB증권'
+                - 'MIRAE: 미래에셋증권'
+                - 'MIRAEDAEWOO: 미래에셋대우증권'
+                - 'SAMSUNG: 삼성증권'
+                - 'HANKOOK: 한국투자증권'
+                - 'NH_INVEST: NH투자증권'
+                - 'KYOBO: 교보증권'
+                - 'HI_INVEST: 하이투자증권'
+                - 'HMC_INVEST: HMC투자증권'
+                - 'KIWOOM: 키움증권'
+                - 'EBEST: 이베스트투자증권'
+                - 'SK: SK증권'
+                - 'DAISHIN: 대신증권'
+                - 'SOLOMON_INVEST: 솔로몬증권'
+                - 'HANHWA: 한화투자증권'
+                - 'HANA_INVEST: 하나금융투자'
+                - 'SHINHAN_INVEST: 신한금융투자'
+                - 'DONGBU: DB금융투자'
+                - 'EUGENE_INVEST: 유진투자증권'
+                - 'MERITZ_COMPREHENSIVE: 메리츠종합금융증권'
+                - 'BOOKOOK: 부국증권'
+                - 'SHINYOUNG: 신영증권'
+                - 'CAPE: 케이프투자증권'
+            bankName:
+              type: string
+              description: 은행명
+            account:
+              type: string
+              description: 계좌번호 (nullable)^|123-12-1234
+              nullable: true
+          description: 환불계좌(환불시) (nullable)^|KB
+    returns-no-collect-880281392:
+      required:
+        - refundHoldProposedAmt
+        - refundOnHold
+        - restoreStockOrderOptionNos
+      type: object
+      properties:
+        refundOnHoldReason:
+          type: string
+          description: 환불보류사유 (nullable)^|제품 확인 필요
+          nullable: true
+        restoreStockOrderOptionNos:
+          type: array
+          description: '재고복원하는 옵션번호^|[1,2,3]'
+          items:
+            type: number
+        refundOnHold:
+          type: boolean
+          description: 환불보류 여부^|false
+        refundHoldProposedAmt:
+          type: number
+          description: 환불보류 조정 요청금액^|2000
+    option-cancels-1028891945:
+      required:
+        - orderNo
+        - orderOptionParams
+        - responsibleObjectType
+        - sellerPaysClaimedDelivery
+      type: object
+      properties:
+        responsibleObjectType:
+          type: string
+          description: '귀책사유^|BUYER, SELLER'
+          enum:
+            - 'BUYER: 구매자귀책'
+            - 'SELLER: 판매자귀책'
+        reasonDetail:
+          type: string
+          description: 클레임사유-상세
+          nullable: true
+        orderNo:
+          type: string
+          description: 주문번호^|202003171021582677
+        complexRefundAdjust:
+          required:
+            - accumulationRefundAmt
+            - cashRefundAmt
+            - externalPayRefundAmts
+            - pgRefundAmt
+          type: object
+          properties:
+            cashRefundAmt:
+              type: number
+              description: 현금 환불 금액 (PG 환불 금액과 동시 사용 불가능)
+            accumulationRefundAmt:
+              type: number
+              description: 적립금 환불 금액
+            pgRefundAmt:
+              type: number
+              description: PG 환불 금액 (현금과 동시 사용 불가능)
+            externalPayRefundAmts:
+              type: array
+              description: 외부 결제 환불 금액
+              items:
+                required:
+                  - externalPayKey
+                  - refundAmt
+                type: object
+                properties:
+                  externalPayKey:
+                    type: string
+                    description: 외부결제 키^|OK_CASH_BAG
+                  refundAmt:
+                    type: number
+                    description: 금액^|2000
+          description: 결제수단 별 환불금액
+        sellerPaysClaimedDelivery:
+          type: boolean
+          description: 초도배송비 판매자 부담 여부(true이면 판매자가 추가되는 초도배송비를 부담)^|false
+        orderOptionParams:
+          type: array
+          description: 클레임 옵션 정보
+          items:
+            required:
+              - claimCnt
+              - orderOptionNo
+            type: object
+            properties:
+              reasonDetail:
+                type: string
+                description: 클레임사유-상세
+                nullable: true
+              claimCnt:
+                type: number
+                description: 클레임 수량
+              reasonType:
+                type: string
+                description:
+                  "클레임사유 (nullable)^|CHANGE_MIND, DEFECTIVE_PRODUCT, WRONG_DELIVERY,\
+                  \ OUT_OF_STOCK_SYSTEM, CANCEL_BEFORE_PAY, WRONG_PRODUCT_DETAIL,\
+                  \ DELAY_DELIVERY, OUT_OF_STOCK, OTHERS_SELLER, OTHERS_BUYER, LATER_INPUT_ORDER,\
+                  \ LATER_INPUT_ORDER_RECEIVER_CANCEL"
+                nullable: true
+                enum:
+                  - 'CHANGE_MIND: 단순변심(색상,사이즈 등)'
+                  - 'DEFECTIVE_PRODUCT: 상품불량/파손'
+                  - 'WRONG_DELIVERY: 배송누락/오배송'
+                  - 'OUT_OF_STOCK_SYSTEM: 재고부족(품절취소)'
+                  - 'CANCEL_BEFORE_PAY: 입금전취소'
+                  - 'WRONG_PRODUCT_DETAIL: 상품상세 정보와 다름'
+                  - 'DELAY_DELIVERY: 판매자 배송 지연'
+                  - 'OTHERS_SELLER: 기타(판매자 귀책)'
+                  - 'OTHERS_BUYER: 기타(구매자 귀책)'
+                  - 'OUT_OF_STOCK: 상품 품절/재고 없음'
+                  - 'LATER_INPUT_ORDER: 배송지 미입력 취소'
+                  - 'LATER_INPUT_ORDER_RECEIVER_CANCEL: 선물거절취소'
+              orderOptionNo:
+                type: number
+                description: 옵션번호
+        reasonType:
+          type: string
+          description: "클레임사유 (nullable)^|CHANGE_MIND, DEFECTIVE_PRODUCT, WRONG_DELIVERY,\
+            \ OUT_OF_STOCK_SYSTEM, CANCEL_BEFORE_PAY, WRONG_PRODUCT_DETAIL, DELAY_DELIVERY,\
+            \ OUT_OF_STOCK, OTHERS_SELLER, OTHERS_BUYER, LATER_INPUT_ORDER, LATER_INPUT_ORDER_RECEIVER_CANCEL"
+          nullable: true
+          enum:
+            - 'CHANGE_MIND: 단순변심(색상,사이즈 등)'
+            - 'DEFECTIVE_PRODUCT: 상품불량/파손'
+            - 'WRONG_DELIVERY: 배송누락/오배송'
+            - 'OUT_OF_STOCK_SYSTEM: 재고부족(품절취소)'
+            - 'CANCEL_BEFORE_PAY: 입금전취소'
+            - 'WRONG_PRODUCT_DETAIL: 상품상세 정보와 다름'
+            - 'DELAY_DELIVERY: 판매자 배송 지연'
+            - 'OTHERS_SELLER: 기타(판매자 귀책)'
+            - 'OTHERS_BUYER: 기타(구매자 귀책)'
+            - 'OUT_OF_STOCK: 상품 품절/재고 없음'
+            - 'LATER_INPUT_ORDER: 배송지 미입력 취소'
+            - 'LATER_INPUT_ORDER_RECEIVER_CANCEL: 선물거절취소'
+        refundBankAccount:
+          required:
+            - bankName
+          type: object
+          properties:
+            depositorName:
+              type: string
+              description: 계좌소유자명 (nullable)^|홍길동
+              nullable: true
+            bank:
+              type: string
+              description: 은행코드 (nullable)^|KB
+              nullable: true
+              enum:
+                - 'ANONYMOUS: 미확인은행'
+                - 'KDB: 산업은행'
+                - 'IBK: 기업은행'
+                - 'KB: 국민은행'
+                - 'KEB: 외환은행'
+                - 'SUHYUP: 수협'
+                - 'KEXIM: 수출입은행'
+                - 'NH: NH농협은행'
+                - 'NHLOCAL: 지역농축협'
+                - 'WOORI: 우리은행'
+                - 'SC: SC제일은행'
+                - 'CITY: 한국씨티은행'
+                - 'SUHYUP_LOCAL_BANK: 수협중앙회'
+                - 'DAEGU: 대구은행'
+                - 'PUSAN: 부산은행'
+                - 'GWANGJU: 광주은행'
+                - 'JEJU: 제주은행'
+                - 'JEONBUK: 전북은행'
+                - 'GYEONGNAM: 경남은행'
+                - 'KFCC: 새마을금고'
+                - 'CU: 신협'
+                - 'SANGHO: 상호저축은행'
+                - 'HSBC: HSBC은행'
+                - 'DEUTSCHE: 도이치은행'
+                - 'NFCF: 산림조합중앙회'
+                - 'EPOST: 우체국'
+                - 'KEBHANA: KEB하나은행'
+                - 'SHINHAN: 신한은행'
+                - 'KBANK: 케이뱅크'
+                - 'KAKAO: 카카오뱅크'
+                - 'TOSS: 토스뱅크'
+                - 'YUANTA: 유안타증권'
+                - 'KBSEC: KB증권'
+                - 'MIRAE: 미래에셋증권'
+                - 'MIRAEDAEWOO: 미래에셋대우증권'
+                - 'SAMSUNG: 삼성증권'
+                - 'HANKOOK: 한국투자증권'
+                - 'NH_INVEST: NH투자증권'
+                - 'KYOBO: 교보증권'
+                - 'HI_INVEST: 하이투자증권'
+                - 'HMC_INVEST: HMC투자증권'
+                - 'KIWOOM: 키움증권'
+                - 'EBEST: 이베스트투자증권'
+                - 'SK: SK증권'
+                - 'DAISHIN: 대신증권'
+                - 'SOLOMON_INVEST: 솔로몬증권'
+                - 'HANHWA: 한화투자증권'
+                - 'HANA_INVEST: 하나금융투자'
+                - 'SHINHAN_INVEST: 신한금융투자'
+                - 'DONGBU: DB금융투자'
+                - 'EUGENE_INVEST: 유진투자증권'
+                - 'MERITZ_COMPREHENSIVE: 메리츠종합금융증권'
+                - 'BOOKOOK: 부국증권'
+                - 'SHINYOUNG: 신영증권'
+                - 'CAPE: 케이프투자증권'
+            bankName:
+              type: string
+              description: 은행명
+            account:
+              type: string
+              description: 계좌번호 (nullable)^|123-12-1234
+              nullable: true
+          description: 환불계좌(환불시) (nullable)^|KB
+    returns209153868:
+      required:
+        - claimedProductOptions
+        - saveBankAccountInfo
+      type: object
+      properties:
+        claimReasonDetail:
+          type: string
+          description: 상세사유 (nullable)^|변심
+          nullable: true
+        responsibleObjectType:
+          type: string
+          description: "귀책 - responsibleObjectType이 null이면 ClaimReasonType에 매핑되는 귀\
+            책 적용(CHANGE_MIND, CANCEL_BEFORE_PAY, OTHERS_BUYER -> BUYER / DEFECTIVE_PRODUCT,\
+            \ WRONG_DELIVERY, OUT_OF_STOCK_SYSTEM, WRONG_PRODUCT_DETAIL, DELAY_DELIVERY,\
+            \ OUT_OF_STOCK, OTHERS_SELLER -> SELLER) (nullable)^|BUYER"
+          nullable: true
+          enum:
+            - 'BUYER: 구매자귀책'
+            - 'SELLER: 판매자귀책'
+        bankAccountInfo:
+          required:
+            - bankName
+          type: object
+          properties:
+            depositorName:
+              type: string
+              description: 계좌소유자명 (nullable)^|홍길동
+              nullable: true
+            bank:
+              type: string
+              description: 은행코드 (nullable)^|KB
+              nullable: true
+              enum:
+                - 'ANONYMOUS: 미확인은행'
+                - 'KDB: 산업은행'
+                - 'IBK: 기업은행'
+                - 'KB: 국민은행'
+                - 'KEB: 외환은행'
+                - 'SUHYUP: 수협'
+                - 'KEXIM: 수출입은행'
+                - 'NH: NH농협은행'
+                - 'NHLOCAL: 지역농축협'
+                - 'WOORI: 우리은행'
+                - 'SC: SC제일은행'
+                - 'CITY: 한국씨티은행'
+                - 'SUHYUP_LOCAL_BANK: 수협중앙회'
+                - 'DAEGU: 대구은행'
+                - 'PUSAN: 부산은행'
+                - 'GWANGJU: 광주은행'
+                - 'JEJU: 제주은행'
+                - 'JEONBUK: 전북은행'
+                - 'GYEONGNAM: 경남은행'
+                - 'KFCC: 새마을금고'
+                - 'CU: 신협'
+                - 'SANGHO: 상호저축은행'
+                - 'HSBC: HSBC은행'
+                - 'DEUTSCHE: 도이치은행'
+                - 'NFCF: 산림조합중앙회'
+                - 'EPOST: 우체국'
+                - 'KEBHANA: KEB하나은행'
+                - 'SHINHAN: 신한은행'
+                - 'KBANK: 케이뱅크'
+                - 'KAKAO: 카카오뱅크'
+                - 'TOSS: 토스뱅크'
+                - 'YUANTA: 유안타증권'
+                - 'KBSEC: KB증권'
+                - 'MIRAE: 미래에셋증권'
+                - 'MIRAEDAEWOO: 미래에셋대우증권'
+                - 'SAMSUNG: 삼성증권'
+                - 'HANKOOK: 한국투자증권'
+                - 'NH_INVEST: NH투자증권'
+                - 'KYOBO: 교보증권'
+                - 'HI_INVEST: 하이투자증권'
+                - 'HMC_INVEST: HMC투자증권'
+                - 'KIWOOM: 키움증권'
+                - 'EBEST: 이베스트투자증권'
+                - 'SK: SK증권'
+                - 'DAISHIN: 대신증권'
+                - 'SOLOMON_INVEST: 솔로몬증권'
+                - 'HANHWA: 한화투자증권'
+                - 'HANA_INVEST: 하나금융투자'
+                - 'SHINHAN_INVEST: 신한금융투자'
+                - 'DONGBU: DB금융투자'
+                - 'EUGENE_INVEST: 유진투자증권'
+                - 'MERITZ_COMPREHENSIVE: 메리츠종합금융증권'
+                - 'BOOKOOK: 부국증권'
+                - 'SHINYOUNG: 신영증권'
+                - 'CAPE: 케이프투자증권'
+            bankName:
+              type: string
+              description: 은행명
+            account:
+              type: string
+              description: 계좌번호 (nullable)^|123-12-1234
+              nullable: true
+          description: 환불계좌정보
+        claimReasonType:
+          type: string
+          description: 클레임사유 (nullable)^|CHANGE_MIND
+          nullable: true
+          enum:
+            - 'CHANGE_MIND: 단순변심(색상,사이즈 등)'
+            - 'DEFECTIVE_PRODUCT: 상품불량/파손'
+            - 'WRONG_DELIVERY: 배송누락/오배송'
+            - 'OUT_OF_STOCK_SYSTEM: 재고부족(품절취소)'
+            - 'CANCEL_BEFORE_PAY: 입금전취소'
+            - 'WRONG_PRODUCT_DETAIL: 상품상세 정보와 다름'
+            - 'DELAY_DELIVERY: 판매자 배송 지연'
+            - 'OTHERS_SELLER: 기타(판매자 귀책)'
+            - 'OTHERS_BUYER: 기타(구매자 귀책)'
+            - 'OUT_OF_STOCK: 상품 품절/재고 없음'
+            - 'LATER_INPUT_ORDER: 배송지 미입력 취소'
+            - 'LATER_INPUT_ORDER_RECEIVER_CANCEL: 선물거절취소'
+        returnWayType:
+          type: string
+          description: 반품상품 수거방법 (nullable)^|SELLER_COLLECT
+          nullable: true
+          enum:
+            - 'SELLER_COLLECT: 판매자수거요청'
+            - 'BUYER_DIRECT_RETURN: 구매자직접반품'
+        deliveryCompanyType:
+          type: string
+          description: 반품 택배사타입 (nullable)^|CJ
+          nullable: true
+          enum:
+            - 'CJ: CJ대한통운'
+            - 'POST: 우체국택배'
+            - 'HANJIN: 한진택배'
+            - 'GTX: gtx로지스'
+            - 'LOTTE: 롯데택배'
+            - 'KGB: kgb택배'
+            - 'LOGEN: 로젠택배'
+            - 'GSI: gsi Express'
+            - 'KGL: KG로지스'
+            - 'INTRAS: INTRAS'
+            - 'UPS: UPS'
+            - 'CHUNIL: 천일택배'
+            - 'KDEXP: 경동택배'
+            - 'HDEXP: 합동택배'
+            - 'ILYANG: 일양택배'
+            - 'POST_EMS: 우체국 EMS'
+            - 'DAESIN: 대신택배'
+            - 'CVS: GSPostbox택배'
+            - 'DHL: DHL'
+            - 'FEDEX: FEDEX'
+            - 'GSM: GSM국제택배'
+            - 'WARPEX: WarpEx'
+            - 'WIZWA: WIZWA'
+            - 'ACI: ACI Express'
+            - 'PANTOS: 범한판토스'
+            - 'CJ_INTERNATIONAL: CJ대한통운(국제택배)'
+            - 'TNT: TNT'
+            - 'CU: CU편의점택배'
+            - 'KUNYOUNG: 건영택배'
+            - 'LOTTE_INTERNATIONAL: 롯데택배(국제택배)'
+            - 'HONAM: 호남택배'
+            - 'HANIPS: 한의사랑'
+            - 'IPARCEL: i-Parcel'
+            - 'SLX: SLX택배'
+            - 'USPS: USPS'
+            - 'WONDERS: 원더스퀵'
+            - 'REGISTPOST: 우편등기'
+            - 'DHLDE: DHL(독일)'
+            - 'EZUSA: EZUSA'
+            - 'SWGEXP: 성원글로벌'
+            - 'DAEWOON: 대운글로벌'
+            - 'DODOFLEX: 도도플렉스'
+            - 'NH_LOGIS: 농협택배'
+            - 'UFO: 유에프오'
+            - 'TODAY_PICKUP: 카카오 T 당일배송'
+            - 'QEXPRESS: 큐익스프레스'
+            - 'PINGPONG: 핑퐁'
+            - 'CR_LOGITECH: CR Logitech'
+            - 'TODAY: 투데이'
+            - 'SELLUV: 셀럽'
+            - 'EXMATE: 이엑스메이트'
+            - 'WINION_LOGIS: 위니온로지스'
+            - 'ETC: 기타'
+        refundAdjustReason:
+          type: string
+          description: 환불 조정 사유 (배송안함 상품만 환불 조정 가능)
+          nullable: true
+        claimImageUrls:
+          type: array
+          description: '첨부파일 url 리스트 (nullable)^|url1,url2'
+          nullable: true
+          items:
+            type: string
+        returnAddress:
+          required:
+            - receiverAddress
+            - receiverContact1
+            - receiverName
+            - receiverZipCd
+          type: object
+          properties:
+            receiverLastName:
+              type: string
+              description: (해외배송 시 필수) 수령인 lastName
+              nullable: true
+            receiverJibunAddress:
+              type: string
+              description: 수령자지번주소 (nullable)^|서울특별시 구로구 구로동 235-3
+              nullable: true
+            receiverName:
+              type: string
+              description: 수령자명^|홍길동
+            customsIdNumber:
+              type: string
+              description: 개인통관고유부호(해외배송상품인 경우 필수) (nullable)^|P12341234123412
+              nullable: true
+            countryCd:
+              type: string
+              description: 국가코드 (nullable)^|KR
+              nullable: true
+              enum:
+                - 'AX: 올랜드 제도'
+                - 'AD: 안도라'
+                - 'AU: 호주'
+                - 'AT: 오스트리아'
+                - 'BH: 바레인'
+                - 'BE: 벨기에'
+                - 'BZ: 벨리즈'
+                - 'BR: 브라질'
+                - 'BN: 브루나이'
+                - 'BG: 불가리아'
+                - 'CA: 캐나다'
+                - 'ES_CANARY: 스페인(에스파냐)'
+                - 'CL: 칠레'
+                - 'CN: 중국'
+                - 'CO: 콜롬비아'
+                - 'CR: 코스타리카'
+                - 'CY: 키프로스'
+                - 'CZ: 체코'
+                - 'DK: 덴마크'
+                - 'EC: 에콰도르'
+                - 'EG: 이집트'
+                - 'SV: 엘살바도르'
+                - 'EE: 에스토니아'
+                - 'FR: 프랑스'
+                - 'GF: 프랑스령 기아나'
+                - 'DE: 독일'
+                - 'GR: 그리스'
+                - 'GL: 덴마크'
+                - 'GU: 괌'
+                - 'GT: 과테말라'
+                - 'GG: 건지'
+                - 'GY: 가이아나'
+                - 'HK: 홍콩'
+                - 'HU: 헝가리'
+                - 'IS: 아이슬란드'
+                - 'ID: 인도네시아'
+                - 'IE: 아일랜드'
+                - 'IL: 이스라엘'
+                - 'IT: 이탈리아'
+                - 'JP: 일본'
+                - 'JE: 저지'
+                - 'JO: 요르단'
+                - 'KR: 대한민국'
+                - 'KW: 쿠웨이트'
+                - 'LV: 라트비아'
+                - 'LB: 레바논'
+                - 'LI: 리히텐슈타인'
+                - 'LT: 리투아니아'
+                - 'LU: 룩셈부르크'
+                - 'MO: 마카오'
+                - 'PT_MADEIRA: 포르투갈'
+                - 'MY: 말레이시아'
+                - 'NL: 네덜란드'
+                - 'NZ: 뉴질랜드'
+                - 'GB_NORTHERN_ISLAND: 영국'
+                - 'NO: 노르웨이'
+                - 'PY: 파라과이'
+                - 'PE: 페루'
+                - 'PL: 폴란드'
+                - 'PT: 포르투갈'
+                - 'RO: 루마니아'
+                - 'RU: 러시아'
+                - 'SM: 산마리노'
+                - 'SA: 사우디아라비아'
+                - 'GB_SCOTLAND: 영국'
+                - 'SG: 싱가폴'
+                - 'SK: 슬로바키아'
+                - 'SI: 슬로베니아'
+                - 'ES: 스페인(에스파냐)'
+                - 'CH: 스위스'
+                - 'TW: 대만'
+                - 'TH: 태국'
+                - 'TR: 터키'
+                - 'AE: 아랍에미리트'
+                - 'GB: 영국'
+                - 'US: 미국(대륙)'
+                - 'U2: 미국(대륙)'
+                - 'UY: 우루과이'
+                - 'VN: 베트남'
+                - 'GB_WALES: 영국'
+                - 'YE: 예멘'
+                - 'HR: 크로아티아'
+                - 'MT: 몰타'
+                - 'FI: 핀란드'
+                - 'SE: 스웨덴'
+                - 'AF: 아프가니스탄'
+                - 'AL: 알바니아'
+                - 'DZ: 알제리'
+                - 'AS: 아메리칸 사모아'
+                - 'AO: 앙골라'
+                - 'AI: 앵귈라'
+                - 'AQ: 남극대륙'
+                - 'AG: 앤티가 바부다'
+                - 'AR: 아르헨티나'
+                - 'AM: 아르메니아'
+                - 'AW: 아루바'
+                - 'AZ: 아제르바이잔'
+                - 'BS: 바하마'
+                - 'BD: 방글라데시'
+                - 'BB: 바베이도스'
+                - 'BY: 벨라루스'
+                - 'BJ: 베냉'
+                - 'BM: 버뮤다'
+                - 'BT: 부탄'
+                - 'BO: 볼리비아'
+                - 'BA: 보스니아 헤르체고비나'
+                - 'BW: 보츠와나'
+                - 'IO: 영국령 인도양 지역'
+                - 'VG: 영국령 버진 아일랜드'
+                - 'BF: 부르키나파소'
+                - 'BI: 부룬디'
+                - 'KH: 캄보디아'
+                - 'CM: 카메룬'
+                - 'CV: 카보베르데'
+                - 'KY: 케이맨 제도'
+                - 'CF: 중앙 아프리카 공화국'
+                - 'TD: 차드'
+                - 'CX: 크리스마스 섬'
+                - 'CC: 코코스 제도'
+                - 'KM: 코모로'
+                - 'CK: 쿡 제도'
+                - 'CU: 쿠바'
+                - 'CW: 퀴라소'
+                - 'CD: 콩고 민주 공화국'
+                - 'DJ: 지부티'
+                - 'DM: 도미니카'
+                - 'DO: 도미니카 공화국'
+                - 'TL: 동티모르'
+                - 'GQ: 적도 기니'
+                - 'ER: 에리트레아'
+                - 'ET: 에티오피아'
+                - 'FK: 포클랜드 제도'
+                - 'FO: 페로 제도'
+                - 'FJ: 피지'
+                - 'PF: 프랑스령 폴리네시아'
+                - 'GA: 가봉'
+                - 'GM: 감비아'
+                - 'GE: 그루지야'
+                - 'GH: 가나'
+                - 'GI: 지브롤터'
+                - 'GD: 그레나다'
+                - 'GN: 기니'
+                - 'GW: 기니비사우'
+                - 'HT: 아이티'
+                - 'HN: 온두라스'
+                - 'IN: 인도'
+                - 'IR: 이란'
+                - 'IQ: 이라크'
+                - 'IM: 맨 섬'
+                - 'CI: 상아 해안'
+                - 'JM: 자메이카'
+                - 'KZ: 카자흐스탄'
+                - 'KE: 케냐'
+                - 'KI: 키리바시'
+                - 'XK: 코소보'
+                - 'KG: 키르기스스탄'
+                - 'LA: 라오스'
+                - 'LS: 레소토'
+                - 'LR: 라이베리아'
+                - 'LY: 리비아'
+                - 'MK: 마케도니아'
+                - 'MG: 마다가스카르'
+                - 'MW: 말라위'
+                - 'MV: 몰디브'
+                - 'ML: 말리'
+                - 'MH: 마셜 제도'
+                - 'MR: 모리타니'
+                - 'MU: 모리셔스'
+                - 'YT: 마요트'
+                - 'MX: 멕시코'
+                - 'FM: 미크로네시아'
+                - 'MD: 몰도바'
+                - 'MC: 모나코'
+                - 'MN: 몽골리아'
+                - 'ME: 몬테네그로'
+                - 'MS: 몬세라트'
+                - 'MA: 모로코 가죽'
+                - 'MZ: 모잠비크'
+                - 'MM: 미얀마'
+                - 'NA: 나미비아'
+                - 'NR: 나우루'
+                - 'NP: 네팔'
+                - 'AN: 네덜란드령 안틸레스'
+                - 'NC: 뉴 칼레도니아'
+                - 'NI: 니카라과'
+                - 'NE: 니제르'
+                - 'NG: 나이지리아'
+                - 'NU: 니우에'
+                - 'KP: 북한'
+                - 'MP: 북마리아나 제도'
+                - 'OM: 오만'
+                - 'PK: 파키스탄'
+                - 'PW: 팔라우'
+                - 'PS: 팔레스타인'
+                - 'PA: 파나마'
+                - 'PG: 파푸아뉴기니'
+                - 'PH: 필리핀 제도'
+                - 'PN: 피트케언'
+                - 'PR: 푸에르토리코'
+                - 'QA: 카타르'
+                - 'CG: 콩고 공화국'
+                - 'RE: 레위니옹'
+                - 'RW: 르완다'
+                - 'BL: 생바르텔레미'
+                - 'SH: 세인트 헬레나'
+                - 'KN: 세인트키츠네비스'
+                - 'LC: 세인트 루시아'
+                - 'MF: 생 마르탱'
+                - 'PM: 생피에르 미클롱'
+                - 'VC: 세인트 빈센트 그레나딘'
+                - 'WS: 사모아'
+                - 'ST: 상투메 프린시페'
+                - 'SN: 세네갈'
+                - 'RS: 세르비아'
+                - 'SC: 세이셸'
+                - 'SL: 시에라리온'
+                - 'SX: 신트마르틴'
+                - 'SB: 솔로몬 제도'
+                - 'SO: 소말리아'
+                - 'ZA: 남아프리카 공화국'
+                - 'SS: 남수단'
+                - 'LK: 스리랑카'
+                - 'SD: 수단'
+                - 'SR: 수리남'
+                - 'SJ: 스발바르 얀마옌 제도'
+                - 'SZ: 스와질랜드'
+                - 'SY: 시리아'
+                - 'TJ: 타지키스탄'
+                - 'TZ: 탄자니아'
+                - 'TG: 토고'
+                - 'TK: 토켈라우'
+                - 'TO: 통가'
+                - 'TT: 트리니다드 토바고'
+                - 'TN: 튀니지'
+                - 'TM: 투르크메니스탄'
+                - 'TC: 터크스 케이커스 제도'
+                - 'TV: 투발루'
+                - 'VI: 미국령 버진 아일랜드'
+                - 'UG: 우간다'
+                - 'UA: 우크라이나'
+                - 'UZ: 우즈베키스탄'
+                - 'VU: 바누아투'
+                - 'VA: 바티칸 궁전'
+                - 'VE: 베네수엘라'
+                - 'WF: 월리스 푸투나'
+                - 'EH: 서사하라'
+                - 'ZM: 잠비아'
+                - 'ZW: 짐바브웨'
+            receiverZipCd:
+              type: string
+              description: 수령자우편번호^|12345
+            receiverDetailAddress:
+              type: string
+              description: 수령자상세주소 (nullable)^|대륭포스트타워 8차 R동 6~7층
+              nullable: true
+            deliveryMemo:
+              type: string
+              description: 배송메모 (nullable)^|택배실에 맡겨 주세요.
+              nullable: true
+            receiverCity:
+              type: string
+              description: (해외) 도시
+              nullable: true
+            receiverMobileCountryCd:
+              type: string
+              description: 수령자 휴대폰번호 국가 코드 (nullable)^|82
+              nullable: true
+            receiverAddress:
+              type: string
+              description: 수령자주소^|서울특별시 구로구 디지털로26길 43
+            receiverState:
+              type: string
+              description: (해외) 주
+              nullable: true
+            receiverFirstName:
+              type: string
+              description: (해외배송 시 필수) 수령인 firstName
+              nullable: true
+            receiverContact1:
+              type: string
+              description: 수령자연락처1^|01012341234
+            receiverContact2:
+              type: string
+              description: 수령자연락처2 (nullable)^|01011111111
+              nullable: true
+          description: '반품주소(배송상품인 경우 필수, 배송안함상품인 경우 null 가능)'
+        claimedProductOptions:
+          type: array
+          description: 주문상품 옵션정보
+          items:
+            required:
+              - orderProductOptionNo
+              - productCnt
+            type: object
+            properties:
+              reasonDetail:
+                type: string
+                description: 클레임사유-상세
+                nullable: true
+              productCnt:
+                type: number
+                description: 취소/반품할 제품수량^|1
+              orderProductOptionNo:
+                type: number
+                description: 주문 상품 옵선 번호^|1
+              reasonType:
+                type: string
+                description:
+                  "클레임사유 (nullable)^|CHANGE_MIND, DEFECTIVE_PRODUCT, WRONG_DELIVERY,\
+                  \ OUT_OF_STOCK_SYSTEM, CANCEL_BEFORE_PAY, WRONG_PRODUCT_DETAIL,\
+                  \ DELAY_DELIVERY, OUT_OF_STOCK, OTHERS_SELLER, OTHERS_BUYER, LATER_INPUT_ORDER,\
+                  \ LATER_INPUT_ORDER_RECEIVER_CANCEL"
+                nullable: true
+                enum:
+                  - 'CHANGE_MIND: 단순변심(색상,사이즈 등)'
+                  - 'DEFECTIVE_PRODUCT: 상품불량/파손'
+                  - 'WRONG_DELIVERY: 배송누락/오배송'
+                  - 'OUT_OF_STOCK_SYSTEM: 재고부족(품절취소)'
+                  - 'CANCEL_BEFORE_PAY: 입금전취소'
+                  - 'WRONG_PRODUCT_DETAIL: 상품상세 정보와 다름'
+                  - 'DELAY_DELIVERY: 판매자 배송 지연'
+                  - 'OTHERS_SELLER: 기타(판매자 귀책)'
+                  - 'OTHERS_BUYER: 기타(구매자 귀책)'
+                  - 'OUT_OF_STOCK: 상품 품절/재고 없음'
+                  - 'LATER_INPUT_ORDER: 배송지 미입력 취소'
+                  - 'LATER_INPUT_ORDER_RECEIVER_CANCEL: 선물거절취소'
+        saveBankAccountInfo:
+          type: boolean
+          description: 환불계좌정보 저장 여부(true일 경우 bankAccountInfo 필수)^|true
+        refundAdjustRequestAmt:
+          type: number
+          description: 판매자 환불 조정 요청금액 (배송안함 상품만 환불 조정 가능) (nullable)^|1000
+          nullable: true
+        isRefundAdjust:
+          type: boolean
+          description: 환불 조정 여부 (배송안함 상품만 환불 조정 가능) (nullable)^|false
+          nullable: true
+        invoiceNo:
+          type: string
+          description: 반품 송장번호 (nullable)^|123455
+          nullable: true
+        complexRefundRequest:
+          required:
+            - accumulationRefundAmt
+            - cashRefundAmt
+            - externalPayRefundAmts
+            - pgRefundAmt
+          type: object
+          properties:
+            cashRefundAmt:
+              type: number
+              description: 현금 환불 금액 (PG 환불 금액과 동시 사용 불가능)
+            accumulationRefundAmt:
+              type: number
+              description: 적립금 환불 금액
+            pgRefundAmt:
+              type: number
+              description: PG 환불 금액 (현금과 동시 사용 불가능)
+            externalPayRefundAmts:
+              type: array
+              description: 외부 결제 환불 금액
+              items:
+                required:
+                  - externalPayKey
+                  - refundAmt
+                type: object
+                properties:
+                  externalPayKey:
+                    type: string
+                    description: 외부결제 키^|OK_CASH_BAG
+                  refundAmt:
+                    type: number
+                    description: 금액^|2000
+          description: 결제수단 별 환불금액
+    return-exchanges-no-collect-1943409195:
+      required:
+        - restoresStock
+      type: object
+      properties:
+        restoresStock:
+          type: boolean
+          description: 재고복원여부 - 교환은 대상상품이 1개이기 때문에 true/false로만 선택합니다.
+    order-cancels1915139160:
+      required:
+        - orderNo
+        - reasonType
+        - refundType
+        - responsibleObjectType
+      type: object
+      properties:
+        responsibleObjectType:
+          type: string
+          description: 귀책^|BUYER
+          enum:
+            - 'BUYER: 구매자귀책'
+            - 'SELLER: 판매자귀책'
+        refundType:
+          type: string
+          description: '환불방법^|PG,ACCOUNT,ZERO_REFUND'
+          enum:
+            - PG
+            - ACCUMULATION
+            - ACCOUNT
+            - ZERO_REFUND
+            - EXTERNAL_PAY
+            - ADMIN_ETC
+        reasonDetail:
+          type: string
+          description: 취소사유-상세
+          nullable: true
+        orderNo:
+          type: string
+          description: 주문번호
+        reasonType:
+          type: string
+          description: 취소사유
+          enum:
+            - 'CHANGE_MIND: 단순변심(색상,사이즈 등)'
+            - 'DEFECTIVE_PRODUCT: 상품불량/파손'
+            - 'WRONG_DELIVERY: 배송누락/오배송'
+            - 'OUT_OF_STOCK_SYSTEM: 재고부족(품절취소)'
+            - 'CANCEL_BEFORE_PAY: 입금전취소'
+            - 'WRONG_PRODUCT_DETAIL: 상품상세 정보와 다름'
+            - 'DELAY_DELIVERY: 판매자 배송 지연'
+            - 'OTHERS_SELLER: 기타(판매자 귀책)'
+            - 'OTHERS_BUYER: 기타(구매자 귀책)'
+            - 'OUT_OF_STOCK: 상품 품절/재고 없음'
+            - 'LATER_INPUT_ORDER: 배송지 미입력 취소'
+            - 'LATER_INPUT_ORDER_RECEIVER_CANCEL: 선물거절취소'
+        refundBankAccount:
+          required:
+            - bankName
+          type: object
+          properties:
+            depositorName:
+              type: string
+              description: 계좌소유자명 (nullable)^|홍길동
+              nullable: true
+            bank:
+              type: string
+              description: 은행코드 (nullable)^|KB
+              nullable: true
+              enum:
+                - 'ANONYMOUS: 미확인은행'
+                - 'KDB: 산업은행'
+                - 'IBK: 기업은행'
+                - 'KB: 국민은행'
+                - 'KEB: 외환은행'
+                - 'SUHYUP: 수협'
+                - 'KEXIM: 수출입은행'
+                - 'NH: NH농협은행'
+                - 'NHLOCAL: 지역농축협'
+                - 'WOORI: 우리은행'
+                - 'SC: SC제일은행'
+                - 'CITY: 한국씨티은행'
+                - 'SUHYUP_LOCAL_BANK: 수협중앙회'
+                - 'DAEGU: 대구은행'
+                - 'PUSAN: 부산은행'
+                - 'GWANGJU: 광주은행'
+                - 'JEJU: 제주은행'
+                - 'JEONBUK: 전북은행'
+                - 'GYEONGNAM: 경남은행'
+                - 'KFCC: 새마을금고'
+                - 'CU: 신협'
+                - 'SANGHO: 상호저축은행'
+                - 'HSBC: HSBC은행'
+                - 'DEUTSCHE: 도이치은행'
+                - 'NFCF: 산림조합중앙회'
+                - 'EPOST: 우체국'
+                - 'KEBHANA: KEB하나은행'
+                - 'SHINHAN: 신한은행'
+                - 'KBANK: 케이뱅크'
+                - 'KAKAO: 카카오뱅크'
+                - 'TOSS: 토스뱅크'
+                - 'YUANTA: 유안타증권'
+                - 'KBSEC: KB증권'
+                - 'MIRAE: 미래에셋증권'
+                - 'MIRAEDAEWOO: 미래에셋대우증권'
+                - 'SAMSUNG: 삼성증권'
+                - 'HANKOOK: 한국투자증권'
+                - 'NH_INVEST: NH투자증권'
+                - 'KYOBO: 교보증권'
+                - 'HI_INVEST: 하이투자증권'
+                - 'HMC_INVEST: HMC투자증권'
+                - 'KIWOOM: 키움증권'
+                - 'EBEST: 이베스트투자증권'
+                - 'SK: SK증권'
+                - 'DAISHIN: 대신증권'
+                - 'SOLOMON_INVEST: 솔로몬증권'
+                - 'HANHWA: 한화투자증권'
+                - 'HANA_INVEST: 하나금융투자'
+                - 'SHINHAN_INVEST: 신한금융투자'
+                - 'DONGBU: DB금융투자'
+                - 'EUGENE_INVEST: 유진투자증권'
+                - 'MERITZ_COMPREHENSIVE: 메리츠종합금융증권'
+                - 'BOOKOOK: 부국증권'
+                - 'SHINYOUNG: 신영증권'
+                - 'CAPE: 케이프투자증권'
+            bankName:
+              type: string
+              description: 은행명
+            account:
+              type: string
+              description: 계좌번호 (nullable)^|123-12-1234
+              nullable: true
+          description: 환불계좌

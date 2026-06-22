@@ -1,0 +1,2905 @@
+openapi: 3.0.1
+info:
+  title: promotion-server
+  description: 프로모션 혜택(promotion)관련 server API입니다.
+  version: 0.1.0-SNAPSHOT
+servers:
+  - url: https://server-api.e-ncp.com
+tags: []
+paths:
+  /coupons:
+    get:
+      tags:
+        - Coupon
+      summary: 쿠폰 검색하기
+      description:
+        " ## 부가설명 및 특이사항\n 검색 조건을 기반으로 쇼핑몰이 가지고 있는 쿠폰 정보를 검색합니다.\n \n couponNos에\
+        \ 입력한 쿠폰번호 리스트와 keyword로 입력한 쿠폰번호는 AND 조건으로 검색됩니다."
+      operationId: get-search-coupon
+      parameters:
+        - name: page
+          in: query
+          description: 페이지 번호^|1
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: size
+          in: query
+          description: 페이지 크기^|30
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: searchDateType
+          in: query
+          description:
+            "날짜 검색 타입(REGISTER_YMD: 등록일, ISSUE_START_YMD: 발행시작일, ISSUE_END_YMD:\
+            \ 발행종료일, UPDATE_YMD: 수정일)^|REGISTER_YMD"
+          required: true
+          schema:
+            type: string
+        - name: startYmd
+          in: query
+          description: 조회 시작일^|2025-06-29
+          required: true
+          schema:
+            type: string
+        - name: endYmd
+          in: query
+          description: 조회 종료일^|2025-09-29
+          required: true
+          schema:
+            type: string
+        - name: issueType
+          in: query
+          description:
+            "쿠폰 발급 타입(DOWNLOAD: 다운로드 발급, CODE_DESIGNATE: 지정코드 발급, CODE_RANDOM:\
+            \ 난수코드 발급, INSERT: 인서트 발급, CODE_DESIGNATE_ADMIN_ONLY: 지정코드 발급(어드민 전용))^|DOWNLOAD"
+          required: false
+          schema:
+            type: string
+        - name: couponType
+          in: query
+          description:
+            "혜택 구분 타입(PRODUCT: 상품적용 쿠폰, PRODUCT_PLUS: 상품 금액 할인(플러스), CART:\
+            \ 주문적용 쿠폰, CART_DELIVERY: 장바구니 배송비 할인, GIFT: 기프트 쿠폰)^|CART"
+          required: false
+          schema:
+            type: string
+        - name: statusTypes
+          in: query
+          description:
+            "쿠폰 상태 타입 리스트(ISSUE_READY: 발급대기, ISSUE_ING: 발급 중, ISSUE_STOP:\
+            \ 발급중지, ISSUE_END: 발급종료)^|ISSUE_ING,ISSUE_END"
+          required: false
+          schema:
+            type: string
+        - name: searchKeywordType
+          in: query
+          description:
+            "검색어 타입(ALL: 전체, COUPON_NAME: 쿠폰명, COUPON_NO: 쿠폰번호, REGISTER_ADMIN:\
+            \ 등록자)^|COUPON_NO"
+          required: false
+          schema:
+            type: string
+        - name: keyword
+          in: query
+          description: 검색어^|검색어
+          required: false
+          schema:
+            type: string
+        - name: couponNos
+          in: query
+          description: '쿠폰번호 리스트^|1,2,3'
+          required: false
+          schema:
+            type: string
+        - name: exceptIssueEndCoupon
+          in: query
+          description: '사용불가 쿠폰 제외 여부 (true: 사용불가 쿠폰 제외, false: 사용불가 쿠폰 포함)^|false'
+          required: false
+          schema:
+            type: boolean
+        - name: memberGradeNo
+          in: query
+          description: 회원 등급 번호^|1
+          required: false
+          schema:
+            type: number
+        - name: memberGroupNo
+          in: query
+          description: 회원 그룹 번호^|1
+          required: false
+          schema:
+            type: number
+        - name: systemKey
+          in: header
+          description:
+            " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: SABANGNET
+        - name: Authorization
+          in: header
+          description:
+            " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중\
+            간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs"
+          required: false
+          schema:
+            type: string
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br />\n Authorization을을 입력을 통한 serverAPI 호출방식 권장드립니다\
+            .<br />\n Authorization을 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각\
+            \ 어드민에서 복사된 값"
+          required: false
+          schema:
+            type: string
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coupons-186158211'
+              examples:
+                get-search-coupon:
+                  value: "{\"totalCount\":10,\"contents\":[{\"no\":1,\"mallName\"\
+                    :\"몰이름\",\"couponName\":\"쿠폰이름\",\"couponType\":\"CART\",\"couponSubType\"\
+                    :\"CART\",\"issueType\":\"DOWNLOAD\",\"usesMinLimit\":true,\"\
+                    minSalePrice\":0,\"usesMaxLimit\":true,\"maxSalePrice\":0,\"fixed\"\
+                    :true,\"discountAmt\":0,\"discountPercent\":0,\"maxDiscountAmt\"\
+                    :0,\"issueLimitCnt\":10,\"usesDailyIssueLimit\":false,\"dailyIssueLimitCnt\"\
+                    :1,\"usesPersonalIssueLimit\":false,\"issuePerPersonLimitCnt\"\
+                    :1,\"dailyIssuePerPersonLimitCnt\":1,\"totalIssueCnt\":9,\"totalIssueCntByAdmin\"\
+                    :0,\"totalUseCnt\":1,\"issueStartYmdt\":\"2025-06-29 17:53:21\"\
+                    ,\"issueEndYmdt\":\"2025-09-29 17:53:21\",\"serviceShareRate\"\
+                    :100,\"registerYmdt\":\"2025-06-29 17:53:21\",\"updateYmdt\":\"\
+                    2025-09-29 17:53:21\",\"couponStatusType\":\"ISSUE_END\",\"promotionCode\"\
+                    :\"CODE\",\"issueStopped\":false,\"scheduledIssuePlan\":false,\"\
+                    memberGradeNos\":[1,2,3],\"memberGroupNos\":[1,2,3],\"benefitAmt\"\
+                    :null}]}"
+    post:
+      tags:
+        - Coupon
+      summary: 쿠폰 생성하기
+      description: |2-
+         ## 부가설명 및 특이사항
+         쿠폰을 신규 생성합니다.
+      operationId: post-coupon
+      parameters:
+        - name: systemKey
+          in: header
+          description:
+            " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: SABANGNET
+        - name: Authorization
+          in: header
+          description:
+            " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중\
+            간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs"
+          required: false
+          schema:
+            type: string
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br />\n Authorization을을 입력을 통한 serverAPI 호출방식 권장드립니다\
+            .<br />\n Authorization을 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각\
+            \ 어드민에서 복사된 값"
+          required: false
+          schema:
+            type: string
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/coupons-2077927525'
+            examples:
+              post-coupon:
+                value: "{\"mallNo\":1,\"couponName\":\"test-coupon\",\"reason\":\"\
+                  test-reason\",\"usableConstraint\":{\"usablePlatformTypes\":[\"\
+                  PC\",\"MOBILE_WEB\",\"MOBILE_APP\"],\"useEndYmdt\":\"2025-12-29\
+                  \ 17:53:21\",\"useDays\":1,\"limitPayType\":null,\"limitPayTypes\"\
+                  :[],\"useStopped\":false},\"issuableConstraint\":{\"issueType\"\
+                  :\"DOWNLOAD\",\"issueStartYmdt\":\"2025-09-29 17:53:21\",\"issueEndYmdt\"\
+                  :\"2025-12-29 17:53:21\",\"memberGradeNo\":0,\"memberGradeNos\"\
+                  :[0,1],\"memberGroupNos\":[2,3],\"issueLimitCnt\":999,\"issueStartHour\"\
+                  :0,\"issueEndHour\":24,\"issueStopped\":false,\"finishesIssuing\"\
+                  :false,\"usesDailyIssueLimit\":false,\"dailyIssueLimitCnt\":0,\"\
+                  usesPersonalIssueLimit\":false,\"issuePerPersonLimitCnt\":0,\"dailyIssuePerPersonLimitCnt\"\
+                  :0,\"issuablePlatformTypes\":[\"PC\",\"MOBILE_WEB\",\"MOBILE_APP\"\
+                  ],\"channelTypes\":[\"NAVER_EP\"],\"possibleDaysOfWeek\":[1,2,3,4,5,6,7],\"\
+                  promotionCode\":null,\"couponCodeLength\":0,\"isPeriodEnd\":false},\"\
+                  discount\":{\"usesMinLimit\":true,\"minSalePrice\":1000,\"usesMaxLimit\"\
+                  :true,\"maxSalePrice\":10000,\"fixed\":true,\"discountAmt\":500,\"\
+                  discountPercent\":null,\"maxDiscountAmt\":null},\"couponType\":\"\
+                  CART\",\"couponSubType\":\"CART\",\"cartCouponDetail\":{\"usableOtherCoupon\"\
+                  :false,\"skipsAccumulation\":false,\"couponIssueLimitTypes\":[\"\
+                  PRODUCT_DETAIL\"],\"couponTargetType\":\"BRAND\",\"couponTargets\"\
+                  :[{\"couponTargetType\":\"BRAND\",\"targetNo\":1,\"targetName\"\
+                  :\"할인대상브랜드명\"}],\"excludesTarget\":false,\"couponExcludeTargets\"\
+                  :[{\"couponTargetType\":\"PRODUCT\",\"targetNo\":1,\"targetName\"\
+                  :\"할인제외대상이름\"}]},\"productCouponDetail\":{\"skipsAccumulation\"\
+                  :false,\"usableCartCoupon\":true,\"serviceSharePercent\":100,\"\
+                  couponIssueLimitTypes\":[\"PRODUCT_DETAIL\"],\"couponTargetType\"\
+                  :\"ALL_PRODUCT\",\"couponTargets\":[{\"couponTargetType\":\"PRODUCT\"\
+                  ,\"targetNo\":1,\"targetName\":\"할인대상이름\"}],\"excludesTarget\":false,\"\
+                  couponExcludeTargets\":[{\"couponTargetType\":\"PRODUCT\",\"targetNo\"\
+                  :1,\"targetName\":\"할인제외대상이름\"}]},\"giftCouponDetail\":{\"benefitEndYmdt\"\
+                  :null,\"benefitExpirationDays\":1,\"benefitAmt\":0,\"giftCouponType\"\
+                  :\"ACCUMULATION\"}}"
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coupons-1711516014'
+              examples:
+                post-coupon:
+                  value: '{"couponNo":1}'
+  /coupons/codes:
+    get:
+      tags:
+        - Coupon
+      summary: 쿠폰 랜덤코드 조회하기 (개발중)
+      description: " ## 부가설명 및 특이사항\n 코드 발급(자동생성) 유형의 쿠폰 랜덤코드를 조회합니다.\n "
+      operationId: get-coupon-random-codes
+      parameters:
+        - name: couponNos
+          in: query
+          description: 쿠폰 번호 리스트^|1
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: page
+          in: query
+          description: 페이지 번호^|1
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: size
+          in: query
+          description: 페이지 크기^|30
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: issued
+          in: query
+          description: '회원 발급 여부 (true: 발급, false: 미발급)^|true'
+          required: true
+          schema:
+            type: boolean
+        - name: systemKey
+          in: header
+          description:
+            " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: SABANGNET
+        - name: Authorization
+          in: header
+          description:
+            " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중\
+            간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs"
+          required: false
+          schema:
+            type: string
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br />\n Authorization을을 입력을 통한 serverAPI 호출방식 권장드립니다\
+            .<br />\n Authorization을 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각\
+            \ 어드민에서 복사된 값"
+          required: false
+          schema:
+            type: string
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coupons-codes-958981943'
+              examples:
+                get-coupon-random-codes:
+                  value: "{\"totalCount\":1,\"contents\":[{\"couponNo\":1,\"couponCode\"\
+                    :\"11232\",\"couponCodeStatusType\":\"ISSUED\",\"couponIssueNo\"\
+                    :1,\"memberNo\":1}]}"
+  /coupons/exclude-targets:
+    get:
+      tags:
+        - Coupon
+      summary: 쿠폰의 제외 대상 조회
+      description:
+        " ## 부가설명 및 특이사항\n 쿠폰 번호를 입력받아 쿠폰의 제외 대상을 조회합니다.\n \n 쿠폰 번호를 입력\
+        하지 않는 경우, 해당 쇼핑몰 전체를 대상으로 조회합니다."
+      operationId: get-coupon-exclude-targets
+      parameters:
+        - name: couponNos
+          in: query
+          description: '쿠폰 번호 목록^|1,2,3'
+          required: false
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: 페이지 번호 (1 이상)^|1
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: size
+          in: query
+          description: 페이지 크기^|30
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: systemKey
+          in: header
+          description:
+            " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: SABANGNET
+        - name: Authorization
+          in: header
+          description:
+            " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중\
+            간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs"
+          required: false
+          schema:
+            type: string
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br />\n Authorization을을 입력을 통한 serverAPI 호출방식 권장드립니다\
+            .<br />\n Authorization을 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각\
+            \ 어드민에서 복사된 값"
+          required: false
+          schema:
+            type: string
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coupons-targets616348469'
+              examples:
+                get-coupon-exclude-targets:
+                  value: "{\"totalCount\":1,\"totalPage\":1,\"contents\":[{\"couponNo\"\
+                    :0,\"targetNo\":0,\"targetName\":\"exclude-target-name\",\"targetType\"\
+                    :\"PRODUCT\"}]}"
+  /coupons/issues:
+    get:
+      tags:
+        - CouponIssue
+      summary: 지급된 쿠폰 검색하기
+      description:
+        " ## 부가설명 및 특이사항\n 회원에게 지급된 쿠폰 정보를 조회합니다.\n \n memberNos, memberIds,\
+        \ couponNos, couponIssueNos 중 적어도 하나의 필드에는 값을 입력해야 합니다.\n couponIssueNos (쿠\
+        폰 지급 번호) 입력 시 startYmd/endYmd 값을 입력하지 않아도 조회할 수 있습니다.\n couponIssueNos 입력하\
+        지 않는 경우 startYmd/endYmd 값을 필수로 입력해야 합니다."
+      operationId: get-search-coupon-issue
+      parameters:
+        - name: memberNos
+          in: query
+          description: '회원 번호 목록^|1,2,3'
+          required: false
+          schema:
+            type: string
+        - name: memberIds
+          in: query
+          description: '회원 ID 목록^|test1,test2,test3'
+          required: false
+          schema:
+            type: string
+        - name: couponNos
+          in: query
+          description: '쿠폰 번호 목록^|1,2,3'
+          required: false
+          schema:
+            type: string
+        - name: couponIssueNos
+          in: query
+          description: '쿠폰 지급 번호 목록^|1,2,3'
+          required: false
+          schema:
+            type: string
+        - name: searchDateType
+          in: query
+          description:
+            "날짜검색타입(ISSUE_START_YMD: 쿠폰발행시작일, ISSUE_END_YMD: 쿠폰발행종료일, ISSUE_YMD:\
+            \ 쿠폰지급일, USE_END_YMD: 쿠폰만료일)^|ISSUE_YMD"
+          required: true
+          schema:
+            type: string
+        - name: startYmd
+          in: query
+          description: 조회 시작일^|2025-06-29
+          required: true
+          schema:
+            type: string
+        - name: endYmd
+          in: query
+          description: 조회 종료일^|2025-09-29
+          required: true
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: 페이지 번호^|1
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: size
+          in: query
+          description: '페이지 크기 (최대 10,000)^|30'
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: systemKey
+          in: header
+          description:
+            " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: SABANGNET
+        - name: Authorization
+          in: header
+          description:
+            " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중\
+            간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs"
+          required: false
+          schema:
+            type: string
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br />\n Authorization을을 입력을 통한 serverAPI 호출방식 권장드립니다\
+            .<br />\n Authorization을 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각\
+            \ 어드민에서 복사된 값"
+          required: false
+          schema:
+            type: string
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coupons-issues-1004695170'
+              examples:
+                get-search-coupon-issue:
+                  value: "{\"totalCount\":0,\"contents\":[{\"memberNo\":1,\"couponNo\"\
+                    :1,\"couponName\":\"할인 쿠폰\",\"couponType\":\"PRODUCT\",\"couponSubType\"\
+                    :\"NONE\",\"issueType\":\"DOWNLOAD\",\"fixed\":true,\"discountAmt\"\
+                    :5000,\"discountRate\":0,\"maxDiscountAmt\":5000,\"useEndYmdt\"\
+                    :\"2025-09-29 17:52:55\",\"couponIssueNo\":1,\"couponDiscountAmt\"\
+                    :5000,\"registerYmdt\":\"2025-09-29 17:52:55\",\"used\":false,\"\
+                    useYmdt\":\"2025-09-29 17:52:55\",\"withdrawn\":false,\"adminIssued\"\
+                    :false,\"benefitAmt\":0}]}"
+    post:
+      tags:
+        - CouponIssue
+      summary: 회원번호와 쿠폰번호로 쿠폰 발급하기
+      description:
+        " ## 부가설명 및 특이사항\n 회원정보, 쿠폰번호를 기반으로 쿠폰을 발행합니다.\n \n 해당 API로 쿠폰\
+        \ 발급하는 경우에는 쿠폰 발급 상태, 쿠폰 발급 제한 수량을 검증하지 않습니다.\n \n memberNos 필드와 memberIds\
+        \ 필드는 동시 요청 시 400 error가 발생합니다. 하나의 필드에만 값을 입력해야 합니다.\n \n response의 크기는 request의\
+        \ (회원 수 * 쿠폰 수)와 같거나 작을 수 있습니다."
+      operationId: post-coupon-issue
+      parameters:
+        - name: systemKey
+          in: header
+          description:
+            " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: SABANGNET
+        - name: Authorization
+          in: header
+          description:
+            " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중\
+            간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs"
+          required: false
+          schema:
+            type: string
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br />\n Authorization을을 입력을 통한 serverAPI 호출방식 권장드립니다\
+            .<br />\n Authorization을 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각\
+            \ 어드민에서 복사된 값"
+          required: false
+          schema:
+            type: string
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/coupons-issues-1903045413'
+            examples:
+              post-coupon-issue:
+                value: "{\"couponNo\":1,\"couponNos\":[1,2,3],\"memberNos\":[1,2,3],\"\
+                  memberIds\":[],\"issueCount\":1,\"reason\":\"쿠폰 지급\",\"isAdminIssue\"\
+                  :false}"
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coupons-issues-194375905'
+              examples:
+                post-coupon-issue:
+                  value: "[{\"couponNo\":1,\"memberNo\":1,\"couponIssueNo\":1,\"useEndYmdt\"\
+                    :\"2025-09-29 17:52:55\",\"issueFail\":false}]"
+  /coupons/targets:
+    get:
+      tags:
+        - Coupon
+      summary: 쿠폰의 대상 조회
+      description:
+        " ## 부가설명 및 특이사항\n 쿠폰 번호를 입력받아 쿠폰의 대상을 조회합니다.\n \n 쿠폰 번호를 입력하지\
+        \ 않는 경우, 해당 쇼핑몰 전체를 대상으로 조회합니다."
+      operationId: get-coupon-targets
+      parameters:
+        - name: couponNos
+          in: query
+          description: '쿠폰 번호 목록^|1,2,3'
+          required: false
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: 페이지 번호 (1 이상)^|1
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: size
+          in: query
+          description: 페이지 크기^|30
+          required: false
+          schema:
+            type: integer
+            format: int32
+        - name: systemKey
+          in: header
+          description:
+            " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: SABANGNET
+        - name: Authorization
+          in: header
+          description:
+            " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중\
+            간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs"
+          required: false
+          schema:
+            type: string
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br />\n Authorization을을 입력을 통한 serverAPI 호출방식 권장드립니다\
+            .<br />\n Authorization을 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각\
+            \ 어드민에서 복사된 값"
+          required: false
+          schema:
+            type: string
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coupons-targets616348469'
+              examples:
+                get-coupon-targets:
+                  value: "{\"totalCount\":1,\"totalPage\":1,\"contents\":[{\"couponNo\"\
+                    :0,\"targetNo\":0,\"targetName\":\"target-name\",\"targetType\"\
+                    :\"PRODUCT\"}]}"
+  /coupons/use:
+    get:
+      tags:
+        - CouponUse
+      summary: 사용된 쿠폰 정보 검색하기
+      description: |2-
+         ## 부가설명 및 특이사항
+         이미 사용된 쿠폰 정보를 검색합니다.
+      operationId: get-coupons-use
+      parameters:
+        - name: keyword
+          in: query
+          description: 검색어^|123
+          required: true
+          schema:
+            type: string
+        - name: searchKeywordType
+          in: query
+          description: '검색어타입[ORDER_NO, COUPON_NO]^|ORDER_NO'
+          required: true
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: 페이지 번호 (1 이상)^|1
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: size
+          in: query
+          description: 페이지 사이즈^|100
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: searchDateType
+          in: query
+          description: '날짜 검색 타입^|[ISSUE_YMD: 지급일, USE_YMD: 사용일]'
+          required: false
+          schema:
+            type: string
+        - name: startYmd
+          in: query
+          description: 검색 시작일^|2024-09-12
+          required: false
+          schema:
+            type: string
+        - name: endYmd
+          in: query
+          description: 검색 종료일^|2024-09-14
+          required: false
+          schema:
+            type: string
+        - name: systemKey
+          in: header
+          description:
+            " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: SABANGNET
+        - name: Authorization
+          in: header
+          description:
+            " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중\
+            간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs"
+          required: false
+          schema:
+            type: string
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br />\n Authorization을을 입력을 통한 serverAPI 호출방식 권장드립니다\
+            .<br />\n Authorization을 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각\
+            \ 어드민에서 복사된 값"
+          required: false
+          schema:
+            type: string
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coupons-use-1764910307'
+              examples:
+                get-coupons-use:
+                  value: "[{\"couponNo\":1,\"couponIssueNo\":0,\"couponName\":\"쿠폰\
+                    이름\",\"couponType\":\"CART\",\"couponSubType\":\"CART\",\"issueType\"\
+                    :\"DOWNLOAD\",\"usesMinLimit\":true,\"minSalePrice\":0,\"usesMaxLimit\"\
+                    :true,\"maxSalePrice\":0,\"fixed\":true,\"discountAmt\":0,\"discountPercent\"\
+                    :0,\"maxDiscountAmt\":0,\"issueStartYmdt\":\"2025-06-29T17:53:15.359653447\"\
+                    ,\"issueEndYmdt\":\"2025-09-29T17:53:15.35973858\",\"serviceShareRate\"\
+                    :100,\"registerYmdt\":\"2025-06-29T17:53:15.359772537\",\"updateYmdt\"\
+                    :\"2025-09-29T17:53:15.359815497\",\"useYmdt\":\"2025-09-29T17:53:15.359837603\"\
+                    ,\"couponStatusType\":\"ISSUE_END\",\"issueStopped\":false,\"\
+                    promotionCode\":\"CODE\",\"orderNo\":\"123\",\"orderProductNo\"\
+                    :0,\"payAmt\":0}]"
+    post:
+      tags:
+        - CouponUse
+      summary: 쿠폰 사용하기
+      description: |2-
+         ## 부가설명 및 특이사항
+         발급된 쿠폰을 사용처리하여 이후에 주문에 사용하지 못하도록 할때 사용합니다.
+      operationId: post-use-coupon
+      parameters:
+        - name: systemKey
+          in: header
+          description:
+            " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: SABANGNET
+        - name: Authorization
+          in: header
+          description:
+            " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중\
+            간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs"
+          required: false
+          schema:
+            type: string
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br />\n Authorization을을 입력을 통한 serverAPI 호출방식 권장드립니다\
+            .<br />\n Authorization을 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각\
+            \ 어드민에서 복사된 값"
+          required: false
+          schema:
+            type: string
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/coupons-use-458945078'
+            examples:
+              post-use-coupon:
+                value: '[{"couponIssueNo":1,"couponDiscountAmt":1}]'
+      responses:
+        '204':
+          description: '204'
+  /coupons/withdraw:
+    put:
+      tags:
+        - Coupon
+      summary: 쿠폰 철회
+      description:
+        " ## 부가설명 및 특이사항\n 쿠폰 지급 번호를 입력받아 발급된 쿠폰을 철회합니다.\n \n `사용 가능` 상\
+        태인 쿠폰이면 발급된 위치에 상관없이 철회할 수 있습니다."
+      operationId: withdraw-coupon
+      parameters:
+        - name: systemKey
+          in: header
+          description:
+            " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: SABANGNET
+        - name: Authorization
+          in: header
+          description:
+            " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중\
+            간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs"
+          required: false
+          schema:
+            type: string
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br />\n Authorization을을 입력을 통한 serverAPI 호출방식 권장드립니다\
+            .<br />\n Authorization을 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각\
+            \ 어드민에서 복사된 값"
+          required: false
+          schema:
+            type: string
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/coupons-withdraw187298523'
+            examples:
+              withdraw-coupon:
+                value: '{"couponIssueNo":0,"reason":"withdraw-reason"}'
+      responses:
+        '204':
+          description: '204'
+  /coupons/withdraw-bulk:
+    put:
+      tags:
+        - Coupon
+      summary: 쿠폰 번호로 쿠폰 지급 철회하기
+      description: |2-
+         ## 부가설명 및 특이사항
+         입력받은 쿠폰번호로 지급된 모든 쿠폰을 철회합니다.
+         10만건 이상은 해당 api 사용하지 마시고 1:1 문의 요청 바랍니다.
+      operationId: put-coupon-issue-withdraw-in-bulk
+      parameters:
+        - name: systemKey
+          in: header
+          description:
+            " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: SABANGNET
+        - name: Authorization
+          in: header
+          description:
+            " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중\
+            간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs"
+          required: false
+          schema:
+            type: string
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br />\n Authorization을을 입력을 통한 serverAPI 호출방식 권장드립니다\
+            .<br />\n Authorization을 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각\
+            \ 어드민에서 복사된 값"
+          required: false
+          schema:
+            type: string
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/coupons-withdraw-bulk765073540'
+            examples:
+              put-coupon-issue-withdraw-in-bulk:
+                value: "{\"couponNo\":1,\"issueStartYmd\":\"2025-09-29\",\"issueEndYmd\"\
+                  :\"2025-09-29\",\"withdrawReason\":\"withdraw-reason\"}"
+      responses:
+        '204':
+          description: '204'
+  /coupons/{couponNo}:
+    get:
+      tags:
+        - Coupon
+      summary: 쿠폰 정보 조회하기
+      description: |2-
+         ## 부가설명 및 특이사항
+         하나의 쿠폰에 대한 상세 정보를 조회합니다.
+      operationId: get-coupons-coupon-no
+      parameters:
+        - name: couponNo
+          in: path
+          description: 쿠폰 번호^|1
+          required: true
+          schema:
+            type: number
+        - name: systemKey
+          in: header
+          description:
+            " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: SABANGNET
+        - name: Authorization
+          in: header
+          description:
+            " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중\
+            간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs"
+          required: false
+          schema:
+            type: string
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br />\n Authorization을을 입력을 통한 serverAPI 호출방식 권장드립니다\
+            .<br />\n Authorization을 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각\
+            \ 어드민에서 복사된 값"
+          required: false
+          schema:
+            type: string
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/coupons-couponNo-1535876060'
+              examples:
+                get-coupons-coupon-no:
+                  value: "{\"couponName\":\"test-coupon\",\"statusType\":\"ISSUE_READY\"\
+                    ,\"reason\":\"test-reason\",\"usableConstraint\":{\"usablePlatformTypes\"\
+                    :[\"PC\",\"MOBILE_WEB\",\"MOBILE_APP\"],\"useEndYmdt\":\"2025-12-29\
+                    \ 17:53:21\",\"useDays\":1,\"limitPayType\":null,\"limitPayTypes\"\
+                    :[],\"useStopped\":false},\"issuableConstraint\":{\"issueType\"\
+                    :\"DOWNLOAD\",\"issueStartYmdt\":\"2025-09-29 17:53:21\",\"issueEndYmdt\"\
+                    :\"2025-12-29 17:53:21\",\"memberGradeNo\":0,\"memberGradeNos\"\
+                    :[0,1],\"memberGroupNos\":null,\"issueLimitCnt\":999,\"issueStartHour\"\
+                    :0,\"issueEndHour\":24,\"issueStopped\":false,\"finishesIssuing\"\
+                    :false,\"usesDailyIssueLimit\":false,\"dailyIssueLimitCnt\":0,\"\
+                    usesPersonalIssueLimit\":false,\"issuePerPersonLimitCnt\":0,\"\
+                    dailyIssuePerPersonLimitCnt\":0,\"issuablePlatformTypes\":[\"\
+                    PC\",\"MOBILE_WEB\",\"MOBILE_APP\"],\"channelTypes\":[\"NAVER_EP\"\
+                    ],\"possibleDaysOfWeek\":[1,2,3,4,5,6,7],\"promotionCode\":null,\"\
+                    couponCodeLength\":0,\"isPeriodEnd\":false},\"couponSummary\"\
+                    :{\"totalIssueCnt\":100,\"totalUseCnt\":15,\"totalNormalIssueCnt\"\
+                    :100,\"totalIssueCntByAdmin\":0},\"discount\":{\"usesMinLimit\"\
+                    :true,\"minSalePrice\":1000,\"usesMaxLimit\":true,\"maxSalePrice\"\
+                    :10000,\"fixed\":true,\"discountAmt\":500,\"discountPercent\"\
+                    :null,\"maxDiscountAmt\":null},\"couponType\":\"PRODUCT\",\"couponSubType\"\
+                    :\"NONE\",\"cartCouponDetail\":{\"usableOtherCoupon\":false,\"\
+                    skipsAccumulation\":false,\"couponIssueLimitTypes\":[\"PRODUCT_DETAIL\"\
+                    ],\"couponTargetType\":\"BRAND\",\"couponTargets\":[{\"couponTargetType\"\
+                    :\"BRAND\",\"targetNo\":1,\"targetName\":\"브랜드할인대상이름\",\"registerYmdt\"\
+                    :\"2024-04-20 09:39:00\"}],\"excludesTarget\":false,\"couponExcludeTargets\"\
+                    :[{\"couponTargetType\":\"PRODUCT\",\"targetNo\":1,\"targetName\"\
+                    :\"할인제외대상이름\"}]},\"productCouponDetail\":{\"skipsAccumulation\"\
+                    :false,\"usableCartCoupon\":true,\"serviceSharePercent\":100,\"\
+                    couponIssueLimitTypes\":[\"PRODUCT_DETAIL\"],\"couponTargetType\"\
+                    :\"ALL_PRODUCT\",\"couponTargets\":[{\"couponTargetType\":\"PRODUCT\"\
+                    ,\"targetNo\":1,\"targetName\":\"할인대상이름\",\"registerYmdt\":\"\
+                    2025-09-29 17:53:21\"}],\"excludesTarget\":false,\"couponExcludeTargets\"\
+                    :[{\"couponTargetType\":\"PRODUCT\",\"targetNo\":1,\"targetName\"\
+                    :\"할인제외대상이름\"}]},\"giftCouponDetail\":{\"benefitEndYmdt\":null,\"\
+                    benefitExpirationDays\":null,\"benefitAmt\":0,\"giftCouponType\"\
+                    :\"ACCUMULATION\"},\"todayIssueCnt\":1,\"isScheduledIssuePlan\"\
+                    :false,\"isCountOver\":false}"
+    put:
+      tags:
+        - Coupon
+      summary: 쿠폰 수정하기
+      description:
+        " ## 부가설명 및 특이사항\n 쿠폰 상세 정보를 수정합니다.\n \n 발행 전/후 수정할 수 있는 항목이 다릅\
+        니다."
+      operationId: put-coupons-coupon-no
+      parameters:
+        - name: couponNo
+          in: path
+          description: 쿠폰 번호^|1
+          required: true
+          schema:
+            type: number
+        - name: systemKey
+          in: header
+          description:
+            " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: SABANGNET
+        - name: Authorization
+          in: header
+          description:
+            " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중\
+            간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs"
+          required: false
+          schema:
+            type: string
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br />\n Authorization을을 입력을 통한 serverAPI 호출방식 권장드립니다\
+            .<br />\n Authorization을 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각\
+            \ 어드민에서 복사된 값"
+          required: false
+          schema:
+            type: string
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/coupons-couponNo-1369532420'
+            examples:
+              put-coupons-coupon-no:
+                value: "{\"couponName\":\"test-coupon\",\"reason\":\"test-reason\"\
+                  ,\"usableConstraint\":{\"usablePlatformTypes\":[\"PC\",\"MOBILE_WEB\"\
+                  ,\"MOBILE_APP\"],\"useEndYmdt\":\"2025-12-29 17:53:21\",\"useDays\"\
+                  :1,\"limitPayType\":null,\"limitPayTypes\":[],\"useStopped\":false},\"\
+                  issuableConstraint\":{\"issueType\":\"DOWNLOAD\",\"issueStartYmdt\"\
+                  :\"2025-09-29 17:53:21\",\"issueEndYmdt\":\"2025-12-29 17:53:21\"\
+                  ,\"memberGradeNo\":0,\"memberGradeNos\":[0,1],\"memberGroupNos\"\
+                  :null,\"issueLimitCnt\":999,\"issueStartHour\":0,\"issueEndHour\"\
+                  :24,\"issueStopped\":false,\"finishesIssuing\":false,\"usesDailyIssueLimit\"\
+                  :false,\"dailyIssueLimitCnt\":0,\"usesPersonalIssueLimit\":false,\"\
+                  issuePerPersonLimitCnt\":0,\"dailyIssuePerPersonLimitCnt\":0,\"\
+                  issuablePlatformTypes\":[\"PC\",\"MOBILE_WEB\",\"MOBILE_APP\"],\"\
+                  channelTypes\":null,\"possibleDaysOfWeek\":[1,2,3,4,5,6,7],\"promotionCode\"\
+                  :null,\"couponCodeLength\":0,\"isPeriodEnd\":false},\"discount\"\
+                  :{\"usesMinLimit\":true,\"minSalePrice\":1000,\"usesMaxLimit\":true,\"\
+                  maxSalePrice\":10000,\"fixed\":true,\"discountAmt\":500,\"discountPercent\"\
+                  :null,\"maxDiscountAmt\":null},\"couponType\":\"PRODUCT\",\"cartCouponDetail\"\
+                  :{\"usableOtherCoupon\":false,\"skipsAccumulation\":false,\"couponIssueLimitTypes\"\
+                  :[\"PRODUCT_DETAIL\"],\"couponTargetType\":\"ALL_PRODUCT\",\"couponTargets\"\
+                  :[{\"couponTargetType\":\"PRODUCT\",\"targetNo\":1,\"targetName\"\
+                  :\"할인대상이름\"}],\"excludesTarget\":false,\"couponExcludeTargets\"\
+                  :[{\"couponTargetType\":\"PRODUCT\",\"targetNo\":1,\"targetName\"\
+                  :\"할인제외대상이름\"}]},\"productCouponDetail\":{\"skipsAccumulation\"\
+                  :false,\"usableCartCoupon\":false,\"serviceSharePercent\":100,\"\
+                  couponIssueLimitTypes\":[\"PRODUCT_DETAIL\"],\"couponTargetType\"\
+                  :\"ALL_PRODUCT\",\"couponTargets\":[{\"couponTargetType\":\"PRODUCT\"\
+                  ,\"targetNo\":1,\"targetName\":\"할인대상이름\"}],\"excludesTarget\":false,\"\
+                  couponExcludeTargets\":[{\"couponTargetType\":\"PRODUCT\",\"targetNo\"\
+                  :1,\"targetName\":\"할인제외대상이름\"}]},\"giftCouponDetail\":{\"benefitEndYmdt\"\
+                  :\"2025-12-29 17:53:21\",\"benefitExpirationDays\":30,\"benefitAmt\"\
+                  :1000,\"giftCouponType\":\"ACCUMULATION\"}}"
+      responses:
+        '204':
+          description: '204'
+  /coupons/use/rollback:
+    post:
+      tags:
+        - CouponUse
+      summary: 쿠폰 취소하기(오프라인 전용)
+      description: 쿠폰 취소하기(오프라인 전용)
+      operationId: post-rollback-coupon
+      parameters:
+        - name: systemKey
+          in: header
+          description:
+            " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: SABANGNET
+        - name: Authorization
+          in: header
+          description:
+            " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중\
+            간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs"
+          required: false
+          schema:
+            type: string
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br />\n Authorization을을 입력을 통한 serverAPI 호출방식 권장드립니다\
+            .<br />\n Authorization을 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각\
+            \ 어드민에서 복사된 값"
+          required: false
+          schema:
+            type: string
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/coupons-use-rollback-141309845'
+            examples:
+              post-rollback-coupon:
+                value: '{"couponIssueNos":[1]}'
+      responses:
+        '204':
+          description: '204'
+  /coupons/{couponNo}/use-stop:
+    put:
+      tags:
+        - Coupon
+      summary: 쿠폰 사용 중지/재개
+      description: |2-
+         ## 부가설명 및 특이사항
+         쿠폰을 사용 중지 또는 재개 처리 합니다
+      operationId: put-use-stop-coupon
+      parameters:
+        - name: couponNo
+          in: path
+          description: ''
+          required: true
+          schema:
+            type: string
+        - name: systemKey
+          in: header
+          description:
+            " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러\
+            어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key"
+          required: true
+          schema:
+            type: string
+          example: SABANGNET
+        - name: Authorization
+          in: header
+          description:
+            " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중\
+            간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived\
+            \ 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs"
+          required: false
+          schema:
+            type: string
+        - name: mallKey
+          in: header
+          description:
+            " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\
+            \ fade out될 수 있습니다.<br />\n Authorization을을 입력을 통한 serverAPI 호출방식 권장드립니다\
+            .<br />\n Authorization을 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각\
+            \ 어드민에서 복사된 값"
+          required: false
+          schema:
+            type: string
+        - name: Version
+          in: header
+          description: API 버전^|1.0
+          required: true
+          schema:
+            type: string
+          example: '1.0'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/coupons-couponNo-use-stop1789105598'
+            examples:
+              put-use-stop-coupon:
+                value: '{"useStopped":true}'
+      responses:
+        '204':
+          description: '204'
+components:
+  schemas:
+    coupons-couponNo-1369532420:
+      type: object
+      properties:
+        productCouponDetail:
+          type: object
+          properties:
+            couponTargets:
+              type: array
+              description: 쿠폰 대상 리스트
+              items:
+                type: object
+                properties:
+                  targetName:
+                    type: string
+                    description: 쿠폰 대상 이름^|할인 대상 이름
+                  targetNo:
+                    type: number
+                    description: 쿠폰 대상 번호^|1
+                  couponTargetType:
+                    type: string
+                    description: 쿠폰 대상 타입^|ALL_PRODUCT
+                    enum:
+                      - 'ALL_PRODUCT: 전상품'
+                      - 'PRODUCT: 개별상품'
+                      - 'BRAND: 브랜드'
+                      - 'CATEGORY: 카테고리'
+                      - 'PARTNER: 파트너사'
+            excludesTarget:
+              type: boolean
+              description: '할인 대상 제외 설정 여부(true: 제외, false: 제외하지 않음)^|false'
+            couponExcludeTargets:
+              type: array
+              description: 쿠폰 제외 대상 리스트
+              items:
+                type: object
+                properties:
+                  targetName:
+                    type: string
+                    description: 쿠폰 제외 대상 이름^|할인 대상 이름
+                  targetNo:
+                    type: number
+                    description: 쿠폰 제외 대상 번호^|1
+                  couponTargetType:
+                    type: string
+                    description: 쿠폰 제외 대상 타입^|ALL_PRODUCT
+                    enum:
+                      - 'ALL_PRODUCT: 전상품'
+                      - 'PRODUCT: 개별상품'
+                      - 'BRAND: 브랜드'
+                      - 'CATEGORY: 카테고리'
+                      - 'PARTNER: 파트너사'
+            couponIssueLimitTypes:
+              type: array
+              description: '발급위치 제한^|(PRODUCT_DETAIL: 상품상세 미노출)'
+              items:
+                oneOf:
+                  - type: object
+                  - type: boolean
+                  - type: string
+                  - type: number
+            couponTargetType:
+              type: string
+              description: 할인쿠폰 대상 타입^|PRODUCT
+              enum:
+                - 'ALL_PRODUCT: 전상품'
+                - 'PRODUCT: 개별상품'
+                - 'BRAND: 브랜드'
+                - 'CATEGORY: 카테고리'
+                - 'PARTNER: 파트너사'
+            skipsAccumulation:
+              type: boolean
+              description: '적립금 제한(true: 적립 제한, false: 적립 제한하지 않음)^|false'
+            usableCartCoupon:
+              type: boolean
+              description: '주문쿠폰 사용 제한(true: 주문쿠폰 사용 가능, false: 사용 불가능)^|true'
+            serviceSharePercent:
+              type: number
+              description: 비용분담 설정-쇼핑몰 부담^|100
+          description: 상품 쿠폰 상세
+        cartCouponDetail:
+          type: object
+          properties:
+            usableOtherCoupon:
+              type: boolean
+              description: '상품쿠폰 사용 제한 여부(true: 상품쿠폰 사용가능, false: 상품쿠폰 사용불가능)^|false'
+            couponTargets:
+              type: array
+              description: 쿠폰 할인 대상 정보
+              items:
+                type: object
+                properties:
+                  targetName:
+                    type: string
+                    description: 쿠폰 대상 이름^|할인 대상 이름
+                  targetNo:
+                    type: number
+                    description: 쿠폰 대상 번호^|1
+                  couponTargetType:
+                    type: string
+                    description: 쿠폰 대상 타입^|ALL_PRODUCT
+                    enum:
+                      - 'ALL_PRODUCT: 전상품'
+                      - 'BRAND: 브랜드'
+            excludesTarget:
+              type: boolean
+              description: '할인 대상 제외 설정 여부(true: 제외, false: 제외설정 하지않음)^|false'
+            couponExcludeTargets:
+              type: array
+              description: 쿠폰 할인 제외 대상 정보
+              items:
+                type: object
+                properties:
+                  targetName:
+                    type: string
+                    description: 쿠폰 제외대상 이름^|할인 대상 이름
+                  targetNo:
+                    type: number
+                    description: 쿠폰 제외대상 번호^|1
+                  couponTargetType:
+                    type: string
+                    description: 쿠폰 제외대상 타입^|ALL_PRODUCT
+                    enum:
+                      - 'ALL_PRODUCT: 전상품'
+                      - 'BRAND: 브랜드'
+            couponIssueLimitTypes:
+              type: array
+              description: 발급위치 제한^|PRODUCT_DETAIL
+              items:
+                type: string
+                enum:
+                  - 'PRODUCT_DETAIL: 상품상세 미노출'
+            couponTargetType:
+              type: string
+              description: '쿠폰 대상 타입 (ALL_PRODUCT,BRAND)^|ALL_PRODUCT'
+              enum:
+                - 'ALL_PRODUCT: 전상품'
+                - 'BRAND: 브랜드'
+            skipsAccumulation:
+              type: boolean
+              description: '적립금 적립 제한 여부(true: 적립 제한, false: 적립 제한없음)^|false'
+          description: 장바구니 쿠폰 상세
+        reason:
+          type: string
+          description: 쿠폰 사유^|for test
+        couponName:
+          type: string
+          description: 쿠폰명^|test coupon
+        giftCouponDetail:
+          type: object
+          properties:
+            giftCouponType:
+              type: string
+              description: '기프트 쿠폰 타입(기본 값: ACCUMULATION)^|ACCUMULATION'
+            benefitEndYmdt:
+              type: string
+              description: 혜택 만료일자 (nullable)^|2024-01-01 00:00:00
+            benefitAmt:
+              type: number
+              description: 혜택 금액 (nullable)^|1000
+            benefitExpirationDays:
+              type: number
+              description: 혜택 지급 시점으로부터 혜택 만료일 (nullable)^|365
+          description: 기프트 쿠폰 상세
+        couponType:
+          type: string
+          description: 혜택 구분 타입^|CART
+          enum:
+            - 'PRODUCT: 상품적용 쿠폰'
+            - 'CART: 주문적용 쿠폰'
+            - 'CART_DELIVERY: 장바구니 배송비 할인'
+            - 'GIFT: 기프트 쿠폰'
+        usableConstraint:
+          type: object
+          properties:
+            limitPayType:
+              type: string
+              description: 사용가능 결제수단 (nullable)^|PAYCO
+            useDays:
+              type: number
+              description: '사용가능 기간 - 쿠폰을 발급받은 날부터 / 31: 말일 / -1: 제한 없음 (nullable)^|1'
+            useStopped:
+              type: boolean
+              description: '사용가능 여부(true: 사용불가, false: 사용가능)^|true'
+            useEndYmdt:
+              type: string
+              description: 사용가능 기간 - 특정 일시 지정 (nullable)^|2020-01-01 00:00:00
+            usablePlatformTypes:
+              type: array
+              description: '사용가능 플랫폼^|["PC"]'
+              items:
+                type: string
+                enum:
+                  - 'PC: PC'
+                  - 'MOBILE_WEB: MOBILE WEB'
+                  - 'MOBILE_APP: MOBILE APP'
+            limitPayTypes:
+              type: array
+              description: '사용가능 결제수단 리스트 (nullable)^|[PAYCO, NAVER_EASY_PAY]'
+              items:
+                type: string
+                enum:
+                  - 'CREDIT_CARD: 신용카드'
+                  - 'ACCOUNT: 무통장입금'
+                  - 'MOBILE: 휴대폰결제'
+                  - 'REALTIME_ACCOUNT_TRANSFER: 실시간계좌이체'
+                  - 'VIRTUAL_ACCOUNT: 가상계좌'
+                  - 'GIFT: 상품권'
+                  - 'ATM: ATM'
+                  - 'PAYCO: PAYCO'
+                  - 'ZERO_PAY: 0원결제'
+                  - 'ACCUMULATION: 적립금 전액 사용'
+                  - 'PHONE_BILL: 전화결제'
+                  - 'POINT: 포인트결제'
+                  - 'YPAY: 옐로페이'
+                  - 'KPAY: 케이페이'
+                  - 'PAYPIN: 페이핀'
+                  - 'INIPAY: INIPay 간편결제'
+                  - 'PAYPAL: PayPal'
+                  - 'STRIPE: STRIPE'
+                  - 'NAVER_PAY: 네이버페이 주문형'
+                  - 'KAKAO_PAY: 카카오페이'
+                  - 'NAVER_EASY_PAY: 네이버페이 결제형'
+                  - 'SAMSUNG_PAY: 삼성페이'
+                  - 'CHAI: 차이'
+                  - 'TOSS_PAY: 토스페이'
+                  - 'SK_PAY: SK페이'
+                  - 'APPLE_PAY: 애플페이'
+                  - 'ESCROW_REALTIME_ACCOUNT_TRANSFER: 실시간계좌이체-에스크로'
+                  - 'ESCROW_VIRTUAL_ACCOUNT: 가상계좌-에스크로'
+                  - 'VERITRANS_CARD: Veritrans CreditCard'
+                  - 'TOASTCAM: 토스트캠'
+                  - 'UNION_PAY: UnionPay'
+                  - 'ALIPAY: Alipay Plus'
+                  - 'WECHAT_PAY: WeChat Pay'
+                  - 'PINPAY: 핀페이'
+                  - 'EXTERNAL_PAY: 외부보조결제수단'
+                  - 'HMG_PAY: HMG페이'
+                  - 'APP_CARD: 앱카드'
+                  - 'PAY_PAY: 페이페이'
+                  - 'E_CONTEXT: 일본 편의점결제'
+                  - 'HAPPY_VOUCHER: 국민행복바우처'
+                  - 'ETC: 기타결제수단'
+          description: 사용 제약사항
+        discount:
+          type: object
+          properties:
+            usesMaxLimit:
+              type: boolean
+              description: '최대 기준 금액 제한여부(true: 제한, false: 제한 없음)^|false'
+            discountAmt:
+              type: number
+              description: 할인 금액^|500
+            discountPercent:
+              type: number
+              description: 정률^|5
+            usesMinLimit:
+              type: boolean
+              description: '최소 기준 금액 제한여부(true: 제한, false: 제한 없음)^|false'
+            minSalePrice:
+              type: number
+              description: 최소 기준 상품 금액 (nullable)^|1000
+            maxDiscountAmt:
+              type: number
+              description: 최대할인금액 (nullable)^|5000
+            fixed:
+              type: boolean
+              description: '정액 할인 여부(true: 정액, false: 정률)^|true'
+            maxSalePrice:
+              type: number
+              description: 최대 기준 상품 금액 (nullable)^|30000
+          description: 쿠폰 할인정보
+        issuableConstraint:
+          type: object
+          properties:
+            dailyIssueLimitCnt:
+              type: number
+              description: 1일 발급 제한 개수 (nullable)^|1
+            issuePerPersonLimitCnt:
+              type: number
+              description: 1인당 발급 제한 수량 (nullable)^|1
+            finishesIssuing:
+              type: boolean
+              description: '발급 종료여부(true: 종료, false: 종료 전)^|false'
+            issueEndYmdt:
+              type: string
+              description: 쿠폰발행 기간-종료일시^|2020-01-01 00:00:00
+            issuablePlatformTypes:
+              type: array
+              description: '발급가능 플랫폼^|["PC"]'
+              items:
+                type: string
+                enum:
+                  - 'PC: PC'
+                  - 'MOBILE_WEB: MOBILE WEB'
+                  - 'MOBILE_APP: MOBILE APP'
+            memberGroupNos:
+              type: array
+              description: '발급대상 회원그룹 json (nullable)^|3,4'
+              items:
+                type: number
+            memberGradeNos:
+              type: array
+              description: '발급대상 회원등급 json (nullable)^|1,2'
+              items:
+                type: number
+            channelTypes:
+              type: array
+              description: '채널타입 리스트 (nullable)^|["NAVER_EP"]'
+              items:
+                type: string
+            issueStartYmdt:
+              type: string
+              description: 쿠폰발행 기간-시작일시^|2020-01-01 00:00:00
+            promotionCode:
+              type: string
+              description: 프로모션코드 - 지정코드 발급인 경우^|HELLO-SALE
+            issueStopped:
+              type: boolean
+              description: '발급 일시중지 여부(true: 일시중지, false: 일시중지 아님)^|false'
+            usesPersonalIssueLimit:
+              type: boolean
+              description: '1인당 발급 제한 여부(true: 제한, false: 제한없음)^|false'
+            possibleDaysOfWeek:
+              type: array
+              description: '발급가능 요일 (nullable)^|1,2,3,4,5,6,7'
+              items:
+                type: number
+            issueStartHour:
+              type: number
+              description: 발급시간대 - 시작 시 (nullable)^|0
+            issueType:
+              type: string
+              description: 발급 타입^|DOWNLOAD
+              enum:
+                - 'DOWNLOAD: 다운로드 발급'
+                - 'CODE_DESIGNATE: 지정코드 발급'
+                - 'CODE_RANDOM: 난수코드 발급'
+                - 'INSERT: 자동 발급'
+                - 'CODE_DESIGNATE_ADMIN_ONLY: 어드민 지정코드 발급(샵바이 엔터프라이즈 전용)'
+            isPeriodEnd:
+              type: boolean
+              description: 발행기간 만료^|false
+            couponCodeLength:
+              type: number
+              description: 난수 자리수 - 난수코드 발급인 경우 (nullable)^|1
+            memberGradeNo:
+              type: number
+              description: 발급대상 회원등급 (nullable)^|1
+            dailyIssuePerPersonLimitCnt:
+              type: number
+              description: 1인당 발급 제한 - 1일 발급 제한 개수 (nullable)^|1
+            usesDailyIssueLimit:
+              type: boolean
+              description: '1일 발급 제한 여부(true: 제한, false: 제한없음)^|false'
+            issueLimitCnt:
+              type: number
+              description: 발급 제한 수량^|999
+            issueEndHour:
+              type: number
+              description: 발급시간대 - 종료 시 (nullable)^|24
+          description: 발급 제약사항
+    coupons-issues-1004695170:
+      type: object
+      properties:
+        contents:
+          type: array
+          items:
+            type: object
+            properties:
+              discountRate:
+                type: number
+                description: 할인금액(정률) (nullable)^|10
+              couponIssueNo:
+                type: number
+                description: 쿠폰 발행 번호^|1
+              discountAmt:
+                type: number
+                description: 할인금액(정액) (nullable)^|3000
+              couponName:
+                type: string
+                description: 쿠폰 이름^|할인 쿠폰
+              useYmdt:
+                type: string
+                description: 사용일시 (nullable)^|2025-05-10 00:00:00
+              withdrawn:
+                type: boolean
+                description: '쿠폰 철회 여부 (true: 철회된 쿠폰, false: 철회되지 않은 쿠폰)^|false'
+              maxDiscountAmt:
+                type: number
+                description: 최대 할인금액 (nullable)^|5000
+              couponNo:
+                type: number
+                description: 쿠폰 번호^|1
+              used:
+                type: boolean
+                description: '쿠폰 사용 여부 (true: 사용, false: 미사용)^|false'
+              useEndYmdt:
+                type: string
+                description: 쿠폰 만료일시^|2025-09-29 17:53:06
+              benefitAmt:
+                type: number
+                description: 혜택 금액 (nullable)^|1000
+              issueType:
+                type: string
+                description: 발급 타입^|DOWNLOAD
+                enum:
+                  - 'DOWNLOAD: 다운로드 발급'
+                  - 'CODE_DESIGNATE: 지정코드 발급'
+                  - 'CODE_RANDOM: 난수코드 발급'
+                  - 'INSERT: 자동 발급'
+                  - 'CODE_DESIGNATE_ADMIN_ONLY: 어드민 지정코드 발급(샵바이 엔터프라이즈 전용)'
+              memberNo:
+                type: number
+                description: 회원 번호^|1
+              couponSubType:
+                type: string
+                description: 쿠폰 하위 타입^|CART
+                enum:
+                  - 'CART: 장바구니 쿠폰'
+                  - 'DELIVERY_DEFAULT: 기본 배송비 쿠폰'
+                  - 'DELIVERY_ALL: 전체 배송비 쿠폰'
+                  - 'NONE: 장바구니 쿠폰 외'
+              couponDiscountAmt:
+                type: number
+                description: 쿠폰 할인 금액 (nullable)^|5000
+              couponType:
+                type: string
+                description: 혜택 구분 타입^|CART
+                enum:
+                  - 'PRODUCT: 상품적용 쿠폰'
+                  - 'CART: 주문적용 쿠폰'
+                  - 'CART_DELIVERY: 장바구니 배송비 할인'
+                  - 'GIFT: 기프트 쿠폰'
+              adminIssued:
+                type: boolean
+                description: 어드민 발급 여부^|false
+              fixed:
+                type: boolean
+                description: '정액 할인 여부(true: 정액할인, false: 정률할인)^|true'
+              registerYmdt:
+                type: string
+                description: 쿠폰 지급일시^|2025-09-29 17:53:06
+        totalCount:
+          type: number
+          description: 총 개수^|1
+    coupons-targets616348469:
+      type: object
+      properties:
+        contents:
+          type: array
+          items:
+            type: object
+            properties:
+              targetName:
+                type: string
+                description: 대상 이름^|target-name
+              targetType:
+                type: string
+                description: 대상 타입^|PRODUCT
+              targetNo:
+                type: number
+                description: 대상 번호^|1
+              couponNo:
+                type: number
+                description: 쿠폰 번호^|1
+        totalPage:
+          type: number
+          description: 총 페이지^|1
+        totalCount:
+          type: number
+          description: 총 개수^|1
+    coupons-issues-1903045413:
+      type: object
+      properties:
+        reason:
+          type: string
+          description: 발급 사유^|생일쿠폰 발급
+        memberNos:
+          type: array
+          description: '회원 번호 리스트 (최대 1,000명)^|[1,2,3]'
+          items:
+            type: number
+        couponNo:
+          type: number
+          description: 쿠폰 번호^|1
+        isAdminIssue:
+          type: boolean
+          description: 어드민 발급 여부 (개발중)^|true
+        couponNos:
+          type: array
+          description: '쿠폰 번호 리스트 (최대 10건)^|[1,2,3]'
+          items:
+            oneOf:
+              - type: object
+              - type: boolean
+              - type: string
+              - type: number
+        issueCount:
+          type: number
+          description: '[개발중] 발급 수량 (기본값: 1)^|1'
+        memberIds:
+          type: array
+          description: '회원 ID 리스트^|["test1","test2","test3"]'
+          items:
+            type: string
+    coupons-1711516014:
+      type: object
+      properties:
+        couponNo:
+          type: number
+          description: 생성된 쿠폰 번호^|1
+    coupons-use-458945078:
+      type: array
+      items:
+        type: object
+        properties:
+          couponIssueNo:
+            type: number
+            description: 쿠폰 지급 번호^|1
+          couponDiscountAmt:
+            type: number
+            description: 쿠폰 할인 금액^|0
+    coupons-use-1764910307:
+      type: array
+      items:
+        type: object
+        properties:
+          discountAmt:
+            type: number
+            description: 할인금액(정액) (nullable)^|3000
+          couponName:
+            type: string
+            description: 쿠폰명^|장바구니 할인 쿠폰
+          couponIssueNo:
+            type: number
+            description: 쿠폰 발급 번호^|123
+          serviceShareRate:
+            type: number
+            description: 쇼핑몰 비용 분담율^|100
+          minSalePrice:
+            type: number
+            description: 최소 기준 금액 (nullable)^|4000
+          maxDiscountAmt:
+            type: number
+            description: 최대할인금액 (nullable)^|5000
+          updateYmdt:
+            type: string
+            description: 쿠폰 수정일시 (nullable)^|2025-09-29 17:53:18
+          couponType:
+            type: string
+            description: 혜택 구분 타입^|CART
+            enum:
+              - 'PRODUCT: 상품적용 쿠폰'
+              - 'CART: 주문적용 쿠폰'
+              - 'CART_DELIVERY: 장바구니 배송비 할인'
+              - 'GIFT: 기프트 쿠폰'
+          usesMinLimit:
+            type: boolean
+            description: '최소 기준 금액 사용여부 (true: 사용, false: 사용하지 않음)^|true'
+          registerYmdt:
+            type: string
+            description: 쿠폰 등록일시^|2025-09-29 17:53:18
+          usesMaxLimit:
+            type: boolean
+            description: '최대 기준 금액 사용여부 (true: 사용, false: 사용하지 않음)^|true'
+          orderNo:
+            type: string
+            description: 주문 번호^|123
+          discountPercent:
+            type: number
+            description: 할인금액(정률) (nullable)^|10
+          useYmdt:
+            type: string
+            description: 쿠폰 사용일시^|2025-09-29 17:53:18
+          issueEndYmdt:
+            type: string
+            description: 쿠폰 발행 종료일시^|2025-06-29 17:53:18
+          issueStartYmdt:
+            type: string
+            description: 쿠폰 발행 시작일시^|2025-06-29 17:53:18
+          issueStopped:
+            type: boolean
+            description: '발급 일시중지 여부 (true: 일시중지 false: 일시중지 아님)^|false'
+          promotionCode:
+            type: string
+            description: 관리자가 직접 입력한 프로모션 코드 (nullable)^|HELLO SAVE
+          couponNo:
+            type: number
+            description: 쿠폰 번호^|123
+          payAmt:
+            type: number
+            description: 결제 금액 (nullable)^|0
+          maxSalePrice:
+            type: number
+            description: 최대 기준 금액 (nullable)^|100000
+          issueType:
+            type: string
+            description: 발급 타입^|DOWNLOAD
+            enum:
+              - 'DOWNLOAD: 다운로드 발급'
+              - 'CODE_DESIGNATE: 지정코드 발급'
+              - 'CODE_RANDOM: 난수코드 발급'
+              - 'INSERT: 자동 발급'
+              - 'CODE_DESIGNATE_ADMIN_ONLY: 어드민 지정코드 발급(샵바이 엔터프라이즈 전용)'
+          couponStatusType:
+            type: string
+            description: 쿠폰 상태 타입^|ISSUE_ING
+            enum:
+              - 'ISSUE_READY: 발급대기'
+              - 'ISSUE_ING: 발급 중'
+              - 'ISSUE_STOP: 발급중지'
+              - 'ISSUE_END: 발급종료'
+          couponSubType:
+            type: string
+            description: 쿠폰 하위 타입^|CART
+            enum:
+              - 'CART: 장바구니 쿠폰'
+              - 'DELIVERY_DEFAULT: 기본 배송비 쿠폰'
+              - 'DELIVERY_ALL: 전체 배송비 쿠폰'
+              - 'NONE: 장바구니 쿠폰 외'
+          orderProductNo:
+            type: number
+            description: 주문 상품 번호(상품 쿠폰이 아닌 경우 0)^|0
+          fixed:
+            type: boolean
+            description: '정액 할인 여부(true: 정액할인, false: 정률할인)^|true'
+    coupons-couponNo-1535876060:
+      type: object
+      properties:
+        cartCouponDetail:
+          type: object
+          properties:
+            usableOtherCoupon:
+              type: boolean
+              description: '상품쿠폰 사용 제한 여부(true: 상품쿠폰 사용가능, false: 상품쿠폰 사용불가능)^|false'
+            couponTargets:
+              type: array
+              description: 쿠폰 할인 대상 정보
+              items:
+                type: object
+                properties:
+                  targetName:
+                    type: string
+                    description: 쿠폰 대상 이름^|할인 대상 이름
+                  targetNo:
+                    type: number
+                    description: 쿠폰 대상 번호^|1
+                  couponTargetType:
+                    type: string
+                    description: 쿠폰 대상 타입^|ALL_PRODUCT
+                    enum:
+                      - 'ALL_PRODUCT: 전상품'
+                      - 'BRAND: 브랜드'
+                  registerYmdt:
+                    type: string
+                    description: 타겟 등록 날짜^|2025-04-20 10:00:00
+            excludesTarget:
+              type: boolean
+              description: '할인 대상 제외 설정 여부(true: 제외, false: 제외설정 하지않음)^|false'
+            couponExcludeTargets:
+              type: array
+              description: 쿠폰 할인 제외 대상 정보
+              items:
+                type: object
+                properties:
+                  targetName:
+                    type: string
+                    description: 쿠폰 제외대상 이름^|할인 대상 이름
+                  targetNo:
+                    type: number
+                    description: 쿠폰 제외대상 번호^|1
+                  couponTargetType:
+                    type: string
+                    description: 쿠폰 제외대상 타입^|ALL_PRODUCT
+                    enum:
+                      - 'ALL_PRODUCT: 전상품'
+                      - 'BRAND: 브랜드'
+            couponIssueLimitTypes:
+              type: array
+              description: 발급위치 제한^|PRODUCT_DETAIL
+              items:
+                type: string
+                enum:
+                  - 'PRODUCT_DETAIL: 상품상세 미노출'
+            couponTargetType:
+              type: string
+              description: '쿠폰 대상 타입 (ALL_PRODUCT,BRAND)^|ALL_PRODUCT'
+              enum:
+                - 'ALL_PRODUCT: 전상품'
+                - 'BRAND: 브랜드'
+            skipsAccumulation:
+              type: boolean
+              description: '적립금 적립 제한 여부(true: 적립 제한, false: 적립 제한없음)^|false'
+          description: 장바구니 쿠폰상세
+        reason:
+          type: string
+          description: 쿠폰 사유^|for test
+        couponName:
+          type: string
+          description: 쿠폰 이름^|test coupon name
+        statusType:
+          type: string
+          description: 쿠폰상태^|ISSUE_END
+          enum:
+            - 'ISSUE_READY: 발급대기'
+            - 'ISSUE_ING: 발급 중'
+            - 'ISSUE_STOP: 발급중지'
+            - 'ISSUE_END: 발급종료'
+        couponSummary:
+          type: object
+          properties:
+            totalIssueCntByAdmin:
+              type: number
+              description: 관리자가 지급한 쿠폰 총 지급 개수^|20
+            totalUseCnt:
+              type: number
+              description: 쿠폰 사용 개수^|3
+            totalIssueCnt:
+              type: number
+              description: 쿠폰 발급 개수^|10
+            totalNormalIssueCnt:
+              type: number
+              description: 일반 발급 쿠폰 개수^|7
+          description: 쿠폰 요약
+        usableConstraint:
+          type: object
+          properties:
+            limitPayType:
+              type: string
+              description: 사용가능 결제수단 (nullable)^|PAYCO
+            useDays:
+              type: number
+              description: '사용가능 기간 - 쿠폰을 발급받은 날부터 / 31: 말일 / -1: 제한 없음 (nullable)^|1'
+            useStopped:
+              type: boolean
+              description: '사용가능 여부(true: 사용불가, false: 사용가능)^|true'
+            useEndYmdt:
+              type: string
+              description: 사용가능 기간 - 특정 일시 지정 (nullable)^|2020-01-01 00:00:00
+            usablePlatformTypes:
+              type: array
+              description: '사용가능 플랫폼^|["PC"]'
+              items:
+                type: string
+                enum:
+                  - 'PC: PC'
+                  - 'MOBILE_WEB: MOBILE WEB'
+                  - 'MOBILE_APP: MOBILE APP'
+            limitPayTypes:
+              type: array
+              description: '사용가능 결제수단 리스트 (nullable)^|[PAYCO, NAVER_EASY_PAY]'
+              items:
+                type: string
+                enum:
+                  - 'CREDIT_CARD: 신용카드'
+                  - 'ACCOUNT: 무통장입금'
+                  - 'MOBILE: 휴대폰결제'
+                  - 'REALTIME_ACCOUNT_TRANSFER: 실시간계좌이체'
+                  - 'VIRTUAL_ACCOUNT: 가상계좌'
+                  - 'GIFT: 상품권'
+                  - 'ATM: ATM'
+                  - 'PAYCO: PAYCO'
+                  - 'ZERO_PAY: 0원결제'
+                  - 'ACCUMULATION: 적립금 전액 사용'
+                  - 'PHONE_BILL: 전화결제'
+                  - 'POINT: 포인트결제'
+                  - 'YPAY: 옐로페이'
+                  - 'KPAY: 케이페이'
+                  - 'PAYPIN: 페이핀'
+                  - 'INIPAY: INIPay 간편결제'
+                  - 'PAYPAL: PayPal'
+                  - 'STRIPE: STRIPE'
+                  - 'NAVER_PAY: 네이버페이 주문형'
+                  - 'KAKAO_PAY: 카카오페이'
+                  - 'NAVER_EASY_PAY: 네이버페이 결제형'
+                  - 'SAMSUNG_PAY: 삼성페이'
+                  - 'CHAI: 차이'
+                  - 'TOSS_PAY: 토스페이'
+                  - 'SK_PAY: SK페이'
+                  - 'APPLE_PAY: 애플페이'
+                  - 'ESCROW_REALTIME_ACCOUNT_TRANSFER: 실시간계좌이체-에스크로'
+                  - 'ESCROW_VIRTUAL_ACCOUNT: 가상계좌-에스크로'
+                  - 'VERITRANS_CARD: Veritrans CreditCard'
+                  - 'TOASTCAM: 토스트캠'
+                  - 'UNION_PAY: UnionPay'
+                  - 'ALIPAY: Alipay Plus'
+                  - 'WECHAT_PAY: WeChat Pay'
+                  - 'PINPAY: 핀페이'
+                  - 'EXTERNAL_PAY: 외부보조결제수단'
+                  - 'HMG_PAY: HMG페이'
+                  - 'APP_CARD: 앱카드'
+                  - 'PAY_PAY: 페이페이'
+                  - 'E_CONTEXT: 일본 편의점결제'
+                  - 'HAPPY_VOUCHER: 국민행복바우처'
+                  - 'ETC: 기타결제수단'
+          description: 사용 제약사항
+        discount:
+          type: object
+          properties:
+            usesMaxLimit:
+              type: boolean
+              description: '최대 기준 금액 제한여부(true: 제한, false: 제한 없음)^|false'
+            discountAmt:
+              type: number
+              description: 할인 금액^|500
+            discountPercent:
+              type: number
+              description: 정률^|5
+            usesMinLimit:
+              type: boolean
+              description: '최소 기준 금액 제한여부(true: 제한, false: 제한 없음)^|false'
+            minSalePrice:
+              type: number
+              description: 최소 기준 상품 금액 (nullable)^|1000
+            maxDiscountAmt:
+              type: number
+              description: 최대할인금액 (nullable)^|5000
+            fixed:
+              type: boolean
+              description: '정액 할인 여부(true: 정액, false: 정률)^|true'
+            maxSalePrice:
+              type: number
+              description: 최대 기준 상품 금액 (nullable)^|30000
+          description: 쿠폰 할인정보 (nullable)
+        issuableConstraint:
+          type: object
+          properties:
+            dailyIssueLimitCnt:
+              type: number
+              description: 1일 발급 제한 개수 (nullable)^|1
+            issuePerPersonLimitCnt:
+              type: number
+              description: 1인당 발급 제한 수량 (nullable)^|1
+            finishesIssuing:
+              type: boolean
+              description: '발급 종료여부(true: 종료, false: 종료 전)^|false'
+            issueEndYmdt:
+              type: string
+              description: 쿠폰발행 기간-종료일시^|2020-01-01 00:00:00
+            issuablePlatformTypes:
+              type: array
+              description: '발급가능 플랫폼^|["PC"]'
+              items:
+                type: string
+                enum:
+                  - 'PC: PC'
+                  - 'MOBILE_WEB: MOBILE WEB'
+                  - 'MOBILE_APP: MOBILE APP'
+            memberGroupNos:
+              type: array
+              description: '발급대상 회원그룹 json (nullable)^|3,4'
+              items:
+                type: number
+            memberGradeNos:
+              type: array
+              description: '발급대상 회원등급 json (nullable)^|1,2'
+              items:
+                type: number
+            channelTypes:
+              type: array
+              description: '채널타입 리스트 (nullable)^|["NAVER_EP"]'
+              items:
+                type: string
+            issueStartYmdt:
+              type: string
+              description: 쿠폰발행 기간-시작일시^|2020-01-01 00:00:00
+            promotionCode:
+              type: string
+              description: 프로모션코드 - 지정코드 발급인 경우^|HELLO-SALE
+            issueStopped:
+              type: boolean
+              description: '발급 일시중지 여부(true: 일시중지, false: 일시중지 아님)^|false'
+            usesPersonalIssueLimit:
+              type: boolean
+              description: '1인당 발급 제한 여부(true: 제한, false: 제한없음)^|false'
+            possibleDaysOfWeek:
+              type: array
+              description: '발급가능 요일 (nullable)^|1,2,3,4,5,6,7'
+              items:
+                type: number
+            issueStartHour:
+              type: number
+              description: 발급시간대 - 시작 시 (nullable)^|0
+            issueType:
+              type: string
+              description: 발급 타입^|DOWNLOAD
+              enum:
+                - 'DOWNLOAD: 다운로드 발급'
+                - 'CODE_DESIGNATE: 지정코드 발급'
+                - 'CODE_RANDOM: 난수코드 발급'
+                - 'INSERT: 자동 발급'
+                - 'CODE_DESIGNATE_ADMIN_ONLY: 어드민 지정코드 발급(샵바이 엔터프라이즈 전용)'
+            isPeriodEnd:
+              type: boolean
+              description: 발행기간 만료^|false
+            couponCodeLength:
+              type: number
+              description: 난수 자리수 - 난수코드 발급인 경우 (nullable)^|1
+            memberGradeNo:
+              type: number
+              description: 발급대상 회원등급 (nullable)^|1
+            dailyIssuePerPersonLimitCnt:
+              type: number
+              description: 1인당 발급 제한 - 1일 발급 제한 개수 (nullable)^|1
+            usesDailyIssueLimit:
+              type: boolean
+              description: '1일 발급 제한 여부(true: 제한, false: 제한없음)^|false'
+            issueLimitCnt:
+              type: number
+              description: 발급 제한 수량^|999
+            issueEndHour:
+              type: number
+              description: 발급시간대 - 종료 시 (nullable)^|24
+          description: 발급 제약사항
+        productCouponDetail:
+          type: object
+          properties:
+            couponTargets:
+              type: array
+              description: 쿠폰 대상 리스트
+              items:
+                type: object
+                properties:
+                  targetName:
+                    type: string
+                    description: 쿠폰 대상 이름^|할인 대상 이름
+                  targetNo:
+                    type: number
+                    description: 쿠폰 대상 번호^|1
+                  couponTargetType:
+                    type: string
+                    description: 쿠폰 대상 타입^|ALL_PRODUCT
+                    enum:
+                      - 'ALL_PRODUCT: 전상품'
+                      - 'PRODUCT: 개별상품'
+                      - 'BRAND: 브랜드'
+                      - 'CATEGORY: 카테고리'
+                      - 'PARTNER: 파트너사'
+                  registerYmdt:
+                    type: string
+                    description: 추가일^|추가 일시^|2025-09-29 17:53:27
+            excludesTarget:
+              type: boolean
+              description: '할인 대상 제외 설정 여부(true: 제외, false: 제외하지 않음)^|false'
+            couponExcludeTargets:
+              type: array
+              description: 쿠폰 제외 대상 리스트
+              items:
+                type: object
+                properties:
+                  targetName:
+                    type: string
+                    description: 쿠폰 제외 대상 이름^|할인 대상 이름
+                  targetNo:
+                    type: number
+                    description: 쿠폰 제외 대상 번호^|1
+                  couponTargetType:
+                    type: string
+                    description: 쿠폰 제외 대상 타입^|ALL_PRODUCT
+                    enum:
+                      - 'ALL_PRODUCT: 전상품'
+                      - 'PRODUCT: 개별상품'
+                      - 'BRAND: 브랜드'
+                      - 'CATEGORY: 카테고리'
+                      - 'PARTNER: 파트너사'
+            couponIssueLimitTypes:
+              type: array
+              description: '발급위치 제한^|(PRODUCT_DETAIL: 상품상세 미노출)'
+              items:
+                oneOf:
+                  - type: object
+                  - type: boolean
+                  - type: string
+                  - type: number
+            couponTargetType:
+              type: string
+              description: 할인쿠폰 대상 타입^|PRODUCT
+              enum:
+                - 'ALL_PRODUCT: 전상품'
+                - 'PRODUCT: 개별상품'
+                - 'BRAND: 브랜드'
+                - 'CATEGORY: 카테고리'
+                - 'PARTNER: 파트너사'
+            skipsAccumulation:
+              type: boolean
+              description: '적립금 제한(true: 적립 제한, false: 적립 제한하지 않음)^|false'
+            usableCartCoupon:
+              type: boolean
+              description: '주문쿠폰 사용 제한(true: 주문쿠폰 사용 가능, false: 사용 불가능)^|true'
+            serviceSharePercent:
+              type: number
+              description: 비용분담 설정-쇼핑몰 부담^|100
+          description: 상품쿠폰 상세
+        isScheduledIssuePlan:
+          type: boolean
+          description: '예약 지급 여부(true: 예약지급, false: 예약지급 아님)^|false'
+        giftCouponDetail:
+          type: object
+          properties:
+            giftCouponType:
+              type: string
+              description: '기프트 쿠폰 타입(기본 값: ACCUMULATION)^|ACCUMULATION'
+            benefitEndYmdt:
+              type: string
+              description: 혜택 만료일자 (nullable)^|2024-01-01 00:00:00
+            benefitAmt:
+              type: number
+              description: 혜택 금액 (nullable)^|1000
+            benefitExpirationDays:
+              type: number
+              description: 혜택 지급 시점으로부터 혜택 만료일 (nullable)^|365
+          description: 기프트 쿠폰 상세
+        isCountOver:
+          type: boolean
+          description: '수량 만료 여부(true: 만료, false: 만료 아님)^|false'
+        couponSubType:
+          type: string
+          description:
+            "쿠폰 하위 타입 - CART(장바구니 쿠폰), DELIVERY_DEFAULT(기본 배송비 쿠폰), DELIVERY_ALL(전\
+            체 배송비 쿠폰), NONE(장바구니 쿠폰 외)^|NONE"
+        todayIssueCnt:
+          type: number
+          description: 오늘 발급 수^|1
+        couponType:
+          type: string
+          description: 혜택 구분 타입^|CART
+          enum:
+            - 'PRODUCT: 상품적용 쿠폰'
+            - 'CART: 주문적용 쿠폰'
+            - 'CART_DELIVERY: 장바구니 배송비 할인'
+            - 'GIFT: 기프트 쿠폰'
+    coupons-withdraw187298523:
+      type: object
+      properties:
+        reason:
+          type: string
+          description: 철회 사유^|테스트
+        couponIssueNo:
+          type: number
+          description: 쿠폰 지급 번호^|1
+    coupons-issues-194375905:
+      type: array
+      items:
+        type: object
+        properties:
+          memberNo:
+            type: number
+            description: 회원 번호^|1
+          couponIssueNo:
+            type: number
+            description: 쿠폰 지급 번호^|1
+          couponNo:
+            type: number
+            description: 쿠폰 번호^|1
+          issueFail:
+            type: boolean
+            description: 쿠폰 지급 실패 여부^|false
+          useEndYmdt:
+            type: string
+            description: 쿠폰 만료 일시^|yyyy-MM-dd HH:mm:ss
+    coupons-use-rollback-141309845:
+      type: object
+      properties:
+        couponIssueNos:
+          type: array
+          description: 쿠폰 지급 번호 리스트^|1
+          items:
+            oneOf:
+              - type: object
+              - type: boolean
+              - type: string
+              - type: number
+    coupons-186158211:
+      type: object
+      properties:
+        contents:
+          type: array
+          items:
+            type: object
+            properties:
+              dailyIssueLimitCnt:
+                type: number
+                description: 일별 발급 제한 수량
+              mallName:
+                type: string
+                description: 쇼핑몰 번호^|테스트몰
+              'no':
+                type: number
+                description: 쿠폰 번호^|123
+              discountAmt:
+                type: number
+                description: 할인금액(정액) (nullable)^|3000
+              couponName:
+                type: string
+                description: 쿠폰명^|장바구니 할인 쿠폰
+              memberGroupNos:
+                type: array
+                description: '발급 대상 회원그룹 번호 리스트 (nullable)^|[1, 2, 3]'
+                items:
+                  type: number
+              memberGradeNos:
+                type: array
+                description: '발급 대상 회원등급 번호 리스트 (nullable)^|[1, 2, 3]'
+                items:
+                  type: number
+              serviceShareRate:
+                type: number
+                description: 쇼핑몰 비용 분담율^|100
+              minSalePrice:
+                type: number
+                description: 최소 기준 금액 (nullable)^|4000
+              usesPersonalIssueLimit:
+                type: boolean
+                description: 회원별 발급 수량 제한 여부
+              maxDiscountAmt:
+                type: number
+                description: 최대할인금액 (nullable)^|5000
+              totalIssueCnt:
+                type: number
+                description: 발급현황^|9
+              benefitAmt:
+                type: number
+                description: 혜택 금액 (nullable)^|1000
+              updateYmdt:
+                type: string
+                description: 쿠폰 수정일시 (nullable)^|2025-09-29 17:53:25
+              scheduledIssuePlan:
+                type: boolean
+                description:
+                  "예약 지급 계획에 설정된 쿠폰 여부 (true: 예약지급 설정됨, false: 예약지급 설정되\
+                  지 않음)^|false"
+              totalIssueCntByAdmin:
+                type: number
+                description: 관리자 - 발급현황^|100
+              couponType:
+                type: string
+                description: 혜택 구분 타입^|CART
+                enum:
+                  - 'PRODUCT: 상품적용 쿠폰'
+                  - 'CART: 주문적용 쿠폰'
+                  - 'CART_DELIVERY: 장바구니 배송비 할인'
+                  - 'GIFT: 기프트 쿠폰'
+              usesMinLimit:
+                type: boolean
+                description: '최소 기준 금액 사용여부 (true: 사용, false: 사용하지 않음)^|true'
+              dailyIssuePerPersonLimitCnt:
+                type: number
+                description: 1인당 발급 제한 - 1일발급제한
+              registerYmdt:
+                type: string
+                description: 쿠폰 등록일시^|2025-09-29 17:53:25
+              usesMaxLimit:
+                type: boolean
+                description: '최대 기준 금액 사용여부 (true: 사용, false: 사용하지 않음)^|true'
+              issuePerPersonLimitCnt:
+                type: number
+                description: 회원별 발급 제한 수량
+              discountPercent:
+                type: number
+                description: 할인금액(정률) (nullable)^|10
+              issueEndYmdt:
+                type: string
+                description: 쿠폰 발행 종료일시^|2025-06-29 17:53:25
+              issueStartYmdt:
+                type: string
+                description: 쿠폰 발행 시작일시^|2025-06-29 17:53:25
+              issueStopped:
+                type: boolean
+                description: '발급 일시중지 여부 (true: 일시중지 false: 일시중지 아님)^|false'
+              promotionCode:
+                type: string
+                description: 관리자가 직접 입력한 프로모션 코드 (nullable)^|HELLO SAVE
+              maxSalePrice:
+                type: number
+                description: 최대 기준 금액 (nullable)^|100000
+              issueType:
+                type: string
+                description: 발급 타입^|DOWNLOAD
+                enum:
+                  - 'DOWNLOAD: 다운로드 발급'
+                  - 'CODE_DESIGNATE: 지정코드 발급'
+                  - 'CODE_RANDOM: 난수코드 발급'
+                  - 'INSERT: 자동 발급'
+                  - 'CODE_DESIGNATE_ADMIN_ONLY: 어드민 지정코드 발급(샵바이 엔터프라이즈 전용)'
+              couponStatusType:
+                type: string
+                description: 쿠폰 상태 타입^|ISSUE_ING
+                enum:
+                  - 'ISSUE_READY: 발급대기'
+                  - 'ISSUE_ING: 발급 중'
+                  - 'ISSUE_STOP: 발급중지'
+                  - 'ISSUE_END: 발급종료'
+              couponSubType:
+                type: string
+                description: 쿠폰 하위 타입^|CART
+                enum:
+                  - 'CART: 장바구니 쿠폰'
+                  - 'DELIVERY_DEFAULT: 기본 배송비 쿠폰'
+                  - 'DELIVERY_ALL: 전체 배송비 쿠폰'
+                  - 'NONE: 장바구니 쿠폰 외'
+              issueLimitCnt:
+                type: number
+                description: 발행수량^|10
+              usesDailyIssueLimit:
+                type: boolean
+                description: 일별 발급 수량 제한 여부
+              fixed:
+                type: boolean
+                description: '정액 할인 여부(true: 정액할인, false: 정률할인)^|true'
+              totalUseCnt:
+                type: number
+                description: 사용현황^|1
+        totalCount:
+          type: number
+          description: 전체 쿠폰 수^|544844
+    coupons-couponNo-use-stop1789105598:
+      type: object
+      properties:
+        useStopped:
+          type: boolean
+          description: '쿠폰 사용중지 여부 (사용중지 : true, 사용재개 : false)^|true'
+    coupons-withdraw-bulk765073540:
+      type: object
+      properties:
+        withdrawReason:
+          type: string
+          description: 지급 철회 사유^|지급 오류
+        issueStartYmd:
+          type: string
+          description: 지급 조회 시작일^|2025-09-29
+        couponNo:
+          type: number
+          description: 쿠폰 번호^|1
+        issueEndYmd:
+          type: string
+          description: 지급 조회 종료일^|2025-09-29
+    coupons-2077927525:
+      type: object
+      properties:
+        productCouponDetail:
+          type: object
+          properties:
+            couponTargets:
+              type: array
+              description: 쿠폰 할인 대상 정보
+              items:
+                type: object
+                properties:
+                  targetName:
+                    type: string
+                    description: 쿠폰 대상 이름^|할인 대상 이름
+                  targetNo:
+                    type: number
+                    description: 쿠폰 대상 번호^|1
+                  couponTargetType:
+                    type: string
+                    description: 쿠폰 대상 타입^|ALL_PRODUCT
+                    enum:
+                      - 'ALL_PRODUCT: 전상품'
+                      - 'PRODUCT: 개별상품'
+                      - 'BRAND: 브랜드'
+                      - 'CATEGORY: 카테고리'
+                      - 'PARTNER: 파트너사'
+            excludesTarget:
+              type: boolean
+              description: '할인 대상 제외 설정 여부(true: 제외, false: 제외설정 하지않음)^|false'
+            couponExcludeTargets:
+              type: array
+              description: 쿠폰 할인 제외 대상 정보
+              items:
+                type: object
+                properties:
+                  targetName:
+                    type: string
+                    description: 쿠폰 제외 대상 이름^|할인 대상 이름
+                  targetNo:
+                    type: number
+                    description: 쿠폰 제외 대상 번호^|1
+                  couponTargetType:
+                    type: string
+                    description: 쿠폰 제외 대상 타입^|ALL_PRODUCT
+                    enum:
+                      - 'ALL_PRODUCT: 전상품'
+                      - 'PRODUCT: 개별상품'
+                      - 'BRAND: 브랜드'
+                      - 'CATEGORY: 카테고리'
+                      - 'PARTNER: 파트너사'
+            couponIssueLimitTypes:
+              type: array
+              description: 발급위치 제한^|PRODUCT_DETAIL
+              items:
+                type: string
+                enum:
+                  - 'PRODUCT_DETAIL: 상품상세 미노출'
+            couponTargetType:
+              type: string
+              description: 쿠폰 대상 타입^|PRODUCT
+              enum:
+                - 'ALL_PRODUCT: 전상품'
+                - 'PRODUCT: 개별상품'
+                - 'BRAND: 브랜드'
+                - 'CATEGORY: 카테고리'
+                - 'PARTNER: 파트너사'
+            skipsAccumulation:
+              type: boolean
+              description: '적립금 제한여부(true: 제한, false: 제한하지 않음)^|false'
+            usableCartCoupon:
+              type: boolean
+              description: '주문쿠폰 사용 제한여부(true: 주문쿠폰 사용가능, false: 사용 불가능)^|true'
+            serviceSharePercent:
+              type: number
+              description: 비용분담 설정-쇼핑몰 부담^|100
+          description: 상품쿠폰 상세
+        cartCouponDetail:
+          type: object
+          properties:
+            usableOtherCoupon:
+              type: boolean
+              description: '상품쿠폰 사용 제한 여부(true: 상품쿠폰 사용가능, false: 상품쿠폰 사용불가능)^|false'
+            couponTargets:
+              type: array
+              description: 쿠폰 할인 대상 정보
+              items:
+                type: object
+                properties:
+                  targetName:
+                    type: string
+                    description: 쿠폰 대상 이름^|할인 대상 이름
+                  targetNo:
+                    type: number
+                    description: 쿠폰 대상 번호^|1
+                  couponTargetType:
+                    type: string
+                    description: 쿠폰 대상 타입^|ALL_PRODUCT
+                    enum:
+                      - 'ALL_PRODUCT: 전상품'
+                      - 'BRAND: 브랜드'
+            excludesTarget:
+              type: boolean
+              description: '할인 대상 제외 설정 여부(true: 제외, false: 제외설정 하지않음)^|false'
+            couponExcludeTargets:
+              type: array
+              description: 쿠폰 할인 제외 대상 정보
+              items:
+                type: object
+                properties:
+                  targetName:
+                    type: string
+                    description: 쿠폰 제외대상 이름^|할인 대상 이름
+                  targetNo:
+                    type: number
+                    description: 쿠폰 제외대상 번호^|1
+                  couponTargetType:
+                    type: string
+                    description: 쿠폰 제외대상 타입^|ALL_PRODUCT
+                    enum:
+                      - 'ALL_PRODUCT: 전상품'
+                      - 'BRAND: 브랜드'
+            couponIssueLimitTypes:
+              type: array
+              description: 발급위치 제한^|PRODUCT_DETAIL
+              items:
+                type: string
+                enum:
+                  - 'PRODUCT_DETAIL: 상품상세 미노출'
+            couponTargetType:
+              type: string
+              description: '쿠폰 대상 타입 (ALL_PRODUCT,BRAND)^|ALL_PRODUCT'
+              enum:
+                - 'ALL_PRODUCT: 전상품'
+                - 'BRAND: 브랜드'
+            skipsAccumulation:
+              type: boolean
+              description: '적립금 적립 제한 여부(true: 적립 제한, false: 적립 제한없음)^|false'
+          description: 장바구니 쿠폰상세
+        reason:
+          type: string
+          description: 쿠폰 발급 사유^|for test
+        couponName:
+          type: string
+          description: 쿠폰 이름^|test coupon name
+        giftCouponDetail:
+          type: object
+          properties:
+            giftCouponType:
+              type: string
+              description: '기프트 쿠폰 타입(기본 값: ACCUMULATION)^|ACCUMULATION'
+            benefitEndYmdt:
+              type: string
+              description: 혜택 만료일자 (nullable)^|2024-01-01 00:00:00
+            benefitAmt:
+              type: number
+              description: 혜택 금액^|1000
+            benefitExpirationDays:
+              type: number
+              description: 혜택 지급 시점으로부터 혜택 만료일 (nullable)^|365
+          description: 기프트 쿠폰 상세
+        couponSubType:
+          type: string
+          description:
+            "쿠폰 하위 타입 - CART(장바구니 쿠폰), DELIVERY_DEFAULT(기본 배송비 쿠폰), DELIVERY_ALL(전\
+            체 배송비 쿠폰), NONE(장바구니 쿠폰 외)^|NONE"
+        couponType:
+          type: string
+          description: 혜택 구분 타입^|CART
+          enum:
+            - 'PRODUCT: 상품적용 쿠폰'
+            - 'CART: 주문적용 쿠폰'
+            - 'CART_DELIVERY: 장바구니 배송비 할인'
+            - 'GIFT: 기프트 쿠폰'
+        usableConstraint:
+          type: object
+          properties:
+            limitPayType:
+              type: string
+              description: 사용가능 결제수단 (nullable)^|PAYCO
+            useDays:
+              type: number
+              description: '사용가능 기간 - 쿠폰을 발급받은 날부터 / 31: 말일 / -1: 제한 없음 (nullable)^|1'
+            useStopped:
+              type: boolean
+              description: '사용가능 여부(true: 사용불가, false: 사용가능)^|true'
+            useEndYmdt:
+              type: string
+              description: 사용가능 기간 - 특정 일시 지정 (nullable)^|2020-01-01 00:00:00
+            usablePlatformTypes:
+              type: array
+              description: '사용가능 플랫폼^|["PC"]'
+              items:
+                type: string
+                enum:
+                  - 'PC: PC'
+                  - 'MOBILE_WEB: MOBILE WEB'
+                  - 'MOBILE_APP: MOBILE APP'
+            limitPayTypes:
+              type: array
+              description: '사용가능 결제수단 리스트 (nullable)^|[PAYCO, NAVER_EASY_PAY]'
+              items:
+                type: string
+                enum:
+                  - 'CREDIT_CARD: 신용카드'
+                  - 'ACCOUNT: 무통장입금'
+                  - 'MOBILE: 휴대폰결제'
+                  - 'REALTIME_ACCOUNT_TRANSFER: 실시간계좌이체'
+                  - 'VIRTUAL_ACCOUNT: 가상계좌'
+                  - 'GIFT: 상품권'
+                  - 'ATM: ATM'
+                  - 'PAYCO: PAYCO'
+                  - 'ZERO_PAY: 0원결제'
+                  - 'ACCUMULATION: 적립금 전액 사용'
+                  - 'PHONE_BILL: 전화결제'
+                  - 'POINT: 포인트결제'
+                  - 'YPAY: 옐로페이'
+                  - 'KPAY: 케이페이'
+                  - 'PAYPIN: 페이핀'
+                  - 'INIPAY: INIPay 간편결제'
+                  - 'PAYPAL: PayPal'
+                  - 'STRIPE: STRIPE'
+                  - 'NAVER_PAY: 네이버페이 주문형'
+                  - 'KAKAO_PAY: 카카오페이'
+                  - 'NAVER_EASY_PAY: 네이버페이 결제형'
+                  - 'SAMSUNG_PAY: 삼성페이'
+                  - 'CHAI: 차이'
+                  - 'TOSS_PAY: 토스페이'
+                  - 'SK_PAY: SK페이'
+                  - 'APPLE_PAY: 애플페이'
+                  - 'ESCROW_REALTIME_ACCOUNT_TRANSFER: 실시간계좌이체-에스크로'
+                  - 'ESCROW_VIRTUAL_ACCOUNT: 가상계좌-에스크로'
+                  - 'VERITRANS_CARD: Veritrans CreditCard'
+                  - 'TOASTCAM: 토스트캠'
+                  - 'UNION_PAY: UnionPay'
+                  - 'ALIPAY: Alipay Plus'
+                  - 'WECHAT_PAY: WeChat Pay'
+                  - 'PINPAY: 핀페이'
+                  - 'EXTERNAL_PAY: 외부보조결제수단'
+                  - 'HMG_PAY: HMG페이'
+                  - 'APP_CARD: 앱카드'
+                  - 'PAY_PAY: 페이페이'
+                  - 'E_CONTEXT: 일본 편의점결제'
+                  - 'HAPPY_VOUCHER: 국민행복바우처'
+                  - 'ETC: 기타결제수단'
+          description: 사용 제약사항
+        discount:
+          type: object
+          properties:
+            usesMaxLimit:
+              type: boolean
+              description: '최대 기준 금액 제한여부(true: 제한, false: 제한 없음)^|false'
+            discountAmt:
+              type: number
+              description: 할인 금액^|500
+            discountPercent:
+              type: number
+              description: 정률^|5
+            usesMinLimit:
+              type: boolean
+              description: '최소 기준 금액 제한여부(true: 제한, false: 제한 없음)^|false'
+            minSalePrice:
+              type: number
+              description: 최소 기준 상품 금액 (nullable)^|1000
+            maxDiscountAmt:
+              type: number
+              description: 최대할인금액 (nullable)^|5000
+            fixed:
+              type: boolean
+              description: '정액 할인 여부(true: 정액, false: 정률)^|true'
+            maxSalePrice:
+              type: number
+              description: 최대 기준 상품 금액 (nullable)^|30000
+          description: 쿠폰 할인정보 (nullable)
+        issuableConstraint:
+          type: object
+          properties:
+            dailyIssueLimitCnt:
+              type: number
+              description: 1일 발급 제한 개수 (nullable)^|1
+            issuePerPersonLimitCnt:
+              type: number
+              description: 1인당 발급 제한 수량 (nullable)^|1
+            finishesIssuing:
+              type: boolean
+              description: '발급 종료여부(true: 종료, false: 종료 전)^|false'
+            issueEndYmdt:
+              type: string
+              description: 쿠폰발행 기간-종료일시^|2020-01-01 00:00:00
+            issuablePlatformTypes:
+              type: array
+              description: '발급가능 플랫폼^|["PC"]'
+              items:
+                type: string
+                enum:
+                  - 'PC: PC'
+                  - 'MOBILE_WEB: MOBILE WEB'
+                  - 'MOBILE_APP: MOBILE APP'
+            memberGroupNos:
+              type: array
+              description: '발급대상 회원그룹 json (nullable)^|3,4'
+              items:
+                type: number
+            memberGradeNos:
+              type: array
+              description: '발급대상 회원등급 json (nullable)^|1,2'
+              items:
+                type: number
+            channelTypes:
+              type: array
+              description: '채널타입 리스트 (nullable)^|["NAVER_EP"]'
+              items:
+                type: string
+            issueStartYmdt:
+              type: string
+              description: 쿠폰발행 기간-시작일시^|2020-01-01 00:00:00
+            promotionCode:
+              type: string
+              description: 프로모션코드 - 지정코드 발급인 경우^|HELLO-SALE
+            issueStopped:
+              type: boolean
+              description: '발급 일시중지 여부(true: 일시중지, false: 일시중지 아님)^|false'
+            usesPersonalIssueLimit:
+              type: boolean
+              description: '1인당 발급 제한 여부(true: 제한, false: 제한없음)^|false'
+            possibleDaysOfWeek:
+              type: array
+              description: '발급가능 요일 (nullable)^|1,2,3,4,5,6,7'
+              items:
+                type: number
+            issueStartHour:
+              type: number
+              description: 발급시간대 - 시작 시 (nullable)^|0
+            issueType:
+              type: string
+              description: 발급 타입^|DOWNLOAD
+              enum:
+                - 'DOWNLOAD: 다운로드 발급'
+                - 'CODE_DESIGNATE: 지정코드 발급'
+                - 'CODE_RANDOM: 난수코드 발급'
+                - 'INSERT: 자동 발급'
+                - 'CODE_DESIGNATE_ADMIN_ONLY: 어드민 지정코드 발급(샵바이 엔터프라이즈 전용)'
+            isPeriodEnd:
+              type: boolean
+              description: 발행기간 만료^|false
+            couponCodeLength:
+              type: number
+              description: 난수 자리수 - 난수코드 발급인 경우 (nullable)^|1
+            memberGradeNo:
+              type: number
+              description: 발급대상 회원등급 (nullable)^|1
+            dailyIssuePerPersonLimitCnt:
+              type: number
+              description: 1인당 발급 제한 - 1일 발급 제한 개수 (nullable)^|1
+            usesDailyIssueLimit:
+              type: boolean
+              description: '1일 발급 제한 여부(true: 제한, false: 제한없음)^|false'
+            issueLimitCnt:
+              type: number
+              description: 발급 제한 수량^|999
+            issueEndHour:
+              type: number
+              description: 발급시간대 - 종료 시 (nullable)^|24
+          description: 발급 제약사항
+        mallNo:
+          type: number
+          description: 몰정보^|1
+    coupons-codes-958981943:
+      type: object
+      properties:
+        contents:
+          type: array
+          items:
+            type: object
+            properties:
+              couponCodeStatusType:
+                type: string
+                description: '발급여부^|[NOT_ISSUED: 미발급, ISSUED: 발급]'
+              memberNo:
+                type: number
+                description: 회원 번호^|1
+              couponIssueNo:
+                type: number
+                description: 쿠폰 발행 번호^|1
+              couponNo:
+                type: number
+                description: 쿠폰 번호^|1
+              couponCode:
+                type: string
+                description: 쿠폰 코드^|YKS8F6E3
+        totalCount:
+          type: number
+          description: 전체 쿠폰 수^|544844

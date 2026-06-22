@@ -1,0 +1,479 @@
+---
+title: "claim-server"
+description: "클레임(claim) 관련 server API입니다."
+version: "unspecified"
+category: "Server API"
+---
+
+# claim-server
+
+:::info API 소개
+ 클레임(claim) 관련 server API입니다.
+:::
+
+## 서버 정보
+
+| 환경 | Base URL |
+|------|----------|
+| Production | `https://server-api.e-ncp.com` |
+
+## 리소스 목록
+
+| 리소스 | 설명 |
+|--------|------|
+| **Claim** | 클레임 |
+| **OptionCancel** | 부분취소 |
+| **Return** | 반품 |
+
+## API 엔드포인트
+
+## CancelExchange
+
+### 🔵 `POST` `/cancel-exchanges`
+
+**취소교환 신청**
+
+> operationId: `post-cancel-exchanges`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+
+---
+
+### 🟡 `PUT` `/cancel-exchanges/{no}/confirm-deposit`
+
+**취소교환 추가결제 입금확인**
+
+> operationId: `put-cancel-exchanges-no-confirm-deposit`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `"no"` | path | ✅ | `string` | "" |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+추가 결제 내역을 입금 확인처리 합니다.
+
+---
+
+## Claim — 클레임
+
+### 🟢 `GET` `/claims`
+
+**클레임 목록 조회하기**
+
+> operationId: `get-claims`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `claimStatusTypes` | query | - | `string` | "클레임 상태 리스트^|CANCEL_REQUEST, CANCEL_DONE" |
+| `endYmd` | query | ✅ | `string` | 조회종료일^|yyyy-mm-dd |
+| `page` | query | ✅ | `string` | 페이지 번호 (1 이상)^|1 |
+| `searchDateType` | query | ✅ | `string` | "검색일자타입(APPLY_YMDT: 클레임일자, COMPLETE_YMDT: 클레임완료일자)^|APPLY_YMDT" |
+| `searchType` | query | ✅ | `string` | "클레임 검색 타입(ALL: 전체, CLAIM_NO: 클레임번호, ORDER_NO: 주문번호, MEMBER_NO:\ |
+| `searchValues` | query | - | `string` | "클레임 검색 값^|1,2,3" |
+| `size` | query | ✅ | `string` | 페이지 사이즈^|30 |
+| `startYmd` | query | ✅ | `string` | 조회시작일^|yyyy-mm-dd |
+| `treatmentStatusTypes` | query | - | `string` | "클레임 처리 상태 리스트^|WITHDRAW, WITHDRAW_APPROVE" |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+
+---
+
+### 🔵 `POST` `/claims/available-complex-refund-amt`
+
+**관리자 지정 환불 - 환불 가능 금액 조회하기**
+
+> operationId: `post-claims-available-complex-refund-amt`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+관리자 지정 환불 클레임 신청시, 각 환불수단 별 최대로 입력 가능한 환불금액을\
+        \ 반환합니다. <br/>
+각 환불수단 별 금액 합계는 환불 금액 (refundAmt) 과 동일해야 합니다.<br/>
+<br/>
+\
+        refundAmt 가 양수인 경우, 고객에게 환불되는 금액을 의미합니다.<br/>
+refundAmt 가 음수인 경우, 고객이 추가로\
+        \ 결제해야 하는 금액을 의미합니다. 이 경우, 모든 항목이 0으로 응답됩니다.<br/>
+<br/>
+반품 수거지 및 교환 배송지는\
+        \ 최초 주문을 기준으로 합니다.<br/>
+반품 및 교환 시 수거지 또는 배송지가 변경되면, 환불 금액이 계산된 값과 상이할 수 있\
+        습니다.<br/>
+<br/>
+claimType : CANCEL, RETURN, EXCHANGE 중 하나입니다.
+## ClaimType\
+        \ 에 따른 파라미터
+### 공통
+claim, orderNo, responsibleObjectType, sellerPaysClaimedDelivery,\
+        \ claimedOptions 파라미터는 필수로 입력해야 합니다.
+### CANCEL
+공통 파라미터 이외에 추가 파라미터는 없습니\
+        다.
+### RETURN
+returnWayType 파라미터가 필수로 입력되어야 합니다.
+### EXCHANGE
+exchangeOption\
+        \ 파라미터가 필수로 입력되어야 합니다.<br/>
+반품교환 (출고 후 교환) 인 경우, returnWayType 은 필수로 입력되어\
+        야 합니다.<br/>
+claimedOptions 는 1개만 입력되어야 합니다.
+
+---
+
+### 🟡 `PUT` `/claims/{claimNo}/already-delivery`
+
+**이미출고**
+
+> operationId: `put-claims-no-already-delivery`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `claimNo` | path | ✅ | `integer` | 클레임 번호^|1 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+옵션취소, 취소교환 신청된 클레임의 배송이 이미 출고된 경우 호출합니다.
+신청\
+        된 클레임을 철회하고, 배송정보를 저장하여 배송중 상태로 변경합니다.
+
+---
+
+### 🟡 `PUT` `/claims/{claimNo}/approve`
+
+**클레임 승인**
+
+> operationId: `put-claims-no-approve`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `claimNo` | path | ✅ | `string` | "" |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+클레임 신청을 승인하는 API 입니다.
+클레임 종류별로 이후 진행 단계가 상이\
+        하니, 아래 항목을 반드시 숙지해주세요.
+특히, 승인 즉시 환불이 되는 경우가 있으니 유의 바랍니다.
+
+ - 반품
+   - 배\
+        송안함 상품 : API 호출에 성공하는 즉시 클레임이 완료(반품이 완료)됩니다. 
+   - 그 외 상품 : API 호출에 성공하면\
+        , 클레임이 완료되지 않고 수거진행 상태가 됩니다.
+
+ - 옵션 취소
+   - API 호출에 성공하는 즉시 클레임이 완료(옵션이\
+        \ 취소)됩니다.
+
+ - 주문 취소
+   - API 호출에 성공하는 즉시 클레임이 완료(주문이 취소)됩니다.
+
+ - 옵션 취\
+        소 교환
+   - API 호출에 성공하는 즉시 클레임이 완료(옵션이 교환)됩니다.
+
+ - 반품 교환
+   - API 호출 성공\
+        \ 이후, 클레임이 완료되지 않고 수거 진행 상태가 됩니다.
+
+---
+
+### 🟡 `PUT` `/claims/{claimNo}/assign-return-invoice`
+
+**반품 송장번호 할당**
+
+> operationId: `put-claims-no-assign-return-invoice`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `claimNo` | path | ✅ | `integer` | 클레임 번호^|1 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+반품 송장번호를 할당하는 API 입니다.
+클레임이 반품, 반품교환인 경우만 사\
+        용 가능합니다.
+
+---
+
+### 🟡 `PUT` `/claims/{claimNo}/withdraw`
+
+**클레임 철회**
+
+> operationId: `put-claims-no-withdraw`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `claimNo` | path | ✅ | `string` | "" |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+클레임을 철회하는 API 입니다.
+
+---
+
+### 🟢 `GET` `/claims/{orderNo}/exchange-infos`
+
+**교환 전/후 정보 조회**
+
+> operationId: `get-claims-order-no-exchange-infos`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `orderNo` | path | ✅ | `string` | "" |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+교환 완료된 클레임의 전/후 옵션 정보를 반환합니다.
+
+ - 철회된 클레임은\
+        \ 조회되지 않습니다.
+ - 응답값 중, exchangedOrderCnt 는 `현재 상태` 기준입니다. (스냅샷 X)
+   - 교\
+        환출고 옵션 `전체`를 다시 클레임하는 경우는 exchangedOrderCnt 가 교환출고된 개수와 동일합니다. 
+   - 교환출고\
+        \ 옵션의 일부를 다시 클레임하여 옵션이 쪼개지는 경우, exchangeOrderCnt 가 최초 교환출고된 개수와 달라질 수 있습니다\
+        .
+
+---
+
+## OptionCancel — 부분취소
+
+### 🔵 `POST` `/option-cancels`
+
+**옵션 취소 신청하기**
+
+> operationId: `post-option-cancels`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+옵션 취소 신청 API입니다.
+
+---
+
+### 🔵 `POST` `/option-cancels/sold-out`
+
+**품절 취소처리하기**
+
+> operationId: `post-option-cancels-sold-out`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+선택한 주문옵션을 품절 취소하고 금액을 환불하는 API입니다.
+
+### 특이\
+        사항
+이벤트 처리 방식으로 주문을 취소처리하는 API입니다.
+요청 완료 후 실제로 품절 취소되는데 일정 시간이 소요될 수 있습니다\
+        .
+
+---
+
+### 🔵 `POST` `/option-cancels/sold-out/set-option`
+
+**세트옵션 품절취소처리하기**
+
+> operationId: `post-option-cancels-sold-out-set-option`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+선택한 주문옵션의 세트구성옵션을 품절 취소하고 금액을 환불하는 API입니다.
+\
+        \
+
+---
+
+## OrderCancel
+
+### 🔵 `POST` `/order-cancels`
+
+**주문 취소하기**
+
+> operationId: `post-order-cancels`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+
+---
+
+## ReturnExchange
+
+### 🔵 `POST` `/return-exchanges`
+
+**반품교환 신청**
+
+> operationId: `post-return-exchanges`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+
+---
+
+### 🟡 `PUT` `/return-exchanges/{no}/collect`
+
+**반품교환 수거완료**
+
+> operationId: `put-return-exhcnages-no-collect`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `"no"` | path | ✅ | `string` | "" |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+
+---
+
+### 🟡 `PUT` `/return-exchanges/{no}/confirm-deposit`
+
+**반품교환 추가결제 입금확인**
+
+> operationId: `put-return-exchanges-no-confirm-deposit`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `"no"` | path | ✅ | `string` | "" |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+추가 결제 내역을 입금 확인처리 합니다.
+
+---
+
+## Return — 반품
+
+### 🔵 `POST` `/returns`
+
+**반품신청하기**
+
+> operationId: `post-returns`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+반품 신청 API입니다.
+
+---
+
+### 🟡 `PUT` `/returns/{no}/collect`
+
+**반품수거 완료하기**
+
+> operationId: `put-returns-no-collect`
+
+**Parameters**
+
+| 이름 | 위치 | 필수 | 타입 | 설명 |
+|------|------|:----:|------|------|
+| `"no"` | path | ✅ | `integer` | 클레임 번호^|1 |
+| `systemKey` | header | ✅ | `string` | "\n 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n - 발급경로: 워크스페이스> 셀러\ |
+| `Authorization` | header | - | `string` | "\n \n 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n - 형식: Bearer {access_token}\ |
+| `mallKey` | header | - | `string` | " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후\ |
+| `Version` | header | ✅ | `string` | API 버전^|1.0 |
+
+## 부가설명 및 특이사항
+반품 수거 완료처리를 위한 API입니다.
+
+---
+

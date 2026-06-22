@@ -1,0 +1,1136 @@
+[
+  {
+    "method": "GET",
+    "path": "/areafees",
+    "summary": "지역별 추가배송비 설정 내역 조회하기",
+    "description": " ## 부가설명 및 특이사항\n 파트너의 지역별 추가배송비 설정 내역을 조회합니다.",
+    "tags": ["AreaFee"],
+    "parameters": [
+      {
+        "name": "page",
+        "in": "query",
+        "description": "시작 번호[페이징 처리] (1 이상)^|1",
+        "required": true,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "size",
+        "in": "query",
+        "description": "종료 번호[페이징 처리]^|30",
+        "required": true,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n Authorization을 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/areafees-82223564"
+            },
+            "examples": {
+              "get-areafees": {
+                "value": "{\"totalCount\":2,\"contents\":[{\"areaFeeNo\":1,\"name\":\"testArea\",\"countryCd\":\"KR\",\"details\":[{\"areaNo\":2,\"defaultArea\":false,\"address\":\"서울특별시 강동구 고덕로 333\",\"roadAddress\":\"서울특별시 강동구 고덕로 333\",\"jibunAddress\":\"서울특별시 강동구 고덕동 694\",\"state\":null,\"extraDeliveryAmt\":1500}],\"registerYmdt\":\"2020-01-01T00:00:00\",\"adminName\":\"홍길동\",\"currencyCode\":\"KRW\",\"areaCnt\":1,\"countryCdLabel\":\"대한민국\"},{\"areaFeeNo\":2,\"name\":\"testArea2\",\"countryCd\":\"KR\",\"details\":[{\"areaNo\":2,\"defaultArea\":false,\"address\":\"서울특별시 강동구 고덕로 333\",\"roadAddress\":\"서울특별시 강동구 고덕로 333\",\"jibunAddress\":\"서울특별시 강동구 고덕동 694\",\"state\":null,\"extraDeliveryAmt\":1500}],\"registerYmdt\":\"2020-01-01T00:00:00\",\"adminName\":\"홍길동\",\"currencyCode\":\"KRW\",\"areaCnt\":1,\"countryCdLabel\":\"대한민국\"}]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/areafees",
+    "summary": "지역별 추가배송비 설정 생성하기",
+    "description": " ## 부가설명 및 특이사항\n 파트너의 지역별 추가배송비 설정을 생성합니다.\n \n ### areaNo\n \n * 198,인천광역시 강화군 교동면\n * 199,인천광역시 강화군 삼산면\n * 200,인천광역시 강화군 서도면\n * 201,인천광역시 옹진군 대청면\n * 202,인천광역시 옹진군 덕적면\n * 203,인천광역시 옹진군 백령면\n * 204,인천광역시 옹진군 북도면\n * 205,인천광역시 옹진군 연평면\n * 206,인천광역시 옹진군 자월면\n * 207,인천광역시 중구 무의동\n * 208,전라북도 군산시 옥도면\n * 209,전라북도 부안군 위도면\n * 210,부산광역시 강서구 눌차동\n * 211,부산광역시 강서구 대항동\n * 212,부산광역시 강서구 동선동\n * 213,부산광역시 강서구 성북동\n * 214,부산광역시 강서구 천성동\n * 215,경상남도 거제시 장목면 시방리\n * 216,경상남도 거제시 둔덕면 술역리\n * 217,경상남도 사천시 마도동\n * 218,경상남도 사천시 신수동\n * 219,경상남도 통영시 사량면\n * 220,경상남도 통영시 욕지면\n * 221,경상남도 통영시 용남면 어의리\n * 222,경상남도 통영시 용남면 지도리\n * 223,경상남도 통영시 한산면\n * 224,경상남도 통영시 산양읍 저림리\n * 225,경상남도 통영시 산양읍 추도리\n * 226,경상남도 통영시 산양읍 연곡리\n * 227,경상남도 통영시 산양읍 곤리리\n * 228,제주특별자치도 제주시\n * 229,제주특별자치도 제주시 우도면\n * 230,제주특별자치도 제주시 추자면\n * 231,제주특별자치도 서귀포시\n * 232,경상북도 울릉군 북면\n * 233,경상북도 울릉군 서면\n * 234,경상북도 울릉군 울릉읍\n * 235,경상북도 상주시 화북면\n * 236,경상북도 상주시 외서면 대전리\n * 237,충청남도 당진시 석문면 난지도리\n * 238,충청남도 당진시 신평면 매산리\n * 239,충청남도 보령시 오천면 녹도리\n * 240,충청남도 보령시 오천면 삽시도리\n * 241,충청남도 보령시 오천면 외연도리\n * 242,충청남도 보령시 오천면 원산도리\n * 243,충청남도 보령시 오천면 효자도리\n * 244,충청남도 서산시 지곡면 중왕리\n * 245,충청남도 태안군 근흥면 가의도리\n * 246,전라남도 고흥군 봉래면 사양리\n * 247,전라남도 고흥군 도양읍 시산리\n * 248,전라남도 고흥군 도양읍 봉암리 상화도\n * 249,전라남도 고흥군 도양읍 봉암리 하화도\n * 250,전라남도 고흥군 도양읍 득량리\n * 251,전라남도 고흥군 도화면 지죽리\n * 252,전라남도 목포시 달동\n * 253,전라남도 목포시 율도동\n * 254,전라남도 신안군 도초면\n * 255,전라남도 신안군 비금면\n * 256,전라남도 신안군 신의면\n * 257,전라남도 신안군 안좌면\n * 258,전라남도 신안군 암태면\n * 259,전라남도 신안군 압해읍 가란리\n * 260,전라남도 신안군 압해읍 고이리\n * 261,전라남도 신안군 압해읍 매화리\n * 262,전라남도 신안군 임자면\n * 263,전라남도 신안군 자은면\n * 264,전라남도 신안군 지도읍 어의리\n * 265,전라남도 신안군 지도읍 선도리\n * 266,전라남도 신안군 장산면\n * 267,전라남도 신안군 증도면 병풍리\n * 268,전라남도 신안군 팔금면\n * 269,전라남도 신안군 하의면\n * 270,전라남도 신안군 흑산면\n * 271,전라남도 여수시 경호동\n * 272,전라남도 여수시 남면\n * 273,전라남도 여수시 묘도동\n * 274,전라남도 여수시 삼산면\n * 275,전라남도 여수시 화정면 개도리\n * 276,전라남도 여수시 화정면 낭도리\n * 277,전라남도 여수시 화정면 상화리\n * 278,전라남도 여수시 화정면 여자리\n * 279,전라남도 여수시 화정면 월호리\n * 280,전라남도 여수시 화정면 적금리\n * 281,전라남도 여수시 화정면 제도리\n * 282,전라남도 여수시 화정면 조발리\n * 283,전라남도 여수시 화정면 하화리\n * 284,전라남도 영광군 낙월면\n * 285,전라남도 완도군 군외면 당인리\n * 286,전라남도 완도군 군외면 불목리\n * 287,전라남도 완도군 군외면 영풍리\n * 288,전라남도 완도군 군외면 황진리\n * 289,전라남도 완도군 금당면\n * 290,전라남도 완도군 금일읍\n * 291,전라남도 완도군 약산면\n * 292,전라남도 완도군 고금면\n * 293,전라남도 완도군 노화읍\n * 294,전라남도 완도군 보길면\n * 295,전라남도 완도군 생일면\n * 296,전라남도 완도군 소안면\n * 297,전라남도 완도군 청산면\n * 298,전라남도 진도군 조도면\n * 299,전라남도 진도군 의신면 모도리\n * 300,전라남도 보성군 벌교읍 장도리\n * 301,경기도 안산시 단원구 풍도동\n",
+    "tags": ["AreaFee"],
+    "parameters": [
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n Authorization을 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/areafees20396953"
+          },
+          "examples": {
+            "post-areafees": {
+              "value": "{\"name\":\"testArea\",\"countryCd\":\"KR\",\"details\":[{\"areaNo\":234,\"extraDeliveryAmt\":1000},{\"areaNo\":228,\"extraDeliveryAmt\":2500}],\"currencyCode\":\"KRW\"}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "201": {
+        "description": "201",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/areafees-areaFeeNo-642934700"
+            },
+            "examples": {
+              "post-areafees": {
+                "value": "{\"areaFeeNo\":1,\"name\":\"testArea\",\"countryCd\":\"KR\",\"details\":[{\"areaNo\":1,\"defaultArea\":null,\"address\":null,\"roadAddress\":\"\",\"jibunAddress\":\"\",\"state\":null,\"extraDeliveryAmt\":1500},{\"areaNo\":2,\"defaultArea\":false,\"address\":\"서울특별시 강동구 고덕로 333\",\"roadAddress\":\"서울특별시 강동구 고덕로 333\",\"jibunAddress\":\"서울특별시 강동구 고덕동 694\",\"state\":\"임시주\",\"extraDeliveryAmt\":1500}],\"registerYmdt\":\"2020-01-01T00:00:00\",\"currencyCode\":\"KRW\",\"areaCnt\":2,\"countryCdLabel\":\"대한민국\"}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/areafees/{areaFeeNo}",
+    "summary": "지역별 추가배송비 설정 조회하기",
+    "description": " ## 부가설명 및 특이사항\n 파트너의 지역별 추가배송비 설정을 조회합니다.",
+    "tags": ["AreaFee"],
+    "parameters": [
+      {
+        "name": "areaFeeNo",
+        "in": "path",
+        "description": "지역별 추가배송비 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n Authorization을 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/areafees-areaFeeNo-642934700"
+            },
+            "examples": {
+              "get-areafees-areaFeeNo": {
+                "value": "{\"areaFeeNo\":1,\"name\":\"testArea\",\"countryCd\":\"KR\",\"details\":[{\"areaNo\":1,\"defaultArea\":null,\"address\":null,\"roadAddress\":\"\",\"jibunAddress\":\"\",\"state\":null,\"extraDeliveryAmt\":1500},{\"areaNo\":2,\"defaultArea\":false,\"address\":\"서울특별시 강동구 고덕로 333\",\"roadAddress\":\"서울특별시 강동구 고덕로 333\",\"jibunAddress\":\"서울특별시 강동구 고덕동 694\",\"state\":\"임시주\",\"extraDeliveryAmt\":1500}],\"registerYmdt\":\"2020-01-01T00:00:00\",\"currencyCode\":\"KRW\",\"areaCnt\":2,\"countryCdLabel\":\"대한민국\"}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/areafees/{areaFeeNo}",
+    "summary": "지역별 추가배송비 설정 수정하기",
+    "description": " ## 부가설명 및 특이사항\n 파트너의 지역별 추가배송비 설정을 수정합니다.",
+    "tags": ["AreaFee"],
+    "parameters": [
+      {
+        "name": "areaFeeNo",
+        "in": "path",
+        "description": "지역별 추가배송비 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n Authorization을 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/areafees20396953"
+          },
+          "examples": {
+            "put-areafees-areaFeeNo": {
+              "value": "{\"name\":\"testArea\",\"countryCd\":\"KR\",\"details\":[{\"areaNo\":234,\"extraDeliveryAmt\":1000},{\"areaNo\":228,\"extraDeliveryAmt\":2500}],\"currencyCode\":\"KRW\"}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/areas",
+    "summary": "배송비 설정을 위한 지역 조회",
+    "description": " ## 부가설명 및 특이사항\n 배송비 설정을 위한 지역을 조회합니다.",
+    "tags": ["AreaFee"],
+    "parameters": [
+      {
+        "name": "countryCd",
+        "in": "query",
+        "description": "국가 코드^|KR",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n Authorization을 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/areas864143670"
+            },
+            "examples": {
+              "get-areas": {
+                "value": "[{\"areaNo\":1,\"address\":\"address\",\"roadAddress\":\"road-address\",\"jibunAddress\":\"jibun-address\",\"zipCd\":\"12345\",\"countryCd\":\"KR\",\"state\":null,\"city\":null,\"isDefaultArea\":true}]"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/deliveries",
+    "summary": "배송비 템플릿 조회하기",
+    "description": " ## 부가설명 및 특이사항\n 파트너사의 배송비 템플릿뿐만 아니라 쇼핑몰 배송 템플릿도 조회합니다.\n \n shippingAreaType : MALL_SHIPPING_AREA (쇼핑몰 배송), PARTNER_SHIPPING_AREA (파트너사 배송)",
+    "tags": ["Delivery"],
+    "parameters": [
+      {
+        "name": "shippingAreaType",
+        "in": "query",
+        "description": "배송 구분^|PARTNER_SHIPPING_AREA",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n Authorization을 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/deliveries-323369351"
+            },
+            "examples": {
+              "get-deliveries": {
+                "value": "[{\"shippingAreaType\":\"PARTNER_SHIPPING_AREA\",\"deliveryTemplateNo\":1,\"templateName\":\"배송비 템플릿\",\"releaseWarehouseAddressStr\":\"출고지 주소\"}]"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/deliveries/template-groups",
+    "summary": "배송비 템플릿 그룹 내역 조회하기",
+    "description": " ## 부가설명 및 특이사항\n 파트너사의 배송비 템플릿 그룹과 쇼핑몰 배송 템플릿 그룹도 함께 조회합니다.\n \n- shippingAreaType : MALL_SHIPPING_AREA (쇼핑몰 배송), PARTNER_SHIPPING_AREA (파트너사 배송)",
+    "tags": ["Delivery"],
+    "parameters": [
+      {
+        "name": "shippingAreaType",
+        "in": "query",
+        "description": "배송 구분^|PARTNER_SHIPPING_AREA",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n Authorization을 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/deliveries-template-groups1699109495"
+            },
+            "examples": {
+              "get-deliveries-template-groups": {
+                "value": "[{\"shippingAreaType\":\"PARTNER_SHIPPING_AREA\",\"templateGroupNo\":0,\"name\":\"기본그룹\",\"displayNo\":1,\"groupDeliveryAmtType\":\"MAXIMUM_SELECTED\",\"prepaid\":true,\"areaFee\":null,\"templates\":[],\"currencyCode\":\"KRW\"}]"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/deliveries/template-groups",
+    "summary": "배송비 템플릿 그룹 생성하기",
+    "description": " ## 부가설명 및 특이사항\n 파트너의 배송비 템플릿 그룹을 생성합니다.",
+    "tags": ["Delivery"],
+    "parameters": [
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n Authorization을 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/deliveries-template-groups1608125329"
+          },
+          "examples": {
+            "post-deliveries-template-groups": {
+              "value": "{\"name\":\"테스트 그룹\",\"groupDeliveryAmtType\":\"MINIMUM_SELECTED\",\"prepaid\":true,\"usesAreaFee\":false,\"areaFeeNo\":null,\"templates\":[{\"name\":\"템플릿1\",\"deliveryType\":\"PARCEL_DELIVERY\",\"deliveryCompanyType\":\"CJ\",\"deliveryFee\":{\"deliveryConditionType\":\"CONDITIONAL\",\"deliveryAmt\":2500,\"returnDeliveryAmt\":2500,\"criteria\":10000,\"perOrderCnt\":2,\"remoteAreaFeeConditionCheck\":false,\"deliveryFeeRanges\":[{\"aboveOrEqual\":10000,\"below\":20000,\"deliveryAmt\":5000}],\"deliveryConditionTypeLabel\":\"조건부 무료\"},\"releaseWarehouseNo\":1,\"returnWarehouseNo\":1,\"default\":false}],\"undeliverableCountries\":[],\"currencyCode\":\"KRW\"}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "201": {
+        "description": "201",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/deliveries-template-groups1180750672"
+            },
+            "examples": {
+              "post-deliveries-template-groups": {
+                "value": "{\"templateGroupNo\":152,\"name\":\"테스트그룹\",\"displayNo\":1,\"groupDeliveryAmtType\":\"MINIMUM_SELECTED\",\"prepaid\":true,\"areaFee\":{\"areaFeeNo\":1,\"name\":\"testArea\",\"countryCd\":\"KR\",\"details\":[{\"areaNo\":2,\"defaultArea\":false,\"address\":\"서울특별시 강동구 고덕로 333\",\"roadAddress\":\"서울특별시 강동구 고덕로 333\",\"jibunAddress\":\"서울특별시 강동구 고덕동 694\",\"state\":null,\"extraDeliveryAmt\":1500}],\"registerYmdt\":\"2020-01-01T00:00:00\",\"currencyCode\":\"KRW\",\"areaCnt\":1,\"countryCdLabel\":\"대한민국\"},\"templates\":[{\"templateNo\":1,\"name\":\"기본그룹\",\"releaseWarehouse\":{\"warehouseNo\":1,\"name\":\"한강뷰 창고\",\"substitutionText\":null,\"address\":{\"address\":\"서울시 서초구 신반포로15길 19\",\"detailAddress\":\"107동 9999호\",\"zipCd\":\"106503\",\"overseaAddress1\":\"1000 E. DEL AMO BLVD\",\"overseaAddress2\":\"S1234\",\"overseaCity\":\"Carson\",\"overseaRegion\":\"CA\",\"countryCd\":\"KR\",\"jibunAddress\":\"서울특별시 서초구 반포동 2-12\",\"addressStr\":\"서울시 서초구 신반포로15길 19 107동 9999호\",\"countryCdLabel\":\"대한민국\"},\"defaultReleaseWarehouse\":false,\"defaultReturnWarehouse\":false,\"registerYmdt\":null,\"summary\":\"한강뷰 창고 | 서울시 서초구 신반포로15길 19 107동 9999호\"},\"returnWarehouse\":{\"warehouseNo\":1,\"name\":\"한강뷰 창고\",\"substitutionText\":null,\"address\":{\"address\":\"서울시 서초구 신반포로15길 19\",\"detailAddress\":\"107동 9999호\",\"zipCd\":\"106503\",\"overseaAddress1\":\"1000 E. DEL AMO BLVD\",\"overseaAddress2\":\"S1234\",\"overseaCity\":\"Carson\",\"overseaRegion\":\"CA\",\"countryCd\":\"KR\",\"jibunAddress\":\"서울특별시 서초구 반포동 2-12\",\"addressStr\":\"서울시 서초구 신반포로15길 19 107동 9999호\",\"countryCdLabel\":\"대한민국\"},\"defaultReleaseWarehouse\":false,\"defaultReturnWarehouse\":false,\"registerYmdt\":null,\"summary\":\"한강뷰 창고 | 서울시 서초구 신반포로15길 19 107동 9999호\"},\"deliveryType\":\"PARCEL_DELIVERY\",\"deliveryCompanyType\":\"CJ\",\"deliveryFee\":{\"deliveryConditionType\":\"FREE\",\"deliveryAmt\":2500,\"returnDeliveryAmt\":2500,\"criteria\":10000,\"perOrderCnt\":2,\"remoteAreaFeeConditionCheck\":false,\"deliveryFeeRanges\":[{\"aboveOrEqual\":10000,\"below\":20000,\"deliveryAmt\":5000}],\"deliveryConditionTypeLabel\":\"무료\"},\"default\":false,\"partnerNo\":1,\"groupName\":\"기본그룹\",\"deliveryTypeLabel\":\"택배/등기/소포\"}],\"currencyCode\":\"KRW\",\"summary\":\"묶음배송비 산출방식: 최소부과, 결제방식: 선결제, 지역별 추가 배송비: 사용함\"}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/deliveries/template-groups/{templateGroupNo}",
+    "summary": "배송비 템플릿 그룹 조회하기",
+    "description": " ## 부가설명 및 특이사항\n 파트너의 배송비 템플릿 그룹을 조회합니다.",
+    "tags": ["Delivery"],
+    "parameters": [
+      {
+        "name": "templateGroupNo",
+        "in": "path",
+        "description": "배송비 템플릿 그룹 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n Authorization을 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/deliveries-template-groups1180750672"
+            },
+            "examples": {
+              "get-deliveries-template-groups-template-no": {
+                "value": "{\"templateGroupNo\":152,\"name\":\"테스트그룹\",\"displayNo\":1,\"groupDeliveryAmtType\":\"MINIMUM_SELECTED\",\"prepaid\":true,\"areaFee\":{\"areaFeeNo\":1,\"name\":\"testArea\",\"countryCd\":\"KR\",\"details\":[{\"areaNo\":2,\"defaultArea\":false,\"address\":\"서울특별시 강동구 고덕로 333\",\"roadAddress\":\"서울특별시 강동구 고덕로 333\",\"jibunAddress\":\"서울특별시 강동구 고덕동 694\",\"state\":null,\"extraDeliveryAmt\":1500}],\"registerYmdt\":\"2020-01-01T00:00:00\",\"currencyCode\":\"KRW\",\"areaCnt\":1,\"countryCdLabel\":\"대한민국\"},\"templates\":[{\"templateNo\":1,\"name\":\"기본그룹\",\"releaseWarehouse\":{\"warehouseNo\":1,\"name\":\"한강뷰 창고\",\"substitutionText\":null,\"address\":{\"address\":\"서울시 서초구 신반포로15길 19\",\"detailAddress\":\"107동 9999호\",\"zipCd\":\"106503\",\"overseaAddress1\":\"1000 E. DEL AMO BLVD\",\"overseaAddress2\":\"S1234\",\"overseaCity\":\"Carson\",\"overseaRegion\":\"CA\",\"countryCd\":\"KR\",\"jibunAddress\":\"서울특별시 서초구 반포동 2-12\",\"addressStr\":\"서울시 서초구 신반포로15길 19 107동 9999호\",\"countryCdLabel\":\"대한민국\"},\"defaultReleaseWarehouse\":false,\"defaultReturnWarehouse\":false,\"registerYmdt\":null,\"summary\":\"한강뷰 창고 | 서울시 서초구 신반포로15길 19 107동 9999호\"},\"returnWarehouse\":{\"warehouseNo\":1,\"name\":\"한강뷰 창고\",\"substitutionText\":null,\"address\":{\"address\":\"서울시 서초구 신반포로15길 19\",\"detailAddress\":\"107동 9999호\",\"zipCd\":\"106503\",\"overseaAddress1\":\"1000 E. DEL AMO BLVD\",\"overseaAddress2\":\"S1234\",\"overseaCity\":\"Carson\",\"overseaRegion\":\"CA\",\"countryCd\":\"KR\",\"jibunAddress\":\"서울특별시 서초구 반포동 2-12\",\"addressStr\":\"서울시 서초구 신반포로15길 19 107동 9999호\",\"countryCdLabel\":\"대한민국\"},\"defaultReleaseWarehouse\":false,\"defaultReturnWarehouse\":false,\"registerYmdt\":null,\"summary\":\"한강뷰 창고 | 서울시 서초구 신반포로15길 19 107동 9999호\"},\"deliveryType\":\"PARCEL_DELIVERY\",\"deliveryCompanyType\":\"CJ\",\"deliveryFee\":{\"deliveryConditionType\":\"FREE\",\"deliveryAmt\":2500,\"returnDeliveryAmt\":2500,\"criteria\":10000,\"perOrderCnt\":2,\"remoteAreaFeeConditionCheck\":false,\"deliveryFeeRanges\":[{\"aboveOrEqual\":10000,\"below\":20000,\"deliveryAmt\":5000}],\"deliveryConditionTypeLabel\":\"무료\"},\"default\":false,\"partnerNo\":1,\"groupName\":\"기본그룹\",\"deliveryTypeLabel\":\"택배/등기/소포\"}],\"currencyCode\":\"KRW\",\"summary\":\"묶음배송비 산출방식: 최소부과, 결제방식: 선결제, 지역별 추가 배송비: 사용함\"}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/deliveries/template-groups/{templateGroupNo}",
+    "summary": "배송비 템플릿 그룹 수정하기",
+    "description": " ## 부가설명 및 특이사항\n 파트너의 배송비 템플릿 그룹을 수정합니다.",
+    "tags": ["Delivery"],
+    "parameters": [
+      {
+        "name": "templateGroupNo",
+        "in": "path",
+        "description": "배송비 템플릿 그룹 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n Authorization을 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/deliveries-template-groups-templateGroupNo1392913703"
+          },
+          "examples": {
+            "put-deliveries-template-groups": {
+              "value": "{\"name\":\"그룹 수정\",\"groupDeliveryAmtType\":\"MINIMUM_SELECTED\",\"prepaid\":false,\"usesAreaFee\":false,\"areaFeeNo\":null,\"deleteTemplateNos\":[1,2,3],\"addTemplates\":[{\"name\":\"템플릿1\",\"deliveryType\":\"PARCEL_DELIVERY\",\"deliveryCompanyType\":\"CJ\",\"deliveryFee\":{\"deliveryConditionType\":\"CONDITIONAL\",\"deliveryAmt\":2500,\"returnDeliveryAmt\":2500,\"criteria\":10000,\"perOrderCnt\":2,\"remoteAreaFeeConditionCheck\":false,\"deliveryFeeRanges\":[{\"aboveOrEqual\":10000,\"below\":20000,\"deliveryAmt\":5000}],\"deliveryConditionTypeLabel\":\"조건부 무료\"},\"releaseWarehouseNo\":1,\"returnWarehouseNo\":1,\"default\":false}],\"modifyTemplates\":[{\"templateNo\":1,\"name\":\"템플릿1(수정)\",\"deliveryType\":\"DIRECT_DELIVERY\",\"deliveryCompanyType\":\"HANJIN\",\"deliveryFee\":{\"deliveryConditionType\":\"CONDITIONAL\",\"deliveryAmt\":2500,\"returnDeliveryAmt\":2500,\"criteria\":10000,\"perOrderCnt\":2,\"remoteAreaFeeConditionCheck\":false,\"deliveryFeeRanges\":[{\"aboveOrEqual\":10000,\"below\":20000,\"deliveryAmt\":5000}],\"deliveryConditionTypeLabel\":\"조건부 무료\"},\"releaseWarehouseNo\":1,\"returnWarehouseNo\":1,\"default\":false}],\"undeliverableCountries\":[]}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/deliveries/templates/{templateNo}",
+    "summary": "배송비 템플릿 상세조회하기",
+    "description": " ## 부가설명 및 특이사항\n 배송비 템플릿 상세조회 API입니다.\n ",
+    "tags": ["Delivery"],
+    "parameters": [
+      {
+        "name": "templateNo",
+        "in": "path",
+        "description": "배송 템플릿 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n Authorization을 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/deliveries-templates-templateNo-820869304"
+            },
+            "examples": {
+              "get-deliveries-templates-template-no": {
+                "value": "{\"templateNo\":1,\"name\":\"\",\"releaseWarehouse\":null,\"returnWarehouse\":null,\"deliveryType\":\"DIRECT_DELIVERY\",\"deliveryCompanyType\":\"CJ\",\"deliveryFee\":{\"deliveryConditionType\":\"CONDITIONAL\",\"deliveryAmt\":0,\"returnDeliveryAmt\":0,\"criteria\":0,\"perOrderCnt\":1,\"remoteAreaFeeConditionCheck\":false,\"deliveryFeeRanges\":null,\"deliveryConditionTypeLabel\":\"조건부 무료\"},\"default\":true,\"partnerNo\":1,\"groupName\":\"\"}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/warehouses",
+    "summary": "입출고 주소 내역 조회하기",
+    "description": " ## 부가설명 및 특이사항\n 파트너의 입출고 주소 내역을 조회합니다.",
+    "tags": ["Warehouse"],
+    "parameters": [
+      {
+        "name": "page",
+        "in": "query",
+        "description": "시작 번호[페이징 처리] (1 이상)^|1",
+        "required": true,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "size",
+        "in": "query",
+        "description": "종료 번호[페이징 처리]^|30",
+        "required": true,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n Authorization을 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/warehouses-445768110"
+            },
+            "examples": {
+              "get-warehouses": {
+                "value": "{\"totalCount\":2,\"contents\":[{\"warehouseNo\":1,\"name\":\"한강뷰 창고\",\"substitutionText\":\"우체국 택배로 빠른시간에 보내드립니다.\",\"address\":{\"address\":\"서울시 서초구 신반포로15길 19\",\"detailAddress\":\"107동 9999호\",\"zipCd\":\"106503\",\"overseaAddress1\":\"1000 E. DEL AMO BLVD\",\"overseaAddress2\":\"S1234\",\"overseaCity\":\"Carson\",\"overseaRegion\":\"CA\",\"countryCd\":\"KR\",\"jibunAddress\":\"서울특별시 서초구 반포동 2-12\",\"addressStr\":\"서울시 서초구 신반포로15길 19 107동 9999호\",\"countryCdLabel\":\"대한민국\"},\"defaultReleaseWarehouse\":false,\"defaultReturnWarehouse\":false,\"registerYmdt\":\"2020-01-01T00:00:00\",\"summary\":\"한강뷰 창고 | 서울시 서초구 신반포로15길 19 107동 9999호\"},{\"warehouseNo\":2,\"name\":\"testWarehouse2\",\"substitutionText\":\"우체국 택배로 빠른시간에 보내드립니다.\",\"address\":{\"address\":\"서울시 서초구 신반포로15길 19\",\"detailAddress\":\"107동 9999호\",\"zipCd\":\"106503\",\"overseaAddress1\":\"1000 E. DEL AMO BLVD\",\"overseaAddress2\":\"S1234\",\"overseaCity\":\"Carson\",\"overseaRegion\":\"CA\",\"countryCd\":\"KR\",\"jibunAddress\":\"서울특별시 서초구 반포동 2-12\",\"addressStr\":\"서울시 서초구 신반포로15길 19 107동 9999호\",\"countryCdLabel\":\"대한민국\"},\"defaultReleaseWarehouse\":false,\"defaultReturnWarehouse\":false,\"registerYmdt\":\"2020-01-01T00:00:00\",\"summary\":\"testWarehouse2 | 서울시 서초구 신반포로15길 19 107동 9999호\"}]}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/warehouses",
+    "summary": "입출고 주소 생성하기",
+    "description": " ## 부가설명 및 특이사항\n 파트너의 입출고 주소를 생성합니다.",
+    "tags": ["Warehouse"],
+    "parameters": [
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n Authorization을 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/warehouses-605800327"
+          },
+          "examples": {
+            "post-warehouses": {
+              "value": "{\"name\":\"한강뷰 창고\",\"usesSubstitutionText\":true,\"substitutionText\":\"우체국 택배로 빠른시간에 보내드립니다.\",\"address\":{\"address\":\"서울시 서초구 신반포로15길 19\",\"detailAddress\":\"107동 9999호\",\"zipCd\":\"106503\",\"overseaAddress1\":\"1000 E. DEL AMO BLVD\",\"overseaAddress2\":\"S1234\",\"overseaCity\":\"Carson\",\"overseaRegion\":\"CA\",\"countryCd\":\"KR\",\"jibunAddress\":\"서울특별시 서초구 반포동 2-12\",\"addressStr\":\"서울시 서초구 신반포로15길 19 107동 9999호\",\"countryCdLabel\":\"대한민국\"},\"defaultReleaseWarehouse\":false,\"defaultReturnWarehouse\":false}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "201": {
+        "description": "201",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/warehouses530577803"
+            },
+            "examples": {
+              "post-warehouses": {
+                "value": "{\"warehouseNo\":1,\"name\":\"한강뷰 창고\",\"substitutionText\":\"우체국 택배로 빠른시간에 보내드립니다.\",\"address\":{\"address\":\"서울시 서초구 신반포로15길 19\",\"detailAddress\":\"107동 9999호\",\"zipCd\":\"106503\",\"overseaAddress1\":\"1000 E. DEL AMO BLVD\",\"overseaAddress2\":\"S1234\",\"overseaCity\":\"Carson\",\"overseaRegion\":\"CA\",\"countryCd\":\"KR\",\"jibunAddress\":\"서울특별시 서초구 반포동 2-12\",\"addressStr\":\"서울시 서초구 신반포로15길 19 107동 9999호\",\"countryCdLabel\":\"대한민국\"},\"defaultReleaseWarehouse\":false,\"defaultReturnWarehouse\":false,\"registerYmdt\":\"2020-01-01T00:00:00\",\"summary\":\"한강뷰 창고 | 서울시 서초구 신반포로15길 19 107동 9999호\"}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/warehouses/{warehouseNo}",
+    "summary": "입출고 주소 조회하기",
+    "description": " ## 부가설명 및 특이사항\n 파트너의 입출고 주소를 조회합니다.",
+    "tags": ["Warehouse"],
+    "parameters": [
+      {
+        "name": "warehouseNo",
+        "in": "path",
+        "description": "입출고 주소 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n Authorization을 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "200",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/warehouses530577803"
+            },
+            "examples": {
+              "get-warehouses-warehouseNo": {
+                "value": "{\"warehouseNo\":1,\"name\":\"한강뷰 창고\",\"substitutionText\":\"우체국 택배로 빠른시간에 보내드립니다.\",\"address\":{\"address\":\"서울시 서초구 신반포로15길 19\",\"detailAddress\":\"107동 9999호\",\"zipCd\":\"106503\",\"overseaAddress1\":\"1000 E. DEL AMO BLVD\",\"overseaAddress2\":\"S1234\",\"overseaCity\":\"Carson\",\"overseaRegion\":\"CA\",\"countryCd\":\"KR\",\"jibunAddress\":\"서울특별시 서초구 반포동 2-12\",\"addressStr\":\"서울시 서초구 신반포로15길 19 107동 9999호\",\"countryCdLabel\":\"대한민국\"},\"defaultReleaseWarehouse\":false,\"defaultReturnWarehouse\":false,\"registerYmdt\":\"2020-01-01T00:00:00\",\"summary\":\"한강뷰 창고 | 서울시 서초구 신반포로15길 19 107동 9999호\"}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/warehouses/{warehouseNo}",
+    "summary": "입출고 주소 수정하기",
+    "description": " ## 부가설명 및 특이사항\n 파트너의 입출고 주소를 수정합니다.",
+    "tags": ["Warehouse"],
+    "parameters": [
+      {
+        "name": "warehouseNo",
+        "in": "path",
+        "description": "입출고 주소 번호^|1",
+        "required": true,
+        "schema": {
+          "type": "number"
+        }
+      },
+      {
+        "name": "systemKey",
+        "in": "header",
+        "description": " 시스템 키 (외부시스템 연동을 위한 server API 호출 키)\n \n- 발급경로: 워크스페이스> 셀러어드민> 신규 앱(App) 등록 시 수정페이지에서 확인가능 \n- 앱 기준으로 systemKey 발급됨\n^|test-system-key",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "SABANGNET"
+      },
+      {
+        "name": "Authorization",
+        "in": "header",
+        "description": " 인증토큰 (Bearer 발급받은 엑세스 토큰)\n \n- 형식: Bearer {access_token} (중간에 띄어쓰기 필수입니다.)\n- 발급경로: POST /auth/token 또는 POST /auth/token/long-lived 의 응답 값으로 내려온 access_token\n^|Bearer ABCDERAdjflaskjdfosiaetlkfs",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "mallKey",
+        "in": "header",
+        "description": " 외부 API 연동키 (외부시스템연동 코드)\n \n ※ server API 호출하는 기존 방식으로, 향후 fade out될 수 있습니다.<br />\n Authorization을을 입력을 통한 serverAPI 호출방식 권장드립니다.<br />\n Authorization을 입력했을 경우, mallKey는 null로 보내시길 바랍니다.)<br />\n ^|각 어드민에서 복사된 값",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      {
+        "name": "Version",
+        "in": "header",
+        "description": "API 버전^|1.0",
+        "required": true,
+        "schema": {
+          "type": "string"
+        },
+        "example": "1.0"
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "$ref": "#/components/schemas/warehouses-605800327"
+          },
+          "examples": {
+            "put-warehouses-warehouseNo": {
+              "value": "{\"name\":\"한강뷰 창고\",\"usesSubstitutionText\":true,\"substitutionText\":\"우체국 택배로 빠른시간에 보내드립니다.\",\"address\":{\"address\":\"서울시 서초구 신반포로15길 19\",\"detailAddress\":\"107동 9999호\",\"zipCd\":\"106503\",\"overseaAddress1\":\"1000 E. DEL AMO BLVD\",\"overseaAddress2\":\"S1234\",\"overseaCity\":\"Carson\",\"overseaRegion\":\"CA\",\"countryCd\":\"KR\",\"jibunAddress\":\"서울특별시 서초구 반포동 2-12\",\"addressStr\":\"서울시 서초구 신반포로15길 19 107동 9999호\",\"countryCdLabel\":\"대한민국\"},\"defaultReleaseWarehouse\":false,\"defaultReturnWarehouse\":false}"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "204": {
+        "description": "204"
+      }
+    }
+  }
+]

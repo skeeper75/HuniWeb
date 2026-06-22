@@ -1,8 +1,10 @@
 ---
 name: huni-widget-orchestrator
 description: >
-  후니프린팅 인쇄 자동견적 위젯 구현 하네스 오케스트레이터. RedPrinting 위젯 역공학 보강(widget_monitor 라이브 테스트베드 활용) → 동작 구조 분석 + 국내외 베스트프랙티스 리서치 → 위젯 개발 요소 상세 명세 → React-in-Shadow-DOM 위젯 구현 → 경계면 교차 QA → 후니 시각재현 정합 까지 7인 에이전트(reverse-engineer/runtime-analyst/researcher/architect/builder/qa/design-fidelity) 파이프라인으로 수행한다.
-  '후니 위젯 구현', '인쇄 자동견적 위젯', '위젯 하네스 실행', 'huni-widget', '역공학 보강', '위젯 동작 분석', '위젯 명세 작성', '위젯 빌드', '위젯 QA', '위젯 다시 구현', '위젯 하네스 재실행', '위젯 업데이트', '특정 단계만 재실행', '상품 확대', '신규 상품 추가', '캘린더/스티커/굿즈 확대', '확대 스테이지', '라이브 캡처 선행', '시각재현', '시각 정합', '디자인 정합', 'Figma 시각재현', '후니 스킨 입히기', 'DESIGN.md 정합', '스크린샷 diff', '코드 정합', '구조 정합', '역공학 코드 검증', '전 상품 정합', '팀으로 재검증', '코드 레벨 정합', '독립 재검증', '보정 웨이브', '갭 지도' 요청 시 반드시 사용. 단순 질문은 직접 응답.
+  후니프린팅 인쇄 자동견적 위젯 구현 하네스 오케스트레이터. RedPrinting 위젯 역공학 보강(widget_monitor 테스트베드)
+  →동작 분석+베스트프랙티스 리서치→상세 명세→React-in-Shadow-DOM 구현→경계면 교차 QA→후니 시각재현 정합까지
+  7인 에이전트(reverse-engineer/runtime-analyst/researcher/architect/builder/qa/design-fidelity) 파이프라인.
+  트리거: 후니 위젯 구현, 인쇄 자동견적 위젯, huni-widget, 역공학 보강, 위젯 동작 분석, 위젯 명세, 위젯 빌드, 위젯 QA, 시각재현/디자인 정합, 상품 확대, 위젯 하네스 재실행, 특정 단계만 재실행. 단순 질문은 직접 응답.
 license: Apache-2.0
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash, Agent, AskUserQuestion, TodoWrite
 metadata:

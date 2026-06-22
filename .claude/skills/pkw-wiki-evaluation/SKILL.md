@@ -1,6 +1,11 @@
 ---
 name: pkw-wiki-evaluation
-description: 후니프린팅 Print-KB LLM 위키의 엄밀 평가 방법론 스킬 — W1~W8 게이트 정의·lint 스크립트 패턴·verdict 포맷. W1 인용 실재성(라인 단위 의미 대조), W2 링크 무결성(깨진 [[참조]]·고아 페이지), W3 스키마 앵커(라이브 information_schema 실측 대조), W4 badge 정합(✅ 인플레 적발), W5 stale/v03 인용 차단, W6 CQ 커버리지, W7 index/log 일관성, W8 레시피 실행가능성(dry walk-through). '위키 검증', '위키 QA', 'W게이트', 'W1 W8', '레시피 검증', '인용 실재성', '링크 무결성 검증', '위키 lint', '커버리지 게이트', '위키 게이트 재실행' 작업 시 반드시 이 스킬을 사용. 집필 컨벤션은 pkw-recipe-authoring, 원천 등급은 큐레이션 팩이 담당하므로 그 작업에는 트리거하지 않는다.
+description: >
+  후니프린팅 Print-KB LLM 위키의 엄밀 평가 방법론 — W1~W8 게이트·lint 스크립트·verdict 포맷. W1 인용
+  실재성(라인 단위 의미 대조)·W2 링크 무결성·W3 스키마 앵커(라이브 information_schema)·W4 badge 정합·
+  W5 stale/v03 인용 차단·W6 CQ 커버리지·W7 index/log 일관성·W8 레시피 실행가능성. 트리거: 위키 검증,
+  위키 QA, W게이트, W1 W8, 레시피 검증, 인용 실재성, 링크 무결성 검증, 위키 lint, 커버리지 게이트, 위키 게이트
+  재실행. 집필 컨벤션은 pkw-recipe-authoring, 원천 등급은 큐레이션 팩 담당.
 ---
 
 # Wiki Evaluation — W1~W8 Gates

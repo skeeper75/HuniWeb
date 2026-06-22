@@ -1,0 +1,100 @@
+%% 디지털인쇄 시트 — 가격사슬 종합도 (시트 레벨)
+%% 출처: recipe-디지털인쇄.md (1) 패밀리 사슬 + (2) 31상품 + recipe-gap-board.md G-1~G-6
+%% 진실 소스: 상품마스터 260610 + 인쇄상품 가격표 260527 + 라이브 t_* (2026-06-18 SELECT)
+%% 강조: :::missing = 견적 결과값 안 나옴(미바인딩·단가행0·축충돌·이중배선)
+flowchart TB
+    classDef product fill:#e3f2fd,stroke:#1565c0,color:#0d47a1
+    classDef formula fill:#fff8e1,stroke:#f9a825,color:#e65100
+    classDef comp fill:#e8f5e9,stroke:#2e7d32,color:#1b5e20
+    classDef missing fill:#ffebee,stroke:#c62828,color:#b71c1c,stroke-width:3px
+    classDef gapnote fill:#fce4ec,stroke:#ad1457,color:#880e4f,stroke-dasharray:5 5
+
+    subgraph PRODUCTS["상품군 31 (라이브 PRD)"]
+        direction TB
+        P_PC["엽서/상품권/배경지/홍보물<br/>21 바인딩 보유"]:::product
+        P_PHC["포토카드 2<br/>PRD_000024/025"]:::product
+        P_NC["명함 (완제품가) 4 바인딩<br/>PRD_000031/032/033 등"]:::product
+        P_ENV["봉투제작<br/>PRD_000050"]:::product
+        P_UNBOUND["미바인딩 10 상품<br/>019·030·034·035·036·037·038·039·040·049"]:::missing
+    end
+
+    subgraph FORMULAS["가격공식 패밀리 (t_prd_product_price_formulas.frm_cd)"]
+        direction TB
+        F_A["PRF_DGP_A<br/>엽서·상품권 원자합산"]:::formula
+        F_B["PRF_DGP_B<br/>모양엽서·라벨/택"]:::formula
+        F_C["PRF_DGP_C<br/>배경지·헤더택"]:::formula
+        F_D["PRF_DGP_D<br/>소량전단지"]:::formula
+        F_E["PRF_DGP_E<br/>접지카드·리플렛"]:::formula
+        F_F["PRF_DGP_F<br/>썬캡(미출시)"]:::formula
+        F_PHC["PRF_PHOTOCARD_FIXED<br/>완제품가"]:::formula
+        F_NC["PRF_NAMECARD_FIXED<br/>완제품가"]:::formula
+        F_ENV["PRF_ENV_MAKING<br/>봉투제작"]:::gapnote
+        F_FOLD["PRF_FOLD_SUM<br/>접지리플렛(comp 불명)"]:::gapnote
+    end
+
+    subgraph COMPS["공유 가격구성요소 comp (t_prc_price_components)"]
+        direction TB
+        C_S1["COMP_PRINT_DIGITAL_S1<br/>디지털인쇄비 단면<br/>단가행 212 ✅"]:::comp
+        C_S2["COMP_PRINT_DIGITAL_S2<br/>디지털인쇄비 양면<br/>단가행 212 ✅"]:::comp
+        C_PAPER["COMP_PAPER<br/>용지비 단가행 56 ✅"]:::comp
+        C_SPOT["COMP_PRINT_SPOT_WHITE_S1<br/>별색인쇄비 PROC_000007"]:::comp
+        C_COAT["COMP_COAT_GLOSSY/MATTE<br/>코팅비"]:::comp
+        C_CUTF["COMP_CUT_FULL_DIECUT<br/>완칼 커팅"]:::comp
+        C_FOLD["COMP_FOLD_* / COMP_CUT_PERF_1H6<br/>접지/타공"]:::comp
+        C_PP["COMP_PP_* 귀돌이·오시·미싱·가변"]:::comp
+        C_PHCSET["COMP_PHOTOCARD_SET / _CLEAR_SET<br/>단가행 1 (희소) ⚠"]:::comp
+        C_NCSET["COMP_NAMECARD_STD_S1/S2<br/>단가행 2 (희소) ⚠"]:::comp
+    end
+
+    %% 상품→공식 바인딩
+    P_PC --> F_A
+    P_PC --> F_C
+    P_PC --> F_D
+    P_PC --> F_E
+    P_PHC --> F_PHC
+    P_NC --> F_NC
+    P_ENV --> F_ENV
+    %% PRF_DGP_B/F는 라벨택/썬캡 (P_PC 내 라벨택·썬캡)
+    P_PC --> F_B
+    P_PC --> F_F
+    %% 미바인딩 = 어떤 공식에도 연결 안됨 (점선 = 끊김)
+    P_UNBOUND -.->|"G-1 frm_cd 부재<br/>견적불가(가격0)"| F_A
+
+    %% 공식→comp 배선 (formula_components)
+    F_A --> C_S1
+    F_A --> C_S2
+    F_A --> C_PAPER
+    F_A --> C_SPOT
+    F_A --> C_PP
+    F_B --> C_S1
+    F_B --> C_PAPER
+    F_B --> C_CUTF
+    F_C --> C_S1
+    F_C --> C_PAPER
+    F_C --> C_FOLD
+    F_D --> C_S1
+    F_D --> C_PAPER
+    F_D --> C_COAT
+    F_D --> C_PP
+    F_E --> C_S1
+    F_E --> C_PAPER
+    F_E --> C_COAT
+    F_E --> C_FOLD
+    F_F --> C_S1
+    F_F --> C_PAPER
+    F_F --> C_CUTF
+    F_PHC --> C_PHCSET
+    F_NC --> C_NCSET
+    %% GAP 공식: comp 사슬 미추출
+    F_ENV -.->|"G-2 comp/use_dims 불명"| C_PAPER
+    F_FOLD -.->|"G-2 comp 미추출"| C_FOLD
+
+    %% comp → 단가행 (component_prices) 차원키
+    C_S1 --> CP_S1["component_prices<br/>plt_siz_cd·print_opt_cd·min_qty"]
+    C_PHCSET --> CP_PHC["component_prices 1행<br/>siz_cd·bdl_qty·min_qty (희소 G-5)"]:::missing
+    C_NCSET --> CP_NC["component_prices 2행<br/>mat_cd·min_qty (희소 G-5)"]:::missing
+
+    %% 시트 횡단 결함 (G-4 패밀리)
+    G4["G-4 DGP 패밀리 사슬 결함 🔴<br/>F-1 print_opt_cd 도수↔면 충돌<br/>F-2 S1(plt_siz)+S2(siz) 이중배선<br/>F-3 출력매수 환산 엔진 부재(호출측)"]:::missing
+    G4 -.-> C_S1
+    G4 -.-> C_S2
