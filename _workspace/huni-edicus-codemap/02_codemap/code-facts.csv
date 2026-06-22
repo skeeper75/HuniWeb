@@ -1,0 +1,66 @@
+layer,path,symbol,role,calls_edicus,evidence
+hook,src/hooks/useEdicus.ts,useEdicus,EdicusClient 생명주기 React 통합,window.edicusSDK.init/create_project/open_project/close/destroy/post_to_editor,src/hooks/useEdicus.ts:65
+hook,src/hooks/useEdicus.ts,createProject,새 프로젝트 생성,ctx.create_project,src/hooks/useEdicus.ts:130
+hook,src/hooks/useEdicus.ts,openProject,기존 프로젝트 열기,ctx.open_project,src/hooks/useEdicus.ts:152
+hook,src/hooks/useEdicus.ts,postToEditor,에디터로 postMessage,ctx.post_to_editor,src/hooks/useEdicus.ts:172
+hook,src/hooks/useEdicus.ts,closeEditor/destroy,편집기 닫기/정리,ctx.close/ctx.destroy,src/hooks/useEdicus.ts:105
+hook,src/hooks/useHuniEditor.ts,useHuniEditor,HuniEditorSDK 생명주기 통합(PC passive),HuniEditorSDK.init/undo/redo/save/close,src/hooks/useHuniEditor.ts:60
+hook,src/hooks/useHuniEditor.ts,save,저장 명령,postToEditor('save-doc'),src/lib/edicus/huni-editor-sdk.ts:208
+hook,src/hooks/useHuniEditor.ts,undo/redo,실행취소/다시실행,postToEditor('undo'/'redo'),src/lib/edicus/huni-editor-sdk.ts:192
+hook,src/hooks/useAuth.ts,useAuth,Firebase 인증+Edicus 토큰+admin 통합,fetch POST /api/edicus/auth {uid},src/hooks/useAuth.ts:39
+hook,src/hooks/useAuth.ts,login/register/logout,Firebase 이메일 인증,signInWithEmail/signUpWithEmail/signOutUser,src/hooks/useAuth.ts:102
+hook,src/hooks/useAuth.ts,fetchEdicusToken,Edicus 토큰 발급,POST /api/edicus/auth,src/hooks/useAuth.ts:50
+hook,src/hooks/useOrder.ts,useOrder,주문 잠정/확정/취소 관리,POST /api/edicus/orders/{tentative|definitive|cancel},src/hooks/useOrder.ts:68
+lib,src/lib/edicus/client.ts,EdicusClient,Edicus SDK 브라우저 클라이언트 래퍼,window.edicusSDK.init/create_project/open_project/close/destroy/post_to_editor,src/lib/edicus/client.ts:116
+lib,src/lib/edicus/client.ts,_doInit,SDK 스크립트 로드+init,window.edicusSDK.init({base_url}),src/lib/edicus/client.ts:158
+lib,src/lib/edicus/client.ts,createProject,프로젝트 생성,ctx.create_project,src/lib/edicus/client.ts:185
+lib,src/lib/edicus/client.ts,openProject,프로젝트 열기,ctx.open_project,src/lib/edicus/client.ts:199
+lib,src/lib/edicus/client.ts,postToEditor,iframe postMessage,ctx.post_to_editor,src/lib/edicus/client.ts:236
+lib,src/lib/edicus/huni-editor-sdk.ts,HuniEditorSDK,EdicusClient 합성 고수준 래퍼(passive),EdicusClient.init/createProject/postToEditor,src/lib/edicus/huni-editor-sdk.ts:65
+lib,src/lib/edicus/huni-editor-sdk.ts,_fetchToken,토큰 발급(본문 없는 POST),POST /api/edicus/auth,src/lib/edicus/huni-editor-sdk.ts:263
+lib,src/lib/edicus/huni-editor-sdk.ts,_setupMessageListener,postMessage 수신+origin 검증,window.addEventListener('message') origin=edicusbase.firebaseapp.com,src/lib/edicus/huni-editor-sdk.ts:275
+lib,src/lib/edicus/server-api.ts,createServerApiClient,Edicus 서버 API 클라이언트(서버 전용),EDICUS_API_HOST /api/auth/token /api/projects /api/orders,src/lib/edicus/server-api.ts:35
+lib,src/lib/edicus/server-api.ts,getToken,사용자 토큰 발급,EDICUS_API_HOST/api/auth/token,src/lib/edicus/server-api.ts:67
+lib,src/lib/edicus/server-api.ts,tentativeOrder/definitiveOrder/cancelOrder,주문 API,EDICUS_API_HOST/api/projects/:id/order/*,src/lib/edicus/server-api.ts:121
+lib,src/lib/edicus/resource-api.ts,createResourceApiClient,Resource API 클라이언트(상품/템플릿),EDICUS_RESOURCE_HOST /resapi/query /resapi/product/list,src/lib/edicus/resource-api.ts:27
+lib,src/lib/edicus/env.ts,validateEnv,Zod 환경변수 검증,EDICUS_API_KEY/EDICUS_API_HOST/EDICUS_RESOURCE_HOST,src/lib/edicus/env.ts:27
+lib,src/lib/edicus/custom-css.ts,getCssForPartner,파트너 private_css 프리셋(후니 #5538B6),private_css 주입(create_project),src/lib/edicus/custom-css.ts:131
+lib,src/lib/edicus/mobile-config.ts,getMobileConfig/getDesktopConfig,모바일/데스크탑 SDK 설정,mobile/lang/ui_locale/private_css params,src/lib/edicus/mobile-config.ts:28
+lib,src/lib/firebase/config.ts,app/auth,Firebase 앱·Auth 초기화,Firebase Auth(NEXT_PUBLIC_FIREBASE_*),src/lib/firebase/config.ts:21
+lib,src/lib/firebase/auth.ts,generateEdicusUid,Firebase UID→Edicus UID 정규화,(edicus-uid 헤더용),src/lib/firebase/auth.ts:56
+lib,src/lib/red-editor/wrapper.ts,RedEditorWrapper,RedEditorSDK Next.js 래퍼(미배선·import 0건),window.RedEditorSDK,src/lib/red-editor/wrapper.ts:208
+middleware,src/middleware.ts,middleware,인증 라우팅 가드(__session 존재만),none,src/middleware.ts:25
+route,src/app/api/edicus/auth/route.ts,POST,사용자 토큰 발급(uid 필수),server-api.getToken,src/app/api/edicus/auth/route.ts:29
+route,src/app/api/edicus/auth/staff/route.ts,POST,스태프 토큰 발급(직접 fetch),EDICUS_API_HOST/api/auth/staff/token,src/app/api/edicus/auth/staff/route.ts:34
+route,src/app/api/edicus/projects/route.ts,GET/POST/DELETE,프로젝트 목록/생성/삭제,server-api.getProjects 등,src/app/api/edicus/projects/route.ts:42
+route,src/app/api/edicus/orders/route.ts,POST/DELETE,주문 잠정/확정/취소,server-api.tentativeOrder/definitiveOrder/cancelOrder,src/app/api/edicus/orders/route.ts:41
+route,src/app/api/edicus/products/route.ts,GET,상품 목록,resource-api.getProductList,src/app/api/edicus/products/route.ts:30
+route,src/app/api/edicus/templates/route.ts,GET,템플릿 쿼리,resource-api.queryTemplates,src/app/api/edicus/templates/route.ts:37
+route,src/app/api/edicus/css/route.ts,GET/POST,파트너 CSS 조회(POST 미저장 stub),getCssForPartner,src/app/api/edicus/css/route.ts:35
+route,src/app/api/edicus/resource/[id]/route.ts,GET,리소스 상세 프록시,RESOURCE_HOST/resapi/resource/:id,src/app/api/edicus/resource/[id]/route.ts:50
+route,src/app/api/edicus/resource/products/route.ts,GET,상품 목록 프록시,RESOURCE_HOST/resapi/product/list,src/app/api/edicus/resource/products/route.ts:53
+route,src/app/api/edicus/resource/query/route.ts,POST,템플릿 쿼리 프록시,RESOURCE_HOST/resapi/query,src/app/api/edicus/resource/query/route.ts:53
+page,src/app/page.tsx,HomePage,홈(RSC·카테고리 필터),none,src/app/page.tsx:26
+page,src/app/login/page.tsx,LoginPage,로그인(client·LoginForm),none,src/app/login/page.tsx:9
+page,src/app/register/page.tsx,RegisterPage,회원가입(client·RegisterForm),none,src/app/register/page.tsx:10
+page,src/app/projects/page.tsx,ProjectsPage,내 프로젝트 목록(RSC·서버 fetch),fetch /api/edicus/projects,src/app/projects/page.tsx:44
+page,src/app/orders/page.tsx,OrdersPage,주문 내역(RSC·서버 fetch),fetch /api/edicus/orders,src/app/orders/page.tsx:48
+page,src/app/editor/[templateId]/page.tsx,EditorPage,PC 편집기 라우트(동적),EdicusEditor→useEdicus,src/app/editor/[templateId]/page.tsx:22
+page,src/app/vdp/[templateId]/page.tsx,VdpPage,VDP 편집기 라우트(동적),VdpEditor→useEdicus,src/app/vdp/[templateId]/page.tsx:21
+page,src/app/mobile/page.tsx,MobileCatalogPage,모바일 카탈로그(client·fetch),fetch /api/edicus/products,src/app/mobile/page.tsx:23
+page,src/app/mobile/[productId]/page.tsx,MobileProductDetailPage,모바일 상품상세+편집(client),MobileEditor→useEdicus,src/app/mobile/[productId]/page.tsx:27
+page,src/app/admin/page.tsx,AdminDashboardPage,관리자 대시보드(보호),none,src/app/admin/page.tsx:49
+layout,src/app/layout.tsx,RootLayout,전역 레이아웃(헤더/네비/푸터·Provider 없음),none,src/app/layout.tsx:29
+layout,src/app/admin/layout.tsx,AdminLayout,관리자 레이아웃+Sidebar,none,src/app/admin/layout.tsx:1
+layout,src/app/mobile/layout.tsx,MobileLayout,모바일 레이아웃,none,src/app/mobile/layout.tsx:1
+component,src/components/editor/EdicusEditor.tsx,EdicusEditor,PC 전체화면 Edicus iframe 편집기,useEdicus(create_project/open_project/post_to_editor) + fetch /api/edicus/auth,src/components/editor/EdicusEditor.tsx:64
+component,src/components/editor/VdpEditor.tsx,VdpEditor,VDP 편집기(가변데이터),useEdicus + postToEditor('set-variable-data'),src/components/editor/VdpEditor.tsx:63
+component,src/components/editor/MobileEditor.tsx,MobileEditor,모바일 전체화면 편집기(passive 지원),useEdicus + getMobileConfig + postToEditor,src/components/mobile/MobileEditor.tsx:48
+component,src/components/editor/PCPassiveEditor.tsx,PCPassiveEditor,PC passive 편집기(키보드 단축키),useHuniEditor(undo/redo/save/close),src/components/editor/PCPassiveEditor.tsx:42
+component,src/components/mobile/PassiveToolbar.tsx,PassiveToolbarTop/Bottom,passive 모바일 툴바,postToEditor('undo'/'redo'/'save-doc'),src/components/mobile/MobileEditor.tsx:218
+component,src/components/auth/LoginForm.tsx,LoginForm,로그인 폼(useAuth props 주입),none(useAuth 부모 주입),src/components/auth/LoginForm.tsx:7
+component,src/components/products/ProductGrid.tsx,ProductGrid,상품 그리드(fetch),fetch /api/edicus/products,src/components/products/ProductGrid.tsx:33
+component,src/components/admin/Sidebar.tsx,Sidebar,관리자 사이드바,none,src/components/admin/Sidebar.tsx:1
+type,src/types/edicus.ts,EdicusContext,SDK init 반환 컨텍스트+메서드 타입,create_project/open_project/post_to_editor 등 시그니처,src/types/edicus.ts:11
+type,src/types/edicus.ts,CreateProjectParams/OpenProjectParams,프로젝트 파라미터 타입,ps_code/token/prjid/parent_element,src/types/edicus.ts:149
+type,src/types/order.ts,Order/OrderStatus,주문 도메인 모델,none,src/types/order.ts:10

@@ -272,7 +272,17 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 **변경이력:** 최신: 2026-06-22 하네스 초기 구성(4 에이전트+5 스킬·역공학 3계층/경로분기 도메인 확정) → 첫 실행 시 CHANGELOG 생성
 
-## 20. MoAI Framework (gated — rarely used here)
+## 20. Harness: Huni-Edicus-Codemap (edicus.man 코드맵 + Edicus SDK/API → 개발팀 아키텍처/플로우 문서)
+
+**목표:** `docs/edicus.man`(후니 Web-to-Print SaaS — Next.js 15 App Router·React 19·TS·Edicus SDK 통합) 코드베이스 + **Edicus 공식 SDK/Server API PDF**(JS SDK 38p·Server API 43p, ㈜모션원) + `EDICUS_*` 환경변수(18종)를 종합해, **개발팀이 전체 아키텍처·플로우·각 코드·API를 알 수 있는 mermaid 기술 문서**를 산출 — 시스템 아키텍처(Next.js·Edicus·Firebase·S3 경계)·라우트맵·인증→편집→주문 시퀀스·Edicus 패시브모드 라이프사이클(info@*)·주문 상태머신·**코드↔API 배선도**(useEdicus/useHuniEditor 등 hook ↔ SDK 메서드/Server API). §19(역공학 위젯 플로우·비전문가 시각화)와 달리 **자체 구현 코드맵 + 공식 SDK/API 권위 + 개발팀 전용**.
+
+**트리거:** "edicus 코드맵", "edicus.man 분석", "Edicus SDK API 분석", "코드맵 mermaid", "전체 아키텍처 플로우 문서", "개발팀 아키텍처 문서", "Edicus 코드맵 하네스 실행/재실행/업데이트/보완", "특정 코드/API만 분석" 등 본 도메인 요청 시 `huni-edicus-codemap-orchestrator` 스킬을 사용. 단순 질문은 직접 응답.
+
+**산출물 루트:** `_workspace/huni-edicus-codemap/` (01_api·02_codemap·03_flow·04_validation). 4 에이전트(`hec-api-cartographer` 공식 SDK/API+env ∥ `hec-code-cartographer` Next.js 코드맵 → `hec-flow-author` mermaid 통합 → `hec-validator` C1~C6 독립검증)·하이브리드(팬아웃→통합→검증)·생성≠검증·PDF=1차권위·코드=권위·근거(`PDF p.N`/`파일:라인`)·**비밀값 비노출[HARD]**(env 키 이름·역할만, 값 금지)·읽기전용. 최종 mermaid 통합본은 인간 확인 후 `docs/edicus.man/docs/codemap/`로 모을 수 있음.
+
+**변경이력:** 최신: 2026-06-22 하네스 초기 구성(4 에이전트+5 스킬·Edicus 공식 SDK/API+edicus.man Next.js 코드맵 권위 확정) → 첫 실행 시 CHANGELOG 생성
+
+## 21. MoAI Framework (gated — rarely used here)
 
 The MoAI-ADK orchestration framework (SPEC plan/run/sync, TRUST 5, DDD/TDD, Agent Teams,
 design GAN loop) is installed but not the primary workflow in this repo. Its detailed
