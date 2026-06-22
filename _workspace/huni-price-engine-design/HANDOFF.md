@@ -1,12 +1,14 @@
 # Huni-Price-Engine-Design 하네스 — HANDOFF
 
-> CLAUDE.md §18 · 갱신 2026-06-22 · 종단 GO 9건(캘린더 첫 게이트 GO 완료)
+> CLAUDE.md §18 · 갱신 2026-06-22 · **종단 GO 10건**(포토북 검증 GO·codex high divergence 0 완료)
 
 ## 다음 시작점
 
-**★캘린더 GO 완료**(2026-06-22·첫 게이트 GO→codex high divergence 0→박제·이력·커밋). **원자합산형(디지털인쇄 직계 동형)·1차 가설 variant 고정가형 반증.** 차별차원=페이지수(4~16장)·제본비 .01 부당가 확정(디지털 합가형과 정반대)·신규 mint=공식5+comp1·inline 합산 골든 BLOCKED 정직(정수해 없음=정찰가 스냅샷)·process_excl_groups 테이블 라이브 부재 정정. **9종단 완주 = 계산방식 전수 커버.**
+**★포토북 GO 완료**(2026-06-22·10번째 종단·Phase 4 E1~E7 전건 PASS·차단0·보정0·LOW2 → Phase 5.5 codex high 7/7 합의·divergence 0 → 박제·이력·CHANGELOG·메모리 갱신 완료). **부품합산 세트형+페이지 선형·★캘린더와 정반대=inline 공식화 가능**(row17 명문 산식·per2p cost-driven). 신규 mint=공식1(PRF_PHOTOBOOK_SUM)+comp2(BASE[siz,mat]/PAGE[siz])·search-before-mint 10연속. **10종단 완주.**
 
-**다음 후보(동형 전파)**: 포토북(가격포함)·디자인캘린더(가격포함·캘린더 inline 권위 결판 Q-CAL-GOLDEN 연계) 외 미종단 상품군. Phase1(cartographer 지도)→benchmark→designer→validator E1~E7→codex Phase5.5 순.
+**다음 후보(동형 전파)**: 디자인캘린더(가격포함·Q-CAL-GOLDEN inline 권위 결판 연계·포토북 "inline 공식화 가능" 분기 기준 적용 가능성)·기타 미종단 상품군. Phase1(cartographer 지도)→benchmark→designer→validator E1~E7→codex Phase5.5 순.
+
+**포토북 실 적재 승인 대기(누적에 추가)**: PRF_PHOTOBOOK_SUM 공식 신설·comp2(BASE/PAGE) 신설·base24 12행(1 BLOCKED)/per2p 4행 단가행 verbatim 충전·부모 PRD_000100 바인딩(product_prices INSERT 금지). **컨펌 선결**: Q-PB-PAGEBASE(돈크리티컬·소프트 base_min=4 vs 하드24)·Q-PB-MAT(표지자재 MAT_005/006/007 del_yn=Y 활성화/재매핑)·Q-PB-SOFT8(10x10 소프트 공란 BLOCKED)·Q-PB-COAT/FACE·Q-PB-DSC. 돈크리티컬 가드 6종(G-PB-PAGE/PRODPRICE/FLAT/SET/BIND01/PAGEBASE) 준수.
 - **실 적재 승인 대기(누적)**: 디지털 prc_typ 교정(.01→.02)·아크릴 G-A1 바인딩·실사 후가공 배선·문구(본체 product_prices·떡메모 바인딩·DSC 링크 4건)·책자(W1 제본비 재배선·W2 중철 단가행 교정=과청구 50%)·굿즈/파우치(GP-1 product_prices·GP-2 formula+variant 단가·★GP-2 product_prices INSERT 금지 가드·구간할인 base) — 전부 인간 승인 후 dbm-axis-staged-load/dbm-load-execution/dbm-price-arbiter 위임.
 
 ## 진행 현황
@@ -22,6 +24,7 @@
 | 스티커 | 이산 siz_cd 단가형+세트 합가형(면적 직교) | **재게이트 GO**(E1 CONDITIONAL→PASS·보정-1 RESOLVED·차단0) | GO 지지(**high**·divergence 0) |
 | 상품악세사리 | inline 고정가형(굿즈 GP-1/GP-2 동형) | **첫 게이트 GO**(E1~E7 전건·차단0·보정0·LOW1) | GO 지지(**high**·divergence 0) |
 | 캘린더 | 원자합산형(디지털인쇄 직계 동형·페이지수 곱·제본비 .01 부당가) | **첫 게이트 GO**(E1~E7 전건·차단0·보정0·LOW1) | GO 지지(**high**·divergence 0) |
+| 포토북 | 부품합산 세트형+페이지 선형(★inline 공식화 가능=캘린더 정반대) | **첫 게이트 GO**(E1~E7 전건·차단0·보정0·LOW2) | GO 지지(**high**·divergence 0) |
 
 ## 미해결 / 블로커 (전부 DB 미적재·인간 승인 후 dbmap 위임)
 

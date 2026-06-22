@@ -883,3 +883,159 @@ cartographer "팩/타투 .02 교정 완료" vs benchmark "B06 .01 오적재→.0
 | **Q-CAL-ENVELOPE** | 캘린더봉투(PRD_000005·012-0008·2400~2500) addon vs 독립상품 경계? | 봉투제작 트랙 위임(엽서 봉투 동형) |
 
 ★ 본 설계는 **구조 레벨 확신도 높음**(라이브 SELECT 실측 + 제본비 prc_typ 라이브 결판 + LINEN_FINISH 그릇 선례 + 디지털 PRF_DGP 직계 동형 + product_prices 0행 선점 가드 자동 충족). **★디자인캘린더 inline 합산 골든은 BLOCKED**(역산 비정합·추측 단가 0·Q-CAL-GOLDEN). 신규 mint = **공식 5(PRF_CAL_*) + comp 1(COMP_CALOPT_STAND) + opt_cd 채번뿐**·신규 테이블/가격축/할인테이블 0·search-before-mint 9연속 통과. 실 적용(PRF_CAL_* 신설·formula_components 배선·product_price_formulas 바인딩·COMP_CALOPT 단가행)은 **DB 미적재·인간 승인 후 dbmap 위임**(dbm-load-execution·dbm-price-arbiter·dbm-axis-staged-load·webadmin 코드 직접수정 금지). 제본비 단가행 무변경(이미 .01·verbatim).
+
+---
+
+# 포토북 종단 설계 결정 (10번째 종단 · 2026-06-22)
+
+> 포토북 = 반제품 세트(부품합산형 + 페이지 선형 증분). 책자(5번째 full 분해)와 갈리는 두 번째 본격 세트 종단. 라이브 읽기전용 SELECT 2026-06-22. 권위=상품마스터260610 `포토북(가격포함)` 시트(inline `가격_기본(24P)`+`가격_추가(2P)당`·row17 명문 `상품단가+페이지당단가적용`)+가격표260527(포토북 전용시트 부재·제본/디지털 보조) 절대.
+
+## D-PB-1. 계산방식 = 부품합산 세트형 + 페이지 선형 (inline 고정가형 아님·캘린더 정찰가와 정반대) `확신도: 높음`
+
+**결정**: 포토북 = `판매가 = base24[siz,표지타입] + ceil((N−base_min)/2)×per2p[siz] (× 부수)`. PRD_TYPE.04(가격포함 고정가형 디폴트)이나 **inline 단일 고정가형(굿즈/악세사리/디자인캘린더) 아님** — 페이지 차원이 가격을 선형 변동하므로 합산형 공식기반(FORMULA).
+
+**근거(실측)**: 상품마스터 row17 명문 `상품단가+페이지당단가적용`(공식이 시트에 직접 규정·캘린더 정찰가와 결정적 차이). `가격_기본(24P)`(variant 고정)+`가격_추가(2P)당`(페이지당) 2-필드 산식. per2p가 imposition cost-driven(§D-PB-3)=진짜 비용 기반. 라이브 포토북 공식/바인딩/product_prices 전부 0행(WIRE).
+
+**흡수**: benchmark §3 "세 경쟁사 모델(RP digital_price 면수합산·RP tmpl_price 에디터완제·WP jobqty 2단) 전부 후니 base24+페이지증분으로 무왜곡 환원·신규 가격축 0". naming(digital_price/tmpl_price/INN_PAGE/seneca) 유입 금지.
+
+## D-PB-MODEL. ★PRD_TYPE.04 고정가형 디폴트 ↔ 합산형 공식기반 충돌 결판 = FORMULA 재분류 (product_prices 금지) `확신도: 높음`
+
+**결정**: 포토북을 **합산형 공식(PRF_PHOTOBOOK_SUM·base24 comp + per2p comp)으로 모델링**. 고정가형 `t_prd_product_prices` 단독 **부결**(페이지 차원 부재·SKU 폭발).
+
+**근거(코드·benchmark C-PB1)**: 고정가형 product_prices는 prd_cd당 수량×옵션 직접단가일 뿐 **페이지 차원이 없다**. 페이지수마다 다른 가격(24P=15,000·26P=15,500·…·150P=46,500)을 product_prices 행으로 전개하면 **(페이지 64단계 × 사이즈 × 표지) SKU 폭발**(책자/디지털 페이지 SKU 폭발 가드 위배). → **합산형 공식이 정답**(base24 + 앱계산 증분횟수 × per2p). `schema-design-intent-map` 고정가형 분류는 **페이지 차원 추가 전 stale**.
+
+**★G-PB-PRODPRICE 선점 가드[HARD·돈크리티컬]**: base24를 `t_prd_product_prices`에 INSERT하면 엔진 가격소스 우선순위 PRODUCT_PRICE(:316)→FORMULA(:324)로 **FORMULA(per2p 페이지 가산) 통째 우회 silent** → 페이지 가산 영영 안 먹힘(경고 없음). 현 product_prices 0행=자동충족·적재 시 박제. 캘린더 G-CAL-2·GP-2 G-GP-3·악세사리 G-AC-3 동형(엔진 :315-330 선점).
+
+**trade-off**: FORMULA 바인딩(공식1+comp2 신설) vs product_prices 132행(12 variant × 11 페이지) 폭발. FORMULA가 최소·무손실. 단 PRD_TYPE.04 디폴트와 시맨틱 충돌(LOW·가격 무영향·dbm-price-arbiter 시맨틱 정정 큐).
+
+## D-PB-2. base24 = 부품 통합(internalize)·full 분해 부결 (책자 DT-BIND-SCOPE와 정반대) `확신도: 높음`
+
+**결정**: base24(표지/내지/제본/면지 부품)를 **COMP_PHOTOBOOK_BASE 통째 단가행**으로 적재. 책자처럼 표지/내지/제본 별 comp full 분해 **부결**.
+
+**근거(benchmark P-9a·DT-PB-SCOPE 결판)**: 결판 기준[HARD]="권위 가격표가 부품별 단가를 주면 부품 합산·완제 통합단가를 주면 통합". 포토북 권위=상품마스터 base24 완제 통합값(15,000 등)·**포토북 전용 가격표 시트 부재**(부품 단가표 없음). 책자는 가격표 제본 시트 B01/B02가 부품 단가를 줘서 full 분해였으나, 포토북은 base24 통합값만 줌 → **부품 분해 금지·base24 통째**. base24 부품 역산(PUR5000+내지6000+표지/면지4000=15,000)은 근사 확인용이지 적재 안 함(부품 정확 단가행 직매칭은 표지 무광코팅/면지 미해소 BLOCKED·Q-PB-COAT/FACE).
+
+**trade-off**: base24 통째(comp 1·단가행 12) vs 부품 4 comp 합산. 통째가 무손실·verbatim·안전(부품 분해 시 추측 단가·COMP_PAPER 표지/내지 2회 배선 충돌·base24 합 불일치 3중 위험). search-before-mint: 인쇄/용지/제본/코팅 comp 전부 라이브 실재(재사용)나 base24에 묶여 **직접 배선 안 함**·신규 base comp는 완제 통합값 무손실 위해 정당(기존 comp로 base24 표현하려면 부품 분해 필수인데 부품 단가 미권위).
+
+## D-PB-3. per2p = siz_cd만 차원·표지 무관 (benchmark C-PB4·돈크리티컬 가드) `확신도: 높음`
+
+**결정**: COMP_PHOTOBOOK_PAGE use_dims=`[siz_cd]`(표지 mat_cd 제외). base24 comp use_dims=`[siz_cd, mat_cd]`와 **차원 분리**.
+
+**근거(상품마스터 verbatim)**: per2p가 **사이즈만 종속**(8x8=500·10x10=1,000·A5=300·A4=600), 표지타입 **무관**(같은 사이즈면 하드/레더하드/소프트 동일 per2p·CSV row3~5 전건 500). imposition cost-driven 단조(§D-PB-3 입증): A5 4-up=300 < 8x8 2-up=500 < A4 2-up=600 < 10x10 1-up=1,000(큰 사이즈일수록 페이지당 비쌈·면적 비례).
+
+**★가드[HARD·돈크리티컬]**: **per2p에 mat_cd(표지) 차원 넣으면 단가행 중복·오청구**. 기본가 차원(siz×표지)과 페이지단가 차원(siz만)을 혼동 금지(C-PB4). 두 comp가 서로 다른 comp_cd·다른 use_dims라 silent 이중합산 없음(각자 1행 매칭).
+
+## D-PB-G-PB-PAGE. ★페이지수 곱 = 내지비(per2p)에만 적용·전역 qty 금지 (돈크리티컬·캘린더 G-CAL-PAGE 양방향 동형) `확신도: 높음`
+
+**결정**: 페이지 증분횟수 `ceil((N−base_min)/2)` = **per2p 항에만 곱**. base24엔 페이지 곱 금지(base24=이미 base_min P 포함 통합값). 부수(Q)는 base24·per2p 둘 다 곱. 증분횟수=앱 런타임 계산(DB는 base24·per2p 단가만 룩업).
+
+**근거(row17 산식·코드)**: `포토북(N,Q) = base24×Q + per2p×ceil((N−base_min)/2)×Q`. 페이지 곱 누락 시 8x8 하드 24P=15,000 vs 150P=46,500(3.1배) → 150P를 15,000원에 **과소청구**(돈크리티컬). 반대 오류(증분횟수를 base24에도 곱)=base 과대청구(캘린더 CX-CAL-A 양방향). 페이지 64단계를 행 베이크 금지(SKU 폭발·benchmark P-9d·[[dbmap-compute-in-app-db-stores-lookup]]).
+
+**★양방향 가드[HARD]**: G-PB-PAGE = ① 페이지 곱 누락(내지비 소실·저청구) ② 전역 qty에 페이지 곱(base24 과청구). base24=×부수만·per2p=×증분횟수×부수. 음수 가드(N≤base_min→증분 0·base24만·page_rule이 N<base_min 차단).
+
+## D-PB-PAGEBASE. ★base_min = 하드 24 vs 소프트 4 (Q-PB-PAGEBASE·돈크리티컬) `확신도: 중`
+
+**결정**: base_min은 표지타입별 page_rule 최소 — 하드커버/레더하드커버=24·소프트커버=4(CSV `4/6/8/…` 실측). 증분횟수 산식의 시작점이 base24 기준 페이지(하드 24·소프트 4)에서 출발.
+
+**근거(CSV verbatim)**: 하드/레더하드 page `24/150/2`·소프트 page `4/—/2`(`4 / 6 / 8 / 10 / 12 / 14`). 소프트 page_min=4 → base24(소프트 12,000)가 **4P 기준** 개연(소프트는 페이지 적게 시작). per2p는 소프트도 siz 종속(8x8 소프트 500).
+
+**★컨펌큐 Q-PB-PAGEBASE[HARD·돈크리티컬]**: 소프트커버 base가 4P 기준이면 증분 시작=4·24P 기준이면 24. 잘못하면 소프트 페이지 증분 10단계(4→24) 과소/과대청구. **base_min은 차원 아님 → page_rule(소프트 page_min=4)+앱 산식이 주입**(상품별 page_rule 권위). 인간 컨펌 후 확정·`확신도: 중`.
+
+## D-PB-MAT. 표지타입 = mat_cd 매핑 (하드 005/레더하드 006/소프트 007·레더 갭) `확신도: 중`
+
+**결정**: base24 mat_cd = 표지타입 3종 — 하드커버=MAT_000005·레더하드커버=MAT_000006·소프트커버=MAT_000007(라이브 실측). 8x8 base24: 하드 15,000/레더하드 23,000/소프트 12,000.
+
+**근거(라이브 2026-06-22)**: MAT_000005=하드커버·006=레더하드커버·007=소프트커버 실재. sub_prd 102(하드)/105(레더하드)/107(소프트)·103(아트250+무광=하드 표지의 종이)·**106(레더)**=레더하드커버 표지의 소재 variant(별 base24 행 아님·레더하드=23,000에 포함).
+
+**★컨펌큐 Q-PB-MAT**: 표지타입↔mat_cd 정확 매핑(레더 106이 레더하드커버 base24에 묶이는지·별 base24 행인지)·추측 금지·verbatim. `확신도: 중`(라이브 mat 실재·시트 표지타입 3종 vs sub_prd 6종 경계 컨펌).
+
+## D-PB-COAT/FACE. 표지 무광코팅·면지 = base24에 묶임 (Q-PB-COAT 해소·Q-PB-FACE 추정) `확신도: 중`
+
+**결정**: 표지 무광코팅(아트250)·면지(그레이)는 base24에 internalize(외부 미배선). 직접 합산 안 함.
+
+**근거(라이브 2026-06-22)**: ★**COMP_COAT_MATTE(무광코팅비) 실재**(.01)·**COMP_PAPER 아트250(MAT_000081=77.75) 실재** → cartographer "코팅 comp 탐색 필요"·gap-board "아트250 0행" stale·해소(재사용·신규 mint 0). 단 base24 통째 적재라 이 부품 comp들은 base24에 묶여 직접 배선 안 함(참고용 인벤토리). 면지=택1 색·가격 비기여 추정(책자 면지 선례).
+
+**★컨펌큐 Q-PB-COAT(코팅 단가행 충전 확인·comp 존재≠충전)·Q-PB-FACE(면지 색별 단가차 여부·동일가면 비기여)**: base24 통째 적재면 둘 다 base24에 흡수되어 영향 없음. `확신도: 중`(부품 정확 역산은 컨펌 후·base24 통째로 골든 재현).
+
+## D-PB-4. 세트 sub_prd = BOM·이중계상 가드 (W4·G-PB-SET·책자 DB-9 동형) `확신도: 높음`
+
+**결정**: sub_prd 7행(내지 101·표지 102/103/105/106/107·면지 104)=생산 BOM·가격 비기여. base24+per2p 공식 Σ만 가격(표지 5 variant 합산 금지=택1·면지 비기여).
+
+**근거**: sub_prd_qty=1·min/max_cnt NULL(택1)·라이브 sub_prd 가격 0행. set-product-design §14 명시. benchmark P-9b·P-9c("이질 N장 assortment" REFUTED·한 책 부품 구성). 가드[HARD]: 표지 5 variant 부품 합산 금지(이중계상)·1권=parent 1개·페이지=면수(여러 권 발주=부수 qty 별 차원).
+
+## D-PB-5. 흡수 적용 (absorption-candidates-photobook C-PB1~7 — 신규 가격축 0건) `확신도: 높음`
+
+| 흡수후보 | 적용 | 흡수 판정 | naming 가드 |
+|----------|------|----------|------------|
+| C-PB1 페이지 증분 단가 | (a)합산형 공식(base24 comp+per2p comp×앱증분) — (b)고정가형 product_prices 페이지폭발 GAP | **흡수=설계 결정**(D-PB-MODEL·합산형) | INN_PAGE 유입 금지 |
+| C-PB2 표지×사이즈 기본가 매트릭스 | base24 use_dims=[siz_cd,mat_cd] 2차원 | 흡수 불요(동형) | CVR_MTRL_CD 유입 금지 |
+| C-PB3 에디터 완제 단가 | 에디터=주문채널·가격 분리(base24 공식) | 흡수 불요(동형) | tmpl_price 유입 금지 |
+| C-PB4 per2p 사이즈 종속(표지 무관) | per2p use_dims=[siz_cd]만(D-PB-3) | 흡수 불요(정합·돈크리티컬 가드) | — |
+| C-PB5 책등(seneca) 페이지 파생 | 앱 런타임·DB 미저장(14-3) | 흡수 불요(정합) | seneca 유입 금지 |
+| C-PB6 자재↔후가공 비활성 | round-6 CPQ constraints(책자 공통·포토북 고유 아님) | 흡수후보(제약 레이어) | pdt_disable_pcs_info 유입 금지 |
+| C-PB7 WowPress 작업량 2단 | 후니 단일 evaluate_price+앱 환산 | **흡수 부결(과분화)** | jobqty0/jobcost0 유입 금지 |
+
+★ **신규 테이블/가격축 신설 = 0건**(rpmeta PH distinct #18 부결 정합·search-before-mint 통과). 신규 = 공식 1(PRF_PHOTOBOOK_SUM)+comp 2(BASE/PAGE)뿐. WowPress 포토북=미관측(보강 불가·정직 기록).
+
+## D-PB-6. search-before-mint 결과 — 신규 = 공식 1 + comp 2 (인쇄/용지/제본/코팅 재사용) `확신도: 높음`
+
+| 후보 | 라이브 실재? | 판정 |
+|------|------------|------|
+| 제본 PUR COMP_BIND_PUR(8행·.01·5000~1500/부) | **실재(재사용)** | base24에 묶임(직접 배선 0) |
+| 내지/표지 용지 COMP_PAPER(몽블랑130=77.03·아트250=77.75) | **실재(재사용)** | base24에 묶임 |
+| 인쇄 COMP_PRINT_DIGITAL_S1 | **실재(재사용)** | base24에 묶임 |
+| 표지 무광코팅 COMP_COAT_MATTE(.01) | **실재(재사용)** | base24에 묶임·Q-PB-COAT 해소 |
+| 세트 그릇 t_prd_product_sets(7행)·page_rule(24/150/2) | **실재** | 구성 그릇(가격축 아님·D-PB-4) |
+| **base24 comp COMP_PHOTOBOOK_BASE** | **부재** | **신설**(완제 통합단가 무손실·채번 MAX+1·`_`) |
+| **per2p comp COMP_PHOTOBOOK_PAGE** | **부재** | **신설**(페이지당단가·siz_cd) |
+| **공식 PRF_PHOTOBOOK_SUM** | **부재** | **신설**(부품집합 상이로 책자 PRF_BIND_SUM 공유 부결) |
+
+★ **신규 mint = 공식 1 + comp 2뿐**(인쇄/용지/제본/코팅 전부 재사용·base24 묶음). 캘린더(공식5)·디지털 대형박·아크릴 미러보다 막힘 적음·search-before-mint 10연속 통과.
+
+## 포토북 컨펌큐 (인간/실무·dbm-price-arbiter 라우팅·미지를 정답으로 위장 안 함)
+
+| ID | 컨펌 항목 | 누구 | 영향 |
+|----|----------|------|------|
+| **Q-PB-PAGEBASE** | ★소프트커버 base_min=4 vs 24(증분 시작점) — 소프트 base24가 4P 기준인지 24P 기준인지 | 상품마스터·실무 | 소프트 페이지 증분 정확성·돈크리티컬 |
+| **Q-PB-MAT** | 표지타입↔mat_cd 매핑(하드 005/레더하드 006/소프트 007)·레더(106)가 레더하드 base24에 묶이는지 별 행인지 | 라이브·실무 | base24 mat_cd 판별 정합 |
+| **Q-PB-COAT** | 표지 아트250 무광코팅 COMP_COAT_MATTE 단가행 충전 확인(comp 존재≠충전)·base24 통째면 무영향 | 가격표·실무 | base24 부품 역산(통째 적재로 우회) |
+| **Q-PB-FACE** | 면지(그레이) 가격기여 — 동일가면 비기여(택1 UI)·색별 단가차면 base24 분기 | 실무·가격표 | 면지 가격기여·이중계상 가드 |
+| **Q-PB-PER2P** | per2p 정확 단가 소스 — 상품마스터 `가격_추가(2P)당` verbatim(8x8 500·A4 600)이 imposition cost-driven인지 임의값인지 | 상품마스터(verbatim 권위) | per2p 단가행(이미 verbatim) |
+| **Q-PB-SOFT8** | 10x10 소프트커버(row8) base24 공란 — 단가 미정(BLOCKED) | 상품마스터·실무 | 10x10 소프트 단가행(추측 금지) |
+| **Q-PB-DSC** | 포토북 부수 수량구간할인 t_prd_product_discount_tables 링크 — 부자재 미해당(악세사리 D-AC-2 동형)인지 적용인지 | dbmap round-1 | 할인 적용 |
+| **Q-PB-OPT** | 표지타입/사이즈 선택값→mat_cd/siz_cd 자동주입 option_items(round-6)·미연결 시 디폴트 variant(0원 침묵 회피) | round-6 dbm-option-mapper | base24 매칭 작동 |
+
+★ 본 설계는 **구조 레벨 확신도 높음**(라이브 SELECT 실측 + 상품마스터 inline verbatim + row17 명문 산식 + per2p imposition cost-driven 입증 + 재사용 comp 실재 + product_prices 0행 선점 가드 자동 충족). **소프트 base_min·표지 mat_cd 매핑·면지 가격기여는 확신도 중**(Q-PB-PAGEBASE·Q-PB-MAT·Q-PB-FACE 컨펌 후 확정). **10x10 소프트(row8)는 BLOCKED**(시트 공란·추측 금지). 신규 mint = **공식 1(PRF_PHOTOBOOK_SUM)+comp 2(BASE/PAGE)뿐**·신규 테이블/가격축/할인테이블 0·search-before-mint 10연속. 실 적용(공식 신설·comp 신설·base24/per2p 단가행 충전·부모 100 바인딩)은 **DB 미적재·인간 승인 후 dbmap 위임**(dbm-load-execution·dbm-axis-staged-load·dbm-ddl-proposer·dbm-price-arbiter·webadmin 코드 직접수정 금지).
+
+---
+
+# ★Q-CAL-GOLDEN 결판 — 두 "가격포함" 시트의 inline 분기 기준 (사용자 directive·메인 인간 결판 큐)
+
+> 사용자 directive: 디자인캘린더 inline=정찰가 스냅샷 결판을 포토북 종단에서 명문화. 두 "가격포함" 시트(디자인캘린더·포토북)가 inline 가격을 어떻게 처리하는지 **분기 기준**을 못박아 메인이 인간 결판 큐에 사용.
+
+## 분기 기준 [HARD] — inline 가격의 단가행 재현성
+
+| 기준 | (가) 공식화 가능 → FORMULA | (나) 정찰가 스냅샷 → BLOCKED |
+|------|---------------------------|------------------------------|
+| **inline 재현성** | 단가행 산식으로 정수·일관 재현 | 비정수해·재현 불가 |
+| **산식 명문** | 시트에 산식 명문(`상품단가+페이지당단가`) | 없음(단일 정찰가) |
+| **단가 비용추세** | 비용 기반(imposition 단조 등) | 임의 표시가 |
+| **처리** | base24/per2p 단가행 적재(verbatim)·공식 바인딩 | inline=권위·**추측 단가 INSERT 금지·BLOCKED 정직** |
+
+## 두 시트 판정
+
+| 시트 | inline 분해 | 정수해 | 산식 명문 | **판정** | 처리 |
+|------|-------------|--------|-----------|----------|------|
+| **디자인캘린더** | 유효판수 비정수(1.31/0.49/1.29/1.57/6.10·python 역산) | ❌ | **없음** | **(나) 정찰가 스냅샷 → BLOCKED** | inline=권위·추측 INSERT 금지·product_prices도 금지(선점 우회 이중위험)·**견적 비대상 or 인간 결판** |
+| **포토북** | base24=variant 고정·per2p=cost-driven 선형 | 🟡 부분 | **있음**(row17) | **(가) 공식화 가능** | base24/per2p 단가행 적재(verbatim)·PRF_PHOTOBOOK_SUM 바인딩·단 10x10소프트 BLOCKED(공란) |
+
+★ **결정적 차이**: 디자인캘린더는 산식 명문 부재 + 인쇄+용지 잔여가 출력판형당 단가×페이지수×판걸이수 산식으로 **깨끗한 정수해를 안 줌**(에디터형 1부 정찰가 스냅샷·소비자 표시가). 포토북은 **row17에 산식 명문** + per2p가 imposition cost-driven(A5 300<8x8 500<A4 600<10x10 1000 단조) = 진짜 공식. **둘 다 "편집기형 디자인 상품"이나 가격 모델이 정반대**(캘린더=정찰가 BLOCKED·포토북=cost-driven 공식화).
+
+## 인간 결판 큐 (메인 사용)
+
+| 시트 | 권위 후보 | 결판 필요 |
+|------|-----------|-----------|
+| **디자인캘린더** | **inline=권위**(정찰가)·산식 불가 | 추측 단가 INSERT 금지 비준·정찰가를 product_prices(GP-1 경로)로 갈지 견적 비대상으로 둘지(Q-CAL-GOLDEN) |
+| **포토북** | **row17 산식=권위**(base24+per2p) | base24 통째 적재 vs 부품 분해(Q-PB-COAT/FACE 해소 후)·소프트 base_min(Q-PB-PAGEBASE) |
+| 공통 | 두 시트 모두 "편집기형 디자인 상품"·편집기 baked spec은 옵션 미노출(시트 메모) | inline 재현성으로 공식화/정찰가 분기(본 기준) |
+
+★ **★두 시트 분기 기준 명문화 완료** — 메인이 인간 결판 시 "inline이 단가행 산식으로 재현되는가"를 잣대로 캘린더(BLOCKED)·포토북(공식화)을 가른다. 추측 단가 INSERT 금지·날조 0·정직 BLOCKED 유지.
