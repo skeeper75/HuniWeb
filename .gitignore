@@ -176,6 +176,7 @@ secret-*.*
 !.claude/skills/hqv-*/
 !.claude/skills/hbd-*/
 !.claude/skills/hpe-*/
+!.claude/skills/hwf-*/
 # Custom harness agents (moai/ framework agents stay untracked).
 !.claude/agents/
 .claude/agents/*
@@ -191,6 +192,7 @@ secret-*.*
 !.claude/agents/huni-quote-verify/
 !.claude/agents/huni-basedata-dedup/
 !.claude/agents/huni-price-engine-design/
+!.claude/agents/huni-widget-flow/
 .claude/settings.local.json
 .claude/settings.local.*.json
 .claude/.env.local*

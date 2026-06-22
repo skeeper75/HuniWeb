@@ -1,0 +1,41 @@
+category,pdtCode_or_scope,name,item_gbn,price_gbn,upload_available,editor_available,evidence,confidence
+AC,ACNTHAP,아크릴 명찰,vDigital_item,vTmpl_price,Y(코드상),Y,cascade_captures/ACNTHAP_cascade.json,확인
+AC,"AC-카테고리(상품 19/20건, 직접증거 없음)",아크릴 명찰 외,vDigital_item(추정),모름,모름(코드상 PDF 경로 존재),"Y(추정,카테고리 신위젯)",monitor_report.md:30-33(GS/AC 카테고리=신위젯);deob_06:1192-1203(코드상 PDF/에디터 둘다),추정
+AH,"AH-카테고리(상품 10/10건, 직접증거 없음)",일반 점착(영구점착) 외,모름,모름,모름,모름,"monitor_report.md:10-18(명함/전단/스티커/배너 등 400+=레거시 product.js, Shadow DOM 없음)",모름(근거 없음)
+AI,"AI-카테고리(상품 14/14건, 직접증거 없음)",미니 에코백 외,모름,모름,모름,모름,"monitor_report.md:10-18(명함/전단/스티커/배너 등 400+=레거시 product.js, Shadow DOM 없음)",모름(근거 없음)
+BC,BCSPDFT,일반 명함,N/A(레거시),N/A(레거시),모름,N(레거시 시스템),"BCSPDFT_capture.json(shadowHostCount=0,mountPoints=[]→레거시);monitor_report.md:10-18(레거시=product.js,Shadow DOM 없음)",확인(레거시=신위젯 대상 아님)
+BC,BCSPHIG,고급지 명함,N/A(레거시),N/A(레거시),모름,N(레거시 시스템),"BCSPHIG_capture.json(레거시 캡처);monitor_report.md:10-18(레거시=product.js,Shadow DOM 없음)",확인(레거시=신위젯 대상 아님)
+BC,"BC-카테고리(상품 7/9건, 직접증거 없음)",일반 명함 외,모름,모름,모름,모름,"monitor_report.md:10-18(명함/전단/스티커/배너 등 400+=레거시 product.js, Shadow DOM 없음)",모름(근거 없음)
+BN,BNSTDFT,X배너(스탠드 배너),N/A(레거시),N/A(레거시),모름,N(레거시 시스템),"BNSTDFT_capture.json(레거시 캡처);monitor_report.md:10-18(레거시=product.js,Shadow DOM 없음)",확인(레거시=신위젯 대상 아님)
+BN,"BN-카테고리(상품 22/23건, 직접증거 없음)",[오늘 출발] X배너(스탠드 배너) 외,모름,모름,모름,모름,"monitor_report.md:10-18(명함/전단/스티커/배너 등 400+=레거시 product.js, Shadow DOM 없음)",모름(근거 없음)
+BT,"BT-카테고리(상품 12/12건, 직접증거 없음)",핀 버튼 외,모름,모름,모름,모름,"monitor_report.md:10-18(명함/전단/스티커/배너 등 400+=레거시 product.js, Shadow DOM 없음)",모름(근거 없음)
+CL,"CL-카테고리(상품 30/30건, 직접증거 없음)",앞치마 외,모름,모름,모름,모름,"monitor_report.md:10-18(명함/전단/스티커/배너 등 400+=레거시 product.js, Shadow DOM 없음)",모름(근거 없음)
+EN,"EN-카테고리(상품 7/7건, 직접증거 없음)",컬러 대봉투(월) 외,모름,모름,모름,모름,"monitor_report.md:10-18(명함/전단/스티커/배너 등 400+=레거시 product.js, Shadow DOM 없음)",모름(근거 없음)
+ET,"ET-카테고리(상품 2/2건, 직접증거 없음)",손목띠 외,모름,모름,모름,모름,"monitor_report.md:10-18(명함/전단/스티커/배너 등 400+=레거시 product.js, Shadow DOM 없음)",모름(근거 없음)
+FB,"FB-카테고리(상품 8/8건, 직접증거 없음)",마우스패드-3종 외,모름,모름,모름,모름,"monitor_report.md:10-18(명함/전단/스티커/배너 등 400+=레거시 product.js, Shadow DOM 없음)",모름(근거 없음)
+FS,"FS-카테고리(상품 21/21건, 직접증거 없음)",패브릭 코스터 외,모름,모름,모름,모름,"monitor_report.md:10-18(명함/전단/스티커/배너 등 400+=레거시 product.js, Shadow DOM 없음)",모름(근거 없음)
+GS,GSTGMIC,마이크 네임택,vDigital_item,tiered_price,Y(코드상),Y,cascade_captures/GSTGMIC_cascade.json;editor_api_analysis.md;monitor_report.md:118-140,확인
+GS,"GS-카테고리(상품 135/136건, 직접증거 없음)",마이크 네임택 외,vDigital_item(추정),모름,모름(코드상 PDF 경로 존재),"Y(추정,카테고리 신위젯)",monitor_report.md:30-33(GS/AC 카테고리=신위젯);deob_06:1192-1203(코드상 PDF/에디터 둘다),추정
+HL,"HL-카테고리(상품 7/7건, 직접증거 없음)",[옵셋] 합판전단 외,모름,모름,모름,모름,"monitor_report.md:10-18(명함/전단/스티커/배너 등 400+=레거시 product.js, Shadow DOM 없음)",모름(근거 없음)
+LF,LFXXXXX,일반전단,N/A(레거시),N/A(레거시),모름,N(레거시 시스템),"LFXXXXX_capture.json(레거시 캡처);monitor_report.md:10-18(레거시=product.js,Shadow DOM 없음)",확인(레거시=신위젯 대상 아님)
+LF,"LF-카테고리(상품 2/3건, 직접증거 없음)",일반전단 외,모름,모름,모름,모름,"monitor_report.md:10-18(명함/전단/스티커/배너 등 400+=레거시 product.js, Shadow DOM 없음)",모름(근거 없음)
+ME,"ME-카테고리(상품 1/1건, 직접증거 없음)",각대봉투 - 크라프트 외,모름,모름,모름,모름,"monitor_report.md:10-18(명함/전단/스티커/배너 등 400+=레거시 product.js, Shadow DOM 없음)",모름(근거 없음)
+NC,"NC-카테고리(상품 9/9건, 직접증거 없음)",[옵셋] 일반 명함 외,모름,모름,모름,모름,"monitor_report.md:10-18(명함/전단/스티커/배너 등 400+=레거시 product.js, Shadow DOM 없음)",모름(근거 없음)
+OT,"OT-카테고리(상품 7/7건, 직접증거 없음)",클래퍼 외,모름,모름,모름,모름,"monitor_report.md:10-18(명함/전단/스티커/배너 등 400+=레거시 product.js, Shadow DOM 없음)",모름(근거 없음)
+PD,"PD-카테고리(상품 3/3건, 직접증거 없음)",스툴 외,모름,모름,모름,모름,"monitor_report.md:10-18(명함/전단/스티커/배너 등 400+=레거시 product.js, Shadow DOM 없음)",모름(근거 없음)
+PH,"PH-카테고리(상품 30/30건, 직접증거 없음)",포토 보드 외,모름,모름,모름,모름,"monitor_report.md:10-18(명함/전단/스티커/배너 등 400+=레거시 product.js, Shadow DOM 없음)",모름(근거 없음)
+PM,"PM-카테고리(상품 2/2건, 직접증거 없음)",화보 포트폴리오_낱장 외,모름,모름,모름,모름,"monitor_report.md:10-18(명함/전단/스티커/배너 등 400+=레거시 product.js, Shadow DOM 없음)",모름(근거 없음)
+PO,"PO-카테고리(상품 7/7건, 직접증거 없음)",포맥스 합지(파인아트) 외,모름,모름,모름,모름,"monitor_report.md:10-18(명함/전단/스티커/배너 등 400+=레거시 product.js, Shadow DOM 없음)",모름(근거 없음)
+PR,PRBKYPR,[윤전] 무선 책자 (컬러),book2025_item,book2025_price,Y,Y,cascade_captures/PRBKYPR_cascade.json;monitor_report.md:24-27,확인
+PR,PRBKYRN,[윤전] 트윈링 책자 (컬러),book2025_item,book2025_price,Y,Y,cascade_captures/PRBKYRN_cascade.json,확인
+PR,PRBKYSL,[윤전] 실제본 책자 (컬러),book2025_item,book2025_price,Y,Y,cascade_captures/PRBKYSL_cascade.json,확인
+PR,PRBKORD,[토너 특가] 트윈링 책자 (컬러),book2025_item,book2025_price,Y,Y,cascade_captures/PRBKORD_cascade.json;monitor_report.md:91-116,확인
+PR,PRBKOPR,[토너] 무선 책자 (컬러),book2025_item,book2025_price,Y,Y,cascade_captures/PRBKOPR_cascade.json,확인
+PR,PRBKOST,[토너] 스테플러 책자 (컬러),book2025_item,book2025_price,Y,Y,cascade_captures/PRBKOST_cascade.json,확인
+PR,PRLFXXX,리플렛,N/A(레거시),N/A(레거시),모름,N(레거시 시스템),"PRLFXXX_capture.json(레거시 캡처);monitor_report.md:10-18(레거시=product.js,Shadow DOM 없음)",확인(레거시=신위젯 대상 아님)
+PR,PR-비책자,리플렛 외,모름,모름,모름,모름,"monitor_report.md:10-18(PR의 책자 PRBK*만 신위젯 확인, 리플렛 등 나머지는 레거시 추정)",추정
+PV,"PV-카테고리(상품 1/1건, 직접증거 없음)",사원증/회원증(PVC카드) 외,모름,모름,모름,모름,"monitor_report.md:10-18(명함/전단/스티커/배너 등 400+=레거시 product.js, Shadow DOM 없음)",모름(근거 없음)
+SK,"SK-카테고리(상품 2/2건, 직접증거 없음)",[옵셋] 도무송 스티커 외,모름,모름,모름,모름,"monitor_report.md:10-18(명함/전단/스티커/배너 등 400+=레거시 product.js, Shadow DOM 없음)",모름(근거 없음)
+ST,STDRCAD,카드스티커,N/A(레거시),N/A(레거시),모름,N(레거시 시스템),"STDRCAD_capture.json(레거시 캡처);monitor_report.md:10-18(레거시=product.js,Shadow DOM 없음)",확인(레거시=신위젯 대상 아님)
+ST,"ST-카테고리(상품 35/36건, 직접증거 없음)",카드스티커 외,모름,모름,모름,모름,"monitor_report.md:10-18(명함/전단/스티커/배너 등 400+=레거시 product.js, Shadow DOM 없음)",모름(근거 없음)
+TP,"TP-카테고리(상품 23/23건, 직접증거 없음)",디자인 명함 외,모름,모름,모름,모름,"monitor_report.md:10-18(명함/전단/스티커/배너 등 400+=레거시 product.js, Shadow DOM 없음)",모름(근거 없음)
