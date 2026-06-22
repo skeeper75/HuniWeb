@@ -1,0 +1,1062 @@
+{
+  "scenario": "G-ATTB",
+  "productCode": "GSNTSPR",
+  "price_gbn": "tmpl_price",
+  "note": "★D-L1 ATTB 단가영향 입증. (a) RIN_DFT 링색 ATTB(BLK/WHT/GLD/SIL)·ROU_DFT 반경 ATTB(0/4/8) 차등 (b) ORD_CNT/PRN_CNT qty 스윕. ATTB는 가격 불변·가격은 ORD_CNT/PRN_CNT가 운반 — 이 차등이 qty=1 단일캡처의 ORD_CNT/상수/material-qty 모호성을 해소(crossverify-round2 D-1).",
+  "capturedAt": "2026-06-22T16:34:25.964Z",
+  "sessionFresh": true,
+  "oracle": "live RedPrinting via server.js :3001 (read-only get_ajax_price_vTmpl)",
+  "oracleSanity": {
+    "readsResultSum": true,
+    "perLineMayBeZero": "legal (bundle components); result_sum.PRICE is authority",
+    "normalPathZeroCount": 0,
+    "zeroIsDefect": "OK: 정상경로 PRICE≠0"
+  },
+  "secretsRedaction": "cookies/JWT/presigned 미포함(server.js 서버측 쿠키주입). mb_cust_cod 세션파생값 [REDACTED], 익명기본 10000000 유지(공개값).",
+  "calls": [
+    {
+      "label": "ATTB고정 ORD1 PRN1",
+      "status": 200,
+      "retCode": 200,
+      "reqBody": {
+        "dataJson": {
+          "ORD_INFO": [
+            {
+              "PDT_CD": "GSNTSPR",
+              "MTRL_CD": "RIBVW350",
+              "CUT_WDT": 182,
+              "CUT_HGH": 257,
+              "WRK_WDT": 187,
+              "WRK_HGH": 262,
+              "PRN_CNT": 1,
+              "ORD_CNT": 1,
+              "DOSU_COD": "SID_S",
+              "PRN_CLR_CNT": 4
+            }
+          ],
+          "PCS_INFO": [
+            {
+              "PCS_COD": "COT_DFT",
+              "PCS_DTL_COD": "TCGLS",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "CUT_DFT",
+              "PCS_DTL_COD": "DFXXX",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "INN_DFT",
+              "PCS_DTL_COD": "INNON",
+              "ATTB": 1,
+              "ATTB_2": "",
+              "ATTB_3": ""
+            },
+            {
+              "PCS_COD": "RIN_DFT",
+              "PCS_DTL_COD": "BPLFT",
+              "ATTB": "RIN_BLK"
+            },
+            {
+              "PCS_COD": "ROU_DFT",
+              "PCS_DTL_COD": "DFXLT",
+              "ATTB": "4"
+            },
+            {
+              "PCS_COD": "ROU_DFT",
+              "PCS_DTL_COD": "DFXRT",
+              "ATTB": "4"
+            },
+            {
+              "PCS_COD": "ROU_DFT",
+              "PCS_DTL_COD": "DFXLB",
+              "ATTB": "4"
+            },
+            {
+              "PCS_COD": "ROU_DFT",
+              "PCS_DTL_COD": "DFXRB",
+              "ATTB": "4"
+            }
+          ],
+          "price_gbn": "tmpl_price",
+          "mb_cust_cod": "10000000"
+        }
+      },
+      "result_sum": {
+        "PRICE": 6300,
+        "PRICE_VAT": 630,
+        "PRICE_MALL": 6300,
+        "PRICE_MALL_VAT": 630,
+        "ORG_PRICE": 6300,
+        "ORG_PRICE_VAT": 630
+      },
+      "perLine": [
+        {
+          "PCS_CD": "COT_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "CUT_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "INN_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "RIN_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "ROU_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "ROU_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "ROU_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "ROU_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "PRT_DFT",
+          "PRICE": 6300
+        }
+      ],
+      "priceLog": "개당단가 : 0.00원, 인쇄수량DDDDD : 1, 주문건수 : 1"
+    },
+    {
+      "label": "ATTB고정 ORD1 PRN5 (PRN↑)",
+      "status": 200,
+      "retCode": 200,
+      "reqBody": {
+        "dataJson": {
+          "ORD_INFO": [
+            {
+              "PDT_CD": "GSNTSPR",
+              "MTRL_CD": "RIBVW350",
+              "CUT_WDT": 182,
+              "CUT_HGH": 257,
+              "WRK_WDT": 187,
+              "WRK_HGH": 262,
+              "PRN_CNT": 5,
+              "ORD_CNT": 1,
+              "DOSU_COD": "SID_S",
+              "PRN_CLR_CNT": 4
+            }
+          ],
+          "PCS_INFO": [
+            {
+              "PCS_COD": "COT_DFT",
+              "PCS_DTL_COD": "TCGLS",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "CUT_DFT",
+              "PCS_DTL_COD": "DFXXX",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "INN_DFT",
+              "PCS_DTL_COD": "INNON",
+              "ATTB": 1,
+              "ATTB_2": "",
+              "ATTB_3": ""
+            },
+            {
+              "PCS_COD": "RIN_DFT",
+              "PCS_DTL_COD": "BPLFT",
+              "ATTB": "RIN_BLK"
+            },
+            {
+              "PCS_COD": "ROU_DFT",
+              "PCS_DTL_COD": "DFXLT",
+              "ATTB": "4"
+            },
+            {
+              "PCS_COD": "ROU_DFT",
+              "PCS_DTL_COD": "DFXRT",
+              "ATTB": "4"
+            },
+            {
+              "PCS_COD": "ROU_DFT",
+              "PCS_DTL_COD": "DFXLB",
+              "ATTB": "4"
+            },
+            {
+              "PCS_COD": "ROU_DFT",
+              "PCS_DTL_COD": "DFXRB",
+              "ATTB": "4"
+            }
+          ],
+          "price_gbn": "tmpl_price",
+          "mb_cust_cod": "10000000"
+        }
+      },
+      "result_sum": {
+        "PRICE": 31300,
+        "PRICE_VAT": 3130,
+        "PRICE_MALL": 31300,
+        "PRICE_MALL_VAT": 3130,
+        "ORG_PRICE": 31300,
+        "ORG_PRICE_VAT": 3130
+      },
+      "perLine": [
+        {
+          "PCS_CD": "COT_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "CUT_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "INN_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "RIN_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "ROU_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "ROU_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "ROU_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "ROU_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "PRT_DFT",
+          "PRICE": 31300
+        }
+      ],
+      "priceLog": "개당단가 : 0.00원, 인쇄수량DDDDD : 5, 주문건수 : 1"
+    },
+    {
+      "label": "ATTB고정 ORD5 PRN1 (ORD↑)",
+      "status": 200,
+      "retCode": 200,
+      "reqBody": {
+        "dataJson": {
+          "ORD_INFO": [
+            {
+              "PDT_CD": "GSNTSPR",
+              "MTRL_CD": "RIBVW350",
+              "CUT_WDT": 182,
+              "CUT_HGH": 257,
+              "WRK_WDT": 187,
+              "WRK_HGH": 262,
+              "PRN_CNT": 1,
+              "ORD_CNT": 5,
+              "DOSU_COD": "SID_S",
+              "PRN_CLR_CNT": 4
+            }
+          ],
+          "PCS_INFO": [
+            {
+              "PCS_COD": "COT_DFT",
+              "PCS_DTL_COD": "TCGLS",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "CUT_DFT",
+              "PCS_DTL_COD": "DFXXX",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "INN_DFT",
+              "PCS_DTL_COD": "INNON",
+              "ATTB": 1,
+              "ATTB_2": "",
+              "ATTB_3": ""
+            },
+            {
+              "PCS_COD": "RIN_DFT",
+              "PCS_DTL_COD": "BPLFT",
+              "ATTB": "RIN_BLK"
+            },
+            {
+              "PCS_COD": "ROU_DFT",
+              "PCS_DTL_COD": "DFXLT",
+              "ATTB": "4"
+            },
+            {
+              "PCS_COD": "ROU_DFT",
+              "PCS_DTL_COD": "DFXRT",
+              "ATTB": "4"
+            },
+            {
+              "PCS_COD": "ROU_DFT",
+              "PCS_DTL_COD": "DFXLB",
+              "ATTB": "4"
+            },
+            {
+              "PCS_COD": "ROU_DFT",
+              "PCS_DTL_COD": "DFXRB",
+              "ATTB": "4"
+            }
+          ],
+          "price_gbn": "tmpl_price",
+          "mb_cust_cod": "10000000"
+        }
+      },
+      "result_sum": {
+        "PRICE": 31500,
+        "PRICE_VAT": 3150,
+        "PRICE_MALL": 31500,
+        "PRICE_MALL_VAT": 3150,
+        "ORG_PRICE": 31500,
+        "ORG_PRICE_VAT": 3150
+      },
+      "perLine": [
+        {
+          "PCS_CD": "COT_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "CUT_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "INN_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "RIN_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "ROU_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "ROU_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "ROU_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "ROU_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "PRT_DFT",
+          "PRICE": 31500
+        }
+      ],
+      "priceLog": "개당단가 : 0.00원, 인쇄수량DDDDD : 1, 주문건수 : 5"
+    },
+    {
+      "label": "ATTB고정 ORD10 PRN1",
+      "status": 200,
+      "retCode": 200,
+      "reqBody": {
+        "dataJson": {
+          "ORD_INFO": [
+            {
+              "PDT_CD": "GSNTSPR",
+              "MTRL_CD": "RIBVW350",
+              "CUT_WDT": 182,
+              "CUT_HGH": 257,
+              "WRK_WDT": 187,
+              "WRK_HGH": 262,
+              "PRN_CNT": 1,
+              "ORD_CNT": 10,
+              "DOSU_COD": "SID_S",
+              "PRN_CLR_CNT": 4
+            }
+          ],
+          "PCS_INFO": [
+            {
+              "PCS_COD": "COT_DFT",
+              "PCS_DTL_COD": "TCGLS",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "CUT_DFT",
+              "PCS_DTL_COD": "DFXXX",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "INN_DFT",
+              "PCS_DTL_COD": "INNON",
+              "ATTB": 1,
+              "ATTB_2": "",
+              "ATTB_3": ""
+            },
+            {
+              "PCS_COD": "RIN_DFT",
+              "PCS_DTL_COD": "BPLFT",
+              "ATTB": "RIN_BLK"
+            },
+            {
+              "PCS_COD": "ROU_DFT",
+              "PCS_DTL_COD": "DFXLT",
+              "ATTB": "4"
+            },
+            {
+              "PCS_COD": "ROU_DFT",
+              "PCS_DTL_COD": "DFXRT",
+              "ATTB": "4"
+            },
+            {
+              "PCS_COD": "ROU_DFT",
+              "PCS_DTL_COD": "DFXLB",
+              "ATTB": "4"
+            },
+            {
+              "PCS_COD": "ROU_DFT",
+              "PCS_DTL_COD": "DFXRB",
+              "ATTB": "4"
+            }
+          ],
+          "price_gbn": "tmpl_price",
+          "mb_cust_cod": "10000000"
+        }
+      },
+      "result_sum": {
+        "PRICE": 63000,
+        "PRICE_VAT": 6300,
+        "PRICE_MALL": 63000,
+        "PRICE_MALL_VAT": 6300,
+        "ORG_PRICE": 63000,
+        "ORG_PRICE_VAT": 6300
+      },
+      "perLine": [
+        {
+          "PCS_CD": "COT_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "CUT_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "INN_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "RIN_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "ROU_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "ROU_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "ROU_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "ROU_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "PRT_DFT",
+          "PRICE": 63000
+        }
+      ],
+      "priceLog": "개당단가 : 0.00원, 인쇄수량DDDDD : 1, 주문건수 : 10"
+    },
+    {
+      "label": "링색 RIN_WHT (ATTB차등)",
+      "status": 200,
+      "retCode": 200,
+      "reqBody": {
+        "dataJson": {
+          "ORD_INFO": [
+            {
+              "PDT_CD": "GSNTSPR",
+              "MTRL_CD": "RIBVW350",
+              "CUT_WDT": 182,
+              "CUT_HGH": 257,
+              "WRK_WDT": 187,
+              "WRK_HGH": 262,
+              "PRN_CNT": 1,
+              "ORD_CNT": 1,
+              "DOSU_COD": "SID_S",
+              "PRN_CLR_CNT": 4
+            }
+          ],
+          "PCS_INFO": [
+            {
+              "PCS_COD": "COT_DFT",
+              "PCS_DTL_COD": "TCGLS",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "CUT_DFT",
+              "PCS_DTL_COD": "DFXXX",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "INN_DFT",
+              "PCS_DTL_COD": "INNON",
+              "ATTB": 1,
+              "ATTB_2": "",
+              "ATTB_3": ""
+            },
+            {
+              "PCS_COD": "RIN_DFT",
+              "PCS_DTL_COD": "BPLFT",
+              "ATTB": "RIN_WHT"
+            },
+            {
+              "PCS_COD": "ROU_DFT",
+              "PCS_DTL_COD": "DFXLT",
+              "ATTB": "4"
+            },
+            {
+              "PCS_COD": "ROU_DFT",
+              "PCS_DTL_COD": "DFXRT",
+              "ATTB": "4"
+            },
+            {
+              "PCS_COD": "ROU_DFT",
+              "PCS_DTL_COD": "DFXLB",
+              "ATTB": "4"
+            },
+            {
+              "PCS_COD": "ROU_DFT",
+              "PCS_DTL_COD": "DFXRB",
+              "ATTB": "4"
+            }
+          ],
+          "price_gbn": "tmpl_price",
+          "mb_cust_cod": "10000000"
+        }
+      },
+      "result_sum": {
+        "PRICE": 6300,
+        "PRICE_VAT": 630,
+        "PRICE_MALL": 6300,
+        "PRICE_MALL_VAT": 630,
+        "ORG_PRICE": 6300,
+        "ORG_PRICE_VAT": 630
+      },
+      "perLine": [
+        {
+          "PCS_CD": "COT_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "CUT_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "INN_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "RIN_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "ROU_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "ROU_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "ROU_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "ROU_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "PRT_DFT",
+          "PRICE": 6300
+        }
+      ],
+      "priceLog": "개당단가 : 0.00원, 인쇄수량DDDDD : 1, 주문건수 : 1"
+    },
+    {
+      "label": "링색 RIN_GLD (ATTB차등)",
+      "status": 200,
+      "retCode": 200,
+      "reqBody": {
+        "dataJson": {
+          "ORD_INFO": [
+            {
+              "PDT_CD": "GSNTSPR",
+              "MTRL_CD": "RIBVW350",
+              "CUT_WDT": 182,
+              "CUT_HGH": 257,
+              "WRK_WDT": 187,
+              "WRK_HGH": 262,
+              "PRN_CNT": 1,
+              "ORD_CNT": 1,
+              "DOSU_COD": "SID_S",
+              "PRN_CLR_CNT": 4
+            }
+          ],
+          "PCS_INFO": [
+            {
+              "PCS_COD": "COT_DFT",
+              "PCS_DTL_COD": "TCGLS",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "CUT_DFT",
+              "PCS_DTL_COD": "DFXXX",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "INN_DFT",
+              "PCS_DTL_COD": "INNON",
+              "ATTB": 1,
+              "ATTB_2": "",
+              "ATTB_3": ""
+            },
+            {
+              "PCS_COD": "RIN_DFT",
+              "PCS_DTL_COD": "BPLFT",
+              "ATTB": "RIN_GLD"
+            },
+            {
+              "PCS_COD": "ROU_DFT",
+              "PCS_DTL_COD": "DFXLT",
+              "ATTB": "4"
+            },
+            {
+              "PCS_COD": "ROU_DFT",
+              "PCS_DTL_COD": "DFXRT",
+              "ATTB": "4"
+            },
+            {
+              "PCS_COD": "ROU_DFT",
+              "PCS_DTL_COD": "DFXLB",
+              "ATTB": "4"
+            },
+            {
+              "PCS_COD": "ROU_DFT",
+              "PCS_DTL_COD": "DFXRB",
+              "ATTB": "4"
+            }
+          ],
+          "price_gbn": "tmpl_price",
+          "mb_cust_cod": "10000000"
+        }
+      },
+      "result_sum": {
+        "PRICE": 6300,
+        "PRICE_VAT": 630,
+        "PRICE_MALL": 6300,
+        "PRICE_MALL_VAT": 630,
+        "ORG_PRICE": 6300,
+        "ORG_PRICE_VAT": 630
+      },
+      "perLine": [
+        {
+          "PCS_CD": "COT_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "CUT_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "INN_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "RIN_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "ROU_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "ROU_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "ROU_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "ROU_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "PRT_DFT",
+          "PRICE": 6300
+        }
+      ],
+      "priceLog": "개당단가 : 0.00원, 인쇄수량DDDDD : 1, 주문건수 : 1"
+    },
+    {
+      "label": "링색 RIN_SIL (ATTB차등)",
+      "status": 200,
+      "retCode": 200,
+      "reqBody": {
+        "dataJson": {
+          "ORD_INFO": [
+            {
+              "PDT_CD": "GSNTSPR",
+              "MTRL_CD": "RIBVW350",
+              "CUT_WDT": 182,
+              "CUT_HGH": 257,
+              "WRK_WDT": 187,
+              "WRK_HGH": 262,
+              "PRN_CNT": 1,
+              "ORD_CNT": 1,
+              "DOSU_COD": "SID_S",
+              "PRN_CLR_CNT": 4
+            }
+          ],
+          "PCS_INFO": [
+            {
+              "PCS_COD": "COT_DFT",
+              "PCS_DTL_COD": "TCGLS",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "CUT_DFT",
+              "PCS_DTL_COD": "DFXXX",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "INN_DFT",
+              "PCS_DTL_COD": "INNON",
+              "ATTB": 1,
+              "ATTB_2": "",
+              "ATTB_3": ""
+            },
+            {
+              "PCS_COD": "RIN_DFT",
+              "PCS_DTL_COD": "BPLFT",
+              "ATTB": "RIN_SIL"
+            },
+            {
+              "PCS_COD": "ROU_DFT",
+              "PCS_DTL_COD": "DFXLT",
+              "ATTB": "4"
+            },
+            {
+              "PCS_COD": "ROU_DFT",
+              "PCS_DTL_COD": "DFXRT",
+              "ATTB": "4"
+            },
+            {
+              "PCS_COD": "ROU_DFT",
+              "PCS_DTL_COD": "DFXLB",
+              "ATTB": "4"
+            },
+            {
+              "PCS_COD": "ROU_DFT",
+              "PCS_DTL_COD": "DFXRB",
+              "ATTB": "4"
+            }
+          ],
+          "price_gbn": "tmpl_price",
+          "mb_cust_cod": "10000000"
+        }
+      },
+      "result_sum": {
+        "PRICE": 6300,
+        "PRICE_VAT": 630,
+        "PRICE_MALL": 6300,
+        "PRICE_MALL_VAT": 630,
+        "ORG_PRICE": 6300,
+        "ORG_PRICE_VAT": 630
+      },
+      "perLine": [
+        {
+          "PCS_CD": "COT_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "CUT_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "INN_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "RIN_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "ROU_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "ROU_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "ROU_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "ROU_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "PRT_DFT",
+          "PRICE": 6300
+        }
+      ],
+      "priceLog": "개당단가 : 0.00원, 인쇄수량DDDDD : 1, 주문건수 : 1"
+    },
+    {
+      "label": "반경 rou8 (ATTB차등)",
+      "status": 200,
+      "retCode": 200,
+      "reqBody": {
+        "dataJson": {
+          "ORD_INFO": [
+            {
+              "PDT_CD": "GSNTSPR",
+              "MTRL_CD": "RIBVW350",
+              "CUT_WDT": 182,
+              "CUT_HGH": 257,
+              "WRK_WDT": 187,
+              "WRK_HGH": 262,
+              "PRN_CNT": 1,
+              "ORD_CNT": 1,
+              "DOSU_COD": "SID_S",
+              "PRN_CLR_CNT": 4
+            }
+          ],
+          "PCS_INFO": [
+            {
+              "PCS_COD": "COT_DFT",
+              "PCS_DTL_COD": "TCGLS",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "CUT_DFT",
+              "PCS_DTL_COD": "DFXXX",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "INN_DFT",
+              "PCS_DTL_COD": "INNON",
+              "ATTB": 1,
+              "ATTB_2": "",
+              "ATTB_3": ""
+            },
+            {
+              "PCS_COD": "RIN_DFT",
+              "PCS_DTL_COD": "BPLFT",
+              "ATTB": "RIN_BLK"
+            },
+            {
+              "PCS_COD": "ROU_DFT",
+              "PCS_DTL_COD": "DFXLT",
+              "ATTB": "8"
+            },
+            {
+              "PCS_COD": "ROU_DFT",
+              "PCS_DTL_COD": "DFXRT",
+              "ATTB": "8"
+            },
+            {
+              "PCS_COD": "ROU_DFT",
+              "PCS_DTL_COD": "DFXLB",
+              "ATTB": "8"
+            },
+            {
+              "PCS_COD": "ROU_DFT",
+              "PCS_DTL_COD": "DFXRB",
+              "ATTB": "8"
+            }
+          ],
+          "price_gbn": "tmpl_price",
+          "mb_cust_cod": "10000000"
+        }
+      },
+      "result_sum": {
+        "PRICE": 6300,
+        "PRICE_VAT": 630,
+        "PRICE_MALL": 6300,
+        "PRICE_MALL_VAT": 630,
+        "ORG_PRICE": 6300,
+        "ORG_PRICE_VAT": 630
+      },
+      "perLine": [
+        {
+          "PCS_CD": "COT_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "CUT_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "INN_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "RIN_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "ROU_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "ROU_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "ROU_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "ROU_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "PRT_DFT",
+          "PRICE": 6300
+        }
+      ],
+      "priceLog": "개당단가 : 0.00원, 인쇄수량DDDDD : 1, 주문건수 : 1"
+    },
+    {
+      "label": "반경 rou0 (ATTB차등)",
+      "status": 200,
+      "retCode": 200,
+      "reqBody": {
+        "dataJson": {
+          "ORD_INFO": [
+            {
+              "PDT_CD": "GSNTSPR",
+              "MTRL_CD": "RIBVW350",
+              "CUT_WDT": 182,
+              "CUT_HGH": 257,
+              "WRK_WDT": 187,
+              "WRK_HGH": 262,
+              "PRN_CNT": 1,
+              "ORD_CNT": 1,
+              "DOSU_COD": "SID_S",
+              "PRN_CLR_CNT": 4
+            }
+          ],
+          "PCS_INFO": [
+            {
+              "PCS_COD": "COT_DFT",
+              "PCS_DTL_COD": "TCGLS",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "CUT_DFT",
+              "PCS_DTL_COD": "DFXXX",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "INN_DFT",
+              "PCS_DTL_COD": "INNON",
+              "ATTB": 1,
+              "ATTB_2": "",
+              "ATTB_3": ""
+            },
+            {
+              "PCS_COD": "RIN_DFT",
+              "PCS_DTL_COD": "BPLFT",
+              "ATTB": "RIN_BLK"
+            },
+            {
+              "PCS_COD": "ROU_DFT",
+              "PCS_DTL_COD": "DFXLT",
+              "ATTB": "0"
+            },
+            {
+              "PCS_COD": "ROU_DFT",
+              "PCS_DTL_COD": "DFXRT",
+              "ATTB": "0"
+            },
+            {
+              "PCS_COD": "ROU_DFT",
+              "PCS_DTL_COD": "DFXLB",
+              "ATTB": "0"
+            },
+            {
+              "PCS_COD": "ROU_DFT",
+              "PCS_DTL_COD": "DFXRB",
+              "ATTB": "0"
+            }
+          ],
+          "price_gbn": "tmpl_price",
+          "mb_cust_cod": "10000000"
+        }
+      },
+      "result_sum": {
+        "PRICE": 6300,
+        "PRICE_VAT": 630,
+        "PRICE_MALL": 6300,
+        "PRICE_MALL_VAT": 630,
+        "ORG_PRICE": 6300,
+        "ORG_PRICE_VAT": 630
+      },
+      "perLine": [
+        {
+          "PCS_CD": "COT_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "CUT_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "INN_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "RIN_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "ROU_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "ROU_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "ROU_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "ROU_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "PRT_DFT",
+          "PRICE": 6300
+        }
+      ],
+      "priceLog": "개당단가 : 0.00원, 인쇄수량DDDDD : 1, 주문건수 : 1"
+    }
+  ]
+}

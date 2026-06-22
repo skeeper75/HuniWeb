@@ -1,0 +1,552 @@
+{
+  "scenario": "G-TD",
+  "productCode": "GSTGMIC",
+  "price_gbn": "tiered_price",
+  "note": "TieredDiscount tiered_price. 삼각 마이크 네임택L. PRN_CNT 스윕 → result_sum.PRICE 단조증가(메타모픽). WRK_MTR ATTB=PRN_CNT 추종(다형). per-line=PRT_DFT 외 0.",
+  "capturedAt": "2026-06-22T16:34:20.532Z",
+  "sessionFresh": true,
+  "oracle": "live RedPrinting via server.js :3001 (read-only get_ajax_price_vTmpl)",
+  "oracleSanity": {
+    "readsResultSum": true,
+    "perLineMayBeZero": "legal (bundle components); result_sum.PRICE is authority",
+    "normalPathZeroCount": 0,
+    "zeroIsDefect": "OK: 정상경로 PRICE≠0"
+  },
+  "secretsRedaction": "cookies/JWT/presigned 미포함(server.js 서버측 쿠키주입). mb_cust_cod 세션파생값 [REDACTED], 익명기본 10000000 유지(공개값).",
+  "calls": [
+    {
+      "label": "PRN_CNT=1",
+      "status": 200,
+      "retCode": 200,
+      "reqBody": {
+        "dataJson": {
+          "ORD_INFO": [
+            {
+              "PDT_CD": "GSTGMIC",
+              "MTRL_CD": "RXBVW300",
+              "CUT_WDT": 351,
+              "CUT_HGH": 291,
+              "WRK_WDT": 355,
+              "WRK_HGH": 295,
+              "PRN_CNT": 1,
+              "ORD_CNT": 1,
+              "DOSU_COD": "SID_S",
+              "PRN_CLR_CNT": 4
+            }
+          ],
+          "PCS_INFO": [
+            {
+              "PCS_COD": "WRK_MTR",
+              "PCS_DTL_COD": "TG003",
+              "ATTB": 1,
+              "ATTB_2": "",
+              "ATTB_3": ""
+            },
+            {
+              "PCS_COD": "COT_DFT",
+              "PCS_DTL_COD": "TCGLS",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "PDT_WRK",
+              "PCS_DTL_COD": "PKT01",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "PAK_POL",
+              "PCS_DTL_COD": "DFXXX",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "THO_CUT",
+              "PCS_DTL_COD": "TG003",
+              "ATTB": ""
+            }
+          ],
+          "price_gbn": "tiered_price",
+          "mb_cust_cod": "10000000"
+        }
+      },
+      "result_sum": {
+        "PRICE": 7000,
+        "PRICE_VAT": 700,
+        "PRICE_MALL": 7000,
+        "PRICE_MALL_VAT": 700,
+        "ORG_PRICE": 7000,
+        "ORG_PRICE_VAT": 700
+      },
+      "perLine": [
+        {
+          "PCS_CD": "WRK_MTR",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "COT_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "PDT_WRK",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "PAK_POL",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "THO_CUT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "PRT_DFT",
+          "PRICE": 7000
+        }
+      ],
+      "priceLog": "개당단가 : 0.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00"
+    },
+    {
+      "label": "PRN_CNT=2",
+      "status": 200,
+      "retCode": 200,
+      "reqBody": {
+        "dataJson": {
+          "ORD_INFO": [
+            {
+              "PDT_CD": "GSTGMIC",
+              "MTRL_CD": "RXBVW300",
+              "CUT_WDT": 351,
+              "CUT_HGH": 291,
+              "WRK_WDT": 355,
+              "WRK_HGH": 295,
+              "PRN_CNT": 2,
+              "ORD_CNT": 1,
+              "DOSU_COD": "SID_S",
+              "PRN_CLR_CNT": 4
+            }
+          ],
+          "PCS_INFO": [
+            {
+              "PCS_COD": "WRK_MTR",
+              "PCS_DTL_COD": "TG003",
+              "ATTB": 2,
+              "ATTB_2": "",
+              "ATTB_3": ""
+            },
+            {
+              "PCS_COD": "COT_DFT",
+              "PCS_DTL_COD": "TCGLS",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "PDT_WRK",
+              "PCS_DTL_COD": "PKT01",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "PAK_POL",
+              "PCS_DTL_COD": "DFXXX",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "THO_CUT",
+              "PCS_DTL_COD": "TG003",
+              "ATTB": ""
+            }
+          ],
+          "price_gbn": "tiered_price",
+          "mb_cust_cod": "10000000"
+        }
+      },
+      "result_sum": {
+        "PRICE": 13600,
+        "PRICE_VAT": 1360,
+        "PRICE_MALL": 13600,
+        "PRICE_MALL_VAT": 1360,
+        "ORG_PRICE": 13600,
+        "ORG_PRICE_VAT": 1360
+      },
+      "perLine": [
+        {
+          "PCS_CD": "WRK_MTR",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "COT_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "PDT_WRK",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "PAK_POL",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "THO_CUT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "PRT_DFT",
+          "PRICE": 13600
+        }
+      ],
+      "priceLog": "개당단가 : 0.00원, 인쇄수량 : 2, 주문건수 : 1, 자재단가 : 0.00"
+    },
+    {
+      "label": "PRN_CNT=5",
+      "status": 200,
+      "retCode": 200,
+      "reqBody": {
+        "dataJson": {
+          "ORD_INFO": [
+            {
+              "PDT_CD": "GSTGMIC",
+              "MTRL_CD": "RXBVW300",
+              "CUT_WDT": 351,
+              "CUT_HGH": 291,
+              "WRK_WDT": 355,
+              "WRK_HGH": 295,
+              "PRN_CNT": 5,
+              "ORD_CNT": 1,
+              "DOSU_COD": "SID_S",
+              "PRN_CLR_CNT": 4
+            }
+          ],
+          "PCS_INFO": [
+            {
+              "PCS_COD": "WRK_MTR",
+              "PCS_DTL_COD": "TG003",
+              "ATTB": 5,
+              "ATTB_2": "",
+              "ATTB_3": ""
+            },
+            {
+              "PCS_COD": "COT_DFT",
+              "PCS_DTL_COD": "TCGLS",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "PDT_WRK",
+              "PCS_DTL_COD": "PKT01",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "PAK_POL",
+              "PCS_DTL_COD": "DFXXX",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "THO_CUT",
+              "PCS_DTL_COD": "TG003",
+              "ATTB": ""
+            }
+          ],
+          "price_gbn": "tiered_price",
+          "mb_cust_cod": "10000000"
+        }
+      },
+      "result_sum": {
+        "PRICE": 33400,
+        "PRICE_VAT": 3340,
+        "PRICE_MALL": 33400,
+        "PRICE_MALL_VAT": 3340,
+        "ORG_PRICE": 33400,
+        "ORG_PRICE_VAT": 3340
+      },
+      "perLine": [
+        {
+          "PCS_CD": "WRK_MTR",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "COT_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "PDT_WRK",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "PAK_POL",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "THO_CUT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "PRT_DFT",
+          "PRICE": 33400
+        }
+      ],
+      "priceLog": "개당단가 : 0.00원, 인쇄수량 : 5, 주문건수 : 1, 자재단가 : 0.00"
+    },
+    {
+      "label": "PRN_CNT=10",
+      "status": 200,
+      "retCode": 200,
+      "reqBody": {
+        "dataJson": {
+          "ORD_INFO": [
+            {
+              "PDT_CD": "GSTGMIC",
+              "MTRL_CD": "RXBVW300",
+              "CUT_WDT": 351,
+              "CUT_HGH": 291,
+              "WRK_WDT": 355,
+              "WRK_HGH": 295,
+              "PRN_CNT": 10,
+              "ORD_CNT": 1,
+              "DOSU_COD": "SID_S",
+              "PRN_CLR_CNT": 4
+            }
+          ],
+          "PCS_INFO": [
+            {
+              "PCS_COD": "WRK_MTR",
+              "PCS_DTL_COD": "TG003",
+              "ATTB": 10,
+              "ATTB_2": "",
+              "ATTB_3": ""
+            },
+            {
+              "PCS_COD": "COT_DFT",
+              "PCS_DTL_COD": "TCGLS",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "PDT_WRK",
+              "PCS_DTL_COD": "PKT01",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "PAK_POL",
+              "PCS_DTL_COD": "DFXXX",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "THO_CUT",
+              "PCS_DTL_COD": "TG003",
+              "ATTB": ""
+            }
+          ],
+          "price_gbn": "tiered_price",
+          "mb_cust_cod": "10000000"
+        }
+      },
+      "result_sum": {
+        "PRICE": 66200,
+        "PRICE_VAT": 6620,
+        "PRICE_MALL": 66200,
+        "PRICE_MALL_VAT": 6620,
+        "ORG_PRICE": 66200,
+        "ORG_PRICE_VAT": 6620
+      },
+      "perLine": [
+        {
+          "PCS_CD": "WRK_MTR",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "COT_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "PDT_WRK",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "PAK_POL",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "THO_CUT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "PRT_DFT",
+          "PRICE": 66200
+        }
+      ],
+      "priceLog": "개당단가 : 0.00원, 인쇄수량 : 10, 주문건수 : 1, 자재단가 : 0.00"
+    },
+    {
+      "label": "PRN_CNT=30",
+      "status": 200,
+      "retCode": 200,
+      "reqBody": {
+        "dataJson": {
+          "ORD_INFO": [
+            {
+              "PDT_CD": "GSTGMIC",
+              "MTRL_CD": "RXBVW300",
+              "CUT_WDT": 351,
+              "CUT_HGH": 291,
+              "WRK_WDT": 355,
+              "WRK_HGH": 295,
+              "PRN_CNT": 30,
+              "ORD_CNT": 1,
+              "DOSU_COD": "SID_S",
+              "PRN_CLR_CNT": 4
+            }
+          ],
+          "PCS_INFO": [
+            {
+              "PCS_COD": "WRK_MTR",
+              "PCS_DTL_COD": "TG003",
+              "ATTB": 30,
+              "ATTB_2": "",
+              "ATTB_3": ""
+            },
+            {
+              "PCS_COD": "COT_DFT",
+              "PCS_DTL_COD": "TCGLS",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "PDT_WRK",
+              "PCS_DTL_COD": "PKT01",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "PAK_POL",
+              "PCS_DTL_COD": "DFXXX",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "THO_CUT",
+              "PCS_DTL_COD": "TG003",
+              "ATTB": ""
+            }
+          ],
+          "price_gbn": "tiered_price",
+          "mb_cust_cod": "10000000"
+        }
+      },
+      "result_sum": {
+        "PRICE": 194200,
+        "PRICE_VAT": 19420,
+        "PRICE_MALL": 194200,
+        "PRICE_MALL_VAT": 19420,
+        "ORG_PRICE": 194200,
+        "ORG_PRICE_VAT": 19420
+      },
+      "perLine": [
+        {
+          "PCS_CD": "WRK_MTR",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "COT_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "PDT_WRK",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "PAK_POL",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "THO_CUT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "PRT_DFT",
+          "PRICE": 194200
+        }
+      ],
+      "priceLog": "개당단가 : 0.00원, 인쇄수량 : 30, 주문건수 : 1, 자재단가 : 0.00"
+    },
+    {
+      "label": "PRN_CNT=100",
+      "status": 200,
+      "retCode": 200,
+      "reqBody": {
+        "dataJson": {
+          "ORD_INFO": [
+            {
+              "PDT_CD": "GSTGMIC",
+              "MTRL_CD": "RXBVW300",
+              "CUT_WDT": 351,
+              "CUT_HGH": 291,
+              "WRK_WDT": 355,
+              "WRK_HGH": 295,
+              "PRN_CNT": 100,
+              "ORD_CNT": 1,
+              "DOSU_COD": "SID_S",
+              "PRN_CLR_CNT": 4
+            }
+          ],
+          "PCS_INFO": [
+            {
+              "PCS_COD": "WRK_MTR",
+              "PCS_DTL_COD": "TG003",
+              "ATTB": 100,
+              "ATTB_2": "",
+              "ATTB_3": ""
+            },
+            {
+              "PCS_COD": "COT_DFT",
+              "PCS_DTL_COD": "TCGLS",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "PDT_WRK",
+              "PCS_DTL_COD": "PKT01",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "PAK_POL",
+              "PCS_DTL_COD": "DFXXX",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "THO_CUT",
+              "PCS_DTL_COD": "TG003",
+              "ATTB": ""
+            }
+          ],
+          "price_gbn": "tiered_price",
+          "mb_cust_cod": "10000000"
+        }
+      },
+      "result_sum": {
+        "PRICE": 631800,
+        "PRICE_VAT": 63180,
+        "PRICE_MALL": 631800,
+        "PRICE_MALL_VAT": 63180,
+        "ORG_PRICE": 631800,
+        "ORG_PRICE_VAT": 63180
+      },
+      "perLine": [
+        {
+          "PCS_CD": "WRK_MTR",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "COT_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "PDT_WRK",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "PAK_POL",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "THO_CUT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "PRT_DFT",
+          "PRICE": 631800
+        }
+      ],
+      "priceLog": "개당단가 : 0.00원, 인쇄수량 : 100, 주문건수 : 1, 자재단가 : 0.00"
+    }
+  ]
+}

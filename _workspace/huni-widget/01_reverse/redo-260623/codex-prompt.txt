@@ -1,0 +1,19 @@
+You are an independent 2nd-opinion reviewer of a JavaScript reverse-engineering audit. Read-only. Do NOT trust the claims below — verify each against the actual deobfuscated source file and report agreement/disagreement.
+
+SOURCE FILE (AST-deobfuscated, equivalence-preserving, 27728 lines):
+  ./deob/widget.deob.js
+
+CLAIMS TO INDEPENDENTLY VERIFY (cite file:line you find; say AGREE / DISAGREE / CANNOT-CONFIRM for each):
+
+1. A new "GarageUploader" Vue component exists (claimed at L18233).
+2. The Garage uploader tries POST /api/garage/presigned-url FIRST, and on catch falls back to POST /api/aws/presigned-url (claimed L18307-18309).
+3. The upload emit payload sets s3_region = "AWS" when AWS fallback used, else "GA" (claimed L18272).
+4. The upload emit payload shape is {gbn:"I", new_file_nm, new_file_size, org_file_nm, s3_file_size:null, s3_region} (claimed L18264-18274).
+5. The price request ORD_INFO includes a new field ADD_CLR_YN sourced from dosuInfo.ADD_CLR_YN (claimed L13982) and PACK_PRN_CNT from addOptionInfo (claimed L13984).
+6. API base vars: jn="https://www.redprinting.co.kr", is="https://widget-api.redprinting.co.kr" (claimed L12292/12294).
+7. A new endpoint get_fld_download is built as {jn}/{lang}/product/get_fld_download (claimed L12466), and get_basicKalSize at L12444.
+8. A post-processing cascade table maps FLD_DFT -> [THO_GRA, LAM_DFT] and LAM_DFT -> [MIS_DFT,OSI_DFT,COT_DFT,FOI_DFT,FLD_DFT,ROU_DFT,PRT_MAG] (claimed L14424-14426).
+9. The quantity ladder generator computes PRN_CNT = MIN_ORD_PRN_CNT + ADD_ORD_PRN_CNT * h for h=0..9 (claimed L15438-15439).
+10. Are there any REMOVED or RENAMED top-level API endpoints or changed price-request field names that would BREAK an existing client (vs additive-only changes)? This is the key risk question.
+
+For each claim give: verdict + the actual line(s) you found. End with an overall: are these RE claims trustworthy, and is claim 10 (no breaking changes) correct?

@@ -1,0 +1,128 @@
+{
+ "NCDFFLD": {
+  "ok": true,
+  "item_gbn": "offset2023_item",
+  "pdt_nme": "[옵셋] 2단/3단 명함",
+  "newPcsPresent": [],
+  "hasGarageOrUseGarage": true,
+  "hasAddClrYn": false,
+  "hasPackPrnCnt": false,
+  "hasReamCnt": true,
+  "hasMinOrdPrn": false
+ },
+ "NCDFDFT": {
+  "ok": true,
+  "item_gbn": "offset2023_item",
+  "pdt_nme": "[옵셋] 일반 명함",
+  "newPcsPresent": [
+   "HOL_DFT",
+   "ROU_DFT"
+  ],
+  "hasGarageOrUseGarage": true,
+  "hasAddClrYn": false,
+  "hasPackPrnCnt": false,
+  "hasReamCnt": true,
+  "hasMinOrdPrn": false
+ },
+ "NCCDDFT": {
+  "ok": true,
+  "item_gbn": "offset2023_item",
+  "pdt_nme": "[옵셋] 일반 카드",
+  "newPcsPresent": [
+   "FLD_DFT",
+   "HOL_DFT",
+   "ROU_DFT"
+  ],
+  "hasGarageOrUseGarage": true,
+  "hasAddClrYn": false,
+  "hasPackPrnCnt": false,
+  "hasReamCnt": true,
+  "hasMinOrdPrn": false
+ },
+ "PRBKYPR": {
+  "ok": true,
+  "item_gbn": "book2025_item",
+  "pdt_nme": "무선 책자 (컬러)",
+  "newPcsPresent": [
+   "FLD_DFT",
+   "PRT_MAG",
+   "LAM_DFT"
+  ],
+  "hasGarageOrUseGarage": true,
+  "hasAddClrYn": true,
+  "hasPackPrnCnt": false,
+  "hasReamCnt": true,
+  "hasMinOrdPrn": false
+ },
+ "GSTRTAG": {
+  "ok": true,
+  "item_gbn": "edicus_item",
+  "pdt_nme": "트래블택",
+  "newPcsPresent": [
+   "THO_CUT"
+  ],
+  "hasGarageOrUseGarage": true,
+  "hasAddClrYn": true,
+  "hasPackPrnCnt": false,
+  "hasReamCnt": true,
+  "hasMinOrdPrn": false
+ },
+ "GSELGLV": {
+  "ok": true,
+  "item_gbn": "digital_item",
+  "pdt_nme": "홍보/응원 장갑",
+  "newPcsPresent": [],
+  "hasGarageOrUseGarage": true,
+  "hasAddClrYn": true,
+  "hasPackPrnCnt": false,
+  "hasReamCnt": true,
+  "hasMinOrdPrn": false
+ },
+ "GSTGMIC": {
+  "ok": true,
+  "item_gbn": "vDigital_item",
+  "pdt_nme": "마이크 네임택",
+  "newPcsPresent": [
+   "THO_CUT",
+   "PAK_POL"
+  ],
+  "hasGarageOrUseGarage": true,
+  "hasAddClrYn": true,
+  "hasPackPrnCnt": false,
+  "hasReamCnt": true,
+  "hasMinOrdPrn": false
+ },
+ "STPADPN": {
+  "ok": true,
+  "item_gbn": "vDigital_item",
+  "pdt_nme": "DTF 열전사 판스티커",
+  "newPcsPresent": [
+   "PAK_POL"
+  ],
+  "hasGarageOrUseGarage": true,
+  "hasAddClrYn": true,
+  "hasPackPrnCnt": false,
+  "hasReamCnt": true,
+  "hasMinOrdPrn": false
+ },
+ "PSCALWD": {
+  "retCode": 999,
+  "msg": "제품정보 확인"
+ },
+ "PSCALTD": {
+  "retCode": 999,
+  "msg": "제품정보 확인"
+ },
+ "STDPSTD": {
+  "retCode": 999,
+  "msg": "제품정보 확인"
+ },
+ "MGSTDFT": {
+  "retCode": 999,
+  "msg": "제품정보 확인"
+ },
+ "ACSTDFT": {
+  "retCode": 999,
+  "msg": "제품정보 확인"
+ }
+}

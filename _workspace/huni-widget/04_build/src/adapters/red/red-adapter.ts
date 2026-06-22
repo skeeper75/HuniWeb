@@ -36,6 +36,7 @@ import type {
   RedSizeInfo,
   RedPcsInfo,
   RedPrnCntInfo,
+  RedAddOptionInfo,
   RedPriceResponse,
   RedPresignedResponse,
   RedPriceReqBody,
@@ -115,6 +116,8 @@ function mtrlValue(m: RedMtrlInfo): OptionValue {
     id: m.MTRL_CD,
     label: m.MTRL_NM ?? m.PTT_NME ?? m.MTRL_CD,
     colorHex: m.CLR_HEX_CD || undefined,
+    // N1: 추가색 가용 자재만 capable=true(어댑터→계약 불투명 echo). 위젯은 운반만.
+    ...(m.ADD_CLR_YN === 'Y' ? { addColorCapable: true } : {}),
     disabled: false,
   };
 }
@@ -304,6 +307,19 @@ function prnCntLadder(data: RedProductData): RedPrnCntInfo[] {
   return ladder;
 }
 
+// N3 수량모델 A 래더 — pdt_add_option_info(PDT_VER_SIZE형 굿즈/떡메)는 선택 PDT_VER_SIZE 의
+//  `MIN_ORD_PRN_CNT + ADD_ORD_PRN_CNT × h`(h=0..9, 10단계) 산술로 인쇄수량 enum 을 만든다.
+//  근거(verbatim) = widget.deob.js:15438-15444 `for(h=0;h<10;h++) v.push({PRN_CNT:u+c*h, DFT_YN:h===0?'Y':'N'})`
+//  (u=MIN_ORD_PRN_CNT, c=ADD_ORD_PRN_CNT). 첫 PDT_VER_SIZE 를 기본 사이즈로 래더 산출(미선택 초기상태).
+//  [INV-1] 산술은 어댑터에만. 단가/공식 0 — 수량 enum 값만 생성(서버가 PRN_CNT→가격).
+function buildModelALadder(addOpt: RedAddOptionInfo): number[] {
+  const u = addOpt.MIN_ORD_PRN_CNT;
+  const c = addOpt.ADD_ORD_PRN_CNT;
+  const out: number[] = [];
+  for (let h = 0; h < 10; h++) out.push(u + c * h);
+  return out;
+}
+
 function mapOptionGroups(
   data: RedProductData,
   hasInner: boolean,
@@ -385,6 +401,7 @@ function mapOptionGroups(
         id: d.COD,
         label: d.COD_NME,
         priceColorCount: d.PRN_CLR_CNT, // dosu↔bnc 평면화
+        colorSide: d.COD, // N1: 색수 상향 축 echo(SID_S/SID_D). 어댑터만 6/12 산출에 사용(INV-1).
         disabled: false,
       })),
     });
@@ -444,11 +461,32 @@ function mapOptionGroups(
   }
 
   // 수량/인쇄수량.
+  // (A0) N3 수량모델 A: pdt_add_option_info 보유(떡메 TPBLMEO/TPBLPST·PDT_VER_SIZE형 굿즈)면
+  //      모델B(prnLadder/counter) 대신 산술 래더(MIN+ADD×h, h=0..9)로 인쇄수량 select enum 생성.
+  //      deob L19664(렌더 게이트)·L19729(래더 우선). 첫 PDT_VER_SIZE 기준(초기 미선택). 신규 컴포넌트 0.
   // (A) S6 옵셋 캘린더: PRN_CNT 가 폐쇄 래더(FIR/INC null)면 counter-input 이 아니라 select-box enum.
   //     임의 수량 입력 시 PRICE=0(서버가 등록 래더값만 단가 보유) → 자유입력 왜곡 금지(명세 §3.3-A, 선택지 A).
   //     componentType 은 기존 select-box 재사용(신규 타입 0). 값 = pdt_prn_cnt_info[].PRN_CNT.
   // (B) 그 외(책자/디지털/굿즈): 기존 counter-input GRP_QUANTITY 유지.
-  if (prnLadder.length > 0) {
+  const addOptions = data.pdt_add_option_info;
+  if (addOptions && addOptions.length > 0) {
+    // 첫 PDT_VER_SIZE 의 래더로 수량 enum 생성(초기 사이즈 미선택 = options[0], deob L15424 동형).
+    const ladderCounts = buildModelALadder(addOptions[0]);
+    groups.push({
+      id: 'GRP_PRN_CNT',
+      side: 'default',
+      label: '수량',
+      componentType: DATASET_COMPONENT_TYPE.material, // 'select-box' (폐쇄 enum, 신규 타입 아님)
+      required: true,
+      visible: true,
+      // 첫 단계(h=0)가 기본(DFT_YN="Y", deob L15443). store.defaultSelections 가 첫 값 선택(선두=기본).
+      values: ladderCounts.map((cnt) => ({
+        id: String(cnt),
+        label: String(cnt),
+        disabled: false,
+      })),
+    });
+  } else if (prnLadder.length > 0) {
     // store.defaultSelections 가 첫 값을 기본 선택하므로 기본값(DFT_YN=Y)을 선두로 정렬.
     const ordered = [...prnLadder].sort(
       (a, b) => (b.DFT_YN === 'Y' ? 1 : 0) - (a.DFT_YN === 'Y' ? 1 : 0),
@@ -577,6 +615,16 @@ export function serializeRedPriceRequest(req: NormalizedPriceRequest): RedPriceR
       : req.materials.inner !== undefined ||
         req.colorCounts.inner !== undefined ||
         req.pageCount !== undefined;
+  // N1: 추가색 색수 상향(deob L15764 동형) — 자재 ADD_CLR_YN="Y"(addColorCapable) + 사용자 추가색(addColor)
+  //  ON 일 때만 PRN_CLR_CNT 를 색수축별로 재작성(SID_S→6 / SID_D→12). 미보유 자재/미토글 = base 유지(가격불변).
+  //  [INV-1] 6/12 산술은 어댑터에만(위젯은 colorSide/addColorCapable 불투명 운반만). 단가/공식 0.
+  const addColorActive = req.addColor === true && req.addColorCapable === true;
+  const addColorClrCnt =
+    addColorActive && req.colorSide === 'SID_S'
+      ? 6
+      : addColorActive && req.colorSide === 'SID_D'
+        ? 12
+        : undefined;
   const ord: RedPriceReqOrdInfo = {
     PDT_CD: req.productCode,
     CUT_WDT: d?.cutW ?? 0,
@@ -585,8 +633,11 @@ export function serializeRedPriceRequest(req: NormalizedPriceRequest): RedPriceR
     WRK_HGH: d?.workH ?? 0,
     ORD_CNT: req.quantity, // 주문건수(굿즈=디자인 수)
     PRN_CNT: req.printCount ?? 1, // 인쇄수량(미전달 상품군 = 1, 책자/디지털 하위호환)
-    PRN_CLR_CNT: req.colorCounts.default,
+    PRN_CLR_CNT: addColorClrCnt ?? req.colorCounts.default, // N1: 추가색 활성 시 6/12 상향
     MTRL_CD: req.materials.default,
+    // N1: 추가색 토글 emit. 비book2025 빌더는 항상 emit(deob L13982·라이브 NCCDDFT ADD_CLR_YN="N").
+    //  미토글/미가용 = "N"(가격불변·하위호환). 책자(book2025)는 아래 분기에서 미적용(단면 도수축 상품 전용).
+    ADD_CLR_YN: addColorActive ? 'Y' : 'N',
   };
   if (isBook) {
     // 책자 표지/내지 분리 (data-adapter.md:81-84). 표지=default, 내지=inner.

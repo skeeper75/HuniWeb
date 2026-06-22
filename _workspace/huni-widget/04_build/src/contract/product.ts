@@ -66,6 +66,10 @@ export interface OptionValue {
   // L-1 ATTB: 이 값 선택 시 가격요청 PCS_INFO.ATTB 로 운반될 불투명 속성문자열(속성칩값 등).
   //  어댑터가 후가공 데이터에서 산출해 주입. 위젯은 의미 무계산·echo만. OPTIONAL·additive.
   attb?: string;
+  // N1: 자재 값의 추가색 가용 플래그(어댑터가 ADD_CLR_YN="Y" 에서 주입). 위젯 무계산·운반만. OPTIONAL.
+  addColorCapable?: boolean;
+  // N1: 도수 값의 색수 상향 축 echo(어댑터가 도수 COD 주입, 불투명). 어댑터만 6/12 산출에 사용. OPTIONAL.
+  colorSide?: string;
 }
 
 export interface OptionGroup {

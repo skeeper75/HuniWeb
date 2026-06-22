@@ -1,0 +1,183 @@
+{
+  "scenario": "NF-PRNCNT-MODELB",
+  "field": "PRN_CNT (수량모델 B)",
+  "productCode": "NCCDDFT",
+  "price_gbn": "offset2023_price",
+  "note": "수량모델 B(offset2023_item·명함/카드/책자·pdt_prn_cnt_info 행기반). PRN_CNT↑⇒price 비감소(메타모픽).",
+  "capturedAt": "2026-06-22T17:56:29.788Z",
+  "sessionFresh": true,
+  "oracle": "live RedPrinting via server.js :3001 (read-only get_ajax_price_vTmpl POST)",
+  "oracleSanity": {
+    "readsResultSum": true,
+    "perLineMayBeZero": "legal (bundle components); result_sum.PRICE is authority",
+    "normalPathZeroCount": 0,
+    "zeroIsDefect": "OK: 정상경로 PRICE≠0",
+    "priceSequence": [
+      12700,
+      23900,
+      43100
+    ]
+  },
+  "secretsRedaction": "cookies/JWT/presigned 미포함(server.js 서버측 쿠키주입). mb_cust_cod 세션파생값 [REDACTED], 익명기본 10000000 유지(공개값).",
+  "calls": [
+    {
+      "label": "PRN_CNT=500 (DFT)",
+      "status": 200,
+      "retCode": 200,
+      "reqBody": {
+        "dataJson": {
+          "ORD_INFO": [
+            {
+              "PDT_CD": "NCCDDFT",
+              "MTRL_CD": "RXSNO250",
+              "CUT_WDT": 148,
+              "CUT_HGH": 100,
+              "WRK_WDT": 152,
+              "WRK_HGH": 104,
+              "PRN_CNT": 500,
+              "ORD_CNT": 1,
+              "DOSU_COD": "SID_S",
+              "PRN_CLR_CNT": 4,
+              "ADD_CLR_YN": "N",
+              "REAM_CNT": 0
+            }
+          ],
+          "PCS_INFO": [
+            {
+              "PCS_COD": "CUT_DFT",
+              "PCS_DTL_COD": "DFXXX",
+              "ATTB": ""
+            }
+          ],
+          "price_gbn": "offset2023_price",
+          "mb_cust_cod": "10000000"
+        }
+      },
+      "result_sum": {
+        "PCS_ETC_PRICE": 0,
+        "PCS_PRI_PRICE": 12700,
+        "PRICE": 12700,
+        "PRICE_VAT": 1270,
+        "PRICE_MALL": 12700,
+        "PRICE_MALL_VAT": 1270,
+        "ORG_PRICE": 12700,
+        "ORG_PRICE_VAT": 1270
+      },
+      "perLine": [
+        {
+          "PRICE": 0
+        },
+        {
+          "PRICE": 12700
+        }
+      ],
+      "priceLog": ""
+    },
+    {
+      "label": "PRN_CNT=1000",
+      "status": 200,
+      "retCode": 200,
+      "reqBody": {
+        "dataJson": {
+          "ORD_INFO": [
+            {
+              "PDT_CD": "NCCDDFT",
+              "MTRL_CD": "RXSNO250",
+              "CUT_WDT": 148,
+              "CUT_HGH": 100,
+              "WRK_WDT": 152,
+              "WRK_HGH": 104,
+              "PRN_CNT": 1000,
+              "ORD_CNT": 1,
+              "DOSU_COD": "SID_S",
+              "PRN_CLR_CNT": 4,
+              "ADD_CLR_YN": "N",
+              "REAM_CNT": 0
+            }
+          ],
+          "PCS_INFO": [
+            {
+              "PCS_COD": "CUT_DFT",
+              "PCS_DTL_COD": "DFXXX",
+              "ATTB": ""
+            }
+          ],
+          "price_gbn": "offset2023_price",
+          "mb_cust_cod": "10000000"
+        }
+      },
+      "result_sum": {
+        "PCS_ETC_PRICE": 0,
+        "PCS_PRI_PRICE": 23900,
+        "PRICE": 23900,
+        "PRICE_VAT": 2390,
+        "PRICE_MALL": 23900,
+        "PRICE_MALL_VAT": 2390,
+        "ORG_PRICE": 23900,
+        "ORG_PRICE_VAT": 2390
+      },
+      "perLine": [
+        {
+          "PRICE": 0
+        },
+        {
+          "PRICE": 23900
+        }
+      ],
+      "priceLog": ""
+    },
+    {
+      "label": "PRN_CNT=2000",
+      "status": 200,
+      "retCode": 200,
+      "reqBody": {
+        "dataJson": {
+          "ORD_INFO": [
+            {
+              "PDT_CD": "NCCDDFT",
+              "MTRL_CD": "RXSNO250",
+              "CUT_WDT": 148,
+              "CUT_HGH": 100,
+              "WRK_WDT": 152,
+              "WRK_HGH": 104,
+              "PRN_CNT": 2000,
+              "ORD_CNT": 1,
+              "DOSU_COD": "SID_S",
+              "PRN_CLR_CNT": 4,
+              "ADD_CLR_YN": "N",
+              "REAM_CNT": 0
+            }
+          ],
+          "PCS_INFO": [
+            {
+              "PCS_COD": "CUT_DFT",
+              "PCS_DTL_COD": "DFXXX",
+              "ATTB": ""
+            }
+          ],
+          "price_gbn": "offset2023_price",
+          "mb_cust_cod": "10000000"
+        }
+      },
+      "result_sum": {
+        "PCS_ETC_PRICE": 0,
+        "PCS_PRI_PRICE": 43100,
+        "PRICE": 43100,
+        "PRICE_VAT": 4310,
+        "PRICE_MALL": 43100,
+        "PRICE_MALL_VAT": 4310,
+        "ORG_PRICE": 43100,
+        "ORG_PRICE_VAT": 4310
+      },
+      "perLine": [
+        {
+          "PRICE": 0
+        },
+        {
+          "PRICE": 43100
+        }
+      ],
+      "priceLog": ""
+    }
+  ]
+}

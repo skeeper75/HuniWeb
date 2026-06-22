@@ -1,0 +1,165 @@
+{
+  "scenario": "G-BK",
+  "productCode": "PRBKYPR",
+  "price_gbn": "book2025_price",
+  "note": "PriceTable3D book2025_price. 표지/내지 분리(CVR_/INN_CLR_CNT·CVR/INN_MTRL_CD)+PAGE_CNT. PAGE_CNT↑⇒PRICE↑ 메타모픽. book_info.DLVR_AMT(배송비) 책자 전용. reqBody shape은 라이브 응답으로 검증(PRICE≠0).",
+  "capturedAt": "2026-06-22T16:34:22.606Z",
+  "sessionFresh": true,
+  "oracle": "live RedPrinting via server.js :3001 (read-only get_ajax_price_vTmpl)",
+  "oracleSanity": {
+    "readsResultSum": true,
+    "perLineMayBeZero": "legal (bundle components); result_sum.PRICE is authority",
+    "normalPathZeroCount": 0,
+    "zeroIsDefect": "OK: 정상경로 PRICE≠0"
+  },
+  "secretsRedaction": "cookies/JWT/presigned 미포함(server.js 서버측 쿠키주입). mb_cust_cod 세션파생값 [REDACTED], 익명기본 10000000 유지(공개값).",
+  "calls": [
+    {
+      "label": "A5 PAGE24 INN_CLR1",
+      "status": 200,
+      "retCode": 200,
+      "reqBody": {
+        "dataJson": {
+          "ORD_INFO": [
+            {
+              "PDT_CD": "PRBKYPR",
+              "CUT_WDT": 148,
+              "CUT_HGH": 210,
+              "WRK_WDT": 148,
+              "WRK_HGH": 210,
+              "PRN_CNT": 1,
+              "ORD_CNT": 1,
+              "PAGE_CNT": 24,
+              "CVR_CLR_CNT": 4,
+              "INN_CLR_CNT": 1,
+              "CVR_MTRL_CD": "RXART300",
+              "INN_MTRL_CD": "RXYWM080"
+            }
+          ],
+          "PCS_INFO": [],
+          "price_gbn": "book2025_price",
+          "mb_cust_cod": "10000000"
+        }
+      },
+      "result_sum": {
+        "PRICE": 6100,
+        "PRICE_VAT": 610,
+        "PRICE_MALL": 6100,
+        "PRICE_MALL_VAT": 610,
+        "ORG_PRICE": 6100,
+        "ORG_PRICE_VAT": 610,
+        "PCS_PRI_PRICE": 6100
+      },
+      "perLine": [
+        {
+          "PCS_CD": "PRT_DFT",
+          "PRICE": 6100
+        }
+      ],
+      "priceLog": "",
+      "book_info": {
+        "PDT_WGT": "0.3",
+        "BOX_CNT": 1,
+        "DLVR_AMT": 3500
+      }
+    },
+    {
+      "label": "A5 PAGE48 (페이지↑ 차등)",
+      "status": 200,
+      "retCode": 200,
+      "reqBody": {
+        "dataJson": {
+          "ORD_INFO": [
+            {
+              "PDT_CD": "PRBKYPR",
+              "CUT_WDT": 148,
+              "CUT_HGH": 210,
+              "WRK_WDT": 148,
+              "WRK_HGH": 210,
+              "PRN_CNT": 1,
+              "ORD_CNT": 1,
+              "PAGE_CNT": 48,
+              "CVR_CLR_CNT": 4,
+              "INN_CLR_CNT": 1,
+              "CVR_MTRL_CD": "RXART300",
+              "INN_MTRL_CD": "RXYWM080"
+            }
+          ],
+          "PCS_INFO": [],
+          "price_gbn": "book2025_price",
+          "mb_cust_cod": "10000000"
+        }
+      },
+      "result_sum": {
+        "PRICE": 6800,
+        "PRICE_VAT": 680,
+        "PRICE_MALL": 6800,
+        "PRICE_MALL_VAT": 680,
+        "ORG_PRICE": 6800,
+        "ORG_PRICE_VAT": 680,
+        "PCS_PRI_PRICE": 6800
+      },
+      "perLine": [
+        {
+          "PCS_CD": "PRT_DFT",
+          "PRICE": 6800
+        }
+      ],
+      "priceLog": "",
+      "book_info": {
+        "PDT_WGT": "0.4",
+        "BOX_CNT": 1,
+        "DLVR_AMT": 3500
+      }
+    },
+    {
+      "label": "A5 PAGE100 INN_CLR4 (차등)",
+      "status": 200,
+      "retCode": 200,
+      "reqBody": {
+        "dataJson": {
+          "ORD_INFO": [
+            {
+              "PDT_CD": "PRBKYPR",
+              "CUT_WDT": 148,
+              "CUT_HGH": 210,
+              "WRK_WDT": 148,
+              "WRK_HGH": 210,
+              "PRN_CNT": 1,
+              "ORD_CNT": 1,
+              "PAGE_CNT": 100,
+              "CVR_CLR_CNT": 4,
+              "INN_CLR_CNT": 4,
+              "CVR_MTRL_CD": "RXART300",
+              "INN_MTRL_CD": "RXYWM080"
+            }
+          ],
+          "PCS_INFO": [],
+          "price_gbn": "book2025_price",
+          "mb_cust_cod": "10000000"
+        }
+      },
+      "result_sum": {
+        "PRICE": 8300,
+        "PRICE_VAT": 830,
+        "PRICE_MALL": 8300,
+        "PRICE_MALL_VAT": 830,
+        "ORG_PRICE": 8300,
+        "ORG_PRICE_VAT": 830,
+        "PCS_PRI_PRICE": 8300
+      },
+      "perLine": [
+        {
+          "PCS_CD": "PRT_DFT",
+          "PRICE": 8300
+        }
+      ],
+      "priceLog": "",
+      "book_info": {
+        "PDT_WGT": "0.8",
+        "BOX_CNT": 1,
+        "DLVR_AMT": 3500
+      }
+    }
+  ]
+}

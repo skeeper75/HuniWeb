@@ -47,6 +47,8 @@ export interface WidgetState {
   dimensionInputs: Record<string, DimensionInput>;
   quantity: number;
   pageCount?: number;
+  // N1: 추가색(별색/형광) 토글 상태. 추가색 가용 자재에서만 의미(미보유 시 가격불변). OPTIONAL·additive.
+  addColor?: boolean;
   // exterior — 면별 입력 결과
   artifacts: Partial<Record<SideKey, NormalizedArtifact>>;
   // price — 서버 권위 결과 (위젯은 저장만)

@@ -1,0 +1,323 @@
+{
+  "scenario": "NF-FLD-DFT",
+  "field": "FLD_DFT (접지)",
+  "productCode": "NCCDDFT",
+  "price_gbn": "offset2023_price",
+  "note": "신규 후가공 FLD_DFT(접지). +후가공⇒price↑(메타모픽). FO006=2단/FO007=3단/FO008=4단/FO002=대문/FO001=4단병풍. PCS_INFO 가격 기여 입증.",
+  "capturedAt": "2026-06-22T17:56:31.525Z",
+  "sessionFresh": true,
+  "oracle": "live RedPrinting via server.js :3001 (read-only get_ajax_price_vTmpl POST)",
+  "oracleSanity": {
+    "readsResultSum": true,
+    "perLineMayBeZero": "legal (bundle components); result_sum.PRICE is authority",
+    "normalPathZeroCount": 0,
+    "zeroIsDefect": "OK: 정상경로 PRICE≠0",
+    "priceSequence": [
+      12700,
+      29700,
+      29700,
+      29700,
+      30700
+    ]
+  },
+  "secretsRedaction": "cookies/JWT/presigned 미포함(server.js 서버측 쿠키주입). mb_cust_cod 세션파생값 [REDACTED], 익명기본 10000000 유지(공개값).",
+  "calls": [
+    {
+      "label": "후가공 없음 (baseline)",
+      "status": 200,
+      "retCode": 200,
+      "reqBody": {
+        "dataJson": {
+          "ORD_INFO": [
+            {
+              "PDT_CD": "NCCDDFT",
+              "MTRL_CD": "RXSNO250",
+              "CUT_WDT": 148,
+              "CUT_HGH": 100,
+              "WRK_WDT": 152,
+              "WRK_HGH": 104,
+              "PRN_CNT": 500,
+              "ORD_CNT": 1,
+              "DOSU_COD": "SID_S",
+              "PRN_CLR_CNT": 4,
+              "ADD_CLR_YN": "N",
+              "REAM_CNT": 0
+            }
+          ],
+          "PCS_INFO": [
+            {
+              "PCS_COD": "CUT_DFT",
+              "PCS_DTL_COD": "DFXXX",
+              "ATTB": ""
+            }
+          ],
+          "price_gbn": "offset2023_price",
+          "mb_cust_cod": "10000000"
+        }
+      },
+      "result_sum": {
+        "PCS_ETC_PRICE": 0,
+        "PCS_PRI_PRICE": 12700,
+        "PRICE": 12700,
+        "PRICE_VAT": 1270,
+        "PRICE_MALL": 12700,
+        "PRICE_MALL_VAT": 1270,
+        "ORG_PRICE": 12700,
+        "ORG_PRICE_VAT": 1270
+      },
+      "perLine": [
+        {
+          "PRICE": 0
+        },
+        {
+          "PRICE": 12700
+        }
+      ],
+      "priceLog": ""
+    },
+    {
+      "label": "FLD_DFT 2단접지 FO006",
+      "status": 200,
+      "retCode": 200,
+      "reqBody": {
+        "dataJson": {
+          "ORD_INFO": [
+            {
+              "PDT_CD": "NCCDDFT",
+              "MTRL_CD": "RXSNO250",
+              "CUT_WDT": 148,
+              "CUT_HGH": 100,
+              "WRK_WDT": 152,
+              "WRK_HGH": 104,
+              "PRN_CNT": 500,
+              "ORD_CNT": 1,
+              "DOSU_COD": "SID_S",
+              "PRN_CLR_CNT": 4,
+              "ADD_CLR_YN": "N",
+              "REAM_CNT": 0
+            }
+          ],
+          "PCS_INFO": [
+            {
+              "PCS_COD": "CUT_DFT",
+              "PCS_DTL_COD": "DFXXX",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "FLD_DFT",
+              "PCS_DTL_COD": "FO006",
+              "ATTB": ""
+            }
+          ],
+          "price_gbn": "offset2023_price",
+          "mb_cust_cod": "10000000"
+        }
+      },
+      "result_sum": {
+        "PCS_ETC_PRICE": 17000,
+        "PCS_PRI_PRICE": 12700,
+        "PRICE": 29700,
+        "PRICE_VAT": 2970,
+        "PRICE_MALL": 29700,
+        "PRICE_MALL_VAT": 2970,
+        "ORG_PRICE": 29700,
+        "ORG_PRICE_VAT": 2970
+      },
+      "perLine": [
+        {
+          "PRICE": 0
+        },
+        {
+          "PRICE": 17000
+        },
+        {
+          "PRICE": 12700
+        }
+      ],
+      "priceLog": ""
+    },
+    {
+      "label": "FLD_DFT 3단접지 FO007",
+      "status": 200,
+      "retCode": 200,
+      "reqBody": {
+        "dataJson": {
+          "ORD_INFO": [
+            {
+              "PDT_CD": "NCCDDFT",
+              "MTRL_CD": "RXSNO250",
+              "CUT_WDT": 148,
+              "CUT_HGH": 100,
+              "WRK_WDT": 152,
+              "WRK_HGH": 104,
+              "PRN_CNT": 500,
+              "ORD_CNT": 1,
+              "DOSU_COD": "SID_S",
+              "PRN_CLR_CNT": 4,
+              "ADD_CLR_YN": "N",
+              "REAM_CNT": 0
+            }
+          ],
+          "PCS_INFO": [
+            {
+              "PCS_COD": "CUT_DFT",
+              "PCS_DTL_COD": "DFXXX",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "FLD_DFT",
+              "PCS_DTL_COD": "FO007",
+              "ATTB": ""
+            }
+          ],
+          "price_gbn": "offset2023_price",
+          "mb_cust_cod": "10000000"
+        }
+      },
+      "result_sum": {
+        "PCS_ETC_PRICE": 17000,
+        "PCS_PRI_PRICE": 12700,
+        "PRICE": 29700,
+        "PRICE_VAT": 2970,
+        "PRICE_MALL": 29700,
+        "PRICE_MALL_VAT": 2970,
+        "ORG_PRICE": 29700,
+        "ORG_PRICE_VAT": 2970
+      },
+      "perLine": [
+        {
+          "PRICE": 0
+        },
+        {
+          "PRICE": 17000
+        },
+        {
+          "PRICE": 12700
+        }
+      ],
+      "priceLog": ""
+    },
+    {
+      "label": "FLD_DFT 4단접지 FO008",
+      "status": 200,
+      "retCode": 200,
+      "reqBody": {
+        "dataJson": {
+          "ORD_INFO": [
+            {
+              "PDT_CD": "NCCDDFT",
+              "MTRL_CD": "RXSNO250",
+              "CUT_WDT": 148,
+              "CUT_HGH": 100,
+              "WRK_WDT": 152,
+              "WRK_HGH": 104,
+              "PRN_CNT": 500,
+              "ORD_CNT": 1,
+              "DOSU_COD": "SID_S",
+              "PRN_CLR_CNT": 4,
+              "ADD_CLR_YN": "N",
+              "REAM_CNT": 0
+            }
+          ],
+          "PCS_INFO": [
+            {
+              "PCS_COD": "CUT_DFT",
+              "PCS_DTL_COD": "DFXXX",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "FLD_DFT",
+              "PCS_DTL_COD": "FO008",
+              "ATTB": ""
+            }
+          ],
+          "price_gbn": "offset2023_price",
+          "mb_cust_cod": "10000000"
+        }
+      },
+      "result_sum": {
+        "PCS_ETC_PRICE": 17000,
+        "PCS_PRI_PRICE": 12700,
+        "PRICE": 29700,
+        "PRICE_VAT": 2970,
+        "PRICE_MALL": 29700,
+        "PRICE_MALL_VAT": 2970,
+        "ORG_PRICE": 29700,
+        "ORG_PRICE_VAT": 2970
+      },
+      "perLine": [
+        {
+          "PRICE": 0
+        },
+        {
+          "PRICE": 17000
+        },
+        {
+          "PRICE": 12700
+        }
+      ],
+      "priceLog": ""
+    },
+    {
+      "label": "FLD_DFT 대문접지 FO002",
+      "status": 200,
+      "retCode": 200,
+      "reqBody": {
+        "dataJson": {
+          "ORD_INFO": [
+            {
+              "PDT_CD": "NCCDDFT",
+              "MTRL_CD": "RXSNO250",
+              "CUT_WDT": 148,
+              "CUT_HGH": 100,
+              "WRK_WDT": 152,
+              "WRK_HGH": 104,
+              "PRN_CNT": 500,
+              "ORD_CNT": 1,
+              "DOSU_COD": "SID_S",
+              "PRN_CLR_CNT": 4,
+              "ADD_CLR_YN": "N",
+              "REAM_CNT": 0
+            }
+          ],
+          "PCS_INFO": [
+            {
+              "PCS_COD": "CUT_DFT",
+              "PCS_DTL_COD": "DFXXX",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "FLD_DFT",
+              "PCS_DTL_COD": "FO002",
+              "ATTB": ""
+            }
+          ],
+          "price_gbn": "offset2023_price",
+          "mb_cust_cod": "10000000"
+        }
+      },
+      "result_sum": {
+        "PCS_ETC_PRICE": 18000,
+        "PCS_PRI_PRICE": 12700,
+        "PRICE": 30700,
+        "PRICE_VAT": 3070,
+        "PRICE_MALL": 30700,
+        "PRICE_MALL_VAT": 3070,
+        "ORG_PRICE": 30700,
+        "ORG_PRICE_VAT": 3070
+      },
+      "perLine": [
+        {
+          "PRICE": 0
+        },
+        {
+          "PRICE": 18000
+        },
+        {
+          "PRICE": 12700
+        }
+      ],
+      "priceLog": ""
+    }
+  ]
+}

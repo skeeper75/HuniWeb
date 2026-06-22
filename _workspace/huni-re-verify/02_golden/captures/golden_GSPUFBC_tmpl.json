@@ -1,0 +1,292 @@
+{
+  "scenario": "G-TM",
+  "productCode": "GSPUFBC",
+  "price_gbn": "tmpl_price",
+  "note": "tmpl_price. 11in세로 230x288. complete(ORD_CNT100·PRN_CNT1)=2,850,000 / incomplete(부재)=0(결함재현). ORD_CNT 선형(할인0).",
+  "capturedAt": "2026-06-22T16:34:21.958Z",
+  "sessionFresh": true,
+  "oracle": "live RedPrinting via server.js :3001 (read-only get_ajax_price_vTmpl)",
+  "oracleSanity": {
+    "readsResultSum": true,
+    "perLineMayBeZero": "legal (bundle components); result_sum.PRICE is authority",
+    "normalPathZeroCount": 0,
+    "zeroIsDefect": "OK: 정상경로 PRICE≠0"
+  },
+  "secretsRedaction": "cookies/JWT/presigned 미포함(server.js 서버측 쿠키주입). mb_cust_cod 세션파생값 [REDACTED], 익명기본 10000000 유지(공개값).",
+  "calls": [
+    {
+      "label": "complete ORD100 PRN1",
+      "status": 200,
+      "retCode": 200,
+      "reqBody": {
+        "dataJson": {
+          "ORD_INFO": [
+            {
+              "PDT_CD": "GSPUFBC",
+              "MTRL_CD": "PXFBW010",
+              "CUT_WDT": 230,
+              "CUT_HGH": 288,
+              "WRK_WDT": 250,
+              "WRK_HGH": 308,
+              "DOSU_COD": "SID_S",
+              "PRN_CLR_CNT": 4,
+              "ORD_CNT": 100,
+              "PRN_CNT": 1
+            }
+          ],
+          "PCS_INFO": [
+            {
+              "PCS_COD": "CUT_DFT",
+              "PCS_DTL_COD": "DFXXX",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "PDT_WRK",
+              "PCS_DTL_COD": "PUBOK",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "FLX_ZIP",
+              "PCS_DTL_COD": "ZPH01",
+              "ATTB": ""
+            }
+          ],
+          "price_gbn": "tmpl_price",
+          "mb_cust_cod": "10000000"
+        }
+      },
+      "result_sum": {
+        "PRICE": 2850000,
+        "PRICE_VAT": 285000,
+        "PRICE_MALL": 2850000,
+        "PRICE_MALL_VAT": 285000,
+        "ORG_PRICE": 2850000,
+        "ORG_PRICE_VAT": 285000
+      },
+      "perLine": [
+        {
+          "PCS_CD": "CUT_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "PDT_WRK",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "FLX_ZIP",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "PRT_DFT",
+          "PRICE": 2850000
+        }
+      ],
+      "priceLog": "개당단가 : 0.00원, 인쇄수량DDDDD : 1, 주문건수 : 100"
+    },
+    {
+      "label": "ORD_CNT=1 (단가확인)",
+      "status": 200,
+      "retCode": 200,
+      "reqBody": {
+        "dataJson": {
+          "ORD_INFO": [
+            {
+              "PDT_CD": "GSPUFBC",
+              "MTRL_CD": "PXFBW010",
+              "CUT_WDT": 230,
+              "CUT_HGH": 288,
+              "WRK_WDT": 250,
+              "WRK_HGH": 308,
+              "DOSU_COD": "SID_S",
+              "PRN_CLR_CNT": 4,
+              "ORD_CNT": 1,
+              "PRN_CNT": 1
+            }
+          ],
+          "PCS_INFO": [
+            {
+              "PCS_COD": "CUT_DFT",
+              "PCS_DTL_COD": "DFXXX",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "PDT_WRK",
+              "PCS_DTL_COD": "PUBOK",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "FLX_ZIP",
+              "PCS_DTL_COD": "ZPH01",
+              "ATTB": ""
+            }
+          ],
+          "price_gbn": "tmpl_price",
+          "mb_cust_cod": "10000000"
+        }
+      },
+      "result_sum": {
+        "PRICE": 28500,
+        "PRICE_VAT": 2850,
+        "PRICE_MALL": 28500,
+        "PRICE_MALL_VAT": 2850,
+        "ORG_PRICE": 28500,
+        "ORG_PRICE_VAT": 2850
+      },
+      "perLine": [
+        {
+          "PCS_CD": "CUT_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "PDT_WRK",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "FLX_ZIP",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "PRT_DFT",
+          "PRICE": 28500
+        }
+      ],
+      "priceLog": "개당단가 : 0.00원, 인쇄수량DDDDD : 1, 주문건수 : 1"
+    },
+    {
+      "label": "ORD_CNT=10 (선형)",
+      "status": 200,
+      "retCode": 200,
+      "reqBody": {
+        "dataJson": {
+          "ORD_INFO": [
+            {
+              "PDT_CD": "GSPUFBC",
+              "MTRL_CD": "PXFBW010",
+              "CUT_WDT": 230,
+              "CUT_HGH": 288,
+              "WRK_WDT": 250,
+              "WRK_HGH": 308,
+              "DOSU_COD": "SID_S",
+              "PRN_CLR_CNT": 4,
+              "ORD_CNT": 10,
+              "PRN_CNT": 1
+            }
+          ],
+          "PCS_INFO": [
+            {
+              "PCS_COD": "CUT_DFT",
+              "PCS_DTL_COD": "DFXXX",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "PDT_WRK",
+              "PCS_DTL_COD": "PUBOK",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "FLX_ZIP",
+              "PCS_DTL_COD": "ZPH01",
+              "ATTB": ""
+            }
+          ],
+          "price_gbn": "tmpl_price",
+          "mb_cust_cod": "10000000"
+        }
+      },
+      "result_sum": {
+        "PRICE": 285000,
+        "PRICE_VAT": 28500,
+        "PRICE_MALL": 285000,
+        "PRICE_MALL_VAT": 28500,
+        "ORG_PRICE": 285000,
+        "ORG_PRICE_VAT": 28500
+      },
+      "perLine": [
+        {
+          "PCS_CD": "CUT_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "PDT_WRK",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "FLX_ZIP",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "PRT_DFT",
+          "PRICE": 285000
+        }
+      ],
+      "priceLog": "개당단가 : 0.00원, 인쇄수량DDDDD : 1, 주문건수 : 10"
+    },
+    {
+      "label": "incomplete (ORD/PRN 부재) — 결함재현가드",
+      "status": 200,
+      "retCode": 200,
+      "reqBody": {
+        "dataJson": {
+          "ORD_INFO": [
+            {
+              "PDT_CD": "GSPUFBC",
+              "MTRL_CD": "PXFBW010",
+              "CUT_WDT": 230,
+              "CUT_HGH": 288,
+              "WRK_WDT": 250,
+              "WRK_HGH": 308,
+              "DOSU_COD": "SID_S",
+              "PRN_CLR_CNT": 4
+            }
+          ],
+          "PCS_INFO": [
+            {
+              "PCS_COD": "CUT_DFT",
+              "PCS_DTL_COD": "DFXXX",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "PDT_WRK",
+              "PCS_DTL_COD": "PUBOK",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "FLX_ZIP",
+              "PCS_DTL_COD": "ZPH01",
+              "ATTB": ""
+            }
+          ],
+          "price_gbn": "tmpl_price",
+          "mb_cust_cod": "10000000"
+        }
+      },
+      "result_sum": {
+        "PRICE": 0,
+        "PRICE_VAT": 0,
+        "PRICE_MALL": 0,
+        "PRICE_MALL_VAT": 0,
+        "ORG_PRICE": 0,
+        "ORG_PRICE_VAT": 0
+      },
+      "perLine": [
+        {
+          "PCS_CD": "CUT_DFT",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "PDT_WRK",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "FLX_ZIP",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "PRT_DFT",
+          "PRICE": 0
+        }
+      ],
+      "priceLog": "개당단가 : 0.00원, 인쇄수량DDDDD : 0, 주문건수 : 0"
+    }
+  ]
+}

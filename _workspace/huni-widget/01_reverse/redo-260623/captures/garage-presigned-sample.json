@@ -1,0 +1,28 @@
+{
+ "garage": {
+  "response_redacted": {
+   "filename": "ed927503-4f2c-42d6-956f-373f74de19c4.pdf",
+   "presignedURL": "https://s3.redprinting.net/redprintingweb.tempo/ed927503-4f2c-42d6-956f-373f74de19c4.pdf?[REDACTED-SIGNATURE]"
+  },
+  "parsed": {
+   "host": "s3.redprinting.net",
+   "path": "/redprintingweb.tempo/ed927503-4f2c-42d6-956f-373f74de19c4.pdf",
+   "expires": "3600",
+   "sha": "UNSIGNED-PAYLOAD",
+   "filename": "ed927503-4f2c-42d6-956f-373f74de19c4.pdf"
+  }
+ },
+ "aws_fallback": {
+  "response_redacted": {
+   "filename": "40414ef7-352d-4466-adb3-6c5ae7b8fcf4.pdf",
+   "presignedURL": "https://s3.ap-northeast-2.amazonaws.com/redprintingweb.tempo/40414ef7-352d-4466-adb3-6c5ae7b8fcf4.pdf?[REDACTED-SIGNATURE]"
+  },
+  "parsed": {
+   "host": "s3.ap-northeast-2.amazonaws.com",
+   "path": "/redprintingweb.tempo/40414ef7-352d-4466-adb3-6c5ae7b8fcf4.pdf",
+   "expires": "3600",
+   "sha": "UNSIGNED-PAYLOAD",
+   "filename": "40414ef7-352d-4466-adb3-6c5ae7b8fcf4.pdf"
+  }
+ }
+}

@@ -1,0 +1,1389 @@
+Reading additional input from stdin...
+OpenAI Codex v0.140.0
+--------
+workdir: /Users/innojini/Dev/HuniWeb
+model: gpt-5.5
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: high
+reasoning summaries: none
+session id: 019ef042-f857-74e3-9aa2-6f6dd37c4a31
+--------
+user
+You are an independent reverse-engineering verifier. Read ONLY the files named below, all under the current working directory. Cite every claim as `path:line` (or "not found"). Do not speculate beyond what the files show. Answer in <=450 words, structured by the numbered questions.
+
+CONTEXT (what the code does): A TypeScript adapter `_workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts` serializes a normalized price request into RedPrinting's price-API request body (function `serializeRedPriceRequest`). RedPrinting's own client code (reverse-engineered) is in `docs/reversing/red_reverse_engineer/03_deobfuscated/` (deob_05_app_api.js = API layer, deob_06_app_widget_sdk.js = widget SDK, deob_07_app_components.js = Vue components) and `docs/reversing/red_reverse_engineer/01_source/` (mod_05/06/07, minified-ish). Live captured request/response samples are in `_workspace/huni-re-verify/02_golden/golden_*.json`.
+
+INDEPENDENTLY DETERMINE:
+
+Q1 — ATTB field TYPE. In RedPrinting's OWN code (deob_05/06/07 and mod_05/06/07), when a PCS_INFO entry's `ATTB` is constructed for a price/order request, is it assigned a NUMBER (e.g. a quantity / orderQty / .quantity) or a STRING? Grep for `ATTB:` assignments and report each assigned expression with its line. Separately: does any Red code that CONSUMES an incoming `ATTB` coerce it with parseInt/Number/+x, or compare it strictly (===) without coercion? Cite lines. CONCLUSION: based ONLY on Red's code, is ATTB naturally number-typed, string-typed, or mixed? Is sending ATTB as the JSON string "2" instead of number 2 likely to be (a) tolerated/coerced, (b) rejected/mismatched, or (c) undeterminable from the available code? State which.
+
+Q2 — Book (item_gbn=book2025) request shape. In Red's code, when building a price/order request for a BOOK product (item_gbn book2025, with cover/inner), which ORD_INFO color/material fields are set — does the book path use single-side fields `PRN_CLR_CNT` and `MTRL_CD`, or only the split fields `CVR_CLR_CNT/INN_CLR_CNT/CVR_MTRL_CD/INN_MTRL_CD`? Now look at the live book golden `golden_PRBKYPR_book.json` ORD_INFO: which of those fields are present/absent? CONCLUSION: For a book request, are `PRN_CLR_CNT` and `MTRL_CD` (a) expected/required, (b) ignored if extra, or (c) potentially mis-consumed (e.g. cover color overwritten)? State which, with evidence.
+
+Q3 — Adapter correctness check (independent). In `red-adapter.ts`, function `serializeRedPriceRequest`: (a) how is `ATTB` serialized for quantity-echo PCS (find the exact line and expression)? Is the emitted value a number or a string? (b) Are `PRN_CLR_CNT` and `MTRL_CD` set unconditionally or only when NOT a book? Cite the exact lines. Compare to your Q1/Q2 conclusions: does the adapter MATCH Red's expected shape, or DIVERGE? List each divergence as adapter-line vs Red-evidence-line.
+
+Q4 — Citation reality. Verify these specific citations are real (line exists AND content matches description); for each say REAL or NOT-FOUND with the actual line content:
+ - red-adapter.ts line ~615: ATTB serialization using String(req.quantity)
+ - red-adapter.ts line ~588: PRN_CLR_CNT assignment
+ - red-adapter.ts line ~589: MTRL_CD assignment
+ - red-adapter.ts line ~151: a comment claiming captured ATTB=1 (quantity echo)
+ Also: does red-adapter.ts itself anywhere CITE a deob/mod line that does NOT actually exist in the deob files (a fabricated source reference)? If you find such a self-citation, report the adapter line and whether the cited target exists.
+
+Q5 — False positives / missed issues. Independently, does the adapter's serialization have any OTHER shape mismatch vs Red's code or vs the golden files that is NOT one of {ATTB type, book PRN_CLR_CNT, book MTRL_CD}? Or conversely, is any of those three actually a NON-issue (false positive)? State findings with citations, or "none found".
+warning: failed to parse plugin hooks config /Users/innojini/.codex/plugins/cache/omc/oh-my-claudecode/4.14.7/hooks/hooks.json: unknown field `description`, expected `hooks` at line 2 column 15
+warning: failed to parse plugin hooks config /Users/innojini/.codex/plugins/cache/claude-code-warp/warp/2.1.0/hooks/hooks.json: unknown field `description`, expected `hooks` at line 2 column 15
+warning: Skill descriptions were shortened to fit the 2% skills context budget. Codex can still see every skill, but some descriptions are shorter. Disable unused skills or plugins to leave more room for the rest.
+hook: SessionStart
+hook: SessionStart Completed
+hook: UserPromptSubmit
+hook: UserPromptSubmit Failed
+codex
+지정된 파일만 대상으로 `ATTB`, book 요청 필드, adapter 직렬화 지점을 확인하겠습니다. 쓰기 작업은 하지 않고 라인 번호가 있는 근거만 모으겠습니다.
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse Failed
+hook: PreToolUse Failed
+hook: PreToolUse Failed
+exec
+/bin/zsh -lc "rg -n \"ATTB\\s*:|ATTB|parseInt\\(|Number\\(|\\+\\s*["'^'"\\n]*ATTB|===\\s*["'^'"\\n]*ATTB|ATTB\\s*===\" _workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts docs/reversing/red_reverse_engineer/03_deobfuscated/deob_05_app_api.js docs/reversing/red_reverse_engineer/03_deobfuscated/deob_06_app_widget_sdk.js docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js docs/reversing/red_reverse_engineer/01_source/mod_05* docs/reversing/red_reverse_engineer/01_source/mod_06* docs/reversing/red_reverse_engineer/01_source/mod_07* _workspace/huni-re-verify/02_golden/golden_*.json" in /Users/innojini/Dev/HuniWeb
+ exited 1 in 0ms:
+zsh:1: no matches found: _workspace/huni-re-verify/02_golden/golden_*.json
+
+exec
+/bin/zsh -lc 'ls docs/reversing/red_reverse_engineer/01_source docs/reversing/red_reverse_engineer/03_deobfuscated _workspace/huni-re-verify/02_golden' in /Users/innojini/Dev/HuniWeb
+ succeeded in 0ms:
+_workspace/huni-re-verify/02_golden:
+capture-log.md
+captures
+golden-index.csv
+
+docs/reversing/red_reverse_engineer/01_source:
+beautified_editor_sdk.js
+beautified_widget.css
+beautified_widget.js
+manifest.json
+mod_01_vendor_vue_core.js
+mod_02_vendor_vue_dom.js
+mod_03_vendor_pinia.js
+mod_04_vendor_query_purify.js
+mod_05_app_api.js
+mod_06_app_widget_sdk.js
+mod_07_app_components.js
+
+docs/reversing/red_reverse_engineer/03_deobfuscated:
+deob_05_06_stats.json
+deob_05_app_api.js
+deob_06_app_widget_sdk.js
+deob_07_app_components.js
+deob_07_stats.json
+deob_editor_sdk.js
+deob_editor_sdk_stats.json
+editor_sdk_method_catalog.md
+
+exec
+/bin/zsh -lc 'rg -n "PRN_CLR_CNT|MTRL_CD|CVR_CLR_CNT|INN_CLR_CNT|CVR_MTRL_CD|INN_MTRL_CD|book2025|PRBKYPR" _workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts docs/reversing/red_reverse_engineer/03_deobfuscated/deob_05_app_api.js docs/reversing/red_reverse_engineer/03_deobfuscated/deob_06_app_widget_sdk.js docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js docs/reversing/red_reverse_engineer/01_source/mod_05* docs/reversing/red_reverse_engineer/01_source/mod_06* docs/reversing/red_reverse_engineer/01_source/mod_07* _workspace/huni-re-verify/02_golden/golden_PRBKYPR_book.json' in /Users/innojini/Dev/HuniWeb
+ exited 2 in 0ms:
+rg: _workspace/huni-re-verify/02_golden/golden_PRBKYPR_book.json: No such file or directory (os error 2)
+_workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts:115:    id: m.MTRL_CD,
+_workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts:116:    label: m.MTRL_NM ?? m.PTT_NME ?? m.MTRL_CD,
+_workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts:149://  평면화한다: (a)다종 자재선택형(ACPDSTD: 엔트리별 distinct MTRL_CD·ATTB_CD None·VIEW_YN=Y) 은
+_workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts:150://  Red 권위(deob_07:2162 material-multi)상 ATTB="" / (b)단일 add-on(AIPPCUT SUB_MTR EC001: MTRL_CD="")
+_workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts:152://  둘을 못 가른다 → 의미는 PCS_COD 단일축이 아니라 *엔트리 shape*(MTRL_CD 보유/다종 여부).
+_workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts:153://  [discriminator] material-multi = SUB_MTR 그룹의 엔트리가 *모두* 비어있지 않은 MTRL_CD 를 갖고
+_workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts:154://   distinct MTRL_CD 가 2종 이상이며 어떤 엔트리도 ATTB_CD 를 갖지 않음(=가시 자재선택 리스트).
+_workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts:155://   근거: fixtures/product_ACPDSTD.json(MTRL_CD 12종 distinct, ATTB_CD None) vs
+_workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts:156://         product_AIPPCUT.json(MTRL_CD 전부 "" → 단일 add-on, 캡처 ATTB=1 유지).
+_workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts:165:  const mtrlCds = items.map((it) => (it.MTRL_CD ?? '').trim());
+_workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts:246:    //  단일 add-on SUB_MTR(AIPPCUT, MTRL_CD="")은 false → attb=undefined 유지 → 캡처 ATTB=1 echo 보존.
+_workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts:387:        priceColorCount: d.PRN_CLR_CNT, // dosu↔bnc 평면화
+_workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts:419:          priceColorCount: d.PRN_CLR_CNT,
+_workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts:524:    triggerValueId: r.MTRL_CD,
+_workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts:569://  - DOSU_COD 는 의도 omit(OPEN-1) — PRN_CLR_CNT 가 도수 가격의미 운반(테스트 입증, 회귀 가드 유지).
+_workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts:572:  // D-L2: 책자 판정 권위 = itemGroup(book2025 분류, 명시값). Red 는 item_gbn 으로 스키마 분기(mod_05:1859).
+_workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts:576:      ? req.itemGroup.startsWith('book2025')
+_workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts:588:    PRN_CLR_CNT: req.colorCounts.default,
+_workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts:589:    MTRL_CD: req.materials.default,
+_workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts:594:    ord.CVR_CLR_CNT = req.colorCounts.default;
+_workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts:595:    ord.INN_CLR_CNT = req.colorCounts.inner;
+_workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts:596:    ord.CVR_MTRL_CD = req.materials.default;
+_workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts:597:    ord.INN_MTRL_CD = req.materials.inner;
+docs/reversing/red_reverse_engineer/03_deobfuscated/deob_05_app_api.js:1081: * @param {string} productCode - 제품 코드 (예: "PRBKYPR")
+docs/reversing/red_reverse_engineer/01_source/mod_05_app_api.js:1696:    }, h = s.default?.cntInfo, f = kl[n] === "SetQty" ? (h?.totalCnt || 1) / (h?.initCnt || 1) : null, _ = a === "book2025_item" ? null : e.quantityInfo.ordCnt, p = a === "book2025_item" ? e.quantityInfo.ordCnt : e.quantityInfo.prnCnt, m = {
+docs/reversing/red_reverse_engineer/01_source/mod_05_app_api.js:1754:    if (a === "book2025_item") {
+docs/reversing/red_reverse_engineer/01_source/mod_05_app_api.js:1831:            book2025_item: {
+docs/reversing/red_reverse_engineer/01_source/mod_05_app_api.js:1859:          const b = c.value === "book2025_item" ? [{
+docs/reversing/red_reverse_engineer/01_source/mod_05_app_api.js:1867:            CVR_CLR_CNT: O.dosuInfo?.PRN_CLR_CNT,
+docs/reversing/red_reverse_engineer/01_source/mod_05_app_api.js:1868:            INN_CLR_CNT: O.inner_dosuInfo?.PRN_CLR_CNT,
+docs/reversing/red_reverse_engineer/01_source/mod_05_app_api.js:1869:            CVR_MTRL_CD: O.meterialInfo?.MTRL_CD,
+docs/reversing/red_reverse_engineer/01_source/mod_05_app_api.js:1870:            INN_MTRL_CD: O.inner_meterialInfo?.MTRL_CD
+docs/reversing/red_reverse_engineer/01_source/mod_05_app_api.js:1873:            MTRL_CD: O.meterialInfo?.MTRL_CD,
+docs/reversing/red_reverse_engineer/01_source/mod_05_app_api.js:1881:            PRN_CLR_CNT: O.dosuInfo?.PRN_CLR_CNT,
+docs/reversing/red_reverse_engineer/01_source/mod_05_app_api.js:2155:      r = s === "book2025_item" ? null : P1(e),
+docs/reversing/red_reverse_engineer/01_source/mod_05_app_api.js:2405:        l = o === "book2025_item" ? {
+docs/reversing/red_reverse_engineer/01_source/mod_05_app_api.js:2470:        ...u?.sizeSelect.view_yn === "Y" && h && n?.dosuInfo.PRN_CLR_CNT !== 0 ? {
+docs/reversing/red_reverse_engineer/01_source/mod_05_app_api.js:2524:        if (o === "book2025_item") {
+docs/reversing/red_reverse_engineer/01_source/mod_05_app_api.js:2575:            i = r.find(y => y.MTRL_CD === t.MTRL_COD);
+docs/reversing/red_reverse_engineer/01_source/mod_05_app_api.js:2586:              MTRL_CD: t.MTRL_COD
+docs/reversing/red_reverse_engineer/03_deobfuscated/deob_06_app_widget_sdk.js:50:   * @param {string} initConfig.pdtCode - 제품 코드 (예: "PRBKYPR", "PRBKORD")
+docs/reversing/red_reverse_engineer/03_deobfuscated/deob_06_app_widget_sdk.js:1046:    const bookSummary = itemGroup === "book2025_item" ? {
+docs/reversing/red_reverse_engineer/03_deobfuscated/deob_06_app_widget_sdk.js:1109:      ...widgetSkinInfo?.sizeSelect.view_yn === "Y" && sizeLabel && orderData?.dosuInfo.PRN_CLR_CNT !== 0 ? {
+docs/reversing/red_reverse_engineer/03_deobfuscated/deob_06_app_widget_sdk.js:1174:      if (itemGroup === "book2025_item") {
+docs/reversing/red_reverse_engineer/03_deobfuscated/deob_06_app_widget_sdk.js:1243:          matchedMaterial = pcsInfoList.find(pcsItem => pcsItem.MTRL_CD === tabData.MTRL_COD);
+docs/reversing/red_reverse_engineer/03_deobfuscated/deob_06_app_widget_sdk.js:1258:            MTRL_CD: tabData.MTRL_COD
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:720:            const C = n.data.pdt_mtrl_info.filter(y => y.MTRL_CD === b[0]?.size.MTRL_COD);
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:727:                MTRL_CD: Z,
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:737:                MTRL_CD: Z,
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:745:            const C = n.data.pdt_pcs_info.filter(y => y.PCS_CD === "DIR_MTR" && y.MTRL_CD && b[y.MTRL_CD]).map(y => {
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:751:                MTRL_CD: me,
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:1127:                MTRL_CD: E,
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:1135:                MTRL_CD: E,
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:1160:          }, h = p => p.every(m => m.HIDE_YN === "Y"), f = H(n.default?.PTT_CD || l.value[0]?.PTT_CD), _ = H(n.default?.MTRL_CD || l.value[0]?.MTRL_CD);
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:1165:            v && (_.value = v.MTRL_CD)
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:1171:          const m = l.value.find(v => v.MTRL_CD === p);
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:1178:              MTRL_CD: D,
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:1189:              MTRL_CD: D,
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:1221:            key: `${v.MTRL_CD}`,
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:1222:            value: v.MTRL_CD,
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:1302:            PRBKYPR: !0,
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:1512:              mtrlCd: T(a).meterialInfo?.MTRL_CD,
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:1523:              mtrlCd: T(a).meterialInfo?.MTRL_CD,
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:1621:                  key: w.MTRL_CD,
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:1622:                  value: w.MTRL_CD,
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:1634:                  key: w.MTRL_CD,
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:1635:                  value: w.MTRL_CD,
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:1641:                  key: w.MTRL_CD,
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:1642:                  value: w.MTRL_CD,
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:1654:            y && (d[y.MTRL_CD] ? d[y.MTRL_CD].QTY += y.INC_STEP : d[y.MTRL_CD] = {
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:1661:            d[y.MTRL_CD].QTY !== y.FIR_CNT && (d[y.MTRL_CD].QTY -= y.INC_STEP)
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:1670:            d[I.MTRL_CD] = {
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:1671:              ...d[I.MTRL_CD],
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:1679:              const y = n.data.find(I => I.MTRL_CD === c.value);
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:1683:              const w = _.value[y].find(U => U.MTRL_CD === I);
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:1706:              const w = _.value[i.value].find(U => U.MTRL_CD === c.value);
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:1712:            delete d[y.MTRL_CD]
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:1716:              MTRL_CD: w.MTRL_CD,
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:1726:            A = R(() => O.getOrderData()?.priceCalc.result.result?.reduce((I, w) => (I[w.MTRL_CD] = +w.PRICE_MALL !== w.PRICE ? +w.PRICE_MALL : w.PRICE, I), {})),
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:1794:            key: w.MTRL_CD
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:1795:          }, [A.value && A.value[w.MTRL_CD] ? (g(), M(J, {
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:1811:          }, "+", 8, nE)]), S("div", oE, [S("span", sE, j(b[w.MTRL_CD]?.toLocaleString()), 1), S("button", {
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:3642:              return $l.has(r.pdtCode) && l.value && (p = n.options.filter(m => m.MTRL_CD === l.value?.MTRL_CD || m.BSN_YN === "Y")), i.value && (p = n.options.filter(m => (i.value?.MTRL_GRP ? i.value.MTRL_GRP === m.GRP_OPTION_CD : !0) && (i.value?.PTT ? i.value.PTT === m.PTT_CD : !0))), p.length > 0 ? p : n.options
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:3657:            }, f = H(n.default?.MTRL_CD || u.value[0]?.MTRL_CD);
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:3659:            const m = u.value.find(v => v.MTRL_CD === p);
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:3666:                MTRL_CD: D,
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:3676:                MTRL_CD: D,
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:3684:          }), F(() => l.value?.MTRL_CD, p => {
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:3685:            p && $l.has(r.pdtCode) && (f.value = u.value[0]?.MTRL_CD)
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:3687:            (p?.MTRL_GRP !== m?.MTRL_GRP || p?.PTT !== m?.PTT) && (f.value = u.value[0]?.MTRL_CD)
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:3703:              key: v.MTRL_CD,
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:3704:              value: v.MTRL_CD,
+docs/reversing/red_reverse_engineer/01_source/mod_06_app_widget_sdk.js:1847:        const m = b => !$l.has(s.pdtCode) && b.MTRL_CD === i.value,
+docs/reversing/red_reverse_engineer/01_source/mod_06_app_widget_sdk.js:1885:                MTRL_CD: Z,
+docs/reversing/red_reverse_engineer/01_source/mod_06_app_widget_sdk.js:1893:                  MTRL_CD: Z
+docs/reversing/red_reverse_engineer/01_source/mod_06_app_widget_sdk.js:1918:                MTRL_CD: C.extra.MTRL_CD,
+docs/reversing/red_reverse_engineer/01_source/mod_06_app_widget_sdk.js:1940:          const C = n.options.essential.find(_e => _e.MTRL_CD === b && _e.PCS_CD === n.relatedData.pcsCodeForSize);
+docs/reversing/red_reverse_engineer/01_source/mod_06_app_widget_sdk.js:2176:      r = t.meterialInfo.MTRL_CD[5],
+docs/reversing/red_reverse_engineer/01_source/mod_06_app_widget_sdk.js:2629:            MTRL_CD: c,
+docs/reversing/red_reverse_engineer/01_source/mod_06_app_widget_sdk.js:2940:              mtrlCd: T(A).meterialInfo?.MTRL_CD,
+docs/reversing/red_reverse_engineer/01_source/mod_06_app_widget_sdk.js:2988:              mtrlCd: T(A).meterialInfo?.MTRL_CD,
+docs/reversing/red_reverse_engineer/01_source/mod_06_app_widget_sdk.js:2999:              mtrlCd: T(A).meterialInfo?.MTRL_CD,
+docs/reversing/red_reverse_engineer/01_source/mod_06_app_widget_sdk.js:3011:              mtrlCd: T(A).meterialInfo?.MTRL_CD,
+docs/reversing/red_reverse_engineer/01_source/mod_06_app_widget_sdk.js:3187:          c = H(n.default?.MTRL_CD || l.value[0]?.MTRL_CD),
+docs/reversing/red_reverse_engineer/01_source/mod_06_app_widget_sdk.js:3199:          const f = l.value.find(_ => _.MTRL_CD === h);
+docs/reversing/red_reverse_engineer/01_source/mod_06_app_widget_sdk.js:3206:              MTRL_CD: E,
+docs/reversing/red_reverse_engineer/01_source/mod_06_app_widget_sdk.js:3216:              MTRL_CD: E,
+docs/reversing/red_reverse_engineer/01_source/mod_06_app_widget_sdk.js:3225:          h && (c.value = l.value[0]?.MTRL_CD)
+docs/reversing/red_reverse_engineer/01_source/mod_06_app_widget_sdk.js:3239:            key: _.MTRL_CD,
+docs/reversing/red_reverse_engineer/01_source/mod_06_app_widget_sdk.js:3240:            value: _.MTRL_CD,
+docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js:969:            const matchedMaterials = componentProps.data.pdt_mtrl_info.filter(mtrl => mtrl.MTRL_CD === newCombinations[0]?.size.MTRL_COD);
+docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js:976:                MTRL_CD: materialCode,
+docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js:986:                MTRL_CD: materialCode,
+docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js:995:            const dirMtrOptions = componentProps.data.pdt_pcs_info.filter(pcsInfo => pcsInfo.PCS_CD === "DIR_MTR" && pcsInfo.MTRL_CD && materialMap[pcsInfo.MTRL_CD]).map(pcsInfo => {
+docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js:1001:                MTRL_CD: mtrlCode,
+docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js:1448:                MTRL_CD: materialCode,
+docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js:1456:                MTRL_CD: materialCode,
+docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js:1486:          selectedMaterialCode = ref(componentProps.default?.MTRL_CD || visibleOptions.value[0]?.MTRL_CD);
+docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js:1492:            firstVisibleWeight && (selectedMaterialCode.value = firstVisibleWeight.MTRL_CD)
+docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js:1499:          const matchedMaterial = visibleOptions.value.find(opt => opt.MTRL_CD === newMtrlCode);
+docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js:1506:              MTRL_CD: materialCode,
+docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js:1517:              MTRL_CD: materialCode,
+docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js:1549:            key: `${weightEntry.MTRL_CD}`,
+docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js:1550:            value: weightEntry.MTRL_CD,
+docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js:1649:            PRBKYPR: !0,
+docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js:1919:              mtrlCd: unref(orderInfo).meterialInfo?.MTRL_CD,
+docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js:1932:              mtrlCd: unref(orderInfo).meterialInfo?.MTRL_CD,
+docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js:2036:            /* 선택된 부자재 항목들 reactive (MTRL_CD → 항목 데이터) */
+docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js:2058:                  key: material.MTRL_CD,
+docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js:2059:                  value: material.MTRL_CD,
+docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js:2071:                  key: material.MTRL_CD,
+docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js:2072:                  value: material.MTRL_CD,
+docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js:2078:                  key: material.MTRL_CD,
+docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js:2079:                  value: material.MTRL_CD,
+docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js:2093:            material && (selectedItems[material.MTRL_CD] ? selectedItems[material.MTRL_CD].QTY += material.INC_STEP : selectedItems[material.MTRL_CD] = {
+docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js:2101:            selectedItems[material.MTRL_CD].QTY !== material.FIR_CNT && (selectedItems[material.MTRL_CD].QTY -= material.INC_STEP)
+docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js:2111:            selectedItems[material.MTRL_CD] = {
+docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js:2112:              ...selectedItems[material.MTRL_CD],
+docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js:2121:              const material = componentProps.data.find(item => item.MTRL_CD === tertiarySelection.value);
+docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js:2125:              const material = materialGroupMap.value[groupKey].find(item => item.MTRL_CD === mtrlCd);
+docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js:2148:              const selectedMaterial = materialGroupMap.value[primarySelection.value].find(item => item.MTRL_CD === tertiarySelection.value);
+docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js:2155:            delete selectedItems[material.MTRL_CD]
+docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js:2160:              MTRL_CD: item.MTRL_CD,
+docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js:2171:            itemPriceMap = computed(() => orderStore.getOrderData()?.priceCalc.result.result?.reduce((priceMap, priceItem) => (priceMap[priceItem.MTRL_CD] = +priceItem.PRICE_MALL !== priceItem.PRICE ? +priceItem.PRICE_MALL : priceItem.PRICE, priceMap), {})),
+docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js:2247:            key: item.MTRL_CD
+docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js:2248:          }, [itemPriceMap.value && itemPriceMap.value[item.MTRL_CD] ? (openBlock(), createElementVNode(Fragment, {
+docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js:2264:          }, "+", 8, accIncreaseBtnAttrs)]), createElement("div", accPriceBoxClass, [createElement("span", accPriceClass, toDisplayString(animatedPrices[item.MTRL_CD]?.toLocaleString()), 1), createElement("button", {
+
+codex
+`golden_*.json`는 지시된 최상위 경로에는 없고, golden 디렉터리 아래 하위 구조만 보입니다. 우선 실제 파일 위치를 파일명 기준으로만 확인한 뒤, 해당 golden JSON만 근거로 사용하겠습니다.
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse Failed
+hook: PreToolUse Failed
+hook: PreToolUse Failed
+hook: PreToolUse
+hook: PreToolUse Failed
+exec
+/bin/zsh -lc "nl -ba _workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts | sed -n '140,160p;580,620p'" in /Users/innojini/Dev/HuniWeb
+exec
+/bin/zsh -lc "nl -ba docs/reversing/red_reverse_engineer/03_deobfuscated/deob_05_app_api.js | sed -n '1678,1900p;2390,2430p;2518,2590p'" in /Users/innojini/Dev/HuniWeb
+ succeeded in 0ms:
+ succeeded in 0ms:
+   140	//    PDT_WRK: GSPUFBC×2·GSTGMIC(PKT01) 4/4 ATTB='' (ORD_CNT=1 에도 '') → echo 대상 아님(W1-b 제외).
+   141	//  [D-1 RESOLVED 2026-06-04 qty-sweep] WRK_MTR/DIR_MTR ATTB = 사용자 건수(N) echo 라이브 검증:
+   142	//   GSTGMIC·ACNTHAP·GSPDLNG·GSTBMWM 에서 ATTB 가 {2,10} 로 PRN_CNT(건수)를 따라 변하고 PRICE 선형.
+   143	//   우리 String(req.quantity)=사용자 건수 N → Red ATTB(=건수 N)와 값 일치 → 현 동작 정당.
+   144	//  ※ 단 굿즈 건수의 *필드축*은 별건(G-6, 잠복/컨버전 게이트): Red 는 건수를 PRN_CNT 에 싣고 ORD_CNT=1,
+   145	//   우리는 ORD_CNT 에 실음. ATTB 값은 옳으나 실 HTTP 가격권위(PRN_CNT) 배선은 컨버전 시 정렬 필요.
+   146	//  INN_DFT 는 노트류 요청 shape 결함으로 scaling 미검증 유지(W2-b). SUB_MTR 은 W2-a(엔트리-shape).
+   147	const QUANTITY_ECHO_PCS = new Set(['SUB_MTR', 'INN_DFT', 'WRK_MTR', 'DIR_MTR']);
+   148	// W2-a(A-2 발현) SUB_MTR 이중의미 해소 — `QUANTITY_ECHO_PCS` 단일 Set 이 SUB_MTR 의 두 의미를
+   149	//  평면화한다: (a)다종 자재선택형(ACPDSTD: 엔트리별 distinct MTRL_CD·ATTB_CD None·VIEW_YN=Y) 은
+   150	//  Red 권위(deob_07:2162 material-multi)상 ATTB="" / (b)단일 add-on(AIPPCUT SUB_MTR EC001: MTRL_CD="")
+   151	//  은 라이브 캡처(05_qa/captures/b1_AIPPCUT.json)상 ATTB=1(=quantity echo). 단일 PCS_COD Set 으로는
+   152	//  둘을 못 가른다 → 의미는 PCS_COD 단일축이 아니라 *엔트리 shape*(MTRL_CD 보유/다종 여부).
+   153	//  [discriminator] material-multi = SUB_MTR 그룹의 엔트리가 *모두* 비어있지 않은 MTRL_CD 를 갖고
+   154	//   distinct MTRL_CD 가 2종 이상이며 어떤 엔트리도 ATTB_CD 를 갖지 않음(=가시 자재선택 리스트).
+   155	//   근거: fixtures/product_ACPDSTD.json(MTRL_CD 12종 distinct, ATTB_CD None) vs
+   156	//         product_AIPPCUT.json(MTRL_CD 전부 "" → 단일 add-on, 캡처 ATTB=1 유지).
+   157	//  [어댑터 전용 해법, INV-3] 이 판정은 mapProduct 시점(mapPcsGroups)에 데이터가 있으므로 어댑터 내부에서
+   158	//   material-multi 엔트리의 OptionValue.attb 슬롯에 '' 를 명시 적재한다. serialize 의 `f.attb ?? (echo)` 는
+   159	//   '' 가 nullish 아님이라 ATTB="" 로 단락(short-circuit) → 캡처/store/계약 무변경(코어 0줄).
+   160	//  [HARD] 새 권위 생성 아님 — ATTB="" 는 deob_07:2162, ATTB=1 echo 는 b1_AIPPCUT 캡처. 둘 다 실측.
+   580	  const ord: RedPriceReqOrdInfo = {
+   581	    PDT_CD: req.productCode,
+   582	    CUT_WDT: d?.cutW ?? 0,
+   583	    CUT_HGH: d?.cutH ?? 0,
+   584	    WRK_WDT: d?.workW ?? 0,
+   585	    WRK_HGH: d?.workH ?? 0,
+   586	    ORD_CNT: req.quantity, // 주문건수(굿즈=디자인 수)
+   587	    PRN_CNT: req.printCount ?? 1, // 인쇄수량(미전달 상품군 = 1, 책자/디지털 하위호환)
+   588	    PRN_CLR_CNT: req.colorCounts.default,
+   589	    MTRL_CD: req.materials.default,
+   590	  };
+   591	  if (isBook) {
+   592	    // 책자 표지/내지 분리 (data-adapter.md:81-84). 표지=default, 내지=inner.
+   593	    ord.PAGE_CNT = req.pageCount;
+   594	    ord.CVR_CLR_CNT = req.colorCounts.default;
+   595	    ord.INN_CLR_CNT = req.colorCounts.inner;
+   596	    ord.CVR_MTRL_CD = req.materials.default;
+   597	    ord.INN_MTRL_CD = req.materials.inner;
+   598	  }
+   599	  return {
+   600	    dataJson: {
+   601	      ORD_INFO: [ord],
+   602	      PCS_INFO: req.selectedFinishes.map((f) => {
+   603	        // PCS_<CD> 그룹 id 에서 Red PCS_COD 복원(어댑터 내부 역매핑).
+   604	        //  L-2: 복합 2축 그룹은 store 가 base groupId(PCS_COT_DFT) + 재합성 valueId(coating+side)로 emit.
+   605	        const pcsCod = f.groupId.startsWith('PCS_') ? f.groupId.slice(4) : f.groupId;
+   606	        // L-1 ATTB(QUANTITY_ECHO_PCS): String(req.quantity) echo + ATTB_2/3 빈슬롯.
+   607	        //  [W1-c] mod_07:2586/2467 인용은 deob 부존재(상단 set 정의 주석 참조). ATTB scaling 미검증 —
+   608	        //  qty=1 캡처 우연일치, qty>1 재캡처/컨버전 게이트(D-1) 전까지 값 동작 보존.
+   609	        //  Red 코드지식은 어댑터에만(INV-1) — 위젯/store 는 수량을 ATTB 로 계산하지 않음.
+   610	        const isQuantityEchoPcs = QUANTITY_ECHO_PCS.has(pcsCod);
+   611	        const entry: { PCS_COD: string; PCS_DTL_COD: string; ATTB: string; ATTB_2?: string; ATTB_3?: string } = {
+   612	          PCS_COD: pcsCod,
+   613	          PCS_DTL_COD: f.valueId,
+   614	          // L-1: ATTB 다형 불투명 echo(속성칩값=f.attb / 수량형=quantity). 미보유 후가공은 ''(하위호환).
+   615	          ATTB: f.attb ?? (isQuantityEchoPcs ? String(req.quantity) : ''),
+   616	        };
+   617	        // ATTB_2/ATTB_3 슬롯: 수량형 후가공은 빈슬롯 운용(mod_07:2598). 그 외는 explicit attb2/3 만.
+   618	        if (f.attb2 != null) entry.ATTB_2 = f.attb2;
+   619	        else if (isQuantityEchoPcs) entry.ATTB_2 = '';
+   620	        if (f.attb3 != null) entry.ATTB_3 = f.attb3;
+
+exec
+/bin/zsh -lc "rg --files _workspace/huni-re-verify/02_golden | rg 'golden_.*\\.json"'$|PRBKYPR|book'"'" in /Users/innojini/Dev/HuniWeb
+ succeeded in 0ms:
+_workspace/huni-re-verify/02_golden/captures/golden_PRBKYPR_book.json
+_workspace/huni-re-verify/02_golden/captures/golden_GSTGMIC_tiered.json
+_workspace/huni-re-verify/02_golden/captures/golden_GSNTSPR_attb.json
+_workspace/huni-re-verify/02_golden/captures/golden_AIPPCUT_real.json
+_workspace/huni-re-verify/02_golden/captures/golden_STPADPN_fixed.json
+_workspace/huni-re-verify/02_golden/captures/golden_GSPUFBC_tmpl.json
+
+exec
+/bin/zsh -lc "nl -ba docs/reversing/red_reverse_engineer/01_source/mod_05_app_api.js | sed -n '1688,1890p;2398,2420p;2518,2590p'" in /Users/innojini/Dev/HuniWeb
+ succeeded in 0ms:
+  1688	        }
+  1689	      } : {},
+  1690	      ...u ? {
+  1691	        workSize: {
+  1692	          value: u,
+  1693	          label: x("summary.작업")
+  1694	        }
+  1695	      } : {}
+  1696	    }, h = s.default?.cntInfo, f = kl[n] === "SetQty" ? (h?.totalCnt || 1) / (h?.initCnt || 1) : null, _ = a === "book2025_item" ? null : e.quantityInfo.ordCnt, p = a === "book2025_item" ? e.quantityInfo.ordCnt : e.quantityInfo.prnCnt, m = {
+  1697	      ...f ? {
+  1698	        setQty: {
+  1699	          value: f,
+  1700	          label: x("summary.세트")
+  1701	        }
+  1702	      } : _ ? {
+  1703	        designQty: {
+  1704	          value: _,
+  1705	          label: x("summary.디자인수")
+  1706	        }
+  1707	      } : {},
+  1708	      orderQty: {
+  1709	        value: p,
+  1710	        label: x("summary.수량")
+  1711	      }
+  1712	    }, {
+  1713	      result_sum: v,
+  1714	      book_info: E
+  1715	    } = e.priceCalc.result, {
+  1716	      ORG_PRICE: k,
+  1717	      ORG_PRICE_VAT: N,
+  1718	      PRICE: D,
+  1719	      PRICE_VAT: O,
+  1720	      PRICE_MALL: A,
+  1721	      PRICE_MALL_VAT: b
+  1722	    } = v, C = D !== A, y = k !== D, I = C ? A + b : y ? D + O : k + N, w = Ll[n] || p1[n] ? p : (p || 1) * (_ || 1), U = Math.round(I / w), Z = {
+  1723	      vat: {
+  1724	        value: C ? b : y ? O : N,
+  1725	        label: x("summary.부가세")
+  1726	      },
+  1727	      unitPrice: {
+  1728	        value: U,
+  1729	        label: x("summary.개당")
+  1730	      },
+  1731	      price: {
+  1732	        value: C ? A : y ? D : k,
+  1733	        label: x("summary.공급가")
+  1734	      },
+  1735	      totalPrice: {
+  1736	        value: I,
+  1737	        label: x("summary.청구금액")
+  1738	      }
+  1739	    };
+  1740	    if (e.acrylicSelectData) {
+  1741	      const me = e.acrylicSelectData.productionMethod?.COD_NME;
+  1742	      return {
+  1743	        ...me ? {
+  1744	          method: {
+  1745	            value: me,
+  1746	            label: x("summary.인쇄방식")
+  1747	          }
+  1748	        } : {},
+  1749	        ...d,
+  1750	        ...m,
+  1751	        ...Z
+  1752	      }
+  1753	    }
+  1754	    if (a === "book2025_item") {
+  1755	      const me = E ? {
+  1756	        weight: {
+  1757	          value: E.PDT_WGT,
+  1758	          label: x("summary.예상무게")
+  1759	        },
+  1760	        boxQty: {
+  1761	          value: E.BOX_CNT,
+  1762	          label: x("summary.예상박스")
+  1763	        },
+  1764	        shipping: {
+  1765	          value: E.DLVR_AMT,
+  1766	          label: x("summary.배송비")
+  1767	        }
+  1768	      } : null;
+  1769	      return {
+  1770	        ...m,
+  1771	        ...Z,
+  1772	        ...me
+  1773	      }
+  1774	    }
+  1775	    return {
+  1776	      ...d,
+  1777	      ...m,
+  1778	      ...Z
+  1779	    }
+  1780	  }
+  1781	  const y1 = {
+  1782	      class: "widget-container"
+  1783	    },
+  1784	    C1 = {
+  1785	      key: 0,
+  1786	      class: "widget-body"
+  1787	    },
+  1788	    T1 = re({
+  1789	      __name: "Common",
+  1790	      setup(e) {
+  1791	        const t = Dt(),
+  1792	          n = le("productCode", {
+  1793	            pdtCode: ""
+  1794	          }),
+  1795	          {
+  1796	            data: o,
+  1797	            isFetchedAfterMount: s
+  1798	          } = Rp({
+  1799	            queryKey: ["product/get", n.pttCode ? `${n.pdtCode}/${n.pttCode}` : n.pdtCode],
+  1800	            queryFn: () => G_(t.locale, n.pdtCode, n.pttCode),
+  1801	            enabled: R(() => !!n?.pdtCode),
+  1802	            refetchOnWindowFocus: !1
+  1803	          }),
+  1804	          {
+  1805	            data: r,
+  1806	            mutate: a
+  1807	          } = wp({
+  1808	            mutationKey: ["price/get"],
+  1809	            mutationFn: O => Al({
+  1810	              type: "COMMON",
+  1811	              body: O
+  1812	            })
+  1813	          }),
+  1814	          i = le("callbacks", {}),
+  1815	          l = R(() => o.value?.result?.product_option.option),
+  1816	          c = R(() => l.value?.item_gbn),
+  1817	          u = {
+  1818	            component: kn(() => Promise.resolve().then(() => SS)),
+  1819	            className: "widget"
+  1820	          },
+  1821	          d = {
+  1822	            vDigital_item: u,
+  1823	            acrylic2025_item: {
+  1824	              component: kn(() => Promise.resolve().then(() => QS)),
+  1825	              className: "widget"
+  1826	            },
+  1827	            clothes2025_item: {
+  1828	              component: kn(() => Promise.resolve().then(() => hP)),
+  1829	              className: "clothes-color"
+  1830	            },
+  1831	            book2025_item: {
+  1832	              component: kn(() => Promise.resolve().then(() => qP)),
+  1833	              className: ""
+  1834	            }
+  1835	          },
+  1836	          h = H(),
+  1837	          f = R(() => l.value?.price_gbn || "tmpl_price"),
+  1838	          _ = le("member"),
+  1839	          p = H({
+  1840	            ORD_INFO: [],
+  1841	            PCS_INFO: [],
+  1842	            price_gbn: f.value,
+  1843	            mb_cust_cod: _?.mb_cust_cod || "10000000"
+  1844	          });
+  1845	
+  1846	        function m(O) {
+  1847	          const A = [];
+  1848	          O.pcsInfo && Object.values(O.pcsInfo).forEach(C => {
+  1849	            C.selectedOptions.forEach(y => {
+  1850	              A.push({
+  1851	                PCS_COD: y.PCS_CD,
+  1852	                PCS_DTL_COD: y.PCS_DTL_CD,
+  1853	                ATTB: y.ATTB,
+  1854	                ATTB_2: y.ATTB_2,
+  1855	                ATTB_3: y.ATTB_3
+  1856	              })
+  1857	            })
+  1858	          });
+  1859	          const b = c.value === "book2025_item" ? [{
+  1860	            PDT_CD: n.pdtCode,
+  1861	            CUT_WDT: O.sizeInfo?.cutSize?.width,
+  1862	            CUT_HGH: O.sizeInfo?.cutSize?.height,
+  1863	            WRK_WDT: O.sizeInfo?.workSize?.width,
+  1864	            WRK_HGH: O.sizeInfo?.workSize?.height,
+  1865	            PRN_CNT: O.quantityInfo?.ordCnt,
+  1866	            PAGE_CNT: O.quantityInfo?.prnCnt,
+  1867	            CVR_CLR_CNT: O.dosuInfo?.PRN_CLR_CNT,
+  1868	            INN_CLR_CNT: O.inner_dosuInfo?.PRN_CLR_CNT,
+  1869	            CVR_MTRL_CD: O.meterialInfo?.MTRL_CD,
+  1870	            INN_MTRL_CD: O.inner_meterialInfo?.MTRL_CD
+  1871	          }] : [{
+  1872	            PDT_CD: n.pdtCode,
+  1873	            MTRL_CD: O.meterialInfo?.MTRL_CD,
+  1874	            CUT_WDT: O.sizeInfo?.cutSize?.width,
+  1875	            CUT_HGH: O.sizeInfo?.cutSize?.height,
+  1876	            WRK_WDT: O.sizeInfo?.workSize?.width,
+  1877	            WRK_HGH: O.sizeInfo?.workSize?.height,
+  1878	            PRN_CNT: O.quantityInfo?.prnCnt,
+  1879	            ORD_CNT: O.quantityInfo?.ordCnt,
+  1880	            DOSU_COD: O.dosuInfo?.COD,
+  1881	            PRN_CLR_CNT: O.dosuInfo?.PRN_CLR_CNT,
+  1882	            ...c.value === "clothes2025_item" ? {
+  1883	              PRINT_TYPE: O.clothesSelectData.printType?.COD
+  1884	            } : {}
+  1885	          }];
+  1886	          p.value = {
+  1887	            ORD_INFO: b,
+  1888	            PCS_INFO: A,
+  1889	            price_gbn: f.value,
+  1890	            mb_cust_cod: _?.mb_cust_cod || "10000000"
+  2398	            }
+  2399	          } : {},
+  2400	          material: {
+  2401	            label: "제품명",
+  2402	            value: n?.meterialInfo.PTT_NM
+  2403	          }
+  2404	        } : null,
+  2405	        l = o === "book2025_item" ? {
+  2406	          innerInfo: {
+  2407	            label: "내지 정보",
+  2408	            children: [{
+  2409	              label: "내지 인쇄 옵션",
+  2410	              value: n?.inner_dosuInfo.COD_NME
+  2411	            }, {
+  2412	              label: "내지 용지",
+  2413	              value: n?.inner_meterialInfo.PTT_NM + `${n?.inner_meterialInfo.WGT_CD?`${+n?.inner_meterialInfo.WGT_CD}g`:""}`
+  2414	            }, {
+  2415	              label: "내지 장수",
+  2416	              value: n?.quantityInfo.prnCnt
+  2417	            }]
+  2418	          },
+  2419	          coverInfo: {
+  2420	            label: "표지 정보",
+  2518	        if (t?.product_option.option.order_yn === "N") throw new Error(x("주문불가상태"));
+  2519	        if (n?.validation && n.validation.length > 0) throw new Error(x("주문불가-사이즈"));
+  2520	        if (n?.priceCalc.result.retCode !== 200 || !n.priceCalc.result.result_sum.PRICE) throw new Error("주문불가-가격");
+  2521	        const o = t?.product_option.option.item_gbn,
+  2522	          s = this.editorStore.uploadType,
+  2523	          r = n?.fileUploadInfo;
+  2524	        if (o === "book2025_item") {
+  2525	          for (const [a, i] of Object.entries(s)) {
+  2526	            const l = x(a === "inner" ? "내지" : "표지");
+  2527	            if (i === "editor" && !this.editorStore.isAfterEdit(a)) throw new Error(`[${l}] ${x("주문불가-에디터")}`);
+  2528	            if (i === "pdf") {
+  2529	              if (!r) throw new Error(`[${l}] ${x("주문불가-파일")}`);
+  2530	              if (a === "inner" && !r[0]) throw new Error(`[${l}] ${x("주문불가-파일")}`);
+  2531	              if (a === "default" && !r[1]) throw new Error(`[${l}] ${x("주문불가-파일")}`)
+  2532	            }
+  2533	          }
+  2534	          if (r && r[0] && r[1] && r[0].org_file_nm === r[1].org_file_nm) throw new Error(x("주문불가-파일명중복"));
+  2535	          return {
+  2536	            success: !0
+  2537	          }
+  2538	        }
+  2539	        if (s.default === "pdf") {
+  2540	          if (!r || !r[0]) throw new Error(x("주문불가-파일"));
+  2541	          if (o === "clothes2025_item" && n.clothesSelectData.printType.COD === "PTP_SLK" && !n?.clothesSelectData.pantoneInfo) throw new Error(x("주문불가-인쇄컬러미선택"))
+  2542	        }
+  2543	        if (o === "clothes2025_item" && !n?.clothesSelectData.printType.COD) return {
+  2544	          success: !0
+  2545	        };
+  2546	        if (s.default === "editor" && !this.editorStore.isAfterEdit() && n.dosuInfo.COD !== "SID_X") throw new Error(x("주문불가-에디터"));
+  2547	        return {
+  2548	          success: !0
+  2549	        }
+  2550	      } catch (t) {
+  2551	        let n = x("주문불가상태");
+  2552	        return t instanceof Error && (n = t.message), {
+  2553	          success: !1,
+  2554	          errorMessage: n
+  2555	        }
+  2556	      }
+  2557	    }
+  2558	    async getKOIEditorTabData(t) {
+  2559	      try {
+  2560	        if (!t) throw new Error("코이 에디터 커스텀 탭 데이터가 필요합니다");
+  2561	        const n = this.getProductBaseInfo();
+  2562	        if (!n) throw new Error("제품 기본 정보 가져오기 실패");
+  2563	        const o = this.getOrderData(),
+  2564	          {
+  2565	            product_data: {
+  2566	              apparel_info: s,
+  2567	              pdt_pcs_info: r
+  2568	            }
+  2569	          } = n;
+  2570	        if (s) {
+  2571	          const a = t.PAGES.map(y => ({
+  2572	              PCS_COD: "PDT_WRK",
+  2573	              PCS_DTL_COD: s.print_area.find(w => w.KOI_NME === y)?.COD || ""
+  2574	            })),
+  2575	            i = r.find(y => y.MTRL_CD === t.MTRL_COD);
+  2576	          if (!i) throw new Error("선택된 제품 자재 코드가 없습니다.");
+  2577	          const l = {
+  2578	              PCS_COD: i.PCS_CD,
+  2579	              PCS_DTL_COD: i.PCS_DTL_CD,
+  2580	              ATTB: o?.quantityInfo.prnCnt
+  2581	            },
+  2582	            u = this.getOrderData()?.priceCalc.params;
+  2583	          if (!u) throw new Error("이전 가격 페이로드 가져오기 실패");
+  2584	          const h = [{
+  2585	              ...u.ORD_INFO[0],
+  2586	              MTRL_CD: t.MTRL_COD
+  2587	            }],
+  2588	            _ = [...u.PCS_INFO.filter(y => y.PCS_COD !== "DIR_MTR" && y.PCS_COD !== "PDT_WRK"), ...a, l],
+  2589	            p = {
+  2590	              ...u,
+
+codex
+`deob_05`에는 해당 고라인 범위가 없어 출력이 비었습니다. 같은 로직은 `mod_05`와 `deob_06`에서 잡히므로, deob 파일별 실제 라인 범위를 다시 좁혀 확인하겠습니다.
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse Failed
+hook: PreToolUse Failed
+hook: PreToolUse Failed
+hook: PreToolUse Failed
+hook: PreToolUse Failed
+exec
+/bin/zsh -lc 'wc -l docs/reversing/red_reverse_engineer/03_deobfuscated/deob_05_app_api.js docs/reversing/red_reverse_engineer/03_deobfuscated/deob_06_app_widget_sdk.js docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js docs/reversing/red_reverse_engineer/01_source/mod_05_app_api.js docs/reversing/red_reverse_engineer/01_source/mod_06_app_widget_sdk.js docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js' in /Users/innojini/Dev/HuniWeb
+exec
+/bin/zsh -lc "nl -ba docs/reversing/red_reverse_engineer/03_deobfuscated/deob_06_app_widget_sdk.js | sed -n '1018,1070p;1168,1265p'" in /Users/innojini/Dev/HuniWeb
+ succeeded in 0ms:
+    1507 docs/reversing/red_reverse_engineer/03_deobfuscated/deob_05_app_api.js
+    1392 docs/reversing/red_reverse_engineer/03_deobfuscated/deob_06_app_widget_sdk.js
+    2607 docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js
+    2685 docs/reversing/red_reverse_engineer/01_source/mod_05_app_api.js
+    4111 docs/reversing/red_reverse_engineer/01_source/mod_06_app_widget_sdk.js
+    4247 docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js
+   16549 total
+
+ succeeded in 0ms:
+  1018	          value: clothesData.PrintAreaInfo.map(item => item.COD_NME).join("/")
+  1019	        }
+  1020	      } : {},
+  1021	      ...clothesData.colorInfo ? {
+  1022	        color: {
+  1023	          label: "의류 컬러",
+  1024	          value: clothesData.colorInfo.COD_NME
+  1025	        }
+  1026	      } : {},
+  1027	      ...clothesData.pantoneInfo ? {
+  1028	        pantoneColor: {
+  1029	          label: "인쇄 컬러(팬톤)",
+  1030	          value: clothesData.pantoneInfo.pantone_name
+  1031	        }
+  1032	      } : {},
+  1033	      ...clothesData.sizeInfo ? {
+  1034	        size: {
+  1035	          label: "사이즈",
+  1036	          value: clothesData.sizeInfo.map(item => `${item.size.COD_NME}(${item.quantity}장)`).join(", ")
+  1037	        }
+  1038	      } : {},
+  1039	      material: {
+  1040	        label: "제품명",
+  1041	        value: orderData?.meterialInfo.PTT_NM
+  1042	      }
+  1043	    } : null;
+  1044	
+  1045	    /* 책자 제품 요약 */
+  1046	    const bookSummary = itemGroup === "book2025_item" ? {
+  1047	      innerInfo: {
+  1048	        label: "내지 정보",
+  1049	        children: [{
+  1050	          label: "내지 인쇄 옵션",
+  1051	          value: orderData?.inner_dosuInfo.COD_NME
+  1052	        }, {
+  1053	          label: "내지 용지",
+  1054	          value: orderData?.inner_meterialInfo.PTT_NM + `${orderData?.inner_meterialInfo.WGT_CD?`${+orderData?.inner_meterialInfo.WGT_CD}g`:""}`
+  1055	        }, {
+  1056	          label: "내지 장수",
+  1057	          value: orderData?.quantityInfo.prnCnt
+  1058	        }]
+  1059	      },
+  1060	      coverInfo: {
+  1061	        label: "표지 정보",
+  1062	        children: [{
+  1063	          label: "표지 인쇄 옵션",
+  1064	          value: orderData?.dosuInfo.COD_NME + (orderData?.dosuInfo.BNC_GB === "BNC_COL" ? "컬러" : "흑백")
+  1065	        }, {
+  1066	          label: "표지 용지",
+  1067	          value: orderData?.meterialInfo.MTRL_NM
+  1068	        }]
+  1069	      },
+  1070	      ordCnt: {
+  1168	
+  1169	      const itemGroup = productBaseInfo?.product_option.option.item_gbn,
+  1170	        uploadTypeState = this.editorStore.uploadType,
+  1171	        fileUploadInfo = orderData?.fileUploadInfo;
+  1172	
+  1173	      /* 책자 제품: 내지/표지 각각 파일 또는 에디터 검증 */
+  1174	      if (itemGroup === "book2025_item") {
+  1175	        for (const [uploadKey, uploadValue] of Object.entries(uploadTypeState)) {
+  1176	          const sectionLabel = translate(uploadKey === "inner" ? "내지" : "표지");
+  1177	          if (uploadValue === "editor" && !this.editorStore.isAfterEdit(uploadKey)) throw new Error(`[${sectionLabel}] ${translate("주문불가-에디터")}`);
+  1178	          if (uploadValue === "pdf") {
+  1179	            if (!fileUploadInfo) throw new Error(`[${sectionLabel}] ${translate("주문불가-파일")}`);
+  1180	            if (uploadKey === "inner" && !fileUploadInfo[0]) throw new Error(`[${sectionLabel}] ${translate("주문불가-파일")}`);
+  1181	            if (uploadKey === "default" && !fileUploadInfo[1]) throw new Error(`[${sectionLabel}] ${translate("주문불가-파일")}`)
+  1182	          }
+  1183	        }
+  1184	        /* 내지/표지 파일명 중복 검사 */
+  1185	        if (fileUploadInfo && fileUploadInfo[0] && fileUploadInfo[1] && fileUploadInfo[0].org_file_nm === fileUploadInfo[1].org_file_nm) throw new Error(translate("주문불가-파일명중복"));
+  1186	        return {
+  1187	          success: !0
+  1188	        }
+  1189	      }
+  1190	
+  1191	      /* PDF 업로드 모드: 파일 존재 확인 */
+  1192	      if (uploadTypeState.default === "pdf") {
+  1193	        if (!fileUploadInfo || !fileUploadInfo[0]) throw new Error(translate("주문불가-파일"));
+  1194	        if (itemGroup === "clothes2025_item" && orderData.clothesSelectData.printType.COD === "PTP_SLK" && !orderData?.clothesSelectData.pantoneInfo) throw new Error(translate("주문불가-인쇄컬러미선택"))
+  1195	      }
+  1196	
+  1197	      /* 의류 제품: 인쇄 없음이면 통과 */
+  1198	      if (itemGroup === "clothes2025_item" && !orderData?.clothesSelectData.printType.COD) return {
+  1199	        success: !0
+  1200	      };
+  1201	
+  1202	      /* 에디터 모드: 편집 완료 확인 (인쇄 없음 제외) */
+  1203	      if (uploadTypeState.default === "editor" && !this.editorStore.isAfterEdit() && orderData.dosuInfo.COD !== "SID_X") throw new Error(translate("주문불가-에디터"));
+  1204	
+  1205	      return {
+  1206	        success: !0
+  1207	      }
+  1208	    } catch (error) {
+  1209	      let errorMessage = translate("주문불가상태");
+  1210	      return error instanceof Error && (errorMessage = error.message), {
+  1211	        success: !1,
+  1212	        errorMessage: errorMessage
+  1213	      }
+  1214	    }
+  1215	  }
+  1216	
+  1217	  /**
+  1218	   * KOI 에디터 커스텀 탭 가격 계산
+  1219	   * 에디터 내에서 자재 변경 시 실시간 가격을 재계산
+  1220	   *
+  1221	   * @param {object} tabData - 에디터 탭 데이터 (PAGES, MTRL_COD 등)
+  1222	   * @returns {Promise<{type: string, data: number}|{errorMessage: string}>}
+  1223	   */
+  1224	  async getKOIEditorTabData(tabData) {
+  1225	    try {
+  1226	      if (!tabData) throw new Error("코이 에디터 커스텀 탭 데이터가 필요합니다");
+  1227	      const productBaseInfo = this.getProductBaseInfo();
+  1228	      if (!productBaseInfo) throw new Error("제품 기본 정보 가져오기 실패");
+  1229	      const orderData = this.getOrderData(),
+  1230	        {
+  1231	          product_data: {
+  1232	            apparel_info: apparelInfo,
+  1233	            pdt_pcs_info: pcsInfoList
+  1234	          }
+  1235	        } = productBaseInfo;
+  1236	
+  1237	      if (apparelInfo) {
+  1238	        /* 의류 제품: 인쇄 영역별 가격 계산 */
+  1239	        const printAreaPcsList = tabData.PAGES.map(pageName => ({
+  1240	            PCS_COD: "PDT_WRK",
+  1241	            PCS_DTL_COD: apparelInfo.print_area.find(area => area.KOI_NME === pageName)?.COD || ""
+  1242	          })),
+  1243	          matchedMaterial = pcsInfoList.find(pcsItem => pcsItem.MTRL_CD === tabData.MTRL_COD);
+  1244	
+  1245	        if (!matchedMaterial) throw new Error("선택된 제품 자재 코드가 없습니다.");
+  1246	
+  1247	        const materialPcsEntry = {
+  1248	            PCS_COD: matchedMaterial.PCS_CD,
+  1249	            PCS_DTL_COD: matchedMaterial.PCS_DTL_CD,
+  1250	            ATTB: orderData?.quantityInfo.prnCnt
+  1251	          },
+  1252	          previousPriceParams = this.getOrderData()?.priceCalc.params;
+  1253	
+  1254	        if (!previousPriceParams) throw new Error("이전 가격 페이로드 가져오기 실패");
+  1255	
+  1256	        const updatedOrderInfo = [{
+  1257	            ...previousPriceParams.ORD_INFO[0],
+  1258	            MTRL_CD: tabData.MTRL_COD
+  1259	          }],
+  1260	          updatedPcsInfo = [...previousPriceParams.PCS_INFO.filter(item => item.PCS_COD !== "DIR_MTR" && item.PCS_COD !== "PDT_WRK"), ...printAreaPcsList, materialPcsEntry],
+  1261	          priceRequestPayload = {
+  1262	            ...previousPriceParams,
+  1263	            ORD_INFO: updatedOrderInfo,
+  1264	            PCS_INFO: updatedPcsInfo
+  1265	          },
+
+exec
+/bin/zsh -lc "rg -n \"ATTB\\s*:\" docs/reversing/red_reverse_engineer/03_deobfuscated/deob_05_app_api.js docs/reversing/red_reverse_engineer/03_deobfuscated/deob_06_app_widget_sdk.js docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js docs/reversing/red_reverse_engineer/01_source/mod_05_app_api.js docs/reversing/red_reverse_engineer/01_source/mod_06_app_widget_sdk.js docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js" in /Users/innojini/Dev/HuniWeb
+ succeeded in 0ms:
+docs/reversing/red_reverse_engineer/01_source/mod_05_app_api.js:1853:                ATTB: y.ATTB,
+docs/reversing/red_reverse_engineer/01_source/mod_05_app_api.js:2580:              ATTB: o?.quantityInfo.prnCnt
+docs/reversing/red_reverse_engineer/01_source/mod_06_app_widget_sdk.js:1214:              ATTB: ""
+docs/reversing/red_reverse_engineer/01_source/mod_06_app_widget_sdk.js:1252:              ATTB: O
+docs/reversing/red_reverse_engineer/01_source/mod_06_app_widget_sdk.js:1490:                ATTB: ""
+docs/reversing/red_reverse_engineer/01_source/mod_06_app_widget_sdk.js:1519:                  ATTB: "Y",
+docs/reversing/red_reverse_engineer/01_source/mod_06_app_widget_sdk.js:1541:                ATTB: "Y",
+docs/reversing/red_reverse_engineer/01_source/mod_06_app_widget_sdk.js:1901:                  ATTB: a.value,
+docs/reversing/red_reverse_engineer/01_source/mod_06_app_widget_sdk.js:1924:                  ATTB: C.qty,
+docs/reversing/red_reverse_engineer/01_source/mod_06_app_widget_sdk.js:3580:              ATTB: f.qty,
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:758:                ATTB: b[me || ""].quantity
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:1718:              ATTB: "",
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:1920:              ATTB: i
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:2470:              ATTB: n.relatedData.orderQty
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:2597:            ATTB: r.value ? u.value : n.relatedData.orderQty,
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:2954:              ATTB: n.relatedData.orderQty
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:3074:                ATTB: "Y",
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:3159:              ATTB: "Y",
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:3240:              ATTB: i
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:3340:              ATTB: i.value
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:3572:              ATTB: o.relatedData.orderQty
+docs/reversing/red_reverse_engineer/03_deobfuscated/deob_06_app_widget_sdk.js:1250:            ATTB: orderData?.quantityInfo.prnCnt
+docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js:1008:                ATTB: materialMap[mtrlCode || ""].quantity
+docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js:2162:              ATTB: "",
+docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js:2387:              ATTB: newValue
+
+exec
+/bin/zsh -lc "nl -ba docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js | sed -n '2148,2165p'" in /Users/innojini/Dev/HuniWeb
+ succeeded in 0ms:
+  2148	              const selectedMaterial = materialGroupMap.value[primarySelection.value].find(item => item.MTRL_CD === tertiarySelection.value);
+  2149	              return addItem(selectedMaterial), resetAllSelections()
+  2150	            }
+  2151	          }
+  2152	
+  2153	          /* 항목 삭제 */
+  2154	          function removeItem(material) {
+  2155	            delete selectedItems[material.MTRL_CD]
+  2156	          }
+  2157	          /* 선택 항목 변경 시 부모에 업데이트 */
+  2158	          watch(() => selectedItems, newItems => {
+  2159	            const itemList = Object.values(newItems).map(item => ({
+  2160	              MTRL_CD: item.MTRL_CD,
+  2161	              QTY: item.QTY,
+  2162	              ATTB: "",
+  2163	              MTRL_NME: item.MTRL_NM
+  2164	            }));
+  2165	            emitFn("update", itemList)
+
+exec
+/bin/zsh -lc "rg -n \"parseInt\\(["'^'"\\n]*ATTB|Number\\(["'^'"\\n]*ATTB|\\+["'^'"\\n]*ATTB|ATTB["'^'"\\n]*===|===["'^'"\\n]*ATTB|ATTB["'^'"\\n]*==|==["'^'"\\n]*ATTB\" docs/reversing/red_reverse_engineer/03_deobfuscated/deob_05_app_api.js docs/reversing/red_reverse_engineer/03_deobfuscated/deob_06_app_widget_sdk.js docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js docs/reversing/red_reverse_engineer/01_source/mod_05_app_api.js docs/reversing/red_reverse_engineer/01_source/mod_06_app_widget_sdk.js docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js" in /Users/innojini/Dev/HuniWeb
+ succeeded in 0ms:
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:2473:            l?.ATTB === i.ATTB && l?.PCS_DTL_CD === i.PCS_DTL_CD || o("update", [i])
+docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:3575:            c?.ATTB === l.ATTB && c?.PCS_DTL_CD === l.PCS_DTL_CD || s("update", [l])
+
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse Failed
+hook: PreToolUse Failed
+hook: PreToolUse Failed
+hook: PreToolUse Failed
+hook: PreToolUse
+hook: PreToolUse Failed
+exec
+/bin/zsh -lc "nl -ba _workspace/huni-re-verify/02_golden/captures/golden_PRBKYPR_book.json | sed -n '1,140p'" in /Users/innojini/Dev/HuniWeb
+ succeeded in 0ms:
+     1	{
+     2	  "scenario": "G-BK",
+     3	  "productCode": "PRBKYPR",
+     4	  "price_gbn": "book2025_price",
+     5	  "note": "PriceTable3D book2025_price. 표지/내지 분리(CVR_/INN_CLR_CNT·CVR/INN_MTRL_CD)+PAGE_CNT. PAGE_CNT↑⇒PRICE↑ 메타모픽. book_info.DLVR_AMT(배송비) 책자 전용. reqBody shape은 라이브 응답으로 검증(PRICE≠0).",
+     6	  "capturedAt": "2026-06-22T16:34:22.606Z",
+     7	  "sessionFresh": true,
+     8	  "oracle": "live RedPrinting via server.js :3001 (read-only get_ajax_price_vTmpl)",
+     9	  "oracleSanity": {
+    10	    "readsResultSum": true,
+    11	    "perLineMayBeZero": "legal (bundle components); result_sum.PRICE is authority",
+    12	    "normalPathZeroCount": 0,
+    13	    "zeroIsDefect": "OK: 정상경로 PRICE≠0"
+    14	  },
+    15	  "secretsRedaction": "cookies/JWT/presigned 미포함(server.js 서버측 쿠키주입). mb_cust_cod 세션파생값 [REDACTED], 익명기본 10000000 유지(공개값).",
+    16	  "calls": [
+    17	    {
+    18	      "label": "A5 PAGE24 INN_CLR1",
+    19	      "status": 200,
+    20	      "retCode": 200,
+    21	      "reqBody": {
+    22	        "dataJson": {
+    23	          "ORD_INFO": [
+    24	            {
+    25	              "PDT_CD": "PRBKYPR",
+    26	              "CUT_WDT": 148,
+    27	              "CUT_HGH": 210,
+    28	              "WRK_WDT": 148,
+    29	              "WRK_HGH": 210,
+    30	              "PRN_CNT": 1,
+    31	              "ORD_CNT": 1,
+    32	              "PAGE_CNT": 24,
+    33	              "CVR_CLR_CNT": 4,
+    34	              "INN_CLR_CNT": 1,
+    35	              "CVR_MTRL_CD": "RXART300",
+    36	              "INN_MTRL_CD": "RXYWM080"
+    37	            }
+    38	          ],
+    39	          "PCS_INFO": [],
+    40	          "price_gbn": "book2025_price",
+    41	          "mb_cust_cod": "10000000"
+    42	        }
+    43	      },
+    44	      "result_sum": {
+    45	        "PRICE": 6100,
+    46	        "PRICE_VAT": 610,
+    47	        "PRICE_MALL": 6100,
+    48	        "PRICE_MALL_VAT": 610,
+    49	        "ORG_PRICE": 6100,
+    50	        "ORG_PRICE_VAT": 610,
+    51	        "PCS_PRI_PRICE": 6100
+    52	      },
+    53	      "perLine": [
+    54	        {
+    55	          "PCS_CD": "PRT_DFT",
+    56	          "PRICE": 6100
+    57	        }
+    58	      ],
+    59	      "priceLog": "",
+    60	      "book_info": {
+    61	        "PDT_WGT": "0.3",
+    62	        "BOX_CNT": 1,
+    63	        "DLVR_AMT": 3500
+    64	      }
+    65	    },
+    66	    {
+    67	      "label": "A5 PAGE48 (페이지↑ 차등)",
+    68	      "status": 200,
+    69	      "retCode": 200,
+    70	      "reqBody": {
+    71	        "dataJson": {
+    72	          "ORD_INFO": [
+    73	            {
+    74	              "PDT_CD": "PRBKYPR",
+    75	              "CUT_WDT": 148,
+    76	              "CUT_HGH": 210,
+    77	              "WRK_WDT": 148,
+    78	              "WRK_HGH": 210,
+    79	              "PRN_CNT": 1,
+    80	              "ORD_CNT": 1,
+    81	              "PAGE_CNT": 48,
+    82	              "CVR_CLR_CNT": 4,
+    83	              "INN_CLR_CNT": 1,
+    84	              "CVR_MTRL_CD": "RXART300",
+    85	              "INN_MTRL_CD": "RXYWM080"
+    86	            }
+    87	          ],
+    88	          "PCS_INFO": [],
+    89	          "price_gbn": "book2025_price",
+    90	          "mb_cust_cod": "10000000"
+    91	        }
+    92	      },
+    93	      "result_sum": {
+    94	        "PRICE": 6800,
+    95	        "PRICE_VAT": 680,
+    96	        "PRICE_MALL": 6800,
+    97	        "PRICE_MALL_VAT": 680,
+    98	        "ORG_PRICE": 6800,
+    99	        "ORG_PRICE_VAT": 680,
+   100	        "PCS_PRI_PRICE": 6800
+   101	      },
+   102	      "perLine": [
+   103	        {
+   104	          "PCS_CD": "PRT_DFT",
+   105	          "PRICE": 6800
+   106	        }
+   107	      ],
+   108	      "priceLog": "",
+   109	      "book_info": {
+   110	        "PDT_WGT": "0.4",
+   111	        "BOX_CNT": 1,
+   112	        "DLVR_AMT": 3500
+   113	      }
+   114	    },
+   115	    {
+   116	      "label": "A5 PAGE100 INN_CLR4 (차등)",
+   117	      "status": 200,
+   118	      "retCode": 200,
+   119	      "reqBody": {
+   120	        "dataJson": {
+   121	          "ORD_INFO": [
+   122	            {
+   123	              "PDT_CD": "PRBKYPR",
+   124	              "CUT_WDT": 148,
+   125	              "CUT_HGH": 210,
+   126	              "WRK_WDT": 148,
+   127	              "WRK_HGH": 210,
+   128	              "PRN_CNT": 1,
+   129	              "ORD_CNT": 1,
+   130	              "PAGE_CNT": 100,
+   131	              "CVR_CLR_CNT": 4,
+   132	              "INN_CLR_CNT": 4,
+   133	              "CVR_MTRL_CD": "RXART300",
+   134	              "INN_MTRL_CD": "RXYWM080"
+   135	            }
+   136	          ],
+   137	          "PCS_INFO": [],
+   138	          "price_gbn": "book2025_price",
+   139	          "mb_cust_cod": "10000000"
+   140	        }
+
+exec
+/bin/zsh -lc "nl -ba docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js | sed -n '998,1012p;2380,2392p'" in /Users/innojini/Dev/HuniWeb
+exec
+/bin/zsh -lc "nl -ba docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js | sed -n '752,760p;1714,1720p;1916,1922p;2466,2474p;2593,2600p;2950,2956p;3070,3076p;3155,3161p;3236,3242p;3336,3342p;3568,3576p'" in /Users/innojini/Dev/HuniWeb
+exec
+/bin/zsh -lc "nl -ba docs/reversing/red_reverse_engineer/01_source/mod_06_app_widget_sdk.js | sed -n '1208,1218p;1248,1255p;1486,1493p;1515,1522p;1537,1544p;1898,1904p;1920,1926p;3576,3582p'" in /Users/innojini/Dev/HuniWeb
+ succeeded in 0ms:
+   998	                PCS_DTL_CD: detailCode,
+   999	                PCS_DTL_NM: detailName,
+  1000	                VIEW_YN: viewYn,
+  1001	                MTRL_CD: mtrlCode,
+  1002	                ESN_YN: essentialYn,
+  1003	                DIV_SEQ: divSeq
+  1004	              } = pcsInfo, selectedOptions = [{
+  1005	                PCS_CD: processCode,
+  1006	                PCS_DTL_CD: detailCode,
+  1007	                PCS_DTL_NM: detailName,
+  1008	                ATTB: materialMap[mtrlCode || ""].quantity
+  1009	              }];
+  1010	              return {
+  1011	                PCS_CD: processCode,
+  1012	                VIEW_YN: viewYn,
+  2380	              selectedAttbValue.value = selectedItem.value, selectedAttbName.value = selectedItem.name
+  2381	            };
+  2382	          return watch(() => selectedAttbValue.value, newValue => {
+  2383	            emitFn("update", [{
+  2384	              PCS_CD: componentProps.data.value,
+  2385	              PCS_DTL_CD: componentProps.data.options[0].value,
+  2386	              PCS_DTL_NM: `${componentProps.data.name}(${selectedAttbName.value})`,
+  2387	              ATTB: newValue
+  2388	            }])
+  2389	          }, {
+  2390	            immediate: !0
+  2391	          }), (instance, cache) => (openBlock(), createVNode(OptionRow, {
+  2392	            title: instance.data.name,
+
+ succeeded in 0ms:
+   752	                ESN_YN: _e,
+   753	                DIV_SEQ: B
+   754	              } = y, W = [{
+   755	                PCS_CD: I,
+   756	                PCS_DTL_CD: w,
+   757	                PCS_DTL_NM: U,
+   758	                ATTB: b[me || ""].quantity
+   759	              }];
+   760	              return {
+  1714	          F(() => d, y => {
+  1715	            const I = Object.values(y).map(w => ({
+  1716	              MTRL_CD: w.MTRL_CD,
+  1717	              QTY: w.QTY,
+  1718	              ATTB: "",
+  1719	              MTRL_NME: w.MTRL_NM
+  1720	            }));
+  1916	            o("update", [{
+  1917	              PCS_CD: n.data.value,
+  1918	              PCS_DTL_CD: n.data.options[0].value,
+  1919	              PCS_DTL_NM: `${n.data.name}(${r.value})`,
+  1920	              ATTB: i
+  1921	            }])
+  1922	          }, {
+  2466	            a = R(() => ({
+  2467	              PCS_CD: n.data.value,
+  2468	              PCS_DTL_CD: r.value.value,
+  2469	              PCS_DTL_NM: r.value.label,
+  2470	              ATTB: n.relatedData.orderQty
+  2471	            }));
+  2472	          return F(() => a.value, (i, l) => {
+  2473	            l?.ATTB === i.ATTB && l?.PCS_DTL_CD === i.PCS_DTL_CD || o("update", [i])
+  2474	          }, {
+  2593	          const h = R(() => [{
+  2594	            PCS_CD: n.data.value,
+  2595	            PCS_DTL_CD: i.value,
+  2596	            PCS_DTL_NM: `${n.data.name}(${l.value?.name})`,
+  2597	            ATTB: r.value ? u.value : n.relatedData.orderQty,
+  2598	            ATTB_2: "",
+  2599	            ATTB_3: ""
+  2600	          }]);
+  2950	            l = R(() => ({
+  2951	              PCS_CD: n.data.value,
+  2952	              PCS_DTL_CD: a.value,
+  2953	              PCS_DTL_NM: n.data.name,
+  2954	              ATTB: n.relatedData.orderQty
+  2955	            })),
+  2956	            c = {
+  3070	              selectedOptions: [{
+  3071	                PCS_CD: d.extra?.PCS_CD,
+  3072	                PCS_DTL_CD: d.extra?.PCS_DTL_CD,
+  3073	                PCS_DTL_NM: d.extra?.PCS_DTL_NM,
+  3074	                ATTB: "Y",
+  3075	                ATTB_2: n.mode
+  3076	              }]
+  3155	            c = R(() => a.value ? [] : n.data.options.filter((_, p) => _.extra?.ESN_YN === "Y" || p === 0).map(_ => ({
+  3156	              PCS_CD: _.extra?.PCS_CD,
+  3157	              PCS_DTL_CD: _.extra?.PCS_DTL_CD,
+  3158	              PCS_DTL_NM: _.extra?.PCS_DTL_NM,
+  3159	              ATTB: "Y",
+  3160	              ATTB_2: i.value
+  3161	            }))),
+  3236	            o("update", [{
+  3237	              PCS_CD: n.data.value,
+  3238	              PCS_DTL_CD: n.data.options[0].value,
+  3239	              PCS_DTL_NM: `${n.data.name}(${r.value})`,
+  3240	              ATTB: i
+  3241	            }])
+  3242	          }, {
+  3336	            return {
+  3337	              PCS_CD: n.data.value,
+  3338	              PCS_DTL_CD: f,
+  3339	              PCS_DTL_NM: _,
+  3340	              ATTB: i.value
+  3341	            }
+  3342	          }));
+  3568	            i = R(() => ({
+  3569	              PCS_CD: o.data.value,
+  3570	              PCS_DTL_CD: a.value.value,
+  3571	              PCS_DTL_NM: a.value.label,
+  3572	              ATTB: o.relatedData.orderQty
+  3573	            }));
+  3574	          return F(() => i.value, (l, c) => {
+  3575	            c?.ATTB === l.ATTB && c?.PCS_DTL_CD === l.PCS_DTL_CD || s("update", [l])
+  3576	          }, {
+
+ succeeded in 0ms:
+  1208	            VIEW_YN: k,
+  1209	            ESN_YN: O,
+  1210	            selectedOptions: [{
+  1211	              PCS_CD: E,
+  1212	              PCS_DTL_CD: N,
+  1213	              PCS_DTL_NM: D,
+  1214	              ATTB: ""
+  1215	            }]
+  1216	          }]
+  1217	        }
+  1218	
+  1248	            }) => ({
+  1249	              PCS_CD: A,
+  1250	              PCS_DTL_CD: b,
+  1251	              PCS_DTL_NM: C,
+  1252	              ATTB: O
+  1253	            }))
+  1254	          }]
+  1255	        }
+  1486	              selectedOptions: [{
+  1487	                PCS_CD: C,
+  1488	                PCS_DTL_CD: w,
+  1489	                PCS_DTL_NM: U,
+  1490	                ATTB: ""
+  1491	              }]
+  1492	            };
+  1493	            i[C] = [_e]
+  1515	                selectedOptions: [{
+  1516	                  PCS_CD: "PRT_WHT",
+  1517	                  PCS_DTL_CD: w === "front" ? "DFXXF" : "DFXXB",
+  1518	                  PCS_DTL_NM: w === "front" ? "앞면 화이트" : "뒷면 화이트",
+  1519	                  ATTB: "Y",
+  1520	                  ATTB_2: "Y"
+  1521	                }]
+  1522	              }), y
+  1537	              selectedOptions: [{
+  1538	                PCS_CD: "PRT_WHT",
+  1539	                PCS_DTL_CD: "DFXXX",
+  1540	                PCS_DTL_NM: "화이트인쇄",
+  1541	                ATTB: "Y",
+  1542	                ATTB_2: "Y"
+  1543	              }]
+  1544	            };
+  1898	                  PCS_CD: y,
+  1899	                  PCS_DTL_CD: w,
+  1900	                  PCS_DTL_NM: U,
+  1901	                  ATTB: a.value,
+  1902	                  ATTB_2: "",
+  1903	                  ATTB_3: ""
+  1904	                }]
+  1920	                selectedOptions: [{
+  1921	                  PCS_CD: C.extra.PCS_CD,
+  1922	                  PCS_DTL_CD: C.PCS_DTL_CD,
+  1923	                  PCS_DTL_NM: C.extra.PCS_DTL_NM,
+  1924	                  ATTB: C.qty,
+  1925	                  ATTB_2: "",
+  1926	                  ATTB_3: ""
+  3576	            selectedOptions: [{
+  3577	              PCS_CD: f.extra.PCS_CD,
+  3578	              PCS_DTL_CD: f.PCS_DTL_CD,
+  3579	              PCS_DTL_NM: f.extra.PCS_DTL_NM,
+  3580	              ATTB: f.qty,
+  3581	              ATTB_2: "",
+  3582	              ATTB_3: a[f.extra.WEB_PCS_DTL_GRP]
+
+exec
+/bin/zsh -lc "nl -ba docs/reversing/red_reverse_engineer/01_source/mod_05_app_api.js | sed -n '1848,1856p;2576,2582p'" in /Users/innojini/Dev/HuniWeb
+ succeeded in 0ms:
+  1848	          O.pcsInfo && Object.values(O.pcsInfo).forEach(C => {
+  1849	            C.selectedOptions.forEach(y => {
+  1850	              A.push({
+  1851	                PCS_COD: y.PCS_CD,
+  1852	                PCS_DTL_COD: y.PCS_DTL_CD,
+  1853	                ATTB: y.ATTB,
+  1854	                ATTB_2: y.ATTB_2,
+  1855	                ATTB_3: y.ATTB_3
+  1856	              })
+  2576	          if (!i) throw new Error("선택된 제품 자재 코드가 없습니다.");
+  2577	          const l = {
+  2578	              PCS_COD: i.PCS_CD,
+  2579	              PCS_DTL_COD: i.PCS_DTL_CD,
+  2580	              ATTB: o?.quantityInfo.prnCnt
+  2581	            },
+  2582	            u = this.getOrderData()?.priceCalc.params;
+
+codex
+핵심 근거는 모였습니다. 마지막으로 adapter 주석이 가리키는 내부 인용(`mod_07:2586/2467`, `deob_07:2162`)이 실제 대상과 맞는지 라인 원문만 확인합니다.
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse Failed
+hook: PreToolUse Failed
+hook: PreToolUse Failed
+hook: PreToolUse Failed
+hook: PreToolUse
+hook: PreToolUse Failed
+exec
+/bin/zsh -lc "nl -ba docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js | sed -n '2467p;2586p;2598p'" in /Users/innojini/Dev/HuniWeb
+ succeeded in 0ms:
+  2467	              PCS_CD: n.data.value,
+  2586	            u = H(1),
+  2598	            ATTB_2: "",
+
+exec
+/bin/zsh -lc "nl -ba docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js | sed -n '2162p'" in /Users/innojini/Dev/HuniWeb
+ succeeded in 0ms:
+  2162	              ATTB: "",
+
+exec
+/bin/zsh -lc 'rg -n "deob_|mod_[0-9]|03_deobfuscated|01_source" _workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts' in /Users/innojini/Dev/HuniWeb
+exec
+/bin/zsh -lc "rg -n '\"PRN_CLR_CNT\"|\"MTRL_CD\"|\"CVR_CLR_CNT\"|\"INN_CLR_CNT\"|\"CVR_MTRL_CD\"|\"INN_MTRL_CD\"' _workspace/huni-re-verify/02_golden/captures/golden_PRBKYPR_book.json" in /Users/innojini/Dev/HuniWeb
+ succeeded in 0ms:
+33:              "CVR_CLR_CNT": 4,
+34:              "INN_CLR_CNT": 1,
+35:              "CVR_MTRL_CD": "RXART300",
+36:              "INN_MTRL_CD": "RXYWM080"
+82:              "CVR_CLR_CNT": 4,
+83:              "INN_CLR_CNT": 1,
+84:              "CVR_MTRL_CD": "RXART300",
+85:              "INN_MTRL_CD": "RXYWM080"
+131:              "CVR_CLR_CNT": 4,
+132:              "INN_CLR_CNT": 4,
+133:              "CVR_MTRL_CD": "RXART300",
+134:              "INN_MTRL_CD": "RXYWM080"
+
+ succeeded in 0ms:
+127://  Red(mod_07:2247~2249) 는 이를 단/양면 라디오 + 코팅 그리드 2축으로 렌더하고 가격 시 재합성.
+132://  [W1-c 권위 정정] 이전 주석의 mod_07:2597/2954/2470/3572("ATTB=orderQty")는 deob 소스에
+133://  *부존재*(deob_07=2607줄/deob_06=1392줄에서 종료, 인용 라인은 ATTB 대입 아님). 실재 deob
+135://    deob_07:1008  DIR_MTR  = materialMap[code].quantity  (선택자재 size-combo **장수**)
+136://    deob_07:2162  SUB_MTR  = ""                          (material-multi 빈문자열)
+137://    deob_07:2387  BID_SIL  = newValue                    (사용자 **속성값**)
+138://    deob_06:1250  material = orderData.quantityInfo.prnCnt(**PRN_CNT**, ORD_CNT 아님)
+150://  Red 권위(deob_07:2162 material-multi)상 ATTB="" / (b)단일 add-on(AIPPCUT SUB_MTR EC001: MTRL_CD="")
+160://  [HARD] 새 권위 생성 아님 — ATTB="" 는 deob_07:2162, ATTB=1 echo 는 b1_AIPPCUT 캡처. 둘 다 실측.
+171:// L-3a 멀티선택 후가공 — 귀돌이(ROU_DFT) 4귀 부분집합 선택(mod_07:3325 u=선택목록 배열).
+241:    // L-3b: ROU_DFT 반경 ATTB 주입(번들 상수 roundingConfigMap 이식, mod_07:3300~3344).
+245:    // W2-a: material-multi SUB_MTR(다종 자재선택)면 ATTB="" 권위(deob_07:2162) 적재 → quantity echo 차단.
+572:  // D-L2: 책자 판정 권위 = itemGroup(book2025 분류, 명시값). Red 는 item_gbn 으로 스키마 분기(mod_05:1859).
+607:        //  [W1-c] mod_07:2586/2467 인용은 deob 부존재(상단 set 정의 주석 참조). ATTB scaling 미검증 —
+617:        // ATTB_2/ATTB_3 슬롯: 수량형 후가공은 빈슬롯 운용(mod_07:2598). 그 외는 explicit attb2/3 만.
+671:  // [D-L3 정합] Red 는 `!result_sum.PRICE → 주문불가`(mod_06:1167). retCode===200 이어도 PRICE 가
+
+exec
+/bin/zsh -lc "rg -n '\"ATTB\"\\s*:\\s*\"[0-9]+\"|\"ATTB\"\\s*:\\s*[0-9]+' _workspace/huni-re-verify/02_golden/captures/golden_*.json" in /Users/innojini/Dev/HuniWeb
+ succeeded in 0ms:
+_workspace/huni-re-verify/02_golden/captures/golden_GSTGMIC_tiered.json:41:              "ATTB": 1,
+_workspace/huni-re-verify/02_golden/captures/golden_GSTGMIC_tiered.json:130:              "ATTB": 2,
+_workspace/huni-re-verify/02_golden/captures/golden_GSTGMIC_tiered.json:219:              "ATTB": 5,
+_workspace/huni-re-verify/02_golden/captures/golden_GSTGMIC_tiered.json:308:              "ATTB": 10,
+_workspace/huni-re-verify/02_golden/captures/golden_GSTGMIC_tiered.json:397:              "ATTB": 30,
+_workspace/huni-re-verify/02_golden/captures/golden_GSTGMIC_tiered.json:486:              "ATTB": 100,
+_workspace/huni-re-verify/02_golden/captures/golden_AIPPCUT_real.json:41:              "ATTB": 1,
+_workspace/huni-re-verify/02_golden/captures/golden_AIPPCUT_real.json:108:              "ATTB": 1,
+_workspace/huni-re-verify/02_golden/captures/golden_GSNTSPR_attb.json:51:              "ATTB": 1,
+_workspace/huni-re-verify/02_golden/captures/golden_GSNTSPR_attb.json:63:              "ATTB": "4"
+_workspace/huni-re-verify/02_golden/captures/golden_GSNTSPR_attb.json:68:              "ATTB": "4"
+_workspace/huni-re-verify/02_golden/captures/golden_GSNTSPR_attb.json:73:              "ATTB": "4"
+_workspace/huni-re-verify/02_golden/captures/golden_GSNTSPR_attb.json:78:              "ATTB": "4"
+_workspace/huni-re-verify/02_golden/captures/golden_GSNTSPR_attb.json:167:              "ATTB": 1,
+_workspace/huni-re-verify/02_golden/captures/golden_GSNTSPR_attb.json:179:              "ATTB": "4"
+_workspace/huni-re-verify/02_golden/captures/golden_GSNTSPR_attb.json:184:              "ATTB": "4"
+_workspace/huni-re-verify/02_golden/captures/golden_GSNTSPR_attb.json:189:              "ATTB": "4"
+_workspace/huni-re-verify/02_golden/captures/golden_GSNTSPR_attb.json:194:              "ATTB": "4"
+_workspace/huni-re-verify/02_golden/captures/golden_GSNTSPR_attb.json:283:              "ATTB": 1,
+_workspace/huni-re-verify/02_golden/captures/golden_GSNTSPR_attb.json:295:              "ATTB": "4"
+_workspace/huni-re-verify/02_golden/captures/golden_GSNTSPR_attb.json:300:              "ATTB": "4"
+_workspace/huni-re-verify/02_golden/captures/golden_GSNTSPR_attb.json:305:              "ATTB": "4"
+_workspace/huni-re-verify/02_golden/captures/golden_GSNTSPR_attb.json:310:              "ATTB": "4"
+_workspace/huni-re-verify/02_golden/captures/golden_GSNTSPR_attb.json:399:              "ATTB": 1,
+_workspace/huni-re-verify/02_golden/captures/golden_GSNTSPR_attb.json:411:              "ATTB": "4"
+_workspace/huni-re-verify/02_golden/captures/golden_GSNTSPR_attb.json:416:              "ATTB": "4"
+_workspace/huni-re-verify/02_golden/captures/golden_GSNTSPR_attb.json:421:              "ATTB": "4"
+_workspace/huni-re-verify/02_golden/captures/golden_GSNTSPR_attb.json:426:              "ATTB": "4"
+_workspace/huni-re-verify/02_golden/captures/golden_GSNTSPR_attb.json:515:              "ATTB": 1,
+_workspace/huni-re-verify/02_golden/captures/golden_GSNTSPR_attb.json:527:              "ATTB": "4"
+_workspace/huni-re-verify/02_golden/captures/golden_GSNTSPR_attb.json:532:              "ATTB": "4"
+_workspace/huni-re-verify/02_golden/captures/golden_GSNTSPR_attb.json:537:              "ATTB": "4"
+_workspace/huni-re-verify/02_golden/captures/golden_GSNTSPR_attb.json:542:              "ATTB": "4"
+_workspace/huni-re-verify/02_golden/captures/golden_GSNTSPR_attb.json:631:              "ATTB": 1,
+_workspace/huni-re-verify/02_golden/captures/golden_GSNTSPR_attb.json:643:              "ATTB": "4"
+_workspace/huni-re-verify/02_golden/captures/golden_GSNTSPR_attb.json:648:              "ATTB": "4"
+_workspace/huni-re-verify/02_golden/captures/golden_GSNTSPR_attb.json:653:              "ATTB": "4"
+_workspace/huni-re-verify/02_golden/captures/golden_GSNTSPR_attb.json:658:              "ATTB": "4"
+_workspace/huni-re-verify/02_golden/captures/golden_GSNTSPR_attb.json:747:              "ATTB": 1,
+_workspace/huni-re-verify/02_golden/captures/golden_GSNTSPR_attb.json:759:              "ATTB": "4"
+_workspace/huni-re-verify/02_golden/captures/golden_GSNTSPR_attb.json:764:              "ATTB": "4"
+_workspace/huni-re-verify/02_golden/captures/golden_GSNTSPR_attb.json:769:              "ATTB": "4"
+_workspace/huni-re-verify/02_golden/captures/golden_GSNTSPR_attb.json:774:              "ATTB": "4"
+_workspace/huni-re-verify/02_golden/captures/golden_GSNTSPR_attb.json:863:              "ATTB": 1,
+_workspace/huni-re-verify/02_golden/captures/golden_GSNTSPR_attb.json:875:              "ATTB": "8"
+_workspace/huni-re-verify/02_golden/captures/golden_GSNTSPR_attb.json:880:              "ATTB": "8"
+_workspace/huni-re-verify/02_golden/captures/golden_GSNTSPR_attb.json:885:              "ATTB": "8"
+_workspace/huni-re-verify/02_golden/captures/golden_GSNTSPR_attb.json:890:              "ATTB": "8"
+_workspace/huni-re-verify/02_golden/captures/golden_GSNTSPR_attb.json:979:              "ATTB": 1,
+_workspace/huni-re-verify/02_golden/captures/golden_GSNTSPR_attb.json:991:              "ATTB": "0"
+_workspace/huni-re-verify/02_golden/captures/golden_GSNTSPR_attb.json:996:              "ATTB": "0"
+_workspace/huni-re-verify/02_golden/captures/golden_GSNTSPR_attb.json:1001:              "ATTB": "0"
+_workspace/huni-re-verify/02_golden/captures/golden_GSNTSPR_attb.json:1006:              "ATTB": "0"
+
+codex
+**Q1 — ATTB type**
+
+Red code assigns mixed values: pass-through `y.ATTB` (`docs/reversing/red_reverse_engineer/01_source/mod_05_app_api.js:1853`), numeric-looking quantity expressions `o?.quantityInfo.prnCnt` (`docs/reversing/red_reverse_engineer/01_source/mod_05_app_api.js:2580`, `docs/reversing/red_reverse_engineer/03_deobfuscated/deob_06_app_widget_sdk.js:1250`), `materialMap[...] .quantity` (`docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js:1008`), string literals `""` (`docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js:2162`) and dynamic `newValue` (`docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js:2387`). Source mod files also include `ATTB: "Y"` (`docs/reversing/red_reverse_engineer/01_source/mod_06_app_widget_sdk.js:1519`) and `ATTB: n.relatedData.orderQty` (`docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:2470`).
+
+No `parseInt/Number/+ATTB` consumer found: not found. Strict comparisons exist only as equality checks against prior emitted objects: `l?.ATTB === i.ATTB` (`docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:2473`) and `c?.ATTB === l.ATTB` (`docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:3575`). Conclusion: mixed. Sending `"2"` vs `2` is undeterminable from Red client code.
+
+**Q2 — Book request shape**
+
+Red book path uses split fields only: `PRN_CNT`, `PAGE_CNT`, `CVR_CLR_CNT`, `INN_CLR_CNT`, `CVR_MTRL_CD`, `INN_MTRL_CD` (`docs/reversing/red_reverse_engineer/01_source/mod_05_app_api.js:1859`-`1870`). Non-book path uses `MTRL_CD` and `PRN_CLR_CNT` (`docs/reversing/red_reverse_engineer/01_source/mod_05_app_api.js:1871`-`1881`). Golden book has split fields (`_workspace/huni-re-verify/02_golden/captures/golden_PRBKYPR_book.json:32`-`36`) and no `PRN_CLR_CNT`/top-level `MTRL_CD`: not found. Conclusion: `PRN_CLR_CNT`/`MTRL_CD` are not shown as expected/required for book; ignored vs mis-consumed is not determinable from these files.
+
+**Q3 — Adapter check**
+
+Adapter serializes quantity echo as string: `ATTB: f.attb ?? (isQuantityEchoPcs ? String(req.quantity) : '')` (`_workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts:615`). It unconditionally sets `PRN_CLR_CNT` and `MTRL_CD` before the book branch (`_workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts:580`-`589`), then adds split book fields (`_workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts:591`-`597`). Divergences: adapter stringifies quantity echo vs Red quantity expressions (`red-adapter.ts:615` vs `deob_06_app_widget_sdk.js:1250`, `deob_07_app_components.js:1008`); adapter includes book `PRN_CLR_CNT/MTRL_CD` vs Red book split-only (`red-adapter.ts:588`-`597` vs `mod_05_app_api.js:1859`-`1870`).
+
+**Q4 — Citation reality**
+
+REAL: line 615 is `ATTB: f.attb ?? (isQuantityEchoPcs ? String(req.quantity) : ''),` (`_workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts:615`). REAL: line 588 `PRN_CLR_CNT: req.colorCounts.default,` (`red-adapter.ts:588`). REAL: line 589 `MTRL_CD: req.materials.default,` (`red-adapter.ts:589`). REAL: line 151 says captured `ATTB=1` (`red-adapter.ts:151`). Self-citation issue: adapter cites old `mod_07:2586/2467` as bad; actual lines are not ATTB (`docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:2467`, `docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:2586`).
+
+**Q5 — Other issues**
+
+None found within the requested scope. Golden files confirm mixed numeric/string ATTB in live samples (`_workspace/huni-re-verify/02_golden/captures/golden_GSTGMIC_tiered.json:130`, `_workspace/huni-re-verify/02_golden/captures/golden_GSNTSPR_attb.json:63`).
+hook: Stop
+hook: Stop Completed
+tokens used
+79,195
+**Q1 — ATTB type**
+
+Red code assigns mixed values: pass-through `y.ATTB` (`docs/reversing/red_reverse_engineer/01_source/mod_05_app_api.js:1853`), numeric-looking quantity expressions `o?.quantityInfo.prnCnt` (`docs/reversing/red_reverse_engineer/01_source/mod_05_app_api.js:2580`, `docs/reversing/red_reverse_engineer/03_deobfuscated/deob_06_app_widget_sdk.js:1250`), `materialMap[...] .quantity` (`docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js:1008`), string literals `""` (`docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js:2162`) and dynamic `newValue` (`docs/reversing/red_reverse_engineer/03_deobfuscated/deob_07_app_components.js:2387`). Source mod files also include `ATTB: "Y"` (`docs/reversing/red_reverse_engineer/01_source/mod_06_app_widget_sdk.js:1519`) and `ATTB: n.relatedData.orderQty` (`docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:2470`).
+
+No `parseInt/Number/+ATTB` consumer found: not found. Strict comparisons exist only as equality checks against prior emitted objects: `l?.ATTB === i.ATTB` (`docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:2473`) and `c?.ATTB === l.ATTB` (`docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:3575`). Conclusion: mixed. Sending `"2"` vs `2` is undeterminable from Red client code.
+
+**Q2 — Book request shape**
+
+Red book path uses split fields only: `PRN_CNT`, `PAGE_CNT`, `CVR_CLR_CNT`, `INN_CLR_CNT`, `CVR_MTRL_CD`, `INN_MTRL_CD` (`docs/reversing/red_reverse_engineer/01_source/mod_05_app_api.js:1859`-`1870`). Non-book path uses `MTRL_CD` and `PRN_CLR_CNT` (`docs/reversing/red_reverse_engineer/01_source/mod_05_app_api.js:1871`-`1881`). Golden book has split fields (`_workspace/huni-re-verify/02_golden/captures/golden_PRBKYPR_book.json:32`-`36`) and no `PRN_CLR_CNT`/top-level `MTRL_CD`: not found. Conclusion: `PRN_CLR_CNT`/`MTRL_CD` are not shown as expected/required for book; ignored vs mis-consumed is not determinable from these files.
+
+**Q3 — Adapter check**
+
+Adapter serializes quantity echo as string: `ATTB: f.attb ?? (isQuantityEchoPcs ? String(req.quantity) : '')` (`_workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts:615`). It unconditionally sets `PRN_CLR_CNT` and `MTRL_CD` before the book branch (`_workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts:580`-`589`), then adds split book fields (`_workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts:591`-`597`). Divergences: adapter stringifies quantity echo vs Red quantity expressions (`red-adapter.ts:615` vs `deob_06_app_widget_sdk.js:1250`, `deob_07_app_components.js:1008`); adapter includes book `PRN_CLR_CNT/MTRL_CD` vs Red book split-only (`red-adapter.ts:588`-`597` vs `mod_05_app_api.js:1859`-`1870`).
+
+**Q4 — Citation reality**
+
+REAL: line 615 is `ATTB: f.attb ?? (isQuantityEchoPcs ? String(req.quantity) : ''),` (`_workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts:615`). REAL: line 588 `PRN_CLR_CNT: req.colorCounts.default,` (`red-adapter.ts:588`). REAL: line 589 `MTRL_CD: req.materials.default,` (`red-adapter.ts:589`). REAL: line 151 says captured `ATTB=1` (`red-adapter.ts:151`). Self-citation issue: adapter cites old `mod_07:2586/2467` as bad; actual lines are not ATTB (`docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:2467`, `docs/reversing/red_reverse_engineer/01_source/mod_07_app_components.js:2586`).
+
+**Q5 — Other issues**
+
+None found within the requested scope. Golden files confirm mixed numeric/string ATTB in live samples (`_workspace/huni-re-verify/02_golden/captures/golden_GSTGMIC_tiered.json:130`, `_workspace/huni-re-verify/02_golden/captures/golden_GSNTSPR_attb.json:63`).

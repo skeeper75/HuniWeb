@@ -1,0 +1,39 @@
+[
+ {
+  "name": "baseline PRN500 ADD_CLR=N",
+  "PRICE": 6350000,
+  "retCode": 200,
+  "msg": "",
+  "rows": [
+   "undefined:6350000"
+  ]
+ },
+ {
+  "name": "PRN1000 (qty up)",
+  "PRICE": 23900000,
+  "retCode": 200,
+  "msg": "",
+  "rows": [
+   "undefined:23900000"
+  ]
+ },
+ {
+  "name": "ADD_CLR_YN=Y",
+  "PRICE": 6350000,
+  "retCode": 200,
+  "msg": "",
+  "rows": [
+   "undefined:6350000"
+  ]
+ },
+ {
+  "name": "add FLD_DFT PCS (2단접지 FO006)",
+  "PRICE": 14850000,
+  "retCode": 200,
+  "msg": "",
+  "rows": [
+   "undefined:8500000",
+   "undefined:6350000"
+  ]
+ }
+]

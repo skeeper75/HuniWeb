@@ -1,0 +1,38 @@
+You are an independent reverse-engineering verifier. You may ONLY read files (read-only). Do not assume; cite file:line for every claim. If something is absent, say "not found" — never invent a line number.
+
+GOAL: Verify whether a reconstructed RedPrinting price adapter correctly handles the NEW price-engine fields that appear in a June de-obfuscated widget bundle. Decide, from the de-obfuscated source ALONE, whether each new field is money-critical (affects PRICE) or inert, and whether claims about cited source lines are real.
+
+FILES TO READ (paths relative to this workdir = HuniWeb repo root):
+1. De-obfuscated widget bundle (the source of truth for how the live engine builds requests):
+   _workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js
+2. The reverse-engineering contract that CLAIMS what the new fields mean:
+   _workspace/huni-widget/01_reverse/redo-260623/contracts/price-engine-additions.md
+3. The reconstructed adapter under verification (does it emit these fields?):
+   _workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts
+   _workspace/huni-widget/04_build/src/adapters/red/red-types.ts
+   _workspace/huni-widget/04_build/src/contract/price.ts
+
+ANSWER THESE QUESTIONS, each with deob file:line evidence (use the deob.js line numbers):
+
+Q1 — ADD_CLR_YN (cited deob ~L13982). Read the ORD_INFO request-builder around L13955-L14000 AND the consumer/selector logic (grep ADD_CLR_YN everywhere). Determine:
+  (a) Does the builder emit ADD_CLR_YN conditionally or always, and what value source feeds it?
+  (b) Is there any code path where ADD_CLR_YN omission (vs "N") changes PRICE — e.g. an addClrMtrlList / material that surcharges when ADD_CLR_YN==="Y"? Quote the lines.
+  (c) Verdict: if ADD_CLR_YN is omitted by a client, does the engine default it / is it inert, or can it under-charge on some material/dosu line? State HIGH (money-critical, omission can mis-price), MEDIUM, or LOW (inert), with line evidence.
+
+Q2 — REAM_CNT (cited deob ~L22611). Read L22600-22640 and grep REAM_CNT / REAM_YN / reamCnt. Determine:
+  (a) Is there a product mode where REAM_CNT replaces PRN_CNT as the quantity authority (year/ream -> sheet count), i.e. quantity is derived FROM ream count? Or is REAM_CNT only a derived display ratio gated by REAM_YN==="Y"?
+  (b) Verdict: does omitting REAM_CNT change the quantity used for PRICE in any product mode? HIGH if a real product drives quantity off REAM_CNT; MEDIUM/LOW otherwise. Line evidence.
+
+Q3 — Quantity model A ladder (cited deob L15432-15445): PRN_CNT = MIN_ORD_PRN_CNT + ADD_ORD_PRN_CNT * h. Read that range. Determine:
+  (a) Is this a real, wired component (not dead code)? What product type / item_gbn uses it (look for PDT_VER_SIZE, 떡메, clothes/goods)?
+  (b) Does it feed a real price path (does PRN_CNT from this ladder reach the get_ajax_price_vTmpl request)? Line evidence.
+
+Q4 — Citation reality (VM-3). For EACH of these cited deob ranges/lines, confirm the line exists and the cited symbol is present, or say "not found":
+  L13955-13999 (ORD_INFO builder), L19733 (MAX_PRN_CNT), L22611 (REAM_CNT), L15432-15445 (model A).
+  ALSO: the contract price-engine-additions.md §3 records a metamorphic table with "baseline PRN500 = 6,350,000". Using the deob price-calc path, is a single-line offset2023 baseline plausibly 6,350,000, or is that ~500x a per-unit figure (e.g. ~12,700 scale)? From the deob alone, can you tell whether 6,350,000 is a real engine return or a transcription/scale artifact? If you cannot tell from source, say "undetermined from source".
+
+Q5 — False positives. Does the reconstructed adapter (red-adapter.ts) treat any LEGITIMATE behavior as a defect, or omit any field that is genuinely harmless? In particular: DOSU_COD is intentionally omitted by the adapter (red-adapter.ts ~L569). From the deob, does omitting DOSU_COD have ANY price effect, given PRN_CLR_CNT is also sent? Is the intentional omission safe (money-impact 0)? Line evidence.
+
+Q6 — New findings. Anything else in the deob about these new fields the contract MISSED or got WRONG (e.g. GSELGLV PRN_CNT*10 at L13978, PACK_PRN_CNT conditional at L13984, forced/disabled post-pcs logic keyed on PACK_PRN_CNT)? List with line evidence.
+
+FORMAT: For Q1-Q6 give a one-line VERDICT (HIGH/MED/LOW/CONFIRMED/NOT-FOUND/UNDETERMINED) then 1-3 evidence lines each. Be terse. Cite deob line numbers.

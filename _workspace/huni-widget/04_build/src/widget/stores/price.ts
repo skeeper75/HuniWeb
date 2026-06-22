@@ -60,6 +60,30 @@ function materialsFromSelections(s: WidgetState): Partial<Record<SideKey, string
   return out;
 }
 
+// N1: 선택된 default-side 자재의 추가색 가용 플래그(불투명 echo). 위젯은 의미 무계산·운반만.
+function addColorCapableFromSelections(s: WidgetState): boolean | undefined {
+  const product = s.product!;
+  for (const g of product.optionGroups) {
+    if (!g.id.startsWith('GRP_MTRL') || g.side !== 'default') continue;
+    const sel = selectedId(s.selections[g.id]);
+    const val = g.values.find((v) => v.id === sel);
+    if (val?.addColorCapable) return true;
+  }
+  return undefined;
+}
+
+// N1: 선택된 default-side 도수의 색수 상향 축 echo(불투명 COD). 어댑터만 6/12 산출에 사용(INV-1).
+function colorSideFromSelections(s: WidgetState): string | undefined {
+  const product = s.product!;
+  for (const g of product.optionGroups) {
+    if (!g.id.startsWith('GRP_DOSU') || g.side !== 'default') continue;
+    const sel = selectedId(s.selections[g.id]);
+    const val = g.values.find((v) => v.id === sel);
+    if (val?.colorSide != null) return val.colorSide;
+  }
+  return undefined;
+}
+
 // L-2 복합 2축 후가공 그룹 식별 suffix (어댑터가 PCS_DTL_CD 를 coating/side 2축으로 분해할 때 부여).
 //  직렬화 전에 store 가 `coating+side` 단일 PCS_DTL_COD 로 재합성한다.
 const COMPOSITE_SIDE_SUFFIX = '__side';
@@ -117,6 +141,10 @@ export function buildPriceRequest(s: WidgetState): NormalizedPriceRequest {
     materials: materialsFromSelections(s),
     quantity: s.quantity,
     pageCount: s.pageCount,
+    // N1: 추가색 토글 + 불투명 메타(가용 자재·색수축). 어댑터가 게이트+6/12 산출(INV-1). 기본 미설정 → 가격불변.
+    ...(s.addColor ? { addColor: true } : {}),
+    ...(addColorCapableFromSelections(s) ? { addColorCapable: true } : {}),
+    ...(colorSideFromSelections(s) != null ? { colorSide: colorSideFromSelections(s) } : {}),
     selectedFinishes: finishesFromSelections(s),
   };
 }

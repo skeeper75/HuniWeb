@@ -24,7 +24,7 @@ fi
 
 # 1) preflight — 모델 가용성(토큰문제 vs 모델데드락 구분). 있으면 재사용.
 if [ -f "$PREFLIGHT" ]; then
-  PF="$(bash "$PREFLIGHT" 2>/dev/null | tail -1)"
+  PF="$(bash "$PREFLIGHT" </dev/null 2>/dev/null | tail -1)"   # </dev/null: preflight 내부 codex probe stdin 트랩 방지
   case "$PF" in
     AVAILABLE*) MODEL="$(echo "$PF" | sed -n 's/.*model=//p')"; MODEL="${MODEL:-gpt-5.5}" ;;
     AUTH_STALE*) echo "CODEX_UNAVAILABLE: 인증 만료(토큰 갱신 필요) — codex login" >&2; exit 2 ;;
@@ -33,11 +33,14 @@ if [ -f "$PREFLIGHT" ]; then
 fi
 
 # 2) codex exec — 비대화·읽기전용. 모델 데드락 시 후보 폴백 1회.
+#    ★ stdin을 반드시 < /dev/null 로 닫는다: 안 닫으면 codex exec가
+#      "Reading additional input from stdin..."로 무한 블록(특히 파이프/백그라운드/래퍼
+#      호출 시). 프롬프트는 positional arg로 전달되므로 stdin은 불필요.
 run_codex() {
   if [ -n "$EFFORT" ]; then
-    codex exec -m "$1" -s read-only -C "$WORKDIR" -c model_reasoning_effort="$EFFORT" "$(cat "$PROMPT_FILE")" 2>&1
+    codex exec -m "$1" -s read-only -C "$WORKDIR" -c model_reasoning_effort="$EFFORT" --skip-git-repo-check "$(cat "$PROMPT_FILE")" </dev/null 2>&1
   else
-    codex exec -m "$1" -s read-only -C "$WORKDIR" "$(cat "$PROMPT_FILE")" 2>&1
+    codex exec -m "$1" -s read-only -C "$WORKDIR" --skip-git-repo-check "$(cat "$PROMPT_FILE")" </dev/null 2>&1
   fi
 }
 OUT="$(run_codex "$MODEL")"

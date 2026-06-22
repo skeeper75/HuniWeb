@@ -1,0 +1,20 @@
+You are an independent reverse-engineering verifier. Read ONLY the files named below, all under the current working directory. Cite every claim as `path:line` (or "not found"). Do not speculate beyond what the files show. Answer in <=450 words, structured by the numbered questions.
+
+CONTEXT (what the code does): A TypeScript adapter `_workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts` serializes a normalized price request into RedPrinting's price-API request body (function `serializeRedPriceRequest`). RedPrinting's own client code (reverse-engineered) is in `docs/reversing/red_reverse_engineer/03_deobfuscated/` (deob_05_app_api.js = API layer, deob_06_app_widget_sdk.js = widget SDK, deob_07_app_components.js = Vue components) and `docs/reversing/red_reverse_engineer/01_source/` (mod_05/06/07, minified-ish). Live captured request/response samples are in `_workspace/huni-re-verify/02_golden/golden_*.json`.
+
+INDEPENDENTLY DETERMINE:
+
+Q1 — ATTB field TYPE. In RedPrinting's OWN code (deob_05/06/07 and mod_05/06/07), when a PCS_INFO entry's `ATTB` is constructed for a price/order request, is it assigned a NUMBER (e.g. a quantity / orderQty / .quantity) or a STRING? Grep for `ATTB:` assignments and report each assigned expression with its line. Separately: does any Red code that CONSUMES an incoming `ATTB` coerce it with parseInt/Number/+x, or compare it strictly (===) without coercion? Cite lines. CONCLUSION: based ONLY on Red's code, is ATTB naturally number-typed, string-typed, or mixed? Is sending ATTB as the JSON string "2" instead of number 2 likely to be (a) tolerated/coerced, (b) rejected/mismatched, or (c) undeterminable from the available code? State which.
+
+Q2 — Book (item_gbn=book2025) request shape. In Red's code, when building a price/order request for a BOOK product (item_gbn book2025, with cover/inner), which ORD_INFO color/material fields are set — does the book path use single-side fields `PRN_CLR_CNT` and `MTRL_CD`, or only the split fields `CVR_CLR_CNT/INN_CLR_CNT/CVR_MTRL_CD/INN_MTRL_CD`? Now look at the live book golden `golden_PRBKYPR_book.json` ORD_INFO: which of those fields are present/absent? CONCLUSION: For a book request, are `PRN_CLR_CNT` and `MTRL_CD` (a) expected/required, (b) ignored if extra, or (c) potentially mis-consumed (e.g. cover color overwritten)? State which, with evidence.
+
+Q3 — Adapter correctness check (independent). In `red-adapter.ts`, function `serializeRedPriceRequest`: (a) how is `ATTB` serialized for quantity-echo PCS (find the exact line and expression)? Is the emitted value a number or a string? (b) Are `PRN_CLR_CNT` and `MTRL_CD` set unconditionally or only when NOT a book? Cite the exact lines. Compare to your Q1/Q2 conclusions: does the adapter MATCH Red's expected shape, or DIVERGE? List each divergence as adapter-line vs Red-evidence-line.
+
+Q4 — Citation reality. Verify these specific citations are real (line exists AND content matches description); for each say REAL or NOT-FOUND with the actual line content:
+ - red-adapter.ts line ~615: ATTB serialization using String(req.quantity)
+ - red-adapter.ts line ~588: PRN_CLR_CNT assignment
+ - red-adapter.ts line ~589: MTRL_CD assignment
+ - red-adapter.ts line ~151: a comment claiming captured ATTB=1 (quantity echo)
+ Also: does red-adapter.ts itself anywhere CITE a deob/mod line that does NOT actually exist in the deob files (a fabricated source reference)? If you find such a self-citation, report the adapter line and whether the cited target exists.
+
+Q5 — False positives / missed issues. Independently, does the adapter's serialization have any OTHER shape mismatch vs Red's code or vs the golden files that is NOT one of {ATTB type, book PRN_CLR_CNT, book MTRL_CD}? Or conversely, is any of those three actually a NON-issue (false positive)? State findings with citations, or "none found".

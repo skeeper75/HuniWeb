@@ -1,0 +1,152 @@
+{
+  "scenario": "G-RP",
+  "productCode": "AIPPCUT",
+  "price_gbn": "real_price",
+  "note": "SizeMatrix2D real_price baseline. SUB_MTR ATTB=1 고정. result_sum.PRICE=3300 검증 베이스라인.",
+  "capturedAt": "2026-06-22T16:34:18.675Z",
+  "sessionFresh": true,
+  "oracle": "live RedPrinting via server.js :3001 (read-only get_ajax_price_vTmpl)",
+  "oracleSanity": {
+    "readsResultSum": true,
+    "perLineMayBeZero": "legal (bundle components); result_sum.PRICE is authority",
+    "normalPathZeroCount": 0,
+    "zeroIsDefect": "OK: 정상경로 PRICE≠0"
+  },
+  "secretsRedaction": "cookies/JWT/presigned 미포함(server.js 서버측 쿠키주입). mb_cust_cod 세션파생값 [REDACTED], 익명기본 10000000 유지(공개값).",
+  "calls": [
+    {
+      "label": "base ORD1 PRN1",
+      "status": 200,
+      "retCode": 200,
+      "reqBody": {
+        "dataJson": {
+          "ORD_INFO": [
+            {
+              "PDT_CD": "AIPPCUT",
+              "MTRL_CD": "PXPLP001",
+              "CUT_WDT": 300,
+              "CUT_HGH": 340,
+              "WRK_WDT": 300,
+              "WRK_HGH": 340,
+              "PRN_CNT": 1,
+              "ORD_CNT": 1,
+              "DOSU_COD": "SID_X",
+              "PRN_CLR_CNT": 0
+            }
+          ],
+          "PCS_INFO": [
+            {
+              "PCS_COD": "SUB_MTR",
+              "PCS_DTL_COD": "EC001",
+              "ATTB": 1,
+              "ATTB_2": "",
+              "ATTB_3": ""
+            },
+            {
+              "PCS_COD": "CUT_ZUN",
+              "PCS_DTL_COD": "ZDFRM",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "BON_SHT",
+              "PCS_DTL_COD": "SHECO",
+              "ATTB": ""
+            }
+          ],
+          "price_gbn": "real_price",
+          "mb_cust_cod": "10000000"
+        }
+      },
+      "result_sum": {
+        "PRICE": 3300,
+        "PRICE_VAT": 330,
+        "PRICE_MALL": 3300,
+        "PRICE_MALL_VAT": 330,
+        "ORG_PRICE": 3300,
+        "ORG_PRICE_VAT": 330
+      },
+      "perLine": [
+        {
+          "PCS_CD": "SUB_MTR",
+          "PRICE": 3300
+        },
+        {
+          "PCS_CD": "CUT_ZUN",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "BON_SHT",
+          "PRICE": 0
+        }
+      ],
+      "priceLog": "개당단가 : 3300.00원, 인쇄수량DDDDD : 1, 주문건수 : 1"
+    },
+    {
+      "label": "mtrl variant EC002 (차등)",
+      "status": 200,
+      "retCode": 200,
+      "reqBody": {
+        "dataJson": {
+          "ORD_INFO": [
+            {
+              "PDT_CD": "AIPPCUT",
+              "MTRL_CD": "PXPLP001",
+              "CUT_WDT": 300,
+              "CUT_HGH": 340,
+              "WRK_WDT": 300,
+              "WRK_HGH": 340,
+              "PRN_CNT": 1,
+              "ORD_CNT": 1,
+              "DOSU_COD": "SID_X",
+              "PRN_CLR_CNT": 0
+            }
+          ],
+          "PCS_INFO": [
+            {
+              "PCS_COD": "SUB_MTR",
+              "PCS_DTL_COD": "EC002",
+              "ATTB": 1,
+              "ATTB_2": "",
+              "ATTB_3": ""
+            },
+            {
+              "PCS_COD": "CUT_ZUN",
+              "PCS_DTL_COD": "ZDFRM",
+              "ATTB": ""
+            },
+            {
+              "PCS_COD": "BON_SHT",
+              "PCS_DTL_COD": "SHECO",
+              "ATTB": ""
+            }
+          ],
+          "price_gbn": "real_price",
+          "mb_cust_cod": "10000000"
+        }
+      },
+      "result_sum": {
+        "PRICE": 4400,
+        "PRICE_VAT": 440,
+        "PRICE_MALL": 4400,
+        "PRICE_MALL_VAT": 440,
+        "ORG_PRICE": 4400,
+        "ORG_PRICE_VAT": 440
+      },
+      "perLine": [
+        {
+          "PCS_CD": "SUB_MTR",
+          "PRICE": 4400
+        },
+        {
+          "PCS_CD": "CUT_ZUN",
+          "PRICE": 0
+        },
+        {
+          "PCS_CD": "BON_SHT",
+          "PRICE": 0
+        }
+      ],
+      "priceLog": "개당단가 : 4400.00원, 인쇄수량DDDDD : 1, 주문건수 : 1"
+    }
+  ]
+}

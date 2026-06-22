@@ -1,0 +1,237 @@
+{
+  "scenario": "NF-ADDCLR",
+  "field": "ADD_CLR_YN",
+  "productCode": "NCCDDFT",
+  "price_gbn": "offset2023_price",
+  "note": "ADD_CLR_YN(추가색상) Y/N. 자재조건부 — R2는 SID_S/RXSNO250선 무변화. 여기서 SID_D(양면)/8도수까지 deeper 조합으로 차등 시도. 무변화면 \"자재조건부 무영향\"의 deeper 입증(결함 아님).",
+  "capturedAt": "2026-06-22T17:56:30.834Z",
+  "sessionFresh": true,
+  "oracle": "live RedPrinting via server.js :3001 (read-only get_ajax_price_vTmpl POST)",
+  "oracleSanity": {
+    "readsResultSum": true,
+    "perLineMayBeZero": "legal (bundle components); result_sum.PRICE is authority",
+    "normalPathZeroCount": 0,
+    "zeroIsDefect": "OK: 정상경로 PRICE≠0",
+    "priceSequence": [
+      12700,
+      12700,
+      15900,
+      15900
+    ]
+  },
+  "secretsRedaction": "cookies/JWT/presigned 미포함(server.js 서버측 쿠키주입). mb_cust_cod 세션파생값 [REDACTED], 익명기본 10000000 유지(공개값).",
+  "calls": [
+    {
+      "label": "SID_S 4clr ADD_CLR=N",
+      "status": 200,
+      "retCode": 200,
+      "reqBody": {
+        "dataJson": {
+          "ORD_INFO": [
+            {
+              "PDT_CD": "NCCDDFT",
+              "MTRL_CD": "RXSNO250",
+              "CUT_WDT": 148,
+              "CUT_HGH": 100,
+              "WRK_WDT": 152,
+              "WRK_HGH": 104,
+              "PRN_CNT": 500,
+              "ORD_CNT": 1,
+              "DOSU_COD": "SID_S",
+              "PRN_CLR_CNT": 4,
+              "ADD_CLR_YN": "N",
+              "REAM_CNT": 0
+            }
+          ],
+          "PCS_INFO": [
+            {
+              "PCS_COD": "CUT_DFT",
+              "PCS_DTL_COD": "DFXXX",
+              "ATTB": ""
+            }
+          ],
+          "price_gbn": "offset2023_price",
+          "mb_cust_cod": "10000000"
+        }
+      },
+      "result_sum": {
+        "PCS_ETC_PRICE": 0,
+        "PCS_PRI_PRICE": 12700,
+        "PRICE": 12700,
+        "PRICE_VAT": 1270,
+        "PRICE_MALL": 12700,
+        "PRICE_MALL_VAT": 1270,
+        "ORG_PRICE": 12700,
+        "ORG_PRICE_VAT": 1270
+      },
+      "perLine": [
+        {
+          "PRICE": 0
+        },
+        {
+          "PRICE": 12700
+        }
+      ],
+      "priceLog": ""
+    },
+    {
+      "label": "SID_S 4clr ADD_CLR=Y (차등)",
+      "status": 200,
+      "retCode": 200,
+      "reqBody": {
+        "dataJson": {
+          "ORD_INFO": [
+            {
+              "PDT_CD": "NCCDDFT",
+              "MTRL_CD": "RXSNO250",
+              "CUT_WDT": 148,
+              "CUT_HGH": 100,
+              "WRK_WDT": 152,
+              "WRK_HGH": 104,
+              "PRN_CNT": 500,
+              "ORD_CNT": 1,
+              "DOSU_COD": "SID_S",
+              "PRN_CLR_CNT": 4,
+              "ADD_CLR_YN": "Y",
+              "REAM_CNT": 0
+            }
+          ],
+          "PCS_INFO": [
+            {
+              "PCS_COD": "CUT_DFT",
+              "PCS_DTL_COD": "DFXXX",
+              "ATTB": ""
+            }
+          ],
+          "price_gbn": "offset2023_price",
+          "mb_cust_cod": "10000000"
+        }
+      },
+      "result_sum": {
+        "PCS_ETC_PRICE": 0,
+        "PCS_PRI_PRICE": 12700,
+        "PRICE": 12700,
+        "PRICE_VAT": 1270,
+        "PRICE_MALL": 12700,
+        "PRICE_MALL_VAT": 1270,
+        "ORG_PRICE": 12700,
+        "ORG_PRICE_VAT": 1270
+      },
+      "perLine": [
+        {
+          "PRICE": 0
+        },
+        {
+          "PRICE": 12700
+        }
+      ],
+      "priceLog": ""
+    },
+    {
+      "label": "SID_D 8clr ADD_CLR=N",
+      "status": 200,
+      "retCode": 200,
+      "reqBody": {
+        "dataJson": {
+          "ORD_INFO": [
+            {
+              "PDT_CD": "NCCDDFT",
+              "MTRL_CD": "RXSNO250",
+              "CUT_WDT": 148,
+              "CUT_HGH": 100,
+              "WRK_WDT": 152,
+              "WRK_HGH": 104,
+              "PRN_CNT": 500,
+              "ORD_CNT": 1,
+              "DOSU_COD": "SID_D",
+              "PRN_CLR_CNT": 8,
+              "ADD_CLR_YN": "N",
+              "REAM_CNT": 0
+            }
+          ],
+          "PCS_INFO": [
+            {
+              "PCS_COD": "CUT_DFT",
+              "PCS_DTL_COD": "DFXXX",
+              "ATTB": ""
+            }
+          ],
+          "price_gbn": "offset2023_price",
+          "mb_cust_cod": "10000000"
+        }
+      },
+      "result_sum": {
+        "PCS_ETC_PRICE": 0,
+        "PCS_PRI_PRICE": 15900,
+        "PRICE": 15900,
+        "PRICE_VAT": 1590,
+        "PRICE_MALL": 15900,
+        "PRICE_MALL_VAT": 1590,
+        "ORG_PRICE": 15900,
+        "ORG_PRICE_VAT": 1590
+      },
+      "perLine": [
+        {
+          "PRICE": 0
+        },
+        {
+          "PRICE": 15900
+        }
+      ],
+      "priceLog": ""
+    },
+    {
+      "label": "SID_D 8clr ADD_CLR=Y (차등)",
+      "status": 200,
+      "retCode": 200,
+      "reqBody": {
+        "dataJson": {
+          "ORD_INFO": [
+            {
+              "PDT_CD": "NCCDDFT",
+              "MTRL_CD": "RXSNO250",
+              "CUT_WDT": 148,
+              "CUT_HGH": 100,
+              "WRK_WDT": 152,
+              "WRK_HGH": 104,
+              "PRN_CNT": 500,
+              "ORD_CNT": 1,
+              "DOSU_COD": "SID_D",
+              "PRN_CLR_CNT": 8,
+              "ADD_CLR_YN": "Y",
+              "REAM_CNT": 0
+            }
+          ],
+          "PCS_INFO": [
+            {
+              "PCS_COD": "CUT_DFT",
+              "PCS_DTL_COD": "DFXXX",
+              "ATTB": ""
+            }
+          ],
+          "price_gbn": "offset2023_price",
+          "mb_cust_cod": "10000000"
+        }
+      },
+      "result_sum": {
+        "PCS_ETC_PRICE": 0,
+        "PCS_PRI_PRICE": 15900,
+        "PRICE": 15900,
+        "PRICE_VAT": 1590,
+        "PRICE_MALL": 15900,
+        "PRICE_MALL_VAT": 1590,
+        "ORG_PRICE": 15900,
+        "ORG_PRICE_VAT": 1590
+      },
+      "perLine": [
+        {
+          "PRICE": 0
+        },
+        {
+          "PRICE": 15900
+        }
+      ],
+      "priceLog": ""
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "_meta": {
+    "source": "R2 260623 — 6월 라이브 보강. 기존 option-schema-catalog.json에 병합할 신규분.",
+    "evidence": "라이브 product_info(NCCDDFT/NCDFDFT/PRBKYPR) + deob widget.deob.js",
+    "verification": "[라이브 검증] product_info 200 + [정적 분석] deob file:line"
+  },
+  "item_gbn_enum_live": {
+    "values": ["book2025_item", "vDigital_item", "vSubMtrl_item", "offset2023_item", "edicus_item", "digital_item"],
+    "code_only_candidates": ["acrylic2025_item", "clothes2025_item"],
+    "note": "offset2023_item/edicus_item/digital_item = 6월 신규 라이브 확정. acrylic/clothes2025 = deob 코드근거(라이브 미프로브)."
+  },
+  "garage_upload": {
+    "activation": "product_option.option.isUseGarage === 'Y' (라이브 확정, 프로브 8상품 전부 Y)",
+    "widget_prop": "uploadConfig.useGarage (isUseGarage 파생)",
+    "fallback": "Garage 실패 시 AWS",
+    "s3_region": ["GA", "AWS"]
+  },
+  "new_postpcs_components": {
+    "count_delta": "29 -> 49 (+20, 제거 0 = 계약 superset)",
+    "new": ["BAK_STK","BND_LOC","BTN_DFT","CDL_DFT","CPN_DFT","CUT_DFT","FLD_DFT","HOL_DFT","LAM_DFT","MIS_DFT","NUM_DFT","OSI_DFT","PRT_MAG","PRT_SID","RFL_HAP","SUB_MTR_LW","THO_BAK","THO_CUT","THO_DFT","THO_GRA"],
+    "domain_map": {
+      "FLD_DFT": {"label_ko": "접지", "label_en": "Fold", "detail_example": "FO006=2단접지", "guide": "get_fld_download", "live": "NCCDDFT pdt_pcs_info"},
+      "HOL_DFT": {"label_ko": "타공형", "label_en": "Punching", "constraint": "size<40mm => HOL_DFT=N (deob L17378)"},
+      "ROU_DFT": {"label_ko": "귀돌이/사각라운드형", "label_en": "Round corner", "constraint": "귀돌이최소선택안내"},
+      "NUM_DFT": {"label_ko": "넘버링/글꼴", "label_en": "Numbering/Font", "sub": "num-dft.글꼴선택=Select Font"},
+      "PRT_MAG": {"label_ko": "자석거치대", "label_en": "Magnet stand", "note": "자석거치대부착가능/불가"},
+      "LAM_DFT": {"label_ko": "라미네이팅", "role": "캐스케이드 허브"},
+      "PAK_POL": {"label_ko": "개별포장", "note": "무광코팅 선택 시 자동연동"},
+      "RIN_DFT": {"label_ko": "걸이형", "label_en": "Hanging"}
+    }
+  },
+  "cascade_disable": {
+    "source": "pdt_disable_pcs_info (라이브) + deob L14424-14434",
+    "model": "material(MTRL_CD) -> disable specific PCS detail (PCS_CD + PCS_DTL_CD)",
+    "live_example": {"MTRL_CD": "RXSNO300", "disables": [{"PCS_CD": "FLD_DFT", "PCS_DTL_CD": "FO001..FO004"}]},
+    "code_cascade": {
+      "FLD_DFT": ["THO_GRA", "LAM_DFT"],
+      "THO_GRA": ["FLD_DFT"],
+      "LAM_DFT": ["MIS_DFT", "OSI_DFT", "COT_DFT", "FOI_DFT", "FLD_DFT", "ROU_DFT", "PRT_MAG"],
+      "special_set_Kh": ["FLD_DFT", "HOL_DFT", "MIS_DFT", "OSI_DFT", "THO_GRA", "PRT_MAG"]
+    }
+  },
+  "new_price_fields": {
+    "ORD_INFO_additions": {
+      "ADD_CLR_YN": {"from": "dosuInfo.ADD_CLR_YN", "deob": "L13982", "meaning": "추가색상 Y/N", "price_impact": "자재/도수 조건부"},
+      "PACK_PRN_CNT": {"from": "addOptionInfo.PACK_PRN_CNT (조건부)", "deob": "L13984", "meaning": "개별포장 수량"},
+      "REAM_CNT": {"deob": "L22611 (REAM_CNT/PRN_CNT)", "meaning": "연(ream) 수", "live": "pdt_prn_cnt_info 행"},
+      "MAX_PRN_CNT": {"from": "pdt_base_info[0].MAX_PRN_CNT", "deob": "L19733"},
+      "PDT_SIZE_INFO": {"deob": "L16212", "scope": "BT*/GSSTPRT 상품"}
+    },
+    "quantity_models": {
+      "A_ladder": "PRN_CNT = MIN_ORD_PRN_CNT + ADD_ORD_PRN_CNT * h (h=0..9), DFT 첫행Y (PDT_VER_SIZE형, deob L15432-15445)",
+      "B_rows": "서버 제공 pdt_prn_cnt_info 행(PRN_CNT/DFT_PRN_CNT/REAM_CNT/UNIT_PRN_CNT/INC_CNT) + base FIR_CNT/INC/INC_STEP/REAM_YN (offset2023_item)"
+    }
+  }
+}

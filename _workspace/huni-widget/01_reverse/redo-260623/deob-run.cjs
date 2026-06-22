@@ -1,0 +1,10 @@
+const fs=require('fs');
+const parser=require('@babel/parser');
+let generate=require('@babel/generator'); generate=generate.default||generate;
+const src=fs.readFileSync('/Users/innojini/Dev/HuniWeb/_workspace/huni-widget/01_reverse/_latest/widget.js.20260622','utf8');
+console.error('parsing', src.length, 'bytes...');
+const ast=parser.parse(src,{sourceType:'script',errorRecovery:true});
+console.error('parsed. generating (AST-equivalent pretty print)...');
+const out=generate(ast,{compact:false,comments:true,retainLines:false,concise:false});
+fs.writeFileSync('deob/widget.deob.js',out.code);
+console.error('written', out.code.length, 'bytes ->', (out.code.split('\n').length),'lines');

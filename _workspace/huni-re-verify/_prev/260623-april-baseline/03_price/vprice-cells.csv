@@ -1,0 +1,55 @@
+gate,scenario,productCode,call_label,check,method,oracle_value,reconstruction_value,verdict,evidence
+VP-1,G-RP,AIPPCUT,base ORD1 PRN1,ORD_INFO 가격필드 정합,differential-serialize,golden reqBody,emit reqBody,PASS,golden_AIPPCUT_real.json:22-58
+VP-1,G-RP,AIPPCUT,base ORD1 PRN1,PCS_INFO ATTB 타입,differential-serialize,1(number),"""1""(string)",FAIL,D1 divergence-cases.md
+VP-1,G-RP,AIPPCUT,mtrl variant EC002,PCS_INFO ATTB 타입,differential-serialize,1(number),"""1""(string)",FAIL,D1
+VP-1,G-FU,STPADPN,A4 ORD1 PRN1,ORD_INFO+PCS+price_gbn+mb_cust_cod 정합,differential-serialize,golden reqBody,emit reqBody,PASS,golden_STPADPN_fixed.json:22-51
+VP-1,G-FU,STPADPN,bigger size 210x297,전 필드 정합,differential-serialize,golden reqBody,emit reqBody,PASS,golden_STPADPN_fixed.json:82-111
+VP-1,G-TD,GSTGMIC,PRN_CNT=1,PCS_INFO ATTB 타입,differential-serialize,1(number),"""1""(string)",FAIL,D1
+VP-1,G-TD,GSTGMIC,PRN_CNT=2,PCS_INFO ATTB 타입,differential-serialize,2(number),"""2""(string)",FAIL,D1
+VP-1,G-TD,GSTGMIC,PRN_CNT=5,PCS_INFO ATTB 타입,differential-serialize,5(number),"""5""(string)",FAIL,D1
+VP-1,G-TD,GSTGMIC,PRN_CNT=10,PCS_INFO ATTB 타입,differential-serialize,10(number),"""10""(string)",FAIL,D1
+VP-1,G-TD,GSTGMIC,PRN_CNT=30,PCS_INFO ATTB 타입,differential-serialize,30(number),"""30""(string)",FAIL,D1
+VP-1,G-TD,GSTGMIC,PRN_CNT=100,PCS_INFO ATTB 타입,differential-serialize,100(number),"""100""(string)",FAIL,D1
+VP-1,G-TM,GSPUFBC,complete ORD100 PRN1,전 필드 정합(ATTB 전 ''),differential-serialize,golden reqBody,emit reqBody,PASS,golden_GSPUFBC_tmpl.json:22-56
+VP-1,G-TM,GSPUFBC,ORD_CNT=1,전 필드 정합,differential-serialize,golden reqBody,emit reqBody,PASS,golden_GSPUFBC_tmpl.json:90-124
+VP-1,G-TM,GSPUFBC,ORD_CNT=10,전 필드 정합,differential-serialize,golden reqBody,emit reqBody,PASS,golden_GSPUFBC_tmpl.json:160-194
+VP-1,G-BK,PRBKYPR,A5 PAGE24 INN_CLR1,책자 분리필드 정합,differential-serialize,golden reqBody,emit reqBody,PASS-partial,golden_PRBKYPR_book.json:22-42
+VP-1,G-BK,PRBKYPR,A5 PAGE24 INN_CLR1,PRN_CLR_CNT 발명,differential-serialize,(부재),4(number),FAIL,D2
+VP-1,G-BK,PRBKYPR,A5 PAGE24 INN_CLR1,MTRL_CD 발명,differential-serialize,(부재),RXART300,FAIL,D3
+VP-1,G-BK,PRBKYPR,A5 PAGE48,PRN_CLR_CNT+MTRL_CD 발명,differential-serialize,(부재),"4,RXART300",FAIL,D2/D3
+VP-1,G-BK,PRBKYPR,A5 PAGE100 INN_CLR4,PRN_CLR_CNT+MTRL_CD 발명,differential-serialize,(부재),"4,RXART300",FAIL,D2/D3
+VP-1,G-ATTB,GSNTSPR,ATTB고정 ORD1 PRN1,INN_DFT ATTB 타입,differential-serialize,1(number),"""1""(string)",FAIL,D1
+VP-1,G-ATTB,GSNTSPR,ATTB고정 ORD1 PRN5,INN_DFT ATTB 타입,differential-serialize,1(number),"""1""(string)",FAIL,D1
+VP-1,G-ATTB,GSNTSPR,ATTB고정 ORD5 PRN1,INN_DFT ATTB 타입,differential-serialize,1(number),"""1""(string)",FAIL,D1
+VP-1,G-ATTB,GSNTSPR,ATTB고정 ORD10 PRN1,INN_DFT ATTB 타입,differential-serialize,1(number),"""1""(string)",FAIL,D1
+VP-1,G-ATTB,GSNTSPR,링색 RIN_WHT,INN_DFT ATTB 타입,differential-serialize,1(number),"""1""(string)",FAIL,D1
+VP-1,G-ATTB,GSNTSPR,링색 RIN_GLD,INN_DFT ATTB 타입,differential-serialize,1(number),"""1""(string)",FAIL,D1
+VP-1,G-ATTB,GSNTSPR,링색 RIN_SIL,INN_DFT ATTB 타입,differential-serialize,1(number),"""1""(string)",FAIL,D1
+VP-1,G-ATTB,GSNTSPR,반경 rou8,INN_DFT ATTB 타입,differential-serialize,1(number),"""1""(string)",FAIL,D1
+VP-1,G-ATTB,GSNTSPR,반경 rou0,INN_DFT ATTB 타입,differential-serialize,1(number),"""1""(string)",FAIL,D1
+VP-2,G-RP,AIPPCUT,base ORD1 PRN1,finalPrice==result_sum.PRICE,differential-map,3300,3300,PASS,golden_AIPPCUT_real.json:61
+VP-2,G-RP,AIPPCUT,mtrl variant EC002,finalPrice==result_sum.PRICE,differential-map,4400,4400,PASS,golden_AIPPCUT_real.json:128
+VP-2,G-FU,STPADPN,A4 ORD1 PRN1,finalPrice/vat,differential-map,4000/400,4000/400,PASS,golden_STPADPN_fixed.json:54
+VP-2,G-FU,STPADPN,bigger size 210x297,finalPrice,differential-map,8000,8000,PASS,golden_STPADPN_fixed.json:114
+VP-2,G-TD,GSTGMIC,PRN_CNT=1,finalPrice,differential-map,7000,7000,PASS,golden_GSTGMIC_tiered.json:71
+VP-2,G-TD,GSTGMIC,PRN_CNT=2,finalPrice,differential-map,13600,13600,PASS,golden_GSTGMIC_tiered.json:160
+VP-2,G-TD,GSTGMIC,PRN_CNT=100,finalPrice,differential-map,631800,631800,PASS,golden_GSTGMIC_tiered.json:516
+VP-2,G-TM,GSPUFBC,complete ORD100 PRN1,finalPrice,differential-map,2850000,2850000,PASS,golden_GSPUFBC_tmpl.json:59
+VP-2,G-TM,GSPUFBC,ORD_CNT=1,finalPrice,differential-map,28500,28500,PASS,golden_GSPUFBC_tmpl.json:128
+VP-2,G-BK,PRBKYPR,A5 PAGE24,finalPrice,differential-map,6100,6100,PASS,golden_PRBKYPR_book.json:45
+VP-2,G-BK,PRBKYPR,A5 PAGE100,finalPrice,differential-map,8300,8300,PASS,golden_PRBKYPR_book.json:143
+VP-2,G-ATTB,GSNTSPR,ATTB고정 ORD1 PRN1,finalPrice,differential-map,6300,6300,PASS,golden_GSNTSPR_attb.json
+VP-2,G-ATTB,GSNTSPR,ATTB고정 ORD10 PRN1,finalPrice(=10x6300),differential-map,63000,63000,PASS,golden_GSNTSPR_attb.json
+VP-3,G-FU,STPADPN,A4 ORD1 PRN1,PRICE>0 & ok:true,differential-map,4000,ok:true,PASS,re-contract §3.1
+VP-3,G-FU,STPADPN,incomplete(ORD/PRN 부재),라이브0 -> ok:false,differential-map+guard,0,ok:false+reason,PASS,golden_STPADPN_fixed.json:171
+VP-3,G-TM,GSPUFBC,incomplete(부재),라이브0 -> ok:false,differential-map+guard,0,ok:false+reason,PASS,golden_GSPUFBC_tmpl.json:263
+VP-3,ALL,*,정상경로,PRICE==0 발생 0,differential-map,>0,ok:true,PASS,oracleSanity.normalPathZeroCount=0
+VP-4,G-TD,GSTGMIC,PRN_CNT=2,per-line 0 무시 result_sum 권위,differential-map,result_sum=13600 perline(PRT_DFT만),finalPrice=13600,PASS,golden_GSTGMIC_tiered.json:159-191
+VP-5,G-TD,GSTGMIC,PRN_CNT 스윕,단조증가,metamorphic,7000<13600<33400<66200<194200<631800,monotone-up,PASS,golden_GSTGMIC_tiered.json
+VP-5,G-TM,GSPUFBC,ORD_CNT 스윕,정확 선형 xN,metamorphic,28500x10=285000;x100=2850000,linear,PASS,golden_GSPUFBC_tmpl.json
+VP-5,G-BK,PRBKYPR,PAGE_CNT 스윕,단조증가,metamorphic,6100<6800<8300,monotone-up,PASS,golden_PRBKYPR_book.json
+VP-5,G-FU,STPADPN,size 스윕,size↑->PRICE↑,metamorphic,4000<8000,increase,PASS,golden_STPADPN_fixed.json
+VP-5,G-ATTB,GSNTSPR,ATTB 차등,ATTB 불변+qty 운반,metamorphic,ATTB invariant;5x6300=31500,invariant+linear,PASS,golden_GSNTSPR_attb.json
+VP-5,ALL,*,동일입력,동일출력(직렬화 결정성),metamorphic,deterministic,deterministic,PASS,vprice-differential.test.ts
+VP-6,ALL,*,emit 필드 ⊆ 사전,dictionary,re-contract §1-1c,emit keys,PASS,re-contract-price.md
+VP-6,G-BK,PRBKYPR,책자 단일면필드,사전엔有 캡처엔無,dictionary-vs-capture,사전:PRN_CLR_CNT/MTRL_CD有;캡처:無,emit:포함,NOTE,D2/D3(VP-1 분류)

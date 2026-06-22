@@ -302,7 +302,7 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 **산출물 루트:** `_workspace/huni-re-verify/` (`_meta` 방법론리서치·codex-high-spec·01_inventory·02_golden·03_price·04_widget·05_editor·06_codex·07_gate). 7인 팀(`hrev-asset-curator` 기준점 → `hrev-golden-recorder` 라이브 골든캡처 → `hrev-price-equivalence`·`hrev-widget-behavior`·`hrev-editor-bridge` 검사 팬아웃 → `hrev-codex-verifier` codex high 2차 → `hrev-verify-gate` V+메타게이트). **파일럿=가격계산 API**. codex 헬퍼=`hqv-codex-cross-verify/scripts/codex-review.sh ... high`(stdin `</dev/null`·`--skip-git-repo-check` 패치 적용). 자격증명 `.env.local`(라이브 세션·EDICUS_* — 골든/로그 비노출).
 
-**변경이력:** 최신: 2026-06-23 하네스 초기 구성(7 에이전트+8 스킬·V-PRICE/WIDGET/EDITOR+메타게이트·codex high 라이브검증·§6/testbed 80% 재사용) → 첫 실행 시 CHANGELOG 생성
+**변경이력:** 최신: 2026-06-23 첫 종단 실행+역공학 최신화(4월→6월 widget.js +137KB·R0~R3 재역공학·Garage/신규14필드/신규옵션군)+신규필드 재검증(V-PRICE NO-GO·N3 견적불가/N1 저청구)+N3·N1 교정(vitest 159 green·N3 CLOSED) → `_workspace/huni-re-verify/CHANGELOG.md`
 
 ## 23. MoAI Framework (gated — rarely used here)
 

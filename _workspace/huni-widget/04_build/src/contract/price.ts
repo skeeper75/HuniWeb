@@ -37,6 +37,15 @@ export interface NormalizedPriceRequest {
   // 위젯은 echo 도 안 함(현 stage UI 미노출) — 어댑터 직렬화가 quantity↔ORD_CNT / printCount↔PRN_CNT 분리.
   printCount?: number;
   pageCount?: number; // 책자
+  // N1 추가색(별색/형광) 토글. 중립 도메인명(Red ADD_CLR_YN 아님). 사용자가 추가색을 켰는지만.
+  //  OPTIONAL·additive — 미전달/false 시 어댑터가 ADD_CLR_YN="N" emit(가격불변·하위호환·회귀 0).
+  //  추가색이 실제 색수(가격축)를 끌어올리는 산술(SID_S→6/SID_D→12)은 어댑터 책임(INV-1).
+  addColor?: boolean;
+  // N1 추가색 가용 여부(선택 자재의 ADD_CLR_YN="Y" 불투명 echo). 위젯은 의미 무계산·운반만.
+  //  어댑터만 이 플래그+addColor 조합으로 색수 상향 게이트(미보유 자재는 addColor 무시 → 가격불변).
+  addColorCapable?: boolean;
+  // N1 색수 상향 축(선택 도수의 불투명 COD echo, 예 SID_S/SID_D). 어댑터가 6/12 산출 시 사용(INV-1).
+  colorSide?: string;
   selectedFinishes: SelectedFinish[];
 }
 

@@ -45,6 +45,10 @@ export interface RedMtrlInfo {
   WGT_COD?: string;
   HIDE_YN: string;
   CLR_HEX_CD?: string;
+  // N1: 추가색(별색/형광) 가용 자재 플래그. "Y"인 자재는 사용자 추가색 토글 시 PRN_CLR_CNT 가
+  //  SID_S→6 / SID_D→12 로 상향(가격 증가). 근거 = pdt_mtrl_info[].ADD_CLR_YN(product_PRBKYPR.json:111)
+  //  + widget.deob.js:15758(자재 게이트 addClrMtrlList.find(MTRL_CD===mtrlCd).ADD_CLR_YN==="Y").
+  ADD_CLR_YN?: string;
 }
 
 export interface RedSizeInfo {
@@ -104,6 +108,17 @@ export interface RedPrnCntInfo {
   DFT_YN?: string;
 }
 
+// N3 수량모델 A 래더(pdt_add_option_info): 떡메(TPBLMEO/TPBLPST)·PDT_VER_SIZE형 굿즈는
+//  pdt_prn_cnt_info 행기반(모델B)이 아니라 PDT_VER_SIZE별 `MIN_ORD_PRN_CNT + ADD_ORD_PRN_CNT × h`
+//  (h=0..9, 10단계) 산술 래더로 수량 enum 을 생성한다. 근거 = widget.deob.js:15428-15445(래더 산술)·
+//  L19664(렌더 게이트 `pdt_add_option_info?.length`). PACK_PRN_CNT 는 라벨 표시("약 N장")용.
+export interface RedAddOptionInfo {
+  PDT_VER_SIZE: string;
+  MIN_ORD_PRN_CNT: number;
+  ADD_ORD_PRN_CNT: number;
+  PACK_PRN_CNT?: number;
+}
+
 export interface RedProductData {
   pdt_base_info: RedBaseInfo[];
   pdt_mtrl_info: RedMtrlInfo[];
@@ -114,6 +129,8 @@ export interface RedProductData {
   // S6: 옵셋 캘린더는 null 로 옴(빈 비활성 규칙). 어댑터가 null→[] 평탄화.
   pdt_disable_pcs_info: RedDisablePcs[] | null;
   pdt_prn_cnt_info: RedPrnCntInfo[];
+  // N3: 수량모델 A 래더 소스(보유 시 모델B 대신 이 래더로 수량 enum 생성). 미보유 상품군 = undefined.
+  pdt_add_option_info?: RedAddOptionInfo[];
   inner_pdt_mtrl_info?: RedMtrlInfo[];
   inner_pdt_dosu_info?: RedDosuInfo[];
   // Wave C 의류(clothes2025): apparel_info 6블록(print_type/print_area/apparel_color/size_info/size_color_info/pantone_color).
@@ -174,6 +191,9 @@ export interface RedPriceReqOrdInfo {
   PRN_CLR_CNT?: number;
   MTRL_CD?: string;
   DOSU_COD?: string;
+  // N1: 추가색 토글. 비book2025 빌더는 항상 emit(deob L13982·라이브 NCCDDFT reqBody ADD_CLR_YN="N").
+  //  자재 ADD_CLR_YN="Y" + 사용자 추가색 ON 이면 "Y", 그 외 "N". "Y"일 때 PRN_CLR_CNT 가 6/12 로 상향.
+  ADD_CLR_YN?: string;
   // ── 책자 분리필드 (data-adapter.md:80-86) — 표지/내지 색·자재 분리 + 면수.
   //  단일면 상품엔 부재(undefined → JSON 직렬화 시 생략). 책자(inner side 보유)에서만 출력.
   PAGE_CNT?: number;

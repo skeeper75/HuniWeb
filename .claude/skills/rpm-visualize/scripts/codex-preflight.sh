@@ -39,7 +39,11 @@ trap 'rm -f "$out"' EXIT
 
 for m in "${CANDIDATES[@]}"; do
   : > "$out"
-  err=$(codex exec -m "$m" --sandbox read-only --output-last-message "$out" "$PING" 2>&1)
+  # ★ stdin을 </dev/null로 닫는다: 안 닫으면 codex exec가
+  #   "Reading additional input from stdin..."로 무한 블록(파이프/백그라운드/래퍼 호출 시).
+  # --skip-git-repo-check: cwd가 git repo/신뢰 디렉토리가 아니면 codex가
+  #   "Not inside a trusted directory..."로 거부 → 전 후보 실패 → 거짓 DEADLOCK.
+  err=$(codex exec -m "$m" --sandbox read-only --skip-git-repo-check --output-last-message "$out" "$PING" </dev/null 2>&1)
   if grep -qi "OK" "$out" 2>/dev/null; then
     echo "AVAILABLE model=$m"
     exit 0

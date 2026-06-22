@@ -1,0 +1,3073 @@
+Reading additional input from stdin...
+OpenAI Codex v0.140.0
+--------
+workdir: /Users/innojini/Dev/HuniWeb
+model: gpt-5.5
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: high
+reasoning summaries: none
+session id: 019ef08b-856c-7992-aa99-d63259615411
+--------
+user
+You are an independent reverse-engineering verifier. You may ONLY read files (read-only). Do not assume; cite file:line for every claim. If something is absent, say "not found" — never invent a line number.
+
+GOAL: Verify whether a reconstructed RedPrinting price adapter correctly handles the NEW price-engine fields that appear in a June de-obfuscated widget bundle. Decide, from the de-obfuscated source ALONE, whether each new field is money-critical (affects PRICE) or inert, and whether claims about cited source lines are real.
+
+FILES TO READ (paths relative to this workdir = HuniWeb repo root):
+1. De-obfuscated widget bundle (the source of truth for how the live engine builds requests):
+   _workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js
+2. The reverse-engineering contract that CLAIMS what the new fields mean:
+   _workspace/huni-widget/01_reverse/redo-260623/contracts/price-engine-additions.md
+3. The reconstructed adapter under verification (does it emit these fields?):
+   _workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts
+   _workspace/huni-widget/04_build/src/adapters/red/red-types.ts
+   _workspace/huni-widget/04_build/src/contract/price.ts
+
+ANSWER THESE QUESTIONS, each with deob file:line evidence (use the deob.js line numbers):
+
+Q1 — ADD_CLR_YN (cited deob ~L13982). Read the ORD_INFO request-builder around L13955-L14000 AND the consumer/selector logic (grep ADD_CLR_YN everywhere). Determine:
+  (a) Does the builder emit ADD_CLR_YN conditionally or always, and what value source feeds it?
+  (b) Is there any code path where ADD_CLR_YN omission (vs "N") changes PRICE — e.g. an addClrMtrlList / material that surcharges when ADD_CLR_YN==="Y"? Quote the lines.
+  (c) Verdict: if ADD_CLR_YN is omitted by a client, does the engine default it / is it inert, or can it under-charge on some material/dosu line? State HIGH (money-critical, omission can mis-price), MEDIUM, or LOW (inert), with line evidence.
+
+Q2 — REAM_CNT (cited deob ~L22611). Read L22600-22640 and grep REAM_CNT / REAM_YN / reamCnt. Determine:
+  (a) Is there a product mode where REAM_CNT replaces PRN_CNT as the quantity authority (year/ream -> sheet count), i.e. quantity is derived FROM ream count? Or is REAM_CNT only a derived display ratio gated by REAM_YN==="Y"?
+  (b) Verdict: does omitting REAM_CNT change the quantity used for PRICE in any product mode? HIGH if a real product drives quantity off REAM_CNT; MEDIUM/LOW otherwise. Line evidence.
+
+Q3 — Quantity model A ladder (cited deob L15432-15445): PRN_CNT = MIN_ORD_PRN_CNT + ADD_ORD_PRN_CNT * h. Read that range. Determine:
+  (a) Is this a real, wired component (not dead code)? What product type / item_gbn uses it (look for PDT_VER_SIZE, 떡메, clothes/goods)?
+  (b) Does it feed a real price path (does PRN_CNT from this ladder reach the get_ajax_price_vTmpl request)? Line evidence.
+
+Q4 — Citation reality (VM-3). For EACH of these cited deob ranges/lines, confirm the line exists and the cited symbol is present, or say "not found":
+  L13955-13999 (ORD_INFO builder), L19733 (MAX_PRN_CNT), L22611 (REAM_CNT), L15432-15445 (model A).
+  ALSO: the contract price-engine-additions.md §3 records a metamorphic table with "baseline PRN500 = 6,350,000". Using the deob price-calc path, is a single-line offset2023 baseline plausibly 6,350,000, or is that ~500x a per-unit figure (e.g. ~12,700 scale)? From the deob alone, can you tell whether 6,350,000 is a real engine return or a transcription/scale artifact? If you cannot tell from source, say "undetermined from source".
+
+Q5 — False positives. Does the reconstructed adapter (red-adapter.ts) treat any LEGITIMATE behavior as a defect, or omit any field that is genuinely harmless? In particular: DOSU_COD is intentionally omitted by the adapter (red-adapter.ts ~L569). From the deob, does omitting DOSU_COD have ANY price effect, given PRN_CLR_CNT is also sent? Is the intentional omission safe (money-impact 0)? Line evidence.
+
+Q6 — New findings. Anything else in the deob about these new fields the contract MISSED or got WRONG (e.g. GSELGLV PRN_CNT*10 at L13978, PACK_PRN_CNT conditional at L13984, forced/disabled post-pcs logic keyed on PACK_PRN_CNT)? List with line evidence.
+
+FORMAT: For Q1-Q6 give a one-line VERDICT (HIGH/MED/LOW/CONFIRMED/NOT-FOUND/UNDETERMINED) then 1-3 evidence lines each. Be terse. Cite deob line numbers.
+warning: failed to parse plugin hooks config /Users/innojini/.codex/plugins/cache/omc/oh-my-claudecode/4.14.7/hooks/hooks.json: unknown field `description`, expected `hooks` at line 2 column 15
+warning: failed to parse plugin hooks config /Users/innojini/.codex/plugins/cache/claude-code-warp/warp/2.1.0/hooks/hooks.json: unknown field `description`, expected `hooks` at line 2 column 15
+warning: Skill descriptions were shortened to fit the 2% skills context budget. Codex can still see every skill, but some descriptions are shorter. Disable unused skills or plugins to leave more room for the rest.
+hook: SessionStart
+hook: SessionStart Completed
+hook: UserPromptSubmit
+hook: UserPromptSubmit Failed
+codex
+읽기 전용으로 지정 파일만 확인하겠습니다. 먼저 deob의 해당 구간과 전체 심볼 검색을 병렬로 모아, 계약 문서와 어댑터 주장까지 대조하겠습니다.
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse Failed
+hook: PreToolUse Failed
+hook: PreToolUse Failed
+hook: PreToolUse Failed
+exec
+/bin/zsh -lc "nl -ba _workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js | sed -n '15390,15470p'" in /Users/innojini/Dev/HuniWeb
+exec
+/bin/zsh -lc "nl -ba _workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js | sed -n '13940,14010p'" in /Users/innojini/Dev/HuniWeb
+exec
+/bin/zsh -lc 'rg -n "ADD_CLR_YN|addClrMtrlList|REAM_CNT|REAM_YN|reamCnt|MAX_PRN_CNT|PDT_VER_SIZE|MIN_ORD_PRN_CNT|ADD_ORD_PRN_CNT|GSELGLV|PACK_PRN_CNT|DOSU_COD|PRN_CLR_CNT|get_ajax_price_vTmpl" _workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js' in /Users/innojini/Dev/HuniWeb
+exec
+/bin/zsh -lc "nl -ba _workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js | sed -n '22580,22660p'" in /Users/innojini/Dev/HuniWeb
+ succeeded in 0ms:
+12324:      const o = `${jn}/${t}/product_price/get_ajax_price_vTmpl`;
+13451:      GSELGLV: "SimpleQty"
+13950:                ATTB: n.pdtCode === "GSELGLV" && E.PCS_CD === "DIR_MTR" ? (T.quantityInfo?.prnCnt ?? 0) * 10 : n.pdtCode === "TPTKDFT" && E.PCS_CD === "SUB_MTR" && ["EN001", "EN002", "EN003", "EN004"].includes(E.PCS_DTL_CD) ? (E.ATTB ?? 0) * 10 : E.ATTB,
+13964:            CVR_CLR_CNT: T.dosuInfo?.PRN_CLR_CNT,
+13965:            INN_CLR_CNT: T.inner_dosuInfo?.PRN_CLR_CNT,
+13978:              PRN_CNT: n.pdtCode === "GSELGLV" ? (T.quantityInfo?.prnCnt ?? 0) * 10 : T.quantityInfo?.prnCnt,
+13980:              DOSU_COD: T.dosuInfo?.COD,
+13981:              PRN_CLR_CNT: T.dosuInfo?.PRN_CLR_CNT,
+13982:              ADD_CLR_YN: T.dosuInfo?.ADD_CLR_YN,
+13984:                PACK_PRN_CNT: T.addOptionInfo.PACK_PRN_CNT
+14110:                if (n.pdtCode === "GSELGLV" && E.quantityInfo) {
+14470:      GSELGLV: {
+14626:        ...(c?.sizeSelect.view_yn === "Y" && p && n?.dosuInfo.PRN_CLR_CNT !== 0 ? {
+15424:          s = H(n.options[0]?.PDT_VER_SIZE),
+15428:          r = b(() => n.options.find(l => l.PDT_VER_SIZE === s.value)),
+15432:            const u = l.MIN_ORD_PRN_CNT,
+15433:              c = l.ADD_ORD_PRN_CNT,
+15459:              key: d.PDT_VER_SIZE,
+15462:                active: s.value === d.PDT_VER_SIZE
+15464:              onClick: p => a(d.PDT_VER_SIZE)
+15465:            }, null, 10, $0)), [[c, `${Number(d.PDT_VER_SIZE)}mm<br><span class='sub'>${y(F)("떡메-약")} ${d.PACK_PRN_CNT}${y(F)("떡메-장")}</span>`]])), 128))]), P("div", F0, [P("p", U0, "* " + Y(y(F)("떡메-오차안내")), 1)])]),
+15749:          v = b(() => n.relatedData?.addClrMtrlList?.some(T => T.ADD_CLR_YN === "Y") ?? !1),
+15758:            return n.relatedData?.addClrMtrlList?.find(C => C.MTRL_CD === n.relatedData?.mtrlCd)?.ADD_CLR_YN === "Y";
+15771:              PRN_CLR_CNT: g
+15773:            ADD_CLR_YN: C === "Y" ? "Y" : "N"
+19697:              addClrMtrlList: E.value,
+19700:              packPrnCnt: y(ie).addOptionInfo?.PACK_PRN_CNT,
+19733:            "max-prn-cnt": te.data.pdt_base_info[0].MAX_PRN_CNT,
+19784:            "disabled-add-pcs": [...x.value, ...p.value, ...ye.value, ...(y(ie).addOptionInfo?.PACK_PRN_CNT === 100 ? ["PRT_SID"] : []), ...(["TPBLMEO", "TPBLPST"].includes(s.value) && !se.value ? ["PRT_SID"] : [])],
+19786:            "forced-post-pcs": [...c.value, ...(y(ie).addOptionInfo && y(ie).addOptionInfo.PACK_PRN_CNT !== 100 && y(ie).dosuInfo?.COD === "SID_X" ? ["PRT_SID"] : []), ...(ye.value.length === 0 && s.value === "WBXXXXX" ? ["CPN_DFT"] : [])],
+19796:              packPrnCnt: y(ie).addOptionInfo?.PACK_PRN_CNT
+22611:            return !S?.PRN_CNT || !S?.REAM_CNT ? 0 : S.REAM_CNT / S.PRN_CNT;
+22625:              reamCnt: h(X.PRN_CNT, X.REAM_CNT)
+22629:                reamCnt: h(X.PRN_CNT, X.REAM_CNT)
+22636:                reamCnt: h(K)
+22643:          I = b(() => m.value.find(S => S.PRN_CNT === N.value)?.reamCnt ?? h(N.value)),
+22647:            reamCnt: I.value
+22722:            }, Y(L.PRN_CNT.toLocaleString()) + Y(S.reamYn === "Y" && L.reamCnt ? ` (${L.reamCnt}R)` : ""), 9, LI))), 128))], 512)), [[Ke, N.value]]), P("button", {
+23029:            "ream-yn": M.data.pdt_base_info[0].REAM_YN,
+
+ succeeded in 0ms:
+ 15390	        }), (p, f) => (_(), V(ve, {
+ 15391	          title: y(F)(r.value)
+ 15392	        }, {
+ 15393	          default: fe(() => [ne(ln, {
+ 15394	            options: s.value,
+ 15395	            default: u.value,
+ 15396	            onSelect: d
+ 15397	          }, null, 8, ["options", "default"])]),
+ 15398	          _: 1
+ 15399	        }, 8, ["title"]));
+ 15400	      }
+ 15401	    }),
+ 15402	    k0 = {
+ 15403	      class: "button-radio"
+ 15404	    },
+ 15405	    $0 = ["onClick"],
+ 15406	    F0 = {
+ 15407	      class: "notes"
+ 15408	    },
+ 15409	    U0 = {
+ 15410	      class: "note"
+ 15411	    },
+ 15412	    B0 = Ne(oe({
+ 15413	      __name: "AddOptionSize",
+ 15414	      props: {
+ 15415	        options: {},
+ 15416	        minPrnCntOverride: {}
+ 15417	      },
+ 15418	      emits: ["update", "update:prnCntOptions"],
+ 15419	      setup(e, {
+ 15420	        emit: t
+ 15421	      }) {
+ 15422	        const n = e,
+ 15423	          o = t,
+ 15424	          s = H(n.options[0]?.PDT_VER_SIZE),
+ 15425	          a = l => {
+ 15426	            s.value = l;
+ 15427	          },
+ 15428	          r = b(() => n.options.find(l => l.PDT_VER_SIZE === s.value)),
+ 15429	          i = b(() => {
+ 15430	            const l = r.value;
+ 15431	            if (!l) return [];
+ 15432	            const u = l.MIN_ORD_PRN_CNT,
+ 15433	              c = l.ADD_ORD_PRN_CNT,
+ 15434	              d = n.minPrnCntOverride ?? u,
+ 15435	              p = n.minPrnCntOverride ?? c,
+ 15436	              f = 10,
+ 15437	              v = [];
+ 15438	            for (let h = 0; h < f; h++) v.push({
+ 15439	              PRN_CNT: u + c * h,
+ 15440	              MIN_PRN_CNT: d,
+ 15441	              INC_CNT: c,
+ 15442	              UNIT_PRN_CNT: p,
+ 15443	              DFT_YN: h === 0 ? "Y" : "N"
+ 15444	            });
+ 15445	            return v;
+ 15446	          });
+ 15447	        return U(() => r.value, l => {
+ 15448	          l && (o("update", l), o("update:prnCntOptions", i.value));
+ 15449	        }, {
+ 15450	          immediate: !0
+ 15451	        }), U(() => i.value, l => {
+ 15452	          o("update:prnCntOptions", l);
+ 15453	        }), (l, u) => {
+ 15454	          const c = it("dompurify-html");
+ 15455	          return _(), V(ve, {
+ 15456	            title: y(F)("떡메-사이즈")
+ 15457	          }, {
+ 15458	            default: fe(() => [P("div", k0, [(_(!0), O(q, null, ce(n.options, d => re((_(), O("button", {
+ 15459	              key: d.PDT_VER_SIZE,
+ 15460	              type: "button",
+ 15461	              class: $e({
+ 15462	                active: s.value === d.PDT_VER_SIZE
+ 15463	              }),
+ 15464	              onClick: p => a(d.PDT_VER_SIZE)
+ 15465	            }, null, 10, $0)), [[c, `${Number(d.PDT_VER_SIZE)}mm<br><span class='sub'>${y(F)("떡메-약")} ${d.PACK_PRN_CNT}${y(F)("떡메-장")}</span>`]])), 128))]), P("div", F0, [P("p", U0, "* " + Y(y(F)("떡메-오차안내")), 1)])]),
+ 15466	            _: 1
+ 15467	          }, 8, ["title"]);
+ 15468	        };
+ 15469	      }
+ 15470	    }), [["__scopeId", "data-v-187f9082"]]),
+
+ succeeded in 0ms:
+ 13940	            wrk: C != null ? C + L : C
+ 13941	          };
+ 13942	        }
+ 13943	        function D(T) {
+ 13944	          const g = [];
+ 13945	          T.pcsInfo && Object.values(T.pcsInfo).forEach(S => {
+ 13946	            (S.PCS_CD === "ROU_DFT" ? S.selectedOptions.slice(0, 1) : S.selectedOptions).forEach(E => {
+ 13947	              g.push({
+ 13948	                PCS_COD: E.PCS_CD,
+ 13949	                PCS_DTL_COD: E.PCS_DTL_CD,
+ 13950	                ATTB: n.pdtCode === "GSELGLV" && E.PCS_CD === "DIR_MTR" ? (T.quantityInfo?.prnCnt ?? 0) * 10 : n.pdtCode === "TPTKDFT" && E.PCS_CD === "SUB_MTR" && ["EN001", "EN002", "EN003", "EN004"].includes(E.PCS_DTL_CD) ? (E.ATTB ?? 0) * 10 : E.ATTB,
+ 13951	                ATTB_2: E.ATTB_2,
+ 13952	                ATTB_3: E.ATTB_3
+ 13953	              });
+ 13954	            });
+ 13955	          });
+ 13956	          const C = u.value === "book2025_item" ? [{
+ 13957	            PDT_CD: n.pdtCode,
+ 13958	            CUT_WDT: T.sizeInfo?.cutSize?.width,
+ 13959	            CUT_HGH: T.sizeInfo?.cutSize?.height,
+ 13960	            WRK_WDT: T.sizeInfo?.workSize?.width,
+ 13961	            WRK_HGH: T.sizeInfo?.workSize?.height,
+ 13962	            PRN_CNT: T.quantityInfo?.ordCnt,
+ 13963	            PAGE_CNT: T.quantityInfo?.prnCnt,
+ 13964	            CVR_CLR_CNT: T.dosuInfo?.PRN_CLR_CNT,
+ 13965	            INN_CLR_CNT: T.inner_dosuInfo?.PRN_CLR_CNT,
+ 13966	            CVR_MTRL_CD: T.meterialInfo?.MTRL_CD,
+ 13967	            INN_MTRL_CD: T.inner_meterialInfo?.MTRL_CD
+ 13968	          }] : [(() => {
+ 13969	            const S = m(n.pdtCode, T.sizeInfo?.cutSize?.width, T.sizeInfo?.workSize?.width, T),
+ 13970	              R = m(n.pdtCode, T.sizeInfo?.cutSize?.height, T.sizeInfo?.workSize?.height, T);
+ 13971	            return {
+ 13972	              PDT_CD: Hh(n.pdtCode, T),
+ 13973	              MTRL_CD: T.meterialInfo?.MTRL_CD,
+ 13974	              CUT_WDT: S.cut,
+ 13975	              CUT_HGH: R.cut,
+ 13976	              WRK_WDT: S.wrk,
+ 13977	              WRK_HGH: R.wrk,
+ 13978	              PRN_CNT: n.pdtCode === "GSELGLV" ? (T.quantityInfo?.prnCnt ?? 0) * 10 : T.quantityInfo?.prnCnt,
+ 13979	              ORD_CNT: T.quantityInfo?.ordCnt,
+ 13980	              DOSU_COD: T.dosuInfo?.COD,
+ 13981	              PRN_CLR_CNT: T.dosuInfo?.PRN_CLR_CNT,
+ 13982	              ADD_CLR_YN: T.dosuInfo?.ADD_CLR_YN,
+ 13983	              ...(T.addOptionInfo ? {
+ 13984	                PACK_PRN_CNT: T.addOptionInfo.PACK_PRN_CNT
+ 13985	              } : {}),
+ 13986	              ...(u.value === "clothes2025_item" ? {
+ 13987	                PRINT_TYPE: T.clothesSelectData.printType?.COD
+ 13988	              } : {}),
+ 13989	              ...(n.pdtCode === "GSTRTAG" ? {
+ 13990	                TMPL_IDX: T.shapeInfo?.COD === "large" ? 14 : T.shapeInfo?.COD === "small" ? 11 : void 0
+ 13991	              } : {})
+ 13992	            };
+ 13993	          })()];
+ 13994	          h.value = {
+ 13995	            ORD_INFO: C,
+ 13996	            PCS_INFO: g,
+ 13997	            price_gbn: f.value,
+ 13998	            mb_cust_cod: v?.mb_cust_cod || "10000000"
+ 13999	          };
+ 14000	        }
+ 14001	        const N = Ve(),
+ 14002	          I = Mo(),
+ 14003	          w = ra(),
+ 14004	          A = Te("editorData", null);
+ 14005	        U(() => A, T => {
+ 14006	          if (!T?.editingYn || T.editingYn !== "Y") return;
+ 14007	          if (n.pdtCode.startsWith("ST") && T.type === "KOI") {
+ 14008	            const L = I.getOrderData()?.pcsInfo ?? [],
+ 14009	              G = L.some(K => K.PCS_CD === "SCO_DFT" && K.VIEW_YN === "Y"),
+ 14010	              X = L.some(K => K.PCS_CD === "PRT_WHT" && K.VIEW_YN === "Y");
+
+ succeeded in 0ms:
+ 22580	        default: {},
+ 22581	        relatedData: {},
+ 22582	        canEditOrdCnt: {},
+ 22583	        reamYn: {}
+ 22584	      },
+ 22585	      emits: ["update"],
+ 22586	      setup(e, {
+ 22587	        emit: t
+ 22588	      }) {
+ 22589	        const n = e,
+ 22590	          o = t,
+ 22591	          s = Te("productCode", {
+ 22592	            pdtCode: ""
+ 22593	          }),
+ 22594	          a = Ve(),
+ 22595	          r = [13, 14, 15, 16],
+ 22596	          i = b(() => s.pdtCode === "HLCLSTD" || s.pdtCode === "HLCLWAL"),
+ 22597	          l = H("select"),
+ 22598	          u = () => {
+ 22599	            l.value = l.value === "input" ? "select" : "input", l.value === "select" && (m.value.find(R => R.PRN_CNT === N.value) || (N.value = d.value));
+ 22600	          },
+ 22601	          c = b(() => n.options.find(S => S.DFT_YN === "Y") || n.options[0]),
+ 22602	          d = b(() => c.value?.DFT_PRN_CNT || 1),
+ 22603	          p = b(() => c.value?.DFT_PRN_CNT || 1),
+ 22604	          f = b(() => {
+ 22605	            const S = n.extraOptions;
+ 22606	            return S && S.length > 0 ? S[0].DFT_PRN_CNT || 1 : c.value?.PRN_CNT || 1;
+ 22607	          }),
+ 22608	          v = b(() => {
+ 22609	            if (n.reamYn !== "Y") return 0;
+ 22610	            const S = c.value;
+ 22611	            return !S?.PRN_CNT || !S?.REAM_CNT ? 0 : S.REAM_CNT / S.PRN_CNT;
+ 22612	          }),
+ 22613	          h = (S, R) => {
+ 22614	            if (n.reamYn === "Y") {
+ 22615	              if (R !== void 0) return R;
+ 22616	              if (v.value) return Math.round(S * v.value);
+ 22617	            }
+ 22618	          },
+ 22619	          m = b(() => {
+ 22620	            const S = n.extraOptions || [],
+ 22621	              R = new Set(S.map(X => X.PRN_CNT)),
+ 22622	              E = [];
+ 22623	            for (const X of n.options) R.has(X.PRN_CNT) || (R.add(X.PRN_CNT), E.push({
+ 22624	              PRN_CNT: X.PRN_CNT,
+ 22625	              reamCnt: h(X.PRN_CNT, X.REAM_CNT)
+ 22626	            }));
+ 22627	            const L = [...S.map(X => ({
+ 22628	                PRN_CNT: X.PRN_CNT,
+ 22629	                reamCnt: h(X.PRN_CNT, X.REAM_CNT)
+ 22630	              })), ...E],
+ 22631	              G = new Set(L.map(X => X.PRN_CNT));
+ 22632	            if (L.length < cv) {
+ 22633	              const X = L.length > 0 ? L[L.length - 1].PRN_CNT : d.value ?? p.value;
+ 22634	              for (let K = X + f.value; L.length < cv; K += f.value) G.has(K) || (L.push({
+ 22635	                PRN_CNT: K,
+ 22636	                reamCnt: h(K)
+ 22637	              }), G.add(K));
+ 22638	            }
+ 22639	            return L;
+ 22640	          }),
+ 22641	          D = H(n.default?.ordCnt || (i.value ? r[0] : 1)),
+ 22642	          N = H(n.default?.prnCnt || d.value || p.value),
+ 22643	          I = b(() => m.value.find(S => S.PRN_CNT === N.value)?.reamCnt ?? h(N.value)),
+ 22644	          w = b(() => ({
+ 22645	            ordCnt: D.value,
+ 22646	            prnCnt: N.value,
+ 22647	            reamCnt: I.value
+ 22648	          })),
+ 22649	          A = b(() => (D.value * N.value).toLocaleString()),
+ 22650	          j = b(() => {
+ 22651	            const R = xh[s.pdtCode]?.[n.relatedData?.mtrlCd || ""] ?? Bh[s.pdtCode] ?? (n.relatedData?.dosu === "SID_D" ? 2 : 1);
+ 22652	            return (D.value * R).toLocaleString();
+ 22653	          }),
+ 22654	          B = b(() => a.uploadType.default === "editor"),
+ 22655	          T = b(() => m.value.some(S => S.PRN_CNT === N.value)),
+ 22656	          g = b(() => {
+ 22657	            if (!N.value) return !0;
+ 22658	            if (T.value) return !1;
+ 22659	            if (f.value !== 1) {
+ 22660	              const S = N.value % f.value;
+
+codex
+첫 검색 결과상 `ADD_CLR_YN`은 요청 빌더 외에 도수 선택 컴포넌트에서만 갱신되고, `REAM_CNT`는 수량 UI의 표시/파생값으로 보입니다. 이제 그 컴포넌트들이 실제 어떤 props로 연결되는지와 어댑터의 emit 여부를 확인하겠습니다.
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse Failed
+hook: PreToolUse Failed
+hook: PreToolUse Failed
+hook: PreToolUse Failed
+exec
+/bin/zsh -lc "nl -ba _workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js | sed -n '19670,19810p'" in /Users/innojini/Dev/HuniWeb
+exec
+/bin/zsh -lc "nl -ba _workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js | sed -n '12290,12360p'" in /Users/innojini/Dev/HuniWeb
+exec
+/bin/zsh -lc "nl -ba _workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js | sed -n '15680,15810p'" in /Users/innojini/Dev/HuniWeb
+ succeeded in 0ms:
+ 12290	  var qS = QS();
+ 12291	  const rn = F_(qS),
+ 12292	    jn = "https://www.redprinting.co.kr",
+ 12293	    ut = "https://d3qehkb69dy9zc.cloudfront.net/assets/images",
+ 12294	    is = "https://widget-api.redprinting.co.kr";
+ 12295	  async function wh(e = "ko", t, n) {
+ 12296	    try {
+ 12297	      const o = new URLSearchParams(n ? {
+ 12298	          pdt_cod: t,
+ 12299	          ptt_cod: n
+ 12300	        } : {
+ 12301	          pdt_cod: t
+ 12302	        }).toString(),
+ 12303	        s = `${jn}/${e}/product/get_digital_product_info?${o}`,
+ 12304	        r = await (await fetch(s)).json();
+ 12305	      if (r.retCode !== 200) throw new Error(r.msg);
+ 12306	      const {
+ 12307	        result: i
+ 12308	      } = r;
+ 12309	      return {
+ 12310	        result: i,
+ 12311	        errorMessage: null
+ 12312	      };
+ 12313	    } catch (o) {
+ 12314	      let s = "제품 정보를 가져올 수 없습니다.";
+ 12315	      return o instanceof Error && (console.error("[RedWidgetSDK/ERROR] 제품 정보 가져오기 실패 > ", o), o.message && (s = o.message)), {
+ 12316	        result: null,
+ 12317	        errorMessage: s
+ 12318	      };
+ 12319	    }
+ 12320	  }
+ 12321	  async function ru(e, t = "ko") {
+ 12322	    let n = null;
+ 12323	    try {
+ 12324	      const o = `${jn}/${t}/product_price/get_ajax_price_vTmpl`;
+ 12325	      if (n = await (await fetch(o, {
+ 12326	        method: "POST",
+ 12327	        headers: {
+ 12328	          "Content-Type": "application/json"
+ 12329	        },
+ 12330	        body: JSON.stringify({
+ 12331	          dataJson: e.body
+ 12332	        })
+ 12333	      })).json(), n.retCode !== 200) throw new Error(n.msg);
+ 12334	      return {
+ 12335	        result: n,
+ 12336	        errorMessage: null
+ 12337	      };
+ 12338	    } catch (o) {
+ 12339	      console.error("[RedWidgetSDK/ERROR] 가격 요청 실패 > ", o);
+ 12340	      let s = "가격 요청에 실패했습니다.";
+ 12341	      return o instanceof Error && (s = o.message), {
+ 12342	        result: n,
+ 12343	        errorMessage: s
+ 12344	      };
+ 12345	    }
+ 12346	  }
+ 12347	  async function XS(e) {
+ 12348	    try {
+ 12349	      const {
+ 12350	          lang: t,
+ 12351	          file_name: n
+ 12352	        } = e,
+ 12353	        o = `${jn}/${t}/product/s3GetObjectJson`,
+ 12354	        a = await (await fetch(o, {
+ 12355	          method: "POST",
+ 12356	          body: JSON.stringify({
+ 12357	            file_name: n
+ 12358	          })
+ 12359	        })).json();
+ 12360	      if (!a) throw new Error("해당 파일은 s3에 존재하지 않습니다");
+
+ succeeded in 0ms:
+ 15680	          s = H(n.default ?? "");
+ 15681	        return U(() => s.value, a => {
+ 15682	          o("update", a), o("validate", a ? null : [F("마스터색상-선택필요")]);
+ 15683	        }, {
+ 15684	          immediate: !0
+ 15685	        }), (a, r) => (_(), V(ve, {
+ 15686	          title: y(F)("마스터색상")
+ 15687	        }, {
+ 15688	          default: fe(() => [re(P("select", {
+ 15689	            "onUpdate:modelValue": r[0] || (r[0] = i => s.value = i),
+ 15690	            class: "basic-select",
+ 15691	            name: "master-color"
+ 15692	          }, [P("option", Z0, Y(y(F)("마스터색상-선택안함")), 1), (_(!0), O(q, null, ce(a.options, i => (_(), O("option", {
+ 15693	            key: i.value,
+ 15694	            value: i.value
+ 15695	          }, Y(i.name), 9, J0))), 128))], 512), [[Ke, s.value]])]),
+ 15696	          _: 1
+ 15697	        }, 8, ["title"]));
+ 15698	      }
+ 15699	    }),
+ 15700	    t1 = ["disabled"],
+ 15701	    n1 = ["value", "disabled"],
+ 15702	    o1 = ["disabled"],
+ 15703	    s1 = {
+ 15704	      value: ""
+ 15705	    },
+ 15706	    a1 = ["disabled"],
+ 15707	    i1 = {
+ 15708	      key: 0,
+ 15709	      class: "note",
+ 15710	      style: {
+ 15711	        "margin-top": "10px"
+ 15712	      }
+ 15713	    },
+ 15714	    Du = Ne(oe({
+ 15715	      __name: "Dosu",
+ 15716	      props: {
+ 15717	        options: {},
+ 15718	        default: {},
+ 15719	        relatedData: {}
+ 15720	      },
+ 15721	      emits: ["update"],
+ 15722	      setup(e, {
+ 15723	        emit: t
+ 15724	      }) {
+ 15725	        const n = e,
+ 15726	          o = t,
+ 15727	          s = Te("callbacks", {}),
+ 15728	          a = Te("productCode", {
+ 15729	            pdtCode: ""
+ 15730	          }),
+ 15731	          r = Ve(),
+ 15732	          i = H(n.default?.COD || n.options[0].COD),
+ 15733	          l = b(() => n.options.find(g => g.COD === i.value)),
+ 15734	          u = b(() => a.pdtCode === "GSCDPOP" ? "radio" : "select"),
+ 15735	          c = b(() => a.pdtCode === "GSCDPOP" ? -1 : 0),
+ 15736	          d = {
+ 15737	            GSCDPOP: "인풋카드",
+ 15738	            TPBLMEO: "낱장 인쇄 (메모하는 면 인쇄)"
+ 15739	          },
+ 15740	          p = {
+ 15741	            GSCDPOP: {
+ 15742	              SID_X: F("인쇄안함"),
+ 15743	              SID_D: F("인쇄함")
+ 15744	            }
+ 15745	          },
+ 15746	          f = () => {
+ 15747	            s?.onReset && s.onReset("dosu");
+ 15748	          },
+ 15749	          v = b(() => n.relatedData?.addClrMtrlList?.some(T => T.ADD_CLR_YN === "Y") ?? !1),
+ 15750	          h = b(() => {
+ 15751	            if (i.value === "SID_X" || n.relatedData?.hasPrtWht) return !1;
+ 15752	            const T = n.relatedData?.size;
+ 15753	            if (T) {
+ 15754	              const C = Math.max(T.width, T.height),
+ 15755	                S = Math.min(T.width, T.height);
+ 15756	              if (C > 420 || S > 297) return !1;
+ 15757	            }
+ 15758	            return n.relatedData?.addClrMtrlList?.find(C => C.MTRL_CD === n.relatedData?.mtrlCd)?.ADD_CLR_YN === "Y";
+ 15759	          }),
+ 15760	          m = H("");
+ 15761	        U(() => h.value, T => {
+ 15762	          T || (m.value = "");
+ 15763	        });
+ 15764	        const D = b(() => m.value !== "Y" ? null : i.value === "SID_S" ? 6 : i.value === "SID_D" ? 12 : null);
+ 15765	        U(() => [l.value, D.value, m.value], ([T, g, C]) => {
+ 15766	          if (!T) return;
+ 15767	          r.isAfterEdit() && f();
+ 15768	          const S = {
+ 15769	            ...T,
+ 15770	            ...(g !== null ? {
+ 15771	              PRN_CLR_CNT: g
+ 15772	            } : {}),
+ 15773	            ADD_CLR_YN: C === "Y" ? "Y" : "N"
+ 15774	          };
+ 15775	          o("update", S);
+ 15776	        }, {
+ 15777	          immediate: !0
+ 15778	        });
+ 15779	        const N = ["SXHTK013", "SXHTK014", "SXHTK015"],
+ 15780	          I = b(() => !!(N.includes(n.relatedData?.mtrlCd || "") || n.relatedData?.mtrlDosu === "SID_S" || w.value));
+ 15781	        U(() => n.relatedData?.mtrlCd, T => {
+ 15782	          T && N.includes(T) && (i.value = "SID_S");
+ 15783	        });
+ 15784	        const w = b(() => n.relatedData?.packPrnCnt === 100),
+ 15785	          A = b(() => !!n.relatedData?.tpblSidSOnly),
+ 15786	          j = b(() => a.pdtCode === "TPBLPST");
+ 15787	        U(() => A.value, T => {
+ 15788	          T && (i.value = "SID_S");
+ 15789	        }, {
+ 15790	          immediate: !0
+ 15791	        }), U(() => j.value, T => {
+ 15792	          T && (i.value = "SID_X");
+ 15793	        }, {
+ 15794	          immediate: !0
+ 15795	        });
+ 15796	        const B = b(() => r.uploadType.default === "editor" && a.pdtCode === "TPCLECO" || n.relatedData?.mtrlDosu === "SID_D");
+ 15797	        return U(() => r.uploadType.default, T => {
+ 15798	          T === "editor" && a.pdtCode === "TPCLECO" && (i.value = "SID_D");
+ 15799	        }, {
+ 15800	          immediate: !0
+ 15801	        }), U(() => w.value, T => {
+ 15802	          T && (i.value = "SID_S");
+ 15803	        }, {
+ 15804	          immediate: !0
+ 15805	        }), U(() => n.relatedData?.mtrlDosu, T => {
+ 15806	          if (T) {
+ 15807	            if (T === "SID_S") return i.value = "SID_S";
+ 15808	            if (T === "SID_D") return i.value = "SID_D";
+ 15809	          }
+ 15810	        }, {
+
+ succeeded in 0ms:
+ 19670	          }, null, 8, ["options", "min-prn-cnt-override"])) : J("", !0), s.value === "BTALLGT" || s.value === "BTALEGG" || s.value === "BTFOTOT" ? (_(), V(H0, {
+ 19671	            key: 8,
+ 19672	            code: s.value,
+ 19673	            onUpdate: ue[9] || (ue[9] = De => W("btnType")(De))
+ 19674	          }, null, 8, ["code"])) : J("", !0), s.value === "STTTDFT" ? (_(), V(X0, {
+ 19675	            key: 9,
+ 19676	            onUpdate: I
+ 19677	          })) : J("", !0), re((_(), V(jo(y(L)), {
+ 19678	            options: E.value,
+ 19679	            default: y(_e)?.meterialInfo,
+ 19680	            "reset-after-edit": y($h).has(te.data.pdt_base_info[0].PDT_CD) && y(ot).isAfterEdit(),
+ 19681	            "show-extra": te.widgetAttr.able_paper_yn === "Y",
+ 19682	            "related-data": {
+ 19683	              POST_PCS: qe.value,
+ 19684	              filters: xe.value,
+ 19685	              sizeInfo: y(ie).sizeInfo,
+ 19686	              forcedMtrlCd: S.value,
+ 19687	              lockedMtrl: S.value !== null,
+ 19688	              notice: R.value
+ 19689	            },
+ 19690	            onUpdate: ue[10] || (ue[10] = De => y(Oe)("meterialInfo")(De))
+ 19691	          }, null, 40, ["options", "default", "reset-after-edit", "show-extra", "related-data"])), [[Lt, a.value.paperSelect.view_yn === "Y"]]), re(ne(Du, {
+ 19692	            options: te.data.pdt_dosu_info,
+ 19693	            default: y(_e)?.dosuInfo,
+ 19694	            "related-data": {
+ 19695	              mtrlCd: y(ie).meterialInfo?.MTRL_CD,
+ 19696	              mtrlDosu: y(ie).meterialInfo?.SID_GBN,
+ 19697	              addClrMtrlList: E.value,
+ 19698	              hasPrtWht: $.value,
+ 19699	              size: y(ie).sizeInfo?.cutSize,
+ 19700	              packPrnCnt: y(ie).addOptionInfo?.PACK_PRN_CNT,
+ 19701	              tpblSidSOnly: ["TPBLMEO", "TPBLPST"].includes(s.value) && !se.value
+ 19702	            },
+ 19703	            onUpdate: ue[11] || (ue[11] = De => y(Oe)("dosuInfo")(De))
+ 19704	          }, null, 8, ["options", "default", "related-data"]), [[Lt, a.value.dosuSelect.view_yn === "Y" && te.data.pdt_dosu_info]]), te.data.option_info?.thickness_info ? (_(), V(l1, {
+ 19705	            key: 10,
+ 19706	            options: te.data.option_info.thickness_info,
+ 19707	            onUpdate: ue[12] || (ue[12] = De => W("thickness")(De))
+ 19708	          }, null, 8, ["options"])) : J("", !0), re(ne(yi, {
+ 19709	            options: be.value,
+ 19710	            "base-info": te.data.pdt_base_info[0],
+ 19711	            default: y(_e)?.size,
+ 19712	            "related-data": {
+ 19713	              shape: y(ie).shapeInfo?.COD,
+ 19714	              sizeFromPostPcs: te.data.pdt_base_info[0].SIZE_PCS_USE ? k.sizeFromPostPcs : null,
+ 19715	              pageDirection: y(ie).pageDirection?.COD,
+ 19716	              mtrlPttCd: y(ie).meterialInfo?.PTT_CD ?? "",
+ 19717	              activePostPcs: yt.value,
+ 19718	              activePcsDtl: Nt.value
+ 19719	            },
+ 19720	            onUpdate: ue[13] || (ue[13] = De => y(Oe)("sizeInfo")(De)),
+ 19721	            onValidate: ue[14] || (ue[14] = De => y(Oe)("validation")(De)),
+ 19722	            "onUpdate:shape": ue[15] || (ue[15] = De => W("shapeFromSize")(De))
+ 19723	          }, null, 8, ["options", "base-info", "default", "related-data"]), [[Lt, a.value.sizeSelect.view_yn === "Y"]]), M.value && y(ot).uploadType.default === "editor" && !y(Fh).has(s.value) ? (_(), V(U1, {
+ 19724	            key: 11,
+ 19725	            onUpdate: ue[16] || (ue[16] = De => y(Oe)("calendarInfo")(De))
+ 19726	          })) : J("", !0), a.value.quantityGroup.view_yn === "Y" ? (_(), V(jo(ht.value), {
+ 19727	            key: 12,
+ 19728	            "can-edit-ord-cnt": Ze.value,
+ 19729	            options: te.data.pdt_add_option_info?.length && le.value.length ? le.value : me.value,
+ 19730	            default: y(_e)?.quantityInfo,
+ 19731	            "default-set-cnt": te.data.pdt_base_info[0].SET_CNT,
+ 19732	            unit: te.data.pdt_base_info[0].PDT_UNIT,
+ 19733	            "max-prn-cnt": te.data.pdt_base_info[0].MAX_PRN_CNT,
+ 19734	            "extra-prn-cnt-options": te.data.pdt_add_option_info?.length ? void 0 : te.data.pdt_prn_cnt_info_add,
+ 19735	            "related-data": {
+ 19736	              dosu: y(ie).dosuInfo?.COD,
+ 19737	              size: y(ie).sizeInfo?.DIV_NM,
+ 19738	              divSeq: y(ie).sizeInfo?.DIV_SEQ,
+ 19739	              mtrlCd: y(ie).meterialInfo?.MTRL_CD,
+ 19740	              shape: y(ie).shapeInfo?.COD
+ 19741	            },
+ 19742	            "express-shipping": pe.value,
+ 19743	            onUpdate: ue[17] || (ue[17] = De => y(Oe)("quantityInfo")(De))
+ 19744	          }, null, 40, ["can-edit-ord-cnt", "options", "default", "default-set-cnt", "unit", "max-prn-cnt", "extra-prn-cnt-options", "related-data", "express-shipping"])) : J("", !0), a.value.subjectGroup.view_yn === "Y" ? (_(), V(Su, {
+ 19745	            key: 13,
+ 19746	            "is-biz-mem": y(A)?.bsn_yn === "Y",
+ 19747	            onUpdate: ue[18] || (ue[18] = De => y(Oe)("etcInfo")(De))
+ 19748	          }, null, 8, ["is-biz-mem"])) : J("", !0), v.value.length ? (_(), V(e1, {
+ 19749	            key: 14,
+ 19750	            options: v.value,
+ 19751	            onUpdate: m,
+ 19752	            onValidate: ue[19] || (ue[19] = De => y(Oe)("validation")(De))
+ 19753	          }, null, 8, ["options"])) : J("", !0), ne(Di, {
+ 19754	            options: Q.value.postPcs.hidden,
+ 19755	            "related-data": {
+ 19756	              shape: y(ie).shapeInfo?.COD || k.shapeFromSize,
+ 19757	              mtrlCd: y(ie).meterialInfo?.MTRL_CD,
+ 19758	              sizeInfo: y(ie).sizeInfo,
+ 19759	              thickness: k.thickness,
+ 19760	              orderQty: Dt.value,
+ 19761	              dosu: y(ie).dosuInfo?.COD,
+ 19762	              btnType: k.btnType,
+ 19763	              mtrlLinkedPcs: te.data.pdt_base_info[0].SIZE_PCS_USE,
+ 19764	              paperLayout: K.value,
+ 19765	              foldingWay: de.value,
+ 19766	              prcatckShape: s.value === "PRCATCK" ? T.value : void 0,
+ 19767	              prcatckPosition: s.value === "PRCATCK" ? g.value : void 0
+ 19768	            },
+ 19769	            "disabled-opts": Q.value.disabled,
+ 19770	            onUpdate: ue[20] || (ue[20] = De => w(De))
+ 19771	          }, null, 8, ["options", "related-data", "disabled-opts"]), ne(Si, {
+ 19772	            options: [...(Array.isArray(Q.value.postPcs.visible) ? Q.value.postPcs.visible : []), ...(Array.isArray(ft.value) ? ft.value : [])],
+ 19773	            "related-data": {
+ 19774	              mtrlCd: y(ie).meterialInfo?.MTRL_CD,
+ 19775	              mtrlPttCd: y(ie).meterialInfo?.PTT_CD,
+ 19776	              sizeInfo: y(ie).sizeInfo,
+ 19777	              orderQty: Dt.value,
+ 19778	              dosuInfo: y(ie).dosuInfo,
+ 19779	              shape: y(ie).shapeInfo?.COD,
+ 19780	              cuttingType: s.value === "STTTDFT" ? u.value : void 0
+ 19781	            },
+ 19782	            "attb-opts": te.data.pdt_add_info[1],
+ 19783	            "disabled-opts": f.value ?? Q.value.disabled,
+ 19784	            "disabled-add-pcs": [...x.value, ...p.value, ...ye.value, ...(y(ie).addOptionInfo?.PACK_PRN_CNT === 100 ? ["PRT_SID"] : []), ...(["TPBLMEO", "TPBLPST"].includes(s.value) && !se.value ? ["PRT_SID"] : [])],
+ 19785	            "hidden-post-pcs": s.value === "PHPLEDT" ? ["SCO_DFT"] : void 0,
+ 19786	            "forced-post-pcs": [...c.value, ...(y(ie).addOptionInfo && y(ie).addOptionInfo.PACK_PRN_CNT !== 100 && y(ie).dosuInfo?.COD === "SID_X" ? ["PRT_SID"] : []), ...(ye.value.length === 0 && s.value === "WBXXXXX" ? ["CPN_DFT"] : [])],
+ 19787	            onUpdate: ue[21] || (ue[21] = De => y(Ue)("visible")(De))
+ 19788	          }, null, 8, ["options", "related-data", "attb-opts", "disabled-opts", "disabled-add-pcs", "hidden-post-pcs", "forced-post-pcs"]), ne(tv, {
+ 19789	            options: Q.value.sub,
+ 19790	            "related-data": {
+ 19791	              orderQty: Dt.value,
+ 19792	              sizeInfo: y(ie).sizeInfo,
+ 19793	              mtrlCd: y(ie).meterialInfo?.MTRL_CD,
+ 19794	              pcsCodeForSize: te.data.pdt_base_info[0].SIZE_PCS_USE,
+ 19795	              setData: y(ie)?.setData,
+ 19796	              packPrnCnt: y(ie).addOptionInfo?.PACK_PRN_CNT
+ 19797	            },
+ 19798	            "disabled-sub-mtrl": d.value,
+ 19799	            onUpdate: ue[22] || (ue[22] = De => y(Me)("SUB_MTR")(De)),
+ 19800	            "onUpdate:size": ue[23] || (ue[23] = De => W("sizeFromPostPcs")(De))
+ 19801	          }, null, 8, ["options", "related-data", "disabled-sub-mtrl"]), te.widgetAttr.order_yn !== "N" && (y(ie).dosuInfo?.COD !== "SID_X" || s.value === "STSKDFT" || ge.value) && !(s.value === "STSKDFT" && y(ie).shapeInfo?.COD && y(ie).shapeInfo.COD !== "FR") ? (_(), V(us, {
+ 19802	            key: 15,
+ 19803	            "upload-config": y(ae),
+ 19804	            "show-extra": te.widgetAttr.useTemplateDownload === "Y" && te.widgetAttr.usePDF === "Y",
+ 19805	            "related-data": {
+ 19806	              size: y(ie).sizeInfo,
+ 19807	              hasPdfOnlyPostPcs: Z.value,
+ 19808	              shape: y(ie).shapeInfo?.COD
+ 19809	            },
+ 19810	            "editor-notes": s.value === "STTBDFT" ? [y(F)("STTBDFT-업로드안내")] : ["STTHUSR", "STPADIY"].includes(s.value) ? [y(F)("자유형스티커-에디터안내1"), y(F)("자유형스티커-에디터안내2")] : void 0,
+
+exec
+/bin/zsh -lc "nl -ba _workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts | sed -n '520,610p' && nl -ba _workspace/huni-widget/04_build/src/adapters/red/red-types.ts | sed -n '1,220p' && nl -ba _workspace/huni-widget/04_build/src/contract/price.ts | sed -n '1,220p'" in /Users/innojini/Dev/HuniWeb
+ succeeded in 0ms:
+   520	  const base = data.pdt_base_info[0];
+   521	
+   522	  // S6: 일부 상품(옵셋 캘린더)은 pdt_disable_pcs_info 가 null(빈 비활성 규칙). null→[] 평탄화.
+   523	  const disableRules: DisableRule[] = (data.pdt_disable_pcs_info ?? []).map((r) => ({
+   524	    triggerValueId: r.MTRL_CD,
+   525	    // PCS_DTL_CD null = 그룹 전체 비활성. 그룹 id 는 mapPcsGroups 와 동일 규칙(PCS_ prefix).
+   526	    disablesGroupId: r.PCS_DTL_CD === null ? `PCS_${r.PCS_CD}` : undefined,
+   527	    disablesValueId: r.PCS_DTL_CD !== null ? r.PCS_DTL_CD : undefined,
+   528	  }));
+   529	
+   530	  const sizeRules: SizeRule[] = data.pdt_size_info.map((s) => ({
+   531	    valueId: `SIZE_${s.DIV_SEQ}`,
+   532	    cutW: num(s.CUT_WDT),
+   533	    cutH: num(s.CUT_HGH),
+   534	    workW: num(s.WRK_WDT),
+   535	    workH: num(s.WRK_HGH),
+   536	  }));
+   537	
+   538	  return {
+   539	    disableRules,
+   540	    // P4: VIEW_YN 동적 add/remove 룰. 일반 상품은 product_info 에 명시 룰 부재(Red 런타임 v()) → 빈 배열.
+   541	    //  Wave C 의류: PTP_SLK 선택 시 multiSize/pantone 토글 룰을 어댑터(apparel.ts)가 산출해 주입.
+   542	    visibilityRules: extraVisibilityRules ?? [],
+   543	    // UI 그룹(GRP_QUANTITY/GRP_INNER_PAGE)과 동일 소스 — 그룹은 표면, 이 객체는 검증(clamp/snap).
+   544	    quantity: {
+   545	      default: buildQuantityRule(data),
+   546	    },
+   547	    sizeRules,
+   548	    base: {
+   549	      unit: base?.PDT_UNIT ?? '개',
+   550	      cutMargin: num(base?.CUT_MRG),
+   551	      minCutW: num(base?.MIN_CUT_WDT),
+   552	      minCutH: num(base?.MIN_CUT_HGH),
+   553	      maxCutW: num(base?.MAX_CUT_WDT),
+   554	      maxCutH: num(base?.MAX_CUT_HGH),
+   555	      nonStandardAllowed: base?.NO_STD_ABL_YN === 'Y',
+   556	    },
+   557	  };
+   558	}
+   559	
+   560	// ── Price 직렬화: NormalizedPriceRequest → Red reqBody (data-adapter §2.4, S5 §2.3) ──
+   561	// [HARD] quantity↔ORD_CNT / printCount↔PRN_CNT 분리. 위젯은 두 수치를 각자 echo만,
+   562	//  ORD_INFO 직렬화는 어댑터(서버) 책임(INV-1). printCount 미전달(S0~S4) → PRN_CNT=1(하위호환).
+   563	// [S5 실측] tmpl/tiered_price 는 ORD_INFO[0]에 ORD_CNT+PRN_CNT 둘 다 있어야 PRICE>0(둘 다 누락 시 침묵 0).
+   564	// [HARD] 출력 shape = 캡처 실측 reqBody(captures/b1_AIPPCUT.json) field-for-field 정합:
+   565	//  `{dataJson:{ORD_INFO:[{...}], PCS_INFO, price_gbn, mb_cust_cod}}`.
+   566	//  - dataJson 래퍼 + mb_cust_cod(customerTier??'10000000') 필수 — 누락 시 실 Red 거부/침묵0(F-2).
+   567	//  - 책자(inner side 보유 → materials.inner/colorCounts.inner 존재)는 표지/내지 분리필드(CVR_/INN_*)
+   568	//    + PAGE_CNT 출력(data-adapter.md:80-86). 단일면 상품은 undefined → JSON 직렬화 시 생략.
+   569	//  - DOSU_COD 는 의도 omit(OPEN-1) — PRN_CLR_CNT 가 도수 가격의미 운반(테스트 입증, 회귀 가드 유지).
+   570	export function serializeRedPriceRequest(req: NormalizedPriceRequest): RedPriceReqBody {
+   571	  const d = req.dimensions[0];
+   572	  // D-L2: 책자 판정 권위 = itemGroup(book2025 분류, 명시값). Red 는 item_gbn 으로 스키마 분기(mod_05:1859).
+   573	  //  itemGroup 미전달(레거시) 시에만 inner/pageCount 형상 휴리스틱 fallback(취약성 격리).
+   574	  const isBook =
+   575	    req.itemGroup != null
+   576	      ? req.itemGroup.startsWith('book2025')
+   577	      : req.materials.inner !== undefined ||
+   578	        req.colorCounts.inner !== undefined ||
+   579	        req.pageCount !== undefined;
+   580	  const ord: RedPriceReqOrdInfo = {
+   581	    PDT_CD: req.productCode,
+   582	    CUT_WDT: d?.cutW ?? 0,
+   583	    CUT_HGH: d?.cutH ?? 0,
+   584	    WRK_WDT: d?.workW ?? 0,
+   585	    WRK_HGH: d?.workH ?? 0,
+   586	    ORD_CNT: req.quantity, // 주문건수(굿즈=디자인 수)
+   587	    PRN_CNT: req.printCount ?? 1, // 인쇄수량(미전달 상품군 = 1, 책자/디지털 하위호환)
+   588	    PRN_CLR_CNT: req.colorCounts.default,
+   589	    MTRL_CD: req.materials.default,
+   590	  };
+   591	  if (isBook) {
+   592	    // 책자 표지/내지 분리 (data-adapter.md:81-84). 표지=default, 내지=inner.
+   593	    ord.PAGE_CNT = req.pageCount;
+   594	    ord.CVR_CLR_CNT = req.colorCounts.default;
+   595	    ord.INN_CLR_CNT = req.colorCounts.inner;
+   596	    ord.CVR_MTRL_CD = req.materials.default;
+   597	    ord.INN_MTRL_CD = req.materials.inner;
+   598	  }
+   599	  return {
+   600	    dataJson: {
+   601	      ORD_INFO: [ord],
+   602	      PCS_INFO: req.selectedFinishes.map((f) => {
+   603	        // PCS_<CD> 그룹 id 에서 Red PCS_COD 복원(어댑터 내부 역매핑).
+   604	        //  L-2: 복합 2축 그룹은 store 가 base groupId(PCS_COT_DFT) + 재합성 valueId(coating+side)로 emit.
+   605	        const pcsCod = f.groupId.startsWith('PCS_') ? f.groupId.slice(4) : f.groupId;
+   606	        // L-1 ATTB(QUANTITY_ECHO_PCS): String(req.quantity) echo + ATTB_2/3 빈슬롯.
+   607	        //  [W1-c] mod_07:2586/2467 인용은 deob 부존재(상단 set 정의 주석 참조). ATTB scaling 미검증 —
+   608	        //  qty=1 캡처 우연일치, qty>1 재캡처/컨버전 게이트(D-1) 전까지 값 동작 보존.
+   609	        //  Red 코드지식은 어댑터에만(INV-1) — 위젯/store 는 수량을 ATTB 로 계산하지 않음.
+   610	        const isQuantityEchoPcs = QUANTITY_ECHO_PCS.has(pcsCod);
+     1	// Red 원시 shape 타입 — [HARD] Red 고유 필드명(PCS_COD/MTRL_CD/ORD_INFO/price_gbn...)은
+     2	// 오직 이 파일 + red-adapter.ts 내부에만 존재한다. 위젯/계약은 절대 이 타입을 import 하지 않는다.
+     3	// 근거: 01_reverse/captures/*.json 실측 shape.
+     4	
+     5	export interface RedDigitalProductResponse {
+     6	  retCode: number;
+     7	  msg: string;
+     8	  result: {
+     9	    product_option: { option: RedOption };
+    10	    product_data: RedProductData;
+    11	    member_info: RedMemberInfo;
+    12	  };
+    13	}
+    14	
+    15	export interface RedOption {
+    16	  pdt_cod: string;
+    17	  pdt_nme: string;
+    18	  item_gbn: string;
+    19	  price_gbn: string;
+    20	  order_yn: string;
+    21	  useKoiEditor: string; // "Y" | "N"
+    22	  useRPEditor: string;
+    23	  usePDF: string;
+    24	  [k: string]: unknown;
+    25	}
+    26	
+    27	export interface RedBaseInfo {
+    28	  PDT_CD: string;
+    29	  PDT_UNIT: string;
+    30	  MIN_CUT_WDT: string;
+    31	  MIN_CUT_HGH: string;
+    32	  MAX_CUT_WDT: string;
+    33	  MAX_CUT_HGH: string;
+    34	  CUT_MRG: string;
+    35	  NO_STD_ABL_YN: string; // "Y"=비표준 허용, "N"=불가
+    36	  FIR_CNT: number;
+    37	  INC: number;
+    38	  INC_STEP: number;
+    39	}
+    40	
+    41	export interface RedMtrlInfo {
+    42	  MTRL_CD: string;
+    43	  MTRL_NM?: string;
+    44	  PTT_NME?: string;
+    45	  WGT_COD?: string;
+    46	  HIDE_YN: string;
+    47	  CLR_HEX_CD?: string;
+    48	}
+    49	
+    50	export interface RedSizeInfo {
+    51	  DIV_NM: string;
+    52	  DIV_SEQ: number;
+    53	  WRK_WDT: string;
+    54	  WRK_HGH: string;
+    55	  CUT_WDT: string;
+    56	  CUT_HGH: string;
+    57	  DFT_YN: string;
+    58	  HIDE_YN: string;
+    59	  PDT_SIZE_INFO?: string;
+    60	}
+    61	
+    62	export interface RedDosuInfo {
+    63	  COD: string;
+    64	  COD_NME: string;
+    65	  PRN_CLR_CNT: number;
+    66	}
+    67	
+    68	export interface RedPcsInfo {
+    69	  PCS_CD: string;
+    70	  PCS_GRP_NM: string;
+    71	  PCS_DTL_CD: string;
+    72	  PCS_DTL_NM: string;
+    73	  VIEW_YN: string; // "Y" | "N"
+    74	  ESN_YN: string; // "Y" | "N"
+    75	  // L-1 속성칩 shape (b): RIN_DFT 류는 선택 옵션 그리드가 아니라 가격측 ATTB 단일 echo
+    76	  //  (ATTB_CD=속성코드 예 RIN_SLV, ATTB_NM=속성명 예 은색). major_attbchip_HLCLWAL.json 실측.
+    77	  //  shape (a) FOI/박은 ATTB_CD 부재(선택 그리드) — 어댑터가 둘을 구분.
+    78	  ATTB_CD?: string | null;
+    79	  ATTB_NM?: string | null;
+    80	  // W2-a discriminator(SUB_MTR 이중의미): material-multi(다종 자재선택)는 엔트리별 *비어있지 않은*
+    81	  //  MTRL_CD 를 갖는다(ACPDSTD SXAPR005 등 12종). 단일 add-on(AIPPCUT 에코백)은 MTRL_CD=""(빈값).
+    82	  //  근거: fixtures/product_ACPDSTD.json(MTRL_CD 12종 distinct) vs product_AIPPCUT.json(MTRL_CD 전부 "").
+    83	  MTRL_CD?: string | null;
+    84	}
+    85	
+    86	export interface RedDisablePcs {
+    87	  MTRL_CD: string;
+    88	  PCS_CD: string;
+    89	  PCS_DTL_CD: string | null;
+    90	}
+    91	
+    92	export interface RedPrnCntInfo {
+    93	  DFT_PRN_CNT: number;
+    94	  FIR_CNT: number | null;
+    95	  INC_CNT: number | null;
+    96	  INC_STEP: number | null;
+    97	  MIN_PRN_CNT: number | null;
+    98	  MIN_INN_PAGE: number | null;
+    99	  MAX_INN_PAGE: number | null;
+   100	  STEP_INN_PAGE: number | null;
+   101	  // S6 옵셋 캘린더(offset2023_price): 폐쇄 인쇄수량 래더. FIR/INC/MIN 이 모두 null 이고
+   102	  //  PRN_CNT(행별 고정 수량값) + DFT_YN 으로 enum 을 구성한다(자유 counter 가 아닌 select 래더).
+   103	  PRN_CNT?: number | string;
+   104	  DFT_YN?: string;
+   105	}
+   106	
+   107	export interface RedProductData {
+   108	  pdt_base_info: RedBaseInfo[];
+   109	  pdt_mtrl_info: RedMtrlInfo[];
+   110	  pdt_size_info: RedSizeInfo[];
+   111	  pdt_dosu_info: RedDosuInfo[];
+   112	  pdt_dosu_bnc_info: Array<{ PRN_CLR_CNT: number; COD: string; COD_NME: string }>;
+   113	  pdt_pcs_info: RedPcsInfo[];
+   114	  // S6: 옵셋 캘린더는 null 로 옴(빈 비활성 규칙). 어댑터가 null→[] 평탄화.
+   115	  pdt_disable_pcs_info: RedDisablePcs[] | null;
+   116	  pdt_prn_cnt_info: RedPrnCntInfo[];
+   117	  inner_pdt_mtrl_info?: RedMtrlInfo[];
+   118	  inner_pdt_dosu_info?: RedDosuInfo[];
+   119	  // Wave C 의류(clothes2025): apparel_info 6블록(print_type/print_area/apparel_color/size_info/size_color_info/pantone_color).
+   120	  //  타입은 apparel.ts 의 ApparelInfo. red-types 는 존재만 선언(상세는 apparel 모듈).
+   121	  apparel_info?: unknown;
+   122	}
+   123	
+   124	export interface RedMemberInfo {
+   125	  mb_cust_cod: string;
+   126	}
+   127	
+   128	// 가격 응답 (price_q*.json 실측)
+   129	export interface RedPriceLine {
+   130	  PCS_CD: string;
+   131	  PCS_DTL_CD: string;
+   132	  PRICE: number;
+   133	  PRICE_VAT: number;
+   134	  PRICE_MALL: number;
+   135	  PRICE_MALL_VAT: number;
+   136	  ORG_PRICE: number;
+   137	  ORG_PRICE_VAT: number;
+   138	}
+   139	
+   140	export interface RedPriceResponse {
+   141	  retCode: number;
+   142	  result: RedPriceLine[];
+   143	  result_sum: {
+   144	    PRICE: number;
+   145	    PRICE_VAT: number;
+   146	    PRICE_MALL: number;
+   147	    PRICE_MALL_VAT: number;
+   148	    ORG_PRICE: number;
+   149	    ORG_PRICE_VAT: number;
+   150	  };
+   151	  // result_log 는 책자 응답에만 존재 — 디지털인쇄(get_ajax_price_vTmpl) 캡처에는 부재. optional.
+   152	  result_log?: { list: unknown[] };
+   153	  book_info?: { DLVR_AMT: number };
+   154	}
+   155	
+   156	// presigned 응답 (presigned_response_sample.json 실측)
+   157	export interface RedPresignedResponse {
+   158	  filename: string;
+   159	  presignedURL: string;
+   160	}
+   161	
+   162	// ── 가격 요청 reqBody shape (get_ajax_price* 실측, s5_pouch_GSPUFBC/s3_rp_GSTGMIC 캡처) ──
+   163	// [HARD] ORD_CNT/PRN_CNT/ORD_INFO/price_gbn 등 Red 고유 필드는 이 파일 + red-adapter.ts 안에만.
+   164	// [S5 실측] tmpl/tiered_price 서버는 ORD_INFO[0]에 ORD_CNT(주문건수) + PRN_CNT(인쇄수량) 둘 다 요구.
+   165	//  둘 중 하나라도 없거나 0이면 PRICE=0(침묵). 캡처 incompleteReqBody/completeReqBody 근거.
+   166	export interface RedPriceReqOrdInfo {
+   167	  PDT_CD: string;
+   168	  CUT_WDT: number;
+   169	  CUT_HGH: number;
+   170	  WRK_WDT: number;
+   171	  WRK_HGH: number;
+   172	  ORD_CNT: number; // 주문건수 (정규화 quantity)
+   173	  PRN_CNT: number; // 인쇄수량 (정규화 printCount, 미전달 시 1)
+   174	  PRN_CLR_CNT?: number;
+   175	  MTRL_CD?: string;
+   176	  DOSU_COD?: string;
+   177	  // ── 책자 분리필드 (data-adapter.md:80-86) — 표지/내지 색·자재 분리 + 면수.
+   178	  //  단일면 상품엔 부재(undefined → JSON 직렬화 시 생략). 책자(inner side 보유)에서만 출력.
+   179	  PAGE_CNT?: number;
+   180	  CVR_CLR_CNT?: number;
+   181	  INN_CLR_CNT?: number;
+   182	  CVR_MTRL_CD?: string;
+   183	  INN_MTRL_CD?: string;
+   184	}
+   185	
+   186	// 가격요청 내부 페이로드 — 캡처 실측 reqBody 는 항상 `{dataJson:{...}}` 래핑 + mb_cust_cod 포함.
+   187	//  근거: captures/b1_AIPPCUT.json reqBody, data-adapter.md:80-86.
+   188	export interface RedPriceReqInner {
+   189	  ORD_INFO: RedPriceReqOrdInfo[];
+   190	  // L-1: ATTB 는 다형 불투명 문자열(속성칩값·수량 등). ATTB_2/ATTB_3 슬롯은 SUB_MTR 류가 운용(현 빈값).
+   191	  PCS_INFO: Array<{ PCS_COD: string; PCS_DTL_COD: string; ATTB?: string; ATTB_2?: string; ATTB_3?: string }>;
+   192	  price_gbn: string; // 불투명 가격체계 echo (tmpl_price / tiered_price / ...)
+   193	  mb_cust_cod: string; // 고객 등급 (정규화 customerTier ?? '10000000'). 누락 시 Red 침묵 0 위험.
+   194	}
+   195	
+   196	// [HARD] 캡처 reqBody field-for-field 정합 — 최상위는 `{dataJson:{...}}` 래퍼.
+   197	//  이전(F-2): bare {ORD_INFO,PCS_INFO,price_gbn} → 실 Red 엔드포인트 거부/침묵0 위험.
+   198	export interface RedPriceReqBody {
+   199	  dataJson: RedPriceReqInner;
+   200	}
+     1	// data-contract.md §3 — 가격 계약 (서버 권위, Red-shape 중립).
+     2	// [HARD] 위젯은 단가/공식 없음. 가격은 불투명 결과값. 계약 필드명에 Red/후니 고유명 없음.
+     3	import type { SideKey } from './product';
+     4	
+     5	export interface PriceDimension {
+     6	  side: SideKey;
+     7	  cutW: number;
+     8	  cutH: number;
+     9	  workW: number;
+    10	  workH: number;
+    11	}
+    12	
+    13	export interface SelectedFinish {
+    14	  groupId: string;
+    15	  valueId: string;
+    16	  // L-1 ATTB: 후가공별로 (a)속성칩 선택값 (b)수량 echo 등 다형 불투명 문자열. 위젯은 의미 무계산·운반만.
+    17	  //  OPTIONAL·additive — 미보유 후가공은 undefined(직렬화 시 ATTB:'' 하위호환). 사이즈연동 반경(ROU/L-3)은
+    18	  //  본 BLOCKER 범위 밖(attb 슬롯만 준비). attb2/attb3 = SUB_MTR 류의 ATTB_2/ATTB_3 빈슬롯(현 빈값).
+    19	  attb?: string;
+    20	  attb2?: string;
+    21	  attb3?: string;
+    22	}
+    23	
+    24	export interface NormalizedPriceRequest {
+    25	  productCode: string;
+    26	  priceSchemeKey: string; // 불투명 echo
+    27	  // D-L2: itemGroup 불투명 echo — 어댑터 직렬화의 ORD_INFO 스키마 분기 권위(book2025=책자 분리필드).
+    28	  //  OPTIONAL·additive. 미전달 시 isBook 형상 휴리스틱 fallback.
+    29	  itemGroup?: string;
+    30	  customerTier?: string; // 불투명 (기본 어댑터가 채움)
+    31	  dimensions: PriceDimension[]; // side별
+    32	  colorCounts: Partial<Record<SideKey, number>>;
+    33	  materials: Partial<Record<SideKey, string>>; // 불투명 자재 id
+    34	  quantity: number; // 주문건수(굿즈=디자인 수). 어댑터가 ORD_CNT 로 직렬화.
+    35	  // S5: 인쇄수량(개당단가 정수배 인자). 굿즈/파우치(tmpl/tiered_price)에서만 의미.
+    36	  // [HARD] 중립 도메인명(Red PRN_CNT 아님). optional → S0~S4 미전달 시 undefined(하위호환, 회귀 0).
+    37	  // 위젯은 echo 도 안 함(현 stage UI 미노출) — 어댑터 직렬화가 quantity↔ORD_CNT / printCount↔PRN_CNT 분리.
+    38	  printCount?: number;
+    39	  pageCount?: number; // 책자
+    40	  selectedFinishes: SelectedFinish[];
+    41	}
+    42	
+    43	export interface PriceLine {
+    44	  code: string;
+    45	  label: string; // 한글 label (백엔드/어댑터가 채움)
+    46	  amount: number;
+    47	}
+    48	
+    49	export interface NormalizedPriceBreakdown {
+    50	  ok: boolean;
+    51	  finalPrice: number; // 결제금액(부가세 별산 전). 산정 방식은 백엔드/어댑터 영역.
+    52	  vat: number;
+    53	  shipping: number;
+    54	  lines: PriceLine[]; // 공정별 분해 (선택적 투명성 표시 — DESIGN Summary)
+    55	  raw?: unknown; // 디버그용 (위젯은 안 씀)
+    56	  // [HARD 도메인] RedPrinting 위젯은 PRICE=0 을 정상 반환하지 않는다 — 0 은 항상 우리측
+    57	  //  요청/세션/스펙선택 결함 신호. finalPrice=0 일 때 어댑터가 진단 사유를 채운다(정상 빈상태로 침묵 금지).
+    58	  //  OPTIONAL·additive — PRICE>0 이면 undefined. 위젯은 표시/로깅에만 사용(가격 계산 안 함).
+    59	  priceUnavailableReason?: string;
+    60	}
+
+codex
+어댑터 현재 타입은 `ADD_CLR_YN`, `PACK_PRN_CNT`, `REAM_CNT`를 가격 요청 타입에 포함하지 않고, 직렬화도 `PRN_CLR_CNT`까지만 보냅니다. deob 쪽에서 이 생략이 가격 요청까지 이어지는지와 `DOSU_COD`의 실제 의존성을 더 좁혀 보겠습니다.
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse Failed
+hook: PreToolUse Failed
+hook: PreToolUse Failed
+hook: PreToolUse Failed
+exec
+/bin/zsh -lc "nl -ba _workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts | sed -n '610,700p'" in /Users/innojini/Dev/HuniWeb
+ succeeded in 0ms:
+   610	        const isQuantityEchoPcs = QUANTITY_ECHO_PCS.has(pcsCod);
+   611	        const entry: { PCS_COD: string; PCS_DTL_COD: string; ATTB: string; ATTB_2?: string; ATTB_3?: string } = {
+   612	          PCS_COD: pcsCod,
+   613	          PCS_DTL_COD: f.valueId,
+   614	          // L-1: ATTB 다형 불투명 echo(속성칩값=f.attb / 수량형=quantity). 미보유 후가공은 ''(하위호환).
+   615	          ATTB: f.attb ?? (isQuantityEchoPcs ? String(req.quantity) : ''),
+   616	        };
+   617	        // ATTB_2/ATTB_3 슬롯: 수량형 후가공은 빈슬롯 운용(mod_07:2598). 그 외는 explicit attb2/3 만.
+   618	        if (f.attb2 != null) entry.ATTB_2 = f.attb2;
+   619	        else if (isQuantityEchoPcs) entry.ATTB_2 = '';
+   620	        if (f.attb3 != null) entry.ATTB_3 = f.attb3;
+   621	        else if (isQuantityEchoPcs) entry.ATTB_3 = '';
+   622	        return entry;
+   623	      }),
+   624	      price_gbn: req.priceSchemeKey, // 불투명 echo (tmpl_price / tiered_price)
+   625	      // W1-a(G-INT-2): `||` 로 빈문자열까지 falsy 처리. `??` 는 null/undefined 만 catch 하여
+   626	      //  customerTier:'' 가 mb_cust_cod:'' 로 직렬화 → 캡처 실증상 Red 침묵 PRICE=0 유발
+   627	      //  ([HARD] PRICE=0=우리측 결함). 빈문자열은 비회원 공개가(10000000)로 대체.
+   628	      mb_cust_cod: req.customerTier || '10000000', // 고객등급 (미전달/빈값 시 비회원 공개가)
+   629	    },
+   630	  };
+   631	}
+   632	
+   633	// 가격호출 가드 — ORD_CNT≥1 && PRN_CNT≥1 (s5-pouch-live-note §②: Red 침묵 PRICE=0 결함 재현 금지).
+   634	// 위반 시 명시적 미견적(ok:false) 반환 — 침묵 0 아님. 어댑터(서버) 책임(위젯은 가격 의미 모름, INV-1).
+   635	function isPriceRequestQuotable(req: NormalizedPriceRequest): boolean {
+   636	  return (req.quantity ?? 0) >= 1 && (req.printCount ?? 1) >= 1;
+   637	}
+   638	
+   639	const UNQUOTABLE_BREAKDOWN: NormalizedPriceBreakdown = {
+   640	  ok: false,
+   641	  finalPrice: 0,
+   642	  vat: 0,
+   643	  shipping: 0,
+   644	  lines: [],
+   645	};
+   646	
+   647	// ── Price: NormalizedPriceRequest → Red → NormalizedPriceBreakdown (data-adapter §2.4) ──
+   648	// [HARD] 3단 워터폴은 어댑터가 finalPrice 로 평면화. 위젯은 산정 방식 모름.
+   649	export function mapPriceResponse(res: RedPriceResponse): NormalizedPriceBreakdown {
+   650	  const sum = res.result_sum;
+   651	  // finalPrice = PRICE_MALL≠PRICE ? PRICE_MALL : ORG_PRICE≠PRICE ? PRICE : ORG_PRICE
+   652	  let finalPrice: number;
+   653	  let vat: number;
+   654	  if (sum.PRICE_MALL !== sum.PRICE) {
+   655	    finalPrice = sum.PRICE_MALL;
+   656	    vat = sum.PRICE_MALL_VAT;
+   657	  } else if (sum.ORG_PRICE !== sum.PRICE) {
+   658	    finalPrice = sum.PRICE;
+   659	    vat = sum.PRICE_VAT;
+   660	  } else {
+   661	    finalPrice = sum.ORG_PRICE;
+   662	    vat = sum.ORG_PRICE_VAT;
+   663	  }
+   664	
+   665	  const lines: PriceLine[] = res.result.map((l) => ({
+   666	    code: l.PCS_CD,
+   667	    label: l.PCS_CD, // 한글 label 은 result_log 에서 추출 가능하나 본 패스는 code 로(투명성 행은 선택적)
+   668	    amount: l.PRICE,
+   669	  }));
+   670	
+   671	  // [D-L3 정합] Red 는 `!result_sum.PRICE → 주문불가`(mod_06:1167). retCode===200 이어도 PRICE 가
+   672	  //  0/누락이면 침묵 0원이 주문으로 빠져나갈 수 있다 → 어댑터가 ok 게이트로 차단.
+   673	  //  finalPrice(워터폴 평면화) > 0 을 ok 조건에 포함해 0원 응답이 절대 ok:true 로 통과하지 못하게 한다.
+   674	  const ok = res.retCode === 200 && finalPrice > 0;
+   675	
+   676	  // [HARD 도메인 재정의] RedPrinting 위젯은 PRICE=0 을 정상 반환하지 않는다 — 0 은 항상 우리측
+   677	  //  요청/세션/스펙선택 결함 신호(정상 "미가격 빈상태" 아님). 0 을 침묵 처리하지 않고 진단 사유를 명시.
+   678	  //  비치명적(throw 안 함) — 미캡처 fixture(포스터/의류/ACC, PRICE=0)의 렌더를 깨지 않기 위함.
+   679	  //  [TODO 재캡처] 그 fixture 들의 0 은 우리 캡처공백(비로그인/세션)이지 Red 미가격이 아니다 →
+   680	  //  PRICE>0 재캡처 필요: BNBNFBL/BNPTPET(포스터), CLSTSHS(의류), ACPDSTD/GSSBMTL(ACC).
+   681	  let priceUnavailableReason: string | undefined;
+   682	  if (finalPrice <= 0) {
+   683	    priceUnavailableReason =
+   684	      'Red 위젯은 PRICE=0 을 정상 반환하지 않음 — 세션 만료/필수필드 누락/스펙선택 결함 또는 우리측 가격캡처 공백 가능성';
+   685	    if (typeof console !== 'undefined' && typeof console.warn === 'function') {
+   686	      console.warn(`[price] PRICE=0 진단: ${priceUnavailableReason} (retCode=${res.retCode})`);
+   687	    }
+   688	  }
+   689	
+   690	  return {
+   691	    ok,
+   692	    finalPrice,
+   693	    vat,
+   694	    shipping: res.book_info?.DLVR_AMT ?? 0,
+   695	    lines,
+   696	    raw: res,
+   697	    ...(priceUnavailableReason ? { priceUnavailableReason } : {}),
+   698	  };
+   699	}
+   700	
+
+exec
+/bin/zsh -lc 'rg -n "DOSU_COD|PRN_CLR_CNT|ADD_CLR_YN|CVR_CLR_CNT|INN_CLR_CNT" _workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js' in /Users/innojini/Dev/HuniWeb
+exec
+/bin/zsh -lc 'rg -n "B0|AddOptionSize|PDT_VER_SIZE|update:prnCntOptions|PACK_PRN_CNT|MIN_ORD_PRN_CNT|ADD_ORD_PRN_CNT" _workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js' in /Users/innojini/Dev/HuniWeb
+ succeeded in 0ms:
+13964:            CVR_CLR_CNT: T.dosuInfo?.PRN_CLR_CNT,
+13965:            INN_CLR_CNT: T.inner_dosuInfo?.PRN_CLR_CNT,
+13980:              DOSU_COD: T.dosuInfo?.COD,
+13981:              PRN_CLR_CNT: T.dosuInfo?.PRN_CLR_CNT,
+13982:              ADD_CLR_YN: T.dosuInfo?.ADD_CLR_YN,
+14626:        ...(c?.sizeSelect.view_yn === "Y" && p && n?.dosuInfo.PRN_CLR_CNT !== 0 ? {
+15749:          v = b(() => n.relatedData?.addClrMtrlList?.some(T => T.ADD_CLR_YN === "Y") ?? !1),
+15758:            return n.relatedData?.addClrMtrlList?.find(C => C.MTRL_CD === n.relatedData?.mtrlCd)?.ADD_CLR_YN === "Y";
+15771:              PRN_CLR_CNT: g
+15773:            ADD_CLR_YN: C === "Y" ? "Y" : "N"
+
+ succeeded in 0ms:
+13984:                PACK_PRN_CNT: T.addOptionInfo.PACK_PRN_CNT
+14417:      SUB_MTR_CB: "CB001"
+15412:    B0 = Ne(oe({
+15413:      __name: "AddOptionSize",
+15418:      emits: ["update", "update:prnCntOptions"],
+15424:          s = H(n.options[0]?.PDT_VER_SIZE),
+15428:          r = b(() => n.options.find(l => l.PDT_VER_SIZE === s.value)),
+15432:            const u = l.MIN_ORD_PRN_CNT,
+15433:              c = l.ADD_ORD_PRN_CNT,
+15448:          l && (o("update", l), o("update:prnCntOptions", i.value));
+15452:          o("update:prnCntOptions", l);
+15459:              key: d.PDT_VER_SIZE,
+15462:                active: s.value === d.PDT_VER_SIZE
+15464:              onClick: p => a(d.PDT_VER_SIZE)
+15465:            }, null, 10, $0)), [[c, `${Number(d.PDT_VER_SIZE)}mm<br><span class='sub'>${y(F)("떡메-약")} ${d.PACK_PRN_CNT}${y(F)("떡메-장")}</span>`]])), 128))]), P("div", F0, [P("p", U0, "* " + Y(y(F)("떡메-오차안내")), 1)])]),
+19288:              if (s.value === "FBDCMOS" && ie.value.meterialInfo?.MTRL_CD === "PXPRB002") return {
+19451:                  De = ["PXPRB001", "PXPSLXXX"].includes(ue) ? 1 : ue === "PXPRB002" ? 2 : null;
+19664:          })], 64)) : J("", !0), te.data.pdt_add_option_info?.length ? (_(), V(B0, {
+19700:              packPrnCnt: y(ie).addOptionInfo?.PACK_PRN_CNT,
+19784:            "disabled-add-pcs": [...x.value, ...p.value, ...ye.value, ...(y(ie).addOptionInfo?.PACK_PRN_CNT === 100 ? ["PRT_SID"] : []), ...(["TPBLMEO", "TPBLPST"].includes(s.value) && !se.value ? ["PRT_SID"] : [])],
+19786:            "forced-post-pcs": [...c.value, ...(y(ie).addOptionInfo && y(ie).addOptionInfo.PACK_PRN_CNT !== 100 && y(ie).dosuInfo?.COD === "SID_X" ? ["PRT_SID"] : []), ...(ye.value.length === 0 && s.value === "WBXXXXX" ? ["CPN_DFT"] : [])],
+19796:              packPrnCnt: y(ie).addOptionInfo?.PACK_PRN_CNT
+
+exec
+/bin/zsh -lc 'rg -n "ADD_CLR_YN|PACK_PRN_CNT|REAM_CNT|DOSU_COD|PRN_CLR_CNT|addColor|additional|printCount|packPrn|ream" _workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts _workspace/huni-widget/04_build/src/adapters/red/red-types.ts _workspace/huni-widget/04_build/src/contract/price.ts' in /Users/innojini/Dev/HuniWeb
+ succeeded in 0ms:
+_workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts:387:        priceColorCount: d.PRN_CLR_CNT, // dosu↔bnc 평면화
+_workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts:419:          priceColorCount: d.PRN_CLR_CNT,
+_workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts:561:// [HARD] quantity↔ORD_CNT / printCount↔PRN_CNT 분리. 위젯은 두 수치를 각자 echo만,
+_workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts:562://  ORD_INFO 직렬화는 어댑터(서버) 책임(INV-1). printCount 미전달(S0~S4) → PRN_CNT=1(하위호환).
+_workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts:569://  - DOSU_COD 는 의도 omit(OPEN-1) — PRN_CLR_CNT 가 도수 가격의미 운반(테스트 입증, 회귀 가드 유지).
+_workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts:587:    PRN_CNT: req.printCount ?? 1, // 인쇄수량(미전달 상품군 = 1, 책자/디지털 하위호환)
+_workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts:588:    PRN_CLR_CNT: req.colorCounts.default,
+_workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts:636:  return (req.quantity ?? 0) >= 1 && (req.printCount ?? 1) >= 1;
+_workspace/huni-widget/04_build/src/adapters/red/red-types.ts:65:  PRN_CLR_CNT: number;
+_workspace/huni-widget/04_build/src/adapters/red/red-types.ts:112:  pdt_dosu_bnc_info: Array<{ PRN_CLR_CNT: number; COD: string; COD_NME: string }>;
+_workspace/huni-widget/04_build/src/adapters/red/red-types.ts:173:  PRN_CNT: number; // 인쇄수량 (정규화 printCount, 미전달 시 1)
+_workspace/huni-widget/04_build/src/adapters/red/red-types.ts:174:  PRN_CLR_CNT?: number;
+_workspace/huni-widget/04_build/src/adapters/red/red-types.ts:176:  DOSU_COD?: string;
+_workspace/huni-widget/04_build/src/contract/price.ts:37:  // 위젯은 echo 도 안 함(현 stage UI 미노출) — 어댑터 직렬화가 quantity↔ORD_CNT / printCount↔PRN_CNT 분리.
+_workspace/huni-widget/04_build/src/contract/price.ts:38:  printCount?: number;
+
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse Failed
+hook: PreToolUse Failed
+hook: PreToolUse Failed
+hook: PreToolUse Failed
+exec
+/bin/zsh -lc "nl -ba _workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js | sed -n '19640,19675p'" in /Users/innojini/Dev/HuniWeb
+exec
+/bin/zsh -lc "nl -ba _workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js | sed -n '14590,14640p'" in /Users/innojini/Dev/HuniWeb
+ succeeded in 0ms:
+ 14590	        u = n?.calendarInfo ? {
+ 14591	          calendarSetting: {
+ 14592	            label: "시작년도/월",
+ 14593	            value: `${n.calendarInfo.year}년 ${n.calendarInfo.month}월`
+ 14594	          }
+ 14595	        } : null,
+ 14596	        c = t?.product_option.option.skinInfo,
+ 14597	        d = n?.sizeInfo.DIV_NM === "사이즈직접입력" || n?.sizeInfo.DIV_NM === "Input Size",
+ 14598	        p = n?.sizeInfo.DIV_SEQ ? d ? `${n.sizeInfo.cutSize.width}mm X ${n.sizeInfo.cutSize.height}mm` : n?.sizeInfo.DIV_NM : null,
+ 14599	        f = c?.quantityGroup.view_yn === "Y" ? n?.quantityInfo.ordCnt : null,
+ 14600	        v = c?.quantityGroup.view_yn === "Y" ? n?.quantityInfo.prnCnt : null,
+ 14601	        h = fu[this.pdtCode] === "SetQty" ? (this.editorStore.editorData.default?.cntInfo?.totalCnt || 1) / (this.editorStore.editorData.default?.cntInfo?.initCnt || 1) : 0,
+ 14602	        m = n?.pcsInfo.reduce((I, w) => {
+ 14603	          const {
+ 14604	            VIEW_YN: A,
+ 14605	            PCS_GRP_NM: j,
+ 14606	            selectedOptions: B
+ 14607	          } = w;
+ 14608	          if (A === "Y" && j && B[0].PCS_DTL_NM) {
+ 14609	            const T = I[j];
+ 14610	            T ? T.push(B[0].PCS_DTL_NM) : I[j] = [B[0].PCS_DTL_NM];
+ 14611	          }
+ 14612	          return I;
+ 14613	        }, {}),
+ 14614	        D = m ? Object.entries(m).map(([I, w]) => ({
+ 14615	          label: I,
+ 14616	          value: w.join(", ")
+ 14617	        })) : null;
+ 14618	      return {
+ 14619	        ...r,
+ 14620	        ...(!l && c?.paperSelect.view_yn === "Y" ? {
+ 14621	          material: {
+ 14622	            label: n?.meterialInfo.MTRL_TYPE === "R" ? "용지" : "자재",
+ 14623	            value: n?.meterialInfo.MTRL_NM
+ 14624	          }
+ 14625	        } : {}),
+ 14626	        ...(c?.sizeSelect.view_yn === "Y" && p && n?.dosuInfo.PRN_CLR_CNT !== 0 ? {
+ 14627	          size: {
+ 14628	            label: "사이즈",
+ 14629	            value: p
+ 14630	          }
+ 14631	        } : {}),
+ 14632	        ...u,
+ 14633	        ...i,
+ 14634	        ...l,
+ 14635	        ...(D && D.length > 0 ? {
+ 14636	          postPcs: {
+ 14637	            label: "후가공/부자재",
+ 14638	            children: D
+ 14639	          }
+ 14640	        } : {}),
+
+ succeeded in 0ms:
+ 19640	            options: te.data.option_info?.shape_info || [],
+ 19641	            default: y(_e)?.shapeInfo,
+ 19642	            "disabled-options": s.value === "PHPLEDT" && l.value.includes("SCO_DFT") ? ["ME", "LA"] : void 0,
+ 19643	            onUpdate: ue[4] || (ue[4] = De => y(Oe)("shapeInfo")(De))
+ 19644	          }, null, 8, ["options", "default", "disabled-options"])) : J("", !0), s.value === "PRCATCK" ? (_(), O(q, {
+ 19645	            key: 6
+ 19646	          }, [ne(ve, {
+ 19647	            title: "꽂이 모양"
+ 19648	          }, {
+ 19649	            default: fe(() => [ne(ln, {
+ 19650	              options: j,
+ 19651	              default: T.value,
+ 19652	              onSelect: ue[5] || (ue[5] = De => T.value = De)
+ 19653	            }, null, 8, ["default"])]),
+ 19654	            _: 1
+ 19655	          }), ne(ve, {
+ 19656	            title: "꽂이 위치"
+ 19657	          }, {
+ 19658	            default: fe(() => [ne(ln, {
+ 19659	              options: B,
+ 19660	              default: g.value,
+ 19661	              onSelect: ue[6] || (ue[6] = De => g.value = De)
+ 19662	            }, null, 8, ["default"])]),
+ 19663	            _: 1
+ 19664	          })], 64)) : J("", !0), te.data.pdt_add_option_info?.length ? (_(), V(B0, {
+ 19665	            key: 7,
+ 19666	            options: te.data.pdt_add_option_info,
+ 19667	            "min-prn-cnt-override": ["TPBLMEO", "TPBLPST"].includes(s.value) && y(ie).dosuInfo?.COD === "SID_X" ? 1 : void 0,
+ 19668	            onUpdate: ue[7] || (ue[7] = De => y(Oe)("addOptionInfo")(De)),
+ 19669	            "onUpdate:prnCntOptions": ue[8] || (ue[8] = De => le.value = De)
+ 19670	          }, null, 8, ["options", "min-prn-cnt-override"])) : J("", !0), s.value === "BTALLGT" || s.value === "BTALEGG" || s.value === "BTFOTOT" ? (_(), V(H0, {
+ 19671	            key: 8,
+ 19672	            code: s.value,
+ 19673	            onUpdate: ue[9] || (ue[9] = De => W("btnType")(De))
+ 19674	          }, null, 8, ["code"])) : J("", !0), s.value === "STTTDFT" ? (_(), V(X0, {
+ 19675	            key: 9,
+
+exec
+/bin/zsh -lc "nl -ba _workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js | sed -n '14090,14125p'" in /Users/innojini/Dev/HuniWeb
+ succeeded in 0ms:
+ 14090	        }
+ 14091	        return U(() => h.value, an(T => {
+ 14092	          if (rn(T)) return;
+ 14093	          const g = T.ORD_INFO?.[0];
+ 14094	          !g?.PRN_CNT || !g?.CUT_WDT || !g?.CUT_HGH || r(T);
+ 14095	        }, 200)), U(() => a.value, T => {
+ 14096	          if (p.value && T?.result) {
+ 14097	            const g = {
+ 14098	                ...p.value,
+ 14099	                priceCalc: {
+ 14100	                  params: h.value,
+ 14101	                  result: T.result
+ 14102	                }
+ 14103	              },
+ 14104	              C = (() => {
+ 14105	                const E = $P.has(n.pdtCode) && g.dosuInfo && g.meterialInfo ? {
+ 14106	                  ...g,
+ 14107	                  inner_dosuInfo: g.dosuInfo,
+ 14108	                  inner_meterialInfo: g.meterialInfo
+ 14109	                } : g;
+ 14110	                if (n.pdtCode === "GSELGLV" && E.quantityInfo) {
+ 14111	                  const L = (E.quantityInfo.prnCnt ?? 0) * 10;
+ 14112	                  return {
+ 14113	                    ...E,
+ 14114	                    quantityInfo: {
+ 14115	                      ...E.quantityInfo,
+ 14116	                      prnCnt: L
+ 14117	                    },
+ 14118	                    pcsInfo: E.pcsInfo?.map(G => G.PCS_CD === "DIR_MTR" ? {
+ 14119	                      ...G,
+ 14120	                      selectedOptions: G.selectedOptions.map(X => ({
+ 14121	                        ...X,
+ 14122	                        ATTB: L
+ 14123	                      }))
+ 14124	                    } : G)
+ 14125	                  };
+
+exec
+/bin/zsh -lc "nl -ba _workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js | sed -n '23015,23040p'" in /Users/innojini/Dev/HuniWeb
+ succeeded in 0ms:
+ 23015	            default: y(R)?.dosuInfo,
+ 23016	            "related-data": {
+ 23017	              mtrlCd: y(E).meterialInfo?.MTRL_CD
+ 23018	            },
+ 23019	            onUpdate: k[8] || (k[8] = W => y(G)("dosuInfo")(W))
+ 23020	          }, null, 8, ["options", "default", "related-data"]), [[Lt, a.value.dosuSelect.view_yn === "Y" && M.data.pdt_dosu_info]]), a.value.quantityGroup.view_yn === "Y" ? (_(), V(dv, {
+ 23021	            key: 4,
+ 23022	            "can-edit-ord-cnt": y(g),
+ 23023	            options: l.value,
+ 23024	            "extra-options": u.value,
+ 23025	            default: y(R)?.quantityInfo,
+ 23026	            "related-data": {
+ 23027	              dosu: y(E).dosuInfo?.COD
+ 23028	            },
+ 23029	            "ream-yn": M.data.pdt_base_info[0].REAM_YN,
+ 23030	            onUpdate: k[9] || (k[9] = W => y(G)("quantityInfo")(W))
+ 23031	          }, null, 8, ["can-edit-ord-cnt", "options", "extra-options", "default", "related-data", "ream-yn"])) : J("", !0), a.value.subjectGroup.view_yn === "Y" ? (_(), V(Su, {
+ 23032	            key: 5,
+ 23033	            "is-biz-mem": y(r)?.bsn_yn === "Y",
+ 23034	            onUpdate: k[10] || (k[10] = W => y(G)("etcInfo")(W))
+ 23035	          }, null, 8, ["is-biz-mem"])) : J("", !0), ne(Di, {
+ 23036	            options: w.value.postPcs.hidden,
+ 23037	            "related-data": {
+ 23038	              shape: y(E).shapeInfo?.COD || c.shapeFromSize,
+ 23039	              mtrlCd: y(E).meterialInfo?.MTRL_CD,
+ 23040	              sizeInfo: y(E).sizeInfo,
+
+codex
+`AddOptionSize`는 `pdt_add_option_info`가 있을 때 실제 렌더되고 그 결과가 `le.value`로 수량 옵션에 들어갑니다. 즉 Q3의 사다리는 dead code가 아니라 수량 선택 후보를 만드는 경로라서, 이 값이 요청 빌더의 `PRN_CNT`로 들어가는 연결을 더 확인합니다.
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse Failed
+hook: PreToolUse Failed
+hook: PreToolUse Failed
+hook: PreToolUse Failed
+exec
+/bin/zsh -lc "nl -ba _workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js | sed -n '19080,19340p'" in /Users/innojini/Dev/HuniWeb
+exec
+/bin/zsh -lc "nl -ba _workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js | sed -n '19340,19580p'" in /Users/innojini/Dev/HuniWeb
+exec
+/bin/zsh -lc "nl -ba _workspace/huni-widget/01_reverse/redo-260623/contracts/price-engine-additions.md | sed -n '1,260p'" in /Users/innojini/Dev/HuniWeb
+ succeeded in 0ms:
+     1	# 가격 엔진 신규 필드 (갱신본 260623)
+     2	
+     3	> R2 산출. 기존 `01_reverse/price-engine-reversed.md`(4월·기본 ORD_INFO/PCS_INFO)에 병합할 6월 신규분.
+     4	> 가격 권위 = 서버 `get_ajax_price_vTmpl`. PRICE≠0 = 정상(0=결함). result_sum.PRICE = 단일 권위.
+     5	
+     6	## 1. ORD_INFO 신규 필드 [라이브 검증 + 정적]
+     7	빌더 deob L13955–13999. 라이브 엔진 수용 확인(retCode 200).
+     8	| 필드 | 출처(deob) | 의미 | 가격영향(라이브) |
+     9	|------|-----------|------|------------------|
+    10	| ADD_CLR_YN | dosuInfo.ADD_CLR_YN (L13982) | 추가색상 Y/N | 자재/도수 조건부(NCCDDFT RXSNO250선 무변화) |
+    11	| PACK_PRN_CNT | addOptionInfo.PACK_PRN_CNT (L13984, 조건부) | 개별포장 수량 | 미full검증 |
+    12	| REAM_CNT | pdt_prn_cnt_info 행 (L22611 REAM_CNT/PRN_CNT) | 연(ream) 수 | 수량모델 B |
+    13	| MAX_PRN_CNT | pdt_base_info[0] (L19733) | 수량 상한 | 검증경계 |
+    14	| PDT_SIZE_INFO | size_info (L16212) | BT*/GSSTPRT 사이즈정보 | - |
+    15	| PRINT_TYPE | clothes2025_item (L13987) | 의류 인쇄타입 | 의류 전용 |
+    16	| TMPL_IDX | GSTRTAG (L13990) | 템플릿 인덱스(large14/small11) | 트래블택 전용 |
+    17	
+    18	특수: GSELGLV PRN_CNT×10 (L13978).
+    19	
+    20	## 2. 수량 모델 2종 [라이브 검증]
+    21	- 모델 A (래더): PRN_CNT = MIN_ORD_PRN_CNT + ADD_ORD_PRN_CNT × h (h=0..9), INC_CNT=ADD, UNIT_PRN_CNT, DFT_YN=첫행Y. deob L15432–15445. (PDT_VER_SIZE형 굿즈)
+    22	- 모델 B (행): 서버 pdt_prn_cnt_info 행 + base FIR_CNT/INC/INC_STEP/REAM_YN. (offset2023_item 명함/카드/책자)
+    23	
+    24	## 3. 메타모픽 검증 (NCCDDFT 라이브) [라이브 검증]
+    25	| 변형 | PRICE | 관계 |
+    26	|------|-------|------|
+    27	| baseline PRN500 | 6,350,000 | ≠0 ✓ |
+    28	| PRN1000 | 23,900,000 | qty↑⇒price↑ ✓ |
+    29	| +FLD_DFT(2단접지) | 14,850,000 | +후가공⇒price↑ ✓ (접지 실가격) |
+    30	| ADD_CLR_YN=Y | 6,350,000 | 무변화(자재조건부) |
+    31	
+    32	## 4. PCS_INFO 신규 후가공
+    33	+20 postPcs(FLD_DFT/HOL_DFT/ROU_DFT/NUM_DFT/PRT_MAG…). PCS_INFO 항목 `{PCS_COD, PCS_DTL_COD}`. FLD_DFT는 가격 기여 확인.
+    34	
+    35	## 5. 미확정
+    36	- ADD_CLR_YN/PACK_PRN_CNT 정확 가격함수(full sweep 미수행).
+    37	- 회원등급 PRICE_MALL 워터폴(기본등급 캡처만).
+
+ succeeded in 0ms:
+ 19080	          };else {
+ 19081	            const p = i[u][c];
+ 19082	            p ? d ? p.length > 0 && p.push(d) : i[u][c] = [] : i[u][c] = d ? [d] : [];
+ 19083	          }
+ 19084	          return i;
+ 19085	        }, {});
+ 19086	      if (s) {
+ 19087	        const i = new Set(e.filter(l => l.PCS_CD === "COT_DFT").map(l => l.PCS_DTL_CD));
+ 19088	        if (i.size > 0) for (const l of Object.values(s)) {
+ 19089	          const u = l.COT_DFT;
+ 19090	          if (!u || u.length === 0) continue;
+ 19091	          [...i].every(d => u.includes(d)) && (l.COT_DFT = []);
+ 19092	        }
+ 19093	      }
+ 19094	      const a = {
+ 19095	        essential: [],
+ 19096	        optional: []
+ 19097	      };
+ 19098	      for (const i of e) {
+ 19099	        const {
+ 19100	          PCS_CD: l,
+ 19101	          ESN_YN: u,
+ 19102	          VIEW_YN: c,
+ 19103	          WEB_PCS_DTL_GRP: d
+ 19104	        } = i;
+ 19105	        Cu[l] && !Cu[l].includes(d) ? u === "Y" && c === "N" ? o.essential.push(i) : o.visible.push(i) : c === "N" ? u === "Y" && n.hidden.push(i) : u === "Y" ? a.essential.push(i) : a.optional.push(i);
+ 19106	      }
+ 19107	      const r = [...a.essential, ...a.optional];
+ 19108	      return n.visible = r, {
+ 19109	        postPcs: n,
+ 19110	        sub: o,
+ 19111	        disabled: s
+ 19112	      };
+ 19113	    };
+ 19114	  function da(e) {
+ 19115	    const t = b(() => {
+ 19116	        const {
+ 19117	            usePDF: o,
+ 19118	            useKoiEditor: s,
+ 19119	            useRPEditor: a,
+ 19120	            koiAccessToken: r,
+ 19121	            rpAccessToken: i,
+ 19122	            isUseGarage: l
+ 19123	          } = e,
+ 19124	          u = s === "N" && a === "N" ? null : s === "Y" ? "KOI" : "RP";
+ 19125	        return {
+ 19126	          useGarage: l === "Y",
+ 19127	          editor: u,
+ 19128	          pdf: o === "Y",
+ 19129	          ...(u ? {
+ 19130	            token: u === "KOI" ? r : i.token
+ 19131	          } : {})
+ 19132	        };
+ 19133	      }),
+ 19134	      n = b(() => {
+ 19135	        const {
+ 19136	          usePDF: o,
+ 19137	          usePDFordCnt: s,
+ 19138	          useEditorOrdCnt: a
+ 19139	        } = e;
+ 19140	        return {
+ 19141	          pdf: o === "Y" && s === "Y",
+ 19142	          editor: a === "Y"
+ 19143	        };
+ 19144	      });
+ 19145	    return {
+ 19146	      uploadConfig: t,
+ 19147	      canEditOrdCnt: n
+ 19148	    };
+ 19149	  }
+ 19150	  function fa(e, {
+ 19151	    group: t,
+ 19152	    emits: n
+ 19153	  }) {
+ 19154	    const o = b(() => e === "new" ? null : {}),
+ 19155	      s = H(e === "new" ? {} : o.value),
+ 19156	      a = (c, d) => p => {
+ 19157	        if (t === "acrylic2025_item") {
+ 19158	          s.value = {
+ 19159	            ...s.value,
+ 19160	            ...(d ? {} : {
+ 19161	              [c]: p
+ 19162	            }),
+ 19163	            acrylicSelectData: {
+ 19164	              ...s.value.acrylicSelectData,
+ 19165	              ...(d ? {
+ 19166	                [c]: p
+ 19167	              } : {})
+ 19168	            }
+ 19169	          };
+ 19170	          return;
+ 19171	        }
+ 19172	        if (t === "clothes2025_item") {
+ 19173	          s.value = {
+ 19174	            ...s.value,
+ 19175	            ...(d ? {} : {
+ 19176	              [c]: p
+ 19177	            }),
+ 19178	            clothesSelectData: {
+ 19179	              ...s.value.clothesSelectData,
+ 19180	              ...(d ? {
+ 19181	                [c]: p
+ 19182	              } : {}),
+ 19183	              ...(c === "quantityInfo" ? {
+ 19184	                quantity: p.prnCnt
+ 19185	              } : {})
+ 19186	            }
+ 19187	          };
+ 19188	          return;
+ 19189	        }
+ 19190	        s.value = {
+ 19191	          ...s.value,
+ 19192	          [c]: p
+ 19193	        };
+ 19194	      };
+ 19195	    U(() => s.value, an(c => {
+ 19196	      n.updateOrder(c);
+ 19197	    }, 150), {
+ 19198	      deep: !0
+ 19199	    });
+ 19200	    const r = H(e === "new" ? {} : {}),
+ 19201	      i = c => d => {
+ 19202	        r.value = {
+ 19203	          ...r.value,
+ 19204	          [c]: d
+ 19205	        };
+ 19206	      };
+ 19207	    U(() => r.value, c => {
+ 19208	      s.value.pcsInfo = Object.values(c).flatMap(d => d);
+ 19209	    });
+ 19210	    const l = Xe({
+ 19211	        hidden: {},
+ 19212	        visible: {}
+ 19213	      }),
+ 19214	      u = c => d => {
+ 19215	        l[c] = d;
+ 19216	      };
+ 19217	    return U(() => l, c => {
+ 19218	      const d = Object.values(c.hidden).flatMap(f => f),
+ 19219	        p = Object.values(c.visible).flatMap(f => f);
+ 19220	      i("POST_PCS")([...d, ...p]);
+ 19221	    }, {
+ 19222	      deep: !0
+ 19223	    }), {
+ 19224	      defaultOrderData: o,
+ 19225	      orderInfo: s,
+ 19226	      pcsInfo: r,
+ 19227	      updateOption: a,
+ 19228	      updatePcsOption: i,
+ 19229	      updatePostPcs: u
+ 19230	    };
+ 19231	  }
+ 19232	  const Vb = {
+ 19233	      class: "widget-error"
+ 19234	    },
+ 19235	    jb = {
+ 19236	      key: 0,
+ 19237	      class: "reason"
+ 19238	    },
+ 19239	    ov = Ne(oe({
+ 19240	      __name: "Error",
+ 19241	      props: {
+ 19242	        message: {}
+ 19243	      },
+ 19244	      setup(e) {
+ 19245	        return (t, n) => (_(), O("div", Vb, [n[0] || (n[0] = P("p", null, "주문 위젯을 생성할 수 없습니다 😱", -1)), t.message ? (_(), O("p", jb, Y(t.message), 1)) : J("", !0)]));
+ 19246	      }
+ 19247	    }), [["__scopeId", "data-v-33e3660e"]]),
+ 19248	    bi = "https://s3-ap-northeast-2.amazonaws.com/redprintingweb.common/assets/images/ordericon",
+ 19249	    Oi = "PRT_M",
+ 19250	    zb = Object.freeze(Object.defineProperty({
+ 19251	      __proto__: null,
+ 19252	      default: oe({
+ 19253	        __name: "Digital",
+ 19254	        props: {
+ 19255	          type: {
+ 19256	            default: "new"
+ 19257	          },
+ 19258	          data: {},
+ 19259	          widgetAttr: {},
+ 19260	          defaultData: {},
+ 19261	          senecaInfo: {}
+ 19262	        },
+ 19263	        emits: ["update"],
+ 19264	        setup(e, {
+ 19265	          emit: t
+ 19266	        }) {
+ 19267	          const n = e,
+ 19268	            o = t,
+ 19269	            s = b(() => n.data.pdt_base_info[0].PDT_CD),
+ 19270	            a = b(() => n.widgetAttr.skinInfo),
+ 19271	            r = [{
+ 19272	              value: "LIGHT",
+ 19273	              name: "LIGHT",
+ 19274	              imgOn: `${bi}/btn_light.svg`,
+ 19275	              imgOff: `${bi}/btn_light_off.svg`
+ 19276	            }, {
+ 19277	              value: "PREMIUM",
+ 19278	              name: "PREMIUM",
+ 19279	              imgOn: `${bi}/btn_premium.svg`,
+ 19280	              imgOff: `${bi}/btn_premium_off.svg`,
+ 19281	              postPcsCd: "SCO_DFT"
+ 19282	            }],
+ 19283	            i = b(() => [F("PHPLEDT-LIGHT-안내"), F("PHPLEDT-PREMIUM-안내")]),
+ 19284	            l = H([]),
+ 19285	            u = H("CUT_DFT"),
+ 19286	            c = b(() => []),
+ 19287	            d = b(() => {
+ 19288	              if (s.value === "FBDCMOS" && ie.value.meterialInfo?.MTRL_CD === "PXPRB002") return {
+ 19289	                POL_BAG: ["PO006"]
+ 19290	              };
+ 19291	            }),
+ 19292	            p = b(() => s.value !== "STTTDFT" ? [] : u.value === "THO_CUT" ? ["PDT_WRK"] : []),
+ 19293	            f = b(() => {
+ 19294	              if (s.value !== "STTTDFT" || u.value !== "THO_CUT") return;
+ 19295	              const te = ie.value.meterialInfo?.MTRL_CD || "";
+ 19296	              return {
+ 19297	                ...Q.value.disabled,
+ 19298	                [te]: {
+ 19299	                  ...(Q.value.disabled?.[te] ?? {}),
+ 19300	                  PAK_POL: ["DFXXX"]
+ 19301	                }
+ 19302	              };
+ 19303	            }),
+ 19304	            v = b(() => s.value !== "PRPORSO" ? [] : n.data.pdt_pcs_info.filter(te => te.PCS_CD.startsWith(Oi)).map(te => ({
+ 19305	              name: (te.PCS_DTL_NM ?? "").replace(" 단면", ""),
+ 19306	              value: `${te.PCS_CD}||${te.PCS_DTL_CD}`
+ 19307	            }))),
+ 19308	            h = H({});
+ 19309	          function m(te) {
+ 19310	            const ue = Object.fromEntries(Object.entries(h.value).filter(([Fe]) => !Fe.startsWith(Oi))),
+ 19311	              De = te || v.value[0]?.value;
+ 19312	            if (De) {
+ 19313	              const [Fe, Ge] = De.split("||"),
+ 19314	                un = n.data.pdt_pcs_info.find(cs => cs.PCS_CD === Fe);
+ 19315	              un && (ue[Fe] = [{
+ 19316	                PCS_CD: un.PCS_CD,
+ 19317	                PCS_GRP_NM: un.PCS_GRP_NM,
+ 19318	                VIEW_YN: "N",
+ 19319	                ESN_YN: "Y",
+ 19320	                selectedOptions: [{
+ 19321	                  PCS_CD: un.PCS_CD,
+ 19322	                  PCS_DTL_CD: Ge,
+ 19323	                  PCS_DTL_NM: un.PCS_DTL_NM,
+ 19324	                  ATTB: ""
+ 19325	                }]
+ 19326	              }]);
+ 19327	            }
+ 19328	            Ue("hidden")(ue);
+ 19329	          }
+ 19330	          const D = H({});
+ 19331	          function N() {
+ 19332	            const te = u.value,
+ 19333	              ue = new Set(["CUT_DFT", "THO_CUT"]),
+ 19334	              De = Object.fromEntries(Object.entries(D.value).filter(([Ge]) => !ue.has(Ge))),
+ 19335	              Fe = n.data.pdt_pcs_info.find(Ge => Ge.PCS_CD === te);
+ 19336	            Fe && (De[te] = [{
+ 19337	              PCS_CD: Fe.PCS_CD,
+ 19338	              PCS_GRP_NM: Fe.PCS_GRP_NM,
+ 19339	              VIEW_YN: Fe.VIEW_YN,
+ 19340	              ESN_YN: Fe.ESN_YN,
+
+ succeeded in 0ms:
+ 19340	              ESN_YN: Fe.ESN_YN,
+ 19341	              selectedOptions: [{
+ 19342	                PCS_CD: Fe.PCS_CD,
+ 19343	                PCS_DTL_CD: Fe.PCS_DTL_CD,
+ 19344	                PCS_DTL_NM: Fe.PCS_DTL_NM,
+ 19345	                ATTB: ""
+ 19346	              }]
+ 19347	            }]), Ue("hidden")(De);
+ 19348	          }
+ 19349	          function I(te) {
+ 19350	            u.value = te.forcedPostPcs[0] ?? "CUT_DFT", s.value === "STTTDFT" && N();
+ 19351	          }
+ 19352	          function w(te) {
+ 19353	            if (s.value === "PHPTPRM") {
+ 19354	              Qe.value = te;
+ 19355	              const ue = Qe.value.HND_CLP;
+ 19356	              Ue("hidden")(ue ? {
+ 19357	                ...te,
+ 19358	                HND_CLP: ue
+ 19359	              } : te);
+ 19360	              return;
+ 19361	            }
+ 19362	            if (s.value === "STTTDFT") {
+ 19363	              D.value = te, N();
+ 19364	              return;
+ 19365	            }
+ 19366	            if (s.value === "PRPORSO") {
+ 19367	              h.value = te;
+ 19368	              const ue = Object.entries(h.value).find(([Fe]) => Fe.startsWith(Oi));
+ 19369	              if (!ue) {
+ 19370	                Ue("hidden")(te);
+ 19371	                return;
+ 19372	              }
+ 19373	              const De = Object.fromEntries(Object.entries(te).filter(([Fe]) => !Fe.startsWith(Oi)));
+ 19374	              De[ue[0]] = ue[1], Ue("hidden")(De);
+ 19375	              return;
+ 19376	            }
+ 19377	            Ue("hidden")(te);
+ 19378	          }
+ 19379	          const A = Te("member"),
+ 19380	            j = [{
+ 19381	              name: "곡선 꽂이",
+ 19382	              value: "CV",
+ 19383	              key: "CV"
+ 19384	            }, {
+ 19385	              name: "사선 꽂이",
+ 19386	              value: "DI",
+ 19387	              key: "DI"
+ 19388	            }],
+ 19389	            B = [{
+ 19390	              name: "왼쪽",
+ 19391	              value: "L",
+ 19392	              key: "L"
+ 19393	            }, {
+ 19394	              name: "가운데",
+ 19395	              value: "C",
+ 19396	              key: "C"
+ 19397	            }, {
+ 19398	              name: "오른쪽",
+ 19399	              value: "R",
+ 19400	              key: "R"
+ 19401	            }],
+ 19402	            T = H("CV"),
+ 19403	            g = H("C"),
+ 19404	            C = b(() => {
+ 19405	              if (!n.data.option_info) return !1;
+ 19406	              const {
+ 19407	                shape_info: te
+ 19408	              } = n.data.option_info;
+ 19409	              return !rn(te) && s.value.startsWith("ST") && te.length === 1 ? !1 : !rn(te) && !!te[0].COD;
+ 19410	            }),
+ 19411	            S = b(() => !s.value.startsWith("BT") || !n.data.pdt_mtrl_info.some(ue => ue.PTT_CD?.includes("YPI")) ? null : ie.value.shapeInfo?.COD === "SQ" ? "RXYPI250" : "RXYPI150"),
+ 19412	            R = b(() => {
+ 19413	              if (s.value !== "GSSTPRT") return;
+ 19414	              const te = ie.value.meterialInfo?.MTRL_CD;
+ 19415	              if (te === "SXSMT016") return F("자석거치대부착가능");
+ 19416	              if (te === "SXSMT014") return F("자석거치대부착불가");
+ 19417	            }),
+ 19418	            E = b(() => A?.bsn_yn === "Y" ? n.data.pdt_mtrl_info : n.data.pdt_mtrl_info.filter(te => te.BSN_YN !== "Y")),
+ 19419	            L = $n(() => ["PHPRFRM", "PHPTBKG", "PHPTDFT", "PHPRDFT", "PHPKDFT", "PHPTEDT", "STTTDFT"].includes(s.value) ? Promise.resolve().then(() => pv) : yu(Object.assign({
+ 19420	              "../options/material/Acrylic.vue": () => Promise.resolve().then(() => qb),
+ 19421	              "../options/material/Basic.vue": () => Promise.resolve().then(() => pv),
+ 19422	              "../options/material/Paper.vue": () => Promise.resolve().then(() => uI)
+ 19423	            }), `../options/material/${E.value[0].MTRL_TYPE === "R" ? "Paper" : "Basic"}.vue`, 4)),
+ 19424	            G = new Set(["BCFDDFT", "BCFDHIG"]),
+ 19425	            X = b(() => {
+ 19426	              if (!G.has(s.value)) return;
+ 19427	              const te = n.data.pdt_add_info[0];
+ 19428	              if (!rn(te[0])) return te.reduce((ue, De) => (ue[De.DIV_ATTB] || (ue[De.DIV_ATTB] = []), ue[De.DIV_ATTB].push(De), ue), {});
+ 19429	            }),
+ 19430	            K = H(X.value ? Object.keys(X.value)[0] : void 0),
+ 19431	            de = H("2"),
+ 19432	            be = b(() => {
+ 19433	              const te = [...n.data.pdt_size_info];
+ 19434	              if (K.value && X.value) {
+ 19435	                const ue = X.value[K.value].reduce((Fe, Ge) => Fe.add(Ge.DIV_SEQ), new Set()),
+ 19436	                  De = te.filter(Fe => ue.has(Fe.DIV_SEQ));
+ 19437	                if (de.value === "N") {
+ 19438	                  const Fe = K.value === "WAT_TRW";
+ 19439	                  return De.map(Ge => ({
+ 19440	                    ...Ge,
+ 19441	                    CUT_WDT: Fe ? String(+Ge.CUT_WDT + 2) : Ge.CUT_WDT,
+ 19442	                    CUT_HGH: Fe ? Ge.CUT_HGH : String(+Ge.CUT_HGH + 2),
+ 19443	                    WRK_WDT: Fe ? String(+Ge.WRK_WDT + 2) : Ge.WRK_WDT,
+ 19444	                    WRK_HGH: Fe ? Ge.WRK_HGH : String(+Ge.WRK_HGH + 2)
+ 19445	                  }));
+ 19446	                }
+ 19447	                return De;
+ 19448	              }
+ 19449	              if (s.value === "FBDCMOS" && ie.value.meterialInfo?.MTRL_CD) {
+ 19450	                const ue = ie.value.meterialInfo.MTRL_CD,
+ 19451	                  De = ["PXPRB001", "PXPSLXXX"].includes(ue) ? 1 : ue === "PXPRB002" ? 2 : null;
+ 19452	                if (De !== null) return te.filter(Fe => Fe.DIV_SEQ === De);
+ 19453	              }
+ 19454	              if (s.value === "GSSTPRT" && ie.value.meterialInfo?.MTRL_CD) {
+ 19455	                const ue = ie.value.meterialInfo.MTRL_CD,
+ 19456	                  De = n.data.pdt_pcs_info.filter(Fe => Fe.PCS_CD === "DIR_MTR" && Fe.MTRL_CD === ue);
+ 19457	                if (De.length) return te.filter(Fe => De.some(Ge => +Ge.CUT_WDT == +Fe.CUT_WDT && +Ge.CUT_HGH == +Fe.CUT_HGH));
+ 19458	              }
+ 19459	              if ((s.value === "BTALLGT" || s.value === "BTALEGG" || s.value === "BTFOTOT") && k.btnType) {
+ 19460	                const ue = k.btnType,
+ 19461	                  De = n.data.pdt_pcs_info.filter(Fe => Fe.PCS_CD === "BTN_DFT" && Fe.PCS_DTL_CD.indexOf(ue) > -1);
+ 19462	                if (De.length) {
+ 19463	                  const Fe = ie.value.shapeInfo?.COD;
+ 19464	                  return (C.value && Fe ? te.filter(un => un.STICKER_TYPE === Fe) : te).filter(un => De.some(cs => +cs.CUT_WDT == +un.CUT_WDT && +cs.CUT_HGH == +un.CUT_HGH));
+ 19465	                }
+ 19466	              }
+ 19467	              return !C.value || !ie.value.shapeInfo || te.length === 1 || s.value === "PRCAPPO" ? te : te.filter(ue => ue.STICKER_TYPE === ie.value.shapeInfo.COD);
+ 19468	            }),
+ 19469	            xe = H(null),
+ 19470	            ee = te => {
+ 19471	              xe.value = te;
+ 19472	            },
+ 19473	            M = b(() => LP.has(s.value)),
+ 19474	            k = Xe({}),
+ 19475	            W = te => ue => {
+ 19476	              k[te] = ue;
+ 19477	            },
+ 19478	            Q = b(() => Pi(n.data.pdt_pcs_info, n.data.pdt_disable_pcs_info)),
+ 19479	            {
+ 19480	              uploadConfig: ae,
+ 19481	              canEditOrdCnt: ke
+ 19482	            } = da(n.widgetAttr),
+ 19483	            nt = new Set(["GSSKHND", "GSSKSHH", "GSSTPRT"]),
+ 19484	            Ze = b(() => nt.has(s.value) ? {
+ 19485	              ...ke.value,
+ 19486	              pdf: !1
+ 19487	            } : ke.value),
+ 19488	            ot = Ve(),
+ 19489	            ht = b(() => {
+ 19490	              let te = A?.bsn_yn === "Y" && ot.uploadType.default === "pdf" ? "DesignQty" : fu[s.value] || "DesignQty";
+ 19491	              return M.value && (te = "CalendarQty"), $n(() => yu(Object.assign({
+ 19492	                "../options/qty/BookQty.vue": () => Promise.resolve().then(() => ZE),
+ 19493	                "../options/qty/CalendarQty.vue": () => Promise.resolve().then(() => HM),
+ 19494	                "../options/qty/DesignQty.vue": () => Promise.resolve().then(() => hO),
+ 19495	                "../options/qty/OffsetQty.vue": () => Promise.resolve().then(() => HI),
+ 19496	                "../options/qty/SetQty.vue": () => Promise.resolve().then(() => nw),
+ 19497	                "../options/qty/SimpleQty.vue": () => Promise.resolve().then(() => dw),
+ 19498	                "../options/qty/TotalQty.vue": () => Promise.resolve().then(() => Tw)
+ 19499	              }), `../options/qty/${te}.vue`, 4));
+ 19500	            }),
+ 19501	            ft = b(() => {
+ 19502	              if (!n.data.pdt_add_pcs_info?.length) return [];
+ 19503	              const te = ie.value.meterialInfo?.MTRL_CD;
+ 19504	              return n.data.pdt_add_pcs_info.filter(ue => ue.MTRL_CD === te);
+ 19505	            }),
+ 19506	            $ = b(() => !!(Q.value.postPcs.visible.some(te => te.PCS_CD === "PRT_WHT") || ft.value.some(te => te.PCS_CD === "PRT_WHT"))),
+ 19507	            x = b(() => {
+ 19508	              if (!n.data.pdt_add_pcs_info?.length) return [];
+ 19509	              const te = ie.value.meterialInfo?.MTRL_CD,
+ 19510	                ue = new Set(n.data.pdt_pcs_info.map(Ge => Ge.PCS_CD)),
+ 19511	                De = new Set(n.data.pdt_add_pcs_info.filter(Ge => Ge.MTRL_CD === te).map(Ge => Ge.PCS_CD));
+ 19512	              return [...new Set(n.data.pdt_add_pcs_info.map(Ge => Ge.PCS_CD))].filter(Ge => !De.has(Ge) && !ue.has(Ge));
+ 19513	            }),
+ 19514	            Z = b(() => (Pe.value.POST_PCS || []).some(ue => a0.has(s.value) && ue.PCS_CD === "THO_GRA" ? !1 : Kh.has(ue.PCS_CD))),
+ 19515	            pe = b(() => {
+ 19516	              const te = n.data.pdt_base_info[0];
+ 19517	              if (te.DAY_PRDC_PDT_YN !== "N") return {
+ 19518	                type: te.DAY_PRDC_PDT_YN,
+ 19519	                maxQty: te.DAY_ABLE_PRN_CNT
+ 19520	              };
+ 19521	            }),
+ 19522	            le = H([]),
+ 19523	            se = b(() => {
+ 19524	              if (!["TPBLMEO", "TPBLPST"].includes(s.value)) return !1;
+ 19525	              const te = ie.value.sizeInfo?.cutSize;
+ 19526	              return te?.width === 80 && te?.height === 80;
+ 19527	            }),
+ 19528	            me = b(() => {
+ 19529	              const te = n.data.pdt_prn_cnt_info;
+ 19530	              return !["TPBLMEO", "TPBLPST"].includes(s.value) || ie.value.dosuInfo?.COD !== "SID_X" ? te : te.map(ue => ({
+ 19531	                ...ue,
+ 19532	                MIN_PRN_CNT: 1,
+ 19533	                DFT_PRN_CNT: Math.max(1, ue.DFT_PRN_CNT)
+ 19534	              }));
+ 19535	            }),
+ 19536	            ye = b(() => {
+ 19537	              if (s.value !== "WBXXXXX") return [];
+ 19538	              const ue = [...n.data.pdt_pcs_info, ...(n.data.pdt_add_pcs_info ?? [])].filter(Fe => Fe.PCS_CD === "CPN_DFT");
+ 19539	              if (!ue.length) return [];
+ 19540	              const De = ie.value.sizeInfo?.DIV_SEQ;
+ 19541	              return ue.some(Fe => Fe.DIV_SEQ === De) ? [] : ["CPN_DFT"];
+ 19542	            }),
+ 19543	            ge = b(() => {
+ 19544	              if (!["TPBLMEO", "TPBLPST"].includes(s.value) || ie.value.dosuInfo?.COD !== "SID_X") return !1;
+ 19545	              const te = ie.value.pcsInfo?.find(ue => ue.PCS_CD === "PRT_SID");
+ 19546	              return ["PT001", "PT003", "PT004"].includes(te?.selectedOptions[0]?.PCS_DTL_CD ?? "");
+ 19547	            }),
+ 19548	            {
+ 19549	              defaultOrderData: _e,
+ 19550	              orderInfo: ie,
+ 19551	              pcsInfo: Pe,
+ 19552	              updateOption: Oe,
+ 19553	              updatePcsOption: Me,
+ 19554	              updatePostPcs: Ue
+ 19555	            } = fa(n.type, {
+ 19556	              group: n.widgetAttr.item_gbn,
+ 19557	              emits: {
+ 19558	                updateOrder: te => o("update", te)
+ 19559	              }
+ 19560	            }),
+ 19561	            Qe = H({});
+ 19562	          U(() => Pe.value.POST_PCS?.find(te => te.PCS_CD === "WRK_MTR"), te => {
+ 19563	            if (s.value !== "PHPTPRM") return;
+ 19564	            const ue = n.data.pdt_pcs_info.find(Fe => Fe.PCS_CD === "HND_CLP");
+ 19565	            if (!ue) return;
+ 19566	            const De = {
+ 19567	              ...Qe.value
+ 19568	            };
+ 19569	            te ? De.HND_CLP = [{
+ 19570	              PCS_CD: "HND_CLP",
+ 19571	              PCS_GRP_NM: ue.PCS_GRP_NM,
+ 19572	              VIEW_YN: "N",
+ 19573	              ESN_YN: "N",
+ 19574	              selectedOptions: [{
+ 19575	                PCS_CD: "HND_CLP",
+ 19576	                PCS_DTL_CD: ue.PCS_DTL_CD,
+ 19577	                PCS_DTL_NM: ue.PCS_DTL_NM,
+ 19578	                ATTB: ""
+ 19579	              }]
+ 19580	            }] : delete De.HND_CLP, Ue("hidden")(De);
+
+exec
+/bin/zsh -lc "rg -n \"ht =|ht.value|quantityGroup|pdt_add_option_info|le =|me =|Dt =|function W|Oe\\)|quantityInfo\" _workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js" in /Users/innojini/Dev/HuniWeb
+ succeeded in 0ms:
+223:  function Wu() {
+616:  function Wi(e, t, n) {
+1096:    }, d.onTrack = n.onTrack, d.onTrigger = n.onTrigger, t ? o ? w(!0) : I = d.run() : r ? r(w.bind(null, !0), !0) : d.run(), N.pause = d.pause.bind(d), N.resume = d.resume.bind(d), N.stop = N, N;
+1906:  function Wm(e, t) {
+2028:    if (Ct.ce || Ct.parent && Go(Ct.parent) && Ct.parent.ce) return t !== "default" && (n.name = t), _(), V(q, null, [ne("slot", n, o)], 64);
+2313:  function Wc(e, t, n) {
+2654:          } else h = we(v) && v.name === "Boolean";
+2835:      h = ($, x, Z, pe = null, le = null, se = null, me = void 0, ye = null, ge = Dn ? !1 : !!x.dynamicChildren) => {
+2863:          const le = x.el = $.el;
+2875:          const le = p($.anchor);
+2884:        for (; $ && $ !== x;) le = p($), o($, Z, pe), $ = le;
+2896:        x.type === "svg" ? me = "svg" : x.type === "math" && (me = "mathml"), $ == null ? B(x, Z, pe, le, se, me, ye, ge) : C($, x, le, se, me, ye, ge);
+2911:        const Ue = RC(le, Oe);
+2921:            const me = le.vnode;
+2944:        if (Z && Co(Z, !1), (Me = Oe.onVnodeBeforeUpdate) && bn(Me, Z, x, $), ie && ho(x, $, Z, "beforeUpdate"), Z && Co(Z, !0), Dn && (ge = 0, me = !1, _e = null), (Pe.innerHTML && Oe.innerHTML == null || Pe.textContent && Oe.textContent == null) && c(ye, ""), _e ? (S($.dynamicChildren, _e, ye, Z, pe, pr(x, le), se), _r($, x)) : me || be($, x, ye, null, Z, pe, pr(x, le), se, !1), ge > 0) {
+2973:            const me = Z[se],
+3033:            Ra(Pe || $.vnode), Co($, !1), Pe ? (Pe.el = Qe.el, de($, Pe, me)) : Pe = Qe, Oe && ko(Oe), (vt = Pe.props && Pe.props.onVnodeBeforeUpdate) && bn(vt, Ue, Pe, Qe), Co($, !0), zo($, "render");
+3126:          if (_e <= Oe) {
+3131:        } else if (_e > Oe) for (; _e <= Pe;) k($[_e], le, se, !0), _e++;else {
+3144:          const Dt = new Array(yt);
+3169:      M = ($, x, Z, pe, le = null) => {
+3189:        if (me === q) {
+3195:        if (me === ws) {
+3218:      k = ($, x, Z, pe = !1, le = !1) => {
+3230:        if (Pe === -2 && (le = !1), ye != null && (fn(), Is(ye, null, Z, $, !0), pn()), Me != null && (x.renderCache[Me] = void 0), ie & 256) {
+3256:          $.patchFlag > 0 && $.patchFlag & 2048 && le && !le.persisted ? $.children.forEach(me => {
+3297:      ke = ($, x, Z, pe = !1, le = !1, se = 0) => {
+3298:        for (let me = se; me < $.length; me++) k($[me], x, Z, pe, le);
+3311:      ht = {
+3410:        return f.stop = Mt, f.resume = Mt, f.pause = Mt, f;
+3666:  function Wa(e, t = !1) {
+3746:      i && !at(i) && (t.class = $e(i)), ze(l) && (Ss(l) && !Ie(l) && (l = ct({}, l)), t.style = mt(l));
+3842:      for (const s in o) if (s === "class") t.class !== o.class && (t.class = $e([t.class, o.class]));else if (s === "style") t.style = mt([t.style, o.style]);else if (ps(s)) {
+4272:    fT = (e => (e.displayName = "Transition", e.props = dT, e))((e, {
+4433:    o && (t = (t ? [t, ...o] : [...o]).join(" ")), t == null ? e.removeAttribute("class") : n ? e.setAttribute("class", t) : e.className = t;
+4580:  function Wd(e, t) {
+4599:    if (t === "spellcheck" || t === "draggable" || t === "translate" || t === "autocorrect" || t === "form" || t === "list" && e.tagName === "INPUT" || t === "type" && e.tagName === "TEXTAREA") return !1;
+6592:    return (!e.top || t.top < e.top) && (e.top = t.top), (!e.bottom || t.bottom > e.bottom) && (e.bottom = t.bottom), (!e.left || t.left < e.left) && (e.left = t.left), (!e.right || t.right > e.right) && (e.right = t.right), e;
+6907:  function Wg() {
+7329:        const n = bf().find(o => o.packageName === this.plugin.descriptor.packageName);
+7441:    n.packageName === "vuex" && s.on.editInspectorState(a => {
+7814:    return n.name = e.name, n.stack = e.stack, t.allowedErrorProps.forEach(o => {
+8017:  function Wy(e, t) {
+8255:    if (o = o || open("", "_blank"), o && (o.document.title = o.document.body.innerText = "downloading..."), typeof e == "string") return Qr(e, t, n);
+8280:  function Wp() {
+8661:        i === In.patchFunction ? u.subtitle = "⤵️" : i === In.patchObject ? u.subtitle = "🧩" : r && !Array.isArray(r) && (u.subtitle = r.type), r && (u.data["rawEvent(s)"] = {
+9473:        this.gcTime = Math.max(this.gcTime || 0, e ?? (No ? 1 / 0 : 300 * 1e3));
+11080:  function We(e, t) {
+11098:  function Wn(e) {
+11278:      ht = !0,
+11284:      le = !1,
+11286:      me = !1,
+11301:      Dt = "http://www.w3.org/1999/xhtml";
+11321:          if ((!z || typeof z != "object") && (z = {}), z = Wn(z), Ge = un.indexOf(z.PARSER_MEDIA_TYPE) === -1 ? cs : z.PARSER_MEDIA_TYPE, Et = Ge === "application/xhtml+xml" ? hl : _i, ee = Cn(z, "ALLOWED_TAGS") ? We({}, z.ALLOWED_TAGS, Et) : M, k = Cn(z, "ALLOWED_ATTR") ? We({}, z.ALLOWED_ATTR, Et) : W, At = Cn(z, "ALLOWED_NAMESPACES") ? We({}, z.ALLOWED_NAMESPACES, hl) : te, vt = Cn(z, "ADD_URI_SAFE_ATTR") ? We(Wn(yt), z.ADD_URI_SAFE_ATTR, Et) : yt, Qe = Cn(z, "ADD_DATA_URI_TAGS") ? We(Wn(qe), z.ADD_DATA_URI_TAGS, Et) : qe, Me = Cn(z, "FORBID_CONTENTS") ? We({}, z.FORBID_CONTENTS, Et) : Ue, ae = Cn(z, "FORBID_TAGS") ? We({}, z.FORBID_TAGS, Et) : Wn({}), ke = Cn(z, "FORBID_ATTR") ? We({}, z.FORBID_ATTR, Et) : Wn({}), Oe = Cn(z, "USE_PROFILES") ? z.USE_PROFILES : !1, nt = z.ALLOW_ARIA_ATTR !== !1, Ze = z.ALLOW_DATA_ATTR !== !1, ot = z.ALLOW_UNKNOWN_PROTOCOLS || !1, ht = z.ALLOW_SELF_CLOSE_IN_ATTR !== !1, ft = z.SAFE_FOR_TEMPLATES || !1, $ = z.SAFE_FOR_XML !== !1, x = z.WHOLE_DOCUMENT || !1, le = z.RETURN_DOM || !1, se = z.RETURN_DOM_FRAGMENT || !1, me = z.RETURN_TRUSTED_TYPE || !1, pe = z.FORCE_BODY || !1, ye = z.SANITIZE_DOM !== !1, ge = z.SANITIZE_NAMED_PROPS || !1, ie = z.KEEP_CONTENT !== !1, Pe = z.IN_PLACE || !1, xe = z.ALLOWED_URI_REGEXP || A_, zt = z.NAMESPACE || Dt, ue = z.MATHML_TEXT_INTEGRATION_POINTS || ue, De = z.HTML_INTEGRATION_POINTS || De, Q = z.CUSTOM_ELEMENT_HANDLING || {}, z.CUSTOM_ELEMENT_HANDLING && _v(z.CUSTOM_ELEMENT_HANDLING.tagNameCheck) && (Q.tagNameCheck = z.CUSTOM_ELEMENT_HANDLING.tagNameCheck), z.CUSTOM_ELEMENT_HANDLING && _v(z.CUSTOM_ELEMENT_HANDLING.attributeNameCheck) && (Q.attributeNameCheck = z.CUSTOM_ELEMENT_HANDLING.attributeNameCheck), z.CUSTOM_ELEMENT_HANDLING && typeof z.CUSTOM_ELEMENT_HANDLING.allowCustomizedBuiltInElements == "boolean" && (Q.allowCustomizedBuiltInElements = z.CUSTOM_ELEMENT_HANDLING.allowCustomizedBuiltInElements), ft && (Ze = !1), se && (le = !0), Oe && (ee = We({}, I_), k = [], Oe.html === !0 && (We(ee, E_), We(k, R_)), Oe.svg === !0 && (We(ee, vl), We(k, Tl), We(k, hi)), Oe.svgFilters === !0 && (We(ee, ml), We(k, Tl), We(k, hi)), Oe.mathMl === !0 && (We(ee, Cl), We(k, N_), We(k, hi))), z.ADD_TAGS && (ee === M && (ee = Wn(ee)), We(ee, z.ADD_TAGS, Et)), z.ADD_ATTR && (k === W && (k = Wn(k)), We(k, z.ADD_ATTR, Et)), z.ADD_URI_SAFE_ATTR && We(vt, z.ADD_URI_SAFE_ATTR, Et), z.FORBID_CONTENTS && (Me === Ue && (Me = Wn(Me)), We(Me, z.FORBID_CONTENTS, Et)), ie && (ee["#text"] = !0), x && We(ee, ["html", "head", "body"]), ee.table && (We(ee, ["tbody"]), delete ae.tbody), z.TRUSTED_TYPES_POLICY) {
+11479:          if (Re.attrName = pa, Re.attrValue = Ft, Re.keepAttr = !0, Re.forceKeepAttr = void 0, Kn(S.uponSanitizeAttribute, z, Re), Ft = Re.attrValue, ge && (pa === "id" || pa === "name") && (fs(St, z), Ft = _e + Ft), $ && Vt(/((--!?|])>)|<\/(style|title)/i, Ft)) {
+11541:      } else if (Ae instanceof i) Se = mv("<!---->"), Re = Se.ownerDocument.importNode(Ae, !0), Re.nodeType === ta.element && Re.nodeName === "BODY" || Re.nodeName === "HTML" ? Se = Re : Se.appendChild(Re);else {
+12159:  function WS() {
+13576:    if (!e.quantityInfo) return null;
+13577:    const v = r === "book2025_item" ? null : e.quantityInfo.ordCnt,
+13578:      h = r === "book2025_item" ? e.quantityInfo.ordCnt : e.quantityInfo.prnCnt,
+13722:  function WP(e, t) {
+13732:        quantityInfo: {
+13748:        quantityInfo: {
+13762:      quantityInfo: {
+13767:      quantityInfo: {
+13777:      quantityInfo: {
+13787:      quantityInfo: {
+13819:  function Wh(e, t, n, o) {
+13854:      quantityInfo: {
+13950:                ATTB: n.pdtCode === "GSELGLV" && E.PCS_CD === "DIR_MTR" ? (T.quantityInfo?.prnCnt ?? 0) * 10 : n.pdtCode === "TPTKDFT" && E.PCS_CD === "SUB_MTR" && ["EN001", "EN002", "EN003", "EN004"].includes(E.PCS_DTL_CD) ? (E.ATTB ?? 0) * 10 : E.ATTB,
+13962:            PRN_CNT: T.quantityInfo?.ordCnt,
+13963:            PAGE_CNT: T.quantityInfo?.prnCnt,
+13978:              PRN_CNT: n.pdtCode === "GSELGLV" ? (T.quantityInfo?.prnCnt ?? 0) * 10 : T.quantityInfo?.prnCnt,
+13979:              ORD_CNT: T.quantityInfo?.ordCnt,
+14052:              quantityInfo: E,
+14072:              quantityInfo: E,
+14110:                if (n.pdtCode === "GSELGLV" && E.quantityInfo) {
+14111:                  const L = (E.quantityInfo.prnCnt ?? 0) * 10;
+14114:                    quantityInfo: {
+14115:                      ...E.quantityInfo,
+14572:              value: n?.quantityInfo.prnCnt
+14587:            value: `${n?.quantityInfo.ordCnt}권`
+14599:        f = c?.quantityGroup.view_yn === "Y" ? n?.quantityInfo.ordCnt : null,
+14600:        v = c?.quantityGroup.view_yn === "Y" ? n?.quantityInfo.prnCnt : null,
+14790:              ATTB: o?.quantityInfo.prnCnt
+15100:            if (d.height === d.width) return i.value;
+16274:          return ee === "max" ? S.locale === "ko" ? ` 최대 주문 가능 사이즈 [${M}] 보다 큽니다.` : ` Max Size: [${M}]` : S.locale === "ko" ? ` 최소 주문 가능 사이즈 [${M}] 보다 작습니다.` : ` Min Size: [${M}]`;
+16285:            ht = u.value === ke ? "W" : "H",
+16286:            ft = g.value ? `${ae} x ${ae}` : ht === "W" ? `${Q} x ${ot}` : `${ot} x ${Q}`;
+16995:          if (k) return l.locale === "en" ? k.en : k.ko;
+17052:                ht = M.get(W),
+17175:            const ht = n.hiddenPostPcs?.includes(Q.value),
+18505:      number3: `${e.quantityInfo.prnCnt}`,
+19108:      return n.visible = r, {
+19183:              ...(c === "quantityInfo" ? {
+19489:            ht = b(() => {
+19522:            le = H([]),
+19526:              return te?.width === 80 && te?.height === 80;
+19528:            me = b(() => {
+19587:            Dt = b(() => Ti[n.data.pdt_base_info[0].PDT_CD] ? ie.value.quantityInfo?.prnCnt || 1 : (ie.value.quantityInfo?.ordCnt || 1) * (ie.value.quantityInfo?.prnCnt || 1)),
+19617:            onUpdate: ue[0] || (ue[0] = De => y(Oe)("pageDirection")(De))
+19625:            onUpdate: ue[1] || (ue[1] = De => y(Oe)("setData")(De))
+19643:            onUpdate: ue[4] || (ue[4] = De => y(Oe)("shapeInfo")(De))
+19664:          })], 64)) : J("", !0), te.data.pdt_add_option_info?.length ? (_(), V(B0, {
+19666:            options: te.data.pdt_add_option_info,
+19668:            onUpdate: ue[7] || (ue[7] = De => y(Oe)("addOptionInfo")(De)),
+19690:            onUpdate: ue[10] || (ue[10] = De => y(Oe)("meterialInfo")(De))
+19703:            onUpdate: ue[11] || (ue[11] = De => y(Oe)("dosuInfo")(De))
+19720:            onUpdate: ue[13] || (ue[13] = De => y(Oe)("sizeInfo")(De)),
+19721:            onValidate: ue[14] || (ue[14] = De => y(Oe)("validation")(De)),
+19725:            onUpdate: ue[16] || (ue[16] = De => y(Oe)("calendarInfo")(De))
+19726:          })) : J("", !0), a.value.quantityGroup.view_yn === "Y" ? (_(), V(jo(ht.value), {
+19729:            options: te.data.pdt_add_option_info?.length && le.value.length ? le.value : me.value,
+19730:            default: y(_e)?.quantityInfo,
+19734:            "extra-prn-cnt-options": te.data.pdt_add_option_info?.length ? void 0 : te.data.pdt_prn_cnt_info_add,
+19743:            onUpdate: ue[17] || (ue[17] = De => y(Oe)("quantityInfo")(De))
+19747:            onUpdate: ue[18] || (ue[18] = De => y(Oe)("etcInfo")(De))
+19752:            onValidate: ue[19] || (ue[19] = De => y(Oe)("validation")(De))
+19812:            onUpload: ue[24] || (ue[24] = De => y(Oe)("fileUploadInfo")(De))
+20243:        }), U(() => a.editorData?.default?.quantityInfo?.ordCnt, (E, L) => {
+20581:          }, null, 8, ["options", "base-info", "default", "related-data"]), [[Lt, (!i.value || i.value && y(m).acrylicSelectData?.shapeInfo) && s.value.sizeSelect.view_yn === "Y"]]), s.value.quantityGroup.view_yn === "Y" ? (_(), V(av, {
+20585:            default: y(h)?.quantityInfo,
+20589:            onUpdate: A[7] || (A[7] = j => y(D)("quantityInfo")(j))
+20609:              orderQty: (y(m).quantityInfo?.ordCnt || 1) * (y(m).quantityInfo?.prnCnt || 1)
+21779:            "onUpdate:qty": g[3] || (g[3] = C => y(c)("quantityInfo")(C)),
+21785:            "onUpdate:qty": g[5] || (g[5] = C => y(c)("quantityInfo")(C)),
+22407:            i("quantityInfo")(T);
+22432:            B = b(() => Ti[n.data.pdt_base_info[0].PDT_CD] ? r.value.quantityInfo?.prnCnt || 1 : (r.value.quantityInfo?.ordCnt || 1) * (r.value.quantityInfo?.prnCnt || 1));
+22474:              QTY: `${y(r).quantityInfo?.prnCnt * (y(r).inner_dosuInfo?.COD === "SID_D" ? 2 : 1)}`
+22681:        }), U(() => a.editorData?.default?.quantityInfo?.ordCnt, (S, R) => {
+22952:          const de = b(() => Ti[n.data.pdt_base_info[0].PDT_CD] ? E.value.quantityInfo?.prnCnt || 1 : (E.value.quantityInfo?.ordCnt || 1) * (E.value.quantityInfo?.prnCnt || 1)),
+23020:          }, null, 8, ["options", "default", "related-data"]), [[Lt, a.value.dosuSelect.view_yn === "Y" && M.data.pdt_dosu_info]]), a.value.quantityGroup.view_yn === "Y" ? (_(), V(dv, {
+23025:            default: y(R)?.quantityInfo,
+23030:            onUpdate: k[9] || (k[9] = W => y(G)("quantityInfo")(W))
+24030:                  name: a.locale === "ko" ? r[S] : g.name,
+25465:            v.familyId = B, v.weight = T.join(" "), c(), f.value = !0;
+25468:            v.familyId = B, v.weight = T;
+25541:                active: v.familyId === C.id && v.weight === S
+27327:          return U(() => a.editorData?.default?.quantityInfo?.ordCnt, (B, T) => {
+27457:          return U(() => s.editorData?.default?.quantityInfo, u => {
+27606:          }), U(() => a.editorData?.default?.quantityInfo?.ordCnt, (g, C) => {
+27685:            r = b(() => s.editorData?.default?.quantityInfo?.ordCnt),
+27697:          return U(() => s.editorData?.default?.quantityInfo, l => {
+
+codex
+계약 문서의 메타모픽 가격표는 정적 deob에 있는 계산식이 아니라 원격 `get_ajax_price_vTmpl` 호출 결과로 보입니다. deob에서 로컬 계산이 있는지, 아니면 요청 생성과 fetch만 있는지 마지막으로 확인합니다.
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse Failed
+hook: PreToolUse Failed
+hook: PreToolUse Failed
+hook: PreToolUse Failed
+exec
+/bin/zsh -lc "nl -ba _workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js | sed -n '13540,13610p'" in /Users/innojini/Dev/HuniWeb
+exec
+/bin/zsh -lc "nl -ba _workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js | sed -n '13880,14040p'" in /Users/innojini/Dev/HuniWeb
+ succeeded in 0ms:
+ 13540	    xP = {
+ 13541	      TPBLMEO: "GSRMMSD",
+ 13542	      TPBLPST: "GSRMPSD"
+ 13543	    };
+ 13544	  function Hh(e, t) {
+ 13545	    const n = xP[e];
+ 13546	    return !n || t.dosuInfo?.COD !== "SID_X" ? e : t.pcsInfo?.find(s => s.PCS_CD === "PRT_SID")?.selectedOptions[0]?.PCS_DTL_CD === "PT005" ? n : e;
+ 13547	  }
+ 13548	  function HP(e, t) {
+ 13549	    const {
+ 13550	        pdtCode: n,
+ 13551	        option: o,
+ 13552	        editorData: s
+ 13553	      } = t,
+ 13554	      a = o.skinInfo,
+ 13555	      r = o.item_gbn,
+ 13556	      i = a?.sizeSelect.view_yn === "Y" ? e.sizeInfo.cutSize : null,
+ 13557	      l = a?.sizeSelect.view_yn === "Y" ? e.sizeInfo.workSize : null,
+ 13558	      u = i ? `${+i.width.toFixed(2)}x${+i.height.toFixed(2)}` : null,
+ 13559	      c = l ? `${+l.width.toFixed(2)}x${+l.height.toFixed(2)}` : null,
+ 13560	      d = {
+ 13561	        ...(u ? {
+ 13562	          cutSize: {
+ 13563	            value: u,
+ 13564	            label: F("summary.재단")
+ 13565	          }
+ 13566	        } : {}),
+ 13567	        ...(c ? {
+ 13568	          workSize: {
+ 13569	            value: c,
+ 13570	            label: F("summary.작업")
+ 13571	          }
+ 13572	        } : {})
+ 13573	      },
+ 13574	      p = s.default?.cntInfo,
+ 13575	      f = fu[n] === "SetQty" ? (p?.totalCnt || 1) / (p?.initCnt || 1) : null;
+ 13576	    if (!e.quantityInfo) return null;
+ 13577	    const v = r === "book2025_item" ? null : e.quantityInfo.ordCnt,
+ 13578	      h = r === "book2025_item" ? e.quantityInfo.ordCnt : e.quantityInfo.prnCnt,
+ 13579	      m = {
+ 13580	        ...(f ? {
+ 13581	          setQty: {
+ 13582	            value: f,
+ 13583	            label: F("summary.세트")
+ 13584	          }
+ 13585	        } : v ? {
+ 13586	          designQty: {
+ 13587	            value: v,
+ 13588	            label: F("summary.디자인수")
+ 13589	          }
+ 13590	        } : {}),
+ 13591	        orderQty: {
+ 13592	          value: h,
+ 13593	          label: F("summary.수량")
+ 13594	        }
+ 13595	      },
+ 13596	      {
+ 13597	        result_sum: D,
+ 13598	        book_info: N
+ 13599	      } = e.priceCalc.result;
+ 13600	    if (!D) return null;
+ 13601	    const {
+ 13602	        ORG_PRICE: I,
+ 13603	        ORG_PRICE_VAT: w,
+ 13604	        PRICE: A,
+ 13605	        PRICE_VAT: j,
+ 13606	        PRICE_MALL: B,
+ 13607	        PRICE_MALL_VAT: T
+ 13608	      } = D,
+ 13609	      g = A !== B,
+ 13610	      C = I !== A,
+
+ succeeded in 0ms:
+ 13880	            refetchOnWindowFocus: !1
+ 13881	          }),
+ 13882	          {
+ 13883	            data: a,
+ 13884	            mutate: r
+ 13885	          } = y_({
+ 13886	            mutationKey: ["price/get"],
+ 13887	            mutationFn: T => ru({
+ 13888	              type: "COMMON",
+ 13889	              body: T
+ 13890	            })
+ 13891	          }),
+ 13892	          i = Te("callbacks", {}),
+ 13893	          l = b(() => o.value?.result?.product_option.option),
+ 13894	          u = b(() => l.value?.item_gbn),
+ 13895	          c = {
+ 13896	            component: $n(() => Promise.resolve().then(() => zb)),
+ 13897	            className: "widget"
+ 13898	          },
+ 13899	          d = {
+ 13900	            vDigital_item: c,
+ 13901	            acrylic2025_item: {
+ 13902	              component: $n(() => Promise.resolve().then(() => DO)),
+ 13903	              className: "widget"
+ 13904	            },
+ 13905	            clothes2025_item: {
+ 13906	              component: $n(() => Promise.resolve().then(() => HE)),
+ 13907	              className: "clothes-color"
+ 13908	            },
+ 13909	            book2025_item: {
+ 13910	              component: $n(() => Promise.resolve().then(() => bI)),
+ 13911	              className: ""
+ 13912	            },
+ 13913	            offset2023_item: {
+ 13914	              component: $n(() => Promise.resolve().then(() => KI)),
+ 13915	              className: ""
+ 13916	            }
+ 13917	          },
+ 13918	          p = H(),
+ 13919	          f = b(() => l.value?.price_gbn || "tmpl_price"),
+ 13920	          v = Te("member"),
+ 13921	          h = H({
+ 13922	            ORD_INFO: [],
+ 13923	            PCS_INFO: [],
+ 13924	            price_gbn: f.value,
+ 13925	            mb_cust_cod: v?.mb_cust_cod || "10000000"
+ 13926	          });
+ 13927	        function m(T, g, C, S) {
+ 13928	          if (!g || !T.startsWith("ST") || ["STTBDFT", "STEWDFT"].includes(T)) return {
+ 13929	            cut: g,
+ 13930	            wrk: C
+ 13931	          };
+ 13932	          if (!Object.values(S?.pcsInfo ?? {}).some(G => G.selectedOptions.some(X => X.PCS_CD === "CUT_DFT" && X.PCS_DTL_CD === "DFITM"))) return {
+ 13933	            cut: g,
+ 13934	            wrk: C
+ 13935	          };
+ 13936	          const E = Math.max(g, 50),
+ 13937	            L = E - g;
+ 13938	          return {
+ 13939	            cut: E,
+ 13940	            wrk: C != null ? C + L : C
+ 13941	          };
+ 13942	        }
+ 13943	        function D(T) {
+ 13944	          const g = [];
+ 13945	          T.pcsInfo && Object.values(T.pcsInfo).forEach(S => {
+ 13946	            (S.PCS_CD === "ROU_DFT" ? S.selectedOptions.slice(0, 1) : S.selectedOptions).forEach(E => {
+ 13947	              g.push({
+ 13948	                PCS_COD: E.PCS_CD,
+ 13949	                PCS_DTL_COD: E.PCS_DTL_CD,
+ 13950	                ATTB: n.pdtCode === "GSELGLV" && E.PCS_CD === "DIR_MTR" ? (T.quantityInfo?.prnCnt ?? 0) * 10 : n.pdtCode === "TPTKDFT" && E.PCS_CD === "SUB_MTR" && ["EN001", "EN002", "EN003", "EN004"].includes(E.PCS_DTL_CD) ? (E.ATTB ?? 0) * 10 : E.ATTB,
+ 13951	                ATTB_2: E.ATTB_2,
+ 13952	                ATTB_3: E.ATTB_3
+ 13953	              });
+ 13954	            });
+ 13955	          });
+ 13956	          const C = u.value === "book2025_item" ? [{
+ 13957	            PDT_CD: n.pdtCode,
+ 13958	            CUT_WDT: T.sizeInfo?.cutSize?.width,
+ 13959	            CUT_HGH: T.sizeInfo?.cutSize?.height,
+ 13960	            WRK_WDT: T.sizeInfo?.workSize?.width,
+ 13961	            WRK_HGH: T.sizeInfo?.workSize?.height,
+ 13962	            PRN_CNT: T.quantityInfo?.ordCnt,
+ 13963	            PAGE_CNT: T.quantityInfo?.prnCnt,
+ 13964	            CVR_CLR_CNT: T.dosuInfo?.PRN_CLR_CNT,
+ 13965	            INN_CLR_CNT: T.inner_dosuInfo?.PRN_CLR_CNT,
+ 13966	            CVR_MTRL_CD: T.meterialInfo?.MTRL_CD,
+ 13967	            INN_MTRL_CD: T.inner_meterialInfo?.MTRL_CD
+ 13968	          }] : [(() => {
+ 13969	            const S = m(n.pdtCode, T.sizeInfo?.cutSize?.width, T.sizeInfo?.workSize?.width, T),
+ 13970	              R = m(n.pdtCode, T.sizeInfo?.cutSize?.height, T.sizeInfo?.workSize?.height, T);
+ 13971	            return {
+ 13972	              PDT_CD: Hh(n.pdtCode, T),
+ 13973	              MTRL_CD: T.meterialInfo?.MTRL_CD,
+ 13974	              CUT_WDT: S.cut,
+ 13975	              CUT_HGH: R.cut,
+ 13976	              WRK_WDT: S.wrk,
+ 13977	              WRK_HGH: R.wrk,
+ 13978	              PRN_CNT: n.pdtCode === "GSELGLV" ? (T.quantityInfo?.prnCnt ?? 0) * 10 : T.quantityInfo?.prnCnt,
+ 13979	              ORD_CNT: T.quantityInfo?.ordCnt,
+ 13980	              DOSU_COD: T.dosuInfo?.COD,
+ 13981	              PRN_CLR_CNT: T.dosuInfo?.PRN_CLR_CNT,
+ 13982	              ADD_CLR_YN: T.dosuInfo?.ADD_CLR_YN,
+ 13983	              ...(T.addOptionInfo ? {
+ 13984	                PACK_PRN_CNT: T.addOptionInfo.PACK_PRN_CNT
+ 13985	              } : {}),
+ 13986	              ...(u.value === "clothes2025_item" ? {
+ 13987	                PRINT_TYPE: T.clothesSelectData.printType?.COD
+ 13988	              } : {}),
+ 13989	              ...(n.pdtCode === "GSTRTAG" ? {
+ 13990	                TMPL_IDX: T.shapeInfo?.COD === "large" ? 14 : T.shapeInfo?.COD === "small" ? 11 : void 0
+ 13991	              } : {})
+ 13992	            };
+ 13993	          })()];
+ 13994	          h.value = {
+ 13995	            ORD_INFO: C,
+ 13996	            PCS_INFO: g,
+ 13997	            price_gbn: f.value,
+ 13998	            mb_cust_cod: v?.mb_cust_cod || "10000000"
+ 13999	          };
+ 14000	        }
+ 14001	        const N = Ve(),
+ 14002	          I = Mo(),
+ 14003	          w = ra(),
+ 14004	          A = Te("editorData", null);
+ 14005	        U(() => A, T => {
+ 14006	          if (!T?.editingYn || T.editingYn !== "Y") return;
+ 14007	          if (n.pdtCode.startsWith("ST") && T.type === "KOI") {
+ 14008	            const L = I.getOrderData()?.pcsInfo ?? [],
+ 14009	              G = L.some(K => K.PCS_CD === "SCO_DFT" && K.VIEW_YN === "Y"),
+ 14010	              X = L.some(K => K.PCS_CD === "PRT_WHT" && K.VIEW_YN === "Y");
+ 14011	            if (G || X) {
+ 14012	              const K = (T.docInfo?.layerList ?? []).map(be => be.layer).filter(Boolean);
+ 14013	              if (G && !K.includes("Scodix") || X && !K.includes("White") || !G && K.includes("Scodix") || !X && K.includes("White")) {
+ 14014	                alert(F("에디터-레이어-후가공-불일치", {
+ 14015	                  FINISHING: G && X ? "부분UV/화이트" : G ? "부분UV" : "화이트"
+ 14016	                }));
+ 14017	                return;
+ 14018	              }
+ 14019	            }
+ 14020	          }
+ 14021	          if (n.pdtCode === "FBPOCHR" && T.type === "KOI") {
+ 14022	            const L = {
+ 14023	                reflect: "ST001",
+ 14024	                "glitter-holo-silver": "ST002",
+ 14025	                "holo-silver": "ST003",
+ 14026	                "holo-gold": "ST004"
+ 14027	              },
+ 14028	              G = T.docInfo?.foilList ?? [],
+ 14029	              X = G.find(de => de.used),
+ 14030	              K = X ? L[X.name] ?? null : null;
+ 14031	            console.log("[FBPOCHR/foil] Common.vue foilList:", G, "/ matched:", K), N.setFoilPcsDtlCd(K);
+ 14032	          }
+ 14033	          const g = w.getProductBaseInfo(),
+ 14034	            C = I.getOrderData()?.sizeInfo?.DIV_NM,
+ 14035	            S = I.getOrderData()?.shapeInfo?.COD,
+ 14036	            R = {
+ 14037	              pdtCode: n.pdtCode,
+ 14038	              ...T
+ 14039	            },
+ 14040	            E = T.type === "RP" ? Vh(R) : Wh(R, g, C, S);
+
+exec
+/bin/zsh -lc "rg -n \"function Hh|const Hh|Hh =|function m\\(|function D\\(|function r\\(\" _workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js" in /Users/innojini/Dev/HuniWeb
+exec
+/bin/zsh -lc 'rg -n "result_sum|PRICE|PRICE_MALL|ORG_PRICE|get_ajax_price_vTmpl|priceCalc|PRICE=|6350000|6,350,000|12700|12,700" _workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js _workspace/huni-widget/01_reverse/redo-260623/contracts/price-engine-additions.md' in /Users/innojini/Dev/HuniWeb
+ succeeded in 0ms:
+4161:    function r(d, p) {
+8840:    function D(C) {
+11740:    function r(i) {
+11802:    function r(i, l, u) {
+11920:    function r(i) {
+13411:      function r(i) {
+13544:  function Hh(e, t) {
+13927:        function m(T, g, C, S) {
+13943:        function D(T) {
+15582:        function r(i) {
+16709:        function m(T) {
+16712:        function D() {
+16993:        function m(M) {
+17639:        function r(i) {
+18254:        function r(v) {
+18278:          async function m(D) {
+18740:        async function m() {
+18802:        async function D() {
+19309:          function m(te) {
+20822:        function r(l) {
+22092:        function D() {
+23193:          function m(C) {
+23196:          function D(C) {
+
+ succeeded in 0ms:
+_workspace/huni-widget/01_reverse/redo-260623/contracts/price-engine-additions.md:4:> 가격 권위 = 서버 `get_ajax_price_vTmpl`. PRICE≠0 = 정상(0=결함). result_sum.PRICE = 단일 권위.
+_workspace/huni-widget/01_reverse/redo-260623/contracts/price-engine-additions.md:25:| 변형 | PRICE | 관계 |
+_workspace/huni-widget/01_reverse/redo-260623/contracts/price-engine-additions.md:27:| baseline PRN500 | 6,350,000 | ≠0 ✓ |
+_workspace/huni-widget/01_reverse/redo-260623/contracts/price-engine-additions.md:30:| ADD_CLR_YN=Y | 6,350,000 | 무변화(자재조건부) |
+_workspace/huni-widget/01_reverse/redo-260623/contracts/price-engine-additions.md:37:- 회원등급 PRICE_MALL 워터폴(기본등급 캡처만).
+_workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js:12324:      const o = `${jn}/${t}/product_price/get_ajax_price_vTmpl`;
+_workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js:13597:        result_sum: D,
+_workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js:13599:      } = e.priceCalc.result;
+_workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js:13602:        ORG_PRICE: I,
+_workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js:13603:        ORG_PRICE_VAT: w,
+_workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js:13604:        PRICE: A,
+_workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js:13605:        PRICE_VAT: j,
+_workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js:13606:        PRICE_MALL: B,
+_workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js:13607:        PRICE_MALL_VAT: T
+_workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js:14056:              priceCalc: K,
+_workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js:14099:                priceCalc: {
+_workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js:14148:            I.setOrderData(C, R), i?.onPriceChange && i.onPriceChange(T.result.result_sum), j(C);
+_workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js:14232:              priceCalc: {
+_workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js:14237:            h.setOrderData(N), i?.onPriceChange && i.onPriceChange(D.result.result_sum);
+_workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js:14493:        priceCalc: t.priceCalc ? {
+_workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js:14494:          ...t.priceCalc,
+_workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js:14496:            ...t.priceCalc.params,
+_workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js:14497:            ORD_INFO: t.priceCalc.params.ORD_INFO.map((o, s) => s === 0 ? {
+_workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js:14502:        } : t.priceCalc
+_workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js:14716:        if (n?.priceCalc.result.retCode !== 200 || !n.priceCalc.result.result_sum.PRICE) throw new Error(F("주문불가-가격"));
+_workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js:14717:        const o = n.priceCalc.result.result_check_orderable;
+_workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js:14792:            c = this.getOrderData()?.priceCalc.params;
+_workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js:14810:            ORG_PRICE: D,
+_workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js:14811:            ORG_PRICE_VAT: N,
+_workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js:14812:            PRICE: I,
+_workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js:14813:            PRICE_VAT: w,
+_workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js:14814:            PRICE_MALL: A,
+_workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js:14815:            PRICE_MALL_VAT: j
+_workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js:14816:          } = m.result.result_sum;
+_workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js:14818:            type: "PRICE",
+_workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js:14854:      const a = n.priceCalc.result.result_sum,
+_workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js:14855:        r = a.PRICE !== a.PRICE_MALL,
+_workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js:14856:        i = a.ORG_PRICE !== a.PRICE,
+_workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js:14857:        l = r ? a.PRICE_MALL + a.PRICE_MALL_VAT : i ? a.PRICE + a.PRICE_VAT : a.ORG_PRICE + a.ORG_PRICE_VAT;
+_workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js:14878:        if (!n?.priceCalc.result.result_sum.PRICE) throw new Error(F("주문불가-가격"));
+_workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js:18493:      a = e.priceCalc.result.seneca_info?.seneca;
+_workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js:22956:          return U(() => ee.orderData?.priceCalc.result.result_check_orderable, M => {
+_workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js:23265:            B = b(() => j.getOrderData()?.priceCalc.result.result?.reduce((S, R) => (S[R.MTRL_CD] = +R.PRICE_MALL !== R.PRICE ? +R.PRICE_MALL : R.PRICE, S), {})),
+_workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js:24340:              } = A.priceCalc.result;
+
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse Failed
+hook: PreToolUse Failed
+hook: PreToolUse Failed
+hook: PreToolUse
+hook: PreToolUse Failed
+exec
+/bin/zsh -lc "nl -ba _workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js | sed -n '14700,14825p'" in /Users/innojini/Dev/HuniWeb
+ succeeded in 0ms:
+ 14700	      const n = {
+ 14701	          pdtCode: this.pdtCode,
+ 14702	          ...t
+ 14703	        },
+ 14704	        o = this.getProductBaseInfo(),
+ 14705	        s = this.orderStore.getOrderData()?.sizeInfo?.DIV_NM,
+ 14706	        a = this.orderStore.getOrderData()?.shapeInfo?.COD,
+ 14707	        r = n.type === "KOI" ? Wh(n, o, s, a) : Vh(n);
+ 14708	      r ? this.editorStore.setEditorData(r) : console.error(`[RedWidgetSDK/ERROR] 에디터에서 온 데이터가 없습니다 > 받은 데이터: ${t}`);
+ 14709	    }
+ 14710	    canOrder() {
+ 14711	      try {
+ 14712	        const t = this.getProductBaseInfo(),
+ 14713	          n = this.getOrderData();
+ 14714	        if (t?.product_option.option.order_yn === "N") throw new Error(F("주문불가상태"));
+ 14715	        if (n?.validation && n.validation.length > 0) throw new Error(n.validation[0]);
+ 14716	        if (n?.priceCalc.result.retCode !== 200 || !n.priceCalc.result.result_sum.PRICE) throw new Error(F("주문불가-가격"));
+ 14717	        const o = n.priceCalc.result.result_check_orderable;
+ 14718	        if (o && o.retCode !== 200 && o.msg) throw new Error(o.msg);
+ 14719	        const s = t?.product_option.option.item_gbn,
+ 14720	          a = this.editorStore.uploadType,
+ 14721	          r = n?.fileUploadInfo;
+ 14722	        if (s === "book2025_item") {
+ 14723	          for (const [c, d] of Object.entries(a)) {
+ 14724	            const p = F(c === "inner" ? "내지" : "표지");
+ 14725	            if (d === "editor" && !this.editorStore.isAfterEdit(c)) throw new Error(`[${p}] ${F("주문불가-에디터")}`);
+ 14726	            if (d === "pdf") {
+ 14727	              if (!r) throw new Error(`[${p}] ${F("주문불가-파일")}`);
+ 14728	              if (c === "inner" && !r[0]) throw new Error(`[${p}] ${F("주문불가-파일")}`);
+ 14729	              if (c === "default" && !r[1]) throw new Error(`[${p}] ${F("주문불가-파일")}`);
+ 14730	            }
+ 14731	          }
+ 14732	          if (r && r[0] && r[1] && r[0].org_file_nm === r[1].org_file_nm) throw new Error(F("주문불가-파일명중복"));
+ 14733	          return {
+ 14734	            success: !0
+ 14735	          };
+ 14736	        }
+ 14737	        if (a.default === "pdf") {
+ 14738	          if (!r || !r[0]) throw new Error(F("주문불가-파일"));
+ 14739	          if (s === "clothes2025_item" && n.clothesSelectData.printType.COD === "PTP_SLK" && !n?.clothesSelectData.pantoneInfo) throw new Error(F("주문불가-인쇄컬러미선택"));
+ 14740	        }
+ 14741	        if (s === "clothes2025_item" && !n?.clothesSelectData.printType.COD) return {
+ 14742	          success: !0
+ 14743	        };
+ 14744	        if (a.default === "editor" && !this.editorStore.isAfterEdit() && n.dosuInfo.COD !== "SID_X") throw new Error(F("주문불가-에디터"));
+ 14745	        const i = n?.pcsInfo.find(c => c.PCS_CD === "NUM_DFT");
+ 14746	        if (i) {
+ 14747	          const c = i.selectedOptions[0]?.ATTB;
+ 14748	          if (!c || !String(c).includes("~")) throw new Error(F("주문불가-번호인쇄"));
+ 14749	        }
+ 14750	        const l = n?.pcsInfo.find(c => c.PCS_CD === "PRT_SID");
+ 14751	        if (l) {
+ 14752	          const c = l.selectedOptions[0];
+ 14753	          if (c?.PCS_DTL_CD === "PT005" && !c.ATTB) throw new Error(F("주문불가-PRT_SID-색상미선택"));
+ 14754	        }
+ 14755	        const u = this.orderStore.getUserDoubleConfirmed();
+ 14756	        if (t0.has(this.pdtCode) && !u) throw new Error(F("주문불가-재확인"));
+ 14757	        return {
+ 14758	          success: !0
+ 14759	        };
+ 14760	      } catch (t) {
+ 14761	        let n = F("주문불가상태");
+ 14762	        return t instanceof Error && (n = t.message), {
+ 14763	          success: !1,
+ 14764	          errorMessage: n
+ 14765	        };
+ 14766	      }
+ 14767	    }
+ 14768	    async getKOIEditorTabData(t) {
+ 14769	      try {
+ 14770	        if (!t) throw new Error("코이 에디터 커스텀 탭 데이터가 필요합니다");
+ 14771	        const n = this.getProductBaseInfo();
+ 14772	        if (!n) throw new Error("제품 기본 정보 가져오기 실패");
+ 14773	        const o = this.getOrderData(),
+ 14774	          {
+ 14775	            product_data: {
+ 14776	              apparel_info: s,
+ 14777	              pdt_pcs_info: a
+ 14778	            }
+ 14779	          } = n;
+ 14780	        if (s) {
+ 14781	          const r = t.PAGES.map(C => ({
+ 14782	              PCS_COD: "PDT_WRK",
+ 14783	              PCS_DTL_COD: s.print_area.find(R => R.KOI_NME === C)?.COD || ""
+ 14784	            })),
+ 14785	            i = a.find(C => C.MTRL_CD === t.MTRL_COD);
+ 14786	          if (!i) throw new Error("선택된 제품 자재 코드가 없습니다.");
+ 14787	          const l = {
+ 14788	              PCS_COD: i.PCS_CD,
+ 14789	              PCS_DTL_COD: i.PCS_DTL_CD,
+ 14790	              ATTB: o?.quantityInfo.prnCnt
+ 14791	            },
+ 14792	            c = this.getOrderData()?.priceCalc.params;
+ 14793	          if (!c) throw new Error("이전 가격 페이로드 가져오기 실패");
+ 14794	          const p = [{
+ 14795	              ...c.ORD_INFO[0],
+ 14796	              MTRL_CD: t.MTRL_COD
+ 14797	            }],
+ 14798	            v = [...c.PCS_INFO.filter(C => C.PCS_COD !== "DIR_MTR" && C.PCS_COD !== "PDT_WRK"), ...r, l],
+ 14799	            h = {
+ 14800	              ...c,
+ 14801	              ORD_INFO: p,
+ 14802	              PCS_INFO: v
+ 14803	            },
+ 14804	            m = await ru({
+ 14805	              type: "COMMON",
+ 14806	              body: h
+ 14807	            });
+ 14808	          if (m.errorMessage || !m.result) throw new Error(m.errorMessage);
+ 14809	          const {
+ 14810	            ORG_PRICE: D,
+ 14811	            ORG_PRICE_VAT: N,
+ 14812	            PRICE: I,
+ 14813	            PRICE_VAT: w,
+ 14814	            PRICE_MALL: A,
+ 14815	            PRICE_MALL_VAT: j
+ 14816	          } = m.result.result_sum;
+ 14817	          return {
+ 14818	            type: "PRICE",
+ 14819	            data: I !== A ? A + j : D !== I ? I + w : D + N
+ 14820	          };
+ 14821	        }
+ 14822	      } catch (n) {
+ 14823	        return console.error("[RedWidgetSDK/ERROR] 코이에디터 데이터 산정 실패 > ", n), {
+ 14824	          errorMessage: "데이터 산정 실패"
+ 14825	        };
+
+exec
+/bin/zsh -lc "nl -ba _workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js | sed -n '14845,14885p'" in /Users/innojini/Dev/HuniWeb
+ succeeded in 0ms:
+ 14845	      if (!n?.subMtrlInfo) return {
+ 14846	        errorMessage: F("주문불가-옵션미선택")
+ 14847	      };
+ 14848	      const o = [];
+ 14849	      let s = 0;
+ 14850	      for (const c of n.subMtrlInfo) o?.push({
+ 14851	        label: c.MTRL_NME,
+ 14852	        value: c.QTY
+ 14853	      }), s += c.QTY;
+ 14854	      const a = n.priceCalc.result.result_sum,
+ 14855	        r = a.PRICE !== a.PRICE_MALL,
+ 14856	        i = a.ORG_PRICE !== a.PRICE,
+ 14857	        l = r ? a.PRICE_MALL + a.PRICE_MALL_VAT : i ? a.PRICE + a.PRICE_VAT : a.ORG_PRICE + a.ORG_PRICE_VAT;
+ 14858	      return {
+ 14859	        product: {
+ 14860	          label: "제품명",
+ 14861	          value: t?.product_option.option.pdt_nme
+ 14862	        },
+ 14863	        qty: {
+ 14864	          label: `수량 (총 수량: ${s})`,
+ 14865	          children: o
+ 14866	        },
+ 14867	        amount: {
+ 14868	          label: "합계",
+ 14869	          value: `${l.toLocaleString()}원`
+ 14870	        }
+ 14871	      };
+ 14872	    }
+ 14873	    canOrder() {
+ 14874	      try {
+ 14875	        if (this.getProductBaseInfo()?.product_option.option.order_yn === "N") throw new Error(F("주문불가상태"));
+ 14876	        const n = this.getOrderData();
+ 14877	        if (!n?.subMtrlInfo) throw new Error(F("주문불가-옵션미선택"));
+ 14878	        if (!n?.priceCalc.result.result_sum.PRICE) throw new Error(F("주문불가-가격"));
+ 14879	        return {
+ 14880	          success: !0
+ 14881	        };
+ 14882	      } catch (t) {
+ 14883	        let n = F("주문불가상태");
+ 14884	        return t instanceof Error && (n = t.message), {
+ 14885	          success: !1,
+
+exec
+/bin/zsh -lc "nl -ba _workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js | sed -n '14040,14160p'" in /Users/innojini/Dev/HuniWeb
+ succeeded in 0ms:
+ 14040	            E = T.type === "RP" ? Vh(R) : Wh(R, g, C, S);
+ 14041	          E && N.setEditorData(E);
+ 14042	        }, {
+ 14043	          deep: !0
+ 14044	        });
+ 14045	        function j(T) {
+ 14046	          if (!o.value?.result) return;
+ 14047	          const {
+ 14048	              sizeInfo: g,
+ 14049	              pcsInfo: C,
+ 14050	              meterialInfo: S,
+ 14051	              dosuInfo: R,
+ 14052	              quantityInfo: E,
+ 14053	              clothesSelectData: L,
+ 14054	              calendarInfo: G,
+ 14055	              acrylicSelectData: X,
+ 14056	              priceCalc: K,
+ 14057	              addOptionInfo: de
+ 14058	            } = T,
+ 14059	            {
+ 14060	              pdt_base_info: be,
+ 14061	              pdt_mtrl_info: xe,
+ 14062	              pdt_pcs_info: ee
+ 14063	            } = o.value.result.product_data,
+ 14064	            M = {
+ 14065	              lang_cod: t.locale,
+ 14066	              pdt_cod: n.pdtCode,
+ 14067	              PDT_NM: be[0].PDT_NM,
+ 14068	              sizeInfo: g,
+ 14069	              pcsInfo: C,
+ 14070	              meterialInfo: S,
+ 14071	              dosuInfo: R,
+ 14072	              quantityInfo: E,
+ 14073	              clothesSelectData: L,
+ 14074	              calendarInfo: G,
+ 14075	              acrylicSelectData: X,
+ 14076	              base: {
+ 14077	                item_gbn: u.value || "",
+ 14078	                koi_template_resource_id: l.value?.koi_template_resource_id || "",
+ 14079	                koiOption: l.value?.koiOption,
+ 14080	                pdt_mtrl_info: u.value === "clothes2025_item" ? [...xe] : [],
+ 14081	                pdt_pcs_info: u.value === "clothes2025_item" ? [...ee] : []
+ 14082	              },
+ 14083	              seneca_info: K?.result.seneca_info,
+ 14084	              addOptionInfo: de
+ 14085	            };
+ 14086	          N.setPayloadForEditorConfig(M);
+ 14087	        }
+ 14088	        function B(T) {
+ 14089	          p.value = T, D(T);
+ 14090	        }
+ 14091	        return U(() => h.value, an(T => {
+ 14092	          if (rn(T)) return;
+ 14093	          const g = T.ORD_INFO?.[0];
+ 14094	          !g?.PRN_CNT || !g?.CUT_WDT || !g?.CUT_HGH || r(T);
+ 14095	        }, 200)), U(() => a.value, T => {
+ 14096	          if (p.value && T?.result) {
+ 14097	            const g = {
+ 14098	                ...p.value,
+ 14099	                priceCalc: {
+ 14100	                  params: h.value,
+ 14101	                  result: T.result
+ 14102	                }
+ 14103	              },
+ 14104	              C = (() => {
+ 14105	                const E = $P.has(n.pdtCode) && g.dosuInfo && g.meterialInfo ? {
+ 14106	                  ...g,
+ 14107	                  inner_dosuInfo: g.dosuInfo,
+ 14108	                  inner_meterialInfo: g.meterialInfo
+ 14109	                } : g;
+ 14110	                if (n.pdtCode === "GSELGLV" && E.quantityInfo) {
+ 14111	                  const L = (E.quantityInfo.prnCnt ?? 0) * 10;
+ 14112	                  return {
+ 14113	                    ...E,
+ 14114	                    quantityInfo: {
+ 14115	                      ...E.quantityInfo,
+ 14116	                      prnCnt: L
+ 14117	                    },
+ 14118	                    pcsInfo: E.pcsInfo?.map(G => G.PCS_CD === "DIR_MTR" ? {
+ 14119	                      ...G,
+ 14120	                      selectedOptions: G.selectedOptions.map(X => ({
+ 14121	                        ...X,
+ 14122	                        ATTB: L
+ 14123	                      }))
+ 14124	                    } : G)
+ 14125	                  };
+ 14126	                }
+ 14127	                if (n.pdtCode === "TPTKDFT") {
+ 14128	                  const L = new Set(["EN001", "EN002", "EN003", "EN004"]);
+ 14129	                  return {
+ 14130	                    ...E,
+ 14131	                    pcsInfo: E.pcsInfo?.map(G => G.PCS_CD === "SUB_MTR" ? {
+ 14132	                      ...G,
+ 14133	                      selectedOptions: G.selectedOptions.map(X => L.has(X.PCS_DTL_CD) ? {
+ 14134	                        ...X,
+ 14135	                        ATTB: (X.ATTB ?? 0) * 10
+ 14136	                      } : X)
+ 14137	                    } : G)
+ 14138	                  };
+ 14139	                }
+ 14140	                return E;
+ 14141	              })(),
+ 14142	              S = l.value ? {
+ 14143	                pdtCode: n.pdtCode,
+ 14144	                option: l.value,
+ 14145	                editorData: N.editorData
+ 14146	              } : null,
+ 14147	              R = S ? HP(C, S) : null;
+ 14148	            I.setOrderData(C, R), i?.onPriceChange && i.onPriceChange(T.result.result_sum), j(C);
+ 14149	          }
+ 14150	        }), U(() => o.value, T => {
+ 14151	          T?.result && w.setProductBaseInfo(T.result);
+ 14152	        }), U(() => s.value, T => {
+ 14153	          if (T && !(typeof i.onMounted > "u")) return o.value?.errorMessage && typeof i.onError < "u" ? (i.onError(o.value.errorMessage), i.onMounted(!1)) : i.onMounted(!0);
+ 14154	        }), (T, g) => (_(), O("div", YP, [y(s) && u.value ? (_(), O("div", QP, [(_(), V(jo(d[u.value]?.component || c.component), {
+ 14155	          data: y(o)?.result?.product_data,
+ 14156	          "widget-attr": l.value,
+ 14157	          "seneca-info": y(a)?.result?.seneca_info,
+ 14158	          onUpdate: B
+ 14159	        }, null, 40, ["data", "widget-attr", "seneca-info"]))])) : (_(), V(Lh, {
+ 14160	          key: 1,
+
+exec
+/bin/zsh -lc 'rg -n "ADD_CLR_YN|addClrMtrlList|REAM_CNT|REAM_YN|PDT_VER_SIZE|MIN_ORD_PRN_CNT|ADD_ORD_PRN_CNT|PACK_PRN_CNT|DOSU_COD|PRN_CLR_CNT|GSELGLV" _workspace/huni-widget/01_reverse/redo-260623/contracts/price-engine-additions.md _workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts _workspace/huni-widget/04_build/src/adapters/red/red-types.ts _workspace/huni-widget/04_build/src/contract/price.ts' in /Users/innojini/Dev/HuniWeb
+ succeeded in 0ms:
+_workspace/huni-widget/04_build/src/adapters/red/red-types.ts:65:  PRN_CLR_CNT: number;
+_workspace/huni-widget/04_build/src/adapters/red/red-types.ts:112:  pdt_dosu_bnc_info: Array<{ PRN_CLR_CNT: number; COD: string; COD_NME: string }>;
+_workspace/huni-widget/04_build/src/adapters/red/red-types.ts:174:  PRN_CLR_CNT?: number;
+_workspace/huni-widget/04_build/src/adapters/red/red-types.ts:176:  DOSU_COD?: string;
+_workspace/huni-widget/01_reverse/redo-260623/contracts/price-engine-additions.md:10:| ADD_CLR_YN | dosuInfo.ADD_CLR_YN (L13982) | 추가색상 Y/N | 자재/도수 조건부(NCCDDFT RXSNO250선 무변화) |
+_workspace/huni-widget/01_reverse/redo-260623/contracts/price-engine-additions.md:11:| PACK_PRN_CNT | addOptionInfo.PACK_PRN_CNT (L13984, 조건부) | 개별포장 수량 | 미full검증 |
+_workspace/huni-widget/01_reverse/redo-260623/contracts/price-engine-additions.md:12:| REAM_CNT | pdt_prn_cnt_info 행 (L22611 REAM_CNT/PRN_CNT) | 연(ream) 수 | 수량모델 B |
+_workspace/huni-widget/01_reverse/redo-260623/contracts/price-engine-additions.md:18:특수: GSELGLV PRN_CNT×10 (L13978).
+_workspace/huni-widget/01_reverse/redo-260623/contracts/price-engine-additions.md:21:- 모델 A (래더): PRN_CNT = MIN_ORD_PRN_CNT + ADD_ORD_PRN_CNT × h (h=0..9), INC_CNT=ADD, UNIT_PRN_CNT, DFT_YN=첫행Y. deob L15432–15445. (PDT_VER_SIZE형 굿즈)
+_workspace/huni-widget/01_reverse/redo-260623/contracts/price-engine-additions.md:22:- 모델 B (행): 서버 pdt_prn_cnt_info 행 + base FIR_CNT/INC/INC_STEP/REAM_YN. (offset2023_item 명함/카드/책자)
+_workspace/huni-widget/01_reverse/redo-260623/contracts/price-engine-additions.md:30:| ADD_CLR_YN=Y | 6,350,000 | 무변화(자재조건부) |
+_workspace/huni-widget/01_reverse/redo-260623/contracts/price-engine-additions.md:36:- ADD_CLR_YN/PACK_PRN_CNT 정확 가격함수(full sweep 미수행).
+_workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts:387:        priceColorCount: d.PRN_CLR_CNT, // dosu↔bnc 평면화
+_workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts:419:          priceColorCount: d.PRN_CLR_CNT,
+_workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts:569://  - DOSU_COD 는 의도 omit(OPEN-1) — PRN_CLR_CNT 가 도수 가격의미 운반(테스트 입증, 회귀 가드 유지).
+_workspace/huni-widget/04_build/src/adapters/red/red-adapter.ts:588:    PRN_CLR_CNT: req.colorCounts.default,
+
+codex
+`REAM_CNT`는 `quantityInfo`에 포함되어 store에는 남지만 가격 요청 빌더가 읽는 필드는 `ordCnt/prnCnt`뿐입니다. 표시 라벨에서만 `R` 표기를 쓰는지 확인하기 위해 해당 렌더 라인도 읽겠습니다.
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse Failed
+hook: PreToolUse Failed
+hook: PreToolUse Failed
+hook: PreToolUse Failed
+exec
+/bin/zsh -lc "nl -ba _workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js | sed -n '22660,22735p'" in /Users/innojini/Dev/HuniWeb
+exec
+/bin/zsh -lc "nl -ba _workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js | sed -n '22420,22490p'" in /Users/innojini/Dev/HuniWeb
+exec
+/bin/zsh -lc "nl -ba _workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js | sed -n '22380,22420p'" in /Users/innojini/Dev/HuniWeb
+ succeeded in 0ms:
+ 22380	              updateOption: i,
+ 22381	              updatePostPcs: l
+ 22382	            } = fa(n.type, {
+ 22383	              group: n.widgetAttr.item_gbn,
+ 22384	              emits: {
+ 22385	                updateOrder: T => o("update", T)
+ 22386	              }
+ 22387	            }),
+ 22388	            u = H(null);
+ 22389	          function c(T) {
+ 22390	            u.value = Object.keys(T).find(g => g.startsWith("CVR_") && g !== "CVR_SFT") ?? null, l("visible")(T);
+ 22391	          }
+ 22392	          const d = b(() => !!r.value.pcsInfo?.find(T => T.PCS_CD === "SCO_DFT")),
+ 22393	            p = H({
+ 22394	              ordCnt: 0,
+ 22395	              prnCnt: 0
+ 22396	            }),
+ 22397	            f = (T, g) => {
+ 22398	              T === "default" && (p.value = {
+ 22399	                ...p.value,
+ 22400	                ordCnt: g
+ 22401	              }), T === "inner" && (p.value = {
+ 22402	                ...p.value,
+ 22403	                prnCnt: g
+ 22404	              });
+ 22405	            };
+ 22406	          U(() => p.value, an(T => {
+ 22407	            i("quantityInfo")(T);
+ 22408	          }, 200), {
+ 22409	            immediate: !0
+ 22410	          });
+ 22411	          const v = Te("member"),
+ 22412	            h = b(() => v?.bsn_yn === "Y" ? n.data.pdt_mtrl_info : n.data.pdt_mtrl_info.filter(T => T.BSN_YN !== "Y")),
+ 22413	            m = b(() => v?.bsn_yn === "Y" ? n.data.inner_pdt_mtrl_info : n.data.inner_pdt_mtrl_info?.filter(T => T.BSN_YN !== "Y")),
+ 22414	            D = b(() => r.value?.pcsInfo?.find(T => T.PCS_CD === "BIND_DIRECTION")),
+ 22415	            {
+ 22416	              uploadConfig: N
+ 22417	            } = da(n.widgetAttr),
+ 22418	            I = b(() => r.value.dosuInfo?.BNC_GB === "BNC_BLA" ? {
+ 22419	              pdf: !0,
+ 22420	              editor: null,
+
+ succeeded in 0ms:
+ 22660	              const S = N.value % f.value;
+ 22661	              if (f.value > 1 && S !== 0) return !0;
+ 22662	            }
+ 22663	            return !1;
+ 22664	          }),
+ 22665	          C = () => {
+ 22666	            if (!N.value) return N.value = d.value;
+ 22667	            if (!T.value && f.value !== 1) {
+ 22668	              const S = N.value % f.value;
+ 22669	              if (f.value > 1 && S !== 0) {
+ 22670	                const R = Math.ceil(N.value / f.value);
+ 22671	                N.value = (R || 1) * f.value;
+ 22672	              }
+ 22673	            }
+ 22674	          };
+ 22675	        return U(() => T.value, S => {
+ 22676	          !S && l.value === "select" && (N.value = d.value);
+ 22677	        }), U(() => w.value, an(S => {
+ 22678	          S.ordCnt || (D.value = 1), !g.value && o("update", S);
+ 22679	        }, 300), {
+ 22680	          immediate: !0
+ 22681	        }), U(() => a.editorData?.default?.quantityInfo?.ordCnt, (S, R) => {
+ 22682	          if (S) D.value = S;else if (R) return D.value = 1;
+ 22683	        }), U(() => a.uploadType.default, S => {
+ 22684	          S === "editor" && (D.value = 1);
+ 22685	        }), (S, R) => {
+ 22686	          const E = it("dompurify-html");
+ 22687	          return _(), V(ve, {
+ 22688	            option: "Qty"
+ 22689	          }, {
+ 22690	            default: fe(() => [P("div", OI, [P("div", EI, [P("h2", II, Y(y(F)("디자인수")), 1), P("h2", RI, Y(y(F)("수량")), 1)]), P("div", NI, [i.value ? re((_(), O("select", {
+ 22691	              key: 0,
+ 22692	              "onUpdate:modelValue": R[0] || (R[0] = L => D.value = L),
+ 22693	              name: "ORD_CNT",
+ 22694	              class: "basic-select"
+ 22695	            }, [(_(), O(q, null, ce(r, L => P("option", {
+ 22696	              value: L,
+ 22697	              key: L
+ 22698	            }, Y(L) + Y(y(F)("장")), 9, AI)), 64))], 512)), [[Ke, D.value]]) : re((_(), O("input", {
+ 22699	              key: 1,
+ 22700	              "onUpdate:modelValue": R[1] || (R[1] = L => D.value = L),
+ 22701	              type: "number",
+ 22702	              class: "basic-input",
+ 22703	              id: "ORD_CNT",
+ 22704	              min: "1",
+ 22705	              disabled: B.value || !S.canEditOrdCnt.pdf
+ 22706	            }, null, 8, MI)), [[dt, D.value]]), P("div", wI, [ne(ls)]), l.value === "input" ? re((_(), O("input", {
+ 22707	              key: 2,
+ 22708	              "onUpdate:modelValue": R[2] || (R[2] = L => N.value = L),
+ 22709	              type: "number",
+ 22710	              class: "basic-input",
+ 22711	              id: "PRN_CNT",
+ 22712	              min: "1",
+ 22713	              onFocusout: C
+ 22714	            }, null, 544)), [[dt, N.value]]) : re((_(), O("select", {
+ 22715	              key: 3,
+ 22716	              "onUpdate:modelValue": R[3] || (R[3] = L => N.value = L),
+ 22717	              name: "PRN_CNT",
+ 22718	              class: "basic-select"
+ 22719	            }, [(_(!0), O(q, null, ce(m.value, L => (_(), O("option", {
+ 22720	              value: L.PRN_CNT,
+ 22721	              key: L.PRN_CNT
+ 22722	            }, Y(L.PRN_CNT.toLocaleString()) + Y(S.reamYn === "Y" && L.reamCnt ? ` (${L.reamCnt}R)` : ""), 9, LI))), 128))], 512)), [[Ke, N.value]]), P("button", {
+ 22723	              type: "button",
+ 22724	              class: "action-btn",
+ 22725	              onClick: u
+ 22726	            }, Y(l.value === "input" ? y(F)("수량선택") : y(F)("직접입력")), 1)])]), P("div", kI, [i.value ? J("", !0) : re((_(), O("p", $I, null, 512)), [[E, y(F)("주문수량안내", {
+ 22727	              QTY: A.value
+ 22728	            })]]), !i.value && p.value > 1 ? re((_(), O("p", FI, null, 512)), [[E, y(F)("단위주문수량안내", {
+ 22729	              QTY: `${p.value}`
+ 22730	            })]]) : J("", !0), B.value ? J("", !0) : (_(), O("p", UI, "* " + Y(`${y(F)("PDF장수안내", {
+ 22731	              QTY: j.value
+ 22732	            })}`), 1)), S.canEditOrdCnt.pdf && S.canEditOrdCnt.editor ? (_(), O("p", BI, "* " + Y(y(F)("디자인건수가능여부-전체")), 1)) : !S.canEditOrdCnt.pdf && S.canEditOrdCnt.editor ? (_(), O("p", xI, " * " + Y(y(F)("디자인건수가능여부-에디터")), 1)) : J("", !0)])]),
+ 22733	            _: 1
+ 22734	          });
+ 22735	        };
+
+ succeeded in 0ms:
+ 22420	              editor: null,
+ 22421	              useGarage: N.value.useGarage
+ 22422	            } : N.value),
+ 22423	            w = H([]),
+ 22424	            A = T => g => {
+ 22425	              const C = g[0];
+ 22426	              T === "inner" && (w.value = [C, w.value[1]]), T === "default" && (w.value = [w.value[0], C]);
+ 22427	            };
+ 22428	          U(() => w.value, T => {
+ 22429	            i("fileUploadInfo")(T);
+ 22430	          });
+ 22431	          const j = b(() => Pi(n.data.pdt_pcs_info, n.data.pdt_disable_pcs_info)),
+ 22432	            B = b(() => Ti[n.data.pdt_base_info[0].PDT_CD] ? r.value.quantityInfo?.prnCnt || 1 : (r.value.quantityInfo?.ordCnt || 1) * (r.value.quantityInfo?.prnCnt || 1));
+ 22433	          return (T, g) => (_(), O(q, null, [re(ne(yi, {
+ 22434	            options: T.data.pdt_size_info,
+ 22435	            "base-info": T.data.pdt_base_info[0],
+ 22436	            default: y(a)?.size,
+ 22437	            "hidden-sizes": !0,
+ 22438	            "show-extra": !0,
+ 22439	            onUpdate: g[0] || (g[0] = C => y(i)("sizeInfo")(C)),
+ 22440	            onValidate: g[1] || (g[1] = C => y(i)("validation")(C))
+ 22441	          }, null, 8, ["options", "base-info", "default"]), [[Lt, s.value.sizeSelect.view_yn === "Y"]]), ne(Ru, {
+ 22442	            type: "default",
+ 22443	            options: T.data.pdt_prn_cnt_info,
+ 22444	            onUpdate: f
+ 22445	          }, null, 8, ["options"]), P("div", yI, [P("span", DI, Y(y(F)("내지")), 1)]), re(ne(uv, {
+ 22446	            options: {
+ 22447	              dosu: T.data.inner_pdt_dosu_info,
+ 22448	              color: T.data.inner_pdt_bnc_info,
+ 22449	              all: T.data.inner_pdt_dosu_bnc_info
+ 22450	            },
+ 22451	            onUpdate: g[2] || (g[2] = C => y(i)("inner_dosuInfo")(C))
+ 22452	          }, null, 8, ["options"]), [[Lt, s.value.dosuSelect.view_yn === "Y" && T.data.inner_pdt_dosu_bnc_info]]), ne(Ei, {
+ 22453	            options: m.value,
+ 22454	            "show-extra": T.widgetAttr.able_paper_yn === "Y",
+ 22455	            onUpdate: g[3] || (g[3] = C => y(i)("inner_meterialInfo")(C))
+ 22456	          }, null, 8, ["options", "show-extra"]), ne(Ru, {
+ 22457	            type: "inner",
+ 22458	            options: T.data.pdt_prn_cnt_info,
+ 22459	            "related-data": {
+ 22460	              dosu: y(r).inner_dosuInfo?.COD
+ 22461	            },
+ 22462	            onUpdate: f
+ 22463	          }, null, 8, ["options", "related-data"]), T.widgetAttr.order_yn !== "N" ? (_(), V(us, {
+ 22464	            key: 0,
+ 22465	            _key: "inner",
+ 22466	            "upload-config": {
+ 22467	              pdf: !0,
+ 22468	              editor: null
+ 22469	            },
+ 22470	            subject: "내지업로드",
+ 22471	            notes: [y(F)("내지업로드사이즈장수안내", {
+ 22472	              CUT_SIZE: `${y(r).sizeInfo?.cutSize.width}x${y(r).sizeInfo?.cutSize.height}`,
+ 22473	              WRK_SIZE: `${y(r).sizeInfo?.workSize.width}x${y(r).sizeInfo?.workSize.height}`,
+ 22474	              QTY: `${y(r).quantityInfo?.prnCnt * (y(r).inner_dosuInfo?.COD === "SID_D" ? 2 : 1)}`
+ 22475	            })],
+ 22476	            onUpload: g[4] || (g[4] = C => A("inner")(C))
+ 22477	          }, null, 8, ["notes"])) : J("", !0), P("div", SI, [P("span", PI, Y(y(F)("표지")), 1)]), re(ne(uv, {
+ 22478	            options: {
+ 22479	              dosu: T.data.pdt_dosu_info,
+ 22480	              color: T.data.pdt_bnc_info,
+ 22481	              all: T.data.pdt_dosu_bnc_info
+ 22482	            },
+ 22483	            onUpdate: g[5] || (g[5] = C => y(i)("dosuInfo")(C))
+ 22484	          }, null, 8, ["options"]), [[Lt, s.value.dosuSelect.view_yn === "Y" && T.data.pdt_dosu_info]]), re(ne(Ei, {
+ 22485	            options: h.value,
+ 22486	            "show-extra": T.widgetAttr.able_paper_yn === "Y",
+ 22487	            onUpdate: g[6] || (g[6] = C => y(i)("meterialInfo")(C))
+ 22488	          }, null, 8, ["options", "show-extra"]), [[Lt, h.value.length > 1]]), ne(gI, {
+ 22489	            "size-info": y(r).sizeInfo,
+ 22490	            "seneca-info": T.senecaInfo
+
+exec
+/bin/zsh -lc "rg -n \"function dv|__name: \\\".*Qty|reamCnt|reamYn\" _workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js" in /Users/innojini/Dev/HuniWeb
+ succeeded in 0ms:
+20103:      __name: "DesignQty",
+21067:      __name: "ApparelSingleSizeQty",
+21205:      __name: "ApparelMultiSizeQty",
+21854:      __name: "BookQty",
+22576:      __name: "OffsetQty",
+22583:        reamYn: {}
+22609:            if (n.reamYn !== "Y") return 0;
+22614:            if (n.reamYn === "Y") {
+22625:              reamCnt: h(X.PRN_CNT, X.REAM_CNT)
+22629:                reamCnt: h(X.PRN_CNT, X.REAM_CNT)
+22636:                reamCnt: h(K)
+22643:          I = b(() => m.value.find(S => S.PRN_CNT === N.value)?.reamCnt ?? h(N.value)),
+22647:            reamCnt: I.value
+22722:            }, Y(L.PRN_CNT.toLocaleString()) + Y(S.reamYn === "Y" && L.reamCnt ? ` (${L.reamCnt}R)` : ""), 9, LI))), 128))], 512)), [[Ke, N.value]]), P("button", {
+27251:        __name: "CalendarQty",
+27430:        __name: "SetQty",
+27521:        __name: "SimpleQty",
+27672:        __name: "TotalQty",
+
+codex
+`deob` = `_workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js`
+
+**Q1 — VERDICT: HIGH**
+- `ADD_CLR_YN`는 normal `ORD_INFO` 객체에 항상 필드로 작성되며 값은 `T.dosuInfo?.ADD_CLR_YN`입니다. `book2025_item` 분기에는 없음: `deob:13956`, `deob:13978`, `deob:13982`.
+- `Dosu` 컴포넌트는 `addClrMtrlList`에서 현재 `MTRL_CD`가 `ADD_CLR_YN==="Y"`인지 골라내고, 선택 시 `PRN_CLR_CNT`를 6/12로 바꾸며 `ADD_CLR_YN`을 `"Y"`/`"N"`으로 emit합니다: `deob:15749`, `deob:15758`, `deob:15764`, `deob:15771`, `deob:15773`.
+- 서버 default 여부는 deob만으로는 undetermined지만, 이 필드는 `get_ajax_price_vTmpl` 요청에 실려 갑니다: `deob:12324`, `deob:12330`, `deob:13994`. omission을 inert로 볼 근거는 not found.
+
+**Q2 — VERDICT: LOW**
+- `REAM_CNT`는 `REAM_YN==="Y"`일 때 `REAM_CNT / PRN_CNT` 또는 `PRN_CNT * ratio`로 `reamCnt` 표시값을 만듭니다: `deob:22609`, `deob:22611`, `deob:22614`, `deob:22616`.
+- emitted `quantityInfo`는 `{ ordCnt, prnCnt, reamCnt }`지만 가격 빌더는 `ordCnt/prnCnt`만 읽습니다: `deob:22644`, `deob:22647`, `deob:13978`, `deob:13979`.
+- UI select 라벨에만 `(${L.reamCnt}R)`가 붙습니다: `deob:22719`, `deob:22722`. REAM_CNT가 PRN_CNT를 대체하는 경로는 not found.
+
+**Q3 — VERDICT: HIGH**
+- 모델 A는 real wired component입니다. `AddOptionSize`가 `MIN_ORD_PRN_CNT + ADD_ORD_PRN_CNT * h`로 `PRN_CNT` ladder를 만듭니다: `deob:15413`, `deob:15432`, `deob:15439`, `deob:15445`.
+- 이 컴포넌트는 `pdt_add_option_info?.length`일 때 렌더되고, `TPBLMEO/TPBLPST`에서 특수 override가 있습니다: `deob:19664`, `deob:19667`, `deob:19669`.
+- ladder는 quantity options로 들어가고, 선택된 `quantityInfo.prnCnt`가 `ORD_INFO.PRN_CNT`로 들어간 뒤 가격 mutation으로 갑니다: `deob:19729`, `deob:19743`, `deob:13978`, `deob:14091`, `deob:14094`.
+
+**Q4 — VERDICT: CONFIRMED / UNDETERMINED**
+- `L13955-13999` exists: `ORD_INFO` builder, `ADD_CLR_YN`, `PACK_PRN_CNT`, `PRINT_TYPE`, `TMPL_IDX` present: `deob:13956`, `deob:13982`, `deob:13984`, `deob:13987`, `deob:13990`.
+- `L19733 MAX_PRN_CNT`, `L22611 REAM_CNT`, `L15432-15445 model A` all exist with cited symbols: `deob:19733`, `deob:22611`, `deob:15432`, `deob:15439`.
+- `baseline PRN500 = 6,350,000` is undetermined from source. deob posts to remote `get_ajax_price_vTmpl`; no local formula proving scale or transcription exists: `deob:12324`, `deob:12330`, `deob:12333`; contract table is only in `price-engine-additions.md:24`, `price-engine-additions.md:27`.
+
+**Q5 — VERDICT: UNDETERMINED**
+- deob sends both `DOSU_COD` and `PRN_CLR_CNT` for normal products: `deob:13980`, `deob:13981`. Adapter intentionally omits `DOSU_COD`: `red-adapter.ts:569`, `red-adapter.ts:580`, `red-adapter.ts:588`.
+- Source-alone proof that `DOSU_COD` has money-impact 0 is not found. The price is remote, not locally calculated: `deob:12324`, `deob:12330`, `deob:12333`.
+- `DOSU_COD` is behaviorally meaningful elsewhere: it can rewrite `PDT_CD` for `TPBLMEO/TPBLPST` and gates `PRT_SID`: `deob:13544`, `deob:13546`, `deob:19784`, `deob:19786`.
+
+**Q6 — VERDICT: CONFIRMED**
+- Contract notes `GSELGLV PRN_CNT×10`, but deob also scales `PCS_INFO.ATTB` for `DIR_MTR` and later mutates stored `quantityInfo.prnCnt`: `deob:13950`, `deob:13978`, `deob:14110`, `deob:14116`, `deob:14122`.
+- `PACK_PRN_CNT` is not just a request echo; it disables or forces `PRT_SID` and is passed into sub-material related data: `deob:13983`, `deob:13984`, `deob:19784`, `deob:19786`, `deob:19796`.
+- Contract’s `REAM_CNT = 수량모델 B` is overstated from deob alone: it is display/derived `reamCnt`, while request uses `PRN_CNT`: `deob:22611`, `deob:22647`, `deob:22722`, `deob:13978`.
+hook: Stop
+hook: Stop Completed
+tokens used
+108,186
+`deob` = `_workspace/huni-widget/01_reverse/redo-260623/deob/widget.deob.js`
+
+**Q1 — VERDICT: HIGH**
+- `ADD_CLR_YN`는 normal `ORD_INFO` 객체에 항상 필드로 작성되며 값은 `T.dosuInfo?.ADD_CLR_YN`입니다. `book2025_item` 분기에는 없음: `deob:13956`, `deob:13978`, `deob:13982`.
+- `Dosu` 컴포넌트는 `addClrMtrlList`에서 현재 `MTRL_CD`가 `ADD_CLR_YN==="Y"`인지 골라내고, 선택 시 `PRN_CLR_CNT`를 6/12로 바꾸며 `ADD_CLR_YN`을 `"Y"`/`"N"`으로 emit합니다: `deob:15749`, `deob:15758`, `deob:15764`, `deob:15771`, `deob:15773`.
+- 서버 default 여부는 deob만으로는 undetermined지만, 이 필드는 `get_ajax_price_vTmpl` 요청에 실려 갑니다: `deob:12324`, `deob:12330`, `deob:13994`. omission을 inert로 볼 근거는 not found.
+
+**Q2 — VERDICT: LOW**
+- `REAM_CNT`는 `REAM_YN==="Y"`일 때 `REAM_CNT / PRN_CNT` 또는 `PRN_CNT * ratio`로 `reamCnt` 표시값을 만듭니다: `deob:22609`, `deob:22611`, `deob:22614`, `deob:22616`.
+- emitted `quantityInfo`는 `{ ordCnt, prnCnt, reamCnt }`지만 가격 빌더는 `ordCnt/prnCnt`만 읽습니다: `deob:22644`, `deob:22647`, `deob:13978`, `deob:13979`.
+- UI select 라벨에만 `(${L.reamCnt}R)`가 붙습니다: `deob:22719`, `deob:22722`. REAM_CNT가 PRN_CNT를 대체하는 경로는 not found.
+
+**Q3 — VERDICT: HIGH**
+- 모델 A는 real wired component입니다. `AddOptionSize`가 `MIN_ORD_PRN_CNT + ADD_ORD_PRN_CNT * h`로 `PRN_CNT` ladder를 만듭니다: `deob:15413`, `deob:15432`, `deob:15439`, `deob:15445`.
+- 이 컴포넌트는 `pdt_add_option_info?.length`일 때 렌더되고, `TPBLMEO/TPBLPST`에서 특수 override가 있습니다: `deob:19664`, `deob:19667`, `deob:19669`.
+- ladder는 quantity options로 들어가고, 선택된 `quantityInfo.prnCnt`가 `ORD_INFO.PRN_CNT`로 들어간 뒤 가격 mutation으로 갑니다: `deob:19729`, `deob:19743`, `deob:13978`, `deob:14091`, `deob:14094`.
+
+**Q4 — VERDICT: CONFIRMED / UNDETERMINED**
+- `L13955-13999` exists: `ORD_INFO` builder, `ADD_CLR_YN`, `PACK_PRN_CNT`, `PRINT_TYPE`, `TMPL_IDX` present: `deob:13956`, `deob:13982`, `deob:13984`, `deob:13987`, `deob:13990`.
+- `L19733 MAX_PRN_CNT`, `L22611 REAM_CNT`, `L15432-15445 model A` all exist with cited symbols: `deob:19733`, `deob:22611`, `deob:15432`, `deob:15439`.
+- `baseline PRN500 = 6,350,000` is undetermined from source. deob posts to remote `get_ajax_price_vTmpl`; no local formula proving scale or transcription exists: `deob:12324`, `deob:12330`, `deob:12333`; contract table is only in `price-engine-additions.md:24`, `price-engine-additions.md:27`.
+
+**Q5 — VERDICT: UNDETERMINED**
+- deob sends both `DOSU_COD` and `PRN_CLR_CNT` for normal products: `deob:13980`, `deob:13981`. Adapter intentionally omits `DOSU_COD`: `red-adapter.ts:569`, `red-adapter.ts:580`, `red-adapter.ts:588`.
+- Source-alone proof that `DOSU_COD` has money-impact 0 is not found. The price is remote, not locally calculated: `deob:12324`, `deob:12330`, `deob:12333`.
+- `DOSU_COD` is behaviorally meaningful elsewhere: it can rewrite `PDT_CD` for `TPBLMEO/TPBLPST` and gates `PRT_SID`: `deob:13544`, `deob:13546`, `deob:19784`, `deob:19786`.
+
+**Q6 — VERDICT: CONFIRMED**
+- Contract notes `GSELGLV PRN_CNT×10`, but deob also scales `PCS_INFO.ATTB` for `DIR_MTR` and later mutates stored `quantityInfo.prnCnt`: `deob:13950`, `deob:13978`, `deob:14110`, `deob:14116`, `deob:14122`.
+- `PACK_PRN_CNT` is not just a request echo; it disables or forces `PRT_SID` and is passed into sub-material related data: `deob:13983`, `deob:13984`, `deob:19784`, `deob:19786`, `deob:19796`.
+- Contract’s `REAM_CNT = 수량모델 B` is overstated from deob alone: it is display/derived `reamCnt`, while request uses `PRN_CNT`: `deob:22611`, `deob:22647`, `deob:22722`, `deob:13978`.
