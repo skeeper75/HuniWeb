@@ -260,9 +260,19 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 **산출물 루트:** `_workspace/huni-price-engine-design/` (`_meta`·`01_formula`·`02_benchmark`·`03_design`·`04_validation`·`05_codex`). 자격증명 `.env.local RAILWAY_DB_*`(읽기전용 SELECT). codex 헬퍼=`hqv-codex-cross-verify/scripts/codex-review.sh`(내부에서 `rpm-visualize/scripts/codex-preflight.sh` 호출) 재사용. 기존 `dbm-price-arbiter`·`dbm-ddl-proposer`·`dbm-schema-extract`·`dbm-excel-parse` 재사용.
 
-**변경이력:** 최신: 2026-06-22 포토북 파일럿 종단 GO(부품합산 세트형+페이지 선형·inline 공식화 가능·10번째 종단·codex high divergence 0) → `_workspace/huni-price-engine-design/CHANGELOG.md`
+**변경이력:** 최신: 2026-06-22 디자인캘린더 종단 GO(inline 정찰가 BLOCKED·고정가형 완제 SKU·11번째 최종 종단·★상품마스터 11시트 전수 완주·codex가 돈크리티컬 2건[본체 ×qty 저청구·엽서 라우팅] 독립 적발→교정 후 GO) → `_workspace/huni-price-engine-design/CHANGELOG.md`
 
-## 19. MoAI Framework (gated — rarely used here)
+## 19. Harness: Huni-Widget-Flow (위젯 구조·플로우 문서화 + 이중 청중 시각화)
+
+**목표:** `docs/reversing`(RedPrinting 위젯/SDK 역공학 — productRedWidgetSDK 브릿지·widget.js Vue3+Pinia Shadow DOM·RedEditorSDK Edicus) + `raw/widget_monitor` 캡처를 근거로, 개발자가 전체 위젯 구조와 플로우를 확인할 수 있는 **① 개발자용 mermaid 기술 문서**(전체 아키텍처+초기화/가격/주문 시퀀스+에디쿠스 라이프사이클+26 상품군별 **파일 업로드 vs 에디쿠스(편집기) 연결** flowchart)와 비전문가도 한눈에 파악하는 **② codex-imgage 인포그래픽**(제품군 구성·전체 고객 여정·두 경로 대비)을 산출. 분기 권위 메커니즘=`exterior.uploadType`(editor|pdf)+상품 `item_gbn`(book2025_item=양쪽/vDigital_item=에디터 전용). 위젯 구현(§6)·가격 레시피 시각화(§16)와 별개의 "구조·플로우 문서화" 전용 하네스.
+
+**트리거:** "위젯 구조 문서", "위젯 플로우 문서화", "위젯 mermaid", "파일업로드 에디쿠스 연결", "제품군 플로우 시각화", "위젯 플로우 하네스 실행/재실행/업데이트/보완", "특정 상품군만 플로우" 등 본 도메인 요청 시 `huni-widget-flow-orchestrator` 스킬을 사용. 단순 질문은 직접 응답.
+
+**산출물 루트:** `_workspace/huni-widget-flow/` (01_curation·02_mermaid·03_visual·04_validation). 4 에이전트(`hwf-flow-curator` 증거 큐레이션 → `hwf-mermaid-author` 개발자 mermaid ∥ `hwf-flow-visualizer` codex-imgage 비전문가 시각화 → `hwf-validator` F1~F6 독립검증)·하이브리드(팬아웃→병렬 생성→독립 검증)·생성≠검증·근거 충실·미상 정직(모름 표기)·읽기전용(라이브 접속 불요). 최종 mermaid 통합본은 인간 확인 후 `docs/reversing/widget-flow/`로 모을 수 있음.
+
+**변경이력:** 최신: 2026-06-22 하네스 초기 구성(4 에이전트+5 스킬·역공학 3계층/경로분기 도메인 확정) → 첫 실행 시 CHANGELOG 생성
+
+## 20. MoAI Framework (gated — rarely used here)
 
 The MoAI-ADK orchestration framework (SPEC plan/run/sync, TRUST 5, DDD/TDD, Agent Teams,
 design GAN loop) is installed but not the primary workflow in this repo. Its detailed

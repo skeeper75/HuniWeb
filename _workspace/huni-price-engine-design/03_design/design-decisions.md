@@ -1039,3 +1039,67 @@ cartographer "팩/타투 .02 교정 완료" vs benchmark "B06 .01 오적재→.0
 | 공통 | 두 시트 모두 "편집기형 디자인 상품"·편집기 baked spec은 옵션 미노출(시트 메모) | inline 재현성으로 공식화/정찰가 분기(본 기준) |
 
 ★ **★두 시트 분기 기준 명문화 완료** — 메인이 인간 결판 시 "inline이 단가행 산식으로 재현되는가"를 잣대로 캘린더(BLOCKED)·포토북(공식화)을 가른다. 추측 단가 INSERT 금지·날조 0·정직 BLOCKED 유지.
+
+---
+
+# 디자인캘린더(가격포함) 설계 결정 (11번째·최종 종단)
+
+> `engine-design-design-calendar.md`·`golden-cases-design-calendar.md` 종단 결정. 라이브 실측 2026-06-22. 각 결정 출처+확신도.
+
+## D-DCAL-1. 계산방식 = 정찰가 스냅샷 [BLOCKED·공식화 불가] (Phase 1 수렴 비준)
+- **결정**: inline 7건(10400/9700/6500/6500/4000/9900/24000)을 단가행 산식으로 공식화하지 않는다(추측 단가 INSERT 금지). inline=정찰가 권위.
+- **근거**: inline-authority-evidence §1.3 python 독립 역산 — 유효판수 1.313/0.486/1.285/1.574/6.104 전부 비정수·페이지수와 정수 배수 무관(미니 0.486판으로 26P 물리 불가). 일반 캘린더(원자합산형)·포토북(per2p cost-driven 선형·row17 산식 명문)과 결정적 대비.
+- `확신도: 높음` · 선례: GC-AC15 카드봉투·booklet 088·calendar §3 BLOCKED 정직 동형.
+
+## D-DCAL-2. ★G-DCAL-DUAL 결판 = 정찰가 채택(.01 단가형 min_qty=1) + 주문방법 차원 분기 (최우선·돈크리티컬)
+- **결정**: 동일 prd_cd(108~112) 이중 가격을 **① 정찰가 채택**(고정가형 .01 단가형 min_qty=1·PRF_DCAL_*)으로 결판. 일반 캘린더 PRF_CAL_*(산식)과 **별 공식·주문방법 분기**(편집기→DCAL·업로드→CAL). 공식 통합(②)·별 prd 분리(③) 부결.
+- ★**prc_typ 표기 [validator 라이브 재실측 2026-06-22]**: 라이브 PRICE_TYPE enum = `.01·.02`뿐(`.03` 부존재). "고정가형 정찰가"는 라이브에 .03 그릇이 없으므로 **.01 단가형 + min_qty=1 단일 단가행**(정찰가=1부 단가)로 표현·가격 결과 불변(굿즈 GP-1·악세사리 inline 동일 표현).
+- **라이브 실측(결판의 토대·2026-06-22)**: ① t_prd_product_prices 108~112 = **0행**(전체 0행) ② 공식 바인딩 108~112 = **0건** ③ PRF_CAL_* 라이브 **부존재**(캘린더/달력 공식 0). → **이중 정의 충돌은 현 라이브엔 미존재**(둘 다 미배선)·충돌은 미래 적재 시점 잠재 위험 → 설계가 분기 구조 선결판.
+- **근거**: ① 무손실(inline verbatim 보존·②는 비정수 산식으로 덮어써 권위 위반) ② 업계 표준(RedPrinting tmpl_price=디자인 제공 완제 개당 정찰가·benchmark DC-1) ③ 비결정 회피(상품별 PRF_DCAL_* 바인딩으로 1 prd 1 공식) ④ add-on 보존(formula 구조라 우드거치대 가산 살아있음).
+- ★**라우팅 키 [codex D2 적발·교정]**: editor_yn 단독 의존 금지 — **엽서캘린더 PRD_000110=editor_yn=N**이라 editor_yn=Y 라우팅 시 엽서 누락(내부 모순). 라우팅 신호 = 가격포함 시트 등재 + 상품별 PRF_DCAL_* 바인딩(엽서 포함 5상품)·editor_yn 보조.
+- ★ **적재 자체는 인간 컨펌(Q-DCAL-AUTHORITY)** — 설계는 무손실 명세만, 실 적재는 인간 승인 후 dbmap 위임.
+- `확신도: 높음(라이브 둘 다 미적재 실측 + 권위/업계 정합 + 비결정 회피)`
+
+## D-DCAL-3. ★G-PRODPRICE 가드 정합 = 본체 정찰가 formula 바인딩·product_prices 금지 (돈크리티컬)
+- **결정**: 정찰가 채택해도 본체를 product_prices에 INSERT하지 않는다. **.01 단가형(min_qty=1·1부 정찰가 ×qty) comp(COMP_DCAL_FIXED)로 formula 바인딩 + add-on(우드거치대) 별 comp 가산**.
+- **근거**: product_prices 1건이라도 있으면 엔진 :315-330 PRODUCT_PRICE 선점 → FORMULA 통째 우회 silent(GP-2·캘린더 G-CAL-2·악세사리·포토북 확립 가드). 엽서캘린더 우드거치대(4000) 가산이 필요하므로 formula 합산 구조 필수(정찰가형이라도 add-on 있으면 formula 유지·benchmark G-DC-2). 골든 GC-DCAL-8(8000 정답 vs product_prices 박을 시 4000 우회 오답)으로 입증.
+- `확신도: 높음(product_prices 0행 실측·5종 선례 계승)`
+
+## D-DCAL-4. search-before-mint = 신규 가격축 0·신규 mint(정찰가 채택 시) PRF_DCAL_* 5 + COMP_DCAL_FIXED 1뿐
+- **결정**: 본체 시트로 인한 신규 mint 0(inline BLOCKED). 정찰가 채택 ① 경로에서만 PRF_DCAL_* 5 + COMP_DCAL_FIXED 1(.01 단가형 min_qty=1 고정가) mint·인간 컨펌 후.
+- **재사용/의존 입증(validator 라이브 재실측 2026-06-22)**: 우드거치대=**캘린더 종단이 신규 mint로 명시한 COMP_CALOPT_STAND에 선행 의존**(라이브 component·단가행 0행·4000 단가 일치·"재사용" 아님·캘린더 종단 소관·G-DCAL-WOODSTAND 이중 mint 회피)·인쇄/용지/제본 comp 전부 실재(의도 비목·정찰가 채택 시 미배선)·캘린더봉투=독립 PRD_000005(012-0008 실측·봉투제작 트랙). 디자인캘린더 시트 본체 신규 mint **0**·신규 테이블/가격축 **0**(11연속 search-before-mint 통과·우드거치대 mint 카운트는 캘린더 종단 소관).
+- `확신도: 높음(라이브 comp/PRD 상태 재실측·COMP_CALOPT_STAND 0행 확인)`
+
+## D-DCAL-5. add-on 귀속 = 우드거치대(formula 합산·캘린더 종단 mint 선행 의존)·봉투(봉투제작 트랙 외부)
+- **결정**: 우드거치대 4000 = COMP_CALOPT_STAND opt_cd(캘린더 종단 신규 mint 선행 의존·현 라이브 0행·엽서캘린더 formula 합산). 캘린더봉투 2500/2400 = 독립 PRD + 본체 addon 이중역할 → 봉투제작 트랙 위임(본체 가격공식 외부).
+- **근거**: 우드거치대 단가(4000)=캘린더 §4 동일 add-on. 봉투를 본체에 합산 시 오과금(G-DCAL-ENVELOPE)·사이즈별 변형가(2500 vs 2400) use_dims 충전 필수(평탄화 가드 G-DC-1). 일반 캘린더 Q-CAL-ENVELOPE 연계(동일 봉투 PRD 두 시트 참조).
+- `확신도: 높음`
+
+## D-DCAL-6. ★본체 정찰가 qty 의미 = 1부 정찰가 ×qty (돈크리티컬·저청구 가드·codex D1 적발)
+- **결정**: 본체 정찰가는 **qty-불변이 아니라 `.01 단가형 = 1부 정찰가 × qty`**. 견적가 = 정찰가 × qty(탁상 10부 = 104,000·10,400 고정은 93,600 저청구).
+- **근거(엔진계약 정합·메인 직접 확인)**: `price-flow-map.md` EV ④ "단가형×qty"·`engine-contract.md` E0-1(단가형 unit×qty·qty=0이면 0원)·`widget-price-contract.md` W-3(`min_qty`는 티어 비교 키 `_tier_order_val(min_qty)=qty`이지 qty-불변 신호 아님). 도메인상 캘린더 정찰가=1부 단가 → ×qty가 정답. 초안의 "qty 무관·min_qty=1이라 qty 불변" 표현이 엔진계약 위반(저청구)이었음.
+- **신규 가드 G-DCAL-QTY(돈크리티컬)**: 본체 정찰가 qty-불변 모델링 금지. 골든 GC-DCAL-9(qty=10·본체 40,000 정답 vs 4,000 고정 오답)으로 입증.
+- ★GP-1/악세사리 "동형" 인용도 "qty 무관"이 아니라 **per-unit ×qty 동일 계약**(엔진 동일). 수량구간할인(DSC) 별 레이어 여부=Q-DCAL-DSC.
+- `확신도: 높음(엔진계약 3원 직접 확인·codex D1 정당)`
+
+## D-DCAL-7. (기록만·현 무해) COMP_DCAL_FIXED 확장 시 comp scoping 점검 (codex D3)
+- **현 무해**: COMP_DCAL_FIXED siz_cd-only 단일 comp는 미래 디자인캘린더 상품 추가 시 siz_cd 충돌 가능. 현재는 상품별 PRF_DCAL_* 5개 전용 공식으로 부분 완화(공식이 상품을 가름).
+- **기록**: 디자인캘린더 상품 확장 시 COMP_DCAL_FIXED를 상품/공식 scoping(전용 comp 또는 차원 추가)으로 분리 점검. **현 설계 변경 불요**.
+- `확신도: 중(미래 시나리오·현 영향 0)`
+
+## 디자인캘린더 컨펌큐 (인간 결판)
+
+| 큐 ID | 사안 | 권고 가설 | 근거 |
+|-------|------|-----------|------|
+| **Q-DCAL-AUTHORITY**(최우선) | inline 정찰가 채택(① PRF_DCAL_* 적재) vs 견적 비대상 BLOCKED 유지 | **정찰가 채택**(고정가형 .01 단가형 min_qty=1) | 업계(RedPrinting tmpl_price)·권위 엑셀 정찰가 명시·무손실 |
+| **Q-DCAL-ROUTE**(codex D2) | 정찰가 경로(DCAL) vs 산식(CAL) 라우팅 — ★엽서(110) editor_yn=N 라우팅 포함 | 가격포함 시트 등재+상품별 PRF_DCAL_* 바인딩(editor_yn 단독 금지) | 엽서 editor_yn=N으로 editor_yn=Y 라우팅 시 누락(내부 모순)·option_groups 0행 의존 |
+| **Q-DCAL-DSC**(codex D1·돈크리티컬) | 본체 정찰가 ×qty base에 수량구간할인(DSC) 별 레이어 존재 여부 | 미확인 시 단순 ×qty(할인 0) | 견적가=정찰가×qty(±DSC)·DSC 있으면 별 레이어 |
+| **Q-DCAL-FIN** | 우드거치대 4000 개당 가산(×qty) vs 주문당 정액 | **개당 가산(×qty)** | 물리 부속물 단위(캘린더 Q-CAL-FIN·굿즈 Q-GP-FIN1 동일 미해소) |
+| **Q-DCAL-ENVELOPE** | 캘린더봉투 PRD_000005 본체 addon 묶음 vs 독립판매만 | 봉투제작 트랙 위임 | 독립 PRD 실측·일반 캘린더 Q-CAL-ENVELOPE 연계 |
+
+## 라우팅 표기
+- 확정 결함/개선 심의 → **dbm-price-arbiter**(G-DCAL-DUAL 정찰가 채택 비준·주문방법 분기 메커니즘).
+- 신규 그릇(COMP_DCAL_FIXED·PRF_DCAL_*) → **dbm-ddl-proposer**(채번 의미코드·인간 승인 후 dbmap 적재 트랙).
+- 실 적재(INSERT/COMMIT) → 인간 승인 후 **dbm-load-execution**·**dbm-axis-staged-load**. inline verbatim·날조 0·라이브 읽기전용.
+
+★ **★디자인캘린더 = 11번째·최종 종단** — 11연속 search-before-mint 통과(신규 가격축 0)·G-DCAL-DUAL 정찰가 채택+상품별 PRF_DCAL_* 바인딩으로 이중 정의 충돌 선결판(엽서 editor_yn=N 라우팅 명문·codex D2)·G-PRODPRICE 가드 정합·G-DCAL-QTY(본체 정찰가 1부 단가 ×qty·qty-불변 저청구 금지·codex D1)·inline BLOCKED 정직(추측 단가 0). 고정가형 완제 SKU 클래스(.01 단가형 1부 정찰가 ×qty·라이브 .03 부재·굿즈 GP-1·악세사리 inline per-unit 동형) + 외부 add-on 가산(우드거치대=캘린더 종단 mint 선행 의존).

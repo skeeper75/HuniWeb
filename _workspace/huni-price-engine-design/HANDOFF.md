@@ -1,14 +1,18 @@
 # Huni-Price-Engine-Design 하네스 — HANDOFF
 
-> CLAUDE.md §18 · 갱신 2026-06-22 · **종단 GO 10건**(포토북 검증 GO·codex high divergence 0 완료)
+> CLAUDE.md §18 · 갱신 2026-06-22 · **종단 GO 11건 — ★상품마스터 11시트 전수 완주**(디자인캘린더 검증 GO·codex가 돈크리티컬 2건 적발→교정 후 합의)
 
 ## 다음 시작점
 
-**★포토북 GO 완료**(2026-06-22·10번째 종단·Phase 4 E1~E7 전건 PASS·차단0·보정0·LOW2 → Phase 5.5 codex high 7/7 합의·divergence 0 → 박제·이력·CHANGELOG·메모리 갱신 완료). **부품합산 세트형+페이지 선형·★캘린더와 정반대=inline 공식화 가능**(row17 명문 산식·per2p cost-driven). 신규 mint=공식1(PRF_PHOTOBOOK_SUM)+comp2(BASE[siz,mat]/PAGE[siz])·search-before-mint 10연속. **10종단 완주.**
+**★디자인캘린더 GO 완료**(2026-06-22·11번째·최종 종단·Phase4 1차 CONDITIONAL-GO(E2)→보정→codex Phase5.5 D1/D2 돈크리티컬 적발→designer 폐루프→validator 2차 재게이트 E1~E7 전건 PASS → 박제·이력·CHANGELOG·메모리 갱신 완료). **inline 정찰가 BLOCKED·고정가형 완제 SKU**(7 inline 비정수 역산→정찰가 스냅샷·추측 INSERT 금지). **★11시트 전수 종단 완주**(디지털/스티커/책자/포토북/캘린더/디자인캘린더/실사/아크릴/문구/굿즈파우치/상품악세사리).
 
-**다음 후보(동형 전파)**: 디자인캘린더(가격포함·Q-CAL-GOLDEN inline 권위 결판 연계·포토북 "inline 공식화 가능" 분기 기준 적용 가능성)·기타 미종단 상품군. Phase1(cartographer 지도)→benchmark→designer→validator E1~E7→codex Phase5.5 순.
+**★이번 종단 특이점(생성≠검증 가치 입증)**: 앞 10종단(divergence 0)과 달리 codex가 **돈크리티컬 2건을 독립 적발**해 설계 강화 — D1(본체 정찰가 "qty 무관" 모델링이 엔진계약 `.01 단가형=unit×qty` 위반→저청구·GC-DCAL-9 44,000→80,000·신규 가드 G-DCAL-QTY)·D2(엽서 PRD_000110 editor_yn=N인데 라우팅키 editor_yn=Y→엽서 라우팅 누락). validator 1차가 설계 자체 골든 재유도만 하고 qty 의미 미도전한 간극을 codex가 메움→2차 재게이트 시정.
 
-**포토북 실 적재 승인 대기(누적에 추가)**: PRF_PHOTOBOOK_SUM 공식 신설·comp2(BASE/PAGE) 신설·base24 12행(1 BLOCKED)/per2p 4행 단가행 verbatim 충전·부모 PRD_000100 바인딩(product_prices INSERT 금지). **컨펌 선결**: Q-PB-PAGEBASE(돈크리티컬·소프트 base_min=4 vs 하드24)·Q-PB-MAT(표지자재 MAT_005/006/007 del_yn=Y 활성화/재매핑)·Q-PB-SOFT8(10x10 소프트 공란 BLOCKED)·Q-PB-COAT/FACE·Q-PB-DSC. 돈크리티컬 가드 6종(G-PB-PAGE/PRODPRICE/FLAT/SET/BIND01/PAGEBASE) 준수.
+**다음 후보**: **상품마스터 11 상품군 시트 전수 종단 완료** → 신규 동형 전파 대상 소진. 남은 작업 = ① **실 적재 승인 큐 소진**(아래 누적·인간 승인 후 dbmap 위임) ② 가격표(260527) 전용 시트 중 미커버 차원 점검(있으면) ③ 세트/반제품 완성가 미완분(책자 W3/W4 표지+내지 부품 합산) 닫기. 새 상품군 요청 시 Phase1(cartographer)→benchmark→designer→validator E1~E7→codex Phase5.5 순.
+
+**디자인캘린더 실 적재 승인 대기(누적에 추가)**: 정찰가 채택 ① 경로(Q-DCAL-AUTHORITY 비준 후) PRF_DCAL_{DESK/DESKMINI/POSTCARD/WALL/WALLWIDE} 5공식 신설·COMP_DCAL_FIXED 1 comp 신설(.01 단가형·use_dims=[siz_cd])·7 inline 정찰가 단가행 verbatim 충전·부모 PRD_000108~112 바인딩(product_prices INSERT 금지=G-PRODPRICE). 우드거치대 comp는 캘린더 종단 mint 선행 의존(현 라이브 0행). **컨펌 선결**: Q-DCAL-AUTHORITY(정찰가 채택 vs BLOCKED 유지)·Q-DCAL-ROUTE(주문방법 라우팅·엽서 editor_yn=N 포함)·Q-DCAL-FIN(우드거치대 개당/주문당)·Q-DCAL-ENVELOPE(봉투 귀속)·Q-DCAL-DSC(정찰가×qty base 위 수량구간할인 여부). 돈크리티컬 가드: G-DCAL-QTY(본체 ×qty·qty-불변 금지)·G-PRODPRICE(product_prices INSERT 금지)·G-DCAL-SIZE-PRICE(siz_cd 정찰가 분기).
+
+**포토북 실 적재 승인 대기(누적)**: PRF_PHOTOBOOK_SUM 공식 신설·comp2(BASE/PAGE) 신설·base24 12행(1 BLOCKED)/per2p 4행 단가행 verbatim 충전·부모 PRD_000100 바인딩(product_prices INSERT 금지). **컨펌 선결**: Q-PB-PAGEBASE(돈크리티컬·소프트 base_min=4 vs 하드24)·Q-PB-MAT(표지자재 MAT_005/006/007 del_yn=Y 활성화/재매핑)·Q-PB-SOFT8(10x10 소프트 공란 BLOCKED)·Q-PB-COAT/FACE·Q-PB-DSC. 돈크리티컬 가드 6종(G-PB-PAGE/PRODPRICE/FLAT/SET/BIND01/PAGEBASE) 준수.
 - **실 적재 승인 대기(누적)**: 디지털 prc_typ 교정(.01→.02)·아크릴 G-A1 바인딩·실사 후가공 배선·문구(본체 product_prices·떡메모 바인딩·DSC 링크 4건)·책자(W1 제본비 재배선·W2 중철 단가행 교정=과청구 50%)·굿즈/파우치(GP-1 product_prices·GP-2 formula+variant 단가·★GP-2 product_prices INSERT 금지 가드·구간할인 base) — 전부 인간 승인 후 dbm-axis-staged-load/dbm-load-execution/dbm-price-arbiter 위임.
 
 ## 진행 현황
@@ -25,6 +29,7 @@
 | 상품악세사리 | inline 고정가형(굿즈 GP-1/GP-2 동형) | **첫 게이트 GO**(E1~E7 전건·차단0·보정0·LOW1) | GO 지지(**high**·divergence 0) |
 | 캘린더 | 원자합산형(디지털인쇄 직계 동형·페이지수 곱·제본비 .01 부당가) | **첫 게이트 GO**(E1~E7 전건·차단0·보정0·LOW1) | GO 지지(**high**·divergence 0) |
 | 포토북 | 부품합산 세트형+페이지 선형(★inline 공식화 가능=캘린더 정반대) | **첫 게이트 GO**(E1~E7 전건·차단0·보정0·LOW2) | GO 지지(**high**·divergence 0) |
+| 디자인캘린더 | inline 정찰가 BLOCKED·고정가형 완제 SKU(★캘린더 Q-CAL-GOLDEN 결판·11시트 완주) | **2차 재게이트 GO**(E2 CONDITIONAL→PASS·D1/D2 보정·차단0) | **D1/D2 돈크리티컬 적발→교정 후 합의**(divergence 0 아님) |
 
 ## 미해결 / 블로커 (전부 DB 미적재·인간 승인 후 dbmap 위임)
 
@@ -70,20 +75,29 @@
 - Q-PB-MAT(표지자재 MAT_005/006/007 전건 del_yn=Y·BIND_PUR도 del_yn=Y·가격 무관이나 적재 전 활성화/재매핑)·Q-PB-SOFT8(10x10 소프트 row8 공란=GC-PB-11 BLOCKED·추측 금지)·Q-PB-COAT/FACE(표지 무광코팅 단가행·면지 가격기여)·Q-PB-DSC(수량구간할인 0행 확인).
 - 실 적용=PRF_PHOTOBOOK_SUM 공식 1 신설·comp2(BASE[siz,mat]/PAGE[siz]) 신설·base24 12행(1 BLOCKED)/per2p 4행 단가행 verbatim·부모 PRD_000100 바인딩(product_prices 금지). 인쇄/용지/제본/코팅 재사용(mint0). 인간 승인 후 dbm-load-execution/dbm-price-arbiter 위임.
 
+**디자인캘린더(GO·차단 아님·11번째 최종 종단):**
+- ★D1 G-DCAL-QTY(돈크리티컬·codex 적발·저청구): 본체 정찰가를 qty-불변으로 모델링 금지. `.01 단가형`은 항상 unit_price×qty(`pricing.py:180-192`·`price-flow-map.md:106`). 본체=1부 정찰가×qty·GC-DCAL-9=80,000(44,000은 저청구 오답·탁상 10부 10,400 고정=104,000 대비 93,600 누락).
+- ★D2 엽서 라우팅(codex 적발): 엽서 PRD_000110 editor_yn=N → 라우팅키를 editor_yn 단독에 의존 금지. 신호=가격포함 시트 등재+상품별 PRF_DCAL_* 바인딩(엽서 포함 5상품).
+- ★inline 정찰가 BLOCKED 확정[HARD]: 7 inline(10400/9700/6500/6500/4000/9900/24000) 비정수 역산(유효판수 1.313/0.486/...)→정찰가 스냅샷·산식 재현 불가→추측 단가 INSERT 금지. 캘린더 Q-CAL-GOLDEN의 inline 권위 분기 기준 최종 결판처(정수재현→FORMULA·아니면 BLOCKED).
+- ★G-DCAL-DUAL: 동일 prd_cd(108~112) 일반캘린더 공식 vs 디자인캘린더 정찰가 이중정의 가능성 → 라이브 product_prices/바인딩/PRF 전부 0행=충돌 미존재(잠재)·결판=정찰가 채택+주문방법 차원 분기.
+- 실 적용=PRF_DCAL_* 5공식+COMP_DCAL_FIXED 1 신설·정찰가 단가행 verbatim·부모 108~112 바인딩(product_prices INSERT 금지). 우드거치대 comp=캘린더 종단 mint 선행 의존. 컨펌큐 Q-DCAL-AUTHORITY/ROUTE/FIN/ENVELOPE/DSC. 전부 인간 승인 후 dbm-load-execution/dbm-price-arbiter 위임.
+
 **디지털인쇄:** 박 동판 정액(차선A qty=1 격리 vs B 정액 prc_typ 신설)·인쇄면 통합 단가행 병합·G-7 옵션 자동주입.
 **아크릴:** CA-1 미러 합류(mat_cd 판별차원 선결·돈크리티컬)·CA-4 후가공 개당/×수량·CA-3 카라비너 신설.
 **공통:** webadmin pricing.py = read-only(엔진 코드 직접 수정 금지).
 
 ## 이번 세션 결정 (relitigate 금지)
 
-- 포토북 설계(이전 세션 Phase 1~3까지·HANDOFF 미반영 stale)를 **Phase 4 검증부터 재개** → hpe-validator E1~E7 전건 PASS(차단0·보정0·LOW2)·hpe-codex-validator Phase5.5 codex high 7/7·divergence 0 → **GO 확정·CLAUDE.md §18·CHANGELOG·메모리·HANDOFF 박제·커밋 244b376**.
-- **★inline 공식화 가능 vs 정찰가 BLOCKED 분기 기준 확립[HARD]**: 캘린더 inline=비정수해→BLOCKED·포토북 inline=row17 명문 산식+per2p cost-driven→공식화. **"inline이 단가행 산식으로 정수·일관 재현되면 FORMULA·안 되면 정찰가 BLOCKED"** = 두 "가격포함" 시트로 확립된 결정 기준(디자인캘린더 Q-CAL-GOLDEN 결판에 적용).
-- 스티커 행을 CLAUDE.md §18 최근 3건에서 `CHANGELOG.md`로 이동(포토북·캘린더·악세사리 유지).
+- 디자인캘린더(11번째·최종 종단)를 Phase1(cartographer∥benchmark)→designer→validator E1~E7→codex Phase5.5 전 파이프라인 종단 → 1차 CONDITIONAL-GO(E2 .03 부재)→보정→codex D1/D2 돈크리티컬 적발→designer 폐루프→**validator 2차 재게이트 E1~E7 전건 PASS=GO** 확정. **★상품마스터 11시트 전수 종단 완주.**
+- **★inline 권위 분기 기준 최종 적용[HARD]**: "inline이 단가행 산식으로 정수·일관 재현되면 FORMULA(포토북)·안 되면 정찰가 BLOCKED(캘린더·디자인캘린더)" — 캘린더 Q-CAL-GOLDEN을 디자인캘린더에서 결판(7 inline 비정수 역산→BLOCKED).
+- **★codex가 돈크리티컬 2건 독립 적발(divergence 0 깨짐·생성≠검증 가치 입증)**: D1(본체 "qty 무관" → 엔진계약 위반 저청구·GC-DCAL-9 80,000·G-DCAL-QTY 신설)·D2(엽서 editor_yn=N 라우팅). validator 1차가 설계 자체 골든 재유도만 하고 qty 의미 미도전한 간극을 codex가 메움. 엔진계약(`price-flow-map.md:106`·`pricing.py:180-192`)·designer 자체 데이터로 둘 다 codex 정당 확정 → 자동 채택 아닌 라이브/계약 재실측으로 채택.
+- **★prc_typ .03 라이브 부존재[HARD]**: PRICE_TYPE enum=.01/.02만. "고정가형 정찰가"=`.01 단가형 + min_qty=1`로 표현(가격 결과 불변·악세사리/캘린더 동형).
 - effort high 유지(effortLevel·codex-review.sh effort 인자).
 
 ## 건드리지 말 것 (confirmed-good)
 
 - **단가행 값 전부 verbatim 보존**(전 상품군 공통·실 교정/배선은 인간 승인 후 dbmap 위임).
-- 확정 GO 산출(10종단): 디지털 `04_validation/regate-verdict-digitalprint.md`·아크릴/실사/문구/책자/굿즈/스티커/악세사리/캘린더/**포토북** `gate-verdict-*.md`·codex reconcile 10종.
+- 확정 GO 산출(**11종단·전 시트 완주**): 디지털 `04_validation/regate-verdict-digitalprint.md`·아크릴/실사/문구/책자/굿즈/스티커/악세사리/캘린더/포토북/**디자인캘린더** `gate-verdict-*.md`·codex reconcile 11종.
 - 실사·현수막 본체 라이브 상태(29 PRF·28상품 1:1 바인딩·동형결합 13→7 COMMIT 완료) — 이미 정합·건드리지 말 것.
 - 포토북 골든 GC-PB-1~10(허용오차 0·권위 CSV verbatim)·신규 mint 결판(공식1+comp2·search-before-mint 10연속)·base24 internalize(책자 full분해와 정반대) — 검증·codex 합의 완료·재논의 금지.
+- 디자인캘린더 inline BLOCKED 결판(7 inline 비정수 역산·정찰가 스냅샷)·G-DCAL-DUAL(라이브 0행 실측)·D1 ×qty 교정(GC-DCAL-9=80,000·G-DCAL-QTY)·D2 엽서 라우팅·prc_typ .03 부존재(=.01+min_qty=1) — validator 2차 재게이트+codex reconcile 완료·재논의 금지.
