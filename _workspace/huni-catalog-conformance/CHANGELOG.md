@@ -5,6 +5,70 @@
 
 ---
 
+## 2026-06-23 (3) — ★전 카탈로그 11시트 종단 완료 + 배치4(goods-pouch 98 prd) CONDITIONAL GO
+
+마지막 잔여 시트 goods-pouch 종단 → **전 11시트 종단 정합 검증 완료**. checklist 누계 3,198 데이터행·
+246 prd·16 그룹·**빈 셀 0**(누락 0 완주). 동형 7클래스 압축으로 103상품 토큰 효율 처리.
+
+**배치4 결과:**
+- Phase 1: 라이브 98 prd(PRD_000183~280, 엑셀 103 중 폰케이스 5 미등록). 동형 7클래스 전부 고정가형.
+- Phase 2 인스펙터: basedata 784셀(MISSING 240·자재 MISMATCH 76 오염·판형 EXTRA 85·도수 MISSING 98·
+  돈크리 0)·cpq-link 392셀(MISSING 77·DEAD_LINK 0·전 CPQ 테이블 0행)·price-engine 98셀(MISSING_BIND 93·
+  NO_AUTHORITY 5 권위공란·신규 ACR 할인 오귀속 1).
+- Phase 3 codex(gpt-5.5 high): 합의 6·불일치 0·신규발굴 1(discount 82 FK/del_yn 무결성)·환각 0.
+- Phase 4 게이트: K1~K5·K7·K8 PASS·**K6 BLOCKED(HUNI_ADMIN_PW 5연속 stale)** → **CONDITIONAL GO**.
+
+**게이트 codex 큐 해소(생성≠검증):** ★자재 "100% 오염" 가설 기각 — PRD_000230 `레더|L|M`(본체소재+옵션값
+공존)이라 교정은 **행 단위**(레더 잔류·옵션값만 이관). discount FK 전건 해소(유일 결함=PRD_000203
+DSC_ACR_QTY 오귀속). 단가행 유일성은 base 0이라 적재명세 가드(G-GP-6)로 이월.
+
+**핵심 결함:** 바인딩 0/98 = 가격 산출 불가(견적 0원·최대 결함·D-GP4-BIND). 판형 85 EXTRA(굿즈=전지없음·
+round-22 잔재). 자재 76 오염·묶음수 64 MISSING(구수 materials 오적재)·CPQ MISSING 77. NO_AUTHORITY 5는
+결함 아닌 권위 공란.
+
+**인간 승인 큐:** 클래스 A=R-GP4-1(GP-1 base 적재·1순위·98상품 견적0 해소)·R-GP4-2(ACR 재바인딩)·
+R-GP4-3(판형 정리)·R-GP4-4(자재 행단위 정규화) / 클래스 B=GP-2 FORMULA·가공·구수·CPQ77.
+
+### ★전 11시트 종합 (`06_gate/conformance-final-summary.md`)
+- 시트별 verdict: 디지털·배치1·2·3 = NO-GO(라이브 권위 미달=round-13 역전)·배치4 = CONDITIONAL GO.
+- 과대청구 8건 전부 라이브 COMMIT 차단 완료(되돌리지 말 것). 미검증이던 4시트 종단 결과 신규 과대청구
+  1건(배치3 실사 A-프리셋·게이트 적발·미적재라 미COMMIT).
+- 생성≠검증 입증 누적: 배치2 094 양방향·배치3 실사 A1+8,000·배치4 자재100%오염 기각.
+- **실 COMMIT 0**(전 교정 인간 승인 후 dbmap 위임). 검증 단계 종료 → 교정 실행 단계.
+- 유일 미해소: K6 product-viewer(HUNI_ADMIN_PW 5연속 stale·갱신 후 전 배치 일괄 재실행).
+
+---
+
+## 2026-06-23 (2) — 배치3 (sticker·acrylic·silsa, 라이브 65 prd) 종단 완료·NO-GO
+
+미검증 4시트 중 3시트 동형 파이프라인 완주(잔여=goods-pouch 배치4). checklist +845행(누계 1,924
+데이터행). 모집단=라이브 prd_nm 1:1 실측(엑셀 66 중 실사 투명포스터 1 미등록=CONFIRM).
+
+**Phase 결과:**
+- Phase 1 권위: 바인딩 45/65=69%(§18 가격엔진 설계가 라이브 적재된 결과·배치2 5/34 대비 급상승).
+  판별차원 명시(스티커=소재×사이즈×수량 단면=NULL 안전 / 실사=소재별 1:1+면적매트릭스 / 아크릴=두께/색×가공×조각수).
+- Phase 2 인스펙터 3병렬: basedata 520셀(MISSING 4=아크릴 부속물 부착공정 누락 148/149/152/154)·
+  cpq-link 260셀(MISSING 76·MISMATCH 2·옵션→차원 100% 해소·DEAD_LINK 0)·price-engine 65셀(BOUND 45·
+  MISSING_BIND 20=아크릴 147~166·NULL_WILDCARD 0).
+- Phase 3 codex(gpt-5.5 high): 합의 6·불일치 0·신규발굴 0·false-positive 0·환각 0. 신규 가설 2건 게이트로.
+- Phase 4 게이트 K1~K8: **K4 FAIL → NO-GO**. K6 BLOCKED(PW 3연속 stale)→CONDITIONAL.
+
+**★게이트 신규발굴(생성≠검증 입증·돈크리티컬):**
+- 인스펙터·codex 모두 "과대청구 0/조건부 보류"로 봤으나, 게이트가 evaluate_price ceiling 재계산으로
+  **실사 면적그리드 A-사이즈 과대청구 확정 적발** — 실사 118/120/121/123 ×3프리셋. A3/A2 +5,000,
+  **A1 +8,000(594<600 off-grid)은 generation-side가 "A1=on-grid"로 오판해 놓친 신규 결함**.
+  근본=A3/A2/A1 고정가 프리셋행(7000/7000/12000) 미적재(사용자입력 ≥600 연속티어만 평면화 적재).
+- codex 가설 H1(스티커 tuple 중복)·H2(실사 formula_components 중복) 라이브 GROUP BY=전부 0 기각.
+
+**핵심 결함:** ①실사 A-사이즈 과대청구(R-B3-PRICE·돈크리·클래스 B 4상품 공유 comp) ②아크릴 147~166
+20 미바인딩=가격0 견적불가(R-B3-1·G-4 끊김 라이브 재현) ③부속물 BUNDLE 부착공정 4(R-B3-BUNDLE)
+④CPQ MISSING 76·MISMATCH 2(거치대 비대칭·고리 sel_typ NULL)·EXTRA 1(TMPL-000013 테스트 잔재).
+
+**실 COMMIT 0**(인간 승인 후 dbmap 위임). 인간승인큐: R-B3-PRICE > R-B3-1 > R-B3-BUNDLE > CPQ 클래스 A.
+산출=`06_gate/{conformance-verdict,e2e-golden-trace,remediation-spec}-batch3.md`·`_meta/batch-progress-260622.md`.
+
+---
+
 ## 2026-06-22 (2) — 019 첫 교정 라이브 COMMIT (클래스 A·directive 준수·되돌리지 말 것)
 
 사용자 directive "기초코드 미수정·상품별 구성요소만"으로 교정 명세 재분류 → 클래스 A(상품별 9)/

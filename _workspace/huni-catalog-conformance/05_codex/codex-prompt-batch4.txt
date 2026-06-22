@@ -1,0 +1,67 @@
+You are an INDEPENDENT 2nd-opinion auditor for a Korean print e-commerce catalog conformance check.
+Batch4 = "goods-pouch" (굿즈파우치) product group: 98 live products PRD_000183~PRD_000280 (del_yn=N).
+Authority [HARD] = two master Excel files (product master 260610 + print-price-table 260527). Live DB = remediation TARGET (live may be wrong; authority wins).
+You are READ-ONLY. Output ONLY your independent judgment. Do NOT trust the data-gatherer's classification — re-judge from raw signals. Label any claim you cannot ground in the provided data as HYPOTHESIS.
+
+=== DOMAIN PRIMER (print) ===
+- Goods (mugs, mirrors, pouches, eco-bags, coasters, keyrings) are FINISHED GOODS, not printed sheets. They have NO mother-sheet/large-format output ("전지"=plate). So plate_sizes (출력용지규격) should normally be EMPTY for goods.
+- Materials axis (t_prd_product_materials, usage_cd=USAGE.07) = the BODY material of the product (leather/canvas/tyvek/mesh). It is NOT a price-summed component; it is a baked-in BOM tag.
+- Option values that are NOT body material: size-grade (S/M/L), print-side (단면/양면=single/double), unit-count (2구/3구/4구 = N-holes/pack), color. These belong to OTHER axes (sizes, print_options, bundle_qtys), not materials.
+- Pricing: live engine evaluate_price uses source priority. If a product has NEITHER t_prd_product_prices NOR t_prd_product_price_formulas bound, source=NONE → base_amount cannot be computed → quote = 0 won. (Industry oracle: a real print site NEVER returns price 0; 0 = our defect.)
+- discount_tables multiply a base. If base=0 (no price/formula), a bound discount_table has nothing to multiply → it is inert/orphan.
+- _row_matches wildcard rule [CRITICAL for overcharge]: in component_prices, a NULL dimension column = wildcard (always matches). If a discriminating dimension is NOT filled into the unit-price rows, selecting one variant silently matches/sums ALL rows = OVERCHARGE.
+
+=== LIVE COVERAGE MEASURED (goods-pouch 98 prd, 2026-06-23, read-only SELECT) ===
+| t_* axis | # of 98 prd loaded |
+| t_prd_product_price_formulas | 0 |
+| t_prd_product_prices | 0 |
+| t_prd_product_sizes | 11 |
+| t_prd_product_materials | 78 |
+| t_prd_product_plate_sizes | 85 (122 rows; ALL output_paper_typ_cd=NULL; siz_cd = work/cut sizes like 57x91, 85x140) |
+| t_prd_product_discount_tables | 82 |
+| t_prd_product_processes | 6 |
+| t_prd_product_print_options | 0 |
+| t_prd_product_option_groups / options / option_items | 0 / 0 / 0 |
+| t_prd_product_addons | 0 in range (live addons total=5, ALL owned by PRD_000016 acrylic, OUT of range) |
+| t_prd_product_constraints | 0 |
+| t_prd_product_bundle_qtys | 1 |
+| t_prd_templates / selections / sets | 0 in range |
+
+=== RAW SIGNALS (data-gatherer observations, NOT conclusions) ===
+1. plate_sizes: 85 prd / 122 rows, every row output_paper_typ_cd=NULL, siz_cd values are work/cut sizes (57x91, 85x140, etc).
+2. materials: examples of what is loaded as a "material" (mat_nm via t_mat_materials join):
+   - PRD_000202 키캡키링(keycap keyring) materials = "2구 / 3구 / 4구" (= 2/3/4-hole counts)
+   - PRD_000206 반팔티셔츠(short-sleeve T) materials = "블랙 M / 화이트 L ..." (= size+color)
+   - PRD_000220 폰스트랩(phone strap) materials = "단면 / 양면" (= single/double print-side)
+   76 prd have this kind of mixed-in option-value content in materials; 22 prd have NO body material loaded at all.
+3. price binding: 0/98 have any formula; 0/98 have product_prices. 82/98 have a discount_table bound.
+4. PRD_000203 LED투명키캡키링: bound discount table = DSC_ACR_QTY (this is the ACRYLIC quantity-discount type). Other goods use DSC_GOODSA_QTY / DSC_GOODSB_QTY / DSC_FABRIC_QTY / DSC_SQUISHY_QTY.
+5. Discount type detail (live), compared to authority golden:
+   - DSC_GOODSA_QTY: 1~49=0, 50~99=5, 100~499=10, 500~999=15, 1000~=20  (bound to 15 prd)
+   - DSC_GOODSB_QTY: 1~99=0, 100~499=5, 500~=10  (bound to 11 prd)
+   - DSC_FABRIC_QTY: 1~49=0, 50~99=5, 100~499=10, 500~999=15, 1000~=20  (bound to 50 prd)
+   - DSC_SQUISHY_QTY: 1~1=0, 2~9=10, 10~29=15, 30~49=20, 50~99=25, 100~499=30, 500~999=40, 1000~=50  (bound to 5 prd)
+6. CPQ: option_groups/options/option_items all 0 in range. Authority says 67 prd have variant/process select options (size-grade S/M/L, capacity, print-side, process 고주파/승화/UV pick-1) that need option groups; 5 prd have add-on options (잉크5cc/볼체인/아크릴스탠드/맥세이프); 5 prd need add-on SKU templates. constraints: authority says 0 needed (the Excel "★" star is just a new-phone-model marker), live=0.
+7. 5 products have BOTH 가격 and 선택가격 columns empty in the master: 투명부채, 미니CD앨범, 극세사타월, 타이벡북커버, 말랑증사홀더.
+
+=== AUTHORITY EXPECTATION (price-class design, §18, for overcharge-guard review) ===
+The price-engine design proposes these classes & discriminating dimensions:
+- GP-1 single-fixed-price: product_prices single unit (no dims). Safe (0 dims = nothing to wildcard-match).
+- GP-2-SIZE size-grade variant (S/M/L): a FORMULA whose component_prices use_dims = [siz_cd].
+- GP-2-VAR capacity/side variant: use_dims = [opt_cd].
+- GP-PROC process surcharge: process comp use_dims = [opt_cd], min_qty (open question: per-unit surcharge vs flat one-time?).
+- GP-ADD add-on: separate SKU outside the body formula.
+- GP-COUNT N-hole/pack: [opt_cd] if count is a price axis, else equal price (open question: is hole-count price-proportional?).
+- HARD guard: a GP-2 product must have NO product_prices row — if even one product_prices row exists, the FORMULA path is bypassed forever (PRODUCT_PRICE wins source priority) → variant prices never apply.
+
+=== YOUR INDEPENDENT REVIEW QUESTIONS ===
+Q1. plate_sizes 85 prd / 122 rows, all output_paper_typ_cd=NULL, siz_cd=work/cut sizes. For a finished-goods group with no sheet output: is loading these into plate_sizes (출력용지규격) JUSTIFIED, or is it spurious/leftover loading? Could any of these legitimately be a work-size or cut-size that belongs in plate_sizes? Give your independent verdict (EXTRA vs justified) and the decisive check.
+Q2. materials axis 76 prd hold mixed content (size-grade/side/hole-count/color) instead of body material. Is this a genuine mis-load (option values polluting the material axis), or could some of these legitimately be the body material (false-positive)? Decisive check?
+Q3. 0/98 products have any price binding (no formula, no product_prices). Is this a DEFECT (missing load → quote=0), or could it be an intentional goods design (fixed price not yet loaded / priced elsewhere)? What decides it?
+Q4. Two specific findings — are they real and do they have a money impact?
+   (a) PRD_000203 LED투명키캡키링 bound to DSC_ACR_QTY (acrylic discount) while it is a goods product.
+   (b) 82 discount_tables bound but base price 0 → orphan/inert.
+Q5. OVERCHARGE GUARD (post-load): the design declares GP-2-SIZE discriminator = [siz_cd] and GP-2-VAR = [opt_cd]. IF these products are loaded per the design, is that enough to prevent silent wildcard summation/overcharge at load time? What additional check is needed (e.g., unit-price-row uniqueness, product_prices-bypass guard)? Are there blind spots (process per-unit-vs-flat, hole-count price axis) that could create NEW overcharge on load?
+Q6. COVERAGE: given 98 prd × 13 axes, are there any product×axis combinations that look UN-checked / blind in the coverage above? Anything the data-gatherer might have missed entirely (a dead link, an orphan, an EXTRA row class beyond plate_sizes)?
+
+Be concise. For each question: verdict + decisive check + (if applicable) HYPOTHESIS flag for anything you cannot ground in the data above. Do not invent prd_cd/codes not present above.

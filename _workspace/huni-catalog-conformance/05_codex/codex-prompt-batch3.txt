@@ -1,0 +1,115 @@
+You are an INDEPENDENT 2nd-opinion reviewer for a Korean print-on-demand catalog
+conformance audit (huni-printing, §21 batch3 = STICKER · ACRYLIC · SILSA[large-format
+photo/banner printing]). You are NOT told the first reviewer's GO/NO-GO conclusions —
+judge the raw data yourself. Read-only. Do NOT invent codes/dimensions/prices that you
+cannot point to in the data shown below. If you assert a defect, you MUST cite the
+specific evidence (prd_cd / comp_cd / column / dim) — unbacked claims are explicitly
+flagged as HYPOTHESIS, not fact.
+
+Reply in Korean. Be terse and surgical. Focus ONLY on the 4 questions at the end.
+
+================================================================================
+DOMAIN PRIMER (price engine = evaluate_price, single authority algorithm)
+================================================================================
+- A product binds to a price FORMULA (frm_cd) via t_prd_product_price_formulas.
+  No binding row => engine falls through to FORMULA source, can't find frm_cd =>
+  price cannot be computed (BLOCKED, quote = 0/impossible). PRICE=0 is a defect signal.
+- A formula has formula_components (comp_cd). Each comp has component_prices rows with
+  dimension columns (siz_cd, siz_width, siz_height, mat_cd, proc_cd, print_opt_cd,
+  min_qty, proc_grp ...). use_dims = which dims that comp evaluates.
+- ★ SILENT-SUM / OVERCHARGE HAZARD [HARD]: in _row_matches, a dim column that is NULL in
+  a price row = WILDCARD (matches everything). If a DISCRIMINATING dim (a dim that price
+  legitimately varies by) is NULL across the price rows, then picking one option still
+  matches ALL rows => they get summed => OVERCHARGE. So: "is every dim that price varies
+  by actually populated (non-NULL) in the price rows?" If yes => safe. If a price-
+  discriminating dim is NULL => overcharge risk.
+- Off-grid area match uses ceiling (P3-4): an order size between grid points rounds UP to
+  the next grid row's price.
+
+================================================================================
+AUTHORITY (the two source-of-truth Excels — abridged, batch3 relevant)
+================================================================================
+STICKER (16 prd, PRD_000052~067): price varies by PAPER(material) × SIZE × QTY-band.
+  Printing is ALL single-sided (no front/back split). Cutting (반칼/완칼/모양) & piece-
+  count are SKU labels but priced the SAME per size => cutting is NOT a price discriminator.
+SILSA / large-format (28 live prd, PRD_000118~145): each product has a 1:1 dedicated
+  formula keyed by material; posters/fabric use AREA-MATRIX use_dims=[siz_width,siz_height,
+  min_qty]; banners use SIZE-TIER use_dims=[siz_cd,min_qty]. Process(가공: overlock/
+  punching/heat-cut/grommet) ADDS to price (add-on). Authority area prices for the
+  shared art-print family: A3(297x420)=7000, A2(420x594)=7000, A1(594x841)=12000,
+  user-input=20000 — IDENTICAL across the 4 materials that share the formula.
+ACRYLIC (21 prd, PRD_000146~166): price varies by MATERIAL(thickness/color) × SIZE ×
+  PROCESS(attachment accessory: ballchain/magnet/pin/ring) × piece-count. Accessory =
+  material+process BUNDLE (one option means BOTH an accessory material AND an attach
+  process). Excel has both `가격`(fixed unit price 2700/2500/3100...) AND `가공_가격`
+  (accessory add-on). Combo SKUs PRD_000160~166 = set-combination (piece-count × body).
+
+================================================================================
+LIVE DATA SNAPSHOT (what the inspectors measured — facts, no conclusions)
+================================================================================
+PRICE ENGINE (live, read-only SELECT results):
+- STICKER 16 (PRD_000052~067): ALL bound. PRF_STK_FIXED comp=COMP_STK_PRINT
+  use_dims=[siz_cd,mat_cd,min_qty]; in COMP_STK_PRINT's 2,694 price rows, print_opt_cd
+  AND proc_cd are NULL in EVERY row. (variants: STK_PACK/GANGPAN_FIXED/STK_TATTOO.)
+- SILSA 28 (PRD_000118~145): ALL bound, 1:1 dedicated formulas.
+  Shared comp COMP_POSTER_ARTPRINT_PHOTO used by 4 formulas (ARTPRINT/ADH_WP/ARTFABRIC/
+  WATERPROOF). use_dims=[siz_width,siz_height,min_qty]; mat_cd is NULL across all 52 rows.
+  MIN area row in COMP_POSTER_ARTPRINT_PHOTO = 600x600 (=360000, price 12000). NO price
+  rows below 600mm exist. (Authority wants A3=297x420=7000 and A2=420x594=7000, which are
+  sub-600 on at least one side.)
+  Banner add-on example PRD_000138: COMP_POSTEROPT_..._PROC_PUNCH_4 use_dims=[proc_cd,
+  min_qty,proc_grp:PROC_000104] — proc_cd POPULATED (non-NULL).
+- ACRYLIC: only PRD_000146 (아크릴키링) is bound (PRF_CLR_ACRYL). PRD_000147~166 (20 prd)
+  have ZERO rows in t_prd_product_price_formulas (no binding). Some comps have orphan
+  price data: COMP_ACRYL_COROTTO has 21 price rows AND a formula PRF_COROTTO_ACRYL, but
+  0 products bound to that formula; COMP_ACRYL_KEYRING(2 rows)/COMP_ACRYL_MIRROR3T(52
+  rows) have price data but no formula link.
+
+BASEDATA / CPQ (live):
+- ACRYLIC accessories: live registered the accessory MATERIAL (mat_cd: 원형핀/투명집게/
+  일자핀/2구자석/블랙헤어끈 exist) for PRD_000148/149/152/154, but did NOT register an
+  attach PROCESS (t_prd_product_processes) for them — only the UV-print process is there.
+  (PRD_000153/166 have NO accessory material either.)
+- CPQ option→dimension links (polymorphic ref_dim_cd): 69 live option_items, 0 with NULL
+  ref_dim_cd, all 69 resolve via LEFT JOIN (target dim rows all del_yn='N' active) => no
+  dead links found in batch3.
+- One live template TMPL-000013: base=PRD_000136(PET banner), tmpl_nm="테스트 템플릿"
+  (="test template"), its only selection bundles PROC_000015 (a single process), not an
+  add-on product. Authority: PET banner template needed=N.
+
+================================================================================
+YOUR 4 QUESTIONS (answer each explicitly; label HYPOTHESIS where you can't cite data)
+================================================================================
+Q1 [OVERCHARGE HUNT — most important]: Re-scan for SILENT-SUM / NULL-wildcard overcharge
+   that a first pass might have missed. Specifically:
+   (a) STICKER COMP_STK_PRINT has proc_cd AND print_opt_cd NULL in all 2,694 rows. Given
+       sticker printing is single-sided and cutting is priced the same — is this NULL
+       wildcard SAFE, or could it cause silent summation/overcharge? Explain the
+       mechanism either way.
+   (b) SILSA shared comp COMP_POSTER_ARTPRINT_PHOTO has mat_cd NULL in all 52 rows, shared
+       by 4 formulas. Given authority area prices are IDENTICAL across the 4 materials —
+       safe, or overcharge? Does sharing one comp across 4 formulas create cross-summation
+       (does any formula evaluate >1 comp such that the shared comp double-counts)?
+   (c) Any OTHER batch3 discriminating dim you suspect is NULL-wildcarded that wasn't
+       listed? (state as HYPOTHESIS — needs live re-measure.)
+
+Q2 [SILSA area-grid floor 600mm]: The art-print shared comp's smallest area row is
+   600x600. Authority wants A3(297x420) and A2(420x594) at 7000 each, but those are
+   sub-600. If a sub-600 order is allowed, off-grid ceiling rounds UP to 600x600=12000 =>
+   +5000 overcharge per sheet vs authority 7000. Is this a real, confirmable overcharge,
+   or is it neutralized by a minimum-output-size constraint (sub-600 simply not orderable)?
+   What single check decides it?
+
+Q3 [ACRYLIC 147~166 missing binding]: 20 acrylic products have no formula binding. Is this
+   a genuine DEFECT (blocked quote), or could it be an intended fixed-price model that
+   bypasses the formula engine (note: excel has BOTH a fixed `가격` and a `가공_가격`)?
+   What determines whether "no formula binding" is wrong vs intended?
+
+Q4 [ACCESSORY BUNDLE missing attach-process — 4 items]: PRD_000148/149/152/154 registered
+   the accessory material but not an attach process. Is "material-only, no attach process"
+   a real defect, or is registering only the material sufficient (false-positive)? Does the
+   missing process have any MONEY impact given these products are NOT bound to a price
+   formula (Q3)?
+
+Also: do you see any MISSED defect or any FALSE-POSITIVE in the data above that none of
+these 4 questions covers? Keep it to genuine, data-cited items.

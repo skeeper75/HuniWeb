@@ -290,9 +290,21 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 **산출물 루트:** `_workspace/huni-catalog-conformance/` (01_authority·02_basedata·03_cpq_link·04_price_engine·05_codex·06_gate·_meta). 누락 0의 자=`01_authority/conformance-checklist.csv`(전 상품×12축). 자격증명 `.env.local RAILWAY_DB_*`(읽기전용 SELECT)·`HUNI_ADMIN_*`(gstack 읽기 탐색만). codex 헬퍼=`hqv-codex-cross-verify/scripts/codex-review.sh` 재사용.
 
-**변경이력:** 최신: 2026-06-22 019 첫 교정 라이브 COMMIT(판형 SIZ_000522→SIZ_000499+PRF_DGP_A 바인딩·가격0→77064·기초코드 미수정 directive 준수·되돌리지말것·명함 돈크리티컬은 클래스B 보류) → `_workspace/huni-catalog-conformance/CHANGELOG.md`
+**변경이력:** 최신: 2026-06-23 ★전 카탈로그 11시트 종단 완료(3,198행·246prd·누락0) — 배치4 goods-pouch 98prd CONDITIONAL GO(바인딩0/98 견적0·판형85 EXTRA·자재오염 행단위·K6만 BLOCKED). 디지털·배치1~3=NO-GO. 검증 종료→교정실행단계(인간승인 후 dbmap). 종합=`06_gate/conformance-final-summary.md` → `_workspace/huni-catalog-conformance/CHANGELOG.md`
 
-## 22. MoAI Framework (gated — rarely used here)
+## 22. Harness: Huni-RE-Verify (RedPrinting 위젯/SDK 역공학 재검증 + 런타임 동등성 검증 · codex high 교차)
+
+**목표:** RedPrinting 위젯/SDK를 두 역공학 리포트(`docs/reversing` SDK Deep Analysis·Widget Analysis)와 최신 베스트프랙티스(차등/동등성 테스트·골든 마스터 record-replay·메타모픽·CASCADE 환각가드)로 재검증하되, **★역공학한 코드가 실제로 동작/재현되는지**를 라이브 RedPrinting을 **기준 오라클(reference oracle)**로 한 차등 테스트로 입증하고, **codex-cli high 독립 2차 교차검증**(서브시스템별 reconcile)으로 환각을 가드한다. §6 huni-widget 재구성(04_build·05_qa 동등성게이트·07_parity)·`raw/widget_monitor` 라이브 테스트베드를 **80% 재사용**(역공학·테스트베드 재구축 금지). §6(구현)·§19(플로우 문서)·§20(edicus 코드맵)과 별개의 **"역공학 정확성 + 런타임 동등성 검증" 전용** 트랙(검증+교정명세까지·실 수정은 §6 위임·인간 승인).
+
+**검증 게이트[HARD]:** V-PRICE(6: 골든 strict 재생·라이브 차등·PRICE≠0 sanity·result_sum 권위·조합 fuzz/메타모픽·필드사전 정합)·V-WIDGET(5: 캐스케이드·emit-on-change·Shadow DOM 렌더·주문조립·커버리지)·V-EDITOR(5: mock postMessage peer 프로토콜·라이프사이클·가격콜백·업로드·무백엔드) + 메타게이트(VM-1 생성≠검증·VM-2 codex reconcile·VM-3 무날조). 오라클=라이브(Red 산식 재유도에 맞추지 않음)·PRICE=0=결함신호·codex 주장=가설(확증 전 사실 아님·미가용 시 Claude 단독 명시 pending 금지)·라이브 읽기전용(주문/결제/폼submit 금지)·비밀 [REDACTED].
+
+**트리거:** "역공학 재검증", "역공학 코드 동작 검증", "RedPrinting 위젯 동등성 검증", "역공학 런타임 검증", "골든 마스터 검증", "차등 테스트", "codex high 교차검증", "price-calc 동등성", "RE-verify 하네스 실행/재실행/업데이트/보완", "특정 서브시스템만 검증" 등 본 도메인 요청 시 `huni-re-verify-orchestrator` 스킬을 사용. 위젯 구현은 §6, 플로우 문서화는 §19, edicus 코드맵은 §20. 단순 질문은 직접 응답.
+
+**산출물 루트:** `_workspace/huni-re-verify/` (`_meta` 방법론리서치·codex-high-spec·01_inventory·02_golden·03_price·04_widget·05_editor·06_codex·07_gate). 7인 팀(`hrev-asset-curator` 기준점 → `hrev-golden-recorder` 라이브 골든캡처 → `hrev-price-equivalence`·`hrev-widget-behavior`·`hrev-editor-bridge` 검사 팬아웃 → `hrev-codex-verifier` codex high 2차 → `hrev-verify-gate` V+메타게이트). **파일럿=가격계산 API**. codex 헬퍼=`hqv-codex-cross-verify/scripts/codex-review.sh ... high`(stdin `</dev/null`·`--skip-git-repo-check` 패치 적용). 자격증명 `.env.local`(라이브 세션·EDICUS_* — 골든/로그 비노출).
+
+**변경이력:** 최신: 2026-06-23 하네스 초기 구성(7 에이전트+8 스킬·V-PRICE/WIDGET/EDITOR+메타게이트·codex high 라이브검증·§6/testbed 80% 재사용) → 첫 실행 시 CHANGELOG 생성
+
+## 23. MoAI Framework (gated — rarely used here)
 
 The MoAI-ADK orchestration framework (SPEC plan/run/sync, TRUST 5, DDD/TDD, Agent Teams,
 design GAN loop) is installed but not the primary workflow in this repo. Its detailed

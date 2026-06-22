@@ -1,0 +1,220 @@
+Reading additional input from stdin...
+OpenAI Codex v0.140.0
+--------
+workdir: /Users/innojini/Dev/HuniWeb/_workspace/huni-catalog-conformance
+model: gpt-5.5
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: high
+reasoning summaries: none
+session id: 019ef062-1461-7ef0-b295-894053101fa2
+--------
+user
+You are an INDEPENDENT 2nd-opinion reviewer for a Korean print-on-demand catalog
+conformance audit (huni-printing, §21 batch3 = STICKER · ACRYLIC · SILSA[large-format
+photo/banner printing]). You are NOT told the first reviewer's GO/NO-GO conclusions —
+judge the raw data yourself. Read-only. Do NOT invent codes/dimensions/prices that you
+cannot point to in the data shown below. If you assert a defect, you MUST cite the
+specific evidence (prd_cd / comp_cd / column / dim) — unbacked claims are explicitly
+flagged as HYPOTHESIS, not fact.
+
+Reply in Korean. Be terse and surgical. Focus ONLY on the 4 questions at the end.
+
+================================================================================
+DOMAIN PRIMER (price engine = evaluate_price, single authority algorithm)
+================================================================================
+- A product binds to a price FORMULA (frm_cd) via t_prd_product_price_formulas.
+  No binding row => engine falls through to FORMULA source, can't find frm_cd =>
+  price cannot be computed (BLOCKED, quote = 0/impossible). PRICE=0 is a defect signal.
+- A formula has formula_components (comp_cd). Each comp has component_prices rows with
+  dimension columns (siz_cd, siz_width, siz_height, mat_cd, proc_cd, print_opt_cd,
+  min_qty, proc_grp ...). use_dims = which dims that comp evaluates.
+- ★ SILENT-SUM / OVERCHARGE HAZARD [HARD]: in _row_matches, a dim column that is NULL in
+  a price row = WILDCARD (matches everything). If a DISCRIMINATING dim (a dim that price
+  legitimately varies by) is NULL across the price rows, then picking one option still
+  matches ALL rows => they get summed => OVERCHARGE. So: "is every dim that price varies
+  by actually populated (non-NULL) in the price rows?" If yes => safe. If a price-
+  discriminating dim is NULL => overcharge risk.
+- Off-grid area match uses ceiling (P3-4): an order size between grid points rounds UP to
+  the next grid row's price.
+
+================================================================================
+AUTHORITY (the two source-of-truth Excels — abridged, batch3 relevant)
+================================================================================
+STICKER (16 prd, PRD_000052~067): price varies by PAPER(material) × SIZE × QTY-band.
+  Printing is ALL single-sided (no front/back split). Cutting (반칼/완칼/모양) & piece-
+  count are SKU labels but priced the SAME per size => cutting is NOT a price discriminator.
+SILSA / large-format (28 live prd, PRD_000118~145): each product has a 1:1 dedicated
+  formula keyed by material; posters/fabric use AREA-MATRIX use_dims=[siz_width,siz_height,
+  min_qty]; banners use SIZE-TIER use_dims=[siz_cd,min_qty]. Process(가공: overlock/
+  punching/heat-cut/grommet) ADDS to price (add-on). Authority area prices for the
+  shared art-print family: A3(297x420)=7000, A2(420x594)=7000, A1(594x841)=12000,
+  user-input=20000 — IDENTICAL across the 4 materials that share the formula.
+ACRYLIC (21 prd, PRD_000146~166): price varies by MATERIAL(thickness/color) × SIZE ×
+  PROCESS(attachment accessory: ballchain/magnet/pin/ring) × piece-count. Accessory =
+  material+process BUNDLE (one option means BOTH an accessory material AND an attach
+  process). Excel has both `가격`(fixed unit price 2700/2500/3100...) AND `가공_가격`
+  (accessory add-on). Combo SKUs PRD_000160~166 = set-combination (piece-count × body).
+
+================================================================================
+LIVE DATA SNAPSHOT (what the inspectors measured — facts, no conclusions)
+================================================================================
+PRICE ENGINE (live, read-only SELECT results):
+- STICKER 16 (PRD_000052~067): ALL bound. PRF_STK_FIXED comp=COMP_STK_PRINT
+  use_dims=[siz_cd,mat_cd,min_qty]; in COMP_STK_PRINT's 2,694 price rows, print_opt_cd
+  AND proc_cd are NULL in EVERY row. (variants: STK_PACK/GANGPAN_FIXED/STK_TATTOO.)
+- SILSA 28 (PRD_000118~145): ALL bound, 1:1 dedicated formulas.
+  Shared comp COMP_POSTER_ARTPRINT_PHOTO used by 4 formulas (ARTPRINT/ADH_WP/ARTFABRIC/
+  WATERPROOF). use_dims=[siz_width,siz_height,min_qty]; mat_cd is NULL across all 52 rows.
+  MIN area row in COMP_POSTER_ARTPRINT_PHOTO = 600x600 (=360000, price 12000). NO price
+  rows below 600mm exist. (Authority wants A3=297x420=7000 and A2=420x594=7000, which are
+  sub-600 on at least one side.)
+  Banner add-on example PRD_000138: COMP_POSTEROPT_..._PROC_PUNCH_4 use_dims=[proc_cd,
+  min_qty,proc_grp:PROC_000104] — proc_cd POPULATED (non-NULL).
+- ACRYLIC: only PRD_000146 (아크릴키링) is bound (PRF_CLR_ACRYL). PRD_000147~166 (20 prd)
+  have ZERO rows in t_prd_product_price_formulas (no binding). Some comps have orphan
+  price data: COMP_ACRYL_COROTTO has 21 price rows AND a formula PRF_COROTTO_ACRYL, but
+  0 products bound to that formula; COMP_ACRYL_KEYRING(2 rows)/COMP_ACRYL_MIRROR3T(52
+  rows) have price data but no formula link.
+
+BASEDATA / CPQ (live):
+- ACRYLIC accessories: live registered the accessory MATERIAL (mat_cd: 원형핀/투명집게/
+  일자핀/2구자석/블랙헤어끈 exist) for PRD_000148/149/152/154, but did NOT register an
+  attach PROCESS (t_prd_product_processes) for them — only the UV-print process is there.
+  (PRD_000153/166 have NO accessory material either.)
+- CPQ option→dimension links (polymorphic ref_dim_cd): 69 live option_items, 0 with NULL
+  ref_dim_cd, all 69 resolve via LEFT JOIN (target dim rows all del_yn='N' active) => no
+  dead links found in batch3.
+- One live template TMPL-000013: base=PRD_000136(PET banner), tmpl_nm="테스트 템플릿"
+  (="test template"), its only selection bundles PROC_000015 (a single process), not an
+  add-on product. Authority: PET banner template needed=N.
+
+================================================================================
+YOUR 4 QUESTIONS (answer each explicitly; label HYPOTHESIS where you can't cite data)
+================================================================================
+Q1 [OVERCHARGE HUNT — most important]: Re-scan for SILENT-SUM / NULL-wildcard overcharge
+   that a first pass might have missed. Specifically:
+   (a) STICKER COMP_STK_PRINT has proc_cd AND print_opt_cd NULL in all 2,694 rows. Given
+       sticker printing is single-sided and cutting is priced the same — is this NULL
+       wildcard SAFE, or could it cause silent summation/overcharge? Explain the
+       mechanism either way.
+   (b) SILSA shared comp COMP_POSTER_ARTPRINT_PHOTO has mat_cd NULL in all 52 rows, shared
+       by 4 formulas. Given authority area prices are IDENTICAL across the 4 materials —
+       safe, or overcharge? Does sharing one comp across 4 formulas create cross-summation
+       (does any formula evaluate >1 comp such that the shared comp double-counts)?
+   (c) Any OTHER batch3 discriminating dim you suspect is NULL-wildcarded that wasn't
+       listed? (state as HYPOTHESIS — needs live re-measure.)
+
+Q2 [SILSA area-grid floor 600mm]: The art-print shared comp's smallest area row is
+   600x600. Authority wants A3(297x420) and A2(420x594) at 7000 each, but those are
+   sub-600. If a sub-600 order is allowed, off-grid ceiling rounds UP to 600x600=12000 =>
+   +5000 overcharge per sheet vs authority 7000. Is this a real, confirmable overcharge,
+   or is it neutralized by a minimum-output-size constraint (sub-600 simply not orderable)?
+   What single check decides it?
+
+Q3 [ACRYLIC 147~166 missing binding]: 20 acrylic products have no formula binding. Is this
+   a genuine DEFECT (blocked quote), or could it be an intended fixed-price model that
+   bypasses the formula engine (note: excel has BOTH a fixed `가격` and a `가공_가격`)?
+   What determines whether "no formula binding" is wrong vs intended?
+
+Q4 [ACCESSORY BUNDLE missing attach-process — 4 items]: PRD_000148/149/152/154 registered
+   the accessory material but not an attach process. Is "material-only, no attach process"
+   a real defect, or is registering only the material sufficient (false-positive)? Does the
+   missing process have any MONEY impact given these products are NOT bound to a price
+   formula (Q3)?
+
+Also: do you see any MISSED defect or any FALSE-POSITIVE in the data above that none of
+these 4 questions covers? Keep it to genuine, data-cited items.
+warning: failed to parse plugin hooks config /Users/innojini/.codex/plugins/cache/omc/oh-my-claudecode/4.14.7/hooks/hooks.json: unknown field `description`, expected `hooks` at line 2 column 15
+warning: failed to parse plugin hooks config /Users/innojini/.codex/plugins/cache/claude-code-warp/warp/2.1.0/hooks/hooks.json: unknown field `description`, expected `hooks` at line 2 column 15
+warning: Skill descriptions were shortened to fit the 2% skills context budget. Codex can still see every skill, but some descriptions are shorter. Disable unused skills or plugins to leave more room for the rest.
+hook: SessionStart
+hook: SessionStart Completed
+hook: UserPromptSubmit
+hook: UserPromptSubmit Failed
+codex
+Q1. NULL-wildcard 재스캔
+
+(a) `STICKER / COMP_STK_PRINT`: **SAFE로 판단**.  
+근거: `use_dims=[siz_cd,mat_cd,min_qty]`, 2,694행에서 `print_opt_cd`와 `proc_cd`가 전부 NULL. 그런데 권위 Excel상 STICKER 가격축은 `PAPER(material) × SIZE × QTY-band`이고, 단면 인쇄 고정이며 컷팅/조각수는 가격축이 아님. 즉 NULL인 두 컬럼은 가격 판별축이 아니므로 wildcard가 여러 유료 row를 동시에 매칭해 합산할 구조가 아니다.  
+단, 같은 `(siz_cd, mat_cd, min_qty)` tuple 중복 여부는 제공 데이터에 없음. 중복이면 별도 과금 가능성은 **HYPOTHESIS**.
+
+(b) `SILSA / COMP_POSTER_ARTPRINT_PHOTO`: `mat_cd NULL` 자체는 **SAFE로 판단**.  
+근거: `use_dims=[siz_width,siz_height,min_qty]`, `mat_cd`는 52행 전부 NULL, 권위상 4개 material의 면적 단가가 동일. material이 가격 판별축이 아니므로 NULL wildcard가 과금 차이를 무너뜨리지는 않는다.  
+공유 comp가 4개 formula에서 쓰이는 것도, 제품은 자기 `frm_cd` 하나를 평가하므로 그 자체로 cross-summation은 아니다. 단, 각 formula 안에 `COMP_POSTER_ARTPRINT_PHOTO`가 중복으로 여러 번 연결돼 있는지는 제공 데이터에 없음. 중복 formula_component가 있으면 **HYPOTHESIS**.
+
+(c) 기타 의심: **HYPOTHESIS**  
+`ACRYLIC`은 가격축이 `MATERIAL × SIZE × PROCESS × piece-count`인데, 제공 데이터는 일부 orphan comp 가격행만 말하고 각 comp의 `use_dims`/NULL 분포를 안 보여준다. 특히 `COMP_ACRYL_COROTTO`, `COMP_ACRYL_MIRROR3T`, `COMP_ACRYL_KEYRING`에서 `proc_cd`, `mat_cd`, piece-count 대응 dim이 NULL인지 재실측 필요.
+
+Q2. SILSA 600mm floor
+
+**조건부 confirmable overcharge**다.  
+근거: `COMP_POSTER_ARTPRINT_PHOTO` 최소 row가 `600x600=12000`, 권위는 `A3 297x420=7000`, `A2 420x594=7000`. sub-600 주문이 허용되면 off-grid ceiling으로 `600x600`에 붙어 `+5000` 과청구가 발생한다.
+
+이걸 결정하는 단일 체크:  
+`PRD_000118~145` 중 해당 4 formula 상품의 주문/CPQ/size constraint가 `min(width,height) >= 600` 또는 A3/A2 선택 불가를 강제하는지 확인. sub-600이 UI/API에서 주문 가능하면 결함, 불가능하면 중립.
+
+Q3. ACRYLIC 147~166 no binding
+
+현재 엔진 계약 기준으로는 **genuine DEFECT / blocked quote**다.  
+근거: `PRD_000147~166` 20개가 `t_prd_product_price_formulas` 0행. primer상 binding row 없으면 `frm_cd`를 못 찾아 가격 계산 불가. `COMP_ACRYL_COROTTO`는 21 price rows와 `PRF_COROTTO_ACRYL`이 있으나 bound product 0개라 더 강한 증거다.
+
+“intended fixed-price bypass”가 되려면 live 엔진에 formula 외 가격 경로가 있어야 한다. 결정 체크는 하나: `evaluate_price`가 `t_prd_product_price_formulas` 없이도 Excel의 `가격` fixed unit price를 읽는 별도 branch/table을 실제로 타는지. 그런 경로가 없으면 `가격` 컬럼 존재는 의도가 아니라 미적재/미연결 증거다.
+
+Q4. Accessory material-only, missing attach process
+
+도메인 모델상은 **defect 가능성이 높음**.  
+근거: ACRYLIC 권위는 accessory가 `material + attach process BUNDLE`이고, live는 `PRD_000148/149/152/154`에 accessory material은 있으나 `t_prd_product_processes`에는 UV-print만 있고 attach process가 없다. 즉 선택 의미가 반쪽만 등록됨.
+
+돈 영향은 현재 **직접 발생하지 않음 / Q3에 의해 가려짐**.  
+근거: 해당 acrylic 제품들이 formula binding이 없으므로 먼저 quote가 blocked된다. attach process 누락으로 인한 `가공_가격` 누락/오청구는 formula binding이 복구된 뒤 드러나는 2차 결함이다.
+
+추가 missed / false-positive
+
+- **Missed defect:** `TMPL-000013`, base=`PRD_000136`, `tmpl_nm="테스트 템플릿"`, selection이 `PROC_000015` 단일 process bundle, 권위는 PET banner template needed=N. 테스트 템플릿/잘못된 bundle 잔존으로 보이며 batch3 데이터 오염이다.
+- **False-positive 후보:** batch3 CPQ option links는 `69 live option_items`, `NULL ref_dim_cd 0`, LEFT JOIN 전건 active resolve. 이 범위에서는 dead option link 결함 주장은 데이터상 반증된다.
+hook: Stop
+hook: Stop Completed
+tokens used
+47,841
+Q1. NULL-wildcard 재스캔
+
+(a) `STICKER / COMP_STK_PRINT`: **SAFE로 판단**.  
+근거: `use_dims=[siz_cd,mat_cd,min_qty]`, 2,694행에서 `print_opt_cd`와 `proc_cd`가 전부 NULL. 그런데 권위 Excel상 STICKER 가격축은 `PAPER(material) × SIZE × QTY-band`이고, 단면 인쇄 고정이며 컷팅/조각수는 가격축이 아님. 즉 NULL인 두 컬럼은 가격 판별축이 아니므로 wildcard가 여러 유료 row를 동시에 매칭해 합산할 구조가 아니다.  
+단, 같은 `(siz_cd, mat_cd, min_qty)` tuple 중복 여부는 제공 데이터에 없음. 중복이면 별도 과금 가능성은 **HYPOTHESIS**.
+
+(b) `SILSA / COMP_POSTER_ARTPRINT_PHOTO`: `mat_cd NULL` 자체는 **SAFE로 판단**.  
+근거: `use_dims=[siz_width,siz_height,min_qty]`, `mat_cd`는 52행 전부 NULL, 권위상 4개 material의 면적 단가가 동일. material이 가격 판별축이 아니므로 NULL wildcard가 과금 차이를 무너뜨리지는 않는다.  
+공유 comp가 4개 formula에서 쓰이는 것도, 제품은 자기 `frm_cd` 하나를 평가하므로 그 자체로 cross-summation은 아니다. 단, 각 formula 안에 `COMP_POSTER_ARTPRINT_PHOTO`가 중복으로 여러 번 연결돼 있는지는 제공 데이터에 없음. 중복 formula_component가 있으면 **HYPOTHESIS**.
+
+(c) 기타 의심: **HYPOTHESIS**  
+`ACRYLIC`은 가격축이 `MATERIAL × SIZE × PROCESS × piece-count`인데, 제공 데이터는 일부 orphan comp 가격행만 말하고 각 comp의 `use_dims`/NULL 분포를 안 보여준다. 특히 `COMP_ACRYL_COROTTO`, `COMP_ACRYL_MIRROR3T`, `COMP_ACRYL_KEYRING`에서 `proc_cd`, `mat_cd`, piece-count 대응 dim이 NULL인지 재실측 필요.
+
+Q2. SILSA 600mm floor
+
+**조건부 confirmable overcharge**다.  
+근거: `COMP_POSTER_ARTPRINT_PHOTO` 최소 row가 `600x600=12000`, 권위는 `A3 297x420=7000`, `A2 420x594=7000`. sub-600 주문이 허용되면 off-grid ceiling으로 `600x600`에 붙어 `+5000` 과청구가 발생한다.
+
+이걸 결정하는 단일 체크:  
+`PRD_000118~145` 중 해당 4 formula 상품의 주문/CPQ/size constraint가 `min(width,height) >= 600` 또는 A3/A2 선택 불가를 강제하는지 확인. sub-600이 UI/API에서 주문 가능하면 결함, 불가능하면 중립.
+
+Q3. ACRYLIC 147~166 no binding
+
+현재 엔진 계약 기준으로는 **genuine DEFECT / blocked quote**다.  
+근거: `PRD_000147~166` 20개가 `t_prd_product_price_formulas` 0행. primer상 binding row 없으면 `frm_cd`를 못 찾아 가격 계산 불가. `COMP_ACRYL_COROTTO`는 21 price rows와 `PRF_COROTTO_ACRYL`이 있으나 bound product 0개라 더 강한 증거다.
+
+“intended fixed-price bypass”가 되려면 live 엔진에 formula 외 가격 경로가 있어야 한다. 결정 체크는 하나: `evaluate_price`가 `t_prd_product_price_formulas` 없이도 Excel의 `가격` fixed unit price를 읽는 별도 branch/table을 실제로 타는지. 그런 경로가 없으면 `가격` 컬럼 존재는 의도가 아니라 미적재/미연결 증거다.
+
+Q4. Accessory material-only, missing attach process
+
+도메인 모델상은 **defect 가능성이 높음**.  
+근거: ACRYLIC 권위는 accessory가 `material + attach process BUNDLE`이고, live는 `PRD_000148/149/152/154`에 accessory material은 있으나 `t_prd_product_processes`에는 UV-print만 있고 attach process가 없다. 즉 선택 의미가 반쪽만 등록됨.
+
+돈 영향은 현재 **직접 발생하지 않음 / Q3에 의해 가려짐**.  
+근거: 해당 acrylic 제품들이 formula binding이 없으므로 먼저 quote가 blocked된다. attach process 누락으로 인한 `가공_가격` 누락/오청구는 formula binding이 복구된 뒤 드러나는 2차 결함이다.
+
+추가 missed / false-positive
+
+- **Missed defect:** `TMPL-000013`, base=`PRD_000136`, `tmpl_nm="테스트 템플릿"`, selection이 `PROC_000015` 단일 process bundle, 권위는 PET banner template needed=N. 테스트 템플릿/잘못된 bundle 잔존으로 보이며 batch3 데이터 오염이다.
+- **False-positive 후보:** batch3 CPQ option links는 `69 live option_items`, `NULL ref_dim_cd 0`, LEFT JOIN 전건 active resolve. 이 범위에서는 dead option link 결함 주장은 데이터상 반증된다.

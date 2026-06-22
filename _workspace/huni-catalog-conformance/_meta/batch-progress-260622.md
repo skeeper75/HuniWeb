@@ -67,14 +67,56 @@
 - 전부 단가 verbatim 불변·멱등·백업·undo 보유. ★print_opt_cd FK=t_prt_print_options(t_cod_base_codes 아님)·t_prc_price_formulas엔 del_yn 없음(논리비활성=use_yn=N)
 - 돈 새는 면 전부 차단 완료. 미검증 4시트엔 과대청구 0(스캔 확인)
 
+### 배치3 (2026-06-23) — sticker · acrylic · silsa — **Phase 1 권위 큐레이션 완료**
+- [x] Phase 1 — prd_nm 라이브 1:1 실측(엑셀ID 부정확): 스티커16(052~067)·실사28(118~145)·아크릴21(146~166) = **65 라이브 prd**(엑셀 66·실사 투명포스터★ 1 미등록=CONFIRM)
+- [x] checklist +845행(65×13축·전체 1,924 데이터행·중복 prd_cd 0). 산출=`authority-spec-batch3.md`·`domain-lens-batch3.md`·reuse-map §배치3
+- ★바인딩 급상승: 45/65=69%(스티커16+실사28+아크릴1) vs 배치2 5/34 — §18 가격엔진 설계가 라이브 적재된 결과. **MISSING 20=아크릴 147~166 전부**(배치3 최대 리스크)
+- 판별차원: 스티커=소재(점착종이)×사이즈×수량(단면=print_opt NULL 안전)·실사=소재별 1:1공식 × **면적매트릭스(siz_w/h)** 또는 사이즈티어(배너)·아크릴=소재(두께/색)×가공(부속물 BUNDLE)×조각수
+- 과대청구 0 비준(스캔 재사용 + 판별차원 정합). ★실사 가공 단가행 proc_cd NULL·공유공식 4상품 동일성은 인스펙터 1택매칭 확인 권고
+- CONFIRM +4: Q-SILSA-투명포스터(미등록)·Q-SILSA-SHARE(공유공식)·Q-ACR-MISSING20(고정가 vs 가공가산)·Q-ACR-부속물BUNDLE
+- [x] Phase 2~4 **종단 완료·NO-GO**(2026-06-23): 인스펙터 팬아웃 → codex 교차(합의6·불일치0) → K1~K8 게이트
+  - K1 PASS(845셀 빈0)·K2 PASS(BUNDLE4 비준)·K3 PASS(고아0 직접 재측정)·**K4 FAIL**·K5 PASS(G1=7000/G2=2000 오차0)·K6 BLOCKED(인증 3연속 stale)·K7 PASS(H1/H2 가설 라이브 기각)·K8 PASS
+  - **★게이트 신규발굴(생성≠검증 입증)**: R-B3-2 격상=실사 면적그리드 A-사이즈 과대청구 확정. 인스펙터·codex가 놓친 **A1 +8,000**(594<600 off-grid) 독립 적발. A3/A2 +5,000. 4상품(118/120/121/123)×3프리셋. 근본=A3/A2/A1 고정가 프리셋행(7000/7000/12000) 미적재(사용자입력 ≥600 연속티어만 적재)
+  - codex 가설 H1(스티커 tuple 중복)·H2(실사 formula_components 중복) 라이브 GROUP BY 재측정=전부 0 기각(double-count 없음)
+  - 산출=`06_gate/{conformance-verdict,e2e-golden-trace,remediation-spec}-batch3.md`. 인간승인큐 top: ①R-B3-PRICE(돈크리·신규·verbatim) ②R-B3-1(아크릴20 차단·Q-ACR-MISSING20) ③R-B3-BUNDLE ④CPQ 클래스A(MM1/MM2/EXTRA)
+  - 실 COMMIT 0(인간 승인 후 dbmap 위임). K6은 PW 갱신 후 누적 일괄 재실행 큐
+
+### 배치4 (2026-06-23) — goods-pouch(굿즈파우치) — **종단 완료·CONDITIONAL GO**
+- [x] Phase 1 — 라이브 1:1 실측(엑셀ID 부정확): 엑셀 103 distinct(레더라벨 중복 102) ↔ **라이브 98 prd**(PRD_000183~280 연속·del_yn=N). 폰케이스 5종(슬림하드/블랙젤리/임팩트젤하드/에어팟/버즈)=엑셀 "준비해야함"·라이브 미등록(C-GP-1). "메쉬 에코백"=메쉬에코백(PRD_000279 공백차) 매칭.
+- [x] checklist +1,274행(98×13축·전체 **3,198 데이터행**·중복 prd_cd 0·빈셀 0). 산출=`authority-spec-batch4.md`·`domain-lens-batch4.md`·reuse-map §배치4
+- ★**동형 7클래스 압축**: GP-1 단일고정가~52·GP-2-SIZE 사이즈등급~10·GP-2-VAR 용량/면~9·GP-PROC 가공8·GP-ADD 추가상품5·GP-COUNT 구수~6·GP-NOPRICE 가격부재5. ★**전부 고정가형**(면적매트릭스/규격티어/세트조합 0건·calc-draft row122~123 권위)
+- ★**바인딩 0/98 = 전건 MISSING**(배치 최대 리스크·가격계산 불가). product_prices 0·product_price_formulas 0·옵션레이어 0·print_options 0. §18 design은 GP-1 product_prices INSERT·GP-2 formula 신설 처방 완비(미적재)
+- 판별차원: GP-1=차원없음(안전)·GP-2-SIZE=[siz_cd]·GP-2-VAR=[opt_cd]·GP-PROC=가공 개당/×수량 가드. ★평탄화 금지(G-GP-3 M주문에 S가격)·PRODUCT_PRICE 선점 가드(G-GP-5 GP-2에 product_prices 1행=FORMULA 영영 우회)
+- 과대청구 0(전 카탈로그 스캔 재사용·base 미적재라 발생 여지 0) — 단 적재 시점 판별차원 미충전하면 신규 발생 위험(인스펙터 적재명세 검증 시 강제점검)
+- CONFIRM +5: C-GP-1 폰케이스5 미등록·C-GP-2 GP-NOPRICE5 가격부재(투명부채/미니CD앨범/극세사타월/타이벡북커버/말랑증사홀더)·C-GP-3 판형85 EXTRA(굿즈=전지없음)·C-GP-4 가공 개당vs×수량·C-GP-5 구수 가격축여부
+- §18 `engine-design-goods-pouch.md`·`golden-cases-goods-pouch.md` 핵심 재사용(동형클래스·판별차원·가드 전부 계승·재조사 0)
+- [x] Phase 2~4 **종단 완료·CONDITIONAL GO**(2026-06-23): 인스펙터 팬아웃 → codex 교차(합의6·신규1·가설2) → K1~K8
+  - 인스펙터: basedata 784셀(MISSING240·자재MISMATCH76 오염·**판형EXTRA85**·도수MISSING98·돈크리0)·cpq-link 392셀(MISSING77·DEAD_LINK0·전CPQ테이블0행)·price-engine 98셀(**MISSING_BIND93**·NO_AUTHORITY5 권위공란·신규 ACR할인오귀속1)
+  - codex: 가용·합의6·불일치0·신규발굴1(discount82 FK/del 무결성)·false-positive0·환각0
+  - K1 PASS·K2 PASS(판형output NOT NULL=0 EXTRA확정)·K3 PASS·**K4 PASS**(formula0/pp0·discount5FK전건해소use_yn=Y정률)·K5 PASS(GC-GP2 base단절재현·할인verbatim오차0)·K6 BLOCKED(PW 5연속stale)·K7 PASS·K8 PASS → **CONDITIONAL GO**(K6만 미해소)
+  - codex 게이트큐 4건 해소: ★자재"100%오염"기각(PRD_000230 `레더|L|M` 본체+옵션 공존→교정은 **행 단위**)·discount FK 전건 해소(유일결함=PRD_000203 DSC_ACR_QTY 오귀속)·단가행유일성=base0이라 적재명세 가드 G-GP-6 이월
+  - 핵심결함: **바인딩0/98=견적0원**(D-GP4-BIND·최대). 인간승인큐 클래스A=R-GP4-1(GP-1 base적재·1순위)·R-GP4-2(ACR재바인딩)·R-GP4-3(판형정리)·R-GP4-4(자재 행단위 정규화)/클래스B=GP-2 FORMULA·가공·구수·CPQ77. NO_AUTHORITY5=결함아님(권위공란). 실 COMMIT 0
+  - 산출=`06_gate/{conformance-verdict,e2e-golden-trace,remediation-spec}-batch4.md` + **★`conformance-final-summary.md`(전11시트 종합)**
+
+## ★전 카탈로그 11시트 종단 완료 (2026-06-23)
+- **누락 0 완주**: 3,198 데이터행·246 prd·16 그룹·빈 셀 0(`conformance-final-summary.md`)
+- 시트별 verdict: 디지털·배치1·2·3 = **NO-GO**(라이브 적재 권위 미달=round-13 역전·검사 오류 아님)·배치4 = **CONDITIONAL GO**(K6만 BLOCKED)
+- 과대청구 8건 전부 라이브 COMMIT 차단 완료(되돌리지말것)·미검증이던 4시트(sticker/acrylic/silsa/goods-pouch)는 종단 검증 결과 신규 과대청구 1건(배치3 실사 A-프리셋·게이트 적발·미적재상태라 미COMMIT)
+- 생성≠검증 입증 누적: 배치2 094 양방향·배치3 실사 A1+8,000·배치4 자재100%오염 기각 등 게이트 독립 적발/정정
+- 실 COMMIT 0(전 교정 인간 승인 후 dbmap 위임). 단가 verbatim 불변·기초코드 마스터 불변 원칙 준수
+
 ## 미해결/블로커
 - **HUNI_ADMIN_PW stale** — K6 product-viewer 3원 대조 디지털+배치1 2연속 BLOCKED. 갱신 후 일괄 재실행.
 - **CONFIRM 큐 6건** 인간 확정 대기 — 적재값이 여기 종속(Q-PB-SUPERSET·Q-CAL-PAGE-SHAPE·Q-CAL-PLATE-112·Q-CAL-PROC-EXTRA-110·Q-PB-SETPRICE류·B-N4 반제품 고객노출)
 - **인스펙터 미세 정정**: basedata "109 공정=0행"은 실측 수축포장 1행(본질 불변·문구만)
 
 ## 진행 현황 (2026-06-22~23)
-- 완료: 디지털인쇄(파일럿) + 배치1(3시트) + 배치2(3시트) = **7/11 시트**
-- 남은 4시트: sticker(16)·acrylic(21)·silsa(29) = 배치3 / goods-pouch(103) = 배치4(단독·대형)
+- ★**전 11/11 시트 종단 완료**: 디지털인쇄(파일럿)+배치1+배치2+배치3(=NO-GO)·배치4(=CONDITIONAL GO). checklist 3,198 데이터행·246 prd·빈 셀 0.
+- 검증·교정명세까지 완료. 실 COMMIT 0(전 교정 인간 승인 후 dbmap 위임).
 
-## 다음 세션 시작점
-배치3 = sticker·acrylic·silsa(66상품, 배치2보다 큼·+50~80k 예상). 이 트래커 + 06_gate(배치1·2 섹션) 읽고 동형 파이프라인 재개. goods-pouch(103)는 단독 배치4로 분리(대형). ★HUNI_ADMIN_PW 갱신되면 K6 product-viewer 3원 대조를 디지털+배치1+배치2 누적 일괄 재실행(축귀속 CONFIRM 다수 종속).
+## 다음 세션 시작점 (검증 단계 종료 → 교정 실행 단계)
+전 카탈로그 종단 정합 검증 완료. 다음은 **인간 승인 후 교정 실행**(검증 아님):
+1. **HUNI_ADMIN_PW 갱신** → K6 product-viewer 3원 대조를 전 5배치 누적 일괄 재실행(현재 유일 미해소 게이트·5연속 stale).
+2. **교정 실행 우선순위(인간 승인 큐)**: ★배치4 R-GP4-1(굿즈 GP-1 base 적재=98상품 견적0 해소·최대 임팩트) → 배치3 R-B3-PRICE(실사 A-프리셋 과대청구) → 배치3 R-B3-1(아크릴20 미바인딩) → 배치1·2 잔여(094 보류·DL5 등). 전부 dbmap(`dbm-load-execution`/`dbm-axis-staged-load`) 위임·단가 verbatim 불변·기초코드 마스터 불변.
+3. **CONFIRM 큐** 인간 확정(굿즈 NO_AUTHORITY5 권위 공란·가공 개당vs1회·구수 가격축 등).
+권위 종합=`06_gate/conformance-final-summary.md`. 시트별 verdict·누적 인간승인큐·누락0 커버리지 수록.

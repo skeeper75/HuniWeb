@@ -1,0 +1,162 @@
+Reading additional input from stdin...
+OpenAI Codex v0.140.0
+--------
+workdir: /Users/innojini/Dev/HuniWeb/_workspace/huni-catalog-conformance
+model: gpt-5.5
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: high
+reasoning summaries: none
+session id: 019ef085-24a3-7542-87d0-695f71c1a669
+--------
+user
+You are an INDEPENDENT 2nd-opinion auditor for a Korean print e-commerce catalog conformance check.
+Batch4 = "goods-pouch" (굿즈파우치) product group: 98 live products PRD_000183~PRD_000280 (del_yn=N).
+Authority [HARD] = two master Excel files (product master 260610 + print-price-table 260527). Live DB = remediation TARGET (live may be wrong; authority wins).
+You are READ-ONLY. Output ONLY your independent judgment. Do NOT trust the data-gatherer's classification — re-judge from raw signals. Label any claim you cannot ground in the provided data as HYPOTHESIS.
+
+=== DOMAIN PRIMER (print) ===
+- Goods (mugs, mirrors, pouches, eco-bags, coasters, keyrings) are FINISHED GOODS, not printed sheets. They have NO mother-sheet/large-format output ("전지"=plate). So plate_sizes (출력용지규격) should normally be EMPTY for goods.
+- Materials axis (t_prd_product_materials, usage_cd=USAGE.07) = the BODY material of the product (leather/canvas/tyvek/mesh). It is NOT a price-summed component; it is a baked-in BOM tag.
+- Option values that are NOT body material: size-grade (S/M/L), print-side (단면/양면=single/double), unit-count (2구/3구/4구 = N-holes/pack), color. These belong to OTHER axes (sizes, print_options, bundle_qtys), not materials.
+- Pricing: live engine evaluate_price uses source priority. If a product has NEITHER t_prd_product_prices NOR t_prd_product_price_formulas bound, source=NONE → base_amount cannot be computed → quote = 0 won. (Industry oracle: a real print site NEVER returns price 0; 0 = our defect.)
+- discount_tables multiply a base. If base=0 (no price/formula), a bound discount_table has nothing to multiply → it is inert/orphan.
+- _row_matches wildcard rule [CRITICAL for overcharge]: in component_prices, a NULL dimension column = wildcard (always matches). If a discriminating dimension is NOT filled into the unit-price rows, selecting one variant silently matches/sums ALL rows = OVERCHARGE.
+
+=== LIVE COVERAGE MEASURED (goods-pouch 98 prd, 2026-06-23, read-only SELECT) ===
+| t_* axis | # of 98 prd loaded |
+| t_prd_product_price_formulas | 0 |
+| t_prd_product_prices | 0 |
+| t_prd_product_sizes | 11 |
+| t_prd_product_materials | 78 |
+| t_prd_product_plate_sizes | 85 (122 rows; ALL output_paper_typ_cd=NULL; siz_cd = work/cut sizes like 57x91, 85x140) |
+| t_prd_product_discount_tables | 82 |
+| t_prd_product_processes | 6 |
+| t_prd_product_print_options | 0 |
+| t_prd_product_option_groups / options / option_items | 0 / 0 / 0 |
+| t_prd_product_addons | 0 in range (live addons total=5, ALL owned by PRD_000016 acrylic, OUT of range) |
+| t_prd_product_constraints | 0 |
+| t_prd_product_bundle_qtys | 1 |
+| t_prd_templates / selections / sets | 0 in range |
+
+=== RAW SIGNALS (data-gatherer observations, NOT conclusions) ===
+1. plate_sizes: 85 prd / 122 rows, every row output_paper_typ_cd=NULL, siz_cd values are work/cut sizes (57x91, 85x140, etc).
+2. materials: examples of what is loaded as a "material" (mat_nm via t_mat_materials join):
+   - PRD_000202 키캡키링(keycap keyring) materials = "2구 / 3구 / 4구" (= 2/3/4-hole counts)
+   - PRD_000206 반팔티셔츠(short-sleeve T) materials = "블랙 M / 화이트 L ..." (= size+color)
+   - PRD_000220 폰스트랩(phone strap) materials = "단면 / 양면" (= single/double print-side)
+   76 prd have this kind of mixed-in option-value content in materials; 22 prd have NO body material loaded at all.
+3. price binding: 0/98 have any formula; 0/98 have product_prices. 82/98 have a discount_table bound.
+4. PRD_000203 LED투명키캡키링: bound discount table = DSC_ACR_QTY (this is the ACRYLIC quantity-discount type). Other goods use DSC_GOODSA_QTY / DSC_GOODSB_QTY / DSC_FABRIC_QTY / DSC_SQUISHY_QTY.
+5. Discount type detail (live), compared to authority golden:
+   - DSC_GOODSA_QTY: 1~49=0, 50~99=5, 100~499=10, 500~999=15, 1000~=20  (bound to 15 prd)
+   - DSC_GOODSB_QTY: 1~99=0, 100~499=5, 500~=10  (bound to 11 prd)
+   - DSC_FABRIC_QTY: 1~49=0, 50~99=5, 100~499=10, 500~999=15, 1000~=20  (bound to 50 prd)
+   - DSC_SQUISHY_QTY: 1~1=0, 2~9=10, 10~29=15, 30~49=20, 50~99=25, 100~499=30, 500~999=40, 1000~=50  (bound to 5 prd)
+6. CPQ: option_groups/options/option_items all 0 in range. Authority says 67 prd have variant/process select options (size-grade S/M/L, capacity, print-side, process 고주파/승화/UV pick-1) that need option groups; 5 prd have add-on options (잉크5cc/볼체인/아크릴스탠드/맥세이프); 5 prd need add-on SKU templates. constraints: authority says 0 needed (the Excel "★" star is just a new-phone-model marker), live=0.
+7. 5 products have BOTH 가격 and 선택가격 columns empty in the master: 투명부채, 미니CD앨범, 극세사타월, 타이벡북커버, 말랑증사홀더.
+
+=== AUTHORITY EXPECTATION (price-class design, §18, for overcharge-guard review) ===
+The price-engine design proposes these classes & discriminating dimensions:
+- GP-1 single-fixed-price: product_prices single unit (no dims). Safe (0 dims = nothing to wildcard-match).
+- GP-2-SIZE size-grade variant (S/M/L): a FORMULA whose component_prices use_dims = [siz_cd].
+- GP-2-VAR capacity/side variant: use_dims = [opt_cd].
+- GP-PROC process surcharge: process comp use_dims = [opt_cd], min_qty (open question: per-unit surcharge vs flat one-time?).
+- GP-ADD add-on: separate SKU outside the body formula.
+- GP-COUNT N-hole/pack: [opt_cd] if count is a price axis, else equal price (open question: is hole-count price-proportional?).
+- HARD guard: a GP-2 product must have NO product_prices row — if even one product_prices row exists, the FORMULA path is bypassed forever (PRODUCT_PRICE wins source priority) → variant prices never apply.
+
+=== YOUR INDEPENDENT REVIEW QUESTIONS ===
+Q1. plate_sizes 85 prd / 122 rows, all output_paper_typ_cd=NULL, siz_cd=work/cut sizes. For a finished-goods group with no sheet output: is loading these into plate_sizes (출력용지규격) JUSTIFIED, or is it spurious/leftover loading? Could any of these legitimately be a work-size or cut-size that belongs in plate_sizes? Give your independent verdict (EXTRA vs justified) and the decisive check.
+Q2. materials axis 76 prd hold mixed content (size-grade/side/hole-count/color) instead of body material. Is this a genuine mis-load (option values polluting the material axis), or could some of these legitimately be the body material (false-positive)? Decisive check?
+Q3. 0/98 products have any price binding (no formula, no product_prices). Is this a DEFECT (missing load → quote=0), or could it be an intentional goods design (fixed price not yet loaded / priced elsewhere)? What decides it?
+Q4. Two specific findings — are they real and do they have a money impact?
+   (a) PRD_000203 LED투명키캡키링 bound to DSC_ACR_QTY (acrylic discount) while it is a goods product.
+   (b) 82 discount_tables bound but base price 0 → orphan/inert.
+Q5. OVERCHARGE GUARD (post-load): the design declares GP-2-SIZE discriminator = [siz_cd] and GP-2-VAR = [opt_cd]. IF these products are loaded per the design, is that enough to prevent silent wildcard summation/overcharge at load time? What additional check is needed (e.g., unit-price-row uniqueness, product_prices-bypass guard)? Are there blind spots (process per-unit-vs-flat, hole-count price axis) that could create NEW overcharge on load?
+Q6. COVERAGE: given 98 prd × 13 axes, are there any product×axis combinations that look UN-checked / blind in the coverage above? Anything the data-gatherer might have missed entirely (a dead link, an orphan, an EXTRA row class beyond plate_sizes)?
+
+Be concise. For each question: verdict + decisive check + (if applicable) HYPOTHESIS flag for anything you cannot ground in the data above. Do not invent prd_cd/codes not present above.
+warning: failed to parse plugin hooks config /Users/innojini/.codex/plugins/cache/omc/oh-my-claudecode/4.14.7/hooks/hooks.json: unknown field `description`, expected `hooks` at line 2 column 15
+warning: failed to parse plugin hooks config /Users/innojini/.codex/plugins/cache/claude-code-warp/warp/2.1.0/hooks/hooks.json: unknown field `description`, expected `hooks` at line 2 column 15
+warning: Skill descriptions were shortened to fit the 2% skills context budget. Codex can still see every skill, but some descriptions are shorter. Disable unused skills or plugins to leave more room for the rest.
+hook: SessionStart
+hook: SessionStart Completed
+hook: UserPromptSubmit
+hook: UserPromptSubmit Failed
+codex
+Q1. **plate_sizes: EXTRA**
+판정: `t_prd_product_plate_sizes` 적재는 굿즈파우치군에는 부당한 잔재 적재로 봅니다. 완제품 굿즈는 전지/출력용지규격 축이 아니며, `output_paper_typ_cd=NULL`인 채 `siz_cd`만 작업/재단 크기처럼 들어간 것은 plate axis로서 결정력이 없습니다.  
+결정적 체크: 권위 엑셀에 해당 상품별 “출력용지/전지/판형 선택축”이 명시되어 있고 엔진이 그 축을 plate selector로 소비하는지. 없으면 전부 EXTRA입니다.
+
+Q2. **materials: genuine mis-load**
+판정: 옵션값이 material axis를 오염시킨 실결함입니다. `2구/3구/4구`, `단면/양면`, `블랙 M/화이트 L`은 본체 소재가 아니라 각각 수량/면수/색상+사이즈 옵션입니다.  
+결정적 체크: 권위 상품마스터에서 body material로 확정되는 값인지 확인. `레더/캔버스/타이벡/메쉬` 같은 본체 소재만 `USAGE.07`에 남고, 선택 가능한 grade/side/count/color는 sizes/options/bundle/print_options로 이동해야 합니다.  
+HYPOTHESIS: 전체 76건 원문을 보지 않았으므로 76건 모두가 100% 오염이라고 단정할 수는 없지만, 제공 예시는 명백한 오염입니다.
+
+Q3. **price binding 0/98: DEFECT**
+판정: 결함입니다. live engine 기준으로 formula도 product_prices도 없으면 `source=NONE`, `base_amount` 계산 불가, 견적 0원이 됩니다. 권위 엑셀에 가격 또는 선택가격이 있는 상품은 반드시 `product_prices` 또는 formula 경로가 있어야 합니다.  
+결정적 체크: 권위 엑셀의 가격/선택가격 존재 여부와 price-class 설계 매핑. 단일가면 product_prices, variant 가격이면 formula+component_prices가 필요합니다.  
+예외: 가격/선택가격이 모두 비어 있는 5개 상품은 “미출시/가격미정/별도견적”인지 권위 문서로 판정해야 합니다. 그 전까지는 HYPOTHESIS입니다.
+
+Q4. **specific findings**
+(a) `PRD_000203`의 `DSC_ACR_QTY` 바인딩: 실결함 가능성이 높습니다. goods 상품에 acrylic discount type이 붙은 것은 도메인 불일치입니다.  
+돈 영향: 현재는 base price가 없어서 즉시 금액 영향은 inert입니다. 다만 가격이 나중에 붙으면 할인율 오적용으로 실금액 영향이 발생합니다. 결정적 체크는 권위 가격표에서 LED투명키캡키링의 할인구간이 `DSC_ACR_QTY`와 동일한지 여부입니다.
+
+(b) 82 discount_tables with base=0: real finding입니다.  
+돈 영향: 현재 견적에는 할인 계산 자체가 작동하지 않아 inert/orphan입니다. 하지만 “가격이 있는데 할인만 적용 안 됨”이 아니라 “기본 가격 부재로 전체 견적 0”이 본 결함입니다.
+
+Q5. **overcharge guard**
+판정: `[siz_cd]`, `[opt_cd]` 설계만으로는 충분하지 않습니다. 방향은 맞지만 load-time 검증이 필요합니다.  
+필수 체크: GP-2 상품에는 `product_prices`가 없어야 합니다. 하나라도 있으면 source priority 때문에 formula가 우회됩니다.  
+필수 체크: component_prices의 discriminating dimension이 모든 단가행에 채워져야 합니다. GP-2-SIZE는 `siz_cd NOT NULL`, GP-2-VAR는 `opt_cd NOT NULL`. NULL이면 wildcard가 되어 다중 행 합산 과청구가 납니다.  
+필수 체크: 동일 discriminator 조합당 단가행이 1개인지 확인해야 합니다. 같은 `siz_cd` 또는 `opt_cd`에 중복 단가행이 있으면 중복 합산 위험이 있습니다.  
+blind spot: process surcharge의 `min_qty` 및 “개당 가산 vs 1회 고정” 계약이 미확정이면 신규 과청구/과소청구가 생길 수 있습니다. N-hole/count도 가격축인지 동일가 옵션인지 확정 전에는 `[opt_cd]` 설계가 과하거나 부족할 수 있습니다.
+
+Q6. **coverage blind spots**
+판정: 현재 coverage는 축별 행수 요약이라 product×axis dead-link 검증이 부족합니다.  
+미검증으로 보이는 항목: formula/component_prices 자체가 0인지, 또는 orphan component_prices가 range 밖/안에 남아 있는지 확인이 없습니다.  
+미검증으로 보이는 항목: discount_tables의 FK 유효성, del/use 상태, 권위 할인타입과 상품별 매칭 검증이 부족합니다.  
+미검증으로 보이는 항목: materials/plate_sizes 외에도 sizes, processes, bundle_qtys의 EXTRA 여부가 product별로 검증되지 않았습니다. 특히 sizes 11건, processes 6건, bundle_qtys 1건은 권위 축과 맞는지 별도 재판정해야 합니다.  
+미검증으로 보이는 항목: CPQ 0행은 “없음” 확인은 됐지만, 권위상 필요한 67개 option group, 5개 add-on, 5개 add-on SKU template의 product별 누락 리스트 검증이 필요합니다.  
+결정적 체크: 98 products × 13 axes를 권위 엑셀 기반 expected/loaded/extra/missing matrix로 만들고, 각 live row가 권위 row에 의해 설명되는지 역추적해야 합니다.
+hook: Stop
+hook: Stop Completed
+tokens used
+48,008
+Q1. **plate_sizes: EXTRA**
+판정: `t_prd_product_plate_sizes` 적재는 굿즈파우치군에는 부당한 잔재 적재로 봅니다. 완제품 굿즈는 전지/출력용지규격 축이 아니며, `output_paper_typ_cd=NULL`인 채 `siz_cd`만 작업/재단 크기처럼 들어간 것은 plate axis로서 결정력이 없습니다.  
+결정적 체크: 권위 엑셀에 해당 상품별 “출력용지/전지/판형 선택축”이 명시되어 있고 엔진이 그 축을 plate selector로 소비하는지. 없으면 전부 EXTRA입니다.
+
+Q2. **materials: genuine mis-load**
+판정: 옵션값이 material axis를 오염시킨 실결함입니다. `2구/3구/4구`, `단면/양면`, `블랙 M/화이트 L`은 본체 소재가 아니라 각각 수량/면수/색상+사이즈 옵션입니다.  
+결정적 체크: 권위 상품마스터에서 body material로 확정되는 값인지 확인. `레더/캔버스/타이벡/메쉬` 같은 본체 소재만 `USAGE.07`에 남고, 선택 가능한 grade/side/count/color는 sizes/options/bundle/print_options로 이동해야 합니다.  
+HYPOTHESIS: 전체 76건 원문을 보지 않았으므로 76건 모두가 100% 오염이라고 단정할 수는 없지만, 제공 예시는 명백한 오염입니다.
+
+Q3. **price binding 0/98: DEFECT**
+판정: 결함입니다. live engine 기준으로 formula도 product_prices도 없으면 `source=NONE`, `base_amount` 계산 불가, 견적 0원이 됩니다. 권위 엑셀에 가격 또는 선택가격이 있는 상품은 반드시 `product_prices` 또는 formula 경로가 있어야 합니다.  
+결정적 체크: 권위 엑셀의 가격/선택가격 존재 여부와 price-class 설계 매핑. 단일가면 product_prices, variant 가격이면 formula+component_prices가 필요합니다.  
+예외: 가격/선택가격이 모두 비어 있는 5개 상품은 “미출시/가격미정/별도견적”인지 권위 문서로 판정해야 합니다. 그 전까지는 HYPOTHESIS입니다.
+
+Q4. **specific findings**
+(a) `PRD_000203`의 `DSC_ACR_QTY` 바인딩: 실결함 가능성이 높습니다. goods 상품에 acrylic discount type이 붙은 것은 도메인 불일치입니다.  
+돈 영향: 현재는 base price가 없어서 즉시 금액 영향은 inert입니다. 다만 가격이 나중에 붙으면 할인율 오적용으로 실금액 영향이 발생합니다. 결정적 체크는 권위 가격표에서 LED투명키캡키링의 할인구간이 `DSC_ACR_QTY`와 동일한지 여부입니다.
+
+(b) 82 discount_tables with base=0: real finding입니다.  
+돈 영향: 현재 견적에는 할인 계산 자체가 작동하지 않아 inert/orphan입니다. 하지만 “가격이 있는데 할인만 적용 안 됨”이 아니라 “기본 가격 부재로 전체 견적 0”이 본 결함입니다.
+
+Q5. **overcharge guard**
+판정: `[siz_cd]`, `[opt_cd]` 설계만으로는 충분하지 않습니다. 방향은 맞지만 load-time 검증이 필요합니다.  
+필수 체크: GP-2 상품에는 `product_prices`가 없어야 합니다. 하나라도 있으면 source priority 때문에 formula가 우회됩니다.  
+필수 체크: component_prices의 discriminating dimension이 모든 단가행에 채워져야 합니다. GP-2-SIZE는 `siz_cd NOT NULL`, GP-2-VAR는 `opt_cd NOT NULL`. NULL이면 wildcard가 되어 다중 행 합산 과청구가 납니다.  
+필수 체크: 동일 discriminator 조합당 단가행이 1개인지 확인해야 합니다. 같은 `siz_cd` 또는 `opt_cd`에 중복 단가행이 있으면 중복 합산 위험이 있습니다.  
+blind spot: process surcharge의 `min_qty` 및 “개당 가산 vs 1회 고정” 계약이 미확정이면 신규 과청구/과소청구가 생길 수 있습니다. N-hole/count도 가격축인지 동일가 옵션인지 확정 전에는 `[opt_cd]` 설계가 과하거나 부족할 수 있습니다.
+
+Q6. **coverage blind spots**
+판정: 현재 coverage는 축별 행수 요약이라 product×axis dead-link 검증이 부족합니다.  
+미검증으로 보이는 항목: formula/component_prices 자체가 0인지, 또는 orphan component_prices가 range 밖/안에 남아 있는지 확인이 없습니다.  
+미검증으로 보이는 항목: discount_tables의 FK 유효성, del/use 상태, 권위 할인타입과 상품별 매칭 검증이 부족합니다.  
+미검증으로 보이는 항목: materials/plate_sizes 외에도 sizes, processes, bundle_qtys의 EXTRA 여부가 product별로 검증되지 않았습니다. 특히 sizes 11건, processes 6건, bundle_qtys 1건은 권위 축과 맞는지 별도 재판정해야 합니다.  
+미검증으로 보이는 항목: CPQ 0행은 “없음” 확인은 됐지만, 권위상 필요한 67개 option group, 5개 add-on, 5개 add-on SKU template의 product별 누락 리스트 검증이 필요합니다.  
+결정적 체크: 98 products × 13 axes를 권위 엑셀 기반 expected/loaded/extra/missing matrix로 만들고, 각 live row가 권위 row에 의해 설명되는지 역추적해야 합니다.
