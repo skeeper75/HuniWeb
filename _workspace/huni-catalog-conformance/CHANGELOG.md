@@ -5,6 +5,24 @@
 
 ---
 
+## 2026-06-22 (2) — 019 첫 교정 라이브 COMMIT (클래스 A·directive 준수·되돌리지 말 것)
+
+사용자 directive "기초코드 미수정·상품별 구성요소만"으로 교정 명세 재분류 → 클래스 A(상품별 9)/
+클래스 B(공유 마스터 수정 필요·보류 5). 최대 돈결함(명함 D-A/D-B·미바인딩)은 공유 공식 영역이라
+**클래스 B 보류**(directive 엄수·추후 §18에서 공유 공식 재설계로). 클래스 A 중 019만 교정 실행.
+
+**019 투명엽서 묶음 교정 (라이브 COMMIT 완료·되돌리지 말 것):**
+- **A5-plate**: 출력판형 SIZ_000522(315x467 오적재) → **SIZ_000499(316x467, 사용자 확정)** 멱등 UPDATE.
+- **A2-bind**: PRD_000019 ↔ **PRF_DGP_A** 바인딩 UPSERT(@2026-06-01).
+- 효과: 가격 **0원 차단 → 77,064원**(대표 골든 qty100·단면·MAT_000074·무광). 형제 016/017/018 동일 경로 합류.
+- **directive 준수**: `t_prd_product_plate_sizes`·`t_prd_product_price_formulas` 019 2행만 접근. 공유 마스터(t_siz_sizes·t_prc_* 공식/comp/단가행) 무수정·신규 mint 0.
+- 검증 체인(생성≠검증): load-builder DRY-RUN(목표 미달 적발→판형 정정 동반 필요 분리) → dbm-validator R1~R6 GO(77,064 독립 재계산) → 사용자 승인 → COMMIT → 독립 사후검증 PASS(영속·부작용0·멱등).
+- 잔여: 025/039 동형 판형(권위 확인 후 별도)·019 완성품치수 혼입 EXTRA 정리.
+
+산출: `06_gate/remediation/019-bind/`(apply.sql·apply.sh·preflight·dryrun-log·validation-verdict·postcommit-verify).
+
+---
+
 ## 2026-06-22 — 하네스 초기 구성 + 디지털인쇄 첫 종단 실행 (NO-GO)
 
 ### 하네스 구성

@@ -4,6 +4,71 @@
 > 게이트가 라이브 재실측으로 **확정**한 결함만 교정 명세화. 항목 = {결함·권위 정답·교정 방법·대상 t_*·FK 위상·돈영향·dbmap 트랙·인간 승인}.
 > **[HARD] 직접 COMMIT 금지·search-before-mint 준수.** 실 적재는 인간 승인 후 dbmap 트랙 위임(게이트는 명세까지).
 > CONFIRM(권위 모호·needed 충돌)은 결함 아님 → §C 별도. 추정 0·단가값 verbatim·신규 mint 최소.
+>
+> **★[HARD] 교정 범위 제약(사용자 directive 2026-06-22):** 기초코드/공유 마스터는 **수정 금지**, 상품별 구성요소만 접근.
+> 본 명세는 §S에서 R1~R9를 **클래스 A(상품별 t_prd_product_* 만으로 닫힘)** vs **클래스 B(공유 마스터 수정 필요·보류)**로
+> 재분류한다. §1~§C 원본은 결함 사실·돈영향 기록으로 유지하되, **실제 교정 가능 범위의 권위는 §S**다.
+
+---
+
+## §S — 교정 범위 재분류 (클래스 A 가능 / 클래스 B 보류) ★권위
+
+> **허용(클래스 A 후보)** = `t_prd_product_*` : product_sizes·materials·print_options·processes·plate_sizes·bundle_qtys·
+> page_rules·addons·option_groups·options·option_items·constraints·templates·**price_formulas 바인딩**(t_prd_product_price_formulas).
+> **금지(클래스 B)** = 기초코드/공유 : t_mat_materials·t_siz_sizes·**t_prc_price_components**(공유 comp·use_dims)·
+> **t_prc_price_formulas**(공식 정의 본체)·**t_prc_component_prices**(공유 단가행)·코드값 그룹·t_prc_formula_components(공식 배선=본체 종속).
+> 라이브 재실측으로 각 항목이 어느 테이블에서 닫히는지 확인(아래 근거).
+
+### 클래스 A — 상품별 교정 가능 (t_prd_product_* 만으로 닫힘)
+
+| ID | 결함 | 대상 t_prd_product_* | FK 위상(선존재=마스터, 미수정) | 돈영향 | dbmap 트랙 | 인간승인 |
+|----|------|---------------------|--------------------------------|--------|------------|:--:|
+| **A2-bind** | 미바인딩 中 **019·049** 공식 바인딩(기존 PRF 재사용) | `t_prd_product_price_formulas`(prd_cd,frm_cd) | 기존 PRF_DGP_A/E(본체 미수정) ← 바인딩 | 019 차단해소(단가행 SIZ_000499/077 실재) | dbm-load-execution(바인딩만) | 필요 |
+| **A3-proc** | 별색/접지/커팅 **product_processes 링크** 추가 | `t_prd_product_processes`(prd_cd,proc_cd,mand_proc_yn,disp_seq) | PROC_000007~012 마스터 실재(미수정) ← 링크 | 별색 선택 가능화(가산은 B 동반) | dbm-correctness-audit | 필요 |
+| **A3-popt** | 도수/인쇄면 **print_options 링크** 보정 | `t_prd_product_print_options`(front/back_colrcnt_cd) | CLR 마스터 실재(미수정) | 견적옵션 정합 | dbm-correctness-audit | 필요 |
+| **A5-plate** | 판형 혼입/오매칭 **product 판형 정리** | `t_prd_product_plate_sizes`(siz_cd,output_paper_typ_cd,del_yn) | SIZ 마스터 실재(미수정) ← 행 교정/논리삭제 | 019 완성품치수 혼입 제거·030/049 권위판형 매핑 | dbm-correctness-audit | 필요 |
+| **A6-opt** | **옵션그룹/옵션/옵션항목** 적재(21상품·046 완성) | `t_prd_product_option_groups`·`options`·`option_items`(ref_dim_cd 타입+ref_key1 코드) | 차원 마스터 실재(미수정) ← 포인터 | 견적 차원환원 가능화 | dbm-option-mapper | 필요 |
+| **A7-addon** | **추가상품/템플릿** 연결(9상품) | `t_prd_product_addons`(prd_cd,tmpl_cd)·`t_prd_templates`(base_prd_cd)·`t_prd_template_selections` | base 상품 실재(미수정) | 추가상품 견적 복구 | dbm-option-mapper | 필요 |
+| **A8-mat** | 형압명함 **자재 슬롯** 적재(038) | `t_prd_product_materials`(mat_cd,usage_cd) | mat 마스터 실재(미수정) ← 링크 | 용지비 산출 가능화 | dbm-axis-staged-load | 필요(별도설정 의미 컨펌) |
+| **A9-bundle** | 명함 **묶음수** 적재(031~040)·024 EXTRA 논리삭제 | `t_prd_product_bundle_qtys`(bdl_qty,bdl_unit_typ_cd,del_yn) | QTY_UNIT 코드 실재(미수정) | LOW(옵션표시) | dbm-load-builder | 선택 |
+| **A-constr** | 제약규칙 적재(needed 확정 후·§C-X3) | `t_prd_product_constraints`(rule_cd,logic,err_msg) | — (상품별 규칙) | UI 제약 가드 | dbm-cpq-option-mapping | 보류→needed 확정 후 |
+
+**클래스 A 항목 수 = 9** (A2-bind·A3-proc·A3-popt·A5-plate·A6-opt·A7-addon·A8-mat·A9-bundle·A-constr).
+**클래스 A 중 돈크리티컬 = 있음** → **A2-bind(019 차단해소·바인딩만으로 0원→견적복구)** 1건. 나머지 A는 과소/옵션/환원(중·저).
+
+### 클래스 B — 보류 (기초코드/공유 마스터 수정 필요)
+
+| ID | 결함 | 공유 마스터(수정 금지) | 돈영향 | 상품별 우회 가능성 | dbmap 트랙 |
+|----|------|----------------------|--------|---------------------|------------|
+| **B1-namecard** | 명함 D-A(variant 공식 신설)+D-B(STD use_dims에 print_opt_cd 등재) | `t_prc_price_formulas`(PRF_NAMECARD_* 신설)·`t_prc_formula_components`(배선)·`t_prc_price_components`(STD use_dims UPDATE)·`t_prc_component_prices`(print_opt 충전) | **과대 +280K / 0원 −550K** (최고 돈크리티컬) | **불가.** PRF_NAMECARD_FIXED만 존재·STD comp 공유. variant 공식·use_dims·단가행 전부 공유 영역. 상품별 t_prd_product_*로는 잘못 배선된 공유 공식을 못 고침(바인딩 대상 자체가 결함) | dbm-price-arbiter→dbm-load-execution |
+| **B2-formula-new** | 미바인딩 명함 **034~040**(variant 공식 부재) | `t_prc_price_formulas`(신설)·`t_prc_formula_components` | **차단 0원** | **불가.** PRF_NAMECARD_FIXED 1종뿐·바인딩하면 D-A/D-B 결함 상속. variant 공식 신설=공유 본체 | dbm-price-arbiter→dbm-load-execution |
+| **B3-print-rows** | 미바인딩 **030·049** 판형 공유 단가행 0 | `t_prc_component_prices`(COMP_PRINT plt_siz=SIZ_000142/143/186/188/190 충전) | **차단 0원** | **부분.** R5-plate(클래스 A)로 030/049 판형을 단가행이 있는 판형(SIZ_000499/077 등)으로 정정하면 우회 가능 — 단 권위판형(330x660=SIZ_000475)도 공유 단가행 0행 → 정답 판형 확정(§C Q-DGP-PLATE)이 선행. 권위판형 고수 시 공유 단가행 충전=B | dbm-correctness-audit(A) + dbm-load-execution(B) |
+| **B4-coat-glossy** | COMP_COAT_GLOSSY 공유 단가행 0 | `t_prc_component_prices`(유광 단가 INSERT) | 과소(유광 미부과) | **불가.** 공유 comp 단가행. 전 PRF_DGP_A/D/E 상품 공통. 상품별 우회 없음 | dbm-load-execution |
+| **B5-spot-price** | 별색 선택의 **가격 가산**(comp 배선·단가) | `t_prc_formula_components`(별색 comp 배선)·`t_prc_component_prices`(별색 단가) | 과소(별색 가산비 누락) | **부분.** A3-proc로 선택은 가능화하나 **가격 가산은 공유 공식 배선·단가행 필요**. 선택만 되고 돈 안 붙으면 과소 잔존 | dbm-price-arbiter→dbm-load-execution |
+
+**클래스 B(보류) 항목 수 = 5** (B1·B2·B3·B4·B5). **B1·B2가 최고 돈크리티컬이나 전부 공유 영역 → 보류.**
+
+### §S 종합 — 범위 제약의 효과
+
+- **돈크리티컬 결함의 핵심(B1 명함 D-A/D-B·B2 명함 미바인딩)은 전부 클래스 B(공유 공식·comp)** → 이 directive 하에서는 **교정 불가·보류.** 상품별 t_prd_product_* 접근만으론 잘못 배선된 공유 공식을 고칠 수 없다(바인딩 대상 자체가 결함).
+- **클래스 A로 닫히는 돈크리티컬 = A2-bind 019 1건**(기존 정상 공식 PRF_DGP_A에 바인딩만 → 0원 차단 해소).
+- **A3/A5/B5 연동 주의:** 별색은 A3-proc(선택 가능화·클래스 A)와 B5-spot-price(가격 가산·클래스 B)가 분리된다. 클래스 A만 하면 "선택은 되나 가격은 0" → **과소 잔존**. 완전 교정은 B 동반 필요(보류).
+- **030/049(B3):** R5-plate(클래스 A 판형 정정)로 단가행 있는 판형에 매핑하면 공유 단가행 충전 없이 우회 가능성 — 단 정답 판형(§C Q-DGP-PLATE) 확정 선행. 권위 330x660 고수 시 B.
+- **결론:** 범위 제약 하 즉시 진행 가능 = 클래스 A 9항목(돈크리티컬 1=019 바인딩). 최대 돈영향 명함 결함은 공유 영역으로 **보류**(인간이 공유 마스터 수정 승인해야 해소).
+
+### §S-보류 — K6·CONFIRM 미해결 (교정 보류)
+
+| 항목 | 보류 사유 | 클래스 |
+|------|-----------|--------|
+| **K6 gstack 3원 대조** | HUNI_ADMIN_PW 인증 실패(추측 금지) → 화면 결함 미확인 → 화면 기반 교정 불가 | 보류(자격증명) |
+| **DEF-PE-05**(단가형 ×qty 의미) | 권위 엑셀 모호(장당가 vs 묶음가)·B1 정확도 선행조건 | 보류(CONFIRM·공유) |
+| **R-X1 needed(037/050/051)** | 판형 needed=Y/N 인간 확정 필요(plate typ NULL) | 보류(needed 재판정) |
+| **R-X3 constraints needed 상품수** | "34 전건 needed=Y" 미입증·상품별 별표/블리드 재추출 필요 | 보류→확정 후 A-constr |
+| **R-X4 페이지룰** | domain-lens 판수=앱런타임 충돌·CONFIRM 강등 | 보류(잡음 가능) |
+| **Q-DGP-PLATE/SPOT·Q-COAT-TIER·Q-ROUND** | 권위 모호(B3·B5·B4 정답 결정 선행) | 보류(CONFIRM) |
+| **C-016-BUNDLE** | 권위 1봉투 vs 라이브 5봉투 재정의 필요 | 보류(권위 확정) |
+
+> 보류 항목은 인간 확인/공유 마스터 수정 승인 전까지 교정 진행 금지. 클래스 A 진행은 보류 항목과 독립.
 
 ---
 
