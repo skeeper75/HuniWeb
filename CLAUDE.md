@@ -290,7 +290,7 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 **산출물 루트:** `_workspace/huni-catalog-conformance/` (01_authority·02_basedata·03_cpq_link·04_price_engine·05_codex·06_gate·_meta). 누락 0의 자=`01_authority/conformance-checklist.csv`(전 상품×12축). 자격증명 `.env.local RAILWAY_DB_*`(읽기전용 SELECT)·`HUNI_ADMIN_*`(gstack 읽기 탐색만). codex 헬퍼=`hqv-codex-cross-verify/scripts/codex-review.sh` 재사용.
 
-**변경이력:** 최신: 2026-06-22 하네스 초기 구성(6 에이전트+6 스킬·12축 종단 정합·codex 교차·gstack product-viewer·K1~K8) → 첫 실행 시 CHANGELOG 생성
+**변경이력:** 최신: 2026-06-22 디지털인쇄 36상품 첫 종단 NO-GO(K4·K5 FAIL=라이브 교정대상·468셀 누락0·codex 환각0·게이트 독자적발 D-B use_dims 진원·K6 gstack 인증블로커·교정 9항목) → `_workspace/huni-catalog-conformance/CHANGELOG.md`
 
 ## 22. MoAI Framework (gated — rarely used here)
 

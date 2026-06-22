@@ -1,0 +1,469 @@
+prd_cd,product_group,axis,authority_source,target_table,needed,owner_inspector,note
+PRD_000016,엽서,사이즈코드,상품마스터:사이즈(필수),t_prd_product_sizes / t_siz_sizes(cut_*),Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000016,엽서,도수,상품마스터:인쇄(옵션),t_prd_product_print_options(front/back_colrcnt),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000016,엽서,인쇄옵션,상품마스터:별색인쇄/코팅/커팅/접지(옵션),t_prd_product_processes(PROC_000007 family·코팅·커팅·접지),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000016,엽서,판형,상품마스터:파일사양_출력용지규격,"t_prd_product_plate_sizes(siz_cd, output_paper_typ_cd) / t_siz_sizes(work_*)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000016,엽서,자재,상품마스터:종이(필수),"t_prd_product_materials(mat_cd, usage_cd)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000016,엽서,공정,상품마스터:후가공(옵션)·박/형압(옵션),t_prd_product_processes(+param),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000016,엽서,묶음수,상품마스터:제작수량_건수(옵션),t_prd_product_bundle_qtys(bdl_qty),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000016,엽서,페이지룰,상품마스터:판수,t_prd_product_page_rules(page_min/max/incr),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000016,엽서,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,디지털인쇄 필수 차원(항상 needed)
+PRD_000016,엽서,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000016,엽서,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000016,엽서,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000016,엽서,가격엔진,상품마스터:가격공식 + 인쇄상품 가격표(260527),t_prd_product_price_formulas → t_prc_price_formulas → formula_components → price_components → component_prices(siz=판형),Y,price-engine,"원자합산형(PRF_DGP_A~F+COMP_PAPER, siz_cd=출력판형) 또는 고정가형(명함/포토카드). 견적 필수=항상 Y"
+PRD_000017,엽서,사이즈코드,상품마스터:사이즈(필수),t_prd_product_sizes / t_siz_sizes(cut_*),Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000017,엽서,도수,상품마스터:인쇄(옵션),t_prd_product_print_options(front/back_colrcnt),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000017,엽서,인쇄옵션,상품마스터:별색인쇄/코팅/커팅/접지(옵션),t_prd_product_processes(PROC_000007 family·코팅·커팅·접지),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000017,엽서,판형,상품마스터:파일사양_출력용지규격,"t_prd_product_plate_sizes(siz_cd, output_paper_typ_cd) / t_siz_sizes(work_*)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000017,엽서,자재,상품마스터:종이(필수),"t_prd_product_materials(mat_cd, usage_cd)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000017,엽서,공정,상품마스터:후가공(옵션)·박/형압(옵션),t_prd_product_processes(+param),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000017,엽서,묶음수,상품마스터:제작수량_건수(옵션),t_prd_product_bundle_qtys(bdl_qty),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000017,엽서,페이지룰,상품마스터:판수,t_prd_product_page_rules(page_min/max/incr),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000017,엽서,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,디지털인쇄 필수 차원(항상 needed)
+PRD_000017,엽서,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000017,엽서,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000017,엽서,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000017,엽서,가격엔진,상품마스터:가격공식 + 인쇄상품 가격표(260527),t_prd_product_price_formulas → t_prc_price_formulas → formula_components → price_components → component_prices(siz=판형),Y,price-engine,"원자합산형(PRF_DGP_A~F+COMP_PAPER, siz_cd=출력판형) 또는 고정가형(명함/포토카드). 견적 필수=항상 Y"
+PRD_000018,엽서,사이즈코드,상품마스터:사이즈(필수),t_prd_product_sizes / t_siz_sizes(cut_*),Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000018,엽서,도수,상품마스터:인쇄(옵션),t_prd_product_print_options(front/back_colrcnt),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000018,엽서,인쇄옵션,상품마스터:별색인쇄/코팅/커팅/접지(옵션),t_prd_product_processes(PROC_000007 family·코팅·커팅·접지),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000018,엽서,판형,상품마스터:파일사양_출력용지규격,"t_prd_product_plate_sizes(siz_cd, output_paper_typ_cd) / t_siz_sizes(work_*)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000018,엽서,자재,상품마스터:종이(필수),"t_prd_product_materials(mat_cd, usage_cd)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000018,엽서,공정,상품마스터:후가공(옵션)·박/형압(옵션),t_prd_product_processes(+param),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000018,엽서,묶음수,상품마스터:제작수량_건수(옵션),t_prd_product_bundle_qtys(bdl_qty),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000018,엽서,페이지룰,상품마스터:판수,t_prd_product_page_rules(page_min/max/incr),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000018,엽서,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,디지털인쇄 필수 차원(항상 needed)
+PRD_000018,엽서,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000018,엽서,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000018,엽서,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000018,엽서,가격엔진,상품마스터:가격공식 + 인쇄상품 가격표(260527),t_prd_product_price_formulas → t_prc_price_formulas → formula_components → price_components → component_prices(siz=판형),Y,price-engine,"원자합산형(PRF_DGP_A~F+COMP_PAPER, siz_cd=출력판형) 또는 고정가형(명함/포토카드). 견적 필수=항상 Y"
+PRD_000019,엽서,사이즈코드,상품마스터:사이즈(필수),t_prd_product_sizes / t_siz_sizes(cut_*),Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000019,엽서,도수,상품마스터:인쇄(옵션),t_prd_product_print_options(front/back_colrcnt),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000019,엽서,인쇄옵션,상품마스터:별색인쇄/코팅/커팅/접지(옵션),t_prd_product_processes(PROC_000007 family·코팅·커팅·접지),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000019,엽서,판형,상품마스터:파일사양_출력용지규격,"t_prd_product_plate_sizes(siz_cd, output_paper_typ_cd) / t_siz_sizes(work_*)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000019,엽서,자재,상품마스터:종이(필수),"t_prd_product_materials(mat_cd, usage_cd)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000019,엽서,공정,상품마스터:후가공(옵션)·박/형압(옵션),t_prd_product_processes(+param),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000019,엽서,묶음수,상품마스터:제작수량_건수(옵션),t_prd_product_bundle_qtys(bdl_qty),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000019,엽서,페이지룰,상품마스터:판수,t_prd_product_page_rules(page_min/max/incr),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000019,엽서,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,디지털인쇄 필수 차원(항상 needed)
+PRD_000019,엽서,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000019,엽서,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000019,엽서,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000019,엽서,가격엔진,상품마스터:가격공식 + 인쇄상품 가격표(260527),t_prd_product_price_formulas → t_prc_price_formulas → formula_components → price_components → component_prices(siz=판형),Y,price-engine,"원자합산형(PRF_DGP_A~F+COMP_PAPER, siz_cd=출력판형) 또는 고정가형(명함/포토카드). 견적 필수=항상 Y"
+PRD_000020,엽서,사이즈코드,상품마스터:사이즈(필수),t_prd_product_sizes / t_siz_sizes(cut_*),Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000020,엽서,도수,상품마스터:인쇄(옵션),t_prd_product_print_options(front/back_colrcnt),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000020,엽서,인쇄옵션,상품마스터:별색인쇄/코팅/커팅/접지(옵션),t_prd_product_processes(PROC_000007 family·코팅·커팅·접지),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000020,엽서,판형,상품마스터:파일사양_출력용지규격,"t_prd_product_plate_sizes(siz_cd, output_paper_typ_cd) / t_siz_sizes(work_*)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000020,엽서,자재,상품마스터:종이(필수),"t_prd_product_materials(mat_cd, usage_cd)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000020,엽서,공정,상품마스터:후가공(옵션)·박/형압(옵션),t_prd_product_processes(+param),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000020,엽서,묶음수,상품마스터:제작수량_건수(옵션),t_prd_product_bundle_qtys(bdl_qty),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000020,엽서,페이지룰,상품마스터:판수,t_prd_product_page_rules(page_min/max/incr),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000020,엽서,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,디지털인쇄 필수 차원(항상 needed)
+PRD_000020,엽서,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000020,엽서,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000020,엽서,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000020,엽서,가격엔진,상품마스터:가격공식 + 인쇄상품 가격표(260527),t_prd_product_price_formulas → t_prc_price_formulas → formula_components → price_components → component_prices(siz=판형),Y,price-engine,"원자합산형(PRF_DGP_A~F+COMP_PAPER, siz_cd=출력판형) 또는 고정가형(명함/포토카드). 견적 필수=항상 Y"
+PRD_000021,엽서,사이즈코드,상품마스터:사이즈(필수),t_prd_product_sizes / t_siz_sizes(cut_*),Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000021,엽서,도수,상품마스터:인쇄(옵션),t_prd_product_print_options(front/back_colrcnt),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000021,엽서,인쇄옵션,상품마스터:별색인쇄/코팅/커팅/접지(옵션),t_prd_product_processes(PROC_000007 family·코팅·커팅·접지),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000021,엽서,판형,상품마스터:파일사양_출력용지규격,"t_prd_product_plate_sizes(siz_cd, output_paper_typ_cd) / t_siz_sizes(work_*)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000021,엽서,자재,상품마스터:종이(필수),"t_prd_product_materials(mat_cd, usage_cd)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000021,엽서,공정,상품마스터:후가공(옵션)·박/형압(옵션),t_prd_product_processes(+param),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000021,엽서,묶음수,상품마스터:제작수량_건수(옵션),t_prd_product_bundle_qtys(bdl_qty),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000021,엽서,페이지룰,상품마스터:판수,t_prd_product_page_rules(page_min/max/incr),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000021,엽서,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,디지털인쇄 필수 차원(항상 needed)
+PRD_000021,엽서,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000021,엽서,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000021,엽서,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000021,엽서,가격엔진,상품마스터:가격공식 + 인쇄상품 가격표(260527),t_prd_product_price_formulas → t_prc_price_formulas → formula_components → price_components → component_prices(siz=판형),Y,price-engine,"원자합산형(PRF_DGP_A~F+COMP_PAPER, siz_cd=출력판형) 또는 고정가형(명함/포토카드). 견적 필수=항상 Y"
+PRD_000022,엽서,사이즈코드,상품마스터:사이즈(필수),t_prd_product_sizes / t_siz_sizes(cut_*),Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000022,엽서,도수,상품마스터:인쇄(옵션),t_prd_product_print_options(front/back_colrcnt),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000022,엽서,인쇄옵션,상품마스터:별색인쇄/코팅/커팅/접지(옵션),t_prd_product_processes(PROC_000007 family·코팅·커팅·접지),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000022,엽서,판형,상품마스터:파일사양_출력용지규격,"t_prd_product_plate_sizes(siz_cd, output_paper_typ_cd) / t_siz_sizes(work_*)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000022,엽서,자재,상품마스터:종이(필수),"t_prd_product_materials(mat_cd, usage_cd)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000022,엽서,공정,상품마스터:후가공(옵션)·박/형압(옵션),t_prd_product_processes(+param),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000022,엽서,묶음수,상품마스터:제작수량_건수(옵션),t_prd_product_bundle_qtys(bdl_qty),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000022,엽서,페이지룰,상품마스터:판수,t_prd_product_page_rules(page_min/max/incr),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000022,엽서,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,디지털인쇄 필수 차원(항상 needed)
+PRD_000022,엽서,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000022,엽서,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000022,엽서,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000022,엽서,가격엔진,상품마스터:가격공식 + 인쇄상품 가격표(260527),t_prd_product_price_formulas → t_prc_price_formulas → formula_components → price_components → component_prices(siz=판형),Y,price-engine,"원자합산형(PRF_DGP_A~F+COMP_PAPER, siz_cd=출력판형) 또는 고정가형(명함/포토카드). 견적 필수=항상 Y"
+PRD_000023,엽서,사이즈코드,상품마스터:사이즈(필수),t_prd_product_sizes / t_siz_sizes(cut_*),Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000023,엽서,도수,상품마스터:인쇄(옵션),t_prd_product_print_options(front/back_colrcnt),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000023,엽서,인쇄옵션,상품마스터:별색인쇄/코팅/커팅/접지(옵션),t_prd_product_processes(PROC_000007 family·코팅·커팅·접지),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000023,엽서,판형,상품마스터:파일사양_출력용지규격,"t_prd_product_plate_sizes(siz_cd, output_paper_typ_cd) / t_siz_sizes(work_*)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000023,엽서,자재,상품마스터:종이(필수),"t_prd_product_materials(mat_cd, usage_cd)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000023,엽서,공정,상품마스터:후가공(옵션)·박/형압(옵션),t_prd_product_processes(+param),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000023,엽서,묶음수,상품마스터:제작수량_건수(옵션),t_prd_product_bundle_qtys(bdl_qty),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000023,엽서,페이지룰,상품마스터:판수,t_prd_product_page_rules(page_min/max/incr),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000023,엽서,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,디지털인쇄 필수 차원(항상 needed)
+PRD_000023,엽서,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000023,엽서,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000023,엽서,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000023,엽서,가격엔진,상품마스터:가격공식 + 인쇄상품 가격표(260527),t_prd_product_price_formulas → t_prc_price_formulas → formula_components → price_components → component_prices(siz=판형),Y,price-engine,"원자합산형(PRF_DGP_A~F+COMP_PAPER, siz_cd=출력판형) 또는 고정가형(명함/포토카드). 견적 필수=항상 Y"
+PRD_000024,포토카드,사이즈코드,상품마스터:사이즈(필수),t_prd_product_sizes / t_siz_sizes(cut_*),Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000024,포토카드,도수,상품마스터:인쇄(옵션),t_prd_product_print_options(front/back_colrcnt),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000024,포토카드,인쇄옵션,상품마스터:별색인쇄/코팅/커팅/접지(옵션),t_prd_product_processes(PROC_000007 family·코팅·커팅·접지),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000024,포토카드,판형,상품마스터:파일사양_출력용지규격,"t_prd_product_plate_sizes(siz_cd, output_paper_typ_cd) / t_siz_sizes(work_*)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000024,포토카드,자재,상품마스터:종이(필수),"t_prd_product_materials(mat_cd, usage_cd)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000024,포토카드,공정,상품마스터:후가공(옵션)·박/형압(옵션),t_prd_product_processes(+param),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000024,포토카드,묶음수,상품마스터:제작수량_건수(옵션),t_prd_product_bundle_qtys(bdl_qty),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000024,포토카드,페이지룰,상품마스터:판수,t_prd_product_page_rules(page_min/max/incr),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000024,포토카드,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,디지털인쇄 필수 차원(항상 needed)
+PRD_000024,포토카드,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000024,포토카드,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000024,포토카드,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000024,포토카드,가격엔진,상품마스터:가격공식 + 인쇄상품 가격표(260527),t_prd_product_price_formulas → t_prc_price_formulas → formula_components → price_components → component_prices(siz=판형),Y,price-engine,"원자합산형(PRF_DGP_A~F+COMP_PAPER, siz_cd=출력판형) 또는 고정가형(명함/포토카드). 견적 필수=항상 Y"
+PRD_000025,포토카드,사이즈코드,상품마스터:사이즈(필수),t_prd_product_sizes / t_siz_sizes(cut_*),Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000025,포토카드,도수,상품마스터:인쇄(옵션),t_prd_product_print_options(front/back_colrcnt),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000025,포토카드,인쇄옵션,상품마스터:별색인쇄/코팅/커팅/접지(옵션),t_prd_product_processes(PROC_000007 family·코팅·커팅·접지),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000025,포토카드,판형,상품마스터:파일사양_출력용지규격,"t_prd_product_plate_sizes(siz_cd, output_paper_typ_cd) / t_siz_sizes(work_*)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000025,포토카드,자재,상품마스터:종이(필수),"t_prd_product_materials(mat_cd, usage_cd)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000025,포토카드,공정,상품마스터:후가공(옵션)·박/형압(옵션),t_prd_product_processes(+param),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000025,포토카드,묶음수,상품마스터:제작수량_건수(옵션),t_prd_product_bundle_qtys(bdl_qty),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000025,포토카드,페이지룰,상품마스터:판수,t_prd_product_page_rules(page_min/max/incr),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000025,포토카드,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,디지털인쇄 필수 차원(항상 needed)
+PRD_000025,포토카드,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000025,포토카드,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000025,포토카드,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000025,포토카드,가격엔진,상품마스터:가격공식 + 인쇄상품 가격표(260527),t_prd_product_price_formulas → t_prc_price_formulas → formula_components → price_components → component_prices(siz=판형),Y,price-engine,"원자합산형(PRF_DGP_A~F+COMP_PAPER, siz_cd=출력판형) 또는 고정가형(명함/포토카드). 견적 필수=항상 Y"
+PRD_000026,포토카드,사이즈코드,상품마스터:사이즈(필수),t_prd_product_sizes / t_siz_sizes(cut_*),Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000026,포토카드,도수,상품마스터:인쇄(옵션),t_prd_product_print_options(front/back_colrcnt),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000026,포토카드,인쇄옵션,상품마스터:별색인쇄/코팅/커팅/접지(옵션),t_prd_product_processes(PROC_000007 family·코팅·커팅·접지),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000026,포토카드,판형,상품마스터:파일사양_출력용지규격,"t_prd_product_plate_sizes(siz_cd, output_paper_typ_cd) / t_siz_sizes(work_*)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000026,포토카드,자재,상품마스터:종이(필수),"t_prd_product_materials(mat_cd, usage_cd)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000026,포토카드,공정,상품마스터:후가공(옵션)·박/형압(옵션),t_prd_product_processes(+param),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000026,포토카드,묶음수,상품마스터:제작수량_건수(옵션),t_prd_product_bundle_qtys(bdl_qty),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000026,포토카드,페이지룰,상품마스터:판수,t_prd_product_page_rules(page_min/max/incr),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000026,포토카드,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,디지털인쇄 필수 차원(항상 needed)
+PRD_000026,포토카드,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000026,포토카드,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000026,포토카드,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000026,포토카드,가격엔진,상품마스터:가격공식 + 인쇄상품 가격표(260527),t_prd_product_price_formulas → t_prc_price_formulas → formula_components → price_components → component_prices(siz=판형),Y,price-engine,"원자합산형(PRF_DGP_A~F+COMP_PAPER, siz_cd=출력판형) 또는 고정가형(명함/포토카드). 견적 필수=항상 Y"
+PRD_000027,접지카드,사이즈코드,상품마스터:사이즈(필수),t_prd_product_sizes / t_siz_sizes(cut_*),Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000027,접지카드,도수,상품마스터:인쇄(옵션),t_prd_product_print_options(front/back_colrcnt),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000027,접지카드,인쇄옵션,상품마스터:별색인쇄/코팅/커팅/접지(옵션),t_prd_product_processes(PROC_000007 family·코팅·커팅·접지),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000027,접지카드,판형,상품마스터:파일사양_출력용지규격,"t_prd_product_plate_sizes(siz_cd, output_paper_typ_cd) / t_siz_sizes(work_*)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000027,접지카드,자재,상품마스터:종이(필수),"t_prd_product_materials(mat_cd, usage_cd)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000027,접지카드,공정,상품마스터:후가공(옵션)·박/형압(옵션),t_prd_product_processes(+param),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000027,접지카드,묶음수,상품마스터:제작수량_건수(옵션),t_prd_product_bundle_qtys(bdl_qty),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000027,접지카드,페이지룰,상품마스터:판수,t_prd_product_page_rules(page_min/max/incr),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000027,접지카드,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,디지털인쇄 필수 차원(항상 needed)
+PRD_000027,접지카드,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000027,접지카드,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000027,접지카드,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000027,접지카드,가격엔진,상품마스터:가격공식 + 인쇄상품 가격표(260527),t_prd_product_price_formulas → t_prc_price_formulas → formula_components → price_components → component_prices(siz=판형),Y,price-engine,"원자합산형(PRF_DGP_A~F+COMP_PAPER, siz_cd=출력판형) 또는 고정가형(명함/포토카드). 견적 필수=항상 Y"
+PRD_000028,접지카드,사이즈코드,상품마스터:사이즈(필수),t_prd_product_sizes / t_siz_sizes(cut_*),Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000028,접지카드,도수,상품마스터:인쇄(옵션),t_prd_product_print_options(front/back_colrcnt),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000028,접지카드,인쇄옵션,상품마스터:별색인쇄/코팅/커팅/접지(옵션),t_prd_product_processes(PROC_000007 family·코팅·커팅·접지),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000028,접지카드,판형,상품마스터:파일사양_출력용지규격,"t_prd_product_plate_sizes(siz_cd, output_paper_typ_cd) / t_siz_sizes(work_*)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000028,접지카드,자재,상품마스터:종이(필수),"t_prd_product_materials(mat_cd, usage_cd)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000028,접지카드,공정,상품마스터:후가공(옵션)·박/형압(옵션),t_prd_product_processes(+param),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000028,접지카드,묶음수,상품마스터:제작수량_건수(옵션),t_prd_product_bundle_qtys(bdl_qty),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000028,접지카드,페이지룰,상품마스터:판수,t_prd_product_page_rules(page_min/max/incr),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000028,접지카드,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,디지털인쇄 필수 차원(항상 needed)
+PRD_000028,접지카드,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000028,접지카드,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000028,접지카드,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000028,접지카드,가격엔진,상품마스터:가격공식 + 인쇄상품 가격표(260527),t_prd_product_price_formulas → t_prc_price_formulas → formula_components → price_components → component_prices(siz=판형),Y,price-engine,"원자합산형(PRF_DGP_A~F+COMP_PAPER, siz_cd=출력판형) 또는 고정가형(명함/포토카드). 견적 필수=항상 Y"
+PRD_000029,접지카드,사이즈코드,상품마스터:사이즈(필수),t_prd_product_sizes / t_siz_sizes(cut_*),Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000029,접지카드,도수,상품마스터:인쇄(옵션),t_prd_product_print_options(front/back_colrcnt),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000029,접지카드,인쇄옵션,상품마스터:별색인쇄/코팅/커팅/접지(옵션),t_prd_product_processes(PROC_000007 family·코팅·커팅·접지),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000029,접지카드,판형,상품마스터:파일사양_출력용지규격,"t_prd_product_plate_sizes(siz_cd, output_paper_typ_cd) / t_siz_sizes(work_*)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000029,접지카드,자재,상품마스터:종이(필수),"t_prd_product_materials(mat_cd, usage_cd)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000029,접지카드,공정,상품마스터:후가공(옵션)·박/형압(옵션),t_prd_product_processes(+param),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000029,접지카드,묶음수,상품마스터:제작수량_건수(옵션),t_prd_product_bundle_qtys(bdl_qty),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000029,접지카드,페이지룰,상품마스터:판수,t_prd_product_page_rules(page_min/max/incr),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000029,접지카드,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,디지털인쇄 필수 차원(항상 needed)
+PRD_000029,접지카드,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000029,접지카드,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000029,접지카드,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000029,접지카드,가격엔진,상품마스터:가격공식 + 인쇄상품 가격표(260527),t_prd_product_price_formulas → t_prc_price_formulas → formula_components → price_components → component_prices(siz=판형),Y,price-engine,"원자합산형(PRF_DGP_A~F+COMP_PAPER, siz_cd=출력판형) 또는 고정가형(명함/포토카드). 견적 필수=항상 Y"
+PRD_000030,접지카드,사이즈코드,상품마스터:사이즈(필수),t_prd_product_sizes / t_siz_sizes(cut_*),Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000030,접지카드,도수,상품마스터:인쇄(옵션),t_prd_product_print_options(front/back_colrcnt),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000030,접지카드,인쇄옵션,상품마스터:별색인쇄/코팅/커팅/접지(옵션),t_prd_product_processes(PROC_000007 family·코팅·커팅·접지),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000030,접지카드,판형,상품마스터:파일사양_출력용지규격,"t_prd_product_plate_sizes(siz_cd, output_paper_typ_cd) / t_siz_sizes(work_*)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000030,접지카드,자재,상품마스터:종이(필수),"t_prd_product_materials(mat_cd, usage_cd)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000030,접지카드,공정,상품마스터:후가공(옵션)·박/형압(옵션),t_prd_product_processes(+param),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000030,접지카드,묶음수,상품마스터:제작수량_건수(옵션),t_prd_product_bundle_qtys(bdl_qty),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000030,접지카드,페이지룰,상품마스터:판수,t_prd_product_page_rules(page_min/max/incr),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000030,접지카드,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,디지털인쇄 필수 차원(항상 needed)
+PRD_000030,접지카드,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000030,접지카드,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000030,접지카드,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000030,접지카드,가격엔진,상품마스터:가격공식 + 인쇄상품 가격표(260527),t_prd_product_price_formulas → t_prc_price_formulas → formula_components → price_components → component_prices(siz=판형),Y,price-engine,"원자합산형(PRF_DGP_A~F+COMP_PAPER, siz_cd=출력판형) 또는 고정가형(명함/포토카드). 견적 필수=항상 Y"
+PRD_000031,명함,사이즈코드,상품마스터:사이즈(필수),t_prd_product_sizes / t_siz_sizes(cut_*),Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000031,명함,도수,상품마스터:인쇄(옵션),t_prd_product_print_options(front/back_colrcnt),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000031,명함,인쇄옵션,상품마스터:별색인쇄/코팅/커팅/접지(옵션),t_prd_product_processes(PROC_000007 family·코팅·커팅·접지),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000031,명함,판형,상품마스터:파일사양_출력용지규격,"t_prd_product_plate_sizes(siz_cd, output_paper_typ_cd) / t_siz_sizes(work_*)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000031,명함,자재,상품마스터:종이(필수),"t_prd_product_materials(mat_cd, usage_cd)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000031,명함,공정,상품마스터:후가공(옵션)·박/형압(옵션),t_prd_product_processes(+param),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000031,명함,묶음수,상품마스터:제작수량_건수(옵션),t_prd_product_bundle_qtys(bdl_qty),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000031,명함,페이지룰,상품마스터:판수,t_prd_product_page_rules(page_min/max/incr),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000031,명함,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,디지털인쇄 필수 차원(항상 needed)
+PRD_000031,명함,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000031,명함,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000031,명함,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000031,명함,가격엔진,상품마스터:가격공식 + 인쇄상품 가격표(260527),t_prd_product_price_formulas → t_prc_price_formulas → formula_components → price_components → component_prices(siz=판형),Y,price-engine,"원자합산형(PRF_DGP_A~F+COMP_PAPER, siz_cd=출력판형) 또는 고정가형(명함/포토카드). 견적 필수=항상 Y"
+PRD_000032,명함,사이즈코드,상품마스터:사이즈(필수),t_prd_product_sizes / t_siz_sizes(cut_*),Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000032,명함,도수,상품마스터:인쇄(옵션),t_prd_product_print_options(front/back_colrcnt),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000032,명함,인쇄옵션,상품마스터:별색인쇄/코팅/커팅/접지(옵션),t_prd_product_processes(PROC_000007 family·코팅·커팅·접지),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000032,명함,판형,상품마스터:파일사양_출력용지규격,"t_prd_product_plate_sizes(siz_cd, output_paper_typ_cd) / t_siz_sizes(work_*)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000032,명함,자재,상품마스터:종이(필수),"t_prd_product_materials(mat_cd, usage_cd)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000032,명함,공정,상품마스터:후가공(옵션)·박/형압(옵션),t_prd_product_processes(+param),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000032,명함,묶음수,상품마스터:제작수량_건수(옵션),t_prd_product_bundle_qtys(bdl_qty),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000032,명함,페이지룰,상품마스터:판수,t_prd_product_page_rules(page_min/max/incr),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000032,명함,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,디지털인쇄 필수 차원(항상 needed)
+PRD_000032,명함,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000032,명함,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000032,명함,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000032,명함,가격엔진,상품마스터:가격공식 + 인쇄상품 가격표(260527),t_prd_product_price_formulas → t_prc_price_formulas → formula_components → price_components → component_prices(siz=판형),Y,price-engine,"원자합산형(PRF_DGP_A~F+COMP_PAPER, siz_cd=출력판형) 또는 고정가형(명함/포토카드). 견적 필수=항상 Y"
+PRD_000033,명함,사이즈코드,상품마스터:사이즈(필수),t_prd_product_sizes / t_siz_sizes(cut_*),Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000033,명함,도수,상품마스터:인쇄(옵션),t_prd_product_print_options(front/back_colrcnt),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000033,명함,인쇄옵션,상품마스터:별색인쇄/코팅/커팅/접지(옵션),t_prd_product_processes(PROC_000007 family·코팅·커팅·접지),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000033,명함,판형,상품마스터:파일사양_출력용지규격,"t_prd_product_plate_sizes(siz_cd, output_paper_typ_cd) / t_siz_sizes(work_*)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000033,명함,자재,상품마스터:종이(필수),"t_prd_product_materials(mat_cd, usage_cd)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000033,명함,공정,상품마스터:후가공(옵션)·박/형압(옵션),t_prd_product_processes(+param),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000033,명함,묶음수,상품마스터:제작수량_건수(옵션),t_prd_product_bundle_qtys(bdl_qty),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000033,명함,페이지룰,상품마스터:판수,t_prd_product_page_rules(page_min/max/incr),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000033,명함,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,디지털인쇄 필수 차원(항상 needed)
+PRD_000033,명함,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000033,명함,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000033,명함,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000033,명함,가격엔진,상품마스터:가격공식 + 인쇄상품 가격표(260527),t_prd_product_price_formulas → t_prc_price_formulas → formula_components → price_components → component_prices(siz=판형),Y,price-engine,"원자합산형(PRF_DGP_A~F+COMP_PAPER, siz_cd=출력판형) 또는 고정가형(명함/포토카드). 견적 필수=항상 Y"
+PRD_000034,명함,사이즈코드,상품마스터:사이즈(필수),t_prd_product_sizes / t_siz_sizes(cut_*),Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000034,명함,도수,상품마스터:인쇄(옵션),t_prd_product_print_options(front/back_colrcnt),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000034,명함,인쇄옵션,상품마스터:별색인쇄/코팅/커팅/접지(옵션),t_prd_product_processes(PROC_000007 family·코팅·커팅·접지),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000034,명함,판형,상품마스터:파일사양_출력용지규격,"t_prd_product_plate_sizes(siz_cd, output_paper_typ_cd) / t_siz_sizes(work_*)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000034,명함,자재,상품마스터:종이(필수),"t_prd_product_materials(mat_cd, usage_cd)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000034,명함,공정,상품마스터:후가공(옵션)·박/형압(옵션),t_prd_product_processes(+param),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000034,명함,묶음수,상품마스터:제작수량_건수(옵션),t_prd_product_bundle_qtys(bdl_qty),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000034,명함,페이지룰,상품마스터:판수,t_prd_product_page_rules(page_min/max/incr),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000034,명함,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,디지털인쇄 필수 차원(항상 needed)
+PRD_000034,명함,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000034,명함,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000034,명함,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000034,명함,가격엔진,상품마스터:가격공식 + 인쇄상품 가격표(260527),t_prd_product_price_formulas → t_prc_price_formulas → formula_components → price_components → component_prices(siz=판형),Y,price-engine,"원자합산형(PRF_DGP_A~F+COMP_PAPER, siz_cd=출력판형) 또는 고정가형(명함/포토카드). 견적 필수=항상 Y"
+PRD_000035,명함,사이즈코드,상품마스터:사이즈(필수),t_prd_product_sizes / t_siz_sizes(cut_*),Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000035,명함,도수,상품마스터:인쇄(옵션),t_prd_product_print_options(front/back_colrcnt),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000035,명함,인쇄옵션,상품마스터:별색인쇄/코팅/커팅/접지(옵션),t_prd_product_processes(PROC_000007 family·코팅·커팅·접지),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000035,명함,판형,상품마스터:파일사양_출력용지규격,"t_prd_product_plate_sizes(siz_cd, output_paper_typ_cd) / t_siz_sizes(work_*)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000035,명함,자재,상품마스터:종이(필수),"t_prd_product_materials(mat_cd, usage_cd)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000035,명함,공정,상품마스터:후가공(옵션)·박/형압(옵션),t_prd_product_processes(+param),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000035,명함,묶음수,상품마스터:제작수량_건수(옵션),t_prd_product_bundle_qtys(bdl_qty),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000035,명함,페이지룰,상품마스터:판수,t_prd_product_page_rules(page_min/max/incr),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000035,명함,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,디지털인쇄 필수 차원(항상 needed)
+PRD_000035,명함,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000035,명함,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000035,명함,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000035,명함,가격엔진,상품마스터:가격공식 + 인쇄상품 가격표(260527),t_prd_product_price_formulas → t_prc_price_formulas → formula_components → price_components → component_prices(siz=판형),Y,price-engine,"원자합산형(PRF_DGP_A~F+COMP_PAPER, siz_cd=출력판형) 또는 고정가형(명함/포토카드). 견적 필수=항상 Y"
+PRD_000036,명함,사이즈코드,상품마스터:사이즈(필수),t_prd_product_sizes / t_siz_sizes(cut_*),Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000036,명함,도수,상품마스터:인쇄(옵션),t_prd_product_print_options(front/back_colrcnt),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000036,명함,인쇄옵션,상품마스터:별색인쇄/코팅/커팅/접지(옵션),t_prd_product_processes(PROC_000007 family·코팅·커팅·접지),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000036,명함,판형,상품마스터:파일사양_출력용지규격,"t_prd_product_plate_sizes(siz_cd, output_paper_typ_cd) / t_siz_sizes(work_*)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000036,명함,자재,상품마스터:종이(필수),"t_prd_product_materials(mat_cd, usage_cd)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000036,명함,공정,상품마스터:후가공(옵션)·박/형압(옵션),t_prd_product_processes(+param),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000036,명함,묶음수,상품마스터:제작수량_건수(옵션),t_prd_product_bundle_qtys(bdl_qty),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000036,명함,페이지룰,상품마스터:판수,t_prd_product_page_rules(page_min/max/incr),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000036,명함,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,디지털인쇄 필수 차원(항상 needed)
+PRD_000036,명함,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000036,명함,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000036,명함,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000036,명함,가격엔진,상품마스터:가격공식 + 인쇄상품 가격표(260527),t_prd_product_price_formulas → t_prc_price_formulas → formula_components → price_components → component_prices(siz=판형),Y,price-engine,"원자합산형(PRF_DGP_A~F+COMP_PAPER, siz_cd=출력판형) 또는 고정가형(명함/포토카드). 견적 필수=항상 Y"
+PRD_000037,명함,사이즈코드,상품마스터:사이즈(필수),t_prd_product_sizes / t_siz_sizes(cut_*),Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000037,명함,도수,상품마스터:인쇄(옵션),t_prd_product_print_options(front/back_colrcnt),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000037,명함,인쇄옵션,상품마스터:별색인쇄/코팅/커팅/접지(옵션),t_prd_product_processes(PROC_000007 family·코팅·커팅·접지),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000037,명함,판형,상품마스터:파일사양_출력용지규격,"t_prd_product_plate_sizes(siz_cd, output_paper_typ_cd) / t_siz_sizes(work_*)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000037,명함,자재,상품마스터:종이(필수),"t_prd_product_materials(mat_cd, usage_cd)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000037,명함,공정,상품마스터:후가공(옵션)·박/형압(옵션),t_prd_product_processes(+param),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000037,명함,묶음수,상품마스터:제작수량_건수(옵션),t_prd_product_bundle_qtys(bdl_qty),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000037,명함,페이지룰,상품마스터:판수,t_prd_product_page_rules(page_min/max/incr),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000037,명함,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,디지털인쇄 필수 차원(항상 needed)
+PRD_000037,명함,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000037,명함,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000037,명함,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000037,명함,가격엔진,상품마스터:가격공식 + 인쇄상품 가격표(260527),t_prd_product_price_formulas → t_prc_price_formulas → formula_components → price_components → component_prices(siz=판형),Y,price-engine,"원자합산형(PRF_DGP_A~F+COMP_PAPER, siz_cd=출력판형) 또는 고정가형(명함/포토카드). 견적 필수=항상 Y"
+PRD_000038,명함,사이즈코드,상품마스터:사이즈(필수),t_prd_product_sizes / t_siz_sizes(cut_*),Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000038,명함,도수,상품마스터:인쇄(옵션),t_prd_product_print_options(front/back_colrcnt),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000038,명함,인쇄옵션,상품마스터:별색인쇄/코팅/커팅/접지(옵션),t_prd_product_processes(PROC_000007 family·코팅·커팅·접지),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000038,명함,판형,상품마스터:파일사양_출력용지규격,"t_prd_product_plate_sizes(siz_cd, output_paper_typ_cd) / t_siz_sizes(work_*)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000038,명함,자재,상품마스터:종이(필수),"t_prd_product_materials(mat_cd, usage_cd)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000038,명함,공정,상품마스터:후가공(옵션)·박/형압(옵션),t_prd_product_processes(+param),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000038,명함,묶음수,상품마스터:제작수량_건수(옵션),t_prd_product_bundle_qtys(bdl_qty),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000038,명함,페이지룰,상품마스터:판수,t_prd_product_page_rules(page_min/max/incr),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000038,명함,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,디지털인쇄 필수 차원(항상 needed)
+PRD_000038,명함,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000038,명함,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000038,명함,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000038,명함,가격엔진,상품마스터:가격공식 + 인쇄상품 가격표(260527),t_prd_product_price_formulas → t_prc_price_formulas → formula_components → price_components → component_prices(siz=판형),Y,price-engine,"원자합산형(PRF_DGP_A~F+COMP_PAPER, siz_cd=출력판형) 또는 고정가형(명함/포토카드). 견적 필수=항상 Y"
+PRD_000039,명함,사이즈코드,상품마스터:사이즈(필수),t_prd_product_sizes / t_siz_sizes(cut_*),Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000039,명함,도수,상품마스터:인쇄(옵션),t_prd_product_print_options(front/back_colrcnt),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000039,명함,인쇄옵션,상품마스터:별색인쇄/코팅/커팅/접지(옵션),t_prd_product_processes(PROC_000007 family·코팅·커팅·접지),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000039,명함,판형,상품마스터:파일사양_출력용지규격,"t_prd_product_plate_sizes(siz_cd, output_paper_typ_cd) / t_siz_sizes(work_*)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000039,명함,자재,상품마스터:종이(필수),"t_prd_product_materials(mat_cd, usage_cd)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000039,명함,공정,상품마스터:후가공(옵션)·박/형압(옵션),t_prd_product_processes(+param),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000039,명함,묶음수,상품마스터:제작수량_건수(옵션),t_prd_product_bundle_qtys(bdl_qty),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000039,명함,페이지룰,상품마스터:판수,t_prd_product_page_rules(page_min/max/incr),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000039,명함,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,디지털인쇄 필수 차원(항상 needed)
+PRD_000039,명함,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000039,명함,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000039,명함,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000039,명함,가격엔진,상품마스터:가격공식 + 인쇄상품 가격표(260527),t_prd_product_price_formulas → t_prc_price_formulas → formula_components → price_components → component_prices(siz=판형),Y,price-engine,"원자합산형(PRF_DGP_A~F+COMP_PAPER, siz_cd=출력판형) 또는 고정가형(명함/포토카드). 견적 필수=항상 Y"
+PRD_000040,명함,사이즈코드,상품마스터:사이즈(필수),t_prd_product_sizes / t_siz_sizes(cut_*),Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000040,명함,도수,상품마스터:인쇄(옵션),t_prd_product_print_options(front/back_colrcnt),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000040,명함,인쇄옵션,상품마스터:별색인쇄/코팅/커팅/접지(옵션),t_prd_product_processes(PROC_000007 family·코팅·커팅·접지),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000040,명함,판형,상품마스터:파일사양_출력용지규격,"t_prd_product_plate_sizes(siz_cd, output_paper_typ_cd) / t_siz_sizes(work_*)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000040,명함,자재,상품마스터:종이(필수),"t_prd_product_materials(mat_cd, usage_cd)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000040,명함,공정,상품마스터:후가공(옵션)·박/형압(옵션),t_prd_product_processes(+param),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000040,명함,묶음수,상품마스터:제작수량_건수(옵션),t_prd_product_bundle_qtys(bdl_qty),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000040,명함,페이지룰,상품마스터:판수,t_prd_product_page_rules(page_min/max/incr),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000040,명함,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,디지털인쇄 필수 차원(항상 needed)
+PRD_000040,명함,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000040,명함,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000040,명함,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000040,명함,가격엔진,상품마스터:가격공식 + 인쇄상품 가격표(260527),t_prd_product_price_formulas → t_prc_price_formulas → formula_components → price_components → component_prices(siz=판형),Y,price-engine,"원자합산형(PRF_DGP_A~F+COMP_PAPER, siz_cd=출력판형) 또는 고정가형(명함/포토카드). 견적 필수=항상 Y"
+PRD_000041,상품권,사이즈코드,상품마스터:사이즈(필수),t_prd_product_sizes / t_siz_sizes(cut_*),Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000041,상품권,도수,상품마스터:인쇄(옵션),t_prd_product_print_options(front/back_colrcnt),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000041,상품권,인쇄옵션,상품마스터:별색인쇄/코팅/커팅/접지(옵션),t_prd_product_processes(PROC_000007 family·코팅·커팅·접지),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000041,상품권,판형,상품마스터:파일사양_출력용지규격,"t_prd_product_plate_sizes(siz_cd, output_paper_typ_cd) / t_siz_sizes(work_*)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000041,상품권,자재,상품마스터:종이(필수),"t_prd_product_materials(mat_cd, usage_cd)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000041,상품권,공정,상품마스터:후가공(옵션)·박/형압(옵션),t_prd_product_processes(+param),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000041,상품권,묶음수,상품마스터:제작수량_건수(옵션),t_prd_product_bundle_qtys(bdl_qty),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000041,상품권,페이지룰,상품마스터:판수,t_prd_product_page_rules(page_min/max/incr),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000041,상품권,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,디지털인쇄 필수 차원(항상 needed)
+PRD_000041,상품권,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000041,상품권,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000041,상품권,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000041,상품권,가격엔진,상품마스터:가격공식 + 인쇄상품 가격표(260527),t_prd_product_price_formulas → t_prc_price_formulas → formula_components → price_components → component_prices(siz=판형),Y,price-engine,"원자합산형(PRF_DGP_A~F+COMP_PAPER, siz_cd=출력판형) 또는 고정가형(명함/포토카드). 견적 필수=항상 Y"
+PRD_000042,상품권,사이즈코드,상품마스터:사이즈(필수),t_prd_product_sizes / t_siz_sizes(cut_*),Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000042,상품권,도수,상품마스터:인쇄(옵션),t_prd_product_print_options(front/back_colrcnt),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000042,상품권,인쇄옵션,상품마스터:별색인쇄/코팅/커팅/접지(옵션),t_prd_product_processes(PROC_000007 family·코팅·커팅·접지),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000042,상품권,판형,상품마스터:파일사양_출력용지규격,"t_prd_product_plate_sizes(siz_cd, output_paper_typ_cd) / t_siz_sizes(work_*)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000042,상품권,자재,상품마스터:종이(필수),"t_prd_product_materials(mat_cd, usage_cd)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000042,상품권,공정,상품마스터:후가공(옵션)·박/형압(옵션),t_prd_product_processes(+param),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000042,상품권,묶음수,상품마스터:제작수량_건수(옵션),t_prd_product_bundle_qtys(bdl_qty),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000042,상품권,페이지룰,상품마스터:판수,t_prd_product_page_rules(page_min/max/incr),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000042,상품권,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,디지털인쇄 필수 차원(항상 needed)
+PRD_000042,상품권,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000042,상품권,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000042,상품권,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000042,상품권,가격엔진,상품마스터:가격공식 + 인쇄상품 가격표(260527),t_prd_product_price_formulas → t_prc_price_formulas → formula_components → price_components → component_prices(siz=판형),Y,price-engine,"원자합산형(PRF_DGP_A~F+COMP_PAPER, siz_cd=출력판형) 또는 고정가형(명함/포토카드). 견적 필수=항상 Y"
+PRD_000043,배경지,사이즈코드,상품마스터:사이즈(필수),t_prd_product_sizes / t_siz_sizes(cut_*),Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000043,배경지,도수,상품마스터:인쇄(옵션),t_prd_product_print_options(front/back_colrcnt),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000043,배경지,인쇄옵션,상품마스터:별색인쇄/코팅/커팅/접지(옵션),t_prd_product_processes(PROC_000007 family·코팅·커팅·접지),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000043,배경지,판형,상품마스터:파일사양_출력용지규격,"t_prd_product_plate_sizes(siz_cd, output_paper_typ_cd) / t_siz_sizes(work_*)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000043,배경지,자재,상품마스터:종이(필수),"t_prd_product_materials(mat_cd, usage_cd)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000043,배경지,공정,상품마스터:후가공(옵션)·박/형압(옵션),t_prd_product_processes(+param),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000043,배경지,묶음수,상품마스터:제작수량_건수(옵션),t_prd_product_bundle_qtys(bdl_qty),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000043,배경지,페이지룰,상품마스터:판수,t_prd_product_page_rules(page_min/max/incr),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000043,배경지,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,디지털인쇄 필수 차원(항상 needed)
+PRD_000043,배경지,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000043,배경지,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000043,배경지,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000043,배경지,가격엔진,상품마스터:가격공식 + 인쇄상품 가격표(260527),t_prd_product_price_formulas → t_prc_price_formulas → formula_components → price_components → component_prices(siz=판형),Y,price-engine,"원자합산형(PRF_DGP_A~F+COMP_PAPER, siz_cd=출력판형) 또는 고정가형(명함/포토카드). 견적 필수=항상 Y"
+PRD_000044,배경지,사이즈코드,상품마스터:사이즈(필수),t_prd_product_sizes / t_siz_sizes(cut_*),Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000044,배경지,도수,상품마스터:인쇄(옵션),t_prd_product_print_options(front/back_colrcnt),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000044,배경지,인쇄옵션,상품마스터:별색인쇄/코팅/커팅/접지(옵션),t_prd_product_processes(PROC_000007 family·코팅·커팅·접지),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000044,배경지,판형,상품마스터:파일사양_출력용지규격,"t_prd_product_plate_sizes(siz_cd, output_paper_typ_cd) / t_siz_sizes(work_*)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000044,배경지,자재,상품마스터:종이(필수),"t_prd_product_materials(mat_cd, usage_cd)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000044,배경지,공정,상품마스터:후가공(옵션)·박/형압(옵션),t_prd_product_processes(+param),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000044,배경지,묶음수,상품마스터:제작수량_건수(옵션),t_prd_product_bundle_qtys(bdl_qty),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000044,배경지,페이지룰,상품마스터:판수,t_prd_product_page_rules(page_min/max/incr),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000044,배경지,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,디지털인쇄 필수 차원(항상 needed)
+PRD_000044,배경지,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000044,배경지,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000044,배경지,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000044,배경지,가격엔진,상품마스터:가격공식 + 인쇄상품 가격표(260527),t_prd_product_price_formulas → t_prc_price_formulas → formula_components → price_components → component_prices(siz=판형),Y,price-engine,"원자합산형(PRF_DGP_A~F+COMP_PAPER, siz_cd=출력판형) 또는 고정가형(명함/포토카드). 견적 필수=항상 Y"
+PRD_000045,배경지,사이즈코드,상품마스터:사이즈(필수),t_prd_product_sizes / t_siz_sizes(cut_*),Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000045,배경지,도수,상품마스터:인쇄(옵션),t_prd_product_print_options(front/back_colrcnt),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000045,배경지,인쇄옵션,상품마스터:별색인쇄/코팅/커팅/접지(옵션),t_prd_product_processes(PROC_000007 family·코팅·커팅·접지),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000045,배경지,판형,상품마스터:파일사양_출력용지규격,"t_prd_product_plate_sizes(siz_cd, output_paper_typ_cd) / t_siz_sizes(work_*)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000045,배경지,자재,상품마스터:종이(필수),"t_prd_product_materials(mat_cd, usage_cd)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000045,배경지,공정,상품마스터:후가공(옵션)·박/형압(옵션),t_prd_product_processes(+param),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000045,배경지,묶음수,상품마스터:제작수량_건수(옵션),t_prd_product_bundle_qtys(bdl_qty),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000045,배경지,페이지룰,상품마스터:판수,t_prd_product_page_rules(page_min/max/incr),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000045,배경지,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,디지털인쇄 필수 차원(항상 needed)
+PRD_000045,배경지,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000045,배경지,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000045,배경지,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000045,배경지,가격엔진,상품마스터:가격공식 + 인쇄상품 가격표(260527),t_prd_product_price_formulas → t_prc_price_formulas → formula_components → price_components → component_prices(siz=판형),Y,price-engine,"원자합산형(PRF_DGP_A~F+COMP_PAPER, siz_cd=출력판형) 또는 고정가형(명함/포토카드). 견적 필수=항상 Y"
+PRD_000046,배경지,사이즈코드,상품마스터:사이즈(필수),t_prd_product_sizes / t_siz_sizes(cut_*),Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000046,배경지,도수,상품마스터:인쇄(옵션),t_prd_product_print_options(front/back_colrcnt),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000046,배경지,인쇄옵션,상품마스터:별색인쇄/코팅/커팅/접지(옵션),t_prd_product_processes(PROC_000007 family·코팅·커팅·접지),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000046,배경지,판형,상품마스터:파일사양_출력용지규격,"t_prd_product_plate_sizes(siz_cd, output_paper_typ_cd) / t_siz_sizes(work_*)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000046,배경지,자재,상품마스터:종이(필수),"t_prd_product_materials(mat_cd, usage_cd)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000046,배경지,공정,상품마스터:후가공(옵션)·박/형압(옵션),t_prd_product_processes(+param),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000046,배경지,묶음수,상품마스터:제작수량_건수(옵션),t_prd_product_bundle_qtys(bdl_qty),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000046,배경지,페이지룰,상품마스터:판수,t_prd_product_page_rules(page_min/max/incr),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000046,배경지,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,디지털인쇄 필수 차원(항상 needed)
+PRD_000046,배경지,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000046,배경지,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000046,배경지,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000046,배경지,가격엔진,상품마스터:가격공식 + 인쇄상품 가격표(260527),t_prd_product_price_formulas → t_prc_price_formulas → formula_components → price_components → component_prices(siz=판형),Y,price-engine,"원자합산형(PRF_DGP_A~F+COMP_PAPER, siz_cd=출력판형) 또는 고정가형(명함/포토카드). 견적 필수=항상 Y"
+PRD_000047,인쇄홍보물,사이즈코드,상품마스터:사이즈(필수),t_prd_product_sizes / t_siz_sizes(cut_*),Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000047,인쇄홍보물,도수,상품마스터:인쇄(옵션),t_prd_product_print_options(front/back_colrcnt),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000047,인쇄홍보물,인쇄옵션,상품마스터:별색인쇄/코팅/커팅/접지(옵션),t_prd_product_processes(PROC_000007 family·코팅·커팅·접지),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000047,인쇄홍보물,판형,상품마스터:파일사양_출력용지규격,"t_prd_product_plate_sizes(siz_cd, output_paper_typ_cd) / t_siz_sizes(work_*)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000047,인쇄홍보물,자재,상품마스터:종이(필수),"t_prd_product_materials(mat_cd, usage_cd)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000047,인쇄홍보물,공정,상품마스터:후가공(옵션)·박/형압(옵션),t_prd_product_processes(+param),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000047,인쇄홍보물,묶음수,상품마스터:제작수량_건수(옵션),t_prd_product_bundle_qtys(bdl_qty),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000047,인쇄홍보물,페이지룰,상품마스터:판수,t_prd_product_page_rules(page_min/max/incr),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000047,인쇄홍보물,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,디지털인쇄 필수 차원(항상 needed)
+PRD_000047,인쇄홍보물,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000047,인쇄홍보물,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000047,인쇄홍보물,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000047,인쇄홍보물,가격엔진,상품마스터:가격공식 + 인쇄상품 가격표(260527),t_prd_product_price_formulas → t_prc_price_formulas → formula_components → price_components → component_prices(siz=판형),Y,price-engine,"원자합산형(PRF_DGP_A~F+COMP_PAPER, siz_cd=출력판형) 또는 고정가형(명함/포토카드). 견적 필수=항상 Y"
+PRD_000048,인쇄홍보물,사이즈코드,상품마스터:사이즈(필수),t_prd_product_sizes / t_siz_sizes(cut_*),Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000048,인쇄홍보물,도수,상품마스터:인쇄(옵션),t_prd_product_print_options(front/back_colrcnt),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000048,인쇄홍보물,인쇄옵션,상품마스터:별색인쇄/코팅/커팅/접지(옵션),t_prd_product_processes(PROC_000007 family·코팅·커팅·접지),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000048,인쇄홍보물,판형,상품마스터:파일사양_출력용지규격,"t_prd_product_plate_sizes(siz_cd, output_paper_typ_cd) / t_siz_sizes(work_*)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000048,인쇄홍보물,자재,상품마스터:종이(필수),"t_prd_product_materials(mat_cd, usage_cd)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000048,인쇄홍보물,공정,상품마스터:후가공(옵션)·박/형압(옵션),t_prd_product_processes(+param),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000048,인쇄홍보물,묶음수,상품마스터:제작수량_건수(옵션),t_prd_product_bundle_qtys(bdl_qty),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000048,인쇄홍보물,페이지룰,상품마스터:판수,t_prd_product_page_rules(page_min/max/incr),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000048,인쇄홍보물,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,디지털인쇄 필수 차원(항상 needed)
+PRD_000048,인쇄홍보물,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000048,인쇄홍보물,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000048,인쇄홍보물,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000048,인쇄홍보물,가격엔진,상품마스터:가격공식 + 인쇄상품 가격표(260527),t_prd_product_price_formulas → t_prc_price_formulas → formula_components → price_components → component_prices(siz=판형),Y,price-engine,"원자합산형(PRF_DGP_A~F+COMP_PAPER, siz_cd=출력판형) 또는 고정가형(명함/포토카드). 견적 필수=항상 Y"
+PRD_000049,인쇄홍보물,사이즈코드,상품마스터:사이즈(필수),t_prd_product_sizes / t_siz_sizes(cut_*),Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000049,인쇄홍보물,도수,상품마스터:인쇄(옵션),t_prd_product_print_options(front/back_colrcnt),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000049,인쇄홍보물,인쇄옵션,상품마스터:별색인쇄/코팅/커팅/접지(옵션),t_prd_product_processes(PROC_000007 family·코팅·커팅·접지),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000049,인쇄홍보물,판형,상품마스터:파일사양_출력용지규격,"t_prd_product_plate_sizes(siz_cd, output_paper_typ_cd) / t_siz_sizes(work_*)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000049,인쇄홍보물,자재,상품마스터:종이(필수),"t_prd_product_materials(mat_cd, usage_cd)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000049,인쇄홍보물,공정,상품마스터:후가공(옵션)·박/형압(옵션),t_prd_product_processes(+param),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000049,인쇄홍보물,묶음수,상품마스터:제작수량_건수(옵션),t_prd_product_bundle_qtys(bdl_qty),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000049,인쇄홍보물,페이지룰,상품마스터:판수,t_prd_product_page_rules(page_min/max/incr),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000049,인쇄홍보물,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,디지털인쇄 필수 차원(항상 needed)
+PRD_000049,인쇄홍보물,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,엑셀 옵션 컬럼 값 존재
+PRD_000049,인쇄홍보물,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000049,인쇄홍보물,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000049,인쇄홍보물,가격엔진,상품마스터:가격공식 + 인쇄상품 가격표(260527),t_prd_product_price_formulas → t_prc_price_formulas → formula_components → price_components → component_prices(siz=판형),Y,price-engine,"원자합산형(PRF_DGP_A~F+COMP_PAPER, siz_cd=출력판형) 또는 고정가형(명함/포토카드). 견적 필수=항상 Y"
+PRD_000050,인쇄홍보물,사이즈코드,상품마스터:사이즈(필수),t_prd_product_sizes / t_siz_sizes(cut_*),Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000050,인쇄홍보물,도수,상품마스터:인쇄(옵션),t_prd_product_print_options(front/back_colrcnt),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000050,인쇄홍보물,인쇄옵션,상품마스터:별색인쇄/코팅/커팅/접지(옵션),t_prd_product_processes(PROC_000007 family·코팅·커팅·접지),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000050,인쇄홍보물,판형,상품마스터:파일사양_출력용지규격,"t_prd_product_plate_sizes(siz_cd, output_paper_typ_cd) / t_siz_sizes(work_*)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000050,인쇄홍보물,자재,상품마스터:종이(필수),"t_prd_product_materials(mat_cd, usage_cd)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000050,인쇄홍보물,공정,상품마스터:후가공(옵션)·박/형압(옵션),t_prd_product_processes(+param),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000050,인쇄홍보물,묶음수,상품마스터:제작수량_건수(옵션),t_prd_product_bundle_qtys(bdl_qty),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000050,인쇄홍보물,페이지룰,상품마스터:판수,t_prd_product_page_rules(page_min/max/incr),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000050,인쇄홍보물,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,디지털인쇄 필수 차원(항상 needed)
+PRD_000050,인쇄홍보물,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000050,인쇄홍보물,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000050,인쇄홍보물,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000050,인쇄홍보물,가격엔진,상품마스터:가격공식 + 인쇄상품 가격표(260527),t_prd_product_price_formulas → t_prc_price_formulas → formula_components → price_components → component_prices(siz=판형),Y,price-engine,"원자합산형(PRF_DGP_A~F+COMP_PAPER, siz_cd=출력판형) 또는 고정가형(명함/포토카드). 견적 필수=항상 Y"
+PRD_000051,인쇄홍보물,사이즈코드,상품마스터:사이즈(필수),t_prd_product_sizes / t_siz_sizes(cut_*),Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000051,인쇄홍보물,도수,상품마스터:인쇄(옵션),t_prd_product_print_options(front/back_colrcnt),Y,basedata,엑셀 옵션 컬럼 값 존재
+PRD_000051,인쇄홍보물,인쇄옵션,상품마스터:별색인쇄/코팅/커팅/접지(옵션),t_prd_product_processes(PROC_000007 family·코팅·커팅·접지),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000051,인쇄홍보물,판형,상품마스터:파일사양_출력용지규격,"t_prd_product_plate_sizes(siz_cd, output_paper_typ_cd) / t_siz_sizes(work_*)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000051,인쇄홍보물,자재,상품마스터:종이(필수),"t_prd_product_materials(mat_cd, usage_cd)",Y,basedata,디지털인쇄 필수 차원(항상 needed)
+PRD_000051,인쇄홍보물,공정,상품마스터:후가공(옵션)·박/형압(옵션),t_prd_product_processes(+param),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000051,인쇄홍보물,묶음수,상품마스터:제작수량_건수(옵션),t_prd_product_bundle_qtys(bdl_qty),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000051,인쇄홍보물,페이지룰,상품마스터:판수,t_prd_product_page_rules(page_min/max/incr),N,basedata,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000051,인쇄홍보물,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,디지털인쇄 필수 차원(항상 needed)
+PRD_000051,인쇄홍보물,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000051,인쇄홍보물,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000051,인쇄홍보물,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,엑셀 해당 옵션 미사용(N/A로 닫음)
+PRD_000051,인쇄홍보물,가격엔진,상품마스터:가격공식 + 인쇄상품 가격표(260527),t_prd_product_price_formulas → t_prc_price_formulas → formula_components → price_components → component_prices(siz=판형),Y,price-engine,"원자합산형(PRF_DGP_A~F+COMP_PAPER, siz_cd=출력판형) 또는 고정가형(명함/포토카드). 견적 필수=항상 Y"

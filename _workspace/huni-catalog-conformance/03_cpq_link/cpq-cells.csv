@@ -1,0 +1,145 @@
+prd_cd,product_group,axis,authority_source,target_table,needed,owner_inspector,verdict,evidence
+PRD_000016,엽서,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,MATCH,옵션그룹·옵션·옵션항목 적재·option_item→차원 100% 해소
+PRD_000016,엽서,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,MISSING,권위 제약(별색/접지/박/블리드 등) 존재하나 라이브 constraints 0행(디지털 전무)
+PRD_000016,엽서,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),Y,cpq-link,MISMATCH,권위=엽서봉투 1종(100x150) vs 라이브=봉투 5종 템플릿(OPP/트레싱/카드봉투)·묶음 내용 상이
+PRD_000016,엽서,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,Y,cpq-link,MATCH,5 addon→template 100% 해소(del_yn=N·selections 보유)·템플릿→추가상품 연결 정상
+PRD_000017,엽서,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,MATCH,옵션그룹·옵션·옵션항목 적재·option_item→차원 100% 해소
+PRD_000017,엽서,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,MISSING,권위 제약(별색/접지/박/블리드 등) 존재하나 라이브 constraints 0행(디지털 전무)
+PRD_000017,엽서,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),Y,cpq-link,MISSING,권위 추가상품(엽서봉투/봉투/케이스) 존재하나 라이브 addons 0행
+PRD_000017,엽서,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,Y,cpq-link,MISSING,추가상품 needed=Y이나 라이브 연결 템플릿 0(addon 미적재 동반)
+PRD_000018,엽서,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,MATCH,옵션그룹·옵션·옵션항목 적재·option_item→차원 100% 해소
+PRD_000018,엽서,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,MISSING,권위 제약(별색/접지/박/블리드 등) 존재하나 라이브 constraints 0행(디지털 전무)
+PRD_000018,엽서,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),Y,cpq-link,MISSING,권위 추가상품(엽서봉투/봉투/케이스) 존재하나 라이브 addons 0행
+PRD_000018,엽서,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,Y,cpq-link,MISSING,추가상품 needed=Y이나 라이브 연결 템플릿 0(addon 미적재 동반)
+PRD_000019,엽서,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,MISSING,권위 옵션성 컬럼 존재하나 라이브 option_groups 0행
+PRD_000019,엽서,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,MISSING,권위 제약(별색/접지/박/블리드 등) 존재하나 라이브 constraints 0행(디지털 전무)
+PRD_000019,엽서,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),Y,cpq-link,MISSING,권위 추가상품(엽서봉투/봉투/케이스) 존재하나 라이브 addons 0행
+PRD_000019,엽서,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,Y,cpq-link,MISSING,추가상품 needed=Y이나 라이브 연결 템플릿 0(addon 미적재 동반)
+PRD_000020,엽서,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,MISSING,권위 옵션성 컬럼 존재하나 라이브 option_groups 0행
+PRD_000020,엽서,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,MISSING,권위 제약(별색/접지/박/블리드 등) 존재하나 라이브 constraints 0행(디지털 전무)
+PRD_000020,엽서,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),Y,cpq-link,MISSING,권위 추가상품(엽서봉투/봉투/케이스) 존재하나 라이브 addons 0행
+PRD_000020,엽서,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,Y,cpq-link,MISSING,추가상품 needed=Y이나 라이브 연결 템플릿 0(addon 미적재 동반)
+PRD_000021,엽서,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,MISSING,권위 옵션성 컬럼 존재하나 라이브 option_groups 0행
+PRD_000021,엽서,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,MISSING,권위 제약(별색/접지/박/블리드 등) 존재하나 라이브 constraints 0행(디지털 전무)
+PRD_000021,엽서,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),Y,cpq-link,MISSING,권위 추가상품(엽서봉투/봉투/케이스) 존재하나 라이브 addons 0행
+PRD_000021,엽서,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,Y,cpq-link,MISSING,추가상품 needed=Y이나 라이브 연결 템플릿 0(addon 미적재 동반)
+PRD_000022,엽서,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,MISSING,권위 옵션성 컬럼 존재하나 라이브 option_groups 0행
+PRD_000022,엽서,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,MISSING,권위 제약(별색/접지/박/블리드 등) 존재하나 라이브 constraints 0행(디지털 전무)
+PRD_000022,엽서,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),Y,cpq-link,MISSING,권위 추가상품(엽서봉투/봉투/케이스) 존재하나 라이브 addons 0행
+PRD_000022,엽서,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,Y,cpq-link,MISSING,추가상품 needed=Y이나 라이브 연결 템플릿 0(addon 미적재 동반)
+PRD_000023,엽서,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,MISSING,권위 옵션성 컬럼 존재하나 라이브 option_groups 0행
+PRD_000023,엽서,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,MISSING,권위 제약(별색/접지/박/블리드 등) 존재하나 라이브 constraints 0행(디지털 전무)
+PRD_000023,엽서,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,N/A,needed=N(추가상품 표기 없음)
+PRD_000023,엽서,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,N/A,needed=N(추가상품 없음→템플릿 불요)
+PRD_000024,포토카드,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,MATCH,옵션그룹·옵션·옵션항목 적재·option_item→차원 100% 해소
+PRD_000024,포토카드,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,MISSING,권위 제약(별색/접지/박/블리드 등) 존재하나 라이브 constraints 0행(디지털 전무)
+PRD_000024,포토카드,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,N/A,needed=N(추가상품 표기 없음)
+PRD_000024,포토카드,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,N/A,needed=N(추가상품 없음→템플릿 불요)
+PRD_000025,포토카드,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,MATCH,옵션그룹·옵션·옵션항목 적재·option_item→차원 100% 해소
+PRD_000025,포토카드,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,MISSING,권위 제약(별색/접지/박/블리드 등) 존재하나 라이브 constraints 0행(디지털 전무)
+PRD_000025,포토카드,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,N/A,needed=N(추가상품 표기 없음)
+PRD_000025,포토카드,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,N/A,needed=N(추가상품 없음→템플릿 불요)
+PRD_000026,포토카드,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,MATCH,옵션그룹·옵션·옵션항목 적재·option_item→차원 100% 해소
+PRD_000026,포토카드,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,MISSING,권위 제약(별색/접지/박/블리드 등) 존재하나 라이브 constraints 0행(디지털 전무)
+PRD_000026,포토카드,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,N/A,needed=N(추가상품 표기 없음)
+PRD_000026,포토카드,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,N/A,needed=N(추가상품 없음→템플릿 불요)
+PRD_000027,접지카드,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,MATCH,옵션그룹·옵션·옵션항목 적재·option_item→차원 100% 해소
+PRD_000027,접지카드,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,MISSING,권위 제약(별색/접지/박/블리드 등) 존재하나 라이브 constraints 0행(디지털 전무)
+PRD_000027,접지카드,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,N/A,needed=N(추가상품 표기 없음)
+PRD_000027,접지카드,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,N/A,needed=N(추가상품 없음→템플릿 불요)
+PRD_000028,접지카드,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,MISSING,권위 옵션성 컬럼 존재하나 라이브 option_groups 0행
+PRD_000028,접지카드,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,MISSING,권위 제약(별색/접지/박/블리드 등) 존재하나 라이브 constraints 0행(디지털 전무)
+PRD_000028,접지카드,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,N/A,needed=N(추가상품 표기 없음)
+PRD_000028,접지카드,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,N/A,needed=N(추가상품 없음→템플릿 불요)
+PRD_000029,접지카드,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,MATCH,옵션그룹·옵션·옵션항목 적재·option_item→차원 100% 해소
+PRD_000029,접지카드,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,MISSING,권위 제약(별색/접지/박/블리드 등) 존재하나 라이브 constraints 0행(디지털 전무)
+PRD_000029,접지카드,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,N/A,needed=N(추가상품 표기 없음)
+PRD_000029,접지카드,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,N/A,needed=N(추가상품 없음→템플릿 불요)
+PRD_000030,접지카드,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,MISSING,권위 옵션성 컬럼 존재하나 라이브 option_groups 0행
+PRD_000030,접지카드,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,MISSING,권위 제약(별색/접지/박/블리드 등) 존재하나 라이브 constraints 0행(디지털 전무)
+PRD_000030,접지카드,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,N/A,needed=N(추가상품 표기 없음)
+PRD_000030,접지카드,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,N/A,needed=N(추가상품 없음→템플릿 불요)
+PRD_000031,명함,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,MATCH,옵션그룹·옵션·옵션항목 적재·option_item→차원 100% 해소
+PRD_000031,명함,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,MISSING,권위 제약(별색/접지/박/블리드 등) 존재하나 라이브 constraints 0행(디지털 전무)
+PRD_000031,명함,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,N/A,needed=N(추가상품 표기 없음)
+PRD_000031,명함,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,N/A,needed=N(추가상품 없음→템플릿 불요)
+PRD_000032,명함,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,MATCH,옵션그룹·옵션·옵션항목 적재·option_item→차원 100% 해소
+PRD_000032,명함,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,MISSING,권위 제약(별색/접지/박/블리드 등) 존재하나 라이브 constraints 0행(디지털 전무)
+PRD_000032,명함,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,N/A,needed=N(추가상품 표기 없음)
+PRD_000032,명함,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,N/A,needed=N(추가상품 없음→템플릿 불요)
+PRD_000033,명함,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,MATCH,옵션그룹·옵션·옵션항목 적재·option_item→차원 100% 해소
+PRD_000033,명함,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,MISSING,권위 제약(별색/접지/박/블리드 등) 존재하나 라이브 constraints 0행(디지털 전무)
+PRD_000033,명함,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,N/A,needed=N(추가상품 표기 없음)
+PRD_000033,명함,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,N/A,needed=N(추가상품 없음→템플릿 불요)
+PRD_000034,명함,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,MISSING,권위 옵션성 컬럼 존재하나 라이브 option_groups 0행
+PRD_000034,명함,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,MISSING,권위 제약(별색/접지/박/블리드 등) 존재하나 라이브 constraints 0행(디지털 전무)
+PRD_000034,명함,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,N/A,needed=N(추가상품 표기 없음)
+PRD_000034,명함,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,N/A,needed=N(추가상품 없음→템플릿 불요)
+PRD_000035,명함,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,MISSING,권위 옵션성 컬럼 존재하나 라이브 option_groups 0행
+PRD_000035,명함,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,MISSING,권위 제약(별색/접지/박/블리드 등) 존재하나 라이브 constraints 0행(디지털 전무)
+PRD_000035,명함,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,N/A,needed=N(추가상품 표기 없음)
+PRD_000035,명함,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,N/A,needed=N(추가상품 없음→템플릿 불요)
+PRD_000036,명함,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,MISSING,권위 옵션성 컬럼 존재하나 라이브 option_groups 0행
+PRD_000036,명함,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,MISSING,권위 제약(별색/접지/박/블리드 등) 존재하나 라이브 constraints 0행(디지털 전무)
+PRD_000036,명함,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,N/A,needed=N(추가상품 표기 없음)
+PRD_000036,명함,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,N/A,needed=N(추가상품 없음→템플릿 불요)
+PRD_000037,명함,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,MISSING,권위 옵션성 컬럼 존재하나 라이브 option_groups 0행
+PRD_000037,명함,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,MISSING,권위 제약(별색/접지/박/블리드 등) 존재하나 라이브 constraints 0행(디지털 전무)
+PRD_000037,명함,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,N/A,needed=N(추가상품 표기 없음)
+PRD_000037,명함,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,N/A,needed=N(추가상품 없음→템플릿 불요)
+PRD_000038,명함,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,MISSING,권위 옵션성 컬럼 존재하나 라이브 option_groups 0행
+PRD_000038,명함,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,MISSING,권위 제약(별색/접지/박/블리드 등) 존재하나 라이브 constraints 0행(디지털 전무)
+PRD_000038,명함,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,N/A,needed=N(추가상품 표기 없음)
+PRD_000038,명함,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,N/A,needed=N(추가상품 없음→템플릿 불요)
+PRD_000039,명함,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,MISSING,권위 옵션성 컬럼 존재하나 라이브 option_groups 0행
+PRD_000039,명함,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,MISSING,권위 제약(별색/접지/박/블리드 등) 존재하나 라이브 constraints 0행(디지털 전무)
+PRD_000039,명함,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,N/A,needed=N(추가상품 표기 없음)
+PRD_000039,명함,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,N/A,needed=N(추가상품 없음→템플릿 불요)
+PRD_000040,명함,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,MISSING,권위 옵션성 컬럼 존재하나 라이브 option_groups 0행
+PRD_000040,명함,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,MISSING,권위 제약(별색/접지/박/블리드 등) 존재하나 라이브 constraints 0행(디지털 전무)
+PRD_000040,명함,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,N/A,needed=N(추가상품 표기 없음)
+PRD_000040,명함,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,N/A,needed=N(추가상품 없음→템플릿 불요)
+PRD_000041,상품권,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,MATCH,옵션그룹·옵션·옵션항목 적재·option_item→차원 100% 해소
+PRD_000041,상품권,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,MISSING,권위 제약(별색/접지/박/블리드 등) 존재하나 라이브 constraints 0행(디지털 전무)
+PRD_000041,상품권,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,N/A,needed=N(추가상품 표기 없음)
+PRD_000041,상품권,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,N/A,needed=N(추가상품 없음→템플릿 불요)
+PRD_000042,상품권,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,MATCH,옵션그룹·옵션·옵션항목 적재·option_item→차원 100% 해소
+PRD_000042,상품권,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,MISSING,권위 제약(별색/접지/박/블리드 등) 존재하나 라이브 constraints 0행(디지털 전무)
+PRD_000042,상품권,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,N/A,needed=N(추가상품 표기 없음)
+PRD_000042,상품권,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,N/A,needed=N(추가상품 없음→템플릿 불요)
+PRD_000043,배경지,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,MISSING,권위 옵션성 컬럼 존재하나 라이브 option_groups 0행
+PRD_000043,배경지,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,MISSING,권위 제약(별색/접지/박/블리드 등) 존재하나 라이브 constraints 0행(디지털 전무)
+PRD_000043,배경지,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),Y,cpq-link,MISSING,권위 추가상품(엽서봉투/봉투/케이스) 존재하나 라이브 addons 0행
+PRD_000043,배경지,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,Y,cpq-link,MISSING,추가상품 needed=Y이나 라이브 연결 템플릿 0(addon 미적재 동반)
+PRD_000044,배경지,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,MISSING,권위 옵션성 컬럼 존재하나 라이브 option_groups 0행
+PRD_000044,배경지,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,MISSING,권위 제약(별색/접지/박/블리드 등) 존재하나 라이브 constraints 0행(디지털 전무)
+PRD_000044,배경지,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),Y,cpq-link,MISSING,권위 추가상품(엽서봉투/봉투/케이스) 존재하나 라이브 addons 0행
+PRD_000044,배경지,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,Y,cpq-link,MISSING,추가상품 needed=Y이나 라이브 연결 템플릿 0(addon 미적재 동반)
+PRD_000045,배경지,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,MISSING,권위 옵션성 컬럼 존재하나 라이브 option_groups 0행
+PRD_000045,배경지,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,MISSING,권위 제약(별색/접지/박/블리드 등) 존재하나 라이브 constraints 0행(디지털 전무)
+PRD_000045,배경지,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),Y,cpq-link,MISSING,권위 추가상품(엽서봉투/봉투/케이스) 존재하나 라이브 addons 0행
+PRD_000045,배경지,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,Y,cpq-link,MISSING,추가상품 needed=Y이나 라이브 연결 템플릿 0(addon 미적재 동반)
+PRD_000046,배경지,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,MISMATCH,옵션그룹 1개 실재하나 option_items 0(미완성)·차원 미참조
+PRD_000046,배경지,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,MISSING,권위 제약(별색/접지/박/블리드 등) 존재하나 라이브 constraints 0행(디지털 전무)
+PRD_000046,배경지,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,N/A,needed=N(추가상품 표기 없음)
+PRD_000046,배경지,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,N/A,needed=N(추가상품 없음→템플릿 불요)
+PRD_000047,인쇄홍보물,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,MATCH,옵션그룹·옵션·옵션항목 적재·option_item→차원 100% 해소
+PRD_000047,인쇄홍보물,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,MISSING,권위 제약(별색/접지/박/블리드 등) 존재하나 라이브 constraints 0행(디지털 전무)
+PRD_000047,인쇄홍보물,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,N/A,needed=N(추가상품 표기 없음)
+PRD_000047,인쇄홍보물,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,N/A,needed=N(추가상품 없음→템플릿 불요)
+PRD_000048,인쇄홍보물,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,MISSING,권위 옵션성 컬럼 존재하나 라이브 option_groups 0행
+PRD_000048,인쇄홍보물,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,MISSING,권위 제약(별색/접지/박/블리드 등) 존재하나 라이브 constraints 0행(디지털 전무)
+PRD_000048,인쇄홍보물,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,N/A,needed=N(추가상품 표기 없음)
+PRD_000048,인쇄홍보물,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,N/A,needed=N(추가상품 없음→템플릿 불요)
+PRD_000049,인쇄홍보물,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,MISSING,권위 옵션성 컬럼 존재하나 라이브 option_groups 0행
+PRD_000049,인쇄홍보물,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,Y,cpq-link,MISSING,권위 제약(별색/접지/박/블리드 등) 존재하나 라이브 constraints 0행(디지털 전무)
+PRD_000049,인쇄홍보물,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,N/A,needed=N(추가상품 표기 없음)
+PRD_000049,인쇄홍보물,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,N/A,needed=N(추가상품 없음→템플릿 불요)
+PRD_000050,인쇄홍보물,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,MISSING,권위 옵션성 컬럼 존재하나 라이브 option_groups 0행
+PRD_000050,인쇄홍보물,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,N,cpq-link,N/A,needed=N(제약 표기 없음)
+PRD_000050,인쇄홍보물,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,N/A,needed=N(추가상품 표기 없음)
+PRD_000050,인쇄홍보물,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,N/A,needed=N(추가상품 없음→템플릿 불요)
+PRD_000051,인쇄홍보물,옵션그룹,상품마스터:옵션성 컬럼(주문방법·후가공·별색·접지 택일),t_prd_product_option_groups(sel_typ_cd) / options / option_items(ref_dim_cd),Y,cpq-link,MISSING,권위 옵션성 컬럼 존재하나 라이브 option_groups 0행
+PRD_000051,인쇄홍보물,제약규칙,상품마스터:제약 주석(별표 *)·박 크기·가변 제한·블리드,t_prd_product_constraints(logic jsonb) / t_prd_products.constraint_json,N,cpq-link,N/A,needed=N(제약 표기 없음)
+PRD_000051,인쇄홍보물,추가상품,상품마스터:추가상품(옵션),t_prd_product_addons(tmpl_cd),N,cpq-link,N/A,needed=N(추가상품 표기 없음)
+PRD_000051,인쇄홍보물,추가상품 템플릿,상품마스터:추가상품(옵션)→SKU,t_prd_templates(base_prd_cd) + template_selections,N,cpq-link,N/A,needed=N(추가상품 없음→템플릿 불요)
