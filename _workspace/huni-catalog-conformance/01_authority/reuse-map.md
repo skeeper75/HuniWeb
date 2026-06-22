@@ -43,3 +43,48 @@
 
 - `conformance-checklist.csv` — 36상품 × 13축 = 468셀 전수(needed 자동 판정, 빈 셀 0). 위 캐시 조합으로 조립.
 - `authority-spec.md` · `domain-lens.md` — 위 출처를 디지털인쇄 스코프로 재구성.
+
+---
+
+## 6. 배치 1 확대 — 캘린더·포토북 (2026-06-22, 디지털인쇄 자(尺) 동형)
+
+> directive #2 준수: 새 .xlsx 파싱 0. 모집단·needed는 모두 기존 추출 캐시에서 측정.
+
+### 재사용 추출 캐시 (새 파싱 안 함)
+| 재사용 파일 | 용도 |
+|-------------|------|
+| `24_master-extract-260610/calendar-l1.csv` | 캘린더 5상품 distinct·옵션형 축(인쇄(필수)·캘린더가공(필수)·종이사양·출력판형) needed 측정 |
+| `24_master-extract-260610/design-calendar-l1.csv` | 캘린더 동일 5상품의 **가격포함** 버전(가격 컬럼·인쇄사양·페이지사양) — 도수/페이지룰/가격엔진 권위 보강 |
+| `24_master-extract-260610/photobook-l1.csv` | 포토북 1상품(세트). 내지/표지/제본 prefix 컬럼 → 반제품 역할축(내지=자재/도수/페이지·표지=자재/도수/공정·면지=자재/공정) 측정 |
+
+### 라이브 읽기전용 SELECT (모집단 확정 1회)
+| 쿼리 | 결과 |
+|------|------|
+| `t_prd_products` WHERE prd_nm ILIKE 포토북/캘린더 | 포토북 8건(PRD_000100~107, 본체1+반제품7)·캘린더 5건(PRD_000108~112) — 전부 del_yn=N |
+| `t_prd_product_price_formulas` LEFT JOIN (위 13 prd) | **전 13 prd frm_cd 미바인딩(none)** — 가격엔진 축 needed=Y 미충족 후보(인스펙터 점검 단서) |
+
+### 새로 만든 것 (append만)
+- `conformance-checklist.csv` += 13 prd × 13축 = 169행(기존 디지털 468행 보존). needed 자동 판정·빈 셀 0.
+- `authority-spec.md` §6·`domain-lens.md` §B·본 §6 — 캘린더/포토북 스코프 추가(디지털 자(尺) 재구성, 컬럼 구조 동일).
+
+## 7. 배치 2 확대 — 책자·문구·상품악세사리 (2026-06-22, 자(尺) 동형)
+
+> directive #2 준수: 새 .xlsx 파싱 0. 모집단·needed는 모두 기존 추출 캐시 + 라이브 prd_nm 매핑(1회).
+
+### 재사용 추출 캐시 (새 파싱 안 함)
+| 재사용 파일 | 용도 |
+|-------------|------|
+| `24_master-extract-260610/booklet-l1.csv` + `-meta.csv` | 책자 10상품 distinct·세트형 축(내지/표지 자재·도수·판형·페이지룰·제본/박형압 공정·옵션그룹) needed 측정·제약 별표(0건) 측정 |
+| `24_master-extract-260610/stationery-l1.csv` + `-meta.csv` | 문구 9상품·세트형+가격포함(`가격`·`구간할인적용테이블`) — 가격엔진 권위 보강·페이지사양 측정 |
+| `24_master-extract-260610/product-accessory-l1.csv` + `-meta.csv` | 상품악세사리 15상품·단순 부속물(사이즈+수량+`가격`만) — needed 최소 프로파일·추가상품축 Y 측정 |
+
+### 라이브 읽기전용 SELECT (모집단 확정 1회)
+| 쿼리 | 결과 |
+|------|------|
+| `t_prd_products` WHERE prd_nm IN (34 정제 상품명) | 34/34 전건 매칭(미매칭 0·중복 0). 책자 10·문구 9(떡메모지 책자 귀속)·악세 15 — 전부 del_yn=N |
+| `t_prd_product_price_formulas` LEFT JOIN (34 prd) | 바인딩 5(책자4 PRF_BIND_SUM·엽서북 PRF_PCB_FIXED)·미바인딩 29(MISSING 후보) |
+| og/constraints/proc/mat 카운트 (34 prd) | 옵션그룹 라이브 분포·제약 EXTRA(OPP접착봉투 3건) 단서 — 인스펙터 우선점검 입력 |
+
+### 새로 만든 것 (append만)
+- `conformance-checklist.csv` += 34 prd × 13축 = 442행(기존 637행 보존 → 전체 1,079행). needed 자동 판정·빈 셀 0.
+- `authority-spec.md` §7(GATE-1 정정 반영)·`domain-lens.md` §C·본 §7 — 책자/문구/상품악세사리 스코프 추가(자(尺) 동형).

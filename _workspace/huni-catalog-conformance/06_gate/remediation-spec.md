@@ -216,3 +216,90 @@
 | `dbm-load-builder` | R9 |
 
 **[HARD] 게이트는 명세까지.** 실 INSERT/UPDATE/DDL은 전부 인간 승인 후 위 트랙. search-before-mint(orphan comp·plate 마스터 재사용·신규 mint 최소).
+
+---
+
+# 배치1 — 포토북·캘린더 13상품 교정 명세 (게이트 확정 결함)
+
+> Phase 6 배치1 · hcc-conformance-gate · 2026-06-22 · 라이브 직접 재실측 확정분만. **실 COMMIT/DDL은 인간 승인.**
+> 클래스 A=상품별 구성요소(t_prd_product_*) 교정 가능 · 클래스 B=기초코드 공유마스터 충돌=보류(memory `catalog-conformance-remediation-scope`).
+> ★기초코드(t_mat/t_siz/t_prc 공유) 직접수정 금지 · webadmin 코드 직접수정 금지 · search-before-mint.
+
+## B1. 확정 결함 요약
+- 확정 결함: **클래스 A 14건 + 클래스 B 0건**(+ 횡단 정정 1·CONFIRM 6).
+- 돈크리티컬: **6건**(공식 미바인딩=견적 0원 차단 — 가장 비싼 등급). 자재오염 4·page_rule 7·판형 1·역할축 비대칭은 견적옵션/생산정보 결함(저~중).
+- **모두 상품별 구성요소(t_prd_product_*) 또는 신규 공식그래프(t_prc_* 신설)** → 클래스 A. 기존 공유마스터 값 변경 0 → 클래스 B(보류) 없음. 단 공식 신설은 가격 돈크리티컬이라 dbm-price-arbiter 심의+인간 승인 필수.
+
+## B2. 교정 명세 (결함·정답·방법·대상·돈영향·트랙·승인)
+
+| ID | 결함 | 권위 정답 | 교정 방법 | 대상 t_* | 돈영향 | dbmap 트랙 | 클래스 | 승인 |
+|----|------|-----------|-----------|----------|--------|-----------|:--:|:--:|
+| **R-B1-PRICE** | 6 prd 공식 미바인딩(100·108~112)·PRF_PHOTOBOOK*/PRF_CAL* 0행 | 설계 engine-design-photobook §2~5·calendar §2~6: 공식 신설+comp(일부)신설+단가행+바인딩 | full WIRE: t_prc_price_formulas 신설→formula_components 배선→component_prices 충전(재사용 comp는 충전됨)→t_prd_product_price_formulas 바인딩 | t_prc_price_formulas·_formula_components·_component_prices·t_prd_product_price_formulas | **차단(0원)** | dbm-price-arbiter(심의)→dbm-load-execution | A | ✔필수 |
+| **R-B1-OPT** | CPQ 옵션 레이어 전무(13 prd grp/opt/item 0) | domain-lens: 포토북=주문방법+표지타입택일·캘린더=주문방법+캘린더가공택일 | option_groups→options→option_items 설계·적재(표지타입→mat_cd·사이즈→proc_cd 판별차원 주입) | t_prd_product_option_groups/_options/_option_items | 차단가중(차원 미주입) | dbm-option-mapper→dbm-load-execution | A | ✔필수 |
+| **R-B1-CONSTR** | 제약 0행(6 prd needed=Y) | 권위 블리드·책등10/12/14/16·캘린더 제약주석 | JSONLogic constraints 설계·적재 | t_prd_product_constraints(.logic) | UI가드 부재 | dbm-cpq-option-mapping→dbm-load-execution | A | ✔필수 |
+| **R-B1-MAT-CONTAM** | 캘린더 자재오염 4(108/109/111/112 삼각대·링 USAGE.07) | materials=종이만·삼각대/링=공정축(캘린더가공/링칼라) | 삼각대(252/254)·링(253) 자재행 논리삭제(del_yn=Y) + 공정 재귀속(한 트랜잭션) | t_prd_product_materials(del)·t_prd_product_processes(insert) | 생산정보 오염 | dbm-axis-staged-load | A | ✔필수 |
+| **R-B1-PROC-CRAFT** | 108/109 링/삼각대 공정 미등록(자재 EXTRA의 짝) | 108=삼각대(그레이)+링블랙·109=삼각대(블랙)+링블랙 | 공정 INSERT(R-B1-MAT-CONTAM과 동일 트랜잭션·축이동) | t_prd_product_processes | 생산정보 누락 | dbm-axis-staged-load | A | ✔필수 |
+| **R-B1-PLATE-112** | 112 판형 304x629(SIZ_000292 작업판) | 출력용지규격 330x660=SIZ_000475(실재) | plate siz_cd 정정 SIZ_000292→SIZ_000475(search-before-mint·신규 mint 불요) | t_prd_product_plate_sizes | 단가차원(가격엔진 교차) | dbm-load-builder(가격 단가행 영향=dbm-price-arbiter 교차) | A | ✔필수 |
+| **R-B1-PAGE-CAL** | 캘린더 page_rule 0행(108~112) | 108=30P·109=26P·110=12P·111=13P·112=13P | page_rule 코드행 적재(고정 min=max vs 가변=Q-CAL-PAGE-SHAPE CONFIRM 선결) | t_prd_product_page_rules | 견적옵션(편집매수) | dbm-load-builder | A | ✔(CONFIRM 후) |
+| **R-B1-SEMI-ROLE** | 101~107 역할축(도수/판형/공정) 0행 — 본체 superset | 내지=양면·작업203·표지=단면·무광·면지=PUR | **교정 아님·구조 의도 확정 선행**: 본체집약 정상이면 N/A 재판정·멤버환원이 정합이면 역할축 환원 | t_prd_product_*(조건부) | (구조의존) | dbm-correctness-audit(의도 확정→환원/N/A 분기) | A | ✔(의도 확정 후) |
+| **R-GATE1** | checklist target_table `t_prd_products.constraint_json` 컬럼 부재(49행·디지털36+배치13) | 제약=t_prd_product_constraints.logic | checklist target_table 49행 정정(스키마 오류·데이터 결함 아님) | (산출물 checklist) | 없음(메타) | dbm-correctness-audit(횡단·checklist 권위 산출물=인간 확인) | A(메타) | ✔ |
+
+## B3. CONFIRM 큐 (결함 아님·인간 확정 — 임의 처리 금지)
+| ID | 모호 | 영향 |
+|----|------|------|
+| Q-PB-SUPERSET | 101~107 본체집약 superset 정상 vs 멤버환원 정합 | R-B1-SEMI-ROLE 12셀 verdict 분기(B-N1 합류) |
+| Q-CAL-PAGE-SHAPE | 캘린더 page_rule 고정(min=max) vs 편집기 가변 | R-B1-PAGE-CAL 적재값 |
+| Q-CAL-PLATE-112 | 304x629→330x660 정정 정합(가격 단가차원) | R-B1-PLATE-112 |
+| Q-CAL-PROC-EXTRA-110 | 110 타공이 권위누락인지 정당공정인지(111 동일) | 110/111 공정 EXTRA 판정 |
+| Q-PB-SETPRICE/PAGEBASE/MAT | 포토북 base24 묶음·base_min 시작점·표지타입↔mat_cd | R-B1-PRICE 단가행 정확성(돈크리티컬·잘못 확정 시 과대/과소) |
+| B-N4 반제품 고객노출 | 101~107 product-viewer 노출=dead-catalog vs 숨김 N/A | K6 BLOCKED 해소 후 |
+
+## B4. 인간 승인 큐 (우선순위)
+1. **[돈크리티컬·top] R-B1-PRICE** — 6 prd 공식 full WIRE. Q-PB-PAGEBASE/MAT/SETPRICE 컨펌 동반(잘못 적재 시 과대/과소). dbm-price-arbiter 심의 선행.
+2. **R-B1-PLATE-112** — 판형 정정(가격 단가차원·디지털 019 동형 선례). Q-CAL-PLATE-112 컨펌.
+3. **R-B1-MAT-CONTAM + R-B1-PROC-CRAFT** — 자재→공정 축이동 한 트랜잭션(생산정보).
+4. **R-GATE1** — checklist 49행 횡단 정정(메타·저위험·디지털 배치 공통).
+5. **R-B1-SEMI-ROLE / Q-PB-SUPERSET** — 구조 의도 확정 선행(교정 아님).
+6. R-B1-OPT/CONSTR/PAGE-CAL — 옵션·제약·페이지 적재(CONFIRM 후).
+
+> 라이브 COMMIT 0(이 게이트는 명세까지). 기초코드 공유마스터 직접수정 금지. 실 적재는 인간 승인 후 dbmap 트랙 위임.
+
+---
+
+# 배치2 — 책자10·문구9·악세15 (34상품) 교정 명세 (게이트 확정 결함)
+
+> Phase 6 배치2 · hcc-conformance-gate · 2026-06-23 · 라이브+코드 직접 재실측 확정분만. **실 COMMIT/DDL 인간 승인.**
+> ★기초코드(공유 마스터 t_mat/t_siz/t_prc 공통) 직접수정 금지·webadmin 코드(pricing.py) 직접수정 금지.
+> 클래스 A=상품별 구성요소(t_prd_product_*) 교정 / 클래스 B=공유 마스터·공식·코드 충돌(보류/별도 트랙).
+
+## B2.교정 명세 표
+
+| ID | 결함 | 권위 정답 | 교정 방법 | 대상 t_* | FK 위상 | 돈영향 | dbm 트랙 | 클래스 | 승인 |
+|----|------|-----------|-----------|----------|---------|--------|----------|--------|:--:|
+| **R-B2-094** | 094 silent 이중합산(단/양면 wildcard) | 단면=S1만·양면=S2만 (print_opt_cd 판별차원) | COMP_PCB_S1_20P 단가행 print_opt_cd=단면·S2_20P=양면 충전 + comp use_dims에 print_opt_cd 등재(둘 다 필수). 단가값 verbatim 불변. 30p variant(S1/S2_30P) 배선+페이지축 설계 | t_prc_component_prices(UPDATE)·t_prc_price_components.use_dims(UPDATE) | comp 차원 정의(공유) | **과대 +11.5K/장(단·+11K 양)** | dbm-price-arbiter→dbm-load-execution | **B**(공유 comp 차원·돈크리·최우선) | ✔ |
+| **R-B2-BIND** | 068~071 PRF_BIND_SUM=JUNGCHEOL(del=Y)만 misfire | 무선=MUSEON·PUR=PUR·트윈링=TWINRING(활성·proc_cd 통합 32행)·표지/내지 comp 합산 | PRF_BIND_SUM 재배선(상품별 제본 comp)+중철 오염 교정+표지/내지 신설. ★pricing.py del_yn 필터는 webadmin 코드(직접수정 금지·구조위험만 기록) | t_prc_formula_components(재배선)·신규 표지/내지 comp | 공식 그래프 변경(공유) | 과소/미완성가 | dbm-price-arbiter→dbm-load-execution | **B**(공유 공식·webadmin 코드 위험) | ✔ |
+| **R-B2-DL5** | 책자 사이즈 옵션→삭제 siz 5 dead link | A5(170)·A5세로(253)·A4가로(255) 활성 siz로 재포인트 또는 옵션 제거 | option_item.ref_key1을 활성 siz_cd로 교정(또는 해당 항목 del). SIZ_000172(활성)은 정상 | t_prd_product_option_items(068/069/071) | option_item→siz 참조 | 차단(견적불가) | dbm-option-mapper | **A**(상품별 option_item) | ✔ |
+| **R-B2-070MAT** | 070 PUR책자 자재 MISSING(용지비 누락) | 내지/표지종이=*별도설정(종이 옵션 다수) | t_prd_product_materials INSERT(형제 068/069/071 동형 종이 세트) | t_prd_product_materials(070) | mat_cd→t_mat 참조 | 차단(용지비 0) | dbm-axis-staged-load | **A**(상품별 materials) | ✔ |
+| **R-B2-MISS28** | MISSING 28(미바인딩/미가격 견적0원) | 책자=PRF_<제본>_SUM·문구=AC열 고정가 product_prices·악세=AC-1/AC-2 가격사슬·떡메모=PRF_TTEOKME_FIXED 바인딩 | engine-design-booklet/stationery/accessory 명세대로 공식 신설·바인딩·product_prices INSERT | t_prd_product_price_formulas·t_prd_product_prices·t_prc_*(신규) | 공식→comp→단가→바인딩 | 차단(견적0원) | dbm-load-execution(+price-arbiter 심의) | A(상품별 바인딩/가격)+B(신규 공유 comp) | ✔ |
+| **R-B2-ADDON** | 악세 001/002 addon 연결 OK이나 양 경로 가격 전무 | 자체 완제품가(product_prices)+addon 단가(template_prices) 양쪽 적재 | product_prices INSERT + template_prices INSERT(TMPL-000005/006) | t_prd_product_prices·t_prd_template_prices | template_prices→tmpl 참조 | 차단(양 경로 0원) | dbm-load-execution | A | ✔ |
+
+## B2.클래스 분리 (★기초코드 미수정 directive)
+
+- **클래스 A(상품별 구성요소 교정·즉시 가능)**: R-B2-DL5(option_item)·R-B2-070MAT(materials)·R-B2-MISS28 일부(상품별 바인딩·product_prices)·R-B2-ADDON. → 상품별 t_prd_product_* 한정. 기초코드 무관.
+- **클래스 B(공유 마스터·공식·코드 충돌·보류/별도 트랙)**:
+  - **R-B2-094**(돈크리 최우선이나 use_dims=comp 마스터 차원 정의=공유). 단가값 불변·차원 충전만이라 영향 좁으나 COMP_PCB_*를 쓰는 모든 공식에 print_opt_cd 차원이 추가됨 → 공유영향 검토 필수.
+  - **R-B2-BIND**(PRF_BIND_SUM=공유 공식·표지/내지 comp 신규=공유). pricing.py del_yn 필터 부재는 **webadmin 코드**(직접수정 금지·구조개선 별도 트랙·코드 PR은 인간).
+  - R-B2-MISS28 신규 공유 comp 부분.
+
+## B2.인간 승인 큐 (우선순위)
+
+1. **R-B2-094** — 돈크리티컬 silent 과대청구(양방향·경고없이 틀린값 성립=가장 위험). use_dims 변경 공유영향 검토 후 승인.
+2. **R-B2-BIND** — 068~071 misfire(과소/미완성가)·표지내지 누락. del_yn 코드위험 별도.
+3. **R-B2-DL5 / R-B2-070MAT** — 차단 결함(견적불가)·클래스 A 즉시 가능.
+4. **R-B2-MISS28 / R-B2-ADDON** — 견적0원 28+양경로. 명세는 engine-design-* 존재.
+
+## B2.codex 라우팅 처리 (reconcile 수렴)
+- **신규B 채택**: R-B2-094 교정범위에 **양방향 명시**(단면+양면 둘 다 print_opt_cd 충전 = S1·S2 각각 단/양면 판별차원). 단면만 고치면 양면 +11,000 잔존.
+- **신규A 라우팅(범위축소)**: del_yn 필터 부재=구조위험 사실이나 라이브 스캔 결과 formula_components 배선된 del_yn=Y comp는 **전 카탈로그 단 1건**(COMP_BIND_JUNGCHEOL→PRF_BIND_SUM)=배치2가 유일 노출 케이스 커버. 광범위 공통피해는 라이브 미입증 → 코드 구조개선은 webadmin 트랙(직접수정 금지).
+
+> 라이브 COMMIT 0(이 게이트는 명세까지). 기초코드 공유마스터·webadmin 코드 직접수정 금지. 실 적재는 인간 승인 후 dbmap 트랙 위임.

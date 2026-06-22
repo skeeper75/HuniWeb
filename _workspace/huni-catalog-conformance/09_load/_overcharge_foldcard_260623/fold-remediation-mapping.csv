@@ -1,0 +1,5 @@
+comp_cd,fold_method_authority,band_header_path_260527,needed_proc_cd,live_proc_nm,live_exists,proc_grp_token,use_dims_before,use_dims_after,price_rows,unit_price_change,status,blocking_reason
+COMP_FOLD_LEAF_3FOLD,3단접지,3단접지,PROC_000060,3단접지,YES,proc_grp:PROC_000056,"[""min_qty""]","[""proc_cd"",""min_qty"",""proc_grp:PROC_000056""]",48,NONE,INSERTABLE,
+COMP_FOLD_LEAF_4ACC,4단병풍접지(아코디언),4단병풍접지,PROC_000071,병풍접지,PARTIAL,proc_grp:PROC_000056,"[""min_qty""]","[""proc_cd"",""min_qty"",""proc_grp:PROC_000056""]",48,NONE,CONDITIONAL,"라이브 명칭=병풍접지(4단 한정 없음). 4단병풍접지 전용 코드 부재 — 인간 확인: PROC_000071 재사용 OK인지 vs §12 4단병풍접지 신규등록"
+COMP_FOLD_LEAF_4GATE,4단대문접지(게이트),4단대문접지,__PENDING_GATE__,(부재),NO,proc_grp:PROC_000056,"[""min_qty""]","[""proc_cd"",""min_qty"",""proc_grp:PROC_000056""]",48,NONE,BLOCKED,"대문접지/게이트 명칭 공정코드 라이브 마스터 전무 — §12 기초코드 등록 선행 필수(임의 채번 금지)"
+COMP_FOLD_LEAF_HALF,반접지,반접지,__PENDING_HALF__,(부재),NO,proc_grp:PROC_000056,"[""min_qty""]","[""proc_cd"",""min_qty"",""proc_grp:PROC_000056""]",48,NONE,BLOCKED,"반접지 명칭 공정코드 부재(PROC_000059=2단접지는 명칭 불일치) — §12 기초코드 등록 선행 또는 2단접지 매핑 인간 확인"

@@ -125,3 +125,52 @@
 | D-016-ADDON | PRD_000016 추가상품 | 권위=엽서봉투 1 vs 라이브=봉투 5종 묶음 | 견적에 권위 외 추가상품 노출/권위 항목 부재 | dbm-option-mapper |
 
 > ★ 연결 자체(polymorphic 해소·템플릿 실재)는 0 고아. 위 후보는 "연결의 내용·완성도" 문제이지 dead link 아님.
+
+---
+
+## 배치2 — 책자·문구·상품악세사리 연결 해소 (2026-06-23)
+
+> 스코프: 책자10·문구9·악세15(34 prd). 라이브 읽기전용. ★두 연결 해소 재실측.
+
+### B2.1 옵션→차원 (polymorphic ref_dim_cd) 해소율
+
+| ref_dim_cd | 의미 | 대상 차원 t_* | 키 | 참조 수 | 해소 | 고아(DEAD_LINK) |
+|------------|------|---------------|----|--------:|-----:|----------------:|
+| OPT_REF_DIM.01 | 사이즈 | t_siz_sizes(del_yn=N) | siz_cd=ref_key1 | 11 | 6 | **5** 🔴 |
+| OPT_REF_DIM.03 | 자재 | t_prd_product_materials | mat_cd=ref_key1, usage_cd=ref_key2 | 90 | 90 | 0 |
+| OPT_REF_DIM.04 | 공정 | t_prd_product_processes(=t_proc_processes) | proc_cd=ref_key1 | 21 | 21 | 0 |
+| OPT_REF_DIM.06 | 도수 | t_prd_product_print_options | opt_id=ref_key1::int | 16 | 16 | 0 |
+| OPT_REF_DIM.07 | 셋트 | t_prd_products | prd_cd=ref_key1 | 2 | 2 | 0 |
+| **합계** | | | | **140** | **135 (96.4%)** | **5** |
+
+- **고아 5건(DEAD_LINK) = 사이즈 A5 계열이 del_yn=Y 마스터행 참조:**
+  - PRD_000068 A5 → SIZ_000170(del=Y)
+  - PRD_000069 A5 → SIZ_000170(del=Y)
+  - PRD_000071 A5 → SIZ_000170 · A5세로 → SIZ_000253 · A4가로 → SIZ_000255 (3건 모두 del=Y)
+- **근본:** fn_chk_opt_item_ref 트리거가 INSERT 시점엔 활성행을 강제했으나, **이후 siz 마스터가 논리삭제**되며
+  option_item 참조가 dangling. polymorphic FK는 DB CASCADE 불가 → 적재 후 마스터 삭제가 dead link를 만든다.
+- 자재(90)·공정(21)·도수(16)·셋트(2)는 100% 해소. 094 엽서북 셋트구성=엽서북-내지(PRD_000095)/표지(096) 정상 참조.
+
+### B2.2 상품별 옵션→차원 해소 (옵션 보유 책자 4종)
+
+| prd_cd | 상품 | grp | item | 사이즈 고아 | 해소율 | 비고 |
+|--------|------|----:|-----:|------------:|-------:|------|
+| PRD_000068 | 중철책자 | 7 | 35 | 1 | 97.1% | A5(SIZ_000170 del=Y) dead. 내지/표지종이·인쇄·코팅·제본 정상 |
+| PRD_000069 | 무선책자 | 8 | 32 | 1 | 96.9% | A5 dead + 박/형압 10항목 정상 |
+| PRD_000071 | 트윈링책자 | 9 | 60 | 3 | 95.0% | A5·A5세로·A4가로 dead. 투명커버/링컬러(자재) 정상 |
+| PRD_000094 | 엽서북 | 8 | 13 | 0 | **100%** | 셋트구성(.07) 반제품 참조 포함 전건 해소 |
+
+> 070·072·077·082·088·097(책자6)·문구9·악세15 = 옵션항목 0(option_groups 미적재 또는 Test 잡음) → 해소 대상 없음.
+
+### B2.3 템플릿→추가상품 묶음 (악세=addon SKU)
+
+| 악세 prd | 상품 | base로 묶인 template(del=N) | 소비 본상품 | 연결 |
+|----------|------|------------------------------|-------------|------|
+| PRD_000001 | OPP접착봉투 | TMPL-000005(110x160 50장) | PRD_000016 프리미엄엽서 | ✅ MATCH |
+| PRD_000002 | OPP비접착봉투 | TMPL-000006(110x160 50장)·TMPL-000012(60x90 20장) | PRD_000016(TMPL-000006) | ✅ MATCH |
+| PRD_000003~015 (13) | 카드봉투류·금속/목재부속·리필잉크 | **없음** | — | **MISSING**(묶음 부재) |
+
+- **악세 addon 연결: 15개 중 2개(13%)만 살아있음.** 001·002만 template→본상품 addon 체인 완성(견적·주문 부착).
+  나머지 13개는 base_prd_cd로 묶은 template 자체가 없어 어느 본상품 addon에도 안 붙음.
+- **잡음:** TMPL-000004(봉투700x200,base 001,del=Y)·테스트 템플릿 3종(base 002,del=Y)은 논리삭제 — 활성 연결 아님.
+- 재현: `SELECT a.tmpl_cd,t.base_prd_cd,string_agg(DISTINCT a.prd_cd,',') FROM t_prd_product_addons a JOIN t_prd_templates t ON t.tmpl_cd=a.tmpl_cd WHERE t.base_prd_cd BETWEEN 'PRD_000001' AND 'PRD_000015' GROUP BY 1,2;`

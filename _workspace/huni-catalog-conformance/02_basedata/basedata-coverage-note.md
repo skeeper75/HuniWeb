@@ -30,3 +30,24 @@
 3. **자재 표기 정규화**: 권위 약어("아트300","백모조220")↔라이브 정식명("아트지 300g","백색모조지 220g")은 한글토큰+두께 매칭으로 동일 처리(g단위·"지" 접미 무시). 의미구분(투명/반투명) 미분리는 결함 유지(PRD_000019/25/39 라이브 mat_nm="PET"로 단일화 의심 → 게이트 재확인 권장).
 4. **페이지룰**: 권위 `판수` 컬럼값(15/12/8/6/4 등)이 낱장 상품에도 존재하나 domain-lens §9상 낱장은 잡음 → 체크리스트 needed(접지카드류 5건만 Y) 우선. 라이브 page_rules 36상품 전부 0행 → needed=Y 5건은 MISSING.
 5. **판형 needed 충돌**: authority-spec §4(비판형 needed=N) vs 체크리스트(판형 전부 needed=Y) — 037/050/051을 CONFIRM 처리(결함 아님·needed 재판정 사안).
+---
+
+## 배치1 커버리지 (포토북 100~107 · 캘린더 108~112) · 2026-06-22
+
+- **검사 셀:** 69셀(포토북 28 + 캘린더 41). checklist owner=basedata 중 배치1 needed 셀 전수 채움(빈 셀 0).
+- **반제품 역할축 한정 검사 적용:** 포토북 101~107은 domain-lens §B.1대로 역할축만(내지=자재/도수/판형/페이지·표지=자재/도수/공정·면지=자재/공정). 역할 외 축은 checklist needed=N이라 cells 미생성(정상).
+- **BLOCKED 셀:** 0건. 13상품 모두 라이브 존재(del_yn=N)·8축 자식행 배치 psql 전수 조회 성공.
+- **재실측 필요(게이트/codex 위임, 결함 아닌 verdict 분기):**
+  - 포토북 101~107 도수/판형/공정 MISSING 12셀: 세트 superset vs 멤버환원 구조 의도 미확정(Q-PB-SUPERSET). MISSING으로 기록했으나 구조정상이면 N/A 재판정.
+  - 캘린더 page_rule 5건: 적재 shape(고정 vs 가변) 미확정(Q-CAL-PAGE-SHAPE).
+  - PRD_000112 판형 MISMATCH·PRD_000110 공정 EXTRA: 도메인 정당성 codex 2차.
+
+---
+
+## 배치2 커버리지 (책자10·문구9·악세15 = 34상품 × 8축 = 272셀)
+
+- **검사 완료 272/272 (BLOCKED 0).** 라이브 8축 자식행 전수 실측(읽기전용 psql 2026-06-22), 권위=상품마스터 260610 캐시(booklet/stationery/product-accessory-l1.csv) 재사용·재파싱 0.
+- needed=Y 129셀(책자60·문구54·악세15) 전건 verdict 산출. needed=N 143셀=N/A로 닫음(인쇄옵션·묶음수·악세 7축 등 권위 미사용).
+- 권위 부재로 단정 불가한 셀은 **CONFIRM으로 정직 표기**(MISSING으로 날조 안 함): 만년다이어리 도수 3건·레더커버 판형/공정/페이지·떡메모지 page EXTRA 의심 등.
+- 자재 마스터 join은 t_mat_materials, 공정 마스터는 t_proc_processes(t_prc_processes 아님·실측 확인). 사이즈 마스터 t_siz_sizes.cut_* 조인.
+- BLOCKED 없음 — 전 셀 라이브 접근 성공.

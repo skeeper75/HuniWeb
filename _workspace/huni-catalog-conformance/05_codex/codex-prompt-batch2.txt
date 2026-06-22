@@ -1,0 +1,101 @@
+당신은 인쇄 자동견적 카탈로그의 "독립 2차 교차검증자"입니다. 한 인스펙터 팀이 작성한 결함 보드를
+독립으로 재검토합니다. 그들의 GO/NO-GO 판정은 제공되지 않습니다(독립성). 인쇄 도메인 지식과
+제공된 권위·라이브 사실만으로 스스로 판단하세요. 당신은 라이브 DB에 직접 접속할 수 없으니
+"제공된 라이브 실측 사실 + 권위 + 도메인 논리"의 정합만 판정하고, 불확실하면 CONFIRM/추정으로 표기하세요.
+
+== 배경 ==
+대상: 후니프린팅 라이브 DB의 책자10·문구9·상품악세사리15 = 34상품(배치2). 권위=상품마스터 엑셀(260610)+인쇄상품 가격표(260527).
+가격엔진=evaluate_price(단일 권위 알고리즘). 공식→formula_components→component_prices→단가행.
+삭제 권위=del_yn='Y'(논리삭제). 옵션→차원 연결=option_item.ref_key1→siz/proc/mat 마스터(polymorphic).
+addon→템플릿 연결=t_prd_product_addons.tmpl_cd→t_prd_templates.base_prd_cd.
+
+== 도메인 렌즈(권위 발췌) ==
+- [HARD] 자재(materials)=종이/소재 사양만. 링·투명커버·삼각대 등 부속물은 제본옵션/공정/표지옵션 컬럼(자재 아님)이 원칙.
+- [HARD] 부속물(악세사리)=완제 부속품. 사이즈(필수) 컬럼에 변형(색/길이)이 들어감. 가격=자기 고정가.
+- [HARD] PRICE=0은 항상 우리측 결함(RedPrinting은 0 반환 안 함). 미바인딩/미가격=견적 차단.
+- 인쇄면(단면/양면)은 가격 판별차원이어야 함. 같은 use_dims·print_opt_cd=NULL인 단/양면 comp 둘을 동시 배선하면
+  단/양면 선택과 무관하게 둘 다 와일드카드 매칭되어 "silent 이중합산"(경고 없이 틀린 합계로 성립).
+- pricing.py(evaluate_price)는 comp/단가행 조회 시 del_yn 필터를 적용하지 않는다(아래 S-CODE 참조).
+
+== 라이브 실측 사실(읽기전용 SELECT, 검증자가 독립 재실측 완료 2026-06-23) ==
+S-CODE. raw/webadmin/.../pricing.py 실코드 확인:
+  - 공식 구성요소 조회 = TPrcFormulaComponents.objects.filter(frm_cd=...)  ← del_yn 필터 없음
+  - 단가행 조회(_component_rows) = TPrcComponentPrices.objects.filter(comp_cd=...)  ← del_yn 필터 없음
+  - 즉 del_yn='Y'(논리삭제) comp·단가행도 가격 합산에 그대로 포함됨(코드 전체에 'del_yn' 문자열 0회).
+
+[쟁점1 — 엽서북 094 silent 이중합산]
+S1a. PRD_000094 엽서북 바인딩 공식=PRF_PCB_FIXED. 그 공식에 배선된 comp = COMP_PCB_S1_20P, COMP_PCB_S2_20P (2개).
+S1b. COMP_PCB_S1_20P·S2_20P·S1_30P·S2_30P 각 117행, **전 행 print_opt_cd=NULL**.
+S1c. S1=단면 의미, S2=양면 의미. use_dims는 둘 다 [siz_cd,min_qty](인쇄면 판별차원 부재).
+S1d. 30p variant(COMP_PCB_S1_30P/S2_30P)는 단가행 실재하나 공식에 미배선(orphan).
+S1e. 단가값: SIZ_000003·min_qty=2에서 S1=11,000 / S2=11,500(가격표 verbatim).
+
+[쟁점2 — DEAD_LINK 책자 사이즈 옵션]
+S2a. 책자 사이즈 옵션항목(option_item, ref_dim_cd=OPT_REF_DIM.01)이 가리키는 siz 마스터의 del_yn:
+  - PRD_000068 중철책자: SIZ_000172(N 활성) + SIZ_000170(Y 삭제)
+  - PRD_000069 무선책자: SIZ_000172(N) + SIZ_000170(Y 삭제)
+  - PRD_000071 트윈링책자: SIZ_000172(N) + SIZ_000170(Y) + SIZ_000253(Y) + SIZ_000255(Y) = 3건 삭제
+S2b. 삭제된 siz 마스터: SIZ_000170='A5(148x210mm)'·SIZ_000253='A5(210x148mm)'·SIZ_000255='A4(297x210mm)' 전부 del_yn=Y.
+  → 고객이 A5/A4를 옵션으로 고르면 ref_key1이 활성 siz로 환원 안 됨(dead link).
+
+[쟁점3 — del_yn='Y' comp 합산 포함]
+S3a. PRF_BIND_SUM(책자 068~071 바인딩)에 배선된 제본 comp = COMP_BIND_JUNGCHEOL(중철) 1개뿐. 그 comp del_yn='Y'(삭제).
+S3b. 제본 comp del_yn 전수: 활성(N)=COMP_BIND_TWINRING·SSABARI·CAL_WALL만. 나머지 삭제(Y)=JUNGCHEOL·MUSEON·PUR·HC_MUSEON·HC_TWINRING·CAL_DESK130/220/MINI.
+S3c. S-CODE에 의해 del_yn=Y인 JUNGCHEOL도 평가에 포함됨 → 068(중철)은 우연히 맞지만 069(무선)·070(PUR)·071(트윈링)도
+  자기 제본 comp(MUSEON/PUR/TWINRING)가 아닌 중철값(JUNGCHEOL)으로 매겨짐(misfire). 표지/내지 인쇄·용지 comp는 배선 0(미완성가).
+
+[쟁점4 — 악세 부속물 변형 축귀속(sizes vs materials)]
+S4a. PRD_000006 볼체인: t_prd_product_sizes 0행. materials 8행(전부 usage_cd=USAGE.07), 행 이름=
+  '볼체인 오렌지(3개1팩)'·'볼체인 핑크(3개1팩)'·…·'볼체인 화이트(3개1팩)' = 색상 변형 8종.
+S4b. 권위 상품마스터는 이 변형을 "사이즈(필수)" 컬럼에 8변형으로 둠. 라이브는 sizes 0·materials 8(색상 변형을 자재로 등록).
+S4c. 동형: 와이어링007(3변형)·천정고리008(1)·행택끈010(3)·우드거치대012(1)·우드봉013(3)·우드행거014(3)·리필잉크015(7색)
+  모두 sizes 0·materials N(USAGE.07). 봉투류(001~005·009·011)는 치수형이라 sizes 정상 등록(MATCH).
+S4d. 책자 071·082·088: 바인더링(화이트/블랙/메탈)·투명커버(유광/무광)를 materials(USAGE.05/07)에 등록(종이 외).
+
+[쟁점5 — Q-PA-ADDON 악세 이중역할]
+S5a. 엽서 PRD_000016의 t_prd_product_addons = 5행. 각 tmpl→base_prd_cd:
+  TMPL-000005→PRD_000001(OPP접착봉투)·TMPL-000006→PRD_000002(OPP비접착봉투)·TMPL-000009→PRD_000283(트레싱지봉투)·
+  TMPL-000010→PRD_000281(카드봉투화이트)·TMPL-000011→PRD_000282(카드봉투블랙).
+S5b. 악세 001/002의 자체 t_prd_product_prices=0행. t_prd_template_prices 전체=0행.
+  → 악세는 "자기 완제품가(product_prices)"와 "본상품 addon가(template_prices)" 양쪽 다 0(가격 전무).
+S5c. 악세 003~015는 어느 본상품 addon에도 base로 안 붙음(연결 자체 부재).
+
+== 인스펙터 결함 보드(배치2 발췌·판정 라벨 포함, GO/NO-GO 게이트 결론은 비공개) ==
+[BASEDATA]
+- 070 PUR책자 자재 MISSING(t_prd_product_materials 0행·동형 책자는 다수) = 종이비 누락→견적불가. [돈크리]
+- 071/082/088 자재 CONFIRM(링/투명커버를 materials USAGE.05/07에 귀속 — 자재오염인지 정당 슬롯인지 모호).
+- 악세 006/007/008/010/012/013/014/015 사이즈코드 CONFIRM(부속물 변형을 sizes 아닌 materials USAGE.07 등록 — 축귀속 모호).
+[CPQ]
+- B2-DL: 책자 068·069(A5 1건씩)·071(A5/A5세로/A4가로 3건) 사이즈 옵션이 del_yn=Y siz 마스터 참조 = DEAD_LINK(A5 선택 시 견적 차단).
+  디지털·배치1에서 0이던 dead link가 배치2에서 처음 출현.
+- 책자 6종+문구9 옵션그룹 MISSING(070은 "Test" 잡음1=실질0)·악세 003~015 addon 미연결 MISSING.
+- 악세 001 제약1행·001/002 옵션그룹 잔여(needed=N인데)=EXTRA 잡음.
+[PRICE]
+- DEF-PE-08(책자 068~071): PRF_BIND_SUM이 del_yn=Y JUNGCHEOL만 배선+표지/내지 comp 0행 = 무선/PUR/트윈링도 중철값 misfire+미완성가. [과소]
+- DEF-PE-09(책자 072/077/082/088): 미바인딩 full WIRE(공식·표지/내지 comp 신설 필요)=견적0원 차단.
+- ★DEF-PE-10(엽서북 094): S1_20P+S2_20P 둘 다 print_opt_cd=NULL→단/양면 silent 이중합산(+11,500/장 과대)+30p orphan(20p값으로 매겨짐). [과대·최위험]
+- DEF-PE-11(떡메모지 097)·DEF-PE-12(문구172~181)·DEF-PE-13(악세 봉투/우드11)·DEF-PE-14(악세 볼체인/와이어링/리필3): 전부 미바인딩/미가격=견적0원 차단.
+- Q-PA-ADDON: 악세는 자기 완제품가 + 본상품(엽서016) addon 이중역할(양립). 현재 양 경로 0행(가격 전무).
+
+== 검토 질문(당신의 임무) ==
+1. ★쟁점1(094 silent 이중합산): S1b(둘 다 print_opt_cd=NULL)+S1c(인쇄면 판별차원 부재)가 사실이면, 단면을 골라도 양면 단가가
+   함께 합산되어 +11,500원/장 과대청구가 "경고 없이 틀린 값으로 성립"하는가? 이게 진짜 돈크리티컬 과대청구인지 독립 판정.
+   30p orphan이 추가로 페이지축 판별불가(30p 주문도 20p 단가)인지도 판정.
+2. 쟁점2(DEAD_LINK 5건): S2a/S2b가 사실이면 A5/A4 사이즈 선택 시 옵션→차원 환원이 끊겨 견적 차단되는 dead link가 라이브
+   현시점에 유효한가? "활성 siz(SIZ_000172)는 정상이고 삭제 siz만 dead"라는 판정에 동의하는가?
+3. 쟁점3(del_yn comp 합산): S-CODE(del_yn 필터 부재)+S3이 사실이면, pricing.py가 삭제된 COMP_BIND_JUNGCHEOL을 실제 합산에 넣어
+   069/070/071이 중철값으로 misfire하는가? "del_yn=Y comp가 평가 제외될 것"이라는 반대 가설을 코드 근거로 기각/지지하라.
+4. ★false-positive 사냥: (a) 악세 부속물 변형(색/길이)을 materials USAGE.07에 둔 것이 sizes축 오등록(결함)인가, 아니면 정당한
+   인쇄 도메인 의미구분(부속물=물리 자재 변형)인가? (b) 책자 071/082/088의 바인더링/투명커버 materials 귀속이 자재 오염인가
+   정당 슬롯(usage 분리)인가? 인스펙터가 정당한 의미구분을 결함(CONFIRM)으로 과잉표기한 게 있으면 지목.
+5. 쟁점5(Q-PA-ADDON): S5a~S5c가 사실이면 악세가 "자체 완제품가 + 본상품 addon" 이중역할로 양립 가능한가? 인스펙터의
+   "양립 확인" 주장이 옳은가, 아니면 한 역할만 정당한가? 봉투류가 자기 product_prices도 addon template_prices도 둘 다 0인
+   현 상태의 돈영향(addon 경로 0원)을 옳게 봤는가?
+6. 인스펙터가 놓친 결함(누락된 오적재·끊긴 연결·빈 커버리지 셀)이 있는가? 인스펙터가 결함으로 분류한 것 중 false-positive가 있는가?
+
+== 출력 형식 ==
+쟁점별로:
+- [동의/불일치/추정]
+- 근거(제공된 S-사실/도메인 논리만 인용. 제공 안 된 코드·치수·prd_cd를 지어내지 말 것 — 모르면 "확인필요"로 표기)
+- (신규발굴/false-positive 있으면) 명시
+마지막에 "codex 종합 한 줄"(가장 위험한 결함 + 가장 의심스러운 false-positive).

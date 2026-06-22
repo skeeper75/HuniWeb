@@ -1,0 +1,4 @@
+action,proc_cd,proc_nm,upr_proc_cd,disp_seq,use_yn,del_yn,prcs_dtl_opt,note,reg_dt,authority_260527,s21_comp_cd,search_before_mint,confirm_id
+REUSE,PROC_000071,병풍접지,PROC_000056,15,Y,N,,,EXISTING,4단병풍접지(아코디언),COMP_FOLD_LEAF_4ACC,"사다리1단 정지=동일물 재사용(병풍=아코디언 표준명·4단은 페이지단수 직교)",CONF-FOLD-1
+INSERT,PROC_000106,4단대문접지,PROC_000056,19,Y,N,,,now(),4단대문접지(게이트),COMP_FOLD_LEAF_4GATE,"사다리1단 불가=명칭전무+PROC_000061(4단접지)는 단수만·PROC_000071(병풍)은 다른형태→신규 코드행 정당(기존테이블·신규컬럼0)",CONF-FOLD-2
+INSERT,PROC_000107,반접지,PROC_000056,20,Y,N,,1폴드 2패널(2단접지 PROC_000059와 별개),now(),반접지,COMP_FOLD_LEAF_HALF,"사다리1단 불가=명칭전무+PROC_000059(2단접지)는 별개공정(가격표 독립라벨·물리형태·의미오염)→신규 코드행 정당",CONF-FOLD-2

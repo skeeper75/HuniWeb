@@ -166,3 +166,122 @@ reconcile.md 큐 전건을 게이트가 라이브 최종 판정:
 | basedata 재현쿼리 | `bdl_unit_typ_cd` | 컬럼명 상이(`bdl_qty`만) | 재현 시 컬럼 확인 |
 | option_items | `opt_item_nm` | 컬럼 부재(`dtl_opt`·`ref_key1`) | 재현 쿼리 보정 |
 | price 보드 D-B | print_opt_cd 차원 충전으로 해소 | use_dims에 print_opt_cd 등재 **선행 필수**(현재 부재) | 교정 명세 R-K4c 반영 |
+
+---
+
+# 배치1 — 포토북(PRD_000100~107)·캘린더(PRD_000108~112) K1~K8 독립 검증
+
+> **Phase 6 배치1 — hcc-conformance-gate (생성≠검증)** · 2026-06-22 · 13상품·169셀(13×13축).
+> 라이브 psql 읽기전용 직접 SELECT(2026-06-22)·gstack 로그인 시도·생성자 주장 비신뢰. 모든 수치 verbatim.
+
+## B1.0 종합 판정 — **NO-GO** (조건부 BLOCKED 1건·구조 CONFIRM 동반)
+
+| 게이트 | 판정 | 한 줄 근거(게이트 직접 재실측) |
+|--------|------|------------------------------|
+| K1 커버리지 누락 0 | **PASS** | checklist 169행(13×13) 빈 셀 0(needed/target/axis 전건 채움)·needed Y93/N76·python CSV 정합 |
+| K2 기초데이터 정합 | **PASS(결함 입증)** | 112판형 304x629(SIZ_000292 작업판)·캘린더 삼각대/링 USAGE.07 자재오염·page_rule 108~112=0·101~107 역할축 전건 0행 — 결함 실재 확정 |
+| K3 CPQ 연결 무결성 | **PASS(vacuous)** | 13상품 전 grp/opt/item/constr/addon/tmpl=0·option_item 0행 → 해소 대상 0 = DEAD_LINK 0(연결 이전·"건강" 아님) |
+| K4 가격엔진 정합 | **FAIL** | 6 prd(100·108~112) bind_cnt=0·prodprice=0·PRF_PHOTOBOOK*/PRF_CAL* 공식 라이브 0행 — 견적 0원 차단 6건 실재(돈크리티컬) |
+| K5 종단 e2e 추적 | **BLOCKED(구조)** | 13/13 prd 공식 바인딩 0 → 옵션→차원→단가행→final_price 재현 불가(재현할 final_price 부재). 디지털 K5 FAIL과 달리 "틀린 값"이 아닌 "값 자체 부재" |
+| K6 라이브 화면 대조 | **BLOCKED** | `.env.local HUNI_ADMIN_PW` 로그인 재시도 실패(LOGIN_ERROR·여전히 /login·추측 금지) → 3원 대조·B-N4 반제품 고객노출 확인 불가. 조건부 |
+| K7 codex reconcile 수렴 | **PASS(미해결 0)** | 4쟁점 전건 합의·불일치 0·B-N2(111/112 링 공정) 라이브로 정정 후 기각·B-N1/B-N4 게이트 판정 완료 |
+| K8 생성≠검증 독립성 | **PASS** | 전 셀 게이트 자체 psql·information_schema 직접 확인(주장 인용 0)·codex 가설 라이브 재실측 후 채택/기각 |
+
+**단일 FAIL = NO-GO.** K4 FAIL → **종합 NO-GO.** K5는 구조적 BLOCKED(공식 부재로 e2e 불성립), K6은 정직한
+자격증명 BLOCKED(CONDITIONAL). NO-GO의 본질 = 포토북·캘린더 6 prd **공식 전무**(디지털 미바인딩보다 깊은
+full WIRE 미충족) + CPQ 옵션 레이어 전(全) 미적재 + 세트 역할축 비대칭(superset). "검사 오류"가 아니라
+**라이브가 권위 엑셀에 아직 못 미침**(round-13 역전·라이브=교정 대상).
+
+## B1.1 K1 — 커버리지 누락 0 · **PASS**
+- python csv 파싱(임베드 콤마 안전): batch1 169행 = 13상품 × 13축. 빈 needed/target_table/axis = **0**.
+- needed Y=93·N=76. 13 distinct 축. `constraint_json` target 13행(전부 제약규칙 축) → 디지털 36 + 배치1 13 = **49행**(reconcile B-A2 정합).
+- cells.csv 127셀 emit(basedata 69·cpq 52·price 6) + N/A-closed = checklist needed 정합(반제품은 역할 외 축 N/A 축소).
+
+## B1.2 K2 — 기초데이터 정합 · **PASS(결함 입증)** (게이트 직접 SELECT)
+| 표본 | 인스펙터 주장 | 게이트 재실측 | 일치 |
+|------|--------------|--------------|:--:|
+| 112 판형 | 304x629 작업판(SIZ_000292)·정답 330x660(SIZ_000475) | `SIZ_000292·OUTPUT_PAPER_TYPE.03·work 304x629`·`SIZ_000475=330x660 실재` | ✅ |
+| 캘린더 자재오염 | 108/109/111/112 삼각대·링 USAGE.07 혼입 | 108=삼각대(그레이)MAT_000252+링블랙253·109=삼각대(블랙)254+링253·111=링253·112=링253 전부 USAGE.07 | ✅ |
+| 캘린더 공정 | 108/109 링/삼각대 공정 미등록 | 108=수축포장만·109=수축포장만(보드 "109=0행"은 부정확하나 **링 공정 누락은 일치**) | ✅(부분정정) |
+| page_rule | 108~112 미적재(0행)·100=24/150/2·101=0 | 108~112 전건 0행·100=24/150/2·101=0행 | ✅ |
+| 반제품 역할축 | 101~107 도수/판형/공정/자재 전건 0(본체 superset) | 101~107 po/plate/proc/mat 전부 0·본체 100=2/11/2/7 | ✅ |
+- **게이트 정정(인스펙터 미세 오류)**: 보드 "109 processes=0행"은 실측 **수축포장 1행**. 결함 본질(링/삼각대 공정 누락)은 불변 → 판정 영향 없음. basedata-cells 109 공정 evidence 문구만 보정 권고.
+- **110 타공 EXTRA(D-CAL-PROC-EXTRA-110)**: 110=PROC_000079(타공) 실재·권위 캘린더가공 빈칸. 111도 타공 보유 → 엽서캘/벽걸이 고리타공 도메인 정당 가능성 높음. **CONFIRM 유지**(결함 단정 안 함).
+
+## B1.3 K3 — CPQ 연결 무결성 · **PASS(vacuous clean)**
+- 13상품 전 prd: grp/opt/item/constr/addon/tmpl 모두 0행(직접 SELECT). option_items batch1 전체 0행.
+- 해소할 polymorphic ref 0건 → DEAD_LINK 0이나 **"연결 이전"**(codex B-N3 정합·"건강 아님"). 적재 후 fn_chk_opt_item_ref 재검증 필수(게이트 노트).
+
+## B1.4 K4 — 가격엔진 정합 · **FAIL** (돈크리티컬 차단 6건)
+- 6 prd(100·108·109·110·111·112) `bind_cnt=0·prodprice_cnt=0`(직접 SELECT)·`PRF_PHOTOBOOK*/PRF_CAL*` 공식 **라이브 0행**.
+- evaluate_price source=NONE → lenient 0원·strict None → **견적 0원 차단**([[huni-widget-red-price-never-zero]] 위반). 6건 전건 라이브 재현.
+- **디지털과 차이(깊이↑)**: 디지털 10건은 comp orphan 실재(공식 신설+바인딩)였으나, 배치1은 **공식 자체 0행** → 공식 신설 + (일부)comp 신설 + 단가행 충전 + 바인딩 full WIRE. 단 재사용 comp 단가행은 충전 확인(비결함):
+  COMP_BIND_CAL_DESK130/220/MINI=각 6·WALL=24·BIND_PUR=8·COAT_MATTE=92·PAPER=56·PRINT_DIGITAL_S1=212(직접 SELECT) → mint 범위 축소.
+
+## B1.5 K5 — 종단 e2e 추적 · **BLOCKED(구조적)**
+- 13/13 prd 공식 바인딩 0(직접 count) → `옵션→차원→단가행→final_price`에서 **final_price 산출 경로 자체 부재**.
+- 디지털 K5(FAIL=틀린 값으로 성립)와 본질 다름: 배치1은 **재현할 살아있는 가격이 없음**(차단). 골든은 "설계 명세상 기대값"만 추적 가능(e2e-golden-trace.md 배치1 섹션). 라이브 정합 e2e는 공식 적재 후 재실행.
+
+## B1.6 K6 — 라이브 화면 대조 · **BLOCKED (CONDITIONAL)**
+- gstack browse로 `/admin/login/` 접속(200)·`HUNI_ADMIN_ID`+`HUNI_ADMIN_PW` 입력 후 클릭 → **여전히 /login·LOGIN_ERROR**(인증 실패 재확인). HUNI_ADMIN_PW stale(memory `catalog-conformance-remediation-scope` 일치).
+- **[HARD] 추측 로그인 금지** → product-viewer 12편집탭·B-N4(101~107 반제품 고객노출) 3원 대조 미수행.
+- 증거: `captures/B1-K6-login-blocked.png`(pw input type=password 마스킹 확인·비밀값 비노출).
+- **정직한 자격증명 BLOCKED = CONDITIONAL**(NO-GO 가중 안 함·미해소 추적). 인계: 유효 PW 갱신 후 우선 = 112판형 화면·캘린더 자재슬롯(삼각대/링 표시)·반제품 101~107 고객노출 여부.
+
+## B1.7 K7 — codex reconcile 수렴 · **PASS(미해결 0)**
+- 4쟁점(B-A1~B-A4d) 전건 합의·불일치 0. 게이트 라이브 최종 판정:
+  - **B-N2(111/112 링 공정 누락 후보)** → 라이브 재실측 **111=타공+트윈링제본·112=트윈링제본** → codex 가설 **기각**(링 공정 누락은 108/109 국한). codex의 검증자-제공-사실(S4) 한계發 부분오판·환각 아님.
+  - **B-N1(역할 스코프 전역부착)** → 본체 100 공정 무광+PUR 혼재 확정 → Q-PB-SUPERSET 합류(구조 의도 CONFIRM·교정 아닌 판정 선행).
+  - **B-N4(반제품 고객노출 dead-catalog)** → 101~107 use_yn=Y/del_yn=N(논리 active)이나 **고객노출 여부=K6 BLOCKED로 미확인** → 유효 PW 후 product-viewer 확인 큐.
+- codex 환각 0건. 가설은 라이브 검증 전 사실 병합 안 함.
+
+## B1.8 K8 — 생성≠검증 독립성 · **PASS**
+- 전 게이트 셀을 게이트 자체 psql/information_schema로 직접 재실측(인스펙터·codex 주장 인용 0). GATE-1(constraint_json 부재)·6 prd 미바인딩·공식 0행·자재오염·판형·역할축·page_rule·CPQ 0행·comp 단가행 전부 직접 SELECT verbatim.
+
+## B1.9 횡단 정정 — GATE-1 (constraint_json 컬럼 부재) · 처리 완료
+- 게이트 직접 확인: `information_schema` `t_prd_products`=**24컬럼·constraint 없음**. 제약 권위=`t_prd_product_constraints.logic`(실재).
+- checklist `target_table`의 `t_prd_products.constraint_json` 표기는 **스키마 오류**(데이터 결함 아님). 디지털 36 + 배치1 13 = **49행** 횡단 정정 대상.
+- **처리**: 49행 target_table을 `t_prd_product_constraints.logic`(또는 `(prd_cd,rule_cd) 신규행`)으로 정정 권고 → remediation-spec R-GATE1(인간 승인·dbm-correctness-audit). 본 게이트는 명세까지(checklist 직접 수정 보류=권위 산출물·인간 확인).
+
+---
+
+# 배치2 — 책자10·문구9·악세15 (34상품) K1~K8 독립 검증
+
+> **Phase 6 배치2 — hcc-conformance-gate (생성≠검증)** · 2026-06-23 · 34상품·442셀(34×13축).
+> 게이트가 라이브 psql + pricing.py 직접 재실측(인스펙터/codex 주장 비신뢰). 라이브 읽기전용 SELECT·DB 미적재.
+> 대상 prd: 책자 068·069·070·071·072·077·082·088·094·097 / 문구 172~179·181 / 악세 001~015.
+
+## B2.K — K1~K8 판정표
+
+| 게이트 | 판정 | 게이트 직접 재실측 증거 |
+|--------|------|-------------------------|
+| **K1 커버리지 누락 0** | ✅ **PASS** | 3 cells.csv 배치2 부분 = basedata 272(8축)+cpq 136(4축)+price 34(1축) = **442 = 34×13**. 빈 verdict 0(awk 검사). checklist 배치2 442행·축별 34 균일. |
+| **K2 기초데이터 정합** | ✅ **PASS** | 표본 재실측 일치: 070 PUR책자 materials=0(형제 068=26·069=13·071=49·072=4 대비 결함 확정·돈크리)·008 천정고리 use_yn=N(EXCLUDED 정당)·악세 006~015 sizes=0·materials N(USAGE.07 변형). 인스펙터 판정과 100% 일치. |
+| **K3 CPQ 연결 무결성** | ✅ **PASS** | DEAD_LINK 5건 직접 재현: 068×1(SIZ_000170 del=Y)·069×1(170)·071×3(170/253/255 전부 del=Y)·SIZ_000172(del=N)=정상공존. 094=3 size item·dead 0. 고아 참조 정확히 5건. |
+| **K4 가격엔진 정합** | ❌ **FAIL(NO-GO 사유)** | ① 094 PRF_PCB_FIXED=S1_20P+S2_20P 둘 다 print_opt_cd=NULL·use_dims=[siz_cd,min_qty]→silent 이중합산 라이브+코드 실증. ② pricing.py del_yn **0회**(L239·L450 필터 부재)→COMP_BIND_JUNGCHEOL(del=Y)이 PRF_BIND_SUM 유일 배선=068~071 합산 misfire 코드 실증. ③ MISSING 28 bind=0·pp=0 견적차단. |
+| **K5 종단 e2e 추적** | ❌ **FAIL(돈크리 입증)** | 094 evaluate_price 합산로직 독립 재계산(오차0): SIZ_000003@min2 단면 정답 11,000 vs 엔진 22,500=**+11,500/장**·양면 정답 11,500 vs 22,500=**+11,000/장**. 양방향 과대청구 silent. (MISSING 28은 BLOCKED=재현할 값 없음) |
+| **K6 라이브 화면 대조** | ⛔ **BLOCKED(자격증명)** | `.env.local HUNI_ADMIN_PW` stale — gstack 로그인 거부("사용자 이름/비밀번호 오류"). 배치1과 동일. 추측 로그인 금지(HARD)→정직 BLOCKED. 동일 자격증명 BLOCKED 증거=captures/B1-K6-login-blocked.png(배치2도 같은 stale 키·로그인 거부 화면 동일). |
+| **K7 codex reconcile 수렴** | △ **CONDITIONAL** | 합의 4/5 고신뢰(094·DEAD_LINK·JUNGCHEOL·Q-PA-ADDON 전부 라이브/코드 실증)·codex 환각 0·신규B(양면 +11,000) 라이브 채택·신규A(del_yn 공통결함) 1건 노출로 범위축소. **미해결 1=쟁점4 축귀속**(K6 의존). |
+| **K8 생성≠검증 독립성** | ✅ **PASS** | 전 핵심 결함 게이트 자체 SQL/코드/재계산으로 재현(인용 아님): 094 wiring·unit_price·del_yn grep·DEAD_LINK join·evaluate_price 합산 재현 모두 본 세션 직접 실측. |
+
+## B2.종합 판정 — **NO-GO** (K4·K5 FAIL)
+
+- **단일 FAIL = NO-GO.** K4(가격엔진)·K5(종단)가 FAIL → 배치2 종단 정합 **NO-GO**.
+- BLOCKED 1(K6 자격증명·정직)·CONDITIONAL 1(K7 축귀속 K6 의존). NO-GO 주사유는 K4/K5의 확정 결함.
+- **NO-GO ≠ 작업 실패.** 게이트가 돈크리티컬 silent 과대청구(094 양방향)와 misfire(JUNGCHEOL)를 라이브+코드로 독립 비준 = 게이트 역할 정상 수행. 이 결함들이 교정 명세로 라우팅됨.
+
+## B2.확정 결함 요약 (게이트 비준)
+
+| ID | 결함 | 판정 | 돈영향 | 클래스 | 증거 |
+|----|------|------|--------|--------|------|
+| DEF-PE-10 | 094 엽서북 silent 이중합산 | 확정 | **과대 +11,500/장(단면)·+11,000/장(양면)** | A→B 경계* | 라이브 wiring+코드+재계산 |
+| DEF-PE-08 | 068~071 PRF_BIND_SUM JUNGCHEOL(del=Y) misfire | 확정 | 과소/미완성가 | **B(공유 comp/공식)** | 코드 del_yn 부재+배선 |
+| B2-DL(5) | 책자 사이즈 옵션→삭제 siz dead link | 확정 | 차단(견적불가) | A(상품별 option_item) | join 재현 5건 |
+| DEF-PE-09/11/12/13/14 | MISSING 28(미바인딩/미가격) | 확정 | 차단(견적0원) | A 다수+B 일부 | bind=0·pp=0 |
+| K2-070 | PUR책자 자재 MISSING | 확정 | 차단(용지비 누락) | A(상품별 materials) | 형제 대비 0행 |
+
+> *094 교정=print_opt_cd 충전(comp 단가행 UPDATE)은 공유 comp(COMP_PCB_*)를 건드리나 단가값 불변·차원 충전만. use_dims는 comp 마스터(공유)→클래스 B 경계. 상품별이 아니라 comp 차원 정의 변경이므로 인간 승인+공유영향 검토 필요.
+
+## B2.미해결 (K6 의존)
+- **쟁점4(b) 책자 071/082/088 링/투명커버 materials 귀속**: 라이브 USAGE.05(투명커버 유광/무광)·USAGE.07(링 화이트/블랙/메탈·D링)=종이(USAGE.01/02/03)와 분리 슬롯 확인. **자재오염 vs 정당 옵션슬롯 확정은 product-viewer 화면에서 USAGE.05/07이 옵션처럼 쓰이는지 봐야 함 → K6 BLOCKED로 미해결.**
+- **쟁점4(a) 악세 006~015 변형 sizes vs materials**: 라이브 006=8 색상변형(볼체인 오렌지~화이트 '3개1팩')·materials USAGE.07·sizes 0 확정. 방향=결함(색상=판매변형축≠소재사양)·정답축(sizes vs 신규 옵션축) 확정은 화면 확인 권장 → K6 의존.
