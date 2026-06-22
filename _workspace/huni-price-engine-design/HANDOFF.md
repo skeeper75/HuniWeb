@@ -63,19 +63,27 @@
 - Q-CAL-BIND-DELYN(WALL 통합 사용 vs DESK130/220/MINI del_yn=Y 부활)·Q-CAL-FIN(가공 add-on 개당 ×수량 vs 정액)·Q-CAL-PROC-INJECT·Q-CAL-DESK130·Q-CAL-PLATE(와이드 SIZ_292↔인쇄비 SIZ_077)·Q-CAL-PKG·Q-CAL-ENVELOPE(캘린더봉투 PRD_000005 addon vs 독립).
 - 실 적용=PRF_CAL_* 5공식 신설·formula_components 배선·product_price_formulas 바인딩·COMP_CALOPT_STAND 단가행·OPV 채번. 제본비 단가행 무변경(이미 .01 verbatim). 전부 인간 승인 후 dbm-load-execution/dbm-price-arbiter 위임.
 
+**포토북(GO·차단 아님·10번째 종단):**
+- ★Q-PB-PAGEBASE(돈크리티컬): 소프트커버 base_min=4 vs 하드 24(라이브 page_rule 부모만 24/150/2 저장)·per2p 증분 시작점 가름(잘못하면 소프트 페이지 과소/과대청구) → 인간 컨펌.
+- ★G-PB-PAGE(돈크리티컬·캘린더 G-CAL-PAGE 동형): 페이지 곱은 per2p(내지비)에만·base24 금지·부수는 둘 다 곱. 누락 시 150P를 15,000에 과소(정답 46,500=3.1배).
+- ★G-PB-PRODPRICE(돈크리티컬): base24를 product_prices INSERT 금지(FORMULA 우회 silent·라이브 0행 자동충족)·GP-2/캘린더/악세사리 동형.
+- Q-PB-MAT(표지자재 MAT_005/006/007 전건 del_yn=Y·BIND_PUR도 del_yn=Y·가격 무관이나 적재 전 활성화/재매핑)·Q-PB-SOFT8(10x10 소프트 row8 공란=GC-PB-11 BLOCKED·추측 금지)·Q-PB-COAT/FACE(표지 무광코팅 단가행·면지 가격기여)·Q-PB-DSC(수량구간할인 0행 확인).
+- 실 적용=PRF_PHOTOBOOK_SUM 공식 1 신설·comp2(BASE[siz,mat]/PAGE[siz]) 신설·base24 12행(1 BLOCKED)/per2p 4행 단가행 verbatim·부모 PRD_000100 바인딩(product_prices 금지). 인쇄/용지/제본/코팅 재사용(mint0). 인간 승인 후 dbm-load-execution/dbm-price-arbiter 위임.
+
 **디지털인쇄:** 박 동판 정액(차선A qty=1 격리 vs B 정액 prc_typ 신설)·인쇄면 통합 단가행 병합·G-7 옵션 자동주입.
 **아크릴:** CA-1 미러 합류(mat_cd 판별차원 선결·돈크리티컬)·CA-4 후가공 개당/×수량·CA-3 카라비너 신설.
 **공통:** webadmin pricing.py = read-only(엔진 코드 직접 수정 금지).
 
 ## 이번 세션 결정 (relitigate 금지)
 
-- 실사·현수막 검증 재개 → Phase4(hpe-validator E1~E7 GO)·Phase5.5(codex high·divergence 0) 완료 → **GO 확정·메모리 박제**([[huni-price-engine-design-harness]]).
-- codex 부가발견 DV-SB1(GC-S7 "280,000"/"350,000" 셀 표기 모순) → 350,000 통일 정정 완료(가격결론 무영향).
-- CLAUDE.md §18 변경이력에 실사·현수막 GO 추가·"하네스 초기 구성" 행은 `CHANGELOG.md`로 이동(최근 3건 유지).
-- effort high 유지(이전 세션 결정·effortLevel medium→high·codex-review.sh effort 인자).
+- 포토북 설계(이전 세션 Phase 1~3까지·HANDOFF 미반영 stale)를 **Phase 4 검증부터 재개** → hpe-validator E1~E7 전건 PASS(차단0·보정0·LOW2)·hpe-codex-validator Phase5.5 codex high 7/7·divergence 0 → **GO 확정·CLAUDE.md §18·CHANGELOG·메모리·HANDOFF 박제·커밋 244b376**.
+- **★inline 공식화 가능 vs 정찰가 BLOCKED 분기 기준 확립[HARD]**: 캘린더 inline=비정수해→BLOCKED·포토북 inline=row17 명문 산식+per2p cost-driven→공식화. **"inline이 단가행 산식으로 정수·일관 재현되면 FORMULA·안 되면 정찰가 BLOCKED"** = 두 "가격포함" 시트로 확립된 결정 기준(디자인캘린더 Q-CAL-GOLDEN 결판에 적용).
+- 스티커 행을 CLAUDE.md §18 최근 3건에서 `CHANGELOG.md`로 이동(포토북·캘린더·악세사리 유지).
+- effort high 유지(effortLevel·codex-review.sh effort 인자).
 
 ## 건드리지 말 것 (confirmed-good)
 
 - **단가행 값 전부 verbatim 보존**(전 상품군 공통·실 교정/배선은 인간 승인 후 dbmap 위임).
-- 확정 GO 산출: 디지털 `04_validation/regate-verdict-digitalprint.md`·아크릴 `gate-verdict-acrylic.md`·실사 `gate-verdict-silsa-banner.md`·codex reconcile 3종.
+- 확정 GO 산출(10종단): 디지털 `04_validation/regate-verdict-digitalprint.md`·아크릴/실사/문구/책자/굿즈/스티커/악세사리/캘린더/**포토북** `gate-verdict-*.md`·codex reconcile 10종.
 - 실사·현수막 본체 라이브 상태(29 PRF·28상품 1:1 바인딩·동형결합 13→7 COMMIT 완료) — 이미 정합·건드리지 말 것.
+- 포토북 골든 GC-PB-1~10(허용오차 0·권위 CSV verbatim)·신규 mint 결판(공식1+comp2·search-before-mint 10연속)·base24 internalize(책자 full분해와 정반대) — 검증·codex 합의 완료·재논의 금지.
