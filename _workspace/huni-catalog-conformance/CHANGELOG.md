@@ -5,6 +5,29 @@
 
 ---
 
+## 2026-06-23 (4) — 교정 실행 단계 진입: K6 PASS + R-GP4-1 굿즈 base 라이브 COMMIT
+
+검증 종료 후 인간 승인(굿즈 GP-1만 먼저)으로 교정 실행 시작.
+
+**K6 해소(전 5배치 BLOCKED→PASS):** `.env.local` 자격증명 갱신 → product-viewer
+gstack 로그인 SUCCESS(이전 stale 판정은 당시 `.env.local` 값 오류였음). 화면축 3원 대조 8상품 불일치 0·과대청구
+교정분(027 접지·094 엽서북) silent-sum 차단이 화면에 반영 확인. 종합 verdict 불변(화면축이 역전 없이
+독립 재확인). 산출=`06_gate/k6-screen-recheck-260623.md`+captures.
+
+**R-GP4-1 굿즈 GP-1 base 라이브 COMMIT(되돌리지 말 것):** 단일고정가 26행 `t_prd_product_prices`
+INSERT(상품마스터 C열 단가 verbatim). 견적 0→정상 실증(카드거울 qty10=25,000·캔버스 qty3=174,000·
+말랑포카 qty10=140,000). DRY-RUN PASS·멱등(PK prd_cd+apply_ymd·ON CONFLICT DO NOTHING)·물리
+백업·undo 보유(`09_load/_gp1_base_260623/`). 기초코드 마스터 무접촉·단가 0변경·search-before-mint.
+
+★로드 실행기 독립 적발: 반팔티(PRD_000206)·후드티(PRD_000209)가 checklist 옵션그룹=N 오분류였으나
+엑셀 권위에 색상×사이즈 variant 존재 → **G-GP-5 위반 위험**(product_prices 선점=FORMULA 영영 우회)으로
+적재 보류·R-GP4-5 라우팅. 적재 26 / 보류 2.
+
+**잔여 교정(미실행):** 실사 A-프리셋 R-B3-PRICE(arbiter 모델정립)·아크릴20 R-B3-1(Q-ACR-MISSING20)·
+GP-2 FORMULA R-GP4-5·R-GP4-2~4·CPQ MISS — 전부 모델정립/CONFIRM 선행.
+
+---
+
 ## 2026-06-23 (3) — ★전 카탈로그 11시트 종단 완료 + 배치4(goods-pouch 98 prd) CONDITIONAL GO
 
 마지막 잔여 시트 goods-pouch 종단 → **전 11시트 종단 정합 검증 완료**. checklist 누계 3,198 데이터행·
@@ -112,7 +135,7 @@ R-GP4-3(판형 정리)·R-GP4-4(자재 행단위 정규화) / 클래스 B=GP-2 F
 - **R4 COMP_COAT_GLOSSY 0행** — 유광 과소.
 
 ### 블로커 / 다음 시작점
-- **K6 gstack BLOCKED**: `.env.local HUNI_ADMIN_PW`·CLAUDE.md "test1234" 모두 라이브 인증 불일치. **유효 PW 갱신 후 product-viewer 3원 대조 재실행** 필요(추측 로그인 금지).
+- **K6 gstack BLOCKED**: `.env.local HUNI_ADMIN_PW`·CLAUDE.md "[REDACTED]" 모두 라이브 인증 불일치. **유효 PW 갱신 후 product-viewer 3원 대조 재실행** 필요(추측 로그인 금지).
 - 교정 실행(R1~R9)은 인간 승인 후 dbmap 트랙 위임(본 하네스는 검증+명세까지).
 - 전 상품 확장: 동일 자(尺)로 나머지 10시트 전파 가능(디지털인쇄 파일럿 완주).
 

@@ -1,0 +1,5 @@
+-- undo.sql — §21 R-GP4-1 역연산. COMMIT 복구용.
+-- 적재한 26행만 정확히 삭제(apply_ymd=2026-06-10). 백업 0행이므로 결과=원복.
+DELETE FROM t_prd_product_prices
+ WHERE apply_ymd='2026-06-10' AND prd_cd IN ('PRD_000185','PRD_000196','PRD_000205','PRD_000210','PRD_000211','PRD_000212','PRD_000219','PRD_000223','PRD_000224','PRD_000225','PRD_000235','PRD_000236','PRD_000237','PRD_000248','PRD_000251','PRD_000253','PRD_000256','PRD_000257','PRD_000258','PRD_000259','PRD_000260','PRD_000263','PRD_000265','PRD_000266','PRD_000272','PRD_000275');
+-- (대안 복원) INSERT INTO t_prd_product_prices SELECT * FROM bak_t_prd_product_prices_gp1base_20260623;

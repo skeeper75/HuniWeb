@@ -126,7 +126,7 @@ SELECT DISTINCT frm_cd FROM t_prc_formula_components WHERE comp_cd='COMP_COAT_GL
 
 - gstack browse로 `https://huni-admin-production.up.railway.app/admin/login/` 접속 성공.
 - `.env.local HUNI_ADMIN_ID`(=admin) + `HUNI_ADMIN_PW`(13자) 입력 → POST 200(302 아님) + Django 오류
-  "관리자 계정의 사용자 이름과 비밀번호를 입력해주세요"(인증 실패). CLAUDE.md note "test1234"도 불일치.
+  "관리자 계정의 사용자 이름과 비밀번호를 입력해주세요"(인증 실패). CLAUDE.md note "[REDACTED]"도 불일치.
 - **[HARD] 추측 로그인 금지** → product-viewer 12편집탭 진입 불가 → 엑셀↔DB↔화면 3원 대조 미수행.
 - 증거: `captures/K6-login-blocked.png`(비밀번호 필드 마스킹·비밀값 비노출 확인).
 - **정직한 자격증명 BLOCKED** = CONDITIONAL(접근 불가 사유 명시). K6은 NO-GO 사유로 가중하지 않되 미해소 추적.

@@ -105,8 +105,12 @@
 - 생성≠검증 입증 누적: 배치2 094 양방향·배치3 실사 A1+8,000·배치4 자재100%오염 기각 등 게이트 독립 적발/정정
 - 실 COMMIT 0(전 교정 인간 승인 후 dbmap 위임). 단가 verbatim 불변·기초코드 마스터 불변 원칙 준수
 
+## ★교정 실행 단계 진입 (2026-06-23)
+- **K6 PASS (해소)**: `.env.local` 갱신된 자격증명(.env.local) 갱신 → product-viewer gstack 로그인 SUCCESS. 전 5배치 K6 BLOCKED→**PASS 상향**. 화면축 8상품 3원 대조 불일치 0·과대청구 교정분(027 접지/094 엽서북) silent-sum 차단 화면 반영 확인. 산출=`06_gate/k6-screen-recheck-260623.md`. (이전 "[REDACTED] stale" 판정은 오류였음)
+- **R-GP4-1 굿즈 GP-1 base 라이브 COMMIT 완료 (되돌리지 말 것)**: 단일고정가 **26행** `t_prd_product_prices` INSERT(상품마스터 C열 verbatim·견적 0→정상: 카드거울 qty10=25,000·캔버스 qty3=174,000·말랑포카 qty10=140,000). DRY-RUN PASS·멱등(PK+ON CONFLICT DO NOTHING)·백업·undo 보유(`09_load/_gp1_base_260623/`). ★G-GP-5 가드로 반팔/후드티(206/209) 보류=색상×사이즈 variant 적발(FORMULA 우회 방지)→R-GP4-5. 기초코드 마스터 무접촉·단가 0변경.
+- **잔여 교정(미실행·선행 필요)**: 실사 A-프리셋 R-B3-PRICE(dbm-price-arbiter 모델정립)·아크릴20 R-B3-1(Q-ACR-MISSING20 확정)·GP-2 FORMULA R-GP4-5(반팔/후드티 포함·CPQ 동반)·R-GP4-2~4·CPQ MISS.
+
 ## 미해결/블로커
-- **HUNI_ADMIN_PW stale** — K6 product-viewer 3원 대조 디지털+배치1 2연속 BLOCKED. 갱신 후 일괄 재실행.
 - **CONFIRM 큐 6건** 인간 확정 대기 — 적재값이 여기 종속(Q-PB-SUPERSET·Q-CAL-PAGE-SHAPE·Q-CAL-PLATE-112·Q-CAL-PROC-EXTRA-110·Q-PB-SETPRICE류·B-N4 반제품 고객노출)
 - **인스펙터 미세 정정**: basedata "109 공정=0행"은 실측 수축포장 1행(본질 불변·문구만)
 
@@ -114,9 +118,10 @@
 - ★**전 11/11 시트 종단 완료**: 디지털인쇄(파일럿)+배치1+배치2+배치3(=NO-GO)·배치4(=CONDITIONAL GO). checklist 3,198 데이터행·246 prd·빈 셀 0.
 - 검증·교정명세까지 완료. 실 COMMIT 0(전 교정 인간 승인 후 dbmap 위임).
 
-## 다음 세션 시작점 (검증 단계 종료 → 교정 실행 단계)
-전 카탈로그 종단 정합 검증 완료. 다음은 **인간 승인 후 교정 실행**(검증 아님):
-1. **HUNI_ADMIN_PW 갱신** → K6 product-viewer 3원 대조를 전 5배치 누적 일괄 재실행(현재 유일 미해소 게이트·5연속 stale).
-2. **교정 실행 우선순위(인간 승인 큐)**: ★배치4 R-GP4-1(굿즈 GP-1 base 적재=98상품 견적0 해소·최대 임팩트) → 배치3 R-B3-PRICE(실사 A-프리셋 과대청구) → 배치3 R-B3-1(아크릴20 미바인딩) → 배치1·2 잔여(094 보류·DL5 등). 전부 dbmap(`dbm-load-execution`/`dbm-axis-staged-load`) 위임·단가 verbatim 불변·기초코드 마스터 불변.
-3. **CONFIRM 큐** 인간 확정(굿즈 NO_AUTHORITY5 권위 공란·가공 개당vs1회·구수 가격축 등).
-권위 종합=`06_gate/conformance-final-summary.md`. 시트별 verdict·누적 인간승인큐·누락0 커버리지 수록.
+## 다음 세션 시작점 (교정 실행 단계 진행 중)
+검증 종료·K6 PASS·R-GP4-1(굿즈 base 26행) COMMIT 완료. 다음 교정(인간 승인·선행 필요):
+1. **실사 A-프리셋 과대청구 R-B3-PRICE** — dbm-price-arbiter 모델정립(프리셋행 vs 면적 catch-all) 선행 → 공유 comp COMP_POSTER_ARTPRINT_PHOTO 4상품 영향 SELECT → 프리셋행(7000/7000/12000 verbatim) 추가 COMMIT. 돈크리.
+2. **아크릴20 미바인딩 R-B3-1** — Q-ACR-MISSING20(고정가형 vs 공식형) 인간 확정 선행 → 바인딩+필요시 고정단가 적재.
+3. **GP-2 FORMULA R-GP4-5**(반팔/후드티 206/209 포함·색상×사이즈 variant) — CPQ 옵션레이어 동반(dbm-cpq-option-mapping). G-GP-5 준수(product_prices 선점 금지·FORMULA만).
+4. R-GP4-2(굿즈 할인 ACR 재바인딩)·R-GP4-3/4(판형/자재 v03 진원)·R-B3-BUNDLE·CPQ MISS·CONFIRM 큐(굿즈 NO_AUTHORITY5 등).
+전부 dbmap 위임·단가 verbatim·기초코드 마스터 불변. 권위 종합=`06_gate/conformance-final-summary.md`·교정명세=`06_gate/remediation-spec-batch{3,4}.md`.

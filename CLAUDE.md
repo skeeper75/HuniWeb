@@ -290,7 +290,7 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 **산출물 루트:** `_workspace/huni-catalog-conformance/` (01_authority·02_basedata·03_cpq_link·04_price_engine·05_codex·06_gate·_meta). 누락 0의 자=`01_authority/conformance-checklist.csv`(전 상품×12축). 자격증명 `.env.local RAILWAY_DB_*`(읽기전용 SELECT)·`HUNI_ADMIN_*`(gstack 읽기 탐색만). codex 헬퍼=`hqv-codex-cross-verify/scripts/codex-review.sh` 재사용.
 
-**변경이력:** 최신: 2026-06-23 ★전 카탈로그 11시트 종단 완료(3,198행·246prd·누락0) — 배치4 goods-pouch 98prd CONDITIONAL GO(바인딩0/98 견적0·판형85 EXTRA·자재오염 행단위·K6만 BLOCKED). 디지털·배치1~3=NO-GO. 검증 종료→교정실행단계(인간승인 후 dbmap). 종합=`06_gate/conformance-final-summary.md` → `_workspace/huni-catalog-conformance/CHANGELOG.md`
+**변경이력:** 최신: 2026-06-23 교정 실행 진입 — K6 PASS(.env.local 자격증명 갱신·전5배치 해소·3원 불일치0) + R-GP4-1 굿즈 GP-1 base 26행 라이브 COMMIT(견적0→정상·verbatim·멱등·undo·G-GP-5 가드로 반팔/후드티 보류). 전11시트 종단완료(3,198행 누락0)·잔여 교정=실사A프리셋/아크릴20/GP-2(선행필요) → `_workspace/huni-catalog-conformance/CHANGELOG.md`
 
 ## 22. Harness: Huni-RE-Verify (RedPrinting 위젯/SDK 역공학 재검증 + 런타임 동등성 검증 · codex high 교차)
 
