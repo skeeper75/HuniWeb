@@ -122,10 +122,11 @@
 - ★**전 11/11 시트 종단 완료**: 디지털인쇄(파일럿)+배치1+배치2+배치3(=NO-GO)·배치4(=CONDITIONAL GO). checklist 3,198 데이터행·246 prd·빈 셀 0.
 - 검증·교정명세까지 완료. 실 COMMIT 0(전 교정 인간 승인 후 dbmap 위임).
 
-## 다음 세션 시작점 (교정 실행 단계 진행 중)
-검증 종료·K6 PASS·R-GP4-1(굿즈 base 26행) COMMIT 완료. 다음 교정(인간 승인·선행 필요):
-1. **실사 A-프리셋 과대청구 R-B3-PRICE** — dbm-price-arbiter 모델정립(프리셋행 vs 면적 catch-all) 선행 → 공유 comp COMP_POSTER_ARTPRINT_PHOTO 4상품 영향 SELECT → 프리셋행(7000/7000/12000 verbatim) 추가 COMMIT. 돈크리.
-2. **아크릴20 미바인딩 R-B3-1** — Q-ACR-MISSING20(고정가형 vs 공식형) 인간 확정 선행 → 바인딩+필요시 고정단가 적재.
-3. **GP-2 FORMULA R-GP4-5**(반팔/후드티 206/209 포함·색상×사이즈 variant) — CPQ 옵션레이어 동반(dbm-cpq-option-mapping). G-GP-5 준수(product_prices 선점 금지·FORMULA만).
-4. R-GP4-2(굿즈 할인 ACR 재바인딩)·R-GP4-3/4(판형/자재 v03 진원)·R-B3-BUNDLE·CPQ MISS·CONFIRM 큐(굿즈 NO_AUTHORITY5 등).
-전부 dbmap 위임·단가 verbatim·기초코드 마스터 불변. 권위 종합=`06_gate/conformance-final-summary.md`·교정명세=`06_gate/remediation-spec-batch{3,4}.md`.
+## 다음 세션 시작점 → ★`HANDOFF.md` 참조 (권위 restart 포인터)
+교정 실행 단계 진행 중. 다음 세션은 `_workspace/huni-catalog-conformance/HANDOFF.md`를 먼저 읽고 재개
+(다음 시작점·미해결/블로커·이번 세션 결정·건드리지 말 것·핵심 경로 수록).
+
+요약: 실사 RC 교정 중 — RC-2 일반현수막 파일럿 COMMIT 완료. 다음 후보(권장순): ① RC-5 아크릴/폼보드
+단가교정(즉시·돈크리·권위=정답) ② RC-2 나머지 6 현수막류(CPQ 선등록 선행) ③ RC-1 프리셋(opt_cd 모델).
+실행 체인=load-builder DRY-RUN→validator R1~R6→load-executor COMMIT. 단가 verbatim·기초코드 마스터 불변.
+권위 종합=`06_gate/conformance-final-summary.md`·실사 모델=`04_price_engine/silsa-price-structure-model.md`.
