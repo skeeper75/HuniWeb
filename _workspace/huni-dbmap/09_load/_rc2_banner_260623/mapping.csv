@@ -1,0 +1,17 @@
+op,target_table,comp_cd,comp_price_id,field,current_value,new_value,verbatim_price,frm_cd,addtn_yn,disp_seq,note,provenance
+update,t_prc_price_components,COMP_POSTEROPT_BANNER_NORMAL_PROC_CUTEDGE,,use_dims,[],"[""opt_cd"", ""opt_grp:OPT_000003""]",,,,,열재단 판별차원 충전(빈 차원 제거),rc2-design-design.md §2 CUTEDGE
+update,t_prc_price_components,COMP_POSTEROPT_BANNER_NORMAL_PROC_DTAPE,,use_dims,[],"[""opt_cd"", ""opt_grp:OPT_000003""]",,,,,양면테입 판별차원 충전,rc2-design §2 DTAPE
+update,t_prc_price_components,COMP_POSTEROPT_BANNER_NORMAL_PROC_BONGSEW,,use_dims,[],"[""opt_cd"", ""opt_grp:OPT_000003""]",,,,,봉미싱 판별차원 충전,rc2-design §2 BONGSEW
+update,t_prc_price_components,COMP_POSTEROPT_BANNER_NORMAL_ADD_QBANG_4,,use_dims,"[""opt_cd"",""min_qty"",""opt_grp:OPT_000018""]","[""opt_cd"", ""opt_grp:OPT_000004""]",,,,,큐방 opt_grp 정정(018 오설정→004),rc2-design §2 QBANG
+update,t_prc_price_components,COMP_POSTEROPT_BANNER_NORMAL_ADD_STRING_4,,use_dims,[],"[""opt_cd"", ""opt_grp:OPT_000004""]",,,,,끈 판별차원 충전,rc2-design §2 STRING
+update,t_prc_component_prices,COMP_POSTEROPT_BANNER_NORMAL_PROC_CUTEDGE,4692,opt_cd,,OPV_000006,3000.00,,,,열재단 단가행 opt_cd 충전(단가 verbatim),live comp_price_id=4692
+update,t_prc_component_prices,COMP_POSTEROPT_BANNER_NORMAL_PROC_DTAPE,4699,opt_cd,,OPV_000010,3000.00,,,,양면테입 단가행 opt_cd 충전,live comp_price_id=4699
+update,t_prc_component_prices,COMP_POSTEROPT_BANNER_NORMAL_PROC_BONGSEW,4701,opt_cd,,OPV_000011,4000.00,,,,봉미싱 단가행 opt_cd 충전,live comp_price_id=4701
+update,t_prc_component_prices,COMP_POSTEROPT_BANNER_NORMAL_ADD_QBANG_4,4694,opt_cd,,OPV_000013,3000.00,,,,큐방 단가행 opt_cd 충전,live comp_price_id=4694
+update,t_prc_component_prices,COMP_POSTEROPT_BANNER_NORMAL_ADD_STRING_4,4696,opt_cd,,OPV_000014,4000.00,,,,끈 단가행 opt_cd 충전,live comp_price_id=4696
+upsert,t_prc_formula_components,COMP_POSTEROPT_BANNER_NORMAL_PROC_PUNCH_4,,addtn_yn+disp_seq,addtn_yn=NULL,addtn_yn=Y,,PRF_POSTER_BANNER_N,Y,2,타공 바인딩 addtn_yn 충전(기존행),live frm bind exists
+upsert,t_prc_formula_components,COMP_POSTEROPT_BANNER_NORMAL_PROC_CUTEDGE,,bind,,addtn_yn=Y,,PRF_POSTER_BANNER_N,Y,3,열재단 가산 바인딩 신규,rc2-design §2
+upsert,t_prc_formula_components,COMP_POSTEROPT_BANNER_NORMAL_PROC_DTAPE,,bind,,addtn_yn=Y,,PRF_POSTER_BANNER_N,Y,4,양면테입 가산 바인딩 신규,rc2-design §2
+upsert,t_prc_formula_components,COMP_POSTEROPT_BANNER_NORMAL_PROC_BONGSEW,,bind,,addtn_yn=Y,,PRF_POSTER_BANNER_N,Y,5,봉미싱 가산 바인딩 신규,rc2-design §2
+upsert,t_prc_formula_components,COMP_POSTEROPT_BANNER_NORMAL_ADD_QBANG_4,,bind,,addtn_yn=Y,,PRF_POSTER_BANNER_N,Y,6,큐방 가산 바인딩 신규,rc2-design §2
+upsert,t_prc_formula_components,COMP_POSTEROPT_BANNER_NORMAL_ADD_STRING_4,,bind,,addtn_yn=Y,,PRF_POSTER_BANNER_N,Y,7,끈 가산 바인딩 신규,rc2-design §2

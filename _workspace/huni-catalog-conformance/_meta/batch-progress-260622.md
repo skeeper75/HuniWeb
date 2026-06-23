@@ -108,7 +108,11 @@
 ## ★교정 실행 단계 진입 (2026-06-23)
 - **K6 PASS (해소)**: `.env.local` 갱신된 자격증명(.env.local) 갱신 → product-viewer gstack 로그인 SUCCESS. 전 5배치 K6 BLOCKED→**PASS 상향**. 화면축 8상품 3원 대조 불일치 0·과대청구 교정분(027 접지/094 엽서북) silent-sum 차단 화면 반영 확인. 산출=`06_gate/k6-screen-recheck-260623.md`. (이전 "[REDACTED] stale" 판정은 오류였음)
 - **R-GP4-1 굿즈 GP-1 base 라이브 COMMIT 완료 (되돌리지 말 것)**: 단일고정가 **26행** `t_prd_product_prices` INSERT(상품마스터 C열 verbatim·견적 0→정상: 카드거울 qty10=25,000·캔버스 qty3=174,000·말랑포카 qty10=140,000). DRY-RUN PASS·멱등(PK+ON CONFLICT DO NOTHING)·백업·undo 보유(`09_load/_gp1_base_260623/`). ★G-GP-5 가드로 반팔/후드티(206/209) 보류=색상×사이즈 variant 적발(FORMULA 우회 방지)→R-GP4-5. 기초코드 마스터 무접촉·단가 0변경.
-- **잔여 교정(미실행·선행 필요)**: 실사 A-프리셋 R-B3-PRICE(dbm-price-arbiter 모델정립)·아크릴20 R-B3-1(Q-ACR-MISSING20 확정)·GP-2 FORMULA R-GP4-5(반팔/후드티 포함·CPQ 동반)·R-GP4-2~4·CPQ MISS.
+- **★실사 가격 구조 종합 모델 수립 (2026-06-23)**: 사용자 directive(장치를 적재적소에·정확한 값)로 실사 28상품 5장치 조립 모델 수립=`04_price_engine/silsa-price-structure-model.md`. 동형 5클래스(C1 면적13·C2 siz_cd 고정14·C3 현수막혼합·C4 가공/추가 add-on 31comp·C5 프리셋통합6). **6대 RC**: RC-1 면적프리셋 과대(=R-B3-PRICE)·**RC-2 옵션comp 30/31 고아(최대)**·RC-3 빈 use_dims/좀비·RC-4 캔버스행잉 차원역배선·RC-5 아크릴/폼보드 단가오적재·미니류 권위부재. ★수량구간할인=굿즈/문구/아크릴 전용(실사 없음·사용자 확정).
+- **★차원 메커니즘 감사 (2026-06-23)**: `04_price_engine/price-component-dimension-mechanism-audit.md`. 옵션(ref_dim_cd·opt_cd)·공정상세(proc_grp+dim_vals·price_dim/contrib)·템플릿(addon) 차원이 **코드에 이미 구현**·시뮬레이터 전송. 정정: 앞선 "siz_preset 위젯 코드 변경 필수"는 과한 진단(opt_cd 차원으로 코드변경 없이 가능·시뮬레이터 한정). 라이브 4장치 실측: 공식50·구성요소149(단가행7,292)·직접단가26(GP-1)·전275상품 중 103 가격가능(63% 견적불가).
+- **★R-B3-PRICE 모델 정정**: 게이트 "셀 A3" 오독 아님 확정 — A3/A2/A1=실제 등록 용지 프리셋(siz_cd·고정가 7000/7000/12000)·사용자입력=nonspec 면적매트릭스. 라이브가 프리셋을 면적 ceiling으로 올림=과대청구. 모델=opt_cd 판별차원(옵션그룹화)·`r-b3-price-model.md`.
+- **★RC-2 일반현수막 파일럿 라이브 COMMIT 완료 (2026-06-23·되돌리지말것)**: PRD_000138/PRF_POSTER_BANNER_N 가공/추가 6comp 종단배선 — use_dims 충전5(빈[]→[opt_cd,opt_grp])·단가행 opt_cd 충전5(verbatim)·공식 addtn_yn=Y 바인딩6. dbm-validator R1~R6 GO→COMMIT→사후검증 PASS(**미선택=0가산**=단일 가공/추가 과소청구 해소·선택별 정확·ERR0·멱등·회귀0·단가 0변경). 백업/undo=`09_load/_rc2_banner_260623/`. ★잔존 코드트랙(§21 밖): 타공 효력(CONFIRM-A proc_cd 104↔105 의미축·실무진)·opt 동시선택(selections 단일키)·각목 세로/가로(CONFIRM-4·사용자 확정 세로/가로 맞음)·나머지 6상품 CPQ 미등록.
+- **잔여 교정(미실행·선행 필요)**: RC-2 나머지 6 현수막류(CPQ 옵션 선등록)·RC-5 아크릴/폼보드 단가교정(권위=정답·사용자 확정)·RC-4 캔버스행잉 차원정정·RC-3 좀비정리·RC-1 프리셋(opt_cd 모델)·아크릴20 R-B3-1·GP-2 R-GP4-5.
 
 ## 미해결/블로커
 - **CONFIRM 큐 6건** 인간 확정 대기 — 적재값이 여기 종속(Q-PB-SUPERSET·Q-CAL-PAGE-SHAPE·Q-CAL-PLATE-112·Q-CAL-PROC-EXTRA-110·Q-PB-SETPRICE류·B-N4 반제품 고객노출)

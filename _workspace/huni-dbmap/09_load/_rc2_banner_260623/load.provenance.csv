@@ -1,0 +1,17 @@
+file,line_kind,comp_cd,key,value,source
+01_use_dims.sql,use_dims,COMP_POSTEROPT_BANNER_NORMAL_PROC_CUTEDGE,use_dims,"[""opt_cd"", ""opt_grp:OPT_000003""]",rc2-design §2 + live
+01_use_dims.sql,use_dims,COMP_POSTEROPT_BANNER_NORMAL_PROC_DTAPE,use_dims,"[""opt_cd"", ""opt_grp:OPT_000003""]",rc2-design §2 + live
+01_use_dims.sql,use_dims,COMP_POSTEROPT_BANNER_NORMAL_PROC_BONGSEW,use_dims,"[""opt_cd"", ""opt_grp:OPT_000003""]",rc2-design §2 + live
+01_use_dims.sql,use_dims,COMP_POSTEROPT_BANNER_NORMAL_ADD_QBANG_4,use_dims,"[""opt_cd"", ""opt_grp:OPT_000004""]",rc2-design §2 + live
+01_use_dims.sql,use_dims,COMP_POSTEROPT_BANNER_NORMAL_ADD_STRING_4,use_dims,"[""opt_cd"", ""opt_grp:OPT_000004""]",rc2-design §2 + live
+02_opt_fill.sql,opt_fill,COMP_POSTEROPT_BANNER_NORMAL_PROC_CUTEDGE,opt_cd(id=4692),OPV_000006·price=3000.00,live comp_price_id
+02_opt_fill.sql,opt_fill,COMP_POSTEROPT_BANNER_NORMAL_PROC_DTAPE,opt_cd(id=4699),OPV_000010·price=3000.00,live comp_price_id
+02_opt_fill.sql,opt_fill,COMP_POSTEROPT_BANNER_NORMAL_PROC_BONGSEW,opt_cd(id=4701),OPV_000011·price=4000.00,live comp_price_id
+02_opt_fill.sql,opt_fill,COMP_POSTEROPT_BANNER_NORMAL_ADD_QBANG_4,opt_cd(id=4694),OPV_000013·price=3000.00,live comp_price_id
+02_opt_fill.sql,opt_fill,COMP_POSTEROPT_BANNER_NORMAL_ADD_STRING_4,opt_cd(id=4696),OPV_000014·price=4000.00,live comp_price_id
+03_formula_components.sql,bind,COMP_POSTEROPT_BANNER_NORMAL_PROC_PUNCH_4,addtn_yn/disp_seq,Y/2,PRF_POSTER_BANNER_N
+03_formula_components.sql,bind,COMP_POSTEROPT_BANNER_NORMAL_PROC_CUTEDGE,addtn_yn/disp_seq,Y/3,PRF_POSTER_BANNER_N
+03_formula_components.sql,bind,COMP_POSTEROPT_BANNER_NORMAL_PROC_DTAPE,addtn_yn/disp_seq,Y/4,PRF_POSTER_BANNER_N
+03_formula_components.sql,bind,COMP_POSTEROPT_BANNER_NORMAL_PROC_BONGSEW,addtn_yn/disp_seq,Y/5,PRF_POSTER_BANNER_N
+03_formula_components.sql,bind,COMP_POSTEROPT_BANNER_NORMAL_ADD_QBANG_4,addtn_yn/disp_seq,Y/6,PRF_POSTER_BANNER_N
+03_formula_components.sql,bind,COMP_POSTEROPT_BANNER_NORMAL_ADD_STRING_4,addtn_yn/disp_seq,Y/7,PRF_POSTER_BANNER_N
