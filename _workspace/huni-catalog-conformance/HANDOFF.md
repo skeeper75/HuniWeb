@@ -4,14 +4,16 @@
 > 권위 종합=`06_gate/conformance-final-summary.md`. 진행 트래커=`_meta/batch-progress-260622.md`.
 > 단가 verbatim 불변·기초코드 마스터(t_mat/t_siz/t_prc 공유) 불변·생성≠검증·DB 쓰기는 인간 승인 후만.
 
-## 다음 시작점 (택1·실사 RC 교정 이어가기·★RC-5·RC-2 추가물 3상품 2026-06-23 COMMIT)
-실사 RC 교정 — 남은 BLOCKED/CONFIRM 의존분:
-1. **RC-2 PET배너(136)**: HOLD-1 = 거치대 택1 그룹에 기존 "실외용거치대"와 신규 단면(S1·23000)/양면(S2·25000)이 **의미 중복** → 모델링 CONFIRM 필요(실무진). 컨펌 후 메쉬/캔버스/린넨과 동일 패턴 적재.
-2. **RC-2 CONFIRM 의존분(각목·타공·린넨마감·족자)**: CONFIRM-A(타공 proc_cd 105 vs 104·detail 전송)·CONFIRM-4(각목 세로/가로 ↔ 4000/8000 매핑규칙)·CONFIRM-B(린넨마감 LINEN_FINISH opt_cd 재배선)·CONFIRM-C(족자 bdl_qty 의미) 실무진 확정 후 적재.
-3. **RC-1 프리셋(R-B3-PRICE)**: A3/A2/A1/사용자입력을 **opt_cd 옵션그룹**으로 모델(코드 변경 없이·`r-b3-price-model.md`). 단 각목·동시선택 등 코드트랙 CONFIRM 정리 후가 안전.
+## 다음 시작점 (택1·실사 RC 교정 이어가기·★RC-5·RC-2 추가물·RC-2 CONFIRM 3건 2026-06-23 COMMIT)
+실사 RC 교정 — 남은분:
+1. **RC-2 각목(CONFIRM-4) 적재**: 후보 C 모델 재정립 **완료**(`04_price_engine/rc2-gakmok-model-revisit.md`) — 단가 권위 출처=인쇄상품 가격표 260527 포스터사인 r244-250(각목900이하+끈=4000·900초과+끈=8000). opt_cd에 900임계 내장(손님 enum 선택·사이즈 자동티어 아님·데이터만·코드 불요). 세로/가로=가격무관(생산 메타로 분리)·양쪽/개수=가격무관. 현행 2 comp 빈차원=12000 이중합산 결함. **사용자 확인 Q1~Q3 후 적재**(옵션구성·세로가로 처리방식·손님판단vs자동). 메쉬 각목=가격표 부재→미적용.
+2. **RC-2 PET배너(136)**: HOLD-1 = 거치대 택1 그룹 기존 "실외용거치대" ↔ 신규 단/양면(S1/S2·23000/25000) 의미 중복 → 모델링 CONFIRM 후 적재.
+3. **잔여 단가 결정(돈크리·인간)**: ① 일반현수막 타공수8 라이브 8000 vs 권위(가격표) 5000(메쉬는 5000 일치)=HOLD-NORMAL-PUNCH8-PRICE ② 족자 천정고리 라이브 6500 vs 권위 "4000?"=HOLD-C-PRICE ③ 타공 코드트랙(위젯 procs detail{타공수} 전송·§6).
+4. **RC-1 프리셋(R-B3-PRICE)**: A3/A2/A1/사용자입력을 **opt_cd 옵션그룹**으로 모델(`r-b3-price-model.md`).
 
-> **RC-5 완료(2026-06-23)**: 유광아크릴(142)·미러아크릴(143)·폼보드(129) 단가 라이브 COMMIT. 별색옵션 혼동 4축 배제(CONFIRM-2 해소)·권위 verbatim 10행·R1~R6 GO. 진단=`04_price_engine/rc5-acrylic-foamboard-diagnosis.md`.
-> **RC-2 추가물 3상품 완료(2026-06-23)**: 메쉬(139) 큐방/끈·캔버스행잉(133) 우드행거(RC-4 재배선)·린넨우드봉(134) 우드봉 라이브 COMMIT(23행·always-add 가드 실효). 명세=`03_cpq_link/rc2-addon-load-spec-unblocked.md`·적재본=`09_load/_rc2_addon_unblocked_260623/`. CONFIRM-D 본체공식 4종 라이브 확정.
+> **RC-5 완료(2026-06-23)**: 유광/미러아크릴·폼보드 단가 COMMIT. 별색옵션 혼동 4축 배제·권위 verbatim 10행·R1~R6 GO.
+> **RC-2 추가물 3상품 완료(2026-06-23)**: 메쉬 큐방/끈·캔버스 우드행거(RC-4 재배선)·린넨우드봉 우드봉 COMMIT(23행·always-add 가드). 명세=`03_cpq_link/rc2-addon-load-spec-unblocked.md`.
+> **RC-2 CONFIRM 3건 완료(2026-06-23)**: 린넨마감(124 바인딩·B=CLOSED opt_cd 이미 정합)·타공(138/139 데이터 정리·proc_cd 통일·좀비 use_yn=N·미선택 0가산)·족자(135 opt_cd 재배선 OPV_000431) COMMIT(19행). 명세=`03_cpq_link/rc2-confirm-resolved-load-spec.md`·적재본=`09_load/_rc2_confirm_resolved_260623/`. 캔버스패브릭(125)=비동형 HOLD(마감비 단가 부재).
 
 실행 패턴(검증된 체인): `dbm-load-builder`(적재본+DRY-RUN·COMMIT 안 함) → `dbm-validator`(R1~R6 독립 게이트) → 사용자 승인 → `hbd-load-executor`(백업·DRY-RUN·COMMIT·사후검증·undo).
 
@@ -37,6 +39,7 @@
 - R-B3 A3/A2/A1=실제 등록 siz_cd 용지 프리셋(고정 7000/7000/12000)·사용자입력=nonspec 면적매트릭스(600mm~·900은 일반현수막용·포스터 무관).
 
 ## 건드리지 말 것 (확정·되돌리지 말 것)
+- **RC-2 CONFIRM 3건 라이브 COMMIT**(2026-06-23·19행): 린넨마감(124) PRF_POSTER_LINEN 바인딩·타공(138/139) 단가행 proc_cd 통일(일반 105→104·메쉬 NULL→079)+dim_vals 충전+바인딩+좀비 PUNCH_6/8 use_yn=N·족자(135) OPV_000431 opt_cd 재배선(단가행 4594 bdl_qty→opt_cd·6500 verbatim). always-add 가드 라이브 실효. undo=`09_load/_rc2_confirm_resolved_260623/undo.sql`·백업 보유.
 - **RC-2 추가물 3상품 라이브 COMMIT**(2026-06-23·23행): 메쉬(139) 큐방/끈·캔버스행잉(133) 우드행거(RC-4 siz_cd 258→172·315→174·317→197 재배선)·린넨우드봉(134) 우드봉. 옵션 INSERT 4(OPV_000425/426/429/430)+comp 차원 4+단가행 11+공식바인딩 4. always-add 가드 라이브 실효(opt_cd 충전). undo=`09_load/_rc2_addon_unblocked_260623/undo.sql`·백업 보유. **PET(136) 제외(HOLD-1)**.
 - **RC-5 아크릴/폼보드 단가 라이브 COMMIT**(2026-06-23·component_prices 10행 권위 verbatim): 유광아크릴 4792~4795·미러아크릴 4796~4799·폼보드 4780(A3 6000)·A1 신규 38239(20000). undo=`09_load/_rc5_acrylic_foamboard_260623/undo.sql`·백업=`backup-before-260623.csv`.
 - **RC-2 일반현수막 라이브 COMMIT**(PRD_000138/PRF_POSTER_BANNER_N 가공/추가 6 comp 배선·미선택0가산 해소). undo=`09_load/_rc2_banner_260623/undo.sql`.

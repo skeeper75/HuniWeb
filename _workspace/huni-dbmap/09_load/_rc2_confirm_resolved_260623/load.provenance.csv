@@ -1,0 +1,20 @@
+step,sql_file,target_table,op,pk_or_key,source_live_id,source_spec,current_value,design_value,verbatim_guard
+01,01_options.sql,t_prd_product_options,INSERT,"PRD_000135,OPV_000431",n/a,spec§3.2,absent,"opt_grp=OPT_000016 opt_nm=천정형고리 포함 disp_seq=2",n/a
+02,02_use_dims.sql,t_prc_price_components,UPDATE,COMP_POSTEROPT_BANNER_MESH_PROC_PUNCH_4,n/a,spec§2.2,"use_dims=[]","[\"proc_cd\",\"min_qty\",\"proc_grp:PROC_000079\"]",IS DISTINCT FROM
+02,02_use_dims.sql,t_prc_price_components,UPDATE,COMP_POSTEROPT_BANNER_MESH_PROC_PUNCH_6,n/a,spec§2.2,"use_dims=[proc_grp:PROC_000080]","[\"proc_cd\",\"min_qty\",\"proc_grp:PROC_000079\"]",IS DISTINCT FROM
+02,02_use_dims.sql,t_prc_price_components,UPDATE,COMP_POSTEROPT_BANNER_MESH_PROC_PUNCH_8,n/a,spec§2.2,"use_dims=[]","[\"proc_cd\",\"min_qty\",\"proc_grp:PROC_000079\"]",IS DISTINCT FROM
+02,02_use_dims.sql,t_prc_price_components,UPDATE,COMP_POSTEROPT_JOKJA_CEILHOOK,n/a,spec§3.3,"use_dims=[\"bdl_qty\",\"min_qty\"]","[\"opt_cd\",\"min_qty\"]",IS DISTINCT FROM
+03,03_price_fill.sql,t_prc_component_prices,UPDATE,38219,38219,spec§2.2,"proc_cd=PROC_000105 dim_vals{타공수:4} 3000",proc_cd=PROC_000104,unit_price=3000.00
+03,03_price_fill.sql,t_prc_component_prices,UPDATE,38220,38220,spec§2.2,"proc_cd=PROC_000105 dim_vals{타공수:6} 4000",proc_cd=PROC_000104,unit_price=4000.00
+03,03_price_fill.sql,t_prc_component_prices,UPDATE,38221,38221,spec§2.2,"proc_cd=PROC_000105 dim_vals{타공수:8} 8000",proc_cd=PROC_000104,unit_price=8000.00
+03,03_price_fill.sql,t_prc_component_prices,UPDATE,4750,4750,spec§2.2,"proc_cd=NULL dim_vals=NULL 3000","proc_cd=PROC_000079 dim_vals{타공수:4}",unit_price=3000.00
+03,03_price_fill.sql,t_prc_component_prices,UPDATE,4752,4752,spec§2.2,"proc_cd=NULL dim_vals=NULL 4000","proc_cd=PROC_000079 dim_vals{타공수:6}",unit_price=4000.00
+03,03_price_fill.sql,t_prc_component_prices,UPDATE,4754,4754,spec§2.2,"proc_cd=NULL dim_vals=NULL 5000","proc_cd=PROC_000079 dim_vals{타공수:8}",unit_price=5000.00
+03,03_price_fill.sql,t_prc_component_prices,UPDATE,4594,4594,spec§3.3,"bdl_qty=2 opt_cd=NULL 6500","bdl_qty=NULL opt_cd=OPV_000431",unit_price=6500.00
+04,04_formula_components.sql,t_prc_formula_components,INSERT,"PRF_POSTER_LINEN,COMP_POSTEROPT_LINEN_FINISH",n/a,spec§1.3,absent,"addtn_yn=Y disp_seq=2",NOT EXISTS
+04,04_formula_components.sql,t_prc_formula_components,INSERT,"PRF_POSTER_BANNER_M,COMP_POSTEROPT_BANNER_MESH_PROC_PUNCH_4",n/a,spec§2.2,absent,"addtn_yn=Y disp_seq=4",NOT EXISTS
+04,04_formula_components.sql,t_prc_formula_components,INSERT,"PRF_POSTER_BANNER_M,COMP_POSTEROPT_BANNER_MESH_PROC_PUNCH_6",n/a,spec§2.2,absent,"addtn_yn=Y disp_seq=5",NOT EXISTS
+04,04_formula_components.sql,t_prc_formula_components,INSERT,"PRF_POSTER_BANNER_M,COMP_POSTEROPT_BANNER_MESH_PROC_PUNCH_8",n/a,spec§2.2,absent,"addtn_yn=Y disp_seq=6",NOT EXISTS
+04,04_formula_components.sql,t_prc_formula_components,INSERT,"PRF_POSTER_JOKJA,COMP_POSTEROPT_JOKJA_CEILHOOK",n/a,spec§3.3,absent,"addtn_yn=Y disp_seq=2",NOT EXISTS
+05,05_zombie_cleanup.sql,t_prc_price_components,UPDATE,COMP_POSTEROPT_BANNER_NORMAL_PROC_PUNCH_6,4695,spec§2.2,"use_yn=Y del_yn=Y",use_yn=N,del_yn=Y guard
+05,05_zombie_cleanup.sql,t_prc_price_components,UPDATE,COMP_POSTEROPT_BANNER_NORMAL_PROC_PUNCH_8,4697,spec§2.2,"use_yn=Y del_yn=Y",use_yn=N,del_yn=Y guard

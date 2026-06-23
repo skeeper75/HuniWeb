@@ -1,0 +1,37 @@
+=== BACKUP backup-before-260623.csv (live read-only snapshot 2026-06-23) ===
+
+[component_prices-7] comp_price_id,comp_cd,proc_cd,opt_cd,bdl_qty,dim_vals,unit_price
+tbl,comp_price_id,comp_cd,coalesce,coalesce,coalesce,coalesce,unit_price
+component_prices,38219,COMP_POSTEROPT_BANNER_NORMAL_PROC_PUNCH_4,PROC_000105,NULL,NULL,{"타공수": 4},3000.00
+component_prices,38220,COMP_POSTEROPT_BANNER_NORMAL_PROC_PUNCH_4,PROC_000105,NULL,NULL,{"타공수": 6},4000.00
+component_prices,38221,COMP_POSTEROPT_BANNER_NORMAL_PROC_PUNCH_4,PROC_000105,NULL,NULL,{"타공수": 8},8000.00
+component_prices,4594,COMP_POSTEROPT_JOKJA_CEILHOOK,NULL,NULL,2,NULL,6500.00
+component_prices,4750,COMP_POSTEROPT_BANNER_MESH_PROC_PUNCH_4,NULL,NULL,NULL,NULL,3000.00
+component_prices,4752,COMP_POSTEROPT_BANNER_MESH_PROC_PUNCH_6,NULL,NULL,NULL,NULL,4000.00
+component_prices,4754,COMP_POSTEROPT_BANNER_MESH_PROC_PUNCH_8,NULL,NULL,NULL,NULL,5000.00
+(7 rows)
+
+[price_components-6] comp_cd,use_dims,use_yn,del_yn
+tbl,comp_cd,coalesce,use_yn,del_yn,?column?,?column?,?column?
+price_components,COMP_POSTEROPT_BANNER_MESH_PROC_PUNCH_4,[],Y,N,,,
+price_components,COMP_POSTEROPT_BANNER_MESH_PROC_PUNCH_6,["proc_cd", "min_qty", "proc_grp:PROC_000080"],Y,N,,,
+price_components,COMP_POSTEROPT_BANNER_MESH_PROC_PUNCH_8,[],Y,N,,,
+price_components,COMP_POSTEROPT_BANNER_NORMAL_PROC_PUNCH_6,[],Y,Y,,,
+price_components,COMP_POSTEROPT_BANNER_NORMAL_PROC_PUNCH_8,[],Y,Y,,,
+price_components,COMP_POSTEROPT_JOKJA_CEILHOOK,["bdl_qty", "min_qty"],Y,N,,,
+(6 rows)
+
+[product_options OPV_000431 expect 0 rows] prd_cd,opt_cd,opt_grp_cd,opt_nm,disp_seq,use_yn,del_yn
+tbl,prd_cd,opt_cd,opt_grp_cd,opt_nm,disp_seq,use_yn,del_yn
+(0 rows)
+
+[formula_components expect 0 rows] frm_cd,comp_cd,disp_seq,addtn_yn
+tbl,frm_cd,comp_cd,disp_seq,addtn_yn,?column?,?column?,?column?
+(0 rows)
+
+[GAKMOK guard: any comp/binding/price touching GAKMOK - record current state for non-touch proof]
+tbl,comp_cd,use_yn,del_yn,coalesce,?column?,?column?,?column?
+gakmok_comp,COMP_POPT_BNR_GAKMOK_STR_900_4,Y,N,NULL,,,
+gakmok_comp,COMP_POPT_BNR_GAKMOK_STR_900_4_GT,Y,N,[],,,
+gakmok_comp,COMP_POPT_BNR_GAKMOK_STR_900_4_LE,Y,N,[],,,
+(3 rows)
