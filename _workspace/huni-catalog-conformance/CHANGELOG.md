@@ -5,6 +5,30 @@
 
 ---
 
+## 2026-06-23 (7) — RC-2 추가물 3상품 라이브 COMMIT (always-add 가드 실효·RC-4 재배선)
+
+RC-2(실사 현수막류 가공/추가 바인딩) 중 **CONFIRM에 안 묶인 추가물형 옵션**만 선별 COMMIT(사용자
+"안 막힌 것부터 진행" directive). 체인: option-mapper 통합명세(CPQ 채번+CONFIRM-D 실측+RC-4 재배선) →
+load-builder 적재본+DRY-RUN → validator R1~R6 → 인간 승인 → load-executor COMMIT.
+
+**대상 3상품(23행)**: 메쉬현수막(139) 큐방/끈·캔버스행잉(133) 우드행거+면끈·린넨우드봉(134) 우드봉+면끈.
+옵션 INSERT 4(OPV_000425/426/429/430·기존 그룹 재사용·신규 그룹 0) + comp use_dims UPDATE 4(opt_cd
+always-add 가드 충전) + 단가행 UPDATE 11(opt_cd 8 + RC-4 siz_cd 재배선 3·단가 verbatim) + 공식 바인딩
+INSERT 4(addtn_yn=Y·PRF_POSTER_BANNER_M/CANVAS_HANGING/LINEN_WOODBONG·disp_seq=2+).
+
+**라이브 실측으로 닫은 4건**(`03_cpq_link/rc2-addon-load-spec-unblocked.md`): ① CONFIRM-D 본체공식 frm_cd
+4종 확정(메쉬=PRF_POSTER_BANNER_M 등) ② CPQ 신규 그룹 0(search-before-mint·기존 추가그룹 재사용) ③ RC-4
+캔버스 우드행거 단가행 siz_cd가 실은 134 사이즈(258/315/317)→133 등록 사이즈(172/174/197) 재배선(동일 치수
+A4/A3/A2·단가 16000/18000/20000 verbatim) ④ 가격 메커니즘=banner 138 동형(opt_cd 단독 판별).
+
+**★always-add 가드 라이브 실효**: 우드행거/우드봉 use_dims에 opt_cd 미포함 시 "출력만 선택"에도 silent
+가산(NULL opt_cd 와일드카드 누출) → opt_cd 가드 충전으로 미선택 가산 0·선택 시 정확 단가 1행 매칭. 엔진
+`_row_matches` 순수함수 재현 + 라이브 COMMIT 후 재실측 입증. 검증 GO(R1~R6 전건 PASS·undo 보유·기초코드
+마스터 불변). **PET(136)=HOLD-1**(거치대 택1 그룹 의미 중복 모델링 CONFIRM)·각목/타공/린넨마감/족자=
+CONFIRM-A/4/B/C 의존 BLOCKED 유지·option_item MES 환원=HOLD-2/3(가격 무영향) 후속.
+
+---
+
 ## 2026-06-23 (6) — RC-5 아크릴/폼보드 단가 교정 라이브 COMMIT (별색옵션 혼동 4축 배제)
 
 실사 RC 교정 이어가기 — RC-5(아크릴·폼보드 본체단가 오적재) 라이브 COMMIT 완주. 전 체인 검증된

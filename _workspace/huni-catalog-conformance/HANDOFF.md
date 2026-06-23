@@ -4,12 +4,14 @@
 > 권위 종합=`06_gate/conformance-final-summary.md`. 진행 트래커=`_meta/batch-progress-260622.md`.
 > 단가 verbatim 불변·기초코드 마스터(t_mat/t_siz/t_prc 공유) 불변·생성≠검증·DB 쓰기는 인간 승인 후만.
 
-## 다음 시작점 (택1·실사 RC 교정 이어가기)
-지금 실사 카테고리 RC 교정 중. 후보 2개 — 권장 순서 (★RC-5는 2026-06-23 COMMIT 완료):
-1. **RC-2 나머지 6 현수막류**: 메쉬현수막·PET배너·캔버스행잉(+RC-4 차원역배선 동반)·린넨우드봉·족자·린넨패브릭. **CPQ 옵션/공정 선등록이 선행**(dbm-cpq-option-mapping)해야 시뮬레이터가 판별값 전송 → 그 후 일반현수막과 동일 패턴(use_dims+단가행+addtn 바인딩) 전파.
-2. **RC-1 프리셋(R-B3-PRICE)**: A3/A2/A1/사용자입력을 **opt_cd 옵션그룹**으로 모델(코드 변경 없이·`r-b3-price-model.md`). 단 각목·동시선택 등 코드트랙 CONFIRM 정리 후가 안전.
+## 다음 시작점 (택1·실사 RC 교정 이어가기·★RC-5·RC-2 추가물 3상품 2026-06-23 COMMIT)
+실사 RC 교정 — 남은 BLOCKED/CONFIRM 의존분:
+1. **RC-2 PET배너(136)**: HOLD-1 = 거치대 택1 그룹에 기존 "실외용거치대"와 신규 단면(S1·23000)/양면(S2·25000)이 **의미 중복** → 모델링 CONFIRM 필요(실무진). 컨펌 후 메쉬/캔버스/린넨과 동일 패턴 적재.
+2. **RC-2 CONFIRM 의존분(각목·타공·린넨마감·족자)**: CONFIRM-A(타공 proc_cd 105 vs 104·detail 전송)·CONFIRM-4(각목 세로/가로 ↔ 4000/8000 매핑규칙)·CONFIRM-B(린넨마감 LINEN_FINISH opt_cd 재배선)·CONFIRM-C(족자 bdl_qty 의미) 실무진 확정 후 적재.
+3. **RC-1 프리셋(R-B3-PRICE)**: A3/A2/A1/사용자입력을 **opt_cd 옵션그룹**으로 모델(코드 변경 없이·`r-b3-price-model.md`). 단 각목·동시선택 등 코드트랙 CONFIRM 정리 후가 안전.
 
-> **RC-5 완료(2026-06-23)**: 유광아크릴(142)·미러아크릴(143)·폼보드(129) 단가 라이브 COMMIT. 별색옵션 혼동 4축 배제(CONFIRM-2 해소)·권위 verbatim 10행(UPDATE 9+INSERT 1)·R1~R6 GO. 진단=`04_price_engine/rc5-acrylic-foamboard-diagnosis.md`·적재본=`_workspace/huni-dbmap/09_load/_rc5_acrylic_foamboard_260623/`(undo 보유).
+> **RC-5 완료(2026-06-23)**: 유광아크릴(142)·미러아크릴(143)·폼보드(129) 단가 라이브 COMMIT. 별색옵션 혼동 4축 배제(CONFIRM-2 해소)·권위 verbatim 10행·R1~R6 GO. 진단=`04_price_engine/rc5-acrylic-foamboard-diagnosis.md`.
+> **RC-2 추가물 3상품 완료(2026-06-23)**: 메쉬(139) 큐방/끈·캔버스행잉(133) 우드행거(RC-4 재배선)·린넨우드봉(134) 우드봉 라이브 COMMIT(23행·always-add 가드 실효). 명세=`03_cpq_link/rc2-addon-load-spec-unblocked.md`·적재본=`09_load/_rc2_addon_unblocked_260623/`. CONFIRM-D 본체공식 4종 라이브 확정.
 
 실행 패턴(검증된 체인): `dbm-load-builder`(적재본+DRY-RUN·COMMIT 안 함) → `dbm-validator`(R1~R6 독립 게이트) → 사용자 승인 → `hbd-load-executor`(백업·DRY-RUN·COMMIT·사후검증·undo).
 
@@ -18,8 +20,9 @@
 - **CONFIRM-4 각목**: 의미축=**세로/가로(사용자 확정)**. 단 권위 단가 2개(4000/8000)가 세로↔가로 중 어디에 배정되는지 매핑 규칙 미확정 → 각목 적재 BLOCKED(실무진).
 - **opt 동시선택 한계**(코드트랙): 가공+추가 동시(예 봉미싱+큐방) 시 selections opt_cd 단일키로 1건 누락. 그룹별 키 분리=§6/webadmin 코드.
 - **위젯 경로**(별 트랙): `_opt_maps` 자동변환은 위젯 전용·시뮬레이터 미동작. 지금은 시뮬레이터 중심(사용자 directive), 위젯은 별도 작업.
-- **RC-2 6상품 CPQ 미등록**: 큐방·끈·거치대·우드행거·우드봉·천정고리·LINEN_FINISH 옵션이 상품에 미등록 → 가산 트리거 불가.
-- **RC-4 캔버스행잉(133)**: use_dims=`[siz_width,siz_height]`인데 단가행=siz_cd 충전(차원 역배선) → use_dims를 siz_cd로 정정 필요.
+- **RC-2 잔여 CPQ 미등록**: 족자 천정고리·LINEN_FINISH·각목 등 BLOCKED분 옵션 미등록 → 가산 트리거 불가(CONFIRM 의존). 메쉬/캔버스/린넨우드봉 큐방·끈·우드행거·우드봉은 2026-06-23 등록 COMMIT 완료.
+- **RC-2 PET배너(136) HOLD-1**: 거치대 택1 그룹에 기존 "실외용거치대" ↔ 신규 단면(S1)/양면(S2·23000/25000) 의미 중복 → 거치대 옵션 모델링 실무진 CONFIRM 후 적재.
+- **RC-4 캔버스행잉(133)**: ✅ 해소(2026-06-23) — 우드행거 단가행 siz_cd 재배선(258→172·315→174·317→197, 134 사이즈→133 사이즈) COMMIT. 본체 comp use_dims는 `[siz_width,siz_height,min_qty]` 치수티어라 충돌 없음 확인.
 - **CONFIRM 잔여**: B(린넨마감 opt_cd 재배선)·C(족자 천정고리 bdl_qty vs opt_cd)·D(본체 공식 바인딩 대상)·미니배너/미니보드 권위부재 수량단가 출처.
 - **그 외 카테고리 교정 큐**(전 11시트): 아크릴20 미바인딩 R-B3-1(Q-ACR-MISSING20)·GP-2 FORMULA R-GP4-5(반팔/후드티 포함)·R-GP4-2~4·CPQ MISS·배치1~3 NO-GO 교정명세(`06_gate/remediation-spec-batch*.md`).
 
@@ -34,6 +37,7 @@
 - R-B3 A3/A2/A1=실제 등록 siz_cd 용지 프리셋(고정 7000/7000/12000)·사용자입력=nonspec 면적매트릭스(600mm~·900은 일반현수막용·포스터 무관).
 
 ## 건드리지 말 것 (확정·되돌리지 말 것)
+- **RC-2 추가물 3상품 라이브 COMMIT**(2026-06-23·23행): 메쉬(139) 큐방/끈·캔버스행잉(133) 우드행거(RC-4 siz_cd 258→172·315→174·317→197 재배선)·린넨우드봉(134) 우드봉. 옵션 INSERT 4(OPV_000425/426/429/430)+comp 차원 4+단가행 11+공식바인딩 4. always-add 가드 라이브 실효(opt_cd 충전). undo=`09_load/_rc2_addon_unblocked_260623/undo.sql`·백업 보유. **PET(136) 제외(HOLD-1)**.
 - **RC-5 아크릴/폼보드 단가 라이브 COMMIT**(2026-06-23·component_prices 10행 권위 verbatim): 유광아크릴 4792~4795·미러아크릴 4796~4799·폼보드 4780(A3 6000)·A1 신규 38239(20000). undo=`09_load/_rc5_acrylic_foamboard_260623/undo.sql`·백업=`backup-before-260623.csv`.
 - **RC-2 일반현수막 라이브 COMMIT**(PRD_000138/PRF_POSTER_BANNER_N 가공/추가 6 comp 배선·미선택0가산 해소). undo=`09_load/_rc2_banner_260623/undo.sql`.
 - **R-GP4-1 굿즈 GP-1 base 26행 COMMIT**(`09_load/_gp1_base_260623/`).

@@ -1,0 +1,29 @@
+kind,prd_cd,opt_cd,opt_grp_cd,opt_nm,dflt_yn,disp_seq,comp_cd,frm_cd,comp_price_id,cur_siz_cd,new_siz_cd,unit_price,use_dims,bind_disp_seq,src
+# kind=option: 신규 CPQ 옵션 INSERT (t_prd_product_options). search-before-mint: opt_cd MAX=OPV_000424
+option,PRD_000139,OPV_000425,OPT_000023,큐방(4개)추가,N,2,,,,,,,,,"spec §1 #1; live opt MAX OPV_000424; grp OPT_000023 disp MAX=1"
+option,PRD_000139,OPV_000426,OPT_000023,끈(4개)추가,N,3,,,,,,,,,"spec §1 #2; grp OPT_000023"
+option,PRD_000133,OPV_000429,OPT_000012,우드행거+면끈 추가,N,2,,,,,,,,,"spec §1 #5; grp OPT_000012 disp MAX=1"
+option,PRD_000134,OPV_000430,OPT_000014,우드봉+면끈 추가,N,2,,,,,,,,,"spec §1 #6; grp OPT_000014 disp MAX=1"
+# kind=use_dims: comp 판별차원 충전 (t_prc_price_components). always-add 가드: opt_cd 포함 필수
+use_dims,,OPV_000425,,,,,COMP_POSTEROPT_BANNER_MESH_ADD_QBANG_4,,,,,,"[""opt_cd"", ""opt_grp:OPT_000023""]",,"spec §2; cur []"
+use_dims,,OPV_000426,,,,,COMP_POSTEROPT_BANNER_MESH_ADD_STRING_4,,,,,,"[""opt_cd"", ""opt_grp:OPT_000023""]",,"spec §2; cur []"
+use_dims,,OPV_000429,,,,,COMP_POSTEROPT_CANVAS_HANGING_WOODHANGER,,,,,,"[""opt_cd"", ""siz_cd"", ""opt_grp:OPT_000012""]",,"spec §2; cur [siz_cd] -> add opt_cd (always-add guard)"
+use_dims,,OPV_000430,,,,,COMP_POSTEROPT_LINEN_WOODBONG_WOODBONG,,,,,,"[""opt_cd"", ""siz_cd"", ""opt_grp:OPT_000014""]",,"spec §2; cur [siz_cd] -> add opt_cd (always-add guard)"
+# kind=price_opt: 단가행 opt_cd 판별값 충전 (t_prc_component_prices). unit_price WHERE 가드(verbatim 불변)
+price_opt,,OPV_000425,,,,,COMP_POSTEROPT_BANNER_MESH_ADD_QBANG_4,,4751,,,3000.00,,,"live 4751 opt_cd NULL price 3000"
+price_opt,,OPV_000426,,,,,COMP_POSTEROPT_BANNER_MESH_ADD_STRING_4,,4753,,,4000.00,,,"live 4753 opt_cd NULL price 4000"
+price_opt,,OPV_000429,,,,,COMP_POSTEROPT_CANVAS_HANGING_WOODHANGER,,4598,,,16000.00,,,"live 4598 opt_cd NULL price 16000"
+price_opt,,OPV_000429,,,,,COMP_POSTEROPT_CANVAS_HANGING_WOODHANGER,,4599,,,18000.00,,,"live 4599 opt_cd NULL price 18000"
+price_opt,,OPV_000429,,,,,COMP_POSTEROPT_CANVAS_HANGING_WOODHANGER,,4600,,,20000.00,,,"live 4600 opt_cd NULL price 20000"
+price_opt,,OPV_000430,,,,,COMP_POSTEROPT_LINEN_WOODBONG_WOODBONG,,4604,,,7000.00,,,"live 4604 opt_cd NULL price 7000"
+price_opt,,OPV_000430,,,,,COMP_POSTEROPT_LINEN_WOODBONG_WOODBONG,,4605,,,9800.00,,,"live 4605 opt_cd NULL price 9800"
+price_opt,,OPV_000430,,,,,COMP_POSTEROPT_LINEN_WOODBONG_WOODBONG,,4606,,,12000.00,,,"live 4606 opt_cd NULL price 12000"
+# kind=siz_rewire: RC-4 캔버스 우드행거 siz_cd 재배선 (133 미등록 258/315/317 -> 등록 172/174/197 동일치수)
+siz_rewire,,,,,,,COMP_POSTEROPT_CANVAS_HANGING_WOODHANGER,,4598,SIZ_000258,SIZ_000172,16000.00,,,"RC-4; A4 210x297 동일등급"
+siz_rewire,,,,,,,COMP_POSTEROPT_CANVAS_HANGING_WOODHANGER,,4599,SIZ_000315,SIZ_000174,18000.00,,,"RC-4; A3 297x420 동일등급"
+siz_rewire,,,,,,,COMP_POSTEROPT_CANVAS_HANGING_WOODHANGER,,4600,SIZ_000317,SIZ_000197,20000.00,,,"RC-4; A2 420x594 동일등급"
+# kind=bind: 공식 바인딩 INSERT (t_prc_formula_components). addtn_yn=Y disp_seq=2
+bind,,,,,,,COMP_POSTEROPT_BANNER_MESH_ADD_QBANG_4,PRF_POSTER_BANNER_M,,,,,,2,"메쉬 큐방 가산 바인딩"
+bind,,,,,,,COMP_POSTEROPT_BANNER_MESH_ADD_STRING_4,PRF_POSTER_BANNER_M,,,,,,3,"메쉬 끈 가산 바인딩 (disp_seq 3)"
+bind,,,,,,,COMP_POSTEROPT_CANVAS_HANGING_WOODHANGER,PRF_POSTER_CANVAS_HANGING,,,,,,2,"캔버스 우드행거 가산 바인딩"
+bind,,,,,,,COMP_POSTEROPT_LINEN_WOODBONG_WOODBONG,PRF_POSTER_LINEN_WOODBONG,,,,,,2,"린넨 우드봉 가산 바인딩"

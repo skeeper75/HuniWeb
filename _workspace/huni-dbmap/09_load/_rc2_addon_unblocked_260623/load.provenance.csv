@@ -1,0 +1,24 @@
+step,target_table,operation,natural_key,value,unit_price_verbatim,spec_ref,live_evidence
+01,t_prd_product_options,INSERT,"(PRD_000139,OPV_000425)",큐방(4개)추가 grp=OPT_000023 seq=2,,spec §1 #1,opt MAX OPV_000424; grp disp MAX=1
+01,t_prd_product_options,INSERT,"(PRD_000139,OPV_000426)",끈(4개)추가 grp=OPT_000023 seq=3,,spec §1 #2,grp OPT_000023 same group disp+1
+01,t_prd_product_options,INSERT,"(PRD_000133,OPV_000429)",우드행거+면끈 추가 grp=OPT_000012 seq=2,,spec §1 #5,grp OPT_000012 disp MAX=1
+01,t_prd_product_options,INSERT,"(PRD_000134,OPV_000430)",우드봉+면끈 추가 grp=OPT_000014 seq=2,,spec §1 #6,grp OPT_000014 disp MAX=1
+02,t_prc_price_components,UPDATE use_dims,COMP_POSTEROPT_BANNER_MESH_ADD_QBANG_4,"[opt_cd,opt_grp:OPT_000023]",,spec §2,cur []
+02,t_prc_price_components,UPDATE use_dims,COMP_POSTEROPT_BANNER_MESH_ADD_STRING_4,"[opt_cd,opt_grp:OPT_000023]",,spec §2,cur []
+02,t_prc_price_components,UPDATE use_dims,COMP_POSTEROPT_CANVAS_HANGING_WOODHANGER,"[opt_cd,siz_cd,opt_grp:OPT_000012]",,spec §2 +always-add guard,cur [siz_cd]
+02,t_prc_price_components,UPDATE use_dims,COMP_POSTEROPT_LINEN_WOODBONG_WOODBONG,"[opt_cd,siz_cd,opt_grp:OPT_000014]",,spec §2 +always-add guard,cur [siz_cd]
+03a,t_prc_component_prices,UPDATE opt_cd,comp_price_id=4751,opt_cd=OPV_000425,3000.00,spec §2,live 4751 opt_cd NULL
+03a,t_prc_component_prices,UPDATE opt_cd,comp_price_id=4753,opt_cd=OPV_000426,4000.00,spec §2,live 4753 opt_cd NULL
+03a,t_prc_component_prices,UPDATE opt_cd,comp_price_id=4598,opt_cd=OPV_000429,16000.00,spec §2,live 4598 opt_cd NULL
+03a,t_prc_component_prices,UPDATE opt_cd,comp_price_id=4599,opt_cd=OPV_000429,18000.00,spec §2,live 4599 opt_cd NULL
+03a,t_prc_component_prices,UPDATE opt_cd,comp_price_id=4600,opt_cd=OPV_000429,20000.00,spec §2,live 4600 opt_cd NULL
+03a,t_prc_component_prices,UPDATE opt_cd,comp_price_id=4604,opt_cd=OPV_000430,7000.00,spec §2,live 4604 opt_cd NULL
+03a,t_prc_component_prices,UPDATE opt_cd,comp_price_id=4605,opt_cd=OPV_000430,9800.00,spec §2,live 4605 opt_cd NULL
+03a,t_prc_component_prices,UPDATE opt_cd,comp_price_id=4606,opt_cd=OPV_000430,12000.00,spec §2,live 4606 opt_cd NULL
+03b,t_prc_component_prices,UPDATE siz_cd RC-4,comp_price_id=4598,SIZ_000258->SIZ_000172,16000.00,spec §3,A4 210x297 동일등급
+03b,t_prc_component_prices,UPDATE siz_cd RC-4,comp_price_id=4599,SIZ_000315->SIZ_000174,18000.00,spec §3,A3 297x420 동일등급
+03b,t_prc_component_prices,UPDATE siz_cd RC-4,comp_price_id=4600,SIZ_000317->SIZ_000197,20000.00,spec §3,A2 420x594 동일등급
+04,t_prc_formula_components,INSERT,"(PRF_POSTER_BANNER_M,COMP_POSTEROPT_BANNER_MESH_ADD_QBANG_4)",addtn_yn=Y seq=2,,spec §2,frm MAX disp=1
+04,t_prc_formula_components,INSERT,"(PRF_POSTER_BANNER_M,COMP_POSTEROPT_BANNER_MESH_ADD_STRING_4)",addtn_yn=Y seq=3,,spec §2,same frm seq+1
+04,t_prc_formula_components,INSERT,"(PRF_POSTER_CANVAS_HANGING,COMP_POSTEROPT_CANVAS_HANGING_WOODHANGER)",addtn_yn=Y seq=2,,spec §2,frm MAX disp=1
+04,t_prc_formula_components,INSERT,"(PRF_POSTER_LINEN_WOODBONG,COMP_POSTEROPT_LINEN_WOODBONG_WOODBONG)",addtn_yn=Y seq=2,,spec §2,frm MAX disp=1
