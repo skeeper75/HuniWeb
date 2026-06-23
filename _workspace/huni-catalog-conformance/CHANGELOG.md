@@ -5,6 +5,31 @@
 
 ---
 
+## 2026-06-23 (9) — RC-2 각목 라이브 COMMIT (12000 이중합산 해소·도메인/경쟁사 Q3 수렴)
+
+RC-2 데이터 트랙의 마지막 BLOCKED 핵심(각목)을 사용자 도메인 입력+가격표 권위+경쟁사 리서치로 닫고 COMMIT.
+arbiter 모델 재정립(background) → 사용자 Q1~Q3 → 도메인/경쟁사 Q3 리서치 → option-mapper 명세 →
+load-builder 적재본 → validator R1~R6 → 인간 승인 → load-executor COMMIT.
+
+**Q3 도메인·경쟁사 수렴**(`04_price_engine/rc2-gakmok-q3-domain-benchmark.md`): 손님 직접 택1 vs 사이즈 자동
+판정 중 **세 권위(인쇄 도메인 관행·경쟁사 5곳 전건·권위 가격표) 모두 (a) 손님 직접으로 수렴**. 자동 사이즈
+판정 UX는 어디서도 발견 0(레드프린팅도 각목 위치 "상하 가로/좌우 세로" 손님 직접 선택). → 데이터만으로
+닫힘·위젯 코드 불요.
+
+**각목 라이브 COMMIT**(`03_cpq_link/rc2-gakmok-load-spec.md`·`09_load/_rc2_gakmok_260623/`·12행):
+① Q1 옵션 재라벨 — 기존 OPV_000015/016을 가격표 verbatim 라벨로(각목900이하+끈/900초과+끈·신규 채번
+회피) ② Q2 세로/가로 신규 그룹 OPT_000063(OPV_000432 세로변/OPV_000433 가로변·가격 0·생산메타 분리)
+③ comp 정비 — _LE/_GT 2 comp use_dims []→[opt_cd]·단가행 4698 opt_cd=OPV_000015(4000)·4700 opt_cd=
+OPV_000016(8000) verbatim·부모 껍데기 use_yn=N ④ PRF_POSTER_BANNER_N addtn_yn=Y 바인딩 2.
+
+**★12000 이중합산 결함 해소**: 현행 _LE/_GT 둘 다 빈 use_dims=always-match → 한 주문에 4000+8000=12000
+이중합산(돈크리티컬). opt_cd 충전 + OPT_000004 택1(max_sel_cnt=1)로 동시매칭 원천 차단 → 미선택 0·각목≤900
+=4000 1행·각목>900=8000 1행. 빌더가 **보수안(2 comp 유지·각 opt_cd 충전)** 채택(형제 끈/큐방 동형·comp
+병합 리스크 회피·메모리 통합 함정 회피). R1~R6 GO·단가 verbatim·기초코드 마스터 불변·메쉬139 미접촉
+(가격표 각목 부재). **RC-2 데이터 트랙(추가물 3상품+CONFIRM 3건+각목) 전부 COMMIT 완료.**
+
+---
+
 ## 2026-06-23 (8) — RC-2 CONFIRM 확정 3건 라이브 COMMIT + 각목 모델 재정립 (사용자 도메인 입력)
 
 사용자 "CONFIRM 정리하고 막힌 것들 진행" directive. RC-2 미해결 CONFIRM 4건(A 타공·4 각목·B 린넨마감·

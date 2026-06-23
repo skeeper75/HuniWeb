@@ -290,7 +290,7 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 **산출물 루트:** `_workspace/huni-catalog-conformance/` (01_authority·02_basedata·03_cpq_link·04_price_engine·05_codex·06_gate·_meta). 누락 0의 자=`01_authority/conformance-checklist.csv`(전 상품×12축). 자격증명 `.env.local RAILWAY_DB_*`(읽기전용 SELECT)·`HUNI_ADMIN_*`(gstack 읽기 탐색만). codex 헬퍼=`hqv-codex-cross-verify/scripts/codex-review.sh` 재사용.
 
-**변경이력:** 최신: 2026-06-23 RC-2 CONFIRM 확정 3건 COMMIT(린넨마감124 바인딩·타공138/139 데이터정리·족자135 opt_cd 재배선·19행·B=CLOSED·R1~R6 GO)+각목 모델 재정립(권위출처=가격표 포스터사인·후보C opt_cd 임계내장·데이터만). 직전: RC-2 추가물 3상품·RC-5 단가 COMMIT. 잔여=각목 적재(사용자 Q)·PET(HOLD-1)·타공8/족자 단가 결정·RC-1 → `_workspace/huni-catalog-conformance/CHANGELOG.md`
+**변경이력:** 최신: 2026-06-23 RC-2 각목 COMMIT(손님 택1 900이하/초과·세로가로 생산메타 분리·12000 이중합산 해소·12행·Q3 도메인/경쟁사 손님직접 수렴·R1~R6 GO)→RC-2 데이터 트랙(추가물·CONFIRM·각목) 전부 완료. 직전: RC-2 CONFIRM 3건·추가물·RC-5 COMMIT. 잔여=PET(HOLD-1)·타공8/족자 단가 컨펌·타공 위젯 코드트랙·RC-1 → `_workspace/huni-catalog-conformance/CHANGELOG.md`
 
 ## 22. Harness: Huni-RE-Verify (RedPrinting 위젯/SDK 역공학 재검증 + 런타임 동등성 검증 · codex high 교차)
 

@@ -1,0 +1,24 @@
+section,key,col,value
+comp,COMP_POPT_BNR_GAKMOK_STR_900_4,use_dims,NULL
+comp,COMP_POPT_BNR_GAKMOK_STR_900_4,use_yn,Y
+comp,COMP_POPT_BNR_GAKMOK_STR_900_4_GT,use_dims,[]
+comp,COMP_POPT_BNR_GAKMOK_STR_900_4_GT,use_yn,Y
+comp,COMP_POPT_BNR_GAKMOK_STR_900_4_LE,use_dims,[]
+comp,COMP_POPT_BNR_GAKMOK_STR_900_4_LE,use_yn,Y
+cprice,4698,apply_ymd,2026-06-01
+cprice,4698,comp_cd,COMP_POPT_BNR_GAKMOK_STR_900_4_LE
+cprice,4698,opt_cd,NULL
+cprice,4698,unit_price,4000.00
+cprice,4700,apply_ymd,2026-06-01
+cprice,4700,comp_cd,COMP_POPT_BNR_GAKMOK_STR_900_4_GT
+cprice,4700,opt_cd,NULL
+cprice,4700,unit_price,8000.00
+option,OPV_000015,disp_seq,4
+option,OPV_000015,opt_grp_cd,OPT_000004
+option,OPV_000015,opt_nm,각목(세로)+끈(4개) 추가
+option,OPV_000016,disp_seq,5
+option,OPV_000016,opt_grp_cd,OPT_000004
+option,OPV_000016,opt_nm,각목(가로)+끈(4개) 추가
+absence,GAKMOK_binding,count,0
+absence,OPT_000063_grp,count,0
+absence,OPV_432_433_opt,count,0
