@@ -5,10 +5,11 @@
 > 단가 verbatim 불변·기초코드 마스터(t_mat/t_siz/t_prc 공유) 불변·생성≠검증·DB 쓰기는 인간 승인 후만.
 
 ## 다음 시작점 (택1·실사 RC 교정 이어가기)
-지금 실사 카테고리 RC 교정 중. 후보 3개 — 권장 순서:
-1. **RC-5 아크릴/폼보드 단가 교정** (★즉시 가능·돈크리·선행 CONFIRM 없음): 유광아크릴(142)·미러아크릴(143)·폼보드(129 A1행 누락)의 라이브 단가가 권위(silsa-l1)와 다름. **권위=정답·라이브 교정 확정(사용자)**. 단가 verbatim으로 교정 + 폼보드 A1 행 추가. 체인=load-builder DRY-RUN→validator R1~R6→load-executor COMMIT. (단 RC-5 단 별색옵션 혼동 가능성은 적재 전 1회 확인.)
-2. **RC-2 나머지 6 현수막류**: 메쉬현수막·PET배너·캔버스행잉(+RC-4 차원역배선 동반)·린넨우드봉·족자·린넨패브릭. **CPQ 옵션/공정 선등록이 선행**(dbm-cpq-option-mapping)해야 시뮬레이터가 판별값 전송 → 그 후 일반현수막과 동일 패턴(use_dims+단가행+addtn 바인딩) 전파.
-3. **RC-1 프리셋(R-B3-PRICE)**: A3/A2/A1/사용자입력을 **opt_cd 옵션그룹**으로 모델(코드 변경 없이·`r-b3-price-model.md`). 단 각목·동시선택 등 코드트랙 CONFIRM 정리 후가 안전.
+지금 실사 카테고리 RC 교정 중. 후보 2개 — 권장 순서 (★RC-5는 2026-06-23 COMMIT 완료):
+1. **RC-2 나머지 6 현수막류**: 메쉬현수막·PET배너·캔버스행잉(+RC-4 차원역배선 동반)·린넨우드봉·족자·린넨패브릭. **CPQ 옵션/공정 선등록이 선행**(dbm-cpq-option-mapping)해야 시뮬레이터가 판별값 전송 → 그 후 일반현수막과 동일 패턴(use_dims+단가행+addtn 바인딩) 전파.
+2. **RC-1 프리셋(R-B3-PRICE)**: A3/A2/A1/사용자입력을 **opt_cd 옵션그룹**으로 모델(코드 변경 없이·`r-b3-price-model.md`). 단 각목·동시선택 등 코드트랙 CONFIRM 정리 후가 안전.
+
+> **RC-5 완료(2026-06-23)**: 유광아크릴(142)·미러아크릴(143)·폼보드(129) 단가 라이브 COMMIT. 별색옵션 혼동 4축 배제(CONFIRM-2 해소)·권위 verbatim 10행(UPDATE 9+INSERT 1)·R1~R6 GO. 진단=`04_price_engine/rc5-acrylic-foamboard-diagnosis.md`·적재본=`_workspace/huni-dbmap/09_load/_rc5_acrylic_foamboard_260623/`(undo 보유).
 
 실행 패턴(검증된 체인): `dbm-load-builder`(적재본+DRY-RUN·COMMIT 안 함) → `dbm-validator`(R1~R6 독립 게이트) → 사용자 승인 → `hbd-load-executor`(백업·DRY-RUN·COMMIT·사후검증·undo).
 
@@ -33,6 +34,7 @@
 - R-B3 A3/A2/A1=실제 등록 siz_cd 용지 프리셋(고정 7000/7000/12000)·사용자입력=nonspec 면적매트릭스(600mm~·900은 일반현수막용·포스터 무관).
 
 ## 건드리지 말 것 (확정·되돌리지 말 것)
+- **RC-5 아크릴/폼보드 단가 라이브 COMMIT**(2026-06-23·component_prices 10행 권위 verbatim): 유광아크릴 4792~4795·미러아크릴 4796~4799·폼보드 4780(A3 6000)·A1 신규 38239(20000). undo=`09_load/_rc5_acrylic_foamboard_260623/undo.sql`·백업=`backup-before-260623.csv`.
 - **RC-2 일반현수막 라이브 COMMIT**(PRD_000138/PRF_POSTER_BANNER_N 가공/추가 6 comp 배선·미선택0가산 해소). undo=`09_load/_rc2_banner_260623/undo.sql`.
 - **R-GP4-1 굿즈 GP-1 base 26행 COMMIT**(`09_load/_gp1_base_260623/`).
 - **과대청구 8건 COMMIT**(접지카드·포토카드·명함·094·배치2 PROC) + **019 교정** — 전부 되돌리지 말 것.

@@ -5,6 +5,30 @@
 
 ---
 
+## 2026-06-23 (6) — RC-5 아크릴/폼보드 단가 교정 라이브 COMMIT (별색옵션 혼동 4축 배제)
+
+실사 RC 교정 이어가기 — RC-5(아크릴·폼보드 본체단가 오적재) 라이브 COMMIT 완주. 전 체인 검증된
+순서대로: 진단(arbiter) → 적재본+DRY-RUN(load-builder) → R1~R6 독립 게이트(validator) → 인간 승인 →
+COMMIT+사후검증(load-executor).
+
+**선행 진단 CONFIRM-2 해소**(`04_price_engine/rc5-acrylic-foamboard-diagnosis.md`): 라이브 어긋난 단가가
+별색옵션 값 오인이 아니라 본체 siz_cd 단가 **단순 오적재**(진원=상류 v03 추정)임을 4축 교차로 배제 —
+① 권위 silsa-l1 "화이트별색(옵션)" col26 3상품 전행 공란 ② 라이브 단가행 clr_cd/opt_cd/dim_vals 전 10행
+NULL ③ CPQ 별색옵션 그룹 0개 ④ 엔진 NON_QTY_DIMS(pricing.py)에 clr_cd 부재. 각 상품 1:1 전용 공식 +
+단일 본체 comp(use_dims=`["siz_cd"]`).
+
+**교정 라이브 COMMIT**(`09_load/_rc5_acrylic_foamboard_260623/`·component_prices 10행·단가 verbatim):
+유광아크릴(142) 4792~4795 → 12000/18000/28000/47000 · 미러아크릴(143) 4796~4799 → 15000/22000/36000/62000 ·
+폼보드(129) 4780(A3) 7000→6000 / A2(4781)=12000 불변 / **A1=SIZ_000294(594×841 세로형) 20000 신규 INSERT**
+(comp_price_id 38239). search-before-mint 충족(siz_cd 전부 기존재·신규 채번 0)·기초코드 마스터 t_siz/t_mat
+불변. undo=`undo.sql`·백업=`backup-before-260623.csv` 보유.
+
+**검증 GO**: R1~R6 전건 PASS(BLOCKER/MAJOR 0). MINOR-1=빌더 manifest IDENTITY 시퀀스 수치 기재 오류
+(dry-run nextval 전진·ROLLBACK이 시퀀스 미복원하는 PostgreSQL 정상 동작) — seq>MAX라 채번 충돌 0·적재
+안전성 무영향. 생성≠검증 실효 입증(검증자 독립 재실측이 적발).
+
+---
+
 ## 2026-06-23 (5) — 실사 가격 구조 종합 모델 + 차원 메커니즘 감사 + RC-2 일반현수막 COMMIT
 
 사용자 directive(장치를 적재적소에·정확한 값까지 끈기있게)로 실사 카테고리를 단편 교정이 아니라

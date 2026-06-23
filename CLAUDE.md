@@ -290,7 +290,7 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 **산출물 루트:** `_workspace/huni-catalog-conformance/` (01_authority·02_basedata·03_cpq_link·04_price_engine·05_codex·06_gate·_meta). 누락 0의 자=`01_authority/conformance-checklist.csv`(전 상품×12축). 자격증명 `.env.local RAILWAY_DB_*`(읽기전용 SELECT)·`HUNI_ADMIN_*`(gstack 읽기 탐색만). codex 헬퍼=`hqv-codex-cross-verify/scripts/codex-review.sh` 재사용.
 
-**변경이력:** 최신: 2026-06-23 실사 가격구조 종합모델(5클래스·6 RC)+차원메커니즘 감사(옵션/공정상세/템플릿 코드 구현·시뮬레이터 중심·위젯 별도)+RC-2 일반현수막 파일럿 라이브 COMMIT(가공/추가 6comp 배선·미선택0가산 과소청구 해소·R1~R6 GO·되돌리지말것). 직전: K6 PASS·GP-1 base 26행 COMMIT. 잔여=RC-2 6현수막류/RC-5 단가/RC-1 프리셋 → `_workspace/huni-catalog-conformance/CHANGELOG.md`
+**변경이력:** 최신: 2026-06-23 RC-5 아크릴/폼보드 단가교정 라이브 COMMIT(별색옵션 혼동 4축 배제·CONFIRM-2 해소·component_prices 10행 권위 verbatim·폼보드 A1 신규·R1~R6 GO·되돌리지말것). 직전: 실사 가격구조 종합모델(5클래스·6 RC)+차원메커니즘 감사+RC-2 일반현수막 COMMIT. 잔여=RC-2 6현수막류/RC-1 프리셋 → `_workspace/huni-catalog-conformance/CHANGELOG.md`
 
 ## 22. Harness: Huni-RE-Verify (RedPrinting 위젯/SDK 역공학 재검증 + 런타임 동등성 검증 · codex high 교차)
 
