@@ -304,7 +304,43 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 **변경이력:** 최신: 2026-06-23 첫 종단 실행+역공학 최신화(4월→6월 widget.js +137KB·R0~R3 재역공학·Garage/신규14필드/신규옵션군)+신규필드 재검증(V-PRICE NO-GO·N3 견적불가/N1 저청구)+N3·N1 교정(vitest 159 green·N3 CLOSED) → `_workspace/huni-re-verify/CHANGELOG.md`
 
-## 23. MoAI Framework (gated — rarely used here)
+## 23. Harness: Huni-Set-Product (셋트상품 구성·설계·라이브 적재)
+
+**목표:** 기초마스터~상품정보~상품뷰어~셋트상품관리 4계층을 종합해 **셋트상품(부품조립형: 셋트 완제품 `prd_cd` ← 반제품 구성원 `sub_prd_cd`, `t_prd_product_sets`)** 구성 데이터를 설계하고 **라이브 DB에 실제 적재**(자체 load-executor·인간 승인 게이트)한다. 권위[HARD]=상품마스터 엑셀(260610), 참조=인쇄도메인+경쟁사(레드프린팅·와우프레스 상품군), 가격은 `evaluate_set_price`(pricing.py:718 — 구성원별 evaluate_price 합산 + 셋트 완제품 공식 + 할인) 정합으로 **가격 구성 가능성**까지. 상품유형[사용자 확정]: 기성상품(제조불필요)·디자인상품 **제외**·완제품=셋트 아닌 단일 제조상품·반제품=셋트 구성원(webadmin admin.py:1082 인라인 필터와 정합). §18(셋트 가격공식 설계·DB 미적재)·§7(CPQ/templates 스키마)·§21(addon 정합 검증)·§11(세트 메타모델)의 산출을 **입력으로 종합**해 셋트 구성 데이터 조립·실 적재하는 전용 트랙(재병합 금지·상보).
+
+**트리거:** "셋트상품 구성", "셋트상품 설계", "세트상품 설계", "부품조립 셋트", "t_prd_product_sets 적재", "셋트 구성 데이터", "셋트상품 라이브 적재", "셋트 가격 구성", "셋트상품 하네스 실행/재실행/업데이트/보완", "특정 셋트만 구성/설계" 등 본 도메인 요청 시 `huni-set-product-orchestrator` 스킬을 사용. 가격공식 설계 자체는 §18, 전 상품 정합은 §21, CPQ 옵션 매핑은 §7(dbmap). 단순 질문은 직접 응답.
+
+**산출물 루트:** `_workspace/huni-set-product/` (01_authority·02_reference·03_design·04_codex·05_gate·06_load·_meta). 6인 팀(`hsp-authority-curator`∥`hsp-domain-researcher` 기준점 팬아웃 → `hsp-set-designer` 설계 → `hsp-codex-verifier` codex 독립 2차 → `hsp-set-gate` S1~S7 게이트(evaluate_set_price 재계산·DRY-RUN) → `hsp-load-executor` 승인 후 안전 적재(백업·복합PK 멱등·사후검증)) + 5 스킬(+ `dbm-load-execution`·`hqv-codex-cross-verify`·`hpe-competitor-benchmark`·`rpm-live-reverse` 재사용). 생성≠검증·codex 주장=가설·search-before-mint(반제품 신규 mint 금지·미등록은 BLOCKED→dbmap 위임)·라이브 읽기전용(적재 Phase 5만 인간 승인 후 COMMIT)·파일럿(책자류·엽서북·떡메) 완주→동형 전파. 자격증명 `.env.local RAILWAY_DB_*`.
+
+**변경이력:** 최신: 2026-06-25 자재 정합 3종 종결(좀비배선 13건 COMMIT)+W2 색/면지 옵션화 1차(9그룹/29옵션 COMMIT)+셋트 가격 적재 착수(097 떡메 바인딩 COMMIT). ★책자 가격=셋트 하이브리드 모델(구성원별 공식+셋트 제본) 확정·단일번들 PRF 폐기(코드 실측)·072 게이트+codex NO-GO(내지 본체통합 ~20배 과소→내지 반제품 승격 선결). 다음=072 내지 구성원 승격(dbmap 구조변경+인간승인) → `_workspace/huni-set-product/HANDOFF.md`·`CHANGELOG.md`
+
+---
+
+## 24. Harness: Huni-Shopby-Commerce (라이브DB 상품/가격 → Shopby 장바구니→주문 통합 설계)
+
+**목표:** 라이브 Railway DB 상품/가격(t_prd_*·t_prc_*·`evaluate_price` 계산가·CPQ)을 **Shopby(NHN Commerce) 장바구니→주문**으로 보내고, 추후 위젯이 고객의 구성요소 선택을 카트를 통해 주문 완료까지 잇도록, ★선행 토대(webadmin 상품+구성요소 선택→가격계산 흐름·라이브 DB 적재 현황) + Shopby 전수 리서치 + 라이브DB→카트→주문 **종단 통합 설계서·아키텍처·API 계약·시퀀스**를 산출한다. admin-analysis 방향(주문/회원/정산/배송=Shopby 네이티브, 상품등록·인쇄옵션·생산워크플로우·파일업로드=커스텀)과 정합. 6인 팀(`hsb-foundation-curator`[후니 선행 토대·기존 §13/§14/§21/§7 산출 재사용] ∥ `hsb-commerce-researcher`[Shopby 커머스] 기준점 팬아웃 → `hsb-product-bridge-analyst` 브리지 → `hsb-integration-architect` 설계 → `hsb-codex-verifier` codex 독립 2차 → `hsb-integration-gate` SB1~SB7 게이트). 문서 권위(OpenAPI 24종+enterprise)+라이브 갭필·브리지 전략은 하네스가 리서치 후 권고(동적 계산가 무손실 주입이 핵심 난제)·생성≠검증·codex 주장=가설·라이브 읽기전용(주문/결제 submit 금지)·DB 미적재(실 구현/연동은 인간 승인 후 §6 huni-widget 위임).
+
+**트리거:** "Shopby 통합", "Shopby 장바구니 연동", "라이브DB 카트 전달", "카트 주문 흐름", "위젯 주문 연동", "상품 가격 카트 브리지", "Shopby 커머스 설계", "주문 완료 흐름", "NHN Commerce 연동", "커머스 통합 하네스 실행/재실행/업데이트/보완", "특정 흐름만 설계" 등 본 도메인 요청 시 `huni-shopby-orchestrator` 스킬을 사용. 위젯 UI 구현은 §6, 가격공식 설계는 §18, 사이트 설계 문서는 §5. 단순 질문은 직접 응답.
+
+**산출물 루트:** `_workspace/huni-shopby/` (00_foundation·01_research·02_bridge·03_design·04_codex·05_gate·_meta). 입력 권위=`docs/shopby/`(shopby-api OpenAPI YAML 24종·shopby-api-docs-complete·shopby_enterprise_docs·aurora-react-skin-guide·admin-analysis). 선행 토대=`raw/webadmin/webadmin/catalog/{pricing.py,price_views.py}`·기존 §13/§14/§21/§7 산출 재사용. 자격증명: `.env.local RAILWAY_DB_*`(읽기전용 shape 확인)·라이브 Shopby는 문서/갭필 읽기만.
+
+**변경이력:** 최신: 2026-06-25 하네스 초기 구성(6 에이전트+7 스킬·SB1~SB7 게이트·Shopby 백엔드 확정·`shopby-excluded` 결정 갱신) + 선행 토대 큐레이터(hsb-foundation-curator) 추가(webadmin 가격계산 흐름·라이브 적재 현황을 브리지 선행 단계로·사용자 피드백) → `_workspace/huni-shopby/CHANGELOG.md`
+
+---
+
+## 25. Harness: Huni-Recode (역공학 코드 가독화 + 동작 보존 변환)
+
+**목표:** 부분 디옵된 RedPrinting JS(`docs/reversing/red_reverse_engineer/03_deobfuscated/*.js` — app-api·widget-sdk·app-components·editor-sdk)를 **사람이 읽고 길찾는 형태로 완성**하되 **[HARD] 실행 가능 동등을 유지**한다. 현대 기법(LLM이 의미 이름 추론 → AST 코드모드가 스코프 안전 적용 → AST 구조 diff로 동작 보존 증명)을 쓴다 — 텍스트 치환 금지·도메인 식별자(PDT_CD·PRICE·COD…) preserve·서드파티(Sentry·Babel 폴리필 ~9,100줄) 분리·요약. 산출=가독 소스(.js) + 길잡이 문서(아키텍처·모듈 워크스루·내비게이션·기법 노트). §22(런타임 동등성 검증)·§19(플로우 문서)·§20(edicus 코드맵)과 별개의 **"축약 코드 자체를 동작 보존하며 가독화"** 전용 트랙.
+
+**트리거:** "디옵 코드 가독화", "역공학 코드 사람이 읽게", "난독 코드 복원", "코드 가독화", "AST 디옵", "동작 보존 가독화", "서드파티 분리", "가독 소스 만들기", "Recode 하네스 실행/재실행/업데이트/보완", "특정 파일만 가독화", "가독화 다시" 등 본 도메인 요청 시 `huni-recode-orchestrator` 스킬을 사용. 위젯 동등성 검증은 §22, 플로우 문서는 §19, edicus 코드맵은 §20. 단순 질문은 직접 응답.
+
+**산출물 루트:** `docs/reversing/red_reverse_engineer/05_readable/` (`_meta` 기법플레이북·toolset·`01_cartography`(리네임/주석/서드파티 맵)·`02_readable`(가독 .js)·`03_verify`(G1~G6 verdict)·`_tooling`(node_modules·gitignore)·`docs`(길잡이 문서)). 5 에이전트(`rcd-technique-researcher` 최신기법 → `rcd-module-cartographer` 맵 → `rcd-readability-engineer` AST 변환·생성 → `rcd-equivalence-verifier` 동등성·가독성 게이트·검증 → `rcd-doc-author` 문서) + 3 스킬(`rcd-ast-deobfuscate`·`rcd-equivalence-verify`·오케스트레이터). ★실행 모드=**dynamic workflow(Workflow 툴)**: cartograph→codemod→verify(G1~G6)→NO-GO 시 루프(맵/스크립트 보강·최대 3회)→doc, 목적 부합까지. 생성≠검증·동작 보존=AST 구조 동등성(G2)이 자·파일럿(deob_05)→동형 전파(06/07/editor_sdk)·읽기전용(라이브 불요·Node+@babel+recast+prettier). 도구 미설치 시 `_tooling/`에 npm 설치.
+
+**변경이력:** 최신: 2026-06-25 하네스 초기 구성(5 에이전트+3 스킬+AST 코드모드/검증 스크립트 6종·G1~G6 게이트·dynamic workflow 실행) → 첫 실행 시 CHANGELOG 생성
+
+---
+
+## 26. MoAI Framework (gated — rarely used here)
 
 The MoAI-ADK orchestration framework (SPEC plan/run/sync, TRUST 5, DDD/TDD, Agent Teams,
 design GAN loop) is installed but not the primary workflow in this repo. Its detailed

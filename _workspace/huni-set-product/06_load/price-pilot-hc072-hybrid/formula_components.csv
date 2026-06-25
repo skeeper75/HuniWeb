@@ -1,0 +1,7 @@
+frm_cd,comp_cd,disp_seq,addtn_yn,role,note
+PRF_HC_COVER,COMP_PRINT_DIGITAL_S1,1,Y,표지인쇄,"표지 단면 인쇄·proc_cd=PROC_000004·plt_siz=SIZ_000499 국4절·print_opt 주입·siz_cd=표지펼침(pansu=1)"
+PRF_HC_COVER,COMP_COAT_MATTE,2,Y,표지코팅,"무광 단면·proc_cd=PROC_000015·coat_side_cnt=1·plt_siz=SIZ_000499"
+PRF_HC_COVER,COMP_PAPER,3,Y,표지용지,"아트150 국4절 절가 46.65·mat_cd=MAT_000078·plt_siz=SIZ_000499"
+PRF_HC_BODY,COMP_PRINT_DIGITAL_S2,1,Y,내지인쇄,"내지 양면 인쇄(S2 부활 선행)·proc_cd=PROC_000004·plt_siz=SIZ_000499·print_opt 주입·CFM-INNER-TOTSHEET 페이지곱 잔존"
+PRF_HC_BODY,COMP_PAPER,2,Y,내지용지,"내지 종이 택1 국4절 절가·plt_siz=SIZ_000499·mat_cd=내지종이"
+PRF_HC_BODY,COMP_BIND_SSABARI,3,Y,제본,"하드커버무선 제본·proc_cd=PROC_000023 셋트 고정 주입·qty=부수"

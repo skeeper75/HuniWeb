@@ -1,7 +1,9 @@
-frm_cd,comp_cd,disp_seq,addtn_yn,bimok,bimok_status,note
-PRF_HC_MUSEON_SUM,COMP_BIND_HC_MUSEON,1,Y,(5)제본비,READY,재사용 comp·proc_cd=PROC_000023 주입 선결
-PRF_HC_MUSEON_SUM,COMP_PRINT_DIGITAL_S1,2,Y,(3)표지인쇄비,READY,재사용 comp·plt_siz_cd+print_opt_cd 주입·출력매수 앱계산
-PRF_HC_MUSEON_SUM,COMP_COAT_MATTE,3,Y,(4)표지코팅비,PARTIAL,재사용 comp·GLOSSY 단가행 부재(유광선택 시 BLOCKED)
-PRF_HC_MUSEON_SUM,COMP_PRINT_DIGITAL_S2,4,Y,(1)내지인쇄비,READY,재사용 comp·×총내지매수 앱계산·S1과 별 comp(충돌가드 CFM-HC-PRINT)
-PRF_HC_MUSEON_SUM,COMP_PAPER,5,Y,(2)용지비,BLOCKED,072 자재 4종 COMP_PAPER 단가행 0행·날조금지·미배선보류
-PRF_HC_MUSEON_SUM,COMP_FOIL_LARGE_PLATE,6,Y,(6)후가공박-동판,BLOCKED,comp 미민팅·072 process 미등록·미배선보류
+frm_cd,comp_cd,disp_seq,addtn_yn,bimok,bimok_status,comp_del_yn,note
+PRF_HC_MUSEON_SUM,COMP_BIND_SSABARI,1,Y,(5)제본비,READY,N,활성 comp·PROC_000023 6행 byte동일(HC_MUSEON del_yn=Y 대체·CFM-HC-BIND-DELYN)·proc_cd=PROC_000023 주입
+PRF_HC_MUSEON_SUM,COMP_PRINT_DIGITAL_S1,2,Y,(3)표지인쇄비,READY,N,활성 comp·표지인쇄·plt_siz_cd+print_opt_cd+proc=PROC_000004 주입·출력매수 앱계산
+PRF_HC_MUSEON_SUM,COMP_COAT_MATTE,3,Y,(4)표지코팅비,READY,N,활성 comp·무광 PROC_000015·coat_side_cnt=1·SIZ_000499 단면 실재·코팅 1회 계상(이중계상 0)
+PRF_HC_MUSEON_SUM,COMP_PAPER,4,Y,(2)용지비-표지,READY,N,활성 comp·표지=아트150(MAT_000078) 国4절 46.65 순수 절가(코팅 미포함)·CFM-COVER-MAT/A4PLT
+# === 미배선 (BLOCKED/N/A·formula_components 행 미생성) ===
+# PRF_HC_MUSEON_SUM,COMP_PRINT_BOOK_INNER,5,Y,(1)내지인쇄비,BLOCKED,—,S2 del_yn=Y·S1 PK점유→2번째 활성 인쇄 comp 부재(dbmap mint 후 배선)·돈크리티컬 최대비목
+# PRF_HC_MUSEON_SUM,COMP_PAPER(내지차원),—,Y,(2)용지비-내지,BLOCKED,N,2번째 평가슬롯 필요(내지인쇄와 묶음)
+# (6)후가공박 = N/A — 072 박 공정 미등록(권위+라이브 2중)·미배선

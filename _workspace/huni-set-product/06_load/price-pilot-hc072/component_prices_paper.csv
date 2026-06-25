@@ -1,0 +1,30 @@
+# 072 용지비(2) COMP_PAPER 단가행 — 재실측 갱신(표지 BLOCKED 해제·내지 READY·면지 무료)
+# 생성: hsp-set-designer · 2026-06-25 라이브 읽기전용 SELECT + cover-paper-calc-derivation.md(표지전용지=seq9 산식·아트150 46.65)
+# 단가 날조 0 · DB 미적재(설계까지) · search-before-mint(신규 단가행 0)
+# COMP_PAPER 라이브: prc_typ_cd=PRICE_TYPE.01(단가형·절가) · use_dims=["plt_siz_cd","mat_cd"] · del_yn=N(활성)
+# 절가 의미: 종이별 국4절(SIZ_000499 316x467) 1절 단가 — 실청구=출력매수만큼 앱 곱(중간계산=앱·DB=절가 룩업)
+#
+# === 판정별 그룹 ===
+# [READY-EXISTING] 표지 용지비: 아트지150g(MAT_000078) 国4절 절가 = 46.65 (라이브 실재·byte=가격표 출력소재 row9)
+#   → "계산식"의 정체 = seq9 용지비 공통산식([크기별기준단가]×[출력매수]+5장) · 기준단가=아트150 46.65
+#   → COMP_PAPER 재사용·신규 단가행 0. (코팅은 표지코팅비 비목 별도 = 이중계상 0)
+#
+# [READY-EXISTING] 내지 용지비: *별도설정(사용자 택1 종이) → 선택 자재의 기존 단가행 매칭
+#   → COMP_PAPER 56행에 이미 적재(MAT_000072~151). 신규 0건.
+#   ※ 단 set 공식에서 내지 용지비는 표지와 별 평가슬롯 필요(내지인쇄와 묶음 BLOCKED·BLK-HC-INNERPAPER)
+#
+# [FREE] 면지 3종(MAT_000001 화이트/MAT_000002 블랙/MAT_000003 그레이): 무료
+#   → 권위 6비목에 면지비목 없음 + 무지3색(인쇄면지 없음) + sets 무지 3중 정합(lining-derivation)
+#   → formula_components 미포함·단가행 불요. 무료 CPQ 색옵션.
+#
+# [CONFIRM] MAT_000246(전용지): 라이브 COMP_PAPER 0행. 적재 시 아트150 절가(46.65) 복제 가능(날조 0)
+#   → CFM-COVER-MAT: MAT_000078(아트150 직접·신규 0) vs MAT_000246(복제·자재 고유성)·단가 동일·돈 영향 0
+# [CONFIRM] A4 표지 3절(SIZ_000475): 아트150 3절 절가 부재(国4절만)·CFM-COVER-A4PLT
+#
+comp_cd,mat_cd,plt_siz_cd,min_qty,unit_price,note,verdict,source
+COMP_PAPER,MAT_000078,SIZ_000499,1,46.65,표지 용지비 — 아트150 国4절 순수 절가(코팅 미포함)·기존 단가행 재사용,READY_REUSE,라이브 t_prc_component_prices 2026-06-25 + 가격표 출력소재 row9
+COMP_PAPER,MAT_000246,SIZ_000499,1,46.65,표지 전용지 — 아트150 절가 복제(택1·CFM-COVER-MAT)·코팅 미포함,CONFIRM_OPTIONAL,cover-paper-calc-derivation §4.1(아트150 베이스 복제)
+COMP_PAPER,MAT_000078,SIZ_000475,1,,A4 표지 3절 — 아트150 3절 절가 부재,BLOCKED_CONFIRM,라이브 COMP_PAPER 아트150=国4절만(CFM-COVER-A4PLT)
+COMP_PAPER,MAT_000001,,,,면지 화이트 — 무료(권위 면지비목 없음),FREE,lining-price-derivation-method.md(3중 정합)
+COMP_PAPER,MAT_000002,,,,면지 블랙 — 무료,FREE,lining-price-derivation-method.md
+COMP_PAPER,MAT_000003,,,,면지 그레이 — 무료,FREE,lining-price-derivation-method.md

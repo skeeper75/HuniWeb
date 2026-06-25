@@ -1,0 +1,8 @@
+id,scope,item,block_reason,routing_track,money_critical,status
+CFM-INNER-TOTSHEET,set/072-body,내지 총내지매수(부수×ceil(페이지/판걸이)),"본체 PRF_HC_BODY는 copies로 평가→plate_qty(copies,pansu)만 환산·페이지 곱 미반영. 권위 내지인쇄비=총내지매수×단가. 정석=내지 별도 반제품 구성원 승격(derive_inner_sheets). 현 라이브=내지가 본체 통합",dbmap(내지 반제품 등록+sets행 추가) or 본체공식 한계 수용,Y,BLOCKED
+CFM-COVER-A4PLT,member/073-cover,A4 표지 3절 아트150 절가행,"라이브 COMP_PAPER=국4절(SIZ_000499) 1판형만·3절(SIZ_000475) 절가행 0행. 가격표 verbatim 89.54 존재(신규mint 불요·적재만)",dbmap(아트150 3절 89.54 적재·verbatim),Y,BLOCKED
+CFM-COVER-SPREAD-SIZ,member/073-cover,표지 펼침 사이즈코드(390x268),"표지 펼침 siz 미등록(근사 SIZ_000326 390x290). 표지 pansu=1 정합 위해 member.selections.siz_cd로 줄 표지펼침 코드 필요",dbmap(siz 신설·search-before-mint),N,CONFIRM
+CFM-INNER-PLATE,set/072-body,내지 인쇄판형=국4절 매핑,"S1/S2 단가행 plt_siz={SIZ_000077,SIZ_000499}만. 072 plate_sizes(SIZ_000250/252)는 인쇄단가 0행→no-match(0원). set_selections.plt_siz_cd=국4절 명시주입 or 072 plate_sizes에 국4절 추가",set_selections 주입 or dbmap(plate_sizes),Y,CONFIRM
+CFM-S2-REVIVE,comp/COMP_PRINT_DIGITAL_S2,S2 부활 del_yn Y→N,"양면 내지 단가(212행 verbatim·부작용0·참조 활성공식0). inner-print-arbitration §4 권고",dbmap(인간 승인 UPDATE),Y,CONFIRM
+CFM-COVER-MAT,member/073-cover,표지 자재코드 MAT_000078 vs MAT_000246,"단가 동일 46.65 verbatim(돈영향0)·청구 자재코드 택1",적재 시 택1,N,CONFIRM
+CFM-COVER-SONJI,member/073-cover,손지 +5장 표지 출력매수,"seq9 +5장(손지율) 표지 적용여부·앱 임포지션",인간(앱 임포지션),N,CONFIRM

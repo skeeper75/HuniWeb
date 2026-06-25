@@ -1,5 +1,10 @@
-id,scope,bimok,blocked_reason,routing,evidence
-BLK-HC-PAPER,component_prices,(2)용지비,072 표지/면지/내지 자재 4종(MAT_000246/001/002/003) COMP_PAPER 단가행 0행·단가 날조 금지,dbmap 가격표 종이비 재추출→COMP_PAPER 단가행 추가,라이브 실측 COMP_PAPER mat_cd 분포에 4종 미수록
-BLK-HC-FOIL,price_components+component_prices,(6)후가공박,COMP_FOIL_LARGE_* 라이브 0행·등급코드/동판좌표51/상품바인딩 미해소,§18+dbmap foil-large(194행 분해 보유),COMP_FOIL_LARGE COUNT 0·072 process 박 미등록
-PARTIAL-HC-COAT,component_prices,(4)표지코팅(유광),COMP_COAT_GLOSSY 단가행 0행(R7 드리프트·round-16 184행 주장 vs 라이브 92행),dbmap 코팅 유광 verbatim 재추출,라이브 GLOSSY COUNT 0·MATTE 92
-BLK-HC-BIND-PRF,product_price_formulas,바인딩,용지비(2) BLOCKED 상태 바인딩 시 용지 누락 과소청구(돈크리티컬)→6비목 READY 후 바인딩,용지비 해소 후 hsp-load-executor,바인딩=과소청구 가드
+id,scope,bimok,blocked_reason,routing,evidence,status
+BLK-HC-INNERPRINT,formula_components+price_components,(1)내지인쇄비,COMP_PRINT_DIGITAL_S2 del_yn=Y(삭제)·COMP_PRINT_DIGITAL_S1 PK점유→2번째 활성 인쇄 comp 부재·돈크리티컬(책자 최대 비목 총내지매수 곱),dbmap COMP_PRINT_BOOK_INNER mint(S1 단가 verbatim 복제) or S2 활성화 후 seq5 배선,라이브 S2 del_yn=Y·S1 del_yn=N·formula_components PK=(frm_cd comp_cd) 동일 comp 중복 0건,BLOCKED
+BLK-HC-INNERPAPER,formula_components,(2)내지 용지비,2번째 평가슬롯 필요(한 comp·한 selections·1회 평가 제약)→내지인쇄와 묶음,dbmap(내지인쇄 해소와 동시),pricing.py formula_component별 1회 평가·selections 1세트,BLOCKED
+CFM-HC-BIND-DELYN,formula_components,(5)제본비,COMP_BIND_HC_MUSEON del_yn=Y(삭제)→COMP_BIND_SSABARI(활성) 대체·단가 byte동일,실무진(HC_MUSEON 활성화 복원 vs SSABARI 정명·단가 영향 0),라이브 HC_MUSEON del_yn=Y·SSABARI del_yn=N·PROC_000023 6행 동일,CONFIRM(보수안=SSABARI 배선)
+CFM-COVER-MAT,component_prices,(2)표지 용지비,표지 자재코드 MAT_000078(아트150) 직접 vs MAT_000246(전용지 0행) 복제·단가 동일 46.65,적재 시 1코드 택1(돈 영향 0),라이브 MAT_000078 国4절=46.65·MAT_000246 0행,CONFIRM(보수안=아트150 직접)
+CFM-COVER-A4PLT,component_prices,(2)표지 용지비,A4 표지 3절(SIZ_000475) 아트150 절가 부재(国4절만 실재),dbmap(3절 절가 적재 or 国4절 환산),라이브 COMP_PAPER 아트150=SIZ_000499 1행만,CONFIRM
+PARTIAL-HC-COAT,component_prices,(4)표지코팅(유광),COMP_COAT_GLOSSY 활성이나 072=무광 단면이라 유광 미사용(072 한정 무관),dbmap(유광 단가 점검·072 외 셋트용),072 process=무광 PROC_000015 실사용·유광 미선택,RESOLVED(072 무관)
+CFM-HC-DSC,product_discount_tables,할인,072 수량할인 유무,—,라이브 072 discount_tables 0행(할인 없음),RESOLVED(할인 0)
+CFM-HC-FOIL,formula_components,(6)후가공박,072 박 후가공 적용 여부,—,072 process={014유광 015무광 023하드커버무선 076수축포장}·박 미등록(권위+라이브),RESOLVED(N/A)
+BLK-HC-BIND-PRF,product_price_formulas,바인딩,내지인쇄+내지용지비 BLOCKED 상태 바인딩 시 책자 최대 비목 누락(파국적 과소청구),내지인쇄 해소 후 hsp-load-executor,바인딩=과소청구 가드·apply.sql 주석 처리,BLOCKED(보류)

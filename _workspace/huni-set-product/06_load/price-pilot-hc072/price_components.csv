@@ -1,5 +1,8 @@
-comp_cd,comp_nm,comp_typ_cd,prc_typ_cd,use_dims,use_yn,reuse_status,note
-COMP_BIND_HC_MUSEON,제본비 하드커버무선,PRC_COMPONENT_TYPE.04,PRICE_TYPE.01,"[""proc_cd"",""min_qty"",""proc_grp:PROC_000017""]",Y,REUSE_EXISTING,라이브 실재·신규mint0
-COMP_PRINT_DIGITAL_S1,디지털인쇄비,(라이브),(라이브),"[""proc_cd"",""plt_siz_cd"",""print_opt_cd"",""min_qty"",""proc_grp:PROC_000001""]",Y,REUSE_EXISTING,라이브 실재·표지인쇄
-COMP_PRINT_DIGITAL_S2,디지털인쇄비,(라이브),(라이브),"[""proc_cd"",""plt_siz_cd"",""print_opt_cd"",""min_qty"",""proc_grp:PROC_000001""]",Y,REUSE_EXISTING,라이브 실재·내지인쇄
-COMP_COAT_MATTE,무광코팅비,(라이브),(라이브),"[""proc_cd"",""plt_siz_cd"",""coat_side_cnt"",""min_qty"",""proc_grp:PROC_000013""]",Y,REUSE_EXISTING,라이브 92행·표지코팅(무광)
+comp_cd,comp_nm,prc_typ_cd,use_dims,use_yn,del_yn,reuse_status,note
+COMP_BIND_SSABARI,제본비 싸바리바인더,PRICE_TYPE.01,"[""proc_cd"",""min_qty"",""proc_grp:PROC_000017""]",Y,N,REUSE_EXISTING,활성·제본비(하드커버무선 PROC_000023 byte동일)·HC_MUSEON(del_yn=Y) 대체
+COMP_PRINT_DIGITAL_S1,디지털인쇄비,PRICE_TYPE.01,"[""proc_cd"",""plt_siz_cd"",""print_opt_cd"",""min_qty"",""proc_grp:PROC_000001""]",Y,N,REUSE_EXISTING,활성·표지인쇄(212행)
+COMP_COAT_MATTE,무광코팅비,PRICE_TYPE.01,"[""proc_cd"",""plt_siz_cd"",""coat_side_cnt"",""min_qty"",""proc_grp:PROC_000013""]",Y,N,REUSE_EXISTING,활성·표지코팅 무광(92행·SIZ_000499 단면 실재)
+COMP_PAPER,용지비(종이별 절가),PRICE_TYPE.01,"[""plt_siz_cd"",""mat_cd""]",Y,N,REUSE_EXISTING,활성·표지용지(56행·MAT_000078 国4절 46.65 순수 절가·코팅 미포함)
+# === 사용 금지(논리삭제·BLOCKED) ===
+# COMP_BIND_HC_MUSEON,제본비 하드커버무선,PRICE_TYPE.01,...,Y,Y,DELETED_DO_NOT_USE,del_yn=Y(논리삭제)→SSABARI로 대체
+# COMP_PRINT_DIGITAL_S2,디지털인쇄비,...,Y,Y,DELETED_DO_NOT_USE,del_yn=Y(논리삭제)→내지인쇄 BLOCKED(dbmap COMP_PRINT_BOOK_INNER mint)
