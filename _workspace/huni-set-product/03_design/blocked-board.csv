@@ -1,0 +1,4 @@
+scope,item,blocked_reason,evidence,routing_track,authority_source
+price,엽서북 30P 견적,PRF_PCB_FIXED 구성요소가 20P 전용(COMP_PCB_S1_20P·S2_20P)뿐·30P comp/단가행 라이브 부재→30P 선택 시 매칭0 견적불가,단가행 note 전부 "20P"·formula_components 2건 모두 _20P,§18 가격엔진 설계 / dbmap 적재(30P comp+단가행 신설·인간승인),booklet-l1 row61(페이지20/30 택1)
+material,면지 자재 4종 재배선,MAT_000001~004(화이트/블랙/그레이/인쇄면지)=용도성이 자재로 오등록·t_mat 공유마스터 수술(돈·영향 큼),하드커버/링책자 4상품(PRD_000072/077/082/088) 참조·엽서북 N/A,dbmap/basecode(논리삭제+출력소재 귀속+용도축 분리·게이트GO+인간승인),set-composition-design §4
+type,셋트 부모 유형교정 6셋트,엽서북 외 6셋트(PRD_000072/077/082/088/097/100)도 prd_typ_cd=04(디자인)→정책 충돌(CONFIRM-1)·본 파일럿 범위 밖,product-type-board CONFIRM-1·admin.py:1095,인간 정책 확인 후 확장(본 directive=엽서북 1건만),set-authority-spec §1

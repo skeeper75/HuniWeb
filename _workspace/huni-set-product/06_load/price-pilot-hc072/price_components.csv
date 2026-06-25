@@ -1,0 +1,5 @@
+comp_cd,comp_nm,comp_typ_cd,prc_typ_cd,use_dims,use_yn,reuse_status,note
+COMP_BIND_HC_MUSEON,제본비 하드커버무선,PRC_COMPONENT_TYPE.04,PRICE_TYPE.01,"[""proc_cd"",""min_qty"",""proc_grp:PROC_000017""]",Y,REUSE_EXISTING,라이브 실재·신규mint0
+COMP_PRINT_DIGITAL_S1,디지털인쇄비,(라이브),(라이브),"[""proc_cd"",""plt_siz_cd"",""print_opt_cd"",""min_qty"",""proc_grp:PROC_000001""]",Y,REUSE_EXISTING,라이브 실재·표지인쇄
+COMP_PRINT_DIGITAL_S2,디지털인쇄비,(라이브),(라이브),"[""proc_cd"",""plt_siz_cd"",""print_opt_cd"",""min_qty"",""proc_grp:PROC_000001""]",Y,REUSE_EXISTING,라이브 실재·내지인쇄
+COMP_COAT_MATTE,무광코팅비,(라이브),(라이브),"[""proc_cd"",""plt_siz_cd"",""coat_side_cnt"",""min_qty"",""proc_grp:PROC_000013""]",Y,REUSE_EXISTING,라이브 92행·표지코팅(무광)

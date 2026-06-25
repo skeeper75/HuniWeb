@@ -1,0 +1,85 @@
+mat_cd,mat_nm,mat_typ_cd,mat_typ_nm,classification,verdict_basis,weight,width,height,depth,bdl_qty,price_ref,wire,active_child,upr_mat_cd
+MAT_000002,블랙면지,MAT_TYPE.02,링제본부자재,POLLUTION(usage/color:면지),"용도/색상 라벨 + 무차원, usage_cd=면지로 wire됨 → CPQ 색택1 옵션화",,,,,,0,4,0,
+MAT_000003,그레이면지,MAT_TYPE.02,링제본부자재,POLLUTION(usage/color:면지),"용도/색상 라벨 + 무차원, usage_cd=면지로 wire됨 → CPQ 색택1 옵션화",,,,,,0,4,0,
+MAT_000001,화이트면지,MAT_TYPE.02,링제본부자재,POLLUTION(usage/color:면지),"용도/색상 라벨 + 무차원, usage_cd=면지로 wire됨 → CPQ 색택1 옵션화",,,,,,0,4,0,
+MAT_000011,투명커버 무광,MAT_TYPE.02,링제본부자재,POLLUTION(usage/finish:커버),마감 옵션(무광/유광/없음) — stock 아님,,,,,,0,0,0,MAT_000009
+MAT_000010,투명커버 유광,MAT_TYPE.02,링제본부자재,POLLUTION(usage/finish:커버),마감 옵션(무광/유광/없음) — stock 아님,,,,,,0,0,0,MAT_000009
+MAT_000032,삼각대(그레이),MAT_TYPE.02,링제본부자재,STOCK(physical),정당 무차원 stock(재고관리 가능 부속),,,,,,0,0,0,MAT_000031
+MAT_000249,D링(56mm),MAT_TYPE.02,링제본부자재,STOCK(physical),치수/규격/번들 명시 → 정당 stock,,,,,,0,1,0,
+MAT_000042,아크릴 투명 1.5mm,MAT_TYPE.03,아크릴부자재,STOCK(physical),치수/규격/번들 명시 → 정당 stock,,,,,,52,1,0,MAT_000036
+MAT_000193,아크릴 화이트 3mm,MAT_TYPE.03,아크릴부자재,STOCK(physical),치수/규격/번들 명시 → 정당 stock,,,,,,0,0,0,
+MAT_000195,아크릴 골드 3mm,MAT_TYPE.03,아크릴부자재,STOCK(physical),치수/규격/번들 명시 → 정당 stock,,,,,,0,1,0,
+MAT_000194,아크릴 블랙 3mm,MAT_TYPE.03,아크릴부자재,STOCK(physical),치수/규격/번들 명시 → 정당 stock,,,,,,0,0,0,
+MAT_000196,아크릴 실버 3mm,MAT_TYPE.03,아크릴부자재,STOCK(physical),치수/규격/번들 명시 → 정당 stock,,,,,,0,1,0,
+MAT_000043,아크릴 투명 3mm,MAT_TYPE.03,아크릴부자재,STOCK(physical),치수/규격/번들 명시 → 정당 stock,,,,,,113,17,0,MAT_000036
+MAT_000044,아크릴 투명 8mm,MAT_TYPE.03,아크릴부자재,STOCK(physical),치수/규격/번들 명시 → 정당 stock,,,,,,0,2,0,MAT_000036
+MAT_000012,링,MAT_TYPE.04,하드커버부자재,STOCK(physical),정당 무차원 stock(재고관리 가능 부속),,,,,,0,0,5,
+MAT_000021,캘린더링,MAT_TYPE.04,하드커버부자재,STOCK(physical),정당 무차원 stock(재고관리 가능 부속),,,,,,0,0,2,
+MAT_000023,캘린더링 블랙,MAT_TYPE.04,하드커버부자재,STOCK(physical),정당 무차원 stock(재고관리 가능 부속),,,,,,0,0,0,MAT_000021
+MAT_000022,캘린더링 화이트,MAT_TYPE.04,하드커버부자재,STOCK(physical),정당 무차원 stock(재고관리 가능 부속),,,,,,0,0,0,MAT_000021
+MAT_000015,링 메탈링,MAT_TYPE.04,하드커버부자재,STOCK(physical),정당 무차원 stock(재고관리 가능 부속),,,,,,0,2,0,MAT_000012
+MAT_000014,링 블랙링,MAT_TYPE.04,하드커버부자재,STOCK(physical),정당 무차원 stock(재고관리 가능 부속),,,,,,0,2,0,MAT_000012
+MAT_000016,링 실버링,MAT_TYPE.04,하드커버부자재,STOCK(physical),정당 무차원 stock(재고관리 가능 부속),,,,,,0,0,0,MAT_000012
+MAT_000013,링 화이트링,MAT_TYPE.04,하드커버부자재,STOCK(physical),정당 무차원 stock(재고관리 가능 부속),,,,,,0,2,0,MAT_000012
+MAT_000018,D링 31mm,MAT_TYPE.04,하드커버부자재,STOCK(physical),치수/규격/번들 명시 → 정당 stock,,,,,,0,0,0,MAT_000017
+MAT_000019,D링 42mm,MAT_TYPE.04,하드커버부자재,STOCK(physical),치수/규격/번들 명시 → 정당 stock,,,,,,0,0,0,MAT_000017
+MAT_000020,D링 56mm,MAT_TYPE.04,하드커버부자재,STOCK(physical),치수/규격/번들 명시 → 정당 stock,,,,,,0,0,0,MAT_000017
+MAT_000047,원형핀,MAT_TYPE.07,포장부자재,STOCK(physical),정당 무차원 stock(재고관리 가능 부속),,,,,,0,1,0,MAT_000045
+MAT_000046,일자핀,MAT_TYPE.07,포장부자재,STOCK(physical),정당 무차원 stock(재고관리 가능 부속),,,,,,0,1,0,MAT_000045
+MAT_000215,천정고리,MAT_TYPE.07,포장부자재,STOCK(physical),정당 무차원 stock(재고관리 가능 부속),,,,,,0,0,0,
+MAT_000056,투명집게,MAT_TYPE.07,포장부자재,STOCK(physical),정당 무차원 stock(재고관리 가능 부속),,,,,,0,1,0,MAT_000045
+MAT_000057,블랙헤어끈,MAT_TYPE.07,포장부자재,STOCK(physical),정당 무차원 stock(재고관리 가능 부속),,,,,,0,1,0,MAT_000045
+MAT_000216,투명케이스,MAT_TYPE.07,포장부자재,STOCK(physical),정당 무차원 stock(재고관리 가능 부속),,,,,,0,0,0,
+MAT_000031,캘린더부자재,MAT_TYPE.07,포장부자재,POLLUTION(category-label-as-mat),확인 필요,,,,,,0,0,3,
+MAT_000035,캘린더부자재 끈,MAT_TYPE.07,포장부자재,POLLUTION(category-label-as-mat),정당 무차원 stock(재고관리 가능 부속),,,,,,0,0,0,MAT_000031
+MAT_000033,캘린더부자재 삼각대블랙,MAT_TYPE.07,포장부자재,POLLUTION(category-label-as-mat),정당 무차원 stock(재고관리 가능 부속),,,,,,0,0,0,MAT_000031
+MAT_000052,아크릴키링 금색고리,MAT_TYPE.07,포장부자재,STOCK(physical),정당 무차원 stock(재고관리 가능 부속),,,,,,0,1,0,MAT_000045
+MAT_000051,아크릴키링 은색고리,MAT_TYPE.07,포장부자재,STOCK(physical),정당 무차원 stock(재고관리 가능 부속),,,,,,0,1,0,MAT_000045
+MAT_000050,네오디움 자석,MAT_TYPE.07,포장부자재,STOCK(physical),정당 무차원 stock(재고관리 가능 부속),,,,,,0,0,0,MAT_000045
+MAT_000213,와이어링 블랙,MAT_TYPE.07,포장부자재,STOCK(physical),정당 무차원 stock(재고관리 가능 부속),,,,,,0,1,0,
+MAT_000210,와이어링 실버,MAT_TYPE.07,포장부자재,STOCK(physical),정당 무차원 stock(재고관리 가능 부속),,,,,,0,1,0,
+MAT_000212,와이어링 화이트,MAT_TYPE.07,포장부자재,STOCK(physical),정당 무차원 stock(재고관리 가능 부속),,,,,,0,1,0,
+MAT_000060,맥세이프 스마트톡,MAT_TYPE.07,포장부자재,STOCK(physical),확인 필요,,,,,,0,0,0,MAT_000045
+MAT_000053,스마트톡 투명바디,MAT_TYPE.07,포장부자재,STOCK(physical),확인 필요,,,,,,0,1,0,MAT_000045
+MAT_000054,스마트톡 화이트바디,MAT_TYPE.07,포장부자재,STOCK(physical),확인 필요,,,,,,0,1,0,MAT_000045
+MAT_000055,투명집게(자석형),MAT_TYPE.07,포장부자재,STOCK(physical),정당 무차원 stock(재고관리 가능 부속),,,,,,0,0,0,MAT_000045
+MAT_000252,삼각대(그레이),MAT_TYPE.07,포장부자재,STOCK(physical),정당 무차원 stock(재고관리 가능 부속),,,,,,0,1,0,
+MAT_000254,삼각대(블랙),MAT_TYPE.07,포장부자재,STOCK(physical),정당 무차원 stock(재고관리 가능 부속),,,,,,0,1,0,
+MAT_000253,링 블랙,MAT_TYPE.07,포장부자재,STOCK(physical),정당 무차원 stock(재고관리 가능 부속),,,,,,0,4,0,MAT_000012
+MAT_000048,1구자석,MAT_TYPE.07,포장부자재,STOCK(physical),정당 무차원 stock(재고관리 가능 부속),,,,,,0,1,0,MAT_000045
+MAT_000217,행택끈 사각검정 (100개),MAT_TYPE.07,포장부자재,STOCK(physical),치수/규격/번들 명시 → 정당 stock,,,,,,0,1,0,
+MAT_000220,행택끈 사각마사 (100개),MAT_TYPE.07,포장부자재,STOCK(physical),치수/규격/번들 명시 → 정당 stock,,,,,100,0,1,0,
+MAT_000219,행택끈 사각백색 (100개),MAT_TYPE.07,포장부자재,STOCK(physical),치수/규격/번들 명시 → 정당 stock,,,,,,0,1,0,
+MAT_000222,우드거치대 120mm (4mm홈) 내추럴,MAT_TYPE.07,포장부자재,STOCK(physical),치수/규격/번들 명시 → 정당 stock,,,,,,0,1,0,
+MAT_000049,2구자석,MAT_TYPE.07,포장부자재,STOCK(physical),정당 무차원 stock(재고관리 가능 부속),,,,,,0,1,0,MAT_000045
+MAT_000221,자석고정용고무판 20 x 20 (20개입),MAT_TYPE.07,포장부자재,STOCK(physical),치수/규격/번들 명시 → 정당 stock,,,,,,0,0,0,
+MAT_000228,우드행거 230mm + 면끈,MAT_TYPE.07,포장부자재,STOCK(physical),치수/규격/번들 명시 → 정당 stock,,,,,,0,1,0,
+MAT_000224,우드봉 270mm + 면끈,MAT_TYPE.07,포장부자재,STOCK(physical),치수/규격/번들 명시 → 정당 stock,,,,,,0,1,0,
+MAT_000230,우드행거 320mm + 면끈,MAT_TYPE.07,포장부자재,STOCK(physical),치수/규격/번들 명시 → 정당 stock,,,,,,0,1,0,
+MAT_000226,우드봉 360mm + 면끈,MAT_TYPE.07,포장부자재,STOCK(physical),치수/규격/번들 명시 → 정당 stock,,,,,,0,1,0,
+MAT_000231,우드행거 440mm + 면끈,MAT_TYPE.07,포장부자재,STOCK(physical),치수/규격/번들 명시 → 정당 stock,,,,,,0,1,0,
+MAT_000227,우드봉 480mm + 면끈,MAT_TYPE.07,포장부자재,STOCK(physical),치수/규격/번들 명시 → 정당 stock,,,,,,0,1,0,
+MAT_000247,D링 D링(31mm),MAT_TYPE.07,포장부자재,STOCK(physical),치수/규격/번들 명시 → 정당 stock,,,,,,0,1,0,MAT_000017
+MAT_000248,D링 D링(42mm),MAT_TYPE.07,포장부자재,STOCK(physical),치수/규격/번들 명시 → 정당 stock,,,,,,0,1,0,MAT_000017
+MAT_000205,볼체인 민트그린 (3개1팩),MAT_TYPE.10,악세사리상품(추가상품),STOCK(physical),치수/규격/번들 명시 → 정당 stock,,,,,3,0,1,0,
+MAT_000207,볼체인 바이올렛 (3개1팩),MAT_TYPE.10,악세사리상품(추가상품),STOCK(physical),치수/규격/번들 명시 → 정당 stock,,,,,,0,1,0,
+MAT_000202,볼체인 오렌지 (3개1팩),MAT_TYPE.10,악세사리상품(추가상품),STOCK(physical),치수/규격/번들 명시 → 정당 stock,,,,,,0,1,0,
+MAT_000204,볼체인 핫핑크 (3개1팩),MAT_TYPE.10,악세사리상품(추가상품),STOCK(physical),치수/규격/번들 명시 → 정당 stock,,,,,3,0,1,0,
+MAT_000209,볼체인 화이트 (3개1팩),MAT_TYPE.10,악세사리상품(추가상품),STOCK(physical),치수/규격/번들 명시 → 정당 stock,,,,,,0,1,0,
+MAT_000208,볼체인 블랙 (3개1팩),MAT_TYPE.10,악세사리상품(추가상품),STOCK(physical),치수/규격/번들 명시 → 정당 stock,,,,,,0,1,0,
+MAT_000206,볼체인 블루 (3개1팩),MAT_TYPE.10,악세사리상품(추가상품),STOCK(physical),치수/규격/번들 명시 → 정당 stock,,,,,,0,1,0,
+MAT_000203,볼체인 핑크 (3개1팩),MAT_TYPE.10,악세사리상품(추가상품),STOCK(physical),치수/규격/번들 명시 → 정당 stock,,,,,,0,1,0,
+MAT_000232,만년스탬프 리필잉크 청보라 (5cc),MAT_TYPE.10,악세사리상품(추가상품),STOCK(physical),치수/규격/번들 명시 → 정당 stock,,,,,,0,1,0,
+MAT_000235,만년스탬프 리필잉크 검정 (5cc),MAT_TYPE.10,악세사리상품(추가상품),STOCK(physical),치수/규격/번들 명시 → 정당 stock,,,,,,0,1,0,
+MAT_000239,만년스탬프 리필잉크 노랑 (5cc),MAT_TYPE.10,악세사리상품(추가상품),STOCK(physical),치수/규격/번들 명시 → 정당 stock,,,,,,0,1,0,
+MAT_000234,만년스탬프 리필잉크 빨강 (5cc),MAT_TYPE.10,악세사리상품(추가상품),STOCK(physical),치수/규격/번들 명시 → 정당 stock,,,,,,0,1,0,
+MAT_000237,만년스탬프 리필잉크 초록 (5cc),MAT_TYPE.10,악세사리상품(추가상품),STOCK(physical),치수/규격/번들 명시 → 정당 stock,,,,,,0,1,0,
+MAT_000236,만년스탬프 리필잉크 파랑 (5cc),MAT_TYPE.10,악세사리상품(추가상품),STOCK(physical),치수/규격/번들 명시 → 정당 stock,,,,,,0,1,0,
+MAT_000238,만년스탬프 리필잉크 핑크 (5cc),MAT_TYPE.10,악세사리상품(추가상품),STOCK(physical),치수/규격/번들 명시 → 정당 stock,,,,,,0,1,0,
+MAT_000293,틴케이스,MAT_TYPE.12,사입자재,STOCK(physical),정당 무차원 stock(재고관리 가능 부속),,,,,,0,1,1,
+MAT_000269,워터북보틀,MAT_TYPE.12,사입자재,STOCK(physical),정당 무차원 stock(재고관리 가능 부속),,,,,,0,1,2,
+MAT_000341,미니틴케이스,MAT_TYPE.12,사입자재,STOCK(physical),정당 무차원 stock(재고관리 가능 부속),,,,,,0,0,0,MAT_000293
+MAT_000268,화이트머그 (11온스),MAT_TYPE.12,사입자재,STOCK(physical),치수/규격/번들 명시 → 정당 stock,,,,,,0,1,0,
+MAT_000342,워터북보틀 350ml,MAT_TYPE.12,사입자재,STOCK(physical),치수/규격/번들 명시 → 정당 stock,,,,,,0,0,0,MAT_000269
+MAT_000343,워터북보틀 500ml,MAT_TYPE.12,사입자재,STOCK(physical),치수/규격/번들 명시 → 정당 stock,,,,,,0,0,0,MAT_000269
+MAT_000281,미니CD키링 세트,MAT_TYPE.12,사입자재,STOCK(physical),정당 무차원 stock(재고관리 가능 부속),,,,,,0,1,0,

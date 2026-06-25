@@ -1,0 +1,6 @@
+prd_typ_cd,cod_nm,use_yn,live_count_active,set_role,note
+PRD_TYPE.01,완제품,Y,33,셋트완제품후보(단일제조상품·그자체는셋트아님),라이브셋트완제품7개는전부TYPE.04라TYPE.01중셋트0
+PRD_TYPE.02,반제품,Y,29,구성원(sub_prd_cd),webadmin admin.py:1090 autocomplete=PRD_TYPE.02만노출·라이브셋트구성원28행전부TYPE.02
+PRD_TYPE.03,기성상품,Y,108,제외(제조불필요),셋트대상아님
+PRD_TYPE.04,디자인상품,N(코드use_yn=N),105,제외(directive)지만★라이브셋트완제품7개전부TYPE.04,CONFIRM-1: webadmin주석(admin.py:1095-1099)=기존셋트가디자인상품에존재→반제품만제외정책. directive제외규칙과충돌
+PRD_TYPE.05,추가상품,N(코드use_yn=N),0,제외,addon템플릿트랙(TYPE.05)·셋트구성원아님

@@ -1,0 +1,95 @@
+track,item_mat_cd,mat_nm,mat_typ_cd,variant_axis,target_prd_cd,target_prd_nm,wired_usage,dflt_yn,existing_opt_group,existing_dim_row,price_rows,disposition,note
+T1-면지,MAT_000001,화이트면지,MAT_TYPE.02,색축,PRD_000072,하드커버책자,USAGE.03,Y,NONE,materials(OK),0,OPTIONIZE-색택1,면지색옵션값·자재행유지(ref_dim.03)·트리거OK
+T1-면지,MAT_000002,블랙면지,MAT_TYPE.02,색축,PRD_000072,하드커버책자,USAGE.03,Y,NONE,materials(OK),0,OPTIONIZE-색택1,동일
+T1-면지,MAT_000003,그레이면지,MAT_TYPE.02,색축,PRD_000072,하드커버책자,USAGE.03,Y,NONE,materials(OK),0,OPTIONIZE-색택1,동일
+T1-면지,MAT_000001,화이트면지,MAT_TYPE.02,색축,PRD_000077,레더 하드커버책자,USAGE.03,Y,NONE,materials(OK),0,OPTIONIZE-색택1,동일
+T1-면지,MAT_000002,블랙면지,MAT_TYPE.02,색축,PRD_000077,레더 하드커버책자,USAGE.03,Y,NONE,materials(OK),0,OPTIONIZE-색택1,동일
+T1-면지,MAT_000003,그레이면지,MAT_TYPE.02,색축,PRD_000077,레더 하드커버책자,USAGE.03,Y,NONE,materials(OK),0,OPTIONIZE-색택1,동일
+T1-면지,MAT_000001,화이트면지,MAT_TYPE.02,색축,PRD_000082,하드커버 링책자,USAGE.03,Y,NONE,materials(OK),0,OPTIONIZE-색택1,동일
+T1-면지,MAT_000002,블랙면지,MAT_TYPE.02,색축,PRD_000082,하드커버 링책자,USAGE.03,Y,NONE,materials(OK),0,OPTIONIZE-색택1,동일
+T1-면지,MAT_000003,그레이면지,MAT_TYPE.02,색축,PRD_000082,하드커버 링책자,USAGE.03,Y,NONE,materials(OK),0,OPTIONIZE-색택1,동일
+T1-면지,MAT_000004,인쇄면지,MAT_TYPE.01,색축(인쇄),PRD_000082,하드커버 링책자,USAGE.03,Y,NONE,materials(OK),0,OPTIONIZE-색택1(stock유지),인쇄면지=실stock변형·옵션값으로도노출·자재행유지
+T1-면지,MAT_000001,화이트면지,MAT_TYPE.02,색축,PRD_000088,레더 링바인더,USAGE.03,Y,NONE,materials(OK),0,OPTIONIZE-색택1,동일
+T1-면지,MAT_000002,블랙면지,MAT_TYPE.02,색축,PRD_000088,레더 링바인더,USAGE.03,Y,NONE,materials(OK),0,OPTIONIZE-색택1,동일
+T1-면지,MAT_000003,그레이면지,MAT_TYPE.02,색축,PRD_000088,레더 링바인더,USAGE.03,Y,NONE,materials(OK),0,OPTIONIZE-색택1,동일
+T1-면지,MAT_000004,인쇄면지,MAT_TYPE.01,색축(인쇄),PRD_000088,레더 링바인더,USAGE.03,Y,NONE,materials(OK),0,OPTIONIZE-색택1(stock유지),동일
+T2-굿즈,MAT_000143,투명,MAT_TYPE.01,투명도축,PRD_000193,머그컵,USAGE.07,Y,NONE,materials(OK·dim siz=0),0,OPTIONIZE-투명도택1,투명/반투명=정당선택옵션·root(자식 PET 260/350g)·자재행유지
+T2-굿즈,MAT_000146,반투명,MAT_TYPE.01,투명도축,PRD_000193,머그컵,USAGE.07,Y,NONE,materials(OK),0,OPTIONIZE-투명도택1,동일·머그컵에 투명/반투명/화이트(.08)/화이트머그(.12)혼재
+T2-굿즈,MAT_000146,반투명,MAT_TYPE.01,투명도축,PRD_000227,미니우치와키링,USAGE.07,Y,NONE,materials(OK),0,CONFIRM,반투명만단독배선=택1불성립(투명대안부재)·실무진 옵션여부확인
+T3-색,MAT_000255,화이트,MAT_TYPE.08,색축,PRD_000140,무광시트커팅,USAGE.07,Y,NONE,materials(OK),0,OPTIONIZE-색택1,실사색라벨·자재행유지
+T3-색,MAT_000256,블랙,MAT_TYPE.08,색축,PRD_000140,무광시트커팅,USAGE.07,Y,NONE,materials(OK),0,OPTIONIZE-색택1,동일
+T3-소재효과,MAT_000257,홀로그램,MAT_TYPE.08,소재효과축?,PRD_000141,홀로그램 시트커팅,USAGE.07,Y,NONE,materials(OK·물성NULL),0,CONFIRM,단독배선·평량NULL=소재여부불명·codex 소재축분리 제안
+T3-소재효과,MAT_000258,골드,MAT_TYPE.08,소재효과축?,PRD_000143,미러아크릴스티커,USAGE.07,Y,NONE,materials(OK·물성NULL),0,CONFIRM,미러필름색?·평량NULL·실무진확인
+T3-소재효과,MAT_000259,실버,MAT_TYPE.08,소재효과축?,PRD_000143,미러아크릴스티커,USAGE.07,Y,NONE,materials(OK·물성NULL),0,CONFIRM,동일
+T3-형상,MAT_000263,원형 90mm,MAT_TYPE.09,형상사이즈축,PRD_000188,레더코스터,USAGE.07,Y,NONE,materials(OK·siz dim=0),0,BLOCKED-needs-L1,siz차원행부재·siz신규적재 선행필요
+T3-형상,MAT_000264,사각 90mm,MAT_TYPE.09,형상사이즈축,PRD_000188,레더코스터,USAGE.07,Y,NONE,materials(OK·siz dim=0),0,BLOCKED-needs-L1,동일
+T3-형상,MAT_000263,원형 90mm,MAT_TYPE.09,형상사이즈축,PRD_000189,코르크코스터,USAGE.07,Y,NONE,materials(OK),0,BLOCKED-needs-L1,동일
+T3-형상,MAT_000263,원형 90mm,MAT_TYPE.09,형상사이즈축,PRD_000190,우드코스터,USAGE.07,Y,NONE,materials(OK),0,BLOCKED-needs-L1,동일
+T3-형상,MAT_000264,사각 90mm,MAT_TYPE.09,형상사이즈축,PRD_000190,우드코스터,USAGE.07,Y,NONE,materials(OK),0,BLOCKED-needs-L1,동일
+T3-형상,MAT_000265,사각 110mm,MAT_TYPE.09,형상사이즈축,PRD_000191,린넨패브릭코스터,USAGE.07,Y,NONE,materials(OK),0,BLOCKED-needs-L1,동일
+T3-형상,MAT_000266,원형 102mm,MAT_TYPE.09,형상사이즈축,PRD_000192,규조토코스터,USAGE.07,Y,NONE,materials(OK),0,BLOCKED-needs-L1,동일
+T3-형상,MAT_000267,사각 100mm,MAT_TYPE.09,형상사이즈축,PRD_000192,규조토코스터,USAGE.07,Y,NONE,materials(OK),0,BLOCKED-needs-L1,동일
+T3-인쇄면,MAT_000271,단면,MAT_TYPE.09,인쇄면축,PRD_000195,벨벳쿠션,USAGE.07,Y,NONE,materials(OK·po dim=0),0,BLOCKED-needs-L1,인쇄면=도수축·print_options차원행부재·선행필요
+T3-인쇄면,MAT_000272,양면,MAT_TYPE.09,인쇄면축,PRD_000195,벨벳쿠션,USAGE.07,Y,NONE,materials(OK·po dim=0),0,BLOCKED-needs-L1,동일
+T3-사이즈,MAT_000275,미니 50mm,MAT_TYPE.09,사이즈축,PRD_000201,레더스트랩키링,USAGE.07,Y,NONE,materials(OK·siz dim=0),0,BLOCKED-needs-L1,siz차원행부재
+T3-사이즈,MAT_000276,일반 100mm,MAT_TYPE.09,사이즈축,PRD_000201,레더스트랩키링,USAGE.07,Y,NONE,materials(OK),0,BLOCKED-needs-L1,동일
+T3-구수,MAT_000277,2구,MAT_TYPE.09,구수축,PRD_000202,키캡키링,USAGE.07,Y,NONE,materials(OK),0,CONFIRM,구수=개수형공정·ref_param_json GAP 또는 묶음수축·트랙결정필요
+T3-구수,MAT_000278,3구,MAT_TYPE.09,구수축,PRD_000202,키캡키링,USAGE.07,Y,NONE,materials(OK),0,CONFIRM,동일
+T3-구수,MAT_000279,4구,MAT_TYPE.09,구수축,PRD_000202,키캡키링,USAGE.07,Y,NONE,materials(OK),0,CONFIRM,동일
+T3-구수,MAT_000277,2구,MAT_TYPE.09,구수축,PRD_000203,LED투명키캡키링,USAGE.07,Y,NONE,materials(OK),0,CONFIRM,동일
+T3-구수,MAT_000278,3구,MAT_TYPE.09,구수축,PRD_000203,LED투명키캡키링,USAGE.07,Y,NONE,materials(OK),0,CONFIRM,동일
+T3-구수,MAT_000279,4구,MAT_TYPE.09,구수축,PRD_000203,LED투명키캡키링,USAGE.07,Y,NONE,materials(OK),0,CONFIRM,동일
+T3-구수,MAT_000280,1구,MAT_TYPE.09,구수축,PRD_000203,LED투명키캡키링,USAGE.07,Y,NONE,materials(OK),0,CONFIRM,동일
+T3-색사이즈,MAT_000282,화이트 M,MAT_TYPE.09,색+사이즈복합축,PRD_000206,반팔티셔츠,USAGE.07,Y,NONE,materials(OK),0,CONFIRM,복합축(색축+사이즈축)2축분해 vs 1축·티셔츠 색×사이즈매트릭스
+T3-색사이즈,MAT_000283,화이트 L,MAT_TYPE.09,색+사이즈복합축,PRD_000206,반팔티셔츠,USAGE.07,Y,NONE,materials(OK),0,CONFIRM,동일
+T3-색사이즈,MAT_000284,화이트 XL,MAT_TYPE.09,색+사이즈복합축,PRD_000206,반팔티셔츠,USAGE.07,Y,NONE,materials(OK),0,CONFIRM,동일
+T3-색사이즈,MAT_000285,화이트 XXL,MAT_TYPE.09,색+사이즈복합축,PRD_000206,반팔티셔츠,USAGE.07,Y,NONE,materials(OK),0,CONFIRM,동일
+T3-색사이즈,MAT_000286,블랙 M,MAT_TYPE.09,색+사이즈복합축,PRD_000206,반팔티셔츠,USAGE.07,Y,NONE,materials(OK),0,CONFIRM,동일
+T3-색사이즈,MAT_000287,블랙 L,MAT_TYPE.09,색+사이즈복합축,PRD_000206,반팔티셔츠,USAGE.07,Y,NONE,materials(OK),0,CONFIRM,동일
+T3-색사이즈,MAT_000288,블랙 XL,MAT_TYPE.09,색+사이즈복합축,PRD_000206,반팔티셔츠,USAGE.07,Y,NONE,materials(OK),0,CONFIRM,동일·MAT_288은 후드티(209)도 공유
+T3-색사이즈,MAT_000289,블랙 XXL,MAT_TYPE.09,색+사이즈복합축,PRD_000206,반팔티셔츠,USAGE.07,Y,NONE,materials(OK),0,CONFIRM,동일
+T3-인쇄면형상,MAT_000290,양면 가로형,MAT_TYPE.09,인쇄면+형상복합축,PRD_000208,슬로건,USAGE.07,Y,NONE,materials(OK),0,CONFIRM,복합축분해 vs 1축
+T3-인쇄면형상,MAT_000291,양면 세로형,MAT_TYPE.09,인쇄면+형상복합축,PRD_000208,슬로건,USAGE.07,Y,NONE,materials(OK),0,CONFIRM,동일
+T3-색사이즈,MAT_000288,블랙 XL,MAT_TYPE.09,색+사이즈복합축,PRD_000209,후드티셔츠,USAGE.07,Y,NONE,materials(OK),0,CONFIRM,티셔츠와 자재공유(블랙XL)
+T3-색사이즈,MAT_000292,멜란지 XL,MAT_TYPE.09,색+사이즈복합축,PRD_000209,후드티셔츠,USAGE.07,Y,NONE,materials(OK),0,CONFIRM,동일
+T3-묶음,MAT_000294,2개1팩,MAT_TYPE.09,묶음수축,PRD_000214,자석북마크,USAGE.07,Y,NONE,materials(OK·bdl dim=?),0,CONFIRM,묶음수=bundle_qtys축·차원행확인필요
+T3-규격,MAT_000295,A5용,MAT_TYPE.09,규격축,PRD_000216,투명클립보드,USAGE.07,Y,NONE,materials(OK·siz dim=0),0,BLOCKED-needs-L1,규격=siz축·차원행부재
+T3-규격,MAT_000296,A4용,MAT_TYPE.09,규격축,PRD_000216,투명클립보드,USAGE.07,Y,NONE,materials(OK),0,BLOCKED-needs-L1,동일
+T3-색,MAT_000297,청보라,MAT_TYPE.09,색축,PRD_000217,만년스탬프,USAGE.07,Y,NONE,materials(OK),0,OPTIONIZE-색택1,잉크색=색축택1(7색)·자재행유지
+T3-색,MAT_000298,빨강,MAT_TYPE.09,색축,PRD_000217,만년스탬프,USAGE.07,Y,NONE,materials(OK),0,OPTIONIZE-색택1,동일
+T3-색,MAT_000299,검정,MAT_TYPE.09,색축,PRD_000217,만년스탬프,USAGE.07,Y,NONE,materials(OK),0,OPTIONIZE-색택1,동일
+T3-색,MAT_000300,파랑,MAT_TYPE.09,색축,PRD_000217,만년스탬프,USAGE.07,Y,NONE,materials(OK),0,OPTIONIZE-색택1,동일
+T3-색,MAT_000301,초록,MAT_TYPE.09,색축,PRD_000217,만년스탬프,USAGE.07,Y,NONE,materials(OK),0,OPTIONIZE-색택1,동일
+T3-색,MAT_000302,핑크,MAT_TYPE.09,색축,PRD_000217,만년스탬프,USAGE.07,Y,NONE,materials(OK),0,OPTIONIZE-색택1,동일
+T3-색,MAT_000303,노랑,MAT_TYPE.09,색축,PRD_000217,만년스탬프,USAGE.07,Y,NONE,materials(OK),0,OPTIONIZE-색택1,동일
+T3-인쇄면,MAT_000271,단면,MAT_TYPE.09,인쇄면축,PRD_000220,폰스트랩,USAGE.07,Y,NONE,materials(OK·po dim=0),0,BLOCKED-needs-L1,동일(벨벳쿠션과 자재공유)
+T3-인쇄면,MAT_000272,양면,MAT_TYPE.09,인쇄면축,PRD_000220,폰스트랩,USAGE.07,Y,NONE,materials(OK),0,BLOCKED-needs-L1,동일
+T3-인쇄면효과,MAT_000309,양면인쇄,MAT_TYPE.09,인쇄면축,PRD_000226,아크릴쉐이커코롯토,USAGE.07,Y,NONE,materials(OK),0,CONFIRM,인쇄면+글리터(소재효과)혼재상품·축분리 복잡
+T3-소재효과,MAT_000310,핑크글리터,MAT_TYPE.09,소재효과축?,PRD_000226,아크릴쉐이커코롯토,USAGE.07,Y,NONE,materials(OK·물성NULL),0,CONFIRM,글리터=소재여부불명·평량NULL
+T3-인쇄면,MAT_000311,전면만 인쇄,MAT_TYPE.09,인쇄면축,PRD_000226,아크릴쉐이커코롯토,USAGE.07,Y,NONE,materials(OK),0,CONFIRM,동일
+T3-소재효과,MAT_000312,화이트글리터,MAT_TYPE.09,소재효과축?,PRD_000226,아크릴쉐이커코롯토,USAGE.07,Y,NONE,materials(OK·물성NULL),0,CONFIRM,동일
+T3-인쇄면,MAT_000313,배면만 인쇄,MAT_TYPE.09,인쇄면축,PRD_000226,아크릴쉐이커코롯토,USAGE.07,Y,NONE,materials(OK),0,CONFIRM,동일
+T3-소재효과,MAT_000314,블루글리터,MAT_TYPE.09,소재효과축?,PRD_000226,아크릴쉐이커코롯토,USAGE.07,Y,NONE,materials(OK·물성NULL),0,CONFIRM,동일
+T3-소재효과,MAT_000315,블랙글리터,MAT_TYPE.09,소재효과축?,PRD_000226,아크릴쉐이커코롯토,USAGE.07,Y,NONE,materials(OK·물성NULL),0,CONFIRM,동일
+T3-인쇄면마감,MAT_000316,양면유광,MAT_TYPE.09,인쇄면+마감복합축,PRD_000228,하트 이미지피켓,USAGE.07,Y,NONE,materials(OK),0,CONFIRM,복합축(인쇄면+마감)분해필요
+T3-인쇄면마감사이즈,MAT_000317,양면유광 M,MAT_TYPE.09,인쇄면+마감+사이즈복합,PRD_000229,이미지피켓,USAGE.07,Y,NONE,materials(OK),0,CONFIRM,3중복합축·분해복잡
+T3-인쇄면마감사이즈,MAT_000318,양면유광 L,MAT_TYPE.09,인쇄면+마감+사이즈복합,PRD_000229,이미지피켓,USAGE.07,Y,NONE,materials(OK),0,CONFIRM,동일
+T3-사이즈,MAT_000319,M,MAT_TYPE.09,사이즈축,PRD_000230,레더 플랫 파우치,USAGE.07,Y,NONE,materials(OK·siz dim=0),0,BLOCKED-needs-L1,파우치 사이즈M·siz차원행부재(13상품 공유)
+T3-사이즈,MAT_000320,L,MAT_TYPE.09,사이즈축,PRD_000230,레더 플랫 파우치,USAGE.07,Y,NONE,materials(OK),0,BLOCKED-needs-L1,동일
+T3-형상사이즈,MAT_000321,정사각M,MAT_TYPE.09,형상+사이즈복합축,PRD_000233,레더 볼륨 파우치,USAGE.07,Y,NONE,materials(OK),0,CONFIRM,복합축분해 vs 1축
+T3-형상사이즈,MAT_000322,직사각M,MAT_TYPE.09,형상+사이즈복합축,PRD_000233,레더 볼륨 파우치,USAGE.07,Y,NONE,materials(OK),0,CONFIRM,동일
+T3-사이즈,MAT_000323,11인치,MAT_TYPE.09,사이즈축,PRD_000238,레더 아이패드/노트북 파우치,USAGE.07,Y,NONE,materials(OK),0,BLOCKED-needs-L1,인치규격=siz축·차원행부재
+T3-사이즈,MAT_000324,13인치,MAT_TYPE.09,사이즈축,PRD_000238,레더 아이패드/노트북 파우치,USAGE.07,Y,NONE,materials(OK),0,BLOCKED-needs-L1,동일
+T3-사이즈,MAT_000325,15인치,MAT_TYPE.09,사이즈축,PRD_000238,레더 아이패드/노트북 파우치,USAGE.07,Y,NONE,materials(OK),0,BLOCKED-needs-L1,동일
+T3-사이즈,MAT_000326,S,MAT_TYPE.09,사이즈축,PRD_000243,린넨 스트링 파우치,USAGE.07,Y,NONE,materials(OK),0,BLOCKED-needs-L1,동일
+T3-색,MAT_000256,블랙,MAT_TYPE.08,색축,PRD_000241,캔버스 스트랩 라벨파우치,USAGE.07,Y,NONE,materials(OK),0,OPTIONIZE-색택1(단독),단독배선=택1불성립(CONFIRM)·실무진확인
+T3-사이즈,MAT_000327,XL,MAT_TYPE.09,사이즈축,PRD_000244,타이벡 플랫 파우치,USAGE.07,Y,NONE,materials(OK),0,BLOCKED-needs-L1,동일(타이벡류 공유)
+T3-형상사이즈,MAT_000328,직사각L,MAT_TYPE.09,형상+사이즈복합축,PRD_000250,메쉬볼륨파우치,USAGE.07,Y,NONE,materials(OK),0,CONFIRM,복합축·단독배선
+T3-형상,MAT_000329,직사각,MAT_TYPE.09,형상축,PRD_000252,레더 슬림 미니파우치,USAGE.07,Y,NONE,materials(OK),0,BLOCKED-needs-L1,형상=siz융합(WowPress규칙)·차원행부재
+T3-형상,MAT_000330,정사각,MAT_TYPE.09,형상축,PRD_000252,레더 슬림 미니파우치,USAGE.07,Y,NONE,materials(OK),0,BLOCKED-needs-L1,동일
+T3-형상,MAT_000331,마카롱,MAT_TYPE.09,형상축,PRD_000255,레더 원형 미니파우치,USAGE.07,Y,NONE,materials(OK),0,CONFIRM,마카롱=형상/종류라벨·단독배선·의미모호
+T3-형상,MAT_000332,세로형,MAT_TYPE.09,형상축,PRD_000264,레더숄더백,USAGE.07,Y,NONE,materials(OK),0,BLOCKED-needs-L1,형상=siz융합·차원행부재(가방류 공유)
+T3-형상,MAT_000333,가로형,MAT_TYPE.09,형상축,PRD_000267,린넨 에코백,USAGE.07,Y,NONE,materials(OK),0,BLOCKED-needs-L1,동일
+T3-형상사이즈,MAT_000334,세로M,MAT_TYPE.09,형상+사이즈복합축,PRD_000268,캔버스심플백,USAGE.07,Y,NONE,materials(OK),0,CONFIRM,복합축·단독배선
+T3-색사이즈,MAT_000335,블랙M,MAT_TYPE.09,색+사이즈복합축,PRD_000269,캔버스 포켓심플백,USAGE.07,Y,NONE,materials(OK),0,CONFIRM,복합축·단독배선
+T3-형상사이즈,MAT_000336,가로L,MAT_TYPE.09,형상+사이즈복합축,PRD_000270,캔버스에코백,USAGE.07,Y,NONE,materials(OK),0,CONFIRM,복합축·단독배선

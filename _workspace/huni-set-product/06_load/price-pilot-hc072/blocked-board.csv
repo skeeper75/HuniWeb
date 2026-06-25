@@ -1,0 +1,5 @@
+id,scope,bimok,blocked_reason,routing,evidence
+BLK-HC-PAPER,component_prices,(2)용지비,072 표지/면지/내지 자재 4종(MAT_000246/001/002/003) COMP_PAPER 단가행 0행·단가 날조 금지,dbmap 가격표 종이비 재추출→COMP_PAPER 단가행 추가,라이브 실측 COMP_PAPER mat_cd 분포에 4종 미수록
+BLK-HC-FOIL,price_components+component_prices,(6)후가공박,COMP_FOIL_LARGE_* 라이브 0행·등급코드/동판좌표51/상품바인딩 미해소,§18+dbmap foil-large(194행 분해 보유),COMP_FOIL_LARGE COUNT 0·072 process 박 미등록
+PARTIAL-HC-COAT,component_prices,(4)표지코팅(유광),COMP_COAT_GLOSSY 단가행 0행(R7 드리프트·round-16 184행 주장 vs 라이브 92행),dbmap 코팅 유광 verbatim 재추출,라이브 GLOSSY COUNT 0·MATTE 92
+BLK-HC-BIND-PRF,product_price_formulas,바인딩,용지비(2) BLOCKED 상태 바인딩 시 용지 누락 과소청구(돈크리티컬)→6비목 READY 후 바인딩,용지비 해소 후 hsp-load-executor,바인딩=과소청구 가드

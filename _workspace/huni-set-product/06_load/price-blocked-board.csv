@@ -1,0 +1,8 @@
+scope,set_prd_cd,set_nm,blocked_axis,blocked_reason,routing_track,note
+set,PRD_000072,하드커버책자,"PRF+comp+단가+선행",PRF_HC_MUSEON_SUM 라이브 미존재·표지/내지/면지 comp 0행·단가 시트간 분산·선행 W1/W2 미해소,§18 engine-design-booklet §3 + dbm-ddl-proposer/dbm-load-execution,원자합산형 6비목 신규 mint 다수·돈크리티컬·설계가 가격공식 신설 금지
+set,PRD_000077,레더 하드커버책자,"PRF+comp+단가+선행",072 동형(PRF_HC_MUSEON_SUM 공유·표지=레더078)·comp 0행·선행 W1/W2,§18 booklet + dbmap,072 BLOCKED 전파
+set,PRD_000082,하드커버 링책자,"PRF+comp+단가+선행",PRF_HC_TWINRING_SUM 미존재·comp 0행(+면지인쇄/코팅 2비목)·선행 W1/W2,§18 booklet + dbmap,8비목 Σ·면지 ×2 추가
+set,PRD_000100,포토북,"PRF+comp+단가평면화",PRF_PHOTOBOOK_SUM 미존재·base24/per2p comp 0행·photobook-l1 단가표 미분해,§18 engine-design-photobook + dbmap(photobook-l1 추출),base24[siz,표지타입]+per2p[siz] 신규 mint·표지5종 internalize
+member,PRD_000088,레더 링바인더,권위 보류중,권위 계산공식집 제본방식 공란("보류중")·신설도 적재도 불가,인간 CONFIRM(제본방식 확정 후 §18),적재 대상 밖·진성 미정
+confirm,PRD_000097,떡메모지,바인딩 적용일,apply_bgn_ymd=2026-06-01 적정성(round-16 Q-PCB-2),인간 확인 후 COMMIT,엽서북094 바인딩·단가행 적용일과 동일 가정(추정 회피)
+confirm,PRD_000072,하드커버책자,표지/내지 단가 재사용,COMP_PAPER/디지털인쇄비 comp가 책자 표지/내지 절가 담는지(Q-BK-COVER),§18 검증가,재사용 vs 신규 mint 결정 전제

@@ -1,0 +1,7 @@
+frm_cd,comp_cd,disp_seq,addtn_yn,bimok,bimok_status,note
+PRF_HC_MUSEON_SUM,COMP_BIND_HC_MUSEON,1,Y,(5)제본비,READY,재사용 comp·proc_cd=PROC_000023 주입 선결
+PRF_HC_MUSEON_SUM,COMP_PRINT_DIGITAL_S1,2,Y,(3)표지인쇄비,READY,재사용 comp·plt_siz_cd+print_opt_cd 주입·출력매수 앱계산
+PRF_HC_MUSEON_SUM,COMP_COAT_MATTE,3,Y,(4)표지코팅비,PARTIAL,재사용 comp·GLOSSY 단가행 부재(유광선택 시 BLOCKED)
+PRF_HC_MUSEON_SUM,COMP_PRINT_DIGITAL_S2,4,Y,(1)내지인쇄비,READY,재사용 comp·×총내지매수 앱계산·S1과 별 comp(충돌가드 CFM-HC-PRINT)
+PRF_HC_MUSEON_SUM,COMP_PAPER,5,Y,(2)용지비,BLOCKED,072 자재 4종 COMP_PAPER 단가행 0행·날조금지·미배선보류
+PRF_HC_MUSEON_SUM,COMP_FOIL_LARGE_PLATE,6,Y,(6)후가공박-동판,BLOCKED,comp 미민팅·072 process 미등록·미배선보류

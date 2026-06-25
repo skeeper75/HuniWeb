@@ -1,0 +1,6 @@
+prd_cd,prd_nm,prd_typ_cd,prd_del_yn,prd_use_yn,mat_cd,mat_nm,mat_del_yn,usage_cd,dflt_yn,pm_del_yn,bound_formula,formula_reads_comp,price_chain_reachable,quote_impact
+PRD_000050,봉투제작,PRD_TYPE.01,N,Y,MAT_000159,모조 120g,Y,USAGE.07,Y,N,PRF_ENV_MAKING,COMP_ENV_MAKING(reads 159),YES,라이브 가격 도달 — 159가 기본 모조봉투 옵션·삭제 시 모조옵션 가격소실
+PRD_000047,소량전단지,PRD_TYPE.04,N,Y,MAT_000119,리브스디자인 250g,Y,USAGE.07,N,N,PRF_DGP_D,COMP_PAPER(reads 119),YES,라이브 가격 도달 — 119 선택 시 용지비 500/판 적용·삭제 시 리브스 용지옵션 소실
+PRD_000031,프리미엄명함,PRD_TYPE.01,N,Y,MAT_000119,리브스디자인 250g,Y,USAGE.07,N,N,PRF_NAMECARD_FIXED,COMP_PAPER 미사용,NO,죽은 자재옵션 — 공식이 COMP_PAPER 안읽음·가격영향 0(UI 잉여만)
+PRD_000048,접지리플렛,PRD_TYPE.04,N,Y,MAT_000119,리브스디자인 250g,Y,USAGE.07,N,N,PRF_FOLD_SUM,COMP_PAPER 미사용,NO,죽은 자재옵션 — 공식이 COMP_FOLD_CARD_2H만 읽음·가격영향 0
+PRD_000111,벽걸이캘린더,PRD_TYPE.04,N,Y,MAT_000119,리브스디자인 250g,Y,USAGE.07,N,N,(공식 바인딩 없음),N/A,NO,상품 자체가 견적불가(공식 미바인딩)·119와 무관
