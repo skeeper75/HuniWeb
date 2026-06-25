@@ -1,0 +1,36 @@
+{
+  "generatedAt": "2026-06-25",
+  "generatedBy": "rcd-technique-researcher",
+  "node": {
+    "version": "v25.2.1",
+    "note": "절대경로 node 사용. 스크립트 실행 시 NODE_PATH=$RCD_NM 필수."
+  },
+  "RCD_NM": "/Users/innojini/Dev/HuniWeb/docs/reversing/red_reverse_engineer/05_readable/_tooling/node_modules",
+  "toolingRoot": "/Users/innojini/Dev/HuniWeb/docs/reversing/red_reverse_engineer/05_readable/_tooling",
+  "envPrefix": "RCD_NM=/Users/innojini/Dev/HuniWeb/docs/reversing/red_reverse_engineer/05_readable/_tooling/node_modules NODE_PATH=$RCD_NM",
+  "installStatus": "ALREADY_INSTALLED — 신규 설치 불필요. require 테스트로 가용성 확인 완료(2026-06-25).",
+  "installed": {
+    "@babel/parser": { "specifier": "^7.25.0", "resolved": "7.29.7", "role": "소스 → AST 파싱", "verified": true },
+    "@babel/traverse": { "specifier": "^7.25.0", "resolved": "7.29.7", "role": "스코프 안전 리네임(path.scope.rename)·AST 순회", "verified": true },
+    "@babel/generator": { "specifier": "^7.25.0", "resolved": "7.29.7", "role": "AST → 코드(주석 보존, 포매팅 비보존)", "verified": true },
+    "@babel/types": { "specifier": "^7.25.0", "resolved": "7.29.7", "role": "AST 노드 빌더/판별", "verified": true },
+    "prettier": { "specifier": "^2.8.8", "resolved": "2.8.8", "role": "결정적 재포매팅(G2 구조 diff 잡음 제거)", "verified": true, "note": "메이저 버전 고정 필수 — 버전 드리프트 시 포매팅 달라짐" }
+  },
+  "transitiveObserved": ["@jridgewell/*", "debug", "js-tokens", "jsesc", "ms", "picocolors"],
+  "notInstalled": {
+    "@babel/core": { "decision": "불필요", "reason": "parser+traverse+generator 직접 조합으로 코드모드 충분. core는 프리셋/플러그인 파이프라인용." },
+    "recast": { "decision": "불필요", "reason": "원본 포매팅 보존이 목적이 아님(가독화가 목적). prettier 정규화 채택 → G2 구조 diff가 포매팅 무시하므로 recast 없이 동등성 증명 가능." }
+  },
+  "verifyAvailabilityCommand": "RCD_NM=/Users/innojini/Dev/HuniWeb/docs/reversing/red_reverse_engineer/05_readable/_tooling/node_modules NODE_PATH=$RCD_NM node -e 'for (const p of [\"@babel/parser\",\"@babel/traverse\",\"@babel/generator\",\"@babel/types\",\"prettier\"]) { require(p); console.log(\"OK \"+p+\" @ \"+require(p+\"/package.json\").version); }'",
+  "targets": {
+    "deobfuscatedDir": "/Users/innojini/Dev/HuniWeb/docs/reversing/red_reverse_engineer/03_deobfuscated",
+    "readableDir": "/Users/innojini/Dev/HuniWeb/docs/reversing/red_reverse_engineer/05_readable",
+    "files": [
+      { "file": "deob_05_app_api.js",        "lines": 1507,  "parse": "OK",            "grade": "양호" },
+      { "file": "deob_06_app_widget_sdk.js", "lines": 1392,  "parse": "OK",            "grade": "양호" },
+      { "file": "deob_07_app_components.js",  "lines": 2607,  "parse": "FAIL@105:10",  "grade": "구문 파손 — 재생성 대상" },
+      { "file": "deob_editor_sdk.js",         "lines": 12629, "parse": "OK",            "grade": "혼재(앱 리네임/서드파티 미처리)" }
+    ]
+  },
+  "verificationGates": ["G1 구문유효", "G2 AST 구조동등", "G3 가독성(잔여 단문자 0)", "G4 서드파티 무변경", "G5 런타임 스모크(선택)", "G6 리네임 단사성"]
+}

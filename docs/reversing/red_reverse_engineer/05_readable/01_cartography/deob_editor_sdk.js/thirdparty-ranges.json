@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Babel transpile helpers (head)",
+    "lines": [13, 113],
+    "coords": "readable",
+    "action": "exclude",
+    "summary": "Babel 트랜스파일 헬퍼 head(서드파티 툴링): _slicedToArray/_extends/_createClass/_typeof(13-84)·_toConsumableArray(85-91)·_defineProperty(92-104)·_classCallCheck(105-113). fold 대상은 아니나(번들 상단 유지) 내부 루프/임시 바인딩(n/r/o 11건·_createClass의 function r@59 포함)은 가독성 집계에서 제외. 거대 proprietary IIFE는 line 114(`!(function(windowRef){...}`)부터 시작."
+  },
+  {
+    "name": "Sentry @sentry/browser v5.22.0",
+    "lines": [122, 3760],
+    "coords": "readable",
+    "action": "fold",
+    "summary": "에러 추적 라이브러리(서드파티). 리네임 제외 — region 배너+상단 인덱스만, 참조 추출본 분리. 가독본 노드앵커(VariableDeclarator id=sentryLib)로 재탐지한 실좌표(원본 67-2534에서 갱신). 내부 바인딩(At/Bt/Dt/lt/vt 등 151개)은 Sentry 내부 전용."
+  },
+  {
+    "name": "Babel Polyfill + regeneratorRuntime",
+    "lines": [4635, 13902],
+    "coords": "readable",
+    "action": "fold",
+    "summary": "async/await 지원 폴리필 + regeneratorRuntime(서드파티). 리네임 제외. 가독본 노드앵커(ExpressionStatement windowRef._babelPolyfill||!function...())로 재탐지한 실좌표(원본 2888-9527에서 갱신). proprietary 코어 에디터 SDK는 이 블록 직후 line 13903부터 재개."
+  }
+]

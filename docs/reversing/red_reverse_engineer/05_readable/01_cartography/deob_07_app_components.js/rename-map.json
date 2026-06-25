@@ -1,0 +1,1349 @@
+{
+  "PDT_CD": {
+    "to": "PDT_CD",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true
+  },
+  "MTRL_CD": {
+    "to": "MTRL_CD",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true
+  },
+  "PRN_CNT": {
+    "to": "PRN_CNT",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true
+  },
+  "CUT_WDT": {
+    "to": "CUT_WDT",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true
+  },
+  "CUT_HGH": {
+    "to": "CUT_HGH",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true
+  },
+  "WRK_WDT": {
+    "to": "WRK_WDT",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true
+  },
+  "WRK_HGH": {
+    "to": "WRK_HGH",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true
+  },
+  "PRICE": {
+    "to": "PRICE",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true
+  },
+  "PRICE_MALL": {
+    "to": "PRICE_MALL",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true
+  },
+  "COD": {
+    "to": "COD",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true
+  },
+  "COD_NME": {
+    "to": "COD_NME",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true
+  },
+  "DIV_SEQ": {
+    "to": "DIV_SEQ",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true
+  },
+  "DIV_NM": {
+    "to": "DIV_NM",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true
+  },
+  "ESN_YN": {
+    "to": "ESN_YN",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true
+  },
+  "VIEW_YN": {
+    "to": "VIEW_YN",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true
+  },
+  "PTT_CD": {
+    "to": "PTT_CD",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true
+  },
+  "PTT_NM": {
+    "to": "PTT_NM",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true
+  },
+  "WGT_CD": {
+    "to": "WGT_CD",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true
+  },
+  "CLR_CD": {
+    "to": "CLR_CD",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true
+  },
+  "MTRL_NM": {
+    "to": "MTRL_NM",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true
+  },
+  "MTRL_TYPE": {
+    "to": "MTRL_TYPE",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true
+  },
+  "KOI_NME": {
+    "to": "KOI_NME",
+    "confidence": 1,
+    "scope": "module",
+    "source": "inferred",
+    "preserve": true
+  },
+  "PCS_CD": {
+    "to": "PCS_CD",
+    "confidence": 1,
+    "scope": "module",
+    "source": "inferred",
+    "preserve": true
+  },
+  "PCS_DTL_CD": {
+    "to": "PCS_DTL_CD",
+    "confidence": 1,
+    "scope": "module",
+    "source": "inferred",
+    "preserve": true
+  },
+  "HIDE_YN": {
+    "to": "HIDE_YN",
+    "confidence": 1,
+    "scope": "module",
+    "source": "inferred",
+    "preserve": true
+  },
+  "HIDE_RSN": {
+    "to": "HIDE_RSN",
+    "confidence": 1,
+    "scope": "module",
+    "source": "inferred",
+    "preserve": true
+  },
+  "GBN": {
+    "to": "GBN",
+    "confidence": 1,
+    "scope": "module",
+    "source": "inferred",
+    "preserve": true
+  },
+  "QUICK_ORD_YN": {
+    "to": "QUICK_ORD_YN",
+    "confidence": 1,
+    "scope": "module",
+    "source": "inferred",
+    "preserve": true
+  },
+  "BACK_ROT_YN": {
+    "to": "BACK_ROT_YN",
+    "confidence": 1,
+    "scope": "module",
+    "source": "inferred",
+    "preserve": true
+  },
+  "ADC_PVC_Module": {
+    "to": "ADC_PVC_Module",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:component"
+  },
+  "AccModule": {
+    "to": "AccModule",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:component"
+  },
+  "ApparelColorSelector": {
+    "to": "ApparelColorSelector",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:component"
+  },
+  "ApparelPrintArea": {
+    "to": "ApparelPrintArea",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:component"
+  },
+  "ApparelPrintType": {
+    "to": "ApparelPrintType",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:component"
+  },
+  "BID_SIL_Module": {
+    "to": "BID_SIL_Module",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:component"
+  },
+  "BIND_DIRECTION_Module": {
+    "to": "BIND_DIRECTION_Module",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:component"
+  },
+  "BON_PAP_Module": {
+    "to": "BON_PAP_Module",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:component"
+  },
+  "BON_SHT_Module": {
+    "to": "BON_SHT_Module",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:component"
+  },
+  "BookModule": {
+    "to": "BookModule",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:component"
+  },
+  "BookQty": {
+    "to": "BookQty",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:component"
+  },
+  "BookQtyModule": {
+    "to": "BookQtyModule",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:component"
+  },
+  "Boolean": {
+    "to": "Boolean",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:builtin"
+  },
+  "ButtonRadio": {
+    "to": "ButtonRadio",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:component"
+  },
+  "CDN_BASE_URL": {
+    "to": "CDN_BASE_URL",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:helper"
+  },
+  "CLD_STD_Module": {
+    "to": "CLD_STD_Module",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:component"
+  },
+  "CloseIcon": {
+    "to": "CloseIcon",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:component"
+  },
+  "CoverGuide": {
+    "to": "CoverGuide",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:component"
+  },
+  "DosuColor": {
+    "to": "DosuColor",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:component"
+  },
+  "FileUpload": {
+    "to": "FileUpload",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:component"
+  },
+  "Fragment": {
+    "to": "Fragment",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:vue-runtime"
+  },
+  "HiddenPostProcess": {
+    "to": "HiddenPostProcess",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:component"
+  },
+  "ImageButton": {
+    "to": "ImageButton",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:component"
+  },
+  "Map": {
+    "to": "Map",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:builtin"
+  },
+  "Math": {
+    "to": "Math",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:builtin"
+  },
+  "Object": {
+    "to": "Object",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:builtin"
+  },
+  "OptionRow": {
+    "to": "OptionRow",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:component"
+  },
+  "Paper": {
+    "to": "Paper",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:component"
+  },
+  "PaperModule": {
+    "to": "PaperModule",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:component"
+  },
+  "RadioList": {
+    "to": "RadioList",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:component"
+  },
+  "Selector": {
+    "to": "Selector",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:component"
+  },
+  "SizeSelect": {
+    "to": "SizeSelect",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:component"
+  },
+  "Skeleton": {
+    "to": "Skeleton",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:component"
+  },
+  "SubjectGroup": {
+    "to": "SubjectGroup",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:component"
+  },
+  "Symbol": {
+    "to": "Symbol",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:builtin"
+  },
+  "VisiblePostProcess": {
+    "to": "VisiblePostProcess",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:component"
+  },
+  "accCounterClass": {
+    "to": "accCounterClass",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "accDecreaseBtnAttrs": {
+    "to": "accDecreaseBtnAttrs",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "accDeleteBtnAttrs": {
+    "to": "accDeleteBtnAttrs",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "accFilterConfigMap": {
+    "to": "accFilterConfigMap",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:helper"
+  },
+  "accIncreaseBtnAttrs": {
+    "to": "accIncreaseBtnAttrs",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "accItemNameClass": {
+    "to": "accItemNameClass",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "accPriceBoxClass": {
+    "to": "accPriceBoxClass",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "accPriceClass": {
+    "to": "accPriceClass",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "accQtyInputAttrs": {
+    "to": "accQtyInputAttrs",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "accQtyPriceClass": {
+    "to": "accQtyPriceClass",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "accSkeletonClass": {
+    "to": "accSkeletonClass",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "accSkeletonPriceBoxClass": {
+    "to": "accSkeletonPriceBoxClass",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "accSkeletonQtyPriceClass": {
+    "to": "accSkeletonQtyPriceClass",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "accSummaryClass": {
+    "to": "accSummaryClass",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "adcPvcFlexRowClass": {
+    "to": "adcPvcFlexRowClass",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "adcPvcNoteClass": {
+    "to": "adcPvcNoteClass",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "adcPvcNotesClass": {
+    "to": "adcPvcNotesClass",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "alert": {
+    "to": "alert",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:builtin"
+  },
+  "bidSilFlexRowClass": {
+    "to": "bidSilFlexRowClass",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "bindDirectionFlexRowClass": {
+    "to": "bindDirectionFlexRowClass",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "bonPapFlexRowClass": {
+    "to": "bonPapFlexRowClass",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "bonPapNoteClass": {
+    "to": "bonPapNoteClass",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "bonPapNotesClass": {
+    "to": "bonPapNotesClass",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "bonShtFlexRowClass": {
+    "to": "bonShtFlexRowClass",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "bookPageMultiplierMap": {
+    "to": "bookPageMultiplierMap",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:helper"
+  },
+  "bookQtyDefaultNoteClass": {
+    "to": "bookQtyDefaultNoteClass",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "bookQtyDefaultNotesClass": {
+    "to": "bookQtyDefaultNotesClass",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "bookQtyFlexRowClass": {
+    "to": "bookQtyFlexRowClass",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "bookQtyInnerNoteClass": {
+    "to": "bookQtyInnerNoteClass",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "bookQtyInnerNotesClass": {
+    "to": "bookQtyInnerNotesClass",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "bookQtyInputIdAttrs": {
+    "to": "bookQtyInputIdAttrs",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "bookQtyMaxNoteClass": {
+    "to": "bookQtyMaxNoteClass",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "bookQtyOptionValueAttrs": {
+    "to": "bookQtyOptionValueAttrs",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "bookQtySelectNameAttrs": {
+    "to": "bookQtySelectNameAttrs",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "bookQtyTonerNoteClass": {
+    "to": "bookQtyTonerNoteClass",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "buildTemplateParams": {
+    "to": "buildTemplateParams",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:helper"
+  },
+  "cldStdOptionValueAttrs": {
+    "to": "cldStdOptionValueAttrs",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "computed": {
+    "to": "computed",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:vue-runtime"
+  },
+  "console": {
+    "to": "console",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:builtin"
+  },
+  "coverGroupSubjectClass": {
+    "to": "coverGroupSubjectClass",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "coverGroupTitleClass": {
+    "to": "coverGroupTitleClass",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "coverGuideDescClass": {
+    "to": "coverGuideDescClass",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "coverGuideImgAttrs": {
+    "to": "coverGuideImgAttrs",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "coverGuideSenecaDetailClass": {
+    "to": "coverGuideSenecaDetailClass",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "coverGuideSenecaSubjectClass": {
+    "to": "coverGuideSenecaSubjectClass",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "coverGuideSenecaValueClass": {
+    "to": "coverGuideSenecaValueClass",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "coverGuideSpecialClass": {
+    "to": "coverGuideSpecialClass",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "coverGuideTextClass": {
+    "to": "coverGuideTextClass",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "coverGuideWorkSizeDetailClass": {
+    "to": "coverGuideWorkSizeDetailClass",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "coverGuideWorkSizeSubjectClass": {
+    "to": "coverGuideWorkSizeSubjectClass",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "coverGuideWorkSizeValueClass": {
+    "to": "coverGuideWorkSizeValueClass",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "createCommentVNode": {
+    "to": "createCommentVNode",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:vue-runtime"
+  },
+  "createElement": {
+    "to": "createElement",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:vue-runtime"
+  },
+  "createElementVNode": {
+    "to": "createElementVNode",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:vue-runtime"
+  },
+  "createStaticVNode": {
+    "to": "createStaticVNode",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:vue-runtime"
+  },
+  "createTextVNode": {
+    "to": "createTextVNode",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:vue-runtime"
+  },
+  "createVNode": {
+    "to": "createVNode",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:vue-runtime"
+  },
+  "debounce": {
+    "to": "debounce",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:vue-runtime"
+  },
+  "defineComponent": {
+    "to": "defineComponent",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:vue-runtime"
+  },
+  "directPrintGuideAttrs": {
+    "to": "directPrintGuideAttrs",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "dosuColorFlexRowClass": {
+    "to": "dosuColorFlexRowClass",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "dosuColorOptionValueAttrs": {
+    "to": "dosuColorOptionValueAttrs",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "dosuOptionValueAttrs": {
+    "to": "dosuOptionValueAttrs",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "downloadTemplate": {
+    "to": "downloadTemplate",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:helper"
+  },
+  "dtfGuideAttrs": {
+    "to": "dtfGuideAttrs",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "dtfGuideContent": {
+    "to": "dtfGuideContent",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:helper"
+  },
+  "fetchMaterialInfo": {
+    "to": "fetchMaterialInfo",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:helper"
+  },
+  "horizontalBindSet": {
+    "to": "horizontalBindSet",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:helper"
+  },
+  "i18n": {
+    "to": "i18n",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:vue-runtime"
+  },
+  "inject": {
+    "to": "inject",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:vue-runtime"
+  },
+  "innerGroupSubjectClass": {
+    "to": "innerGroupSubjectClass",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "innerGroupTitleClass": {
+    "to": "innerGroupTitleClass",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "isEmpty": {
+    "to": "isEmpty",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:vue-runtime"
+  },
+  "normalizeClass": {
+    "to": "normalizeClass",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:vue-runtime"
+  },
+  "normalizeStyle": {
+    "to": "normalizeStyle",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:vue-runtime"
+  },
+  "onMounted": {
+    "to": "onMounted",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:vue-runtime"
+  },
+  "openBlock": {
+    "to": "openBlock",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:vue-runtime"
+  },
+  "paperFlexRowClass": {
+    "to": "paperFlexRowClass",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "paperOptionAttrs": {
+    "to": "paperOptionAttrs",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "parsePostProcessOptions": {
+    "to": "parsePostProcessOptions",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:helper"
+  },
+  "performance": {
+    "to": "performance",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:builtin"
+  },
+  "printAreaNotesClass": {
+    "to": "printAreaNotesClass",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "reactive": {
+    "to": "reactive",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:vue-runtime"
+  },
+  "ref": {
+    "to": "ref",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:vue-runtime"
+  },
+  "renderComponent": {
+    "to": "renderComponent",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:vue-runtime"
+  },
+  "renderList": {
+    "to": "renderList",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:vue-runtime"
+  },
+  "requestAnimationFrame": {
+    "to": "requestAnimationFrame",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:builtin"
+  },
+  "resolveDirective": {
+    "to": "resolveDirective",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:vue-runtime"
+  },
+  "silkPrintGuideAttrs": {
+    "to": "silkPrintGuideAttrs",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "toDisplayString": {
+    "to": "toDisplayString",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:vue-runtime"
+  },
+  "translate": {
+    "to": "translate",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:vue-runtime"
+  },
+  "unref": {
+    "to": "unref",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:vue-runtime"
+  },
+  "useAccOrderStore": {
+    "to": "useAccOrderStore",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:vue-runtime"
+  },
+  "useConfigStore": {
+    "to": "useConfigStore",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:vue-runtime"
+  },
+  "useExteriorStore": {
+    "to": "useExteriorStore",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:vue-runtime"
+  },
+  "useOrderComposable": {
+    "to": "useOrderComposable",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:vue-runtime"
+  },
+  "useOrderStore": {
+    "to": "useOrderStore",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:vue-runtime"
+  },
+  "useUploadConfig": {
+    "to": "useUploadConfig",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:vue-runtime"
+  },
+  "vModelSelect": {
+    "to": "vModelSelect",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:vue-runtime"
+  },
+  "vModelText": {
+    "to": "vModelText",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:vue-runtime"
+  },
+  "vShow": {
+    "to": "vShow",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:vue-runtime"
+  },
+  "watch": {
+    "to": "watch",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:vue-runtime"
+  },
+  "weightOptionAttrs": {
+    "to": "weightOptionAttrs",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:hoisted-static"
+  },
+  "withCtx": {
+    "to": "withCtx",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:vue-runtime"
+  },
+  "withDirectives": {
+    "to": "withDirectives",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:vue-runtime"
+  },
+  "withModifiers": {
+    "to": "withModifiers",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:vue-runtime"
+  },
+  "withScopeId": {
+    "to": "withScopeId",
+    "confidence": 1,
+    "scope": "module",
+    "source": "free-ref",
+    "preserve": true,
+    "note": "절단 prefix 에 선언된 바인딩(슬라이스 내 미선언 free reference). codemod 리네임 제외·검증 G5 예상 미해소 참조 — class:vue-runtime"
+  }
+}

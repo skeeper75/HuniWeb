@@ -1,0 +1,62 @@
+[
+  {
+    "anchor": "Qe",
+    "kind": "jsdoc",
+    "text": "EditorBridge — 에디터 iframe 통신 관리자.\nedicusbase.firebaseapp.com(운영)/edicus-stage(개발) iframe을 생성하고\npostMessage 기반 양방향 통신과 URL 구성을 담당한다. (원본 식별자 Qe, 섹션 라인 2535-2732)"
+  },
+  {
+    "anchor": "a",
+    "kind": "jsdoc",
+    "text": "ApiClient — 레드프린팅 makers API HTTP 래퍼 클래스.\nmakers.redprinting.net과 통신하며 red-editor-token 헤더 인증과\n50분 간격 토큰 자동 갱신을 수행한다. (원본 식별자 a, 섹션 라인 2733-2887)"
+  },
+  {
+    "anchor": "D",
+    "kind": "jsdoc",
+    "text": "sessionStorageManager — Base64 인코딩 sessionStorage 관리 유틸.\n값이 주어지면 JSON 직렬화 후 btoa(encodeURIComponent)로 저장(userId는 64자 절단),\n값이 없으면 atob로 디코딩하여 반환한다. (원본 식별자 D, 90회 참조)"
+  },
+  {
+    "anchor": "U",
+    "kind": "jsdoc",
+    "text": "validateRequiredParams — 필수 파라미터 검증. 키 배열을 순회하며\n대상 객체에 없는 키가 있으면 `<key> is undefined.` 에러를 던진다. (원본 식별자 U)"
+  },
+  {
+    "anchor": "c",
+    "kind": "jsdoc",
+    "text": "buildQueryString — 객체를 `?k=v&...` URL 쿼리스트링으로 변환(값은 encodeURIComponent,\n객체값은 JSON 직렬화). (원본 식별자 c)"
+  },
+  {
+    "anchor": "B",
+    "kind": "jsdoc",
+    "text": "getAuthState — sessionStorage의 editorToken/userId로 인증 상태({user, token})를 조회. (원본 식별자 B)"
+  },
+  {
+    "anchor": "G",
+    "kind": "jsdoc",
+    "text": "ddpBlockBuilder — SDK 고수준 명령을 에디터가 이해하는 DDP 블록으로 변환.\n23가지 명령 타입을 처리한다. (원본 식별자 G, 21회 참조, 섹션 라인 9654-10346)"
+  },
+  {
+    "anchor": "t",
+    "kind": "jsdoc",
+    "text": "RedEditorSDK — 메인 SDK 클래스(window.RedEditorSDK로 export).\n생성자 + 45개 프로토타입 메서드(템플릿/프로젝트/에디터 UI/VDP/라이프사이클/인증/이벤트/조회/주문).\nthis.version=6.6.48, sdkState.mode=standard|passive. (원본 식별자 t, 섹션 라인 10398-11801)"
+  },
+  {
+    "anchor": "X",
+    "kind": "jsdoc",
+    "text": "CustomTabManager — 커스텀 탭(옵션 선택 UI) 데이터 가공 헬퍼 클래스.\n소재 목록에서 동적 아이템을 추출하고 템플릿 매칭·초기 변수 설정을 수행한다.\n(원본 식별자 X, 섹션 라인 11803-12244)"
+  },
+  {
+    "anchor": "en",
+    "kind": "jsdoc",
+    "text": "apiClientInstance — ApiClient 인스턴스(makers API 통신용 싱글턴). (원본 식별자 en, 36회 참조)"
+  },
+  {
+    "anchor": "K",
+    "kind": "jsdoc",
+    "text": "sdkState — SDK 내부 상태 객체. mode(standard|passive)·deviceTarget(pc|mobile) 등\n런타임 상태를 보관한다. (원본 식별자 K, 47회 참조)"
+  },
+  {
+    "anchor": "b",
+    "kind": "jsdoc",
+    "text": "commandPromiseHandlers — remoteEditor command+close-preview 명령의 결과를\n해소할 Promise 핸들러 보관소. (원본 식별자 b)"
+  }
+]

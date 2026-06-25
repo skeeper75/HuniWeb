@@ -1,0 +1,681 @@
+{
+  "We": {
+    "to": "windowRef",
+    "confidence": 0.95,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "Qe": {
+    "to": "editorBridge",
+    "confidence": 0.95,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "A": {
+    "to": "isEditorBusy",
+    "confidence": 0.9,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "i": {
+    "to": "sentryLib",
+    "confidence": 0.9,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "a": {
+    "to": "ApiClient",
+    "confidence": 0.9,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "t": {
+    "to": "RedEditorSDK",
+    "confidence": 0.9,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "X": {
+    "to": "CustomTabManager",
+    "confidence": 0.9,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "en": {
+    "to": "apiClientInstance",
+    "confidence": 0.9,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "D": {
+    "to": "sessionStorageManager",
+    "confidence": 0.95,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "U": {
+    "to": "validateRequiredParams",
+    "confidence": 0.9,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "c": {
+    "to": "buildQueryString",
+    "confidence": 0.9,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "B": {
+    "to": "getAuthState",
+    "confidence": 0.9,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "z": {
+    "to": "buildPluginParams",
+    "confidence": 0.9,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "G": {
+    "to": "ddpBlockBuilder",
+    "confidence": 0.95,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "tn": {
+    "to": "objectToQueryParam",
+    "confidence": 0.9,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "K": {
+    "to": "sdkState",
+    "confidence": 0.95,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "Y": {
+    "to": "customTabRawData",
+    "confidence": 0.9,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "$": {
+    "to": "noStockCombinations",
+    "confidence": 0.9,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "F": {
+    "to": "vdpCatalogData",
+    "confidence": 0.9,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "V": {
+    "to": "sentryHubInstance",
+    "confidence": 0.9,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "J": {
+    "to": "sentryLogger",
+    "confidence": 0.9,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "M": {
+    "to": "autoSaveIntervalId",
+    "confidence": 0.9,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "W": {
+    "to": "autoSaveIntervalMinutes",
+    "confidence": 0.9,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "N": {
+    "to": "sceneInfoCallback",
+    "confidence": 0.9,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "u": {
+    "to": "koiContainerElement",
+    "confidence": 0.9,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "L": {
+    "to": "koiIframeElement",
+    "confidence": 0.9,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "l": {
+    "to": "onCreateCallback",
+    "confidence": 0.9,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "f": {
+    "to": "onLoadCallback",
+    "confidence": 0.9,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "p": {
+    "to": "onChangeCallback",
+    "confidence": 0.9,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "d": {
+    "to": "onCloseCallback",
+    "confidence": 0.9,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "h": {
+    "to": "onSaveCallback",
+    "confidence": 0.9,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "v": {
+    "to": "onSelectCallback",
+    "confidence": 0.9,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "g": {
+    "to": "onHistoryStateCallback",
+    "confidence": 0.9,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "_": {
+    "to": "onHistoryLabelCallback",
+    "confidence": 0.9,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "y": {
+    "to": "onPromoReportCallback",
+    "confidence": 0.9,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "m": {
+    "to": "onGroupCaptionCallback",
+    "confidence": 0.9,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "b": {
+    "to": "commandPromiseHandlers",
+    "confidence": 0.9,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "H": {
+    "to": "onErrorCallback",
+    "confidence": 0.95,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "x": {
+    "to": "onAllEventsCallback",
+    "confidence": 0.9,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "k": {
+    "to": "onDdpExecuteCompleteCallback",
+    "confidence": 0.9,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "w": {
+    "to": "onImagePoolCallback",
+    "confidence": 0.9,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "S": {
+    "to": "onPreviewCloseCallback",
+    "confidence": 0.9,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "E": {
+    "to": "onFontListCallback",
+    "confidence": 0.9,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "I": {
+    "to": "onChangeModeCallback",
+    "confidence": 0.9,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "T": {
+    "to": "onPageCountChangeCallback",
+    "confidence": 0.9,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "P": {
+    "to": "onPageChangeCallback",
+    "confidence": 0.9,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "O": {
+    "to": "onImposeOpenedCallback",
+    "confidence": 0.9,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "j": {
+    "to": "onPrintCountChangeCallback",
+    "confidence": 0.9,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "C": {
+    "to": "onCustomTabSelectionChangeCallback",
+    "confidence": 0.9,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "R": {
+    "to": "onDocReportCallback",
+    "confidence": 0.9,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "s": {
+    "to": "koiTokenRefreshListener",
+    "confidence": 0.9,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "q": {
+    "to": "koiPassiveMessageListener",
+    "confidence": 0.9,
+    "scope": "iife:78",
+    "source": "stats",
+    "preserve": false
+  },
+  "PDT_CD": {
+    "to": "PDT_CD",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true,
+    "non_applicable": true,
+    "note": "이 파일에 식별자/프로퍼티키로 부재(grep count=0·AST 확인). stats 상속 도메인 계약 가드(다른 파일용). 공허 충족 — 이 파일 리네임 대상 아님."
+  },
+  "MTRL_CD": {
+    "to": "MTRL_CD",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true,
+    "non_applicable": true,
+    "note": "이 파일에 식별자/프로퍼티키로 부재(grep count=0·AST 확인). stats 상속 도메인 계약 가드(다른 파일용). 공허 충족 — 이 파일 리네임 대상 아님."
+  },
+  "PRN_CNT": {
+    "to": "PRN_CNT",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true,
+    "non_applicable": true,
+    "note": "이 파일에 식별자/프로퍼티키로 부재(grep count=0·AST 확인). stats 상속 도메인 계약 가드(다른 파일용). 공허 충족 — 이 파일 리네임 대상 아님."
+  },
+  "CUT_WDT": {
+    "to": "CUT_WDT",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true,
+    "non_applicable": true,
+    "note": "이 파일에 식별자/프로퍼티키로 부재(grep count=0·AST 확인). stats 상속 도메인 계약 가드(다른 파일용). 공허 충족 — 이 파일 리네임 대상 아님."
+  },
+  "CUT_HGH": {
+    "to": "CUT_HGH",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true,
+    "non_applicable": true,
+    "note": "이 파일에 식별자/프로퍼티키로 부재(grep count=0·AST 확인). stats 상속 도메인 계약 가드(다른 파일용). 공허 충족 — 이 파일 리네임 대상 아님."
+  },
+  "WRK_WDT": {
+    "to": "WRK_WDT",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true,
+    "non_applicable": true,
+    "note": "이 파일에 식별자/프로퍼티키로 부재(grep count=0·AST 확인). stats 상속 도메인 계약 가드(다른 파일용). 공허 충족 — 이 파일 리네임 대상 아님."
+  },
+  "WRK_HGH": {
+    "to": "WRK_HGH",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true,
+    "non_applicable": true,
+    "note": "이 파일에 식별자/프로퍼티키로 부재(grep count=0·AST 확인). stats 상속 도메인 계약 가드(다른 파일용). 공허 충족 — 이 파일 리네임 대상 아님."
+  },
+  "CVR_MTRL_CD": {
+    "to": "CVR_MTRL_CD",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true,
+    "non_applicable": true,
+    "note": "이 파일에 식별자/프로퍼티키로 부재(grep count=0·AST 확인). stats 상속 도메인 계약 가드(다른 파일용). 공허 충족 — 이 파일 리네임 대상 아님."
+  },
+  "INN_MTRL_CD": {
+    "to": "INN_MTRL_CD",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true,
+    "non_applicable": true,
+    "note": "이 파일에 식별자/프로퍼티키로 부재(grep count=0·AST 확인). stats 상속 도메인 계약 가드(다른 파일용). 공허 충족 — 이 파일 리네임 대상 아님."
+  },
+  "PCS_COD": {
+    "to": "PCS_COD",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true,
+    "non_applicable": true,
+    "note": "이 파일에 식별자/프로퍼티키로 부재(grep count=0·AST 확인). stats 상속 도메인 계약 가드(다른 파일용). 공허 충족 — 이 파일 리네임 대상 아님."
+  },
+  "PCS_DTL_COD": {
+    "to": "PCS_DTL_COD",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true,
+    "non_applicable": true,
+    "note": "이 파일에 식별자/프로퍼티키로 부재(grep count=0·AST 확인). stats 상속 도메인 계약 가드(다른 파일용). 공허 충족 — 이 파일 리네임 대상 아님."
+  },
+  "PRICE": {
+    "to": "PRICE",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true,
+    "non_applicable": true,
+    "note": "이 파일에 식별자/프로퍼티키로 부재(grep count=0·AST 확인). stats 상속 도메인 계약 가드(다른 파일용). 공허 충족 — 이 파일 리네임 대상 아님."
+  },
+  "PRICE_VAT": {
+    "to": "PRICE_VAT",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true,
+    "non_applicable": true,
+    "note": "이 파일에 식별자/프로퍼티키로 부재(grep count=0·AST 확인). stats 상속 도메인 계약 가드(다른 파일용). 공허 충족 — 이 파일 리네임 대상 아님."
+  },
+  "PRICE_MALL": {
+    "to": "PRICE_MALL",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true,
+    "non_applicable": true,
+    "note": "이 파일에 식별자/프로퍼티키로 부재(grep count=0·AST 확인). stats 상속 도메인 계약 가드(다른 파일용). 공허 충족 — 이 파일 리네임 대상 아님."
+  },
+  "ORG_PRICE": {
+    "to": "ORG_PRICE",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true,
+    "non_applicable": true,
+    "note": "이 파일에 식별자/프로퍼티키로 부재(grep count=0·AST 확인). stats 상속 도메인 계약 가드(다른 파일용). 공허 충족 — 이 파일 리네임 대상 아님."
+  },
+  "mb_cust_cod": {
+    "to": "mb_cust_cod",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true,
+    "non_applicable": true,
+    "note": "이 파일에 식별자/프로퍼티키로 부재(grep count=0·AST 확인). stats 상속 도메인 계약 가드(다른 파일용). 공허 충족 — 이 파일 리네임 대상 아님."
+  },
+  "price_gbn": {
+    "to": "price_gbn",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true,
+    "non_applicable": true,
+    "note": "이 파일에 식별자/프로퍼티키로 부재(grep count=0·AST 확인). stats 상속 도메인 계약 가드(다른 파일용). 공허 충족 — 이 파일 리네임 대상 아님."
+  },
+  "retCode": {
+    "to": "retCode",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true,
+    "non_applicable": true,
+    "note": "이 파일에 식별자/프로퍼티키로 부재(grep count=0·AST 확인). stats 상속 도메인 계약 가드(다른 파일용). 공허 충족 — 이 파일 리네임 대상 아님."
+  },
+  "COD": {
+    "to": "COD",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true,
+    "non_applicable": true,
+    "note": "이 파일에 식별자/프로퍼티키로 부재(grep count=0·AST 확인). stats 상속 도메인 계약 가드(다른 파일용). 공허 충족 — 이 파일 리네임 대상 아님."
+  },
+  "COD_NME": {
+    "to": "COD_NME",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true,
+    "non_applicable": true,
+    "note": "이 파일에 식별자/프로퍼티키로 부재(grep count=0·AST 확인). stats 상속 도메인 계약 가드(다른 파일용). 공허 충족 — 이 파일 리네임 대상 아님."
+  },
+  "DIV_SEQ": {
+    "to": "DIV_SEQ",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true,
+    "non_applicable": true,
+    "note": "이 파일에 식별자/프로퍼티키로 부재(grep count=0·AST 확인). stats 상속 도메인 계약 가드(다른 파일용). 공허 충족 — 이 파일 리네임 대상 아님."
+  },
+  "DIV_NM": {
+    "to": "DIV_NM",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true,
+    "non_applicable": true,
+    "note": "이 파일에 식별자/프로퍼티키로 부재(grep count=0·AST 확인). stats 상속 도메인 계약 가드(다른 파일용). 공허 충족 — 이 파일 리네임 대상 아님."
+  },
+  "DFT_YN": {
+    "to": "DFT_YN",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true,
+    "non_applicable": true,
+    "note": "이 파일에 식별자/프로퍼티키로 부재(grep count=0·AST 확인). stats 상속 도메인 계약 가드(다른 파일용). 공허 충족 — 이 파일 리네임 대상 아님."
+  },
+  "ESN_YN": {
+    "to": "ESN_YN",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true,
+    "non_applicable": true,
+    "note": "이 파일에 식별자/프로퍼티키로 부재(grep count=0·AST 확인). stats 상속 도메인 계약 가드(다른 파일용). 공허 충족 — 이 파일 리네임 대상 아님."
+  },
+  "VIEW_YN": {
+    "to": "VIEW_YN",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true,
+    "non_applicable": true,
+    "note": "이 파일에 식별자/프로퍼티키로 부재(grep count=0·AST 확인). stats 상속 도메인 계약 가드(다른 파일용). 공허 충족 — 이 파일 리네임 대상 아님."
+  },
+  "PTT_CD": {
+    "to": "PTT_CD",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true,
+    "non_applicable": true,
+    "note": "이 파일에 식별자/프로퍼티키로 부재(grep count=0·AST 확인). stats 상속 도메인 계약 가드(다른 파일용). 공허 충족 — 이 파일 리네임 대상 아님."
+  },
+  "PTT_NM": {
+    "to": "PTT_NM",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true,
+    "non_applicable": true,
+    "note": "이 파일에 식별자/프로퍼티키로 부재(grep count=0·AST 확인). stats 상속 도메인 계약 가드(다른 파일용). 공허 충족 — 이 파일 리네임 대상 아님."
+  },
+  "WGT_CD": {
+    "to": "WGT_CD",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true,
+    "non_applicable": true,
+    "note": "이 파일에 식별자/프로퍼티키로 부재(grep count=0·AST 확인). stats 상속 도메인 계약 가드(다른 파일용). 공허 충족 — 이 파일 리네임 대상 아님."
+  },
+  "CLR_CD": {
+    "to": "CLR_CD",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true,
+    "non_applicable": true,
+    "note": "이 파일에 식별자/프로퍼티키로 부재(grep count=0·AST 확인). stats 상속 도메인 계약 가드(다른 파일용). 공허 충족 — 이 파일 리네임 대상 아님."
+  },
+  "MTRL_NM": {
+    "to": "MTRL_NM",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true,
+    "non_applicable": true,
+    "note": "이 파일에 식별자/프로퍼티키로 부재(grep count=0·AST 확인). stats 상속 도메인 계약 가드(다른 파일용). 공허 충족 — 이 파일 리네임 대상 아님."
+  },
+  "MTRL_TYPE": {
+    "to": "MTRL_TYPE",
+    "confidence": 1,
+    "scope": "module",
+    "source": "stats",
+    "preserve": true,
+    "non_applicable": true,
+    "note": "이 파일에 식별자/프로퍼티키로 부재(grep count=0·AST 확인). stats 상속 도메인 계약 가드(다른 파일용). 공허 충족 — 이 파일 리네임 대상 아님."
+  },
+  "Q": {
+    "to": "Q",
+    "confidence": 1,
+    "scope": "module",
+    "source": "inferred",
+    "preserve": true,
+    "class": "free-ref",
+    "note": "conventional minifier local (loop/temp/param). 1st/2nd/3rd-local naming convention — i/j/e류와 동일. 중첩 익명 스코프마다 별개 바인딩이라 고유 의미명 부여 불가(추측 금지). free-ref로 분류·리네임 대상 아님."
+  },
+  "Z": {
+    "to": "Z",
+    "confidence": 1,
+    "scope": "module",
+    "source": "inferred",
+    "preserve": true,
+    "class": "free-ref",
+    "note": "conventional minifier local (loop/temp/param). 1st/2nd/3rd-local naming convention — i/j/e류와 동일. 중첩 익명 스코프마다 별개 바인딩이라 고유 의미명 부여 불가(추측 금지). free-ref로 분류·리네임 대상 아님."
+  },
+  "_e": {
+    "to": "_e",
+    "confidence": 1,
+    "scope": "module",
+    "source": "inferred",
+    "preserve": true,
+    "class": "free-ref",
+    "note": "conventional minifier local (1회 사용·미니파이어 이름생성기 시퀀스 $e..zt). 중첩 익명 스코프 지역 임시. 고유 의미명 부여 불가(추측 금지). free-ref로 분류·리네임 대상 아님."
+  },
+  "_t": {
+    "to": "_t",
+    "confidence": 1,
+    "scope": "module",
+    "source": "inferred",
+    "preserve": true,
+    "class": "free-ref",
+    "note": "conventional minifier local (1회 사용·미니파이어 이름생성기 시퀀스 $e..zt). 중첩 익명 스코프 지역 임시. 고유 의미명 부여 불가(추측 금지). free-ref로 분류·리네임 대상 아님."
+  }
+}

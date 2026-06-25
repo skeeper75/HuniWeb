@@ -1,0 +1,13 @@
+{
+  "name": "rcd-tooling",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Huni-Recode AST 가독화 도구 (Babel codemod + prettier)",
+  "dependencies": {
+    "@babel/parser": "^7.25.0",
+    "@babel/traverse": "^7.25.0",
+    "@babel/generator": "^7.25.0",
+    "@babel/types": "^7.25.0",
+    "prettier": "^2.8.8"
+  }
+}
