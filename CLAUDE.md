@@ -13,6 +13,10 @@ are gated (load on demand) and the full original directive is archived at
 
 ## 1. Core Rules (always apply)
 
+- [HARD] **상품 유형 분류 정본(SOT)** = `_workspace/_foundation/product-type-classification-sot.md`.
+  완제품(.01)=일반 단일+셋트 완제품 · 반제품(.02)=셋트 구성원(부품) · 기성상품(.03)=제조 없음 ·
+  디자인상품(.04)=폐기→재분류 · 추가상품(.05)=addon. 이 분류는 relitigate 금지, 라이브를 이에
+  맞춰 교정(역방향 금지). 셋트 완제품/일반 단일 구분 = `t_prd_product_sets` 부모 등록 여부.
 - [HARD] Respond to the user in `conversation_language` (ko). Code, identifiers,
   table/column names, SQL, and skill names stay in English. Code comments per
   `code_comments` (ko).
