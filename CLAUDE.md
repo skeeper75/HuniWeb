@@ -336,7 +336,7 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 **산출물 루트:** `docs/reversing/red_reverse_engineer/05_readable/` (`_meta` 기법플레이북·toolset·`01_cartography`(리네임/주석/서드파티 맵)·`02_readable`(가독 .js)·`03_verify`(G1~G6 verdict)·`_tooling`(node_modules·gitignore)·`docs`(길잡이 문서)). 5 에이전트(`rcd-technique-researcher` 최신기법 → `rcd-module-cartographer` 맵 → `rcd-readability-engineer` AST 변환·생성 → `rcd-equivalence-verifier` 동등성·가독성 게이트·검증 → `rcd-doc-author` 문서) + 3 스킬(`rcd-ast-deobfuscate`·`rcd-equivalence-verify`·오케스트레이터). ★실행 모드=**dynamic workflow(Workflow 툴)**: cartograph→codemod→verify(G1~G6)→NO-GO 시 루프(맵/스크립트 보강·최대 3회)→doc, 목적 부합까지. 생성≠검증·동작 보존=AST 구조 동등성(G2)이 자·파일럿(deob_05)→동형 전파(06/07/editor_sdk)·읽기전용(라이브 불요·Node+@babel+recast+prettier). 도구 미설치 시 `_tooling/`에 npm 설치.
 
-**변경이력:** 최신: 2026-06-25 하네스 초기 구성(5 에이전트+3 스킬+AST 코드모드/검증 스크립트 6종·G1~G6 게이트·dynamic workflow 실행) → 첫 실행 시 CHANGELOG 생성
+**변경이력:** 최신: 2026-06-26 editor 핵심메서드 의미화 GO(기계명 450→268)+07 비절단 재추출(full.js·G2클린이나 재-minify NO-GO)+G4b 의미품질 게이트+07 가능성 타진(中上·PARTIAL-SETUP-ONLY). 05/06 정식 GO. 다음=07 경로 결정 → `docs/reversing/red_reverse_engineer/05_readable/HANDOFF.md`·`CHANGELOG.md`
 
 ---
 

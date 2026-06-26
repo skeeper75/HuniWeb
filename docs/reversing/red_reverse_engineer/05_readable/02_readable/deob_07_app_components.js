@@ -1,3 +1,10 @@
+/* =========================================================================
+ 섹션 1: 의류(Apparel) — 인쇄 영역 컴포넌트 (계속)
+ 의류 상품의 인쇄 영역(front, leftchest 등)을 아이콘 체크박스로 선택하는 UI.
+ DTF/직접인쇄/실크인쇄 유형에 따라 가이드 문구가 달라짐.
+ ※ 이 파일은 번들 슬라이스라 line 105가 orphan `}),` 로 시작(앞 컴포넌트 setup 본문이 잘림).
+ ※ [절단 복원] engineer 는 03_deobfuscated/deob_07_app_components.recovered.js (합성 HEAD/TAIL 로 브래킷 균형·babel 무에러 검증)를 --in 으로 사용할 것. 원본 절단본은 파싱 불가.
+ ========================================================================= */
 /**
  * 의류 멀티 사이즈 수량 컴포넌트. 사이즈별 +/- 버튼으로 수량 조절. QUICK_ORD_YN(퀵오더 가능여부)에 따라 경고 노출. __name="ApparelMultiSizeQty".
  */
@@ -7,231 +14,2344 @@
 /**
  * 의류 사이즈 구분(성인/아동) 라디오 컴포넌트. props.options 를 성인/아동으로 분류해 RadioList 로 렌더, 선택 시 update emit. __name="ApparelSizeGbn".
  */
-/**
- * ============================================================================
- * RedPrinting 주문 위젯 — Vue 3 UI 컴포넌트 모듈 (역공학 결과)
- * ============================================================================
- *
- * 이 파일은 RedPrinting 자동견적 위젯의 Vue 3 UI 컴포넌트들을 포함합니다.
- * 주요 구성:
- *   - 의류(Apparel) 주문 컴포넌트: 인쇄영역, 사이즈, 수량, 팬톤컬러
- *   - 책자(Book) 주문 컴포넌트: 내지/표지, 도수, 용지, 수량
- *   - 부자재(Acc) 주문 컴포넌트: 옵션 선택, 수량, 가격 표시
- *   - 후가공(PostProcess) 컴포넌트: 코팅, 라운딩, 제본방향, 스코딕스 등
- *   - 수량(Quantity) 컴포넌트: 단순수량, 세트수량, 달력수량, 총수량
- *   - 용지(Material) 컴포넌트: 기본자재, 책자용지
- *
- * Vue 렌더 함수 매핑:
- *   g()  → openBlock()
- *   V()  → createVNode() (컴포넌트용)
- *   M()  → createElementVNode() (HTML 엘리먼트용)
- *   S()  → createElement()
- *   ce() → withCtx()
- *   de() → withDirectives()
- *   j()  → toDisplayString()
- *   T()  → unref()
- *   oe() → createCommentVNode()
- *   J    → Fragment
- *   K    → renderComponent (내부 렌더 헬퍼)
- *   he() → renderList()
- *   fe   → OptionRow (fieldset 래퍼 컴포넌트)
- *   je   → ImageButton (이미지 버튼 컴포넌트, deob_06 canonical. 구 IconCheckbox)
- *   Dn   → RadioList (라디오 리스트 컴포넌트, deob_06 canonical. 구 RadioGroup)
- *   Fo   → Selector (셀렉터 컴포넌트, deob_06 canonical. 구 BasicSelect)
- *   Ne   → Skeleton (로딩 스켈레톤)
- *   Kr   → CloseIcon / MultiplyIcon (아이콘)
- *   Sn   → ButtonRadio (버튼 라디오 컴포넌트, deob_06 canonical. 구 SizeSelector)
- *   sh   → ColorPicker (컬러 피커 컴포넌트, deob_06 canonical. 구 ColorChipSelector)
- *   we() → normalizeClass()
- *   Qt() → normalizeStyle()
- *   yt   → vModelText 디렉티브
- *   We   → vModelSelect 디렉티브
- *   Wi   → vModelCheckbox 디렉티브
- *   od   → vModelRadio 디렉티브
- *   Kt   → vShow 디렉티브
- *   Po() → createTextVNode()
- *
- * 기타 참조:
- *   re() → defineComponent()
- *   R()  → computed()
- *   H()  → ref()
- *   F()  → watch()
- *   xe() → reactive()
- *   le() → inject()
- *   Ve() → useExteriorStore() -- Pinia exterior 스토어 (uploadType, editorData). deob_06 canonical: defineStore("exterior")
- *   Dt() → useConfigStore() -- Pinia config 스토어 (locale 관리). Note: x()/translate() 함수가 내부적으로 useConfigStore를 호출하므로 useI18n은 간접적 별칭
- *   x()  → t() (번역 함수)
- *   Be() → withScopeId() (scoped CSS)
- *   on() → resolveDirective()
- *   br() → withModifiers()
- *   rs() → onMounted()
- *   Pi() → onBeforeUnmount()
- *   un() → debounce()
- *   cn() → isEmpty()
- *   qe   → CDN_BASE_URL (정적 자원 CDN 기본 경로)
- *   Uv() → createStaticVNode()
- *
- * 주요 함수/유틸:
- *   qr()  → useOrderComposable() (주문 정보 관리 컴포저블)
- *   Wr()  → useUploadConfig() (업로드 설정 컴포저블)
- *   Ql()  → parsePostProcessOptions() (후가공 옵션 파싱)
- *   Nl()  → fetchMaterialInfo() (자재 정보 API 호출)
- *   Hl()  → useWhiteReset() (화이트 인쇄 리셋 컴포저블)
- *   Ml()  → useAccOrderStore() -- Pinia acc-order 스토어 (부자재 주문). deob_06 canonical: defineStore("acc-order")
- *   zr()  → useOrderStore() -- Pinia order 스토어 (orderData). deob_06 canonical: defineStore("order")
- *   dS()  → buildTemplateParams() (템플릿 다운로드 파라미터 빌드)
- *   BT()  → downloadTemplate() (템플릿 다운로드 API)
- *   Yr    → roundingConfigMap (라운딩 설정 맵)
- *   Ll    → bookPageMultiplierMap (책자 페이지 배수 맵)
- *   J_    → horizontalBindSet (가로제본 상품코드 Set)
- *   K_    → accFilterConfigMap (부자재 필터 설정 맵)
- *   $l    → materialFilterSet (자재 필터 상품코드 Set)
- *   Fl    → whiteExclusionMap (화이트 제외 맵)
- *   _1    → whiteAlwaysAutoSet (화이트 항상 자동 Set)
- *   f1    → deviceModelSet (기종 표시 상품코드 Set)
- *   z_    → calendarPdfOnlySet (달력 PDF전용 상품코드 Set)
- *
- * 컴포넌트 레지스트리 변수 (minified → 원래 이름):
- *   Bl   → SizeSelect (규격 선택)
- *   Xl   → BookQty (책자 수량)
- *   Jl   → Paper (용지 선택 — 책자용)
- *   Vl   → HiddenPostProcess (숨김 후가공)
- *   Yl   → VisiblePostProcess (표시 후가공)
- *   X_   → SubjectGroup (건명 그룹)
- *   ks   → FileUpload (파일 업로드)
- *   Nl   → fetchMaterialInfo
- *
- * ============================================================================
- */
-/* =========================================================================
- * 섹션 1: 의류(Apparel) — 인쇄 영역 컴포넌트 (계속)
- * 의류 상품의 인쇄 영역(front, leftchest 등)을 아이콘 체크박스로 선택하는 UI.
- * DTF/직접인쇄/실크인쇄 유형에 따라 가이드 문구가 달라짐.
- * ========================================================================= */
-/* ============================================================================
- * [합성 래퍼 — 절단 복원 / SYNTHETIC TRUNCATION-RECOVERY WRAPPER]
- * 본 deob 파일(03_deobfuscated/deob_07_app_components.js)은 번들 슬라이스라 선두가
- * 절단됨 — 원본 line 105 가 orphan `}),` 로 시작(매칭 여는 토큰이 파일 안에 없음 → 브래킷 불균형
- * → AST 빌드 불가, G1/G2 차단). 아래 __recoveredApparelPrintAreaSetup 래퍼는 잘린 앞부분
- * (defineComponent → setup → 첫 computed 머리)을 합성으로 복원해 브래킷 균형을 맞추기 위한
- * SCAFFOLD 일 뿐이다. RedPrinting 원본 코드가 아니며(식별자/본문 무의미·동작 무관),
- * 가독화/리네임/검증의 대상이 아니다. 이 슬라이스의 목적은 오직: 첫 실 컴포넌트(line 105~)
- * 이하 본문이 균형 잡힌 AST 로 파싱되어 codemod(리네임/주석/포매팅)와 AST 구조동등(G2)을
- * 적용 가능하게 만드는 것이다. 슬라이스 끝의 트레일링 미닫힘 괄호 6개는 동일 목적의 SYNTHETIC
- * TAIL 로 닫는다. (babel @babel/parser 로 무에러 파싱 검증됨.)
- * ========================================================================= */
-const __recoveredApparelPrintAreaSetup = defineComponent({
-    __name: "ApparelPrintArea__recovered",
-    setup(props, { emit }) {
-      const callbacks = props.callbacks,
-        productCode = props.productCode,
-        editorStore = props.editorStore,
-        printAreaGridClass = props.printAreaGridClass,
-        productCodeImageMap = props.productCodeImageMap,
-        /* 인쇄영역 선택 — computed: 활성 영역 목록 생성 (합성 머리, 원본 절단 본문 대체) */
-        printAreaActiveAreas = computed(() => {
-          return [];
-
-          /* 인쇄영역 선택 — computed: 활성 영역 목록 생성 */
+const CS = {
+    class: "widget-error",
+  },
+  TS = {
+    key: 0,
+    class: "reason",
+  },
+  bS = withScopeId(
+    defineComponent({
+      __name: "Error",
+      props: {
+        message: {},
+      },
+      setup(e) {
+        return (t, n) => (
+          openBlock(),
+          createElementVNode("div", CS, [
+            n[0] || (n[0] = createElement("p", null, "주문 위젯을 생성할 수 없습니다 😱", -1)),
+            t.message
+              ? (openBlock(), createElementVNode("p", TS, toDisplayString(t.message), 1))
+              : createCommentVNode("", !0),
+          ])
+        );
+      },
+    }),
+    [["__scopeId", "data-v-33e3660e"]]
+  ),
+  SS = Object.freeze(
+    Object.defineProperty(
+      {
+        __proto__: null,
+        default: defineComponent({
+          __name: "Digital",
+          props: {
+            type: {
+              default: "new",
+            },
+            data: {},
+            widgetAttr: {},
+            defaultData: {},
+            senecaInfo: {},
+          },
+          emits: ["update"],
+          setup(e, { emit: t }) {
+            const n = e,
+              o = t,
+              s = computed(() => n.data.pdt_base_info[0].PDT_CD),
+              r = computed(() => n.widgetAttr.skinInfo),
+              a = inject("member"),
+              i = computed(() => {
+                if (!n.data.option_info) return !1;
+                const { shape_info: B } = n.data.option_info;
+                return !isEmpty(B) && !!B[0].COD;
+              }),
+              l = computed(() =>
+                a?.bsn_yn === "Y"
+                  ? n.data.pdt_mtrl_info
+                  : n.data.pdt_mtrl_info.filter((B) => B.BSN_YN !== "Y")
+              ),
+              c = kn(() =>
+                Ul(
+                  Object.assign({
+                    "../options/material/Acrylic.vue": () => Promise.resolve().then(() => OS),
+                    "../options/material/Basic.vue": () => Promise.resolve().then(() => kO),
+                    "../options/material/Paper.vue": () => Promise.resolve().then(() => MP),
+                  }),
+                  `../options/material/${l.value[0].MTRL_TYPE === "R" ? "Paper" : "Basic"}.vue`,
+                  4
+                )
+              ),
+              u = computed(() => {
+                const B = [...n.data.pdt_size_info];
+                return !i.value || !A.value.shapeInfo || B.length === 1
+                  ? B
+                  : B.filter((W) => W.STICKER_TYPE === A.value.shapeInfo.COD);
+              }),
+              d = ref(null),
+              h = (B) => {
+                d.value = B;
+              },
+              f = computed(() => v1.has(s.value)),
+              _ = reactive({}),
+              p = (B) => (W) => {
+                _[B] = W;
+              },
+              m = computed(() =>
+                parsePostProcessOptions(n.data.pdt_pcs_info, n.data.pdt_disable_pcs_info)
+              ),
+              { uploadConfig: v, canEditOrdCnt: E } = useUploadConfig(n.widgetAttr),
+              k = useEditorStore(),
+              N = computed(() => {
+                let B =
+                  a?.bsn_yn === "Y" && k.uploadType.default === "pdf"
+                    ? "DesignQty"
+                    : kl[s.value] || "DesignQty";
+                return (
+                  f.value && (B = "CalendarQty"),
+                  kn(() =>
+                    Ul(
+                      Object.assign({
+                        "../options/qty/BookQty.vue": () => Promise.resolve().then(() => EP),
+                        "../options/qty/CalendarQty.vue": () => Promise.resolve().then(() => jO),
+                        "../options/qty/DesignQty.vue": () => Promise.resolve().then(() => GS),
+                        "../options/qty/SetQty.vue": () => Promise.resolve().then(() => rI),
+                        "../options/qty/SimpleQty.vue": () => Promise.resolve().then(() => _I),
+                        "../options/qty/TotalQty.vue": () => Promise.resolve().then(() => bI),
+                      }),
+                      `../options/qty/${B}.vue`,
+                      4
+                    )
+                  )
+                );
+              }),
+              D = computed(() => {
+                const B = n.data.pdt_base_info[0];
+                if (B.DAY_PRDC_PDT_YN !== "N")
+                  return {
+                    type: B.DAY_PRDC_PDT_YN,
+                    maxQty: B.DAY_ABLE_PRN_CNT,
+                  };
+              }),
+              {
+                defaultOrderData: O,
+                orderInfo: A,
+                pcsInfo: b,
+                updateOption: C,
+                updatePcsOption: y,
+                updatePostPcs: I,
+              } = useOrderComposable(n.type, {
+                group: n.widgetAttr.item_gbn,
+                emits: {
+                  updateOrder: (B) => o("update", B),
+                },
+              }),
+              w = computed(() => b.value.SUB_MTR?.find((B) => B.PCS_CD === xl[s.value])),
+              U = computed(() =>
+                bookPageMultiplierMap[n.data.pdt_base_info[0].PDT_CD]
+                  ? A.value.quantityInfo?.prnCnt || 1
+                  : (A.value.quantityInfo?.ordCnt || 1) * (A.value.quantityInfo?.prnCnt || 1)
+              ),
+              Z = ref(null),
+              me = inject("callbacks", {});
+            watch(
+              () => f.value,
+              (B) => {
+                B && u.value.length === 0 && (Z.value = "달력 사이즈 설정이 필요합니다");
+              },
+              {
+                immediate: !0,
+              }
+            ),
+              watch(
+                () => Z.value,
+                (B) => {
+                  B && me?.onError && me.onError(B || "주문 위젯 에러 발생");
+                },
+                {
+                  immediate: !0,
+                }
+              );
+            const _e = () => {
+              me?.onReset && me.onReset("fileUpload");
+            };
+            return (
+              watch(
+                () => A.value.dosuInfo?.COD,
+                (B) => {
+                  k.isAfterEdit() && B === "SID_X" && _e();
+                }
+              ),
+              (B, W) =>
+                Z.value
+                  ? (openBlock(),
+                    createVNode(
+                      bS,
+                      {
+                        key: 0,
+                        message: Z.value,
+                      },
+                      null,
+                      8,
+                      ["message"]
+                    ))
+                  : (openBlock(),
+                    createElementVNode(
+                      Fragment,
+                      {
+                        key: 1,
+                      },
+                      [
+                        r.value.pageDirection.view_yn === "Y" && unref(A)?.dosuInfo?.COD !== "SID_X"
+                          ? (openBlock(),
+                            createVNode(
+                              Y1,
+                              {
+                                key: 0,
+                                "related-data": {
+                                  sizeInfo: unref(A).sizeInfo,
+                                },
+                                onUpdate: W[0] || (W[0] = (ue) => unref(C)("pageDirection")(ue)),
+                              },
+                              null,
+                              8,
+                              ["related-data"]
+                            ))
+                          : createCommentVNode("", !0),
+                        n.data.option_material_filters
+                          ? (openBlock(),
+                            createVNode(
+                              ob,
+                              {
+                                key: 1,
+                                options: n.data.option_material_filters,
+                                onUpdate: h,
+                              },
+                              null,
+                              8,
+                              ["options"]
+                            ))
+                          : createCommentVNode("", !0),
+                        n.data.option_info?.color_info
+                          ? (openBlock(),
+                            createVNode(
+                              rb,
+                              {
+                                key: 2,
+                                data: n.data.option_info?.color_info,
+                                onUpdate: W[1] || (W[1] = (ue) => unref(C)("setData")(ue)),
+                              },
+                              null,
+                              8,
+                              ["data"]
+                            ))
+                          : createCommentVNode("", !0),
+                        i.value
+                          ? (openBlock(),
+                            createVNode(
+                              W_,
+                              {
+                                key: 3,
+                                options: B.data.option_info?.shape_info || [],
+                                default: unref(O)?.shapeInfo,
+                                onUpdate: W[2] || (W[2] = (ue) => unref(C)("shapeInfo")(ue)),
+                              },
+                              null,
+                              8,
+                              ["options", "default"]
+                            ))
+                          : createCommentVNode("", !0),
+                        withDirectives(
+                          (openBlock(),
+                          createVNode(
+                            ns(unref(c)),
+                            {
+                              options: l.value,
+                              default: unref(O)?.meterialInfo,
+                              "reset-after-edit":
+                                unref(d1).has(B.data.pdt_base_info[0].PDT_CD) &&
+                                unref(k).isAfterEdit(),
+                              "show-extra": B.widgetAttr.able_paper_yn === "Y",
+                              "related-data": {
+                                POST_PCS: w.value,
+                                filters: d.value,
+                              },
+                              onUpdate: W[3] || (W[3] = (ue) => unref(C)("meterialInfo")(ue)),
+                            },
+                            null,
+                            40,
+                            ["options", "default", "reset-after-edit", "show-extra", "related-data"]
+                          )),
+                          [[vShow, r.value.paperSelect.view_yn === "Y"]]
+                        ),
+                        withDirectives(
+                          renderComponent(
+                            q_,
+                            {
+                              options: B.data.pdt_dosu_info,
+                              default: unref(O)?.dosuInfo,
+                              "related-data": {
+                                mtrlCd: unref(A).meterialInfo?.MTRL_CD,
+                                mtrlDosu: unref(A).meterialInfo?.SID_GBN,
+                              },
+                              onUpdate: W[4] || (W[4] = (ue) => unref(C)("dosuInfo")(ue)),
+                            },
+                            null,
+                            8,
+                            ["options", "default", "related-data"]
+                          ),
+                          [[vShow, r.value.dosuSelect.view_yn === "Y" && B.data.pdt_dosu_info]]
+                        ),
+                        B.data.option_info?.thickness_info
+                          ? (openBlock(),
+                            createVNode(
+                              lb,
+                              {
+                                key: 4,
+                                options: B.data.option_info.thickness_info,
+                                onUpdate: W[5] || (W[5] = (ue) => p("thickness")(ue)),
+                              },
+                              null,
+                              8,
+                              ["options"]
+                            ))
+                          : createCommentVNode("", !0),
+                        withDirectives(
+                          renderComponent(
+                            SizeSelect,
+                            {
+                              options: u.value,
+                              "base-info": B.data.pdt_base_info[0],
+                              default: unref(O)?.size,
+                              "related-data": {
+                                shape: unref(A).shapeInfo?.COD,
+                                sizeFromPostPcs: B.data.pdt_base_info[0].SIZE_PCS_USE
+                                  ? _.sizeFromPostPcs
+                                  : null,
+                                pageDirection: unref(A).pageDirection?.COD,
+                              },
+                              onUpdate: W[6] || (W[6] = (ue) => unref(C)("sizeInfo")(ue)),
+                              onValidate: W[7] || (W[7] = (ue) => unref(C)("validation")(ue)),
+                              "onUpdate:shape": W[8] || (W[8] = (ue) => p("shapeFromSize")(ue)),
+                            },
+                            null,
+                            8,
+                            ["options", "base-info", "default", "related-data"]
+                          ),
+                          [
+                            [
+                              vShow,
+                              r.value.sizeSelect.view_yn === "Y" &&
+                                unref(A)?.dosuInfo?.COD !== "SID_X",
+                            ],
+                          ]
+                        ),
+                        f.value &&
+                        unref(k).uploadType.default === "editor" &&
+                        !unref(calendarPdfOnlySet).has(s.value)
+                          ? (openBlock(),
+                            createVNode(Ab, {
+                              key: 5,
+                              onUpdate: W[9] || (W[9] = (ue) => unref(C)("calendarInfo")(ue)),
+                            }))
+                          : createCommentVNode("", !0),
+                        r.value.quantityGroup.view_yn === "Y"
+                          ? (openBlock(),
+                            createVNode(
+                              ns(N.value),
+                              {
+                                key: 6,
+                                "can-edit-ord-cnt": unref(E),
+                                options: B.data.pdt_prn_cnt_info,
+                                default: unref(O)?.quantityInfo,
+                                "default-set-cnt": B.data.pdt_base_info[0].SET_CNT,
+                                unit: B.data.pdt_base_info[0].PDT_UNIT,
+                                "related-data": {
+                                  dosu: unref(A).dosuInfo?.COD,
+                                  size: unref(A).sizeInfo?.DIV_NM,
+                                },
+                                "express-shipping": D.value,
+                                onUpdate: W[10] || (W[10] = (ue) => unref(C)("quantityInfo")(ue)),
+                              },
+                              null,
+                              40,
+                              [
+                                "can-edit-ord-cnt",
+                                "options",
+                                "default",
+                                "default-set-cnt",
+                                "unit",
+                                "related-data",
+                                "express-shipping",
+                              ]
+                            ))
+                          : createCommentVNode("", !0),
+                        r.value.subjectGroup.view_yn === "Y"
+                          ? (openBlock(),
+                            createVNode(
+                              SubjectGroup,
+                              {
+                                key: 7,
+                                "is-biz-mem": unref(a)?.bsn_yn === "Y",
+                                onUpdate: W[11] || (W[11] = (ue) => unref(C)("etcInfo")(ue)),
+                              },
+                              null,
+                              8,
+                              ["is-biz-mem"]
+                            ))
+                          : createCommentVNode("", !0),
+                        renderComponent(
+                          HiddenPostProcess,
+                          {
+                            options: m.value.postPcs.hidden,
+                            "related-data": {
+                              shape: unref(A).shapeInfo?.COD || _.shapeFromSize,
+                              mtrlCd: unref(A).meterialInfo?.MTRL_CD,
+                              sizeInfo: unref(A).sizeInfo,
+                              thickness: _.thickness,
+                              orderQty: U.value,
+                              dosu: unref(A).dosuInfo?.COD,
+                            },
+                            "disabled-opts": m.value.disabled,
+                            onUpdate: W[12] || (W[12] = (ue) => unref(I)("hidden")(ue)),
+                          },
+                          null,
+                          8,
+                          ["options", "related-data", "disabled-opts"]
+                        ),
+                        renderComponent(
+                          VisiblePostProcess,
+                          {
+                            options: m.value.postPcs.visible,
+                            "related-data": {
+                              mtrlCd: unref(A).meterialInfo?.MTRL_CD,
+                              sizeInfo: unref(A).sizeInfo,
+                              orderQty: U.value,
+                            },
+                            "attb-opts": B.data.pdt_add_info[1],
+                            "disabled-opts": m.value.disabled,
+                            onUpdate: W[13] || (W[13] = (ue) => unref(I)("visible")(ue)),
+                          },
+                          null,
+                          8,
+                          ["options", "related-data", "attb-opts", "disabled-opts"]
+                        ),
+                        renderComponent(
+                          Jb,
+                          {
+                            options: m.value.sub,
+                            "related-data": {
+                              orderQty: U.value,
+                              sizeInfo: unref(A).sizeInfo,
+                              mtrlCd: unref(A).meterialInfo?.MTRL_CD,
+                              pcsCodeForSize: B.data.pdt_base_info[0].SIZE_PCS_USE,
+                              setData: unref(A)?.setData,
+                            },
+                            onUpdate: W[14] || (W[14] = (ue) => unref(y)("SUB_MTR")(ue)),
+                            "onUpdate:size": W[15] || (W[15] = (ue) => p("sizeFromPostPcs")(ue)),
+                          },
+                          null,
+                          8,
+                          ["options", "related-data"]
+                        ),
+                        B.widgetAttr.order_yn !== "N" && unref(A).dosuInfo?.COD !== "SID_X"
+                          ? (openBlock(),
+                            createVNode(
+                              FileUpload,
+                              {
+                                key: 8,
+                                "upload-config": unref(v),
+                                "show-extra":
+                                  B.widgetAttr.useTemplateDownload === "Y" &&
+                                  B.widgetAttr.usePDF === "Y",
+                                "related-data": {
+                                  size: unref(A).sizeInfo,
+                                },
+                                onUpload: W[16] || (W[16] = (ue) => unref(C)("fileUploadInfo")(ue)),
+                              },
+                              null,
+                              8,
+                              ["upload-config", "show-extra", "related-data"]
+                            ))
+                          : createCommentVNode("", !0),
+                      ],
+                      64
+                    ))
+            );
+          },
         }),
-        /* 인쇄영역 옵션 → 직접인쇄 제한 영역 이름 computed */
-        directPrintAreaNames = computed(() => {
-          const restrictedAreaNames = [];
-          for (const areaOption of props.options)
-            (areaOption.COD === "CL011" ||
-              areaOption.COD === "CL009" ||
-              areaOption.COD === "CL010" ||
-              areaOption.COD === "CL004") &&
-              restrictedAreaNames.push(areaOption.COD_NME);
-          return restrictedAreaNames.length === 0 ? null : restrictedAreaNames.join(", ");
+      },
+      Symbol.toStringTag,
+      {
+        value: "Module",
+      }
+    )
+  ),
+  DS = defineComponent({
+    __name: "Method",
+    props: {
+      options: {},
+      default: {},
+    },
+    emits: ["update"],
+    setup(e, { emit: t }) {
+      const n = e,
+        o = t,
+        s = useI18n(),
+        r = inject("productCode", {
+          pdtCode: "",
         }),
-        /* 인쇄영역 옵션 → 아이콘 데이터 배열 computed */
-        printAreaIconItems = computed(() =>
-          props.options.map((areaOption) => ({
-            name: areaOption.COD_NME,
-            value: areaOption.KOI_NME,
-            imgPath: `${CDN_BASE_URL}/ko/item/printarea_${
-              productCodeImageMap[productCode.pdtCode]
-                ? productCodeImageMap[productCode.pdtCode][areaOption.COD]
-                : areaOption.COD
-            }.svg`,
-            forcedImg: !0,
+        a = inject("callbacks", {}),
+        i = inject("deviceType", "pc"),
+        l = computed(() =>
+          n.options.map((h) => ({
+            name: h.COD_NME,
+            value: h.COD,
+            key: h.COD,
           }))
         ),
-        /* 인쇄영역 활성 상태 reactive 객체 */
-        printAreaActiveState = reactive(
-          props.options.reduce(
-            (stateMap, areaOption, index) => (
-              (stateMap[areaOption.KOI_NME] = {
-                active: index === 0,
-                COD: areaOption.COD,
-                COD_NME: areaOption.COD_NME,
-                KOI_NME: areaOption.KOI_NME,
-              }),
-              stateMap
-            ),
-            {}
-          )
-        ),
-        /* 현재 활성화된 인쇄영역 목록 computed */
-        activePrintAreas = computed(() =>
-          Object.entries(printAreaActiveState).reduce((activeList, entry) => {
-            const [areaKey, areaData] = entry;
-            return (
-              areaData.active &&
-                activeList.push({
-                  COD: areaData.COD,
-                  COD_NME: areaData.COD_NME,
-                  KOI_NME: areaKey,
-                }),
-              activeList
-            );
-          }, [])
-        ),
-        /* 인쇄영역 리셋 핸들러 — 에디터 수정 후 상태 초기화 */
-        handlePrintAreaReset = () => {
-          callbacks?.onReset && callbacks.onReset("printArea");
+        c = ref(n.default || l.value[0].value),
+        u = (h) => {
+          c.value = h;
         },
-        /* 인쇄영역 토글 핸들러 — front/leftchest 상호 배타적 처리 */
-        togglePrintArea = (areaKey) => {
-          (activePrintAreas.value.length === 1 && printAreaActiveState[areaKey]?.active) ||
-            (editorStore.isAfterEdit() && handlePrintAreaReset(),
-            areaKey === "front" &&
-              printAreaActiveState.leftchest &&
-              (printAreaActiveState.leftchest.active = !1),
-            areaKey === "leftchest" &&
-              printAreaActiveState.front &&
-              (printAreaActiveState.front.active = !1),
-            (printAreaActiveState[areaKey].active = !printAreaActiveState[areaKey].active));
-        };
-      /* 인쇄영역 변경 시 부모로 update 이벤트 발행 */
+        d = computed(() =>
+          n.options.map((h, f) => ({
+            IDX: f + 1,
+            CATEGORY: t("제작방식"),
+            LABEL: n.options[f].COD_NME,
+            IMG_URL: `${CDN_BASE_URL}/${s.locale}/item/print_method/${h.COD}/${r.pdtCode}.png`,
+            IMG_ALT: h.COD_NME,
+          }))
+        );
       return (
         watch(
-          () => activePrintAreas.value,
-          (selectedAreas) => {
-            emit("update", selectedAreas);
+          () => c.value,
+          (h) => {
+            const f = n.options.find((_) => _.COD == h);
+            o("update", f);
           },
           {
             immediate: !0,
           }
-        ) /* 인쇄 유형(PRINT_GBN) 변경 감시 — 'N'이면 null 전달 */,
+        ),
+        (h, f) => (
+          openBlock(),
+          createVNode(
+            OptionRow,
+            {
+              title: "제작방식",
+              option: "Method",
+              extra:
+                unref(i) === "mobile" && d.value
+                  ? {
+                      name: "자세히보기",
+                      callback: () => {
+                        unref(a).onInformOptionTips && unref(a).onInformOptionTips(d.value);
+                      },
+                      style: "tip",
+                    }
+                  : null,
+            },
+            {
+              default: withCtx(() => [
+                renderComponent(
+                  SizeSelector,
+                  {
+                    options: l.value,
+                    default: c.value,
+                    tips: d.value,
+                    onSelect: u,
+                  },
+                  null,
+                  8,
+                  ["options", "default", "tips"]
+                ),
+              ]),
+              _: 1,
+            },
+            8,
+            ["extra"]
+          )
+        )
+      );
+    },
+  }),
+  PS = defineComponent({
+    __name: "AcrylicPrintData",
+    props: {
+      options: {},
+      default: {},
+    },
+    emits: ["update"],
+    setup(e, { emit: t }) {
+      const n = e,
+        o = t,
+        s = useI18n(),
+        r = useEditorStore(),
+        a = inject("productCode", {
+          pdtCode: "",
+        }),
+        i = inject("callbacks", {}),
+        l = inject("deviceType", "pc"),
+        c = computed(() =>
+          n.options.map((_) => ({
+            name: _.COD_NME,
+            value: _.COD,
+            key: _.COD,
+          }))
+        ),
+        u = ref(n.default || c.value[0].value),
+        d = (_) => {
+          u.value = _;
+        },
+        h = {
+          O: new Set(["ACTHBCO", "ACTHDCO"]),
+          X: new Set(["ACTHBCO", "ACTHDCO", "ACTHFCO"]),
+        },
+        f = computed(() =>
+          n.options.map((_, p) => ({
+            IDX: p + 1,
+            CATEGORY: t("인쇄데이터"),
+            LABEL: n.options[p].COD_NME,
+            IMG_URL: h[_.COD].has(a.pdtCode)
+              ? `${CDN_BASE_URL}/${s.locale}/item/printdata/${_.COD}/${a.pdtCode}.png`
+              : `${CDN_BASE_URL}/${s.locale}/item/printdata/${_.COD}/default.png`,
+            IMG_ALT: _.COD_NME,
+          }))
+        );
+      return (
         watch(
-          () => props.relatedData.printType?.PRINT_GBN,
-          (printGbn) => {
-            printGbn === "N" ? emit("update", null) : emit("update", activePrintAreas.value);
-          }
-        ) /* 에디터 데이터에서 인쇄영역 페이지 정보 동기화 */,
-        watch(
-          () => editorStore.editorData.default,
-          (editorDefault) => {
-            const editorPages = editorDefault?.editorClothesInfo?.PAGES;
-            if (editorPages)
-              for (const areaKey in printAreaActiveState)
-                printAreaActiveState[areaKey].active = editorPages.includes(areaKey);
+          () => u.value,
+          (_) => {
+            r.isAfterEdit() && i?.onReset && i.onReset("printData");
+            const p = n.options.find((m) => m.COD === _);
+            o("update", p);
+          },
+          {
+            immediate: !0,
           }
         ),
-        (instance, cache) =>
-          instance.relatedData.printType?.PRINT_GBN === "Y"
+        (_, p) => (
+          openBlock(),
+          createVNode(
+            OptionRow,
+            {
+              title: "인쇄데이터",
+              extra:
+                unref(l) === "mobile" && f.value
+                  ? {
+                      name: "자세히보기",
+                      callback: () => {
+                        unref(i).onInformOptionTips && unref(i).onInformOptionTips(f.value);
+                      },
+                      style: "tip",
+                    }
+                  : null,
+            },
+            {
+              default: withCtx(() => [
+                renderComponent(
+                  SizeSelector,
+                  {
+                    options: c.value,
+                    default: u.value,
+                    tips: f.value,
+                    onSelect: d,
+                  },
+                  null,
+                  8,
+                  ["options", "default", "tips"]
+                ),
+              ]),
+              _: 1,
+            },
+            8,
+            ["extra"]
+          )
+        )
+      );
+    },
+  }),
+  ES = ["value", "disabled"],
+  nh = defineComponent({
+    __name: "Acrylic",
+    props: {
+      options: {},
+      showExtra: {
+        type: Boolean,
+        default: !1,
+      },
+      default: {},
+      resetAfterEdit: {
+        type: Boolean,
+      },
+      relatedData: {},
+    },
+    emits: ["update"],
+    setup(e, { emit: t }) {
+      const n = e,
+        o = t,
+        s = inject("callbacks", {}),
+        r = inject("productCode", {
+          pdtCode: "",
+        }),
+        a = useI18n(),
+        i = computed(() => {
+          const h = n.options.filter((f) => f.GRP_OPTION_CD === n.relatedData?.method);
+          return h.length > 0 ? h : n.options;
+        }),
+        l = computed(() => i.value.filter((h) => h.HIDE_YN !== "Y")),
+        c = ref(n.default?.MTRL_CD || l.value[0]?.MTRL_CD),
+        u = async () => {
+          const h = await fetchMaterialInfo({
+            pdt_cod: r.pdtCode,
+            lang: a.locale,
+          });
+          if (!h) return console.error("[RedWidgetSDK/ERROR] 자재 정보가 없습니다.");
+          s?.onInformMaterials
+            ? s.onInformMaterials(h)
+            : console.log("[RedWidgetSDK] 자재 정보 >", h);
+        },
+        d = () => {
+          n.resetAfterEdit && s?.onReset && s.onReset("mtrl");
+        };
+      return (
+        watch(
+          () => c.value,
+          (h) => {
+            const f = l.value.find((_) => _.MTRL_CD === h);
+            if (f) {
+              const {
+                PTT_CD: _,
+                PTT_NM: p,
+                WGT_CD: m,
+                CLR_CD: v,
+                MTRL_CD: E,
+                MTRL_NM: k,
+                MTRL_TYPE: N,
+                PRT_HIDE_YN: D,
+              } = f;
+              o("update", {
+                PTT_CD: _,
+                PTT_NM: p,
+                WGT_CD: m,
+                CLR_CD: v,
+                MTRL_CD: E,
+                MTRL_NM: k,
+                MTRL_TYPE: N,
+                PRT_HIDE_YN: D,
+              }),
+                _ === "OOO" && s?.onSaleOrder && s?.onSaleOrder(),
+                d();
+            }
+          },
+          {
+            immediate: !0,
+          }
+        ),
+        watch(
+          () => n.relatedData?.method,
+          (h) => {
+            h && (c.value = l.value[0]?.MTRL_CD);
+          }
+        ),
+        (h, f) => (
+          openBlock(),
+          createVNode(
+            OptionRow,
+            {
+              title: "자재",
+              extra: h.showExtra
+                ? {
+                    name: "주문가능자재",
+                    callback: u,
+                  }
+                : null,
+            },
+            {
+              default: withCtx(() => [
+                withDirectives(
+                  createElement(
+                    "select",
+                    {
+                      "onUpdate:modelValue": f[0] || (f[0] = (_) => (c.value = _)),
+                      class: "basic-select",
+                      name: "material",
+                      onChange: d,
+                    },
+                    [
+                      (openBlock(!0),
+                      createElementVNode(
+                        Fragment,
+                        null,
+                        renderList(
+                          i.value,
+                          (_) => (
+                            openBlock(),
+                            createElementVNode(
+                              "option",
+                              {
+                                key: _.MTRL_CD,
+                                value: _.MTRL_CD,
+                                disabled: _.HIDE_YN === "Y",
+                              },
+                              toDisplayString(
+                                _.HIDE_YN !== "Y"
+                                  ? _.MTRL_NM
+                                  : `[${_.HIDE_RSN || unref(t)("주문불가")}] ${_.MTRL_NM}`
+                              ) +
+                                " " +
+                                toDisplayString(_.BSN_YN === "Y" ? "[영업주문]" : ""),
+                              9,
+                              ES
+                            )
+                          )
+                        ),
+                        128
+                      )),
+                    ],
+                    544
+                  ),
+                  [[vModelSelect, c.value]]
+                ),
+              ]),
+              _: 1,
+            },
+            8,
+            ["extra"]
+          )
+        )
+      );
+    },
+  }),
+  OS = Object.freeze(
+    Object.defineProperty(
+      {
+        __proto__: null,
+        default: nh,
+      },
+      Symbol.toStringTag,
+      {
+        value: "Module",
+      }
+    )
+  ),
+  IS = {
+    class: "qty-group",
+  },
+  RS = {
+    class: "title",
+  },
+  wS = {
+    class: "subject",
+  },
+  AS = {
+    class: "subject",
+  },
+  NS = {
+    class: "inputs",
+  },
+  MS = ["disabled"],
+  kS = {
+    class: "icon-box",
+  },
+  LS = ["value"],
+  $S = {
+    class: "notes",
+  },
+  xS = {
+    class: "note",
+  },
+  FS = {
+    key: 0,
+    class: "note",
+  },
+  US = {
+    key: 1,
+    class: "note",
+  },
+  BS = {
+    key: 2,
+    class: "note",
+  },
+  VS = {
+    key: 3,
+    class: "note",
+  },
+  HS = {
+    key: 4,
+    class: "note red",
+  },
+  oh = withScopeId(
+    defineComponent({
+      __name: "DesignQty",
+      props: {
+        options: {},
+        default: {},
+        relatedData: {},
+        canEditOrdCnt: {},
+        expressShipping: {},
+        unit: {},
+      },
+      emits: ["update"],
+      setup(e, { emit: t }) {
+        const n = e,
+          o = t,
+          s = inject("productCode", {
+            pdtCode: "",
+          }),
+          r = useEditorStore(),
+          a = ref("select"),
+          i = () => {
+            (a.value = a.value === "input" ? "select" : "input"),
+              a.value === "select" &&
+                (f.value.find((y) => y.PRN_CNT === p.value) || (p.value = c.value));
+          },
+          l = computed(() => n.options.find((C) => C.DFT_YN === "Y") || n.options[0]),
+          c = computed(() => l.value?.DFT_PRN_CNT || 1),
+          u = computed(() => l.value?.MIN_PRN_CNT || 1),
+          d = computed(() => l.value?.INC_CNT || 1),
+          h = computed(() => l.value?.INC_STEP || 10),
+          f = computed(() => {
+            if (n.options.length > 1) return n.options;
+            const C = [];
+            for (let y = u.value; C.length < h.value; y += d.value) {
+              const I = {
+                PRN_CNT: y,
+              };
+              C.push(I);
+            }
+            return C;
+          }),
+          _ = ref(n.default?.ordCnt || 1),
+          p = ref(n.default?.prnCnt || c.value || u.value),
+          m = computed(() => ({
+            ordCnt: _.value,
+            prnCnt: p.value,
+          })),
+          v = computed(() => (_.value * p.value).toLocaleString()),
+          E = computed(() => {
+            if (!n.expressShipping) return;
+            const { maxQty: C, type: y } = n.expressShipping;
+            if (!(C === 0 || C >= +v.value)) {
+              if (y === "Y") return t("오늘출발-불가능");
+              if (y === "T") return t("내일출발-불가능");
+            }
+          }),
+          k = computed(() => {
+            const C = h1[s.pdtCode] || (n.relatedData?.dosu === "SID_D" ? 2 : 1);
+            return (_.value * C).toLocaleString();
+          }),
+          N = computed(() => r.uploadType.default === "editor"),
+          D = computed(() => {
+            if (!p.value) return !0;
+            if (d.value !== 1) {
+              const C = p.value % d.value;
+              if (d.value > 1 && C !== 0) return !0;
+            }
+            return !1;
+          }),
+          O = computed(() => !_.value),
+          A = () => {
+            if (!p.value) return (p.value = 1);
+            if (d.value !== 1) {
+              const C = p.value % d.value;
+              if (d.value > 1 && C !== 0) {
+                const y = Math.ceil(p.value / d.value);
+                p.value = (y || 1) * d.value;
+              }
+            }
+          },
+          b = () => {
+            if (!_.value) return (_.value = 1);
+          };
+        return (
+          watch(
+            () => m.value,
+            debounce((C) => {
+              D.value || O.value || o("update", C);
+            }, 300),
+            {
+              immediate: !0,
+            }
+          ),
+          watch(
+            () => r.editorData?.default?.quantityInfo?.ordCnt,
+            (C, y) => {
+              if (C) _.value = C;
+              else if (y) return (_.value = 1);
+            }
+          ),
+          watch(
+            () => r.uploadType.default,
+            (C) => {
+              C === "editor" && (_.value = 1);
+            }
+          ),
+          (C, y) => {
+            const I = resolveDirective("dompurify-html");
+            return (
+              openBlock(),
+              createVNode(OptionRow, null, {
+                default: withCtx(() => [
+                  createElement("div", IS, [
+                    createElement("div", RS, [
+                      createElement("h2", wS, toDisplayString(unref(t)("디자인수")), 1),
+                      createElement("h2", AS, toDisplayString(unref(t)("수량")), 1),
+                    ]),
+                    createElement("div", NS, [
+                      withDirectives(
+                        createElement(
+                          "input",
+                          {
+                            "onUpdate:modelValue": y[0] || (y[0] = (w) => (_.value = w)),
+                            type: "number",
+                            class: "basic-input",
+                            id: "ORD_CNT",
+                            min: "1",
+                            disabled: N.value || !C.canEditOrdCnt.pdf,
+                            onFocusout: b,
+                          },
+                          null,
+                          40,
+                          MS
+                        ),
+                        [[vModelText, _.value]]
+                      ),
+                      createElement("div", kS, [renderComponent(CloseIcon)]),
+                      a.value === "input"
+                        ? withDirectives(
+                            (openBlock(),
+                            createElementVNode(
+                              "input",
+                              {
+                                key: 0,
+                                "onUpdate:modelValue": y[1] || (y[1] = (w) => (p.value = w)),
+                                type: "number",
+                                class: "basic-input",
+                                id: "PRN_CNT",
+                                min: "1",
+                                onFocusout: A,
+                              },
+                              null,
+                              544
+                            )),
+                            [[vModelText, p.value]]
+                          )
+                        : withDirectives(
+                            (openBlock(),
+                            createElementVNode(
+                              "select",
+                              {
+                                key: 1,
+                                "onUpdate:modelValue": y[2] || (y[2] = (w) => (p.value = w)),
+                                name: "PRN_CNT",
+                                class: "basic-select",
+                              },
+                              [
+                                (openBlock(!0),
+                                createElementVNode(
+                                  Fragment,
+                                  null,
+                                  renderList(
+                                    f.value,
+                                    (w) => (
+                                      openBlock(),
+                                      createElementVNode(
+                                        "option",
+                                        {
+                                          value: w.PRN_CNT,
+                                          key: w.PRN_CNT,
+                                        },
+                                        toDisplayString(w.PRN_CNT),
+                                        9,
+                                        LS
+                                      )
+                                    )
+                                  ),
+                                  128
+                                )),
+                              ],
+                              512
+                            )),
+                            [[vModelSelect, p.value]]
+                          ),
+                      createElement(
+                        "button",
+                        {
+                          type: "button",
+                          class: "action-btn",
+                          onClick: i,
+                        },
+                        toDisplayString(
+                          a.value === "input" ? unref(t)("수량선택") : unref(t)("직접입력")
+                        ),
+                        1
+                      ),
+                    ]),
+                  ]),
+                  createElement("div", $S, [
+                    withDirectives(createElement("p", xS, null, 512), [
+                      [
+                        I,
+                        unref(t)("주문수량안내", {
+                          QTY: v.value + (C.unit || unref(t)("개")),
+                        }),
+                      ],
+                    ]),
+                    u.value > 1
+                      ? withDirectives((openBlock(), createElementVNode("p", FS, null, 512)), [
+                          [
+                            I,
+                            unref(t)("단위주문수량안내", {
+                              QTY: `${u.value}`,
+                            }),
+                          ],
+                        ])
+                      : createCommentVNode("", !0),
+                    N.value
+                      ? createCommentVNode("", !0)
+                      : (openBlock(),
+                        createElementVNode(
+                          "p",
+                          US,
+                          "* " +
+                            toDisplayString(
+                              `${unref(t)("PDF장수안내", {
+                                QTY: k.value,
+                              })}`
+                            ),
+                          1
+                        )),
+                    C.canEditOrdCnt.pdf && C.canEditOrdCnt.editor
+                      ? (openBlock(),
+                        createElementVNode(
+                          "p",
+                          BS,
+                          "* " + toDisplayString(unref(t)("디자인건수가능여부-전체")),
+                          1
+                        ))
+                      : !C.canEditOrdCnt.pdf && C.canEditOrdCnt.editor
+                      ? (openBlock(),
+                        createElementVNode(
+                          "p",
+                          VS,
+                          " * " + toDisplayString(unref(t)("디자인건수가능여부-에디터")),
+                          1
+                        ))
+                      : createCommentVNode("", !0),
+                    E.value
+                      ? withDirectives((openBlock(), createElementVNode("p", HS, null, 512)), [
+                          [I, E.value],
+                        ])
+                      : createCommentVNode("", !0),
+                  ]),
+                ]),
+                _: 1,
+              })
+            );
+          }
+        );
+      },
+    }),
+    [["__scopeId", "data-v-598642f7"]]
+  ),
+  GS = Object.freeze(
+    Object.defineProperty(
+      {
+        __proto__: null,
+        default: oh,
+      },
+      Symbol.toStringTag,
+      {
+        value: "Module",
+      }
+    )
+  ),
+  jS = {
+    class: "basic-radio",
+  },
+  zS = ["for", "aria-disabled"],
+  YS = ["id", "name", "value", "checked", "disabled", "onChange"],
+  KS = {
+    class: "text",
+  },
+  RadioGroup = defineComponent({
+    __name: "RadioList",
+    props: {
+      options: {},
+      defaultChecked: {},
+    },
+    emits: ["change"],
+    setup(e, { emit: t }) {
+      const n = t,
+        o = (s) => {
+          n("change", s);
+        };
+      return (s, r) => (
+        openBlock(),
+        createElementVNode("div", jS, [
+          (openBlock(!0),
+          createElementVNode(
+            Fragment,
+            null,
+            renderList(
+              s.options,
+              (a) => (
+                openBlock(),
+                createElementVNode(
+                  "label",
+                  {
+                    key: a.id,
+                    for: a.id,
+                    "aria-disabled": a.disabled,
+                  },
+                  [
+                    createElement(
+                      "input",
+                      {
+                        type: "radio",
+                        id: a.id,
+                        name: a.name,
+                        value: a.value,
+                        checked: s.defaultChecked === a.value,
+                        disabled: a.disabled,
+                        onChange: () => o(a),
+                      },
+                      null,
+                      40,
+                      YS
+                    ),
+                    createElement("span", KS, toDisplayString(unref(t)(a.label)), 1),
+                  ],
+                  8,
+                  zS
+                )
+              )
+            ),
+            128
+          )),
+        ])
+      );
+    },
+  }),
+  WS = {
+    class: "flex-row",
+  },
+  qS = defineComponent({
+    __name: "Acrylic",
+    props: {
+      options: {},
+      default: {
+        default() {
+          return {
+            assembleYN: {
+              SUB_MTR_KR: "Y",
+              SUB_MTR_BN: "Y",
+              SUB_MTR_CN: "Y",
+              SUB_MTR_CR: "Y",
+            },
+            subMtrlOption: {},
+          };
+        },
+      },
+      relatedData: {},
+    },
+    emits: ["update"],
+    setup(e, { emit: t }) {
+      const n = e,
+        o = t,
+        s = reactive(new Map()),
+        r = computed(() =>
+          [...s.values()].sort((h, f) => (h.order && f.order ? h.order - f.order : 0))
+        ),
+        a = reactive({
+          ...n.default.assembleYN,
+        }),
+        i = reactive({
+          ...n.default.subMtrlOption,
+        }),
+        l = ref(null);
+      function c(h) {
+        const f = s.get(h);
+        f &&
+          (f.value === l.value
+            ? (l.value = null)
+            : ((l.value = f.value),
+              (i[l.value] = {
+                PCS_DTL_CD: f.options[0].value,
+                qty: n.relatedData.orderQty,
+                extra: f.options[0].extra,
+              })));
+      }
+      function u(h) {
+        a[h.name] = h.value;
+      }
+      const d = (h) => (f) => {
+        i[h] = f;
+      };
+      return (
+        watch(
+          () => n.options.visible,
+          (h) => {
+            h.forEach((f) => {
+              const _ = s.get(f.WEB_PCS_DTL_GRP),
+                p = {
+                  name: f.PCS_DTL_NM,
+                  value: f.PCS_DTL_CD,
+                  key: f.PCS_DTL_CD,
+                  extra: f,
+                };
+              _
+                ? _.options.push(p)
+                : s.set(f.WEB_PCS_DTL_GRP, {
+                    name: f.WEB_PCS_DTL_GRP_NM || f.PCS_DTL_NM,
+                    imgPath: f.WEB_PCS_DTL_GRP,
+                    subImgPath: f.PCS_CD,
+                    value: f.WEB_PCS_DTL_GRP,
+                    active: !1,
+                    options: [p],
+                    order: th[f.WEB_PCS_DTL_GRP],
+                  });
+            });
+          },
+          {
+            immediate: !0,
+          }
+        ),
+        watch(
+          () => n.relatedData.orderQty,
+          (h) => {
+            for (const f in i) i[f].qty = h;
+          }
+        ),
+        onMounted(() => {
+          const h = Object.values(i).map((f) => ({
+            PCS_CD: f.extra.PCS_CD,
+            PCS_GRP_NM: f.extra.WEB_PCS_DTL_GRP_NM,
+            VIEW_YN: f.extra.VIEW_YN,
+            ESN_YN: f.extra.ESN_YN,
+            active: !0,
+            selectedOptions: [
+              {
+                PCS_CD: f.extra.PCS_CD,
+                PCS_DTL_CD: f.PCS_DTL_CD,
+                PCS_DTL_NM: f.extra.PCS_DTL_NM,
+                ATTB: f.qty,
+                ATTB_2: "",
+                ATTB_3: a[f.extra.WEB_PCS_DTL_GRP],
+              },
+            ],
+          }));
+          o("update", h);
+        }),
+        watch(
+          () => l.value,
+          (h, f) => {
+            f && h !== f && (delete i[f], (a[f] = n.default.assembleYN[f]));
+          }
+        ),
+        (h, f) => (
+          openBlock(),
+          createElementVNode(
+            Fragment,
+            null,
+            [
+              s.size
+                ? (openBlock(),
+                  createVNode(
+                    OptionRow,
+                    {
+                      key: 0,
+                      title: "부자재선택",
+                    },
+                    {
+                      default: withCtx(() => [
+                        createElement("div", WS, [
+                          (openBlock(!0),
+                          createElementVNode(
+                            Fragment,
+                            null,
+                            renderList(
+                              r.value,
+                              (_) => (
+                                openBlock(),
+                                createVNode(
+                                  IconCheckbox,
+                                  {
+                                    key: _.value,
+                                    active: l.value === _.value,
+                                    data: _,
+                                    onSelect: f[0] || (f[0] = (p) => c(p.value)),
+                                  },
+                                  null,
+                                  8,
+                                  ["active", "data"]
+                                )
+                              )
+                            ),
+                            128
+                          )),
+                        ]),
+                      ]),
+                      _: 1,
+                    }
+                  ))
+                : createCommentVNode("", !0),
+              l.value
+                ? (openBlock(),
+                  createVNode(
+                    OptionRow,
+                    {
+                      key: 1,
+                    },
+                    {
+                      default: withCtx(() => [
+                        (openBlock(!0),
+                        createElementVNode(
+                          Fragment,
+                          null,
+                          renderList(
+                            r.value,
+                            (_) => (
+                              openBlock(),
+                              createElementVNode(
+                                Fragment,
+                                {
+                                  key: _.value,
+                                },
+                                [
+                                  l.value === _.value
+                                    ? (openBlock(),
+                                      createVNode(
+                                        Kl,
+                                        {
+                                          key: 0,
+                                          title: _.name,
+                                          options: _.options,
+                                          "default-data": i[_.value],
+                                          "qty-disabled": !0,
+                                          onUpdate: (p) => d(_.value)(p),
+                                        },
+                                        Km(
+                                          {
+                                            _: 2,
+                                          },
+                                          [
+                                            unref(qb).has(_.value)
+                                              ? {
+                                                  name: "extra",
+                                                  fn: withCtx(() => [
+                                                    renderComponent(
+                                                      RadioGroup,
+                                                      {
+                                                        options: [
+                                                          {
+                                                            id: `${_.value}/Y`,
+                                                            name: _.value,
+                                                            label: "조립",
+                                                            value: "Y",
+                                                          },
+                                                          {
+                                                            id: `${_.value}/N`,
+                                                            name: _.value,
+                                                            label: "미조립",
+                                                            value: "N",
+                                                          },
+                                                        ],
+                                                        "default-checked": a[_.value],
+                                                        onChange: u,
+                                                      },
+                                                      null,
+                                                      8,
+                                                      ["options", "default-checked"]
+                                                    ),
+                                                  ]),
+                                                  key: "0",
+                                                }
+                                              : void 0,
+                                          ]
+                                        ),
+                                        1032,
+                                        ["title", "options", "default-data", "onUpdate"]
+                                      ))
+                                    : createCommentVNode("", !0),
+                                ],
+                                64
+                              )
+                            )
+                          ),
+                          128
+                        )),
+                      ]),
+                      _: 1,
+                    }
+                  ))
+                : createCommentVNode("", !0),
+            ],
+            64
+          )
+        )
+      );
+    },
+  }),
+  QS = Object.freeze(
+    Object.defineProperty(
+      {
+        __proto__: null,
+        default: defineComponent({
+          __name: "Acrylic",
+          props: {
+            type: {
+              default: "new",
+            },
+            data: {},
+            widgetAttr: {},
+            defaultData: {},
+            senecaInfo: {},
+          },
+          emits: ["update"],
+          setup(e, { emit: t }) {
+            const n = e,
+              o = t,
+              s = computed(() => n.widgetAttr.skinInfo),
+              r = inject("member"),
+              a = useEditorStore(),
+              i = computed(() => {
+                if (!n.data.option_info) return !1;
+                const { shape_info: N } = n.data.option_info;
+                return !isEmpty(N) && !!N[0].COD;
+              }),
+              l = computed(() => {
+                if (!n.data.option_info) return !1;
+                const { print_data: N } = n.data.option_info;
+                return !isEmpty(N) && !!N[0].COD && m.value.meterialInfo?.PRT_HIDE_YN === "N";
+              }),
+              c = computed(() => {
+                if (!n.data.option_info) return !1;
+                const { production_method: N } = n.data.option_info;
+                return !isEmpty(N) && !!N[0].COD;
+              }),
+              u = computed(() =>
+                r?.bsn_yn === "Y"
+                  ? n.data.pdt_mtrl_info
+                  : n.data.pdt_mtrl_info.filter((N) => N.BSN_YN !== "Y")
+              ),
+              d = computed(() => {
+                const N = [...n.data.pdt_size_info];
+                return !i.value || !m.value.acrylicSelectData?.shapeInfo || N.length === 1
+                  ? N
+                  : N.filter((D) => D.STICKER_TYPE === m.value.acrylicSelectData?.shapeInfo.COD);
+              }),
+              h = computed(() =>
+                parsePostProcessOptions(n.data.pdt_pcs_info, n.data.pdt_disable_pcs_info)
+              ),
+              { uploadConfig: f, canEditOrdCnt: _ } = useUploadConfig(n.widgetAttr),
+              {
+                defaultOrderData: p,
+                orderInfo: m,
+                updateOption: v,
+                updatePcsOption: E,
+                updatePostPcs: k,
+              } = useOrderComposable(n.type, {
+                group: n.widgetAttr.item_gbn,
+                emits: {
+                  updateOrder: (N) => o("update", N),
+                },
+              });
+            return (N, D) => (
+              openBlock(),
+              createElementVNode(
+                Fragment,
+                null,
+                [
+                  withDirectives(
+                    renderComponent(
+                      q_,
+                      {
+                        options: N.data.pdt_dosu_info,
+                        default: unref(p)?.dosuInfo,
+                        onUpdate: D[0] || (D[0] = (O) => unref(v)("dosuInfo")(O)),
+                      },
+                      null,
+                      8,
+                      ["options", "default"]
+                    ),
+                    [[vShow, s.value.dosuSelect.view_yn === "Y" && N.data.pdt_dosu_info]]
+                  ),
+                  c.value
+                    ? (openBlock(),
+                      createVNode(
+                        DS,
+                        {
+                          key: 0,
+                          options: N.data.option_info?.production_method || [],
+                          default: unref(p)?.productionMethod,
+                          onUpdate: D[1] || (D[1] = (O) => unref(v)("productionMethod", !0)(O)),
+                        },
+                        null,
+                        8,
+                        ["options", "default"]
+                      ))
+                    : createCommentVNode("", !0),
+                  i.value
+                    ? (openBlock(),
+                      createVNode(
+                        W_,
+                        {
+                          key: 1,
+                          options: N.data.option_info?.shape_info || [],
+                          default: unref(p)?.shapeInfo,
+                          onUpdate: D[2] || (D[2] = (O) => unref(v)("shapeInfo", !0)(O)),
+                        },
+                        null,
+                        8,
+                        ["options", "default"]
+                      ))
+                    : createCommentVNode("", !0),
+                  l.value
+                    ? (openBlock(),
+                      createVNode(
+                        PS,
+                        {
+                          key: 2,
+                          options: N.data.option_info?.print_data || [],
+                          default: unref(p)?.printData,
+                          onUpdate: D[3] || (D[3] = (O) => unref(v)("printData", !0)(O)),
+                        },
+                        null,
+                        8,
+                        ["options", "default"]
+                      ))
+                    : createCommentVNode("", !0),
+                  withDirectives(
+                    renderComponent(
+                      nh,
+                      {
+                        options: u.value,
+                        default: unref(p)?.meterialInfo,
+                        "reset-after-edit":
+                          unref(Qb).has(N.data.pdt_base_info[0].PDT_CD) && unref(a).isAfterEdit(),
+                        "show-extra": N.widgetAttr.able_paper_yn === "Y",
+                        "related-data": {
+                          method: unref(m).acrylicSelectData?.productionMethod?.COD,
+                        },
+                        onUpdate: D[4] || (D[4] = (O) => unref(v)("meterialInfo")(O)),
+                      },
+                      null,
+                      8,
+                      ["options", "default", "reset-after-edit", "show-extra", "related-data"]
+                    ),
+                    [[vShow, s.value.paperSelect.view_yn === "Y"]]
+                  ),
+                  withDirectives(
+                    renderComponent(
+                      SizeSelect,
+                      {
+                        options: d.value,
+                        "base-info": N.data.pdt_base_info[0],
+                        default: unref(p)?.size,
+                        "related-data": {
+                          shape: unref(m).acrylicSelectData?.shapeInfo?.COD,
+                        },
+                        onUpdate: D[5] || (D[5] = (O) => unref(v)("sizeInfo")(O)),
+                        onValidate: D[6] || (D[6] = (O) => unref(v)("validation")(O)),
+                      },
+                      null,
+                      8,
+                      ["options", "base-info", "default", "related-data"]
+                    ),
+                    [
+                      [
+                        vShow,
+                        (!i.value || (i.value && unref(m).acrylicSelectData?.shapeInfo)) &&
+                          s.value.sizeSelect.view_yn === "Y",
+                      ],
+                    ]
+                  ),
+                  s.value.quantityGroup.view_yn === "Y"
+                    ? (openBlock(),
+                      createVNode(
+                        oh,
+                        {
+                          key: 3,
+                          "can-edit-ord-cnt": unref(_),
+                          options: N.data.pdt_prn_cnt_info,
+                          default: unref(p)?.quantityInfo,
+                          "related-data": {
+                            dosu: unref(m).dosuInfo?.COD,
+                          },
+                          onUpdate: D[7] || (D[7] = (O) => unref(v)("quantityInfo")(O)),
+                        },
+                        null,
+                        8,
+                        ["can-edit-ord-cnt", "options", "default", "related-data"]
+                      ))
+                    : createCommentVNode("", !0),
+                  renderComponent(
+                    HiddenPostProcess,
+                    {
+                      options: h.value.postPcs.hidden,
+                      "related-data": {
+                        shape: unref(m).acrylicSelectData?.shapeInfo?.COD,
+                        sizeInfo: unref(m).sizeInfo,
+                      },
+                      "disabled-opts": h.value.disabled,
+                      onUpdate: D[8] || (D[8] = (O) => unref(k)("hidden")(O)),
+                    },
+                    null,
+                    8,
+                    ["options", "related-data", "disabled-opts"]
+                  ),
+                  renderComponent(
+                    VisiblePostProcess,
+                    {
+                      options: h.value.postPcs.visible,
+                      "related-data": {
+                        sizeInfo: unref(m).sizeInfo,
+                      },
+                      "attb-opts": N.data.pdt_add_info[1],
+                      "disabled-opts": h.value.disabled,
+                      onUpdate: D[9] || (D[9] = (O) => unref(k)("visible")(O)),
+                    },
+                    null,
+                    8,
+                    ["options", "related-data", "attb-opts", "disabled-opts"]
+                  ),
+                  renderComponent(
+                    qS,
+                    {
+                      options: h.value.sub,
+                      "related-data": {
+                        orderQty:
+                          (unref(m).quantityInfo?.ordCnt || 1) *
+                          (unref(m).quantityInfo?.prnCnt || 1),
+                      },
+                      onUpdate: D[10] || (D[10] = (O) => unref(E)("SUB_MTR")(O)),
+                    },
+                    null,
+                    8,
+                    ["options", "related-data"]
+                  ),
+                  N.widgetAttr.order_yn !== "N"
+                    ? (openBlock(),
+                      createVNode(
+                        FileUpload,
+                        {
+                          key: 4,
+                          "upload-config": unref(f),
+                          "show-extra":
+                            N.widgetAttr.useTemplateDownload === "Y" && N.widgetAttr.usePDF === "Y",
+                          "related-data": {
+                            print: unref(m).acrylicSelectData?.printData,
+                          },
+                          onUpload: D[11] || (D[11] = (O) => unref(v)("fileUploadInfo")(O)),
+                        },
+                        null,
+                        8,
+                        ["upload-config", "show-extra", "related-data"]
+                      ))
+                    : createCommentVNode("", !0),
+                ],
+                64
+              )
+            );
+          },
+        }),
+      },
+      Symbol.toStringTag,
+      {
+        value: "Module",
+      }
+    )
+  ),
+  XS = {
+    class: "grid-group",
+  },
+  JS = defineComponent({
+    __name: "ApparelPrintType",
+    props: {
+      options: {},
+      dosuOptions: {},
+      relatedData: {},
+    },
+    emits: ["update:type", "update:dosu"],
+    setup(e, { emit: t }) {
+      const n = e,
+        o = t,
+        s = useI18n(),
+        r = useEditorStore(),
+        a = inject("productCode", {
+          pdtCode: "",
+        }),
+        i = inject("callbacks", {}),
+        l = inject("deviceType", "pc"),
+        c = {
+          PTP_DTF: {
+            src: `${CDN_BASE_URL}/{lang}/item/clothes-color-film-img.png`,
+            alt: "DTF 열전사 설명 사진",
+          },
+          PTP_DIR: {
+            src: `${CDN_BASE_URL}/{lang}/item/clothes-color-direct-img.png`,
+            alt: "직접인쇄 설명 사진",
+          },
+          PTP_SLK: {
+            src: `${CDN_BASE_URL}/{lang}/item/clothes-color-printing-img.png`,
+            alt: "날염(실크인쇄) 설명 사진",
+          },
+        },
+        u = computed(() =>
+          n.options.map((N, D) => {
+            const O = c[N.COD];
+            return O
+              ? {
+                  IDX: D + 1,
+                  CATEGORY: t("인쇄"),
+                  LABEL: n.options[D].COD_NME,
+                  IMG_URL: O.src.replace("{lang}", s.locale),
+                  IMG_ALT: O.alt,
+                }
+              : null;
+          })
+        ),
+        d = computed(() =>
+          n.dosuOptions.map((N) => ({
+            id: N.COD,
+            name: "apparel-print-side",
+            value: N.COD,
+            label: `의류.${N.COD_NME}`,
+            disabled: k.value,
+          }))
+        ),
+        h = ref(n.dosuOptions[0].COD),
+        f = computed(() => n.dosuOptions.find((N) => N.COD === h.value)),
+        _ = ref(n.options[0].COD),
+        p = computed(() =>
+          n.options.map((N) => ({
+            name: N.COD_NME,
+            value: N.COD,
+            key: N.COD,
+            disabled: N.USE_YN !== "Y" || h.value === "SID_X",
+          }))
+        ),
+        m = () => {
+          i?.onReset && i.onReset("fileUpload");
+        },
+        v = (N) => {
+          r.isAfterEdit() && m(), (_.value = N);
+        };
+      watch(
+        () => h.value,
+        (N) => {
+          o("update:type", {
+            COD: N === "SID_S" ? _.value : "",
+            PRINT_GBN: N === "SID_S" ? "Y" : "N",
+          }),
+            o("update:dosu", {
+              ...f.value,
+              COD_NME: t(`의류.${f.value.COD_NME}`),
+            });
+        },
+        {
+          immediate: !0,
+        }
+      ),
+        watch(
+          () => _.value,
+          (N) => {
+            o("update:type", {
+              COD: N,
+              PRINT_GBN: h.value === "SID_S" ? "Y" : "N",
+            });
+          },
+          {
+            immediate: !0,
+          }
+        );
+      const E = computed(() => n.relatedData.color),
+        k = computed(() =>
+          !E.value || a.pdtCode !== "CLSTBSA" ? !1 : E.value === "DD" || E.value === "DG"
+        );
+      return (
+        watch(
+          () => k.value,
+          (N) => {
+            N && ((h.value = "SID_X"), alert("[인쇄없음]으로만 주문 가능합니다."));
+          }
+        ),
+        (N, D) => (
+          openBlock(),
+          createVNode(
+            OptionRow,
+            {
+              title: "인쇄",
+              extra:
+                unref(l) === "mobile"
+                  ? {
+                      name: "자세히보기",
+                      callback: () => {
+                        unref(i).onInformOptionTips && unref(i).onInformOptionTips(u.value);
+                      },
+                      style: "tip",
+                    }
+                  : {
+                      name: "가이드보기",
+                      callback: () => {
+                        unref(i)?.onInformGuide && unref(i).onInformGuide("print");
+                      },
+                    },
+            },
+            {
+              default: withCtx(() => [
+                createElement("div", XS, [
+                  renderComponent(
+                    RadioGroup,
+                    {
+                      options: d.value,
+                      "default-checked": h.value,
+                      onChange: D[0] || (D[0] = (O) => (h.value = O.value)),
+                    },
+                    null,
+                    8,
+                    ["options", "default-checked"]
+                  ),
+                  renderComponent(
+                    SizeSelector,
+                    {
+                      options: p.value,
+                      default: _.value,
+                      tips: u.value,
+                      onSelect: v,
+                    },
+                    null,
+                    8,
+                    ["options", "default", "tips"]
+                  ),
+                ]),
+              ]),
+              _: 1,
+            },
+            8,
+            ["extra"]
+          )
+        )
+      );
+    },
+  }),
+  ZS = {
+    key: 0,
+    class: "arrow-up",
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "22",
+    height: "22",
+    viewBox: "0 0 22 22",
+    fill: "none",
+  },
+  eD = {
+    key: 1,
+    class: "arrow-down",
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "22",
+    height: "22",
+    viewBox: "0 0 22 22",
+    fill: "none",
+  },
+  tD = defineComponent({
+    __name: "Chevron",
+    props: {
+      direction: {},
+    },
+    setup(e) {
+      return (t, n) => (
+        openBlock(),
+        createElementVNode(
+          Fragment,
+          null,
+          [
+            t.direction === "up"
+              ? (openBlock(),
+                createElementVNode("svg", ZS, [
+                  ...(n[0] ||
+                    (n[0] = [
+                      createElement(
+                        "path",
+                        {
+                          d: "M4.39961 7.70042L10.9855 14.3002L17.5996 7.70042",
+                          stroke: "#777777",
+                          "stroke-width": "1.5",
+                          "stroke-linecap": "round",
+                          "stroke-linejoin": "round",
+                        },
+                        null,
+                        -1
+                      ),
+                    ])),
+                ]))
+              : createCommentVNode("", !0),
+            t.direction === "down"
+              ? (openBlock(),
+                createElementVNode("svg", eD, [
+                  ...(n[1] ||
+                    (n[1] = [
+                      createElement(
+                        "path",
+                        {
+                          d: "M4.39961 14.2996L10.9855 7.69981L17.5996 14.2996",
+                          stroke: "#777777",
+                          "stroke-width": "1.5",
+                          "stroke-linecap": "round",
+                          "stroke-linejoin": "round",
+                        },
+                        null,
+                        -1
+                      ),
+                    ])),
+                ]))
+              : createCommentVNode("", !0),
+          ],
+          64
+        )
+      );
+    },
+  }),
+  nD = {
+    class: "color-picker",
+  },
+  oD = {
+    key: 0,
+    class: "desc",
+  },
+  sD = {
+    class: "text",
+  },
+  rD = {
+    class: "text",
+  },
+  iD = ["aria-expanded"],
+  aD = ["title", "onClick"],
+  lD = {
+    class: "tooltip",
+  },
+  ColorChipSelector = withScopeId(
+    defineComponent({
+      __name: "ColorPicker",
+      props: {
+        options: {},
+        canToggle: {
+          type: Boolean,
+        },
+        defaultValue: {},
+      },
+      emits: ["select"],
+      setup(e, { emit: t }) {
+        const n = e,
+          o = t,
+          s = ref(n.defaultValue || n.options[0]),
+          r = ref(!0);
+        function a(l) {
+          (s.value = l), o("select", l);
+        }
+        const i = (l) => {
+          const c = l.split(",").map((f) => f.replace("#", "")),
+            [u, d, h] = c;
+          if (c.length === 2) return `linear-gradient(to right, #${u} 50%, #${d} 50%)`;
+          if (c.length === 3)
+            return `linear-gradient(to right, #${u} 34%, #${d} 34% 67%, #${h} 33%)`;
+        };
+        return (
+          watch(
+            () => n.defaultValue,
+            (l) => {
+              l && (s.value = l);
+            }
+          ),
+          (l, c) => (
+            openBlock(),
+            createElementVNode("div", nD, [
+              l.canToggle
+                ? (openBlock(),
+                  createElementVNode("div", oD, [
+                    createElement(
+                      "span",
+                      sD,
+                      toDisplayString(unref(t)("선택")) + " : " + toDisplayString(s.value?.COD_NME),
+                      1
+                    ),
+                    createElement(
+                      "button",
+                      {
+                        type: "button",
+                        class: "toggle-btn",
+                        onClick: c[0] || (c[0] = (u) => (r.value = !r.value)),
+                      },
+                      [
+                        createElement("span", rD, toDisplayString(r.value ? "접기" : "보기"), 1),
+                        renderComponent(
+                          tD,
+                          {
+                            direction: r.value ? "down" : "up",
+                          },
+                          null,
+                          8,
+                          ["direction"]
+                        ),
+                      ]
+                    ),
+                  ]))
+                : createCommentVNode("", !0),
+              createElement(
+                "ul",
+                {
+                  class: "color-chip",
+                  "aria-expanded": l.canToggle ? r.value : !0,
+                },
+                [
+                  (openBlock(!0),
+                  createElementVNode(
+                    Fragment,
+                    null,
+                    renderList(
+                      l.options,
+                      (u) => (
+                        openBlock(),
+                        createElementVNode(
+                          "li",
+                          {
+                            key: u.COD,
+                            class: normalizeClass([
+                              "color",
+                              {
+                                active: u.COD === s.value?.COD,
+                              },
+                            ]),
+                            title: `hex: ${u.HEX}`,
+                            style: normalizeStyle([
+                              {
+                                background: u.HEX.includes(",") ? i(u.HEX) : u.HEX,
+                              },
+                              {
+                                border: u.HEX.toLocaleLowerCase().includes("ffff")
+                                  ? "1px solid #ddd"
+                                  : "",
+                              },
+                            ]),
+                            onClick: (d) => a(u),
+                          },
+                          [createElement("div", lD, toDisplayString(u.COD_NME), 1)],
+                          14,
+                          aD
+                        )
+                      )
+                    ),
+                    128
+                  )),
+                ],
+                8,
+                iD
+              ),
+            ])
+          )
+        );
+      },
+    }),
+    [["__scopeId", "data-v-609eb670"]]
+  ),
+  uD = defineComponent({
+    __name: "ApparelColor",
+    props: {
+      options: {},
+    },
+    emits: ["update"],
+    setup(e, { emit: t }) {
+      const n = e,
+        o = t,
+        s = useEditorStore(),
+        r = inject("callbacks", {}),
+        a = ref(n.options.find((u) => u.DEFAULT === "Y") || n.options[0]),
+        i = computed(() => n.options.find((u) => u.COD === a.value.COD)),
+        l = () => {
+          r?.onReset && r.onReset("color");
+        },
+        c = (u) => {
+          s.isAfterEdit() && l(), (a.value = u);
+        };
+      return (
+        watch(
+          () => i.value,
+          (u) => {
+            u && o("update", u);
+          },
+          {
+            immediate: !0,
+          }
+        ),
+        watch(
+          () => s.editorData.default,
+          (u) => {
+            const d = u?.editorClothesInfo?.COLOR;
+            if (!d || a.value.COD === d) return;
+            const h = n.options.find((f) => f.COD === d);
+            h && (a.value = h);
+          }
+        ),
+        (u, d) => (
+          openBlock(),
+          createVNode(
+            OptionRow,
+            {
+              title: "의류 컬러",
+            },
+            {
+              default: withCtx(() => [
+                renderComponent(
+                  ColorChipSelector,
+                  {
+                    options: u.options,
+                    "can-toggle": !0,
+                    "default-value": a.value,
+                    onSelect: c,
+                  },
+                  null,
+                  8,
+                  ["options", "default-value"]
+                ),
+              ]),
+              _: 1,
+            }
+          )
+        )
+      );
+    },
+  }),
+  cD = {
+    class: "flex-row -flow",
+  },
+  dD = {
+    class: "notes",
+  },
+  fD = ["innerHTML"],
+  pD = ["innerHTML"],
+  _D = ["innerHTML"],
+  hD = defineComponent({
+    __name: "ApparelPrintArea",
+    props: {
+      options: {},
+      relatedData: {},
+    },
+    emits: ["update"],
+    setup(e, { emit: t }) {
+      const n = e,
+        o = t,
+        s = useEditorStore(),
+        r = inject("productCode", {
+          pdtCode: "",
+        }),
+        a = inject("callbacks", {}),
+        i = {
+          CLSTLUB: {
+            CL001: "CLSTLUB_CL001",
+          },
+          CLSTTOB: {
+            CL001: "CLSTTOB_CL001",
+          },
+          CLDFNCP: {
+            CL001: "CLDFNCP_CL001",
+          },
+          CLSTSAP: {
+            CL005: "CLSTSAP_CL005",
+          },
+          CLSTCAP: {
+            CL001: "CLSTCAP_CL001",
+          },
+        },
+        l = computed(() => {
+          let p = 0;
+          for (const m of n.options)
+            if (((m.COD === "CL011" || m.COD === "CL001") && p++, p === 2)) break;
+          return p === 2;
+        }),
+        c = computed(() => {
+          const p = [];
+          for (const m of n.options)
+            (m.COD === "CL011" || m.COD === "CL009" || m.COD === "CL010" || m.COD === "CL004") &&
+              p.push(m.COD_NME);
+          return p.length === 0 ? null : p.join(", ");
+        }),
+        u = computed(() =>
+          n.options.map((p) => ({
+            name: p.COD_NME,
+            value: p.KOI_NME,
+            imgPath: `${CDN_BASE_URL}/ko/item/printarea_${
+              i[r.pdtCode] ? i[r.pdtCode][p.COD] : p.COD
+            }.svg`,
+            forcedImg: !0,
+          }))
+        ),
+        d = reactive(
+          n.options.reduce(
+            (p, m, v) => (
+              (p[m.KOI_NME] = {
+                active: v === 0,
+                COD: m.COD,
+                COD_NME: m.COD_NME,
+                KOI_NME: m.KOI_NME,
+              }),
+              p
+            ),
+            {}
+          )
+        ),
+        h = computed(() =>
+          Object.entries(d).reduce((p, m) => {
+            const [v, E] = m;
+            return (
+              E.active &&
+                p.push({
+                  COD: E.COD,
+                  COD_NME: E.COD_NME,
+                  KOI_NME: v,
+                }),
+              p
+            );
+          }, [])
+        ),
+        f = () => {
+          a?.onReset && a.onReset("printArea");
+        },
+        _ = (p) => {
+          (h.value.length === 1 && d[p]?.active) ||
+            (s.isAfterEdit() && f(),
+            p === "front" && d.leftchest && (d.leftchest.active = !1),
+            p === "leftchest" && d.front && (d.front.active = !1),
+            (d[p].active = !d[p].active));
+        };
+      return (
+        watch(
+          () => h.value,
+          (p) => {
+            o("update", p);
+          },
+          {
+            immediate: !0,
+          }
+        ),
+        watch(
+          () => n.relatedData.printType?.PRINT_GBN,
+          (p) => {
+            p === "N" ? o("update", null) : o("update", h.value);
+          }
+        ),
+        watch(
+          () => s.editorData.default,
+          (p) => {
+            const m = p?.editorClothesInfo?.PAGES;
+            if (m) for (const v in d) d[v].active = m.includes(v);
+          }
+        ),
+        (p, m) =>
+          p.relatedData.printType?.PRINT_GBN === "Y"
             ? (openBlock(),
               createVNode(
                 OptionRow,
@@ -241,25 +2361,22 @@ const __recoveredApparelPrintAreaSetup = defineComponent({
                 },
                 {
                   default: withCtx(() => [
-                    createElement("div", printAreaGridClass, [
+                    createElement("div", cD, [
                       (openBlock(!0),
                       createElementVNode(
                         Fragment,
                         null,
                         renderList(
-                          printAreaIconItems.value,
-                          (iconItem) => (
+                          u.value,
+                          (v) => (
                             openBlock(),
                             createVNode(
-                              ImageButton,
+                              IconCheckbox,
                               {
-                                key: iconItem.value,
-                                data: iconItem,
-                                active: printAreaActiveState[iconItem.value].active,
-                                onSelect:
-                                  cache[0] ||
-                                  (cache[0] = (selectedItem) =>
-                                    togglePrintArea(selectedItem.value)),
+                                key: v.value,
+                                data: v,
+                                active: d[v.value].active,
+                                onSelect: m[0] || (m[0] = (E) => _(E.value)),
                               },
                               null,
                               8,
@@ -270,49 +2387,49 @@ const __recoveredApparelPrintAreaSetup = defineComponent({
                         128
                       )),
                     ]),
-                    createElement("div", printAreaNotesClass, [
-                      instance.relatedData.printType.COD === "PTP_DTF" && dtfGuideContent.value
+                    createElement("div", dD, [
+                      p.relatedData.printType.COD === "PTP_DTF" && l.value
                         ? (openBlock(),
                           createElementVNode(
                             "p",
                             {
                               key: 0,
                               class: "note",
-                              innerHTML: unref(translate)("의류인쇄영역가이드"),
+                              innerHTML: unref(t)("의류인쇄영역가이드"),
                             },
                             null,
                             8,
-                            dtfGuideAttrs
+                            fD
                           ))
                         : createCommentVNode("", !0),
-                      instance.relatedData.printType.COD === "PTP_DIR" && directPrintAreaNames.value
+                      p.relatedData.printType.COD === "PTP_DIR" && c.value
                         ? (openBlock(),
                           createElementVNode(
                             "p",
                             {
                               key: 1,
                               class: "note",
-                              innerHTML: unref(translate)("의류인쇄영역가이드-직접인쇄", {
-                                areas: directPrintAreaNames.value,
+                              innerHTML: unref(t)("의류인쇄영역가이드-직접인쇄", {
+                                areas: c.value,
                               }),
                             },
                             null,
                             8,
-                            directPrintGuideAttrs
+                            pD
                           ))
                         : createCommentVNode("", !0),
-                      instance.relatedData.printType.COD === "PTP_SLK"
+                      p.relatedData.printType.COD === "PTP_SLK"
                         ? (openBlock(),
                           createElementVNode(
                             "p",
                             {
                               key: 2,
                               class: "note",
-                              innerHTML: unref(translate)("의류인쇄영역가이드-실크인쇄"),
+                              innerHTML: unref(t)("의류인쇄영역가이드-실크인쇄"),
                             },
                             null,
                             8,
-                            silkPrintGuideAttrs
+                            _D
                           ))
                         : createCommentVNode("", !0),
                     ]),
@@ -324,62 +2441,46 @@ const __recoveredApparelPrintAreaSetup = defineComponent({
       );
     },
   }),
-  /* =========================================================================
-   * 섹션 2: 의류(Apparel) — 사이즈 구분 (성인/아동) 컴포넌트
-   * adult/child 라디오 선택으로 사이즈 그룹을 전환하는 UI.
-   * ========================================================================= */
-  /**
-   * 의류 사이즈 구분 (자유/규격) 선택 컴포넌트
-   * 성인(adult)/아동(child) 라디오 버튼으로 사이즈 그룹을 전환하는 fieldset.
-   * @component ApparelSizeGbn
-   * @props {Array} options - 사이즈 구분 옵션 목록 (adult/child)
-   * @props {string} default - 기본 선택값
-   * @emits {string} update - 선택된 사이즈 구분값 (adult|child)
-   */
-  ApparelSizeGbn = defineComponent({
+  rh = defineComponent({
     __name: "ApparelSizeGbn",
     props: {
       options: {},
       default: {},
     },
     emits: ["update"],
-    setup(props, { emit: emit }) {
-      const componentProps = props,
-        emitFn = emit,
-        /* 성인/아동 라디오 옵션 정의 */
-        sizeGbnRadioOptions = [
+    setup(e, { emit: t }) {
+      const n = e,
+        o = t,
+        s = [
           {
             id: "adult",
             name: "size-option",
-            label: translate("adult"),
+            label: t("adult"),
             value: "adult",
           },
           {
             id: "child",
             name: "size-option",
-            label: translate("child"),
+            label: t("child"),
             value: "child",
           },
         ],
-        selectedSizeGbn = ref(componentProps.default);
-      /* 사이즈 구분 변경 시 부모에 update 전달 */
+        r = ref(n.default);
       return (
         watch(
-          () => selectedSizeGbn.value,
-          (newGbn) => {
-            emitFn("update", newGbn);
+          () => r.value,
+          (a) => {
+            o("update", a);
           }
         ),
-        (instance, cache) => (
+        (a, i) => (
           openBlock(),
           createVNode(
-            RadioList,
+            RadioGroup,
             {
-              options: sizeGbnRadioOptions,
-              "default-checked": sizeGbnRadioOptions[0].value,
-              onChange:
-                cache[0] ||
-                (cache[0] = (selectedOption) => (selectedSizeGbn.value = selectedOption.value)),
+              options: s,
+              "default-checked": s[0].value,
+              onChange: i[0] || (i[0] = (l) => (r.value = l.value)),
             },
             null,
             8,
@@ -389,38 +2490,24 @@ const __recoveredApparelPrintAreaSetup = defineComponent({
       );
     },
   }),
-  /* =========================================================================
-   * 섹션 3: 의류(Apparel) — 단일 사이즈 수량 컴포넌트
-   * 사이즈 1개를 선택하고 인쇄 수량을 지정하는 UI.
-   * 사이즈별 품절(HIDE_YN) 처리, 퀵오더 불가 표시 포함.
-   * ========================================================================= */
-  singleSizeGridClass = {
+  mD = {
     class: "grid-group",
   },
-  quickOrderWarningClass = {
+  vD = {
     key: 1,
     class: "note red",
   },
-  singleSizeInputsClass = {
+  gD = {
     class: "inputs",
   },
-  singleSizeQtyValueAttrs = ["value"],
-  singleSizeNotesClass = {
+  yD = ["value"],
+  CD = {
     class: "notes",
   },
-  singleSizeNoteClass = {
+  TD = {
     class: "note",
   },
-  /**
-   * 단일 사이즈 수량 입력 컴포넌트
-   * 사이즈 1개를 선택하고 인쇄 수량을 지정하는 UI. 사이즈별 품절(HIDE_YN) 처리, 퀵오더 불가 표시 포함.
-   * @component ApparelSingleSizeQty
-   * @props {Array} options - 사이즈 옵션 목록 (COD, COD_NME, GBN, HIDE_YN 등)
-   * @props {Object} sizeInfo - 현재 선택된 사이즈 구분 정보 (adult/child)
-   * @emits {number} update:qty - 선택된 수량
-   * @emits {Array} update:combinations - 사이즈+수량 조합 배열
-   */
-  ApparelSingleSizeQty = withScopeId(
+  bD = withScopeId(
     defineComponent({
       __name: "ApparelSingleSizeQty",
       props: {
@@ -428,76 +2515,60 @@ const __recoveredApparelPrintAreaSetup = defineComponent({
         sizeInfo: {},
       },
       emits: ["update:qty", "update:combinations"],
-      setup(props, { emit: emit }) {
-        const componentProps = props,
-          emitFn = emit,
-          editorStore = useExteriorStore(),
-          callbacks = inject("callbacks", {}),
-          /* 사이즈 옵션을 GBN(성인/아동)별로 그룹핑 */
-          sizeGroupsByGbn = computed(() => {
-            const groups = {};
+      setup(e, { emit: t }) {
+        const n = e,
+          o = t,
+          s = useEditorStore(),
+          r = inject("callbacks", {}),
+          a = computed(() => {
+            const N = {};
             return (
-              componentProps.options.forEach((sizeOption) => {
-                const existingGroup = groups[sizeOption.GBN];
-                existingGroup
-                  ? existingGroup.push(sizeOption)
-                  : (groups[sizeOption.GBN] = [sizeOption]);
+              n.options.forEach((D) => {
+                const O = N[D.GBN];
+                O ? O.push(D) : (N[D.GBN] = [D]);
               }),
-              groups
+              N
             );
           }),
-          /* GBN 키 목록 (성인/아동) */
-          gbnKeys = computed(() => Object.keys(sizeGroupsByGbn.value)),
-          selectedGbn = ref(gbnKeys.value.length === 1 ? gbnKeys.value[0] : "adult"),
-          /* 현재 GBN에 해당하는 사이즈 목록을 정렬하여 셀렉트 옵션으로 변환 */
-          sortedSizeOptions = computed(() =>
-            [...sizeGroupsByGbn.value[selectedGbn.value]]
-              .sort(
-                (sizeA, sizeB) =>
-                  componentProps.sizeInfo[sizeA.COD].ORD - componentProps.sizeInfo[sizeB.COD].ORD
-              )
-              .map((sizeOption) => ({
-                name: componentProps.sizeInfo[sizeOption.COD].COD_NME || sizeOption.COD_NME,
-                value: sizeOption.COD,
-                key: sizeOption.COD,
-                disabled: sizeOption.HIDE_YN === "Y",
+          i = computed(() => Object.keys(a.value)),
+          l = ref(i.value.length === 1 ? i.value[0] : "adult"),
+          c = computed(() =>
+            [...a.value[l.value]]
+              .sort((D, O) => n.sizeInfo[D.COD].ORD - n.sizeInfo[O.COD].ORD)
+              .map((D) => ({
+                name: n.sizeInfo[D.COD].COD_NME || D.COD_NME,
+                value: D.COD,
+                key: D.COD,
+                disabled: D.HIDE_YN === "Y",
               }))
           ),
-          /* 수량 입력 모드: select(드롭다운) / input(직접입력) */
-          qtyInputMode = ref("select"),
-          toggleQtyInputMode = () => {
-            qtyInputMode.value = qtyInputMode.value === "input" ? "select" : "input";
+          u = ref("select"),
+          d = () => {
+            u.value = u.value === "input" ? "select" : "input";
           },
-          /* 기본 선택 사이즈 계산 — 활성 사이즈 중 중간값 */
-          defaultSizeCode = computed(() => {
-            const activeSizes = sortedSizeOptions.value.filter((opt) => !opt.disabled);
-            if (activeSizes.length === 1) return activeSizes[0].value;
-            const defaultIndex =
-              selectedGbn.value === "adult" ? Math.trunc(activeSizes.length / 2) : 0;
-            return activeSizes[defaultIndex].value;
+          h = computed(() => {
+            const N = c.value.filter((O) => !O.disabled);
+            if (N.length === 1) return N[0].value;
+            const D = l.value === "adult" ? Math.trunc(N.length / 2) : 0;
+            return N[D].value;
           }),
-          selectedSizeCode = ref(defaultSizeCode.value);
-
-        /* 사이즈 선택 핸들러 — 에디터 편집 후이면 리셋 처리 */
-        function handleSizeSelect(sizeCode) {
-          editorStore.isAfterEdit() && callbacks?.onReset && callbacks.onReset("size"),
-            (selectedSizeCode.value = sizeCode);
+          f = ref(h.value);
+        function _(N) {
+          s.isAfterEdit() && r?.onReset && r.onReset("size"), (f.value = N);
         }
-        const /* 인쇄수량 셀렉트 옵션 (1~10) */
-          qtySelectOptions = computed(() => {
-            const options = [];
-            for (let qty = 1; qty <= 10; qty++) options.push(qty);
-            return options;
+        const p = computed(() => {
+            const D = [];
+            for (let O = 1; O <= 10; O++) D.push(O);
+            return D;
           }),
-          printQuantity = ref(1);
-        /* 수량 변경 감시 — 부모에 update:qty 이벤트 발행 */
+          m = ref(1);
         watch(
-          () => printQuantity.value,
-          (newQty) => {
-            newQty || (printQuantity.value = 1),
-              emitFn("update:qty", {
+          () => m.value,
+          (N) => {
+            N || (m.value = 1),
+              o("update:qty", {
                 ordCnt: 1,
-                prnCnt: newQty,
+                prnCnt: N,
               });
           },
           {
@@ -505,48 +2576,42 @@ const __recoveredApparelPrintAreaSetup = defineComponent({
           }
         ),
           onMounted(() => {
-            selectedSizeCode.value = defaultSizeCode.value;
+            f.value = h.value;
           });
-        const /* 선택된 사이즈+수량 조합 */
-          sizeCombinations = computed(() =>
-            componentProps.options
-              .filter((opt) => opt.COD === selectedSizeCode.value)
-              .map((opt) => ({
-                size: opt,
-                quantity: printQuantity.value,
+        const v = computed(() =>
+            n.options
+              .filter((N) => N.COD === f.value)
+              .map((N) => ({
+                size: N,
+                quantity: m.value,
               }))
           ),
-          /* 퀵오더 불가 여부 */
-          isQuickOrderDisabled = computed(
-            () => sizeCombinations.value[0]?.size?.QUICK_ORD_YN === "N"
-          ),
-          /* 퀵오더 불가 사이즈 이름 목록 */
-          quickOrderDisabledNames = computed(() =>
-            componentProps.options
-              .filter((opt) => opt.QUICK_ORD_YN === "N")
-              .map((opt) => componentProps.sizeInfo[opt.COD].COD_NME || opt.COD_NME)
+          E = computed(() => v.value[0]?.size?.QUICK_ORD_YN === "N"),
+          k = computed(() =>
+            n.options
+              .filter((N) => N.QUICK_ORD_YN === "N")
+              .map((N) => n.sizeInfo[N.COD].COD_NME || N.COD_NME)
               .join(", ")
           );
-        /* 사이즈 조합 변경 시 부모에 update:combinations 이벤트 발행 */
         return (
           watch(
-            () => sizeCombinations.value,
-            (newCombinations) => {
-              newCombinations && emitFn("update:combinations", newCombinations);
+            () => v.value,
+            (N) => {
+              N && o("update:combinations", N);
             },
             {
               immediate: !0,
             }
-          ) /* 에디터 데이터에서 사이즈 동기화 */,
+          ),
           watch(
-            () => editorStore.editorData.default,
-            (editorDefault) => {
-              const editorSize = editorDefault?.editorClothesInfo?.SIZE;
-              editorSize && (selectedSizeCode.value = editorSize);
+            () => s.editorData.default,
+            (N) => {
+              const D = N?.editorClothesInfo?.SIZE;
+              D && (f.value = D);
             }
           ),
-          (instance, cache) => {
-            const domPurifyDirective = resolveDirective("dompurify-html");
+          (N, D) => {
+            const O = resolveDirective("dompurify-html");
             return (
               openBlock(),
               createElementVNode(
@@ -560,18 +2625,16 @@ const __recoveredApparelPrintAreaSetup = defineComponent({
                     },
                     {
                       default: withCtx(() => [
-                        createElement("div", singleSizeGridClass, [
-                          gbnKeys.value.length > 1
+                        createElement("div", mD, [
+                          i.value.length > 1
                             ? (openBlock(),
                               createVNode(
-                                ApparelSizeGbn,
+                                rh,
                                 {
                                   key: 0,
-                                  options: gbnKeys.value,
-                                  default: selectedGbn.value,
-                                  onUpdate:
-                                    cache[0] ||
-                                    (cache[0] = (newGbn) => (selectedGbn.value = newGbn)),
+                                  options: i.value,
+                                  default: l.value,
+                                  onUpdate: D[0] || (D[0] = (A) => (l.value = A)),
                                 },
                                 null,
                                 8,
@@ -579,25 +2642,25 @@ const __recoveredApparelPrintAreaSetup = defineComponent({
                               ))
                             : createCommentVNode("", !0),
                           renderComponent(
-                            ButtonRadio,
+                            SizeSelector,
                             {
                               type: "sm",
-                              options: sortedSizeOptions.value,
-                              default: selectedSizeCode.value,
-                              onSelect: handleSizeSelect,
+                              options: c.value,
+                              default: f.value,
+                              onSelect: _,
                             },
                             null,
                             8,
                             ["options", "default"]
                           ),
-                          isQuickOrderDisabled.value
+                          E.value
                             ? (openBlock(),
                               createElementVNode(
                                 "p",
-                                quickOrderWarningClass,
-                                toDisplayString(unref(translate)("퀵오더불가")) +
+                                vD,
+                                toDisplayString(unref(t)("퀵오더불가")) +
                                   " - " +
-                                  toDisplayString(quickOrderDisabledNames.value),
+                                  toDisplayString(k.value),
                                 1
                               ))
                             : createCommentVNode("", !0),
@@ -613,17 +2676,15 @@ const __recoveredApparelPrintAreaSetup = defineComponent({
                     },
                     {
                       default: withCtx(() => [
-                        createElement("div", singleSizeInputsClass, [
-                          qtyInputMode.value === "input"
+                        createElement("div", gD, [
+                          u.value === "input"
                             ? withDirectives(
                                 (openBlock(),
                                 createElementVNode(
                                   "input",
                                   {
                                     key: 0,
-                                    "onUpdate:modelValue":
-                                      cache[1] ||
-                                      (cache[1] = (newVal) => (printQuantity.value = newVal)),
+                                    "onUpdate:modelValue": D[1] || (D[1] = (A) => (m.value = A)),
                                     type: "number",
                                     class: normalizeClass(["basic-input", "-fixed-w"]),
                                     id: "PRN_CNT",
@@ -632,7 +2693,7 @@ const __recoveredApparelPrintAreaSetup = defineComponent({
                                   null,
                                   512
                                 )),
-                                [[vModelText, printQuantity.value]]
+                                [[vModelText, m.value]]
                               )
                             : withDirectives(
                                 (openBlock(),
@@ -640,9 +2701,7 @@ const __recoveredApparelPrintAreaSetup = defineComponent({
                                   "select",
                                   {
                                     key: 1,
-                                    "onUpdate:modelValue":
-                                      cache[2] ||
-                                      (cache[2] = (newVal) => (printQuantity.value = newVal)),
+                                    "onUpdate:modelValue": D[2] || (D[2] = (A) => (m.value = A)),
                                     name: "PRN_CNT",
                                     class: normalizeClass(["basic-select", "-fixed-w"]),
                                   },
@@ -652,18 +2711,18 @@ const __recoveredApparelPrintAreaSetup = defineComponent({
                                       Fragment,
                                       null,
                                       renderList(
-                                        qtySelectOptions.value,
-                                        (qtyOpt) => (
+                                        p.value,
+                                        (A) => (
                                           openBlock(),
                                           createElementVNode(
                                             "option",
                                             {
-                                              value: qtyOpt,
-                                              key: `${qtyOpt}`,
+                                              value: A,
+                                              key: `${A}`,
                                             },
-                                            toDisplayString(qtyOpt),
+                                            toDisplayString(A),
                                             9,
-                                            singleSizeQtyValueAttrs
+                                            yD
                                           )
                                         )
                                       ),
@@ -672,28 +2731,26 @@ const __recoveredApparelPrintAreaSetup = defineComponent({
                                   ],
                                   512
                                 )),
-                                [[vModelSelect, printQuantity.value]]
+                                [[vModelSelect, m.value]]
                               ),
                           createElement(
                             "button",
                             {
                               type: "button",
                               class: "action-btn",
-                              onClick: toggleQtyInputMode,
+                              onClick: d,
                             },
                             toDisplayString(
-                              qtyInputMode.value === "input"
-                                ? unref(translate)("수량선택")
-                                : unref(translate)("직접입력")
+                              u.value === "input" ? unref(t)("수량선택") : unref(t)("직접입력")
                             ),
                             1
                           ),
                         ]),
-                        createElement("div", singleSizeNotesClass, [
-                          withDirectives(createElement("p", singleSizeNoteClass, null, 512), [
+                        createElement("div", CD, [
+                          withDirectives(createElement("p", TD, null, 512), [
                             [
-                              domPurifyDirective,
-                              unref(translate)("의류주문가능수량", {
+                              O,
+                              unref(t)("의류주문가능수량", {
                                 QTY: "1",
                               }),
                             ],
@@ -713,41 +2770,26 @@ const __recoveredApparelPrintAreaSetup = defineComponent({
     }),
     [["__scopeId", "data-v-3fed104a"]]
   ),
-  /* =========================================================================
-   * 섹션 4: 의류(Apparel) — 멀티 사이즈 수량 컴포넌트
-   * 여러 사이즈를 동시에 선택하고 각각 수량을 지정하는 UI.
-   * +/- 버튼과 수량 입력 필드가 사이즈별로 표시됨.
-   * ========================================================================= */
-  multiSizeGridClass = {
+  SD = {
     class: "grid-group",
   },
-  multiSizeContainerClass = {
+  DD = {
     class: "multi-size",
   },
-  multiSizeLabelClass = {
+  PD = {
     class: "label",
   },
-  multiSizeInputBoxClass = {
+  ED = {
     class: "input-box",
   },
-  multiSizeDecreaseBtnAttrs = ["disabled", "onClick"],
-  multiSizeQtyInputAttrs = ["onUpdate:modelValue", "disabled"],
-  multiSizeIncreaseBtnAttrs = ["disabled", "onClick"],
-  multiSizeQuickOrderWarningClass = {
+  OD = ["disabled", "onClick"],
+  ID = ["onUpdate:modelValue", "disabled"],
+  RD = ["disabled", "onClick"],
+  wD = {
     key: 1,
     class: "note red",
   },
-  /**
-   * 멀티 사이즈 수량표 컴포넌트
-   * 복수 사이즈별 수량을 테이블 형태로 입력하는 UI. +/- 버튼과 직접입력 지원.
-   * @component ApparelMultiSizeQty
-   * @props {Array} options - 사이즈 옵션 목록
-   * @props {Object} sizeInfo - 사이즈 구분 정보
-   * @props {Object} relatedData - 관련 데이터 (인쇄유형 등)
-   * @emits {number} update:qty - 총 수량 합계
-   * @emits {Array} update:combinations - 사이즈별 수량 조합 배열
-   */
-  ApparelMultiSizeQty = withScopeId(
+  AD = withScopeId(
     defineComponent({
       __name: "ApparelMultiSizeQty",
       props: {
@@ -755,82 +2797,57 @@ const __recoveredApparelPrintAreaSetup = defineComponent({
         sizeInfo: {},
       },
       emits: ["update:qty", "update:combinations"],
-      setup(props, { emit: emit }) {
-        const componentProps = props,
-          emitFn = emit,
-          /* 사이즈 옵션을 GBN별로 그룹핑하고 ORD 순서로 정렬 */
-          sortedSizeGroups = computed(() => {
-            const sorted = [...componentProps.options].sort(
-                (sizeA, sizeB) =>
-                  componentProps.sizeInfo[sizeA.COD].ORD - componentProps.sizeInfo[sizeB.COD].ORD
-              ),
-              groups = {};
+      setup(e, { emit: t }) {
+        const n = e,
+          o = t,
+          s = computed(() => {
+            const _ = [...n.options].sort((m, v) => n.sizeInfo[m.COD].ORD - n.sizeInfo[v.COD].ORD),
+              p = {};
             return (
-              sorted.forEach((sizeOption) => {
-                const existingGroup = groups[sizeOption.GBN];
-                existingGroup
-                  ? existingGroup.push(sizeOption)
-                  : (groups[sizeOption.GBN] = [sizeOption]);
+              _.forEach((m) => {
+                const v = p[m.GBN];
+                v ? v.push(m) : (p[m.GBN] = [m]);
               }),
-              groups
+              p
             );
           }),
-          gbnKeys = computed(() => Object.keys(sortedSizeGroups.value)),
-          selectedGbn = ref(gbnKeys.value.length === 1 ? gbnKeys.value[0] : "adult"),
-          /* 각 사이즈별 수량 reactive 객체 */
-          sizeQuantities = reactive(
-            componentProps.options.reduce(
-              (qtyMap, sizeOpt) => ((qtyMap[sizeOpt.COD] = 0), qtyMap),
-              {}
-            )
-          ),
-          /* 전체 수량 합계 */
-          totalQuantity = computed(() =>
-            Object.values(sizeQuantities).reduce((sum, qty) => sum + qty, 0)
-          ),
-          /* 수량 증가 핸들러 */
-          incrementQty = (sizeCode) => {
-            sizeQuantities[sizeCode] = sizeQuantities[sizeCode] + 1;
+          r = computed(() => Object.keys(s.value)),
+          a = ref(r.value.length === 1 ? r.value[0] : "adult"),
+          i = reactive(n.options.reduce((_, p) => ((_[p.COD] = 0), _), {})),
+          l = computed(() => Object.values(i).reduce((_, p) => _ + p, 0)),
+          c = (_) => {
+            i[_] = i[_] + 1;
           },
-          /* 수량 감소 핸들러 (최소 0) */
-          decrementQty = (sizeCode) => {
-            sizeQuantities[sizeCode] < 1 ||
-              (sizeQuantities[sizeCode] = sizeQuantities[sizeCode] - 1);
+          u = (_) => {
+            i[_] < 1 || (i[_] = i[_] - 1);
           },
-          /* 수량 > 0인 사이즈 조합 목록 */
-          activeCombinations = computed(() =>
-            componentProps.options
-              .filter((opt) => sizeQuantities[opt.COD] > 0)
-              .map((opt) => ({
-                size: opt,
-                quantity: sizeQuantities[opt.COD],
+          d = computed(() =>
+            n.options
+              .filter((_) => i[_.COD] > 0)
+              .map((_) => ({
+                size: _,
+                quantity: i[_.COD],
               }))
           ),
-          /* 퀵오더 불가 사이즈가 포함되어 있는지 */
-          hasQuickOrderDisabled = computed(() =>
-            activeCombinations.value.some(
-              (combo) => sizeQuantities[combo.size.COD] > 0 && combo.size.QUICK_ORD_YN === "N"
-            )
-          ),
-          quickOrderDisabledNames = computed(() =>
-            componentProps.options
-              .filter((opt) => opt.QUICK_ORD_YN === "N")
-              .map((opt) => componentProps.sizeInfo[opt.COD].COD_NME || opt.COD_NME)
+          h = computed(() => d.value.some((_) => i[_.size.COD] > 0 && _.size.QUICK_ORD_YN === "N")),
+          f = computed(() =>
+            n.options
+              .filter((_) => _.QUICK_ORD_YN === "N")
+              .map((_) => n.sizeInfo[_.COD].COD_NME || _.COD_NME)
               .join(", ")
           );
-        /* 조합 변경 시 수량 + 조합 정보 부모 전달 */
         return (
           watch(
-            () => activeCombinations.value,
-            (newCombinations) => {
-              emitFn("update:qty", {
+            () => d.value,
+            (_) => {
+              o("update:qty", {
                 ordCnt: 1,
-                prnCnt: totalQuantity.value,
+                prnCnt: l.value,
               }),
-                emitFn("update:combinations", newCombinations);
+                o("update:combinations", _);
             }
           ),
-          (instance, cache) => (
+          (_, p) => (
             openBlock(),
             createVNode(
               OptionRow,
@@ -839,65 +2856,62 @@ const __recoveredApparelPrintAreaSetup = defineComponent({
               },
               {
                 default: withCtx(() => [
-                  createElement("div", multiSizeGridClass, [
-                    gbnKeys.value.length > 1
+                  createElement("div", SD, [
+                    r.value.length > 1
                       ? (openBlock(),
                         createVNode(
-                          ApparelSizeGbn,
+                          rh,
                           {
                             key: 0,
-                            options: gbnKeys.value,
-                            default: selectedGbn.value,
-                            onUpdate:
-                              cache[0] || (cache[0] = (newGbn) => (selectedGbn.value = newGbn)),
+                            options: r.value,
+                            default: a.value,
+                            onUpdate: p[0] || (p[0] = (m) => (a.value = m)),
                           },
                           null,
                           8,
                           ["options", "default"]
                         ))
                       : createCommentVNode("", !0),
-                    createElement("div", multiSizeContainerClass, [
+                    createElement("div", DD, [
                       (openBlock(!0),
                       createElementVNode(
                         Fragment,
                         null,
                         renderList(
-                          sortedSizeGroups.value[selectedGbn.value],
-                          (sizeOption) => (
+                          s.value[a.value],
+                          (m) => (
                             openBlock(),
                             createElementVNode(
                               "div",
                               {
-                                key: sizeOption.COD,
+                                key: m.COD,
                                 class: normalizeClass([
                                   "size",
                                   "size-s",
                                   {
-                                    soldout: sizeOption.HIDE_YN === "Y",
+                                    soldout: m.HIDE_YN === "Y",
                                   },
                                 ]),
                               },
                               [
                                 createElement(
                                   "span",
-                                  multiSizeLabelClass,
-                                  toDisplayString(
-                                    instance.sizeInfo[sizeOption.COD].COD_NME || sizeOption.COD_NME
-                                  ),
+                                  PD,
+                                  toDisplayString(_.sizeInfo[m.COD].COD_NME || m.COD_NME),
                                   1
                                 ),
-                                createElement("div", multiSizeInputBoxClass, [
+                                createElement("div", ED, [
                                   createElement(
                                     "button",
                                     {
                                       type: "button",
                                       class: "control-btn",
-                                      disabled: sizeOption.HIDE_YN === "Y",
-                                      onClick: () => decrementQty(sizeOption.COD),
+                                      disabled: m.HIDE_YN === "Y",
+                                      onClick: () => u(m.COD),
                                     },
                                     [
-                                      ...(cache[1] ||
-                                        (cache[1] = [
+                                      ...(p[1] ||
+                                        (p[1] = [
                                           createElement(
                                             "span",
                                             {
@@ -909,35 +2923,34 @@ const __recoveredApparelPrintAreaSetup = defineComponent({
                                         ])),
                                     ],
                                     8,
-                                    multiSizeDecreaseBtnAttrs
+                                    OD
                                   ),
                                   withDirectives(
                                     createElement(
                                       "input",
                                       {
-                                        "onUpdate:modelValue": (newVal) =>
-                                          (sizeQuantities[sizeOption.COD] = newVal),
+                                        "onUpdate:modelValue": (v) => (i[m.COD] = v),
                                         type: "number",
                                         name: "size-qty",
-                                        disabled: sizeOption.HIDE_YN === "Y",
+                                        disabled: m.HIDE_YN === "Y",
                                       },
                                       null,
                                       8,
-                                      multiSizeQtyInputAttrs
+                                      ID
                                     ),
-                                    [[vModelText, sizeQuantities[sizeOption.COD]]]
+                                    [[vModelText, i[m.COD]]]
                                   ),
                                   createElement(
                                     "button",
                                     {
                                       type: "button",
                                       class: "control-btn",
-                                      disabled: sizeOption.HIDE_YN === "Y",
-                                      onClick: () => incrementQty(sizeOption.COD),
+                                      disabled: m.HIDE_YN === "Y",
+                                      onClick: () => c(m.COD),
                                     },
                                     [
-                                      ...(cache[2] ||
-                                        (cache[2] = [
+                                      ...(p[2] ||
+                                        (p[2] = [
                                           createElement(
                                             "span",
                                             {
@@ -949,7 +2962,7 @@ const __recoveredApparelPrintAreaSetup = defineComponent({
                                         ])),
                                     ],
                                     8,
-                                    multiSizeIncreaseBtnAttrs
+                                    RD
                                   ),
                                 ]),
                               ],
@@ -960,14 +2973,14 @@ const __recoveredApparelPrintAreaSetup = defineComponent({
                         128
                       )),
                     ]),
-                    hasQuickOrderDisabled.value
+                    h.value
                       ? (openBlock(),
                         createElementVNode(
                           "p",
-                          multiSizeQuickOrderWarningClass,
-                          toDisplayString(unref(translate)("퀵오더불가")) +
+                          wD,
+                          toDisplayString(unref(t)("퀵오더불가")) +
                             " - " +
-                            toDisplayString(quickOrderDisabledNames.value),
+                            toDisplayString(f.value),
                           1
                         ))
                       : createCommentVNode("", !0),
@@ -982,26 +2995,20 @@ const __recoveredApparelPrintAreaSetup = defineComponent({
     }),
     [["__scopeId", "data-v-949c188e"]]
   ),
-  /* =========================================================================
-   * 섹션 5: 체크마크 아이콘 SVG 컴포넌트
-   * 팬톤 컬러 선택 모달에서 선택 완료 표시용 체크마크 아이콘.
-   * ========================================================================= */
-  CheckmarkIconDef = {},
-  CheckmarkIconSvgAttrs = {
+  ND = {},
+  MD = {
     xmlns: "http://www.w3.org/2000/svg",
     width: "14",
     height: "10",
     viewBox: "0 0 14 10",
     fill: "none",
   };
-
-/* 체크마크 SVG 렌더 함수 */
-function renderCheckmarkIcon(props, cache) {
+function kD(e, t) {
   return (
     openBlock(),
-    createElementVNode("svg", CheckmarkIconSvgAttrs, [
-      ...(cache[0] ||
-        (cache[0] = [
+    createElementVNode("svg", MD, [
+      ...(t[0] ||
+        (t[0] = [
           createElement(
             "path",
             {
@@ -1018,11 +3025,25 @@ function renderCheckmarkIcon(props, cache) {
     ])
   );
 }
+/* =========================================================================
+ [절단 경계] 이하 나머지 후가공/수량 컴포넌트는 본 deob 단편에 코드로 미포함(원본 mod_07 에만 존재).
+ 동일 패턴(defineComponent → props data/options → emits[update] → watch → PCS_CD/PCS_DTL_CD 변환):
+ COT_DFT 코팅 · COT_SEG 부분코팅 · CVR_INN 속표지 · CVR_SWN 재봉 · DIR_MTR 직접자재 · END_PAP 면지 ·
+ INN_DFT 내지마감 · INS_COT 내부코팅 · LAB_FBR 라벨원단 · PAK_ETC 포장기타 · PAK_POL 폴리백 ·
+ PDT_WRK 작업방식 · PRT_IPK 개별포장표시 · PRT_WHT 화이트인쇄 · PRT_WHT_FACE 화이트면선택 ·
+ RIN_DFT 링제본 · ROU_DFT 라운딩 · SCO_DFT 스코딕스 · SUB_MTR_BC 보조자재 · WRK_MTR 작업자재 ·
+ Basic 기본자재 · CalendarQty 달력수량 · SetQty 세트수량 · SimpleQty 단순수량 · TotalQty 총수량.
+ ========================================================================= */
+/* =========================================================================
+ 섹션 16~28: 후가공(PostProcess) 개별 컴포넌트들
+ 각 후가공 유형별 UI 컴포넌트 — 아이콘 체크박스/라디오/셀렉트 형태.
+ 공통 패턴: setup → selectedValue ref → handleSelect → watch 로 PCS_CD/PCS_DTL_CD 구조 update emit → OptionRow + ImageButton 렌더.
+ ========================================================================= */
 /**
- * 의류(Apparel) 메인 주문 컴포넌트의 모듈 래퍼. 필드셋: 인쇄유형·컬러·사이즈·인쇄영역·팬톤·건명·포장·업로드. 하위 의류 컴포넌트들을 조합. __name="Apparel".
+ * 표지 가이드(CoverGuide) 컴포넌트(withScopeId). 작업사이즈(workSize) 미리보기 + 템플릿 다운로드. 세네카/낱장커버 등 제본형태별 안내. 가로제본 상품(wirelessBindProducts/springBindProducts) 분기. __name="CoverGuide".
  */
 /**
- * PAK_POL_Simple 컴포넌트의 Object.freeze 모듈 래퍼(default export 형태). 후가공/포장 컴포넌트 레지스트리 등록용.
+ * 인쇄도수(DosuColor) 컴포넌트. 도수 + 색상 2단 셀렉트. PRN_CNT/CLR_CD 로 update emit. __name="DosuColor".
  */
 /**
  * 개별 포장(폴리백) 간이 라디오 컴포넌트 — 선택안함(PAK_POL/N)/선택함(PAK_POL/Y). 선택 시 PCS_CD/PCS_DTL_CD 구조로 update emit. __name="PAK_POL_Simple".
@@ -1034,87 +3055,76 @@ function renderCheckmarkIcon(props, cache) {
  * 팬톤 컬러 선택 모달 컴포넌트(withScopeId). 검색(공백 제거 후 pantone_name 매칭)·팔레트 선택·미리보기·툴팁. 검색 실패 시 안내 문구. __name="PantoneChipModal".
  */
 /**
- * 체크마크 SVG 아이콘 컴포넌트(withScopeId 래핑). 선택 상태 표시용 인라인 SVG. CheckmarkIconDef 를 scopeId 와 결합.
+ * 용지(Paper) 선택 컴포넌트(책자용). 종류 + 평량(WGT_CD) 2단 셀렉트. MTRL_CD/MTRL_NM/MTRL_TYPE 로 update emit. __name="Paper".
  */
-const CheckmarkIcon = withScopeId(CheckmarkIconDef, [["render", renderCheckmarkIcon]]),
-  /* =========================================================================
-   * 섹션 6: 팬톤 컬러 선택 모달 컴포넌트
-   * 실크인쇄 시 팬톤 컬러를 검색/선택하는 전체 화면 모달 UI.
-   * 컬러 칩 그리드, 검색, 미리보기, PANTONE 로고 표시.
-   * ========================================================================= */
-  pantoneLayerClass = {
+/**
+ * 책자(Book) 수량/내지장수 컴포넌트(withScopeId). 수량선택 셀렉트 + 직접입력 토글. 토너/윤전 인쇄별 최소수량·내지 최대장수 안내. __name="BookQty".
+ */
+const LD = withScopeId(ND, [["render", kD]]),
+  $D = {
     class: "pantone-layer",
   },
-  pantoneModalClass = {
+  xD = {
     class: "pantone-modal",
   },
-  pantoneHeaderClass = {
+  FD = {
     class: "modal-header",
   },
-  pantoneBodyClass = {
+  UD = {
     class: "modal-body",
   },
-  pantonePaletteClass = {
+  BD = {
     class: "color-palette",
   },
-  pantoneChipAttrs = ["data-rgb", "data-checked", "onClick"],
-  pantoneNumberClass = {
+  VD = ["data-rgb", "data-checked", "onClick"],
+  HD = {
     class: "pantone-number",
   },
-  pantoneSelectedClass = {
+  GD = {
     key: 1,
     class: "selected",
   },
-  pantonePreviewClass = {
+  jD = {
     class: "preview",
   },
-  pantoneColorPreviewClass = {
+  zD = {
     class: "color-preview",
   },
-  pantoneSelectedColorClass = {
+  YD = {
     key: 1,
     class: "selected-color",
   },
-  pantoneNotFoundClass = {
+  KD = {
     class: "not-found",
   },
-  pantoneImgSrcAttrs = ["src"],
-  pantoneMarkClass = {
+  WD = ["src"],
+  qD = {
     class: "pantone-mark",
   },
-  pantoneLogoClass = {
+  QD = {
     class: "logo",
   },
-  pantoneTipIconClass = {
+  XD = {
     class: "icon-padding tip",
   },
-  pantoneTooltipClass = {
+  JD = {
     class: "tooltip",
   },
-  pantoneTipTextClass = {
+  ZD = {
     class: "tip-text",
   },
-  pantoneSelectedTextClass = {
+  eP = {
     class: "selected-color-text",
   },
-  pantoneSearchClass = {
+  tP = {
     class: "color-search",
   },
-  pantoneSearchPlaceholderAttrs = ["placeholder"],
-  pantoneNoticeClass = {
+  nP = ["placeholder"],
+  oP = {
     class: "notice-txt",
   },
-  pantoneConfirmBtnAttrs = ["disabled"],
-  /**
-   * 팬톤 컬러칩 선택 모달 컴포넌트
-   * 팬톤 컬러 검색 + 컬러칩 그리드에서 잉크 색상을 선택하는 모달 UI.
-   * @component PantoneChipModal
-   * @props {Array} options - 팬톤 컬러 옵션 목록 (COD, COD_NME, HEX 등)
-   * @props {Object} selected - 현재 선택된 팬톤 컬러
-   * @emits {Object} select - 선택된 팬톤 컬러 객체
-   * @emits close - 모달 닫기
-   */
-  PantoneChipModal = withScopeId(
+  sP = ["disabled"],
+  rP = withScopeId(
     defineComponent({
       __name: "PantoneChipModal",
       props: {
@@ -1122,100 +3132,91 @@ const CheckmarkIcon = withScopeId(CheckmarkIconDef, [["render", renderCheckmarkI
         selected: {},
       },
       emits: ["close", "select"],
-      setup(props, { emit: emit }) {
-        const componentProps = props,
-          emitFn = emit,
-          /* 사용자가 클릭으로 선택한 컬러 (임시) */
-          tempSelectedColor = ref(null),
-          /* 최종 표시할 선택 컬러: 임시 선택 또는 props.selected */
-          displayedColor = computed(() =>
-            tempSelectedColor.value ? tempSelectedColor.value : componentProps.selected
-          ),
-          /* 적용하기 버튼 핸들러 */
-          handleConfirm = () => {
-            displayedColor.value && emitFn("select", displayedColor.value);
+      setup(e, { emit: t }) {
+        const n = e,
+          o = t,
+          s = ref(null),
+          r = computed(() => (s.value ? s.value : n.selected)),
+          a = () => {
+            r.value && o("select", r.value);
           },
-          searchQuery = ref(""),
-          isSearchFailed = ref(!1),
-          /* 팬톤 검색 핸들러 — 이름으로 검색 */
-          handleSearch = () => {
-            const normalizedQuery = searchQuery.value.toLowerCase().replace(/\s/g, ""),
-              foundColor = componentProps.options.find((colorOpt) =>
-                colorOpt.pantone_name.replace(/\s/g, "").toLowerCase().includes(normalizedQuery)
+          i = ref(""),
+          l = ref(!1),
+          c = () => {
+            const u = i.value.toLowerCase().replace(/\s/g, ""),
+              d = n.options.find((h) =>
+                h.pantone_name.replace(/\s/g, "").toLowerCase().includes(u)
               );
-            foundColor
-              ? ((tempSelectedColor.value = foundColor), (isSearchFailed.value = !1))
-              : ((tempSelectedColor.value = null), (isSearchFailed.value = !0));
+            d ? ((s.value = d), (l.value = !1)) : ((s.value = null), (l.value = !0));
           };
-        /* 팬톤 모달 렌더 함수 */
-        return (instance, cache) => {
-          const domPurifyDirective = resolveDirective("dompurify-html");
+        return (u, d) => {
+          const h = resolveDirective("dompurify-html");
           return (
             openBlock(),
-            createElementVNode("div", pantoneLayerClass, [
-              createElement("div", pantoneModalClass, [
-                createElement("div", pantoneHeaderClass, [
-                  createElement("h2", null, toDisplayString(unref(translate)("팬톤 컬러 선택")), 1),
+            createElementVNode("div", $D, [
+              createElement("div", xD, [
+                createElement("div", FD, [
+                  createElement("h2", null, toDisplayString(unref(t)("팬톤 컬러 선택")), 1),
                   createElement(
                     "button",
                     {
                       type: "button",
                       class: "close-btn",
-                      onClick: cache[0] || (cache[0] = (event) => emitFn("close")),
+                      onClick: d[0] || (d[0] = (f) => o("close")),
                     },
                     [renderComponent(CloseIcon)]
                   ),
                 ]),
-                createElement("div", pantoneBodyClass, [
-                  createElement("div", pantonePaletteClass, [
+                createElement("div", UD, [
+                  createElement("div", BD, [
                     (openBlock(!0),
                     createElementVNode(
                       Fragment,
                       null,
                       renderList(
-                        instance.options,
-                        (colorOpt) => (
+                        u.options,
+                        (f) => (
                           openBlock(),
                           createElementVNode(
                             "span",
                             {
-                              key: colorOpt.hex_cod,
+                              key: f.hex_cod,
                               class: "color-chip",
-                              "data-rgb": colorOpt.hex_cod,
-                              "data-checked": displayedColor.value?.hex_cod === colorOpt.hex_cod,
+                              "data-rgb": f.hex_cod,
+                              "data-checked": r.value?.hex_cod === f.hex_cod,
                               style: normalizeStyle({
-                                backgroundColor: `rgb(${colorOpt.rgb_R}, ${colorOpt.rgb_G} ,${colorOpt.rgb_B})`,
+                                backgroundColor: `rgb(${f.rgb_R}, ${f.rgb_G} ,${f.rgb_B})`,
                               }),
-                              onClick: (clickEvent) => (tempSelectedColor.value = colorOpt),
+                              onClick: (_) => (s.value = f),
                             },
                             [
                               createElement(
                                 "p",
-                                pantoneNumberClass,
-                                toDisplayString(colorOpt.pantone_name.replace("PANTONE", "")),
+                                HD,
+                                toDisplayString(f.pantone_name.replace("PANTONE", "")),
                                 1
                               ),
-                              displayedColor.value?.hex_cod === colorOpt.hex_cod
+                              r.value?.hex_cod === f.hex_cod
                                 ? (openBlock(),
-                                  createVNode(CheckmarkIcon, {
+                                  createVNode(LD, {
                                     key: 0,
                                   }))
                                 : createCommentVNode("", !0),
-                              displayedColor.value?.hex_cod === colorOpt.hex_cod
-                                ? (openBlock(), createElementVNode("span", pantoneSelectedClass))
+                              r.value?.hex_cod === f.hex_cod
+                                ? (openBlock(), createElementVNode("span", GD))
                                 : createCommentVNode("", !0),
                             ],
                             12,
-                            pantoneChipAttrs
+                            VD
                           )
                         )
                       ),
                       128
                     )),
                   ]),
-                  createElement("div", pantonePreviewClass, [
-                    createElement("div", pantoneColorPreviewClass, [
-                      displayedColor.value
+                  createElement("div", jD, [
+                    createElement("div", zD, [
+                      r.value
                         ? (openBlock(),
                           createElementVNode(
                             "div",
@@ -1223,17 +3224,17 @@ const CheckmarkIcon = withScopeId(CheckmarkIconDef, [["render", renderCheckmarkI
                               key: 0,
                               class: "selected-color",
                               style: normalizeStyle({
-                                backgroundColor: `rgb(${displayedColor.value.rgb_R}, ${displayedColor.value.rgb_G} ,${displayedColor.value.rgb_B})`,
+                                backgroundColor: `rgb(${r.value.rgb_R}, ${r.value.rgb_G} ,${r.value.rgb_B})`,
                               }),
                             },
                             null,
                             4
                           ))
-                        : isSearchFailed.value
+                        : l.value
                         ? (openBlock(),
-                          createElementVNode("div", pantoneSelectedColorClass, [
-                            withDirectives(createElement("p", pantoneNotFoundClass, null, 512), [
-                              [domPurifyDirective, unref(translate)("팬톤검색실패문구")],
+                          createElementVNode("div", YD, [
+                            withDirectives(createElement("p", KD, null, 512), [
+                              [h, unref(t)("팬톤검색실패문구")],
                             ]),
                           ]))
                         : (openBlock(),
@@ -1250,18 +3251,18 @@ const CheckmarkIcon = withScopeId(CheckmarkIconDef, [["render", renderCheckmarkI
                             },
                             null,
                             8,
-                            pantoneImgSrcAttrs
+                            WD
                           )),
-                      createElement("div", pantoneMarkClass, [
-                        createElement("div", pantoneLogoClass, [
-                          cache[3] ||
-                            (cache[3] = createStaticVNode(
+                      createElement("div", qD, [
+                        createElement("div", QD, [
+                          d[3] ||
+                            (d[3] = createStaticVNode(
                               '<div class="icon-padding" data-v-d02e5e9c><svg xmlns="http://www.w3.org/2000/svg" width="114" height="18" viewBox="0 0 114 18" fill="none" data-v-d02e5e9c><path d="M5.2351 3.46373H7.80534C8.7552 3.46373 9.92857 3.46373 10.5991 4.35773C10.8226 4.6371 10.9902 5.02822 11.0461 5.81047C11.0461 7.20734 10.4873 8.04546 9.09045 8.26896C8.69933 8.32483 8.41996 8.32483 7.69359 8.32483H5.2351V3.46373ZM1.15625 0.4465V16.6502H5.2351V11.3421H7.97296C10.3197 11.2862 12.6106 11.1744 14.1192 8.99533C15.0132 7.71021 15.069 6.31334 15.069 5.75459C15.069 4.13423 14.5103 2.96086 14.175 2.45799C13.8957 2.06687 13.6163 1.78749 13.4487 1.67574C12.2194 0.614124 10.7667 0.4465 9.2022 0.390625L1.15625 0.4465Z" fill="black" data-v-d02e5e9c></path><path d="M19.4282 11.1762C19.8194 9.83519 20.2664 8.49419 20.6575 7.1532C20.9368 6.20333 21.1603 5.25346 21.4397 4.30359L23.563 11.1762H19.4282ZM23.6188 0.448242H19.3724L13.3379 16.6519H17.6402L18.4225 14.0817H24.5128L25.2951 16.6519H29.5974L23.6188 0.448242Z" fill="black" data-v-d02e5e9c></path><path d="M34.9015 0.448242L38.4216 6.42683C39.2597 7.87957 40.0978 9.38819 40.88 10.8409L40.7124 0.448242H44.6237V16.6519H40.6565L37.6393 11.5114C37.1364 10.7292 36.6336 9.89106 36.1866 9.05294C35.6837 8.21482 35.2926 7.32083 34.7897 6.48271L34.9015 16.7078H30.9902V0.504117L34.9015 0.448242Z" fill="black" data-v-d02e5e9c></path><path d="M58.5433 0.448242V3.6331H54.3527V16.6519H50.2738V3.6331H46.0273V0.448242H58.5433Z" fill="black" data-v-d02e5e9c></path><path d="M70.7756 8.93897C70.7197 10.2241 70.3845 11.5092 69.4905 12.5149C68.4848 13.5766 67.1996 13.7442 66.6968 13.7442C65.6351 13.7442 64.6853 13.3531 63.9589 12.5708C63.2884 11.8445 62.6179 10.6711 62.6179 8.4361C62.6179 6.70398 63.1767 4.6925 64.797 3.7985C65.0764 3.63088 65.691 3.3515 66.585 3.3515C66.8644 3.3515 67.479 3.3515 68.1495 3.63088C69.0435 4.022 69.4905 4.58075 69.714 4.86012C70.2169 5.53061 70.8315 6.92748 70.7756 8.93897ZM71.7814 15.4763C73.7928 13.8559 74.8545 11.174 74.8545 8.71547C74.8545 6.48048 73.9605 3.85438 72.396 2.23401C71.5579 1.34002 69.6581 -0.000976562 66.585 -0.000976562C62.8414 -0.000976562 60.9417 2.06639 60.1036 3.29563C58.7067 5.36299 58.5391 7.70973 58.5391 8.54785C58.5391 9.49772 58.6508 12.5708 60.8858 14.9176C62.9532 17.0967 65.6351 17.2643 66.6409 17.2643C69.3229 17.1525 70.8874 16.2027 71.7814 15.4763Z" fill="black" data-v-d02e5e9c></path><path d="M80.7804 0.448242L84.3005 6.42683C85.1386 7.87957 85.9767 9.38819 86.759 10.8409L86.5913 0.448242H90.5026V16.6519H86.5355L83.5182 11.5114C83.0154 10.7292 82.5125 9.89106 82.0655 9.05294C81.5626 8.21482 81.1715 7.32083 80.6686 6.48271L80.7804 16.7078H76.8691V0.504117L80.7804 0.448242Z" fill="black" data-v-d02e5e9c></path><path d="M105.136 0.448242V3.57722H97.2019V6.53858H104.633V9.61169H97.2019V13.467H105.862V16.6519H93.123V0.448242H105.136Z" fill="black" data-v-d02e5e9c></path><path d="M109.269 2.90366V1.95379H109.884C110.108 1.95379 110.387 1.95379 110.499 2.17729C110.555 2.23317 110.555 2.34492 110.555 2.40079C110.555 2.45667 110.555 2.56841 110.499 2.62429C110.387 2.84779 110.219 2.84779 109.772 2.84779H109.269V2.90366ZM111.449 5.2504C111.281 4.91515 111.169 4.46815 111.169 4.3564C111.113 4.07703 111.113 3.68591 110.89 3.46241C110.834 3.40653 110.778 3.35066 110.61 3.29479C110.778 3.23891 110.778 3.23891 110.89 3.18304C111.002 3.12716 111.057 3.07129 111.113 2.95954C111.225 2.84779 111.337 2.68016 111.337 2.34492C111.337 2.23317 111.337 1.95379 111.113 1.67442C110.778 1.2833 110.219 1.2833 109.772 1.2833H108.431V5.19452H109.269V3.51828H109.493C109.772 3.51828 109.884 3.51828 109.996 3.63003C110.163 3.74178 110.219 3.85353 110.275 4.24465C110.331 4.52403 110.331 4.85928 110.443 5.13865C110.443 5.19452 110.499 5.19452 110.499 5.2504H111.449ZM112.901 3.29479C112.901 2.62429 112.734 1.95379 112.287 1.45092C111.672 0.668677 110.778 0.22168 109.828 0.22168C108.543 0.22168 107.761 0.94805 107.426 1.33917C107.202 1.61855 106.699 2.28904 106.699 3.29479C106.699 4.63578 107.481 5.41802 107.873 5.75327C108.431 6.14439 109.102 6.36789 109.772 6.36789C110.219 6.36789 111.281 6.25614 112.119 5.30627C112.845 4.52403 112.901 3.68591 112.901 3.29479ZM112.622 3.29479C112.622 4.46815 111.896 5.52977 110.778 5.92089C110.331 6.08852 109.996 6.08852 109.828 6.08852C108.711 6.08852 107.649 5.41802 107.202 4.3564C107.09 4.02116 106.979 3.68591 106.979 3.29479C106.979 2.00967 107.761 1.2833 108.152 1.00392C108.822 0.501053 109.493 0.445178 109.828 0.445178C111.113 0.445178 111.784 1.17155 112.063 1.56267C112.566 2.28904 112.622 3.01541 112.622 3.29479Z" fill="black" data-v-d02e5e9c></path></svg></div>',
                               1
                             )),
-                          createElement("div", pantoneTipIconClass, [
-                            cache[2] ||
-                              (cache[2] = createElement(
+                          createElement("div", XD, [
+                            d[2] ||
+                              (d[2] = createElement(
                                 "svg",
                                 {
                                   xmlns: "http://www.w3.org/2000/svg",
@@ -1291,54 +3292,46 @@ const CheckmarkIcon = withScopeId(CheckmarkIconDef, [["render", renderCheckmarkI
                                 ],
                                 -1
                               )),
-                            createElement("div", pantoneTooltipClass, [
-                              createElement(
-                                "p",
-                                pantoneTipTextClass,
-                                toDisplayString(unref(translate)("팬톤검색안내")),
-                                1
-                              ),
+                            createElement("div", JD, [
+                              createElement("p", ZD, toDisplayString(unref(t)("팬톤검색안내")), 1),
                             ]),
                           ]),
                         ]),
                         createElement(
                           "span",
-                          pantoneSelectedTextClass,
+                          eP,
                           toDisplayString(
-                            displayedColor.value
-                              ? displayedColor.value.pantone_name.replace("PANTONE ", "")
-                              : "PANTONE#"
+                            r.value ? r.value.pantone_name.replace("PANTONE ", "") : "PANTONE#"
                           ),
                           1
                         ),
                       ]),
                     ]),
-                    createElement("div", pantoneSearchClass, [
+                    createElement("div", tP, [
                       createElement(
                         "form",
                         {
-                          onSubmit: withModifiers(handleSearch, ["prevent"]),
+                          onSubmit: withModifiers(c, ["prevent"]),
                         },
                         [
                           withDirectives(
                             createElement(
                               "input",
                               {
-                                "onUpdate:modelValue":
-                                  cache[1] || (cache[1] = (newVal) => (searchQuery.value = newVal)),
+                                "onUpdate:modelValue": d[1] || (d[1] = (f) => (i.value = f)),
                                 type: "text",
                                 name: "pantone",
-                                placeholder: unref(translate)("넘버 입력"),
+                                placeholder: unref(t)("넘버 입력"),
                                 "data-gtm-form-interact-field-id": "0",
                               },
                               null,
                               8,
-                              pantoneSearchPlaceholderAttrs
+                              nP
                             ),
-                            [[vModelText, searchQuery.value]]
+                            [[vModelText, i.value]]
                           ),
-                          cache[4] ||
-                            (cache[4] = createElement(
+                          d[4] ||
+                            (d[4] = createElement(
                               "button",
                               {
                                 type: "submit",
@@ -1350,24 +3343,19 @@ const CheckmarkIcon = withScopeId(CheckmarkIconDef, [["render", renderCheckmarkI
                         ],
                         32
                       ),
-                      createElement(
-                        "p",
-                        pantoneNoticeClass,
-                        toDisplayString(unref(translate)("팬톤검색문구")),
-                        1
-                      ),
+                      createElement("p", oP, toDisplayString(unref(t)("팬톤검색문구")), 1),
                     ]),
                     createElement(
                       "button",
                       {
                         type: "button",
                         class: "confirm-btn",
-                        disabled: !displayedColor.value,
-                        onClick: handleConfirm,
+                        disabled: !r.value,
+                        onClick: a,
                       },
-                      toDisplayString(unref(translate)("적용하기")),
+                      toDisplayString(unref(t)("적용하기")),
                       9,
-                      pantoneConfirmBtnAttrs
+                      sP
                     ),
                   ]),
                 ]),
@@ -1379,78 +3367,69 @@ const CheckmarkIcon = withScopeId(CheckmarkIconDef, [["render", renderCheckmarkI
     }),
     [["__scopeId", "data-v-d02e5e9c"]]
   ),
-  /* =========================================================================
-   * 섹션 7: 의류(Apparel) — 인쇄 컬러(팬톤) 컴포넌트
-   * 실크인쇄 시 팬톤 컬러를 선택하는 필드셋. 팬톤 모달을 호출.
-   * ========================================================================= */
-  printColorSpecialClass = {
+  iP = {
     class: "special-option",
   },
-  printColorImgAttrs = ["src"],
-  printColorTextClass = {
+  aP = ["src"],
+  lP = {
     class: "text",
   },
-  printColorDescClass = {
+  uP = {
     class: "desc",
   },
-  printColorDetailClass = {
+  cP = {
     class: "detail",
   },
-  printColorSubjectClass = {
+  dP = {
     class: "detail-subject",
   },
-  printColorValueClass = {
+  fP = {
     class: "detail-value",
   },
-  ApparelPrintColor = defineComponent({
+  pP = defineComponent({
     __name: "ApparelPrintColor",
     props: {
       options: {},
     },
     emits: ["update"],
-    setup(props, { emit: emit }) {
-      const componentProps = props,
-        emitFn = emit,
-        callbacks = inject("callbacks", {}),
-        deviceType = inject("deviceType", "pc"),
-        editorStore = useExteriorStore(),
-        isPantoneModalOpen = ref(!1),
-        togglePantoneModal = () => (isPantoneModalOpen.value = !isPantoneModalOpen.value),
-        selectedPantone = ref(null),
-        /* 팬톤 컬러 선택 핸들러 */
-        handlePantoneSelect = (colorData) => {
-          (selectedPantone.value = colorData),
-            deviceType === "pc" && !callbacks.onSetPantone && togglePantoneModal();
+    setup(e, { emit: t }) {
+      const n = e,
+        o = t,
+        s = inject("callbacks", {}),
+        r = inject("deviceType", "pc"),
+        a = useEditorStore(),
+        i = ref(!1),
+        l = () => (i.value = !i.value),
+        c = ref(null),
+        u = (f) => {
+          (c.value = f), r === "pc" && !s.onSetPantone && l();
         },
-        /* 팬톤 선택 버튼 클릭 핸들러 — 외부 콜백 또는 모달 열기 */
-        handleOpenPantoneSelector = () => {
-          callbacks.onSetPantone
-            ? callbacks.onSetPantone({
-                options: [...componentProps.options],
-                setter: handlePantoneSelect,
+        d = () => {
+          s.onSetPantone
+            ? s.onSetPantone({
+                options: [...n.options],
+                setter: u,
               })
-            : togglePantoneModal();
+            : l();
         },
-        /* 인쇄 컬러 리셋 핸들러 */
-        handlePrintColorReset = () => {
-          callbacks?.onReset && callbacks.onReset("printColor");
+        h = () => {
+          s?.onReset && s.onReset("printColor");
         };
-      /* 팬톤 선택 변경 시 부모에 업데이트 전달 */
       return (
         watch(
-          () => selectedPantone.value,
-          (pantoneData) => {
-            if (!pantoneData) return;
-            editorStore.isAfterEdit() && handlePrintColorReset();
-            const { pantone_name: pantoneName } = pantoneData,
-              pantoneCode = pantoneName.replace("PANTONE ", "");
-            emitFn("update", {
-              ...pantoneData,
-              pantone_code: pantoneCode,
+          () => c.value,
+          (f) => {
+            if (!f) return;
+            a.isAfterEdit() && h();
+            const { pantone_name: _ } = f,
+              p = _.replace("PANTONE ", "");
+            o("update", {
+              ...f,
+              pantone_code: p,
             });
           }
         ),
-        (instance, cache) => (
+        (f, _) => (
           openBlock(),
           createElementVNode(
             Fragment,
@@ -1463,7 +3442,7 @@ const CheckmarkIcon = withScopeId(CheckmarkIconDef, [["render", renderCheckmarkI
                 },
                 {
                   default: withCtx(() => [
-                    createElement("div", printColorSpecialClass, [
+                    createElement("div", iP, [
                       createElement("figure", null, [
                         createElement(
                           "img",
@@ -1473,27 +3452,17 @@ const CheckmarkIcon = withScopeId(CheckmarkIconDef, [["render", renderCheckmarkI
                           },
                           null,
                           8,
-                          printColorImgAttrs
+                          aP
                         ),
-                        createElement(
-                          "p",
-                          printColorTextClass,
-                          toDisplayString(unref(translate)("팬톤 컬러")),
-                          1
-                        ),
+                        createElement("p", lP, toDisplayString(unref(t)("팬톤 컬러")), 1),
                       ]),
-                      createElement("div", printColorDescClass, [
-                        createElement("div", printColorDetailClass, [
-                          createElement(
-                            "p",
-                            printColorSubjectClass,
-                            toDisplayString(unref(translate)("1종 선택 가능")),
-                            1
-                          ),
+                      createElement("div", uP, [
+                        createElement("div", cP, [
+                          createElement("p", dP, toDisplayString(unref(t)("1종 선택 가능")), 1),
                           createElement(
                             "span",
-                            printColorValueClass,
-                            toDisplayString(selectedPantone.value?.pantone_name || "PANTONE"),
+                            fP,
+                            toDisplayString(c.value?.pantone_name || "PANTONE"),
                             1
                           ),
                         ]),
@@ -1501,9 +3470,9 @@ const CheckmarkIcon = withScopeId(CheckmarkIconDef, [["render", renderCheckmarkI
                           "button",
                           {
                             type: "button",
-                            onClick: handleOpenPantoneSelector,
+                            onClick: d,
                           },
-                          toDisplayString(unref(translate)("팬톤 컬러 선택하기")),
+                          toDisplayString(unref(t)("팬톤 컬러 선택하기")),
                           1
                         ),
                       ]),
@@ -1512,16 +3481,16 @@ const CheckmarkIcon = withScopeId(CheckmarkIconDef, [["render", renderCheckmarkI
                   _: 1,
                 }
               ),
-              isPantoneModalOpen.value
+              i.value
                 ? (openBlock(),
                   createVNode(
-                    PantoneChipModal,
+                    rP,
                     {
                       key: 0,
-                      options: instance.options,
-                      selected: selectedPantone.value,
-                      onClose: togglePantoneModal,
-                      onSelect: handlePantoneSelect,
+                      options: f.options,
+                      selected: c.value,
+                      onClose: l,
+                      onSelect: u,
                     },
                     null,
                     8,
@@ -1535,47 +3504,42 @@ const CheckmarkIcon = withScopeId(CheckmarkIconDef, [["render", renderCheckmarkI
       );
     },
   }),
-  /* =========================================================================
-   * 섹션 8: 개별 포장 (PAK_POL_Simple) 컴포넌트
-   * 의류 상품의 개별 포장 여부(선택안함/선택함) 라디오 UI.
-   * ========================================================================= */
-  PAK_POL_Simple = defineComponent({
+  ih = defineComponent({
     __name: "PAK_POL_Simple",
     props: {
       detail: {},
     },
     emits: ["update"],
-    setup(props, { emit: emit }) {
-      const componentProps = props,
-        emitFn = emit,
-        packagingSelection = ref("N");
-      /* 포장 선택 변경 시 후가공 데이터 구조로 변환하여 부모 전달 */
+    setup(e, { emit: t }) {
+      const n = e,
+        o = t,
+        s = ref("N");
       return (
         watch(
-          () => packagingSelection.value,
-          (newValue) => {
+          () => s.value,
+          (r) => {
             const {
-              PCS_CD: processCode,
-              PCS_GRP_NM: processGroupName,
-              PCS_DTL_CD: processDetailCode,
-              PCS_DTL_NM: processDetailName,
-              VIEW_YN: viewYn,
-              ESN_YN: essentialYn,
-            } = componentProps.detail;
-            emitFn(
+              PCS_CD: a,
+              PCS_GRP_NM: i,
+              PCS_DTL_CD: l,
+              PCS_DTL_NM: c,
+              VIEW_YN: u,
+              ESN_YN: d,
+            } = n.detail;
+            o(
               "update",
-              newValue === "Y"
+              r === "Y"
                 ? [
                     {
-                      PCS_CD: processCode,
-                      PCS_GRP_NM: processGroupName,
-                      VIEW_YN: viewYn,
-                      ESN_YN: essentialYn,
+                      PCS_CD: a,
+                      PCS_GRP_NM: i,
+                      VIEW_YN: u,
+                      ESN_YN: d,
                       selectedOptions: [
                         {
-                          PCS_CD: processCode,
-                          PCS_DTL_CD: processDetailCode,
-                          PCS_DTL_NM: processDetailName,
+                          PCS_CD: a,
+                          PCS_DTL_CD: l,
+                          PCS_DTL_NM: c,
                         },
                       ],
                     },
@@ -1587,7 +3551,7 @@ const CheckmarkIcon = withScopeId(CheckmarkIconDef, [["render", renderCheckmarkI
             immediate: !0,
           }
         ),
-        (instance, cache) => (
+        (r, a) => (
           openBlock(),
           createVNode(
             OptionRow,
@@ -1597,7 +3561,7 @@ const CheckmarkIcon = withScopeId(CheckmarkIconDef, [["render", renderCheckmarkI
             {
               default: withCtx(() => [
                 renderComponent(
-                  RadioList,
+                  RadioGroup,
                   {
                     options: [
                       {
@@ -1613,10 +3577,8 @@ const CheckmarkIcon = withScopeId(CheckmarkIconDef, [["render", renderCheckmarkI
                         value: "Y",
                       },
                     ],
-                    "default-checked": packagingSelection.value,
-                    onChange:
-                      cache[0] ||
-                      (cache[0] = (selectedOpt) => (packagingSelection.value = selectedOpt.value)),
+                    "default-checked": s.value,
+                    onChange: a[0] || (a[0] = (i) => (s.value = i.value)),
                   },
                   null,
                   8,
@@ -1630,12 +3592,11 @@ const CheckmarkIcon = withScopeId(CheckmarkIconDef, [["render", renderCheckmarkI
       );
     },
   }),
-  /* 모듈 내보내기: PAK_POL_Simple */
-  PAK_POL_SimpleModule = Object.freeze(
+  _P = Object.freeze(
     Object.defineProperty(
       {
         __proto__: null,
-        default: PAK_POL_Simple,
+        default: ih,
       },
       Symbol.toStringTag,
       {
@@ -1643,24 +3604,7 @@ const CheckmarkIcon = withScopeId(CheckmarkIconDef, [["render", renderCheckmarkI
       }
     )
   ),
-  /* =========================================================================
-   * 섹션 9: 의류(Apparel) 메인 컴포넌트
-   * 의류 주문의 전체 구성을 관장하는 최상위 컴포넌트.
-   * 인쇄유형 → 컬러 → 사이즈 → 인쇄영역 → 팬톤 → 건명 → 포장 → 업로드 순서 렌더링.
-   * ========================================================================= */
-  /**
-   * 의류 주문 메인 컴포넌트
-   * 의류 주문의 전체 구성을 관장하는 최상위 컴포넌트.
-   * 인쇄유형 → 컬러 → 사이즈 → 인쇄영역 → 팬톤 → 건명 → 포장 → 업로드 순서로 fieldset 렌더링.
-   * @component Apparel
-   * @props {string} type - 주문 유형 ("new"|"reorder"|"edit")
-   * @props {Object} data - 상품 옵션 데이터 (인쇄유형, 사이즈, 컬러 등)
-   * @props {Object} widgetAttr - 위젯 설정 속성 (퀵오더 여부 등)
-   * @props {Object} defaultData - 재주문/수정 시 기존 선택값
-   * @props {Object} senecaInfo - 세네카 연동 정보 (작업사이즈, 템플릿)
-   * @emits {Object} update - 주문 옵션 변경 시 전체 orderData 객체
-   */
-  ApparelModule = Object.freeze(
+  hP = Object.freeze(
     Object.defineProperty(
       {
         __proto__: null,
@@ -1676,417 +3620,340 @@ const CheckmarkIcon = withScopeId(CheckmarkIconDef, [["render", renderCheckmarkI
             senecaInfo: {},
           },
           emits: ["update"],
-          setup(props, { emit: emit }) {
-            const componentProps = props,
-              emitFn = emit,
-              skinInfo = computed(() => componentProps.widgetAttr.skinInfo),
-              memberInfo = inject("member"),
-              /* 인쇄 유형 정보 computed */
-              printTypeInfo = computed(() => orderInfo.value.clothesSelectData?.printType),
-              /* 사이즈 선택 모드: 인쇄 불필요(N)→single, 실크→multi, 기타→single */
-              sizeSelectionMode = computed(() =>
-                printTypeInfo.value?.PRINT_GBN === "N"
+          setup(e, { emit: t }) {
+            const n = e,
+              o = t,
+              s = computed(() => n.widgetAttr.skinInfo),
+              r = inject("member"),
+              a = computed(() => c.value.clothesSelectData?.printType),
+              i = computed(() =>
+                a.value?.PRINT_GBN === "N"
                   ? "single"
-                  : printTypeInfo.value?.COD === "PTP_SLK"
+                  : a.value?.COD === "PTP_SLK"
                   ? "multi"
                   : "single"
               ),
-              { uploadConfig: uploadConfig } = useUploadConfig(componentProps.widgetAttr),
+              { uploadConfig: l } = useUploadConfig(n.widgetAttr),
               {
-                orderInfo: orderInfo,
-                updateOption: updateOption,
-                updatePcsOption: updatePcsOption,
-              } = useOrderComposable(componentProps.type, {
-                group: componentProps.widgetAttr.item_gbn,
+                orderInfo: c,
+                updateOption: u,
+                updatePcsOption: d,
+              } = useOrderComposable(n.type, {
+                group: n.widgetAttr.item_gbn,
                 emits: {
-                  updateOrder: (orderData) => emitFn("update", orderData),
+                  updateOrder: (b) => o("update", b),
                 },
               }),
-              /* 선택된 컬러 코드 */
-              selectedColorCode = computed(() => orderInfo.value.clothesSelectData?.colorInfo?.COD),
-              /* 사이즈 정보 맵 (COD → info) */
-              sizeInfoMap = computed(() =>
-                componentProps.data.apparel_info?.size_info.reduce(
-                  (map, info) => ((map[info.COD] = info), map),
-                  {}
-                )
+              h = computed(() => c.value.clothesSelectData?.colorInfo?.COD),
+              f = computed(() =>
+                n.data.apparel_info?.size_info.reduce((b, C) => ((b[C.COD] = C), b), {})
               ),
-              /* 현재 선택된 컬러에 해당하는 사이즈-컬러 목록 */
-              filteredSizeColorOptions = computed(() => {
-                if (selectedColorCode.value)
-                  return componentProps.data.apparel_info?.size_color_info.filter(
-                    (item) => item.CLR_COD === selectedColorCode.value
-                  );
+              _ = computed(() => {
+                if (h.value)
+                  return n.data.apparel_info?.size_color_info.filter((b) => b.CLR_COD === h.value);
               }),
-              /* 후가공 상태 reactive */
-              postProcessState = reactive({}),
-              /* 사이즈 조합 결과 */
-              sizeCombinations = ref(null),
-              /* 사이즈 조합 → 자재코드 매핑 */
-              sizeMaterialMap = computed(() =>
-                sizeCombinations.value?.reduce(
-                  (map, combo) => ((map[combo.size.MTRL_COD] = combo), map),
-                  {}
-                )
-              );
-            /* 사이즈 조합 변경 감시 — 자재 정보 업데이트 */
+              p = reactive({}),
+              m = ref(null),
+              v = computed(() => m.value?.reduce((b, C) => ((b[C.size.MTRL_COD] = C), b), {}));
             watch(
-              () => sizeCombinations.value,
-              (newCombinations) => {
-                if (!newCombinations) return;
-                updateOption("sizeInfo", !0)(newCombinations);
-                const matchedMaterials = componentProps.data.pdt_mtrl_info.filter(
-                  (mtrl) => mtrl.MTRL_CD === newCombinations[0]?.size.MTRL_COD
-                );
-                if (matchedMaterials.length > 0) {
+              () => m.value,
+              (b) => {
+                if (!b) return;
+                u("sizeInfo", !0)(b);
+                const C = n.data.pdt_mtrl_info.filter((y) => y.MTRL_CD === b[0]?.size.MTRL_COD);
+                if (C.length > 0) {
                   const {
-                    PTT_CD: paperTypeCode,
-                    PTT_NM: paperTypeName,
-                    WGT_CD: weightCode,
-                    CLR_CD: colorCode,
-                    MTRL_CD: materialCode,
-                    MTRL_NM: materialName,
-                    MTRL_TYPE: materialType,
-                    PRT_HIDE_YN: printHideYn,
-                  } = matchedMaterials[0];
-                  updateOption("meterialInfo")({
-                    PTT_CD: paperTypeCode,
-                    PTT_NM: paperTypeName,
-                    WGT_CD: weightCode,
-                    CLR_CD: colorCode,
-                    MTRL_CD: materialCode,
-                    MTRL_NM: materialName,
-                    MTRL_TYPE: materialType,
-                    PRT_HIDE_YN: printHideYn,
+                    PTT_CD: y,
+                    PTT_NM: I,
+                    WGT_CD: w,
+                    CLR_CD: U,
+                    MTRL_CD: Z,
+                    MTRL_NM: me,
+                    MTRL_TYPE: _e,
+                    PRT_HIDE_YN: B,
+                  } = C[0];
+                  u("meterialInfo")({
+                    PTT_CD: y,
+                    PTT_NM: I,
+                    WGT_CD: w,
+                    CLR_CD: U,
+                    MTRL_CD: Z,
+                    MTRL_NM: me,
+                    MTRL_TYPE: _e,
+                    PRT_HIDE_YN: B,
                   });
                 }
               }
-            ) /* 자재 맵 변경 감시 — DIR_MTR 후가공 자동 구성 */,
+            ),
               watch(
-                () => sizeMaterialMap.value,
-                (materialMap) => {
-                  if (!materialMap) return;
-                  const dirMtrOptions = componentProps.data.pdt_pcs_info
-                    .filter(
-                      (pcsInfo) =>
-                        pcsInfo.PCS_CD === "DIR_MTR" &&
-                        pcsInfo.MTRL_CD &&
-                        materialMap[pcsInfo.MTRL_CD]
-                    )
-                    .map((pcsInfo) => {
+                () => v.value,
+                (b) => {
+                  if (!b) return;
+                  const C = n.data.pdt_pcs_info
+                    .filter((y) => y.PCS_CD === "DIR_MTR" && y.MTRL_CD && b[y.MTRL_CD])
+                    .map((y) => {
                       const {
-                          PCS_CD: processCode,
-                          PCS_DTL_CD: detailCode,
-                          PCS_DTL_NM: detailName,
-                          VIEW_YN: viewYn,
-                          MTRL_CD: mtrlCode,
-                          ESN_YN: essentialYn,
-                          DIV_SEQ: divSeq,
-                        } = pcsInfo,
-                        selectedOptions = [
+                          PCS_CD: I,
+                          PCS_DTL_CD: w,
+                          PCS_DTL_NM: U,
+                          VIEW_YN: Z,
+                          MTRL_CD: me,
+                          ESN_YN: _e,
+                          DIV_SEQ: B,
+                        } = y,
+                        W = [
                           {
-                            PCS_CD: processCode,
-                            PCS_DTL_CD: detailCode,
-                            PCS_DTL_NM: detailName,
-                            ATTB: materialMap[mtrlCode || ""].quantity,
+                            PCS_CD: I,
+                            PCS_DTL_CD: w,
+                            PCS_DTL_NM: U,
+                            ATTB: b[me || ""].quantity,
                           },
                         ];
                       return {
-                        PCS_CD: processCode,
-                        VIEW_YN: viewYn,
-                        ESN_YN: essentialYn,
-                        DIV_SEQ: divSeq,
+                        PCS_CD: I,
+                        VIEW_YN: Z,
+                        ESN_YN: _e,
+                        DIV_SEQ: B,
                         active: !1,
-                        selectedOptions: selectedOptions,
+                        selectedOptions: W,
                       };
                     });
-                  postProcessState.DIR_MTR = dirMtrOptions;
+                  p.DIR_MTR = C;
                 }
               );
-            const /* 인쇄영역 선택 결과 */
-              printAreaSelection = ref(null),
-              /* PDT_WRK 후가공 맵 (인쇄영역별) */
-              pdtWrkMap = computed(() =>
-                componentProps.data.pdt_pcs_info.reduce(
-                  (map, pcsInfo) => (
-                    pcsInfo.PCS_CD === "PDT_WRK" && (map[pcsInfo.PCS_DTL_CD] = pcsInfo), map
-                  ),
+            const E = ref(null),
+              k = computed(() =>
+                n.data.pdt_pcs_info.reduce(
+                  (b, C) => (C.PCS_CD === "PDT_WRK" && (b[C.PCS_DTL_CD] = C), b),
                   {}
                 )
               );
-            /* 인쇄영역 변경 감시 — PDT_WRK 후가공 구성 */
             watch(
-              () => printAreaSelection.value,
-              (selectedAreas) => {
-                updateOption("PrintAreaInfo", !0)(selectedAreas);
-                const pdtWrkOptions = selectedAreas
-                  ? selectedAreas?.map((area) => {
-                      const wrkInfo = pdtWrkMap.value[area.COD],
-                        {
-                          PCS_CD: processCode,
-                          PCS_DTL_CD: detailCode,
-                          PCS_DTL_NM: detailName,
-                          VIEW_YN: viewYn,
-                          ESN_YN: essentialYn,
-                        } = wrkInfo,
-                        selectedOptions = [
+              () => E.value,
+              (b) => {
+                u("PrintAreaInfo", !0)(b);
+                const C = b
+                  ? b?.map((y) => {
+                      const I = k.value[y.COD],
+                        { PCS_CD: w, PCS_DTL_CD: U, PCS_DTL_NM: Z, VIEW_YN: me, ESN_YN: _e } = I,
+                        B = [
                           {
-                            PCS_CD: processCode,
-                            PCS_DTL_CD: detailCode,
-                            PCS_DTL_NM: detailName,
-                            KOI_NME: area.KOI_NME,
+                            PCS_CD: w,
+                            PCS_DTL_CD: U,
+                            PCS_DTL_NM: Z,
+                            KOI_NME: y.KOI_NME,
                           },
                         ];
                       return {
-                        PCS_CD: processCode,
-                        VIEW_YN: viewYn,
-                        ESN_YN: essentialYn,
+                        PCS_CD: w,
+                        VIEW_YN: me,
+                        ESN_YN: _e,
                         active: !0,
-                        selectedOptions: selectedOptions,
+                        selectedOptions: B,
                       };
                     })
                   : [];
-                postProcessState.PDT_WRK = pdtWrkOptions;
+                p.PDT_WRK = C;
               }
             );
-            const /* PAK_POL (개별포장) 후가공 정보 */
-              pakPolInfo = computed(() =>
-                componentProps.data.pdt_pcs_info.find((info) => info.PCS_CD === "PAK_POL")
-              );
-            /* 후가공 상태 변경 시 통합 POST_PCS 업데이트 */
+            const N = computed(() => n.data.pdt_pcs_info.find((b) => b.PCS_CD === "PAK_POL"));
             watch(
-              () => postProcessState,
-              (newState) => {
-                updatePcsOption("POST_PCS")(Object.values(newState).flatMap((options) => options));
+              () => p,
+              (b) => {
+                d("POST_PCS")(Object.values(b).flatMap((C) => C));
               },
               {
                 deep: !0,
               }
-            ) /* 규격 정보 초기 설정 */,
+            ),
               watch(
-                () => componentProps.data.pdt_size_info,
-                (sizeInfo) => {
-                  if (!sizeInfo || !sizeInfo[0]) return;
-                  const sizeData = {
-                    DIV_NM: sizeInfo[0].DIV_NM || "",
-                    DIV_SEQ: sizeInfo[0].DIV_SEQ,
+                () => n.data.pdt_size_info,
+                (b) => {
+                  if (!b || !b[0]) return;
+                  const C = {
+                    DIV_NM: b[0].DIV_NM || "",
+                    DIV_SEQ: b[0].DIV_SEQ,
                     DivInfo: {},
                     cutSize: {
-                      width: +sizeInfo[0].CUT_WDT,
-                      height: +sizeInfo[0].CUT_HGH,
+                      width: +b[0].CUT_WDT,
+                      height: +b[0].CUT_HGH,
                     },
                     workSize: {
-                      width: +sizeInfo[0].WRK_WDT,
-                      height: +sizeInfo[0].WRK_HGH,
+                      width: +b[0].WRK_WDT,
+                      height: +b[0].WRK_HGH,
                     },
                   };
-                  updateOption("sizeInfo")(sizeData);
+                  u("sizeInfo")(C);
                 },
                 {
                   immediate: !0,
                   once: !0,
                 }
               );
-            const apparelCallbacks = inject("callbacks", {}),
-              apparelEditorStore = useExteriorStore(),
-              /* 파일 업로드 리셋 핸들러 */
-              handleFileUploadReset = () => {
-                apparelCallbacks?.onReset && apparelCallbacks.onReset("fileUpload");
+            const D = inject("callbacks", {}),
+              O = useEditorStore(),
+              A = () => {
+                D?.onReset && D.onReset("fileUpload");
               };
-            /* 인쇄유형 변경 감시 — 인쇄 불필요 시 업로드 초기화 */
             return (
               watch(
-                () => printTypeInfo.value,
-                (typeInfo) => {
-                  typeInfo.PRINT_GBN === "N" &&
-                    (orderInfo.value.fileUploadInfo &&
-                      orderInfo.value.fileUploadInfo[0] &&
-                      (updateOption("fileUploadInfo")([null]), handleFileUploadReset()),
-                    apparelEditorStore.editorData.default && handleFileUploadReset());
+                () => a.value,
+                (b) => {
+                  b.PRINT_GBN === "N" &&
+                    (c.value.fileUploadInfo &&
+                      c.value.fileUploadInfo[0] &&
+                      (u("fileUploadInfo")([null]), A()),
+                    O.editorData.default && A());
                 }
-              ) /* 의류 메인 렌더 — 조건부로 하위 컴포넌트 렌더링 */,
-              (instance, cache) => (
+              ),
+              (b, C) => (
                 openBlock(),
                 createElementVNode(
                   Fragment,
                   null,
                   [
-                    instance.data.apparel_info?.print_type
+                    b.data.apparel_info?.print_type
                       ? (openBlock(),
                         createVNode(
-                          ApparelPrintType,
+                          JS,
                           {
                             key: 0,
-                            options: instance.data.apparel_info?.print_type,
-                            "dosu-options": instance.data.pdt_dosu_info,
+                            options: b.data.apparel_info?.print_type,
+                            "dosu-options": b.data.pdt_dosu_info,
                             "related-data": {
-                              color: selectedColorCode.value,
+                              color: h.value,
                             },
-                            "onUpdate:type":
-                              cache[0] ||
-                              (cache[0] = (typeData) =>
-                                unref(updateOption)("printType", !0)(typeData)),
-                            "onUpdate:dosu":
-                              cache[1] ||
-                              (cache[1] = (dosuData) => unref(updateOption)("dosuInfo")(dosuData)),
+                            "onUpdate:type": C[0] || (C[0] = (y) => unref(u)("printType", !0)(y)),
+                            "onUpdate:dosu": C[1] || (C[1] = (y) => unref(u)("dosuInfo")(y)),
                           },
                           null,
                           8,
                           ["options", "dosu-options", "related-data"]
                         ))
                       : createCommentVNode("", !0),
-                    instance.data.apparel_info?.apparel_color
+                    b.data.apparel_info?.apparel_color
                       ? (openBlock(),
                         createVNode(
-                          ApparelColorSelector,
+                          uD,
                           {
                             key: 1,
-                            options: instance.data.apparel_info.apparel_color,
-                            onUpdate:
-                              cache[2] ||
-                              (cache[2] = (colorData) =>
-                                unref(updateOption)("colorInfo", !0)(colorData)),
+                            options: b.data.apparel_info.apparel_color,
+                            onUpdate: C[2] || (C[2] = (y) => unref(u)("colorInfo", !0)(y)),
                           },
                           null,
                           8,
                           ["options"]
                         ))
                       : createCommentVNode("", !0),
-                    filteredSizeColorOptions.value &&
-                    sizeSelectionMode.value === "single" &&
-                    sizeInfoMap.value
+                    _.value && i.value === "single" && f.value
                       ? (openBlock(),
                         createVNode(
-                          ApparelSingleSizeQty,
+                          bD,
                           {
                             key: 2,
-                            options: filteredSizeColorOptions.value,
-                            "size-info": sizeInfoMap.value,
-                            "onUpdate:qty":
-                              cache[3] ||
-                              (cache[3] = (qtyData) =>
-                                unref(updateOption)("quantityInfo")(qtyData)),
-                            "onUpdate:combinations":
-                              cache[4] ||
-                              (cache[4] = (combos) => (sizeCombinations.value = combos)),
+                            options: _.value,
+                            "size-info": f.value,
+                            "onUpdate:qty": C[3] || (C[3] = (y) => unref(u)("quantityInfo")(y)),
+                            "onUpdate:combinations": C[4] || (C[4] = (y) => (m.value = y)),
                           },
                           null,
                           8,
                           ["options", "size-info"]
                         ))
                       : createCommentVNode("", !0),
-                    filteredSizeColorOptions.value &&
-                    sizeSelectionMode.value === "multi" &&
-                    sizeInfoMap.value
+                    _.value && i.value === "multi" && f.value
                       ? (openBlock(),
                         createVNode(
-                          ApparelMultiSizeQty,
+                          AD,
                           {
                             key: 3,
-                            options: filteredSizeColorOptions.value,
-                            "size-info": sizeInfoMap.value,
-                            "onUpdate:qty":
-                              cache[5] ||
-                              (cache[5] = (qtyData) =>
-                                unref(updateOption)("quantityInfo")(qtyData)),
-                            "onUpdate:combinations":
-                              cache[6] ||
-                              (cache[6] = (combos) => (sizeCombinations.value = combos)),
+                            options: _.value,
+                            "size-info": f.value,
+                            "onUpdate:qty": C[5] || (C[5] = (y) => unref(u)("quantityInfo")(y)),
+                            "onUpdate:combinations": C[6] || (C[6] = (y) => (m.value = y)),
                           },
                           null,
                           8,
                           ["options", "size-info"]
                         ))
                       : createCommentVNode("", !0),
-                    instance.data.apparel_info?.print_area
+                    b.data.apparel_info?.print_area
                       ? (openBlock(),
                         createVNode(
-                          ApparelPrintArea,
+                          hD,
                           {
                             key: 4,
-                            options: instance.data.apparel_info.print_area,
+                            options: b.data.apparel_info.print_area,
                             "related-data": {
-                              printType: printTypeInfo.value,
+                              printType: a.value,
                             },
-                            onUpdate:
-                              cache[7] ||
-                              (cache[7] = (areaData) => (printAreaSelection.value = areaData)),
+                            onUpdate: C[7] || (C[7] = (y) => (E.value = y)),
                           },
                           null,
                           8,
                           ["options", "related-data"]
                         ))
                       : createCommentVNode("", !0),
-                    instance.data.apparel_info?.pantone_color &&
-                    unref(orderInfo).clothesSelectData?.printType?.COD === "PTP_SLK"
+                    b.data.apparel_info?.pantone_color &&
+                    unref(c).clothesSelectData?.printType?.COD === "PTP_SLK"
                       ? (openBlock(),
                         createVNode(
-                          ApparelPrintColor,
+                          pP,
                           {
                             key: 5,
-                            options: instance.data.apparel_info.pantone_color,
-                            onUpdate:
-                              cache[8] ||
-                              (cache[8] = (pantoneData) =>
-                                unref(updateOption)("pantoneInfo", !0)(pantoneData)),
+                            options: b.data.apparel_info.pantone_color,
+                            onUpdate: C[8] || (C[8] = (y) => unref(u)("pantoneInfo", !0)(y)),
                           },
                           null,
                           8,
                           ["options"]
                         ))
                       : createCommentVNode("", !0),
-                    skinInfo.value.subjectGroup.view_yn === "Y"
+                    s.value.subjectGroup.view_yn === "Y"
                       ? (openBlock(),
                         createVNode(
                           SubjectGroup,
                           {
                             key: 6,
-                            "is-biz-mem": unref(memberInfo)?.bsn_yn === "Y",
-                            onUpdate:
-                              cache[9] ||
-                              (cache[9] = (etcData) => unref(updateOption)("etcInfo")(etcData)),
+                            "is-biz-mem": unref(r)?.bsn_yn === "Y",
+                            onUpdate: C[9] || (C[9] = (y) => unref(u)("etcInfo")(y)),
                           },
                           null,
                           8,
                           ["is-biz-mem"]
                         ))
                       : createCommentVNode("", !0),
-                    pakPolInfo.value
+                    N.value
                       ? (openBlock(),
                         createVNode(
-                          PAK_POL_Simple,
+                          ih,
                           {
                             key: 7,
-                            detail: pakPolInfo.value,
-                            onUpdate:
-                              cache[10] ||
-                              (cache[10] = (pakData) => (postProcessState.PAK_POL = pakData)),
+                            detail: N.value,
+                            onUpdate: C[10] || (C[10] = (y) => (p.PAK_POL = y)),
                           },
                           null,
                           8,
                           ["detail"]
                         ))
                       : createCommentVNode("", !0),
-                    printTypeInfo.value?.PRINT_GBN === "Y" && instance.widgetAttr.order_yn !== "N"
+                    a.value?.PRINT_GBN === "Y" && b.widgetAttr.order_yn !== "N"
                       ? (openBlock(),
                         createVNode(
                           FileUpload,
                           {
                             key: 8,
-                            "upload-config": unref(uploadConfig),
+                            "upload-config": unref(l),
                             "show-extra":
-                              instance.widgetAttr.useTemplateDownload === "Y" &&
-                              instance.widgetAttr.usePDF === "Y",
+                              b.widgetAttr.useTemplateDownload === "Y" &&
+                              b.widgetAttr.usePDF === "Y",
                             "related-data": {
                               apparel: {
-                                printType: printTypeInfo.value?.COD,
-                                pantone: unref(orderInfo).clothesSelectData.pantoneInfo?.hex_cod,
+                                printType: a.value?.COD,
+                                pantone: unref(c).clothesSelectData.pantoneInfo?.hex_cod,
                               },
                             },
-                            onUpload:
-                              cache[11] ||
-                              (cache[11] = (uploadData) =>
-                                unref(updateOption)("fileUploadInfo")(uploadData)),
+                            onUpload: C[11] || (C[11] = (y) => unref(u)("fileUploadInfo")(y)),
                           },
                           null,
                           8,
@@ -2105,199 +3972,3077 @@ const CheckmarkIcon = withScopeId(CheckmarkIconDef, [["render", renderCheckmarkI
       {
         value: "Module",
       }
-    ),
-    /* =========================================================================
-     * 섹션 10: 책자(Book) — 수량 컴포넌트
-     * 책자 주문의 부수(ordCnt) 또는 내지장수(prnCnt)를 입력하는 UI.
-     * 셀렉트/직접입력 토글, 최소수량 안내, 짝수 단위 보정 포함.
-     * ========================================================================= */
-    (bookQtyFlexRowClass = {
-      class: "flex-row -center",
+    )
+  ),
+  mP = {
+    class: "flex-row -center",
+  },
+  vP = ["id"],
+  gP = ["name"],
+  yP = ["value"],
+  CP = {
+    key: 0,
+    class: "notes",
+  },
+  TP = {
+    key: 0,
+    class: "note",
+  },
+  bP = {
+    key: 1,
+    class: "note",
+  },
+  SP = {
+    key: 1,
+    class: "notes",
+  },
+  DP = {
+    class: "note",
+  },
+  PP = {
+    class: "note",
+  },
+  BookQty = withScopeId(
+    defineComponent({
+      __name: "BookQty",
+      props: {
+        type: {},
+        options: {},
+        relatedData: {},
+      },
+      emits: ["update"],
+      setup(e, { emit: t }) {
+        const n = e,
+          o = t,
+          s = inject("productCode", {
+            pdtCode: "",
+          }),
+          r = computed(() => s.pdtCode[4] === "O"),
+          a = computed(() => n.options[0]),
+          i = computed(() => (n.type === "default" ? a.value.INC_CNT : a.value.STEP_INN_PAGE)),
+          l = computed(() => n.type === "default" && a.value.FIR_CNT === 2),
+          c = computed(() => (n.type === "default" ? a.value.MIN_PRN_CNT : a.value.MIN_INN_PAGE)),
+          u = computed(() => (n.type === "default" ? null : a.value.MAX_INN_PAGE)),
+          d = ref(c.value),
+          h = computed(() => !!(c.value > d.value || (u.value && u.value < d.value)));
+        watch(
+          () => d.value,
+          (E) => {
+            h.value || o("update", n.type, E);
+          },
+          {
+            immediate: !0,
+          }
+        );
+        const f = computed(() => {
+            const E = n.relatedData?.dosu === "SID_D" ? 2 : 1;
+            return (d.value * E).toLocaleString();
+          }),
+          _ = () => {
+            if (c.value > d.value) return (d.value = c.value);
+            if (u.value && u.value < d.value) return (d.value = u.value);
+            if (n.type === "default" && l.value) {
+              const E = d.value % 2;
+              if (E > 0) return (d.value = d.value + E);
+            }
+            if (n.type === "inner" && i.value === 2) {
+              const E = d.value % 2;
+              if (E > 0) return (d.value = d.value + E);
+            }
+          },
+          p = computed(() => {
+            const E = [],
+              k = i.value > c.value ? i.value : c.value,
+              N = i.value > c.value ? 10 : 9,
+              D = u.value ?? i.value * N + c.value;
+            for (let O = k; O <= D; O += i.value)
+              O === i.value &&
+                i.value > c.value &&
+                E.push({
+                  value: c.value,
+                }),
+                E.push({
+                  value: O,
+                });
+            return E;
+          }),
+          m = ref("select"),
+          v = () => {
+            m.value = m.value === "input" ? "select" : "input";
+          };
+        return (E, k) => {
+          const N = resolveDirective("dompurify-html");
+          return (
+            openBlock(),
+            createVNode(
+              OptionRow,
+              {
+                title: E.type === "default" ? unref(t)("수량") : unref(t)("내지장수"),
+              },
+              {
+                default: withCtx(() => [
+                  createElement("div", mP, [
+                    m.value === "input"
+                      ? withDirectives(
+                          (openBlock(),
+                          createElementVNode(
+                            "input",
+                            {
+                              key: 0,
+                              "onUpdate:modelValue": k[0] || (k[0] = (D) => (d.value = D)),
+                              type: "number",
+                              class: normalizeClass(["basic-input", "-fixed-w"]),
+                              id: E.type === "default" ? "QTY" : "INNER_QTY",
+                              onFocusout: _,
+                            },
+                            null,
+                            40,
+                            vP
+                          )),
+                          [[vModelText, d.value]]
+                        )
+                      : withDirectives(
+                          (openBlock(),
+                          createElementVNode(
+                            "select",
+                            {
+                              key: 1,
+                              "onUpdate:modelValue": k[1] || (k[1] = (D) => (d.value = D)),
+                              name: E.type === "default" ? "QTY" : "INNER_QTY",
+                              class: "basic-select -fixed-w",
+                            },
+                            [
+                              (openBlock(!0),
+                              createElementVNode(
+                                Fragment,
+                                null,
+                                renderList(
+                                  p.value,
+                                  (D) => (
+                                    openBlock(),
+                                    createElementVNode(
+                                      "option",
+                                      {
+                                        value: D.value,
+                                        key: D.value,
+                                      },
+                                      toDisplayString(D.value),
+                                      9,
+                                      yP
+                                    )
+                                  )
+                                ),
+                                128
+                              )),
+                            ],
+                            8,
+                            gP
+                          )),
+                          [[vModelSelect, d.value]]
+                        ),
+                    createElement(
+                      "button",
+                      {
+                        type: "button",
+                        class: "action-btn",
+                        onClick: v,
+                      },
+                      toDisplayString(
+                        m.value === "input" ? unref(t)("수량선택") : unref(t)("직접입력")
+                      ),
+                      1
+                    ),
+                  ]),
+                  E.type === "default"
+                    ? (openBlock(),
+                      createElementVNode("div", CP, [
+                        r.value
+                          ? withDirectives((openBlock(), createElementVNode("p", bP, null, 512)), [
+                              [
+                                N,
+                                unref(t)(
+                                  l.value ? "토너책자최소수량안내-짝수" : "토너책자최소수량안내"
+                                ).replace("{MIN_CNT}", `${c.value}`),
+                              ],
+                            ])
+                          : withDirectives((openBlock(), createElementVNode("p", TP, null, 512)), [
+                              [
+                                N,
+                                unref(t)("윤전책자최소수량안내").replace("{MIN_CNT}", `${c.value}`),
+                              ],
+                            ]),
+                      ]))
+                    : (openBlock(),
+                      createElementVNode("div", SP, [
+                        withDirectives(createElement("p", DP, null, 512), [
+                          [N, unref(t)("내지장수안내").replace("{QTY}", `${f.value}`)],
+                        ]),
+                        withDirectives(createElement("p", PP, null, 512), [
+                          [N, unref(t)("내지최대장수안내").replace("{MAX_CNT}", `${u.value}`)],
+                        ]),
+                      ])),
+                ]),
+                _: 1,
+              },
+              8,
+              ["title"]
+            )
+          );
+        };
+      },
     }),
-    (bookQtyInputIdAttrs = ["id"]),
-    (bookQtySelectNameAttrs = ["name"]),
-    (bookQtyOptionValueAttrs = ["value"]),
-    (bookQtyDefaultNotesClass = {
-      key: 0,
-      class: "notes",
-    }),
-    (bookQtyDefaultNoteClass = {
-      key: 0,
-      class: "note",
-    }),
-    (bookQtyTonerNoteClass = {
-      key: 1,
-      class: "note",
-    }),
-    (bookQtyInnerNotesClass = {
-      key: 1,
-      class: "notes",
-    }),
-    (bookQtyInnerNoteClass = {
-      class: "note",
-    }),
-    (bookQtyMaxNoteClass = {
-      class: "note",
-    }),
-    /**
-     * 책자 수량 (내지장수 포함) 입력 컴포넌트
-     * 책자 수량과 내지 장수를 입력하는 UI. 페이지 배수 제약, 최대수량 제한 표시 포함.
-     * @component BookQty
-     * @props {string} type - 주문 유형
-     * @props {Array} options - 수량 옵션 (페이지 배수, 최소/최대 등)
-     * @props {Object} relatedData - 관련 데이터 (용지, 제본방식에 따른 페이지 배수)
-     * @emits {Object} update - {qty, innerPages} 수량+내지장수 객체
-     */
-    (BookQty = withScopeId(
-      defineComponent({
-        __name: "BookQty",
-        props: {
-          type: {},
-          options: {},
-          relatedData: {},
-        },
-        emits: ["update"],
-        setup(props, { emit: emit }) {
-          const componentProps = props,
-            emitFn = emit,
-            productCode = inject("productCode", {
-              pdtCode: "",
-            }),
-            /* 토너 책자 여부 (상품코드 5번째 문자가 'O') */
-            isTonerBooklet = computed(() => productCode.pdtCode[4] === "O"),
-            firstOption = computed(() => componentProps.options[0]),
-            /* 증감 단위 */
-            incrementStep = computed(() =>
-              componentProps.type === "default"
-                ? firstOption.value.INC_CNT
-                : firstOption.value.STEP_INN_PAGE
-            ),
-            /* 짝수 단위 필수 여부 */
-            requiresEvenCount = computed(
-              () => componentProps.type === "default" && firstOption.value.FIR_CNT === 2
-            ),
-            /* 최소 수량 */
-            minQuantity = computed(() =>
-              componentProps.type === "default"
-                ? firstOption.value.MIN_PRN_CNT
-                : firstOption.value.MIN_INN_PAGE
-            ),
-            /* 최대 수량 (내지에만 적용) */
-            maxQuantity = computed(() =>
-              componentProps.type === "default" ? null : firstOption.value.MAX_INN_PAGE
-            ),
-            currentQuantity = ref(minQuantity.value),
-            /* 유효성 오류 여부 */
-            hasValidationError = computed(
-              () =>
-                !!(
-                  minQuantity.value > currentQuantity.value ||
-                  (maxQuantity.value && maxQuantity.value < currentQuantity.value)
-                )
-            );
-          /* 수량 변경 시 유효하면 부모에 전달 */
-          watch(
-            () => currentQuantity.value,
-            (newQty) => {
-              hasValidationError.value || emitFn("update", componentProps.type, newQty);
+    [["__scopeId", "data-v-106e3545"]]
+  ),
+  EP = Object.freeze(
+    Object.defineProperty(
+      {
+        __proto__: null,
+        default: BookQty,
+      },
+      Symbol.toStringTag,
+      {
+        value: "Module",
+      }
+    )
+  ),
+  OP = {
+    class: "flex-row",
+  },
+  IP = ["value"],
+  RP = ["value"],
+  ah = defineComponent({
+    __name: "DosuColor",
+    props: {
+      options: {},
+    },
+    emits: ["update"],
+    setup(e, { emit: t }) {
+      const n = e,
+        o = t,
+        s = inject("callbacks", {}),
+        r = useEditorStore(),
+        a = computed(() => n.options.all.length > n.options.dosu.length),
+        i = ref(n.options.dosu[0].COD),
+        l = ref(n.options.color[0].COD),
+        c = computed(() => n.options.all.find((d) => d.BNC_GB === l.value && d.COD === i.value)),
+        u = () => {
+          s?.onReset && s.onReset("dosu");
+        };
+      return (
+        watch(
+          () => c.value,
+          (d) => {
+            d && (r.isAfterEdit() && u(), o("update", d));
+          },
+          {
+            immediate: !0,
+          }
+        ),
+        (d, h) => (
+          openBlock(),
+          createVNode(
+            OptionRow,
+            {
+              title: "인쇄도수",
             },
             {
-              immediate: !0,
+              default: withCtx(() => [
+                createElement("div", OP, [
+                  withDirectives(
+                    createElement(
+                      "select",
+                      {
+                        "onUpdate:modelValue": h[0] || (h[0] = (f) => (i.value = f)),
+                        name: "dosu",
+                        class: "basic-select",
+                      },
+                      [
+                        (openBlock(!0),
+                        createElementVNode(
+                          Fragment,
+                          null,
+                          renderList(
+                            d.options.dosu,
+                            (f) => (
+                              openBlock(),
+                              createElementVNode(
+                                "option",
+                                {
+                                  key: f.COD,
+                                  value: f.COD,
+                                },
+                                toDisplayString(f.COD_NME),
+                                9,
+                                IP
+                              )
+                            )
+                          ),
+                          128
+                        )),
+                      ],
+                      512
+                    ),
+                    [[vModelSelect, i.value]]
+                  ),
+                  a.value
+                    ? withDirectives(
+                        (openBlock(),
+                        createElementVNode(
+                          "select",
+                          {
+                            key: 0,
+                            "onUpdate:modelValue": h[1] || (h[1] = (f) => (l.value = f)),
+                            name: "dosu-color",
+                            class: "basic-select",
+                          },
+                          [
+                            (openBlock(!0),
+                            createElementVNode(
+                              Fragment,
+                              null,
+                              renderList(
+                                d.options.color,
+                                (f) => (
+                                  openBlock(),
+                                  createElementVNode(
+                                    "option",
+                                    {
+                                      key: f.COD,
+                                      value: f.COD,
+                                    },
+                                    toDisplayString(f.COD_NME),
+                                    9,
+                                    RP
+                                  )
+                                )
+                              ),
+                              128
+                            )),
+                          ],
+                          512
+                        )),
+                        [[vModelSelect, l.value]]
+                      )
+                    : createCommentVNode("", !0),
+                ]),
+              ]),
+              _: 1,
             }
+          )
+        )
+      );
+    },
+  }),
+  wP = {
+    class: "flex-row",
+  },
+  AP = ["value", "disabled"],
+  NP = ["value", "disabled"],
+  Paper = defineComponent({
+    __name: "Paper",
+    props: {
+      options: {},
+      showExtra: {
+        type: Boolean,
+        default: !1,
+      },
+      default: {},
+      resetAfterEdit: {
+        type: Boolean,
+      },
+    },
+    emits: ["update"],
+    setup(e, { emit: t }) {
+      const n = e,
+        o = t,
+        s = inject("callbacks", {}),
+        r = inject("productCode", {
+          pdtCode: "",
+        }),
+        a = useI18n(),
+        i = computed(() => {
+          const p = [];
+          return p.length > 0 ? p : n.options;
+        }),
+        l = computed(() => i.value.filter((p) => p.HIDE_YN !== "Y")),
+        c = computed(() => {
+          const p = new Map();
+          return (
+            i.value.forEach((m) => {
+              const {
+                  WGT_CD: v,
+                  MTRL_CD: E,
+                  PTT_CD: k,
+                  PTT_NM: N,
+                  BSN_YN: D,
+                  HIDE_YN: O,
+                  HIDE_RSN: A,
+                } = m,
+                b = p.get(k),
+                C = {
+                  WGT_CD: v,
+                  MTRL_CD: E,
+                  HIDE_YN: O,
+                  HIDE_RSN: A,
+                };
+              if (b) b.weights.push(C);
+              else {
+                const y = {
+                  PTT_CD: k,
+                  PTT_NM: N,
+                  BSN_YN: D,
+                  weights: [C],
+                };
+                p.set(k, y);
+              }
+            }),
+            p
           );
-          const /* 양면 인쇄 시 실제 페이지 수 계산 */
-            actualPageCount = computed(() => {
-              const multiplier = componentProps.relatedData?.dosu === "SID_D" ? 2 : 1;
-              return (currentQuantity.value * multiplier).toLocaleString();
-            }),
-            /* 포커스아웃 시 유효성 보정 */
-            handleFocusOut = () => {
-              if (minQuantity.value > currentQuantity.value)
-                return (currentQuantity.value = minQuantity.value);
-              if (maxQuantity.value && maxQuantity.value < currentQuantity.value)
-                return (currentQuantity.value = maxQuantity.value);
-              if (componentProps.type === "default" && requiresEvenCount.value) {
-                const remainder = currentQuantity.value % 2;
-                if (remainder > 0)
-                  return (currentQuantity.value = currentQuantity.value + remainder);
-              }
-              if (componentProps.type === "inner" && incrementStep.value === 2) {
-                const remainder = currentQuantity.value % 2;
-                if (remainder > 0)
-                  return (currentQuantity.value = currentQuantity.value + remainder);
-              }
+        }),
+        u = async () => {
+          const p = await fetchMaterialInfo({
+            pdt_cod: r.pdtCode,
+            lang: a.locale,
+          });
+          if (!p) return console.error("[RedWidgetSDK/ERROR] 자재 정보가 없습니다.");
+          s?.onInformMaterials
+            ? s.onInformMaterials(p)
+            : console.log("[RedWidgetSDK] 용지 정보 >", p);
+        },
+        d = () => {
+          n.resetAfterEdit && s?.onReset && s.onReset("mtrl");
+        },
+        h = (p) => p.every((m) => m.HIDE_YN === "Y"),
+        f = ref(n.default?.PTT_CD || l.value[0]?.PTT_CD),
+        _ = ref(n.default?.MTRL_CD || l.value[0]?.MTRL_CD);
+      return (
+        watch(
+          () => f.value,
+          (p) => {
+            const m = c.value.get(p);
+            if (m) {
+              const v = m.weights.find((E) => E.HIDE_YN !== "Y");
+              v && (_.value = v.MTRL_CD);
+            }
+            p === "OOO" && s?.onSaleOrder && s?.onSaleOrder();
+          },
+          {
+            immediate: !0,
+          }
+        ),
+        watch(
+          () => _.value,
+          (p) => {
+            const m = l.value.find((v) => v.MTRL_CD === p);
+            if (m) {
+              const {
+                PTT_CD: v,
+                PTT_NM: E,
+                WGT_CD: k,
+                CLR_CD: N,
+                MTRL_CD: D,
+                MTRL_NM: O,
+                MTRL_TYPE: A,
+                PRT_HIDE_YN: b,
+                SID_GBN: C,
+              } = m;
+              o("update", {
+                PTT_CD: v,
+                PTT_NM: E,
+                WGT_CD: k,
+                CLR_CD: N,
+                MTRL_CD: D,
+                MTRL_NM: O,
+                MTRL_TYPE: A,
+                PRT_HIDE_YN: b,
+                SID_GBN: C,
+              });
+            }
+          },
+          {
+            immediate: !0,
+          }
+        ),
+        (p, m) => (
+          openBlock(),
+          createVNode(
+            OptionRow,
+            {
+              title: "용지",
+              extra: p.showExtra
+                ? {
+                    name: "주문가능자재",
+                    callback: u,
+                  }
+                : null,
             },
-            /* 셀렉트 드롭다운 옵션 생성 */
-            selectOptions = computed(() => {
-              const options = [],
-                startValue =
-                  incrementStep.value > minQuantity.value ? incrementStep.value : minQuantity.value,
-                maxSteps = incrementStep.value > minQuantity.value ? 10 : 9,
-                maxValue = maxQuantity.value ?? incrementStep.value * maxSteps + minQuantity.value;
-              for (let qty = startValue; qty <= maxValue; qty += incrementStep.value)
-                qty === incrementStep.value &&
-                  incrementStep.value > minQuantity.value &&
-                  options.push({
-                    value: minQuantity.value,
-                  }),
-                  options.push({
-                    value: qty,
-                  });
-              return options;
-            }),
-            /* 수량 입력 모드: select / input */
-            qtyInputMode = ref("select"),
-            toggleQtyInputMode = () => {
-              qtyInputMode.value = qtyInputMode.value === "input" ? "select" : "input";
-            };
-          /* 렌더 함수 */
-          return (instance, cache) => {
-            const domPurifyDirective = resolveDirective("dompurify-html");
-            return (
-              openBlock(),
-              createVNode(
-                OptionRow,
+            {
+              default: withCtx(() => [
+                createElement("div", wP, [
+                  withDirectives(
+                    createElement(
+                      "select",
+                      {
+                        "onUpdate:modelValue": m[0] || (m[0] = (v) => (f.value = v)),
+                        class: "basic-select",
+                        name: "paper",
+                      },
+                      [
+                        (openBlock(!0),
+                        createElementVNode(
+                          Fragment,
+                          null,
+                          renderList(
+                            c.value.values(),
+                            (v) => (
+                              openBlock(),
+                              createElementVNode(
+                                "option",
+                                {
+                                  key: v.PTT_CD,
+                                  value: v.PTT_CD,
+                                  disabled: h(v.weights),
+                                  onChange: d,
+                                },
+                                toDisplayString(
+                                  h(v.weights) ? `[${v.weights[0].HIDE_RSN || "주문불가"}]` : ""
+                                ) +
+                                  " " +
+                                  toDisplayString(v.PTT_NM) +
+                                  " " +
+                                  toDisplayString(v.BSN_YN === "Y" ? "[영업주문]" : ""),
+                                41,
+                                AP
+                              )
+                            )
+                          ),
+                          128
+                        )),
+                      ],
+                      512
+                    ),
+                    [[vModelSelect, f.value]]
+                  ),
+                  withDirectives(
+                    createElement(
+                      "select",
+                      {
+                        "onUpdate:modelValue": m[1] || (m[1] = (v) => (_.value = v)),
+                        class: "basic-select",
+                        name: "weight",
+                      },
+                      [
+                        (openBlock(!0),
+                        createElementVNode(
+                          Fragment,
+                          null,
+                          renderList(
+                            c.value.get(f.value)?.weights,
+                            (v) => (
+                              openBlock(),
+                              createElementVNode(
+                                "option",
+                                {
+                                  key: `${v.MTRL_CD}`,
+                                  value: v.MTRL_CD,
+                                  disabled: v.HIDE_YN === "Y",
+                                },
+                                toDisplayString(
+                                  v.HIDE_YN === "Y" ? `[${v.HIDE_RSN || "주문불가"}]` : ""
+                                ) +
+                                  " " +
+                                  toDisplayString(`${v.WGT_CD}g`),
+                                9,
+                                NP
+                              )
+                            )
+                          ),
+                          128
+                        )),
+                      ],
+                      512
+                    ),
+                    [[vModelSelect, _.value]]
+                  ),
+                ]),
+              ]),
+              _: 1,
+            },
+            8,
+            ["extra"]
+          )
+        )
+      );
+    },
+  }),
+  MP = Object.freeze(
+    Object.defineProperty(
+      {
+        __proto__: null,
+        default: Paper,
+      },
+      Symbol.toStringTag,
+      {
+        value: "Module",
+      }
+    )
+  ),
+  kP = {
+    class: "special-option",
+  },
+  LP = ["src"],
+  $P = {
+    class: "text",
+  },
+  xP = {
+    class: "desc",
+  },
+  FP = {
+    key: 0,
+    class: "detail",
+  },
+  UP = {
+    class: "detail-subject",
+  },
+  BP = {
+    class: "detail-value",
+  },
+  VP = {
+    key: 1,
+    class: "detail",
+  },
+  HP = {
+    class: "detail-subject",
+  },
+  GP = {
+    class: "detail-value",
+  },
+  jP = withScopeId(
+    defineComponent({
+      __name: "CoverGuide",
+      props: {
+        sizeInfo: {},
+        senecaInfo: {},
+      },
+      setup(e) {
+        const t = e,
+          n = inject("productCode", {
+            pdtCode: "",
+          }),
+          o = inject("callbacks", {}),
+          s = ref(t.senecaInfo);
+        watch(
+          () => t.senecaInfo,
+          (f) => {
+            f && (s.value = f);
+          }
+        );
+        const r = useOrderDataStore(),
+          a = useI18n(),
+          i = async () => {
+            const f = r.getOrderData();
+            if (!f) return;
+            const _ = dS(f);
+            if (!_ || typeof _ == "string") return alert(t(_ || "템플릿다운로드실패"));
+            (await BT({
+              lang: a.locale,
+              ..._,
+            })) || alert(t("템플릿다운로드실패"));
+          },
+          l = {
+            PRBKYPB: !0,
+            PRBKYCB: !0,
+            PRBKYRB: !0,
+            PRBKOPB: !0,
+            PRBKOCB: !0,
+            PRBKORB: !0,
+          },
+          c = {
+            PRBKYPR: !0,
+            PRBKOPR: !0,
+            PRBKYPB: !0,
+            PRBKOPB: !0,
+          },
+          u = {
+            PRBKYCO: !0,
+            PRBKYCB: !0,
+            PRBKYRN: !0,
+            PRBKYRB: !0,
+            PRBKOCO: !0,
+            PRBKOCB: !0,
+            PRBKORN: !0,
+            PRBKORB: !0,
+            PRBKORD: !0,
+            PRBKOCD: !0,
+          },
+          d = {
+            PRBKYST: !0,
+            PRBKYSL: !0,
+            PRBKOST: !0,
+            PRBKOSL: !0,
+          },
+          h = computed(() => {
+            if (!t.sizeInfo) return null;
+            if (d[n.pdtCode])
+              return {
+                title: "소프트커버",
+                imgSrc: `${CDN_BASE_URL}/ko/cover_icon_stapler.png`,
+              };
+            const _ =
+                t.sizeInfo.workSize.width > t.sizeInfo.workSize.height
+                  ? horizontalBindSet.has(n.pdtCode)
+                    ? "_wh"
+                    : "_w"
+                  : "_h",
+              p = l[n.pdtCode] ? "_black" : "";
+            return c[n.pdtCode]
+              ? {
+                  title: "세네카",
+                  imgSrc: `${CDN_BASE_URL}/ko/cover_icon_wireless${p}${_}.png`,
+                }
+              : u[n.pdtCode]
+              ? {
+                  title: "낱장커버",
+                  imgSrc: `${CDN_BASE_URL}/ko/cover_icon_spring${p}${_}.png`,
+                }
+              : null;
+          });
+        return (f, _) => (
+          openBlock(),
+          createVNode(
+            OptionRow,
+            {
+              title: "표지가이드",
+              extra: {
+                name: "가이드보기",
+                callback: () => {
+                  unref(o)?.onInformGuide && unref(o).onInformGuide("bookCover");
+                },
+              },
+            },
+            {
+              default: withCtx(() => [
+                createElement("div", kP, [
+                  createElement("figure", null, [
+                    createElement(
+                      "img",
+                      {
+                        src: h.value?.imgSrc,
+                      },
+                      null,
+                      8,
+                      LP
+                    ),
+                    createElement(
+                      "figcaption",
+                      $P,
+                      toDisplayString(unref(t)(h.value?.title || "")),
+                      1
+                    ),
+                  ]),
+                  createElement("div", xP, [
+                    s.value?.seneca_show === "Y"
+                      ? (openBlock(),
+                        createElementVNode("div", FP, [
+                          createElement("p", UP, toDisplayString(unref(t)("세네카")), 1),
+                          createElement("span", BP, [
+                            createElement("b", null, toDisplayString(s.value?.seneca), 1),
+                            _[0] || (_[0] = createTextVNode(" mm ", -1)),
+                          ]),
+                        ]))
+                      : (openBlock(),
+                        createElementVNode("div", VP, [
+                          createElement("p", HP, toDisplayString(unref(t)("표지작업사이즈")), 1),
+                          createElement("span", GP, [
+                            createElement(
+                              "b",
+                              null,
+                              toDisplayString(f.sizeInfo?.workSize.width) +
+                                "x" +
+                                toDisplayString(f.sizeInfo?.workSize.height),
+                              1
+                            ),
+                            _[1] || (_[1] = createTextVNode(" mm ", -1)),
+                          ]),
+                        ])),
+                    createElement(
+                      "button",
+                      {
+                        type: "button",
+                        class: "download-btn",
+                        onClick: i,
+                      },
+                      toDisplayString(unref(t)("표지템플릿다운로드")),
+                      1
+                    ),
+                  ]),
+                ]),
+              ]),
+              _: 1,
+            },
+            8,
+            ["extra"]
+          )
+        );
+      },
+    }),
+    [["__scopeId", "data-v-7f08ebe2"]]
+  ),
+  zP = {
+    class: "group-title",
+  },
+  YP = {
+    class: "subject",
+  },
+  KP = {
+    class: "group-title",
+  },
+  WP = {
+    class: "subject",
+  },
+  qP = Object.freeze(
+    Object.defineProperty(
+      {
+        __proto__: null,
+        default: withScopeId(
+          defineComponent({
+            __name: "Book",
+            props: {
+              type: {
+                default: "new",
+              },
+              data: {},
+              widgetAttr: {},
+              defaultData: {},
+              senecaInfo: {},
+            },
+            emits: ["update"],
+            setup(e, { emit: t }) {
+              const n = e,
+                o = t,
+                s = computed(() => n.widgetAttr.skinInfo),
                 {
-                  title:
-                    instance.type === "default"
-                      ? unref(translate)("수량")
-                      : unref(translate)("내지장수"),
+                  defaultOrderData: r,
+                  orderInfo: a,
+                  updateOption: i,
+                  updatePostPcs: l,
+                } = useOrderComposable(n.type, {
+                  group: n.widgetAttr.item_gbn,
+                  emits: {
+                    updateOrder: (O) => o("update", O),
+                  },
+                }),
+                c = computed(() => !!a.value.pcsInfo?.find((O) => O.PCS_CD === "SCO_DFT")),
+                u = ref({
+                  ordCnt: 0,
+                  prnCnt: 0,
+                }),
+                d = (O, A) => {
+                  O === "default" &&
+                    (u.value = {
+                      ...u.value,
+                      ordCnt: A,
+                    }),
+                    O === "inner" &&
+                      (u.value = {
+                        ...u.value,
+                        prnCnt: A,
+                      });
+                };
+              watch(
+                () => u.value,
+                debounce((O) => {
+                  i("quantityInfo")(O);
+                }, 200),
+                {
+                  immediate: !0,
+                }
+              );
+              const h = inject("member"),
+                f = computed(() =>
+                  h?.bsn_yn === "Y"
+                    ? n.data.pdt_mtrl_info
+                    : n.data.pdt_mtrl_info.filter((O) => O.BSN_YN !== "Y")
+                ),
+                _ = computed(() =>
+                  h?.bsn_yn === "Y"
+                    ? n.data.inner_pdt_mtrl_info
+                    : n.data.inner_pdt_mtrl_info?.filter((O) => O.BSN_YN !== "Y")
+                ),
+                p = computed(() => a.value?.pcsInfo?.find((O) => O.PCS_CD === "BIND_DIRECTION")),
+                { uploadConfig: m } = useUploadConfig(n.widgetAttr),
+                v = computed(() =>
+                  a.value.dosuInfo?.BNC_GB === "BNC_BLA"
+                    ? {
+                        pdf: !0,
+                        editor: null,
+                      }
+                    : m.value
+                ),
+                E = ref([]),
+                k = (O) => (A) => {
+                  const b = A[0];
+                  O === "inner" && (E.value = [b, E.value[1]]),
+                    O === "default" && (E.value = [E.value[0], b]);
+                };
+              watch(
+                () => E.value,
+                (O) => {
+                  i("fileUploadInfo")(O);
+                }
+              );
+              const N = computed(() =>
+                  parsePostProcessOptions(n.data.pdt_pcs_info, n.data.pdt_disable_pcs_info)
+                ),
+                D = computed(() =>
+                  bookPageMultiplierMap[n.data.pdt_base_info[0].PDT_CD]
+                    ? a.value.quantityInfo?.prnCnt || 1
+                    : (a.value.quantityInfo?.ordCnt || 1) * (a.value.quantityInfo?.prnCnt || 1)
+                );
+              return (O, A) => (
+                openBlock(),
+                createElementVNode(
+                  Fragment,
+                  null,
+                  [
+                    withDirectives(
+                      renderComponent(
+                        SizeSelect,
+                        {
+                          options: O.data.pdt_size_info,
+                          "base-info": O.data.pdt_base_info[0],
+                          default: unref(r)?.size,
+                          "hidden-sizes": !0,
+                          "show-extra": !0,
+                          onUpdate: A[0] || (A[0] = (b) => unref(i)("sizeInfo")(b)),
+                          onValidate: A[1] || (A[1] = (b) => unref(i)("validation")(b)),
+                        },
+                        null,
+                        8,
+                        ["options", "base-info", "default"]
+                      ),
+                      [[vShow, s.value.sizeSelect.view_yn === "Y"]]
+                    ),
+                    renderComponent(
+                      BookQty,
+                      {
+                        type: "default",
+                        options: O.data.pdt_prn_cnt_info,
+                        onUpdate: d,
+                      },
+                      null,
+                      8,
+                      ["options"]
+                    ),
+                    createElement("div", zP, [
+                      createElement("span", YP, toDisplayString(unref(t)("내지")), 1),
+                    ]),
+                    withDirectives(
+                      renderComponent(
+                        ah,
+                        {
+                          options: {
+                            dosu: O.data.inner_pdt_dosu_info,
+                            color: O.data.inner_pdt_bnc_info,
+                            all: O.data.inner_pdt_dosu_bnc_info,
+                          },
+                          onUpdate: A[2] || (A[2] = (b) => unref(i)("inner_dosuInfo")(b)),
+                        },
+                        null,
+                        8,
+                        ["options"]
+                      ),
+                      [
+                        [
+                          vShow,
+                          s.value.dosuSelect.view_yn === "Y" && O.data.inner_pdt_dosu_bnc_info,
+                        ],
+                      ]
+                    ),
+                    renderComponent(
+                      Paper,
+                      {
+                        options: _.value,
+                        "show-extra": O.widgetAttr.able_paper_yn === "Y",
+                        onUpdate: A[3] || (A[3] = (b) => unref(i)("inner_meterialInfo")(b)),
+                      },
+                      null,
+                      8,
+                      ["options", "show-extra"]
+                    ),
+                    renderComponent(
+                      BookQty,
+                      {
+                        type: "inner",
+                        options: O.data.pdt_prn_cnt_info,
+                        "related-data": {
+                          dosu: unref(a).inner_dosuInfo?.COD,
+                        },
+                        onUpdate: d,
+                      },
+                      null,
+                      8,
+                      ["options", "related-data"]
+                    ),
+                    O.widgetAttr.order_yn !== "N"
+                      ? (openBlock(),
+                        createVNode(
+                          FileUpload,
+                          {
+                            key: 0,
+                            _key: "inner",
+                            "upload-config": {
+                              pdf: !0,
+                              editor: null,
+                            },
+                            subject: "내지업로드",
+                            notes: [
+                              unref(t)("내지업로드사이즈장수안내", {
+                                CUT_SIZE: `${unref(a).sizeInfo?.cutSize.width}x${
+                                  unref(a).sizeInfo?.cutSize.height
+                                }`,
+                                WRK_SIZE: `${unref(a).sizeInfo?.workSize.width}x${
+                                  unref(a).sizeInfo?.workSize.height
+                                }`,
+                                QTY: `${
+                                  unref(a).quantityInfo?.prnCnt *
+                                  (unref(a).inner_dosuInfo?.COD === "SID_D" ? 2 : 1)
+                                }`,
+                              }),
+                            ],
+                            onUpload: A[4] || (A[4] = (b) => k("inner")(b)),
+                          },
+                          null,
+                          8,
+                          ["notes"]
+                        ))
+                      : createCommentVNode("", !0),
+                    createElement("div", KP, [
+                      createElement("span", WP, toDisplayString(unref(t)("표지")), 1),
+                    ]),
+                    withDirectives(
+                      renderComponent(
+                        ah,
+                        {
+                          options: {
+                            dosu: O.data.pdt_dosu_info,
+                            color: O.data.pdt_bnc_info,
+                            all: O.data.pdt_dosu_bnc_info,
+                          },
+                          onUpdate: A[5] || (A[5] = (b) => unref(i)("dosuInfo")(b)),
+                        },
+                        null,
+                        8,
+                        ["options"]
+                      ),
+                      [[vShow, s.value.dosuSelect.view_yn === "Y" && O.data.pdt_dosu_info]]
+                    ),
+                    withDirectives(
+                      renderComponent(
+                        Paper,
+                        {
+                          options: f.value,
+                          "show-extra": O.widgetAttr.able_paper_yn === "Y",
+                          onUpdate: A[6] || (A[6] = (b) => unref(i)("meterialInfo")(b)),
+                        },
+                        null,
+                        8,
+                        ["options", "show-extra"]
+                      ),
+                      [[vShow, f.value.length > 1]]
+                    ),
+                    renderComponent(
+                      jP,
+                      {
+                        "size-info": unref(a).sizeInfo,
+                        "seneca-info": O.senecaInfo,
+                      },
+                      null,
+                      8,
+                      ["size-info", "seneca-info"]
+                    ),
+                    renderComponent(
+                      HiddenPostProcess,
+                      {
+                        options: N.value.postPcs.hidden,
+                        "related-data": {
+                          mtrlCd: unref(a).meterialInfo?.MTRL_CD,
+                          sizeInfo: unref(a).sizeInfo,
+                          orderQty: D.value,
+                          bindDirection: p.value,
+                        },
+                        onUpdate: A[7] || (A[7] = (b) => unref(l)("hidden")(b)),
+                      },
+                      null,
+                      8,
+                      ["options", "related-data"]
+                    ),
+                    renderComponent(
+                      VisiblePostProcess,
+                      {
+                        options: N.value.postPcs.visible,
+                        "disabled-opts": N.value.disabled,
+                        "attb-opts": O.data.pdt_add_info[1],
+                        "related-data": {
+                          mtrlCd: unref(a).meterialInfo?.MTRL_CD,
+                          sizeInfo: unref(a).sizeInfo,
+                        },
+                        onUpdate: A[8] || (A[8] = (b) => unref(l)("visible")(b)),
+                      },
+                      null,
+                      8,
+                      ["options", "disabled-opts", "attb-opts", "related-data"]
+                    ),
+                    O.widgetAttr.order_yn !== "N"
+                      ? (openBlock(),
+                        createVNode(
+                          FileUpload,
+                          {
+                            key: 1,
+                            _key: "default",
+                            "upload-config": v.value,
+                            subject: "표지업로드",
+                            notes: [
+                              unref(t)("표지업로드장수안내", {
+                                QTY: `${unref(a).dosuInfo?.COD === "SID_D" ? 2 : 1}`,
+                              }),
+                            ],
+                            "related-data": {
+                              hasScodix: c.value,
+                            },
+                            onUpload: A[9] || (A[9] = (b) => k("default")(b)),
+                          },
+                          null,
+                          8,
+                          ["upload-config", "notes", "related-data"]
+                        ))
+                      : createCommentVNode("", !0),
+                  ],
+                  64
+                )
+              );
+            },
+          }),
+          [["__scopeId", "data-v-51f6d81b"]]
+        ),
+      },
+      Symbol.toStringTag,
+      {
+        value: "Module",
+      }
+    )
+  ),
+  QP = {
+    key: 2,
+    class: "summary",
+  },
+  XP = {
+    class: "name",
+  },
+  JP = {
+    class: "qty-price",
+  },
+  ZP = {
+    class: "counter",
+  },
+  eE = ["onClick"],
+  tE = ["value", "onChange"],
+  nE = ["onClick"],
+  oE = {
+    class: "price-box",
+  },
+  sE = {
+    class: "price",
+  },
+  rE = ["onClick"],
+  iE = {
+    key: 1,
+  },
+  aE = {
+    class: "qty-price",
+  },
+  lE = {
+    class: "price-box",
+  },
+  uE = Object.freeze(
+    Object.defineProperty(
+      {
+        __proto__: null,
+        default: withScopeId(
+          defineComponent({
+            __name: "Acc",
+            props: {
+              type: {
+                default: "new",
+              },
+              data: {},
+            },
+            emits: ["update"],
+            setup(e, { emit: t }) {
+              const n = e,
+                o = t,
+                s = inject("productCode", {
+                  pdtCode: "",
+                }),
+                r = inject("callbacks", {}),
+                a = computed(() =>
+                  accFilterConfigMap[s.pdtCode]
+                    ? accFilterConfigMap[s.pdtCode][s.pttCode || ""]
+                    : null
+                ),
+                i = ref("X"),
+                l = ref("X"),
+                c = ref("X"),
+                u = reactive({}),
+                d = reactive({});
+              watch(
+                () => i.value,
+                () => {
+                  c.value = "X";
+                }
+              );
+              const h = {
+                  key: "X",
+                  value: "X",
+                  name: t("선택하기"),
+                },
+                f = () => {
+                  (i.value = "X"), (l.value = "X"), (c.value = "X");
+                },
+                _ = computed(() =>
+                  n.data.reduce(
+                    (y, I) => (
+                      y[I.MTRL_GRP_GB] || (y[I.MTRL_GRP_GB] = []), y[I.MTRL_GRP_GB].push(I), y
+                    ),
+                    {}
+                  )
+                ),
+                p = (y) => {
+                  const I = [h];
+                  return y
+                    ? y.GRP_TYPE === "MTRL_MULTI_GRP"
+                      ? (_.value[y.GRP_COD].forEach((w) => {
+                          I.push({
+                            key: w.MTRL_CD,
+                            value: w.MTRL_CD,
+                            name: w.MTRL_NM,
+                            disabled: w.HIDE_YN === "Y",
+                          });
+                        }),
+                        I)
+                      : y.options
+                      ? (y.options.forEach((w) => {
+                          I.push({
+                            key: w.COD,
+                            value: w.COD,
+                            name: t(w.COD_NME),
+                          });
+                        }),
+                        I)
+                      : (i.value !== "X" &&
+                          _.value[i.value].forEach((w) => {
+                            I.push({
+                              key: w.MTRL_CD,
+                              value: w.MTRL_CD,
+                              name: w.MTRL_NM,
+                              disabled: w.HIDE_YN === "Y",
+                            });
+                          }),
+                        I)
+                    : (n.data.forEach((w) => {
+                        I.push({
+                          key: w.MTRL_CD,
+                          value: w.MTRL_CD,
+                          name: w.MTRL_NM,
+                          disabled: w.HIDE_YN === "Y",
+                        });
+                      }),
+                      I);
+                };
+              function m(y) {
+                return r?.onCallMsg ? r.onCallMsg("warn", y) : alert(y);
+              }
+              function v(y) {
+                y &&
+                  (d[y.MTRL_CD]
+                    ? (d[y.MTRL_CD].QTY += y.INC_STEP)
+                    : (d[y.MTRL_CD] = {
+                        ...y,
+                        QTY: y.FIR_CNT,
+                      }));
+              }
+              function E(y) {
+                d[y.MTRL_CD].QTY !== y.FIR_CNT && (d[y.MTRL_CD].QTY -= y.INC_STEP);
+              }
+              function k(y, I) {
+                let U = +y.target.value || I.FIR_CNT;
+                if (
+                  (U < I.FIR_CNT && (U = I.FIR_CNT),
+                  I.RMD_QTY > 0 && U > I.RMD_QTY && (U = I.RMD_QTY),
+                  I.INC_STEP !== 1)
+                ) {
+                  const Z = U % I.INC_STEP;
+                  Z !== 0 && (U = U - Z);
+                }
+                d[I.MTRL_CD] = {
+                  ...d[I.MTRL_CD],
+                  QTY: U,
+                };
+              }
+              function N() {
+                if (!a.value) {
+                  if (c.value === "X") return m(t("옵션미선택안내"));
+                  const y = n.data.find((I) => I.MTRL_CD === c.value);
+                  return v(y), (c.value = "X");
+                }
+                if (a.value.uiType === "MULTI")
+                  return isEmpty(u) || Object.values(u).every((y) => y === "X")
+                    ? m(t("옵션미선택안내"))
+                    : (Object.entries(u).forEach(([y, I]) => {
+                        const w = _.value[y].find((U) => U.MTRL_CD === I);
+                        v(w);
+                      }),
+                      Object.keys(u).forEach((y) => delete u[y]));
+                if (a.value.uiType === "CASCADE") {
+                  const y = a.value.filters[0],
+                    I = a.value.filters.find((U) => U.GRP_TYPE === "MTRL_SUB_GRP");
+                  if (i.value === "X")
+                    return m(
+                      t("옵션미선택안내상세", {
+                        OPTION: t(y.GRP_NME),
+                      })
+                    );
+                  if (!I) return;
+                  if (I.options) {
+                    if (l.value === "X")
+                      return m(
+                        t("옵션미선택안내상세", {
+                          OPTION: t(I.GRP_NME),
+                        })
+                      );
+                    const U = _.value[i.value].find((Z) => {
+                      if (Z.MTRL_NM.includes(t(l.value))) return !0;
+                      if (l.value === "NONE") return !0;
+                    });
+                    return v(U), f();
+                  }
+                  if (c.value === "X")
+                    return m(
+                      t("옵션미선택안내상세", {
+                        OPTION: t(I.GRP_NME),
+                      })
+                    );
+                  const w = _.value[i.value].find((U) => U.MTRL_CD === c.value);
+                  return v(w), f();
+                }
+              }
+              function D(y) {
+                delete d[y.MTRL_CD];
+              }
+              watch(
+                () => d,
+                (y) => {
+                  const I = Object.values(y).map((w) => ({
+                    MTRL_CD: w.MTRL_CD,
+                    QTY: w.QTY,
+                    ATTB: "",
+                    MTRL_NME: w.MTRL_NM,
+                  }));
+                  o("update", I);
                 },
                 {
-                  default: withCtx(() => [
-                    createElement("div", bookQtyFlexRowClass, [
-                      qtyInputMode.value === "input"
-                        ? withDirectives(
-                            (openBlock(),
+                  deep: !0,
+                }
+              );
+              const O = useOrderStore(),
+                A = computed(() =>
+                  O.getOrderData()?.priceCalc.result.result?.reduce(
+                    (I, w) => (
+                      (I[w.MTRL_CD] = +w.PRICE_MALL !== w.PRICE ? +w.PRICE_MALL : w.PRICE), I
+                    ),
+                    {}
+                  )
+                ),
+                b = reactive(A.value || {});
+              function C(y, I, w) {
+                const Z = performance.now(),
+                  me = (_e) => {
+                    const B = Math.min((_e - Z) / 300, 1),
+                      W = Math.floor(I + (w - I) * B);
+                    (b[y] = W), B < 1 && requestAnimationFrame(me);
+                  };
+                requestAnimationFrame(me);
+              }
+              return (
+                watch(
+                  () => A.value,
+                  (y, I = {}) => {
+                    y &&
+                      Object.keys(y).forEach((w) => {
+                        const U = I[w] || 0,
+                          Z = y[w] || 0;
+                        C(w, U, Z);
+                      });
+                  },
+                  {
+                    deep: !0,
+                  }
+                ),
+                (y, I) => (
+                  openBlock(),
+                  createElementVNode(
+                    Fragment,
+                    null,
+                    [
+                      a.value
+                        ? (openBlock(!0),
+                          createElementVNode(
+                            Fragment,
+                            {
+                              key: 0,
+                            },
+                            renderList(
+                              a.value.filters,
+                              (w) => (
+                                openBlock(),
+                                createVNode(
+                                  OptionRow,
+                                  {
+                                    key: w.GRP_NME,
+                                    title: `${unref(t)("옵션")} - ${unref(t)(w.GRP_NME)}`,
+                                  },
+                                  {
+                                    default: withCtx(() => [
+                                      w.GRP_TYPE === "MTRL_MULTI_GRP"
+                                        ? (openBlock(),
+                                          createVNode(
+                                            BasicSelect,
+                                            {
+                                              key: 0,
+                                              name: w.GRP_COD,
+                                              default: u[w.GRP_COD] || "X",
+                                              options: p(w),
+                                              onSelect: (U) => (u[w.GRP_COD] = U),
+                                            },
+                                            null,
+                                            8,
+                                            ["name", "default", "options", "onSelect"]
+                                          ))
+                                        : w.GRP_TYPE === "MTRL_GRP"
+                                        ? (openBlock(),
+                                          createVNode(
+                                            BasicSelect,
+                                            {
+                                              key: 1,
+                                              name: "material-group",
+                                              options: p(w),
+                                              default: i.value,
+                                              onSelect: I[0] || (I[0] = (U) => (i.value = U)),
+                                            },
+                                            null,
+                                            8,
+                                            ["options", "default"]
+                                          ))
+                                        : w.GRP_TYPE === "MTRL_SUB_GRP" && w.options
+                                        ? (openBlock(),
+                                          createVNode(
+                                            BasicSelect,
+                                            {
+                                              key: 2,
+                                              name: "material-sub-group",
+                                              options: p(w),
+                                              default: l.value,
+                                              onSelect: I[1] || (I[1] = (U) => (l.value = U)),
+                                            },
+                                            null,
+                                            8,
+                                            ["options", "default"]
+                                          ))
+                                        : (openBlock(),
+                                          createVNode(
+                                            BasicSelect,
+                                            {
+                                              key: 3,
+                                              name: "material",
+                                              options: p(w),
+                                              default: c.value,
+                                              onSelect: I[2] || (I[2] = (U) => (c.value = U)),
+                                            },
+                                            null,
+                                            8,
+                                            ["options", "default"]
+                                          )),
+                                    ]),
+                                    _: 2,
+                                  },
+                                  1032,
+                                  ["title"]
+                                )
+                              )
+                            ),
+                            128
+                          ))
+                        : (openBlock(),
+                          createVNode(
+                            OptionRow,
+                            {
+                              key: 1,
+                              title: unref(t)("옵션"),
+                            },
+                            {
+                              default: withCtx(() => [
+                                renderComponent(
+                                  BasicSelect,
+                                  {
+                                    name: "material",
+                                    options: p(),
+                                    default: c.value,
+                                    onSelect: I[3] || (I[3] = (w) => (c.value = w)),
+                                  },
+                                  null,
+                                  8,
+                                  ["options", "default"]
+                                ),
+                              ]),
+                              _: 1,
+                            },
+                            8,
+                            ["title"]
+                          )),
+                      createElement(
+                        "button",
+                        {
+                          type: "button",
+                          class: "add-btn",
+                          onClick: N,
+                        },
+                        "+ " + toDisplayString(unref(t)("옵션선택")),
+                        1
+                      ),
+                      unref(isEmpty)(d)
+                        ? createCommentVNode("", !0)
+                        : (openBlock(),
+                          createElementVNode("div", QP, [
+                            (openBlock(!0),
                             createElementVNode(
-                              "input",
+                              Fragment,
+                              null,
+                              renderList(
+                                Object.values(d),
+                                (w) => (
+                                  openBlock(),
+                                  createElementVNode(
+                                    "div",
+                                    {
+                                      key: w.MTRL_CD,
+                                    },
+                                    [
+                                      A.value && A.value[w.MTRL_CD]
+                                        ? (openBlock(),
+                                          createElementVNode(
+                                            Fragment,
+                                            {
+                                              key: 0,
+                                            },
+                                            [
+                                              createElement("p", XP, toDisplayString(w.MTRL_NM), 1),
+                                              createElement("div", JP, [
+                                                createElement("div", ZP, [
+                                                  createElement(
+                                                    "button",
+                                                    {
+                                                      type: "button",
+                                                      class: "btn minus",
+                                                      onClick: (U) => E(w),
+                                                    },
+                                                    "-",
+                                                    8,
+                                                    eE
+                                                  ),
+                                                  createElement(
+                                                    "input",
+                                                    {
+                                                      class: "qty",
+                                                      value: w.QTY,
+                                                      name: "qty",
+                                                      onChange: (U) => k(U, w),
+                                                      type: "number",
+                                                    },
+                                                    null,
+                                                    40,
+                                                    tE
+                                                  ),
+                                                  createElement(
+                                                    "button",
+                                                    {
+                                                      type: "button",
+                                                      class: "btn plus",
+                                                      onClick: (U) => v(w),
+                                                    },
+                                                    "+",
+                                                    8,
+                                                    nE
+                                                  ),
+                                                ]),
+                                                createElement("div", oE, [
+                                                  createElement(
+                                                    "span",
+                                                    sE,
+                                                    toDisplayString(b[w.MTRL_CD]?.toLocaleString()),
+                                                    1
+                                                  ),
+                                                  createElement(
+                                                    "button",
+                                                    {
+                                                      type: "button",
+                                                      class: "delete-btn",
+                                                      onClick: (U) => D(w),
+                                                    },
+                                                    "X",
+                                                    8,
+                                                    rE
+                                                  ),
+                                                ]),
+                                              ]),
+                                            ],
+                                            64
+                                          ))
+                                        : (openBlock(),
+                                          createElementVNode("div", iE, [
+                                            renderComponent(Skeleton, {
+                                              variant: "rounded",
+                                              width: 110,
+                                              height: 16,
+                                            }),
+                                            createElement("div", aE, [
+                                              renderComponent(Skeleton, {
+                                                variant: "rounded",
+                                                width: 106,
+                                                height: 28,
+                                              }),
+                                              createElement("div", lE, [
+                                                renderComponent(Skeleton, {
+                                                  variant: "rounded",
+                                                  width: 50,
+                                                  height: 17,
+                                                }),
+                                                renderComponent(Skeleton, {
+                                                  variant: "circular",
+                                                  width: 16,
+                                                  height: 16,
+                                                }),
+                                              ]),
+                                            ]),
+                                          ])),
+                                    ]
+                                  )
+                                )
+                              ),
+                              128
+                            )),
+                          ])),
+                    ],
+                    64
+                  )
+                )
+              );
+            },
+          }),
+          [["__scopeId", "data-v-99ad5859"]]
+        ),
+      },
+      Symbol.toStringTag,
+      {
+        value: "Module",
+      }
+    )
+  ),
+  cE = {
+    class: "flex-row",
+  },
+  dE = {
+    class: "notes",
+  },
+  fE = {
+    class: "note",
+  },
+  pE = Object.freeze(
+    Object.defineProperty(
+      {
+        __proto__: null,
+        default: defineComponent({
+          __name: "ADC_PVC",
+          props: {
+            data: {},
+          },
+          emits: ["update"],
+          setup(e, { emit: t }) {
+            const n = e,
+              o = t,
+              s = ref(n.data.options[0].value),
+              r = (a) => {
+                s.value = a.value;
+              };
+            return (
+              watch(
+                () => s.value,
+                (a) => {
+                  o("update", [
+                    {
+                      PCS_CD: n.data.value,
+                      PCS_DTL_CD: a,
+                      PCS_DTL_NM: n.data.name,
+                    },
+                  ]);
+                },
+                {
+                  immediate: !0,
+                }
+              ),
+              (a, i) => (
+                openBlock(),
+                createVNode(
+                  OptionRow,
+                  {
+                    title: a.data.name,
+                    underline: "",
+                  },
+                  {
+                    default: withCtx(() => [
+                      createElement("div", cE, [
+                        (openBlock(!0),
+                        createElementVNode(
+                          Fragment,
+                          null,
+                          renderList(
+                            a.data.options,
+                            (l) => (
+                              openBlock(),
+                              createVNode(
+                                IconCheckbox,
+                                {
+                                  key: l.key,
+                                  data: {
+                                    value: l.value,
+                                    name: l.name,
+                                    imgPath: `${a.data.subImgPath}_${l.value}`,
+                                  },
+                                  active: s.value === l.value,
+                                  onSelect: r,
+                                },
+                                null,
+                                8,
+                                ["data", "active"]
+                              )
+                            )
+                          ),
+                          128
+                        )),
+                      ]),
+                      createElement("div", dE, [
+                        createElement(
+                          "p",
+                          fE,
+                          toDisplayString(a.data.options[0]?.extra?.NOTICE[0]),
+                          1
+                        ),
+                      ]),
+                    ]),
+                    _: 1,
+                  },
+                  8,
+                  ["title"]
+                )
+              )
+            );
+          },
+        }),
+      },
+      Symbol.toStringTag,
+      {
+        value: "Module",
+      }
+    )
+  ),
+  _E = {
+    class: "flex-row -flow",
+  },
+  hE = Object.freeze(
+    Object.defineProperty(
+      {
+        __proto__: null,
+        default: defineComponent({
+          __name: "BID_SIL",
+          props: {
+            data: {},
+          },
+          emits: ["update"],
+          setup(e, { emit: t }) {
+            const n = e,
+              o = t,
+              s = ref(n.data.attbOptions[0].value),
+              r = ref(n.data.attbOptions[0].name),
+              a = (i) => {
+                (s.value = i.value), (r.value = i.name);
+              };
+            return (
+              watch(
+                () => s.value,
+                (i) => {
+                  o("update", [
+                    {
+                      PCS_CD: n.data.value,
+                      PCS_DTL_CD: n.data.options[0].value,
+                      PCS_DTL_NM: `${n.data.name}(${r.value})`,
+                      ATTB: i,
+                    },
+                  ]);
+                },
+                {
+                  immediate: !0,
+                }
+              ),
+              (i, l) => (
+                openBlock(),
+                createVNode(
+                  OptionRow,
+                  {
+                    title: i.data.name,
+                    underline: "",
+                  },
+                  {
+                    default: withCtx(() => [
+                      createElement("div", _E, [
+                        (openBlock(!0),
+                        createElementVNode(
+                          Fragment,
+                          null,
+                          renderList(
+                            i.data.attbOptions,
+                            (c) => (
+                              openBlock(),
+                              createVNode(
+                                IconCheckbox,
+                                {
+                                  key: c.key,
+                                  data: {
+                                    value: c.value,
+                                    name: c.name,
+                                    imgPath: c.value,
+                                  },
+                                  active: s.value === c.value,
+                                  onSelect: a,
+                                },
+                                null,
+                                8,
+                                ["data", "active"]
+                              )
+                            )
+                          ),
+                          128
+                        )),
+                      ]),
+                    ]),
+                    _: 1,
+                  },
+                  8,
+                  ["title"]
+                )
+              )
+            );
+          },
+        }),
+      },
+      Symbol.toStringTag,
+      {
+        value: "Module",
+      }
+    )
+  ),
+  mE = {
+    class: "flex-row",
+  },
+  vE = Object.freeze(
+    Object.defineProperty(
+      {
+        __proto__: null,
+        default: defineComponent({
+          __name: "BIND_DIRECTION",
+          props: {
+            data: {},
+            relatedData: {},
+          },
+          emits: ["update"],
+          setup(e, { emit: t }) {
+            const n = e,
+              o = t,
+              s = inject("productCode", {
+                pdtCode: "",
+              }),
+              r = [
+                {
+                  name: "A",
+                  value: "Y",
+                  key: "A",
+                  imgPath: "BIND_DIRECTION_BPTOP_A",
+                },
+                {
+                  name: "B",
+                  value: "N",
+                  key: "B",
+                  imgPath: "BIND_DIRECTION_BPTOP_B",
+                },
+              ],
+              a = computed(() => n.relatedData.sizeInfo.workSize),
+              i = computed(() =>
+                horizontalBindSet.has(s.pdtCode)
+                  ? "BPLFT"
+                  : a.value.width > a.value.height
+                  ? "BPTOP"
+                  : "BPLFT"
+              ),
+              l = ref(r[0].value),
+              c = computed(() => ({
+                main: i.value,
+                sub: l.value,
+              }));
+            return (
+              watch(
+                () => c.value,
+                (u) => {
+                  const d = n.data.options.find((h) => h.value === u.main)?.extra;
+                  o("update", [
+                    {
+                      PCS_CD: n.data.value,
+                      PCS_DTL_CD: u.main,
+                      PCS_DTL_NM: d?.PCS_DTL_NM,
+                      ...(i.value === "BPTOP"
+                        ? {
+                            BACK_ROT_YN: u.sub,
+                          }
+                        : {}),
+                    },
+                  ]);
+                },
+                {
+                  immediate: !0,
+                }
+              ),
+              (u, d) => (
+                openBlock(),
+                createVNode(
+                  OptionRow,
+                  {
+                    title: u.data.name,
+                    underline: "",
+                  },
+                  {
+                    default: withCtx(() => [
+                      createElement("div", mE, [
+                        (openBlock(!0),
+                        createElementVNode(
+                          Fragment,
+                          null,
+                          renderList(
+                            u.data.options,
+                            (h) => (
+                              openBlock(),
+                              createVNode(
+                                IconCheckbox,
+                                {
+                                  key: h.key,
+                                  data: {
+                                    value: h.value,
+                                    name: h.name,
+                                    imgPath: `${u.data.subImgPath}_${h.value}`,
+                                  },
+                                  "force-hidden": i.value !== h.value,
+                                  active: i.value === h.value,
+                                },
+                                null,
+                                8,
+                                ["data", "force-hidden", "active"]
+                              )
+                            )
+                          ),
+                          128
+                        )),
+                        (openBlock(),
+                        createElementVNode(
+                          Fragment,
+                          null,
+                          renderList(r, (h) =>
+                            renderComponent(
+                              IconCheckbox,
                               {
-                                key: 0,
-                                "onUpdate:modelValue":
-                                  cache[0] ||
-                                  (cache[0] = (newVal) => (currentQuantity.value = newVal)),
-                                type: "number",
-                                class: normalizeClass(["basic-input", "-fixed-w"]),
-                                id: instance.type === "default" ? "QTY" : "INNER_QTY",
-                                onFocusout: handleFocusOut,
+                                key: h.key,
+                                data: {
+                                  value: h.value,
+                                  name: h.name,
+                                  imgPath: h.imgPath,
+                                },
+                                "force-hidden": i.value === "BPLFT",
+                                active: l.value === h.value,
+                                onSelect: d[0] || (d[0] = (f) => (l.value = f.value)),
                               },
                               null,
-                              40,
-                              bookQtyInputIdAttrs
-                            )),
-                            [[vModelText, currentQuantity.value]]
-                          )
-                        : withDirectives(
-                            (openBlock(),
+                              8,
+                              ["data", "force-hidden", "active"]
+                            )
+                          ),
+                          64
+                        )),
+                      ]),
+                    ]),
+                    _: 1,
+                  },
+                  8,
+                  ["title"]
+                )
+              )
+            );
+          },
+        }),
+      },
+      Symbol.toStringTag,
+      {
+        value: "Module",
+      }
+    )
+  ),
+  gE = {
+    class: "flex-row",
+  },
+  yE = {
+    class: "notes",
+  },
+  CE = {
+    class: "note",
+  },
+  TE = Object.freeze(
+    Object.defineProperty(
+      {
+        __proto__: null,
+        default: defineComponent({
+          __name: "BON_PAP",
+          props: {
+            data: {},
+          },
+          emits: ["update"],
+          setup(e, { emit: t }) {
+            const n = e,
+              o = t,
+              s = ref(n.data.options[0].value),
+              r = ref(n.data.options[0].name),
+              a = (i) => {
+                (s.value = i.value), (r.value = i.name);
+              };
+            return (
+              watch(
+                () => s.value,
+                (i) => {
+                  o("update", [
+                    {
+                      PCS_CD: n.data.value,
+                      PCS_DTL_CD: i,
+                      PCS_DTL_NM: r.value,
+                    },
+                  ]);
+                },
+                {
+                  immediate: !0,
+                }
+              ),
+              (i, l) => (
+                openBlock(),
+                createVNode(
+                  OptionRow,
+                  {
+                    title: i.data.name,
+                    underline: "",
+                  },
+                  {
+                    default: withCtx(() => [
+                      createElement("div", gE, [
+                        (openBlock(!0),
+                        createElementVNode(
+                          Fragment,
+                          null,
+                          renderList(
+                            i.data.options,
+                            (c) => (
+                              openBlock(),
+                              createVNode(
+                                IconCheckbox,
+                                {
+                                  key: c.key,
+                                  data: {
+                                    value: c.value,
+                                    name: c.name,
+                                    imgPath: i.data.value,
+                                  },
+                                  active: s.value === c.value,
+                                  onSelect: a,
+                                },
+                                null,
+                                8,
+                                ["data", "active"]
+                              )
+                            )
+                          ),
+                          128
+                        )),
+                      ]),
+                      createElement("div", yE, [
+                        createElement(
+                          "p",
+                          CE,
+                          toDisplayString(i.data.options[0]?.extra?.NOTICE[0]),
+                          1
+                        ),
+                      ]),
+                    ]),
+                    _: 1,
+                  },
+                  8,
+                  ["title"]
+                )
+              )
+            );
+          },
+        }),
+      },
+      Symbol.toStringTag,
+      {
+        value: "Module",
+      }
+    )
+  ),
+  bE = {
+    class: "flex-row",
+  },
+  SE = Object.freeze(
+    Object.defineProperty(
+      {
+        __proto__: null,
+        default: defineComponent({
+          __name: "BON_SHT",
+          props: {
+            data: {},
+          },
+          emits: ["update"],
+          setup(e, { emit: t }) {
+            const n = e,
+              o = t,
+              s = ref(n.data.options[0].value),
+              r = ref(n.data.options[0].name),
+              a = (i) => {
+                (s.value = i.value), (r.value = i.name);
+              };
+            return (
+              watch(
+                () => s.value,
+                (i) => {
+                  o("update", [
+                    {
+                      PCS_CD: n.data.value,
+                      PCS_DTL_CD: i,
+                      PCS_DTL_NM: `${n.data.name}(${r.value})`,
+                    },
+                  ]);
+                },
+                {
+                  immediate: !0,
+                }
+              ),
+              (i, l) => (
+                openBlock(),
+                createVNode(
+                  OptionRow,
+                  {
+                    title: i.data.name,
+                    underline: "",
+                  },
+                  {
+                    default: withCtx(() => [
+                      createElement("div", bE, [
+                        (openBlock(!0),
+                        createElementVNode(
+                          Fragment,
+                          null,
+                          renderList(
+                            i.data.options,
+                            (c) => (
+                              openBlock(),
+                              createVNode(
+                                IconCheckbox,
+                                {
+                                  key: c.key,
+                                  data: {
+                                    value: c.value,
+                                    name: c.name,
+                                    imgPath: `${i.data.subImgPath}_${c.value}`,
+                                  },
+                                  active: s.value === c.value,
+                                  onSelect: a,
+                                },
+                                null,
+                                8,
+                                ["data", "active"]
+                              )
+                            )
+                          ),
+                          128
+                        )),
+                      ]),
+                    ]),
+                    _: 1,
+                  },
+                  8,
+                  ["title"]
+                )
+              )
+            );
+          },
+        }),
+      },
+      Symbol.toStringTag,
+      {
+        value: "Module",
+      }
+    )
+  ),
+  DE = ["value"],
+  PE = Object.freeze(
+    Object.defineProperty(
+      {
+        __proto__: null,
+        default: defineComponent({
+          __name: "CLD_STD",
+          props: {
+            data: {},
+          },
+          emits: ["update"],
+          setup(e, { emit: t }) {
+            const n = e,
+              o = t,
+              s = ref(n.data.options[0]?.value);
+            return (
+              watch(
+                () => s.value,
+                (r) => {
+                  const a = n.data.options.find((i) => i.value === r);
+                  o("update", [
+                    {
+                      PCS_CD: n.data.value,
+                      PCS_DTL_CD: r,
+                      PCS_DTL_NM: a?.name,
+                    },
+                  ]);
+                },
+                {
+                  immediate: !0,
+                }
+              ),
+              (r, a) => (
+                openBlock(),
+                createVNode(
+                  OptionRow,
+                  {
+                    title: r.data.name,
+                    underline: "",
+                  },
+                  {
+                    default: withCtx(() => [
+                      withDirectives(
+                        createElement(
+                          "select",
+                          {
+                            "onUpdate:modelValue": a[0] || (a[0] = (i) => (s.value = i)),
+                            name: "CLD_STD",
+                            class: "basic-select",
+                          },
+                          [
+                            (openBlock(!0),
                             createElementVNode(
+                              Fragment,
+                              null,
+                              renderList(
+                                r.data.options,
+                                (i) => (
+                                  openBlock(),
+                                  createElementVNode(
+                                    "option",
+                                    {
+                                      key: i.key,
+                                      value: i.value,
+                                    },
+                                    toDisplayString(unref(t)(i.name)),
+                                    9,
+                                    DE
+                                  )
+                                )
+                              ),
+                              128
+                            )),
+                          ],
+                          512
+                        ),
+                        [[vModelSelect, s.value]]
+                      ),
+                    ]),
+                    _: 1,
+                  },
+                  8,
+                  ["title"]
+                )
+              )
+            );
+          },
+        }),
+      },
+      Symbol.toStringTag,
+      {
+        value: "Module",
+      }
+    )
+  ),
+  EE = {
+    class: "grid-group",
+  },
+  OE = {
+    class: "flex-row -flow",
+  },
+  IE = Object.freeze(
+    Object.defineProperty(
+      {
+        __proto__: null,
+        default: defineComponent({
+          __name: "COT_DFT",
+          props: {
+            data: {},
+            disabledOptions: {},
+          },
+          emits: ["update"],
+          setup(e, { emit: t }) {
+            const n = e,
+              o = t,
+              s = inject("productCode", {
+                pdtCode: "",
+              }),
+              r = useI18n(),
+              a = {
+                S: "단면",
+                D: "양면",
+                TCMA: "무광",
+                TCGL: "유광",
+                TCEB: "엠보",
+                TCSL: "벨벳",
+                TCHL: "홀로그램 무지개",
+                TCSD: "홀로그램 모래알",
+                TCSS: "홀로그램 잔모래",
+                TCST: "홀로그램 별빛",
+              };
+            function i(_) {
+              const p = _.slice(-1),
+                m = _.slice(0, 4);
+              return {
+                side: p,
+                coating: m,
+              };
+            }
+            const l = computed(() => {
+                const _ = {},
+                  p = {};
+                for (const m of n.data.options) {
+                  const { side: v, coating: E } = i(m.value),
+                    k = a[v],
+                    N = r.locale === "ko" ? a[E] : m.name;
+                  _[v] ||
+                    (_[v] = {
+                      id: `COT_DFT/${v}`,
+                      name: `COT_DFT/${v}`,
+                      label: k,
+                      value: v,
+                    }),
+                    p[E] ||
+                      (p[E] = {
+                        ...m,
+                        value: E,
+                        name: N,
+                        disabled: n.disabledOptions?.includes(m.value),
+                      });
+                }
+                return {
+                  sides: _,
+                  coatings: p,
+                };
+              }),
+              c = ref(n.data.options[0].value.slice(-1)),
+              u = ref(n.data.options[0].value.slice(0, 4)),
+              d = computed(() => u.value + c.value),
+              h = {
+                TCMA: "COT_DFT_MA_BOOK",
+                TCGL: "COT_DFT_GL_BOOK",
+                TCEB: "COT_DFT_EB_BOOK",
+                TCSL: "COT_DFT_SL_BOOK",
+              },
+              f = computed(() => (s.pdtCode.startsWith("PRBK") ? h : null));
+            return (
+              watch(
+                () => d.value,
+                (_) => {
+                  const p = n.data.options.find((m) => m.value === _)?.extra;
+                  o("update", [
+                    {
+                      PCS_CD: n.data.value,
+                      PCS_DTL_CD: _,
+                      PCS_DTL_NM: p?.PCS_DTL_NM,
+                    },
+                  ]);
+                },
+                {
+                  immediate: !0,
+                }
+              ),
+              watch(
+                () => n.disabledOptions,
+                (_) => {
+                  if (!_ || !_.some((m) => m.startsWith(u.value))) return;
+                  const p = Object.values(l.value.coatings).find((m) => !m.disabled);
+                  p && (u.value = p.value);
+                }
+              ),
+              (_, p) => (
+                openBlock(),
+                createVNode(
+                  OptionRow,
+                  {
+                    title: _.data.name,
+                    underline: "",
+                  },
+                  {
+                    default: withCtx(() => [
+                      createElement("div", EE, [
+                        renderComponent(
+                          RadioGroup,
+                          {
+                            options: Object.values(l.value.sides),
+                            "default-checked": c.value,
+                            onChange: p[0] || (p[0] = (m) => (c.value = m.value)),
+                          },
+                          null,
+                          8,
+                          ["options", "default-checked"]
+                        ),
+                        createElement("div", OE, [
+                          (openBlock(!0),
+                          createElementVNode(
+                            Fragment,
+                            null,
+                            renderList(
+                              Object.values(l.value.coatings),
+                              (m) => (
+                                openBlock(),
+                                createVNode(
+                                  IconCheckbox,
+                                  {
+                                    key: m.key,
+                                    data: {
+                                      value: m.value,
+                                      name: m.name,
+                                      imgPath:
+                                        f.value && f.value[m.value]
+                                          ? f.value[m.value]
+                                          : `COT_DFT_${m.value.slice(2, 4)}`,
+                                      subImgPath: _.data.subImgPath,
+                                    },
+                                    disabled: m.disabled,
+                                    "disabled-styling": m.disabled,
+                                    active: u.value === m.value,
+                                    onSelect: p[1] || (p[1] = (v) => (u.value = v.value)),
+                                  },
+                                  null,
+                                  8,
+                                  ["data", "disabled", "disabled-styling", "active"]
+                                )
+                              )
+                            ),
+                            128
+                          )),
+                        ]),
+                      ]),
+                    ]),
+                    _: 1,
+                  },
+                  8,
+                  ["title"]
+                )
+              )
+            );
+          },
+        }),
+      },
+      Symbol.toStringTag,
+      {
+        value: "Module",
+      }
+    )
+  ),
+  RE = {
+    class: "flex-row",
+  },
+  wE = Object.freeze(
+    Object.defineProperty(
+      {
+        __proto__: null,
+        default: defineComponent({
+          __name: "COT_SEG",
+          props: {
+            data: {},
+          },
+          emits: ["update"],
+          setup(e, { emit: t }) {
+            const n = e,
+              o = t,
+              s = ref(n.data.options[0].value),
+              r = ref(`${n.data.name}(${n.data.options[0].name})`),
+              a = (i) => {
+                (s.value = i.value), (r.value = `${n.data.name}(${i.name})`);
+              };
+            return (
+              watch(
+                () => s.value,
+                (i) => {
+                  o("update", [
+                    {
+                      PCS_CD: n.data.value,
+                      PCS_DTL_CD: i,
+                      PCS_DTL_NM: r.value,
+                    },
+                  ]);
+                },
+                {
+                  immediate: !0,
+                }
+              ),
+              (i, l) => (
+                openBlock(),
+                createVNode(
+                  OptionRow,
+                  {
+                    title: i.data.name,
+                    underline: "",
+                  },
+                  {
+                    default: withCtx(() => [
+                      createElement("div", RE, [
+                        (openBlock(!0),
+                        createElementVNode(
+                          Fragment,
+                          null,
+                          renderList(
+                            i.data.options,
+                            (c) => (
+                              openBlock(),
+                              createVNode(
+                                IconCheckbox,
+                                {
+                                  key: c.key,
+                                  data: {
+                                    value: c.value,
+                                    name: c.name,
+                                    imgPath: `${i.data.subImgPath}_${c.value}`,
+                                    subImgPath: i.data.value,
+                                  },
+                                  active: s.value === c.value,
+                                  onSelect: a,
+                                },
+                                null,
+                                8,
+                                ["data", "active"]
+                              )
+                            )
+                          ),
+                          128
+                        )),
+                      ]),
+                    ]),
+                    _: 1,
+                  },
+                  8,
+                  ["title"]
+                )
+              )
+            );
+          },
+        }),
+      },
+      Symbol.toStringTag,
+      {
+        value: "Module",
+      }
+    )
+  ),
+  AE = ["value"],
+  NE = Object.freeze(
+    Object.defineProperty(
+      {
+        __proto__: null,
+        default: defineComponent({
+          __name: "CVR_INN",
+          props: {
+            data: {},
+          },
+          emits: ["update"],
+          setup(e, { emit: t }) {
+            const n = e,
+              o = t,
+              s = ref(n.data.options[0].value);
+            return (
+              watch(
+                () => s.value,
+                (r) => {
+                  const a = n.data.options.find((i) => i.value === r);
+                  o("update", [
+                    {
+                      PCS_CD: n.data.value,
+                      PCS_DTL_CD: r,
+                      PCS_DTL_NM: `${n.data.name}(${a?.name})`,
+                    },
+                  ]);
+                },
+                {
+                  immediate: !0,
+                }
+              ),
+              (r, a) => (
+                openBlock(),
+                createVNode(
+                  OptionRow,
+                  {
+                    title: r.data.name,
+                    underline: "",
+                  },
+                  {
+                    default: withCtx(() => [
+                      withDirectives(
+                        createElement(
+                          "select",
+                          {
+                            "onUpdate:modelValue": a[0] || (a[0] = (i) => (s.value = i)),
+                            name: "CVR_INN",
+                            class: "basic-select",
+                          },
+                          [
+                            (openBlock(!0),
+                            createElementVNode(
+                              Fragment,
+                              null,
+                              renderList(
+                                r.data.options,
+                                (i) => (
+                                  openBlock(),
+                                  createElementVNode(
+                                    "option",
+                                    {
+                                      key: i.key,
+                                      value: i.value,
+                                    },
+                                    toDisplayString(unref(t)(i.name)),
+                                    9,
+                                    AE
+                                  )
+                                )
+                              ),
+                              128
+                            )),
+                          ],
+                          512
+                        ),
+                        [[vModelSelect, s.value]]
+                      ),
+                    ]),
+                    _: 1,
+                  },
+                  8,
+                  ["title"]
+                )
+              )
+            );
+          },
+        }),
+      },
+      Symbol.toStringTag,
+      {
+        value: "Module",
+      }
+    )
+  ),
+  ME = {
+    class: "flex-row",
+  },
+  kE = Object.freeze(
+    Object.defineProperty(
+      {
+        __proto__: null,
+        default: defineComponent({
+          __name: "CVR_SWN",
+          props: {
+            data: {},
+          },
+          emits: ["update"],
+          setup(e, { emit: t }) {
+            const n = e,
+              o = t,
+              s = ref(n.data.options[0].value),
+              r = ref(n.data.options[0].name),
+              a = (i) => {
+                (s.value = i.value), (r.value = i.name);
+              };
+            return (
+              watch(
+                () => s.value,
+                (i) => {
+                  o("update", [
+                    {
+                      PCS_CD: n.data.value,
+                      PCS_DTL_CD: i,
+                      PCS_DTL_NM: r.value,
+                    },
+                  ]);
+                },
+                {
+                  immediate: !0,
+                }
+              ),
+              (i, l) => (
+                openBlock(),
+                createVNode(
+                  OptionRow,
+                  {
+                    title: i.data.name,
+                    underline: "",
+                  },
+                  {
+                    default: withCtx(() => [
+                      createElement("div", ME, [
+                        (openBlock(!0),
+                        createElementVNode(
+                          Fragment,
+                          null,
+                          renderList(
+                            i.data.options,
+                            (c) => (
+                              openBlock(),
+                              createVNode(
+                                IconCheckbox,
+                                {
+                                  key: c.key,
+                                  data: {
+                                    value: c.value,
+                                    name: c.name,
+                                    imgPath: `${i.data.subImgPath}_${c.value}`,
+                                    subImgPath: i.data.value,
+                                  },
+                                  active: s.value === c.value,
+                                  onSelect: a,
+                                },
+                                null,
+                                8,
+                                ["data", "active"]
+                              )
+                            )
+                          ),
+                          128
+                        )),
+                      ]),
+                    ]),
+                    _: 1,
+                  },
+                  8,
+                  ["title"]
+                )
+              )
+            );
+          },
+        }),
+      },
+      Symbol.toStringTag,
+      {
+        value: "Module",
+      }
+    )
+  ),
+  LE = Object.freeze(
+    Object.defineProperty(
+      {
+        __proto__: null,
+        default: defineComponent({
+          __name: "DIR_MTR",
+          props: {
+            data: {},
+            relatedData: {},
+          },
+          emits: ["update"],
+          setup(e, { emit: t }) {
+            const n = e,
+              o = t,
+              s = computed(() =>
+                n.data.options.map((i) => ({
+                  id: i.value,
+                  name: n.data.value,
+                  label: i.name,
+                  value: i.value,
+                }))
+              ),
+              r = ref(s.value[0]),
+              a = computed(() => ({
+                PCS_CD: n.data.value,
+                PCS_DTL_CD: r.value.value,
+                PCS_DTL_NM: r.value.label,
+                ATTB: n.relatedData.orderQty,
+              }));
+            return (
+              watch(
+                () => a.value,
+                (i, l) => {
+                  (l?.ATTB === i.ATTB && l?.PCS_DTL_CD === i.PCS_DTL_CD) || o("update", [i]);
+                },
+                {
+                  immediate: !0,
+                }
+              ),
+              (i, l) => (
+                openBlock(),
+                createVNode(
+                  OptionRow,
+                  {
+                    title: i.data.name,
+                    underline: "",
+                  },
+                  {
+                    default: withCtx(() => [
+                      renderComponent(
+                        RadioGroup,
+                        {
+                          options: s.value,
+                          "default-checked": s.value[0].value,
+                          onChange: l[0] || (l[0] = (c) => (r.value = c)),
+                        },
+                        null,
+                        8,
+                        ["options", "default-checked"]
+                      ),
+                    ]),
+                    _: 1,
+                  },
+                  8,
+                  ["title"]
+                )
+              )
+            );
+          },
+        }),
+      },
+      Symbol.toStringTag,
+      {
+        value: "Module",
+      }
+    )
+  ),
+  $E = {
+    class: "notes",
+  },
+  xE = {
+    class: "note",
+  },
+  FE = Object.freeze(
+    Object.defineProperty(
+      {
+        __proto__: null,
+        default: defineComponent({
+          __name: "END_PAP",
+          props: {
+            data: {},
+          },
+          emits: ["update"],
+          setup(e, { emit: t }) {
+            const n = e,
+              o = t,
+              s = {
+                CLYEL: "#fdeec5",
+                CLMIN: "#d5edea",
+                CLWHT: "#ffffff",
+                CLPPL: "#e0def0",
+                CLPIN: "#f6e6f1",
+                CLAPR: "#fde7dc",
+                CLGRN: "#e4f2e8",
+                CLBLU: "#adccec",
+                CLSKY: "#bae5fb",
+                CLGRY: "#ededee",
+              },
+              r = computed(() =>
+                n.data.options.map((i) => ({
+                  COD: i.value,
+                  COD_NME: i.name,
+                  HEX: s[i.value],
+                }))
+              ),
+              a = ref(r.value[0]);
+            return (
+              watch(
+                () => a.value,
+                (i) => {
+                  o("update", [
+                    {
+                      PCS_CD: n.data.value,
+                      PCS_DTL_CD: i.COD,
+                      PCS_DTL_NM: `${n.data.name}(${i.COD_NME})`,
+                    },
+                  ]);
+                },
+                {
+                  immediate: !0,
+                }
+              ),
+              (i, l) => (
+                openBlock(),
+                createVNode(
+                  OptionRow,
+                  {
+                    title: i.data.name,
+                    underline: "",
+                  },
+                  {
+                    default: withCtx(() => [
+                      renderComponent(
+                        ColorChipSelector,
+                        {
+                          options: r.value,
+                          onSelect: l[0] || (l[0] = (c) => (a.value = c)),
+                        },
+                        null,
+                        8,
+                        ["options"]
+                      ),
+                      createElement("div", $E, [
+                        createElement(
+                          "p",
+                          xE,
+                          toDisplayString(i.data.options[0]?.extra?.NOTICE[0]),
+                          1
+                        ),
+                      ]),
+                    ]),
+                    _: 1,
+                  },
+                  8,
+                  ["title"]
+                )
+              )
+            );
+          },
+        }),
+      },
+      Symbol.toStringTag,
+      {
+        value: "Module",
+      }
+    )
+  ),
+  UE = {
+    class: "flex-row",
+  },
+  BE = ["value", "disabled"],
+  VE = ["value"],
+  HE = {
+    key: 0,
+    class: "notes",
+  },
+  GE = Object.freeze(
+    Object.defineProperty(
+      {
+        __proto__: null,
+        default: defineComponent({
+          __name: "INN_DFT",
+          props: {
+            data: {},
+            relatedData: {},
+          },
+          emits: ["update"],
+          setup(e, { emit: t }) {
+            const n = e,
+              o = t,
+              s = inject("productCode", {
+                pdtCode: "",
+              }),
+              r = computed(() => n.data.options[0].extra.QTY_INPUT_YN === "Y"),
+              a = computed(() =>
+                s.pdtCode === "GSNTMIS" && c.value
+                  ? n.data.options.map((f) => ({
+                      ...f,
+                      disabled: f.value !== "INNON",
+                    }))
+                  : n.data.options
+              ),
+              i = ref(n.data.options[0].value),
+              l = computed(() => a.value.find((f) => f.value === i.value)),
+              c = computed(
+                () =>
+                  n.relatedData.sizeInfo?.DIV_SEQ === 0 ||
+                  n.relatedData.sizeInfo?.DIV_NM === "사이즈직접입력"
+              ),
+              u = ref(1),
+              d = () => {
+                if (u.value < 1) return (u.value = 1);
+              };
+            watch(
+              () => c.value,
+              (f) => {
+                f && (i.value = "INNON");
+              }
+            );
+            const h = computed(() => [
+              {
+                PCS_CD: n.data.value,
+                PCS_DTL_CD: i.value,
+                PCS_DTL_NM: `${n.data.name}(${l.value?.name})`,
+                ATTB: r.value ? u.value : n.relatedData.orderQty,
+                ATTB_2: "",
+                ATTB_3: "",
+              },
+            ]);
+            return (
+              watch(
+                () => h.value,
+                (f) => {
+                  o("update", f);
+                },
+                {
+                  immediate: !0,
+                }
+              ),
+              (f, _) => {
+                const p = resolveDirective("dompurify-html");
+                return (
+                  openBlock(),
+                  createVNode(
+                    OptionRow,
+                    {
+                      title: f.data.name,
+                      underline: "",
+                    },
+                    {
+                      default: withCtx(() => [
+                        createElement("div", UE, [
+                          withDirectives(
+                            createElement(
                               "select",
                               {
-                                key: 1,
-                                "onUpdate:modelValue":
-                                  cache[1] ||
-                                  (cache[1] = (newVal) => (currentQuantity.value = newVal)),
-                                name: instance.type === "default" ? "QTY" : "INNER_QTY",
-                                class: "basic-select -fixed-w",
+                                "onUpdate:modelValue": _[0] || (_[0] = (m) => (i.value = m)),
+                                name: "INN_DFT",
+                                class: "basic-select",
                               },
                               [
                                 (openBlock(!0),
@@ -2305,2489 +7050,2210 @@ const CheckmarkIcon = withScopeId(CheckmarkIconDef, [["render", renderCheckmarkI
                                   Fragment,
                                   null,
                                   renderList(
-                                    selectOptions.value,
-                                    (opt) => (
+                                    a.value,
+                                    (m) => (
                                       openBlock(),
                                       createElementVNode(
                                         "option",
                                         {
-                                          value: opt.value,
-                                          key: opt.value,
+                                          key: m.key,
+                                          value: m.value,
+                                          disabled: m.disabled,
                                         },
-                                        toDisplayString(opt.value),
+                                        toDisplayString(unref(t)(m.name)),
                                         9,
-                                        bookQtyOptionValueAttrs
+                                        BE
                                       )
                                     )
                                   ),
                                   128
                                 )),
                               ],
-                              8,
-                              bookQtySelectNameAttrs
-                            )),
-                            [[vModelSelect, currentQuantity.value]]
+                              512
+                            ),
+                            [[vModelSelect, i.value]]
                           ),
-                      createElement(
-                        "button",
-                        {
-                          type: "button",
-                          class: "action-btn",
-                          onClick: toggleQtyInputMode,
-                        },
-                        toDisplayString(
-                          qtyInputMode.value === "input"
-                            ? unref(translate)("수량선택")
-                            : unref(translate)("직접입력")
-                        ),
-                        1
-                      ),
-                    ]),
-                    instance.type === "default"
-                      ? (openBlock(),
-                        createElementVNode("div", bookQtyDefaultNotesClass, [
-                          isTonerBooklet.value
+                          r.value
                             ? withDirectives(
                                 (openBlock(),
-                                createElementVNode("p", bookQtyTonerNoteClass, null, 512)),
-                                [
-                                  [
-                                    domPurifyDirective,
-                                    unref(translate)(
-                                      requiresEvenCount.value
-                                        ? "토너책자최소수량안내-짝수"
-                                        : "토너책자최소수량안내"
-                                    ).replace("{MIN_CNT}", `${minQuantity.value}`),
-                                  ],
-                                ]
+                                createElementVNode(
+                                  "input",
+                                  {
+                                    key: 0,
+                                    "onUpdate:modelValue": _[1] || (_[1] = (m) => (u.value = m)),
+                                    type: "number",
+                                    id: "qty",
+                                    class: "basic-input",
+                                    onFocusout: d,
+                                  },
+                                  null,
+                                  544
+                                )),
+                                [[vModelText, u.value]]
                               )
-                            : withDirectives(
-                                (openBlock(),
-                                createElementVNode("p", bookQtyDefaultNoteClass, null, 512)),
-                                [
+                            : (openBlock(),
+                              createElementVNode(
+                                "input",
+                                {
+                                  key: 1,
+                                  type: "number",
+                                  id: "qty",
+                                  disabled: !0,
+                                  value: f.relatedData.orderQty,
+                                  class: "basic-input",
+                                },
+                                null,
+                                8,
+                                VE
+                              )),
+                        ]),
+                        l.value
+                          ? (openBlock(),
+                            createElementVNode("div", HE, [
+                              (openBlock(!0),
+                              createElementVNode(
+                                Fragment,
+                                null,
+                                renderList(l.value.extra.NOTICE, (m, v) =>
+                                  withDirectives(
+                                    (openBlock(),
+                                    createElementVNode("p", {
+                                      key: `notice-${v}`,
+                                      class: "note",
+                                    })),
+                                    [[p, m]]
+                                  )
+                                ),
+                                128
+                              )),
+                            ]))
+                          : createCommentVNode("", !0),
+                      ]),
+                      _: 1,
+                    },
+                    8,
+                    ["title"]
+                  )
+                );
+              }
+            );
+          },
+        }),
+      },
+      Symbol.toStringTag,
+      {
+        value: "Module",
+      }
+    )
+  ),
+  jE = {
+    class: "flex-row",
+  },
+  zE = Object.freeze(
+    Object.defineProperty(
+      {
+        __proto__: null,
+        default: defineComponent({
+          __name: "INS_COT",
+          props: {
+            data: {},
+          },
+          emits: ["update"],
+          setup(e, { emit: t }) {
+            const n = e,
+              o = t,
+              s = ref(n.data.options[0].value),
+              r = ref(n.data.options[0].name),
+              a = (i) => {
+                (s.value = i.value), (r.value = i.name);
+              };
+            return (
+              watch(
+                () => s.value,
+                (i) => {
+                  o("update", [
+                    {
+                      PCS_CD: n.data.value,
+                      PCS_DTL_CD: i,
+                      PCS_DTL_NM: r.value,
+                    },
+                  ]);
+                },
+                {
+                  immediate: !0,
+                }
+              ),
+              (i, l) => (
+                openBlock(),
+                createVNode(
+                  OptionRow,
+                  {
+                    title: i.data.name,
+                    underline: "",
+                  },
+                  {
+                    default: withCtx(() => [
+                      createElement("div", jE, [
+                        (openBlock(!0),
+                        createElementVNode(
+                          Fragment,
+                          null,
+                          renderList(
+                            i.data.options,
+                            (c) => (
+                              openBlock(),
+                              createVNode(
+                                IconCheckbox,
+                                {
+                                  key: c.key,
+                                  data: {
+                                    value: c.value,
+                                    name: c.name,
+                                    imgPath: `${i.data.subImgPath}_${c.value}`,
+                                    subImgPath: i.data.value,
+                                  },
+                                  active: s.value === c.value,
+                                  onSelect: a,
+                                },
+                                null,
+                                8,
+                                ["data", "active"]
+                              )
+                            )
+                          ),
+                          128
+                        )),
+                      ]),
+                    ]),
+                    _: 1,
+                  },
+                  8,
+                  ["title"]
+                )
+              )
+            );
+          },
+        }),
+      },
+      Symbol.toStringTag,
+      {
+        value: "Module",
+      }
+    )
+  ),
+  YE = {
+    class: "flex-row",
+  },
+  KE = Object.freeze(
+    Object.defineProperty(
+      {
+        __proto__: null,
+        default: defineComponent({
+          __name: "LAB_FBR",
+          props: {
+            data: {},
+          },
+          emits: ["update"],
+          setup(e, { emit: t }) {
+            const n = e,
+              o = t,
+              s = ref(n.data.options[0].value),
+              r = ref(n.data.options[0].name),
+              a = (i) => {
+                (s.value = i.value), (r.value = i.name);
+              };
+            return (
+              watch(
+                () => s.value,
+                (i) => {
+                  o("update", [
+                    {
+                      PCS_CD: n.data.value,
+                      PCS_DTL_CD: i,
+                      PCS_DTL_NM: r.value,
+                    },
+                  ]);
+                },
+                {
+                  immediate: !0,
+                }
+              ),
+              (i, l) => (
+                openBlock(),
+                createVNode(
+                  OptionRow,
+                  {
+                    title: i.data.name,
+                    underline: "",
+                  },
+                  {
+                    default: withCtx(() => [
+                      createElement("div", YE, [
+                        (openBlock(!0),
+                        createElementVNode(
+                          Fragment,
+                          null,
+                          renderList(
+                            i.data.options,
+                            (c) => (
+                              openBlock(),
+                              createVNode(
+                                IconCheckbox,
+                                {
+                                  key: c.key,
+                                  data: {
+                                    value: c.value,
+                                    name: c.name,
+                                    imgPath: `${i.data.subImgPath}_${c.value}`,
+                                    subImgPath: i.data.value,
+                                  },
+                                  active: s.value === c.value,
+                                  onSelect: a,
+                                },
+                                null,
+                                8,
+                                ["data", "active"]
+                              )
+                            )
+                          ),
+                          128
+                        )),
+                      ]),
+                    ]),
+                    _: 1,
+                  },
+                  8,
+                  ["title"]
+                )
+              )
+            );
+          },
+        }),
+      },
+      Symbol.toStringTag,
+      {
+        value: "Module",
+      }
+    )
+  ),
+  WE = {
+    class: "flex-row",
+  },
+  qE = Object.freeze(
+    Object.defineProperty(
+      {
+        __proto__: null,
+        default: defineComponent({
+          __name: "PAK_ETC",
+          props: {
+            data: {},
+            relatedData: {},
+          },
+          emits: ["update"],
+          setup(e, { emit: t }) {
+            const n = e,
+              o = t,
+              s = inject("productCode", {
+                pdtCode: "",
+              }),
+              r = inject("callbacks", {}),
+              a = inject("deviceType", "pc"),
+              i = ref(
+                n.data.options.find((p) => p.value === "DFXXX" || p.value === "PK000")?.value ||
+                  n.data.options[0].value
+              ),
+              l = (p) => {
+                i.value = p.value;
+              },
+              c = {
+                GSBKBCH: {
+                  PK017: "PAK_ETC_PK017",
+                },
+                TPCLECO: {
+                  PK018: "PAK_ETC_PK018",
+                  PK019: "PAK_ETC_PK019",
+                  PK020: "PAK_ETC_PK019",
+                  PK021: "PAK_ETC_PK019",
+                  PK022: "PAK_ETC_PK019",
+                  PK023: "PAK_ETC_PK019",
+                  PK024: "PAK_ETC_PK019",
+                  PK025: "PAK_ETC_PK019",
+                  PK026: "PAK_ETC_PK019",
+                  PK027: "PAK_ETC_PK019",
+                  PK028: "PAK_ETC_PK019",
+                },
+              },
+              u = computed(() => c[s.pdtCode]),
+              d = {
+                PK017: {
+                  src: `${CDN_BASE_URL}/ko/item/order_beachTowel_opt_hover_1.png`,
+                  alt: "Beach Towel PVC bag image",
+                },
+              },
+              h = computed(() =>
+                n.data.options.map((p, m) => {
+                  const v = d[p.value];
+                  return v
+                    ? {
+                        IDX: m + 1,
+                        CATEGORY: `${t("후가공")} > ${p.name}`,
+                        LABEL: p.name,
+                        IMG_URL: v.src,
+                        IMG_ALT: v.alt,
+                      }
+                    : null;
+                })
+              );
+            watch(
+              () => i.value,
+              (p) => {
+                const m = n.data.options.find((v) => v.value === p)?.name || n.data.name;
+                o("update", [
+                  {
+                    PCS_CD: n.data.value,
+                    PCS_DTL_CD: p,
+                    PCS_DTL_NM: m,
+                  },
+                ]);
+              },
+              {
+                immediate: !0,
+              }
+            );
+            const f = {
+                EC001: "PK019",
+                EC002: "PK020",
+                EC003: "PK021",
+                EC004: "PK022",
+                EC005: "PK023",
+                EC006: "PK024",
+                EC007: "PK025",
+                EC008: "PK026",
+                EC009: "PK027",
+                EC010: "PK028",
+              },
+              _ = reactive(n.data.options);
+            return (
+              watch(
+                () => n.relatedData?.postpcs?.CLD_STD,
+                (p) => {
+                  if (!p) return;
+                  const m = p[0].selectedOptions[0].PCS_DTL_CD;
+                  if (!m) return;
+                  const v = f[m];
+                  for (const E of _)
+                    E.value === "PK018" || E.value === v
+                      ? (E.forceHidden = !1)
+                      : (E.forceHidden = !0),
+                      E.forceHidden && E.value === i.value && (i.value = v);
+                },
+                {
+                  immediate: !0,
+                  deep: !0,
+                }
+              ),
+              (p, m) => (
+                openBlock(),
+                createVNode(
+                  OptionRow,
+                  {
+                    title: p.data.name || "폴리백 개별포장",
+                    underline: "",
+                    extra:
+                      unref(a) === "mobile" && h.value
+                        ? {
+                            name: "자세히보기",
+                            callback: () => {
+                              unref(r).onInformOptionTips && unref(r).onInformOptionTips(h.value);
+                            },
+                            style: "tip",
+                          }
+                        : null,
+                  },
+                  {
+                    default: withCtx(() => [
+                      createElement("div", WE, [
+                        (openBlock(!0),
+                        createElementVNode(
+                          Fragment,
+                          null,
+                          renderList(
+                            _,
+                            (v, E) => (
+                              openBlock(),
+                              createVNode(
+                                IconCheckbox,
+                                {
+                                  key: v.key,
+                                  data: {
+                                    value: v.value,
+                                    name: v.name,
+                                    imgPath:
+                                      u.value && u.value[v.value]
+                                        ? u.value[v.value]
+                                        : p.data.imgPath,
+                                    subImgPath: p.data.subImgPath,
+                                  },
+                                  "force-hidden": v.forceHidden,
+                                  active: i.value === v.value,
+                                  tip: h.value[E],
+                                  onSelect: l,
+                                },
+                                null,
+                                8,
+                                ["data", "force-hidden", "active", "tip"]
+                              )
+                            )
+                          ),
+                          128
+                        )),
+                      ]),
+                    ]),
+                    _: 1,
+                  },
+                  8,
+                  ["title", "extra"]
+                )
+              )
+            );
+          },
+        }),
+      },
+      Symbol.toStringTag,
+      {
+        value: "Module",
+      }
+    )
+  ),
+  QE = {
+    class: "flex-row",
+  },
+  XE = Object.freeze(
+    Object.defineProperty(
+      {
+        __proto__: null,
+        default: defineComponent({
+          __name: "PAK_POL",
+          props: {
+            data: {},
+          },
+          emits: ["update"],
+          setup(e, { emit: t }) {
+            const n = e,
+              o = t,
+              s = ref(n.data.options[0].value),
+              r = (a) => {
+                s.value = a.value;
+              };
+            return (
+              watch(
+                () => s.value,
+                (a) => {
+                  o("update", [
+                    {
+                      PCS_CD: n.data.value,
+                      PCS_DTL_CD: a,
+                      PCS_DTL_NM: n.data.name,
+                    },
+                  ]);
+                },
+                {
+                  immediate: !0,
+                }
+              ),
+              (a, i) => (
+                openBlock(),
+                createVNode(
+                  OptionRow,
+                  {
+                    title: a.data.name || "폴리백 개별포장",
+                    underline: "",
+                  },
+                  {
+                    default: withCtx(() => [
+                      createElement("div", QE, [
+                        (openBlock(!0),
+                        createElementVNode(
+                          Fragment,
+                          null,
+                          renderList(
+                            a.data.options,
+                            (l) => (
+                              openBlock(),
+                              createVNode(
+                                IconCheckbox,
+                                {
+                                  key: l.key,
+                                  data: {
+                                    value: l.value,
+                                    name: l.name,
+                                    imgPath: a.data.imgPath,
+                                    subImgPath: a.data.subImgPath,
+                                  },
+                                  active: s.value === l.value,
+                                  onSelect: r,
+                                },
+                                null,
+                                8,
+                                ["data", "active"]
+                              )
+                            )
+                          ),
+                          128
+                        )),
+                      ]),
+                    ]),
+                    _: 1,
+                  },
+                  8,
+                  ["title"]
+                )
+              )
+            );
+          },
+        }),
+      },
+      Symbol.toStringTag,
+      {
+        value: "Module",
+      }
+    )
+  ),
+  JE = {
+    class: "flex-row",
+  },
+  ZE = Object.freeze(
+    Object.defineProperty(
+      {
+        __proto__: null,
+        default: defineComponent({
+          __name: "PDT_WRK",
+          props: {
+            data: {},
+            relatedData: {},
+          },
+          emits: ["update"],
+          setup(e, { emit: t }) {
+            const n = e,
+              o = t,
+              s = inject("deviceType", "pc"),
+              r = inject("callbacks", {}),
+              a = ref(n.data.options[0].value),
+              i = (d) => {
+                a.value = d.value;
+              },
+              l = computed(() => ({
+                PCS_CD: n.data.value,
+                PCS_DTL_CD: a.value,
+                PCS_DTL_NM: n.data.name,
+                ATTB: n.relatedData.orderQty,
+              })),
+              c = {
+                PP002: {
+                  src: `${CDN_BASE_URL}/ko/STDRCAD_back_print_over_img.png`,
+                  alt: "Back paper image",
+                },
+              },
+              u = computed(() =>
+                n.data.options.map((d, h) => {
+                  const f = c[d.value];
+                  return f
+                    ? {
+                        IDX: h + 1,
+                        CATEGORY: `${t("후가공")} > ${d.name}`,
+                        LABEL: d.name,
+                        IMG_URL: f.src,
+                        IMG_ALT: f.alt,
+                      }
+                    : null;
+                })
+              );
+            return (
+              watch(
+                () => l.value,
+                (d) => {
+                  o("update", [d]);
+                },
+                {
+                  immediate: !0,
+                }
+              ),
+              (d, h) => (
+                openBlock(),
+                createVNode(
+                  OptionRow,
+                  {
+                    title: d.data.name,
+                    underline: "",
+                    extra:
+                      unref(s) === "mobile" && u.value
+                        ? {
+                            name: "자세히보기",
+                            callback: () => {
+                              unref(r).onInformOptionTips && unref(r).onInformOptionTips(u.value);
+                            },
+                            style: "tip",
+                          }
+                        : null,
+                  },
+                  {
+                    default: withCtx(() => [
+                      createElement("div", JE, [
+                        (openBlock(!0),
+                        createElementVNode(
+                          Fragment,
+                          null,
+                          renderList(
+                            d.data.options,
+                            (f, _) => (
+                              openBlock(),
+                              createVNode(
+                                IconCheckbox,
+                                {
+                                  key: f.key,
+                                  data: {
+                                    value: f.value,
+                                    name: f.name,
+                                    imgPath: `${d.data.value}_${f.value}`,
+                                  },
+                                  active: a.value === f.value,
+                                  tip: u.value[_],
+                                  onSelect: i,
+                                },
+                                null,
+                                8,
+                                ["data", "active", "tip"]
+                              )
+                            )
+                          ),
+                          128
+                        )),
+                      ]),
+                    ]),
+                    _: 1,
+                  },
+                  8,
+                  ["title", "extra"]
+                )
+              )
+            );
+          },
+        }),
+      },
+      Symbol.toStringTag,
+      {
+        value: "Module",
+      }
+    )
+  ),
+  eO = {
+    class: "option packing",
+  },
+  tO = {
+    class: "title",
+  },
+  nO = {
+    class: "flex-row",
+  },
+  oO = Object.freeze(
+    Object.defineProperty(
+      {
+        __proto__: null,
+        default: defineComponent({
+          __name: "PRT_IPK",
+          setup(e) {
+            return (t, n) => (
+              openBlock(),
+              createElementVNode("div", eO, [
+                createElement("div", tO, [
+                  createElement("h2", null, toDisplayString(unref(t)("개별포장")), 1),
+                ]),
+                createElement("div", nO, [
+                  renderComponent(IconCheckbox, {
+                    data: {
+                      value: "PRT_IPK",
+                      name: "개별포장",
+                      imgPath: "PRT_IPK",
+                    },
+                    active: !0,
+                  }),
+                ]),
+              ])
+            );
+          },
+        }),
+      },
+      Symbol.toStringTag,
+      {
+        value: "Module",
+      }
+    )
+  ),
+  sO = {
+    class: "flex-row",
+  },
+  lh = defineComponent({
+    __name: "PRT_WHT_FACE",
+    props: {
+      mode: {},
+      options: {},
+    },
+    emits: ["update"],
+    setup(e, { emit: t }) {
+      const n = e,
+        o = t,
+        s = useEditorStore(),
+        r = computed(() =>
+          n.options.map((u) => ({
+            value: u.value,
+            name: u.name,
+            imgPath: u.extra?.PCS_CD || "",
+            extra: u.extra,
+          }))
+        ),
+        a = reactive({
+          DFXXF: !0,
+          DFXXB: !0,
+        });
+      function i(u) {
+        a[u.value] = !a[u.value];
+      }
+      const l = computed(() => {
+        const u = [];
+        return (
+          n.options.forEach((d) => {
+            (d.extra?.ESN_YN === "Y" || a[d.value]) &&
+              u.push({
+                PCS_CD: d.extra?.PCS_CD || "PRT_WHT",
+                PCS_GRP_NM: d.extra.PCS_GRP_NM,
+                VIEW_YN: "Y",
+                ESN_YN: d.extra?.ESN_YN || "N",
+                selectedOptions: [
+                  {
+                    PCS_CD: d.extra?.PCS_CD,
+                    PCS_DTL_CD: d.extra?.PCS_DTL_CD,
+                    PCS_DTL_NM: d.extra?.PCS_DTL_NM,
+                    ATTB: "Y",
+                    ATTB_2: n.mode,
+                  },
+                ],
+              });
+          }),
+          u
+        );
+      });
+      watch(
+        () => l.value,
+        (u) => {
+          u && o("update", u);
+        },
+        {
+          immediate: !0,
+        }
+      ),
+        watch(
+          () => s.editorData?.default?.PRT_WHT,
+          (u) => {
+            u && ((a.DFXXF = u?.front ?? !1), (a.DFXXB = u?.back ?? !1));
+          },
+          {
+            immediate: !0,
+          }
+        );
+      const { resetEditByWhite: c } = useWhiteReset();
+      return (
+        onBeforeUnmount(() => {
+          s.isAfterEdit() && c();
+        }),
+        watch(
+          () => s.uploadType.default,
+          (u) => {
+            u === "editor" && ((a.DFXXF = !0), (a.DFXXB = !0));
+          }
+        ),
+        (u, d) => (
+          openBlock(),
+          createElementVNode("div", sO, [
+            (openBlock(!0),
+            createElementVNode(
+              Fragment,
+              null,
+              renderList(
+                r.value,
+                (h) => (
+                  openBlock(),
+                  createVNode(
+                    IconCheckbox,
+                    {
+                      key: h.value,
+                      data: h,
+                      active: a[h.value],
+                      disabled: h.extra?.ESN_YN === "Y" || unref(s).uploadType.default === "editor",
+                      onSelect: i,
+                    },
+                    null,
+                    8,
+                    ["data", "active", "disabled"]
+                  )
+                )
+              ),
+              128
+            )),
+          ])
+        )
+      );
+    },
+  }),
+  rO = Object.freeze(
+    Object.defineProperty(
+      {
+        __proto__: null,
+        default: lh,
+      },
+      Symbol.toStringTag,
+      {
+        value: "Module",
+      }
+    )
+  ),
+  iO = {
+    class: "grid-group",
+  },
+  aO = {
+    class: "basic-radio",
+  },
+  lO = {
+    for: "auto-white",
+  },
+  uO = {
+    class: "text",
+  },
+  cO = {
+    key: 0,
+    for: "self-white",
+  },
+  dO = {
+    class: "text disabled",
+  },
+  fO = {
+    key: 1,
+    class: "note red",
+  },
+  pO = Object.freeze(
+    Object.defineProperty(
+      {
+        __proto__: null,
+        default: defineComponent({
+          __name: "PRT_WHT",
+          props: {
+            data: {},
+            relatedData: {},
+          },
+          emits: ["update", "update:replace"],
+          setup(e, { emit: t }) {
+            const n = e,
+              o = t,
+              s = useEditorStore(),
+              r = inject("productCode", {
+                pdtCode: "",
+              }),
+              a = computed(() => n.data.options.length >= 2),
+              i = ref("Y"),
+              l = computed(() => n.data.options[0].extra?.NOTICE[i.value === "Y" ? 0 : 1]),
+              c = computed(() =>
+                a.value
+                  ? []
+                  : n.data.options
+                      .filter((_, p) => _.extra?.ESN_YN === "Y" || p === 0)
+                      .map((_) => ({
+                        PCS_CD: _.extra?.PCS_CD,
+                        PCS_DTL_CD: _.extra?.PCS_DTL_CD,
+                        PCS_DTL_NM: _.extra?.PCS_DTL_NM,
+                        ATTB: "Y",
+                        ATTB_2: i.value,
+                      }))
+              ),
+              { canResetWhite: u, resetEditByWhite: d } = useWhiteReset();
+            watch(
+              () => c.value,
+              (_) => {
+                if (_)
+                  if (r.pdtCode.startsWith("AC")) {
+                    if (a.value && !s.isAfterEdit()) return;
+                    u.value && d(), o("update", _), s.isAfterEdit() && !u.value && (u.value = !0);
+                  } else o("update", _);
+              },
+              {
+                immediate: !0,
+              }
+            );
+            const h = (_) => {
+                o("update:replace", _);
+              },
+              f = computed(() =>
+                whiteAlwaysAutoSet.has(r.pdtCode)
+                  ? !1
+                  : s.uploadType.default === "pdf"
+                  ? !0
+                  : whiteExclusionMap[r.pdtCode] && n.relatedData.mtrlCd
+                  ? !whiteExclusionMap[r.pdtCode][n.relatedData.mtrlCd]
+                  : !1
+              );
+            return (
+              watch(
+                () => f.value,
+                (_) => {
+                  _ || ((i.value = "Y"), o("update", c.value));
+                }
+              ),
+              (_, p) => (
+                openBlock(),
+                createVNode(
+                  OptionRow,
+                  {
+                    title: _.data.name,
+                    underline: "",
+                  },
+                  {
+                    default: withCtx(() => [
+                      createElement("div", iO, [
+                        createElement("div", aO, [
+                          createElement("label", lO, [
+                            withDirectives(
+                              createElement(
+                                "input",
+                                {
+                                  type: "radio",
+                                  id: "auto-white",
+                                  name: "white-mode",
+                                  "onUpdate:modelValue": p[0] || (p[0] = (m) => (i.value = m)),
+                                  value: "Y",
+                                },
+                                null,
+                                512
+                              ),
+                              [[vModelRadio, i.value]]
+                            ),
+                            createElement("span", uO, toDisplayString(unref(t)("자동화이트")), 1),
+                          ]),
+                          f.value
+                            ? (openBlock(),
+                              createElementVNode("label", cO, [
+                                withDirectives(
+                                  createElement(
+                                    "input",
+                                    {
+                                      type: "radio",
+                                      id: "self-white",
+                                      name: "white-mode",
+                                      "onUpdate:modelValue": p[1] || (p[1] = (m) => (i.value = m)),
+                                      value: "N",
+                                    },
+                                    null,
+                                    512
+                                  ),
+                                  [[vModelRadio, i.value]]
+                                ),
+                                createElement(
+                                  "span",
+                                  dO,
+                                  toDisplayString(unref(t)("수동화이트")),
+                                  1
+                                ),
+                              ]))
+                            : createCommentVNode("", !0),
+                        ]),
+                        a.value
+                          ? (openBlock(),
+                            createVNode(
+                              lh,
+                              {
+                                key: 0,
+                                mode: i.value,
+                                options: _.data.options,
+                                onUpdate: h,
+                              },
+                              null,
+                              8,
+                              ["mode", "options"]
+                            ))
+                          : createCommentVNode("", !0),
+                        l.value
+                          ? (openBlock(),
+                            createElementVNode("p", fO, "* " + toDisplayString(l.value), 1))
+                          : createCommentVNode("", !0),
+                      ]),
+                    ]),
+                    _: 1,
+                  },
+                  8,
+                  ["title"]
+                )
+              )
+            );
+          },
+        }),
+      },
+      Symbol.toStringTag,
+      {
+        value: "Module",
+      }
+    )
+  ),
+  _O = {
+    class: "flex-row",
+  },
+  hO = Object.freeze(
+    Object.defineProperty(
+      {
+        __proto__: null,
+        default: defineComponent({
+          __name: "RIN_DFT",
+          props: {
+            data: {},
+          },
+          emits: ["update"],
+          setup(e, { emit: t }) {
+            const n = e,
+              o = t,
+              s = ref(n.data.attbOptions[0].value),
+              r = ref(n.data.attbOptions[0].name),
+              a = (i) => {
+                (s.value = i.value), (r.value = i.name);
+              };
+            return (
+              watch(
+                () => s.value,
+                (i) => {
+                  o("update", [
+                    {
+                      PCS_CD: n.data.value,
+                      PCS_DTL_CD: n.data.options[0].value,
+                      PCS_DTL_NM: `${n.data.name}(${r.value})`,
+                      ATTB: i,
+                    },
+                  ]);
+                },
+                {
+                  immediate: !0,
+                }
+              ),
+              (i, l) => (
+                openBlock(),
+                createVNode(
+                  OptionRow,
+                  {
+                    title: i.data.name,
+                    underline: "",
+                  },
+                  {
+                    default: withCtx(() => [
+                      createElement("div", _O, [
+                        (openBlock(!0),
+                        createElementVNode(
+                          Fragment,
+                          null,
+                          renderList(
+                            i.data.attbOptions,
+                            (c) => (
+                              openBlock(),
+                              createVNode(
+                                IconCheckbox,
+                                {
+                                  key: c.key,
+                                  data: {
+                                    value: c.value,
+                                    name: c.name,
+                                    imgPath: c.value,
+                                  },
+                                  active: s.value === c.value,
+                                  onSelect: a,
+                                },
+                                null,
+                                8,
+                                ["data", "active"]
+                              )
+                            )
+                          ),
+                          128
+                        )),
+                      ]),
+                    ]),
+                    _: 1,
+                  },
+                  8,
+                  ["title"]
+                )
+              )
+            );
+          },
+        }),
+      },
+      Symbol.toStringTag,
+      {
+        value: "Module",
+      }
+    )
+  ),
+  mO = {
+    class: "options",
+  },
+  vO = {
+    class: "full-width",
+  },
+  gO = {
+    for: "ROU_DFT_ALL",
+    class: "fake-checkbox",
+  },
+  yO = ["src"],
+  CO = ["id", "value"],
+  TO = ["for"],
+  bO = ["src"],
+  SO = {
+    class: "option-name",
+  },
+  DO = Object.freeze(
+    Object.defineProperty(
+      {
+        __proto__: null,
+        default: withScopeId(
+          defineComponent({
+            __name: "ROU_DFT",
+            props: {
+              data: {},
+              relatedData: {},
+            },
+            emits: ["update"],
+            setup(e, { emit: t }) {
+              const n = e,
+                o = t,
+                s = inject("productCode", {
+                  pdtCode: "",
+                }),
+                r = computed(() => n.relatedData.sizeInfo?.DIV_SEQ),
+                a = computed(() => {
+                  const h = roundingConfigMap[s.pdtCode];
+                  if (h && h.factor === "size" && r.value) {
+                    const f = h.value[r.value];
+                    return [
+                      {
+                        id: `round-${f}`,
+                        name: "round-value",
+                        label: `${f}mm`,
+                        value: f,
+                      },
+                    ];
+                  }
+                  return [
+                    {
+                      id: "round-4",
+                      name: "round-value",
+                      label: "4mm",
+                      value: "4",
+                    },
+                    {
+                      id: "round-6",
+                      name: "round-value",
+                      label: "6mm",
+                      value: "6",
+                    },
+                  ];
+                }),
+                i = ref(a.value[0].value),
+                l = ref(!0),
+                c = computed(() => n.data.options.map((h) => `${h.value}/${h.name}`)),
+                u = ref(c.value);
+              watch(
+                () => l.value,
+                (h) => {
+                  h ? (u.value = c.value) : u.value.length === 4 && (u.value = []);
+                }
+              ),
+                watch(
+                  () => u.value,
+                  (h) => {
+                    l.value = h.length === 4;
+                  }
+                ),
+                watch(
+                  () => r.value,
+                  (h) => {
+                    !roundingConfigMap[s.pdtCode] ||
+                      !h ||
+                      (i.value = roundingConfigMap[s.pdtCode].value[h]);
+                  }
+                );
+              const d = computed(() =>
+                u.value.map((h) => {
+                  const [f, _] = h.split("/");
+                  return {
+                    PCS_CD: n.data.value,
+                    PCS_DTL_CD: f,
+                    PCS_DTL_NM: _,
+                    ATTB: i.value,
+                  };
+                })
+              );
+              return (
+                watch(
+                  () => d.value,
+                  (h) => {
+                    o("update", h);
+                  },
+                  {
+                    immediate: !0,
+                  }
+                ),
+                (h, f) => (
+                  openBlock(),
+                  createVNode(
+                    OptionRow,
+                    {
+                      title: h.data.name,
+                      underline: "",
+                    },
+                    {
+                      default: withCtx(() => [
+                        renderComponent(
+                          RadioGroup,
+                          {
+                            options: a.value,
+                            "default-checked": a.value[0].value,
+                            onChange: f[0] || (f[0] = (_) => (i.value = _.value)),
+                          },
+                          null,
+                          8,
+                          ["options", "default-checked"]
+                        ),
+                        createElement("ul", mO, [
+                          createElement("li", vO, [
+                            withDirectives(
+                              createElement(
+                                "input",
+                                {
+                                  "onUpdate:modelValue": f[1] || (f[1] = (_) => (l.value = _)),
+                                  type: "checkbox",
+                                  id: "ROU_DFT_ALL",
+                                },
+                                null,
+                                512
+                              ),
+                              [[vModelCheckbox, l.value]]
+                            ),
+                            createElement("label", gO, [
+                              createElement(
+                                "img",
+                                {
+                                  src: `${unref(CDN_BASE_URL)}/ko/order_aside_icon_round_all.svg`,
+                                },
+                                null,
+                                8,
+                                yO
+                              ),
+                              f[3] ||
+                                (f[3] = createElement(
+                                  "span",
+                                  {
+                                    class: "option-name",
+                                  },
+                                  "4귀 전체",
+                                  -1
+                                )),
+                            ]),
+                          ]),
+                          (openBlock(!0),
+                          createElementVNode(
+                            Fragment,
+                            null,
+                            renderList(
+                              h.data.options,
+                              (_) => (
+                                openBlock(),
+                                createElementVNode(
+                                  "li",
+                                  {
+                                    key: _.value,
+                                  },
                                   [
-                                    domPurifyDirective,
-                                    unref(translate)("윤전책자최소수량안내").replace(
-                                      "{MIN_CNT}",
-                                      `${minQuantity.value}`
+                                    withDirectives(
+                                      createElement(
+                                        "input",
+                                        {
+                                          "onUpdate:modelValue":
+                                            f[2] || (f[2] = (p) => (u.value = p)),
+                                          type: "checkbox",
+                                          id: _.value,
+                                          value: `${_.value}/${_.name}`,
+                                        },
+                                        null,
+                                        8,
+                                        CO
+                                      ),
+                                      [[vModelCheckbox, u.value]]
                                     ),
-                                  ],
-                                ]
+                                    createElement(
+                                      "label",
+                                      {
+                                        for: _.value,
+                                        class: "fake-checkbox",
+                                      },
+                                      [
+                                        createElement(
+                                          "img",
+                                          {
+                                            src: `${unref(
+                                              CDN_BASE_URL
+                                            )}/ko/order_aside_icon_ROU_DFT_${_.value}.svg`,
+                                          },
+                                          null,
+                                          8,
+                                          bO
+                                        ),
+                                        createElement("span", SO, toDisplayString(_.name), 1),
+                                      ],
+                                      8,
+                                      TO
+                                    ),
+                                  ]
+                                )
+                              )
+                            ),
+                            128
+                          )),
+                        ]),
+                      ]),
+                      _: 1,
+                    },
+                    8,
+                    ["title"]
+                  )
+                )
+              );
+            },
+          }),
+          [["__scopeId", "data-v-dd59e1e8"]]
+        ),
+      },
+      Symbol.toStringTag,
+      {
+        value: "Module",
+      }
+    )
+  ),
+  PO = {
+    class: "grid-group",
+  },
+  EO = {
+    class: "flex-row",
+  },
+  OO = {
+    class: "note",
+  },
+  IO = Object.freeze(
+    Object.defineProperty(
+      {
+        __proto__: null,
+        default: defineComponent({
+          __name: "SCO_DFT",
+          props: {
+            data: {},
+          },
+          emits: ["update"],
+          setup(e, { emit: t }) {
+            const n = e,
+              o = t,
+              s = inject("callbacks", {}),
+              r = {
+                S: "단면",
+                D: "양면",
+                DFXX: "스코딕스",
+              },
+              a = computed(() => {
+                const u = {},
+                  d = {};
+                for (const h of n.data.options) {
+                  const f = h.value.slice(-1),
+                    _ = r[f],
+                    p = h.value.slice(0, 4),
+                    m = r[p];
+                  u[f] ||
+                    (u[f] = {
+                      id: `SCO_DFT/${f}`,
+                      name: `SCO_DFT/${f}`,
+                      label: _,
+                      value: f,
+                    }),
+                    d[p] ||
+                      (d[p] = {
+                        ...h,
+                        value: p,
+                        name: m,
+                      });
+                }
+                return {
+                  sides: u,
+                  spotUVs: d,
+                };
+              }),
+              i = ref("S"),
+              l = ref(n.data.options[0].value.slice(0, 4)),
+              c = computed(() => l.value + i.value);
+            return (
+              watch(
+                () => c.value,
+                (u) => {
+                  const d = n.data.options.find((h) => h.value === u)?.extra;
+                  o("update", [
+                    {
+                      PCS_CD: n.data.value,
+                      PCS_DTL_CD: u,
+                      PCS_DTL_NM: d?.PCS_DTL_NM,
+                    },
+                  ]);
+                },
+                {
+                  immediate: !0,
+                }
+              ),
+              (u, d) => (
+                openBlock(),
+                createVNode(
+                  OptionRow,
+                  {
+                    title: u.data.name,
+                    underline: "",
+                    extra: {
+                      name: "규격가이드",
+                      callback: () => {
+                        unref(s)?.onInformGuide && unref(s).onInformGuide("SCO_DFT");
+                      },
+                    },
+                  },
+                  {
+                    default: withCtx(() => [
+                      createElement("div", PO, [
+                        renderComponent(
+                          RadioGroup,
+                          {
+                            options: Object.values(a.value.sides),
+                            "default-checked": i.value,
+                            onChange: d[0] || (d[0] = (h) => (i.value = h.value)),
+                          },
+                          null,
+                          8,
+                          ["options", "default-checked"]
+                        ),
+                        createElement("div", EO, [
+                          (openBlock(!0),
+                          createElementVNode(
+                            Fragment,
+                            null,
+                            renderList(
+                              Object.values(a.value.spotUVs),
+                              (h) => (
+                                openBlock(),
+                                createVNode(
+                                  IconCheckbox,
+                                  {
+                                    key: h.key,
+                                    data: {
+                                      value: h.value,
+                                      name: h.name,
+                                      imgPath: u.data.value,
+                                      subImgPath: u.data.subImgPath,
+                                    },
+                                    active: l.value === h.value,
+                                    onSelect: d[1] || (d[1] = (f) => (l.value = f.value)),
+                                  },
+                                  null,
+                                  8,
+                                  ["data", "active"]
+                                )
+                              )
+                            ),
+                            128
+                          )),
+                        ]),
+                        createElement(
+                          "p",
+                          OO,
+                          toDisplayString(u.data.options[0]?.extra?.NOTICE[0]),
+                          1
+                        ),
+                      ]),
+                    ]),
+                    _: 1,
+                  },
+                  8,
+                  ["title", "extra"]
+                )
+              )
+            );
+          },
+        }),
+      },
+      Symbol.toStringTag,
+      {
+        value: "Module",
+      }
+    )
+  ),
+  RO = {
+    class: "flex-row",
+  },
+  wO = Object.freeze(
+    Object.defineProperty(
+      {
+        __proto__: null,
+        default: defineComponent({
+          __name: "SUB_MTR_BC",
+          props: {
+            data: {},
+            relatedData: {},
+          },
+          emits: ["update"],
+          setup(e, { emit: t }) {
+            const n = e,
+              o = t,
+              s = computed(() =>
+                n.data.options[0].extra.DIV_SEQ === 0
+                  ? n.data.options
+                  : n.data.options.filter((l) => l.extra.DIV_SEQ === n.relatedData.sizeInfo.DIV_SEQ)
+              ),
+              r = ref(s.value[0].value),
+              a = ref(`${n.data.name}-${s.value[0].name}`),
+              i = (l) => {
+                (r.value = l.value), (a.value = `${n.data.name}-${l.name}`);
+              };
+            return (
+              watch(
+                () => r.value,
+                (l) => {
+                  o("update", [
+                    {
+                      PCS_CD: n.data.value,
+                      PCS_DTL_CD: l,
+                      PCS_DTL_NM: a.value,
+                    },
+                  ]);
+                },
+                {
+                  immediate: !0,
+                }
+              ),
+              watch(
+                () => n.relatedData.sizeInfo.DIV_SEQ,
+                () => {
+                  (r.value = s.value[0].value), (a.value = `${n.data.name}-${s.value[0].name}`);
+                }
+              ),
+              (l, c) => (
+                openBlock(),
+                createVNode(
+                  OptionRow,
+                  {
+                    title: l.data.name,
+                    underline: "",
+                  },
+                  {
+                    default: withCtx(() => [
+                      createElement("div", RO, [
+                        (openBlock(!0),
+                        createElementVNode(
+                          Fragment,
+                          null,
+                          renderList(
+                            s.value,
+                            (u) => (
+                              openBlock(),
+                              createVNode(
+                                IconCheckbox,
+                                {
+                                  key: u.key,
+                                  data: {
+                                    value: u.value,
+                                    name: u.name,
+                                    imgPath: `${l.data.subImgPath}_${u.value}`,
+                                    subImgPath: l.data.value,
+                                  },
+                                  active: r.value === u.value,
+                                  onSelect: i,
+                                },
+                                null,
+                                8,
+                                ["data", "active"]
+                              )
+                            )
+                          ),
+                          128
+                        )),
+                      ]),
+                    ]),
+                    _: 1,
+                  },
+                  8,
+                  ["title"]
+                )
+              )
+            );
+          },
+        }),
+      },
+      Symbol.toStringTag,
+      {
+        value: "Module",
+      }
+    )
+  ),
+  AO = {
+    key: 0,
+    class: "flex-row",
+  },
+  NO = Object.freeze(
+    Object.defineProperty(
+      {
+        __proto__: null,
+        default: defineComponent({
+          __name: "WRK_MTR",
+          props: {
+            data: {},
+            relatedData: {},
+          },
+          emits: ["update"],
+          setup(e, { emit: t }) {
+            const n = {
+                WRK_MTR_PB: "icon",
+              },
+              o = e,
+              s = t,
+              r = computed(() =>
+                o.data.options.map((l) => ({
+                  id: l.value,
+                  name: o.data.value,
+                  label: l.name,
+                  value: l.value,
+                }))
+              ),
+              a = ref(r.value[0]),
+              i = computed(() => ({
+                PCS_CD: o.data.value,
+                PCS_DTL_CD: a.value.value,
+                PCS_DTL_NM: a.value.label,
+                ATTB: o.relatedData.orderQty,
+              }));
+            return (
+              watch(
+                () => i.value,
+                (l, c) => {
+                  (c?.ATTB === l.ATTB && c?.PCS_DTL_CD === l.PCS_DTL_CD) || s("update", [l]);
+                },
+                {
+                  immediate: !0,
+                }
+              ),
+              (l, c) => (
+                openBlock(),
+                createVNode(
+                  OptionRow,
+                  {
+                    title: l.data.name,
+                    underline: "",
+                  },
+                  {
+                    default: withCtx(() => [
+                      n[l.data.group] === "icon"
+                        ? (openBlock(),
+                          createElementVNode("div", AO, [
+                            (openBlock(!0),
+                            createElementVNode(
+                              Fragment,
+                              null,
+                              renderList(
+                                l.data.options,
+                                (u) => (
+                                  openBlock(),
+                                  createVNode(
+                                    IconCheckbox,
+                                    {
+                                      key: u.value,
+                                      active: a.value.value === u.value,
+                                      data: {
+                                        ...u,
+                                        imgPath: `${l.data.value}_${u.value}`,
+                                      },
+                                      onSelect: (d) => {
+                                        a.value = {
+                                          id: d.value,
+                                          name: o.data.value,
+                                          label: d.name,
+                                          value: d.value,
+                                        };
+                                      },
+                                    },
+                                    null,
+                                    8,
+                                    ["active", "data", "onSelect"]
+                                  )
+                                )
                               ),
-                        ]))
-                      : (openBlock(),
-                        createElementVNode("div", bookQtyInnerNotesClass, [
-                          withDirectives(createElement("p", bookQtyInnerNoteClass, null, 512), [
-                            [
-                              domPurifyDirective,
-                              unref(translate)("내지장수안내").replace(
-                                "{QTY}",
-                                `${actualPageCount.value}`
-                              ),
-                            ],
-                          ]),
-                          withDirectives(createElement("p", bookQtyMaxNoteClass, null, 512), [
-                            [
-                              domPurifyDirective,
-                              unref(translate)("내지최대장수안내").replace(
-                                "{MAX_CNT}",
-                                `${maxQuantity.value}`
-                              ),
-                            ],
-                          ]),
-                        ])),
+                              128
+                            )),
+                          ]))
+                        : (openBlock(),
+                          createVNode(
+                            RadioGroup,
+                            {
+                              key: 1,
+                              options: r.value,
+                              "default-checked": r.value[0].value,
+                              onChange: c[0] || (c[0] = (u) => (a.value = u)),
+                            },
+                            null,
+                            8,
+                            ["options", "default-checked"]
+                          )),
+                    ]),
+                    _: 1,
+                  },
+                  8,
+                  ["title"]
+                )
+              )
+            );
+          },
+        }),
+      },
+      Symbol.toStringTag,
+      {
+        value: "Module",
+      }
+    )
+  ),
+  MO = ["value", "disabled"],
+  kO = Object.freeze(
+    Object.defineProperty(
+      {
+        __proto__: null,
+        default: defineComponent({
+          __name: "Basic",
+          props: {
+            options: {},
+            showExtra: {
+              type: Boolean,
+              default: !1,
+            },
+            default: {},
+            resetAfterEdit: {
+              type: Boolean,
+            },
+            relatedData: {},
+          },
+          emits: ["update"],
+          setup(e, { emit: t }) {
+            const n = e,
+              o = t,
+              s = inject("callbacks", {}),
+              r = inject("productCode", {
+                pdtCode: "",
+              }),
+              a = useI18n(),
+              i = computed(() => n.relatedData?.filters),
+              l = computed(() => n.relatedData?.POST_PCS),
+              c = computed(() => {
+                let p = [];
+                return (
+                  materialFilterSet.has(r.pdtCode) &&
+                    l.value &&
+                    (p = n.options.filter(
+                      (m) => m.MTRL_CD === l.value?.MTRL_CD || m.BSN_YN === "Y"
+                    )),
+                  i.value &&
+                    (p = n.options.filter(
+                      (m) =>
+                        (i.value?.MTRL_GRP ? i.value.MTRL_GRP === m.GRP_OPTION_CD : !0) &&
+                        (i.value?.PTT ? i.value.PTT === m.PTT_CD : !0)
+                    )),
+                  p.length > 0 ? p : n.options
+                );
+              }),
+              u = computed(() => c.value.filter((p) => p.HIDE_YN !== "Y")),
+              d = async () => {
+                const p = await fetchMaterialInfo({
+                  pdt_cod: r.pdtCode,
+                  lang: a.locale,
+                });
+                if (!p) return console.error("[RedWidgetSDK/ERROR] 자재 정보가 없습니다.");
+                if (s?.onInformMaterials) {
+                  const m = r.pdtCode.startsWith("ST") ? [t("스티커용지-주의사항")] : void 0;
+                  s.onInformMaterials(p, m);
+                } else console.log("[RedWidgetSDK] 자재 정보 >", p);
+              },
+              h = () => {
+                n.resetAfterEdit && s?.onReset && s.onReset("mtrl");
+              },
+              f = ref(n.default?.MTRL_CD || u.value[0]?.MTRL_CD);
+            watch(
+              () => f.value,
+              (p) => {
+                const m = u.value.find((v) => v.MTRL_CD === p);
+                if (m) {
+                  const {
+                    PTT_CD: v,
+                    PTT_NM: E,
+                    WGT_CD: k,
+                    CLR_CD: N,
+                    MTRL_CD: D,
+                    MTRL_NM: O,
+                    MTRL_TYPE: A,
+                    PRT_HIDE_YN: b,
+                  } = m;
+                  o("update", {
+                    PTT_CD: v,
+                    PTT_NM: E,
+                    WGT_CD: k,
+                    CLR_CD: N,
+                    MTRL_CD: D,
+                    MTRL_NM: O,
+                    MTRL_TYPE: A,
+                    PRT_HIDE_YN: b,
+                  }),
+                    v === "OOO" && s?.onSaleOrder && s?.onSaleOrder(),
+                    h();
+                }
+              },
+              {
+                immediate: !0,
+              }
+            ),
+              watch(
+                () => l.value?.MTRL_CD,
+                (p) => {
+                  p && materialFilterSet.has(r.pdtCode) && (f.value = u.value[0]?.MTRL_CD);
+                }
+              ),
+              watch(
+                () => i.value,
+                (p, m) => {
+                  (p?.MTRL_GRP !== m?.MTRL_GRP || p?.PTT !== m?.PTT) &&
+                    (f.value = u.value[0]?.MTRL_CD);
+                }
+              );
+            const _ = computed(() =>
+              deviceModelSet.has(r.pdtCode) ? "기종" : r.pdtCode === "PHFRDIA" ? "액자" : "자재"
+            );
+            return (p, m) => (
+              openBlock(),
+              createVNode(
+                OptionRow,
+                {
+                  title: _.value,
+                  extra: p.showExtra
+                    ? {
+                        name: "주문가능자재",
+                        callback: d,
+                      }
+                    : null,
+                },
+                {
+                  default: withCtx(() => [
+                    withDirectives(
+                      createElement(
+                        "select",
+                        {
+                          "onUpdate:modelValue": m[0] || (m[0] = (v) => (f.value = v)),
+                          class: "basic-select",
+                          name: "material",
+                          onChange: h,
+                        },
+                        [
+                          (openBlock(!0),
+                          createElementVNode(
+                            Fragment,
+                            null,
+                            renderList(
+                              c.value,
+                              (v) => (
+                                openBlock(),
+                                createElementVNode(
+                                  "option",
+                                  {
+                                    key: v.MTRL_CD,
+                                    value: v.MTRL_CD,
+                                    disabled: v.HIDE_YN === "Y",
+                                  },
+                                  toDisplayString(
+                                    v.HIDE_YN !== "Y"
+                                      ? c.value.length === 1
+                                        ? v.PTT_NM
+                                        : v.MTRL_NM || v.PTT_NM
+                                      : `[${v.HIDE_RSN || unref(t)("주문불가")}] ${v.MTRL_NM}`
+                                  ) +
+                                    " " +
+                                    toDisplayString(v.BSN_YN === "Y" ? "[영업주문]" : ""),
+                                  9,
+                                  MO
+                                )
+                              )
+                            ),
+                            128
+                          )),
+                        ],
+                        544
+                      ),
+                      [[vModelSelect, f.value]]
+                    ),
                   ]),
                   _: 1,
                 },
                 8,
-                ["title"]
+                ["title", "extra"]
               )
             );
-          };
-        },
-      }),
-      [["__scopeId", "data-v-106e3545"]]
-    )),
-    (BookQtyModule = Object.freeze(
-      Object.defineProperty(
-        {
-          __proto__: null,
-          default: BookQty,
-        },
-        Symbol.toStringTag,
-        {
-          value: "Module",
-        }
-      )
-    )),
-    /* =========================================================================
-     * 섹션 11: 인쇄도수(DosuColor) 컴포넌트
-     * 도수(단면/양면 등)와 색상(BNC) 조합을 선택하는 UI.
-     * 도수 셀렉트 + 컬러 셀렉트 2단 구조.
-     * ========================================================================= */
-    (dosuColorFlexRowClass = {
-      class: "flex-row",
-    }),
-    (dosuOptionValueAttrs = ["value"]),
-    (dosuColorOptionValueAttrs = ["value"]),
-    /**
-     * 인쇄 도수 + 잉크 색상 선택 컴포넌트
-     * 도수(1도/2도/4도 등) 셀렉트 + 잉크 컬러 셀렉트 2단 구조 UI.
-     * @component DosuColor
-     * @props {Object} options - {dosu: Array, color: Array, all: Array} 도수/색상 옵션
-     * @emits {Object} update - {dosu: COD, color: COD} 선택된 도수+색상 코드
-     */
-    (DosuColor = defineComponent({
-      __name: "DosuColor",
-      props: {
-        options: {},
-      },
-      emits: ["update"],
-      setup(props, { emit: emit }) {
-        const componentProps = props,
-          emitFn = emit,
-          callbacks = inject("callbacks", {}),
-          editorStore = useExteriorStore(),
-          /* 색상 셀렉트 표시 여부 (all > dosu 이면 별도 색상 선택 필요) */
-          showColorSelect = computed(
-            () => componentProps.options.all.length > componentProps.options.dosu.length
-          ),
-          selectedDosuCode = ref(componentProps.options.dosu[0].COD),
-          selectedColorCode = ref(componentProps.options.color[0].COD),
-          /* 선택된 도수+색상 조합 찾기 */
-          matchedDosuOption = computed(() =>
-            componentProps.options.all.find(
-              (opt) => opt.BNC_GB === selectedColorCode.value && opt.COD === selectedDosuCode.value
-            )
-          ),
-          /* 도수 리셋 핸들러 */
-          handleDosuReset = () => {
-            callbacks?.onReset && callbacks.onReset("dosu");
-          };
-        /* 매칭된 도수 옵션 변경 시 부모 전달 */
-        return (
-          watch(
-            () => matchedDosuOption.value,
-            (matchedOption) => {
-              matchedOption &&
-                (editorStore.isAfterEdit() && handleDosuReset(), emitFn("update", matchedOption));
-            },
-            {
-              immediate: !0,
-            }
-          ),
-          (instance, cache) => (
-            openBlock(),
-            createVNode(
-              OptionRow,
-              {
-                title: "인쇄도수",
-              },
-              {
-                default: withCtx(() => [
-                  createElement("div", dosuColorFlexRowClass, [
-                    withDirectives(
-                      createElement(
-                        "select",
-                        {
-                          "onUpdate:modelValue":
-                            cache[0] || (cache[0] = (newVal) => (selectedDosuCode.value = newVal)),
-                          name: "dosu",
-                          class: "basic-select",
-                        },
-                        [
-                          (openBlock(!0),
-                          createElementVNode(
-                            Fragment,
-                            null,
-                            renderList(
-                              instance.options.dosu,
-                              (dosuOpt) => (
-                                openBlock(),
-                                createElementVNode(
-                                  "option",
-                                  {
-                                    key: dosuOpt.COD,
-                                    value: dosuOpt.COD,
-                                  },
-                                  toDisplayString(dosuOpt.COD_NME),
-                                  9,
-                                  dosuOptionValueAttrs
-                                )
-                              )
-                            ),
-                            128
-                          )),
-                        ],
-                        512
-                      ),
-                      [[vModelSelect, selectedDosuCode.value]]
-                    ),
-                    showColorSelect.value
-                      ? withDirectives(
-                          (openBlock(),
-                          createElementVNode(
-                            "select",
-                            {
-                              key: 0,
-                              "onUpdate:modelValue":
-                                cache[1] ||
-                                (cache[1] = (newVal) => (selectedColorCode.value = newVal)),
-                              name: "dosu-color",
-                              class: "basic-select",
-                            },
-                            [
-                              (openBlock(!0),
-                              createElementVNode(
-                                Fragment,
-                                null,
-                                renderList(
-                                  instance.options.color,
-                                  (colorOpt) => (
-                                    openBlock(),
-                                    createElementVNode(
-                                      "option",
-                                      {
-                                        key: colorOpt.COD,
-                                        value: colorOpt.COD,
-                                      },
-                                      toDisplayString(colorOpt.COD_NME),
-                                      9,
-                                      dosuColorOptionValueAttrs
-                                    )
-                                  )
-                                ),
-                                128
-                              )),
-                            ],
-                            512
-                          )),
-                          [[vModelSelect, selectedColorCode.value]]
-                        )
-                      : createCommentVNode("", !0),
-                  ]),
-                ]),
-                _: 1,
-              }
-            )
-          )
-        );
-      },
-    })),
-    /* =========================================================================
-     * 섹션 12: 용지(Paper) 컴포넌트 — 책자용
-     * 용지 종류(PTT) + 평량(WGT) 2단 셀렉트로 자재를 선택하는 UI.
-     * 영업주문 전용 자재, 주문불가 자재 표시/비활성화 처리.
-     * ========================================================================= */
-    (paperFlexRowClass = {
-      class: "flex-row",
-    }),
-    (paperOptionAttrs = ["value", "disabled"]),
-    (weightOptionAttrs = ["value", "disabled"]),
-    /**
-     * 용지 종류 + 평량 선택 컴포넌트
-     * 용지 종류(PTT) + 평량(WGT) 2단 셀렉트로 자재를 선택하는 UI.
-     * 영업주문 전용 자재, 주문불가 자재 표시/비활성화 처리.
-     * @component Paper
-     * @props {Array} options - 용지 옵션 목록 (PTT_COD, WGT_COD, 주문불가 플래그 등)
-     * @props {boolean} showExtra - 추가 자재 정보 표시 여부 (기본: false)
-     * @emits {Object} update - {paper: COD, weight: COD} 선택된 용지+평량 코드
-     */
-    (Paper = defineComponent({
-      __name: "Paper",
-      props: {
-        options: {},
-        showExtra: {
-          type: Boolean,
-          default: !1,
-        },
-        default: {},
-        resetAfterEdit: {
-          type: Boolean,
-        },
-      },
-      emits: ["update"],
-      setup(props, { emit: emit }) {
-        const componentProps = props,
-          emitFn = emit,
-          callbacks = inject("callbacks", {}),
-          productCode = inject("productCode", {
-            pdtCode: "",
-          }),
-          configStore = useConfigStore(),
-          /* 필터링된 옵션 (현재는 전체 반환) */
-          filteredOptions = computed(() => {
-            const filtered = [];
-            return filtered.length > 0 ? filtered : componentProps.options;
-          }),
-          /* 주문 가능한 옵션만 필터 */
-          visibleOptions = computed(() =>
-            filteredOptions.value.filter((opt) => opt.HIDE_YN !== "Y")
-          ),
-          /* 용지 종류별 평량 그룹 맵 */
-          paperTypeGroupMap = computed(() => {
-            const groupMap = new Map();
-            return (
-              filteredOptions.value.forEach((materialOpt) => {
-                const {
-                    WGT_CD: weightCode,
-                    MTRL_CD: materialCode,
-                    PTT_CD: paperTypeCode,
-                    PTT_NM: paperTypeName,
-                    BSN_YN: businessYn,
-                    HIDE_YN: hideYn,
-                    HIDE_RSN: hideReason,
-                  } = materialOpt,
-                  existingGroup = groupMap.get(paperTypeCode),
-                  weightEntry = {
-                    WGT_CD: weightCode,
-                    MTRL_CD: materialCode,
-                    HIDE_YN: hideYn,
-                    HIDE_RSN: hideReason,
-                  };
-                if (existingGroup) existingGroup.weights.push(weightEntry);
-                else {
-                  const newGroup = {
-                    PTT_CD: paperTypeCode,
-                    PTT_NM: paperTypeName,
-                    BSN_YN: businessYn,
-                    weights: [weightEntry],
-                  };
-                  groupMap.set(paperTypeCode, newGroup);
-                }
-              }),
-              groupMap
-            );
-          }),
-          /* 주문 가능 자재 정보 조회 */
-          handleShowMaterials = async () => {
-            const materialInfo = await fetchMaterialInfo({
-              pdt_cod: productCode.pdtCode,
-              lang: i18n.locale,
-            });
-            if (!materialInfo) return console.error("[RedWidgetSDK/ERROR] 자재 정보가 없습니다.");
-            callbacks?.onInformMaterials
-              ? callbacks.onInformMaterials(materialInfo)
-              : console.log("[RedWidgetSDK] 용지 정보 >", materialInfo);
           },
-          /* 편집 후 자재 리셋 */
-          handleMaterialReset = () => {
-            componentProps.resetAfterEdit && callbacks?.onReset && callbacks.onReset("mtrl");
-          },
-          /* 모든 평량이 주문불가인지 체크 */
-          isAllWeightsHidden = (weights) => weights.every((weight) => weight.HIDE_YN === "Y"),
-          selectedPaperType = ref(
-            componentProps.default?.PTT_CD || visibleOptions.value[0]?.PTT_CD
-          ),
-          selectedMaterialCode = ref(
-            componentProps.default?.MTRL_CD || visibleOptions.value[0]?.MTRL_CD
-          );
-        /* 용지 종류 변경 시 첫 번째 활성 평량으로 자동 선택 */
-        return (
-          watch(
-            () => selectedPaperType.value,
-            (newPaperType) => {
-              const group = paperTypeGroupMap.value.get(newPaperType);
-              if (group) {
-                const firstVisibleWeight = group.weights.find((weight) => weight.HIDE_YN !== "Y");
-                firstVisibleWeight && (selectedMaterialCode.value = firstVisibleWeight.MTRL_CD);
-              }
-              newPaperType === "OOO" && callbacks?.onSaleOrder && callbacks?.onSaleOrder();
-            },
-            {
-              immediate: !0,
-            }
-          ) /* 자재 코드 변경 시 부모에 전체 자재 정보 전달 */,
-          watch(
-            () => selectedMaterialCode.value,
-            (newMtrlCode) => {
-              const matchedMaterial = visibleOptions.value.find(
-                (opt) => opt.MTRL_CD === newMtrlCode
-              );
-              if (matchedMaterial) {
-                const {
-                  PTT_CD: paperTypeCode,
-                  PTT_NM: paperTypeName,
-                  WGT_CD: weightCode,
-                  CLR_CD: colorCode,
-                  MTRL_CD: materialCode,
-                  MTRL_NM: materialName,
-                  MTRL_TYPE: materialType,
-                  PRT_HIDE_YN: printHideYn,
-                  SID_GBN: sideGbn,
-                } = matchedMaterial;
-                emitFn("update", {
-                  PTT_CD: paperTypeCode,
-                  PTT_NM: paperTypeName,
-                  WGT_CD: weightCode,
-                  CLR_CD: colorCode,
-                  MTRL_CD: materialCode,
-                  MTRL_NM: materialName,
-                  MTRL_TYPE: materialType,
-                  PRT_HIDE_YN: printHideYn,
-                  SID_GBN: sideGbn,
-                });
-              }
-            },
-            {
-              immediate: !0,
-            }
-          ),
-          (instance, cache) => (
-            openBlock(),
-            createVNode(
-              OptionRow,
-              {
-                title: "용지",
-                extra: instance.showExtra
-                  ? {
-                      name: "주문가능자재",
-                      callback: handleShowMaterials,
-                    }
-                  : null,
-              },
-              {
-                default: withCtx(() => [
-                  createElement("div", paperFlexRowClass, [
-                    withDirectives(
-                      createElement(
-                        "select",
-                        {
-                          "onUpdate:modelValue":
-                            cache[0] || (cache[0] = (newVal) => (selectedPaperType.value = newVal)),
-                          class: "basic-select",
-                          name: "paper",
-                        },
-                        [
-                          (openBlock(!0),
-                          createElementVNode(
-                            Fragment,
-                            null,
-                            renderList(
-                              paperTypeGroupMap.value.values(),
-                              (paperGroup) => (
-                                openBlock(),
-                                createElementVNode(
-                                  "option",
-                                  {
-                                    key: paperGroup.PTT_CD,
-                                    value: paperGroup.PTT_CD,
-                                    disabled: isAllWeightsHidden(paperGroup.weights),
-                                    onChange: handleMaterialReset,
-                                  },
-                                  toDisplayString(
-                                    isAllWeightsHidden(paperGroup.weights)
-                                      ? `[${paperGroup.weights[0].HIDE_RSN || "주문불가"}]`
-                                      : ""
-                                  ) +
-                                    " " +
-                                    toDisplayString(paperGroup.PTT_NM) +
-                                    " " +
-                                    toDisplayString(paperGroup.BSN_YN === "Y" ? "[영업주문]" : ""),
-                                  41,
-                                  paperOptionAttrs
-                                )
-                              )
-                            ),
-                            128
-                          )),
-                        ],
-                        512
-                      ),
-                      [[vModelSelect, selectedPaperType.value]]
-                    ),
-                    withDirectives(
-                      createElement(
-                        "select",
-                        {
-                          "onUpdate:modelValue":
-                            cache[1] ||
-                            (cache[1] = (newVal) => (selectedMaterialCode.value = newVal)),
-                          class: "basic-select",
-                          name: "weight",
-                        },
-                        [
-                          (openBlock(!0),
-                          createElementVNode(
-                            Fragment,
-                            null,
-                            renderList(
-                              paperTypeGroupMap.value.get(selectedPaperType.value)?.weights,
-                              (weightEntry) => (
-                                openBlock(),
-                                createElementVNode(
-                                  "option",
-                                  {
-                                    key: `${weightEntry.MTRL_CD}`,
-                                    value: weightEntry.MTRL_CD,
-                                    disabled: weightEntry.HIDE_YN === "Y",
-                                  },
-                                  toDisplayString(
-                                    weightEntry.HIDE_YN === "Y"
-                                      ? `[${weightEntry.HIDE_RSN || "주문불가"}]`
-                                      : ""
-                                  ) +
-                                    " " +
-                                    toDisplayString(`${weightEntry.WGT_CD}g`),
-                                  9,
-                                  weightOptionAttrs
-                                )
-                              )
-                            ),
-                            128
-                          )),
-                        ],
-                        512
-                      ),
-                      [[vModelSelect, selectedMaterialCode.value]]
-                    ),
-                  ]),
-                ]),
-                _: 1,
-              },
-              8,
-              ["extra"]
-            )
-          )
-        );
+        }),
       },
-    })),
-    (PaperModule = Object.freeze(
-      Object.defineProperty(
-        {
-          __proto__: null,
-          default: Paper,
-        },
-        Symbol.toStringTag,
-        {
-          value: "Module",
-        }
-      )
-    )),
-    /* =========================================================================
-     * 섹션 13: 표지 가이드(CoverGuide) 컴포넌트
-     * 책자 표지의 작업 사이즈, 세네카 정보, 미리보기 이미지, 템플릿 다운로드를 제공.
-     * 상품코드에 따라 무선제본/스프링/소프트커버 이미지를 표시.
-     * ========================================================================= */
-    (coverGuideSpecialClass = {
-      class: "special-option",
-    }),
-    (coverGuideImgAttrs = ["src"]),
-    (coverGuideTextClass = {
-      class: "text",
-    }),
-    (coverGuideDescClass = {
-      class: "desc",
-    }),
-    (coverGuideSenecaDetailClass = {
-      key: 0,
-      class: "detail",
-    }),
-    (coverGuideSenecaSubjectClass = {
-      class: "detail-subject",
-    }),
-    (coverGuideSenecaValueClass = {
-      class: "detail-value",
-    }),
-    (coverGuideWorkSizeDetailClass = {
-      key: 1,
-      class: "detail",
-    }),
-    (coverGuideWorkSizeSubjectClass = {
-      class: "detail-subject",
-    }),
-    (coverGuideWorkSizeValueClass = {
-      class: "detail-value",
-    }),
-    /**
-     * 표지 가이드 (작업사이즈/템플릿 다운로드) 컴포넌트
-     * 책자 표지의 작업 사이즈 정보를 표시하고 템플릿 파일 다운로드를 제공하는 UI.
-     * @component CoverGuide
-     * @props {Object} sizeInfo - 작업사이즈 정보 (가로, 세로, 재단여백 등)
-     * @props {Object} senecaInfo - 세네카 연동 정보 (템플릿 URL, 파라미터)
-     */
-    (CoverGuide = withScopeId(
-      defineComponent({
-        __name: "CoverGuide",
-        props: {
-          sizeInfo: {},
-          senecaInfo: {},
-        },
-        setup(props) {
-          const componentProps = props,
-            productCode = inject("productCode", {
-              pdtCode: "",
-            }),
-            callbacks = inject("callbacks", {}),
-            senecaData = ref(componentProps.senecaInfo);
-          /* 세네카 정보 변경 감시 */
-          watch(
-            () => componentProps.senecaInfo,
-            (newInfo) => {
-              newInfo && (senecaData.value = newInfo);
-            }
-          );
-          const orderDataStore = useOrderStore(),
-            configStore = useConfigStore(),
-            /* 템플릿 다운로드 핸들러 */
-            handleTemplateDownload = async () => {
-              const orderData = orderDataStore.getOrderData();
-              if (!orderData) return;
-              const templateParams = buildTemplateParams(orderData);
-              if (!templateParams || typeof templateParams == "string")
-                return alert(translate(templateParams || "템플릿다운로드실패"));
-              (await downloadTemplate({
-                lang: i18n.locale,
-                ...templateParams,
-              })) || alert(translate("템플릿다운로드실패"));
+      Symbol.toStringTag,
+      {
+        value: "Module",
+      }
+    )
+  ),
+  LO = {
+    class: "inputs",
+  },
+  $O = ["disabled"],
+  xO = {
+    class: "notes",
+  },
+  FO = {
+    key: 0,
+    class: "note red",
+  },
+  UO = {
+    class: "note red",
+  },
+  BO = {
+    class: "inputs",
+  },
+  VO = ["value"],
+  HO = {
+    key: 0,
+    class: "notes",
+  },
+  GO = {
+    class: "note red",
+  },
+  jO = Object.freeze(
+    Object.defineProperty(
+      {
+        __proto__: null,
+        default: withScopeId(
+          defineComponent({
+            __name: "CalendarQty",
+            props: {
+              options: {},
+              default: {},
+              relatedData: {},
             },
-            /* 흑색 표지 상품코드 맵 */
-            blackCoverProducts = {
-              PRBKYPB: !0,
-              PRBKYCB: !0,
-              PRBKYRB: !0,
-              PRBKOPB: !0,
-              PRBKOCB: !0,
-              PRBKORB: !0,
-            },
-            /* 무선제본(세네카) 상품코드 맵 */
-            wirelessBindProducts = {
-              PRBKYPR: !0,
-              PRBKOPR: !0,
-              PRBKYPB: !0,
-              PRBKOPB: !0,
-            },
-            /* 스프링(낱장커버) 상품코드 맵 */
-            springBindProducts = {
-              PRBKYCO: !0,
-              PRBKYCB: !0,
-              PRBKYRN: !0,
-              PRBKYRB: !0,
-              PRBKOCO: !0,
-              PRBKOCB: !0,
-              PRBKORN: !0,
-              PRBKORB: !0,
-              PRBKORD: !0,
-              PRBKOCD: !0,
-            },
-            /* 소프트커버(중철) 상품코드 맵 */
-            softCoverProducts = {
-              PRBKYST: !0,
-              PRBKYSL: !0,
-              PRBKOST: !0,
-              PRBKOSL: !0,
-            },
-            /* 표지 가이드 정보 computed — 상품코드에 따라 이미지/타이틀 결정 */
-            coverGuideInfo = computed(() => {
-              if (!componentProps.sizeInfo) return null;
-              if (softCoverProducts[productCode.pdtCode])
-                return {
-                  title: "소프트커버",
-                  imgSrc: `${CDN_BASE_URL}/ko/cover_icon_stapler.png`,
-                };
-              const orientSuffix =
-                  componentProps.sizeInfo.workSize.width > componentProps.sizeInfo.workSize.height
-                    ? horizontalBindSet.has(productCode.pdtCode)
-                      ? "_wh"
-                      : "_w"
-                    : "_h",
-                colorSuffix = blackCoverProducts[productCode.pdtCode] ? "_black" : "";
-              return wirelessBindProducts[productCode.pdtCode]
-                ? {
-                    title: "세네카",
-                    imgSrc: `${CDN_BASE_URL}/ko/cover_icon_wireless${colorSuffix}${orientSuffix}.png`,
-                  }
-                : springBindProducts[productCode.pdtCode]
-                ? {
-                    title: "낱장커버",
-                    imgSrc: `${CDN_BASE_URL}/ko/cover_icon_spring${colorSuffix}${orientSuffix}.png`,
-                  }
-                : null;
-            });
-          /* 렌더 함수 */
-          return (instance, cache) => (
-            openBlock(),
-            createVNode(
-              OptionRow,
-              {
-                title: "표지가이드",
-                extra: {
-                  name: "가이드보기",
-                  callback: () => {
-                    unref(callbacks)?.onInformGuide && unref(callbacks).onInformGuide("bookCover");
-                  },
-                },
-              },
-              {
-                default: withCtx(() => [
-                  createElement("div", coverGuideSpecialClass, [
-                    createElement("figure", null, [
-                      createElement(
-                        "img",
-                        {
-                          src: coverGuideInfo.value?.imgSrc,
-                        },
-                        null,
-                        8,
-                        coverGuideImgAttrs
-                      ),
-                      createElement(
-                        "figcaption",
-                        coverGuideTextClass,
-                        toDisplayString(unref(translate)(coverGuideInfo.value?.title || "")),
-                        1
-                      ),
-                    ]),
-                    createElement("div", coverGuideDescClass, [
-                      senecaData.value?.seneca_show === "Y"
-                        ? (openBlock(),
-                          createElementVNode("div", coverGuideSenecaDetailClass, [
-                            createElement(
-                              "p",
-                              coverGuideSenecaSubjectClass,
-                              toDisplayString(unref(translate)("세네카")),
-                              1
-                            ),
-                            createElement("span", coverGuideSenecaValueClass, [
-                              createElement(
-                                "b",
-                                null,
-                                toDisplayString(senecaData.value?.seneca),
-                                1
-                              ),
-                              cache[0] || (cache[0] = createTextVNode(" mm ", -1)),
-                            ]),
-                          ]))
-                        : (openBlock(),
-                          createElementVNode("div", coverGuideWorkSizeDetailClass, [
-                            createElement(
-                              "p",
-                              coverGuideWorkSizeSubjectClass,
-                              toDisplayString(unref(translate)("표지작업사이즈")),
-                              1
-                            ),
-                            createElement("span", coverGuideWorkSizeValueClass, [
-                              createElement(
-                                "b",
-                                null,
-                                toDisplayString(instance.sizeInfo?.workSize.width) +
-                                  "x" +
-                                  toDisplayString(instance.sizeInfo?.workSize.height),
-                                1
-                              ),
-                              cache[1] || (cache[1] = createTextVNode(" mm ", -1)),
-                            ]),
-                          ])),
-                      createElement(
-                        "button",
-                        {
-                          type: "button",
-                          class: "download-btn",
-                          onClick: handleTemplateDownload,
-                        },
-                        toDisplayString(unref(translate)("표지템플릿다운로드")),
-                        1
-                      ),
-                    ]),
-                  ]),
-                ]),
-                _: 1,
-              },
-              8,
-              ["extra"]
-            )
-          );
-        },
-      }),
-      [["__scopeId", "data-v-7f08ebe2"]]
-    )),
-    /* =========================================================================
-     * 섹션 14: 책자(Book) 메인 컴포넌트
-     * 책자 주문의 전체 구성 — 규격→수량→내지(도수/용지/장수/업로드)→표지(도수/용지/가이드/후가공/업로드).
-     * group-title 디바이더로 내지/표지 섹션을 구분.
-     * ========================================================================= */
-    (innerGroupTitleClass = {
-      class: "group-title",
-    }),
-    (innerGroupSubjectClass = {
-      class: "subject",
-    }),
-    (coverGroupTitleClass = {
-      class: "group-title",
-    }),
-    (coverGroupSubjectClass = {
-      class: "subject",
-    }),
-    /**
-     * 책자 주문 메인 컴포넌트
-     * 책자 주문의 전체 구성을 관장하는 최상위 컴포넌트.
-     * 내지/표지 용지 → 도수+잉크색상 → 수량(내지장수 포함) → 후가공 → 표지가이드 순서로 fieldset 렌더링.
-     * @component Book
-     * @props {string} type - 주문 유형 ("new"|"reorder"|"edit")
-     * @props {Object} data - 상품 옵션 데이터 (용지, 도수, 후가공 등)
-     * @props {Object} widgetAttr - 위젯 설정 속성
-     * @props {Object} defaultData - 재주문/수정 시 기존 선택값
-     * @props {Object} senecaInfo - 세네카 연동 정보 (작업사이즈, 템플릿)
-     * @emits {Object} update - 주문 옵션 변경 시 전체 orderData 객체
-     */
-    (BookModule = Object.freeze(
-      Object.defineProperty(
-        {
-          __proto__: null,
-          default: withScopeId(
-            defineComponent({
-              __name: "Book",
-              props: {
-                type: {
-                  default: "new",
-                },
-                data: {},
-                widgetAttr: {},
-                defaultData: {},
-                senecaInfo: {},
-              },
-              emits: ["update"],
-              setup(props, { emit: emit }) {
-                const componentProps = props,
-                  emitFn = emit,
-                  skinInfo = computed(() => componentProps.widgetAttr.skinInfo),
-                  {
-                    defaultOrderData: defaultOrderData,
-                    orderInfo: orderInfo,
-                    updateOption: updateOption,
-                    updatePostPcs: updatePostPcs,
-                  } = useOrderComposable(componentProps.type, {
-                    group: componentProps.widgetAttr.item_gbn,
-                    emits: {
-                      updateOrder: (orderData) => emitFn("update", orderData),
-                    },
-                  }),
-                  /* 스코딕스 후가공 존재 여부 */
-                  hasScodix = computed(
-                    () => !!orderInfo.value.pcsInfo?.find((info) => info.PCS_CD === "SCO_DFT")
-                  ),
-                  /* 수량 정보: ordCnt(부수) + prnCnt(내지장수) */
-                  quantityInfo = ref({
-                    ordCnt: 0,
-                    prnCnt: 0,
-                  }),
-                  /* 수량 업데이트 핸들러 — type에 따라 ordCnt 또는 prnCnt 업데이트 */
-                  handleQuantityUpdate = (qtyType, qtyValue) => {
-                    qtyType === "default" &&
-                      (quantityInfo.value = {
-                        ...quantityInfo.value,
-                        ordCnt: qtyValue,
-                      }),
-                      qtyType === "inner" &&
-                        (quantityInfo.value = {
-                          ...quantityInfo.value,
-                          prnCnt: qtyValue,
-                        });
-                  };
-                /* 수량 변경 디바운스 감시 */
-                watch(
-                  () => quantityInfo.value,
-                  debounce((newQty) => {
-                    updateOption("quantityInfo")(newQty);
-                  }, 200),
-                  {
-                    immediate: !0,
-                  }
-                );
-                const memberInfo = inject("member"),
-                  /* 자재 목록 (영업회원이면 BSN_YN 포함) */
-                  coverMaterials = computed(() =>
-                    memberInfo?.bsn_yn === "Y"
-                      ? componentProps.data.pdt_mtrl_info
-                      : componentProps.data.pdt_mtrl_info.filter((info) => info.BSN_YN !== "Y")
-                  ),
-                  innerMaterials = computed(() =>
-                    memberInfo?.bsn_yn === "Y"
-                      ? componentProps.data.inner_pdt_mtrl_info
-                      : componentProps.data.inner_pdt_mtrl_info?.filter(
-                          (info) => info.BSN_YN !== "Y"
-                        )
-                  ),
-                  /* 제본방향 후가공 정보 */
-                  bindDirectionInfo = computed(() =>
-                    orderInfo.value?.pcsInfo?.find((info) => info.PCS_CD === "BIND_DIRECTION")
-                  ),
-                  { uploadConfig: uploadConfig } = useUploadConfig(componentProps.widgetAttr),
-                  /* 흑백 도수 시 에디터 비활성화 */
-                  coverUploadConfig = computed(() =>
-                    orderInfo.value.dosuInfo?.BNC_GB === "BNC_BLA"
-                      ? {
-                          pdf: !0,
-                          editor: null,
-                        }
-                      : uploadConfig.value
-                  ),
-                  /* 파일 업로드 결과 배열 [내지, 표지] */
-                  fileUploadResults = ref([]),
-                  /* 파일 업로드 핸들러 팩토리 — type별로 배열 인덱스에 저장 */
-                  createUploadHandler = (uploadType) => (uploadData) => {
-                    const fileData = uploadData[0];
-                    uploadType === "inner" &&
-                      (fileUploadResults.value = [fileData, fileUploadResults.value[1]]),
-                      uploadType === "default" &&
-                        (fileUploadResults.value = [fileUploadResults.value[0], fileData]);
-                  };
-                /* 업로드 결과 변경 시 부모 전달 */
-                watch(
-                  () => fileUploadResults.value,
-                  (newResults) => {
-                    updateOption("fileUploadInfo")(newResults);
-                  }
-                );
-                const /* 후가공 옵션 파싱 */
-                  parsedPostProcessOptions = computed(() =>
-                    parsePostProcessOptions(
-                      componentProps.data.pdt_pcs_info,
-                      componentProps.data.pdt_disable_pcs_info
-                    )
-                  ),
-                  /* 주문 수량 계산 (페이지 수 기반) */
-                  orderQuantityForPostPcs = computed(() =>
-                    bookPageMultiplierMap[componentProps.data.pdt_base_info[0].PDT_CD]
-                      ? orderInfo.value.quantityInfo?.prnCnt || 1
-                      : (orderInfo.value.quantityInfo?.ordCnt || 1) *
-                        (orderInfo.value.quantityInfo?.prnCnt || 1)
-                  );
-                /* 렌더 함수 — 책자 전체 구조 */
-                return (instance, cache) => (
-                  openBlock(),
-                  createElementVNode(
-                    Fragment,
-                    null,
-                    [
-                      withDirectives(
-                        renderComponent(
-                          SizeSelect,
-                          {
-                            options: instance.data.pdt_size_info,
-                            "base-info": instance.data.pdt_base_info[0],
-                            default: unref(defaultOrderData)?.size,
-                            "hidden-sizes": !0,
-                            "show-extra": !0,
-                            onUpdate:
-                              cache[0] ||
-                              (cache[0] = (sizeData) => unref(updateOption)("sizeInfo")(sizeData)),
-                            onValidate:
-                              cache[1] ||
-                              (cache[1] = (validData) =>
-                                unref(updateOption)("validation")(validData)),
-                          },
-                          null,
-                          8,
-                          ["options", "base-info", "default"]
-                        ),
-                        [[vShow, skinInfo.value.sizeSelect.view_yn === "Y"]]
-                      ) /* 수량(부수) 선택 */,
-                      renderComponent(
-                        BookQty,
-                        {
-                          type: "default",
-                          options: instance.data.pdt_prn_cnt_info,
-                          onUpdate: handleQuantityUpdate,
-                        },
-                        null,
-                        8,
-                        ["options"]
-                      ) /* ── 내지 섹션 구분선 ── */,
-                      createElement("div", innerGroupTitleClass, [
-                        createElement(
-                          "span",
-                          innerGroupSubjectClass,
-                          toDisplayString(unref(translate)("내지")),
-                          1
-                        ),
-                      ]) /* 내지 인쇄도수 */,
-                      withDirectives(
-                        renderComponent(
-                          DosuColor,
-                          {
-                            options: {
-                              dosu: instance.data.inner_pdt_dosu_info,
-                              color: instance.data.inner_pdt_bnc_info,
-                              all: instance.data.inner_pdt_dosu_bnc_info,
-                            },
-                            onUpdate:
-                              cache[2] ||
-                              (cache[2] = (dosuData) =>
-                                unref(updateOption)("inner_dosuInfo")(dosuData)),
-                          },
-                          null,
-                          8,
-                          ["options"]
-                        ),
-                        [
-                          [
-                            vShow,
-                            skinInfo.value.dosuSelect.view_yn === "Y" &&
-                              instance.data.inner_pdt_dosu_bnc_info,
-                          ],
-                        ]
-                      ) /* 내지 용지 */,
-                      renderComponent(
-                        Paper,
-                        {
-                          options: innerMaterials.value,
-                          "show-extra": instance.widgetAttr.able_paper_yn === "Y",
-                          onUpdate:
-                            cache[3] ||
-                            (cache[3] = (mtrlData) =>
-                              unref(updateOption)("inner_meterialInfo")(mtrlData)),
-                        },
-                        null,
-                        8,
-                        ["options", "show-extra"]
-                      ) /* 내지장수 */,
-                      renderComponent(
-                        BookQty,
-                        {
-                          type: "inner",
-                          options: instance.data.pdt_prn_cnt_info,
-                          "related-data": {
-                            dosu: unref(orderInfo).inner_dosuInfo?.COD,
-                          },
-                          onUpdate: handleQuantityUpdate,
-                        },
-                        null,
-                        8,
-                        ["options", "related-data"]
-                      ) /* 내지 업로드 */,
-                      instance.widgetAttr.order_yn !== "N"
-                        ? (openBlock(),
-                          createVNode(
-                            FileUpload,
-                            {
-                              key: 0,
-                              _key: "inner",
-                              "upload-config": {
-                                pdf: !0,
-                                editor: null,
-                              },
-                              subject: "내지업로드",
-                              notes: [
-                                unref(translate)("내지업로드사이즈장수안내", {
-                                  CUT_SIZE: `${unref(orderInfo).sizeInfo?.cutSize.width}x${
-                                    unref(orderInfo).sizeInfo?.cutSize.height
-                                  }`,
-                                  WRK_SIZE: `${unref(orderInfo).sizeInfo?.workSize.width}x${
-                                    unref(orderInfo).sizeInfo?.workSize.height
-                                  }`,
-                                  QTY: `${
-                                    unref(orderInfo).quantityInfo?.prnCnt *
-                                    (unref(orderInfo).inner_dosuInfo?.COD === "SID_D" ? 2 : 1)
-                                  }`,
-                                }),
-                              ],
-                              onUpload:
-                                cache[4] ||
-                                (cache[4] = (uploadData) =>
-                                  createUploadHandler("inner")(uploadData)),
-                            },
-                            null,
-                            8,
-                            ["notes"]
-                          ))
-                        : createCommentVNode("", !0) /* ── 표지 섹션 구분선 ── */,
-                      createElement("div", coverGroupTitleClass, [
-                        createElement(
-                          "span",
-                          coverGroupSubjectClass,
-                          toDisplayString(unref(translate)("표지")),
-                          1
-                        ),
-                      ]) /* 표지 인쇄도수 */,
-                      withDirectives(
-                        renderComponent(
-                          DosuColor,
-                          {
-                            options: {
-                              dosu: instance.data.pdt_dosu_info,
-                              color: instance.data.pdt_bnc_info,
-                              all: instance.data.pdt_dosu_bnc_info,
-                            },
-                            onUpdate:
-                              cache[5] ||
-                              (cache[5] = (dosuData) => unref(updateOption)("dosuInfo")(dosuData)),
-                          },
-                          null,
-                          8,
-                          ["options"]
-                        ),
-                        [
-                          [
-                            vShow,
-                            skinInfo.value.dosuSelect.view_yn === "Y" &&
-                              instance.data.pdt_dosu_info,
-                          ],
-                        ]
-                      ) /* 표지 용지 (단일 자재이면 숨김) */,
-                      withDirectives(
-                        renderComponent(
-                          Paper,
-                          {
-                            options: coverMaterials.value,
-                            "show-extra": instance.widgetAttr.able_paper_yn === "Y",
-                            onUpdate:
-                              cache[6] ||
-                              (cache[6] = (mtrlData) =>
-                                unref(updateOption)("meterialInfo")(mtrlData)),
-                          },
-                          null,
-                          8,
-                          ["options", "show-extra"]
-                        ),
-                        [[vShow, coverMaterials.value.length > 1]]
-                      ) /* 표지 가이드 — 미리보기 이미지 + 템플릿 다운로드 */,
-                      renderComponent(
-                        CoverGuide,
-                        {
-                          "size-info": unref(orderInfo).sizeInfo,
-                          "seneca-info": instance.senecaInfo,
-                        },
-                        null,
-                        8,
-                        ["size-info", "seneca-info"]
-                      ) /* 숨김 후가공 (자동 적용) */,
-                      renderComponent(
-                        HiddenPostProcess,
-                        {
-                          options: parsedPostProcessOptions.value.postPcs.hidden,
-                          "related-data": {
-                            mtrlCd: unref(orderInfo).meterialInfo?.MTRL_CD,
-                            sizeInfo: unref(orderInfo).sizeInfo,
-                            orderQty: orderQuantityForPostPcs.value,
-                            bindDirection: bindDirectionInfo.value,
-                          },
-                          onUpdate:
-                            cache[7] ||
-                            (cache[7] = (pcsData) => unref(updatePostPcs)("hidden")(pcsData)),
-                        },
-                        null,
-                        8,
-                        ["options", "related-data"]
-                      ) /* 표시 후가공 — 아이콘 체크박스/라디오 */,
-                      renderComponent(
-                        VisiblePostProcess,
-                        {
-                          options: parsedPostProcessOptions.value.postPcs.visible,
-                          "disabled-opts": parsedPostProcessOptions.value.disabled,
-                          "attb-opts": instance.data.pdt_add_info[1],
-                          "related-data": {
-                            mtrlCd: unref(orderInfo).meterialInfo?.MTRL_CD,
-                            sizeInfo: unref(orderInfo).sizeInfo,
-                          },
-                          onUpdate:
-                            cache[8] ||
-                            (cache[8] = (pcsData) => unref(updatePostPcs)("visible")(pcsData)),
-                        },
-                        null,
-                        8,
-                        ["options", "disabled-opts", "attb-opts", "related-data"]
-                      ) /* 표지 업로드 */,
-                      instance.widgetAttr.order_yn !== "N"
-                        ? (openBlock(),
-                          createVNode(
-                            FileUpload,
-                            {
-                              key: 1,
-                              _key: "default",
-                              "upload-config": coverUploadConfig.value,
-                              subject: "표지업로드",
-                              notes: [
-                                unref(translate)("표지업로드장수안내", {
-                                  QTY: `${unref(orderInfo).dosuInfo?.COD === "SID_D" ? 2 : 1}`,
-                                }),
-                              ],
-                              "related-data": {
-                                hasScodix: hasScodix.value,
-                              },
-                              onUpload:
-                                cache[9] ||
-                                (cache[9] = (uploadData) =>
-                                  createUploadHandler("default")(uploadData)),
-                            },
-                            null,
-                            8,
-                            ["upload-config", "notes", "related-data"]
-                          ))
-                        : createCommentVNode("", !0),
-                    ],
-                    64
-                  )
-                );
-              },
-            }),
-            [["__scopeId", "data-v-51f6d81b"]]
-          ),
-        },
-        Symbol.toStringTag,
-        {
-          value: "Module",
-        }
-      ),
-      /* =========================================================================
-       * 섹션 15: 부자재(Acc) 메인 컴포넌트
-       * 부자재 옵션 선택(캐스케이드/멀티/단일), 수량 조절(+/- 버튼), 가격 표시.
-       * 선택한 부자재 항목의 요약 리스트와 삭제 기능 포함.
-       * ========================================================================= */
-      /* 부자재 요약 영역 CSS 클래스들 */
-      (accSummaryClass = {
-        key: 2,
-        class: "summary",
-      }),
-      (accItemNameClass = {
-        class: "name",
-      }),
-      (accQtyPriceClass = {
-        class: "qty-price",
-      }),
-      (accCounterClass = {
-        class: "counter",
-      }),
-      (accDecreaseBtnAttrs = ["onClick"]),
-      (accQtyInputAttrs = ["value", "onChange"]),
-      (accIncreaseBtnAttrs = ["onClick"]),
-      (accPriceBoxClass = {
-        class: "price-box",
-      }),
-      (accPriceClass = {
-        class: "price",
-      }),
-      (accDeleteBtnAttrs = ["onClick"]),
-      (accSkeletonClass = {
-        key: 1,
-      }),
-      (accSkeletonQtyPriceClass = {
-        class: "qty-price",
-      }),
-      (accSkeletonPriceBoxClass = {
-        class: "price-box",
-      }),
-      /**
-       * 부자재 주문 메인 컴포넌트
-       * 부자재(액세서리) 주문의 전체 구성을 관장하는 최상위 컴포넌트.
-       * 필터(자재그룹/서브그룹) → 옵션 선택 → 수량 → 가격 표시 순서로 fieldset 렌더링.
-       * @component Acc
-       * @props {string} type - 주문 유형 ("new"|"reorder"|"edit")
-       * @props {Object} data - 부자재 옵션 데이터 (필터 설정, 자재 목록 등)
-       * @emits {Object} update - 주문 옵션 변경 시 전체 orderData 객체
-       */
-      (AccModule = Object.freeze(
-        Object.defineProperty(
-          {
-            __proto__: null,
-            default: withScopeId(
-              defineComponent({
-                __name: "Acc",
-                props: {
-                  type: {
-                    default: "new",
-                  },
-                  data: {},
-                },
-                emits: ["update"],
-                setup(props, { emit: emit }) {
-                  const componentProps = props,
-                    emitFn = emit,
-                    productCode = inject("productCode", {
-                      pdtCode: "",
-                    }),
-                    callbacks = inject("callbacks", {}),
-                    /* 부자재 필터 설정 (상품별 UI 유형) */
-                    accFilterConfig = computed(() =>
-                      accFilterConfigMap[productCode.pdtCode]
-                        ? accFilterConfigMap[productCode.pdtCode][productCode.pttCode || ""]
-                        : null
-                    ),
-                    /* 1단계 선택값 */
-                    primarySelection = ref("X"),
-                    /* 2단계(서브그룹) 선택값 */
-                    secondarySelection = ref("X"),
-                    /* 3단계(자재) 선택값 */
-                    tertiarySelection = ref("X"),
-                    /* 멀티 그룹 선택값 reactive */
-                    multiGroupSelections = reactive({}),
-                    /* 선택된 부자재 항목들 reactive (MTRL_CD → 항목 데이터) */
-                    selectedItems = reactive({});
-                  /* 1단계 변경 시 3단계 초기화 */
-                  watch(
-                    () => primarySelection.value,
-                    () => {
-                      tertiarySelection.value = "X";
-                    }
-                  );
-                  const defaultSelectOption = {
-                      key: "X",
-                      value: "X",
-                      name: translate("선택하기"),
-                    },
-                    /* 전체 초기화 핸들러 */
-                    resetAllSelections = () => {
-                      (primarySelection.value = "X"),
-                        (secondarySelection.value = "X"),
-                        (tertiarySelection.value = "X");
-                    },
-                    /* 자재 그룹별 맵 */
-                    materialGroupMap = computed(() =>
-                      componentProps.data.reduce(
-                        (groupMap, material) => (
-                          groupMap[material.MTRL_GRP_GB] || (groupMap[material.MTRL_GRP_GB] = []),
-                          groupMap[material.MTRL_GRP_GB].push(material),
-                          groupMap
-                        ),
-                        {}
-                      )
-                    ),
-                    /* 셀렉트 옵션 빌더 — 필터 설정에 따라 옵션 목록 생성 */
-                    buildSelectOptions = (filterDef) => {
-                      const options = [defaultSelectOption];
-                      return filterDef
-                        ? filterDef.GRP_TYPE === "MTRL_MULTI_GRP"
-                          ? (materialGroupMap.value[filterDef.GRP_COD].forEach((material) => {
-                              options.push({
-                                key: material.MTRL_CD,
-                                value: material.MTRL_CD,
-                                name: material.MTRL_NM,
-                                disabled: material.HIDE_YN === "Y",
-                              });
-                            }),
-                            options)
-                          : filterDef.options
-                          ? (filterDef.options.forEach((opt) => {
-                              options.push({
-                                key: opt.COD,
-                                value: opt.COD,
-                                name: translate(opt.COD_NME),
-                              });
-                            }),
-                            options)
-                          : (primarySelection.value !== "X" &&
-                              materialGroupMap.value[primarySelection.value].forEach((material) => {
-                                options.push({
-                                  key: material.MTRL_CD,
-                                  value: material.MTRL_CD,
-                                  name: material.MTRL_NM,
-                                  disabled: material.HIDE_YN === "Y",
-                                });
-                              }),
-                            options)
-                        : (componentProps.data.forEach((material) => {
-                            options.push({
-                              key: material.MTRL_CD,
-                              value: material.MTRL_CD,
-                              name: material.MTRL_NM,
-                              disabled: material.HIDE_YN === "Y",
-                            });
-                          }),
-                          options);
-                    };
-
-                  /* 경고 메시지 표시 */
-                  function showWarning(message) {
-                    return callbacks?.onCallMsg
-                      ? callbacks.onCallMsg("warn", message)
-                      : alert(message);
-                  }
-
-                  /* 항목 추가 (이미 있으면 수량 증가) */
-                  function addItem(material) {
-                    material &&
-                      (selectedItems[material.MTRL_CD]
-                        ? (selectedItems[material.MTRL_CD].QTY += material.INC_STEP)
-                        : (selectedItems[material.MTRL_CD] = {
-                            ...material,
-                            QTY: material.FIR_CNT,
-                          }));
-                  }
-
-                  /* 수량 감소 (최소 수량 이하로는 감소 불가) */
-                  function decreaseItemQty(material) {
-                    selectedItems[material.MTRL_CD].QTY !== material.FIR_CNT &&
-                      (selectedItems[material.MTRL_CD].QTY -= material.INC_STEP);
-                  }
-
-                  /* 수량 직접 입력 핸들러 — 유효성 보정 */
-                  function handleQtyInput(event, material) {
-                    let newQty = +event.target.value || material.FIR_CNT;
-                    if (
-                      (newQty < material.FIR_CNT && (newQty = material.FIR_CNT),
-                      material.RMD_QTY > 0 &&
-                        newQty > material.RMD_QTY &&
-                        (newQty = material.RMD_QTY),
-                      material.INC_STEP !== 1)
-                    ) {
-                      const remainder = newQty % material.INC_STEP;
-                      remainder !== 0 && (newQty = newQty - remainder);
-                    }
-                    selectedItems[material.MTRL_CD] = {
-                      ...selectedItems[material.MTRL_CD],
-                      QTY: newQty,
-                    };
-                  }
-
-                  /* 옵션 선택 (추가) 버튼 핸들러 */
-                  function handleAddOption() {
-                    if (!accFilterConfig.value) {
-                      if (tertiarySelection.value === "X")
-                        return showWarning(translate("옵션미선택안내"));
-                      const material = componentProps.data.find(
-                        (item) => item.MTRL_CD === tertiarySelection.value
-                      );
-                      return addItem(material), (tertiarySelection.value = "X");
-                    }
-                    if (accFilterConfig.value.uiType === "MULTI")
-                      return isEmpty(multiGroupSelections) ||
-                        Object.values(multiGroupSelections).every((val) => val === "X")
-                        ? showWarning(translate("옵션미선택안내"))
-                        : (Object.entries(multiGroupSelections).forEach(([groupKey, mtrlCd]) => {
-                            const material = materialGroupMap.value[groupKey].find(
-                              (item) => item.MTRL_CD === mtrlCd
-                            );
-                            addItem(material);
-                          }),
-                          Object.keys(multiGroupSelections).forEach(
-                            (key) => delete multiGroupSelections[key]
-                          ));
-                    if (accFilterConfig.value.uiType === "CASCADE") {
-                      const primaryFilter = accFilterConfig.value.filters[0],
-                        subGroupFilter = accFilterConfig.value.filters.find(
-                          (filter) => filter.GRP_TYPE === "MTRL_SUB_GRP"
-                        );
-                      if (primarySelection.value === "X")
-                        return showWarning(
-                          translate("옵션미선택안내상세", {
-                            OPTION: translate(primaryFilter.GRP_NME),
-                          })
-                        );
-                      if (!subGroupFilter) return;
-                      if (subGroupFilter.options) {
-                        if (secondarySelection.value === "X")
-                          return showWarning(
-                            translate("옵션미선택안내상세", {
-                              OPTION: translate(subGroupFilter.GRP_NME),
-                            })
-                          );
-                        const matchedMaterial = materialGroupMap.value[primarySelection.value].find(
-                          (item) => {
-                            if (item.MTRL_NM.includes(translate(secondarySelection.value)))
-                              return !0;
-                            if (secondarySelection.value === "NONE") return !0;
-                          }
-                        );
-                        return addItem(matchedMaterial), resetAllSelections();
-                      }
-                      if (tertiarySelection.value === "X")
-                        return showWarning(
-                          translate("옵션미선택안내상세", {
-                            OPTION: translate(subGroupFilter.GRP_NME),
-                          })
-                        );
-                      const selectedMaterial = materialGroupMap.value[primarySelection.value].find(
-                        (item) => item.MTRL_CD === tertiarySelection.value
-                      );
-                      return addItem(selectedMaterial), resetAllSelections();
-                    }
-                  }
-
-                  /* 항목 삭제 */
-                  function removeItem(material) {
-                    delete selectedItems[material.MTRL_CD];
-                  }
-                  /* 선택 항목 변경 시 부모에 업데이트 */
-                  watch(
-                    () => selectedItems,
-                    (newItems) => {
-                      const itemList = Object.values(newItems).map((item) => ({
-                        MTRL_CD: item.MTRL_CD,
-                        QTY: item.QTY,
-                        ATTB: "",
-                        MTRL_NME: item.MTRL_NM,
-                      }));
-                      emitFn("update", itemList);
-                    },
-                    {
-                      deep: !0,
-                    }
-                  );
-                  const orderStore = useAccOrderStore(),
-                    /* 가격 계산 결과에서 항목별 가격 추출 */
-                    itemPriceMap = computed(() =>
-                      orderStore
-                        .getOrderData()
-                        ?.priceCalc.result.result?.reduce(
-                          (priceMap, priceItem) => (
-                            (priceMap[priceItem.MTRL_CD] =
-                              +priceItem.PRICE_MALL !== priceItem.PRICE
-                                ? +priceItem.PRICE_MALL
-                                : priceItem.PRICE),
-                            priceMap
-                          ),
-                          {}
-                        )
-                    ),
-                    /* 가격 애니메이션용 reactive 객체 */
-                    animatedPrices = reactive(itemPriceMap.value || {});
-
-                  /* 가격 애니메이션 함수 — requestAnimationFrame으로 부드러운 숫자 전환 */
-                  function animatePrice(mtrlCd, fromPrice, toPrice) {
-                    const startTime = performance.now(),
-                      animate = (currentTime) => {
-                        const progress = Math.min((currentTime - startTime) / 300, 1),
-                          currentPrice = Math.floor(fromPrice + (toPrice - fromPrice) * progress);
-                        (animatedPrices[mtrlCd] = currentPrice),
-                          progress < 1 && requestAnimationFrame(animate);
-                      };
-                    requestAnimationFrame(animate);
-                  }
-                  /* 가격 변경 감시 — 애니메이션 적용 */
-                  return (
-                    watch(
-                      () => itemPriceMap.value,
-                      (newPrices, oldPrices = {}) => {
-                        newPrices &&
-                          Object.keys(newPrices).forEach((mtrlCd) => {
-                            const oldPrice = oldPrices[mtrlCd] || 0,
-                              newPrice = newPrices[mtrlCd] || 0;
-                            animatePrice(mtrlCd, oldPrice, newPrice);
-                          });
-                      },
-                      {
-                        deep: !0,
-                      }
-                    ) /* 렌더 함수 — 필터 셀렉트 + 추가 버튼 + 요약 리스트 */,
-                    (instance, cache) => (
-                      openBlock(),
-                      createElementVNode(
-                        Fragment,
-                        null,
-                        [
-                          accFilterConfig.value
-                            ? (openBlock(!0),
-                              createElementVNode(
-                                Fragment,
-                                {
-                                  key: 0,
-                                },
-                                renderList(
-                                  accFilterConfig.value.filters,
-                                  (filterDef) => (
-                                    openBlock(),
-                                    createVNode(
-                                      OptionRow,
-                                      {
-                                        key: filterDef.GRP_NME,
-                                        title: `${unref(translate)("옵션")} - ${unref(translate)(
-                                          filterDef.GRP_NME
-                                        )}`,
-                                      },
-                                      {
-                                        default: withCtx(() => [
-                                          filterDef.GRP_TYPE === "MTRL_MULTI_GRP"
-                                            ? (openBlock(),
-                                              createVNode(
-                                                Selector,
-                                                {
-                                                  key: 0,
-                                                  name: filterDef.GRP_COD,
-                                                  default:
-                                                    multiGroupSelections[filterDef.GRP_COD] || "X",
-                                                  options: buildSelectOptions(filterDef),
-                                                  onSelect: (selectedVal) =>
-                                                    (multiGroupSelections[filterDef.GRP_COD] =
-                                                      selectedVal),
-                                                },
-                                                null,
-                                                8,
-                                                ["name", "default", "options", "onSelect"]
-                                              ))
-                                            : filterDef.GRP_TYPE === "MTRL_GRP"
-                                            ? (openBlock(),
-                                              createVNode(
-                                                Selector,
-                                                {
-                                                  key: 1,
-                                                  name: "material-group",
-                                                  options: buildSelectOptions(filterDef),
-                                                  default: primarySelection.value,
-                                                  onSelect:
-                                                    cache[0] ||
-                                                    (cache[0] = (selectedVal) =>
-                                                      (primarySelection.value = selectedVal)),
-                                                },
-                                                null,
-                                                8,
-                                                ["options", "default"]
-                                              ))
-                                            : filterDef.GRP_TYPE === "MTRL_SUB_GRP" &&
-                                              filterDef.options
-                                            ? (openBlock(),
-                                              createVNode(
-                                                Selector,
-                                                {
-                                                  key: 2,
-                                                  name: "material-sub-group",
-                                                  options: buildSelectOptions(filterDef),
-                                                  default: secondarySelection.value,
-                                                  onSelect:
-                                                    cache[1] ||
-                                                    (cache[1] = (selectedVal) =>
-                                                      (secondarySelection.value = selectedVal)),
-                                                },
-                                                null,
-                                                8,
-                                                ["options", "default"]
-                                              ))
-                                            : (openBlock(),
-                                              createVNode(
-                                                Selector,
-                                                {
-                                                  key: 3,
-                                                  name: "material",
-                                                  options: buildSelectOptions(filterDef),
-                                                  default: tertiarySelection.value,
-                                                  onSelect:
-                                                    cache[2] ||
-                                                    (cache[2] = (selectedVal) =>
-                                                      (tertiarySelection.value = selectedVal)),
-                                                },
-                                                null,
-                                                8,
-                                                ["options", "default"]
-                                              )),
-                                        ]),
-                                        _: 2,
-                                      },
-                                      1032,
-                                      ["title"]
-                                    )
-                                  )
-                                ),
-                                128
-                              ))
-                            : (openBlock(),
-                              createVNode(
-                                OptionRow,
-                                {
-                                  key: 1,
-                                  title: unref(translate)("옵션"),
-                                },
-                                {
-                                  default: withCtx(() => [
-                                    renderComponent(
-                                      Selector,
-                                      {
-                                        name: "material",
-                                        options: buildSelectOptions(),
-                                        default: tertiarySelection.value,
-                                        onSelect:
-                                          cache[3] ||
-                                          (cache[3] = (selectedVal) =>
-                                            (tertiarySelection.value = selectedVal)),
-                                      },
-                                      null,
-                                      8,
-                                      ["options", "default"]
-                                    ),
-                                  ]),
-                                  _: 1,
-                                },
-                                8,
-                                ["title"]
-                              )) /* 옵션 추가 버튼 */,
-                          createElement(
-                            "button",
-                            {
-                              type: "button",
-                              class: "add-btn",
-                              onClick: handleAddOption,
-                            },
-                            "+ " + toDisplayString(unref(translate)("옵션선택")),
-                            1
-                          ) /* 선택된 부자재 요약 리스트 */,
-                          unref(isEmpty)(selectedItems)
-                            ? createCommentVNode("", !0)
-                            : (openBlock(),
-                              createElementVNode("div", accSummaryClass, [
-                                (openBlock(!0),
-                                createElementVNode(
-                                  Fragment,
-                                  null,
-                                  renderList(
-                                    Object.values(selectedItems),
-                                    (item) => (
-                                      openBlock(),
-                                      createElementVNode(
-                                        "div",
-                                        {
-                                          key: item.MTRL_CD,
-                                        },
-                                        [
-                                          itemPriceMap.value && itemPriceMap.value[item.MTRL_CD]
-                                            ? (openBlock(),
-                                              createElementVNode(
-                                                Fragment,
-                                                {
-                                                  key: 0,
-                                                },
-                                                [
-                                                  createElement(
-                                                    "p",
-                                                    accItemNameClass,
-                                                    toDisplayString(item.MTRL_NM),
-                                                    1
-                                                  ),
-                                                  createElement("div", accQtyPriceClass, [
-                                                    createElement("div", accCounterClass, [
-                                                      createElement(
-                                                        "button",
-                                                        {
-                                                          type: "button",
-                                                          class: "btn minus",
-                                                          onClick: (clickEvent) =>
-                                                            decreaseItemQty(item),
-                                                        },
-                                                        "-",
-                                                        8,
-                                                        accDecreaseBtnAttrs
-                                                      ),
-                                                      createElement(
-                                                        "input",
-                                                        {
-                                                          class: "qty",
-                                                          value: item.QTY,
-                                                          name: "qty",
-                                                          onChange: (changeEvent) =>
-                                                            handleQtyInput(changeEvent, item),
-                                                          type: "number",
-                                                        },
-                                                        null,
-                                                        40,
-                                                        accQtyInputAttrs
-                                                      ),
-                                                      createElement(
-                                                        "button",
-                                                        {
-                                                          type: "button",
-                                                          class: "btn plus",
-                                                          onClick: (clickEvent) => addItem(item),
-                                                        },
-                                                        "+",
-                                                        8,
-                                                        accIncreaseBtnAttrs
-                                                      ),
-                                                    ]),
-                                                    createElement("div", accPriceBoxClass, [
-                                                      createElement(
-                                                        "span",
-                                                        accPriceClass,
-                                                        toDisplayString(
-                                                          animatedPrices[
-                                                            item.MTRL_CD
-                                                          ]?.toLocaleString()
-                                                        ),
-                                                        1
-                                                      ),
-                                                      createElement(
-                                                        "button",
-                                                        {
-                                                          type: "button",
-                                                          class: "delete-btn",
-                                                          onClick: (clickEvent) => removeItem(item),
-                                                        },
-                                                        "X",
-                                                        8,
-                                                        accDeleteBtnAttrs
-                                                      ),
-                                                    ]),
-                                                  ]),
-                                                ],
-                                                64
-                                              ))
-                                            : (openBlock(),
-                                              createElementVNode("div", accSkeletonClass, [
-                                                renderComponent(Skeleton, {
-                                                  variant: "rounded",
-                                                  width: 110,
-                                                  height: 16,
-                                                }),
-                                                createElement("div", accSkeletonQtyPriceClass, [
-                                                  renderComponent(Skeleton, {
-                                                    variant: "rounded",
-                                                    width: 106,
-                                                    height: 28,
-                                                  }),
-                                                  createElement("div", accSkeletonPriceBoxClass, [
-                                                    renderComponent(Skeleton, {
-                                                      variant: "rounded",
-                                                      width: 50,
-                                                      height: 17,
-                                                    }),
-                                                    renderComponent(Skeleton, {
-                                                      variant: "circular",
-                                                      width: 16,
-                                                      height: 16,
-                                                    }),
-                                                  ]),
-                                                ]),
-                                              ])),
-                                        ]
-                                      )
-                                    )
-                                  ),
-                                  128
-                                )),
-                              ])),
-                        ],
-                        64
-                      )
-                    )
-                  );
-                },
-              }),
-              [["__scopeId", "data-v-99ad5859"]]
-            ),
-          },
-          Symbol.toStringTag,
-          {
-            value: "Module",
-          }
-        ),
-        /* =========================================================================
-         * 섹션 16~28: 후가공(PostProcess) 개별 컴포넌트들
-         * 각 후가공 유형별 UI 컴포넌트 — 아이콘 체크박스/라디오/셀렉트 형태.
-         * PCS_CD 코드로 구분: ADC_PVC, BID_SIL, BIND_DIRECTION, BON_PAP, BON_SHT,
-         * CLD_STD, COT_DFT, COT_SEG, CVR_INN, CVR_SWN, DIR_MTR, END_PAP,
-         * INN_DFT, INS_COT, LAB_FBR, PAK_ETC, PAK_POL, PDT_WRK, PRT_IPK,
-         * PRT_WHT, PRT_WHT_FACE, RIN_DFT, ROU_DFT, SCO_DFT, SUB_MTR_BC, WRK_MTR
-         * ========================================================================= */
-
-        /* --- ADC_PVC: PVC 커버 후가공 --- */
-        (adcPvcFlexRowClass = {
-          class: "flex-row",
-        }),
-        (adcPvcNotesClass = {
-          class: "notes",
-        }),
-        (adcPvcNoteClass = {
-          class: "note",
-        }),
-        (ADC_PVC_Module = Object.freeze(
-          Object.defineProperty(
-            {
-              __proto__: null,
-              default: defineComponent({
-                __name: "ADC_PVC",
-                props: {
-                  data: {},
-                },
-                emits: ["update"],
-                setup(props, { emit: emit }) {
-                  const componentProps = props,
-                    emitFn = emit,
-                    selectedValue = ref(componentProps.data.options[0].value),
-                    handleSelect = (selectedItem) => {
-                      selectedValue.value = selectedItem.value;
-                    };
-                  /* 선택 변경 시 후가공 데이터 구조로 부모 전달 */
-                  return (
-                    watch(
-                      () => selectedValue.value,
-                      (newValue) => {
-                        emitFn("update", [
-                          {
-                            PCS_CD: componentProps.data.value,
-                            PCS_DTL_CD: newValue,
-                            PCS_DTL_NM: componentProps.data.name,
-                          },
-                        ]);
-                      },
-                      {
-                        immediate: !0,
-                      }
-                    ),
-                    (instance, cache) => (
-                      openBlock(),
-                      createVNode(
-                        OptionRow,
-                        {
-                          title: instance.data.name,
-                          underline: "",
-                        },
-                        {
-                          default: withCtx(() => [
-                            createElement("div", adcPvcFlexRowClass, [
-                              (openBlock(!0),
-                              createElementVNode(
-                                Fragment,
-                                null,
-                                renderList(
-                                  instance.data.options,
-                                  (optionItem) => (
-                                    openBlock(),
-                                    createVNode(
-                                      ImageButton,
-                                      {
-                                        key: optionItem.key,
-                                        data: {
-                                          value: optionItem.value,
-                                          name: optionItem.name,
-                                          imgPath: `${instance.data.subImgPath}_${optionItem.value}`,
-                                        },
-                                        active: selectedValue.value === optionItem.value,
-                                        onSelect: handleSelect,
-                                      },
-                                      null,
-                                      8,
-                                      ["data", "active"]
-                                    )
-                                  )
-                                ),
-                                128
-                              )),
-                            ]),
-                            createElement("div", adcPvcNotesClass, [
-                              createElement(
-                                "p",
-                                adcPvcNoteClass,
-                                toDisplayString(instance.data.options[0]?.extra?.NOTICE[0]),
-                                1
-                              ),
-                            ]),
-                          ]),
-                          _: 1,
-                        },
-                        8,
-                        ["title"]
-                      )
-                    )
-                  );
-                },
-              }),
-            },
-            Symbol.toStringTag,
-            {
-              value: "Module",
-            }
-          ) /* --- BID_SIL: 실크 인쇄 후가공 (속성값 선택 포함) --- */,
-          (bidSilFlexRowClass = {
-            class: "flex-row -flow",
-          }),
-          (BID_SIL_Module = Object.freeze(
-            Object.defineProperty(
-              {
-                __proto__: null,
-                default: defineComponent({
-                  __name: "BID_SIL",
-                  props: {
-                    data: {},
-                  },
-                  emits: ["update"],
-                  setup(props, { emit: emit }) {
-                    const componentProps = props,
-                      emitFn = emit,
-                      selectedAttbValue = ref(componentProps.data.attbOptions[0].value),
-                      selectedAttbName = ref(componentProps.data.attbOptions[0].name),
-                      handleAttbSelect = (selectedItem) => {
-                        (selectedAttbValue.value = selectedItem.value),
-                          (selectedAttbName.value = selectedItem.name);
-                      };
-                    return (
-                      watch(
-                        () => selectedAttbValue.value,
-                        (newValue) => {
-                          emitFn("update", [
-                            {
-                              PCS_CD: componentProps.data.value,
-                              PCS_DTL_CD: componentProps.data.options[0].value,
-                              PCS_DTL_NM: `${componentProps.data.name}(${selectedAttbName.value})`,
-                              ATTB: newValue,
-                            },
-                          ]);
-                        },
-                        {
-                          immediate: !0,
-                        }
-                      ),
-                      (instance, cache) => (
-                        openBlock(),
-                        createVNode(
-                          OptionRow,
-                          {
-                            title: instance.data.name,
-                            underline: "",
-                          },
-                          {
-                            default: withCtx(() => [
-                              createElement("div", bidSilFlexRowClass, [
-                                (openBlock(!0),
-                                createElementVNode(
-                                  Fragment,
-                                  null,
-                                  renderList(
-                                    instance.data.attbOptions,
-                                    (attbOpt) => (
-                                      openBlock(),
-                                      createVNode(
-                                        ImageButton,
-                                        {
-                                          key: attbOpt.key,
-                                          data: {
-                                            value: attbOpt.value,
-                                            name: attbOpt.name,
-                                            imgPath: attbOpt.value,
-                                          },
-                                          active: selectedAttbValue.value === attbOpt.value,
-                                          onSelect: handleAttbSelect,
-                                        },
-                                        null,
-                                        8,
-                                        ["data", "active"]
-                                      )
-                                    )
-                                  ),
-                                  128
-                                )),
-                              ]),
-                            ]),
-                            _: 1,
-                          },
-                          8,
-                          ["title"]
-                        )
-                      )
-                    );
-                  },
+            emits: ["update"],
+            setup(e, { emit: t }) {
+              const n = e,
+                o = t,
+                s = inject("productCode", {
+                  pdtCode: "",
                 }),
-              },
-              Symbol.toStringTag,
-              {
-                value: "Module",
-              }
-            ) /* --- BIND_DIRECTION: 제본방향 후가공 (BPTOP/BPLFT 자동 결정 + A/B 회전) --- */,
-            (bindDirectionFlexRowClass = {
-              class: "flex-row",
-            }),
-            (BIND_DIRECTION_Module = Object.freeze(
-              Object.defineProperty(
+                r = useEditorStore(),
+                a = ref("select"),
+                i = () => {
+                  a.value = a.value === "input" ? "select" : "input";
+                },
+                l = computed(() =>
+                  calendarPdfOnlySet.has(s.pdtCode) ? !0 : r.uploadType.default === "pdf"
+                ),
+                c = computed(() => n.options.find((A) => A.DFT_YN === "Y") || n.options[0]),
+                u = computed(() => c.value?.MIN_PRN_CNT || 1),
+                d = computed(() => c.value?.DFT_PRN_CNT || 1),
+                h = computed(() => {
+                  if (n.options.length > 1) return n.options;
+                  const A = d.value,
+                    b = u.value,
+                    C = A * 10,
+                    y = [];
+                  for (let I = b; I <= C; I += A) {
+                    const w = {
+                      PRN_CNT: I,
+                    };
+                    y.push(w);
+                  }
+                  return y;
+                }),
+                f = ref(n.default?.ordCnt || 13),
+                _ = ref(n.default?.prnCnt || u.value),
+                p = computed(() => ({
+                  ordCnt: f.value,
+                  prnCnt: _.value,
+                })),
+                m = computed(() => {
+                  const A = n.relatedData?.dosu === "SID_D" ? 2 : 1;
+                  return (f.value * A).toLocaleString();
+                }),
+                v = computed(
+                  () => n.relatedData?.size === "mini" || r.uploadType.default === "editor"
+                ),
+                E = computed(() =>
+                  n.relatedData?.size === "mini" ? 13 : s.pdtCode === "TPCLECO" ? 14 : 24
+                ),
+                k = computed(() => {
+                  if (d.value === 1) return !1;
+                  const A = p.value.prnCnt % d.value;
+                  return d.value > 1 && A !== 0;
+                }),
+                N = computed(() => p.value.ordCnt < 13 || p.value.ordCnt > E.value);
+              watch(
+                () => p.value,
+                debounce((A) => {
+                  k.value
+                    ? o("update", {
+                        ordCnt: f.value,
+                        prnCnt: 0,
+                      })
+                    : N.value
+                    ? o("update", {
+                        ordCnt: 0,
+                        prnCnt: _.value,
+                      })
+                    : o("update", A);
+                }, 200),
                 {
-                  __proto__: null,
-                  default: defineComponent({
-                    __name: "BIND_DIRECTION",
-                    props: {
-                      data: {},
-                      relatedData: {},
-                    },
-                    emits: ["update"],
-                    setup(props, { emit: emit }) {
-                      const componentProps = props,
-                        emitFn = emit,
-                        productCode = inject("productCode", {
-                          pdtCode: "",
-                        }),
-                        /* 제본 회전 옵션: A(정방향) / B(역방향) */
-                        rotationOptions = [
-                          {
-                            name: "A",
-                            value: "Y",
-                            key: "A",
-                            imgPath: "BIND_DIRECTION_BPTOP_A",
-                          },
-                          {
-                            name: "B",
-                            value: "N",
-                            key: "B",
-                            imgPath: "BIND_DIRECTION_BPTOP_B",
-                          },
-                        ],
-                        workSize = computed(() => componentProps.relatedData.sizeInfo.workSize),
-                        /* 제본 방향 자동 결정: 가로 → 상단(BPTOP), 세로 → 좌측(BPLFT) */
-                        bindDirection = computed(() =>
-                          horizontalBindSet.has(productCode.pdtCode)
-                            ? "BPLFT"
-                            : workSize.value.width > workSize.value.height
-                            ? "BPTOP"
-                            : "BPLFT"
-                        ),
-                        selectedRotation = ref(rotationOptions[0].value),
-                        /* 메인 방향 + 회전 조합 */
-                        combinedDirection = computed(() => ({
-                          main: bindDirection.value,
-                          sub: selectedRotation.value,
-                        }));
-                      /* 방향 조합 변경 시 부모 전달 */
-                      return (
-                        watch(
-                          () => combinedDirection.value,
-                          (newDirection) => {
-                            const extraData = componentProps.data.options.find(
-                              (opt) => opt.value === newDirection.main
-                            )?.extra;
-                            emitFn("update", [
-                              {
-                                PCS_CD: componentProps.data.value,
-                                PCS_DTL_CD: newDirection.main,
-                                PCS_DTL_NM: extraData?.PCS_DTL_NM,
-                                ...(bindDirection.value === "BPTOP"
-                                  ? {
-                                      BACK_ROT_YN: newDirection.sub,
-                                    }
-                                  : {}),
-                              },
-                            ]);
-                          },
-                          {
-                            immediate: !0,
-                          }
-                        ),
-                        (instance, cache) => (
-                          openBlock(),
+                  immediate: !0,
+                }
+              );
+              const D = () => {
+                  if (k.value) {
+                    const A = Math.ceil(p.value.prnCnt / d.value);
+                    _.value = (A || 1) * d.value;
+                  }
+                },
+                O = () => {
+                  N.value &&
+                    (p.value.ordCnt < 13 && (f.value = 13),
+                    p.value.ordCnt > E.value && (f.value = E.value));
+                };
+              return (
+                watch(
+                  () => r.editorData?.default?.quantityInfo?.ordCnt,
+                  (A, b) => {
+                    if (A) f.value = A;
+                    else if (b) return (f.value = 13);
+                  }
+                ),
+                (A, b) => (
+                  openBlock(),
+                  createVNode(OptionRow, null, {
+                    default: withCtx(() => [
+                      l.value
+                        ? (openBlock(),
                           createVNode(
                             OptionRow,
                             {
-                              title: instance.data.name,
-                              underline: "",
+                              key: 0,
+                              title: "디자인수",
                             },
                             {
                               default: withCtx(() => [
-                                createElement("div", bindDirectionFlexRowClass, [
-                                  (openBlock(!0),
-                                  createElementVNode(
-                                    Fragment,
-                                    null,
-                                    renderList(
-                                      instance.data.options,
-                                      (dirOption) => (
-                                        openBlock(),
-                                        createVNode(
-                                          ImageButton,
-                                          {
-                                            key: dirOption.key,
-                                            data: {
-                                              value: dirOption.value,
-                                              name: dirOption.name,
-                                              imgPath: `${instance.data.subImgPath}_${dirOption.value}`,
-                                            },
-                                            "force-hidden": bindDirection.value !== dirOption.value,
-                                            active: bindDirection.value === dirOption.value,
-                                          },
-                                          null,
-                                          8,
-                                          ["data", "force-hidden", "active"]
-                                        )
-                                      )
-                                    ),
-                                    128
-                                  )),
-                                  (openBlock(),
-                                  createElementVNode(
-                                    Fragment,
-                                    null,
-                                    renderList(rotationOptions, (rotOption) =>
-                                      renderComponent(
-                                        ImageButton,
-                                        {
-                                          key: rotOption.key,
-                                          data: {
-                                            value: rotOption.value,
-                                            name: rotOption.name,
-                                            imgPath: rotOption.imgPath,
-                                          },
-                                          "force-hidden": bindDirection.value === "BPLFT",
-                                          active: selectedRotation.value === rotOption.value,
-                                          onSelect:
-                                            cache[0] ||
-                                            (cache[0] = (selectedItem) =>
-                                              (selectedRotation.value = selectedItem.value)),
-                                        },
-                                        null,
-                                        8,
-                                        ["data", "force-hidden", "active"]
-                                      )
-                                    ),
-                                    64
-                                  )),
-                                ]),
-                              ]),
-                              _: 1,
-                            },
-                            8,
-                            ["title"]
-                          )
-                        )
-                      );
-                    },
-                  }),
-                },
-                Symbol.toStringTag,
-                {
-                  value: "Module",
-                }
-              ) /* 나머지 후가공 컴포넌트들은 동일한 패턴을 따름 (아이콘 선택 / 셀렉트 / 라디오) */,
-              /* BON_PAP, BON_SHT, CLD_STD, COT_DFT, COT_SEG, CVR_INN, CVR_SWN 등 */
-              /* 각각의 PCS_CD에 맞는 옵션을 렌더링하고 update 이벤트로 상위에 전달 */
-
-              /* --- BON_PAP: 본드용지 후가공 --- */
-              (bonPapFlexRowClass = {
-                class: "flex-row",
-              }),
-              (bonPapNotesClass = {
-                class: "notes",
-              }),
-              (bonPapNoteClass = {
-                class: "note",
-              }),
-              (BON_PAP_Module = Object.freeze(
-                Object.defineProperty(
-                  {
-                    __proto__: null,
-                    default: defineComponent({
-                      __name: "BON_PAP",
-                      props: {
-                        data: {},
-                      },
-                      emits: ["update"],
-                      setup(props, { emit: emit }) {
-                        const componentProps = props,
-                          emitFn = emit,
-                          selectedValue = ref(componentProps.data.options[0].value),
-                          selectedName = ref(componentProps.data.options[0].name),
-                          handleSelect = (selectedItem) => {
-                            (selectedValue.value = selectedItem.value),
-                              (selectedName.value = selectedItem.name);
-                          };
-                        return (
-                          watch(
-                            () => selectedValue.value,
-                            (newValue) => {
-                              emitFn("update", [
-                                {
-                                  PCS_CD: componentProps.data.value,
-                                  PCS_DTL_CD: newValue,
-                                  PCS_DTL_NM: selectedName.value,
-                                },
-                              ]);
-                            },
-                            {
-                              immediate: !0,
-                            }
-                          ),
-                          (instance, cache) => (
-                            openBlock(),
-                            createVNode(
-                              OptionRow,
-                              {
-                                title: instance.data.name,
-                                underline: "",
-                              },
-                              {
-                                default: withCtx(() => [
-                                  createElement("div", bonPapFlexRowClass, [
-                                    (openBlock(!0),
-                                    createElementVNode(
-                                      Fragment,
-                                      null,
-                                      renderList(
-                                        instance.data.options,
-                                        (optItem) => (
-                                          openBlock(),
-                                          createVNode(
-                                            ImageButton,
-                                            {
-                                              key: optItem.key,
-                                              data: {
-                                                value: optItem.value,
-                                                name: optItem.name,
-                                                imgPath: instance.data.value,
-                                              },
-                                              active: selectedValue.value === optItem.value,
-                                              onSelect: handleSelect,
-                                            },
-                                            null,
-                                            8,
-                                            ["data", "active"]
-                                          )
-                                        )
-                                      ),
-                                      128
-                                    )),
-                                  ]),
-                                  createElement("div", bonPapNotesClass, [
-                                    createElement(
-                                      "p",
-                                      bonPapNoteClass,
-                                      toDisplayString(instance.data.options[0]?.extra?.NOTICE[0]),
-                                      1
-                                    ),
-                                  ]),
-                                ]),
-                                _: 1,
-                              },
-                              8,
-                              ["title"]
-                            )
-                          )
-                        );
-                      },
-                    }),
-                  },
-                  Symbol.toStringTag,
-                  {
-                    value: "Module",
-                  }
-                )
-              )) /* --- BON_SHT: 본드시트 후가공 --- */,
-              (bonShtFlexRowClass = {
-                class: "flex-row",
-              }),
-              (BON_SHT_Module = Object.freeze(
-                Object.defineProperty(
-                  {
-                    __proto__: null,
-                    default: defineComponent({
-                      __name: "BON_SHT",
-                      props: {
-                        data: {},
-                      },
-                      emits: ["update"],
-                      setup(props, { emit: emit }) {
-                        const componentProps = props,
-                          emitFn = emit,
-                          selectedValue = ref(componentProps.data.options[0].value),
-                          selectedName = ref(componentProps.data.options[0].name),
-                          handleSelect = (selectedItem) => {
-                            (selectedValue.value = selectedItem.value),
-                              (selectedName.value = selectedItem.name);
-                          };
-                        return (
-                          watch(
-                            () => selectedValue.value,
-                            (newValue) => {
-                              emitFn("update", [
-                                {
-                                  PCS_CD: componentProps.data.value,
-                                  PCS_DTL_CD: newValue,
-                                  PCS_DTL_NM: `${componentProps.data.name}(${selectedName.value})`,
-                                },
-                              ]);
-                            },
-                            {
-                              immediate: !0,
-                            }
-                          ),
-                          (instance, cache) => (
-                            openBlock(),
-                            createVNode(
-                              OptionRow,
-                              {
-                                title: instance.data.name,
-                                underline: "",
-                              },
-                              {
-                                default: withCtx(() => [
-                                  createElement("div", bonShtFlexRowClass, [
-                                    (openBlock(!0),
-                                    createElementVNode(
-                                      Fragment,
-                                      null,
-                                      renderList(
-                                        instance.data.options,
-                                        (optItem) => (
-                                          openBlock(),
-                                          createVNode(
-                                            ImageButton,
-                                            {
-                                              key: optItem.key,
-                                              data: {
-                                                value: optItem.value,
-                                                name: optItem.name,
-                                                imgPath: `${instance.data.subImgPath}_${optItem.value}`,
-                                              },
-                                              active: selectedValue.value === optItem.value,
-                                              onSelect: handleSelect,
-                                            },
-                                            null,
-                                            8,
-                                            ["data", "active"]
-                                          )
-                                        )
-                                      ),
-                                      128
-                                    )),
-                                  ]),
-                                ]),
-                                _: 1,
-                              },
-                              8,
-                              ["title"]
-                            )
-                          )
-                        );
-                      },
-                    }),
-                  },
-                  Symbol.toStringTag,
-                  {
-                    value: "Module",
-                  }
-                )
-              )) /* --- CLD_STD: 달력규격 셀렉트 --- */,
-              (cldStdOptionValueAttrs = ["value"]),
-              (CLD_STD_Module = Object.freeze(
-                Object.defineProperty(
-                  {
-                    __proto__: null,
-                    default: defineComponent({
-                      __name: "CLD_STD",
-                      props: {
-                        data: {},
-                      },
-                      emits: ["update"],
-                      setup(props, { emit: emit }) {
-                        const componentProps = props,
-                          emitFn = emit,
-                          selectedValue = ref(componentProps.data.options[0]?.value);
-                        return (
-                          watch(
-                            () => selectedValue.value,
-                            (newValue) => {
-                              const matchedOpt = componentProps.data.options.find(
-                                (opt) => opt.value === newValue
-                              );
-                              emitFn("update", [
-                                {
-                                  PCS_CD: componentProps.data.value,
-                                  PCS_DTL_CD: newValue,
-                                  PCS_DTL_NM: matchedOpt?.name,
-                                },
-                              ]);
-                            },
-                            {
-                              immediate: !0,
-                            }
-                          ),
-                          (instance, cache) => (
-                            openBlock(),
-                            createVNode(
-                              OptionRow,
-                              {
-                                title: instance.data.name,
-                                underline: "",
-                              },
-                              {
-                                default: withCtx(() => [
+                                createElement("div", LO, [
                                   withDirectives(
                                     createElement(
-                                      "select",
+                                      "input",
                                       {
                                         "onUpdate:modelValue":
-                                          cache[0] ||
-                                          (cache[0] = (newVal) => (selectedValue.value = newVal)),
-                                        name: "CLD_STD",
-                                        class: "basic-select",
+                                          b[0] || (b[0] = (C) => (f.value = C)),
+                                        type: "number",
+                                        class: normalizeClass(["basic-input", "-fixed-w"]),
+                                        id: "ORD_CNT",
+                                        min: "13",
+                                        disabled: v.value,
+                                        onFocusout: O,
+                                      },
+                                      null,
+                                      40,
+                                      $O
+                                    ),
+                                    [[vModelText, f.value]]
+                                  ),
+                                  createTextVNode(" " + toDisplayString(unref(t)("장")), 1),
+                                ]),
+                                createElement("div", xO, [
+                                  unref(r).uploadType.default === "pdf"
+                                    ? (openBlock(),
+                                      createElementVNode(
+                                        "p",
+                                        FO,
+                                        " * " +
+                                          toDisplayString(
+                                            `${unref(t)("PDF장수안내", {
+                                              QTY: m.value,
+                                            })}`
+                                          ),
+                                        1
+                                      ))
+                                    : createCommentVNode("", !0),
+                                  createElement(
+                                    "p",
+                                    UO,
+                                    "* " +
+                                      toDisplayString(
+                                        unref(t)("달력디자인수설명", {
+                                          MAX_CNT: `${E.value}`,
+                                        })
+                                      ),
+                                    1
+                                  ),
+                                ]),
+                                b[3] || (b[3] = createElement("br", null, null, -1)),
+                              ]),
+                              _: 1,
+                            }
+                          ))
+                        : createCommentVNode("", !0),
+                      renderComponent(
+                        OptionRow,
+                        {
+                          title: "수량",
+                        },
+                        {
+                          default: withCtx(() => [
+                            createElement("div", BO, [
+                              a.value === "input"
+                                ? withDirectives(
+                                    (openBlock(),
+                                    createElementVNode(
+                                      "input",
+                                      {
+                                        key: 0,
+                                        "onUpdate:modelValue":
+                                          b[1] || (b[1] = (C) => (_.value = C)),
+                                        type: "number",
+                                        class: normalizeClass(["basic-input", "-fixed-w"]),
+                                        id: "PRN_CNT",
+                                        min: "1",
+                                        onFocusout: D,
+                                      },
+                                      null,
+                                      544
+                                    )),
+                                    [[vModelText, _.value]]
+                                  )
+                                : withDirectives(
+                                    (openBlock(),
+                                    createElementVNode(
+                                      "select",
+                                      {
+                                        key: 1,
+                                        "onUpdate:modelValue":
+                                          b[2] || (b[2] = (C) => (_.value = C)),
+                                        name: "PRN_CNT",
+                                        class: normalizeClass(["basic-select", "-fixed-w"]),
                                       },
                                       [
                                         (openBlock(!0),
@@ -4795,18 +9261,18 @@ const CheckmarkIcon = withScopeId(CheckmarkIconDef, [["render", renderCheckmarkI
                                           Fragment,
                                           null,
                                           renderList(
-                                            instance.data.options,
-                                            (optItem) => (
+                                            h.value,
+                                            (C) => (
                                               openBlock(),
                                               createElementVNode(
                                                 "option",
                                                 {
-                                                  key: optItem.key,
-                                                  value: optItem.value,
+                                                  value: C.PRN_CNT,
+                                                  key: C.PRN_CNT,
                                                 },
-                                                toDisplayString(unref(translate)(optItem.name)),
+                                                toDisplayString(C.PRN_CNT),
                                                 9,
-                                                cldStdOptionValueAttrs
+                                                VO
                                               )
                                             )
                                           ),
@@ -4814,52 +9280,632 @@ const CheckmarkIcon = withScopeId(CheckmarkIconDef, [["render", renderCheckmarkI
                                         )),
                                       ],
                                       512
-                                    ),
-                                    [[vModelSelect, selectedValue.value]]
+                                    )),
+                                    [[vModelSelect, _.value]]
                                   ),
-                                ]),
-                                _: 1,
-                              },
-                              8,
-                              ["title"]
-                            )
-                          )
-                        );
-                      },
-                    }),
-                  },
-                  Symbol.toStringTag,
-                  {
-                    value: "Module",
-                  }
+                              createTextVNode(" " + toDisplayString(unref(t)("개")) + " ", 1),
+                              createElement(
+                                "button",
+                                {
+                                  type: "button",
+                                  class: "action-btn",
+                                  onClick: i,
+                                },
+                                toDisplayString(
+                                  a.value === "input" ? unref(t)("수량선택") : unref(t)("직접입력")
+                                ),
+                                1
+                              ),
+                            ]),
+                            d.value !== 1
+                              ? (openBlock(),
+                                createElementVNode("div", HO, [
+                                  createElement(
+                                    "p",
+                                    GO,
+                                    " * " +
+                                      toDisplayString(
+                                        unref(t)("최소단위수량안내", {
+                                          MIN_QTY: `${u.value}`,
+                                          UNIT_QTY:
+                                            d.value % 2 === 0 ? unref(t)("짝수") : unref(t)("홀수"),
+                                        })
+                                      ),
+                                    1
+                                  ),
+                                ]))
+                              : createCommentVNode("", !0),
+                          ]),
+                          _: 1,
+                        }
+                      ),
+                    ]),
+                    _: 1,
+                  })
                 )
-              ))
-
-              /* =========================================================================
-               * 이하 나머지 후가공 및 수량 컴포넌트들은 동일한 패턴을 따릅니다.
-               * COT_DFT(코팅), COT_SEG(부분코팅), CVR_INN(속표지), CVR_SWN(재봉),
-               * DIR_MTR(직접자재), END_PAP(면지), INN_DFT(내지마감), INS_COT(내부코팅),
-               * LAB_FBR(라벨원단), PAK_ETC(포장기타), PAK_POL(폴리백),
-               * PDT_WRK(작업방식), PRT_IPK(개별포장표시), PRT_WHT(화이트인쇄),
-               * PRT_WHT_FACE(화이트면선택), RIN_DFT(링제본), ROU_DFT(라운딩),
-               * SCO_DFT(스코딕스), SUB_MTR_BC(보조자재), WRK_MTR(작업자재),
-               * Basic(기본자재), CalendarQty(달력수량), SetQty(세트수량),
-               * SimpleQty(단순수량), TotalQty(총수량)
-               *
-               * 모든 컴포넌트는:
-               * 1. defineComponent()로 정의
-               * 2. props로 data/options/relatedData 수신
-               * 3. emits: ["update"]로 선택 결과를 부모에 전달
-               * 4. watch()로 선택값 변경 시 PCS_CD/PCS_DTL_CD 구조로 변환
-               * 5. OptionRow(fe) 래퍼로 fieldset 스타일 적용
-               * 6. ImageButton(je) 또는 select/radio로 옵션 렌더링
-               * ========================================================================= */
-
-              /* [합성 래퍼 닫기 — SYNTHETIC TAIL] 슬라이스 트레일링 미닫힘 괄호 6개를 균형 맞춤(babel 검증).
-               * 원본 코드 아님 — 위 SYNTHETIC HEAD 의 짝. */
-            ))
-          ))
-        ))
-      ))
-    ))
+              );
+            },
+          }),
+          [["__scopeId", "data-v-129f13ef"]]
+        ),
+      },
+      Symbol.toStringTag,
+      {
+        value: "Module",
+      }
+    )
+  ),
+  zO = {
+    class: "qty-group",
+  },
+  YO = {
+    class: "title",
+  },
+  KO = {
+    class: "subject",
+  },
+  WO = {
+    class: "subject",
+  },
+  qO = {
+    class: "inputs",
+  },
+  QO = ["value"],
+  XO = {
+    class: "icon-box",
+  },
+  JO = ["value"],
+  ZO = {
+    class: "notes",
+  },
+  eI = {
+    key: 0,
+    class: "note",
+  },
+  tI = {
+    key: 1,
+    class: "note",
+  },
+  nI = {
+    key: 2,
+    class: "note",
+  },
+  oI = {
+    key: 3,
+    class: "note",
+  },
+  sI = {
+    key: 4,
+    class: "note red",
+  },
+  rI = Object.freeze(
+    Object.defineProperty(
+      {
+        __proto__: null,
+        default: withScopeId(
+          defineComponent({
+            __name: "SetQty",
+            props: {
+              defaultSetCnt: {},
+              canEditOrdCnt: {},
+              expressShipping: {},
+            },
+            emits: ["update"],
+            setup(e, { emit: t }) {
+              const n = e,
+                o = t,
+                s = useEditorStore(),
+                r = computed(() => s.editorData?.default?.cntInfo?.initCnt),
+                a = computed(() => s.editorData?.default?.cntInfo?.totalCnt),
+                i = computed(() => (a.value || 0) / (r.value || 0)),
+                l = computed(() => {
+                  if (!n.expressShipping) return;
+                  const { maxQty: c, type: u } = n.expressShipping;
+                  if (!(c === 0 || c >= (a.value || 0))) {
+                    if (u === "Y") return t("오늘출발-불가능");
+                    if (u === "T") return t("내일출발-불가능");
+                  }
+                });
+              return (
+                watch(
+                  () => s.editorData?.default?.quantityInfo,
+                  (c) => {
+                    const u = c?.prnCnt || 1;
+                    o("update", {
+                      ordCnt: c?.ordCnt || 1,
+                      prnCnt: u < n.defaultSetCnt ? n.defaultSetCnt : u,
+                    });
+                  },
+                  {
+                    immediate: !0,
+                  }
+                ),
+                (c, u) => {
+                  const d = resolveDirective("dompurify-html");
+                  return (
+                    openBlock(),
+                    createVNode(OptionRow, null, {
+                      default: withCtx(() => [
+                        createElement("div", zO, [
+                          createElement("div", YO, [
+                            createElement("h2", KO, toDisplayString(unref(t)("세트별수량")), 1),
+                            createElement("h2", WO, toDisplayString(unref(t)("세트")), 1),
+                          ]),
+                          createElement("div", qO, [
+                            createElement(
+                              "input",
+                              {
+                                type: "number",
+                                class: "basic-input",
+                                id: "unitQty",
+                                maxlength: "6",
+                                min: "1",
+                                value: r.value,
+                                disabled: "",
+                              },
+                              null,
+                              8,
+                              QO
+                            ),
+                            createElement("div", XO, [renderComponent(CloseIcon)]),
+                            createElement(
+                              "input",
+                              {
+                                type: "number",
+                                class: "basic-input",
+                                id: "setQty",
+                                maxlength: "6",
+                                min: "1",
+                                value: i.value,
+                                disabled: "",
+                              },
+                              null,
+                              8,
+                              JO
+                            ),
+                          ]),
+                          createElement("div", ZO, [
+                            a.value
+                              ? withDirectives(
+                                  (openBlock(), createElementVNode("p", tI, null, 512)),
+                                  [
+                                    [
+                                      d,
+                                      unref(t)("주문수량안내", {
+                                        QTY: a.value.toLocaleString() + unref(t)("개"),
+                                      }),
+                                    ],
+                                  ]
+                                )
+                              : (openBlock(),
+                                createElementVNode(
+                                  "p",
+                                  eI,
+                                  "* " + toDisplayString(unref(t)("세트수량안내")),
+                                  1
+                                )),
+                            c.canEditOrdCnt.pdf && c.canEditOrdCnt.editor
+                              ? (openBlock(),
+                                createElementVNode(
+                                  "p",
+                                  nI,
+                                  "* " + toDisplayString(unref(t)("디자인건수가능여부-전체")),
+                                  1
+                                ))
+                              : !c.canEditOrdCnt.pdf && c.canEditOrdCnt.editor
+                              ? (openBlock(),
+                                createElementVNode(
+                                  "p",
+                                  oI,
+                                  " * " + toDisplayString(unref(t)("디자인건수가능여부-에디터")),
+                                  1
+                                ))
+                              : createCommentVNode("", !0),
+                            l.value
+                              ? withDirectives(
+                                  (openBlock(), createElementVNode("p", sI, null, 512)),
+                                  [[d, l.value]]
+                                )
+                              : createCommentVNode("", !0),
+                          ]),
+                        ]),
+                      ]),
+                      _: 1,
+                    })
+                  );
+                }
+              );
+            },
+          }),
+          [["__scopeId", "data-v-aa32054c"]]
+        ),
+      },
+      Symbol.toStringTag,
+      {
+        value: "Module",
+      }
+    )
+  ),
+  iI = {
+    class: "qty-group",
+  },
+  aI = {
+    class: "title",
+  },
+  lI = {
+    class: "subject",
+  },
+  uI = {
+    class: "inputs",
+  },
+  cI = ["value"],
+  dI = {
+    class: "notes",
+  },
+  fI = {
+    class: "note",
+  },
+  pI = {
+    key: 0,
+    class: "note red",
+  },
+  _I = Object.freeze(
+    Object.defineProperty(
+      {
+        __proto__: null,
+        default: withScopeId(
+          defineComponent({
+            __name: "SimpleQty",
+            props: {
+              options: {},
+              unit: {},
+              default: {},
+              relatedData: {},
+              expressShipping: {},
+            },
+            emits: ["update"],
+            setup(e, { emit: t }) {
+              const n = e,
+                o = t,
+                s = inject("productCode", {
+                  pdtCode: "",
+                }),
+                r = ref("select"),
+                a = () => {
+                  (r.value = r.value === "input" ? "select" : "input"),
+                    r.value === "select" &&
+                      (h.value.find((A) => A.PRN_CNT === _.value) || (_.value = l.value));
+                },
+                i = computed(() => n.options.find((O) => O.DFT_YN === "Y") || n.options[0]),
+                l = computed(() => i.value?.DFT_PRN_CNT || 1),
+                c = computed(() => i.value?.MIN_PRN_CNT || 1),
+                u = computed(() => i.value?.INC_CNT || 1),
+                d = computed(() => i.value?.INC_STEP || 10),
+                h = computed(() => {
+                  if (n.options.length > 1) return n.options;
+                  const O = [];
+                  for (let A = c.value; O.length < d.value; A += u.value) {
+                    const b = {
+                      PRN_CNT: A,
+                    };
+                    O.push(b);
+                  }
+                  return O;
+                }),
+                f = ref(n.default?.ordCnt || 1),
+                _ = ref(n.default?.prnCnt || l.value || c.value),
+                p = computed(() => ({
+                  ordCnt: f.value,
+                  prnCnt: _.value,
+                })),
+                m = {
+                  STDRCAD: {
+                    name: "세트",
+                    qtyPerSet: 2,
+                  },
+                  STTBDFT: {
+                    name: "세트",
+                    qtyPerSet: 10,
+                  },
+                  TPCAPTW: {
+                    name: "세트",
+                    qtyPerSet: 20,
+                  },
+                },
+                v = computed(() => (f.value * _.value).toLocaleString()),
+                E = computed(() => {
+                  if (!n.expressShipping) return;
+                  const { maxQty: O, type: A } = n.expressShipping;
+                  if (!(O === 0 || O >= +v.value)) {
+                    if (A === "Y") return t("오늘출발-불가능");
+                    if (A === "T") return t("내일출발-불가능");
+                  }
+                }),
+                k = computed(() => {
+                  if (!_.value) return !0;
+                  if (u.value !== 1) {
+                    const O = _.value % u.value;
+                    if (u.value > 1 && O !== 0) return !0;
+                  }
+                  return !1;
+                }),
+                N = computed(() => !f.value),
+                D = () => {
+                  if (!_.value) return (_.value = 1);
+                  if (u.value !== 1) {
+                    const O = _.value % u.value;
+                    if (u.value > 1 && O !== 0) {
+                      const A = Math.ceil(_.value / u.value);
+                      _.value = (A || 1) * u.value;
+                    }
+                  }
+                };
+              return (
+                watch(
+                  () => p.value,
+                  debounce((O) => {
+                    k.value || N.value || o("update", O);
+                  }, 300),
+                  {
+                    immediate: !0,
+                  }
+                ),
+                (O, A) => {
+                  const b = resolveDirective("dompurify-html");
+                  return (
+                    openBlock(),
+                    createVNode(OptionRow, null, {
+                      default: withCtx(() => [
+                        createElement("div", iI, [
+                          createElement("div", aI, [
+                            createElement("h2", lI, toDisplayString(unref(t)("수량")), 1),
+                          ]),
+                          createElement("div", uI, [
+                            r.value === "input"
+                              ? withDirectives(
+                                  (openBlock(),
+                                  createElementVNode(
+                                    "input",
+                                    {
+                                      key: 0,
+                                      "onUpdate:modelValue": A[0] || (A[0] = (C) => (_.value = C)),
+                                      type: "number",
+                                      class: "basic-input",
+                                      id: "PRN_CNT",
+                                      min: "1",
+                                      onFocusout: D,
+                                    },
+                                    null,
+                                    544
+                                  )),
+                                  [[vModelText, _.value]]
+                                )
+                              : withDirectives(
+                                  (openBlock(),
+                                  createElementVNode(
+                                    "select",
+                                    {
+                                      key: 1,
+                                      "onUpdate:modelValue": A[1] || (A[1] = (C) => (_.value = C)),
+                                      name: "PRN_CNT",
+                                      class: "basic-select",
+                                    },
+                                    [
+                                      (openBlock(!0),
+                                      createElementVNode(
+                                        Fragment,
+                                        null,
+                                        renderList(
+                                          h.value,
+                                          (C) => (
+                                            openBlock(),
+                                            createElementVNode(
+                                              "option",
+                                              {
+                                                value: C.PRN_CNT,
+                                                key: C.PRN_CNT,
+                                              },
+                                              toDisplayString(C.PRN_CNT),
+                                              9,
+                                              cI
+                                            )
+                                          )
+                                        ),
+                                        128
+                                      )),
+                                    ],
+                                    512
+                                  )),
+                                  [[vModelSelect, _.value]]
+                                ),
+                            createElement(
+                              "button",
+                              {
+                                type: "button",
+                                class: "action-btn",
+                                onClick: a,
+                              },
+                              toDisplayString(
+                                r.value === "input" ? unref(t)("수량선택") : unref(t)("직접입력")
+                              ),
+                              1
+                            ),
+                          ]),
+                        ]),
+                        createElement("div", dI, [
+                          withDirectives(createElement("p", fI, null, 512), [
+                            [
+                              b,
+                              unref(t)("주문수량안내", {
+                                QTY: `${v.value}${unref(t)(m[unref(s).pdtCode].name)}`,
+                              }) +
+                                ` (${m[unref(s).pdtCode].qtyPerSet}${O.unit}/1${unref(t)(
+                                  m[unref(s).pdtCode].name
+                                )})`,
+                            ],
+                          ]),
+                          E.value
+                            ? withDirectives(
+                                (openBlock(), createElementVNode("p", pI, null, 512)),
+                                [[b, E.value]]
+                              )
+                            : createCommentVNode("", !0),
+                        ]),
+                      ]),
+                      _: 1,
+                    })
+                  );
+                }
+              );
+            },
+          }),
+          [["__scopeId", "data-v-29abd9de"]]
+        ),
+      },
+      Symbol.toStringTag,
+      {
+        value: "Module",
+      }
+    )
+  ),
+  hI = ["value"],
+  mI = {
+    class: "notes",
+  },
+  vI = {
+    key: 0,
+    class: "note",
+  },
+  gI = {
+    key: 1,
+    class: "note",
+  },
+  yI = {
+    key: 2,
+    class: "note",
+  },
+  CI = {
+    key: 3,
+    class: "note",
+  },
+  TI = {
+    key: 4,
+    class: "note red",
+  },
+  bI = Object.freeze(
+    Object.defineProperty(
+      {
+        __proto__: null,
+        default: defineComponent({
+          __name: "TotalQty",
+          props: {
+            canEditOrdCnt: {},
+            expressShipping: {},
+          },
+          emits: ["update"],
+          setup(e, { emit: t }) {
+            const n = e,
+              o = t,
+              s = useEditorStore(),
+              r = computed(() => s.editorData?.default?.cntInfo?.totalCnt),
+              a = computed(() => s.editorData?.default?.quantityInfo?.ordCnt),
+              i = computed(() => {
+                if (!n.expressShipping) return;
+                const { maxQty: l, type: c } = n.expressShipping;
+                if (!(l === 0 || l >= (r.value || 0))) {
+                  if (c === "Y") return t("오늘출발-불가능");
+                  if (c === "T") return t("내일출발-불가능");
+                }
+              });
+            return (
+              watch(
+                () => s.editorData?.default?.quantityInfo,
+                (l) => {
+                  o("update", {
+                    ordCnt: l?.ordCnt || 1,
+                    prnCnt: l?.prnCnt || 1,
+                  });
+                },
+                {
+                  immediate: !0,
+                }
+              ),
+              (l, c) => {
+                const u = resolveDirective("dompurify-html");
+                return (
+                  openBlock(),
+                  createVNode(
+                    OptionRow,
+                    {
+                      title: "총수량",
+                    },
+                    {
+                      default: withCtx(() => [
+                        createElement(
+                          "input",
+                          {
+                            type: "number",
+                            class: "basic-input",
+                            id: "totalQty",
+                            maxlength: "6",
+                            min: "1",
+                            value: r.value,
+                            disabled: "",
+                          },
+                          null,
+                          8,
+                          hI
+                        ),
+                        createElement("div", mI, [
+                          a.value
+                            ? withDirectives(
+                                (openBlock(), createElementVNode("p", gI, null, 512)),
+                                [[u, unref(t)("디자인건수안내").replace("{QTY}", `${a.value}`)]]
+                              )
+                            : (openBlock(),
+                              createElementVNode(
+                                "p",
+                                vI,
+                                "* " + toDisplayString(unref(t)("세트수량안내")),
+                                1
+                              )),
+                          l.canEditOrdCnt.pdf && l.canEditOrdCnt.editor
+                            ? (openBlock(),
+                              createElementVNode(
+                                "p",
+                                yI,
+                                "* " + toDisplayString(unref(t)("디자인건수가능여부-전체")),
+                                1
+                              ))
+                            : !l.canEditOrdCnt.pdf && l.canEditOrdCnt.editor
+                            ? (openBlock(),
+                              createElementVNode(
+                                "p",
+                                CI,
+                                " * " + toDisplayString(unref(t)("디자인건수가능여부-에디터")),
+                                1
+                              ))
+                            : createCommentVNode("", !0),
+                          i.value
+                            ? withDirectives(
+                                (openBlock(), createElementVNode("p", TI, null, 512)),
+                                [[u, i.value]]
+                              )
+                            : createCommentVNode("", !0),
+                        ]),
+                      ]),
+                      _: 1,
+                    }
+                  )
+                );
+              }
+            );
+          },
+        }),
+      },
+      Symbol.toStringTag,
+      {
+        value: "Module",
+      }
+    )
   );

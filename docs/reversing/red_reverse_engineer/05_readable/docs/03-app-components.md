@@ -1,16 +1,26 @@
 # 03 — Vue 주문 컴포넌트 워크스루 (`deob_07_app_components.js`)
 
 > **정체:** 상품군별(의류·책자·부자재·후가공) 주문 UI를 그리는 Vue 3 컴포넌트(`defineComponent` +
-> 렌더 함수). **검증:** G1~G6 전부 **GO**(`03_verify/deob_07_app_components.js.verdict.md`). 구조
-> 시그니처 바이트 동일(427581) → 동작 보존.
+> 렌더 함수).
 >
-> ⚠ **입력 절단 주의(verdict·comment-map 근거):** 이 파일의 입력 번들은 앞부분이 절단(truncation)되어
-> 있었다. engineer는 cartographer가 합성 HEAD/TAIL로 브래킷 균형을 맞춘 `*.recovered.js`를 입력으로
-> 썼고, G2 비교도 그 recovered.js 기준이다. 따라서 가독본 선두의
-> `__recoveredApparelPrintAreaSetup` 블록은 **RedPrinting 원본 코드가 아니라 절단 복원 scaffold**다 —
-> 이 블록의 식별자/구조는 무의미하며 동작과 무관(verdict "합성 scaffold는 원본 아님으로 명시" 지시).
+> **검증(attempt 2 재실측, `03_verify/deob_07_app_components.js.verdict.md`):**
+> - **G2 동작 보존 = 정식 GO** — ★합성 래퍼 제거·**비절단 `03_deobfuscated/deob_07_app_components.full.js`**
+>   (186,128 byte·`parse-check.cjs` → `OK` exit 0=실제 파싱가능) 기준. 가독본과 AST 구조·프로퍼티명 멀티셋·
+>   리터럴 멀티셋이 **완전 일치**(`structSigLenA==structSigLenB=1,051,111`·`propertyNameDiff=null`·
+>   `literalDiff=null`). 동작 보존이 **진짜로 증명**됐다.
+> - G1 GO(가독본·full.js 둘 다 파싱) · G3 GO(N/A, 서드파티 물리분리 0·in-place fold) ·
+>   G5 GO(도메인 코드 본문 존재: PDT_CD·MTRL_CD·PRN_CNT·PRICE·DIV_SEQ·ESN_YN·VIEW_YN) · G6 GO(독립 재실측).
+> - **종합 판정 = NO-GO** — 단일 FAIL=NO-GO이며 그 단일 FAIL은 오직 **G4(가독화)**다. 가독본은 디옵 코드
+>   + 일부 주석일 뿐 **rename-map(469 매핑·의미 타깃명 정의됨)이 본문에 거의 미적용** — 잔여 1~2자 바인딩
+>   1,421개, 단문자 callee 126회. 즉 동작/계약은 보존되나 "읽기 쉽게" 만드는 단계가 아직 안 됐다. engineer가
+>   rename-map을 본문에 재적용 후 G4 재실행이 필요하다(verdict routing). **동작·계약과는 무관한 미달이다.**
 >
-> 인용은 `02_readable/deob_07_app_components.js` 기준. 근거 = 가독 소스·comment-map·verdict.
+> ★**직전 "합성 복원" 서술 정정:** 이전 버전 이 문서는 입력이 절단되어 합성 HEAD/TAIL `*.recovered.js`를
+> 썼고 가독본 선두 `__recoveredApparelPrintAreaSetup` 블록이 "절단 복원 scaffold(원본 아님)"라고 적었다.
+> 이번 재실측은 합성 래퍼 없는 **비절단 실파싱 full.js**로 G2를 다시 돌렸고 통과했다 — 따라서 그 의혹은
+> 해소됐고, G2 동작 보존은 합성 scaffold가 아니라 진짜 비절단 원본 대비 증명이다.
+>
+> 인용은 `02_readable/deob_07_app_components.js` 기준. 근거 = 가독 소스·comment-map·verdict·structdiff.json·metrics.json.
 
 ---
 
@@ -18,10 +28,13 @@
 
 | 섹션 | 위치 | 내용 |
 |------|------|------|
-| 1 | `:97` | 의류(Apparel) 인쇄 영역 컴포넌트(계속) — ※ line 105 orphan `}),` = 절단 경계 |
+| 1 | `:97` | 의류(Apparel) 인쇄 영역 컴포넌트 |
 | 2~ | 본문(JSDoc 앵커) | 의류 컴포넌트군·책자(Book) 컴포넌트군·부자재(Acc) |
 | 16~28 | `:2294` | 후가공(PostProcess) 개별 컴포넌트들 |
-| (절단 경계) | `:2588` | 이하 후가공/수량 컴포넌트는 원본(4247줄)에만 존재 — 본 단편 미포함 |
+| 말미 | `:2588` 부근 | 이하 후가공/수량 컴포넌트군 — §4 참조 |
+
+> ★재실측 후 G2는 비절단 `full.js`를 입력으로 쓴다(아래 §4·§7). 이전 버전이 표시하던 "line 105 orphan
+> `}),` 절단 경계"는 합성 recovered.js 시절의 산물이다 — 비절단 full.js 기준에서는 본문이 정상 파싱된다.
 
 ---
 
@@ -77,11 +90,10 @@
 
 ---
 
-## 4. ★ 절단 경계 — 본 파일에 코드로 없는 것 (`:2588`)
+## 4. 후가공/수량 컴포넌트군 (말미)
 
-comment-map이 명시적으로 기록한 **절단 경계**. 아래 컴포넌트들은 동일 패턴(`defineComponent → props
-data/options → emits[update] → watch → PCS_CD/PCS_DTL_CD 변환)이나 **원본 mod_07(4247줄)에만 존재하고
-본 단편(2607줄→가독본 4865줄)에는 코드로 미포함**(트레일링 주석 요약으로만 존재):
+후가공 후반·수량 컴포넌트들은 동일 패턴(`defineComponent → props data/options → emits[update] →
+watch → PCS_CD/PCS_DTL_CD 변환`)을 따른다:
 
 ```
 COT_DFT 코팅 · COT_SEG 부분코팅 · CVR_INN 속표지 · CVR_SWN 재봉 · DIR_MTR 직접자재 ·
@@ -92,15 +104,19 @@ SUB_MTR_BC 보조자재 · WRK_MTR 작업자재 · Basic 기본자재 ·
 CalendarQty 달력수량 · SetQty 세트수량 · SimpleQty 단순수량 · TotalQty 총수량
 ```
 
-**다운스트림 주의:** 위 목록의 동작을 본 가독 소스만으로 추적할 수 없다(미포함). 필요 시 원본 mod_07
-재추출이 필요하다(verdict routing: "향후 full-bundle 재추출로 비절단 deob 확보 권장").
+> ★재실측 갱신: 이전 버전은 위 목록을 "절단 경계 이후 원본 mod_07(4247줄)에만 존재하고 본 단편에는
+> 코드 미포함"으로 적었다(합성 recovered.js 시절). 이번 G2는 **비절단 `deob_07_app_components.full.js`**를
+> 입력으로 쓰며 그것이 가독본과 구조·프로퍼티·리터럴 완전 일치한다(§7). 위 컴포넌트군의 **현재 가독본 내
+> 정확한 코드 좌표는 본 문서가 미확인(미상)** — comment-map은 합성 recovered 시절 기준이었다. 정확한 위치는
+> 가독본/`full.js`에서 직접 grep으로 확인 권장. **다운스트림 주의:** 본 가독본은 G4(가독화) 미달(NO-GO)이라
+> rename-map 재적용 전까지는 식별자가 난독 원명(1~2자)으로 남아 있어 워크스루 정밀도가 제한된다.
 
 ---
 
 ## 5. 도메인 계약 키 (preserve·동결)
 
-이 모듈에서 컴포넌트가 emit/참조하는 키는 대부분 **서버 데이터 계약**이라 동결됨(verdict G5: 172개
-preserve 전부 verbatim 존재):
+이 모듈에서 컴포넌트가 emit/참조하는 키는 대부분 **서버 데이터 계약**이라 동결됨(verdict G5 GO: 도메인 코드
+본문 존재·missing 0 — grep `PDT_CD`=5·`MTRL_CD`=59·`PRN_CNT`=23·`PRICE`=1·`DIV_SEQ`=8·`ESN_YN`=11·`VIEW_YN`=8):
 
 `PCS_CD`·`PCS_DTL_CD`·`PDT_CD`·`MTRL_CD`·`MTRL_NM`·`MTRL_TYPE`·`PRN_CNT`·`CLR_CD`·`WGT_CD`·
 `COD`·`COD_NME`·`KOI_NME`·`PRICE`·`PRICE_MALL`·`HIDE_YN`·`GBN`·`QUICK_ORD_YN`·`BACK_ROT_YN` 등.
@@ -134,6 +150,7 @@ flowchart TB
 ```
 
 > 위 관계는 comment-map JSDoc의 "필드셋"·"하위 컴포넌트 조합" 서술 기준 개요다. 정확한 부모-자식 트리는
-> 각 `*Module`의 렌더 함수에서 직접 확인 가능하며, 절단된 컴포넌트는 표현하지 않았다.
+> 각 `*Module`의 렌더 함수에서 직접 확인 가능하다.
 
-근거: verdict(GO·G2 recovered.js 기준 바이트 동일·G5 172/172 보존·절단 복원 정당성 입증)·comment-map(절단 경계 명시).
+근거: verdict(attempt 2 재실측 — G2 동작보존 **정식 GO**(비절단 `full.js` 기준 structSig 1,051,111 일치·
+propertyNameDiff/literalDiff null)·G5 GO·G6 GO / **종합 NO-GO=G4 가독화 미달**)·structdiff.json·metrics.json·comment-map.
