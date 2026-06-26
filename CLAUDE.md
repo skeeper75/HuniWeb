@@ -312,7 +312,7 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 **산출물 루트:** `_workspace/huni-set-product/` (01_authority·02_reference·03_design·04_codex·05_gate·06_load·_meta). 6인 팀(`hsp-authority-curator`∥`hsp-domain-researcher` 기준점 팬아웃 → `hsp-set-designer` 설계 → `hsp-codex-verifier` codex 독립 2차 → `hsp-set-gate` S1~S7 게이트(evaluate_set_price 재계산·DRY-RUN) → `hsp-load-executor` 승인 후 안전 적재(백업·복합PK 멱등·사후검증)) + 5 스킬(+ `dbm-load-execution`·`hqv-codex-cross-verify`·`hpe-competitor-benchmark`·`rpm-live-reverse` 재사용). 생성≠검증·codex 주장=가설·search-before-mint(반제품 신규 mint 금지·미등록은 BLOCKED→dbmap 위임)·라이브 읽기전용(적재 Phase 5만 인간 승인 후 COMMIT)·파일럿(책자류·엽서북·떡메) 완주→동형 전파. 자격증명 `.env.local RAILWAY_DB_*`.
 
-**변경이력:** 최신: 2026-06-25 자재 정합 3종 종결(좀비배선 13건 COMMIT)+W2 색/면지 옵션화 1차(9그룹/29옵션 COMMIT)+셋트 가격 적재 착수(097 떡메 바인딩 COMMIT). ★책자 가격=셋트 하이브리드 모델(구성원별 공식+셋트 제본) 확정·단일번들 PRF 폐기(코드 실측)·072 게이트+codex NO-GO(내지 본체통합 ~20배 과소→내지 반제품 승격 선결). 다음=072 내지 구성원 승격(dbmap 구조변경+인간승인) → `_workspace/huni-set-product/HANDOFF.md`·`CHANGELOG.md`
+**변경이력:** 최신: 2026-06-26 072 내지 반제품 승격 그릇 GO(검증+codex 수렴·정본siz SIZ_000007/050·069 7자재·PRD_284·돈0·DB미적재)+PRF 트랙 설계(골든 968,433·DBLPANSU=코드트랙·★S1/S2 내지인쇄 이중합산 codex 신규적발=094도 가진 가격엔진 구조결함)+책등/판형여백 검증(A5 plate-based·전페이지 1-up·돈0)+★전체 7×4 현황판(조각금지 피드백·`06_load/set-product-readiness-master.md`). 다음=전체 4축(A2 전체 가격표 적재정합 전수→A1 기초데이터→A3 코드결함2→B그릇→C민팅바인딩) → `_workspace/huni-set-product/HANDOFF.md`·`CHANGELOG.md`
 
 ---
 

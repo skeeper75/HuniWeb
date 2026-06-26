@@ -4,6 +4,37 @@
 
 ---
 
+## 2026-06-26 — 072 내지 승격 그릇 GO + PRF 트랙 설계 + ★전체 7×4 현황판(조각 방지) · DB COMMIT 0
+
+### 072 내지 반제품 승격 — 그릇 단계 GO (검증+codex 수렴·DB 미적재)
+- **배경**: 072=원자합산형(권위 확정·094/097 고정가형과 달리 derive_inner_sheets 경로 필요). 내지 본체통합→총내지매수 미반영 → 내지 반제품 SEMI_ROLE.01 승격이 정석.
+- **그릇 설계**(inner-promotion/inner-promotion-design.md): 채번 PRD_000284·내지 차원 copy·069 무선책자 내지 7자재 재사용·국4절 plate·sets 1행. 신규 mint 14행·신규 자재/siz/단가행 0.
+- **정본 siz 4원천 권위 분석**(inner-size-authority.md): 삭제 SIZ_000170(A5) 대신 **active A5=SIZ_000007·A4=SIZ_000050**(note "책자내지"). 가격영향 0(절가=국4절 기준·use_dims에 siz_cd 부재·fn_calc_pansu pansu 불변 007=4=구170·050=2=구172). 삭제 170 20상품 활성참조 광역 dedup→basedata-dedup 라우팅.
+- **검증 rev2 GO**(validation-gate.md): 차단 3건 실발동 입증(P1-e A5 정본 assert·채번 ABORT·CASE 멱등 dryrun 4회 ROLLBACK)·돈무영향(072 UNBOUND)·FK·멱등 회귀.
+- **codex rev2 GO**(codex-reconcile.md): 차단1/2 CLOSED·DBLPANSU CODE 트랙 확정(`_row_matches` 하드코딩 NON_QTY_DIMS 순회·데이터-only는 over-mint뿐). Claude↔codex 불일치 0.
+
+### PRF 트랙 설계 — NO-GO (4 선결·골든 968,433)
+- **3 PRF**(prf-track-design.md): PRF_HC_INNER(내지284)·PRF_HC_COVER(표지073)·PRF_HC_BODY(072 제본only). S2 부활(참조 0·verbatim). 전 comp 표준 재사용·신규 단가행 0.
+- **★골든 968,432.5→round_won 968,433**(3자 일치·표지 64,832.5+내지 453,600[인쇄407,500+용지46,100]+제본450,000). DBLPANSU 함정 695,395.94(내지 ~0.4배).
+- **DBLPANSU**: 데이터 정석해소 불가·canonical=price_views.py:1707 `derive_inner_sheets→copies*pages` 1줄(§6 webadmin·인간 승인).
+- **★codex 신규 돈 크리티컬 — S1/S2 내지인쇄 이중합산**(prf-track-codex-reconcile.md): 양면 주문 시 S1·S2 단가행 NON_QTY_DIM 동일 매칭→배타선택 부재→S1+S2 합산. print_opt_cd=색상축(면축 아님). **094 엽서북 R-3와 동일=가격엔진 구조결함·전 책자 공통**. 생성≠검증 거듭 실효.
+
+### 책등(spine) 원칙 + 판형 출력가능영역 여백 감사 (사용자 원칙 질문 대응)
+- **fn_calc_pansu 실측**: 판형 work−margin(출력가능영역)·아이템 work(도련 포함)로 임포지션. 국4절(306×457)에 A5 4-up. **출력가능영역 정확 처리**.
+- **판형 여백 감사**(plate-margin-audit.md): 돈경로 판형=국4절(5mm)·국3절(2mm) 2개뿐·여백 clean·과소청구 0. 비활성 229건 여백 누락(단가행 미진입·돈0·향후 포스터 pansu CONFIRM).
+- **책등**(cover-spine-principle.md): 책등=(페이지÷2)×종이두께+보드. A5 펼침 가로 24p384→300p405mm·국4절 한계 457까지 여유. **072(24~300p)·082(8~100p) 전 범위 1-up 유지→pansu 상수 1→돈영향 0**. plate-based 절가라 펼침치수 가격 무관. 정적 펼침siz(390×268) 충분(가변폭 큰 레더 바인더만 이산 버킷). 진짜 결함=펼침siz 미등록(3.8배). 책등 종이비 권위 부재(CONFIRM).
+
+### ★전체 7×4 현황판 (사용자 피드백 — 조각 금지)
+- **사용자 피드백**: "조각된 방식으로 전체를 보지 않고 일부분만 수정하고 있는 것 같다." → 메모리 [[set-product-whole-before-pieces]].
+- **현황판**(set-product-readiness-master.md): 7셋트 × 4축(①기초데이터 ②전체 가격표 적재정합 ③set-products 코드 ④구성매핑). 라이브 바인딩=097(완료)·094(결함)만·5셋트 미바인딩. set-products 사용법(views.py:622·admin.py:1041·set_products.html) 숙지.
+- **공통 선결 블로커**(한 셋트 아닌 전체): 가격엔진 코드결함 2(DBLPANSU·S1/S2·전책자)·기초데이터 정정·**전체 가격표 적재정합 전수(미수행=핵심 공백)**.
+- **로드맵**: A2(전체 적재정합 전수)→A1(기초데이터)→A3(코드결함2)→B(그릇)→C(민팅·바인딩 072→전파).
+
+### COMMIT 0 / 안전
+- 이번 세션 라이브 DB 변경 0(그릇·PRF·검증 전부 설계+DRY-RUN ROLLBACK). 산출물만 작성. 기존 COMMIT(좀비배선13·W2·097) 보존.
+
+---
+
 ## 2026-06-25 — W1-2 좀비 배선 정리 종단 완주(라이브 COMMIT 4+9건) + rev2 전체 재검토 + codex 교차
 
 ### 좀비 배선(삭제 자재가 활성 상품에 BOM 배선) 교정
