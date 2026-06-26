@@ -2,11 +2,13 @@
 
 > **정체:** RedPrinting 디자인 편집기(Edicus) 통합 SDK. `window.RedEditorSDK`로 노출되는 메인 클래스 +
 > iframe postMessage 브릿지(`EditorBridge`) + makers API HTTP 래퍼(`ApiClient`) + DDP 블록 빌더 +
-> 커스텀 탭 매니저. **버전 6.6.48**(`:8` 주석). **검증:** G1~G6 전부 **GO**
-> (`03_verify/deob_editor_sdk.js.verdict.md`, attempt 2).
+> 커스텀 탭 매니저. **버전 6.6.48**(`:8` 주석). **검증(attempt 2 재실측):** G1~G6 전부 **GO**
+> (`03_verify/deob_editor_sdk.js.verdict.md`) — ★G2 동작 보존 재입증(structSig A==B=2,440,905·총 Identifier
+> 노드 32,203==32,203), ★G4 가독성 잔여 0 달성(직전 18→0). 단 의미 완성도는 **부분**(`fullySemantic=false`·
+> 핵심 10 메서드 의미화 완료·나머지 비핵심 헬퍼 미심화 — §4.1·§10).
 >
 > 인용은 `02_readable/deob_editor_sdk.js` 기준. 원본 식별자(1~2자)는 cartography 기록 시 병기.
-> 근거 = 가독 소스·comment-map·thirdparty-ranges·verdict·engineer-log.
+> 근거 = 가독 소스·comment-map·thirdparty-ranges·verdict·metrics.json·structdiff.json·engineer-log.
 
 용어: **DDP** = 에디터가 이해하는 명령 블록 포맷(이름 풀이는 본 소스 범위 밖, 미상). **passive 모드** =
 툴바를 숨긴 임베드 편집 모드(아래 §6).
@@ -121,8 +123,28 @@ windowRef.RedEditorSDK = RedEditorSDK;   // :18944  전역 export
 ```
 
 **메서드 카테고리(comment-map JSDoc):** 템플릿 / 프로젝트 / 에디터 UI / VDP / 라이프사이클 / 인증 /
-이벤트 / 조회 / 주문 — 총 45개 프로토타입 메서드. 구체 메서드 시그니처는 클래스 본문(`:15137`~`:18266`,
-verdict 섹션 라인 10398-11801 대응)에서 직접 확인.
+이벤트 / 조회 / 주문 — 총 45개 프로토타입 메서드. 구체 메서드 시그니처는 클래스 본문(`:15137`~`:18266`)에서 직접 확인.
+
+### 4.1 ★ 핵심 공개 메서드 — 의미명 심화 (재실측 attempt 2)
+
+핵심 10개 공개 SDK 메서드는 인자·지역 식별자가 **의미명으로 심화**됐다(verdict G4b: 핵심 메서드 의미화로
+mechanicalRoleNames **베이스라인 450 → 268, ≈40%↓**). 즉 아래 메서드들은 시그니처를 그대로 읽어 의도를
+파악할 수 있다(가독본 직접 확인):
+
+| 메서드 | 위치(가독) | 시그니처(의미명) | 역할(소스 직접 확인) |
+|--------|------------|------------------|----------------------|
+| `createProject` | `:15282` | `createProject(editorConfig, projectOptions)` | 새 편집 프로젝트 생성. userId 미설정 시 `setUserId` 선요구 에러 |
+| `openProject` | `:15935` | `openProject(editorConfig, projectOptions)` | 기존 프로젝트 열기. 동일 userId 가드 |
+| `changeTemplate` | `:16891` | (key `changeTemplate`) | 템플릿 교체 |
+| `setUserId` | `:17377` | (key `setUserId`) | 사용자 ID 설정(다른 메서드의 선행 조건) |
+| `prepareOrder` | `:17614` | (key `prepareOrder`) | 주문 준비. userId 가드 |
+| `saveThenClose` | `:17993` | (key `saveThenClose`) | 저장 후 닫기(`saveThenCloseCommand` → `post_to_editor("command", …)`) |
+| `setToken` | `:18004` | `setToken(newToken)` | 토큰 설정(`apiClientInstance.setToken`) |
+| `checkOrderable` | `:18016` | (key `checkOrderable`) | 주문 가능 여부 확인 |
+| `setPrice` | `:18232` | `setPrice(priceValue)` | 가격 주입(`varMap: { $PRCE: priceValue }` → `set-mutable-prod-var`) |
+
+> **정직 표기:** 위 10개 외 나머지 ~35개 프로토타입 메서드는 본 재실측에서 **의미화 미수행** —
+> 역할명(category)으로만 추적 가능하다. verdict `fullySemantic=false`가 이 부분 의미화를 명시한다(§10·05-method §6).
 
 **상태 객체 `sdkState`**(원본 `K`, 47회 참조, `:518` JSDoc):
 - `mode`: `standard | passive`
@@ -186,6 +208,12 @@ var sessionStorageManager = function (t, e) {
 코어 SDK 앱 로직은 폴리필 직후 `:13903`부터 재개된다. 분리 추출본은
 `deob_editor_sdk.js.thirdparty.js`(418KB). 서드파티 식별자는 미변경(verdict G3 GO·zone 내 라벨 0).
 
+> ⚠ **부수발견(verdict §G5·GO 유지·경미):** free-ref 미니파이어 지역명 `Q`(28→24)·`Z`(10→7)·`_e`(6→4)·
+> `_t`(25→22) = 13 occurrence가 가독본에서 리네임됐다. **전부 서드파티 fold 내부**(Sentry·Babel Polyfill·
+> head helpers)이고 proprietary 좌표 0·도메인계약 무관·동작 보존(총 노드 32,203 불변). rename-map은 이들을
+> `preserve:true`(리네임 대상 아님)로 선언했으므로 카토그래퍼 의도와 경미한 불일치 — 카토그래퍼 정합 확인
+> 라우팅(no-op 가능). 종합 판정은 GO 유지.
+
 ---
 
 ## 9. 데이터 흐름 (SDK ↔ 에디터)
@@ -214,10 +242,17 @@ sequenceDiagram
 ## 10. 이 모듈에서 주의할 점
 
 - **거대 IIFE 단일 번들** — 앱 로직(`:114`~)이 한 클로저 안에 있어 모듈 경계가 라인 범위로만 구분된다.
-- **원본 식별자가 1~2자였던 코어** — engineer가 `scope.rename`으로 52개 IIFE 바인딩 + 구조적 라벨
-  522건을 의미/역할 이름으로 바꿨다(engineer-log). 일부 잔여 short는 minifier 관례 임시명(loop index·
-  scratch register)이라 의미명 부여 불가 → free-ref로 정직 기록(05-method §4).
+- **원본 식별자가 1~2자였던 코어** — engineer가 `scope.rename`으로 IIFE 바인딩 + 구조적 라벨을
+  의미/역할 이름으로 바꿨다. ★재실측 attempt 2에서 **G4 가독성 잔여 = 0 달성**(`residualBindings=0`·
+  `shortCallees=0`) — 직전 attempt 1의 명령조립 블록 잔여 단축 지역변수 18개(`it`/`pt`/`dt`/`mt`/`bt` 등,
+  `:14441`~`:15009`)가 명령 의미명(`copyPageCmd` 등)으로 상향되며 0이 됐다.
+- **의미 완성도는 부분(정직 표기)** — `g4b_mechanicalRoleNames=268`(distinct 160)·`fullySemantic=false`.
+  핵심 10 공개 메서드(§4.1)는 의미화 완료지만, 잔존 268은 거의 전부 **babel regenerator/iterator 트랜스파일
+  헬퍼 지역명**(`_iter*` 36·`_reg*`·`_arg*`)으로 비핵심 내부 블록이다. 이들은 한 변수가 여러 case에서 다른
+  값을 갖는 scratch register라 단일 의미명 부여 불가 → 역할 라벨로만 정직 기록(05-method §6). minifier 관례
+  임시명·서드파티 내부 식별자도 free-ref로 동결.
 - **DDP 포맷·KOI 프로토콜 세부**는 본 소스의 명시 범위 밖이라 미상 — 명령 `action` 문자열로만 추적 가능.
 
-근거: verdict(GO·attempt 2·G2 동작보존 4건 prettier 정규화로 확정·G3 토큰 잔존·G5 free-ref 정직)·
-comment-map(11 JSDoc)·thirdparty-ranges(3)·engineer-log(applied 52 + structural 522).
+근거: verdict(attempt 2·**종합 GO**·G2 동작보존 재입증[총 Identifier 노드 32,203==32,203]·
+G4 잔여 18→0·G4b 450→268 유지·G5 preserve drift 0)·metrics.json·structdiff.json·comment-map(11 JSDoc)·
+thirdparty-ranges(3)·engineer-log.

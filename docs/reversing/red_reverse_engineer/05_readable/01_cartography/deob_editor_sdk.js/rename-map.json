@@ -20,27 +20,113 @@
     "source": "stats",
     "preserve": false
   },
-  "i": {
-    "to": "sentryLib",
-    "confidence": 0.9,
-    "scope": "iife:78",
-    "source": "stats",
-    "preserve": false
-  },
-  "a": {
-    "to": "ApiClient",
-    "confidence": 0.9,
-    "scope": "iife:78",
-    "source": "stats",
-    "preserve": false
-  },
-  "t": {
-    "to": "RedEditorSDK",
-    "confidence": 0.9,
-    "scope": "iife:78",
-    "source": "stats",
-    "preserve": false
-  },
+  "i": [
+    {
+      "to": "sentryLib",
+      "confidence": 0.9,
+      "scope": "iife:78",
+      "source": "stats",
+      "preserve": false
+    },
+    {
+      "to": "projectOptions",
+      "confidence": 0.95,
+      "scope": "iife:10827",
+      "source": "inferred",
+      "preserve": false,
+      "note": "openProject 2nd param. 옵션 객체(executeList/customTabInfo/clone...)."
+    },
+    {
+      "to": "savedEditorConfig",
+      "confidence": 0.8,
+      "scope": "iife:11672",
+      "source": "inferred",
+      "preserve": false,
+      "note": "prepareOrder: i=JSON.parse(sessionStorage edicusConfig). updateTemplateCount(template_uri) 용."
+    }
+  ],
+  "a": [
+    {
+      "to": "ApiClient",
+      "confidence": 0.9,
+      "scope": "iife:78",
+      "source": "stats",
+      "preserve": false
+    },
+    {
+      "to": "self",
+      "confidence": 0.9,
+      "scope": "iife:10827",
+      "source": "inferred",
+      "preserve": false,
+      "note": "openProject: a=this. 재귀/콜백에서 인스턴스 캡처."
+    }
+  ],
+  "t": [
+    {
+      "to": "RedEditorSDK",
+      "confidence": 0.9,
+      "scope": "iife:78",
+      "source": "stats",
+      "preserve": false
+    },
+    {
+      "to": "productCode",
+      "confidence": 0.85,
+      "scope": "iife:11257",
+      "source": "inferred",
+      "preserve": false,
+      "note": "changeTemplate 1st param. editorBridge.change_template(productCode,templateUri)(catalog)."
+    },
+    {
+      "to": "userId",
+      "confidence": 0.95,
+      "scope": "iife:11526",
+      "source": "inferred",
+      "preserve": false,
+      "note": "setUserId 1st param. sessionStorage userId 저장 후 issueUserToken 발급."
+    },
+    {
+      "to": "projectId",
+      "confidence": 0.9,
+      "scope": "iife:11672",
+      "source": "inferred",
+      "preserve": false,
+      "note": "prepareOrder 1st param. tentativeOrder 대상 프로젝트 ID(string 검사)."
+    },
+    {
+      "to": "saveCommand",
+      "confidence": 0.85,
+      "scope": "iife:11908",
+      "source": "inferred",
+      "preserve": false,
+      "note": "save: t={type:\"save\"}. removeOutterItems 시 remove_outter_item 추가 후 post_to_editor(\"command\")."
+    },
+    {
+      "to": "saveThenCloseCommand",
+      "confidence": 0.85,
+      "scope": "iife:11921",
+      "source": "inferred",
+      "preserve": false,
+      "note": "saveThenClose: t={type:\"save-then-close\"}. post_to_editor(\"command\")."
+    },
+    {
+      "to": "newToken",
+      "confidence": 0.9,
+      "scope": "iife:11929",
+      "source": "inferred",
+      "preserve": false,
+      "note": "setToken 1st param. apiClientInstance.setToken(newToken) 위임."
+    },
+    {
+      "to": "priceValue",
+      "confidence": 0.9,
+      "scope": "iife:12082",
+      "source": "inferred",
+      "preserve": false,
+      "note": "setPrice 1st param. varMap.$PRCE에 주입."
+    }
+  ],
   "X": {
     "to": "CustomTabManager",
     "confidence": 0.9,
@@ -125,13 +211,23 @@
     "source": "stats",
     "preserve": false
   },
-  "F": {
-    "to": "vdpCatalogData",
-    "confidence": 0.9,
-    "scope": "iife:78",
-    "source": "stats",
-    "preserve": false
-  },
+  "F": [
+    {
+      "to": "vdpCatalogData",
+      "confidence": 0.9,
+      "scope": "iife:78",
+      "source": "stats",
+      "preserve": false
+    },
+    {
+      "to": "eventHandlerRef",
+      "confidence": 0.85,
+      "scope": "iife:10603",
+      "source": "inferred",
+      "preserve": false,
+      "note": "createProject: F=self.editorEventHandler. create_project 콜백으로 전달."
+    }
+  ],
   "V": {
     "to": "sentryHubInstance",
     "confidence": 0.9,
@@ -160,13 +256,23 @@
     "source": "stats",
     "preserve": false
   },
-  "N": {
-    "to": "sceneInfoCallback",
-    "confidence": 0.9,
-    "scope": "iife:78",
-    "source": "stats",
-    "preserve": false
-  },
+  "N": [
+    {
+      "to": "sceneInfoCallback",
+      "confidence": 0.9,
+      "scope": "iife:78",
+      "source": "stats",
+      "preserve": false
+    },
+    {
+      "to": "authState",
+      "confidence": 0.85,
+      "scope": "iife:10603",
+      "source": "inferred",
+      "preserve": false,
+      "note": "createProject: N=getAuthState(). N.user/N.token 분기."
+    }
+  ],
   "u": {
     "to": "koiContainerElement",
     "confidence": 0.9,
@@ -174,13 +280,23 @@
     "source": "stats",
     "preserve": false
   },
-  "L": {
-    "to": "koiIframeElement",
-    "confidence": 0.9,
-    "scope": "iife:78",
-    "source": "stats",
-    "preserve": false
-  },
+  "L": [
+    {
+      "to": "koiIframeElement",
+      "confidence": 0.9,
+      "scope": "iife:78",
+      "source": "stats",
+      "preserve": false
+    },
+    {
+      "to": "retryCount",
+      "confidence": 0.9,
+      "scope": "iife:10603",
+      "source": "inferred",
+      "preserve": false,
+      "note": "createProject 3rd param(default 0). isReady 미설정 시 setTimeout 재귀(<4) 카운터."
+    }
+  ],
   "l": {
     "to": "onCreateCallback",
     "confidence": 0.9,
@@ -244,20 +360,48 @@
     "source": "stats",
     "preserve": false
   },
-  "m": {
-    "to": "onGroupCaptionCallback",
-    "confidence": 0.9,
-    "scope": "iife:78",
-    "source": "stats",
-    "preserve": false
-  },
-  "b": {
-    "to": "commandPromiseHandlers",
-    "confidence": 0.9,
-    "scope": "iife:78",
-    "source": "stats",
-    "preserve": false
-  },
+  "m": [
+    {
+      "to": "onGroupCaptionCallback",
+      "confidence": 0.9,
+      "scope": "iife:78",
+      "source": "stats",
+      "preserve": false
+    },
+    {
+      "to": "customTabContext",
+      "confidence": 0.8,
+      "scope": "iife:10603",
+      "source": "inferred",
+      "preserve": false,
+      "note": "createProject: customTabInfo 처리 시 {productCode,product,templateList,isDev,locale} 컨텍스트(new CustomTabManager 입력)."
+    }
+  ],
+  "b": [
+    {
+      "to": "commandPromiseHandlers",
+      "confidence": 0.9,
+      "scope": "iife:78",
+      "source": "stats",
+      "preserve": false
+    },
+    {
+      "to": "customTabManager",
+      "confidence": 0.8,
+      "scope": "iife:10603",
+      "source": "inferred",
+      "preserve": false,
+      "note": "createProject: b=new CustomTabManager(ctx). getCustomTabFormat 호출."
+    },
+    {
+      "to": "launchOpenProject",
+      "confidence": 0.85,
+      "scope": "iife:10827",
+      "source": "inferred",
+      "preserve": false,
+      "note": "openProject: b=function(projectId){...}. 토큰 확보 후 editorBridge.open_project 실행하는 내부 launcher(clone 분기에서 호출)."
+    }
+  ],
   "H": {
     "to": "onErrorCallback",
     "confidence": 0.95,
@@ -265,20 +409,48 @@
     "source": "stats",
     "preserve": false
   },
-  "x": {
-    "to": "onAllEventsCallback",
-    "confidence": 0.9,
-    "scope": "iife:78",
-    "source": "stats",
-    "preserve": false
-  },
-  "k": {
-    "to": "onDdpExecuteCompleteCallback",
-    "confidence": 0.9,
-    "scope": "iife:78",
-    "source": "stats",
-    "preserve": false
-  },
+  "x": [
+    {
+      "to": "onAllEventsCallback",
+      "confidence": 0.9,
+      "scope": "iife:78",
+      "source": "stats",
+      "preserve": false
+    },
+    {
+      "to": "customTabFormat",
+      "confidence": 0.8,
+      "scope": "iife:10603",
+      "source": "inferred",
+      "preserve": false,
+      "note": "createProject: x=await getCustomTabFormat 결과. noStocks/varMap/extra.custom_tab."
+    },
+    {
+      "to": "cloneOptions",
+      "confidence": 0.8,
+      "scope": "iife:10827",
+      "source": "inferred",
+      "preserve": false,
+      "note": "openProject: x={}; projectOwnerId 주입 후 cloneProject 인자(clone 경로)."
+    }
+  ],
+  "k": [
+    {
+      "to": "onDdpExecuteCompleteCallback",
+      "confidence": 0.9,
+      "scope": "iife:78",
+      "source": "stats",
+      "preserve": false
+    },
+    {
+      "to": "retryCount",
+      "confidence": 0.9,
+      "scope": "iife:10827",
+      "source": "inferred",
+      "preserve": false,
+      "note": "openProject 3rd param(default 0). isReady 미설정 시 재귀(<4) 카운터."
+    }
+  ],
   "w": {
     "to": "onImagePoolCallback",
     "confidence": 0.9,
@@ -314,13 +486,23 @@
     "source": "stats",
     "preserve": false
   },
-  "P": {
-    "to": "onPageChangeCallback",
-    "confidence": 0.9,
-    "scope": "iife:78",
-    "source": "stats",
-    "preserve": false
-  },
+  "P": [
+    {
+      "to": "onPageChangeCallback",
+      "confidence": 0.9,
+      "scope": "iife:78",
+      "source": "stats",
+      "preserve": false
+    },
+    {
+      "to": "editorPayload",
+      "confidence": 0.85,
+      "scope": "iife:10603",
+      "source": "inferred",
+      "preserve": false,
+      "note": "createProject: editorBridge.create_project로 보내는 서버 페이로드(parent_element/ps_code/template_uri/token...)."
+    }
+  ],
   "O": {
     "to": "onImposeOpenedCallback",
     "confidence": 0.9,
@@ -677,5 +859,117 @@
     "preserve": true,
     "class": "free-ref",
     "note": "conventional minifier local (1회 사용·미니파이어 이름생성기 시퀀스 $e..zt). 중첩 익명 스코프 지역 임시. 고유 의미명 부여 불가(추측 금지). free-ref로 분류·리네임 대상 아님."
-  }
+  },
+  "e": [
+    {
+      "to": "editorConfig",
+      "confidence": 0.95,
+      "scope": "iife:10603",
+      "source": "inferred",
+      "preserve": false,
+      "note": "createProject 1st param. validateRequiredParams([selector,psCode,title]) 대상·서버 페이로드 원천(catalog 시그니처)."
+    },
+    {
+      "to": "templateUri",
+      "confidence": 0.85,
+      "scope": "iife:11257",
+      "source": "inferred",
+      "preserve": false,
+      "note": "changeTemplate 2nd param. 새 템플릿 URI."
+    },
+    {
+      "to": "projectId",
+      "confidence": 0.9,
+      "scope": "iife:11941",
+      "source": "inferred",
+      "preserve": false,
+      "note": "checkOrderable 1st param. isReadyToOrder API 대상."
+    },
+    {
+      "to": "priceVarMessage",
+      "confidence": 0.8,
+      "scope": "iife:12082",
+      "source": "inferred",
+      "preserve": false,
+      "note": "setPrice: e={varMap:{$PRCE:priceValue}}. post_to_editor(\"set-mutable-prod-var\")."
+    }
+  ],
+  "n": [
+    {
+      "to": "projectOptions",
+      "confidence": 0.95,
+      "scope": "iife:10603",
+      "source": "inferred",
+      "preserve": false,
+      "note": "createProject 2nd param. calendarConfig/customTabInfo/paletteCode/autoSave 등 옵션 객체."
+    },
+    {
+      "to": "self",
+      "confidence": 0.9,
+      "scope": "iife:11526",
+      "source": "inferred",
+      "preserve": false,
+      "note": "setUserId: n=this. 토큰 발급 then 콜백에서 isReady=true 설정용 캡처."
+    },
+    {
+      "to": "legacyCallback",
+      "confidence": 0.9,
+      "scope": "iife:11941",
+      "source": "inferred",
+      "preserve": false,
+      "note": "checkOrderable 2nd param. (error,result) 콜백."
+    }
+  ],
+  "r": [
+    {
+      "to": "self",
+      "confidence": 0.9,
+      "scope": "iife:10603",
+      "source": "inferred",
+      "preserve": false,
+      "note": "createProject: r=this. setTimeout 재귀에서 인스턴스 캡처(this 대체)."
+    },
+    {
+      "to": "orderParams",
+      "confidence": 0.9,
+      "scope": "iife:11672",
+      "source": "inferred",
+      "preserve": false,
+      "note": "prepareOrder 2nd param. validateRequiredParams([order_count,total_price]) 대상."
+    },
+    {
+      "to": "orderableResult",
+      "confidence": 0.85,
+      "scope": "iife:11941",
+      "source": "inferred",
+      "preserve": false,
+      "note": "checkOrderable: r=await isReadyToOrder 결과. {can_order,doc_rev,message}; doc_rev null→can_order=false."
+    }
+  ],
+  "o": [
+    {
+      "to": "now",
+      "confidence": 0.7,
+      "scope": "iife:10603",
+      "source": "inferred",
+      "preserve": false,
+      "note": "createProject: o=new Date(). calendarConfig 기본 연/월 산출용."
+    },
+    {
+      "to": "editorConfig",
+      "confidence": 0.95,
+      "scope": "iife:10827",
+      "source": "inferred",
+      "preserve": false,
+      "note": "openProject 1st param. validateRequiredParams([selector,projectId]) 대상."
+    },
+    {
+      "to": "legacyCallback",
+      "confidence": 0.9,
+      "scope": "iife:11672",
+      "source": "inferred",
+      "preserve": false,
+      "note": "prepareOrder 3rd param. (error,data) 콜백."
+    }
+  ]
 }

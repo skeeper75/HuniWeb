@@ -3807,79 +3807,79 @@ function _classCallCheck(t, e) {
                   i.target_callback && i.target_callback(null, e);
                 else if ("from-edicus-private" == e.type)
                   if ("waiting-for-extra-param" == e.action) {
-                    for (var _valN = [], _tmpR = 0; _tmpR < e.info.param_names.length; _tmpR++)
-                      "ddp_block" == e.info.param_names[_tmpR]
-                        ? _valN.push({
+                    for (var n = [], r = 0; r < e.info.param_names.length; r++)
+                      "ddp_block" == e.info.param_names[r]
+                        ? n.push({
                             name: "ddp_block",
                             ddp_block: i.ddp_block,
                           })
-                        : "private_css" == e.info.param_names[_tmpR]
-                        ? _valN.push({
+                        : "private_css" == e.info.param_names[r]
+                        ? n.push({
                             name: "private_css",
                             private_css: i.private_css,
                           })
-                        : "prod_info" == e.info.param_names[_tmpR]
-                        ? _valN.push({
+                        : "prod_info" == e.info.param_names[r]
+                        ? n.push({
                             name: "prod_info",
                             prod_info: i.prod_info,
                           })
-                        : "options" == e.info.param_names[_tmpR]
-                        ? _valN.push({
+                        : "options" == e.info.param_names[r]
+                        ? n.push({
                             name: "options",
                             options: i.options,
                           })
-                        : "option_string" == e.info.param_names[_tmpR]
-                        ? _valN.push({
+                        : "option_string" == e.info.param_names[r]
+                        ? n.push({
                             name: "option_string",
                             option_string: i.option_string,
                           })
-                        : "data_row" == e.info.param_names[_tmpR]
-                        ? _valN.push({
+                        : "data_row" == e.info.param_names[r]
+                        ? n.push({
                             name: "data_row",
                             data_row: i.data_row,
                           })
-                        : "data_feed" == e.info.param_names[_tmpR]
-                        ? _valN.push({
+                        : "data_feed" == e.info.param_names[r]
+                        ? n.push({
                             name: "data_feed",
                             data_feed: i.data_feed,
                           })
-                        : "zoom" == e.info.param_names[_tmpR]
-                        ? _valN.push({
+                        : "zoom" == e.info.param_names[r]
+                        ? n.push({
                             name: "zoom",
                             zoom: i.zoom,
                           })
-                        : "size_option" == e.info.param_names[_tmpR]
-                        ? _valN.push({
+                        : "size_option" == e.info.param_names[r]
+                        ? n.push({
                             name: "size_option",
                             size_option: i.size_option,
                           })
-                        : "rsc_option" == e.info.param_names[_tmpR]
-                        ? _valN.push({
+                        : "rsc_option" == e.info.param_names[r]
+                        ? n.push({
                             name: "rsc_option",
                             rsc_option: i.rsc_option,
                           })
-                        : "template_list" == e.info.param_names[_tmpR] &&
-                          _valN.push({
+                        : "template_list" == e.info.param_names[r] &&
+                          n.push({
                             name: "template_list",
                             zoom: i.template_list,
                           });
-                    var _tmpO = {
+                    var o = {
                       type: "to-edicus-root",
                       action: "send-extra-param",
                       info: {
-                        params: _valN,
+                        params: n,
                       },
                     };
-                    i.iframe_el.contentWindow.postMessage(JSON.stringify(_tmpO), "*");
+                    i.iframe_el.contentWindow.postMessage(JSON.stringify(o), "*");
                   } else if ("waiting-for-ddp-data" == e.action) {
-                    _tmpO = {
+                    o = {
                       type: "to-edicus-root",
                       action: "send-ddp-data",
                       info: {
                         ddp_block: i.ddp_block,
                       },
                     };
-                    i.iframe_el.contentWindow.postMessage(JSON.stringify(_tmpO), "*");
+                    i.iframe_el.contentWindow.postMessage(JSON.stringify(o), "*");
                   }
             }
           }),
@@ -3941,7 +3941,7 @@ function _classCallCheck(t, e) {
         (e.dev_resHost ? "&dev_resHost=" + e.dev_resHost : ""));
     }),
     (editorBridge.create_project = function (t, e) {
-      var _tmpN =
+      var n =
         this.base_url +
         this.landing_path +
         "?cmd=create&token=" +
@@ -3953,20 +3953,20 @@ function _classCallCheck(t, e) {
         (t.template_uri ? "&template_uri=" + t.template_uri : "") +
         (t.content_uri ? "&content_uri=" + t.content_uri : "");
       (this.target_callback = e),
-        (_tmpN = this._add_common_url_param(_tmpN, t)),
+        (n = this._add_common_url_param(n, t)),
         this._set_deferred_params(t),
-        this._build_iframe(_tmpN, t.parent_element);
+        this._build_iframe(n, t.parent_element);
     }),
     (editorBridge.open_project = function (t, e) {
-      var _tmpN =
+      var n =
         this.base_url + this.landing_path + "?cmd=open&token=" + t.token + "&prjid=" + t.prjid;
       (this.target_callback = e),
-        (_tmpN = this._add_common_url_param(_tmpN, t)),
+        (n = this._add_common_url_param(n, t)),
         this._set_deferred_params(t),
-        this._build_iframe(_tmpN, t.parent_element);
+        this._build_iframe(n, t.parent_element);
     }),
     (editorBridge.edit_template = function (t, e) {
-      var _tmpN =
+      var n =
         this.base_url +
         this.landing_path +
         "?cmd=edit-template&token=" +
@@ -3976,12 +3976,12 @@ function _classCallCheck(t, e) {
         (t.prjid ? "&prjid=" + t.prjid : "") +
         (t.template_uri ? "&template_uri=" + t.template_uri : "");
       (this.target_callback = e),
-        (_tmpN = this._add_common_url_param(_tmpN, t)),
+        (n = this._add_common_url_param(n, t)),
         this._set_deferred_params(t),
-        this._build_iframe(_tmpN, t.parent_element);
+        this._build_iframe(n, t.parent_element);
     }),
     (editorBridge.create_design_project = function (t, e) {
-      var _tmpN =
+      var n =
         this.base_url +
         this.landing_path +
         "?cmd=create-design-project&token=" +
@@ -3992,12 +3992,12 @@ function _classCallCheck(t, e) {
         encodeURIComponent(t.title) +
         (t.template_uri ? "&template_uri=" + t.template_uri : "");
       (this.target_callback = e),
-        (_tmpN = this._add_common_url_param(_tmpN, t)),
+        (n = this._add_common_url_param(n, t)),
         this._set_deferred_params(t),
-        this._build_iframe(_tmpN, t.parent_element);
+        this._build_iframe(n, t.parent_element);
     }),
     (editorBridge.open_design_project = function (t, e) {
-      var _tmpN =
+      var n =
         this.base_url +
         this.landing_path +
         "?cmd=open-design-project&token=" +
@@ -4005,12 +4005,12 @@ function _classCallCheck(t, e) {
         "&prjid=" +
         t.prjid;
       (this.target_callback = e),
-        (_tmpN = this._add_common_url_param(_tmpN, t)),
+        (n = this._add_common_url_param(n, t)),
         this._set_deferred_params(t),
-        this._build_iframe(_tmpN, t.parent_element);
+        this._build_iframe(n, t.parent_element);
     }),
     (editorBridge.recycle_project = function (t, e) {
-      var _tmpN =
+      var n =
         this.base_url +
         this.landing_path +
         "?cmd=recycle&token=" +
@@ -4020,12 +4020,12 @@ function _classCallCheck(t, e) {
         "&title=" +
         encodeURIComponent(t.title);
       (this.target_callback = e),
-        (_tmpN = this._add_common_url_param(_tmpN, t)),
+        (n = this._add_common_url_param(n, t)),
         this._set_deferred_params(t),
-        this._build_iframe(_tmpN, t.parent_element);
+        this._build_iframe(n, t.parent_element);
     }),
     (editorBridge.reform_project = function (t, e) {
-      var _tmpN =
+      var n =
         this.base_url +
         this.landing_path +
         "?cmd=reform&token=" +
@@ -4035,9 +4035,9 @@ function _classCallCheck(t, e) {
         "&ps_code=" +
         t.ps_code;
       (this.target_callback = e),
-        (_tmpN = this._add_common_url_param(_tmpN, t)),
+        (n = this._add_common_url_param(n, t)),
         this._set_deferred_params(t),
-        this._build_iframe(_tmpN, t.parent_element);
+        this._build_iframe(n, t.parent_element);
     }),
     (editorBridge.change_project = function (t) {
       var e = {
@@ -4060,24 +4060,24 @@ function _classCallCheck(t, e) {
       };
       this.iframe_el.contentWindow.postMessage(JSON.stringify(changeTemplateCommand), "*");
     }),
-    (editorBridge.change_layout = function (t, e, _paramN) {
+    (editorBridge.change_layout = function (t, e, n) {
       var changeLayoutCommand = {
         type: "to-edicus",
         action: "change-layout",
         info: {
           layout_uri: t,
           page_index: e || 0,
-          change_background_if_available: _paramN,
+          change_background_if_available: n,
         },
       };
       this.iframe_el.contentWindow.postMessage(JSON.stringify(changeLayoutCommand), "*");
     }),
     (editorBridge.execute_ddp_block = function (t, e) {
-      var _valN = {
+      var executeDdpBlockPayload = {
         ddp_block: t,
         history_label: e,
       };
-      windowRef.edicusSDK.post_to_editor("execute-ddp-block", _valN);
+      windowRef.edicusSDK.post_to_editor("execute-ddp-block", executeDdpBlockPayload);
     }),
     (editorBridge.open_preview = function (t, e) {
       var openUrl =
@@ -4341,8 +4341,8 @@ function _classCallCheck(t, e) {
   //         verifyToken, refreshAccessToken, autoRefreshToken, getProjectOwnerId
   // ============================================================
   var ApiClient = (function () {
-    function _localN(t, e) {
-      _classCallCheck(this, _localN),
+    function n(t, e) {
+      _classCallCheck(this, n),
         (this.baseUrl =
           "product" === e
             ? "https://makers.redprinting.net/"
@@ -4352,7 +4352,7 @@ function _classCallCheck(t, e) {
         (this.token = t);
     }
     return (
-      _createClass(_localN, [
+      _createClass(n, [
         {
           key: "getToken",
           value: function () {
@@ -4372,7 +4372,7 @@ function _classCallCheck(t, e) {
         },
         {
           key: "call",
-          value: function (t, e, _paramN) {
+          value: function (t, e, n) {
             var self2 = this,
               formData = new FormData();
             formData.append("target", t),
@@ -4392,12 +4392,11 @@ function _classCallCheck(t, e) {
                     ? formData.append("collectionId", e)
                     : formData.append("collectionId", sessionStorageManager("projectId")),
                   "cloneProject" === t &&
-                    (_paramN.projectOwnerId &&
-                      formData.append("projectOwnerId", _paramN.projectOwnerId),
-                    (_paramN = null)))
+                    (n.projectOwnerId && formData.append("projectOwnerId", n.projectOwnerId),
+                    (n = null)))
                 : "cancelOrder" === t &&
                   formData.append("collectionId", sessionStorageManager("orderId")),
-              _paramN && formData.append("qry", JSON.stringify(_paramN));
+              n && formData.append("qry", JSON.stringify(n));
             var i = self2.baseUrl + "editor";
             return new Promise(function (t, e) {
               var xMLHttpRequest = new XMLHttpRequest();
@@ -4428,7 +4427,7 @@ function _classCallCheck(t, e) {
             var self2 = this;
             return new Promise(function (t, e) {
               var xMLHttpRequest = new XMLHttpRequest(),
-                _valR = self2.baseUrl + "v1/templates";
+                r = self2.baseUrl + "v1/templates";
               (xMLHttpRequest.onreadystatechange = function () {
                 4 == xMLHttpRequest.readyState && 200 == xMLHttpRequest.status
                   ? t(JSON.parse(xMLHttpRequest.responseText))
@@ -4436,7 +4435,7 @@ function _classCallCheck(t, e) {
                     200 != xMLHttpRequest.status &&
                     e(new Error(xMLHttpRequest.statusText));
               }),
-                xMLHttpRequest.open("GET", _valR),
+                xMLHttpRequest.open("GET", r),
                 xMLHttpRequest.setRequestHeader("red-editor-token", self2.token),
                 xMLHttpRequest.send();
             });
@@ -4444,14 +4443,14 @@ function _classCallCheck(t, e) {
         },
         {
           key: "getTemplateList",
-          value: function (_paramO, i) {
+          value: function (o, i) {
             var self2 = this;
             return new Promise(function (t, e) {
               var xMLHttpRequest = new XMLHttpRequest(),
-                _valR =
+                r =
                   self2.baseUrl +
                   "v1/templates/" +
-                  _paramO +
+                  o +
                   ("function" == typeof i || 0 === Object.keys(i).length
                     ? ""
                     : buildQueryString(i));
@@ -4462,7 +4461,7 @@ function _classCallCheck(t, e) {
                     200 != xMLHttpRequest.status &&
                     e(new Error(xMLHttpRequest.statusText));
               }),
-                xMLHttpRequest.open("GET", _valR),
+                xMLHttpRequest.open("GET", r),
                 xMLHttpRequest.setRequestHeader("red-editor-token", self2.token),
                 xMLHttpRequest.send();
             });
@@ -4478,19 +4477,19 @@ function _classCallCheck(t, e) {
            * @returns {Promise<Object>}
            */
           key: "getResourceList",
-          value: function (t, e, _paramO) {
+          value: function (t, e, o) {
             var i = this;
             return (
               (e.productCode = t),
-              (_paramO = _extends({}, _paramO, e)),
+              (o = _extends({}, o, e)),
               new Promise(function (t, e) {
                 var xMLHttpRequest = new XMLHttpRequest(),
-                  _valR =
+                  r =
                     i.baseUrl +
                     "v1/resources/resource/query" +
-                    ("function" == typeof _paramO || 0 === Object.keys(_paramO).length
+                    ("function" == typeof o || 0 === Object.keys(o).length
                       ? ""
-                      : buildQueryString(_paramO));
+                      : buildQueryString(o));
                 (xMLHttpRequest.onreadystatechange = function () {
                   4 == xMLHttpRequest.readyState && 200 == xMLHttpRequest.status
                     ? t(JSON.parse(xMLHttpRequest.responseText))
@@ -4498,7 +4497,7 @@ function _classCallCheck(t, e) {
                       200 != xMLHttpRequest.status &&
                       e(new Error(xMLHttpRequest.statusText));
                 }),
-                  xMLHttpRequest.open("GET", _valR),
+                  xMLHttpRequest.open("GET", r),
                   xMLHttpRequest.setRequestHeader("red-editor-token", i.token),
                   xMLHttpRequest.send();
               })
@@ -4513,11 +4512,11 @@ function _classCallCheck(t, e) {
            * @returns {Promise<Object>}
            */
           key: "getResourceWithId",
-          value: function (_paramO) {
+          value: function (o) {
             var i = this;
             return new Promise(function (t, e) {
               var xMLHttpRequest = new XMLHttpRequest(),
-                _valR = i.baseUrl + "v2/template/resource/" + _paramO;
+                r = i.baseUrl + "v2/template/resource/" + o;
               (xMLHttpRequest.onreadystatechange = function () {
                 4 == xMLHttpRequest.readyState && 200 == xMLHttpRequest.status
                   ? t(JSON.parse(xMLHttpRequest.responseText))
@@ -4525,7 +4524,7 @@ function _classCallCheck(t, e) {
                     200 != xMLHttpRequest.status &&
                     e(new Error(xMLHttpRequest.statusText));
               }),
-                xMLHttpRequest.open("GET", _valR),
+                xMLHttpRequest.open("GET", r),
                 xMLHttpRequest.setRequestHeader("red-editor-token", i.token),
                 xMLHttpRequest.send();
             });
@@ -4533,11 +4532,11 @@ function _classCallCheck(t, e) {
         },
         {
           key: "updateTemplateCount",
-          value: function (_paramO, i) {
+          value: function (o, i) {
             var self2 = this;
             return new Promise(function (t, e) {
               var xMLHttpRequest = new XMLHttpRequest(),
-                _valR = self2.baseUrl + "v1/template/" + btoa(_paramO) + "/" + i;
+                r = self2.baseUrl + "v1/template/" + btoa(o) + "/" + i;
               (xMLHttpRequest.onreadystatechange = function () {
                 4 == xMLHttpRequest.readyState && 200 == xMLHttpRequest.status
                   ? t(xMLHttpRequest.responseText)
@@ -4545,7 +4544,7 @@ function _classCallCheck(t, e) {
                     200 != xMLHttpRequest.status &&
                     e(xMLHttpRequest.statusText);
               }),
-                xMLHttpRequest.open("PUT", _valR),
+                xMLHttpRequest.open("PUT", r),
                 xMLHttpRequest.setRequestHeader("red-editor-token", self2.token),
                 xMLHttpRequest.send();
             });
@@ -4575,7 +4574,7 @@ function _classCallCheck(t, e) {
         },
         {
           key: "refreshAccessToken",
-          value: function (_paramR) {
+          value: function (r) {
             var self2 = this,
               i = new XMLHttpRequest(),
               t = this.baseUrl + "token";
@@ -4586,8 +4585,8 @@ function _classCallCheck(t, e) {
                   refreshToken = t.refreshToken;
                 (self2.token = e),
                   (self2.refreshToken = refreshToken),
-                  _paramR &&
-                    _paramR(null, {
+                  r &&
+                    r(null, {
                       token: e,
                       refreshToken: refreshToken,
                     });
@@ -4620,11 +4619,11 @@ function _classCallCheck(t, e) {
            * @returns {Promise<Object>|void}
            */
           key: "getProjectOwnerId",
-          value: function (_paramO) {
+          value: function (o) {
             var i = this;
-            return new Promise(function (e, _paramN) {
+            return new Promise(function (e, n) {
               var xMLHttpRequest = new XMLHttpRequest(),
-                t = i.baseUrl + "v1/project/" + _paramO + "/ownerId";
+                t = i.baseUrl + "v1/project/" + o + "/ownerId";
               (xMLHttpRequest.onreadystatechange = function () {
                 if (4 == xMLHttpRequest.readyState && 200 == xMLHttpRequest.status) {
                   var t = JSON.parse(xMLHttpRequest.responseText);
@@ -4632,7 +4631,7 @@ function _classCallCheck(t, e) {
                 } else
                   4 == xMLHttpRequest.readyState &&
                     200 != xMLHttpRequest.status &&
-                    _paramN(xMLHttpRequest.statusText);
+                    n(xMLHttpRequest.statusText);
               }),
                 xMLHttpRequest.open("GET", t),
                 xMLHttpRequest.setRequestHeader("red-editor-token", i.token),
@@ -4641,7 +4640,7 @@ function _classCallCheck(t, e) {
           },
         },
       ]),
-      _localN
+      n
     );
   })();
 
@@ -13943,32 +13942,29 @@ function _classCallCheck(t, e) {
   var sessionStorageManager = function (t, e) {
       if (void 0 !== e) {
         "object" === (void 0 === e ? "undefined" : _typeof(e)) && (e = JSON.stringify(e));
-        var _tmpN = windowRef.btoa(encodeURIComponent(e));
+        var n = windowRef.btoa(encodeURIComponent(e));
         return (
-          "userId" === t && 64 < _tmpN.length && (_tmpN = _tmpN.slice(0, 64)),
-          sessionStorage.setItem(t, _tmpN)
+          "userId" === t && 64 < n.length && (n = n.slice(0, 64)), sessionStorage.setItem(t, n)
         );
       }
-      var _valR = sessionStorage.getItem(t);
-      return _valR ? decodeURIComponent(windowRef.atob(_valR)) : null;
+      var r = sessionStorage.getItem(t);
+      return r ? decodeURIComponent(windowRef.atob(r)) : null;
     },
     validateRequiredParams = function (t, e) {
       t.map(function (t) {
         if (!e[t]) throw new Error(t + " is undefined.");
       });
     },
-    buildQueryString = function (_paramN) {
+    buildQueryString = function (n) {
       return (
         "?" +
-        Object.keys(_paramN)
+        Object.keys(n)
           .reduce(function (t, e) {
             return (
               t.push(
                 e +
                   "=" +
-                  encodeURIComponent(
-                    "object" === _typeof(_paramN[e]) ? JSON.stringify(_paramN[e]) : _paramN[e]
-                  )
+                  encodeURIComponent("object" === _typeof(n[e]) ? JSON.stringify(n[e]) : n[e])
               ),
               t
             );
@@ -13979,18 +13975,18 @@ function _classCallCheck(t, e) {
     getAuthState = function () {
       var t = sessionStorageManager("editorToken"),
         e = sessionStorageManager("userId"),
-        _valN = {};
-      if (((_valN.user = !("null" === e || "undefined" === e || !e)), t)) {
-        var _valR = JSON.parse(t);
-        _valN.token = _valR.token;
+        n = {};
+      if (((n.user = !("null" === e || "undefined" === e || !e)), t)) {
+        var r = JSON.parse(t);
+        n.token = r.token;
       }
-      return _valN;
+      return n;
     },
     buildPluginParams = function (t, e) {
-      var _tmpN = {
+      var n = {
         companyCode: t,
       };
-      return e && e.constructor === Object && (_tmpN = _extends({}, e, _tmpN)), _tmpN;
+      return e && e.constructor === Object && (n = _extends({}, e, n)), n;
     },
     onCreateCallback = function (t) {
       return null;
@@ -14088,19 +14084,15 @@ function _classCallCheck(t, e) {
     autoSaveIntervalId = null,
     autoSaveIntervalMinutes = null,
     sceneInfoCallback = null,
-    objectToQueryParam = function (_paramN, t) {
+    objectToQueryParam = function (n, t) {
       return t
-        ? _paramN &&
-          "object" === (void 0 === _paramN ? "undefined" : _typeof(_paramN)) &&
-          0 < Object.keys(_paramN).length
-          ? Object.values(_paramN)
+        ? n && "object" === (void 0 === n ? "undefined" : _typeof(n)) && 0 < Object.keys(n).length
+          ? Object.values(n)
           : ""
-        : _paramN &&
-          "object" === (void 0 === _paramN ? "undefined" : _typeof(_paramN)) &&
-          0 < Object.keys(_paramN).length
+        : n && "object" === (void 0 === n ? "undefined" : _typeof(n)) && 0 < Object.keys(n).length
         ? "?" +
-          Object.keys(_paramN).reduce(function (t, e) {
-            return t + (e + "=") + _paramN[e] + "&";
+          Object.keys(n).reduce(function (t, e) {
+            return t + (e + "=") + n[e] + "&";
           }, "")
         : "";
     },
@@ -14131,24 +14123,28 @@ function _classCallCheck(t, e) {
                   _iterDone = !0
                 ) {
                   var _iterValue = _iterStep.value,
-                    _tmpS = {
+                    setItemAttributeCommand = {
                       action: "set-item-attribute",
                       target: {
                         object: "item",
                       },
                     };
                   "name" === _iterValue.type
-                    ? (_tmpS.target.name = _iterValue.target)
+                    ? (setItemAttributeCommand.target.name = _iterValue.target)
                     : "item" === _iterValue.type
-                    ? (_tmpS.target.var_id = _iterValue.target)
-                    : "layer" === _iterValue.type && (_tmpS.target.postlayer = _iterValue.target),
-                    _iterValue.pageIndex && (_tmpS.target.page_index = _iterValue.pageIndex),
-                    _iterValue.itemId && (_tmpS.target.item_id = _iterValue.itemId),
-                    "document" === _iterValue.scope && (_tmpS.target.object = "all-items"),
-                    (_tmpS.data = {
+                    ? (setItemAttributeCommand.target.var_id = _iterValue.target)
+                    : "layer" === _iterValue.type &&
+                      (setItemAttributeCommand.target.postlayer = _iterValue.target),
+                    _iterValue.pageIndex &&
+                      (setItemAttributeCommand.target.page_index = _iterValue.pageIndex),
+                    _iterValue.itemId &&
+                      (setItemAttributeCommand.target.item_id = _iterValue.itemId),
+                    "document" === _iterValue.scope &&
+                      (setItemAttributeCommand.target.object = "all-items"),
+                    (setItemAttributeCommand.data = {
                       hidden: void 0 === _iterValue.value || _iterValue.value,
                     }),
-                    t.push(_tmpS);
+                    t.push(setItemAttributeCommand);
                 }
               } catch (t) {
                 (_iterDidErr = !0), (_iterErr = t);
@@ -14171,22 +14167,22 @@ function _classCallCheck(t, e) {
                   _iterDone2 = !0
                 ) {
                   var _iterValue2 = _iterStep2.value,
-                    _tmpV = {
+                    deletePageCommand = {
                       action: "delete-page",
                       target: {
                         object: "page",
                       },
                     };
                   "index" === _iterValue2.target
-                    ? (_tmpV.target.index = _iterValue2.value)
+                    ? (deletePageCommand.target.index = _iterValue2.value)
                     : "cover" === _iterValue2.target
-                    ? (_tmpV.target.type = _iterValue2.target)
+                    ? (deletePageCommand.target.type = _iterValue2.target)
                     : "subType" === _iterValue2.target &&
-                      (_tmpV.target.subType = _iterValue2.value),
-                    (_tmpV.data = {
+                      (deletePageCommand.target.subType = _iterValue2.value),
+                    (deletePageCommand.data = {
                       store_to_pool: !0,
                     }),
-                    t.push(_tmpV);
+                    t.push(deletePageCommand);
                 }
               } catch (t) {
                 (_iterDidErr2 = !0), (_iterErr2 = t);
@@ -14256,15 +14252,15 @@ function _classCallCheck(t, e) {
                 ) {
                   var _iterValue4 = _iterStep4.value;
                   if ("page" === _iterValue4.type) {
-                    var _tmpO = {
+                    var setPageAttributeCommand = {
                       action: "set-page-attribute",
                     };
-                    (_tmpO.target = {
+                    (setPageAttributeCommand.target = {
                       object: "page",
                       index: _iterValue4.target,
                     }),
-                      (_tmpO.data = _iterValue4.data),
-                      t.push(_tmpO);
+                      (setPageAttributeCommand.data = _iterValue4.data),
+                      t.push(setPageAttributeCommand);
                   }
                   if ("layer" === _iterValue4.type) {
                     var j = {};
@@ -14293,29 +14289,32 @@ function _classCallCheck(t, e) {
                       t.push(j);
                   }
                   if ("item" === _iterValue4.type) {
-                    var _tmpC = {};
-                    (_tmpC.target = {
+                    var setTextStyleCommand = {};
+                    (setTextStyleCommand.target = {
                       object: "item",
                       var_id: _iterValue4.data.id,
                     }),
                       _iterValue4.data.pageIndex &&
-                        (_tmpC.target.page_index = _iterValue4.data.pageIndex),
-                      _iterValue4.data.itemId && (_tmpC.target.item_id = _iterValue4.data.itemId),
-                      (_tmpC.data = {}),
+                        (setTextStyleCommand.target.page_index = _iterValue4.data.pageIndex),
+                      _iterValue4.data.itemId &&
+                        (setTextStyleCommand.target.item_id = _iterValue4.data.itemId),
+                      (setTextStyleCommand.data = {}),
                       "color" === _iterValue4.data.attribute &&
                         ("textbox" === _iterValue4.target
-                          ? ((_tmpC.action = "set-text-style"),
-                            (_tmpC.data.fontColor = _iterValue4.data.value))
+                          ? ((setTextStyleCommand.action = "set-text-style"),
+                            (setTextStyleCommand.data.fontColor = _iterValue4.data.value))
                           : "svgart" === _iterValue4.target
-                          ? ((_tmpC.action = "set-item-overlay-src"),
-                            (_tmpC.data.overlaySrc = "value://color/" + _iterValue4.data.value))
-                          : ((_tmpC.action = "set-item-src"),
-                            (_tmpC.data.src = "value://color/" + _iterValue4.data.value))),
+                          ? ((setTextStyleCommand.action = "set-item-overlay-src"),
+                            (setTextStyleCommand.data.overlaySrc =
+                              "value://color/" + _iterValue4.data.value))
+                          : ((setTextStyleCommand.action = "set-item-src"),
+                            (setTextStyleCommand.data.src =
+                              "value://color/" + _iterValue4.data.value))),
                       "textbox" === _iterValue4.target &&
                         "font" === _iterValue4.data.attribute &&
                         _iterValue4.data.font &&
-                        (_tmpC.data.font = _iterValue4.data.font),
-                      t.push(_tmpC);
+                        (setTextStyleCommand.data.font = _iterValue4.data.font),
+                      t.push(setTextStyleCommand);
                   }
                 }
               } catch (t) {
@@ -14339,17 +14338,17 @@ function _classCallCheck(t, e) {
                   _iterDone5 = !0
                 ) {
                   var _iterValue5 = _iterStep5.value,
-                    _tmpD = {
+                    clonePageCommand = {
                       action: "clone-page",
                     };
-                  (_tmpD.target = {
+                  (clonePageCommand.target = {
                     object: "page",
                     index: _iterValue5.target,
                   }),
-                    (_tmpD.data = {
+                    (clonePageCommand.data = {
                       position: _iterValue5.value,
                     }),
-                    t.push(_tmpD);
+                    t.push(clonePageCommand);
                 }
               } catch (t) {
                 (_iterDidErr5 = !0), (_iterErr5 = t);
@@ -14372,19 +14371,20 @@ function _classCallCheck(t, e) {
                   _iterDone6 = !0
                 ) {
                   var _iterValue6 = _iterStep6.value,
-                    _tmpQ = {
+                    flipStickerCommand = {
                       action: "flip-sticker",
                     };
-                  (_tmpQ.target = {
+                  (flipStickerCommand.target = {
                     object: "item",
                     var_id: _iterValue6.target,
                   }),
-                    _iterValue6.pageIndex && (_tmpQ.target.page_index = _iterValue6.pageIndex),
-                    _iterValue6.itemId && (_tmpQ.target.item_id = _iterValue6.itemId),
-                    (_tmpQ.data = {
+                    _iterValue6.pageIndex &&
+                      (flipStickerCommand.target.page_index = _iterValue6.pageIndex),
+                    _iterValue6.itemId && (flipStickerCommand.target.item_id = _iterValue6.itemId),
+                    (flipStickerCommand.data = {
                       direction: _iterValue6.value,
                     }),
-                    t.push(_tmpQ);
+                    t.push(flipStickerCommand);
                 }
               } catch (t) {
                 (_iterDidErr6 = !0), (_iterErr6 = t);
@@ -14407,14 +14407,14 @@ function _classCallCheck(t, e) {
                   _iterDone7 = !0
                 ) {
                   var _iterValue7 = _iterStep7.value,
-                    _tmpZ = {
+                    changeLayoutCommand = {
                       action: "change-layout",
                       target: {
                         object: "page",
                         position: "active-page",
                       },
                     };
-                  (_tmpZ.data = {
+                  (changeLayoutCommand.data = {
                     templateUri: _iterValue7.resourceUri,
                     indexInTemplate: _iterValue7.targetIndex,
                     changeBackgroundIfAvailable: _iterValue7.changeBackground || !1,
@@ -14424,7 +14424,7 @@ function _classCallCheck(t, e) {
                     userItemTypesToPreserve: ["textbox"],
                   }),
                     apiClientInstance.updateTemplateCount(_iterValue7.resourceUri || "null", "hit"),
-                    t.push(_tmpZ);
+                    t.push(changeLayoutCommand);
                 }
               } catch (t) {
                 (_iterDidErr7 = !0), (_iterErr7 = t);
@@ -14447,17 +14447,17 @@ function _classCallCheck(t, e) {
                   _iterDone8 = !0
                 ) {
                   var _iterValue8 = _iterStep8.value,
-                    _tmpIT = {
+                    copyPageContentCommand = {
                       action: "copy-page-content",
                     };
-                  (_tmpIT.target = {
+                  (copyPageContentCommand.target = {
                     object: "page",
                     index: _iterValue8.copyIndex,
                   }),
-                    (_tmpIT.data = {
+                    (copyPageContentCommand.data = {
                       position: _iterValue8.pasteIndex,
                     }),
-                    t.push(_tmpIT);
+                    t.push(copyPageContentCommand);
                 }
               } catch (t) {
                 (_iterDidErr8 = !0), (_iterErr8 = t);
@@ -14487,7 +14487,7 @@ function _classCallCheck(t, e) {
                   _iterDone9 = !0
                 ) {
                   var _iterValue9 = _iterStep9.value,
-                    _tmpPT = {
+                    addPageCommand = {
                       action: "add-page",
                       target: "document",
                       data: {},
@@ -14495,23 +14495,23 @@ function _classCallCheck(t, e) {
                   if (
                     (_iterValue9.width &&
                       _iterValue9.height &&
-                      (_tmpPT.data.size_mm = {
+                      (addPageCommand.data.size_mm = {
                         width: _iterValue9.width,
                         height: _iterValue9.height,
                       }),
-                    _iterValue9.count && (_tmpPT.data.count = _iterValue9.count),
+                    _iterValue9.count && (addPageCommand.data.count = _iterValue9.count),
                     _iterValue9.template &&
-                      ((_tmpPT.data.templateUri = _iterValue9.template.resourceUri),
-                      (_tmpPT.data.indexInTemplate = _iterValue9.template.targetIndex)),
+                      ((addPageCommand.data.templateUri = _iterValue9.template.resourceUri),
+                      (addPageCommand.data.indexInTemplate = _iterValue9.template.targetIndex)),
                     _iterValue9.setBackground)
                   ) {
-                    var _tmpDT = _iterValue9.bgColor || "#ffffff";
-                    (_tmpPT.data.backgroundSrc = "value://color/" + _tmpDT),
+                    var bgColor = _iterValue9.bgColor || "#ffffff";
+                    (addPageCommand.data.backgroundSrc = "value://color/" + bgColor),
                       "transparent" === _iterValue9.bgColor &&
-                        (_tmpPT.data.backgroundSrc = "value://color/transparent");
+                        (addPageCommand.data.backgroundSrc = "value://color/transparent");
                   }
                   if (_iterValue9.cutMargin) {
-                    _tmpPT.data.cutMargin_mm = {};
+                    addPageCommand.data.cutMargin_mm = {};
                     var _iterDone10 = !0,
                       _iterDidErr10 = !1,
                       _iterErr10 = void 0;
@@ -14522,10 +14522,10 @@ function _classCallCheck(t, e) {
                         !(_iterDone10 = (_iterStep10 = _iterator10.next()).done);
                         _iterDone10 = !0
                       ) {
-                        var _tmpMT = _slicedToArray(_iterStep10.value, 2),
-                          _tmpBT = _tmpMT[0],
-                          _tmpXT = _tmpMT[1];
-                        _tmpPT.data.cutMargin_mm[_tmpBT] = _tmpXT;
+                        var _destructured = _slicedToArray(_iterStep10.value, 2),
+                          _destructured0 = _destructured[0],
+                          _destructured1 = _destructured[1];
+                        addPageCommand.data.cutMargin_mm[_destructured0] = _destructured1;
                       }
                     } catch (t) {
                       (_iterDidErr10 = !0), (_iterErr10 = t);
@@ -14537,7 +14537,7 @@ function _classCallCheck(t, e) {
                       }
                     }
                   }
-                  t.push(_tmpPT);
+                  t.push(addPageCommand);
                 }
               } catch (t) {
                 (_iterDidErr9 = !0), (_iterErr9 = t);
@@ -14560,52 +14560,55 @@ function _classCallCheck(t, e) {
                   _iterDone11 = !0
                 ) {
                   var _iterValue11 = _iterStep11.value,
-                    _tmpPT2 = {};
+                    addCellCommand = {};
                   switch (_iterValue11.type) {
                     case "picFrame":
-                      (_tmpPT2.action = "add-cell"),
-                        (_tmpPT2.target = {
+                      (addCellCommand.action = "add-cell"),
+                        (addCellCommand.target = {
                           object: "page",
                           index: _iterValue11.pageIndex,
                         }),
-                        (_tmpPT2.data = {}),
+                        (addCellCommand.data = {}),
                         _iterValue11.position && _iterValue11.position.constructor === Object
-                          ? (_tmpPT2.data.rect_mm = {
+                          ? (addCellCommand.data.rect_mm = {
                               x: _iterValue11.position.x,
                               y: _iterValue11.position.y,
                               width: _iterValue11.position.width,
                               height: _iterValue11.position.height,
                             })
-                          : (_tmpPT2.data.rect_mm = "page-full"),
-                        _iterValue11.variable && (_tmpPT2.data.variable = _iterValue11.variable),
+                          : (addCellCommand.data.rect_mm = "page-full"),
+                        _iterValue11.variable &&
+                          (addCellCommand.data.variable = _iterValue11.variable),
                         _iterValue11.insertIndex &&
-                          (_tmpPT2.data.insertIndex = _iterValue11.insertIndex);
+                          (addCellCommand.data.insertIndex = _iterValue11.insertIndex);
                       break;
                     case "sticker":
-                      (_tmpPT2.action = "add-sticker"),
-                        (_tmpPT2.target = {
+                      (addCellCommand.action = "add-sticker"),
+                        (addCellCommand.target = {
                           object: "page",
                           index: _iterValue11.pageIndex,
                         }),
-                        (_tmpPT2.data = {}),
+                        (addCellCommand.data = {}),
                         _iterValue11.src &&
-                          (_tmpPT2.data.src =
+                          (addCellCommand.data.src =
                             "value://svg/base64," + _iterValue11.src.split("base64,")[1]),
-                        _iterValue11.externalSrc && (_tmpPT2.data.src = _iterValue11.externalSrc),
-                        _iterValue11.layer && (_tmpPT2.data.postLayer = _iterValue11.layer),
+                        _iterValue11.externalSrc &&
+                          (addCellCommand.data.src = _iterValue11.externalSrc),
+                        _iterValue11.layer && (addCellCommand.data.postLayer = _iterValue11.layer),
                         _iterValue11.position && _iterValue11.position.constructor === Object
-                          ? (_tmpPT2.data.rect_mm = {
+                          ? (addCellCommand.data.rect_mm = {
                               x: _iterValue11.position.x,
                               y: _iterValue11.position.y,
                               width: _iterValue11.position.width,
                               height: _iterValue11.position.height,
                             })
-                          : (_tmpPT2.data.rect_mm = "page-full"),
-                        _iterValue11.variable && (_tmpPT2.data.variable = _iterValue11.variable),
+                          : (addCellCommand.data.rect_mm = "page-full"),
+                        _iterValue11.variable &&
+                          (addCellCommand.data.variable = _iterValue11.variable),
                         _iterValue11.insertIndex &&
-                          (_tmpPT2.data.insertIndex = _iterValue11.insertIndex);
+                          (addCellCommand.data.insertIndex = _iterValue11.insertIndex);
                   }
-                  t.push(_tmpPT2);
+                  t.push(addCellCommand);
                 }
               } catch (t) {
                 (_iterDidErr11 = !0), (_iterErr11 = t);
@@ -14631,13 +14634,13 @@ function _classCallCheck(t, e) {
                   _iterDone12 = !0
                 ) {
                   var _iterValue12 = _iterStep12.value,
-                    _tmpFT = {
+                    urlPayload = {
                       src_type: "url",
                       src: _iterValue12.src,
                       src_format: _iterValue12.format,
                       item_type: _iterValue12.type,
                     };
-                  editorBridge.post_to_editor("add-image", _tmpFT);
+                  editorBridge.post_to_editor("add-image", urlPayload);
                 }
               } catch (t) {
                 (_iterDidErr12 = !0), (_iterErr12 = t);
@@ -14664,7 +14667,7 @@ function _classCallCheck(t, e) {
                 ) {
                   var _iterValue13 = _iterStep13.value;
                   if (_iterValue13.multi) {
-                    var _tmpHT = {
+                    var setCellSrcInfosPayload = {
                       empty_cell_only: _iterValue13.onlyEmptyFrame,
                       repeat: _iterValue13.repeat,
                       sort_type: "default",
@@ -14675,17 +14678,17 @@ function _classCallCheck(t, e) {
                         };
                       }),
                     };
-                    editorBridge.post_to_editor("set-cell-src-infos", _tmpHT);
+                    editorBridge.post_to_editor("set-cell-src-infos", setCellSrcInfosPayload);
                   } else {
-                    var _tmpWT = {
+                    var srcInfoPayload = {
                       src_type: "src-info",
                       item_type: _iterValue13.type,
                       src_key: _iterValue13.key,
                       src_info: _iterValue13.info,
                     };
-                    _iterValue13.tid && (_tmpWT.item_id = _iterValue13.tid),
-                      _iterValue13.rectInfo && (_tmpWT.item_mm = _iterValue13.rectInfo),
-                      editorBridge.post_to_editor("add-image", _tmpWT);
+                    _iterValue13.tid && (srcInfoPayload.item_id = _iterValue13.tid),
+                      _iterValue13.rectInfo && (srcInfoPayload.item_mm = _iterValue13.rectInfo),
+                      editorBridge.post_to_editor("add-image", srcInfoPayload);
                   }
                 }
               } catch (t) {
@@ -14709,7 +14712,7 @@ function _classCallCheck(t, e) {
                   _iterDone14 = !0
                 ) {
                   var _iterValue14 = _iterStep14.value,
-                    _tmp$T = {
+                    setTextStyleCommand2 = {
                       action: "set-text-style",
                       target: {
                         object: "item",
@@ -14718,27 +14721,30 @@ function _classCallCheck(t, e) {
                       data: {},
                     };
                   (_iterValue14.pageIndex || 0 === _iterValue14.pageIndex) &&
-                    (_tmp$T.target.page_index = _iterValue14.pageIndex),
-                    1 == _iterValue14.shrink && (_tmp$T.data.shrink = _iterValue14.shrink),
+                    (setTextStyleCommand2.target.page_index = _iterValue14.pageIndex),
+                    1 == _iterValue14.shrink &&
+                      (setTextStyleCommand2.data.shrink = _iterValue14.shrink),
                     _iterValue14.font &&
                       (_iterValue14.font.family &&
                         _iterValue14.font.style &&
-                        (_tmp$T.data.font = {
+                        (setTextStyleCommand2.data.font = {
                           fontFamily: _iterValue14.font.family,
                           typeStyle: _iterValue14.font.style,
                         }),
-                      _iterValue14.font.size && (_tmp$T.data.fontSize = _iterValue14.font.size),
-                      _iterValue14.font.align && (_tmp$T.data.align = _iterValue14.font.align),
+                      _iterValue14.font.size &&
+                        (setTextStyleCommand2.data.fontSize = _iterValue14.font.size),
+                      _iterValue14.font.align &&
+                        (setTextStyleCommand2.data.align = _iterValue14.font.align),
                       _iterValue14.font.color &&
-                        ((_tmp$T.data.fontColor = _iterValue14.font.color),
+                        ((setTextStyleCommand2.data.fontColor = _iterValue14.font.color),
                         _iterValue14.font.cmyk &&
-                          (_tmp$T.data.fontColorCMYK = objectToQueryParam(
+                          (setTextStyleCommand2.data.fontColorCMYK = objectToQueryParam(
                             _iterValue14.font.cmyk,
                             !0
                           )))),
                     (_iterValue14.value || "" === _iterValue14.value) &&
-                      (_tmp$T.data.text = _iterValue14.value),
-                    t.push(_tmp$T);
+                      (setTextStyleCommand2.data.text = _iterValue14.value),
+                    t.push(setTextStyleCommand2);
                 }
               } catch (t) {
                 (_iterDidErr14 = !0), (_iterErr14 = t);
@@ -14764,21 +14770,25 @@ function _classCallCheck(t, e) {
                   _iterDone15 = !0
                 ) {
                   var _iterValue15 = _iterStep15.value,
-                    _tmpRE = {
+                    setItemAttributeCommand2 = {
                       action: "set-item-attribute",
                       target: {
                         object: "item",
                       },
                       data: {},
                     };
-                  _iterValue15.variableId && (_tmpRE.target.var_id = _iterValue15.variableId),
-                    _iterValue15.itemId && (_tmpRE.target.item_id = _iterValue15.itemId),
-                    (_tmpRE.data[_iterValue15.type] = _iterValue15.value),
-                    _iterValue15.scope && (_tmpRE.target.scope = _iterValue15.scope),
-                    _iterValue15.target && (_tmpRE.target.type = _iterValue15.target),
-                    _iterValue15.data && (_tmpRE.data = _iterValue15.data),
-                    _iterValue15.allItem && (_tmpRE.target.object = "all-items"),
-                    t.push(_tmpRE);
+                  _iterValue15.variableId &&
+                    (setItemAttributeCommand2.target.var_id = _iterValue15.variableId),
+                    _iterValue15.itemId &&
+                      (setItemAttributeCommand2.target.item_id = _iterValue15.itemId),
+                    (setItemAttributeCommand2.data[_iterValue15.type] = _iterValue15.value),
+                    _iterValue15.scope &&
+                      (setItemAttributeCommand2.target.scope = _iterValue15.scope),
+                    _iterValue15.target &&
+                      (setItemAttributeCommand2.target.type = _iterValue15.target),
+                    _iterValue15.data && (setItemAttributeCommand2.data = _iterValue15.data),
+                    _iterValue15.allItem && (setItemAttributeCommand2.target.object = "all-items"),
+                    t.push(setItemAttributeCommand2);
                 }
               } catch (t) {
                 (_iterDidErr15 = !0), (_iterErr15 = t);
@@ -14801,7 +14811,7 @@ function _classCallCheck(t, e) {
                   _iterDone16 = !0
                 ) {
                   var _iterValue16 = _iterStep16.value,
-                    _tmpLE = {
+                    setItemLayerFilterCommand = {
                       action: "set-item-layer-filter",
                       target: {
                         object: "item",
@@ -14814,9 +14824,9 @@ function _classCallCheck(t, e) {
                       ),
                     };
                   "document" === _iterValue16.scope &&
-                    "object" == _typeof(_tmpLE.target) &&
-                    (_tmpLE.target.object = "all-items"),
-                    t.push(_tmpLE);
+                    "object" == _typeof(setItemLayerFilterCommand.target) &&
+                    (setItemLayerFilterCommand.target.object = "all-items"),
+                    t.push(setItemLayerFilterCommand);
                 }
               } catch (t) {
                 (_iterDidErr16 = !0), (_iterErr16 = t);
@@ -14839,7 +14849,7 @@ function _classCallCheck(t, e) {
                   _iterDone17 = !0
                 ) {
                   var _iterValue17 = _iterStep17.value,
-                    _tmp_E = {
+                    resizePageCommand = {
                       action: "resize-page",
                       target: {
                         object: "page",
@@ -14854,7 +14864,7 @@ function _classCallCheck(t, e) {
                         userData: _iterValue17.userData,
                       },
                     };
-                  t.push(_tmp_E);
+                  t.push(resizePageCommand);
                 }
               } catch (t) {
                 (_iterDidErr17 = !0), (_iterErr17 = t);
@@ -14877,7 +14887,7 @@ function _classCallCheck(t, e) {
                   _iterDone18 = !0
                 ) {
                   var _iterValue18 = _iterStep18.value,
-                    _tmpSE = {
+                    imposePagesCommand = {
                       action: "impose-pages",
                       target: {
                         object: "document",
@@ -14897,7 +14907,7 @@ function _classCallCheck(t, e) {
                         },
                       },
                     };
-                  t.push(_tmpSE);
+                  t.push(imposePagesCommand);
                 }
               } catch (t) {
                 (_iterDidErr18 = !0), (_iterErr18 = t);
@@ -14920,7 +14930,7 @@ function _classCallCheck(t, e) {
                   _iterDone19 = !0
                 ) {
                   var _iterValue19 = _iterStep19.value,
-                    _tmpCE = {
+                    addPageGroupCommand = {
                       action: "add-page-group",
                       target: "document",
                       data: {
@@ -14928,7 +14938,7 @@ function _classCallCheck(t, e) {
                         printCount: _iterValue19.printCount,
                       },
                     };
-                  t.push(_tmpCE);
+                  t.push(addPageGroupCommand);
                 }
               } catch (t) {
                 (_iterDidErr19 = !0), (_iterErr19 = t);
@@ -14950,7 +14960,7 @@ function _classCallCheck(t, e) {
                   !(_iterDone20 = (_iterStep20 = _iterator20.next()).done);
                   _iterDone20 = !0
                 ) {
-                  var _tmpAE = {
+                  var clonePageGroupCommand = {
                     action: "clone-page-group",
                     target: {
                       object: "group",
@@ -14961,7 +14971,7 @@ function _classCallCheck(t, e) {
                       clearCell: _iterStep20.value.clearCell,
                     },
                   };
-                  t.push(_tmpAE);
+                  t.push(clonePageGroupCommand);
                 }
               } catch (t) {
                 (_iterDidErr20 = !0), (_iterErr20 = t);
@@ -14984,7 +14994,7 @@ function _classCallCheck(t, e) {
                   _iterDone21 = !0
                 ) {
                   var _iterValue21 = _iterStep21.value,
-                    _tmpGE = {
+                    changePageGroupInfoCommand = {
                       action: "change-page-group-info",
                       target: {
                         object: "group",
@@ -14992,7 +15002,7 @@ function _classCallCheck(t, e) {
                       },
                       data: _iterValue21.data,
                     };
-                  t.push(_tmpGE);
+                  t.push(changePageGroupInfoCommand);
                 }
               } catch (t) {
                 (_iterDidErr21 = !0), (_iterErr21 = t);
@@ -15015,7 +15025,7 @@ function _classCallCheck(t, e) {
                   _iterDone22 = !0
                 ) {
                   var _iterValue22 = _iterStep22.value,
-                    _tmpXE = {
+                    setPageAttributeCommand2 = {
                       action: "set-page-attribute",
                       target: {
                         object: "page",
@@ -15025,7 +15035,7 @@ function _classCallCheck(t, e) {
                         selectedKey: _iterValue22.selectKey,
                       },
                     };
-                  t.push(_tmpXE);
+                  t.push(setPageAttributeCommand2);
                 }
               } catch (t) {
                 (_iterDidErr22 = !0), (_iterErr22 = t);
@@ -15038,7 +15048,7 @@ function _classCallCheck(t, e) {
               }
             }
             if (e.setPostLayer) {
-              var setItemAttributeCommand = {
+              var setItemAttributeCommand3 = {
                 action: "set-item-attribute",
                 target: {
                   object: "item",
@@ -15048,7 +15058,7 @@ function _classCallCheck(t, e) {
                   postLayer: e.setPostLayer,
                 },
               };
-              t.push(setItemAttributeCommand);
+              t.push(setItemAttributeCommand3);
             }
             return t;
           }, e || []),
@@ -15197,8 +15207,8 @@ function _classCallCheck(t, e) {
                 });
           else
             try {
-              var _valR = sessionStorageManager("userId");
-              "bnVsbA==" === _valR || "dW5kZWZpbmVk" === _valR
+              var r = sessionStorageManager("userId");
+              "bnVsbA==" === r || "dW5kZWZpbmVk" === r
                 ? apiClientInstance
                     .call("issueUserToken")
                     .then(function (t) {
@@ -15270,9 +15280,9 @@ function _classCallCheck(t, e) {
              * @param {number} L - 재시도 횟수 (내부용, 기본 0)
              */
             key: "createProject",
-            value: function (e, _argN) {
-              var _regR,
-                _regO2,
+            value: function (editorConfig, projectOptions) {
+              var self,
+                now,
                 i,
                 _regA,
                 _regC,
@@ -15287,24 +15297,24 @@ function _classCallCheck(t, e) {
                 _regG,
                 _,
                 y,
-                _regM,
-                _regB,
-                x,
+                customTabContext,
+                customTabManager,
+                customTabFormat,
                 k,
                 _regW,
                 _regS2,
                 _regE,
                 _regI,
                 _regT,
-                _regP2,
-                _regO3,
+                editorPayload,
+                _regO2,
                 j,
                 _regC2,
-                _regR2,
-                _regM2,
-                _regN,
-                _regF2,
-                _valL = 2 < arguments.length && void 0 !== arguments[2] ? arguments[2] : 0;
+                _regR,
+                _regM,
+                authState,
+                eventHandlerRef,
+                retryCount = 2 < arguments.length && void 0 !== arguments[2] ? arguments[2] : 0;
               return regeneratorRuntime.async(
                 function (t) {
                   for (;;)
@@ -15316,27 +15326,27 @@ function _classCallCheck(t, e) {
                       case 2:
                         if (
                           ((isEditorBusy = !0),
-                          (_regR = this),
+                          (self = this),
                           (sdkState.openType = "CREATE"),
                           (sdkState.clone = !1),
                           (sdkState.originProjectId = null),
                           (sdkState.params = JSON.parse(
                             JSON.stringify({
-                              editorConfig: e,
-                              options: _argN,
+                              editorConfig: editorConfig,
+                              options: projectOptions,
                             })
                           )),
-                          windowRef.__KOI_EVENT_LISNTER_INITIALIZE ||
-                            editorBridge.init(_regR.isDev),
+                          windowRef.__KOI_EVENT_LISNTER_INITIALIZE || editorBridge.init(self.isDev),
                           this.isReady)
                         ) {
                           t.next = 16;
                           break;
                         }
-                        if (_valL < 4)
+                        if (retryCount < 4)
                           return (
                             setTimeout(function () {
-                              (isEditorBusy = !1), _regR.createProject(e, _argN, _valL + 1);
+                              (isEditorBusy = !1),
+                                self.createProject(editorConfig, projectOptions, retryCount + 1);
                             }, 500),
                             t.abrupt("return", !1)
                           );
@@ -15351,7 +15361,7 @@ function _classCallCheck(t, e) {
                         );
                       case 16:
                         (t.prev = 16),
-                          validateRequiredParams(["selector", "psCode", "title"], e),
+                          validateRequiredParams(["selector", "psCode", "title"], editorConfig),
                           (t.next = 23);
                         break;
                       case 20:
@@ -15363,177 +15373,186 @@ function _classCallCheck(t, e) {
                       case 23:
                         if (
                           ((t.prev = 23),
-                          e.psCode &&
-                            e.psCode.split("@")[1] &&
-                            ["PHBKPRM"].includes(e.psCode.split("@")[1]) &&
-                            ((_argN = _argN || {}).deletePages = [
+                          editorConfig.psCode &&
+                            editorConfig.psCode.split("@")[1] &&
+                            ["PHBKPRM"].includes(editorConfig.psCode.split("@")[1]) &&
+                            ((projectOptions = projectOptions || {}).deletePages = [
                               {
                                 target: "cover",
                               },
                             ]),
-                          e.locale && ((_argN = _argN || {}).locale = e.locale),
-                          !_argN)
+                          editorConfig.locale &&
+                            ((projectOptions = projectOptions || {}).locale = editorConfig.locale),
+                          !projectOptions)
                         ) {
                           t.next = 102;
                           break;
                         }
                         if (
-                          (_argN.initPageCount && (e.initPageCount = _argN.initPageCount),
-                          _argN.maxPage && (e.maxPage = _argN.maxPage),
-                          _argN.minPage && (e.minPage = _argN.minPage),
-                          _argN.maxOrder && (e.maxOrder = _argN.maxOrder),
-                          _argN.testPlugin && (e.testPlugin = !0),
-                          _argN.bundlePageUnit && (e.bundlePageUnit = _argN.bundlePageUnit),
-                          _argN.calendarConfig &&
-                            "object" === _typeof(_argN.calendarConfig) &&
-                            ((_regO2 = new Date()),
-                            (i = _argN.calendarConfig),
+                          (projectOptions.initPageCount &&
+                            (editorConfig.initPageCount = projectOptions.initPageCount),
+                          projectOptions.maxPage && (editorConfig.maxPage = projectOptions.maxPage),
+                          projectOptions.minPage && (editorConfig.minPage = projectOptions.minPage),
+                          projectOptions.maxOrder &&
+                            (editorConfig.maxOrder = projectOptions.maxOrder),
+                          projectOptions.testPlugin && (editorConfig.testPlugin = !0),
+                          projectOptions.bundlePageUnit &&
+                            (editorConfig.bundlePageUnit = projectOptions.bundlePageUnit),
+                          projectOptions.calendarConfig &&
+                            "object" === _typeof(projectOptions.calendarConfig) &&
+                            ((now = new Date()),
+                            (i = projectOptions.calendarConfig),
                             (_regA = i.initialYear),
                             (_regC = i.initialMonth),
                             (_regS = i.range),
                             (_regU = i.prefixMonths),
                             (_regL = i.afterMonths),
-                            (_regA = _regA || _regO2.getFullYear()),
-                            (_regC = _regC || _regO2.getMonth() + 1),
+                            (_regA = _regA || now.getFullYear()),
+                            (_regC = _regC || now.getMonth() + 1),
                             (_regS = _regS || 12),
                             (_regU = _regU || 0),
                             (_regL = _regL || 0),
-                            (e.calendarDate =
+                            (editorConfig.calendarDate =
                               _regA + "-" + _regC + "-" + _regS + "-" + _regU + "-" + _regL)),
-                          _argN.emptyDocument &&
-                            (e.ddpBlock
-                              ? (e.ddpBlock = ddpBlockBuilder(
+                          projectOptions.emptyDocument &&
+                            (editorConfig.ddpBlock
+                              ? (editorConfig.ddpBlock = ddpBlockBuilder(
                                   [
                                     {
                                       newDocument: !0,
                                     },
                                   ],
-                                  e.ddpBlock.commands
+                                  editorConfig.ddpBlock.commands
                                 ))
-                              : (e.ddpBlock = ddpBlockBuilder([
+                              : (editorConfig.ddpBlock = ddpBlockBuilder([
                                   {
                                     newDocument: !0,
                                   },
                                 ])),
-                            (e.templateUrl = null)),
-                          _argN.addPages &&
-                            (e.ddpBlock
-                              ? (e.ddpBlock = ddpBlockBuilder(
+                            (editorConfig.templateUrl = null)),
+                          projectOptions.addPages &&
+                            (editorConfig.ddpBlock
+                              ? (editorConfig.ddpBlock = ddpBlockBuilder(
                                   [
                                     {
-                                      addPages: _argN.addPages,
+                                      addPages: projectOptions.addPages,
                                     },
                                   ],
-                                  e.ddpBlock.commands
+                                  editorConfig.ddpBlock.commands
                                 ))
-                              : (e.ddpBlock = ddpBlockBuilder([
+                              : (editorConfig.ddpBlock = ddpBlockBuilder([
                                   {
-                                    addPages: _argN.addPages,
+                                    addPages: projectOptions.addPages,
                                   },
                                 ]))),
-                          _argN.customDocument &&
-                            (_argN.executeList
-                              ? (_argN.executeList = [
+                          projectOptions.customDocument &&
+                            (projectOptions.executeList
+                              ? (projectOptions.executeList = [
                                   {
                                     newDocument: !0,
                                   },
                                   {
-                                    addPages: _argN.customDocument.pages.map(function (t) {
+                                    addPages: projectOptions.customDocument.pages.map(function (t) {
                                       return (t.setBackground = !0), t;
                                     }),
                                   },
-                                ].concat(_toConsumableArray(_argN.executeList)))
+                                ].concat(_toConsumableArray(projectOptions.executeList)))
                               : ((_regF = [
                                   {
                                     newDocument: !0,
                                   },
                                   {
-                                    addPages: _argN.customDocument.pages.map(function (t) {
+                                    addPages: projectOptions.customDocument.pages.map(function (t) {
                                       return (t.setBackground = !0), t;
                                     }),
                                   },
                                 ]),
-                                (e.ddpBlock = ddpBlockBuilder(_regF))),
-                            (e.templateUrl = null)),
-                          _argN.executeList && (e.ddpBlock = ddpBlockBuilder(_argN.executeList)),
-                          _argN.deletePages &&
-                            (e.ddpBlock
-                              ? (e.ddpBlock = ddpBlockBuilder(
+                                (editorConfig.ddpBlock = ddpBlockBuilder(_regF))),
+                            (editorConfig.templateUrl = null)),
+                          projectOptions.executeList &&
+                            (editorConfig.ddpBlock = ddpBlockBuilder(projectOptions.executeList)),
+                          projectOptions.deletePages &&
+                            (editorConfig.ddpBlock
+                              ? (editorConfig.ddpBlock = ddpBlockBuilder(
                                   [
                                     {
-                                      deletePages: _argN.deletePages,
+                                      deletePages: projectOptions.deletePages,
                                     },
                                   ],
-                                  e.ddpBlock.commands
+                                  editorConfig.ddpBlock.commands
                                 ))
-                              : (e.ddpBlock = ddpBlockBuilder([
+                              : (editorConfig.ddpBlock = ddpBlockBuilder([
                                   {
-                                    deletePages: _argN.deletePages,
+                                    deletePages: projectOptions.deletePages,
                                   },
                                 ]))),
-                          _argN.hiddenItems &&
-                            (e.ddpBlock
-                              ? (e.ddpBlock = ddpBlockBuilder(
+                          projectOptions.hiddenItems &&
+                            (editorConfig.ddpBlock
+                              ? (editorConfig.ddpBlock = ddpBlockBuilder(
                                   [
                                     {
-                                      hiddenItems: _argN.hiddenItems,
+                                      hiddenItems: projectOptions.hiddenItems,
                                     },
                                   ],
-                                  e.ddpBlock.commands
+                                  editorConfig.ddpBlock.commands
                                 ))
-                              : (e.ddpBlock = ddpBlockBuilder([
+                              : (editorConfig.ddpBlock = ddpBlockBuilder([
                                   {
-                                    hiddenItems: _argN.hiddenItems,
+                                    hiddenItems: projectOptions.hiddenItems,
                                   },
                                 ]))),
-                          _argN.autoSave &&
-                            "number" == typeof _argN.autoSave &&
-                            (autoSaveIntervalMinutes = _argN.autoSave),
-                          _argN.extra && (e.extra = _argN.extra),
-                          _argN.locale && (e.locale = _argN.locale),
-                          _argN.isMobile &&
-                            ((e.isMobile = _argN.isMobile), (sdkState.deviceTarget = "mobile")),
-                          _argN.hideToolbar &&
-                            ((e.hideToolbar = _argN.hideToolbar), (sdkState.mode = "passive")),
-                          _argN.showSetting && (e.showSetting = _argN.showSetting),
-                          _argN.useVideoFrame && (e.useVideoFrame = _argN.useVideoFrame),
-                          !_argN.limitColor && !_argN.paletteCode)
+                          projectOptions.autoSave &&
+                            "number" == typeof projectOptions.autoSave &&
+                            (autoSaveIntervalMinutes = projectOptions.autoSave),
+                          projectOptions.extra && (editorConfig.extra = projectOptions.extra),
+                          projectOptions.locale && (editorConfig.locale = projectOptions.locale),
+                          projectOptions.isMobile &&
+                            ((editorConfig.isMobile = projectOptions.isMobile),
+                            (sdkState.deviceTarget = "mobile")),
+                          projectOptions.hideToolbar &&
+                            ((editorConfig.hideToolbar = projectOptions.hideToolbar),
+                            (sdkState.mode = "passive")),
+                          projectOptions.showSetting &&
+                            (editorConfig.showSetting = projectOptions.showSetting),
+                          projectOptions.useVideoFrame &&
+                            (editorConfig.useVideoFrame = projectOptions.useVideoFrame),
+                          !projectOptions.limitColor && !projectOptions.paletteCode)
                         ) {
                           t.next = 71;
                           break;
                         }
-                        if (!e.extra) {
+                        if (!editorConfig.extra) {
                           t.next = 60;
                           break;
                         }
                         if (
-                          (_argN.limitColor &&
-                            (e.extra.palette = {
-                              max_color: parseInt(_argN.limitColor),
+                          (projectOptions.limitColor &&
+                            (editorConfig.extra.palette = {
+                              max_color: parseInt(projectOptions.limitColor),
                             }),
-                          !_argN.paletteCode)
+                          !projectOptions.paletteCode)
                         ) {
                           t.next = 58;
                           break;
                         }
-                        (t.t1 = _typeof(_argN.paletteCode)),
+                        (t.t1 = _typeof(projectOptions.paletteCode)),
                           (t.next = "string" === t.t1 ? 54 : "object" === t.t1 ? 56 : 58);
                         break;
                       case 54:
                         return (
-                          (e.extra.palette = {
-                            palCode: _argN.paletteCode,
+                          (editorConfig.extra.palette = {
+                            palCode: projectOptions.paletteCode,
                           }),
                           t.abrupt("break", 58)
                         );
                       case 56:
                         return (
-                          (e.extra.palette = {
-                            palCode: _argN.paletteCode.palCode,
-                            palNameFilters: _argN.paletteCode.filters,
-                            foilNameFilters: _argN.paletteCode.filters,
-                            foilNameMajor: _argN.paletteCode.default,
-                            palNameMajor: _argN.paletteCode.default,
+                          (editorConfig.extra.palette = {
+                            palCode: projectOptions.paletteCode.palCode,
+                            palNameFilters: projectOptions.paletteCode.filters,
+                            foilNameFilters: projectOptions.paletteCode.filters,
+                            foilNameMajor: projectOptions.paletteCode.default,
+                            palNameMajor: projectOptions.paletteCode.default,
                           }),
                           t.abrupt("break", 58)
                         );
@@ -15542,54 +15561,57 @@ function _classCallCheck(t, e) {
                         break;
                       case 60:
                         if (
-                          ((e.extra = {}),
-                          (e.extra.palette = {}),
-                          _argN.limitColor &&
-                            (e.extra.palette.max_color = parseInt(_argN.limitColor)),
-                          !_argN.paletteCode)
+                          ((editorConfig.extra = {}),
+                          (editorConfig.extra.palette = {}),
+                          projectOptions.limitColor &&
+                            (editorConfig.extra.palette.max_color = parseInt(
+                              projectOptions.limitColor
+                            )),
+                          !projectOptions.paletteCode)
                         ) {
                           t.next = 71;
                           break;
                         }
-                        (t.t2 = _typeof(_argN.paletteCode)),
+                        (t.t2 = _typeof(projectOptions.paletteCode)),
                           (t.next = "string" === t.t2 ? 67 : "object" === t.t2 ? 69 : 71);
                         break;
                       case 67:
                         return (
-                          (e.extra.palette = {
-                            palCode: _argN.paletteCode,
+                          (editorConfig.extra.palette = {
+                            palCode: projectOptions.paletteCode,
                           }),
                           t.abrupt("break", 71)
                         );
                       case 69:
                         return (
-                          (e.extra.palette = {
-                            palCode: _argN.paletteCode.palCode,
-                            palNameFilters: _argN.paletteCode.filters,
-                            foilNameFilters: _argN.paletteCode.filters,
-                            foilNameMajor: _argN.paletteCode.default,
-                            palNameMajor: _argN.paletteCode.default,
+                          (editorConfig.extra.palette = {
+                            palCode: projectOptions.paletteCode.palCode,
+                            palNameFilters: projectOptions.paletteCode.filters,
+                            foilNameFilters: projectOptions.paletteCode.filters,
+                            foilNameMajor: projectOptions.paletteCode.default,
+                            palNameMajor: projectOptions.paletteCode.default,
                           }),
                           t.abrupt("break", 71)
                         );
                       case 71:
                         if (
-                          ((!0 !== _argN.setTransparentBackground &&
-                            !1 !== _argN.setTransparentBackground) ||
-                            (e.extra || (e.extra = {}),
-                            e.extra.background || (e.extra.background = {}),
-                            (e.extra.background.set_transparent = _argN.setTransparentBackground)),
-                          (!0 !== _argN.activeTransparentBackground &&
-                            !1 !== _argN.activeTransparentBackground) ||
-                            (e.extra || (e.extra = {}),
-                            e.extra.background || (e.extra.background = {}),
-                            (e.extra.background.can_transparent =
-                              _argN.activeTransparentBackground)),
-                          _argN.customTabInfo)
+                          ((!0 !== projectOptions.setTransparentBackground &&
+                            !1 !== projectOptions.setTransparentBackground) ||
+                            (editorConfig.extra || (editorConfig.extra = {}),
+                            editorConfig.extra.background || (editorConfig.extra.background = {}),
+                            (editorConfig.extra.background.set_transparent =
+                              projectOptions.setTransparentBackground)),
+                          (!0 !== projectOptions.activeTransparentBackground &&
+                            !1 !== projectOptions.activeTransparentBackground) ||
+                            (editorConfig.extra || (editorConfig.extra = {}),
+                            editorConfig.extra.background || (editorConfig.extra.background = {}),
+                            (editorConfig.extra.background.can_transparent =
+                              projectOptions.activeTransparentBackground)),
+                          projectOptions.customTabInfo)
                         )
                           return (
-                            e.extra || (e.extra = {}),
-                            (_regP = _argN.customTabInfo),
+                            editorConfig.extra || (editorConfig.extra = {}),
+                            (_regP = projectOptions.customTabInfo),
                             (_regD = _regP.productCode),
                             (_regH = _regP.data),
                             (_regV = _regP.initValues),
@@ -15608,198 +15630,209 @@ function _classCallCheck(t, e) {
                       case 81:
                         return (
                           (y = t.sent.list),
-                          (_regM = {
+                          (customTabContext = {
                             productCode: _regD,
                             product: _,
                             templateList: y,
                             isDev: this.isDev,
-                            locale: _argN.locale || "ko",
+                            locale: projectOptions.locale || "ko",
                           }),
-                          (_regB = new CustomTabManager(_regM)),
+                          (customTabManager = new CustomTabManager(customTabContext)),
                           (customTabRawData = _regH),
                           (t.next = 87),
-                          regeneratorRuntime.awrap(_regB.getCustomTabFormat(_regH, _regV, _regG))
+                          regeneratorRuntime.awrap(
+                            customTabManager.getCustomTabFormat(_regH, _regV, _regG)
+                          )
                         );
                       case 87:
-                        (x = t.sent),
-                          (noStockCombinations = x.noStocks),
-                          x.varMap &&
-                            (!e.templateUrl && x.varMap.$TMPL && (e.templateUrl = x.varMap.$TMPL),
-                            !e.psCode && x.varMap.$PSCD && (e.psCode = x.varMap.$PSCD)),
-                          (e.extra.custom_tab = x),
-                          (k = _regB.whetherUsePalette(_regV)) && (e.extra.palette = _.paletteInfo),
+                        (customTabFormat = t.sent),
+                          (noStockCombinations = customTabFormat.noStocks),
+                          customTabFormat.varMap &&
+                            (!editorConfig.templateUrl &&
+                              customTabFormat.varMap.$TMPL &&
+                              (editorConfig.templateUrl = customTabFormat.varMap.$TMPL),
+                            !editorConfig.psCode &&
+                              customTabFormat.varMap.$PSCD &&
+                              (editorConfig.psCode = customTabFormat.varMap.$PSCD)),
+                          (editorConfig.extra.custom_tab = customTabFormat),
+                          (k = customTabManager.whetherUsePalette(_regV)) &&
+                            (editorConfig.extra.palette = _.paletteInfo),
                           console.log(
                             ">>>>>>>>>>>>>",
                             {
                               usePalette: k,
                             },
                             {
-                              editorConfig: e,
+                              editorConfig: editorConfig,
                             },
                             _
                           );
                       case 94:
-                        _argN.useTabless && (e.uiStyle = "tab-less,header-less"),
-                          _argN.hideCustomTab && (e.uiStyle = "tab-less,hide-custom"),
-                          _argN.setSpine &&
-                            (e.extra || (e.extra = {}),
-                            e.extra.override || (e.extra.override = {}),
-                            (e.extra.override.spine_mm = _argN.setSpine)),
-                          _argN.documentSizeInfo &&
-                            (e.extra || (e.extra = {}),
-                            (_regW = _argN.documentSizeInfo),
+                        projectOptions.useTabless &&
+                          (editorConfig.uiStyle = "tab-less,header-less"),
+                          projectOptions.hideCustomTab &&
+                            (editorConfig.uiStyle = "tab-less,hide-custom"),
+                          projectOptions.setSpine &&
+                            (editorConfig.extra || (editorConfig.extra = {}),
+                            editorConfig.extra.override || (editorConfig.extra.override = {}),
+                            (editorConfig.extra.override.spine_mm = projectOptions.setSpine)),
+                          projectOptions.documentSizeInfo &&
+                            (editorConfig.extra || (editorConfig.extra = {}),
+                            (_regW = projectOptions.documentSizeInfo),
                             (_regS2 = _regW.width),
                             (_regE = _regW.height),
                             (_regI = _regW.round),
-                            (e.extra.sizing = {
+                            (editorConfig.extra.sizing = {
                               width_mm: _regS2,
                               height_mm: _regE,
                             }),
-                            _regI && (e.extra.sizing.round_mm = _regI)),
-                          _argN.setDefaultSelectKey &&
-                            (e.ddpBlock
-                              ? (e.ddpBlock = ddpBlockBuilder(
+                            _regI && (editorConfig.extra.sizing.round_mm = _regI)),
+                          projectOptions.setDefaultSelectKey &&
+                            (editorConfig.ddpBlock
+                              ? (editorConfig.ddpBlock = ddpBlockBuilder(
                                   [
                                     {
-                                      setPageAttribute: _argN.setDefaultSelectKey,
+                                      setPageAttribute: projectOptions.setDefaultSelectKey,
                                     },
                                   ],
-                                  e.ddpBlock.commands
+                                  editorConfig.ddpBlock.commands
                                 ))
-                              : (e.ddpBlock = ddpBlockBuilder([
+                              : (editorConfig.ddpBlock = ddpBlockBuilder([
                                   {
-                                    setPageAttribute: _argN.setDefaultSelectKey,
+                                    setPageAttribute: projectOptions.setDefaultSelectKey,
                                   },
                                 ]))),
-                          _argN.minItemSize &&
-                            (e.extra || (e.extra = {}),
-                            e.extra.override || (e.extra.override = {}),
-                            (e.extra.override.min_item_mm = _argN.minItemSize)),
-                          _argN.tabControl &&
-                            (e.extra || (e.extra = {}),
-                            e.extra.override || (e.extra.override = {}),
-                            (_regT = Object.keys(_argN.tabControl).map(function (t) {
+                          projectOptions.minItemSize &&
+                            (editorConfig.extra || (editorConfig.extra = {}),
+                            editorConfig.extra.override || (editorConfig.extra.override = {}),
+                            (editorConfig.extra.override.min_item_mm = projectOptions.minItemSize)),
+                          projectOptions.tabControl &&
+                            (editorConfig.extra || (editorConfig.extra = {}),
+                            editorConfig.extra.override || (editorConfig.extra.override = {}),
+                            (_regT = Object.keys(projectOptions.tabControl).map(function (t) {
                               return {
                                 type: t,
-                                value: _argN.tabControl[t],
+                                value: projectOptions.tabControl[t],
                               };
                             })),
-                            (e.extra.override.sizeOption = {
+                            (editorConfig.extra.override.sizeOption = {
                               tabControls: _regT,
                             })),
-                          _argN.changeLayer &&
-                            (e.ddpBlock
-                              ? (e.ddpBlock = ddpBlockBuilder(
+                          projectOptions.changeLayer &&
+                            (editorConfig.ddpBlock
+                              ? (editorConfig.ddpBlock = ddpBlockBuilder(
                                   [
                                     {
-                                      setPostLayer: _argN.changeLayer,
+                                      setPostLayer: projectOptions.changeLayer,
                                     },
                                   ],
-                                  e.ddpBlock.commands
+                                  editorConfig.ddpBlock.commands
                                 ))
-                              : (e.ddpBlock = ddpBlockBuilder([
+                              : (editorConfig.ddpBlock = ddpBlockBuilder([
                                   {
-                                    setPostLayer: _argN.changeLayer,
+                                    setPostLayer: projectOptions.changeLayer,
                                   },
                                 ])));
                       case 102:
                         if (
-                          ((_regP2 = {
-                            parent_element: document.querySelector(e.selector),
-                            ps_code: e.psCode,
-                            template_uri: e.templateUrl,
-                            title: e.title,
-                            run_mode: e.hideToolbar ? "passive" : "standard",
-                            edit_mode: e.showSetting ? "design" : "standard",
-                            ddp_block: e.ddpBlock || "",
-                            private_css: e.privateCSS || "",
-                            num_page: e.initPageCount,
-                            max_page: e.maxPage,
-                            min_page: e.minPage,
-                            max_order: e.maxOrder,
-                            force_plugin: e.testPlugin,
+                          ((editorPayload = {
+                            parent_element: document.querySelector(editorConfig.selector),
+                            ps_code: editorConfig.psCode,
+                            template_uri: editorConfig.templateUrl,
+                            title: editorConfig.title,
+                            run_mode: editorConfig.hideToolbar ? "passive" : "standard",
+                            edit_mode: editorConfig.showSetting ? "design" : "standard",
+                            ddp_block: editorConfig.ddpBlock || "",
+                            private_css: editorConfig.privateCSS || "",
+                            num_page: editorConfig.initPageCount,
+                            max_page: editorConfig.maxPage,
+                            min_page: editorConfig.minPage,
+                            max_order: editorConfig.maxOrder,
+                            force_plugin: editorConfig.testPlugin,
                             partner: "redp",
-                            mobile: e.isMobile,
-                            unit_page: e.bundlePageUnit,
-                            ui_locale: e.locale,
-                            cal_date: e.calendarDate,
-                            options: e.extra,
-                            clear_src: e.clearSource,
-                            video_frames: e.useVideoFrame,
-                            ui_style: e.uiStyle,
+                            mobile: editorConfig.isMobile,
+                            unit_page: editorConfig.bundlePageUnit,
+                            ui_locale: editorConfig.locale,
+                            cal_date: editorConfig.calendarDate,
+                            options: editorConfig.extra,
+                            clear_src: editorConfig.clearSource,
+                            video_frames: editorConfig.useVideoFrame,
+                            ui_style: editorConfig.uiStyle,
                           }),
-                          _argN &&
-                            _argN.unableLayers &&
-                            (_argN.unableLayers.constructor === String().constructor
-                              ? (_regP2.unlayers = _argN.unableLayers)
-                              : _argN.unableLayers.constructor === Array().constructor &&
-                                0 < _argN.unableLayers.length &&
-                                (_regP2.unlayers = _argN.unableLayers.join(","))),
-                          _argN &&
-                            _argN.resourceParams &&
-                            (_regP2.resapi_param = _argN.resourceParams),
-                          _argN &&
-                            _argN.lockGroupPageCount &&
-                            ((_regP2.no_edit_group = _argN.lockGroupPageCount),
-                            (_regP2.edit_lock = "edit-group")),
-                          _argN &&
-                            _argN.disableMasterColorPicker &&
-                            ((_regP2.no_edit_group = _argN.lockGroupPageCount),
-                            (_regP2.edit_lock = _regP2.edit_lock
-                              ? _regP2.edit_lock + ",set-strict-color"
+                          projectOptions &&
+                            projectOptions.unableLayers &&
+                            (projectOptions.unableLayers.constructor === String().constructor
+                              ? (editorPayload.unlayers = projectOptions.unableLayers)
+                              : projectOptions.unableLayers.constructor === Array().constructor &&
+                                0 < projectOptions.unableLayers.length &&
+                                (editorPayload.unlayers = projectOptions.unableLayers.join(","))),
+                          projectOptions &&
+                            projectOptions.resourceParams &&
+                            (editorPayload.resapi_param = projectOptions.resourceParams),
+                          projectOptions &&
+                            projectOptions.lockGroupPageCount &&
+                            ((editorPayload.no_edit_group = projectOptions.lockGroupPageCount),
+                            (editorPayload.edit_lock = "edit-group")),
+                          projectOptions &&
+                            projectOptions.disableMasterColorPicker &&
+                            ((editorPayload.no_edit_group = projectOptions.lockGroupPageCount),
+                            (editorPayload.edit_lock = editorPayload.edit_lock
+                              ? editorPayload.edit_lock + ",set-strict-color"
                               : "set-strict-color")),
-                          _argN &&
-                            _argN.disableFontPreview &&
-                            (_regP2.edit_lock = _regP2.edit_lock
-                              ? _regP2.edit_lock + ",no-font-preview"
+                          projectOptions &&
+                            projectOptions.disableFontPreview &&
+                            (editorPayload.edit_lock = editorPayload.edit_lock
+                              ? editorPayload.edit_lock + ",no-font-preview"
                               : "no-font-preview"),
-                          _argN &&
-                            _argN.disableSelection &&
-                            (_regP2.edit_lock = _regP2.edit_lock
-                              ? _regP2.edit_lock + ",no-selection"
+                          projectOptions &&
+                            projectOptions.disableSelection &&
+                            (editorPayload.edit_lock = editorPayload.edit_lock
+                              ? editorPayload.edit_lock + ",no-selection"
                               : "no-selection"),
-                          _argN &&
-                            _argN.disableTapeOptions &&
-                            (_regP2.edit_lock = _regP2.edit_lock
-                              ? _regP2.edit_lock + ",tape-option"
+                          projectOptions &&
+                            projectOptions.disableTapeOptions &&
+                            (editorPayload.edit_lock = editorPayload.edit_lock
+                              ? editorPayload.edit_lock + ",tape-option"
                               : "tape-option"),
-                          _argN &&
-                            _argN.disableAllOption &&
-                            (_regP2.edit_lock = "lock-all, edit-custom-tab"),
-                          _argN && _argN.clearSource && (_regP2.clear_src = _argN.clearSource),
-                          _argN && _argN.privateCSS)
+                          projectOptions &&
+                            projectOptions.disableAllOption &&
+                            (editorPayload.edit_lock = "lock-all, edit-custom-tab"),
+                          projectOptions &&
+                            projectOptions.clearSource &&
+                            (editorPayload.clear_src = projectOptions.clearSource),
+                          projectOptions && projectOptions.privateCSS)
                         )
                           return (
                             (t.next = 115),
-                            regeneratorRuntime.awrap(this.getCustomCss(_argN.privateCSS))
+                            regeneratorRuntime.awrap(this.getCustomCss(projectOptions.privateCSS))
                           );
                         t.next = 116;
                         break;
                       case 115:
-                        _regP2.private_css = t.sent;
+                        editorPayload.private_css = t.sent;
                       case 116:
                         if (
-                          (_argN &&
-                            _argN.preview &&
-                            (_regP2.option_string = "file_3d=" + _argN.preview),
-                          _argN &&
-                            _argN.pantone &&
-                            ((_regO3 = _argN.pantone),
-                            (j = _regO3.name),
-                            (_regC2 = _regO3.dpName),
-                            (_regR2 = _regO3.hex),
-                            (_regM2 = _regO3.rgb),
-                            (_regP2.option_string =
+                          (projectOptions &&
+                            projectOptions.preview &&
+                            (editorPayload.option_string = "file_3d=" + projectOptions.preview),
+                          projectOptions &&
+                            projectOptions.pantone &&
+                            ((_regO2 = projectOptions.pantone),
+                            (j = _regO2.name),
+                            (_regC2 = _regO2.dpName),
+                            (_regR = _regO2.hex),
+                            (_regM = _regO2.rgb),
+                            (editorPayload.option_string =
                               "single_strict_palette=name:" +
                               j +
                               ";dpName:" +
                               _regC2 +
                               ";hex:" +
-                              _regR2 +
+                              _regR +
                               ";rgb:" +
-                              _regM2 +
+                              _regM +
                               ";")),
-                          (_regN = getAuthState()).user)
+                          (authState = getAuthState()).user)
                         ) {
                           t.next = 121;
                           break;
@@ -15807,64 +15840,68 @@ function _classCallCheck(t, e) {
                         return t.abrupt("return", !1);
                       case 121:
                         return (
-                          sessionStorageManager("edicusConfig", e),
-                          sessionStorageManager("targetElement", e.selector),
-                          (_regF2 = _regR.editorEventHandler),
-                          e.promotionInfo &&
-                            (_regP2.options || (_regP2.options = {}),
-                            e.promotionInfo.useExternal
-                              ? (_regP2.options.promo = {
+                          sessionStorageManager("edicusConfig", editorConfig),
+                          sessionStorageManager("targetElement", editorConfig.selector),
+                          (eventHandlerRef = self.editorEventHandler),
+                          editorConfig.promotionInfo &&
+                            (editorPayload.options || (editorPayload.options = {}),
+                            editorConfig.promotionInfo.useExternal
+                              ? (editorPayload.options.promo = {
                                   type: "external",
                                 })
-                              : (_regP2.options.promo = {
-                                  preferredWidth: e.promotionInfo.width,
-                                  preferredHeight: e.promotionInfo.height,
-                                  url: e.promotionInfo.url,
-                                  opened: e.promotionInfo.autoShow,
+                              : (editorPayload.options.promo = {
+                                  preferredWidth: editorConfig.promotionInfo.width,
+                                  preferredHeight: editorConfig.promotionInfo.height,
+                                  url: editorConfig.promotionInfo.url,
+                                  opened: editorConfig.promotionInfo.autoShow,
                                 })),
-                          _regN.token
-                            ? ((_regP2.token = _regN.token),
-                              (_regP2.div = sessionStorageManager("division")),
-                              (_regP2.lang = sessionStorageManager("lang")),
-                              (_regP2.plugin_param = JSON.stringify(
+                          authState.token
+                            ? ((editorPayload.token = authState.token),
+                              (editorPayload.div = sessionStorageManager("division")),
+                              (editorPayload.lang = sessionStorageManager("lang")),
+                              (editorPayload.plugin_param = JSON.stringify(
                                 buildPluginParams(
                                   sessionStorageManager("companyCode"),
-                                  _argN && _argN.pluginCustomData
+                                  projectOptions && projectOptions.pluginCustomData
                                 )
                               )),
-                              _argN && _argN.locale && (_regP2.lang = _argN.locale),
-                              editorBridge.create_project(_regP2, _regF2),
+                              projectOptions &&
+                                projectOptions.locale &&
+                                (editorPayload.lang = projectOptions.locale),
+                              editorBridge.create_project(editorPayload, eventHandlerRef),
                               apiClientInstance.updateTemplateCount(
-                                _regP2.template_uri || "null",
+                                editorPayload.template_uri || "null",
                                 "hit"
                               ))
                             : apiClientInstance
                                 .call("issueUserToken")
                                 .then(function (t) {
-                                  (_regP2.token = t.token),
+                                  (editorPayload.token = t.token),
                                     t.division &&
                                       (sessionStorageManager("division", t.division),
-                                      (_regP2.div = t.division)),
+                                      (editorPayload.div = t.division)),
                                     t.lang &&
                                       (sessionStorageManager("lang", t.lang),
-                                      (_regP2.lang = t.lang),
-                                      _argN && _argN.locale && (_regP2.lang = _argN.locale)),
+                                      (editorPayload.lang = t.lang),
+                                      projectOptions &&
+                                        projectOptions.locale &&
+                                        (editorPayload.lang = projectOptions.locale)),
                                     t.companyCode &&
                                       (sessionStorageManager("companyCode", t.companyCode),
-                                      (_regP2.plugin_param = JSON.stringify(
+                                      (editorPayload.plugin_param = JSON.stringify(
                                         buildPluginParams(
                                           t.companyCode,
-                                          _argN && _argN.pluginCustomData
+                                          projectOptions && projectOptions.pluginCustomData
                                         )
                                       ))),
-                                    editorBridge.create_project(_regP2, _regF2);
+                                    editorBridge.create_project(editorPayload, eventHandlerRef);
                                   var e = {
                                     token: t.token,
                                     expiredAt: new Date().getTime(),
                                   };
                                   sessionStorageManager("editorToken", e),
                                     apiClientInstance.updateTemplateCount(
-                                      _regP2.template_uri,
+                                      editorPayload.template_uri,
                                       "hit"
                                     );
                                 })
@@ -15896,8 +15933,8 @@ function _classCallCheck(t, e) {
              * @param {number} k - 재시도 횟수 (내부용, 기본 0)
              */
             key: "openProject",
-            value: function (_argO, i) {
-              var _regA,
+            value: function (editorConfig, projectOptions) {
+              var self,
                 e,
                 _regN,
                 _regR,
@@ -15914,9 +15951,9 @@ function _classCallCheck(t, e) {
                 _,
                 y,
                 _regM,
-                _regB,
-                x,
-                k = 2 < arguments.length && void 0 !== arguments[2] ? arguments[2] : 0;
+                launchOpenProject,
+                cloneOptions,
+                retryCount = 2 < arguments.length && void 0 !== arguments[2] ? arguments[2] : 0;
               return regeneratorRuntime.async(
                 function (t) {
                   for (;;)
@@ -15928,25 +15965,25 @@ function _classCallCheck(t, e) {
                       case 2:
                         if (
                           ((isEditorBusy = !0),
-                          (_regA = this),
+                          (self = this),
                           (sdkState.openType = "OPEN"),
                           (sdkState.params = JSON.parse(
                             JSON.stringify({
-                              editorConfig: _argO,
-                              options: i,
+                              editorConfig: editorConfig,
+                              options: projectOptions,
                             })
                           )),
-                          windowRef.__KOI_EVENT_LISNTER_INITIALIZE ||
-                            editorBridge.init(_regA.isDev),
+                          windowRef.__KOI_EVENT_LISNTER_INITIALIZE || editorBridge.init(self.isDev),
                           this.isReady)
                         ) {
                           t.next = 14;
                           break;
                         }
-                        if (k < 4)
+                        if (retryCount < 4)
                           return (
                             setTimeout(function () {
-                              (isEditorBusy = !1), _regA.openProject(_argO, i, k + 1);
+                              (isEditorBusy = !1),
+                                self.openProject(editorConfig, projectOptions, retryCount + 1);
                             }, 500),
                             t.abrupt("return", !1)
                           );
@@ -15961,7 +15998,7 @@ function _classCallCheck(t, e) {
                         );
                       case 14:
                         (t.prev = 14),
-                          validateRequiredParams(["selector", "projectId"], _argO),
+                          validateRequiredParams(["selector", "projectId"], editorConfig),
                           (t.next = 21);
                         break;
                       case 18:
@@ -15972,66 +16009,76 @@ function _classCallCheck(t, e) {
                             ((t.t0.code = "001"), onErrorCallback(t.t0));
                       case 21:
                         if (
-                          ((t.prev = 21), _argO.locale && ((i = i || {}).locale = _argO.locale), !i)
+                          ((t.prev = 21),
+                          editorConfig.locale &&
+                            ((projectOptions = projectOptions || {}).locale = editorConfig.locale),
+                          !projectOptions)
                         ) {
                           t.next = 95;
                           break;
                         }
                         if (
-                          (i.initPageCount && (_argO.initPageCount = i.initPageCount),
-                          i.maxPage && (_argO.maxPage = i.maxPage),
-                          i.minPage && (_argO.minPage = i.minPage),
-                          i.maxOrder && (_argO.maxOrder = i.maxOrder),
-                          i.testPlugin && (_argO.force_plugin = !0),
-                          i.executeList && (_argO.ddpBlock = ddpBlockBuilder(i.executeList)),
-                          i.autoSave &&
-                            "number" == typeof i.autoSave &&
-                            (autoSaveIntervalMinutes = i.autoSave),
-                          i.extra && (_argO.extra = i.extra),
-                          i.locale && (_argO.locale = i.locale),
-                          i.isMobile &&
-                            ((_argO.isMobile = i.isMobile), (sdkState.deviceTarget = "mobile")),
-                          i.hideToolbar &&
-                            ((_argO.hideToolbar = i.hideToolbar), (sdkState.mode = "passive")),
-                          i.showSetting && (_argO.showSetting = i.showSetting),
-                          i.clone && (_argO.clone = i.clone),
-                          i.useVideoFrame && (_argO.useVideoFrame = i.useVideoFrame),
-                          !i.limitColor && !i.paletteCode)
+                          (projectOptions.initPageCount &&
+                            (editorConfig.initPageCount = projectOptions.initPageCount),
+                          projectOptions.maxPage && (editorConfig.maxPage = projectOptions.maxPage),
+                          projectOptions.minPage && (editorConfig.minPage = projectOptions.minPage),
+                          projectOptions.maxOrder &&
+                            (editorConfig.maxOrder = projectOptions.maxOrder),
+                          projectOptions.testPlugin && (editorConfig.force_plugin = !0),
+                          projectOptions.executeList &&
+                            (editorConfig.ddpBlock = ddpBlockBuilder(projectOptions.executeList)),
+                          projectOptions.autoSave &&
+                            "number" == typeof projectOptions.autoSave &&
+                            (autoSaveIntervalMinutes = projectOptions.autoSave),
+                          projectOptions.extra && (editorConfig.extra = projectOptions.extra),
+                          projectOptions.locale && (editorConfig.locale = projectOptions.locale),
+                          projectOptions.isMobile &&
+                            ((editorConfig.isMobile = projectOptions.isMobile),
+                            (sdkState.deviceTarget = "mobile")),
+                          projectOptions.hideToolbar &&
+                            ((editorConfig.hideToolbar = projectOptions.hideToolbar),
+                            (sdkState.mode = "passive")),
+                          projectOptions.showSetting &&
+                            (editorConfig.showSetting = projectOptions.showSetting),
+                          projectOptions.clone && (editorConfig.clone = projectOptions.clone),
+                          projectOptions.useVideoFrame &&
+                            (editorConfig.useVideoFrame = projectOptions.useVideoFrame),
+                          !projectOptions.limitColor && !projectOptions.paletteCode)
                         ) {
                           t.next = 62;
                           break;
                         }
-                        if (!_argO.extra) {
+                        if (!editorConfig.extra) {
                           t.next = 51;
                           break;
                         }
                         if (
-                          (i.limitColor &&
-                            (_argO.extra.palette = {
-                              max_color: parseInt(i.limitColor),
+                          (projectOptions.limitColor &&
+                            (editorConfig.extra.palette = {
+                              max_color: parseInt(projectOptions.limitColor),
                             }),
-                          !i.paletteCode)
+                          !projectOptions.paletteCode)
                         ) {
                           t.next = 49;
                           break;
                         }
-                        (t.t1 = _typeof(i.paletteCode)),
+                        (t.t1 = _typeof(projectOptions.paletteCode)),
                           (t.next = "string" === t.t1 ? 45 : "object" === t.t1 ? 47 : 49);
                         break;
                       case 45:
                         return (
-                          (_argO.extra.palette = {
-                            palCode: i.paletteCode,
+                          (editorConfig.extra.palette = {
+                            palCode: projectOptions.paletteCode,
                           }),
                           t.abrupt("break", 49)
                         );
                       case 47:
                         return (
-                          (_argO.extra.palette = {
-                            palCode: i.paletteCode.palCode,
-                            palNameFilters: i.paletteCode.filters,
-                            foilNameFilters: i.paletteCode.filters,
-                            foilNameMajor: i.paletteCode.default,
+                          (editorConfig.extra.palette = {
+                            palCode: projectOptions.paletteCode.palCode,
+                            palNameFilters: projectOptions.paletteCode.filters,
+                            foilNameFilters: projectOptions.paletteCode.filters,
+                            foilNameMajor: projectOptions.paletteCode.default,
                           }),
                           t.abrupt("break", 49)
                         );
@@ -16040,60 +16087,65 @@ function _classCallCheck(t, e) {
                         break;
                       case 51:
                         if (
-                          ((_argO.extra = {}),
-                          (_argO.extra.palette = {}),
-                          i.limitColor && (_argO.extra.palette.max_color = parseInt(i.limitColor)),
-                          !i.paletteCode)
+                          ((editorConfig.extra = {}),
+                          (editorConfig.extra.palette = {}),
+                          projectOptions.limitColor &&
+                            (editorConfig.extra.palette.max_color = parseInt(
+                              projectOptions.limitColor
+                            )),
+                          !projectOptions.paletteCode)
                         ) {
                           t.next = 62;
                           break;
                         }
-                        (t.t2 = _typeof(i.paletteCode)),
+                        (t.t2 = _typeof(projectOptions.paletteCode)),
                           (t.next = "string" === t.t2 ? 58 : "object" === t.t2 ? 60 : 62);
                         break;
                       case 58:
                         return (
-                          (_argO.extra.palette = {
-                            palCode: i.paletteCode,
+                          (editorConfig.extra.palette = {
+                            palCode: projectOptions.paletteCode,
                           }),
                           t.abrupt("break", 62)
                         );
                       case 60:
                         return (
-                          (_argO.extra.palette = {
-                            palCode: i.paletteCode.palCode,
-                            palNameFilters: i.paletteCode.filters,
-                            foilNameFilters: i.paletteCode.filters,
-                            foilNameMajor: i.paletteCode.default,
+                          (editorConfig.extra.palette = {
+                            palCode: projectOptions.paletteCode.palCode,
+                            palNameFilters: projectOptions.paletteCode.filters,
+                            foilNameFilters: projectOptions.paletteCode.filters,
+                            foilNameMajor: projectOptions.paletteCode.default,
                           }),
                           t.abrupt("break", 62)
                         );
                       case 62:
                         if (
-                          (!1 === i.setTransparentBackground &&
-                            (_argO.extra || (_argO.extra = {}),
-                            _argO.extra.background || (_argO.extra.background = {}),
-                            (_argO.extra.background.set_transparent = i.setTransparentBackground)),
-                          (!0 !== i.activeTransparentBackground &&
-                            !1 !== i.activeTransparentBackground) ||
-                            (_argO.extra || (_argO.extra = {}),
-                            _argO.extra.background || (_argO.extra.background = {}),
-                            (_argO.extra.background.can_transparent =
-                              i.activeTransparentBackground)),
-                          i && i.privateCSS)
+                          (!1 === projectOptions.setTransparentBackground &&
+                            (editorConfig.extra || (editorConfig.extra = {}),
+                            editorConfig.extra.background || (editorConfig.extra.background = {}),
+                            (editorConfig.extra.background.set_transparent =
+                              projectOptions.setTransparentBackground)),
+                          (!0 !== projectOptions.activeTransparentBackground &&
+                            !1 !== projectOptions.activeTransparentBackground) ||
+                            (editorConfig.extra || (editorConfig.extra = {}),
+                            editorConfig.extra.background || (editorConfig.extra.background = {}),
+                            (editorConfig.extra.background.can_transparent =
+                              projectOptions.activeTransparentBackground)),
+                          projectOptions && projectOptions.privateCSS)
                         )
                           return (
-                            (t.next = 67), regeneratorRuntime.awrap(this.getCustomCss(i.privateCSS))
+                            (t.next = 67),
+                            regeneratorRuntime.awrap(this.getCustomCss(projectOptions.privateCSS))
                           );
                         t.next = 68;
                         break;
                       case 67:
-                        _argO.privateCSS = t.sent;
+                        editorConfig.privateCSS = t.sent;
                       case 68:
-                        if (i.customTabInfo)
+                        if (projectOptions.customTabInfo)
                           return (
-                            _argO.extra || (_argO.extra = {}),
-                            (e = i.customTabInfo),
+                            editorConfig.extra || (editorConfig.extra = {}),
+                            (e = projectOptions.customTabInfo),
                             (_regN = e.productCode),
                             (_regR = e.data),
                             (_regC = e.initValues),
@@ -16118,7 +16170,7 @@ function _classCallCheck(t, e) {
                             product: _regL,
                             templateList: _regF,
                             isDev: this.isDev,
-                            locale: i.locale || "ko",
+                            locale: projectOptions.locale || "ko",
                           }),
                           (_regD = new CustomTabManager(_regP)),
                           (customTabRawData = _regR),
@@ -16128,178 +16180,192 @@ function _classCallCheck(t, e) {
                         );
                       case 83:
                         (_regH = t.sent),
-                          (_argO.extra.custom_tab = _regH),
+                          (editorConfig.extra.custom_tab = _regH),
                           _regD.whetherUsePalette(_regC) &&
-                            (_argO.extra.palette = _regL.paletteInfo);
+                            (editorConfig.extra.palette = _regL.paletteInfo);
                       case 87:
-                        i.useTabless && (_argO.uiStyle = "tab-less,header-less"),
-                          i.hideCustomTab && (_argO.uiStyle = "tab-less,hide-custom"),
-                          i.setSpine &&
-                            (_argO.extra || (_argO.extra = {}),
-                            _argO.extra.override || (_argO.extra.override = {}),
-                            (_argO.extra.override.spine_mm = i.setSpine)),
-                          i.documentSizeInfo &&
-                            (_argO.extra || (_argO.extra = {}),
-                            (_regV = i.documentSizeInfo),
+                        projectOptions.useTabless &&
+                          (editorConfig.uiStyle = "tab-less,header-less"),
+                          projectOptions.hideCustomTab &&
+                            (editorConfig.uiStyle = "tab-less,hide-custom"),
+                          projectOptions.setSpine &&
+                            (editorConfig.extra || (editorConfig.extra = {}),
+                            editorConfig.extra.override || (editorConfig.extra.override = {}),
+                            (editorConfig.extra.override.spine_mm = projectOptions.setSpine)),
+                          projectOptions.documentSizeInfo &&
+                            (editorConfig.extra || (editorConfig.extra = {}),
+                            (_regV = projectOptions.documentSizeInfo),
                             (_regG = _regV.width),
                             (_ = _regV.height),
                             (y = _regV.round),
-                            (_argO.extra.sizing = {
+                            (editorConfig.extra.sizing = {
                               width_mm: _regG,
                               height_mm: _,
                             }),
-                            y && (_argO.extra.sizing.round_mm = y)),
-                          i.setDefaultSelectKey &&
-                            (_argO.ddpBlock
-                              ? (_argO.ddpBlock = ddpBlockBuilder(
+                            y && (editorConfig.extra.sizing.round_mm = y)),
+                          projectOptions.setDefaultSelectKey &&
+                            (editorConfig.ddpBlock
+                              ? (editorConfig.ddpBlock = ddpBlockBuilder(
                                   [
                                     {
-                                      setPageAttribute: i.setDefaultSelectKey,
+                                      setPageAttribute: projectOptions.setDefaultSelectKey,
                                     },
                                   ],
-                                  _argO.ddpBlock.commands
+                                  editorConfig.ddpBlock.commands
                                 ))
-                              : (_argO.ddpBlock = ddpBlockBuilder([
+                              : (editorConfig.ddpBlock = ddpBlockBuilder([
                                   {
-                                    setPageAttribute: i.setDefaultSelectKey,
+                                    setPageAttribute: projectOptions.setDefaultSelectKey,
                                   },
                                 ]))),
-                          i.minItemSize &&
-                            (_argO.extra || (_argO.extra = {}),
-                            _argO.extra.override || (_argO.extra.override = {}),
-                            (_argO.extra.override.min_item_mm = i.minItemSize)),
-                          i.tabControl &&
-                            (_argO.extra || (_argO.extra = {}),
-                            _argO.extra.override || (_argO.extra.override = {}),
-                            (_regM = Object.keys(i.tabControl).map(function (t) {
+                          projectOptions.minItemSize &&
+                            (editorConfig.extra || (editorConfig.extra = {}),
+                            editorConfig.extra.override || (editorConfig.extra.override = {}),
+                            (editorConfig.extra.override.min_item_mm = projectOptions.minItemSize)),
+                          projectOptions.tabControl &&
+                            (editorConfig.extra || (editorConfig.extra = {}),
+                            editorConfig.extra.override || (editorConfig.extra.override = {}),
+                            (_regM = Object.keys(projectOptions.tabControl).map(function (t) {
                               return {
                                 type: t,
-                                value: i.tabControl[t],
+                                value: projectOptions.tabControl[t],
                               };
                             })),
-                            (_argO.extra.override.sizeOption = {
+                            (editorConfig.extra.override.sizeOption = {
                               tabControls: _regM,
                             })),
-                          i.changeLayer &&
-                            (_argO.ddpBlock
-                              ? (_argO.ddpBlock = ddpBlockBuilder(
+                          projectOptions.changeLayer &&
+                            (editorConfig.ddpBlock
+                              ? (editorConfig.ddpBlock = ddpBlockBuilder(
                                   [
                                     {
-                                      setPostLayer: i.changeLayer,
+                                      setPostLayer: projectOptions.changeLayer,
                                     },
                                   ],
-                                  _argO.ddpBlock.commands
+                                  editorConfig.ddpBlock.commands
                                 ))
-                              : (_argO.ddpBlock = ddpBlockBuilder([
+                              : (editorConfig.ddpBlock = ddpBlockBuilder([
                                   {
-                                    setPostLayer: i.changeLayer,
+                                    setPostLayer: projectOptions.changeLayer,
                                   },
                                 ])));
                       case 95:
                         return (
-                          (_regB = function (t) {
-                            var _valN = {
-                              parent_element: document.querySelector(_argO.selector),
-                              prjid: t || _argO.projectId,
-                              run_mode: _argO.hideToolbar ? "passive" : "standard",
-                              edit_mode: _argO.showSetting ? "design" : "standard",
-                              ddp_block: _argO.ddpBlock || "",
-                              max_page: _argO.maxPage,
-                              min_page: _argO.minPage,
-                              max_order: _argO.maxOrder,
-                              force_plugin: _argO.testPlugin,
-                              resapi_param: _argO.resapiParam,
-                              private_css: _argO.privateCSS || "",
+                          (launchOpenProject = function (t) {
+                            var n = {
+                              parent_element: document.querySelector(editorConfig.selector),
+                              prjid: t || editorConfig.projectId,
+                              run_mode: editorConfig.hideToolbar ? "passive" : "standard",
+                              edit_mode: editorConfig.showSetting ? "design" : "standard",
+                              ddp_block: editorConfig.ddpBlock || "",
+                              max_page: editorConfig.maxPage,
+                              min_page: editorConfig.minPage,
+                              max_order: editorConfig.maxOrder,
+                              force_plugin: editorConfig.testPlugin,
+                              resapi_param: editorConfig.resapiParam,
+                              private_css: editorConfig.privateCSS || "",
                               partner: "redp",
-                              mobile: _argO.isMobile,
-                              ui_locale: _argO.locale,
-                              options: _argO.extra,
-                              video_frames: _argO.useVideoFrame,
-                              ui_style: _argO.uiStyle,
+                              mobile: editorConfig.isMobile,
+                              ui_locale: editorConfig.locale,
+                              options: editorConfig.extra,
+                              video_frames: editorConfig.useVideoFrame,
+                              ui_style: editorConfig.uiStyle,
                             };
-                            i &&
-                              null !== i.unableLayers &&
-                              void 0 !== i.unableLayers &&
-                              (i.unableLayers.constructor === String().constructor
-                                ? (_valN.unlayers = i.unableLayers)
-                                : i.unableLayers.constructor === Array().constructor &&
-                                  (_valN.unlayers = i.unableLayers.join(","))),
-                              i && i.resourceParams && (_valN.resapi_param = _argO.resourceParams),
-                              i &&
-                                i.lockGroupPageCount &&
-                                ((_valN.no_edit_group = i.lockGroupPageCount),
-                                (_valN.edit_lock = "edit-group")),
-                              i &&
-                                i.disableMasterColorPicker &&
-                                ((_valN.no_edit_group = i.lockGroupPageCount),
-                                (_valN.edit_lock = _valN.edit_lock
-                                  ? _valN.edit_lock + ",set-strict-color"
+                            projectOptions &&
+                              null !== projectOptions.unableLayers &&
+                              void 0 !== projectOptions.unableLayers &&
+                              (projectOptions.unableLayers.constructor === String().constructor
+                                ? (n.unlayers = projectOptions.unableLayers)
+                                : projectOptions.unableLayers.constructor === Array().constructor &&
+                                  (n.unlayers = projectOptions.unableLayers.join(","))),
+                              projectOptions &&
+                                projectOptions.resourceParams &&
+                                (n.resapi_param = editorConfig.resourceParams),
+                              projectOptions &&
+                                projectOptions.lockGroupPageCount &&
+                                ((n.no_edit_group = projectOptions.lockGroupPageCount),
+                                (n.edit_lock = "edit-group")),
+                              projectOptions &&
+                                projectOptions.disableMasterColorPicker &&
+                                ((n.no_edit_group = projectOptions.lockGroupPageCount),
+                                (n.edit_lock = n.edit_lock
+                                  ? n.edit_lock + ",set-strict-color"
                                   : "set-strict-color")),
-                              i &&
-                                i.disableFontPreview &&
-                                (_valN.edit_lock = _valN.edit_lock
-                                  ? _valN.edit_lock + ",no-font-preview"
+                              projectOptions &&
+                                projectOptions.disableFontPreview &&
+                                (n.edit_lock = n.edit_lock
+                                  ? n.edit_lock + ",no-font-preview"
                                   : "no-font-preview"),
-                              i &&
-                                i.disableSelection &&
-                                (_valN.edit_lock = _valN.edit_lock
-                                  ? _valN.edit_lock + ",no-selection"
+                              projectOptions &&
+                                projectOptions.disableSelection &&
+                                (n.edit_lock = n.edit_lock
+                                  ? n.edit_lock + ",no-selection"
                                   : "no-selection"),
-                              i &&
-                                i.disableTapeOptions &&
-                                (_valN.edit_lock = _valN.edit_lock
-                                  ? _valN.edit_lock + ",tape-option"
+                              projectOptions &&
+                                projectOptions.disableTapeOptions &&
+                                (n.edit_lock = n.edit_lock
+                                  ? n.edit_lock + ",tape-option"
                                   : "tape-option"),
-                              i && i.disableAllOption && (_valN.edit_lock = "lock-all"),
-                              i && i.clearSource && (_valN.clear_src = i.clearSource),
-                              i && i.viewerMode && (_valN.no_update = i.viewerMode),
-                              sessionStorageManager("projectId", _argO.projectId),
-                              sessionStorageManager("edicusConfig", _argO),
-                              sessionStorageManager("targetElement", _argO.selector);
+                              projectOptions &&
+                                projectOptions.disableAllOption &&
+                                (n.edit_lock = "lock-all"),
+                              projectOptions &&
+                                projectOptions.clearSource &&
+                                (n.clear_src = projectOptions.clearSource),
+                              projectOptions &&
+                                projectOptions.viewerMode &&
+                                (n.no_update = projectOptions.viewerMode),
+                              sessionStorageManager("projectId", editorConfig.projectId),
+                              sessionStorageManager("edicusConfig", editorConfig),
+                              sessionStorageManager("targetElement", editorConfig.selector);
                             var e = getAuthState();
                             if (!e.user) return !1;
-                            var editorEventHandler = _regA.editorEventHandler;
-                            _argO.promotionInfo &&
-                              (_valN.options || (_valN.options = {}),
-                              _argO.promotionInfo.useExternal
-                                ? (_valN.options.promo = {
+                            var editorEventHandler = self.editorEventHandler;
+                            editorConfig.promotionInfo &&
+                              (n.options || (n.options = {}),
+                              editorConfig.promotionInfo.useExternal
+                                ? (n.options.promo = {
                                     type: "external",
                                   })
-                                : (_valN.options.promo = {
-                                    preferredWidth: _argO.promotionInfo.width,
-                                    preferredHeight: _argO.promotionInfo.height,
-                                    url: _argO.promotionInfo.url,
-                                    opened: _argO.promotionInfo.autoShow,
+                                : (n.options.promo = {
+                                    preferredWidth: editorConfig.promotionInfo.width,
+                                    preferredHeight: editorConfig.promotionInfo.height,
+                                    url: editorConfig.promotionInfo.url,
+                                    opened: editorConfig.promotionInfo.autoShow,
                                   })),
                               e.token
-                                ? ((_valN.token = e.token),
-                                  (_valN.div = sessionStorageManager("division")),
-                                  (_valN.lang = sessionStorageManager("lang")),
-                                  (_valN.plugin_param = JSON.stringify(
+                                ? ((n.token = e.token),
+                                  (n.div = sessionStorageManager("division")),
+                                  (n.lang = sessionStorageManager("lang")),
+                                  (n.plugin_param = JSON.stringify(
                                     buildPluginParams(
                                       sessionStorageManager("companyCode"),
-                                      i && i.pluginCustomData
+                                      projectOptions && projectOptions.pluginCustomData
                                     )
                                   )),
-                                  i && i.locale && (_valN.lang = i.locale),
-                                  editorBridge.open_project(_valN, editorEventHandler))
+                                  projectOptions &&
+                                    projectOptions.locale &&
+                                    (n.lang = projectOptions.locale),
+                                  editorBridge.open_project(n, editorEventHandler))
                                 : apiClientInstance
                                     .call("issueUserToken")
                                     .then(function (t) {
-                                      (_valN.token = t.token),
+                                      (n.token = t.token),
                                         t.division &&
                                           (sessionStorageManager("division", t.division),
-                                          (_valN.div = t.division)),
+                                          (n.div = t.division)),
                                         t.lang &&
                                           (sessionStorageManager("lang", t.lang),
-                                          (_valN.lang = t.lang),
-                                          i && i.locale && (_valN.lang = i.locale)),
+                                          (n.lang = t.lang),
+                                          projectOptions &&
+                                            projectOptions.locale &&
+                                            (n.lang = projectOptions.locale)),
                                         t.companyCode &&
                                           (sessionStorageManager("companyCode", t.companyCode),
-                                          (_valN.plugin_param = JSON.stringify(
+                                          (n.plugin_param = JSON.stringify(
                                             buildPluginParams(
                                               t.companyCode,
-                                              i && i.pluginCustomData
+                                              projectOptions && projectOptions.pluginCustomData
                                             )
                                           )));
                                       var e = {
@@ -16307,7 +16373,7 @@ function _classCallCheck(t, e) {
                                         expiredAt: new Date().getTime(),
                                       };
                                       sessionStorageManager("editorToken", e),
-                                        editorBridge.open_project(_valN, editorEventHandler);
+                                        editorBridge.open_project(n, editorEventHandler);
                                     })
                                     .catch(function (t) {
                                       onErrorCallback &&
@@ -16316,18 +16382,18 @@ function _classCallCheck(t, e) {
                                         console.error(t);
                                     });
                           }),
-                          !0 === _argO.clone
-                            ? ((x = {}),
-                              i &&
-                                i.projectOwnerId &&
-                                ((x.projectOwnerId = i.projectOwnerId),
-                                (sdkState.projectOwnerId = i.projectOwnerId)),
-                              this.cloneProject(_argO.projectId, x)
+                          !0 === editorConfig.clone
+                            ? ((cloneOptions = {}),
+                              projectOptions &&
+                                projectOptions.projectOwnerId &&
+                                ((cloneOptions.projectOwnerId = projectOptions.projectOwnerId),
+                                (sdkState.projectOwnerId = projectOptions.projectOwnerId)),
+                              this.cloneProject(editorConfig.projectId, cloneOptions)
                                 .then(function (t) {
                                   (sdkState.clone = !0),
-                                    (sdkState.originProjectId = _argO.projectId),
-                                    (_argO.projectId = t),
-                                    _regB(t);
+                                    (sdkState.originProjectId = editorConfig.projectId),
+                                    (editorConfig.projectId = t),
+                                    launchOpenProject(t);
                                 })
                                 .catch(function (t) {
                                   onErrorCallback &&
@@ -16337,7 +16403,7 @@ function _classCallCheck(t, e) {
                                 }))
                             : ((sdkState.clone = !1),
                               (sdkState.originProjectId = null),
-                              _regB(_argO.projectId)),
+                              launchOpenProject(editorConfig.projectId)),
                           t.finish(21)
                         );
                       case 98:
@@ -16363,7 +16429,7 @@ function _classCallCheck(t, e) {
             value: function (_argO, i) {
               var _regA,
                 e,
-                _valN = 2 < arguments.length && void 0 !== arguments[2] ? arguments[2] : 0;
+                n = 2 < arguments.length && void 0 !== arguments[2] ? arguments[2] : 0;
               return regeneratorRuntime.async(
                 function (t) {
                   for (;;)
@@ -16385,10 +16451,10 @@ function _classCallCheck(t, e) {
                           t.next = 11;
                           break;
                         }
-                        if (_valN < 4)
+                        if (n < 4)
                           return (
                             setTimeout(function () {
-                              _regA.reformProject(_argO, i, _valN + 1);
+                              _regA.reformProject(_argO, i, n + 1);
                             }, 500),
                             t.abrupt("return", !1)
                           );
@@ -16463,7 +16529,7 @@ function _classCallCheck(t, e) {
                       case 39:
                         return (
                           (e = function (t) {
-                            var _valN2 = {
+                            var n = {
                               parent_element: document.querySelector(_argO.selector),
                               prjid: t || _argO.projectId,
                               ps_code: _argO.psCode,
@@ -16486,31 +16552,31 @@ function _classCallCheck(t, e) {
                               null !== i.unableLayers &&
                               void 0 !== i.unableLayers &&
                               (i.unableLayers.constructor === String().constructor
-                                ? (_valN2.unlayers = i.unableLayers)
+                                ? (n.unlayers = i.unableLayers)
                                 : i.unableLayers.constructor === Array().constructor &&
-                                  (_valN2.unlayers = i.unableLayers.join(","))),
-                              i && i.resourceParams && (_valN2.resapi_param = _argO.resourceParams),
+                                  (n.unlayers = i.unableLayers.join(","))),
+                              i && i.resourceParams && (n.resapi_param = _argO.resourceParams),
                               i &&
                                 i.lockGroupPageCount &&
-                                ((_valN2.no_edit_group = i.lockGroupPageCount),
-                                (_valN2.edit_lock = "edit-group")),
+                                ((n.no_edit_group = i.lockGroupPageCount),
+                                (n.edit_lock = "edit-group")),
                               i &&
                                 i.disableMasterColorPicker &&
-                                ((_valN2.no_edit_group = i.lockGroupPageCount),
-                                (_valN2.edit_lock = _valN2.edit_lock
-                                  ? _valN2.edit_lock + ",set-strict-color"
+                                ((n.no_edit_group = i.lockGroupPageCount),
+                                (n.edit_lock = n.edit_lock
+                                  ? n.edit_lock + ",set-strict-color"
                                   : "set-strict-color")),
                               i &&
                                 i.disableFontPreview &&
-                                (_valN2.edit_lock = _valN2.edit_lock
-                                  ? _valN2.edit_lock + ",no-font-preview"
+                                (n.edit_lock = n.edit_lock
+                                  ? n.edit_lock + ",no-font-preview"
                                   : "no-font-preview"),
                               i &&
                                 i.disableSelection &&
-                                (_valN2.edit_lock = _valN2.edit_lock
-                                  ? _valN2.edit_lock + ",no-selection"
+                                (n.edit_lock = n.edit_lock
+                                  ? n.edit_lock + ",no-selection"
                                   : "no-selection"),
-                              i && i.clearSource && (_valN2.clear_src = i.clearSource),
+                              i && i.clearSource && (n.clear_src = i.clearSource),
                               sessionStorageManager("projectId", _argO.projectId),
                               sessionStorageManager("edicusConfig", _argO),
                               sessionStorageManager("targetElement", _argO.selector);
@@ -16518,37 +16584,37 @@ function _classCallCheck(t, e) {
                             if (!e.user) return !1;
                             var editorEventHandler = _regA.editorEventHandler;
                             _argO.promotionInfo &&
-                              (_valN2.options || (_valN2.options = {}),
-                              (_valN2.options.promo = {
+                              (n.options || (n.options = {}),
+                              (n.options.promo = {
                                 preferredWidth: _argO.promotionInfo.width,
                                 preferredHeight: _argO.promotionInfo.height,
                                 url: _argO.promotionInfo.url,
                                 opened: _argO.promotionInfo.autoShow,
                               })),
                               e.token
-                                ? ((_valN2.token = e.token),
-                                  (_valN2.div = sessionStorageManager("division")),
-                                  (_valN2.lang = sessionStorageManager("lang")),
-                                  (_valN2.plugin_param = JSON.stringify(
+                                ? ((n.token = e.token),
+                                  (n.div = sessionStorageManager("division")),
+                                  (n.lang = sessionStorageManager("lang")),
+                                  (n.plugin_param = JSON.stringify(
                                     buildPluginParams(
                                       sessionStorageManager("companyCode"),
                                       i && i.pluginCustomData
                                     )
                                   )),
-                                  editorBridge.reform_project(_valN2, editorEventHandler))
+                                  editorBridge.reform_project(n, editorEventHandler))
                                 : apiClientInstance
                                     .call("issueUserToken")
                                     .then(function (t) {
-                                      (_valN2.token = t.token),
+                                      (n.token = t.token),
                                         t.division &&
                                           (sessionStorageManager("division", t.division),
-                                          (_valN2.div = t.division)),
+                                          (n.div = t.division)),
                                         t.lang &&
                                           (sessionStorageManager("lang", t.lang),
-                                          (_valN2.lang = t.lang)),
+                                          (n.lang = t.lang)),
                                         t.companyCode &&
                                           (sessionStorageManager("companyCode", t.companyCode),
-                                          (_valN2.plugin_param = JSON.stringify(
+                                          (n.plugin_param = JSON.stringify(
                                             buildPluginParams(
                                               t.companyCode,
                                               i && i.pluginCustomData
@@ -16559,7 +16625,7 @@ function _classCallCheck(t, e) {
                                         expiredAt: new Date().getTime(),
                                       };
                                       sessionStorageManager("editorToken", e),
-                                        editorBridge.reform_project(_valN2, editorEventHandler);
+                                        editorBridge.reform_project(n, editorEventHandler);
                                     })
                                     .catch(function (t) {
                                       onErrorCallback &&
@@ -16744,7 +16810,7 @@ function _classCallCheck(t, e) {
                   ((t.code = "003"), onErrorCallback(t)),
                   console.log(t);
               } finally {
-                var _valR = {
+                var r = {
                     parent_element: document.querySelector(t.selector),
                     prjid: t.projectId,
                     npage: t.npage || 1,
@@ -16755,18 +16821,17 @@ function _classCallCheck(t, e) {
                   e = getAuthState();
                 if (!e.user) return !1;
                 e.token
-                  ? ((_valR.token = e.token),
-                    editorBridge.open_tnview(_valR, this.editorEventHandler))
+                  ? ((r.token = e.token), editorBridge.open_tnview(r, this.editorEventHandler))
                   : apiClientInstance
                       .call("issueUserToken")
                       .then(function (t) {
-                        _valR.token = t.token;
+                        r.token = t.token;
                         var e = {
                           token: t.token,
                           expiredAt: new Date().getTime(),
                         };
                         sessionStorageManager("editorToken", e),
-                          editorBridge.open_tnview(_valR, self2.editorEventHandler);
+                          editorBridge.open_tnview(r, self2.editorEventHandler);
                       })
                       .catch(function (t) {
                         onErrorCallback &&
@@ -16824,8 +16889,8 @@ function _classCallCheck(t, e) {
              * @param {string} e - 새 템플릿 URI
              */
             key: "changeTemplate",
-            value: function (t, e) {
-              editorBridge.change_template(t, e);
+            value: function (productCode, templateUri) {
+              editorBridge.change_template(productCode, templateUri);
             },
           },
           {
@@ -16841,9 +16906,9 @@ function _classCallCheck(t, e) {
              */
             key: "changeLayout",
             value: function (t, e) {
-              var _valN = 2 < arguments.length && void 0 !== arguments[2] ? arguments[2] : {},
-                _valR = arguments[3],
-                _valO = {
+              var n = 2 < arguments.length && void 0 !== arguments[2] ? arguments[2] : {},
+                arguments3 = arguments[3],
+                executeDdpBlockPayload = {
                   ddp_block: {
                     commands: [
                       {
@@ -16855,10 +16920,10 @@ function _classCallCheck(t, e) {
                         data: {
                           templateUri: t,
                           indexInTemplate: e,
-                          changeBackgroundIfAvailable: _valN.changeBackground || !1,
-                          changeOverlay: !1 !== _valN.changeOverlay,
-                          transferCellContent: !1 !== _valN.transferCellContent,
-                          transferTextContent: !1 !== _valN.transferTextContent,
+                          changeBackgroundIfAvailable: n.changeBackground || !1,
+                          changeOverlay: !1 !== n.changeOverlay,
+                          transferCellContent: !1 !== n.transferCellContent,
+                          transferTextContent: !1 !== n.transferTextContent,
                           userItemTypesToPreserve: ["textbox"],
                         },
                       },
@@ -16866,8 +16931,10 @@ function _classCallCheck(t, e) {
                   },
                 };
               return (
-                _valR && _valR.constructor === Function && (onDdpExecuteCompleteCallback = _valR),
-                editorBridge.post_to_editor("execute-ddp-block", _valO),
+                arguments3 &&
+                  arguments3.constructor === Function &&
+                  (onDdpExecuteCompleteCallback = arguments3),
+                editorBridge.post_to_editor("execute-ddp-block", executeDdpBlockPayload),
                 this
               );
             },
@@ -16881,7 +16948,7 @@ function _classCallCheck(t, e) {
              */
             key: "copyPageContent",
             value: function (t, e) {
-              var _valN = {
+              var n = {
                 commands: [
                   {
                     action: "copy-page-content",
@@ -16897,7 +16964,7 @@ function _classCallCheck(t, e) {
               };
               return (
                 editorBridge.post_to_editor("execute-ddp-block", {
-                  ddp_block: _valN,
+                  ddp_block: n,
                 }),
                 this
               );
@@ -17119,10 +17186,13 @@ function _classCallCheck(t, e) {
                                   expiredAt: new Date().getTime(),
                                 };
                                 sessionStorageManager("editorToken", e);
-                                var _valN = {
+                                var sendUserTokenPayload = {
                                   token: t.token,
                                 };
-                                editorBridge.post_to_editor("send-user-token", _valN);
+                                editorBridge.post_to_editor(
+                                  "send-user-token",
+                                  sendUserTokenPayload
+                                );
                               })
                               .catch(function (t) {
                                 onErrorCallback &&
@@ -17278,26 +17348,24 @@ function _classCallCheck(t, e) {
              * @param {Function} r - 완료 콜백
              */
             key: "remoteEditorBulk",
-            value: function (t, e, _paramN, _paramR) {
-              var _valO = {
+            value: function (t, e, n, r) {
+              var executeDdpBlockPayload = {
                 ddp_block: ddpBlockBuilder(t),
               };
-              void 0 !== e && e.constructor === Function && void 0 === _paramR
-                ? (_paramR = e)
-                : e && e.constructor === Object && (_valO.history_label = e),
-                void 0 !== _paramN && _paramN.constructor === Function && void 0 === _paramR
-                  ? (_paramR = _paramN)
-                  : _paramN && _paramN.constructor === Boolean && (_valO.reset_history = _paramN),
-                _paramR &&
-                  _paramR.constructor === Function &&
-                  (onDdpExecuteCompleteCallback = _paramR),
-                _valO.ddp_block.commands.some(function (t) {
+              void 0 !== e && e.constructor === Function && void 0 === r
+                ? (r = e)
+                : e && e.constructor === Object && (executeDdpBlockPayload.history_label = e),
+                void 0 !== n && n.constructor === Function && void 0 === r
+                  ? (r = n)
+                  : n && n.constructor === Boolean && (executeDdpBlockPayload.reset_history = n),
+                r && r.constructor === Function && (onDdpExecuteCompleteCallback = r),
+                executeDdpBlockPayload.ddp_block.commands.some(function (t) {
                   return "set-text-style" === t.action
                     ? t.data.text || "" === t.data.text
                     : "set-item-src" === t.action && t.data.src && t.data.src.includes("color");
-                }) && (_valO.show_progress = !1),
-                0 < _valO.ddp_block.commands.length &&
-                  editorBridge.post_to_editor("execute-ddp-block", _valO);
+                }) && (executeDdpBlockPayload.show_progress = !1),
+                0 < executeDdpBlockPayload.ddp_block.commands.length &&
+                  editorBridge.post_to_editor("execute-ddp-block", executeDdpBlockPayload);
             },
           },
           {
@@ -17307,10 +17375,10 @@ function _classCallCheck(t, e) {
              * @returns {null}
              */
             key: "setUserId",
-            value: function (t) {
-              var self2 = this;
+            value: function (userId) {
+              var self = this;
               return (
-                sessionStorageManager("userId", t),
+                sessionStorageManager("userId", userId),
                 (this.isReady = !1),
                 apiClientInstance
                   .call("issueUserToken")
@@ -17322,7 +17390,7 @@ function _classCallCheck(t, e) {
                       token: t.token,
                       expiredAt: new Date().getTime(),
                     };
-                    sessionStorageManager("editorToken", e), (self2.isReady = !0);
+                    sessionStorageManager("editorToken", e), (self.isReady = !0);
                   })
                   .catch(function (t) {
                     onErrorCallback &&
@@ -17342,23 +17410,23 @@ function _classCallCheck(t, e) {
              * @returns {Promise<Object>}
              */
             key: "getProjectList",
-            value: function (_paramR) {
+            value: function (r) {
               this.isReady ||
                 alert(
                   "UserID Must be Set before use this function. Please call setUserId or re-init with userId."
                 );
               var t = sessionStorageManager("userId");
-              return new Promise(function (e, _paramN) {
+              return new Promise(function (e, n) {
                 apiClientInstance
                   .call("projectList", t)
                   .then(function (t) {
-                    _paramR && "function" == typeof _paramR ? _paramR(null, t) : e(t);
+                    r && "function" == typeof r ? r(null, t) : e(t);
                   })
                   .catch(function (t) {
                     onErrorCallback &&
                       onErrorCallback.constructor === Function &&
                       onErrorCallback(t),
-                      _paramR && "function" == typeof _paramR ? _paramR(t) : _paramN(t);
+                      r && "function" == typeof r ? r(t) : n(t);
                   });
               });
             },
@@ -17372,11 +17440,11 @@ function _classCallCheck(t, e) {
              * @returns {Promise<Object>}
              */
             key: "getProductInfo",
-            value: function (_paramR, _paramO) {
-              return new Promise(function (_paramN, e) {
+            value: function (r, o) {
+              return new Promise(function (n, e) {
                 sessionStorageManager("division")
                   ? apiClientInstance
-                      .call("getProductInfo", _paramR)
+                      .call("getProductInfo", r)
                       .then(function (t) {
                         var e = t.product;
                         (e.userData = JSON.parse(e.userData || "{}")),
@@ -17393,13 +17461,13 @@ function _classCallCheck(t, e) {
                               : (e.userData =
                                   e.userData.productCustomData[sessionStorageManager("division")])
                             : (e.userData = null),
-                          _paramO && "function" == typeof _paramO ? _paramO(null, e) : _paramN(e);
+                          o && "function" == typeof o ? o(null, e) : n(e);
                       })
                       .catch(function (t) {
                         onErrorCallback &&
                           onErrorCallback.constructor === Function &&
                           onErrorCallback(t),
-                          _paramO && "function" == typeof _paramO ? _paramO(t) : e(t);
+                          o && "function" == typeof o ? o(t) : e(t);
                       })
                   : apiClientInstance
                       .call("issueUserToken")
@@ -17411,7 +17479,7 @@ function _classCallCheck(t, e) {
                           expiredAt: new Date().getTime(),
                         };
                         sessionStorageManager("editorToken", e),
-                          apiClientInstance.call("getProductInfo", _paramR).then(function (t) {
+                          apiClientInstance.call("getProductInfo", r).then(function (t) {
                             var e = t.product;
                             (e.userData = JSON.parse(e.userData || "{}")),
                               e.userData &&
@@ -17420,16 +17488,14 @@ function _classCallCheck(t, e) {
                                 ? (e.userData =
                                     e.userData.productCustomData[sessionStorageManager("division")])
                                 : (e.userData = null),
-                              _paramO && "function" == typeof _paramO
-                                ? _paramO(null, e)
-                                : _paramN(e);
+                              o && "function" == typeof o ? o(null, e) : n(e);
                           });
                       })
                       .catch(function (t) {
                         onErrorCallback &&
                           onErrorCallback.constructor === Function &&
                           onErrorCallback(t),
-                          _paramO && "function" == typeof _paramO ? _paramO(t) : e(t);
+                          o && "function" == typeof o ? o(t) : e(t);
                       });
               });
             },
@@ -17442,20 +17508,20 @@ function _classCallCheck(t, e) {
              * @returns {Promise<Object>}
              */
             key: "getProjectThumbnails",
-            value: function (t, _paramR) {
+            value: function (t, r) {
               return this.isReady
-                ? (null !== t && "function" == typeof t && ((_paramR = t), (t = null)),
-                  new Promise(function (e, _paramN) {
+                ? (null !== t && "function" == typeof t && ((r = t), (t = null)),
+                  new Promise(function (e, n) {
                     apiClientInstance
                       .call("projectThumbnail", t)
                       .then(function (t) {
-                        _paramR && "function" == typeof _paramR ? _paramR(null, t) : e(t);
+                        r && "function" == typeof r ? r(null, t) : e(t);
                       })
                       .catch(function (t) {
                         onErrorCallback &&
                           onErrorCallback.constructor === Function &&
                           onErrorCallback(t),
-                          _paramR && "function" == typeof _paramR ? _paramR(t) : _paramN(t);
+                          r && "function" == typeof r ? r(t) : n(t);
                       });
                   }))
                 : alert(
@@ -17471,37 +17537,37 @@ function _classCallCheck(t, e) {
              * @returns {Promise<Object>}
              */
             key: "getImposeCount",
-            value: function (t, _paramR) {
+            value: function (t, r) {
               if (!this.isReady)
                 return alert(
                   "UserID Must be Set before use this function. Please call setUserId or re-init with userId."
                 );
               var e = t.methods,
-                _valN = void 0 === e ? ["contact-point"] : e,
+                n = void 0 === e ? ["contact-point"] : e,
                 sourceSize = t.sourceSize,
                 i = t.imposeSize,
                 rotatable = t.rotatable,
-                _valC = void 0 === rotatable || rotatable,
+                c = void 0 === rotatable || rotatable,
                 border = t.border,
-                _valU = void 0 === border ? 0 : border,
-                _valL = {
-                  methods: _valN,
+                u = void 0 === border ? 0 : border,
+                l = {
+                  methods: n,
                   srcSize_mm: _extends({}, sourceSize),
                   imposeSize_mm: _extends({}, i),
-                  rotatable: _valC,
-                  border: _valU,
+                  rotatable: c,
+                  border: u,
                 };
-              return new Promise(function (e, _paramN) {
+              return new Promise(function (e, n) {
                 apiClientInstance
-                  .call("getImposeCount", null, _valL)
+                  .call("getImposeCount", null, l)
                   .then(function (t) {
-                    _paramR && "function" == typeof _paramR ? _paramR(null, t) : e(t);
+                    r && "function" == typeof r ? r(null, t) : e(t);
                   })
                   .catch(function (t) {
                     onErrorCallback &&
                       onErrorCallback.constructor === Function &&
                       onErrorCallback(t),
-                      _paramR && "function" == typeof _paramR ? _paramR(t) : _paramN(t);
+                      r && "function" == typeof r ? r(t) : n(t);
                   });
               });
             },
@@ -17514,15 +17580,15 @@ function _classCallCheck(t, e) {
              * @returns {Promise<string>} 복제된 프로젝트 ID
              */
             key: "cloneProject",
-            value: function (t, _paramR) {
+            value: function (t, r) {
               return (
                 this.isReady ||
                   alert(
                     "UserID Must be Set before use this function. Please call setUserId or re-init with userId."
                   ),
-                new Promise(function (e, _paramN) {
+                new Promise(function (e, n) {
                   apiClientInstance
-                    .call("cloneProject", t, _paramR)
+                    .call("cloneProject", t, r)
                     .then(function (t) {
                       e(t.project_id);
                     })
@@ -17530,7 +17596,7 @@ function _classCallCheck(t, e) {
                       onErrorCallback &&
                         onErrorCallback.constructor === Function &&
                         onErrorCallback(t),
-                        _paramN(t);
+                        n(t);
                     });
                 })
               );
@@ -17546,7 +17612,7 @@ function _classCallCheck(t, e) {
              * @returns {Promise<Object>}
              */
             key: "prepareOrder",
-            value: function (t, _paramR, _paramO) {
+            value: function (projectId, orderParams, legacyCallback) {
               if (
                 (console.warn(
                   "[Deprecated] This API will be deprecated, should be call on Server."
@@ -17556,43 +17622,51 @@ function _classCallCheck(t, e) {
                 return alert(
                   "UserID Must be Set before use this function. Please call setUserId or re-init with userId."
                 );
-              if (null === t && "string" != typeof t) return alert("projectId must be string");
+              if (null === projectId && "string" != typeof projectId)
+                return alert("projectId must be string");
               try {
-                validateRequiredParams(["order_count", "total_price"], _paramR);
+                validateRequiredParams(["order_count", "total_price"], orderParams);
               } catch (t) {
                 console.error(t);
               }
-              var i = JSON.parse(sessionStorageManager("edicusConfig") || "{}");
-              return new Promise(function (e, _paramN) {
+              var savedEditorConfig = JSON.parse(sessionStorageManager("edicusConfig") || "{}");
+              return new Promise(function (e, n) {
                 apiClientInstance
-                  .call("tentativeOrder", t, _paramR)
+                  .call("tentativeOrder", projectId, orderParams)
                   .then(function (t) {
-                    _paramO && "function" == typeof _paramO ? _paramO(null, t) : e(t),
-                      apiClientInstance.updateTemplateCount(i.template_uri, "order");
+                    legacyCallback && "function" == typeof legacyCallback
+                      ? legacyCallback(null, t)
+                      : e(t),
+                      apiClientInstance.updateTemplateCount(
+                        savedEditorConfig.template_uri,
+                        "order"
+                      );
                   })
                   .catch(function (t) {
                     onErrorCallback &&
                       onErrorCallback.constructor === Function &&
                       onErrorCallback(t),
-                      _paramO && "function" == typeof _paramO ? _paramO(t) : _paramN(t);
+                      legacyCallback && "function" == typeof legacyCallback
+                        ? legacyCallback(t)
+                        : n(t);
                   });
               });
             },
           },
           {
             key: "getProductList",
-            value: function (_paramR) {
-              return new Promise(function (e, _paramN) {
+            value: function (r) {
+              return new Promise(function (e, n) {
                 apiClientInstance
                   .getProductList()
                   .then(function (t) {
-                    _paramR && "function" == typeof _paramR ? _paramR(null, t) : e(t);
+                    r && "function" == typeof r ? r(null, t) : e(t);
                   })
                   .catch(function (t) {
                     onErrorCallback &&
                       onErrorCallback.constructor === Function &&
                       onErrorCallback(t),
-                      _paramR && "function" == typeof _paramR ? _paramR(t) : _paramN(t);
+                      r && "function" == typeof r ? r(t) : n(t);
                   });
               });
             },
@@ -17686,7 +17760,7 @@ function _classCallCheck(t, e) {
                       case 28:
                         return t.abrupt(
                           "return",
-                          new Promise(function (e, _paramN) {
+                          new Promise(function (e, n) {
                             apiClientInstance
                               .getTemplateList(_argR, i)
                               .then(function (t) {
@@ -17696,7 +17770,7 @@ function _classCallCheck(t, e) {
                                 onErrorCallback &&
                                   onErrorCallback.constructor === Function &&
                                   onErrorCallback(t),
-                                  _argO && "function" == typeof _argO ? _argO(t) : _paramN(t);
+                                  _argO && "function" == typeof _argO ? _argO(t) : n(t);
                               });
                           })
                         );
@@ -17795,7 +17869,7 @@ function _classCallCheck(t, e) {
                       case 29:
                         return t.abrupt(
                           "return",
-                          new Promise(function (e, _paramN) {
+                          new Promise(function (e, n) {
                             apiClientInstance
                               .getResourceList(_argR, _argO, _regA)
                               .then(function (t) {
@@ -17805,7 +17879,7 @@ function _classCallCheck(t, e) {
                                 onErrorCallback &&
                                   onErrorCallback.constructor === Function &&
                                   onErrorCallback(t),
-                                  i && "function" == typeof i ? i(t) : _paramN(t);
+                                  i && "function" == typeof i ? i(t) : n(t);
                               });
                           })
                         );
@@ -17832,7 +17906,7 @@ function _classCallCheck(t, e) {
                       case 0:
                         return t.abrupt(
                           "return",
-                          new Promise(function (e, _paramN) {
+                          new Promise(function (e, n) {
                             apiClientInstance
                               .getResourceWithId(_argR)
                               .then(function (t) {
@@ -17842,7 +17916,7 @@ function _classCallCheck(t, e) {
                                 onErrorCallback &&
                                   onErrorCallback.constructor === Function &&
                                   onErrorCallback(t),
-                                  _argO && "function" == typeof _argO ? _argO(t) : _paramN(t);
+                                  _argO && "function" == typeof _argO ? _argO(t) : n(t);
                               });
                           })
                         );
@@ -17903,12 +17977,12 @@ function _classCallCheck(t, e) {
              */
             key: "save",
             value: function () {
-              var t = {
+              var saveCommand = {
                 type: "save",
               };
               (0 < arguments.length && void 0 !== arguments[0] ? arguments[0] : {})
-                .removeOutterItems && (t.remove_outter_item = !0),
-                editorBridge.post_to_editor("command", t);
+                .removeOutterItems && (saveCommand.remove_outter_item = !0),
+                editorBridge.post_to_editor("command", saveCommand);
             },
           },
           {
@@ -17918,18 +17992,18 @@ function _classCallCheck(t, e) {
              */
             key: "saveThenClose",
             value: function () {
-              var t = {
+              var saveThenCloseCommand = {
                 type: "save-then-close",
               };
               (0 < arguments.length && void 0 !== arguments[0] ? arguments[0] : {})
-                .removeOutterItems && (t.remove_outter_item = !0),
-                editorBridge.post_to_editor("command", t);
+                .removeOutterItems && (saveThenCloseCommand.remove_outter_item = !0),
+                editorBridge.post_to_editor("command", saveThenCloseCommand);
             },
           },
           {
             key: "setToken",
-            value: function (t) {
-              apiClientInstance.setToken(t);
+            value: function (newToken) {
+              apiClientInstance.setToken(newToken);
             },
           },
           {
@@ -17940,34 +18014,37 @@ function _classCallCheck(t, e) {
              * @returns {Promise<Object>} { can_order, doc_rev, message }
              */
             key: "checkOrderable",
-            value: function (e, _argN) {
-              var _regR;
+            value: function (projectId, legacyCallback) {
+              var orderableResult;
               return regeneratorRuntime.async(
                 function (t) {
                   for (;;)
                     switch ((t.prev = t.next)) {
                       case 0:
                         return (
-                          (_regR = null),
+                          (orderableResult = null),
                           (t.prev = 1),
                           validateRequiredParams(["projectId"], {
-                            projectId: e,
+                            projectId: projectId,
                           }),
                           (t.next = 5),
-                          regeneratorRuntime.awrap(apiClientInstance.call("isReadyToOrder", e))
+                          regeneratorRuntime.awrap(
+                            apiClientInstance.call("isReadyToOrder", projectId)
+                          )
                         );
                       case 5:
                         if (
-                          (null === (_regR = t.sent).doc_rev && (_regR.can_order = !1),
-                          !_argN || _argN.constructor !== Function)
+                          (null === (orderableResult = t.sent).doc_rev &&
+                            (orderableResult.can_order = !1),
+                          !legacyCallback || legacyCallback.constructor !== Function)
                         ) {
                           t.next = 11;
                           break;
                         }
-                        _argN(null, _regR), (t.next = 12);
+                        legacyCallback(null, orderableResult), (t.next = 12);
                         break;
                       case 11:
-                        return t.abrupt("return", _regR);
+                        return t.abrupt("return", orderableResult);
                       case 12:
                         t.next = 21;
                         break;
@@ -17978,13 +18055,15 @@ function _classCallCheck(t, e) {
                           onErrorCallback &&
                             onErrorCallback.constructor === Function &&
                             onErrorCallback(t.t0),
-                          (_regR = {
+                          (orderableResult = {
                             can_order: !1,
                             message: t.t0.message,
                           }),
-                          _argN && _argN.constructor === Function && _argN(t.t0, _regR),
+                          legacyCallback &&
+                            legacyCallback.constructor === Function &&
+                            legacyCallback(t.t0, orderableResult),
                           console.log(t.t0),
-                          t.abrupt("return", _regR)
+                          t.abrupt("return", orderableResult)
                         );
                       case 21:
                       case "end":
@@ -18004,10 +18083,10 @@ function _classCallCheck(t, e) {
              * @returns {Promise<string>} CSS 텍스트
              */
             key: "getCustomCss",
-            value: function (_paramR) {
+            value: function (r) {
               return new Promise(function (e, t) {
                 var xMLHttpRequest = new XMLHttpRequest();
-                xMLHttpRequest.open("GET", _paramR, !0),
+                xMLHttpRequest.open("GET", r, !0),
                   xMLHttpRequest.setRequestHeader("Cache-Control", "max-age=0"),
                   (xMLHttpRequest.responseType = "blob"),
                   (xMLHttpRequest.onload = function () {
@@ -18097,12 +18176,12 @@ function _classCallCheck(t, e) {
                 !isEditorBusy &&
                 ((isEditorBusy = !0),
                 (koiContainerElement = document.querySelector(selector)),
-                (koiIframeElement = (function (t, e, _paramN) {
-                  var _tmpR = _paramN
+                (koiIframeElement = (function (t, e, n) {
+                  var r = n
                     ? "http://koi-staging.redprinting.net/"
                     : "https://koi.redprinting.net/";
-                  e && e.targetUrl && ((_tmpR = e.targetUrl), delete e.targetUrl);
-                  var _tmpO = _tmpR + "gateway/" + t + "?",
+                  e && e.targetUrl && ((r = e.targetUrl), delete e.targetUrl);
+                  var o = r + "gateway/" + t + "?",
                     i = {
                       accessToken: apiClientInstance.getToken(),
                       userId: sessionStorageManager("userId"),
@@ -18110,17 +18189,17 @@ function _classCallCheck(t, e) {
                       division: sessionStorageManager("division"),
                       lang: sessionStorageManager("lang"),
                     };
-                  (_tmpO += "config=" + encodeURIComponent(JSON.stringify(i))),
+                  (o += "config=" + encodeURIComponent(JSON.stringify(i))),
                     e &&
                       "object" === (void 0 === e ? "undefined" : _typeof(e)) &&
-                      (_tmpO += "&options=" + encodeURIComponent(JSON.stringify(e)));
-                  var _valA = document.createElement("iframe");
+                      (o += "&options=" + encodeURIComponent(JSON.stringify(e)));
+                  var a = document.createElement("iframe");
                   return (
-                    _valA.setAttribute("src", _tmpO),
-                    _valA.setAttribute("frameborder", "0"),
-                    (_valA.style.width = "100%"),
-                    (_valA.style.height = "100%"),
-                    _valA
+                    a.setAttribute("src", o),
+                    a.setAttribute("frameborder", "0"),
+                    (a.style.width = "100%"),
+                    (a.style.height = "100%"),
+                    a
                   );
                 })(productCode, e, this.isDev)),
                 windowRef.addEventListener("message", koiPassiveMessageListener, !1),
@@ -18151,13 +18230,13 @@ function _classCallCheck(t, e) {
              * @param {string|number} t - 가격 값
              */
             key: "setPrice",
-            value: function (t) {
-              var e = {
+            value: function (priceValue) {
+              var priceVarMessage = {
                 varMap: {
-                  $PRCE: t,
+                  $PRCE: priceValue,
                 },
               };
-              editorBridge.post_to_editor("set-mutable-prod-var", e);
+              editorBridge.post_to_editor("set-mutable-prod-var", priceVarMessage);
             },
           },
           {
@@ -18168,45 +18247,45 @@ function _classCallCheck(t, e) {
              * @returns {Object} 조합된 선택 정보 (MTRL_COD 등)
              */
             key: "getCustomTabSelectInfo",
-            value: function (_paramG) {
+            value: function (g) {
               var _ = {},
-                _valN = _paramG.$CODE.split(",").reduce(function (t, e) {
-                  var _valN2 = e.split(":"),
-                    _destructured = _slicedToArray(_valN2, 2),
-                    _valO = _destructured[0],
-                    i = _destructured[1],
-                    _valA = _valO.split("@"),
-                    _destructured2 = _slicedToArray(_valA, 2),
-                    _valS = _destructured2[0];
-                  switch (_destructured2[1]) {
+                n = g.$CODE.split(",").reduce(function (t, e) {
+                  var n = e.split(":"),
+                    _destructured2 = _slicedToArray(n, 2),
+                    _destructured20 = _destructured2[0],
+                    i = _destructured2[1],
+                    a = _destructured20.split("@"),
+                    _destructured3 = _slicedToArray(a, 2),
+                    _destructured30 = _destructured3[0];
+                  switch (_destructured3[1]) {
                     case "combination":
-                      var _valU = i.split("/");
+                      var u = i.split("/");
                       if (
-                        ((t[_valS] = _valU.reduce(function (t, e) {
-                          return (t += Object.keys(_paramG).includes(e) ? _paramG[e] : e);
+                        ((t[_destructured30] = u.reduce(function (t, e) {
+                          return (t += Object.keys(g).includes(e) ? g[e] : e);
                         }, "")),
-                        "NO_STOCK" === _valS)
+                        "NO_STOCK" === _destructured30)
                       ) {
-                        var _valL = _valU.reduce(function (t, e) {
-                            return (t += e + ":" + _paramG[e] + "/");
+                        var l = u.reduce(function (t, e) {
+                            return (t += e + ":" + g[e] + "/");
                           }, ""),
-                          _valF = noStockCombinations.some(function (t) {
-                            return t === _valL.slice(0, -1);
+                          f = noStockCombinations.some(function (t) {
+                            return t === l.slice(0, -1);
                           });
-                        t[_valS] = _valF;
+                        t[_destructured30] = f;
                       }
                       break;
                     case "rawData":
-                      t[_valS] = _paramG[i];
+                      t[_destructured30] = g[i];
                       break;
                     case "findData":
-                      var _valP = i.split("/"),
-                        _destructured3 = _slicedToArray(_valP, 2),
-                        _valH = _destructured3[0],
-                        _valV = _destructured3[1];
-                      _[_valS] = {
-                        findField: _valH,
-                        baseData: _valV,
+                      var p = i.split("/"),
+                        _destructured4 = _slicedToArray(p, 2),
+                        _destructured40 = _destructured4[0],
+                        _destructured41 = _destructured4[1];
+                      _[_destructured30] = {
+                        findField: _destructured40,
+                        baseData: _destructured41,
                       };
                   }
                   return t;
@@ -18221,16 +18300,16 @@ function _classCallCheck(t, e) {
                     !(_iterDone = (_iterStep = _iterator.next()).done);
                     _iterDone = !0
                   ) {
-                    var _tmpA = _slicedToArray(_iterStep.value, 2),
-                      _tmpC = _tmpA[0],
-                      _tmpS = _tmpA[1],
-                      _tmpU = _tmpS.baseData,
-                      _tmpL = _tmpS.findField.split("&").reduce(function (t, e) {
+                    var _destructured = _slicedToArray(_iterStep.value, 2),
+                      _destructured0 = _destructured[0],
+                      _destructured1 = _destructured[1],
+                      baseData = _destructured1.baseData,
+                      l = _destructured1.findField.split("&").reduce(function (t, e) {
                         return (t = t.filter(function (t) {
-                          return t[e] === _valN[e];
+                          return t[e] === n[e];
                         }));
-                      }, customTabRawData[_tmpU]);
-                    _valN[_tmpC] = _tmpL[0][_tmpC];
+                      }, customTabRawData[baseData]);
+                    n[_destructured0] = l[0][_destructured0];
                   }
                 } catch (t) {
                   (_iterDidErr = !0), (_iterErr = t);
@@ -18242,7 +18321,7 @@ function _classCallCheck(t, e) {
                   }
                 }
               }
-              return _paramG.$FCMC && (_valN.MTRL_COD = _paramG.$FCMC), _valN;
+              return g.$FCMC && (n.MTRL_COD = g.$FCMC), n;
             },
           },
           {
@@ -18284,25 +18363,25 @@ function _classCallCheck(t, e) {
           },
           {
             key: "whetherUsePalette",
-            value: function (_paramR) {
+            value: function (r) {
               return Object.entries({
                 printType: ["PTP_SLK"],
               }).some(function (t) {
                 var e = _slicedToArray(t, 2),
-                  _valN = e[0];
-                if (e[1].includes(_paramR[_valN])) return !0;
+                  n = e[0];
+                if (e[1].includes(r[n])) return !0;
               });
             },
           },
           {
             key: "getExceptionCondition",
-            value: function (t, _paramR) {
+            value: function (t, r) {
               var e = !1;
               return (
                 t &&
                   (e = t.reduce(function (t, e) {
-                    var _valN = e.values.includes(_paramR[e.field]);
-                    return t || _valN;
+                    var n = e.values.includes(r[e.field]);
+                    return t || n;
                   }, !1)),
                 e
               );
@@ -18310,7 +18389,7 @@ function _classCallCheck(t, e) {
           },
           {
             key: "getGroupingCodes",
-            value: function (_paramO) {
+            value: function (o) {
               var t = this.customTabInfo,
                 e = t.grouping,
                 groupingInfo = t.groupingInfo;
@@ -18319,39 +18398,37 @@ function _classCallCheck(t, e) {
                     var e = t.sliceField,
                       targetField = t.targetField,
                       range = t.range;
-                    return e
-                      ? _paramO[targetField].slice(range[0], range[1])
-                      : _paramO[targetField];
+                    return e ? o[targetField].slice(range[0], range[1]) : o[targetField];
                   })
                 : ["material"];
             },
           },
           {
             key: "getMatchTemplate",
-            value: function (t, _paramG) {
+            value: function (t, g) {
               var _ = t.material,
                 y = t.mappingData;
-              return this.templateList.find(function (_paramR) {
-                var _valO = {},
+              return this.templateList.find(function (r) {
+                var o = {},
                   _iterDone = !0,
                   _iterDidErr = !1,
                   _iterErr = void 0;
                 try {
                   for (
-                    var _iterStep, _iterator = _paramG[Symbol.iterator]();
+                    var _iterStep, _iterator = g[Symbol.iterator]();
                     !(_iterDone = (_iterStep = _iterator.next()).done);
                     _iterDone = !0
                   ) {
                     var _iterValue = _iterStep.value,
-                      _tmpS = _iterValue.key,
-                      _tmpU = _iterValue.sliceField,
-                      _tmpL = _iterValue.baseField,
-                      _tmpF = _iterValue.range,
-                      _tmpP = _iterValue.haveMappingData,
-                      _tmpD = _iterValue.compareField,
-                      _tmpH = _tmpU ? _[_tmpL].slice(_tmpF[0], _tmpF[1]) : _[_tmpL],
-                      _tmpV = _tmpP ? y[_tmpS][_tmpH][_tmpD] : _tmpH;
-                    _valO[_tmpS] = _tmpV;
+                      key = _iterValue.key,
+                      sliceField = _iterValue.sliceField,
+                      baseField = _iterValue.baseField,
+                      range = _iterValue.range,
+                      haveMappingData = _iterValue.haveMappingData,
+                      compareField = _iterValue.compareField,
+                      h = sliceField ? _[baseField].slice(range[0], range[1]) : _[baseField],
+                      v = haveMappingData ? y[key][h][compareField] : h;
+                    o[key] = v;
                   }
                 } catch (t) {
                   (_iterDidErr = !0), (_iterErr = t);
@@ -18362,9 +18439,9 @@ function _classCallCheck(t, e) {
                     if (_iterDidErr) throw _iterErr;
                   }
                 }
-                return Object.keys(_valO).reduce(function (t, e) {
-                  var _valN = _paramR.features.customInfo[e] === _valO[e];
-                  return t && _valN;
+                return Object.keys(o).reduce(function (t, e) {
+                  var n = r.features.customInfo[e] === o[e];
+                  return t && n;
                 }, !0);
               });
             },
@@ -18382,9 +18459,9 @@ function _classCallCheck(t, e) {
                 docFields = e.docFields,
                 includeTemplateInfo = e.includeTemplateInfo,
                 matchingTemplateInfo = e.matchingTemplateInfo,
-                _valP = {},
-                _valD = i ? material[baseField].slice(range[0], range[1]) : material[baseField],
-                _valH = haveMappingData ? mappingData[targetItem][_valD] : material,
+                p = {},
+                d = i ? material[baseField].slice(range[0], range[1]) : material[baseField],
+                h = haveMappingData ? mappingData[targetItem][d] : material,
                 _iterDone = !0,
                 _iterDidErr = !1,
                 _iterErr = void 0;
@@ -18396,8 +18473,8 @@ function _classCallCheck(t, e) {
                 ) {
                   var _iterValue = _iterStep.value;
                   "code" === _iterValue.key
-                    ? (_valP[_iterValue.key] = _valD)
-                    : (_valP[_iterValue.key] = _valH[_iterValue.value]);
+                    ? (p[_iterValue.key] = d)
+                    : (p[_iterValue.key] = h[_iterValue.value]);
                 }
               } catch (t) {
                 (_iterDidErr = !0), (_iterErr = t);
@@ -18416,11 +18493,11 @@ function _classCallCheck(t, e) {
                   },
                   matchingTemplateInfo
                 );
-                (_valP.templateUri = x ? x.template_uri : ""),
-                  (_valP.psCode = x ? x.psCode : ""),
-                  (_valP.sortNumber = x ? x.features.sortNumber : "");
+                (p.templateUri = x ? x.template_uri : ""),
+                  (p.psCode = x ? x.psCode : ""),
+                  (p.sortNumber = x ? x.features.sortNumber : "");
               }
-              return _valP;
+              return p;
             },
           },
           {
@@ -18431,82 +18508,79 @@ function _classCallCheck(t, e) {
                 grouping = e.grouping,
                 mappingData = e.mappingData,
                 dynamicItems = e.dynamicItems,
-                _valH = dynamicItems.list.reduce(function (t, e) {
+                h = dynamicItems.list.reduce(function (t, e) {
                   return (t[e.targetItem + "Tree"] = {}), t;
                 }, {});
-              return t.reduce(function (_paramR, _paramU) {
+              return t.reduce(function (r, u) {
                 var t = dynamicItems.exceptions,
                   e = dynamicItems.list;
-                if (self2.getExceptionCondition(t, _paramU)) return _paramR;
-                var _valL = self2.getGroupingCodes(_paramU);
+                if (self2.getExceptionCondition(t, u)) return r;
+                var l = self2.getGroupingCodes(u);
                 return (
-                  e.forEach(function (_paramA) {
-                    var t = _paramA.sliceField,
-                      e = _paramA.baseField,
-                      range = _paramA.range,
-                      targetItem = _paramA.targetItem,
-                      _valS = t ? _paramU[e].slice(range[0], range[1]) : _paramU[e];
-                    _valL.reduce(function (_paramO, i, t, e) {
-                      if (
-                        (void 0 === _paramO[i] && (_paramO[i] = grouping ? {} : []),
-                        t === _valL.length - 1)
-                      )
+                  e.forEach(function (a) {
+                    var t = a.sliceField,
+                      e = a.baseField,
+                      range = a.range,
+                      targetItem = a.targetItem,
+                      s = t ? u[e].slice(range[0], range[1]) : u[e];
+                    l.reduce(function (o, i, t, e) {
+                      if ((void 0 === o[i] && (o[i] = grouping ? {} : []), t === l.length - 1))
                         if (grouping)
-                          void 0 === _paramO[i][targetItem] && (_paramO[i][targetItem] = []),
-                            _valL.reduce(function (t, e, _paramN) {
+                          void 0 === o[i][targetItem] && (o[i][targetItem] = []),
+                            l.reduce(function (t, e, n) {
                               if (
                                 (void 0 === t[e] && (t[e] = {}),
-                                _paramN === _valL.length - 1 && void 0 === t[e][_valS])
+                                n === l.length - 1 && void 0 === t[e][s])
                               ) {
-                                t[e][_valS] = !0;
-                                var _valR = self2.getSettingDocs(
+                                t[e][s] = !0;
+                                var r = self2.getSettingDocs(
                                   {
-                                    material: _paramU,
+                                    material: u,
                                     mappingData: mappingData,
                                   },
-                                  _paramA
+                                  a
                                 );
-                                _paramO[i][targetItem].push(_valR);
+                                o[i][targetItem].push(r);
                               }
                               return t[e];
-                            }, _valH[targetItem + "Tree"]);
-                        else if (void 0 === _valH[targetItem + "Tree"][_valS]) {
-                          _valH[targetItem + "Tree"][_valS] = !0;
-                          var _valN = self2.getSettingDocs(
+                            }, h[targetItem + "Tree"]);
+                        else if (void 0 === h[targetItem + "Tree"][s]) {
+                          h[targetItem + "Tree"][s] = !0;
+                          var n = self2.getSettingDocs(
                             {
-                              material: _paramU,
+                              material: u,
                               mappingData: mappingData,
                             },
-                            _paramA
+                            a
                           );
-                          _paramO[i].push(_valN);
+                          o[i].push(n);
                         }
                       return (
-                        _paramO[i][targetItem].sort(function (t, e) {
+                        o[i][targetItem].sort(function (t, e) {
                           return mappingData[targetItem][t.code].sortNumber
                             ? mappingData[targetItem][t.code].sortNumber -
                                 mappingData[targetItem][e.code].sortNumber
                             : t.sortNumber - e.sortNumber;
                         }),
-                        _paramO[i]
+                        o[i]
                       );
-                    }, _paramR);
+                    }, r);
                   }),
-                  _paramR
+                  r
                 );
               }, {});
             },
           },
           {
             key: "getInitVariable",
-            value: function (_paramR, _paramO) {
-              var t = Object.keys(_paramR).reduce(function (t, e) {
-                  if (_paramO[e]) {
-                    var _valN = _paramO[e];
-                    t[e] = _paramR[e].find(function (t) {
-                      return t.code === _valN;
+            value: function (r, o) {
+              var t = Object.keys(r).reduce(function (t, e) {
+                  if (o[e]) {
+                    var n = o[e];
+                    t[e] = r[e].find(function (t) {
+                      return t.code === n;
                     });
-                  } else t[e] = _paramR[e][0];
+                  } else t[e] = r[e][0];
                   return t;
                 }, {}),
                 e = {},
@@ -18524,8 +18598,7 @@ function _classCallCheck(t, e) {
                   else {
                     if ("selected" === _iterValue.type) continue;
                     void 0 === t[_iterValue.targetItem]
-                      ? (e[_iterValue.variable] =
-                          _paramR[_iterValue.targetItem][0][_iterValue.itemField])
+                      ? (e[_iterValue.variable] = r[_iterValue.targetItem][0][_iterValue.itemField])
                       : (e[_iterValue.variable] = t[_iterValue.targetItem][_iterValue.itemField]);
                   }
                 }
@@ -18547,17 +18620,17 @@ function _classCallCheck(t, e) {
               var self2 = this,
                 t = this.customTabInfo.settings;
               if (!t) return [];
-              var _tmpR = void 0;
+              var r = void 0;
               switch (t.selectionInfo.compareKey) {
                 case "materialType":
-                  _tmpR = this.templateList.find(function (t) {
+                  r = this.templateList.find(function (t) {
                     return t.features.customInfo.materialType === e.materialType;
                   });
                   break;
                 case "productCode":
-                  _tmpR = this.templateList[0];
+                  r = this.templateList[0];
               }
-              return _tmpR.features.customInfo.printArea
+              return r.features.customInfo.printArea
                 .map(function (t) {
                   return self2.customTabInfo.mappingData.printArea[t];
                 })
@@ -18568,7 +18641,7 @@ function _classCallCheck(t, e) {
           },
           {
             key: "getEntities",
-            value: function (_paramN, _paramR) {
+            value: function (n, r) {
               var self2 = this,
                 t = this.customTabInfo.entities,
                 i = [],
@@ -18581,11 +18654,11 @@ function _classCallCheck(t, e) {
               try {
                 for (
                   var _iterStep,
-                    _valU = function () {
+                    u = function () {
                       var value = _iterStep.value;
                       if ("uniform-select" === value.type) {
-                        var t = _paramN[value.items.target].reduce(function (t, e) {
-                          var _valN = {},
+                        var t = n[value.items.target].reduce(function (t, e) {
+                          var n = {},
                             _iterDidErr2 = !1,
                             _iterDone2 = !0,
                             _iterDidErr3 = !1,
@@ -18597,13 +18670,13 @@ function _classCallCheck(t, e) {
                               !(_iterDone2 = (_iterStep2 = _iterator2.next()).done);
                               _iterDone2 = !0
                             ) {
-                              var _tmpU = _iterStep2.value;
-                              if ("target" !== _tmpU)
-                                if ("varMap" === _tmpU) {
+                              var value2 = _iterStep2.value;
+                              if ("target" !== value2)
+                                if ("varMap" === value2) {
                                   if (
-                                    ((_valN[_tmpU] = {}),
+                                    ((n[value2] = {}),
                                     value.items.target === _.targetItem &&
-                                      !e[value.items[_tmpU].TMPL])
+                                      !e[value.items[value2].TMPL])
                                   ) {
                                     _iterDidErr2 = !0;
                                     break;
@@ -18614,14 +18687,14 @@ function _classCallCheck(t, e) {
                                   try {
                                     for (
                                       var _iterStep22,
-                                        _iterator22 = Object.keys(value.items[_tmpU])[
+                                        _iterator22 = Object.keys(value.items[value2])[
                                           Symbol.iterator
                                         ]();
                                       !(_iterDone22 = (_iterStep22 = _iterator22.next()).done);
                                       _iterDone22 = !0
                                     ) {
-                                      var _tmpV = _iterStep22.value;
-                                      _valN[_tmpU]["$" + _tmpV] = e[value.items[_tmpU][_tmpV]];
+                                      var value3 = _iterStep22.value;
+                                      n[value2]["$" + value3] = e[value.items[value2][value3]];
                                     }
                                   } catch (t) {
                                     (_iterDidErr22 = !0), (_iterErr22 = t);
@@ -18632,7 +18705,7 @@ function _classCallCheck(t, e) {
                                       if (_iterDidErr22) throw _iterErr22;
                                     }
                                   }
-                                } else _valN[_tmpU] = e[value.items[_tmpU]];
+                                } else n[value2] = e[value.items[value2]];
                             }
                           } catch (t) {
                             (_iterDidErr3 = !0), (_iterErr2 = t);
@@ -18643,12 +18716,12 @@ function _classCallCheck(t, e) {
                               if (_iterDidErr3) throw _iterErr2;
                             }
                           }
-                          return _iterDidErr2 ? t : [].concat(_toConsumableArray(t), [_valN]);
+                          return _iterDidErr2 ? t : [].concat(_toConsumableArray(t), [n]);
                         }, []);
                         value.items = t;
                       }
                       if ("uniform-toggle" === value.type) {
-                        var e = self2.getSelection(_paramR);
+                        var e = self2.getSelection(r);
                         value.items = e;
                       }
                       i.push(value);
@@ -18657,7 +18730,7 @@ function _classCallCheck(t, e) {
                   !(_iterDone = (_iterStep = _iterator.next()).done);
                   _iterDone = !0
                 )
-                  _valU();
+                  u();
               } catch (t) {
                 (_iterDidErr = !0), (_iterErr = t);
               } finally {
@@ -18687,19 +18760,19 @@ function _classCallCheck(t, e) {
                           (_regN = this.customTabInfo.noStocks),
                           (y = _regN.exceptions),
                           (_regM = _regN.tagItems),
-                          (_regR = e.reduce(function (t, _paramR) {
+                          (_regR = e.reduce(function (t, r) {
                             var e = !1;
                             if (
                               (y &&
                                 (e = y.reduce(function (t, e) {
-                                  var _valN = e.values.includes(_paramR[e.field]);
-                                  return t || _valN;
+                                  var n = e.values.includes(r[e.field]);
+                                  return t || n;
                                 }, !1)),
                               e)
                             )
                               return t;
-                            var _tmpN = "";
-                            if ("Y" === _paramR.HIDE_YN) {
+                            var n = "";
+                            if ("Y" === r.HIDE_YN) {
                               var _iterDone = !0,
                                 _iterDidErr = !1,
                                 _iterErr = void 0;
@@ -18710,20 +18783,22 @@ function _classCallCheck(t, e) {
                                   _iterDone = !0
                                 ) {
                                   var _iterValue = _iterStep.value,
-                                    _tmpL = _iterValue.sliceField,
-                                    _tmpF = _iterValue.variable,
-                                    _tmpP = _iterValue.mappingKey,
-                                    _tmpD = _iterValue.baseField,
-                                    _tmpH = _iterValue.range,
-                                    _tmpV = _iterValue.mappingField,
-                                    _tmpG = _iterValue.referenceMappingData,
-                                    _ = _tmpL
-                                      ? _paramR[_tmpD].slice(_tmpH[0], _tmpH[1])
-                                      : _paramR[_tmpD];
-                                  _tmpN +=
-                                    _tmpF +
+                                    sliceField = _iterValue.sliceField,
+                                    variable = _iterValue.variable,
+                                    mappingKey = _iterValue.mappingKey,
+                                    baseField = _iterValue.baseField,
+                                    range = _iterValue.range,
+                                    mappingField = _iterValue.mappingField,
+                                    referenceMappingData = _iterValue.referenceMappingData,
+                                    _ = sliceField
+                                      ? r[baseField].slice(range[0], range[1])
+                                      : r[baseField];
+                                  n +=
+                                    variable +
                                     ":" +
-                                    (_tmpG ? self2.customTabInfo.mappingData[_tmpP][_][_tmpV] : _) +
+                                    (referenceMappingData
+                                      ? self2.customTabInfo.mappingData[mappingKey][_][mappingField]
+                                      : _) +
                                     "/";
                                 }
                               } catch (t) {
@@ -18735,7 +18810,7 @@ function _classCallCheck(t, e) {
                                   if (_iterDidErr) throw _iterErr;
                                 }
                               }
-                              t.push(_tmpN.slice(0, -1));
+                              t.push(n.slice(0, -1));
                             }
                             return t;
                           }, [])),
@@ -18787,7 +18862,7 @@ function _classCallCheck(t, e) {
                 _regM2,
                 _regN2,
                 _regF2,
-                _valL = 2 < arguments.length && void 0 !== arguments[2] ? arguments[2] : {};
+                L = 2 < arguments.length && void 0 !== arguments[2] ? arguments[2] : {};
               return regeneratorRuntime.async(
                 function (t) {
                   for (;;)
@@ -18803,8 +18878,8 @@ function _classCallCheck(t, e) {
                           (_regU = _regN.settings),
                           (_regL = void 0 === _regU ? {} : _regU),
                           (_regF = this.getItemList(e[_regO])),
-                          (_regP = _valL.skipInitVarMap),
-                          (_regD = _valL.generateCutLayer),
+                          (_regP = L.skipInitVarMap),
+                          (_regD = L.generateCutLayer),
                           (_regH = _regL.forceMaterialCode),
                           (_regV = this.product.controlPsCode),
                           (_regG = {}),
@@ -18813,12 +18888,12 @@ function _classCallCheck(t, e) {
                           (_regM = Object.keys(_argR)),
                           _regA
                             ? (_ = _regC.list.reduce(function (t, e) {
-                                var _tmpN = "";
+                                var n = "";
                                 return (
                                   _regM.includes(e.key) &&
-                                    ((_tmpN = _argR[e.key]), _regM.splice(_regM.indexOf(e.key), 1)),
+                                    ((n = _argR[e.key]), _regM.splice(_regM.indexOf(e.key), 1)),
                                   e.initVariable && (y[e.initVariable] = _argR[e.key]),
-                                  _tmpN ? t[_tmpN] : t
+                                  n ? t[n] : t
                                 );
                               }, _regF))
                             : (y.$MTRL = _argR.material),
