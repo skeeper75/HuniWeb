@@ -1,0 +1,91 @@
+-- ============================================================================
+-- namecard-mat-fix.dryrun — 명함 자재 결손 교정 DRY-RUN (라이브 ROLLBACK, 미변경)
+-- ----------------------------------------------------------------------------
+-- 실행:
+--   set -a && . ./.env.local && set +a
+--   export PGPASSWORD="$RAILWAY_DB_PASSWORD"
+--   psql -h "$RAILWAY_DB_HOST" -p "$RAILWAY_DB_PORT" -U "$RAILWAY_DB_USER" \
+--        -d "$RAILWAY_DB_NAME" -f namecard-mat-fix.dryrun
+-- 목적: ① BEFORE 견적불가 실증 ② 교정 INSERT 후 5종 견적가능·동시매칭0 ③ ROLLBACK.
+--   엔진 _row_matches(행 mat_cd!=NULL 이면 정확매칭) 동등 쿼리로 매칭행수 측정.
+-- ============================================================================
+\pset format aligned
+\pset null '(NULL)'
+
+BEGIN;
+
+\echo ''
+\echo '################ BEFORE 교정 — 단면(POPT_000001) 5종 종이 매칭 (0=견적불가) ################'
+WITH paper(mat_cd, mat_nm) AS (VALUES
+  ('MAT_000074','백모조220'),('MAT_000081','아트250'),('MAT_000082','아트300'),
+  ('MAT_000091','스노우250'),('MAT_000092','스노우300'))
+SELECT p.mat_nm,
+       COUNT(cp.*) AS matched_rows,
+       COALESCE((array_agg(cp.unit_price))[1]::text,'★견적불가') AS unit_price
+FROM paper p
+LEFT JOIN t_prc_component_prices cp
+  ON cp.comp_cd='COMP_NAMECARD_STD_S1' AND cp.print_opt_cd='POPT_000001'
+ AND cp.min_qty=100 AND cp.mat_cd = p.mat_cd
+GROUP BY p.mat_cd, p.mat_nm ORDER BY p.mat_cd;
+
+-- ---- 교정 적용 (namecard-mat-fix.sql 본문과 동일) ----------------------------
+DELETE FROM t_prc_component_prices
+ WHERE comp_cd IN ('COMP_NAMECARD_STD_S1','COMP_NAMECARD_STD_S2')
+   AND print_opt_cd IN ('POPT_000001','POPT_000002')
+   AND min_qty = 100
+   AND mat_cd IN ('MAT_000074','MAT_000081','MAT_000082','MAT_000091','MAT_000092');
+
+INSERT INTO t_prc_component_prices
+  (comp_cd, apply_ymd, mat_cd, print_opt_cd, min_qty, unit_price, note)
+VALUES
+('COMP_NAMECARD_STD_S1','2026-06-01','MAT_000074','POPT_000001',100,3500.00,'스탠다드명함/단면/백모조220 제작수량 100 이상'),
+('COMP_NAMECARD_STD_S1','2026-06-01','MAT_000081','POPT_000001',100,3500.00,'스탠다드명함/단면/아트250 제작수량 100 이상'),
+('COMP_NAMECARD_STD_S1','2026-06-01','MAT_000091','POPT_000001',100,3500.00,'스탠다드명함/단면/스노우250 제작수량 100 이상'),
+('COMP_NAMECARD_STD_S1','2026-06-01','MAT_000082','POPT_000001',100,3800.00,'스탠다드명함/단면/아트300 제작수량 100 이상'),
+('COMP_NAMECARD_STD_S1','2026-06-01','MAT_000092','POPT_000001',100,3800.00,'스탠다드명함/단면/스노우300 제작수량 100 이상'),
+('COMP_NAMECARD_STD_S2','2026-06-01','MAT_000074','POPT_000002',100,4500.00,'스탠다드명함/양면/백모조220 제작수량 100 이상'),
+('COMP_NAMECARD_STD_S2','2026-06-01','MAT_000081','POPT_000002',100,4500.00,'스탠다드명함/양면/아트250 제작수량 100 이상'),
+('COMP_NAMECARD_STD_S2','2026-06-01','MAT_000091','POPT_000002',100,4500.00,'스탠다드명함/양면/스노우250 제작수량 100 이상'),
+('COMP_NAMECARD_STD_S2','2026-06-01','MAT_000082','POPT_000002',100,4800.00,'스탠다드명함/양면/아트300 제작수량 100 이상'),
+('COMP_NAMECARD_STD_S2','2026-06-01','MAT_000092','POPT_000002',100,4800.00,'스탠다드명함/양면/스노우300 제작수량 100 이상');
+
+\echo ''
+\echo '################ AFTER 교정 — 단면 5종 (1=정상, 권위 그룹1=3500/그룹2=3800) ################'
+WITH paper(mat_cd, mat_nm) AS (VALUES
+  ('MAT_000074','백모조220'),('MAT_000081','아트250'),('MAT_000082','아트300'),
+  ('MAT_000091','스노우250'),('MAT_000092','스노우300'))
+SELECT p.mat_nm, COUNT(cp.*) AS matched_rows, (array_agg(cp.unit_price))[1] AS unit_price
+FROM paper p
+LEFT JOIN t_prc_component_prices cp
+  ON cp.comp_cd='COMP_NAMECARD_STD_S1' AND cp.print_opt_cd='POPT_000001'
+ AND cp.min_qty=100 AND cp.mat_cd = p.mat_cd
+GROUP BY p.mat_cd, p.mat_nm ORDER BY p.mat_cd;
+
+\echo ''
+\echo '################ AFTER 교정 — 양면 5종 (권위 그룹1=4500/그룹2=4800) ################'
+WITH paper(mat_cd, mat_nm) AS (VALUES
+  ('MAT_000074','백모조220'),('MAT_000081','아트250'),('MAT_000082','아트300'),
+  ('MAT_000091','스노우250'),('MAT_000092','스노우300'))
+SELECT p.mat_nm, COUNT(cp.*) AS matched_rows, (array_agg(cp.unit_price))[1] AS unit_price
+FROM paper p
+LEFT JOIN t_prc_component_prices cp
+  ON cp.comp_cd='COMP_NAMECARD_STD_S2' AND cp.print_opt_cd='POPT_000002'
+ AND cp.min_qty=100 AND cp.mat_cd = p.mat_cd
+GROUP BY p.mat_cd, p.mat_nm ORDER BY p.mat_cd;
+
+\echo ''
+\echo '################ 동시매칭 가드 — (comp,print_opt,mat,min_qty) 중복(0행=ERR_AMBIGUOUS 없음) ################'
+SELECT comp_cd, print_opt_cd, mat_cd, min_qty, COUNT(*) AS rows_per_combo
+FROM t_prc_component_prices
+WHERE comp_cd IN ('COMP_NAMECARD_STD_S1','COMP_NAMECARD_STD_S2')
+GROUP BY comp_cd, print_opt_cd, mat_cd, min_qty HAVING COUNT(*)>1;
+
+\echo ''
+\echo '################ 권위 verbatim 가드 — 기존 대표 종이 단가 불변(74=3500/4500, 82=3800/4800) ################'
+SELECT comp_cd, mat_cd, unit_price FROM t_prc_component_prices
+WHERE comp_cd IN ('COMP_NAMECARD_STD_S1','COMP_NAMECARD_STD_S2')
+  AND mat_cd IN ('MAT_000074','MAT_000082') ORDER BY comp_cd, mat_cd;
+
+ROLLBACK;
+\echo ''
+\echo '################ ROLLED BACK — 라이브 미변경(DRY-RUN 종료) ################'
