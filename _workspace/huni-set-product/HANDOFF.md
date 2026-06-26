@@ -1,22 +1,25 @@
 # Huni-Set-Product (§23) — HANDOFF
 
-최종 갱신: 2026-06-26 · ★근본원인 진단(harness)→상품 유형 분류 SOT 확정→라이브 재정렬 2회 COMMIT→상품 구성 기초 진단→A2 가격교정 3건 COMMIT 세션 마감. **이번 세션은 set-product 축2(A2)에서 출발해 전역 기초로 확장됨 — 권위 이동 = `_workspace/_foundation/`.** 상세 누적 → `CHANGELOG.md`.
+최종 갱신: 2026-06-27 · 전 상품 가격공식 통합 마스터(완전성 자) 수립 + 가격만결손 51 분해 + 명함특수 4 라이브 COMMIT + 아크릴 코드버그 적발(개발팀 위임). **권위 = `_workspace/_foundation/`(price-formula-master·remediation).** 상세 누적 → `CHANGELOG.md`.
+
+> 직전(2026-06-26): 상품 유형 분류 SOT 확정→라이브 재정렬 2회→기초 진단→A2 가격교정 3건 COMMIT.
 
 ---
 
 ## ★다음 시작점 (fresh 세션이 바로 할 일)
 
-**먼저 읽을 권위(재발견 0):** `_workspace/_foundation/product-type-classification-sot.md`(분류 SOT·작업순서)·`product-config-readiness-260626.md`(견적 준비도)·`remediation/_REMEDIATION-LOG.md`(가격교정 이력). 셋트 7×4 현황판=`06_load/set-product-readiness-master.md`.
+**먼저 읽을 권위(재발견 0):** `_workspace/_foundation/price-formula-master.{csv,md}`(★전 275상품 가격공식 완전성 자·status 7분류)·`product-type-classification-sot.md`(분류 SOT)·`product-config-readiness-260626.md`(견적 준비도)·`remediation/_REMEDIATION-LOG.md`(가격교정·COMMIT 이력)·`remediation/CODEBUG-sizcd-area-undercharge.md`(아크릴 코드버그)·`remediation/namecard-special-design.md`. 셋트 7×4 현황판=`06_load/set-product-readiness-master.md`.
 
 **근본원인 해소 진행 = SOT §3 작업순서:**
-1. ✅ 분류축 확정 · 2. ✅ 라이브 재정렬(디자인98+기성88→완제품·완226/반29/기성20) · 3. ✅ 상품 구성 기초 진단 · 4. 가격 적재정합 교정(견적가능70 3건 COMMIT)
+1. ✅ 분류축 확정 · 2. ✅ 라이브 재정렬(완226/반29/기성20) · 3. ✅ 기초 진단 · 4. ✅ A2 견적가능70 교정 3건 · 5. ✅ 전 상품 공식 완전성 마스터 + 가격만결손 51 분해 + 명함특수 4 COMMIT
 
 **다음 우선순위 (이어서):**
-1. **가격만결손 51 바인딩** ← 다음 — 기초(차원·자재) 구성됐으나 가격공식 미바인딩 51상품. §18 price-engine-design 설계를 dbmap 적재 트랙으로 실 바인딩(인간 승인). "설계됨≠적재됨" 해소.
-2. **기초부실 105 구성** — 차원/자재부터. ★기성출신 굿즈 75개(에코백·머그·키링·다이어리)가 최대. 상품마스터 굿즈파우치/문구 시트 권위로 사이즈·소재 신규 구성.
-3. **잔여**: 094 30P(코드트랙 C-1·page 전송·§6 위임)·동형전파(명함 PEARL collapse·명함 S1/S2 이중합산 검증)·기성 보류2(메모패드준비중·타이벡북커버)·테스트템플릿5 정리.
+1. **아크릴 siz_cd×면적 코드 환원(C)** — 개발팀 위임. `CODEBUG-sizcd-area-undercharge.md` 전달 → 엔진 siz_cd→cut_width/height 환원 적용 후 아크릴 16(157~162 등) area 바인딩 안전. **현재 area 바인딩 시 과소청구 확정이라 보류.** webadmin 코드 직접수정 금지(§6).
+2. **명함 034 펄·040 화이트** — 자재 collapse(등록 MAT≠단가행 MAT) = dbmap `namecard-mat-fix` 확장 + 040 코팅 CL/NOCL 차원 → 후 바인딩(PRF/배선/태깅은 이미 적재). 박 037 HOLO/양면 = CPQ 옵션그룹 선결.
+3. **DESIGNED_NOT_LOADED 22 민팅** — §18 설계만·라이브 미적재(문구9·책자셋트5·굿즈4·특수아크릴3·코롯토1). §18→dbmap 적재(돈크리티컬·각 건 인간 승인).
+4. **NEEDS_BASICS_FIRST 97 구성(최대)** — 차원/자재부터. 굿즈/파우치 87. 상품마스터 굿즈파우치/문구 시트 권위로 신규 구성(§7 dbmap).
 
-처리 방식 = 검증(생성≠검증)·백업/undo·DRY-RUN·DO block·돈크리티컬 신규만 단간 승인(이번 세션 검증통과분 자율 COMMIT 모드 계속).
+처리 방식 = 생성≠검증·백업/undo·**검증은 반드시 `*-dryrun.sql`(ROLLBACK)**·실 COMMIT은 인간 승인(이번 세션 fix.sql 오실행 교훈 [[dryrun-vs-fix-script-commit-lesson]]).
 
 ---
 
@@ -37,7 +40,12 @@
 - 검증: `06_load/a2-price-conformance/`(6클러스터+codex high·종합 NO-GO). 미바인딩 197=§18 "설계됨≠적재됨". C2 스티커만 완전 GO.
 - ✅ **교정 COMMIT 3건**(`_foundation/remediation/_REMEDIATION-LOG.md`·되돌리지말것): ① 제본 다종-1배선(무선/PUR/트윈링 0원전손→정상·셋트 책자 근본) ② 디지털 흑백/칼라 오적재(색상엽서 칼라단가·이중합산0) ③ 명함 자재 결손(5종 전개). 백업/undo 보유.
 - ⏸️ 094 30P 보류(코드트랙 C-1·page 전송·§6). REFUTED 1: FOMEXBOARD(가격표 권위 정합·검증가 오판).
-- 다음: 가격만결손 51 바인딩 → 기초부실 105 구성(굿즈75). 동형전파(명함 PEARL·내지 S1/S2 이중합산).
+
+### ★전 상품 공식 완전성 + 가격만결손 51 분해 + 명함특수 4 COMMIT (2026-06-27)
+- **마스터** `_foundation/price-formula-master.{csv,md}` — 전 275상품 status 7분류. 완제품226 가격작동 78→82. **가격만결손 51 = LIVE_UNBOUND 24 + DESIGNED_NOT_LOADED 22 + DESIGN_BLOCKED 5** 정확 분해.
+- ✅ **명함특수 4 라이브 COMMIT**(035 모양·036 미니모양·037 박·039 투명·`_REMEDIATION-LOG.md` 2026-06-27·되돌리지말것): 특수 comp print_opt_cd 태깅(S1=단면/S2=양면·단가verbatim)+use_dims 보강+전용 PRF 5+배선 9. ★035/036 양면 이중합산 홀(37000→19000) 해소·사후검증 통과.
+- ⏸️ **아크릴 16 보류** = siz_cd×면적 코드버그(엔진 siz_cd 미환원→최소사이즈 과소청구 확정·`CODEBUG-sizcd-area-undercharge.md`·데이터편집 불가·C트랙 개발팀). ⏸️ 명함 034 펄/040 화이트 = 자재 collapse.
+- 다음: 아크릴 코드(C·dev) → 명함 034/040 자재 → DESIGNED_NOT_LOADED 22 민팅 → NEEDS_BASICS 97(굿즈).
 
 ### 잔여 CONFIRM (돈영향 현재 0)
 - 책등 종이 추가비를 권위 가격축이 안 받음(두꺼운 책 표지종이 증가분·실무진 확인). 비활성 판형 229건 여백 누락(향후 포스터 pansu 도입 시·현재 0). 088 제본방식 "보류중"(실무진).
@@ -59,8 +67,9 @@
 
 ## 건드리지 말 것 (확정 COMMIT·되돌리지 말 것)
 
-- 기존 라이브 COMMIT 전부 보존: 좀비배선 13건·W2 9그룹/29옵션·097 떡메 바인딩(git 26902ef·d32debf 직전). 백업·undo 보유.
-- **이번 세션 DB COMMIT = 0** (그릇·PRF·검증 전부 설계+DRY-RUN ROLLBACK·라이브 무변경). 산출물(06_load/inner-promotion/ 10종·set-product-readiness-master.md) 보존.
+- 기존 라이브 COMMIT 전부 보존: 좀비배선 13건·W2 9그룹/29옵션·097 떡메 바인딩(git 26902ef·d32debf 직전)·A2 교정 3건(260626). 백업·undo 보유.
+- **★2026-06-27 명함특수 4 COMMIT 보존**: PRF 5(SHAPE·MINISHAPE·FOIL·CLEAR·PEARL)·배선 9·바인딩 4(035/036/037/039)·print_opt 태깅 12행·use_dims 10 comp. 단가값 verbatim 불변. undo=`namecard-special-undo.sql`. 되돌리지 말 것.
+- 산출물 보존: `_foundation/price-formula-master.*`·`remediation/`(51 board·CODEBUG·namecard-special)·`06_load/inner-promotion/`·`set-product-readiness-master.md`.
 
 ---
 

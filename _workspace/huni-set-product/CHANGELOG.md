@@ -4,6 +4,33 @@
 
 ---
 
+## 2026-06-27 — 전 상품 가격공식 완전성 마스터 + 가격만결손 51 분해 + 명함특수 4 라이브 COMMIT + 아크릴 코드버그
+
+세션 시작 = 가격만결손 51 바인딩(§23 핸드오프). 중간에 `/harness:harness`로 두 목표(①가격구성 적재 ②전 상품 공식 정리) 요청 → **Phase 0 감사로 신규 하네스 불요 판정**(§18+§7+§17 커버·SOT [HARD] "새 하네스 금지") → 수렴-실행 + 사용자 지적("전체 공식 수립 시도 부재") 반영.
+
+### 전 상품 가격공식 통합 마스터 (완전성 자·goal 2)
+- `_foundation/price-formula-master.{csv,md}` — 전 275상품 1행. hpe-formula-cartographer가 §18 11시트 formula-map/component-inventory 합본 + 라이브 병합(신규 하네스 0). main 독립검증(바인딩78·공식52·고아3·status합275).
+- status 7분류: BOUND_OK 77·LIVE_UNBOUND 24·DESIGNED_NOT_LOADED 22·NEEDS_BASICS_FIRST 97(굿즈/파우치 87)·DESIGN_BLOCKED 5·BOUND_DEFECT 1·NA 49. **완제품226 가격작동 78/35%·미수립 148.**
+- **가격만결손 51 = LIVE_UNBOUND 24 + DESIGNED_NOT_LOADED 22 + DESIGN_BLOCKED 5** 정확 분해.
+
+### 가격만결손 51 바인딩 보드 (생성≠검증)
+- hsp-set-designer 생성 BIND_ONLY 16 주장 → hsp-set-gate 독립검증 **6만 GO**·10 매트릭스 희소격자 홀 적발(생성≠검증 실효). 산출 `_foundation/remediation/price-only-51-binding-board.*`.
+
+### ★아크릴 siz_cd×면적 코드버그 (개발팀 C트랙·DB 미변경)
+- 6 GO 아크릴(157~162·nonspec_yn=N) area 공식 바인딩 시 **과소청구 확정** 규명: 엔진(pricing.py match_component)이 siz_cd→치수 미환원→tier=0→최소사이즈 행. 데이터 단가편집 불가(어느 행 뽑히나 문제)·근본=코드(siz_cd→t_siz_sizes.cut_width/height 환원). 기존 146=nonspec_yn=Y라 무관. 문서 `_foundation/remediation/CODEBUG-sizcd-area-undercharge.md` → 개발팀 위임·바인딩 보류.
+
+### ✅ 명함특수 4 라이브 COMMIT (되돌리지말것)
+- hpe-engine-designer 설계 → main 독립검증+사후검증. **035 모양(단면18000/양면19000)·036 미니모양(16000/17000)·037 박(24200)·039 투명(13500)** 견적가능화.
+- 패턴 = 특수 comp 단가행 print_opt_cd 태깅(S1=단면POPT_001·S2=양면POPT_002·단가값 verbatim 불변·NULL→코드) + use_dims에 print_opt_cd 추가 → S1/S2 정상 배선(STD 패턴). ★035/036 양면 이중합산 홀(태깅 전 양면=S1+S2=37000 과청구·사용자 적발) → 태깅 후 S2만 19000 해소.
+- footprint: 신규 PRF 5(SHAPE·MINISHAPE·FOIL·CLEAR·PEARL)·배선 9·바인딩 4·태깅 12행·use_dims 10 comp. 바인딩 distinct prd **78→82**. 부수효과 0(대상 comp 전부 기존 미배선)·단가값 0 변경. 백업/undo 보유.
+- ⏸️ 034 펄(PRF/배선 적재·바인딩 보류=자재 collapse)·040 화이트(태깅만) = dbmap namecard-mat-fix + 코팅 차원 선결.
+- ※프로세스 사고: dryrun 대신 fix.sql(끝 COMMIT) 오실행으로 조기 COMMIT → 독립검증 통과·승인접근 일치로 **유지** 결정. 교훈 [[dryrun-vs-fix-script-commit-lesson]].
+
+### 다음
+아크릴 코드(C·dev) → 명함 034/040 자재 → DESIGNED_NOT_LOADED 22 민팅 → NEEDS_BASICS 97(굿즈).
+
+---
+
 ## 2026-06-26 — 072 내지 승격 그릇 GO + PRF 트랙 설계 + ★전체 7×4 현황판(조각 방지) · DB COMMIT 0
 
 ### 072 내지 반제품 승격 — 그릇 단계 GO (검증+codex 수렴·DB 미적재)

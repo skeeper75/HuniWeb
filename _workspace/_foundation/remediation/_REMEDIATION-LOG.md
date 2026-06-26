@@ -17,3 +17,22 @@
 - 명함: use_dims=[mat_cd,...] 정확매칭→mat별 행 필요. 기존 2종 verbatim 보존+누락3 그룹가 추가.
 
 **잔여 동형 전파(별 트랙):** 명함 PEARL collapse·디지털 명함 S1/S2 이중합산 검증·094 코드 트랙(C-1)·견적가능 70 외 가격만결손 51·기초부실 105.
+
+---
+
+## 2026-06-27 · 가격만결손 51 → 명함특수 4 바인딩 COMMIT (되돌리지 말 것)
+
+권위=가격표260527 명함 B04~B09. 생성(hpe-engine-designer)≠검증(main 독립 재실측·사후검증). **★실 라이브 COMMIT 발생**(main이 dryrun 대신 fix.sql 실행한 실수로 조기 COMMIT → 독립검증 통과분·사용자 승인접근 일치 확인 후 **유지** 결정).
+
+| 대상 | 처리 | 상태 | 골든(사후검증) |
+|---|---|---|---|
+| 035 모양·036 미니모양 | print_opt_cd 태깅(S1=단면·S2=양면) + use_dims 보강 + 전용 PRF + S1/S2 배선 + 바인딩 | ✅ **COMMIT** | 035 단면18000/양면19000 · 036 16000/17000 |
+| 037 박 | PRF_NAMECARD_FOIL(본체+동판셋업5000) + 바인딩 | ✅ **COMMIT** | 200개=24200(19200+5000) |
+| 039 투명 | PRF_NAMECARD_CLEAR(S1단독·단면만) + 바인딩 | ✅ **COMMIT** | 13500 |
+| 034 펄 | 태깅·use_dims·PRF_NAMECARD_PEARL·배선 적재됨·**바인딩 보류** | ⏸️ 자재 collapse | 등록 MAT_128/129/240/241 ↔ 단가행 MAT_127/130 불일치 → dbmap namecard-mat-fix 후 GO |
+| 040 화이트 | print_opt 태깅·use_dims만 선반영·PRF/배선/바인딩 미적재 | ⏸️ 보류 | 코팅 CL/NOCL 차원+자재 3중 선결 |
+
+**라이브 footprint:** 신규 PRF 5(SHAPE·MINISHAPE·FOIL·CLEAR·PEARL) · 배선 9 · 바인딩 4 · print_opt 태깅 12행(단가값 verbatim 불변·NULL→코드) · use_dims 보강 10 comp. 바인딩 distinct prd **78→82**.
+**핵심 입증:** ★035/036 양면 이중합산 홀(태깅 전 양면=S1+S2=37000 과청구) → 태깅 후 양면=S2만 19000 해소(사용자 적발). 부수효과 0(대상 comp 전부 기존 미배선). 단가값 0 변경.
+**백업/undo:** `namecard-special-{backup,undo}.sql`(태깅·use_dims·PRF·배선·바인딩 전부 역연산). 단가값 미변경이라 undo도 단가 무관.
+**교훈(프로세스):** 검증용 실행은 반드시 `*-dryrun.sql`(ROLLBACK), `*-fix.sql`은 끝이 `COMMIT;`이므로 라이브 적용. 운영 DB 대상 psql -f 전 파일 종결자 확인.
