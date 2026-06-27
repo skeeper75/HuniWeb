@@ -1,0 +1,10 @@
+block,dim_type,comp_cd,authority_cells,live_cells,missing_cells,mismatch_cells,surplus_cells,dim_type_ok,verdict,note
+B01,area,COMP_ACRYL_CLEAR3T(MAT_000043),196,113,83,0,0,YES,DEFECT,투명3T 면적격자. 미적재 83=전부 하삼각(w>h) 대칭쌍누락. use_dims=면적 정상(siz_cd 코드버그 아님). 있는셀 verbatim
+B02,area,COMP_ACRYL_CLEAR3T(MAT_000042),81,52,29,0,0,YES,DEFECT,투명1.5T 면적격자. 미적재 29=하삼각 대칭쌍누락. mat 분리 정상
+B03,area,COMP_ACRYL_MIRROR3T,81,52,29,0,0,YES,DEFECT,미러3T. 미적재 29=하삼각. ★추가결함=구성요소 어느 공식에도 미바인딩(고아)=견적불가
+B04a,qty_discount,DSC_ACR_QTY,6,6,0,0,0,YES,GO,공통 6구간 분리적재 정상(0/10/20/30/40/50). dsc_rate 퍼센트스케일(엔진/100 종속)
+B04b,addon_option,(다수 comp),26,4,22,0,0,PARTIAL,DEFECT,키링2/4(고리없음0·은색구슬줄300 누락)·머리끈 단가0(아이템만)·뱃지/마그넷/집게/명찰/스마트톡/지비츠/볼펜/카라비너색상 comp없음
+B05,area,COMP_ACRYL_COROTTO,36,21,15,0,0,YES,DEFECT,코롯토 면적격자. 미적재 15. 비대칭 격자라 단순대칭누락 아님
+B06,fixed_shape,(없음),4,0,4,0,0,N/A,DEFECT,카라비너 형태 고정단가(5800/5800/6300/6900) 구성요소 자체 부재=완전미적재
+B07,qty_discount,DSC_ACRCARA_QTY,3,3,0,0,0,YES,GO,카라비너 전용 3구간 분리적재 정상(0/10/20상한). B04a 오적용 없음=과할인 함정 회피
+TOTAL,,,433,251,182,0,0,,,미적재 182/433(42%). 정합불일치 0·잉여 0(있는셀 전부 권위 verbatim)

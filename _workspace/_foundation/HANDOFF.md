@@ -1,41 +1,51 @@
-# 가격 파이프라인 세션 핸드오프 — 2026-06-27
+# 가격 파이프라인 세션 핸드오프 — 2026-06-28
 
 ## 다음 시작점 (한 줄)
-**`huni-price-master-orchestrator` 스킬로 아크릴 상품군 종단 실행** — 단, 먼저 아래 "미해결 결정 1(코드 배포)"을 사용자에게 확인하고 시작.
+**`huni-price-master-orchestrator`로 아크릴 잔여 마감 또는 다음 상품군 착수** — 파이프라인 플레이북(SKILL.md "상품군 처리 플레이북")이 아크릴 종단으로 검증됨. 다음 상품군은 그대로 동형 전파.
 
----
+## 파이프라인 상태 (이번 세션 핵심 성과)
+**마스터 오케스트레이터 첫 종단 실행 = 아크릴.** 그 과정에서 파이프라인을 개선해 다음 상품군이 동형으로 돌도록 codify 완료. 진척판 = `_workspace/_foundation/price-pipeline-rtm.csv`.
 
-## 이번 세션 라이브 COMMIT (되돌리지 말 것)
-모두 dryrun→검증→인간 승인 후 COMMIT. 단가값 권위 verbatim·물리삭제 0(논리삭제 del_yn). 로그=`remediation/_REMEDIATION-LOG.md`.
+### 동형 전파 절차 (SKILL.md에 codify됨·HARD)
+1. 사실수집(상품 전수·바인딩·자재·nonspec) + ★가격코드 의존성 운영배포 확인.
+2. **단계1 무결성 = 정식 §26 4에이전트**(extractor→inspector→codex→gate). ★셀-카운트 quick diff 금지(아크릴서 141로 직행했다 156셀+12미바인딩+고아 놓칠 뻔). 권위=상품마스터 시트(`<군>-l1.csv`)+가격표 전 블록.
+3. 단계2 R3 미적재셀 = 게이트 확정 CSV verbatim(대칭전개 금지).
+4. 단계3 설계 = 상품→공식 귀속 → validator가 ⓐ즉시GO/ⓑaddon-HOLD/ⓒBLOCKED 3분류(날조·과소차단 적발).
+5. 단계4 적재 = 분류대로. R4 addon = 본체+가산comp(opt_cd)+전용공식+CPQ옵션. ★carry-forward 점검(comp 실재≠배선).
+6. 채번 = 언더스코어 OPT_/OPV_ 표준.
 
-1. **명함 034 펄** — 자재 collapse 해소(단가행 8: 다이아/실버/골드=9000/10000·로츠쿼츠=10000/11000) + 바인딩(PRD_000034→PRF_NAMECARD_PEARL). 견적 가능. 바인딩 distinct prd 82→83. 엔진 검증 8경우 ✅. SQL=`namecard-034-pearl-{fix,dryrun,undo}.sql`.
-2. **굿즈 기초 시범 3(230/231/232 레더 파우치)** — 크기 연결(기존 코드 재사용 6: SIZ_433~438) + 잘못 적재된 M/L 소재(MAT_319/320) 논리해제. SQL=`goods-pouch-pilot-*.sql`.
-3. **굿즈 사이즈 라벨 모델 확정 + 230 표본** — ★방식 B 확정(라벨 옵션). 230에 옵션그룹 OPT_000073(사이즈·택1)+옵션 OPV_000463/464(M/L)+아이템 2(→siz_cd). 손님 라벨(M/L)→크기코드→가격축 연결. SQL=`goods-size-label-pilot-*.sql`.
-4. **아크릴 157 등록사이즈 가격모델** — 신규 COMP_ACRYL_3T_BYSIZ(완제품비·단가형·use_dims=[siz_cd,min_qty]·자재무관) + PRF_ACRYL_BYSIZ + 단가행 2(60x60=5900·55x86=7800) + 바인딩. 엔진 검증 ✅(전 버그 2500→정답). SQL=`acryl-bysiz-157-{fix,dryrun,undo}.sql`.
+## 이번 세션 라이브 COMMIT (되돌리지 말 것) — 전부 dryrun→인간승인→사후검증
+로그 = `remediation/_REMEDIATION-LOG.md`(2026-06-27~28). 단가 verbatim·물리삭제 0·undo 보유.
+1. **R3 면적격자 156셀 보완** — 투명3T 196·투명1.5T 81·미러3T 81·코롯토 36 권위 완전화. `acryl-grid-fill-v2-*.sql`.
+2. **안전 6상품 바인딩** — 157·158·159·161·162→PRF_CLR_ACRYL·164→PRF_COROTTO_ACRYL(고아 해소)·157 BYSIZ 임시모델 폐기. `acryl-bind-safe6-*.sql`.
+3. **146 키링 저청구 교정** — 신규 PRF_ACRYL_KEYRING(본체+고리)→재바인딩(라이브 저청구 해소). `acryl-146-keyring-*.sql`.
+4. **147~152 addon CPQ** — 마그넷·뱃지·집게·스마트톡·명찰 5상품(본체+가공옵션·택1 비필수). 옵션그룹5(OPT_000074~078)·옵션8(OPV_000465~472)·가산comp5·전용공식5·단가행8·바인딩5+자재보강1. `acryl-addon-147-152-*.sql`.
 
-## 이번 세션 신규 구축 (하네스/오케스트레이터)
-- **§26 Huni-Price-Table-Integrity 하네스** — 권위→라이브 적재 무결성 진단(미적재 셀·차원 누락·정합 불일치). 4 에이전트 hpti-*·방법론 스킬 `hpti-load-integrity-audit`·오케스트레이터. CLAUDE.md §26.
-- **§27 가격 종단 마스터 오케스트레이터** — 상품군 단위 5단계(무결성§26→교정적재§7→설계§18→적재§7→검증§21/§13) 수렴 실행. 스킬 `huni-price-master-orchestrator`·진척판 RTM. CLAUDE.md §27.
+## 이번 세션 C트랙 (운영 배포 = 인간)
+- **webadmin 채번 언더스코어 통일** — `raw/webadmin/webadmin/catalog/views.py _next_opt_grp_code/_next_opt_code`를 OPT_/OPV_로 교체(로컬 준비완료·py_compile OK). 운영 HuniProductPrice2 배포는 인간. 명세=`remediation/CTRACK-webadmin-optcode-numbering.md`.
+- (직전 세션) `pricing.py _reduce_siz_dims`(siz_cd→cut 환원)=운영 배포 확정(사용자) → 아크릴 면적공식 단일진실원.
 
-## ★미해결 결정 (다음 세션 선결)
-1. **[코드 배포] 가장 중요** — 사용자가 `pricing.py`에 `_reduce_siz_dims`(siz_cd→cut_width/height 환원) 추가. **검증 완료: 로직·연결(evaluate_price L407)·효과 모두 정상**(아크릴 전 사이즈 정답가). 단 **raw/webadmin은 로컬 복사본**(미배포). 라이브 운영(huni-admin-production)=별도 레포 HuniProductPrice2.
-   - **확인 필요:** 이 수정이 운영에 배포됐나?
-     - 배포됨 → 아크릴 6개를 **기존 면적공식(PRF_CLR_ACRYL)에 바인딩**(단일 진실원). 내가 만든 157 데이터모델(COMP_ACRYL_3T_BYSIZ)은 **중복→되돌림**(undo 있음).
-     - 미배포 → 157 데이터모델 유지(임시책)·배포 후 면적공식 전환.
-   - 운영 코드 반영 전 `tools/test_pricing.py` 회귀 실행 권장(돈 영역).
-2. **[아크릴 158~162]** — dryrun 준비됨(`acryl-bysiz-rest-dryrun.sql`·신규 단가행 8+바인딩 5, 전 사이즈 커버 검증). 단 결정1에 종속(코드 배포면 데이터모델 대신 면적바인딩).
-3. **[굿즈 batch1 67개]** — dryrun 있으나(`goods-pouch-batch1-dryrun.sql`) **t_prd_product_sizes 연결만**. 방식 B(라벨 옵션) 확정됐으니 **옵션 층(그룹→옵션→아이템) 라벨까지 추가하도록 재생성 필요**(230 표본 형태). 73개 중 67 기존코드/7 신규/14 무권위.
+## 미해결/블로커 (아크릴 잔여)
+- **154 머리끈** — HAIR_BAND comp 단가행(500) 충전+전용공식+옵션(147~152 동형·미실행).
+- **146 Step2** — 볼체인(1000)·고리없음(0)·은색구슬줄(300) 옵션 추가(채번 언더스코어).
+- **R1 카라비너(166)** — 완전 미적재·고정형 신규 그릇(dbm-price-import-prep) 설계 필요.
+- **163 미니파츠** — 등록 120x50인데 1.5T격자 100까지=격자밖 견적불가(무결성 폐루프 or 사이즈 컨펌).
+- **BLOCKED 컨펌큐(사용자 판단 필요):** 미러153(정체 모호·MIRROR3T comp 고아)·볼펜155(본체 inline 정찰가 B01 불일치)·자유형스탠드160(8800 정찰가)·쉐이커170/226·157 네임택 가공(B04b 단가 부재).
 
 ## 이번 세션 결정 (relitigate 금지)
-- **가격은 설계 먼저·시뮬레이터는 검증도구**(표면 바인딩 금지·돈크리티컬). → memory [[price-design-before-verify]].
-- **사이즈 표현 = 방식 B(라벨 옵션)** — 손님 라벨(opt_nm)→크기코드(siz_cd·생산치수)→가격축. 새 속성/코드 0·기존 장치만. 레드프린팅도 동일(사이즈=치수차원·변형=라벨/코드).
-- **기초마스터 코드 삭제금지·추가가능·이름변경가능** → memory [[base-master-code-no-delete]].
-- **사용자=비전문가·쉬운 말** → memory [[user-nonexpert-plain-language]].
-- 아크릴 siz_cd×면적 = 순수 코드버그(데이터 우회 가능하나 등록사이즈 모델 or 코드환원이 정석).
+- **무결성은 정식 §26 하네스로** — 셀-카운트 quick diff는 토대 결함을 놓침(아크릴 입증).
+- **권위 = 상품마스터 시트**(상품별 가격모델+가공/추가) + 가격표 전 블록. "각 시트 상품에서 최종 적용대상 확인"(사용자).
+- **채번 = 언더스코어 표준**(다수 135/510) + webadmin 채번코드 C트랙 교체로 재혼재 차단.
+- **addon = 본체면적공식 + opt_cd 가산comp + 상품별 전용공식**(공유공식 오염 차단·미선택0·이중합산0).
+- 비대칭쌍 격자는 verbatim only(대칭전개=오가격).
 
 ## 건드리지 말 것
-- 위 COMMIT 4건(명함034·굿즈230~232·230라벨·아크릴157). undo 스크립트 보유.
-- 명함 대표코드 MAT_127/130, 굿즈 M/L 마스터코드 MAT_319/320(논리해제만·코드 보존).
+- 위 COMMIT 4건(R3 156셀·안전6·146·147~152). undo 보유.
+- 면적격자 217 기존셀·공유공식 PRF_CLR_ACRYL/COMP_ACRYL_CLEAR3T·고리 COMP_ACRYL_KEYRING 단가행·부속자재 마스터코드.
+- C트랙 webadmin 코드 변경(배포 전까지 운영 영향 0·로컬만).
 
-## 진척판 (다음 세션 갱신)
-`_workspace/_foundation/price-pipeline-rtm.csv` — 미생성. 마스터 오케스트레이터 첫 실행 시 생성(상품군×5단계 상태).
+## 산출물 위치
+- 무결성: `_workspace/huni-price-table-integrity/`(01_authority 433셀·02_load·03_codex·04_gate verdict+confirmed CSV).
+- 설계/검증: `_workspace/huni-price-engine-design/`(03_design acrylic-binding/addon·04_validation verdict).
+- 교정 SQL/로그: `_workspace/_foundation/remediation/`(acryl-*·CTRACK-*·_REMEDIATION-LOG.md).
+- 진척판: `_workspace/_foundation/price-pipeline-rtm.csv`.

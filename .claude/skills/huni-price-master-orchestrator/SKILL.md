@@ -29,9 +29,15 @@ description: >-
 ## 파이프라인 단계 (상품군 단위·의존 순서)
 
 ### 단계 1 — 토대 무결성 [§26 huni-price-table-integrity]
-권위 엑셀의 그 상품군 가격테이블(차원+전 셀)이 라이브에 이 빠짐 없이·정확히 적재됐는지 진단. 산출=결함 보드(미적재 셀·차원 누락·정합 불일치)+I1~I7 GO/NO-GO.
+권위의 그 상품군 가격테이블(차원+전 셀)이 라이브에 이 빠짐 없이·정확히 적재됐는지 진단. 산출=결함 보드(미적재 셀·차원 누락·정합 불일치)+I1~I7 GO/NO-GO.
 - **GO** → 단계 3로.
 - **NO-GO(결함)** → 단계 2.
+
+**★[HARD·아크릴 실전 교훈] 절대 셀-카운트 quick diff로 판단하지 말 것.** main이 면적 3블록만 셀 수 비교(141)로 "GO" 직행했다가, 정식 §26 하네스 구동하니 실제는 156셀 미적재 + 12/13 상품 미바인딩 + 고아 comp/formula + addon 저청구 + 카라비너 완전미적재였다. **반드시 4에이전트 정식 구동**: `hpti-authority-extractor`(전 블록·차원+전 셀) → `hpti-load-inspector`(3종 결함·차원+데이터 함께) → `hpti-codex-verifier`(독립 2차) → `hpti-integrity-gate`(I1~I7·라이브 좌표 독립 재실측). 권위 원천 2종 모두:
+- **상품마스터 시트(`24_master-extract-260610/<군>-l1.csv`)** = 상품 universe + 상품별 {가격모델·소재·인쇄사양·가공(옵션)+단가·추가상품(옵션)+단가}. ★"각 시트 상품에서 최종 적용대상 확인"(사용자 directive)의 권위.
+- **가격표 시트(`24_master-extract`/`06_extract`/`huni-price-table-integrity/01_authority`)** = 격자(차원+전 셀)·후가공/추가 단가블록. ★면적격자만이 아니라 전 블록(수량할인·후가공·파생상품·고정형) 전수.
+
+**무결성 결함 분류(아크릴 실증·전 상품군 동형):** ① 미적재 셀(꽉 찬 권위격자 vs 라이브 sparse·★verbatim INSERT만·**대칭전개 금지**=비대칭쌍 오가격) ② 차원 누락(권위 가격축이 라이브 use_dims/차원행에 없음) ③ 정합 불일치(값/자재/표시 오적재) ④ 상품 공식 0바인딩(단가표 있어도 상품→공식 사슬 단절=견적불가) ⑤ 고아 comp/formula(comp 실재≠배선·formula 실재≠상품바인딩) ⑥ 파생격자(미러=투명×2 등). false-positive 가드: 도수 "통용"=단일가(차원 아님)·원형/사각 동일가·의미축 정당차이.
 
 ### 단계 2 — 무결성 결함 교정 적재 [§7 dbmap · 인간 승인]
 단계 1 결함을 권위대로 라이브에 보완/교정 적재(dbm-price-import-prep 그릇·dbm-correctness-audit 교정·dbm-load-execution). ★실 COMMIT은 dryrun→인간 승인. 완료 후 단계 1 재실측(GO 확인).
@@ -49,6 +55,20 @@ description: >-
 
 ### 단계 0(선택·1회) — 이해 [§14 price-engine-diag]
 5장치 역할·코드↔DB 정합이 불확실하면 선행 1회. 이미 이해됐으면 생략.
+
+## ★상품군 처리 플레이북 (아크릴 종단 검증·동형 전파)
+다음 상품군은 아크릴과 **동일 순서·동일 패턴**으로 처리한다. 각 단계 산출은 인간 승인 후 라이브 COMMIT.
+
+1. **사실 수집(Phase 0+):** 라이브에서 그 상품군 상품 전수 + 현재 바인딩 + 자재 + nonspec_yn 조회. 상품마스터 시트(`<군>-l1.csv`) + 가격표 격자 위치 확보. 가격 코드 의존성(예 siz_cd→cut 환원) **운영 배포 여부 먼저 확인**(미배포면 등록사이즈 상품 바인딩 보류·C트랙).
+2. **단계1 무결성(정식 §26 하네스):** 위 [HARD] 절차. 산출=결함보드 + 게이트 확정 `<군>-missing-cells-confirmed.csv`(좌표·verbatim 단가).
+3. **단계2 교정적재 R3=미적재 셀:** 게이트 확정 CSV에서 INSERT(단가 verbatim·대칭전개 금지·min_qty/mat 등 기존 행 형태 보존·IDENTITY 시퀀스 setval 선행). dryrun(격자 완전화 어서션)→승인→COMMIT.
+4. **단계3 설계 = 상품→공식 귀속(§18 hpe-engine-designer):** 각 미바인딩 상품을 상품마스터 가격모델로 분류(면적/코롯토/고정형/addon)·기존 공식 재사용(search-before-mint). → **validator(hpe-validator) 독립 골든검증이 상품을 3분류**: ⓐ 즉시 GO(순수 면적·저청구 0) ⓑ addon-HOLD(본체+가공·후가공 미적재면 저청구→R4 선결) ⓒ BLOCKED(inline 정찰가 불일치·격자밖·자재無·권위 단가 부재). ★validator가 설계의 골든 날조·과소차단도 적발(아크릴서 163 격자밖 GO오분류·날조 골든 적발).
+5. **단계4 적재 = 안전 분류대로:** ⓐ 즉시 GO 바인딩 먼저 COMMIT. ⓑ addon은 R4로(아래). ⓒ BLOCKED는 컨펌큐.
+6. **R4 addon 레시피(본체+가공+추가상품):** 본체 면적공식 + **opt_cd-keyed 가산 comp**(PRICE_TYPE.01 단가형·use_dims=`[opt_cd,min_qty,opt_grp:OPT_xxxxx]`) + **상품별 전용공식**(공유 공식 오염 차단·본체 disp1 addtn_yn=N + 가산 disp2 addtn_yn=Y) + CPQ 옵션층(그룹→옵션→옵션아이템 ref_dim_cd=OPT_REF_DIM.03 부속자재·search-before-mint로 자재 실재 확인) + 바인딩. 단가=상품마스터 가공/추가가격 + 가격표 후가공블록 verbatim. dbm-option-mapper 구축→main 독립 dryrun(골든 본체+가공 합·opt_cd 미선택0·이중합산0·멱등).
+7. **★carry-forward 결함 점검:** 이미 바인딩된 상품도 **comp 실재≠배선** 저청구 가능(아크릴 146 키링=고리 comp 미배선 라이브 저청구). 기존 바인딩 상품의 가공/추가 comp 배선 여부 점검.
+8. **단계5 검증:** 안전6+addon 골든 재계산(엔진 충실재현 SQL or evaluate_price)·허용오차 0.
+
+**채번 거버넌스 [HARD]:** 옵션 코드는 **언더스코어 OPT_/OPV_ 표준**(라이브 다수). 신규 mint=언더스코어 MAX+1. webadmin `views.py _next_opt_grp_code/_next_opt_code`가 하이픈 발번하는 건 C트랙으로 언더스코어 교체(`CTRACK-webadmin-optcode-numbering.md`·운영 배포 인간). comp_cd/frm_cd=이름기반.
 
 ## 실행 모드
 각 단계는 해당 하네스 **오케스트레이터 스킬을 직접 호출**(Skill 도구)하거나 그 하네스 에이전트를 `model:"opus"`로 구동. 마스터는 단계 전이·진척판·인간 승인 게이트만 관리(중앙 조율).
