@@ -48,10 +48,15 @@ description: >-
 ### 단계 4 — 설계분 적재 [§7 dbmap · 인간 승인]
 설계된 공식·구성요소·단가행·바인딩을 라이브 COMMIT(dryrun→인간 승인·멱등·백업/undo). search-before-mint·단가 verbatim·[[base-master-code-no-delete]].
 
-### 단계 5 — 검증 [§21 conformance 전수 + §13/§15 골든 재계산]
-그 상품군 전 상품×사이즈·옵션 조합을 시뮬레이터/evaluate_price로 재계산해 권위 골든과 수치 대조(허용오차 0). §21 종단 정합 + §13 게이트/§15 단일. 생성≠검증.
+### 단계 5 — 검증 [§21 conformance 전수 + ★라이브 시뮬레이터 전수 + §13/§15 골든]
+그 상품군 전 상품×사이즈·옵션 조합을 권위 골든과 수치 대조(허용오차 0). §21 종단 정합 + §13 게이트/§15 단일. 생성≠검증.
+
+**★[HARD·아크릴 실전 교훈] 라이브 가격시뮬레이터(gstack browse)가 진짜 검증 게이트.** dryrun 골든합산(본체단가+가산단가 SQL 합)은 **엔진의 옵션→차원 환원을 우회**해 결함을 숨긴다(아크릴 addon이 SQL 골든 PASS인데 라이브 0원·저청구5종이 SQL상 정상인데 라이브 2500). **반드시 라이브 `huni-admin-production…/admin/price-simulator/`에서 각 상품을 실제 옵션 선택→가격계산해 권위가 일치하는지 실측**(SQL/dryrun만으로 GO 금지):
+- 검증 헬퍼 `_workspace/_foundation/remediation/_sim_verify.sh`(로그인 세션 재사용·결과 요약). 자격증명 `.env.local HUNI_ADMIN_*`(읽기 탐색만).
+- **전 등록사이즈·전 가공/추가 옵션 조합을 실측**(대표 1개만 보고 "PASS" 금지=오검증 함정. 아크릴서 "코스터 2500 PASS"가 최소 디폴트를 정상으로 오인한 오검증이었음).
+- 시뮬레이터 신호 읽기: `제외·데이터 없음`=단가행 부재, `제외·해당 없음`=차원 미스매치/opt_cd 미주입, `합계 0원 경고`=결함, `최소셀 고정`=사이즈 입력 불가(저청구).
 - **GO** → 상품군 완주. 진척판 갱신. 다음 상품군.
-- **NO-GO** → 결함 유형별 라우팅: 적재 빠짐=단계 2 / 설계 결함=단계 3 / 코드버그=개발팀(C트랙). 루프.
+- **NO-GO** → 결함 유형별 라우팅: 적재 빠짐=단계 2 / 설계·모델 결함=단계 3 / 코드버그=개발팀(C트랙). 루프.
 
 ### 단계 0(선택·1회) — 이해 [§14 price-engine-diag]
 5장치 역할·코드↔DB 정합이 불확실하면 선행 1회. 이미 이해됐으면 생략.
@@ -64,11 +69,16 @@ description: >-
 3. **단계2 교정적재 R3=미적재 셀:** 게이트 확정 CSV에서 INSERT(단가 verbatim·대칭전개 금지·min_qty/mat 등 기존 행 형태 보존·IDENTITY 시퀀스 setval 선행). dryrun(격자 완전화 어서션)→승인→COMMIT.
 4. **단계3 설계 = 상품→공식 귀속(§18 hpe-engine-designer):** 각 미바인딩 상품을 상품마스터 가격모델로 분류(면적/코롯토/고정형/addon)·기존 공식 재사용(search-before-mint). → **validator(hpe-validator) 독립 골든검증이 상품을 3분류**: ⓐ 즉시 GO(순수 면적·저청구 0) ⓑ addon-HOLD(본체+가공·후가공 미적재면 저청구→R4 선결) ⓒ BLOCKED(inline 정찰가 불일치·격자밖·자재無·권위 단가 부재). ★validator가 설계의 골든 날조·과소차단도 적발(아크릴서 163 격자밖 GO오분류·날조 골든 적발).
 5. **단계4 적재 = 안전 분류대로:** ⓐ 즉시 GO 바인딩 먼저 COMMIT. ⓑ addon은 R4로(아래). ⓒ BLOCKED는 컨펌큐.
-6. **R4 addon 레시피(본체+가공+추가상품):** 본체 면적공식 + **opt_cd-keyed 가산 comp**(PRICE_TYPE.01 단가형·use_dims=`[opt_cd,min_qty,opt_grp:OPT_xxxxx]`) + **상품별 전용공식**(공유 공식 오염 차단·본체 disp1 addtn_yn=N + 가산 disp2 addtn_yn=Y) + CPQ 옵션층(그룹→옵션→옵션아이템 ref_dim_cd=OPT_REF_DIM.03 부속자재·search-before-mint로 자재 실재 확인) + 바인딩. 단가=상품마스터 가공/추가가격 + 가격표 후가공블록 verbatim. dbm-option-mapper 구축→main 독립 dryrun(골든 본체+가공 합·opt_cd 미선택0·이중합산0·멱등).
-7. **★carry-forward 결함 점검:** 이미 바인딩된 상품도 **comp 실재≠배선** 저청구 가능(아크릴 146 키링=고리 comp 미배선 라이브 저청구). 기존 바인딩 상품의 가공/추가 comp 배선 여부 점검.
-8. **단계5 검증:** 안전6+addon 골든 재계산(엔진 충실재현 SQL or evaluate_price)·허용오차 0.
+6. **★가격 모델 결정 트리 [HARD·아크릴 라이브 입증]** — 상품을 라이브에서 견적되는 모델로 분류. 시뮬레이터 사이즈 입력은 **`nonspec_yn='Y'`(비규격 자유입력)일 때만** 뜸(price_views.py:1302·1366):
+   - **고정가 by-siz_cd**(형상별·등록사이즈별 자체 정찰가·면적격자와 불일치): 본체 comp `use_dims=[siz_cd,min_qty]`·PRICE_TYPE.02·min_qty=1·단가행 siz_cd verbatim. 시뮬레이터가 siz_cd 드롭다운 노출 → 정상. (예 볼펜·자유형·카라비너·명찰GS.)
+   - **면적격자 + 자유입력**(nonspec_yn=Y): 본체 `COMP_*_CLEAR3T`(use_dims=[mat_cd,siz_width,siz_height])·자재 선택+비규격 spinbutton → 정상. (예 addon 본체·코롯토.)
+   - **면적격자 + 등록사이즈(nonspec_yn=N)** = ★저청구 함정: 사이즈 입력 UI 없어 최소셀(20x20) 고정(코스터 100x100→2500=5배 저청구). **교정=사이즈 라벨 옵션**(옵션그룹 택1 mand_yn=Y·옵션=등록사이즈·옵션아이템 `ref_dim_cd=OPT_REF_DIM.01 ref_key1=siz_cd` → _opt_maps dims[siz_cd]→_reduce_siz_dims→면적격자 환원). 굿즈230·`acryl-sizelabel-*.sql` 동형.
+7. **★addon 부속(고리·볼체인·마그넷 등) = addon 템플릿 [HARD·엔진 정식·라이브 입증]** — ❌**옵션그룹+가산 comp(opt_cd 키) 방식은 엔진서 미작동**(option group의 _opt_maps가 opt_cd 미생성·OPT_REF_DIM.03이 본체 mat_cd 덮음·covered가 자재 드롭다운 숨김 → 본체+가산 둘 다 0원). **정식=t_prd_product_addons→템플릿**(`t_prd_templates` base_prd_cd=본상품 + `t_prd_template_prices` flat 단가 B04b verbatim + `t_prd_product_addons` 링크). evaluate_price(target=tmpl)=unit_price×qty(pricing.py:436)·개별 평가·합산(price_simulate:1769). 교정 3단계=① 바인딩 본체공식만(PRF_CLR_ACRYL 등) ② 가산 옵션그룹/옵션/아이템 삭제(자재 covered 해소) ③ addon 템플릿+링크. 채번 TMPL-0000NN(하이픈 채널 MAX+1). `acryl-pilot-147-addon-template-*.sql`·`acryl-addon-template-propagate-*.sql` 레시피. (다중 부속=택1 단일은 0원옵션 미추가·색=생산메타 단일템플릿.)
+8. **★권위 단가 부재 = "확인필요" 시그널 [HARD·임의단가 금지]** — 가격표/상품마스터에 단가 빈칸이면 임의 생성 금지(돈크리티컬). 대신 단가행 없는 구성요소(comp_nm=구체 갭 메시지)+공식(frm_nm 메시지)+바인딩 → 시뮬레이터가 `제외·데이터없음`+공식명으로 "실무진 단가/구성 확인필요" 노출(코드0·DB only). 실무진 확정 후 단가행1줄/정상공식 교체로 해소. `acryl-163-minipart-pending-*.sql`·`acryl-unbound-pending-*.sql`.
+9. **★carry-forward 결함 점검:** 이미 바인딩된 상품도 **comp 실재≠배선** 저청구 가능(아크릴 146 키링=고리 comp 미배선). 기존 바인딩 상품의 가공/추가 배선 점검.
+10. **단계5 검증(필수):** 위 ★라이브 시뮬레이터 전수(각 등록사이즈·옵션 조합 실측·골든 허용오차 0). SQL 골든합산만으로 GO 금지.
 
-**채번 거버넌스 [HARD]:** 옵션 코드는 **언더스코어 OPT_/OPV_ 표준**(라이브 다수). 신규 mint=언더스코어 MAX+1. webadmin `views.py _next_opt_grp_code/_next_opt_code`가 하이픈 발번하는 건 C트랙으로 언더스코어 교체(`CTRACK-webadmin-optcode-numbering.md`·운영 배포 인간). comp_cd/frm_cd=이름기반.
+**채번 거버넌스 [HARD]:** 옵션 코드는 **언더스코어 OPT_/OPV_ 표준**(라이브 다수). 신규 mint=언더스코어 MAX+1. 템플릿=하이픈 TMPL- 채널 MAX+1. webadmin `views.py _next_opt_grp_code/_next_opt_code` 하이픈 발번은 C트랙 언더스코어 교체(`CTRACK-webadmin-optcode-numbering.md`·운영 배포 인간). comp_cd/frm_cd=이름기반.
 
 ## 실행 모드
 각 단계는 해당 하네스 **오케스트레이터 스킬을 직접 호출**(Skill 도구)하거나 그 하네스 에이전트를 `model:"opus"`로 구동. 마스터는 단계 전이·진척판·인간 승인 게이트만 관리(중앙 조율).
@@ -87,5 +97,10 @@ description: >-
 - **경계:** 마스터는 조율만. 실제 분석·설계·검증·적재는 각 하네스가 수행(재구현 금지). 단일 레이어만 필요하면 해당 하네스 직접.
 
 ## 테스트 시나리오
-- **정상:** "아크릴 가격 종단" → §26 무결성(sparse grid·차원누락 적발)→§7 교정적재(승인)→§18 설계→§7 적재(승인)→§21/§13 골든 재계산 GO → 진척판 아크릴 GO.
-- **에러:** 단계5 NO-GO(특정 사이즈 저청구) → 원인=단계1 미적재 셀 → 단계2로 라우팅·교정→재검증.
+- **정상:** "아크릴 가격 종단" → §26 무결성(sparse grid·차원누락 적발)→§7 교정적재(승인)→§18 설계(모델 결정 트리)→§7 적재(승인)→**라이브 시뮬레이터 전수 실측**+§21/§13 골든 GO → 진척판 GO.
+- **에러1(적재):** 단계5 라이브 NO-GO(특정 사이즈 저청구) → 단계1 미적재 셀 → 단계2 라우팅·교정→재검증.
+- **에러2(모델·아크릴 실증):** 라이브 0원/2500 고정 → addon이 opt_cd 가산 방식(미작동)→addon 템플릿 전환 / 면적+nonspec_yn=N(사이즈 입력불가)→사이즈 라벨 옵션. 둘 다 라이브 시뮬레이터 재실증.
+- **에러3(권위 부재):** 단가 빈칸 → 임의단가 금지 → "확인필요" 시그널 바인딩(시뮬레이터 노출)·실무진 해소.
+
+## ★아크릴 종단 완주 기록 (1호·전 패턴 라이브 입증 2026-06-28)
+무결성(§26 정식)→R3 156셀 교정적재→설계→적재(고정가 by-siz·면적·addon)→**라이브 시뮬레이터 전수 검증**. 발견·교정: ① addon opt_cd 모델 미작동→템플릿 전환(147=3900·146=5200·152=5100 GO) ② 저청구5종(157/158/159/161/162) 면적+nonspec_yn=N→사이즈 라벨 옵션(코스터 2500→12700) ③ 미니파츠·미바인딩7=확인필요 시그널. 최종=정상19·시그널8·돈크리티컬 저청구0. 산출=`_workspace/_foundation/remediation/`·`acryl-simulator-verification-matrix.md`. 다음 상품군은 이 패턴 동형.
