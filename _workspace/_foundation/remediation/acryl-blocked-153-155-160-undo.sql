@@ -1,0 +1,8 @@
+-- acryl-blocked-153-155-160-undo.sql — 역연산 (인간 승인 후만)
+BEGIN;
+DELETE FROM t_prd_product_price_formulas WHERE frm_cd IN ('PRF_ACRYL_NAMETAG_GS','PRF_ACRYL_BALLPEN','PRF_ACRYL_FREESTAND');
+DELETE FROM t_prc_formula_components WHERE frm_cd IN ('PRF_ACRYL_NAMETAG_GS','PRF_ACRYL_BALLPEN','PRF_ACRYL_FREESTAND');
+DELETE FROM t_prc_price_formulas WHERE frm_cd IN ('PRF_ACRYL_NAMETAG_GS','PRF_ACRYL_BALLPEN','PRF_ACRYL_FREESTAND');
+DELETE FROM t_prc_component_prices WHERE comp_price_id BETWEEN 39102 AND 39112;
+DELETE FROM t_prc_price_components WHERE comp_cd IN ('COMP_ACRYL_NAMETAG_GS','COMP_ACRYL_BALLPEN','COMP_ACRYL_FREESTAND');
+COMMIT;
