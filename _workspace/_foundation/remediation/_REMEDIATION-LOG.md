@@ -24,6 +24,14 @@
 | R1 | 카라비너 신규 그릇 | dbm-price-import-prep→load | 설계 필요 |
 | R4 | 후가공 22옵션 + 146키링 저청구 | §18 master기준 설계→validator→dbmap CPQ | ✅ **146+147~152 COMMIT**·잔여 154/Step2 |
 
+### 2026-06-28(이어서3) · ★addon 템플릿 교정 패턴 라이브 실증 — 147 마그넷 파일럿 GO (되돌리지 말 것)
+
+addon 미작동(아래) 교정 방향=사용자 승인 "addon 템플릿 재설계(정석)". **147 마그넷 파일럿으로 패턴 라이브 실증.**
+- **교정 3단계(검증된 레시피):** ① 바인딩 PRF_ACRYL_MAGNET(가산형)→**PRF_CLR_ACRYL**(공유 면적격자 본체만) ② 마그넷 옵션그룹(OPT_000074)+옵션+아이템 **삭제**(OPT_REF_DIM.03이 본체 mat_cd 가리던 것 해소→자재 드롭다운 복원) ③ 마그넷=**addon 템플릿**(t_prd_templates base_prd_cd=147+t_prd_template_prices flat 800+t_prd_product_addons 링크). `acryl-pilot-147-addon-template-*.sql`.
+- **★라이브 시뮬레이터 실증:** 147 30x30 투명3T = **본품 3,100(면적격자 정상) + 추가상품 자석부착 800(TEMPLATE_PRICE) = 총 3,900원**(권위 골든 일치). 본체 자재 복원·addon 정상 가산 확인.
+- **채번:** 템플릿 TMPL-000014(기존 채널 하이픈 MAX+1). flat 단가=evaluate_price(target=tmpl)가 unit_price×qty(pricing.py:436-441).
+- **잔여 전파(동형·검증된 레시피·각 건 라이브 시뮬레이터 실증 필수):** 146 키링(고리 4+볼체인 9·multi-addon)·148 뱃지(2)·149 집게(1)·150 스마트톡(2)·152 명찰(2)·154 머리끈(1). COMP_ACRYL_*/PRF_ACRYL_* 가산 잔재는 고아(무해)·최종 정리 트랙.
+
 ### 2026-06-28(이어서) · 아크릴 잔여 마감 6 COMMIT + ★addon 모델 라이브 미작동 적발 (되돌리지 말 것 / 단 addon은 교정대상)
 
 사용자 directive: 잔여(154·146 Step2·166·BLOCKED 컨펌큐) 마감 + **라이브 시뮬레이터에서 실제 견적 확인까지 파이프라인에**. dryrun 골든 PASS→인간 승인→COMMIT→사후검증, 그 다음 gstack browse로 라이브 검증.

@@ -45,7 +45,21 @@
 - **라이브 evaluate_price/시뮬레이터 실행이 진짜 검증** — 사용자 "실제 사이트 확인" directive가 핵심 결함 적발.
 - 향후 addon/옵션 가격은 **반드시 라이브 시뮬레이터 골든**으로 검증(SQL 합산만으로 GO 금지).
 
-## 교정 방향 (인간 결정 필요)
+## ★교정 패턴 라이브 실증 완료 (147 마그넷 파일럿 GO · 2026-06-28)
+
+사용자 승인 = 옵션 1(addon 템플릿 재설계·정석). **147 마그넷으로 라이브 실증 = 총 3,900원**(본품 3,100 + addon 800).
+
+**검증된 교정 레시피(상품당·전파용):**
+1. 바인딩 가산형 공식(PRF_ACRYL_<X>) → **PRF_CLR_ACRYL**(공유 면적격자 본체) 또는 해당 본체 공식. = 본체만.
+2. 가산 옵션그룹(OPT_*)+옵션+아이템 **삭제**(OPT_REF_DIM.03이 본체 mat_cd covered/덮음 해소 → 자재 드롭다운 복원).
+3. 부속마다 **addon 템플릿**: `t_prd_templates`(tmpl_cd·base_prd_cd=본상품·tmpl_nm·dflt_qty1·use_yn Y) + `t_prd_template_prices`(flat unit_price=B04b verbatim) + `t_prd_product_addons`(prd_cd↔tmpl_cd·disp_seq).
+4. **라이브 시뮬레이터 실증 필수**(SQL/dryrun만으론 불충분 — 본 결함이 그렇게 숨었음).
+- 채번: 템플릿 TMPL-000014~(하이픈 채널 MAX+1). flat 단가 → evaluate_price(target=tmpl)=unit_price×qty(pricing.py:436-441).
+- 잔재(COMP_ACRYL_*/PRF_ACRYL_* 가산)=고아·무해·최종 정리 트랙.
+
+**잔여 전파(동형):** 146 키링(고리4+볼체인9·multi)·148 뱃지(2)·149 집게(1)·150 스마트톡(2)·152 명찰(2)·154 머리끈(1).
+
+## 교정 방향 (당초 옵션 — 1번 채택·실증됨)
 
 1. **부속을 addon 템플릿으로 재모델링**(엔진 정식): 고리/볼체인/마그넷/머리끈 등 → t_prd_product_addons→템플릿+단가.
    본체는 액세서리 그룹 제거로 자재 선택 복원 → 면적격자 정상화. = 정석이나 재설계.
