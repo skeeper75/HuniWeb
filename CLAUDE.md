@@ -316,7 +316,7 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 **산출물 루트:** `_workspace/huni-set-product/` (01_authority·02_reference·03_design·04_codex·05_gate·06_load·_meta). 6인 팀(`hsp-authority-curator`∥`hsp-domain-researcher` 기준점 팬아웃 → `hsp-set-designer` 설계 → `hsp-codex-verifier` codex 독립 2차 → `hsp-set-gate` S1~S7 게이트(evaluate_set_price 재계산·DRY-RUN) → `hsp-load-executor` 승인 후 안전 적재(백업·복합PK 멱등·사후검증)) + 5 스킬(+ `dbm-load-execution`·`hqv-codex-cross-verify`·`hpe-competitor-benchmark`·`rpm-live-reverse` 재사용). 생성≠검증·codex 주장=가설·search-before-mint(반제품 신규 mint 금지·미등록은 BLOCKED→dbmap 위임)·라이브 읽기전용(적재 Phase 5만 인간 승인 후 COMMIT)·파일럿(책자류·엽서북·떡메) 완주→동형 전파. 자격증명 `.env.local RAILWAY_DB_*`.
 
-**변경이력:** 최신: 2026-06-27 전 275상품 가격공식 통합 마스터(완전성 자·신규 하네스0으로 §18 합본)+가격만결손51 분해(LIVE_UNBOUND24/DESIGNED_NOT_LOADED22/DESIGN_BLOCKED5)+명함특수 4 라이브 COMMIT(035/036/037/039·print_opt 태깅 S1/S2 라우팅·양면홀 해소·78→82바인딩)+★아크릴 siz_cd×면적 코드버그 적발(개발팀 C트랙). 다음=아크릴 코드→명함 034/040 자재→DESIGNED_NOT_LOADED 22 민팅→NEEDS_BASICS 97(굿즈) → `_workspace/huni-set-product/HANDOFF.md`·`_workspace/_foundation/`·`CHANGELOG.md`
+**변경이력:** 최신: 2026-06-27(2세션) 명함034 펄 collapse+바인딩 COMMIT(83바인딩)·굿즈 기초 시범3+라벨모델 확정(방식B 라벨옵션)·아크릴157 등록사이즈 가격모델 COMMIT·★siz_cd→cut환원 코드수정 검증(미배포 확인필요)·신설 §26 가격테이블 적재무결성 하네스+§27 가격 종단 마스터 오케스트레이터. 다음=마스터로 아크릴 종단 실행(단 코드배포 결정 선결) → `_workspace/_foundation/HANDOFF.md`(가격 파이프라인 핸드오프)·`_workspace/huni-set-product/HANDOFF.md`·`remediation/_REMEDIATION-LOG.md`
 
 ---
 
@@ -344,7 +344,25 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 ---
 
-## 26. MoAI Framework (gated — rarely used here)
+## 26. Harness: Huni-Price-Table-Integrity (권위 가격테이블 적재 무결성 진단)
+
+**목표:** 두 권위 엑셀(상품마스터 가격표포함 260610·인쇄상품 가격표 260527)의 각 시트 **가격테이블 "차원 + 전 데이터셀"이 라이브 DB에 이 빠짐 없이·정확히 적재**됐는지 정밀 진단하고 보완/교정 명세를 산출한다. 권위=엑셀(절대)·라이브=감사 대상. 3종 결함=① 미적재 셀(sparse grid·이 빠진 것·견적 0/최소가) ② 차원 누락(권위 가격축이 라이브 use_dims·차원행에 없음·손님 선택불가/엔진 미환원) ③ 정합 불일치(적재값≠권위·mat 코드 불일치·표시↔실제 오적재). **가격공식·가격구성요소(차원 포함) 설계(§18)·검증(§13/15)의 선행 신뢰 기반** — 불완전 적재 위에 설계하면 정확값 불가(아크릴 siz_cd×면적·명함 자재 collapse가 실증). §21(전 상품 12축 종단 정합·존재 위주)과 달리 **가격테이블 셀·차원 적재 무결성에 집중·더 granular·설계 선행 게이트**.
+
+**트리거:** "가격테이블 무결성", "적재 무결성 진단", "권위 적재 정밀 진단", "이 빠진 적재", "미적재 셀 진단", "차원 누락 검사", "권위 라이브 적재 대조", "가격격자 빈칸", "sparse grid 진단", "무결성 하네스 실행/재실행/업데이트/보완", "특정 시트만 무결성 진단" 등 본 도메인 요청 시 `huni-price-table-integrity-orchestrator` 스킬을 사용. 가격공식 설계 자체는 §18, 전 상품 12축 종단 정합은 §21, 표시명 중복은 §17, 라이브 실 교정 적재는 §7 dbmap. 단순 질문은 직접 응답.
+
+**산출물 루트:** `_workspace/huni-price-table-integrity/` (01_authority·02_load·03_codex·04_gate·_meta). 4 에이전트(`hpti-authority-extractor` 정답격자 → `hpti-load-inspector` 적재대조 결함보드(시트 팬아웃) → `hpti-codex-verifier` codex 독립2차 → `hpti-integrity-gate` I1~I7 게이트) + 방법론 스킬 `hpti-load-integrity-audit`(+ `hqv-codex-cross-verify`·`dbm-excel-parse`·`dbm-price-import-prep`·`dbm-correctness-audit` 재사용). 생성≠검증·codex 주장=가설·라이브 읽기전용 SELECT만(`.env.local RAILWAY_DB_*`)·DB 미적재(실 교정 인간 승인 후 dbmap 위임)·파일럿=아크릴(sparse grid 실증)→동형 전파.
+
+**변경이력:** 최신: 2026-06-27 하네스 초기 구성(4 에이전트+오케스트레이터+방법론 스킬·I1~I7·아크릴 파일럿) → 첫 실행 시 CHANGELOG 생성
+
+## 27. 가격 종단 마스터 오케스트레이터 (상품군 단위 파이프라인·수렴 실행)
+
+**목표:** 흩어진 8개 가격 하네스를 의존 순서대로 엮어, 한 상품군이 **"제대로된 가격값"**(전 사이즈·옵션이 권위대로 정확 계산)에 도달할 때까지 구동하는 종단 파이프라인. ★새 분석 하네스가 아니라 **수렴 실행 조율자**(SOT "새 하네스 금지·기존으로 수렴 실행" 정합·"분석 과잉 vs 적재 부족" 해소). 순서[HARD]=① 토대 무결성(§26) → ② 무결성 결함 교정 적재(§7·인간 승인) → ③ 공식·구성요소 설계(§18) → ④ 설계분 적재(§7·인간 승인) → ⑤ 검증(§21 전수+§13/§15 골든 재계산) → NO-GO면 해당 단계 라우팅 루프. 진척판 RTM(`_workspace/_foundation/price-pipeline-rtm.csv`)·실 COMMIT 인간 승인·코드버그=개발팀 C트랙.
+
+**트리거:** "가격 종단 파이프라인", "상품군 가격 제대로", "가격 마스터 오케스트레이터", "상품군 가격 종단 완주", "정확한 가격값까지", "전 상품 가격 정합 완주", "가격 종단 실행/재실행/이어서", "특정 상품군 가격 종단" 등 본 요청 시 `huni-price-master-orchestrator` 스킬을 사용. 단일 레이어 작업은 해당 하네스 직접(§26 무결성·§18 설계·§7 적재·§21 정합). 단순 질문은 직접 응답.
+
+**변경이력:** 최신: 2026-06-27 마스터 오케스트레이터 초기 구성(상품군 단위 5단계 종단·기존 8 하네스 수렴·아크릴 파일럿)
+
+## 28. MoAI Framework (gated — rarely used here)
 
 The MoAI-ADK orchestration framework (SPEC plan/run/sync, TRUST 5, DDD/TDD, Agent Teams,
 design GAN loop) is installed but not the primary workflow in this repo. Its detailed
