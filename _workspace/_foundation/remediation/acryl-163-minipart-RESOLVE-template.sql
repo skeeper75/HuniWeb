@@ -1,0 +1,9 @@
+-- acryl-163-minipart-RESOLVE-template.sql — 실무진 단가 확정 후 1줄 추가하면 작동 (코드/구조 변경 0)
+-- <CONFIRMED_PRICE>를 실무진 확정가로 치환 후 실행(인간 승인). comp_price_id는 실행 시점 MAX+1.
+-- BEGIN;
+-- INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, min_qty, unit_price)
+-- SELECT (SELECT MAX(comp_price_id)+1 FROM t_prc_component_prices),
+--        'COMP_ACRYL_MINIPART_TBD','2026-06-28','SIZ_000365',1, <CONFIRMED_PRICE>::numeric
+-- WHERE NOT EXISTS (SELECT 1 FROM t_prc_component_prices WHERE comp_cd='COMP_ACRYL_MINIPART_TBD' AND siz_cd='SIZ_000365');
+-- -- (선택) 메시지 정리: comp_nm을 '미니파츠 본체'로, frm_nm을 '아크릴미니파츠 공식'으로 UPDATE.
+-- COMMIT;
