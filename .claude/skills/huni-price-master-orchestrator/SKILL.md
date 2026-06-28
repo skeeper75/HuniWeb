@@ -63,7 +63,8 @@ description: >-
 - **사실(검증됨):** curl 403(봇차단)→**반드시 gstack browse**(200). EUC-KR·이미지 메뉴(상품명=goods 페이지 breadcrumb로만). 라이브 **읽기탐색만**(담기/주문/결제 0).
 - **★단가/합가 구조 기준** = `_workspace/_foundation/price-table-formula-structure-map.md/.csv`(가격표 19시트 전수 L1 단가블록/L2 선조립표/L3 modifier 분류 + 가족별 합가 조립사슬). **L2 가족(명함·봉투·스티커)은 권위=라이브 정확 일치 실증**(verbatim 적재면 오차0)·**L1 합가 조립 가족(디지털·책자·아크릴addon)에 라이브 교차검증 우선 투입**(오차 위험 집중).
 - **라우팅:** 가격값 조사신호는 **자동교정 금지** — 권위 엑셀 재확인 + 단계1 무결성 재실측 후 인간 판단. 라이브에 맞춰 우리 값을 바꾸지 않는다.
-- 산출=`remediation/<군>-live-crosscheck-matrix.md`(상품매핑·구조대조·가격대조·신호·미실측). 가격표 전수 교차검증=`pricetable-live-crosscheck-matrix.md`.
+- **★off-grid 공식 역확인(합가 정답 확정):** 가격표에 없는 수량(95·97)·임의 사이즈를 라이브에 입력해 실제 공식을 확정(`remediation/price-formula-live-confirmation.md`). 확정 규칙=자유수량(단가×수량 선형)·per-unit 합가(base+옵션 가산·이중합산0)·면적(격자 lookup·off-grid=견적·보간 아님)·밴드수량(밴드 lookup·×qty 아님). 단계3 설계가 **자유수량/밴드수량 구분·L2 verbatim·면적격자**를 따르는지 이걸로 검증(합가 오류 3근원 반증).
+- 산출=`remediation/<군>-live-crosscheck-matrix.md`(상품매핑·구조대조·가격대조·신호·미실측). 가격표 전수 교차검증=`pricetable-live-crosscheck-matrix.md`. off-grid 공식확정=`price-formula-live-confirmation.md`.
 
 - **GO** → 상품군 완주. 진척판 갱신. 다음 상품군.
 - **NO-GO** → 결함 유형별 라우팅: 적재 빠짐=단계 2 / 설계·모델 결함=단계 3 / 코드버그=개발팀(C트랙). 루프.
