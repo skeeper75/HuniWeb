@@ -1,0 +1,21 @@
+# 하드커버책자(072) 표지 전용지 단가 라이브 역산 — gstack browse pcode=40 (2026-06-29 읽기전용)
+# 라이브 ASP가 가격을 분해 노출: price_01=내지(inner) · price_02=표지+제본(cover+binding) · total_num=공급가
+# ★p02는 size-independent(A5=B5=A4 동일·전 밴드)·per-book 밴드룩업. 표지(전용지)=p02_unit − 제본_unit(COMP_BIND_HC_MUSEON DB)
+min_qty,p02_unit_perbook(표지+제본),bind_unit_perbook(DB COMP_BIND_HC_MUSEON),cover_unit_perbook(표지전용지=역산)
+1,34100,30000,4100
+4,22425,20000,2425
+10,15910,14000,1910
+50,10170,9000,1170
+100,7969,7000,969
+1000,6368.4,6000,368.4
+# 검증: qty interior(3≈4,9≈10,49≈50,99≈100) per-book가 밴드floor와 일치=per-book 밴드룩업 확정(보간 아님)
+# 표지=전용지 1종(맞춤표지). 레자인쇄표지=+3,900/book(qty1 p02 38000 vs 34100). 코팅 무광=유광(가산0).
+# 내지(p01)=사이즈×페이지 의존(A5 q1p30=7700·A4=12400). 면지=무료(이전세션 확정).
+#
+# === 내지(p01) 격자 — A4세로·백색모조지100·page×qty (가산 per-page × qty) ===
+# page,qty1,qty10,qty100
+# 30,12400,77400,353100
+# 60,21500,112700,586200
+# 100,35800,147700,977000
+# 내지 per-page(qty1) ≈ (21500-12400)/30 = 303/page; 사이즈별 상이(A5 q1p30=7700)
+# ★내지=페이지수×부수 파생(종이비+디지털인쇄비). COMP_PAPER+COMP_PRINT_DIGITAL_S2 재사용 후보(plt_siz 격자 충전 필요)
