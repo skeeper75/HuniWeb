@@ -104,3 +104,7 @@ description: >-
 
 ## ★아크릴 종단 완주 기록 (1호·전 패턴 라이브 입증 2026-06-28)
 무결성(§26 정식)→R3 156셀 교정적재→설계→적재(고정가 by-siz·면적·addon)→**라이브 시뮬레이터 전수 검증**. 발견·교정: ① addon opt_cd 모델 미작동→템플릿 전환(147=3900·146=5200·152=5100 GO) ② 저청구5종(157/158/159/161/162) 면적+nonspec_yn=N→사이즈 라벨 옵션(코스터 2500→12700) ③ 미니파츠·미바인딩7=확인필요 시그널. 최종=정상19·시그널8·돈크리티컬 저청구0. 산출=`_workspace/_foundation/remediation/`·`acryl-simulator-verification-matrix.md`. 다음 상품군은 이 패턴 동형.
+
+## ★스티커 종단 완주 기록 (2호·라이브 시뮬레이터 22조합 전건 PASS 2026-06-28)
+무결성(§26 정식 4에이전트)→NO-GO(결함14·**resolver 부재 pricing.py 코드실측**으로 false-positive 기각)→단계2 교정적재 COMMIT→**라이브 시뮬레이터 전수**. 스티커=**고정가 by-siz_cd 모델**(면적격자 아님·nonspec_yn=N 전부지만 이산 siz_cd 단가형이라 시뮬레이터가 siz_cd 드롭다운 노출→아크릴 저청구 함정 회피). 교정: ① 052 A4 저청구(product_sizes 172→520·-1000/장) ② 053투명/054홀로그램(★긴급 전건 견적불가)→144행 단가행 verbatim+재바인딩 ③ 055/056/057 자재오바인딩(154→153/243→162)+B4/B3 사이즈 ④ 066 합판6소재 동일가복제740행 ⑤ A6/100x140 권위없는 사이즈 제거 ⑥ 타투 기본가2000=333밴드(엔진 .02 고정-1회 타입부재 우회). 최종=22조합 전건 PASS·NO-GO0·저청구/견적불가0.
+**★단계5가 적발한 신규 함정 = option_items vs product_materials**: 옵션그룹 보유 상품(055)은 시뮬레이터가 `product_materials`가 아닌 **`option_items.ref_key1`(손님 진짜 선택값)**을 본다. 단계2가 product_materials만 교정→시뮬레이터 무효(SQL PASS·라이브 견적불가). OPV ref_key1 재교정 후 PASS. **아크릴 addon=opt_cd 미작동·면적+nonspec과 동류 = "SQL/뷰가 손님 선택경로를 가린다"**. → ★[HARD 추가] 옵션그룹 보유 상품 교정 시 product_materials만이 아니라 option_items.ref_key1을 함께 점검. 산출=`remediation/sticker-*`·`sticker-simulator-verification-matrix.md`.

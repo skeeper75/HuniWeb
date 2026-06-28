@@ -1,0 +1,26 @@
+가정: 엔진은 `use_dims=[siz_cd,mat_cd,min_qty]`의 exact `mat_cd`/`siz_cd` 매칭으로 단가행을 찾고, 그룹 대표 소재로 자동 normalize하지 않는다. 이 가정은 권위 문서의 “같은 단가라도 소재별 개별 행 필요”와 관측된 `no_match` 증상과 맞다.
+
+**Verdict Table**
+
+| claim/area | verdict | reason |
+|---|---|---|
+| Q1 STK-D01 PRD_054 holo | **CONFIRM defect** | B01 grp3는 `MAT162` 투명과 `MAT163` 홀로그램을 같은 가격으로 모두 요구한다. 상품이 `MAT163`을 제공하는데 바인딩 siz에 `MAT163` 행이 없으면 exact match에서 no_match. 단 `SIZ_196(A6)`은 권위 가격 부재라 “적재 누락”으로 만들면 안 된다. |
+| Q2 STK-D08/09/10 material bindings | **CONFIRM conformance mismatch** | B02/B04 유포 계열은 라이브 가격축이 `MAT153`, B03 투명은 `MAT162`로 성립한다. `MAT154`/`MAT243` 행을 새로 복제하기보다 상품 소재 바인딩을 권위 가격축 코드로 정렬하는 것이 맞다. |
+| Q3 STK-D03+D04 PRD_052 A4 `SIZ_172` | **CONFIRM defect** | B01 반칼 A4는 `A4_2판` 단가, qty1 `5000`; `SIZ_172`는 낱장/완칼 A4 단가 `4000` 성격이다. `SIZ_520` 같은 반칼 A4 전용 key로 분리하는 root cause 판정이 맞다. |
+| Q4 STK-D02 PRD_053 transparent `170/196` | **CONFIRM for valid B01 size, REFUTE for A6 as missing cell** | `MAT162` 투명 행은 B01 grp3에 필요하다. 하지만 `SIZ_196(A6)`은 authority B01 6개 siz_label에 없으므로 가격을 발명하면 안 된다. `SIZ_170`이 B01 A5로 승인된 key라면 누락/바인딩 결함이다. |
+| Q5 STK-D13 GANGPAN 6-material | **CONFIRM defect, with engine caveat** | 권위는 2 가격그룹이지만 상품은 6 소재를 제공한다. exact `mat_cd` 매칭이면 `155/156/170/171`은 no_match라 실결함. 단 엔진에 소재→그룹대표 resolver가 실제로 있다면 false-positive가 되므로 그 경우만 live re-measure 필요. |
+| Q6 A6, 100x140, tattoo 기본가 | **PARTIAL REFUTE** | `SIZ_196(A6)`과 `SIZ_058(100x140)`은 authority grid에 가격 셀이 없으므로 누락 적재 금지. 다만 tattoo `기본가 2000`은 CSV에 authority signal이 있다. “가격 부재”가 아니라 “엔진 표현/정책 의미 미확정”이다. |
+| Q7 false-positive hunt | **mostly CONFIRM guardrails** | shape=cutting option, coating=material variant, `clr_cd=NULL`, addon block=0은 defect가 아니다. Same-price group collapse는 DB가 exact `mat_cd` 매칭이면 defect이고, group resolver가 있으면 false-positive다. |
+
+**NEW Candidates**
+
+- **HYPOTHESIS: B02/B03 B4/B3 coverage** — authority는 B02/B03 각각 `A4/B4/A3/B3/A2 × qty6`이다. 현재 관측이 `A4/A3/A2`만 확인한 것이라면 `B4/B3 × 일반/투명 × 6qty = 24` cells 재실측 필요.
+- **HYPOTHESIS: B01 full 6-size × 7-material expansion** — `MAT163`이 `{059,060,518,519}`에만 있다면 B01의 나머지 승인 siz key, 예: 반칼 A4/A3/A5 mapping, 에서 `MAT162/163` 포함 7소재 전개가 완전한지 재실측 필요.
+- **HYPOTHESIS: GANGPAN exact material expansion** — shape 37개와 qty 5개는 370 대표셀로 보이지만, 상품이 6소재를 그대로 넘기면 4소재분 exact rows가 필요하다. resolver 부재 확인 시 `37×4×5=740` row-equivalent gap.
+- **HYPOTHESIS: 058~061 current live state** — authority상 형상은 비가격축이고 A5/A4 B01 가격 공유가 맞다. 현재 라이브가 `SIZ_170/SIZ_520 × 5소재 × 36qty`로 완결됐는지 재실측 필요.
+
+**False Positives**
+
+- `SIZ_196(A6)`과 `SIZ_058(100x140)`을 “authority missing cell”로 적재 요구하면 false-positive다. authority grid가 값을 주지 않는다.
+- tattoo `기본가2000`을 단순 누락 cell로 바로 insert하는 것도 false-positive 위험이다. 값은 있지만 base fee인지 최소가인지 별도 component인지 미확정이다.
+- 반칼 원형/정사각/직사각/띠지의 shape을 가격축으로 요구하면 false-positive다. 권위상 가격축은 sheet/imposition size, material, qty다.

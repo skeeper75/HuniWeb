@@ -360,7 +360,7 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 **트리거:** "가격 종단 파이프라인", "상품군 가격 제대로", "가격 마스터 오케스트레이터", "상품군 가격 종단 완주", "정확한 가격값까지", "전 상품 가격 정합 완주", "가격 종단 실행/재실행/이어서", "특정 상품군 가격 종단" 등 본 요청 시 `huni-price-master-orchestrator` 스킬을 사용. 단일 레이어 작업은 해당 하네스 직접(§26 무결성·§18 설계·§7 적재·§21 정합). 단순 질문은 직접 응답.
 
-**변경이력:** 최신: 2026-06-28 아크릴 **전수 종단 완주+라이브 시뮬레이터 전수 검증**(정상19·확인필요시그널8·돈크리티컬 저청구0)·★파이프라인 플레이북 대개정 codify(라이브 시뮬레이터 검증 게이트·addon=opt_cd가산❌→**addon 템플릿** 정정·**가격 모델 결정 트리**[고정가by-siz/면적nonspec/면적등록사이즈=사이즈라벨옵션/addon템플릿/확인필요시그널]·임의단가 금지) → `_workspace/_foundation/HANDOFF.md`·`price-pipeline-rtm.csv`·`huni-price-master-orchestrator/SKILL.md`
+**변경이력:** 최신: 2026-06-28 **스티커 종단 완주(2호·라이브 시뮬레이터 22조합 전건 PASS·NO-GO0)** — 스티커=고정가by-siz_cd(면적격자 아님·nonspec_yn=N이어도 siz_cd 드롭다운=아크릴함정 회피)·052저청구/053·054긴급견적불가/055·056·057자재/066합판6소재/067타투기본가 교정 COMMIT·★단계5 신규함정 적발=옵션그룹 상품은 시뮬레이터가 option_items.ref_key1(손님선택값)을 봄→product_materials만 교정=무효(아크릴 교훈 일반화). 직전: 아크릴 전수 종단 완주+파이프라인 플레이북 codify → `_workspace/_foundation/HANDOFF.md`·`price-pipeline-rtm.csv`·`huni-price-master-orchestrator/SKILL.md`
 
 ## 28. MoAI Framework (gated — rarely used here)
 
