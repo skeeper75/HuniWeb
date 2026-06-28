@@ -29,6 +29,12 @@ description: >-
 ## Phase 1: 권위 격자 추출 (기준점)
 `hpti-authority-extractor` — 시트별 정답 격자(차원+전 셀) + 차원 의미. ★기존 06_extract·24_master-extract 재사용. → `01_authority/<sheet>-grid.csv`·`-dims.md`.
 
+**★[HARD·신설 2026-06-28] 단가/합가 계층 분류 먼저.** 격자 추출 전 그 시트가 어느 계층인지 분류(권위=`_workspace/_foundation/price-table-formula-structure-map.md/.csv`·가격표 19시트 전수):
+- **L1 단가 블록**(출력소재·디지털인쇄비·코팅·접지·인쇄후가공·커팅타공·박·제본·아크릴·박대형) = 합산 대상 atomic 단가. 무결성=각 단가 셀 verbatim 적재.
+- **L2 선조립 합가표**(스티커·도무송·봉투·명함포토카드·엽서북떡메·포스터사인) = 상품가가 이미 합쳐짐. ★권위 셀=라이브 정확 일치 실증(봉투·명함 4/4) → **verbatim 적재면 오차 0**. 대칭전개·재계산 금지.
+- **L3 modifier**(판걸이수=판수·굿즈파우치=구간할인율) = 곱/환산. 가격 아님(별도 검사).
+→ 시트 분류가 틀리면 무결성 판정이 틀린다(L2를 L1처럼 분해하면 이중합산·L1을 L2로 보면 합산 누락).
+
 ## Phase 2: 라이브 적재 대조 (생성·시트 팬아웃)
 `hpti-load-inspector` — 정답 격자 ↔ 라이브 셀/차원 대조 → 3종 결함 보드(미적재·차원누락·불일치)+돈영향+재현SQL. 시트별 병렬. 라이브 읽기전용. → `02_load/<sheet>-defects.csv`.
 
@@ -37,6 +43,12 @@ description: >-
 
 ## Phase 4: 무결성 게이트 (검증)
 `hpti-integrity-gate` — 라이브 독립 재실측·I1~I7·GO/NO-GO·교정 명세(dbmap 라우팅·인간 승인). → `04_gate/<sheet>-verdict.md`·`remediation-spec.md`.
+
+**★[신설] 단가/합가 오차 3유형 점검 + 라이브 고객사이트 교차검증.** 게이트는 적재 무결성(셀/차원)에 더해 **합가 조립 오차**를 본다:
+1. **이중합산(과대)** — L2 선조립표인데 L1 단가를 또 더함(명함 S1/S2·책자 제본·always-add opt_cd 와일드카드).
+2. **미바인딩/부분합산(과소)** — 합가 사슬 일부만 배선(아크릴 고리 미배선·최소셀 고정·option_items 단가행 결손).
+3. **차원 미스매치** — 도수×면·소재·판수·page 키 불일치(견적불가/오가격).
+- **라이브 교차검증(권위 보강):** 가족 대표를 라이브 `goods.asp`(`HUNI_LIVE_GOODS_URL`+pcode)로 구동→권위 셀/우리 적재와 대조. ★L2 가족은 권위=라이브 일치라 빠른 확증, **L1 합가 조립 가족에 우선 투입**(오차 위험 집중). 헬퍼=`remediation/_huni_live_crosscheck.md`·인덱스=`_huni_live_pcode-index.csv`. 차이=조사신호(자동교정 금지·권위 절대).
 
 ## 데이터 전달
 파일 기반(`_workspace/huni-price-table-integrity/<phase>/`) + 반환값(요약). 중간 산출물 보존(감사).
