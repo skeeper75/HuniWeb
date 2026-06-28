@@ -53,6 +53,7 @@
   - 바인딩 12=COMP_NAMECARD_{STD_S1/S2·PEARL_S1/S2·SHAPE_S1/S2·MINISHAPE_S1/S2·FOIL_S1_STD·CLEAR_S1}·COMP_ENV_MAKING·COMP_GANGPAN_PRINT.
   - 미바인딩 13=COMP_NAMECARD_{FOIL_S2_STD·FOIL_HOLO×2·COAT×2·PREMIUM×4·WHITE×4}.
 - **교정 = `prc_typ_cd .01 → .02`**(합가형·단가행 verbatim 불변). 검증: 투명명함 .02 → 13,500÷100×100=13,500 ✓·봉투 134,000÷1000×1000=134,000 ✓.
+- **★.02 라이브 실증 확정(가정 아님·`price-dimension-layout-method.md` 차원 정밀배치 probe):** 명함 백모조220 단면 전 밴드 라이브=100→3,500·200→7,000·500→17,500·1000→35,000 = **완전 선형 35원/매** → .02(밴드단가÷min_qty×수량)가 전 수량 정확 일치(.03 고정이면 1000매=3,500으로 틀림). 봉투 1000~5000 라이브=DB 밴드총액 정확 일치(272,000 등) → .02 매칭밴드 정확. **단, 선형상품(명함)은 단일밴드로 충분·비선형밴드(봉투)는 전밴드 적재 필수** — 상품마다 차원배치+라이브 전밴드 probe로 확정.
 - **dryrun 실행·ROLLBACK 검증 완료**(25행 .01→.02 트랜잭션 내 적용 후 롤백·실변경 0):
   - `bandtotal-prctyp-fix-dryrun.sql`(ROLLBACK 종결) · `bandtotal-prctyp-fix-COMMIT.sql`(COMMIT·★승인 후 실행) · `bandtotal-prctyp-undo.sql` · `bandtotal-prctyp-undo-backup.csv`(현재값 스냅샷).
 - **실 COMMIT은 인간 승인 후**([[dryrun-vs-fix-script-commit-lesson]])·교정 후 시뮬레이터 전수 재실증(투명명함 13,500 등) 필수.
