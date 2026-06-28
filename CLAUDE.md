@@ -360,7 +360,7 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 **트리거:** "가격 종단 파이프라인", "상품군 가격 제대로", "가격 마스터 오케스트레이터", "상품군 가격 종단 완주", "정확한 가격값까지", "전 상품 가격 정합 완주", "가격 종단 실행/재실행/이어서", "특정 상품군 가격 종단" 등 본 요청 시 `huni-price-master-orchestrator` 스킬을 사용. 단일 레이어 작업은 해당 하네스 직접(§26 무결성·§18 설계·§7 적재·§21 정합). 단순 질문은 직접 응답.
 
-**변경이력:** 최신: 2026-06-29(2세션) **Phase 0.5 라이브 구조 오라클(필수)+배치 도구 codify** — 라이브 이전사이트 `goods.asp` `<select>`=권위 엑셀 옵션/소재/제약 구조 검증 **필수 선행**(단계1 前·BLOCKED 재중단 차단). `blocked_scan`(두 엑셀 BLOCKED 위험 146건 7카테고리→★대부분=제약스펙≠단가미상·단가는 가격표에 이미 적재)+`score_batch`(5축 채점 CALC/PR/R1/R3/OC·토큰0)+`lib_huni`(시뮬레이터 인증 POST·브라우저불요). 하드커버 셋트 구조 라이브 COMMIT+가격 BLOCKED 라이브 해소(면지=무료·표지전용지≈7,400 역산). 산출=`_workspace/_foundation/batch/`(README·BLOCKED-RISK-RESOLUTION). 직전: 채점 프레임워크 신설 + 단순/세트 상품 종단 2방법 입증(`SCORING-FRAMEWORK-260628.md`·밴드총액12 .01→.02 COMMIT) → `_workspace/_foundation/HANDOFF.md`·`product-scoreboard.csv`
+**변경이력:** 최신: 2026-06-29(3세션) **채점 로봇 적발 막힌가격을 이전사이트 오라클로 실해소(라이브 COMMIT 4건)** — ① 채점 로봇 단순상품 3군 확대(sticker13·acrylic12 면적모델·문구 UNBOUND신호)+세트 채점(엽서북094/떡메097 PRICED) ② 투명엽서019 견적0 해소(PET용지비 미적재+판형 오적재 2결함) ③ 포토북100 종단(★페이지가=내지 구성원 단가형·기본24P+추가2P당·OI-3 옵션그룹·엔진 23,800 검증) ④ 072 표지+제본 합산가(이전사이트 실측 표지종이 무관). 방법론 정립=COMP_PAPER단가=가격표 국4절 verbatim·PRICED-0=용지+판형 복합·책자세트 페이지=내지구성원·별도/합산판정=이전사이트 cover paper 가격불변. C트랙=fn_calc_pansu 양방향결함(투명+50%저청구/스탠다드-33%과청구). 다음=072 내지(284)§18→종단·077/082/088 동형 → `_workspace/_foundation/HANDOFF.md`·`remediation/_REMEDIATION-LOG.md`
 
 ## 28. MoAI Framework (gated — rarely used here)
 
