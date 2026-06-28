@@ -360,7 +360,7 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 **트리거:** "가격 종단 파이프라인", "상품군 가격 제대로", "가격 마스터 오케스트레이터", "상품군 가격 종단 완주", "정확한 가격값까지", "전 상품 가격 정합 완주", "가격 종단 실행/재실행/이어서", "특정 상품군 가격 종단" 등 본 요청 시 `huni-price-master-orchestrator` 스킬을 사용. 단일 레이어 작업은 해당 하네스 직접(§26 무결성·§18 설계·§7 적재·§21 정합). 단순 질문은 직접 응답.
 
-**변경이력:** 최신: 2026-06-29 **채점 프레임워크 신설 + 단순/세트 상품 종단 2방법 입증** — 통화분석 docx(9결정 SOT)+webadmin 갭감사→근본원인=종료척도 부재(2에이전트 수렴)→상품단위 채점(PR 가격재현+OC 주문완전성·스코어보드 CSV가 RTM 서사 대체·`SCORING-FRAMEWORK-260628.md`). ★단순상품 파일럿=프리미엄엽서 완성(부자재오염3 제거+dflt 2→1 라이브 COMMIT·판걸이수 systemic 저청구 C트랙). ★세트상품 파일럿=하드커버책자 §23 종단 설계+codex 교차+게이트 CONDITIONAL GO(내지 반제품 신설·반제품↔자재 매칭·이중합산0). ★효율화=결정론 동형 배치 스크립트 설계(토큰0·R1~R4·인간큐6종·`BATCH-design-deterministic-isomorphic-260628.md`). 밴드총액12 .01→.02 COMMIT. 직전: 라이브 교차검증 오라클·아크릴/스티커 종단 → `_workspace/_foundation/HANDOFF.md`·`product-scoreboard.csv`
+**변경이력:** 최신: 2026-06-29(2세션) **Phase 0.5 라이브 구조 오라클(필수)+배치 도구 codify** — 라이브 이전사이트 `goods.asp` `<select>`=권위 엑셀 옵션/소재/제약 구조 검증 **필수 선행**(단계1 前·BLOCKED 재중단 차단). `blocked_scan`(두 엑셀 BLOCKED 위험 146건 7카테고리→★대부분=제약스펙≠단가미상·단가는 가격표에 이미 적재)+`score_batch`(5축 채점 CALC/PR/R1/R3/OC·토큰0)+`lib_huni`(시뮬레이터 인증 POST·브라우저불요). 하드커버 셋트 구조 라이브 COMMIT+가격 BLOCKED 라이브 해소(면지=무료·표지전용지≈7,400 역산). 산출=`_workspace/_foundation/batch/`(README·BLOCKED-RISK-RESOLUTION). 직전: 채점 프레임워크 신설 + 단순/세트 상품 종단 2방법 입증(`SCORING-FRAMEWORK-260628.md`·밴드총액12 .01→.02 COMMIT) → `_workspace/_foundation/HANDOFF.md`·`product-scoreboard.csv`
 
 ## 28. MoAI Framework (gated — rarely used here)
 

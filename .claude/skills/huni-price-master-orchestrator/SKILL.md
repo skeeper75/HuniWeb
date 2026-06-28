@@ -26,6 +26,25 @@ description: >-
 - 진척판 `_workspace/_foundation/price-pipeline-rtm.csv` 확인(상품군 × 단계 상태). 있으면 이어서, 없으면 신규.
 - 단계별 산출물(_workspace/<harness>/)이 최신인지(freshness) 확인 — stale면 그 단계 재실행.
 
+## ★Phase 0.5 — 라이브 사이트 구조 확인 (필수·엑셀 구조 검증 오라클) [HARD·사용자 directive 2026-06-29]
+**모든 상품군은 단계1 진입 전 반드시 라이브 이전사이트 구조를 먼저 본다.** 라이브 `goods.asp` 손님 폼의
+`<select>` 구조 = **권위 엑셀의 옵션/소재/제약 구조를 읽는 직접 수단**(애매모호한 "별도설정 종이·★제약·옵션"이
+실제로 무엇인지 라이브가 보여줌). 이걸 선행하면 BLOCKED가 단계 도중 터지지 않는다(사전 해소). 본 단계가
+**"같은 BLOCKED 반복"을 차단하는 핵심**이다.
+
+1. **BLOCKED 위험 전수 스캔(결정론·토큰0):** `python3 _workspace/_foundation/batch/blocked_scan.py` → `blocked-risk-registry.csv`
+   (★/별도설정 셀을 7카테고리로 분류). 그 상품군 행만 보면 무엇이 애매한지 즉시 파악.
+2. **라이브 구조 대조:** 그 상품군 라이브 pcode(`remediation/_huni_live_pcode-index.csv`)를 gstack browse로 열어
+   `<select>` 전수 읽기(소재 목록·사이즈축·가공/부속 옵션·제약). 헬퍼=`remediation/_huni_live_crosscheck.md`.
+   ★엑셀 ★마커의 정체 판정: **대부분 "단가 미상"이 아니라 "제약 스펙"(값이 셀에 있음)**이고 단가는 가격표에
+   이미 있다(`BLOCKED-RISK-RESOLUTION-260629.md` 결론). 진짜 미상(예 하드커버 표지 "계산식")만 라이브 가격
+   역산으로 해소(`_huni_live_crosscheck.md` off-grid 절차·한 축씩 변경해 구성요소 단가 분리).
+3. **해소 기록:** 애매 항목 → 라이브 증거 → 해소(PRICE_KNOWN/CONSTRAINT/NEEDS_STAFF)를 registry에 갱신.
+   값 날조 0(라이브는 보강 증거·자동 DB 주입 금지·차이=조사신호). → 해소 완료분은 단계1~5에서 재논쟁 금지.
+
+**권위 위상:** 권위 엑셀(상품마스터·가격표)이 절대. 라이브 ASP=구 시스템이나 **엑셀 구조를 비추는 거울**
+(옵션/소재/제약을 손님 폼으로 구현). 권위 엑셀에 값이 부재("계산식"/행부재)인 항목만 라이브가 정당한 보강 출처.
+
 ## 파이프라인 단계 (상품군 단위·의존 순서)
 
 ### 단계 1 — 토대 무결성 [§26 huni-price-table-integrity]
@@ -91,8 +110,17 @@ description: >-
 
 **채번 거버넌스 [HARD]:** 옵션 코드는 **언더스코어 OPT_/OPV_ 표준**(라이브 다수). 신규 mint=언더스코어 MAX+1. 템플릿=하이픈 TMPL- 채널 MAX+1. webadmin `views.py _next_opt_grp_code/_next_opt_code` 하이픈 발번은 C트랙 언더스코어 교체(`CTRACK-webadmin-optcode-numbering.md`·운영 배포 인간). comp_cd/frm_cd=이름기반.
 
+## ★배치 도구 (결정론·토큰0·`_workspace/_foundation/batch/`) [신설 2026-06-29]
+"상품 하나씩 LLM 확인=끝없음"을 끝내는 결정론 배치. 채점 프레임워크(SCORING-FRAMEWORK-260628)의 실행 계측.
+- **`lib_huni.py`** — 시뮬레이터 인증 클라이언트(브라우저 불요·토큰0): 로그인(HUNI_ADMIN_*)→`POST /admin/price-viewer/<prd_cd>/simulate/` `{selections,qty,procs}`→`final_price`·`base.components[].subtotal`·`matched_row.pansu`. 세트=`simulate-set/` `{copies,members[]}`. `sim_meta()`=케이스 enumerate 소스. + 라이브 DB 읽기전용 psql.
+- **`authority.py`** — 권위 엑셀 추출(24_master-extract) 리더: 사이즈별 권위 판수·주자재(종이)·요구 OC축·가격공식.
+- **`score_batch.py`** — 동형군 채점 드라이버: sim-meta enumerate→simulate→**5축 채점**(CALC 계산가능성·PR 엔진pansu vs 권위판수·R1 부자재오염·R3 dflt 1개·OC 요구축 선택가능)→scoreboard CSV+교정 SQL. `python3 score_batch.py <group> [prd_cd]`.
+- **`blocked_scan.py`** — 두 권위 엑셀 BLOCKED 위험 전수 스캔→7카테고리 분류+해소(Phase 0.5).
+- **R1 자가수렴 교훈[HARD]:** 부자재 오염은 mat_typ 단독 판정 불가(PET .08=투명 주자재·정상종이 false-positive). 디지털인쇄군=substrate 화이트리스트{.01,.08}로 진짜 오염(부속 .03/.17)만. 군별 substrate_typ 프로파일 정의.
+- **상품군 확장:** `score_batch.py` GROUP dict에 군 프로파일(extract·print_proc_kw·qty_cases·substrate_typ) 추가. BATCH-design 순서=sticker→문구→acrylic→digital(완)→실사→책자(세트). 자기검증=프리미엄엽서 단독 재생산.
+
 ## 실행 모드
-각 단계는 해당 하네스 **오케스트레이터 스킬을 직접 호출**(Skill 도구)하거나 그 하네스 에이전트를 `model:"opus"`로 구동. 마스터는 단계 전이·진척판·인간 승인 게이트만 관리(중앙 조율).
+각 단계는 해당 하네스 **오케스트레이터 스킬을 직접 호출**(Skill 도구)하거나 그 하네스 에이전트를 `model:"opus"`로 구동. 마스터는 단계 전이·진척판·인간 승인 게이트만 관리(중앙 조율). **단순/반복 채점·스캔은 배치 도구 우선(토큰0)·LLM은 설계·판정·교정에 집중.**
 
 ## 데이터 전달·진척판
 - 파일 기반: 각 하네스 `_workspace/<harness>/` 산출물을 다음 단계 입력으로.
@@ -125,3 +153,14 @@ description: >-
 - **아크릴(1:1 정합):** 라이브 굿즈블록(goods.asp 72~101) ↔ 우리 146~163 이름기반 1:1. **구성요소 구조 전건 정합**(키링 고리/볼체인 addon·명찰 등록사이즈·조각수·미니파츠 1.5T 라이브 입증). 가격: **판아크릴 16,600≈우리 16,700 일치(저청구 교정 라이브 검증)** / **조사신호 2건**=162 포카스탠드 10,900 vs 라이브 22,000(~2배 저청구 의심)·155 볼펜 1,800 vs 2,900 / 미니파츠 라이브 단가 7,400(실무진 해소 참고). → `acryl-live-crosscheck-matrix.md`.
 - **스티커(분류 발산):** 라이브=3통합상품(56 반칼·29 사각라운딩·30 원형타원·형상=옵션·소량/대량 2분리) vs 우리=16 형상별 분해(052~067)+시트사이즈+수량밴드. **1:1 골든 가격비교 비성립**(리뉴얼 의도차·라이브 정답 아님). 소재 대부분 정합·**갭신호=라이브 은데드롱 보유**(우리 적재 점검)·우리 홀로그램(054)=신규·타투(067)/도무송(066) 라이브 단독 미존재. → `sticker-live-crosscheck-matrix.md`.
 - **교훈[HARD]:** 라이브 고객사이트는 **본인 시스템이라 강한 오라클**이되 구 ASP라 정답 아님 — 가격 조사신호는 **권위 엑셀 재확인+단계1 무결성 재실측 후 인간 판단**(자동교정 금지). 분류·수량모델이 다르면(스티커) 가격차는 신호 아닌 "의도차"로 분류.
+
+## ★Phase 0.5 라이브 구조 오라클 + 배치 도구 신설 (4호·2026-06-29)
+사용자 directive로 **라이브 이전사이트를 "엑셀 구조 검증 필수 선행 오라클"로 격상** + 결정론 배치 도구 신설.
+- **BLOCKED 위험 전수 해소:** `blocked_scan.py`로 두 권위 엑셀 146건 7카테고리 발굴 → 라이브/가격표 대조로
+  **★마커 대부분=제약 스펙(값 셀에 있음)≠단가 미상·단가는 가격표에 이미 적재** 확정(`BLOCKED-RISK-RESOLUTION-260629.md`).
+  진짜 미상=하드커버 표지 "계산식"만 라이브 역산 해소(면지=무료·표지전용지≈7,400·`hc072-blocked-resolution-LIVE-260629.md`).
+  → **BLOCKED 재중단 구조 위험 해소.** 잔여=per-product 미적재(score_batch CALC 자동적발)·박 prc_typ 점검·OC 파싱.
+- **배치 채점 드라이버:** `score_batch.py`가 프리미엄엽서 결정론 재현(pansu18≠15·부자재0·dflt1) 자가검증 →
+  PRF_DGP_A 동형군 10상품 토큰0 채점(투명019 CALC FAIL=PET용지비 미적재 자동적발·화이트020/쿠폰042 R1오염).
+- **하드커버 셋트 구조 라이브 COMMIT:** 내지 284 신설+5구성원(가격은 BLOCKED 해소됨·다음 종단).
+- 다음=score_batch 상품군 전파(sticker→문구→acrylic). 산출=`_workspace/_foundation/batch/`(README.md 권위).
