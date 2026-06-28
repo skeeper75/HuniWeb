@@ -37,15 +37,25 @@
 | 050 | **봉투제작** | 1000 | COMP_ENV_MAKING(48,000~152,000) | **×1000** |
 | 066 | **합판도무송스티커** | 1000 | COMP_GANGPAN_PRINT(18,000~) | **×1000** |
 
-### 검증필요 클래스 (단위기준 모호 — 권당/장당일 수 있음) — 4 상품
-| prd | 상품 | min_band | comp | 비고 |
-|---|---|---:|---|---|
-| 094 | 엽서북 | 2 | COMP_PCB_S1/S2_20P | BOUND_DEFECT·권당 vs 총액 확인 |
-| 097 | 떡메모지 | 6 | COMP_TTEOKME(3,000) | 권당3,000일 수 있음(set-product GO 이력)→라이브 대조 후 판정 |
-| 144 | 미니보드스탠딩 | 4 | COMP_POSTER_MINI_STANDBOARD | 장당 vs 총액 확인 |
-| 145 | 미니배너 | 4 | COMP_POSTER_MINI_BANNER | 장당 vs 총액 확인 |
+### 검증필요 클래스 → ★라이브 확인 완료 = 전부 per-unit(.01 정상·버그 아님)
+라이브 구동으로 단위기준 확정(우리 .01 산출 = unit×qty 가 라이브와 근사하면 per-unit·정상):
+| prd | 상품 | 라이브 | 우리.01(unit×qty) | 판정 |
+|---|---|---:|---:|---|
+| 097 | 떡메모지 | 6권=16,000 | 3,000×6=18,000 | per-권 .01 정상(근사·값 미세차) |
+| 145 | 미니배너 | 4장=28,000·8장=56,000(선형) | 6,500×4=26,000 | per-장 .01 정상(근사) |
+| 144 | 미니보드스탠딩 | 4장=14,000·8장=28,000(선형) | 3,500×4=14,000 | per-장 .01 정상 **정확일치** |
+| 094 | 엽서북 | 2권=25,200·4권=36,600 | 11,000×2=22,000 | per-book .01 정상(근사·page 결함은 별개) |
 
-★검증필요 4는 unit_price가 per-unit(권당/장당)이면 .01 정상 → **라이브/권위로 단위기준 확정 후 판정**(임의 교정 금지).
+→ **검증필요 4 = 밴드총액 버그 아님**(unit_price가 per-unit). .01 유지. (떡메·미니배너·엽서북의 unit 값 미세차는 별도 소규모 점검 사항·×qty 폭증과 무관.)
+
+## ★교정 준비 완료 (dryrun 검증·실 COMMIT은 인간 승인)
+- **대상 25 component**(명함 완제품가 + 봉투 + 합판·밴드총액 .01·min_qty>1): **바인딩 12(긴급·현재 과대청구)** + 미바인딩 13(잠재·예방).
+  - 바인딩 12=COMP_NAMECARD_{STD_S1/S2·PEARL_S1/S2·SHAPE_S1/S2·MINISHAPE_S1/S2·FOIL_S1_STD·CLEAR_S1}·COMP_ENV_MAKING·COMP_GANGPAN_PRINT.
+  - 미바인딩 13=COMP_NAMECARD_{FOIL_S2_STD·FOIL_HOLO×2·COAT×2·PREMIUM×4·WHITE×4}.
+- **교정 = `prc_typ_cd .01 → .02`**(합가형·단가행 verbatim 불변). 검증: 투명명함 .02 → 13,500÷100×100=13,500 ✓·봉투 134,000÷1000×1000=134,000 ✓.
+- **dryrun 실행·ROLLBACK 검증 완료**(25행 .01→.02 트랜잭션 내 적용 후 롤백·실변경 0):
+  - `bandtotal-prctyp-fix-dryrun.sql`(ROLLBACK 종결) · `bandtotal-prctyp-fix-COMMIT.sql`(COMMIT·★승인 후 실행) · `bandtotal-prctyp-undo.sql` · `bandtotal-prctyp-undo-backup.csv`(현재값 스냅샷).
+- **실 COMMIT은 인간 승인 후**([[dryrun-vs-fix-script-commit-lesson]])·교정 후 시뮬레이터 전수 재실증(투명명함 13,500 등) 필수.
 
 ## 교정 명세 (인간 승인 후·dryrun→COMMIT)
 - **확정 10 상품의 밴드총액 component를 `prc_typ_cd` `.01`→`.02`(합가형) 변경.**
