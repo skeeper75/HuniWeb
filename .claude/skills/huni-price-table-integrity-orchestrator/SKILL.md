@@ -50,6 +50,7 @@ description: >-
 3. **차원 미스매치** — 도수×면·소재·판수·page 키 불일치(견적불가/오가격).
 - **라이브 교차검증(권위 보강):** 가족 대표를 라이브 `goods.asp`(`HUNI_LIVE_GOODS_URL`+pcode)로 구동→권위 셀/우리 적재와 대조. ★L2 가족은 권위=라이브 일치라 빠른 확증, **L1 합가 조립 가족에 우선 투입**(오차 위험 집중). 헬퍼=`remediation/_huni_live_crosscheck.md`·인덱스=`_huni_live_pcode-index.csv`. 차이=조사신호(자동교정 금지·권위 절대).
 - **★off-grid 공식 역확인(합가 정답 확정):** 가격표에 없는 수량(95·97)·임의 사이즈를 라이브에 입력해 실제 공식 확정(`price-formula-live-confirmation.md`). 확정 규칙: 자유수량=단가×수량(선형)·per-unit 합가=base+옵션 가산(이중합산0)·면적=격자 lookup(off-grid=견적·보간 아님)·밴드수량=밴드 lookup(×qty 아님). **합가 오류 3근원**=밴드를 ×qty로/L2에 L1 또 더함(이중합산)/면적 연속보간. 게이트가 이 3종을 라이브로 반증.
+- **★[HARD·실증 2026-06-28] prc_typ_cd 밴드총액 점검 (×qty 과대청구 결함 클래스).** 엔진 `.01 단가형 = unit_price × 수량`(나눗셈 없음)·NULL=.01 기본. **"완제품가"(L2 선조립=밴드 총액) component가 min_qty>1인데 `prc_typ_cd=.01`이면 = 총액×주문수량 = 밴드크기 배수 과대청구**(투명명함 13,500×100=1,350,000 시뮬레이터 실증·봉투/합판=×1000). 게이트 SQL: `완제품가 + min(min_qty)>1 + prc_typ in(NULL,.01)` 적발 → **.02(합가형=총액÷min_qty×수량)** 교정. 단, unit_price가 per-unit(장당·권당·스티커 min_qty=1)이면 .01 정상(false-positive 가드=라이브 단위기준 대조). `FINDING-bandtotal-x-qty-overcharge.md`.
 
 ## 데이터 전달
 파일 기반(`_workspace/huni-price-table-integrity/<phase>/`) + 반환값(요약). 중간 산출물 보존(감사).
