@@ -2,7 +2,21 @@
 
 ---
 
-## 2026-06-29 · 투명엽서019 PET 용지비 미적재 교정 (DRY-RUN GO·COMMIT 대기)
+## 2026-06-29 · 투명엽서019 견적0 교정 — 2결함 라이브 COMMIT (인간 승인) ✅
+
+**결함(채점 로봇 PRICED-0 적발) 2건:**
+1. **PET 용지비 미적재** — `COMP_PAPER`에 PET(MAT_000178) 단가행 부재(56자재 중 PET만). 권위=가격표260527 "투명 PET 260g" 가격(국4절)=**1,100**(★verbatim 증명: 백모조 100g→30.73·220g→70.64 라이브 정확일치). 1행 INSERT(SIZ_000499 전지). `petpaper-comp-260629-fix.sql` COMMIT(INSERT 0 1).
+2. **판형 오적재** — 투명엽서019에만 소형판형 4개(SIZ_000113/114/115/118) plate_sizes 오적재(형제 엽서는 전지 SIZ_000499 1개뿐)→best-plate가 단가행 없는 소형판형 선택→0. 소형 4링크 논리삭제. `petplate-019-260629-fix.sql` COMMIT(UPDATE 4·sibling 패리티·reversible).
+
+**결과:** 투명엽서019 PRICED-0 종결 — 채점 로봇 CALC=OK(4/4 PRICE>0). 0원→견적가능(49,000).
+
+**⚠️ 잔여 조사 신호(자동교정 금지 [HARD]):** 우리 엔진 49,000 vs 이전사이트 공급가 75,500(100x150·PET·단면칼라4도+화이트·qty120). 두 mapping 교정으로 0→49,000 접근, 인쇄 rate 차 잔존(화이트 풀커버 underbase rate·pansu·구 ASP stale 중 조사). **권위 가격표 절대** — ASP에 맞춰 rate 변경 안 함. →§26/§13/§14 라우팅. 진단=`FINDING-transparent-postcard-PET-paper-260629.md`. undo=fix.sql 내 동봉.
+
+**되돌리지 말 것:** PET 용지비 1100행·판형 4링크 논리삭제(둘 다 권위/sibling 정합).
+
+---
+
+## 2026-06-29 · (구) 투명엽서019 PET 용지비 미적재 교정 (DRY-RUN GO·COMMIT 대기)
 
 **결함(채점 로봇 적발):** 투명엽서019(PRD_000019) 견적 0원 = `COMP_PAPER`(용지비)에 PET(MAT_000178) 단가행 부재(56자재 중 PET만 누락). score_batch가 `PRICED-0`(공식 있는데 0=진짜결함)로 분류.
 
