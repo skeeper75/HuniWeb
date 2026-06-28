@@ -352,7 +352,7 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 **산출물 루트:** `_workspace/huni-price-table-integrity/` (01_authority·02_load·03_codex·04_gate·_meta). 4 에이전트(`hpti-authority-extractor` 정답격자 → `hpti-load-inspector` 적재대조 결함보드(시트 팬아웃) → `hpti-codex-verifier` codex 독립2차 → `hpti-integrity-gate` I1~I7 게이트) + 방법론 스킬 `hpti-load-integrity-audit`(+ `hqv-codex-cross-verify`·`dbm-excel-parse`·`dbm-price-import-prep`·`dbm-correctness-audit` 재사용). 생성≠검증·codex 주장=가설·라이브 읽기전용 SELECT만(`.env.local RAILWAY_DB_*`)·DB 미적재(실 교정 인간 승인 후 dbmap 위임)·파일럿=아크릴(sparse grid 실증)→동형 전파.
 
-**변경이력:** 최신: 2026-06-28 **가격표 19시트 단가/합가 계층 분류 codify** — 가격표 260527 전수 구조 맵(L1 단가블록 11종/L2 선조립표 5종/L3 modifier 2종 + 가족별 합가 조립사슬)=`_foundation/price-table-formula-structure-map.md`. Phase1에 계층분류 선행·Phase4에 단가/합가 오차3유형(이중합산·미바인딩·차원미스매치)+라이브 교차검증 게이트 신설. ★라이브 실증=L2(명함·봉투) 권위=라이브 정확일치 4/4. 직전: 하네스 초기 구성(4 에이전트·I1~I7·아크릴 파일럿) → `_workspace/huni-price-table-integrity/`
+**변경이력:** 최신: 2026-06-28 **★band-total .01 ×수량 과대청구 결함 발견+.02 라이브 실증+dryrun** — 명함/봉투/합판 "완제품가"(밴드총액)가 prc_typ .01(엔진 .01=총액×수량)로 오타이핑→100~1000배 과대(시뮬레이터 실증 투명명함 100매=1,350,000·정답13,500). 교정 25comp .01→.02(dryrun ROLLBACK검증·승인후 COMMIT). ★.02 실증=명함 전밴드 라이브 선형35원/매·봉투 밴드총액 정확일치. + **상품별 차원 정밀배치+라이브 off-grid 공식확정 방법**(`price-dimension-layout-method.md`·엑셀=값권위·라이브=계산방식권위)·가격표 19시트 단가/합가 계층맵·off-grid 공식4규칙 codify(Phase1 차원배치+계층분류·Phase4 오차3유형+밴드총액 prc_typ 점검). 진단=`remediation/FINDING-bandtotal-x-qty-overcharge.md` → `_workspace/_foundation/HANDOFF.md`·`remediation/`
 
 ## 27. 가격 종단 마스터 오케스트레이터 (상품군 단위 파이프라인·수렴 실행)
 
