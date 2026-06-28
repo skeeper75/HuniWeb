@@ -48,6 +48,14 @@
 
 → **검증필요 4 = 밴드총액 버그 아님**(unit_price가 per-unit). .01 유지. (떡메·미니배너·엽서북의 unit 값 미세차는 별도 소규모 점검 사항·×qty 폭증과 무관.)
 
+## ★바인딩 12건 라이브 COMMIT 완료 (2026-06-28·인간 승인 후)
+- **실행:** `bandtotal-prctyp-fix-bindings12-COMMIT.sql`(바인딩 12 한정·dryrun ROLLBACK 선검증 12행 정확). 사후 재실측=**12 component 전부 `.02`** 확인.
+- **★시뮬레이터 전수 재실증 GO(라이브 huni-admin price-simulator):**
+  - 투명명함 100매 = **13,500원** (교정 전 1,350,000 → ×100 과대 해소·smoking-gun 종결).
+  - 스탠다드명함 백모조220 단면 100매 = **3,500원** · 1000매 = **35,000원** (`.02` 완전 선형 ÷100×qty 정확·교정 전 350,000·3,500,000).
+- **되돌리지 말 것**: 단가행 verbatim 불변·prc_typ만 변경·undo=`bandtotal-prctyp-undo.sql`+`bandtotal-prctyp-undo-backup.csv` 보유.
+- **잔여 미바인딩 13건(예방)** = 후속(현재 과대청구 없음). COMP_NAMECARD_{FOIL_S2_STD·FOIL_S1/S2_HOLO·COAT_S1/S2·PREMIUM_S1/S2_MGA/MGB·WHITE_S1/S2W_CL/NOCL} 등.
+
 ## ★교정 준비 완료 (dryrun 검증·실 COMMIT은 인간 승인)
 - **대상 25 component**(명함 완제품가 + 봉투 + 합판·밴드총액 .01·min_qty>1): **바인딩 12(긴급·현재 과대청구)** + 미바인딩 13(잠재·예방).
   - 바인딩 12=COMP_NAMECARD_{STD_S1/S2·PEARL_S1/S2·SHAPE_S1/S2·MINISHAPE_S1/S2·FOIL_S1_STD·CLEAR_S1}·COMP_ENV_MAKING·COMP_GANGPAN_PRINT.

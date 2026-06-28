@@ -2,6 +2,23 @@
 
 ---
 
+## 2026-06-28 · ★밴드총액 .01 ×수량 과대청구 교정 — 바인딩 12건 라이브 COMMIT
+
+**결함(배포 전 적발):** 명함/봉투/합판 "완제품가"(밴드 총액) component가 `prc_typ_cd=.01(단가형 ×qty)`로 오타이핑 → 엔진 `.01=unit×수량`이라 **총액×주문수량 = 100~1000배 과대**. 라이브 구 ASP 교차검증 오라클이 우리 리뉴얼 DB(미배포)의 결함을 적발. 진단=`FINDING-bandtotal-x-qty-overcharge.md`.
+
+**교정:** 바인딩 12 component `prc_typ_cd .01→.02`(합가형 ÷min_qty×qty·단가행 verbatim 불변). 사용자 승인=바인딩 12건 우선(현재 과대청구분), 미바인딩 13건은 후속.
+- 대상 12 = COMP_NAMECARD_{STD_S1/S2·PEARL_S1/S2·SHAPE_S1/S2·MINISHAPE_S1/S2·FOIL_S1_STD·CLEAR_S1}·COMP_ENV_MAKING·COMP_GANGPAN_PRINT.
+- SQL=`bandtotal-prctyp-fix-bindings12-{dryrun,COMMIT}.sql`. dryrun ROLLBACK 선검증(12행 정확)→COMMIT. 사후 재실측 12/12 `.02`.
+
+**★라이브 시뮬레이터 전수 재실증 GO:**
+- 투명명함 100매 = **13,500** (교정 전 1,350,000·×100 해소).
+- 스탠다드명함 백모조220 단면 100매=**3,500**·1000매=**35,000** (.02 선형 정확).
+
+**되돌리지 말 것·undo:** `bandtotal-prctyp-undo.sql`+`bandtotal-prctyp-undo-backup.csv`. 단가행 미터치.
+**잔여:** 미바인딩 13건(예방·현재 과대청구 0)·박명함 FOIL use_dims=[min_qty]만 동시매칭 2차 점검(부차).
+
+---
+
 ## 2026-06-27 · ★아크릴 §26 무결성 정밀진단 NO-GO (마스터 오케스트레이터 단계1)
 
 사용자가 "셀-카운트 diff로는 부족·격자 구조(차원)+전체 데이터 정밀진단 필요"를 directive. §26 하네스 4에이전트(authority-extractor→load-inspector→codex-verifier→integrity-gate) 정식 구동. 권위=인쇄상품가격표 "아크릴" 시트 433셀(B01~B07).
