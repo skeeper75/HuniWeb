@@ -1,8 +1,22 @@
-# 가격 파이프라인 세션 핸드오프 (최신 2026-06-29)
+# 가격 파이프라인 세션 핸드오프 (최신 2026-06-29 2세션)
 
-> 재시작 포인터. 상세 서술은 각 FINDING/매트릭스/메모리에. ★본 세션 = 채점 프레임워크 신설 + 단순/세트 상품 종단 방법 양쪽 입증.
+> 재시작 포인터. 상세 서술은 각 FINDING/매트릭스/메모리에.
 
-## ★다음 시작점 — 채점 구동 종단(2 방법 확립·이제 전파)
+## ★다음 시작점 — 배치 채점 스크립트 전파 (토대 완성·이제 상품군 확장)
+**2세션(06-29 야간) 완성: ① 하드커버 셋트 구조 라이브 COMMIT ② 결정론 배치 채점 스크립트(토큰0·자가검증) ③ 하드커버 가격 BLOCKED 라이브 오라클 영구 해소.**
+
+**빌드스크립트 = `_workspace/_foundation/batch/`** (lib_huni·authority·score_batch). 프리미엄엽서 결정론 재현 입증(pansu18≠15·부자재0·dflt1) → PRF_DGP_A 동형군 10상품 토큰0 채점 완료. `README.md`에 결함 보드.
+
+**선택지(택1):**
+1. **빌드스크립트 다음 상품군 전파** — sticker→문구→acrylic 그룹 프로파일 추가(score_batch.py GROUP dict). 케이스 enumerate=sim-meta·simulate POST(인증=HUNI_ADMIN_*). 권위 추출=24_master-extract.
+2. **하드커버 가격 종단 (BLOCKED 해소됨)** — 면지=무료(비목제외)·표지전용지≈7,400 라이브역산. 라이브 사이즈×수량 격자 probe→§18 t_prc_* 단가 설계→셋트공식 PRF_BIND_HC_MUSEON 신설→COMMIT. 권위=`06_load/hc072-blocked-resolution-LIVE-260629.md`.
+3. **R1 부자재 오염 4건 COMMIT** — 화이트인쇄020(볼펜·지비츠)·프리쿠폰042(면끈·고리). `batch/remediation-r1.sql`(DRY-RUN 후 인간 승인).
+
+### 라이브 가격 오라클 사용법 (재중단 방지·핵심 도구)
+webadmin 시뮬레이터 = **인증 POST 직접 호출**(브라우저 불요·토큰0): 로그인(HUNI_ADMIN_*)→`POST /admin/price-viewer/<prd_cd>/simulate/` `{selections,qty,procs}`→`final_price`. 세트=`simulate-set/` `{copies,members[]}`. sim-meta=enumerate 소스. 코드=`batch/lib_huni.py`.
+라이브 고객사이트 = **gstack browse**(EUC-KR·curl 403): 권위 엑셀에 단가 부재("계산식"/행부재) 시 보강 오라클. 하드커버 pcode=40. 면지무료·표지전용지 단가 라이브 역산으로 BLOCKED 해소 입증.
+
+## (이전) 채점 구동 종단(2 방법 확립)
 **핵심 전환: "상품 하나씩 LLM 확인=끝없음" → 결정론 배치 스크립트(토큰0) + 동형 전파 + 인간 큐 격리.** 근본원인=종료척도 부재(RC-1)·처방=상품단위 채점(PR 가격재현+OC 주문완전성). SOT=`SCORING-FRAMEWORK-260628.md`·진척판=`product-scoreboard.csv`. 설계=`remediation/BATCH-design-deterministic-isomorphic-260628.md`.
 
 **선택지(택1로 이어받기):**
@@ -10,9 +24,10 @@
 2. **세트 BLOCKED 이어 적재** — 하드커버책자 CONDITIONAL GO. 세트구조 적재(GO 큐·인간승인)→제본공식 PRF_BIND_HC_MUSEON 신설+차원충전(§18/dbmap)→재게이트.
 3. **R1 종이상품 부자재오염 일괄 COMMIT** — 접지리플렛·소량전단지·펄명함·프리미엄쿠폰·오리지널박명함·화이트인쇄명함·화이트인쇄엽서(권위 소재 대조 후).
 
-## ★이번 세션 라이브 COMMIT (되돌리지 말 것)
-- **밴드총액 바인딩 12건** `.01→.02`(과대청구 해소·시뮬레이터 13,500 재실증).
-- **프리미엄엽서(PRD_000016)** 부자재오염3 제거(면끈/고리/자석 del_yn=Y)·dflt 2→1(백모조220·라이브 오라클).
+## ★라이브 COMMIT (되돌리지 말 것)
+- **(2세션 06-29) 하드커버책자(072) 셋트 구조** — 내지 반제품 PRD_000284 신설 + 셋트 5구성원(표지1·내지2·면지3색3·4·5)·disp_seq 1~5·내지 페이지24~300/+2. `03_design/hardcover-book-apply.sql`·baseline=`06_load/_hc072-sets-baseline-260629.csv`. 가격은 미바인딩(BLOCKED 해소됨·다음 종단).
+- (1세션) **밴드총액 바인딩 12건** `.01→.02`(과대청구 해소·시뮬레이터 13,500 재실증).
+- (1세션) **프리미엄엽서(PRD_000016)** 부자재오염3 제거(면끈/고리/자석 del_yn=Y)·dflt 2→1(백모조220·라이브 오라클).
 
 ## ★C트랙 기록 (개발팀·배포 인간승인)
 - **판걸이수**: `fn_calc_pansu` 기하계산이 간격/물림변 미반영→과다→저청구. 권위=실무진 엑셀 판수. `CTRACK-fn-calc-pansu-authority-pansu.md`. ★이전 사이트 가격검토 키.

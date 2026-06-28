@@ -1,0 +1,11 @@
+prd_cd,prd_nm,prd_typ,frm,n_cases,calc_ok,priced,pansu_match,pansu_signal,R1_contamination,R3_dflt_ok,n_dflt,OC_score,OC_missing
+PRD_000016,프리미엄엽서,PRD_TYPE.01,PRF_DGP_A,7,True,7,4/6,73x98:e18/a15;100x150:e9/a8,,True,1,100,
+PRD_000017,코팅엽서,PRD_TYPE.01,PRF_DGP_A,7,True,7,4/6,73x98:e18/a15;100x150:e9/a8,,False,2,83,coating
+PRD_000018,스탠다드엽서,PRD_TYPE.01,PRF_DGP_A,5,True,5,2/4,73x98:e18/a15;100x150:e9/a8,,True,1,100,
+PRD_000019,투명엽서,PRD_TYPE.01,PRF_DGP_A,4,False,0,0/3,98x98:e1/a8;100x150:e1/a6;135x135:e1/a4,,True,1,83,spot_color
+PRD_000020,화이트인쇄엽서,PRD_TYPE.01,PRF_DGP_A,4,True,4,0/0,,MAT_000138(젤리볼펜(가칭));MAT_000139(지비츠부속),False,4,75,spot_color
+PRD_000021,핑크별색엽서,PRD_TYPE.01,PRF_DGP_A,4,True,4,0/0,,,False,3,80,spot_color
+PRD_000022,금은별색엽서,PRD_TYPE.01,PRF_DGP_A,4,True,4,0/0,,,False,3,80,spot_color
+PRD_000026,종이슬로건,PRD_TYPE.01,PRF_DGP_A,2,True,2,0/0,,,True,1,80,coating
+PRD_000041,스탠다드 쿠폰/상품권,PRD_TYPE.01,PRF_DGP_A,2,True,2,0/0,,,False,4,100,
+PRD_000042,프리미엄 쿠폰/상품권,PRD_TYPE.01,PRF_DGP_A,2,True,2,0/0,,MAT_000128(면끈);MAT_000129(아크릴키링고리),False,8,100,
