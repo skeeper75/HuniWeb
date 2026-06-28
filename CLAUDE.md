@@ -360,7 +360,7 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 **트리거:** "가격 종단 파이프라인", "상품군 가격 제대로", "가격 마스터 오케스트레이터", "상품군 가격 종단 완주", "정확한 가격값까지", "전 상품 가격 정합 완주", "가격 종단 실행/재실행/이어서", "특정 상품군 가격 종단" 등 본 요청 시 `huni-price-master-orchestrator` 스킬을 사용. 단일 레이어 작업은 해당 하네스 직접(§26 무결성·§18 설계·§7 적재·§21 정합). 단순 질문은 직접 응답.
 
-**변경이력:** 최신: 2026-06-28 **라이브 고객사이트 교차검증 오라클 신설 + 아크릴·스티커 실행** — 단계5에 huniprinting.com 라이브 ASP(goods.asp 손님폼·gstack browse·curl 403우회) 2번째 독립 오라클 추가(위상=교차검증·권위 엑셀 절대·차이=조사신호·자동교정 금지·읽기탐색만). 아크릴=구성요소 전건 정합(키링 고리/볼체인 addon·명찰 등록사이즈 라이브 입증)+판아크릴 가격 일치(저청구 교정 검증)·★조사신호2(포카스탠드 10,900 vs 라이브 22,000 ~2배 저청구의심·볼펜). 스티커=분류/수량모델 발산(라이브 3통합상품 vs 우리 16분해=리뉴얼 의도차)·은데드롱 소재 갭신호. 헬퍼·매트릭스=`remediation/_huni_live_crosscheck.md`·`{acryl,sticker}-live-crosscheck-matrix.md`. 직전: 스티커 종단 완주(2호·시뮬레이터 22조합 PASS)·아크릴 전수 종단 → `_workspace/_foundation/HANDOFF.md`·`price-pipeline-rtm.csv`·`huni-price-master-orchestrator/SKILL.md`
+**변경이력:** 최신: 2026-06-29 **채점 프레임워크 신설 + 단순/세트 상품 종단 2방법 입증** — 통화분석 docx(9결정 SOT)+webadmin 갭감사→근본원인=종료척도 부재(2에이전트 수렴)→상품단위 채점(PR 가격재현+OC 주문완전성·스코어보드 CSV가 RTM 서사 대체·`SCORING-FRAMEWORK-260628.md`). ★단순상품 파일럿=프리미엄엽서 완성(부자재오염3 제거+dflt 2→1 라이브 COMMIT·판걸이수 systemic 저청구 C트랙). ★세트상품 파일럿=하드커버책자 §23 종단 설계+codex 교차+게이트 CONDITIONAL GO(내지 반제품 신설·반제품↔자재 매칭·이중합산0). ★효율화=결정론 동형 배치 스크립트 설계(토큰0·R1~R4·인간큐6종·`BATCH-design-deterministic-isomorphic-260628.md`). 밴드총액12 .01→.02 COMMIT. 직전: 라이브 교차검증 오라클·아크릴/스티커 종단 → `_workspace/_foundation/HANDOFF.md`·`product-scoreboard.csv`
 
 ## 28. MoAI Framework (gated — rarely used here)
 
