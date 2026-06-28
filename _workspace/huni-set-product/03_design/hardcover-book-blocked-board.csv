@@ -1,0 +1,9 @@
+id,scope,target,reason,routing_track,human_cue
+BLOCKED-FORMULA,price,PRD_000072 셋트공식,셋트 제본공식 PRF_BIND_HC_MUSEON 라이브 미존재(신설 필요)·단가행 COMP_BIND_HC_MUSEON 6개는 실재 verbatim,§18/dbmap 공식신설,Y
+BLOCKED-INNER-DIM,dimension,PRD_000284 내지,신설 내지 사이즈/공정/판형 차원 0→PRF_DGP_A 충전 필요(인쇄비/용지비 매칭),dbmap 차원적재,Y
+BLOCKED-COVER-DIM,dimension,PRD_000073 표지,표지 PRF_DGP_A 바인딩+차원 충전(전용지 인쇄/용지/코팅),dbmap 차원적재,Y
+BLOCKED-MAT-REWIRE,material,PRD_000072 자재,부모 좀비자재 MAT_000002(아크릴투명)·MAT_000003(우드거치대) link 오염→제거+구성원 정자재 배선(마스터 삭제금지·link만),dbmap/basecode,Y
+CONFIRM-PAPER,authority,내지 종이,내지종이=별도설정(권위 booklet 공란)→실무진 내지 종이 목록 확정,human-실무진,Y
+CONFIRM-FACE,structure,면지 074/075/076,면지 3반제품→1반제품+색상옵션축 통합 여부(상품뷰어 옵션·손님UX·가격묶음),human-정책,Y
+C-TRACK-ENGINE,engine,evaluate_set_price/제본비,S1/S2 silent 이중합산·prc_typ band-total ×qty 결함(엽서북094 R-3 동형·책등 by 페이지),개발팀-webadmin코드,N
+HUMAN-CUE-BIND,spec,제본세부,책등 두께 10/18mm(권위 COMMENT)·하드커버무선엔 방향/링컬러 비해당이나 책등=페이지수 파생 확인,human-큐,Y
