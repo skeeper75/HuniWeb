@@ -2,6 +2,20 @@
 
 ---
 
+## 2026-06-29 · 투명엽서019 PET 용지비 미적재 교정 (DRY-RUN GO·COMMIT 대기)
+
+**결함(채점 로봇 적발):** 투명엽서019(PRD_000019) 견적 0원 = `COMP_PAPER`(용지비)에 PET(MAT_000178) 단가행 부재(56자재 중 PET만 누락). score_batch가 `PRICED-0`(공식 있는데 0=진짜결함)로 분류.
+
+**권위 단가:** 인쇄상품 가격표 260527 "투명 PET 260g" 가격(국4절)=**1,100**. ★매핑 verbatim 증명=`COMP_PAPER.unit_price`=가격(국4절) 그대로(백모조 100g→30.73·220g→70.64 라이브 정확일치). 추정 아님.
+
+**이전사이트 오라클:** huniprinting.com 투명엽서(pcode=71) 100x150·투명PET·단면칼라4도+화이트·qty120 → 공급가 **75,500원**. 용지=투명PET 확인(MAT_000178↔권위 동일물).
+
+**교정:** 1행 INSERT(COMP_PAPER·SIZ_000499 전지·MAT_000178·min_qty1·1100·2026-06-01). DRY-RUN=`petpaper-comp-260629-dryrun.sql`(INSERT 0 1·ROLLBACK·멱등 NOT EXISTS). FIX=`petpaper-comp-260629-fix.sql`(COMMIT·undo 동봉). 진단=`FINDING-transparent-postcard-PET-paper-260629.md`.
+
+**상태:** ✅DRY-RUN GO · ⏳**인간 승인 후 COMMIT**→시뮬레이터 75,500 일치 확인→PRICED-0 종결. 영향=투명엽서019 단일(타 PET상품은 COMP_PAPER 미사용).
+
+---
+
 ## 2026-06-28 · ★밴드총액 .01 ×수량 과대청구 교정 — 바인딩 12건 라이브 COMMIT
 
 **결함(배포 전 적발):** 명함/봉투/합판 "완제품가"(밴드 총액) component가 `prc_typ_cd=.01(단가형 ×qty)`로 오타이핑 → 엔진 `.01=unit×수량`이라 **총액×주문수량 = 100~1000배 과대**. 라이브 구 ASP 교차검증 오라클이 우리 리뉴얼 DB(미배포)의 결함을 적발. 진단=`FINDING-bandtotal-x-qty-overcharge.md`.
