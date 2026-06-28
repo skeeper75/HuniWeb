@@ -17,9 +17,11 @@
   - `UNBOUND-NO-PRICE` = 공식없음 + 가격포함 아님 = 가격원천 없음(진짜 설계)
   - `PRICED-0` = 공식 있는데 in-grid 사이즈서도 0 = **진짜 결함(돈크리티컬)**
   - `OFFGRID-격자밖` = 전 케이스 사이즈 범위밖(결함 아님)
-- **빌더 거짓신호 2종 제거**:
-  - 면적모델 대표점에서 **최대코너(w_max,h_max) 제외**(off-grid above_max_size 거짓 PRICED-0 유발) → min+중간점만.
-  - 케이스 off-grid 에러를 채점 모집단에서 제외(거짓 0 방지). → PRICED-0 30→16(거짓 14 제거).
+- **빌더 거짓신호 4종 제거**:
+  - 면적모델 대표점에서 **최대코너(w_max,h_max) 제외**(off-grid above_max_size 거짓 PRICED-0) → min+중간점만.
+  - 케이스 off-grid 에러를 채점 모집단에서 제외(거짓 0 방지). → PRICED-0 30→16.
+  - **전 FK 차원 첫옵션 주입**(bdl_qty 등 미주입 거짓 0 방지·포토카드024 해소).
+  - **base 인쇄 proc 폴백 주입**(`base_print_proc`: sim-meta proc옵션에 인쇄공정 없으면 공식 COMP_PRINT_* 요구 proc DB조회 주입·접지카드 해소). → PRICED-0 16→15.
 - **set 이중합산 휴리스틱 정교화** — PRICED-완제품가/구성원합산/2레이어/★이중합산의심 구분.
 
 ## 전수 채점 결과 (239 일반상품 + 7 세트)
@@ -27,13 +29,24 @@
 ### 일반상품 (general·239)
 | 상태 | 건수 | 의미 / 다음 액션 |
 |------|------|------------------|
-| **OK** | 63 | 정상 가격계산(전 in-grid 케이스 PRICE>0) |
+| **OK** | 64 | 정상 가격계산(전 in-grid 케이스 PRICE>0) |
 | **UNBOUND-PRICE-IN-SHEET** | 125 | (가격포함) 시트=마스터에 가격 내장 → §18 시트추출 설계(포토북 동형). 굿즈96·상품악세15·문구9·디자인캘5 |
 | **UNSCORED-축미탑재** | 17 | 빌더가 사이즈축 enumerate 못함 → 빌더 보강 또는 확인 |
-| **PRICED-0** | 16 | ★진짜 결함(공식 있는데 in-grid 0) → §26/§18 교정 큐(아래) |
+| **PRICED-0** | 15 | ★진짜 결함(공식 있는데 in-grid 0) → §26/§18 교정 큐(아래) |
 | **UNBOUND-NO-PRICE** | 9 | 가격원천 없음(미발견4·아크릴1·디지털4) → 권위 확인 후 설계 |
 | **TBD-미설정** | 8 | placeholder 공식(아크릴 입체변종 등) → §18 단가설계 |
 | **OFFGRID-격자밖** | 1 | 합판도무송066(전 케이스 범위밖·결함 아님) |
+
+### ★PRICED-0 15 교정 트랙 (병렬 진행·DRY-RUN 완료·실 COMMIT 인간승인)
+**Track A — silsa siz_cd 오적재 9 (재키잉으로 해소·승인 시 즉시 COMMIT 가능)**
+- 근본원인: A시리즈 사이즈 코드 두 벌 — 옵션=정본(174/197/172/170/293)·단가행=중복본(315/317/258/426/294) 불일치.
+  엔진 `_row_matches`(pricing.py:94)가 단가행 siz_cd를 매칭키로 써서 0. 물리 cut_width/height 5쌍 전부 동일(독립 검증).
+- 교정: 단가행 siz_cd 중복본→정본 재키잉 **35행**(값 불변·마스터 미터치). **충돌 0·comp 9종 전부 1상품전용(타군 영향0)** 독립 검증.
+- 산출: `remediation/silsa-sizcd-rekey-260629-dryrun.sql`(승인 시 ROLLBACK→COMMIT)·`FINDING-silsa-sizcd-misload-260629.md`.
+- 잔여 2(재키잉 무관·단가행 자체 부재): 레더132 소형4(304/306/308/310)·족자135 A1(293) → 권위 단가 추출 후 INSERT.
+**digital 6 (개별 결함)**:
+- 투명포토카드025 = PET 용지비 미적재(019 동형·진짜). ★에이전트는 빌더거짓이라 했으나 독립검증=진짜결함.
+- 접지카드027/028/029 = 회전사이즈 1건씩 `no_plate_pansu`(소규모·진짜). 모양엽서023 = fn_calc_pansu NULL(C트랙). 썬캡051 = 판형 오적재(019 동형).
 
 ### 책자 세트 (booklet-set·7)
 | 상품 | 상태 | 비고 |
@@ -57,6 +70,16 @@
   2-레이어 설계상 24P에서 추가페이지=0이라 내지 0이어야 함. 배치 `_member_payload`의 derived(페이지환산) qty가
   엔진 simulate-set 계약과 정합하지 않는 **모델링 갭** 추정(HANDOFF는 위젯계약 page-step으로 엔진 검증 정확이라 기록).
   → 배치 내지 qty=부수×⌈(page−24)/2⌉ 계약 구현 확인 필요. [[book-set-page-pricing-inner-member-260629]]
+
+## Track B — 072 내지(284) 페이지가 설계 결과 (★모델 정정)
+- **포토북 동형 아님**(Claude+codex high 수렴·divergence 0): 072 내지는 per-book 수량할인 72~73% 존재(이전사이트 pcode40 p01 실측)
+  → 포토북식 고정 단가형(.01) verbatim 재현 불가. 포토북(101)은 내지종이 1종·수량할인 없음이라 가능했음.
+- **정답 = 디지털인쇄 합가형 B**: COMP_PRINT_DIGITAL_S1(판수밴드×판수) + COMP_PAPER(국4절 절가×출력매수) **둘 다 재사용**.
+  기본페이지 개념 없음(전량 과금). 앱 로직 `derive_inner_sheets`(pricing.py:820)·`fn_calc_pansu` 이미 존재.
+- **★BLOCKED-INNER-DIM (dbmap 선결)**: PRD_000284에 출력판형·내지종이·내지사이즈·인쇄옵션 차원이 **전부 0개** →
+  공식 바인딩만 COMMIT해도 차원 미충전이면 여전히 0. **차원 충전(dbmap §7)이 선결**.
+- 산출: `remediation/hardcover072-inner-page-design-260629.md`·`hardcover072-inner-260629-dryrun.sql`(공식1·배선2·바인딩1·멱등 PASS).
+- 077/082/088 동형: PRF_DGP_INNER 공유 바인딩 + 각 내지 차원 충전으로 전파 가능.
 
 ## 사용법
 ```

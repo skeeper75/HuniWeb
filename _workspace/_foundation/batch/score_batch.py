@@ -174,6 +174,20 @@ def dim_options(meta, name):
     return []
 
 
+def base_print_proc(frm):
+    """공식의 인쇄 구성요소(COMP_PRINT_*)가 단가행에서 요구하는 base 인쇄 proc_cd.
+       sim-meta proc 옵션에 인쇄공정이 안 보일 때 폴백 주입용(결정론·하드코딩 아님).
+       후가공(코팅·접지 등) proc 는 손님 선택이라 제외 — 인쇄 comp 만."""
+    if not frm:
+        return None
+    rows = H.db(f"""SELECT DISTINCT cp.proc_cd
+        FROM t_prc_formula_components fc
+        JOIN t_prc_component_prices cp ON cp.comp_cd = fc.comp_cd
+        WHERE fc.frm_cd = '{frm}' AND fc.comp_cd LIKE 'COMP_PRINT%'
+          AND cp.proc_cd <> '' AND cp.proc_cd IS NOT NULL""")
+    return rows[0][0] if rows else None
+
+
 def proc_options(meta):
     for d in meta.get("prod_dims", []):
         if d.get("kind") == "proc":
@@ -243,15 +257,25 @@ def score_product(sim, prd_cd, extract_group, qty_cases=(100,),
     dflt_mat = dflt_mats[0][0] if dflt_mats else (
         dim_options(meta, "mat_cd")[0]["v"] if dim_options(meta, "mat_cd") else None)
     print_opt = print_opts[0]["v"] if print_opts else None
-    # 인쇄공정(이름에 키워드)
+    # base FK 선택 = 손님이 필수로 고르는 전 fk 차원 첫 옵션(siz_cd 제외=루프).
+    #   ★bdl_qty(묶음수)·print_opt_cd 등 미주입 시 견적 0 거짓신호 방지(포토카드 패턴).
+    base_fk_sel = {}
+    for d in meta.get("prod_dims", []):
+        if d.get("kind") == "fk" and d.get("name") != "siz_cd" and d.get("options"):
+            base_fk_sel[d["name"]] = d["options"][0]["v"]
+    # 인쇄공정: sim-meta proc 옵션의 인쇄 키워드 우선, 없으면 공식 인쇄 comp 요구 proc 폴백.
+    #   ★접지카드 등=인쇄공정이 proc 옵션에 안 보임(후가공만) → base_print_proc 주입(거짓 0 방지).
     procs = proc_options(meta)
     print_proc = next((p["v"] for p in procs
                        if (print_proc_kw or "") in (p.get("t") or "")), None)
+    if not print_proc:
+        print_proc = base_print_proc(frm)
 
     cases = []
     for st, size_sel in size_specs:
         for qty in qty_cases:
-            sel = dict(size_sel)
+            sel = dict(base_fk_sel)
+            sel.update(size_sel)
             if print_opt:
                 sel["print_opt_cd"] = print_opt
             if dflt_mat:
