@@ -19,6 +19,8 @@ GROUP_CSV = {
     "digital-print": "digital-print-l1.csv",
     "booklet": "booklet-l1.csv",
     "acrylic": "acrylic-l1.csv",
+    "sticker": "sticker-l1.csv",
+    "stationery": "stationery-l1.csv",
     "goods-pouch": "goods-pouch-l1.csv",
     "calendar": "calendar-l1.csv",
     "design-calendar": "design-calendar-l1.csv",

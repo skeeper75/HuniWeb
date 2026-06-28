@@ -20,7 +20,11 @@ score_batch — 동형 상품군 결정론 채점 드라이버 (토큰 0).
 [HARD] 라이브 읽기전용·권위 절대·값 날조 0. 결함은 신호로 노출하되 자동 COMMIT 금지.
 
 사용:  python3 score_batch.py <group> [prd_cd ...]
-예:    python3 score_batch.py digital-print            # 동형군 전체
+그룹:  digital-print · sticker · acrylic · stationery(단순상품, 갈래1)
+       booklet-set(조립형 세트=표지+내지+면지, 갈래2)
+예:    python3 score_batch.py sticker                  # 동형군 전체(PRF_STK_FIXED 13)
+       python3 score_batch.py acrylic                  # 면적격자 12
+       python3 score_batch.py booklet-set              # 세트 7부모 채점
        python3 score_batch.py digital-print PRD_000016 # 단일(자기검증)
 """
 import sys
@@ -34,9 +38,25 @@ import authority as A
 OUT_DIR = os.path.dirname(os.path.abspath(__file__))
 SCOREBOARD = os.path.join(OUT_DIR, "scoreboard-cases.csv")
 SUMMARY = os.path.join(OUT_DIR, "scoreboard-summary.csv")
+SET_SCOREBOARD = os.path.join(OUT_DIR, "scoreboard-sets.csv")
 REMED_SQL = os.path.join(OUT_DIR, "remediation-r1.sql")
 
+
+def _num(v):
+    """문자/None/Decimal → float(채점 비교용·실패 시 0.0)."""
+    try:
+        return float(v)
+    except (TypeError, ValueError):
+        return 0.0
+
 # 상품군 → {extract group, 케이스 프로파일}
+#   targets: 동형군 대상 상품 선정 방법
+#     {"frm": [...]}        → 그 가격공식에 바인딩된 상품(동형 클래스)
+#     {"name_like": [...]}  → prd_nm LIKE 패턴(미바인딩군도 타깃·"가격설계 필요" 신호 노출용)
+#     {"set_parents": True} → t_prd_product_sets 부모 상품 전체(세트 채점)
+#   is_set: True 면 세트 채점 경로(simulate-set·구성원별 합산) 사용.
+#   substrate_typ: R1 주자재 화이트리스트(이 타입 밖 자재 = 부속물 오염 후보).
+#   use_authority_tokens: 권위 주자재 토큰 대조 사용(mat_typ 모호한 군=아크릴 .03 등).
 GROUP = {
     "digital-print": {
         "extract": "digital-print",
@@ -47,6 +67,50 @@ GROUP = {
         # 이 집합 밖 = 부속물(.03 고리/볼펜/지비츠·.17 끈) = 오염.
         # ★PET false-positive 가드: .08 포함(BATCH-design R1 정제).
         "substrate_typ": {"MAT_TYPE.01", "MAT_TYPE.08"},
+        "targets": {"frm": ["PRF_DGP_A"]},
+    },
+    # ── 갈래1: 단순상품 다수 자동 채점(스티커·문구·아크릴) ──────────────
+    "sticker": {
+        "extract": "sticker",
+        "print_proc_kw": "인쇄",
+        "qty_cases": [100],
+        # 스티커 주자재 타입: .11(스티커 출력소재 다수)·.13(특수지). 둘 다 정상 택1.
+        # 이 밖 = 부속물 오염. (PRF_STK_FIXED=고정가 by-siz_cd · 13상품 동형)
+        "substrate_typ": {"MAT_TYPE.11", "MAT_TYPE.13"},
+        "targets": {"frm": ["PRF_STK_FIXED"]},
+    },
+    "acrylic": {
+        "extract": "acrylic",
+        "print_proc_kw": "인쇄",
+        "qty_cases": [100],
+        # 아크릴 .03 은 본체소재/부속물(고리·볼펜·지비츠)이 섞여 mat_typ 단독 판정 불가
+        # → 권위 주자재 토큰 대조로 오염 판정(BATCH-design R1 정제). (PRF_CLR_ACRYL=면적격자 12상품)
+        "substrate_typ": {"MAT_TYPE.03", "MAT_TYPE.07"},
+        "use_authority_tokens": True,
+        "area_model": True,   # siz_cd 미노출·면적(siz_width×siz_height) 입력으로 가격
+        "targets": {"frm": ["PRF_CLR_ACRYL"]},
+    },
+    "stationery": {
+        # 문구(만년다이어리·먼슬리플래너·스프링노트/수첩·메모패드·중철노트).
+        # ★현재 가격공식 미바인딩(formula=0) → CALC FAIL 신호 = "§18 가격설계 필요"(정직 노출).
+        # 떡메모지(097)는 세트라 booklet-set 군에서 채점.
+        "extract": "stationery",
+        "print_proc_kw": "인쇄",
+        "qty_cases": [100],
+        "substrate_typ": set(),
+        "targets": {"name_like": ["만년다이어리%", "먼슬리플래너%", "스프링노트%",
+                                  "스프링수첩%", "메모패드%", "중철노트%"]},
+    },
+    # ── 갈래2: 조립형(세트) 상품 채점(책자=표지+내지+면지) ──────────────
+    "booklet-set": {
+        # t_prd_product_sets 부모 전체(하드커버책자·레더·링·엽서북·떡메·포토북).
+        # 세트 가격모델 2종을 simulate-set 으로 자동 분류:
+        #   ① 완제품가 세트공식(094 엽서북·097 떡메) = set_selections 로 PRICED
+        #   ② 구성원 합산형(072 하드커버 등) = 구성원/세트 공식 미바인딩 → BLOCKED(실무진 대기)
+        "extract": "booklet",
+        "is_set": True,
+        "copies_cases": [100],
+        "targets": {"set_parents": True},
     },
 }
 
@@ -102,6 +166,25 @@ def score_product(sim, group, prd_cd):
 
     # ── 케이스 빌더 입력 ──
     sizes = dim_options(meta, "siz_cd")
+    nonspec = meta.get("nonspec") or {}
+    # 사이즈축 = (label, sel_partial) 리스트. siz_cd 모델이면 사이즈 코드별,
+    # 면적 모델(아크릴 등 siz_cd 미노출)이면 nonspec w×h 대표점으로 환산.
+    size_specs = []
+    for sz in sizes:
+        st = A.norm_size(sz["t"].split("(")[0])
+        size_specs.append((st, {"siz_cd": sz["v"]}))
+    area_model = False
+    if not size_specs and prof.get("area_model"):
+        # 면적 입력 대표점: (w_min,h_min) + (w_max,h_max) 있으면 추가. 없으면 60x60.
+        w0 = nonspec.get("w_min") or 60
+        h0 = nonspec.get("h_min") or 60
+        pts = [(w0, h0)]
+        if nonspec.get("w_max") and nonspec.get("h_max"):
+            pts.append((nonspec["w_max"], nonspec["h_max"]))
+        for w, h in pts:
+            size_specs.append((f"{int(w)}x{int(h)}",
+                               {"siz_width": w, "siz_height": h}))
+        area_model = bool(size_specs)
     print_opts = dim_options(meta, "print_opt_cd")
     mats = live_materials(prd_cd)
     dflt_mats = [m for m in mats if m[3] == "Y"]
@@ -114,15 +197,15 @@ def score_product(sim, group, prd_cd):
                        if prof.get("print_proc_kw", "") in (p.get("t") or "")), None)
 
     cases = []
-    for sz in sizes:
-        sv, st = sz["v"], A.norm_size(sz["t"].split("(")[0])
+    for st, size_sel in size_specs:
         for qty in prof["qty_cases"]:
-            sel = {"siz_cd": sv}
+            sel = dict(size_sel)
             if print_opt:
                 sel["print_opt_cd"] = print_opt
             if dflt_mat:
                 sel["mat_cd"] = dflt_mat
             kw = [{"proc_cd": print_proc}] if print_proc else None
+            sv = size_sel.get("siz_cd") or st
             try:
                 res = sim.simulate(prd_cd, sel, qty, procs=kw)
             except Exception as e:
@@ -173,8 +256,8 @@ def score_product(sim, group, prd_cd):
     dflt_ok = len(dflt_mats) == 1
     # OC: 요구 축 selectable in sim-meta
     sim_axes = set()
-    if sizes:
-        sim_axes.add("size")
+    if sizes or area_model or nonspec.get("yn") in ("Y", "N"):
+        sim_axes.add("size")  # 면적 모델(아크릴)은 nonspec w×h 가 사이즈축
     if dim_options(meta, "mat_cd"):
         sim_axes.add("material")
     if print_opts:
@@ -187,10 +270,24 @@ def score_product(sim, group, prd_cd):
     oc_missing = req_axes - sim_axes
     oc_score = round(100 * len(oc_covered) / len(req_axes)) if req_axes else None
 
+    # CALC 상태 분류(거짓 FAIL 방지):
+    #   OK              = 전 케이스 PRICE>0
+    #   UNBOUND-미바인딩  = 가격공식 자체 없음(frm None) → §18 가격설계 필요
+    #   UNSCORED-축미탑재 = 사이즈축 enumerate 0(siz_cd·면적 둘 다 미노출)=빌더 한계·확인필요
+    #   PRICED-0        = 공식은 있는데 케이스가 0원 = 진짜 결함 신호
+    if calc_ok:
+        calc_status = "OK"
+    elif not frm:
+        calc_status = "UNBOUND-미바인딩"
+    elif len(cases) == 0:
+        calc_status = "UNSCORED-축미탑재"
+    else:
+        calc_status = "PRICED-0"
+
     summary = {
         "prd_cd": prd_cd, "prd_nm": prd_nm, "prd_typ": prd_typ,
         "frm": frm, "is_set": is_set, "formula_note": formula_note,
-        "n_cases": len(cases), "calc_ok": calc_ok,
+        "n_cases": len(cases), "calc_ok": calc_ok, "calc_status": calc_status,
         "priced": len(priced),
         "pansu_match": f"{pansu_match}/{pansu_total}",
         "pansu_signal": [f"{s}:e{e}/a{a}" for s, e, a in pansu_cmp if e != a],
@@ -201,27 +298,188 @@ def score_product(sim, group, prd_cd):
     return summary, cases
 
 
+# ─────────────────────────────────────────────────────────────────────
+# 세트(조립형) 채점 — 갈래2: 책자=표지+내지+면지
+# ─────────────────────────────────────────────────────────────────────
+def _set_selections(meta):
+    """세트 완제품가 공식 입력 = 부모 fk 차원의 첫 옵션값 전부(siz_cd·bdl_qty·print_opt_cd…).
+    완제품가 세트공식(094·097)은 이 값들로 PRICED 된다."""
+    ss = {}
+    for d in meta.get("prod_dims", []):
+        if d.get("kind") == "fk" and d.get("options"):
+            ss[d["name"]] = d["options"][0]["v"]
+    return ss
+
+
+def _member_payload(meta, set_sel, copies):
+    """구성원(반제품) 입력 조립 — 역할군당 1개(택1 대표). 내지=derived(페이지 파생)·그 외=manual."""
+    by_role = {}
+    for m in (meta.get("set_members") or []):
+        # 같은 역할(표지/내지/면지)이 여러 옵션이면 첫째만(손님 택1 대표).
+        by_role.setdefault(m.get("role") or m.get("sub_prd_cd"), m)
+    payload = []
+    for m in by_role.values():
+        mats = m.get("materials") or []
+        dflt_mat = next((x["v"] for x in mats if x.get("dflt")),
+                        (mats[0]["v"] if mats else None))
+        sizes = m.get("sizes") or []
+        siz = sizes[0]["v"] if sizes else set_sel.get("siz_cd")
+        pr = m.get("page_rule") or {}
+        if m.get("is_inner"):
+            payload.append({"sub_prd_cd": m["sub_prd_cd"], "role": m.get("role"),
+                            "label": m.get("prd_nm"), "qty_mode": "derived",
+                            "pages": pr.get("min") or 24, "siz_cd": siz, "mat_cd": dflt_mat})
+        else:
+            payload.append({"sub_prd_cd": m["sub_prd_cd"], "role": m.get("role"),
+                            "label": m.get("prd_nm"), "qty_mode": "manual",
+                            "qty": copies, "siz_cd": siz, "mat_cd": dflt_mat})
+    return payload
+
+
+def score_set_product(sim, group, prd_cd):
+    """세트 1상품 채점: 대표 부수 케이스로 simulate-set → CALC/STATUS/이중합산 신호."""
+    prof = GROUP[group]
+    lp = live_product(prd_cd)
+    if not lp:
+        return {"prd_cd": prd_cd, "error": "live 미존재"}, []
+    _, prd_nm, prd_typ = lp
+    meta = sim.sim_meta(prd_cd)
+    if not meta.get("is_set"):
+        return {"prd_cd": prd_cd, "prd_nm": prd_nm, "error": "세트 아님(구성 없음)"}, []
+
+    set_frm = (meta.get("frm") or {}).get("frm_cd")  # 완제품가 세트공식(있으면)
+    set_sel = _set_selections(meta)
+    members_in = _member_payload(meta, set_sel, prof["copies_cases"][0])
+    n_members = len(meta.get("set_members") or [])
+
+    cases = []
+    for copies in prof["copies_cases"]:
+        try:
+            res = sim.simulate_set(prd_cd, copies, members_in, set_selections=set_sel)
+        except Exception as e:
+            cases.append({"prd_cd": prd_cd, "copies": copies, "final_price": None,
+                          "set_contrib": None, "members_priced": None,
+                          "members_included": None, "error": str(e)[:80]})
+            continue
+        fp = H.price_of(res)
+        set_contrib = _num((res.get("set_eval") or {}).get("contribution"))
+        mb = res.get("members") or []
+        priced = sum(1 for m in mb if _num(m.get("contribution")) > 0)
+        incl = sum(1 for m in mb if m.get("included"))
+        cases.append({"prd_cd": prd_cd, "copies": copies,
+                      "final_price": fp, "set_contrib": set_contrib,
+                      "members_priced": priced, "members_included": incl, "error": None})
+
+    # ── 채점 ──
+    priced_cases = [c for c in cases if c.get("final_price") and c["final_price"] > 0]
+    calc_ok = len(priced_cases) == len(cases) and len(cases) > 0
+    last = cases[-1] if cases else {}
+    # 세트 가격모델 분류 + 이중합산 신호:
+    #   PRICED              = 가격 계산됨
+    #   BLOCKED-미바인딩      = 가격 0(구성원/세트 공식 미바인딩 → 실무진 대기·§18 단가설계)
+    #   ★DOUBLE-COUNT 의심   = 완제품가 세트공식 + 구성원 공식이 동시 기여(이중합산 경계)
+    if calc_ok:
+        if _num(last.get("set_contrib")) > 0 and (last.get("members_priced") or 0) > 0:
+            status = "PRICED(★이중합산 의심)"
+        else:
+            status = "PRICED"
+    else:
+        status = "BLOCKED-미바인딩"
+
+    summary = {
+        "prd_cd": prd_cd, "prd_nm": prd_nm, "prd_typ": prd_typ,
+        "set_frm": set_frm or "(없음)", "n_members": n_members,
+        "set_sel_dims": sorted(set_sel.keys()),
+        "final_price": last.get("final_price"),
+        "set_contrib": last.get("set_contrib"),
+        "members_priced": last.get("members_priced"),
+        "members_included": last.get("members_included"),
+        "calc_ok": calc_ok, "status": status,
+    }
+    return summary, cases
+
+
+def select_targets(group):
+    """프로파일 targets 규칙으로 대상 prd_cd 리스트 선정."""
+    sel = GROUP[group].get("targets") or {}
+    if sel.get("set_parents"):
+        rows = H.db("""SELECT DISTINCT s.prd_cd FROM t_prd_product_sets s
+                       JOIN t_prd_products p ON p.prd_cd=s.prd_cd
+                       WHERE s.del_yn='N' AND p.del_yn='N' ORDER BY s.prd_cd""")
+        return [r[0] for r in rows]
+    if sel.get("frm"):
+        frms = "','".join(sel["frm"])
+        rows = H.db(f"""SELECT DISTINCT p.prd_cd FROM t_prd_products p
+                        JOIN t_prd_product_price_formulas f ON f.prd_cd=p.prd_cd
+                        WHERE f.frm_cd IN ('{frms}') AND p.del_yn='N' ORDER BY p.prd_cd""")
+        return [r[0] for r in rows]
+    if sel.get("name_like"):
+        likes = " OR ".join(f"p.prd_nm LIKE '{pat}'" for pat in sel["name_like"])
+        rows = H.db(f"""SELECT p.prd_cd FROM t_prd_products p
+                        WHERE p.del_yn='N' AND ({likes}) ORDER BY p.prd_cd""")
+        return [r[0] for r in rows]
+    return []
+
+
+def run_set_group(sim, group, targets):
+    """세트 채점 실행 + 세트 스코어보드 기록."""
+    print(f"\n{'='*70}\n세트 채점 그룹={group}  대상={len(targets)}상품\n{'='*70}")
+    summaries, all_cases = [], []
+    for prd_cd in targets:
+        summary, cases = score_set_product(sim, group, prd_cd)
+        all_cases.extend(cases)
+        if summary.get("error"):
+            print(f"\n[{prd_cd}] {summary.get('prd_nm','')}: {summary['error']}")
+            continue
+        summaries.append(summary)
+        s = summary
+        print(f"\n[{s['prd_cd']}] {s['prd_nm']} ({s['prd_typ']})  세트공식={s['set_frm']}  구성원={s['n_members']}")
+        print(f"  CALC={'OK' if s['calc_ok'] else 'FAIL'}  final_price={s['final_price']}  "
+              f"set기여={s['set_contrib']}  구성원가격={s['members_priced']}/{s['members_included']}")
+        print(f"  STATUS={s['status']}  set_sel축={s['set_sel_dims'] or '없음'}")
+
+    if summaries:
+        scols = ["prd_cd", "prd_nm", "prd_typ", "set_frm", "n_members", "set_sel_dims",
+                 "final_price", "set_contrib", "members_priced", "members_included",
+                 "calc_ok", "status"]
+        with open(SET_SCOREBOARD, "w", newline="", encoding="utf-8") as f:
+            w = csv.DictWriter(f, fieldnames=scols, extrasaction="ignore")
+            w.writeheader()
+            for s in summaries:
+                row = dict(s)
+                row["set_sel_dims"] = ";".join(s.get("set_sel_dims") or [])
+                w.writerow(row)
+        print(f"\n세트 스코어보드 → {SET_SCOREBOARD} ({len(summaries)}행)")
+        n_priced = sum(1 for s in summaries if s["calc_ok"])
+        print(f"  요약: PRICED {n_priced}/{len(summaries)} · "
+              f"BLOCKED-미바인딩 {len(summaries)-n_priced}(실무진 대기·§18)")
+    return summaries
+
+
 def main():
     H.load_env()
     if len(sys.argv) < 2:
         print(__doc__)
+        print("그룹:", ", ".join(GROUP.keys()))
         sys.exit(1)
     group = sys.argv[1]
+    if group not in GROUP:
+        print(f"미지원 그룹: {group}\n지원: {', '.join(GROUP.keys())}")
+        sys.exit(1)
     sim = H.HuniSim()
 
     if len(sys.argv) > 2:
         targets = sys.argv[2:]
     else:
-        # 동형군 전체 = 그 frm 바인딩 상품 (digital-print=PRF_DGP_A)
-        frm = "PRF_DGP_A" if group == "digital-print" else None
-        if frm:
-            rows = H.db(f"""SELECT p.prd_cd FROM t_prd_products p
-                            JOIN t_prd_product_price_formulas f ON f.prd_cd=p.prd_cd
-                            WHERE f.frm_cd='{frm}' AND p.del_yn='N' ORDER BY p.prd_cd""")
-            targets = [r[0] for r in rows]
-        else:
-            print("동형군 자동선정 미지원 — prd_cd 명시 필요")
+        targets = select_targets(group)
+        if not targets:
+            print(f"동형군 자동선정 0건 — targets 규칙 확인({GROUP[group].get('targets')})")
             sys.exit(1)
+
+    # ── 세트(조립형) 경로 ──
+    if GROUP[group].get("is_set"):
+        run_set_group(sim, group, targets)
+        return
 
     all_cases = []
     all_summaries = []
@@ -235,7 +493,7 @@ def main():
         all_summaries.append(summary)
         s = summary
         print(f"\n[{s['prd_cd']}] {s['prd_nm']} ({s['prd_typ']}) frm={s['frm']}")
-        print(f"  CALC={'OK' if s['calc_ok'] else 'FAIL'} ({s['priced']}/{s['n_cases']} 케이스 PRICE>0)")
+        print(f"  CALC={s['calc_status']} ({s['priced']}/{s['n_cases']} 케이스 PRICE>0)")
         print(f"  PR pansu일치={s['pansu_match']}  신호={s['pansu_signal']}")
         print(f"  R1 부자재오염={s['R1_contamination'] or '0(청정)'}")
         print(f"  R3 dflt={s['n_dflt']}개 {'OK' if s['R3_dflt_ok'] else 'FAIL'}")
@@ -254,8 +512,8 @@ def main():
     # 상품 요약 스코어보드 기록
     if all_summaries:
         scols = ["prd_cd", "prd_nm", "prd_typ", "frm", "n_cases", "calc_ok",
-                 "priced", "pansu_match", "pansu_signal", "R1_contamination",
-                 "R3_dflt_ok", "n_dflt", "OC_score", "OC_missing"]
+                 "calc_status", "priced", "pansu_match", "pansu_signal",
+                 "R1_contamination", "R3_dflt_ok", "n_dflt", "OC_score", "OC_missing"]
         with open(SUMMARY, "w", newline="", encoding="utf-8") as f:
             w = csv.DictWriter(f, fieldnames=scols, extrasaction="ignore")
             w.writeheader()
