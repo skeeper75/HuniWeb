@@ -34,12 +34,47 @@ import json
 
 import lib_huni as H
 import authority as A
+import group_index as GI
 
 OUT_DIR = os.path.dirname(os.path.abspath(__file__))
 SCOREBOARD = os.path.join(OUT_DIR, "scoreboard-cases.csv")
 SUMMARY = os.path.join(OUT_DIR, "scoreboard-summary.csv")
 SET_SCOREBOARD = os.path.join(OUT_DIR, "scoreboard-sets.csv")
+GENERAL_SCOREBOARD = os.path.join(OUT_DIR, "scoreboard-general.csv")
 REMED_SQL = os.path.join(OUT_DIR, "remediation-r1.sql")
+
+# ─────────────────────────────────────────────────────────────────────
+# 그룹별 R1 부자재 오염 판정 설정 (전 12 권위 그룹 커버)
+#   일반 sweep(general)이 어떤 상품을 만나도 R1 채점을 멈추지 않도록(비중단)
+#   모든 그룹에 설정을 둔다. 미발견 그룹은 DEFAULT_R1(토큰대조만=보수적).
+#   substrate_typ : 정상 주자재(substrate) MAT_TYPE 화이트리스트. 이 밖 = 부속물 오염 후보.
+#   use_authority_tokens : 권위 주자재 토큰 대조(mat_typ 단독 판정 불가 그룹=아크릴/굿즈/실사).
+# ─────────────────────────────────────────────────────────────────────
+GROUP_R1 = {
+    "digital-print":     {"substrate_typ": {"MAT_TYPE.01", "MAT_TYPE.08"}},
+    "sticker":           {"substrate_typ": {"MAT_TYPE.11", "MAT_TYPE.13"}},
+    "acrylic":           {"substrate_typ": {"MAT_TYPE.03", "MAT_TYPE.07"},
+                          "use_authority_tokens": True},
+    "booklet":           {"substrate_typ": {"MAT_TYPE.01"}, "use_authority_tokens": True},
+    "photobook":         {"substrate_typ": {"MAT_TYPE.01"}, "use_authority_tokens": True},
+    "stationery":        {"substrate_typ": {"MAT_TYPE.01"}, "use_authority_tokens": True},
+    "calendar":          {"substrate_typ": {"MAT_TYPE.01"}, "use_authority_tokens": True},
+    "design-calendar":   {"substrate_typ": {"MAT_TYPE.01"}, "use_authority_tokens": True},
+    "map":               {"substrate_typ": {"MAT_TYPE.01"}, "use_authority_tokens": True},
+    "silsa":             {"use_authority_tokens": True},   # 실사=포스터사인 소재 다양→토큰만
+    "goods-pouch":       {"use_authority_tokens": True},   # 굿즈=소재 다양→토큰만
+    "product-accessory": {"use_authority_tokens": True},
+}
+DEFAULT_R1 = {"use_authority_tokens": True}  # 권위 미발견: 토큰대조만(false-positive 최소)
+
+
+def r1_ctx(extract_group):
+    """그룹 → R1 채점 컨텍스트 {substrate_typ, use_authority_tokens}."""
+    cfg = GROUP_R1.get(extract_group) or DEFAULT_R1
+    return {
+        "substrate_typ": cfg.get("substrate_typ", set()),
+        "use_authority_tokens": cfg.get("use_authority_tokens", False),
+    }
 
 
 def _num(v):
@@ -146,23 +181,31 @@ def proc_options(meta):
     return []
 
 
-def score_product(sim, group, prd_cd):
-    prof = GROUP[group]
-    grp = prof["extract"]
+def score_product(sim, prd_cd, extract_group, qty_cases=(100,),
+                  print_proc_kw="인쇄", ambiguous=False, all_groups=None):
+    """단품 1상품 채점. extract_group = 권위 추출 그룹(일반 sweep 은 상품별 해소).
+       extract_group=None 이면 권위축(판수·주자재·요구축) 미적용(CALC 만 채점)."""
+    grp = extract_group
     lp = live_product(prd_cd)
     if not lp:
         return {"prd_cd": prd_cd, "error": "live 미존재"}, []
     _, prd_nm, prd_typ = lp
 
     meta = sim.sim_meta(prd_cd)
-    frm = (meta.get("frm") or {}).get("frm_cd")
+    frm_obj = meta.get("frm") or {}
+    frm = frm_obj.get("frm_cd")
+    frm_nm = frm_obj.get("frm_nm") or ""
     is_set = meta.get("is_set")
+    ctx = r1_ctx(grp)
 
-    # ── S1 권위 ──
-    auth_pansu = A.authority_pansu(grp, prd_nm)
-    auth_mat = A.main_materials(grp, prd_nm)
-    req_axes = A.required_axes(grp, prd_nm)
-    formula_note = A.price_formula_note(grp, prd_nm)
+    # ── S1 권위 (그룹 해소 실패 시 빈 권위) ──
+    if grp:
+        auth_pansu = A.authority_pansu(grp, prd_nm)
+        auth_mat = A.main_materials(grp, prd_nm)
+        req_axes = A.required_axes(grp, prd_nm)
+        formula_note = A.price_formula_note(grp, prd_nm)
+    else:
+        auth_pansu, auth_mat, req_axes, formula_note = {}, {}, set(), ""
 
     # ── 케이스 빌더 입력 ──
     sizes = dim_options(meta, "siz_cd")
@@ -174,13 +217,22 @@ def score_product(sim, group, prd_cd):
         st = A.norm_size(sz["t"].split("(")[0])
         size_specs.append((st, {"siz_cd": sz["v"]}))
     area_model = False
-    if not size_specs and prof.get("area_model"):
+    if not size_specs and (nonspec.get("yn") == "Y" or nonspec.get("w_min")):
         # 면적 입력 대표점: (w_min,h_min) + (w_max,h_max) 있으면 추가. 없으면 60x60.
+        # 격자 안(in-grid) 대표점만 — ★최대 코너(w_max,h_max)는 off-grid(above_max_size)
+        # 위험이 커서 PRICED-0 거짓신호를 유발하므로 제외. min + 중간점(min과 max 사이)을 쓴다.
         w0 = nonspec.get("w_min") or 60
         h0 = nonspec.get("h_min") or 60
         pts = [(w0, h0)]
-        if nonspec.get("w_max") and nonspec.get("h_max"):
-            pts.append((nonspec["w_max"], nonspec["h_max"]))
+        wmax, hmax = nonspec.get("w_max"), nonspec.get("h_max")
+        if wmax and hmax:
+            # 중간점(min과 max의 중앙·incr 정렬). 최대 코너는 쓰지 않는다.
+            wmid = w0 + (int((wmax - w0) / 2 / (nonspec.get("w_incr") or 1))
+                         * (nonspec.get("w_incr") or 1))
+            hmid = h0 + (int((hmax - h0) / 2 / (nonspec.get("h_incr") or 1))
+                         * (nonspec.get("h_incr") or 1))
+            if (wmid, hmid) != (w0, h0):
+                pts.append((wmid, hmid))
         for w, h in pts:
             size_specs.append((f"{int(w)}x{int(h)}",
                                {"siz_width": w, "siz_height": h}))
@@ -194,11 +246,11 @@ def score_product(sim, group, prd_cd):
     # 인쇄공정(이름에 키워드)
     procs = proc_options(meta)
     print_proc = next((p["v"] for p in procs
-                       if prof.get("print_proc_kw", "") in (p.get("t") or "")), None)
+                       if (print_proc_kw or "") in (p.get("t") or "")), None)
 
     cases = []
     for st, size_sel in size_specs:
-        for qty in prof["qty_cases"]:
+        for qty in qty_cases:
             sel = dict(size_sel)
             if print_opt:
                 sel["print_opt_cd"] = print_opt
@@ -216,18 +268,33 @@ def score_product(sim, group, prd_cd):
             price = H.price_of(res)
             comps = H.components_of(res)
             pansu = next((c[3] for c in comps if c[3] is not None), None)
+            # off-grid 판정: 컴포넌트 error 가 사이즈 범위밖(above_max/below_min/size)이면
+            # 결함(0)이 아니라 격자밖 신호 → 채점에서 제외(거짓 PRICED-0 방지).
+            cerr = ""
+            for c in (res.get("base", {}).get("components") or []):
+                e = c.get("error")
+                if e:
+                    cerr = str(e)
+                    break
+            offgrid = any(k in cerr for k in
+                          ("above_max", "below_min", "max_size", "min_size", "off_grid"))
             cases.append({
                 "siz_cd": sv, "size": st, "qty": qty,
                 "engine_price": price,
                 "engine_pansu": pansu,
                 "auth_pansu": auth_pansu.get(st),
                 "n_comps": len([c for c in comps if c[4]]),
-                "error": None,
+                "offgrid": offgrid,
+                "error": cerr or None,
             })
 
     # ── S3 채점 ──
-    priced = [c for c in cases if c.get("engine_price")]
-    calc_ok = len(priced) == len(cases) and len(cases) > 0 and all(
+    # off-grid 케이스는 채점 모집단에서 제외(격자밖=결함 아님).
+    scored = [c for c in cases if not c.get("offgrid")]
+    priced = [c for c in scored if c.get("engine_price")]
+    n_offgrid = len(cases) - len(scored)
+    # CALC OK = 채점대상이 있고 전건 PRICE>0 (off-grid 만 있으면 OK 아님→UNSCORED)
+    calc_ok = len(scored) > 0 and len(priced) == len(scored) and all(
         c["engine_price"] > 0 for c in priced)
     # PR 신호: pansu 불일치
     pansu_cmp = [(c["size"], c["engine_pansu"], c["auth_pansu"]) for c in cases
@@ -239,8 +306,8 @@ def score_product(sim, group, prd_cd):
     #   진짜 오염 = 부속물 타입(.03 고리/볼펜/지비츠·.17 끈) = substrate 밖.
     #   ★PET(.08) false-positive 가드 + 정상 종이(.01) false-positive 가드 동시.
     #   ★권위 토큰 대조는 use_authority_tokens=True 군에서만(아크릴 등 .03 모호).
-    substrate_typ = prof.get("substrate_typ", set())
-    use_tokens = prof.get("use_authority_tokens", False)
+    substrate_typ = ctx["substrate_typ"]
+    use_tokens = ctx["use_authority_tokens"]
     auth_tokens = auth_mat.get("tokens", set())
     contamination = []
     for m in mats:
@@ -270,24 +337,37 @@ def score_product(sim, group, prd_cd):
     oc_missing = req_axes - sim_axes
     oc_score = round(100 * len(oc_covered) / len(req_axes)) if req_axes else None
 
-    # CALC 상태 분류(거짓 FAIL 방지):
-    #   OK              = 전 케이스 PRICE>0
-    #   UNBOUND-미바인딩  = 가격공식 자체 없음(frm None) → §18 가격설계 필요
-    #   UNSCORED-축미탑재 = 사이즈축 enumerate 0(siz_cd·면적 둘 다 미노출)=빌더 한계·확인필요
-    #   PRICED-0        = 공식은 있는데 케이스가 0원 = 진짜 결함 신호
+    # CALC 상태 분류(거짓 FAIL 방지 + 비중단 actionable 버킷):
+    #   OK                    = 전 케이스 PRICE>0 (정상)
+    #   TBD-미설정             = 공식 바인딩됐으나 사이즈/단가 미설정(frm_nm 에 ★/미설정 또는 _TBD)
+    #                            → §18 설계 필요(known placeholder·미스터리 아님)
+    #   UNBOUND-PRICE-IN-SHEET = 공식 없음 + (가격포함) 시트 = 마스터 시트에 가격 내장
+    #                            → §18 시트 추출 설계(포토북 모델 동형·사용자 directive)
+    #   UNBOUND-NO-PRICE      = 공식 없음 + 가격포함 아님 = 가격 원천 없음(진짜 설계 필요)
+    #   UNSCORED-축미탑재       = 사이즈축 enumerate 0(siz_cd·면적 둘 다 미노출)=빌더 한계·확인필요
+    #   PRICED-0              = 공식 있는데 케이스 0원 = 진짜 결함 신호(돈크리티컬)
+    is_tbd = ("★" in frm_nm) or ("미설정" in frm_nm) or bool(frm and frm.endswith("_TBD"))
+    pricein = GI.is_pricein_sheet(grp) if grp else False
     if calc_ok:
         calc_status = "OK"
+    elif is_tbd:
+        calc_status = "TBD-미설정"
     elif not frm:
-        calc_status = "UNBOUND-미바인딩"
-    elif len(cases) == 0:
-        calc_status = "UNSCORED-축미탑재"
+        calc_status = "UNBOUND-PRICE-IN-SHEET" if pricein else "UNBOUND-NO-PRICE"
+    elif len(scored) == 0:
+        # 채점대상 0 = 사이즈축 미탑재 또는 전 케이스 off-grid(격자밖)
+        calc_status = "UNSCORED-축미탑재" if n_offgrid == 0 else "OFFGRID-격자밖"
     else:
         calc_status = "PRICED-0"
 
     summary = {
         "prd_cd": prd_cd, "prd_nm": prd_nm, "prd_typ": prd_typ,
-        "frm": frm, "is_set": is_set, "formula_note": formula_note,
-        "n_cases": len(cases), "calc_ok": calc_ok, "calc_status": calc_status,
+        "frm": frm, "frm_nm": frm_nm, "is_set": is_set, "formula_note": formula_note,
+        "extract_group": grp or "(미발견)", "ambiguous": ambiguous,
+        "all_groups": ";".join(sorted(all_groups)) if all_groups else "",
+        "pricein_sheet": pricein,
+        "n_cases": len(cases), "n_offgrid": n_offgrid,
+        "calc_ok": calc_ok, "calc_status": calc_status,
         "priced": len(priced),
         "pansu_match": f"{pansu_match}/{pansu_total}",
         "pansu_signal": [f"{s}:e{e}/a{a}" for s, e, a in pansu_cmp if e != a],
@@ -375,12 +455,26 @@ def score_set_product(sim, group, prd_cd):
     calc_ok = len(priced_cases) == len(cases) and len(cases) > 0
     last = cases[-1] if cases else {}
     # 세트 가격모델 분류 + 이중합산 신호:
-    #   PRICED              = 가격 계산됨
-    #   BLOCKED-미바인딩      = 가격 0(구성원/세트 공식 미바인딩 → 실무진 대기·§18 단가설계)
-    #   ★DOUBLE-COUNT 의심   = 완제품가 세트공식 + 구성원 공식이 동시 기여(이중합산 경계)
+    #   PRICED-완제품가     = 세트공식만 기여(구성원가 0) — 094 엽서북·097 떡메 패턴(정상)
+    #   PRICED-구성원합산    = 구성원만 기여(세트공식 없음) — 구성원별 가격 합(정상)
+    #   PRICED-2레이어      = 세트공식(기본/제본) + 구성원(증분) 동시 기여 = 의도된 2-레이어
+    #                         (포토북=기본24P 부모 + 추가페이지 내지·072=표지제본 + 내지)
+    #                         ★기본/증분 분리 모델이면 정상. 같은 항목 중복이면 진짜 이중합산.
+    #   PRICED(★이중합산 의심)= 세트공식 frm_nm 이 "완제품가/완성가" 전체가인데 구성원도 가격
+    #   BLOCKED-미바인딩      = 가격 0(구성원/세트 공식 미바인딩 → §18 단가설계)
+    set_frm_nm = (meta.get("frm") or {}).get("frm_nm") or ""
+    set_contrib_pos = _num(last.get("set_contrib")) > 0
+    members_pos = (last.get("members_priced") or 0) > 0
+    # 완제품가(전체가) 세트공식 표식: 이름에 '완제품'/'완성'/'FIXED' → 그 자체로 전체가
+    full_price_set = ("완제품" in set_frm_nm or "완성" in set_frm_nm
+                      or (set_frm and set_frm.endswith("_FIXED")))
     if calc_ok:
-        if _num(last.get("set_contrib")) > 0 and (last.get("members_priced") or 0) > 0:
-            status = "PRICED(★이중합산 의심)"
+        if set_contrib_pos and members_pos:
+            status = ("PRICED(★이중합산 의심)" if full_price_set else "PRICED-2레이어")
+        elif set_contrib_pos:
+            status = "PRICED-완제품가"
+        elif members_pos:
+            status = "PRICED-구성원합산"
         else:
             status = "PRICED"
     else:
@@ -397,6 +491,25 @@ def score_set_product(sim, group, prd_cd):
         "calc_ok": calc_ok, "status": status,
     }
     return summary, cases
+
+
+def set_member_cds():
+    """세트 구성원(.02 반제품) + 세트 부모 prd_cd 집합 — 일반 sweep 제외용."""
+    mem = {r[0] for r in H.db(
+        "SELECT DISTINCT sub_prd_cd FROM t_prd_product_sets WHERE del_yn='N'")}
+    par = {r[0] for r in H.db(
+        "SELECT DISTINCT prd_cd FROM t_prd_product_sets WHERE del_yn='N'")}
+    return mem | par
+
+
+def select_general():
+    """일반상품 sweep 대상 = 전 .01/.03 비(非)세트 상품(구성원/부모 제외).
+       세트 구성원(.02)은 세트 경로에서 채점되므로 제외."""
+    skip = set_member_cds()
+    rows = H.db("""SELECT prd_cd, prd_nm, prd_typ_cd FROM t_prd_products
+                   WHERE del_yn='N' AND prd_typ_cd IN ('PRD_TYPE.01','PRD_TYPE.03')
+                   ORDER BY prd_cd""")
+    return [(r[0], r[1]) for r in rows if r[0] not in skip]
 
 
 def select_targets(group):
@@ -456,6 +569,61 @@ def run_set_group(sim, group, targets):
     return summaries
 
 
+GEN_COLS = ["prd_cd", "prd_nm", "prd_typ", "extract_group", "ambiguous",
+            "all_groups", "pricein_sheet", "frm", "frm_nm", "n_cases",
+            "calc_status", "priced", "pansu_match", "pansu_signal",
+            "R1_contamination", "R3_dflt_ok", "n_dflt", "OC_score", "OC_missing"]
+
+
+def _write_general(summaries):
+    with open(GENERAL_SCOREBOARD, "w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=GEN_COLS, extrasaction="ignore")
+        w.writeheader()
+        for s in summaries:
+            row = dict(s)
+            row["pansu_signal"] = ";".join(s.get("pansu_signal") or [])
+            row["R1_contamination"] = ";".join(
+                f"{c[0]}({c[1]})" for c in (s.get("R1_contamination") or []))
+            row["OC_missing"] = ";".join(s.get("OC_missing") or [])
+            w.writerow(row)
+
+
+def run_general(sim, targets):
+    """일반상품 전수 sweep — 상품별 권위그룹 해소 + 채점 + 비중단 상태 분류.
+       targets = [(prd_cd, prd_nm), ...]. 권위 미발견도 CALC 채점(멈추지 않음)."""
+    print(f"\n{'='*70}\n일반상품 sweep  대상={len(targets)}상품 "
+          f"(전 .01/.03 비세트·세트구성원 제외)\n{'='*70}")
+    summaries = []
+    from collections import Counter
+    stat = Counter()
+    for prd_cd, prd_nm in targets:
+        g, ambig, gs = GI.resolve_group(prd_nm)
+        try:
+            summary, _ = score_product(sim, prd_cd, g, ambiguous=ambig, all_groups=gs)
+        except Exception as e:
+            summary = {"prd_cd": prd_cd, "prd_nm": prd_nm, "error": str(e)[:90]}
+        if summary.get("error"):
+            stat["ERROR"] += 1
+            print(f"  [{prd_cd}] {prd_nm[:20]} ERROR: {summary['error']}")
+            summaries.append({"prd_cd": prd_cd, "prd_nm": prd_nm,
+                              "calc_status": "ERROR", "frm_nm": summary["error"]})
+            continue
+        summaries.append(summary)
+        stat[summary["calc_status"]] += 1
+    _write_general(summaries)
+    print(f"\n일반 스코어보드 → {GENERAL_SCOREBOARD} ({len(summaries)}행)")
+    print("=== CALC 상태 집계 (비중단·전수) ===")
+    for k, n in stat.most_common():
+        print(f"  {k:26s} {n}")
+    # 돈크리티컬·확인 큐 요약
+    crit = [s for s in summaries if s.get("calc_status") == "PRICED-0"]
+    if crit:
+        print(f"\n★PRICED-0 (진짜 결함·돈크리티컬) {len(crit)}건:")
+        for s in crit:
+            print(f"  {s['prd_cd']} {s['prd_nm'][:24]} frm={s.get('frm')}")
+    return summaries
+
+
 def main():
     H.load_env()
     if len(sys.argv) < 2:
@@ -463,10 +631,21 @@ def main():
         print("그룹:", ", ".join(GROUP.keys()))
         sys.exit(1)
     group = sys.argv[1]
-    if group not in GROUP:
-        print(f"미지원 그룹: {group}\n지원: {', '.join(GROUP.keys())}")
+    SPECIAL = {"general", "all"}
+    if group not in GROUP and group not in SPECIAL:
+        print(f"미지원 그룹: {group}\n지원: {', '.join(GROUP.keys())} · general · all")
         sys.exit(1)
     sim = H.HuniSim()
+
+    # ── 일반상품 전수 sweep (모든 .01/.03 비세트) ──
+    if group == "general":
+        run_general(sim, select_general())
+        return
+    # ── all = 일반 sweep + 세트 sweep (전 상품 비중단 종단) ──
+    if group == "all":
+        run_general(sim, select_general())
+        run_set_group(sim, "booklet-set", select_targets("booklet-set"))
+        return
 
     if len(sys.argv) > 2:
         targets = sys.argv[2:]
@@ -484,8 +663,12 @@ def main():
     all_cases = []
     all_summaries = []
     print(f"\n{'='*70}\n채점 그룹={group}  대상={len(targets)}상품\n{'='*70}")
+    prof = GROUP[group]
+    eg = prof["extract"]
+    qcs = prof.get("qty_cases", (100,))
+    ppk = prof.get("print_proc_kw", "인쇄")
     for prd_cd in targets:
-        summary, cases = score_product(sim, group, prd_cd)
+        summary, cases = score_product(sim, prd_cd, eg, qty_cases=qcs, print_proc_kw=ppk)
         all_cases.extend([{**c, "prd_cd": prd_cd} for c in cases])
         if summary.get("error"):
             print(f"\n[{prd_cd}] ERROR: {summary['error']}")
