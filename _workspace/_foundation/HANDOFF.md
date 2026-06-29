@@ -1,52 +1,56 @@
-# 가격 파이프라인 세션 핸드오프 (최신 2026-06-29 3세션)
+# 가격 파이프라인 세션 핸드오프 (최신 2026-06-29 4세션)
 
-> 재시작 포인터. 상세 서술은 각 FINDING/SQL/메모리에. 활성 하네스=가격 종단(CLAUDE.md §27).
+> 재시작 포인터. 상세는 각 FINDING/SQL/메모리에. 활성 하네스=가격 종단(CLAUDE.md §27).
+> ★사용자 원칙: 코드(PRD_xxx) 대신 상품명·쉬운 말. 애매하면 이전사이트 먼저(실무진은 최후).
 
-## ★다음 시작점
-이번 세션은 **채점 로봇이 적발한 막힌 가격을 이전사이트 오라클 방법으로 실제 해소**했다(투명엽서·포토북·072 라이브 COMMIT). 다음 우선순위:
+## ★이번 세션 한 일 (요약)
+1. **빌드스크립트 전수 확장** — `score_batch.py general/all` 모드(276상품 비중단 채점)+`group_index.py`(prd_nm→권위그룹 자동해소 268/276)+거짓신호 제거(면적 최대코너·bdl_qty·base인쇄proc). PRICED-0 30→15 정밀화.
+2. **★예전사이트 "가격이 맞나" 자동비교 신설** — `golden_fetch.py`(goods.asp 폼 네이티브구동→공급가 추출)+`pr_score.py`+`pr_retest.py`(★조건[크기·수량] 동일매칭). score_batch `--pr` 플래그(기본OFF).
+3. **라이브 COMMIT 6건**(아래)·**책자군 전체 이전사이트 구조 오라클 확정**.
+4. **실무진 검토 문서**=`remediation/STAFF-REVIEW-excel-decode-260629.md`(비교표+엑셀 해독 기록).
 
-1. **072 하드커버 내지(284) 종단** — 표지+제본 합산가는 COMMIT 완료, **내지(PRD_000284) 디지털인쇄 페이지가만 남음**(§18 설계·포토북 내지 동형). 완결 시 072 종단(현재 set_eval=표지+제본만). 권위=이전사이트 pcode=40 `price_01`(내지) 밴드 + 가격표 booklet-l1.
-2. **077/082/088 동형 전파** — 072 표지+제본 합산모델 복제(제본종류별 밴드 교체: 077=레더하드커버·082=하드커버트윈링(pcode41)·088=싸바리(pcode44)). 각 이전사이트 price_02 실측.
-3. **채점 로봇 다음 상품군** — `score_batch.py`로 실사/책자 등 추가 채점(갈래1 패턴).
+## ★다음 시작점 (우선순위)
+1. **비교 검사 확장·보강** — ① 명함류(프리미엄/코팅/스탠다드/펄/박명함)는 우리 sim-meta에 **사이즈 미노출**→명함 전용 케이스빌더 필요 ② 포토카드 예전폼 구조 golden_fetch 보강 ③ 접지카드 예전 수량단위 "개"(8단위) 매칭. 보강 후 재검사.
+2. **저청구 큰 건 조사** — 투명엽서 **−60.8%**(조건맞춤 진짜신호·우리가 쌈)·모양명함류 −5~10%. 공식·구성요소 어디서 빠지는지(권위 엑셀 절대·자동교정 금지).
+3. **하드커버책자 세트 합산 완성** — 속지 데이터는 COMMIT됨(가격 나옴). **세트 합계에 속지 0** 잔존=3원인(속지 role 미태깅·페이지→출력장수 환산·인쇄비 공정). 데이터 일부+위젯/엔진 C트랙. 077/082/088 동형 전파 대기(책자군 오라클로 종이/사이즈 확정됨).
+4. **남은 자동검사 군** — 스티커18·아크릴굿즈16(부분·케이스빌더 보강)·실사 족자/현수막/미니배너.
 
-## ★이번 세션 라이브 COMMIT (되돌리지 말 것·undo SQL 보유)
-1. **용지비 3건 충전** — COMP_PAPER 미적재 자재(아이보리153·스타드림다이아407.5·로츠쿼츠524=가격표 "가격(국4절)" verbatim·SIZ_000499 전지). `remediation/paper-missing-fill-260629-fix.sql`.
-2. **투명엽서019 견적0 해소(2결함)** — ① PET 용지비 미적재→COMP_PAPER MAT_000178=1,100 적재 ② 판형 오적재→소형판형 4개(SIZ_000113/114/115/118) 논리삭제(형제 엽서는 전지뿐). 0원→가격. `petpaper-comp-260629-fix.sql`·`petplate-019-260629-fix.sql`.
-3. **포토북100 종단 완성** — 가격데이터(PRF_PHOTOBOOK_FIXED+COMP_PHOTOBOOK_BASE 기본24P 11행 / PRF_PHOTOBOOK_INNER+COMP_PHOTOBOOK_PAGE 추가2P당 4행 / 바인딩2) + OI-3 옵션그룹(OPT_000079 표지타입+OPV_000484~486). 엔진 검증 23,800·38,000·50,000 권위 정확. `photobook-price-260629-fix.sql`·`photobook-oi3-options-260629.sql`.
-4. **072 표지+제본 합산가** — PRF_HC_MUSEON_SET+COMP_HC_MUSEON_COVERBIND(권당 6밴드·prc_typ .01·이전사이트 price_02 verbatim). simulate_set copies1=34,100·copies100=796,900 일치. `hardcover072-coverbind-260629.sql`.
+## ★이번 세션 라이브 COMMIT (되돌리지 말 것·UNDO 보유)
+1. **silsa siz_cd 오적재 재키잉 35행** — A시리즈 사이즈 코드 두벌(옵션=정본174/197/172/170/293·단가행=중복본315/317/258/426/294 불일치)→단가행을 정본으로 재키잉. 7상품 견적0 해소(폼보드 등). 잔여2=레더132 소형4·족자135 A1 단가행 부재. `silsa-sizcd-rekey-260629-fix.sql`.
+2. **digital 견적0 4건** — 투명포토카드(묶음수 20개 행 추가)+공유사이즈 작업치수 충전3(SIZ_000119/124/133=재단+2mm→판수 양수복귀). 무회귀(명함032/033 3,500 불변). 썬캡051=신규·BLOCKED. `digital-priced0-260629-fix.sql`.
+3. **문구 9상품 가격 신설** — (가격포함)시트=마스터 가격내장. 공식9·단가행10 verbatim. 수량할인 DSC_STAT_QTY=가격표 정확일치(기존바인딩 재사용). 9/9 OK·100개 810k(10%할인) 검증. `stationery-price-260629-fix.sql`.
+4. **하드커버책자 속지(PRD_000284) 데이터** — 이전사이트 확정 9종(앙상블100 포함)·A5/B5/A4·단양면·국4절. 공식 PRF_DGP_INNER(인쇄비+용지비). 속지 단독 가격남(용지비 30.73/장 정합). `hardcover072-inner-complete-260629-fix.sql`.
 
 ## ★핵심 방법론 정립 (이번 세션·재사용)
-- **COMP_PAPER 단가 = 가격표 "가격(국4절)" 컬럼 verbatim** (백모조 100g→30.73·220g→70.64 라이브 정확일치로 증명). 미적재 용지는 이 규칙으로 충전(추정 아님).
-- **PRICED-0 결함(견적0) = 용지단가 미적재 + 판형(plt_siz_cd) 오적재 복합** — best-plate가 단가행 있는 전지(SIZ_000499)로 수렴하는지(형제 상품 plate_sizes 패리티) 확인이 핵심.
-- **책자 세트 페이지 가격 = 내지 구성원에 단가형(.01)** — 엔진 evaluate_set_price는 구성원마다 자기 qty로 가격(부모 set_eval 단일호출만 보면 page 못 곱한다고 오판). 위젯이 내지 qty=부수×⌈(page−24)/2⌉ 전달. [[book-set-page-pricing-inner-member-260629]].
-- **별도 vs 합산 판정 = 이전사이트서 cover paper 바꿔 가격 불변이면 합산** — 072 표지종이 3종 전부 41,800 동일→표지+제본=합산(역산 분리 불필요). 표지종이=사양선택(가격 무관).
-- **표지타입 차원 = opt_cd(text·OPT_REF_DIM 불요)** — 시뮬레이터 드롭다운=TPrdProductOptions(prd_cd) 직접. OI-3=옵션그룹+옵션 등록.
-
-## ★C트랙 기록 (개발팀·배포 인간승인)
-- **fn_calc_pansu 양방향 결함**(이번 세션 정량화): 기하 임포지션 과다→투명엽서 전사이즈 +43~50% **저청구**, **그러나 스탠다드엽서 148x210 −33% 과청구**(역방향). 권위=실무진 엑셀 판수. 코드=`raw/webadmin/sql/32_fn_calc_pansu.sql` L56-59. 회귀=투명 100x150 권위판수6(엔진14전지). `CTRACK-fn-calc-pansu-authority-pansu.md`.
-- **OI-PAGE**: 위젯이 포토북/책자 내지 qty=부수×페이지스텝 산출 계약(데이터는 적재완료·코드 외부).
-- composite 판형·S1/S2 이중합산(기존).
+- **"가격이 맞나" 2단계 채점**: ① CALC(가격 나오나·기존) ② PR(예전사이트 정답 대조·신설). PR mismatch=조사신호(자동교정 X·권위 엑셀 절대).
+- **★비교는 양쪽 크기·수량 동일매칭 필수** — 안 맞추면 가짜신호(투명엽서 가짜 +195% → 조건맞춤 −60.8% 진짜). 없는 조건은 "비교불가" 정직분류(가짜숫자 금지). `pr_retest.py`.
+- **공식 유형 차이**: 우리=원자합산형(인쇄비 판수×단가 + 용지비 매수×절가) vs 예전=출력 통합단가형(한 칸). 차이 위치=판수(우리 과다)·용지비 추가분.
+- **`*별도설정` 종이 정체 = 이전사이트 `<select>` + 가격표 "출력소재(IMPORT)"**(seoljeong-import-map). 도메인 추정 금지.
+- **책자 세트 = 표지+제본(합산) + 속지(페이지·디지털합가형) + 면지(무료·블랙/화이트/그레이)**.
+- **수량구간 할인 = 문구·굿즈파우치·아크릴 3군만**(가격표 discount-brackets.csv·군별 할인율 상이).
 
 ## 미해결/블로커
-- **072 내지(284)** = 디지털인쇄 페이지가 미설계(§18). 077/082/088 동형 대기.
-- **094 엽서북 내지(095) 무공식** = 포토북과 동일 구조 결함(추가페이지 미반영 가능)·별도 점검.
-- **로츠쿼츠(MAT_000241)** = 로즈쿼츠 오타 판단으로 524 적재(실무진 1건 확인 권장·상이시 실버425/골드435).
-- **투명엽서 잔여 갭**(49,000 vs 75,500)=전부 fn_calc_pansu C트랙(데이터는 정확·교정 금지).
-- 포토북 10x10 소프트커버=권위 빈칸(미제공·CPQ 제약).
+- 명함류 사이즈 미노출(전용 빌더)·포토카드 예전폼·접지카드 수량단위 = 비교기 보강 대상.
+- **미니접지카드 크기 불일치**(우리 90x50 vs 예전 100x150)=데이터 점검 신호(실무진).
+- 투명엽서 −60.8% 저청구 원인 미규명.
+- 하드커버책자 세트 합산(속지 0)·077/082/088 미전파.
+- 굿즈파우치96·상품악세15·디자인캘5 PRICE-IN-SHEET 미착수(문구만 완료).
+- 썬캡051=신규 실무진 확정·silsa 잔여2 단가행 권위추출.
 
 ## 이번 세션 결정 (relitigate 금지)
-- **미적재 용지 단가 = 가격표 가격(국4절) verbatim**(역산/추정 금지·증명됨).
-- **책자 세트 페이지가 = 내지 구성원**(BLOCKED 아님·엔진 구성원별 qty).
-- **072 표지+제본 = 합산**(이전사이트 실측·표지종이 무관·역산 분리 폐기).
-- **포토북 ≠ 072**(포토북=리뉴얼 신규·이전사이트 부재·가격표 권위 / 072=pcode40 독립 책자).
-- 이전사이트=조사 오라클(가격표 절대 권위·차이=조사신호·자동교정 금지·역산값은 인간/실측 확정).
+- 면지=무료 · 하드커버 속지=9종(이전사이트) · 책자세트=표지제본+속지+면지.
+- 수량할인=문구·굿즈파우치·아크릴 3군만.
+- **애매→이전사이트 먼저, 실무진은 최후수단**(SKILL.md Phase0.5 [HARD] 강화).
+- **비교는 양쪽 크기·수량 동일매칭 필수**·차이=조사신호(자동교정 금지·권위 엑셀 절대).
+- 코드 대신 상품명·쉬운 말(사용자 재강조·메모리 반영).
 
 ## 건드리지 말 것
-- 이번 세션 라이브 COMMIT 4건(위)·이전 세션 COMMIT 전부 — undo SQL 보유. 단가행 verbatim 불변.
-- 채점 로봇(`batch/`)·기존 라이브 COMMIT(아크릴·스티커·밴드총액·디지털 종단) — `remediation/_REMEDIATION-LOG.md`.
+- 이번 세션 라이브 COMMIT 6건(위)·이전 세션 COMMIT 전부 — UNDO SQL 보유.
+- 빌드스크립트(`batch/`)·비교기(golden_fetch·pr_score·pr_retest)·기존 라이브 COMMIT.
 
 ## 산출물 위치
-- **이번 세션 신규**: `remediation/{paper-missing-fill,petpaper-comp,petplate-019,photobook-price,photobook-oi3-options,hardcover072-coverbind,hardcover072-price-design,FINDING-transparent-postcard-PET-paper}-260629.*`·`CTRACK-fn-calc-pansu-authority-pansu.md`.
-- 채점 로봇: `_foundation/batch/`(score_batch·lib_huni·authority·README). 교정 로그: `remediation/_REMEDIATION-LOG.md`.
-- 메모리: [[transparent-postcard-price-fix-260629]]·[[book-set-page-pricing-inner-member-260629]]·[[batch-scoring-driver-260629]].
-- 시뮬레이터 헬퍼: `batch/lib_huni.py`(인증 POST). 이전사이트 오라클: `remediation/_huni_live_crosscheck.md`(gstack browse·EUC-KR·price_01/02 분해).
+- 배치/비교기: `_foundation/batch/`(score_batch·group_index·golden_fetch·pr_score·pr_retest·prd-pcode-map.csv·GOLDEN-FETCH-NOTES·SWEEP-RESULTS-260629).
+- 실무진 문서: `remediation/STAFF-REVIEW-excel-decode-260629.md` · 책자군 오라클: `remediation/booklet-group-live-oracle-260629.md`.
+- COMMIT/UNDO: `remediation/{silsa-sizcd-rekey,digital-priced0,stationery-price,hardcover072-inner-complete}-260629-{fix,UNDO}.sql` · 로그 `remediation/_REMEDIATION-LOG.md`.
+- 이전사이트 헬퍼: `remediation/_huni_live_crosscheck.md`·`_huni_live_pcode-index.csv`(책자 pcode=36무선·37PUR·38트윈링·39중철·40하드커버무선(072)·41하드커버트윈링(082)·44싸바리(088)·53엽서북(094)·55떡메(097)).
+- 메모리: [[batch-scoring-driver-260629]]·[[pr-golden-compare-260629]]·[[live-site-excel-structure-oracle-mandatory]]·[[user-nonexpert-plain-language]].

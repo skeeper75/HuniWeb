@@ -360,7 +360,7 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 **트리거:** "가격 종단 파이프라인", "상품군 가격 제대로", "가격 마스터 오케스트레이터", "상품군 가격 종단 완주", "정확한 가격값까지", "전 상품 가격 정합 완주", "가격 종단 실행/재실행/이어서", "특정 상품군 가격 종단" 등 본 요청 시 `huni-price-master-orchestrator` 스킬을 사용. 단일 레이어 작업은 해당 하네스 직접(§26 무결성·§18 설계·§7 적재·§21 정합). 단순 질문은 직접 응답.
 
-**변경이력:** 최신: 2026-06-29(3세션) **채점 로봇 적발 막힌가격을 이전사이트 오라클로 실해소(라이브 COMMIT 4건)** — ① 채점 로봇 단순상품 3군 확대(sticker13·acrylic12 면적모델·문구 UNBOUND신호)+세트 채점(엽서북094/떡메097 PRICED) ② 투명엽서019 견적0 해소(PET용지비 미적재+판형 오적재 2결함) ③ 포토북100 종단(★페이지가=내지 구성원 단가형·기본24P+추가2P당·OI-3 옵션그룹·엔진 23,800 검증) ④ 072 표지+제본 합산가(이전사이트 실측 표지종이 무관). 방법론 정립=COMP_PAPER단가=가격표 국4절 verbatim·PRICED-0=용지+판형 복합·책자세트 페이지=내지구성원·별도/합산판정=이전사이트 cover paper 가격불변. C트랙=fn_calc_pansu 양방향결함(투명+50%저청구/스탠다드-33%과청구). 다음=072 내지(284)§18→종단·077/082/088 동형 → `_workspace/_foundation/HANDOFF.md`·`remediation/_REMEDIATION-LOG.md`
+**변경이력:** 최신: 2026-06-29(4세션) **전수 배치 확장 + "가격이 맞나" 이전사이트 자동비교 신설 + 라이브 COMMIT 6건** — ① `score_batch general/all`(276상품 비중단)+`group_index`(권위그룹 자동해소)+거짓신호 제거(PRICED-0 30→15) ② ★예전사이트 정답 자동대조 신설(`golden_fetch`·`pr_score`·`pr_retest` 조건[크기·수량] 동일매칭·`--pr`) ③ COMMIT=silsa siz_cd 재키잉35행(견적0 7해소)·digital4(투명포토카드 묶음수·접지/모양엽서 작업치수)·문구9 가격신설·하드커버속지(284) 데이터 ④ 책자군 전체 이전사이트 오라클 확정(속지9종·면지무료·제본별 종이목록) ⑤ 실무진 검토문서. 신호=투명엽서 −60.8%저청구(조건맞춤·가짜+195% 반증)·모양명함류 −5~10%·미니접지카드 크기불일치. 다음=명함/포토카드 비교기 보강·투명엽서 저청구 조사·책자세트 합산 → `_workspace/_foundation/HANDOFF.md`·`remediation/STAFF-REVIEW-excel-decode-260629.md`
 
 ## 28. MoAI Framework (gated — rarely used here)
 
