@@ -1,56 +1,48 @@
-# 가격 파이프라인 세션 핸드오프 (최신 2026-06-29 4세션)
+# 가격 파이프라인 세션 핸드오프 (최신 2026-06-29 5세션)
 
-> 재시작 포인터. 상세는 각 FINDING/SQL/메모리에. 활성 하네스=가격 종단(CLAUDE.md §27).
-> ★사용자 원칙: 코드(PRD_xxx) 대신 상품명·쉬운 말. 애매하면 이전사이트 먼저(실무진은 최후).
+> 재시작 포인터. 활성 하네스=가격 종단(§27)·셋트(§23). 권위=2엑셀(상품마스터260610·가격표260527).
+> ★사용자 권위모델[[price-authority-model-reframe]]: 엑셀=권위·이전사이트=거울·레드/도메인=구성요소 애매시만·webadmin=상품+가격 둘다 등록.
 
-## ★이번 세션 한 일 (요약)
-1. **빌드스크립트 전수 확장** — `score_batch.py general/all` 모드(276상품 비중단 채점)+`group_index.py`(prd_nm→권위그룹 자동해소 268/276)+거짓신호 제거(면적 최대코너·bdl_qty·base인쇄proc). PRICED-0 30→15 정밀화.
-2. **★예전사이트 "가격이 맞나" 자동비교 신설** — `golden_fetch.py`(goods.asp 폼 네이티브구동→공급가 추출)+`pr_score.py`+`pr_retest.py`(★조건[크기·수량] 동일매칭). score_batch `--pr` 플래그(기본OFF).
-3. **라이브 COMMIT 6건**(아래)·**책자군 전체 이전사이트 구조 오라클 확정**.
-4. **실무진 검토 문서**=`remediation/STAFF-REVIEW-excel-decode-260629.md`(비교표+엑셀 해독 기록).
+## ★이번 세션 한 일 (관점 재정립 세션)
+1. **파이프라인 감사** — 배치 채점기가 "가격 나오나"만 재고 "맞나"는 0건 측정(PR 0/239)·전문에이전트 우회·공식집 미디코드를 적발.
+2. **라이브 webadmin 실측**(`_live-webadmin-observe-260629/`) — 가격이 admin/뷰어 코드로 등록 확인("로더없음" 오판 정정)·HUNI_ADMIN_PW 현재 유효.
+3. **★공식집 디코드 정본** — `계산공식집초안`=카탈로그 전상품 가격논리 정본(27블록·3유형)을 디코드, evaluate_price와 1:1. → `price-formula-collection-decode-260629.md`.
+4. **전 카탈로그 공식 귀속 지도** — 상품→공식블록 매핑(`formula-block-map-260629.csv`·`formula-block-coverage-260629.md`).
+5. **★3가격모델 분류 확정** — 공식형120·직접단가(가격포함)110·기성20. "(가격포함)=직접단가(공식아님)" 사용자 확정.
+6. **공식형 구성요소 검증→진짜 저청구 5건** — `verify-atomic-findings-260629.md`.
+7. **★반제품/셋트 분석 정본** — `set-semifinished-model-260629.md`(재작업 방지 토대).
 
-## ★다음 시작점 (우선순위)
-1. **비교 검사 확장·보강** — ① 명함류(프리미엄/코팅/스탠다드/펄/박명함)는 우리 sim-meta에 **사이즈 미노출**→명함 전용 케이스빌더 필요 ② 포토카드 예전폼 구조 golden_fetch 보강 ③ 접지카드 예전 수량단위 "개"(8단위) 매칭. 보강 후 재검사.
-2. **저청구 큰 건 조사** — 투명엽서 **−60.8%**(조건맞춤 진짜신호·우리가 쌈)·모양명함류 −5~10%. 공식·구성요소 어디서 빠지는지(권위 엑셀 절대·자동교정 금지).
-3. **하드커버책자 세트 합산 완성** — 속지 데이터는 COMMIT됨(가격 나옴). **세트 합계에 속지 0** 잔존=3원인(속지 role 미태깅·페이지→출력장수 환산·인쇄비 공정). 데이터 일부+위젯/엔진 C트랙. 077/082/088 동형 전파 대기(책자군 오라클로 종이/사이즈 확정됨).
-4. **남은 자동검사 군** — 스티커18·아크릴굿즈16(부분·케이스빌더 보강)·실사 족자/현수막/미니배너.
+## ★다음 시작점 (확정 순서)
+**① §23 반제품/셋트 설계·적재 → ② A codify(3-tier 검증).** (사용자 우려=반제품 미분석 채 codify하면 재작업 → 셋트 먼저)
 
-## ★이번 세션 라이브 COMMIT (되돌리지 말 것·UNDO 보유)
-1. **silsa siz_cd 오적재 재키잉 35행** — A시리즈 사이즈 코드 두벌(옵션=정본174/197/172/170/293·단가행=중복본315/317/258/426/294 불일치)→단가행을 정본으로 재키잉. 7상품 견적0 해소(폼보드 등). 잔여2=레더132 소형4·족자135 A1 단가행 부재. `silsa-sizcd-rekey-260629-fix.sql`.
-2. **digital 견적0 4건** — 투명포토카드(묶음수 20개 행 추가)+공유사이즈 작업치수 충전3(SIZ_000119/124/133=재단+2mm→판수 양수복귀). 무회귀(명함032/033 3,500 불변). 썬캡051=신규·BLOCKED. `digital-priced0-260629-fix.sql`.
-3. **문구 9상품 가격 신설** — (가격포함)시트=마스터 가격내장. 공식9·단가행10 verbatim. 수량할인 DSC_STAT_QTY=가격표 정확일치(기존바인딩 재사용). 9/9 OK·100개 810k(10%할인) 검증. `stationery-price-260629-fix.sql`.
-4. **하드커버책자 속지(PRD_000284) 데이터** — 이전사이트 확정 9종(앙상블100 포함)·A5/B5/A4·단양면·국4절. 공식 PRF_DGP_INNER(인쇄비+용지비). 속지 단독 가격남(용지비 30.73/장 정합). `hardcover072-inner-complete-260629-fix.sql`.
+§23에서 할 것(=`set-semifinished-model-260629.md` §3 결함 5):
+1. **셋트 미구성 4 신규구성**(중철068·무선069·PUR070·트윈링071=제본값만 청구 심각저청구)→072 패턴(내지·표지 구성원+부모 표지+제본 합산공식).
+2. **부모공식 신설 3**(077·082·088)+내지 구성원 승격(082·077 내지 없음).
+3. **면지/표지 택1 연결**(현재 3색 항상포함→생산연결 부정확·가격0이라 금액무해).
+4. 엽서북094/떡메097 내지 page공식 점검(095·098 공식X).
+5. **하드커버링 면지=제본비 포함**(사용자 확정·가격0·생산연결만).
 
-## ★핵심 방법론 정립 (이번 세션·재사용)
-- **"가격이 맞나" 2단계 채점**: ① CALC(가격 나오나·기존) ② PR(예전사이트 정답 대조·신설). PR mismatch=조사신호(자동교정 X·권위 엑셀 절대).
-- **★비교는 양쪽 크기·수량 동일매칭 필수** — 안 맞추면 가짜신호(투명엽서 가짜 +195% → 조건맞춤 −60.8% 진짜). 없는 조건은 "비교불가" 정직분류(가짜숫자 금지). `pr_retest.py`.
-- **공식 유형 차이**: 우리=원자합산형(인쇄비 판수×단가 + 용지비 매수×절가) vs 예전=출력 통합단가형(한 칸). 차이 위치=판수(우리 과다)·용지비 추가분.
-- **`*별도설정` 종이 정체 = 이전사이트 `<select>` + 가격표 "출력소재(IMPORT)"**(seoljeong-import-map). 도메인 추정 금지.
-- **책자 세트 = 표지+제본(합산) + 속지(페이지·디지털합가형) + 면지(무료·블랙/화이트/그레이)**.
-- **수량구간 할인 = 문구·굿즈파우치·아크릴 3군만**(가격표 discount-brackets.csv·군별 할인율 상이).
+이후 A codify=공식집-정합 검증을 **3-tier(단순 완제품/셋트 완제품/반제품 역할별)** 로 §27 batch계측에 codify(수렴·신규하네스0).
 
 ## 미해결/블로커
-- 명함류 사이즈 미노출(전용 빌더)·포토카드 예전폼·접지카드 수량단위 = 비교기 보강 대상.
-- **미니접지카드 크기 불일치**(우리 90x50 vs 예전 100x150)=데이터 점검 신호(실무진).
-- 투명엽서 −60.8% 저청구 원인 미규명.
-- 하드커버책자 세트 합산(속지 0)·077/082/088 미전파.
-- 굿즈파우치96·상품악세15·디자인캘5 PRICE-IN-SHEET 미착수(문구만 완료).
-- 썬캡051=신규 실무진 확정·silsa 잔여2 단가행 권위추출.
+- **저청구 5**(접지리플렛048 인쇄·용지누락 / 책자068~071 제본만) → §23/§18 교정.
+- **가격포함 110 단가 미적재**(굿즈·파우치·문구일부·상품악세·디자인캘)=직접단가 적재(§7·공식아님·난이도낮음).
+- **가격표 골든격자 2/19**(아크릴·스티커만)=셀값 전수대조 미흡 → §26 17시트 전파(봉투 FAIL=1000배·포스터사인 97%미채번).
+- 지그재그엽서=PRF_DGP_E 공용 바인딩·형압명함=명함 공용(search-before-mint).
 
 ## 이번 세션 결정 (relitigate 금지)
-- 면지=무료 · 하드커버 속지=9종(이전사이트) · 책자세트=표지제본+속지+면지.
-- 수량할인=문구·굿즈파우치·아크릴 3군만.
-- **애매→이전사이트 먼저, 실무진은 최후수단**(SKILL.md Phase0.5 [HARD] 강화).
-- **비교는 양쪽 크기·수량 동일매칭 필수**·차이=조사신호(자동교정 금지·권위 엑셀 절대).
-- 코드 대신 상품명·쉬운 말(사용자 재강조·메모리 반영).
+- **권위=2엑셀·이전사이트=거울(가격오라클 아님)·레드/도메인=구성요소 애매시만**[[price-authority-model-reframe]].
+- **"(가격포함)"=직접단가 모델(공식 계산 아님)**.
+- **면지=제본비 포함(가격0)·생산연결(택1)만 필요**.
+- **셋트=2레이어**(부모 표지+제본 합산 + 내지 page공식 + 표지/면지=가격0 선택지).
+- **검증은 3-tier 필수**(반제품을 부모기준 대조=false-positive 원인).
+- **순서=§23 반제품/셋트 먼저→A codify**.
 
 ## 건드리지 말 것
-- 이번 세션 라이브 COMMIT 6건(위)·이전 세션 COMMIT 전부 — UNDO SQL 보유.
-- 빌드스크립트(`batch/`)·비교기(golden_fetch·pr_score·pr_retest)·기존 라이브 COMMIT.
+- 이번 산출물: `price-formula-collection-decode`·`formula-block-map/coverage`·`verify-atomic-findings`·`set-semifinished-model`·`_live-webadmin-observe-260629/`·`batch/{verify_formula_binding,formula_block_map,verify_formula_full}.py`.
+- 이전 세션 라이브 COMMIT 전부(UNDO 보유).
 
 ## 산출물 위치
-- 배치/비교기: `_foundation/batch/`(score_batch·group_index·golden_fetch·pr_score·pr_retest·prd-pcode-map.csv·GOLDEN-FETCH-NOTES·SWEEP-RESULTS-260629).
-- 실무진 문서: `remediation/STAFF-REVIEW-excel-decode-260629.md` · 책자군 오라클: `remediation/booklet-group-live-oracle-260629.md`.
-- COMMIT/UNDO: `remediation/{silsa-sizcd-rekey,digital-priced0,stationery-price,hardcover072-inner-complete}-260629-{fix,UNDO}.sql` · 로그 `remediation/_REMEDIATION-LOG.md`.
-- 이전사이트 헬퍼: `remediation/_huni_live_crosscheck.md`·`_huni_live_pcode-index.csv`(책자 pcode=36무선·37PUR·38트윈링·39중철·40하드커버무선(072)·41하드커버트윈링(082)·44싸바리(088)·53엽서북(094)·55떡메(097)).
-- 메모리: [[batch-scoring-driver-260629]]·[[pr-golden-compare-260629]]·[[live-site-excel-structure-oracle-mandatory]]·[[user-nonexpert-plain-language]].
+- 정본: `_foundation/{price-formula-collection-decode,formula-block-coverage,verify-atomic-findings,set-semifinished-model}-260629.md`·`formula-block-map-260629.csv`.
+- 라이브 실측: `_foundation/_live-webadmin-observe-260629/`.
+- 메모리: [[price-authority-model-reframe]]·[[price-formula-collection-keystone-260629]]·[[set-semifinished-3tier-model-260629]]·[[catalog-price-3model-coverage-260629]].

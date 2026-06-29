@@ -1,0 +1,30 @@
+prd_cd,prd_nm,block,frm,n_comp,miss_core,contam,verdict
+PRD_000016,프리미엄엽서,B03_엽서류,PRF_DGP_A,10,,,OK
+PRD_000017,코팅엽서,B03_엽서류,PRF_DGP_A,10,,,OK
+PRD_000018,스탠다드엽서,B03_엽서류,PRF_DGP_A,10,,,OK
+PRD_000019,투명엽서,B03_엽서류,PRF_DGP_A,10,,,OK
+PRD_000020,화이트인쇄엽서,B03_엽서류,PRF_DGP_A,10,,,OK
+PRD_000021,핑크별색엽서,B03_엽서류,PRF_DGP_A,10,,,OK
+PRD_000022,금은별색엽서,B03_엽서류,PRF_DGP_A,10,,,OK
+PRD_000023,모양엽서,B14_모양,PRF_DGP_B,3,,,OK
+PRD_000026,종이슬로건,B03_엽서류,PRF_DGP_A,10,,,OK
+PRD_000027,2단접지카드,B28_접지,PRF_DGP_E,9,,타공비 (6mm),오염
+PRD_000028,미니접지카드,B28_접지,PRF_DGP_E,9,,타공비 (6mm),오염
+PRD_000029,3단접지카드,B28_접지,PRF_DGP_E,9,,타공비 (6mm),오염
+PRD_000041,스탠다드 쿠폰/상품권,B03_엽서류,PRF_DGP_A,10,,,OK
+PRD_000042,프리미엄 쿠폰/상품권,B03_엽서류,PRF_DGP_A,10,,,OK
+PRD_000043,인쇄배경지(OPP봉투타입),B18_배경지,PRF_DGP_C,4,,,OK
+PRD_000044,인쇄배경지(투명케이스타입),B18_배경지,PRF_DGP_C,4,,,OK
+PRD_000045,인쇄헤더택,B18_배경지,PRF_DGP_C,4,,,OK
+PRD_000046,라벨/택,B14_모양,PRF_DGP_B,3,,,OK
+PRD_000047,소량전단지,B24_전단,PRF_DGP_D,10,,타공비 (6mm);가변텍스트;가변이미지,오염
+PRD_000048,접지리플렛,B28_접지,PRF_FOLD_SUM,1,인쇄;용지,,누락
+PRD_000051,썬캡,B48_썬캡,PRF_DGP_F,3,,,OK
+PRD_000068,중철책자,B63_책자무선,PRF_BIND_SUM,1,표지,,누락
+PRD_000069,무선책자,B63_책자무선,PRF_BIND_MUSEON,1,표지,,누락
+PRD_000070,PUR책자,B63_책자무선,PRF_BIND_PUR,1,표지,,누락
+PRD_000071,트윈링책자,B72_트윈링,PRF_BIND_TWINRING,1,표지,,누락
+PRD_000072,하드커버책자,B63_책자무선,PRF_HC_MUSEON_SET,1,,,OK
+PRD_000100,포토북 [디자인명],B_포토북,PRF_PHOTOBOOK_FIXED,1,,,OK
+PRD_000101,포토북 [디자인명]-내지(몽블랑130),B_포토북,PRF_PHOTOBOOK_INNER,1,표지,포토북 추가2P당(사이즈별),누락
+PRD_000284,하드커버책자-내지,B63_책자무선,PRF_DGP_INNER,2,표지;제본,디지털인쇄비,누락
