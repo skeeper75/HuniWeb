@@ -35,14 +35,14 @@
 | 항목 | 값 |
 |---|---|
 | 부모 상품 | PRD_000100 (셋트 완제품) — 현재 완제품가 공식 미바인딩 → 견적 0 |
-| 신규 공식 | `PRF_PHOTOBOOK_FIXED` (1) |
-| 신규 구성요소 | `COMP_PHOTOBOOK_BASE` (1) · comp_typ=.06 · prc_typ=.01(단가형) |
-| use_dims | `["siz_cd", "opt_cd", "min_qty"]` |
-| 신규 단가행 | 11 (권위 11조합 verbatim) |
-| 신규 바인딩 | PRD_000100 ← PRF_PHOTOBOOK_FIXED (1) |
+| 신규 공식 | `PRF_PHOTOBOOK_FIXED`(부모 기본가) + `PRF_PHOTOBOOK_INNER`(내지 추가2P당) = **2** |
+| 신규 구성요소 | `COMP_PHOTOBOOK_BASE` + `COMP_PHOTOBOOK_PAGE` = **2** · comp_typ=.06 · prc_typ=.01(단가형) |
+| use_dims | BASE `["siz_cd","opt_cd","min_qty"]` · PAGE `["siz_cd","min_qty"]` |
+| 신규 단가행 | **15** = 기본24P 11(siz×표지) + 추가2P당 4(siz별·표지무관) |
+| 신규 바인딩 | PRD_000100 ← FIXED, PRD_000101(내지) ← INNER = **2** |
 | 표지타입 차원 | **opt_cd** (OPV_000484 하드 / OPV_000485 레더하드 / OPV_000486 소프트) — 라이브 OPV 컨벤션·MAX 483+1 |
-| ★page 모델 | **옵션D — 기본24P만 정확. page추가가 미반영(BLOCKED·저청구·열린 이슈)** |
-| DRY-RUN | RC=0 · PK충돌 0 · 단가행 11 · 멱등(2차 재실행 0행) |
+| ★page 모델 | **해결 — 내지 구성원(PRD_000101) 단가형 추가2P당 × 내지qty(=copies×page-step). page 선형증가 정확** |
+| DRY-RUN | RC=0 · PK충돌 0 · 공식2/구성요소2/배선2/단가행15/바인딩2 · 멱등(2차 0행) |
 
 ---
 
@@ -82,16 +82,24 @@
 ### 2.2 포토북 설계 (동형 + 표지타입 축 추가)
 
 ```
+[부모 세트공식] (set_eval — qty=copies)
 PRF_PHOTOBOOK_FIXED  "포토북 사이즈/표지타입별 기본가(24P)"
   └─ COMP_PHOTOBOOK_BASE (disp_seq 1, addtn_yn Y)
-        comp_typ_cd = PRC_COMPONENT_TYPE.06   (094 완제품가 동일)
-        prc_typ_cd  = PRICE_TYPE.01           (단가형 → unit_price × copies)
-        use_dims    = ["siz_cd", "opt_cd", "min_qty"]
-        단가행 11 = (siz_cd × opt_cd[표지타입]) 정확매칭 + min_qty=1 단일밴드
-바인딩: PRD_000100 ← PRF_PHOTOBOOK_FIXED  (apply_bgn_ymd 2026-06-06)
+        comp_typ .06 · prc_typ .01(단가형 → unit_price × copies)
+        use_dims = ["siz_cd", "opt_cd", "min_qty"]
+        단가행 11 = (siz_cd × opt_cd[표지타입]) 정확매칭 + min_qty=1
+  바인딩: PRD_000100 ← PRF_PHOTOBOOK_FIXED  (apply_bgn_ymd 2026-06-06)
+
+[내지 구성원] (member eval — qty=내지qty=copies×⌈(page−24)/2⌉)   ★신규(page 해결)
+PRF_PHOTOBOOK_INNER  "포토북 내지 추가2P당(사이즈별)"
+  └─ COMP_PHOTOBOOK_PAGE (disp_seq 1, addtn_yn Y)
+        comp_typ .06 · prc_typ .01(단가형 → unit_price × 내지qty)
+        use_dims = ["siz_cd", "min_qty"]   (opt_cd 불요=표지무관)
+        단가행 4 = siz_cd별 추가2P당(500/1000/300/600) + min_qty=1
+  바인딩: PRD_000101 ← PRF_PHOTOBOOK_INNER  (apply_bgn_ymd 2026-06-06)
 ```
 
-094와의 차이: 094는 표지타입 같은 3분기 축이 없어 component를 분리(S1/S2)했지만, 포토북은 표지타입을 **opt_cd 단일 차원**으로 가른다(아래 §과제1 근거). 따라서 component는 1개로 충분.
+094와의 차이: 094는 표지타입 같은 3분기 축이 없어 component를 분리(S1/S2)했지만, 포토북은 표지타입을 **opt_cd 단일 차원**으로 가른다(§4 근거). page 추가가는 094도 미해결이었으나(내지 무공식) 본 설계가 내지 구성원 단가형으로 해결(§3).
 
 ### 2.3 엔진 계약 정합 (pricing.py 실측)
 - set_eval이 set_selections를 selections로 그대로 받는다 → 위젯이 `{siz_cd, opt_cd}`를 set_selections에 넣으면 단가행 NON_QTY_DIMS 정확매칭.
@@ -100,35 +108,35 @@ PRF_PHOTOBOOK_FIXED  "포토북 사이즈/표지타입별 기본가(24P)"
 
 ---
 
-## 3. ★page 선형증가 모델 결정 (최대 난제·돈크리티컬)
+## 3. ★page 선형증가 모델 — 내지 구성원으로 해결(완성)
 
-### 3.1 엔진 한계 (구조적 사실, pricing.py 정독)
-`component_subtotal(prc_typ, unit_price, tier_min_qty, qty)`의 곱셈 인자는 **오직 `qty(=copies)`와 `tier_min_qty`** 둘뿐이다. page는 어디에도 곱해질 수 없다.
-- selections에 page를 넣어도 → NON_QTY_DIMS/dim_vals **정확매칭**으로만 쓰임(곱셈 아님).
-- min_qty(TIER)는 `_tier_order_val`에서 **qty(copies)에 고정** — page를 티어로 못 쓴다.
-- evaluate_set_price 시그니처는 copies 하나만 qty로 받는다 → page를 별도 곱셈 수량으로 못 넘긴다.
+### 3.0 ★이전 BLOCKED 판정 정정(해소)
+초안에서 "page추가가는 엔진으로 표현 불가(OI-1 BLOCKED·저청구)"로 단정했으나 **오판이었다**. 그 분석은 **부모 set_eval 단일호출**만 봤고, evaluate_set_price의 **구성원별 evaluate_price 합산**(member qty 자유도)을 놓쳤다. 동료 검증으로 정정·해소.
 
-### 3.2 옵션별 판정
+### 3.1 해결 메커니즘 (pricing.py:844 evaluate_set_price 재정독)
+evaluate_set_price는 부모 set_eval 외에 **구성원마다** `evaluate_price({"prd_cd":sub_cd}, mb["selections"], mqty_i)`를 호출하고 `contribution = res["base"]["amount"]`를 `base_total`에 합산한다(pricing.py:904~910). **mqty_i = 호출자(시뮬레이터/위젯)가 산출해 넘긴 자유 qty** — copies와 독립.
+→ 내지 구성원에 **추가2P당을 단가형(.01)**으로 실으면 내지 qty만큼 곱해진다(`component_subtotal: unit_price × mqty_i`).
+→ 위젯이 **내지 qty = copies × ⌈(page−24)/2⌉**로 넘기면 `추가2P당 × copies × page-step` = **page 선형증가 정확 산출**.
+→ page≤24 → step=0 → 내지 qty=0 → member 루프 `mqty_i < 1` 가드로 **기여 0(included=False·경고만)** → 기본24P만. 권위 정확.
 
-| 옵션 | 가능? | 판정 |
-|---|---|---|
-| A: 기본가 comp + page추가 comp | △ | page추가를 곱하는 메커니즘 부재. page추가 comp를 둬도 `× copies`만 됨(× page-step 불가) → 잘못된 곱 |
-| B: page-step을 copies처럼 별도 호출 | ✗ | evaluate_set_price는 copies 1개만 qty. page-step 주입 시그니처 없음 |
-| C: page를 dim_vals/min_qty 트릭 | ✗ | dim_vals=정확매칭(곱셈 아님). min_qty=copies 고정. page 64값 enumerate는 비현실+선형증가 본질 안 맞음 |
-| **D: 기본24P만 적재·page추가 BLOCKED** | ✓ | **채택**. 기본24P(page=24)는 정확. page>24는 미반영 |
+### 3.2 ★확정 설계 (2-레이어)
+```
+[부모 세트공식] PRD_000100 ← PRF_PHOTOBOOK_FIXED ← COMP_PHOTOBOOK_BASE
+    기본24P[siz_cd × opt_cd 표지타입] × copies. 단가행 11. (기존 유지)
+[내지 구성원]   PRD_000101 ← PRF_PHOTOBOOK_INNER ← COMP_PHOTOBOOK_PAGE   ★신규
+    추가2P당[siz_cd] × 내지qty. prc_typ .01(단가형). use_dims=["siz_cd","min_qty"].
+    단가행 4(사이즈별·표지타입 무관·opt_cd NULL): 8x8=500/10x10=1000/A5=300/A4=600.
+    바인딩 PRD_000101 ← PRF_PHOTOBOOK_INNER (apply_bgn_ymd 2026-06-06).
+```
+- **추가2P당 권위 재확인(날조 0)**: photobook-l1.csv 직접 재추출 → 사이즈별 동일·**표지타입 무관**(8x8=500/10x10=1000/A5=300/A4=600, 표지 3종 전부 같은 값). → opt_cd 불요·siz_cd 단일 차원·4행으로 충분.
+- **search-before-mint**: PRF_PHOTOBOOK_INNER·COMP_PHOTOBOOK_PAGE 기존 부재 확인(라이브 count 0) → 신규 mint. 094 패턴 채번.
 
-### 3.3 ★결정 = 옵션D + 명시적 저청구 경고
-- **기본24P 단가행 11개만 적재**(권위 verbatim). page=24일 때 100% 정확.
-- **page>24 추가가는 엔진 단일호출로 표현 불가** → 미반영 = **저청구**.
-  - 예: A4 하드커버 page=50 copies=1 → 권위 = 16000 + ⌈(50-24)/2⌉×600 = 16000 + 13×600 = 23800. 엔진 산출 = 16000. **차액 7800 저청구**.
-  - page=150(최대)이면 ⌈126/2⌉=63 step → A4 하드커버 16000+63×600=53800 vs 엔진 16000. **차액 37800 저청구**(돈크리티컬).
-- 이 한계는 **엔진/위젯 확장 과제**(열린 이슈 §6). 값 날조·억지 배선으로 가짜 정합을 만들지 않는다.
+### 3.3 위젯/시뮬레이터 계약 (OI-PAGE)
+- 내지 구성원(PRD_000101)을 `qty_mode='manual'`, `qty = copies × ⌈(page−24)/2⌉`, `selections={siz_cd}`(부모와 동일 사이즈)로 members에 넣는다.
+- page≤24면 step=0 → 내지 qty=0 → 내지 기여 0(경고 발생하나 가격 정확). ★깔끔하게는 page=24일 때 내지 member를 빼거나 위젯이 step≥1만 전달(경고 회피) — OI-PAGE로 명기.
 
-### 3.4 page 추가가 해결 경로(권고·미구현)
-page 선형증가는 본질적으로 "기본 + 단위×수량" 2-term 가격이다. 엔진 단일호출로 풀려면 둘 중:
-1. **위젯/시뮬레이터 선계산**: page-step 수를 copies처럼 별도 qty로 받는 `page_add` 구성요소 + 엔진 시그니처 확장(C트랙·개발팀). 가장 정석.
-2. **page 구간 enumerate**: page 24~150을 dim_vals로 64값 단가행(조합당 64행 × 11조합 = 704행). 엔진 변경 없으나 데이터 폭증+증가2 본질 왜곡. 비권장.
-→ §6 열린 이슈로 등록. 현 설계는 (1)을 권고하되 미구현이므로 기본24P만 정확.
+### 3.4 ★094 엽서북 동일 구조 관찰 (사실만)
+094 내지 PRD_000095도 무공식(바인딩 0)이라 동일 구조다. 단 094 page_rule은 부모(PRD_000094) 20~30·증가10으로 범위가 좁고 셋트라 영향 제한적 — page 추가가 미반영 가능성은 **사실로 기록**하되, 별도 검증 없이 과한 결함 단정은 하지 않는다(094는 본 설계 범위 밖·별도 점검 대상).
 
 ---
 
@@ -171,7 +179,7 @@ page=24(기본)일 때 권위 = 기본24P. copies=1이면 set_eval contribution 
 | 3 | SIZ_000269 | OPV_000486 | 12000 | 12000 | 12000 | ✅ |
 | 4 | SIZ_000274 | OPV_000484 | 22000 | 22000 | 22000 | ✅ |
 | 5 | SIZ_000274 | OPV_000485 | 32000 | 32000 | 32000 | ✅ |
-| — | SIZ_000274 | (소프트) | — 미생성 | 빈칸 | (매칭0) | ✅ BLOCKED |
+| — | SIZ_000274 | (소프트) | — 미생성 | 빈칸 | (매칭0) | ✅ 미제공 |
 | 6 | SIZ_000170 | OPV_000484 | 12000 | 12000 | 12000 | ✅ |
 | 7 | SIZ_000170 | OPV_000485 | 19000 | 19000 | 19000 | ✅ |
 | 8 | SIZ_000170 | OPV_000486 | 10000 | 10000 | 10000 | ✅ |
@@ -180,35 +188,45 @@ page=24(기본)일 때 권위 = 기본24P. copies=1이면 set_eval contribution 
 | 11 | SIZ_000172 | OPV_000486 | 13000 | 13000 | 13000 | ✅ |
 
 **11/11 권위 일치(page=24·copies=1).** copies=N이면 ×N(예: A4 하드 copies 10 = 160000).
-※ page>24는 §3.3대로 저청구(설계 한계·열린 이슈).
-
 검산 2(copies 곱): A4 하드 copies 10 page 24 → 권위 16000×10=160000, 엔진 unit_price 16000 ×copies 10 = 160000 ✅.
+
+### 5.1 ★page>24 검산표 (기본가 + 내지 추가2P당 합산 = 권위 정확)
+공식: `총가 = copies × (기본24P[siz×표지] + 추가2P당[siz] × ⌈(page−24)/2⌉)`.
+내지 qty = copies × ⌈(page−24)/2⌉. set_eval(base) + 내지 contribution(추가2P당 × 내지qty).
+
+| siz | 표지 | page | copies | step=⌈(p-24)/2⌉ | base(기본×copies) | 내지(추가2P당×내지qty) | 합 | 권위 | 일치 |
+|---|---|---|---|---|---|---|---|---|---|
+| A4 SIZ_000172 | 하드 OPV_000484 | 50 | 1 | 13 | 16000×1=16000 | 600×(1×13)=7800 | 23800 | 16000+13×600=23800 | ✅ |
+| 8x8 SIZ_000269 | 하드 OPV_000484 | 40 | 2 | 8 | 15000×2=30000 | 500×(2×8)=8000 | 38000 | 2×(15000+8×500)=38000 | ✅ |
+| 10x10 SIZ_000274 | 레더 OPV_000485 | 100 | 1 | 38 | 32000×1=32000 | 1000×(1×38)=38000 | 70000 | 32000+38×1000=70000 | ✅ |
+| A5 SIZ_000170 | 소프트 OPV_000486 | 24 | 5 | 0 | 10000×5=50000 | 0(내지 qty0·기여0) | 50000 | 5×10000=50000 | ✅ |
+| A4 SIZ_000172 | 하드 OPV_000484 | 150 | 1 | 63 | 16000 | 600×63=37800 | 53800 | 16000+63×600=53800 | ✅ |
+
+→ 사이즈별·page 케이스 전부 권위 정확 일치(이전 초안의 −37800 저청구는 내지 구성원으로 **해소**).
+page=24(A5 5부) 케이스 = step0 → 내지 qty0 → 기여0 → 기본가만(권위 정확). ✅
 
 ---
 
 ## 6. DRY-RUN 결과 (psql -f 실행 검증)
 
 ```
-BEGIN
-INSERT 0 1   (공식)
-INSERT 0 1   (구성요소)
-INSERT 0 1   (배선)
-INSERT 0 11  (단가행)
-INSERT 0 1   (바인딩)
---- 단가행 카운트: 11 ---
-ROLLBACK    (실제 변경 0)
+BEGIN ... (10 INSERT: 공식2·구성요소2·배선2·단가행11+4·바인딩2) ... ROLLBACK
+검증 카운트: FIXED공식1 / INNER공식1 / BASE구성요소1 / PAGE구성요소1
+             / BASE단가행11 / PAGE단가행4 / 바인딩2
 ```
-- **PK충돌 0** · 단가행 정확 11행(10×10 소프트커버 제외) · 권위 verbatim 일치.
-- **멱등 검증**: INSERT 블록 2회 실행 → 1차 1/1/1/11/1, 2차 전부 INSERT 0 0(NOT EXISTS 가드) → 최종 카운트 formula1/component1/wiring1/dprice11/binding1. 중복 0.
-- ★IDENTITY 시퀀스 stale 발견(last_value 40329 < MAX 40332). DRY-RUN은 comp_price_id 명시부여로 회피, **fix.sql은 setval 동기화 정석** 사용.
+- **PK충돌 0** · 통합 카운트 = **공식2·구성요소2·배선2·단가행15·바인딩2**(권위 verbatim 일치).
+  - 기본24P 11행(10×10 소프트커버 제외) + 추가2P당 4행(500/1000/300/600·opt_cd NULL).
+- **멱등 검증**: INSERT 블록 2회 실행 → 1차 정상, 2차 전부 INSERT 0 0(NOT EXISTS 가드) → 카운트 불변. 중복 0.
+- ★IDENTITY 시퀀스 stale(last_value 40329 < MAX 40332). DRY-RUN은 comp_price_id 명시부여로 회피, **fix.sql은 setval 동기화 정석** 사용.
 
 ---
 
-## 7. 열린 이슈 (BLOCKED / 위젯·엔진 확장 과제)
+## 7. 열린 이슈 (위젯 계약 / CPQ 연결)
 
 | # | 이슈 | 영향 | 경로 |
 |---|---|---|---|
-| OI-1 | **page 추가가 미반영 = 저청구** | page>24에서 차액(page150 A4하드 −37800) | 엔진 시그니처 확장(page_add qty 별도) C트랙·개발팀. dbm-price-arbiter 심의 |
+| ~~OI-1~~ | ~~page 추가가 미반영 = 저청구~~ → **해소(내지 구성원 PRD_000101 단가형 추가2P당)**. page 선형증가 정확 산출. | — | 닫힘 |
+| OI-PAGE | 내지 qty 위젯 계약 | page-step 산식(copies×⌈(page−24)/2⌉)은 **위젯이 계산해 내지 member qty로 전달**. page=24면 step0→내지 빼거나 qty≥1만 전달(경고 회피). 내지 selections={siz_cd}(부모 사이즈와 동일) | 위젯 구현 계약(코드 외부·데이터는 적재 완료) |
 | OI-2 | 10×10 소프트커버 미제공 | 손님이 선택 시 매칭0(견적불가) | 권위 빈칸=정상. 위젯이 해당 조합 비활성화 필요 |
 | OI-3 | **표지타입 → opt_cd CPQ 연결 부재(선결)** | PRD_000100 옵션 0개 → 시뮬레이터가 표지타입을 set_selections.opt_cd로 못 보냄 → 미선택 시 ERR_AMBIGUOUS(가격 안 나옴) | PRD_000100에 "표지타입" 옵션그룹+OPV_000484~486 등록(t_prd_product_options) + 위젯 set_selections.opt_cd 매핑 계약. OPT_REF_DIM에 opt_cd 차원 부재 → .08 신설 또는 위젯 직매핑(dbmap CPQ 심의). ★단가행 COMMIT만으론 불충분 |
 | OI-4 | 실 simulate_set 가격검증 미수행 | DRY-RUN은 미COMMIT이라 시뮬레이터(별 connection)서 안 보임 | COMMIT 후 사람이 simulate_set 실호출 검증(§fix.sql 주석) |
