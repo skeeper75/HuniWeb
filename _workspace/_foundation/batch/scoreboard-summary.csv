@@ -1,2 +1,11 @@
-prd_cd,prd_nm,prd_typ,frm,n_cases,calc_ok,calc_status,priced,pansu_match,pansu_signal,R1_contamination,R3_dflt_ok,n_dflt,OC_score,OC_missing
-PRD_000016,프리미엄엽서,PRD_TYPE.01,PRF_DGP_A,7,True,OK,7,4/6,73x98:e18/a15;100x150:e9/a8,,True,1,100,
+prd_cd,prd_nm,prd_typ,frm,n_cases,calc_ok,calc_status,priced,pansu_match,pansu_signal,R1_contamination,R3_dflt_ok,n_dflt,OC_score,OC_missing,PR_verdict,PR_golden,PR_engine,PR_diff,PR_pct,PR_pcode,PR_note
+PRD_000016,프리미엄엽서,PRD_TYPE.01,PRF_DGP_A,7,True,OK,7,4/6,73x98:e18/a15;100x150:e9/a8,,True,1,100,,mismatch,9000,9424,424,4.7,33,
+PRD_000017,코팅엽서,PRD_TYPE.01,PRF_DGP_A,7,True,OK,7,4/6,73x98:e18/a15;100x150:e9/a8,,False,2,83,coating,mismatch,9000,9467,467,5.2,33,
+PRD_000018,스탠다드엽서,PRD_TYPE.01,PRF_DGP_A,5,True,OK,5,2/4,73x98:e18/a15;100x150:e9/a8,,True,1,100,,mismatch,9000,9424,424,4.7,33,
+PRD_000019,투명엽서,PRD_TYPE.01,PRF_DGP_A,4,True,OK,4,0/3,98x98:e12/a8;100x150:e9/a6;135x135:e6/a4,,True,1,83,spot_color,mismatch,6700,19800,13100,195.5,71,
+PRD_000020,화이트인쇄엽서,PRD_TYPE.01,PRF_DGP_A,4,True,OK,4,0/0,,MAT_000138(젤리볼펜(가칭));MAT_000139(지비츠부속),False,4,75,spot_color,no-pcode,,11183,,,,pcode 미상(미상)
+PRD_000021,핑크별색엽서,PRD_TYPE.01,PRF_DGP_A,4,True,OK,4,0/0,,,False,3,80,spot_color,no-pcode,,1013,,,,pcode 미상(미상)
+PRD_000022,금은별색엽서,PRD_TYPE.01,PRF_DGP_A,4,True,OK,4,0/0,,,False,3,80,spot_color,no-pcode,,1013,,,,pcode 미상(미상)
+PRD_000026,종이슬로건,PRD_TYPE.01,PRF_DGP_A,2,True,OK,2,0/0,,,True,1,80,coating,no-pcode,,22333,,,,pcode 미상(미상)
+PRD_000041,스탠다드 쿠폰/상품권,PRD_TYPE.01,PRF_DGP_A,2,True,OK,2,0/0,,,False,4,100,,no-pcode,,10177,,,,pcode 미상(미상)
+PRD_000042,프리미엄 쿠폰/상품권,PRD_TYPE.01,PRF_DGP_A,2,True,OK,2,0/0,,MAT_000128(면끈);MAT_000129(아크릴키링고리),False,8,100,,no-pcode,,10913,,,,pcode 미상(미상)
