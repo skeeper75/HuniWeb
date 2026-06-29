@@ -11,11 +11,14 @@ score_batch — 동형 상품군 결정론 채점 드라이버 (토큰 0).
   S2 케이스 enumerate(사이즈 × 대표수량 × 기본옵션) → simulate(엔진 직접호출)
   S3 채점:
      · CALC  계산가능성(PRICE≠0 전건)
-     · PR    엔진 pansu vs 권위 판수(불일치=systemic 신호)·직접격자 모델은 값 일치
+     · PR-pansu  엔진 pansu vs 권위 판수(불일치=systemic 신호)·직접격자 모델은 값 일치
      · R1    부자재 오염(라이브 자재 ↔ 권위 주자재/자재타입)
      · R3    dflt_yn=Y 정확히 1개
      · OC    권위 요구 축이 손님 선택 가능(sim-meta)
-  S4 스코어보드 행(case CSV) + 상품 요약
+     · PR-가격재현(--pr 플래그)  엔진 simulate 금액 ↔ 예전사이트 골든 공급가 대조
+                  ("가격이 맞나" 정답 대조·match/mismatch/no-golden·★차이=조사신호
+                   자동교정 X·권위 엑셀 절대·브라우저 독점 1상품 1케이스)
+  S4 스코어보드 행(case CSV) + 상품 요약 (PR 컬럼 포함)
 
 [HARD] 라이브 읽기전용·권위 절대·값 날조 0. 결함은 신호로 노출하되 자동 COMMIT 금지.
 
@@ -35,6 +38,16 @@ import json
 import lib_huni as H
 import authority as A
 import group_index as GI
+
+# PR(가격 재현) 채점 — 예전사이트 골든 대조(선택적·브라우저 독점).
+#   ★기존 채점 흐름 보존: pr_check=True 일 때만 활성(기본 OFF).
+#   golden_fetch/pr_score 가 없거나 브라우저 미가용이면 조용히 스킵(비중단).
+try:
+    import pr_score as PR
+    _PR_AVAILABLE = True
+except Exception:
+    PR = None
+    _PR_AVAILABLE = False
 
 OUT_DIR = os.path.dirname(os.path.abspath(__file__))
 SCOREBOARD = os.path.join(OUT_DIR, "scoreboard-cases.csv")
@@ -174,6 +187,14 @@ def dim_options(meta, name):
     return []
 
 
+def _label_for(meta, name, value):
+    """차원 name 의 코드값 value 에 해당하는 표시 라벨(예전사이트 브리지용)."""
+    for o in dim_options(meta, name):
+        if o.get("v") == value:
+            return o.get("t")
+    return None
+
+
 def base_print_proc(frm):
     """공식의 인쇄 구성요소(COMP_PRINT_*)가 단가행에서 요구하는 base 인쇄 proc_cd.
        sim-meta proc 옵션에 인쇄공정이 안 보일 때 폴백 주입용(결정론·하드코딩 아님).
@@ -196,9 +217,12 @@ def proc_options(meta):
 
 
 def score_product(sim, prd_cd, extract_group, qty_cases=(100,),
-                  print_proc_kw="인쇄", ambiguous=False, all_groups=None):
+                  print_proc_kw="인쇄", ambiguous=False, all_groups=None,
+                  pr_check=False):
     """단품 1상품 채점. extract_group = 권위 추출 그룹(일반 sweep 은 상품별 해소).
-       extract_group=None 이면 권위축(판수·주자재·요구축) 미적용(CALC 만 채점)."""
+       extract_group=None 이면 권위축(판수·주자재·요구축) 미적용(CALC 만 채점).
+       pr_check=True 면 예전사이트 골든 대조 PR(가격재현) 채점 추가
+       (브라우저 독점·기본 OFF — 기존 흐름 보존)."""
     grp = extract_group
     lp = live_product(prd_cd)
     if not lp:
@@ -310,6 +334,9 @@ def score_product(sim, prd_cd, extract_group, qty_cases=(100,),
                 "n_comps": len([c for c in comps if c[4]]),
                 "offgrid": offgrid,
                 "error": cerr or None,
+                # PR 브리지용 라벨(예전사이트 폼 매칭 — engine 라벨 보존).
+                "_mat_label": _label_for(meta, "mat_cd", dflt_mat),
+                "_popt_label": _label_for(meta, "print_opt_cd", print_opt),
             })
 
     # ── S3 채점 ──
@@ -384,6 +411,23 @@ def score_product(sim, prd_cd, extract_group, qty_cases=(100,),
     else:
         calc_status = "PRICED-0"
 
+    # ── PR(가격 재현) 채점 — 예전사이트 골든 대조(선택적·브라우저 독점) ──
+    #   ★기존 채점 보존: pr_check=True 일 때만. 대표 1 케이스(첫 priced)만 대조해
+    #   브라우저 호출을 1상품당 1회로 제한(과도한 라이브 접속 방지).
+    #   verdict: match(고신뢰)·mismatch(차이=조사신호)·no-pcode/no-golden(미실측).
+    pr = None
+    if pr_check and _PR_AVAILABLE and priced:
+        rep = priced[0]
+        try:
+            pr = PR.score_pr_case(
+                prd_cd, rep.get("engine_price"),
+                size_label=rep.get("size"),
+                mat_label=rep.get("_mat_label"),
+                popt_label=rep.get("_popt_label"),
+                qty=rep.get("qty") or 100)
+        except Exception as e:
+            pr = {"verdict": "pr-error", "note": str(e)[:120]}
+
     summary = {
         "prd_cd": prd_cd, "prd_nm": prd_nm, "prd_typ": prd_typ,
         "frm": frm, "frm_nm": frm_nm, "is_set": is_set, "formula_note": formula_note,
@@ -398,6 +442,14 @@ def score_product(sim, prd_cd, extract_group, qty_cases=(100,),
         "R1_contamination": contamination,
         "R3_dflt_ok": dflt_ok, "n_dflt": len(dflt_mats),
         "OC_score": oc_score, "OC_missing": sorted(oc_missing),
+        # PR(가격재현): pr_check 미사용이면 모두 빈값(기존 CSV 컬럼 영향 최소).
+        "PR_verdict": (pr or {}).get("verdict", ""),
+        "PR_golden": (pr or {}).get("golden", ""),
+        "PR_engine": (pr or {}).get("engine", ""),
+        "PR_diff": (pr or {}).get("diff", ""),
+        "PR_pct": (pr or {}).get("pct", ""),
+        "PR_pcode": (pr or {}).get("pcode", ""),
+        "PR_note": (pr or {}).get("note", ""),
     }
     return summary, cases
 
@@ -596,7 +648,9 @@ def run_set_group(sim, group, targets):
 GEN_COLS = ["prd_cd", "prd_nm", "prd_typ", "extract_group", "ambiguous",
             "all_groups", "pricein_sheet", "frm", "frm_nm", "n_cases",
             "calc_status", "priced", "pansu_match", "pansu_signal",
-            "R1_contamination", "R3_dflt_ok", "n_dflt", "OC_score", "OC_missing"]
+            "R1_contamination", "R3_dflt_ok", "n_dflt", "OC_score", "OC_missing",
+            "PR_verdict", "PR_golden", "PR_engine", "PR_diff", "PR_pct",
+            "PR_pcode", "PR_note"]
 
 
 def _write_general(summaries):
@@ -612,18 +666,22 @@ def _write_general(summaries):
             w.writerow(row)
 
 
-def run_general(sim, targets):
+def run_general(sim, targets, pr_check=False):
     """일반상품 전수 sweep — 상품별 권위그룹 해소 + 채점 + 비중단 상태 분류.
-       targets = [(prd_cd, prd_nm), ...]. 권위 미발견도 CALC 채점(멈추지 않음)."""
+       targets = [(prd_cd, prd_nm), ...]. 권위 미발견도 CALC 채점(멈추지 않음).
+       pr_check=True 면 예전사이트 골든 대조 PR 채점 추가(브라우저 독점)."""
     print(f"\n{'='*70}\n일반상품 sweep  대상={len(targets)}상품 "
-          f"(전 .01/.03 비세트·세트구성원 제외)\n{'='*70}")
+          f"(전 .01/.03 비세트·세트구성원 제외)"
+          f"{'  +PR골든대조' if pr_check else ''}\n{'='*70}")
     summaries = []
     from collections import Counter
     stat = Counter()
+    pr_stat = Counter()
     for prd_cd, prd_nm in targets:
         g, ambig, gs = GI.resolve_group(prd_nm)
         try:
-            summary, _ = score_product(sim, prd_cd, g, ambiguous=ambig, all_groups=gs)
+            summary, _ = score_product(sim, prd_cd, g, ambiguous=ambig,
+                                       all_groups=gs, pr_check=pr_check)
         except Exception as e:
             summary = {"prd_cd": prd_cd, "prd_nm": prd_nm, "error": str(e)[:90]}
         if summary.get("error"):
@@ -634,6 +692,8 @@ def run_general(sim, targets):
             continue
         summaries.append(summary)
         stat[summary["calc_status"]] += 1
+        if pr_check and summary.get("PR_verdict"):
+            pr_stat[summary["PR_verdict"]] += 1
     _write_general(summaries)
     print(f"\n일반 스코어보드 → {GENERAL_SCOREBOARD} ({len(summaries)}행)")
     print("=== CALC 상태 집계 (비중단·전수) ===")
@@ -645,16 +705,33 @@ def run_general(sim, targets):
         print(f"\n★PRICED-0 (진짜 결함·돈크리티컬) {len(crit)}건:")
         for s in crit:
             print(f"  {s['prd_cd']} {s['prd_nm'][:24]} frm={s.get('frm')}")
+    # PR(가격재현) 집계 + mismatch(조사신호) 큐
+    if pr_check:
+        print("\n=== PR(가격재현) 판정 집계 ===")
+        for k, n in pr_stat.most_common():
+            print(f"  {k:14s} {n}")
+        mm = [s for s in summaries if s.get("PR_verdict") == "mismatch"]
+        if mm:
+            print(f"\n★PR mismatch (예전사이트와 가격 상이=조사신호·자동교정 X) {len(mm)}건:")
+            for s in mm:
+                print(f"  {s['prd_cd']} {s['prd_nm'][:20]} "
+                      f"엔진={s.get('PR_engine')} 골든={s.get('PR_golden')} "
+                      f"({s.get('PR_pct')}%)")
     return summaries
 
 
 def main():
     H.load_env()
-    if len(sys.argv) < 2:
+    # ★PR(가격재현) 플래그: --pr 이면 예전사이트 골든 대조 채점 추가(브라우저 독점).
+    #   기존 호출(플래그 없음)은 PR OFF 로 동작 100% 보존.
+    argv = [a for a in sys.argv[1:] if a != "--pr"]
+    pr_check = "--pr" in sys.argv
+    if not argv:
         print(__doc__)
         print("그룹:", ", ".join(GROUP.keys()))
+        print("PR 채점: 끝에 --pr (예전사이트 골든 대조·브라우저 독점)")
         sys.exit(1)
-    group = sys.argv[1]
+    group = argv[0]
     SPECIAL = {"general", "all"}
     if group not in GROUP and group not in SPECIAL:
         print(f"미지원 그룹: {group}\n지원: {', '.join(GROUP.keys())} · general · all")
@@ -663,16 +740,16 @@ def main():
 
     # ── 일반상품 전수 sweep (모든 .01/.03 비세트) ──
     if group == "general":
-        run_general(sim, select_general())
+        run_general(sim, select_general(), pr_check=pr_check)
         return
     # ── all = 일반 sweep + 세트 sweep (전 상품 비중단 종단) ──
     if group == "all":
-        run_general(sim, select_general())
+        run_general(sim, select_general(), pr_check=pr_check)
         run_set_group(sim, "booklet-set", select_targets("booklet-set"))
         return
 
-    if len(sys.argv) > 2:
-        targets = sys.argv[2:]
+    if len(argv) > 1:
+        targets = argv[1:]
     else:
         targets = select_targets(group)
         if not targets:
@@ -692,7 +769,8 @@ def main():
     qcs = prof.get("qty_cases", (100,))
     ppk = prof.get("print_proc_kw", "인쇄")
     for prd_cd in targets:
-        summary, cases = score_product(sim, prd_cd, eg, qty_cases=qcs, print_proc_kw=ppk)
+        summary, cases = score_product(sim, prd_cd, eg, qty_cases=qcs,
+                                       print_proc_kw=ppk, pr_check=pr_check)
         all_cases.extend([{**c, "prd_cd": prd_cd} for c in cases])
         if summary.get("error"):
             print(f"\n[{prd_cd}] ERROR: {summary['error']}")
@@ -705,6 +783,9 @@ def main():
         print(f"  R1 부자재오염={s['R1_contamination'] or '0(청정)'}")
         print(f"  R3 dflt={s['n_dflt']}개 {'OK' if s['R3_dflt_ok'] else 'FAIL'}")
         print(f"  OC={s['OC_score']}점  미충족축={s['OC_missing'] or '없음'}")
+        if pr_check and s.get("PR_verdict"):
+            print(f"  PR(가격재현)={s['PR_verdict']}  엔진={s.get('PR_engine')} "
+                  f"골든={s.get('PR_golden')} ({s.get('PR_pct')}%) pcode={s.get('PR_pcode')}")
 
     # case-level 스코어보드 기록
     if all_cases:
@@ -720,7 +801,9 @@ def main():
     if all_summaries:
         scols = ["prd_cd", "prd_nm", "prd_typ", "frm", "n_cases", "calc_ok",
                  "calc_status", "priced", "pansu_match", "pansu_signal",
-                 "R1_contamination", "R3_dflt_ok", "n_dflt", "OC_score", "OC_missing"]
+                 "R1_contamination", "R3_dflt_ok", "n_dflt", "OC_score", "OC_missing",
+                 "PR_verdict", "PR_golden", "PR_engine", "PR_diff", "PR_pct",
+                 "PR_pcode", "PR_note"]
         with open(SUMMARY, "w", newline="", encoding="utf-8") as f:
             w = csv.DictWriter(f, fieldnames=scols, extrasaction="ignore")
             w.writeheader()
