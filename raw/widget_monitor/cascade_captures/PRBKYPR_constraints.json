@@ -1,0 +1,672 @@
+{
+  "pdtCode": "PRBKYPR",
+  "productName": "무선 책자 (컬러)",
+  "itemType": "book2025_item",
+  "priceType": "book2025_price",
+  "disablePcsRules": [
+    {
+      "materialCode": "RXOMO080",
+      "pcsCode": "COT_DFT",
+      "pcsDetailCode": null,
+      "note": null
+    },
+    {
+      "materialCode": "RXOMO080",
+      "pcsCode": "FLD_DFT",
+      "pcsDetailCode": null,
+      "note": null
+    },
+    {
+      "materialCode": "RXOMO080",
+      "pcsCode": "MIS_DFT",
+      "pcsDetailCode": null,
+      "note": null
+    },
+    {
+      "materialCode": "RXOMO080",
+      "pcsCode": "PRT_MAG",
+      "pcsDetailCode": null,
+      "note": null
+    },
+    {
+      "materialCode": "RXOMO080",
+      "pcsCode": "SCO_DFT",
+      "pcsDetailCode": null,
+      "note": null
+    },
+    {
+      "materialCode": "RXOMO080",
+      "pcsCode": "SCO_GLD",
+      "pcsDetailCode": null,
+      "note": null
+    },
+    {
+      "materialCode": "RXOMO080",
+      "pcsCode": "SCO_SLV",
+      "pcsDetailCode": null,
+      "note": null
+    },
+    {
+      "materialCode": "RXOMO100",
+      "pcsCode": "COT_DFT",
+      "pcsDetailCode": null,
+      "note": null
+    },
+    {
+      "materialCode": "RXOMO100",
+      "pcsCode": "FLD_DFT",
+      "pcsDetailCode": null,
+      "note": null
+    },
+    {
+      "materialCode": "RXOMO100",
+      "pcsCode": "LAM_DFT",
+      "pcsDetailCode": null,
+      "note": null
+    },
+    {
+      "materialCode": "RXOMO100",
+      "pcsCode": "MIS_DFT",
+      "pcsDetailCode": null,
+      "note": null
+    },
+    {
+      "materialCode": "RXOMO100",
+      "pcsCode": "OSI_DFT",
+      "pcsDetailCode": null,
+      "note": null
+    },
+    {
+      "materialCode": "RXOMO100",
+      "pcsCode": "PRT_MAG",
+      "pcsDetailCode": null,
+      "note": null
+    },
+    {
+      "materialCode": "RXOMO100",
+      "pcsCode": "SCO_DFT",
+      "pcsDetailCode": null,
+      "note": null
+    },
+    {
+      "materialCode": "RXOMO100",
+      "pcsCode": "SCO_GLD",
+      "pcsDetailCode": null,
+      "note": null
+    },
+    {
+      "materialCode": "RXOMO100",
+      "pcsCode": "SCO_SLV",
+      "pcsDetailCode": null,
+      "note": null
+    },
+    {
+      "materialCode": "RXPLM080",
+      "pcsCode": "COT_DFT",
+      "pcsDetailCode": null,
+      "note": null
+    },
+    {
+      "materialCode": "RXPLM080",
+      "pcsCode": "MIS_DFT",
+      "pcsDetailCode": null,
+      "note": null
+    },
+    {
+      "materialCode": "RXPLM100",
+      "pcsCode": "COT_DFT",
+      "pcsDetailCode": null,
+      "note": null
+    },
+    {
+      "materialCode": "RXPLM100",
+      "pcsCode": "MIS_DFT",
+      "pcsDetailCode": null,
+      "note": null
+    },
+    {
+      "materialCode": "RXPLW080",
+      "pcsCode": "COT_DFT",
+      "pcsDetailCode": null,
+      "note": null
+    },
+    {
+      "materialCode": "RXPLW080",
+      "pcsCode": "MIS_DFT",
+      "pcsDetailCode": null,
+      "note": null
+    },
+    {
+      "materialCode": "RXPLW100",
+      "pcsCode": "COT_DFT",
+      "pcsDetailCode": null,
+      "note": null
+    },
+    {
+      "materialCode": "RXPLW100",
+      "pcsCode": "MIS_DFT",
+      "pcsDetailCode": null,
+      "note": null
+    }
+  ],
+  "hiddenMaterials": [],
+  "quantityConstraints": [
+    {
+      "divCode": null,
+      "minPrintCount": 30,
+      "reamCount": null,
+      "firstCount": 30,
+      "incrementCount": 10,
+      "incrementStep": 10,
+      "minInnerPage": 10,
+      "maxInnerPage": 300,
+      "stepInnerPage": 1,
+      "maxThickness": 1000,
+      "defaultPrintCount": 30,
+      "innerMaxWeight": 130,
+      "coverMinWeight": 150
+    }
+  ],
+  "dosuBncMapping": [
+    {
+      "printColorCount": 4,
+      "code": "SID_S",
+      "codeName": "단면",
+      "bindingGroup": "BNC_COL",
+      "note": null
+    },
+    {
+      "printColorCount": 8,
+      "code": "SID_D",
+      "codeName": "양면",
+      "bindingGroup": "BNC_COL",
+      "note": null
+    },
+    {
+      "printColorCount": 8,
+      "code": "SID_D",
+      "codeName": "양면",
+      "bindingGroup": "BNC_COL",
+      "note": "책자 내지 인쇄색도",
+      "type": "inner"
+    }
+  ],
+  "sizeConstraints": [
+    {
+      "divCode": "",
+      "divName": "무선책자 (A4세로형)",
+      "workWidth": 220,
+      "workHeight": 307,
+      "cutWidth": 210,
+      "cutHeight": 297,
+      "isDefault": true,
+      "isHidden": false,
+      "reamPaperCount": null,
+      "note": null
+    },
+    {
+      "divCode": "",
+      "divName": "무선책자 (B5세로형)",
+      "workWidth": 192,
+      "workHeight": 267,
+      "cutWidth": 182,
+      "cutHeight": 257,
+      "isDefault": false,
+      "isHidden": false,
+      "reamPaperCount": null,
+      "note": null
+    },
+    {
+      "divCode": "",
+      "divName": "무선책자 (A5세로형)",
+      "workWidth": 158,
+      "workHeight": 220,
+      "cutWidth": 148,
+      "cutHeight": 210,
+      "isDefault": false,
+      "isHidden": false,
+      "reamPaperCount": null,
+      "note": null
+    },
+    {
+      "divCode": "",
+      "divName": "크라운판",
+      "workWidth": 186,
+      "workHeight": 258,
+      "cutWidth": 176,
+      "cutHeight": 248,
+      "isDefault": false,
+      "isHidden": false,
+      "reamPaperCount": null,
+      "note": null
+    },
+    {
+      "divCode": "",
+      "divName": "신국판",
+      "workWidth": 162,
+      "workHeight": 235,
+      "cutWidth": 152,
+      "cutHeight": 225,
+      "isDefault": false,
+      "isHidden": false,
+      "reamPaperCount": null,
+      "note": null
+    }
+  ],
+  "pcsConstraints": [
+    {
+      "pcsCode": "COT_DFT",
+      "pcsDetailCode": "TCMAS",
+      "pcsDetailName": "무광코팅단면",
+      "pcsGroupName": "코팅",
+      "webGroup": "COT_DFT_TC",
+      "webGroupName": null,
+      "viewYn": "Y",
+      "hideYn": "N",
+      "essentialYn": "Y",
+      "materialCode": null,
+      "materialCod": null,
+      "workWidth": 0,
+      "workHeight": 0,
+      "notice": [],
+      "note": null,
+      "subMaterialYn": "N"
+    },
+    {
+      "pcsCode": "COT_DFT",
+      "pcsDetailCode": "TCGLS",
+      "pcsDetailName": "유광코팅단면",
+      "pcsGroupName": "코팅",
+      "webGroup": "COT_DFT_TC",
+      "webGroupName": null,
+      "viewYn": "Y",
+      "hideYn": "N",
+      "essentialYn": "Y",
+      "materialCode": null,
+      "materialCod": null,
+      "workWidth": 0,
+      "workHeight": 0,
+      "notice": [],
+      "note": null,
+      "subMaterialYn": "N"
+    },
+    {
+      "pcsCode": "COT_DFT",
+      "pcsDetailCode": "TCEBS",
+      "pcsDetailName": "엠보코팅단면",
+      "pcsGroupName": "코팅",
+      "webGroup": "COT_DFT_TC",
+      "webGroupName": null,
+      "viewYn": "Y",
+      "hideYn": "N",
+      "essentialYn": "Y",
+      "materialCode": null,
+      "materialCod": null,
+      "workWidth": 0,
+      "workHeight": 0,
+      "notice": [],
+      "note": null,
+      "subMaterialYn": "N"
+    },
+    {
+      "pcsCode": "CUT_DFT",
+      "pcsDetailCode": "DFXXX",
+      "pcsDetailName": "재단",
+      "pcsGroupName": "재단",
+      "webGroup": "CUT_DFT_DF",
+      "webGroupName": null,
+      "viewYn": "N",
+      "hideYn": "N",
+      "essentialYn": "Y",
+      "materialCode": null,
+      "materialCod": null,
+      "workWidth": 0,
+      "workHeight": 0,
+      "notice": [],
+      "note": null,
+      "subMaterialYn": "N"
+    },
+    {
+      "pcsCode": "PER_DFT",
+      "pcsDetailCode": "BPLFT",
+      "pcsDetailName": "좌철",
+      "pcsGroupName": "무선",
+      "webGroup": "PER_DFT_BP",
+      "webGroupName": null,
+      "viewYn": "N",
+      "hideYn": "N",
+      "essentialYn": "Y",
+      "materialCode": null,
+      "materialCod": null,
+      "workWidth": 0,
+      "workHeight": 0,
+      "notice": [],
+      "note": null,
+      "subMaterialYn": "N"
+    },
+    {
+      "pcsCode": "CVR_SFT",
+      "pcsDetailCode": "DFXXX",
+      "pcsDetailName": "소프트커버",
+      "pcsGroupName": "커버",
+      "webGroup": "CVR_SFT_DF",
+      "webGroupName": null,
+      "viewYn": "N",
+      "hideYn": "N",
+      "essentialYn": "Y",
+      "materialCode": null,
+      "materialCod": null,
+      "workWidth": 0,
+      "workHeight": 0,
+      "notice": [],
+      "note": null,
+      "subMaterialYn": "N"
+    },
+    {
+      "pcsCode": "CVR_SWN",
+      "pcsDetailCode": "DFPRT",
+      "pcsDetailName": "날개소프트커버",
+      "pcsGroupName": "날개 커버",
+      "webGroup": "CVR_SWN_DF",
+      "webGroupName": null,
+      "viewYn": "Y",
+      "hideYn": "N",
+      "essentialYn": "N",
+      "materialCode": null,
+      "materialCod": null,
+      "workWidth": 0,
+      "workHeight": 0,
+      "notice": [],
+      "note": null,
+      "subMaterialYn": "N"
+    },
+    {
+      "pcsCode": "END_PAP",
+      "pcsDetailCode": "CLYEL",
+      "pcsDetailName": "노랑",
+      "pcsGroupName": "면지",
+      "webGroup": "END_PAP_CL",
+      "webGroupName": null,
+      "viewYn": "Y",
+      "hideYn": "N",
+      "essentialYn": "N",
+      "materialCode": null,
+      "materialCod": null,
+      "workWidth": 0,
+      "workHeight": 0,
+      "notice": [
+        "*내지 시작 전/후 선택한 컬러로 양면 인쇄된 면지를 삽입해 드립니다."
+      ],
+      "note": null,
+      "subMaterialYn": "N"
+    },
+    {
+      "pcsCode": "END_PAP",
+      "pcsDetailCode": "CLMIN",
+      "pcsDetailName": "민트",
+      "pcsGroupName": "면지",
+      "webGroup": "END_PAP_CL",
+      "webGroupName": null,
+      "viewYn": "Y",
+      "hideYn": "N",
+      "essentialYn": "N",
+      "materialCode": null,
+      "materialCod": null,
+      "workWidth": 0,
+      "workHeight": 0,
+      "notice": [
+        "*내지 시작 전/후 선택한 컬러로 양면 인쇄된 면지를 삽입해 드립니다."
+      ],
+      "note": null,
+      "subMaterialYn": "N"
+    },
+    {
+      "pcsCode": "END_PAP",
+      "pcsDetailCode": "CLWHT",
+      "pcsDetailName": "화이트",
+      "pcsGroupName": "면지",
+      "webGroup": "END_PAP_CL",
+      "webGroupName": null,
+      "viewYn": "Y",
+      "hideYn": "N",
+      "essentialYn": "N",
+      "materialCode": null,
+      "materialCod": null,
+      "workWidth": 0,
+      "workHeight": 0,
+      "notice": [
+        "*내지 시작 전/후 선택한 컬러로 양면 인쇄된 면지를 삽입해 드립니다."
+      ],
+      "note": null,
+      "subMaterialYn": "N"
+    },
+    {
+      "pcsCode": "END_PAP",
+      "pcsDetailCode": "CLPPL",
+      "pcsDetailName": "보라",
+      "pcsGroupName": "면지",
+      "webGroup": "END_PAP_CL",
+      "webGroupName": null,
+      "viewYn": "Y",
+      "hideYn": "N",
+      "essentialYn": "N",
+      "materialCode": null,
+      "materialCod": null,
+      "workWidth": 0,
+      "workHeight": 0,
+      "notice": [
+        "*내지 시작 전/후 선택한 컬러로 양면 인쇄된 면지를 삽입해 드립니다."
+      ],
+      "note": null,
+      "subMaterialYn": "N"
+    },
+    {
+      "pcsCode": "END_PAP",
+      "pcsDetailCode": "CLPIN",
+      "pcsDetailName": "분홍",
+      "pcsGroupName": "면지",
+      "webGroup": "END_PAP_CL",
+      "webGroupName": null,
+      "viewYn": "Y",
+      "hideYn": "N",
+      "essentialYn": "N",
+      "materialCode": null,
+      "materialCod": null,
+      "workWidth": 0,
+      "workHeight": 0,
+      "notice": [
+        "*내지 시작 전/후 선택한 컬러로 양면 인쇄된 면지를 삽입해 드립니다."
+      ],
+      "note": null,
+      "subMaterialYn": "N"
+    },
+    {
+      "pcsCode": "END_PAP",
+      "pcsDetailCode": "CLAPR",
+      "pcsDetailName": "살구",
+      "pcsGroupName": "면지",
+      "webGroup": "END_PAP_CL",
+      "webGroupName": null,
+      "viewYn": "Y",
+      "hideYn": "N",
+      "essentialYn": "N",
+      "materialCode": null,
+      "materialCod": null,
+      "workWidth": 0,
+      "workHeight": 0,
+      "notice": [
+        "*내지 시작 전/후 선택한 컬러로 양면 인쇄된 면지를 삽입해 드립니다."
+      ],
+      "note": null,
+      "subMaterialYn": "N"
+    },
+    {
+      "pcsCode": "END_PAP",
+      "pcsDetailCode": "CLGRN",
+      "pcsDetailName": "연두",
+      "pcsGroupName": "면지",
+      "webGroup": "END_PAP_CL",
+      "webGroupName": null,
+      "viewYn": "Y",
+      "hideYn": "N",
+      "essentialYn": "N",
+      "materialCode": null,
+      "materialCod": null,
+      "workWidth": 0,
+      "workHeight": 0,
+      "notice": [
+        "*내지 시작 전/후 선택한 컬러로 양면 인쇄된 면지를 삽입해 드립니다."
+      ],
+      "note": null,
+      "subMaterialYn": "N"
+    },
+    {
+      "pcsCode": "END_PAP",
+      "pcsDetailCode": "CLBLU",
+      "pcsDetailName": "파랑",
+      "pcsGroupName": "면지",
+      "webGroup": "END_PAP_CL",
+      "webGroupName": null,
+      "viewYn": "Y",
+      "hideYn": "N",
+      "essentialYn": "N",
+      "materialCode": null,
+      "materialCod": null,
+      "workWidth": 0,
+      "workHeight": 0,
+      "notice": [
+        "*내지 시작 전/후 선택한 컬러로 양면 인쇄된 면지를 삽입해 드립니다."
+      ],
+      "note": null,
+      "subMaterialYn": "N"
+    },
+    {
+      "pcsCode": "END_PAP",
+      "pcsDetailCode": "CLSKY",
+      "pcsDetailName": "하늘",
+      "pcsGroupName": "면지",
+      "webGroup": "END_PAP_CL",
+      "webGroupName": null,
+      "viewYn": "Y",
+      "hideYn": "N",
+      "essentialYn": "N",
+      "materialCode": null,
+      "materialCod": null,
+      "workWidth": 0,
+      "workHeight": 0,
+      "notice": [
+        "*내지 시작 전/후 선택한 컬러로 양면 인쇄된 면지를 삽입해 드립니다."
+      ],
+      "note": null,
+      "subMaterialYn": "N"
+    },
+    {
+      "pcsCode": "END_PAP",
+      "pcsDetailCode": "CLGRY",
+      "pcsDetailName": "회색",
+      "pcsGroupName": "면지",
+      "webGroup": "END_PAP_CL",
+      "webGroupName": null,
+      "viewYn": "Y",
+      "hideYn": "N",
+      "essentialYn": "N",
+      "materialCode": null,
+      "materialCod": null,
+      "workWidth": 0,
+      "workHeight": 0,
+      "notice": [
+        "*내지 시작 전/후 선택한 컬러로 양면 인쇄된 면지를 삽입해 드립니다."
+      ],
+      "note": null,
+      "subMaterialYn": "N"
+    },
+    {
+      "pcsCode": "SCO_DFT",
+      "pcsDetailCode": "DFXXS",
+      "pcsDetailName": "스코딕스단면",
+      "pcsGroupName": "스코딕스",
+      "webGroup": "SCO_DFT_DF",
+      "webGroupName": null,
+      "viewYn": "Y",
+      "hideYn": "N",
+      "essentialYn": "N",
+      "materialCode": null,
+      "materialCod": null,
+      "workWidth": 0,
+      "workHeight": 0,
+      "notice": [
+        "* 투명 잉크가 올라갈 부분을 인쇄 파일과 함께 PDF 파일로 주문해 주세요. (에디터 주문 불가)"
+      ],
+      "note": null,
+      "subMaterialYn": "N"
+    },
+    {
+      "pcsCode": "BIND_DIRECTION",
+      "pcsDetailCode": "BPLFT",
+      "pcsDetailName": "좌철",
+      "pcsGroupName": "제본방향",
+      "webGroup": "BIND_DIRECTION_BP",
+      "webGroupName": null,
+      "viewYn": "Y",
+      "essentialYn": "Y",
+      "materialCode": null,
+      "materialCod": null,
+      "workWidth": null,
+      "workHeight": null,
+      "notice": null,
+      "note": null,
+      "subMaterialYn": null
+    },
+    {
+      "pcsCode": "BIND_DIRECTION",
+      "pcsDetailCode": "BPTOP",
+      "pcsDetailName": "상철",
+      "pcsGroupName": "제본방향",
+      "webGroup": "BIND_DIRECTION_BP",
+      "webGroupName": null,
+      "viewYn": "Y",
+      "essentialYn": "Y",
+      "materialCode": null,
+      "materialCod": null,
+      "workWidth": null,
+      "workHeight": null,
+      "notice": null,
+      "note": null,
+      "subMaterialYn": null
+    }
+  ],
+  "baseConstraints": {
+    "productCode": "PRBKYPR",
+    "productName": "무선 책자 (컬러)",
+    "widthHeightSeparate": "N",
+    "printYn": "Y",
+    "unit": "권",
+    "orderCountYn": "Y",
+    "nonStandardAllowed": "N",
+    "minCutWidth": 100,
+    "minCutHeight": 150,
+    "maxCutWidth": 500,
+    "maxCutHeight": 730,
+    "defaultCutWidth": 0,
+    "defaultCutHeight": 0,
+    "cutMargin": 10,
+    "firstCount": 1,
+    "increment": 5,
+    "incrementStep": 10,
+    "reamYn": "",
+    "setCount": 1
+  },
+  "summary": {
+    "totalDisableRules": 24,
+    "totalHiddenMaterials": 0,
+    "totalQuantityRules": 1,
+    "totalDosuBncMappings": 3,
+    "totalSizes": 5,
+    "hiddenSizes": 0,
+    "totalPcsOptions": 20,
+    "hiddenPcs": 0,
+    "essentialPcs": 8,
+    "materialBoundPcs": 0,
+    "totalConstraintCount": 25
+  }
+}

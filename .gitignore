@@ -199,6 +199,8 @@ secret-*.*
 !.claude/agents/huni-edicus-codemap/
 !.claude/agents/huni-catalog-conformance/
 !.claude/agents/huni-price-table-integrity/
+!.claude/agents/huni-set-product/
+!.claude/agents/huni-shopby/
 .claude/settings.local.json
 .claude/settings.local.*.json
 .claude/.env.local*
@@ -265,3 +267,6 @@ dist-ssr/
 
 # Figma 바이너리 원본 (대용량 — GitHub 100MB 초과, 로컬 보존·_ds 추출물만 추적)
 docs/figma/*.fig
+
+# 별도 git repo (webadmin 소스 — embedded gitlink 방지·이 repo서 미추적)
+raw/webadmin/

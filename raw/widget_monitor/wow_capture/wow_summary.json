@@ -1,0 +1,155 @@
+{
+  "platform": "wowpress",
+  "siteUrl": "https://wowpress.co.kr",
+  "capturedAt": "2026-03-31T02:06:04.359Z",
+  "captureVersion": "fresh_v2",
+  "status": "partial_success",
+  "totalProducts": 5,
+  "successfulCaptures": 3,
+  "failedCaptures": 2,
+  "products": [
+    {
+      "prodNo": "40073",
+      "name": "namecard",
+      "label": "일반명함",
+      "url": "https://wowpress.co.kr/ordr/prod/dets?ProdNo=40073",
+      "reachable": true,
+      "framework": "jquery",
+      "selectCount": 28,
+      "hasEditor": true,
+      "editorType": "이지템플릿 (EasyTemplate)",
+      "apiCallCount": 64,
+      "cascadeTriggered": 4,
+      "optionFlow": {
+        "category1": {"type": "product_category", "options": 23},
+        "category2": {"type": "sub_product", "options": 8},
+        "SelfCNoSize": {"type": "editor_size", "options": 4},
+        "pdata_00_sizeno": {"type": "print_size", "options": 4},
+        "pdata_00_colorno": {"type": "color_mode", "options": 2},
+        "spdata_00_paperno3": {"type": "paper_front", "options": 2},
+        "spdata_00_paperno4": {"type": "paper_back", "options": 2},
+        "spdata_00_ordqty": {"type": "quantity_select", "options": 29},
+        "pdata_00_ordcnt": {"type": "order_count", "options": 50},
+        "finishing_selects": {"type": "awk_options", "count": 13, "desc": "후가공 옵션들 (귀둥글리기, 오시, 타공 등)"}
+      },
+      "priceData": {
+        "sample": {"size": "90x50", "color": "단면 칼라4도", "qty": 500, "cost": 3300},
+        "sampleAlt": {"size": "90x50", "color": "양면 칼라8도", "qty": 500, "cost": 4100}
+      }
+    },
+    {
+      "prodNo": "40026",
+      "name": "flyer",
+      "label": "합판전단",
+      "url": "https://wowpress.co.kr/ordr/prod/dets?ProdNo=40026",
+      "reachable": true,
+      "framework": "jquery",
+      "selectCount": 13,
+      "hasEditor": true,
+      "editorType": "이지템플릿 (EasyTemplate)",
+      "apiCallCount": 60,
+      "cascadeTriggered": 3,
+      "optionFlow": {
+        "category1": {"type": "product_category", "options": 23},
+        "category2": {"type": "sub_product", "options": 3},
+        "SelfCNoSize": {"type": "editor_size", "options": 4},
+        "pdata_00_sizeno": {"type": "print_size", "options": 14},
+        "pdata_00_colorno": {"type": "color_mode", "options": 2},
+        "spdata_00_paperno3": {"type": "paper_front", "options": 1},
+        "spdata_00_paperno4": {"type": "paper_type", "options": 2},
+        "spdata_00_ordqty": {"type": "quantity_select", "options": 201},
+        "pdata_00_ordcnt": {"type": "order_count", "options": 20},
+        "finishing_selects": {"type": "awk_options", "count": 4, "desc": "접지, 재단, 오시 등"}
+      },
+      "priceData": {
+        "sample": {"size": "A4(국8절)", "color": "단면 칼라4도", "qty": 0.5, "cost": 28000},
+        "sampleAlt": {"size": "A2(국2절)", "color": "단면 칼라4도", "qty": 4, "cost": 188000}
+      }
+    },
+    {
+      "prodNo": "40002",
+      "name": "sticker",
+      "label": "스티커",
+      "url": "https://wowpress.co.kr/ordr/prod/dets?ProdNo=40002",
+      "reachable": false,
+      "error": "page.goto: Timeout 30000ms exceeded"
+    },
+    {
+      "prodNo": "40004",
+      "name": "booklet",
+      "label": "책자",
+      "url": "https://wowpress.co.kr/ordr/prod/dets?ProdNo=40004",
+      "reachable": true,
+      "framework": "jquery",
+      "selectCount": 14,
+      "hasEditor": true,
+      "editorType": "이지템플릿 (EasyTemplate)",
+      "apiCallCount": 55,
+      "cascadeTriggered": 2,
+      "optionFlow": {
+        "category1": {"type": "product_category", "options": 23},
+        "category2": {"type": "sub_product", "options": 5},
+        "pdata_00_sizeno": {"type": "print_size", "options": 1},
+        "pdata_00_colorno": {"type": "color_mode", "options": 1},
+        "pdata_00_colorno_add": {"type": "color_mode_extra", "options": 4},
+        "spdata_00_paperno3": {"type": "paper_front", "options": 1},
+        "spdata_00_paperno4": {"type": "paper_body", "options": 1},
+        "spdata_00_paperno5": {"type": "paper_cover", "options": 1},
+        "spdata_00_ordqty": {"type": "quantity_select", "options": 9},
+        "pdata_00_ordcnt": {"type": "order_count", "options": 1000}
+      },
+      "priceData": {
+        "sample": {"size": "220x310", "color": "단면 칼라4도", "qty": 300, "cost": 200000},
+        "sampleAlt": {"size": "220x310", "color": "양면 칼라8도 + 칼라4도", "qty": 300, "cost": 227200}
+      }
+    },
+    {
+      "prodNo": "40520",
+      "name": "goods",
+      "label": "굿즈",
+      "url": "https://wowpress.co.kr/ordr/prod/dets?ProdNo=40520",
+      "reachable": false,
+      "error": "page.goto: Timeout 30000ms exceeded"
+    }
+  ],
+  "apiPatterns": {
+    "coreEndpoints": [
+      {"path": "/ordr/prod/sale/no/list", "method": "GET", "desc": "제품 목록 (ProdNo 배열)"},
+      {"path": "/ordr/prod/mdm/detail/Size", "method": "POST", "desc": "사이즈 상세 (WSize, PdfWSize 등)", "params": "ProdNo, itemNo, CoverCD"},
+      {"path": "/ordr/prod/mdm/detail/Paper", "method": "POST", "desc": "용지 상세 (PGramNo, CottingYN 등)", "params": "ProdNo, itemNo, CoverCD"},
+      {"path": "/ord/calc/jobqty0", "method": "POST", "desc": "수량→가격 계산 (JobQty, Cost, Weight)", "params": "SNo, ProdNo, Job, JobNo, CoverCD, OrdCnt, OrdQty, SizeNo, ColorNo, PaperNo..."},
+      {"path": "/ord/calc/jobcost0", "method": "POST", "desc": "총 비용 계산 (HTML msg 반환)", "params": "JSON body: PJoin, ProdNo, Job[]"},
+      {"path": "/ord/cart/exitday", "method": "POST", "desc": "출고일 계산", "params": "ProdNo, JobNos, PaperNos, ColorNos, SizeNos"}
+    ],
+    "editorEndpoints": [
+      {"path": "/self/dsgn/getproduct", "method": "POST", "desc": "이지템플릿 제품 카탈로그"},
+      {"path": "/self/dsgn/getsizes", "method": "GET", "desc": "이지템플릿 사이즈 목록"},
+      {"path": "/self/dsgn/gettemplate", "method": "GET", "desc": "이지템플릿 템플릿 목록"},
+      {"path": "/self/dsgn/template/group/{id}", "method": "GET", "desc": "템플릿 그룹 (카테고리별)"},
+      {"path": "/self/dsgn/landing", "method": "GET", "desc": "이지템플릿 에디터 진입점"}
+    ],
+    "supportEndpoints": [
+      {"path": "/myInfo", "method": "GET", "desc": "사용자 정보 (비로그인 시 null)"},
+      {"path": "/main/favorite", "method": "GET", "desc": "즐겨찾기/퀵메뉴"},
+      {"path": "/aggregate/mssg/common", "method": "GET", "desc": "공통 메시지"},
+      {"path": "/aggregate/mssg/product", "method": "GET", "desc": "상품 메시지"}
+    ],
+    "cascadePattern": {
+      "trigger_size": ["mdm/detail/Size", "mdm/detail/Paper", "calc/jobqty0", "calc/jobcost0", "cart/exitday"],
+      "trigger_color": ["mdm/detail/Paper", "calc/jobqty0", "calc/jobcost0", "cart/exitday"],
+      "trigger_paper": ["mdm/detail/Paper", "calc/jobqty0", "calc/jobcost0", "cart/exitday"],
+      "trigger_qty": ["calc/jobcost0", "cart/exitday"]
+    },
+    "totalApiCalls": 179,
+    "uniqueWowpressEndpoints": 12
+  },
+  "uiAnalysis": {
+    "framework": "jQuery (서버사이드 렌더링 + AJAX)",
+    "optionPattern": "HTML <select> 기반, 서버사이드 옵션 로딩",
+    "priceDisplay": "HTML 마크업으로 반환 (calc/jobcost0 → msg 필드)",
+    "editorIntegration": "이지템플릿 — movePage('/self/dsgn/landing') 호출",
+    "orderFlow": "옵션 선택 → 파일 업로드 → 장바구니/바로주문",
+    "avgSteps": 3,
+    "productCategories": 23
+  }
+}

@@ -316,7 +316,7 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 **산출물 루트:** `_workspace/huni-set-product/` (01_authority·02_reference·03_design·04_codex·05_gate·06_load·_meta). 6인 팀(`hsp-authority-curator`∥`hsp-domain-researcher` 기준점 팬아웃 → `hsp-set-designer` 설계 → `hsp-codex-verifier` codex 독립 2차 → `hsp-set-gate` S1~S7 게이트(evaluate_set_price 재계산·DRY-RUN) → `hsp-load-executor` 승인 후 안전 적재(백업·복합PK 멱등·사후검증)) + 5 스킬(+ `dbm-load-execution`·`hqv-codex-cross-verify`·`hpe-competitor-benchmark`·`rpm-live-reverse` 재사용). 생성≠검증·codex 주장=가설·search-before-mint(반제품 신규 mint 금지·미등록은 BLOCKED→dbmap 위임)·라이브 읽기전용(적재 Phase 5만 인간 승인 후 COMMIT)·파일럿(책자류·엽서북·떡메) 완주→동형 전파. 자격증명 `.env.local RAILWAY_DB_*`.
 
-**변경이력:** 최신: 2026-06-27(2세션) 명함034 펄 collapse+바인딩 COMMIT(83바인딩)·굿즈 기초 시범3+라벨모델 확정(방식B 라벨옵션)·아크릴157 등록사이즈 가격모델 COMMIT·★siz_cd→cut환원 코드수정 검증(미배포 확인필요)·신설 §26 가격테이블 적재무결성 하네스+§27 가격 종단 마스터 오케스트레이터. 다음=마스터로 아크릴 종단 실행(단 코드배포 결정 선결) → `_workspace/_foundation/HANDOFF.md`(가격 파이프라인 핸드오프)·`_workspace/huni-set-product/HANDOFF.md`·`remediation/_REMEDIATION-LOG.md`
+**변경이력:** 최신: 2026-06-29(6세션) [HARD] **상품별 구성요소 경계(옵션 오염 방지)+게이트 S8** 추가(8파일) + 셋트 미구성4(068~071) 설계(표지+속지·면지없음·계산공식집 원리: 068~070 펼침 표지×1/071 트윈링 ×2·표지단가 1면기준·내지×1·면지=제본포함·rev.2 부모4비목+표지용지). ★게이트 전 보류=가격테이블 토대 먼저(§27 순서). 부품8 mint=dbmap·표지양면 R-4 책자공통. → `_workspace/huni-set-product/HANDOFF.md`·`booklet-set-formula-principle-260629`. 직전: 2026-06-27(2세션) 명함034 펄+굿즈 라벨모델+아크릴157 COMMIT
 
 ---
 
@@ -350,9 +350,9 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 **트리거:** "가격테이블 무결성", "적재 무결성 진단", "권위 적재 정밀 진단", "이 빠진 적재", "미적재 셀 진단", "차원 누락 검사", "권위 라이브 적재 대조", "가격격자 빈칸", "sparse grid 진단", "무결성 하네스 실행/재실행/업데이트/보완", "특정 시트만 무결성 진단" 등 본 도메인 요청 시 `huni-price-table-integrity-orchestrator` 스킬을 사용. 가격공식 설계 자체는 §18, 전 상품 12축 종단 정합은 §21, 표시명 중복은 §17, 라이브 실 교정 적재는 §7 dbmap. 단순 질문은 직접 응답.
 
-**산출물 루트:** `_workspace/huni-price-table-integrity/` (01_authority·02_load·03_codex·04_gate·_meta). 4 에이전트(`hpti-authority-extractor` 정답격자 → `hpti-load-inspector` 적재대조 결함보드(시트 팬아웃) → `hpti-codex-verifier` codex 독립2차 → `hpti-integrity-gate` I1~I7 게이트) + 방법론 스킬 `hpti-load-integrity-audit`(+ `hqv-codex-cross-verify`·`dbm-excel-parse`·`dbm-price-import-prep`·`dbm-correctness-audit` 재사용). 생성≠검증·codex 주장=가설·라이브 읽기전용 SELECT만(`.env.local RAILWAY_DB_*`)·DB 미적재(실 교정 인간 승인 후 dbmap 위임)·파일럿=아크릴(sparse grid 실증)→동형 전파.
+**산출물 루트:** `_workspace/huni-price-table-integrity/` (01_authority·02_load·03_codex·04_gate·**_batch**·_meta). 5 에이전트(`hpti-authority-extractor` 정답격자 → ★`hpti-matrix-batch-builder` 결정론 배치 diff(권위CSV↔스냅샷CSV·토큰0) → `hpti-load-inspector` 예외 보강 → `hpti-codex-verifier` codex 독립2차(스냅샷) → `hpti-integrity-gate` I1~I7 게이트) + 방법론 스킬 `hpti-matrix-batch-build`·`hpti-load-integrity-audit`(+ `hqv-codex-cross-verify`·`dbm-excel-parse`·`dbm-price-import-prep`·`dbm-batch-load`·`dbm-correctness-audit` 재사용). 라이브 실측 환경=`_workspace/_foundation/live-snapshot/`. 생성≠검증·codex 주장=가설·라이브 읽기전용 SELECT만(`.env.local RAILWAY_DB_*`)·DB 미적재(실 교정 인간 승인 후 dbmap 위임)·파일럿=아크릴(sparse grid 실증)→동형 전파.
 
-**변경이력:** 최신: 2026-06-28 **★band-total .01 ×수량 과대청구 결함 발견+.02 라이브 실증+dryrun** — 명함/봉투/합판 "완제품가"(밴드총액)가 prc_typ .01(엔진 .01=총액×수량)로 오타이핑→100~1000배 과대(시뮬레이터 실증 투명명함 100매=1,350,000·정답13,500). 교정 25comp .01→.02(dryrun ROLLBACK검증·승인후 COMMIT). ★.02 실증=명함 전밴드 라이브 선형35원/매·봉투 밴드총액 정확일치. + **상품별 차원 정밀배치+라이브 off-grid 공식확정 방법**(`price-dimension-layout-method.md`·엑셀=값권위·라이브=계산방식권위)·가격표 19시트 단가/합가 계층맵·off-grid 공식4규칙 codify(Phase1 차원배치+계층분류·Phase4 오차3유형+밴드총액 prc_typ 점검). 진단=`remediation/FINDING-bandtotal-x-qty-overcharge.md` → `_workspace/_foundation/HANDOFF.md`·`remediation/`
+**변경이력:** 최신: 2026-06-29 **결정론 배치 빌더 + 라이브 실측 환경 + 돈크리티컬 2건 라이브COMMIT** — ① 신규 `hpti-matrix-batch-builder` 에이전트 + `hpti-matrix-batch-build` 스킬: 가격 매트릭스 무결성을 AI 셀분석(토큰폭발) 대신 권위CSV(24_master-extract)↔라이브 스냅샷CSV 결정론 grid-diff로 처리(토큰0·`dbm-batch-load` 동형·시트1 파일럿→전파). ② 라이브 실측 환경 `_workspace/_foundation/live-snapshot/`(snapshot.sh·db-check.sh·36 t_* CSV·codex 스냅샷 우회). ③ 명함18 `.01` 과대청구 COMMIT(시뮬 037 ×42·024/025 ×20 해소·14→.02·2→.03·2→.02+min20). ④ 포스터사인 transpose **verbatim 재적재** COMMIT(491행+4·600×1400=20,000·1200×3000=72,000·권위 100%정합·blind swap 금지). 직전: 2026-06-28 band-total .01 ×수량 과대청구 진단+19시트 단가/합가 계층맵. → `_workspace/_foundation/HANDOFF.md`·`live-snapshot/`·`huni-price-table-integrity/`
 
 ## 27. 가격 종단 마스터 오케스트레이터 (상품군 단위 파이프라인·수렴 실행)
 
@@ -360,7 +360,7 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 **트리거:** "가격 종단 파이프라인", "상품군 가격 제대로", "가격 마스터 오케스트레이터", "상품군 가격 종단 완주", "정확한 가격값까지", "전 상품 가격 정합 완주", "가격 종단 실행/재실행/이어서", "특정 상품군 가격 종단" 등 본 요청 시 `huni-price-master-orchestrator` 스킬을 사용. 단일 레이어 작업은 해당 하네스 직접(§26 무결성·§18 설계·§7 적재·§21 정합). 단순 질문은 직접 응답.
 
-**변경이력:** 최신: 2026-06-29(5세션) 관점 재정립 — 공식집(`계산공식집초안`) 디코드 정본+3가격모델 분류(공식형120·"(가격포함)=직접단가"110·기성20)+반제품/셋트 2레이어 모델+순서 확정(§23 반제품/셋트 먼저→A codify 3-tier·재작업 방지)+공식형 저청구5 적발 → `_workspace/_foundation/HANDOFF.md`·`CHANGELOG.md`
+**변경이력:** 최신: 2026-06-29(6세션) **토대 먼저 전환 + 돈크리티컬 2건 라이브COMMIT + 결정론 배치 빌더** — 셋트 공식(지붕)을 가격표 적재(토대) 없이 짜던 것 교정→순서 재확립(무결성→교정적재→공식→검증). 명함18 .01 과대청구 COMMIT(037 ×42·024/025 ×20)·포스터사인 transpose verbatim 재적재 COMMIT(491행·권위 100%정합). 라이브 실측 환경(`_foundation/live-snapshot`)+결정론 배치 빌더(`hpti-matrix-batch-builder`·권위CSV↔스냅샷CSV diff·토큰0). 다음=배치빌더 파일럿(디지털인쇄비)→전 시트. 직전: 2026-06-29(5세션) 공식집 디코드+3가격모델 → `_workspace/_foundation/HANDOFF.md`·[[live-measure-batch-builder-260629]]
 
 ## 28. MoAI Framework (gated — rarely used here)
 

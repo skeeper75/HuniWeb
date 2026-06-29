@@ -1,0 +1,72 @@
+{
+  "tokenOk": true,
+  "widgetMounted": true,
+  "editorTabClicked": true,
+  "editBtnFound": true,
+  "iframeCount": 1,
+  "shadowEditorFound": false,
+  "visibleModals": 2,
+  "networkCalls": [
+    {
+      "type": "req",
+      "method": "GET",
+      "url": "https://d3qehkb69dy9zc.cloudfront.net/assets/images/ko/order_editor_icon.svg"
+    },
+    {
+      "type": "resp",
+      "status": 200,
+      "url": "https://d3qehkb69dy9zc.cloudfront.net/assets/images/ko/order_editor_icon.svg"
+    },
+    {
+      "type": "req",
+      "method": "POST",
+      "url": "http://localhost:3001/widget-api/api/editor/config/KOI"
+    },
+    {
+      "type": "resp",
+      "status": 200,
+      "url": "http://localhost:3001/widget-api/api/editor/config/KOI"
+    },
+    {
+      "type": "req",
+      "method": "GET",
+      "url": "http://localhost:3001/get-editor-token"
+    },
+    {
+      "type": "resp",
+      "status": 200,
+      "url": "http://localhost:3001/get-editor-token"
+    },
+    {
+      "type": "req",
+      "method": "POST",
+      "url": "http://localhost:3001/makers-api/token"
+    },
+    {
+      "type": "req",
+      "method": "POST",
+      "url": "http://localhost:3001/makers-api/editor"
+    },
+    {
+      "type": "resp",
+      "status": 200,
+      "url": "http://localhost:3001/makers-api/token"
+    },
+    {
+      "type": "resp",
+      "status": 200,
+      "url": "http://localhost:3001/makers-api/editor"
+    },
+    {
+      "type": "req",
+      "method": "PUT",
+      "url": "http://localhost:3001/makers-api/v1/template/bnVsbA==/hit"
+    },
+    {
+      "type": "resp",
+      "status": 200,
+      "url": "http://localhost:3001/makers-api/v1/template/bnVsbA==/hit"
+    }
+  ],
+  "consoleErrors": []
+}

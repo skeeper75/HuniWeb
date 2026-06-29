@@ -1,0 +1,181 @@
+{
+  "pdtCode": "장바구니",
+  "label": "장바구니",
+  "url": "https://wowpress.co.kr/ordr/cart/main",
+  "finalUrl": "https://wowpress.co.kr/cust/lgin/form?p=/ordr/cart/main?null",
+  "framework": "unknown",
+  "optionCascadeApiCalls": [
+    {
+      "url": "https://wowpress.co.kr/ordr/prod/sale/no/list",
+      "method": "GET",
+      "status": 200,
+      "postData": null
+    }
+  ],
+  "priceApiCalls": [
+    {
+      "url": "https://wowpress.co.kr/ordr/prod/sale/no/list",
+      "method": "GET",
+      "status": 200,
+      "postData": null
+    }
+  ],
+  "allWowApiCalls": [
+    {
+      "url": "https://wowpress.co.kr/ordr/prod/sale/no/list",
+      "method": "GET",
+      "status": 200,
+      "postData": null,
+      "responseBody": {
+        "prodNoList": [
+          null,
+          {
+            "prodNo": "40026"
+          },
+          {
+            "prodNo": "40034"
+          },
+          {
+            "prodNo": "40070"
+          },
+          {
+            "prodNo": "40040"
+          },
+          {
+            "prodNo": "30001"
+          },
+          {
+            "prodNo": "30003"
+          },
+          {
+            "prodNo": "30010"
+          },
+          {
+            "prodNo": "30013"
+          }
+        ]
+      }
+    },
+    {
+      "url": "https://wowpress.co.kr/myInfo",
+      "method": "GET",
+      "status": 200,
+      "postData": null,
+      "responseBody": {
+        "myInfo": null
+      }
+    },
+    {
+      "url": "https://wowpress.co.kr/main/favorite",
+      "method": "GET",
+      "status": 200,
+      "postData": null,
+      "responseBody": {
+        "favoriteList": [
+          {
+            "UDT": 1614933802000,
+            "DspGB": 5,
+            "Title": "퀵메뉴1",
+            "Post2": "우리함께\r\n이겨내요",
+            "Post1": "이용가이드\r\nWOW배송",
+            "Url1": "/cent/notc/list?_selectBNo=718862",
+            "Url2": "https://blog.naver.com/wow_press/222142563178",
+            "FilePath2": "/main/2021/03/05/20210305174322-1274934577601852635.jpg",
+            "FilePath1": "/main/2021/03/05/202103051743221148775093529628029.jpg",
+            "CDT": 1591846960000,
+            "FileNm1": "2-1.jpg",
+            "FileNm2": "1-2.jpg",
+            "DspNo": 19,
+            "RegDT": 1591846960000,
+            "ShopNo": 1,
+            "Sort": 1,
+            "File2": "/wowdoc/wow2.0/main/2021/03/05/20210305174322-1274934577601852635.jpg",
+            "File1": "/wowdoc/wow2.0/main/2021/03/05/202103051743221148775093529628029.jpg",
+            "UseYN": "Y"
+          },
+          {
+            "UDT": 1614933513000,
+            "DspGB": 5,
+            "Title": "출고배송",
+            "Post2": "무료폰트\r\n다운로드",
+            "Post1": "출고안내",
+            "Url1": "/info/lnbPage/cent/release",
+            "Url2": "/cent/font/list",
+            "FilePath2": "/main/2021/03/05/202103051738333682894287733885196.jpg",
+            "FilePath1": "/main/2021/03/05/20210305173833864366637918192390.jpg",
+            "CDT": 1604382640000,
+            "FileNm1": "1-1.jpg",
+            "FileNm2": "무료폰트.jpg",
+            "DspNo": 3012,
+            "RegDT": 1604382640000,
+            "ShopNo": 1,
+            "Sort": 2,
+            "File2": "/wowdoc/wow2.0/main/2021/03/05/202103051738333682894287733885196.jpg",
+            "File1": "/wowdoc/wow2.0/main/2021/03/05/20210305173833864366637918192390.jpg",
+            "UseYN": "Y"
+          },
+          {
+            "DspGB": 5,
+            "Title": "퀵메뉴3",
+            "Post2": "안심포장",
+            "Post1": "정매수\r\n출고",
+            "Url1": "/archives/evnt/fixed",
+            "Url2": "/archives/evnt/airc",
+            "FilePath2": "/main/2021/03/05/20210305173037-1622352730049854323.jpg",
+            "FilePath1": "/main/2021/03/05/20210305173037-1438703710964510071.jpg",
+            "CDT": 1614933037000,
+            "FileNm1": "정매수출고.jpg",
+            "FileNm2": "프리미엄안심포장.jpg",
+            "DspNo": 5030,
+            "RegDT": 1614933037000,
+            "ShopNo": 1,
+            "Sort": 3,
+            "File2": "/wowdoc/wow2.0/main/2021/03/05/20210305173037-1622352730049854323.jpg",
+            "File1": "/wowdoc/wow2.0/main/2021/03/05/20210305173037-1438703710964510071.jpg",
+            "UseYN": "Y"
+          }
+        ]
+      }
+    }
+  ],
+  "uiFlow": {
+    "steps": 3,
+    "hasEditor": false,
+    "optionCount": 0,
+    "selectDetails": [],
+    "radioDetails": [],
+    "priceDisplayType": "unknown",
+    "priceTexts": [],
+    "buttons": [
+      "WOW 멤버십안내 자세히보기",
+      "함께캠페인 자세히보기",
+      "쿠폰페이지 바로가기",
+      "핵심가치페이지 바로가기",
+      "고객센터",
+      "상업인쇄소",
+      "힙지로디지털",
+      "책공방",
+      "가게용품",
+      "문구점",
+      "어패럴",
+      "선거홍보물",
+      "이벤트",
+      "신제품",
+      "창닫기",
+      "로그인",
+      "아이디 찾기",
+      "비밀번호 찾기",
+      "회원가입"
+    ]
+  },
+  "pageInfo": {
+    "title": "와우프레스",
+    "framework": "unknown",
+    "bodySnippet": "WOW멤버십\nVVIP만의 특별한 혜택\n- 결제금액 4% 적립\n- 배쑝와쑝 배송비 무료\n- 명함/스티커 2만원 이상 택배비 무료\n- VIP 전용 상담 가능\n등급조건(3개월 접수액 기준)\n\n3억원 이상 \n9,000만원 이상 \n3,000만원 이상 \n2,100만원 이상 \n1,200만원 이상 \n300만원 이상 \n90만원 이상 \n30만원 이상 \n5만원 이상 \n5만원 미만\nWOW 멤버십안내 자세히보기\n   \n로그인\n회원가입\n쿠폰4종+무료배송\n고객센터\n요즘 인쇄 어디?\n와우프레스\n정매수 인쇄 어디?\n와우프레스\n요즘 인쇄 어디?\n와우프레스\n정매수 인쇄 어디?\n와우프레스\n상업인쇄소\n힙지로디지털\n책공방\n가게용품\n문구점\n어패럴\n선거홍보물\n이벤트\n신제품\n제작가이드 통합주문 무료직배송신청\nNEW!\n이지템플릿\n창닫기\n로그인\n로그인\n아이디 저장\n아이디 찾기\n비밀번호 찾기\n회원가입\n와우프레스 회원이 되시면 더 많은 혜택이 있습니다.\n소셜로그인\n네이버\n 페이스북\n 카카오\n회사소개\n이용약관\n개인정보취급방침\n사업자정보확인\n이메일주소무단수집거부\n찾아오시는길\n유해인쇄물제작불가\n멤버십안내\n일반로그인아이디전환\n와우프레스(주)\n[42699] 대구광역시 달서구 장기로 65길 11-5대표이사 : 김경환대표전화 : 1600-7580\n이메일 : wowpress@wowpress.co.kr (세금계산서발급 전용 이메일)\n사업자등록번호 : 504-86-01811통신판매업신고 : 제2016-대구달서-4272호\n개인정보관리책임자 : 권용석\nCopyrightⓒWOWPRESS INC. All rights reserved.\nAI 방울이입니다!"
+  },
+  "screenshots": [
+    "wow_장바구니_main.png",
+    "wow_장바구니_options.png"
+  ],
+  "capturedAt": "2026-03-31T01:25:26.650Z"
+}

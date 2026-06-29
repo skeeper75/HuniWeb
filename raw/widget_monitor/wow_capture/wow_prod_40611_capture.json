@@ -1,0 +1,4434 @@
+{
+  "prodNo": "40611",
+  "url": "https://wowpress.co.kr/ordr/prod/dets?ProdNo=40611",
+  "capturedAt": "2026-03-31T01:27:10.470Z",
+  "pageInfo": {
+    "title": "와우프레스",
+    "selectCount": 10,
+    "inputCount": 6,
+    "formCount": 8,
+    "hasEditor": false,
+    "editorButtons": [
+      {
+        "text": "이지템플릿",
+        "href": "https://wowpress.co.kr/ordr/prod/dets?ProdNo=40611#",
+        "onclick": "movePage('/self/dsgn/landing', '')"
+      }
+    ],
+    "vueData": {
+      "hasVue": false
+    },
+    "globalVars": {
+      "ProdNo": "{\"0\":{},\"1\":{}}",
+      "itemNo": "{}"
+    }
+  },
+  "optionWidget": {
+    "selects": [
+      {
+        "name": "category1",
+        "id": "category1",
+        "className": "select_front_h30 brute-select-front-h30-select",
+        "options": [
+          {
+            "value": "30001",
+            "text": "명함"
+          },
+          {
+            "value": "30002",
+            "text": "스티커"
+          },
+          {
+            "value": "30004",
+            "text": "책자"
+          },
+          {
+            "value": "30014",
+            "text": "사인제품"
+          },
+          {
+            "value": "30003",
+            "text": "전단"
+          },
+          {
+            "value": "40422",
+            "text": "디지털인쇄"
+          },
+          {
+            "value": "30005",
+            "text": "홍보물"
+          },
+          {
+            "value": "30013",
+            "text": "자석제품"
+          },
+          {
+            "value": "30010",
+            "text": "봉투"
+          },
+          {
+            "value": "30007",
+            "text": "판촉물"
+          },
+          {
+            "value": "40209",
+            "text": "캘린더"
+          },
+          {
+            "value": "40287",
+            "text": "카페용품"
+          },
+          {
+            "value": "30012",
+            "text": "서식류"
+          },
+          {
+            "value": "30011",
+            "text": "행택/쿠폰/안내장"
+          },
+          {
+            "value": "30006",
+            "text": "포토/액자"
+          },
+          {
+            "value": "30009",
+            "text": "홀더"
+          },
+          {
+            "value": "30008",
+            "text": "굿즈/다꾸"
+          },
+          {
+            "value": "40190",
+            "text": "와우기획상품"
+          },
+          {
+            "value": "39999",
+            "text": "부자재"
+          },
+          {
+            "value": "40278",
+            "text": "팬시제품"
+          },
+          {
+            "value": "40452",
+            "text": "선거홍보물"
+          },
+          {
+            "value": "40460",
+            "text": "폰 액세서리"
+          },
+          {
+            "value": "40466",
+            "text": "어패럴"
+          }
+        ]
+      },
+      {
+        "name": "category2",
+        "id": "category2",
+        "className": "select_front_h30 brute-select-front-h30-select",
+        "options": [
+          {
+            "value": "40133",
+            "text": "사각스티커"
+          },
+          {
+            "value": "40134",
+            "text": "도무송스티커"
+          },
+          {
+            "value": "40076",
+            "text": "주차스티커"
+          },
+          {
+            "value": "40438",
+            "text": "판스티커"
+          },
+          {
+            "value": "40020",
+            "text": "배달스티커"
+          },
+          {
+            "value": "40145",
+            "text": "핫딜스티커"
+          },
+          {
+            "value": "40268",
+            "text": "팬시스티커"
+          },
+          {
+            "value": "40006",
+            "text": "롤스티커"
+          },
+          {
+            "value": "40472",
+            "text": "정밀도무송스티커"
+          }
+        ]
+      },
+      {
+        "name": "category3",
+        "id": "category3",
+        "className": "select_front_h30 brute-select-front-h30-select",
+        "options": [
+          {
+            "value": "40612",
+            "text": "띠지스티커(사각)"
+          },
+          {
+            "value": "40611",
+            "text": "띠지스티커(도무송)"
+          }
+        ]
+      },
+      {
+        "name": "SizeNo",
+        "id": "pdata_00_sizeno",
+        "className": "select_front_w100 sgClass brute-select-front-w100-select",
+        "options": [
+          {
+            "value": "10773",
+            "text": "비규격"
+          },
+          {
+            "value": "10771",
+            "text": "원형200x30"
+          },
+          {
+            "value": "10772",
+            "text": "원형300x30"
+          },
+          {
+            "value": "10769",
+            "text": "원형400x30"
+          },
+          {
+            "value": "10770",
+            "text": "타원200x30"
+          },
+          {
+            "value": "10767",
+            "text": "타원300x30"
+          },
+          {
+            "value": "10768",
+            "text": "타원400x30"
+          },
+          {
+            "value": "10766",
+            "text": "팔각200x50"
+          },
+          {
+            "value": "10765",
+            "text": "팔각300x50"
+          },
+          {
+            "value": "10764",
+            "text": "팔각400x50"
+          },
+          {
+            "value": "10782",
+            "text": "비규격(균등)"
+          },
+          {
+            "value": "10783",
+            "text": "원형200x30(균등)"
+          },
+          {
+            "value": "10780",
+            "text": "원형300x30(균등)"
+          },
+          {
+            "value": "10781",
+            "text": "원형400x30(균등)"
+          },
+          {
+            "value": "10777",
+            "text": "타원200x30(균등)"
+          },
+          {
+            "value": "10778",
+            "text": "타원300x30(균등)"
+          },
+          {
+            "value": "10779",
+            "text": "타원400x30(균등)"
+          },
+          {
+            "value": "10776",
+            "text": "팔각200x50(균등)"
+          },
+          {
+            "value": "10775",
+            "text": "팔각300x50(균등)"
+          },
+          {
+            "value": "10774",
+            "text": "팔각400x50(균등)"
+          }
+        ]
+      },
+      {
+        "name": "ColorNo",
+        "id": "pdata_00_colorno",
+        "className": "select_front_w100 brute-select-front-w100-select",
+        "options": [
+          {
+            "value": "302",
+            "text": "단면 칼라"
+          },
+          {
+            "value": "1355",
+            "text": "단면 칼라+백색"
+          }
+        ]
+      },
+      {
+        "name": "sPaper0",
+        "id": "spdata_00_paperno3",
+        "className": "select_front_w100 sPaperpdata_00_paperno brute-select-front-w100-select",
+        "options": [
+          {
+            "value": "22929",
+            "text": "아트지(무광코팅)"
+          },
+          {
+            "value": "22931",
+            "text": "아트지(유광코팅)"
+          },
+          {
+            "value": "22926",
+            "text": "아트지(무코팅)"
+          },
+          {
+            "value": "21188",
+            "text": "모조지"
+          },
+          {
+            "value": "21199",
+            "text": "크라프트지"
+          },
+          {
+            "value": "21187",
+            "text": "유포지"
+          }
+        ]
+      },
+      {
+        "name": "sPaper0",
+        "id": "spdata_00_paperno4",
+        "className": "select_front_w100 sPaperpdata_00_paperno brute-select-front-w100-select",
+        "options": [
+          {
+            "value": "22930",
+            "text": "80g"
+          }
+        ]
+      },
+      {
+        "name": "",
+        "id": "spdata_00_ordqty",
+        "className": "select_front_w100 brute-select-front-w100-select",
+        "options": [
+          {
+            "value": "500",
+            "text": "500매"
+          },
+          {
+            "value": "1000",
+            "text": "1000매"
+          },
+          {
+            "value": "2000",
+            "text": "2000매"
+          },
+          {
+            "value": "3000",
+            "text": "3000매"
+          },
+          {
+            "value": "4000",
+            "text": "4000매"
+          },
+          {
+            "value": "5000",
+            "text": "5000매"
+          },
+          {
+            "value": "6000",
+            "text": "6000매"
+          },
+          {
+            "value": "8000",
+            "text": "8000매"
+          },
+          {
+            "value": "10000",
+            "text": "10000매"
+          },
+          {
+            "value": "11000",
+            "text": "11000매"
+          },
+          {
+            "value": "12000",
+            "text": "12000매"
+          },
+          {
+            "value": "13000",
+            "text": "13000매"
+          },
+          {
+            "value": "14000",
+            "text": "14000매"
+          },
+          {
+            "value": "15000",
+            "text": "15000매"
+          },
+          {
+            "value": "16000",
+            "text": "16000매"
+          },
+          {
+            "value": "18000",
+            "text": "18000매"
+          },
+          {
+            "value": "20000",
+            "text": "20000매"
+          },
+          {
+            "value": "25000",
+            "text": "25000매"
+          },
+          {
+            "value": "30000",
+            "text": "30000매"
+          },
+          {
+            "value": "40000",
+            "text": "40000매"
+          },
+          {
+            "value": "50000",
+            "text": "50000매"
+          }
+        ]
+      },
+      {
+        "name": "OrdCnt",
+        "id": "pdata_00_ordcnt",
+        "className": "select_front_w100 brute-select-front-w100-select",
+        "options": [
+          {
+            "value": "1",
+            "text": "1건"
+          },
+          {
+            "value": "2",
+            "text": "2건"
+          },
+          {
+            "value": "3",
+            "text": "3건"
+          },
+          {
+            "value": "4",
+            "text": "4건"
+          },
+          {
+            "value": "5",
+            "text": "5건"
+          },
+          {
+            "value": "6",
+            "text": "6건"
+          },
+          {
+            "value": "7",
+            "text": "7건"
+          },
+          {
+            "value": "8",
+            "text": "8건"
+          },
+          {
+            "value": "9",
+            "text": "9건"
+          },
+          {
+            "value": "10",
+            "text": "10건"
+          },
+          {
+            "value": "11",
+            "text": "11건"
+          },
+          {
+            "value": "12",
+            "text": "12건"
+          },
+          {
+            "value": "13",
+            "text": "13건"
+          },
+          {
+            "value": "14",
+            "text": "14건"
+          },
+          {
+            "value": "15",
+            "text": "15건"
+          },
+          {
+            "value": "16",
+            "text": "16건"
+          },
+          {
+            "value": "17",
+            "text": "17건"
+          },
+          {
+            "value": "18",
+            "text": "18건"
+          },
+          {
+            "value": "19",
+            "text": "19건"
+          },
+          {
+            "value": "20",
+            "text": "20건"
+          },
+          {
+            "value": "21",
+            "text": "21건"
+          },
+          {
+            "value": "22",
+            "text": "22건"
+          },
+          {
+            "value": "23",
+            "text": "23건"
+          },
+          {
+            "value": "24",
+            "text": "24건"
+          },
+          {
+            "value": "25",
+            "text": "25건"
+          },
+          {
+            "value": "26",
+            "text": "26건"
+          },
+          {
+            "value": "27",
+            "text": "27건"
+          },
+          {
+            "value": "28",
+            "text": "28건"
+          },
+          {
+            "value": "29",
+            "text": "29건"
+          },
+          {
+            "value": "30",
+            "text": "30건"
+          },
+          {
+            "value": "31",
+            "text": "31건"
+          },
+          {
+            "value": "32",
+            "text": "32건"
+          },
+          {
+            "value": "33",
+            "text": "33건"
+          },
+          {
+            "value": "34",
+            "text": "34건"
+          },
+          {
+            "value": "35",
+            "text": "35건"
+          },
+          {
+            "value": "36",
+            "text": "36건"
+          },
+          {
+            "value": "37",
+            "text": "37건"
+          },
+          {
+            "value": "38",
+            "text": "38건"
+          },
+          {
+            "value": "39",
+            "text": "39건"
+          },
+          {
+            "value": "40",
+            "text": "40건"
+          },
+          {
+            "value": "41",
+            "text": "41건"
+          },
+          {
+            "value": "42",
+            "text": "42건"
+          },
+          {
+            "value": "43",
+            "text": "43건"
+          },
+          {
+            "value": "44",
+            "text": "44건"
+          },
+          {
+            "value": "45",
+            "text": "45건"
+          },
+          {
+            "value": "46",
+            "text": "46건"
+          },
+          {
+            "value": "47",
+            "text": "47건"
+          },
+          {
+            "value": "48",
+            "text": "48건"
+          },
+          {
+            "value": "49",
+            "text": "49건"
+          },
+          {
+            "value": "50",
+            "text": "50건"
+          }
+        ]
+      },
+      {
+        "name": "sJob0",
+        "id": "spdata_00_awk360002",
+        "className": "select_front_w100 sJobpdata_00_awk36000 brute-select-front-w100-select",
+        "options": [
+          {
+            "value": "",
+            "text": "칼선 선택하세요"
+          },
+          {
+            "value": "36101",
+            "text": "1개"
+          },
+          {
+            "value": "36102",
+            "text": "2개"
+          },
+          {
+            "value": "36103",
+            "text": "3개"
+          },
+          {
+            "value": "36104",
+            "text": "4개"
+          },
+          {
+            "value": "36105",
+            "text": "5개"
+          },
+          {
+            "value": "36106",
+            "text": "6개"
+          },
+          {
+            "value": "36107",
+            "text": "7개"
+          },
+          {
+            "value": "36108",
+            "text": "8개"
+          },
+          {
+            "value": "36109",
+            "text": "9개"
+          },
+          {
+            "value": "36110",
+            "text": "10개"
+          },
+          {
+            "value": "36111",
+            "text": "11개"
+          },
+          {
+            "value": "36112",
+            "text": "12개"
+          },
+          {
+            "value": "36113",
+            "text": "13개"
+          },
+          {
+            "value": "36114",
+            "text": "14개"
+          },
+          {
+            "value": "36115",
+            "text": "15개"
+          },
+          {
+            "value": "36116",
+            "text": "16개"
+          },
+          {
+            "value": "36117",
+            "text": "17개"
+          },
+          {
+            "value": "36118",
+            "text": "18개"
+          },
+          {
+            "value": "36119",
+            "text": "19개"
+          },
+          {
+            "value": "36120",
+            "text": "20개"
+          },
+          {
+            "value": "11440",
+            "text": "21개"
+          },
+          {
+            "value": "11437",
+            "text": "22개"
+          },
+          {
+            "value": "11438",
+            "text": "23개"
+          },
+          {
+            "value": "11439",
+            "text": "24개"
+          },
+          {
+            "value": "11436",
+            "text": "25개"
+          },
+          {
+            "value": "11435",
+            "text": "26개"
+          },
+          {
+            "value": "11431",
+            "text": "27개"
+          },
+          {
+            "value": "11432",
+            "text": "28개"
+          },
+          {
+            "value": "11433",
+            "text": "29개"
+          },
+          {
+            "value": "11434",
+            "text": "30개"
+          }
+        ]
+      }
+    ],
+    "inputs": [
+      {
+        "name": "srchKeyword",
+        "id": "srchKeyword",
+        "type": "text",
+        "value": "",
+        "placeholder": ""
+      },
+      {
+        "name": "sizeCW",
+        "id": "hdata_00_sizeno_x",
+        "type": "text",
+        "value": "200",
+        "placeholder": "가로"
+      },
+      {
+        "name": "sizeCH",
+        "id": "hdata_00_sizeno_y",
+        "type": "text",
+        "value": "30",
+        "placeholder": "세로"
+      },
+      {
+        "name": "sizeWW",
+        "id": "hdata_00_sizeno_xx",
+        "type": "text",
+        "value": "205",
+        "placeholder": "가로"
+      },
+      {
+        "name": "sizeWH",
+        "id": "hdata_00_sizeno_yy",
+        "type": "text",
+        "value": "35",
+        "placeholder": "세로"
+      },
+      {
+        "name": "preset",
+        "id": "preset_1",
+        "type": "radio",
+        "value": "1",
+        "placeholder": ""
+      }
+    ],
+    "hiddenInputs": [
+      {
+        "name": "ordType",
+        "value": "selfDsn"
+      },
+      {
+        "name": "width",
+        "value": ""
+      },
+      {
+        "name": "height",
+        "value": ""
+      },
+      {
+        "name": "Wwidth",
+        "value": ""
+      },
+      {
+        "name": "Wheight",
+        "value": ""
+      },
+      {
+        "name": "SelfDCSzNm",
+        "value": ""
+      },
+      {
+        "name": "imageList",
+        "value": ""
+      },
+      {
+        "name": "jpgFront",
+        "value": "1"
+      },
+      {
+        "name": "jpgBack",
+        "value": "1"
+      },
+      {
+        "name": "side",
+        "value": "1"
+      },
+      {
+        "name": "pdf",
+        "value": ""
+      },
+      {
+        "name": "ezTName",
+        "value": ""
+      },
+      {
+        "name": "ProdNo",
+        "value": "40611"
+      },
+      {
+        "name": "incNonStd",
+        "value": ""
+      },
+      {
+        "name": "useOnlyProd",
+        "value": ""
+      },
+      {
+        "name": "uopPP",
+        "value": ""
+      },
+      {
+        "name": "uopSZ",
+        "value": ""
+      },
+      {
+        "name": "uopCL",
+        "value": ""
+      },
+      {
+        "name": "uopOPT",
+        "value": ""
+      },
+      {
+        "name": "_csrf",
+        "value": "dd409043-21ec-4fa9-9e71-f7047919b651"
+      },
+      {
+        "name": "partner",
+        "value": "wowpress.jarvis.wepnp.com"
+      },
+      {
+        "name": "domain",
+        "value": "wowpress.jarvis.wepnp.com"
+      },
+      {
+        "name": "user_id",
+        "value": ""
+      },
+      {
+        "name": "sessionKey",
+        "value": ""
+      },
+      {
+        "name": "xmltemplate",
+        "value": ""
+      },
+      {
+        "name": "prdcode",
+        "value": ""
+      },
+      {
+        "name": "horSize",
+        "value": ""
+      },
+      {
+        "name": "verSize",
+        "value": ""
+      },
+      {
+        "name": "cutHorSize",
+        "value": ""
+      },
+      {
+        "name": "cutVerSize",
+        "value": ""
+      },
+      {
+        "name": "hvtype",
+        "value": "h"
+      },
+      {
+        "name": "podType",
+        "value": "namecard"
+      },
+      {
+        "name": "selectSide",
+        "value": "ds2"
+      },
+      {
+        "name": "returnUrl",
+        "value": "https://wowpress.co.kr:443/self/dsgn/Rslt?"
+      },
+      {
+        "name": "ProdNo",
+        "value": "40611"
+      },
+      {
+        "name": "SelfDCName",
+        "value": ""
+      },
+      {
+        "name": "SelfDCNo",
+        "value": ""
+      },
+      {
+        "name": "printArea",
+        "value": ""
+      },
+      {
+        "name": "_csrf",
+        "value": "dd409043-21ec-4fa9-9e71-f7047919b651"
+      },
+      {
+        "name": "",
+        "value": "2026-04-01"
+      },
+      {
+        "name": "AWKs",
+        "value": "칼선"
+      },
+      {
+        "name": "CoverCD",
+        "value": "0"
+      },
+      {
+        "name": "SianCKYN",
+        "value": "N"
+      },
+      {
+        "name": "Page_Color",
+        "value": "0"
+      },
+      {
+        "name": "QUnit_val",
+        "value": "매"
+      },
+      {
+        "name": "ProdNo",
+        "value": "40611"
+      },
+      {
+        "name": "PRSs",
+        "value": "[{JobNo=3110, Name=옵셋인쇄, PressM=O, QUnit=5}]"
+      },
+      {
+        "name": "QUnit",
+        "value": "5"
+      },
+      {
+        "name": "ALLAWKs",
+        "value": "칼선"
+      },
+      {
+        "name": "CoverName",
+        "value": "통합"
+      },
+      {
+        "name": "Name",
+        "value": "띠지스티커(도무송)"
+      },
+      {
+        "name": "Cover_Press",
+        "value": "0"
+      },
+      {
+        "name": "PJoin",
+        "value": "0"
+      },
+      {
+        "name": "ColorAddYN",
+        "value": "N"
+      },
+      {
+        "name": "ALLAWKsJobNo",
+        "value": "36000"
+      },
+      {
+        "name": "ShopNo",
+        "value": "1"
+      },
+      {
+        "name": "JobPresetYN",
+        "value": "N"
+      },
+      {
+        "name": "Cover_Awk",
+        "value": "0"
+      },
+      {
+        "name": "rn",
+        "value": "1"
+      },
+      {
+        "name": "initOrdQty",
+        "value": "1"
+      },
+      {
+        "name": "AWKsJobNo",
+        "value": "36000"
+      },
+      {
+        "name": "PRSsJson",
+        "value": "[{\"JobNo\": \"3110\", \"Name\": \"옵셋인쇄\", \"PressM\": \"O\", \"QUnit\": \"5\"}]"
+      },
+      {
+        "name": "ProdNo",
+        "value": "40611"
+      },
+      {
+        "name": "PJoin",
+        "value": "0"
+      },
+      {
+        "name": "QUnit",
+        "value": "5"
+      },
+      {
+        "name": "JobPset",
+        "value": "N"
+      },
+      {
+        "name": "JobCostList",
+        "value": "[{\"ColorNo\": 302, \"PaperNo\": 22932, \"PaperPNo\": 22931, \"PaperBNo\": 22931, \"SizeNo\": 10771},{\"ColorNo\": 302, \"PaperNo\": 22932, \"PaperPNo\": 22931, \"PaperBNo\": 22931, \"SizeNo\": 10772},{\"ColorNo\": 302, \"PaperNo\": 22932, \"PaperPNo\": 22931, \"PaperBNo\": 22931, \"SizeNo\": 10769},{\"ColorNo\": 302, \"PaperNo\": 22932, \"PaperPNo\": 22931, \"PaperBNo\": 22931, \"SizeNo\": 10770},{\"ColorNo\": 302, \"PaperNo\": 22932, \"PaperPNo\": 22931, \"PaperBNo\": 22931, \"SizeNo\": 10767},{\"ColorNo\": 302, \"PaperNo\": 22932, \"PaperPNo\": 22931, \"PaperBNo\": 22931, \"SizeNo\": 10768},{\"ColorNo\": 302, \"PaperNo\": 22932, \"PaperPNo\": 22931, \"PaperBNo\": 22931, \"SizeNo\": 10766},{\"ColorNo\": 302, \"PaperNo\": 22932, \"PaperPNo\": 22931, \"PaperBNo\": 22931, \"SizeNo\": 10765},{\"ColorNo\": 302, \"PaperNo\": 22932, \"PaperPNo\": 22931, \"PaperBNo\": 22931, \"SizeNo\": 10764},{\"ColorNo\": 302, \"PaperNo\": 22930, \"PaperPNo\": 22929, \"PaperBNo\": 22929, \"SizeNo\": 10771},{\"ColorNo\": 302, \"PaperNo\": 22930, \"PaperPNo\": 22929, \"PaperBNo\": 22929, \"SizeNo\": 10772},{\"ColorNo\": 302, \"PaperNo\": 22930, \"PaperPNo\": 22929, \"PaperBNo\": 22929, \"SizeNo\": 10769},{\"ColorNo\": 302, \"PaperNo\": 22930, \"PaperPNo\": 22929, \"PaperBNo\": 22929, \"SizeNo\": 10770},{\"ColorNo\": 302, \"PaperNo\": 22930, \"PaperPNo\": 22929, \"PaperBNo\": 22929, \"SizeNo\": 10767},{\"ColorNo\": 302, \"PaperNo\": 22930, \"PaperPNo\": 22929, \"PaperBNo\": 22929, \"SizeNo\": 10768},{\"ColorNo\": 302, \"PaperNo\": 22930, \"PaperPNo\": 22929, \"PaperBNo\": 22929, \"SizeNo\": 10766},{\"ColorNo\": 302, \"PaperNo\": 22930, \"PaperPNo\": 22929, \"PaperBNo\": 22929, \"SizeNo\": 10765},{\"ColorNo\": 302, \"PaperNo\": 22930, \"PaperPNo\": 22929, \"PaperBNo\": 22929, \"SizeNo\": 10764},{\"ColorNo\": 302, \"PaperNo\": 22927, \"PaperPNo\": 22926, \"PaperBNo\": 22926, \"SizeNo\": 10771},{\"ColorNo\": 302, \"PaperNo\": 22927, \"PaperPNo\": 22926, \"PaperBNo\": 22926, \"SizeNo\": 10772},{\"ColorNo\": 302, \"PaperNo\": 22927, \"PaperPNo\": 22926, \"PaperBNo\": 22926, \"SizeNo\": 10769},{\"ColorNo\": 302, \"PaperNo\": 22927, \"PaperPNo\": 22926, \"PaperBNo\": 22926, \"SizeNo\": 10770},{\"ColorNo\": 302, \"PaperNo\": 22927, \"PaperPNo\": 22926, \"PaperBNo\": 22926, \"SizeNo\": 10767},{\"ColorNo\": 302, \"PaperNo\": 22927, \"PaperPNo\": 22926, \"PaperBNo\": 22926, \"SizeNo\": 10768},{\"ColorNo\": 302, \"PaperNo\": 22927, \"PaperPNo\": 22926, \"PaperBNo\": 22926, \"SizeNo\": 10766},{\"ColorNo\": 302, \"PaperNo\": 22927, \"PaperPNo\": 22926, \"PaperBNo\": 22926, \"SizeNo\": 10765},{\"ColorNo\": 302, \"PaperNo\": 22927, \"PaperPNo\": 22926, \"PaperBNo\": 22926, \"SizeNo\": 10764},{\"ColorNo\": 302, \"PaperNo\": 21205, \"PaperPNo\": 21187, \"PaperBNo\": 21187, \"SizeNo\": 10771},{\"ColorNo\": 302, \"PaperNo\": 21205, \"PaperPNo\": 21187, \"PaperBNo\": 21187, \"SizeNo\": 10772},{\"ColorNo\": 302, \"PaperNo\": 21205, \"PaperPNo\": 21187, \"PaperBNo\": 21187, \"SizeNo\": 10769},{\"ColorNo\": 302, \"PaperNo\": 21205, \"PaperPNo\": 21187, \"PaperBNo\": 21187, \"SizeNo\": 10770},{\"ColorNo\": 302, \"PaperNo\": 21205, \"PaperPNo\": 21187, \"PaperBNo\": 21187, \"SizeNo\": 10767},{\"ColorNo\": 302, \"PaperNo\": 21205, \"PaperPNo\": 21187, \"PaperBNo\": 21187, \"SizeNo\": 10768},{\"ColorNo\": 302, \"PaperNo\": 21205, \"PaperPNo\": 21187, \"PaperBNo\": 21187, \"SizeNo\": 10766},{\"ColorNo\": 302, \"PaperNo\": 21205, \"PaperPNo\": 21187, \"PaperBNo\": 21187, \"SizeNo\": 10765},{\"ColorNo\": 302, \"PaperNo\": 21205, \"PaperPNo\": 21187, \"PaperBNo\": 21187, \"SizeNo\": 10764},{\"ColorNo\": 302, \"PaperNo\": 22932, \"PaperPNo\": 22931, \"PaperBNo\": 22931, \"SizeNo\": 10783},{\"ColorNo\": 302, \"PaperNo\": 22932, \"PaperPNo\": 22931, \"PaperBNo\": 22931, \"SizeNo\": 10780},{\"ColorNo\": 302, \"PaperNo\": 22932, \"PaperPNo\": 22931, \"PaperBNo\": 22931, \"SizeNo\": 10781},{\"ColorNo\": 302, \"PaperNo\": 22932, \"PaperPNo\": 22931, \"PaperBNo\": 22931, \"SizeNo\": 10777},{\"ColorNo\": 302, \"PaperNo\": 22932, \"PaperPNo\": 22931, \"PaperBNo\": 22931, \"SizeNo\": 10778},{\"ColorNo\": 302, \"PaperNo\": 22932, \"PaperPNo\": 22931, \"PaperBNo\": 22931, \"SizeNo\": 10779},{\"ColorNo\": 302, \"PaperNo\": 22932, \"PaperPNo\": 22931, \"PaperBNo\": 22931, \"SizeNo\": 10776},{\"ColorNo\": 302, \"PaperNo\": 22932, \"PaperPNo\": 22931, \"PaperBNo\": 22931, \"SizeNo\": 10775},{\"ColorNo\": 302, \"PaperNo\": 22932, \"PaperPNo\": 22931, \"PaperBNo\": 22931, \"SizeNo\": 10774},{\"ColorNo\": 302, \"PaperNo\": 22930, \"PaperPNo\": 22929, \"PaperBNo\": 22929, \"SizeNo\": 10783},{\"ColorNo\": 302, \"PaperNo\": 22930, \"PaperPNo\": 22929, \"PaperBNo\": 22929, \"SizeNo\": 10780},{\"ColorNo\": 302, \"PaperNo\": 22930, \"PaperPNo\": 22929, \"PaperBNo\": 22929, \"SizeNo\": 10781},{\"ColorNo\": 302, \"PaperNo\": 22930, \"PaperPNo\": 22929, \"PaperBNo\": 22929, \"SizeNo\": 10777},{\"ColorNo\": 302, \"PaperNo\": 22930, \"PaperPNo\": 22929, \"PaperBNo\": 22929, \"SizeNo\": 10778},{\"ColorNo\": 302, \"PaperNo\": 22930, \"PaperPNo\": 22929, \"PaperBNo\": 22929, \"SizeNo\": 10779},{\"ColorNo\": 302, \"PaperNo\": 22930, \"PaperPNo\": 22929, \"PaperBNo\": 22929, \"SizeNo\": 10776},{\"ColorNo\": 302, \"PaperNo\": 22930, \"PaperPNo\": 22929, \"PaperBNo\": 22929, \"SizeNo\": 10775},{\"ColorNo\": 302, \"PaperNo\": 22930, \"PaperPNo\": 22929, \"PaperBNo\": 22929, \"SizeNo\": 10774},{\"ColorNo\": 302, \"PaperNo\": 22927, \"PaperPNo\": 22926, \"PaperBNo\": 22926, \"SizeNo\": 10783},{\"ColorNo\": 302, \"PaperNo\": 22927, \"PaperPNo\": 22926, \"PaperBNo\": 22926, \"SizeNo\": 10780},{\"ColorNo\": 302, \"PaperNo\": 22927, \"PaperPNo\": 22926, \"PaperBNo\": 22926, \"SizeNo\": 10781},{\"ColorNo\": 302, \"PaperNo\": 22927, \"PaperPNo\": 22926, \"PaperBNo\": 22926, \"SizeNo\": 10777},{\"ColorNo\": 302, \"PaperNo\": 22927, \"PaperPNo\": 22926, \"PaperBNo\": 22926, \"SizeNo\": 10778},{\"ColorNo\": 302, \"PaperNo\": 22927, \"PaperPNo\": 22926, \"PaperBNo\": 22926, \"SizeNo\": 10779},{\"ColorNo\": 302, \"PaperNo\": 22927, \"PaperPNo\": 22926, \"PaperBNo\": 22926, \"SizeNo\": 10776},{\"ColorNo\": 302, \"PaperNo\": 22927, \"PaperPNo\": 22926, \"PaperBNo\": 22926, \"SizeNo\": 10775},{\"ColorNo\": 302, \"PaperNo\": 22927, \"PaperPNo\": 22926, \"PaperBNo\": 22926, \"SizeNo\": 10774},{\"ColorNo\": 302, \"PaperNo\": 21205, \"PaperPNo\": 21187, \"PaperBNo\": 21187, \"SizeNo\": 10783},{\"ColorNo\": 302, \"PaperNo\": 21205, \"PaperPNo\": 21187, \"PaperBNo\": 21187, \"SizeNo\": 10780},{\"ColorNo\": 302, \"PaperNo\": 21205, \"PaperPNo\": 21187, \"PaperBNo\": 21187, \"SizeNo\": 10781},{\"ColorNo\": 302, \"PaperNo\": 21205, \"PaperPNo\": 21187, \"PaperBNo\": 21187, \"SizeNo\": 10777},{\"ColorNo\": 302, \"PaperNo\": 21205, \"PaperPNo\": 21187, \"PaperBNo\": 21187, \"SizeNo\": 10778},{\"ColorNo\": 302, \"PaperNo\": 21205, \"PaperPNo\": 21187, \"PaperBNo\": 21187, \"SizeNo\": 10779},{\"ColorNo\": 302, \"PaperNo\": 21205, \"PaperPNo\": 21187, \"PaperBNo\": 21187, \"SizeNo\": 10776},{\"ColorNo\": 302, \"PaperNo\": 21205, \"PaperPNo\": 21187, \"PaperBNo\": 21187, \"SizeNo\": 10775},{\"ColorNo\": 302, \"PaperNo\": 21205, \"PaperPNo\": 21187, \"PaperBNo\": 21187, \"SizeNo\": 10774},{\"ColorNo\": 302, \"PaperNo\": 22932, \"PaperPNo\": 22931, \"PaperBNo\": 22931, \"SizeNo\": 10773},{\"ColorNo\": 302, \"PaperNo\": 22930, \"PaperPNo\": 22929, \"PaperBNo\": 22929, \"SizeNo\": 10773},{\"ColorNo\": 302, \"PaperNo\": 22927, \"PaperPNo\": 22926, \"PaperBNo\": 22926, \"SizeNo\": 10773},{\"ColorNo\": 302, \"PaperNo\": 21205, \"PaperPNo\": 21187, \"PaperBNo\": 21187, \"SizeNo\": 10773},{\"ColorNo\": 302, \"PaperNo\": 22932, \"PaperPNo\": 22931, \"PaperBNo\": 22931, \"SizeNo\": 10782},{\"ColorNo\": 302, \"PaperNo\": 22930, \"PaperPNo\": 22929, \"PaperBNo\": 22929, \"SizeNo\": 10782},{\"ColorNo\": 302, \"PaperNo\": 22927, \"PaperPNo\": 22926, \"PaperBNo\": 22926, \"SizeNo\": 10782},{\"ColorNo\": 302, \"PaperNo\": 21205, \"PaperPNo\": 21187, \"PaperBNo\": 21187, \"SizeNo\": 10782},{\"ColorNo\": 302, \"PaperNo\": 21206, \"PaperPNo\": 21188, \"PaperBNo\": 21188, \"SizeNo\": 10771},{\"ColorNo\": 302, \"PaperNo\": 21206, \"PaperPNo\": 21188, \"PaperBNo\": 21188, \"SizeNo\": 10772},{\"ColorNo\": 302, \"PaperNo\": 21206, \"PaperPNo\": 21188, \"PaperBNo\": 21188, \"SizeNo\": 10769},{\"ColorNo\": 302, \"PaperNo\": 21206, \"PaperPNo\": 21188, \"PaperBNo\": 21188, \"SizeNo\": 10770},{\"ColorNo\": 302, \"PaperNo\": 21206, \"PaperPNo\": 21188, \"PaperBNo\": 21188, \"SizeNo\": 10767},{\"ColorNo\": 302, \"PaperNo\": 21206, \"PaperPNo\": 21188, \"PaperBNo\": 21188, \"SizeNo\": 10768},{\"ColorNo\": 302, \"PaperNo\": 21206, \"PaperPNo\": 21188, \"PaperBNo\": 21188, \"SizeNo\": 10766},{\"ColorNo\": 302, \"PaperNo\": 21206, \"PaperPNo\": 21188, \"PaperBNo\": 21188, \"SizeNo\": 10765},{\"ColorNo\": 302, \"PaperNo\": 21206, \"PaperPNo\": 21188, \"PaperBNo\": 21188, \"SizeNo\": 10764},{\"ColorNo\": 302, \"PaperNo\": 21216, \"PaperPNo\": 21199, \"PaperBNo\": 21199, \"SizeNo\": 10771},{\"ColorNo\": 302, \"PaperNo\": 21216, \"PaperPNo\": 21199, \"PaperBNo\": 21199, \"SizeNo\": 10772},{\"ColorNo\": 302, \"PaperNo\": 21216, \"PaperPNo\": 21199, \"PaperBNo\": 21199, \"SizeNo\": 10769},{\"ColorNo\": 302, \"PaperNo\": 21216, \"PaperPNo\": 21199, \"PaperBNo\": 21199, \"SizeNo\": 10770},{\"ColorNo\": 302, \"PaperNo\": 21216, \"PaperPNo\": 21199, \"PaperBNo\": 21199, \"SizeNo\": 10767},{\"ColorNo\": 302, \"PaperNo\": 21216, \"PaperPNo\": 21199, \"PaperBNo\": 21199, \"SizeNo\": 10768},{\"ColorNo\": 302, \"PaperNo\": 21216, \"PaperPNo\": 21199, \"PaperBNo\": 21199, \"SizeNo\": 10766},{\"ColorNo\": 302, \"PaperNo\": 21216, \"PaperPNo\": 21199, \"PaperBNo\": 21199, \"SizeNo\": 10765},{\"ColorNo\": 302, \"PaperNo\": 21216, \"PaperPNo\": 21199, \"PaperBNo\": 21199, \"SizeNo\": 10764},{\"ColorNo\": 302, \"PaperNo\": 21206, \"PaperPNo\": 21188, \"PaperBNo\": 21188, \"SizeNo\": 10783},{\"ColorNo\": 302, \"PaperNo\": 21206, \"PaperPNo\": 21188, \"PaperBNo\": 21188, \"SizeNo\": 10780},{\"ColorNo\": 302, \"PaperNo\": 21206, \"PaperPNo\": 21188, \"PaperBNo\": 21188, \"SizeNo\": 10781},{\"ColorNo\": 302, \"PaperNo\": 21206, \"PaperPNo\": 21188, \"PaperBNo\": 21188, \"SizeNo\": 10777},{\"ColorNo\": 302, \"PaperNo\": 21206, \"PaperPNo\": 21188, \"PaperBNo\": 21188, \"SizeNo\": 10778},{\"ColorNo\": 302, \"PaperNo\": 21206, \"PaperPNo\": 21188, \"PaperBNo\": 21188, \"SizeNo\": 10779},{\"ColorNo\": 302, \"PaperNo\": 21206, \"PaperPNo\": 21188, \"PaperBNo\": 21188, \"SizeNo\": 10776},{\"ColorNo\": 302, \"PaperNo\": 21206, \"PaperPNo\": 21188, \"PaperBNo\": 21188, \"SizeNo\": 10775},{\"ColorNo\": 302, \"PaperNo\": 21206, \"PaperPNo\": 21188, \"PaperBNo\": 21188, \"SizeNo\": 10774},{\"ColorNo\": 302, \"PaperNo\": 21216, \"PaperPNo\": 21199, \"PaperBNo\": 21199, \"SizeNo\": 10783},{\"ColorNo\": 302, \"PaperNo\": 21216, \"PaperPNo\": 21199, \"PaperBNo\": 21199, \"SizeNo\": 10780},{\"ColorNo\": 302, \"PaperNo\": 21216, \"PaperPNo\": 21199, \"PaperBNo\": 21199, \"SizeNo\": 10781},{\"ColorNo\": 302, \"PaperNo\": 21216, \"PaperPNo\": 21199, \"PaperBNo\": 21199, \"SizeNo\": 10777},{\"ColorNo\": 302, \"PaperNo\": 21216, \"PaperPNo\": 21199, \"PaperBNo\": 21199, \"SizeNo\": 10778},{\"ColorNo\": 302, \"PaperNo\": 21216, \"PaperPNo\": 21199, \"PaperBNo\": 21199, \"SizeNo\": 10779},{\"ColorNo\": 302, \"PaperNo\": 21216, \"PaperPNo\": 21199, \"PaperBNo\": 21199, \"SizeNo\": 10776},{\"ColorNo\": 302, \"PaperNo\": 21216, \"PaperPNo\": 21199, \"PaperBNo\": 21199, \"SizeNo\": 10775},{\"ColorNo\": 302, \"PaperNo\": 21216, \"PaperPNo\": 21199, \"PaperBNo\": 21199, \"SizeNo\": 10774},{\"ColorNo\": 302, \"PaperNo\": 21206, \"PaperPNo\": 21188, \"PaperBNo\": 21188, \"SizeNo\": 10773},{\"ColorNo\": 302, \"PaperNo\": 21216, \"PaperPNo\": 21199, \"PaperBNo\": 21199, \"SizeNo\": 10773},{\"ColorNo\": 302, \"PaperNo\": 21206, \"PaperPNo\": 21188, \"PaperBNo\": 21188, \"SizeNo\": 10782},{\"ColorNo\": 302, \"PaperNo\": 21216, \"PaperPNo\": 21199, \"PaperBNo\": 21199, \"SizeNo\": 10782},{\"ColorNo\": 1355, \"PaperNo\": 21216, \"PaperPNo\": 21199, \"PaperBNo\": 21199, \"SizeNo\": 10771},{\"ColorNo\": 1355, \"PaperNo\": 21216, \"PaperPNo\": 21199, \"PaperBNo\": 21199, \"SizeNo\": 10772},{\"ColorNo\": 1355, \"PaperNo\": 21216, \"PaperPNo\": 21199, \"PaperBNo\": 21199, \"SizeNo\": 10769},{\"ColorNo\": 1355, \"PaperNo\": 21216, \"PaperPNo\": 21199, \"PaperBNo\": 21199, \"SizeNo\": 10770},{\"ColorNo\": 1355, \"PaperNo\": 21216, \"PaperPNo\": 21199, \"PaperBNo\": 21199, \"SizeNo\": 10767},{\"ColorNo\": 1355, \"PaperNo\": 21216, \"PaperPNo\": 21199, \"PaperBNo\": 21199, \"SizeNo\": 10768},{\"ColorNo\": 1355, \"PaperNo\": 21216, \"PaperPNo\": 21199, \"PaperBNo\": 21199, \"SizeNo\": 10766},{\"ColorNo\": 1355, \"PaperNo\": 21216, \"PaperPNo\": 21199, \"PaperBNo\": 21199, \"SizeNo\": 10765},{\"ColorNo\": 1355, \"PaperNo\": 21216, \"PaperPNo\": 21199, \"PaperBNo\": 21199, \"SizeNo\": 10764},{\"ColorNo\": 1355, \"PaperNo\": 21216, \"PaperPNo\": 21199, \"PaperBNo\": 21199, \"SizeNo\": 10783},{\"ColorNo\": 1355, \"PaperNo\": 21216, \"PaperPNo\": 21199, \"PaperBNo\": 21199, \"SizeNo\": 10780},{\"ColorNo\": 1355, \"PaperNo\": 21216, \"PaperPNo\": 21199, \"PaperBNo\": 21199, \"SizeNo\": 10781},{\"ColorNo\": 1355, \"PaperNo\": 21216, \"PaperPNo\": 21199, \"PaperBNo\": 21199, \"SizeNo\": 10777},{\"ColorNo\": 1355, \"PaperNo\": 21216, \"PaperPNo\": 21199, \"PaperBNo\": 21199, \"SizeNo\": 10778},{\"ColorNo\": 1355, \"PaperNo\": 21216, \"PaperPNo\": 21199, \"PaperBNo\": 21199, \"SizeNo\": 10779},{\"ColorNo\": 1355, \"PaperNo\": 21216, \"PaperPNo\": 21199, \"PaperBNo\": 21199, \"SizeNo\": 10776},{\"ColorNo\": 1355, \"PaperNo\": 21216, \"PaperPNo\": 21199, \"PaperBNo\": 21199, \"SizeNo\": 10775},{\"ColorNo\": 1355, \"PaperNo\": 21216, \"PaperPNo\": 21199, \"PaperBNo\": 21199, \"SizeNo\": 10774},{\"ColorNo\": 1355, \"PaperNo\": 21216, \"PaperPNo\": 21199, \"PaperBNo\": 21199, \"SizeNo\": 10773},{\"ColorNo\": 1355, \"PaperNo\": 21216, \"PaperPNo\": 21199, \"PaperBNo\": 21199, \"SizeNo\": 10782}]"
+      },
+      {
+        "name": "paperList",
+        "value": "[{\"CoverCD\":0,\"PGramNo\":0,\"ShopNo\":1,\"Sort\":-1,\"itemNo\":0,\"sort\":-1,\"PaperNo\":0,\"Name\":\"종이\",\"UseYN\":\"Y\"},{\"CoverCD\":0,\"PGramNo\":0,\"ShopNo\":1,\"PaperPNo\":0,\"Sort\":0,\"itemNo\":20000,\"sort\":0,\"itemPNo\":0,\"PaperNo\":20000,\"Name\":\"W2.0\",\"UseYN\":\"Y\"},{\"CoverCD\":0,\"ShopNo\":1,\"PaperPNo\":20000,\"Sort\":100,\"itemNo\":22929,\"sort\":100,\"itemPNo\":20000,\"PaperNo\":22929,\"Name\":\"아트지(무광코팅)\",\"UseYN\":\"Y\"},{\"CoverCD\":0,\"ShopNo\":1,\"PaperPNo\":20000,\"Sort\":100,\"itemNo\":22931,\"sort\":100,\"itemPNo\":20000,\"PaperNo\":22931,\"Name\":\"아트지(유광코팅)\",\"UseYN\":\"Y\"},{\"CoverCD\":0,\"ShopNo\":1,\"PaperPNo\":20000,\"Sort\":100,\"itemNo\":22926,\"sort\":100,\"itemPNo\":20000,\"PaperNo\":22926,\"Name\":\"아트지(무코팅)\",\"UseYN\":\"Y\"},{\"CoverCD\":0,\"PGramNo\":0,\"ShopNo\":1,\"PaperPNo\":20000,\"Sort\":100,\"itemNo\":21188,\"sort\":100,\"itemPNo\":20000,\"PaperNo\":21188,\"Name\":\"모조지\",\"UseYN\":\"Y\"},{\"CoverCD\":0,\"PGramNo\":0,\"ShopNo\":1,\"PaperPNo\":20000,\"Sort\":100,\"itemNo\":21199,\"sort\":100,\"itemPNo\":20000,\"PaperNo\":21199,\"Name\":\"크라프트지\",\"UseYN\":\"Y\"},{\"CoverCD\":0,\"PGramNo\":0,\"ShopNo\":1,\"PaperPNo\":20000,\"Sort\":100,\"itemNo\":21187,\"sort\":100,\"itemPNo\":20000,\"PaperNo\":21187,\"Name\":\"유포지\",\"UseYN\":\"Y\"},{\"CoverCD\":0,\"PGramNo\":80,\"ShopNo\":1,\"PaperPNo\":22931,\"Sort\":101,\"itemNo\":22932,\"sort\":101,\"itemPNo\":22931,\"PaperNo\":22932,\"Name\":\"80g\",\"UseYN\":\"Y\"},{\"CoverCD\":0,\"PGramNo\":80,\"ShopNo\":1,\"PaperPNo\":22929,\"Sort\":102,\"itemNo\":22930,\"sort\":102,\"itemPNo\":22929,\"PaperNo\":22930,\"Name\":\"80g\",\"UseYN\":\"Y\"},{\"CoverCD\":0,\"PGramNo\":80,\"ShopNo\":1,\"PaperPNo\":22926,\"Sort\":103,\"itemNo\":22927,\"sort\":103,\"itemPNo\":22926,\"PaperNo\":22927,\"Name\":\"80g\",\"UseYN\":\"Y\"},{\"CoverCD\":0,\"PGramNo\":80,\"ShopNo\":1,\"PaperPNo\":21187,\"Sort\":104,\"itemNo\":21205,\"sort\":104,\"itemPNo\":21187,\"PaperNo\":21205,\"Name\":\"80g\",\"UseYN\":\"Y\"},{\"CoverCD\":0,\"PGramNo\":80,\"ShopNo\":1,\"PaperPNo\":21188,\"Sort\":105,\"itemNo\":21206,\"sort\":105,\"itemPNo\":21188,\"PaperNo\":21206,\"Name\":\"80g\",\"UseYN\":\"Y\"},{\"CoverCD\":0,\"PGramNo\":57,\"ShopNo\":1,\"PaperPNo\":21199,\"Sort\":106,\"itemNo\":21216,\"sort\":106,\"itemPNo\":21199,\"PaperNo\":21216,\"Name\":\"57g\",\"UseYN\":\"Y\"}]"
+      },
+      {
+        "name": "prodOptCK",
+        "value": "[{\"CalcCD\":1,\"CkNo\":1,\"jobbno2name\":\"오시\",\"DspLoc\":0,\"Name\":\"오시\",\"CDT\":\"Jul 29, 2020 10:57:28 AM\",\"NameFull\":\"오시\",\"JobPageGetYN\":\"N\",\"JobSizeGetYN\":\"N\",\"JobQtyGetYN\":\"N\",\"Sort\":74,\"PaperNo\":-1,\"UseYN\":\"Y\",\"SizeNo\":-1,\"WeightMin\":150.0,\"JobNo2\":11341,\"JobPNo\":70,\"ProdNo\":-1,\"jobno2name\":\"오시\",\"WfYN\":\"Y\",\"DspMtd\":1,\"JobPageDspYN\":\"N\",\"OptCKCD\":2,\"ColorNo\":-1,\"JobBNo\":28000,\"WeightBaeSu\":1.0,\"JobBNo2\":11341,\"ShopNo\":1,\"JobNo\":28000,\"Acronyms\":\"AWK\"},{\"SizeNo\":-1,\"OptCKCD\":3,\"CDT\":\"Jul 29, 2020 10:57:28 AM\",\"ColorNo\":-1,\"ProdNo\":-1,\"JobBNo\":11352,\"JobBNo2\":31000,\"ShopNo\":1,\"JobNo\":-1,\"CkNo\":169,\"jobbno2name\":\"코팅\",\"PaperNo\":-1},{\"SizeNo\":-1,\"OptCKCD\":3,\"CDT\":\"Jul 29, 2020 10:57:28 AM\",\"ColorNo\":-1,\"ProdNo\":-1,\"JobBNo\":31000,\"JobBNo2\":11352,\"ShopNo\":1,\"JobNo\":-1,\"CkNo\":170,\"jobbno2name\":\"미싱\",\"PaperNo\":-1},{\"SizeNo\":-1,\"OptCKCD\":3,\"CDT\":\"Jul 29, 2020 10:57:28 AM\",\"ColorNo\":-1,\"ProdNo\":-1,\"JobBNo\":39000,\"JobBNo2\":42000,\"ShopNo\":1,\"JobNo\":-1,\"CkNo\":171,\"jobbno2name\":\"아일렛\",\"PaperNo\":-1},{\"SizeNo\":-1,\"OptCKCD\":3,\"CDT\":\"Jul 29, 2020 10:57:28 AM\",\"ColorNo\":-1,\"ProdNo\":-1,\"JobBNo\":39000,\"JobBNo2\":41000,\"ShopNo\":1,\"JobNo\":-1,\"CkNo\":172,\"jobbno2name\":\"테두리마감\",\"PaperNo\":-1},{\"SizeNo\":-1,\"OptCKCD\":3,\"CDT\":\"Jul 29, 2020 10:57:28 AM\",\"ColorNo\":-1,\"ProdNo\":-1,\"JobBNo\":41000,\"JobBNo2\":39000,\"ShopNo\":1,\"JobNo\":-1,\"CkNo\":173,\"jobbno2name\":\"나무+로프\",\"PaperNo\":-1},{\"SizeNo\":-1,\"OptCKCD\":3,\"CDT\":\"Jul 29, 2020 10:57:28 AM\",\"ColorNo\":-1,\"ProdNo\":-1,\"JobBNo\":42000,\"JobBNo2\":39000,\"ShopNo\":1,\"JobNo\":-1,\"CkNo\":174,\"jobbno2name\":\"나무+로프\",\"PaperNo\":-1},{\"SizeNo\":-1,\"Msg\":\"UV인쇄는 지질평량 150g 이상부터 가능합니다.\\u003cbr/\\u003e 표지,내지,간지의 지질평량을 확인바랍니다.\",\"OptCKCD\":6,\"CDT\":\"Jul 29, 2020 10:57:28 AM\",\"WeightMin\":150.0,\"ColorNo\":-1,\"ProdNo\":-1,\"JobBNo\":-1,\"ShopNo\":1,\"JobNo\":3230,\"CkNo\":1608,\"PaperNo\":-1},{\"SizeNo\":-1,\"OptCKCD\":3,\"CDT\":\"Jul 29, 2020 10:57:28 AM\",\"ColorNo\":-1,\"ProdNo\":-1,\"JobBNo\":42000,\"JobBNo2\":11392,\"ShopNo\":1,\"JobNo\":-1,\"CkNo\":2018,\"jobbno2name\":\"줄미싱\",\"PaperNo\":-1},{\"SizeNo\":-1,\"OptCKCD\":3,\"CDT\":\"Jul 29, 2020 10:57:28 AM\",\"ColorNo\":-1,\"ProdNo\":-1,\"JobBNo\":11392,\"JobBNo2\":42000,\"ShopNo\":1,\"JobNo\":-1,\"CkNo\":2019,\"jobbno2name\":\"아일렛\",\"PaperNo\":-1},{\"Cost1\":\"인쇄비\",\"CalcCD\":1,\"CkNo\":2348,\"DspLoc\":0,\"Name\":\"옵셋인쇄\",\"PJoin\":0,\"CDT\":\"Jul 21, 2025 9:14:30 AM\",\"NameFull\":\"합판옵셋인쇄\",\"JobPageGetYN\":\"N\",\"JobSizeGetYN\":\"N\",\"Sort\":60,\"PaperNo\":21216,\"UseYN\":\"Y\",\"SizeNo\":-1,\"UDT\":\"Jul 21, 2025 9:16:48 AM\",\"JobNo2\":3110,\"JobPNo\":3100,\"ProdNo\":40611,\"QUnit\":5,\"jobno2name\":\"합판옵셋인쇄\",\"WfYN\":\"Y\",\"DspMtd\":1,\"JobPageDspYN\":\"N\",\"OptCKCD\":5,\"PressM\":\"O\",\"ColorNo\":1355,\"WeightBaeSu\":1.0,\"NameEN\":\"Press OffSet\",\"ShopNo\":1,\"JobNo\":-1,\"Acronyms\":\"PRS\"},{\"SizeNo\":-1,\"OptCKCD\":0,\"CDT\":\"Oct 17, 2025 9:57:00 AM\",\"UDT\":\"Oct 17, 2025 9:57:04 AM\",\"ColorNo\":-1,\"ProdNo\":40611,\"JobBNo2\":36000,\"ShopNo\":1,\"JobNo\":-1,\"CkNo\":2376,\"jobbno2name\":\"칼선\",\"PaperNo\":-1}]"
+      },
+      {
+        "name": "awkMapJson",
+        "value": "{\"pdata_00_awk36000\":\"[{\\\"CoverCD\\\":0,\\\"NameFull\\\":\\\"칼선\\\",\\\"JobPNo\\\":70,\\\"JobBNo\\\":36000,\\\"AutoClsAD\\\":\\\"Y\\\",\\\"ShopNo\\\":1,\\\"JobNo\\\":36000,\\\"itemNo\\\":36000,\\\"BName\\\":\\\"칼선\\\",\\\"itemPNo\\\":70,\\\"Name\\\":\\\"칼선\\\"},{\\\"CoverCD\\\":0,\\\"NameFull\\\":\\\"칼선 단순\\\",\\\"JobPNo\\\":36000,\\\"JobBNo\\\":36000,\\\"AutoClsAD\\\":\\\"Y\\\",\\\"ShopNo\\\":1,\\\"JobNo\\\":36100,\\\"itemNo\\\":36100,\\\"BName\\\":\\\"칼선\\\",\\\"itemPNo\\\":36000,\\\"Name\\\":\\\"단순\\\"},{\\\"CoverCD\\\":0,\\\"NameFull\\\":\\\"칼선 단순 1개\\\",\\\"JobPNo\\\":36100,\\\"JobBNo\\\":36000,\\\"AutoClsAD\\\":\\\"D\\\",\\\"ShopNo\\\":1,\\\"JobNo\\\":36101,\\\"itemNo\\\":36101,\\\"BName\\\":\\\"칼선\\\",\\\"itemPNo\\\":36100,\\\"Name\\\":\\\"1개\\\"},{\\\"CoverCD\\\":0,\\\"NameFull\\\":\\\"칼선 단순 2개\\\",\\\"JobPNo\\\":36100,\\\"JobBNo\\\":36000,\\\"AutoClsAD\\\":\\\"D\\\",\\\"ShopNo\\\":1,\\\"JobNo\\\":36102,\\\"itemNo\\\":36102,\\\"BName\\\":\\\"칼선\\\",\\\"itemPNo\\\":36100,\\\"Name\\\":\\\"2개\\\"},{\\\"CoverCD\\\":0,\\\"NameFull\\\":\\\"칼선 단순 3개\\\",\\\"JobPNo\\\":36100,\\\"JobBNo\\\":36000,\\\"AutoClsAD\\\":\\\"D\\\",\\\"ShopNo\\\":1,\\\"JobNo\\\":36103,\\\"itemNo\\\":36103,\\\"BName\\\":\\\"칼선\\\",\\\"itemPNo\\\":36100,\\\"Name\\\":\\\"3개\\\"},{\\\"CoverCD\\\":0,\\\"NameFull\\\":\\\"칼선 단순 4개\\\",\\\"JobPNo\\\":36100,\\\"JobBNo\\\":36000,\\\"AutoClsAD\\\":\\\"D\\\",\\\"ShopNo\\\":1,\\\"JobNo\\\":36104,\\\"itemNo\\\":36104,\\\"BName\\\":\\\"칼선\\\",\\\"itemPNo\\\":36100,\\\"Name\\\":\\\"4개\\\"},{\\\"CoverCD\\\":0,\\\"NameFull\\\":\\\"칼선 단순 5개\\\",\\\"JobPNo\\\":36100,\\\"JobBNo\\\":36000,\\\"AutoClsAD\\\":\\\"D\\\",\\\"ShopNo\\\":1,\\\"JobNo\\\":36105,\\\"itemNo\\\":36105,\\\"BName\\\":\\\"칼선\\\",\\\"itemPNo\\\":36100,\\\"Name\\\":\\\"5개\\\"},{\\\"CoverCD\\\":0,\\\"NameFull\\\":\\\"칼선 단순 6개\\\",\\\"JobPNo\\\":36100,\\\"JobBNo\\\":36000,\\\"AutoClsAD\\\":\\\"D\\\",\\\"ShopNo\\\":1,\\\"JobNo\\\":36106,\\\"itemNo\\\":36106,\\\"BName\\\":\\\"칼선\\\",\\\"itemPNo\\\":36100,\\\"Name\\\":\\\"6개\\\"},{\\\"CoverCD\\\":0,\\\"NameFull\\\":\\\"칼선 단순 7개\\\",\\\"JobPNo\\\":36100,\\\"JobBNo\\\":36000,\\\"AutoClsAD\\\":\\\"D\\\",\\\"ShopNo\\\":1,\\\"JobNo\\\":36107,\\\"itemNo\\\":36107,\\\"BName\\\":\\\"칼선\\\",\\\"itemPNo\\\":36100,\\\"Name\\\":\\\"7개\\\"},{\\\"CoverCD\\\":0,\\\"NameFull\\\":\\\"칼선 단순 8개\\\",\\\"JobPNo\\\":36100,\\\"JobBNo\\\":36000,\\\"AutoClsAD\\\":\\\"D\\\",\\\"ShopNo\\\":1,\\\"JobNo\\\":36108,\\\"itemNo\\\":36108,\\\"BName\\\":\\\"칼선\\\",\\\"itemPNo\\\":36100,\\\"Name\\\":\\\"8개\\\"},{\\\"CoverCD\\\":0,\\\"NameFull\\\":\\\"칼선 단순 9개\\\",\\\"JobPNo\\\":36100,\\\"JobBNo\\\":36000,\\\"AutoClsAD\\\":\\\"D\\\",\\\"ShopNo\\\":1,\\\"JobNo\\\":36109,\\\"itemNo\\\":36109,\\\"BName\\\":\\\"칼선\\\",\\\"itemPNo\\\":36100,\\\"Name\\\":\\\"9개\\\"},{\\\"CoverCD\\\":0,\\\"NameFull\\\":\\\"칼선 단순 10개\\\",\\\"JobPNo\\\":36100,\\\"JobBNo\\\":36000,\\\"AutoClsAD\\\":\\\"D\\\",\\\"ShopNo\\\":1,\\\"JobNo\\\":36110,\\\"itemNo\\\":36110,\\\"BName\\\":\\\"칼선\\\",\\\"itemPNo\\\":36100,\\\"Name\\\":\\\"10개\\\"},{\\\"CoverCD\\\":0,\\\"NameFull\\\":\\\"칼선 단순 11개\\\",\\\"JobPNo\\\":36100,\\\"JobBNo\\\":36000,\\\"AutoClsAD\\\":\\\"D\\\",\\\"ShopNo\\\":1,\\\"JobNo\\\":36111,\\\"itemNo\\\":36111,\\\"BName\\\":\\\"칼선\\\",\\\"itemPNo\\\":36100,\\\"Name\\\":\\\"11개\\\"},{\\\"CoverCD\\\":0,\\\"NameFull\\\":\\\"칼선 단순 12개\\\",\\\"JobPNo\\\":36100,\\\"JobBNo\\\":36000,\\\"AutoClsAD\\\":\\\"D\\\",\\\"ShopNo\\\":1,\\\"JobNo\\\":36112,\\\"itemNo\\\":36112,\\\"BName\\\":\\\"칼선\\\",\\\"itemPNo\\\":36100,\\\"Name\\\":\\\"12개\\\"},{\\\"CoverCD\\\":0,\\\"NameFull\\\":\\\"칼선 단순 13개\\\",\\\"JobPNo\\\":36100,\\\"JobBNo\\\":36000,\\\"AutoClsAD\\\":\\\"D\\\",\\\"ShopNo\\\":1,\\\"JobNo\\\":36113,\\\"itemNo\\\":36113,\\\"BName\\\":\\\"칼선\\\",\\\"itemPNo\\\":36100,\\\"Name\\\":\\\"13개\\\"},{\\\"CoverCD\\\":0,\\\"NameFull\\\":\\\"칼선 단순 14개\\\",\\\"JobPNo\\\":36100,\\\"JobBNo\\\":36000,\\\"AutoClsAD\\\":\\\"D\\\",\\\"ShopNo\\\":1,\\\"JobNo\\\":36114,\\\"itemNo\\\":36114,\\\"BName\\\":\\\"칼선\\\",\\\"itemPNo\\\":36100,\\\"Name\\\":\\\"14개\\\"},{\\\"CoverCD\\\":0,\\\"NameFull\\\":\\\"칼선 단순 15개\\\",\\\"JobPNo\\\":36100,\\\"JobBNo\\\":36000,\\\"AutoClsAD\\\":\\\"D\\\",\\\"ShopNo\\\":1,\\\"JobNo\\\":36115,\\\"itemNo\\\":36115,\\\"BName\\\":\\\"칼선\\\",\\\"itemPNo\\\":36100,\\\"Name\\\":\\\"15개\\\"},{\\\"CoverCD\\\":0,\\\"NameFull\\\":\\\"칼선 단순 16개\\\",\\\"JobPNo\\\":36100,\\\"JobBNo\\\":36000,\\\"AutoClsAD\\\":\\\"D\\\",\\\"ShopNo\\\":1,\\\"JobNo\\\":36116,\\\"itemNo\\\":36116,\\\"BName\\\":\\\"칼선\\\",\\\"itemPNo\\\":36100,\\\"Name\\\":\\\"16개\\\"},{\\\"CoverCD\\\":0,\\\"NameFull\\\":\\\"칼선 단순 17개\\\",\\\"JobPNo\\\":36100,\\\"JobBNo\\\":36000,\\\"AutoClsAD\\\":\\\"D\\\",\\\"ShopNo\\\":1,\\\"JobNo\\\":36117,\\\"itemNo\\\":36117,\\\"BName\\\":\\\"칼선\\\",\\\"itemPNo\\\":36100,\\\"Name\\\":\\\"17개\\\"},{\\\"CoverCD\\\":0,\\\"NameFull\\\":\\\"칼선 단순 18개\\\",\\\"JobPNo\\\":36100,\\\"JobBNo\\\":36000,\\\"AutoClsAD\\\":\\\"D\\\",\\\"ShopNo\\\":1,\\\"JobNo\\\":36118,\\\"itemNo\\\":36118,\\\"BName\\\":\\\"칼선\\\",\\\"itemPNo\\\":36100,\\\"Name\\\":\\\"18개\\\"},{\\\"CoverCD\\\":0,\\\"NameFull\\\":\\\"칼선 단순 19개\\\",\\\"JobPNo\\\":36100,\\\"JobBNo\\\":36000,\\\"AutoClsAD\\\":\\\"D\\\",\\\"ShopNo\\\":1,\\\"JobNo\\\":36119,\\\"itemNo\\\":36119,\\\"BName\\\":\\\"칼선\\\",\\\"itemPNo\\\":36100,\\\"Name\\\":\\\"19개\\\"},{\\\"CoverCD\\\":0,\\\"NameFull\\\":\\\"칼선 단순 20개\\\",\\\"JobPNo\\\":36100,\\\"JobBNo\\\":36000,\\\"AutoClsAD\\\":\\\"D\\\",\\\"ShopNo\\\":1,\\\"JobNo\\\":36120,\\\"itemNo\\\":36120,\\\"BName\\\":\\\"칼선\\\",\\\"itemPNo\\\":36100,\\\"Name\\\":\\\"20개\\\"},{\\\"CoverCD\\\":0,\\\"NameFull\\\":\\\"칼선 단순 21개\\\",\\\"JobPNo\\\":36100,\\\"JobBNo\\\":36000,\\\"AutoClsAD\\\":\\\"D\\\",\\\"ShopNo\\\":1,\\\"JobNo\\\":11440,\\\"itemNo\\\":11440,\\\"BName\\\":\\\"칼선\\\",\\\"itemPNo\\\":36100,\\\"Name\\\":\\\"21개\\\"},{\\\"CoverCD\\\":0,\\\"NameFull\\\":\\\"칼선 단순 22개\\\",\\\"JobPNo\\\":36100,\\\"JobBNo\\\":36000,\\\"AutoClsAD\\\":\\\"D\\\",\\\"ShopNo\\\":1,\\\"JobNo\\\":11437,\\\"itemNo\\\":11437,\\\"BName\\\":\\\"칼선\\\",\\\"itemPNo\\\":36100,\\\"Name\\\":\\\"22개\\\"},{\\\"CoverCD\\\":0,\\\"NameFull\\\":\\\"칼선 단순 23개\\\",\\\"JobPNo\\\":36100,\\\"JobBNo\\\":36000,\\\"AutoClsAD\\\":\\\"D\\\",\\\"ShopNo\\\":1,\\\"JobNo\\\":11438,\\\"itemNo\\\":11438,\\\"BName\\\":\\\"칼선\\\",\\\"itemPNo\\\":36100,\\\"Name\\\":\\\"23개\\\"},{\\\"CoverCD\\\":0,\\\"NameFull\\\":\\\"칼선 단순 24개\\\",\\\"JobPNo\\\":36100,\\\"JobBNo\\\":36000,\\\"AutoClsAD\\\":\\\"D\\\",\\\"ShopNo\\\":1,\\\"JobNo\\\":11439,\\\"itemNo\\\":11439,\\\"BName\\\":\\\"칼선\\\",\\\"itemPNo\\\":36100,\\\"Name\\\":\\\"24개\\\"},{\\\"CoverCD\\\":0,\\\"NameFull\\\":\\\"칼선 단순 25개\\\",\\\"JobPNo\\\":36100,\\\"JobBNo\\\":36000,\\\"AutoClsAD\\\":\\\"D\\\",\\\"ShopNo\\\":1,\\\"JobNo\\\":11436,\\\"itemNo\\\":11436,\\\"BName\\\":\\\"칼선\\\",\\\"itemPNo\\\":36100,\\\"Name\\\":\\\"25개\\\"},{\\\"CoverCD\\\":0,\\\"NameFull\\\":\\\"칼선 단순 26개\\\",\\\"JobPNo\\\":36100,\\\"JobBNo\\\":36000,\\\"AutoClsAD\\\":\\\"D\\\",\\\"ShopNo\\\":1,\\\"JobNo\\\":11435,\\\"itemNo\\\":11435,\\\"BName\\\":\\\"칼선\\\",\\\"itemPNo\\\":36100,\\\"Name\\\":\\\"26개\\\"},{\\\"CoverCD\\\":0,\\\"NameFull\\\":\\\"칼선 단순 27개\\\",\\\"JobPNo\\\":36100,\\\"JobBNo\\\":36000,\\\"AutoClsAD\\\":\\\"D\\\",\\\"ShopNo\\\":1,\\\"JobNo\\\":11431,\\\"itemNo\\\":11431,\\\"BName\\\":\\\"칼선\\\",\\\"itemPNo\\\":36100,\\\"Name\\\":\\\"27개\\\"},{\\\"CoverCD\\\":0,\\\"NameFull\\\":\\\"칼선 단순 28개\\\",\\\"JobPNo\\\":36100,\\\"JobBNo\\\":36000,\\\"AutoClsAD\\\":\\\"D\\\",\\\"ShopNo\\\":1,\\\"JobNo\\\":11432,\\\"itemNo\\\":11432,\\\"BName\\\":\\\"칼선\\\",\\\"itemPNo\\\":36100,\\\"Name\\\":\\\"28개\\\"},{\\\"CoverCD\\\":0,\\\"NameFull\\\":\\\"칼선 단순 29개\\\",\\\"JobPNo\\\":36100,\\\"JobBNo\\\":36000,\\\"AutoClsAD\\\":\\\"D\\\",\\\"ShopNo\\\":1,\\\"JobNo\\\":11433,\\\"itemNo\\\":11433,\\\"BName\\\":\\\"칼선\\\",\\\"itemPNo\\\":36100,\\\"Name\\\":\\\"29개\\\"},{\\\"CoverCD\\\":0,\\\"NameFull\\\":\\\"칼선 단순 30개\\\",\\\"JobPNo\\\":36100,\\\"JobBNo\\\":36000,\\\"AutoClsAD\\\":\\\"D\\\",\\\"ShopNo\\\":1,\\\"JobNo\\\":11434,\\\"itemNo\\\":11434,\\\"BName\\\":\\\"칼선\\\",\\\"itemPNo\\\":36100,\\\"Name\\\":\\\"30개\\\"}]\"}"
+      },
+      {
+        "name": "",
+        "value": "N"
+      },
+      {
+        "name": "",
+        "value": "N"
+      },
+      {
+        "name": "",
+        "value": ""
+      },
+      {
+        "name": "",
+        "value": ""
+      },
+      {
+        "name": "",
+        "value": ""
+      },
+      {
+        "name": "",
+        "value": ""
+      },
+      {
+        "name": "",
+        "value": ""
+      },
+      {
+        "name": "",
+        "value": "띠지스티커(도무송)"
+      },
+      {
+        "name": "",
+        "value": "40613"
+      },
+      {
+        "name": "ordMethod",
+        "value": "fileupload"
+      },
+      {
+        "name": "SizeNo",
+        "value": "10773"
+      },
+      {
+        "name": "CoverCD",
+        "value": "0"
+      },
+      {
+        "name": "SizePNo",
+        "value": "10763"
+      },
+      {
+        "name": "CalcCD",
+        "value": "8"
+      },
+      {
+        "name": "WSize",
+        "value": "200.0"
+      },
+      {
+        "name": "itemNo",
+        "value": "10773"
+      },
+      {
+        "name": "L",
+        "value": "0"
+      },
+      {
+        "name": "Name",
+        "value": "비규격"
+      },
+      {
+        "name": "HSize",
+        "value": "30.0"
+      },
+      {
+        "name": "ShopNo",
+        "value": "1"
+      },
+      {
+        "name": "Sort",
+        "value": "100"
+      },
+      {
+        "name": "itemPNo",
+        "value": "10763"
+      },
+      {
+        "name": "UseYN",
+        "value": "Y"
+      },
+      {
+        "name": "SizeNo",
+        "value": "10771"
+      },
+      {
+        "name": "CoverCD",
+        "value": "0"
+      },
+      {
+        "name": "HSize",
+        "value": "30.0"
+      },
+      {
+        "name": "ShopNo",
+        "value": "1"
+      },
+      {
+        "name": "SizePNo",
+        "value": "10763"
+      },
+      {
+        "name": "Sort",
+        "value": "101"
+      },
+      {
+        "name": "WSize",
+        "value": "200.0"
+      },
+      {
+        "name": "itemNo",
+        "value": "10771"
+      },
+      {
+        "name": "itemPNo",
+        "value": "10763"
+      },
+      {
+        "name": "L",
+        "value": "0"
+      },
+      {
+        "name": "Name",
+        "value": "원형200x30"
+      },
+      {
+        "name": "UseYN",
+        "value": "Y"
+      },
+      {
+        "name": "SizeNo",
+        "value": "10772"
+      },
+      {
+        "name": "CoverCD",
+        "value": "0"
+      },
+      {
+        "name": "HSize",
+        "value": "30.0"
+      },
+      {
+        "name": "ShopNo",
+        "value": "1"
+      },
+      {
+        "name": "SizePNo",
+        "value": "10763"
+      },
+      {
+        "name": "Sort",
+        "value": "102"
+      },
+      {
+        "name": "WSize",
+        "value": "300.0"
+      },
+      {
+        "name": "itemNo",
+        "value": "10772"
+      },
+      {
+        "name": "itemPNo",
+        "value": "10763"
+      },
+      {
+        "name": "L",
+        "value": "0"
+      },
+      {
+        "name": "Name",
+        "value": "원형300x30"
+      },
+      {
+        "name": "UseYN",
+        "value": "Y"
+      },
+      {
+        "name": "SizeNo",
+        "value": "10769"
+      },
+      {
+        "name": "CoverCD",
+        "value": "0"
+      },
+      {
+        "name": "HSize",
+        "value": "30.0"
+      },
+      {
+        "name": "ShopNo",
+        "value": "1"
+      },
+      {
+        "name": "SizePNo",
+        "value": "10763"
+      },
+      {
+        "name": "Sort",
+        "value": "103"
+      },
+      {
+        "name": "WSize",
+        "value": "400.0"
+      },
+      {
+        "name": "itemNo",
+        "value": "10769"
+      },
+      {
+        "name": "itemPNo",
+        "value": "10763"
+      },
+      {
+        "name": "L",
+        "value": "0"
+      },
+      {
+        "name": "Name",
+        "value": "원형400x30"
+      },
+      {
+        "name": "UseYN",
+        "value": "Y"
+      },
+      {
+        "name": "SizeNo",
+        "value": "10770"
+      },
+      {
+        "name": "CoverCD",
+        "value": "0"
+      },
+      {
+        "name": "HSize",
+        "value": "30.0"
+      },
+      {
+        "name": "ShopNo",
+        "value": "1"
+      },
+      {
+        "name": "SizePNo",
+        "value": "10763"
+      },
+      {
+        "name": "Sort",
+        "value": "201"
+      },
+      {
+        "name": "WSize",
+        "value": "200.0"
+      },
+      {
+        "name": "itemNo",
+        "value": "10770"
+      },
+      {
+        "name": "itemPNo",
+        "value": "10763"
+      },
+      {
+        "name": "L",
+        "value": "0"
+      },
+      {
+        "name": "Name",
+        "value": "타원200x30"
+      },
+      {
+        "name": "UseYN",
+        "value": "Y"
+      },
+      {
+        "name": "SizeNo",
+        "value": "10767"
+      },
+      {
+        "name": "CoverCD",
+        "value": "0"
+      },
+      {
+        "name": "HSize",
+        "value": "30.0"
+      },
+      {
+        "name": "ShopNo",
+        "value": "1"
+      },
+      {
+        "name": "SizePNo",
+        "value": "10763"
+      },
+      {
+        "name": "Sort",
+        "value": "202"
+      },
+      {
+        "name": "WSize",
+        "value": "300.0"
+      },
+      {
+        "name": "itemNo",
+        "value": "10767"
+      },
+      {
+        "name": "itemPNo",
+        "value": "10763"
+      },
+      {
+        "name": "L",
+        "value": "0"
+      },
+      {
+        "name": "Name",
+        "value": "타원300x30"
+      },
+      {
+        "name": "UseYN",
+        "value": "Y"
+      },
+      {
+        "name": "SizeNo",
+        "value": "10768"
+      },
+      {
+        "name": "CoverCD",
+        "value": "0"
+      },
+      {
+        "name": "HSize",
+        "value": "30.0"
+      },
+      {
+        "name": "ShopNo",
+        "value": "1"
+      },
+      {
+        "name": "SizePNo",
+        "value": "10763"
+      },
+      {
+        "name": "Sort",
+        "value": "203"
+      },
+      {
+        "name": "WSize",
+        "value": "400.0"
+      },
+      {
+        "name": "itemNo",
+        "value": "10768"
+      },
+      {
+        "name": "itemPNo",
+        "value": "10763"
+      },
+      {
+        "name": "L",
+        "value": "0"
+      },
+      {
+        "name": "Name",
+        "value": "타원400x30"
+      },
+      {
+        "name": "UseYN",
+        "value": "Y"
+      },
+      {
+        "name": "SizeNo",
+        "value": "10766"
+      },
+      {
+        "name": "CoverCD",
+        "value": "0"
+      },
+      {
+        "name": "HSize",
+        "value": "50.0"
+      },
+      {
+        "name": "ShopNo",
+        "value": "1"
+      },
+      {
+        "name": "SizePNo",
+        "value": "10763"
+      },
+      {
+        "name": "Sort",
+        "value": "301"
+      },
+      {
+        "name": "WSize",
+        "value": "200.0"
+      },
+      {
+        "name": "itemNo",
+        "value": "10766"
+      },
+      {
+        "name": "itemPNo",
+        "value": "10763"
+      },
+      {
+        "name": "L",
+        "value": "0"
+      },
+      {
+        "name": "Name",
+        "value": "팔각200x50"
+      },
+      {
+        "name": "UseYN",
+        "value": "Y"
+      },
+      {
+        "name": "SizeNo",
+        "value": "10765"
+      },
+      {
+        "name": "CoverCD",
+        "value": "0"
+      },
+      {
+        "name": "HSize",
+        "value": "50.0"
+      },
+      {
+        "name": "ShopNo",
+        "value": "1"
+      },
+      {
+        "name": "SizePNo",
+        "value": "10763"
+      },
+      {
+        "name": "Sort",
+        "value": "302"
+      },
+      {
+        "name": "WSize",
+        "value": "300.0"
+      },
+      {
+        "name": "itemNo",
+        "value": "10765"
+      },
+      {
+        "name": "itemPNo",
+        "value": "10763"
+      },
+      {
+        "name": "L",
+        "value": "0"
+      },
+      {
+        "name": "Name",
+        "value": "팔각300x50"
+      },
+      {
+        "name": "UseYN",
+        "value": "Y"
+      },
+      {
+        "name": "SizeNo",
+        "value": "10764"
+      },
+      {
+        "name": "CoverCD",
+        "value": "0"
+      },
+      {
+        "name": "HSize",
+        "value": "50.0"
+      },
+      {
+        "name": "ShopNo",
+        "value": "1"
+      },
+      {
+        "name": "SizePNo",
+        "value": "10763"
+      },
+      {
+        "name": "Sort",
+        "value": "303"
+      },
+      {
+        "name": "WSize",
+        "value": "400.0"
+      },
+      {
+        "name": "itemNo",
+        "value": "10764"
+      },
+      {
+        "name": "itemPNo",
+        "value": "10763"
+      },
+      {
+        "name": "L",
+        "value": "0"
+      },
+      {
+        "name": "Name",
+        "value": "팔각400x50"
+      },
+      {
+        "name": "UseYN",
+        "value": "Y"
+      },
+      {
+        "name": "SizeNo",
+        "value": "10782"
+      },
+      {
+        "name": "CoverCD",
+        "value": "0"
+      },
+      {
+        "name": "SizePNo",
+        "value": "10763"
+      },
+      {
+        "name": "CalcCD",
+        "value": "8"
+      },
+      {
+        "name": "WSize",
+        "value": "200.0"
+      },
+      {
+        "name": "itemNo",
+        "value": "10782"
+      },
+      {
+        "name": "L",
+        "value": "0"
+      },
+      {
+        "name": "Name",
+        "value": "비규격(균등)"
+      },
+      {
+        "name": "HSize",
+        "value": "30.0"
+      },
+      {
+        "name": "ShopNo",
+        "value": "1"
+      },
+      {
+        "name": "Sort",
+        "value": "400"
+      },
+      {
+        "name": "itemPNo",
+        "value": "10763"
+      },
+      {
+        "name": "UseYN",
+        "value": "Y"
+      },
+      {
+        "name": "SizeNo",
+        "value": "10783"
+      },
+      {
+        "name": "CoverCD",
+        "value": "0"
+      },
+      {
+        "name": "HSize",
+        "value": "30.0"
+      },
+      {
+        "name": "ShopNo",
+        "value": "1"
+      },
+      {
+        "name": "SizePNo",
+        "value": "10763"
+      },
+      {
+        "name": "Sort",
+        "value": "401"
+      },
+      {
+        "name": "WSize",
+        "value": "200.0"
+      },
+      {
+        "name": "itemNo",
+        "value": "10783"
+      },
+      {
+        "name": "itemPNo",
+        "value": "10763"
+      },
+      {
+        "name": "L",
+        "value": "0"
+      },
+      {
+        "name": "Name",
+        "value": "원형200x30(균등)"
+      },
+      {
+        "name": "UseYN",
+        "value": "Y"
+      },
+      {
+        "name": "SizeNo",
+        "value": "10780"
+      },
+      {
+        "name": "CoverCD",
+        "value": "0"
+      },
+      {
+        "name": "HSize",
+        "value": "30.0"
+      },
+      {
+        "name": "ShopNo",
+        "value": "1"
+      },
+      {
+        "name": "SizePNo",
+        "value": "10763"
+      },
+      {
+        "name": "Sort",
+        "value": "402"
+      },
+      {
+        "name": "WSize",
+        "value": "300.0"
+      },
+      {
+        "name": "itemNo",
+        "value": "10780"
+      },
+      {
+        "name": "itemPNo",
+        "value": "10763"
+      },
+      {
+        "name": "L",
+        "value": "0"
+      },
+      {
+        "name": "Name",
+        "value": "원형300x30(균등)"
+      },
+      {
+        "name": "UseYN",
+        "value": "Y"
+      },
+      {
+        "name": "SizeNo",
+        "value": "10781"
+      },
+      {
+        "name": "CoverCD",
+        "value": "0"
+      },
+      {
+        "name": "HSize",
+        "value": "30.0"
+      },
+      {
+        "name": "ShopNo",
+        "value": "1"
+      },
+      {
+        "name": "SizePNo",
+        "value": "10763"
+      },
+      {
+        "name": "Sort",
+        "value": "403"
+      },
+      {
+        "name": "WSize",
+        "value": "400.0"
+      },
+      {
+        "name": "itemNo",
+        "value": "10781"
+      },
+      {
+        "name": "itemPNo",
+        "value": "10763"
+      },
+      {
+        "name": "L",
+        "value": "0"
+      },
+      {
+        "name": "Name",
+        "value": "원형400x30(균등)"
+      },
+      {
+        "name": "UseYN",
+        "value": "Y"
+      },
+      {
+        "name": "SizeNo",
+        "value": "10777"
+      },
+      {
+        "name": "CoverCD",
+        "value": "0"
+      },
+      {
+        "name": "HSize",
+        "value": "30.0"
+      },
+      {
+        "name": "ShopNo",
+        "value": "1"
+      },
+      {
+        "name": "SizePNo",
+        "value": "10763"
+      },
+      {
+        "name": "Sort",
+        "value": "501"
+      },
+      {
+        "name": "WSize",
+        "value": "200.0"
+      },
+      {
+        "name": "itemNo",
+        "value": "10777"
+      },
+      {
+        "name": "itemPNo",
+        "value": "10763"
+      },
+      {
+        "name": "L",
+        "value": "0"
+      },
+      {
+        "name": "Name",
+        "value": "타원200x30(균등)"
+      },
+      {
+        "name": "UseYN",
+        "value": "Y"
+      },
+      {
+        "name": "SizeNo",
+        "value": "10778"
+      },
+      {
+        "name": "CoverCD",
+        "value": "0"
+      },
+      {
+        "name": "HSize",
+        "value": "30.0"
+      },
+      {
+        "name": "ShopNo",
+        "value": "1"
+      },
+      {
+        "name": "SizePNo",
+        "value": "10763"
+      },
+      {
+        "name": "Sort",
+        "value": "502"
+      },
+      {
+        "name": "WSize",
+        "value": "300.0"
+      },
+      {
+        "name": "itemNo",
+        "value": "10778"
+      },
+      {
+        "name": "itemPNo",
+        "value": "10763"
+      },
+      {
+        "name": "L",
+        "value": "0"
+      },
+      {
+        "name": "Name",
+        "value": "타원300x30(균등)"
+      },
+      {
+        "name": "UseYN",
+        "value": "Y"
+      },
+      {
+        "name": "SizeNo",
+        "value": "10779"
+      },
+      {
+        "name": "CoverCD",
+        "value": "0"
+      },
+      {
+        "name": "HSize",
+        "value": "30.0"
+      },
+      {
+        "name": "ShopNo",
+        "value": "1"
+      },
+      {
+        "name": "SizePNo",
+        "value": "10763"
+      },
+      {
+        "name": "Sort",
+        "value": "503"
+      },
+      {
+        "name": "WSize",
+        "value": "400.0"
+      },
+      {
+        "name": "itemNo",
+        "value": "10779"
+      },
+      {
+        "name": "itemPNo",
+        "value": "10763"
+      },
+      {
+        "name": "L",
+        "value": "0"
+      },
+      {
+        "name": "Name",
+        "value": "타원400x30(균등)"
+      },
+      {
+        "name": "UseYN",
+        "value": "Y"
+      },
+      {
+        "name": "SizeNo",
+        "value": "10776"
+      },
+      {
+        "name": "CoverCD",
+        "value": "0"
+      },
+      {
+        "name": "HSize",
+        "value": "50.0"
+      },
+      {
+        "name": "ShopNo",
+        "value": "1"
+      },
+      {
+        "name": "SizePNo",
+        "value": "10763"
+      },
+      {
+        "name": "Sort",
+        "value": "601"
+      },
+      {
+        "name": "WSize",
+        "value": "200.0"
+      },
+      {
+        "name": "itemNo",
+        "value": "10776"
+      },
+      {
+        "name": "itemPNo",
+        "value": "10763"
+      },
+      {
+        "name": "L",
+        "value": "0"
+      },
+      {
+        "name": "Name",
+        "value": "팔각200x50(균등)"
+      },
+      {
+        "name": "UseYN",
+        "value": "Y"
+      },
+      {
+        "name": "SizeNo",
+        "value": "10775"
+      },
+      {
+        "name": "CoverCD",
+        "value": "0"
+      },
+      {
+        "name": "HSize",
+        "value": "50.0"
+      },
+      {
+        "name": "ShopNo",
+        "value": "1"
+      },
+      {
+        "name": "SizePNo",
+        "value": "10763"
+      },
+      {
+        "name": "Sort",
+        "value": "602"
+      },
+      {
+        "name": "WSize",
+        "value": "300.0"
+      },
+      {
+        "name": "itemNo",
+        "value": "10775"
+      },
+      {
+        "name": "itemPNo",
+        "value": "10763"
+      },
+      {
+        "name": "L",
+        "value": "0"
+      },
+      {
+        "name": "Name",
+        "value": "팔각300x50(균등)"
+      },
+      {
+        "name": "UseYN",
+        "value": "Y"
+      },
+      {
+        "name": "SizeNo",
+        "value": "10774"
+      },
+      {
+        "name": "CoverCD",
+        "value": "0"
+      },
+      {
+        "name": "HSize",
+        "value": "50.0"
+      },
+      {
+        "name": "ShopNo",
+        "value": "1"
+      },
+      {
+        "name": "SizePNo",
+        "value": "10763"
+      },
+      {
+        "name": "Sort",
+        "value": "603"
+      },
+      {
+        "name": "WSize",
+        "value": "400.0"
+      },
+      {
+        "name": "itemNo",
+        "value": "10774"
+      },
+      {
+        "name": "itemPNo",
+        "value": "10763"
+      },
+      {
+        "name": "L",
+        "value": "0"
+      },
+      {
+        "name": "Name",
+        "value": "팔각400x50(균등)"
+      },
+      {
+        "name": "UseYN",
+        "value": "Y"
+      },
+      {
+        "name": "",
+        "value": "hdata_00_size"
+      },
+      {
+        "name": "",
+        "value": "10773"
+      },
+      {
+        "name": "",
+        "value": "1"
+      },
+      {
+        "name": "",
+        "value": ""
+      },
+      {
+        "name": "",
+        "value": "N"
+      },
+      {
+        "name": "nostd",
+        "value": "1"
+      },
+      {
+        "name": "CalcCD",
+        "value": "8"
+      },
+      {
+        "name": "CSize",
+        "value": "5"
+      },
+      {
+        "name": "JobQtyMin",
+        "value": ""
+      },
+      {
+        "name": "JobQtyMax",
+        "value": ""
+      },
+      {
+        "name": "",
+        "value": "10"
+      },
+      {
+        "name": "",
+        "value": "295"
+      },
+      {
+        "name": "",
+        "value": "10"
+      },
+      {
+        "name": "",
+        "value": "445"
+      },
+      {
+        "name": "CoverCD",
+        "value": "0"
+      },
+      {
+        "name": "ColorPNo",
+        "value": "201"
+      },
+      {
+        "name": "Dstep",
+        "value": "1"
+      },
+      {
+        "name": "SelfDColorYN",
+        "value": "Y"
+      },
+      {
+        "name": "ColorNo",
+        "value": "302"
+      },
+      {
+        "name": "ShopNo",
+        "value": "1"
+      },
+      {
+        "name": "Sort",
+        "value": "0"
+      },
+      {
+        "name": "PageCD",
+        "value": "0"
+      },
+      {
+        "name": "PdfPage",
+        "value": "1"
+      },
+      {
+        "name": "DeftYN",
+        "value": "N"
+      },
+      {
+        "name": "Name",
+        "value": "단면 칼라"
+      },
+      {
+        "name": "CoverCD",
+        "value": "0"
+      },
+      {
+        "name": "ColorPNo",
+        "value": "201"
+      },
+      {
+        "name": "Dstep",
+        "value": "1"
+      },
+      {
+        "name": "SelfDColorYN",
+        "value": "N"
+      },
+      {
+        "name": "ColorNo",
+        "value": "1355"
+      },
+      {
+        "name": "ShopNo",
+        "value": "1"
+      },
+      {
+        "name": "Sort",
+        "value": "1"
+      },
+      {
+        "name": "PageCD",
+        "value": "0"
+      },
+      {
+        "name": "PdfPage",
+        "value": "1"
+      },
+      {
+        "name": "DeftYN",
+        "value": "N"
+      },
+      {
+        "name": "Name",
+        "value": "단면 칼라+백색"
+      },
+      {
+        "name": "",
+        "value": "302"
+      },
+      {
+        "name": "",
+        "value": "1"
+      },
+      {
+        "name": "",
+        "value": "1"
+      },
+      {
+        "name": "",
+        "value": "22930"
+      },
+      {
+        "name": "",
+        "value": "80"
+      },
+      {
+        "name": "",
+        "value": "80"
+      },
+      {
+        "name": "",
+        "value": ""
+      },
+      {
+        "name": "",
+        "value": ""
+      },
+      {
+        "name": "",
+        "value": ""
+      },
+      {
+        "name": "",
+        "value": "N"
+      },
+      {
+        "name": "",
+        "value": "N"
+      },
+      {
+        "name": "",
+        "value": "N"
+      },
+      {
+        "name": "",
+        "value": ""
+      },
+      {
+        "name": "",
+        "value": ""
+      },
+      {
+        "name": "JobNo",
+        "value": "3110"
+      },
+      {
+        "name": "",
+        "value": "O"
+      },
+      {
+        "name": "",
+        "value": "5"
+      },
+      {
+        "name": "EmgYN",
+        "value": "N"
+      },
+      {
+        "name": "",
+        "value": "500"
+      },
+      {
+        "name": "",
+        "value": "500"
+      },
+      {
+        "name": "",
+        "value": "1"
+      },
+      {
+        "name": "AWKs",
+        "value": "36000"
+      },
+      {
+        "name": "",
+        "value": "칼선"
+      },
+      {
+        "name": "",
+        "value": "36101"
+      },
+      {
+        "name": "",
+        "value": ""
+      },
+      {
+        "name": "",
+        "value": ""
+      },
+      {
+        "name": "",
+        "value": ""
+      },
+      {
+        "name": "",
+        "value": ""
+      },
+      {
+        "name": "",
+        "value": ""
+      },
+      {
+        "name": "",
+        "value": ""
+      },
+      {
+        "name": "",
+        "value": ""
+      },
+      {
+        "name": "",
+        "value": ""
+      },
+      {
+        "name": "",
+        "value": ""
+      },
+      {
+        "name": "",
+        "value": ""
+      },
+      {
+        "name": "",
+        "value": ""
+      },
+      {
+        "name": "",
+        "value": ""
+      },
+      {
+        "name": "",
+        "value": ""
+      },
+      {
+        "name": "",
+        "value": ""
+      },
+      {
+        "name": "",
+        "value": ""
+      },
+      {
+        "name": "",
+        "value": ""
+      },
+      {
+        "name": "",
+        "value": ""
+      },
+      {
+        "name": "",
+        "value": ""
+      },
+      {
+        "name": "",
+        "value": ""
+      },
+      {
+        "name": "",
+        "value": ""
+      },
+      {
+        "name": "",
+        "value": ""
+      },
+      {
+        "name": "",
+        "value": "Y"
+      },
+      {
+        "name": "estimatedVal",
+        "value": ""
+      },
+      {
+        "name": "_csrf",
+        "value": "dd409043-21ec-4fa9-9e71-f7047919b651"
+      },
+      {
+        "name": "ProdNo",
+        "value": "40611"
+      },
+      {
+        "name": "kind",
+        "value": "all"
+      },
+      {
+        "name": "pageIndex",
+        "value": "1"
+      },
+      {
+        "name": "_csrf",
+        "value": "dd409043-21ec-4fa9-9e71-f7047919b651"
+      },
+      {
+        "name": "FileGrp",
+        "value": "6"
+      },
+      {
+        "name": "FileName",
+        "value": ""
+      },
+      {
+        "name": "FileBase64",
+        "value": ""
+      },
+      {
+        "name": "FileDir",
+        "value": ""
+      },
+      {
+        "name": "FileExt",
+        "value": "pdf"
+      },
+      {
+        "name": "FileSize",
+        "value": ""
+      },
+      {
+        "name": "OrdTitle",
+        "value": ""
+      },
+      {
+        "name": "WorkerNo",
+        "value": ""
+      },
+      {
+        "name": "Comt",
+        "value": ""
+      },
+      {
+        "name": "preFlightOrd",
+        "value": "Y"
+      },
+      {
+        "name": "_csrf",
+        "value": "dd409043-21ec-4fa9-9e71-f7047919b651"
+      },
+      {
+        "name": "itemNo",
+        "value": ""
+      },
+      {
+        "name": "CartTP",
+        "value": "1"
+      },
+      {
+        "name": "_csrf",
+        "value": "dd409043-21ec-4fa9-9e71-f7047919b651"
+      },
+      {
+        "name": "_csrf",
+        "value": "dd409043-21ec-4fa9-9e71-f7047919b651"
+      }
+    ],
+    "buttons": [
+      {
+        "text": "WOW 멤버십안내 자세히보기",
+        "id": "",
+        "className": "sidebar_btn_style_01",
+        "onclick": "movePage('/info/page/mpag/membership', '')"
+      },
+      {
+        "text": "함께캠페인 자세히보기",
+        "id": "",
+        "className": "sidebar_btn_style_01",
+        "onclick": "movePage('https://blog.naver.com/PostList.nhn?blogId=wow_press&from=postList&categoryNo=37', '_blank"
+      },
+      {
+        "text": "쿠폰페이지 바로가기",
+        "id": "",
+        "className": "sidebar_btn_style_01",
+        "onclick": "movePage('/mpag/cupn/list', '')"
+      },
+      {
+        "text": "핵심가치페이지 바로가기",
+        "id": "",
+        "className": "sidebar_btn_style_01",
+        "onclick": "movePage('/archives/info/wowpress7', '')"
+      },
+      {
+        "text": "PDF파일 업로드",
+        "id": "",
+        "className": "btn_pdf_up2",
+        "onclick": "fileForm('next');"
+      },
+      {
+        "text": "장바구니",
+        "id": "",
+        "className": "btn_cart_up",
+        "onclick": "preFlightFileForm('cart','Y');"
+      },
+      {
+        "text": "주문하기",
+        "id": "",
+        "className": "btn_pdf_up2",
+        "onclick": "preFlightFileForm('ordr','Y');"
+      },
+      {
+        "text": "재업로드 및 초기화",
+        "id": "",
+        "className": "btn_modify_up",
+        "onclick": "preflightInit();"
+      },
+      {
+        "text": "견적서출력",
+        "id": "",
+        "className": "mypage_order_state",
+        "onclick": "callEstimate();"
+      },
+      {
+        "text": "장바구니",
+        "id": "",
+        "className": "btn_basket",
+        "onclick": "fileForm('cart');"
+      },
+      {
+        "text": "주문하기",
+        "id": "",
+        "className": "btn_order",
+        "onclick": "fileForm('ordr');"
+      }
+    ],
+    "forms": [
+      {
+        "action": "https://wowpress.co.kr/srch/list",
+        "method": "get",
+        "id": "frmWowSearch",
+        "name": "",
+        "fields": [
+          {
+            "tag": "INPUT",
+            "name": "srchKeyword",
+            "type": "text",
+            "id": "srchKeyword"
+          }
+        ]
+      },
+      {
+        "action": "https://wowpress.co.kr/ordr/prod/dets?ProdNo=40611",
+        "method": "post",
+        "id": "frmProd",
+        "name": "frmProd",
+        "fields": [
+          {
+            "tag": "INPUT",
+            "name": "ordType",
+            "type": "hidden",
+            "id": ""
+          },
+          {
+            "tag": "INPUT",
+            "name": "width",
+            "type": "hidden",
+            "id": ""
+          },
+          {
+            "tag": "INPUT",
+            "name": "height",
+            "type": "hidden",
+            "id": ""
+          },
+          {
+            "tag": "INPUT",
+            "name": "Wwidth",
+            "type": "hidden",
+            "id": ""
+          },
+          {
+            "tag": "INPUT",
+            "name": "Wheight",
+            "type": "hidden",
+            "id": ""
+          },
+          {
+            "tag": "INPUT",
+            "name": "SelfDCSzNm",
+            "type": "hidden",
+            "id": ""
+          },
+          {
+            "tag": "INPUT",
+            "name": "imageList",
+            "type": "hidden",
+            "id": ""
+          },
+          {
+            "tag": "INPUT",
+            "name": "jpgFront",
+            "type": "hidden",
+            "id": ""
+          },
+          {
+            "tag": "INPUT",
+            "name": "jpgBack",
+            "type": "hidden",
+            "id": ""
+          },
+          {
+            "tag": "INPUT",
+            "name": "side",
+            "type": "hidden",
+            "id": ""
+          },
+          {
+            "tag": "INPUT",
+            "name": "pdf",
+            "type": "hidden",
+            "id": ""
+          },
+          {
+            "tag": "INPUT",
+            "name": "ezTName",
+            "type": "hidden",
+            "id": ""
+          },
+          {
+            "tag": "INPUT",
+            "name": "ProdNo",
+            "type": "hidden",
+            "id": "ProdNo"
+          },
+          {
+            "tag": "INPUT",
+            "name": "incNonStd",
+            "type": "hidden",
+            "id": "incNonStd"
+          },
+          {
+            "tag": "INPUT",
+            "name": "useOnlyProd",
+            "type": "hidden",
+            "id": ""
+          },
+          {
+            "tag": "INPUT",
+            "name": "uopPP",
+            "type": "hidden",
+            "id": ""
+          },
+          {
+            "tag": "INPUT",
+            "name": "uopSZ",
+            "type": "hidden",
+            "id": ""
+          },
+          {
+            "tag": "INPUT",
+            "name": "uopCL",
+            "type": "hidden",
+            "id": ""
+          },
+          {
+            "tag": "INPUT",
+            "name": "uopOPT",
+            "type": "hidden",
+            "id": ""
+          },
+          {
+            "tag": "INPUT",
+            "name": "_csrf",
+            "type": "hidden",
+            "id": ""
+          }
+        ]
+      },
+      {
+        "action": "https://wowpress.co.kr/ordr/prod/dets?ProdNo=40611",
+        "method": "post",
+        "id": "editForm",
+        "name": "editForm",
+        "fields": [
+          {
+            "tag": "INPUT",
+            "name": "partner",
+            "type": "hidden",
+            "id": ""
+          },
+          {
+            "tag": "INPUT",
+            "name": "domain",
+            "type": "hidden",
+            "id": ""
+          },
+          {
+            "tag": "INPUT",
+            "name": "user_id",
+            "type": "hidden",
+            "id": ""
+          },
+          {
+            "tag": "INPUT",
+            "name": "sessionKey",
+            "type": "hidden",
+            "id": ""
+          },
+          {
+            "tag": "INPUT",
+            "name": "xmltemplate",
+            "type": "hidden",
+            "id": ""
+          },
+          {
+            "tag": "INPUT",
+            "name": "prdcode",
+            "type": "hidden",
+            "id": ""
+          },
+          {
+            "tag": "INPUT",
+            "name": "horSize",
+            "type": "hidden",
+            "id": ""
+          },
+          {
+            "tag": "INPUT",
+            "name": "verSize",
+            "type": "hidden",
+            "id": ""
+          },
+          {
+            "tag": "INPUT",
+            "name": "cutHorSize",
+            "type": "hidden",
+            "id": ""
+          },
+          {
+            "tag": "INPUT",
+            "name": "cutVerSize",
+            "type": "hidden",
+            "id": ""
+          },
+          {
+            "tag": "INPUT",
+            "name": "hvtype",
+            "type": "hidden",
+            "id": ""
+          },
+          {
+            "tag": "INPUT",
+            "name": "podType",
+            "type": "hidden",
+            "id": ""
+          },
+          {
+            "tag": "INPUT",
+            "name": "selectSide",
+            "type": "hidden",
+            "id": ""
+          },
+          {
+            "tag": "INPUT",
+            "name": "returnUrl",
+            "type": "hidden",
+            "id": ""
+          },
+          {
+            "tag": "INPUT",
+            "name": "ProdNo",
+            "type": "hidden",
+            "id": ""
+          },
+          {
+            "tag": "INPUT",
+            "name": "SelfDCName",
+            "type": "hidden",
+            "id": ""
+          },
+          {
+            "tag": "INPUT",
+            "name": "SelfDCNo",
+            "type": "hidden",
+            "id": ""
+          },
+          {
+            "tag": "INPUT",
+            "name": "printArea",
+            "type": "hidden",
+            "id": ""
+          },
+          {
+            "tag": "INPUT",
+            "name": "_csrf",
+            "type": "hidden",
+            "id": ""
+          }
+        ]
+      },
+      {
+        "action": "https://wowpress.co.kr/ordr/prod/dets/estimate",
+        "method": "post",
+        "id": "estimateForm",
+        "name": "",
+        "fields": [
+          {
+            "tag": "INPUT",
+            "name": "estimatedVal",
+            "type": "hidden",
+            "id": "estimatedVal"
+          },
+          {
+            "tag": "INPUT",
+            "name": "_csrf",
+            "type": "hidden",
+            "id": ""
+          }
+        ]
+      },
+      {
+        "action": "https://wowpress.co.kr/ordr/prod/dets?ProdNo=40611",
+        "method": "post",
+        "id": "frmRevs",
+        "name": "",
+        "fields": [
+          {
+            "tag": "INPUT",
+            "name": "ProdNo",
+            "type": "hidden",
+            "id": ""
+          },
+          {
+            "tag": "INPUT",
+            "name": "kind",
+            "type": "hidden",
+            "id": "kind"
+          },
+          {
+            "tag": "INPUT",
+            "name": "pageIndex",
+            "type": "hidden",
+            "id": "pageIndex"
+          },
+          {
+            "tag": "INPUT",
+            "name": "_csrf",
+            "type": "hidden",
+            "id": ""
+          }
+        ]
+      },
+      {
+        "action": "https://wowpress.co.kr/ordr/prod/dets?ProdNo=40611",
+        "method": "post",
+        "id": "frmFile",
+        "name": "frmFile",
+        "fields": [
+          {
+            "tag": "INPUT",
+            "name": "FileGrp",
+            "type": "hidden",
+            "id": "FileGrp"
+          },
+          {
+            "tag": "INPUT",
+            "name": "FileName",
+            "type": "hidden",
+            "id": "FileName"
+          },
+          {
+            "tag": "INPUT",
+            "name": "FileBase64",
+            "type": "hidden",
+            "id": "FileBase64"
+          },
+          {
+            "tag": "INPUT",
+            "name": "FileDir",
+            "type": "hidden",
+            "id": "FileDir"
+          },
+          {
+            "tag": "INPUT",
+            "name": "FileExt",
+            "type": "hidden",
+            "id": "FileExt"
+          },
+          {
+            "tag": "INPUT",
+            "name": "FileSize",
+            "type": "hidden",
+            "id": "FileSize"
+          },
+          {
+            "tag": "INPUT",
+            "name": "OrdTitle",
+            "type": "hidden",
+            "id": "OrdTitle"
+          },
+          {
+            "tag": "INPUT",
+            "name": "WorkerNo",
+            "type": "hidden",
+            "id": "WorkerNo"
+          },
+          {
+            "tag": "INPUT",
+            "name": "Comt",
+            "type": "hidden",
+            "id": "Comt"
+          },
+          {
+            "tag": "INPUT",
+            "name": "preFlightOrd",
+            "type": "hidden",
+            "id": "preFlightOrd"
+          },
+          {
+            "tag": "INPUT",
+            "name": "_csrf",
+            "type": "hidden",
+            "id": ""
+          }
+        ]
+      },
+      {
+        "action": "https://wowpress.co.kr/ordr/paym/main",
+        "method": "get",
+        "id": "frmParam",
+        "name": "",
+        "fields": [
+          {
+            "tag": "INPUT",
+            "name": "itemNo",
+            "type": "hidden",
+            "id": "itemNo"
+          },
+          {
+            "tag": "INPUT",
+            "name": "CartTP",
+            "type": "hidden",
+            "id": "CartTP"
+          }
+        ]
+      },
+      {
+        "action": "https://wowpress.co.kr/ordr/prod/dets?ProdNo=40611",
+        "method": "post",
+        "id": "frmCart",
+        "name": "",
+        "fields": [
+          {
+            "tag": "INPUT",
+            "name": "_csrf",
+            "type": "hidden",
+            "id": ""
+          },
+          {
+            "tag": "INPUT",
+            "name": "_csrf",
+            "type": "hidden",
+            "id": ""
+          }
+        ]
+      }
+    ],
+    "optionLabels": [
+      "용지",
+      "출고일",
+      "예상출고일",
+      "규격",
+      "인쇄도수",
+      "용지",
+      "인쇄선택",
+      "수량",
+      "후가공",
+      "부자재",
+      "재고안내",
+      "견적서",
+      "인쇄",
+      "인쇄",
+      "인쇄비",
+      "부자재비",
+      "후가공비",
+      "디자인비",
+      "할인",
+      "부가세",
+      "배쑝와쑝",
+      "배송비",
+      "유의사항",
+      "택배송",
+      "배송비",
+      "유의사항",
+      "대리배송",
+      "배송비",
+      "유의사항",
+      "방문수령",
+      "배송비",
+      "유의사항",
+      "퀵배송",
+      "배송비",
+      "유의사항",
+      "기타배송",
+      "배송비",
+      "유의사항",
+      "구분",
+      "재작업 불가사항 내용"
+    ],
+    "priceElements": [
+      {
+        "text": "인쇄비\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t23,400 원\n\t\t\t\t\n\t\t\t\n\t\t\t\n\t\t\t\t\n\t\t\t\t\t부자재비\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t\t0 원\n\t\t\t\t\n\t\t\t\n\t\t\t\n\t\t\t\t\n\t\t\t\t\t후가",
+        "class": "order_price",
+        "id": "order_price"
+      }
+    ]
+  },
+  "apiEndpoints": {
+    "GET /ordr/prod/sale/no/list": {
+      "method": "GET",
+      "path": "/ordr/prod/sale/no/list",
+      "query": "",
+      "calls": [
+        {
+          "status": 200,
+          "postData": null,
+          "responseBody": {
+            "prodNoList": [
+              null,
+              {
+                "prodNo": "40026"
+              },
+              {
+                "prodNo": "40034"
+              },
+              {
+                "prodNo": "40070"
+              },
+              {
+                "prodNo": "40040"
+              },
+              {
+                "prodNo": "30001"
+              },
+              {
+                "prodNo": "30003"
+              },
+              {
+                "prodNo": "30010"
+              },
+              {
+                "prodNo": "30013"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "GET /myInfo": {
+      "method": "GET",
+      "path": "/myInfo",
+      "query": "",
+      "calls": [
+        {
+          "status": 200,
+          "postData": null,
+          "responseBody": {
+            "myInfo": null
+          }
+        }
+      ]
+    },
+    "GET /main/favorite": {
+      "method": "GET",
+      "path": "/main/favorite",
+      "query": "",
+      "calls": [
+        {
+          "status": 200,
+          "postData": null,
+          "responseBody": {
+            "favoriteList": [
+              {
+                "UDT": 1614933802000,
+                "DspGB": 5,
+                "Title": "퀵메뉴1",
+                "Post2": "우리함께\r\n이겨내요",
+                "Post1": "이용가이드\r\nWOW배송",
+                "Url1": "/cent/notc/list?_selectBNo=718862",
+                "Url2": "https://blog.naver.com/wow_press/222142563178",
+                "FilePath2": "/main/2021/03/05/20210305174322-1274934577601852635.jpg",
+                "FilePath1": "/main/2021/03/05/202103051743221148775093529628029.jpg",
+                "CDT": 1591846960000,
+                "FileNm1": "2-1.jpg",
+                "FileNm2": "1-2.jpg",
+                "DspNo": 19,
+                "RegDT": 1591846960000,
+                "ShopNo": 1,
+                "Sort": 1,
+                "File2": "/wowdoc/wow2.0/main/2021/03/05/20210305174322-1274934577601852635.jpg",
+                "File1": "/wowdoc/wow2.0/main/2021/03/05/202103051743221148775093529628029.jpg",
+                "UseYN": "Y"
+              },
+              {
+                "UDT": 1614933513000,
+                "DspGB": 5,
+                "Title": "출고배송",
+                "Post2": "무료폰트\r\n다운로드",
+                "Post1": "출고안내",
+                "Url1": "/info/lnbPage/cent/release",
+                "Url2": "/cent/font/list",
+                "FilePath2": "/main/2021/03/05/202103051738333682894287733885196.jpg",
+                "FilePath1": "/main/2021/03/05/20210305173833864366637918192390.jpg",
+                "CDT": 1604382640000,
+                "FileNm1": "1-1.jpg",
+                "FileNm2": "무료폰트.jpg",
+                "DspNo": 3012,
+                "RegDT": 1604382640000,
+                "ShopNo": 1,
+                "Sort": 2,
+                "File2": "/wowdoc/wow2.0/main/2021/03/05/202103051738333682894287733885196.jpg",
+                "File1": "/wowdoc/wow2.0/main/2021/03/05/20210305173833864366637918192390.jpg",
+                "UseYN": "Y"
+              },
+              {
+                "DspGB": 5,
+                "Title": "퀵메뉴3",
+                "Post2": "안심포장",
+                "Post1": "정매수\r\n출고",
+                "Url1": "/archives/evnt/fixed",
+                "Url2": "/archives/evnt/airc",
+                "FilePath2": "/main/2021/03/05/20210305173037-1622352730049854323.jpg",
+                "FilePath1": "/main/2021/03/05/20210305173037-1438703710964510071.jpg",
+                "CDT": 1614933037000,
+                "FileNm1": "정매수출고.jpg",
+                "FileNm2": "프리미엄안심포장.jpg",
+                "DspNo": 5030,
+                "RegDT": 1614933037000,
+                "ShopNo": 1,
+                "Sort": 3,
+                "File2": "/wowdoc/wow2.0/main/2021/03/05/20210305173037-1622352730049854323.jpg",
+                "File1": "/wowdoc/wow2.0/main/2021/03/05/20210305173037-1438703710964510071.jpg",
+                "UseYN": "Y"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "GET /main/ko/sub/info/delivery_info.html": {
+      "method": "GET",
+      "path": "/main/ko/sub/info/delivery_info.html",
+      "query": "",
+      "calls": [
+        {
+          "status": 200,
+          "postData": null,
+          "responsePreview": "<div class=\"as_info\">\r\n\t<div class=\"title\"><span>출고안내</span></div>\r\n\t<ul>\r\n\t\t<li>&#8226; 출고일은 접수부터 포장까지 완료되는데 소요되는 일수입니다. (평일 기준, 주말/공휴일 제외)</li>\r\n\t\t<li>&#8226; 접수마감시간 이전에 주문과 결제가 완료된 건에 한해 당일 접수됩니다.</li>\r\n\t\t<li>&#8226; 주문수량이 많거나 박, 도무송 등 기타 후가공이 많이 추가되는 경우는 별도 문의 바랍니다.</li>\r\n\t</ul>\r\n</div>\r\n<div class=\"delivery_info\">\r\n\t<div class=\"title\"><span>배송안내</span></div>\r\n    <ul>\r\n\t\t<li>&#8226; 배쑝와쑝</li>\r\n\t</ul>\r\n\t<ul>\r\n\t\t<li>\r\n\t\t\t<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\r\n\t\t\t\t<tb"
+        }
+      ]
+    },
+    "GET /main/ko/sub/info/as_info.html": {
+      "method": "GET",
+      "path": "/main/ko/sub/info/as_info.html",
+      "query": "",
+      "calls": [
+        {
+          "status": 200,
+          "postData": null,
+          "responsePreview": "<div class=\"as_info\">\r\n    <div class=\"title\"><span>재작업 안내</span></div>\r\n\t<ul>\r\n\t\t<li>&#8226; 재작업 문의는 마이페이지 > 재작업신청 통해 신청하시기 바랍니다.</li>\r\n\t\t<li>&#8226; 문제가 발생한 제품은 수령일로부터 7일 이내에 신청을 하셔야 재작업이 가능합니다.</li>\r\n\t\t<li>&#8226; 재작업 신청 시 수령한 제품은 모두 반송되어야 하며 원본 파일로 재작업됨을 원칙으로 합니다.</li>\r\n\t\t<li>&#8226; 재작업을 진행할 때 파일을 수정할 경우 비용의 50%를 부담하셔야 합니다.</li>\r\n\t\t<li>&#8226; 본사의 과실로 재작업을 할 경우 환불이나 납기지연에 따른 손해배상은 하지 않음을 원칙으로 합니다.</li>\r\n\t\t<li>&#8226; 제품을 받은 후 별도로 후가공을 진행한 뒤 제품의 하자가 발견된 경우 후가공비를 제외한 제품의 가격만 환불합니다.</li>\r\n\t\t<l"
+        }
+      ]
+    },
+    "POST /ordr/prod/mdm/detail/Size": {
+      "method": "POST",
+      "path": "/ordr/prod/mdm/detail/Size",
+      "query": "",
+      "calls": [
+        {
+          "status": 200,
+          "postData": "ProdNo=40611&itemNo=10773&CoverCD=0",
+          "responseBody": {
+            "curUri": "/ordr/prod/mdm/detail/Size",
+            "mdmMap": {
+              "SizeNo": 10773,
+              "UDT": 1744870397000,
+              "CalcCD": 8,
+              "SizePNo": 10763,
+              "WSize": 200,
+              "PdfWSize": 200,
+              "PdfHSize": 30,
+              "Name": "비규격",
+              "Dsp1": "Y",
+              "JobSize2Min": 10,
+              "CDT": 1744870376000,
+              "JobSize1Min": 10,
+              "CSize": 5,
+              "HSize": 30,
+              "JubgyYN": "N",
+              "ShopNo": 1,
+              "JobSize2Max": 445,
+              "JobSize1Max": 295,
+              "UseYN": "Y"
+            },
+            "ajaxResult": "succ"
+          }
+        }
+      ]
+    },
+    "POST /ordr/prod/mdm/detail/Paper": {
+      "method": "POST",
+      "path": "/ordr/prod/mdm/detail/Paper",
+      "query": "",
+      "calls": [
+        {
+          "status": 200,
+          "postData": "ProdNo=40611&itemNo=22930&CoverCD=0",
+          "responseBody": {
+            "curUri": "/ordr/prod/mdm/detail/Paper",
+            "mdmMap": {
+              "CottingYN": "N",
+              "CoverCD": 0,
+              "FoilYN": "N",
+              "UDT": 1745211731000,
+              "ProdNo": 40611,
+              "PGramNo": 80,
+              "CalcCD": 1,
+              "HeungAbYN": "N",
+              "Post1": "종이의 면이 곱고 자체 광택감이 있는 일반적으로 많이 사용되는 종이로 색상표현이 뛰어납니다.",
+              "PaperBNo": 22929,
+              "JaeBonYN": "Y",
+              "BName": "아트지(무광코팅)",
+              "DeftYN": "N",
+              "Weight": 80,
+              "CDT": 1744869888000,
+              "NameFull": "아트지(무광코팅) 80g",
+              "StDT": 1744869840000,
+              "ShopNo": 1,
+              "PaperPNo": 22929,
+              "Sort": 102,
+              "PdfPageAdd": 1,
+              "PaperNo": 22930,
+              "UseYN": "Y"
+            },
+            "ajaxResult": "succ"
+          }
+        }
+      ]
+    },
+    "POST /ord/calc/jobqty0": {
+      "method": "POST",
+      "path": "/ord/calc/jobqty0",
+      "query": "",
+      "calls": [
+        {
+          "status": 200,
+          "postData": "SNo=1&CostKD=-1&ProdNo=40611&Job=PRS&JobNo=3110&CoverCD=0&PJoin=0&OrdCnt=1&OrdQty=0&SizeNo=10773&WSize=200&HSize=30&JobQty=&PressM=O&QUnit=5&PaperNo=22930&ColorNo0=302&ColorNo=302&returnType=json",
+          "responseBody": {
+            "jobcost": [
+              {
+                "SizeNo": "10773",
+                "Cost1": 23400,
+                "CoverCD": 0,
+                "Cost2": 0,
+                "ProdNo": "40611",
+                "JobQty": 500,
+                "Cost": 23400,
+                "Weight": 0.24,
+                "ExitDay": 0,
+                "EdDT": "N",
+                "NameFull": "합판옵셋인쇄",
+                "ColorNo": "302",
+                "JobNo": "3110",
+                "PaperNo": "22930",
+                "JobCostNo": 7499394
+              },
+              {
+                "SizeNo": "10773",
+                "Cost1": 25900,
+                "CoverCD": 0,
+                "Cost2": 0,
+                "ProdNo": "40611",
+                "JobQty": 1000,
+                "Cost": 25900,
+                "Weight": 0.48,
+                "ExitDay": 0,
+                "EdDT": "N",
+                "NameFull": "합판옵셋인쇄",
+                "ColorNo": "302",
+                "JobNo": "3110",
+                "PaperNo": "22930",
+                "JobCostNo": 7499395
+              },
+              {
+                "SizeNo": "10773",
+                "Cost1": 51200,
+                "CoverCD": 0,
+                "Cost2": 0,
+                "ProdNo": "40611",
+                "JobQty": 2000,
+                "Cost": 51200,
+                "Weight": 0.96,
+                "ExitDay": 0,
+                "EdDT": "N",
+                "NameFull": "합판옵셋인쇄",
+                "ColorNo": "302",
+                "JobNo": "3110",
+                "PaperNo": "22930",
+                "JobCostNo": 7499396
+              },
+              {
+                "SizeNo": "10773",
+                "Cost1": 76900,
+                "CoverCD": 0,
+                "Cost2": 0,
+                "ProdNo": "40611",
+                "JobQty": 3000,
+                "Cost": 76900,
+                "Weight": 1.44,
+                "ExitDay": 0,
+                "EdDT": "N",
+                "NameFull": "합판옵셋인쇄",
+                "ColorNo": "302",
+                "JobNo": "3110",
+                "PaperNo": "22930",
+                "JobCostNo": 7499397
+              },
+              {
+                "SizeNo": "10773",
+                "Cost1": 102500,
+                "CoverCD": 0,
+                "Cost2": 0,
+                "ProdNo": "40611",
+                "JobQty": 4000,
+                "Cost": 102500,
+                "Weight": 1.92,
+                "ExitDay": 0,
+                "EdDT": "N",
+                "NameFull": "합판옵셋인쇄",
+                "ColorNo": "302",
+                "JobNo": "3110",
+                "PaperNo": "22930",
+                "JobCostNo": 7499398
+              },
+              {
+                "SizeNo": "10773",
+                "Cost1": 122700,
+                "CoverCD": 0,
+                "Cost2": 0,
+                "ProdNo": "40611",
+                "JobQty": 5000,
+                "Cost": 122700,
+                "Weight": 2.4,
+                "ExitDay": 0,
+                "EdDT": "N",
+                "NameFull": "합판옵셋인쇄",
+                "ColorNo": "302",
+                "JobNo": "3110",
+                "PaperNo": "22930",
+                "JobCostNo": 7499399
+              },
+              {
+                "SizeNo": "10773",
+                "Cost1": 141800,
+                "CoverCD": 0,
+                "Cost2": 0,
+                "ProdNo": "40611",
+                "JobQty": 6000,
+                "Cost": 141800,
+                "Weight": 2.88,
+                "ExitDay": 0,
+                "EdDT": "N",
+                "NameFull": "합판옵셋인쇄",
+                "ColorNo": "302",
+                "JobNo": "3110",
+                "PaperNo": "22930",
+                "JobCostNo": 7499400
+              },
+              {
+                "SizeNo": "10773",
+                "Cost1": 189100,
+                "CoverCD": 0,
+                "Cost2": 0,
+                "ProdNo": "40611",
+                "JobQty": 8000,
+                "Cost": 189100,
+                "Weight": 3.84,
+                "ExitDay": 0,
+                "EdDT": "N",
+                "NameFull": "합판옵셋인쇄",
+                "ColorNo": "302",
+                "JobNo": "3110",
+                "PaperNo": "22930",
+                "JobCostNo": 7499401
+              },
+              {
+                "SizeNo": "10773",
+                "Cost1": 235200,
+                "CoverCD": 0,
+                "Cost2": 0,
+                "ProdNo": "40611",
+                "JobQty": 10000,
+                "Cost": 235200,
+                "Weight": 4.8,
+                "ExitDay": 0,
+                "EdDT": "N",
+                "NameFull": "합판옵셋인쇄",
+                "ColorNo": "302",
+                "JobNo": "3110",
+                "PaperNo": "22930",
+                "JobCostNo": 7499402
+              },
+              {
+                "SizeNo": "10773",
+                "Cost1": 248200,
+                "CoverCD": 0,
+                "Cost2": 0,
+                "ProdNo": "40611",
+                "JobQty": 11000,
+                "Cost": 248200,
+                "Weight": 5.28,
+                "ExitDay": 0,
+                "EdDT": "N",
+                "NameFull": "합판옵셋인쇄",
+                "ColorNo": "302",
+                "JobNo": "3110",
+                "PaperNo": "22930",
+                "JobCostNo": 7499403
+              },
+              {
+                "SizeNo": "10773",
+                "Cost1": 270700,
+                "CoverCD": 0,
+                "Cost2": 0,
+                "ProdNo": "40611",
+                "JobQty": 12000,
+                "Cost": 270700,
+                "Weight": 5.76,
+                "ExitDay": 0,
+                "EdDT": "N",
+                "NameFull": "합판옵셋인쇄",
+                "ColorNo": "302",
+                "JobNo": "3110",
+                "PaperNo": "22930",
+                "JobCostNo": 7499404
+              },
+              {
+                "SizeNo": "10773",
+                "Cost1": 293300,
+                "CoverCD": 0,
+                "Cost2": 0,
+                "ProdNo": "40611",
+                "JobQty": 13000,
+                "Cost": 293300,
+                "Weight": 6.24,
+                "ExitDay": 0,
+                "EdDT": "N",
+                "NameFull": "합판옵셋인쇄",
+                "ColorNo": "302",
+                "JobNo": "3110",
+                "PaperNo": "22930",
+                "JobCostNo": 7499405
+              },
+              {
+                "SizeNo": "10773",
+                "Cost1": 315800,
+                "CoverCD": 0,
+                "Cost2": 0,
+                "ProdNo": "40611",
+                "JobQty": 14000,
+                "Cost": 315800,
+                "Weight": 6.72,
+                "ExitDay": 0,
+                "EdDT": "N",
+                "NameFull": "합판옵셋인쇄",
+                "ColorNo": "302",
+                "JobNo": "3110",
+                "PaperNo": "22930",
+                "JobCostNo": 7499406
+              },
+              {
+                "SizeNo": "10773",
+                "Cost1": 338400,
+                "CoverCD": 0,
+                "Cost2": 0,
+                "ProdNo": "40611",
+                "JobQty": 15000,
+                "Cost": 338400,
+                "Weight": 7.2,
+                "ExitDay": 0,
+                "EdDT": "N",
+                "NameFull": "합판옵셋인쇄",
+                "ColorNo": "302",
+                "JobNo": "3110",
+                "PaperNo": "22930",
+                "JobCostNo": 7499407
+              },
+              {
+                "SizeNo": "10773",
+                "Cost1": 361000,
+                "CoverCD": 0,
+                "Cost2": 0,
+                "ProdNo": "40611",
+                "JobQty": 16000,
+                "Cost": 361000,
+                "Weight": 7.68,
+                "ExitDay": 0,
+                "EdDT": "N",
+                "NameFull": "합판옵셋인쇄",
+                "ColorNo": "302",
+                "JobNo": "3110",
+                "PaperNo": "22930",
+                "JobCostNo": 7499408
+              },
+              {
+                "SizeNo": "10773",
+                "Cost1": 406100,
+                "CoverCD": 0,
+                "Cost2": 0,
+                "ProdNo": "40611",
+                "JobQty": 18000,
+                "Cost": 406100,
+                "Weight": 8.64,
+                "ExitDay": 0,
+                "EdDT": "N",
+                "NameFull": "합판옵셋인쇄",
+                "ColorNo": "302",
+                "JobNo": "3110",
+                "PaperNo": "22930",
+                "JobCostNo": 7499409
+              },
+              {
+                "SizeNo": "10773",
+                "Cost1": 451200,
+                "CoverCD": 0,
+                "Cost2": 0,
+                "ProdNo": "40611",
+                "JobQty": 20000,
+                "Cost": 451200,
+                "Weight": 9.6,
+                "ExitDay": 0,
+                "EdDT": "N",
+                "NameFull": "합판옵셋인쇄",
+                "ColorNo": "302",
+                "JobNo": "3110",
+                "PaperNo": "22930",
+                "JobCostNo": 7499410
+              },
+              {
+                "SizeNo": "10773",
+                "Cost1": 564000,
+                "CoverCD": 0,
+                "Cost2": 0,
+                "ProdNo": "40611",
+                "JobQty": 25000,
+                "Cost": 564000,
+                "Weight": 12,
+                "ExitDay": 0,
+                "EdDT": "N",
+                "NameFull": "합판옵셋인쇄",
+                "ColorNo": "302",
+                "JobNo": "3110",
+                "PaperNo": "22930",
+                "JobCostNo": 7499411
+              },
+              {
+                "SizeNo": "10773",
+                "Cost1": 676800,
+                "CoverCD": 0,
+                "Cost2": 0,
+                "ProdNo": "40611",
+                "JobQty": 30000,
+                "Cost": 676800,
+                "Weight": 14.4,
+                "ExitDay": 0,
+                "EdDT": "N",
+                "NameFull": "합판옵셋인쇄",
+                "ColorNo": "302",
+                "JobNo": "3110",
+                "PaperNo": "22930",
+                "JobCostNo": 7499412
+              },
+              {
+                "SizeNo": "10773",
+                "Cost1": 902400,
+                "CoverCD": 0,
+                "Cost2": 0,
+                "ProdNo": "40611",
+                "JobQty": 40000,
+                "Cost": 902400,
+                "Weight": 19.2,
+                "ExitDay": 0,
+                "EdDT": "N",
+                "NameFull": "합판옵셋인쇄",
+                "ColorNo": "302",
+                "JobNo": "3110",
+                "PaperNo": "22930",
+                "JobCostNo": 7499413
+              },
+              {
+                "SizeNo": "10773",
+                "Cost1": 1128000,
+                "CoverCD": 0,
+                "Cost2": 0,
+                "ProdNo": "40611",
+                "JobQty": 50000,
+                "Cost": 1128000,
+                "Weight": 24,
+                "ExitDay": 0,
+                "EdDT": "N",
+                "NameFull": "합판옵셋인쇄",
+                "ColorNo": "302",
+                "JobNo": "3110",
+                "PaperNo": "22930",
+                "JobCostNo": 7499414
+              }
+            ],
+            "curUri": "/ord/calc/jobqty0",
+            "ajaxResult": "succ"
+          }
+        },
+        {
+          "status": 200,
+          "postData": "SNo=1&CostKD=-1&ProdNo=40611&Job=PRS&JobNo=3110&CoverCD=0&PJoin=0&OrdCnt=1&OrdQty=500&SizeNo=10773&WSize=200&HSize=30&JobQty=&PressM=O&QUnit=5&PaperNo=22930&ColorNo0=302&ColorNo=302&returnType=json",
+          "responseBody": {
+            "jobcost": [
+              {
+                "SizeNo": "10773",
+                "Cost1": 23400,
+                "CoverCD": 0,
+                "Cost2": 0,
+                "ProdNo": "40611",
+                "JobQty": 500,
+                "Cost": 23400,
+                "Weight": 0.24,
+                "ExitDay": 0,
+                "EdDT": "N",
+                "NameFull": "합판옵셋인쇄",
+                "ColorNo": "302",
+                "JobNo": "3110",
+                "PaperNo": "22930",
+                "JobCostNo": 7499394
+              },
+              {
+                "SizeNo": "10773",
+                "Cost1": 25900,
+                "CoverCD": 0,
+                "Cost2": 0,
+                "ProdNo": "40611",
+                "JobQty": 1000,
+                "Cost": 25900,
+                "Weight": 0.48,
+                "ExitDay": 0,
+                "EdDT": "N",
+                "NameFull": "합판옵셋인쇄",
+                "ColorNo": "302",
+                "JobNo": "3110",
+                "PaperNo": "22930",
+                "JobCostNo": 7499395
+              },
+              {
+                "SizeNo": "10773",
+                "Cost1": 51200,
+                "CoverCD": 0,
+                "Cost2": 0,
+                "ProdNo": "40611",
+                "JobQty": 2000,
+                "Cost": 51200,
+                "Weight": 0.96,
+                "ExitDay": 0,
+                "EdDT": "N",
+                "NameFull": "합판옵셋인쇄",
+                "ColorNo": "302",
+                "JobNo": "3110",
+                "PaperNo": "22930",
+                "JobCostNo": 7499396
+              },
+              {
+                "SizeNo": "10773",
+                "Cost1": 76900,
+                "CoverCD": 0,
+                "Cost2": 0,
+                "ProdNo": "40611",
+                "JobQty": 3000,
+                "Cost": 76900,
+                "Weight": 1.44,
+                "ExitDay": 0,
+                "EdDT": "N",
+                "NameFull": "합판옵셋인쇄",
+                "ColorNo": "302",
+                "JobNo": "3110",
+                "PaperNo": "22930",
+                "JobCostNo": 7499397
+              },
+              {
+                "SizeNo": "10773",
+                "Cost1": 102500,
+                "CoverCD": 0,
+                "Cost2": 0,
+                "ProdNo": "40611",
+                "JobQty": 4000,
+                "Cost": 102500,
+                "Weight": 1.92,
+                "ExitDay": 0,
+                "EdDT": "N",
+                "NameFull": "합판옵셋인쇄",
+                "ColorNo": "302",
+                "JobNo": "3110",
+                "PaperNo": "22930",
+                "JobCostNo": 7499398
+              },
+              {
+                "SizeNo": "10773",
+                "Cost1": 122700,
+                "CoverCD": 0,
+                "Cost2": 0,
+                "ProdNo": "40611",
+                "JobQty": 5000,
+                "Cost": 122700,
+                "Weight": 2.4,
+                "ExitDay": 0,
+                "EdDT": "N",
+                "NameFull": "합판옵셋인쇄",
+                "ColorNo": "302",
+                "JobNo": "3110",
+                "PaperNo": "22930",
+                "JobCostNo": 7499399
+              },
+              {
+                "SizeNo": "10773",
+                "Cost1": 141800,
+                "CoverCD": 0,
+                "Cost2": 0,
+                "ProdNo": "40611",
+                "JobQty": 6000,
+                "Cost": 141800,
+                "Weight": 2.88,
+                "ExitDay": 0,
+                "EdDT": "N",
+                "NameFull": "합판옵셋인쇄",
+                "ColorNo": "302",
+                "JobNo": "3110",
+                "PaperNo": "22930",
+                "JobCostNo": 7499400
+              },
+              {
+                "SizeNo": "10773",
+                "Cost1": 189100,
+                "CoverCD": 0,
+                "Cost2": 0,
+                "ProdNo": "40611",
+                "JobQty": 8000,
+                "Cost": 189100,
+                "Weight": 3.84,
+                "ExitDay": 0,
+                "EdDT": "N",
+                "NameFull": "합판옵셋인쇄",
+                "ColorNo": "302",
+                "JobNo": "3110",
+                "PaperNo": "22930",
+                "JobCostNo": 7499401
+              },
+              {
+                "SizeNo": "10773",
+                "Cost1": 235200,
+                "CoverCD": 0,
+                "Cost2": 0,
+                "ProdNo": "40611",
+                "JobQty": 10000,
+                "Cost": 235200,
+                "Weight": 4.8,
+                "ExitDay": 0,
+                "EdDT": "N",
+                "NameFull": "합판옵셋인쇄",
+                "ColorNo": "302",
+                "JobNo": "3110",
+                "PaperNo": "22930",
+                "JobCostNo": 7499402
+              },
+              {
+                "SizeNo": "10773",
+                "Cost1": 248200,
+                "CoverCD": 0,
+                "Cost2": 0,
+                "ProdNo": "40611",
+                "JobQty": 11000,
+                "Cost": 248200,
+                "Weight": 5.28,
+                "ExitDay": 0,
+                "EdDT": "N",
+                "NameFull": "합판옵셋인쇄",
+                "ColorNo": "302",
+                "JobNo": "3110",
+                "PaperNo": "22930",
+                "JobCostNo": 7499403
+              },
+              {
+                "SizeNo": "10773",
+                "Cost1": 270700,
+                "CoverCD": 0,
+                "Cost2": 0,
+                "ProdNo": "40611",
+                "JobQty": 12000,
+                "Cost": 270700,
+                "Weight": 5.76,
+                "ExitDay": 0,
+                "EdDT": "N",
+                "NameFull": "합판옵셋인쇄",
+                "ColorNo": "302",
+                "JobNo": "3110",
+                "PaperNo": "22930",
+                "JobCostNo": 7499404
+              },
+              {
+                "SizeNo": "10773",
+                "Cost1": 293300,
+                "CoverCD": 0,
+                "Cost2": 0,
+                "ProdNo": "40611",
+                "JobQty": 13000,
+                "Cost": 293300,
+                "Weight": 6.24,
+                "ExitDay": 0,
+                "EdDT": "N",
+                "NameFull": "합판옵셋인쇄",
+                "ColorNo": "302",
+                "JobNo": "3110",
+                "PaperNo": "22930",
+                "JobCostNo": 7499405
+              },
+              {
+                "SizeNo": "10773",
+                "Cost1": 315800,
+                "CoverCD": 0,
+                "Cost2": 0,
+                "ProdNo": "40611",
+                "JobQty": 14000,
+                "Cost": 315800,
+                "Weight": 6.72,
+                "ExitDay": 0,
+                "EdDT": "N",
+                "NameFull": "합판옵셋인쇄",
+                "ColorNo": "302",
+                "JobNo": "3110",
+                "PaperNo": "22930",
+                "JobCostNo": 7499406
+              },
+              {
+                "SizeNo": "10773",
+                "Cost1": 338400,
+                "CoverCD": 0,
+                "Cost2": 0,
+                "ProdNo": "40611",
+                "JobQty": 15000,
+                "Cost": 338400,
+                "Weight": 7.2,
+                "ExitDay": 0,
+                "EdDT": "N",
+                "NameFull": "합판옵셋인쇄",
+                "ColorNo": "302",
+                "JobNo": "3110",
+                "PaperNo": "22930",
+                "JobCostNo": 7499407
+              },
+              {
+                "SizeNo": "10773",
+                "Cost1": 361000,
+                "CoverCD": 0,
+                "Cost2": 0,
+                "ProdNo": "40611",
+                "JobQty": 16000,
+                "Cost": 361000,
+                "Weight": 7.68,
+                "ExitDay": 0,
+                "EdDT": "N",
+                "NameFull": "합판옵셋인쇄",
+                "ColorNo": "302",
+                "JobNo": "3110",
+                "PaperNo": "22930",
+                "JobCostNo": 7499408
+              },
+              {
+                "SizeNo": "10773",
+                "Cost1": 406100,
+                "CoverCD": 0,
+                "Cost2": 0,
+                "ProdNo": "40611",
+                "JobQty": 18000,
+                "Cost": 406100,
+                "Weight": 8.64,
+                "ExitDay": 0,
+                "EdDT": "N",
+                "NameFull": "합판옵셋인쇄",
+                "ColorNo": "302",
+                "JobNo": "3110",
+                "PaperNo": "22930",
+                "JobCostNo": 7499409
+              },
+              {
+                "SizeNo": "10773",
+                "Cost1": 451200,
+                "CoverCD": 0,
+                "Cost2": 0,
+                "ProdNo": "40611",
+                "JobQty": 20000,
+                "Cost": 451200,
+                "Weight": 9.6,
+                "ExitDay": 0,
+                "EdDT": "N",
+                "NameFull": "합판옵셋인쇄",
+                "ColorNo": "302",
+                "JobNo": "3110",
+                "PaperNo": "22930",
+                "JobCostNo": 7499410
+              },
+              {
+                "SizeNo": "10773",
+                "Cost1": 564000,
+                "CoverCD": 0,
+                "Cost2": 0,
+                "ProdNo": "40611",
+                "JobQty": 25000,
+                "Cost": 564000,
+                "Weight": 12,
+                "ExitDay": 0,
+                "EdDT": "N",
+                "NameFull": "합판옵셋인쇄",
+                "ColorNo": "302",
+                "JobNo": "3110",
+                "PaperNo": "22930",
+                "JobCostNo": 7499411
+              },
+              {
+                "SizeNo": "10773",
+                "Cost1": 676800,
+                "CoverCD": 0,
+                "Cost2": 0,
+                "ProdNo": "40611",
+                "JobQty": 30000,
+                "Cost": 676800,
+                "Weight": 14.4,
+                "ExitDay": 0,
+                "EdDT": "N",
+                "NameFull": "합판옵셋인쇄",
+                "ColorNo": "302",
+                "JobNo": "3110",
+                "PaperNo": "22930",
+                "JobCostNo": 7499412
+              },
+              {
+                "SizeNo": "10773",
+                "Cost1": 902400,
+                "CoverCD": 0,
+                "Cost2": 0,
+                "ProdNo": "40611",
+                "JobQty": 40000,
+                "Cost": 902400,
+                "Weight": 19.2,
+                "ExitDay": 0,
+                "EdDT": "N",
+                "NameFull": "합판옵셋인쇄",
+                "ColorNo": "302",
+                "JobNo": "3110",
+                "PaperNo": "22930",
+                "JobCostNo": 7499413
+              },
+              {
+                "SizeNo": "10773",
+                "Cost1": 1128000,
+                "CoverCD": 0,
+                "Cost2": 0,
+                "ProdNo": "40611",
+                "JobQty": 50000,
+                "Cost": 1128000,
+                "Weight": 24,
+                "ExitDay": 0,
+                "EdDT": "N",
+                "NameFull": "합판옵셋인쇄",
+                "ColorNo": "302",
+                "JobNo": "3110",
+                "PaperNo": "22930",
+                "JobCostNo": 7499414
+              }
+            ],
+            "curUri": "/ord/calc/jobqty0",
+            "ajaxResult": "succ"
+          }
+        }
+      ]
+    },
+    "POST /ordr/prod/mdm/detail/Job": {
+      "method": "POST",
+      "path": "/ordr/prod/mdm/detail/Job",
+      "query": "",
+      "calls": [
+        {
+          "status": 200,
+          "postData": "ProdNo=40611&itemNo=36101&CoverCD=0",
+          "responseBody": {
+            "curUri": "/ordr/prod/mdm/detail/Job",
+            "mdmMap": {
+              "ReqYN": "N",
+              "CoverCD": 0,
+              "UDT": 1744875427000,
+              "ProdNo": 40611,
+              "CalcCD": 1,
+              "QUnit": 5,
+              "DeftYN": "N",
+              "EstSpYN": "N",
+              "DspLoc": 0,
+              "DspMtd": 1,
+              "JobPageDspYN": "N",
+              "CDT": 1744875346000,
+              "StDT": 1744875300000,
+              "WeightBaeSu": 1,
+              "JobBNo": 36000,
+              "JobPageGetYN": "N",
+              "AutoClsAD": "D",
+              "ShopNo": 1,
+              "JobNo": 36101,
+              "JobSizeGetYN": "N",
+              "JobQtyGetYN": "N",
+              "Sort": 1
+            },
+            "ajaxResult": "succ"
+          }
+        }
+      ]
+    },
+    "POST /ord/calc/jobcost0": {
+      "method": "POST",
+      "path": "/ord/calc/jobcost0",
+      "query": "",
+      "calls": [
+        {
+          "status": 200,
+          "postData": "{\"PJoin\":\"0\",\"ProdNo\":\"40611\",\"Job\":[{\"SNo\":\"1\",\"CostKD\":-1,\"ProdNo\":\"40611\",\"Job\":\"PRS\",\"JobNo\":\"3110\",\"CoverCD\":\"0\",\"PJoin\":\"0\",\"OrdCnt\":\"1\",\"OrdQty\":\"500\",\"SizeNo\":\"10773\",\"WSize\":\"200\",\"HSize\":\"30\",\"JobQty\":\"500\",\"PressM\":\"O\",\"QUnit\":\"5\",\"PaperNo\":\"22930\",\"ColorNo0\":\"302\",\"ColorNo\":\"302\"},{\"SNo\":\"1\",\"CostKD\":\"-1\",\"ProdNo\":\"40611\",\"Job\":\"AWK\",\"PJoin\":\"0\",\"OrdCnt\":\"1\",\"JobNo\":\"36101\",\"CoverCD\":\"0\",\"PageCD\":\"0\",\"JobQty\":\"500\",\"SizeNo\":\"10773\",\"WSize\":\"200\",\"HSize\":\"30\",\"JobOptMsg\":\"\",\"OrdQty\":\"500\"}],\"act\":\"calc\",\"OrdCnt\":\"1\",\"__wowchkeck\":\"1\"}",
+          "responseBody": {
+            "msg": "<div class='row'><div class='col-12 text-primary'>[인쇄비]</div><div class='col-12 mb-1'><ul style='padding-left:20px;'><li class='w-100'><span class='clearfix'><span class='float-left'>합판옵셋인쇄</span></li><li class='w-100'><span class='clearfix'><span class='float-left'>기본 인쇄비</span><span class='float-right'>23,400 원</span></span></li><li class='w-100'><span class='clearfix'><span class='float-left'>소계</span><span class='float-right'>23,400 원</span></li><li class='w-100'><span class='clearfix'><span class='float-left'>무게 : 0.24 kg, 작업일(추가) : 0.0</span></span></li></ul></div></div><div class='row'><div class='col-12 text-primary'>[후가공]</div><div class='col-12 mb-1'><ul style='padding-left:20px;'><li class='w-100'><span class='clearfix'><span class='float-left'>null</span><span class='float-right'>0 원</span></span></li><li class='w-100'><span class='clearfix'><span class='float-left'>소계</span><span class='float-right'>0 원</span></span></li><li class='w-100'><span class='clearfix'><span class='float-left'>무게 : 0.0 kg, 작업일(추가) : 0.0</span></span></li></ul></div></div><div class='row'><div class='col-12 text-primary'>[합계]</div><div class='col-12 mb-1'><ul style='padding-left:20px;'><li class='w-100'><span class='clearfix'><span class='float-left'>인쇄/후가공비</span><span class='float-right'>23,400 원</span></span></li><li class='w-100'><span class='clearfix'><span class='float-left'>주문건수</span><span class='float-right'>X 1 건</span></span><li class='w-100'><span class='clearfix'><span class='float-left'>인쇄/후가공비 계</span><span class='float-right'>23,400 원</span></span></li><li class='w-100'><span class='clearfix'><span class='float-left'>공급가</span><span class='float-right'>23,400 원</span></span></li><li class='w-100'><span class='clearfix'><span class='float-left'>부가세</span><span class='float-right'>2,340 원</span></span></li><li class='w-100'><span class='clearfix'><span class='float-left'>청구금액</span><span class='float-right'>25,740 원</span></span></li><li class='w-100'><span class='clearfix'><span class='float-left'>무게 : 0.24 kg, 박스 : 1 개</span></span></li></ul></div></div>",
+            "prod": "띠지스티커(도무송)",
+            "cost": 23400,
+            "costtax": 2340,
+            "exitday": 1,
+            "ajaxResult": "succ",
+            "weight": 0.24,
+            "dc_addjob": 0,
+            "amtreq": 25740,
+            "cost_prs": 23400,
+            "dc_awkjob": 0,
+            "boxcnt": 1,
+            "Jobs": [
+              {
+                "CostKD": -1,
+                "SizeNo": "10773",
+                "Cost1": 23400,
+                "KGram": 0.24,
+                "CoverCD": "0",
+                "Cost2": 0,
+                "ProdNo": "40611",
+                "QUnit": "5",
+                "WSize": "200",
+                "JobQty": "500",
+                "OrdCnt": "1",
+                "Cost": 23400,
+                "Name": "합판옵셋인쇄",
+                "PJoin": "0",
+                "OrdQty": "500",
+                "PressM": "O",
+                "ColorNo0": "302",
+                "HSize": "30",
+                "SNo": "1",
+                "ColorNo": "302",
+                "JobNo": "3110",
+                "Job": "PRS",
+                "PaperNo": "22930",
+                "JobCostNo": 7499394
+              },
+              {
+                "CostKD": "-1",
+                "SizeNo": "10773",
+                "CoverCD": "0",
+                "ProdNo": "40611",
+                "JobQty": "500",
+                "WSize": "200",
+                "OrdCnt": "1",
+                "Cost": null,
+                "Weight": null,
+                "ExitDay": 0,
+                "PJoin": "0",
+                "OrdQty": "500",
+                "HSize": "30",
+                "SNo": "1",
+                "JobOptMsg": "",
+                "JobNo": "36101",
+                "PageCD": "0",
+                "Job": "AWK",
+                "CutCnt": 1,
+                "JobCostNo": null
+              }
+            ],
+            "dc_prsjob": 0,
+            "cost_awk": 0,
+            "ordcnt": 1,
+            "curUri": "/ord/calc/jobcost0",
+            "dc_prod": 0,
+            "dc_shop": 0,
+            "cost_add": 0,
+            "costsup": 23400,
+            "whatinfo": "whatinfo",
+            "dc": 0
+          }
+        },
+        {
+          "status": 200,
+          "postData": "{\"PJoin\":\"0\",\"ProdNo\":\"40611\",\"Job\":[{\"SNo\":\"1\",\"CostKD\":-1,\"ProdNo\":\"40611\",\"Job\":\"PRS\",\"JobNo\":\"3110\",\"CoverCD\":\"0\",\"PJoin\":\"0\",\"OrdCnt\":\"1\",\"OrdQty\":\"500\",\"SizeNo\":\"10773\",\"WSize\":\"200\",\"HSize\":\"30\",\"JobQty\":\"500\",\"PressM\":\"O\",\"QUnit\":\"5\",\"PaperNo\":\"22930\",\"ColorNo0\":\"302\",\"ColorNo\":\"302\"},{\"SNo\":\"1\",\"CostKD\":\"-1\",\"ProdNo\":\"40611\",\"Job\":\"AWK\",\"PJoin\":\"0\",\"OrdCnt\":\"1\",\"JobNo\":\"36101\",\"CoverCD\":\"0\",\"PageCD\":\"0\",\"JobQty\":\"500\",\"SizeNo\":\"10773\",\"WSize\":\"200\",\"HSize\":\"30\",\"JobOptMsg\":\"\",\"OrdQty\":\"500\"}],\"act\":\"calc\",\"OrdCnt\":\"1\",\"__wowchkeck\":\"1\"}",
+          "responseBody": {
+            "msg": "<div class='row'><div class='col-12 text-primary'>[인쇄비]</div><div class='col-12 mb-1'><ul style='padding-left:20px;'><li class='w-100'><span class='clearfix'><span class='float-left'>합판옵셋인쇄</span></li><li class='w-100'><span class='clearfix'><span class='float-left'>기본 인쇄비</span><span class='float-right'>23,400 원</span></span></li><li class='w-100'><span class='clearfix'><span class='float-left'>소계</span><span class='float-right'>23,400 원</span></li><li class='w-100'><span class='clearfix'><span class='float-left'>무게 : 0.24 kg, 작업일(추가) : 0.0</span></span></li></ul></div></div><div class='row'><div class='col-12 text-primary'>[후가공]</div><div class='col-12 mb-1'><ul style='padding-left:20px;'><li class='w-100'><span class='clearfix'><span class='float-left'>null</span><span class='float-right'>0 원</span></span></li><li class='w-100'><span class='clearfix'><span class='float-left'>소계</span><span class='float-right'>0 원</span></span></li><li class='w-100'><span class='clearfix'><span class='float-left'>무게 : 0.0 kg, 작업일(추가) : 0.0</span></span></li></ul></div></div><div class='row'><div class='col-12 text-primary'>[합계]</div><div class='col-12 mb-1'><ul style='padding-left:20px;'><li class='w-100'><span class='clearfix'><span class='float-left'>인쇄/후가공비</span><span class='float-right'>23,400 원</span></span></li><li class='w-100'><span class='clearfix'><span class='float-left'>주문건수</span><span class='float-right'>X 1 건</span></span><li class='w-100'><span class='clearfix'><span class='float-left'>인쇄/후가공비 계</span><span class='float-right'>23,400 원</span></span></li><li class='w-100'><span class='clearfix'><span class='float-left'>공급가</span><span class='float-right'>23,400 원</span></span></li><li class='w-100'><span class='clearfix'><span class='float-left'>부가세</span><span class='float-right'>2,340 원</span></span></li><li class='w-100'><span class='clearfix'><span class='float-left'>청구금액</span><span class='float-right'>25,740 원</span></span></li><li class='w-100'><span class='clearfix'><span class='float-left'>무게 : 0.24 kg, 박스 : 1 개</span></span></li></ul></div></div>",
+            "prod": "띠지스티커(도무송)",
+            "cost": 23400,
+            "costtax": 2340,
+            "exitday": 1,
+            "ajaxResult": "succ",
+            "weight": 0.24,
+            "dc_addjob": 0,
+            "amtreq": 25740,
+            "cost_prs": 23400,
+            "dc_awkjob": 0,
+            "boxcnt": 1,
+            "Jobs": [
+              {
+                "CostKD": -1,
+                "SizeNo": "10773",
+                "Cost1": 23400,
+                "KGram": 0.24,
+                "CoverCD": "0",
+                "Cost2": 0,
+                "ProdNo": "40611",
+                "QUnit": "5",
+                "WSize": "200",
+                "JobQty": "500",
+                "OrdCnt": "1",
+                "Cost": 23400,
+                "Name": "합판옵셋인쇄",
+                "PJoin": "0",
+                "OrdQty": "500",
+                "PressM": "O",
+                "ColorNo0": "302",
+                "HSize": "30",
+                "SNo": "1",
+                "ColorNo": "302",
+                "JobNo": "3110",
+                "Job": "PRS",
+                "PaperNo": "22930",
+                "JobCostNo": 7499394
+              },
+              {
+                "CostKD": "-1",
+                "SizeNo": "10773",
+                "CoverCD": "0",
+                "ProdNo": "40611",
+                "JobQty": "500",
+                "WSize": "200",
+                "OrdCnt": "1",
+                "Cost": null,
+                "Weight": null,
+                "ExitDay": 0,
+                "PJoin": "0",
+                "OrdQty": "500",
+                "HSize": "30",
+                "SNo": "1",
+                "JobOptMsg": "",
+                "JobNo": "36101",
+                "PageCD": "0",
+                "Job": "AWK",
+                "CutCnt": 1,
+                "JobCostNo": null
+              }
+            ],
+            "dc_prsjob": 0,
+            "cost_awk": 0,
+            "ordcnt": 1,
+            "curUri": "/ord/calc/jobcost0",
+            "dc_prod": 0,
+            "dc_shop": 0,
+            "cost_add": 0,
+            "costsup": 23400,
+            "whatinfo": "whatinfo",
+            "dc": 0
+          }
+        }
+      ]
+    },
+    "POST /ord/cart/exitday": {
+      "method": "POST",
+      "path": "/ord/cart/exitday",
+      "query": "",
+      "calls": [
+        {
+          "status": 200,
+          "postData": "ProdNo=40611&JobNos=3110%2C36101&PaperNos=22930%2Cundefined&ColorNos=302%2Cundefined&SizeNos=10773%2C10773",
+          "responseBody": {
+            "result": {
+              "prodno": 40611,
+              "base_t": "18:30",
+              "add_size_exitday": 0,
+              "exit_day": "2026-04-01",
+              "base_day": "2026-03-31",
+              "add_color_exitday": 0,
+              "cpst_wd_d": "2026-03-31",
+              "add_over_t": 0,
+              "add_paper_exitday": 0,
+              "cpst_wd": "월,화,수,목,금",
+              "cpst_chk_wd": "화",
+              "cpst_base_d": "2026-03-31",
+              "chk_t": "10:26",
+              "add_job_exitday": 0,
+              "shopno": 1,
+              "add_prod_exitday": 1,
+              "add_tot_exitday": 1
+            }
+          }
+        },
+        {
+          "status": 200,
+          "postData": "ProdNo=40611&JobNos=3110%2C36101&PaperNos=22930%2Cundefined&ColorNos=302%2Cundefined&SizeNos=10773%2C10773",
+          "responseBody": {
+            "result": {
+              "prodno": 40611,
+              "base_t": "18:30",
+              "add_size_exitday": 0,
+              "exit_day": "2026-04-01",
+              "base_day": "2026-03-31",
+              "add_color_exitday": 0,
+              "cpst_wd_d": "2026-03-31",
+              "add_over_t": 0,
+              "add_paper_exitday": 0,
+              "cpst_wd": "월,화,수,목,금",
+              "cpst_chk_wd": "화",
+              "cpst_base_d": "2026-03-31",
+              "chk_t": "10:26",
+              "add_job_exitday": 0,
+              "shopno": 1,
+              "add_prod_exitday": 1,
+              "add_tot_exitday": 1
+            }
+          }
+        }
+      ]
+    },
+    "GET /bc": {
+      "method": "GET",
+      "path": "/bc",
+      "query": "?d=%7B%22track_id%22%3A%228687565182042523789%22%2C%22event_code%22%3A%22ViewContent%22%2C%22params%22%3A%7B%22tag%22%3A%2240611%22%7D%2C%22props%22%3A%7B%22lmt%22%3A%22N%22%7D%2C%22site%22%3A%7B%22identifier%22%3A%22wowpress.co.kr%22%7D%2C%22sdk%22%3A%7B%22type%22%3A%22WEB%22%2C%22version%22%3A%221.6.4%22%2C%22tpc%22%3A%22Y%22%7D%2C%22page%22%3A%7B%22url%22%3A%22https%3A%2F%2Fwowpress.co.kr%2Fordr%2Fprod%2Fdets%3FProdNo%3D40611%22%2C%22is_frame_env%22%3Afalse%7D%2C%22device%22%3A%7B%22dnt%22%3A%22N%22%2C%22device_type%22%3A%22pc%22%2C%22is_mobile%22%3A%22N%22%2C%22browser%22%3A%22HeadlessChrome%22%2C%22browser_version%22%3A%22145.0.7632.6%22%2C%22os%22%3A%22macOS%22%2C%22os_version%22%3A%2210_15_7%22%7D%7D",
+      "calls": [
+        {
+          "status": 204,
+          "postData": null
+        },
+        {
+          "status": 204,
+          "postData": null
+        }
+      ]
+    },
+    "POST /v1/projects/wowpress-cs/installations": {
+      "method": "POST",
+      "path": "/v1/projects/wowpress-cs/installations",
+      "query": "",
+      "calls": [
+        {
+          "status": 200,
+          "postData": "{\"fid\":\"cYvM4t5U5k-VBHs7Uj1bCC\",\"authVersion\":\"FIS_v2\",\"appId\":\"1:1040281362681:web:22257913dd883ad79c8228\",\"sdkVersion\":\"w:0.6.13\"}",
+          "responseBody": {
+            "name": "projects/1040281362681/installations/cYvM4t5U5k-VBHs7Uj1bCC",
+            "fid": "cYvM4t5U5k-VBHs7Uj1bCC",
+            "refreshToken": "3_AS3qfwKvdalfW0rpEkkJ3LCKpf_BGo9ZYt02YHXoQbK7KLesVVXa1pTMa4pQN5-HSUaJEvAb5KAqFvHr5-7AHL4huyAPcIl29WaIJ5e8MsNboJc",
+            "authToken": {
+              "token": "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBJZCI6IjE6MTA0MDI4MTM2MjY4MTp3ZWI6MjIyNTc5MTNkZDg4M2FkNzljODIyOCIsImV4cCI6MTc3NTUyNTIxNSwiZmlkIjoiY1l2TTR0NVU1ay1WQkhzN1VqMWJDQyIsInByb2plY3ROdW1iZXIiOjEwNDAyODEzNjI2ODF9.AB2LPV8wRAIgYDT7nVh01GGoCIWRwB_SS6QSG8jTc4zxWxHd21-s9V4CIE9oK2vuIwgIOYswIwJ3UmUZyFcAfu2Ow_obMZAvZ4RU",
+              "expiresIn": "604800s"
+            }
+          }
+        }
+      ]
+    },
+    "GET /dist/config/id/wowpress.json": {
+      "method": "GET",
+      "path": "/dist/config/id/wowpress.json",
+      "query": "",
+      "calls": [
+        {
+          "status": 200,
+          "postData": null,
+          "responseBody": {
+            "version": "4.0",
+            "hostingType": "self_hosted",
+            "siteCode": "2c0a795982472db1a11b251668872a40",
+            "dataParser": "",
+            "dataValidator": "",
+            "categoryParser": "",
+            "tester": false
+          }
+        }
+      ]
+    },
+    "POST /ccm/collect": {
+      "method": "POST",
+      "path": "/ccm/collect",
+      "query": "?frm=0&ae=g&en=page_view&dl=https%3A%2F%2Fwowpress.co.kr%2Fordr%2Fprod%2Fdets&scrsrc=www.googletagmanager.com&rnd=292184063.1774920415&dt=%EC%99%80%EC%9A%B0%ED%94%84%EB%A0%88%EC%8A%A4&auid=1992398253.1774920415&navt=n&npa=0&ep.ads_data_redaction=0&gtm=45He63r2v850258599za200zd850258599xea&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115616986~115938465~115938469~116133313~116991816~117484252~118317690&apve=1&apvf=f&apvc=1&tft=1774920414946&tfd=2007",
+      "calls": [
+        {
+          "status": 200,
+          "postData": null,
+          "responsePreview": ""
+        },
+        {
+          "status": 200,
+          "postData": null,
+          "responsePreview": ""
+        }
+      ]
+    },
+    "POST /g/collect": {
+      "method": "POST",
+      "path": "/g/collect",
+      "query": "?v=2&tid=G-196RRM2KDH&gtm=45je63u0h2v879067779z8850258599za200zd879067779&_p=1774920413249&_gaz=1&gcd=13l3l3l3l1l1&npa=0&dma=0&cid=220131279.1774920415&ecid=816822234&ul=en-us&sr=1280x720&uaa=x86&uab=64&uafvl=Not%253AA-Brand%3B99.0.0.0%7CHeadlessChrome%3B145.0.7632.6%7CChromium%3B145.0.7632.6&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&are=1&frm=0&pscdl=noapi&ec_mode=a&_eu=AAAAAGA&_s=1&tag_exp=0~115616985~115938465~115938468~116991816~117484252~118131809~118317690&sid=1774920414&sct=1&seg=0&dl=https%3A%2F%2Fwowpress.co.kr%2Fordr%2Fprod%2Fdets%3FProdNo%3D40611&dt=%EC%99%80%EC%9A%B0%ED%94%84%EB%A0%88%EC%8A%A4&en=page_view&_fv=1&_nsi=1&_ss=1&tfd=2017",
+      "calls": [
+        {
+          "status": 204,
+          "postData": null,
+          "responsePreview": ""
+        },
+        {
+          "status": 204,
+          "postData": null,
+          "responsePreview": ""
+        }
+      ]
+    },
+    "POST /rmkt/collect/10876121420/": {
+      "method": "POST",
+      "path": "/rmkt/collect/10876121420/",
+      "query": "?random=1774920414960&cv=11&fst=1774920414960&fmt=8&bg=ffffff&guid=ON&async=1&gtm=45be63r2v9213559146z8850258599za200zd9213559146xea&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115616986~115938465~115938469~116991816~117484252~118317690&u_w=1280&u_h=720&url=https%3A%2F%2Fwowpress.co.kr%2Fordr%2Fprod%2Fdets%3FProdNo%3D40611&frm=0&tiba=%EC%99%80%EC%9A%B0%ED%94%84%EB%A0%88%EC%8A%A4&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=1992398253.1774920415&uaa=x86&uab=64&uafvl=Not%253AA-Brand%3B99.0.0.0%7CHeadlessChrome%3B145.0.7632.6%7CChromium%3B145.0.7632.6&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&_tu=CA&gcp=5",
+      "calls": [
+        {
+          "status": 302,
+          "postData": null
+        }
+      ]
+    },
+    "GET /rmkt/collect/10876121420/": {
+      "method": "GET",
+      "path": "/rmkt/collect/10876121420/",
+      "query": "?random=1774920414960&cv=11&fst=1774920414960&fmt=8&bg=ffffff&guid=ON&async=1&gtm=45be63r2v9213559146z8850258599za200zd9213559146xea&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115616986~115938465~115938469~116991816~117484252~118317690&u_w=1280&u_h=720&url=https%3A%2F%2Fwowpress.co.kr%2Fordr%2Fprod%2Fdets%3FProdNo%3D40611&frm=0&tiba=%EC%99%80%EC%9A%B0%ED%94%84%EB%A0%88%EC%8A%A4&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=1992398253.1774920415&uaa=x86&uab=64&uafvl=Not%253AA-Brand%3B99.0.0.0%7CHeadlessChrome%3B145.0.7632.6%7CChromium%3B145.0.7632.6&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&_tu=CA&gcp=5&ipr=y",
+      "calls": [
+        {
+          "status": 200,
+          "postData": null,
+          "responsePreview": ""
+        }
+      ]
+    },
+    "POST /google.firestore.v1.Firestore/Listen/channel": {
+      "method": "POST",
+      "path": "/google.firestore.v1.Firestore/Listen/channel",
+      "query": "?VER=8&database=projects%2Fwowpress-cs%2Fdatabases%2F(default)&RID=19386&CVER=22&X-HTTP-Session-Id=gsessionid&zx=34cfitp20yb7&t=1",
+      "calls": [
+        {
+          "status": 200,
+          "postData": "headers=X-Goog-Api-Client%3Agl-js%2F%20fire%2F11.6.0%0D%0AContent-Type%3Atext%2Fplain%0D%0AX-Firebase-GMPID%3A1%3A1040281362681%3Aweb%3A22257913dd883ad79c8228%0D%0AAuthorization%3ABearer%20eyJhbGciOiJSUzI1NiIsImtpZCI6IjM3MzAwNzY5YTA3ZTA1MTE2ZjdlNTEzOGZhOTA5MzY4NWVlYmMyNDAiLCJ0eXAiOiJKV1QifQ.eyJwcm92aWRlcl9pZCI6ImFub255bW91cyIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS93b3dwcmVzcy1jcyIsImF1ZCI6Indvd3ByZXNzLWNzIiwiYXV0aF90aW1lIjoxNzc0OTIwNDE1LCJ1c2VyX2lkIjoiMHhqbG45aUVCQVhqd0sybEowdHo3RkY4M1BGMiIsInN1YiI6IjB4amxuOWlFQkFYandLMmxKMHR6N0ZGODNQRjIiLCJpYXQiOjE3NzQ5MjA0MTUsImV4cCI6MTc3NDkyNDAxNSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6e30sInNpZ25faW5fcHJvdmlkZXIiOiJhbm9ueW1vdXMifX0.MYJpetqMsGC1QWcjLloRvCLEosMjtV1l8_gS5CbqX_NMpXyk4vZn1iiaNVW0YtDhJOV7cXMpsutXRF1PEDpwzgecc1tUKZUnIgcMimqfPthjJN1wsfxs1AY9oftnYCmB9WtaRIA31cnz6W1prOfp0Sy15ZmDB_z5ARSGesIVuCUs0sjVbKSRf4ZT2aTJ0vtc-JvDG76kMTD0Wn7zjy_auudrTKKEhojHSmDgmXg_2xaAtNexzN8OYZWsgTS82UsA7xQiikbeQ81OGq_e3UWOIhwYZfw5QgEPLdjQNSDUSvMkU-DKVfCi996F1hKudbKAgMt6CANchMPI8vJtTdjMiQ%0D%0A&count=1&ofs=0&req0___data__=%7B%22database%22%3A%22projects%2Fwowpress-cs%2Fdatabases%2F(default)%22%2C%22addTarget%22%3A%7B%22query%22%3A%7B%22structuredQuery%22%3A%7B%22from%22%3A%5B%7B%22collectionId%22%3A%22tickets%22%7D%5D%2C%22where%22%3A%7B%22fieldFilter%22%3A%7B%22field%22%3A%7B%22fieldPath%22%3A%22customer.id%22%7D%2C%22op%22%3A%22EQUAL%22%2C%22value%22%3A%7B%22stringValue%22%3A%220xjln9iEBAXjwK2lJ0tz7FF83PF2%22%7D%7D%7D%2C%22orderBy%22%3A%5B%7B%22field%22%3A%7B%22fieldPath%22%3A%22updatedAt%22%7D%2C%22direction%22%3A%22DESCENDING%22%7D%2C%7B%22field%22%3A%7B%22fieldPath%22%3A%22__name__%22%7D%2C%22direction%22%3A%22DESCENDING%22%7D%5D%2C%22limit%22%3A1%7D%2C%22parent%22%3A%22projects%2Fwowpress-cs%2Fdatabases%2F(default)%2Fdocuments%22%7D%2C%22targetId%22%3A2%7D%7D",
+          "responsePreview": "51\n[[0,[\"c\",\"SffBMnY4woF0wKAPuI-ZMw\",\"\",8,14,30000]]]\n"
+        },
+        {
+          "status": 200,
+          "postData": "headers=X-Goog-Api-Client%3Agl-js%2F%20fire%2F11.6.0%0D%0AContent-Type%3Atext%2Fplain%0D%0AX-Firebase-GMPID%3A1%3A1040281362681%3Aweb%3A22257913dd883ad79c8228%0D%0AAuthorization%3ABearer%20eyJhbGciOiJSUzI1NiIsImtpZCI6IjM3MzAwNzY5YTA3ZTA1MTE2ZjdlNTEzOGZhOTA5MzY4NWVlYmMyNDAiLCJ0eXAiOiJKV1QifQ.eyJwcm92aWRlcl9pZCI6ImFub255bW91cyIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS93b3dwcmVzcy1jcyIsImF1ZCI6Indvd3ByZXNzLWNzIiwiYXV0aF90aW1lIjoxNzc0OTIwNDE2LCJ1c2VyX2lkIjoibEZpMURmaktXQ1ZIdzlyYWM1YlU5Njl1OVhJMiIsInN1YiI6ImxGaTFEZmpLV0NWSHc5cmFjNWJVOTY5dTlYSTIiLCJpYXQiOjE3NzQ5MjA0MTYsImV4cCI6MTc3NDkyNDAxNiwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6e30sInNpZ25faW5fcHJvdmlkZXIiOiJhbm9ueW1vdXMifX0.P4AGuJcYdG847mk4nHPzk4gcz37ylslGOfBD3UfSxE78f7Htq-QGzIqobpzGKHmbRz7mr7VtRZMxtNXMDVBygX-t7sjVuUOoVG90ZkFAbSbwkCLnnKE-vv_flKrYEf_lG3Wl3TIJzigOy0KcSslnID3nc39EaVnQY2SK_m0zZVVEQ20KflO1a4m1S0hm1I-ozt_fzkmzFSBURc8T11Qz_2z-HeQ3QCIddqqlwcvEKMqvj_0RjeRACLDbKAjAA9Rh_iTsHsNBUXD0sntVdSY36HlN12HagTItLkke4fQRPkj3Tn1jEk-6MEmA6T2P25Ip46OciyAe7EeydGQOayHQ6A%0D%0A&count=1&ofs=0&req0___data__=%7B%22database%22%3A%22projects%2Fwowpress-cs%2Fdatabases%2F(default)%22%2C%22addTarget%22%3A%7B%22query%22%3A%7B%22structuredQuery%22%3A%7B%22from%22%3A%5B%7B%22collectionId%22%3A%22tickets%22%7D%5D%2C%22where%22%3A%7B%22fieldFilter%22%3A%7B%22field%22%3A%7B%22fieldPath%22%3A%22customer.id%22%7D%2C%22op%22%3A%22EQUAL%22%2C%22value%22%3A%7B%22stringValue%22%3A%22lFi1DfjKWCVHw9rac5bU969u9XI2%22%7D%7D%7D%2C%22orderBy%22%3A%5B%7B%22field%22%3A%7B%22fieldPath%22%3A%22updatedAt%22%7D%2C%22direction%22%3A%22DESCENDING%22%7D%2C%7B%22field%22%3A%7B%22fieldPath%22%3A%22__name__%22%7D%2C%22direction%22%3A%22DESCENDING%22%7D%5D%2C%22limit%22%3A1%7D%2C%22parent%22%3A%22projects%2Fwowpress-cs%2Fdatabases%2F(default)%2Fdocuments%22%7D%2C%22targetId%22%3A4%7D%7D",
+          "responsePreview": "51\n[[0,[\"c\",\"8TeDAcd5qHOuzq4EHzh2YQ\",\"\",8,14,30000]]]\n"
+        }
+      ]
+    },
+    "GET /google.firestore.v1.Firestore/Listen/channel": {
+      "method": "GET",
+      "path": "/google.firestore.v1.Firestore/Listen/channel",
+      "query": "?gsessionid=oR5Rt0ki5RBDahxEfHXvx4clqimC6G4jGKjG3qXg_4MMuxLKNE7YKA&VER=8&database=projects%2Fwowpress-cs%2Fdatabases%2F(default)&RID=rpc&SID=SffBMnY4woF0wKAPuI-ZMw&AID=0&CI=0&TYPE=xmlhttp&zx=tch67mxbzz2h&t=1",
+      "calls": [
+        {
+          "status": 200,
+          "postData": null,
+          "responsePreview": "409\n[[1,[{\n  \"targetChange\": {\n    \"targetChangeType\": \"ADD\",\n    \"targetIds\": [\n      2\n    ]\n  }\n}\n]],[2,[{\n  \"targetChange\": {\n    \"targetChangeType\": \"CURRENT\",\n    \"targetIds\": [\n      2\n    ],\n    \"resumeToken\": \"CgkIgIew5/3IkwM=\",\n    \"readTime\": \"2026-03-31T01:26:56.363392Z\"\n  }\n}\n]],[3,[{\n  \"targetChange\": {\n    \"resumeToken\": \"CgkIgIew5/3IkwM=\",\n    \"readTime\": \"2026-03-31T01:26:56.363392Z\"\n  }\n}\n]]]"
+        },
+        {
+          "status": 200,
+          "postData": null
+        }
+      ]
+    }
+  },
+  "bodyTextPreview": "WOW멤버십\nVVIP만의 특별한 혜택\n- 결제금액 4% 적립\n- 배쑝와쑝 배송비 무료\n- 명함/스티커 2만원 이상 택배비 무료\n- VIP 전용 상담 가능\n등급조건(3개월 접수액 기준)\n\n3억원 이상 \n9,000만원 이상 \n3,000만원 이상 \n2,100만원 이상 \n1,200만원 이상 \n300만원 이상 \n90만원 이상 \n30만원 이상 \n5만원 이상 \n5만원 미만\nWOW 멤버십안내 자세히보기\n   \n로그인\n회원가입\n쿠폰4종+무료배송\n고객센터\n요즘 인쇄 어디?\n와우프레스\n정매수 인쇄 어디?\n와우프레스\n요즘 인쇄 어디?\n와우프레스\n정매수 인쇄 어디?\n와우프레스\n상업인쇄소\n힙지로디지털\n책공방\n가게용품\n문구점\n어패럴\n선거홍보물\n이벤트\n신제품\n제작가이드 통합주문 무료직배송신청\nNEW!\n이지템플릿\n창닫기\n홈\n>\n스티커\n명함\n스티커\n책자\n사인제품\n전단\n디지털인쇄\n홍보물\n자석제품\n봉투\n판촉물\n캘린더\n카페용품\n서식류\n행택/쿠폰/안내장\n포토/액자\n홀더\n굿즈/다꾸\n와우기획상품\n부자재\n팬시제품\n선거홍보물\n폰 액세서리\n어패럴\n>\n사각스티커\n사각스티커\n도무송스티커\n주차스티커\n판스티커\n배달스티커\n핫딜스티커\n팬시스티커\n롤스티커\n정밀도무송스티커\n>\n띠지스티커(도무송)\n띠지스티커(사각)\n띠지스티커(도무송)\n띠지스티커(도무송)\n상품이나 포장 용기에 부착해 정보를 전달하며, 다양한 모양으로 제작 가능한 띠지 스티커\n \n●  예상출고일 2026-04-01\n용지\t출고일\n아트지(무코팅)\n아트지(유광코팅)\n유포지\t1박2일\n아트지(무광코팅)\t2박3일(500매는 3박4일)\n모조지\t화.목 조판 / 수.금 출고\n크라프트지\t수.금 조판 / 목.월 출고\n\n\n- 균등재단 선택 시 기존 출고일 +1일 추가됩니다.\n- 출고일은 주문접수부터 생산완료까지 소요되는 일자입니다(토/일/공휴일 제외)\n- 주문 및 결제 완료 후 접수가 진행되며 마감시간이 지난 주문 건은 다음 날 처리됩니다.\n- 후가공 선택 시 기존 출고일에서 1일 추가됩니다(여러 후가공이 있는 경우 별도 문의 바람)\n●  접수마감시간 월~목 18:30 / 금 20:00\n●  유의사항\n- 제품 생산 시 오차 방지를 위해 본사 제공 칼선을 사용해 주시기 바랍니다.\n- 균등 재단을 선택 안 할 경우 임의로 재단되는 점 유의 부탁드립니다.\n- 규격 및 인쇄도수를 변경하시면 선택한 용지가 초기화되오니 주문 전 꼭 확인해 주세요.\n- 도무송스티커 칼선의 최소사이즈는 10x10(mm)입니다.\n- 도무송스티커 칼선을 직선으로 할 경우 스티커를 떼어낼 때 찢어질 수 있으므로 컬선의 모서리 부분은 둥글게 처리해야 합니다.\n- 굴곡이 많거나 섬세한 모양의 칼선은 도무송 작업 시 변형될 수 있으므로 별도 문의바랍니다.\n- 본사에서 생산하는 스티커는 실외용으로 적합하지 않습니다.\n- 백색파일 작업을 한 경우 주문 시 인쇄도수에서 단면 칼라+백색을 선택해 주세요.\n- 백색인쇄는 재질 색상에 따라 비침 현상이 발생하여 순백색 인쇄가 불가합니다. 이로 인한 재작업은 불가하오니 주문 전 유의 바랍니다.\n주문방법\n파일주문\n\t\n이지템플릿\n규격\n비규격\n비규격\n원형200x30\n원형300x30\n원형400x30\n타원200x30\n타원300x30\n타원400x30\n팔각200x50\n팔각300x50\n팔각400x50\n비규격(균등)\n원형200x30(균등)\n원형300x30(균등)\n원형400x30(균등)\n타원200x30(균등)\n타원300x30(균등)\n타원400x30(균등)\n팔각200x50(균등)\n팔각300x50(균등)\n팔각400x50(균등)\n* 재단사이즈를 확인(수정)하세요.(주문과 다르면 접수불가)\n재단사이즈(mm) : 가로  세로 \n작업사이즈(mm) : 가로  세로 \n인쇄도수\n단면 칼라\n단면 칼라\n단면 칼라+백색\n용지\n아트지(무광코팅)\n아트지(무광코팅)\n아트지(유광코팅)\n아트지(무코팅)\n모조지\n크라프트지\n유포지\n80g\n80g\n수량\n500매\n500매\n1000매\n2000매\n3000매\n4000매\n5000매\n6000매\n8000매\n10000매\n11000매\n12000매\n13000매\n14000매\n15000매\n16000매\n18000매\n20000매\n25000매\n30000매\n40000매\n50000매\n \n건수\n1건\n1건\n2건\n3건\n4건\n5건\n6건\n7건\n8건\n9건\n10건\n11건\n12건\n13건\n14건\n15건\n16건\n17건\n18건\n19건\n20건\n21건\n22건\n23건\n24건\n25건\n26건\n27건\n28건\n29건\n30건\n31건\n32건\n33건\n34건\n35건\n36건\n37건\n38건\n39건\n40건\n41건\n42건\n43건\n44건\n45건\n46건\n47건\n48건\n49건\n50건\n - 여러 개의 인쇄 데이타를 주문할 때 건수를 선택해 주세요.\n후가공\n칼선\n칼선\n도무송스티커 주문 시 왼쪽에는 인쇄파일, 오른쪽에는 칼선을 배열해 주시고\n칼선의 굴곡이 많거나 복잡한 모양일 경우 정밀도무송스티커로 주문해 주세요.\n총 칼선 개수에 맞춰 선택해주세요.\n1개\n칼선 선택하세요\n1개\n2개\n3개\n4개\n5개\n6개\n7개\n8개\n9개\n10개\n11개\n12개\n13개\n14개\n15개\n16개\n17개\n18개\n19개\n20개\n21개\n22개\n23개\n24개\n25개\n26개\n27개\n28개\n29개\n30개\n띠지스티커(도무송)\n\n예상출고일\t2026-04-01\n규격\t비규격\n인쇄도수\t단면 칼라\n용지\t아트지(무광코팅)80g\n\n수량\t500매x1건\n후가공\t칼선  1개  \n견적서\t견적서출력\n인쇄비\t23,400 원\n부자재비\t0 원\n후가공비\t0 원\n할인\t0 원\n부가세\t2,340 원\n총 결제금액25,740 원\n\n\n장바구니 주문하기\n제품정보\n제작가이드\n이용후기 \n(0)\n출고/배송\n재작업/취소/환불\n원형으로 더 돋보이는 라벨 포장\n띠지스티커(도무송)\n\n500매 15,800원부터\n최고의 가성비\n\n차별화된 첫인상\n다양한 패키지와의 조화!\n\n브랜딩의 시작!\n맞춤형 제작으로\n브랜드 가치를 높히세요.\n\n사각보다 더 특별한 인상을 남기고 싶을 때\n선물 & 파티 장식 등 다양하게 활용!\n제작 가능 사이즈\n규격사이즈\n원형 : 200x300, 300x30, 400x30\n타원 : 200x30, 300x30, 400x30\n팔각 : 200x50, 300x50, 400x50mm\n비규격\n최소 10x10mm ~ 최대 435x600mm\n접수가능파일\nAI EPS\n저작권 유의"
+}

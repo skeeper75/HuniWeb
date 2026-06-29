@@ -1,0 +1,183 @@
+{
+  "pdtCode": "ACNTHAP",
+  "productName": "아크릴 명찰",
+  "itemType": "vDigital_item",
+  "priceType": "vTmpl_price",
+  "disablePcsRules": [
+    {
+      "materialCode": "RXIGC075",
+      "pcsCode": "COT_DFT",
+      "pcsDetailCode": null,
+      "note": null
+    },
+    {
+      "materialCode": "RXIGC075",
+      "pcsCode": "MIS_DFT",
+      "pcsDetailCode": null,
+      "note": null
+    },
+    {
+      "materialCode": "RXIGC075",
+      "pcsCode": "SCO_DFT",
+      "pcsDetailCode": null,
+      "note": null
+    }
+  ],
+  "hiddenMaterials": [],
+  "quantityConstraints": [
+    {
+      "divCode": null,
+      "minPrintCount": 1,
+      "reamCount": null,
+      "firstCount": 1,
+      "incrementCount": 1,
+      "incrementStep": 10,
+      "minInnerPage": 1,
+      "maxInnerPage": 1,
+      "stepInnerPage": 1,
+      "maxThickness": null,
+      "defaultPrintCount": 1,
+      "innerMaxWeight": null,
+      "coverMinWeight": null
+    }
+  ],
+  "dosuBncMapping": [],
+  "sizeConstraints": [
+    {
+      "divCode": "",
+      "divName": "소 70X25",
+      "workWidth": 72,
+      "workHeight": 27,
+      "cutWidth": 70,
+      "cutHeight": 25,
+      "isDefault": true,
+      "isHidden": false,
+      "reamPaperCount": null,
+      "note": null
+    },
+    {
+      "divCode": "",
+      "divName": "중 75X25",
+      "workWidth": 77,
+      "workHeight": 27,
+      "cutWidth": 75,
+      "cutHeight": 25,
+      "isDefault": false,
+      "isHidden": false,
+      "reamPaperCount": null,
+      "note": null
+    }
+  ],
+  "pcsConstraints": [
+    {
+      "pcsCode": "BON_PAP",
+      "pcsDetailCode": "ACXXS",
+      "pcsDetailName": "아크릴합지",
+      "pcsGroupName": "접착",
+      "webGroup": "BON_PAP_AC",
+      "webGroupName": null,
+      "viewYn": "N",
+      "hideYn": "N",
+      "essentialYn": "Y",
+      "materialCode": null,
+      "materialCod": null,
+      "workWidth": 0,
+      "workHeight": 0,
+      "notice": [
+        "*두꺼운 용지에 인쇄한 표지를 합지해 하드커버 같은 효과가 있으며 프리미엄 한 책자에 주로 사용됩니다."
+      ],
+      "note": null,
+      "subMaterialYn": "N"
+    },
+    {
+      "pcsCode": "LAS_DFT",
+      "pcsDetailCode": "DFXXX",
+      "pcsDetailName": "레이저",
+      "pcsGroupName": "레이저",
+      "webGroup": "LAS_DFT_DF",
+      "webGroupName": null,
+      "viewYn": "N",
+      "hideYn": "N",
+      "essentialYn": "Y",
+      "materialCode": null,
+      "materialCod": null,
+      "workWidth": 0,
+      "workHeight": 0,
+      "notice": [
+        "\t자동 견적은 A3 용지 1미터 이하 커팅 기준 금액입니다. 파일 업로드 후 최종 견적을 확인하실 수 있습니다."
+      ],
+      "note": null,
+      "subMaterialYn": "N"
+    },
+    {
+      "pcsCode": "WRK_MTR",
+      "pcsDetailCode": "NBPIN",
+      "pcsDetailName": "옷핀 집게",
+      "pcsGroupName": "부자재작업",
+      "webGroup": "WRK_MTR_NB",
+      "webGroupName": "뒷면자재",
+      "viewYn": "Y",
+      "hideYn": "N",
+      "essentialYn": "Y",
+      "materialCode": "SXANB001",
+      "materialCod": "SXANB001",
+      "workWidth": 0,
+      "workHeight": 0,
+      "notice": [],
+      "note": null,
+      "subMaterialYn": "Y"
+    },
+    {
+      "pcsCode": "WRK_MTR",
+      "pcsDetailCode": "NBMGN",
+      "pcsDetailName": "마그넷",
+      "pcsGroupName": "부자재작업",
+      "webGroup": "WRK_MTR_NB",
+      "webGroupName": "뒷면자재",
+      "viewYn": "Y",
+      "hideYn": "N",
+      "essentialYn": "Y",
+      "materialCode": "SXANB002",
+      "materialCod": "SXANB002",
+      "workWidth": 0,
+      "workHeight": 0,
+      "notice": [],
+      "note": null,
+      "subMaterialYn": "Y"
+    }
+  ],
+  "baseConstraints": {
+    "productCode": "ACNTHAP",
+    "productName": "아크릴 명찰",
+    "widthHeightSeparate": "N",
+    "printYn": "Y",
+    "unit": "pcs",
+    "orderCountYn": "Y",
+    "nonStandardAllowed": "N",
+    "minCutWidth": 70,
+    "minCutHeight": 25,
+    "maxCutWidth": 148,
+    "maxCutHeight": 210,
+    "defaultCutWidth": 0,
+    "defaultCutHeight": 0,
+    "cutMargin": 2,
+    "firstCount": 1,
+    "increment": 1,
+    "incrementStep": 10,
+    "reamYn": "",
+    "setCount": 1
+  },
+  "summary": {
+    "totalDisableRules": 3,
+    "totalHiddenMaterials": 0,
+    "totalQuantityRules": 1,
+    "totalDosuBncMappings": 0,
+    "totalSizes": 2,
+    "hiddenSizes": 0,
+    "totalPcsOptions": 4,
+    "hiddenPcs": 0,
+    "essentialPcs": 4,
+    "materialBoundPcs": 2,
+    "totalConstraintCount": 4
+  }
+}

@@ -1,0 +1,488 @@
+{
+  "pdtCode": "PRBKYRN",
+  "productName": "트윈링 책자 (컬러)",
+  "itemType": "book2025_item",
+  "priceType": "book2025_price",
+  "disablePcsRules": [
+    {
+      "materialCode": "RXOMO080",
+      "pcsCode": "COT_DFT",
+      "pcsDetailCode": null,
+      "note": null
+    },
+    {
+      "materialCode": "RXOMO080",
+      "pcsCode": "FLD_DFT",
+      "pcsDetailCode": null,
+      "note": null
+    },
+    {
+      "materialCode": "RXOMO080",
+      "pcsCode": "MIS_DFT",
+      "pcsDetailCode": null,
+      "note": null
+    },
+    {
+      "materialCode": "RXOMO080",
+      "pcsCode": "PRT_MAG",
+      "pcsDetailCode": null,
+      "note": null
+    },
+    {
+      "materialCode": "RXOMO080",
+      "pcsCode": "SCO_DFT",
+      "pcsDetailCode": null,
+      "note": null
+    },
+    {
+      "materialCode": "RXOMO080",
+      "pcsCode": "SCO_GLD",
+      "pcsDetailCode": null,
+      "note": null
+    },
+    {
+      "materialCode": "RXOMO080",
+      "pcsCode": "SCO_SLV",
+      "pcsDetailCode": null,
+      "note": null
+    },
+    {
+      "materialCode": "RXOMO100",
+      "pcsCode": "COT_DFT",
+      "pcsDetailCode": null,
+      "note": null
+    },
+    {
+      "materialCode": "RXOMO100",
+      "pcsCode": "FLD_DFT",
+      "pcsDetailCode": null,
+      "note": null
+    },
+    {
+      "materialCode": "RXOMO100",
+      "pcsCode": "LAM_DFT",
+      "pcsDetailCode": null,
+      "note": null
+    },
+    {
+      "materialCode": "RXOMO100",
+      "pcsCode": "MIS_DFT",
+      "pcsDetailCode": null,
+      "note": null
+    },
+    {
+      "materialCode": "RXOMO100",
+      "pcsCode": "OSI_DFT",
+      "pcsDetailCode": null,
+      "note": null
+    },
+    {
+      "materialCode": "RXOMO100",
+      "pcsCode": "PRT_MAG",
+      "pcsDetailCode": null,
+      "note": null
+    },
+    {
+      "materialCode": "RXOMO100",
+      "pcsCode": "SCO_DFT",
+      "pcsDetailCode": null,
+      "note": null
+    },
+    {
+      "materialCode": "RXOMO100",
+      "pcsCode": "SCO_GLD",
+      "pcsDetailCode": null,
+      "note": null
+    },
+    {
+      "materialCode": "RXOMO100",
+      "pcsCode": "SCO_SLV",
+      "pcsDetailCode": null,
+      "note": null
+    },
+    {
+      "materialCode": "RXPLM080",
+      "pcsCode": "COT_DFT",
+      "pcsDetailCode": null,
+      "note": null
+    },
+    {
+      "materialCode": "RXPLM080",
+      "pcsCode": "MIS_DFT",
+      "pcsDetailCode": null,
+      "note": null
+    },
+    {
+      "materialCode": "RXPLM100",
+      "pcsCode": "COT_DFT",
+      "pcsDetailCode": null,
+      "note": null
+    },
+    {
+      "materialCode": "RXPLM100",
+      "pcsCode": "MIS_DFT",
+      "pcsDetailCode": null,
+      "note": null
+    },
+    {
+      "materialCode": "RXPLW080",
+      "pcsCode": "COT_DFT",
+      "pcsDetailCode": null,
+      "note": null
+    },
+    {
+      "materialCode": "RXPLW080",
+      "pcsCode": "MIS_DFT",
+      "pcsDetailCode": null,
+      "note": null
+    },
+    {
+      "materialCode": "RXPLW100",
+      "pcsCode": "COT_DFT",
+      "pcsDetailCode": null,
+      "note": null
+    },
+    {
+      "materialCode": "RXPLW100",
+      "pcsCode": "MIS_DFT",
+      "pcsDetailCode": null,
+      "note": null
+    }
+  ],
+  "hiddenMaterials": [],
+  "quantityConstraints": [
+    {
+      "divCode": null,
+      "minPrintCount": 30,
+      "reamCount": null,
+      "firstCount": 30,
+      "incrementCount": 10,
+      "incrementStep": 10,
+      "minInnerPage": 2,
+      "maxInnerPage": 130,
+      "stepInnerPage": 1,
+      "maxThickness": 1000,
+      "defaultPrintCount": 30,
+      "innerMaxWeight": 1000,
+      "coverMinWeight": 200
+    }
+  ],
+  "dosuBncMapping": [
+    {
+      "printColorCount": 4,
+      "code": "SID_S",
+      "codeName": "단면",
+      "bindingGroup": "BNC_COL",
+      "note": null
+    },
+    {
+      "printColorCount": 8,
+      "code": "SID_D",
+      "codeName": "양면",
+      "bindingGroup": "BNC_COL",
+      "note": null
+    },
+    {
+      "printColorCount": 8,
+      "code": "SID_D",
+      "codeName": "양면",
+      "bindingGroup": "BNC_COL",
+      "note": "책자 내지 인쇄색도",
+      "type": "inner"
+    }
+  ],
+  "sizeConstraints": [
+    {
+      "divCode": "",
+      "divName": "트윈링 책자 (A4세로형)",
+      "workWidth": 220,
+      "workHeight": 307,
+      "cutWidth": 210,
+      "cutHeight": 297,
+      "isDefault": true,
+      "isHidden": false,
+      "reamPaperCount": null,
+      "note": null
+    },
+    {
+      "divCode": "",
+      "divName": "트윈링 책자 (A4가로형)",
+      "workWidth": 307,
+      "workHeight": 220,
+      "cutWidth": 297,
+      "cutHeight": 210,
+      "isDefault": false,
+      "isHidden": false,
+      "reamPaperCount": null,
+      "note": null
+    },
+    {
+      "divCode": "",
+      "divName": "트윈링 책자 (B5세로형)",
+      "workWidth": 192,
+      "workHeight": 267,
+      "cutWidth": 182,
+      "cutHeight": 257,
+      "isDefault": false,
+      "isHidden": false,
+      "reamPaperCount": null,
+      "note": null
+    }
+  ],
+  "pcsConstraints": [
+    {
+      "pcsCode": "COT_DFT",
+      "pcsDetailCode": "TCMAS",
+      "pcsDetailName": "무광코팅단면",
+      "pcsGroupName": "코팅",
+      "webGroup": "COT_DFT_TC",
+      "webGroupName": null,
+      "viewYn": "Y",
+      "hideYn": "N",
+      "essentialYn": "Y",
+      "materialCode": null,
+      "materialCod": null,
+      "workWidth": 0,
+      "workHeight": 0,
+      "notice": [],
+      "note": null,
+      "subMaterialYn": "N"
+    },
+    {
+      "pcsCode": "COT_DFT",
+      "pcsDetailCode": "TCGLS",
+      "pcsDetailName": "유광코팅단면",
+      "pcsGroupName": "코팅",
+      "webGroup": "COT_DFT_TC",
+      "webGroupName": null,
+      "viewYn": "Y",
+      "hideYn": "N",
+      "essentialYn": "Y",
+      "materialCode": null,
+      "materialCod": null,
+      "workWidth": 0,
+      "workHeight": 0,
+      "notice": [],
+      "note": null,
+      "subMaterialYn": "N"
+    },
+    {
+      "pcsCode": "COT_DFT",
+      "pcsDetailCode": "TCEBS",
+      "pcsDetailName": "엠보코팅단면",
+      "pcsGroupName": "코팅",
+      "webGroup": "COT_DFT_TC",
+      "webGroupName": null,
+      "viewYn": "Y",
+      "hideYn": "N",
+      "essentialYn": "Y",
+      "materialCode": null,
+      "materialCod": null,
+      "workWidth": 0,
+      "workHeight": 0,
+      "notice": [],
+      "note": null,
+      "subMaterialYn": "N"
+    },
+    {
+      "pcsCode": "CUT_DFT",
+      "pcsDetailCode": "DFXXX",
+      "pcsDetailName": "재단",
+      "pcsGroupName": "재단",
+      "webGroup": "CUT_DFT_DF",
+      "webGroupName": null,
+      "viewYn": "N",
+      "hideYn": "N",
+      "essentialYn": "Y",
+      "materialCode": null,
+      "materialCod": null,
+      "workWidth": 0,
+      "workHeight": 0,
+      "notice": [],
+      "note": null,
+      "subMaterialYn": "N"
+    },
+    {
+      "pcsCode": "RIN_DFT",
+      "pcsDetailCode": "BPLFT",
+      "pcsDetailName": "좌철",
+      "pcsGroupName": "링제본",
+      "webGroup": "RIN_DFT_BP",
+      "webGroupName": null,
+      "viewYn": "Y",
+      "hideYn": "N",
+      "essentialYn": "Y",
+      "materialCode": null,
+      "materialCod": null,
+      "workWidth": 0,
+      "workHeight": 0,
+      "notice": [],
+      "note": null,
+      "subMaterialYn": "N"
+    },
+    {
+      "pcsCode": "RIN_DFT",
+      "pcsDetailCode": "BPTOP",
+      "pcsDetailName": "상철",
+      "pcsGroupName": "링제본",
+      "webGroup": "RIN_DFT_BP",
+      "webGroupName": null,
+      "viewYn": "Y",
+      "hideYn": "N",
+      "essentialYn": "Y",
+      "materialCode": null,
+      "materialCod": null,
+      "workWidth": 0,
+      "workHeight": 0,
+      "notice": [],
+      "note": null,
+      "subMaterialYn": "N"
+    },
+    {
+      "pcsCode": "CVR_UNT",
+      "pcsDetailCode": "DFXXX",
+      "pcsDetailName": "낱장커버",
+      "pcsGroupName": "커버",
+      "webGroup": "CVR_UNT_DF",
+      "webGroupName": null,
+      "viewYn": "N",
+      "hideYn": "N",
+      "essentialYn": "Y",
+      "materialCode": null,
+      "materialCod": null,
+      "workWidth": 0,
+      "workHeight": 0,
+      "notice": [],
+      "note": null,
+      "subMaterialYn": "N"
+    },
+    {
+      "pcsCode": "BON_PAP",
+      "pcsDetailCode": "BKCVR",
+      "pcsDetailName": "표지합지",
+      "pcsGroupName": "접착",
+      "webGroup": "BON_PAP_BK",
+      "webGroupName": null,
+      "viewYn": "Y",
+      "hideYn": "N",
+      "essentialYn": "N",
+      "materialCode": null,
+      "materialCod": null,
+      "workWidth": 0,
+      "workHeight": 0,
+      "notice": [
+        "*두꺼운 용지에 인쇄한 표지를 합지해 하드커버 같은 효과가 있으며 프리미엄 한 책자에 주로 사용됩니다."
+      ],
+      "note": null,
+      "subMaterialYn": "N"
+    },
+    {
+      "pcsCode": "SCO_DFT",
+      "pcsDetailCode": "DFXXS",
+      "pcsDetailName": "스코딕스단면",
+      "pcsGroupName": "스코딕스",
+      "webGroup": "SCO_DFT_DF",
+      "webGroupName": null,
+      "viewYn": "Y",
+      "hideYn": "N",
+      "essentialYn": "N",
+      "materialCode": null,
+      "materialCod": null,
+      "workWidth": 0,
+      "workHeight": 0,
+      "notice": [
+        "* 투명 잉크가 올라갈 부분을 인쇄 파일과 함께 PDF 파일로 주문해 주세요. (에디터 주문 불가)"
+      ],
+      "note": null,
+      "subMaterialYn": "N"
+    },
+    {
+      "pcsCode": "ADC_PVC",
+      "pcsDetailCode": "DFXXX",
+      "pcsDetailName": "PVC 추가커버",
+      "pcsGroupName": "PVC 추가커버",
+      "webGroup": "ADC_PVC_DF",
+      "webGroupName": null,
+      "viewYn": "Y",
+      "hideYn": "N",
+      "essentialYn": "N",
+      "materialCode": null,
+      "materialCod": null,
+      "workWidth": 0,
+      "workHeight": 0,
+      "notice": [
+        "* 표지 앞뒤로 반투명 PVC 커버를 한 겹 덧대어 링 제본합니다.(필수)"
+      ],
+      "note": null,
+      "subMaterialYn": "N"
+    },
+    {
+      "pcsCode": "BIND_DIRECTION",
+      "pcsDetailCode": "BPLFT",
+      "pcsDetailName": "좌철",
+      "pcsGroupName": "제본방향",
+      "webGroup": "BIND_DIRECTION_BP",
+      "webGroupName": null,
+      "viewYn": "Y",
+      "essentialYn": "Y",
+      "materialCode": null,
+      "materialCod": null,
+      "workWidth": null,
+      "workHeight": null,
+      "notice": null,
+      "note": null,
+      "subMaterialYn": null
+    },
+    {
+      "pcsCode": "BIND_DIRECTION",
+      "pcsDetailCode": "BPTOP",
+      "pcsDetailName": "상철",
+      "pcsGroupName": "제본방향",
+      "webGroup": "BIND_DIRECTION_BP",
+      "webGroupName": null,
+      "viewYn": "Y",
+      "essentialYn": "Y",
+      "materialCode": null,
+      "materialCod": null,
+      "workWidth": null,
+      "workHeight": null,
+      "notice": null,
+      "note": null,
+      "subMaterialYn": null
+    }
+  ],
+  "baseConstraints": {
+    "productCode": "PRBKYRN",
+    "productName": "트윈링 책자 (컬러)",
+    "widthHeightSeparate": "N",
+    "printYn": "Y",
+    "unit": "권",
+    "orderCountYn": "Y",
+    "nonStandardAllowed": "N",
+    "minCutWidth": 100,
+    "minCutHeight": 150,
+    "maxCutWidth": 500,
+    "maxCutHeight": 730,
+    "defaultCutWidth": 0,
+    "defaultCutHeight": 0,
+    "cutMargin": 10,
+    "firstCount": 1,
+    "increment": 5,
+    "incrementStep": 10,
+    "reamYn": "",
+    "setCount": 1
+  },
+  "summary": {
+    "totalDisableRules": 24,
+    "totalHiddenMaterials": 0,
+    "totalQuantityRules": 1,
+    "totalDosuBncMappings": 3,
+    "totalSizes": 3,
+    "hiddenSizes": 0,
+    "totalPcsOptions": 12,
+    "hiddenPcs": 0,
+    "essentialPcs": 9,
+    "materialBoundPcs": 0,
+    "totalConstraintCount": 25
+  }
+}

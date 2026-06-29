@@ -1,48 +1,45 @@
-# 가격 파이프라인 세션 핸드오프 (최신 2026-06-29 5세션)
+# 가격 파이프라인 세션 핸드오프 (최신 2026-06-29 6세션)
 
-> 재시작 포인터. 활성 하네스=가격 종단(§27)·셋트(§23). 권위=2엑셀(상품마스터260610·가격표260527).
-> ★사용자 권위모델[[price-authority-model-reframe]]: 엑셀=권위·이전사이트=거울·레드/도메인=구성요소 애매시만·webadmin=상품+가격 둘다 등록.
+> 재시작 포인터. 활성 하네스=가격테이블 무결성(§26·배치빌더 신설)·셋트(§23)·가격 종단(§27).
+> 권위=2엑셀(상품마스터260610·가격표260527). ★[[price-authority-model-reframe]]: 엑셀=권위·이전사이트=거울(가격값 정답 아님)·차이=조사신호(엑셀 채택).
 
-## ★이번 세션 한 일 (관점 재정립 세션)
-1. **파이프라인 감사** — 배치 채점기가 "가격 나오나"만 재고 "맞나"는 0건 측정(PR 0/239)·전문에이전트 우회·공식집 미디코드를 적발.
-2. **라이브 webadmin 실측**(`_live-webadmin-observe-260629/`) — 가격이 admin/뷰어 코드로 등록 확인("로더없음" 오판 정정)·HUNI_ADMIN_PW 현재 유효.
-3. **★공식집 디코드 정본** — `계산공식집초안`=카탈로그 전상품 가격논리 정본(27블록·3유형)을 디코드, evaluate_price와 1:1. → `price-formula-collection-decode-260629.md`.
-4. **전 카탈로그 공식 귀속 지도** — 상품→공식블록 매핑(`formula-block-map-260629.csv`·`formula-block-coverage-260629.md`).
-5. **★3가격모델 분류 확정** — 공식형120·직접단가(가격포함)110·기성20. "(가격포함)=직접단가(공식아님)" 사용자 확정.
-6. **공식형 구성요소 검증→진짜 저청구 5건** — `verify-atomic-findings-260629.md`.
-7. **★반제품/셋트 분석 정본** — `set-semifinished-model-260629.md`(재작업 방지 토대).
+## ★이번 세션(6세션) 한 일 — "토대 먼저" 전환 + 돈크리티컬 2건 COMMIT
+1. **§23 하네스 개선** — [HARD] "상품별 구성요소 경계(옵션 오염 방지)" 원칙 + 게이트 **S8** 추가(8개 파일). 각 상품은 자기 시트 허용 구성요소만·공유공식도 자기 분기만(중철공식이 무선에 새는 B-4 가드).
+2. **셋트 미구성 4(068~071) 설계** — 표지+속지 2구성원(면지 없음)·★계산공식집 원리 확정(068~070=펼침 표지×1·**071 트윈링=표지×2**·표지단가=1면 기준·내지=×1 page파생·면지=제본비 포함). 설계 rev.2(표지 단/양면=print_opt selection·071 표지인쇄/코팅/용지 ×2·표지용지비 추가). **게이트 전 보류**(토대 먼저).
+3. **이전사이트 = 서버 AJAX 가격조회 발견** — `a_<FORMCODE>.asp` GET·정적select≠동적거동·OFAT 수집기 `harvest_booklet.sh`. ★표지 양면 가격축 +60~67% 누락 실증(068~071 공통·R-4). [[huni-live-site-crosscheck-oracle]].
+4. **가격테이블 현황 지도** — 19시트 중 셀골든 2개(아크릴·스티커)만·"분석 충분·적재 부족" 진단.
+5. **★명함 18개 .01 과대청구 라이브 COMMIT** — 시뮬 037 ×42·024/025 ×20 해소(14→.02·2→.03·2→.02+min20). [[bandtotal-x-qty-overcharge-260628]].
+6. **★포스터사인 transpose verbatim 재적재 라이브 COMMIT** — 491행+4·권위 100%정합·600×1400=20,000·1200×3000=72,000(blind swap 금지).
+7. **라이브 실측 환경 구축** — `_foundation/live-snapshot/`(snapshot.sh·db-check.sh·36 t_* CSV·codex 스냅샷 우회).
+8. **결정론 배치 빌더 하네스** — `hpti-matrix-batch-builder`+`hpti-matrix-batch-build`(권위CSV↔스냅샷CSV diff·토큰0·§26 확장).
 
-## ★다음 시작점 (확정 순서)
-**① §23 반제품/셋트 설계·적재 → ② A codify(3-tier 검증).** (사용자 우려=반제품 미분석 채 codify하면 재작업 → 셋트 먼저)
-
-§23에서 할 것(=`set-semifinished-model-260629.md` §3 결함 5):
-1. **셋트 미구성 4 신규구성**(중철068·무선069·PUR070·트윈링071=제본값만 청구 심각저청구)→072 패턴(내지·표지 구성원+부모 표지+제본 합산공식).
-2. **부모공식 신설 3**(077·082·088)+내지 구성원 승격(082·077 내지 없음).
-3. **면지/표지 택1 연결**(현재 3색 항상포함→생산연결 부정확·가격0이라 금액무해).
-4. 엽서북094/떡메097 내지 page공식 점검(095·098 공식X).
-5. **하드커버링 면지=제본비 포함**(사용자 확정·가격0·생산연결만).
-
-이후 A codify=공식집-정합 검증을 **3-tier(단순 완제품/셋트 완제품/반제품 역할별)** 로 §27 batch계측에 codify(수렴·신규하네스0).
+## ★다음 시작점 (우선순위)
+1. **배치 빌더 파일럿** — 디지털인쇄비 1시트로 `hpti-matrix-batch-builder` 실증(권위↔스냅샷 grid-diff 스크립트 빌드·실행→결함보드·적재본 자동·토큰0 확인)→어댑터로 전 시트 전파.
+2. **셋트 068~071** — 보류한 게이트(rev.2) → 부품 8개(표지4+속지4·PRD_000285~292 예약) mint는 dbmap/§7·인간 승인 → 셋트행 적재. ★전 책자 표지 양면 배선(R-4·068~071 공통).
+3. **포스터 T2** — 레더아트액자132 소형4·족자135 A1 단가 추출→INSERT(별 트랜잭션).
+4. **굿즈/파우치/문구 직접단가** — "(가격포함)=직접단가" 125건 §7 적재(공식 아님).
+5. **전 상품 확장** — 이전사이트 AJAX 수집기를 전 상품군으로(폼코드별 응답 사전 1회 매핑).
 
 ## 미해결/블로커
-- **저청구 5**(접지리플렛048 인쇄·용지누락 / 책자068~071 제본만) → §23/§18 교정.
-- **가격포함 110 단가 미적재**(굿즈·파우치·문구일부·상품악세·디자인캘)=직접단가 적재(§7·공식아님·난이도낮음).
-- **가격표 골든격자 2/19**(아크릴·스티커만)=셀값 전수대조 미흡 → §26 17시트 전파(봉투 FAIL=1000배·포스터사인 97%미채번).
-- 지그재그엽서=PRF_DGP_E 공용 바인딩·형압명함=명함 공용(search-before-mint).
+- **셋트 부품 mint**(8 반제품)·전 책자 표지 양면 배선 = dbmap/§7·인간 승인.
+- **코드 트랙(C·개발팀)**: DBLPANSU(내지 이중÷pansu)·S2 부활·전 책자 공통. webadmin 코드 직접수정 금지.
+- 포스터 잔여 T2 2건·silsa 35행 rekey는 이미 적용(드리프트).
 
 ## 이번 세션 결정 (relitigate 금지)
-- **권위=2엑셀·이전사이트=거울(가격오라클 아님)·레드/도메인=구성요소 애매시만**[[price-authority-model-reframe]].
-- **"(가격포함)"=직접단가 모델(공식 계산 아님)**.
-- **면지=제본비 포함(가격0)·생산연결(택1)만 필요**.
-- **셋트=2레이어**(부모 표지+제본 합산 + 내지 page공식 + 표지/면지=가격0 선택지).
-- **검증은 3-tier 필수**(반제품을 부모기준 대조=false-positive 원인).
-- **순서=§23 반제품/셋트 먼저→A codify**.
+- **가격테이블 토대 먼저**(§27 순서: 무결성→교정적재→공식→검증). 셋트 공식(지붕)을 토대(가격표 적재) 없이 짜던 것 교정.
+- **AI 셀분석 → 결정론 배치 빌더**(토큰0). 권위CSV·라이브 스냅샷 CSV diff.
+- **이전사이트=서버 AJAX 거울**(가격값 정답=엑셀·차이=조사신호).
+- **셋트 책자 원리**: 068~070 펼침 표지×1·071 트윈링 표지×2·표지단가 1면기준(×2≠이중)·내지×1·면지=제본포함.
+- **단가=가격표 매트릭스 verbatim**(계산식·배수 치부 금지·blind swap 금지).
+- **상품별 구성요소 경계(S8)**: 경계 넘는 옵션=오염.
 
-## 건드리지 말 것
-- 이번 산출물: `price-formula-collection-decode`·`formula-block-map/coverage`·`verify-atomic-findings`·`set-semifinished-model`·`_live-webadmin-observe-260629/`·`batch/{verify_formula_binding,formula_block_map,verify_formula_full}.py`.
-- 이전 세션 라이브 COMMIT 전부(UNDO 보유).
+## 건드리지 말 것 (라이브 COMMIT·undo 보유)
+- **명함 18 .01 교정 COMMIT**(undo=`huni-price-table-integrity/02_load/namecard-band-undo.sql`·백업 bak_*_20260629_1749).
+- **포스터 transpose 재적재 COMMIT**(undo=`huni-basedata-dedup/poster-sign/_exec/undo.sql`·백업 bak_*_postersign_dedup_20260629_1934).
+- 이전 세션 COMMIT 전부·라이브 실측 환경·배치 빌더 하네스 파일.
 
 ## 산출물 위치
-- 정본: `_foundation/{price-formula-collection-decode,formula-block-coverage,verify-atomic-findings,set-semifinished-model}-260629.md`·`formula-block-map-260629.csv`.
-- 라이브 실측: `_foundation/_live-webadmin-observe-260629/`.
-- 메모리: [[price-authority-model-reframe]]·[[price-formula-collection-keystone-260629]]·[[set-semifinished-3tier-model-260629]]·[[catalog-price-3model-coverage-260629]].
+- 실측 환경: `_foundation/live-snapshot/`(snapshot.sh·db-check.sh·latest/).
+- §26: `huni-price-table-integrity/`(02_load/{namecard,poster-sign}-*·04_gate/*-verdict·_batch/[파일럿 대기]).
+- 셋트: `huni-set-product/`(01_authority/booklet-formula-principle·03_design/booklet-068-071-design rev.2·02_reference/{prevsite-harvest,cover-spread}).
+- 메모리: [[bandtotal-x-qty-overcharge-260628]]·[[huni-live-site-crosscheck-oracle]]·[[set-semifinished-3tier-model-260629]].

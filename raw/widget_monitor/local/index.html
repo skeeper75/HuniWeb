@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RedPrinting Widget Precision Analyzer</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, 'Noto Sans KR', sans-serif; background: #f0f2f5; height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+
+    .header {
+      background: #c62828; color: white;
+      padding: 0 16px; height: 48px;
+      display: flex; align-items: center; gap: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.2); flex-shrink: 0; z-index: 10;
+    }
+    .header h1 { font-size: 15px; font-weight: 600; }
+    .header .badge { background: rgba(255,255,255,.2); padding: 2px 8px; border-radius: 10px; font-size: 12px; }
+    .header .active-pdt { margin-left: auto; font-size: 13px; opacity: .85; max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .token-btn { margin-left: 10px; padding: 3px 10px; border-radius: 10px; font-size: 11px; cursor: pointer; border: 1px solid rgba(255,255,255,.4); background: transparent; color: white; white-space: nowrap; transition: all .2s; }
+    .token-btn:hover { background: rgba(255,255,255,.15); }
+    .token-btn.ok { border-color: #4ade80; color: #4ade80; }
+    .token-btn.expired { border-color: #f87171; color: #f87171; animation: pulse 1.5s infinite; }
+    .token-btn.loading { opacity: .6; cursor: wait; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.5} }
+
+    .layout { display: flex; flex: 1; overflow: hidden; }
+
+    /* -- sidebar -- */
+    .sidebar { width: 270px; background: white; border-right: 1px solid #e0e0e0; display: flex; flex-direction: column; flex-shrink: 0; }
+    .sidebar-header { padding: 10px; border-bottom: 1px solid #eee; }
+    .search-input { width: 100%; padding: 7px 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 13px; outline: none; }
+    .search-input:focus { border-color: #c62828; }
+    .cat-tabs { display: flex; gap: 4px; padding: 8px; flex-wrap: wrap; border-bottom: 1px solid #eee; }
+    .cat-tab { padding: 3px 9px; border-radius: 12px; font-size: 12px; cursor: pointer; border: 1px solid #ddd; background: white; color: #555; transition: all .15s; }
+    .cat-tab:hover { border-color: #c62828; color: #c62828; }
+    .cat-tab.active { background: #c62828; color: white; border-color: #c62828; }
+    .product-list { flex: 1; overflow-y: auto; padding: 4px; }
+    .product-item { padding: 8px 10px; border-radius: 6px; cursor: pointer; border: 1px solid transparent; margin-bottom: 2px; transition: all .12s; }
+    .product-item:hover { background: #fef2f2; border-color: #f5c6c6; }
+    .product-item.active { background: #fef2f2; border-color: #c62828; }
+    .product-item .pdt-code { font-size: 10px; color: #999; font-family: monospace; }
+    .product-item .pdt-name { font-size: 13px; color: #333; margin-top: 1px; line-height: 1.3; }
+    .pdt-cat { display: inline-block; font-size: 10px; padding: 1px 6px; border-radius: 8px; margin-top: 3px; }
+    .product-count { padding: 6px 10px; font-size: 12px; color: #999; border-top: 1px solid #eee; flex-shrink: 0; }
+
+    /* -- main -- */
+    .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+    .widget-area { flex: 1; overflow-y: auto; padding: 16px; display: flex; justify-content: center; }
+    .widget-wrap { width: 100%; max-width: 960px; }
+    .widget-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 260px; color: #ccc; gap: 10px; }
+    .widget-placeholder p { font-size: 14px; }
+    #widget-host { min-height: 100px; }
+
+    /* -- debug panel (5-tab) -- */
+    .debug-panel { height: 320px; border-top: 1px solid #e0e0e0; background: #1e1e1e; display: flex; flex-direction: column; flex-shrink: 0; }
+    .debug-tabs { display: flex; background: #2d2d2d; flex-shrink: 0; }
+    .debug-tab { padding: 7px 14px; font-size: 12px; color: #888; cursor: pointer; border-right: 1px solid #3d3d3d; user-select: none; transition: color .12s; white-space: nowrap; }
+    .debug-tab:hover { color: #ccc; }
+    .debug-tab.active { color: #fff; background: #1e1e1e; border-bottom: 2px solid #c62828; }
+    .debug-tab .cnt { display: inline-block; background: #c62828; color: white; font-size: 10px; padding: 1px 5px; border-radius: 8px; margin-left: 4px; }
+    .debug-actions { margin-left: auto; display: flex; align-items: center; padding: 0 8px; gap: 6px; }
+    .debug-btn { padding: 3px 10px; border-radius: 4px; font-size: 11px; cursor: pointer; border: 1px solid #444; background: #333; color: #aaa; transition: all .12s; }
+    .debug-btn:hover { background: #444; color: #fff; }
+    .status-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .dot-ok { background: #4ade80; } .dot-err { background: #f87171; } .dot-idle { background: #555; }
+    .debug-content { flex: 1; overflow-y: auto; padding: 10px 12px; }
+    .debug-content pre { font-family: monospace; font-size: 11px; color: #d4d4d4; white-space: pre-wrap; word-break: break-all; line-height: 1.5; }
+    .empty { color: #555; font-size: 13px; padding: 8px 0; }
+
+    .log-entry { margin-bottom: 10px; padding-left: 10px; border-left: 2px solid #3d3d3d; }
+    .log-header { display: flex; align-items: center; gap: 6px; margin-bottom: 3px; }
+    .method-GET { background: #1a4731; color: #4ade80; font-size: 10px; padding: 1px 5px; border-radius: 3px; font-weight: bold; }
+    .method-POST { background: #1a2e4a; color: #60a5fa; font-size: 10px; padding: 1px 5px; border-radius: 3px; font-weight: bold; }
+    .log-path { font-size: 11px; color: #9ca3af; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .log-status-ok { color: #4ade80; font-size: 11px; }
+    .log-status-err { color: #f87171; font-size: 11px; }
+    .log-time { color: #6b7280; font-size: 10px; }
+    .log-toggle { font-size: 10px; color: #6b7280; cursor: pointer; margin-top: 2px; }
+    .log-toggle:hover { color: #9ca3af; }
+    .log-body { display: none; margin-top: 4px; }
+    .log-body.open { display: block; }
+
+    .loading-bar { height: 3px; background: linear-gradient(90deg, #c62828 0%, #ef9a9a 50%, #c62828 100%); background-size: 200% 100%; animation: loading 1s linear infinite; position: fixed; top: 0; left: 0; right: 0; z-index: 999; display: none; }
+    .loading-bar.active { display: block; }
+    @keyframes loading { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+    /* -- console log -- */
+    .con-entry { font-family: monospace; font-size: 11px; padding: 2px 0; border-bottom: 1px solid #2d2d2d; word-break: break-all; }
+    .con-log { color: #d4d4d4; } .con-warn { color: #f59e0b; } .con-error { color: #f87171; }
+    .con-ts { color: #555; font-size: 10px; margin-right: 6px; }
+
+    /* -- editor overlay (fullscreen) -- */
+    .editor-overlay { display: none; position: fixed; inset: 0; z-index: 1000; background: #1e1e1e; flex-direction: column; }
+    .editor-overlay.open { display: flex; }
+    .editor-modal { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+    .editor-modal-header { padding: 8px 12px; background: #2d2d2d; display: flex; align-items: center; gap: 10px; flex-shrink: 0; border-bottom: 1px solid #3d3d3d; }
+    .editor-modal-header h2 { font-size: 13px; color: #fff; flex: 1; }
+    .editor-close { background: none; border: none; color: #aaa; font-size: 18px; cursor: pointer; padding: 2px 8px; line-height: 1; }
+    .editor-close:hover { color: #fff; }
+    .editor-payload-row { padding: 6px 12px; background: #252525; border-bottom: 1px solid #3d3d3d; flex-shrink: 0; display: flex; align-items: flex-start; gap: 8px; }
+    .editor-payload-row pre { font-family: monospace; font-size: 11px; color: #6b7280; white-space: pre-wrap; max-height: 60px; overflow-y: auto; flex: 1; }
+    .editor-body { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+    #editor-mount { flex: 1; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; background: #252525; }
+    #editor-mount iframe { position: absolute; inset: 0; width: 100% !important; height: 100% !important; border: none; }
+    .editor-launch-btn { background: #c62828; color: white; border: none; padding: 10px 20px; border-radius: 6px; font-size: 14px; cursor: pointer; }
+    .editor-launch-btn:hover { background: #b71c1c; }
+
+    /* -- store diff highlights -- */
+    .diff-added { background: rgba(74,222,128,.15); border-left: 2px solid #4ade80; padding-left: 4px; }
+    .diff-changed { background: rgba(250,204,21,.12); border-left: 2px solid #facc15; padding-left: 4px; }
+    .diff-removed { background: rgba(248,113,113,.12); border-left: 2px solid #f87171; padding-left: 4px; text-decoration: line-through; opacity: .7; }
+
+    /* -- auto-refresh toggle -- */
+    .auto-refresh-toggle { display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px; border-radius: 4px; font-size: 11px; cursor: pointer; border: 1px solid #444; background: #333; color: #aaa; }
+    .auto-refresh-toggle.on { border-color: #4ade80; color: #4ade80; }
+
+    /* -- editor flow: lifecycle -- */
+    .lifecycle-bar { display: flex; gap: 2px; padding: 8px 0; overflow-x: auto; flex-shrink: 0; }
+    .lifecycle-step { padding: 4px 8px; border-radius: 4px; font-size: 10px; font-family: monospace; background: #2d2d2d; color: #666; border: 1px solid #3d3d3d; white-space: nowrap; }
+    .lifecycle-step.active { background: #1a4731; color: #4ade80; border-color: #4ade80; }
+    .lifecycle-step.past { background: #333; color: #9ca3af; border-color: #555; }
+    .lifecycle-arrow { color: #555; font-size: 12px; display: flex; align-items: center; }
+
+    /* -- event timeline -- */
+    .evt-item { padding: 6px 8px; border-left: 2px solid #3d3d3d; margin-bottom: 4px; cursor: pointer; }
+    .evt-item:hover { background: #252525; }
+    .evt-header { display: flex; align-items: center; gap: 6px; }
+    .evt-action { color: #60a5fa; font-size: 11px; font-family: monospace; }
+    .evt-ts { color: #555; font-size: 10px; font-family: monospace; }
+    .evt-detail { display: none; margin-top: 4px; padding: 4px 8px; background: #252525; border-radius: 4px; }
+    .evt-detail.open { display: block; }
+    .evt-detail pre { font-size: 10px; color: #9ca3af; }
+
+    /* -- goto-cart payload -- */
+    .goto-cart-panel { background: #1a2e4a; border: 1px solid #2563eb; border-radius: 6px; padding: 8px 12px; margin: 8px 0; }
+    .goto-cart-panel h4 { color: #60a5fa; font-size: 12px; margin-bottom: 4px; }
+    .goto-cart-panel pre { font-size: 11px; color: #93c5fd; }
+
+    /* -- network waterfall -- */
+    .waterfall-bar { height: 6px; border-radius: 3px; background: linear-gradient(90deg, #60a5fa, #3b82f6); min-width: 4px; display: inline-block; vertical-align: middle; }
+    .net-row { display: grid; grid-template-columns: 70px 50px 1fr 50px 60px 120px; align-items: center; gap: 6px; padding: 4px 0; border-bottom: 1px solid #2d2d2d; font-size: 11px; cursor: pointer; }
+    .net-row:hover { background: #252525; }
+    .net-detail { display: none; padding: 8px; background: #252525; border-radius: 4px; margin-bottom: 4px; }
+    .net-detail.open { display: block; }
+    .net-header-row { display: grid; grid-template-columns: 70px 50px 1fr 50px 60px 120px; gap: 6px; padding: 4px 0; border-bottom: 1px solid #444; font-size: 10px; color: #666; font-weight: bold; }
+
+    /* -- comparison tab -- */
+    .compare-layout { display: flex; gap: 12px; height: 100%; }
+    .compare-panel { flex: 1; overflow-y: auto; }
+    .compare-panel h3 { font-size: 12px; color: #9ca3af; margin-bottom: 8px; padding-bottom: 4px; border-bottom: 1px solid #3d3d3d; }
+    .compare-load-btns { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
+    .compare-load-btn { padding: 3px 8px; border-radius: 4px; font-size: 10px; cursor: pointer; border: 1px solid #444; background: #333; color: #aaa; font-family: monospace; }
+    .compare-load-btn:hover { background: #444; color: #fff; }
+    .compare-load-btn.loaded { border-color: #4ade80; color: #4ade80; }
+    .compare-match { color: #4ade80; } .compare-miss { color: #f87171; } .compare-extra { color: #f59e0b; }
+    .diff-summary { background: #252525; border-radius: 6px; padding: 8px; margin-top: 8px; }
+    .diff-summary h4 { color: #9ca3af; font-size: 11px; margin-bottom: 4px; }
+    .diff-summary li { font-size: 11px; color: #d4d4d4; margin-bottom: 2px; list-style: disc; margin-left: 16px; }
+
+    /* -- insights tab -- */
+    .insight-table { width: 100%; border-collapse: collapse; }
+    .insight-table th { text-align: left; font-size: 10px; color: #666; padding: 4px 8px; border-bottom: 1px solid #444; }
+    .insight-table td { font-size: 11px; color: #d4d4d4; padding: 6px 8px; border-bottom: 1px solid #2d2d2d; vertical-align: top; }
+    .insight-cat { font-size: 10px; padding: 1px 6px; border-radius: 8px; white-space: nowrap; }
+    .cat-ux { background: #7c3aed22; color: #a78bfa; }
+    .cat-api { background: #0284c722; color: #38bdf8; }
+    .cat-price { background: #b4530922; color: #fbbf24; }
+    .cat-editor { background: #05966922; color: #34d399; }
+  </style>
+</head>
+<body>
+
+<div class="loading-bar" id="loadingBar"></div>
+
+<div class="header">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>
+  <h1>RedPrinting Widget Precision Analyzer</h1>
+  <span class="badge" id="productCount">...</span>
+  <span class="active-pdt" id="activePdtLabel">&#8592; select product</span>
+  <button class="token-btn" id="tokenBtn" onclick="handleTokenBtn()">token check...</button>
+</div>
+
+<div class="layout">
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <input type="text" class="search-input" id="searchInput" placeholder="product name or code..." oninput="filterProducts()">
+    </div>
+    <div class="cat-tabs" id="catTabs"></div>
+    <div class="product-list" id="productList"></div>
+    <div class="product-count" id="filteredCount"></div>
+  </div>
+
+  <div class="main">
+    <div class="widget-area">
+      <div class="widget-wrap">
+        <div class="widget-placeholder" id="placeholder">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          <p>Select a product from the sidebar</p>
+        </div>
+        <div id="widget-host"></div>
+      </div>
+    </div>
+
+    <div class="debug-panel">
+      <div class="debug-tabs">
+        <div class="debug-tab active" onclick="switchTab('store')" id="tab-store">Widget Monitor <span class="cnt" id="store-cnt">-</span></div>
+        <div class="debug-tab" onclick="switchTab('editor')" id="tab-editor">Editor Flow <span class="cnt" id="editor-cnt">0</span></div>
+        <div class="debug-tab" onclick="switchTab('network')" id="tab-network">Network <span class="cnt" id="network-cnt">0</span></div>
+        <div class="debug-tab" onclick="switchTab('compare')" id="tab-compare">Compare</div>
+        <div class="debug-tab" onclick="switchTab('insights')" id="tab-insights">Insights</div>
+        <div class="debug-actions">
+          <button class="auto-refresh-toggle" id="autoRefreshBtn" onclick="toggleAutoRefresh()">Auto 2s</button>
+          <button class="debug-btn" onclick="refreshStore()">Refresh</button>
+          <button class="debug-btn" onclick="copyContent(event)">Copy</button>
+          <button class="debug-btn" onclick="saveContent()">Save</button>
+          <button class="debug-btn" onclick="clearLog()">Clear</button>
+          <div class="status-dot dot-idle" id="statusDot"></div>
+        </div>
+      </div>
+      <div class="debug-content" id="debugContent"><div class="empty">Select a product to begin analysis.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- editor overlay (fullscreen) -->
+<div class="editor-overlay" id="editorOverlay">
+  <div class="editor-modal">
+    <div class="editor-modal-header">
+      <h2>RedPrinting Editor -- <span id="editorPdtCode">-</span></h2>
+      <button class="debug-btn" onclick="launchEditorSDK()" id="editorLaunchBtn">Editor Open</button>
+      <button class="debug-btn" onclick="copyEditorPayload(this)">copy payload</button>
+      <button class="editor-close" onclick="closeEditor()">X</button>
+    </div>
+    <div class="editor-payload-row">
+      <pre id="editorPayload">no payload -- click edit in widget</pre>
+    </div>
+    <div class="editor-body">
+      <div id="editor-mount">
+        <span style="color:#555;font-size:13px">Click edit in widget to load editor here</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- console capture (before SDK load) -->
+<script>
+  window.__consoleLogs = [];
+  window.__eventTimeline = [];
+  window.__prevStore = {};
+  window.__storeHistory = [];
+  window.__preEditorStore = null;
+  window.__postEditorStore = null;
+  window.__gotoCartPayload = null;
+  window.__networkTimings = {};
+
+  function __pushLog(level, args) {
+    try {
+      const ts = new Date().toISOString().slice(11,23);
+      const text = args.map(a => {
+        if (a === null) return 'null';
+        if (a === undefined) return 'undefined';
+        if (typeof a !== 'object') return String(a);
+        try { return JSON.stringify(a); } catch { return Object.prototype.toString.call(a); }
+      }).join(' ');
+      window.__consoleLogs.push({ level, ts, text });
+      if (window.__consoleLogs.length > 500) window.__consoleLogs.shift();
+    } catch {}
+  }
+  ['log','warn','error'].forEach(level => {
+    const orig = console[level].bind(console);
+    console[level] = (...args) => { orig(...args); __pushLog(level, args); };
+  });
+  window.onerror = (msg, src, line, col, err) => {
+    __pushLog('error', ['[onerror] ' + msg + ' @ ' + src + ':' + line + ':' + col]);
+  };
+  window.onunhandledrejection = (e) => {
+    __pushLog('error', ['[unhandledRejection] ' + e.reason]);
+  };
+</script>
+
+<!-- API patch: redprinting.co.kr to local proxy + timing capture -->
+<script>
+  const _origFetch = window.fetch;
+  window.fetch = (url, opts) => {
+    let rewritten = url;
+    if (typeof url === 'string') {
+      if (url.includes('widget-api.redprinting.co.kr'))
+        rewritten = url.replace('https://widget-api.redprinting.co.kr', '/widget-api');
+      else if (url.includes('makers.redprinting.net'))
+        rewritten = url.replace('https://makers.redprinting.net', '/makers-api');
+      else if (url.includes('www.redprinting.co.kr'))
+        rewritten = url.replace('https://www.redprinting.co.kr', '/rp-api');
+    }
+    const startTs = Date.now();
+    const id = startTs + '_' + Math.random().toString(36).slice(2,6);
+    window.__networkTimings[id] = { url: rewritten, start: startTs };
+    return _origFetch(rewritten, opts).then(resp => {
+      window.__networkTimings[id].end = Date.now();
+      window.__networkTimings[id].duration = Date.now() - startTs;
+      window.__networkTimings[id].status = resp.status;
+      return resp;
+    }).catch(err => {
+      window.__networkTimings[id].end = Date.now();
+      window.__networkTimings[id].duration = Date.now() - startTs;
+      window.__networkTimings[id].error = err.message;
+      throw err;
+    });
+  };
+  const _origXHR = XMLHttpRequest.prototype.open;
+  XMLHttpRequest.prototype.open = function(m, url, ...r) {
+    if (typeof url === 'string') {
+      if (url.includes('widget-api.redprinting.co.kr'))
+        url = url.replace('https://widget-api.redprinting.co.kr', '/widget-api');
+      else if (url.includes('makers.redprinting.net'))
+        url = url.replace('https://makers.redprinting.net', '/makers-api');
+      else if (url.includes('www.redprinting.co.kr'))
+        url = url.replace('https://www.redprinting.co.kr', '/rp-api');
+    }
+    return _origXHR.call(this, m, url, ...r);
+  };
+</script>
+
+<!-- postMessage capture (from-edicus events) -->
+<script>
+  const LIFECYCLE_STEPS = ['init','ready-to-listen','doc-changed','project-id-created','save-doc-report:start','save-doc-report:end','goto-cart','close'];
+  window.__editorLifecycleState = null;
+
+  window.addEventListener('message', (e) => {
+    if (!e.data) return;
+    const d = typeof e.data === 'string' ? (() => { try { return JSON.parse(e.data); } catch { return null; } })() : e.data;
+    if (!d || d.type !== 'from-edicus') return;
+
+    const str = JSON.stringify(d).slice(0, 400);
+    console.log('[postMessage]', e.origin, str);
+
+    // push to event timeline
+    window.__eventTimeline.push({
+      ts: Date.now(),
+      tsISO: new Date().toISOString(),
+      action: d.action,
+      info: d.info || null,
+      origin: e.origin
+    });
+    const ecnt = document.getElementById('editor-cnt');
+    if (ecnt) ecnt.textContent = window.__eventTimeline.length;
+
+    // track lifecycle
+    const actionBase = d.action || '';
+    if (actionBase === 'save-doc-report') {
+      const phase = d.info?.phase || (d.info?.docInfo ? 'end' : 'start');
+      window.__editorLifecycleState = 'save-doc-report:' + phase;
+    } else if (LIFECYCLE_STEPS.includes(actionBase)) {
+      window.__editorLifecycleState = actionBase;
+    }
+
+    // save-doc-report
+    if (d.action === 'save-doc-report' && d.info?.docInfo) {
+      window.__lastEditorDocInfo = d.info.docInfo;
+      console.log('[Editor] save-doc-report received -- projectID:', d.info.docInfo.projectID);
+    }
+
+    // goto-cart
+    if (d.action === 'goto-cart') {
+      const projectID = d.info?.projectID;
+      const docInfo = window.__lastEditorDocInfo;
+      window.__gotoCartPayload = {
+        projectID: projectID,
+        tnUrlList: d.info?.tnUrlList || docInfo?.tnUrlList || [],
+        totalPageCount: d.info?.totalPageCount || docInfo?.totalPageCount || 0,
+        case: d.info?.case
+      };
+      window.__postEditorStore = getStoreSnapshot();
+      console.log('[Editor] goto-cart -- projectID:', projectID, 'case:', d.info?.case);
+      document.getElementById('editorOverlay').classList.remove('open');
+      editorPayload = null;
+      setTimeout(refreshStore, 500);
+      setTimeout(refreshStore, 2000);
+      if (docInfo) {
+        console.log('[Editor] completion data:', {
+          projectID,
+          psCode: docInfo.psCode,
+          preview: docInfo.tnUrlList?.[0],
+          pages: docInfo.totalPageCount
+        });
+      }
+    }
+
+    // update editor tab if active
+    if (currentTab === 'editor') renderEditorFlow();
+  });
+</script>
+
+<script src="/widget.js"></script>
+<script src="/RedEditorSDK.min.js"></script>
+
+<script>
+  // -- state --
+  let allProducts = [], filteredProducts = [];
+  let activeCat = 'ALL';
+  let currentPdtCode = null, currentTab = 'store';
+  let apiLogs = [];
+  let autoRefreshTimer = null;
+  let autoRefreshOn = false;
+  let editorPayload = null;
+  let comparisonData = null;
+
+  // -- circular-safe JSON serialization --
+  function safeJson(obj, indent) {
+    indent = indent === undefined ? 2 : indent;
+    const seen = new WeakSet();
+    try {
+      return JSON.stringify(obj, (k, v) => {
+        if (typeof v === 'object' && v !== null) {
+          if (seen.has(v)) return '[Circular]';
+          seen.add(v);
+        }
+        return v;
+      }, indent);
+    } catch (e) {
+      return '"[serialization failed: ' + e.message + ']"';
+    }
+  }
+
+  // -- deep diff utility --
+  function deepDiff(prev, curr, path) {
+    path = path || '';
+    const changes = [];
+    if (prev === undefined && curr !== undefined) {
+      changes.push({ type: 'added', path: path, value: curr });
+      return changes;
+    }
+    if (prev !== undefined && curr === undefined) {
+      changes.push({ type: 'removed', path: path, value: prev });
+      return changes;
+    }
+    if (typeof prev !== typeof curr) {
+      changes.push({ type: 'changed', path: path, from: prev, to: curr });
+      return changes;
+    }
+    if (typeof curr !== 'object' || curr === null || prev === null) {
+      if (prev !== curr) {
+        changes.push({ type: 'changed', path: path, from: prev, to: curr });
+      }
+      return changes;
+    }
+    if (Array.isArray(curr) || Array.isArray(prev)) {
+      const pStr = JSON.stringify(prev);
+      const cStr = JSON.stringify(curr);
+      if (pStr !== cStr) {
+        changes.push({ type: 'changed', path: path, from: prev, to: curr });
+      }
+      return changes;
+    }
+    const allKeys = new Set([...Object.keys(prev || {}), ...Object.keys(curr || {})]);
+    for (const key of allKeys) {
+      const sub = deepDiff(prev?.[key], curr?.[key], path ? path + '.' + key : key);
+      changes.push(...sub);
+    }
+    return changes;
+  }
+
+  // -- copy --
+  function copyContent(e) {
+    const btn = (e || window.event)?.target;
+    const text = document.getElementById('debugContent').innerText;
+    navigator.clipboard.writeText(text).then(() => {
+      if (btn) { btn.textContent = 'Copied'; setTimeout(() => { btn.textContent = 'Copy'; }, 1500); }
+    }).catch(() => {
+      prompt('Copy content:', text);
+    });
+  }
+
+  // -- save --
+  function saveContent() {
+    const tab = currentTab;
+    let data, ext;
+    if (tab === 'network') {
+      data = safeJson(apiLogs);
+      ext = 'json';
+    } else if (tab === 'editor') {
+      data = safeJson({ events: window.__eventTimeline, gotoCart: window.__gotoCartPayload });
+      ext = 'json';
+    } else {
+      data = document.getElementById('debugContent').innerText;
+      ext = 'txt';
+    }
+    const blob = new Blob([data], { type: 'text/plain;charset=utf-8' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'rp-' + tab + '-' + Date.now() + '.' + ext;
+    a.click();
+  }
+
+  const catMeta = {
+    ALL: { label: 'All' },
+    GS:  { label: 'Goods GS', color: '#7c3aed' },
+    AC:  { label: 'Acrylic AC', color: '#0284c7' },
+    PR:  { label: 'Book PR', color: '#b45309' },
+  };
+
+  // -- catalog loading --
+  async function loadCatalog() {
+    const d = await fetch('/catalog.json').then(r => r.json());
+    allProducts = d.products;
+    document.getElementById('productCount').textContent = 'Widget ' + d.total;
+    buildCatTabs();
+    filterProducts();
+  }
+
+  function buildCatTabs() {
+    document.getElementById('catTabs').innerHTML = Object.entries(catMeta).map(([k, v]) => {
+      const cnt = k === 'ALL' ? allProducts.length : allProducts.filter(p => p.category === k).length;
+      return '<button class="cat-tab' + (k===activeCat?' active':'') + '" onclick="setCat(\'' + k + '\',event)">' + v.label + ' <span style="opacity:.7">' + cnt + '</span></button>';
+    }).join('');
+  }
+
+  function setCat(cat, e) {
+    activeCat = cat;
+    document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+    if (e) e.target.closest('.cat-tab').classList.add('active');
+    filterProducts();
+  }
+
+  function filterProducts() {
+    const q = document.getElementById('searchInput').value.toLowerCase();
+    filteredProducts = allProducts.filter(p => {
+      const mc = activeCat === 'ALL' || p.category === activeCat;
+      const mq = !q || p.pdtCode.toLowerCase().includes(q) || p.name.toLowerCase().includes(q);
+      return mc && mq;
+    });
+    renderList();
+  }
+
+  function renderList() {
+    const cc = { GS: '#7c3aed', AC: '#0284c7', PR: '#b45309' };
+    document.getElementById('productList').innerHTML = filteredProducts.map(p =>
+      '<div class="product-item' + (p.pdtCode===currentPdtCode?' active':'') + '" data-code="' + p.pdtCode + '" onclick="selectProductByCode(this.dataset.code)">' +
+        '<div class="pdt-code">' + p.pdtCode + '</div>' +
+        '<div class="pdt-name">' + p.name + '</div>' +
+        '<span class="pdt-cat" style="background:' + (cc[p.category]||'#555') + '18;color:' + (cc[p.category]||'#555') + '">' + p.catName + '</span>' +
+      '</div>'
+    ).join('');
+    document.getElementById('filteredCount').textContent = filteredProducts.length + ' items';
+  }
+
+  function selectProductByCode(code) {
+    const p = allProducts.find(x => x.pdtCode === code);
+    if (p) selectProduct(p.pdtCode, p.name);
+  }
+
+  // -- widget initialization --
+  async function selectProduct(pdtCode, name) {
+    if (currentPdtCode === pdtCode) return;
+    currentPdtCode = pdtCode;
+    apiLogs = [];
+    window.__eventTimeline = [];
+    window.__prevStore = {};
+    window.__storeHistory = [];
+    window.__gotoCartPayload = null;
+    window.__preEditorStore = null;
+    window.__postEditorStore = null;
+    window.__editorLifecycleState = null;
+    updateNetworkCnt();
+    document.getElementById('editor-cnt').textContent = '0';
+    document.getElementById('activePdtLabel').textContent = pdtCode + ' -- ' + name;
+    document.getElementById('placeholder').style.display = 'none';
+    document.getElementById('loadingBar').classList.add('active');
+    document.getElementById('statusDot').className = 'status-dot dot-idle';
+    renderList();
+
+    const host = document.getElementById('widget-host');
+    const newMount = document.createElement('div');
+    newMount.id = 'redWidgetSdk';
+    newMount.style.minHeight = '100px';
+    const newHost = document.createElement('div');
+    newHost.id = 'widget-host';
+    newHost.appendChild(newMount);
+    host.replaceWith(newHost);
+
+    clearAutoRefresh();
+
+    try {
+      const sdk = new RedWidgetSDK('red-pc');
+      sdk.init({
+        target: '#redWidgetSdk',
+        pdtCode,
+        pttCode: '',
+        locale: 'ko',
+        member: { mb_id: '', mb_cust_cod: '', base64ID: '' },
+        deviceType: 'pc'
+      }, {
+        onOptionChange: (d) => { scheduleStoreRefresh(); },
+        onPriceChange:  (d) => { scheduleStoreRefresh(); },
+        onOpenEditor:   (d) => { handleOpenEditor(d); },
+        onCloseEditor:  (d) => { handleCloseEditor(d); }
+      });
+      document.getElementById('statusDot').className = 'status-dot dot-ok';
+      setTimeout(() => { refreshStore(); if (autoRefreshOn) startAutoRefresh(); }, 1800);
+    } catch(e) {
+      document.getElementById('statusDot').className = 'status-dot dot-err';
+      console.error('[SDK Error]', e.message);
+      showDebug('<div class="empty" style="color:#f87171">Widget error: ' + e.message + '</div>');
+    } finally {
+      document.getElementById('loadingBar').classList.remove('active');
+    }
+  }
+
+  // -- Pinia store access --
+  window.getStoreSnapshot = () => {
+    const tryPinia = (root) => {
+      for (const el of root.querySelectorAll('*')) {
+        const app = el.__vue_app__;
+        if (app) {
+          const p = app._context?.provides?.pinia || app.config?.globalProperties?.$pinia;
+          if (p?.state?.value) return Object.fromEntries(
+            Object.keys(p.state.value).map(k => [k, JSON.parse(JSON.stringify(p.state.value[k]))])
+          );
+        }
+        if (el.shadowRoot) { const r = tryPinia(el.shadowRoot); if (r) return r; }
+      }
+      return null;
+    };
+    return tryPinia(document);
+  };
+
+  function refreshStore() {
+    const snap = getStoreSnapshot();
+    if (!snap) {
+      if (currentTab === 'store') showDebug('<div class="empty">Store not available (widget initializing...)</div>');
+      return;
+    }
+
+    // compute diff
+    const changes = [];
+    for (const storeKey of new Set([...Object.keys(snap), ...Object.keys(window.__prevStore)])) {
+      const sub = deepDiff(window.__prevStore[storeKey], snap[storeKey], storeKey);
+      changes.push(...sub);
+    }
+
+    // save snapshot history
+    window.__storeHistory.push({ ts: Date.now(), snapshot: JSON.parse(JSON.stringify(snap)) });
+    if (window.__storeHistory.length > 50) window.__storeHistory.shift();
+
+    document.getElementById('store-cnt').textContent = Object.keys(snap).length;
+
+    if (currentTab === 'store') {
+      let html = '';
+      if (changes.length > 0) {
+        html += '<div style="margin-bottom:8px;padding:6px 8px;background:#252525;border-radius:4px">';
+        html += '<div style="font-size:11px;color:#9ca3af;margin-bottom:4px">Changes (' + changes.length + '):</div>';
+        for (const c of changes.slice(0, 30)) {
+          if (c.type === 'added') {
+            html += '<div class="diff-added" style="font-size:10px;font-family:monospace;padding:1px 4px">+ ' + esc(c.path) + ': ' + esc(JSON.stringify(c.value)).slice(0,80) + '</div>';
+          } else if (c.type === 'removed') {
+            html += '<div class="diff-removed" style="font-size:10px;font-family:monospace;padding:1px 4px">- ' + esc(c.path) + ': ' + esc(JSON.stringify(c.value)).slice(0,80) + '</div>';
+          } else {
+            html += '<div class="diff-changed" style="font-size:10px;font-family:monospace;padding:1px 4px">~ ' + esc(c.path) + ': ' + esc(JSON.stringify(c.from)).slice(0,40) + ' -> ' + esc(JSON.stringify(c.to)).slice(0,40) + '</div>';
+          }
+        }
+        if (changes.length > 30) html += '<div style="font-size:10px;color:#666">... +' + (changes.length - 30) + ' more</div>';
+        html += '</div>';
+      }
+      html += '<pre>' + jsonHL(snap) + '</pre>';
+      showDebug(html);
+    }
+
+    window.__prevStore = JSON.parse(JSON.stringify(snap));
+  }
+
+  function scheduleStoreRefresh() { setTimeout(refreshStore, 400); }
+
+  function toggleAutoRefresh() {
+    autoRefreshOn = !autoRefreshOn;
+    const btn = document.getElementById('autoRefreshBtn');
+    if (autoRefreshOn) {
+      btn.classList.add('on');
+      btn.textContent = 'Auto ON';
+      startAutoRefresh();
+    } else {
+      btn.classList.remove('on');
+      btn.textContent = 'Auto 2s';
+      clearAutoRefresh();
+    }
+  }
+
+  function startAutoRefresh() {
+    if (autoRefreshTimer) clearInterval(autoRefreshTimer);
+    autoRefreshTimer = setInterval(refreshStore, 2000);
+  }
+  function clearAutoRefresh() { if (autoRefreshTimer) { clearInterval(autoRefreshTimer); autoRefreshTimer = null; } }
+
+  // -- editor handling --
+  function handleOpenEditor(data) {
+    try {
+      console.log('[onOpenEditor] called, type=', typeof data);
+      editorPayload = data;
+      window.__preEditorStore = getStoreSnapshot();
+
+      const serialized = safeJson(data);
+      document.getElementById('editorPdtCode').textContent = currentPdtCode || '';
+      document.getElementById('editorPayload').textContent = serialized;
+      document.getElementById('editor-mount').innerHTML = '';
+      const btn = document.getElementById('editorLaunchBtn');
+      if (btn) { btn.textContent = 'Editor Open'; btn.disabled = false; }
+      document.getElementById('editorOverlay').classList.add('open');
+      console.log('[onOpenEditor] complete -- auto-launching editor');
+      setTimeout(launchEditorSDK, 300);
+    } catch(e) {
+      console.error('[onOpenEditor] error:', e.message, e.stack);
+      try { document.getElementById('editorOverlay').classList.add('open'); } catch {}
+    }
+  }
+
+  function handleCloseEditor(data) {
+    console.log('[onCloseEditor] received:', safeJson(data));
+    window.__postEditorStore = getStoreSnapshot();
+    document.getElementById('editorOverlay').classList.remove('open');
+    editorPayload = null;
+    setTimeout(refreshStore, 500);
+    setTimeout(refreshStore, 1500);
+  }
+
+  function closeEditor() {
+    document.getElementById('editorOverlay').classList.remove('open');
+    editorPayload = null;
+  }
+
+  function copyEditorPayload(btn) {
+    const text = document.getElementById('editorPayload').textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = 'Copied';
+      setTimeout(() => { btn.textContent = 'copy payload'; }, 1500);
+    });
+  }
+
+  async function launchEditorSDK() {
+    if (typeof RedEditorSDK === 'undefined') {
+      document.getElementById('editor-mount').innerHTML = '<div style="color:#f87171;padding:16px">RedEditorSDK load failed</div>';
+      return;
+    }
+    const cfg = editorPayload?.config || editorPayload;
+    if (!cfg?.token) {
+      document.getElementById('editor-mount').innerHTML = '<div style="color:#f87171;padding:16px">No editorPayload data -- onOpenEditor not called</div>';
+      return;
+    }
+
+    console.log('[RedEditorSDK] KOI cfg fields:', {
+      psCode: cfg.psCode,
+      templateUrl: cfg.templateUrl,
+      resource_id: cfg.resource_id,
+      title: cfg.title,
+      locale: cfg.locale,
+      token_prefix: cfg.token?.slice(0,20)
+    });
+
+    try {
+      const mount = document.getElementById('editor-mount');
+      mount.innerHTML = '<div style="color:#6b7280;padding:16px;font-size:13px">Initializing...</div>';
+      const btn = document.getElementById('editorLaunchBtn');
+      if (btn) { btn.textContent = 'Loading...'; btn.disabled = true; }
+
+      const { token: hostToken, expired } = await fetch('/get-editor-token').then(r => r.json());
+      if (!hostToken || expired) {
+        mount.innerHTML = '<div style="color:#f59e0b;padding:16px">host JWT expired -- click token refresh button in header</div>';
+        if (btn) { btn.textContent = 'Editor Open'; btn.disabled = false; }
+        return;
+      }
+      console.log('[RedEditorSDK] host JWT:', hostToken.slice(0,20) + '...');
+
+      const sdk = new RedEditorSDK({
+        accessToken: hostToken,
+        userId: 'redprinting',
+        locale: cfg.locale || 'ko'
+      });
+
+      const pluginCustomData = editorPayload?.option?.pluginCustomData;
+
+      if (cfg.psCode) {
+        console.log('[RedEditorSDK] createProject -- psCode=' + cfg.psCode + ', templateUrl=' + cfg.templateUrl);
+        sdk.createProject(
+          {
+            selector: '#editor-mount',
+            psCode: cfg.psCode,
+            templateUrl: cfg.templateUrl,
+            title: cfg.title || currentPdtCode || 'Huni Design'
+          },
+          {
+            locale: cfg.locale || 'ko',
+            ...(pluginCustomData ? { pluginCustomData } : {})
+          }
+        );
+      } else {
+        mount.innerHTML = '<div style="color:#f87171;padding:16px">No psCode -- check KOI config</div>';
+        if (btn) { btn.textContent = 'Editor Open'; btn.disabled = false; }
+        return;
+      }
+      console.log('[RedEditorSDK] createProject call complete');
+    } catch(e) {
+      document.getElementById('editor-mount').innerHTML =
+        '<div style="color:#f87171;padding:16px;font-family:monospace;font-size:12px">EditorSDK error: ' + e.message + '</div>';
+      console.error('[RedEditorSDK]', e);
+      const btn = document.getElementById('editorLaunchBtn');
+      if (btn) { btn.textContent = 'Editor Open'; btn.disabled = false; }
+    }
+  }
+
+  // ============================================================
+  // TAB 2: Editor Flow
+  // ============================================================
+  function renderEditorFlow() {
+    let html = '';
+
+    // lifecycle state machine
+    html += '<div class="lifecycle-bar">';
+    let foundCurrent = false;
+    for (let i = 0; i < LIFECYCLE_STEPS.length; i++) {
+      const step = LIFECYCLE_STEPS[i];
+      let cls = 'lifecycle-step';
+      if (window.__editorLifecycleState === step) {
+        cls += ' active';
+        foundCurrent = true;
+      } else if (!foundCurrent && window.__editorLifecycleState) {
+        // check if we already passed this step
+        const stateIdx = LIFECYCLE_STEPS.indexOf(window.__editorLifecycleState);
+        if (stateIdx > i) cls += ' past';
+      }
+      if (i > 0) html += '<span class="lifecycle-arrow">-></span>';
+      html += '<span class="' + cls + '">' + step + '</span>';
+    }
+    html += '</div>';
+
+    // goto-cart payload
+    if (window.__gotoCartPayload) {
+      html += '<div class="goto-cart-panel">';
+      html += '<h4>goto-cart Payload</h4>';
+      html += '<pre>' + jsonHL(window.__gotoCartPayload) + '</pre>';
+      html += '</div>';
+    }
+
+    // store delta (pre vs post editor)
+    if (window.__preEditorStore && window.__postEditorStore) {
+      const delta = [];
+      for (const k of new Set([...Object.keys(window.__preEditorStore), ...Object.keys(window.__postEditorStore)])) {
+        delta.push(...deepDiff(window.__preEditorStore[k], window.__postEditorStore[k], k));
+      }
+      if (delta.length > 0) {
+        html += '<div style="background:#252525;border-radius:4px;padding:6px 8px;margin:6px 0">';
+        html += '<div style="font-size:11px;color:#9ca3af;margin-bottom:4px">Store Delta (before vs after editor):</div>';
+        for (const c of delta.slice(0, 20)) {
+          if (c.type === 'added') html += '<div class="diff-added" style="font-size:10px;font-family:monospace;padding:1px 4px">+ ' + esc(c.path) + '</div>';
+          else if (c.type === 'removed') html += '<div class="diff-removed" style="font-size:10px;font-family:monospace;padding:1px 4px">- ' + esc(c.path) + '</div>';
+          else html += '<div class="diff-changed" style="font-size:10px;font-family:monospace;padding:1px 4px">~ ' + esc(c.path) + '</div>';
+        }
+        html += '</div>';
+      }
+    }
+
+    // event timeline
+    const events = window.__eventTimeline;
+    if (events.length === 0) {
+      html += '<div class="empty">No from-edicus events yet. Open editor in widget to begin capturing.</div>';
+    } else {
+      html += '<div style="font-size:11px;color:#9ca3af;margin:4px 0">Event Timeline (' + events.length + ')</div>';
+      for (let i = events.length - 1; i >= 0; i--) {
+        const evt = events[i];
+        const time = new Date(evt.ts).toISOString().slice(11,23);
+        html += '<div class="evt-item" onclick="this.querySelector(\'.evt-detail\').classList.toggle(\'open\')">';
+        html += '<div class="evt-header"><span class="evt-ts">' + time + '</span><span class="evt-action">' + esc(evt.action) + '</span></div>';
+        html += '<div class="evt-detail"><pre>' + esc(safeJson(evt.info)) + '</pre></div>';
+        html += '</div>';
+      }
+    }
+
+    showDebug(html);
+  }
+
+  // ============================================================
+  // TAB 3: Network Inspector
+  // ============================================================
+  async function loadApiLog() {
+    try {
+      const d = await fetch('/api-log.json?_=' + Date.now()).then(r => r.json());
+      apiLogs = d;
+      updateNetworkCnt();
+      if (currentTab === 'network') renderNetwork();
+    } catch {}
+  }
+
+  function updateNetworkCnt() { document.getElementById('network-cnt').textContent = apiLogs.length; }
+
+  function renderNetwork() {
+    if (!apiLogs.length) { showDebug('<div class="empty">No API requests yet.</div>'); return; }
+
+    // find max duration for waterfall scaling
+    const timings = Object.values(window.__networkTimings);
+    const maxDur = Math.max(100, ...timings.map(t => t.duration || 0));
+
+    let html = '<div style="display:flex;justify-content:space-between;margin-bottom:6px">';
+    html += '<span style="font-size:11px;color:#9ca3af">' + apiLogs.length + ' requests</span>';
+    html += '<button class="debug-btn" onclick="exportSessionJSON()">Session JSON Download</button>';
+    html += '</div>';
+
+    html += '<div class="net-header-row"><span>time</span><span>method</span><span>path</span><span>status</span><span>ms</span><span>waterfall</span></div>';
+
+    const reversed = [...apiLogs].reverse();
+    for (let i = 0; i < reversed.length; i++) {
+      const e = reversed[i];
+      const method = e.method || 'GET';
+      const path = (e.path || '').split('?')[0].slice(-50);
+      const ok = e.status === 200;
+      const time = (e.timestamp || '').slice(11, 19);
+
+      // match timing by URL path
+      const timing = timings.find(t => t.url && t.url.includes(e.path?.split('?')[0] || '___'));
+      const dur = timing?.duration || '-';
+      const barW = timing?.duration ? Math.max(4, Math.round((timing.duration / maxDur) * 120)) : 4;
+
+      const rowId = 'net-detail-' + i;
+      html += '<div class="net-row" onclick="document.getElementById(\'' + rowId + '\').classList.toggle(\'open\')">';
+      html += '<span class="log-time">' + time + '</span>';
+      html += '<span class="method-' + method + '">' + method + '</span>';
+      html += '<span class="log-path" title="' + esc(e.path || '') + '">' + esc(path) + '</span>';
+      html += '<span class="' + (ok ? 'log-status-ok' : 'log-status-err') + '">' + (e.status || '?') + '</span>';
+      html += '<span style="color:#9ca3af;font-size:10px">' + dur + '</span>';
+      html += '<span><span class="waterfall-bar" style="width:' + barW + 'px' + (!ok ? ';background:linear-gradient(90deg,#f87171,#ef4444)' : '') + '"></span></span>';
+      html += '</div>';
+      html += '<div class="net-detail" id="' + rowId + '"><pre>' + jsonHL(e) + '</pre></div>';
+    }
+
+    showDebug(html);
+  }
+
+  function exportSessionJSON() {
+    const session = {
+      timestamp: new Date().toISOString(),
+      pdtCode: currentPdtCode,
+      events: window.__eventTimeline,
+      storeSnapshots: window.__storeHistory.slice(-10),
+      networkLog: apiLogs,
+      editorPayload: window.__lastEditorDocInfo || null,
+      gotoCart: window.__gotoCartPayload
+    };
+    const blob = new Blob([safeJson(session)], { type: 'application/json' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'rp-session-' + (currentPdtCode || 'unknown') + '-' + Date.now() + '.json';
+    a.click();
+  }
+
+  // ============================================================
+  // TAB 4: Comparison
+  // ============================================================
+  const CAPTURE_FILES = [
+    { label: 'v2_GSTGMIC', path: '/captures/v2_GSTGMIC_capture.json' },
+    { label: 'v2_PRBKORD', path: '/captures/v2_PRBKORD_capture.json' },
+    { label: 'v2_ACNTHAP', path: '/captures/v2_ACNTHAP_capture.json' },
+    { label: 'v2_PRBKOPR', path: '/captures/v2_PRBKOPR_capture.json' },
+    { label: 'v2_PRBKOST', path: '/captures/v2_PRBKOST_capture.json' },
+    { label: 'v2_PRBKYPR', path: '/captures/v2_PRBKYPR_capture.json' },
+    { label: 'GSTGMIC', path: '/captures/GSTGMIC_capture.json' },
+    { label: 'PRBKORD', path: '/captures/PRBKORD_capture.json' },
+    { label: 'monitor_summary_v2', path: '/captures/monitor_summary_v2.json' },
+  ];
+
+  async function loadComparisonFile(path, btnEl) {
+    try {
+      const data = await fetch(path + '?_=' + Date.now()).then(r => {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.json();
+      });
+      comparisonData = { path: path, data: data };
+      if (btnEl) {
+        document.querySelectorAll('.compare-load-btn').forEach(b => b.classList.remove('loaded'));
+        btnEl.classList.add('loaded');
+      }
+      renderComparison();
+    } catch (e) {
+      console.error('[Compare] Failed to load:', path, e.message);
+      showDebug('<div class="empty" style="color:#f87171">Failed to load: ' + esc(path) + ' -- ' + esc(e.message) + '</div>');
+    }
+  }
+
+  function renderComparison() {
+    let html = '<div class="compare-layout">';
+
+    // left panel: current session
+    html += '<div class="compare-panel">';
+    html += '<h3>Current Session (RedPrinting)</h3>';
+    if (!currentPdtCode) {
+      html += '<div class="empty">Select a product first.</div>';
+    } else {
+      html += '<div style="font-size:11px;color:#d4d4d4;margin-bottom:6px">pdtCode: <span style="color:#60a5fa">' + esc(currentPdtCode) + '</span></div>';
+      html += '<div style="font-size:11px;color:#9ca3af;margin-bottom:4px">API Calls (' + apiLogs.length + '):</div>';
+      for (const log of apiLogs.slice(-20)) {
+        const p = (log.path || '').split('?')[0].slice(-40);
+        html += '<div style="font-size:10px;font-family:monospace;color:#d4d4d4;padding:1px 0"><span class="method-' + (log.method||'GET') + '">' + (log.method||'GET') + '</span> ' + esc(p) + ' <span class="' + (log.status===200?'log-status-ok':'log-status-err') + '">' + (log.status||'?') + '</span></div>';
+      }
+      html += '<div style="font-size:11px;color:#9ca3af;margin-top:8px">Events (' + window.__eventTimeline.length + '):</div>';
+      for (const evt of window.__eventTimeline.slice(-10)) {
+        html += '<div style="font-size:10px;font-family:monospace;color:#60a5fa;padding:1px 0">' + esc(evt.action) + '</div>';
+      }
+    }
+    html += '</div>';
+
+    // right panel: comparison data
+    html += '<div class="compare-panel" style="border-left:1px solid #3d3d3d;padding-left:12px">';
+    html += '<h3>Load Comparison Data</h3>';
+    html += '<div class="compare-load-btns">';
+    for (const cf of CAPTURE_FILES) {
+      html += '<button class="compare-load-btn' + (comparisonData?.path === cf.path ? ' loaded' : '') + '" onclick="loadComparisonFile(\'' + cf.path + '\', this)">' + cf.label + '</button>';
+    }
+    html += '</div>';
+    html += '<div style="margin-bottom:6px"><input type="file" id="compareFileInput" accept=".json" style="font-size:11px;color:#9ca3af" onchange="loadComparisonFromFile(event)"></div>';
+
+    if (comparisonData) {
+      const cd = comparisonData.data;
+      html += '<div style="font-size:11px;color:#d4d4d4;margin-bottom:4px">Loaded: <span style="color:#4ade80">' + esc(comparisonData.path.split('/').pop()) + '</span></div>';
+
+      // extract API calls from comparison data
+      const compApis = cd.apiCalls || cd.api_calls || cd.networkLog || cd.requests || [];
+      if (Array.isArray(compApis) && compApis.length > 0) {
+        html += '<div style="font-size:11px;color:#9ca3af;margin-bottom:4px">API Calls (' + compApis.length + '):</div>';
+        for (const api of compApis.slice(-20)) {
+          const p = (api.path || api.url || '').split('?')[0].slice(-40);
+          const m = api.method || 'GET';
+          html += '<div style="font-size:10px;font-family:monospace;color:#d4d4d4;padding:1px 0"><span class="method-' + m + '">' + m + '</span> ' + esc(p) + '</div>';
+        }
+      }
+
+      // extract events
+      const compEvents = cd.events || cd.postMessages || [];
+      if (Array.isArray(compEvents) && compEvents.length > 0) {
+        html += '<div style="font-size:11px;color:#9ca3af;margin-top:8px">Events (' + compEvents.length + '):</div>';
+        for (const evt of compEvents.slice(-10)) {
+          html += '<div style="font-size:10px;font-family:monospace;color:#f59e0b;padding:1px 0">' + esc(evt.action || evt.type || JSON.stringify(evt).slice(0,60)) + '</div>';
+        }
+      }
+
+      // diff summary
+      html += buildDiffSummary(cd);
+    } else {
+      html += '<div class="empty">Click a capture file button above to load comparison data.</div>';
+    }
+
+    html += '</div>';
+    html += '</div>';
+
+    showDebug(html);
+  }
+
+  function loadComparisonFromFile(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const data = JSON.parse(e.target.result);
+        comparisonData = { path: file.name, data: data };
+        renderComparison();
+      } catch (err) {
+        console.error('[Compare] JSON parse error:', err.message);
+      }
+    };
+    reader.readAsText(file);
+  }
+
+  function buildDiffSummary(compData) {
+    let html = '<div class="diff-summary"><h4>Key Differences</h4><ul>';
+
+    const currentPaths = new Set(apiLogs.map(l => (l.path || '').split('?')[0]));
+    const compApis = compData.apiCalls || compData.api_calls || compData.networkLog || compData.requests || [];
+    const compPaths = new Set((Array.isArray(compApis) ? compApis : []).map(a => (a.path || a.url || '').split('?')[0]));
+
+    const onlyCurrent = [...currentPaths].filter(p => p && !compPaths.has(p));
+    const onlyComp = [...compPaths].filter(p => p && !currentPaths.has(p));
+
+    if (onlyCurrent.length > 0) {
+      html += '<li class="compare-miss">Current session only: ' + onlyCurrent.slice(0,5).map(esc).join(', ') + '</li>';
+    }
+    if (onlyComp.length > 0) {
+      html += '<li class="compare-extra">Comparison only: ' + onlyComp.slice(0,5).map(esc).join(', ') + '</li>';
+    }
+    if (onlyCurrent.length === 0 && onlyComp.length === 0) {
+      html += '<li class="compare-match">API paths match (or no data to compare)</li>';
+    }
+
+    // store keys comparison
+    if (compData.storeKeys || compData.piniaStores) {
+      const compStoreKeys = compData.storeKeys || Object.keys(compData.piniaStores || {});
+      const currentStoreKeys = Object.keys(window.__prevStore || {});
+      const diff = compStoreKeys.filter(k => !currentStoreKeys.includes(k));
+      if (diff.length > 0) {
+        html += '<li>Comparison has extra store keys: ' + diff.map(esc).join(', ') + '</li>';
+      }
+    }
+
+    html += '</ul></div>';
+    return html;
+  }
+
+  // ============================================================
+  // TAB 5: Insights
+  // ============================================================
+  const STATIC_INSIGHTS = [
+    { cat: 'ux', catLabel: 'UX Flow', platform: 'RedPrinting', observation: 'Shadow DOM widget, Vue3+Pinia, component isolation via custom element', recommendation: 'Same architecture recommended. Keep Shadow DOM isolation for host page compatibility.' },
+    { cat: 'ux', catLabel: 'UX Flow', platform: 'RedPrinting', observation: 'onOptionChange/onPriceChange callbacks for real-time updates', recommendation: 'Adopt same callback pattern. Consider adding onValidationChange for form state.' },
+    { cat: 'api', catLabel: 'API Design', platform: 'RedPrinting', observation: 'get_digital_product_info + get_ajax_price_vTmpl 2-step resolve+price', recommendation: 'Same 2-step pattern usable. Consider merging into single endpoint for latency reduction.' },
+    { cat: 'api', catLabel: 'API Design', platform: 'RedPrinting', observation: 'widget-api.redprinting.co.kr (KOI config) separate from main API', recommendation: 'Separate widget API domain for CDN/caching optimization.' },
+    { cat: 'api', catLabel: 'API Design', platform: 'RedPrinting', observation: 'makers.redprinting.net for editor token issuance (issueUserToken)', recommendation: 'Dedicated auth endpoint for editor. Consider OAuth2 flow for Huni.' },
+    { cat: 'price', catLabel: 'Pricing Model', platform: 'RedPrinting', observation: 'price_gbn=book2025_price (quantity-tier table), multiple pricing formulas per category', recommendation: '7 pricing patterns needed. Decompose to cost atoms for flexibility.' },
+    { cat: 'price', catLabel: 'Pricing Model', platform: 'RedPrinting', observation: 'Real-time price calculation in Pinia store (priceStore)', recommendation: 'Keep client-side price calculation for responsiveness. Server validates on order.' },
+    { cat: 'editor', catLabel: 'Editor Integration', platform: 'RedPrinting', observation: 'KOI passive mode -> Edicus SDK, psCode@pdtCode format', recommendation: 'Same Edicus integration. psCode@pdtCode format maps to Huni product schema.' },
+    { cat: 'editor', catLabel: 'Editor Integration', platform: 'RedPrinting', observation: 'postMessage protocol: from-edicus type, save-doc-report -> goto-cart lifecycle', recommendation: 'Adopt same lifecycle. Add explicit error/timeout handling for editor communication.' },
+    { cat: 'editor', catLabel: 'Editor Integration', platform: 'RedPrinting', observation: 'RedEditorSDK.createProject with psCode + templateUrl (GCS path)', recommendation: 'Template management via GCS. Huni needs own template registry.' },
+  ];
+
+  function renderInsights() {
+    let html = '<table class="insight-table">';
+    html += '<tr><th>Category</th><th>Platform</th><th>Observation</th><th>Huni Recommendation</th></tr>';
+    for (const ins of STATIC_INSIGHTS) {
+      const catCls = 'cat-' + ins.cat;
+      html += '<tr>';
+      html += '<td><span class="insight-cat ' + catCls + '">' + ins.catLabel + '</span></td>';
+      html += '<td style="color:#9ca3af;font-size:10px">' + esc(ins.platform) + '</td>';
+      html += '<td>' + esc(ins.observation) + '</td>';
+      html += '<td style="color:#4ade80">' + esc(ins.recommendation) + '</td>';
+      html += '</tr>';
+    }
+    html += '</table>';
+
+    if (comparisonData) {
+      html += '<div style="margin-top:12px;padding:8px;background:#252525;border-radius:4px">';
+      html += '<div style="font-size:11px;color:#9ca3af;margin-bottom:4px">Dynamic insights from comparison data:</div>';
+
+      const cd = comparisonData.data;
+      const compApis = cd.apiCalls || cd.api_calls || cd.networkLog || cd.requests || [];
+      if (Array.isArray(compApis)) {
+        const endpoints = new Set(compApis.map(a => (a.path || a.url || '').split('?')[0]).filter(Boolean));
+        html += '<div style="font-size:10px;color:#d4d4d4">Unique endpoints in comparison: ' + endpoints.size + '</div>';
+        const priceApis = [...endpoints].filter(p => p.includes('price') || p.includes('Price'));
+        if (priceApis.length > 0) {
+          html += '<div style="font-size:10px;color:#fbbf24;margin-top:2px">Price-related APIs: ' + priceApis.map(esc).join(', ') + '</div>';
+        }
+      }
+      html += '</div>';
+    }
+
+    showDebug(html);
+  }
+
+  // ============================================================
+  // Tab switching
+  // ============================================================
+  function switchTab(tab) {
+    currentTab = tab;
+    document.querySelectorAll('.debug-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('tab-' + tab).classList.add('active');
+    if (tab === 'store') refreshStore();
+    else if (tab === 'editor') renderEditorFlow();
+    else if (tab === 'network') loadApiLog().then(renderNetwork);
+    else if (tab === 'compare') renderComparison();
+    else if (tab === 'insights') renderInsights();
+  }
+
+  function showDebug(html) { document.getElementById('debugContent').innerHTML = html; }
+
+  // -- JSON syntax highlight --
+  function jsonHL(obj) {
+    return JSON.stringify(obj, null, 2)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      .replace(/("(\\u[a-fA-F0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, m => {
+        const c = /^"/.test(m) ? (/:$/.test(m)?'#9cdcfe':'#ce9178') : (/true|false|null/.test(m)?'#569cd6':'#b5cea8');
+        return '<span style="color:' + c + '">' + m + '</span>';
+      });
+  }
+
+  // -- HTML escape --
+  function esc(s) {
+    if (s === null || s === undefined) return '';
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  // -- polling --
+  setInterval(() => { if (currentPdtCode && currentTab === 'network') loadApiLog(); }, 3000);
+
+  // -- clearLog (context-aware) --
+  function clearLog() {
+    if (currentTab === 'network') {
+      apiLogs = [];
+      updateNetworkCnt();
+      showDebug('<div class="empty">Network log cleared.</div>');
+    } else if (currentTab === 'editor') {
+      window.__eventTimeline = [];
+      window.__gotoCartPayload = null;
+      window.__editorLifecycleState = null;
+      document.getElementById('editor-cnt').textContent = '0';
+      renderEditorFlow();
+    } else if (currentTab === 'store') {
+      window.__prevStore = {};
+      window.__storeHistory = [];
+      refreshStore();
+    }
+  }
+
+  // -- token status --
+  async function checkTokenStatus() {
+    const btn = document.getElementById('tokenBtn');
+    try {
+      const d = await fetch('/token-status').then(r => r.json());
+      if (d.status === 'none' || d.expired) {
+        btn.textContent = 'Token EXPIRED -- click to refresh';
+        btn.className = 'token-btn expired';
+      } else {
+        const diff = Math.round((d.exp - Date.now()/1000) / 60);
+        btn.textContent = 'Token OK (' + diff + 'min)';
+        btn.className = 'token-btn ok';
+      }
+    } catch { btn.textContent = 'Token check failed'; btn.className = 'token-btn'; }
+  }
+
+  async function handleTokenBtn() {
+    const btn = document.getElementById('tokenBtn');
+    const d = await fetch('/token-status').then(r => r.json());
+    if (!d.expired) { checkTokenStatus(); return; }
+    btn.textContent = 'Refreshing token... (~30s)';
+    btn.className = 'token-btn loading';
+    btn.disabled = true;
+    try {
+      const r = await fetch('/refresh-token', { method: 'POST' }).then(r => r.json());
+      if (r.ok) { await checkTokenStatus(); }
+      else { btn.textContent = 'Refresh failed -- retry'; btn.className = 'token-btn expired'; btn.disabled = false; }
+    } catch { btn.textContent = 'Refresh error'; btn.className = 'token-btn expired'; btn.disabled = false; }
+  }
+
+  checkTokenStatus();
+  setInterval(checkTokenStatus, 60000);
+  loadCatalog();
+</script>
+</body>
+</html>

@@ -1,0 +1,1598 @@
+{
+  "pdtCode": "GSTGMIC",
+  "name": "마이크 네임택",
+  "url": "https://www.redprinting.co.kr/ko/product/item/GS/GSTGMIC",
+  "level": "acc",
+  "capturedAt": "2026-03-30T21:28:22.321Z",
+  "widgetInfo": {
+    "mountPoints": [],
+    "sdkScriptUrl": "https://www.redprinting.co.kr/js/productRedWidgetSDK.js?20260331062815",
+    "widgetScriptUrl": "https://d2vgy67dgpwzce.cloudfront.net/RedWidgetSDK/prod/widget.js?20260331062815",
+    "shadowHostCount": 1,
+    "shadowHostIds": [
+      "redWidgetSdk"
+    ]
+  },
+  "networkApiCalls": 2,
+  "storeKeys": [
+    "config",
+    "exterior",
+    "order",
+    "product"
+  ],
+  "networkLog": [
+    {
+      "timestamp": 1774906096852,
+      "url": "https://www.redprinting.co.kr/ko/product/get_digital_product_info?pdt_cod=GSTGMIC",
+      "method": "GET",
+      "status": 200,
+      "requestBody": null,
+      "response": {
+        "retCode": 200,
+        "msg": "",
+        "result": {
+          "product_option": {
+            "option": {
+              "pdt_cod": "GSTGMIC",
+              "pdt_nme": "마이크 네임택",
+              "item_gbn": "vDigital_item",
+              "price_gbn": "tiered_price",
+              "skinInfo": {
+                "pageDirection": {
+                  "view_yn": "N",
+                  "title": "주문서 작성"
+                },
+                "paperSelect": {
+                  "view_yn": "Y",
+                  "title": "용지"
+                },
+                "sizeSelect": {
+                  "view_yn": "Y",
+                  "title": "규격 (mm)"
+                },
+                "dosuSelect": {
+                  "view_yn": "Y",
+                  "title": "인쇄 도수"
+                },
+                "subjectGroup": {
+                  "view_yn": "Y",
+                  "title": "주문 제목"
+                },
+                "quantityGroup": {
+                  "view_yn": "Y",
+                  "title": {
+                    "orderCnt": "디자인 수 (건수)",
+                    "printCnt": "수량"
+                  }
+                }
+              },
+              "order_yn": "Y",
+              "cut_guide_yn": "N",
+              "able_paper_yn": "Y",
+              "price_table_yn": "Y",
+              "useTemplateDownload": "Y",
+              "useKoiEditor": "Y",
+              "useRPEditor": "N",
+              "usePDF": "Y",
+              "usePDFordCnt": "Y",
+              "useEditorOrdCnt": "N",
+              "koiAccessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb21wYW55Ijoi66CI65Oc7ZSE66aw7YyFIiwiY29tcGFueUNvZGUiOiIwMTAxIiwiY3VzdG9tZXJDb2RlIjoiMTUwOTAwMzUiLCJ1c2VySWQiOiJyZWRwcmludGluZyIsImRpdmlzaW9uIjoiaG9zdCIsImxhbmciOiJrbyIsImlzQ2xpZW50Ijp0cnVlLCJyZWZyZXNoVG9rZW4iOiIzaFpuRmlaejdKY3JaYWg0VGVBOVNvTmpXNDJkTlciLCJpYXQiOjE3NzQ5MDYwOTYsImV4cCI6MTc3NDkwOTY5Nn0.wYdYjdQzU7a-7EgvNdg5nKCBuVvrbwnFN1Ds9r99Oy0",
+              "rpAccessToken": null,
+              "koi_template_resource_id": null
+            }
+          },
+          "product_data": {
+            "pdt_base_info": [
+              {
+                "PDT_CD": "GSTGMIC",
+                "PDT_NM": "마이크 네임택",
+                "WDT_HGH_GBN_YN": "N",
+                "PRN_YN": "Y",
+                "PDT_UNIT": "개",
+                "ORD_CNT_YN": "Y",
+                "NO_STD_ABL_YN": "N",
+                "MIN_CUT_WDT": "10.00",
+                "MIN_CUT_HGH": "10.00",
+                "MAX_CUT_WDT": "470.00",
+                "MAX_CUT_HGH": "300.00",
+                "DFT_CUT_WDT": "0.00",
+                "DFT_CUT_HGH": "0.00",
+                "CUT_MRG": "4.00",
+                "FIR_CNT": 1,
+                "INC": 1,
+                "INC_STEP": 10,
+                "NOTE": "",
+                "REAM_YN": "",
+                "SET_CNT": 1,
+                "SIZE_PCS_USE": "",
+                "MAX_PRN_CNT": 0,
+                "DAY_PRDC_PDT_YN": "N",
+                "DAY_ABLE_PRN_CNT": 0
+              }
+            ],
+            "pdt_mtrl_info": [
+              {
+                "MTRL_TYPE": "R",
+                "CLR_CD": "X",
+                "CLR_NM": "기본",
+                "PTT_CD": "BVW",
+                "PTT_NM": "BV",
+                "WGT_CD": "300",
+                "MTRL_CD": "RXBVW300",
+                "HIDE_YN": "N",
+                "HIDE_RSN": "",
+                "NOTE": "",
+                "SID_GBN": "",
+                "CLR_COD": "X",
+                "CLR_NME": "기본",
+                "PTT_COD": "BVW",
+                "PTT_NME": "BV",
+                "WGT_COD": "300",
+                "MTRL_COD": "RXBVW300",
+                "MTRL_NM": "BV300g",
+                "GRP_OPTION_CD": "",
+                "CLR_OPTION_CD": "",
+                "PRT_HIDE_YN": null,
+                "BSN_YN": "N"
+              }
+            ],
+            "pdt_size_info": [
+              {
+                "DIV_NM": "삼각 마이크 네임택S",
+                "WRK_WDT": "355.00",
+                "WRK_HGH": "245.00",
+                "CUT_WDT": "351.00",
+                "CUT_HGH": "241.00",
+                "DFT_YN": "Y",
+                "DIV_CD": "",
+                "DIV_SEQ": 1,
+                "STICKER_TYPE": "",
+                "REAM_PAPER_CNT": null,
+                "NOTE": null,
+                "PDT_SIZE_INFO": "제품사이즈 : 351 X 241mm",
+                "HIDE_YN": "N"
+              },
+              {
+                "DIV_NM": "삼각 마이크 네임택L",
+                "WRK_WDT": "355.00",
+                "WRK_HGH": "295.00",
+                "CUT_WDT": "351.00",
+                "CUT_HGH": "291.00",
+                "DFT_YN": "N",
+                "DIV_CD": "",
+                "DIV_SEQ": 3,
+                "STICKER_TYPE": "",
+                "REAM_PAPER_CNT": null,
+                "NOTE": null,
+                "PDT_SIZE_INFO": "제품사이즈 : 351 X 291mm",
+                "HIDE_YN": "N"
+              },
+              {
+                "DIV_NM": "사각 마이크 네임택S",
+                "WRK_WDT": "474.00",
+                "WRK_HGH": "304.00",
+                "CUT_WDT": "470.00",
+                "CUT_HGH": "300.00",
+                "DFT_YN": "N",
+                "DIV_CD": "",
+                "DIV_SEQ": 2,
+                "STICKER_TYPE": "",
+                "REAM_PAPER_CNT": null,
+                "NOTE": null,
+                "PDT_SIZE_INFO": "제품사이즈 : 470 X 300mm",
+                "HIDE_YN": "N"
+              },
+              {
+                "DIV_NM": "사각 마이크 네임택L",
+                "WRK_WDT": "474.00",
+                "WRK_HGH": "354.00",
+                "CUT_WDT": "470.00",
+                "CUT_HGH": "350.00",
+                "DFT_YN": "N",
+                "DIV_CD": "",
+                "DIV_SEQ": 4,
+                "STICKER_TYPE": "",
+                "REAM_PAPER_CNT": null,
+                "NOTE": null,
+                "PDT_SIZE_INFO": "제품사이즈 : 470 X 350mm",
+                "HIDE_YN": "N"
+              }
+            ],
+            "pdt_dosu_info": [
+              {
+                "COD": "SID_S",
+                "COD_NME": "단면",
+                "PRN_CLR_CNT": 4
+              }
+            ],
+            "pdt_prn_cnt_info": [
+              {
+                "DIV_CD": "",
+                "REAM_CNT": "",
+                "PRN_CNT": "",
+                "DFT_YN": "Y",
+                "DFT_PRN_CNT": 1,
+                "FIR_CNT": 1,
+                "INC_CNT": 1,
+                "INC_STEP": 10,
+                "MIN_PRN_CNT": 1,
+                "MIN_INN_PAGE": 1,
+                "MAX_INN_PAGE": 1,
+                "STEP_INN_PAGE": 1,
+                "MAX_THCK": null,
+                "INN_MAX_WGT": null,
+                "COV_MIN_WGT": null
+              }
+            ],
+            "pdt_exp_prn_cnt_info": null,
+            "pdt_pcs_info": [
+              {
+                "PCS_CD": "COT_DFT",
+                "PCS_GRP_NM": "코팅",
+                "PCS_DTL_CD": "TCGLS",
+                "PCS_DTL_NM": "유광코팅단면",
+                "WEB_PCS_DTL_GRP": "COT_DFT_TC",
+                "WEB_PCS_DTL_GRP_NM": "",
+                "WRK_WDT": "0.00",
+                "WRK_HGH": "0.00",
+                "CUT_WDT": "0.00",
+                "CUT_HGH": "0.00",
+                "VIEW_YN": "N",
+                "HIDE_YN": "N",
+                "NOTICE": [],
+                "ESN_YN": "Y",
+                "NOTE": "",
+                "MTRL_CD": "",
+                "MTRL_COD": "",
+                "DIV_SEQ": 0,
+                "SUB_MTRL_YN": "N",
+                "STICKER_TYPE": null,
+                "QTY_INPUT_YN": "N",
+                "PCS_COD": "COT_DFT",
+                "PCS_GRP_NME": "코팅",
+                "PCS_DTL_COD": "TCGLS",
+                "PCS_DTL_NME": "유광코팅단면",
+                "PCS_GROUP_NME": "유광코팅단면"
+              },
+              {
+                "PCS_CD": "THO_CUT",
+                "PCS_GRP_NM": "모양커팅",
+                "PCS_DTL_CD": "TG001",
+                "PCS_DTL_NM": "삼각 마이크텍 S",
+                "WEB_PCS_DTL_GRP": "THO_CUT_TG",
+                "WEB_PCS_DTL_GRP_NM": "",
+                "WRK_WDT": "355.00",
+                "WRK_HGH": "245.00",
+                "CUT_WDT": "351.00",
+                "CUT_HGH": "241.00",
+                "VIEW_YN": "N",
+                "HIDE_YN": "N",
+                "NOTICE": [],
+                "ESN_YN": "Y",
+                "NOTE": "",
+                "MTRL_CD": "",
+                "MTRL_COD": "",
+                "DIV_SEQ": 1,
+                "SUB_MTRL_YN": "N",
+                "STICKER_TYPE": null,
+                "QTY_INPUT_YN": "N",
+                "PCS_COD": "THO_CUT",
+                "PCS_GRP_NME": "모양커팅",
+                "PCS_DTL_COD": "TG001",
+                "PCS_DTL_NME": "삼각 마이크텍 S",
+                "PCS_GROUP_NME": "삼각 마이크텍 S"
+              },
+              {
+                "PCS_CD": "THO_CUT",
+                "PCS_GRP_NM": "모양커팅",
+                "PCS_DTL_CD": "TG002",
+                "PCS_DTL_NM": "사각 마이크텍 S",
+                "WEB_PCS_DTL_GRP": "THO_CUT_TG",
+                "WEB_PCS_DTL_GRP_NM": "",
+                "WRK_WDT": "474.00",
+                "WRK_HGH": "304.00",
+                "CUT_WDT": "470.00",
+                "CUT_HGH": "300.00",
+                "VIEW_YN": "N",
+                "HIDE_YN": "N",
+                "NOTICE": [],
+                "ESN_YN": "Y",
+                "NOTE": "",
+                "MTRL_CD": "",
+                "MTRL_COD": "",
+                "DIV_SEQ": 2,
+                "SUB_MTRL_YN": "N",
+                "STICKER_TYPE": null,
+                "QTY_INPUT_YN": "N",
+                "PCS_COD": "THO_CUT",
+                "PCS_GRP_NME": "모양커팅",
+                "PCS_DTL_COD": "TG002",
+                "PCS_DTL_NME": "사각 마이크텍 S",
+                "PCS_GROUP_NME": "사각 마이크텍 S"
+              },
+              {
+                "PCS_CD": "THO_CUT",
+                "PCS_GRP_NM": "모양커팅",
+                "PCS_DTL_CD": "TG003",
+                "PCS_DTL_NM": "삼각 마이크텍 L",
+                "WEB_PCS_DTL_GRP": "THO_CUT_TG",
+                "WEB_PCS_DTL_GRP_NM": "",
+                "WRK_WDT": "355.00",
+                "WRK_HGH": "295.00",
+                "CUT_WDT": "351.00",
+                "CUT_HGH": "291.00",
+                "VIEW_YN": "N",
+                "HIDE_YN": "N",
+                "NOTICE": [],
+                "ESN_YN": "Y",
+                "NOTE": "",
+                "MTRL_CD": "",
+                "MTRL_COD": "",
+                "DIV_SEQ": 3,
+                "SUB_MTRL_YN": "N",
+                "STICKER_TYPE": null,
+                "QTY_INPUT_YN": "N",
+                "PCS_COD": "THO_CUT",
+                "PCS_GRP_NME": "모양커팅",
+                "PCS_DTL_COD": "TG003",
+                "PCS_DTL_NME": "삼각 마이크텍 L",
+                "PCS_GROUP_NME": "삼각 마이크텍 L"
+              },
+              {
+                "PCS_CD": "THO_CUT",
+                "PCS_GRP_NM": "모양커팅",
+                "PCS_DTL_CD": "TG004",
+                "PCS_DTL_NM": "사각 마이크텍 L",
+                "WEB_PCS_DTL_GRP": "THO_CUT_TG",
+                "WEB_PCS_DTL_GRP_NM": "",
+                "WRK_WDT": "474.00",
+                "WRK_HGH": "354.00",
+                "CUT_WDT": "470.00",
+                "CUT_HGH": "350.00",
+                "VIEW_YN": "N",
+                "HIDE_YN": "N",
+                "NOTICE": [],
+                "ESN_YN": "Y",
+                "NOTE": "",
+                "MTRL_CD": "",
+                "MTRL_COD": "",
+                "DIV_SEQ": 4,
+                "SUB_MTRL_YN": "N",
+                "STICKER_TYPE": null,
+                "QTY_INPUT_YN": "N",
+                "PCS_COD": "THO_CUT",
+                "PCS_GRP_NME": "모양커팅",
+                "PCS_DTL_COD": "TG004",
+                "PCS_DTL_NME": "사각 마이크텍 L",
+                "PCS_GROUP_NME": "사각 마이크텍 L"
+              },
+              {
+                "PCS_CD": "WRK_MTR",
+                "PCS_GRP_NM": "부자재작업",
+                "PCS_DTL_CD": "TG001",
+                "PCS_DTL_NM": "삼각 마이크텍 스펀지 S",
+                "WEB_PCS_DTL_GRP": "WRK_MTR_TG",
+                "WEB_PCS_DTL_GRP_NM": "",
+                "WRK_WDT": "355.00",
+                "WRK_HGH": "245.00",
+                "CUT_WDT": "351.00",
+                "CUT_HGH": "241.00",
+                "VIEW_YN": "N",
+                "HIDE_YN": "N",
+                "NOTICE": [],
+                "ESN_YN": "Y",
+                "NOTE": "",
+                "MTRL_CD": "SXAPMT01",
+                "MTRL_COD": "SXAPMT01",
+                "DIV_SEQ": 1,
+                "SUB_MTRL_YN": "Y",
+                "STICKER_TYPE": null,
+                "QTY_INPUT_YN": "N",
+                "PCS_COD": "WRK_MTR",
+                "PCS_GRP_NME": "부자재작업",
+                "PCS_DTL_COD": "TG001",
+                "PCS_DTL_NME": "삼각 마이크텍 스펀지 S",
+                "PCS_GROUP_NME": "삼각 마이크텍 스펀지 S"
+              },
+              {
+                "PCS_CD": "WRK_MTR",
+                "PCS_GRP_NM": "부자재작업",
+                "PCS_DTL_CD": "TG002",
+                "PCS_DTL_NM": "사각 마이크텍 스펀지 S",
+                "WEB_PCS_DTL_GRP": "WRK_MTR_TG",
+                "WEB_PCS_DTL_GRP_NM": "",
+                "WRK_WDT": "474.00",
+                "WRK_HGH": "304.00",
+                "CUT_WDT": "470.00",
+                "CUT_HGH": "300.00",
+                "VIEW_YN": "N",
+                "HIDE_YN": "N",
+                "NOTICE": [],
+                "ESN_YN": "Y",
+                "NOTE": "",
+                "MTRL_CD": "SXAPMT02",
+                "MTRL_COD": "SXAPMT02",
+                "DIV_SEQ": 2,
+                "SUB_MTRL_YN": "Y",
+                "STICKER_TYPE": null,
+                "QTY_INPUT_YN": "N",
+                "PCS_COD": "WRK_MTR",
+                "PCS_GRP_NME": "부자재작업",
+                "PCS_DTL_COD": "TG002",
+                "PCS_DTL_NME": "사각 마이크텍 스펀지 S",
+                "PCS_GROUP_NME": "사각 마이크텍 스펀지 S"
+              },
+              {
+                "PCS_CD": "WRK_MTR",
+                "PCS_GRP_NM": "부자재작업",
+                "PCS_DTL_CD": "TG003",
+                "PCS_DTL_NM": "삼각 마이크텍 스펀지 L",
+                "WEB_PCS_DTL_GRP": "WRK_MTR_TG",
+                "WEB_PCS_DTL_GRP_NM": "",
+                "WRK_WDT": "355.00",
+                "WRK_HGH": "295.00",
+                "CUT_WDT": "351.00",
+                "CUT_HGH": "291.00",
+                "VIEW_YN": "N",
+                "HIDE_YN": "N",
+                "NOTICE": [],
+                "ESN_YN": "Y",
+                "NOTE": "",
+                "MTRL_CD": "SXAPMT03",
+                "MTRL_COD": "SXAPMT03",
+                "DIV_SEQ": 3,
+                "SUB_MTRL_YN": "Y",
+                "STICKER_TYPE": null,
+                "QTY_INPUT_YN": "N",
+                "PCS_COD": "WRK_MTR",
+                "PCS_GRP_NME": "부자재작업",
+                "PCS_DTL_COD": "TG003",
+                "PCS_DTL_NME": "삼각 마이크텍 스펀지 L",
+                "PCS_GROUP_NME": "삼각 마이크텍 스펀지 L"
+              },
+              {
+                "PCS_CD": "WRK_MTR",
+                "PCS_GRP_NM": "부자재작업",
+                "PCS_DTL_CD": "TG004",
+                "PCS_DTL_NM": "사각 마이크텍 스펀지 L",
+                "WEB_PCS_DTL_GRP": "WRK_MTR_TG",
+                "WEB_PCS_DTL_GRP_NM": "",
+                "WRK_WDT": "474.00",
+                "WRK_HGH": "354.00",
+                "CUT_WDT": "470.00",
+                "CUT_HGH": "350.00",
+                "VIEW_YN": "N",
+                "HIDE_YN": "N",
+                "NOTICE": [],
+                "ESN_YN": "Y",
+                "NOTE": "",
+                "MTRL_CD": "SXAPMT04",
+                "MTRL_COD": "SXAPMT04",
+                "DIV_SEQ": 4,
+                "SUB_MTRL_YN": "Y",
+                "STICKER_TYPE": null,
+                "QTY_INPUT_YN": "N",
+                "PCS_COD": "WRK_MTR",
+                "PCS_GRP_NME": "부자재작업",
+                "PCS_DTL_COD": "TG004",
+                "PCS_DTL_NME": "사각 마이크텍 스펀지 L",
+                "PCS_GROUP_NME": "사각 마이크텍 스펀지 L"
+              },
+              {
+                "PCS_CD": "PDT_WRK",
+                "PCS_GRP_NM": "제품가공",
+                "PCS_DTL_CD": "PKT01",
+                "PCS_DTL_NM": "마이크텍 조립",
+                "WEB_PCS_DTL_GRP": "PDT_WRK_PK",
+                "WEB_PCS_DTL_GRP_NM": "",
+                "WRK_WDT": "0.00",
+                "WRK_HGH": "0.00",
+                "CUT_WDT": "0.00",
+                "CUT_HGH": "0.00",
+                "VIEW_YN": "N",
+                "HIDE_YN": "N",
+                "NOTICE": [],
+                "ESN_YN": "Y",
+                "NOTE": "",
+                "MTRL_CD": "",
+                "MTRL_COD": "",
+                "DIV_SEQ": 0,
+                "SUB_MTRL_YN": "N",
+                "STICKER_TYPE": null,
+                "QTY_INPUT_YN": "N",
+                "PCS_COD": "PDT_WRK",
+                "PCS_GRP_NME": "제품가공",
+                "PCS_DTL_COD": "PKT01",
+                "PCS_DTL_NME": "마이크텍 조립",
+                "PCS_GROUP_NME": "마이크텍 조립"
+              },
+              {
+                "PCS_CD": "PAK_POL",
+                "PCS_GRP_NM": "폴리백 개별포장",
+                "PCS_DTL_CD": "DFXXX",
+                "PCS_DTL_NM": "폴리백 개별포장",
+                "WEB_PCS_DTL_GRP": "PAK_POL_DF",
+                "WEB_PCS_DTL_GRP_NM": "",
+                "WRK_WDT": "0.00",
+                "WRK_HGH": "0.00",
+                "CUT_WDT": "0.00",
+                "CUT_HGH": "0.00",
+                "VIEW_YN": "N",
+                "HIDE_YN": "N",
+                "NOTICE": [],
+                "ESN_YN": "Y",
+                "NOTE": "",
+                "MTRL_CD": "",
+                "MTRL_COD": "",
+                "DIV_SEQ": 0,
+                "SUB_MTRL_YN": "N",
+                "STICKER_TYPE": null,
+                "QTY_INPUT_YN": "N",
+                "PCS_COD": "PAK_POL",
+                "PCS_GRP_NME": "폴리백 개별포장",
+                "PCS_DTL_COD": "DFXXX",
+                "PCS_DTL_NME": "폴리백 개별포장",
+                "PCS_GROUP_NME": "폴리백 개별포장"
+              }
+            ],
+            "pdt_add_pcs_info": null,
+            "pdt_disable_pcs_info": [],
+            "pdt_add_info": [
+              [],
+              []
+            ]
+          },
+          "member_info": {
+            "mb_id": "RP6416fae17f57eac014993e9ffa008bab",
+            "mb_cust_cod": "10000000",
+            "discount_cust_yn": null,
+            "mall_cust_yn": null,
+            "bsn_yn": null,
+            "blk_con": null,
+            "edicusUserID": "cmVkcHJpbnRpbmdfbm9tZW1iZXI="
+          }
+        }
+      }
+    },
+    {
+      "timestamp": 1774906097620,
+      "url": "https://www.redprinting.co.kr/ko/product_price/get_ajax_price_vTmpl",
+      "method": "POST",
+      "status": 200,
+      "requestBody": "{\"dataJson\":{\"ORD_INFO\":[{\"PDT_CD\":\"GSTGMIC\",\"MTRL_CD\":\"RXBVW300\",\"CUT_WDT\":351,\"CUT_HGH\":241,\"WRK_WDT\":355,\"WRK_HGH\":245,\"PRN_CNT\":1,\"ORD_CNT\":1,\"DOSU_COD\":\"SID_S\",\"PRN_CLR_CNT\":4}],\"PCS_INFO\":[{\"PCS_COD\":\"WRK_MTR\",\"PCS_DTL_COD\":\"TG001\",\"ATTB\":1,\"ATTB_2\":\"\",\"ATTB_3\":\"\"},{\"PCS_COD\":\"COT_DFT\",\"PCS_DTL_COD\":\"TCGLS\",\"ATTB\":\"\"},{\"PCS_COD\":\"PDT_WRK\",\"PCS_DTL_COD\":\"PKT01\",\"ATTB\":\"\"},{\"PCS_COD\":\"PAK_POL\",\"PCS_DTL_COD\":\"DFXXX\",\"ATTB\":\"\"},{\"PCS_COD\":\"THO_CUT\",\"PCS_DTL_COD\":\"TG001\",\"ATTB\":\"\"}],\"price_gbn\":\"tiered_price\",\"mb_cust_cod\":\"10000000\"}}",
+      "response": {
+        "retCode": 200,
+        "msg": "",
+        "result": [
+          {
+            "PCS_CD": "WRK_MTR",
+            "PCS_DTL_CD": "TG001",
+            "PCS_COD": "WRK_MTR",
+            "PCS_DTL_COD": "TG001",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00 분양몰 할인율: 0.0000, 환율 : 1.00",
+            "PCS_NME": "부자재작업",
+            "PCS_DTL_NME": "삼각 마이크텍 스펀지 S"
+          },
+          {
+            "PCS_CD": "COT_DFT",
+            "PCS_DTL_CD": "TCGLS",
+            "PCS_COD": "COT_DFT",
+            "PCS_DTL_COD": "TCGLS",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00 분양몰 할인율: 0.0000, 환율 : 1.00",
+            "PCS_NME": "코팅",
+            "PCS_DTL_NME": "유광코팅단면"
+          },
+          {
+            "PCS_CD": "PDT_WRK",
+            "PCS_DTL_CD": "PKT01",
+            "PCS_COD": "PDT_WRK",
+            "PCS_DTL_COD": "PKT01",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00 분양몰 할인율: 0.0000, 환율 : 1.00",
+            "PCS_NME": "제품가공",
+            "PCS_DTL_NME": "마이크텍 조립"
+          },
+          {
+            "PCS_CD": "PAK_POL",
+            "PCS_DTL_CD": "DFXXX",
+            "PCS_COD": "PAK_POL",
+            "PCS_DTL_COD": "DFXXX",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00 분양몰 할인율: 0.0000, 환율 : 1.00",
+            "PCS_NME": "폴리백 개별포장",
+            "PCS_DTL_NME": "폴리백 개별포장"
+          },
+          {
+            "PCS_CD": "THO_CUT",
+            "PCS_DTL_CD": "TG001",
+            "PCS_COD": "THO_CUT",
+            "PCS_DTL_COD": "TG001",
+            "PRICE": 0,
+            "PRICE_VAT": 0,
+            "PRICE_MALL": 0,
+            "PRICE_MALL_VAT": 0,
+            "ORG_PRICE": 0,
+            "ORG_PRICE_VAT": 0,
+            "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00",
+            "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00 분양몰 할인율: 0.0000, 환율 : 1.00",
+            "PCS_NME": "완칼도무송",
+            "PCS_DTL_NME": "삼각 마이크텍 S"
+          },
+          {
+            "PCS_CD": "PRT_DFT",
+            "PCS_DTL_CD": "DFXXS",
+            "PCS_COD": "PRT_DFT",
+            "PCS_DTL_COD": "DFXXS",
+            "PRICE": 6000,
+            "PRICE_VAT": 600,
+            "PRICE_MALL": 6000,
+            "PRICE_MALL_VAT": 600,
+            "ORG_PRICE": 6000,
+            "ORG_PRICE_VAT": 600,
+            "PRICE_LOG": "개당단가 : 6000.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00",
+            "PRICE_MALL_LOG": "개당단가 : 6000.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00 분양몰 할인율: 0.0000, 환율 : 1.00",
+            "PCS_NME": "인쇄",
+            "PCS_DTL_NME": "인쇄단면"
+          }
+        ],
+        "result_sum": {
+          "PRICE": 6000,
+          "PRICE_VAT": 600,
+          "PRICE_MALL": 6000,
+          "PRICE_MALL_VAT": 600,
+          "ORG_PRICE": 6000,
+          "ORG_PRICE_VAT": 600
+        }
+      }
+    }
+  ],
+  "storeSnapshot": {
+    "config": {
+      "locale": "ko"
+    },
+    "exterior": {
+      "uploadType": {
+        "default": "editor"
+      },
+      "editorData": {
+        "default": null
+      },
+      "payloadForEditorConfig": {
+        "default": {
+          "lang_cod": "ko",
+          "pdt_cod": "GSTGMIC",
+          "PDT_NM": "마이크 네임택",
+          "sizeInfo": {
+            "DIV_NM": "삼각 마이크 네임택S",
+            "DIV_SEQ": 1,
+            "DivInfo": {},
+            "cutSize": {
+              "width": 351,
+              "height": 241
+            },
+            "workSize": {
+              "width": 355,
+              "height": 245
+            }
+          },
+          "pcsInfo": [
+            {
+              "PCS_CD": "WRK_MTR",
+              "VIEW_YN": "N",
+              "ESN_YN": "Y",
+              "MTRL_CD": "SXAPMT01",
+              "DIV_SEQ": 1,
+              "active": false,
+              "selectedOptions": [
+                {
+                  "PCS_CD": "WRK_MTR",
+                  "PCS_DTL_CD": "TG001",
+                  "PCS_DTL_NM": "삼각 마이크텍 스펀지 S",
+                  "ATTB": 1,
+                  "ATTB_2": "",
+                  "ATTB_3": ""
+                }
+              ]
+            },
+            {
+              "PCS_CD": "COT_DFT",
+              "VIEW_YN": "N",
+              "ESN_YN": "Y",
+              "selectedOptions": [
+                {
+                  "PCS_CD": "COT_DFT",
+                  "PCS_DTL_CD": "TCGLS",
+                  "PCS_DTL_NM": "유광코팅단면",
+                  "ATTB": ""
+                }
+              ]
+            },
+            {
+              "PCS_CD": "PDT_WRK",
+              "VIEW_YN": "N",
+              "ESN_YN": "Y",
+              "selectedOptions": [
+                {
+                  "PCS_CD": "PDT_WRK",
+                  "PCS_DTL_CD": "PKT01",
+                  "PCS_DTL_NM": "마이크텍 조립",
+                  "ATTB": ""
+                }
+              ]
+            },
+            {
+              "PCS_CD": "PAK_POL",
+              "VIEW_YN": "N",
+              "ESN_YN": "Y",
+              "selectedOptions": [
+                {
+                  "PCS_CD": "PAK_POL",
+                  "PCS_DTL_CD": "DFXXX",
+                  "PCS_DTL_NM": "폴리백 개별포장",
+                  "ATTB": ""
+                }
+              ]
+            },
+            {
+              "PCS_CD": "THO_CUT",
+              "VIEW_YN": "N",
+              "ESN_YN": "Y",
+              "selectedOptions": [
+                {
+                  "PCS_CD": "THO_CUT",
+                  "PCS_DTL_CD": "TG001",
+                  "PCS_DTL_NM": "삼각 마이크텍 S",
+                  "ATTB": ""
+                }
+              ]
+            }
+          ],
+          "meterialInfo": {
+            "PTT_CD": "BVW",
+            "PTT_NM": "BV",
+            "WGT_CD": "300",
+            "CLR_CD": "X",
+            "MTRL_CD": "RXBVW300",
+            "MTRL_NM": "BV300g",
+            "MTRL_TYPE": "R",
+            "PRT_HIDE_YN": null,
+            "SID_GBN": ""
+          },
+          "dosuInfo": {
+            "COD": "SID_S",
+            "COD_NME": "단면",
+            "PRN_CLR_CNT": 4
+          },
+          "quantityInfo": {
+            "ordCnt": 1,
+            "prnCnt": 1
+          },
+          "base": {
+            "item_gbn": "vDigital_item",
+            "koi_template_resource_id": "",
+            "pdt_mtrl_info": [],
+            "pdt_pcs_info": []
+          }
+        }
+      }
+    },
+    "order": {
+      "orderData": {
+        "dosuInfo": {
+          "COD": "SID_S",
+          "COD_NME": "단면",
+          "PRN_CLR_CNT": 4
+        },
+        "sizeInfo": {
+          "DIV_NM": "삼각 마이크 네임택S",
+          "DIV_SEQ": 1,
+          "DivInfo": {},
+          "cutSize": {
+            "width": 351,
+            "height": 241
+          },
+          "workSize": {
+            "width": 355,
+            "height": 245
+          }
+        },
+        "pcsInfo": [
+          {
+            "PCS_CD": "WRK_MTR",
+            "VIEW_YN": "N",
+            "ESN_YN": "Y",
+            "MTRL_CD": "SXAPMT01",
+            "DIV_SEQ": 1,
+            "active": false,
+            "selectedOptions": [
+              {
+                "PCS_CD": "WRK_MTR",
+                "PCS_DTL_CD": "TG001",
+                "PCS_DTL_NM": "삼각 마이크텍 스펀지 S",
+                "ATTB": 1,
+                "ATTB_2": "",
+                "ATTB_3": ""
+              }
+            ]
+          },
+          {
+            "PCS_CD": "COT_DFT",
+            "VIEW_YN": "N",
+            "ESN_YN": "Y",
+            "selectedOptions": [
+              {
+                "PCS_CD": "COT_DFT",
+                "PCS_DTL_CD": "TCGLS",
+                "PCS_DTL_NM": "유광코팅단면",
+                "ATTB": ""
+              }
+            ]
+          },
+          {
+            "PCS_CD": "PDT_WRK",
+            "VIEW_YN": "N",
+            "ESN_YN": "Y",
+            "selectedOptions": [
+              {
+                "PCS_CD": "PDT_WRK",
+                "PCS_DTL_CD": "PKT01",
+                "PCS_DTL_NM": "마이크텍 조립",
+                "ATTB": ""
+              }
+            ]
+          },
+          {
+            "PCS_CD": "PAK_POL",
+            "VIEW_YN": "N",
+            "ESN_YN": "Y",
+            "selectedOptions": [
+              {
+                "PCS_CD": "PAK_POL",
+                "PCS_DTL_CD": "DFXXX",
+                "PCS_DTL_NM": "폴리백 개별포장",
+                "ATTB": ""
+              }
+            ]
+          },
+          {
+            "PCS_CD": "THO_CUT",
+            "VIEW_YN": "N",
+            "ESN_YN": "Y",
+            "selectedOptions": [
+              {
+                "PCS_CD": "THO_CUT",
+                "PCS_DTL_CD": "TG001",
+                "PCS_DTL_NM": "삼각 마이크텍 S",
+                "ATTB": ""
+              }
+            ]
+          }
+        ],
+        "meterialInfo": {
+          "PTT_CD": "BVW",
+          "PTT_NM": "BV",
+          "WGT_CD": "300",
+          "CLR_CD": "X",
+          "MTRL_CD": "RXBVW300",
+          "MTRL_NM": "BV300g",
+          "MTRL_TYPE": "R",
+          "PRT_HIDE_YN": null,
+          "SID_GBN": ""
+        },
+        "quantityInfo": {
+          "ordCnt": 1,
+          "prnCnt": 1
+        },
+        "priceCalc": {
+          "params": {
+            "ORD_INFO": [
+              {
+                "PDT_CD": "GSTGMIC",
+                "MTRL_CD": "RXBVW300",
+                "CUT_WDT": 351,
+                "CUT_HGH": 241,
+                "WRK_WDT": 355,
+                "WRK_HGH": 245,
+                "PRN_CNT": 1,
+                "ORD_CNT": 1,
+                "DOSU_COD": "SID_S",
+                "PRN_CLR_CNT": 4
+              }
+            ],
+            "PCS_INFO": [
+              {
+                "PCS_COD": "WRK_MTR",
+                "PCS_DTL_COD": "TG001",
+                "ATTB": 1,
+                "ATTB_2": "",
+                "ATTB_3": ""
+              },
+              {
+                "PCS_COD": "COT_DFT",
+                "PCS_DTL_COD": "TCGLS",
+                "ATTB": ""
+              },
+              {
+                "PCS_COD": "PDT_WRK",
+                "PCS_DTL_COD": "PKT01",
+                "ATTB": ""
+              },
+              {
+                "PCS_COD": "PAK_POL",
+                "PCS_DTL_COD": "DFXXX",
+                "ATTB": ""
+              },
+              {
+                "PCS_COD": "THO_CUT",
+                "PCS_DTL_COD": "TG001",
+                "ATTB": ""
+              }
+            ],
+            "price_gbn": "tiered_price",
+            "mb_cust_cod": "10000000"
+          },
+          "result": {
+            "retCode": 200,
+            "msg": "",
+            "result": [
+              {
+                "PCS_CD": "WRK_MTR",
+                "PCS_DTL_CD": "TG001",
+                "PCS_COD": "WRK_MTR",
+                "PCS_DTL_COD": "TG001",
+                "PRICE": 0,
+                "PRICE_VAT": 0,
+                "PRICE_MALL": 0,
+                "PRICE_MALL_VAT": 0,
+                "ORG_PRICE": 0,
+                "ORG_PRICE_VAT": 0,
+                "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00",
+                "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00 분양몰 할인율: 0.0000, 환율 : 1.00",
+                "PCS_NME": "부자재작업",
+                "PCS_DTL_NME": "삼각 마이크텍 스펀지 S"
+              },
+              {
+                "PCS_CD": "COT_DFT",
+                "PCS_DTL_CD": "TCGLS",
+                "PCS_COD": "COT_DFT",
+                "PCS_DTL_COD": "TCGLS",
+                "PRICE": 0,
+                "PRICE_VAT": 0,
+                "PRICE_MALL": 0,
+                "PRICE_MALL_VAT": 0,
+                "ORG_PRICE": 0,
+                "ORG_PRICE_VAT": 0,
+                "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00",
+                "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00 분양몰 할인율: 0.0000, 환율 : 1.00",
+                "PCS_NME": "코팅",
+                "PCS_DTL_NME": "유광코팅단면"
+              },
+              {
+                "PCS_CD": "PDT_WRK",
+                "PCS_DTL_CD": "PKT01",
+                "PCS_COD": "PDT_WRK",
+                "PCS_DTL_COD": "PKT01",
+                "PRICE": 0,
+                "PRICE_VAT": 0,
+                "PRICE_MALL": 0,
+                "PRICE_MALL_VAT": 0,
+                "ORG_PRICE": 0,
+                "ORG_PRICE_VAT": 0,
+                "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00",
+                "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00 분양몰 할인율: 0.0000, 환율 : 1.00",
+                "PCS_NME": "제품가공",
+                "PCS_DTL_NME": "마이크텍 조립"
+              },
+              {
+                "PCS_CD": "PAK_POL",
+                "PCS_DTL_CD": "DFXXX",
+                "PCS_COD": "PAK_POL",
+                "PCS_DTL_COD": "DFXXX",
+                "PRICE": 0,
+                "PRICE_VAT": 0,
+                "PRICE_MALL": 0,
+                "PRICE_MALL_VAT": 0,
+                "ORG_PRICE": 0,
+                "ORG_PRICE_VAT": 0,
+                "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00",
+                "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00 분양몰 할인율: 0.0000, 환율 : 1.00",
+                "PCS_NME": "폴리백 개별포장",
+                "PCS_DTL_NME": "폴리백 개별포장"
+              },
+              {
+                "PCS_CD": "THO_CUT",
+                "PCS_DTL_CD": "TG001",
+                "PCS_COD": "THO_CUT",
+                "PCS_DTL_COD": "TG001",
+                "PRICE": 0,
+                "PRICE_VAT": 0,
+                "PRICE_MALL": 0,
+                "PRICE_MALL_VAT": 0,
+                "ORG_PRICE": 0,
+                "ORG_PRICE_VAT": 0,
+                "PRICE_LOG": "개당단가 : 0.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00",
+                "PRICE_MALL_LOG": "개당단가 : 0.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00 분양몰 할인율: 0.0000, 환율 : 1.00",
+                "PCS_NME": "완칼도무송",
+                "PCS_DTL_NME": "삼각 마이크텍 S"
+              },
+              {
+                "PCS_CD": "PRT_DFT",
+                "PCS_DTL_CD": "DFXXS",
+                "PCS_COD": "PRT_DFT",
+                "PCS_DTL_COD": "DFXXS",
+                "PRICE": 6000,
+                "PRICE_VAT": 600,
+                "PRICE_MALL": 6000,
+                "PRICE_MALL_VAT": 600,
+                "ORG_PRICE": 6000,
+                "ORG_PRICE_VAT": 600,
+                "PRICE_LOG": "개당단가 : 6000.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00",
+                "PRICE_MALL_LOG": "개당단가 : 6000.00원, 인쇄수량 : 1, 주문건수 : 1, 자재단가 : 0.00 분양몰 할인율: 0.0000, 환율 : 1.00",
+                "PCS_NME": "인쇄",
+                "PCS_DTL_NME": "인쇄단면"
+              }
+            ],
+            "result_sum": {
+              "PRICE": 6000,
+              "PRICE_VAT": 600,
+              "PRICE_MALL": 6000,
+              "PRICE_MALL_VAT": 600,
+              "ORG_PRICE": 6000,
+              "ORG_PRICE_VAT": 600
+            }
+          }
+        }
+      }
+    },
+    "product": {
+      "baseInfo": {
+        "product_option": {
+          "option": {
+            "pdt_cod": "GSTGMIC",
+            "pdt_nme": "마이크 네임택",
+            "item_gbn": "vDigital_item",
+            "price_gbn": "tiered_price",
+            "skinInfo": {
+              "pageDirection": {
+                "view_yn": "N",
+                "title": "주문서 작성"
+              },
+              "paperSelect": {
+                "view_yn": "Y",
+                "title": "용지"
+              },
+              "sizeSelect": {
+                "view_yn": "Y",
+                "title": "규격 (mm)"
+              },
+              "dosuSelect": {
+                "view_yn": "Y",
+                "title": "인쇄 도수"
+              },
+              "subjectGroup": {
+                "view_yn": "Y",
+                "title": "주문 제목"
+              },
+              "quantityGroup": {
+                "view_yn": "Y",
+                "title": {
+                  "orderCnt": "디자인 수 (건수)",
+                  "printCnt": "수량"
+                }
+              }
+            },
+            "order_yn": "Y",
+            "cut_guide_yn": "N",
+            "able_paper_yn": "Y",
+            "price_table_yn": "Y",
+            "useTemplateDownload": "Y",
+            "useKoiEditor": "Y",
+            "useRPEditor": "N",
+            "usePDF": "Y",
+            "usePDFordCnt": "Y",
+            "useEditorOrdCnt": "N",
+            "koiAccessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb21wYW55Ijoi66CI65Oc7ZSE66aw7YyFIiwiY29tcGFueUNvZGUiOiIwMTAxIiwiY3VzdG9tZXJDb2RlIjoiMTUwOTAwMzUiLCJ1c2VySWQiOiJyZWRwcmludGluZyIsImRpdmlzaW9uIjoiaG9zdCIsImxhbmciOiJrbyIsImlzQ2xpZW50Ijp0cnVlLCJyZWZyZXNoVG9rZW4iOiIzaFpuRmlaejdKY3JaYWg0VGVBOVNvTmpXNDJkTlciLCJpYXQiOjE3NzQ5MDYwOTYsImV4cCI6MTc3NDkwOTY5Nn0.wYdYjdQzU7a-7EgvNdg5nKCBuVvrbwnFN1Ds9r99Oy0",
+            "rpAccessToken": null,
+            "koi_template_resource_id": null
+          }
+        },
+        "product_data": {
+          "pdt_base_info": [
+            {
+              "PDT_CD": "GSTGMIC",
+              "PDT_NM": "마이크 네임택",
+              "WDT_HGH_GBN_YN": "N",
+              "PRN_YN": "Y",
+              "PDT_UNIT": "개",
+              "ORD_CNT_YN": "Y",
+              "NO_STD_ABL_YN": "N",
+              "MIN_CUT_WDT": "10.00",
+              "MIN_CUT_HGH": "10.00",
+              "MAX_CUT_WDT": "470.00",
+              "MAX_CUT_HGH": "300.00",
+              "DFT_CUT_WDT": "0.00",
+              "DFT_CUT_HGH": "0.00",
+              "CUT_MRG": "4.00",
+              "FIR_CNT": 1,
+              "INC": 1,
+              "INC_STEP": 10,
+              "NOTE": "",
+              "REAM_YN": "",
+              "SET_CNT": 1,
+              "SIZE_PCS_USE": "",
+              "MAX_PRN_CNT": 0,
+              "DAY_PRDC_PDT_YN": "N",
+              "DAY_ABLE_PRN_CNT": 0
+            }
+          ],
+          "pdt_mtrl_info": [
+            {
+              "MTRL_TYPE": "R",
+              "CLR_CD": "X",
+              "CLR_NM": "기본",
+              "PTT_CD": "BVW",
+              "PTT_NM": "BV",
+              "WGT_CD": "300",
+              "MTRL_CD": "RXBVW300",
+              "HIDE_YN": "N",
+              "HIDE_RSN": "",
+              "NOTE": "",
+              "SID_GBN": "",
+              "CLR_COD": "X",
+              "CLR_NME": "기본",
+              "PTT_COD": "BVW",
+              "PTT_NME": "BV",
+              "WGT_COD": "300",
+              "MTRL_COD": "RXBVW300",
+              "MTRL_NM": "BV300g",
+              "GRP_OPTION_CD": "",
+              "CLR_OPTION_CD": "",
+              "PRT_HIDE_YN": null,
+              "BSN_YN": "N"
+            }
+          ],
+          "pdt_size_info": [
+            {
+              "DIV_NM": "삼각 마이크 네임택S",
+              "WRK_WDT": "355.00",
+              "WRK_HGH": "245.00",
+              "CUT_WDT": "351.00",
+              "CUT_HGH": "241.00",
+              "DFT_YN": "Y",
+              "DIV_CD": "",
+              "DIV_SEQ": 1,
+              "STICKER_TYPE": "",
+              "REAM_PAPER_CNT": null,
+              "NOTE": null,
+              "PDT_SIZE_INFO": "제품사이즈 : 351 X 241mm",
+              "HIDE_YN": "N"
+            },
+            {
+              "DIV_NM": "삼각 마이크 네임택L",
+              "WRK_WDT": "355.00",
+              "WRK_HGH": "295.00",
+              "CUT_WDT": "351.00",
+              "CUT_HGH": "291.00",
+              "DFT_YN": "N",
+              "DIV_CD": "",
+              "DIV_SEQ": 3,
+              "STICKER_TYPE": "",
+              "REAM_PAPER_CNT": null,
+              "NOTE": null,
+              "PDT_SIZE_INFO": "제품사이즈 : 351 X 291mm",
+              "HIDE_YN": "N"
+            },
+            {
+              "DIV_NM": "사각 마이크 네임택S",
+              "WRK_WDT": "474.00",
+              "WRK_HGH": "304.00",
+              "CUT_WDT": "470.00",
+              "CUT_HGH": "300.00",
+              "DFT_YN": "N",
+              "DIV_CD": "",
+              "DIV_SEQ": 2,
+              "STICKER_TYPE": "",
+              "REAM_PAPER_CNT": null,
+              "NOTE": null,
+              "PDT_SIZE_INFO": "제품사이즈 : 470 X 300mm",
+              "HIDE_YN": "N"
+            },
+            {
+              "DIV_NM": "사각 마이크 네임택L",
+              "WRK_WDT": "474.00",
+              "WRK_HGH": "354.00",
+              "CUT_WDT": "470.00",
+              "CUT_HGH": "350.00",
+              "DFT_YN": "N",
+              "DIV_CD": "",
+              "DIV_SEQ": 4,
+              "STICKER_TYPE": "",
+              "REAM_PAPER_CNT": null,
+              "NOTE": null,
+              "PDT_SIZE_INFO": "제품사이즈 : 470 X 350mm",
+              "HIDE_YN": "N"
+            }
+          ],
+          "pdt_dosu_info": [
+            {
+              "COD": "SID_S",
+              "COD_NME": "단면",
+              "PRN_CLR_CNT": 4
+            }
+          ],
+          "pdt_prn_cnt_info": [
+            {
+              "DIV_CD": "",
+              "REAM_CNT": "",
+              "PRN_CNT": "",
+              "DFT_YN": "Y",
+              "DFT_PRN_CNT": 1,
+              "FIR_CNT": 1,
+              "INC_CNT": 1,
+              "INC_STEP": 10,
+              "MIN_PRN_CNT": 1,
+              "MIN_INN_PAGE": 1,
+              "MAX_INN_PAGE": 1,
+              "STEP_INN_PAGE": 1,
+              "MAX_THCK": null,
+              "INN_MAX_WGT": null,
+              "COV_MIN_WGT": null
+            }
+          ],
+          "pdt_exp_prn_cnt_info": null,
+          "pdt_pcs_info": [
+            {
+              "PCS_CD": "COT_DFT",
+              "PCS_GRP_NM": "코팅",
+              "PCS_DTL_CD": "TCGLS",
+              "PCS_DTL_NM": "유광코팅단면",
+              "WEB_PCS_DTL_GRP": "COT_DFT_TC",
+              "WEB_PCS_DTL_GRP_NM": "",
+              "WRK_WDT": "0.00",
+              "WRK_HGH": "0.00",
+              "CUT_WDT": "0.00",
+              "CUT_HGH": "0.00",
+              "VIEW_YN": "N",
+              "HIDE_YN": "N",
+              "NOTICE": [],
+              "ESN_YN": "Y",
+              "NOTE": "",
+              "MTRL_CD": "",
+              "MTRL_COD": "",
+              "DIV_SEQ": 0,
+              "SUB_MTRL_YN": "N",
+              "STICKER_TYPE": null,
+              "QTY_INPUT_YN": "N",
+              "PCS_COD": "COT_DFT",
+              "PCS_GRP_NME": "코팅",
+              "PCS_DTL_COD": "TCGLS",
+              "PCS_DTL_NME": "유광코팅단면",
+              "PCS_GROUP_NME": "유광코팅단면"
+            },
+            {
+              "PCS_CD": "THO_CUT",
+              "PCS_GRP_NM": "모양커팅",
+              "PCS_DTL_CD": "TG001",
+              "PCS_DTL_NM": "삼각 마이크텍 S",
+              "WEB_PCS_DTL_GRP": "THO_CUT_TG",
+              "WEB_PCS_DTL_GRP_NM": "",
+              "WRK_WDT": "355.00",
+              "WRK_HGH": "245.00",
+              "CUT_WDT": "351.00",
+              "CUT_HGH": "241.00",
+              "VIEW_YN": "N",
+              "HIDE_YN": "N",
+              "NOTICE": [],
+              "ESN_YN": "Y",
+              "NOTE": "",
+              "MTRL_CD": "",
+              "MTRL_COD": "",
+              "DIV_SEQ": 1,
+              "SUB_MTRL_YN": "N",
+              "STICKER_TYPE": null,
+              "QTY_INPUT_YN": "N",
+              "PCS_COD": "THO_CUT",
+              "PCS_GRP_NME": "모양커팅",
+              "PCS_DTL_COD": "TG001",
+              "PCS_DTL_NME": "삼각 마이크텍 S",
+              "PCS_GROUP_NME": "삼각 마이크텍 S"
+            },
+            {
+              "PCS_CD": "THO_CUT",
+              "PCS_GRP_NM": "모양커팅",
+              "PCS_DTL_CD": "TG002",
+              "PCS_DTL_NM": "사각 마이크텍 S",
+              "WEB_PCS_DTL_GRP": "THO_CUT_TG",
+              "WEB_PCS_DTL_GRP_NM": "",
+              "WRK_WDT": "474.00",
+              "WRK_HGH": "304.00",
+              "CUT_WDT": "470.00",
+              "CUT_HGH": "300.00",
+              "VIEW_YN": "N",
+              "HIDE_YN": "N",
+              "NOTICE": [],
+              "ESN_YN": "Y",
+              "NOTE": "",
+              "MTRL_CD": "",
+              "MTRL_COD": "",
+              "DIV_SEQ": 2,
+              "SUB_MTRL_YN": "N",
+              "STICKER_TYPE": null,
+              "QTY_INPUT_YN": "N",
+              "PCS_COD": "THO_CUT",
+              "PCS_GRP_NME": "모양커팅",
+              "PCS_DTL_COD": "TG002",
+              "PCS_DTL_NME": "사각 마이크텍 S",
+              "PCS_GROUP_NME": "사각 마이크텍 S"
+            },
+            {
+              "PCS_CD": "THO_CUT",
+              "PCS_GRP_NM": "모양커팅",
+              "PCS_DTL_CD": "TG003",
+              "PCS_DTL_NM": "삼각 마이크텍 L",
+              "WEB_PCS_DTL_GRP": "THO_CUT_TG",
+              "WEB_PCS_DTL_GRP_NM": "",
+              "WRK_WDT": "355.00",
+              "WRK_HGH": "295.00",
+              "CUT_WDT": "351.00",
+              "CUT_HGH": "291.00",
+              "VIEW_YN": "N",
+              "HIDE_YN": "N",
+              "NOTICE": [],
+              "ESN_YN": "Y",
+              "NOTE": "",
+              "MTRL_CD": "",
+              "MTRL_COD": "",
+              "DIV_SEQ": 3,
+              "SUB_MTRL_YN": "N",
+              "STICKER_TYPE": null,
+              "QTY_INPUT_YN": "N",
+              "PCS_COD": "THO_CUT",
+              "PCS_GRP_NME": "모양커팅",
+              "PCS_DTL_COD": "TG003",
+              "PCS_DTL_NME": "삼각 마이크텍 L",
+              "PCS_GROUP_NME": "삼각 마이크텍 L"
+            },
+            {
+              "PCS_CD": "THO_CUT",
+              "PCS_GRP_NM": "모양커팅",
+              "PCS_DTL_CD": "TG004",
+              "PCS_DTL_NM": "사각 마이크텍 L",
+              "WEB_PCS_DTL_GRP": "THO_CUT_TG",
+              "WEB_PCS_DTL_GRP_NM": "",
+              "WRK_WDT": "474.00",
+              "WRK_HGH": "354.00",
+              "CUT_WDT": "470.00",
+              "CUT_HGH": "350.00",
+              "VIEW_YN": "N",
+              "HIDE_YN": "N",
+              "NOTICE": [],
+              "ESN_YN": "Y",
+              "NOTE": "",
+              "MTRL_CD": "",
+              "MTRL_COD": "",
+              "DIV_SEQ": 4,
+              "SUB_MTRL_YN": "N",
+              "STICKER_TYPE": null,
+              "QTY_INPUT_YN": "N",
+              "PCS_COD": "THO_CUT",
+              "PCS_GRP_NME": "모양커팅",
+              "PCS_DTL_COD": "TG004",
+              "PCS_DTL_NME": "사각 마이크텍 L",
+              "PCS_GROUP_NME": "사각 마이크텍 L"
+            },
+            {
+              "PCS_CD": "WRK_MTR",
+              "PCS_GRP_NM": "부자재작업",
+              "PCS_DTL_CD": "TG001",
+              "PCS_DTL_NM": "삼각 마이크텍 스펀지 S",
+              "WEB_PCS_DTL_GRP": "WRK_MTR_TG",
+              "WEB_PCS_DTL_GRP_NM": "",
+              "WRK_WDT": "355.00",
+              "WRK_HGH": "245.00",
+              "CUT_WDT": "351.00",
+              "CUT_HGH": "241.00",
+              "VIEW_YN": "N",
+              "HIDE_YN": "N",
+              "NOTICE": [],
+              "ESN_YN": "Y",
+              "NOTE": "",
+              "MTRL_CD": "SXAPMT01",
+              "MTRL_COD": "SXAPMT01",
+              "DIV_SEQ": 1,
+              "SUB_MTRL_YN": "Y",
+              "STICKER_TYPE": null,
+              "QTY_INPUT_YN": "N",
+              "PCS_COD": "WRK_MTR",
+              "PCS_GRP_NME": "부자재작업",
+              "PCS_DTL_COD": "TG001",
+              "PCS_DTL_NME": "삼각 마이크텍 스펀지 S",
+              "PCS_GROUP_NME": "삼각 마이크텍 스펀지 S"
+            },
+            {
+              "PCS_CD": "WRK_MTR",
+              "PCS_GRP_NM": "부자재작업",
+              "PCS_DTL_CD": "TG002",
+              "PCS_DTL_NM": "사각 마이크텍 스펀지 S",
+              "WEB_PCS_DTL_GRP": "WRK_MTR_TG",
+              "WEB_PCS_DTL_GRP_NM": "",
+              "WRK_WDT": "474.00",
+              "WRK_HGH": "304.00",
+              "CUT_WDT": "470.00",
+              "CUT_HGH": "300.00",
+              "VIEW_YN": "N",
+              "HIDE_YN": "N",
+              "NOTICE": [],
+              "ESN_YN": "Y",
+              "NOTE": "",
+              "MTRL_CD": "SXAPMT02",
+              "MTRL_COD": "SXAPMT02",
+              "DIV_SEQ": 2,
+              "SUB_MTRL_YN": "Y",
+              "STICKER_TYPE": null,
+              "QTY_INPUT_YN": "N",
+              "PCS_COD": "WRK_MTR",
+              "PCS_GRP_NME": "부자재작업",
+              "PCS_DTL_COD": "TG002",
+              "PCS_DTL_NME": "사각 마이크텍 스펀지 S",
+              "PCS_GROUP_NME": "사각 마이크텍 스펀지 S"
+            },
+            {
+              "PCS_CD": "WRK_MTR",
+              "PCS_GRP_NM": "부자재작업",
+              "PCS_DTL_CD": "TG003",
+              "PCS_DTL_NM": "삼각 마이크텍 스펀지 L",
+              "WEB_PCS_DTL_GRP": "WRK_MTR_TG",
+              "WEB_PCS_DTL_GRP_NM": "",
+              "WRK_WDT": "355.00",
+              "WRK_HGH": "295.00",
+              "CUT_WDT": "351.00",
+              "CUT_HGH": "291.00",
+              "VIEW_YN": "N",
+              "HIDE_YN": "N",
+              "NOTICE": [],
+              "ESN_YN": "Y",
+              "NOTE": "",
+              "MTRL_CD": "SXAPMT03",
+              "MTRL_COD": "SXAPMT03",
+              "DIV_SEQ": 3,
+              "SUB_MTRL_YN": "Y",
+              "STICKER_TYPE": null,
+              "QTY_INPUT_YN": "N",
+              "PCS_COD": "WRK_MTR",
+              "PCS_GRP_NME": "부자재작업",
+              "PCS_DTL_COD": "TG003",
+              "PCS_DTL_NME": "삼각 마이크텍 스펀지 L",
+              "PCS_GROUP_NME": "삼각 마이크텍 스펀지 L"
+            },
+            {
+              "PCS_CD": "WRK_MTR",
+              "PCS_GRP_NM": "부자재작업",
+              "PCS_DTL_CD": "TG004",
+              "PCS_DTL_NM": "사각 마이크텍 스펀지 L",
+              "WEB_PCS_DTL_GRP": "WRK_MTR_TG",
+              "WEB_PCS_DTL_GRP_NM": "",
+              "WRK_WDT": "474.00",
+              "WRK_HGH": "354.00",
+              "CUT_WDT": "470.00",
+              "CUT_HGH": "350.00",
+              "VIEW_YN": "N",
+              "HIDE_YN": "N",
+              "NOTICE": [],
+              "ESN_YN": "Y",
+              "NOTE": "",
+              "MTRL_CD": "SXAPMT04",
+              "MTRL_COD": "SXAPMT04",
+              "DIV_SEQ": 4,
+              "SUB_MTRL_YN": "Y",
+              "STICKER_TYPE": null,
+              "QTY_INPUT_YN": "N",
+              "PCS_COD": "WRK_MTR",
+              "PCS_GRP_NME": "부자재작업",
+              "PCS_DTL_COD": "TG004",
+              "PCS_DTL_NME": "사각 마이크텍 스펀지 L",
+              "PCS_GROUP_NME": "사각 마이크텍 스펀지 L"
+            },
+            {
+              "PCS_CD": "PDT_WRK",
+              "PCS_GRP_NM": "제품가공",
+              "PCS_DTL_CD": "PKT01",
+              "PCS_DTL_NM": "마이크텍 조립",
+              "WEB_PCS_DTL_GRP": "PDT_WRK_PK",
+              "WEB_PCS_DTL_GRP_NM": "",
+              "WRK_WDT": "0.00",
+              "WRK_HGH": "0.00",
+              "CUT_WDT": "0.00",
+              "CUT_HGH": "0.00",
+              "VIEW_YN": "N",
+              "HIDE_YN": "N",
+              "NOTICE": [],
+              "ESN_YN": "Y",
+              "NOTE": "",
+              "MTRL_CD": "",
+              "MTRL_COD": "",
+              "DIV_SEQ": 0,
+              "SUB_MTRL_YN": "N",
+              "STICKER_TYPE": null,
+              "QTY_INPUT_YN": "N",
+              "PCS_COD": "PDT_WRK",
+              "PCS_GRP_NME": "제품가공",
+              "PCS_DTL_COD": "PKT01",
+              "PCS_DTL_NME": "마이크텍 조립",
+              "PCS_GROUP_NME": "마이크텍 조립"
+            },
+            {
+              "PCS_CD": "PAK_POL",
+              "PCS_GRP_NM": "폴리백 개별포장",
+              "PCS_DTL_CD": "DFXXX",
+              "PCS_DTL_NM": "폴리백 개별포장",
+              "WEB_PCS_DTL_GRP": "PAK_POL_DF",
+              "WEB_PCS_DTL_GRP_NM": "",
+              "WRK_WDT": "0.00",
+              "WRK_HGH": "0.00",
+              "CUT_WDT": "0.00",
+              "CUT_HGH": "0.00",
+              "VIEW_YN": "N",
+              "HIDE_YN": "N",
+              "NOTICE": [],
+              "ESN_YN": "Y",
+              "NOTE": "",
+              "MTRL_CD": "",
+              "MTRL_COD": "",
+              "DIV_SEQ": 0,
+              "SUB_MTRL_YN": "N",
+              "STICKER_TYPE": null,
+              "QTY_INPUT_YN": "N",
+              "PCS_COD": "PAK_POL",
+              "PCS_GRP_NME": "폴리백 개별포장",
+              "PCS_DTL_COD": "DFXXX",
+              "PCS_DTL_NME": "폴리백 개별포장",
+              "PCS_GROUP_NME": "폴리백 개별포장"
+            }
+          ],
+          "pdt_add_pcs_info": null,
+          "pdt_disable_pcs_info": [],
+          "pdt_add_info": [
+            [],
+            []
+          ]
+        },
+        "member_info": {
+          "mb_id": "RP6416fae17f57eac014993e9ffa008bab",
+          "mb_cust_cod": "10000000",
+          "discount_cust_yn": null,
+          "mall_cust_yn": null,
+          "bsn_yn": null,
+          "blk_con": null,
+          "edicusUserID": "cmVkcHJpbnRpbmdfbm9tZW1iZXI="
+        }
+      }
+    }
+  }
+}

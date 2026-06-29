@@ -1,0 +1,242 @@
+{
+  "extractedAt": "2026-04-07T13:10:10.239Z",
+  "totalProducts": 8,
+  "constraintTotals": {
+    "disableRules": 209,
+    "hiddenMaterials": 0,
+    "quantityRules": 8,
+    "dosuBncMappings": 22,
+    "sizes": 35,
+    "hiddenSizes": 0,
+    "pcsOptions": 80,
+    "hiddenPcs": 0,
+    "essentialPcs": 63,
+    "materialBoundPcs": 6
+  },
+  "topDisabledPcsCodes": [
+    {
+      "pcsCode": "COT_DFT",
+      "count": 40
+    },
+    {
+      "pcsCode": "MIS_DFT",
+      "count": 35
+    },
+    {
+      "pcsCode": "SCO_GLD",
+      "count": 27
+    },
+    {
+      "pcsCode": "SCO_SLV",
+      "count": 27
+    },
+    {
+      "pcsCode": "SCO_DFT",
+      "count": 24
+    },
+    {
+      "pcsCode": "FLD_DFT",
+      "count": 22
+    },
+    {
+      "pcsCode": "PRT_MAG",
+      "count": 16
+    },
+    {
+      "pcsCode": "LAM_DFT",
+      "count": 9
+    },
+    {
+      "pcsCode": "OSI_DFT",
+      "count": 9
+    }
+  ],
+  "topConstrainedMaterials": [
+    {
+      "materialCode": "RXOMO100",
+      "count": 54
+    },
+    {
+      "materialCode": "RXOMO080",
+      "count": 42
+    },
+    {
+      "materialCode": "RXWMO100",
+      "count": 27
+    },
+    {
+      "materialCode": "RXWMO080",
+      "count": 18
+    },
+    {
+      "materialCode": "RXNPW080",
+      "count": 12
+    },
+    {
+      "materialCode": "RXNPW100",
+      "count": 12
+    },
+    {
+      "materialCode": "RXRAU210",
+      "count": 6
+    },
+    {
+      "materialCode": "RXRAU240",
+      "count": 6
+    },
+    {
+      "materialCode": "RXPLM080",
+      "count": 6
+    },
+    {
+      "materialCode": "RXPLM100",
+      "count": 6
+    },
+    {
+      "materialCode": "RXPLW080",
+      "count": 6
+    },
+    {
+      "materialCode": "RXPLW100",
+      "count": 6
+    },
+    {
+      "materialCode": "RXWMO220",
+      "count": 5
+    },
+    {
+      "materialCode": "RXIGC075",
+      "count": 3
+    }
+  ],
+  "perProduct": [
+    {
+      "pdtCode": "ACNTHAP",
+      "productName": "아크릴 명찰",
+      "itemType": "vDigital_item",
+      "totalDisableRules": 3,
+      "totalHiddenMaterials": 0,
+      "totalQuantityRules": 1,
+      "totalDosuBncMappings": 0,
+      "totalSizes": 2,
+      "hiddenSizes": 0,
+      "totalPcsOptions": 4,
+      "hiddenPcs": 0,
+      "essentialPcs": 4,
+      "materialBoundPcs": 2,
+      "totalConstraintCount": 4
+    },
+    {
+      "pdtCode": "GSTGMIC",
+      "productName": "마이크 네임택",
+      "itemType": "vDigital_item",
+      "totalDisableRules": 0,
+      "totalHiddenMaterials": 0,
+      "totalQuantityRules": 1,
+      "totalDosuBncMappings": 0,
+      "totalSizes": 4,
+      "hiddenSizes": 0,
+      "totalPcsOptions": 11,
+      "hiddenPcs": 0,
+      "essentialPcs": 11,
+      "materialBoundPcs": 4,
+      "totalConstraintCount": 1
+    },
+    {
+      "pdtCode": "PRBKOPR",
+      "productName": "무선 책자 (컬러)",
+      "itemType": "book2025_item",
+      "totalDisableRules": 49,
+      "totalHiddenMaterials": 0,
+      "totalQuantityRules": 1,
+      "totalDosuBncMappings": 5,
+      "totalSizes": 8,
+      "hiddenSizes": 0,
+      "totalPcsOptions": 12,
+      "hiddenPcs": 0,
+      "essentialPcs": 10,
+      "materialBoundPcs": 0,
+      "totalConstraintCount": 50
+    },
+    {
+      "pdtCode": "PRBKORD",
+      "productName": "트윈링 책자 (컬러)",
+      "itemType": "book2025_item",
+      "totalDisableRules": 31,
+      "totalHiddenMaterials": 0,
+      "totalQuantityRules": 1,
+      "totalDosuBncMappings": 3,
+      "totalSizes": 4,
+      "hiddenSizes": 0,
+      "totalPcsOptions": 7,
+      "hiddenPcs": 0,
+      "essentialPcs": 7,
+      "materialBoundPcs": 0,
+      "totalConstraintCount": 32
+    },
+    {
+      "pdtCode": "PRBKOST",
+      "productName": "스테플러 책자 (컬러)",
+      "itemType": "book2025_item",
+      "totalDisableRules": 49,
+      "totalHiddenMaterials": 0,
+      "totalQuantityRules": 1,
+      "totalDosuBncMappings": 5,
+      "totalSizes": 4,
+      "hiddenSizes": 0,
+      "totalPcsOptions": 9,
+      "hiddenPcs": 0,
+      "essentialPcs": 9,
+      "materialBoundPcs": 0,
+      "totalConstraintCount": 50
+    },
+    {
+      "pdtCode": "PRBKYPR",
+      "productName": "무선 책자 (컬러)",
+      "itemType": "book2025_item",
+      "totalDisableRules": 24,
+      "totalHiddenMaterials": 0,
+      "totalQuantityRules": 1,
+      "totalDosuBncMappings": 3,
+      "totalSizes": 5,
+      "hiddenSizes": 0,
+      "totalPcsOptions": 20,
+      "hiddenPcs": 0,
+      "essentialPcs": 8,
+      "materialBoundPcs": 0,
+      "totalConstraintCount": 25
+    },
+    {
+      "pdtCode": "PRBKYRN",
+      "productName": "트윈링 책자 (컬러)",
+      "itemType": "book2025_item",
+      "totalDisableRules": 24,
+      "totalHiddenMaterials": 0,
+      "totalQuantityRules": 1,
+      "totalDosuBncMappings": 3,
+      "totalSizes": 3,
+      "hiddenSizes": 0,
+      "totalPcsOptions": 12,
+      "hiddenPcs": 0,
+      "essentialPcs": 9,
+      "materialBoundPcs": 0,
+      "totalConstraintCount": 25
+    },
+    {
+      "pdtCode": "PRBKYSL",
+      "productName": "실제본 책자 (컬러)",
+      "itemType": "book2025_item",
+      "totalDisableRules": 29,
+      "totalHiddenMaterials": 0,
+      "totalQuantityRules": 1,
+      "totalDosuBncMappings": 3,
+      "totalSizes": 5,
+      "hiddenSizes": 0,
+      "totalPcsOptions": 5,
+      "hiddenPcs": 0,
+      "essentialPcs": 5,
+      "materialBoundPcs": 0,
+      "totalConstraintCount": 30
+    }
+  ]
+}

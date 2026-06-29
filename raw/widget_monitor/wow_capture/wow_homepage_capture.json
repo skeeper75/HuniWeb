@@ -1,0 +1,323 @@
+{
+  "pdtCode": "homepage",
+  "label": "홈페이지",
+  "url": "https://wowpress.co.kr/",
+  "framework": "unknown",
+  "optionCascadeApiCalls": [
+    {
+      "url": "https://firebase.googleapis.com/v1alpha/projects/-/apps/1:1040281362681:web:22257913dd883ad79c8228/webConfig",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "url": "https://cdn.megadata.co.kr/dist/config/id/wowpress.json",
+      "method": "GET",
+      "status": 200
+    },
+    {
+      "url": "https://tk.mediacategory.com/aggregate/mssg/common",
+      "method": "POST",
+      "status": 200
+    },
+    {
+      "url": "https://api.mediacategory.com/rtb/redirectUrl",
+      "method": "POST",
+      "status": 200
+    }
+  ],
+  "priceApiCalls": [],
+  "allApiCalls": [
+    {
+      "url": "https://wowpress.co.kr/main/all/prod",
+      "method": "POST",
+      "status": 200,
+      "postData": "ProdNo=30002"
+    },
+    {
+      "url": "https://www.google.com/ccm/collect?frm=0&ae=g&en=page_view&dl=https%3A%2F%2Fwowpress.co.kr%2F&scrsrc=www.googletagmanager.com&rnd=1155040913.1774920028&dt=%EC%99%80%EC%9A%B0%ED%94%84%EB%A0%88%EC%8A%A4&auid=1444463198.1774920028&navt=n&npa=0&ep.ads_data_redaction=0&gtm=45He63r2v850258599za200zd850258599xea&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115938466~115938469~116991816~117484252~118128923&apve=1&apvf=f&apvc=1&tft=1774920027637&tfd=2837",
+      "method": "POST",
+      "status": 200,
+      "postData": null
+    },
+    {
+      "url": "https://firebase.googleapis.com/v1alpha/projects/-/apps/1:1040281362681:web:22257913dd883ad79c8228/webConfig",
+      "method": "GET",
+      "status": 200,
+      "postData": null
+    },
+    {
+      "url": "https://o221632.ingest.us.sentry.io/api/4510270145757184/envelope/?sentry_version=7&sentry_key=1413bdfcbb6137c005c032fe98acdab6&sentry_client=sentry.javascript.vue%2F10.22.0",
+      "method": "POST",
+      "status": 403,
+      "postData": "{\"sent_at\":\"2026-03-31T01:20:27.642Z\",\"sdk\":{\"name\":\"sentry.javascript.vue\",\"version\":\"10.22.0\"}}\n{\"type\":\"session\"}\n{\"sid\":\"fef6a6ede9874df0b79b0ab2c10ca5f2\",\"init\":true,\"started\":\"2026-03-31T01:20:27.642Z\",\"timestamp\":\"2026-03-31T01:20:27.642Z\",\"status\":\"ok\",\"errors\":0,\"attrs\":{\"release\":\"ac9fcfb2db6f7681c20e5ea6796a2cfa99937b43\",\"environment\":\"production\",\"ip_address\":\"{{auto}}\",\"user_agent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36\"}}"
+    },
+    {
+      "url": "https://wowpress.co.kr/ordr/prod/sale/no/list",
+      "method": "GET",
+      "status": 200,
+      "postData": null
+    },
+    {
+      "url": "https://wowpress.co.kr/myInfo",
+      "method": "GET",
+      "status": 200,
+      "postData": null
+    },
+    {
+      "url": "https://wowpress.co.kr/main/favorite",
+      "method": "GET",
+      "status": 200,
+      "postData": null
+    },
+    {
+      "url": "https://wowpress.co.kr/self/dsgn/gettotpdcnt",
+      "method": "GET",
+      "status": 200,
+      "postData": null
+    },
+    {
+      "url": "https://wowpress.co.kr/self/dsgn/template/group/325",
+      "method": "GET",
+      "status": 200,
+      "postData": null
+    },
+    {
+      "url": "https://wowpress.co.kr/main/all/prod",
+      "method": "POST",
+      "status": 200,
+      "postData": "ProdNo=30002"
+    },
+    {
+      "url": "https://bc.ad.daum.net/bc?d=%7B%22track_id%22%3A%228687565182042523789%22%2C%22event_code%22%3A%22PageView%22%2C%22params%22%3A%7B%22tag%22%3A%22W%22%7D%2C%22props%22%3A%7B%22lmt%22%3A%22N%22%7D%2C%22site%22%3A%7B%22identifier%22%3A%22wowpress.co.kr%22%7D%2C%22sdk%22%3A%7B%22type%22%3A%22WEB%22%2C%22version%22%3A%221.6.4%22%2C%22tpc%22%3A%22Y%22%7D%2C%22page%22%3A%7B%22url%22%3A%22https%3A%2F%2Fwowpress.co.kr%2F%22%2C%22is_frame_env%22%3Afalse%7D%2C%22device%22%3A%7B%22dnt%22%3A%22N%22%2C%22device_type%22%3A%22pc%22%2C%22is_mobile%22%3A%22N%22%2C%22browser%22%3A%22HeadlessChrome%22%2C%22browser_version%22%3A%22145.0.7632.6%22%2C%22os%22%3A%22macOS%22%2C%22os_version%22%3A%2210_15_7%22%7D%7D",
+      "method": "GET",
+      "status": 204,
+      "postData": null
+    },
+    {
+      "url": "https://firebaseinstallations.googleapis.com/v1/projects/wowpress-cs/installations",
+      "method": "POST",
+      "status": 200,
+      "postData": "{\"fid\":\"dzNMIO8JFBOIP7vxekOVqh\",\"authVersion\":\"FIS_v2\",\"appId\":\"1:1040281362681:web:22257913dd883ad79c8228\",\"sdkVersion\":\"w:0.6.13\"}"
+    },
+    {
+      "url": "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCn5S3_UFq_LTI4AX77ZwV1Cf85amfgs9M",
+      "method": "POST",
+      "status": 200,
+      "postData": "{\"returnSecureToken\":true}"
+    },
+    {
+      "url": "https://analytics.google.com/g/collect?v=2&tid=G-196RRM2KDH&gtm=45je63r2v879067779z8850258599za20gzb850258599zd850258599&_p=1774920024950&_gaz=1&gcd=13l3l3l3l1l1&npa=0&dma=0&cid=881742183.1774920028&ecid=1689600778&ul=en-us&sr=1440x900&uaa=x86&uab=64&uafvl=Not%253AA-Brand%3B99.0.0.0%7CHeadlessChrome%3B145.0.7632.6%7CChromium%3B145.0.7632.6&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&are=1&frm=0&pscdl=noapi&ec_mode=a&_eu=AAAAAGA&_s=1&tag_exp=0~115616985~115938466~115938469~116991817~117484252&sid=1774920027&sct=1&seg=0&dl=https%3A%2F%2Fwowpress.co.kr%2F&dt=%EC%99%80%EC%9A%B0%ED%94%84%EB%A0%88%EC%8A%A4&en=page_view&_fv=1&_nsi=1&_ss=1&tfd=3002",
+      "method": "POST",
+      "status": 204,
+      "postData": null
+    },
+    {
+      "url": "https://www.google-analytics.com/g/collect?v=2&tid=G-DVJLEQRWS4&gtm=45je63r2v879067779z8850258599za20gzb850258599zd850258599&_p=1774920024950&gcd=13l3l3l3l1l1&npa=0&dma=0&cid=881742183.1774920028&ul=en-us&sr=1440x900&uaa=x86&uab=64&uafvl=Not%253AA-Brand%3B99.0.0.0%7CHeadlessChrome%3B145.0.7632.6%7CChromium%3B145.0.7632.6&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&are=1&frm=0&pscdl=noapi&_s=1&tag_exp=0~115616985~115938466~115938469~116991817~117484252&sid=1774920027&sct=1&seg=0&dl=https%3A%2F%2Fwowpress.co.kr%2F&dt=%EC%99%80%EC%9A%B0%ED%94%84%EB%A0%88%EC%8A%A4&en=page_view&_fv=1&_ss=1&tfd=3005",
+      "method": "POST",
+      "status": 204,
+      "postData": null
+    },
+    {
+      "url": "https://www.google.com/rmkt/collect/10876121420/?random=1774920027829&cv=11&fst=1774920027829&fmt=8&bg=ffffff&guid=ON&async=1&gtm=45be63r2v9213559146z8850258599za200zd9213559146xea&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115616985~115938466~115938469~116991816~117384406~117484252&u_w=1440&u_h=900&url=https%3A%2F%2Fwowpress.co.kr%2F&frm=0&tiba=%EC%99%80%EC%9A%B0%ED%94%84%EB%A0%88%EC%8A%A4&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=1444463198.1774920028&uaa=x86&uab=64&uafvl=Not%253AA-Brand%3B99.0.0.0%7CHeadlessChrome%3B145.0.7632.6%7CChromium%3B145.0.7632.6&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&_tu=CA&gcp=5",
+      "method": "POST",
+      "status": 302,
+      "postData": null
+    },
+    {
+      "url": "https://www.google.com/ccm/collect?frm=0&ae=g&dl=https%3A%2F%2Fwowpress.co.kr%2F&scrsrc=www.googletagmanager.com&rnd=1155040913.1774920028&dt=%EC%99%80%EC%9A%B0%ED%94%84%EB%A0%88%EC%8A%A4&auid=1444463198.1774920028&navt=n&npa=0&_tu=CA&gtm=45be63r2v9213559146z8850258599za200zd9213559146xea&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115616985~115938466~115938469~116991816~117384406~117484252&apve=1&apvf=f&apvc=0&tids=AW-10876121420&tid=AW-10876121420&tft=1774920027836&tfd=3036",
+      "method": "POST",
+      "status": 200,
+      "postData": null
+    },
+    {
+      "url": "https://nam.veta.naver.com/nac/2",
+      "method": "GET",
+      "status": 200,
+      "postData": null
+    },
+    {
+      "url": "https://cdn.megadata.co.kr/dist/config/id/wowpress.json",
+      "method": "GET",
+      "status": 200,
+      "postData": null
+    },
+    {
+      "url": "https://tk.mediacategory.com/aggregate/mssg/common",
+      "method": "POST",
+      "status": 200,
+      "postData": "{\"adverId\":\"wowpress\",\"device\":\"W\",\"domain\":\"wowpress.co.kr\",\"charSet\":\"UTF-8\",\"url\":\"https://wowpress.co.kr/\",\"referrer\":\"\",\"referrerDomain\":\"\",\"cookieEnabled\":true,\"solutionType\":\"self_hosted\",\"siteCode\":\"2c0a795982472db1a11b251668872a40\",\"ver\":\"02\",\"slc\":2,\"llc\":0,\"_fcTE\":\"{\\\"rd\\\":\\\"o\\\"}\"}"
+    },
+    {
+      "url": "https://googleads.g.doubleclick.net/pagead/id",
+      "method": "GET",
+      "status": 302,
+      "postData": null
+    },
+    {
+      "url": "https://googleads.g.doubleclick.net/pagead/id",
+      "method": "GET",
+      "status": 302,
+      "postData": null
+    },
+    {
+      "url": "https://www.google.co.kr/rmkt/collect/10876121420/?random=1774920027829&cv=11&fst=1774920027829&fmt=8&bg=ffffff&guid=ON&async=1&gtm=45be63r2v9213559146z8850258599za200zd9213559146xea&gcd=13l3l3l3l1l1&dma=0&tag_exp=0~115616985~115938466~115938469~116991816~117384406~117484252&u_w=1440&u_h=900&url=https%3A%2F%2Fwowpress.co.kr%2F&frm=0&tiba=%EC%99%80%EC%9A%B0%ED%94%84%EB%A0%88%EC%8A%A4&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=1444463198.1774920028&uaa=x86&uab=64&uafvl=Not%253AA-Brand%3B99.0.0.0%7CHeadlessChrome%3B145.0.7632.6%7CChromium%3B145.0.7632.6&uamb=0&uam=&uap=macOS&uapv=10_15_7&uaw=0&_tu=CA&gcp=5&ipr=y",
+      "method": "GET",
+      "status": 200,
+      "postData": null
+    },
+    {
+      "url": "https://googleads.g.doubleclick.net/pagead/id?slf_rd=1",
+      "method": "GET",
+      "status": 200,
+      "postData": null
+    },
+    {
+      "url": "https://api.mediacategory.com/rtb/redirectUrl",
+      "method": "POST",
+      "status": 200,
+      "postData": "{\"t\":\"\"}"
+    },
+    {
+      "url": "https://googleads.g.doubleclick.net/pagead/id?slf_rd=1",
+      "method": "GET",
+      "status": 200,
+      "postData": null
+    },
+    {
+      "url": "https://jnn-pa.googleapis.com/$rpc/google.internal.waa.v1.Waa/GenerateIT",
+      "method": "POST",
+      "status": 200,
+      "postData": "[\"O43z0dpjhgX20SCx4KAo\",\"$HYI5guZRAAae9WspvvXe8NINSsVVO5unAEABEArZ1AtuhSNZPq1m7Ii63HGHOaJMGUIDi-IF59uYoxx98plig_BZBhavbgwTB7j6P34_qN98ldi9g6c9BlhmngAAAC3OAAAABPQBB-IAVJIi87UevH17U53HSvwytj45Dj_yvX2hzzxwjI702tJxrXqCYy7faAjccghkaB2Q40mf8-6a5R8rF1f-9hhReaHiM0kbQNbIKTiR8CbmXs8DTHRG3AUEYM2GT4xLjw2iFIAg9Ev7gVpYrnE_r4ZvFXrWdecxQKgMhiBL9fwfhVqX0h3WjEaa1noXhSTV5j90a8jmAgS3Be8HKACt5zqp1IgFXV4SeUqOimyMLVAiPQvJziJRtZbD7U2xCKp9IR4pToVO_cjDDjKRWHNd1P-mrWMocSeeagEKcvHaI0zd6gYL-PXYqBpxnVMwN2fT7C5-UwqljECe9sVF_oiNwN0GjwKymbLnQQRTjxTh18FxiW2fAufOr06zfFBB-m9g4TKR_bgCihW8r_DvfGumDEUg0LxN-4zumh9idSEPEabzQU5Jh5Vtd438ITbB9y2qsrwIbqm0SmFUmU-H_Z338FTbpAAvRX_1I2qwReCr7YobJ02AgLNoBfjFBesguQNrytkLzYE87ebuFUKeeRoPxu7eVuGCHBBCOJaP1qeAKqrZCr6BWO8FEyII76t-WJaV02-xglw6onEe5-LJku9B3aZUucnMTPOiKQs6KARvHLipTq7mPyZwdAkkqU1b5bAOKesgYJAKQI6UJ5CN8cuk4KZGz6DFIaP_inY2UjadNjfXWP_prRovOxJT_u3ZadfjBc0uOjOkOV2P3iW3Q7uApLgQyZg78zkztOe8jWgBZ5iLIhLbujhBqs1LYr2aA1Mfz2_k-Mw-HS4jI8XTPrg2kQ6w5wkEz6GolDGclek0gQ757Nzj90Nr47punw3W3aNMqEop1QyJSjjHIk1fjK6Du9PKd5oNMljtZSHELz0h82k-Jc-Znz-grgF6GOZgVlYty14bsWF7cbV68KMkBb4ozxGm1jRXTsYm5SFH7plII0kyk8UNzYQJgMfzQEzhU5OJieAu_scP263uCpGaggYwvrT3mcU21VfBIPAQOeOclJDl62GHf0DiCVyR_g2koTNkdQgxSiYb1n5gSXMAzkiNSwVgdrEyTZe9PwxzhfLrHxv1UJTwI57dZWHZK3bg5l-7mzjZWo37dlfYFEIjfGA-vUaeVROLTxMhvb5v0SpZbew-Ue9vn937rtbYLSMqaU144M65Eir4ng6VvbKpFceOIxH-p0vqvZJ7dSz0jWtiRprkT5f9du4JXeSyhThdmTEJNoYLRe21VO1QyJyrcVyOKOyQmdB0-SrAUbT-M6zYhOO-24b7H19Hf_qRAc9yd35BX05cr9EahutT1A_qgP3yWLpDm6JXm6WtJZEjxLx14Q1cFaV7CK-YrEQQhZ8U3iqV96wNB1LIo84WXFEx1qDPL4WrFjrxC4bQ9RdJd5KFBaOxLcfo7SQ9vjfGeQCPmFmJhTDl9W-ERLxAXvL16NMbcGF8ayhTIFsT-EEz2O2VgunGz5UJDX-byx85jNO6iskqGos4Rqaha-LO2bv-szEBq04Gok1iCL68Rw6acgedE3LCr_o0GxEEg4J1Mx5MZPCXKizFqNko8N-pZ5ZgiYJNv-pDzBEx78lMbBjPYB5mkvcQKUnNQW_CwR1QoEuJx3zlbLM1e3SMb_Ul_o0\"]"
+    },
+    {
+      "url": "https://jnn-pa.googleapis.com/$rpc/google.internal.waa.v1.Waa/GenerateIT",
+      "method": "POST",
+      "status": 200,
+      "postData": "[\"O43z0dpjhgX20SCx4KAo\",\"$XMM5w6dRAAae9WspvvXe-rQc0fW191KnAEABEArZ1MQ4m_472na0dyxmCyqgem6C8Of7lj5_aSh7eEg0Gj0DINJ0srA4mqMfiXV2YYF5VBEfaoscNj22mj8fngAAAC7OAAAABPQBB-IAVFjKSp_r__KtWzBCfFaiW8YSNQtNUcyeosiTajn2TvkgXaZJ7OOododbhGNeaM4wbDtV7reJMmiGFl-vHaDZXfnSF3A0kNneneTKUvsMUoNnL3QohwUEYW7pBGlEFh4ASZmBDRoB8IqobdCVNPneU0MJX9XsYpajflztEkQpu3OvaRGFtoe31xatxYaec6BXtL9QYpPTQtqzsCeJlVjJVek3cmXLoto01QJcqPY3OUYat-mRG_AGq-c0ZYUW1U8PTw-p8Q3DI3nuikiPHY-JiNHNSE-WWdy8pUqVWBaawBnemRtH1e7wTIiEYOvhZDKaQsFjAGx9L3Mak26s9xr82LezUB2YTyv59xQ4CUhRdKPQ-AwLcQeyiTjZ5jqtY0aD28ZTUGSoyLEDv2H47buxBXIIv7hb6rmCPt7UtNjB2cm5VK5G4WLUsFw9gAR4o4_nK07J3tsCgKuDndKgd5R2g-c0XaC0lICeQLQdxAaxezlvw733vSSuywa9EJOg32M_QH9jIdXL6gaK4pUKUs5pTx9uLOyvJBFqTPxiEaZ-KDf9Wmx_QHJP7ltZS8tVwjFIgImJPAwPeAtrSdH1sWf4EHB3vuRn5_1vhv1d85eecgm5d-kmL1UH7rtw1E-sEiVm4F7xZTTGYh6_M4em4VlfNnUE2YkjkR5abnmS1p3SRCwkOV-7LDQH4fjhGSJyHNPJ5QHqNLnXZBgE-UuoMf9oy9kj2Jj1MmClIhSZ-dg7gI1GL0FDY2ODQttlFClIO-l-aQJAUSFcSeL1TK_JXldn7cOlW-TgP2ULNbkQICCOyKxMSalLBROJcqF0OIGbwR9xnFykiktFAR_LjExpUcPsAEJq2f8UvQph7V3dbeSGd7J3ICnmws37BoMLSAF7ZE99u2jT684Lo70W3cRrrSiVHvDTjF9XQT7kzjxi7zZr7qdN5QoM1Yt50nC9f1qpOn2ERAfAX85kS26PSA6q_mM1SSCotmw5Ir8-j07ma0xQMUMmvEyjSxyrYpXvMs1fhxDxcuPdFy8NHwHRQKaqHxBEv_cwsAe5mDz5c3vV5yI6-CcvSIdyQzoEPo6A8ptsQ6URarBQZaPfVMSpaDuvEgG1JMGpTqfw0CJbb4xaKs7OnHglPtrD0z-uExAyxSwSDmRgq6_Lb0YdjiImQBNPDQpwPa31hAosk0JQuRywZBxFB43rxgIgca0W2_xfJQOrNq_zMC6bjq85aRlAJLnAtJcdvG9WZIypDJ0lNacbJDejVNNGYKdhYoUdPVYGzEZ1gT9sDGZcf7R0dt0wqULc5y8G62u-CTDOZ7IoLAWt_hlTXu1iQ28PAiBkUyIAcLevAqCJ1wDghq9KTAcRRqffw1DhIKzDAdNxBzkZFUJDYvCFNlGR1T4yrWvKLFQl75ktM8RrA6jIRR9xky8ET0hVIStP5ShlhANsO5KNnADbfRJTuEBrLREcroUd3MHN9WENIHsuihFbPAmeHwbiRCwiAARbWPK0wlvt9Y7do0fcc4p_tTyDzw-Udsr0JJj5V79B-J8JOWc7UTsrOnxp128SULoGE4P06BrRXQE7wfxOl3klJUQMRrhepiTh2ZPPkZ7qu3lX0QDVaTA_vSlL\"]"
+    },
+    {
+      "url": "https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyCn5S3_UFq_LTI4AX77ZwV1Cf85amfgs9M",
+      "method": "POST",
+      "status": 200,
+      "postData": "{\"idToken\":\"eyJhbGciOiJSUzI1NiIsImtpZCI6IjM3MzAwNzY5YTA3ZTA1MTE2ZjdlNTEzOGZhOTA5MzY4NWVlYmMyNDAiLCJ0eXAiOiJKV1QifQ.eyJwcm92aWRlcl9pZCI6ImFub255bW91cyIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS93b3dwcmVzcy1jcyIsImF1ZCI6Indvd3ByZXNzLWNzIiwiYXV0aF90aW1lIjoxNzc0OTIwMDI4LCJ1c2VyX2lkIjoiM2lSb2gxVk84clR2Qm96cGVlNHFHMHBBTmE5MyIsInN1YiI6IjNpUm9oMVZPOHJUdkJvenBlZTRxRzBwQU5hOTMiLCJpYXQiOjE3NzQ5MjAwMjgsImV4cCI6MTc3NDkyMzYyOCwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6e30sInNpZ25faW5fcHJvdmlkZXIiOiJhbm9ueW1vdXMifX0.D8D7L6b7I2jkE5bQsea3iSFFn-UXV1Tc2uXHG4pNaqyTFIbC6ELskUAqk2fMUik9m24B79CqsL274jDnaYR8mfcs4tVUzQa_drJUdsmgqCyaMepvguU0xNbDotkpVE0ABLTyQQE5L4bUpkJZSsjJhWWlMTMp4mSa8bKCMsB1salopdQzldwE4CmbXENH43_8yj1GL6E5r8HII1g2tY6HZ85FTVRZgPWBVkurECgQzGGhhbzGGRQ1VROzIjOIuB6Y-YVewSSjGcR0zsDLb-SLss7sYmchtj5X4mzVk3v8HdWWYZOZn1IKOCIMc0NAwMWln0bjaNJFbts8H4gJCbe25w\"}"
+    },
+    {
+      "url": "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCn5S3_UFq_LTI4AX77ZwV1Cf85amfgs9M",
+      "method": "POST",
+      "status": 200,
+      "postData": "{\"returnSecureToken\":true}"
+    },
+    {
+      "url": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Listen/channel?VER=8&database=projects%2Fwowpress-cs%2Fdatabases%2F(default)&RID=4014&CVER=22&X-HTTP-Session-Id=gsessionid&zx=ux2o8yrvk3lv&t=1",
+      "method": "POST",
+      "status": 200,
+      "postData": "headers=X-Goog-Api-Client%3Agl-js%2F%20fire%2F11.6.0%0D%0AContent-Type%3Atext%2Fplain%0D%0AX-Firebase-GMPID%3A1%3A1040281362681%3Aweb%3A22257913dd883ad79c8228%0D%0AAuthorization%3ABearer%20eyJhbGciOiJSUzI1NiIsImtpZCI6IjM3MzAwNzY5YTA3ZTA1MTE2ZjdlNTEzOGZhOTA5MzY4NWVlYmMyNDAiLCJ0eXAiOiJKV1QifQ.eyJwcm92aWRlcl9pZCI6ImFub255bW91cyIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS93b3dwcmVzcy1jcyIsImF1ZCI6Indvd3ByZXNzLWNzIiwiYXV0aF90aW1lIjoxNzc0OTIwMDI4LCJ1c2VyX2lkIjoiM2lSb2gxVk84clR2Qm96cGVlNHFHMHBBTmE5MyIsInN1YiI6IjNpUm9oMVZPOHJUdkJvenBlZTRxRzBwQU5hOTMiLCJpYXQiOjE3NzQ5MjAwMjgsImV4cCI6MTc3NDkyMzYyOCwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6e30sInNpZ25faW5fcHJvdmlkZXIiOiJhbm9ueW1vdXMifX0.D8D7L6b7I2jkE5bQsea3iSFFn-UXV1Tc2uXHG4pNaqyTFIbC6ELskUAqk2fMUik9m24B79CqsL274jDnaYR8mfcs4tVUzQa_drJUdsmgqCyaMepvguU0xNbDotkpVE0ABLTyQQE5L4bUpkJZSsjJhWWlMTMp4mSa8bKCMsB1salopdQzldwE4CmbXENH43_8yj1GL6E5r8HII1g2tY6HZ85FTVRZgPWBVkurECgQzGGhhbzGGRQ1VROzIjOIuB6Y-YVewSSjGcR0zsDLb-SLss7sYmchtj5X4mzVk3v8HdWWYZOZn1IKOCIMc0NAwMWln0bjaNJFbts8H4gJCbe25w%0D%0A&count=1&ofs=0&req0___data__=%7B%22database%22%3A%22projects%2Fwowpress-cs%2Fdatabases%2F(default)%22%2C%22addTarget%22%3A%7B%22query%22%3A%7B%22structuredQuery%22%3A%7B%22from%22%3A%5B%7B%22collectionId%22%3A%22tickets%22%7D%5D%2C%22where%22%3A%7B%22fieldFilter%22%3A%7B%22field%22%3A%7B%22fieldPath%22%3A%22customer.id%22%7D%2C%22op%22%3A%22EQUAL%22%2C%22value%22%3A%7B%22stringValue%22%3A%223iRoh1VO8rTvBozpee4qG0pANa93%22%7D%7D%7D%2C%22orderBy%22%3A%5B%7B%22field%22%3A%7B%22fieldPath%22%3A%22updatedAt%22%7D%2C%22direction%22%3A%22DESCENDING%22%7D%2C%7B%22field%22%3A%7B%22fieldPath%22%3A%22__name__%22%7D%2C%22direction%22%3A%22DESCENDING%22%7D%5D%2C%22limit%22%3A1%7D%2C%22parent%22%3A%22projects%2Fwowpress-cs%2Fdatabases%2F(default)%2Fdocuments%22%7D%2C%22targetId%22%3A2%7D%7D"
+    },
+    {
+      "url": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Listen/channel?gsessionid=z41SbxV0RPrmdEflIIbxJY_LKyWXIethNze-wUExVrD6p13ZycLHfQ&VER=8&database=projects%2Fwowpress-cs%2Fdatabases%2F(default)&RID=rpc&SID=cor3U_MltiB8wUayL1NkgQ&AID=0&CI=0&TYPE=xmlhttp&zx=lzplsm9fjy61&t=1",
+      "method": "GET",
+      "status": 200,
+      "postData": null
+    },
+    {
+      "url": "https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyCn5S3_UFq_LTI4AX77ZwV1Cf85amfgs9M",
+      "method": "POST",
+      "status": 200,
+      "postData": "{\"idToken\":\"eyJhbGciOiJSUzI1NiIsImtpZCI6IjM3MzAwNzY5YTA3ZTA1MTE2ZjdlNTEzOGZhOTA5MzY4NWVlYmMyNDAiLCJ0eXAiOiJKV1QifQ.eyJwcm92aWRlcl9pZCI6ImFub255bW91cyIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS93b3dwcmVzcy1jcyIsImF1ZCI6Indvd3ByZXNzLWNzIiwiYXV0aF90aW1lIjoxNzc0OTIwMDI5LCJ1c2VyX2lkIjoiY21ETDIwamZxaGZseXd5WXZuMk5OSVhTTE5wMSIsInN1YiI6ImNtREwyMGpmcWhmbHl3eVl2bjJOTklYU0xOcDEiLCJpYXQiOjE3NzQ5MjAwMjksImV4cCI6MTc3NDkyMzYyOSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6e30sInNpZ25faW5fcHJvdmlkZXIiOiJhbm9ueW1vdXMifX0.mC9ORbnPnZfEVCfcESML4TidktOP8p14AwKOUep5QOS6CKPlCeSNS6barIA8LurJN5_SZffVMt1JxqjxNUqR9nonpZ2Xc0ctDMUmSToB6J3uonG-UgjQM4q2MA0l-fdDOT_JY_jdAsxztEJe85-f8MG_3lchqaPQ9XhsF-q1al3nEoddNwI9GubTdrFNVRWZ-x10Jb4Cx8enHFlofri9aPOXfmXDcpkIjOYyaoGOD_2XFSkwwHpKuxMfNofxzPzMTLzN6Z2VT6ro53qA7yTL8d6EBU-P25QOLQYnIgcFw68DH7F7FK6PRc4nG4xc19jY79gKC99FkfSSoHXOMQBzFQ\"}"
+    },
+    {
+      "url": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Listen/channel?VER=8&database=projects%2Fwowpress-cs%2Fdatabases%2F(default)&RID=41406&CVER=22&X-HTTP-Session-Id=gsessionid&zx=ap1eq9yba70&t=1",
+      "method": "POST",
+      "status": 200,
+      "postData": "headers=X-Goog-Api-Client%3Agl-js%2F%20fire%2F11.6.0%0D%0AContent-Type%3Atext%2Fplain%0D%0AX-Firebase-GMPID%3A1%3A1040281362681%3Aweb%3A22257913dd883ad79c8228%0D%0AAuthorization%3ABearer%20eyJhbGciOiJSUzI1NiIsImtpZCI6IjM3MzAwNzY5YTA3ZTA1MTE2ZjdlNTEzOGZhOTA5MzY4NWVlYmMyNDAiLCJ0eXAiOiJKV1QifQ.eyJwcm92aWRlcl9pZCI6ImFub255bW91cyIsImlzcyI6Imh0dHBzOi8vc2VjdXJldG9rZW4uZ29vZ2xlLmNvbS93b3dwcmVzcy1jcyIsImF1ZCI6Indvd3ByZXNzLWNzIiwiYXV0aF90aW1lIjoxNzc0OTIwMDI5LCJ1c2VyX2lkIjoiY21ETDIwamZxaGZseXd5WXZuMk5OSVhTTE5wMSIsInN1YiI6ImNtREwyMGpmcWhmbHl3eVl2bjJOTklYU0xOcDEiLCJpYXQiOjE3NzQ5MjAwMjksImV4cCI6MTc3NDkyMzYyOSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6e30sInNpZ25faW5fcHJvdmlkZXIiOiJhbm9ueW1vdXMifX0.mC9ORbnPnZfEVCfcESML4TidktOP8p14AwKOUep5QOS6CKPlCeSNS6barIA8LurJN5_SZffVMt1JxqjxNUqR9nonpZ2Xc0ctDMUmSToB6J3uonG-UgjQM4q2MA0l-fdDOT_JY_jdAsxztEJe85-f8MG_3lchqaPQ9XhsF-q1al3nEoddNwI9GubTdrFNVRWZ-x10Jb4Cx8enHFlofri9aPOXfmXDcpkIjOYyaoGOD_2XFSkwwHpKuxMfNofxzPzMTLzN6Z2VT6ro53qA7yTL8d6EBU-P25QOLQYnIgcFw68DH7F7FK6PRc4nG4xc19jY79gKC99FkfSSoHXOMQBzFQ%0D%0A&count=1&ofs=0&req0___data__=%7B%22database%22%3A%22projects%2Fwowpress-cs%2Fdatabases%2F(default)%22%2C%22addTarget%22%3A%7B%22query%22%3A%7B%22structuredQuery%22%3A%7B%22from%22%3A%5B%7B%22collectionId%22%3A%22tickets%22%7D%5D%2C%22where%22%3A%7B%22fieldFilter%22%3A%7B%22field%22%3A%7B%22fieldPath%22%3A%22customer.id%22%7D%2C%22op%22%3A%22EQUAL%22%2C%22value%22%3A%7B%22stringValue%22%3A%22cmDL20jfqhflywyYvn2NNIXSLNp1%22%7D%7D%7D%2C%22orderBy%22%3A%5B%7B%22field%22%3A%7B%22fieldPath%22%3A%22updatedAt%22%7D%2C%22direction%22%3A%22DESCENDING%22%7D%2C%7B%22field%22%3A%7B%22fieldPath%22%3A%22__name__%22%7D%2C%22direction%22%3A%22DESCENDING%22%7D%5D%2C%22limit%22%3A1%7D%2C%22parent%22%3A%22projects%2Fwowpress-cs%2Fdatabases%2F(default)%2Fdocuments%22%7D%2C%22targetId%22%3A4%7D%7D"
+    },
+    {
+      "url": "https://firestore.googleapis.com/google.firestore.v1.Firestore/Listen/channel?gsessionid=YqcLi2Ufdudhq26mWxfXQpy53hZSfTIs6uRo3iApny4OsrJH4bb_vg&VER=8&database=projects%2Fwowpress-cs%2Fdatabases%2F(default)&RID=rpc&SID=6PWlxQMdF_maBVJloaIBPQ&AID=0&CI=0&TYPE=xmlhttp&zx=okxq8a943wgs&t=1",
+      "method": "GET",
+      "status": 200,
+      "postData": null
+    },
+    {
+      "url": "https://www.youtube.com/youtubei/v1/log_event?alt=json",
+      "method": "POST",
+      "status": 200,
+      "postData": "{\"context\":{\"client\":{\"hl\":\"ko\",\"gl\":\"KR\",\"clientName\":56,\"clientVersion\":\"2.20260329.08.00\",\"configInfo\":{\"appInstallData\":\"CNvCrM4GEJ3QsAUQ0MKAExCZjbEFEParsAUQ_Y3RHBC45M4cEIeszhwQvKTQHBDevM4cEMr-0BwQz4zRHBDZidEcEKz10BwQ28-AExDI988cEL22rgUQwonRHBD8ss4cEPG00BwQzPnQHBDM364FEL6E0RwQzvnQHBCogdEcEMbGzxwQprbQHBCJsM4cENr3zhwQlLbQHBDc1NAcEJSD0BwQjOnPHBCfz4ATEIHNzhwQu9nOHBCY1YATEL6KsAUQ1YW4IhCu1s8cEMGP0BwQlP6wBRCM_v8SEP7_0BwQvZmwBRCgj9EcEPv20BwQ8ZywBRCL988cEJjd0BwQi4bRHBCKh9EcKkRDQU1TTGhVdC1acS1ETWVVRXBVQ25BNzVGYjBHV2VPeThBc3lvS3dFQTgzX0JjdTNCdnNtdHVRR240a042X2tHSFFjPTAA\"},\"userAgent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36\",\"connectionType\":\"CONN_CELLULAR_4G\",\"browserName\":\"Chrome\",\"deviceMake\":\"apple\",\"browserVersion\":\"120.0.0.0\",\"osName\":\"Macintosh\",\"osVersion\":\"10_15_7\",\"platform\":\"DESKTOP\"},\"thirdParty\":{\"embedUrl\":\"https://wowpress.co.kr/\"}},\"events\":[{\"eventTimeMs\":1774920027917,\"latencyActionTicked\":{\"tickName\":\"mm_is\",\"clientActionNonce\":\"2nsbS3QhS9BFXPWt\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027918,\"latencyActionTicked\":{\"tickName\":\"mm_ie\",\"clientActionNonce\":\"2nsbS3QhS9BFXPWt\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027933,\"latencyActionTicked\":{\"tickName\":\"ep_init_cus\",\"clientActionNonce\":\"2nsbS3QhS9BFXPWt\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027933,\"latencyActionTicked\":{\"tickName\":\"ep_init_eps\",\"clientActionNonce\":\"2nsbS3QhS9BFXPWt\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027933,\"latencyActionTicked\":{\"tickName\":\"ep_init_epe\",\"clientActionNonce\":\"2nsbS3QhS9BFXPWt\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027933,\"latencyActionTicked\":{\"tickName\":\"ep_init_cue\",\"clientActionNonce\":\"2nsbS3QhS9BFXPWt\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027950,\"latencyActionTicked\":{\"tickName\":\"pe\",\"clientActionNonce\":\"2nsbS3QhS9BFXPWt\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027950,\"latencyActionTicked\":{\"tickName\":\"ep_init_wes\",\"clientActionNonce\":\"2nsbS3QhS9BFXPWt\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027705,\"latencyActionTicked\":{\"tickName\":\"srt\",\"clientActionNonce\":\"2nsbS3QhS9BFXPWt\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027472,\"latencyActionBaselined\":{\"clientActionNonce\":\"2nsbS3QhS9BFXPWt\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027524,\"latencyActionTicked\":{\"tickName\":\"nreqs\",\"clientActionNonce\":\"2nsbS3QhS9BFXPWt\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027705,\"latencyActionTicked\":{\"tickName\":\"nress\",\"clientActionNonce\":\"2nsbS3QhS9BFXPWt\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027742,\"latencyActionTicked\":{\"tickName\":\"nrese\",\"clientActionNonce\":\"2nsbS3QhS9BFXPWt\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027743,\"latencyActionTicked\":{\"tickName\":\"rsf_pj\",\"clientActionNonce\":\"2nsbS3QhS9BFXPWt\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027918,\"latencyActionTicked\":{\"tickName\":\"rse_pj\",\"clientActionNonce\":\"2nsbS3QhS9BFXPWt\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027743,\"latencyActionTicked\":{\"tickName\":\"rsf_pc\",\"clientActionNonce\":\"2nsbS3QhS9BFXPWt\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027806,\"latencyActionTicked\":{\"tickName\":\"rse_pc\",\"clientActionNonce\":\"2nsbS3QhS9BFXPWt\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027743,\"latencyActionTicked\":{\"tickName\":\"rsf_ecj\",\"clientActionNonce\":\"2nsbS3QhS9BFXPWt\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027867,\"latencyActionTicked\":{\"tickName\":\"rse_ecj\",\"clientActionNonce\":\"2nsbS3QhS9BFXPWt\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027743,\"latencyActionTicked\":{\"tickName\":\"rsf_ecc\",\"clientActionNonce\":\"2nsbS3QhS9BFXPWt\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027792,\"latencyActionTicked\":{\"tickName\":\"rse_ecc\",\"clientActionNonce\":\"2nsbS3QhS9BFXPWt\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027953,\"latencyActionInfo\":{\"isNavigation\":true,\"actionType\":\"LATENCY_ACTION_VIDEO_PREVIEW\",\"httpProtocol\":\"h2\",\"transportProtocol\":\"tcp\",\"isVisible\":true,\"loadType\":\"cold\",\"resourceInfo\":[{\"resourceCache\":\"pj\"},{\"resourceCache\":\"pc\"},{\"resourceCache\":\"ecj\"},{\"resourceCache\":\"ecc\"}],\"clientActionNonce\":\"2nsbS3QhS9BFXPWt\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027916,\"latencyActionTicked\":{\"tickName\":\"rses_dpj\",\"clientActionNonce\":\"2nsbS3QhS9BFXPWt\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027954,\"latencyActionTicked\":{\"tickName\":\"ep_init_wee\",\"clientActionNonce\":\"2nsbS3QhS9BFXPWt\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027955,\"latencyActionInfo\":{\"serverTimeMs\":52,\"clientActionNonce\":\"2nsbS3QhS9BFXPWt\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027978,\"screenCreated\":{\"csn\":\"gp3NYvnhKBRFsUAq\",\"pageVe\":{\"veType\":16623,\"youtubeData\":{\"servletData\":{\"serializedServletEventId\":\"WyHLadzsIs2r-dIPtfeBuAk\"}}}},\"context\":{\"lastActivityMs\":\"12\"}},{\"eventTimeMs\":1774920027979,\"latencyActionInfo\":{\"clientScreenNonce\":\"gp3NYvnhKBRFsUAq\",\"clientActionNonce\":\"2nsbS3QhS9BFXPWt\"},\"context\":{\"lastActivityMs\":\"12\"}},{\"eventTimeMs\":1774920027979,\"screenCreated\":{\"csn\":\"B6QR_u1ShZo2OJ9N\",\"pageVe\":{\"veType\":32594},\"implicitGesture\":{\"parentCsn\":\"gp3NYvnhKBRFsUAq\",\"gesturedVe\":{\"veType\":16623},\"gestureType\":\"INTERACTION_LOGGING_GESTURE_TYPE_AUTOMATED\"}},\"context\":{\"lastActivityMs\":\"12\"}},{\"eventTimeMs\":1774920027979,\"visualElementHidden\":{\"csn\":\"gp3NYvnhKBRFsUAq\",\"ve\":{\"veType\":16623},\"eventType\":16},\"context\":{\"lastActivityMs\":\"12\"}},{\"eventTimeMs\":1774920027979,\"latencyActionInfo\":{\"clientScreenNonce\":\"B6QR_u1ShZo2OJ9N\",\"clientActionNonce\":\"2nsbS3QhS9BFXPWt\"},\"context\":{\"lastActivityMs\":\"12\"}},{\"eventTimeMs\":1774920027979,\"visualElementAttached\":{\"csn\":\"B6QR_u1ShZo2OJ9N\",\"parentVe\":{\"veType\":32594},\"childVes\":[{\"trackingParams\":\"CAAQru4BIhMIupr_rfzIkwMVDBV7Bx0rhR86ygEEFycBkg==\"}]},\"context\":{\"lastActivityMs\":\"12\"}},{\"eventTimeMs\":1774920027980,\"latencyActionTicked\":{\"tickName\":\"fs\",\"clientActionNonce\":\"2nsbS3QhS9BFXPWt\"},\"context\":{\"lastActivityMs\":\"14\"}},{\"eventTimeMs\":1774920027985,\"latencyActionInfo\":{\"clientPlaybackNonce\":\"CXGGepoI6tqE5P7J\",\"clientActionNonce\":\"2nsbS3QhS9BFXPWt\"},\"context\":{\"lastActivityMs\":\"18\"}},{\"eventTimeMs\":1774920027985,\"latencyActionTicked\":{\"tickName\":\"ep_init_pr\",\"clientActionNonce\":\"2nsbS3QhS9BFXPWt\"},\"context\":{\"lastActivityMs\":\"18\"}},{\"eventTimeMs\":1774920028091,\"latencyActionTicked\":{\"tickName\":\"ep_init_ijs\",\"clientActionNonce\":\"2nsbS3QhS9BFXPWt\"},\"context\":{\"lastActivityMs\":\"124\"}},{\"eventTimeMs\":1774920028091,\"latencyActionTicked\":{\"tickName\":\"ep_init_ije\",\"clientActionNonce\":\"2nsbS3QhS9BFXPWt\"},\"context\":{\"lastActivityMs\":\"124\"}},{\"eventTimeMs\":1774920028091,\"latencyActionTicked\":{\"tickName\":\"ep_init_rs\",\"clientActionNonce\":\"2nsbS3QhS9BFXPWt\"},\"context\":{\"lastActivityMs\":\"124\"}},{\"eventTimeMs\":1774920028093,\"latencyActionTicked\":{\"tickName\":\"ep_init_re\",\"clientActionNonce\":\"2nsbS3QhS9BFXPWt\"},\"context\":{\"lastActivityMs\":\"126\"}},{\"eventTimeMs\":1774920028101,\"visualElementAttached\":{\"csn\":\"B6QR_u1ShZo2OJ9N\",\"parentVe\":{\"veType\":32594},\"childVes\":[{\"veType\":28572,\"veCounter\":2,\"elementIndex\":0}]},\"context\":{\"lastActivityMs\":\"135\"}},{\"eventTimeMs\":1774920028101,\"visualElementShown\":{\"csn\":\"B6QR_u1ShZo2OJ9N\",\"ve\":{\"veType\":28572,\"veCounter\":2,\"elementIndex\":0},\"eventType\":1},\"context\":{\"lastActivityMs\":\"135\"}},{\"eventTimeMs\":1774920028111,\"latencyActionTicked\":{\"tickName\":\"ftr\",\"clientActionNonce\":\"2nsbS3QhS9BFXPWt\"},\"context\":{\"lastActivityMs\":\"144\"}},{\"eventTimeMs\":1774920028460,\"latencyActionTicked\":{\"tickName\":\"pot_ist\",\"clientActionNonce\":\"2nsbS3QhS9BFXPWt\"},\"context\":{\"lastActivityMs\":\"493\"}},{\"eventTimeMs\":1774920028559,\"streamzIncremented\":{\"serializedIncrementBatch\":\"ChUvY2xpZW50X3N0cmVhbXovYmcvZWMSEAoOCghib3RndWFyZBICNTMaAmVuGgJtayIRCgMKAW8KBgoEYUdJZhICCAEiEQoDCgF0CgYKBGFHSWYSAggBIhEKAwoBaAoGCgRhR0lmEgIIBQ==\"},\"context\":{\"lastActivityMs\":\"593\"}},{\"eventTimeMs\":1774920028560,\"streamzIncremented\":{\"serializedIncrementBatch\":\"ChUvY2xpZW50X3N0cmVhbXovYmcvZWwSEAoOCghib3RndWFyZBICNTMaAmVuGgJtayIYCgMKAWgKBgoEYUdJZhIJEQAAAAAgMyFAIhgKAwoBaAoGCgRhR0lmEgkRAAAAAAA04z8iGAoDCgFoCgYKBGFHSWYSCREAAAAAAM0QQCIYCgMKAWgKBgoEYUdJZhIJEQAAAAAAmglAIhgKAwoBaAoGCgRhR0lmEgkRAAAAAAAAFkAiGAoDCgF0CgYKBGFHSWYSCREAADAzM3NIQA==\"},\"context\":{\"lastActivityMs\":\"593\"}},{\"eventTimeMs\":1774920028709,\"latencyActionTicked\":{\"tickName\":\"pot_if\",\"clientActionNonce\":\"2nsbS3QhS9BFXPWt\"},\"context\":{\"lastActivityMs\":\"743\"}},{\"eventTimeMs\":1774920028710,\"latencyActionTicked\":{\"tickName\":\"pot_cms\",\"clientActionNonce\":\"2nsbS3QhS9BFXPWt\"},\"context\":{\"lastActivityMs\":\"743\"}},{\"eventTimeMs\":1774920028710,\"latencyActionTicked\":{\"tickName\":\"pot_cmf\",\"clientActionNonce\":\"2nsbS3QhS9BFXPWt\"},\"context\":{\"lastActivityMs\":\"743\"}},{\"eventTimeMs\":1774920029568,\"streamzIncremented\":{\"serializedIncrementBatch\":\"ChYvY2xpZW50X3N0cmVhbXovYmcvZnJzEhAKDgoIYm90Z3VhcmQSAjUzGgJtayITCgYKBGFHSWYSCREAAAAAAGCbQA==\"},\"context\":{\"lastActivityMs\":\"1602\"}},{\"eventTimeMs\":1774920029569,\"streamzIncremented\":{\"serializedIncrementBatch\":\"ChUvY2xpZW50X3N0cmVhbXovYmcvZWMSEAoOCghib3RndWFyZBICNTMaAmVuGgJtayIRCgMKAW4KBgoEYUdJZhICCAEiEQoDCgFtCgYKBGFHSWYSAggB\"},\"context\":{\"lastActivityMs\":\"1602\"}},{\"eventTimeMs\":1774920029569,\"streamzIncremented\":{\"serializedIncrementBatch\":\"ChUvY2xpZW50X3N0cmVhbXovYmcvZWwSEAoOCghib3RndWFyZBICNTMaAmVuGgJtayIYCgMKAW4KBgoEYUdJZhIJEQAAADQzMw9AIhgKAwoBaQoGCgRhR0lmEgkRAAAAMDMz0z8iGAoDCgFvCgYKBGFHSWYSCREAAJiZmRlvQCIYCgMKAWMKBgoEYUdJZhIJEQAAAAAAAAAAIhgKAwoBQwoGCgRhR0lmEgkRAAAAoJmZyT8iGAoDCgF4CgYKBGFHSWYSCREAAAAAAAAAACIYCgMKAW0KBgoEYUdJZhIJEQAAADgzM9M/\"},\"context\":{\"lastActivityMs\":\"1602\"}}],\"serializedClientEventId\":{\"serializedEventId\":\"WyHLadzsIs2r-dIPtfeBuAk\",\"clientCounter\":\"14380\"}}"
+    },
+    {
+      "url": "https://www.youtube.com/youtubei/v1/log_event?alt=json",
+      "method": "POST",
+      "status": 200,
+      "postData": "{\"context\":{\"client\":{\"hl\":\"ko\",\"gl\":\"KR\",\"clientName\":56,\"clientVersion\":\"2.20260329.08.00\",\"configInfo\":{\"appInstallData\":\"CNvCrM4GELyk0BwQprbQHBCM6c8cEL62rgUQ2vfOHBDO-dAcEK7WzxwQxsbPHBC9mbAFEImwzhwQwonRHBDZidEcEIv3zxwQoI_RHBD8ss4cEL6KsAUQ3NTQHBDM364FEMz50BwQmY2xBRDevM4cEJT-sAUQuOTOHBDK_tAcEMuD0RwQntCwBRDxtNAcELaB0RwQl9WAExD9_9AcEPv20BwQrPXQHBCUttAcENSFuCIQu9nOHBCogdEcEMGP0BwQz4zRHBD2q7AFEPGcsAUQ0MKAExCa-dAcEP6N0RwQyPfPHBCBzc4cEJjd0BwQn8-AExCHrM4cEJSD0BwQjbWAExDnjNEcKkRDQU1TTGhVdC1acS1ETGlVRXBRQ25BNzVGYjBHV2VPeThBc3lvS3dFQTgzX0JjdTNCdnNtdHVRR240a042X2tHSFFjPTAA\"},\"userAgent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36\",\"connectionType\":\"CONN_CELLULAR_4G\",\"browserName\":\"Chrome\",\"deviceMake\":\"apple\",\"browserVersion\":\"120.0.0.0\",\"osName\":\"Macintosh\",\"osVersion\":\"10_15_7\",\"platform\":\"DESKTOP\"},\"thirdParty\":{\"embedUrl\":\"https://wowpress.co.kr/\"}},\"events\":[{\"eventTimeMs\":1774920027902,\"latencyActionTicked\":{\"tickName\":\"mm_is\",\"clientActionNonce\":\"cwDZHzS4IMGSN20m\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027903,\"latencyActionTicked\":{\"tickName\":\"mm_ie\",\"clientActionNonce\":\"cwDZHzS4IMGSN20m\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027916,\"latencyActionTicked\":{\"tickName\":\"ep_init_cus\",\"clientActionNonce\":\"cwDZHzS4IMGSN20m\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027916,\"latencyActionTicked\":{\"tickName\":\"ep_init_eps\",\"clientActionNonce\":\"cwDZHzS4IMGSN20m\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027916,\"latencyActionTicked\":{\"tickName\":\"ep_init_epe\",\"clientActionNonce\":\"cwDZHzS4IMGSN20m\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027916,\"latencyActionTicked\":{\"tickName\":\"ep_init_cue\",\"clientActionNonce\":\"cwDZHzS4IMGSN20m\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027946,\"latencyActionTicked\":{\"tickName\":\"pe\",\"clientActionNonce\":\"cwDZHzS4IMGSN20m\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027958,\"latencyActionTicked\":{\"tickName\":\"ep_init_wes\",\"clientActionNonce\":\"cwDZHzS4IMGSN20m\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027643,\"latencyActionTicked\":{\"tickName\":\"srt\",\"clientActionNonce\":\"cwDZHzS4IMGSN20m\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027425,\"latencyActionBaselined\":{\"clientActionNonce\":\"cwDZHzS4IMGSN20m\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027523,\"latencyActionTicked\":{\"tickName\":\"nreqs\",\"clientActionNonce\":\"cwDZHzS4IMGSN20m\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027643,\"latencyActionTicked\":{\"tickName\":\"nress\",\"clientActionNonce\":\"cwDZHzS4IMGSN20m\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027704,\"latencyActionTicked\":{\"tickName\":\"nrese\",\"clientActionNonce\":\"cwDZHzS4IMGSN20m\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027426,\"latencyActionTicked\":{\"tickName\":\"ndnss\",\"clientActionNonce\":\"cwDZHzS4IMGSN20m\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027428,\"latencyActionTicked\":{\"tickName\":\"ndnse\",\"clientActionNonce\":\"cwDZHzS4IMGSN20m\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027428,\"latencyActionTicked\":{\"tickName\":\"ntcps\",\"clientActionNonce\":\"cwDZHzS4IMGSN20m\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027523,\"latencyActionTicked\":{\"tickName\":\"ntcpe\",\"clientActionNonce\":\"cwDZHzS4IMGSN20m\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027470,\"latencyActionTicked\":{\"tickName\":\"nstcps\",\"clientActionNonce\":\"cwDZHzS4IMGSN20m\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027523,\"latencyActionTicked\":{\"tickName\":\"ntcpe\",\"clientActionNonce\":\"cwDZHzS4IMGSN20m\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027735,\"latencyActionTicked\":{\"tickName\":\"rsf_pj\",\"clientActionNonce\":\"cwDZHzS4IMGSN20m\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027918,\"latencyActionTicked\":{\"tickName\":\"rse_pj\",\"clientActionNonce\":\"cwDZHzS4IMGSN20m\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027735,\"latencyActionTicked\":{\"tickName\":\"rsf_pc\",\"clientActionNonce\":\"cwDZHzS4IMGSN20m\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027806,\"latencyActionTicked\":{\"tickName\":\"rse_pc\",\"clientActionNonce\":\"cwDZHzS4IMGSN20m\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027735,\"latencyActionTicked\":{\"tickName\":\"rsf_ecj\",\"clientActionNonce\":\"cwDZHzS4IMGSN20m\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027867,\"latencyActionTicked\":{\"tickName\":\"rse_ecj\",\"clientActionNonce\":\"cwDZHzS4IMGSN20m\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027735,\"latencyActionTicked\":{\"tickName\":\"rsf_ecc\",\"clientActionNonce\":\"cwDZHzS4IMGSN20m\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027792,\"latencyActionTicked\":{\"tickName\":\"rse_ecc\",\"clientActionNonce\":\"cwDZHzS4IMGSN20m\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027960,\"latencyActionInfo\":{\"isNavigation\":true,\"actionType\":\"LATENCY_ACTION_VIDEO_PREVIEW\",\"httpProtocol\":\"h2\",\"transportProtocol\":\"tcp\",\"isVisible\":true,\"loadType\":\"cold\",\"clientActionNonce\":\"cwDZHzS4IMGSN20m\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027900,\"latencyActionTicked\":{\"tickName\":\"rses_dpj\",\"clientActionNonce\":\"cwDZHzS4IMGSN20m\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027962,\"latencyActionTicked\":{\"tickName\":\"ep_init_wee\",\"clientActionNonce\":\"cwDZHzS4IMGSN20m\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920027963,\"latencyActionInfo\":{\"serverTimeMs\":43,\"clientActionNonce\":\"cwDZHzS4IMGSN20m\"},\"context\":{\"lastActivityMs\":\"-1\"}},{\"eventTimeMs\":1774920028007,\"screenCreated\":{\"csn\":\"LlXJ0mcrHZ4DTR-1\",\"pageVe\":{\"veType\":16623,\"youtubeData\":{\"servletData\":{\"serializedServletEventId\":\"WyHLacvSIubh-dIPiuPuyAs\"}}}},\"context\":{\"lastActivityMs\":\"8\"}},{\"eventTimeMs\":1774920028007,\"latencyActionInfo\":{\"clientScreenNonce\":\"LlXJ0mcrHZ4DTR-1\",\"clientActionNonce\":\"cwDZHzS4IMGSN20m\"},\"context\":{\"lastActivityMs\":\"8\"}},{\"eventTimeMs\":1774920028007,\"screenCreated\":{\"csn\":\"Wnay_gTktuQsHeWl\",\"pageVe\":{\"veType\":32594},\"implicitGesture\":{\"parentCsn\":\"LlXJ0mcrHZ4DTR-1\",\"gesturedVe\":{\"veType\":16623},\"gestureType\":\"INTERACTION_LOGGING_GESTURE_TYPE_AUTOMATED\"}},\"context\":{\"lastActivityMs\":\"8\"}},{\"eventTimeMs\":1774920028007,\"visualElementHidden\":{\"csn\":\"LlXJ0mcrHZ4DTR-1\",\"ve\":{\"veType\":16623},\"eventType\":16},\"context\":{\"lastActivityMs\":\"8\"}},{\"eventTimeMs\":1774920028007,\"latencyActionInfo\":{\"clientScreenNonce\":\"Wnay_gTktuQsHeWl\",\"clientActionNonce\":\"cwDZHzS4IMGSN20m\"},\"context\":{\"lastActivityMs\":\"8\"}},{\"eventTimeMs\":1774920028007,\"visualElementAttached\":{\"csn\":\"Wnay_gTktuQsHeWl\",\"parentVe\":{\"veType\":32594},\"childVes\":[{\"trackingParams\":\"CAAQru4BIhMIq_f-rfzIkwMV4Q17Bx21sDrAygEEwdy5Lg==\"}]},\"context\":{\"lastActivityMs\":\"8\"}},{\"eventTimeMs\":1774920028009,\"latencyActionTicked\":{\"tickName\":\"fs\",\"clientActionNonce\":\"cwDZHzS4IMGSN20m\"},\"context\":{\"lastActivityMs\":\"10\"}},{\"eventTimeMs\":1774920028012,\"latencyActionInfo\":{\"clientPlaybackNonce\":\"xDJeDNIPOOuqKvy5\",\"clientActionNonce\":\"cwDZHzS4IMGSN20m\"},\"context\":{\"lastActivityMs\":\"13\"}},{\"eventTimeMs\":1774920028012,\"latencyActionTicked\":{\"tickName\":\"ep_init_pr\",\"clientActionNonce\":\"cwDZHzS4IMGSN20m\"},\"context\":{\"lastActivityMs\":\"13\"}},{\"eventTimeMs\":1774920028095,\"latencyActionTicked\":{\"tickName\":\"ep_init_ijs\",\"clientActionNonce\":\"cwDZHzS4IMGSN20m\"},\"context\":{\"lastActivityMs\":\"96\"}},{\"eventTimeMs\":1774920028095,\"latencyActionTicked\":{\"tickName\":\"ep_init_ije\",\"clientActionNonce\":\"cwDZHzS4IMGSN20m\"},\"context\":{\"lastActivityMs\":\"96\"}},{\"eventTimeMs\":1774920028095,\"latencyActionTicked\":{\"tickName\":\"ep_init_rs\",\"clientActionNonce\":\"cwDZHzS4IMGSN20m\"},\"context\":{\"lastActivityMs\":\"96\"}},{\"eventTimeMs\":1774920028097,\"latencyActionTicked\":{\"tickName\":\"ep_init_re\",\"clientActionNonce\":\"cwDZHzS4IMGSN20m\"},\"context\":{\"lastActivityMs\":\"98\"}},{\"eventTimeMs\":1774920028117,\"visualElementAttached\":{\"csn\":\"Wnay_gTktuQsHeWl\",\"parentVe\":{\"veType\":32594},\"childVes\":[{\"veType\":28572,\"veCounter\":2,\"elementIndex\":0}]},\"context\":{\"lastActivityMs\":\"118\"}},{\"eventTimeMs\":1774920028117,\"visualElementShown\":{\"csn\":\"Wnay_gTktuQsHeWl\",\"ve\":{\"veType\":28572,\"veCounter\":2,\"elementIndex\":0},\"eventType\":1},\"context\":{\"lastActivityMs\":\"118\"}},{\"eventTimeMs\":1774920028124,\"latencyActionTicked\":{\"tickName\":\"ftr\",\"clientActionNonce\":\"cwDZHzS4IMGSN20m\"},\"context\":{\"lastActivityMs\":\"125\"}},{\"eventTimeMs\":1774920028469,\"latencyActionTicked\":{\"tickName\":\"pot_ist\",\"clientActionNonce\":\"cwDZHzS4IMGSN20m\"},\"context\":{\"lastActivityMs\":\"470\"}},{\"eventTimeMs\":1774920028572,\"streamzIncremented\":{\"serializedIncrementBatch\":\"ChUvY2xpZW50X3N0cmVhbXovYmcvZWMSEAoOCghib3RndWFyZBICNTMaAmVuGgJtayIRCgMKAW8KBgoEYUdJZhICCAEiEQoDCgF0CgYKBGFHSWYSAggBIhEKAwoBaAoGCgRhR0lmEgIIBQ==\"},\"context\":{\"lastActivityMs\":\"573\"}},{\"eventTimeMs\":1774920028572,\"streamzIncremented\":{\"serializedIncrementBatch\":\"ChUvY2xpZW50X3N0cmVhbXovYmcvZWwSEAoOCghib3RndWFyZBICNTMaAmVuGgJtayIYCgMKAWgKBgoEYUdJZhIJEQAAAABAMyFAIhgKAwoBaAoGCgRhR0lmEgkRAAAAAAAA4D8iGAoDCgFoCgYKBGFHSWYSCREAAAAAAM0WQCIYCgMKAWgKBgoEYUdJZhIJEQAAAAAAzQBAIhgKAwoBaAoGCgRhR0lmEgkRAAAAAEBmFkAiGAoDCgF0CgYKBGFHSWYSCREAAHBmZmZIQA==\"},\"context\":{\"lastActivityMs\":\"573\"}},{\"eventTimeMs\":1774920028717,\"latencyActionTicked\":{\"tickName\":\"pot_if\",\"clientActionNonce\":\"cwDZHzS4IMGSN20m\"},\"context\":{\"lastActivityMs\":\"717\"}},{\"eventTimeMs\":1774920028717,\"latencyActionTicked\":{\"tickName\":\"pot_cms\",\"clientActionNonce\":\"cwDZHzS4IMGSN20m\"},\"context\":{\"lastActivityMs\":\"717\"}},{\"eventTimeMs\":1774920028717,\"latencyActionTicked\":{\"tickName\":\"pot_cmf\",\"clientActionNonce\":\"cwDZHzS4IMGSN20m\"},\"context\":{\"lastActivityMs\":\"718\"}},{\"eventTimeMs\":1774920029578,\"streamzIncremented\":{\"serializedIncrementBatch\":\"ChYvY2xpZW50X3N0cmVhbXovYmcvZnJzEhAKDgoIYm90Z3VhcmQSAjUzGgJtayITCgYKBGFHSWYSCREAAAAAAGSbQA==\"},\"context\":{\"lastActivityMs\":\"1579\"}},{\"eventTimeMs\":1774920029578,\"streamzIncremented\":{\"serializedIncrementBatch\":\"ChUvY2xpZW50X3N0cmVhbXovYmcvZWMSEAoOCghib3RndWFyZBICNTMaAmVuGgJtayIRCgMKAW4KBgoEYUdJZhICCAEiEQoDCgFtCgYKBGFHSWYSAggB\"},\"context\":{\"lastActivityMs\":\"1579\"}},{\"eventTimeMs\":1774920029578,\"streamzIncremented\":{\"serializedIncrementBatch\":\"ChUvY2xpZW50X3N0cmVhbXovYmcvZWwSEAoOCghib3RndWFyZBICNTMaAmVuGgJtayIYCgMKAW4KBgoEYUdJZhIJEQAAADMzMw9AIhgKAwoBaQoGCgRhR0lmEgkRAAAAODMz0z8iGAoDCgFvCgYKBGFHSWYSCREAAAAAANBuQCIYCgMKAWMKBgoEYUdJZhIJEQAAAAAAAAAAIhgKAwoBQwoGCgRhR0lmEgkRAAAAoJmZyT8iGAoDCgF4CgYKBGFHSWYSCREAAAAAAAAAACIYCgMKAW0KBgoEYUdJZhIJEQAAAKCZmck/\"},\"context\":{\"lastActivityMs\":\"1579\"}}],\"serializedClientEventId\":{\"serializedEventId\":\"WyHLacvSIubh-dIPiuPuyAs\",\"clientCounter\":\"4913\"}}"
+    }
+  ],
+  "uiFlow": {
+    "steps": 4,
+    "hasEditor": false,
+    "optionCount": 0,
+    "priceDisplayType": "visible",
+    "buttons": [
+      "WOW 멤버십안내 자세히보기",
+      "함께캠페인 자세히보기",
+      "쿠폰페이지 바로가기",
+      "핵심가치페이지 바로가기",
+      "로그인"
+    ],
+    "priceTexts": [
+      "4,400원",
+      "11,500원",
+      "13,500원",
+      "3,800원",
+      "33,800원",
+      "23,900원",
+      "26,600원",
+      "12,000원"
+    ]
+  },
+  "pageInfo": {
+    "title": "와우프레스",
+    "framework": "unknown",
+    "selectCount": 0,
+    "radioCount": 0,
+    "checkboxCount": 0,
+    "buttons": [
+      "WOW 멤버십안내 자세히보기",
+      "함께캠페인 자세히보기",
+      "쿠폰페이지 바로가기",
+      "핵심가치페이지 바로가기",
+      "로그인"
+    ],
+    "hasEditor": false,
+    "forms": [
+      {
+        "action": "https://wowpress.co.kr/srch/list",
+        "method": "get",
+        "inputCount": 1
+      },
+      {
+        "action": "https://wowpress.co.kr/",
+        "method": "post",
+        "inputCount": 20
+      },
+      {
+        "action": "https://wowpress.co.kr/",
+        "method": "post",
+        "inputCount": 19
+      }
+    ],
+    "priceTexts": [
+      "4,400원",
+      "11,500원",
+      "13,500원",
+      "3,800원",
+      "33,800원",
+      "23,900원",
+      "26,600원",
+      "12,000원"
+    ],
+    "bodyTextSnippet": "WOW멤버십\nVVIP만의 특별한 혜택\n- 결제금액 4% 적립\n- 배쑝와쑝 배송비 무료\n- 명함/스티커 2만원 이상 택배비 무료\n- VIP 전용 상담 가능\n등급조건(3개월 접수액 기준)\n\n3억원 이상 \n9,000만원 이상 \n3,000만원 이상 \n2,100만원 이상 \n1,200만원 이상 \n300만원 이상 \n90만원 이상 \n30만원 이상 \n5만원 이상 \n5만원 미만\nWOW 멤버십안내 자세히보기\n   \n로그인\n회원가입\n쿠폰4종+무료배송\n고객센터\n요즘 인쇄 어디?\n와우프레스\n정매수 인쇄 어디?\n와우프레스\n요즘 인쇄 어디?\n와우프레스\n정매수 인쇄 어디?\n와우프레스\n상업인쇄소\n힙지로디지털\n책공방\n가게용품\n문구점\n어패럴\n선거홍보물\n이벤트\n신제품\n제작가이드 통합주문 무료직배송신청\nNEW!\n이지템플릿\n창닫기\n7 / 10\n01\n신규가입혜택\n신규가입시\n할인과 무료배송\n02\n와우멤버십 안내\n상위 고객을 위한\n차별화된 프리미엄 혜택\n03\n와우프로그램\n오픈마켓 주문을\n쉽고 빠르게!\n04\n독판납기지연 보상제\n납"
+  },
+  "screenshots": [
+    "wow_homepage_main.png"
+  ],
+  "capturedAt": "2026-03-31T01:20:49.140Z"
+}

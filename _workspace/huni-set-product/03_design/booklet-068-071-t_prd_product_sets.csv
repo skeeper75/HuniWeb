@@ -1,0 +1,13 @@
+prd_cd,sub_prd_cd,sub_prd_qty,min_cnt,max_cnt,cnt_incr,disp_seq,note,del_yn,op,member_exists_live,mint_reserved_prd_cd
+# 068~071 셋트 구성 청사진 rev.2 (면지 없음·표지+내지 2구성원만·사용자 확정)
+# sub_prd_cd = 예약 placeholder(부품 mint 후 확정·MAX prd_cd=PRD_000284 → PRD_000285~292 예약)
+# 실 적재는 부품 mint 완료 후(BLOCKED→dbmap)·load-executor가 placeholder→실 prd_cd 치환
+# rev.2: 부모공식=표지인쇄+표지코팅+표지용지(Q-A)+제본 4비목·단/양면=print_opt selection·071만 표지×2
+PRD_000068,PRD_(mint:중철책자-표지),1,1,1,,1,표지=별도설정·1권고정·가격0(부모공식 PRF_BIND_JUNGCHEOL_SET=표지인쇄+코팅+용지+제본·×1펼침),N,INSERT,N,PRD_000285
+PRD_000068,PRD_(mint:중철책자-내지),1,4,28,4,2,내지=별도설정·페이지4~28/+4(중철4배수·양면POPT2)·PRF_DGP_INNER·×1page파생,N,INSERT,N,PRD_000286
+PRD_000069,PRD_(mint:무선책자-표지),1,1,1,,1,표지=별도설정·가격0(부모공식 PRF_BIND_MUSEON_SET=표지인쇄+코팅+용지+제본+박/형압·×1펼침),N,INSERT,N,PRD_000287
+PRD_000069,PRD_(mint:무선책자-내지),1,24,300,2,2,내지=별도설정·페이지24~300/+2·양면POPT2·PRF_DGP_INNER·×1,N,INSERT,N,PRD_000288
+PRD_000070,PRD_(mint:PUR책자-표지),1,1,1,,1,표지=별도설정·가격0(부모공식 PRF_BIND_PUR_SET=표지인쇄+코팅+용지+제본+박/형압·×1펼침),N,INSERT,N,PRD_000289
+PRD_000070,PRD_(mint:PUR책자-내지),1,24,300,2,2,내지=별도설정·페이지24~300/+2·단면POPT1(A5)/양면POPT2(A4)·PRF_DGP_INNER·×1,N,INSERT,N,PRD_000290
+PRD_000071,PRD_(mint:트윈링책자-표지),1,1,1,,1,표지=별도설정·가격0(부모공식 PRF_BIND_TWINRING_SET=표지인쇄+코팅+용지+제본·앞뒤표지 출력매수×2),N,INSERT,N,PRD_000291
+PRD_000071,PRD_(mint:트윈링책자-내지),1,8,100,2,2,내지=별도설정·페이지8~100/+2·단면POPT1(A5)/양면POPT2(A4)·PRF_DGP_INNER·×1,N,INSERT,N,PRD_000292

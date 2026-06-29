@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>상품 옵션 위젯 — 기술 설계 (웹컴포넌트 + Shadow DOM 기준)</title>
+<style>
+  :root{
+    --bg:#f6f7f9; --card:#ffffff; --ink:#1f2733; --muted:#5b6675; --line:#e3e7ec;
+    --brand:#2b6cb0; --brand-soft:#eaf2fb;
+    --issue:#c0392b; --issue-soft:#fdecea;
+    --rec:#1e8e5a; --rec-soft:#e7f6ee;
+    --warn:#b7791f; --warn-soft:#fdf3e2;
+    --note:#6b46c1; --note-soft:#f1ecfb;
+    --code-bg:#0f172a; --code-ink:#e2e8f0;
+    --radius:14px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard","Malgun Gothic","Segoe UI",sans-serif;
+    line-height:1.7; font-size:16px;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 24px; display:grid; grid-template-columns:236px 1fr; gap:36px;}
+  nav.toc{position:sticky; top:0; align-self:start; height:100vh; overflow:auto; padding:28px 0; font-size:14px;}
+  nav.toc .brand{font-weight:800; font-size:15px; color:var(--brand); margin-bottom:6px; letter-spacing:-.3px}
+  nav.toc .sub{color:var(--muted); font-size:12px; margin-bottom:18px}
+  nav.toc a{display:block; color:var(--muted); text-decoration:none; padding:6px 10px; border-radius:8px; border-left:2px solid transparent;}
+  nav.toc a:hover{background:var(--brand-soft); color:var(--brand);}
+  nav.toc a.h2{padding-left:22px; font-size:13px;}
+  main{padding:40px 0 120px;}
+  header.hero{background:linear-gradient(135deg,#23394f,#2b6cb0); color:#fff; border-radius:var(--radius); padding:34px 36px; margin-bottom:28px; box-shadow:0 10px 30px rgba(20,40,70,.18)}
+  header.hero h1{margin:0 0 8px; font-size:26px; letter-spacing:-.6px}
+  header.hero p{margin:0; opacity:.92; font-size:15px}
+  header.hero .meta{margin-top:16px; font-size:12.5px; opacity:.8; border-top:1px solid rgba(255,255,255,.25); padding-top:12px}
+  .decided{background:#e7f6ee; border:1px solid #bfe6ce; border-left:5px solid var(--rec); border-radius:12px; padding:16px 20px; margin:0 0 26px}
+  .decided .lbl{font-weight:800; color:var(--rec); font-size:12px; letter-spacing:.5px; text-transform:uppercase}
+  .decided h3{margin:4px 0 6px; font-size:18px; color:#16623f}
+  h2{font-size:21px; margin:46px 0 14px; letter-spacing:-.4px; padding-bottom:8px; border-bottom:2px solid var(--line);}
+  h2 .tag{display:inline-block; font-size:12px; font-weight:700; color:#fff; background:var(--brand); padding:2px 9px; border-radius:20px; vertical-align:middle; margin-right:8px}
+  h2.star .tag{background:var(--rec)}
+  h3{font-size:17px; margin:26px 0 8px; letter-spacing:-.3px}
+  p{margin:10px 0}
+  .lead{font-size:16.5px}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:22px 24px; margin:16px 0; box-shadow:0 1px 2px rgba(0,0,0,.03)}
+  .box{border-radius:12px; padding:14px 16px; margin:12px 0; font-size:14.5px; border:1px solid;}
+  .box b{font-weight:800}
+  .box .lbl{font-weight:800; font-size:12px; letter-spacing:.4px; text-transform:uppercase; display:block; margin-bottom:4px}
+  .issue{background:var(--issue-soft); border-color:#f3c6c0; color:#7a2218} .issue .lbl{color:var(--issue)}
+  .rec{background:var(--rec-soft); border-color:#bfe6ce; color:#16623f} .rec .lbl{color:var(--rec)}
+  .warn{background:var(--warn-soft); border-color:#f0dcae; color:#7a5512} .warn .lbl{color:var(--warn)}
+  .note{background:var(--note-soft); border-color:#d8caf2; color:#4a3392} .note .lbl{color:var(--note)}
+  table{width:100%; border-collapse:collapse; margin:14px 0; font-size:14.5px; background:#fff; border-radius:10px; overflow:hidden; border:1px solid var(--line)}
+  th,td{text-align:left; padding:11px 14px; border-bottom:1px solid var(--line); vertical-align:top}
+  th{background:#f0f3f7; font-weight:700; font-size:13px; color:var(--muted)}
+  tr:last-child td{border-bottom:none}
+  .pick{color:var(--rec); font-weight:800}
+  .x{color:var(--issue); font-weight:800}
+  pre{background:var(--code-bg); color:var(--code-ink); padding:16px 18px; border-radius:12px; overflow:auto; font-size:13px; line-height:1.55; margin:12px 0;
+      font-family:"SF Mono",ui-monospace,"JetBrains Mono",Menlo,Consolas,monospace}
+  code.inl{background:#eef1f5; padding:1px 6px; border-radius:5px; font-size:13.5px; font-family:ui-monospace,Menlo,monospace; color:#324}
+  ul.tight{margin:8px 0; padding-left:20px} ul.tight li{margin:5px 0}
+  .smallnote{font-size:13px; color:var(--muted); margin-top:6px}
+  .pill{display:inline-block; font-size:11.5px; font-weight:700; padding:2px 9px; border-radius:20px; background:var(--brand-soft); color:var(--brand); margin-left:6px}
+  /* layered strategy stack */
+  .stack{margin:18px 0}
+  .tier{display:grid; grid-template-columns:54px 1fr; gap:16px; align-items:stretch; margin:10px 0}
+  .tier .lv{border-radius:12px; color:#fff; font-weight:800; display:flex; flex-direction:column; align-items:center; justify-content:center; font-size:12px; padding:10px 4px}
+  .tier .lv .big{font-size:20px; line-height:1}
+  .tier .c{background:#fff; border:1px solid var(--line); border-radius:12px; padding:14px 18px}
+  .tier .c .h{font-weight:800; font-size:15.5px; margin-bottom:3px}
+  .tier .c .why{color:var(--muted); font-size:13.5px}
+  .tier.t0 .lv{background:#64748b} .tier.t1 .lv{background:#2b6cb0}
+  .tier.t2 .lv{background:#1e8e5a} .tier.t3 .lv{background:#0891b2} .tier.t4 .lv{background:#b7791f}
+  /* room metaphor diagram */
+  .rooms{display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; margin:16px 0}
+  .room{background:#fff; border:1px solid var(--line); border-radius:12px; padding:16px; text-align:center}
+  .room .ic{font-size:30px} .room .nm{font-weight:800; margin:6px 0 4px}
+  .room .verdict{font-size:13px; margin-top:8px; padding:5px; border-radius:8px}
+  .room.bad .verdict{background:var(--issue-soft); color:#7a2218}
+  .room.good .verdict{background:var(--rec-soft); color:#16623f}
+  .room.mid .verdict{background:var(--warn-soft); color:#7a5512}
+  .road{counter-reset:step; margin:14px 0}
+  .road .step{display:grid; grid-template-columns:42px 1fr; gap:14px; margin:10px 0; align-items:start}
+  .road .num{counter-increment:step; width:38px; height:38px; border-radius:50%; background:var(--brand); color:#fff; font-weight:800; display:flex; align-items:center; justify-content:center}
+  .road .num::before{content:counter(step)}
+  .road .step .t{font-weight:800; margin-bottom:2px}
+  .road .step small{color:var(--muted)}
+  .check{list-style:none; padding:0; margin:14px 0}
+  .check li{background:#fff; border:1px solid var(--line); border-radius:10px; padding:12px 14px; margin:8px 0; display:flex; gap:12px; align-items:flex-start}
+  .check .box-i{flex:0 0 22px; height:22px; border:2px solid var(--brand); border-radius:6px; margin-top:2px}
+  .check .q{font-weight:700}
+  .done{opacity:.7} .done .box-i{background:var(--rec); border-color:var(--rec); position:relative}
+  .done .box-i::after{content:"✓"; color:#fff; position:absolute; left:4px; top:-2px; font-size:15px; font-weight:800}
+  @media(max-width:880px){ .wrap{grid-template-columns:1fr} nav.toc{display:none} .rooms{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav class="toc">
+    <div class="brand">상품 옵션 위젯</div>
+    <div class="sub">기술 설계 · 웹컴포넌트+Shadow DOM 기준</div>
+    <a href="#why">왜 이 방식인가</a>
+    <a href="#blend">★ 어떻게 녹아드는가</a>
+    <a href="#t0" class="h2">0. Shadow DOM = 보호막</a>
+    <a href="#t1" class="h2">1. 공짜 상속</a>
+    <a href="#t2" class="h2">2. 자동 감지</a>
+    <a href="#t3" class="h2">3. 토큰 후크</a>
+    <a href="#t4" class="h2">4. 빌더 오버라이드</a>
+    <a href="#layout" class="h2">+ 레이아웃 자연 흐름</a>
+    <a href="#embed">설치 방식(스니펫)</a>
+    <a href="#limits">정직한 한계</a>
+    <a href="#rest">나머지 기술 이슈</a>
+    <a href="#price" class="h2">가격·보안</a>
+    <a href="#file" class="h2">파일·Edicus</a>
+    <a href="#out" class="h2">출력 JSON</a>
+    <a href="#builder" class="h2">빌더 데이터모델</a>
+    <a href="#ops" class="h2">운영</a>
+    <a href="#decisions">결정 필요 목록</a>
+    <a href="#roadmap">구현 순서</a>
+  </nav>
+
+  <main>
+    <header class="hero">
+      <h1>상품 옵션 위젯 — 기술 설계</h1>
+      <p>여러 사이트에 꽂아도 <b>이질감 없이 녹아들고</b>, 한 사이트의 CSS가 다른 사이트에서 <b>깨뜨리지 않는</b><br>
+      임베드형 상품 구성기 — <b>웹컴포넌트 + Shadow DOM</b> 기준으로 정리</p>
+      <div class="meta">HuniProductPrice2 · 기존 가격 엔진/차원설정 재사용 · 2026-06-23 · D1(임베드 방식) 확정판</div>
+    </header>
+
+    <div class="decided">
+      <span class="lbl">확정된 결정 · D1</span>
+      <h3>임베드 = 웹컴포넌트(Custom Element) + Shadow DOM</h3>
+      요구사항이 <b>① 여러 사이트에서 사용 ② 이질감 없이 녹아듦 ③ (그러면서) 안 깨짐</b> 이 셋을 동시에 만족해야 하므로,
+      이 조합이 사실상 유일한 답입니다. 아래는 그 이유와 <b>"어떻게 녹아드는가"</b>를 중심으로 정리한 것입니다.
+    </div>
+
+    <!-- WHY -->
+    <section id="why">
+      <h2><span class="tag">왜</span>왜 이 방식이 답인가 — 세 방식 비교</h2>
+      <p class="lead">핵심 딜레마: <b>"녹아듦"과 "안 깨짐"은 보통 서로 상충</b>합니다. 남의 디자인을 다 받아들이면 자연스럽지만 사이트마다 깨지고,
+      다 차단하면 안 깨지지만 동떨어져 보입니다.</p>
+      <div class="rooms">
+        <div class="room bad">
+          <div class="ic">🧱</div><div class="nm">iframe</div>
+          <div>완전히 다른 방. 남의 CSS 차단.</div>
+          <div class="verdict">✗ 절대 안 깨지지만<br><b>녹아들 수 없음</b><br>(폰트·색 상속 불가, 높이 협상 필요)</div>
+        </div>
+        <div class="room bad">
+          <div class="ic">🌊</div><div class="nm">Light DOM<br>(그냥 직접 삽입)</div>
+          <div>남의 CSS가 다 흘러들어옴.</div>
+          <div class="verdict">✗ 제일 잘 녹아들지만<br><b>미지의 사이트마다 예측불가하게 깨짐</b><br>(reset·* 규칙·버튼 스타일 충돌)</div>
+        </div>
+        <div class="room good">
+          <div class="ic">🪟</div><div class="nm">Shadow DOM</div>
+          <div>방음·단열된 방 + 창문.</div>
+          <div class="verdict">✓ <b>기본은 차단(안전)</b><br><b>디자인 토큰만 골라 통과(자연스러움)</b><br>→ 둘 다 잡음</div>
+        </div>
+      </div>
+      <div class="box rec"><span class="lbl">한 줄 요약</span>
+        Shadow DOM은 <b>"방음·단열된 방"</b>입니다. 남의 집(사이트) 소음(CSS)이 안 들어오고 내 소리도 안 새나갑니다.
+        대신 <b>창문(CSS 변수·상속)</b>은 열 수 있어서, 바깥 햇빛(그 사이트의 글꼴·색)은 <b>골라서</b> 받아들입니다.
+        그래서 여러 사이트에서 안 깨지면서도 그 사이트처럼 보일 수 있습니다.</div>
+    </section>
+
+    <!-- BLEND (centerpiece) -->
+    <section id="blend">
+      <h2 class="star"><span class="tag">★핵심</span>어떻게 이질감 없이 녹아드는가 — 4단 전략</h2>
+      <p class="lead">"자동으로 어디서나 native하게 보이는 마법"은 없습니다. 대신 <b>위에서 아래로 4단계</b>를 쌓으면,
+      대부분의 사이트에서 <b>설정 없이도</b> 자연스럽고, 부족하면 관리자가 마지막에 손봅니다.</p>
+
+      <div class="stack">
+        <div class="tier t0" id="t0">
+          <div class="lv"><span class="big">0</span>토대</div>
+          <div class="c"><div class="h">Shadow DOM = 깨지지 않게 하는 보호막</div>
+            <div class="why">이게 깔려 있어야 1~4단이 의미가 있습니다. 보호막이 없으면(=Light DOM) 어떤 사이트는 멀쩡하고
+            어떤 사이트는 그 사이트의 <code class="inl">* { box-sizing }</code>·CSS 리셋·<code class="inl">button{}</code> 규칙 때문에 위젯이 깨집니다.
+            "여러 사이트에서 일관되게"가 불가능해지죠. Shadow DOM이 그 충돌을 원천 차단합니다.
+            (대신 위젯은 자기만의 작은 리셋 CSS를 들고 들어갑니다.)</div></div>
+        </div>
+        <div class="tier t1" id="t1">
+          <div class="lv"><span class="big">1</span>공짜</div>
+          <div class="c"><div class="h">글꼴·글자색·줄간격을 그냥 물려받기</div>
+            <div class="why"><code class="inl">:host { font: inherit; color: inherit; }</code> 한 줄.
+            텍스트가 <b>즉시 그 사이트의 글처럼</b> 보입니다. 비용 0, 효과 최대 — 사람 눈은 글꼴·글자색이 같으면 "같은 집안"으로 인식합니다.</div></div>
+        </div>
+        <div class="tier t2" id="t2">
+          <div class="lv"><span class="big">2</span>자동</div>
+          <div class="c"><div class="h">그 자리에 적용될 스타일을 "읽어서" 자동 채택 <span class="pill">웹컴포넌트의 결정적 강점</span></div>
+            <div class="why">웹컴포넌트는 <b>그 페이지 DOM 안에 실제로 박혀</b> 있습니다. 그래서 <code class="inl">getComputedStyle(요소)</code>로
+            "이 위치에 페이지가 적용했을 글꼴·글자크기·기본 텍스트색·링크색"을 <b>읽어낼 수 있습니다.</b>
+            이 값을 위젯 테마의 기본값으로 삼으면, 사이트가 아무 설정을 안 해도 <b>그 사이트 톤을 자동으로 입습니다.</b>
+            (강조색은 근처 버튼·링크 색을 샘플링) — <b>iframe은 분리돼 있어 이게 불가능</b>합니다. 이게 웹컴포넌트를 택하는 결정적 이유입니다.</div></div>
+        </div>
+        <div class="tier t3" id="t3">
+          <div class="lv"><span class="big">3</span>약속</div>
+          <div class="c"><div class="h">사이트가 디자인 토큰을 주면 그걸 우선</div>
+            <div class="why">잘 만든 사이트는 <code class="inl">--brand-primary</code> 같은 CSS 변수를 갖고 있습니다. 있으면 그걸 씁니다:
+            <code class="inl">color: var(--huni-primary, var(--brand-primary, 기본값))</code>. CSS 변수는 Shadow 경계를 <b>통과</b>하므로 가능합니다.</div></div>
+        </div>
+        <div class="tier t4" id="t4">
+          <div class="lv"><span class="big">4</span>수동</div>
+          <div class="c"><div class="h">빌더에서 관리자가 직접 지정/고정</div>
+            <div class="why">자동(1~3)으로 부족하거나, 특정 사이트에 딱 맞추고 싶으면 <b>위젯 빌더에서 색·폰트·모서리·버튼 스타일을 직접 지정</b>하거나
+            "페이지 따라가기"를 선택합니다. 사이트별 위젯이면 사이트별로 테마를 다르게 줄 수 있습니다.</div></div>
+        </div>
+      </div>
+
+      <div class="box rec"><span class="lbl">동작 순서(우선순위)</span>
+        <b>4(관리자 고정) ＞ 3(사이트 토큰) ＞ 2(자동 감지) ＞ 1(공짜 상속) ＞ 위젯 기본값.</b>
+        위에서 값이 있으면 그걸 쓰고, 없으면 아래로 내려가며 채웁니다. 대부분 1·2단에서 이미 "그 사이트 같다"가 됩니다.</div>
+
+      <h3>실제 코드 모양 (개념)</h3>
+      <pre>class HuniWidget extends HTMLElement {
+  connectedCallback() {
+    const root = this.attachShadow({ mode: 'open' });   // 0단계: 방음·단열된 방
+
+    // 2단계: 이 자리에 적용될 페이지 스타일을 읽어 자동 채택
+    const probe = getComputedStyle(this);
+    const autoFont  = probe.fontFamily;
+    const autoColor = probe.color;
+
+    root.innerHTML = `
+      <style>
+        :host { font: inherit; color: inherit; }        /* 1단계: 공짜 상속 */
+        .huni {
+          --fg:     var(--huni-fg, ${autoColor});                 /* 2 → 채움 */
+          --font:   var(--huni-font, ${JSON.stringify(autoFont)});
+          --accent: var(--huni-primary, var(--brand-primary, #2b6cb0)); /* 3 → 사이트 토큰 */
+          font-family: var(--font); color: var(--fg);
+        }
+        .huni .btn { background: var(--accent); border-radius: var(--huni-radius, 8px); }
+      </style>
+      <div class="huni"> … 옵션·가격 UI … </div>`;
+    // 4단계(빌더 지정값)는 스펙의 theme_json을 :host 인라인 변수로 주입해 최우선 적용
+  }
+}
+customElements.define('huni-widget', HuniWidget);</pre>
+      <p class="smallnote">정리하면: <b>0이 안전을 보장</b>하고, <b>1·2가 대부분의 "녹아듦"을 공짜로 해결</b>하고, <b>3·4가 마무리</b>를 합니다.</p>
+    </section>
+
+    <!-- LAYOUT -->
+    <section id="layout">
+      <h3>+ 레이아웃도 자연스럽게 흐릅니다 (이미지 오른쪽 배치)</h3>
+      <div class="card">
+        웹컴포넌트는 그냥 <b>일반 블록 요소</b>입니다. 그래서 상품 메인이미지 오른쪽 컨테이너에 넣으면
+        <b>그 칸 너비에 맞춰 자연 배치</b>되고, 내용이 길어지면 페이지가 알아서 늘어납니다.
+        <div class="box warn"><span class="lbl">iframe과의 차이</span>iframe이면 높이를 미리 알 수 없어 <b>스크롤바가 생기거나 잘리고</b>,
+          postMessage로 높이를 계속 주고받아 맞춰야 합니다. 웹컴포넌트는 이 고생이 없습니다 — "녹아듦"이 디자인뿐 아니라 <b>레이아웃</b>에서도 성립.</div>
+      </div>
+    </section>
+
+    <!-- EMBED -->
+    <section id="embed">
+      <h2><span class="tag">설치</span>여러 사이트에 까는 법 — 스니펫 한 줄</h2>
+      <div class="card">
+        <p>각 사이트는 아래 두 줄만 붙이면 됩니다. 어떤 위치에든(상품 이미지 오른쪽 칸) 둘 수 있습니다.</p>
+        <pre>&lt;script src="https://cdn.huni.../widget.js" async&gt;&lt;/script&gt;
+&lt;huni-widget data-widget-id="WGT-123"&gt;&lt;/huni-widget&gt;</pre>
+        <ul class="tight">
+          <li><b>프레임워크 무관</b>: <code class="inl">customElements.define</code>는 브라우저 표준이라 React·Vue·순수HTML·카페24·쇼피파이 어디서든 동일하게 동작.</li>
+          <li><b>한 페이지에 여러 개</b>도 가능(각 인스턴스가 자기 Shadow 방을 가짐).</li>
+          <li><b>버전·자동업데이트</b>: 스크립트 URL을 한 곳에서 관리 → 전 사이트 일괄 갱신.</li>
+          <li><b>CORS</b>: 위젯 JS가 우리 API를 부르므로 <b>허용 도메인 화이트리스트</b> 필요(아래 운영 이슈).</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- LIMITS -->
+    <section id="limits">
+      <h2><span class="tag">정직</span>이 방식의 한계 (알고 가야 할 것)</h2>
+      <div class="box note"><span class="lbl">유일한 방법인가?</span>
+        문자 그대로 유일하진 않습니다(Light DOM도 기술적으로 가능). 하지만 <b>"여러 미지의 사이트 + 자연스러움 + 안 깨짐"</b>을
+        <b>동시에</b> 만족하는 건 이 조합뿐이라, 사실상 유일한 현실적 선택입니다.</div>
+      <ul class="tight">
+        <li><b>자기 리셋 CSS 지참</b>: 사이트의 전역 리셋이 안 들어오므로, 위젯이 자기만의 최소 리셋·기본 스타일을 들고 들어가야 함(=오히려 일관성에 유리).</li>
+        <li><b>일부 서드파티 위젯</b>(전역 CSS가 필요한 라이브러리)은 Shadow 안에서 까다로울 수 있음 → 대표 사례인 <b>Edicus 에디터는 어차피 자체 iframe</b>으로 띄우므로 영향 없음.</li>
+        <li><b>브라우저 지원</b>: 모든 최신 브라우저가 Shadow DOM·Custom Element 지원(IE만 불가 — 무시 가능).</li>
+        <li><b>완전 자동 100%는 환상</b>: 1~3단으로 대부분 해결되지만, 디자인이 까다로운 사이트는 4단(빌더 테마 지정)으로 마무리 필요. 그래서 빌더에 테마 입력을 꼭 둡니다.</li>
+      </ul>
+    </section>
+
+    <!-- REST -->
+    <section id="rest">
+      <h2><span class="tag">나머지</span>나머지 기술 이슈 (이 기준 위에서)</h2>
+
+      <h3 id="price">가격 계산 + 【보안】 견적 위변조 방지</h3>
+      <div class="card">
+        <p>가격 엔진(<code class="inl">evaluate_price()</code>)은 수십 개 테이블을 읽는 서버 파이썬 → JS로 못 옮김. 선택이 바뀔 때마다 <b>공개 가격 API로 서버 왕복</b>.</p>
+        <div class="box issue"><span class="lbl">디바운스</span>빠르게 클릭 시 매번 쏘지 말고 <b>~250ms 모아 1회</b>. 로딩 표시 필요.</div>
+        <div class="box issue"><span class="lbl">가격 위변조 (중요)</span>화면 숫자를 페이지가 받아 장바구니에 넣으면 사용자가 <b>가격 조작</b> 가능.</div>
+        <div class="box rec"><span class="lbl">추천</span>가격 API가 <b>서명된 견적 토큰</b>(<code class="inl">{상품,선택,가격,만료}</code>를 서버 비밀키로 HMAC)을 함께 반환 →
+          실제 주문 시스템이 그 토큰을 <b>재검증</b>. 화면 가격이 아니라 토큰이 진실.</div>
+      </div>
+
+      <h3 id="file">파일 업로드 + Edicus 에디터 — "artwork 참조"로 추상화</h3>
+      <div class="card">
+        <p>상품에 <code class="inl">file_upload_yn</code>/<code class="inl">editor_yn</code> 플래그만 있고 구현은 없음(models.py:515-516).</p>
+        <ul class="tight">
+          <li><b>업로드</b>: Railway는 파일 휘발성 → <b>오브젝트 스토리지(S3/R2)</b> + <b>presigned URL</b>로 브라우저→S3 직업로드(큰 PDF가 서버 우회). PDF·용량·규격 검증 이슈.</li>
+          <li><b>Edicus</b>: 자체 iframe 에디터로 띄움(Shadow 영향 없음). 별도 미니 프로젝트.</li>
+        </ul>
+        <div class="box rec"><span class="lbl">핵심 추상화</span>업로드든 에디터든 결국 <b>"artwork 참조 1개"</b>(파일키/디자인ID)를 만들어 출력 JSON에 넣는 것.
+          교체 가능한 모드로 설계 → <b>1차는 업로드만, Edicus는 나중에</b>.</div>
+      </div>
+
+      <h3 id="out">출력 JSON 계약 (페이지로 전달)</h3>
+      <div class="card">
+        <pre>// 웹컴포넌트라 전달이 깔끔: el.addEventListener('huni:submit', e =&gt; e.detail)
+{
+  "widgetId":"WGT-123", "prd_cd":"BCARD-001",
+  "selections":{ "siz_cd":{"code":"SIZ-001","label":"90x50"},
+                 "mat_cd":{"code":"MAT-014","label":"스노우 250g"} },
+  "qty":1000,
+  "price":{ "final":35000, "breakdown":[ … ] },
+  "quoteToken":"eyJhbGciOi…",            // 위변조 방지 서명
+  "artwork":{ "mode":"upload", "ref":"s3://huni-art/abc.pdf" },
+  "addons":[ {"tmpl_cd":"TMPL-9","label":"코팅"} ]
+}</pre>
+        <p class="smallnote">코드뿐 아니라 <b>사람이 읽을 라벨</b>도 함께 담아 장바구니/주문서에 바로 표시.</p>
+      </div>
+
+      <h3 id="builder">빌더 데이터 모델 — use_dims에서 시드, 프레젠테이션은 따로</h3>
+      <div class="card">
+        <div class="box warn"><span class="lbl">분리 원칙</span><code class="inl">use_dims</code>=가격에 영향 주는 차원(엔진), 빌더 설정=보여주는 방법(프레젠테이션). 섞지 않음.</div>
+        <pre>위젯 (t_wgt_widget)
+  wgt_id, prd_cd, wgt_nm, status(draft/published),
+  theme_json,            // 4단계: 색·폰트·모서리·버튼스타일 / "페이지 따라가기" 플래그
+  file_upload_yn, editor_yn,
+  layout_json: [
+    {"dim":"siz_cd","seq":1,"component":"button","visible":true,"default":null,"label":"사이즈"},
+    {"dim":"mat_cd","seq":2,"component":"dropdown","visible":true,"label":"종이"},
+    {"dim":"proc_cd","seq":3,"component":"checkbox","visible":true,"multi":true,"label":"후가공"},
+    {"dim":"coat_side_cnt","seq":4,"component":"hidden","visible":false,"default":2}   // 숨김+고정
+  ]</pre>
+        <div class="box rec"><span class="lbl">흐름</span>빌더 열면 그 상품 <code class="inl">use_dims</code>로 <b>초기 화면 자동 생성</b> → 관리자가 숨김/기본값/잠금/컴포넌트/순서/라벨 <b>덮어쓰기</b>.
+          가격 시뮬레이터 UI를 그대로 띄워 거기서 편집 시작.</div>
+        <p class="smallnote">컴포넌트: 단일=드롭다운/라디오/사각버튼/색상스와치 · 멀티=체크박스/토글버튼. "안 보이고 디폴트 고정"·"비활성(무조건 1개)"은 visible/default/locked 조합.</p>
+      </div>
+
+      <h3 id="ops">운영 이슈</h3>
+      <div class="card">
+        <ul class="tight">
+          <li><b>드래프트/퍼블리시 + 버전</b>: 저장 즉시 라이브 X → 초안/발행 분리, 발행 시 스펙 캐시 무효화.</li>
+          <li><b>캐시/성능</b>: 스펙 JSON은 CDN 캐시(발행 때만 무효화). 위젯 JS는 가볍게(프레임워크 의존 X).</li>
+          <li><b>CORS 화이트리스트</b>: 위젯이 실릴 사이트 도메인만 API 허용 + 가격 API 레이트리밋.</li>
+          <li><b>상품당 위젯 1 vs N</b>: 같은 상품을 다른 사이트/페이지에 다른 구성·테마로? → ID 체계 결정.</li>
+          <li><b>접근성/키보드</b>: 기존 드롭다운 키보드 수준을 버튼·체크박스에도 유지.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- DECISIONS -->
+    <section id="decisions">
+      <h2><span class="tag">결정</span>결정 필요 목록</h2>
+      <ul class="check">
+        <li class="done"><div class="box-i"></div><div><span class="q">D1. 임베드 방식</span> <span class="pill">확정</span><br>
+          <b>웹컴포넌트 + Shadow DOM</b> — 여러 사이트·이질감 없음·안 깨짐을 동시에 만족.</div></li>
+        <li><div class="box-i"></div><div><span class="q">D6. 호스트 사이트 플랫폼</span> <span class="pill">다음 핵심</span><br>
+          위젯이 실릴 사이트들은 자체개발? 카페24/쇼피파이/워드프레스 같은 솔루션? 스니펫 삽입 제약이 달라짐.</div></li>
+        <li><div class="box-i"></div><div><span class="q">D2. 상품당 위젯 개수</span><br>
+          상품 1:위젯 1(단순) vs 1:N(사이트/페이지별 다른 구성·테마).</div></li>
+        <li><div class="box-i"></div><div><span class="q">D3. 파일 저장소</span><br>
+          S3 vs Cloudflare R2 vs 기타 — 이미 쓰는 계정 있는지.</div></li>
+        <li><div class="box-i"></div><div><span class="q">D4. Edicus 연동 시점</span><br>
+          1차 포함 vs "PDF 업로드"만 먼저(추상화로 나중 — 추천).</div></li>
+        <li><div class="box-i"></div><div><span class="q">D5. 책임 경계</span><br>
+          위젯은 결과 JSON까지. 장바구니/주문/결제는 호스트 페이지 책임 — 맞는지 확인.</div></li>
+      </ul>
+    </section>
+
+    <!-- ROADMAP -->
+    <section id="roadmap">
+      <h2><span class="tag">순서</span>추천 구현 순서</h2>
+      <div class="road">
+        <div class="step"><div class="num"></div><div><div class="t">공개 API 레이어 + 가격 엔진 노출</div>
+          <small>admin 인증 벗긴 <code class="inl">/w/&lt;id&gt;/spec</code>·<code class="inl">/w/&lt;id&gt;/price</code> + CORS 화이트리스트 + 견적 서명.</small></div></div>
+        <div class="step"><div class="num"></div><div><div class="t">위젯 런타임(웹컴포넌트) 골격 + 4단 테마 엔진</div>
+          <small>Shadow DOM·공짜상속·자동감지·토큰후크·빌더테마 주입 — "녹아듦"의 심장. 더미 스펙으로 먼저 검증.</small></div></div>
+        <div class="step"><div class="num"></div><div><div class="t">위젯 빌더(관리자)</div>
+          <small>use_dims 시드 → 컴포넌트/순서/기본값/숨김 + theme_json 편집 → 초안/발행.</small></div></div>
+        <div class="step"><div class="num"></div><div><div class="t">가격 왕복 + 제약 비활성 + 결과 JSON 이벤트</div>
+          <small>런타임을 실제 API와 연결.</small></div></div>
+        <div class="step"><div class="num"></div><div><div class="t">파일 업로드(presigned S3) → 이후 Edicus 모드</div>
+          <small>artwork "upload" 먼저, "editor"는 추상화로 추가.</small></div></div>
+      </div>
+      <div class="box note"><span class="lbl">다음 단계</span>D1은 확정됐습니다. 자리 돌아오시면 <b>D6(어떤 사이트들에 깔리나)</b>만 알려주시면
+        스니펫·CORS·테마 자동감지 범위가 바로 구체화됩니다. 나머지 D2~D5는 그 다음에 빠르게 정하면 됩니다.</div>
+    </section>
+
+  </main>
+</div>
+</body>
+</html>

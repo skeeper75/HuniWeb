@@ -1,0 +1,77 @@
+{
+  "generated_at": "2026-03-31T12:00:00+09:00",
+  "gaps": [
+    {
+      "id": "GAP-001",
+      "title": "Reactive Option Cascade Engine",
+      "priority": "high",
+      "description": "클라이언트에서 옵션 간 의존 관계를 실시간으로 처리하는 캐스케이드 엔진. 용지→규격→도수→수량→후가공 체인과 pdt_disable_pcs_info 기반 비활성화 규칙 포함.",
+      "redprinting": "Vue 3 reactive + Pinia 5개 스토어. fetchProductInfo로 16개 데이터셋 로드 후 useOrderStore에서 캐스케이드 처리. item_gbn별 3종 분기(vDigital_item, book2025_item). PRBKORD 기준 30+ 비활성화 규칙.",
+      "wowpress": "없음. jQuery DOM 직접 조작. 서버 렌더링 form POST 방식으로 옵션 간 의존 관계 클라이언트 처리 로직 미발견.",
+      "huni_recommendation": "React/Vue 기반 상태 머신으로 옵션 캐스케이드 구현. 제품 유형별 규칙 엔진을 JSON 스키마로 선언하여 하드코딩 최소화. WowPress 대비 UX 혁신 포인트."
+    },
+    {
+      "id": "GAP-002",
+      "title": "Real-time Pricing API with Cost Decomposition",
+      "priority": "high",
+      "description": "옵션 변경 시 즉각적으로 공정별 원가를 분해하여 반환하는 가격 계산 API. 3종 가격 엔진(tiered_price, vTmpl_price, book2025_price) 통합.",
+      "redprinting": "POST /ko/product_price/get_ajax_price_vTmpl — ORD_INFO/PCS_INFO/price_gbn/mb_cust_cod 입력. 공정별 [PCS_CD, PRICE, PRICE_VAT, PRICE_MALL] 배열 반환. 고객 등급별 차등 가격. 배송비(DLVR_AMT 3500) 포함.",
+      "wowpress": "가격 API 미발견. 제품 목록에서 priceTexts=[] (빈 배열). 가격은 서버 사이드에서만 처리되는 것으로 추정.",
+      "huni_recommendation": "통합 가격 API 설계: 단일 엔드포인트에서 price_gbn 파라미터로 엔진 분기. 원가 투명성(공정별 분해)을 고객 신뢰 요소로 활용. GraphQL 또는 REST 둘 다 가능하나, RedPrinting 패턴(REST POST + JSON body)이 검증됨."
+    },
+    {
+      "id": "GAP-003",
+      "title": "Online Design Editor Integration (Edicus/KOI Pattern)",
+      "priority": "high",
+      "description": "위젯 내에서 온라인 디자인 에디터를 연동하여 고객이 직접 인쇄물을 편집할 수 있는 기능. 인증, 코드 매핑, 템플릿 로드, iframe 통신 포함.",
+      "redprinting": "Edicus 에디터 4단계 연동: POST /token → Firebase JWT → getProductInfo(RP→Edicus 코드 매핑) → /v1/templates. KOI passive mode(division: red_widget, useFullyFunctionalUI: false). RedEditorSDK 45개 메서드, 23개 DDP 명령, EditorBridge iframe 통신(198줄).",
+      "wowpress": "에디터 없음. 6개 페이지 프로브 전체에서 hasEditor=false. 파일 업로드만 지원하는 것으로 추정.",
+      "huni_recommendation": "Edicus 직접 연동 또는 Polotno/Canva API 등 대안 에디터 평가. KOI passive mode 패턴(호스트가 UI 제어권 유지)을 채택하여 위젯-에디터 결합도 최소화. WowPress 대비 핵심 차별화 기능."
+    },
+    {
+      "id": "GAP-004",
+      "title": "Shadow DOM Widget Isolation",
+      "priority": "medium",
+      "description": "위젯을 Shadow DOM으로 격리하여 호스트 페이지의 CSS/JS 충돌 없이 독립 배포 가능한 구조.",
+      "redprinting": "#redWidgetSdk Shadow DOM 컨테이너. widget.js 450KB 단일 번들(Vue 3 + Pinia + TanStack Query + DOMPurify 내장). 호스트 페이지와 완전 격리.",
+      "wowpress": "Shadow DOM 미사용. 호스트 DOM에 직접 렌더링. jQuery 플러그인(bxslider, lightslider 등)이 전역 네임스페이스 사용.",
+      "huni_recommendation": "Web Components + Shadow DOM 패턴 채택. 위젯을 독립 배포 단위로 설계하여 Shopby/자체몰/파트너사이트 등 다양한 호스트에 임베드 가능하게. Custom Elements v1 표준 준수."
+    },
+    {
+      "id": "GAP-005",
+      "title": "Client-side State Management Architecture",
+      "priority": "medium",
+      "description": "제품 옵션, 주문 데이터, 에디터 상태, 가격 계산 결과를 체계적으로 관리하는 클라이언트 상태 관리 아키텍처.",
+      "redprinting": "Pinia 2.x 5개 스토어: useConfigStore(locale), useProductStore(baseInfo 16개 셋), useOrderStore(size/dosu/material/pcs/qty/priceCalc), useExteriorStore(upload/editor), useAccOrderStore(부자재). TanStack Query로 서버 상태 캐싱.",
+      "wowpress": "상태 관리 프레임워크 없음. jQuery 이벤트 핸들러와 DOM 직접 조작. 데이터 일관성 보장 메커니즘 미발견.",
+      "huni_recommendation": "Zustand 또는 Pinia 기반 스토어 설계. RedPrinting의 5-store 패턴을 참고하되 config/product/order/editor/ui로 도메인 분리. TanStack Query(또는 SWR)로 서버 상태 분리."
+    },
+    {
+      "id": "GAP-006",
+      "title": "Product Type Branching System",
+      "priority": "medium",
+      "description": "제품 유형(일반 인쇄물, 책자, 부자재/굿즈)별로 UI 컴포넌트와 가격 엔진을 분기하는 시스템.",
+      "redprinting": "item_gbn 기반 3종 분기: vDigital_item(일반), book2025_item(책자). 38개 Vue 컴포넌트(3 메인: Apparel/Book/Acc + 10 서브 + 25 후가공). price_gbn으로 가격 엔진도 연동 분기.",
+      "wowpress": "20+ 제품 카테고리(스티커/명함/책자/전단 등) 존재하나, 제품 유형별 UI 분기 로직 미발견. 단일 폼 구조로 추정.",
+      "huni_recommendation": "제품 유형 레지스트리 패턴 설계. JSON 스키마로 유형별 필드/컴포넌트/가격엔진을 선언하여 새 제품 유형 추가 시 코드 변경 최소화. RedPrinting의 하드코딩된 분기를 개선."
+    },
+    {
+      "id": "GAP-007",
+      "title": "Multi-language and Theming Support",
+      "priority": "low",
+      "description": "다국어 번역 사전 및 테마 시스템을 통한 화이트라벨 위젯 배포.",
+      "redprinting": "ko/en 280개 번역 사전 내장. 단일 테마.",
+      "wowpress": "한국어 단일. 다국어/테마 미지원.",
+      "huni_recommendation": "i18n 프레임워크(react-intl 또는 vue-i18n) 내장. Printly DS 토큰 시스템 연동으로 Aurora/Huni/Default 3테마 자동 전환. 글로벌 확장 시 경쟁 우위."
+    },
+    {
+      "id": "GAP-008",
+      "title": "Price Transparency UX",
+      "priority": "low",
+      "description": "공정별 원가 분해를 고객에게 투명하게 보여주는 UX 패턴. 인쇄비/후가공비/배송비 각각 표시.",
+      "redprinting": "PCS_ETC_PRICE/PCS_PRI_PRICE 분리. 공급가/부가세/청구금액 3단. result_sum에 book_info(DLVR_AMT 배송비) 포함. UI에서 공정별 가격 노출.",
+      "wowpress": "가격 투명성 관련 UI 요소 미발견. 총액 중심 표시로 추정.",
+      "huni_recommendation": "가격 분해 위젯 설계: 인쇄비/후가공비/배송비/부가세를 시각적으로 분리 표시. 인쇄 업계 특성상 고객이 원가 구조를 이해하면 신뢰도와 전환율 상승. RedPrinting 패턴을 더 직관적인 UI로 개선."
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+-- ============================================================================
+-- 068~071 셋트 구성 멱등 적재 청사진 (t_prd_product_sets)
+-- 생성: hsp-set-designer · 2026-06-29 · DB 미적재(설계·멱등 SQL 청사진)
+-- BEGIN/COMMIT 미내장 — load-executor가 트랜잭션 래핑·인간 승인 후 실행.
+-- ★실 적재 BLOCKED: 구성원 표지/내지 반제품이 라이브 0행(미존재).
+--   아래 PRD_(mint:...) placeholder는 dbmap mint 완료 후 실 prd_cd로 치환해야 함.
+--   부품 mint 전 실행 금지(FK 무결성 위반·존재하지 않는 sub_prd_cd).
+-- 면지 없음(사용자 확정·소프트커버) — 각 셋트 표지1+내지1 = 2행.
+-- 멱등: 복합PK (prd_cd, sub_prd_cd) ON CONFLICT DO UPDATE.
+-- ============================================================================
+
+-- [선결 가드] 부품 mint 검증 — 8 반제품이 실재해야 적재 가능.
+-- DO $$ BEGIN
+--   IF (SELECT count(*) FROM t_prd_products
+--        WHERE prd_cd IN ('PRD_000285','PRD_000286','PRD_000287','PRD_000288',
+--                         'PRD_000289','PRD_000290','PRD_000291','PRD_000292')
+--          AND prd_typ_cd='PRD_TYPE.02' AND del_yn='N') <> 8
+--   THEN RAISE EXCEPTION '068~071 구성원 반제품 8개 mint 미완 — 적재 BLOCKED'; END IF;
+-- END $$;
+
+-- ---- PRD_000068 중철책자 (표지+내지·면지없음) ---------------------------------
+-- INSERT INTO t_prd_product_sets
+--   (prd_cd, sub_prd_cd, sub_prd_qty, min_cnt, max_cnt, cnt_incr, disp_seq, note, del_yn, reg_dt)
+-- VALUES
+--   ('PRD_000068', '<<MINT:중철책자-표지>>', 1, 1,  1,  NULL, 1, '표지=별도설정·1권고정·가격0(부모공식)',          'N', now()),
+--   ('PRD_000068', '<<MINT:중철책자-내지>>', 1, 4,  28, 4,    2, '내지=별도설정·페이지4~28/+4·양면·PRF_DGP_INNER', 'N', now())
+-- ON CONFLICT (prd_cd, sub_prd_cd) DO UPDATE
+--   SET sub_prd_qty=EXCLUDED.sub_prd_qty, min_cnt=EXCLUDED.min_cnt, max_cnt=EXCLUDED.max_cnt,
+--       cnt_incr=EXCLUDED.cnt_incr, disp_seq=EXCLUDED.disp_seq, note=EXCLUDED.note,
+--       del_yn='N', upd_dt=now();
+
+-- ---- PRD_000069 무선책자 ------------------------------------------------------
+-- INSERT INTO t_prd_product_sets
+--   (prd_cd, sub_prd_cd, sub_prd_qty, min_cnt, max_cnt, cnt_incr, disp_seq, note, del_yn, reg_dt)
+-- VALUES
+--   ('PRD_000069', '<<MINT:무선책자-표지>>', 1, 1,   1,   NULL, 1, '표지=별도설정·가격0(부모공식+박/형압)',           'N', now()),
+--   ('PRD_000069', '<<MINT:무선책자-내지>>', 1, 24,  300, 2,    2, '내지=별도설정·페이지24~300/+2·양면·PRF_DGP_INNER','N', now())
+-- ON CONFLICT (prd_cd, sub_prd_cd) DO UPDATE
+--   SET sub_prd_qty=EXCLUDED.sub_prd_qty, min_cnt=EXCLUDED.min_cnt, max_cnt=EXCLUDED.max_cnt,
+--       cnt_incr=EXCLUDED.cnt_incr, disp_seq=EXCLUDED.disp_seq, note=EXCLUDED.note,
+--       del_yn='N', upd_dt=now();
+
+-- ---- PRD_000070 PUR책자 (069 동형·내지 A5=단면) ------------------------------
+-- INSERT INTO t_prd_product_sets
+--   (prd_cd, sub_prd_cd, sub_prd_qty, min_cnt, max_cnt, cnt_incr, disp_seq, note, del_yn, reg_dt)
+-- VALUES
+--   ('PRD_000070', '<<MINT:PUR책자-표지>>', 1, 1,   1,   NULL, 1, '표지=별도설정·가격0(부모공식+박/형압)',                       'N', now()),
+--   ('PRD_000070', '<<MINT:PUR책자-내지>>', 1, 24,  300, 2,    2, '내지=별도설정·페이지24~300/+2·단면(A5)/양면(A4)·PRF_DGP_INNER','N', now())
+-- ON CONFLICT (prd_cd, sub_prd_cd) DO UPDATE
+--   SET sub_prd_qty=EXCLUDED.sub_prd_qty, min_cnt=EXCLUDED.min_cnt, max_cnt=EXCLUDED.max_cnt,
+--       cnt_incr=EXCLUDED.cnt_incr, disp_seq=EXCLUDED.disp_seq, note=EXCLUDED.note,
+--       del_yn='N', upd_dt=now();
+
+-- ---- PRD_000071 트윈링책자 (표지×2는 부모공식·내지 8~100/2) -------------------
+-- INSERT INTO t_prd_product_sets
+--   (prd_cd, sub_prd_cd, sub_prd_qty, min_cnt, max_cnt, cnt_incr, disp_seq, note, del_yn, reg_dt)
+-- VALUES
+--   ('PRD_000071', '<<MINT:트윈링책자-표지>>', 1, 1,  1,   NULL, 1, '표지=별도설정·가격0(부모공식·앞뒤표지×2)',                    'N', now()),
+--   ('PRD_000071', '<<MINT:트윈링책자-내지>>', 1, 8,  100, 2,    2, '내지=별도설정·페이지8~100/+2·단면(A5)/양면(A4)·PRF_DGP_INNER','N', now())
+-- ON CONFLICT (prd_cd, sub_prd_cd) DO UPDATE
+--   SET sub_prd_qty=EXCLUDED.sub_prd_qty, min_cnt=EXCLUDED.min_cnt, max_cnt=EXCLUDED.max_cnt,
+--       cnt_incr=EXCLUDED.cnt_incr, disp_seq=EXCLUDED.disp_seq, note=EXCLUDED.note,
+--       del_yn='N', upd_dt=now();
+
+-- ============================================================================
+-- 위 INSERT는 전부 주석 처리됨 — placeholder(<<MINT:...>>)가 실 prd_cd로
+-- 치환되고 부품 mint(dbmap)·선결 가드 통과 후에만 해제하여 실행한다.
+-- ----------------------------------------------------------------------------
+-- 가격 활성화(셋트행과 별도 §18/dbmap 트랙·인간 승인·blocked-board.csv) — rev.2:
+--   부모공식 PRF_BIND_*_SET = 4 comp:
+--     표지인쇄 COMP_PRINT_DIGITAL_S1 (print_opt_cd 단/양면 selection)
+--     표지코팅 COMP_COAT_MATTE/GLOSSY (coat_side_cnt 1/2)
+--     표지용지 COMP_PAPER (표지종이 국4절 절가·Q-A 추가)
+--     제본    COMP_BIND_<METHOD> (책자별 자기 comp만)
+--     ※071(트윈링)만 표지인쇄·코팅·용지 출력매수 ×2(앞뒤 낱장)
+--   내지공식 PRF_DGP_INNER (S1 인쇄비 + COMP_PAPER 내지용지·page파생·×1)
+--   ★단/양면 = print_opt_cd selection (COMP_PRINT_DIGITAL_S2 부활 불요·rev.2 철회)
+--   ★선결: DBLPANSU 코드교정(price_views.py:1707·C트랙) 전 내지 바인딩 금지
+-- ============================================================================

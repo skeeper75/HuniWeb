@@ -10,7 +10,8 @@ description: >-
   (integrity-gate). 생성≠검증·codex 주장=가설·라이브 읽기전용 SELECT만·DB 미적재(실 교정은 인간 승인 후 dbmap
   위임). 트리거: '가격테이블 무결성', '적재 무결성 진단', '권위 적재 정밀 진단', '이 빠진 적재', '미적재 셀 진단',
   '차원 누락 검사', '권위 라이브 적재 대조', '가격격자 빈칸', 'sparse grid 진단', '무결성 하네스 실행/재실행/
-  업데이트/보완', '특정 시트만 무결성 진단', '무결성 진단 다시'. 가격공식 설계 자체는 §18, 전 상품 12축 종단 정합은
+  업데이트/보완', '특정 시트만 무결성 진단', '무결성 진단 다시', '가격테이블 배치 빌드', '매트릭스 결정론 diff',
+  '권위 스냅샷 비교', '토큰 절약 가격 분석', '시트 적재본 자동생성'. 가격공식 설계 자체는 §18, 전 상품 12축 종단 정합은
   §21, 표시명 중복은 §17, 라이브 정합 교정 실행은 §7 dbmap. 단순 질문은 직접 응답.
 ---
 
@@ -19,7 +20,9 @@ description: >-
 ## 목적
 권위 엑셀의 가격 데이터·차원이 라이브에 **이 빠짐 없이·정확히** 적재됐는지 시트별 정밀 진단 → 결함 보드 + 교정 명세. 이 진단의 GO가 가격공식·구성요소 설계의 신뢰 기반이다(불완전 적재 위에 설계하면 정확값 불가).
 
-**실행 모드:** 하이브리드 — 추출(서브) → 검사 팬아웃(서브/시트별 병렬) → codex(서브) → 게이트(서브). 모든 Agent 호출 `model:"opus"`.
+**실행 모드:** 하이브리드 — 추출(서브) → ★**결정론 배치 diff**(matrix-batch-builder·권위CSV↔스냅샷CSV·토큰0) + 검사 보강(서브) → codex(서브) → 게이트(서브). 모든 Agent 호출 `model:"opus"`.
+
+**★[HARD·토큰 경제·사용자 directive] AI 셀 분석 금지.** 권위도 CSV(24_master-extract)·라이브도 CSV(live-snapshot 스냅샷)이므로 무결성 대조는 **결정론 스크립트 diff**가 정답이다(AI가 19시트×수천 셀을 자연어로 읽으면 토큰 폭발). 에이전트는 시트 1개의 파서+diff 규칙을 코드화(토큰 1회)하고, 스크립트가 전 셀·전 시트를 처리(토큰 0)한다. 상품마스터 배치 적재(`dbm-batch-load`)와 동형. → 라이브 실측 환경 = `_workspace/_foundation/live-snapshot/`(snapshot.sh·db-check.sh).
 
 ## Phase 0: 컨텍스트 확인
 - `_workspace/huni-price-table-integrity/` 존재 + 부분 수정 요청 → 해당 시트 에이전트만 재호출.
@@ -37,8 +40,9 @@ description: >-
 - **L3 modifier**(판걸이수=판수·굿즈파우치=구간할인율) = 곱/환산. 가격 아님(별도 검사).
 → 시트 분류가 틀리면 무결성 판정이 틀린다(L2를 L1처럼 분해하면 이중합산·L1을 L2로 보면 합산 누락).
 
-## Phase 2: 라이브 적재 대조 (생성·시트 팬아웃)
-`hpti-load-inspector` — 정답 격자 ↔ 라이브 셀/차원 대조 → 3종 결함 보드(미적재·차원누락·불일치)+돈영향+재현SQL. 시트별 병렬. 라이브 읽기전용. → `02_load/<sheet>-defects.csv`.
+## Phase 2: 라이브 적재 대조 (결정론 배치 1차 + AI 보강)
+**★결정론 배치 우선(토큰 0).** `hpti-matrix-batch-builder`(스킬 `hpti-matrix-batch-build`) — 권위 격자 CSV ↔ 라이브 스냅샷 CSV(`live-snapshot/latest/`)를 grid-diff 스크립트로 비교해 3종 결함(미적재·차원누락·불일치)+prc_typ 오타이핑+transpose를 **셀 단위 자동 검출**하고 결함보드·교정 적재본(권위 verbatim UPSERT+dryrun)을 산출. 시트 1개 파일럿→어댑터로 전 시트 전파. → `_batch/<sheet>-defect-board.csv`·`-load-dryrun.sql`·`scripts/`.
+**AI는 보강만.** `hpti-load-inspector` — 스크립트가 못 잡는 의미·예외(시트 구조 해석·차원 의미 확정·경계 케이스)만 판단(시트 팬아웃·라이브 읽기전용). ★전수 셀 대조는 배치 빌더가 한다(load-inspector가 매 셀 자연어 대조 = 토큰 폭발·금지). → `02_load/<sheet>-defects.csv`.
 
 ## Phase 3: codex 독립 2차
 `hpti-codex-verifier` — `hqv-codex-cross-verify` 재사용. 놓친 gap·false-positive 발굴·reconcile. codex 주장=가설. → `03_codex/<sheet>-reconcile.md`.

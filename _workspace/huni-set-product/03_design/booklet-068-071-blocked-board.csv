@@ -1,0 +1,28 @@
+block_id,scope,target,reason,routing_track,prereq_spec_ref,human_approval,note
+# 068~071 셋트 미구성 4종 — BLOCKED 보드 rev.2 (적재 불가분 분리·dbmap/§18/§7 라우팅)
+# 부품(표지·내지 반제품) 0행·부모공식 0행 → 셋트 행 적재 BLOCKED·설계 청사진은 완성
+# rev.2: 부모공식=표지인쇄+표지코팅+표지용지(Q-A)+제본 4비목·단/양면=print_opt selection(S2 부활 철회)·071만 표지×2
+BLK-MEMBER-068C,member,중철책자-표지(예약 PRD_000285),라이브 반제품 0행(셋트 미구성)·search-before-mint 미존재,dbmap/basecode mint,booklet-068-071-design §10.2·072 PRD_000284 동형,필요,가격0·표지종이 별도설정(MES통합)·공정 무광/유광·단/양면=print_opt
+BLK-MEMBER-068I,member,중철책자-내지(예약 PRD_000286),라이브 반제품 0행,dbmap/basecode mint,§10.1·072 PRD_000284 동형,필요,PRF_DGP_INNER 바인딩 대상·페이지4/28/4·양면POPT2·차원충전 필요
+BLK-MEMBER-069C,member,무선책자-표지(예약 PRD_000287),라이브 반제품 0행,dbmap/basecode mint,§10.2,필요,가격0·코팅+박/형압·단/양면=print_opt
+BLK-MEMBER-069I,member,무선책자-내지(예약 PRD_000288),라이브 반제품 0행,dbmap/basecode mint,§10.1,필요,PRF_DGP_INNER·페이지24/300/2·양면POPT2
+BLK-MEMBER-070C,member,PUR책자-표지(예약 PRD_000289),라이브 반제품 0행,dbmap/basecode mint,§10.2,필요,가격0·코팅+박/형압·단/양면=print_opt
+BLK-MEMBER-070I,member,PUR책자-내지(예약 PRD_000290),라이브 반제품 0행,dbmap/basecode mint,§10.1,필요,PRF_DGP_INNER·페이지24/300/2·단면POPT1(A5)/양면POPT2(A4)
+BLK-MEMBER-071C,member,트윈링책자-표지(예약 PRD_000291),라이브 반제품 0행,dbmap/basecode mint,§10.2,필요,가격0·앞뒤표지 출력매수×2(부모공식 배수)·코팅+투명커버·단/양면=print_opt
+BLK-MEMBER-071I,member,트윈링책자-내지(예약 PRD_000292),라이브 반제품 0행,dbmap/basecode mint,§10.1,필요,PRF_DGP_INNER·페이지8/100/2·단면POPT1(A5)/양면POPT2(A4)
+BLK-FORMULA-068,set,부모공식 PRF_BIND_JUNGCHEOL_SET,라이브 0행(현 PRF_BIND_SUM=제본비 comp만)·표지인쇄+표지코팅+표지용지+제본 4비목 분해형 신설,§18/dbmap,§3.1·calc-formula seq63·Q-A,필요,기존 comp 조립(S1+COAT_MATTE+COMP_PAPER+COMP_BIND_JUNGCHEOL)·새 단가0·단/양면=print_opt/coat_side·×1펼침
+BLK-FORMULA-069,set,부모공식 PRF_BIND_MUSEON_SET,라이브 0행(현 PRF_BIND_MUSEON=제본비만)·4비목 분해형 신설,§18/dbmap,§3.1·Q-A,필요,S1+COAT+COMP_PAPER+COMP_BIND_MUSEON+후가공박(옵션)·×1펼침
+BLK-FORMULA-070,set,부모공식 PRF_BIND_PUR_SET,라이브 0행(현 PRF_BIND_PUR=제본비만)·4비목 분해형 신설,§18/dbmap,§3.1·Q-A,필요,069 동형(제본 comp만 PUR)·표지용지 포함·×1펼침
+BLK-FORMULA-071,set,부모공식 PRF_BIND_TWINRING_SET,라이브 0행(현 PRF_BIND_TWINRING=제본비만)·표지×2 4비목 분해형 신설,§18/dbmap,§3.1·calc-formula seq72·Q-A·R-2,필요,S1+COAT+COMP_PAPER 출력매수×2(앞뒤)+COMP_BIND_TWINRING·게이트 권위 1면/2면 대조로 이중×2 가드(S-B)
+BLK-INNER-BIND,set,내지 반제품 PRF_DGP_INNER 바인딩 4건,내지 mint 후 바인딩,dbmap,§4.1,필요,새 공식0(072 내지284가 쓰는 PRF_DGP_INNER 전사)·단/양면=print_opt selection·×1page파생
+BLK-INNER-DIM,member,내지 반제품 사이즈/공정/판형 차원,mint 직후 0행·evaluate_price 차원 충전 불가,dbmap,§9.2·072 PRD_000284 동형,필요,내지 작업siz·국4절 판형·종이 mat·면 print_opt(POPT1/POPT2)
+BLK-COVER-SIZ,member,표지 펼침 siz 주입,표지 출력매수 1-up(미주입 시 4-up ~3.8배 과소)·071은 매수×2,dbmap,§3.3·cover-spine-principle,필요,SIZ_000326(390×290 근사·072 사용) 재사용 or 펼침 신설·071 ×2는 매수 독립
+BLK-COVER-PAPER,set,표지용지비 단일귀속(Q-A·codex 진성 적발),부모공식에 COMP_PAPER(표지종이) 4번째 comp 추가·071은 ×2,§18/dbmap,reconcile Q-A·§3.1·§6.2,필요,072 선례(073 표지가 표지용지 보유)·표지종이≠내지종이(frm_cd 분리·이중합산0)·미반영 시 표지 종이값 저청구
+CTRACK-DBLPANSU,engine,내지 이중÷pansu(price_views.py:1707),내지 ~0.4배 과소·072 prf-track-design §2 동형,개발팀(webadmin 코드),072 §6 핸드오프,필요,코드 1회 교정이 072/068~071 내지 동시 해소·바인딩 전 선결
+CTRACK-BANDTOTAL,engine,제본비 prc_typ ×qty 검증,제본 .01=권당×부수 정상(false-positive 가드)·시뮬 골든 확인,개발팀/게이트,memory bandtotal-x-qty-overcharge,확인,제본은 권당가가 의미상 맞음(밴드총액 아님)
+R-4-COVER-SIDE,set,표지 단/양면 가격축(prevsite +60~67%),부모공식 표지인쇄 print_opt_cd(POPT1단면/POPT2양면)·표지코팅 coat_side_cnt(1/2) selection 배선,§18/dbmap,§0.1·§3.1·골든 G-068B,해소(설계반영),라이브 S1 양면 2배·coat 양면 2배 verbatim·S2 부활 불요·게이트 G-068B 양면 검출
+S-B-COVER-X2,set,071 표지×2 권위 vs 이전사이트 거동 충돌,공식집 verbatim ×2(값 정답)·이전사이트 거동=×1(거동 신호),게이트 G-071,booklet-formula-principle §1·§4·prevsite S-B,확인,권위 가격표 1면/2면 대조로 이중×2 가드·라이브 단가=1면 기준 실측이라 ×2 정당
+CFM-S2-REVIVE-WITHDRAWN,engine,COMP_PRINT_DIGITAL_S2 부활,★철회(rev.2)—단/양면=print_opt_cd selection으로 갈림·S1 단일 comp 충분,—,§0.1·§4.1,불요,라이브 S1 use_dims에 print_opt_cd·단면350/양면700 실측·S2 미배선이 PRF_DGP_INNER 정합
+CONFIRM-6,authority,068~071 면지 유무,사용자 확정=면지 없음(소프트커버·booklet-l1 빈칸),해소,§11,완료,면지 구성원 미생성
+CONFIRM-8,authority,표지/내지 반제품 자재(별도설정),MES 통합관리·표지/내지 종이 코드,dbmap mint 시,§10·CONFIRM-8,필요,별도설정=입력값 무시·마스터 외부
+CONFIRM-071-TRANSPARENT,authority,071 투명커버 구성원(SEMI_ROLE.05),본 스코프 미포함(면지처럼 별 옵션축·codex Q-F),후속 CONFIRM,§11,후속,트윈링 고유·유광/무광 택1·비목성(무료 vs 비용) 권위 재확인

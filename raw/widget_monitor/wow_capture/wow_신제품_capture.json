@@ -1,0 +1,177 @@
+{
+  "pdtCode": "신제품",
+  "label": "신제품",
+  "url": "https://wowpress.co.kr/ordr/prod/newest",
+  "finalUrl": "https://wowpress.co.kr/ordr/prod/newest",
+  "framework": "unknown",
+  "optionCascadeApiCalls": [
+    {
+      "url": "https://wowpress.co.kr/ordr/prod/sale/no/list",
+      "method": "GET",
+      "status": 200,
+      "postData": null
+    }
+  ],
+  "priceApiCalls": [
+    {
+      "url": "https://wowpress.co.kr/ordr/prod/sale/no/list",
+      "method": "GET",
+      "status": 200,
+      "postData": null
+    }
+  ],
+  "allWowApiCalls": [
+    {
+      "url": "https://wowpress.co.kr/ordr/prod/sale/no/list",
+      "method": "GET",
+      "status": 200,
+      "postData": null,
+      "responseBody": {
+        "prodNoList": [
+          null,
+          {
+            "prodNo": "40026"
+          },
+          {
+            "prodNo": "40034"
+          },
+          {
+            "prodNo": "40070"
+          },
+          {
+            "prodNo": "40040"
+          },
+          {
+            "prodNo": "30001"
+          },
+          {
+            "prodNo": "30003"
+          },
+          {
+            "prodNo": "30010"
+          },
+          {
+            "prodNo": "30013"
+          }
+        ]
+      }
+    },
+    {
+      "url": "https://wowpress.co.kr/myInfo",
+      "method": "GET",
+      "status": 200,
+      "postData": null,
+      "responseBody": {
+        "myInfo": null
+      }
+    },
+    {
+      "url": "https://wowpress.co.kr/main/favorite",
+      "method": "GET",
+      "status": 200,
+      "postData": null,
+      "responseBody": {
+        "favoriteList": [
+          {
+            "UDT": 1614933802000,
+            "DspGB": 5,
+            "Title": "퀵메뉴1",
+            "Post2": "우리함께\r\n이겨내요",
+            "Post1": "이용가이드\r\nWOW배송",
+            "Url1": "/cent/notc/list?_selectBNo=718862",
+            "Url2": "https://blog.naver.com/wow_press/222142563178",
+            "FilePath2": "/main/2021/03/05/20210305174322-1274934577601852635.jpg",
+            "FilePath1": "/main/2021/03/05/202103051743221148775093529628029.jpg",
+            "CDT": 1591846960000,
+            "FileNm1": "2-1.jpg",
+            "FileNm2": "1-2.jpg",
+            "DspNo": 19,
+            "RegDT": 1591846960000,
+            "ShopNo": 1,
+            "Sort": 1,
+            "File2": "/wowdoc/wow2.0/main/2021/03/05/20210305174322-1274934577601852635.jpg",
+            "File1": "/wowdoc/wow2.0/main/2021/03/05/202103051743221148775093529628029.jpg",
+            "UseYN": "Y"
+          },
+          {
+            "UDT": 1614933513000,
+            "DspGB": 5,
+            "Title": "출고배송",
+            "Post2": "무료폰트\r\n다운로드",
+            "Post1": "출고안내",
+            "Url1": "/info/lnbPage/cent/release",
+            "Url2": "/cent/font/list",
+            "FilePath2": "/main/2021/03/05/202103051738333682894287733885196.jpg",
+            "FilePath1": "/main/2021/03/05/20210305173833864366637918192390.jpg",
+            "CDT": 1604382640000,
+            "FileNm1": "1-1.jpg",
+            "FileNm2": "무료폰트.jpg",
+            "DspNo": 3012,
+            "RegDT": 1604382640000,
+            "ShopNo": 1,
+            "Sort": 2,
+            "File2": "/wowdoc/wow2.0/main/2021/03/05/202103051738333682894287733885196.jpg",
+            "File1": "/wowdoc/wow2.0/main/2021/03/05/20210305173833864366637918192390.jpg",
+            "UseYN": "Y"
+          },
+          {
+            "DspGB": 5,
+            "Title": "퀵메뉴3",
+            "Post2": "안심포장",
+            "Post1": "정매수\r\n출고",
+            "Url1": "/archives/evnt/fixed",
+            "Url2": "/archives/evnt/airc",
+            "FilePath2": "/main/2021/03/05/20210305173037-1622352730049854323.jpg",
+            "FilePath1": "/main/2021/03/05/20210305173037-1438703710964510071.jpg",
+            "CDT": 1614933037000,
+            "FileNm1": "정매수출고.jpg",
+            "FileNm2": "프리미엄안심포장.jpg",
+            "DspNo": 5030,
+            "RegDT": 1614933037000,
+            "ShopNo": 1,
+            "Sort": 3,
+            "File2": "/wowdoc/wow2.0/main/2021/03/05/20210305173037-1622352730049854323.jpg",
+            "File1": "/wowdoc/wow2.0/main/2021/03/05/20210305173037-1438703710964510071.jpg",
+            "UseYN": "Y"
+          }
+        ]
+      }
+    }
+  ],
+  "uiFlow": {
+    "steps": 3,
+    "hasEditor": false,
+    "optionCount": 0,
+    "selectDetails": [],
+    "radioDetails": [],
+    "priceDisplayType": "unknown",
+    "priceTexts": [],
+    "buttons": [
+      "WOW 멤버십안내 자세히보기",
+      "함께캠페인 자세히보기",
+      "쿠폰페이지 바로가기",
+      "핵심가치페이지 바로가기",
+      "고객센터",
+      "상업인쇄소",
+      "힙지로디지털",
+      "책공방",
+      "가게용품",
+      "문구점",
+      "어패럴",
+      "선거홍보물",
+      "이벤트",
+      "신제품",
+      "창닫기"
+    ]
+  },
+  "pageInfo": {
+    "title": "와우프레스",
+    "framework": "unknown",
+    "bodySnippet": "WOW멤버십\nVVIP만의 특별한 혜택\n- 결제금액 4% 적립\n- 배쑝와쑝 배송비 무료\n- 명함/스티커 2만원 이상 택배비 무료\n- VIP 전용 상담 가능\n등급조건(3개월 접수액 기준)\n\n3억원 이상 \n9,000만원 이상 \n3,000만원 이상 \n2,100만원 이상 \n1,200만원 이상 \n300만원 이상 \n90만원 이상 \n30만원 이상 \n5만원 이상 \n5만원 미만\nWOW 멤버십안내 자세히보기\n   \n로그인\n회원가입\n쿠폰4종+무료배송\n고객센터\n요즘 인쇄 어디?\n와우프레스\n정매수 인쇄 어디?\n와우프레스\n요즘 인쇄 어디?\n와우프레스\n정매수 인쇄 어디?\n와우프레스\n상업인쇄소\n힙지로디지털\n책공방\n가게용품\n문구점\n어패럴\n선거홍보물\n이벤트\n신제품\n제작가이드 통합주문 무료직배송신청\nNEW!\n이지템플릿\n창닫기\n신제품\n 접착 포스터\n1 개\n1,700원\n 우드 행잉 캘린더\n1 개\n16,500원\n 기성 벽걸이캘린더(윤전-2026년)\n100 개\n203,000원\n 기성 벽걸이캘린더(2026년)\n100 개\n285,600원\n 포토카드(대량)\n100 매\n10,500원\n 특수초강접스티커(사각)\n500 매\n7,300원\n 특수초강접스티커(도무송)\n500 매\n10,100원\n 캔버스엽서\n100 매\n28,400원\n 모양엽서\n5 매\n4,900원\n 띠지스티커(사각)\n1 매\n6,500원\n 띠지스티커(도무송)\n1 매\n15,800원\n 모양포스터\n1 매\n5,203원\n 샤오미볼펜\n1 개\n1,500원\n 식권\n100 매\n3,100원\n 후드집업-프린트스타(쭈리)\n1 장\n29,000원\n 후드-프린트스타(쭈리)\n1 장\n24,000원\n 맨투맨-프린트스타(쭈리)\n1 장\n20,000원\n 긴팔T-프린트스타(17수)\n1 장\n14,400원\n 개폐형 철제입간판\n1 개\n7,000원\n 선반형 철제입간판\n1 개\n15,000원\n 걸이형 철제입간판\n1 개\n15,500원\n 미니명함\n100 매\n3,200원\n 클래퍼\n1 개\n3,800원\n 기성 탁상용캘린더(2026년)\n100 개\n130,000원\n 컴퓨터용 클립펜\n1 개\n2,800원\n 클립펜 틴케이스\n1"
+  },
+  "screenshots": [
+    "wow_신제품_main.png",
+    "wow_신제품_options.png"
+  ],
+  "capturedAt": "2026-03-31T01:25:44.155Z"
+}
