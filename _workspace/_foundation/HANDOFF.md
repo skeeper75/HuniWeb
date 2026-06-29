@@ -1,45 +1,46 @@
-# 가격 파이프라인 세션 핸드오프 (최신 2026-06-29 6세션)
+# 가격 파이프라인 세션 핸드오프 (최신 2026-06-29 7세션)
 
-> 재시작 포인터. 활성 하네스=가격테이블 무결성(§26·배치빌더 신설)·셋트(§23)·가격 종단(§27).
-> 권위=2엑셀(상품마스터260610·가격표260527). ★[[price-authority-model-reframe]]: 엑셀=권위·이전사이트=거울(가격값 정답 아님)·차이=조사신호(엑셀 채택).
+> 재시작 포인터. 활성 하네스=가격테이블 무결성(§26·배치빌더)·가격 종단(§27).
+> 권위=2엑셀(상품마스터260610·가격표260527). 엑셀=권위·라이브=감사대상·단가 verbatim.
+> ★다음 세션 필독: **`huni-price-table-integrity/_batch/SHEET-LOAD-PLAYBOOK.md`**(시트별 효율 적재 표준 절차+재사용 쿼리).
 
-## ★이번 세션(6세션) 한 일 — "토대 먼저" 전환 + 돈크리티컬 2건 COMMIT
-1. **§23 하네스 개선** — [HARD] "상품별 구성요소 경계(옵션 오염 방지)" 원칙 + 게이트 **S8** 추가(8개 파일). 각 상품은 자기 시트 허용 구성요소만·공유공식도 자기 분기만(중철공식이 무선에 새는 B-4 가드).
-2. **셋트 미구성 4(068~071) 설계** — 표지+속지 2구성원(면지 없음)·★계산공식집 원리 확정(068~070=펼침 표지×1·**071 트윈링=표지×2**·표지단가=1면 기준·내지=×1 page파생·면지=제본비 포함). 설계 rev.2(표지 단/양면=print_opt selection·071 표지인쇄/코팅/용지 ×2·표지용지비 추가). **게이트 전 보류**(토대 먼저).
-3. **이전사이트 = 서버 AJAX 가격조회 발견** — `a_<FORMCODE>.asp` GET·정적select≠동적거동·OFAT 수집기 `harvest_booklet.sh`. ★표지 양면 가격축 +60~67% 누락 실증(068~071 공통·R-4). [[huni-live-site-crosscheck-oracle]].
-4. **가격테이블 현황 지도** — 19시트 중 셀골든 2개(아크릴·스티커)만·"분석 충분·적재 부족" 진단.
-5. **★명함 18개 .01 과대청구 라이브 COMMIT** — 시뮬 037 ×42·024/025 ×20 해소(14→.02·2→.03·2→.02+min20). [[bandtotal-x-qty-overcharge-260628]].
-6. **★포스터사인 transpose verbatim 재적재 라이브 COMMIT** — 491행+4·권위 100%정합·600×1400=20,000·1200×3000=72,000(blind swap 금지).
-7. **라이브 실측 환경 구축** — `_foundation/live-snapshot/`(snapshot.sh·db-check.sh·36 t_* CSV·codex 스냅샷 우회).
-8. **결정론 배치 빌더 하네스** — `hpti-matrix-batch-builder`+`hpti-matrix-batch-build`(권위CSV↔스냅샷CSV diff·토큰0·§26 확장).
+## ★이번 세션(7세션) 한 일 — 배치빌더 전수 진단 + 출력소재 적재 종단
+
+1. **배치 빌더 파일럿→전수** — 디지털인쇄비 1시트 결정론 grid-diff(토큰0) 검증 → 19시트 전파(DIFFED 11·결함 36·적재된 셀은 대부분 권위 verbatim). `_batch/ALL-SHEETS-summary.md`.
+2. **4원 적재 모델 확정** — 코드↔라이브DB↔라이브화면↔엑셀. 사슬=상품→공식→구성요소(use_dims=그리드 컬럼)→단가행. 자동로더 없음·수동 그리드. `_batch/LOADING-MODEL-4WAY-260629.md`.
+3. **라이브 COMMIT 4건**(전부 verbatim·undo 보유):
+   - **코팅 유광 92행**(COMP_COAT_GLOSSY 0→92·유광 견적불가 해소·undo=`coating-glossy-undo.sql`).
+   - **디지털 흑백 단면 106행**(★도수=인쇄옵션이 담음: 사장님이 POPT_000008"단면1도"(앞면도수 CLR_000002) 추가 → 그 print_opt에 흑백 단면 적재·칼라 212행 무변경·엔진변경 불요·undo=`digital-mono-s1-undo.sql`).
+   - **출력소재 PET 2행**(투명/반투명 PET 260g 하위 144/147=1100·투명엽서 견적불가·undo=`paper-gap9-clean5-undo.sql`).
+   - **출력소재 특수용지 하위 18행**(아코팩~큐리어스스킨 색상별 권위값 verbatim·디지털엽서3종 견적불가·undo=`paper-specialty18-undo.sql`).
+   - ※중간 오적재 3절 3행=가짜결함 적발·즉시 제거(원리2).
+4. **시트별 효율 적재 플레이북 정립** — 4원리(카테고리 라우팅·가짜결함 가드·상위하위 레벨·검증) + 재사용 쿼리. `_batch/SHEET-LOAD-PLAYBOOK.md`.
 
 ## ★다음 시작점 (우선순위)
-1. **배치 빌더 파일럿** — 디지털인쇄비 1시트로 `hpti-matrix-batch-builder` 실증(권위↔스냅샷 grid-diff 스크립트 빌드·실행→결함보드·적재본 자동·토큰0 확인)→어댑터로 전 시트 전파.
-2. **셋트 068~071** — 보류한 게이트(rev.2) → 부품 8개(표지4+속지4·PRD_000285~292 예약) mint는 dbmap/§7·인간 승인 → 셋트행 적재. ★전 책자 표지 양면 배선(R-4·068~071 공통).
-3. **포스터 T2** — 레더아트액자132 소형4·족자135 A1 단가 추출→INSERT(별 트랜잭션).
-4. **굿즈/파우치/문구 직접단가** — "(가격포함)=직접단가" 125건 §7 적재(공식 아님).
-5. **전 상품 확장** — 이전사이트 AJAX 수집기를 전 상품군으로(폼코드별 응답 사전 1회 매핑).
+1. **출력소재 마무리 결정 1건** — 특수용지 기본색(큐리어스스킨 화이트361=880·스타드림 다이아 등)을 **하위로 통일 적재**할지(권장 옵션1) vs 부모 유지(옵션2). 부모를 손님이 직접 고르는 경로 확인 후 결정. (큐리어스스킨 화이트361=880은 권위에 있음·하위0).
+2. **나머지 시트 적재** — 플레이북 절차로: 출력소재 잔여·디지털 흑백 양면(양면1도 print_opt 추가 시·B01 colC 권위값)·제본(del_yn=Y comp 다수=재편 흔적·먼저 이해)·매핑미상 6시트(커팅타공·스티커·명함·박류).
+3. **§17 정리거리** — 중복 mat_cd(MAT_000260 "아트250 + 무광코팅"=MAT_000250 dup)·실사 PET(MAT_000178 .08에 1100 잘못 적재=투명엽서가 쓰는 건 .01 디지털 PET).
 
 ## 미해결/블로커
-- **셋트 부품 mint**(8 반제품)·전 책자 표지 양면 배선 = dbmap/§7·인간 승인.
-- **코드 트랙(C·개발팀)**: DBLPANSU(내지 이중÷pansu)·S2 부활·전 책자 공통. webadmin 코드 직접수정 금지.
-- 포스터 잔여 T2 2건·silsa 35행 rekey는 이미 적용(드리프트).
+- **디지털 흑백 양면** = 사장님이 "양면1도" 인쇄옵션 추가하면 즉시 적재(권위 B01/B02 colC).
+- **흑백 상품 노출** = 1도 인쇄 상품 생길 때 t_prd_product_print_options에 POPT_000008 연결(후속·사장님 결정).
+- **제본 재편**(중철·무선·하드커버 등 del_yn=Y) = 단순 복원 금지·재편 의도 이해 먼저.
+- **면적가격(.08 실사·.20 아크릴)** = mat_cd 아닌 면적 → 별도 감사(이번 출력소재 감사 범위 밖).
 
 ## 이번 세션 결정 (relitigate 금지)
-- **가격테이블 토대 먼저**(§27 순서: 무결성→교정적재→공식→검증). 셋트 공식(지붕)을 토대(가격표 적재) 없이 짜던 것 교정.
-- **AI 셀분석 → 결정론 배치 빌더**(토큰0). 권위CSV·라이브 스냅샷 CSV diff.
-- **이전사이트=서버 AJAX 거울**(가격값 정답=엑셀·차이=조사신호).
-- **셋트 책자 원리**: 068~070 펼침 표지×1·071 트윈링 표지×2·표지단가 1면기준(×2≠이중)·내지×1·면지=제본포함.
-- **단가=가격표 매트릭스 verbatim**(계산식·배수 치부 금지·blind swap 금지).
-- **상품별 구성요소 경계(S8)**: 경계 넘는 옵션=오염.
+- **도수(흑백/칼라)는 인쇄옵션(print_opt)이 담는다** — t_prt_print_options.front/back_colrcnt_cd=clr_cd. 엔진은 print_opt_cd로 매칭(clr_cd는 NON_QTY_DIMS에 없음). 그래서 흑백=새 print_opt(POPT_000008)+단가. clr_cd 엔진변경(갈래A) 폐기.
+- **출력소재 적재 레벨=상품 옵션 참조 레벨**(option_items ref_key1). 색상별 절가 상이→부모복사 금지·각 하위 verbatim.
+- **가짜결함 가드**=상품 공식이 그 component를 실제 바인딩하는지 필터(아트250코팅·3절=BOM only).
+- **substrate 카테고리별 component 라우팅**(.01→COMP_PAPER·.11/.13→완제품가·.08/.20→면적).
 
 ## 건드리지 말 것 (라이브 COMMIT·undo 보유)
-- **명함 18 .01 교정 COMMIT**(undo=`huni-price-table-integrity/02_load/namecard-band-undo.sql`·백업 bak_*_20260629_1749).
-- **포스터 transpose 재적재 COMMIT**(undo=`huni-basedata-dedup/poster-sign/_exec/undo.sql`·백업 bak_*_postersign_dedup_20260629_1934).
-- 이전 세션 COMMIT 전부·라이브 실측 환경·배치 빌더 하네스 파일.
+- 이번 4 COMMIT(코팅유광92·흑백단면106·PET2·특수용지18) + 이전 세션 전부(명함18·포스터transpose 등).
+- undo 스크립트: `_batch/{coating-glossy,digital-mono-s1,paper-gap9-clean5,paper-specialty18}-undo.sql`.
 
 ## 산출물 위치
-- 실측 환경: `_foundation/live-snapshot/`(snapshot.sh·db-check.sh·latest/).
-- §26: `huni-price-table-integrity/`(02_load/{namecard,poster-sign}-*·04_gate/*-verdict·_batch/[파일럿 대기]).
-- 셋트: `huni-set-product/`(01_authority/booklet-formula-principle·03_design/booklet-068-071-design rev.2·02_reference/{prevsite-harvest,cover-spread}).
-- 메모리: [[bandtotal-x-qty-overcharge-260628]]·[[huni-live-site-crosscheck-oracle]]·[[set-semifinished-3tier-model-260629]].
+- 플레이북: `huni-price-table-integrity/_batch/SHEET-LOAD-PLAYBOOK.md` ★
+- 배치 빌더: `_batch/scripts/`·`ALL-SHEETS-{defects.csv,summary.md}`·`LOADING-MODEL-4WAY-260629.md`
+- 적재본/undo: `_batch/*-load.sql`·`*-undo.sql`
+- 실측 환경: `_foundation/live-snapshot/`·시뮬레이터 `_foundation/batch/lib_huni.py`
+- 쉬운 설명: `_foundation/가격파이프라인-쉬운설명-260629.md`
+- §18 도수설계(참고·폐기 갈래A): `huni-price-engine-design/03_design/*-dosu.*`

@@ -1,0 +1,2 @@
+defect,key,auth_value,live_value,money_impact,repro
+dim_missing,clr=흑백,212셀(전 판형·면·수량),축 부재(use_dims collapse),도수축 collapse: use_dims 에 도수축 없음 → 도수 구분 불가 (잘못된 단가 과/저청구 또는 견적불가) · 차원 설계 결정 필요(BLOCKED),권위 도수 '흑백' 축이 라이브 use_dims·활성 단가행에 없음(collapse)

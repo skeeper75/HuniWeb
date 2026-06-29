@@ -352,7 +352,7 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 **산출물 루트:** `_workspace/huni-price-table-integrity/` (01_authority·02_load·03_codex·04_gate·**_batch**·_meta). 5 에이전트(`hpti-authority-extractor` 정답격자 → ★`hpti-matrix-batch-builder` 결정론 배치 diff(권위CSV↔스냅샷CSV·토큰0) → `hpti-load-inspector` 예외 보강 → `hpti-codex-verifier` codex 독립2차(스냅샷) → `hpti-integrity-gate` I1~I7 게이트) + 방법론 스킬 `hpti-matrix-batch-build`·`hpti-load-integrity-audit`(+ `hqv-codex-cross-verify`·`dbm-excel-parse`·`dbm-price-import-prep`·`dbm-batch-load`·`dbm-correctness-audit` 재사용). 라이브 실측 환경=`_workspace/_foundation/live-snapshot/`. 생성≠검증·codex 주장=가설·라이브 읽기전용 SELECT만(`.env.local RAILWAY_DB_*`)·DB 미적재(실 교정 인간 승인 후 dbmap 위임)·파일럿=아크릴(sparse grid 실증)→동형 전파.
 
-**변경이력:** 최신: 2026-06-29 **결정론 배치 빌더 + 라이브 실측 환경 + 돈크리티컬 2건 라이브COMMIT** — ① 신규 `hpti-matrix-batch-builder` 에이전트 + `hpti-matrix-batch-build` 스킬: 가격 매트릭스 무결성을 AI 셀분석(토큰폭발) 대신 권위CSV(24_master-extract)↔라이브 스냅샷CSV 결정론 grid-diff로 처리(토큰0·`dbm-batch-load` 동형·시트1 파일럿→전파). ② 라이브 실측 환경 `_workspace/_foundation/live-snapshot/`(snapshot.sh·db-check.sh·36 t_* CSV·codex 스냅샷 우회). ③ 명함18 `.01` 과대청구 COMMIT(시뮬 037 ×42·024/025 ×20 해소·14→.02·2→.03·2→.02+min20). ④ 포스터사인 transpose **verbatim 재적재** COMMIT(491행+4·600×1400=20,000·1200×3000=72,000·권위 100%정합·blind swap 금지). 직전: 2026-06-28 band-total .01 ×수량 과대청구 진단+19시트 단가/합가 계층맵. → `_workspace/_foundation/HANDOFF.md`·`live-snapshot/`·`huni-price-table-integrity/`
+**변경이력:** 최신: 2026-06-29(7세션) **배치빌더 전수 진단 + 출력소재 적재 종단 + 시트별 적재 플레이북** — 배치빌더 19시트 전파(DIFFED 11·결함 36·적재셀 대부분 verbatim) + 4원 적재모델 확정 + 라이브 COMMIT 4건(코팅유광92·디지털흑백단면106[도수=인쇄옵션 POPT_000008]·출력소재 PET2+특수용지18·전부 verbatim/undo). ★시트별 효율 적재 플레이북 정립(`_batch/SHEET-LOAD-PLAYBOOK.md`·4원리=카테고리 라우팅/가짜결함 가드/상위하위 레벨/도수=print_opt). 직전: 2026-06-29 결정론 배치빌더+라이브 실측환경+명함18·포스터 transpose COMMIT. → `_workspace/_foundation/HANDOFF.md`·`huni-price-table-integrity/_batch/`·[[output-material-load-4principles-260629]]
 
 ## 27. 가격 종단 마스터 오케스트레이터 (상품군 단위 파이프라인·수렴 실행)
 
@@ -360,7 +360,7 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 **트리거:** "가격 종단 파이프라인", "상품군 가격 제대로", "가격 마스터 오케스트레이터", "상품군 가격 종단 완주", "정확한 가격값까지", "전 상품 가격 정합 완주", "가격 종단 실행/재실행/이어서", "특정 상품군 가격 종단" 등 본 요청 시 `huni-price-master-orchestrator` 스킬을 사용. 단일 레이어 작업은 해당 하네스 직접(§26 무결성·§18 설계·§7 적재·§21 정합). 단순 질문은 직접 응답.
 
-**변경이력:** 최신: 2026-06-29(6세션) **토대 먼저 전환 + 돈크리티컬 2건 라이브COMMIT + 결정론 배치 빌더** — 셋트 공식(지붕)을 가격표 적재(토대) 없이 짜던 것 교정→순서 재확립(무결성→교정적재→공식→검증). 명함18 .01 과대청구 COMMIT(037 ×42·024/025 ×20)·포스터사인 transpose verbatim 재적재 COMMIT(491행·권위 100%정합). 라이브 실측 환경(`_foundation/live-snapshot`)+결정론 배치 빌더(`hpti-matrix-batch-builder`·권위CSV↔스냅샷CSV diff·토큰0). 다음=배치빌더 파일럿(디지털인쇄비)→전 시트. 직전: 2026-06-29(5세션) 공식집 디코드+3가격모델 → `_workspace/_foundation/HANDOFF.md`·[[live-measure-batch-builder-260629]]
+**변경이력:** 최신: 2026-06-29(7세션) **배치빌더 전수 진단→출력소재 적재 종단·시트별 적재 플레이북 정립** — 배치빌더 19시트 전파(DIFFED 11) + 4원 적재모델(코드↔라이브DB↔화면↔엑셀) + 라이브 COMMIT 4건(코팅유광92·디지털흑백단면106·출력소재 PET2+특수용지18). ★다음 세션용 시트별 효율 적재 플레이북=`huni-price-table-integrity/_batch/SHEET-LOAD-PLAYBOOK.md`(4원리+재사용 쿼리). 다음=특수용지 기본색 하위통일 결정·나머지 시트 플레이북 적재. 직전: 2026-06-29(6세션) 토대 먼저 전환+명함18·포스터 COMMIT → `_workspace/_foundation/HANDOFF.md`·[[output-material-load-4principles-260629]]
 
 ## 28. MoAI Framework (gated — rarely used here)
 
