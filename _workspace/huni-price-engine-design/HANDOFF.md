@@ -1,6 +1,14 @@
 # Huni-Price-Engine-Design 하네스 — HANDOFF
 
-> CLAUDE.md §18 · 갱신 2026-06-22 · **종단 GO 11건 — ★상품마스터 11시트 전수 완주**(디자인캘린더 검증 GO·codex가 돈크리티컬 2건 적발→교정 후 합의)
+> CLAUDE.md §18 · 갱신 2026-06-30 · **종단 GO 12건 — 11 상품군 시트 + 박류(foil) 후가공 면적 설계**(박류 데이터 설계 GO·codex가 동판비 silent 과금 돈크리티컬 적발→REV3 교정 후 GO)
+
+## ★박류(foil) 면적 가격 설계 — 데이터 설계 GO (2026-06-30·12번째 종단·DB 미적재)
+
+**박=동판비(setup·.03 1회성)+박가공비(면적→등급A~E→등급×수량구간·일반/특수박·.02)**. 신규 5 comp(동판비 SETUP_LARGE/SMALL+박가공비 PROC_LARGE/SMALL×STD/SPECIAL)·박색상축=proc_cd(박 자식공정 16종 재사용·mint 0)·**7상품(2단/3단접지카드·PUR/무선책자·펄명함·프리미엄쿠폰·프리미엄명함) 본체 공식 합산 바인딩**(addon 아님·명함박 PRF_NAMECARD_FOIL+접지카드 PRF_DGP_E 입증 패턴)·오리지널박명함은 기존 모델 보존(참조만). 골든 8/8 권위 verbatim(Claude+codex 독립 0오차).
+
+**★폐루프 2회(생성≠검증 가치 입증)**: REV2=바인딩 addon 템플릿→본체 공식 합산 전환(addon은 단일단가만 담아 다차원 박가공비 ×qty 폭발). **REV3=codex가 돈크리티컬 적발**(designer·Claude validator E4 PASS 둘 다 놓침)=동판비 setup comp에 proc_cd 게이트 없으면 pricing.py:99-111 NULL 와일드카드로 박 미선택 주문에도 동판비(5,000~64,000) 상시 과금→동판비 use_dims에 proc_cd 추가로 해소(박가공비와 동형).
+
+**돈크리티컬 3건 설계로 해소**: ①7상품 박 0원(comp 부재) ②박 미선택 동판비 상시과금(codex) ③.01이면 ×qty 폭발(.02+min_qty로 해소). **잔여 C트랙(개발팀)**: 면적→등급 환산 엔진 미지원(grade가 NON_QTY/TIER_DIMS 부재)→가변사이즈 상품(접지카드/책자)만 종속·고정사이즈(명함류)는 단일등급 collapse로 현 엔진 작동. **G6**: 명함박 1000구간 단가행 63,000 vs 권위 64,000 라이브 1셀 오적재(교정 후보). **실 적재 승인 대기(누적)**: 신규 5 comp + 동판비/박가공비 단가행(★proc_cd 충전 필수·박가공비 .02 NOT NULL) + 7상품 본체 공식 합산 배선·인간 승인 후 dbmap 위임·C트랙 선결(가변사이즈). 산출=`{01_formula,02_benchmark,03_design,04_validation,05_codex}/*-foil.md`.
 
 ## 다음 시작점
 

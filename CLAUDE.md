@@ -264,7 +264,7 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 **산출물 루트:** `_workspace/huni-price-engine-design/` (`_meta`·`01_formula`·`02_benchmark`·`03_design`·`04_validation`·`05_codex`). 자격증명 `.env.local RAILWAY_DB_*`(읽기전용 SELECT). codex 헬퍼=`hqv-codex-cross-verify/scripts/codex-review.sh`(내부에서 `rpm-visualize/scripts/codex-preflight.sh` 호출) 재사용. 기존 `dbm-price-arbiter`·`dbm-ddl-proposer`·`dbm-schema-extract`·`dbm-excel-parse` 재사용.
 
-**변경이력:** 최신: 2026-06-22 디자인캘린더 종단 GO(inline 정찰가 BLOCKED·고정가형 완제 SKU·11번째 최종 종단·★상품마스터 11시트 전수 완주·codex가 돈크리티컬 2건[본체 ×qty 저청구·엽서 라우팅] 독립 적발→교정 후 GO) → `_workspace/huni-price-engine-design/CHANGELOG.md`
+**변경이력:** 최신: 2026-06-30 박류(foil) 후가공 면적 가격 설계 데이터 GO(동판비 setup.03 + 박가공비 면적→등급×수량.02·proc_cd 박색상축·신규5comp·7상품 본체합산·골든8/8 verbatim·폐루프2회·★codex가 동판비 silent 과금 돈크리티컬 적발→REV3 교정 후 GO·12번째 종단·C트랙=면적→등급 엔진 미지원·DB 미적재) → `_workspace/huni-price-engine-design/CHANGELOG.md`
 
 ## 19. Harness: Huni-Widget-Flow (위젯 구조·플로우 문서화 + 이중 청중 시각화)
 
@@ -352,7 +352,7 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 **산출물 루트:** `_workspace/huni-price-table-integrity/` (01_authority·02_load·03_codex·04_gate·**_batch**·_meta). 5 에이전트(`hpti-authority-extractor` 정답격자 → ★`hpti-matrix-batch-builder` 결정론 배치 diff(권위CSV↔스냅샷CSV·토큰0) → `hpti-load-inspector` 예외 보강 → `hpti-codex-verifier` codex 독립2차(스냅샷) → `hpti-integrity-gate` I1~I7 게이트) + 방법론 스킬 `hpti-matrix-batch-build`·`hpti-load-integrity-audit`(+ `hqv-codex-cross-verify`·`dbm-excel-parse`·`dbm-price-import-prep`·`dbm-batch-load`·`dbm-correctness-audit` 재사용). 라이브 실측 환경=`_workspace/_foundation/live-snapshot/`. 생성≠검증·codex 주장=가설·라이브 읽기전용 SELECT만(`.env.local RAILWAY_DB_*`)·DB 미적재(실 교정 인간 승인 후 dbmap 위임)·파일럿=아크릴(sparse grid 실증)→동형 전파.
 
-**변경이력:** 최신: 2026-06-29(7세션) **배치빌더 전수 진단 + 출력소재 적재 종단 + 시트별 적재 플레이북** — 배치빌더 19시트 전파(DIFFED 11·결함 36·적재셀 대부분 verbatim) + 4원 적재모델 확정 + 라이브 COMMIT 4건(코팅유광92·디지털흑백단면106[도수=인쇄옵션 POPT_000008]·출력소재 PET2+특수용지18·전부 verbatim/undo). ★시트별 효율 적재 플레이북 정립(`_batch/SHEET-LOAD-PLAYBOOK.md`·4원리=카테고리 라우팅/가짜결함 가드/상위하위 레벨/도수=print_opt). 직전: 2026-06-29 결정론 배치빌더+라이브 실측환경+명함18·포스터 transpose COMMIT. → `_workspace/_foundation/HANDOFF.md`·`huni-price-table-integrity/_batch/`·[[output-material-load-4principles-260629]]
+**변경이력:** 최신: 2026-06-30(8세션) **잔여 시트 종결 + UNMAPPED 4시트 gap-0 확정** — 라이브 COMMIT 3건(큐리어스화이트880 출력소재종결·제본비3종 del_yn=N복원[제본74/74·엔진 del_yn 미필터·표시만]·디지털 흑백양면106[POPT_000009·4도수완비]·전부 verbatim/undo). ★UNMAPPED=가짜신호 입증: 출력소재·커팅타공·스티커B01(540셀100%)·명함(B12 50/50) 전부 정밀 셀단위 대조 시 진짜 gap 0(파싱한계 false). ★합가 우선 규칙[사용자]. 직전: 2026-06-29(7세션) 배치빌더 전수 진단+출력소재 적재 종단+플레이북. → `_workspace/_foundation/HANDOFF.md`·`huni-price-table-integrity/_batch/SHEET-LOAD-PLAYBOOK.md`·[[price-component-unify-vs-split-criterion-260630]]
 
 ## 27. 가격 종단 마스터 오케스트레이터 (상품군 단위 파이프라인·수렴 실행)
 
@@ -360,7 +360,7 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 **트리거:** "가격 종단 파이프라인", "상품군 가격 제대로", "가격 마스터 오케스트레이터", "상품군 가격 종단 완주", "정확한 가격값까지", "전 상품 가격 정합 완주", "가격 종단 실행/재실행/이어서", "특정 상품군 가격 종단" 등 본 요청 시 `huni-price-master-orchestrator` 스킬을 사용. 단일 레이어 작업은 해당 하네스 직접(§26 무결성·§18 설계·§7 적재·§21 정합). 단순 질문은 직접 응답.
 
-**변경이력:** 최신: 2026-06-29(7세션) **배치빌더 전수 진단→출력소재 적재 종단·시트별 적재 플레이북 정립** — 배치빌더 19시트 전파(DIFFED 11) + 4원 적재모델(코드↔라이브DB↔화면↔엑셀) + 라이브 COMMIT 4건(코팅유광92·디지털흑백단면106·출력소재 PET2+특수용지18). ★다음 세션용 시트별 효율 적재 플레이북=`huni-price-table-integrity/_batch/SHEET-LOAD-PLAYBOOK.md`(4원리+재사용 쿼리). 다음=특수용지 기본색 하위통일 결정·나머지 시트 플레이북 적재. 직전: 2026-06-29(6세션) 토대 먼저 전환+명함18·포스터 COMMIT → `_workspace/_foundation/HANDOFF.md`·[[output-material-load-4principles-260629]]
+**변경이력:** 최신: 2026-06-30(8세션) **잔여 시트 종결 + 박류 §18 면적 설계 완주** — 라이브 COMMIT 3건(큐리어스화이트880·제본비3종 del_yn복원[제본74/74]·디지털흑백양면106[4도수완비]) + UNMAPPED 4시트(출력소재·커팅·스티커·명함) 정밀대조 gap-0 확정(파싱한계 false) + ★박류 §18 데이터 설계 GO(동판비+박가공비 면적→등급·7상품 본체합산·골든8/8·codex가 동판비 silent과금 적발→REV3·DB미적재·C트랙=면적→등급 엔진). ★합가 우선·setup comp도 proc_cd 게이트 필수. 다음=박류 실적재 승인+C트랙·디지털/제본 사장님 후속. 직전: 2026-06-29(7세션) 배치빌더+출력소재 종단. → `_workspace/_foundation/HANDOFF.md`·[[price-component-unify-vs-split-criterion-260630]]
 
 ## 28. MoAI Framework (gated — rarely used here)
 

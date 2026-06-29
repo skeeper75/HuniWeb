@@ -12,15 +12,15 @@
 
 | # | 시트 | 패밀리 | status | 권위셀 | 일치 | dim_missing | sparse | missing_cell | transpose | 불일치 | unmapped | 라우팅 |
 |---|------|--------|--------|-------|------|-------------|--------|--------------|-----------|--------|----------|--------|
-| 1 | 출력소재IMPORT | L1-단가(소재) | DIFFED | 79 | 47(59.5%) | — | — | 32 | — | — | — | 47셀 일치·32 specialty 용지 미적재(missing_cell) |
+| 1 | 출력소재IMPORT | L1-단가(소재) | DIFFED | 79 | 49(62.0%) | — | — | 30 | — | — | — | 47셀 일치·32 specialty 용지 미적재(missing_cell) |
 | 2 | 디지털인쇄비 | L1-밴드 | DIFFED | 954 | 742(77.8%) | 1 | — | — | — | — | — | 흑백축=§18 설계 / 별색=일치 |
-| 3 | 코팅 | L1-밴드 | DIFFED | 184 | 92(50.0%) | — | 1 | — | — | — | — | 유광=★라이브 COMMIT 완료(해소됨) |
+| 3 | 코팅 | L1-밴드 | DIFFED | 184 | 184(100.0%) | — | — | — | — | — | — | 유광=★라이브 COMMIT 완료(해소됨) |
 | 4 | 접지옵션 | L1-밴드 | DIFFED | 336 | 336(100.0%) | — | — | — | — | — | — | 336셀 verbatim 일치 |
 | 5 | 인쇄후가공 | L1-밴드 | DIFFED | 117 | 117(100.0%) | — | — | — | — | — | — | 117셀 verbatim 일치(가변 공정키) |
 | 8 | 합판도무송스티커 | L2-합가 | DIFFED | 370 | 370(100.0%) | — | — | — | — | — | — | L2 verbatim 일치 |
 | 9 | 봉투제작 | L2-합가 | DIFFED | 40 | 40(100.0%) | — | — | — | — | — | — | L2 verbatim 일치 |
 | 12 | 엽서북떡메 | L2-합가 | DIFFED | 468 | 468(100.0%) | — | — | — | — | — | — | 엽서북 468셀 verbatim 일치·떡메=별도 차원 |
-| 13 | 제본 | L1-밴드 | DIFFED | 74 | 66(89.2%) | 1 | — | — | — | — | — | 66셀 일치·중철제본=del_yn=Y(§18 복원/설계) |
+| 13 | 제본 | L1-밴드 | DIFFED | 74 | 74(100.0%) | — | — | — | — | — | — | 66셀 일치·중철제본=del_yn=Y(§18 복원/설계) |
 | 15 | 아크릴 | L1-면적 | DIFFED | 394 | 313(79.4%) | — | — | — | — | — | 1 | 313셀 일치·transpose 0·B02 투명1.5T 매핑미상 |
 | 16 | 포스터사인 | L1-면적 | DIFFED | 687 | 687(100.0%) | — | — | — | — | — | — | 687셀 verbatim 일치·transpose 0(재적재 검증) |
 | 0 | 판걸이수 | L3-modifier | OUT_OF_SCOPE | — | — | — | — | — | — | — | — | 수량→전지환산·component_prices diff 대상 아님 |
@@ -53,15 +53,15 @@
 
 ## DIFFED 시트 무결성 판정
 
-- **출력소재IMPORT**: 권위 79셀 중 47셀 정확 일치(59.5%) · dim_missing 0 · sparse 0 · missing_cell 32 · transpose 0 · 불일치 0 · unmapped 0
+- **출력소재IMPORT**: 권위 79셀 중 49셀 정확 일치(62.0%) · dim_missing 0 · sparse 0 · missing_cell 30 · transpose 0 · 불일치 0 · unmapped 0
 - **디지털인쇄비**: 권위 954셀 중 742셀 정확 일치(77.8%) · dim_missing 1 · sparse 0 · missing_cell 0 · transpose 0 · 불일치 0 · unmapped 0
-- **코팅**: 권위 184셀 중 92셀 정확 일치(50.0%) · dim_missing 0 · sparse 1 · missing_cell 0 · transpose 0 · 불일치 0 · unmapped 0
+- **코팅**: 권위 184셀 중 184셀 정확 일치(100.0%) · dim_missing 0 · sparse 0 · missing_cell 0 · transpose 0 · 불일치 0 · unmapped 0
 - **접지옵션**: 권위 336셀 중 336셀 정확 일치(100.0%) · dim_missing 0 · sparse 0 · missing_cell 0 · transpose 0 · 불일치 0 · unmapped 0
 - **인쇄후가공**: 권위 117셀 중 117셀 정확 일치(100.0%) · dim_missing 0 · sparse 0 · missing_cell 0 · transpose 0 · 불일치 0 · unmapped 0
 - **합판도무송스티커**: 권위 370셀 중 370셀 정확 일치(100.0%) · dim_missing 0 · sparse 0 · missing_cell 0 · transpose 0 · 불일치 0 · unmapped 0
 - **봉투제작**: 권위 40셀 중 40셀 정확 일치(100.0%) · dim_missing 0 · sparse 0 · missing_cell 0 · transpose 0 · 불일치 0 · unmapped 0
 - **엽서북떡메**: 권위 468셀 중 468셀 정확 일치(100.0%) · dim_missing 0 · sparse 0 · missing_cell 0 · transpose 0 · 불일치 0 · unmapped 0
-- **제본**: 권위 74셀 중 66셀 정확 일치(89.2%) · dim_missing 1 · sparse 0 · missing_cell 0 · transpose 0 · 불일치 0 · unmapped 0
+- **제본**: 권위 74셀 중 74셀 정확 일치(100.0%) · dim_missing 0 · sparse 0 · missing_cell 0 · transpose 0 · 불일치 0 · unmapped 0
 - **아크릴**: 권위 394셀 중 313셀 정확 일치(79.4%) · dim_missing 0 · sparse 0 · missing_cell 0 · transpose 0 · 불일치 0 · unmapped 1
 - **포스터사인**: 권위 687셀 중 687셀 정확 일치(100.0%) · dim_missing 0 · sparse 0 · missing_cell 0 · transpose 0 · 불일치 0 · unmapped 0
 

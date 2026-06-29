@@ -1,46 +1,54 @@
-# 가격 파이프라인 세션 핸드오프 (최신 2026-06-29 7세션)
+# 가격 파이프라인 세션 핸드오프 (최신 2026-06-30 8세션)
 
-> 재시작 포인터. 활성 하네스=가격테이블 무결성(§26·배치빌더)·가격 종단(§27).
+> 재시작 포인터. 활성 하네스=가격테이블 무결성(§26)·가격 종단(§27)·가격엔진 설계(§18).
 > 권위=2엑셀(상품마스터260610·가격표260527). 엑셀=권위·라이브=감사대상·단가 verbatim.
-> ★다음 세션 필독: **`huni-price-table-integrity/_batch/SHEET-LOAD-PLAYBOOK.md`**(시트별 효율 적재 표준 절차+재사용 쿼리).
+> ★시트별 적재 표준절차=`huni-price-table-integrity/_batch/SHEET-LOAD-PLAYBOOK.md`.
 
-## ★이번 세션(7세션) 한 일 — 배치빌더 전수 진단 + 출력소재 적재 종단
+## ★이번 세션(8세션) 한 일 — 잔여 시트 종결 + 박류 §18 설계 완주
 
-1. **배치 빌더 파일럿→전수** — 디지털인쇄비 1시트 결정론 grid-diff(토큰0) 검증 → 19시트 전파(DIFFED 11·결함 36·적재된 셀은 대부분 권위 verbatim). `_batch/ALL-SHEETS-summary.md`.
-2. **4원 적재 모델 확정** — 코드↔라이브DB↔라이브화면↔엑셀. 사슬=상품→공식→구성요소(use_dims=그리드 컬럼)→단가행. 자동로더 없음·수동 그리드. `_batch/LOADING-MODEL-4WAY-260629.md`.
-3. **라이브 COMMIT 4건**(전부 verbatim·undo 보유):
-   - **코팅 유광 92행**(COMP_COAT_GLOSSY 0→92·유광 견적불가 해소·undo=`coating-glossy-undo.sql`).
-   - **디지털 흑백 단면 106행**(★도수=인쇄옵션이 담음: 사장님이 POPT_000008"단면1도"(앞면도수 CLR_000002) 추가 → 그 print_opt에 흑백 단면 적재·칼라 212행 무변경·엔진변경 불요·undo=`digital-mono-s1-undo.sql`).
-   - **출력소재 PET 2행**(투명/반투명 PET 260g 하위 144/147=1100·투명엽서 견적불가·undo=`paper-gap9-clean5-undo.sql`).
-   - **출력소재 특수용지 하위 18행**(아코팩~큐리어스스킨 색상별 권위값 verbatim·디지털엽서3종 견적불가·undo=`paper-specialty18-undo.sql`).
-   - ※중간 오적재 3절 3행=가짜결함 적발·즉시 제거(원리2).
-4. **시트별 효율 적재 플레이북 정립** — 4원리(카테고리 라우팅·가짜결함 가드·상위하위 레벨·검증) + 재사용 쿼리. `_batch/SHEET-LOAD-PLAYBOOK.md`.
+### 라이브 COMMIT 3건 (전부 verbatim·undo 보유·`_batch/`)
+1. **큐리어스스킨 화이트 880**(MAT_000361 COMP_PAPER 1행) — 출력소재 종결. 형제 색상과 정합(부모=화이트 대표값). undo=`paper-curious-white-undo.sql`.
+2. **제본비 comp 3종 del_yn=N 복원**(COMP_BIND_JUNGCHEOL/MUSEON/PUR) — 제본 시트 74/74 100%. ★엔진은 del_yn 미필터(가격 무관)·어드민 가격뷰어 표시만 복원·단가/바인딩 불변. 트윈링(del=N)과 정합. undo=`binding-restore-delyn-undo.sql`.
+3. **디지털 흑백 양면 106행**(POPT_000009 양면1도·COMP_PRINT_DIGITAL_S1) — 디지털 4도수 완비(칼라단/양면·흑백단/양면 각 106). 권위 흑백양면 verbatim(국4절 qty1=4000·3절 qty1=5000). ★POPT_000009는 사장님이 어드민에서 미리 추가(00:28)→내 적재는 단가행만(ON CONFLICT). 단, **상품 노출(t_prd_product_print_options 연결)은 별도 사장님 결정**(단면 흑백 POPT_000008도 동일 미연결). undo=`digital-mono-s2-undo.sql`.
+
+### 정밀 대조 — UNMAPPED 4시트 전부 "이미 적재(진짜 gap 0)" 확정
+§26 batch가 UNMAPPED 판정한 시트는 **파싱 한계의 false 신호**였고 셀단위 정밀 대조 시 gap 0:
+- **출력소재**: 30 "미적재"=10 아티팩트(siz_cd 빈값)+9 스티커류(COMP_STK_PRINT 적재)+5 3절(가짜결함)+6 미구성.
+- **커팅타공**: 완칼 36/36·타공합가 1구/2구 9/9 verbatim(2중테이블+note행+이중수량축 파싱불가였음). ★합가 우선 규칙 적용.
+- **스티커 B01(반칼 메인)**: 5규격×3소재그룹×36수량=540셀 100%·A3컬럼108셀=반칼 미제공 가짜gap. B02~B07 소블록만 정밀확인 잔여(노이즈 추정).
+- **명함/포토카드**: 12블록 전부 일치·B12 포토카드대량 50/50 좌표 완전일치(수량라벨을 가격값 오인한 64% 노이즈 제거).
+
+### 박류 §18 면적 가격 설계 완주 (데이터 설계 GO·DB 미적재)
+§18 하네스 전단계(카토그래피→벤치마크→설계→E게이트→codex→폐루프2회 REV2/REV3)→**데이터 설계 GO**. 산출=`huni-price-engine-design/03_design/engine-design-foil.md`(+rev2/rev3).
+- 박=동판비(setup·.03 1회성)+박가공비(면적→등급A~E→등급×수량구간·일반/특수박·.02). 신규 5 comp·박색상축=proc_cd(공정 16종 재사용·mint 0)·**7상품 본체 공식 합산 바인딩**(addon 아님·명함박/PRF_DGP_E 입증 패턴).
+- 골든 8/8 권위 verbatim(Claude+codex 독립 재계산 0오차).
+- ★**codex가 돈크리티컬 적발**(designer·Claude validator 둘 다 놓침): 동판비 setup comp에 proc_cd 게이트 없으면 박 미선택 주문에도 동판비 상시 과금→REV3에서 동판비 use_dims에 proc_cd 추가로 해소.
 
 ## ★다음 시작점 (우선순위)
-1. **출력소재 마무리 결정 1건** — 특수용지 기본색(큐리어스스킨 화이트361=880·스타드림 다이아 등)을 **하위로 통일 적재**할지(권장 옵션1) vs 부모 유지(옵션2). 부모를 손님이 직접 고르는 경로 확인 후 결정. (큐리어스스킨 화이트361=880은 권위에 있음·하위0).
-2. **나머지 시트 적재** — 플레이북 절차로: 출력소재 잔여·디지털 흑백 양면(양면1도 print_opt 추가 시·B01 colC 권위값)·제본(del_yn=Y comp 다수=재편 흔적·먼저 이해)·매핑미상 6시트(커팅타공·스티커·명함·박류).
-3. **§17 정리거리** — 중복 mat_cd(MAT_000260 "아트250 + 무광코팅"=MAT_000250 dup)·실사 PET(MAT_000178 .08에 1100 잘못 적재=투명엽서가 쓰는 건 .01 디지털 PET).
+1. **박류 실 적재 승인 큐**(인간 승인 후 dbmap 위임): 신규 5 comp + 동판비/박가공비 단가행(★proc_cd 충전 필수·박가공비 .02 NOT NULL) + 7상품 본체 공식 합산 배선. 단, **C트랙 선결**=면적→등급 환산 엔진 미지원(grade가 pricing.py NON_QTY/TIER_DIMS 부재)→가변사이즈 상품(접지카드/책자)만 종속·고정사이즈(명함류)는 단일등급 collapse로 현 엔진 작동. 개발팀 코드트랙.
+2. **디지털/제본 후속(사장님)**: ① 1도 인쇄 상품 생길 때 t_prd_product_print_options에 POPT_000008(단면1도)·POPT_000009(양면1도) 연결 ② 068~070 책자 표지/내지 5비목 누락(저청구)=§23 셋트 구성.
+3. **스티커 B02~B07 소블록** 정밀확인(낱장/투명/대형/타투/기본가/스티커팩·노이즈 추정이나 미확정).
+4. **§17 정리거리**: G6 명함박 1000구간 단가행 63,000→권위 64,000 라이브 1셀 오적재(교정 후보)·중복 mat_cd(MAT_000260 dup).
 
 ## 미해결/블로커
-- **디지털 흑백 양면** = 사장님이 "양면1도" 인쇄옵션 추가하면 즉시 적재(권위 B01/B02 colC).
-- **흑백 상품 노출** = 1도 인쇄 상품 생길 때 t_prd_product_print_options에 POPT_000008 연결(후속·사장님 결정).
-- **제본 재편**(중철·무선·하드커버 등 del_yn=Y) = 단순 복원 금지·재편 의도 이해 먼저.
-- **면적가격(.08 실사·.20 아크릴)** = mat_cd 아닌 면적 → 별도 감사(이번 출력소재 감사 범위 밖).
+- **박 면적→등급 환산 엔진 미지원**(B-FOIL-2·C트랙 개발팀·가변사이즈 상품 종속).
+- **디지털 흑백 상품 노출**=사장님이 print_opt를 상품에 연결해야 손님 선택 가능(단가는 적재됨).
+- **068~070 책자 저청구**=제본비만 청구·표지/내지 누락=§23 셋트 구성 작업.
 
 ## 이번 세션 결정 (relitigate 금지)
-- **도수(흑백/칼라)는 인쇄옵션(print_opt)이 담는다** — t_prt_print_options.front/back_colrcnt_cd=clr_cd. 엔진은 print_opt_cd로 매칭(clr_cd는 NON_QTY_DIMS에 없음). 그래서 흑백=새 print_opt(POPT_000008)+단가. clr_cd 엔진변경(갈래A) 폐기.
-- **출력소재 적재 레벨=상품 옵션 참조 레벨**(option_items ref_key1). 색상별 절가 상이→부모복사 금지·각 하위 verbatim.
-- **가짜결함 가드**=상품 공식이 그 component를 실제 바인딩하는지 필터(아트250코팅·3절=BOM only).
-- **substrate 카테고리별 component 라우팅**(.01→COMP_PAPER·.11/.13→완제품가·.08/.20→면적).
+- **가격구성요소 통합 vs 분리 기준**=한 상품 안 손님선택(도수)→차원통합 / 종류·상품다름(별색색상·제본종류)→별도 comp. "디지털=통합·제본=분리"는 부정확(디지털도 별색은 분리). 제본 4책자=별개상품→분리 맞음.
+- **합가 우선**[HARD·사용자]=한 시트에 단가·합가 같이 있으면 합가 우선.
+- **setup/1회성 comp도 proc_cd 게이트 필수**[HARD·codex 적발]=가공비뿐 아니라 setup comp(동판비)에도 proc_cd 충전 안 하면 미선택 주문 silent 과금.
+- **del_yn 복원=정합/표시 교정**(엔진 무관)·박색상축=proc_cd·박 바인딩=본체 공식 합산(addon 템플릿은 단일단가만 담아 다차원 박가공비 불가).
 
 ## 건드리지 말 것 (라이브 COMMIT·undo 보유)
-- 이번 4 COMMIT(코팅유광92·흑백단면106·PET2·특수용지18) + 이전 세션 전부(명함18·포스터transpose 등).
-- undo 스크립트: `_batch/{coating-glossy,digital-mono-s1,paper-gap9-clean5,paper-specialty18}-undo.sql`.
+- 이번 3 COMMIT(큐리어스880·제본복원3·디지털흑백양면106) + 이전 세션 전부(코팅유광92·흑백단면106·PET2·특수용지18·명함18·포스터transpose 등).
+- undo: `_batch/{paper-curious-white,binding-restore-delyn,digital-mono-s2}-undo.sql`.
 
 ## 산출물 위치
-- 플레이북: `huni-price-table-integrity/_batch/SHEET-LOAD-PLAYBOOK.md` ★
-- 배치 빌더: `_batch/scripts/`·`ALL-SHEETS-{defects.csv,summary.md}`·`LOADING-MODEL-4WAY-260629.md`
+- 플레이북: `huni-price-table-integrity/_batch/SHEET-LOAD-PLAYBOOK.md`
+- 박류 설계: `huni-price-engine-design/{01_formula,02_benchmark,03_design,04_validation,05_codex}/*-foil.md`
+- 배치 빌더: `_batch/scripts/`·`ALL-SHEETS-summary.md`
 - 적재본/undo: `_batch/*-load.sql`·`*-undo.sql`
 - 실측 환경: `_foundation/live-snapshot/`·시뮬레이터 `_foundation/batch/lib_huni.py`
-- 쉬운 설명: `_foundation/가격파이프라인-쉬운설명-260629.md`
-- §18 도수설계(참고·폐기 갈래A): `huni-price-engine-design/03_design/*-dosu.*`
+- 메모리: [[price-component-unify-vs-split-criterion-260630]]·[[output-material-load-4principles-260629]]
