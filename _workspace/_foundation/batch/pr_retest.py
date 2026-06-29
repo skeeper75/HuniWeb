@@ -171,8 +171,12 @@ def retest(prd_cd, sim):
     # 공통 수량
     qty = pick_common_qty(l_qtys, target=100) if l_qtys else 100
 
-    # 엔진 계산(공통 크기·자재·수량)
-    sel = {"siz_cd": e_sizcd}
+    # 엔진 계산(공통 크기·자재·수량) — 전 필수 FK 차원(묶음수 bdl_qty 등) 주입(견적0 방지)
+    sel = {}
+    for d in meta.get("prod_dims", []):
+        if d.get("kind") == "fk" and d.get("name") != "siz_cd" and d.get("options"):
+            sel[d["name"]] = d["options"][0]["v"]
+    sel["siz_cd"] = e_sizcd
     if mat_cd:
         sel["mat_cd"] = mat_cd
     if e_popt:
