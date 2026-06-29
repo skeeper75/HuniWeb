@@ -9,7 +9,10 @@
 |------|------|
 | `lib_huni.py` | 시뮬레이터 인증 클라이언트(sim-meta/simulate/simulate-set) + 라이브 DB 읽기전용 psql. 셀프테스트=프리미엄엽서 결정론 재현 |
 | `authority.py` | 권위 엑셀 추출 CSV(24_master-extract-260610) 리더 — 사이즈별 권위 판수·주자재(종이)·요구 OC축·가격공식 |
-| `score_batch.py` | 채점 드라이버: sim-meta enumerate → simulate → CALC/PR/R1/R3/OC 채점 → 스코어보드 + 교정 SQL |
+| `score_batch.py` | 채점 드라이버: sim-meta enumerate → simulate → CALC/PR/R1/R3/OC 채점 → 스코어보드 + 교정 SQL. **`--pr` 플래그=예전사이트 골든 대조 PR(가격재현) 추가** |
+| `build_pcode_map.py` | 라이브 prd_cd ↔ 예전사이트 pcode 매핑표 생성(`prd-pcode-map.csv`) |
+| `golden_fetch.py` | 예전사이트(goods.asp) 폼 네이티브 구동→공급가 골든 추출(브라우저 독점) |
+| `pr_score.py` | 엔진 simulate 금액 ↔ 골든 공급가 대조(match/mismatch/no-golden). 상세=`GOLDEN-FETCH-NOTES.md` |
 
 ## 지원 상품군 (그룹)
 | 그룹 | 종류 | 모델 | 대상 선정 |

@@ -21,13 +21,13 @@ PRD_000019,투명엽서,PRD_TYPE.01,digital-print,False,digital-print,False,PRF_
 PRD_000020,화이트인쇄엽서,PRD_TYPE.01,digital-print,False,digital-print,False,PRF_DGP_A,디지털인쇄 원자합산형A 엽서·상품권·슬로건,4,OK,4,0/0,,MAT_000138(젤리볼펜(가칭));MAT_000139(지비츠부속),False,4,75,spot_color
 PRD_000021,핑크별색엽서,PRD_TYPE.01,digital-print,False,digital-print,False,PRF_DGP_A,디지털인쇄 원자합산형A 엽서·상품권·슬로건,4,OK,4,0/0,,,False,3,80,spot_color
 PRD_000022,금은별색엽서,PRD_TYPE.01,digital-print,False,digital-print,False,PRF_DGP_A,디지털인쇄 원자합산형A 엽서·상품권·슬로건,4,OK,4,0/0,,,False,3,80,spot_color
-PRD_000023,모양엽서,PRD_TYPE.01,digital-print,False,digital-print,False,PRF_DGP_B,디지털인쇄 원자합산형B 모양엽서·라벨택,1,PRICED-0,0,0/0,,,False,3,80,cutting
+PRD_000023,모양엽서,PRD_TYPE.01,digital-print,False,digital-print,False,PRF_DGP_B,디지털인쇄 원자합산형B 모양엽서·라벨택,1,OK,1,0/0,,,False,3,80,cutting
 PRD_000024,포토카드,PRD_TYPE.01,digital-print,False,digital-print,False,PRF_PHOTOCARD_NORMAL,일반포토카드 세트 고정가,1,OK,1,0/0,,,True,1,29,coating;finish;material;print_opt;spot_color
-PRD_000025,투명포토카드,PRD_TYPE.01,digital-print,False,digital-print,False,PRF_PHOTOCARD_CLEAR,투명포토카드 세트 고정가,1,PRICED-0,0,0/0,,,True,1,33,finish;material;print_opt;spot_color
+PRD_000025,투명포토카드,PRD_TYPE.01,digital-print,False,digital-print,False,PRF_PHOTOCARD_CLEAR,투명포토카드 세트 고정가,1,OK,1,0/0,,,True,1,33,finish;material;print_opt;spot_color
 PRD_000026,종이슬로건,PRD_TYPE.01,digital-print,False,digital-print,False,PRF_DGP_A,디지털인쇄 원자합산형A 엽서·상품권·슬로건,2,OK,2,0/0,,,True,1,80,coating
-PRD_000027,2단접지카드,PRD_TYPE.01,digital-print,False,digital-print,False,PRF_DGP_E,디지털인쇄 원자합산형E 접지카드·접지리플렛,5,PRICED-0,4,0/4,100x150:e9/a8;135x135:e6/a8;110x170:e4/a8;170x110:e4/a10,,True,1,83,folding
-PRD_000028,미니접지카드,PRD_TYPE.01,digital-print,False,digital-print,False,PRF_DGP_E,디지털인쇄 원자합산형E 접지카드·접지리플렛,4,PRICED-0,3,0/0,,,True,1,83,folding
-PRD_000029,3단접지카드,PRD_TYPE.01,digital-print,False,digital-print,False,PRF_DGP_E,디지털인쇄 원자합산형E 접지카드·접지리플렛,3,PRICED-0,2,0/0,,,True,1,83,folding
+PRD_000027,2단접지카드,PRD_TYPE.01,digital-print,False,digital-print,False,PRF_DGP_E,디지털인쇄 원자합산형E 접지카드·접지리플렛,5,OK,5,0/5,100x150:e9/a8;150x100:e9/a8;135x135:e6/a8;110x170:e4/a8;170x110:e4/a10,,True,1,83,folding
+PRD_000028,미니접지카드,PRD_TYPE.01,digital-print,False,digital-print,False,PRF_DGP_E,디지털인쇄 원자합산형E 접지카드·접지리플렛,4,OK,4,0/0,,,True,1,83,folding
+PRD_000029,3단접지카드,PRD_TYPE.01,digital-print,False,digital-print,False,PRF_DGP_E,디지털인쇄 원자합산형E 접지카드·접지리플렛,3,OK,3,0/0,,,True,1,83,folding
 PRD_000030,지그재그엽서,PRD_TYPE.01,digital-print,False,digital-print,False,,,0,UNBOUND-NO-PRICE,0,0/0,,,True,1,40,folding;material;print_opt
 PRD_000031,프리미엄명함,PRD_TYPE.01,digital-print,False,digital-print,False,PRF_NAMECARD_FIXED,명함 면/소재/수량별 단가(용지포함),0,UNSCORED-축미탑재,0,0/0,,,True,1,80,finish
 PRD_000032,코팅명함,PRD_TYPE.01,digital-print,False,digital-print,False,PRF_NAMECARD_FIXED,명함 면/소재/수량별 단가(용지포함),0,UNSCORED-축미탑재,0,0/0,,,False,2,67,coating;finish
@@ -86,22 +86,22 @@ PRD_000125,캔버스패브릭포스터,PRD_TYPE.01,silsa,False,silsa,False,PRF_P
 PRD_000126,레더아트프린트,PRD_TYPE.01,silsa,False,silsa,False,PRF_POSTER_LEATHER_AP,레더아트프린트 완제품가(면적/규격 단가),2,OK,2,0/0,,,True,1,67,material
 PRD_000127,타이벡프린트,PRD_TYPE.01,silsa,False,silsa,False,PRF_POSTER_TYVEK,타이벡프린트 완제품가(면적/규격 단가),2,OK,2,0/0,,,False,2,67,material
 PRD_000128,메쉬프린트,PRD_TYPE.01,silsa,False,silsa,False,PRF_POSTER_MESH,메쉬프린트 완제품가(면적/규격 단가),2,OK,2,0/0,,,True,1,67,material
-PRD_000129,폼보드,PRD_TYPE.01,silsa,False,silsa,False,PRF_POSTER_FOAMBOARD,폼보드 완제품가(면적/규격 단가),2,PRICED-0,0,0/0,,,False,0,67,coating
-PRD_000130,포맥스보드,PRD_TYPE.01,silsa,False,silsa,False,PRF_POSTER_FOMEXBOARD,포맥스보드 완제품가(면적/규격 단가),2,PRICED-0,0,0/0,,,False,0,67,coating
-PRD_000131,프레임리스우드액자,PRD_TYPE.01,silsa,False,silsa,False,PRF_POSTER_FRAMELESS,프레임리스우드액자 완제품가(면적/규격 단가),2,PRICED-0,0,0/0,,,False,0,67,coating
-PRD_000132,레더아트액자,PRD_TYPE.01,silsa,False,silsa,False,PRF_POSTER_LEATHER_FRAME,레더아트액자 완제품가(면적/규격 단가),6,PRICED-0,0,0/0,,,False,0,100,
-PRD_000133,캔버스 행잉포스터,PRD_TYPE.01,silsa,False,silsa,False,PRF_POSTER_CANVAS_HANGING,캔버스 행잉포스터 완제품가(면적/규격 단가),3,PRICED-0,0,0/0,,,True,1,67,material
+PRD_000129,폼보드,PRD_TYPE.01,silsa,False,silsa,False,PRF_POSTER_FOAMBOARD,폼보드 완제품가(면적/규격 단가),2,OK,2,0/0,,,False,0,67,coating
+PRD_000130,포맥스보드,PRD_TYPE.01,silsa,False,silsa,False,PRF_POSTER_FOMEXBOARD,포맥스보드 완제품가(면적/규격 단가),2,OK,2,0/0,,,False,0,67,coating
+PRD_000131,프레임리스우드액자,PRD_TYPE.01,silsa,False,silsa,False,PRF_POSTER_FRAMELESS,프레임리스우드액자 완제품가(면적/규격 단가),2,OK,2,0/0,,,False,0,67,coating
+PRD_000132,레더아트액자,PRD_TYPE.01,silsa,False,silsa,False,PRF_POSTER_LEATHER_FRAME,레더아트액자 완제품가(면적/규격 단가),6,PRICED-0,2,0/0,,,False,0,100,
+PRD_000133,캔버스 행잉포스터,PRD_TYPE.01,silsa,False,silsa,False,PRF_POSTER_CANVAS_HANGING,캔버스 행잉포스터 완제품가(면적/규격 단가),3,OK,3,0/0,,,True,1,67,material
 PRD_000134,린넨 우드봉 족자,PRD_TYPE.01,silsa,False,silsa,False,PRF_POSTER_LINEN_WOODBONG,린넨 우드봉 족자 완제품가(면적/규격 단가),3,OK,3,0/0,,,True,1,67,material
-PRD_000135,족자포스터,PRD_TYPE.01,silsa,False,silsa,False,PRF_POSTER_JOKJA,족자포스터 완제품가(면적/규격 단가),5,PRICED-0,2,0/0,,,True,1,67,material
+PRD_000135,족자포스터,PRD_TYPE.01,silsa,False,silsa,False,PRF_POSTER_JOKJA,족자포스터 완제품가(면적/규격 단가),5,PRICED-0,4,0/0,,,True,1,67,material
 PRD_000136,PET배너,PRD_TYPE.01,silsa,False,silsa,False,PRF_POSTER_PET_BANNER,PET배너 완제품가(면적/규격 단가),1,OK,1,0/0,,MAT_000223(우드거치대),True,1,50,coating;material
 PRD_000137,메쉬배너,PRD_TYPE.01,silsa,False,silsa,False,PRF_POSTER_MESH_BANNER,메쉬배너 완제품가(면적/규격 단가),1,OK,1,0/0,,,True,1,67,material
 PRD_000138,일반현수막,PRD_TYPE.01,silsa,False,silsa,False,PRF_POSTER_BANNER_N,일반현수막 완제품가(면적/규격 단가),2,OK,1,0/0,,MAT_000069(양면테입);MAT_000070(설치용끈);MAT_000337(큐방);MAT_000338(각목);MAT_000340(봉제사),True,1,67,material
 PRD_000139,메쉬현수막,PRD_TYPE.01,silsa,False,silsa,False,PRF_POSTER_BANNER_M,메쉬현수막 완제품가(면적/규격 단가),2,OK,1,0/0,,MAT_000070(설치용끈),True,1,50,material
-PRD_000140,무광시트커팅,PRD_TYPE.01,silsa,False,silsa,False,PRF_POSTER_SHEETCUT_MATTE,무광시트커팅 완제품가(면적/규격 단가),3,PRICED-0,0,0/0,,,False,2,67,material
-PRD_000141,홀로그램 시트커팅,PRD_TYPE.01,silsa,False,silsa,False,PRF_POSTER_SHEETCUT_HOLO,홀로그램 시트커팅 완제품가(면적/규격 단가),3,PRICED-0,0,0/0,,,True,1,67,material
+PRD_000140,무광시트커팅,PRD_TYPE.01,silsa,False,silsa,False,PRF_POSTER_SHEETCUT_MATTE,무광시트커팅 완제품가(면적/규격 단가),3,OK,3,0/0,,,False,2,67,material
+PRD_000141,홀로그램 시트커팅,PRD_TYPE.01,silsa,False,silsa,False,PRF_POSTER_SHEETCUT_HOLO,홀로그램 시트커팅 완제품가(면적/규격 단가),3,OK,3,0/0,,,True,1,67,material
 PRD_000142,유광아크릴스티커,PRD_TYPE.01,silsa,False,silsa,False,PRF_POSTER_ACRYLSTK_GLOSS,유광아크릴스티커 완제품가(면적/규격 단가),4,OK,4,0/0,,,False,2,67,material
 PRD_000143,미러아크릴스티커,PRD_TYPE.01,silsa,False,silsa,False,PRF_POSTER_ACRYLSTK_MIRROR,미러아크릴스티커 완제품가(면적/규격 단가),4,OK,4,0/0,,,False,2,67,material
-PRD_000144,미니보드스탠딩,PRD_TYPE.01,silsa,False,silsa,False,PRF_POSTER_MINI_STANDBOARD,미니보드스탠딩 완제품가(면적/규격 단가),3,PRICED-0,0,0/0,,,False,0,100,
+PRD_000144,미니보드스탠딩,PRD_TYPE.01,silsa,False,silsa,False,PRF_POSTER_MINI_STANDBOARD,미니보드스탠딩 완제품가(면적/규격 단가),3,OK,3,0/0,,,False,0,100,
 PRD_000145,미니배너,PRD_TYPE.01,silsa,False,silsa,False,PRF_POSTER_MINI_BANNER,미니배너 완제품가(면적/규격 단가),2,OK,2,0/0,,,True,1,50,coating;material
 PRD_000146,아크릴키링,PRD_TYPE.01,acrylic,False,acrylic,False,PRF_CLR_ACRYL,투명 아크릴 공식,2,OK,2,0/0,,,True,1,100,
 PRD_000147,아크릴마그넷,PRD_TYPE.01,acrylic,False,acrylic,False,PRF_CLR_ACRYL,투명 아크릴 공식,2,OK,2,0/0,,,True,1,100,
@@ -128,15 +128,15 @@ PRD_000168,아크릴입체코롯토,PRD_TYPE.01,(미발견),False,,False,PRF_ACR
 PRD_000169,아크릴입체블럭,PRD_TYPE.01,(미발견),False,,False,PRF_ACRYL_3DBLOCK_TBD,아크릴입체블럭 (★단가 확인필요),0,TBD-미설정,0,0/0,,,True,1,,
 PRD_000170,아크릴쉐이커★,PRD_TYPE.01,(미발견),False,,False,PRF_ACRYL_SHAKER_TBD,아크릴쉐이커 (★자재/단가 확인필요),0,TBD-미설정,0,0/0,,,False,0,,
 PRD_000171,지비츠★,PRD_TYPE.01,(미발견),False,,False,PRF_ACRYL_ZIBITZ2_TBD,지비츠★ (★사이즈/자재/단가 미설정),0,TBD-미설정,0,0/0,,,True,1,,
-PRD_000172,만년다이어리(소프트커버),PRD_TYPE.01,stationery,False,stationery,True,,,0,UNBOUND-PRICE-IN-SHEET,0,0/0,,,True,1,100,
-PRD_000173,만년다이어리(하드커버),PRD_TYPE.01,stationery,False,stationery,True,,,0,UNBOUND-PRICE-IN-SHEET,0,0/0,,,True,1,100,
-PRD_000174,만년다이어리(레더하드커버),PRD_TYPE.01,stationery,False,stationery,True,,,0,UNBOUND-PRICE-IN-SHEET,0,0/0,,MAT_000186(레더),True,1,100,
-PRD_000175,만년다이어리(레더소프트커버),PRD_TYPE.01,stationery,False,stationery,True,,,0,UNBOUND-PRICE-IN-SHEET,0,0/0,,MAT_000186(레더),True,1,100,
-PRD_000176,먼슬리플래너,PRD_TYPE.01,stationery,False,stationery,True,,,0,UNBOUND-PRICE-IN-SHEET,0,0/0,,,False,2,100,
-PRD_000178,스프링수첩,PRD_TYPE.01,stationery,False,stationery,True,,,0,UNBOUND-PRICE-IN-SHEET,0,0/0,,,False,3,100,
-PRD_000179,메모패드,PRD_TYPE.01,stationery,False,stationery,True,,,0,UNBOUND-PRICE-IN-SHEET,0,0/0,,,False,3,100,
+PRD_000172,만년다이어리(소프트커버),PRD_TYPE.01,stationery,False,stationery,True,PRF_STN_DIARY_SOFT,만년다이어리(소프트커버) 완제품가,1,OK,1,0/0,,,True,1,100,
+PRD_000173,만년다이어리(하드커버),PRD_TYPE.01,stationery,False,stationery,True,PRF_STN_DIARY_HARD,만년다이어리(하드커버) 완제품가,1,OK,1,0/0,,,True,1,100,
+PRD_000174,만년다이어리(레더하드커버),PRD_TYPE.01,stationery,False,stationery,True,PRF_STN_DIARY_LHARD,만년다이어리(레더하드커버) 완제품가,1,OK,1,0/0,,MAT_000186(레더),True,1,100,
+PRD_000175,만년다이어리(레더소프트커버),PRD_TYPE.01,stationery,False,stationery,True,PRF_STN_DIARY_LSOFT,만년다이어리(레더소프트커버) 완제품가,1,OK,1,0/0,,MAT_000186(레더),True,1,100,
+PRD_000176,먼슬리플래너,PRD_TYPE.01,stationery,False,stationery,True,PRF_STN_MONTHLY,먼슬리플래너 완제품가,1,OK,1,0/0,,,False,2,100,
+PRD_000178,스프링수첩,PRD_TYPE.01,stationery,False,stationery,True,PRF_STN_SPRINGNOTEBK,스프링수첩 완제품가,1,OK,1,0/0,,,False,3,100,
+PRD_000179,메모패드,PRD_TYPE.01,stationery,False,stationery,True,PRF_STN_MEMOPAD,메모패드 완제품가,2,OK,2,0/0,,,False,3,100,
 PRD_000180,메모패드(내지커스텀) 준비중,PRD_TYPE.03,stationery,False,stationery,True,,,0,UNBOUND-PRICE-IN-SHEET,0,0/0,,,True,1,100,
-PRD_000181,중철노트,PRD_TYPE.01,stationery,False,stationery,True,,,0,UNBOUND-PRICE-IN-SHEET,0,0/0,,,False,3,100,
+PRD_000181,중철노트,PRD_TYPE.01,stationery,False,stationery,True,PRF_STN_JUNGCHEOL,중철노트 완제품가,1,OK,1,0/0,,,False,3,100,
 PRD_000183,틴거울,PRD_TYPE.01,goods-pouch,False,goods-pouch,True,,,0,UNBOUND-PRICE-IN-SHEET,0,0/0,,,True,1,100,
 PRD_000184,컴팩트거울,PRD_TYPE.01,goods-pouch,False,goods-pouch,True,,,0,UNBOUND-PRICE-IN-SHEET,0,0/0,,,True,1,100,
 PRD_000185,카드거울,PRD_TYPE.01,goods-pouch,False,goods-pouch,True,,,0,UNBOUND-PRICE-IN-SHEET,0,0/0,,,False,0,100,
