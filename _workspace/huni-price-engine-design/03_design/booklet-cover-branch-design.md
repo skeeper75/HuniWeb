@@ -12,6 +12,22 @@
 
 **한 정보(표지인쇄+표지코팅)가 책등 유무로 펼침×1/개별×2 분기**되도록, evaluate_set_price가 처리할 표지측 가격구성요소 배치를 10책자(068~071·072·077·082·088·094·100)에 설계한다. 핵심 = **표지 출력매수가 책등 유무로 갈리는 배수를 어디에 어떻게 두느냐**.
 
+### 0.0 ★★ 2트랙 분리 — REV(폐루프 보정·검증가 E4/E6 + codex Phase5.5 NO-GO 합의) [HARD]
+
+> **검증가(조건부 GO·E4 CONDITIONAL/E6 PARTIAL)와 codex(NO-GO·Q2 "C2 그대로 구현 불가" 단정)가 reconcile §C에서 "사실 충돌 아닌 엄격도 차이"로 합의 → 돈크리티컬 안전쪽(codex 엄격) 채택해 종합을 2트랙으로 격상.**
+
+| 트랙 | 판정 | 범위 | 근거 |
+|------|:----:|------|------|
+| **① 데이터 설계 트랙** | ✅ **GO 유지** | 공식·구성요소·단가행·골든 — verbatim·구조 변경 없음. 068A=158,688·068B +85,000·071=164,665 허용오차 0 PASS(E6). | E1~E3·E5 PASS·E6 주값 PASS·codex A6/A7 합의. |
+| **② cover_mult ×2 실행 트랙** | ❌ **NO-GO · BLOCKED** | cover_mult=2 배수를 현행 evaluate_price 단일 qty로 표지(cover_sheets)·제본(copies) 동시 처리 **불가**. 표지를 부모공식 직배선하면 S1이 자동 plate_qty(⌈copies/pansu⌉)로 환산되어 **cover_mult×copies가 안 됨**(E4·codex Q2 독립 합치 A1). | 인간 결정 큐 **Q-CB-COVERMULT-ENGINE**으로 격상. |
+
+★ **종합 라벨 (REV)**: **데이터 GO / cover_mult ×2 실행 NO-GO(BLOCKED)**. "조건부 GO"의 "보정하면 됨" 뉘앙스가 cover_mult ×2를 그대로 적재하게 두면 071/082 저·과청구 실재화(reconcile §C). codex가 라벨을 NO-GO로 끌어 BLOCKED를 명확화(N-CB-1)한 것을 채택.
+
+★ **cover_mult ×2 실행 해법 2택 (Q-CB-COVERMULT-ENGINE·인간 결정)**:
+- **(a) 표지를 cover_sheets qty member로 재설계** — 표지를 부모공식 직배선이 아니라 **별 evaluate_price 호출 단위(member)**로 분리하고, evaluate_set_price 호출자가 `member.qty = copies × cover_mult`를 주입(pricing.py:851 "호출자 산출 유효수량"). 표지·제본·내지가 각자 다른 qty로 평가됨. **신규 엔진 코드 0(호출자 qty 주입은 기존 계약)**·표지 반제품 mint 필요(dbmap).
+- **(b) price_views.py C트랙(개발팀)** — 부모공식 안에서 component별 effective qty override를 지원하도록 엔진 계약 확장. webadmin 코드 직접수정 금지 → 개발팀 위임.
+- ★ **why BLOCKED**: 표지가 **부모공식 직배선**이면 evaluate_price(prd_cd, sel, qty)가 공식 전체에 단일 qty(copies)만 주고, S1(plt_siz_cd 차원)은 plate_qty(⌈copies/pansu⌉)로 자동 환산되므로 **cover_mult×copies(=copies×2)를 표현할 경로가 없다**(E4 실측·pricing.py:674-692). 부모 qty=copies면 표지 ~50% 저청구·qty=cover_sheets면 제본 2배 과청구(codex Q2).
+
 ### 0.1 ★라이브 freshness 실측 (2026-06-30·읽기전용 SELECT·본 세션 직접 — 입력 문서 이후 대폭 진화)
 
 | 상품 | 라이브 바인딩 실측 | 셋트 구성원 | page_rule | 표지/내지 합산 상태 | 비고 |
@@ -51,11 +67,14 @@
 
 | 후보 | 배수 위치 | 메커니즘 | trade-off | 판정 |
 |------|----------|----------|-----------|------|
-| **후보 ① 출력매수 앱계산 (권고)** | evaluate_set_price 런타임 `cover_sheets = copies × cover_mult` | 부모공식 표지인쇄/코팅/용지 comp 단가는 1매 기준(verbatim 그대로)·매수만 cover_mult(068~070=1·071/082=2) 곱. cover_mult는 상품 메타/page_rule 파생(책등 유무) | **단가행 무중복**(comp 단가 1매 기준 그대로)·SKU 폭발 0·off-grid ceiling·판수·책등과 동일 앱계산 철학([[dbmap-compute-in-app-db-stores-lookup]]) | ✅ **권고** |
-| 후보 ② sub_prd_qty=2 (셋트행) | 표지 구성원 `sub_prd_qty`를 068~070=1·071/082=2 | 셋트 BOM 수량으로 표지 2장 표현. 단 **표지 구성원은 가격공식 0**(비용=부모공식)이라 sub_prd_qty 곱이 가격에 안 닿음 → 무효 | ❌ 표지 가격이 부모공식에 있어 sub_prd_qty가 가격에 미반영(072 표지073=공식0 실측) | ✗ 부결 |
+| **후보 ① 부모공식 직배선 + 앱계산** | evaluate_set_price 런타임 `cover_sheets = copies × cover_mult` | 부모공식 표지인쇄/코팅/용지 comp 단가는 1매 기준(verbatim 그대로)·매수만 cover_mult(068~070=1·071/082=2) 곱 | ❌ **REV(폐루프 보정): 현행 엔진 미지원** — 부모공식 직배선이면 evaluate_price 단일 qty(copies)만 받고 S1은 plate_qty(⌈copies/pansu⌉)로 자동환산 → cover_mult×copies 표현 경로 없음(E4·codex Q2 A1) | ✗ **BLOCKED**(직배선) |
+| **후보 ①' 표지 member 분리 + 호출자 qty 주입 (권고·REV)** | 표지를 **별 evaluate_price 호출 단위(member)**·호출자가 `member.qty = copies × cover_mult` 주입 | 표지/제본/내지가 각자 다른 qty로 평가(pricing.py:851 호출자 유효수량)·신규 엔진 코드 0 | **단가 1매 기준 verbatim·tier도 cover_sheets로 조회(권위 대조 필요·§1.4)**·표지 반제품 mint 필요 | ✅ **권고(해법 a)**·Q-CB-COVERMULT-ENGINE |
+| 후보 ② sub_prd_qty=2 (셋트행) | 표지 구성원 `sub_prd_qty`를 068~070=1·071/082=2 | 셋트 BOM 수량으로 표지 2장 표현. 단 **표지 구성원은 현재 가격공식 0**(비용=부모공식)이라 sub_prd_qty 곱이 가격에 안 닿음 → 무효 | ❌ 표지 가격이 부모공식에 있어 sub_prd_qty가 가격에 미반영(072 표지073=공식0 실측). **단 후보①'로 표지 member에 공식 부여하면 sub_prd_qty도 경로가 생김(해법 a와 결합 가능)** | △ 후보①'와 결합 시 유효 |
 | 후보 ③ comp 배선 ×2 (formula_components 2회) | 부모공식에 표지인쇄 comp를 2회 배선(071만) | 같은 comp_cd 2회 → `_combo_key` 충돌·silent 이중합산/ERR_AMBIGUOUS(디지털 S1/S2 동형 위험) | ❌ combo_key 충돌·엔진 계약 위반 | ✗ 부결 |
 
-★ **결정 (AD-CB1·확신도 높음): 후보 ① 출력매수 앱계산** — 표지 출력매수 = `copies × cover_mult`. `cover_mult`는 책등 유무 파생(펼침=1·개별=2). 부모공식의 표지인쇄(S1)·표지코팅(MATTE/GLOSSY)·표지용지(COMP_PAPER) comp는 **1매 기준 단가 그대로**, 곱해지는 출력매수(qty 인자)만 cover_mult 반영. 이중계상 0(단가 1매 기준이라 ×2 정당·booklet-formula-principle §4).
+★ **결정 (AD-CB1·REV 폐루프 보정): cover_mult ×2 실행 = BLOCKED·표지 member 분리(후보①')가 엔진 정합 해법.**
+- **데이터 설계 트랙(GO)**: 표지인쇄(S1)·표지코팅(MATTE/GLOSSY)·표지용지(COMP_PAPER) comp 분해·단가 1매 기준 verbatim·출력매수 = `copies × cover_mult`(펼침1/개별2) 산식 — **변경 없이 보존**. 이중계상 0(단가 1매 기준이라 ×N 정당·booklet-formula-principle §4).
+- **실행 트랙(NO-GO·BLOCKED)**: 위 산식을 **부모공식 직배선(후보①)으로는 현행 evaluate_price가 표현 못 함**(단일 qty·plate_qty 자동환산). 해법 = 후보①'(표지 member.qty=cover_sheets 주입) 또는 price_views.py C트랙. 인간 결정 큐 **Q-CB-COVERMULT-ENGINE**(§0.0).
 
 ### 1.2 cover_mult를 무엇이 결정하는가 (책등 유무 파생)
 
@@ -89,6 +108,18 @@
 - **단/양면(print_opt_cd)은 표지인쇄 단가행에 흐름** — 손님 양면 선택 시 S1 POPT_000002(700)이 매칭(단면 350의 2배). cover_mult(출력매수)와 독립 곱.
 - **코팅 단/양면(coat_side_cnt)은 표지코팅 단가행에 흐름** — coat_side=2면 MATTE 1000(단면 500의 2배).
 - **시뮬레이터 검증 포인트**: cover_sheets가 책등 유무 정확 반영하는지(068~070=copies·071/082=copies×2). 양면 주문이 양면 단가 받는지(R-4·prevsite +60~67%).
+
+### 1.4 ★cover_sheets는 매수 곱뿐 아니라 단가 tier(min_qty) 조회 기준 — REV(폐루프 보정·N-CB-1/G-071·돈크리티컬) [HARD]
+
+> **검증가 E4 보정#2 + codex Q3 독립 합치(A2·고신뢰 확정).** cover_sheets를 표지 comp의 qty로 넣으면 "매수만 ×2 곱"이 아니라 **min_qty tier 조회 기준 자체가 cover_sheets로 바뀐다**.
+
+| 시나리오(G-071·copies=50·트윈링 ×2) | 표지 comp 평가 qty | S1 단가 tier 매칭 | 결과 |
+|-------------------------------------|--------------------|-------------------|------|
+| 부모 qty=**copies=50** 주입 | 50 | m=50 tier=**550**(예시·tier 권위 확정 필요) | ★표지 ~50% **저청구**(cover_mult ×2 미반영·17,500 vs 의도 35,000) |
+| 표지 qty=**cover_sheets=100** 주입 | 100 | m=100 tier=**350** | 매수 ×2 정확하나 **단가 tier가 100매 기준(350)으로 낮아짐** — 부수 50 기준 tier(550)이 권위면 오선택 |
+
+★ **결판 미결(컨펌큐 N-CB-TIER·Q-CB-COVERMULT-ENGINE 연동)**: 표지 단가 tier 기준이 **(가) 주문부수(copies=50→550) vs (나) 출력매수(cover_sheets=100→350)** 중 무엇인지 **권위 표지단가 verbatim 대조로 확정**해야 함. 수량↑→단가↓ 구조라 cover_sheets=100 적용이 표지 단가를 낮춰 **저청구할 수 있음**(codex Q3). 현 시점 **미결** — 게이트에서 권위 가격표 tier 기준(부수 vs 출력매수) 대조 후 fix.
+★ **돈크리티컬 가드**: "×2만 한다"가 아님. tier 변동까지 함께 결정해야 표지비 정확. 골든 G-071 주값(164,665)은 cover_sheets=100 tier=350 전제(E6 PASS)이나, 권위가 부수 tier면 재계산 필요.
 
 ---
 
@@ -130,25 +161,31 @@
 - 082(하드커버링)는 **링이라 앞뒤 2장**. 082가 072 COVERBIND를 공유하면 표지비 ~50% 저청구(앞뒤 2장인데 1장단가).
 - **설계 결판(확신도 중)**: 082는 **별 COVERBIND_TWINRING 또는 분해형(068~071 패턴)** 필요. 통합단가 공유 금지(펼침/개별 다름). **권위 가격표(하드커버링 표지단가)가 앞뒤 2면 포함이면 ×1·1면 기준이면 ×2** → 게이트에서 권위 verbatim 대조(Q-CB-082).
 
+★ **REV(폐루프 보정·double-count 가드·codex B2/Q5-1) [HARD]**: 072/077/082는 **통합형(◆ COVERBIND·표지+제본 권당 단일단가)**. COVERBIND가 표지를 이미 포함하므로 여기에 **분해형 표지 comp(표지인쇄 S1·표지코팅 COAT·표지용지 PAPER)를 추가 배선하면 표지비 double-count**(통합단가 + 별 표지비 = 표지 2번 청구). → **통합형(072/077/082)에 분해형 표지 comp 추가배선 절대 금지**(이미 §2.1 ◆통합 표기). 082의 ×2는 **COVERBIND 단가 자체를 ×2(또는 별 COVERBIND_TWINRING variant)**로 해결·분해형 comp 덧붙이기 금지. 이 가드는 codex가 "통합형+분해형 혼용 double-count"로 적발(B2·Q7)한 것을 명문화.
+
 ---
 
-## 3. ★077/082 내지 구성원 누락 교정 명세 (라이브 실측 결함)
+## 3. ★077/082 부모공식 0행 + 내지 구성원 누락 교정 명세 (라이브 실측 결함) — REV(폐루프 보정·D-CB-2 Critical/A3)
 
-### 3.1 결함 확정 (2026-06-30 실측)
+### 3.1 결함 확정 (2026-06-30 실측) — ★1차 결함 = 부모공식 0행(견적 0원), 내지 누락은 2차 [HARD]
 
-| 상품 | 셋트 구성원 실측 | page_rule | 내지 누락 |
-|------|------------------|-----------|-----------|
-| **077 레더HC** | 표지078 + 면지079/080/081 (**내지 0행**) | **24/300/2 존재** | ❌ page_rule 있는데 내지 구성원 없음 = 내지비 전부 누락(심각 저청구) |
-| **082 HC링** | 표지083 + 면지084~087 (**내지 0행**) | **8/100/2 존재** | ❌ 동 |
-| 088 레더링바인더 | 표지089 + 면지090~093 | **없음** | ✅ 정상(빈 바인더·내지 없음·BLOCKED 보류중) |
+> **REV(폐루프 보정·검증가 E6 + codex Q4 독립 합치 A3·고신뢰).** 현행 설계가 "내지 누락"만 강조했으나 **더 선행 결함 = 부모공식 미바인딩(0행)** — 077/082는 표지/제본/내지 **전액 미산정 = 견적 0원 가능**. 내지 누락은 부모공식 바인딩 후에야 드러나는 **2차 결함**.
 
-★ page_rule이 있다는 것은 **내지 페이지를 입력받는다는 뜻** = 내지가 가격에 기여해야 함. 그런데 내지 구성원(sub_prd)이 없어 evaluate_set_price가 내지비를 합산 못 함 → **책 한 권에서 종이·인쇄가 전부 빠진 저청구**(072 내지284 대비).
+| 상품 | 라이브 공식 바인딩 | 셋트 구성원 실측 | page_rule | 결함 (선행순) |
+|------|--------------------|------------------|-----------|---------------|
+| **077 레더HC** | **0행(미바인딩)** | 표지078 + 면지079/080/081 (**내지 0행**) | **24/300/2 존재** | ① **부모공식 0행=표지+제본+내지 전액 0=견적 0원** ② page_rule 있는데 내지 구성원 없음 |
+| **082 HC링** | **0행(미바인딩)** | 표지083 + 면지084~087 (**내지 0행**) | **8/100/2 존재** | ① **부모공식 0행=견적 0원** ② 내지 구성원 없음 (+ 링 ×2 미결 Q-CB-082) |
+| 088 레더링바인더 | 0행 | 표지089 + 면지090~093 | **없음** | 정상(빈 바인더·내지 없음·BLOCKED 보류중) |
 
-### 3.2 교정 명세 — 내지 구성원 mint (search-before-mint·072 PRD_000284 동형)
+★ **1차 결함(견적 0원)**: 077/082는 `t_prd_product_price_formulas` 바인딩 0행 → evaluate_price 부모 기여=0 → 표지/제본까지 전부 미산정. G-CB-077의 "COVERBIND ×100=796,900"은 **현재 재현 불가**(공식 미바인딩·가정값일 뿐). 1순위 = 부모공식 바인딩(072 PRF_HC_MUSEON_SET 동형).
+★ **2차 결함(내지 누락)**: page_rule이 있다는 것은 **내지 페이지를 입력받는다는 뜻** = 내지가 가격에 기여해야 함. 그런데 내지 구성원(sub_prd)이 없어 evaluate_set_price가 내지비를 합산 못 함 → **책 한 권에서 종이·인쇄가 전부 빠진 저청구**(072 내지284 대비). 부모공식 바인딩 후 노출.
+
+### 3.2 교정 명세 — ① 부모공식 바인딩(1차) + ② 내지 구성원 mint(2차) (search-before-mint·072 동형) — REV(폐루프 보정)
 
 | 항목 | 077 | 082 | 처리 |
 |------|-----|-----|------|
-| **내지 반제품 mint** | 레더하드커버책자-내지 | 하드커버 링책자-내지 | **BLOCKED→dbmap mint**(072 PRD_000284 동형·인간 승인·채번 MAX+1) |
+| **① 부모공식 바인딩 (1차·선행)** | `PRF_HC_MUSEON_SET` 동형 바인딩 | `PRF_HC_MUSEON_SET`(링 proc) 동형 | **BLOCKED→dbmap**(072 동형·신규 공식 0행 재사용·product_price_formulas 1행 INSERT·인간 승인). ★단 082는 링(책등없음)이라 COVERBIND ×2 미결(Q-CB-082)·**신규 공식이라 공식 자체가 0행 mint면 BLOCKED**(dbmap) |
+| **② 내지 반제품 mint (2차)** | 레더하드커버책자-내지 | 하드커버 링책자-내지 | **BLOCKED→dbmap mint**(072 PRD_000284 동형·인간 승인·채번 MAX+1) |
 | **가격공식 바인딩** | PRF_DGP_INNER (재사용·신규0) | PRF_DGP_INNER | 내지 반제품에 전사(S1 인쇄비 + COMP_PAPER 용지비·page파생) |
 | **셋트행 INSERT** | 077 disp_seq 5: 내지 sub_prd | 082 disp_seq 6: 내지 sub_prd | t_prd_product_sets 1행 추가(min/max/incr=page_rule) |
 | **내지 page 범위** | 24/300/2 (077 page_rule) | 8/100/2 (082 page_rule) | 셋트행 min_cnt/max_cnt/cnt_incr 충전 |
@@ -203,42 +240,49 @@ evaluate_set_price(prd_cd, selections, copies) =
 ### 4.3 골든 케이스 (검증가 재계산용·verbatim 손계산)
 
 > 단가 전부 라이브 국4절 verbatim(2026-06-30 실측). DBLPANSU 코드교정 전제(내지 ÷pansu 1회).
+> ★**REV(폐루프 보정)**: 068A/068B/071 주값 = **데이터 트랙 GO**(E6 PASS·허용오차 0). 077/082 = **현행 0원 vs 정답 양면 표기**(부모공식 미바인딩·E6 ❌ 전제). 071 ×2 = **실행 트랙 BLOCKED**(엔진 미지원·§0.0). 도수 라벨 칼라/흑백 명시(아래).
 
-**G-CB-068A (중철·표지 단면 백모120 무광·내지 28p양면·100부)** — 펼침×1 기준선
+★ **REV(폐루프 보정·도수 라벨 명시·D-CB-5)** [HARD]: 골든 print_opt_cd 라벨 — **POPT_000001=칼라(CMYK)단면·POPT_000002=칼라양면·POPT_000008=흑백1도 단면·POPT_000009=흑백1도 양면**. 아래 골든은 전부 **칼라(CMYK)** 도수. 흑백 주문 시 POPT_000008(단면 200)/POPT_000009(양면 400)이 매칭(칼라 350/700보다 낮음) — 흑백을 칼라단가로 청구하면 과청구·칼라를 흑백단가로 청구하면 저청구. 도수축(print_opt)은 펼침/개별(cover_mult)과 완전 독립.
+
+**G-CB-068A (중철·표지 칼라(POPT_000001)단면 백모120 무광·내지 28p양면·100부)** — 펼침×1 기준선
 - 부모공식 PRF_BIND_SUM (cover_mult=1·cover_sheets=100):
-  - 표지인쇄 S1 POPT_000001(단면) 국4절 100매=350 × 100 = **35,000**
+  - 표지인쇄 S1 POPT_000001(칼라단면) 국4절 100매=350 × 100 = **35,000**
   - 표지코팅 MATTE coat_side=1 100매=500 × 100 = **50,000**
   - 표지용지 COMP_PAPER 백모120(MAT_000073) 국4절 36.88 × 100 = **3,688**
   - 제본 JUNGCHEOL PROC_000018 tier(100)=700 × 100부 = **70,000**
   - 부모 소계 = **158,688**
 - 내지 PRF_DGP_INNER (page파생·inner_sheets=100×⌈28/pansu⌉·게이트 판수 확정)
-- 검증: 표지 단면=350·펼침 cover_mult=1·이중합산 0·제본 1회.
+- 검증: 표지 칼라단면=350·펼침 cover_mult=1·이중합산 0·제본 1회. ★데이터 트랙 GO(E6 PASS 158,688). cover_mult=1이라 실행 트랙 BLOCKED 무영향(068~070은 ×1이므로 부모공식 직배선으로도 정확).
 
-**G-CB-068B (068A에서 표지만 양면)** — R-4 양면 가격축
-- 표지인쇄 S1 POPT_000002(양면) 700 × 100 = **70,000** (단면 35,000의 2배)
+**G-CB-068B (068A에서 표지만 칼라양면)** — R-4 양면 가격축
+- 표지인쇄 S1 POPT_000002(칼라양면) 700 × 100 = **70,000** (칼라단면 35,000의 2배)
 - 표지코팅 MATTE coat_side=2 1000 × 100 = **100,000** (2배)
 - 부모 소계 = 70,000+100,000+3,688+70,000 = **243,688** (068A 대비 +85,000)
-- 검증: 양면이 POPT_000002·coat_side=2로 흐르면 양면단가 자동. 단면으로 청구되면 +85,000 저청구.
+- 검증: 양면이 POPT_000002(칼라양면)·coat_side=2로 흐르면 양면단가 자동. 단면으로 청구되면 +85,000 저청구. ★데이터 트랙 GO(E6 PASS +85,000).
 
-**G-CB-071 (트윈링·표지 단면 아트150 무광·내지 100p단면·50부)** — ★개별 ×2 검출
+**G-CB-071 (트윈링·표지 칼라(POPT_000001)단면 아트150 무광·내지 100p단면·50부)** — ★개별 ×2 검출 / 실행 트랙 BLOCKED 핵심
 - 부모공식 PRF_BIND_TWINRING (cover_mult=**2**·cover_sheets=50×2=**100**):
-  - 표지인쇄 S1 POPT_000001 350 × 100(=50×2) = **35,000** ← ×2 미적용 시 50×350=17,500(절반 저청구)
-  - 표지코팅 MATTE coat_side=1 500 × 100 = **50,000** ← ×1이면 25,000
-  - 표지용지 COMP_PAPER 아트150(MAT_000078) 46.65 × 100 = **4,665** ← ×1이면 2,332.5
+  - 표지인쇄 S1 POPT_000001(칼라단면) cover_sheets=100 tier=350 × 100 = **35,000**
+  - 표지코팅 MATTE coat_side=1 cover_sheets=100 tier=500 × 100 = **50,000**
+  - 표지용지 COMP_PAPER 아트150(MAT_000078) 46.65 × 100 = **4,665**
   - 제본 TWINRING PROC_000021 tier(50)=1,500 × 50부 = **75,000** (proc_cd 주입 필수·§5)
-  - 부모 소계 = **164,665**
-- 내지 PRF_DGP_INNER (100p 단면·POPT_000001·page파생)
-- 검증: ★표지 3비목 전부 cover_sheets=100(=copies×2). ×1이면 표지비 ~50% 저청구=cover_mult 결함. 제본은 권당(×50부·proc_cd=PROC_000021 정확). 단/양면(print_opt)과 ×2(cover_mult) 독립.
+  - 부모 소계 = **164,665** (cover_sheets=100 tier=350 전제·E6 PASS 주값)
+- 내지 PRF_DGP_INNER (100p 칼라단면·POPT_000001·page파생)
+- 검증: ★데이터 트랙 = 164,665 GO(E6 PASS). 표지 3비목 cover_sheets=100(=copies×2)·제본 권당(×50부).
+- ★**REV(폐루프 보정·071 비교주석 정정·D-CB-5)**: 종전 "×1이면 17,500" 주석은 **삭제** — tier 의미를 무시(실제 ×1=27,500/35,000·copies=50 tier=550/700 가정). cover_mult ×2 미적용은 단순 매수 절반이 아니라 **tier 자체가 50매 기준으로 바뀜**(§1.4)이므로 단순 "절반" 비교는 부정확. 실 검출은 §1.4 tier 시나리오 표로 대체.
+- ★**실행 트랙 NO-GO(BLOCKED·D-CB-3)**: cover_sheets=100을 표지에 적용하려면 표지가 **부모공식 직배선으로는 불가**(단일 qty·plate_qty 자동환산). 표지 member 분리(후보①'·호출자 qty=100 주입) 또는 C트랙 필요(§0.0·Q-CB-COVERMULT-ENGINE). tier 기준(부수50 vs 출력매수100)은 권위 대조 미결(§1.4).
 
-**G-CB-077 (레더HC·내지 mint 후·24p양면·100부)** — 내지 누락 교정 검출
-- 부모공식 PRF_HC_MUSEON_SET COVERBIND tier(100)=7,969 × 100부 = **796,900** (표지+제본 통합·펼침×1)
-- 내지 member PRF_DGP_INNER (24p양면·inner_sheets=100×⌈24/pansu⌉) ← **현재 0(누락)·mint 후 추가**
-- 검증: 내지 member 없으면 내지비 0(저청구). mint 후 내지비 합산 확인.
+**G-CB-077 (레더HC·24p 칼라양면·100부)** — ★현행=견적 0원 vs 정답 양면 표기 (REV·D-CB-2/A3)
+- ★**현행(라이브 실측)**: PRF_HC_MUSEON_SET **미바인딩(0행)** → 부모 기여=0 + 내지 member 0행 → **견적 0원(표지/제본/내지 전액 미산정)**.
+- ★**정답(교정 후·1차 부모공식 바인딩 + 2차 내지 member mint)**:
+  - 부모공식 PRF_HC_MUSEON_SET COVERBIND tier(100)=7,969 × 100부 = **796,900** (표지+제본 통합·펼침×1·바인딩 후)
+  - 내지 member PRF_DGP_INNER (24p 칼라양면·inner_sheets=100×⌈24/pansu⌉) ← **현재 0(누락)·mint 후 추가**
+- 검증: 796,900은 **공식 바인딩 후에만 재현 가능**(현재 미바인딩이라 재현 불가·E6 ❌ 전제). 1차=부모공식 바인딩(견적 0원 해소)·2차=내지 member(내지비 누락 해소).
 
-**G-CB-082 (하드커버링·8p단면·50부)** — ★Q-CB-082 COVERBIND ×2 결판
-- 표지+제본: COVERBIND ×1(072 공유 시) vs ×2(앞뒤 별·링) — **게이트에서 권위 표지단가 1면/2면 대조**
-- 내지 member ← **mint 후 추가**(082 page 8/100/2)
-- 검증: 082 링 책등없음 → 표지 앞뒤 2장 보정 여부(Q-CB-082)·내지 누락 교정.
+**G-CB-082 (하드커버링·8p 칼라단면·50부)** — ★현행=견적 0원 vs 정답 양면 + Q-CB-082 COVERBIND ×2 결판 (REV·D-CB-2/A3)
+- ★**현행(라이브 실측)**: 공식 **미바인딩(0행)** + 내지 0행 → **견적 0원**.
+- ★**정답(교정 후)**: 표지+제본 COVERBIND ×1(072 공유 시) vs ×2(앞뒤 별·링 책등없음) — **게이트에서 권위 표지단가 1면/2면 대조**(Q-CB-082) + 내지 member mint(082 page 8/100/2).
+- 검증: 1차=부모공식 바인딩(견적 0원 해소)·2차=내지 member·3차=링 ×2 결판(Q-CB-082). 082 ×2도 실행 트랙 BLOCKED(통합형 COVERBIND이라 ×2는 별 variant or member 분리 필요).
 
 ---
 
@@ -249,9 +293,9 @@ evaluate_set_price(prd_cd, selections, copies) =
 - **proc_cd 미주입 시**: 4 proc_cd 단가행(중철+무선+PUR+트윈링)이 전부 와일드 후보 → silent 다중매칭/오값(실사 PUNCH·디지털 S1/S2 동형 위험).
 - **proc_cd 주입 시**: 트윈링책자=PROC_000021 고정 주입 → 1행만 매칭(50부=1,500).
 
-★ **결정 (AD-CB3)**: 071 견적 시 **상품→proc_cd=PROC_000021 고정 주입**(중철책자=018·무선=019·PUR=020·트윈링=021). CPQ option 또는 상품 메타에서 결정(068-071-design §3·Q-CB-PROC). cover_mult(=2)도 이 proc_cd(021=링)에서 파생. **proc_cd 주입이 cover_mult·제본비 둘 다의 선결**.
+★ **결정 (AD-CB3·REV 폐루프 보정·검증가 D-CB-4 + codex Q5-3 독립 합치 A5·고신뢰 확정)**: 071 견적 시 **상품→proc_cd=PROC_000021 고정 주입**(중철책자=018·무선=019·PUR=020·트윈링=021·082 하드커버링=024). CPQ option 또는 상품 메타에서 결정(068-071-design §3·Q-CB-PROC). cover_mult(=2)도 이 proc_cd(021/024=링)에서 파생. **proc_cd 주입이 cover_mult·제본비 둘 다의 선결**.
 
-★ 068(JUNGCHEOL)·069(MUSEON)·070(PUR)은 각자 단일 proc_cd comp라 다중매칭 위험 낮으나, TWINRING comp가 4 proc_cd 공유하므로 071이 가장 위험. 082(하드커버링)도 트윈링 proc(024) 주입 필요.
+★ **실측 확정(검증가 E4)**: COMP_BIND_TWINRING = **4 proc_cd(018/019/020/021)×8 tier=32행**(use_dims에 proc_cd). 미주입 시 4행 silent 다중매칭 → 엔진이 다중행 합산하면 중철+무선+PUR+트윈링 제본비 **전부 붙는 silent overcharge**(codex Q5-3). 068(JUNGCHEOL)·069(MUSEON)·070(PUR)은 각자 단일 proc_cd comp라 다중매칭 위험 낮으나, TWINRING comp가 4 proc_cd 공유하므로 071이 가장 위험. 082(하드커버링)도 트윈링 proc(PROC_000024) 주입 필요. ★이 가드는 cover_mult ×2(BLOCKED)와 별개로 **데이터 트랙에서 즉시 적용 가능한 선결 가드**.
 
 ---
 
@@ -308,31 +352,43 @@ evaluate_set_price(prd_cd, selections, copies) =
 |----------------------------------|-----------|
 | 가격 소스 우선순위(TEMPLATE→PRODUCT_PRICE→FORMULA·:296-326) | ✅ 책자=FORMULA·세트 sub_prd 가격 비기여·표지/면지 member 가격0 |
 | C7 frm_typ 미참조·공식=합산 | ✅ 분해형/통합형 둘 다 합산형 comp Σ·펼침/개별=cover_mult 앱계산(엔진 코드 분기 아님) |
-| P3-8 ERR_AMBIGUOUS / silent 이중합산 | ⚠️ **가드**: ① 071/082 제본 proc_cd 미주입→TWINRING 4 proc_cd 다중매칭(§5) ② COMP_PAPER 표지/내지 다른 frm_cd라 충돌 없음(§4.2). 검증가 E4 재현 |
+| P3-8 ERR_AMBIGUOUS / silent 이중합산 | ⚠️ **가드**: ① 071/082 제본 proc_cd 미주입→TWINRING 4 proc_cd 다중매칭(§5) ② COMP_PAPER 표지/내지 다른 frm_cd라 충돌 없음(§4.2) ③ 통합형 072/077/082에 분해형 표지 comp 추가배선 금지=double-count 가드(§2.2 REV). 검증가 E4 재현 |
 | P4-1 단가형 ×qty | ✅ 표지인쇄/코팅/용지·제본 전부 .01 단가형·×cover_sheets/×copies. COVERBIND .01·×copies |
-| TIER min_qty '이상' 하한(:42·144) | ✅ 제본비·COVERBIND min_qty=부수 tier(100부=700/7969) |
-| **cover_mult 앱계산(off-grid 동류)** | ✅ DB는 1매 단가만·cover_mult(펼침1/개별2)=앱 파생(책등 유무·proc_cd)·SKU 폭발 0 |
+| TIER min_qty '이상' 하한(:42·144) | ⚠️ **REV**: 제본비·COVERBIND min_qty=부수 tier(100부=700/7969) OK. 단 **표지 comp tier 기준(부수 vs cover_sheets) 미결**(§1.4·N-CB-TIER)·권위 대조 필요 |
+| **cover_mult ×2 앱계산** | ❌ **REV(BLOCKED·실행 트랙)**: 단일 qty·plate_qty 자동환산으로 부모공식 직배선 불가(E4·codex Q2). cover_mult=1(068~070)은 OK·cover_mult=2(071/082)는 표지 member 분리(후보①') or C트랙 필요(§0.0·Q-CB-COVERMULT-ENGINE). 데이터 트랙(산식·단가)은 GO |
 | U-7 시트 차원경계 | ✅ 책자 공식에 시트 밖 comp 침입 금지·표지/내지=디지털인쇄 종이비/인쇄비 경계 내 재사용 |
 | 수량구간할인(:478-504) | ⚠️ 책자 discount_tables 링크 미점검(Q-CB-DSC) |
 | search-before-mint | ✅ 표지/내지=S1·COAT·PAPER·PRF_DGP_INNER 재사용(신규 공식 0·068~071 부모공식만 dbmap mint)·077/082 내지 member mint(072 동형) |
 
 ---
 
-## 9. designer 큐 잔여 (golden-cases·design-decisions로 이관)
+## 9. designer 큐 잔여 (golden-cases·design-decisions로 이관) — REV(폐루프 보정 반영)
 
-- **펼침/개별 분기 = cover_mult 앱계산**(펼침1·개별2·책등 유무/proc_cd 파생) = 중심 설계(AD-CB1). 표지단가 1매 기준 ×cover_sheets(이중계상 0).
-- **068~071 부모공식 표지/내지/용지 배선**(제본비만 저청구) = 1순위(068-071-design rev.2 청사진·dbmap mint·인간 승인).
-- **077/082 내지 구성원 mint**(page_rule 있는데 내지 0행=저청구) = 1순위·072 PRD_000284 동형(§3).
-- **071/082 제본 proc_cd 주입**(TWINRING 4 proc_cd 다중매칭) = 선결 가드(§5).
-- **082 COVERBIND ×2 결판**(링 책등없음·통합형 교차) = Q-CB-082·게이트 권위 대조.
+### 9.1 ★2트랙 분리 요약 (REV·§0.0)
+| 트랙 | 항목 | 판정 |
+|------|------|------|
+| **데이터 GO** | 공식·구성요소 분해·단가 verbatim·골든 068A/068B/071 주값·출력매수 산식(copies×cover_mult)·proc_cd 가드·double-count 가드·도수 라벨 | ✅ GO(변경 없이 보존) |
+| **실행 BLOCKED** | cover_mult ×2 배수를 엔진이 처리하는 메커니즘(071/082) | ❌ NO-GO·Q-CB-COVERMULT-ENGINE |
+
+### 9.2 라우팅
+- **[Critical·BLOCKED] cover_mult ×2 실행** — 부모공식 직배선 불가(단일 qty·plate_qty 자동환산). 해법 (a)표지 member.qty=cover_sheets 주입(후보①'·신규 엔진 코드 0·표지 반제품 mint=dbmap) (b)price_views.py C트랙(개발팀). tier 기준(부수 vs cover_sheets)은 권위 대조로 확정(§1.4). → **Q-CB-COVERMULT-ENGINE·인간 결정**.
+- **[Critical] 077/082 부모공식 0행(견적 0원)** = 1차 결함(내지보다 선행)·dbmap 공식 바인딩(072 PRF_HC_MUSEON_SET 동형)·인간 승인(§3.2 REV).
+- **[High] 068~071 부모공식 표지/내지/용지 배선**(제본비만 저청구) = 1순위(068-071-design rev.2 청사진·dbmap mint·인간 승인). ★068~070은 cover_mult=1이라 부모공식 직배선으로도 정확(실행 트랙 무영향)·071만 ×2 BLOCKED.
+- **[High] 077/082 내지 구성원 mint**(page_rule 있는데 내지 0행=저청구) = 2차 결함·072 PRD_000284 동형(§3).
+- **[Med] 071/082 제본 proc_cd 주입**(TWINRING 4 proc_cd 다중매칭) = 선결 가드(§5·데이터 트랙 즉시 적용 가능).
+- **[Med] 082 COVERBIND ×2 결판**(링 책등없음·통합형 교차) = Q-CB-082·게이트 권위 대조.
+- **[Low] 통합형 double-count 가드**(072/077/082에 분해형 표지 comp 추가배선 금지) = §2.2 REV.
+- **[가드 유지] COMP_PAPER 표지/내지 frm_cd 분리** = 검증가 E5 실측(frm_cd 분리)·codex B1 우려는 라이브 사실에 반박·자동 flip 금지.
 - **088 레더링바인더 BLOCKED**(보류중·내지/page 없음·빈 바인더) = 정체 확정 후.
 
-실 적용(부모공식 신설·내지 member mint·셋트행·cover_mult 코드)은 **DB 미적재·인간 승인 후 dbmap/§18/개발팀 위임**(dbm-axis-staged-load·dbm-load-execution·dbm-ddl-proposer·dbm-price-arbiter·cover_mult 앱로직=webadmin price_views.py C트랙·webadmin 코드 직접수정 금지).
+실 적용(부모공식 신설·내지 member mint·셋트행·cover_mult 실행)은 **DB 미적재·인간 승인 후 dbmap/§18/개발팀 위임**(dbm-axis-staged-load·dbm-load-execution·dbm-ddl-proposer·dbm-price-arbiter·cover_mult 실행=표지 member 분리 or webadmin price_views.py C트랙·webadmin 코드 직접수정 금지).
 
 ## naming 유입 가드 [HARD]
 `book2025`·`INN_PAGE`·`seneca`·`COV_MIN_WGT`·`BIND_DIRECTION`·`jobqty0`·`오시(별 단가)`·`paperno` 후니 유입 금지. 후니 `frm_cd`(PRF_BIND_*_SET·PRF_DGP_INNER·PRF_HC_MUSEON_SET)·`comp_cd`(COMP_PRINT_DIGITAL_S1·COMP_COAT_MATTE·COMP_PAPER·COMP_BIND_*·COMP_HC_MUSEON_COVERBIND)·`proc_cd`·`print_opt_cd`·`coat_side_cnt`·`page_rules`·cover_mult(앱변수) 컨벤션으로 번역. cover_mult·inner_sheets=앱 런타임 변수(DB 차원 아님).
 
-## 컨펌큐 (design-decisions 통합)
+## 컨펌큐 (design-decisions 통합) — REV(폐루프 보정 신규 2건)
+- **★Q-CB-COVERMULT-ENGINE (신규·Critical·인간 결정)**: cover_mult ×2(071/082)를 (a)표지 member.qty=cover_sheets 주입(후보①'·신규 엔진 코드 0·표지 반제품 mint) vs (b)price_views.py C트랙(엔진 계약 확장) 중 어디로 구현할지. 현행 evaluate_price 단일 qty 제약상 표지 부모공식 직배선 불가(BLOCKED·§0.0).
+- **★N-CB-TIER (신규·돈크리티컬)**: 표지 comp 단가 tier 기준 = (가)주문부수(copies) vs (나)출력매수(cover_sheets) — 권위 표지단가 verbatim 대조로 확정(§1.4). 수량↑→단가↓ 구조라 오선택 시 저청구.
 - **Q-CB-082**: 082 하드커버링 COVERBIND ×2 여부(링 책등없음·통합단가 1면/2면)·게이트 권위 표지단가 대조.
 - **Q-CB-PROC**: 071/082 제본 proc_cd 고정 주입 메커니즘(상품 메타 vs CPQ option).
 - **Q-CB-LEATHER**: 077 레더표지 자재단가(레더하드커버 A5=4000/A4=7000 완제품가)→표지타입 mat_cd 매핑.

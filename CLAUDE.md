@@ -264,7 +264,7 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 **산출물 루트:** `_workspace/huni-price-engine-design/` (`_meta`·`01_formula`·`02_benchmark`·`03_design`·`04_validation`·`05_codex`). 자격증명 `.env.local RAILWAY_DB_*`(읽기전용 SELECT). codex 헬퍼=`hqv-codex-cross-verify/scripts/codex-review.sh`(내부에서 `rpm-visualize/scripts/codex-preflight.sh` 호출) 재사용. 기존 `dbm-price-arbiter`·`dbm-ddl-proposer`·`dbm-schema-extract`·`dbm-excel-parse` 재사용.
 
-**변경이력:** 최신: 2026-06-30 박류(foil) 후가공 면적 가격 설계 데이터 GO(동판비 setup.03 + 박가공비 면적→등급×수량.02·proc_cd 박색상축·신규5comp·7상품 본체합산·골든8/8 verbatim·폐루프2회·★codex가 동판비 silent 과금 돈크리티컬 적발→REV3 교정 후 GO·12번째 종단·C트랙=면적→등급 엔진 미지원·DB 미적재) → `_workspace/huni-price-engine-design/CHANGELOG.md`
+**변경이력:** 최신: 2026-06-30 책자 표지 펼침/개별 분기 종단 완료(13번째·codex Phase5.5 사실5건 합치 divergence0→폐루프7건→2차 재게이트)·★2트랙 분리[데이터 설계 GO(공식·단가·골든 verbatim·068A=158,688) / cover_mult ×2 실행 NO-GO·BLOCKED(pricing.py:680 plate_qty=÷pansu뿐·×2 곱셈 경로 0·표지 cover_sheets member 재설계 vs C트랙)]·codex가 BLOCKED 단정 격상·N-CB-TIER 돈크리티컬 신규(표지 tier 부수vs출력매수)·077/082 부모공식0행=견적0·DB 미적재 → `_workspace/huni-price-engine-design/CHANGELOG.md`
 
 ## 19. Harness: Huni-Widget-Flow (위젯 구조·플로우 문서화 + 이중 청중 시각화)
 
@@ -352,7 +352,7 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 **산출물 루트:** `_workspace/huni-price-table-integrity/` (01_authority·02_load·03_codex·04_gate·**_batch**·_meta). 5 에이전트(`hpti-authority-extractor` 정답격자 → ★`hpti-matrix-batch-builder` 결정론 배치 diff(권위CSV↔스냅샷CSV·토큰0) → `hpti-load-inspector` 예외 보강 → `hpti-codex-verifier` codex 독립2차(스냅샷) → `hpti-integrity-gate` I1~I7 게이트) + 방법론 스킬 `hpti-matrix-batch-build`·`hpti-load-integrity-audit`(+ `hqv-codex-cross-verify`·`dbm-excel-parse`·`dbm-price-import-prep`·`dbm-batch-load`·`dbm-correctness-audit` 재사용). 라이브 실측 환경=`_workspace/_foundation/live-snapshot/`. 생성≠검증·codex 주장=가설·라이브 읽기전용 SELECT만(`.env.local RAILWAY_DB_*`)·DB 미적재(실 교정 인간 승인 후 dbmap 위임)·파일럿=아크릴(sparse grid 실증)→동형 전파.
 
-**변경이력:** 최신: 2026-06-30 **디지털인쇄비 시트 셀단위 종결(GO)** — §29 준비도 검증 후속으로 디지털 권위 954셀↔라이브 954셀 gap-0 verbatim(1도212·4도212·별색530 전건·돈영향0·NO-OP). ★grid_diff.py side 코드맵 버그 교정(신규 흑백 POPT_000008 단면1도/POPT_000009 양면1도를 스킵→가짜 dim_missing→면을 note 1차 권위로 도출+코드맵 보강·742→954·타 시트 무회귀). 직전: 2026-06-30(8세션) 잔여 시트 종결+UNMAPPED 4시트 gap-0(가짜신호 입증·합가 우선[사용자]). → `_workspace/_foundation/HANDOFF.md`·`huni-price-table-integrity/_batch/SHEET-LOAD-PLAYBOOK.md`·[[price-component-unify-vs-split-criterion-260630]]
+**변경이력:** 최신: 2026-06-30 **차원 정합 적대적 진단기 추가(Phase 2b)** — 가격구성요소 use_dims↔component_prices 충전↔상품 옵션선택수단 3자를 (상품×component×차원) 전수 조인하는 신규 에이전트 `hpti-dimension-conformance-inspector`+스킬 `hpti-dimension-conformance-audit`+결정론 `dim_conformance.py`(토큰0·union 분담흡수·신뢰도태깅). 전수 결과 MISSING-HIGH 12·UNDECLARED 4(돈샘 고신뢰·14상품). 검증골든=봉투제작 MAT_169 자재단가 누락·명함032 코팅 UNDECLARED(메모리 기존결함 독립 재발견). 봉투 옵션→사이즈 환원(OPT_REF_DIM.01)은 정합 인정. 직전: 디지털인쇄비 셀단위 종결(GO·954셀 gap-0·grid_diff side버그 교정). → `_workspace/huni-price-table-integrity/_batch/dim-conformance-fullscan-260630.tsv`·`_workspace/_foundation/HANDOFF.md`·[[whiteprint-material-4color-unified-spot-component-260630]]
 
 ## 27. 가격 종단 마스터 오케스트레이터 (상품군 단위 파이프라인·수렴 실행)
 

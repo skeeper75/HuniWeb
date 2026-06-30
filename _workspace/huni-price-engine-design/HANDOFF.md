@@ -1,6 +1,24 @@
 # Huni-Price-Engine-Design 하네스 — HANDOFF
 
-> CLAUDE.md §18 · 갱신 2026-06-30 · **종단 GO 12건 — 11 상품군 시트 + 박류(foil) 후가공 면적 설계**(박류 데이터 설계 GO·codex가 동판비 silent 과금 돈크리티컬 적발→REV3 교정 후 GO)
+> CLAUDE.md §18 · 갱신 2026-06-30 · **종단 GO 13건 — 11 상품군 시트 + 박류(foil) 후가공 + 책자 표지 펼침/개별 분기**(책자 표지 분기 종단 완료·데이터 GO/cover_mult ×2 BLOCKED 2트랙·codex 합의 divergence0)
+
+## ★책자 표지 펼침/개별 분기 — 종단 완료 (2026-06-30·13번째 종단·DB 미적재)
+
+**파이프라인 완주**: 설계(engine-designer)→1차 검증 조건부 GO→**codex Phase5.5 독립 2차**(사실 결함 5건 독립 합치·divergence 0·cover_mult ×2를 BLOCKED로 단정 격상)→designer 폐루프 보정 7건(2트랙 분리 명문화)→**validator 2차 재게이트**.
+
+**★2트랙 분리 판정[HARD·relitigate 금지]**:
+- **① 데이터 설계 트랙 = GO** — E1~E7 단일 FAIL 0. 공식·구성요소·단가·골든 verbatim(068A=158,688·068B 양면 +85,000·071=164,665·허용오차0). 표지 분기=`cover_mult ∈{1,2}`=제본 proc_cd 책등여부 자동파생(펼침×1: 중철068·무선069·PUR070·하드커버072 / 개별×2: 트윈링071·하드커버링082·손님 직접선택 X). 표지단가=1매 verbatim·×N은 출력매수만(×2≠이중계상). 도수축 POPT_000001/002=칼라(350/700)·008/009=흑백 1도(200/400). 부모공식 4비목(표지인쇄+표지코팅+표지용지 COMP_PAPER+제본)·이중합산0.
+- **② cover_mult ×2 실행 트랙 = NO-GO·BLOCKED** — `pricing.py:680` plate_qty=⌈qty÷pansu⌉ 나눗셈뿐·×2 곱셈 경로 코드 0건. 부모공식 직배선 시 표지 S1이 자동 plate_qty 환산되어 cover_mult×copies 표현 불가. 해법=**표지를 cover_sheets qty member로 재설계**(evaluate_set_price 호출자 member.qty 주입·`pricing.py:907`·신규 엔진코드 0) vs price_views.py C트랙(개발팀)·인간결정 **Q-CB-COVERMULT-ENGINE**.
+
+**잔여(전부 DB 미적재·인간 승인 후 dbmap/개발팀 위임)**:
+- **D-CB-1 High**: 068~071 부모공식=제본비 comp 1개만(표지/내지/용지 누락=저청구)→4비목 배선 mint(068~070 cover_mult=1이라 직배선 정확·우선 적재 가능).
+- **D-CB-2 Critical**: 077/082 부모공식 0행(미바인딩·1차 결함)=표지/제본/내지 전액 미산정=견적 0원(072 동형 PRF_HC_MUSEON_SET 바인딩+내지 member mint).
+- **D-CB-4 Med**: 071/082 TWINRING proc_cd 다중매칭 가드(071=PROC_000021·082=PROC_000024 고정주입 AD-CB3).
+- **★N-CB-TIER 돈크리티컬[codex 신규]**: 표지 단가 tier 기준=주문부수 vs 출력매수 미결(cover_sheets는 매수 곱뿐 아니라 tier min_qty 조회 기준이기도 함·잘못하면 저청구/과청구·권위 표지단가 대조 필요).
+- **다음**: 확정 결함(D-CB-1/2/4)→dbm-price-arbiter 돈크리티컬 정립 / cover_mult ×2→Q-CB-COVERMULT-ENGINE 인간 결정 / 데이터 GO분→dbmap 적재(인간 승인).
+- **산출**: 설계=`03_design/booklet-cover-branch-design.md` · 2차 게이트=`04_validation/regate-verdict-booklet-cover-branch.md`·`recompute-log-booklet-cover-branch.md` · codex=`05_codex/codex-reconcile-booklet-cover-branch.md`·`codex-verdict-booklet-cover-branch.md`. 메모리 [[booklet-cover-branch-design-260630]].
+
+---
 
 ## ★박류(foil) 면적 가격 설계 — 데이터 설계 GO (2026-06-30·12번째 종단·DB 미적재)
 
@@ -12,27 +30,13 @@
 
 ## 다음 시작점
 
-### ★책자 표지 펼침/개별 분기 공식 설계 (§18·진행중·조건부 GO·다음 세션 최우선)
+**상품마스터 11 상품군 시트 + 박류 + 책자 표지 분기 = 13종단 전수 완료** → 신규 동형 전파 대상 소진. 남은 작업:
+1. **실 적재 승인 큐 소진**(아래 누적·인간 승인 후 dbmap 위임) — 데이터 GO분을 실제 라이브로 정립.
+2. **확정 결함 정립**: 책자 표지 분기 D-CB-1/2/4 등 돈크리티컬을 dbm-price-arbiter로 "어느 t_*에 무엇을 어떻게" 정립.
+3. **인간 결정 큐**: cover_mult ×2 구현 방식(Q-CB-COVERMULT-ENGINE)·N-CB-TIER(표지 tier 기준)·디자인캘린더 Q-DCAL-AUTHORITY 등.
+4. 가격표(260527) 전용 시트 중 미커버 차원 점검(있으면)·세트/반제품 완성가 미완분.
 
-**상태**: Phase2 설계(engine-designer)+Phase3 검증(validator E1~E7) 완료 = **조건부 GO**(단일 FAIL 없음·E4/E6 보정 후 GO). Phase5.5 codex 미실행.
-
-**다음 작업(순서)**:
-1. **codex 2차 교차**(hpe-codex-validator Phase5.5) — 설계 독립 재검증(codex-review.sh·codex 미가용 시 Claude단독 폴백).
-2. **designer 폐루프 보정 3건**:
-   - **D-CB-2 (Critical)**: 077 레더하드커버·082 하드커버링 = **부모공식 0행(미바인딩)** → 내지뿐 아니라 표지·제본 전액 미산정=**견적 0원 가능**. 072 동형 바인딩 + 내지 member mint(BLOCKED→dbmap·신규 공식 0). 골든을 "현행 0원 vs 정답" 양면 표기로 정정.
-   - **D-CB-3 (High)**: `cover_mult ×2`(트윈링071·하드커버링082 개별 표지) **현행 evaluate_price 미지원**(단일 qty 충돌·plate_qty는 ÷pansu지 ×배수 아님) → **표지를 cover_sheets qty member로 재설계(데이터)** vs price_views.py 코드트랙. 인간 결정 큐 **Q-CB-COVERMULT-ENGINE**.
-   - **D-CB-5 (Med)**: 골든 도수 칼라/흑백 라벨 명시.
-3. 재게이트(validator 2차) → arbiter 정립 → 인간 승인 큐(실 적재 dbmap·cover_mult 코드 개발팀).
-
-**검증으로 확정(건드리지 말 것)**:
-- 표지 분기 = `cover_mult ∈{1,2}` = **제본 proc_cd 책등여부 자동파생**(펼침×1: 중철068·무선069·PUR070·하드커버072 / 개별×2: 트윈링071·하드커버링082)·손님 직접선택 X. 표지단가=1매 verbatim·×N은 출력매수만(×2≠이중계상).
-- 골든 독립 재현 PASS: 068A=158,688·068B 양면 +85,000·071=164,665 (허용오차0).
-- 단가 verbatim·**도수축 정정: POPT_000001/002=칼라(CMYK) 단/양면(350/700)·POPT_000008/009=흑백 1도(200/400)**.
-- 부모공식 4비목(표지인쇄 print_opt + 표지코팅 coat_side + 표지용지 COMP_PAPER + 제본)·이중합산0.
-
-**표지/내지/면지 매트릭스(라이브 실측·확인 완료)**: 068~071 셋트미적재(설계만·부품8 mint 보류)·072/100 완전·**077/082 내지 구성원 누락**·088 빈바인더(정상)·094 면지없음(소프트).
-
-**산출물**: 설계=`03_design/booklet-cover-branch-design.md` · 검증=`04_validation/gate-verdict-booklet-cover-branch.md`·`recompute-log-booklet-cover-branch.md`. 입력 재사용=`engine-design-booklet.md`·`huni-set-product/03_design/booklet-068-071-design.md`·출력소재 `huni-dbmap/06_extract/output-material-composite-decode.md`·메모리 [[booklet-set-formula-principle-260629]].
+새 상품군/시트 요청 시 Phase1(cartographer)→benchmark→designer→validator E1~E7→codex Phase5.5 순.
 
 ---
 
