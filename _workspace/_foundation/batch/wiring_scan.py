@@ -42,8 +42,28 @@ FND = HERE.parent                                        # _foundation/
 SNAP_ROOT = FND / "live-snapshot"
 OUT_DIR = HERE / "wiring"
 DETAILS_JSON = FND.parent / "huni-product-readiness" / "05_gate" / "product-details-final.json"
+CLASSIFY_JSON = OUT_DIR / "orphan-classification.json"   # 게이트 판정(생성≠검증) 산출
 
 ACTIVE = lambda r: (r.get("use_yn", "Y") != "N") and (r.get("del_yn", "N") != "Y")
+
+
+def load_legit_unused() -> dict:
+    """검증(round8 게이트)에서 '미배선이 정답'으로 판정된 LEGIT_UNUSED comp_cd 화이트리스트.
+    근거=orphan-classification.json(생성≠검증 분리·게이트 산출). addon 별건/superseded 라
+    공식 배선 시 always-add 과대청구 → 영구 미배선이 정답. 스캐너가 이를 고아로 계속 잡으면
+    종료척도(결함0) 도달이 영구 불가하므로 분리한다.
+    ★결함 은닉 아님(no silent caps): total_defects 에서 빼되 별도 legit_unused 카운트로 명시."""
+    if not CLASSIFY_JSON.exists():
+        return {}
+    try:
+        data = json.loads(CLASSIFY_JSON.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+    out = {}
+    for cd, meta in (data.get("classes") or {}).items():
+        if meta.get("class") == "LEGIT_UNUSED":
+            out[cd] = {"target": meta.get("target", ""), "note": meta.get("note", "")}
+    return out
 
 
 def _read_csv(path: pathlib.Path) -> list[dict]:
@@ -102,18 +122,26 @@ def scan_from_snapshot(snap: pathlib.Path) -> dict:
     wired = set(comp_frms)
 
     # ── 1) ORPHAN: 단가행 있고 활성인데 어디에도 미배선 ──
-    orphans = []
+    #    단, 게이트가 LEGIT_UNUSED('미배선이 정답')로 판정한 comp 는 별도 분리(결함 아님).
+    legit_map = load_legit_unused()
+    orphans, legit_unused = [], []
     for cd, n in sorted(price_rows.items()):
         meta = comp.get(cd, {})
         if cd in wired:
             continue
         if meta.get("deleted"):
             continue  # 삭제된 건 고아 아님(별도)
-        # 카탈로그에 없거나 활성인 comp 중 단가행만 있고 미배선 = 고아
+        # 카탈로그에 없거나 활성인 comp 중 단가행만 있고 미배선 = 고아 후보
         if meta.get("active", True):
-            orphans.append({"comp_cd": cd, "comp_nm": meta.get("comp_nm", ""),
-                            "price_rows": n, "prc_typ": meta.get("prc_typ", ""),
-                            "use_dims": meta.get("use_dims", "")})
+            rec = {"comp_cd": cd, "comp_nm": meta.get("comp_nm", ""),
+                   "price_rows": n, "prc_typ": meta.get("prc_typ", ""),
+                   "use_dims": meta.get("use_dims", "")}
+            if cd in legit_map:
+                rec["legit_target"] = legit_map[cd]["target"]
+                rec["legit_note"] = legit_map[cd]["note"]
+                legit_unused.append(rec)
+            else:
+                orphans.append(rec)
     # ── 2) DEAD_WIRE: 배선됐는데 단가행 0 ──  ── 3) DELETED_WIRE: 배선이 삭제된 comp 참조 ──
     dead, deleted = [], []
     for f, comps in sorted(frm_comps.items()):
@@ -147,7 +175,7 @@ def scan_from_snapshot(snap: pathlib.Path) -> dict:
         products[p] = {"frm_cds": sorted(frms), "wired": wired_n,
                        "dead": dead_n, "deleted": del_n, "status": status}
 
-    total_defects = len(orphans) + len(dead) + len(deleted)
+    total_defects = len(orphans) + len(dead) + len(deleted)  # legit_unused 제외(미배선이 정답)
     summary = {
         "source": "snapshot", "snap": snap.name,
         "formulas": len(frm_comps), "wired_links": sum(len(v) for v in frm_comps.values()),
@@ -155,14 +183,15 @@ def scan_from_snapshot(snap: pathlib.Path) -> dict:
         "components_with_price": len(price_rows),
         "components_wired": len(wired),
         "orphan_comps": len(orphans),
+        "legit_unused": len(legit_unused),  # ★게이트 '미배선이 정답' 판정(결함 아님·명시)
         "dead_wires": len(dead),
         "deleted_wires": len(deleted),
         "no_formula_products": 0,  # 스냅샷엔 분모(이전사이트) 없음 → details 폴백에서 보강
         "total_wiring_defects": total_defects,
         "verdict": "GO(배선 정합)" if total_defects == 0 else f"NO-GO(결함 {total_defects})",
     }
-    return {"summary": summary, "orphans": orphans, "dead_wires": dead,
-            "deleted_wires": deleted, "products": products}
+    return {"summary": summary, "orphans": orphans, "legit_unused": legit_unused,
+            "dead_wires": dead, "deleted_wires": deleted, "products": products}
 
 
 def scan_from_details() -> dict:
@@ -247,8 +276,8 @@ def main():
 
     print(f"[wiring_scan] source={s.get('source')} snap={s.get('snap')} "
           f"orphan={s.get('orphan_comps')} dead={s.get('dead_wires')} "
-          f"deleted={s.get('deleted_wires')} total_defects={s.get('total_wiring_defects')} "
-          f"=> {s.get('verdict')}")
+          f"deleted={s.get('deleted_wires')} legit_unused={s.get('legit_unused')} "
+          f"total_defects={s.get('total_wiring_defects')} => {s.get('verdict')}")
     print(f"  -> {OUT_DIR / 'wiring-status.json'}")
 
 

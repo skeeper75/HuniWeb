@@ -1,18 +1,19 @@
 {
  "summary": {
   "source": "snapshot",
-  "snap": "snap_20260701_0421",
+  "snap": "snap_20260701_0443",
   "formulas": 102,
   "wired_links": 228,
   "components_total": 179,
   "components_with_price": 175,
   "components_wired": 130,
-  "orphan_comps": 15,
+  "orphan_comps": 9,
+  "legit_unused": 6,
   "dead_wires": 7,
   "deleted_wires": 1,
   "no_formula_products": 0,
-  "total_wiring_defects": 23,
-  "verdict": "NO-GO(결함 23)"
+  "total_wiring_defects": 17,
+  "verdict": "NO-GO(결함 17)"
  },
  "orphans": [
   {
@@ -28,27 +29,6 @@
    "price_rows": 24,
    "prc_typ": ".01",
    "use_dims": "[\"proc_cd\", \"min_qty\", \"proc_grp:PROC_000017\"]"
-  },
-  {
-   "comp_cd": "COMP_BIND_SSABARI",
-   "comp_nm": "제본비 싸바리바인더",
-   "price_rows": 18,
-   "prc_typ": ".01",
-   "use_dims": "[\"proc_cd\", \"min_qty\", \"proc_grp:PROC_000017\"]"
-  },
-  {
-   "comp_cd": "COMP_CUT_FULL_PERF_1H6",
-   "comp_nm": "커팅 완제품가 완칼+타공1구",
-   "price_rows": 9,
-   "prc_typ": ".01",
-   "use_dims": "[\"min_qty\"]"
-  },
-  {
-   "comp_cd": "COMP_CUT_FULL_PERF_2H6",
-   "comp_nm": "커팅 완제품가 완칼+타공2구",
-   "price_rows": 9,
-   "prc_typ": ".01",
-   "use_dims": "[\"min_qty\"]"
   },
   {
    "comp_cd": "COMP_FOLD_CARD_3H",
@@ -86,27 +66,6 @@
    "use_dims": "[\"min_qty\"]"
   },
   {
-   "comp_cd": "COMP_POSTEROPT_PET_BANNER_STAND_IN",
-   "comp_nm": "PET배너 실내용배너거치대 추가가격",
-   "price_rows": 1,
-   "prc_typ": ".01",
-   "use_dims": "[]"
-  },
-  {
-   "comp_cd": "COMP_POSTEROPT_PET_BANNER_STAND_OUT_S1",
-   "comp_nm": "PET배너 실외용배너거치대(단면용) 추가가격",
-   "price_rows": 1,
-   "prc_typ": ".01",
-   "use_dims": "[]"
-  },
-  {
-   "comp_cd": "COMP_POSTEROPT_PET_BANNER_STAND_OUT_S2",
-   "comp_nm": "PET배너 실외용배너거치대(양면용) 추가가격",
-   "price_rows": 1,
-   "prc_typ": ".01",
-   "use_dims": "[]"
-  },
-  {
    "comp_cd": "COMP_POSTER_FOAMBOARD_BLACK",
    "comp_nm": "폼보드(블랙) 완제품가",
    "price_rows": 2,
@@ -119,6 +78,62 @@
    "price_rows": 2,
    "prc_typ": ".01",
    "use_dims": "[\"siz_cd\"]"
+  }
+ ],
+ "legit_unused": [
+  {
+   "comp_cd": "COMP_BIND_SSABARI",
+   "comp_nm": "제본비 싸바리바인더",
+   "price_rows": 18,
+   "prc_typ": ".01",
+   "use_dims": "[\"proc_cd\", \"min_qty\", \"proc_grp:PROC_000017\"]",
+   "legit_target": "§23 세트/정리",
+   "legit_note": "superseded(per-type 제본comp+COVERBIND로 대체 운영)·use_yn=N 후보(삭제금지)"
+  },
+  {
+   "comp_cd": "COMP_CUT_FULL_PERF_1H6",
+   "comp_nm": "커팅 완제품가 완칼+타공1구",
+   "price_rows": 9,
+   "prc_typ": ".01",
+   "use_dims": "[\"min_qty\"]",
+   "legit_target": "addon(§7/CPQ)",
+   "legit_note": "★§13 분석 종결: 호스트=헤더택(045)/벽걸이캘린더(111)인데 두 상품 모두 타공 옵션그룹 0건. 가격표 커팅타공41 '타공(합가)·타공없음0원·1구2,000(100장당+1,000)'=손님선택 추가옵션 → PET배너거치대 완전 동형(always-add 배선=과대청구). 공식 미배선이 정답=LEGIT_UNUSED. ★단 addon 자체가 라이브 미구성(product_addons/template 0건)이라 타공 가격 손님계산은 §7 과제(배선 결함은 아님)"
+  },
+  {
+   "comp_cd": "COMP_CUT_FULL_PERF_2H6",
+   "comp_nm": "커팅 완제품가 완칼+타공2구",
+   "price_rows": 9,
+   "prc_typ": ".01",
+   "use_dims": "[\"min_qty\"]",
+   "legit_target": "addon(§7/CPQ)",
+   "legit_note": "★§13 분석 종결: 1H6 동형. 가격표41 '2구4,000(100장당+2,000)'·타공없음0=손님선택 addon. 공식 미배선이 정답=LEGIT_UNUSED. addon 작동은 §7"
+  },
+  {
+   "comp_cd": "COMP_POSTEROPT_PET_BANNER_STAND_IN",
+   "comp_nm": "PET배너 실내용배너거치대 추가가격",
+   "price_rows": 1,
+   "prc_typ": ".01",
+   "use_dims": "[]",
+   "legit_target": "addon(§7/CPQ)",
+   "legit_note": "거치대=추가옵션 별건. formula 배선=always-add 과금→미배선이 정답"
+  },
+  {
+   "comp_cd": "COMP_POSTEROPT_PET_BANNER_STAND_OUT_S1",
+   "comp_nm": "PET배너 실외용배너거치대(단면용) 추가가격",
+   "price_rows": 1,
+   "prc_typ": ".01",
+   "use_dims": "[]",
+   "legit_target": "addon(§7/CPQ)",
+   "legit_note": "거치대=addon 별건·미배선이 정답"
+  },
+  {
+   "comp_cd": "COMP_POSTEROPT_PET_BANNER_STAND_OUT_S2",
+   "comp_nm": "PET배너 실외용배너거치대(양면용) 추가가격",
+   "price_rows": 1,
+   "prc_typ": ".01",
+   "use_dims": "[]",
+   "legit_target": "addon(§7/CPQ)",
+   "legit_note": "거치대=addon 별건·미배선이 정답"
   }
  ],
  "dead_wires": [

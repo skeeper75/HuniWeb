@@ -6,9 +6,10 @@
   "source": "orphan-classification-260701.md·design-*-260701.md·gate-design-260701.md·codex-design-260701.md·commit-report-namecard037-260701.md·design-pcb30p-fix-260701.md",
   "summary": {
    "REAL_GAP": 0,
-   "NEEDS_FORMULA": 15,
-   "BLOCKED": 4,
-   "LEGIT_UNUSED": 4
+   "NEEDS_FORMULA": 19,
+   "BLOCKED": 0,
+   "LEGIT_UNUSED": 4,
+   "_note": "R10 가격표 재확인: 기존 BLOCKED 4(포토카드대량·완칼타공1H6·2H6·미러3T)가 가격표에서 호스트 식별됨→NEEDS_FORMULA 격상(BLOCKED 4→0). 잔존 사람 의존=권위충돌/이중과금/공식부재/미수록단가(스캐너 결함 아님·설계 입력 CONFIRM)."
   },
   "design_summary": {
    "COMMITTED": 8,
@@ -33,6 +34,31 @@
    "orphans": 15,
    "total_defects": 23,
    "delta": "고아 23→15(박명함4+화이트명함4 COMMIT 후 고아 탈출)"
+  },
+  "scan_round9": {
+   "snap": "snap_20260701_0443",
+   "orphans": 11,
+   "legit_unused": 4,
+   "dead": 7,
+   "deleted": 1,
+   "total_defects": 19,
+   "delta": "결함 23→19(★LEGIT_UNUSED 4 스캐너 분리: 싸바리·PET배너거치대3='미배선이 정답' false-positive). 라이브 무변동. 남은 19 전부 외부 의존(사장님16+§6 위젯2+§23 셋트1)=자율 배선분 소진. CONFIRM-QUEUE 확정본 7항목→결함16 해소경로.",
+   "scanner_change": "wiring_scan.py 에 load_legit_unused() 추가 — class==LEGIT_UNUSED comp_cd 를 total_defects 에서 제외하되 summary.legit_unused 별도 카운트(no silent caps)."
+  },
+  "pricetable_recheck_r10": {
+   "trigger": "사용자: '인쇄상품가격표 포스터/사인에서 확인할 수 있는데 확인했을지?' — v1 CONFIRM 큐가 가격표 미확인으로 호스트를 '모름' 처리한 것 적발(정당).",
+   "source": "후니프린팅_인쇄상품_가격표_260527.xlsx 시트: 포스터사인·커팅타공·아크릴·명함포토카드 직접 확인",
+   "findings": {
+    "완칼타공_1H6_2H6": "커팅타공 41행 '타공(합가)|헤더택/벽걸이캘린더|1구2,000·2구4,000(100장당+1,000/+2,000)' → 호스트 식별·BLOCKED 해제→§13",
+    "미러아크릴3T": "아크릴 34행 '미러아크릴3T(직접입력형) 전면5도 통용단가' 면적매트릭스 → 통용단가·BLOCKED 해제→§13",
+    "포토카드대량": "명함포토카드 81행 '포토카드(대랑제작)' → 호스트=포토카드(세트vs대량)·BLOCKED 해제→§18",
+    "PET배너거치대": "포스터사인 228행 '배너 추가옵션(거치대) 추가가격'(실내7,000·실외단면23,000·양면25,000) → LEGIT_UNUSED(addon) 가격표 확증",
+    "폼보드포맥스_A1": "포스터사인 187-196 A1 전부 존재(폼화이트20,000·블랙24,000·포맥스3mm23,000·5mm30,000) → A1 CONFIRM 불요(§7 등록만)",
+    "신상아크릴_가격표존재": "아크릴 72행 지비츠(슈츠참)=200원·89-96행 아크릴코롯토 면적매트릭스(30~80mm) → 코롯토/지비츠는 설계가능",
+    "신상아크릴_미수록": "입체블럭·쉐이커·포카코롯토(및 쉐이커코롯토·입체코롯토 변종)는 가격표 미발견 → 실무진 단가 CONFIRM 잔존"
+   },
+   "confirm_queue_v2": "사장님 진짜 필요분 5개로 축소(v1 7항목→v2 5항목): ①폼보드 7,000vs6,000(권위충돌) ②접지 이중과금 ③캘린더 가격방식 ④신상아크릴 미수록3종 ⑤포토카드 세트/대량 배타성. 나머지(완칼타공·미러·거치대·폼보드A1·코롯토·지비츠·포토카드호스트)=가격표 근거 자율(§13/§18/§7).",
+   "lesson": "[HARD] CONFIRM 큐 올리기 전 인쇄상품 가격표(260527) 전 시트(특히 커팅타공·아크릴 후가공·명함포토카드 같은 '횡단 옵션/통용단가' 시트)를 먼저 봐라. '호스트 모름'의 다수가 가격표에 명시돼 있다."
   }
  },
  "classes": {
@@ -118,33 +144,33 @@
    "class": "NEEDS_FORMULA",
    "target": "§7/§21",
    "design": "GO*",
-   "note": "폼보드 129: siz_cd disjoint·골든 8,500/14,000 일치·배선 안전·★§7 product_sizes 315/317 등록이 발현 조건"
+   "note": "폼보드 129: siz_cd disjoint·골든 8,500/14,000 일치·배선 안전·★§7 product_sizes 315/317 등록이 발현 조건. ★가격표 포스터사인 187-190: 화이트A3=7,000/블랙A3=8,500·A1(화이트20,000·블랙24,000) 전부 존재. 잔여 CONFIRM=화이트A3 7,000 vs 6,000(권위충돌)만"
   },
   "COMP_POSTER_FOMEXBOARD_WHITE5MM": {
    "class": "NEEDS_FORMULA",
    "target": "§7/§21",
    "design": "GO*",
-   "note": "포맥스 130: siz_cd disjoint·골든 10,000/16,000·★§7 사이즈 315/317 등록 선행"
+   "note": "포맥스 130: siz_cd disjoint·골든 10,000/16,000·★§7 사이즈 315/317 등록 선행. ★가격표 포스터사인 193-196: 3mm A3=8,500·A1=23,000 / 5mm A3=10,000·A1=30,000 전부 존재(A1 CONFIRM 불요)"
   },
   "COMP_PHOTOCARD_BULK": {
-   "class": "BLOCKED",
-   "target": "goods.asp/실무진",
-   "note": "포토카드 세트 vs 대량 선택 메커니즘·배타성 모호(추측 적재 금지)"
+   "class": "NEEDS_FORMULA",
+   "target": "§18(호스트 식별됨)",
+   "note": "★가격표 재확인: 명함포토카드 시트 81행 '포토카드(대랑제작)'=호스트 식별(포토카드 상품 PRD_000024/025·세트vs대량 두 방식). BLOCKED 해제→§18. 잔여 CONFIRM=세트/대량 배타성만"
   },
   "COMP_CUT_FULL_PERF_1H6": {
-   "class": "BLOCKED",
-   "target": "goods.asp/실무진",
-   "note": "완칼+타공1구 호스트 상품·선택수단 미식별"
+   "class": "LEGIT_UNUSED",
+   "target": "addon(§7/CPQ)",
+   "note": "★§13 분석 종결: 호스트=헤더택(045)/벽걸이캘린더(111)인데 두 상품 모두 타공 옵션그룹 0건. 가격표 커팅타공41 '타공(합가)·타공없음0원·1구2,000(100장당+1,000)'=손님선택 추가옵션 → PET배너거치대 완전 동형(always-add 배선=과대청구). 공식 미배선이 정답=LEGIT_UNUSED. ★단 addon 자체가 라이브 미구성(product_addons/template 0건)이라 타공 가격 손님계산은 §7 과제(배선 결함은 아님)"
   },
   "COMP_CUT_FULL_PERF_2H6": {
-   "class": "BLOCKED",
-   "target": "goods.asp/실무진",
-   "note": "완칼+타공2구 호스트 상품 미식별"
+   "class": "LEGIT_UNUSED",
+   "target": "addon(§7/CPQ)",
+   "note": "★§13 분석 종결: 1H6 동형. 가격표41 '2구4,000(100장당+2,000)'·타공없음0=손님선택 addon. 공식 미배선이 정답=LEGIT_UNUSED. addon 작동은 §7"
   },
   "COMP_ACRYL_MIRROR3T": {
-   "class": "BLOCKED",
-   "target": "goods.asp/실무진",
-   "note": "미러아크릴3T 면적단가 81행 적재됐으나 호스트 상품·공식 귀속 미식별"
+   "class": "NEEDS_FORMULA",
+   "target": "§18(투명3T 동형 공식 신설)",
+   "note": "★§13 분석: 아크릴34 '미러아크릴3T(직접입력형) 전면5도 통용단가'(면적). 투명아크릴3T=COMP_ACRYL_CLEAR3T→PRF_CLR_ACRYL 정상배선(동형 템플릿). 호스트=거울류 상품 틴거울183/컴팩트184/카드185/사각손186/블랙187 — ★이들 가격공식 미바인딩(0건). 단순 배선 아님→§18 PRF_MIRROR_ACRYL 신설+거울류 바인딩+골든(예전사이트) 검증 선행. 미배선 유지(실제 결함). 미러아크릴스티커143은 별 comp(COMP_POSTER_ACRYLSTK_MIRROR)로 이미 배선=무관"
   },
   "COMP_POSTEROPT_PET_BANNER_STAND_IN": {
    "class": "LEGIT_UNUSED",
