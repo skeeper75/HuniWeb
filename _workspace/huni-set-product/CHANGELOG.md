@@ -4,6 +4,22 @@
 
 ---
 
+## 2026-07-01 — 077 레더하드커버 셋트 라이브 동작화 COMMIT (견적 0원 → 51,146·첫 셋트 동작화 종단)
+
+사용자 요청("실제 라이브 셋트상품 하나를 동작하게")으로 **077 레더하드커버**를 권위대조→설계→독립 게이트 DRY-RUN→**인간 승인 후 실 COMMIT**까지 종단.
+
+- **권위 대조 결판(요청 ①·빈 껍데기 결함 vs 설계의도)**: 077 표지078·면지079/080/081 = **설계의도(가격0)** — 072 동형으로 부모 `COMP_HC_MUSEON_COVERBIND`(표지+제본 권당 통합)가 흡수·면지 권위상 무료(072 라이브 ASP 블랙=화이트=그레이 동일가 46,500 입증). 내지 부재 = **결함**(책 본문 가격 통째 누락=저청구 진짜 원인). 산출=`03_design/leather-hardcover-077-authority.md`.
+- **동작 경로 = 072 패턴 재사용 + 내지 1건 신설**: 부모공식 `PRF_HC_MUSEON_SET`·내지공식 `PRF_DGP_INNER`·`COMP_HC_MUSEON_COVERBIND` 6밴드·레더자재 MAT_000186·공유 단가행 전부 재사용(신규 공식/comp/단가행 mint **0**). 신규 mint = 내지 반제품 **PRD_000285** 1건만(search-before-mint 전수 확인·MAX prd_cd=284).
+- **라이브 COMMIT(인간 승인)**: 단일 트랜잭션 **23행**(products 1 + 285 차원 15[사이즈3·인쇄옵션2·자재9·판형1] + 공식 바인딩 2 + 셋트행 5). 백업=`leather-hardcover-077-backup-20260701_0005.sql`·undo=`leather-hardcover-077-undo.sql`. 멱등(2회차 delta 0)·FK 위상(285→차원→공식→셋트행)·**기존 072 등 회귀 0**.
+- **사후 검증**: evaluate_set_price 견적 **0원 → 51,146원**(PRICE≠0 동작 입증·A4·30p·qty1). 077 셋트행 4→5행(disp_seq 1~5·내지285 min24/max300/incr2).
+- **★돈크리티컬 결판(레더 +3,900 BLOCKED)**: COVERBIND `use_dims=["min_qty"]`만이고 6밴드 mat_cd=NULL → `_row_matches`(pricing.py:94)가 use_dims와 무관하게 mat_cd 검사 → 레더 단가행 추가 시 NULL밴드+레더 combo 2개 = **ERR_AMBIGUOUS → 합산 제외(34,100조차 0)**. **designer가 레더 단가행 안 넣은 게 옳음.** 결과: 077이 072 전용지와 동일가(레더 프리미엄 +3,900 미반영=저청구)이지 **0원·계산불가 아님**. 견적 0원→정상 동작 목표 달성. 레더 델타는 엔진 use_dims 확장 필요(C트랙·개발팀).
+- 골든 50,800 vs 계산 51,146(+346) = 072가 이미 가진 산식 편차(권당/내지환산) 상속·077 적재 결함 아님(C트랙).
+- **동형 전파 패턴 입증**: 082 하드커버링(단 cover_mult ×2 BLOCKED 동반)·068~071 소프트커버(부모공식 4비목)에 같은 패턴 적용 가능.
+- **잔존 BLOCKED**: BLOCKED-COVERBIND-LEATHER(레더 +3,900·엔진)·BLOCKED-MAT-REWIRE(좀비 MAT_000002 아크릴 link 정리·표지078 레더 link·dbmap)·CONFIRM-LEATHER-PRINT(실무진)·C-TRACK-ENGINE(COVERBIND ×qty·DBLPANSU).
+- 산출=`06_load/leather-hardcover-077-{load.sql,load-spec.md,backup-*.sql,undo.sql,commit-log.md}`·`05_gate/gate-verdict-leather-hardcover-077.md`·[[leather-hardcover-077-live-commit-260701]].
+
+---
+
 ## 2026-06-27 — 전 상품 가격공식 완전성 마스터 + 가격만결손 51 분해 + 명함특수 4 라이브 COMMIT + 아크릴 코드버그
 
 세션 시작 = 가격만결손 51 바인딩(§23 핸드오프). 중간에 `/harness:harness`로 두 목표(①가격구성 적재 ②전 상품 공식 정리) 요청 → **Phase 0 감사로 신규 하네스 불요 판정**(§18+§7+§17 커버·SOT [HARD] "새 하네스 금지") → 수렴-실행 + 사용자 지적("전체 공식 수립 시도 부재") 반영.

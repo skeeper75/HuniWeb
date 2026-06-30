@@ -316,7 +316,7 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 **산출물 루트:** `_workspace/huni-set-product/` (01_authority·02_reference·03_design·04_codex·05_gate·06_load·_meta). 6인 팀(`hsp-authority-curator`∥`hsp-domain-researcher` 기준점 팬아웃 → `hsp-set-designer` 설계 → `hsp-codex-verifier` codex 독립 2차 → `hsp-set-gate` S1~S7 게이트(evaluate_set_price 재계산·DRY-RUN) → `hsp-load-executor` 승인 후 안전 적재(백업·복합PK 멱등·사후검증)) + 5 스킬(+ `dbm-load-execution`·`hqv-codex-cross-verify`·`hpe-competitor-benchmark`·`rpm-live-reverse` 재사용). 생성≠검증·codex 주장=가설·search-before-mint(반제품 신규 mint 금지·미등록은 BLOCKED→dbmap 위임)·라이브 읽기전용(적재 Phase 5만 인간 승인 후 COMMIT)·파일럿(책자류·엽서북·떡메) 완주→동형 전파. 자격증명 `.env.local RAILWAY_DB_*`.
 
-**변경이력:** 최신: 2026-06-29(6세션) [HARD] **상품별 구성요소 경계(옵션 오염 방지)+게이트 S8** 추가(8파일) + 셋트 미구성4(068~071) 설계(표지+속지·면지없음·계산공식집 원리: 068~070 펼침 표지×1/071 트윈링 ×2·표지단가 1면기준·내지×1·면지=제본포함·rev.2 부모4비목+표지용지). ★게이트 전 보류=가격테이블 토대 먼저(§27 순서). 부품8 mint=dbmap·표지양면 R-4 책자공통. → `_workspace/huni-set-product/HANDOFF.md`·`booklet-set-formula-principle-260629`. 직전: 2026-06-27(2세션) 명함034 펄+굿즈 라벨모델+아크릴157 COMMIT
+**변경이력:** 최신: 2026-07-01 **077 레더하드커버 셋트 라이브 동작화 COMMIT**(견적0원→51,146·23행 단일트랜잭션·내지 PRD_000285 mint 1건+나머지 072 자산 재사용·부모공식 PRF_HC_MUSEON_SET 바인딩·셋트행 4→5·회귀0·undo보유)·권위대조 결판(표지078/면지=설계의도 가격0·내지부재=결함)·★레더 +3,900은 COVERBIND use_dims=[min_qty] 제약상 단가행 추가시 AMBIGUOUS로 전체0→미반영(저청구 잔존·엔진 C트랙)·동형 전파 패턴 입증(082·068~071) → `_workspace/huni-set-product/HANDOFF.md`·[[leather-hardcover-077-live-commit-260701]]. 직전: 2026-06-29(6세션) 상품별 구성요소 경계+게이트 S8·셋트 미구성4(068~071) 설계
 
 ---
 

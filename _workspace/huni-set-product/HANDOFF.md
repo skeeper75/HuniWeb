@@ -1,8 +1,16 @@
 # Huni-Set-Product (§23) — HANDOFF
 
-최종 갱신: 2026-06-27 · 전 상품 가격공식 통합 마스터(완전성 자) 수립 + 가격만결손 51 분해 + 명함특수 4 라이브 COMMIT + 아크릴 코드버그 적발(개발팀 위임). **권위 = `_workspace/_foundation/`(price-formula-master·remediation).** 상세 누적 → `CHANGELOG.md`.
+최종 갱신: 2026-07-01 · **077 레더하드커버 셋트 라이브 동작화 COMMIT**(견적0원→51,146·첫 셋트 동작화 종단). **권위 = `_workspace/_foundation/`(price-formula-master·remediation).** 상세 누적 → `CHANGELOG.md`.
 
-> 직전(2026-06-26): 상품 유형 분류 SOT 확정→라이브 재정렬 2회→기초 진단→A2 가격교정 3건 COMMIT.
+> 직전(2026-06-27): 전 상품 가격공식 통합 마스터 + 가격만결손 51 분해 + 명함특수 4 COMMIT + 아크릴 코드버그.
+
+## ★077 레더하드커버 동작화 완료 (2026-07-01·셋트 동작화 동형 패턴 입증)
+
+077을 권위대조→설계→독립 게이트 DRY-RUN→인간 승인 후 **라이브 COMMIT**(23행 단일 트랜잭션·견적 0원→51,146). **패턴**: 부모공식 미바인딩 견적0 셋트는 ① 동작하는 동형(072) 권위 대조로 빈 껍데기 결함 vs 설계의도 결판 ② 부모공식·comp·단가행 재사용 + 내지 반제품만 mint(search-before-mint) ③ 셋트행에 내지 삽입 ④ evaluate_set_price 사후 PRICE≠0 확인. 백업·undo 보유·회귀0. 상세 [[leather-hardcover-077-live-commit-260701]].
+
+**★레더 +3,900 BLOCKED 교훈[HARD]**: COVERBIND `use_dims=["min_qty"]`만이라 mat_cd 단가행 추가 시 `_row_matches`가 AMBIGUOUS로 전체 0원화 → 단가행에 차원 넣어도 use_dims 미선언이면 무용·오히려 위험. 레더 프리미엄 정확반영은 엔진 use_dims 확장(C트랙).
+
+**077 동형 전파 후보**: 082 하드커버링(단 cover_mult ×2 BLOCKED·[[booklet-cover-branch-design-260630]] 동반)·068~071 소프트커버(부모공식 4비목·[[booklet-set-formula-principle-260629]]). 동작화 전 BLOCKED-MAT-REWIRE(077 좀비 MAT_000002 link 정리)·CONFIRM-LEATHER-PRINT 잔존.
 
 ---
 
