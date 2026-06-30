@@ -1,6 +1,6 @@
 # Huni-Set-Product (§23) — HANDOFF
 
-최종 갱신: 2026-07-01 · **하드커버 셋트 동작화 라이브 COMMIT 2건**(077 레더 견적0→51,146·082 링 0→44,123). **권위 = `_workspace/_foundation/`(price-formula-master·remediation).** 상세 누적 → `CHANGELOG.md`.
+최종 갱신: 2026-07-01 · **셋트 동작화 라이브 COMMIT 3건**(077 레더 0→51,146·082 링 0→44,123·068 중철 저청구→158,688). 다음=069/070 전파(PRF_BOOK_COVER 재사용)·071/088 BLOCKED. **권위 = `_workspace/_foundation/`(price-formula-master·remediation).** 상세 누적 → `CHANGELOG.md`.
 
 > 직전(2026-06-27): 전 상품 가격공식 통합 마스터 + 가격만결손 51 분해 + 명함특수 4 COMMIT + 아크릴 코드버그.
 

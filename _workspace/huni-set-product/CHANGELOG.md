@@ -4,6 +4,22 @@
 
 ---
 
+## 2026-07-01 — 068 중철 소프트커버 셋트 완전 동작화 COMMIT (저청구 → 골든 158,688·표지 동작 첫 소프트커버)
+
+077/082(하드커버·통합 COVERBIND)와 달리 068=소프트커버(분해형)라 표지가 인쇄/코팅/용지 3비목으로 쪼개짐. 사용자 "표지까지 완전 동작화" 선택 → 표지를 member로 분리해 골든 **158,688** 완전 도달.
+
+- **077/082 대비 차이[핵심]**: 068 표지 3중 BLOCKED — (a) 표지 3비목만 가진 깔끔한 공식 부재(기존 PRF_DGP_*는 굿즈/명함 후가공 혼입·S8 오염) (b) 표지 반제품 부재 (c) 완제품 판형(SIZ_000250)≠표지 단가행 판형(SIZ_000499) NO_MATCH. **해법 = 표지를 별도 member로 분리**(booklet-cover-branch 종단 결론).
+- **신규 mint**: 표지 가격공식 **PRF_BOOK_COVER**(인쇄 COMP_PRINT_DIGITAL_S1 + 코팅 COMP_COAT_MATTE + 용지 COMP_PAPER 3비목만·신설·신규 comp 0) + 반제품 2(표지 PRD_000288·내지 PRD_000287). PRF_DGP_A 등 후가공 혼입 공식 빌리기 부결(S8).
+- **★판형 해소**: 표지288을 A3펼침(SIZ_000174)+판형 SIZ_000499로 → `fn_calc_pansu(499,174)=1` → 표지 1매=1판 정확(A4=pansu2 저청구·499자신=0 부결). 068 완제품 판형엔 SIZ_000499 단가행 없음 → **member 분리 필연**(직배선 불가 검증).
+- **라이브 COMMIT(인간 승인)**: 단일 트랜잭션 41행(가격공식4+반제품2+차원30+바인딩3+셋트행2). ★의존순서[HARD]: 가격공식(t_prc_*) 먼저→반제품/셋트행(t_prd_*) FK 위상순(역순이면 288→PRF_BOOK_COVER FK 깨져 표지 0). 백업·undo·멱등·회귀 0.
+- **사후 evaluate_set_price = 158,688**(표지 88,688[인쇄350×100+코팅500×100+용지36.88×100] + 제본 JUNGCHEOL 700×100=70,000·오차 0·단가 verbatim). 068 셋트행 0→2행(표지288+내지287·소프트커버 면지 0).
+- **S8 오염 0**: PRF_BOOK_COVER 비목 3개만·후가공/굿즈 혼입 0·proc_cd 주입(인쇄 PROC_000004·코팅 PROC_000015) silent 다중매칭 가드.
+- codex Q-A(표지 용지비 누락 NO-GO 후보·6/29 reconcile) → COMP_PAPER 3,688 member 명시로 해소.
+- **069/070 전파 준비**: 분해형 동형(cover_mult=1) → PRF_BOOK_COVER 재사용·반제품2+셋트만 mint. **071=BLOCKED**(트윈링 cover_mult ×2·엔진 미지원·C트랙). DBLPANSU 내지 이중÷pansu도 C트랙(표지/제본 무영향).
+- 산출=`06_load/booklet-jungcheol-068-{full-load.sql,apply.sql,undo.sql,backup-*.sql,commit-log.md}`·`05_gate/gate-verdict-booklet-jungcheol-068.md`·`price-e2e-trace-*.md`·[[leather-hardcover-077-live-commit-260701]].
+
+---
+
 ## 2026-07-01 — 082 하드커버링 셋트 라이브 동작화 COMMIT (견적 0원 → 44,123·077 동형 전파 2번째)
 
 077 패턴을 082 하드커버링에 전파(권위대조→설계→독립 게이트 DRY-RUN→인간 승인 후 실 COMMIT). 견적 **0원 → 44,123원**(A5·30p·양면).
