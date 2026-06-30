@@ -45,6 +45,12 @@
    "delta": "결함 23→19(★LEGIT_UNUSED 4 스캐너 분리: 싸바리·PET배너거치대3='미배선이 정답' false-positive). 라이브 무변동. 남은 19 전부 외부 의존(사장님16+§6 위젯2+§23 셋트1)=자율 배선분 소진. CONFIRM-QUEUE 확정본 7항목→결함16 해소경로.",
    "scanner_change": "wiring_scan.py 에 load_legit_unused() 추가 — class==LEGIT_UNUSED comp_cd 를 total_defects 에서 제외하되 summary.legit_unused 별도 카운트(no silent caps)."
   },
+  "pcb30p_live_rediag_r10": {
+   "trigger": "사용자: '엽서북부터 시작' → 라이브 webadmin 시뮬레이터 실호출(HuniSim 읽기전용) 재진단",
+   "finding": "094=셋트(is_set=True·내지 PRD_000095). webadmin 페이지=page_rule{20,30,10}(전용 차원). 셋트경로 simulate_set PRICE=0(내지 frm=null·pansu None→derive_inner_sheets 불가). 단품경로=20p 고정 22,000(page_rule 무시).",
+   "verdict": "★기존 design-pcb30p-fix(opt_cd 옵션그룹 설계) SUPERSEDED/폐기 — page_rule과 이중입력 충돌. 진짜 결함=셋트 내지(095) 가격공식+pansu(§23/§18/§26). wiring 배선 범위 밖. COMMIT 0(정당). 상세 diag-pcb30p-set-live-260701.md",
+   "lesson": "[HARD] 배선 설계 전 라이브 sim_meta로 상품의 실제 메커니즘(is_set·page_rule·qty_rule) 먼저 확인. 094는 셋트인데 단품 완제품 단가행+opt_cd로 설계한 게 오류. 셋트 상품은 simulate_set 경로가 권위."
+  },
   "pricetable_recheck_r10": {
    "trigger": "사용자: '인쇄상품가격표 포스터/사인에서 확인할 수 있는데 확인했을지?' — v1 CONFIRM 큐가 가격표 미확인으로 호스트를 '모름' 처리한 것 적발(정당).",
    "source": "후니프린팅_인쇄상품_가격표_260527.xlsx 시트: 포스터사인·커팅타공·아크릴·명함포토카드 직접 확인",
@@ -111,16 +117,16 @@
    "note": "★별색 flat 교정 라이브 COMMIT 완료(견적0/저청구6,213→골든 14,500~19,000·PRF_DGP_A 과대소멸·재바인딩·클리어별색 OPT_000081 없음dflt·mat_cd 와일드)·고아 탈출. 위젯 단/양면+클리어 필수선택 §6 의존·qty≠100 §26"
   },
   "COMP_PCB_S1_30P": {
-   "class": "NEEDS_FORMULA",
-   "target": "§18",
-   "design": "DATA_GO_HOLD",
-   "note": "엽서북30p 재검증: 데이터 설계 GO(채번 OPT_000082 무충돌·disjoint 2×2·골든 6/6)·★COMMIT 보류 — 페이지수=print동형 필수선택이라 위젯이 '페이지 필수선택+opt_cd 전송' 강제(§6) 또는 C트랙(webadmin dflt_yn 전파) 해소 후. 데이터 재작업 불요"
+   "class": "BLOCKED",
+   "target": "§23 셋트+§18 내지가격+§26 pansu",
+   "design": "REDESIGN(opt_cd 설계 폐기)",
+   "note": "★라이브 실호출 재진단(260701 세션): 094=셋트(is_set=True·내지구성원 PRD_000095). webadmin은 페이지를 page_rule{20,30,10}(TPrdProductPageRules)로 다룸→내 opt_cd 옵션그룹 설계는 page_rule과 이중입력 충돌→폐기. 셋트경로 simulate_set PRICE=0(내지095 frm=null·가격공식 부재 + pansu None→derive_inner_sheets 계산불가). 단품경로 PRF_PCB_FIXED=20p 고정(page_rule 무시·22,000). 진짜 결함=셋트 내지 가격공식+pansu→wiring 범위 밖. COMMIT 안 한 것 정당. 산출 design-pcb30p-fix=폐기(opt_cd 가정 오류)"
   },
   "COMP_PCB_S2_30P": {
-   "class": "NEEDS_FORMULA",
-   "target": "§18",
-   "design": "DATA_GO_HOLD",
-   "note": "엽서북30p 재검증: 데이터 설계 GO(채번 OPT_000082 무충돌·disjoint 2×2·골든 6/6)·★COMMIT 보류 — 페이지수=print동형 필수선택이라 위젯이 '페이지 필수선택+opt_cd 전송' 강제(§6) 또는 C트랙(webadmin dflt_yn 전파) 해소 후. 데이터 재작업 불요"
+   "class": "BLOCKED",
+   "target": "§23 셋트+§18 내지가격+§26 pansu",
+   "design": "REDESIGN(opt_cd 설계 폐기)",
+   "note": "★라이브 실호출 재진단: COMP_PCB_S1_30P 동형. 094 셋트 내지(095) 가격공식 부재+pansu 부재가 근본결함. opt_cd 단품 설계는 webadmin page_rule 셋트 메커니즘과 불일치→폐기. §23/§18/§26 라우팅"
   },
   "COMP_BIND_CAL_WALL": {
    "class": "NEEDS_FORMULA",
