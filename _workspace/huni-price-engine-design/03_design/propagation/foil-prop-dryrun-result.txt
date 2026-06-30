@@ -1,0 +1,17 @@
+SET
+BEGIN
+--- PASS 1 (insert) ---
+           comp_cd            | rows 
+------------------------------+------
+ COMP_FOIL_PROC_LARGE_SPECIAL | 3328
+ COMP_FOIL_PROC_LARGE_STD     | 3328
+ COMP_FOIL_SETUP_LARGE        |  512
+(3 rows)
+
+--- PASS 2 (re-apply: expect 0 changes) ---
+ d_prices | d_comps | d_formulas | d_fc | d_bindings |     verdict      
+----------+---------+------------+------+------------+------------------
+        0 |       0 |          0 |    0 |          0 | IDEMPOTENT: PASS
+(1 row)
+
+ROLLBACK
