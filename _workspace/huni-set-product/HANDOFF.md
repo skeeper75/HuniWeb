@@ -10,11 +10,25 @@
 
 **★레더 +3,900 BLOCKED 교훈[HARD]**: COVERBIND `use_dims=["min_qty"]`만이라 mat_cd 단가행 추가 시 `_row_matches`가 AMBIGUOUS로 전체 0원화 → 단가행에 차원 넣어도 use_dims 미선언이면 무용·오히려 위험. 레더 프리미엄 정확반영은 엔진 use_dims 확장(C트랙).
 
-**077 동형 전파 후보**: 082 하드커버링(단 cover_mult ×2 BLOCKED·[[booklet-cover-branch-design-260630]] 동반)·068~071 소프트커버(부모공식 4비목·[[booklet-set-formula-principle-260629]]). 동작화 전 BLOCKED-MAT-REWIRE(077 좀비 MAT_000002 link 정리)·CONFIRM-LEATHER-PRINT 잔존.
+**077 동형 전파 = 5건 완료**(077·082·068·069·070). 패턴 입증: 하드커버=COVERBIND 통합+내지 mint / 소프트커버=PRF_BOOK_COVER(3비목)+표지 member 분리(완제품 판형≠표지단가행 SIZ_000499 NO_MATCH→member 필연·fn_calc_pansu=1)·068 공식신설→069/070 공식 재사용. 상세 [[leather-hardcover-077-live-commit-260701]].
 
 ---
 
-## ★다음 시작점 (fresh 세션이 바로 할 일)
+## ★셋트 동작화 다음 시작점 (이번 세션 이어서·fresh 세션 최우선)
+
+**완료(라이브 COMMIT·건드리지 말 것)**: 077 레더하드커버(51,146)·082 하드커버링(44,123)·068 중철(158,688)·069 무선(138,688)·070 PUR(288,688). 전건 백업·undo 보유·회귀0.
+
+**잔존 셋트 동작화 후속:**
+1. **088 레더링바인더** (082 동형·082 패턴 그대로 적용 가능) — 단 제본방식 실무진 보류(HOLD)·확정 후 088 권위대조→설계(082 동형)→게이트→COMMIT. 088=내지 없는 빈 바인더(정상)일 수 있어 권위 확인 선행.
+2. **071 트윈링** = cover_mult ×2 **데이터로 해결 불가·개발팀 C트랙 선행**. 명세 완료=`_workspace/_foundation/remediation/CODEBUG-cover-mult-x2-undercharge.md`(권고: 호출자 price_views.py:1900-1911 표지 member.qty×cover_mult 주입·회귀게이트 068 표지 88,688 유지). 엔진 수정 후 071 동작화 가능(082 동형+×2).
+3. **프리미엄 정확값 트랙(저청구 잔존·동작은 됨)**: 077 레더 +3,900(BLOCKED-COVERBIND-LEATHER·엔진 use_dims 제약)·082 면지 유료(CONFIRM-MYUNJI-PAID·라이브 ASP 골든 역산)·082 표지/면지 ×2. 전부 §18/엔진 별도 트랙.
+4. **usage_cd 표시명 정합**(068~070 표지/내지 자재 usage_cd 표시명 어긋남·가격 무관·dbmap 점검 큐).
+
+**셋트 동작화 패턴 SOP(다음 셋트에 그대로)**: ① hsp-authority-curator 권위대조(동작하는 동형 셋트 기준·빈 껍데기 결함 vs 설계의도 결판) → ② hsp-set-designer 적재본(search-before-mint·재사용 우선·내지/표지 member mint·멱등 FK 위상순) → ③ hsp-set-gate 독립 DRY-RUN(evaluate_set_price 실재계산·S8 오염0·골든 도달) → ④ 인간 승인 → ⑤ hsp-load-executor(백업·단일 트랜잭션·사후검증·undo). 소프트커버 분해형은 PRF_BOOK_COVER 재사용·표지 판형 SIZ_000499.
+
+---
+
+## ★다음 시작점 (그 외 트랙·fresh 세션이 바로 할 일)
 
 **먼저 읽을 권위(재발견 0):** `_workspace/_foundation/price-formula-master.{csv,md}`(★전 275상품 가격공식 완전성 자·status 7분류)·`product-type-classification-sot.md`(분류 SOT)·`product-config-readiness-260626.md`(견적 준비도)·`remediation/_REMEDIATION-LOG.md`(가격교정·COMMIT 이력)·`remediation/CODEBUG-sizcd-area-undercharge.md`(아크릴 코드버그)·`remediation/namecard-special-design.md`. 셋트 7×4 현황판=`06_load/set-product-readiness-master.md`.
 
