@@ -82,6 +82,33 @@ tr.r-FAIL{ background:#fef2f2; } tr.r-WARN{ background:#fffbeb; }
 .nextstep{ background:#eff6ff; border:1px solid #bfdbfe; border-radius:8px; padding:10px 12px; font-size:13px; }
 .nextstep .lbl{ font-size:11px; color:#2563eb; font-weight:700; display:block; margin-bottom:3px; }
 .gnote{ color:#92400e; background:#fffbeb; border:1px solid #fde68a; border-radius:6px; padding:6px 9px; font-size:11.5px; margin-top:8px; }
+
+/* ── BOM(구성요소·가격구성요소) 항목 단위 표 ── */
+details.bom{ margin-bottom:7px; border:1px solid #e5e7eb; border-radius:7px; overflow:hidden; }
+details.bom>summary{ font-size:12px; font-weight:600; padding:6px 10px; cursor:pointer; background:#fcfcfd; list-style:none; display:flex; align-items:center; gap:7px; }
+details.bom>summary::-webkit-details-marker{ display:none; }
+details.bom>summary::before{ content:"▸"; color:#9ca3af; font-size:10px; }
+details.bom[open]>summary::before{ content:"▾"; }
+details.bom>summary .ax-cnt{ color:#9ca3af; font-weight:400; font-size:11px; }
+.bom-body{ padding:6px 8px; overflow-x:auto; }
+table.bom{ border-collapse:collapse; width:100%; font-size:11.5px; }
+table.bom th,table.bom td{ border:1px solid #eef0f2; padding:3px 7px; text-align:left; vertical-align:top; }
+table.bom th{ background:#f6f7f8; font-weight:600; }
+table.bom td.code{ font-family:ui-monospace,SFMono-Regular,Menlo,monospace; color:#6b7280; font-size:10.5px; white-space:nowrap; }
+table.bom td.cst{ text-align:center; white-space:nowrap; }
+tr.it-missing{ background:#fef2f2; } tr.it-missing td:first-child{ font-weight:600; }
+tr.it-price_gap{ background:#fffbeb; } tr.it-차원_미스매치{ background:#fffbeb; } tr.it-단가행_전무{ background:#fef2f2; }
+.chip{ display:inline-block; font-size:10px; padding:1px 7px; border-radius:9px; font-weight:700; color:#fff; }
+.chip-present{ background:#16a34a; } .chip-missing{ background:#dc2626; }
+.chip-price_gap{ background:#d97706; } .chip-차원_미스매치{ background:#d97706; } .chip-단가행_전무{ background:#dc2626; }
+.chip-direct_price{ background:#0891b2; } .chip-na{ background:#9ca3af; } .chip-extra{ background:#7c3aed; } .chip-mismatch{ background:#d97706; }
+.q0box{ background:#fef2f2; border:1px solid #fecaca; border-radius:7px; padding:8px 10px; margin-bottom:9px; font-size:12px; color:#b91c1c; }
+.q0box .q0-lbl{ font-weight:700; display:block; margin-bottom:3px; }
+.q0box ul{ margin:3px 0 0; padding-left:18px; } .q0box li{ margin:2px 0; }
+.cellgrid{ font-family:ui-monospace,Menlo,monospace; font-size:10.5px; }
+.cellgrid .empty{ color:#dc2626; font-weight:700; }
+.bom-note{ color:#9ca3af; font-size:10.5px; margin-top:1px; }
+.bom-empty{ color:#9ca3af; font-size:11.5px; padding:4px 2px; font-style:italic; }
 """
 
 # ── 공통 JS (standalone·django 동일: 데이터는 id="rv-data" json_script 에서 읽음) ──
@@ -111,9 +138,10 @@ function renderSummary(){
    +`<div class="s-kpi"><b>${s.avg_completion}%</b><span>평균 완성률</span></div>`
    +`<div class="s-kpi"><b>${s.calc_ok} <small style="font-size:11px;color:#6b7280">(${s.calc_pct}%)</small></b><span>계산 가능(PRICE≠0)</span></div>`
    +`<div class="s-kpi"><b>${s.widget_y}</b><span>위젯 대상(eligible=Y)</span></div>`
-   +`<div class="s-kpi"><b>${s.l3plus}</b><span>L3+ (체인 완전)</span></div>`
+   +`<div class="s-kpi"><b style="color:#dc2626">${s.bom_price0??'-'}</b><span>견적 0(가격사슬 끊김)</span></div>`
+   +`<div class="s-kpi"><b style="color:#dc2626">${s.bom_axis_missing??'-'}</b><span>구성요소 빠짐(축 결손)</span></div>`
    +`<div class="s-grades"><span style="color:#6b7280">등급 분포</span>${chips}</div>`
-   +`<div class="s-note">★ golden_status 다수 "골든 미대조": 계산은 되나 예전사이트 정답가 전수 일치는 미검증(후속). PRICE≠0=계산 성립 신호일 뿐.</div>`;
+   +`<div class="s-note">★ 구성요소·가격구성요소 BOM 을 항목 단위로 대조 — 상세 패널에서 "어느 구성요소가 빠졌나/어디서 견적이 끊겼나"를 직접 확인. PRICE≠0=계산 성립 신호일 뿐(골든 전수 일치는 후속).</div>`;
 }
 
 // ── 사이드바 트리(상품군 그룹) ──
@@ -149,50 +177,77 @@ function renderList(){
   document.getElementById("rv-items").innerHTML = html || '<p class="rv-hint">조건에 맞는 상품 없음</p>';
 }
 
-// ── Cytoscape 플로우 그래프 (상품 → 구성요소 → 가격공식 → 가격구성요소 → 단가행) ──
-// 노드 색 = 차원 status(PASS/WARN/FAIL/N/A 회색점선). 끊긴 연결(FAIL) = 빨강 점선.
+// ── Cytoscape 플로우 그래프 (★실제 BOM 항목 노드) ──
+// 좌→우: 상품 → 구성요소 항목(자재·공정·사이즈·도수·옵션 — component_bom 실항목) →
+//          가격공식 → 가격구성요소 항목(price_bom) → 단가행 → 계산가능/견적0.
+// 노드 색 = 항목 status(있음 초록 / 빠짐·단가행없음 빨강 / 단가공백·차원불일치 주황 / 비대상 회색 점선).
+// 끊긴 엣지(빨강 점선) = 견적 0 원인 지점. ★항목 다수 축은 (축+상태)로 집계(읽기성)·소수(≤5)는 항목별.
 // React Flow 미채택(React 빌드 필요). 교체 시 동일 노드/엣지 모델을 React Flow nodes/edges 로 이식 가능.
-const FLOW = [
-  // id,    label,           col, row, dimCode
-  ["P",    "상품",            0, 1.5, null],
-  ["D1",   "구성요소 BOM",     1, 0,   "D1"],
-  ["D6",   "기초마스터",       1, 1,   "D6"],
-  ["D7",   "옵션",            1, 2,   "D7"],
-  ["D9",   "제약조건",         1, 3,   "D9"],
-  ["D2",   "가격공식 바인딩",   2, 1.5, "D2"],
-  ["D3",   "가격구성요소",      3, 0.5, "D3"],
-  ["D4",   "차원 충전(단가행)", 3, 1.5, "D4"],
-  ["D10",  "판형 매핑",        3, 2.5, "D10"],
-  ["D11",  "매핑 정합",        4, 1.5, "D11"],
-  ["D5",   "계산가능(PRICE)",  5, 1.5, "D5"],
-];
-const FLOW_EDGES = [
-  ["P","D1"],["P","D6"],["P","D7"],["P","D9"],
-  ["D1","D2"],["D6","D2"],["D7","D2"],["D9","D2"],
-  ["D2","D3"],["D2","D4"],["D2","D10"],
-  ["D3","D11"],["D4","D11"],["D10","D11"],
-  ["D11","D5"],
-];
-const STATUS_FILL = { PASS:"#16a34a", WARN:"#d97706", FAIL:"#dc2626", "N/A":"#9ca3af" };
+const STATUS_FILL = { present:"#16a34a", missing:"#dc2626", price_gap:"#d97706",
+  "차원_미스매치":"#d97706", "단가행_전무":"#dc2626", direct_price:"#0891b2",
+  "n/a":"#9ca3af", "N/A":"#9ca3af", "":"#9ca3af" };
+const STATUS_LABEL = { present:"있음", missing:"빠짐", price_gap:"단가공백",
+  "차원_미스매치":"차원불일치", "단가행_전무":"단가행없음", direct_price:"직접단가", "n/a":"비대상" };
+function stColor(s){ return STATUS_FILL[s]||"#9ca3af"; }
+function stLabel(s){ return STATUS_LABEL[s]||s||"-"; }
+
+// 한 축의 항목을 status 로 묶어 그래프 노드화(소수=항목별·다수=집계).
+function axisNodes(ax){
+  const groups = {}; for(const it of (ax.items||[])){ (groups[it.status]=groups[it.status]||[]).push(it); }
+  const out = [];
+  for(const st in groups){
+    const arr = groups[st];
+    const real = arr.filter(i=>i.code||i.name);
+    if(real.length===0){ out.push({ label:`${ax.axis} 결손`, status:st }); continue; }
+    if(real.length<=5){ for(const it of real) out.push({ label:(it.name||it.code), status:st }); }
+    else { out.push({ label:`${ax.axis} ${stLabel(st)} ×${real.length}`, status:st }); }
+  }
+  return out;
+}
 function buildGraph(p){
-  const dimByCode = {}; for(const d of p.dims) dimByCode[d.code]=d;
-  const els = [];
-  for(const [id,label,col,row,code] of FLOW){
-    let status = code ? (dimByCode[code]?dimByCode[code].status:"N/A") : null;
-    let fill, shape="roundrectangle", border="#fff", dashed=false;
-    if(id==="P"){ fill = gradeColor(p.등급); }
-    else { fill = STATUS_FILL[status]||"#9ca3af"; if(status==="N/A"){ dashed=true; } }
-    els.push({ data:{ id, label:(id==="P"?p.상품명:label), status:status||"", note: code&&dimByCode[code]?dimByCode[code].실제:"" },
-      position:{ x: col*150+40, y: row*72+30 },
-      classes: (id==="P"?"node-p ":"") + (dashed?"node-na":"") });
+  const cb = p.component_bom||[], pb = p.price_bom||{};
+  const fm = pb.formula||{}, pcs = pb.price_components||[];
+  const cols = {0:[],1:[],2:[],3:[],4:[]};
+  // col0 상품(등급 색)
+  cols[0].push({ id:"P", label:p.상품명, fill:gradeColor(p.등급), cls:"node-p" });
+  // col1 구성요소 항목
+  let ci=0;
+  for(const ax of cb){ for(const nd of axisNodes(ax)){
+    const dashed = (nd.status==='missing'||nd.status==='n/a');
+    cols[1].push({ id:"C"+(ci++), label:nd.label, fill:stColor(nd.status), status:nd.status, dashed });
+  }}
+  if(!cols[1].length) cols[1].push({ id:"C0", label:"구성요소 없음", fill:"#9ca3af", dashed:true });
+  // col2 가격공식
+  const fmFillSt = fm.status==='present'?'present':(fm.status==='direct_price'?'direct_price':(fm.status==='n/a'?'n/a':'missing'));
+  cols[2].push({ id:"F",
+    label: fm.frm_cd ? fm.frm_cd : ("가격공식 "+stLabel(fm.status)),
+    fill: stColor(fmFillSt), dashed:(fm.status==='missing'||fm.status==='n/a') });
+  // col3 가격구성요소 항목(단가행 셀 요약 포함)
+  let pi=0;
+  for(const pc of pcs){
+    const cells = (pc.전역셀수!=null) ? ` [${pc.단가행_적재셀수}/${pc.전역셀수}셀]` : "";
+    cols[3].push({ id:"PC"+(pi++), label:(pc.name||pc.comp_cd)+cells, fill:stColor(pc.status),
+      status:pc.status, dashed:(pc.status==='단가행_전무') });
   }
-  for(const [s,t] of FLOW_EDGES){
-    const td = FLOW.find(f=>f[0]===t); const tcode=td[4];
-    const tstatus = tcode ? (dimByCode[tcode]?dimByCode[tcode].status:"N/A") : "PASS";
-    let cls = "e-pass";
-    if(tstatus==="FAIL") cls="e-fail"; else if(tstatus==="WARN") cls="e-warn"; else if(tstatus==="N/A") cls="e-na";
-    els.push({ data:{ id:s+"_"+t, source:s, target:t }, classes:cls });
-  }
+  if(fm.status==='direct_price') cols[3].push({ id:"PCd", label:"직접단가(가격포함)", fill:stColor('direct_price') });
+  if(!cols[3].length && fm.status!=='direct_price') cols[3].push({ id:"PC0", label:"가격구성요소 없음", fill:"#9ca3af", dashed:true });
+  // col4 종착(견적0/계산가능)
+  const q0 = (pb.견적0원인||[]).length>0;
+  cols[4].push({ id:"PRICE", label:(q0?"견적 0(끊김)":"계산 가능"), fill:(q0?"#dc2626":"#16a34a"), dashed:q0 });
+  // 좌표(컬럼 X·행 중앙 정렬). fit:true 가 재스케일하므로 상대좌표만 정확하면 됨.
+  const COLX=[30,210,400,560,760], ROWH=56, CY=200;
+  const els=[];
+  for(const c in cols){ const arr=cols[c], h=(arr.length-1)*ROWH;
+    arr.forEach((nd,i)=>els.push({ data:{ id:nd.id, label:nd.label, fill:nd.fill, status:nd.status||"" },
+      position:{ x:COLX[c], y: i*ROWH - h/2 + CY },
+      classes:(nd.cls||"")+(nd.dashed?" node-na":"") })); }
+  // 엣지(끊긴 곳 빨강 점선)
+  const e=(s,t,cls)=>els.push({ data:{ id:s+"_"+t, source:s, target:t }, classes:cls||"e-pass" });
+  const fmBroken = (fm.status==='missing');
+  for(const n of cols[1]) e("P", n.id, n.dashed?"e-fail":"e-pass");
+  for(const n of cols[1]) e(n.id, "F", fmBroken?"e-fail":"e-pass");
+  for(const n of cols[3]) e("F", n.id, n.dashed?"e-fail":"e-pass");
+  for(const n of cols[3]) e(n.id, "PRICE", (n.dashed||q0)?"e-fail":"e-pass");
   return els;
 }
 function renderGraph(p){
@@ -206,11 +261,10 @@ function renderGraph(p){
     elements: buildGraph(p),
     layout: { name:"preset", fit:true, padding:18 },
     style: [
-      { selector:"node", style:{ "background-color":"data(status)", "label":"data(label)", "font-size":"10px",
-        "text-valign":"center","text-halign":"center","color":"#fff","text-wrap":"wrap","text-max-width":"96px",
-        "width":"108px","height":"40px","shape":"roundrectangle","border-width":1,"border-color":"#e5e7eb",
-        "background-color":(ele)=>STATUS_FILL[ele.data("status")]|| "#9ca3af" } },
-      { selector:"node.node-p", style:{ "shape":"round-tag","width":"96px","font-weight":"bold","font-size":"11px" } },
+      { selector:"node", style:{ "background-color":"data(fill)", "label":"data(label)", "font-size":"9.5px",
+        "text-valign":"center","text-halign":"center","color":"#fff","text-wrap":"wrap","text-max-width":"118px",
+        "width":"128px","height":"38px","shape":"roundrectangle","border-width":1,"border-color":"#e5e7eb","padding":"2px" } },
+      { selector:"node.node-p", style:{ "shape":"round-tag","width":"104px","font-weight":"bold","font-size":"11px" } },
       { selector:"node.node-na", style:{ "border-width":2,"border-style":"dashed","border-color":"#9ca3af","color":"#374151" } },
       { selector:"edge", style:{ "width":2,"curve-style":"bezier","target-arrow-shape":"triangle",
         "line-color":"#cbd5e1","target-arrow-color":"#cbd5e1" } },
@@ -219,9 +273,97 @@ function renderGraph(p){
       { selector:"edge.e-na", style:{ "line-color":"#d1d5db","target-arrow-color":"#d1d5db","line-style":"dotted" } },
     ],
   });
-  // 노드 색을 status 기준으로 (P 는 grade 색 별도 처리)
-  cyInst.nodes().forEach(n=>{ if(n.id()==="P"){ n.style("background-color", gradeColor(p.등급)); } });
   cyInst.userZoomingEnabled(false);
+}
+
+// ── BOM 표 렌더러(항목 단위) ──
+function chip(st){ return `<span class="chip chip-${st||'na'}">${esc(stLabel(st))}</span>`; }
+// ★구성요소 BOM: 축별 접이식 + 항목 한 줄씩(코드·이름 vs 라이브 실제 + 상태칩). 빠짐 빨강.
+function compBomHTML(p){
+  const cb = p.component_bom||[];
+  if(!cb.length) return '<p class="bom-empty">구성요소 BOM 데이터 없음</p>';
+  let html="";
+  for(const ax of cb){
+    const items = ax.items||[];
+    const miss = items.filter(i=>i.status==='missing').length;
+    const gap  = items.filter(i=>i.status==='price_gap').length;
+    const pres = items.filter(i=>i.status==='present').length;
+    const worst = miss?'missing':(gap?'price_gap':'present');
+    const open = (miss||gap)?' open':'';
+    let rows="";
+    if(!items.length){
+      rows = `<tr class="it-missing"><td colspan="3" class="bom-empty">권위 기대 — 라이브 미적재(항목 0)</td></tr>`;
+    } else {
+      for(const it of items){
+        const named = it.code||it.name;
+        const expected = named
+          ? `<span class="code">${esc(it.code||'')}</span> ${esc(it.name||'')}`
+          : `<span style="color:#9ca3af">(권위 기대 항목)</span>`;
+        let actual;
+        if(it.status==='missing') actual = `<span style="color:#dc2626">라이브 미적재</span>`;
+        else if(it.status==='price_gap') actual = `적재됨 · <span style="color:#d97706">단가행 공백</span>`;
+        else actual = `적재됨`;
+        const ex=[];
+        if(it.dflt==='Y') ex.push('기본값');
+        if(it.side) ex.push(esc(it.side)+(it.front?` ${esc(it.front)}/${esc(it.back||'')}`:''));
+        if(it.grp) ex.push('그룹 '+esc(it.grp));
+        const exHtml = ex.length?`<div class="bom-note">${ex.join(' · ')}</div>`:'';
+        const noteHtml = it.근거?`<div class="bom-note">${esc(it.근거)}</div>`:'';
+        rows += `<tr class="it-${esc(it.status)}"><td>${expected}${exHtml}</td><td>${actual}${noteHtml}</td><td class="cst">${chip(it.status)}</td></tr>`;
+      }
+    }
+    const cntTxt = `있음 ${pres}`+(gap?` · 단가공백 ${gap}`:'')+(miss?` · 빠짐 ${miss}`:'');
+    html += `<details class="bom"${open}><summary>${chip(worst)} ${esc(ax.axis)} <span class="ax-cnt">(${esc(cntTxt)} · 필요 ${esc(ax.needed||'-')})</span></summary>`
+      +`<div class="bom-body"><table class="bom"><thead><tr><th style="width:48%">예상 항목(코드·이름)</th><th>라이브 실제</th><th style="width:62px">상태</th></tr></thead><tbody>${rows}</tbody></table></div></details>`;
+  }
+  return html;
+}
+// ★가격구성요소 BOM: 공식→formula_components→price_components→단가행 항목 한 줄씩 + 견적0원인 최상단.
+function priceBomHTML(p){
+  const pb = p.price_bom||{};
+  const fm = pb.formula||{}, fcs = pb.formula_components||[], pcs = pb.price_components||[];
+  const q0 = pb.견적0원인||[], extra = pb.추가공식||[];
+  let html="";
+  if(q0.length){
+    html += `<div class="q0box"><span class="q0-lbl">★ 견적 0 원인(견적이 끊기는 지점)</span><ul>`
+      + q0.map(c=>`<li>${esc(c)}</li>`).join("") + `</ul></div>`;
+  }
+  const fmFillSt = fm.status==='present'?'present':(fm.status==='direct_price'?'direct_price':(fm.status==='n/a'?'n/a':'missing'));
+  html += `<table class="bom" style="margin-bottom:7px"><tbody>`
+    + `<tr><th style="width:120px">가격공식</th><td>${fm.frm_cd?`<span class="code">${esc(fm.frm_cd)}</span> `:''}${esc(fm.name||'')} ${chip(fmFillSt)}`
+    + (fm.실제?`<div class="bom-note">${esc(fm.실제)}</div>`:'') + `</td></tr></tbody></table>`;
+  if(fcs.length){
+    html += `<div class="bom-note" style="margin:4px 0 2px">formula_components (공식이 합산하는 가격구성요소)</div>`
+      + `<table class="bom"><thead><tr><th style="width:160px">코드</th><th>이름</th><th style="width:42px">가산</th><th style="width:58px">상태</th></tr></thead><tbody>`
+      + fcs.map(fc=>`<tr class="it-${esc(fc.status)}"><td class="code">${esc(fc.comp_cd)}</td><td>${esc(fc.name||'')}</td><td class="cst">${esc(fc.addtn||'-')}</td><td class="cst">${chip(fc.status)}</td></tr>`).join("")
+      + `</tbody></table>`;
+  }
+  html += `<div class="bom-note" style="margin:7px 0 2px">price_components → 단가행(component_prices) — 셀이 비면 견적 0</div>`;
+  if(pcs.length){
+    html += `<table class="bom"><thead><tr><th>가격구성요소</th><th style="width:50px">유형</th><th>차원(use_dims)</th><th style="width:96px">단가행(적재/전역)</th><th style="width:74px">상태</th></tr></thead><tbody>`;
+    for(const pc of pcs){
+      const loaded=pc.단가행_적재셀수, total=pc.전역셀수;
+      const empty=(total!=null)?(total-(loaded||0)):null;
+      let cellHtml;
+      if(total!=null) cellHtml = `<span class="cellgrid">${loaded}/${total}`+(empty>0?` <span class="empty">(빈칸 ${empty})</span>`:` ✓`)+`</span>`;
+      else cellHtml = '<span style="color:#9ca3af">-</span>';
+      const dims=(pc.use_dims||[]).join(', ');
+      html += `<tr class="it-${esc(pc.status)}"><td>${pc.comp_cd?`<span class="code">${esc(pc.comp_cd)}</span> `:''}${esc(pc.name||'')}${pc.근거?`<div class="bom-note">${esc(pc.근거)}</div>`:''}</td>`
+        + `<td class="cst">${esc((pc.prc_typ||'').replace('PRICE_TYPE.','.'))}</td><td>${esc(dims)}</td><td class="cst">${cellHtml}</td><td class="cst">${chip(pc.status)}</td></tr>`;
+    }
+    html += `</tbody></table>`;
+  } else if(fm.status==='direct_price'){
+    html += `<p class="bom-empty">직접단가 모델(가격포함) — 공식/가격구성요소 없이 단일 단가만 적재.</p>`;
+  } else if(fm.status==='n/a'){
+    html += `<p class="bom-empty">공식 비대상(기성/inline 고정가) — 가격구성요소 없음.</p>`;
+  } else {
+    html += `<p class="bom-empty">가격구성요소 없음(라이브 미적재) — 견적 불가.</p>`;
+  }
+  if(extra.length){
+    html += `<div class="bom-note" style="margin:7px 0 2px">추가공식</div><table class="bom"><tbody>`
+      + extra.map(x=>`<tr><td>${esc(typeof x==='string'?x:JSON.stringify(x))}</td></tr>`).join("") + `</tbody></table>`;
+  }
+  return html;
 }
 
 // ── 상세 패널 ──
@@ -251,14 +393,20 @@ function selectProd(cd){
      +(p._preverify?`<span class="pill" style="background:#f3f4f6;color:#6b7280">검증 전</span>`:"")
    +`</div>`
    +`<div style="font-size:11.5px;color:#6b7280;margin-bottom:10px">골든 상태: <b style="color:#374151">${esc(p.golden_status||'-')}</b></div>`
-   +`<details class="sec" open><summary>구성요소↔가격 플로우 그래프 (어디서 끊겼나)</summary><div class="sec-body">`
+   +`<details class="sec" open><summary>구성요소↔가격 플로우 그래프 (실항목 노드 · 어디서 끊겼나)</summary><div class="sec-body">`
      +`<div class="cy-wrap"><div id="cy"></div></div>`
      +`<div class="cy-legend">`
-       +`<span><i style="background:#16a34a"></i>PASS</span><span><i style="background:#d97706"></i>WARN</span>`
-       +`<span><i style="background:#dc2626"></i>FAIL</span><span><i style="background:#9ca3af"></i>N/A(미적재·점선)</span>`
+       +`<span><i style="background:#16a34a"></i>있음(적재)</span><span><i style="background:#d97706"></i>단가공백·차원불일치</span>`
+       +`<span><i style="background:#dc2626"></i>빠짐·단가행없음</span><span><i style="background:#9ca3af"></i>비대상(점선)</span>`
        +`<span style="color:#dc2626">━ 빨강 점선 = 끊긴 연결(견적 0 원인)</span>`
      +`</div></div></details>`
-   +`<details class="sec" open><summary>차원 D1~D11 — 예상(권위) vs 실제(라이브 적재)</summary><div class="sec-body">`
+   +`<details class="sec" open><summary>★ 구성요소 BOM — 어느 구성요소가 빠졌나 (자재·공정·사이즈·도수·옵션)</summary><div class="sec-body">`
+     +compBomHTML(p)
+     +`</div></details>`
+   +`<details class="sec" open><summary>★ 가격구성요소 BOM — 견적이 만들어지는 사슬 (공식→구성요소→단가행)</summary><div class="sec-body">`
+     +priceBomHTML(p)
+     +`</div></details>`
+   +`<details class="sec"><summary>차원 D1~D11 요약 — 예상(권위) vs 실제(라이브 적재)</summary><div class="sec-body">`
      +`<table class="dim"><thead><tr><th style="width:150px">차원</th><th>예상(권위 기준)</th><th>실제(라이브 적재)</th><th style="width:54px">판정</th></tr></thead><tbody>`
      +p.dims.map(dimRow).join("")
      +`</tbody></table></div></details>`
@@ -316,6 +464,7 @@ def build_payload(products):
     cat_order, seen = [], set()
     grades = collections.Counter()
     calc_ok = widget_y = l3plus = 0
+    bom_axis_missing = bom_price0 = 0
     comp_sum = 0.0
     for p in products:
         cat = p.get("상품군", "기타")
@@ -324,8 +473,16 @@ def build_payload(products):
         grades[p.get("등급", "?")] += 1
         comp_sum += float(p.get("완성률", 0) or 0)
         ev = p.get("근거", "") or ""
+        # ── BOM 파생 집계(항목 단위) ──
+        cb = p.get("component_bom") or []
+        if any(it.get("status") == "missing" for ax in cb for it in (ax.get("items") or [])):
+            bom_axis_missing += 1
+        pb = p.get("price_bom") or {}
+        p["_bom_priced0"] = bool(pb.get("견적0원인"))
+        if p["_bom_priced0"]:
+            bom_price0 += 1
         # 파생 플래그
-        p["_priced0"] = ("PRICED-0" in ev)
+        p["_priced0"] = ("PRICED-0" in ev) or p["_bom_priced0"]
         base = p.get("등급", "")
         p["_preverify"] = (base in ("L0", "L1", "L1(기성)", "L2", "L2(반제품)")) and ("골든 미대조" not in (p.get("golden_status") or "") and "PRICE>0" not in (p.get("golden_status") or ""))
         if "calc=OK" in ev or "PRICED" in ev:
@@ -345,6 +502,8 @@ def build_payload(products):
         "calc_pct": round(calc_ok / total * 100) if total else 0,
         "widget_y": widget_y,
         "l3plus": l3plus,
+        "bom_axis_missing": bom_axis_missing,
+        "bom_price0": bom_price0,
     }
     return {"products": products, "summary": summary, "cat_order": cat_order}
 
