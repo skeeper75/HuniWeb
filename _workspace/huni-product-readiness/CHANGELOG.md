@@ -1,5 +1,11 @@
 # Huni-Product-Readiness (§29) CHANGELOG
 
+## 2026-06-30 (후속) 항목 단위 BOM 보강 + 디지털 §26 셀단위 교차 검증
+- **BOM enrich**(사용자 피드백 "차원요약 너무 러프"): 283 전수에 `component_bom`(자재·공정·사이즈·도수·옵션 항목별 예상vs실제)+`price_bom`(공식→formula_components→price_components→단가행·견적0원인) 추가(라이브 스냅샷 결정론 대조). 대시보드 상세 패널에 BOM 2표+Cytoscape 실항목 노드로 재빌드. 신규 KPI: 견적0 100·구성요소 빠짐 160.
+- **항목 단위로 새 결함 규명**: ★프리미엄명함(PRD_000031) 차원미스매치 견적0(프리미엄16종 완제품가 단가행 전무)·자재 price_gap 26항목/8상품·견적0 100상품. L3/L4 충돌 0=FP없음. 리스트 3종(list-bom-priced-zero/axis-missing/material-pricegap).
+- **★방법론 명확화**: §29 `적재셀수/전역셀수`=라이브 내부 coverage 비율(권위 분모 아님)·sparse≠갭. 권위 셀단위 완전성은 §26.
+- **§26 디지털인쇄비 셀단위 실행(별도 트랙·GO)**: 권위 954셀↔라이브 954셀 gap-0 verbatim(1도/4도/별색 전건)·돈영향0·NO-OP. ★grid_diff.py side 코드맵 버그 교정(신규 흑백 POPT_000008/009 스킵→가짜 dim_missing→note 권위로 교정·무회귀). → 디지털 시트 "제대로 적재" 합격.
+
 ## 2026-06-30 하네스 초기 구성 + 첫 종단 실행 GO(보정) + 웹 대시보드
 - **구성**: 7 에이전트(hpr-catalog-spine∥hpr-rubric-curator → hpr-readiness-evaluator → hpr-widget-scheduler → hpr-codex-verifier → hpr-scorecard-gate → hpr-dashboard-builder) + 7 스킬(방법론6 + 오케스트레이터, codex는 hqv-codex-cross-verify 재사용). 하이브리드·전 에이전트 opus. CLAUDE.md §29 등록(MoAI→§30).
 - **사용자 결정**: 분모=이전사이트 상품리스트 / 위젯 일정=등급별 묶음 / 새 하네스(기존 스코어링·§21·§26·§13 재사용·중복 채점 0) / 산출=인터랙티브 웹 대시보드(webadmin product_viewer UX 재사용 + Cytoscape.js·React Flow 미채택=React 빌드 필요) / raw/webadmin 직접 수정 금지(드롭인 패키지) / 판형은 종이류에만 [HARD].

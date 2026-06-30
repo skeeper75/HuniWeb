@@ -34,13 +34,27 @@ from matrix_parse import parse_l1, read_csv, ADAPTERS  # noqa: E402
 # ─────────────────────────────────────────────────────────────────────
 LIVE_MAP_DIGITAL = {
     "plt_grade": {"SIZ_000499": "국4절", "SIZ_000077": "3절"},
-    "side": {"POPT_000001": "단면", "POPT_000002": "양면"},
+    # side: 면(단면/양면)은 note 가 1차 권위(POPT 코드는 도수까지 인코딩해 불완전).
+    #   POPT_000001=단면/POPT_000002=양면(칼라) · POPT_000008=단면1도/POPT_000009=양면1도(흑백).
+    #   흑백 1도는 별도 print_opt(색수 CLR_000002)로 적재됨 → 코드맵만으론 흑백 누락(가짜신호).
+    #   그래서 _side_from_note 를 1차로, 코드맵을 폴백으로 쓴다.
+    "side": {"POPT_000001": "단면", "POPT_000002": "양면",
+             "POPT_000008": "단면", "POPT_000009": "양면"},
     "spot_proc": {
         "PROC_000008": "별색-화이트", "PROC_000009": "별색-클리어",
         "PROC_000010": "별색-핑크", "PROC_000011": "별색-금색",
         "PROC_000012": "별색-은색",
     },
 }
+
+
+def _side_from_note(note):
+    """디지털 인쇄비 note 에서 면(단면/양면) 추출 — print_opt 코드맵보다 1차 권위."""
+    if "양면" in note:
+        return "양면"
+    if "단면" in note:
+        return "단면"
+    return None
 
 
 def _clr_from_note(note):
@@ -74,7 +88,8 @@ def live_grid_digital(comp_prices, components):
             continue  # 논리삭제 comp 제외(엔진 미사용)
         m = LIVE_MAP_DIGITAL
         grade = m["plt_grade"].get(r["plt_siz_cd"])
-        side = m["side"].get(r["print_opt_cd"])
+        # 면: note 1차(흑백 신규 print_opt POPT_000008/009 누락 방지) → 코드맵 폴백
+        side = _side_from_note(r["note"]) or m["side"].get(r["print_opt_cd"])
         # 도수: 별색 comp 는 proc_cd, 디지털 comp 는 note
         if comp.startswith("COMP_PRINT_SPOT"):
             clr = m["spot_proc"].get(r["proc_cd"])

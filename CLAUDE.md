@@ -352,7 +352,7 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 **산출물 루트:** `_workspace/huni-price-table-integrity/` (01_authority·02_load·03_codex·04_gate·**_batch**·_meta). 5 에이전트(`hpti-authority-extractor` 정답격자 → ★`hpti-matrix-batch-builder` 결정론 배치 diff(권위CSV↔스냅샷CSV·토큰0) → `hpti-load-inspector` 예외 보강 → `hpti-codex-verifier` codex 독립2차(스냅샷) → `hpti-integrity-gate` I1~I7 게이트) + 방법론 스킬 `hpti-matrix-batch-build`·`hpti-load-integrity-audit`(+ `hqv-codex-cross-verify`·`dbm-excel-parse`·`dbm-price-import-prep`·`dbm-batch-load`·`dbm-correctness-audit` 재사용). 라이브 실측 환경=`_workspace/_foundation/live-snapshot/`. 생성≠검증·codex 주장=가설·라이브 읽기전용 SELECT만(`.env.local RAILWAY_DB_*`)·DB 미적재(실 교정 인간 승인 후 dbmap 위임)·파일럿=아크릴(sparse grid 실증)→동형 전파.
 
-**변경이력:** 최신: 2026-06-30(8세션) **잔여 시트 종결 + UNMAPPED 4시트 gap-0 확정** — 라이브 COMMIT 3건(큐리어스화이트880 출력소재종결·제본비3종 del_yn=N복원[제본74/74·엔진 del_yn 미필터·표시만]·디지털 흑백양면106[POPT_000009·4도수완비]·전부 verbatim/undo). ★UNMAPPED=가짜신호 입증: 출력소재·커팅타공·스티커B01(540셀100%)·명함(B12 50/50) 전부 정밀 셀단위 대조 시 진짜 gap 0(파싱한계 false). ★합가 우선 규칙[사용자]. 직전: 2026-06-29(7세션) 배치빌더 전수 진단+출력소재 적재 종단+플레이북. → `_workspace/_foundation/HANDOFF.md`·`huni-price-table-integrity/_batch/SHEET-LOAD-PLAYBOOK.md`·[[price-component-unify-vs-split-criterion-260630]]
+**변경이력:** 최신: 2026-06-30 **디지털인쇄비 시트 셀단위 종결(GO)** — §29 준비도 검증 후속으로 디지털 권위 954셀↔라이브 954셀 gap-0 verbatim(1도212·4도212·별색530 전건·돈영향0·NO-OP). ★grid_diff.py side 코드맵 버그 교정(신규 흑백 POPT_000008 단면1도/POPT_000009 양면1도를 스킵→가짜 dim_missing→면을 note 1차 권위로 도출+코드맵 보강·742→954·타 시트 무회귀). 직전: 2026-06-30(8세션) 잔여 시트 종결+UNMAPPED 4시트 gap-0(가짜신호 입증·합가 우선[사용자]). → `_workspace/_foundation/HANDOFF.md`·`huni-price-table-integrity/_batch/SHEET-LOAD-PLAYBOOK.md`·[[price-component-unify-vs-split-criterion-260630]]
 
 ## 27. 가격 종단 마스터 오케스트레이터 (상품군 단위 파이프라인·수렴 실행)
 
@@ -380,7 +380,7 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 **산출물 루트:** `_workspace/huni-product-readiness/` (00_spine·01_rubric·02_readiness·03_schedule·04_codex·05_gate·_meta). 6 에이전트(`hpr-catalog-spine`∥`hpr-rubric-curator` 팬아웃 → `hpr-readiness-evaluator` → `hpr-widget-scheduler` → `hpr-codex-verifier` → `hpr-scorecard-gate` Q1~Q7). 생성≠검증·codex 주장=가설·라이브 읽기전용 SELECT만(실 교정·적재는 인간 승인 후 §7/§18/§6 위임). 자격증명 `.env.local` RAILWAY_DB_*·HUNI_ADMIN_*·HUNIPRINTING_*·HUNI_LIVE_*.
 
-**변경이력:** 최신: 2026-06-30 하네스 초기 구성(7 에이전트+7 스킬·D1~D11 루브릭·L0~L4·Q1~Q7) + 첫 종단 실행 GO(보정)·283상품 전수 평가(평균 완성률 63.5%·L3+ 83·계산성립 88/31%)·codex "D5 과대평가" 반증(체인 83/83·표본 13/13 PRICE>0)·판형 재처리 0건(재프레이밍)·위젯 누수 3건 widget_eligible=N·★웹 대시보드(webadmin product_viewer UX 재사용+Cytoscape.js·standalone+Django 드롭인·raw/webadmin 미수정) → `_workspace/huni-product-readiness/CHANGELOG.md`
+**변경이력:** 최신: 2026-06-30(후속) 항목 단위 BOM 보강(283 전수 component_bom+price_bom·대시보드 BOM 2표+Cytoscape 실항목 노드)·프리미엄명함 차원미스매치 견적0 등 규명·★방법론 명확화(§29 적재셀수/전역셀수=라이브 내부 coverage 비율·sparse≠갭·권위 셀단위는 §26)·디지털 §26 셀단위 gap-0 교차검증(GO·grid_diff.py side 버그 교정). 직전: 초기 구성(7 에이전트+7 스킬·D1~D11·L0~L4·Q1~Q7) + 첫 종단 GO(283상품·완성률 63.5%·L3+ 83·웹 대시보드) → `_workspace/huni-product-readiness/HANDOFF.md`·`CHANGELOG.md`
 
 ## 30. MoAI Framework (gated — rarely used here)
 
