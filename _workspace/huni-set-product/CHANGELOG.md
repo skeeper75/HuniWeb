@@ -4,6 +4,21 @@
 
 ---
 
+## 2026-07-01 — 082 하드커버링 셋트 라이브 동작화 COMMIT (견적 0원 → 44,123·077 동형 전파 2번째)
+
+077 패턴을 082 하드커버링에 전파(권위대조→설계→독립 게이트 DRY-RUN→인간 승인 후 실 COMMIT). 견적 **0원 → 44,123원**(A5·30p·양면).
+
+- **077 대비 차이[핵심]**: 082=하드커버**트윈링(링)**이라 무선 부모공식 `PRF_HC_MUSEON_SET` **재사용 불가**(S8 옵션 오염=링에 무선 제본단가) → 링 전용 부모공식 **PRF_HC_TWINRING_SET 신설**(분해형). 077은 재사용이었으나 082는 신설.
+- **신규 mint 2건**: 링 부모공식 PRF_HC_TWINRING_SET(+비목배선 COMP_BIND_HC_TWINRING addtn_yn=Y) + 내지 반제품 **PRD_000286**(page8/100/+2·072 내지284 재사용 불가). 제본비 `COMP_BIND_HC_TWINRING`(PROC_000024·6밴드 verbatim 30000~7000·이미 실재·미바인딩) 재사용.
+- **라이브 COMMIT(인간 승인)**: 단일 트랜잭션 **27행**(공식1+비목배선1+286마스터1+차원15+바인딩2+셋트행6[5→6]). 백업·undo 보유·멱등·FK 위상·기존 077/072 회귀 0.
+- **★S8 제본 오염 0(견고)**: COMP_BIND_HC_TWINRING 단가행 proc_cd=PROC_000024 **단독**·무선(019)/일반트윈링(018~021)/PUR(020)/중철(018)과 무중첩·5개 제본 comp 전부 use_dims에 proc_cd → 엔진 proc_cd 분기로 silent 매칭 불가. 077 COVERBIND(무차원 와일드)보다 데이터 레벨 격리 우수. **링≠무선≠일반트윈링 혼선 0**.
+- **사후**: evaluate_set_price 0원→44,123(제본 30,000 + 내지 인쇄 14,000 + 용지·fn_calc_pansu(SIZ_000499,A5)=4 실측). 082 셋트행 5→6행.
+- **잔존 BLOCKED(077 동형·동작 안 막음·저청구 잔존하나 0원 아님)**: 표지/면지 ×2 인쇄·코팅(BLOCKED-COVER-MYUNJI-PRINT·§18)·cover_mult ×2(엔진)·면지 유료 결판(CONFIRM-MYUNJI-PAID·077은 면지무료였으나 082 권위는 유료 명시·라이브 ASP 골든 역산 필요)·좀비 link(dbmap)·C트랙.
+- **동형 전파 대기**: 088 레더 링바인더(082 패턴 동형·072:077 = 082:088 매트릭스).
+- 산출=`06_load/hardcover-ring-082-{load.sql,load-spec.md,backup-*.sql,undo.sql,commit-log.md,post-verify.md}`·`05_gate/gate-verdict-hardcover-ring-082.md`·`03_design/hardcover-ring-082-authority.md`·[[leather-hardcover-077-live-commit-260701]].
+
+---
+
 ## 2026-07-01 — 077 레더하드커버 셋트 라이브 동작화 COMMIT (견적 0원 → 51,146·첫 셋트 동작화 종단)
 
 사용자 요청("실제 라이브 셋트상품 하나를 동작하게")으로 **077 레더하드커버**를 권위대조→설계→독립 게이트 DRY-RUN→**인간 승인 후 실 COMMIT**까지 종단.

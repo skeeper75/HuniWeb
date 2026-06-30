@@ -316,7 +316,7 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 **산출물 루트:** `_workspace/huni-set-product/` (01_authority·02_reference·03_design·04_codex·05_gate·06_load·_meta). 6인 팀(`hsp-authority-curator`∥`hsp-domain-researcher` 기준점 팬아웃 → `hsp-set-designer` 설계 → `hsp-codex-verifier` codex 독립 2차 → `hsp-set-gate` S1~S7 게이트(evaluate_set_price 재계산·DRY-RUN) → `hsp-load-executor` 승인 후 안전 적재(백업·복합PK 멱등·사후검증)) + 5 스킬(+ `dbm-load-execution`·`hqv-codex-cross-verify`·`hpe-competitor-benchmark`·`rpm-live-reverse` 재사용). 생성≠검증·codex 주장=가설·search-before-mint(반제품 신규 mint 금지·미등록은 BLOCKED→dbmap 위임)·라이브 읽기전용(적재 Phase 5만 인간 승인 후 COMMIT)·파일럿(책자류·엽서북·떡메) 완주→동형 전파. 자격증명 `.env.local RAILWAY_DB_*`.
 
-**변경이력:** 최신: 2026-07-01 **077 레더하드커버 셋트 라이브 동작화 COMMIT**(견적0원→51,146·23행 단일트랜잭션·내지 PRD_000285 mint 1건+나머지 072 자산 재사용·부모공식 PRF_HC_MUSEON_SET 바인딩·셋트행 4→5·회귀0·undo보유)·권위대조 결판(표지078/면지=설계의도 가격0·내지부재=결함)·★레더 +3,900은 COVERBIND use_dims=[min_qty] 제약상 단가행 추가시 AMBIGUOUS로 전체0→미반영(저청구 잔존·엔진 C트랙)·동형 전파 패턴 입증(082·068~071) → `_workspace/huni-set-product/HANDOFF.md`·[[leather-hardcover-077-live-commit-260701]]. 직전: 2026-06-29(6세션) 상품별 구성요소 경계+게이트 S8·셋트 미구성4(068~071) 설계
+**변경이력:** 최신: 2026-07-01 **하드커버 셋트 동작화 라이브 COMMIT 2건**(077 레더 견적0→51,146·23행 / 082 링 0→44,123·27행)·077 패턴 전파(동작하는 072 권위대조→부모공식·단가행 재사용+내지 mint→PRICE≠0)·077=PRF_HC_MUSEON_SET 재사용/082=링이라 PRF_HC_TWINRING_SET 신설(무선 재사용=S8 오염)·★S8 proc_cd 격리(082 링≠무선≠일반트윈링 무중첩)·레더+3,900/링 표지×2 엔진제약 BLOCKED(저청구잔존 0원아님·C트랙)·전파대기 088·068~071=부품8mint 토대선결 → `_workspace/huni-set-product/HANDOFF.md`·[[leather-hardcover-077-live-commit-260701]]. 직전: 2026-06-29(6세션) 상품별 구성요소 경계+게이트 S8·셋트 미구성4(068~071) 설계
 
 ---
 

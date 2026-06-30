@@ -1,0 +1,8 @@
+id,scope,blocked_reason,detail,routing_track,blocks_activation
+BLOCKED-COVER-MYUNJI-PRINT,set/parent-formula,가격공식 단가행 부재,"표지인쇄·표지코팅·면지인쇄·면지코팅 비목(권위 (3)~(6)·전부 ×2) — 링 표지/면지 인쇄·코팅 component 단가행 라이브 부재(072 표지=COVERBIND bundle 흡수·면지=무료라 별도 단가행 없음). COMP_PRINT_COVER_*/COMP_COAT_COVER_*/COMP_PRINT_MYUNJI_* 신설+PRF_HC_TWINRING_SET 비목 배선 필요",§18 설계+082 라이브 ASP 골든 역산+인간 승인,N(저청구 잔존·0원 아님)
+BLOCKED-COVERMULT-X2,set/engine,엔진 미지원,"표지/면지 ×2(앞뒤 물리 2장·링=책등無·권위 (3)~(6) 명시). 엔진 plate_qty÷pansu만·×2 곱셈 경로 0. 권고=단가행 2매분 내재(데이터 흡수)",§18 설계(단가행 ×2 내재) 또는 개발팀(엔진 C트랙),N(077 +3900 동형·동작화 막지 않음)
+CONFIRM-MYUNJI-PAID,authority,권위 모호,"082 면지=유료 비목(권위 면지인쇄·코팅 ×2 명시) vs 072 면지=무료(라이브 동형) 충돌. 면지 종류별 단가·인쇄면지(087) 추가단가 미확정",domain-researcher/실무진·082 라이브 ASP 역산,N(현 무료 보존·동작화 진행)
+BLOCKED-INNER-MINT-MASTER,member/PRD_000286,반제품 신규 mint(설계 범위 밖),"082 내지 반제품 PRD_000286 마스터+차원 등록은 dbmap 위임(본 SQL은 위상1~2에 포함하되 실 적재는 인간 승인). page8/100/+2·PRF_DGP_INNER·285 동형 차원",dbmap·인간 승인,해소됨(본 SQL 위상1~2 포함)
+BLOCKED-PARENT-MINT,set/parent-formula,가격공식 신규 mint(설계 범위 밖),"링 전용 부모공식 PRF_HC_TWINRING_SET 신설은 §18 영역(본 SQL 위상0에 포함하되 실 적재 인간 승인). 무선 PRF_HC_MUSEON_SET 재사용 금지(S8 오염)",§18·인간 승인,해소됨(본 SQL 위상0 포함·제본 비목만)
+BLOCKED-MAT-REWIRE,parent/cover-material,자재 link 점검(견적 미관여),"082 부모 좀비 자재 link(MAT_000246/001/013/002/014/015/004 활성·MAT_000003만 del_yn=Y·072/077 동형 오염 가능). 표지083 자재=전용지 배선(현 0행)·면지 정자재. link만·마스터 삭제 금지",dbmap/basecode·인간 승인,N(견적 미관여·정합)
+C-TRACK-ENGINE,engine,코드 결함,"COMP_BIND_HC_TWINRING ×copies(권당)·책등 by 페이지·DBLPANSU 내지 이중÷pansu·cover_mult ×2 곱셈(전 책자 공통). 입력값 우회 명시",개발팀(webadmin·072 동형),N(입력값 우회)
