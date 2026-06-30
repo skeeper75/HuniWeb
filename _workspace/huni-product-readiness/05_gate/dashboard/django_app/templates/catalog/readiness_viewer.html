@@ -1,0 +1,295 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block extrahead %}{{ block.super }}
+  <script src="https://unpkg.com/cytoscape@3.30.2/dist/cytoscape.min.js"></script>
+  {# 오프라인/사내망: cytoscape.min.js 를 static 에 vendoring 후 위 줄을 {% static %} 로 교체(README 참고) #}
+{% endblock %}
+
+{% block content %}
+<style>
+:root{ --pass:#16a34a; --warn:#d97706; --fail:#dc2626; --na:#9ca3af; --ink:#1f2937; }
+*{ box-sizing:border-box; }
+body{ margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Apple SD Gothic Neo","Malgun Gothic",sans-serif; color:var(--ink); background:#f9fafb; }
+#rv-summary{ padding:12px 16px; background:#fff; border-bottom:1px solid #e5e7eb; display:flex; flex-wrap:wrap; gap:18px; align-items:center; font-size:12.5px; }
+#rv-summary .s-title{ font-size:15px; font-weight:700; margin-right:6px; }
+#rv-summary .s-kpi{ display:flex; flex-direction:column; line-height:1.25; }
+#rv-summary .s-kpi b{ font-size:16px; }
+#rv-summary .s-kpi span{ color:#6b7280; font-size:11px; }
+#rv-summary .s-grades{ display:flex; gap:4px; align-items:center; }
+.gchip{ font-size:11px; padding:2px 7px; border-radius:9px; font-weight:700; color:#fff; }
+.s-note{ color:#9ca3af; font-size:11px; font-style:italic; max-width:340px; }
+
+#rv-app{ display:flex; gap:0; border-top:1px solid #e5e7eb; height:calc(100vh - 64px); min-height:480px; }
+#rv-list{ width:320px; border-right:1px solid #e5e7eb; display:flex; flex-direction:column; background:#fafafa; }
+#rv-list .rv-search{ padding:10px; border-bottom:1px solid #eee; }
+#rv-list input[type=search]{ width:100%; padding:7px 9px; border:1px solid #d1d5db; border-radius:7px; font-size:13px; }
+#rv-filters{ padding:7px 10px; border-bottom:1px solid #eee; display:flex; flex-wrap:wrap; gap:5px; font-size:11px; }
+#rv-filters select,#rv-filters label{ font-size:11px; }
+#rv-filters label{ display:inline-flex; align-items:center; gap:3px; color:#4b5563; cursor:pointer; }
+#rv-items{ overflow-y:auto; flex:1; }
+.rv-cat{ font-size:11px; color:#6b7280; padding:9px 12px 3px; font-weight:700; background:#fafafa; position:sticky; top:0; }
+.rv-cat .c-n{ color:#9ca3af; font-weight:400; }
+.rv-item{ padding:5px 12px; border-bottom:1px solid #f0f0f0; cursor:pointer; display:flex; align-items:center; gap:8px; }
+.rv-item:hover{ background:#eef4ff; }
+.rv-item.active{ background:#dbe9ff; }
+.rv-item .rv-nm{ flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:13px; }
+.rv-item.active .rv-nm{ font-weight:600; }
+.rv-item .rv-cd{ flex-shrink:0; color:#9ca3af; font-size:10.5px; }
+.gbadge{ flex-shrink:0; font-size:10px; width:34px; text-align:center; padding:1px 0; border-radius:8px; font-weight:700; color:#fff; }
+.flag{ flex-shrink:0; font-size:9px; padding:0 4px; border-radius:7px; font-weight:700; }
+.flag-w{ background:#dcfce7; color:#15803d; } .flag-p0{ background:#fee2e2; color:#b91c1c; }
+.flag-pre{ background:#f3f4f6; color:#6b7280; }
+
+#rv-detail{ flex:1; overflow-y:auto; padding:16px 22px; }
+.rv-hint{ color:#9ca3af; padding:24px; }
+.dhead{ display:flex; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:4px; }
+.dhead h2{ margin:0; font-size:19px; }
+.dhead .cd{ color:#9ca3af; font-size:12px; }
+.dmeta{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px; font-size:11.5px; }
+.pill{ padding:2px 9px; border-radius:10px; background:#f3f4f6; color:#374151; font-weight:600; }
+.pill.grade{ color:#fff; }
+.pill.we-y{ background:#dcfce7; color:#15803d; } .pill.we-n{ background:#f3f4f6; color:#6b7280; }
+details.sec{ margin-bottom:10px; border:1px solid #e5e7eb; border-radius:8px; overflow:hidden; }
+details.sec>summary{ font-size:13px; font-weight:600; padding:8px 12px; cursor:pointer; background:#f9fafb; list-style:none; display:flex; align-items:center; gap:8px; }
+details.sec>summary::-webkit-details-marker{ display:none; }
+details.sec>summary::before{ content:"▸"; color:#6b7280; font-size:11px; }
+details.sec[open]>summary::before{ content:"▾"; }
+.sec-body{ padding:10px 12px; }
+.cy-wrap{ position:relative; }
+#cy{ width:100%; height:300px; background:#fff; border:1px solid #eee; border-radius:8px; }
+.cy-legend{ font-size:10.5px; color:#6b7280; padding:6px 2px 0; display:flex; flex-wrap:wrap; gap:10px; }
+.cy-legend i{ display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:3px; vertical-align:-1px; }
+table.dim{ border-collapse:collapse; width:100%; font-size:12px; }
+table.dim th,table.dim td{ border:1px solid #e5e7eb; padding:4px 8px; text-align:left; vertical-align:top; }
+table.dim th{ background:#f3f4f6; }
+table.dim td.st{ font-weight:700; text-align:center; white-space:nowrap; }
+.st-PASS{ color:var(--pass); } .st-WARN{ color:var(--warn); } .st-FAIL{ color:var(--fail); } .st-NA{ color:var(--na); }
+tr.r-FAIL{ background:#fef2f2; } tr.r-WARN{ background:#fffbeb; }
+.golden td b{ color:#111827; }
+.nextstep{ background:#eff6ff; border:1px solid #bfdbfe; border-radius:8px; padding:10px 12px; font-size:13px; }
+.nextstep .lbl{ font-size:11px; color:#2563eb; font-weight:700; display:block; margin-bottom:3px; }
+.gnote{ color:#92400e; background:#fffbeb; border:1px solid #fde68a; border-radius:6px; padding:6px 9px; font-size:11.5px; margin-top:8px; }
+</style>
+{% if load_error %}<div style="padding:12px 16px;background:#fef2f2;color:#b91c1c;border:1px solid #fecaca;border-radius:8px;margin:10px;white-space:pre-line;font-size:12.5px">{{ load_error }}</div>{% endif %}
+{{ data|json_script:"rv-data" }}
+
+<div id="rv-summary"></div>
+<div id="rv-app">
+  <div id="rv-list">
+    <div class="rv-search"><input id="rv-q" type="search" placeholder="상품명/코드 검색…"></div>
+    <div id="rv-filters">
+      <select id="f-grade"><option value="">등급 전체</option><option value="L0">L0</option><option value="L1">L1</option><option value="L2">L2</option><option value="L3">L3</option><option value="L4">L4</option></select>
+      <select id="f-paper"><option value="">종이류 전체</option><option value="Y">종이 Y</option><option value="N">종이 N</option></select>
+      <label><input type="checkbox" id="f-widget">위젯대상만</label>
+      <label><input type="checkbox" id="f-p0">PRICED-0만</label>
+    </div>
+    <div id="rv-items"></div>
+  </div>
+  <div id="rv-detail"><p class="rv-hint">좌측에서 상품을 선택하세요. 상단 요약·필터로 빠르게 좁힐 수 있습니다.</p></div>
+</div>
+
+<script>
+const RV = JSON.parse(document.getElementById("rv-data").textContent);
+const PRODUCTS = RV.products, SUMMARY = RV.summary;
+let curCd = null, cyInst = null;
+const esc = s => (s==null?"":String(s)).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+// 등급 → 색 (L0 빨강 → L4 초록). 괄호 변형(L1(기성)·L2(반제품))은 베이스 등급 색.
+function gradeBase(g){ const m=String(g||"").match(/L(\d)/); return m?("L"+m[1]):"L0"; }
+const GRADE_COLOR = { L0:"#dc2626", L1:"#f97316", L2:"#eab308", L3:"#84cc16", L4:"#16a34a" };
+function gradeColor(g){ let b=gradeBase(g); if(String(g).includes("+")) return "#a3e635"; return GRADE_COLOR[b]||"#9ca3af"; }
+function compColor(p){ if(p>=90) return "#16a34a"; if(p>=70) return "#84cc16"; if(p>=50) return "#eab308"; if(p>=30) return "#f97316"; return "#dc2626"; }
+const stCls = s => s==="N/A" ? "NA" : s;
+
+// ── 상단 요약 ──
+function renderSummary(){
+  const s = SUMMARY;
+  const gOrder = ["L0","L1","L1(기성)","L2","L2(반제품)","L2+","L3","L4"];
+  let chips = "";
+  for(const g of gOrder){ if(!s.grades[g]) continue;
+    chips += `<span class="gchip" style="background:${gradeColor(g)}" title="${esc(g)}">${esc(g)} ${s.grades[g]}</span>`; }
+  document.getElementById("rv-summary").innerHTML =
+    `<span class="s-title">상품 준비도 대시보드</span>`
+   +`<div class="s-kpi"><b>${s.total}</b><span>전체 상품(분모)</span></div>`
+   +`<div class="s-kpi"><b>${s.avg_completion}%</b><span>평균 완성률</span></div>`
+   +`<div class="s-kpi"><b>${s.calc_ok} <small style="font-size:11px;color:#6b7280">(${s.calc_pct}%)</small></b><span>계산 가능(PRICE≠0)</span></div>`
+   +`<div class="s-kpi"><b>${s.widget_y}</b><span>위젯 대상(eligible=Y)</span></div>`
+   +`<div class="s-kpi"><b>${s.l3plus}</b><span>L3+ (체인 완전)</span></div>`
+   +`<div class="s-grades"><span style="color:#6b7280">등급 분포</span>${chips}</div>`
+   +`<div class="s-note">★ golden_status 다수 "골든 미대조": 계산은 되나 예전사이트 정답가 전수 일치는 미검증(후속). PRICE≠0=계산 성립 신호일 뿐.</div>`;
+}
+
+// ── 사이드바 트리(상품군 그룹) ──
+function passFilter(p){
+  const q = (document.getElementById("rv-q").value||"").trim().toLowerCase();
+  if(q && !(p.상품명||"").toLowerCase().includes(q) && !(p.prd_cd||"").toLowerCase().includes(q)) return false;
+  const fg = document.getElementById("f-grade").value;
+  if(fg && gradeBase(p.등급)!==fg) return false;
+  const fp = document.getElementById("f-paper").value;
+  if(fp && (p.종이류||"")!==fp) return false;
+  if(document.getElementById("f-widget").checked && p.widget_eligible!=="Y") return false;
+  if(document.getElementById("f-p0").checked && !p._priced0) return false;
+  return true;
+}
+function itemHTML(p){
+  const gb = `<span class="gbadge" style="background:${gradeColor(p.등급)}" title="등급 ${esc(p.등급)}">${esc(p.등급)}</span>`;
+  let flags = "";
+  if(p.widget_eligible==="Y") flags += `<span class="flag flag-w" title="위젯 대상">W</span>`;
+  if(p._priced0) flags += `<span class="flag flag-p0" title="PRICED-0(견적 0)">0</span>`;
+  if(p._preverify) flags += `<span class="flag flag-pre" title="검증 전(L3 미만·골든 미대조)">검</span>`;
+  return `<div class="rv-item${curCd===p.prd_cd?' active':''}" onclick="selectProd('${p.prd_cd}')">`
+    +`${gb}<span class="rv-nm" title="완성률 ${p.완성률}%">${esc(p.상품명)}</span>${flags}`
+    +`<span class="rv-cd">${esc(p.prd_cd)}</span></div>`;
+}
+function renderList(){
+  const groups = {};
+  for(const p of PRODUCTS){ if(!passFilter(p)) continue; (groups[p.상품군]=groups[p.상품군]||[]).push(p); }
+  let html = "";
+  for(const cat of RV.cat_order){ const ps = groups[cat]; if(!ps||!ps.length) continue;
+    html += `<div class="rv-cat">${esc(cat)} <span class="c-n">(${ps.length})</span></div>`;
+    for(const p of ps) html += itemHTML(p);
+  }
+  document.getElementById("rv-items").innerHTML = html || '<p class="rv-hint">조건에 맞는 상품 없음</p>';
+}
+
+// ── Cytoscape 플로우 그래프 (상품 → 구성요소 → 가격공식 → 가격구성요소 → 단가행) ──
+// 노드 색 = 차원 status(PASS/WARN/FAIL/N/A 회색점선). 끊긴 연결(FAIL) = 빨강 점선.
+// React Flow 미채택(React 빌드 필요). 교체 시 동일 노드/엣지 모델을 React Flow nodes/edges 로 이식 가능.
+const FLOW = [
+  // id,    label,           col, row, dimCode
+  ["P",    "상품",            0, 1.5, null],
+  ["D1",   "구성요소 BOM",     1, 0,   "D1"],
+  ["D6",   "기초마스터",       1, 1,   "D6"],
+  ["D7",   "옵션",            1, 2,   "D7"],
+  ["D9",   "제약조건",         1, 3,   "D9"],
+  ["D2",   "가격공식 바인딩",   2, 1.5, "D2"],
+  ["D3",   "가격구성요소",      3, 0.5, "D3"],
+  ["D4",   "차원 충전(단가행)", 3, 1.5, "D4"],
+  ["D10",  "판형 매핑",        3, 2.5, "D10"],
+  ["D11",  "매핑 정합",        4, 1.5, "D11"],
+  ["D5",   "계산가능(PRICE)",  5, 1.5, "D5"],
+];
+const FLOW_EDGES = [
+  ["P","D1"],["P","D6"],["P","D7"],["P","D9"],
+  ["D1","D2"],["D6","D2"],["D7","D2"],["D9","D2"],
+  ["D2","D3"],["D2","D4"],["D2","D10"],
+  ["D3","D11"],["D4","D11"],["D10","D11"],
+  ["D11","D5"],
+];
+const STATUS_FILL = { PASS:"#16a34a", WARN:"#d97706", FAIL:"#dc2626", "N/A":"#9ca3af" };
+function buildGraph(p){
+  const dimByCode = {}; for(const d of p.dims) dimByCode[d.code]=d;
+  const els = [];
+  for(const [id,label,col,row,code] of FLOW){
+    let status = code ? (dimByCode[code]?dimByCode[code].status:"N/A") : null;
+    let fill, shape="roundrectangle", border="#fff", dashed=false;
+    if(id==="P"){ fill = gradeColor(p.등급); }
+    else { fill = STATUS_FILL[status]||"#9ca3af"; if(status==="N/A"){ dashed=true; } }
+    els.push({ data:{ id, label:(id==="P"?p.상품명:label), status:status||"", note: code&&dimByCode[code]?dimByCode[code].실제:"" },
+      position:{ x: col*150+40, y: row*72+30 },
+      classes: (id==="P"?"node-p ":"") + (dashed?"node-na":"") });
+  }
+  for(const [s,t] of FLOW_EDGES){
+    const td = FLOW.find(f=>f[0]===t); const tcode=td[4];
+    const tstatus = tcode ? (dimByCode[tcode]?dimByCode[tcode].status:"N/A") : "PASS";
+    let cls = "e-pass";
+    if(tstatus==="FAIL") cls="e-fail"; else if(tstatus==="WARN") cls="e-warn"; else if(tstatus==="N/A") cls="e-na";
+    els.push({ data:{ id:s+"_"+t, source:s, target:t }, classes:cls });
+  }
+  return els;
+}
+function renderGraph(p){
+  if(cyInst){ cyInst.destroy(); cyInst=null; }
+  if(typeof cytoscape==="undefined"){
+    document.getElementById("cy").innerHTML='<p class="rv-hint" style="padding:12px">Cytoscape 로드 실패(오프라인). 인터넷 연결 시 그래프 표시 — 또는 README 의 vendored 안내 참고.</p>';
+    return;
+  }
+  cyInst = cytoscape({
+    container: document.getElementById("cy"),
+    elements: buildGraph(p),
+    layout: { name:"preset", fit:true, padding:18 },
+    style: [
+      { selector:"node", style:{ "background-color":"data(status)", "label":"data(label)", "font-size":"10px",
+        "text-valign":"center","text-halign":"center","color":"#fff","text-wrap":"wrap","text-max-width":"96px",
+        "width":"108px","height":"40px","shape":"roundrectangle","border-width":1,"border-color":"#e5e7eb",
+        "background-color":(ele)=>STATUS_FILL[ele.data("status")]|| "#9ca3af" } },
+      { selector:"node.node-p", style:{ "shape":"round-tag","width":"96px","font-weight":"bold","font-size":"11px" } },
+      { selector:"node.node-na", style:{ "border-width":2,"border-style":"dashed","border-color":"#9ca3af","color":"#374151" } },
+      { selector:"edge", style:{ "width":2,"curve-style":"bezier","target-arrow-shape":"triangle",
+        "line-color":"#cbd5e1","target-arrow-color":"#cbd5e1" } },
+      { selector:"edge.e-warn", style:{ "line-color":"#d97706","target-arrow-color":"#d97706","line-style":"dashed" } },
+      { selector:"edge.e-fail", style:{ "line-color":"#dc2626","target-arrow-color":"#dc2626","line-style":"dashed","width":3 } },
+      { selector:"edge.e-na", style:{ "line-color":"#d1d5db","target-arrow-color":"#d1d5db","line-style":"dotted" } },
+    ],
+  });
+  // 노드 색을 status 기준으로 (P 는 grade 색 별도 처리)
+  cyInst.nodes().forEach(n=>{ if(n.id()==="P"){ n.style("background-color", gradeColor(p.등급)); } });
+  cyInst.userZoomingEnabled(false);
+}
+
+// ── 상세 패널 ──
+const NA = "N/A";
+function dimRow(d){
+  const cls = stCls(d.status);
+  const stHtml = `<td class="st st-${cls}">${esc(d.status)}</td>`;
+  const noteHtml = d.note ? `<div style="color:#9ca3af;font-size:11px;margin-top:2px">${esc(d.note)}</div>` : "";
+  return `<tr class="r-${cls}"><td><b>${esc(d.code)}</b> ${esc(d.name)}<br><span style="color:#9ca3af;font-size:10.5px">가중 ${esc(d.가중)}</span></td>`
+    +`<td>${esc(d.예상)}</td><td>${esc(d.실제)}${noteHtml}</td>${stHtml}</tr>`;
+}
+function selectProd(cd){
+  curCd = cd; renderList();
+  const p = PRODUCTS.find(x=>x.prd_cd===cd);
+  if(!p){ return; }
+  const g = p.골든 || {};
+  const det = document.getElementById("rv-detail");
+  det.innerHTML =
+    `<div class="dhead"><h2>${esc(p.상품명)}</h2><span class="cd">${esc(p.prd_cd)}</span></div>`
+   +`<div class="dmeta">`
+     +`<span class="pill grade" style="background:${gradeColor(p.등급)}">등급 ${esc(p.등급)}</span>`
+     +`<span class="pill">완성률 ${esc(p.완성률)}%</span>`
+     +`<span class="pill">상품군 ${esc(p.상품군)}</span>`
+     +`<span class="pill">위젯클래스 ${esc(p.위젯클래스)}</span>`
+     +`<span class="pill ${p.widget_eligible==='Y'?'we-y':'we-n'}">위젯대상 ${esc(p.widget_eligible)}</span>`
+     +(p._priced0?`<span class="pill" style="background:#fee2e2;color:#b91c1c">PRICED-0(견적 0)</span>`:"")
+     +(p._preverify?`<span class="pill" style="background:#f3f4f6;color:#6b7280">검증 전</span>`:"")
+   +`</div>`
+   +`<div style="font-size:11.5px;color:#6b7280;margin-bottom:10px">골든 상태: <b style="color:#374151">${esc(p.golden_status||'-')}</b></div>`
+   +`<details class="sec" open><summary>구성요소↔가격 플로우 그래프 (어디서 끊겼나)</summary><div class="sec-body">`
+     +`<div class="cy-wrap"><div id="cy"></div></div>`
+     +`<div class="cy-legend">`
+       +`<span><i style="background:#16a34a"></i>PASS</span><span><i style="background:#d97706"></i>WARN</span>`
+       +`<span><i style="background:#dc2626"></i>FAIL</span><span><i style="background:#9ca3af"></i>N/A(미적재·점선)</span>`
+       +`<span style="color:#dc2626">━ 빨강 점선 = 끊긴 연결(견적 0 원인)</span>`
+     +`</div></div></details>`
+   +`<details class="sec" open><summary>차원 D1~D11 — 예상(권위) vs 실제(라이브 적재)</summary><div class="sec-body">`
+     +`<table class="dim"><thead><tr><th style="width:150px">차원</th><th>예상(권위 기준)</th><th>실제(라이브 적재)</th><th style="width:54px">판정</th></tr></thead><tbody>`
+     +p.dims.map(dimRow).join("")
+     +`</tbody></table></div></details>`
+   +`<details class="sec" open><summary>골든 케이스 (계산 검증)</summary><div class="sec-body">`
+     +`<table class="dim golden"><tbody>`
+       +`<tr><th style="width:120px">입력</th><td>${esc(g.입력||'-')}</td></tr>`
+       +`<tr><th>기대가(예전사이트)</th><td><b>${esc(g.기대가||'-')}</b></td></tr>`
+       +`<tr><th>실제가(라이브 엔진)</th><td><b>${esc(g.실제가||'-')}</b></td></tr>`
+       +`<tr><th>판정</th><td class="st st-${stCls(g.판정==='OK'?'PASS':(g.판정==='-'?'NA':'WARN'))}">${esc(g.판정||'-')}</td></tr>`
+     +`</tbody></table></div></details>`
+   +`<div class="nextstep"><span class="lbl">다음 한 걸음</span>${esc(p.다음한걸음||'-')}`
+     +(p.gate_note?`<div class="gnote">게이트 메모: ${esc(p.gate_note)}</div>`:"")
+     +`<div style="color:#9ca3af;font-size:10.5px;margin-top:6px">근거: ${esc(p.근거||'')}</div>`
+   +`</div>`;
+  renderGraph(p);
+}
+
+// ── 부트스트랩 ──
+function boot(){
+  renderSummary(); renderList();
+  ["f-grade","f-paper"].forEach(id=>document.getElementById(id).addEventListener("change",renderList));
+  ["f-widget","f-p0"].forEach(id=>document.getElementById(id).addEventListener("change",renderList));
+  document.getElementById("rv-q").addEventListener("input",renderList);
+  // ?prd=<코드> 진입 시 자동 선택
+  const ip = new URLSearchParams(location.search).get("prd");
+  if(ip) selectProd(ip);
+}
+boot();
+</script>
+{% endblock %}

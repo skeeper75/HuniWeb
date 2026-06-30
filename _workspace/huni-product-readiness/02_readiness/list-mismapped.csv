@@ -1,0 +1,20 @@
+prd_cd,상품명,상품군,분류,D11,D6,오염증거,근거
+PRD_000020,화이트인쇄엽서,디지털인쇄,진짜 silent합산(돈크리티컬),FAIL,WARN,MAT_000138(젤리볼펜(가칭));MAT_000139(지비츠부속),calc=OK;frm=PRF_DGP_A;R1=MAT_000138(젤리볼펜(가칭));OC=75;pfm=BOUND_OK
+PRD_000034,펄명함,디지털인쇄,진짜 silent합산(돈크리티컬),FAIL,WARN,MAT_000128(면끈);MAT_000129(아크릴키링고리),calc=UNSCORED-축미탑재;frm=PRF_NAMECARD_PEARL;R1=MAT_000128(면끈);MAT_0;OC=80;pfm=LIVE_UNBOUND
+PRD_000037,오리지널박명함,디지털인쇄,진짜 silent합산(돈크리티컬),FAIL,WARN,MAT_000138(젤리볼펜(가칭));MAT_000139(지비츠부속),calc=UNSCORED-축미탑재;frm=PRF_NAMECARD_FOIL;R1=MAT_000138(젤리볼펜(가칭));OC=67;pfm=LIVE_UNBOUND
+PRD_000040,화이트인쇄명함,디지털인쇄,진짜 silent합산(돈크리티컬),FAIL,WARN,MAT_000138(젤리볼펜(가칭));MAT_000139(지비츠부속),calc=UNBOUND-NO-PRICE;R1=MAT_000138(젤리볼펜(가칭));OC=40;pfm=LIVE_UNBOUND
+PRD_000042,프리미엄 쿠폰/상품권,디지털인쇄,진짜 silent합산(돈크리티컬),FAIL,WARN,MAT_000128(면끈);MAT_000129(아크릴키링고리),calc=OK;frm=PRF_DGP_A;R1=MAT_000128(면끈);MAT_0;OC=100;pfm=BOUND_OK
+PRD_000047,소량전단지,디지털인쇄,진짜 silent합산(돈크리티컬),FAIL,WARN,MAT_000128(면끈);MAT_000129(아크릴키링고리);MAT_000130(네오디움자석),calc=OK;frm=PRF_DGP_D;R1=MAT_000128(면끈);MAT_0;OC=83;pfm=BOUND_OK
+PRD_000048,접지리플렛,디지털인쇄,진짜 silent합산(돈크리티컬),FAIL,WARN,MAT_000128(면끈);MAT_000129(아크릴키링고리);MAT_000130(네오디움자석),calc=UNSCORED-축미탑재;frm=PRF_FOLD_SUM;R1=MAT_000128(면끈);MAT_0;OC=29;pfm=BOUND_OK
+PRD_000050,봉투제작,디지털인쇄,자기부품/addon화 검토(FP가드),WARN,WARN,MAT_000168(레자크체크백색 110g);MAT_000169(레자크줄무늬백색 110g),calc=UNSCORED-축미탑재;frm=PRF_ENV_MAKING;R1=MAT_000168(레자크체크백색 1;OC=100;pfm=BOUND_OK
+PRD_000071,트윈링책자,책자,자기부품/addon화 검토(FP가드),WARN,WARN,MAT_000013(화이트링);MAT_000014(블랙링);MAT_000015(링 메탈링);MAT_000244(투명커버 유광투명커버);MAT_000245(투명커버 무광투명커버),calc=UNSCORED-축미탑재;frm=PRF_BIND_TWINRING;R1=MAT_000013(화이트링);MAT;OC=100;pfm=BOUND_OK
+PRD_000108,탁상형캘린더,캘린더,자기부품/addon화 검토(FP가드),WARN,WARN,MAT_000252(삼각대(싸바리));MAT_000253(링 블랙),calc=UNBOUND-PRICE-IN-SHEET;R1=MAT_000252(삼각대(싸바리));OC=100;pfm=DESIGN_BLOCKED
+PRD_000109,미니탁상형캘린더,캘린더,자기부품/addon화 검토(FP가드),WARN,WARN,MAT_000253(링 블랙);MAT_000254(삼각대(종이)),calc=UNBOUND-PRICE-IN-SHEET;R1=MAT_000253(링 블랙);MAT;OC=100;pfm=DESIGN_BLOCKED
+PRD_000111,벽걸이캘린더,캘린더,자기부품/addon화 검토(FP가드),WARN,WARN,MAT_000253(링 블랙),calc=UNBOUND-PRICE-IN-SHEET;R1=MAT_000253(링 블랙);OC=100;pfm=DESIGN_BLOCKED
+PRD_000112,와이드벽걸이캘린더,캘린더,자기부품/addon화 검토(FP가드),WARN,WARN,MAT_000253(링 블랙),calc=UNBOUND-PRICE-IN-SHEET;R1=MAT_000253(링 블랙);OC=100;pfm=DESIGN_BLOCKED
+PRD_000136,PET배너,실사,자기부품/addon화 검토(FP가드),WARN,PASS,MAT_000223(우드거치대),calc=OK;frm=PRF_POSTER_PET_BANNER;R1=MAT_000223(우드거치대);OC=50;pfm=BOUND_OK
+PRD_000138,일반현수막,실사,자기부품/addon화 검토(FP가드),WARN,PASS,MAT_000069(양면테입);MAT_000070(설치용끈);MAT_000337(큐방);MAT_000338(각목);MAT_000340(봉제사),calc=OK;frm=PRF_POSTER_BANNER_N;R1=MAT_000069(양면테입);MAT;OC=67;pfm=BOUND_OK
+PRD_000139,메쉬현수막,실사,자기부품/addon화 검토(FP가드),WARN,PASS,MAT_000070(설치용끈),calc=OK;frm=PRF_POSTER_BANNER_M;R1=MAT_000070(설치용끈);OC=50;pfm=BOUND_OK
+PRD_000153,아크릴명찰(골드실버),아크릴,자기부품/addon화 검토(FP가드),WARN,PASS,MAT_000195(아크릴(골드));MAT_000196(아크릴(실버)),calc=OK;frm=PRF_ACRYL_NAMETAG_GS;R1=MAT_000195(아크릴(골드));;OC=67;pfm=DESIGNED_NOT_LOADED
+PRD_000174,만년다이어리(레더하드커버),문구,자기부품/addon화 검토(FP가드),WARN,PASS,MAT_000186(레더),calc=OK;frm=PRF_STN_DIARY_LHARD;R1=MAT_000186(레더);OC=100;pfm=DESIGNED_NOT_LOADED
+PRD_000175,만년다이어리(레더소프트커버),문구,자기부품/addon화 검토(FP가드),WARN,PASS,MAT_000186(레더),calc=OK;frm=PRF_STN_DIARY_LSOFT;R1=MAT_000186(레더);OC=100;pfm=DESIGNED_NOT_LOADED

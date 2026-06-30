@@ -1,0 +1,11 @@
+wave,위젯클래스,준비도등급,상품수,대표상품,선행조건,규모,비고
+W0,(코어·전 클래스),L3+,0,(상품무관),"evaluate_price API화(읽기전용 BFF)+selections 계약+Shadow DOM shell(§6 동등성 GO 재사용)",M,모든 wave 선행 1회·PRICE=0=결함신호
+W1,W-FIX,L3,15,낱장 자유형 스티커(PRD_000055),"W0·siz_cd 드롭다운 차원 적재(스티커=고정가 by-siz)",M,가장 단순·동형 매우 높음(반칼/투명/홀로 1대표→전파)·D7 WARN→C트랙 병행
+W2,W-CASCADE,L3,19,스탠다드 쿠폰/상품권(PRD_000041),"W0·캐스케이드 차원(sizes→dosu→paper→weight) 적재 확인",L,단계 의존 드롭다운·디지털인쇄 19·OC=100 다수
+W3,W-AREA+W-ADDON,L3/L4,12,아크릴마그넷(PRD_000147·L4),"W0·면적격자(siz_cd×면적)+addon은 template 모델 강제([[addon-optcd-model-broken-live]])",M,본체 면적+고리/볼체인 addon 2클래스 합산·L4 6개 선두
+W4,W-AREA,L3,26,미니보드스탠딩(PRD_000144),"W0·면적입력(가로×세로 off-grid ceiling)·실사=포스터사인 매트릭스 환원",L,대량이나 동형 매우 높음(1대표 완주→25 전파)·OC 50~67→C트랙 필수
+W5,W-CASCADE,L4,8,만년다이어리(소프트커버)(PRD_000172),"W0·문구=다이어리/노트 캐스케이드·일부 page/구성원 성격",M,L4(D7~D9 충족 다수)·DESIGNED_NOT_LOADED 일부 적재 확인
+W6,W-SET,L3,3,떡메모지(PRD_000097),"W0·셋트 구성원 합산(t_prd_product_sets)+page-step·완제품가",M,셋트조립=최고 난도·책자 본격 셋트(068~082)는 L2+/L2 미달=선행 불가
+C1,(제약·동시불가),L3,~40,스티커/명함류,"D7 option_groups 적재 선행·json-logic-js(webadmin devDep) 재사용",M,위젯 병행 별도 줄·반칼+코팅 등 동시불가 constraints
+C2,(제약·min/max),L3,~38,아크릴/실사/현수막,"D9 면적 min/max·D7 옵션 적재",M,최소사이즈·현수막 min 면적·면적 입력 가드
+C3,(제약·셋트 min/max/incr),L3/L2+,~12,책자/포토북,"셋트 구성원 page 2P증분·min/max(§23 연계)",M,W6 셋트 wave에 종속

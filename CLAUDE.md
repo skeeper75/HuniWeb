@@ -362,7 +362,27 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 **변경이력:** 최신: 2026-06-30(8세션) **잔여 시트 종결 + 박류 §18 면적 설계 완주** — 라이브 COMMIT 3건(큐리어스화이트880·제본비3종 del_yn복원[제본74/74]·디지털흑백양면106[4도수완비]) + UNMAPPED 4시트(출력소재·커팅·스티커·명함) 정밀대조 gap-0 확정(파싱한계 false) + ★박류 §18 데이터 설계 GO(동판비+박가공비 면적→등급·7상품 본체합산·골든8/8·codex가 동판비 silent과금 적발→REV3·DB미적재·C트랙=면적→등급 엔진). ★합가 우선·setup comp도 proc_cd 게이트 필수. 다음=박류 실적재 승인+C트랙·디지털/제본 사장님 후속. 직전: 2026-06-29(7세션) 배치빌더+출력소재 종단. → `_workspace/_foundation/HANDOFF.md`·[[price-component-unify-vs-split-criterion-260630]]
 
-## 28. MoAI Framework (gated — rarely used here)
+## 28. Harness: Huni-Launch-Scope (1차 런칭 개발범위 · Shopby 갭 · 개발방안 · 회원/프린트머니 마이그레이션)
+
+**목표:** 프로젝트일정관리 통합IA(162기능·`docs/huni/후니프린팅_프로젝트일정관리_통합IA_260616.xlsx`)를 읽고 `docs/shopby`를 적용할 때 기능 수정·보완 필요분을 찾아, **Shopby로 해결되는 것 / 부분 / 미해결**을 분류하고 미해결·부분분을 **어떻게 개발할지** 새 문서로 산출. **1차 런칭 범위**(huniprinting.com main.asp 상품리스트·회원/프린트머니 마이그레이션·마이페이지 P0)는 라이브 로그인→마이페이지→전체 사이트맵 전수 분석으로 세부 기능목록까지, **2차(안정)·3차(확장)는 보완 로드맵**으로 정리. §24(가격→장바구니→주문 통합 설계)·§10(IA 엑셀 산출)과 별개의 **런칭 스코핑·fit-gap·개발방안·마이그레이션 설계 전용** 하네스(재병합 금지·재사용).
+
+**트리거:** "1차 런칭 개발범위", "런칭 스코핑", "Shopby 갭 분석", "Shopby 해결 미해결", "기능 수정 보완 도출", "회원 프린트머니 마이그레이션", "라이브 사이트맵 마이페이지 분석", "개발방안 문서", "런칭 범위 하네스 실행/재실행/업데이트/보완", "특정 영역만 갭/개발방안" 등 본 도메인 요청 시 `huni-launch-scope-orchestrator` 스킬을 사용. 가격→장바구니→주문 통합 설계는 §24, 일정 IA 엑셀 산출은 §10, 위젯 구현은 §6. 단순 질문은 직접 응답.
+
+**산출물 루트:** `_workspace/huni-launch-scope/` (00_live·01_foundation·02_gap·03_migration·04_codex·05_gate·_meta). 최종=`05_gate/후니프린팅_1차런칭_개발범위_Shopby갭_개발방안.md`. 6 에이전트(`hls-live-cartographer`∥`hls-foundation-curator` 팬아웃 → `hls-gap-analyst` → `hls-migration-designer` → `hls-codex-verifier` → `hls-scope-gate` L1~L7). §10 hpp·§24 hsb 산출 재사용. 핵심 결정: ① 마이그레이션=설계·명세 중심(원천 구 DB 미접근·라이브 화면+Shopby 모델 기준·실 이관 인간 승인) ② 문서 깊이=1차 세부/2·3차 로드맵 ③ 생성≠검증·codex 주장=가설 ④ 라이브 읽기전용(주문/결제/회원변경 금지)·DB/코드 미수정. 자격증명 `.env.local` HUNIPRINTING_SITE_ID/PW·SHOPBY_*·HUNI_LIVE_*.
+
+**변경이력:** 최신: 2026-06-30 하네스 초기 구성(6 에이전트+6 스킬) + 첫 종단 실행 GO(조건부)·IA 162 fit-gap(SOLVED48/PARTIAL53/CUSTOM61)·런칭전 GATE4·마이그레이션 설계·최종 문서+xlsx 8시트 → `_workspace/huni-launch-scope/CHANGELOG.md`
+
+## 29. Harness: Huni-Product-Readiness (상품별 가격계산 준비도 평가 + 위젯/제약 개발일정)
+
+**목표:** 이전사이트(huniprinting.com) 상품리스트를 **분모**로, 라이브 DB에 적재된 상품+가격이 **실제 가격계산 가능한 수준**으로 연결됐는지 상품별로 세부 평가(진척도)하고, **위젯+제약조건 개발 부분만** 준비도 등급별 묶음 일정으로 분리한다. 베스트프랙티스 루브릭(D1~D11: 구성요소 요건·가격공식 바인딩·단가행·차원충전·계산가능성·기초마스터·옵션·추가상품템플릿·제약·판형·매핑정합 / 등급 L0~L4)으로 상품별 점수표·체크리스트·특정 리스트(구성요소 누락·오매핑·★판형 재처리·가격계산 0·미적재 구멍)를 산출. 목적=현재 구현 수준 전반 확인 + 프로젝트 일정 체크. ★[HARD] 판형(plate_sizes)은 종이류 출력소재에만 유효 — 종이류인데 판형 미/오매핑이면 재처리 대상. ★기존 스코어링/RTM/§21/§26/§13 재사용(중복 채점 금지). §28(런칭 fit-gap)·§21(전 상품 12축 정합)·§26(가격테이블 셀 무결성)·§27(가격 종단 수렴실행)과 별개의 **상품별 준비도 평가(진척도) + 위젯/제약 일정 분리 전용** 하네스.
+
+**트리거:** "상품 준비도 평가", "상품별 진척도", "구현 진척도 평가", "가격계산 준비도", "상품 준비도 점수표", "위젯 개발일정 분리", "제약조건 일정", "구성요소 누락 점검", "오매핑 점검", "판형 매핑 점검", "준비도 하네스 실행/재실행/업데이트/보완", "특정 상품군만 준비도" 등 본 도메인 요청 시 `huni-product-readiness-orchestrator` 스킬을 사용. 1차 런칭 개발범위 fit-gap은 §28, 전 상품 정합은 §21, 가격테이블 무결성은 §26, 가격 종단 수렴실행은 §27, 위젯 구현은 §6. 단순 질문은 직접 응답.
+
+**산출물 루트:** `_workspace/huni-product-readiness/` (00_spine·01_rubric·02_readiness·03_schedule·04_codex·05_gate·_meta). 6 에이전트(`hpr-catalog-spine`∥`hpr-rubric-curator` 팬아웃 → `hpr-readiness-evaluator` → `hpr-widget-scheduler` → `hpr-codex-verifier` → `hpr-scorecard-gate` Q1~Q7). 생성≠검증·codex 주장=가설·라이브 읽기전용 SELECT만(실 교정·적재는 인간 승인 후 §7/§18/§6 위임). 자격증명 `.env.local` RAILWAY_DB_*·HUNI_ADMIN_*·HUNIPRINTING_*·HUNI_LIVE_*.
+
+**변경이력:** 최신: 2026-06-30 하네스 초기 구성(7 에이전트+7 스킬·D1~D11 루브릭·L0~L4·Q1~Q7) + 첫 종단 실행 GO(보정)·283상품 전수 평가(평균 완성률 63.5%·L3+ 83·계산성립 88/31%)·codex "D5 과대평가" 반증(체인 83/83·표본 13/13 PRICE>0)·판형 재처리 0건(재프레이밍)·위젯 누수 3건 widget_eligible=N·★웹 대시보드(webadmin product_viewer UX 재사용+Cytoscape.js·standalone+Django 드롭인·raw/webadmin 미수정) → `_workspace/huni-product-readiness/CHANGELOG.md`
+
+## 30. MoAI Framework (gated — rarely used here)
 
 The MoAI-ADK orchestration framework (SPEC plan/run/sync, TRUST 5, DDD/TDD, Agent Teams,
 design GAN loop) is installed but not the primary workflow in this repo. Its detailed
