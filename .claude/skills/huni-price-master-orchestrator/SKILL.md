@@ -7,11 +7,14 @@ description: >-
   부족"을 끝내고 실제 정확한 값에 도달시키는 수렴 실행 조율자. 흐름(상품군 단위): ① 토대 무결성(§26 권위→라이브
   적재 이 빠진 것 0 확인) → ② 무결성 결함 교정 적재(§7 dbmap·인간 승인) → ③ 공식·구성요소 설계(§18·무결성 GO
   토대 위) → ④ 설계분 적재(§7 dbmap·인간 승인) → ⑤ 검증(§21 전수+§13/§15 골든 재계산) → NO-GO면 해당 단계로
-  라우팅 루프, 전 상품 GO까지. 상품군 진척판(RTM)으로 추적. 생성≠검증·권위 엑셀 절대·라이브 읽기전용(검증)·실
-  COMMIT은 인간 승인·codex 교차. 트리거: '가격 종단 파이프라인', '상품군 가격 제대로', '가격 마스터 오케스트레이터',
-  '상품군 가격 종단 완주', '정확한 가격값까지', '가격 하네스 엮어서', '전 상품 가격 정합 완주', '가격 종단 실행/
-  재실행/이어서', '특정 상품군 가격 종단', '가격 파이프라인 진척'. 단일 레이어 작업은 해당 하네스 직접(§26/§18/§7/
-  §21), 단순 질문은 직접 응답.
+  라우팅 루프, 전 상품 GO까지. 상품군 진척판(RTM)으로 추적. ★배선 연결 서브트랙(formula_components) 포함 — 가격에
+  영향 주는 가격구성요소를 가격공식에 배선(고아 단가행 적발→공식 연결)하는 수렴 루프(wiring_scan.py 토큰0 측도·종료
+  척도=배선 결함 0+PRICE≠0·명세까지 DB 미적재). 생성≠검증·권위 엑셀 절대·라이브 읽기전용(검증)·실 COMMIT은 인간
+  승인·codex 교차. 트리거: '가격 종단 파이프라인', '상품군 가격 제대로', '가격 마스터 오케스트레이터', '상품군 가격
+  종단 완주', '정확한 가격값까지', '가격 하네스 엮어서', '전 상품 가격 정합 완주', '가격 종단 실행/재실행/이어서',
+  '특정 상품군 가격 종단', '가격 파이프라인 진척', '가격공식 가격구성요소 연결', '가격공식에 구성요소 배선',
+  'formula_components 배선', '고아 구성요소 연결', '배선 연결 서브트랙', '배선 진척 보드', '구성요소 공식 연결 다시'.
+  단일 레이어 작업은 해당 하네스 직접(§26/§18/§7/§21), 단순 질문은 직접 응답.
 ---
 
 # 가격 종단 마스터 오케스트레이터 (상품군 단위 파이프라인)
@@ -102,6 +105,34 @@ description: >-
 ### 단계 0(선택·1회) — 이해 [§14 price-engine-diag]
 5장치 역할·코드↔DB 정합이 불확실하면 선행 1회. 이미 이해됐으면 생략.
 
+## ★배선 연결 서브트랙 — 가격공식 ↔ 가격구성요소(formula_components) [신설 2026-07-01·사용자 directive]
+**목적:** 전 상품의 **가격에 영향을 주는 구성요소(comp_cd)가 그 상품의 가격공식(frm_cd)의 `t_prc_formula_components`에
+배선됐는지**를 수렴 루프로 닫는다. 단가행(component_prices)만 적재하고 공식에 안 배선하면 = **고아** → 권위 알고리즘
+(evaluate_price)이 그 구성요소를 합산 못 함 → 견적0/저청구([[namecard-orphan-component-wiring-260630]]·
+[[digital-print-base-proc-missing-260701]] 실증). 단계1~5의 **formula_components 정합에 좁힌 수렴 렌즈** — 무결성
+(단계1)이 GO인데 견적0/저청구면 대개 배선 문제다. 새 하네스 아님(§13 탐지·§18 설계·§7 적재·§21 검증 재사용).
+
+**★종료 척도 [HARD·사용자 확정 2026-07-01]:** **배선 결함 0 + PRICE≠0**. 배선 결함 = ① 고아(단가행有·공식
+미배선) ② 빈배선(배선됐으나 단가행0) ③ 삭제오염(논리삭제 comp 참조) ④ 미배선 공식(상품 공식 바인딩0). 결함 0이고
+대표 케이스 evaluate_price 실호출이 PRICE≠0(견적 성립)이면 그 상품군 배선 GO.
+
+**진척 측도(토큰0):** `python3 _workspace/_foundation/batch/wiring_scan.py --round N --note "…"` →
+`batch/wiring/wiring-status.json`(전역 결함 리스트 + 상품별 판정) · `wiring-summary.json`(KPI) · `wiring-rounds.csv`
+(라운드 추이). 라이브 스냅샷(`live-snapshot/latest`) 3종 CSV로 결정론 스캔. 대시보드 **배선 진척 보드 탭**
+(`huni-product-readiness/05_gate/dashboard/dashboard.html` — `build_dashboard.py`가 wiring-status.json 임베드)으로 시각 추적.
+
+**수렴 루프(결함 0까지):**
+1. **스캔** — `wiring_scan.py --round N`. 결함 4종 + 상품별 판정 산출. 라운드 비교로 수렴 추이 확인.
+2. **탐지·분류** [§13 hpq-price-chain-inspector] — 고아가 **진짜 배선 누락**인지 **정당한 미사용**(addon 템플릿·미출시·중복)인지 분류.
+   ★`*_TBD/_PENDING` 빈배선 = 실무진 단가 확인 BLOCKED(배선 대상 아님·임의단가 금지·[[pansu-authority-fn-calc-pansu-260628]]). 보드가 자동 분리.
+3. **설계** [§18 hpe-engine-designer / dbm-price-arbiter] — 어느 공식에 어느 comp를 어느 disp_seq·addtn_yn으로 배선할지 명세.
+   ★[HARD] **시트 차원경계 SOT 준수**(상품마스터 시트=상품군 경계) — 시트 밖 comp를 공식에 배선하면 **silent 합산 오염**([[set-semifinished-3tier-model-260629]]·차원경계 위반 가드). search-before-mint(기존 comp/공식 재사용). codex 교차(가설 경계).
+4. **명세 → 적재** [§7 dbmap · 인간 승인] — `t_prc_formula_components` INSERT(고아 배선)·삭제오염 정리. **명세까지가 기본**(DB 미적재)·실 COMMIT은 dryrun→인간 승인([[dryrun-vs-fix-script-commit-lesson]]). 기초코드 mint 금지(반제품/comp 신규는 BLOCKED→해당 트랙).
+5. **검증** — 배선 후 evaluate_price 실호출(PRICE≠0)·§21 전수/§13 골든 재계산. NO-GO면 결함 유형별 라우팅(고아 잔존=2·차원경계 위반=3·코드버그=C트랙).
+6. **재스캔** — `--round N+1`. 결함 0 + PRICE≠0 = GO. 아니면 1로 루프.
+
+**경계 [HARD]:** 생성≠검증(스캐너=결정론 탐지·정당/누락 판정은 설계/게이트)·라이브 읽기전용(스캔·검증)·DB 미적재(실 배선 COMMIT 인간 승인 후 §7)·codex 주장=가설.
+
 ## ★상품군 처리 플레이북 (아크릴 종단 검증·동형 전파)
 다음 상품군은 아크릴과 **동일 순서·동일 패턴**으로 처리한다. 각 단계 산출은 인간 승인 후 라이브 COMMIT.
 
@@ -127,6 +158,7 @@ description: >-
 - **`authority.py`** — 권위 엑셀 추출(24_master-extract) 리더: 사이즈별 권위 판수·주자재(종이)·요구 OC축·가격공식.
 - **`score_batch.py`** — 동형군 채점 드라이버: sim-meta enumerate→simulate→**5축 채점**(CALC 계산가능성·PR 엔진pansu vs 권위판수·R1 부자재오염·R3 dflt 1개·OC 요구축 선택가능)→scoreboard CSV+교정 SQL. `python3 score_batch.py <group> [prd_cd]`.
 - **`blocked_scan.py`** — 두 권위 엑셀 BLOCKED 위험 전수 스캔→7카테고리 분류+해소(Phase 0.5).
+- **`wiring_scan.py`** [신설 2026-07-01] — 배선 연결 서브트랙 측도: 라이브 스냅샷 3종(formula_components·component_prices·price_components)+상품-공식 바인딩을 결정론 diff→배선 결함 4종(고아·빈배선·삭제오염·미배선공식) 전수 검출→`wiring/wiring-status.json`+라운드 추이. `python3 wiring_scan.py --round N --note "…"`. 대시보드 배선 진척 보드가 임베드.
 - **R1 자가수렴 교훈[HARD]:** 부자재 오염은 mat_typ 단독 판정 불가(PET .08=투명 주자재·정상종이 false-positive). 디지털인쇄군=substrate 화이트리스트{.01,.08}로 진짜 오염(부속 .03/.17)만. 군별 substrate_typ 프로파일 정의.
 - **상품군 확장:** `score_batch.py` GROUP dict에 군 프로파일(extract·print_proc_kw·qty_cases·substrate_typ) 추가. BATCH-design 순서=sticker→문구→acrylic→digital(완)→실사→책자(세트). 자기검증=프리미엄엽서 단독 재생산.
 
@@ -136,6 +168,7 @@ description: >-
 ## 데이터 전달·진척판
 - 파일 기반: 각 하네스 `_workspace/<harness>/` 산출물을 다음 단계 입력으로.
 - **진척판(RTM):** `_workspace/_foundation/price-pipeline-rtm.csv` — {상품군, 단계1무결성, 단계2교정, 단계3설계, 단계4적재, 단계5검증, 상태(GO/진행/BLOCKED), 차단사유}. 매 단계 후 갱신.
+- **배선 진척판:** `_workspace/_foundation/batch/wiring/wiring-status.json`·`wiring-rounds.csv`(전역) — 배선 서브트랙의 결함 0 수렴 추적. 대시보드 배선 진척 보드 탭으로 시각화. (상품군 RTM의 단계3/5와 상보 — 배선은 formula_components 정합에 좁힌 렌즈.)
 
 ## 인간 승인 게이트 [HARD]
 - 단계 2·4의 실 라이브 COMMIT은 **반드시 dryrun→인간 승인 후** 실행([[dryrun-vs-fix-script-commit-lesson]]).
@@ -151,6 +184,8 @@ description: >-
 - **에러1(적재):** 단계5 라이브 NO-GO(특정 사이즈 저청구) → 단계1 미적재 셀 → 단계2 라우팅·교정→재검증.
 - **에러2(모델·아크릴 실증):** 라이브 0원/2500 고정 → addon이 opt_cd 가산 방식(미작동)→addon 템플릿 전환 / 면적+nonspec_yn=N(사이즈 입력불가)→사이즈 라벨 옵션. 둘 다 라이브 시뮬레이터 재실증.
 - **에러3(권위 부재):** 단가 빈칸 → 임의단가 금지 → "확인필요" 시그널 바인딩(시뮬레이터 노출)·실무진 해소.
+- **배선 서브트랙 정상:** "가격공식에 가격구성요소 연결" → `wiring_scan.py --round 1`(고아 N 적발)→§13 분류(진짜 누락 vs 정당 미사용·*_TBD 분리)→§18 배선 설계(차원경계 SOT)→인간 승인 후 §7 formula_components COMMIT→재계산 PRICE≠0→`--round 2`(고아 0)→배선 GO. 대시보드 배선 보드로 추이 확인.
+- **배선 서브트랙 에러:** 고아 배선했더니 시트 밖 comp가 silent 합산(과대청구) → 차원경계 위반 → 단계3 재설계(그 comp는 그 공식 비대상)·codex 교차로 적발.
 
 ## ★아크릴 종단 완주 기록 (1호·전 패턴 라이브 입증 2026-06-28)
 무결성(§26 정식)→R3 156셀 교정적재→설계→적재(고정가 by-siz·면적·addon)→**라이브 시뮬레이터 전수 검증**. 발견·교정: ① addon opt_cd 모델 미작동→템플릿 전환(147=3900·146=5200·152=5100 GO) ② 저청구5종(157/158/159/161/162) 면적+nonspec_yn=N→사이즈 라벨 옵션(코스터 2500→12700) ③ 미니파츠·미바인딩7=확인필요 시그널. 최종=정상19·시그널8·돈크리티컬 저청구0. 산출=`_workspace/_foundation/remediation/`·`acryl-simulator-verification-matrix.md`. 다음 상품군은 이 패턴 동형.

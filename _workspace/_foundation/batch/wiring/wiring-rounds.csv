@@ -1,0 +1,5 @@
+round,snap,orphan,dead_wire,deleted_wire,total_defects,verdict,note
+1,snap_20260630_1743,23,8,0,31,NO-GO(결함 31),배선 서브트랙 초기 스캔(latest 스냅샷)
+2,snap_20260630_1743,23,8,0,31,R2 §18설계+검증,고아23 §13분류(REAL_GAP0·설계선행15·실무진4·정당4)→§18설계 GO10/NEEDS_FIX2/BLOCKED강등3·골든verbatim·codex divergence0·실COMMIT 인간승인대기
+3,snap_20260701_0305,19,7,1,27,NO-GO(결함 27),박명함037 배선 COMMIT 후 재스캔(엽서북 보정은 미COMMIT)
+4,snap_20260701_0421,15,7,1,23,NO-GO(결함 23),화이트명함040 별색 flat COMMIT 후 재스캔(박명함+화이트=8 comp 배선)

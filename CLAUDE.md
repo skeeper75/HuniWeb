@@ -102,7 +102,7 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 **입력 자산·핵심 결정:** 입력자산(역공학 86/100·Widget/SDK 리포트·widget_monitor 테스트베드·DESIGN.md 14 componentType·`.env.local`)과 핵심결정 5건(역공학→구현 end-to-end·React-in-Shadow-DOM·미검증 영역 라이브 보강·정규화 계약 의존+어댑터 무손실 컨버전·RedPrinting=사용자 본인 시스템) → `_workspace/huni-widget/HANDOFF.md`·`CHANGELOG.md`
 
-**변경이력:** 최신: 2026-06-04 보정 W2-a SUB_MTR 이중의미 평면화(A-2) 해소·vitest 150 → `_workspace/huni-widget/CHANGELOG.md`
+**변경이력:** 최신: 2026-07-01 컨버전 트랙(③') 신설 — 8번째 에이전트 `hw-db-cartographer` + `huni-widget-db-cartography` 스킬 추가(현재 라이브 DB t_prd_*·t_prc_*·CPQ·evaluate_price → 정규화 계약 매핑·상품군별 대표 파일럿→동형 전파·§7/§13~§29 재사용·STALE huni-db-mapping.md 가격제약미작성 전제 폐기) → `_workspace/huni-widget/CHANGELOG.md`
 
 ---
 
@@ -362,7 +362,7 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 **★배선 연결 서브트랙(formula_components):** 가격에 영향 주는 가격구성요소를 가격공식에 배선(고아 단가행→공식 연결)하는 수렴 루프. 측도=`_foundation/batch/wiring_scan.py`(라이브 스냅샷 결정론 diff→배선 결함 4종: 고아·빈배선·삭제오염·미배선공식). 종료척도[HARD]=배선 결함 0+PRICE≠0·명세까지(실 COMMIT 인간 승인 후 §7). 진척판=`_foundation/batch/wiring/wiring-status.json`+대시보드 **배선 진척 보드 탭**(§29 `build_dashboard.py`).
 
-**변경이력:** 최신: 2026-07-01 **배선 연결 서브트랙 신설(formula_components)** — "가격에 영향 주는 가격구성요소를 가격공식에 배선"하는 수렴 루프를 §27에 추가(새 하네스 0·SOT 정합). `wiring_scan.py`가 라이브 스냅샷 3종 결정론 diff→배선 결함 31건 전수(고아23·빈배선8[대부분 *_TBD 실무진BLOCKED]·삭제오염0). 종료척도[사용자 확정]=배선 결함 0+PRICE≠0·명세까지. 루프=스캔→§13 탐지분류→§18 배선설계(시트 차원경계 SOT 오염 가드)→§7 적재→PRICE≠0 검증→재스캔. 대시보드(§29)에 **배선 진척 보드 탭** 추가(wiring-status.json 임베드·완성도52%·고아/깨진사슬/미배선공식 리스트). 직전: 2026-06-30(8세션) 잔여 시트 종결+박류 §18 면적 설계(동판비 silent과금 codex 적발). → `_workspace/_foundation/HANDOFF.md`·[[formula-components-wiring-subtrack-260701]]·[[price-component-unify-vs-split-criterion-260630]]
+**변경이력:** 최신: 2026-07-01 **배선 서브트랙 신설+종단 실행(라이브 COMMIT 2건)** — 배선 연결 서브트랙을 §27에 신설(새 하네스 0·SOT 정합·`wiring_scan.py` 토큰0 측도·대시보드 배선 진척 보드 탭·종료척도=배선결함0+PRICE≠0). 고아23 §13분류(REAL_GAP0·설계선행15·실무진4·정당4)→§18 설계×2→검증(Claude+codex divergence0·골든 verbatim)→**라이브 COMMIT 2건**: ① 박명함037(양면홀로 저청구→38,200/55,000) ② **화이트명함040 별색 flat 교정**(★사장님 도메인 정정: 코팅아님=별색·PRF_DGP_A 원자합산 과대→flat 재바인딩·견적0/6,213→14,500~19,000). **고아 23→15**. ★엔진 매칭=행 판별컬럼 기반(use_dims는 UI전용)·고아≠단순배선(판별차원 없으면 형제배선=과대청구). 폼보드/포맥스=자재축 모델 확정(가격표260527·중복 siz_cd 아님·가격충돌7000vs6000 CONFIRM). 엽서북30p=데이터GO·위젯§6 보류. 직전: 2026-06-30(8세션) 잔여 시트 종결+박류 §18 면적 설계. → `_workspace/_foundation/batch/wiring/HANDOFF.md`·[[formula-components-wiring-subtrack-260701]]
 
 ## 28. Harness: Huni-Launch-Scope (1차 런칭 개발범위 · Shopby 갭 · 개발방안 · 회원/프린트머니 마이그레이션)
 

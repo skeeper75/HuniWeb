@@ -1,0 +1,1356 @@
+{
+ "summary": {
+  "source": "snapshot",
+  "snap": "snap_20260701_0421",
+  "formulas": 102,
+  "wired_links": 228,
+  "components_total": 179,
+  "components_with_price": 175,
+  "components_wired": 130,
+  "orphan_comps": 15,
+  "dead_wires": 7,
+  "deleted_wires": 1,
+  "no_formula_products": 0,
+  "total_wiring_defects": 23,
+  "verdict": "NO-GO(결함 23)"
+ },
+ "orphans": [
+  {
+   "comp_cd": "COMP_ACRYL_MIRROR3T",
+   "comp_nm": "미러아크릴3T 인쇄가공비",
+   "price_rows": 81,
+   "prc_typ": ".01",
+   "use_dims": "[\"siz_width\", \"siz_height\"]"
+  },
+  {
+   "comp_cd": "COMP_BIND_CAL_WALL",
+   "comp_nm": "제본비 벽걸이캘린더",
+   "price_rows": 24,
+   "prc_typ": ".01",
+   "use_dims": "[\"proc_cd\", \"min_qty\", \"proc_grp:PROC_000017\"]"
+  },
+  {
+   "comp_cd": "COMP_BIND_SSABARI",
+   "comp_nm": "제본비 싸바리바인더",
+   "price_rows": 18,
+   "prc_typ": ".01",
+   "use_dims": "[\"proc_cd\", \"min_qty\", \"proc_grp:PROC_000017\"]"
+  },
+  {
+   "comp_cd": "COMP_CUT_FULL_PERF_1H6",
+   "comp_nm": "커팅 완제품가 완칼+타공1구",
+   "price_rows": 9,
+   "prc_typ": ".01",
+   "use_dims": "[\"min_qty\"]"
+  },
+  {
+   "comp_cd": "COMP_CUT_FULL_PERF_2H6",
+   "comp_nm": "커팅 완제품가 완칼+타공2구",
+   "price_rows": 9,
+   "prc_typ": ".01",
+   "use_dims": "[\"min_qty\"]"
+  },
+  {
+   "comp_cd": "COMP_FOLD_CARD_3H",
+   "comp_nm": "접지비 카드 3단",
+   "price_rows": 48,
+   "prc_typ": ".01",
+   "use_dims": "[\"min_qty\"]"
+  },
+  {
+   "comp_cd": "COMP_FOLD_CARD_6CR",
+   "comp_nm": "접지비 카드 6크리즈",
+   "price_rows": 48,
+   "prc_typ": ".01",
+   "use_dims": "[\"min_qty\"]"
+  },
+  {
+   "comp_cd": "COMP_PCB_S1_30P",
+   "comp_nm": "엽서북 완제품가 단면·30p",
+   "price_rows": 117,
+   "prc_typ": ".01",
+   "use_dims": "[\"siz_cd\", \"min_qty\"]"
+  },
+  {
+   "comp_cd": "COMP_PCB_S2_30P",
+   "comp_nm": "엽서북 완제품가 양면·30p",
+   "price_rows": 117,
+   "prc_typ": ".01",
+   "use_dims": "[\"siz_cd\", \"min_qty\"]"
+  },
+  {
+   "comp_cd": "COMP_PHOTOCARD_BULK",
+   "comp_nm": "포토카드 완제품가 대량",
+   "price_rows": 50,
+   "prc_typ": ".02",
+   "use_dims": "[\"min_qty\"]"
+  },
+  {
+   "comp_cd": "COMP_POSTEROPT_PET_BANNER_STAND_IN",
+   "comp_nm": "PET배너 실내용배너거치대 추가가격",
+   "price_rows": 1,
+   "prc_typ": ".01",
+   "use_dims": "[]"
+  },
+  {
+   "comp_cd": "COMP_POSTEROPT_PET_BANNER_STAND_OUT_S1",
+   "comp_nm": "PET배너 실외용배너거치대(단면용) 추가가격",
+   "price_rows": 1,
+   "prc_typ": ".01",
+   "use_dims": "[]"
+  },
+  {
+   "comp_cd": "COMP_POSTEROPT_PET_BANNER_STAND_OUT_S2",
+   "comp_nm": "PET배너 실외용배너거치대(양면용) 추가가격",
+   "price_rows": 1,
+   "prc_typ": ".01",
+   "use_dims": "[]"
+  },
+  {
+   "comp_cd": "COMP_POSTER_FOAMBOARD_BLACK",
+   "comp_nm": "폼보드(블랙) 완제품가",
+   "price_rows": 2,
+   "prc_typ": ".01",
+   "use_dims": "[\"siz_cd\"]"
+  },
+  {
+   "comp_cd": "COMP_POSTER_FOMEXBOARD_WHITE5MM",
+   "comp_nm": "포맥스보드(화이트5mm) 완제품가",
+   "price_rows": 2,
+   "prc_typ": ".01",
+   "use_dims": "[\"siz_cd\"]"
+  }
+ ],
+ "dead_wires": [
+  {
+   "frm_cd": "PRF_ACRYL_3DBLOCK_TBD",
+   "comp_cd": "COMP_ACRYL_PENDING_TBD",
+   "comp_nm": "단가/구성 확인필요 (실무진)"
+  },
+  {
+   "frm_cd": "PRF_ACRYL_3DCOROTTO_TBD",
+   "comp_cd": "COMP_ACRYL_PENDING_TBD",
+   "comp_nm": "단가/구성 확인필요 (실무진)"
+  },
+  {
+   "frm_cd": "PRF_ACRYL_PHCOROTTO_TBD",
+   "comp_cd": "COMP_ACRYL_PENDING_TBD",
+   "comp_nm": "단가/구성 확인필요 (실무진)"
+  },
+  {
+   "frm_cd": "PRF_ACRYL_SHAKER_TBD",
+   "comp_cd": "COMP_ACRYL_PENDING_TBD",
+   "comp_nm": "단가/구성 확인필요 (실무진)"
+  },
+  {
+   "frm_cd": "PRF_ACRYL_SHCOROTTO_TBD",
+   "comp_cd": "COMP_ACRYL_PENDING_TBD",
+   "comp_nm": "단가/구성 확인필요 (실무진)"
+  },
+  {
+   "frm_cd": "PRF_ACRYL_ZIBITZ2_TBD",
+   "comp_cd": "COMP_ACRYL_PENDING_TBD",
+   "comp_nm": "단가/구성 확인필요 (실무진)"
+  },
+  {
+   "frm_cd": "PRF_ACRYL_ZIBITZ_TBD",
+   "comp_cd": "COMP_ACRYL_PENDING_TBD",
+   "comp_nm": "단가/구성 확인필요 (실무진)"
+  }
+ ],
+ "deleted_wires": [
+  {
+   "frm_cd": "PRF_HC_TWINRING_SET",
+   "comp_cd": "COMP_BIND_HC_TWINRING",
+   "comp_nm": "제본비 하드커버트윈링"
+  }
+ ],
+ "products": {
+  "PRD_000016": {
+   "frm_cds": [
+    "PRF_DGP_A"
+   ],
+   "wired": 10,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000017": {
+   "frm_cds": [
+    "PRF_DGP_A"
+   ],
+   "wired": 10,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000018": {
+   "frm_cds": [
+    "PRF_DGP_A"
+   ],
+   "wired": 10,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000019": {
+   "frm_cds": [
+    "PRF_DGP_A"
+   ],
+   "wired": 10,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000020": {
+   "frm_cds": [
+    "PRF_DGP_A"
+   ],
+   "wired": 10,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000021": {
+   "frm_cds": [
+    "PRF_DGP_A"
+   ],
+   "wired": 10,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000022": {
+   "frm_cds": [
+    "PRF_DGP_A"
+   ],
+   "wired": 10,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000023": {
+   "frm_cds": [
+    "PRF_DGP_B"
+   ],
+   "wired": 3,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000024": {
+   "frm_cds": [
+    "PRF_PHOTOCARD_NORMAL"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000025": {
+   "frm_cds": [
+    "PRF_PHOTOCARD_CLEAR"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000026": {
+   "frm_cds": [
+    "PRF_DGP_A"
+   ],
+   "wired": 10,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000027": {
+   "frm_cds": [
+    "PRF_DGP_E",
+    "PRF_DGP_E_FOIL"
+   ],
+   "wired": 25,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000028": {
+   "frm_cds": [
+    "PRF_DGP_E"
+   ],
+   "wired": 11,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000029": {
+   "frm_cds": [
+    "PRF_DGP_E",
+    "PRF_DGP_E_FOIL"
+   ],
+   "wired": 25,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000031": {
+   "frm_cds": [
+    "PRF_NAMECARD_PREMIUM",
+    "PRF_NAMECARD_PREMIUM_FOIL"
+   ],
+   "wired": 11,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000032": {
+   "frm_cds": [
+    "PRF_NAMECARD_COAT"
+   ],
+   "wired": 2,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000033": {
+   "frm_cds": [
+    "PRF_NAMECARD_FIXED"
+   ],
+   "wired": 2,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000034": {
+   "frm_cds": [
+    "PRF_NAMECARD_PEARL",
+    "PRF_NAMECARD_PEARL_FOIL"
+   ],
+   "wired": 7,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000035": {
+   "frm_cds": [
+    "PRF_NAMECARD_SHAPE"
+   ],
+   "wired": 2,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000036": {
+   "frm_cds": [
+    "PRF_NAMECARD_MINISHAPE"
+   ],
+   "wired": 2,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000037": {
+   "frm_cds": [
+    "PRF_NAMECARD_FOIL"
+   ],
+   "wired": 6,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000039": {
+   "frm_cds": [
+    "PRF_NAMECARD_CLEAR"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000040": {
+   "frm_cds": [
+    "PRF_NAMECARD_WHITE"
+   ],
+   "wired": 4,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000041": {
+   "frm_cds": [
+    "PRF_DGP_A"
+   ],
+   "wired": 10,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000042": {
+   "frm_cds": [
+    "PRF_DGP_A",
+    "PRF_DGP_A_FOIL"
+   ],
+   "wired": 23,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000043": {
+   "frm_cds": [
+    "PRF_DGP_C"
+   ],
+   "wired": 4,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000044": {
+   "frm_cds": [
+    "PRF_DGP_C"
+   ],
+   "wired": 4,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000045": {
+   "frm_cds": [
+    "PRF_DGP_C"
+   ],
+   "wired": 4,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000046": {
+   "frm_cds": [
+    "PRF_DGP_B"
+   ],
+   "wired": 3,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000047": {
+   "frm_cds": [
+    "PRF_DGP_D"
+   ],
+   "wired": 10,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000048": {
+   "frm_cds": [
+    "PRF_FOLD_SUM"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000050": {
+   "frm_cds": [
+    "PRF_ENV_MAKING"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000051": {
+   "frm_cds": [
+    "PRF_DGP_F"
+   ],
+   "wired": 3,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000052": {
+   "frm_cds": [
+    "PRF_STK_FIXED"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000053": {
+   "frm_cds": [
+    "PRF_STK_FIXED"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000054": {
+   "frm_cds": [
+    "PRF_STK_FIXED"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000055": {
+   "frm_cds": [
+    "PRF_STK_FIXED"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000056": {
+   "frm_cds": [
+    "PRF_STK_FIXED"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000057": {
+   "frm_cds": [
+    "PRF_STK_FIXED"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000058": {
+   "frm_cds": [
+    "PRF_STK_FIXED"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000059": {
+   "frm_cds": [
+    "PRF_STK_FIXED"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000060": {
+   "frm_cds": [
+    "PRF_STK_FIXED"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000061": {
+   "frm_cds": [
+    "PRF_STK_FIXED"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000062": {
+   "frm_cds": [
+    "PRF_STK_FIXED"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000063": {
+   "frm_cds": [
+    "PRF_STK_FIXED"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000064": {
+   "frm_cds": [
+    "PRF_STK_FIXED"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000065": {
+   "frm_cds": [
+    "PRF_STK_PACK"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000066": {
+   "frm_cds": [
+    "PRF_GANGPAN_FIXED"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000067": {
+   "frm_cds": [
+    "PRF_STK_TATTOO"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000068": {
+   "frm_cds": [
+    "PRF_BIND_SUM"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000069": {
+   "frm_cds": [
+    "PRF_BIND_MUSEON",
+    "PRF_BIND_MUSEON_FOIL"
+   ],
+   "wired": 5,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000070": {
+   "frm_cds": [
+    "PRF_BIND_PUR",
+    "PRF_BIND_PUR_FOIL"
+   ],
+   "wired": 5,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000071": {
+   "frm_cds": [
+    "PRF_BIND_TWINRING"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000072": {
+   "frm_cds": [
+    "PRF_HC_MUSEON_SET"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000077": {
+   "frm_cds": [
+    "PRF_HC_MUSEON_SET"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000082": {
+   "frm_cds": [
+    "PRF_HC_TWINRING_SET"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 1,
+   "status": "BROKEN"
+  },
+  "PRD_000094": {
+   "frm_cds": [
+    "PRF_PCB_FIXED"
+   ],
+   "wired": 2,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000097": {
+   "frm_cds": [
+    "PRF_TTEOKME_FIXED"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000100": {
+   "frm_cds": [
+    "PRF_PHOTOBOOK_FIXED"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000101": {
+   "frm_cds": [
+    "PRF_PHOTOBOOK_INNER"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000118": {
+   "frm_cds": [
+    "PRF_POSTER_ARTPRINT"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000119": {
+   "frm_cds": [
+    "PRF_POSTER_ARTPAPER"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000120": {
+   "frm_cds": [
+    "PRF_POSTER_WATERPROOF"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000121": {
+   "frm_cds": [
+    "PRF_POSTER_ADH_WP"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000122": {
+   "frm_cds": [
+    "PRF_POSTER_ADH_CLEAR"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000123": {
+   "frm_cds": [
+    "PRF_POSTER_ARTFABRIC"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000124": {
+   "frm_cds": [
+    "PRF_POSTER_LINEN"
+   ],
+   "wired": 2,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000125": {
+   "frm_cds": [
+    "PRF_POSTER_CANVAS"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000126": {
+   "frm_cds": [
+    "PRF_POSTER_LEATHER_AP"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000127": {
+   "frm_cds": [
+    "PRF_POSTER_TYVEK"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000128": {
+   "frm_cds": [
+    "PRF_POSTER_MESH"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000129": {
+   "frm_cds": [
+    "PRF_POSTER_FOAMBOARD"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000130": {
+   "frm_cds": [
+    "PRF_POSTER_FOMEXBOARD"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000131": {
+   "frm_cds": [
+    "PRF_POSTER_FRAMELESS"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000132": {
+   "frm_cds": [
+    "PRF_POSTER_LEATHER_FRAME"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000133": {
+   "frm_cds": [
+    "PRF_POSTER_CANVAS_HANGING"
+   ],
+   "wired": 2,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000134": {
+   "frm_cds": [
+    "PRF_POSTER_LINEN_WOODBONG"
+   ],
+   "wired": 2,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000135": {
+   "frm_cds": [
+    "PRF_POSTER_JOKJA"
+   ],
+   "wired": 2,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000136": {
+   "frm_cds": [
+    "PRF_POSTER_PET_BANNER"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000137": {
+   "frm_cds": [
+    "PRF_POSTER_MESH_BANNER"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000138": {
+   "frm_cds": [
+    "PRF_POSTER_BANNER_N"
+   ],
+   "wired": 9,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000139": {
+   "frm_cds": [
+    "PRF_POSTER_BANNER_M"
+   ],
+   "wired": 6,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000140": {
+   "frm_cds": [
+    "PRF_POSTER_SHEETCUT_MATTE"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000141": {
+   "frm_cds": [
+    "PRF_POSTER_SHEETCUT_HOLO"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000142": {
+   "frm_cds": [
+    "PRF_POSTER_ACRYLSTK_GLOSS"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000143": {
+   "frm_cds": [
+    "PRF_POSTER_ACRYLSTK_MIRROR"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000144": {
+   "frm_cds": [
+    "PRF_POSTER_MINI_STANDBOARD"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000145": {
+   "frm_cds": [
+    "PRF_POSTER_MINI_BANNER"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000146": {
+   "frm_cds": [
+    "PRF_CLR_ACRYL"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000147": {
+   "frm_cds": [
+    "PRF_CLR_ACRYL"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000148": {
+   "frm_cds": [
+    "PRF_CLR_ACRYL"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000149": {
+   "frm_cds": [
+    "PRF_CLR_ACRYL"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000150": {
+   "frm_cds": [
+    "PRF_CLR_ACRYL"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000152": {
+   "frm_cds": [
+    "PRF_CLR_ACRYL"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000153": {
+   "frm_cds": [
+    "PRF_ACRYL_NAMETAG_GS"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000154": {
+   "frm_cds": [
+    "PRF_CLR_ACRYL"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000155": {
+   "frm_cds": [
+    "PRF_ACRYL_BALLPEN"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000156": {
+   "frm_cds": [
+    "PRF_ACRYL_ZIBITZ_TBD"
+   ],
+   "wired": 1,
+   "dead": 1,
+   "deleted": 0,
+   "status": "BROKEN"
+  },
+  "PRD_000157": {
+   "frm_cds": [
+    "PRF_CLR_ACRYL"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000158": {
+   "frm_cds": [
+    "PRF_CLR_ACRYL"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000159": {
+   "frm_cds": [
+    "PRF_CLR_ACRYL"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000160": {
+   "frm_cds": [
+    "PRF_ACRYL_FREESTAND"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000161": {
+   "frm_cds": [
+    "PRF_CLR_ACRYL"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000162": {
+   "frm_cds": [
+    "PRF_CLR_ACRYL"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000163": {
+   "frm_cds": [
+    "PRF_ACRYL_MINIPART"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000164": {
+   "frm_cds": [
+    "PRF_COROTTO_ACRYL"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000165": {
+   "frm_cds": [
+    "PRF_ACRYL_PHCOROTTO_TBD"
+   ],
+   "wired": 1,
+   "dead": 1,
+   "deleted": 0,
+   "status": "BROKEN"
+  },
+  "PRD_000166": {
+   "frm_cds": [
+    "PRF_ACRYL_CARABINER"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000168": {
+   "frm_cds": [
+    "PRF_ACRYL_3DCOROTTO_TBD"
+   ],
+   "wired": 1,
+   "dead": 1,
+   "deleted": 0,
+   "status": "BROKEN"
+  },
+  "PRD_000169": {
+   "frm_cds": [
+    "PRF_ACRYL_3DBLOCK_TBD"
+   ],
+   "wired": 1,
+   "dead": 1,
+   "deleted": 0,
+   "status": "BROKEN"
+  },
+  "PRD_000170": {
+   "frm_cds": [
+    "PRF_ACRYL_SHAKER_TBD"
+   ],
+   "wired": 1,
+   "dead": 1,
+   "deleted": 0,
+   "status": "BROKEN"
+  },
+  "PRD_000171": {
+   "frm_cds": [
+    "PRF_ACRYL_ZIBITZ2_TBD"
+   ],
+   "wired": 1,
+   "dead": 1,
+   "deleted": 0,
+   "status": "BROKEN"
+  },
+  "PRD_000172": {
+   "frm_cds": [
+    "PRF_STN_DIARY_SOFT"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000173": {
+   "frm_cds": [
+    "PRF_STN_DIARY_HARD"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000174": {
+   "frm_cds": [
+    "PRF_STN_DIARY_LHARD"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000175": {
+   "frm_cds": [
+    "PRF_STN_DIARY_LSOFT"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000176": {
+   "frm_cds": [
+    "PRF_STN_MONTHLY"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000177": {
+   "frm_cds": [
+    "PRF_STN_SPRINGNOTE"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000178": {
+   "frm_cds": [
+    "PRF_STN_SPRINGNOTEBK"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000179": {
+   "frm_cds": [
+    "PRF_STN_MEMOPAD"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000181": {
+   "frm_cds": [
+    "PRF_STN_JUNGCHEOL"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000226": {
+   "frm_cds": [
+    "PRF_ACRYL_SHCOROTTO_TBD"
+   ],
+   "wired": 1,
+   "dead": 1,
+   "deleted": 0,
+   "status": "BROKEN"
+  },
+  "PRD_000284": {
+   "frm_cds": [
+    "PRF_DGP_INNER"
+   ],
+   "wired": 2,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000285": {
+   "frm_cds": [
+    "PRF_DGP_INNER"
+   ],
+   "wired": 2,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000286": {
+   "frm_cds": [
+    "PRF_DGP_INNER"
+   ],
+   "wired": 2,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000287": {
+   "frm_cds": [
+    "PRF_DGP_INNER"
+   ],
+   "wired": 2,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000288": {
+   "frm_cds": [
+    "PRF_BOOK_COVER"
+   ],
+   "wired": 3,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000289": {
+   "frm_cds": [
+    "PRF_DGP_INNER"
+   ],
+   "wired": 2,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000290": {
+   "frm_cds": [
+    "PRF_BOOK_COVER"
+   ],
+   "wired": 3,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000291": {
+   "frm_cds": [
+    "PRF_DGP_INNER"
+   ],
+   "wired": 2,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000292": {
+   "frm_cds": [
+    "PRF_BOOK_COVER"
+   ],
+   "wired": 3,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  }
+ }
+}

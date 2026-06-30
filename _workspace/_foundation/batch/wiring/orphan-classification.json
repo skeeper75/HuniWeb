@@ -1,0 +1,170 @@
+{
+ "_meta": {
+  "round": 8,
+  "date": "2026-07-01",
+  "agent": "dbm-price-arbiter→hpe-engine-designer×2→hpe-validator+codex→COMMIT(박명함)+보정(엽서북)",
+  "source": "orphan-classification-260701.md·design-*-260701.md·gate-design-260701.md·codex-design-260701.md·commit-report-namecard037-260701.md·design-pcb30p-fix-260701.md",
+  "summary": {
+   "REAL_GAP": 0,
+   "NEEDS_FORMULA": 15,
+   "BLOCKED": 4,
+   "LEGIT_UNUSED": 4
+  },
+  "design_summary": {
+   "COMMITTED": 8,
+   "GO": 2,
+   "DATA_GO_HOLD": 2,
+   "BLOCKED_down": 3
+  },
+  "scan_round3": {
+   "snap": "snap_20260701_0305",
+   "orphans": 19,
+   "dead": 7,
+   "deleted": 1,
+   "total_defects": 27,
+   "delta_from_r1": "고아 23→19(박명함4 COMMIT 후 고아 탈출)"
+  },
+  "cross_signal": "신규 deleted_wire 1: PRF_HC_TWINRING_SET→COMP_BIND_HC_TWINRING(논리삭제 참조)=§23 셋트 트랙(082 트윈링 BLOCKED) 산물·배선 서브트랙 밖→§23 라우팅. dead 7=전부 *_TBD 실무진 placeholder(BLOCKED·배선 대상 아님).",
+  "note": "R1: REAL_GAP 0(와일드카드 always-match·억지 배선 거부). R2: §18 설계+검증(골든 verbatim·Claude+codex divergence0). R3: ★박명함037 4comp 라이브 COMMIT(골든 38,200/55,000/24,200 3/3 일치·양면홀로 저청구 회복·고아 23→19)·엽서북30p 보정완료(선택수단 t_prd_product_options 교체·OPT_000082 재채번·재검증 대기). 잔여 GO 6(화이트명함4 qty100한정·폼보드2 §7사이즈선행)·BLOCKED강등3. 실 COMMIT 인간 승인 후 §7.",
+  "reverify_pcb30p": "Claude+codex divergence0: D1선택수단·D3채번 CLOSED·D2 자동dflt 거짓 반증(page=print동형 필수선택)·데이터GO·COMMIT은 위젯계약§6/C트랙 해소후. 골든6/6 verbatim. 산출 gate-pcb30p-fix-260701.md·codex-pcb30p-fix-260701.md",
+  "whitenamecard_correction": "화이트인쇄명함 040 진단확정: 축=별색(화이트·클리어)·코팅미사용(사장님 정정 맞음). 단 가격모델=flat 완제품묶음가(flat comp 14,500~19,000)가 정답, 별색 원자합산 PRF_DGP_A는 1.6~2.3배 과대(부적합). 040 현재 PRF_DGP_A 오바인딩→견적0(print_opt 선택수단 0건). 교정=flat공식 신설+4comp배선+040 재바인딩+print_opt 선택수단+클리어별색 라벨. design-namecard B노선 살리되 2정정(신설→재바인딩·코팅→클리어별색). score_batch print_opt 코드주입이 6,213 저청구 은폐(260630 040정상=FALSE-PASS). C트랙아님. 산출 diag-whitenamecard-belsaek-260701.md",
+  "scan_round4": {
+   "snap": "snap_20260701_0421",
+   "orphans": 15,
+   "total_defects": 23,
+   "delta": "고아 23→15(박명함4+화이트명함4 COMMIT 후 고아 탈출)"
+  }
+ },
+ "classes": {
+  "COMP_NAMECARD_FOIL_S1_HOLO": {
+   "class": "NEEDS_FORMULA",
+   "target": "§18",
+   "design": "COMMITTED",
+   "note": "박명함 037 ★라이브 COMMIT 완료(골든 일치·양면홀로 저청구 회복)·고아 탈출"
+  },
+  "COMP_NAMECARD_FOIL_S2_HOLO": {
+   "class": "NEEDS_FORMULA",
+   "target": "§18",
+   "design": "COMMITTED",
+   "note": "박명함 037 ★라이브 COMMIT 완료(골든 일치·양면홀로 저청구 회복)·고아 탈출"
+  },
+  "COMP_NAMECARD_FOIL_S2_STD": {
+   "class": "NEEDS_FORMULA",
+   "target": "§18",
+   "design": "COMMITTED",
+   "note": "박명함 037 ★라이브 COMMIT 완료(골든 일치·양면홀로 저청구 회복)·고아 탈출"
+  },
+  "COMP_NAMECARD_FOIL_SETUP_S2_STD": {
+   "class": "NEEDS_FORMULA",
+   "target": "§18",
+   "design": "COMMITTED",
+   "note": "박명함 037 ★라이브 COMMIT 완료(골든 일치·양면홀로 저청구 회복)·고아 탈출"
+  },
+  "COMP_NAMECARD_WHITE_S1W_CL": {
+   "class": "NEEDS_FORMULA",
+   "target": "§18",
+   "design": "COMMITTED",
+   "note": "★별색 flat 교정 라이브 COMMIT 완료(견적0/저청구6,213→골든 14,500~19,000·PRF_DGP_A 과대소멸·재바인딩·클리어별색 OPT_000081 없음dflt·mat_cd 와일드)·고아 탈출. 위젯 단/양면+클리어 필수선택 §6 의존·qty≠100 §26"
+  },
+  "COMP_NAMECARD_WHITE_S1W_NOCL": {
+   "class": "NEEDS_FORMULA",
+   "target": "§18",
+   "design": "COMMITTED",
+   "note": "★별색 flat 교정 라이브 COMMIT 완료(견적0/저청구6,213→골든 14,500~19,000·PRF_DGP_A 과대소멸·재바인딩·클리어별색 OPT_000081 없음dflt·mat_cd 와일드)·고아 탈출. 위젯 단/양면+클리어 필수선택 §6 의존·qty≠100 §26"
+  },
+  "COMP_NAMECARD_WHITE_S2W_CL": {
+   "class": "NEEDS_FORMULA",
+   "target": "§18",
+   "design": "COMMITTED",
+   "note": "★별색 flat 교정 라이브 COMMIT 완료(견적0/저청구6,213→골든 14,500~19,000·PRF_DGP_A 과대소멸·재바인딩·클리어별색 OPT_000081 없음dflt·mat_cd 와일드)·고아 탈출. 위젯 단/양면+클리어 필수선택 §6 의존·qty≠100 §26"
+  },
+  "COMP_NAMECARD_WHITE_S2W_NOCL": {
+   "class": "NEEDS_FORMULA",
+   "target": "§18",
+   "design": "COMMITTED",
+   "note": "★별색 flat 교정 라이브 COMMIT 완료(견적0/저청구6,213→골든 14,500~19,000·PRF_DGP_A 과대소멸·재바인딩·클리어별색 OPT_000081 없음dflt·mat_cd 와일드)·고아 탈출. 위젯 단/양면+클리어 필수선택 §6 의존·qty≠100 §26"
+  },
+  "COMP_PCB_S1_30P": {
+   "class": "NEEDS_FORMULA",
+   "target": "§18",
+   "design": "DATA_GO_HOLD",
+   "note": "엽서북30p 재검증: 데이터 설계 GO(채번 OPT_000082 무충돌·disjoint 2×2·골든 6/6)·★COMMIT 보류 — 페이지수=print동형 필수선택이라 위젯이 '페이지 필수선택+opt_cd 전송' 강제(§6) 또는 C트랙(webadmin dflt_yn 전파) 해소 후. 데이터 재작업 불요"
+  },
+  "COMP_PCB_S2_30P": {
+   "class": "NEEDS_FORMULA",
+   "target": "§18",
+   "design": "DATA_GO_HOLD",
+   "note": "엽서북30p 재검증: 데이터 설계 GO(채번 OPT_000082 무충돌·disjoint 2×2·골든 6/6)·★COMMIT 보류 — 페이지수=print동형 필수선택이라 위젯이 '페이지 필수선택+opt_cd 전송' 강제(§6) 또는 C트랙(webadmin dflt_yn 전파) 해소 후. 데이터 재작업 불요"
+  },
+  "COMP_BIND_CAL_WALL": {
+   "class": "NEEDS_FORMULA",
+   "target": "§18→BLOCKED",
+   "design": "BLOCKED",
+   "note": "검증 강등 정당: 공식 전무+COMP proc_cd 99-102↔상품 process 76/79/21 교집합0(영구 no_match)+본문 가격모델 미설계. §7 proc 재할당 선행"
+  },
+  "COMP_FOLD_CARD_3H": {
+   "class": "NEEDS_FORMULA",
+   "target": "§18→BLOCKED",
+   "design": "BLOCKED",
+   "note": "검증 강등 정당: PRF_DGP_E에 COMP_FOLD_LEAF_3FOLD 이미 배선=이중과금 실재·접지유형=상품식별(택1 아님). 실무진/goods.asp 패밀리 권위 선행"
+  },
+  "COMP_FOLD_CARD_6CR": {
+   "class": "NEEDS_FORMULA",
+   "target": "§18→BLOCKED",
+   "design": "BLOCKED",
+   "note": "6CR 호스트 상품 부재·이중과금 가드. 실무진 확인"
+  },
+  "COMP_POSTER_FOAMBOARD_BLACK": {
+   "class": "NEEDS_FORMULA",
+   "target": "§7/§21",
+   "design": "GO*",
+   "note": "폼보드 129: siz_cd disjoint·골든 8,500/14,000 일치·배선 안전·★§7 product_sizes 315/317 등록이 발현 조건"
+  },
+  "COMP_POSTER_FOMEXBOARD_WHITE5MM": {
+   "class": "NEEDS_FORMULA",
+   "target": "§7/§21",
+   "design": "GO*",
+   "note": "포맥스 130: siz_cd disjoint·골든 10,000/16,000·★§7 사이즈 315/317 등록 선행"
+  },
+  "COMP_PHOTOCARD_BULK": {
+   "class": "BLOCKED",
+   "target": "goods.asp/실무진",
+   "note": "포토카드 세트 vs 대량 선택 메커니즘·배타성 모호(추측 적재 금지)"
+  },
+  "COMP_CUT_FULL_PERF_1H6": {
+   "class": "BLOCKED",
+   "target": "goods.asp/실무진",
+   "note": "완칼+타공1구 호스트 상품·선택수단 미식별"
+  },
+  "COMP_CUT_FULL_PERF_2H6": {
+   "class": "BLOCKED",
+   "target": "goods.asp/실무진",
+   "note": "완칼+타공2구 호스트 상품 미식별"
+  },
+  "COMP_ACRYL_MIRROR3T": {
+   "class": "BLOCKED",
+   "target": "goods.asp/실무진",
+   "note": "미러아크릴3T 면적단가 81행 적재됐으나 호스트 상품·공식 귀속 미식별"
+  },
+  "COMP_POSTEROPT_PET_BANNER_STAND_IN": {
+   "class": "LEGIT_UNUSED",
+   "target": "addon(§7/CPQ)",
+   "note": "거치대=추가옵션 별건. formula 배선=always-add 과금→미배선이 정답"
+  },
+  "COMP_POSTEROPT_PET_BANNER_STAND_OUT_S1": {
+   "class": "LEGIT_UNUSED",
+   "target": "addon(§7/CPQ)",
+   "note": "거치대=addon 별건·미배선이 정답"
+  },
+  "COMP_POSTEROPT_PET_BANNER_STAND_OUT_S2": {
+   "class": "LEGIT_UNUSED",
+   "target": "addon(§7/CPQ)",
+   "note": "거치대=addon 별건·미배선이 정답"
+  },
+  "COMP_BIND_SSABARI": {
+   "class": "LEGIT_UNUSED",
+   "target": "§23 세트/정리",
+   "note": "superseded(per-type 제본comp+COVERBIND로 대체 운영)·use_yn=N 후보(삭제금지)"
+  }
+ }
+}

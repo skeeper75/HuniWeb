@@ -97,10 +97,49 @@ tr.it-price_gap{ background:#fffbeb; } tr.it-차원_미스매치{ background:#ff
 .cellgrid .empty{ color:#dc2626; font-weight:700; }
 .bom-note{ color:#9ca3af; font-size:10.5px; margin-top:1px; }
 .bom-empty{ color:#9ca3af; font-size:11.5px; padding:4px 2px; font-style:italic; }
+
+/* ── 탭 바 (준비도 ↔ 배선 진척 보드) ── */
+#rv-tabs{ display:flex; gap:2px; padding:0 16px; background:#fff; border-bottom:1px solid #e5e7eb; }
+#rv-tabs button{ border:none; background:transparent; padding:9px 16px; font-size:13px; font-weight:600;
+  color:#6b7280; cursor:pointer; border-bottom:2px solid transparent; }
+#rv-tabs button.active{ color:#1d4ed8; border-bottom-color:#1d4ed8; }
+.tab-pane{ display:none; } .tab-pane.active{ display:block; }
+
+/* ── 배선 진척 보드 ── */
+#wb-app{ padding:16px 22px; overflow-y:auto; height:calc(100vh - 96px); min-height:460px; }
+.wb-kpis{ display:flex; flex-wrap:wrap; gap:14px; margin-bottom:8px; }
+.wb-kpi{ background:#fff; border:1px solid #e5e7eb; border-radius:10px; padding:10px 16px; min-width:118px; }
+.wb-kpi b{ font-size:22px; display:block; line-height:1.1; }
+.wb-kpi span{ font-size:11px; color:#6b7280; }
+.wb-kpi.bad b{ color:#dc2626; } .wb-kpi.warn b{ color:#d97706; } .wb-kpi.ok b{ color:#16a34a; }
+.wb-prog{ height:14px; border-radius:8px; background:#fee2e2; overflow:hidden; margin:6px 0 14px; max-width:520px; }
+.wb-prog i{ display:block; height:100%; background:linear-gradient(90deg,#84cc16,#16a34a); }
+.wb-verdict{ font-size:12.5px; font-weight:700; padding:3px 10px; border-radius:9px; display:inline-block; margin-bottom:10px; }
+.wb-verdict.go{ background:#dcfce7; color:#15803d; } .wb-verdict.nogo{ background:#fee2e2; color:#b91c1c; }
+.wb-note{ font-size:11.5px; color:#6b7280; margin:2px 0 14px; max-width:760px; line-height:1.5; }
+.wb-sec{ margin-bottom:16px; }
+.wb-sec h3{ font-size:14px; margin:0 0 6px; display:flex; align-items:center; gap:8px; }
+.wb-sec h3 .cnt{ font-size:12px; color:#6b7280; font-weight:400; }
+table.wb{ border-collapse:collapse; width:100%; font-size:12px; }
+table.wb th,table.wb td{ border:1px solid #e5e7eb; padding:4px 8px; text-align:left; vertical-align:top; }
+table.wb th{ background:#f3f4f6; position:sticky; top:0; }
+table.wb td.code{ font-family:ui-monospace,Menlo,monospace; font-size:10.5px; color:#6b7280; white-space:nowrap; }
+table.wb tr:hover{ background:#f9fafb; }
+.wb-empty{ color:#16a34a; font-size:12px; padding:6px 2px; font-weight:600; }
+.wb-pill{ font-size:10px; padding:1px 7px; border-radius:8px; font-weight:700; color:#fff; }
+.wb-link{ color:#1d4ed8; cursor:pointer; text-decoration:underline; }
+.wb-rounds{ font-size:11.5px; }
+.wb-rounds td,.wb-rounds th{ padding:3px 8px; }
 </style>
 {% if load_error %}<div style="padding:12px 16px;background:#fef2f2;color:#b91c1c;border:1px solid #fecaca;border-radius:8px;margin:10px;white-space:pre-line;font-size:12.5px">{{ load_error }}</div>{% endif %}
 {{ data|json_script:"rv-data" }}
 
+<div id="rv-tabs">
+  <button id="tab-rv" class="active" onclick="showTab('rv')">상품 준비도</button>
+  <button id="tab-wb" onclick="showTab('wb')">배선 진척 보드</button>
+</div>
+
+<div id="pane-rv" class="tab-pane active">
 <div id="rv-summary"></div>
 <div id="rv-app">
   <div id="rv-list">
@@ -114,6 +153,11 @@ tr.it-price_gap{ background:#fffbeb; } tr.it-차원_미스매치{ background:#ff
     <div id="rv-items"></div>
   </div>
   <div id="rv-detail"><p class="rv-hint">좌측에서 상품을 선택하세요. 상단 요약·필터로 빠르게 좁힐 수 있습니다.</p></div>
+</div>
+</div>
+
+<div id="pane-wb" class="tab-pane">
+  <div id="wb-app"></div>
 </div>
 
 <script>
@@ -428,9 +472,125 @@ function selectProd(cd){
   renderGraph(p);
 }
 
+// ── 탭 전환 (준비도 ↔ 배선 진척 보드) ──
+function showTab(t){
+  for(const k of ["rv","wb"]){
+    document.getElementById("pane-"+k).classList.toggle("active", k===t);
+    document.getElementById("tab-"+k).classList.toggle("active", k===t);
+  }
+}
+// 배선 보드에서 상품 클릭 → 준비도 탭으로 이동 + 그 상품 선택(그래프에서 끊긴 지점 확인).
+function gotoProduct(cd){ showTab("rv"); selectProd(cd); document.getElementById("rv-detail").scrollTop=0; }
+
+// ── 배선 진척 보드 ──
+// 목적: "전 상품의 가격에 영향 주는 구성요소가 가격공식(formula_components)에 배선됐나"를
+//        한 화면에서 추적. 결함 4종을 직접 보여주고, 루프(§27 배선 서브트랙)의 진척판으로.
+//   고아(ORPHAN)        = 단가행 적재됐는데 어느 공식에도 미배선 → 엔진이 못 봄(견적0/저청구)
+//   빈배선(DEAD_WIRE)   = 배선됐는데 단가행 0 (다수 *_TBD = 실무진 확인 BLOCKED·배선 대상 아님)
+//   깨진 사슬(BROKEN)   = 상품 견적0원인/단가행전무/차원불일치 (price_bom 파생)
+//   미배선 공식(NO_FORMULA) = 상품에 공식 바인딩 0 (배선 이전 단계)
+// 종료 척도(§27): 배선 결함 0 + PRICE≠0. 이 보드는 결함을 0으로 모는 진척을 보여준다.
+function isTbd(cd){ return /(_TBD|_PENDING|PENDING)/i.test(cd||""); }
+function renderWiringBoard(){
+  const wb = RV.wiring || {};
+  const scan = wb.scan || {}, hasScan = wb.has_scan;
+  const orphans = wb.orphans||[], dead = wb.dead_wires||[], deleted = wb.deleted_wires||[];
+  const broken = wb.broken_products||[], noFm = wb.no_formula_products||[];
+  // 실 배선 대상 결함(고아 + 비-TBD 빈배선 + 삭제오염). *_TBD 빈배선은 실무진 BLOCKED 로 분리.
+  const deadReal = dead.filter(d=>!isTbd(d.comp_cd)), deadTbd = dead.filter(d=>isTbd(d.comp_cd));
+  const wireDefects = (hasScan? orphans.length + deadReal.length + deleted.length : "?");
+  const totalDefects = scan.total_wiring_defects;
+  const goNoGo = hasScan && (orphans.length+deadReal.length+deleted.length)===0 && broken.length===0;
+
+  let h = "";
+  // ── KPI ──
+  h += `<div class="wb-kpis">`
+    + kpi(wb.completion+"%", "배선 완성도", "WIRED_OK / 배선대상 "+wb.applicable, wb.completion>=90?"ok":(wb.completion>=60?"warn":"bad"))
+    + kpi(hasScan?orphans.length:"—", "고아 구성요소", "단가행有·공식 미배선", orphans.length?"bad":"ok")
+    + kpi(hasScan?deadReal.length:"—", "빈 배선(교정)", "배선됐으나 단가행0(비-TBD)", deadReal.length?"warn":"ok")
+    + kpi(broken.length, "깨진 사슬", "견적0·단가행전무·차원불일치", broken.length?"bad":"ok")
+    + kpi(noFm.length, "미배선 공식", "상품에 가격공식 바인딩 0", noFm.length?"warn":"ok")
+    + kpi(hasScan?deadTbd.length:"—", "실무진 BLOCKED", "*_TBD 빈배선(배선 대상 아님)", "")
+    + `</div>`;
+  h += `<div class="wb-prog"><i style="width:${wb.completion}%"></i></div>`;
+  h += `<span class="wb-verdict ${goNoGo?'go':'nogo'}">배선 정합: ${goNoGo?'GO(결함 0)':'NO-GO'}</span>`;
+  if(hasScan) h += ` <span style="font-size:11.5px;color:#6b7280">스캐너(${esc(scan.snap||'')}): 공식 ${scan.formulas} · 배선링크 ${scan.wired_links} · 단가행보유 ${scan.components_with_price} · 배선된 ${scan.components_wired} · 배선결함 ${totalDefects}</span>`;
+  h += `<p class="wb-note">★ 종료 척도(§27 배선 서브트랙): <b>배선 결함 0 + PRICE≠0</b>. 고아=단가행은 적재됐는데 가격공식에 안 묶여 엔진이 합산 못 함(견적0/저청구 — 명함 박/화이트 클래스가 실증). 실 교정 COMMIT 은 인간 승인 후 §7 dbmap 위임(DB 미적재). ${hasScan?'':'<b style="color:#d97706">스냅샷 스캔본 없음 — 고아/빈배선은 wiring_scan.py 실행 후 표시(현재 details 폴백).</b>'}</p>`;
+
+  // ── 라운드 추적(수렴 추이) ──
+  if((wb.rounds||[]).length){
+    h += `<div class="wb-sec"><h3>루프 라운드 추적 <span class="cnt">(수렴 추이)</span></h3>`
+      + `<table class="wb wb-rounds"><thead><tr><th>R</th><th>스냅샷</th><th>고아</th><th>빈배선</th><th>삭제오염</th><th>총결함</th><th>판정</th><th>메모</th></tr></thead><tbody>`
+      + wb.rounds.map(r=>`<tr><td>${esc(r.round)}</td><td class="code">${esc(r.snap||'')}</td><td>${esc(r.orphan)}</td><td>${esc(r.dead_wire)}</td><td>${esc(r.deleted_wire)}</td><td><b>${esc(r.total_defects)}</b></td><td>${esc(r.verdict||'')}</td><td>${esc(r.note||'')}</td></tr>`).join("")
+      + `</tbody></table></div>`;
+  }
+
+  // ── 고아 구성요소 (핵심 배선 누락) + §13 분류 오버레이 ──
+  const CLS_COLOR = { REAL_GAP:"#16a34a", NEEDS_FORMULA:"#d97706", BLOCKED:"#dc2626", LEGIT_UNUSED:"#6b7280" };
+  const CLS_LABEL = { REAL_GAP:"즉시배선", NEEDS_FORMULA:"설계선행", BLOCKED:"실무진", LEGIT_UNUSED:"정당미배선" };
+  const ocs = wb.orphan_class_summary, ods = wb.orphan_design_summary;
+  const DES_COLOR = { COMMITTED:"#0e7490", GO:"#16a34a", "GO*":"#65a30d", DATA_GO_HOLD:"#0891b2", FLAT_RECTIFY:"#7c3aed", GO_CONFIRM:"#16a34a", FIXED_PENDING:"#0891b2", NEEDS_FIX:"#d97706", BLOCKED:"#dc2626" };
+  const DES_LABEL = { COMMITTED:"COMMIT완료", GO:"검증 GO", "GO*":"GO(의존)", DATA_GO_HOLD:"데이터GO·보류", FLAT_RECTIFY:"별색재바인딩", GO_CONFIRM:"GO·CONFIRM대기", FIXED_PENDING:"보정완료", NEEDS_FIX:"보정필요", BLOCKED:"BLOCKED강등" };
+  h += `<div class="wb-sec"><h3><span class="wb-pill" style="background:#dc2626">고아</span> 단가행 있으나 공식 미배선 <span class="cnt">(${hasScan?orphans.length:'스냅샷 필요'})</span></h3>`;
+  if(ocs){
+    h += `<div class="wb-note" style="margin:0 0 4px"><b>§13 분류(R1·고아 23 기준):</b> `
+      + Object.keys(CLS_LABEL).map(k=>`<span class="wb-pill" style="background:${CLS_COLOR[k]};margin-right:4px">${CLS_LABEL[k]} ${ocs[k]??0}</span>`).join("")
+      + ` &nbsp;— ${esc(wb.orphan_class_note||'')}</div>`;
+  }
+  if(ods){
+    const DK = [["COMMITTED","#0e7490"],["GO","#16a34a"],["DATA_GO_HOLD","#0891b2"],["FLAT_RECTIFY","#7c3aed"],["GO_CONFIRM","#16a34a"],["FIXED_PENDING_REVERIFY","#0891b2"],["NEEDS_FIX","#d97706"],["BLOCKED_down","#dc2626"]];
+    const DKL = { COMMITTED:"COMMIT완료", GO:"검증 GO", DATA_GO_HOLD:"데이터GO·보류", FLAT_RECTIFY:"별색재바인딩", GO_CONFIRM:"GO·CONFIRM대기", FIXED_PENDING_REVERIFY:"보정완료", NEEDS_FIX:"보정필요", BLOCKED_down:"BLOCKED강등" };
+    h += `<div class="wb-note" style="margin:0 0 8px"><b>§18 설계·검증·적재(R2~R3):</b> `
+      + DK.filter(([k])=>ods[k]!=null).map(([k,c])=>`<span class="wb-pill" style="background:${c};margin-right:4px">${DKL[k]} ${ods[k]}</span>`).join("")
+      + ` &nbsp;골든 verbatim·Claude+codex divergence 0·★박명함 라이브 COMMIT(양면홀로 저청구 회복·고아 23→19)·실 COMMIT 인간 승인 후 §7</div>`;
+  }
+  if(!hasScan) h += `<p class="wb-note">wiring_scan.py 실행 시 표시.</p>`;
+  else if(!orphans.length) h += `<p class="wb-empty">✓ 고아 구성요소 없음</p>`;
+  else h += `<table class="wb"><thead><tr><th style="width:78px">§13 분류</th><th style="width:78px">§18 검증</th><th>구성요소 코드</th><th>이름</th><th style="width:46px">단가행</th><th>처방(근거)</th></tr></thead><tbody>`
+      + orphans.map(o=>{ const cl=o._class||"", clc=CLS_COLOR[cl]||"#9ca3af", cll=CLS_LABEL[cl]||"미분류";
+          const dv=o._design||"", dvc=DES_COLOR[dv]||"#e5e7eb", dvl=DES_LABEL[dv]||"";
+          const dchip = dv ? `<span class="wb-pill" style="background:${dvc}">${esc(dvl)}</span>` : `<span style="color:#9ca3af;font-size:10px">-</span>`;
+          return `<tr><td><span class="wb-pill" style="background:${clc}">${esc(cll)}</span></td><td>${dchip}</td>`
+          + `<td class="code">${esc(o.comp_cd)}<div style="color:#9ca3af">${esc(o.use_dims)}</div></td>`
+          + `<td>${esc(o.comp_nm)}</td><td>${esc(o.price_rows)}행</td>`
+          + `<td style="font-size:11px">${esc(o._class_note||'')}</td></tr>`; }).join("")
+      + `</tbody></table>`;
+  h += `</div>`;
+
+  // ── 깨진 사슬(상품) ──
+  h += `<div class="wb-sec"><h3><span class="wb-pill" style="background:#dc2626">깨짐</span> 깨진 사슬 — 견적 0/단가행전무 상품 <span class="cnt">(${broken.length})</span></h3>`;
+  if(!broken.length) h += `<p class="wb-empty">✓ 깨진 사슬 없음</p>`;
+  else h += `<table class="wb"><thead><tr><th style="width:90px">코드</th><th>상품명</th><th style="width:110px">상품군</th><th style="width:48px">등급</th><th>견적0 원인(요약)</th></tr></thead><tbody>`
+      + broken.map(b=>`<tr><td class="code wb-link" onclick="gotoProduct('${b.prd_cd}')">${esc(b.prd_cd)}</td><td class="wb-link" onclick="gotoProduct('${b.prd_cd}')">${esc(b.상품명)}</td><td>${esc(b.상품군)}</td><td>${esc(b.등급)}</td><td style="font-size:11px">${(b.견적0원인||[]).map(esc).join('<br>')||'-'}</td></tr>`).join("")
+      + `</tbody></table>`;
+  h += `</div>`;
+
+  // ── 미배선 공식 (상품) ──
+  if(noFm.length){
+    h += `<div class="wb-sec"><h3><span class="wb-pill" style="background:#d97706">미배선</span> 공식 미바인딩 상품 <span class="cnt">(${noFm.length})</span></h3>`
+      + `<table class="wb"><thead><tr><th style="width:90px">코드</th><th>상품명</th><th style="width:120px">상품군</th><th style="width:48px">등급</th></tr></thead><tbody>`
+      + noFm.map(b=>`<tr><td class="code wb-link" onclick="gotoProduct('${b.prd_cd}')">${esc(b.prd_cd)}</td><td class="wb-link" onclick="gotoProduct('${b.prd_cd}')">${esc(b.상품명)}</td><td>${esc(b.상품군)}</td><td>${esc(b.등급)}</td></tr>`).join("")
+      + `</tbody></table></div>`;
+  }
+
+  // ── 빈 배선 / 삭제오염 ──
+  if(hasScan && (deadReal.length||deadTbd.length||deleted.length)){
+    h += `<div class="wb-sec"><h3><span class="wb-pill" style="background:#d97706">빈배선</span> 배선됐으나 단가행 0 <span class="cnt">(교정 ${deadReal.length} · 실무진BLOCKED ${deadTbd.length} · 삭제오염 ${deleted.length})</span></h3>`
+      + `<table class="wb"><thead><tr><th>가격공식(frm_cd)</th><th>구성요소(comp_cd)</th><th>이름</th><th style="width:90px">분류</th></tr></thead><tbody>`
+      + dead.map(d=>`<tr><td class="code">${esc(d.frm_cd)}</td><td class="code">${esc(d.comp_cd)}</td><td>${esc(d.comp_nm)}</td><td>${isTbd(d.comp_cd)?'<span class="wb-pill" style="background:#6b7280">실무진BLOCKED</span>':'<span class="wb-pill" style="background:#d97706">교정</span>'}</td></tr>`).join("")
+      + deleted.map(d=>`<tr><td class="code">${esc(d.frm_cd)}</td><td class="code">${esc(d.comp_cd)}</td><td>${esc(d.comp_nm||'')}</td><td><span class="wb-pill" style="background:#dc2626">삭제오염</span></td></tr>`).join("")
+      + `</tbody></table></div>`;
+  }
+  document.getElementById("wb-app").innerHTML = h;
+}
+function kpi(val,label,sub,cls){
+  return `<div class="wb-kpi ${cls||''}"><b>${esc(val)}</b><span>${esc(label)}</span>`
+    + `<div style="font-size:10px;color:#9ca3af;margin-top:1px">${esc(sub)}</div></div>`;
+}
+
 // ── 부트스트랩 ──
 function boot(){
-  renderSummary(); renderList();
+  renderSummary(); renderList(); renderWiringBoard();
   ["f-grade","f-paper"].forEach(id=>document.getElementById(id).addEventListener("change",renderList));
   ["f-widget","f-p0"].forEach(id=>document.getElementById(id).addEventListener("change",renderList));
   document.getElementById("rv-q").addEventListener("input",renderList);

@@ -1,0 +1,42 @@
+-- ============================================================================
+-- wiring-fix-dryrun.sql  (§27 배선 서브트랙 — 고아 23건 배선 제안)
+-- 생성: 2026-07-01 · 입력: wiring/wiring-status.json (snap_20260630_1743)
+-- 산출: dbm-price-arbiter (생성측·생성≠검증) · 동반문서: orphan-classification-260701.md
+--
+--  ★★ 활성 INSERT = 0행. REAL_GAP(순수 배선으로 해소) = 0건. ★★
+--
+-- 23 고아 전부가 "단가행만 적재·formula_components 미배선"이나, 어느 것도
+-- INSERT formula_components 한 줄로 안전하게 해소되지 않는다.
+--
+-- 근본 이유 (pricing.py evaluate_price 매칭 규칙):
+--   _match_entry(line 600) + _row_matches(line 94): 구성요소 단가행이 판별 비수량차원
+--   (print_opt_cd·mat_cd·proc_cd·opt_cd·siz_cd)을 하나도 안 가지면 = 와일드카드 = 항상 매칭
+--   → addtn_yn=Y로 무조건 합산. 따라서 use_dims=["min_qty"]인 고아를 형제 옆에 그냥
+--   배선하면 두 변형이 동시 합산 = 과대청구(silent-sum).
+--   참조: [[namecard-orphan-component-wiring-260630]] · [[booklet-cover-branch cover_mult×2 BLOCKED]]
+--
+-- 따라서 [HARD] 이중배선/시트경계 가드에 따라 본 트랙은 배선을 제안하지 않는다.
+-- 23건 라우팅(분류 상세 = orphan-classification-260701.md):
+--   NEEDS_FORMULA 15 → §18 huni-price-engine-design (판별차원/공식 설계 선행 후 배선)
+--   BLOCKED        4 → goods.asp + 실무진 확인 (호스트/선택수단/배타성 모호·임의생성 금지)
+--   LEGIT_UNUSED   4 → 배선 제외가 정답 (PET거치대=addon 경로 / 싸바리=superseded)
+--   REAL_GAP       0 → 본 파일 활성 INSERT 없음
+--
+-- ============================================================================
+-- 멱등 배선 INSERT 템플릿 (★실행 금지 — REAL_GAP 확정 시에만 활성화·인간 승인 후 §7)
+-- ----------------------------------------------------------------------------
+-- BEGIN;  -- (참고: 실 적용은 dbm-load-execution 트랜잭션 래핑 + 사후검증)
+--
+-- 형식: 판별차원이 갖춰진(co-wire 안전 입증된) comp만, NOT EXISTS 가드로 멱등 배선.
+-- INSERT INTO t_prc_formula_components (frm_cd, comp_cd, disp_seq, addtn_yn, reg_dt)
+-- SELECT '<frm_cd>', '<comp_cd>', <disp_seq>, 'Y', now()
+-- WHERE NOT EXISTS (
+--   SELECT 1 FROM t_prc_formula_components
+--   WHERE frm_cd = '<frm_cd>' AND comp_cd = '<comp_cd>'
+-- );
+-- ★전제: 해당 comp 단가행이 형제와 겹치지 않는 판별차원을 보유(silent-sum 0)임을
+--        live-snapshot로 입증한 뒤에만. 현 23건 중 충족 0건.
+--
+-- ROLLBACK;  -- dryrun = 항상 롤백. 실 COMMIT은 인간 승인 후 별도.
+-- ============================================================================
+SELECT '고아 배선 제안 0행 — 23건 전부 설계/확인 선행(NEEDS_FORMULA 15·BLOCKED 4·LEGIT_UNUSED 4). 상세: orphan-classification-260701.md' AS wiring_fix_summary;
