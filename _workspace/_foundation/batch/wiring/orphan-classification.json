@@ -117,16 +117,16 @@
    "note": "★별색 flat 교정 라이브 COMMIT 완료(견적0/저청구6,213→골든 14,500~19,000·PRF_DGP_A 과대소멸·재바인딩·클리어별색 OPT_000081 없음dflt·mat_cd 와일드)·고아 탈출. 위젯 단/양면+클리어 필수선택 §6 의존·qty≠100 §26"
   },
   "COMP_PCB_S1_30P": {
-   "class": "BLOCKED",
-   "target": "§23 셋트+§18 내지가격+§26 pansu",
-   "design": "REDESIGN(opt_cd 설계 폐기)",
-   "note": "★라이브 실호출 재진단(260701 세션): 094=셋트(is_set=True·내지구성원 PRD_000095). webadmin은 페이지를 page_rule{20,30,10}(TPrdProductPageRules)로 다룸→내 opt_cd 옵션그룹 설계는 page_rule과 이중입력 충돌→폐기. 셋트경로 simulate_set PRICE=0(내지095 frm=null·가격공식 부재 + pansu None→derive_inner_sheets 계산불가). 단품경로 PRF_PCB_FIXED=20p 고정(page_rule 무시·22,000). 진짜 결함=셋트 내지 가격공식+pansu→wiring 범위 밖. COMMIT 안 한 것 정당. 산출 design-pcb30p-fix=폐기(opt_cd 가정 오류)"
+   "class": "NEEDS_FORMULA",
+   "target": "§7 데이터 COMMIT(design-pcb30p-fix·셋트 해제 불요)",
+   "design": "DATA_GO(단품정합·셋트 완제품 공식 경로 입증)",
+   "note": "★3차 조사 종결(260701): 가격표 엽서북떡메=단품 완제품 단가표·라이브 단가행 verbatim 일치. ★evaluate_set_price(L920)가 셋트 완제품 공식(PRF_PCB_FIXED 통째)을 set_selections로 호출→simulate_set(set_sel={siz,print_opt})=22,000/23,000 가격표 일치 입증. 직전 simulate_set 0원=set_selections 미전달 내 호출오류(데이터 결함 아님). ★094 셋트 해제 불필요·사장님 셋트vs단품 결정 불요·내지095 가격공식/pansu 미사용(통째공식 경로). COMMIT 경로=design-pcb30p-fix 데이터만: 30P print_opt 충전(S1=POPT_000001)+20P/30P opt_cd(page) 충전+30P 배선→simulate_set 골든6/6 검증→§7 인간승인. 위젯계약=page를 set_selections.opt_cd 전송(siz·print_opt 이미 전송)"
   },
   "COMP_PCB_S2_30P": {
-   "class": "BLOCKED",
-   "target": "§23 셋트+§18 내지가격+§26 pansu",
-   "design": "REDESIGN(opt_cd 설계 폐기)",
-   "note": "★라이브 실호출 재진단: COMP_PCB_S1_30P 동형. 094 셋트 내지(095) 가격공식 부재+pansu 부재가 근본결함. opt_cd 단품 설계는 webadmin page_rule 셋트 메커니즘과 불일치→폐기. §23/§18/§26 라우팅"
+   "class": "NEEDS_FORMULA",
+   "target": "§7 데이터 COMMIT(design-pcb30p-fix·셋트 해제 불요)",
+   "design": "DATA_GO(단품정합·셋트 완제품 공식 경로 입증)",
+   "note": "★COMP_PCB_S1_30P 동형(양면 S2=POPT_000002). 셋트 완제품 공식 set_selections 통째계산 입증(양면 23,000). 데이터 COMMIT만(셋트 해제 불요)"
   },
   "COMP_BIND_CAL_WALL": {
    "class": "NEEDS_FORMULA",
