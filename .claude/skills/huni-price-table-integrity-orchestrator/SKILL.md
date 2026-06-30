@@ -11,7 +11,9 @@ description: >-
   위임). 트리거: '가격테이블 무결성', '적재 무결성 진단', '권위 적재 정밀 진단', '이 빠진 적재', '미적재 셀 진단',
   '차원 누락 검사', '권위 라이브 적재 대조', '가격격자 빈칸', 'sparse grid 진단', '무결성 하네스 실행/재실행/
   업데이트/보완', '특정 시트만 무결성 진단', '무결성 진단 다시', '가격테이블 배치 빌드', '매트릭스 결정론 diff',
-  '권위 스냅샷 비교', '토큰 절약 가격 분석', '시트 적재본 자동생성'. 가격공식 설계 자체는 §18, 전 상품 12축 종단 정합은
+  '권위 스냅샷 비교', '토큰 절약 가격 분석', '시트 적재본 자동생성', '차원 정합 진단', '차원 누락 진단',
+  'use_dims 정합', '돈 새는 차원', '옵션 차원 단가행 정합', '가격구성요소 차원 누락', '봉투제작 차원',
+  'dim conformance'. 가격공식 설계 자체는 §18, 전 상품 12축 종단 정합은
   §21, 표시명 중복은 §17, 라이브 정합 교정 실행은 §7 dbmap. 단순 질문은 직접 응답.
 ---
 
@@ -43,6 +45,14 @@ description: >-
 ## Phase 2: 라이브 적재 대조 (결정론 배치 1차 + AI 보강)
 **★결정론 배치 우선(토큰 0).** `hpti-matrix-batch-builder`(스킬 `hpti-matrix-batch-build`) — 권위 격자 CSV ↔ 라이브 스냅샷 CSV(`live-snapshot/latest/`)를 grid-diff 스크립트로 비교해 3종 결함(미적재·차원누락·불일치)+prc_typ 오타이핑+transpose를 **셀 단위 자동 검출**하고 결함보드·교정 적재본(권위 verbatim UPSERT+dryrun)을 산출. 시트 1개 파일럿→어댑터로 전 시트 전파. → `_batch/<sheet>-defect-board.csv`·`-load-dryrun.sql`·`scripts/`.
 **AI는 보강만.** `hpti-load-inspector` — 스크립트가 못 잡는 의미·예외(시트 구조 해석·차원 의미 확정·경계 케이스)만 판단(시트 팬아웃·라이브 읽기전용). ★전수 셀 대조는 배치 빌더가 한다(load-inspector가 매 셀 자연어 대조 = 토큰 폭발·금지). → `02_load/<sheet>-defects.csv`.
+
+## Phase 2b: 차원 정합 적대적 진단 (3자 조인·전 상품 전수)
+Phase 2가 "권위 셀 ↔ 라이브 셀"(시트 내부)을 본다면, Phase 2b는 **"가격구성요소가 손님 선택을 단가로 환원하는가"**(상품×component×차원)를 본다 — 셀이 다 적재돼도 차원이 어긋나면 손님 선택이 단가행에 닿지 못해 돈이 샌다.
+`hpti-dimension-conformance-inspector`(스킬 `hpti-dimension-conformance-audit`) — 결정론 `dim_conformance.py`(토큰0)로 **Face A(use_dims 선언) ↔ Face B(component_prices 충전) ↔ Face C(상품 옵션 선택수단+polymorphic ref_dim 환원)** 3자를 union 분담 흡수로 조인. 산출:
+- **MISSING**(손님 선택가능한데 어느 component에도 단가행 0=저청구/견적불가) · **UNDECLARED**(단가행은 차원 구분하는데 use_dims 미선언=silent 가산/무시).
+- 신뢰도 태깅: mat/siz/plt/bdl=HIGH(전담), proc/opt/print_opt=REVIEW(분담 잔여).
+- → `_batch/dim-conformance-fullscan-<date>.tsv` + HIGH 결함보드(재현쿼리·돈영향·dbmap 라우팅).
+★봉투제작처럼 사이즈에 못 넣는 종류(티켓/소/자켓/대봉투)를 옵션그룹으로 두고 `ref_dim_cd=OPT_REF_DIM.01`(사이즈) 환원하는 패턴은 정합으로 인정(옵션→차원 환원되면 use_dims에 opt_cd 없어도 OK). 검증 골든=봉투 MAT_169 누락·명함032 코팅 UNDECLARED(메모리 기존 결함 독립 재발견).
 
 ## Phase 3: codex 독립 2차
 `hpti-codex-verifier` — `hqv-codex-cross-verify` 재사용. 놓친 gap·false-positive 발굴·reconcile. codex 주장=가설. → `03_codex/<sheet>-reconcile.md`.
