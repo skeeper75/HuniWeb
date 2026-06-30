@@ -1,0 +1,11 @@
+scope,blocked_id,target,reason,golden_impact,routing_track,human_decision
+note,RESOLVED-069-070-COVER-REUSE,PRF_BOOK_COVER 표지공식,068에서 신설+COMMIT(라이브 실재·use_yn=Y·비목 S1+COAT_MATTE+PAPER 3개)→069/070 재사용·신규 공식 0,표지 88688 산정 가능(인쇄35000+코팅50000+용지3688)·068 동형,재사용(NO-OP 멱등),해소
+note,RESOLVED-069-INNER-MINT,무선책자-내지 PRD_000289,라이브 미존재(MAX=288)→mint(prd_typ.02·068 내지287 동형·069 USAGE.02 내지6종 verbatim)·PRF_DGP_INNER 재사용,내지 page파생 가산 가능(해소),본 069 SQL 위상1~3,게이트 GO 후 적재
+note,RESOLVED-069-COVER-MINT,무선책자-표지 PRD_000290,라이브 미존재→mint(068 표지288 동형·SIZ_000174 펼침+SIZ_000499 판형 pansu=1·USAGE.01 표지7종),표지 88688 평가 환원(해소),본 069 SQL 위상4~6,게이트 GO 후 적재
+note,RESOLVED-070-INNER-MINT,PUR책자-내지 PRD_000291,라이브 미존재→mint·PRF_DGP_INNER 재사용·069 권위 자재 verbatim,내지 가산 가능(해소),본 070 SQL 위상1~3,게이트 GO 후 적재
+note,RESOLVED-070-COVER-MINT,PUR책자-표지 PRD_000292,라이브 미존재→mint·068/069 동형,표지 88688 평가(해소),본 070 SQL 위상4~6,게이트 GO 후 적재
+note,NA-069-070-MUSEON-PUR-PARENT,069 PRF_BIND_MUSEON·070 PRF_BIND_PUR,제본 부모공식 이미 라이브 바인딩(MUSEON min100=500·PUR min100=2000)·재바인딩 불요,제본비 정확(069 50000·070 200000),NO-OP 멱등 재확인,해소
+member,BLOCKED-MAT070-LINK,070 완제품(PRD_000070) 자재 link 0행,069는 USAGE.01 표지7종+USAGE.02 내지6종 보유·070은 완제품 자재 0행(라이브 실측·del 무관)·표지/내지 자재는 member(291/292)에 069 권위 verbatim 충전(견적 정확),견적 미관여(member 자재로 88688/내지 정확 산정)·완제품 link 부재는 운영자 노출만 영향,dbmap/basecode link(선택 정합),인간 승인 후 dbmap(선택·견적 무영향)
+note,C-TRACK-ENGINE-DBLPANSU,내지289/291 이중÷pansu(price_views.py:1707),전 책자 공통 코드결함(068/072/077/082 동형)·내지비 과소 가능성·1회 교정이 전 책자 해소,내지비 환산 오차(표지/제본 무영향·골든 페이지 환산 시 입력값 우회 명시),개발팀 C트랙(webadmin 코드),개발팀
+note,NA-FOIL-VARIANT,PRF_BIND_MUSEON_FOIL·PRF_BIND_PUR_FOIL,박 후가공 옵션 변종(박 미선택 기본가)·본체 동작화 불요·박류 §18 별 트랙,없음(본체 골든 무영향),박류 §18,건드리지 않음
+note,NA-COVERMULT-X2,069/070 cover_mult ×2,069 무선=PROC_000019·070 PUR=PROC_000020 둘 다 책등 있음=펼침 cover_mult=1이라 ×배수 자체 없음·표지 member.qty=copies×1=copies,없음(068 동형·×1 즉시 정확),해당없음,071/082(×2) BLOCKED 무관

@@ -316,7 +316,7 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 **산출물 루트:** `_workspace/huni-set-product/` (01_authority·02_reference·03_design·04_codex·05_gate·06_load·_meta). 6인 팀(`hsp-authority-curator`∥`hsp-domain-researcher` 기준점 팬아웃 → `hsp-set-designer` 설계 → `hsp-codex-verifier` codex 독립 2차 → `hsp-set-gate` S1~S7 게이트(evaluate_set_price 재계산·DRY-RUN) → `hsp-load-executor` 승인 후 안전 적재(백업·복합PK 멱등·사후검증)) + 5 스킬(+ `dbm-load-execution`·`hqv-codex-cross-verify`·`hpe-competitor-benchmark`·`rpm-live-reverse` 재사용). 생성≠검증·codex 주장=가설·search-before-mint(반제품 신규 mint 금지·미등록은 BLOCKED→dbmap 위임)·라이브 읽기전용(적재 Phase 5만 인간 승인 후 COMMIT)·파일럿(책자류·엽서북·떡메) 완주→동형 전파. 자격증명 `.env.local RAILWAY_DB_*`.
 
-**변경이력:** 최신: 2026-07-01 **셋트 동작화 라이브 COMMIT 3건**(077 레더 0→51,146 / 082 링 0→44,123 / 068 중철 저청구→158,688·표지 동작 첫 소프트커버)·동형 패턴(동작하는 072 권위대조→재사용+mint→PRICE≠0)·하드커버=COVERBIND 통합+내지 mint(077 재사용/082 PRF_HC_TWINRING_SET 신설·무선재사용=S8오염)·★소프트커버=분해형이라 표지 3비목 PRF_BOOK_COVER 신설+표지 member 분리(완제품 판형≠표지단가행 SIZ_000499 NO_MATCH→member필연·fn_calc_pansu=1·의존순서 가격공식 먼저)·★S8 proc_cd 격리·레더+3,900/링·트윈링 ×2 BLOCKED(엔진C트랙)·전파대기 088·069/070(PRF_BOOK_COVER 재사용)·071 BLOCKED → `_workspace/huni-set-product/HANDOFF.md`·[[leather-hardcover-077-live-commit-260701]]. 직전: 2026-06-29(6세션) 상품별 구성요소 경계+게이트 S8·셋트 미구성4(068~071) 설계
+**변경이력:** 최신: 2026-07-01 **셋트 동작화 라이브 COMMIT 5건**(077 레더 0→51,146 / 082 링 0→44,123 / 068 중철→158,688 / 069 무선→138,688 / 070 PUR→288,688)·동형 패턴(동작하는 072 권위대조→재사용+mint→PRICE≠0)·하드커버=COVERBIND 통합+내지 mint(077 재사용/082 PRF_HC_TWINRING_SET 신설·무선재사용=S8오염)·★소프트커버=분해형이라 표지 3비목 PRF_BOOK_COVER 신설+표지 member 분리(완제품 판형≠표지단가행 SIZ_000499 NO_MATCH→member필연·fn_calc_pansu=1·068 공식신설→069/070 공식 재사용)·★S8 proc_cd 격리(MUSEON019/PUR020 단독)·레더/링/트윈링 ×2 BLOCKED(엔진C트랙)·071만 잔존·088 미착수 → `_workspace/huni-set-product/HANDOFF.md`·[[leather-hardcover-077-live-commit-260701]]. 직전: 2026-06-29(6세션) 상품별 구성요소 경계+게이트 S8·셋트 미구성4(068~071) 설계
 
 ---
 
@@ -358,9 +358,11 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 **목표:** 흩어진 8개 가격 하네스를 의존 순서대로 엮어, 한 상품군이 **"제대로된 가격값"**(전 사이즈·옵션이 권위대로 정확 계산)에 도달할 때까지 구동하는 종단 파이프라인. ★새 분석 하네스가 아니라 **수렴 실행 조율자**(SOT "새 하네스 금지·기존으로 수렴 실행" 정합·"분석 과잉 vs 적재 부족" 해소). 순서[HARD]=① 토대 무결성(§26) → ② 무결성 결함 교정 적재(§7·인간 승인) → ③ 공식·구성요소 설계(§18) → ④ 설계분 적재(§7·인간 승인) → ⑤ 검증(§21 전수+§13/§15 골든 재계산) → NO-GO면 해당 단계 라우팅 루프. 진척판 RTM(`_workspace/_foundation/price-pipeline-rtm.csv`)·실 COMMIT 인간 승인·코드버그=개발팀 C트랙.
 
-**트리거:** "가격 종단 파이프라인", "상품군 가격 제대로", "가격 마스터 오케스트레이터", "상품군 가격 종단 완주", "정확한 가격값까지", "전 상품 가격 정합 완주", "가격 종단 실행/재실행/이어서", "특정 상품군 가격 종단" 등 본 요청 시 `huni-price-master-orchestrator` 스킬을 사용. 단일 레이어 작업은 해당 하네스 직접(§26 무결성·§18 설계·§7 적재·§21 정합). 단순 질문은 직접 응답.
+**트리거:** "가격 종단 파이프라인", "상품군 가격 제대로", "가격 마스터 오케스트레이터", "상품군 가격 종단 완주", "정확한 가격값까지", "전 상품 가격 정합 완주", "가격 종단 실행/재실행/이어서", "특정 상품군 가격 종단", **"가격공식에 가격구성요소 연결/배선", "formula_components 배선", "고아 구성요소 연결", "배선 연결 서브트랙", "배선 진척 보드"** 등 본 요청 시 `huni-price-master-orchestrator` 스킬을 사용. 단일 레이어 작업은 해당 하네스 직접(§26 무결성·§18 설계·§7 적재·§21 정합). 단순 질문은 직접 응답.
 
-**변경이력:** 최신: 2026-06-30(8세션) **잔여 시트 종결 + 박류 §18 면적 설계 완주** — 라이브 COMMIT 3건(큐리어스화이트880·제본비3종 del_yn복원[제본74/74]·디지털흑백양면106[4도수완비]) + UNMAPPED 4시트(출력소재·커팅·스티커·명함) 정밀대조 gap-0 확정(파싱한계 false) + ★박류 §18 데이터 설계 GO(동판비+박가공비 면적→등급·7상품 본체합산·골든8/8·codex가 동판비 silent과금 적발→REV3·DB미적재·C트랙=면적→등급 엔진). ★합가 우선·setup comp도 proc_cd 게이트 필수. 다음=박류 실적재 승인+C트랙·디지털/제본 사장님 후속. 직전: 2026-06-29(7세션) 배치빌더+출력소재 종단. → `_workspace/_foundation/HANDOFF.md`·[[price-component-unify-vs-split-criterion-260630]]
+**★배선 연결 서브트랙(formula_components):** 가격에 영향 주는 가격구성요소를 가격공식에 배선(고아 단가행→공식 연결)하는 수렴 루프. 측도=`_foundation/batch/wiring_scan.py`(라이브 스냅샷 결정론 diff→배선 결함 4종: 고아·빈배선·삭제오염·미배선공식). 종료척도[HARD]=배선 결함 0+PRICE≠0·명세까지(실 COMMIT 인간 승인 후 §7). 진척판=`_foundation/batch/wiring/wiring-status.json`+대시보드 **배선 진척 보드 탭**(§29 `build_dashboard.py`).
+
+**변경이력:** 최신: 2026-07-01 **배선 연결 서브트랙 신설(formula_components)** — "가격에 영향 주는 가격구성요소를 가격공식에 배선"하는 수렴 루프를 §27에 추가(새 하네스 0·SOT 정합). `wiring_scan.py`가 라이브 스냅샷 3종 결정론 diff→배선 결함 31건 전수(고아23·빈배선8[대부분 *_TBD 실무진BLOCKED]·삭제오염0). 종료척도[사용자 확정]=배선 결함 0+PRICE≠0·명세까지. 루프=스캔→§13 탐지분류→§18 배선설계(시트 차원경계 SOT 오염 가드)→§7 적재→PRICE≠0 검증→재스캔. 대시보드(§29)에 **배선 진척 보드 탭** 추가(wiring-status.json 임베드·완성도52%·고아/깨진사슬/미배선공식 리스트). 직전: 2026-06-30(8세션) 잔여 시트 종결+박류 §18 면적 설계(동판비 silent과금 codex 적발). → `_workspace/_foundation/HANDOFF.md`·[[formula-components-wiring-subtrack-260701]]·[[price-component-unify-vs-split-criterion-260630]]
 
 ## 28. Harness: Huni-Launch-Scope (1차 런칭 개발범위 · Shopby 갭 · 개발방안 · 회원/프린트머니 마이그레이션)
 

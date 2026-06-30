@@ -4,6 +4,21 @@
 
 ---
 
+## 2026-07-01 — 069 무선·070 PUR 소프트커버 셋트 완전 동작화 COMMIT (저청구 → 138,688·288,688·068 동형 전파)
+
+068 중철에서 확립한 분해형 소프트커버 패턴(표지공식 PRF_BOOK_COVER + 표지 member 분리)을 069 무선·070 PUR에 전파. 둘 다 완전 동작화 COMMIT.
+
+- **068 대비 단순**: **신규 가격공식 0·신규 comp 0** — PRF_BOOK_COVER(068에서 신설)·PRF_DGP_INNER·PRF_BIND_MUSEON·PRF_BIND_PUR 전부 라이브 재사용. 068의 t_prc_* 선행 COMMIT 트랙 불요 → t_prd_* 단일 트랙.
+- **신규 mint**: 반제품 4(PRD_000289 069내지·290 069표지·291 070내지·292 070표지·prd_typ.02). MAX=288(068 표지)→289~292.
+- **라이브 COMMIT(인간 승인)**: 셋트행 각 2행(069·070)·반제품 4·차원·공식 바인딩(290/292→PRF_BOOK_COVER 재사용·289/291→PRF_DGP_INNER·부모 제본 NO-OP). 백업·undo·멱등·회귀 0(068/072/077/082 무손상).
+- **사후 evaluate_set_price**: 069=**138,688**(표지88,688 + 제본 MUSEON 500×100=50,000) / 070=**288,688**(표지88,688 + 제본 PUR 2000×100=200,000). 오차 0·단가 verbatim. 표지 member SIZ_000499 fn_calc_pansu=1.
+- **★S8 제본 격리 결정적**: COMP_BIND_MUSEON=PROC_000019 단독·COMP_BIND_PUR=PROC_000020 단독 → silent 다중매칭 0. PRF_BOOK_COVER 재사용이 069/070 표지 member(290/292) 전용·오염 0.
+- 내지 page_rule 24/300/2(068의 4/28/4와 다름·라이브 verbatim). cover_mult=1(책등 펼침)이라 071/082 ×2 무관.
+- **잔존 BLOCKED**: 071 트윈링(cover_mult ×2·엔진 미지원·C트랙)·088 레더링바인더·DBLPANSU(C트랙·표지/제본 무영향)·BLOCKED-MAT070-LINK(070 완제품 자재 link 0·견적 미관여·dbmap)·usage_cd 표시명 정합(dbmap·가격 무관).
+- 산출=`06_load/booklet-museon-069-load.sql`·`booklet-pur-070-load.sql`·`booklet-museon-pur-069-070-{apply,undo,backup,commit-log,exec-report}.*`·`05_gate/gate-verdict-booklet-museon-pur-069-070.md`·[[leather-hardcover-077-live-commit-260701]].
+
+---
+
 ## 2026-07-01 — 068 중철 소프트커버 셋트 완전 동작화 COMMIT (저청구 → 골든 158,688·표지 동작 첫 소프트커버)
 
 077/082(하드커버·통합 COVERBIND)와 달리 068=소프트커버(분해형)라 표지가 인쇄/코팅/용지 3비목으로 쪼개짐. 사용자 "표지까지 완전 동작화" 선택 → 표지를 member로 분리해 골든 **158,688** 완전 도달.
