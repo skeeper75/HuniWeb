@@ -38,10 +38,14 @@
 
 ## 3. 교정 명세 (DB 미적재 — 인간 승인 후 §18 설계→§7 적재/바인딩 위임)
 
-**A. 031 프리미엄명함 (견적0·돈크리티컬)** — 배선 + 등급매핑
-- PRF_NAMECARD_PREMIUM(+_FOIL) 공식 신설 → formula_components: COMP_NAMECARD_PREMIUM_S1_MGA/MGB·S2_MGA/MGB (+박은 기존 COMP_FOIL_* 재사용).
-- 031 product-formula 바인딩을 FIXED→PREMIUM로 교정.
-- ★등급 디스크리미네이터: PREMIUM 단가행은 mat_cd 아닌 등급(MGA/MGB)축 → 16 프리미엄용지를 권위 B02 A/B 그룹에 매핑하는 축(opt 또는 mat_grade) 설계 필요(§18).
+**A. 031 프리미엄명함 (견적0·돈크리티컬)** — ✅ **적재 완료(COMMIT 2026-06-30)**
+- 권위 출처 확정: 가격표 260527 B02/F10셀(등급 A 4500/5500·B 5000/6500·14용지)·상품마스터=종이 "*별도설정"(위임).
+- PREMIUM 단가행 재구축: grade-only 4행(use_dims=[min_qty]) → **mat_cd+print_opt 키 28행**(14용지×단/양면·등급가 baking)·use_dims=[mat_cd,print_opt_cd,min_qty].
+- PRF_NAMECARD_PREMIUM(+_FOIL 박분기) 신설 → 4 PREMIUM comp(+박은 COMP_FOIL_* 재사용) 배선.
+- 031 rebind: FIXED→PREMIUM(2026-06-01)·FIXED_FOIL→PREMIUM_FOIL(2026-07-01).
+- **권위무근거 2용지 논리삭제**: 앙상블210(MAT_099·기본자재→랑데뷰240 이전)·리브스디자인250(MAT_119) — 두 권위 어디에도 프리미엄 용지 없음(사용자 승인). 16→14용지.
+- **사후검증(시뮬)**: 등급A 4500/5500·등급B 5000/6500·200매 9000 전건 권위 일치·033/032 무회귀.
+- 실행=`namecard-premium-load-260630-COMMITTED.sql`·복원=`namecard-premium-load-260630-undo.sql`·백업=`namecard-premium-260630-backup-*.txt`.
 
 **B. 032 코팅명함 (저청구·돈크리티컬)** — ✅ **적재 완료(COMMIT 2026-06-30)**
 - COAT 단가행 print_opt 보정(S1→POPT_000001 단면·S2→POPT_000002 양면·NULL 더블카운트 차단).
