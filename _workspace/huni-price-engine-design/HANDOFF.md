@@ -12,6 +12,30 @@
 
 ## 다음 시작점
 
+### ★책자 표지 펼침/개별 분기 공식 설계 (§18·진행중·조건부 GO·다음 세션 최우선)
+
+**상태**: Phase2 설계(engine-designer)+Phase3 검증(validator E1~E7) 완료 = **조건부 GO**(단일 FAIL 없음·E4/E6 보정 후 GO). Phase5.5 codex 미실행.
+
+**다음 작업(순서)**:
+1. **codex 2차 교차**(hpe-codex-validator Phase5.5) — 설계 독립 재검증(codex-review.sh·codex 미가용 시 Claude단독 폴백).
+2. **designer 폐루프 보정 3건**:
+   - **D-CB-2 (Critical)**: 077 레더하드커버·082 하드커버링 = **부모공식 0행(미바인딩)** → 내지뿐 아니라 표지·제본 전액 미산정=**견적 0원 가능**. 072 동형 바인딩 + 내지 member mint(BLOCKED→dbmap·신규 공식 0). 골든을 "현행 0원 vs 정답" 양면 표기로 정정.
+   - **D-CB-3 (High)**: `cover_mult ×2`(트윈링071·하드커버링082 개별 표지) **현행 evaluate_price 미지원**(단일 qty 충돌·plate_qty는 ÷pansu지 ×배수 아님) → **표지를 cover_sheets qty member로 재설계(데이터)** vs price_views.py 코드트랙. 인간 결정 큐 **Q-CB-COVERMULT-ENGINE**.
+   - **D-CB-5 (Med)**: 골든 도수 칼라/흑백 라벨 명시.
+3. 재게이트(validator 2차) → arbiter 정립 → 인간 승인 큐(실 적재 dbmap·cover_mult 코드 개발팀).
+
+**검증으로 확정(건드리지 말 것)**:
+- 표지 분기 = `cover_mult ∈{1,2}` = **제본 proc_cd 책등여부 자동파생**(펼침×1: 중철068·무선069·PUR070·하드커버072 / 개별×2: 트윈링071·하드커버링082)·손님 직접선택 X. 표지단가=1매 verbatim·×N은 출력매수만(×2≠이중계상).
+- 골든 독립 재현 PASS: 068A=158,688·068B 양면 +85,000·071=164,665 (허용오차0).
+- 단가 verbatim·**도수축 정정: POPT_000001/002=칼라(CMYK) 단/양면(350/700)·POPT_000008/009=흑백 1도(200/400)**.
+- 부모공식 4비목(표지인쇄 print_opt + 표지코팅 coat_side + 표지용지 COMP_PAPER + 제본)·이중합산0.
+
+**표지/내지/면지 매트릭스(라이브 실측·확인 완료)**: 068~071 셋트미적재(설계만·부품8 mint 보류)·072/100 완전·**077/082 내지 구성원 누락**·088 빈바인더(정상)·094 면지없음(소프트).
+
+**산출물**: 설계=`03_design/booklet-cover-branch-design.md` · 검증=`04_validation/gate-verdict-booklet-cover-branch.md`·`recompute-log-booklet-cover-branch.md`. 입력 재사용=`engine-design-booklet.md`·`huni-set-product/03_design/booklet-068-071-design.md`·출력소재 `huni-dbmap/06_extract/output-material-composite-decode.md`·메모리 [[booklet-set-formula-principle-260629]].
+
+---
+
 **★디자인캘린더 GO 완료**(2026-06-22·11번째·최종 종단·Phase4 1차 CONDITIONAL-GO(E2)→보정→codex Phase5.5 D1/D2 돈크리티컬 적발→designer 폐루프→validator 2차 재게이트 E1~E7 전건 PASS → 박제·이력·CHANGELOG·메모리 갱신 완료). **inline 정찰가 BLOCKED·고정가형 완제 SKU**(7 inline 비정수 역산→정찰가 스냅샷·추측 INSERT 금지). **★11시트 전수 종단 완주**(디지털/스티커/책자/포토북/캘린더/디자인캘린더/실사/아크릴/문구/굿즈파우치/상품악세사리).
 
 **★이번 종단 특이점(생성≠검증 가치 입증)**: 앞 10종단(divergence 0)과 달리 codex가 **돈크리티컬 2건을 독립 적발**해 설계 강화 — D1(본체 정찰가 "qty 무관" 모델링이 엔진계약 `.01 단가형=unit×qty` 위반→저청구·GC-DCAL-9 44,000→80,000·신규 가드 G-DCAL-QTY)·D2(엽서 PRD_000110 editor_yn=N인데 라우팅키 editor_yn=Y→엽서 라우팅 누락). validator 1차가 설계 자체 골든 재유도만 하고 qty 의미 미도전한 간극을 codex가 메움→2차 재게이트 시정.
