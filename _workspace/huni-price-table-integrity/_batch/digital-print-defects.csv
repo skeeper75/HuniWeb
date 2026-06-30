@@ -1,2 +1,1 @@
 defect,key,auth_value,live_value,money_impact,repro
-RESOLVED,clr=흑백(이전 dim_missing),212셀(흑백 1도),라이브 적재됨 212/212(POPT_000008 단면1도·POPT_000009 양면1도),없음(가짜신호 정정),"8세션 흑백 신규 print_opt COMMIT 후 셀단위 재대조 954/954 verbatim 일치. 이전 dim_missing 은 grid_diff side 코드맵 stale(POPT_000008/009 미인지)→교정(note 1차) 후 소멸. 상세=digital-print-griddiff-summary.md"

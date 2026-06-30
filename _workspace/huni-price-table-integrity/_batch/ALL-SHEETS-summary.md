@@ -13,7 +13,7 @@
 | # | 시트 | 패밀리 | status | 권위셀 | 일치 | dim_missing | sparse | missing_cell | transpose | 불일치 | unmapped | 라우팅 |
 |---|------|--------|--------|-------|------|-------------|--------|--------------|-----------|--------|----------|--------|
 | 1 | 출력소재IMPORT | L1-단가(소재) | DIFFED | 79 | 49(62.0%) | — | — | 30 | — | — | — | 47셀 일치·32 specialty 용지 미적재(missing_cell) |
-| 2 | 디지털인쇄비 | L1-밴드 | DIFFED | 954 | 742(77.8%) | 1 | — | — | — | — | — | 흑백축=§18 설계 / 별색=일치 |
+| 2 | 디지털인쇄비 | L1-밴드 | DIFFED | 954 | 954(100.0%) | — | — | — | — | — | — | 흑백축=§18 설계 / 별색=일치 |
 | 3 | 코팅 | L1-밴드 | DIFFED | 184 | 184(100.0%) | — | — | — | — | — | — | 유광=★라이브 COMMIT 완료(해소됨) |
 | 4 | 접지옵션 | L1-밴드 | DIFFED | 336 | 336(100.0%) | — | — | — | — | — | — | 336셀 verbatim 일치 |
 | 5 | 인쇄후가공 | L1-밴드 | DIFFED | 117 | 117(100.0%) | — | — | — | — | — | — | 117셀 verbatim 일치(가변 공정키) |
@@ -54,7 +54,7 @@
 ## DIFFED 시트 무결성 판정
 
 - **출력소재IMPORT**: 권위 79셀 중 49셀 정확 일치(62.0%) · dim_missing 0 · sparse 0 · missing_cell 30 · transpose 0 · 불일치 0 · unmapped 0
-- **디지털인쇄비**: 권위 954셀 중 742셀 정확 일치(77.8%) · dim_missing 1 · sparse 0 · missing_cell 0 · transpose 0 · 불일치 0 · unmapped 0
+- **디지털인쇄비**: 권위 954셀 중 954셀 정확 일치(100.0%) · dim_missing 0 · sparse 0 · missing_cell 0 · transpose 0 · 불일치 0 · unmapped 0
 - **코팅**: 권위 184셀 중 184셀 정확 일치(100.0%) · dim_missing 0 · sparse 0 · missing_cell 0 · transpose 0 · 불일치 0 · unmapped 0
 - **접지옵션**: 권위 336셀 중 336셀 정확 일치(100.0%) · dim_missing 0 · sparse 0 · missing_cell 0 · transpose 0 · 불일치 0 · unmapped 0
 - **인쇄후가공**: 권위 117셀 중 117셀 정확 일치(100.0%) · dim_missing 0 · sparse 0 · missing_cell 0 · transpose 0 · 불일치 0 · unmapped 0
