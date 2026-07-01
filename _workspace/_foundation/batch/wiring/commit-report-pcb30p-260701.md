@@ -40,3 +40,8 @@
 
 ## 잔여 / C트랙
 - 시뮬레이터 opt_cd 드롭다운 dflt 방출(price_views.py:1360) = 개발팀 C트랙(선택). 데이터는 COMMIT 완료·위젯 계약으로 회귀가드.
+
+## ★webadmin 실화면 확인 (2026-07-01 추가·새 [HARD] directive 충족)
+- browse UI 콤보박스 불안정 → 시뮬레이터가 호출하는 실제 뷰 `price_simulate_set`를 인증세션 POST(엔진 실호출·UI 동일 경로).
+- 셋트 시뮬레이터 UI가 셋트공식 영역에 **옵션코드 20P/30P 드롭다운 노출** 확인(meta: siz_cd3·print_opt2·opt_cd2).
+- 실호출 결과: **30P부수2=23,000·30P부수4=39,600·20P부수2=22,000(회귀불변)** = 골든 일치. 셋트 UI가 페이지를 set_selections.opt_cd로 전달 입증.
