@@ -1,5 +1,15 @@
 # Huni-Set-Product (§23) — HANDOFF
 
+## ★2026-07-02 셋트상품 19개 전수 진단 완료 — 18 PRICE≠0(정상)·088만 결함
+- **전수 진단**(라이브 simulate-set 실호출·copies=100·독립 재현 검증): 19개 중 **18개 PRICE≠0(GO)·1개 결함(088)**. 산출=`05_gate/set-price-full-diagnosis-260702.md`·재현 스크립트 `_foundation/batch/{set_full_scan,set_fix3,gold_repro}.py`.
+- **088 레더링바인더 = 유일 진짜 결함(PRICE=0)**: 부모공식 바인딩 전무 + 구성원(표지+면지4) 전부 무공식 + **가격 낼 내지 member 부재**(082/077과 결정적 차이·빈 바인더). 데이터 dryrun만으로 교정 불가 — 실무진 제본방식(HOLD)+권위단가+cover_mult ×2 C트랙 확인 후 §23 SOP로 구성.
+- **094/097/100 = 오진단 정정·데이터 정상**: 부모 고정형 공식이 옵션차원(opt_cd·bdl_qty) 요구. 정확 선택 시 실증 **094=450,000(opt OPV_000491+siz003)·097=135,000(bdl_qty=50)·100=1,500,000(opt OPV_000484+siz269)**. 독립 재현 확인. 교정 불요.
+- **문구 172~181 = 전부 PRICE≠0**: 부모 PRF_STN_* 고정가(권/부)×부수·구성원 0기여 정상(부모 all-in). 교정 불요.
+- **★신규 C트랙 코드결함(개발팀)**: `price_views.py:1930-1933` `price_simulate_set`이 member selections에 siz_cd/mat_cd/print_opt_cd만 복사·**coat_side_cnt 드롭** → 셋트경로 표지 코팅비(100부 50,000) 누락(068/069/070). 단품경로 정상(88,688) vs 셋트경로 38,688. PRICE≠0은 유지·골든만 저평가. 명세=`_foundation/remediation/CODEBUG-set-coat-side-cnt-drop.md`. 미확인=실주문 위젯의 이 뷰 경유 여부.
+- **결론: 데이터로 교정할 결함 0**(18/19 이미 정상). 잔여 2건(088·coat 드롭)=실무진/개발팀 소관.
+
+---
+
 최종 갱신: 2026-07-01 · **셋트 동작화 라이브 COMMIT 5건**(077 레더 0→51,146·082 링 0→44,123·068 중철→158,688·069 무선→138,688·070 PUR→288,688). 잔존=071 트윈링(cover_mult ×2 엔진 BLOCKED·C트랙)·088 레더링바인더(미착수·082 동형 가능). **권위 = `_workspace/_foundation/`(price-formula-master·remediation).** 상세 누적 → `CHANGELOG.md`.
 
 > 직전(2026-06-27): 전 상품 가격공식 통합 마스터 + 가격만결손 51 분해 + 명함특수 4 COMMIT + 아크릴 코드버그.
