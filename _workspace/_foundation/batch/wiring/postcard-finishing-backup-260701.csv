@@ -1,0 +1,39 @@
+# postcard-finishing-backup-260701 — 프리미엄엽서(016)·스탠다드엽서(018) 오시/미싱 정합 스냅샷 (읽기전용·무변경)
+## SECTION A: option_items (ref_key1=parent proc) — 스캐너가 unpriced로 오탐한 참조
+prd_cd,opt_grp_nm,opt_nm,opt_cd,ref_dim_cd,ref_key1,dtl_opt,use_yn,del_yn
+prd_cd,opt_grp_nm,opt_nm,opt_cd,ref_dim_cd,ref_key1,coalesce,use_yn,del_yn
+PRD_000016,미싱,1줄,OPV-000010,OPT_REF_DIM.04,PROC_000030,,Y,N
+PRD_000016,미싱,2줄,OPV-000011,OPT_REF_DIM.04,PROC_000030,,Y,N
+PRD_000016,미싱,3줄,OPV-000012,OPT_REF_DIM.04,PROC_000030,,Y,N
+PRD_000016,오시,1줄,OPV-000007,OPT_REF_DIM.04,PROC_000029,,Y,N
+PRD_000016,오시,2줄,OPV-000008,OPT_REF_DIM.04,PROC_000029,,Y,N
+PRD_000016,오시,3줄,OPV-000009,OPT_REF_DIM.04,PROC_000029,,Y,N
+PRD_000016,후가공,오시,OPV_000042,OPT_REF_DIM.04,PROC_000029,,Y,N
+PRD_000016,후가공,미싱,OPV_000043,OPT_REF_DIM.04,PROC_000030,,Y,N
+PRD_000018,후가공,오시,OPV_000066,OPT_REF_DIM.04,PROC_000029,,Y,N
+PRD_000018,후가공,미싱,OPV_000067,OPT_REF_DIM.04,PROC_000030,,Y,N
+(10 rows)
+## SECTION B: proc 계층 (부모029/030 ← 자식090/086)
+proc_cd,proc_nm,upr_proc_cd,prcs_dtl_opt
+proc_cd,proc_nm,coalesce,coalesce
+PROC_000029,오시,,{"inputs": [{"key": "줄수", "max": 3, "min": 0, "type": "integer", "unit": "줄"}]}
+PROC_000030,미싱,,{"inputs": [{"key": "줄수", "max": 3, "min": 0, "type": "integer", "unit": "줄"}]}
+PROC_000086,미싱,PROC_000030,
+PROC_000090,오시,PROC_000029,
+(4 rows)
+## SECTION C: component_prices — 단가행 실재 (자식 proc 090/086·줄수×수량밴드) rowcount 요약
+comp_cd,proc_cd,dim_vals,n_bands,min_unit,max_unit
+comp_cd,proc_cd,dim_vals,count,min,max
+COMP_PP_CREASE_1L,PROC_000090,{"줄수": 1},10,5000.00,105000.00
+COMP_PP_CREASE_1L,PROC_000090,{"줄수": 2},10,6000.00,109000.00
+COMP_PP_CREASE_1L,PROC_000090,{"줄수": 3},10,7000.00,103000.00
+COMP_PP_PERF_1L,PROC_000086,{"줄수": 1},10,5000.00,105000.00
+COMP_PP_PERF_1L,PROC_000086,{"줄수": 2},10,6000.00,109000.00
+COMP_PP_PERF_1L,PROC_000086,{"줄수": 3},10,7000.00,103000.00
+(6 rows)
+## SECTION D: formula_components — PRF_DGP_A 배선 확인
+frm_cd,comp_cd,disp_seq,addtn_yn
+frm_cd,comp_cd,disp_seq,coalesce
+PRF_DGP_A,COMP_PP_CREASE_1L,4,Y
+PRF_DGP_A,COMP_PP_PERF_1L,5,Y
+(2 rows)

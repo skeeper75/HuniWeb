@@ -1,0 +1,46 @@
+# poster/banner 6상품 배선 대상 라이브 스냅샷 (읽기전용·2026-07-02 00:xx) — undo 참조용
+# 대상: PRD_000118 아트프린트포스터·124 린넨패브릭포스터·129 폼보드·136 PET배너·140 무광시트커팅·143 미러아크릴스티커
+# 이 파일은 dryrun 前 원상태. COMMIT 시 undo(poster-banner-undo.sql)로 복원 기준.
+
+## t_prd_product_option_groups (prd_cd,opt_grp_cd,opt_grp_nm,sel_typ_cd,mand_yn,min_sel_cnt,max_sel_cnt,use_yn,del_yn)
+PRD_000118,OPT_000005,코팅,SEL_TYPE.01,Y,0,1,Y,N
+PRD_000118,OPT-000043,소재,,Y,,,Y,N
+PRD_000124,OPT_000009,마감,SEL_TYPE.01,N,0,1,Y,N
+PRD_000129,OPT-000044,코팅,,N,,,Y,N
+PRD_000129,OPT-000045,보드칼라,,N,,,Y,N
+PRD_000136,OPT_000017,코팅,SEL_TYPE.01,N,0,1,Y,N
+PRD_000136,OPT_000018,가공,SEL_TYPE.01,Y,1,1,Y,N
+PRD_000136,OPT-000009,거치대,SEL_TYPE.01,Y,,,Y,N
+PRD_000140,OPT_000068,색상,SEL_TYPE.01,Y,1,1,Y,N
+PRD_000143,OPT-000046,칼라,,N,,,Y,N
+
+## t_prd_product_options (prd_cd,opt_grp_cd,opt_cd,opt_nm,dflt_yn,use_yn,del_yn) — 변경 대상만
+PRD_000118,OPT-000043,OPV-000089,인화지,N,Y,N
+PRD_000129,OPT-000045,OPV-000092,화이트보드 (5mm),N,Y,N
+PRD_000129,OPT-000045,OPV-000093,블랙보드 (5mm),N,Y,N
+
+## t_prc_formula_components (frm_cd,comp_cd,disp_seq,addtn_yn) — 대상 공식
+PRF_POSTER_FOAMBOARD,COMP_POSTER_FOAMBOARD_WHITE,1,Y
+PRF_POSTER_PET_BANNER,COMP_POSTER_PET_BANNER,1,Y
+PRF_POSTER_SHEETCUT_MATTE,COMP_POSTER_SHEETCUT_MATTE,1,Y
+# (COMP_POSTER_FOAMBOARD_BOARD·COMP_POSTEROPT_PET_BANNER_STAND_SEL 은 신설 전 = 부재)
+
+## t_prc_price_components (comp_cd|comp_nm|prc_typ_cd|use_dims|use_yn|del_yn) — 대상/신설관련
+COMP_POSTER_FOAMBOARD_BLACK|폼보드(블랙) 완제품가|PRICE_TYPE.01|["siz_cd"]|Y|N
+COMP_POSTER_FOAMBOARD_WHITE|폼보드(화이트) 완제품가|PRICE_TYPE.01|["siz_cd"]|Y|N
+COMP_POSTER_SHEETCUT_MATTE|무광시트커팅 완제품가|PRICE_TYPE.01|["siz_cd"]|Y|N
+COMP_POSTEROPT_PET_BANNER_STAND_IN|PET배너 실내용배너거치대 추가가격|PRICE_TYPE.01|[]|Y|N
+COMP_POSTEROPT_PET_BANNER_STAND_OUT_S1|PET배너 실외용배너거치대(단면용) 추가가격|PRICE_TYPE.01|[]|Y|N
+# COMP_POSTER_FOAMBOARD_BOARD = 부재(신설예정) · COMP_POSTEROPT_PET_BANNER_STAND_SEL = 부재(신설예정)
+
+## t_prc_component_prices (comp_cd|siz_cd|mat_cd|proc_cd|min_qty|unit_price|note) — 대상 컴포넌트
+COMP_POSTER_FOAMBOARD_BLACK|SIZ_000315|||8500.00|폼보드/블랙보드/A3 완제품가[출력+코팅+가공 포함가]
+COMP_POSTER_FOAMBOARD_BLACK|SIZ_000317|||14000.00|폼보드/블랙보드/A2 완제품가[출력+코팅+가공 포함가]
+COMP_POSTER_FOAMBOARD_WHITE|SIZ_000174|||6000.00|폼보드/화이트보드/A3 완제품가[출력+코팅+가공 포함가]
+COMP_POSTER_FOAMBOARD_WHITE|SIZ_000197|||12000.00|폼보드/화이트보드/A2 완제품가[출력+코팅+가공 포함가]
+COMP_POSTER_FOAMBOARD_WHITE|SIZ_000293|||20000.00|폼보드/화이트보드/A1 완제품가[출력+코팅+가공 포함가]
+COMP_POSTER_SHEETCUT_MATTE|SIZ_000172|||6000.00|시트커팅/무광(화이트/블랙)/A4 완제품가[시트커팅]
+COMP_POSTER_SHEETCUT_MATTE|SIZ_000174|||11000.00|시트커팅/무광(화이트/블랙)/A3 완제품가[시트커팅]
+COMP_POSTER_SHEETCUT_MATTE|SIZ_000197|||32000.00|시트커팅/무광(화이트/블랙)/A2 완제품가[시트커팅]
+COMP_POSTEROPT_PET_BANNER_STAND_IN|||1|7000.00|PET배너 실내용배너거치대 추가가격 (별도 add-on·★orphan 미배선)
+COMP_POSTEROPT_PET_BANNER_STAND_OUT_S1||||23000.00|PET배너 실외용배너거치대(단면용) 추가가격 (별도 add-on·★orphan 미배선)

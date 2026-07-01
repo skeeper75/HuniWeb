@@ -1,40 +1,26 @@
 {
  "summary": {
   "source": "snapshot",
-  "snap": "snap_20260701_2157",
-  "formulas": 104,
-  "wired_links": 237,
-  "components_total": 180,
-  "components_with_price": 176,
-  "components_wired": 134,
-  "orphan_comps": 5,
+  "snap": "snap_20260702_0042",
+  "formulas": 105,
+  "wired_links": 249,
+  "components_total": 182,
+  "components_with_price": 178,
+  "components_wired": 138,
+  "orphan_comps": 3,
   "legit_unused": 7,
   "dead_wires": 6,
   "deleted_wires": 1,
   "no_formula_products": 0,
-  "total_wiring_defects": 12,
-  "verdict": "NO-GO(결함 12)"
+  "total_wiring_defects": 10,
+  "verdict": "NO-GO(결함 10)"
  },
  "orphans": [
-  {
-   "comp_cd": "COMP_BIND_CAL_WALL",
-   "comp_nm": "제본비 벽걸이캘린더",
-   "price_rows": 24,
-   "prc_typ": ".01",
-   "use_dims": "[\"proc_cd\", \"min_qty\", \"proc_grp:PROC_000017\"]"
-  },
   {
    "comp_cd": "COMP_FOLD_CARD_3H",
    "comp_nm": "접지비 카드 3단",
    "price_rows": 48,
    "prc_typ": ".01",
-   "use_dims": "[\"min_qty\"]"
-  },
-  {
-   "comp_cd": "COMP_PHOTOCARD_BULK",
-   "comp_nm": "포토카드 완제품가 대량",
-   "price_rows": 50,
-   "prc_typ": ".02",
    "use_dims": "[\"min_qty\"]"
   },
   {
@@ -233,7 +219,7 @@
    "frm_cds": [
     "PRF_PHOTOCARD_NORMAL"
    ],
-   "wired": 1,
+   "wired": 2,
    "dead": 0,
    "deleted": 0,
    "status": "WIRED_OK"
@@ -299,7 +285,7 @@
     "PRF_NAMECARD_PREMIUM",
     "PRF_NAMECARD_PREMIUM_FOIL"
    ],
-   "wired": 11,
+   "wired": 17,
    "dead": 0,
    "deleted": 0,
    "status": "WIRED_OK"
@@ -724,14 +710,23 @@
   },
   "PRD_000108": {
    "frm_cds": [
-    "PRF_DGP_INNER"
+    "PRF_DGP_CAL_DESK"
    ],
-   "wired": 2,
+   "wired": 3,
    "dead": 0,
    "deleted": 0,
    "status": "WIRED_OK"
   },
   "PRD_000109": {
+   "frm_cds": [
+    "PRF_DGP_CAL_DESK"
+   ],
+   "wired": 3,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000110": {
    "frm_cds": [
     "PRF_DGP_INNER"
    ],
@@ -861,7 +856,7 @@
    "frm_cds": [
     "PRF_POSTER_FOAMBOARD"
    ],
-   "wired": 1,
+   "wired": 2,
    "dead": 0,
    "deleted": 0,
    "status": "WIRED_OK"
@@ -924,7 +919,7 @@
    "frm_cds": [
     "PRF_POSTER_PET_BANNER"
    ],
-   "wired": 1,
+   "wired": 2,
    "dead": 0,
    "deleted": 0,
    "status": "WIRED_OK"

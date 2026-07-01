@@ -1,0 +1,17 @@
+-- ============================================================================
+-- postcard-finishing-undo.sql  (2026-07-01)
+-- 대상: 프리미엄엽서(PRD_000016)·스탠다드엽서(PRD_000018) 오시/미싱 후가공.
+--
+-- ★UNDO 불요 = N/A.
+--   fix-dryrun 의 결론이 NO-OP(거짓결함·데이터 무변경)이므로 되돌릴 변경이 없다.
+--   fix-dryrun 은 UPDATE 없이 SELECT 어서션만 수행하고 ROLLBACK 한다.
+--
+--   만약 후속에서 (미권고) 재키 UPDATE(090→029 등)를 실수로 COMMIT 한 경우의
+--   원복 절차는 아래와 같다(현재는 실행 대상 없음 — 참고용):
+--     UPDATE t_prc_component_prices SET proc_cd='PROC_000090'
+--      WHERE comp_cd='COMP_PP_CREASE_1L' AND proc_cd='PROC_000029';
+--     UPDATE t_prc_component_prices SET proc_cd='PROC_000086'
+--      WHERE comp_cd='COMP_PP_PERF_1L'   AND proc_cd='PROC_000030';
+--   (백업 스냅샷 = postcard-finishing-backup-260701.csv SECTION C 로 검증)
+-- ============================================================================
+SELECT 'NO_UNDO_REQUIRED — fix is NO-OP (false positive)' AS status;

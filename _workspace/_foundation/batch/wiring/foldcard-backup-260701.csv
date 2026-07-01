@@ -1,0 +1,6 @@
+table,prd_cd,opt_cd,item_seq,ref_dim_cd,ref_key1,ref_key2,qty,use_yn,del_yn,dtl_opt,reg_dt,note
+# t_prd_product_option_items pre-fix snapshot for 접지카드 fix (027/029). Only OPV_000107 exists (del_yn=Y). Others have NO row.
+t_prd_product_option_items,PRD_000027,OPV_000107,1,OPT_REF_DIM.04,PROC_000065,,,Y,Y,,2026-07-01 15:07:06.736808,2단가로접지(default) - item exists but soft-deleted
+t_prd_product_option_items,PRD_000027,OPV_000108,1,,,,,,,,,ABSENT - no item row (2단세로접지 -> would-be PROC_000066)
+t_prd_product_option_items,PRD_000029,OPV_000135,1,,,,,,,,,ABSENT - no item row (3단가로접지 -> would-be PROC_000067)
+t_prd_product_option_items,PRD_000029,OPV_000136,1,,,,,,,,,ABSENT - no item row (3단세로접지 -> would-be PROC_000068)

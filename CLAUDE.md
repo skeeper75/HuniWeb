@@ -369,7 +369,7 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 **★배선 연결 서브트랙(formula_components):** 가격에 영향 주는 가격구성요소를 가격공식에 배선(고아 단가행→공식 연결)하는 수렴 루프. 측도=`_foundation/batch/wiring_scan.py`(라이브 스냅샷 결정론 diff→배선 결함 4종: 고아·빈배선·삭제오염·미배선공식). 종료척도[HARD]=배선 결함 0+PRICE≠0·명세까지(실 COMMIT 인간 승인 후 §7). 진척판=`_foundation/batch/wiring/wiring-status.json`+대시보드 **배선 진척 보드 탭**(§29 `build_dashboard.py`).
 
-**변경이력:** 최신: 2026-07-01(4세션) **셋트상품(책자9+문구9) 구성요소↔가격배선 종합 정합 감사+COMMIT 5건·배선결함 13→12** — 지비츠★171 COMMIT(156과 동형·use_yn Y 동시론칭)·문구류 9종 반제품 16개 신규 분해 COMMIT(가격불변)·책자류 판형 3건 교정 COMMIT(엽서북·떡메모지·포토북 내지=국4절)+webadmin 실화면 확인·072/077/082/088 자재오염 정리 COMMIT(1차)+옵션참조 자기교정 COMMIT(2차·면지색 무료 실측 확인)·[HARD 신규] 옵션-자재 참조는 반드시 같은 부모 상품에 존재해야 함(트리거 제약) 학습. 남은=068 FOIL 유무·088 제본방식·CONFIRM 4항목(폼보드/접지/캘린더/포토카드) 방향 확정·실행 대기·dead5(신상아크릴 무권위). → `_workspace/_foundation/batch/wiring/HANDOFF.md`·[[formula-components-wiring-subtrack-260701]]·[[set-product-bom-role-reassignment-260701]]
+**변경이력:** 최신: 2026-07-02(배선 서브트랙 5세션) **CONFIRM-QUEUE 4항목 방향정정 COMMIT + 22상품 실무진 편집 전수진단·교정 + 모서리 긴급버그(1000배 과대청구) 해소** — 포토카드/접지카드/캘린더(탁상형+엽서) 정정 COMMIT(벽걸이는 이중권위 BLOCKED 유지)·COMP_PP_CORNER_RIGHT prc_typ 오류로 최대 1000배 과대청구 발견·긴급교정(PRF_DGP_A/D 8+ 상품)·`batch/staff_edit_scan.py` 신설(선택방식공백/참조무단가/축배선결손 3종 결정론 스캔)로 22상품 5클러스터 병렬조사+COMMIT(선택방식17·스티커신규자재7·폼보드+무광시트커팅 파손복구·PET배너거치대)·스캐너 false-positive 2종(공정 부모자식 계층·opt_cd 경로) 발견해 코드 반영(v2)·잔존=CONFIRM 12건(실무진 답변 대기, 임의단가 생성 금지). → `_workspace/_foundation/batch/wiring/HANDOFF.md`·`_workspace/_foundation/CHANGELOG.md`
 
 ## 28. Harness: Huni-Launch-Scope (1차 런칭 개발범위 · Shopby 갭 · 개발방안 · 회원/프린트머니 마이그레이션)
 

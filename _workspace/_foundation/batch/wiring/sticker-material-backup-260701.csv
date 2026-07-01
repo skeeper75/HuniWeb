@@ -1,0 +1,16 @@
+kind,prd_cd,ref_key1_or_matcd,current_state,canonical_src,canonical_name,note
+# --- MINT 대상: 신규 mat_cd 에 COMP_STK_PRINT/TATTOO 단가행 신설(pre-state=0행, undo=mat_cd로 정확 삭제) ---
+mint,PRD_000052+058,MAT_000584,0rows,MAT_000153,유포스티커,유포스티커 80g ← 유포스티커(504행 verbatim 클론)
+mint,PRD_000052+058,MAT_000585,0rows,MAT_000155,무광코팅스티커,무광코팅스티커(아트지90g+무광라미) ← 무광코팅스티커(468행)
+mint,PRD_000052+058,MAT_000586,0rows,MAT_000156,유광코팅스티커,유광코팅스티커(아트지90g+유광라미) ← 유광코팅스티커(468행)
+mint,PRD_000052+058,MAT_000609,0rows,MAT_000242,미색스티커,미색스티커(모조80g) ← 미색스티커(468행)
+mint,PRD_000053,MAT_000371,0rows,MAT_000162,투명스티커,투명스티커(백색후지) ← 투명스티커(246행)
+mint,PRD_000053,MAT_000372,0rows,MAT_000162,투명스티커,투명스티커(투명후지) ← 투명스티커(246행)
+mint,PRD_000067,MAT_000594,0rows,MAT_000167,타투스티커,타투스티커 ← COMP_STK_TATTOO MAT_000167(333행)
+# --- CONFIRM(권위 미정·dryrun 제외): 가격원천 없음 ---
+confirm,PRD_000052+058,MAT_000611,0rows,NONE,아트스티커,아트스티커 90g=가격표260527/라이브 어디에도 아트스티커 단가행 없음(canonical 610도 무가격)→보스 단가 컨펌
+confirm,PRD_000055,MAT_000593,0rows,AMBIGUOUS,유포+무광쿨코팅,canonical 165(유포지+엠보코팅) 무가격·쿨코팅 프리미엄 모호(153유포 vs 155무광코팅)→컨펌
+# --- NO-ACTION: 커팅 proc = 비가격 선택수단(A4반칼=별도 siz_cd로 내재·use_dims에 proc_cd 없음·추가시 이중청구) ---
+noaction,PRD_000052+053,PROC_000054,반칼,BAKED_IN_SIZE,반칼,커팅=사이즈에 내재(SIZ_000520=A4반칼)·단가행 신설 금지
+noaction,PRD_000055,PROC_000053,완칼,BAKED_IN_SIZE,완칼,커팅=사이즈에 내재·단가행 신설 금지
+confirm,PRD_000053,PROC_000008,화이트인쇄,SPOT_WHITE,화이트인쇄,별색component 영역(자재 범위밖)→별도 검토

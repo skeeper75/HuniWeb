@@ -1,0 +1,34 @@
+# calendar-backup-260701 — 변경 대상 행 스냅샷 (읽기전용)
+## t_prd_product_price_formulas (108-112)
+prd_cd,frm_cd,apply_bgn_ymd,note
+prd_cd,frm_cd,apply_bgn_ymd,replace
+PRD_000108,PRF_DGP_INNER,2026-07-01,탁상형캘린더(220) -- 용지+인쇄 base 공식 배선(스탠드비는 권위 미확보로 보류) 260701
+PRD_000109,PRF_DGP_INNER,2026-07-01,미니탁상형캘린더 -- 용지+인쇄 base 공식 배선(스탠드비는 권위 미확보로 보류) 260701
+PRD_000111,PRF_DGP_CAL_WIDE,2026-07-01,국4절 벽걸이캘린더 -- 트윈링제본 공식 배선(112와 공용) 260701
+PRD_000112,PRF_DGP_CAL_WIDE,2026-07-01,3절 판형이관+트윈링제본 공식 신설 260701
+(4 rows)
+
+## t_prd_product_processes (108-112)
+prd_cd,proc_cd,mand_proc_yn,disp_seq,del_yn
+prd_cd,proc_cd,mand_proc_yn,disp_seq,del_yn
+PRD_000108,PROC_000004,Y,-1,N
+PRD_000108,PROC_000076,N,1,N
+PRD_000109,PROC_000004,Y,-1,N
+PRD_000109,PROC_000076,N,1,N
+PRD_000110,PROC_000079,N,1,N
+PRD_000111,PROC_000004,Y,-1,N
+PRD_000111,PROC_000021,N,1,N
+PRD_000111,PROC_000079,N,1,N
+PRD_000112,PROC_000004,Y,-1,N
+PRD_000112,PROC_000021,N,1,N
+(10 rows)
+
+## t_prc_formula_components (PRF_DGP_INNER, PRF_DGP_CAL_WIDE)
+frm_cd,comp_cd,disp_seq,addtn_yn
+frm_cd,comp_cd,disp_seq,addtn_yn
+PRF_DGP_CAL_WIDE,COMP_PRINT_DIGITAL_S1,0,Y
+PRF_DGP_CAL_WIDE,COMP_PAPER,1,Y
+PRF_DGP_CAL_WIDE,COMP_BIND_TWINRING,2,Y
+PRF_DGP_INNER,COMP_PRINT_DIGITAL_S1,1,Y
+PRF_DGP_INNER,COMP_PAPER,2,Y
+(5 rows)
