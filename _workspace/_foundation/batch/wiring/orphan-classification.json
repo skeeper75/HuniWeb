@@ -9,7 +9,7 @@
    "NEEDS_FORMULA": 19,
    "BLOCKED": 0,
    "LEGIT_UNUSED": 4,
-   "_note": "R10 가격표 재확인: 기존 BLOCKED 4(포토카드대량·완칼타공1H6·2H6·미러3T)가 가격표에서 호스트 식별됨→NEEDS_FORMULA 격상(BLOCKED 4→0). 잔존 사람 의존=권위충돌/이중과금/공식부재/미수록단가(스캐너 결함 아님·설계 입력 CONFIRM)."
+   "_note": "R10 가격표 재확인: 기존 BLOCKED 4(포토카드대량·완칼타공1H6·2H6·미러3T)가 가격표에서 호스트 식별됨→NEEDS_FORMULA 격상(BLOCKED 4→0). 잔존 사람 의존=권위충돌/이중과금/공식부재/미수록단가(스캐너 결함 아님·설계 입력 CONFIRM). | R11: 미러3T→LEGIT_UNUSED 재분류(소비상품0·순수고아·§18 설계 실측). 엽서북30p COMMIT(고아 탈출)."
   },
   "design_summary": {
    "COMMITTED": 8,
@@ -174,9 +174,9 @@
    "note": "★§13 분석 종결: 1H6 동형. 가격표41 '2구4,000(100장당+2,000)'·타공없음0=손님선택 addon. 공식 미배선이 정답=LEGIT_UNUSED. addon 작동은 §7"
   },
   "COMP_ACRYL_MIRROR3T": {
-   "class": "NEEDS_FORMULA",
-   "target": "§18(투명3T 동형 공식 신설)",
-   "note": "★§13 분석: 아크릴34 '미러아크릴3T(직접입력형) 전면5도 통용단가'(면적). 투명아크릴3T=COMP_ACRYL_CLEAR3T→PRF_CLR_ACRYL 정상배선(동형 템플릿). 호스트=거울류 상품 틴거울183/컴팩트184/카드185/사각손186/블랙187 — ★이들 가격공식 미바인딩(0건). 단순 배선 아님→§18 PRF_MIRROR_ACRYL 신설+거울류 바인딩+골든(예전사이트) 검증 선행. 미배선 유지(실제 결함). 미러아크릴스티커143은 별 comp(COMP_POSTER_ACRYLSTK_MIRROR)로 이미 배선=무관"
+   "class": "LEGIT_UNUSED",
+   "target": "통용단가 대기(소비 상품 미존재)",
+   "note": "★R11 정정(§18 미러아크릴 설계 실측): COMP_ACRYL_MIRROR3T=아크릴 B03 '미러아크릴3T(직접입력형) 통용단가'(자유치수 면적격자 81셀·라이브 verbatim). ★이를 소비하는 직접입력형 미러아크릴 완제품이 라이브 0건=순수 고아. 거울류183~187은 별개 '굿즈 고정가'(면적격자 아님·186/187 사이즈 격자초과→강제배선시 ERR_ABOVE_MAX). 강제 배선하면 '미배선공식'으로 유형만 이동(순감0)+오적재. 미배선이 정답(직접입력 미러아크릴 상품 생성 시 활성=CONFIRM). round9 addon/superseded 분리와 동형·결함 은닉 아님."
   },
   "COMP_POSTEROPT_PET_BANNER_STAND_IN": {
    "class": "LEGIT_UNUSED",

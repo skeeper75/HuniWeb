@@ -7,22 +7,15 @@
   "components_total": 179,
   "components_with_price": 175,
   "components_wired": 132,
-  "orphan_comps": 7,
-  "legit_unused": 6,
+  "orphan_comps": 6,
+  "legit_unused": 7,
   "dead_wires": 7,
   "deleted_wires": 1,
   "no_formula_products": 0,
-  "total_wiring_defects": 15,
-  "verdict": "NO-GO(결함 15)"
+  "total_wiring_defects": 14,
+  "verdict": "NO-GO(결함 14)"
  },
  "orphans": [
-  {
-   "comp_cd": "COMP_ACRYL_MIRROR3T",
-   "comp_nm": "미러아크릴3T 인쇄가공비",
-   "price_rows": 81,
-   "prc_typ": ".01",
-   "use_dims": "[\"siz_width\", \"siz_height\"]"
-  },
   {
    "comp_cd": "COMP_BIND_CAL_WALL",
    "comp_nm": "제본비 벽걸이캘린더",
@@ -67,6 +60,15 @@
   }
  ],
  "legit_unused": [
+  {
+   "comp_cd": "COMP_ACRYL_MIRROR3T",
+   "comp_nm": "미러아크릴3T 인쇄가공비",
+   "price_rows": 81,
+   "prc_typ": ".01",
+   "use_dims": "[\"siz_width\", \"siz_height\"]",
+   "legit_target": "통용단가 대기(소비 상품 미존재)",
+   "legit_note": "★R11 정정(§18 미러아크릴 설계 실측): COMP_ACRYL_MIRROR3T=아크릴 B03 '미러아크릴3T(직접입력형) 통용단가'(자유치수 면적격자 81셀·라이브 verbatim). ★이를 소비하는 직접입력형 미러아크릴 완제품이 라이브 0건=순수 고아. 거울류183~187은 별개 '굿즈 고정가'(면적격자 아님·186/187 사이즈 격자초과→강제배선시 ERR_ABOVE_MAX). 강제 배선하면 '미배선공식'으로 유형만 이동(순감0)+오적재. 미배선이 정답(직접입력 미러아크릴 상품 생성 시 활성=CONFIRM). round9 addon/superseded 분리와 동형·결함 은닉 아님."
+  },
   {
    "comp_cd": "COMP_BIND_SSABARI",
    "comp_nm": "제본비 싸바리바인더",
