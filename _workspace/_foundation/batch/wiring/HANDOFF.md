@@ -1,70 +1,46 @@
-# 배선 연결 서브트랙 (formula_components) HANDOFF — 2026-07-01
+# 배선 연결 서브트랙 + 셋트상품 구성요소 정합 HANDOFF — 2026-07-01(4세션)
 
-§27 가격 종단 마스터의 **배선 연결 서브트랙** — "가격에 영향 주는 가격구성요소를 가격공식에 배선"하는 수렴 루프.
-종료 척도[HARD·사용자]: **배선 결함 0 + PRICE≠0**. 명세까지(실 COMMIT 인간 승인). 상세 메모리=[[formula-components-wiring-subtrack-260701]].
+§27 배선 연결 서브트랙에서 시작해, 이번 세션은 **셋트상품(책자류+문구류) 구성요소↔가격배선 종합 정합 감사**로 자연스럽게 확장됐다.
+상세 메모리=[[formula-components-wiring-subtrack-260701]]·[[set-product-bom-role-reassignment-260701]](신규, 아래 참조).
 
-## 현재 상태 (2026-07-01 round14 기준)
-- **배선 결함 17 → 13** (엽서북30p COMMIT 고아2 17→15 + 미러3T LEGIT_UNUSED 재분류 15→14 + 지비츠156 COMMIT·placeholder정리 dead1 14→13). legit_unused=7.
-- 남은 **13 = 진짜고아 6 + dead 6(신상아크릴 *_TBD) + deleted 1(082 트윈링)**.
-- 스캐너: `wiring_scan.py`가 `orphan-classification.json` LEGIT_UNUSED를 별도 카운트(결함 은닉 아님).
+## 현재 상태 (round17 기준)
+- **wiring_scan.py 배선 결함 = 12**(세션 시작 13 → 12·orphan5/dead6/deleted1/legit_unused7). 유일 변동=6크리즈(COMP_FOLD_CARD_6CR)가 세션 도중 **사장님이 직접 webadmin에서** `PRD_000030`(지그재그엽서)에 `PRF_DGP_C_6CR`로 배선 완료(내가 한 작업 아님·확인만).
+- ★이번 세션 핵심은 **wiring_scan 지표 밖의 더 넓은 범위** — 책자류 9개+문구류 9개 총 18개 셋트상품의 "부모(그릇)는 완성형 속성만, 반제품(표지/내지/면지)은 각자 용도별 구성요소"라는 원칙 정합 감사와 교정.
 
 ## ★다음 시작점 (fresh 세션 여기부터)
-자율 진행 가능 배선 결함은 **전부 소진**. 남은 13은 모두 사장님 CONFIRM·무권위·타트랙 의존.
-1. **먼저 재스캔으로 현재값 확인**: `cd _workspace/_foundation/batch && bash ../live-snapshot/snapshot.sh && python3 wiring_scan.py --round N --note "..."` (기대 13·라이브 무변동 시).
-2. **사장님 CONFIRM 촉진** = 남은 고아 6 해소의 유일 경로 → `CONFIRM-QUEUE-260701.md` v2 5항목을 사장님 쉬운말로 정리·질의(AskUserQuestion). CONFIRM 받으면 해당 항목 §18/§7 설계·COMMIT.
-3. CONFIRM 없이 가능한 잔여 자율분 = **없음**(엽서북·미러·지비츠·코롯토 이번 세션 완결). dead 6은 무권위(실무진 단가), 082는 §23.
-4. ★[HARD·신규 directive] **라이브 COMMIT 전 webadmin 실화면 확인 필수** (별도 §26 세션이 CLAUDE.md §1에 추가·SOT=`HARNESS-DOMAIN-RULES-260701.md`). 가격시뮬레이터 실화면 or `price_simulate(_set)` 뷰 실호출로 PRICE≠0·골든 확인 후 COMMIT.
-
-### 이번 세션(round11~14) 처리분
-- **★엽서북30p PRD_000094 라이브 COMMIT 완료** — 30P 고아 2 comp 배선+opt_cd 페이지판별(OPT_000082·OPV_491/492)·골든6/6 PASS(30p 저청구 해소·20p 회귀0). 백엔드 3계층 검증(pricing.py:920·price_views.py:1921·1333-1368). undo=`pcb30p-undo.sql`·리포트=`commit-report-pcb30p-260701.md`.
-- **미러아크릴3T LEGIT_UNUSED 재분류** — COMP_ACRYL_MIRROR3T 소비 상품 0건(순수 고아·통용단가 대기). 강제 배선시 오적재(§18 실측). 라이브 무변동.
-- **코롯토(164)=이미 배선완료** 확인(재-mint 방지) — 활성화만 §7.
-- **★지비츠(156)=신규출시 상품 §18 재설계 COMMIT 완료** — 가공(투명200/스핀600) opt_cd 모델 + DSC_ACR_QTY 재사용·골든8/8 PASS·use_yn=N 유지(손님 미노출·런칭 시 §7 활성화). 고아 placeholder(ZIBITZ_TBD) 정리로 dead 탈출. 리포트=`commit-report-jibbitz156-260701.md`·undo=`jibbitz156-undo.sql`. 권위정정(규격5+비규격·사이즈 무관)=`jibbitz-authority-correction-260701.md`.
-- **186/187 거울 굿즈 고정가**=READY(설계 有·`design-mirror-acryl3t-260701.md`)·COMMIT 보류(사장님 CONFIRM). 183~185=§7 사이즈 등록 BLOCKED.
-
-## ★남은 13 결함 (전부 사장님/타트랙 의존)
-
-### A. 사장님 CONFIRM 필요 = 고아 6 (`CONFIRM-QUEUE-260701.md` v2)
-- ① 폼보드 블랙·화이트5mm **7,000 vs 6,000**(권위충돌) → 후 §7 product_sizes 315/317 + A1 등록(고아 COMP_POSTER_FOAMBOARD_BLACK·FOMEXBOARD_WHITE5MM)
-- ② 접지카드 3단/6크리즈 이중과금(고아 COMP_FOLD_CARD_3H·6CR)
-- ③ 벽걸이캘린더 가격방식(고아 COMP_BIND_CAL_WALL·공식 부재)
-- ⑤ 포토카드대량 세트/대량 배타성(고아 COMP_PHOTOCARD_BULK·호스트=명함포토카드81)
-
-### B. 무권위 = dead 6 (실무진 단가 CONFIRM ④)
-- 신상아크릴 무권위 *_TBD 6종: 지비츠★(171)·입체블럭·입체코롯토·포카코롯토·쉐이커·쉐이커코롯토. 공유 placeholder COMP_ACRYL_PENDING_TBD(단가/구성 확인필요). 가격표 미수록 → 실무진 단가 확보 전 BLOCKED(placeholder 정당).
-
-### C. 타 트랙 위임 = deleted 1
-- **082 트윈링**(PRF_HC_TWINRING_SET→COMP_BIND_HC_TWINRING 논리삭제 참조) → §23 셋트.
-
-### 재스캔
-- `python3 wiring_scan.py --round N --note "..."` (라이브 무변동 시 13 유지).
+자율 진행 가능한 잔여 항목:
+1. **068(중철책자) FOIL(박) 옵션 확인** — 069/070(무선책자·PUR책자)은 기본+박(FOIL) 공식이 둘 다 걸려있는데 068은 기본 공식만 있음. 중철책자가 원래 박 옵션을 안 파는 게 맞는지 사장님 확인 필요.
+2. **CONFIRM-QUEUE 잔여 dead 5종**(아크릴입체블럭·입체코롯토·포카코롯토·쉐이커·쉐이커코롯토) — 미출시 확정(이번 세션 결정) 상태 유지 중. 사장님이 실제 단가를 알려주시면 지비츠★171과 동일 패턴(§18 설계→골든→COMMIT)으로 처리.
+3. **088(레더 링바인더) 제본방식** — 여전히 실무진 보류(HOLD). 확정되면 082 동형 패턴 적용 가능(자재/옵션 정합은 이번 세션에 이미 완료).
+4. **CONFIRM-QUEUE 4항목(폼보드·접지카드·캘린더·포토카드) 방향은 확정됐으나 미실행** — 아래 "이번 세션 결정" 참조 후 §7/§18 설계·COMMIT 착수.
 
 ## 미해결 / 블로커
-- 남은 13 전부 사장님 CONFIRM(고아 6)·무권위 실무진 단가(dead 6)·§23(082 1)에 막힘. **자율 진행 가능분 0.**
-- 폼보드 권위충돌(7,000 vs 6,000·돈크리티컬)·캘린더 공식 부재·접지 이중과금·포토카드 배타성·신상아크릴 무권위 → 사장님 CONFIRM.
-- 186/187 거울 굿즈 고정가 설계 READY이나 COMMIT은 CONFIRM 대기(신규 굿즈 상품화 여부). 183~185=§7 사이즈 등록 BLOCKED.
+- 068 FOIL 유무·088 제본방식 확정만 사장님 답 대기. 그 외 자율 진행 불가 항목 없음(이번 세션에 문구9종+책자9종 전수 정합 완주).
+- dead 5종(아크릴 신상)은 가격 자체가 없어 실무진 단가 없이는 진행 불가(BLOCKED 정당).
 
 ## 이번 세션 결정 (relitigate 금지)
-- **★엽서북30p 셋트 opt_cd 페이지판별 = 라이브 실증 완료**(코드+실화면). `evaluate_set_price`(pricing.py:920)가 셋트 완제품 공식을 `set_selections`로 호출 → `_row_matches`가 opt_cd 매칭. price_views.py:1921 set_selections 키 화이트리스트 없이 통과. sim_meta(1333-1368)가 formula use_dims `opt_grp:OPT_000082` 스코프 수집→셋트 UI에 페이지 드롭다운(20P/30P) 노출. price_simulate_set 실호출=30P부수2 23,000·부수4 39,600·20P 22,000(회귀0). [[formula-components-wiring-subtrack-260701]] 갱신.
-- **★지비츠156=신규출시(단종 아님)·가공=opt_cd 옵션 모델**(공정코드 아님·이전 "공정 부재" 판정은 축 오해). 동형선례 COMP_ACRYL_BADGE/CLIP/KEYRING/MAGNET(`["opt_cd","min_qty","opt_grp:*"]`). 수량할인=`DSC_ACR_QTY` 재사용(권위 B04 일치·아크릴12상품 선례). 사이즈(규격5+비규격)는 가격 무관. 골든8/8·실화면(투명100=16,000·스핀100=48,000).
-- **★미러아크릴3T = LEGIT_UNUSED**(강제배선하면 오적재). COMP_ACRYL_MIRROR3T=직접입력 면적격자인데 소비상품 0(순수고아). 거울류186/187은 별개 굿즈 고정가(면적격자 아님·강제배선시 ERR_ABOVE_MAX). 직접입력 미러아크릴 상품 생성 시 활성=CONFIRM.
-- **★[HARD·신규 directive] 라이브 COMMIT 전 webadmin 실화면 확인 필수** — 별도 §26 세션이 CLAUDE.md §1 추가. DB dry-run만으로 COMMIT 금지. SOT=`_workspace/_foundation/HARNESS-DOMAIN-RULES-260701.md`(12규칙).
-- **★LEGIT_UNUSED 스캐너 분리** — 게이트가 "미배선이 정답"으로 판정한 comp(addon·superseded·순수고아)를 별도 카운트(결함 은닉 아님).
-- **★[HARD] 가격표 먼저·엔진 매칭=행 판별컬럼(`_row_matches` NON_QTY_DIMS)·고아 적발≠단순배선**(판별 없는 단가행=와일드 always-match→형제 배선=과대청구·대부분 §18 설계).
-- **★[HARD] 가격표 먼저** — CONFIRM 올리기 전 인쇄상품 가격표(260527) 전 시트(커팅타공·아크릴후가공·명함포토카드=횡단옵션/통용단가) 확인. "호스트 모름" 다수가 가격표에 명시.
-- **배선 서브트랙 = §27 신설**(새 하네스 0). 측도=`wiring_scan.py`(토큰0). 종료척도=배선 결함 0 + PRICE≠0.
+- **가격표(260527) 포스터/사인 시트가 상품마스터(260610) 실사시트보다 우선** — 폼보드 화이트 A3 정가=**7,000원**(라이브 기존 6,000원 → 교정 대상으로 확정, 단 이번 세션엔 미실행·다음 착수 시 우선순위 낮음으로 보류 목록에 남음).
+- **접지카드**: 2단/3단접지카드에 이미 존재하던 빈 "접지" 옵션칸을 채워 완성하는 방향으로 확정(카드전용 접지비 2H/3H/6CR 연결, 기존 리플렛용 접지비 이중과금 해소) — ★설계만 확정, 이번 세션엔 미실행(다음 착수 대상).
+- **캘린더**: 가격표(삼각대 포함가)가 권위, 상품마스터의 "+2,000원" 단순화 표기는 참고용. 매핑도 자연 해소(탁상형캘린더=220/130mm 사이즈옵션이지 별상품 아님, 엽서캘린더·캘린더봉투는 이 제본비 표 대상 아님) — ★설계만 확정, 미실행.
+- **포토카드**: 세트(20장)/대량제작 둘 다 손님이 고를 수 있게 — ★설계만 확정, 미실행.
+- **★지비츠★(171) 라이브 COMMIT 완료**: 156과 100% 동일 설계 재사용(PRF_ZIBITZ_ACRYL·opt_cd 가공옵션 OPT_000083/OPV_000493·494·비규격 15~35mm)·156도 함께 use_yn=N→Y 동시 론칭·골든 실화면 검증(투명100=16,000·스핀100=48,000).
+- **★문구류 9종(만년다이어리4·먼슬리플래너·스프링노트·스프링수첩·메모패드·중철노트) 반제품 분해 라이브 COMMIT**: 신규 반제품 16개 생성(표지9+면지2+내지5)·자재 부모→구성원 이관·가격은 "(가격포함)" 직접단가 그대로 유지(구조만 변경, 가격 COMMIT전후 9개 전부 동일 확인).
+- **★책자류 9개 판형(plate_sizes) 전수 감사 완료**: 6개(중철·무선·PUR·하드커버·레더하드커버·하드커버링) 정상, **3개 결함(엽서북·떡메모지·포토북) 라이브 COMMIT 교정**(내지에 국전지4절 SIZ_000499 등록·부모 잘못된 완제품사이즈 값 19건 논리삭제)·webadmin 실화면(상품뷰어) 확인 완료.
+- **★18개 셋트상품(책자9+문구9) 가격배선 전수 감사**: 088(레더링바인더)=가격공식 전무 확인(기존 HOLD와 일치, 신규 아님)·072/077/082 표지 반제품 무공식은 실제로는 부모의 "표지+제본 합산" 공식(COMP_HC_MUSEON_COVERBIND/COMP_BIND_HC_TWINRING)에 이미 포함돼 있어 가격 버그 아님(구조/생산정보 이슈일 뿐).
+- **★072/077/082/088 자재 오염 정리 라이브 COMMIT**: 면지 색상 옵션(4종) 슬롯을 채우려고 완전히 무관한 자재(아크릴투명·우드거치대·폼보드)를 끌어다 쓴 오염 발견·제거. 078/089(레더표지)의 잘못된 "몽블랑130g"(내지용 종이)도 "레더(화이트)"로 교체. 표지 자재(전용지/레더)는 부모→표지 반제품으로 이관.
+- **★★자기교정(2차 COMMIT)**: 1차 정리에서 "면지색" 옵션(화이트/블랙/그레이/인쇄)이 정확히 그 오염 자재들을 `ref_key1`로 참조하고 있었음을 뒤늦게 발견 — 시스템 트리거(`fn_chk_opt_item_ref`)는 옵션이 참조하는 자재가 **반드시 같은 부모 상품 코드에 등록**돼 있어야 함(반제품 이관 대상 아님, 부모 유지가 정답). 이미 존재하던 올바른 색상별 자재(MAT_000382~385: 화이트/블랙/그레이/인쇄면지)로 옵션 참조를 재연결하고 부모에 등록. **면지 색상 선택은 가격에 영향 없음(무료·제본비 포함) 실측 확인**(072/077=159,100원, 082=150,000원, 10개 색상 옵션 전부 동일).
+- **[HARD] 옵션-자재 참조 트리거 규칙(신규 학습)**: `t_prd_product_option_items.ref_dim_cd='OPT_REF_DIM.03'`(자재)일 때 `ref_key1`(mat_cd)+`ref_key2`(usage_cd)는 **반드시 같은 prd_cd의 `t_prd_product_materials`에 존재**해야 함(트리거 강제). 반제품으로 자재를 옮기기 전에 "이 자재를 참조하는 옵션이 부모에 있는가" 먼저 확인할 것 — 없으면 이관, 있으면 부모에 유지.
+- **088 제본방식은 여전히 보류 상태 유지**(자재/옵션 정합만 정리, 가격공식은 손대지 않음 — 기존 HOLD 존중).
 
-## 건드리지 말 것 (confirmed-good·보존·undo 있으나 되돌리지 말 것)
-- **엽서북30p PRD_000094 COMMIT** — 30P 배선+OPT_000082 페이지그룹·골든6/6·실화면 23,000/39,600/22,000. undo=`pcb30p-undo.sql`·backup=`pcb30p-usedims-backup-260701.tsv`.
-- **지비츠156 PRD_000156 COMMIT** — 가공 opt_cd(OPT_000083)+DSC_ACR_QTY·골든8/8·실화면 16,000/48,000·use_yn=N 유지. undo=`jibbitz156-undo.sql`·`jibbitz-tbd-cleanup-undo.sql`·backup=`jibbitz156-backup-260701.tsv`.
-- **박명함037 COMMIT** — 골든 3/3·undo=`namecard037-undo.sql`. **화이트명함040 COMMIT** — 골든 4/4·undo=`whitenamecard040-undo.sql`.
-- 하네스 파일: `wiring_scan.py`(LEGIT_UNUSED 분리)·`orphan-classification.json`·`CONFIRM-QUEUE-260701.md` v2.
+## 건드리지 말 것 (confirmed-good·되돌리지 말 것)
+- 지비츠★171/156 COMMIT, 문구류 16개 반제품 COMMIT, 책자류 판형 3건 COMMIT, 072/077/082/088 자재+옵션참조 COMMIT(1차+2차 자기교정 포함) — 전부 가격 불변 검증 완료.
+- 엽서북30p·지비츠156(1차) 등 이전 세션 COMMIT — 계속 보존.
 
 ## 산출물 인덱스 (batch/wiring/)
-- 스캐너·진척: `wiring_scan.py`·`wiring-status.json`·`wiring-rounds.csv`·`orphan-classification.json`
-- 엽서북: `diag-pcb30p-set-live-260701.md`·`design-pcb30p-fix-260701.md`·`pcb30p-fix.sql`·`pcb30p-undo.sql`·`commit-report-pcb30p-260701.md`
-- 지비츠: `design-jibbitz-full-260701.md`·`jibbitz-authority-correction-260701.md`·`jibbitz156-fix.sql`·`jibbitz156-undo.sql`·`jibbitz-tbd-cleanup-fix/undo.sql`·`commit-report-jibbitz156-260701.md`
-- 미러/코롯토: `design-mirror-acryl3t-260701.md`(186/187 READY·COMMIT 보류)·`design-corotto-jibbitz-260701.md`(코롯토 기배선 확인)
-- CONFIRM: `CONFIRM-QUEUE-260701.md` v2(사장님 쉬운말 5항목)
-- 대시보드: `_workspace/huni-product-readiness/05_gate/dashboard/dashboard.html`(배선 진척 보드 탭)
-- ★도메인 규칙 SOT(신규·별도 §26 세션): `_workspace/_foundation/HARNESS-DOMAIN-RULES-260701.md`(12규칙·라이브 COMMIT 전 실화면 필수 포함)
+- 스캐너·진척: `wiring_scan.py`·`wiring-status.json`·`wiring-rounds.csv`(round17까지)
+- 지비츠★171: `zibitz171/zibitz171-fix-commit.sql`·`zibitz171-undo.sql`
+- 문구류 반제품 분해: `stationery-bom/stationery-bom-fix-commit.sql`·`stationery-bom-undo.sql`
+- 072/077/082/088 자재 정리: `hardcover-material-cleanup/cleanup-fix-commit.sql`(1차)·`myunji-color-fix-commit.sql`(2차 자기교정)·각 undo.sql
+- 판형 3건: `plate-size-3fix/plate-size-3fix-commit.sql`·`plate-size-3fix-undo.sql`
+- 설계 문서: `_workspace/_foundation/PLATE-SIZE-COMPOSITION-엽서북-260701.md`(엽서북 사례 + 9개 책자류 전수 + 문구9종 발견 + 도메인/와우프레스/레드프린팅 리서치 종합 템플릿)
+- CONFIRM-QUEUE 잔여: `CONFIRM-QUEUE-260701.md` v2 — 폼보드/접지카드/캘린더/포토카드 4항목은 방향 확정(위 결정 참조)·실행 대기. 신상아크릴 3종만 여전히 실무진 단가 대기.
