@@ -28,6 +28,13 @@ are gated (load on demand) and the full original directive is archived at
 - [HARD] Secrets live ONLY in `.env.local` (chmod 600, gitignored). Never write
   credentials into `_workspace/` (git-tracked) or echo them to stdout.
 - [HARD] Prefer dedicated tools: Read over cat, Edit over sed, Grep over grep, Glob over find.
+- [HARD] **라이브 DB 적재 전 webadmin 실화면 확인 필수** — DB DRY-RUN만으로 COMMIT 금지.
+  적재 준비는 webadmin(product-viewer/가격시뮬레이터)에서 "제외 0·PRICE≠0"·판형 자동선택 등을
+  실화면으로 확인된 경우에만(gstack + `HUNI_ADMIN_*` 읽기 탐색). 전 적재 트랙(§7·§18·§23·§26) 공통.
+- [HARD] **가격·판형·적재·위젯 도메인 규칙 정본(SOT)** = `_workspace/_foundation/HARNESS-DOMAIN-RULES-260701.md`
+  (12규칙: 판걸이수·상품↔판형 `t_prd_product_plate_sizes`/`fn_best_plate`/`fn_calc_pansu`·종이류만 판형·
+  면지 무가격·공식vs가격테이블·상품마스터 권위·실사=포스터/사인·차원형vs수량단가·시뮬레이터 입증·
+  위젯 3소스+레드 역공학 2문서). 가격/위젯 하네스는 이 정본을 참조. relitigate 금지.
 - No time estimates ("2-3 days"). Use priority labels (High/Medium/Low) or phase ordering.
 
 ## 2. Agent Core Behaviors (always apply)
