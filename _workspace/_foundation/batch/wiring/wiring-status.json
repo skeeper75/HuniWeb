@@ -1,19 +1,19 @@
 {
  "summary": {
   "source": "snapshot",
-  "snap": "snap_20260701_0443",
+  "snap": "snap_20260701_1001",
   "formulas": 102,
-  "wired_links": 228,
+  "wired_links": 230,
   "components_total": 179,
   "components_with_price": 175,
-  "components_wired": 130,
-  "orphan_comps": 9,
+  "components_wired": 132,
+  "orphan_comps": 7,
   "legit_unused": 6,
   "dead_wires": 7,
   "deleted_wires": 1,
   "no_formula_products": 0,
-  "total_wiring_defects": 17,
-  "verdict": "NO-GO(결함 17)"
+  "total_wiring_defects": 15,
+  "verdict": "NO-GO(결함 15)"
  },
  "orphans": [
   {
@@ -43,20 +43,6 @@
    "price_rows": 48,
    "prc_typ": ".01",
    "use_dims": "[\"min_qty\"]"
-  },
-  {
-   "comp_cd": "COMP_PCB_S1_30P",
-   "comp_nm": "엽서북 완제품가 단면·30p",
-   "price_rows": 117,
-   "prc_typ": ".01",
-   "use_dims": "[\"siz_cd\", \"min_qty\"]"
-  },
-  {
-   "comp_cd": "COMP_PCB_S2_30P",
-   "comp_nm": "엽서북 완제품가 양면·30p",
-   "price_rows": 117,
-   "prc_typ": ".01",
-   "use_dims": "[\"siz_cd\", \"min_qty\"]"
   },
   {
    "comp_cd": "COMP_PHOTOCARD_BULK",
@@ -696,7 +682,7 @@
    "frm_cds": [
     "PRF_PCB_FIXED"
    ],
-   "wired": 2,
+   "wired": 4,
    "dead": 0,
    "deleted": 0,
    "status": "WIRED_OK"

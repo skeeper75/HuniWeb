@@ -5,3 +5,4 @@ round,snap,orphan,dead_wire,deleted_wire,total_defects,verdict,note
 4,snap_20260701_0421,15,7,1,23,NO-GO(결함 23),화이트명함040 별색 flat COMMIT 후 재스캔(박명함+화이트=8 comp 배선)
 9,snap_20260701_0443,11,7,1,19,NO-GO(결함 19),LEGIT_UNUSED 4 분리(게이트 미배선정답·false-positive 제거)·라이브 무변동
 10,snap_20260701_0443,9,7,1,17,NO-GO(결함 17),가격표 재확인+§13분석: 완칼타공1H6/2H6=addon(헤더택/벽걸이캘린더 옵션그룹0·PET거치대동형)→LEGIT_UNUSED. 미러3T=거울류 공식부재→§18설계후보
+11,snap_20260701_1001,7,7,1,15,NO-GO(결함 15),엽서북30p COMMIT(30P 2 comp 배선+opt_cd 페이지판별)·골든6/6 PASS
