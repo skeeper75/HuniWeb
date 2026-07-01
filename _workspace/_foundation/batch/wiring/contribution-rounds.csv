@@ -1,0 +1,5 @@
+round,snap,uncovered_HIGH,mismatch_HIGH,orphan_proc,verdict,note
+1,snap_20260701_0421,71,17,12,NO-GO(UNCOVERED-HIGH 71·MISMATCH-HIGH 17),F층 최초 전수 스캔
+2,snap_20260701_0443,71,10,12,NO-GO(UNCOVERED-HIGH 71·MISMATCH-HIGH 10),별색 오탐 conf 교정
+3,snap_20260701_0443,16,10,12,NO-GO(UNCOVERED-HIGH 16·MISMATCH-HIGH 10),이원화 짝(orphan 상관)만 HIGH로 정밀화
+4,snap_20260701_0443,8,10,12,NO-GO(UNCOVERED-HIGH 8·MISMATCH-HIGH 10),완제품가(.06) 가드 추가 — baked 공정 오탐 제거

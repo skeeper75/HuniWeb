@@ -4,6 +4,23 @@
 > 설계가(hpe-engine-designer)·검증가(hpe-validator)가 이것을 자(尺)로 쓴다.
 > 권위 순서[HARD]: ① 상품마스터(260610) > ② 인쇄상품 가격표(260527) > ③ 라이브 t_prc_*(현 상태 기준선) > ④ 역공학(후보).
 > 산출자: hpe-formula-cartographer · 라이브 실측 2026-06-22 읽기전용 SELECT · 추정 0 · 단가값 verbatim.
+> **★freshness 재확인 2026-07-01** (live-snapshot/latest): 구조 지도 유효 · 아래 §0-bis 델타 3건 반영(prd_typ·BIND comp 통합·여전히 BLOCKED).
+
+---
+
+## 0-bis. ★freshness 델타 (2026-07-01 재실측 vs 2026-06-22 본문)
+
+라이브 스냅샷(`_foundation/live-snapshot/latest/`, 2026-07-01)으로 재대조. **공식 구조·계산방식 판정은 전부 유효**, 아래 3건만 라이브 상태가 바뀜(설계 지도 자체 변경 없음).
+
+| 델타 | 2026-06-22 본문 | 2026-07-01 라이브 실측 | 영향 |
+|------|----------------|----------------------|------|
+| **prd_typ_cd** | `.04`(§1 표) | **PRD_TYPE.01 완제품**(5상품 전부·semi_role ∅) | §1 표 `.04` → `.01` 정정. SOT 완제품 분류와 정합(셋트 아님) |
+| **COMP_BIND_CAL 통합** | DESK220/DESK130/DESKMINI/WALL 4개 comp 각각 단가행(§2) | **3 desk comp(DESK220·DESK130·DESKMINI) del_yn=Y 논리삭제**(2026-06-17)·**전 24 bind-행이 COMP_BIND_CAL_WALL 1개로 통합**(proc_cd로 분기: PROC_000099 벽걸이/100 탁상220/101 탁상130/102 미니, 각 6 tier) | 제본비 comp 재사용 대상 = **COMP_BIND_CAL_WALL 단일**(proc_cd 차원으로 4 제본종류 흡수). designer는 §2 4-comp 대신 1-comp×proc_cd 차원 사용 |
+| **0바인딩·미배선** | product_price_formulas 0행·formula_components 0행(§2 WIRE 결함) | **여전히 0행**(108~112 공식 바인딩 0·CAL comp formula_components 0) | BLOCKED 그대로 — 설계·적재 미선행. **PRICE=0 지속** |
+
+★통합 후 COMP_BIND_CAL_WALL 24행 = {PROC_000099 벽걸이, PROC_000100 탁상220, PROC_000101 탁상130, PROC_000102 미니} × {min_qty 1/4/10/50/100/1000}. tier 단가 verbatim 예(PROC_000100 탁상220): `1→5000·4→4000·10→3000·50→2500·100→2300·1000→2000`. PROC_000099 벽걸이: `1→5000·4→4000·10→3000·50→2500·100→2000·1000→2000`.
+
+`확신도: 높음(2026-07-01 스냅샷 grep 실측 — t_prc_price_components del_yn·t_prc_component_prices proc_cd 집계·t_prd_product_price_formulas 0행)`
 
 ---
 

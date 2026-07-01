@@ -886,6 +886,34 @@ cartographer "팩/타투 .02 교정 완료" vs benchmark "B06 .01 오적재→.0
 
 ---
 
+## ★ 캘린더 부분 재설계 결정 (2026-07-01 freshness 델타 · PRICE=0 BLOCKED 닫기)
+
+> 2026-06-22 D-CAL-1~8 판정은 전부 유효. 라이브 스냅샷(2026-07-01) 재실측으로 **배선 경로 3건 보정 + 컨펌큐 1건 종결 + 돈크리티컬 가드 1건 신규**.
+
+### D-CAL-9. [Δ1·HARD] 제본비 comp = COMP_BIND_CAL_WALL 단일 통합 (Q-CAL-BIND-DELYN 종결) `확신도: 높음`
+**결정**: 전 캘린더 공식의 제본비 배선 = **COMP_BIND_CAL_WALL 하나**(proc_cd 99/100/101/102 판별차원). 본문 §2.1·D-CAL-6의 사이즈별 DESK220/130/MINI comp 배선은 **폐기**.
+**근거**: 라이브 실측 — DESK220/130/MINI **전부 del_yn='Y'(2026-06-17 논리삭제)**·WALL(del_yn='N')에 24 제본 단가행 통합(comp_price_id 8348~8389·전부 PRICE_TYPE.01·verbatim). D-CAL-8 (a)안(WALL 통합)이 **라이브에서 이미 종결** → Q-CAL-BIND-DELYN **CLOSED**(WALL 통합이 라이브 의도로 확정·DESK 부활 불요). 단가값 불변(verbatim)·가격 결과 불변.
+
+### D-CAL-10. [Δ2·HARD·돈크리티컬·신규] base 인쇄공정 PROC_000004 자동선택 = 인쇄비 발현 선행 (G-CAL-BASEPROC) `확신도: 높음`
+**결정**: 캘린더 5상품에 **base 디지털인쇄공정 PROC_000004 자동선택**(필수공정 product_processes 추가 또는 엔진 base_print_proc 주입)이 인쇄비 발현의 절대 선행. PRF_CAL_* 바인딩만으로는 인쇄비 silent 0.
+**근거**: COMP_PRINT_DIGITAL_S1 use_dims=`["proc_cd","plt_siz_cd","print_opt_cd","min_qty","proc_grp:PROC_000001"]`·단가행 proc_cd=PROC_000004. 캘린더 product_processes 바인딩=PROC_000076/079/021뿐(PROC_000004 미바인딩) → proc_cd 불매칭으로 인쇄비 항 skip. 디지털인쇄 18상품 인쇄비 영구0 결함([[digital-print-base-proc-missing-260701]])과 동형 함정. **2026-06-22 1차 설계가 못 본 신규 발견** — 적재 명세 #5에 포함. GC-CAL-13 입증.
+
+### D-CAL-11. [Δ3] add-on mint 차원 = opt_cd 채택 (PUNCH proc_cd 선례 검토 후 부결) `확신도: 높음`
+**결정**: COMP_CALOPT_STAND use_dims=**[opt_cd, min_qty]** 유지(D-CAL-4 불변). 라이브 신규 발견 선례 COMP_POSTEROPT_BANNER_*_PROC_PUNCH_*(타공 add-on·proc_cd 차원)도 유효하나 **부결**.
+**근거**: 캘린더가공은 우드거치대(비공정·부속물)·타공+끈이 혼재 → proc_cd로 쪼개면 우드거치대 표현 불가(무손실 실패). opt_cd(LINEN_FINISH 동형)가 우드거치대·타공·가공없음을 단일 그릇으로 무손실 표현. 트윈링제본(2000)은 add-on 아님 — COMP_BIND_CAL_WALL PROC_000099 제본비로 분기(G-CAL-TWINRING-DOUBLE 이중계상 금지).
+
+### 컨펌큐 갱신 (2026-07-01)
+| 큐 | 상태 | 비고 |
+|----|------|------|
+| Q-CAL-BIND-DELYN | **CLOSED** | WALL 통합 라이브 확정(D-CAL-9) |
+| Q-CAL-DESK130 | **완화** | 탁상형 220/130 = 동일 PRF_CAL_DESK220 공식·제본비만 proc_cd 100(220)/101(130) 분기(WALL 통합으로 자연 해소). 별 상품 분리 불요 |
+| **Q-CAL-BASEPROC**(신규) | **OPEN·돈크리티컬** | PROC_000004 자동선택 방식(product_processes 필수공정 추가 vs 엔진 base 주입) — §7 개발·dbm-price-arbiter |
+| Q-CAL-GOLDEN·Q-CAL-FIN·Q-CAL-PROC-INJECT·Q-CAL-PLATE·Q-CAL-PKG·Q-CAL-ENVELOPE | OPEN | 2026-06-22 그대로 |
+
+★ 부분 재설계 = **데이터 그릇/배선 보정만**(공식 골격·돈크리티컬 판정 불변). 신규 mint 변동 없음(공식 5 + comp 1 + opt_cd 채번). 실 적용 DB 미적재·인간 승인 후 dbmap 위임. ★base proc 자동선택(D-CAL-10)은 코드/공정 경로 결정 필요 = 개발 C트랙 협의(dbm-price-arbiter 라우팅).
+
+---
+
 # 포토북 종단 설계 결정 (10번째 종단 · 2026-06-22)
 
 > 포토북 = 반제품 세트(부품합산형 + 페이지 선형 증분). 책자(5번째 full 분해)와 갈리는 두 번째 본격 세트 종단. 라이브 읽기전용 SELECT 2026-06-22. 권위=상품마스터260610 `포토북(가격포함)` 시트(inline `가격_기본(24P)`+`가격_추가(2P)당`·row17 명문 `상품단가+페이지당단가적용`)+가격표260527(포토북 전용시트 부재·제본/디지털 보조) 절대.

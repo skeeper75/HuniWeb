@@ -2,17 +2,19 @@
 name: huni-widget-orchestrator
 description: >
   후니프린팅 인쇄 자동견적 위젯 구현 하네스 오케스트레이터. RedPrinting 위젯 역공학 보강(widget_monitor 테스트베드)
-  →동작 분석+베스트프랙티스 리서치→상세 명세→React-in-Shadow-DOM 구현→경계면 교차 QA→후니 시각재현 정합까지
-  7인 에이전트(reverse-engineer/runtime-analyst/researcher/architect/builder/qa/design-fidelity) 파이프라인.
-  트리거: 후니 위젯 구현, 인쇄 자동견적 위젯, huni-widget, 역공학 보강, 위젯 동작 분석, 위젯 명세, 위젯 빌드, 위젯 QA, 시각재현/디자인 정합, 상품 확대, 위젯 하네스 재실행, 특정 단계만 재실행. 단순 질문은 직접 응답.
+  →동작 분석+베스트프랙티스 리서치→상세 명세→React-in-Shadow-DOM 구현→경계면 교차 QA→후니 시각재현 정합, 그리고
+  ★라이브 DB→정규화 계약 매핑(컨버전 선행 ③')까지 8인 에이전트(reverse-engineer/runtime-analyst/researcher/
+  db-cartographer/architect/builder/qa/design-fidelity) 파이프라인. db-cartographer는 현재 라이브 DB(t_prd_*·t_prc_*·
+  CPQ·evaluate_price)의 모든 구성요소·옵션·가격·제약을 위젯 계약으로 매핑하고 상품군별 대표 상품 파일럿→동형 전파(§7/§13~§29 재사용).
+  트리거: 후니 위젯 구현, 인쇄 자동견적 위젯, huni-widget, 역공학 보강, 위젯 동작 분석, 위젯 명세, 위젯 빌드, 위젯 QA, 시각재현/디자인 정합, 상품 확대, 위젯 하네스 재실행, 특정 단계만 재실행, 위젯 설계, 라이브 DB 위젯 매핑, DB 엔티티 속성 위젯, 후니 어댑터 데이터, DB 컨버전, 상품군 대표 매핑, 동형 전파 매핑. 단순 질문은 직접 응답.
 license: Apache-2.0
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash, Agent, AskUserQuestion, TodoWrite
 metadata:
-  version: "1.3.0"
+  version: "1.4.0"
   category: "domain"
   status: "active"
-  updated: "2026-06-03"
-  tags: "huni, widget, redprinting, shadow-dom, edicus, pipeline, agent-team, reverse-engineering, code-parity, independent-verification, team-crossverify"
+  updated: "2026-07-01"
+  tags: "huni, widget, redprinting, shadow-dom, edicus, pipeline, agent-team, reverse-engineering, code-parity, independent-verification, team-crossverify, db-cartography, conversion, normalized-contract, isomorphism"
 ---
 
 # Huni Widget — 구현 하네스 오케스트레이터
@@ -31,6 +33,7 @@ metadata:
 | ④ 구현 | hw-builder (메인 트리) | 순차 | 03_spec → `04_build/` |
 | ⑤ QA | hw-qa | 점진적 | 04_build vs 03_spec/캡처/DESIGN → `05_qa/` |
 | ⑥ 시각재현 | hw-design-fidelity | 순차(빌드 후) | 04_build + 02_analysis(Red구조) + huni-design-system/DESIGN.md(후니스킨) → `06_fidelity/` |
+| ③' DB 매핑(컨버전 선행) | hw-db-cartographer | 순차 | 라이브 DB(t_prd_*·t_prc_*·CPQ·evaluate_price) + §7/§13~§29 재사용 → `03_spec/db-cartography/` |
 
 ## Phase 0: 컨텍스트 확인
 
@@ -58,6 +61,7 @@ test -f .env.local && echo ".env.local OK" || echo ".env.local MISSING"
 02_analysis/   동작 구조 (runtime-behavior, sequence-diagrams, state-machine, cascade-rules, event-contract)
 02_research/   베스트프랙티스 (bp-embed-widget, bp-react-shadow-dom, bp-pricing-ux, bp-editor-integration, research-summary)
 03_spec/       구현 명세 (architecture, component-tree, state-management, price-engine, shadow-dom-strategy, editor-integration, api-contract, bundle-strategy, build-plan)
+03_spec/db-cartography/  컨버전 선행 — 라이브 DB→정규화 계약 매핑 (db-contract-mapping, widget-db-entities, isomorphism-classes, <group>/pilot-<prd_cd>, evaluate-price-contract, gaps-and-recommendations) ★huni-db-mapping.md(STALE) supersede
 04_build/      위젯 구현 코드 (build-plan 지정 트리)
 05_qa/         검증 (qa-report, boundary-matrix, regression-checklist)
 06_fidelity/   시각재현 정합 (fidelity-report, skin-mapping, conflicts, captures/before·after)
@@ -117,6 +121,24 @@ test -f .env.local && echo ".env.local OK" || echo ".env.local MISSING"
 4. **hw-qa 비교 QA** — 경계면 교차 비교(캡처↔구현 round-trip, 어댑터↔계약, INV-3 git 증명, 가드). GO/NO-GO 판정. 정직성: 미검증·생략 항목은 은폐 말고 명시.
 
 매 스테이지 후 산출물은 커밋 병행하고 `HANDOFF.md`·CLAUDE.md 변경이력을 갱신한다. **커밋 전 비밀값 스캔**: `grep -rlE 'eyJ...\.eyJ...\.' _workspace/huni-widget/` 0건 확인(캡처 respBody JWT 누출 방지).
+
+## 컨버전 트랙 (③' — 라이브 DB → 정규화 계약, 위젯 설계의 후니 데이터 결합)
+
+위젯은 Red 어댑터로 구현·검증 완료(동등성 GO). 남은 단계는 **후니 컨버전** = Red 어댑터를 후니 라이브 DB 어댑터로 교체. 이 트랙이 그 선행 매핑이다.
+
+★**STALE 정정 [HARD]:** `03_spec/huni-db-mapping.md`(2026-06-02)는 "후니 가격·제약 미작성"을 전제로 작성됐다. **폐기.** 그 이후 §7·§13~§29가 라이브 DB에 가격(`t_prc_*` 공식 48·단가행 7,293·`evaluate_price` 동작)·CPQ 옵션·제약을 적재 완료 → 컨버전이 실제로 가능. 본 트랙은 STALE 문서가 아니라 **현재 라이브 DB를 권위**로 매핑하고 huni-db-mapping.md를 supersede 표기한다.
+
+**언제:** 사용자가 "위젯 설계"·"라이브 DB 위젯 매핑"·"DB 엔티티/속성 고려"·"후니 어댑터 데이터"·"DB 컨버전"·"상품군 대표 매핑"·"동형 전파" 등을 요청할 때. Phase 0이 `03_spec/db-cartography/` 존재 여부로 초기/부분 재실행 판정.
+
+**실행(서브 에이전트 순차, model opus):**
+1. **hw-db-cartographer** — huni-widget-db-cartography 스킬. 현재 라이브 DB(스냅샷 `_foundation/live-snapshot/latest/` 우선)의 상품 구성요소·옵션·가격·제약을 정규화 계약으로 매핑 + **상품군별 대표 상품 1개 종단 파일럿(evaluate_price 골든 PRICE≠0)** → 동형 전파. §13/§21/§29/§7 산출 재사용(재조사 금지). 산출 `03_spec/db-cartography/`.
+2. **hw-architect** — db-cartography 산출로 `data-adapter.md` 후니 arm + `huni-db-mapping.md`(supersede) 갱신. 계약 변경 필요 갭(B분류)만 최소 권고.
+3. **hw-builder (메인 트리)** — pilot fixture + 매핑 규칙으로 `createHuniAdapter` 데이터소스 교체. 위젯 코어·정규화 계약 0줄 diff(INV-3) 전제. 무손실 컨버전.
+4. **hw-qa** — evaluate_price 골든(PRICE≠0)·종단 e2e(옵션 선택→차원 환원→가격→주문조립) 독립 재검증. GO/NO-GO.
+
+**게이트:** 대표 상품 NormalizedProduct 완전 조립(빈 필드 0)·evaluate_price PRICE≠0 재현·componentType 14종 사상·갭 (A)어댑터흡수/(B)계약변경/(C)DB교정 분류·(C)는 §7/§18/§26 라우팅(인간 승인). **가격 서버 권위** — 위젯은 evaluate_price 불투명 결과만, `t_prc_*` 공식 포팅 금지. **PRICE=0=결함 신호**([[huni-widget-red-price-never-zero]]).
+
+**동형 전파:** §29 복잡도 클래스(고정가by-siz·면적입력·셋트조립·옵션캐스케이드·addon템플릿) 재사용. 대표 1개 종단 완주 → 동형 입증 후 매핑 규칙만 전파(전수 재조립 금지). 동형 깨지면 새 클래스 분리.
 
 ## 코드 레벨 구조 정합 검증축 (S0~S3 — 캡처 표본을 넘어선 권위)
 

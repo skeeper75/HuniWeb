@@ -1,6 +1,61 @@
 # engine-design-calendar.md — 캘린더 가격엔진 설계 (완제품·원자합산형)
 
-> **핵심 설계가(hpe-engine-designer) 산출 — 캘린더 종단(9번째·디지털[원자합산+고정가]·아크릴[면적]·실사현수막[면적+거치]·문구[고정가+매트릭스]·책자[부품합산세트]·스티커[이산siz단가형+세트]·상품악세사리[inline고정가] 다음).**
+---
+
+## ★ 2026-07-01 부분 재설계 (freshness 델타 반영 · PRICE=0 BLOCKED 닫기)
+
+> 본문(아래 §0~§8)은 2026-06-22 1차 설계 — **공식 구조·계산방식·돈크리티컬 가드 판정은 전부 유효**. 이번 재설계는 라이브 스냅샷(`_foundation/live-snapshot/latest/`, 2026-07-01) 재실측으로 **배선 경로 3건만 보정**한다(설계 골격 불변). 본문은 보존(이력)·이 절이 적재 권위.
+
+### Δ1 [HARD·핵심] 제본비 comp = **COMP_BIND_CAL_WALL 단일 통합**(DESK 3종 논리삭제 종결)
+
+라이브 실측(2026-07-01): `COMP_BIND_CAL_DESK220/DESK130/DESKMINI` **전부 del_yn='Y'(2026-06-17 논리삭제)**. **24 제본 단가행 전부가 `COMP_BIND_CAL_WALL`(del_yn='N'·활성) 하나로 통합** — proc_cd로 4 제본방식 분기. 본문 §3.5 (a)안(WALL 통합 단독)이 **라이브에서 이미 종결됨** → 본문 §2.1의 사이즈별 DESK comp 배선은 **폐기**, 전 캘린더 공식이 **단일 COMP_BIND_CAL_WALL** 배선(proc_cd 판별차원).
+
+라이브 verbatim(comp_price_id 8348~8389·24행·전부 PRICE_TYPE.01·`min_qty` tier):
+```
+COMP_BIND_CAL_WALL (단일 comp · use_dims=["proc_cd","min_qty","proc_grp:PROC_000017"]):
+  PROC_000099 벽걸이캘린더제본 : 1→5000 · 4→4000 · 10→3000 · 50→2500 · 100→2000 · 1000→2000
+  PROC_000100 탁상형캘린더제본(220): 1→5000 · 4→4000 · 10→3000 · 50→2500 · 100→2300 · 1000→2000
+  PROC_000101 탁상형캘린더제본(130): 1→5000 · 4→4000 · 10→3000 · 50→2500 · 100→2300 · 1000→2000
+  PROC_000102 탁상형캘린더제본(미니): 1→4500 · 4→3500 · 10→2500 · 50→2000 · 100→1800 · 1000→1600
+```
+→ **DB 단가행 무변경**(이미 적재·verbatim). 컨펌큐 Q-CAL-BIND-DELYN **종결**(WALL 통합이 라이브 의도로 확정·DESK 부활 불요).
+
+### Δ2 [HARD·신규 발견·돈크리티컬] 인쇄비 comp 발현 = **base print proc PROC_000004 자동선택 필수**
+
+`COMP_PRINT_DIGITAL_S1` use_dims = `["proc_cd","plt_siz_cd","print_opt_cd","min_qty","proc_grp:PROC_000001"]`. 단가행은 **base 인쇄공정 proc_cd=PROC_000004(CMYK 디지털)** 로 적재돼 있어, 엔진이 인쇄비를 합산하려면 selections에 `proc_cd=PROC_000004`(proc_grp:PROC_000001 그룹의 base 공정)가 주입돼야 발현된다. **그런데 캘린더 5상품의 `t_prd_product_processes` 바인딩은 PROC_000076(수축포장)·PROC_000079(타공)·PROC_000021(트윈링)뿐 — PROC_000004 미바인딩**.
+
+→ 디지털인쇄 18상품 인쇄비 영구0 결함([[digital-print-base-proc-missing-260701]])과 **동형 함정**. PRF_CAL_* 바인딩만으로는 인쇄비가 silent 0이 될 수 있다. **돈크리티컬 신규 가드 G-CAL-BASEPROC**: 캘린더 5상품에 **base 인쇄공정 PROC_000004 자동선택**(필수공정·product_processes 추가 또는 엔진 base_print_proc 주입)이 인쇄비 발현의 절대 선행. 적재 명세에 포함(§Δ-적재 요약).
+
+### Δ3 add-on mint 그릇 = **POSTEROPT PUNCH 선례 추가**(LINEN_FINISH와 병기)
+
+라이브 실재(2026-07-01): `COMP_POSTEROPT_BANNER_*_PROC_PUNCH_4/6/8`(타공 add-on·use_dims=`["proc_cd","min_qty","proc_grp:PROC_000079"]`·.01). **캘린더 타공+끈 add-on의 직계 동형 선례**(현수막 타공 그릇). 본문 §4의 LINEN_FINISH(opt_cd 차원) 선례에 더해 **PUNCH(proc_cd 차원) 선례도 유효** — 캘린더 가공 add-on을 opt_cd vs proc_cd 어느 차원으로 mint할지는 §Δ-mint 결정으로 확정.
+
+### Δ-mint 결정 (캘린더가공 add-on 신규 comp)
+
+| comp_cd(신규) | comp_nm(한글) | prc_typ | use_dims | 단가행(상품마스터 verbatim) | 선례 |
+|---------------|--------------|---------|----------|------------------------------|------|
+| **COMP_CALOPT_STAND** | 캘린더 거치/타공 가공비 | 단가형(.01) | **[opt_cd, min_qty]** | 우드거치대→4000 · 1구타공+끈→1000 · 2구타공+끈→1500 · 가공없음→0 | LINEN_FINISH(opt_cd) |
+
+★ **opt_cd 차원 채택**(PUNCH의 proc_cd 아님): 캘린더가공은 우드거치대(공정 아님·부속물)·타공+끈이 혼재 → 공통 그릇은 **opt_cd**(LINEN_FINISH 동형)가 무손실. 타공만 proc_cd로 쪼개면 우드거치대(비공정)가 표현 불가. 단일 comp + opt_cd 가공종류축. ★**트윈링제본(2000)은 add-on 아님 — COMP_BIND_CAL_WALL PROC_000099 제본비로 분기**(이중계상 금지·G-CAL-TWINRING-DOUBLE).
+
+### Δ-적재 요약 (PRICE=0 BLOCKED 닫는 최소 작업셋 · §7 인간 승인 후 dbmap)
+
+| # | 작업 | 대상 | 트랙 |
+|---|------|------|------|
+| 1 | **PRF_CAL_* 공식 5종 신설** | PRF_CAL_DESK220·DESKMINI·POSTCARD·WALL·WALLWIDE | t_prc_price_formulas INSERT |
+| 2 | **formula_components 배선** | 각 PRF = COMP_PRINT_DIGITAL_S1(인쇄·재사용) + COMP_PAPER(용지·재사용) + COMP_BIND_CAL_WALL(제본·**단일 통합·재사용**) + COMP_CALOPT_STAND(엽서/벽걸이 가공·신규) | t_prc_formula_components INSERT |
+| 3 | **product_price_formulas 바인딩** | 108→DESK220·109→DESKMINI·110→POSTCARD·111→WALL·112→WALLWIDE | t_prd_product_price_formulas INSERT |
+| 4 | **COMP_CALOPT_STAND mint** | comp + opt_cd 단가행(우드4000/1구타공1000/2구타공1500/0)·OPV 채번 MAX+1 | t_prc_price_components + component_prices + opt 채번 |
+| 5 | **★base print proc 자동선택**(Δ2·돈크리티컬) | 108~112 PROC_000004 필수공정 주입(또는 base_print_proc 코드주입) | product_processes / 엔진 base 주입(§7·개발) |
+| 6 | 제본비 단가행 | **무변경**(WALL 24행 verbatim 실재) | — |
+
+★ **DB 단가값 무변경**(제본·인쇄·용지 전부 verbatim 실재). 작업 = **공식 신설 + 배선 + 바인딩 + add-on mint + base proc 주입**(WIRE 결함 폐쇄)이지 단가 교정 아님. 컬러축(삼각대컬러/링컬러) = **가격 무관 옵션레이어·use_dims·공식에 절대 미포함**[HARD](option_items만).
+
+`확신도: 높음(2026-07-01 라이브 스냅샷 grep 실측 — COMP_BIND_CAL_WALL 24행 verbatim·제본 DESK del_yn=Y·108~112 price_formulas 0행·COMP_PRINT_DIGITAL_S1 use_dims proc_cd 실측)`
+
+---
+
+> **핵심 설계가(hpe-engine-designer) 산출 — 캘린더 종단(9번째·디지털[원자합산+고정가]·아크릴[면적]·실사현수막[면적+거치]·문구[고정가+매트릭스]·책자[부품합산세트]·스티커[이산siz단가형+세트]·상품악세사리[inline고정가] 다음). [본문=2026-06-22 1차·위 ★재설계 절이 적재 권위]**
 > cartographer 지도(`formula-map-calendar.md`·`component-inventory-calendar.md`·`gap-board-calendar.md`)+benchmark 흡수(`absorption-candidates-calendar.md`·`competitor-pricing-models-calendar.md`·`set-pricing-patterns-calendar.md`)를 종합해,
 > 캘린더 5 완제품의 **가격공식 + 가격구성요소 + t_prc_* 단가행 그릇 + 상품↔공식 바인딩**을 라이브 `evaluate_price` 단일 권위 알고리즘이 그대로 먹는 형태로 설계한다. **새 엔진 코드 아님 — t_prc_*/t_prd_* 데이터 그릇/배선/바인딩 설계.**
 >

@@ -1,5 +1,13 @@
 # huni-db-mapping.md — 후니 DB ↔ 정규화 위젯 계약 적합성 분석
 
+> ⚠⚠ **STALE (2026-07-01) — `03_spec/db-cartography/`로 SUPERSEDED 예정.** 본 문서는 "후니 가격·제약 미작성"을
+> 전제로 작성됐다(§0.1·§1.5·§2·§6 B1/B2). **그 전제는 더 이상 참이 아니다.** 그 이후 §7·§13~§29 하네스가 라이브 DB에
+> 가격(`t_prc_*` 공식 48·단가행 7,293·`evaluate_price` 동작)·CPQ 옵션(`t_prd_product_option_groups/options/option_items`)·
+> 제약(`t_prd_product_constraints`)을 적재 완료 → **컨버전이 실제로 가능**하다. 현재 권위 매핑은 `hw-db-cartographer`가
+> 현재 라이브 DB(스냅샷)를 권위로 산출하는 `db-cartography/db-contract-mapping.md`다. 본 문서는 **계약 필드 골격·갭 분류
+> 참고**로만 쓰고, "가격/제약 미작성·Red fixture로만 진행" 결론은 인용 금지.
+
+
 > 파이프라인 ③ 분석 산출물. 진행 중인 후니 DB(`docs/huni/table-spec_260602.html`)와
 > 정규화 위젯 계약(`04_build/src/contract/*` 구현 + `03_spec/data-contract.md`)의 적합성 검증 + 후니 어댑터 방향 설계.
 > [HARD] 본 패스는 분석만. 코드·스펙 무수정. 계약 변경은 권고로만 제시 — 채택 결정은 오케스트레이터.

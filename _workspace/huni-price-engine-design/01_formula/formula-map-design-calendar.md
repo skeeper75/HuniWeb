@@ -4,6 +4,7 @@
 > 설계가(hpe-engine-designer)·검증가(hpe-validator)가 이것을 자(尺)로 쓴다.
 > 권위 순서[HARD]: ① 상품마스터(260610) inline > ② 인쇄상품 가격표(260527) > ③ 라이브 t_prc_*(현 상태 기준선) > ④ 역공학(후보).
 > 산출자: hpe-formula-cartographer · 라이브 실측 2026-06-22 읽기전용 SELECT · 추정 0 · 단가값 verbatim.
+> **★freshness 재확인 2026-07-01**: BLOCKED(정찰가 스냅샷) 판정 유효 · 델타 = prd_typ `.04→PRD_TYPE.01`·COMP_BIND_CAL desk 3종 논리삭제→WALL 1종 통합(일반 캘린더 map §0-bis 참조)·여전히 공식·t_prd_product_prices 0행. 설계 변경 없음.
 
 ---
 

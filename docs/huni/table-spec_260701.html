@@ -1,0 +1,4750 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>후니 POD 상품·가격 DB 테이블 명세서</title>
+  <style>
+/* ===== Reset & base ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', sans-serif;
+  font-size: 10pt;
+  color: #111;
+  background: #fff;
+  padding: 12mm 15mm;
+}
+
+/* ===== Header ===== */
+.doc-header {
+  margin-bottom: 8mm;
+  border-bottom: 2px solid #2c3e50;
+  padding-bottom: 4mm;
+}
+.doc-header h1 {
+  font-size: 16pt;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 3pt;
+}
+.doc-header .meta {
+  font-size: 8.5pt;
+  color: #555;
+}
+
+/* ===== Table sections ===== */
+.table-section {
+  margin-bottom: 8mm;
+  page-break-inside: avoid;
+}
+.table-section h2 {
+  font-size: 11pt;
+  font-weight: 700;
+  color: #2c3e50;
+  background: #eaf0f6;
+  padding: 3pt 5pt;
+  border-left: 4px solid #2980b9;
+  margin-bottom: 3pt;
+}
+
+/* ===== Spec table ===== */
+.spec-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 9pt;
+}
+.spec-table th,
+.spec-table td {
+  border: 1px solid #bbb;
+  padding: 2.5pt 4pt;
+  vertical-align: top;
+}
+.spec-table thead th {
+  background: #2c3e50;
+  color: #fff;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+}
+.spec-table tbody tr:nth-child(even) { background: #f7f9fb; }
+.spec-table .col-num    { width: 3%;  text-align: center; color: #888; }
+.spec-table .col-name   { width: 17%; font-family: 'Courier New', monospace; font-size: 8.5pt; word-break: break-all; }
+.spec-table .col-desc   { width: 16%; }
+.spec-table .col-type   { width: 12%; font-family: 'Courier New', monospace; font-size: 8.5pt; }
+.spec-table .col-pk     { width: 4%;  text-align: center; }
+.spec-table .col-fk     { width: 14%; font-size: 8.5pt; color: #1a5276; }
+.spec-table .col-null   { width: 6%;  text-align: center; }
+.spec-table .col-note   { width: 28%; font-size: 8.5pt; color: #555; }
+
+.pk-mark { color: #c0392b; font-size: 11pt; }
+.fk-ref  { font-style: italic; }
+
+/* ===== Section dividers (가격/할인 group headings) ===== */
+.section-divider {
+  margin-top: 12mm;
+  margin-bottom: 4mm;
+  page-break-before: always;
+}
+.section-divider-heading {
+  font-size: 13pt;
+  font-weight: 700;
+  color: #fff;
+  background: #2c3e50;
+  padding: 5pt 8pt;
+  border-left: 6px solid #e67e22;
+  letter-spacing: 0.03em;
+}
+
+/* ===== 좌측 목차 (TOC) — 접기/펼치기 + 폭 조절 ===== */
+body { padding-left: calc(15mm + var(--toc-w, 248px)); transition: padding-left .15s; }
+body.toc-collapsed { padding-left: calc(15mm + 26px); }
+#toc {
+  position: fixed; top: 0; left: 0; bottom: 0; width: var(--toc-w, 248px);
+  overflow-y: auto; background: #f8fafc; border-right: 1px solid #e2e8f0;
+  padding: 10px 0 24px; font-size: 8.5pt;
+}
+body.toc-collapsed #toc { display: none; }
+#toc-handle {
+  position: fixed; top: 0; bottom: 0; left: calc(var(--toc-w, 248px) - 3px);
+  width: 6px; cursor: col-resize; z-index: 10;
+}
+#toc-handle:hover { background: #93c5fd; }
+body.toc-collapsed #toc-handle { display: none; }
+#toc-toggle {
+  position: fixed; top: 8px; left: calc(var(--toc-w, 248px) - 24px); z-index: 11;
+  width: 20px; height: 20px; line-height: 18px; text-align: center;
+  border: 1px solid #cbd5e1; border-radius: 5px; background: #fff; color: #475569;
+  cursor: pointer; font-size: 11px; padding: 0;
+}
+body.toc-collapsed #toc-toggle { left: 4px; }
+#toc .toc-title { font-weight: 700; color: #2c3e50; padding: 6px 14px 8px; font-size: 9.5pt; border-bottom: 1px solid #e2e8f0; margin-bottom: 4px; }
+#toc .toc-sec { font-weight: 700; color: #64748b; padding: 8px 14px 2px; font-size: 8pt; }
+#toc a { display: block; padding: 2.5px 14px 2.5px 20px; color: #334155; text-decoration: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#toc a:hover { background: #e2e8f0; }
+#toc a .tnm { color: #94a3b8; }
+.table-section h2 { scroll-margin-top: 8px; }
+.section-divider-heading { scroll-margin-top: 8px; }
+
+/* ===== A4 print ===== */
+@page {
+  size: A4;
+  margin: 15mm;
+}
+@media print {
+  body { padding: 0; }
+  #toc, #toc-handle, #toc-toggle { display: none; }
+  .table-section { page-break-inside: avoid; }
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+  </style>
+</head>
+<body>
+
+<div class="doc-header">
+  <h1>후니 POD 상품·가격 DB 테이블 명세서</h1>
+  <div class="meta">
+    생성일시: 2026-07-01 (위젯 컨버전 추가분 병합) &nbsp;|&nbsp;
+    총 테이블 36 / 컬럼 379 &nbsp;|&nbsp; <b>2026-07-01 위젯 추가 5컬럼</b>
+  </div>
+</div>
+<nav id="toc">
+<div class="toc-title">목차</div>
+<a href="#t_cod_base_codes">기초코드정보 <span class="tnm">t_cod_base_codes</span></a>
+<a href="#t_cat_categories">카테고리 <span class="tnm">t_cat_categories</span></a>
+<a href="#t_prd_products">상품정보 <span class="tnm">t_prd_products</span></a>
+<a href="#t_prd_product_sets">상품셋트정보 <span class="tnm">t_prd_product_sets</span></a>
+<a href="#t_mat_materials">자재정보 <span class="tnm">t_mat_materials</span></a>
+<a href="#t_siz_sizes">사이즈정보 <span class="tnm">t_siz_sizes</span></a>
+<a href="#t_clr_color_counts">도수정보 <span class="tnm">t_clr_color_counts</span></a>
+<a href="#t_prt_print_options">인쇄옵션 <span class="tnm">t_prt_print_options</span></a>
+<a href="#t_proc_processes">공정정보 <span class="tnm">t_proc_processes</span></a>
+<a href="#t_prd_product_categories">상품별카테고리 <span class="tnm">t_prd_product_categories</span></a>
+<a href="#t_prd_product_sizes">상품별사이즈 <span class="tnm">t_prd_product_sizes</span></a>
+<a href="#t_prd_product_materials">상품별자재 <span class="tnm">t_prd_product_materials</span></a>
+<a href="#t_prd_product_print_options">상품별인쇄옵션 <span class="tnm">t_prd_product_print_options</span></a>
+<a href="#t_prd_product_processes">상품별공정 <span class="tnm">t_prd_product_processes</span></a>
+<a href="#t_prd_product_plate_sizes">상품별판형사이즈 <span class="tnm">t_prd_product_plate_sizes</span></a>
+<a href="#t_prd_product_bundle_qtys">상품별묶음수 <span class="tnm">t_prd_product_bundle_qtys</span></a>
+<a href="#t_prd_product_page_rules">상품별페이지룰 <span class="tnm">t_prd_product_page_rules</span></a>
+<a href="#t_prd_product_addons">상품별추가상품 <span class="tnm">t_prd_product_addons</span></a>
+<a href="#t_cus_customers">고객 <span class="tnm">t_cus_customers</span></a>
+<div class="toc-sec">컨피규레이터 (Configurator)</div>
+<a href="#t_prd_product_option_groups">상품 옵션그룹 <span class="tnm">t_prd_product_option_groups</span></a>
+<a href="#t_prd_product_options">상품 옵션 <span class="tnm">t_prd_product_options</span></a>
+<a href="#t_prd_product_option_items">상품 옵션항목 <span class="tnm">t_prd_product_option_items</span></a>
+<a href="#t_prd_templates">추가상품 템플릿 <span class="tnm">t_prd_templates</span></a>
+<a href="#t_prd_template_selections">템플릿 선택값 <span class="tnm">t_prd_template_selections</span></a>
+<a href="#t_prd_product_constraints">상품 제약규칙 <span class="tnm">t_prd_product_constraints</span></a>
+<div class="toc-sec">가격 (Pricing)</div>
+<a href="#t_prc_price_formulas">가격공식 <span class="tnm">t_prc_price_formulas</span></a>
+<a href="#t_prc_price_components">가격구성요소 <span class="tnm">t_prc_price_components</span></a>
+<a href="#t_prc_formula_components">공식별구성요소 <span class="tnm">t_prc_formula_components</span></a>
+<a href="#t_prc_component_prices">구성요소 다차원 단가 — 시계열 <span class="tnm">t_prc_component_prices</span></a>
+<a href="#t_prd_product_price_formulas">상품별가격공식 <span class="tnm">t_prd_product_price_formulas</span></a>
+<a href="#t_prd_product_prices">상품단가, 시계열 <span class="tnm">t_prd_product_prices</span></a>
+<a href="#t_prd_template_prices">템플릿단가, 시계열 <span class="tnm">t_prd_template_prices</span></a>
+<div class="toc-sec">할인 (Discount)</div>
+<a href="#t_dsc_discount_tables">수량구간할인 마스터 <span class="tnm">t_dsc_discount_tables</span></a>
+<a href="#t_dsc_discount_details">수량구간할인상세, 시계열 <span class="tnm">t_dsc_discount_details</span></a>
+<a href="#t_dsc_grade_discount_rates">등급별할인율, 시계열 <span class="tnm">t_dsc_grade_discount_rates</span></a>
+<a href="#t_prd_product_discount_tables">상품별할인테이블 <span class="tnm">t_prd_product_discount_tables</span></a>
+</nav>
+<div id="toc-handle" title="드래그로 폭 조절"></div>
+<button id="toc-toggle" title="목차 접기/펼치기">◀</button>
+<script>
+(function(){
+  var root = document.documentElement, body = document.body;
+  var btn = document.getElementById('toc-toggle');
+  var w = parseInt(localStorage.getItem('tocW')||'248',10);
+  function setW(px){ px = Math.max(140, Math.min(520, px));
+    root.style.setProperty('--toc-w', px+'px'); localStorage.setItem('tocW', px); }
+  setW(w);
+  function setCollapsed(c){ body.classList.toggle('toc-collapsed', c);
+    btn.textContent = c ? '▶' : '◀'; localStorage.setItem('tocC', c?'1':'0'); }
+  setCollapsed(localStorage.getItem('tocC')==='1');
+  btn.onclick = function(){ setCollapsed(!body.classList.contains('toc-collapsed')); };
+  var drag = false;
+  document.getElementById('toc-handle').onmousedown = function(e){
+    drag = true; e.preventDefault(); };
+  document.addEventListener('mousemove', function(e){ if(drag) setW(e.clientX); });
+  document.addEventListener('mouseup', function(){ drag = false; });
+})();
+</script>
+
+<div class="table-section" id="t_cod_base_codes">
+<h2>t_cod_base_codes — 기초코드정보</h2>
+<table class="spec-table">
+  <thead>
+    <tr>
+      <th class="col-num">#</th>
+      <th class="col-name">컬럼명</th>
+      <th class="col-desc">한글명(Description)</th>
+      <th class="col-type">DataType</th>
+      <th class="col-pk">PK</th>
+      <th class="col-fk">FK</th>
+      <th class="col-null">Nullable</th>
+      <th class="col-note">비고 (기초코드 FK 값)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="col-num">1</td>
+      <td class="col-name">cod_cd</td>
+      <td class="col-desc">기초코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">2</td>
+      <td class="col-name">cod_nm</td>
+      <td class="col-desc">기초코드명</td>
+      <td class="col-type">varchar(100)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">3</td>
+      <td class="col-name">upr_cod_cd</td>
+      <td class="col-desc">상위기초코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_cod_base_codes</span></td>
+      <td class="col-null">Y</td>
+      <td class="col-note">기초코드 계층 상위(자기참조 — 그룹 루트/자식 코드)</td>
+    </tr>
+    <tr>
+      <td class="col-num">4</td>
+      <td class="col-name">disp_seq</td>
+      <td class="col-desc">표시순서</td>
+      <td class="col-type">integer</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">5</td>
+      <td class="col-name">use_yn</td>
+      <td class="col-desc">사용여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">6</td>
+      <td class="col-name">note</td>
+      <td class="col-desc">비고</td>
+      <td class="col-type">varchar(500)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">7</td>
+      <td class="col-name">del_yn</td>
+      <td class="col-desc">삭제여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">8</td>
+      <td class="col-name">del_dt</td>
+      <td class="col-desc">삭제일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">9</td>
+      <td class="col-name">reg_dt</td>
+      <td class="col-desc">등록일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">10</td>
+      <td class="col-name">upd_dt</td>
+      <td class="col-desc">수정일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="table-section" id="t_cat_categories">
+<h2>t_cat_categories — 카테고리</h2>
+<table class="spec-table">
+  <thead>
+    <tr>
+      <th class="col-num">#</th>
+      <th class="col-name">컬럼명</th>
+      <th class="col-desc">한글명(Description)</th>
+      <th class="col-type">DataType</th>
+      <th class="col-pk">PK</th>
+      <th class="col-fk">FK</th>
+      <th class="col-null">Nullable</th>
+      <th class="col-note">비고 (기초코드 FK 값)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="col-num">1</td>
+      <td class="col-name">cat_cd</td>
+      <td class="col-desc">카테고리코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">2</td>
+      <td class="col-name">cat_nm</td>
+      <td class="col-desc">카테고리명</td>
+      <td class="col-type">varchar(100)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">3</td>
+      <td class="col-name">upr_cat_cd</td>
+      <td class="col-desc">상위카테고리코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_cat_categories</span></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">4</td>
+      <td class="col-name">cat_lvl</td>
+      <td class="col-desc">카테고리레벨</td>
+      <td class="col-type">integer</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">5</td>
+      <td class="col-name">disp_seq</td>
+      <td class="col-desc">표시순서</td>
+      <td class="col-type">integer</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">6</td>
+      <td class="col-name">use_yn</td>
+      <td class="col-desc">사용여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">7</td>
+      <td class="col-name">del_yn</td>
+      <td class="col-desc">삭제여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">8</td>
+      <td class="col-name">del_dt</td>
+      <td class="col-desc">삭제일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">9</td>
+      <td class="col-name">reg_dt</td>
+      <td class="col-desc">등록일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">10</td>
+      <td class="col-name">upd_dt</td>
+      <td class="col-desc">수정일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="table-section" id="t_prd_products">
+<h2>t_prd_products — 상품정보</h2>
+<table class="spec-table">
+  <thead>
+    <tr>
+      <th class="col-num">#</th>
+      <th class="col-name">컬럼명</th>
+      <th class="col-desc">한글명(Description)</th>
+      <th class="col-type">DataType</th>
+      <th class="col-pk">PK</th>
+      <th class="col-fk">FK</th>
+      <th class="col-null">Nullable</th>
+      <th class="col-note">비고 (기초코드 FK 값)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="col-num">1</td>
+      <td class="col-name">prd_cd</td>
+      <td class="col-desc">상품코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">2</td>
+      <td class="col-name">MES_ITEM_CD</td>
+      <td class="col-desc">MES품목코드</td>
+      <td class="col-type">varchar(30)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">3</td>
+      <td class="col-name">prd_nm</td>
+      <td class="col-desc">상품명</td>
+      <td class="col-type">varchar(200)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">4</td>
+      <td class="col-name">prd_typ_cd</td>
+      <td class="col-desc">상품유형코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_cod_base_codes</span></td>
+      <td class="col-null">N</td>
+      <td class="col-note">PRD_TYPE: 완제품 / 반제품 / 기성상품 / 디자인상품 / 추가상품</td>
+    </tr>
+    <tr>
+      <td class="col-num">5</td>
+      <td class="col-name">semi_role_cd</td>
+      <td class="col-desc">반제품역할코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_cod_base_codes</span></td>
+      <td class="col-null">Y</td>
+      <td class="col-note">SEMI_ROLE: 내지 / 표지 / 면지 / 간지 / 투명커버</td>
+    </tr>
+    <tr>
+      <td class="col-num">6</td>
+      <td class="col-name">nonspec_yn</td>
+      <td class="col-desc">비규격여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">7</td>
+      <td class="col-name">nonspec_width_min</td>
+      <td class="col-desc">비규격가로최소</td>
+      <td class="col-type">numeric(8,2)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">8</td>
+      <td class="col-name">nonspec_width_max</td>
+      <td class="col-desc">비규격가로최대</td>
+      <td class="col-type">numeric(8,2)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">9</td>
+      <td class="col-name">nonspec_width_incr</td>
+      <td class="col-desc">비규격가로증가단위</td>
+      <td class="col-type">numeric(8,2)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">10</td>
+      <td class="col-name">nonspec_height_min</td>
+      <td class="col-desc">비규격세로최소</td>
+      <td class="col-type">numeric(8,2)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">11</td>
+      <td class="col-name">nonspec_height_max</td>
+      <td class="col-desc">비규격세로최대</td>
+      <td class="col-type">numeric(8,2)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">12</td>
+      <td class="col-name">nonspec_height_incr</td>
+      <td class="col-desc">비규격세로증가단위</td>
+      <td class="col-type">numeric(8,2)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">13</td>
+      <td class="col-name">file_upload_yn</td>
+      <td class="col-desc">파일업로드지원여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">14</td>
+      <td class="col-name">editor_yn</td>
+      <td class="col-desc">편집기지원여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">15</td>
+      <td class="col-name">min_qty</td>
+      <td class="col-desc">최소수량</td>
+      <td class="col-type">integer</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">16</td>
+      <td class="col-name">max_qty</td>
+      <td class="col-desc">최대수량</td>
+      <td class="col-type">integer</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">17</td>
+      <td class="col-name">qty_incr</td>
+      <td class="col-desc">증가단위</td>
+      <td class="col-type">integer</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">18</td>
+      <td class="col-name">dflt_qty</td>
+      <td class="col-desc">기본수량</td>
+      <td class="col-type">integer</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">19</td>
+      <td class="col-name">qty_unit_typ_cd</td>
+      <td class="col-desc">수량단위유형코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_cod_base_codes</span></td>
+      <td class="col-null">Y</td>
+      <td class="col-note">QTY_UNIT: EA / 매 / 권 / 세트 / 팩 / 장</td>
+    </tr>
+    <tr>
+      <td class="col-num">20</td>
+      <td class="col-name">use_yn</td>
+      <td class="col-desc">사용여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">21</td>
+      <td class="col-name">del_yn</td>
+      <td class="col-desc">삭제여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">22</td>
+      <td class="col-name">del_dt</td>
+      <td class="col-desc">삭제일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">23</td>
+      <td class="col-name">reg_dt</td>
+      <td class="col-desc">등록일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">24</td>
+      <td class="col-name">upd_dt</td>
+      <td class="col-desc">수정일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr style="background:#fff7e6;">
+      <td class="col-num">25</td>
+      <td class="col-name">editor_partner_cd</td>
+      <td class="col-desc">에디터파트너코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_cod_base_codes</span></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"><b>2026-07-01 위젯 추가</b> — EDITOR_PARTNER: edicus/none (NormalizedEditorConfig 발급 라우팅)</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="table-section" id="t_prd_product_sets">
+<h2>t_prd_product_sets — 상품셋트정보</h2>
+<table class="spec-table">
+  <thead>
+    <tr>
+      <th class="col-num">#</th>
+      <th class="col-name">컬럼명</th>
+      <th class="col-desc">한글명(Description)</th>
+      <th class="col-type">DataType</th>
+      <th class="col-pk">PK</th>
+      <th class="col-fk">FK</th>
+      <th class="col-null">Nullable</th>
+      <th class="col-note">비고 (기초코드 FK 값)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="col-num">1</td>
+      <td class="col-name">prd_cd</td>
+      <td class="col-desc">셋트 최종상품코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_prd_products</span></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">2</td>
+      <td class="col-name">sub_prd_cd</td>
+      <td class="col-desc">하위상품코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_prd_products</span></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">3</td>
+      <td class="col-name">sub_prd_qty</td>
+      <td class="col-desc">하위상품수량</td>
+      <td class="col-type">integer</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">4</td>
+      <td class="col-name">disp_seq</td>
+      <td class="col-desc">표시순서</td>
+      <td class="col-type">integer</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">5</td>
+      <td class="col-name">note</td>
+      <td class="col-desc">비고</td>
+      <td class="col-type">varchar(500)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">6</td>
+      <td class="col-name">del_yn</td>
+      <td class="col-desc">삭제여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">7</td>
+      <td class="col-name">del_dt</td>
+      <td class="col-desc">삭제일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">8</td>
+      <td class="col-name">reg_dt</td>
+      <td class="col-desc">등록일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">9</td>
+      <td class="col-name">upd_dt</td>
+      <td class="col-desc">수정일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="table-section" id="t_mat_materials">
+<h2>t_mat_materials — 자재정보</h2>
+<table class="spec-table">
+  <thead>
+    <tr>
+      <th class="col-num">#</th>
+      <th class="col-name">컬럼명</th>
+      <th class="col-desc">한글명(Description)</th>
+      <th class="col-type">DataType</th>
+      <th class="col-pk">PK</th>
+      <th class="col-fk">FK</th>
+      <th class="col-null">Nullable</th>
+      <th class="col-note">비고 (기초코드 FK 값)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="col-num">1</td>
+      <td class="col-name">mat_cd</td>
+      <td class="col-desc">자재코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">2</td>
+      <td class="col-name">mat_nm</td>
+      <td class="col-desc">자재명</td>
+      <td class="col-type">varchar(200)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">3</td>
+      <td class="col-name">mat_typ_cd</td>
+      <td class="col-desc">자재유형코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_cod_base_codes</span></td>
+      <td class="col-null">N</td>
+      <td class="col-note">MAT_TYPE: 디지털인쇄용지 / 제본부자재 / 아크릴 / 금속 / 특수소재 / 가죽 / 부자재 / 실사소재 / 파우치 / 악세사리 / 스티커용지 / 사입자재 / 합판 스티커용지 / 합판 봉투용지</td>
+    </tr>
+    <tr>
+      <td class="col-num">4</td>
+      <td class="col-name">upr_mat_cd</td>
+      <td class="col-desc">상위자재코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_mat_materials</span></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">5</td>
+      <td class="col-name">sel_typ_cd</td>
+      <td class="col-desc">선택유형코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_cod_base_codes</span></td>
+      <td class="col-null">Y</td>
+      <td class="col-note">SEL_TYPE: 단일 / 다중</td>
+    </tr>
+    <tr>
+      <td class="col-num">6</td>
+      <td class="col-name">max_sel_cnt</td>
+      <td class="col-desc">최대선택수</td>
+      <td class="col-type">integer</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">7</td>
+      <td class="col-name">width</td>
+      <td class="col-desc">가로</td>
+      <td class="col-type">numeric(8,2)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">8</td>
+      <td class="col-name">height</td>
+      <td class="col-desc">세로</td>
+      <td class="col-type">numeric(8,2)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">9</td>
+      <td class="col-name">depth</td>
+      <td class="col-desc">높이/두께</td>
+      <td class="col-type">numeric(8,2)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">10</td>
+      <td class="col-name">weight</td>
+      <td class="col-desc">무게</td>
+      <td class="col-type">numeric(8,2)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">11</td>
+      <td class="col-name">bdl_qty</td>
+      <td class="col-desc">묶음수</td>
+      <td class="col-type">integer</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">12</td>
+      <td class="col-name">use_yn</td>
+      <td class="col-desc">사용여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">13</td>
+      <td class="col-name">note</td>
+      <td class="col-desc">비고</td>
+      <td class="col-type">varchar(500)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">14</td>
+      <td class="col-name">del_yn</td>
+      <td class="col-desc">삭제여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">15</td>
+      <td class="col-name">del_dt</td>
+      <td class="col-desc">삭제일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">16</td>
+      <td class="col-name">reg_dt</td>
+      <td class="col-desc">등록일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">17</td>
+      <td class="col-name">upd_dt</td>
+      <td class="col-desc">수정일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr style="background:#fff7e6;">
+      <td class="col-num">18</td>
+      <td class="col-name">color_hex</td>
+      <td class="col-desc">색상칩hex</td>
+      <td class="col-type">varchar(7)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"><b>2026-07-01 위젯 추가</b> — color-chip 렌더용 #RRGGBB (OptionValue.colorHex)</td>
+    </tr>
+    <tr style="background:#fff7e6;">
+      <td class="col-num">19</td>
+      <td class="col-name">image_url</td>
+      <td class="col-desc">미리보기이미지URL</td>
+      <td class="col-type">varchar(500)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"><b>2026-07-01 위젯 추가</b> — image-chip 렌더용 (OptionValue.imageUrl)</td>
+    </tr>
+    <tr style="background:#fff7e6;">
+      <td class="col-num">20</td>
+      <td class="col-name">add_clr_yn</td>
+      <td class="col-desc">추가색가용여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"><b>2026-07-01 위젯 추가</b> — 별색/형광 가용 Y/N (OptionValue.addColorCapable)</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="table-section" id="t_siz_sizes">
+<h2>t_siz_sizes — 사이즈정보</h2>
+<table class="spec-table">
+  <thead>
+    <tr>
+      <th class="col-num">#</th>
+      <th class="col-name">컬럼명</th>
+      <th class="col-desc">한글명(Description)</th>
+      <th class="col-type">DataType</th>
+      <th class="col-pk">PK</th>
+      <th class="col-fk">FK</th>
+      <th class="col-null">Nullable</th>
+      <th class="col-note">비고 (기초코드 FK 값)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="col-num">1</td>
+      <td class="col-name">siz_cd</td>
+      <td class="col-desc">사이즈코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">2</td>
+      <td class="col-name">siz_nm</td>
+      <td class="col-desc">사이즈명</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">3</td>
+      <td class="col-name">tags</td>
+      <td class="col-desc">태그목록</td>
+      <td class="col-type">jsonb</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">4</td>
+      <td class="col-name">work_width</td>
+      <td class="col-desc">작업가로</td>
+      <td class="col-type">numeric(8,2)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">5</td>
+      <td class="col-name">work_height</td>
+      <td class="col-desc">작업세로</td>
+      <td class="col-type">numeric(8,2)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">6</td>
+      <td class="col-name">cut_width</td>
+      <td class="col-desc">재단가로</td>
+      <td class="col-type">numeric(8,2)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">7</td>
+      <td class="col-name">cut_height</td>
+      <td class="col-desc">재단세로</td>
+      <td class="col-type">numeric(8,2)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">8</td>
+      <td class="col-name">margin_top</td>
+      <td class="col-desc">여백상</td>
+      <td class="col-type">numeric(8,2)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">9</td>
+      <td class="col-name">margin_bot</td>
+      <td class="col-desc">여백하</td>
+      <td class="col-type">numeric(8,2)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">10</td>
+      <td class="col-name">margin_lft</td>
+      <td class="col-desc">여백좌</td>
+      <td class="col-type">numeric(8,2)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">11</td>
+      <td class="col-name">margin_rgt</td>
+      <td class="col-desc">여백우</td>
+      <td class="col-type">numeric(8,2)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">12</td>
+      <td class="col-name">impos_yn</td>
+      <td class="col-desc">조판판형여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">13</td>
+      <td class="col-name">use_yn</td>
+      <td class="col-desc">사용여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">14</td>
+      <td class="col-name">note</td>
+      <td class="col-desc">비고</td>
+      <td class="col-type">varchar(500)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">15</td>
+      <td class="col-name">del_yn</td>
+      <td class="col-desc">삭제여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">16</td>
+      <td class="col-name">del_dt</td>
+      <td class="col-desc">삭제일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">17</td>
+      <td class="col-name">reg_dt</td>
+      <td class="col-desc">등록일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">18</td>
+      <td class="col-name">upd_dt</td>
+      <td class="col-desc">수정일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="table-section" id="t_clr_color_counts">
+<h2>t_clr_color_counts — 도수정보</h2>
+<table class="spec-table">
+  <thead>
+    <tr>
+      <th class="col-num">#</th>
+      <th class="col-name">컬럼명</th>
+      <th class="col-desc">한글명(Description)</th>
+      <th class="col-type">DataType</th>
+      <th class="col-pk">PK</th>
+      <th class="col-fk">FK</th>
+      <th class="col-null">Nullable</th>
+      <th class="col-note">비고 (기초코드 FK 값)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="col-num">1</td>
+      <td class="col-name">clr_cd</td>
+      <td class="col-desc">도수코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">2</td>
+      <td class="col-name">clr_nm</td>
+      <td class="col-desc">도수명</td>
+      <td class="col-type">varchar(100)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">3</td>
+      <td class="col-name">chnl_cnt</td>
+      <td class="col-desc">채널수</td>
+      <td class="col-type">integer</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">4</td>
+      <td class="col-name">use_yn</td>
+      <td class="col-desc">사용여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">5</td>
+      <td class="col-name">note</td>
+      <td class="col-desc">비고</td>
+      <td class="col-type">varchar(500)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">6</td>
+      <td class="col-name">del_yn</td>
+      <td class="col-desc">삭제여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">7</td>
+      <td class="col-name">del_dt</td>
+      <td class="col-desc">삭제일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">8</td>
+      <td class="col-name">reg_dt</td>
+      <td class="col-desc">등록일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">9</td>
+      <td class="col-name">upd_dt</td>
+      <td class="col-desc">수정일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="table-section" id="t_prt_print_options">
+<h2>t_prt_print_options — 인쇄옵션</h2>
+<table class="spec-table">
+  <thead>
+    <tr>
+      <th class="col-num">#</th>
+      <th class="col-name">컬럼명</th>
+      <th class="col-desc">한글명(Description)</th>
+      <th class="col-type">DataType</th>
+      <th class="col-pk">PK</th>
+      <th class="col-fk">FK</th>
+      <th class="col-null">Nullable</th>
+      <th class="col-note">비고 (기초코드 FK 값)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="col-num">1</td>
+      <td class="col-name">print_opt_cd</td>
+      <td class="col-desc"></td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">2</td>
+      <td class="col-name">print_opt_nm</td>
+      <td class="col-desc"></td>
+      <td class="col-type">varchar(100)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">3</td>
+      <td class="col-name">print_side</td>
+      <td class="col-desc"></td>
+      <td class="col-type">varchar(20)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">4</td>
+      <td class="col-name">front_colrcnt_cd</td>
+      <td class="col-desc"></td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_clr_color_counts</span></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">5</td>
+      <td class="col-name">back_colrcnt_cd</td>
+      <td class="col-desc"></td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_clr_color_counts</span></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">6</td>
+      <td class="col-name">disp_seq</td>
+      <td class="col-desc"></td>
+      <td class="col-type">integer</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">7</td>
+      <td class="col-name">use_yn</td>
+      <td class="col-desc"></td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">8</td>
+      <td class="col-name">del_yn</td>
+      <td class="col-desc"></td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">9</td>
+      <td class="col-name">del_dt</td>
+      <td class="col-desc"></td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">10</td>
+      <td class="col-name">reg_dt</td>
+      <td class="col-desc"></td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">11</td>
+      <td class="col-name">upd_dt</td>
+      <td class="col-desc"></td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="table-section" id="t_proc_processes">
+<h2>t_proc_processes — 공정정보</h2>
+<table class="spec-table">
+  <thead>
+    <tr>
+      <th class="col-num">#</th>
+      <th class="col-name">컬럼명</th>
+      <th class="col-desc">한글명(Description)</th>
+      <th class="col-type">DataType</th>
+      <th class="col-pk">PK</th>
+      <th class="col-fk">FK</th>
+      <th class="col-null">Nullable</th>
+      <th class="col-note">비고 (기초코드 FK 값)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="col-num">1</td>
+      <td class="col-name">proc_cd</td>
+      <td class="col-desc">공정코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">2</td>
+      <td class="col-name">proc_nm</td>
+      <td class="col-desc">공정명</td>
+      <td class="col-type">varchar(200)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">3</td>
+      <td class="col-name">upr_proc_cd</td>
+      <td class="col-desc">상위공정코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_proc_processes</span></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">4</td>
+      <td class="col-name">prcs_dtl_opt</td>
+      <td class="col-desc">공정상세옵션</td>
+      <td class="col-type">jsonb</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">5</td>
+      <td class="col-name">disp_seq</td>
+      <td class="col-desc">표시순서</td>
+      <td class="col-type">integer</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">6</td>
+      <td class="col-name">use_yn</td>
+      <td class="col-desc">사용여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">7</td>
+      <td class="col-name">note</td>
+      <td class="col-desc">비고</td>
+      <td class="col-type">varchar(500)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">8</td>
+      <td class="col-name">del_yn</td>
+      <td class="col-desc">삭제여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">9</td>
+      <td class="col-name">del_dt</td>
+      <td class="col-desc">삭제일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">10</td>
+      <td class="col-name">reg_dt</td>
+      <td class="col-desc">등록일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">11</td>
+      <td class="col-name">upd_dt</td>
+      <td class="col-desc">수정일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="table-section" id="t_prd_product_categories">
+<h2>t_prd_product_categories — 상품별카테고리</h2>
+<table class="spec-table">
+  <thead>
+    <tr>
+      <th class="col-num">#</th>
+      <th class="col-name">컬럼명</th>
+      <th class="col-desc">한글명(Description)</th>
+      <th class="col-type">DataType</th>
+      <th class="col-pk">PK</th>
+      <th class="col-fk">FK</th>
+      <th class="col-null">Nullable</th>
+      <th class="col-note">비고 (기초코드 FK 값)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="col-num">1</td>
+      <td class="col-name">prd_cd</td>
+      <td class="col-desc">상품코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_prd_products</span></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">2</td>
+      <td class="col-name">cat_cd</td>
+      <td class="col-desc">카테고리코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_cat_categories</span></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">3</td>
+      <td class="col-name">main_cat_yn</td>
+      <td class="col-desc">주카테고리여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">4</td>
+      <td class="col-name">disp_seq</td>
+      <td class="col-desc">표시순서</td>
+      <td class="col-type">integer</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">5</td>
+      <td class="col-name">note</td>
+      <td class="col-desc">비고</td>
+      <td class="col-type">varchar(500)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">6</td>
+      <td class="col-name">reg_dt</td>
+      <td class="col-desc">등록일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">7</td>
+      <td class="col-name">upd_dt</td>
+      <td class="col-desc">수정일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="table-section" id="t_prd_product_sizes">
+<h2>t_prd_product_sizes — 상품별사이즈</h2>
+<table class="spec-table">
+  <thead>
+    <tr>
+      <th class="col-num">#</th>
+      <th class="col-name">컬럼명</th>
+      <th class="col-desc">한글명(Description)</th>
+      <th class="col-type">DataType</th>
+      <th class="col-pk">PK</th>
+      <th class="col-fk">FK</th>
+      <th class="col-null">Nullable</th>
+      <th class="col-note">비고 (기초코드 FK 값)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="col-num">1</td>
+      <td class="col-name">prd_cd</td>
+      <td class="col-desc">상품코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_prd_products</span></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">2</td>
+      <td class="col-name">siz_cd</td>
+      <td class="col-desc">사이즈코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_siz_sizes</span></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">3</td>
+      <td class="col-name">dflt_yn</td>
+      <td class="col-desc">기본여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">4</td>
+      <td class="col-name">disp_seq</td>
+      <td class="col-desc">표시순서</td>
+      <td class="col-type">integer</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">5</td>
+      <td class="col-name">del_yn</td>
+      <td class="col-desc">삭제여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">6</td>
+      <td class="col-name">del_dt</td>
+      <td class="col-desc">삭제일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">7</td>
+      <td class="col-name">reg_dt</td>
+      <td class="col-desc">등록일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">8</td>
+      <td class="col-name">upd_dt</td>
+      <td class="col-desc">수정일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="table-section" id="t_prd_product_materials">
+<h2>t_prd_product_materials — 상품별자재</h2>
+<table class="spec-table">
+  <thead>
+    <tr>
+      <th class="col-num">#</th>
+      <th class="col-name">컬럼명</th>
+      <th class="col-desc">한글명(Description)</th>
+      <th class="col-type">DataType</th>
+      <th class="col-pk">PK</th>
+      <th class="col-fk">FK</th>
+      <th class="col-null">Nullable</th>
+      <th class="col-note">비고 (기초코드 FK 값)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="col-num">1</td>
+      <td class="col-name">prd_cd</td>
+      <td class="col-desc">상품코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_prd_products</span></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">2</td>
+      <td class="col-name">mat_cd</td>
+      <td class="col-desc">자재코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_mat_materials</span></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">3</td>
+      <td class="col-name">usage_cd</td>
+      <td class="col-desc">용도</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_cod_base_codes</span></td>
+      <td class="col-null">N</td>
+      <td class="col-note">USAGE: 내지 / 표지 / 면지 / 간지 / 투명커버 / 표지타입 / 공통</td>
+    </tr>
+    <tr>
+      <td class="col-num">4</td>
+      <td class="col-name">dflt_yn</td>
+      <td class="col-desc">기본여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">5</td>
+      <td class="col-name">disp_seq</td>
+      <td class="col-desc">표시순서</td>
+      <td class="col-type">integer</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">6</td>
+      <td class="col-name">del_yn</td>
+      <td class="col-desc">삭제여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">7</td>
+      <td class="col-name">del_dt</td>
+      <td class="col-desc">삭제일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">8</td>
+      <td class="col-name">reg_dt</td>
+      <td class="col-desc">등록일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">9</td>
+      <td class="col-name">upd_dt</td>
+      <td class="col-desc">수정일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="table-section" id="t_prd_product_print_options">
+<h2>t_prd_product_print_options — 상품별인쇄옵션</h2>
+<table class="spec-table">
+  <thead>
+    <tr>
+      <th class="col-num">#</th>
+      <th class="col-name">컬럼명</th>
+      <th class="col-desc">한글명(Description)</th>
+      <th class="col-type">DataType</th>
+      <th class="col-pk">PK</th>
+      <th class="col-fk">FK</th>
+      <th class="col-null">Nullable</th>
+      <th class="col-note">비고 (기초코드 FK 값)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="col-num">1</td>
+      <td class="col-name">prd_cd</td>
+      <td class="col-desc">상품코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_prd_products</span></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">2</td>
+      <td class="col-name">opt_id</td>
+      <td class="col-desc">옵션ID</td>
+      <td class="col-type">integer</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">3</td>
+      <td class="col-name">print_side</td>
+      <td class="col-desc">인쇄면</td>
+      <td class="col-type">varchar(20)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">4</td>
+      <td class="col-name">front_colrcnt_cd</td>
+      <td class="col-desc">앞면도수코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_clr_color_counts</span></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">5</td>
+      <td class="col-name">back_colrcnt_cd</td>
+      <td class="col-desc">뒷면도수코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_clr_color_counts</span></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">6</td>
+      <td class="col-name">dflt_yn</td>
+      <td class="col-desc">기본여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">7</td>
+      <td class="col-name">disp_seq</td>
+      <td class="col-desc">표시순서</td>
+      <td class="col-type">integer</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">8</td>
+      <td class="col-name">print_opt_cd</td>
+      <td class="col-desc">인쇄옵션코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_prt_print_options</span></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">9</td>
+      <td class="col-name">del_yn</td>
+      <td class="col-desc">삭제여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">10</td>
+      <td class="col-name">del_dt</td>
+      <td class="col-desc">삭제일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">11</td>
+      <td class="col-name">reg_dt</td>
+      <td class="col-desc">등록일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">12</td>
+      <td class="col-name">upd_dt</td>
+      <td class="col-desc">수정일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="table-section" id="t_prd_product_processes">
+<h2>t_prd_product_processes — 상품별공정</h2>
+<table class="spec-table">
+  <thead>
+    <tr>
+      <th class="col-num">#</th>
+      <th class="col-name">컬럼명</th>
+      <th class="col-desc">한글명(Description)</th>
+      <th class="col-type">DataType</th>
+      <th class="col-pk">PK</th>
+      <th class="col-fk">FK</th>
+      <th class="col-null">Nullable</th>
+      <th class="col-note">비고 (기초코드 FK 값)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="col-num">1</td>
+      <td class="col-name">prd_cd</td>
+      <td class="col-desc">상품코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_prd_products</span></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">2</td>
+      <td class="col-name">proc_cd</td>
+      <td class="col-desc">공정코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_proc_processes</span></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">3</td>
+      <td class="col-name">mand_proc_yn</td>
+      <td class="col-desc">필수공정여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">4</td>
+      <td class="col-name">disp_seq</td>
+      <td class="col-desc">표시순서</td>
+      <td class="col-type">integer</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">5</td>
+      <td class="col-name">del_yn</td>
+      <td class="col-desc">삭제여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">6</td>
+      <td class="col-name">del_dt</td>
+      <td class="col-desc">삭제일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">7</td>
+      <td class="col-name">reg_dt</td>
+      <td class="col-desc">등록일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">8</td>
+      <td class="col-name">upd_dt</td>
+      <td class="col-desc">수정일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr style="background:#fff7e6;">
+      <td class="col-num">9</td>
+      <td class="col-name">view_yn</td>
+      <td class="col-desc">위젯표시여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"><b>2026-07-01 위젯 추가</b> — OptionGroup.visible hidden-essential 명시(NULL=disp_seq<0 관례 fallback)</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="table-section" id="t_prd_product_plate_sizes">
+<h2>t_prd_product_plate_sizes — 상품별판형사이즈</h2>
+<table class="spec-table">
+  <thead>
+    <tr>
+      <th class="col-num">#</th>
+      <th class="col-name">컬럼명</th>
+      <th class="col-desc">한글명(Description)</th>
+      <th class="col-type">DataType</th>
+      <th class="col-pk">PK</th>
+      <th class="col-fk">FK</th>
+      <th class="col-null">Nullable</th>
+      <th class="col-note">비고 (기초코드 FK 값)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="col-num">1</td>
+      <td class="col-name">prd_cd</td>
+      <td class="col-desc">상품코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_prd_products</span></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">2</td>
+      <td class="col-name">siz_cd</td>
+      <td class="col-desc">사이즈코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_siz_sizes</span></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">3</td>
+      <td class="col-name">dflt_plt_yn</td>
+      <td class="col-desc">기본판형여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">4</td>
+      <td class="col-name">output_paper_typ_cd</td>
+      <td class="col-desc">출력용지유형코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_cod_base_codes</span></td>
+      <td class="col-null">Y</td>
+      <td class="col-note">OUTPUT_PAPER_TYPE: 국전계열 / 46계열 / 기타</td>
+    </tr>
+    <tr>
+      <td class="col-num">5</td>
+      <td class="col-name">output_file_typ</td>
+      <td class="col-desc">출력파일유형</td>
+      <td class="col-type">varchar(30)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">6</td>
+      <td class="col-name">note</td>
+      <td class="col-desc">비고</td>
+      <td class="col-type">varchar(500)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">7</td>
+      <td class="col-name">del_yn</td>
+      <td class="col-desc">삭제여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">8</td>
+      <td class="col-name">del_dt</td>
+      <td class="col-desc">삭제일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">9</td>
+      <td class="col-name">reg_dt</td>
+      <td class="col-desc">등록일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">10</td>
+      <td class="col-name">upd_dt</td>
+      <td class="col-desc">수정일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="table-section" id="t_prd_product_bundle_qtys">
+<h2>t_prd_product_bundle_qtys — 상품별묶음수</h2>
+<table class="spec-table">
+  <thead>
+    <tr>
+      <th class="col-num">#</th>
+      <th class="col-name">컬럼명</th>
+      <th class="col-desc">한글명(Description)</th>
+      <th class="col-type">DataType</th>
+      <th class="col-pk">PK</th>
+      <th class="col-fk">FK</th>
+      <th class="col-null">Nullable</th>
+      <th class="col-note">비고 (기초코드 FK 값)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="col-num">1</td>
+      <td class="col-name">prd_cd</td>
+      <td class="col-desc">상품코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_prd_products</span></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">2</td>
+      <td class="col-name">bdl_qty</td>
+      <td class="col-desc">묶음수</td>
+      <td class="col-type">integer</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">3</td>
+      <td class="col-name">bdl_unit_typ_cd</td>
+      <td class="col-desc">묶음단위유형코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_cod_base_codes</span></td>
+      <td class="col-null">Y</td>
+      <td class="col-note">QTY_UNIT: EA / 매 / 권 / 세트 / 팩 / 장</td>
+    </tr>
+    <tr>
+      <td class="col-num">4</td>
+      <td class="col-name">dflt_yn</td>
+      <td class="col-desc">기본여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">5</td>
+      <td class="col-name">disp_seq</td>
+      <td class="col-desc">표시순서</td>
+      <td class="col-type">integer</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">6</td>
+      <td class="col-name">del_yn</td>
+      <td class="col-desc">삭제여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">7</td>
+      <td class="col-name">del_dt</td>
+      <td class="col-desc">삭제일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">8</td>
+      <td class="col-name">reg_dt</td>
+      <td class="col-desc">등록일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">9</td>
+      <td class="col-name">upd_dt</td>
+      <td class="col-desc">수정일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="table-section" id="t_prd_product_page_rules">
+<h2>t_prd_product_page_rules — 상품별페이지룰</h2>
+<table class="spec-table">
+  <thead>
+    <tr>
+      <th class="col-num">#</th>
+      <th class="col-name">컬럼명</th>
+      <th class="col-desc">한글명(Description)</th>
+      <th class="col-type">DataType</th>
+      <th class="col-pk">PK</th>
+      <th class="col-fk">FK</th>
+      <th class="col-null">Nullable</th>
+      <th class="col-note">비고 (기초코드 FK 값)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="col-num">1</td>
+      <td class="col-name">prd_cd</td>
+      <td class="col-desc">상품코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_prd_products</span></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">2</td>
+      <td class="col-name">page_min</td>
+      <td class="col-desc">페이지최소</td>
+      <td class="col-type">integer</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">3</td>
+      <td class="col-name">page_max</td>
+      <td class="col-desc">페이지최대</td>
+      <td class="col-type">integer</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">4</td>
+      <td class="col-name">page_incr</td>
+      <td class="col-desc">페이지증가단위</td>
+      <td class="col-type">integer</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">5</td>
+      <td class="col-name">note</td>
+      <td class="col-desc">비고</td>
+      <td class="col-type">varchar(500)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">6</td>
+      <td class="col-name">reg_dt</td>
+      <td class="col-desc">등록일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">7</td>
+      <td class="col-name">upd_dt</td>
+      <td class="col-desc">수정일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="table-section" id="t_prd_product_addons">
+<h2>t_prd_product_addons — 상품별추가상품</h2>
+<table class="spec-table">
+  <thead>
+    <tr>
+      <th class="col-num">#</th>
+      <th class="col-name">컬럼명</th>
+      <th class="col-desc">한글명(Description)</th>
+      <th class="col-type">DataType</th>
+      <th class="col-pk">PK</th>
+      <th class="col-fk">FK</th>
+      <th class="col-null">Nullable</th>
+      <th class="col-note">비고 (기초코드 FK 값)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="col-num">1</td>
+      <td class="col-name">prd_cd</td>
+      <td class="col-desc">상품코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_prd_products</span></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">2</td>
+      <td class="col-name">tmpl_cd</td>
+      <td class="col-desc">템플릿코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_prd_templates</span></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">3</td>
+      <td class="col-name">disp_seq</td>
+      <td class="col-desc">표시순서</td>
+      <td class="col-type">integer</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">4</td>
+      <td class="col-name">note</td>
+      <td class="col-desc">비고</td>
+      <td class="col-type">varchar(500)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">5</td>
+      <td class="col-name">reg_dt</td>
+      <td class="col-desc">등록일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">6</td>
+      <td class="col-name">upd_dt</td>
+      <td class="col-desc">수정일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="table-section" id="t_cus_customers">
+<h2>t_cus_customers — 고객</h2>
+<table class="spec-table">
+  <thead>
+    <tr>
+      <th class="col-num">#</th>
+      <th class="col-name">컬럼명</th>
+      <th class="col-desc">한글명(Description)</th>
+      <th class="col-type">DataType</th>
+      <th class="col-pk">PK</th>
+      <th class="col-fk">FK</th>
+      <th class="col-null">Nullable</th>
+      <th class="col-note">비고 (기초코드 FK 값)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="col-num">1</td>
+      <td class="col-name">cus_cd</td>
+      <td class="col-desc">고객코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">2</td>
+      <td class="col-name">cus_nm</td>
+      <td class="col-desc">고객명</td>
+      <td class="col-type">varchar(100)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">3</td>
+      <td class="col-name">grade_cd</td>
+      <td class="col-desc">등급코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_cod_base_codes</span></td>
+      <td class="col-null">Y</td>
+      <td class="col-note">CUS_GRADE: VIP / 일반</td>
+    </tr>
+    <tr>
+      <td class="col-num">4</td>
+      <td class="col-name">reg_ymd</td>
+      <td class="col-desc">등록일자</td>
+      <td class="col-type">varchar(10)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">5</td>
+      <td class="col-name">use_yn</td>
+      <td class="col-desc">사용여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">6</td>
+      <td class="col-name">reg_dt</td>
+      <td class="col-desc">등록일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">7</td>
+      <td class="col-name">upd_dt</td>
+      <td class="col-desc">수정일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="section-divider">
+<h2 class="section-divider-heading">컨피규레이터 (Configurator)</h2>
+</div>
+
+<div class="table-section" id="t_prd_product_option_groups">
+<h2>t_prd_product_option_groups — 상품 옵션그룹</h2>
+<table class="spec-table">
+  <thead>
+    <tr>
+      <th class="col-num">#</th>
+      <th class="col-name">컬럼명</th>
+      <th class="col-desc">한글명(Description)</th>
+      <th class="col-type">DataType</th>
+      <th class="col-pk">PK</th>
+      <th class="col-fk">FK</th>
+      <th class="col-null">Nullable</th>
+      <th class="col-note">비고 (기초코드 FK 값)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="col-num">1</td>
+      <td class="col-name">prd_cd</td>
+      <td class="col-desc">상품코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_prd_products</span></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">2</td>
+      <td class="col-name">opt_grp_cd</td>
+      <td class="col-desc">옵션그룹코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">3</td>
+      <td class="col-name">opt_grp_nm</td>
+      <td class="col-desc">옵션그룹명</td>
+      <td class="col-type">varchar(100)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">4</td>
+      <td class="col-name">usr_def_nm</td>
+      <td class="col-desc">사용자정의명</td>
+      <td class="col-type">varchar(100)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">5</td>
+      <td class="col-name">sel_typ_cd</td>
+      <td class="col-desc">선택유형코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_cod_base_codes</span></td>
+      <td class="col-null">Y</td>
+      <td class="col-note">SEL_TYPE: 단일 / 다중</td>
+    </tr>
+    <tr>
+      <td class="col-num">6</td>
+      <td class="col-name">min_sel_cnt</td>
+      <td class="col-desc">최소선택수</td>
+      <td class="col-type">integer</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">7</td>
+      <td class="col-name">max_sel_cnt</td>
+      <td class="col-desc">최대선택수</td>
+      <td class="col-type">integer</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">8</td>
+      <td class="col-name">mand_yn</td>
+      <td class="col-desc">필수여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">9</td>
+      <td class="col-name">disp_seq</td>
+      <td class="col-desc">표시순서</td>
+      <td class="col-type">integer</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">10</td>
+      <td class="col-name">use_yn</td>
+      <td class="col-desc">사용여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">11</td>
+      <td class="col-name">note</td>
+      <td class="col-desc">비고</td>
+      <td class="col-type">varchar(500)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">12</td>
+      <td class="col-name">del_yn</td>
+      <td class="col-desc">삭제여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">13</td>
+      <td class="col-name">del_dt</td>
+      <td class="col-desc">삭제일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">14</td>
+      <td class="col-name">reg_dt</td>
+      <td class="col-desc">등록일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">15</td>
+      <td class="col-name">upd_dt</td>
+      <td class="col-desc">수정일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="table-section" id="t_prd_product_options">
+<h2>t_prd_product_options — 상품 옵션</h2>
+<table class="spec-table">
+  <thead>
+    <tr>
+      <th class="col-num">#</th>
+      <th class="col-name">컬럼명</th>
+      <th class="col-desc">한글명(Description)</th>
+      <th class="col-type">DataType</th>
+      <th class="col-pk">PK</th>
+      <th class="col-fk">FK</th>
+      <th class="col-null">Nullable</th>
+      <th class="col-note">비고 (기초코드 FK 값)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="col-num">1</td>
+      <td class="col-name">prd_cd</td>
+      <td class="col-desc">상품코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_prd_products</span></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">2</td>
+      <td class="col-name">opt_cd</td>
+      <td class="col-desc">옵션코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">3</td>
+      <td class="col-name">opt_grp_cd</td>
+      <td class="col-desc">소속 옵션그룹코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_prd_product_option_groups</span></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">4</td>
+      <td class="col-name">opt_nm</td>
+      <td class="col-desc">옵션명</td>
+      <td class="col-type">varchar(100)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">5</td>
+      <td class="col-name">usr_def_cd</td>
+      <td class="col-desc">사용자정의코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">6</td>
+      <td class="col-name">usr_def_nm</td>
+      <td class="col-desc">사용자정의명</td>
+      <td class="col-type">varchar(100)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">7</td>
+      <td class="col-name">dflt_yn</td>
+      <td class="col-desc">기본값여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">8</td>
+      <td class="col-name">disp_seq</td>
+      <td class="col-desc">표시순서</td>
+      <td class="col-type">integer</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">9</td>
+      <td class="col-name">use_yn</td>
+      <td class="col-desc">사용여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">10</td>
+      <td class="col-name">note</td>
+      <td class="col-desc">비고</td>
+      <td class="col-type">varchar(500)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">11</td>
+      <td class="col-name">tags</td>
+      <td class="col-desc">태그목록</td>
+      <td class="col-type">jsonb</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">12</td>
+      <td class="col-name">del_yn</td>
+      <td class="col-desc">삭제여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">13</td>
+      <td class="col-name">del_dt</td>
+      <td class="col-desc">삭제일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">14</td>
+      <td class="col-name">reg_dt</td>
+      <td class="col-desc">등록일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">15</td>
+      <td class="col-name">upd_dt</td>
+      <td class="col-desc">수정일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr style="background:#fff7e6;">
+      <td class="col-num">16</td>
+      <td class="col-name">badge_cd</td>
+      <td class="col-desc">옵션배지코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_cod_base_codes</span></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"><b>2026-07-01 위젯 추가</b> — BADGE_TYPE: recommend/best/new/up (OptionValue.badge)</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="table-section" id="t_prd_product_option_items">
+<h2>t_prd_product_option_items — 상품 옵션항목</h2>
+<table class="spec-table">
+  <thead>
+    <tr>
+      <th class="col-num">#</th>
+      <th class="col-name">컬럼명</th>
+      <th class="col-desc">한글명(Description)</th>
+      <th class="col-type">DataType</th>
+      <th class="col-pk">PK</th>
+      <th class="col-fk">FK</th>
+      <th class="col-null">Nullable</th>
+      <th class="col-note">비고 (기초코드 FK 값)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="col-num">1</td>
+      <td class="col-name">prd_cd</td>
+      <td class="col-desc">상품코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_prd_product_options</span></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">2</td>
+      <td class="col-name">opt_cd</td>
+      <td class="col-desc">옵션코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_prd_product_options</span></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">3</td>
+      <td class="col-name">item_seq</td>
+      <td class="col-desc">항목순서</td>
+      <td class="col-type">integer</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">4</td>
+      <td class="col-name">ref_dim_cd</td>
+      <td class="col-desc">참조차원유형코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_cod_base_codes</span></td>
+      <td class="col-null">N</td>
+      <td class="col-note">OPT_REF_DIM: 사이즈 / 판형 / 자재 / 공정 / 묶음수 / 도수 / 셋트</td>
+    </tr>
+    <tr>
+      <td class="col-num">5</td>
+      <td class="col-name">ref_key1</td>
+      <td class="col-desc">참조키1</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">6</td>
+      <td class="col-name">ref_key2</td>
+      <td class="col-desc">참조키2</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">7</td>
+      <td class="col-name">qty</td>
+      <td class="col-desc">수량</td>
+      <td class="col-type">integer</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">8</td>
+      <td class="col-name">use_yn</td>
+      <td class="col-desc">사용여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">9</td>
+      <td class="col-name">del_yn</td>
+      <td class="col-desc">삭제여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">10</td>
+      <td class="col-name">del_dt</td>
+      <td class="col-desc">삭제일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">11</td>
+      <td class="col-name">reg_dt</td>
+      <td class="col-desc">등록일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">12</td>
+      <td class="col-name">upd_dt</td>
+      <td class="col-desc">수정일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="table-section" id="t_prd_templates">
+<h2>t_prd_templates — 추가상품 템플릿</h2>
+<table class="spec-table">
+  <thead>
+    <tr>
+      <th class="col-num">#</th>
+      <th class="col-name">컬럼명</th>
+      <th class="col-desc">한글명(Description)</th>
+      <th class="col-type">DataType</th>
+      <th class="col-pk">PK</th>
+      <th class="col-fk">FK</th>
+      <th class="col-null">Nullable</th>
+      <th class="col-note">비고 (기초코드 FK 값)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="col-num">1</td>
+      <td class="col-name">tmpl_cd</td>
+      <td class="col-desc">템플릿코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">2</td>
+      <td class="col-name">base_prd_cd</td>
+      <td class="col-desc">기준상품코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_prd_products</span></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">3</td>
+      <td class="col-name">tmpl_nm</td>
+      <td class="col-desc">템플릿명</td>
+      <td class="col-type">varchar(200)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">4</td>
+      <td class="col-name">usr_def_cd</td>
+      <td class="col-desc">사용자정의코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">5</td>
+      <td class="col-name">usr_def_nm</td>
+      <td class="col-desc">사용자정의명</td>
+      <td class="col-type">varchar(200)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">6</td>
+      <td class="col-name">dflt_qty</td>
+      <td class="col-desc">기본수량</td>
+      <td class="col-type">integer</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">7</td>
+      <td class="col-name">use_yn</td>
+      <td class="col-desc">사용여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">8</td>
+      <td class="col-name">note</td>
+      <td class="col-desc">비고</td>
+      <td class="col-type">varchar(500)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">9</td>
+      <td class="col-name">tags</td>
+      <td class="col-desc">태그목록</td>
+      <td class="col-type">jsonb</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">10</td>
+      <td class="col-name">del_yn</td>
+      <td class="col-desc">삭제여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">11</td>
+      <td class="col-name">del_dt</td>
+      <td class="col-desc">삭제일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">12</td>
+      <td class="col-name">reg_dt</td>
+      <td class="col-desc">등록일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">13</td>
+      <td class="col-name">upd_dt</td>
+      <td class="col-desc">수정일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="table-section" id="t_prd_template_selections">
+<h2>t_prd_template_selections — 템플릿 선택값</h2>
+<table class="spec-table">
+  <thead>
+    <tr>
+      <th class="col-num">#</th>
+      <th class="col-name">컬럼명</th>
+      <th class="col-desc">한글명(Description)</th>
+      <th class="col-type">DataType</th>
+      <th class="col-pk">PK</th>
+      <th class="col-fk">FK</th>
+      <th class="col-null">Nullable</th>
+      <th class="col-note">비고 (기초코드 FK 값)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="col-num">1</td>
+      <td class="col-name">tmpl_cd</td>
+      <td class="col-desc">템플릿코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_prd_templates</span></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">2</td>
+      <td class="col-name">sel_seq</td>
+      <td class="col-desc">선택순서</td>
+      <td class="col-type">integer</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">3</td>
+      <td class="col-name">ref_dim_cd</td>
+      <td class="col-desc">참조차원유형코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_cod_base_codes</span></td>
+      <td class="col-null">Y</td>
+      <td class="col-note">OPT_REF_DIM: 사이즈 / 판형 / 자재 / 공정 / 묶음수 / 도수 / 셋트</td>
+    </tr>
+    <tr>
+      <td class="col-num">4</td>
+      <td class="col-name">ref_key1</td>
+      <td class="col-desc">참조키1</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">5</td>
+      <td class="col-name">ref_key2</td>
+      <td class="col-desc">참조키2</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">6</td>
+      <td class="col-name">opt_cd</td>
+      <td class="col-desc">옵션코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">7</td>
+      <td class="col-name">sel_val</td>
+      <td class="col-desc">선택값</td>
+      <td class="col-type">varchar(100)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">8</td>
+      <td class="col-name">qty</td>
+      <td class="col-desc">수량</td>
+      <td class="col-type">integer</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">9</td>
+      <td class="col-name">use_yn</td>
+      <td class="col-desc">사용여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">10</td>
+      <td class="col-name">del_yn</td>
+      <td class="col-desc">삭제여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">11</td>
+      <td class="col-name">del_dt</td>
+      <td class="col-desc">삭제일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">12</td>
+      <td class="col-name">reg_dt</td>
+      <td class="col-desc">등록일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">13</td>
+      <td class="col-name">upd_dt</td>
+      <td class="col-desc">수정일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="table-section" id="t_prd_product_constraints">
+<h2>t_prd_product_constraints — 상품 제약규칙</h2>
+<table class="spec-table">
+  <thead>
+    <tr>
+      <th class="col-num">#</th>
+      <th class="col-name">컬럼명</th>
+      <th class="col-desc">한글명(Description)</th>
+      <th class="col-type">DataType</th>
+      <th class="col-pk">PK</th>
+      <th class="col-fk">FK</th>
+      <th class="col-null">Nullable</th>
+      <th class="col-note">비고 (기초코드 FK 값)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="col-num">1</td>
+      <td class="col-name">prd_cd</td>
+      <td class="col-desc">상품코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_prd_products</span></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">2</td>
+      <td class="col-name">rule_cd</td>
+      <td class="col-desc">규칙코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">3</td>
+      <td class="col-name">rule_nm</td>
+      <td class="col-desc">규칙명</td>
+      <td class="col-type">varchar(200)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">4</td>
+      <td class="col-name">rule_typ_cd</td>
+      <td class="col-desc">규칙유형코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_cod_base_codes</span></td>
+      <td class="col-null">Y</td>
+      <td class="col-note">RULE_TYPE: 금지 / 필수동반</td>
+    </tr>
+    <tr>
+      <td class="col-num">5</td>
+      <td class="col-name">logic</td>
+      <td class="col-desc">JSONLogic 규칙</td>
+      <td class="col-type">jsonb</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">6</td>
+      <td class="col-name">err_msg</td>
+      <td class="col-desc">위반시 오류메시지</td>
+      <td class="col-type">varchar(500)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">7</td>
+      <td class="col-name">disp_seq</td>
+      <td class="col-desc">표시순서</td>
+      <td class="col-type">integer</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">8</td>
+      <td class="col-name">use_yn</td>
+      <td class="col-desc">사용여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">9</td>
+      <td class="col-name">del_yn</td>
+      <td class="col-desc">삭제여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">10</td>
+      <td class="col-name">del_dt</td>
+      <td class="col-desc">삭제일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">11</td>
+      <td class="col-name">reg_dt</td>
+      <td class="col-desc">등록일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">12</td>
+      <td class="col-name">upd_dt</td>
+      <td class="col-desc">수정일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="section-divider">
+<h2 class="section-divider-heading">가격 (Pricing)</h2>
+</div>
+
+<div class="table-section" id="t_prc_price_formulas">
+<h2>t_prc_price_formulas — 가격공식</h2>
+<table class="spec-table">
+  <thead>
+    <tr>
+      <th class="col-num">#</th>
+      <th class="col-name">컬럼명</th>
+      <th class="col-desc">한글명(Description)</th>
+      <th class="col-type">DataType</th>
+      <th class="col-pk">PK</th>
+      <th class="col-fk">FK</th>
+      <th class="col-null">Nullable</th>
+      <th class="col-note">비고 (기초코드 FK 값)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="col-num">1</td>
+      <td class="col-name">frm_cd</td>
+      <td class="col-desc">공식코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">2</td>
+      <td class="col-name">frm_nm</td>
+      <td class="col-desc">공식명</td>
+      <td class="col-type">varchar(200)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">3</td>
+      <td class="col-name">note</td>
+      <td class="col-desc">비고</td>
+      <td class="col-type">varchar(500)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">4</td>
+      <td class="col-name">use_yn</td>
+      <td class="col-desc">사용여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">5</td>
+      <td class="col-name">reg_dt</td>
+      <td class="col-desc">등록일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">6</td>
+      <td class="col-name">upd_dt</td>
+      <td class="col-desc">수정일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="table-section" id="t_prc_price_components">
+<h2>t_prc_price_components — 가격구성요소</h2>
+<table class="spec-table">
+  <thead>
+    <tr>
+      <th class="col-num">#</th>
+      <th class="col-name">컬럼명</th>
+      <th class="col-desc">한글명(Description)</th>
+      <th class="col-type">DataType</th>
+      <th class="col-pk">PK</th>
+      <th class="col-fk">FK</th>
+      <th class="col-null">Nullable</th>
+      <th class="col-note">비고 (기초코드 FK 값)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="col-num">1</td>
+      <td class="col-name">comp_cd</td>
+      <td class="col-desc">구성요소코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">2</td>
+      <td class="col-name">comp_nm</td>
+      <td class="col-desc">구성요소명</td>
+      <td class="col-type">varchar(200)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">3</td>
+      <td class="col-name">comp_typ_cd</td>
+      <td class="col-desc">구성요소유형코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_cod_base_codes</span></td>
+      <td class="col-null">Y</td>
+      <td class="col-note">PRC_COMPONENT_TYPE: 인쇄비 / 코팅비 / 용지비 / 후가공비 / 박형압비 / 완제품비 / 제본비</td>
+    </tr>
+    <tr>
+      <td class="col-num">4</td>
+      <td class="col-name">prc_typ_cd</td>
+      <td class="col-desc">단가유형코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_cod_base_codes</span></td>
+      <td class="col-null">Y</td>
+      <td class="col-note">PRICE_TYPE: 단가형 / 합가형</td>
+    </tr>
+    <tr>
+      <td class="col-num">5</td>
+      <td class="col-name">use_dims</td>
+      <td class="col-desc">사용차원목록</td>
+      <td class="col-type">jsonb</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">6</td>
+      <td class="col-name">note</td>
+      <td class="col-desc">비고</td>
+      <td class="col-type">varchar(500)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">7</td>
+      <td class="col-name">use_yn</td>
+      <td class="col-desc">사용여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">8</td>
+      <td class="col-name">del_yn</td>
+      <td class="col-desc">삭제여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">9</td>
+      <td class="col-name">del_dt</td>
+      <td class="col-desc">삭제일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">10</td>
+      <td class="col-name">reg_dt</td>
+      <td class="col-desc">등록일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">11</td>
+      <td class="col-name">upd_dt</td>
+      <td class="col-desc">수정일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="table-section" id="t_prc_formula_components">
+<h2>t_prc_formula_components — 공식별구성요소</h2>
+<table class="spec-table">
+  <thead>
+    <tr>
+      <th class="col-num">#</th>
+      <th class="col-name">컬럼명</th>
+      <th class="col-desc">한글명(Description)</th>
+      <th class="col-type">DataType</th>
+      <th class="col-pk">PK</th>
+      <th class="col-fk">FK</th>
+      <th class="col-null">Nullable</th>
+      <th class="col-note">비고 (기초코드 FK 값)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="col-num">1</td>
+      <td class="col-name">frm_cd</td>
+      <td class="col-desc">공식코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_prc_price_formulas</span></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">2</td>
+      <td class="col-name">comp_cd</td>
+      <td class="col-desc">구성요소코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_prc_price_components</span></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">3</td>
+      <td class="col-name">disp_seq</td>
+      <td class="col-desc">표시순서</td>
+      <td class="col-type">integer</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">4</td>
+      <td class="col-name">addtn_yn</td>
+      <td class="col-desc">가산여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">5</td>
+      <td class="col-name">reg_dt</td>
+      <td class="col-desc">등록일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">6</td>
+      <td class="col-name">upd_dt</td>
+      <td class="col-desc">수정일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="table-section" id="t_prc_component_prices">
+<h2>t_prc_component_prices — 구성요소 다차원 단가 — 시계열</h2>
+<table class="spec-table">
+  <thead>
+    <tr>
+      <th class="col-num">#</th>
+      <th class="col-name">컬럼명</th>
+      <th class="col-desc">한글명(Description)</th>
+      <th class="col-type">DataType</th>
+      <th class="col-pk">PK</th>
+      <th class="col-fk">FK</th>
+      <th class="col-null">Nullable</th>
+      <th class="col-note">비고 (기초코드 FK 값)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="col-num">1</td>
+      <td class="col-name">comp_price_id</td>
+      <td class="col-desc">구성요소단가ID</td>
+      <td class="col-type">bigint</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">2</td>
+      <td class="col-name">comp_cd</td>
+      <td class="col-desc">구성요소코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_prc_price_components</span></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">3</td>
+      <td class="col-name">apply_ymd</td>
+      <td class="col-desc">적용일자</td>
+      <td class="col-type">varchar(10)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">4</td>
+      <td class="col-name">siz_cd</td>
+      <td class="col-desc">사이즈코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_siz_sizes</span></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">5</td>
+      <td class="col-name">plt_siz_cd</td>
+      <td class="col-desc">판형사이즈코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_siz_sizes</span></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">6</td>
+      <td class="col-name">clr_cd</td>
+      <td class="col-desc">도수코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_clr_color_counts</span></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">7</td>
+      <td class="col-name">mat_cd</td>
+      <td class="col-desc">자재코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_mat_materials</span></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">8</td>
+      <td class="col-name">proc_cd</td>
+      <td class="col-desc">공정코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_proc_processes</span></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">9</td>
+      <td class="col-name">opt_cd</td>
+      <td class="col-desc">옵션코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">10</td>
+      <td class="col-name">coat_side_cnt</td>
+      <td class="col-desc">코팅면수</td>
+      <td class="col-type">integer</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">11</td>
+      <td class="col-name">bdl_qty</td>
+      <td class="col-desc">묶음수 차원 키</td>
+      <td class="col-type">integer</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">12</td>
+      <td class="col-name">siz_width</td>
+      <td class="col-desc">사이즈가로(이하)</td>
+      <td class="col-type">numeric(8,2)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">13</td>
+      <td class="col-name">siz_height</td>
+      <td class="col-desc">사이즈세로(이하)</td>
+      <td class="col-type">numeric(8,2)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">14</td>
+      <td class="col-name">min_qty</td>
+      <td class="col-desc">수량구간하한</td>
+      <td class="col-type">integer</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">15</td>
+      <td class="col-name">dim_vals</td>
+      <td class="col-desc">차원값(공정상세 파라미터 등 동적 차원)</td>
+      <td class="col-type">jsonb</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">16</td>
+      <td class="col-name">unit_price</td>
+      <td class="col-desc">단가</td>
+      <td class="col-type">numeric(12,2)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">17</td>
+      <td class="col-name">note</td>
+      <td class="col-desc">비고</td>
+      <td class="col-type">varchar(500)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">18</td>
+      <td class="col-name">print_opt_cd</td>
+      <td class="col-desc">인쇄옵션코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_prt_print_options</span></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">19</td>
+      <td class="col-name">reg_dt</td>
+      <td class="col-desc">등록일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">20</td>
+      <td class="col-name">upd_dt</td>
+      <td class="col-desc">수정일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="table-section" id="t_prd_product_price_formulas">
+<h2>t_prd_product_price_formulas — 상품별가격공식</h2>
+<table class="spec-table">
+  <thead>
+    <tr>
+      <th class="col-num">#</th>
+      <th class="col-name">컬럼명</th>
+      <th class="col-desc">한글명(Description)</th>
+      <th class="col-type">DataType</th>
+      <th class="col-pk">PK</th>
+      <th class="col-fk">FK</th>
+      <th class="col-null">Nullable</th>
+      <th class="col-note">비고 (기초코드 FK 값)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="col-num">1</td>
+      <td class="col-name">prd_cd</td>
+      <td class="col-desc">상품코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_prd_products</span></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">2</td>
+      <td class="col-name">frm_cd</td>
+      <td class="col-desc">공식코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_prc_price_formulas</span></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">3</td>
+      <td class="col-name">apply_bgn_ymd</td>
+      <td class="col-desc">적용시작일자</td>
+      <td class="col-type">varchar(10)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">4</td>
+      <td class="col-name">note</td>
+      <td class="col-desc">비고</td>
+      <td class="col-type">varchar(500)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">5</td>
+      <td class="col-name">reg_dt</td>
+      <td class="col-desc">등록일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">6</td>
+      <td class="col-name">upd_dt</td>
+      <td class="col-desc">수정일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="table-section" id="t_prd_product_prices">
+<h2>t_prd_product_prices — 상품단가, 시계열</h2>
+<table class="spec-table">
+  <thead>
+    <tr>
+      <th class="col-num">#</th>
+      <th class="col-name">컬럼명</th>
+      <th class="col-desc">한글명(Description)</th>
+      <th class="col-type">DataType</th>
+      <th class="col-pk">PK</th>
+      <th class="col-fk">FK</th>
+      <th class="col-null">Nullable</th>
+      <th class="col-note">비고 (기초코드 FK 값)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="col-num">1</td>
+      <td class="col-name">prd_cd</td>
+      <td class="col-desc">상품코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_prd_products</span></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">2</td>
+      <td class="col-name">apply_ymd</td>
+      <td class="col-desc">적용일자</td>
+      <td class="col-type">varchar(10)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">3</td>
+      <td class="col-name">unit_price</td>
+      <td class="col-desc">단가</td>
+      <td class="col-type">numeric(12,2)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">4</td>
+      <td class="col-name">note</td>
+      <td class="col-desc">비고</td>
+      <td class="col-type">varchar(500)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">5</td>
+      <td class="col-name">reg_dt</td>
+      <td class="col-desc">등록일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">6</td>
+      <td class="col-name">upd_dt</td>
+      <td class="col-desc">수정일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="table-section" id="t_prd_template_prices">
+<h2>t_prd_template_prices — 템플릿단가, 시계열</h2>
+<table class="spec-table">
+  <thead>
+    <tr>
+      <th class="col-num">#</th>
+      <th class="col-name">컬럼명</th>
+      <th class="col-desc">한글명(Description)</th>
+      <th class="col-type">DataType</th>
+      <th class="col-pk">PK</th>
+      <th class="col-fk">FK</th>
+      <th class="col-null">Nullable</th>
+      <th class="col-note">비고 (기초코드 FK 값)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="col-num">1</td>
+      <td class="col-name">tmpl_cd</td>
+      <td class="col-desc">템플릿코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_prd_templates</span></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">2</td>
+      <td class="col-name">apply_ymd</td>
+      <td class="col-desc">적용일자</td>
+      <td class="col-type">varchar(10)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">3</td>
+      <td class="col-name">unit_price</td>
+      <td class="col-desc">단가</td>
+      <td class="col-type">numeric(12,2)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">4</td>
+      <td class="col-name">note</td>
+      <td class="col-desc">비고</td>
+      <td class="col-type">varchar(500)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">5</td>
+      <td class="col-name">reg_dt</td>
+      <td class="col-desc">등록일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">6</td>
+      <td class="col-name">upd_dt</td>
+      <td class="col-desc">수정일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="section-divider">
+<h2 class="section-divider-heading">할인 (Discount)</h2>
+</div>
+
+<div class="table-section" id="t_dsc_discount_tables">
+<h2>t_dsc_discount_tables — 수량구간할인 마스터</h2>
+<table class="spec-table">
+  <thead>
+    <tr>
+      <th class="col-num">#</th>
+      <th class="col-name">컬럼명</th>
+      <th class="col-desc">한글명(Description)</th>
+      <th class="col-type">DataType</th>
+      <th class="col-pk">PK</th>
+      <th class="col-fk">FK</th>
+      <th class="col-null">Nullable</th>
+      <th class="col-note">비고 (기초코드 FK 값)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="col-num">1</td>
+      <td class="col-name">dsc_tbl_cd</td>
+      <td class="col-desc">할인테이블코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">2</td>
+      <td class="col-name">dsc_tbl_nm</td>
+      <td class="col-desc">할인테이블명</td>
+      <td class="col-type">varchar(100)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">3</td>
+      <td class="col-name">note</td>
+      <td class="col-desc">비고</td>
+      <td class="col-type">varchar(500)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">4</td>
+      <td class="col-name">use_yn</td>
+      <td class="col-desc">사용여부</td>
+      <td class="col-type">char(1)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">5</td>
+      <td class="col-name">dsc_typ_cd</td>
+      <td class="col-desc"></td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_cod_base_codes</span></td>
+      <td class="col-null">Y</td>
+      <td class="col-note">DSC_TYPE: 정률 / 정액</td>
+    </tr>
+    <tr>
+      <td class="col-num">6</td>
+      <td class="col-name">reg_dt</td>
+      <td class="col-desc">등록일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">7</td>
+      <td class="col-name">upd_dt</td>
+      <td class="col-desc">수정일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="table-section" id="t_dsc_discount_details">
+<h2>t_dsc_discount_details — 수량구간할인상세, 시계열</h2>
+<table class="spec-table">
+  <thead>
+    <tr>
+      <th class="col-num">#</th>
+      <th class="col-name">컬럼명</th>
+      <th class="col-desc">한글명(Description)</th>
+      <th class="col-type">DataType</th>
+      <th class="col-pk">PK</th>
+      <th class="col-fk">FK</th>
+      <th class="col-null">Nullable</th>
+      <th class="col-note">비고 (기초코드 FK 값)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="col-num">1</td>
+      <td class="col-name">dsc_tbl_cd</td>
+      <td class="col-desc">할인테이블코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_dsc_discount_tables</span></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">2</td>
+      <td class="col-name">apply_ymd</td>
+      <td class="col-desc">적용일자</td>
+      <td class="col-type">varchar(10)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">3</td>
+      <td class="col-name">min_qty</td>
+      <td class="col-desc">수량구간하한</td>
+      <td class="col-type">integer</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">4</td>
+      <td class="col-name">max_qty</td>
+      <td class="col-desc">수량구간상한</td>
+      <td class="col-type">integer</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">5</td>
+      <td class="col-name">dsc_rate</td>
+      <td class="col-desc">할인율</td>
+      <td class="col-type">numeric(5,2)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">6</td>
+      <td class="col-name">dsc_amt</td>
+      <td class="col-desc">할인액</td>
+      <td class="col-type">numeric(12,2)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">7</td>
+      <td class="col-name">note</td>
+      <td class="col-desc">비고</td>
+      <td class="col-type">varchar(500)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">8</td>
+      <td class="col-name">reg_dt</td>
+      <td class="col-desc">등록일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">9</td>
+      <td class="col-name">upd_dt</td>
+      <td class="col-desc">수정일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="table-section" id="t_dsc_grade_discount_rates">
+<h2>t_dsc_grade_discount_rates — 등급별할인율, 시계열</h2>
+<table class="spec-table">
+  <thead>
+    <tr>
+      <th class="col-num">#</th>
+      <th class="col-name">컬럼명</th>
+      <th class="col-desc">한글명(Description)</th>
+      <th class="col-type">DataType</th>
+      <th class="col-pk">PK</th>
+      <th class="col-fk">FK</th>
+      <th class="col-null">Nullable</th>
+      <th class="col-note">비고 (기초코드 FK 값)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="col-num">1</td>
+      <td class="col-name">grade_cd</td>
+      <td class="col-desc">등급코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_cod_base_codes</span></td>
+      <td class="col-null">N</td>
+      <td class="col-note">CUS_GRADE: VIP / 일반</td>
+    </tr>
+    <tr>
+      <td class="col-num">2</td>
+      <td class="col-name">cat_cd</td>
+      <td class="col-desc">카테고리코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_cat_categories</span></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">3</td>
+      <td class="col-name">apply_ymd</td>
+      <td class="col-desc">적용일자</td>
+      <td class="col-type">varchar(10)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">4</td>
+      <td class="col-name">dsc_typ_cd</td>
+      <td class="col-desc">할인유형코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_cod_base_codes</span></td>
+      <td class="col-null">Y</td>
+      <td class="col-note">DSC_TYPE: 정률 / 정액</td>
+    </tr>
+    <tr>
+      <td class="col-num">5</td>
+      <td class="col-name">dsc_rate</td>
+      <td class="col-desc">할인율</td>
+      <td class="col-type">numeric(5,2)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">6</td>
+      <td class="col-name">dsc_amt</td>
+      <td class="col-desc">할인액</td>
+      <td class="col-type">numeric(12,2)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">7</td>
+      <td class="col-name">note</td>
+      <td class="col-desc">비고</td>
+      <td class="col-type">varchar(500)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">8</td>
+      <td class="col-name">reg_dt</td>
+      <td class="col-desc">등록일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">9</td>
+      <td class="col-name">upd_dt</td>
+      <td class="col-desc">수정일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="table-section" id="t_prd_product_discount_tables">
+<h2>t_prd_product_discount_tables — 상품별할인테이블</h2>
+<table class="spec-table">
+  <thead>
+    <tr>
+      <th class="col-num">#</th>
+      <th class="col-name">컬럼명</th>
+      <th class="col-desc">한글명(Description)</th>
+      <th class="col-type">DataType</th>
+      <th class="col-pk">PK</th>
+      <th class="col-fk">FK</th>
+      <th class="col-null">Nullable</th>
+      <th class="col-note">비고 (기초코드 FK 값)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="col-num">1</td>
+      <td class="col-name">prd_cd</td>
+      <td class="col-desc">상품코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_prd_products</span></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">2</td>
+      <td class="col-name">dsc_tbl_cd</td>
+      <td class="col-desc">할인테이블코드</td>
+      <td class="col-type">varchar(50)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"><span class="fk-ref">&rarr; t_dsc_discount_tables</span></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">3</td>
+      <td class="col-name">apply_bgn_ymd</td>
+      <td class="col-desc">적용시작일자</td>
+      <td class="col-type">varchar(10)</td>
+      <td class="col-pk"><span class="pk-mark">&#x25CF;</span></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">4</td>
+      <td class="col-name">note</td>
+      <td class="col-desc">비고</td>
+      <td class="col-type">varchar(500)</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">5</td>
+      <td class="col-name">reg_dt</td>
+      <td class="col-desc">등록일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">N</td>
+      <td class="col-note"></td>
+    </tr>
+    <tr>
+      <td class="col-num">6</td>
+      <td class="col-name">upd_dt</td>
+      <td class="col-desc">수정일시</td>
+      <td class="col-type">timestamp</td>
+      <td class="col-pk"></td>
+      <td class="col-fk"></td>
+      <td class="col-null">Y</td>
+      <td class="col-note"></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+</body>
+</html>

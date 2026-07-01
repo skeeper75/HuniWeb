@@ -1,6 +1,33 @@
 # golden-cases-calendar.md — 캘린더 설계 대표 케이스 + 기대 골든값
 
-> **핵심 설계가(hpe-engine-designer) 산출 — 캘린더 종단 골든.** 설계 공식으로 계산되는 대표 케이스와 기대 골든값.
+---
+
+## ★ 2026-07-01 freshness 보정 (제본 골든 = 단일 COMP_BIND_CAL_WALL)
+
+> 본문 GC-CAL-1~6의 제본비 골든은 라이브 실측으로 **comp_cd만 보정**(단가값·기대값 전부 불변·verbatim 동일). DESK220/130/MINI comp는 **del_yn='Y' 논리삭제** → 전 제본 단가행이 `COMP_BIND_CAL_WALL` 하나에 proc_cd로 통합. 검증가는 **comp_cd=COMP_BIND_CAL_WALL + proc_cd selection**으로 재현한다.
+
+| 골든 | 본문 comp(폐기) | **재현 comp(2026-07-01)** | selection | 기대값(불변) |
+|------|-----------------|---------------------------|-----------|-------------|
+| GC-CAL-1 | DESK220 | **COMP_BIND_CAL_WALL** | proc_cd=PROC_000100·min_qty=1 | 5,000 ×1 = **5,000** |
+| GC-CAL-2 | DESK220 | COMP_BIND_CAL_WALL | proc_cd=PROC_000100·min_qty=4 | 4,000 ×4 = **16,000** (★합가형 반증) |
+| GC-CAL-3 | DESK220 | COMP_BIND_CAL_WALL | proc_cd=PROC_000100·min_qty=100 | 2,300 ×100 = **230,000** |
+| GC-CAL-4 | DESKMINI | COMP_BIND_CAL_WALL | proc_cd=PROC_000102·min_qty=10 | 2,500 ×10 = **25,000** |
+| GC-CAL-5 | WALL | COMP_BIND_CAL_WALL | proc_cd=PROC_000099·min_qty=50 | 2,500 ×50 = **125,000** |
+| GC-CAL-6 | DESK130 | COMP_BIND_CAL_WALL | proc_cd=PROC_000101·min_qty=1000 | 2,000 ×1000 = **2,000,000** |
+
+★ 단가값=라이브 comp_price_id 8348~8389 verbatim(2026-07-01 실측·전부 PRICE_TYPE.01). 제본 prc_typ .01 단가형 ×qty 결판 불변(GC-CAL-2=16,000이 입증).
+
+### GC-CAL-13 [신규·돈크리티컬] base 인쇄공정 PROC_000004 누락 시 인쇄비 0 (G-CAL-BASEPROC 입증)
+| 시나리오 | 인쇄비 골든 | 근거 |
+|----------|-------------|------|
+| selections에 proc_cd=PROC_000004(base 디지털인쇄) 주입 O | 3,000/판 × 총출력판수 (정답) | COMP_PRINT_DIGITAL_S1 use_dims proc_cd 매칭 |
+| **주입 X**(상품 product_processes에 PROC_000004 미바인딩) | **0 (silent·결함)** | proc_cd 불매칭→인쇄비 항 skip([[digital-print-base-proc-missing-260701]] 동형) |
+
+→ 검증가는 base proc 미주입 시 인쇄비=0(저청구)을 재현해 G-CAL-BASEPROC 발동을 입증. 캘린더 5상품 PROC_000004 자동선택이 PRICE≠0의 선행.
+
+---
+
+> **핵심 설계가(hpe-engine-designer) 산출 — 캘린더 종단 골든.** 설계 공식으로 계산되는 대표 케이스와 기대 골든값. [본문=2026-06-22·위 ★보정 절 우선]
 > 검증가(hpe-validator)·codex가 라이브 `evaluate_price`를 실호출/재구현해 **이 골든값을 재현**한다(허용오차 0).
 >
 > **★순환참조 금지[HARD]**: 골든값은 **가격표 셀(=라이브 단가행 verbatim)·상품마스터 inline verbatim**에서 가져온다. 설계가 만든 값이 아니다.
