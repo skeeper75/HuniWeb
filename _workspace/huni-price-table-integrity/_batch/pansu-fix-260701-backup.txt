@@ -1,0 +1,40 @@
+-- 백업 캡처 2026-07-01 (pansu lookup-first 교정 전)
+-- t_siz_pansu: 부재(신규 생성)
+
+-- 원본 fn_calc_pansu:
+CREATE OR REPLACE FUNCTION public.fn_calc_pansu(p_plate_siz_cd character varying, p_item_siz_cd character varying)
+ RETURNS integer
+ LANGUAGE plpgsql
+ STABLE
+AS $function$
+DECLARE
+    pw numeric; ph numeric;   -- 판 실제영역(작업 − 여백)
+    iw numeric; ih numeric;   -- 아이템 작업사이즈(여분포함)
+    n_normal integer;         -- 정상 배치
+    n_rotate integer;         -- 90° 회전 배치
+BEGIN
+    -- 판형: 작업사이즈에서 여백 제거 = 인쇄 실제영역
+    SELECT work_width  - COALESCE(margin_lft, 0) - COALESCE(margin_rgt, 0),
+           work_height - COALESCE(margin_top, 0) - COALESCE(margin_bot, 0)
+      INTO pw, ph
+      FROM t_siz_sizes
+     WHERE siz_cd = p_plate_siz_cd;
+
+    -- 아이템: 작업사이즈(여분포함) = 한 장이 차지하는 자리
+    SELECT work_width, work_height
+      INTO iw, ih
+      FROM t_siz_sizes
+     WHERE siz_cd = p_item_siz_cd;
+
+    IF pw IS NULL OR ph IS NULL OR iw IS NULL OR ih IS NULL
+       OR pw <= 0 OR ph <= 0 OR iw <= 0 OR ih <= 0 THEN
+        RETURN NULL;   -- 치수 데이터 부족 → 계산불가
+    END IF;
+
+    n_normal := floor(pw / iw)::int * floor(ph / ih)::int;
+    n_rotate := floor(pw / ih)::int * floor(ph / iw)::int;
+
+    RETURN GREATEST(n_normal, n_rotate);
+END;
+$function$
+
