@@ -1,19 +1,19 @@
 {
  "summary": {
   "source": "snapshot",
-  "snap": "snap_20260701_1050",
-  "formulas": 102,
-  "wired_links": 230,
+  "snap": "snap_20260701_1652",
+  "formulas": 104,
+  "wired_links": 237,
   "components_total": 180,
   "components_with_price": 176,
-  "components_wired": 133,
-  "orphan_comps": 6,
+  "components_wired": 134,
+  "orphan_comps": 5,
   "legit_unused": 7,
   "dead_wires": 6,
   "deleted_wires": 1,
   "no_formula_products": 0,
-  "total_wiring_defects": 13,
-  "verdict": "NO-GO(결함 13)"
+  "total_wiring_defects": 12,
+  "verdict": "NO-GO(결함 12)"
  },
  "orphans": [
   {
@@ -26,13 +26,6 @@
   {
    "comp_cd": "COMP_FOLD_CARD_3H",
    "comp_nm": "접지비 카드 3단",
-   "price_rows": 48,
-   "prc_typ": ".01",
-   "use_dims": "[\"min_qty\"]"
-  },
-  {
-   "comp_cd": "COMP_FOLD_CARD_6CR",
-   "comp_nm": "접지비 카드 6크리즈",
    "price_rows": 48,
    "prc_typ": ".01",
    "use_dims": "[\"min_qty\"]"
@@ -292,6 +285,15 @@
    "deleted": 0,
    "status": "WIRED_OK"
   },
+  "PRD_000030": {
+   "frm_cds": [
+    "PRF_DGP_C_6CR"
+   ],
+   "wired": 4,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
   "PRD_000031": {
    "frm_cds": [
     "PRF_NAMECARD_PREMIUM",
@@ -444,6 +446,15 @@
     "PRF_FOLD_SUM"
    ],
    "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000049": {
+   "frm_cds": [
+    "PRF_DGP_E"
+   ],
+   "wired": 11,
    "dead": 0,
    "deleted": 0,
    "status": "WIRED_OK"
@@ -707,6 +718,42 @@
     "PRF_PHOTOBOOK_INNER"
    ],
    "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000108": {
+   "frm_cds": [
+    "PRF_DGP_INNER"
+   ],
+   "wired": 2,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000109": {
+   "frm_cds": [
+    "PRF_DGP_INNER"
+   ],
+   "wired": 2,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000111": {
+   "frm_cds": [
+    "PRF_DGP_CAL_WIDE"
+   ],
+   "wired": 3,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000112": {
+   "frm_cds": [
+    "PRF_DGP_CAL_WIDE"
+   ],
+   "wired": 3,
    "dead": 0,
    "deleted": 0,
    "status": "WIRED_OK"
@@ -1172,12 +1219,12 @@
   },
   "PRD_000171": {
    "frm_cds": [
-    "PRF_ACRYL_ZIBITZ2_TBD"
+    "PRF_ZIBITZ_ACRYL"
    ],
    "wired": 1,
-   "dead": 1,
+   "dead": 0,
    "deleted": 0,
-   "status": "BROKEN"
+   "status": "WIRED_OK"
   },
   "PRD_000172": {
    "frm_cds": [

@@ -1,382 +1,5 @@
 [
   {
-    "timestamp": "2026-06-30T02:17:59.603Z",
-    "method": "GET",
-    "path": "/ko/product/get_digital_product_info",
-    "status": 200,
-    "responseShape": {
-      "_raw": "non-JSON",
-      "byteLength": 2228
-    }
-  },
-  {
-    "timestamp": "2026-06-30T02:17:59.926Z",
-    "method": "GET",
-    "path": "/ko/product/get_digital_product_info",
-    "status": 200,
-    "responseShape": {
-      "_raw": "non-JSON",
-      "byteLength": 1875
-    }
-  },
-  {
-    "timestamp": "2026-06-30T02:18:03.182Z",
-    "method": "POST",
-    "path": "/ko/product_price/get_ajax_price_vTmpl",
-    "status": 200,
-    "responseShape": {
-      "_raw": "non-JSON",
-      "byteLength": 716
-    }
-  },
-  {
-    "timestamp": "2026-06-30T02:18:03.169Z",
-    "method": "POST",
-    "path": "/ko/product_price/get_ajax_price_vTmpl",
-    "status": 200,
-    "responseShape": {
-      "_raw": "non-JSON",
-      "byteLength": 895
-    }
-  },
-  {
-    "timestamp": "2026-06-30T02:18:04.026Z",
-    "method": "POST",
-    "path": "/ko/product_price/get_ajax_price_vTmpl",
-    "status": 200,
-    "responseShape": {
-      "_raw": "non-JSON",
-      "byteLength": 725
-    }
-  },
-  {
-    "timestamp": "2026-06-30T02:18:00.560Z",
-    "method": "GET",
-    "path": "/ko/product/get_digital_product_info",
-    "status": 200,
-    "responseShape": {
-      "_raw": "non-JSON",
-      "byteLength": 1839
-    }
-  },
-  {
-    "timestamp": "2026-06-30T02:19:42.122Z",
-    "method": "POST",
-    "path": "/ko/product_price/get_ajax_price_vTmpl",
-    "status": 502,
-    "responseShape": {
-      "error": "string"
-    },
-    "responseBody": {
-      "error": "getaddrinfo ENOTFOUND www.redprinting.co.kr"
-    }
-  },
-  {
-    "timestamp": "2026-06-30T02:43:37.181Z",
-    "method": "POST",
-    "path": "/makers-api/token",
-    "status": 502,
-    "responseShape": {
-      "error": "string"
-    }
-  },
-  {
-    "timestamp": "2026-06-30T03:33:37.147Z",
-    "method": "POST",
-    "path": "/makers-api/token",
-    "status": 502,
-    "responseShape": {
-      "error": "string"
-    }
-  },
-  {
-    "timestamp": "2026-06-30T03:43:32.136Z",
-    "method": "GET",
-    "path": "/ko/product/get_digital_product_info",
-    "status": 200,
-    "responseShape": {
-      "_raw": "non-JSON",
-      "byteLength": 1839
-    }
-  },
-  {
-    "timestamp": "2026-06-30T03:43:32.105Z",
-    "method": "GET",
-    "path": "/ko/product/get_digital_product_info",
-    "status": 200,
-    "responseShape": {
-      "_raw": "non-JSON",
-      "byteLength": 2227
-    }
-  },
-  {
-    "timestamp": "2026-06-30T03:43:31.762Z",
-    "method": "GET",
-    "path": "/ko/product/get_digital_product_info",
-    "status": 200,
-    "responseShape": {
-      "_raw": "non-JSON",
-      "byteLength": 2278
-    }
-  },
-  {
-    "timestamp": "2026-06-30T03:43:32.125Z",
-    "method": "GET",
-    "path": "/ko/product/get_digital_product_info",
-    "status": 200,
-    "responseShape": {
-      "_raw": "non-JSON",
-      "byteLength": 1878
-    }
-  },
-  {
-    "timestamp": "2026-06-30T04:23:37.392Z",
-    "method": "POST",
-    "path": "/makers-api/token",
-    "status": 502,
-    "responseShape": {
-      "error": "string"
-    }
-  },
-  {
-    "timestamp": "2026-06-30T04:49:12.199Z",
-    "method": "GET",
-    "path": "/ko/product/get_digital_product_info",
-    "status": 200,
-    "responseShape": {
-      "_raw": "non-JSON",
-      "byteLength": 1877
-    }
-  },
-  {
-    "timestamp": "2026-06-30T04:49:12.132Z",
-    "method": "GET",
-    "path": "/ko/product/get_digital_product_info",
-    "status": 200,
-    "responseShape": {
-      "_raw": "non-JSON",
-      "byteLength": 2278
-    }
-  },
-  {
-    "timestamp": "2026-06-30T04:49:12.179Z",
-    "method": "GET",
-    "path": "/ko/product/get_digital_product_info",
-    "status": 200,
-    "responseShape": {
-      "_raw": "non-JSON",
-      "byteLength": 2231
-    }
-  },
-  {
-    "timestamp": "2026-06-30T04:49:12.204Z",
-    "method": "GET",
-    "path": "/ko/product/get_digital_product_info",
-    "status": 200,
-    "responseShape": {
-      "_raw": "non-JSON",
-      "byteLength": 1839
-    }
-  },
-  {
-    "timestamp": "2026-06-30T05:13:37.456Z",
-    "method": "POST",
-    "path": "/makers-api/token",
-    "status": 200,
-    "responseShape": {
-      "_raw": "non-JSON",
-      "byteLength": 391
-    }
-  },
-  {
-    "timestamp": "2026-06-30T06:03:37.189Z",
-    "method": "POST",
-    "path": "/makers-api/token",
-    "status": 200,
-    "responseShape": {
-      "_raw": "non-JSON",
-      "byteLength": 389
-    }
-  },
-  {
-    "timestamp": "2026-06-30T06:53:37.323Z",
-    "method": "POST",
-    "path": "/makers-api/token",
-    "status": 200,
-    "responseShape": {
-      "_raw": "non-JSON",
-      "byteLength": 389
-    }
-  },
-  {
-    "timestamp": "2026-06-30T07:43:37.610Z",
-    "method": "POST",
-    "path": "/makers-api/token",
-    "status": 200,
-    "responseShape": {
-      "_raw": "non-JSON",
-      "byteLength": 388
-    }
-  },
-  {
-    "timestamp": "2026-06-30T08:33:42.922Z",
-    "method": "POST",
-    "path": "/makers-api/token",
-    "status": 200,
-    "responseShape": {
-      "_raw": "non-JSON",
-      "byteLength": 387
-    }
-  },
-  {
-    "timestamp": "2026-06-30T09:23:37.456Z",
-    "method": "POST",
-    "path": "/makers-api/token",
-    "status": 502,
-    "responseShape": {
-      "error": "string"
-    }
-  },
-  {
-    "timestamp": "2026-06-30T10:13:37.241Z",
-    "method": "POST",
-    "path": "/makers-api/token",
-    "status": 502,
-    "responseShape": {
-      "error": "string"
-    }
-  },
-  {
-    "timestamp": "2026-06-30T10:46:17.813Z",
-    "method": "GET",
-    "path": "/ko/product/get_digital_product_info",
-    "status": 200,
-    "responseShape": {
-      "_raw": "non-JSON",
-      "byteLength": 1814
-    }
-  },
-  {
-    "timestamp": "2026-06-30T10:46:17.798Z",
-    "method": "GET",
-    "path": "/ko/product/get_digital_product_info",
-    "status": 200,
-    "responseShape": {
-      "_raw": "non-JSON",
-      "byteLength": 2207
-    }
-  },
-  {
-    "timestamp": "2026-06-30T10:46:17.804Z",
-    "method": "GET",
-    "path": "/ko/product/get_digital_product_info",
-    "status": 200,
-    "responseShape": {
-      "_raw": "non-JSON",
-      "byteLength": 1854
-    }
-  },
-  {
-    "timestamp": "2026-06-30T10:46:17.431Z",
-    "method": "GET",
-    "path": "/ko/product/get_digital_product_info",
-    "status": 200,
-    "responseShape": {
-      "_raw": "non-JSON",
-      "byteLength": 2257
-    }
-  },
-  {
-    "timestamp": "2026-06-30T10:46:56.512Z",
-    "method": "POST",
-    "path": "/ko/product_price/get_ajax_price_vTmpl",
-    "status": 200,
-    "responseShape": {
-      "_raw": "non-JSON",
-      "byteLength": 749
-    }
-  },
-  {
-    "timestamp": "2026-06-30T10:47:24.989Z",
-    "method": "POST",
-    "path": "/ko/product_price/get_ajax_price_vTmpl",
-    "status": 200,
-    "responseShape": {
-      "_raw": "non-JSON",
-      "byteLength": 716
-    }
-  },
-  {
-    "timestamp": "2026-06-30T10:47:38.961Z",
-    "method": "POST",
-    "path": "/ko/product_price/get_ajax_price_vTmpl",
-    "status": 200,
-    "responseShape": {
-      "_raw": "non-JSON",
-      "byteLength": 725
-    }
-  },
-  {
-    "timestamp": "2026-06-30T10:47:41.519Z",
-    "method": "POST",
-    "path": "/ko/product_price/get_ajax_price_vTmpl",
-    "status": 200,
-    "responseShape": {
-      "_raw": "non-JSON",
-      "byteLength": 895
-    }
-  },
-  {
-    "timestamp": "2026-06-30T11:03:39.066Z",
-    "method": "POST",
-    "path": "/makers-api/token",
-    "status": 200,
-    "responseShape": {
-      "_raw": "non-JSON",
-      "byteLength": 388
-    }
-  },
-  {
-    "timestamp": "2026-06-30T11:53:37.212Z",
-    "method": "POST",
-    "path": "/makers-api/token",
-    "status": 200,
-    "responseShape": {
-      "_raw": "non-JSON",
-      "byteLength": 387
-    }
-  },
-  {
-    "timestamp": "2026-06-30T12:43:37.346Z",
-    "method": "POST",
-    "path": "/makers-api/token",
-    "status": 200,
-    "responseShape": {
-      "_raw": "non-JSON",
-      "byteLength": 385
-    }
-  },
-  {
-    "timestamp": "2026-06-30T13:33:37.165Z",
-    "method": "POST",
-    "path": "/makers-api/token",
-    "status": 200,
-    "responseShape": {
-      "_raw": "non-JSON",
-      "byteLength": 386
-    }
-  },
-  {
-    "timestamp": "2026-06-30T14:23:37.291Z",
-    "method": "POST",
-    "path": "/makers-api/token",
-    "status": 200,
-    "responseShape": {
-      "_raw": "non-JSON",
-      "byteLength": 389
-    }
-  },
-  {
     "timestamp": "2026-06-30T15:13:37.504Z",
     "method": "POST",
     "path": "/makers-api/token",
@@ -494,6 +117,383 @@
     "responseShape": {
       "_raw": "non-JSON",
       "byteLength": 390
+    }
+  },
+  {
+    "timestamp": "2026-07-01T01:13:37.034Z",
+    "method": "POST",
+    "path": "/makers-api/token",
+    "status": 200,
+    "responseShape": {
+      "_raw": "non-JSON",
+      "byteLength": 390
+    }
+  },
+  {
+    "timestamp": "2026-07-01T02:03:37.015Z",
+    "method": "POST",
+    "path": "/makers-api/token",
+    "status": 200,
+    "responseShape": {
+      "_raw": "non-JSON",
+      "byteLength": 390
+    }
+  },
+  {
+    "timestamp": "2026-07-01T02:53:37.134Z",
+    "method": "POST",
+    "path": "/makers-api/token",
+    "status": 200,
+    "responseShape": {
+      "_raw": "non-JSON",
+      "byteLength": 388
+    }
+  },
+  {
+    "timestamp": "2026-07-01T03:00:23.396Z",
+    "method": "GET",
+    "path": "/ko/product/get_digital_product_info",
+    "status": 200,
+    "responseShape": {
+      "_raw": "non-JSON",
+      "byteLength": 1877
+    }
+  },
+  {
+    "timestamp": "2026-07-01T03:00:23.178Z",
+    "method": "GET",
+    "path": "/ko/product/get_digital_product_info",
+    "status": 200,
+    "responseShape": {
+      "_raw": "non-JSON",
+      "byteLength": 2278
+    }
+  },
+  {
+    "timestamp": "2026-07-01T03:00:23.377Z",
+    "method": "GET",
+    "path": "/ko/product/get_digital_product_info",
+    "status": 200,
+    "responseShape": {
+      "_raw": "non-JSON",
+      "byteLength": 2229
+    }
+  },
+  {
+    "timestamp": "2026-07-01T03:00:23.410Z",
+    "method": "GET",
+    "path": "/ko/product/get_digital_product_info",
+    "status": 200,
+    "responseShape": {
+      "_raw": "non-JSON",
+      "byteLength": 1837
+    }
+  },
+  {
+    "timestamp": "2026-07-01T03:00:27.957Z",
+    "method": "POST",
+    "path": "/ko/product_price/get_ajax_price_vTmpl",
+    "status": 200,
+    "responseShape": {
+      "_raw": "non-JSON",
+      "byteLength": 716
+    }
+  },
+  {
+    "timestamp": "2026-07-01T03:00:27.080Z",
+    "method": "POST",
+    "path": "/ko/product_price/get_ajax_price_vTmpl",
+    "status": 200,
+    "responseShape": {
+      "_raw": "non-JSON",
+      "byteLength": 895
+    }
+  },
+  {
+    "timestamp": "2026-07-01T03:00:27.961Z",
+    "method": "POST",
+    "path": "/ko/product_price/get_ajax_price_vTmpl",
+    "status": 200,
+    "responseShape": {
+      "_raw": "non-JSON",
+      "byteLength": 749
+    }
+  },
+  {
+    "timestamp": "2026-07-01T03:00:27.066Z",
+    "method": "POST",
+    "path": "/ko/product_price/get_ajax_price_vTmpl",
+    "status": 200,
+    "responseShape": {
+      "_raw": "non-JSON",
+      "byteLength": 725
+    }
+  },
+  {
+    "timestamp": "2026-07-01T03:43:37.021Z",
+    "method": "POST",
+    "path": "/makers-api/token",
+    "status": 502,
+    "responseShape": {
+      "error": "string"
+    }
+  },
+  {
+    "timestamp": "2026-07-01T04:33:37.047Z",
+    "method": "POST",
+    "path": "/makers-api/token",
+    "status": 502,
+    "responseShape": {
+      "error": "string"
+    }
+  },
+  {
+    "timestamp": "2026-07-01T04:40:59.478Z",
+    "method": "GET",
+    "path": "/ko/product/get_digital_product_info",
+    "status": 200,
+    "responseShape": {
+      "_raw": "non-JSON",
+      "byteLength": 1877
+    }
+  },
+  {
+    "timestamp": "2026-07-01T04:40:59.494Z",
+    "method": "GET",
+    "path": "/ko/product/get_digital_product_info",
+    "status": 200,
+    "responseShape": {
+      "_raw": "non-JSON",
+      "byteLength": 1839
+    }
+  },
+  {
+    "timestamp": "2026-07-01T04:40:59.399Z",
+    "method": "GET",
+    "path": "/ko/product/get_digital_product_info",
+    "status": 200,
+    "responseShape": {
+      "_raw": "non-JSON",
+      "byteLength": 2277
+    }
+  },
+  {
+    "timestamp": "2026-07-01T04:40:59.472Z",
+    "method": "GET",
+    "path": "/ko/product/get_digital_product_info",
+    "status": 200,
+    "responseShape": {
+      "_raw": "non-JSON",
+      "byteLength": 2229
+    }
+  },
+  {
+    "timestamp": "2026-07-01T05:23:37.017Z",
+    "method": "POST",
+    "path": "/makers-api/token",
+    "status": 200,
+    "responseShape": {
+      "_raw": "non-JSON",
+      "byteLength": 391
+    }
+  },
+  {
+    "timestamp": "2026-07-01T06:13:37.019Z",
+    "method": "POST",
+    "path": "/makers-api/token",
+    "status": 200,
+    "responseShape": {
+      "_raw": "non-JSON",
+      "byteLength": 387
+    }
+  },
+  {
+    "timestamp": "2026-07-01T06:43:10.764Z",
+    "method": "GET",
+    "path": "/ko/product/get_digital_product_info",
+    "status": 200,
+    "responseShape": {
+      "_raw": "non-JSON",
+      "byteLength": 2276
+    }
+  },
+  {
+    "timestamp": "2026-07-01T06:43:10.812Z",
+    "method": "GET",
+    "path": "/ko/product/get_digital_product_info",
+    "status": 200,
+    "responseShape": {
+      "_raw": "non-JSON",
+      "byteLength": 2228
+    }
+  },
+  {
+    "timestamp": "2026-07-01T06:43:10.847Z",
+    "method": "GET",
+    "path": "/ko/product/get_digital_product_info",
+    "status": 200,
+    "responseShape": {
+      "_raw": "non-JSON",
+      "byteLength": 1877
+    }
+  },
+  {
+    "timestamp": "2026-07-01T06:43:10.854Z",
+    "method": "GET",
+    "path": "/ko/product/get_digital_product_info",
+    "status": 200,
+    "responseShape": {
+      "_raw": "non-JSON",
+      "byteLength": 1839
+    }
+  },
+  {
+    "timestamp": "2026-07-01T07:03:37.017Z",
+    "method": "POST",
+    "path": "/makers-api/token",
+    "status": 200,
+    "responseShape": {
+      "_raw": "non-JSON",
+      "byteLength": 388
+    }
+  },
+  {
+    "timestamp": "2026-07-01T07:53:36.920Z",
+    "method": "POST",
+    "path": "/makers-api/token",
+    "status": 200,
+    "responseShape": {
+      "_raw": "non-JSON",
+      "byteLength": 389
+    }
+  },
+  {
+    "timestamp": "2026-07-01T08:43:37.037Z",
+    "method": "POST",
+    "path": "/makers-api/token",
+    "status": 200,
+    "responseShape": {
+      "_raw": "non-JSON",
+      "byteLength": 390
+    }
+  },
+  {
+    "timestamp": "2026-07-01T09:33:37.046Z",
+    "method": "POST",
+    "path": "/makers-api/token",
+    "status": 200,
+    "responseShape": {
+      "_raw": "non-JSON",
+      "byteLength": 388
+    }
+  },
+  {
+    "timestamp": "2026-07-01T10:23:37.139Z",
+    "method": "POST",
+    "path": "/makers-api/token",
+    "status": 502,
+    "responseShape": {
+      "error": "string"
+    }
+  },
+  {
+    "timestamp": "2026-07-01T10:58:36.924Z",
+    "method": "GET",
+    "path": "/ko/product/get_digital_product_info",
+    "status": 200,
+    "responseShape": {
+      "_raw": "non-JSON",
+      "byteLength": 2274
+    }
+  },
+  {
+    "timestamp": "2026-07-01T10:58:37.440Z",
+    "method": "GET",
+    "path": "/ko/product/get_digital_product_info",
+    "status": 200,
+    "responseShape": {
+      "_raw": "non-JSON",
+      "byteLength": 1879
+    }
+  },
+  {
+    "timestamp": "2026-07-01T10:58:37.378Z",
+    "method": "GET",
+    "path": "/ko/product/get_digital_product_info",
+    "status": 200,
+    "responseShape": {
+      "_raw": "non-JSON",
+      "byteLength": 2229
+    }
+  },
+  {
+    "timestamp": "2026-07-01T10:58:37.724Z",
+    "method": "GET",
+    "path": "/ko/product/get_digital_product_info",
+    "status": 200,
+    "responseShape": {
+      "_raw": "non-JSON",
+      "byteLength": 1840
+    }
+  },
+  {
+    "timestamp": "2026-07-01T11:13:37.046Z",
+    "method": "POST",
+    "path": "/makers-api/token",
+    "status": 200,
+    "responseShape": {
+      "_raw": "non-JSON",
+      "byteLength": 385
+    }
+  },
+  {
+    "timestamp": "2026-07-01T11:37:54.403Z",
+    "method": "GET",
+    "path": "/ko/product/get_digital_product_info",
+    "status": 200,
+    "responseShape": {
+      "_raw": "non-JSON",
+      "byteLength": 1839
+    }
+  },
+  {
+    "timestamp": "2026-07-01T11:37:54.395Z",
+    "method": "GET",
+    "path": "/ko/product/get_digital_product_info",
+    "status": 200,
+    "responseShape": {
+      "_raw": "non-JSON",
+      "byteLength": 2228
+    }
+  },
+  {
+    "timestamp": "2026-07-01T11:37:54.401Z",
+    "method": "GET",
+    "path": "/ko/product/get_digital_product_info",
+    "status": 200,
+    "responseShape": {
+      "_raw": "non-JSON",
+      "byteLength": 1875
+    }
+  },
+  {
+    "timestamp": "2026-07-01T11:37:54.369Z",
+    "method": "GET",
+    "path": "/ko/product/get_digital_product_info",
+    "status": 200,
+    "responseShape": {
+      "_raw": "non-JSON",
+      "byteLength": 2278
+    }
+  },
+  {
+    "timestamp": "2026-07-01T12:03:36.900Z",
+    "method": "POST",
+    "path": "/makers-api/token",
+    "status": 200,
+    "responseShape": {
+      "_raw": "non-JSON",
+      "byteLength": 386
     }
   }
 ]
