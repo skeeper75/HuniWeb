@@ -33,8 +33,14 @@ CONFIRM_PENDING dict 비움(코드에 해소 경위 주석). `wiring_scan.py`는
 무판별·시뮬 오시=미싱=30,000 확인). 트리거 우회 위해 임시코드 없이 순차 UPDATE 2회(ref_key1 유니크제약 없음).
 백업·undo 보존(zigzag-label-swap-*).
 
-**다음 시작점**: CONFIRM 큐 소진 + 지그재그 라벨 해소. 남은 별건 = 벽걸이캘린더 이중권위(200원/부)뿐.
-자율 진행할 §27 배선 잔여는 wiring_scan.py 결함10(전부 기존/별건: FOLD_CARD_3H·ACRYL_PENDING·BIND_HC_TWINRING).
+**★벽걸이캘린더(111/112) 제본 이중권위 통일 COMMIT**: 111/112가 범용 트윈링(COMP_BIND_TWINRING/PROC_021)을
+쓰던 것 → 캘린더 전용(COMP_BIND_CAL_WALL/PROC_099 벽걸이캘린더제본)으로 통일(108/109 탁상형과 동일 권위·
+가격표 캘린더 제본표 '벽걸이캘린더제본' 전용줄 권위·사장님 승인). 방법=① PRF_DGP_CAL_WIDE(111/112 전용공식)의
+제본 comp 교체 ② 111/112 등록공정 PROC_021→PROC_099. 제본비 100부 1,300→2,000/부(+700, 캘린더 권위).
+시뮬 검증 벽걸이 qty100=231,032·qty1=9,071(제본비 5,000). 백업·undo(wallcal-dualauthority-*).
+
+**다음 시작점**: CONFIRM 큐 + 지그재그 + 벽걸이 이중권위 전부 해소 — §27 별건 큐 소진.
+자율 진행할 §27 배선 잔여는 wiring_scan.py 결함(전부 기존/별건: FOLD_CARD_3H·ACRYL_PENDING·BIND_HC_TWINRING).
 
 **건드리지 말 것(6세션 COMMIT·시뮬레이터 검증 완료)**: 스티커 4상품 사이즈 복원(052/053/058/055 del_yn)·
 611/593/A6 단가 클론(마커 note='STK-RESTORE-260702%'). undo=`sticker-size-restore-260702-undo.sql`.
