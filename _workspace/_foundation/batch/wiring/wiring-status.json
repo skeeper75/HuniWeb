@@ -1,19 +1,19 @@
 {
  "summary": {
   "source": "snapshot",
-  "snap": "snap_20260701_1001",
+  "snap": "snap_20260701_1050",
   "formulas": 102,
   "wired_links": 230,
-  "components_total": 179,
-  "components_with_price": 175,
-  "components_wired": 132,
+  "components_total": 180,
+  "components_with_price": 176,
+  "components_wired": 133,
   "orphan_comps": 6,
   "legit_unused": 7,
-  "dead_wires": 7,
+  "dead_wires": 6,
   "deleted_wires": 1,
   "no_formula_products": 0,
-  "total_wiring_defects": 14,
-  "verdict": "NO-GO(결함 14)"
+  "total_wiring_defects": 13,
+  "verdict": "NO-GO(결함 13)"
  },
  "orphans": [
   {
@@ -152,11 +152,6 @@
   },
   {
    "frm_cd": "PRF_ACRYL_ZIBITZ2_TBD",
-   "comp_cd": "COMP_ACRYL_PENDING_TBD",
-   "comp_nm": "단가/구성 확인필요 (실무진)"
-  },
-  {
-   "frm_cd": "PRF_ACRYL_ZIBITZ_TBD",
    "comp_cd": "COMP_ACRYL_PENDING_TBD",
    "comp_nm": "단가/구성 확인필요 (실무진)"
   }
@@ -1051,12 +1046,12 @@
   },
   "PRD_000156": {
    "frm_cds": [
-    "PRF_ACRYL_ZIBITZ_TBD"
+    "PRF_ZIBITZ_ACRYL"
    ],
    "wired": 1,
-   "dead": 1,
+   "dead": 0,
    "deleted": 0,
-   "status": "BROKEN"
+   "status": "WIRED_OK"
   },
   "PRD_000157": {
    "frm_cds": [
