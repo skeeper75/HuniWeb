@@ -1,5 +1,25 @@
 # Huni-Set-Product (§23) — HANDOFF
 
+## ★2026-07-02(밤) 088 Q2 해소 → 재설계 게이트 S1~S8 전부 GO — ★적재 승인 대기 (fresh 세션 최우선)
+
+### 다음 시작점
+1. **사용자 적재 승인 확인 → hsp-load-executor 실행**: 백업 → `03_design/088-redesign-260702/apply-dryrun.sql` 재실증 → `apply.sql`(8행: 표지 mint 5·부모 재배선 2·proc 격리 1) 단일 트랜잭션 COMMIT(단독 세션·comp_price_id MAX+1 가드) → webadmin 가격시뮬레이터 실화면 "제외 0·PRICE≠0"(1부 39,000·100부 1,800,000) → postverify. undo=`undo.sql`(임시 COVERBIND 모델 대칭 복원). 게이트 GO 근거=`05_gate/088-redesign/gate-report-088.md`·codex=`04_codex/088-redesign/reconcile-088.md`(13/13 합의).
+2. 적재 후: 100부 796,900→1,800,000 변화이므로 실무진에 결과 공유 권장. 9,000 값의 가격표 IMPORT 시트 역반영 traceability 큐.
+
+### 이번(밤) 결정 — relitigate 금지
+- **"(출력소재관리)"=상품마스터/가격표와 별개의 제3문서**(실무진측·가격표 IMPORT 미반영). **레더 링바인더 A4 = 9,000**(636×374 기준·소재+인쇄 **통합** — 실무진 공식 문장이 행 비고 "소재비" 표기보다 권위·사용자 채팅 전달 verbatim=`01_authority/088-0702/leather-ringbinder-a4-grid.csv` 하단).
+- **표지 작업사이즈 3종 = 611/622/636×374**(D링 31/42/56mm 대응)=생산 메타·가격축 아님. 상품시트 611 vs 소재관리 636은 CONFLICT 아님.
+- 모델=[표지 9,000/부·member 089 Home-M·COMP_LEATHER_RINGBINDER_COVER+PRF_LEATHER_RINGBINDER_COVER mint]+[싸바리 COMP_BIND_SSABARI@PROC_000098 고아→부모 배선]. COVERBIND는 **배선만 폐기**(component는 072/077용 보존). 088 proc=PROC_000098 단독(옵션 오염 가드).
+- `proc_grp:PROC_000017` 차원=SSABARI 전 행 dim_vals 빈값이라 매칭 무력(실엔진 확증·codex High 해소).
+- S8 실증: blast radius={088,089}·072/077/023/024 무영향.
+
+### 건드리지 말 것
+- `03_design/088-redesign-260702/`(apply·undo·golden-088.csv)·`05_gate/088-redesign/`·`04_codex/088-redesign/`·`01_authority/088-0702/`(9,000 verbatim).
+- 라이브 088 임시 COVERBIND 모델(796,900)은 승인 전까지 **현행 유지** — 교체 대상이지 삭제 대상 아님.
+- 잔존(본 건 독립): cover_mult ×2 = 엔진 C트랙(개발팀)·×1로 동작화(082/077 선례).
+
+---
+
 ## ★2026-07-02(오후) 엽서북 시뮬레이터 수렴 + 전 상품 수량 진단·교정 + 권위 260702 채택
 
 ### 다음 시작점 (fresh 세션 최우선)
