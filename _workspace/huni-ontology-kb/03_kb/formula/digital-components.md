@@ -147,3 +147,81 @@
 - src: {source_file: "live-snapshot/latest/t_prc_price_components.csv", source_locator: "키:COMP_PRINT_SPOT_WHITE_S1", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
 - props: {prc_typ_cd: "PRICE_TYPE.01", use_dims: '["plt_siz_cd", "proc_cd", "print_opt_cd", "min_qty", "proc_grp:PROC_000007"]', role: "통합별색인쇄비(5별색×단면양면 통합·개별 CLEAR/GOLD use=N)"}
 
+## 투명포토카드·모양명함·박명함 완제품가 구성요소 (공유축 통합 mint 260703)
+
+<!-- 2026-07-03 공유축 통합(okb-knowledge-builder): 아래 12구성요소는 상품 빌더 needed_shared_nodes 중 -->
+<!-- 브로큰링크 해소 공식(PRF_PHOTOCARD_CLEAR·PRF_NAMECARD_SHAPE/MINISHAPE/FOIL/CLEAR)의 has_component 타깃. -->
+<!-- use_dims=차원 선언(값 계산=evaluate_price 권위·D-18). 단가행 실값은 t_prc_component_prices 접기(D-22). -->
+
+### [component-COMP_PHOTOCARD_CLEAR_SET] 포토카드 완제품가 투명세트 {verified}
+- type: price_component
+- anchor: t_prc_price_components/COMP_PHOTOCARD_CLEAR_SET
+- src: {source_file: "live-snapshot/latest/t_prc_price_components.csv", source_locator: "키:COMP_PHOTOCARD_CLEAR_SET", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {prc_typ_cd: "PRICE_TYPE.02", comp_typ_cd: "PRC_COMPONENT_TYPE.06", use_dims: '["siz_cd", "bdl_qty", "min_qty"]', role: "025 투명포토카드 완제품가(용지포함 세트)"}
+
+### [component-COMP_NAMECARD_SHAPE_S1] 모양명함 완제품가 단면(용지포함) {verified}
+- type: price_component
+- anchor: t_prc_price_components/COMP_NAMECARD_SHAPE_S1
+- src: {source_file: "live-snapshot/latest/t_prc_price_components.csv", source_locator: "키:COMP_NAMECARD_SHAPE_S1", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {prc_typ_cd: "PRICE_TYPE.02", comp_typ_cd: "PRC_COMPONENT_TYPE.06", use_dims: '["siz_cd", "min_qty", "print_opt_cd"]', role: "035 모양명함 단면·siz_cd 키(COAT/STD의 mat_cd 키와 상이)"}
+
+### [component-COMP_NAMECARD_SHAPE_S2] 모양명함 완제품가 양면(용지포함) {verified}
+- type: price_component
+- anchor: t_prc_price_components/COMP_NAMECARD_SHAPE_S2
+- src: {source_file: "live-snapshot/latest/t_prc_price_components.csv", source_locator: "키:COMP_NAMECARD_SHAPE_S2", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {prc_typ_cd: "PRICE_TYPE.02", comp_typ_cd: "PRC_COMPONENT_TYPE.06", use_dims: '["siz_cd", "min_qty", "print_opt_cd"]', role: "035 모양명함 양면"}
+
+### [component-COMP_NAMECARD_MINISHAPE_S1] 미니모양명함 완제품가 단면(용지포함) {verified}
+- type: price_component
+- anchor: t_prc_price_components/COMP_NAMECARD_MINISHAPE_S1
+- src: {source_file: "live-snapshot/latest/t_prc_price_components.csv", source_locator: "키:COMP_NAMECARD_MINISHAPE_S1", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {prc_typ_cd: "PRICE_TYPE.02", comp_typ_cd: "PRC_COMPONENT_TYPE.06", use_dims: '["siz_cd", "min_qty", "print_opt_cd"]', role: "036 미니모양명함 단면"}
+
+### [component-COMP_NAMECARD_MINISHAPE_S2] 미니모양명함 완제품가 양면(용지포함) {verified}
+- type: price_component
+- anchor: t_prc_price_components/COMP_NAMECARD_MINISHAPE_S2
+- src: {source_file: "live-snapshot/latest/t_prc_price_components.csv", source_locator: "키:COMP_NAMECARD_MINISHAPE_S2", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {prc_typ_cd: "PRICE_TYPE.02", comp_typ_cd: "PRC_COMPONENT_TYPE.06", use_dims: '["siz_cd", "min_qty", "print_opt_cd"]', role: "036 미니모양명함 양면"}
+
+### [component-COMP_NAMECARD_FOIL_S1_STD] 오리지널박명함 완제품가 단면·일반박 {verified}
+- type: price_component
+- anchor: t_prc_price_components/COMP_NAMECARD_FOIL_S1_STD
+- src: {source_file: "live-snapshot/latest/t_prc_price_components.csv", source_locator: "키:COMP_NAMECARD_FOIL_S1_STD", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {prc_typ_cd: "PRICE_TYPE.02", comp_typ_cd: "PRC_COMPONENT_TYPE.06", use_dims: '["print_opt_cd", "opt_cd", "min_qty", "opt_grp:OPT_000080"]', role: "037 단면 일반박(종이+동판+박)"}
+
+### [component-COMP_NAMECARD_FOIL_S2_STD] 오리지널박명함 완제품가 양면·일반박 {verified}
+- type: price_component
+- anchor: t_prc_price_components/COMP_NAMECARD_FOIL_S2_STD
+- src: {source_file: "live-snapshot/latest/t_prc_price_components.csv", source_locator: "키:COMP_NAMECARD_FOIL_S2_STD", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {prc_typ_cd: "PRICE_TYPE.02", comp_typ_cd: "PRC_COMPONENT_TYPE.06", use_dims: '["print_opt_cd", "opt_cd", "min_qty", "opt_grp:OPT_000080"]', role: "037 양면 일반박"}
+
+### [component-COMP_NAMECARD_FOIL_S1_HOLO] 오리지널박명함 완제품가 단면·홀로/트윙클 {verified}
+- type: price_component
+- anchor: t_prc_price_components/COMP_NAMECARD_FOIL_S1_HOLO
+- src: {source_file: "live-snapshot/latest/t_prc_price_components.csv", source_locator: "키:COMP_NAMECARD_FOIL_S1_HOLO", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {prc_typ_cd: "PRICE_TYPE.02", comp_typ_cd: "PRC_COMPONENT_TYPE.06", use_dims: '["print_opt_cd", "opt_cd", "min_qty", "opt_grp:OPT_000080"]', role: "037 단면 홀로그램/트윙클"}
+
+### [component-COMP_NAMECARD_FOIL_S2_HOLO] 오리지널박명함 완제품가 양면·홀로/트윙클 {verified}
+- type: price_component
+- anchor: t_prc_price_components/COMP_NAMECARD_FOIL_S2_HOLO
+- src: {source_file: "live-snapshot/latest/t_prc_price_components.csv", source_locator: "키:COMP_NAMECARD_FOIL_S2_HOLO", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {prc_typ_cd: "PRICE_TYPE.02", comp_typ_cd: "PRC_COMPONENT_TYPE.06", use_dims: '["print_opt_cd", "opt_cd", "min_qty", "opt_grp:OPT_000080"]', role: "037 양면 홀로그램/트윙클"}
+
+### [component-COMP_NAMECARD_FOIL_SETUP_S1_STD] 박·형압 동판셋업비 단면 {verified}
+- type: price_component
+- anchor: t_prc_price_components/COMP_NAMECARD_FOIL_SETUP_S1_STD
+- src: {source_file: "live-snapshot/latest/t_prc_price_components.csv", source_locator: "키:COMP_NAMECARD_FOIL_SETUP_S1_STD", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {prc_typ_cd: "PRICE_TYPE.03", comp_typ_cd: "PRC_COMPONENT_TYPE.05", use_dims: '["print_opt_cd", "min_qty"]', role: "037 동판셋업비 단면·주문 1건당 1회"}
+
+### [component-COMP_NAMECARD_FOIL_SETUP_S2_STD] 박·형압 동판셋업비 양면 {verified}
+- type: price_component
+- anchor: t_prc_price_components/COMP_NAMECARD_FOIL_SETUP_S2_STD
+- src: {source_file: "live-snapshot/latest/t_prc_price_components.csv", source_locator: "키:COMP_NAMECARD_FOIL_SETUP_S2_STD", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {prc_typ_cd: "PRICE_TYPE.03", comp_typ_cd: "PRC_COMPONENT_TYPE.05", use_dims: '["print_opt_cd"]', role: "037 동판셋업비 양면"}
+
+### [component-COMP_NAMECARD_CLEAR_S1] 투명명함 완제품가 단면(용지포함) {verified}
+- type: price_component
+- anchor: t_prc_price_components/COMP_NAMECARD_CLEAR_S1
+- src: {source_file: "live-snapshot/latest/t_prc_price_components.csv", source_locator: "키:COMP_NAMECARD_CLEAR_S1", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {prc_typ_cd: "PRICE_TYPE.02", comp_typ_cd: "PRC_COMPONENT_TYPE.06", use_dims: '["min_qty"]', role: "039 투명명함 단면·자재무관 수량단가"}
+

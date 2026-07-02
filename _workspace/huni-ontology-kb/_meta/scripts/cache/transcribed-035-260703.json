@@ -1,0 +1,136 @@
+{
+  "bindings": {
+    "addons": [],
+    "bundle_qtys": [],
+    "categories": [
+      {
+        "cat_cd": "CAT_000003",
+        "main_cat_yn": "Y"
+      },
+      {
+        "cat_cd": "CAT_000313",
+        "main_cat_yn": "N"
+      }
+    ],
+    "constraints": [],
+    "materials": [
+      {
+        "dflt_yn": "Y",
+        "mat_cd": "MAT_000109",
+        "usage_cd": "USAGE.07"
+      }
+    ],
+    "option_groups": [],
+    "option_items": [],
+    "options": [],
+    "plate_sizes": [
+      {
+        "output_paper_typ_cd": "OUTPUT_PAPER_TYPE.01",
+        "siz_cd": "SIZ_000499"
+      }
+    ],
+    "price_formulas": [
+      {
+        "frm_cd": "PRF_NAMECARD_SHAPE",
+        "note": "namecard-special: 모양명함 S1+S2 print_opt 태깅 배선. siz=SIZ_000008. 단면18000/양면19000."
+      }
+    ],
+    "print_options": [
+      {
+        "back_colrcnt_cd": "CLR_000001",
+        "front_colrcnt_cd": "CLR_000005",
+        "opt_id": "1",
+        "print_opt_cd": "POPT_000001",
+        "print_side": "단면"
+      },
+      {
+        "back_colrcnt_cd": "CLR_000005",
+        "front_colrcnt_cd": "CLR_000005",
+        "opt_id": "2",
+        "print_opt_cd": "POPT_000002",
+        "print_side": "양면"
+      }
+    ],
+    "processes": [],
+    "sizes": [
+      {
+        "dflt_yn": "Y",
+        "siz_cd": "SIZ_000008"
+      }
+    ]
+  },
+  "materials": {
+    "MAT_000109": {
+      "mat_nm": "몽블랑 240g",
+      "mat_typ_cd": "MAT_TYPE.01",
+      "upr_mat_cd": "MAT_000103",
+      "weight": "240"
+    }
+  },
+  "meta": {
+    "captured_at": "2026-07-03",
+    "generated_by": "transcribe_product_035.py",
+    "prd_cd": "PRD_000035",
+    "snapshot": "live-snapshot/latest (snap_20260702_1119)"
+  },
+  "price_chain": {
+    "component_price_rowcount": {
+      "COMP_NAMECARD_SHAPE_S1": 1,
+      "COMP_NAMECARD_SHAPE_S2": 1
+    },
+    "components": {
+      "COMP_NAMECARD_SHAPE_S1": {
+        "comp_nm": "모양명함 완제품가 단면(용지포함)",
+        "comp_typ_cd": "PRC_COMPONENT_TYPE.06",
+        "prc_typ_cd": "PRICE_TYPE.02",
+        "use_dims": "[\"siz_cd\", \"min_qty\", \"print_opt_cd\"]"
+      },
+      "COMP_NAMECARD_SHAPE_S2": {
+        "comp_nm": "모양명함 완제품가 양면(용지포함)",
+        "comp_typ_cd": "PRC_COMPONENT_TYPE.06",
+        "prc_typ_cd": "PRICE_TYPE.02",
+        "use_dims": "[\"siz_cd\", \"min_qty\", \"print_opt_cd\"]"
+      }
+    },
+    "formula_components": [
+      {
+        "addtn_yn": "Y",
+        "comp_cd": "COMP_NAMECARD_SHAPE_S1",
+        "disp_seq": "1",
+        "frm_cd": "PRF_NAMECARD_SHAPE"
+      },
+      {
+        "addtn_yn": "Y",
+        "comp_cd": "COMP_NAMECARD_SHAPE_S2",
+        "disp_seq": "2",
+        "frm_cd": "PRF_NAMECARD_SHAPE"
+      }
+    ]
+  },
+  "product": {
+    "del_yn": "N",
+    "editor_yn": "N",
+    "file_upload_yn": "Y",
+    "max_qty": "10000",
+    "min_qty": "100",
+    "prd_nm": "모양명함",
+    "prd_typ_cd": "PRD_TYPE.01",
+    "qty_incr": "100",
+    "qty_unit_typ_cd": "QTY_UNIT.02",
+    "use_yn": "Y"
+  },
+  "sizes": {
+    "SIZ_000008": {
+      "cut": "90x50",
+      "note": "판걸이=24.0 / 전지=316x467 / 적용=명함",
+      "siz_nm": "90x50mm",
+      "work": "92x52"
+    },
+    "SIZ_000499": {
+      "cut": "306x457",
+      "note": "",
+      "siz_nm": "316x467",
+      "work": "316x467"
+    }
+  }
+}

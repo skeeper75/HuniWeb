@@ -2,51 +2,52 @@
 
 > build_graph.py · 정본 /Users/innojini/Dev/HuniWeb/_workspace/huni-ontology-kb/03_kb → 04_graph. 생성=빌드(검증은 별도 레인·okb-adversarial-gate).
 
-- 판정: **PASS(하드 0)** · 하드 위반 0 · 소프트 경고 30
-- 노드 204 · 엣지 430
-- 멱등 해시: nodes.jsonl=f116635ef5b55181 · edges.jsonl=da3e882a7272347d
+- 판정: **PASS(하드 0)** · 하드 위반 0 · 소프트 경고 116
+- 노드 466 · 엣지 1526
+- 멱등 해시: nodes.jsonl=b22b58bd451ffd6a · edges.jsonl=a829dcb8ac7241a9
 
 ## 노드 수 (타입별)
-- bundle_qty: 2
-- category: 8
+- bundle_qty: 15
+- category: 11
 - constraint: 2
-- decision: 8
-- gap: 15
+- decision: 12
+- gap: 67
 - intent: 3
-- material: 18
-- option_group: 29
-- plate_size: 1
-- price_component: 26
-- price_formula: 10
+- material: 56
+- option_group: 78
+- plate_size: 3
+- price_component: 53
+- price_formula: 23
 - print_option: 4
-- process: 28
-- product: 8
+- process: 37
+- product: 36
 - rule: 7
-- size: 28
+- size: 52
 - term: 7
 
 ## 엣지 수 (rel별)
 - alias_of: 19
 - constrains: 3
-- decided_because: 11
-- derived_from: 2
-- has_component: 61
-- has_option_group: 29
-- has_plate_size: 8
-- has_print_option: 15
-- has_process: 39
-- has_qty_rule: 2
-- has_size: 29
-- in_category: 12
-- option_refs: 75
-- priced_by: 9
-- references: 84
-- uses_material: 32
+- decided_because: 19
+- derived_from: 5
+- has_component: 107
+- has_option_group: 78
+- has_plate_size: 34
+- has_print_option: 59
+- has_process: 165
+- has_qty_rule: 15
+- has_size: 98
+- in_category: 59
+- option_refs: 210
+- priced_by: 39
+- references: 470
+- uses_material: 146
 
 ## badge 분포
-- candidate: 5
-- unknown: 15
-- verified: 184
+- candidate: 6
+- defect: 5
+- unknown: 67
+- verified: 388
 
 ## 무결성 6검사
 - I-1 고아(하드 유형 product/formula/component): 0
@@ -57,35 +58,121 @@
 - I-6 오염(blocklist): 0 (원천 실재 — hard src_id 5·path 5·advisory src_id 2·path 2 로드)
 
 ## 소프트 경고 (빌드 계속·검토용)
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-023-shaped-postcard :: 최소 12매·최대 10,000매·12매 증분(단위 QTY_UNIT.02 "매"). 수량·치수 raw 값은
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-023-shaped-postcard :: - **수량규칙:** 제품 레벨 min 12 / max 10,000 / incr 12(QTY_UNIT.02)
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-023-shaped-postcard :: 계열([[rule/decisions#DEC_diecut_260701]]·팩 §4-B: 023 8,040,00
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-031-premium-namecard :: 업로드형(editor_yn=N). 최소 100매·100매 증분·최대 10,000매(QTY_UNIT.02 "매
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-033-standard-namecard :: `evaluate_price` 권위(온톨로지는 배선까지·D-18). 최소 100매·100매 증분·최대 10,
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-035-shaped-namecard :: 칼라 단/양면을 손님이 고른다. 최소 100매·100매 증분·최대 10,000매(QTY_UNIT.02 "매"
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-036-mini-shaped-namecard :: (`file_upload_yn=Y`·에디터 미사용). 출시 상태(`use_yn=Y`). 최소 100매·100
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-036-mini-shaped-namecard :: - **수량규칙:** 제품 레벨 min 100 / max 10,000 / incr 100(QTY_UNIT.0
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-036-mini-shaped-namecard :: (가격표260527 B08 앵커·수량 100~10,000 전 구간 동일 고정단가). 값은 evaluate_p
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-036-mini-shaped-namecard :: 완제품가 단가표 포함). 위키 🔴 결함표(T-6)를 그대로 옮기지 않고 §4 원장·live-snapshot로
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-041-coupon :: 파일 업로드형(`file_upload_yn=Y`·에디터 미사용 `editor_yn=N`). 최소 12매·12
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-046-diecut-golden :: - gap_what: "완칼 die-cut 단가 .03 고정 교정(046 1,350,000→50,000) 후
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-046-label-tag :: `CAT_000327`). 파일 업로드 방식(`file_upload_yn=Y`, 에디터 미사용). 최소 20
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-046-label-tag :: - **수량규칙:** 제품 레벨 min 20 / max 1,000 / incr 20(QTY_UNIT.02).
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-046-label-tag :: ([[rule/decisions#DEC_diecut_260701]]·046 1,350,000→50,000).
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-050-envelope-making :: 에디터 미사용). 최소 1,000매·최대 5,000매·1,000매 증분(단위 QTY_UNIT.02). 수량·
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-050-envelope-making :: - **수량규칙:** 제품 레벨 min 1,000 / max 5,000 / incr 1,000(QTY_UNI
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): DEC_baseproc_260701 :: - props: {일자: "2026-07-01", 내용: "16상품+019(흰토너008+CMYK004)+02
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): DEC_diecut_260701 :: - props: {일자: "2026-07-01", 내용: "COMP_CUT_FULL_DIECUT .01→.0
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-020-white-print-postcard -> product-020-white-print-postcard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-020-white-print-postcard -> product-020-white-print-postcard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-020-white-print-postcard -> product-020-white-print-postcard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-020-white-print-postcard -> product-020-white-print-postcard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-023-shaped-postcard -> product-023-shaped-postcard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-023-shaped-postcard -> product-023-shaped-postcard-nodes
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-024-photocard -> product-type-classification-sot
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-024-photocard -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-025-transparent-photocard -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-025-transparent-photocard -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-026-paper-slogan -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-026-paper-slogan -> harness-domain-rules-12-260701
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-027-bifold-card -> product-type-classification-sot
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-027-bifold-card -> product-027-nodes
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-027-bifold-card -> product-027-nodes
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-027-bifold-card -> product-027-nodes
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-027-bifold-card -> product-027-cpq
-- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): size-SIZ_000129 -> RULE_import_material_keep
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-028-mini-folded-card -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-028-mini-folded-card -> product-028-mini-folded-card-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-028-mini-folded-card -> product-027-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-028-mini-folded-card -> product-023-shaped-postcard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-028-mini-folded-card -> product-027-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-028-mini-folded-card -> product-028-mini-folded-card-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): process-PROC_000068 -> product-027-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-029-trifold-card -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-029-trifold-card -> product-029-trifold-card-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-029-trifold-card -> product-027-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-029-trifold-card -> product-027-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-029-trifold-card -> product-023-shaped-postcard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-029-trifold-card -> product-029-trifold-card-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-029-trifold-card -> product-027-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-029-trifold-card -> product-027-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-029-trifold-card -> product-029-trifold-card-cpq
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-029-trifold-card -> product-029-trifold-card-cpq
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-030-zigzag-postcard -> product-030-zigzag-postcard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-030-zigzag-postcard -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-030-zigzag-postcard -> product-030-zigzag-postcard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-030-zigzag-postcard -> product-030-zigzag-postcard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-031-premium-namecard -> product-031-premium-namecard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): gap-031-vardata-param -> product-031-premium-namecard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-034-pearl-namecard -> product-034-pearl-namecard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-034-pearl-namecard -> product-034-pearl-namecard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): GAP_034_foil_optgroup -> product-034-pearl-namecard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-039-transparent-namecard -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-040-white-print-namecard -> product-020-white-print-postcard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-040-white-print-namecard -> product-020-white-print-postcard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-040-white-print-namecard -> product-040-white-print-namecard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-040-white-print-namecard -> product-040-white-print-namecard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-040-white-print-namecard -> product-020-white-print-postcard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): DEC_namecard040_flat_260630 -> product-040-white-print-namecard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): DEC_namecard040_flat_260630 -> product-020-white-print-postcard-nodes
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-046-label-tag -> product-046-label-tag-nodes
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-046-label-tag -> product-046-label-tag-nodes
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-046-label-tag -> product-046-label-tag-nodes
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-046-label-tag -> product-046-label-tag-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-047-small-flyer -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-047-small-flyer -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-047-small-flyer -> goods-material-contamination-260630
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-047-small-flyer -> goods-material-contamination-260630
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): gap-047-optref-mat129 -> goods-material-contamination-260630
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-048-folded-leaflet -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-048-folded-leaflet -> product-048-folded-leaflet-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-048-folded-leaflet -> product-048-folded-leaflet-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-048-folded-leaflet -> product-048-folded-leaflet-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-048-folded-leaflet -> product-027-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-048-folded-leaflet -> product-023-shaped-postcard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-048-folded-leaflet -> product-048-folded-leaflet-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-048-folded-leaflet -> product-048-folded-leaflet-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-048-folded-leaflet -> product-048-folded-leaflet-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-048-folded-leaflet -> product-048-folded-leaflet-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): size-SIZ_000055 -> product-030-zigzag-postcard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): material-MAT_000093 -> product-030-zigzag-postcard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): process-PROC_000071 -> product-030-zigzag-postcard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-049-wide-folded-leaflet -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-049-wide-folded-leaflet -> product-049-wide-folded-leaflet-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-049-wide-folded-leaflet -> product-049-wide-folded-leaflet-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-049-wide-folded-leaflet -> product-030-zigzag-postcard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-049-wide-folded-leaflet -> product-049-wide-folded-leaflet-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-049-wide-folded-leaflet -> product-030-zigzag-postcard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-049-wide-folded-leaflet -> product-049-wide-folded-leaflet-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): component-COMP_ENV_MAKING -> product-050-envelope-making-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-050-envelope-making -> product-050-envelope-making-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-050-envelope-making -> product-050-envelope-making-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-050-envelope-making -> product-050-envelope-making-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-050-envelope-making -> product-050-envelope-making-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-050-envelope-making -> product-050-envelope-making-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-050-envelope-making -> product-050-envelope-making-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-051-suncap -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-051-suncap -> harness-domain-rules-12-260701
 - I-1 고아 노드(연결 대기·Phase 4): printopt-POPT_000008 (print_option)
 - I-1 고아 노드(연결 대기·Phase 4): printopt-POPT_000009 (print_option)
 - I-1 고아 노드(연결 대기·Phase 4): process-PROC_000001 (process)
-- I-1 고아 노드(연결 대기·Phase 4): process-PROC_000007 (process)
 - I-1 고아 노드(연결 대기·Phase 4): process-PROC_000013 (process)
 - I-1 고아 노드(연결 대기·Phase 4): process-PROC_000056 (process)
 - I-1 고아 노드(연결 대기·Phase 4): size-SIZ_000499 (size)
 - I-1 고아 노드(연결 대기·Phase 4): GAP_roll_material_price (gap)
-- I-1 고아 노드(연결 대기·Phase 4): GAP_transparent019_pansu (gap)
 - I-1 고아 노드(연결 대기·Phase 4): GAP_product_count (gap)
 
 ## 비고

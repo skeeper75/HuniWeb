@@ -1,0 +1,75 @@
+{
+  "materials": {
+    "MAT_000159": {
+      "mat_nm": "모조 120g",
+      "mat_typ_cd": "MAT_TYPE.01",
+      "upr_mat_cd": "MAT_000157",
+      "weight": "120"
+    },
+    "MAT_000168": {
+      "mat_nm": "레자크체크백색",
+      "mat_typ_cd": "MAT_TYPE.14",
+      "upr_mat_cd": "",
+      "weight": "110"
+    },
+    "MAT_000169": {
+      "mat_nm": "레자크줄무늬백색",
+      "mat_typ_cd": "MAT_TYPE.14",
+      "upr_mat_cd": "",
+      "weight": "110"
+    }
+  },
+  "matrix_shape": {
+    "combo_count": 12,
+    "comp_cd": "COMP_ENV_MAKING",
+    "dims": [
+      "siz_cd",
+      "mat_cd",
+      "min_qty"
+    ],
+    "distinct_mat": 3,
+    "distinct_siz": 4,
+    "grid_full": true,
+    "qty_bands": [
+      1000,
+      2000,
+      3000,
+      4000,
+      5000
+    ],
+    "row_count": 60
+  },
+  "meta": {
+    "captured_at": "2026-07-03",
+    "generated_by": "transcribe_product_050.py",
+    "snapshot": "live-snapshot/latest (snap_20260702_1119)"
+  },
+  "qty": {
+    "max_qty": "5000",
+    "min_qty": "1000",
+    "qty_incr": "1000",
+    "unit": "QTY_UNIT.02"
+  },
+  "sizes": {
+    "SIZ_000191": {
+      "impos_yn": "N",
+      "siz_nm": "225x193",
+      "work": "225x193"
+    },
+    "SIZ_000192": {
+      "impos_yn": "N",
+      "siz_nm": "238x262",
+      "work": "238x262"
+    },
+    "SIZ_000193": {
+      "impos_yn": "N",
+      "siz_nm": "262x238",
+      "work": "262x238"
+    },
+    "SIZ_000194": {
+      "impos_yn": "N",
+      "siz_nm": "510x387",
+      "work": "510x387"
+    }
+  }
+}

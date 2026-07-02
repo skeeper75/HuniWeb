@@ -435,7 +435,7 @@ The full original directive (all 17 sections, verbatim) is archived at
 
 **산출물 루트:** `_workspace/huni-ontology-kb/` (00_research·01_curation·02_ontology·03_kb[정본]·04_graph[파생]·05_verification·06_query_gate·_meta). 6인 팀(`okb-methodology-researcher`∥`okb-source-curator` 기준점 팬아웃 → `okb-ontology-architect` 스키마[★인간 승인 게이트] → `okb-knowledge-builder` 구축 → `okb-adversarial-verifier` 6축 적대 검증 루프 → `okb-query-gate` 블라인드 NL 시나리오·O1~O7) + 스킬 3종(orchestrator·okb-ontology-authoring·okb-adversarial-gate). 권위=260702 엑셀·가격값 권위=evaluate_price·생성≠검증·LLM 숫자 손전사 금지·STALE 인용 금지·라이브 읽기전용·DB 미적재.
 
-**변경이력:** 최신: 2026-07-03 하네스 구성+파일럿 종단 완주 GO(디지털인쇄 대표 8상품·노드 204·스키마 v1.0.1 승인·적대검증 14결함 CLOSED·블라인드 31시나리오 가격오차 0·O1~O7 GO — 다음=나머지 28상품 동형 확장) → `_workspace/huni-ontology-kb/_meta/CHANGELOG.md`
+**변경이력:** 최신: 2026-07-03 디지털인쇄 전체 36상품 완성 GO(파일럿 8+확장 28·그래프 노드 466·엣지 1526·하드 위반 0·멱등·확장 질의게이트 29시나리오 가격오차 0·미출시 정직표기·O1~O7 GO — 다음=스티커 상품군) → `_workspace/huni-ontology-kb/_meta/CHANGELOG.md`
 
 ## 34. Harness: Huni-Load-Governance (적재 거버넌스 · 그릇 규범 + 옵션 쓰임새 전수 판정)
 

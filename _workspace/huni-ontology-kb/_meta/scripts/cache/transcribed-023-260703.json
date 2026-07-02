@@ -1,0 +1,123 @@
+{
+  "formula": [
+    {
+      "frm_cd": "PRF_DGP_B",
+      "note": "모양엽서 → PRF_DGP_B (use_yn=N 미출시)"
+    }
+  ],
+  "formula_components": [
+    {
+      "addtn": "Y",
+      "comp_cd": "COMP_PAPER",
+      "disp_seq": "1",
+      "frm_cd": "PRF_DGP_B"
+    },
+    {
+      "addtn": "Y",
+      "comp_cd": "COMP_CUT_FULL_DIECUT",
+      "disp_seq": "2",
+      "frm_cd": "PRF_DGP_B"
+    },
+    {
+      "addtn": "",
+      "comp_cd": "COMP_PRINT_DIGITAL_S1",
+      "disp_seq": "0",
+      "frm_cd": "PRF_DGP_B"
+    }
+  ],
+  "materials": [
+    {
+      "mat_cd": "MAT_000107",
+      "mat_nm": "몽블랑 190g",
+      "mat_typ_cd": "MAT_TYPE.01",
+      "spec": "316x467",
+      "upr_mat_cd": "MAT_000103",
+      "usage": "USAGE.07",
+      "weight": "190"
+    },
+    {
+      "mat_cd": "MAT_000109",
+      "mat_nm": "몽블랑 240g",
+      "mat_typ_cd": "MAT_TYPE.01",
+      "spec": "316x467",
+      "upr_mat_cd": "MAT_000103",
+      "usage": "USAGE.07",
+      "weight": "240"
+    },
+    {
+      "mat_cd": "MAT_000113",
+      "mat_nm": "아코팩",
+      "mat_typ_cd": "MAT_TYPE.01",
+      "spec": "316x467",
+      "upr_mat_cd": "",
+      "usage": "USAGE.07",
+      "weight": "250"
+    }
+  ],
+  "meta": {
+    "captured_at": "2026-07-03",
+    "generated_by": "transcribe_product_023.py",
+    "snapshot": "live-snapshot/latest (snap_20260702_1119)"
+  },
+  "plate": [
+    {
+      "dflt_plt": "Y",
+      "item_siz_cd": "",
+      "output_paper_typ_cd": "OUTPUT_PAPER_TYPE.01",
+      "siz_cd": "SIZ_000499"
+    }
+  ],
+  "print_options": [
+    {
+      "back": "CLR_000001(인쇄 안 함)",
+      "front": "CLR_000005(CMYK 4도)",
+      "opt_id": "1",
+      "print_opt_cd": "POPT_000001",
+      "print_side": "단면"
+    },
+    {
+      "back": "CLR_000005(CMYK 4도)",
+      "front": "CLR_000005(CMYK 4도)",
+      "opt_id": "2",
+      "print_opt_cd": "POPT_000002",
+      "print_side": "양면"
+    }
+  ],
+  "processes": [
+    {
+      "disp": "1",
+      "mand": "Y",
+      "proc_cd": "PROC_000123",
+      "proc_nm": "완칼커팅",
+      "upr_proc_cd": "PROC_000121"
+    },
+    {
+      "disp": "-1",
+      "mand": "Y",
+      "proc_cd": "PROC_000004",
+      "proc_nm": "디지털인쇄",
+      "upr_proc_cd": "PROC_000001"
+    }
+  ],
+  "qty": {
+    "del_yn": "N",
+    "editor_yn": "N",
+    "file_upload_yn": "Y",
+    "max_qty": "10000",
+    "min_qty": "12",
+    "prd_typ_cd": "PRD_TYPE.01",
+    "qty_incr": "12",
+    "unit": "QTY_UNIT.02",
+    "use_yn": "N"
+  },
+  "sizes": [
+    {
+      "cut": "90x90",
+      "dflt": "Y",
+      "disp": "1",
+      "siz_cd": "SIZ_000119",
+      "siz_nm": "90x90",
+      "work": "92x92"
+    }
+  ]
+}

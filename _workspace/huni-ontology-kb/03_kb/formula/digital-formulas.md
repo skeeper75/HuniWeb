@@ -110,3 +110,49 @@
 - rel: {rel: has_component, target: component-COMP_PHOTOCARD_BULK, qualifier: {disp_seq: 2, addtn: Y}}
 - props: {archetype: "고정가", note: "024 포토카드 바인딩"}
 
+<!-- 공유축 통합 mint 260703(okb-knowledge-builder): 아래 5공식은 상품 빌더 needed_shared_nodes 중 -->
+<!-- 브로큰링크(product priced_by 배선 실재·공식 부재) 해소 대상. 025/035/036/037/039 priced_by 타깃. -->
+<!-- has_component 배선(disp_seq/addtn)=_meta/scripts/transcribe_shared_axis_260703.py 전사(t_prc_formula_components). -->
+
+### [formula-PRF_PHOTOCARD_CLEAR] 투명포토카드 세트 고정가 {verified}
+- type: price_formula
+- anchor: t_prc_price_formulas/PRF_PHOTOCARD_CLEAR
+- src: {source_file: "live-snapshot/latest/t_prc_formula_components.csv", source_locator: "frm_cd:PRF_PHOTOCARD_CLEAR", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- rel: {rel: has_component, target: component-COMP_PHOTOCARD_CLEAR_SET, qualifier: {disp_seq: 1, addtn: Y}}
+- props: {archetype: "고정가", note: "025 투명포토카드 바인딩·V3 공식분리(PRF_PHOTOCARD_FIXED silent 합산 교정·260623)"}
+
+### [formula-PRF_NAMECARD_SHAPE] 모양명함 면/수량별 단가(용지포함) {verified}
+- type: price_formula
+- anchor: t_prc_price_formulas/PRF_NAMECARD_SHAPE
+- src: {source_file: "live-snapshot/latest/t_prc_formula_components.csv", source_locator: "frm_cd:PRF_NAMECARD_SHAPE", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- rel: {rel: has_component, target: component-COMP_NAMECARD_SHAPE_S1, qualifier: {disp_seq: 1, addtn: Y}}
+- rel: {rel: has_component, target: component-COMP_NAMECARD_SHAPE_S2, qualifier: {disp_seq: 2, addtn: Y}}
+- props: {archetype: "고정가", note: "035 모양명함 바인딩·siz_cd 정확매칭(032/033과 동형 블록)"}
+
+### [formula-PRF_NAMECARD_MINISHAPE] 미니모양명함 면/수량별 단가(용지포함) {verified}
+- type: price_formula
+- anchor: t_prc_price_formulas/PRF_NAMECARD_MINISHAPE
+- src: {source_file: "live-snapshot/latest/t_prc_formula_components.csv", source_locator: "frm_cd:PRF_NAMECARD_MINISHAPE", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- rel: {rel: has_component, target: component-COMP_NAMECARD_MINISHAPE_S1, qualifier: {disp_seq: 1, addtn: Y}}
+- rel: {rel: has_component, target: component-COMP_NAMECARD_MINISHAPE_S2, qualifier: {disp_seq: 2, addtn: Y}}
+- props: {archetype: "고정가", note: "036 미니모양명함 바인딩·가격표260527 B08"}
+
+### [formula-PRF_NAMECARD_FOIL] 오리지널박명함 박종류/수량별 단가+동판셋업비 {verified}
+- type: price_formula
+- anchor: t_prc_price_formulas/PRF_NAMECARD_FOIL
+- src: {source_file: "live-snapshot/latest/t_prc_formula_components.csv", source_locator: "frm_cd:PRF_NAMECARD_FOIL", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- rel: {rel: has_component, target: component-COMP_NAMECARD_FOIL_S1_STD, qualifier: {disp_seq: 1, addtn: Y}}
+- rel: {rel: has_component, target: component-COMP_NAMECARD_FOIL_SETUP_S1_STD, qualifier: {disp_seq: 2, addtn: Y}}
+- rel: {rel: has_component, target: component-COMP_NAMECARD_FOIL_S1_HOLO, qualifier: {disp_seq: 3, addtn: Y}}
+- rel: {rel: has_component, target: component-COMP_NAMECARD_FOIL_S2_STD, qualifier: {disp_seq: 4, addtn: Y}}
+- rel: {rel: has_component, target: component-COMP_NAMECARD_FOIL_S2_HOLO, qualifier: {disp_seq: 5, addtn: Y}}
+- rel: {rel: has_component, target: component-COMP_NAMECARD_FOIL_SETUP_S2_STD, qualifier: {disp_seq: 6, addtn: Y}}
+- props: {archetype: "고정가", note: "037 오리지널박명함 바인딩·박 본체+동판셋업·면 동일가·042 프리미엄쿠폰 박분기(PRF_DGP_A_FOIL)와 별 공식"}
+
+### [formula-PRF_NAMECARD_CLEAR] 투명명함 수량별 단가(용지포함) {verified}
+- type: price_formula
+- anchor: t_prc_price_formulas/PRF_NAMECARD_CLEAR
+- src: {source_file: "live-snapshot/latest/t_prc_formula_components.csv", source_locator: "frm_cd:PRF_NAMECARD_CLEAR", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- rel: {rel: has_component, target: component-COMP_NAMECARD_CLEAR_S1, qualifier: {disp_seq: 1, addtn: Y}}
+- props: {archetype: "고정가", note: "039 투명명함 바인딩·자재무관·단면 단독(CLEAR_S1)"}
+

@@ -1,0 +1,121 @@
+{
+  "addons": [],
+  "bundle_qty": [],
+  "categories": [
+    {
+      "cat_cd": "CAT_000003",
+      "cat_nm": "인쇄홍보물",
+      "main_cat_yn": "N"
+    },
+    {
+      "cat_cd": "CAT_000181",
+      "cat_nm": "여행/아웃도어",
+      "main_cat_yn": "Y"
+    }
+  ],
+  "constraints": [],
+  "formulas": [
+    "PRF_DGP_F"
+  ],
+  "materials": [
+    {
+      "dflt_yn": "Y",
+      "mat_cd": "MAT_000149",
+      "mat_nm": "아이보리",
+      "mat_typ_cd": "MAT_TYPE.01",
+      "usage_cd": "USAGE.07"
+    }
+  ],
+  "meta": {
+    "captured_at": "2026-07-03",
+    "generated_by": "transcribe_product_051.py",
+    "prd_cd": "PRD_000051",
+    "snapshot": "live-snapshot/latest (snap_20260702_1119)"
+  },
+  "option_groups": [],
+  "plates": [
+    {
+      "dflt_plt_yn": "Y",
+      "note": "3절 330x540 연결 260701",
+      "output_file_typ": "PDF",
+      "output_paper_typ_cd": "",
+      "siz_cd": "SIZ_000535"
+    }
+  ],
+  "print_options": [
+    {
+      "back_clr": "인쇄 안 함",
+      "front_clr": "CMYK 4도",
+      "opt_id": "1",
+      "print_opt_cd": "POPT_000001",
+      "print_side": "단면"
+    }
+  ],
+  "processes": [
+    {
+      "mand_proc_yn": "Y",
+      "proc_cd": "PROC_000004",
+      "proc_nm": "디지털인쇄"
+    }
+  ],
+  "product": {
+    "del_yn": "N",
+    "editor_yn": "N",
+    "file_upload_yn": "N",
+    "max_qty": "1000",
+    "min_qty": "10",
+    "prd_cd": "PRD_000051",
+    "prd_nm": "썬캡",
+    "prd_typ_cd": "PRD_TYPE.01",
+    "qty_incr": "10",
+    "qty_unit_typ_cd": "QTY_UNIT.02",
+    "use_yn": "N"
+  },
+  "size_dims": {
+    "SIZ_000195": {
+      "cut": "?x?",
+      "note": "",
+      "siz_nm": "313x400",
+      "tags": "",
+      "work": "313x400"
+    },
+    "SIZ_000535": {
+      "cut": "320x530",
+      "note": "3절 전지 - 썬캡 판형(권위 판걸이수시트 330x540 판수1) 260701",
+      "siz_nm": "330x540",
+      "tags": "[\"3절\", \"판형\"]",
+      "work": "330x540"
+    }
+  },
+  "sizes_linked": [
+    "SIZ_000195"
+  ],
+  "wiring": {
+    "PRF_DGP_F": [
+      {
+        "addtn_yn": "Y",
+        "comp_cd": "COMP_PRINT_DIGITAL_S1",
+        "comp_nm": "디지털인쇄비",
+        "disp_seq": "0",
+        "prc_typ_cd": "PRICE_TYPE.01",
+        "use_dims": "[\"proc_cd\", \"plt_siz_cd\", \"print_opt_cd\", \"min_qty\", \"proc_grp:PROC_000001\"]"
+      },
+      {
+        "addtn_yn": "Y",
+        "comp_cd": "COMP_PAPER",
+        "comp_nm": "용지비(종이별 절가)",
+        "disp_seq": "1",
+        "prc_typ_cd": "PRICE_TYPE.01",
+        "use_dims": "[\"plt_siz_cd\", \"mat_cd\"]"
+      },
+      {
+        "addtn_yn": "Y",
+        "comp_cd": "COMP_CUT_FULL_DIECUT",
+        "comp_nm": "커팅 완제품가 완칼(모양엽서·라벨택)",
+        "disp_seq": "2",
+        "prc_typ_cd": "PRICE_TYPE.03",
+        "use_dims": "[\"plt_siz_cd\", \"min_qty\"]"
+      }
+    ]
+  }
+}

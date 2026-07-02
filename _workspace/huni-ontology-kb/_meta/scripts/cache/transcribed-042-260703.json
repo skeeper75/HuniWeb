@@ -1,0 +1,474 @@
+{
+  "categories": [
+    {
+      "cat_cd": "CAT_000062",
+      "disp_seq": "2",
+      "main_cat_yn": "Y"
+    }
+  ],
+  "counts": {
+    "addons": 0,
+    "bundle_qtys": 0,
+    "constraints": 0
+  },
+  "materials": [
+    {
+      "contaminated": false,
+      "correct_matcd": null,
+      "dflt_yn": "Y",
+      "mat_cd": "MAT_000107",
+      "mat_nm": "몽블랑 190g",
+      "mat_typ_cd": "MAT_TYPE.01",
+      "opt_intended": null,
+      "usage_cd": "USAGE.07"
+    },
+    {
+      "contaminated": true,
+      "correct_matcd": "MAT_000352",
+      "dflt_yn": "Y",
+      "mat_cd": "MAT_000240",
+      "mat_nm": "보드스탠딩",
+      "mat_typ_cd": "MAT_TYPE.16",
+      "opt_intended": "스타드림(다이아) 240g",
+      "usage_cd": "USAGE.07"
+    },
+    {
+      "contaminated": true,
+      "correct_matcd": "MAT_000358",
+      "dflt_yn": "Y",
+      "mat_cd": "MAT_000128",
+      "mat_nm": "면끈",
+      "mat_typ_cd": "MAT_TYPE.17",
+      "opt_intended": "스타드림(실버) 240g",
+      "usage_cd": "USAGE.07"
+    },
+    {
+      "contaminated": true,
+      "correct_matcd": "MAT_000359",
+      "dflt_yn": "Y",
+      "mat_cd": "MAT_000129",
+      "mat_nm": "아크릴키링고리",
+      "mat_typ_cd": "MAT_TYPE.03",
+      "opt_intended": "스타드림(골드) 240g",
+      "usage_cd": "USAGE.07"
+    },
+    {
+      "contaminated": true,
+      "correct_matcd": "MAT_000360",
+      "dflt_yn": "Y",
+      "mat_cd": "MAT_000241",
+      "mat_nm": "핀버튼",
+      "mat_typ_cd": "MAT_TYPE.12",
+      "opt_intended": "스타드림(로츠쿼츠) 240g",
+      "usage_cd": "USAGE.07"
+    },
+    {
+      "contaminated": false,
+      "correct_matcd": null,
+      "dflt_yn": "Y",
+      "mat_cd": "MAT_000118",
+      "mat_nm": "클래식 크래스트",
+      "mat_typ_cd": "MAT_TYPE.01",
+      "opt_intended": null,
+      "usage_cd": "USAGE.07"
+    },
+    {
+      "contaminated": false,
+      "correct_matcd": null,
+      "dflt_yn": "Y",
+      "mat_cd": "MAT_000125",
+      "mat_nm": "한지",
+      "mat_typ_cd": "MAT_TYPE.01",
+      "opt_intended": null,
+      "usage_cd": "USAGE.07"
+    },
+    {
+      "contaminated": false,
+      "correct_matcd": null,
+      "dflt_yn": "Y",
+      "mat_cd": "MAT_000121",
+      "mat_nm": "켄도",
+      "mat_typ_cd": "MAT_TYPE.01",
+      "opt_intended": null,
+      "usage_cd": "USAGE.07"
+    }
+  ],
+  "meta": {
+    "captured_at": "2026-07-03",
+    "generated_by": "transcribe_product_042.py",
+    "prd_cd": "PRD_000042",
+    "snapshot": "live-snapshot/latest (snap_20260702_1119)"
+  },
+  "option_groups": [
+    {
+      "disp_seq": "1",
+      "mand_yn": "Y",
+      "max_sel_cnt": "1",
+      "min_sel_cnt": "1",
+      "opt_grp_cd": "OPT_000055",
+      "opt_grp_nm": "인쇄",
+      "sel_typ_cd": "SEL_TYPE.01"
+    },
+    {
+      "disp_seq": "2",
+      "mand_yn": "Y",
+      "max_sel_cnt": "1",
+      "min_sel_cnt": "1",
+      "opt_grp_cd": "OPT_000056",
+      "opt_grp_nm": "종이",
+      "sel_typ_cd": "SEL_TYPE.01"
+    },
+    {
+      "disp_seq": "3",
+      "mand_yn": "N",
+      "max_sel_cnt": "4",
+      "min_sel_cnt": "0",
+      "opt_grp_cd": "OPT_000057",
+      "opt_grp_nm": "후가공",
+      "sel_typ_cd": "SEL_TYPE.02"
+    },
+    {
+      "disp_seq": "4",
+      "mand_yn": "N",
+      "max_sel_cnt": "1",
+      "min_sel_cnt": "0",
+      "opt_grp_cd": "OPT_000058",
+      "opt_grp_nm": "박칼라",
+      "sel_typ_cd": "SEL_TYPE.01"
+    }
+  ],
+  "option_items": [
+    {
+      "item_seq": "1",
+      "opt_cd": "OPV_000207",
+      "opt_nm": "단면",
+      "ref_dim_cd": "OPT_REF_DIM.06",
+      "ref_key1": "1",
+      "ref_key2": ""
+    },
+    {
+      "item_seq": "1",
+      "opt_cd": "OPV_000208",
+      "opt_nm": "양면",
+      "ref_dim_cd": "OPT_REF_DIM.06",
+      "ref_key1": "2",
+      "ref_key2": ""
+    },
+    {
+      "item_seq": "1",
+      "opt_cd": "OPV_000209",
+      "opt_nm": "몽블랑 190g",
+      "ref_dim_cd": "OPT_REF_DIM.03",
+      "ref_key1": "MAT_000107",
+      "ref_key2": "USAGE.07"
+    },
+    {
+      "item_seq": "1",
+      "opt_cd": "OPV_000210",
+      "opt_nm": "클래식 크래스트 스티플 270g",
+      "ref_dim_cd": "OPT_REF_DIM.03",
+      "ref_key1": "MAT_000118",
+      "ref_key2": "USAGE.07"
+    },
+    {
+      "item_seq": "1",
+      "opt_cd": "OPV_000211",
+      "opt_nm": "켄도 250g",
+      "ref_dim_cd": "OPT_REF_DIM.03",
+      "ref_key1": "MAT_000121",
+      "ref_key2": "USAGE.07"
+    },
+    {
+      "item_seq": "1",
+      "opt_cd": "OPV_000212",
+      "opt_nm": "한지 170g",
+      "ref_dim_cd": "OPT_REF_DIM.03",
+      "ref_key1": "MAT_000125",
+      "ref_key2": "USAGE.07"
+    },
+    {
+      "item_seq": "1",
+      "opt_cd": "OPV_000213",
+      "opt_nm": "스타드림(실버) 240g",
+      "ref_dim_cd": "OPT_REF_DIM.03",
+      "ref_key1": "MAT_000128",
+      "ref_key2": "USAGE.07"
+    },
+    {
+      "item_seq": "1",
+      "opt_cd": "OPV_000214",
+      "opt_nm": "스타드림(골드) 240g",
+      "ref_dim_cd": "OPT_REF_DIM.03",
+      "ref_key1": "MAT_000129",
+      "ref_key2": "USAGE.07"
+    },
+    {
+      "item_seq": "1",
+      "opt_cd": "OPV_000215",
+      "opt_nm": "스타드림(다이아) 240g",
+      "ref_dim_cd": "OPT_REF_DIM.03",
+      "ref_key1": "MAT_000240",
+      "ref_key2": "USAGE.07"
+    },
+    {
+      "item_seq": "1",
+      "opt_cd": "OPV_000216",
+      "opt_nm": "스타드림(로츠쿼츠) 240g",
+      "ref_dim_cd": "OPT_REF_DIM.03",
+      "ref_key1": "MAT_000241",
+      "ref_key2": "USAGE.07"
+    },
+    {
+      "item_seq": "1",
+      "opt_cd": "OPV_000217",
+      "opt_nm": "오시",
+      "ref_dim_cd": "OPT_REF_DIM.04",
+      "ref_key1": "PROC_000029",
+      "ref_key2": ""
+    },
+    {
+      "item_seq": "1",
+      "opt_cd": "OPV_000218",
+      "opt_nm": "미싱",
+      "ref_dim_cd": "OPT_REF_DIM.04",
+      "ref_key1": "PROC_000030",
+      "ref_key2": ""
+    },
+    {
+      "item_seq": "1",
+      "opt_cd": "OPV_000219",
+      "opt_nm": "가변텍스트",
+      "ref_dim_cd": "OPT_REF_DIM.04",
+      "ref_key1": "PROC_000031",
+      "ref_key2": ""
+    },
+    {
+      "item_seq": "1",
+      "opt_cd": "OPV_000220",
+      "opt_nm": "가변이미지",
+      "ref_dim_cd": "OPT_REF_DIM.04",
+      "ref_key1": "PROC_000032",
+      "ref_key2": ""
+    },
+    {
+      "item_seq": "1",
+      "opt_cd": "OPV_000222",
+      "opt_nm": "홀로그램",
+      "ref_dim_cd": "OPT_REF_DIM.04",
+      "ref_key1": "PROC_000037",
+      "ref_key2": ""
+    },
+    {
+      "item_seq": "1",
+      "opt_cd": "OPV_000223",
+      "opt_nm": "금유광",
+      "ref_dim_cd": "OPT_REF_DIM.04",
+      "ref_key1": "PROC_000038",
+      "ref_key2": ""
+    },
+    {
+      "item_seq": "1",
+      "opt_cd": "OPV_000224",
+      "opt_nm": "은유광",
+      "ref_dim_cd": "OPT_REF_DIM.04",
+      "ref_key1": "PROC_000039",
+      "ref_key2": ""
+    },
+    {
+      "item_seq": "1",
+      "opt_cd": "OPV_000225",
+      "opt_nm": "먹유광",
+      "ref_dim_cd": "OPT_REF_DIM.04",
+      "ref_key1": "PROC_000040",
+      "ref_key2": ""
+    },
+    {
+      "item_seq": "1",
+      "opt_cd": "OPV_000226",
+      "opt_nm": "동박",
+      "ref_dim_cd": "OPT_REF_DIM.04",
+      "ref_key1": "PROC_000041",
+      "ref_key2": ""
+    },
+    {
+      "item_seq": "1",
+      "opt_cd": "OPV_000227",
+      "opt_nm": "적박",
+      "ref_dim_cd": "OPT_REF_DIM.04",
+      "ref_key1": "PROC_000042",
+      "ref_key2": ""
+    },
+    {
+      "item_seq": "1",
+      "opt_cd": "OPV_000228",
+      "opt_nm": "청박",
+      "ref_dim_cd": "OPT_REF_DIM.04",
+      "ref_key1": "PROC_000043",
+      "ref_key2": ""
+    },
+    {
+      "item_seq": "1",
+      "opt_cd": "OPV_000229",
+      "opt_nm": "트윙클",
+      "ref_dim_cd": "OPT_REF_DIM.04",
+      "ref_key1": "PROC_000044",
+      "ref_key2": ""
+    }
+  ],
+  "plate_sizes": [
+    {
+      "dflt_plt_yn": "Y",
+      "output_paper_typ_cd": "OUTPUT_PAPER_TYPE.01",
+      "siz_cd": "SIZ_000499"
+    }
+  ],
+  "price_formulas": [
+    {
+      "apply_bgn_ymd": "2026-06-01",
+      "frm_cd": "PRF_DGP_A",
+      "note": "프리미엄 쿠폰/상품권 → PRF_DGP_A"
+    },
+    {
+      "apply_bgn_ymd": "2026-07-01",
+      "frm_cd": "PRF_DGP_A_FOIL",
+      "note": "박 분기 공식으로 재바인딩(동형전파·인간승인 후 COMMIT)"
+    }
+  ],
+  "print_options": [
+    {
+      "dflt_yn": "Y",
+      "opt_id": "1",
+      "print_opt_cd": "POPT_000001",
+      "print_side": "단면"
+    },
+    {
+      "dflt_yn": "Y",
+      "opt_id": "2",
+      "print_opt_cd": "POPT_000002",
+      "print_side": "양면"
+    }
+  ],
+  "processes": [
+    {
+      "disp_seq": "1",
+      "mand_proc_yn": "N",
+      "proc_cd": "PROC_000038",
+      "proc_nm": "금유광",
+      "upr_proc_cd": "PROC_000033"
+    },
+    {
+      "disp_seq": "1",
+      "mand_proc_yn": "N",
+      "proc_cd": "PROC_000039",
+      "proc_nm": "은유광",
+      "upr_proc_cd": "PROC_000033"
+    },
+    {
+      "disp_seq": "1",
+      "mand_proc_yn": "N",
+      "proc_cd": "PROC_000040",
+      "proc_nm": "먹유광",
+      "upr_proc_cd": "PROC_000033"
+    },
+    {
+      "disp_seq": "1",
+      "mand_proc_yn": "N",
+      "proc_cd": "PROC_000043",
+      "proc_nm": "청박",
+      "upr_proc_cd": "PROC_000033"
+    },
+    {
+      "disp_seq": "1",
+      "mand_proc_yn": "N",
+      "proc_cd": "PROC_000042",
+      "proc_nm": "적박",
+      "upr_proc_cd": "PROC_000033"
+    },
+    {
+      "disp_seq": "1",
+      "mand_proc_yn": "N",
+      "proc_cd": "PROC_000041",
+      "proc_nm": "동박",
+      "upr_proc_cd": "PROC_000033"
+    },
+    {
+      "disp_seq": "1",
+      "mand_proc_yn": "N",
+      "proc_cd": "PROC_000037",
+      "proc_nm": "홀로그램",
+      "upr_proc_cd": "PROC_000033"
+    },
+    {
+      "disp_seq": "1",
+      "mand_proc_yn": "N",
+      "proc_cd": "PROC_000044",
+      "proc_nm": "트윙클",
+      "upr_proc_cd": "PROC_000033"
+    },
+    {
+      "disp_seq": "10",
+      "mand_proc_yn": "N",
+      "proc_cd": "PROC_000029",
+      "proc_nm": "오시",
+      "upr_proc_cd": ""
+    },
+    {
+      "disp_seq": "11",
+      "mand_proc_yn": "N",
+      "proc_cd": "PROC_000030",
+      "proc_nm": "미싱",
+      "upr_proc_cd": ""
+    },
+    {
+      "disp_seq": "12",
+      "mand_proc_yn": "N",
+      "proc_cd": "PROC_000031",
+      "proc_nm": "가변텍스트",
+      "upr_proc_cd": "PROC_000085"
+    },
+    {
+      "disp_seq": "13",
+      "mand_proc_yn": "N",
+      "proc_cd": "PROC_000032",
+      "proc_nm": "가변이미지",
+      "upr_proc_cd": "PROC_000085"
+    },
+    {
+      "disp_seq": "-1",
+      "mand_proc_yn": "Y",
+      "proc_cd": "PROC_000004",
+      "proc_nm": "디지털인쇄",
+      "upr_proc_cd": "PROC_000001"
+    }
+  ],
+  "product": {
+    "del_yn": "N",
+    "editor_yn": "N",
+    "file_upload_yn": "Y",
+    "max_qty": "10000",
+    "min_qty": "12",
+    "prd_nm": "프리미엄 쿠폰/상품권",
+    "prd_typ_cd": "PRD_TYPE.01",
+    "qty_incr": "12",
+    "qty_unit_typ_cd": "QTY_UNIT.02",
+    "use_yn": "Y"
+  },
+  "sizes": [
+    {
+      "cut": "148x68",
+      "dflt_yn": "Y",
+      "disp_seq": "1",
+      "siz_cd": "SIZ_000013",
+      "siz_nm": "148x68",
+      "work": "152x72"
+    },
+    {
+      "cut": "148x75",
+      "dflt_yn": "Y",
+      "disp_seq": "1",
+      "siz_cd": "SIZ_000014",
+      "siz_nm": "148x75",
+      "work": "158x77"
+    }
+  ]
+}

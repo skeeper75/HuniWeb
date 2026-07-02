@@ -1,0 +1,327 @@
+{
+  "bindings": {
+    "addons": [],
+    "bundle_qtys": [],
+    "categories": [
+      {
+        "cat_cd": "CAT_000003",
+        "main_cat_yn": "Y"
+      },
+      {
+        "cat_cd": "CAT_000313",
+        "main_cat_yn": "N"
+      }
+    ],
+    "constraints": [],
+    "option_groups": [],
+    "plate_sizes": [
+      {
+        "output_paper_typ_cd": "OUTPUT_PAPER_TYPE.01",
+        "siz_cd": "SIZ_000499"
+      }
+    ],
+    "price_formulas": [
+      {
+        "frm_cd": "PRF_NAMECARD_PEARL"
+      },
+      {
+        "frm_cd": "PRF_NAMECARD_PEARL_FOIL"
+      }
+    ],
+    "print_options": [
+      {
+        "opt_id": "1",
+        "print_opt_cd": "POPT_000001",
+        "print_side": "단면"
+      },
+      {
+        "opt_id": "2",
+        "print_opt_cd": "POPT_000002",
+        "print_side": "양면"
+      }
+    ],
+    "processes": [
+      {
+        "mand_proc_yn": "N",
+        "proc_cd": "PROC_000027"
+      },
+      {
+        "mand_proc_yn": "N",
+        "proc_cd": "PROC_000038"
+      },
+      {
+        "mand_proc_yn": "N",
+        "proc_cd": "PROC_000028"
+      },
+      {
+        "mand_proc_yn": "N",
+        "proc_cd": "PROC_000039"
+      },
+      {
+        "mand_proc_yn": "N",
+        "proc_cd": "PROC_000041"
+      },
+      {
+        "mand_proc_yn": "N",
+        "proc_cd": "PROC_000040"
+      },
+      {
+        "mand_proc_yn": "N",
+        "proc_cd": "PROC_000043"
+      },
+      {
+        "mand_proc_yn": "N",
+        "proc_cd": "PROC_000042"
+      },
+      {
+        "mand_proc_yn": "N",
+        "proc_cd": "PROC_000037"
+      },
+      {
+        "mand_proc_yn": "N",
+        "proc_cd": "PROC_000044"
+      }
+    ],
+    "sets": [],
+    "sizes": [
+      {
+        "dflt_yn": "Y",
+        "siz_cd": "SIZ_000008"
+      }
+    ]
+  },
+  "components": {
+    "COMP_FOIL_PROC_SMALL_SPECIAL": {
+      "comp_nm": "박 가공비(소형·특수박)",
+      "prc_typ_cd": "PRICE_TYPE.03",
+      "use_dims": "[\"proc_cd\", \"siz_width\", \"siz_height\", \"min_qty\"]"
+    },
+    "COMP_FOIL_PROC_SMALL_STD": {
+      "comp_nm": "박 가공비(소형·일반박)",
+      "prc_typ_cd": "PRICE_TYPE.03",
+      "use_dims": "[\"proc_cd\", \"siz_width\", \"siz_height\", \"min_qty\"]"
+    },
+    "COMP_FOIL_SETUP_SMALL": {
+      "comp_nm": "박·형압 동판셋업비(소형)",
+      "prc_typ_cd": "PRICE_TYPE.03",
+      "use_dims": "[\"proc_cd\"]"
+    },
+    "COMP_NAMECARD_PEARL_S1": {
+      "comp_nm": "펄명함(스타드림) 완제품가 단면(용지포함)",
+      "prc_typ_cd": "PRICE_TYPE.02",
+      "use_dims": "[\"mat_cd\", \"min_qty\", \"print_opt_cd\"]"
+    },
+    "COMP_NAMECARD_PEARL_S2": {
+      "comp_nm": "펄명함(스타드림) 완제품가 양면(용지포함)",
+      "prc_typ_cd": "PRICE_TYPE.02",
+      "use_dims": "[\"mat_cd\", \"min_qty\", \"print_opt_cd\"]"
+    }
+  },
+  "foil_processes": {
+    "PROC_000037": {
+      "note": "",
+      "proc_nm": "홀로그램",
+      "upr_proc_cd": "PROC_000033"
+    },
+    "PROC_000038": {
+      "note": "책자 추가 D-26",
+      "proc_nm": "금유광",
+      "upr_proc_cd": "PROC_000033"
+    },
+    "PROC_000039": {
+      "note": "",
+      "proc_nm": "은유광",
+      "upr_proc_cd": "PROC_000033"
+    },
+    "PROC_000040": {
+      "note": "",
+      "proc_nm": "먹유광",
+      "upr_proc_cd": "PROC_000033"
+    },
+    "PROC_000041": {
+      "note": "",
+      "proc_nm": "동박",
+      "upr_proc_cd": "PROC_000033"
+    },
+    "PROC_000042": {
+      "note": "",
+      "proc_nm": "적박",
+      "upr_proc_cd": "PROC_000033"
+    },
+    "PROC_000043": {
+      "note": "",
+      "proc_nm": "청박",
+      "upr_proc_cd": "PROC_000033"
+    },
+    "PROC_000044": {
+      "note": "특수박 r31",
+      "proc_nm": "트윙클",
+      "upr_proc_cd": "PROC_000033"
+    }
+  },
+  "formula_components": [
+    {
+      "addtn_yn": "Y",
+      "comp_cd": "COMP_NAMECARD_PEARL_S1",
+      "disp_seq": "1",
+      "frm_cd": "PRF_NAMECARD_PEARL"
+    },
+    {
+      "addtn_yn": "Y",
+      "comp_cd": "COMP_NAMECARD_PEARL_S2",
+      "disp_seq": "2",
+      "frm_cd": "PRF_NAMECARD_PEARL"
+    },
+    {
+      "addtn_yn": "Y",
+      "comp_cd": "COMP_NAMECARD_PEARL_S1",
+      "disp_seq": "1",
+      "frm_cd": "PRF_NAMECARD_PEARL_FOIL"
+    },
+    {
+      "addtn_yn": "Y",
+      "comp_cd": "COMP_NAMECARD_PEARL_S2",
+      "disp_seq": "2",
+      "frm_cd": "PRF_NAMECARD_PEARL_FOIL"
+    },
+    {
+      "addtn_yn": "Y",
+      "comp_cd": "COMP_FOIL_SETUP_SMALL",
+      "disp_seq": "3",
+      "frm_cd": "PRF_NAMECARD_PEARL_FOIL"
+    },
+    {
+      "addtn_yn": "Y",
+      "comp_cd": "COMP_FOIL_PROC_SMALL_STD",
+      "disp_seq": "4",
+      "frm_cd": "PRF_NAMECARD_PEARL_FOIL"
+    },
+    {
+      "addtn_yn": "Y",
+      "comp_cd": "COMP_FOIL_PROC_SMALL_SPECIAL",
+      "disp_seq": "5",
+      "frm_cd": "PRF_NAMECARD_PEARL_FOIL"
+    }
+  ],
+  "formulas": {
+    "PRF_NAMECARD_PEARL": {
+      "frm_nm": "펄명함(스타드림) 면/소재/수량별 단가(용지포함)",
+      "use_yn": "Y"
+    },
+    "PRF_NAMECARD_PEARL_FOIL": {
+      "frm_nm": "펄명함 면/소재/수량별 단가(용지포함)+박",
+      "use_yn": "Y"
+    }
+  },
+  "material_active": [
+    {
+      "dflt_yn": "Y",
+      "mat_cd": "MAT_000358",
+      "mat_nm": "스타드림(실버) 240g",
+      "usage_cd": "USAGE.07"
+    },
+    {
+      "dflt_yn": "Y",
+      "mat_cd": "MAT_000360",
+      "mat_nm": "스타드림(로즈쿼츠) 240g",
+      "usage_cd": "USAGE.07"
+    },
+    {
+      "dflt_yn": "Y",
+      "mat_cd": "MAT_000352",
+      "mat_nm": "스타드림(다이아몬드) 240g",
+      "usage_cd": "USAGE.07"
+    },
+    {
+      "dflt_yn": "Y",
+      "mat_cd": "MAT_000359",
+      "mat_nm": "스타드림(골드) 240g",
+      "usage_cd": "USAGE.07"
+    }
+  ],
+  "material_removed": [
+    {
+      "del_dt": "2026-06-30 11:30:58.226017",
+      "mat_cd": "MAT_000128",
+      "mat_nm": "면끈",
+      "mat_typ_cd": "MAT_TYPE.17"
+    },
+    {
+      "del_dt": "2026-06-30 11:30:58.226017",
+      "mat_cd": "MAT_000129",
+      "mat_nm": "아크릴키링고리",
+      "mat_typ_cd": "MAT_TYPE.03"
+    },
+    {
+      "del_dt": "2026-06-30 11:30:58.226017",
+      "mat_cd": "MAT_000240",
+      "mat_nm": "보드스탠딩",
+      "mat_typ_cd": "MAT_TYPE.16"
+    },
+    {
+      "del_dt": "2026-06-30 11:30:58.226017",
+      "mat_cd": "MAT_000241",
+      "mat_nm": "핀버튼",
+      "mat_typ_cd": "MAT_TYPE.12"
+    }
+  ],
+  "meta": {
+    "captured_at": "2026-07-03",
+    "generated_by": "transcribe_product_034.py",
+    "prd_cd": "PRD_000034",
+    "snapshot": "live-snapshot/latest (snap_20260702_1119)"
+  },
+  "pearl_materials": {
+    "MAT_000352": {
+      "height": "?",
+      "mat_nm": "스타드림(다이아몬드) 240g",
+      "mat_typ_cd": "MAT_TYPE.01",
+      "upr_mat_cd": "MAT_000127",
+      "weight": "?",
+      "width": "?"
+    },
+    "MAT_000358": {
+      "height": "?",
+      "mat_nm": "스타드림(실버) 240g",
+      "mat_typ_cd": "MAT_TYPE.01",
+      "upr_mat_cd": "MAT_000127",
+      "weight": "?",
+      "width": "?"
+    },
+    "MAT_000359": {
+      "height": "?",
+      "mat_nm": "스타드림(골드) 240g",
+      "mat_typ_cd": "MAT_TYPE.01",
+      "upr_mat_cd": "MAT_000127",
+      "weight": "?",
+      "width": "?"
+    },
+    "MAT_000360": {
+      "height": "?",
+      "mat_nm": "스타드림(로즈쿼츠) 240g",
+      "mat_typ_cd": "MAT_TYPE.01",
+      "upr_mat_cd": "MAT_000127",
+      "weight": "?",
+      "width": "?"
+    }
+  },
+  "product": {
+    "del_yn": "N",
+    "editor_yn": "N",
+    "file_upload_yn": "Y",
+    "max_qty": "10000",
+    "min_qty": "100",
+    "prd_nm": "펄명함",
+    "prd_typ_cd": "PRD_TYPE.01",
+    "qty_incr": "100",
+    "qty_unit_typ_cd": "QTY_UNIT.02"
+  },
+  "sizes": {
+    "SIZ_000008": {
+      "cut": "90x50",
+      "note": "판걸이=24.0 / 전지=316x467 / 적용=명함",
+      "siz_nm": "90x50mm",
+      "work": "92x52"
+    }
+  }
+}

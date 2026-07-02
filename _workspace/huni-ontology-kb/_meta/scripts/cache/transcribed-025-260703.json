@@ -1,0 +1,198 @@
+{
+  "addons": [
+    {
+      "base_prd_cd": "PRD_000002",
+      "base_prd_nm": "OPP비접착봉투",
+      "base_prd_typ_cd": "PRD_TYPE.03",
+      "disp_seq": "1",
+      "tmpl_cd": "TMPL-000012",
+      "tmpl_nm": "OPP비접착봉투 60x90 mm 20장"
+    },
+    {
+      "base_prd_cd": "PRD_000002",
+      "base_prd_nm": "OPP비접착봉투",
+      "base_prd_typ_cd": "PRD_TYPE.03",
+      "disp_seq": "2",
+      "tmpl_cd": "TMPL-000030",
+      "tmpl_nm": "OPP비접착봉투 60x90 mm 50장"
+    }
+  ],
+  "bundle_qty": [
+    {
+      "bdl_qty": "20",
+      "bdl_unit_typ_cd": "QTY_UNIT.06"
+    }
+  ],
+  "categories": [
+    {
+      "cat_cd": "CAT_000310",
+      "main_cat_yn": "Y"
+    },
+    {
+      "cat_cd": "CAT_000001",
+      "main_cat_yn": "Y"
+    }
+  ],
+  "formulas": [
+    "PRF_PHOTOCARD_CLEAR"
+  ],
+  "materials": [
+    {
+      "dflt_yn": "Y",
+      "mat_cd": "MAT_000144",
+      "mat_nm": "투명 PET 260g",
+      "usage_cd": "USAGE.07"
+    },
+    {
+      "dflt_yn": "N",
+      "mat_cd": "MAT_000147",
+      "mat_nm": "반투명 PET 260g",
+      "usage_cd": "USAGE.07"
+    }
+  ],
+  "meta": {
+    "captured_at": "2026-07-03",
+    "generated_by": "transcribe_product_025.py",
+    "prd_cd": "PRD_000025",
+    "snapshot": "live-snapshot/latest (snap_20260702_1119)"
+  },
+  "option_groups": [
+    {
+      "mand_yn": "Y",
+      "max_sel_cnt": "1",
+      "min_sel_cnt": "1",
+      "opt_grp_cd": "OPT_000022",
+      "opt_grp_nm": "인쇄",
+      "sel_typ_cd": "SEL_TYPE.01"
+    },
+    {
+      "mand_yn": "Y",
+      "max_sel_cnt": "1",
+      "min_sel_cnt": "1",
+      "opt_grp_cd": "OPT_000023",
+      "opt_grp_nm": "종이",
+      "sel_typ_cd": "SEL_TYPE.01"
+    },
+    {
+      "mand_yn": "N",
+      "max_sel_cnt": "1",
+      "min_sel_cnt": "0",
+      "opt_grp_cd": "OPT_000024",
+      "opt_grp_nm": "모서리",
+      "sel_typ_cd": "SEL_TYPE.01"
+    },
+    {
+      "mand_yn": "N",
+      "max_sel_cnt": "1",
+      "min_sel_cnt": "0",
+      "opt_grp_cd": "OPT_000025",
+      "opt_grp_nm": "화이트별색",
+      "sel_typ_cd": "SEL_TYPE.01"
+    }
+  ],
+  "option_items": [
+    {
+      "opt_cd": "OPV_000079",
+      "opt_grp_cd": "OPT_000022",
+      "opt_nm": "단면",
+      "ref_dim_cd": "OPT_REF_DIM.06",
+      "ref_key1": "1",
+      "ref_key2": ""
+    },
+    {
+      "opt_cd": "OPV_000080",
+      "opt_grp_cd": "OPT_000023",
+      "opt_nm": "PET",
+      "ref_dim_cd": "OPT_REF_DIM.03",
+      "ref_key1": "MAT_000178",
+      "ref_key2": "USAGE.07"
+    },
+    {
+      "opt_cd": "OPV_000081",
+      "opt_grp_cd": "OPT_000024",
+      "opt_nm": "직각",
+      "ref_dim_cd": "OPT_REF_DIM.04",
+      "ref_key1": "PROC_000027",
+      "ref_key2": ""
+    },
+    {
+      "opt_cd": "OPV_000082",
+      "opt_grp_cd": "OPT_000024",
+      "opt_nm": "둥근",
+      "ref_dim_cd": "OPT_REF_DIM.04",
+      "ref_key1": "PROC_000028",
+      "ref_key2": ""
+    }
+  ],
+  "plates": [
+    {
+      "dflt_plt_yn": "Y",
+      "output_paper_typ_cd": "OUTPUT_PAPER_TYPE.01",
+      "siz_cd": "SIZ_000522"
+    }
+  ],
+  "print_options": [
+    {
+      "opt_id": "1",
+      "print_opt_cd": "POPT_000001",
+      "print_side": "단면"
+    }
+  ],
+  "processes": [
+    {
+      "mand_proc_yn": "N",
+      "proc_cd": "PROC_000027",
+      "proc_nm": "직각"
+    },
+    {
+      "mand_proc_yn": "N",
+      "proc_cd": "PROC_000028",
+      "proc_nm": "둥근"
+    },
+    {
+      "mand_proc_yn": "N",
+      "proc_cd": "PROC_000008",
+      "proc_nm": "화이트인쇄"
+    }
+  ],
+  "product": {
+    "del_yn": "N",
+    "editor_yn": "Y",
+    "file_upload_yn": "Y",
+    "max_qty": "10000",
+    "min_qty": "20",
+    "prd_cd": "PRD_000025",
+    "prd_nm": "투명포토카드",
+    "prd_typ_cd": "PRD_TYPE.01",
+    "qty_incr": "20",
+    "qty_unit_typ_cd": "QTY_UNIT.02",
+    "use_yn": "Y"
+  },
+  "size_dims": {
+    "SIZ_000012": {
+      "cut": "55x86",
+      "siz_nm": "55x86",
+      "work": "57x88"
+    },
+    "SIZ_000522": {
+      "cut": "305x457",
+      "siz_nm": "315x467",
+      "work": "315x467"
+    }
+  },
+  "sizes_linked": [
+    "SIZ_000012"
+  ],
+  "wiring": {
+    "PRF_PHOTOCARD_CLEAR": [
+      {
+        "addtn_yn": "Y",
+        "comp_cd": "COMP_PHOTOCARD_CLEAR_SET",
+        "comp_nm": "포토카드 완제품가 투명세트",
+        "disp_seq": "1",
+        "prc_typ_cd": "PRICE_TYPE.02",
+        "use_dims": "[\"siz_cd\", \"bdl_qty\", \"min_qty\"]"
+      }
+    ]
+  }
+}

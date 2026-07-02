@@ -1,0 +1,758 @@
+{
+  "bindings": {
+    "addons": [],
+    "bundle_qtys": [],
+    "categories": [
+      {
+        "cat_cd": "CAT_000313",
+        "main_cat_yn": "N"
+      },
+      {
+        "cat_cd": "CAT_000003",
+        "main_cat_yn": "Y"
+      }
+    ],
+    "constraints": [],
+    "materials": [
+      {
+        "dflt_yn": "N",
+        "mat_cd": "MAT_000102",
+        "usage_cd": "USAGE.07"
+      },
+      {
+        "dflt_yn": "N",
+        "mat_cd": "MAT_000108",
+        "usage_cd": "USAGE.07"
+      },
+      {
+        "dflt_yn": "N",
+        "mat_cd": "MAT_000109",
+        "usage_cd": "USAGE.07"
+      },
+      {
+        "dflt_yn": "N",
+        "mat_cd": "MAT_000123",
+        "usage_cd": "USAGE.07"
+      },
+      {
+        "dflt_yn": "N",
+        "mat_cd": "MAT_000124",
+        "usage_cd": "USAGE.07"
+      },
+      {
+        "dflt_yn": "Y",
+        "mat_cd": "MAT_000101",
+        "usage_cd": "USAGE.07"
+      },
+      {
+        "dflt_yn": "N",
+        "mat_cd": "MAT_000347",
+        "usage_cd": "USAGE.07"
+      },
+      {
+        "dflt_yn": "N",
+        "mat_cd": "MAT_000348",
+        "usage_cd": "USAGE.07"
+      },
+      {
+        "dflt_yn": "N",
+        "mat_cd": "MAT_000349",
+        "usage_cd": "USAGE.07"
+      },
+      {
+        "dflt_yn": "N",
+        "mat_cd": "MAT_000350",
+        "usage_cd": "USAGE.07"
+      },
+      {
+        "dflt_yn": "N",
+        "mat_cd": "MAT_000351",
+        "usage_cd": "USAGE.07"
+      },
+      {
+        "dflt_yn": "N",
+        "mat_cd": "MAT_000353",
+        "usage_cd": "USAGE.07"
+      },
+      {
+        "dflt_yn": "N",
+        "mat_cd": "MAT_000356",
+        "usage_cd": "USAGE.07"
+      },
+      {
+        "dflt_yn": "N",
+        "mat_cd": "MAT_000357",
+        "usage_cd": "USAGE.07"
+      }
+    ],
+    "option_groups": [
+      {
+        "disp_seq": "1",
+        "mand_yn": "Y",
+        "max_sel_cnt": "1",
+        "min_sel_cnt": "1",
+        "opt_grp_cd": "OPT_000039",
+        "opt_grp_nm": "인쇄",
+        "sel_typ_cd": "SEL_TYPE.01"
+      },
+      {
+        "disp_seq": "2",
+        "mand_yn": "Y",
+        "max_sel_cnt": "1",
+        "min_sel_cnt": "1",
+        "opt_grp_cd": "OPT_000040",
+        "opt_grp_nm": "종이",
+        "sel_typ_cd": "SEL_TYPE.01"
+      },
+      {
+        "disp_seq": "3",
+        "mand_yn": "N",
+        "max_sel_cnt": "1",
+        "min_sel_cnt": "0",
+        "opt_grp_cd": "OPT_000041",
+        "opt_grp_nm": "모서리",
+        "sel_typ_cd": "SEL_TYPE.01"
+      },
+      {
+        "disp_seq": "4",
+        "mand_yn": "N",
+        "max_sel_cnt": "2",
+        "min_sel_cnt": "0",
+        "opt_grp_cd": "OPT_000042",
+        "opt_grp_nm": "후가공",
+        "sel_typ_cd": "SEL_TYPE.02"
+      },
+      {
+        "disp_seq": "5",
+        "mand_yn": "N",
+        "max_sel_cnt": "1",
+        "min_sel_cnt": "0",
+        "opt_grp_cd": "OPT_000043",
+        "opt_grp_nm": "박칼라",
+        "sel_typ_cd": "SEL_TYPE.01"
+      }
+    ],
+    "option_items": [
+      {
+        "opt_cd": "OPV_000146",
+        "ref_dim_cd": "OPT_REF_DIM.06",
+        "ref_key1": "1",
+        "ref_key2": ""
+      },
+      {
+        "opt_cd": "OPV_000147",
+        "ref_dim_cd": "OPT_REF_DIM.06",
+        "ref_key1": "2",
+        "ref_key2": ""
+      },
+      {
+        "opt_cd": "OPV_000149",
+        "ref_dim_cd": "OPT_REF_DIM.03",
+        "ref_key1": "MAT_000101",
+        "ref_key2": "USAGE.07"
+      },
+      {
+        "opt_cd": "OPV_000150",
+        "ref_dim_cd": "OPT_REF_DIM.03",
+        "ref_key1": "MAT_000102",
+        "ref_key2": "USAGE.07"
+      },
+      {
+        "opt_cd": "OPV_000151",
+        "ref_dim_cd": "OPT_REF_DIM.03",
+        "ref_key1": "MAT_000108",
+        "ref_key2": "USAGE.07"
+      },
+      {
+        "opt_cd": "OPV_000152",
+        "ref_dim_cd": "OPT_REF_DIM.03",
+        "ref_key1": "MAT_000109",
+        "ref_key2": "USAGE.07"
+      },
+      {
+        "opt_cd": "OPV_000153",
+        "ref_dim_cd": "OPT_REF_DIM.03",
+        "ref_key1": "MAT_000113",
+        "ref_key2": "USAGE.07"
+      },
+      {
+        "opt_cd": "OPV_000154",
+        "ref_dim_cd": "OPT_REF_DIM.03",
+        "ref_key1": "MAT_000114",
+        "ref_key2": "USAGE.07"
+      },
+      {
+        "opt_cd": "OPV_000155",
+        "ref_dim_cd": "OPT_REF_DIM.03",
+        "ref_key1": "MAT_000115",
+        "ref_key2": "USAGE.07"
+      },
+      {
+        "opt_cd": "OPV_000156",
+        "ref_dim_cd": "OPT_REF_DIM.03",
+        "ref_key1": "MAT_000116",
+        "ref_key2": "USAGE.07"
+      },
+      {
+        "opt_cd": "OPV_000157",
+        "ref_dim_cd": "OPT_REF_DIM.03",
+        "ref_key1": "MAT_000117",
+        "ref_key2": "USAGE.07"
+      },
+      {
+        "opt_cd": "OPV_000158",
+        "ref_dim_cd": "OPT_REF_DIM.03",
+        "ref_key1": "MAT_000118",
+        "ref_key2": "USAGE.07"
+      },
+      {
+        "opt_cd": "OPV_000160",
+        "ref_dim_cd": "OPT_REF_DIM.03",
+        "ref_key1": "MAT_000123",
+        "ref_key2": "USAGE.07"
+      },
+      {
+        "opt_cd": "OPV_000161",
+        "ref_dim_cd": "OPT_REF_DIM.03",
+        "ref_key1": "MAT_000124",
+        "ref_key2": "USAGE.07"
+      },
+      {
+        "opt_cd": "OPV_000162",
+        "ref_dim_cd": "OPT_REF_DIM.03",
+        "ref_key1": "MAT_000125",
+        "ref_key2": "USAGE.07"
+      },
+      {
+        "opt_cd": "OPV_000163",
+        "ref_dim_cd": "OPT_REF_DIM.03",
+        "ref_key1": "MAT_000126",
+        "ref_key2": "USAGE.07"
+      },
+      {
+        "opt_cd": "OPV_000164",
+        "ref_dim_cd": "OPT_REF_DIM.04",
+        "ref_key1": "PROC_000027",
+        "ref_key2": ""
+      },
+      {
+        "opt_cd": "OPV_000165",
+        "ref_dim_cd": "OPT_REF_DIM.04",
+        "ref_key1": "PROC_000028",
+        "ref_key2": ""
+      },
+      {
+        "opt_cd": "OPV_000166",
+        "ref_dim_cd": "OPT_REF_DIM.04",
+        "ref_key1": "PROC_000031",
+        "ref_key2": ""
+      },
+      {
+        "opt_cd": "OPV_000167",
+        "ref_dim_cd": "OPT_REF_DIM.04",
+        "ref_key1": "PROC_000032",
+        "ref_key2": ""
+      },
+      {
+        "opt_cd": "OPV_000169",
+        "ref_dim_cd": "OPT_REF_DIM.04",
+        "ref_key1": "PROC_000037",
+        "ref_key2": ""
+      },
+      {
+        "opt_cd": "OPV_000170",
+        "ref_dim_cd": "OPT_REF_DIM.04",
+        "ref_key1": "PROC_000038",
+        "ref_key2": ""
+      },
+      {
+        "opt_cd": "OPV_000171",
+        "ref_dim_cd": "OPT_REF_DIM.04",
+        "ref_key1": "PROC_000039",
+        "ref_key2": ""
+      },
+      {
+        "opt_cd": "OPV_000172",
+        "ref_dim_cd": "OPT_REF_DIM.04",
+        "ref_key1": "PROC_000040",
+        "ref_key2": ""
+      },
+      {
+        "opt_cd": "OPV_000173",
+        "ref_dim_cd": "OPT_REF_DIM.04",
+        "ref_key1": "PROC_000041",
+        "ref_key2": ""
+      },
+      {
+        "opt_cd": "OPV_000174",
+        "ref_dim_cd": "OPT_REF_DIM.04",
+        "ref_key1": "PROC_000042",
+        "ref_key2": ""
+      },
+      {
+        "opt_cd": "OPV_000175",
+        "ref_dim_cd": "OPT_REF_DIM.04",
+        "ref_key1": "PROC_000043",
+        "ref_key2": ""
+      },
+      {
+        "opt_cd": "OPV_000176",
+        "ref_dim_cd": "OPT_REF_DIM.04",
+        "ref_key1": "PROC_000044",
+        "ref_key2": ""
+      }
+    ],
+    "options": [
+      {
+        "opt_cd": "OPV_000146",
+        "opt_grp_cd": "OPT_000039",
+        "opt_nm": "단면"
+      },
+      {
+        "opt_cd": "OPV_000147",
+        "opt_grp_cd": "OPT_000039",
+        "opt_nm": "양면"
+      },
+      {
+        "opt_cd": "OPV_000164",
+        "opt_grp_cd": "OPT_000041",
+        "opt_nm": "직각"
+      },
+      {
+        "opt_cd": "OPV_000165",
+        "opt_grp_cd": "OPT_000041",
+        "opt_nm": "둥근"
+      },
+      {
+        "opt_cd": "OPV_000166",
+        "opt_grp_cd": "OPT_000042",
+        "opt_nm": "가변텍스트"
+      },
+      {
+        "opt_cd": "OPV_000167",
+        "opt_grp_cd": "OPT_000042",
+        "opt_nm": "가변이미지"
+      },
+      {
+        "opt_cd": "OPV_000168",
+        "opt_grp_cd": "OPT_000043",
+        "opt_nm": "박없음"
+      },
+      {
+        "opt_cd": "OPV_000169",
+        "opt_grp_cd": "OPT_000043",
+        "opt_nm": "홀로그램"
+      },
+      {
+        "opt_cd": "OPV_000170",
+        "opt_grp_cd": "OPT_000043",
+        "opt_nm": "금유광"
+      },
+      {
+        "opt_cd": "OPV_000171",
+        "opt_grp_cd": "OPT_000043",
+        "opt_nm": "은유광"
+      },
+      {
+        "opt_cd": "OPV_000172",
+        "opt_grp_cd": "OPT_000043",
+        "opt_nm": "먹유광"
+      },
+      {
+        "opt_cd": "OPV_000173",
+        "opt_grp_cd": "OPT_000043",
+        "opt_nm": "동박"
+      },
+      {
+        "opt_cd": "OPV_000174",
+        "opt_grp_cd": "OPT_000043",
+        "opt_nm": "적박"
+      },
+      {
+        "opt_cd": "OPV_000175",
+        "opt_grp_cd": "OPT_000043",
+        "opt_nm": "청박"
+      },
+      {
+        "opt_cd": "OPV_000176",
+        "opt_grp_cd": "OPT_000043",
+        "opt_nm": "트윙클"
+      },
+      {
+        "opt_cd": "OPV_000148",
+        "opt_grp_cd": "OPT_000040",
+        "opt_nm": "앙상블 210g"
+      },
+      {
+        "opt_cd": "OPV_000149",
+        "opt_grp_cd": "OPT_000040",
+        "opt_nm": "랑데뷰 WH 240g"
+      },
+      {
+        "opt_cd": "OPV_000150",
+        "opt_grp_cd": "OPT_000040",
+        "opt_nm": "랑데뷰 WH 310g"
+      },
+      {
+        "opt_cd": "OPV_000151",
+        "opt_grp_cd": "OPT_000040",
+        "opt_nm": "몽블랑 210g"
+      },
+      {
+        "opt_cd": "OPV_000152",
+        "opt_grp_cd": "OPT_000040",
+        "opt_nm": "몽블랑 240g"
+      },
+      {
+        "opt_cd": "OPV_000153",
+        "opt_grp_cd": "OPT_000040",
+        "opt_nm": "아코팩(웜화이트) 250g"
+      },
+      {
+        "opt_cd": "OPV_000154",
+        "opt_grp_cd": "OPT_000040",
+        "opt_nm": "리사이클러스 240g"
+      },
+      {
+        "opt_cd": "OPV_000155",
+        "opt_grp_cd": "OPT_000040",
+        "opt_nm": "매쉬멜로우 233g"
+      },
+      {
+        "opt_cd": "OPV_000156",
+        "opt_grp_cd": "OPT_000040",
+        "opt_nm": "린넨커버 216g"
+      },
+      {
+        "opt_cd": "OPV_000157",
+        "opt_grp_cd": "OPT_000040",
+        "opt_nm": "스타화이트(하이테크) 238g"
+      },
+      {
+        "opt_cd": "OPV_000158",
+        "opt_grp_cd": "OPT_000040",
+        "opt_nm": "클래식 크래스트 스티플 270g"
+      },
+      {
+        "opt_cd": "OPV_000159",
+        "opt_grp_cd": "OPT_000040",
+        "opt_nm": "리브스디자인 250g"
+      },
+      {
+        "opt_cd": "OPV_000160",
+        "opt_grp_cd": "OPT_000040",
+        "opt_nm": "띤또레또 200g"
+      },
+      {
+        "opt_cd": "OPV_000161",
+        "opt_grp_cd": "OPT_000040",
+        "opt_nm": "띤또레또 250g"
+      },
+      {
+        "opt_cd": "OPV_000162",
+        "opt_grp_cd": "OPT_000040",
+        "opt_nm": "한지 170g"
+      },
+      {
+        "opt_cd": "OPV_000163",
+        "opt_grp_cd": "OPT_000040",
+        "opt_nm": "스코트랜드 220g"
+      }
+    ],
+    "plate_sizes": [
+      {
+        "output_paper_typ_cd": "OUTPUT_PAPER_TYPE.01",
+        "siz_cd": "SIZ_000499"
+      }
+    ],
+    "price_formulas": [
+      {
+        "frm_cd": "PRF_NAMECARD_PREMIUM"
+      },
+      {
+        "frm_cd": "PRF_NAMECARD_PREMIUM_FOIL"
+      }
+    ],
+    "print_options": [
+      {
+        "back_colrcnt_cd": "CLR_000001",
+        "front_colrcnt_cd": "CLR_000005",
+        "opt_id": "1",
+        "print_opt_cd": "POPT_000001",
+        "print_side": "단면"
+      },
+      {
+        "back_colrcnt_cd": "CLR_000005",
+        "front_colrcnt_cd": "CLR_000005",
+        "opt_id": "2",
+        "print_opt_cd": "POPT_000002",
+        "print_side": "양면"
+      }
+    ],
+    "processes": [
+      {
+        "mand_proc_yn": "N",
+        "proc_cd": "PROC_000027"
+      },
+      {
+        "mand_proc_yn": "N",
+        "proc_cd": "PROC_000038"
+      },
+      {
+        "mand_proc_yn": "N",
+        "proc_cd": "PROC_000028"
+      },
+      {
+        "mand_proc_yn": "N",
+        "proc_cd": "PROC_000039"
+      },
+      {
+        "mand_proc_yn": "N",
+        "proc_cd": "PROC_000041"
+      },
+      {
+        "mand_proc_yn": "N",
+        "proc_cd": "PROC_000040"
+      },
+      {
+        "mand_proc_yn": "N",
+        "proc_cd": "PROC_000043"
+      },
+      {
+        "mand_proc_yn": "N",
+        "proc_cd": "PROC_000042"
+      },
+      {
+        "mand_proc_yn": "N",
+        "proc_cd": "PROC_000037"
+      },
+      {
+        "mand_proc_yn": "N",
+        "proc_cd": "PROC_000044"
+      },
+      {
+        "mand_proc_yn": "N",
+        "proc_cd": "PROC_000031"
+      },
+      {
+        "mand_proc_yn": "N",
+        "proc_cd": "PROC_000032"
+      }
+    ],
+    "sizes": [
+      {
+        "dflt_yn": "Y",
+        "siz_cd": "SIZ_000008"
+      },
+      {
+        "dflt_yn": "Y",
+        "siz_cd": "SIZ_000009"
+      },
+      {
+        "dflt_yn": "Y",
+        "siz_cd": "SIZ_000133"
+      }
+    ]
+  },
+  "mat_master": {
+    "MAT_000101": {
+      "height": "467.00",
+      "mat_nm": "랑데뷰 WH 240g",
+      "mat_typ_cd": "MAT_TYPE.01",
+      "upr_mat_cd": "MAT_000100",
+      "weight": "240.00",
+      "width": "316.00"
+    },
+    "MAT_000102": {
+      "height": "467.00",
+      "mat_nm": "랑데뷰 WH 310g",
+      "mat_typ_cd": "MAT_TYPE.01",
+      "upr_mat_cd": "MAT_000100",
+      "weight": "310.00",
+      "width": "316.00"
+    },
+    "MAT_000108": {
+      "height": "467.00",
+      "mat_nm": "몽블랑 210g",
+      "mat_typ_cd": "MAT_TYPE.01",
+      "upr_mat_cd": "MAT_000103",
+      "weight": "210.00",
+      "width": "316.00"
+    },
+    "MAT_000109": {
+      "height": "467.00",
+      "mat_nm": "몽블랑 240g",
+      "mat_typ_cd": "MAT_TYPE.01",
+      "upr_mat_cd": "MAT_000103",
+      "weight": "240.00",
+      "width": "316.00"
+    },
+    "MAT_000123": {
+      "height": "320.00",
+      "mat_nm": "띤또레또 200g",
+      "mat_typ_cd": "MAT_TYPE.01",
+      "upr_mat_cd": "MAT_000122",
+      "weight": "200.00",
+      "width": "464.00"
+    },
+    "MAT_000124": {
+      "height": "320.00",
+      "mat_nm": "띤또레또 250g",
+      "mat_typ_cd": "MAT_TYPE.01",
+      "upr_mat_cd": "MAT_000122",
+      "weight": "250.00",
+      "width": "464.00"
+    },
+    "MAT_000347": {
+      "height": "",
+      "mat_nm": "아코팩 웜화이트 250g",
+      "mat_typ_cd": "MAT_TYPE.01",
+      "upr_mat_cd": "MAT_000113",
+      "weight": "",
+      "width": ""
+    },
+    "MAT_000348": {
+      "height": "",
+      "mat_nm": "리사이클러스 240g",
+      "mat_typ_cd": "MAT_TYPE.01",
+      "upr_mat_cd": "MAT_000114",
+      "weight": "",
+      "width": ""
+    },
+    "MAT_000349": {
+      "height": "",
+      "mat_nm": "매쉬멜로우 233g",
+      "mat_typ_cd": "MAT_TYPE.01",
+      "upr_mat_cd": "MAT_000115",
+      "weight": "",
+      "width": ""
+    },
+    "MAT_000350": {
+      "height": "",
+      "mat_nm": "린넨커버 216g",
+      "mat_typ_cd": "MAT_TYPE.01",
+      "upr_mat_cd": "MAT_000116",
+      "weight": "",
+      "width": ""
+    },
+    "MAT_000351": {
+      "height": "",
+      "mat_nm": "스타화이트(하이테크) 238g",
+      "mat_typ_cd": "MAT_TYPE.01",
+      "upr_mat_cd": "MAT_000117",
+      "weight": "",
+      "width": ""
+    },
+    "MAT_000353": {
+      "height": "",
+      "mat_nm": "클래식 크래스트 스티플 270g",
+      "mat_typ_cd": "MAT_TYPE.01",
+      "upr_mat_cd": "MAT_000118",
+      "weight": "",
+      "width": ""
+    },
+    "MAT_000356": {
+      "height": "",
+      "mat_nm": "한지 170g",
+      "mat_typ_cd": "MAT_TYPE.01",
+      "upr_mat_cd": "MAT_000125",
+      "weight": "",
+      "width": ""
+    },
+    "MAT_000357": {
+      "height": "",
+      "mat_nm": "스코트랜드 220g",
+      "mat_typ_cd": "MAT_TYPE.01",
+      "upr_mat_cd": "MAT_000126",
+      "weight": "",
+      "width": ""
+    }
+  },
+  "meta": {
+    "captured_at": "2026-07-03",
+    "generated_by": "transcribe_product_031.py",
+    "prd_cd": "PRD_000031",
+    "snapshot": "live-snapshot/latest (snap_20260702_1119)"
+  },
+  "proc_master": {
+    "PROC_000027": {
+      "proc_nm": "직각",
+      "upr_proc_cd": "PROC_000026"
+    },
+    "PROC_000028": {
+      "proc_nm": "둥근",
+      "upr_proc_cd": "PROC_000026"
+    },
+    "PROC_000031": {
+      "proc_nm": "가변텍스트",
+      "upr_proc_cd": "PROC_000085"
+    },
+    "PROC_000032": {
+      "proc_nm": "가변이미지",
+      "upr_proc_cd": "PROC_000085"
+    },
+    "PROC_000037": {
+      "proc_nm": "홀로그램",
+      "upr_proc_cd": "PROC_000033"
+    },
+    "PROC_000038": {
+      "proc_nm": "금유광",
+      "upr_proc_cd": "PROC_000033"
+    },
+    "PROC_000039": {
+      "proc_nm": "은유광",
+      "upr_proc_cd": "PROC_000033"
+    },
+    "PROC_000040": {
+      "proc_nm": "먹유광",
+      "upr_proc_cd": "PROC_000033"
+    },
+    "PROC_000041": {
+      "proc_nm": "동박",
+      "upr_proc_cd": "PROC_000033"
+    },
+    "PROC_000042": {
+      "proc_nm": "적박",
+      "upr_proc_cd": "PROC_000033"
+    },
+    "PROC_000043": {
+      "proc_nm": "청박",
+      "upr_proc_cd": "PROC_000033"
+    },
+    "PROC_000044": {
+      "proc_nm": "트윙클",
+      "upr_proc_cd": "PROC_000033"
+    }
+  },
+  "product": {
+    "del_yn": "N",
+    "editor_yn": "N",
+    "file_upload_yn": "Y",
+    "max_qty": "10000",
+    "min_qty": "100",
+    "prd_nm": "프리미엄명함",
+    "prd_typ_cd": "PRD_TYPE.01",
+    "qty_incr": "100",
+    "qty_unit_typ_cd": "QTY_UNIT.02"
+  },
+  "size_master": {
+    "SIZ_000008": {
+      "cut": "90x50",
+      "note": "판걸이=24.0 / 전지=316x467 / 적용=명함",
+      "siz_nm": "90x50mm",
+      "work": "92x52"
+    },
+    "SIZ_000009": {
+      "cut": "90x55",
+      "note": "판걸이=21.0 / 전지=316x467 / 적용=명함",
+      "siz_nm": "90x55mm",
+      "work": "92x57"
+    },
+    "SIZ_000133": {
+      "cut": "86x52",
+      "note": "",
+      "siz_nm": "86x52mm",
+      "work": "88x54"
+    }
+  }
+}

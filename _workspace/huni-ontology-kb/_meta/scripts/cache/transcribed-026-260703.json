@@ -1,0 +1,256 @@
+{
+  "addons": [],
+  "bundle_qty": [],
+  "categories": [
+    {
+      "cat_cd": "CAT_000001",
+      "main_cat_yn": "Y"
+    }
+  ],
+  "constraints": [],
+  "formulas": [
+    "PRF_DGP_A"
+  ],
+  "materials": [
+    {
+      "dflt_yn": "Y",
+      "mat_cd": "MAT_000082",
+      "usage_cd": "USAGE.07"
+    }
+  ],
+  "meta": {
+    "captured_at": "2026-07-03",
+    "generated_by": "transcribe_product_026.py",
+    "prd_cd": "PRD_000026",
+    "snapshot": "live-snapshot/latest (snap_20260702_1119)"
+  },
+  "option_groups": [
+    {
+      "mand_yn": "Y",
+      "max_sel_cnt": "1",
+      "min_sel_cnt": "1",
+      "opt_grp_cd": "OPT_000026",
+      "opt_grp_nm": "인쇄",
+      "sel_typ_cd": "SEL_TYPE.01"
+    },
+    {
+      "mand_yn": "Y",
+      "max_sel_cnt": "1",
+      "min_sel_cnt": "1",
+      "opt_grp_cd": "OPT_000027",
+      "opt_grp_nm": "종이",
+      "sel_typ_cd": "SEL_TYPE.01"
+    },
+    {
+      "mand_yn": "N",
+      "max_sel_cnt": "1",
+      "min_sel_cnt": "0",
+      "opt_grp_cd": "OPT_000028",
+      "opt_grp_nm": "코팅",
+      "sel_typ_cd": "SEL_TYPE.01"
+    }
+  ],
+  "option_items": [
+    {
+      "opt_cd": "OPV_000084",
+      "opt_grp_cd": "OPT_000026",
+      "opt_nm": "단면",
+      "ref_dim_cd": "OPT_REF_DIM.06",
+      "ref_key1": "1",
+      "ref_key2": ""
+    },
+    {
+      "opt_cd": "OPV_000085",
+      "opt_grp_cd": "OPT_000026",
+      "opt_nm": "양면",
+      "ref_dim_cd": "OPT_REF_DIM.06",
+      "ref_key1": "2",
+      "ref_key2": ""
+    },
+    {
+      "opt_cd": "OPV_000086",
+      "opt_grp_cd": "OPT_000027",
+      "opt_nm": "아트지 300g",
+      "ref_dim_cd": "OPT_REF_DIM.03",
+      "ref_key1": "MAT_000082",
+      "ref_key2": "USAGE.07"
+    },
+    {
+      "opt_cd": "OPV_000088",
+      "opt_grp_cd": "OPT_000028",
+      "opt_nm": "유광",
+      "ref_dim_cd": "OPT_REF_DIM.04",
+      "ref_key1": "PROC_000014",
+      "ref_key2": ""
+    },
+    {
+      "opt_cd": "OPV_000089",
+      "opt_grp_cd": "OPT_000028",
+      "opt_nm": "무광",
+      "ref_dim_cd": "OPT_REF_DIM.04",
+      "ref_key1": "PROC_000015",
+      "ref_key2": ""
+    }
+  ],
+  "plates": [
+    {
+      "dflt_plt_yn": "Y",
+      "output_paper_typ_cd": "OUTPUT_PAPER_TYPE.01",
+      "siz_cd": "SIZ_000499"
+    }
+  ],
+  "print_options": [
+    {
+      "back_clr": "인쇄 안 함",
+      "front_clr": "CMYK 4도",
+      "opt_id": "1",
+      "print_opt_cd": "POPT_000001",
+      "print_side": "단면"
+    },
+    {
+      "back_clr": "CMYK 4도",
+      "front_clr": "CMYK 4도",
+      "opt_id": "2",
+      "print_opt_cd": "POPT_000002",
+      "print_side": "양면"
+    }
+  ],
+  "processes": [
+    {
+      "mand_proc_yn": "N",
+      "proc_cd": "PROC_000015",
+      "proc_nm": "무광라미네이팅"
+    },
+    {
+      "mand_proc_yn": "N",
+      "proc_cd": "PROC_000014",
+      "proc_nm": "유광라미네이팅"
+    },
+    {
+      "mand_proc_yn": "Y",
+      "proc_cd": "PROC_000004",
+      "proc_nm": "디지털인쇄"
+    }
+  ],
+  "product": {
+    "del_yn": "N",
+    "editor_yn": "N",
+    "file_upload_yn": "Y",
+    "max_qty": "10000",
+    "min_qty": "4",
+    "prd_cd": "PRD_000026",
+    "prd_nm": "종이슬로건",
+    "prd_typ_cd": "PRD_TYPE.01",
+    "qty_incr": "4",
+    "qty_unit_typ_cd": "QTY_UNIT.02",
+    "use_yn": "Y"
+  },
+  "size_dims": {
+    "SIZ_000015": {
+      "cut": "300x100",
+      "note": "판걸이=4.0 / 전지=316x467 / 적용=종이슬로건",
+      "siz_nm": "300x100",
+      "work": "302x102"
+    },
+    "SIZ_000016": {
+      "cut": "400x145",
+      "note": "판걸이=2.0 / 전지=316x467 / 적용=종이슬로건",
+      "siz_nm": "400x145",
+      "work": "402x147"
+    },
+    "SIZ_000499": {
+      "cut": "306x457",
+      "note": "",
+      "siz_nm": "316x467",
+      "work": "316x467"
+    }
+  },
+  "sizes_linked": [
+    "SIZ_000015",
+    "SIZ_000016"
+  ],
+  "wiring": {
+    "PRF_DGP_A": [
+      {
+        "addtn_yn": "Y",
+        "comp_cd": "COMP_PRINT_DIGITAL_S1",
+        "comp_nm": "디지털인쇄비",
+        "disp_seq": "0",
+        "prc_typ_cd": "PRICE_TYPE.01",
+        "use_dims": "[\"proc_cd\", \"plt_siz_cd\", \"print_opt_cd\", \"min_qty\", \"proc_grp:PROC_000001\"]"
+      },
+      {
+        "addtn_yn": "Y",
+        "comp_cd": "COMP_PRINT_SPOT_WHITE_S1",
+        "comp_nm": "별색인쇄비",
+        "disp_seq": "1",
+        "prc_typ_cd": "PRICE_TYPE.01",
+        "use_dims": "[\"plt_siz_cd\", \"proc_cd\", \"print_opt_cd\", \"min_qty\", \"proc_grp:PROC_000007\"]"
+      },
+      {
+        "addtn_yn": "Y",
+        "comp_cd": "COMP_PAPER",
+        "comp_nm": "용지비(종이별 절가)",
+        "disp_seq": "2",
+        "prc_typ_cd": "PRICE_TYPE.01",
+        "use_dims": "[\"plt_siz_cd\", \"mat_cd\"]"
+      },
+      {
+        "addtn_yn": "",
+        "comp_cd": "COMP_PP_CORNER_RIGHT",
+        "comp_nm": "귀돌이비",
+        "disp_seq": "3",
+        "prc_typ_cd": "PRICE_TYPE.03",
+        "use_dims": "[\"proc_cd\", \"min_qty\", \"proc_grp:PROC_000026\"]"
+      },
+      {
+        "addtn_yn": "Y",
+        "comp_cd": "COMP_PP_CREASE_1L",
+        "comp_nm": "오시비",
+        "disp_seq": "4",
+        "prc_typ_cd": "PRICE_TYPE.01",
+        "use_dims": "[\"proc_cd\", \"min_qty\", \"proc_grp:PROC_000029\"]"
+      },
+      {
+        "addtn_yn": "Y",
+        "comp_cd": "COMP_PP_PERF_1L",
+        "comp_nm": "미싱비",
+        "disp_seq": "5",
+        "prc_typ_cd": "PRICE_TYPE.01",
+        "use_dims": "[\"proc_cd\", \"min_qty\", \"proc_grp:PROC_000030\"]"
+      },
+      {
+        "addtn_yn": "Y",
+        "comp_cd": "COMP_PP_VARTEXT_1EA",
+        "comp_nm": "가변텍스트",
+        "disp_seq": "6",
+        "prc_typ_cd": "PRICE_TYPE.03",
+        "use_dims": "[\"proc_cd\", \"min_qty\", \"proc_grp:PROC_000085\"]"
+      },
+      {
+        "addtn_yn": "Y",
+        "comp_cd": "COMP_PP_VARIMG_1EA",
+        "comp_nm": "가변이미지",
+        "disp_seq": "7",
+        "prc_typ_cd": "PRICE_TYPE.03",
+        "use_dims": "[\"proc_cd\", \"min_qty\", \"proc_grp:PROC_000085\"]"
+      },
+      {
+        "addtn_yn": "",
+        "comp_cd": "COMP_COAT_GLOSSY",
+        "comp_nm": "유광코팅비",
+        "disp_seq": "",
+        "prc_typ_cd": "PRICE_TYPE.01",
+        "use_dims": "[\"proc_cd\", \"plt_siz_cd\", \"coat_side_cnt\", \"min_qty\", \"proc_grp:PROC_000013\"]"
+      },
+      {
+        "addtn_yn": "",
+        "comp_cd": "COMP_COAT_MATTE",
+        "comp_nm": "무광코팅비",
+        "disp_seq": "",
+        "prc_typ_cd": "PRICE_TYPE.01",
+        "use_dims": "[\"proc_cd\", \"plt_siz_cd\", \"coat_side_cnt\", \"min_qty\", \"proc_grp:PROC_000013\"]"
+      }
+    ]
+  }
+}

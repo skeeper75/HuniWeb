@@ -68,3 +68,41 @@
 - anchor: t_mat_materials/MAT_000109
 - src: {source_file: "live-snapshot/latest/t_mat_materials.csv", source_locator: "키:MAT_000109", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
 - props: {mat_typ_cd: "MAT_TYPE.01", 상위자재: "MAT_000103", 사양_ref: "마스터 t_mat_materials/MAT_000109(평량 240g·규격 미기재)", 사용: "027 접지카드·046 라벨택 본문(USAGE.07)"}
+
+## 투명·명함박 공유 자재 (공유축 통합 mint 260703)
+
+<!-- 2026-07-03 공유축 통합(okb-knowledge-builder): 아래 4자재는 상품 빌더 needed_shared_nodes 중 -->
+<!-- 브로큰링크(product uses_material 배선 실재·노드 부재) 해소 대상. 025/037/039 uses_material 타깃. -->
+<!-- 019는 같은 PET(MAT_000144/147)를 gap-019-material로 정직 지연(rewire 미실행) — 노드는 여기 공유. -->
+
+<!-- transcribed-by: _meta/scripts/transcribe_shared_axis_260703.py from live-snapshot/latest (snap_20260702_1119) t_mat_materials @ 2026-07-03 -->
+| mat_cd | 자재명 | mat_typ | 규격(mm) | 평량(g) | 상위자재 |
+|---|---|---|---|---|---|
+| MAT_000137 | 큐리어스스킨 | MAT_TYPE.01 | 316x467 | 270 | - |
+| MAT_000144 | 투명 PET 260g | MAT_TYPE.01 | 315x467 | 260 | MAT_000143 |
+| MAT_000147 | 반투명 PET 260g | MAT_TYPE.01 | 315x467 | 260 | MAT_000146 |
+| MAT_000178 | PET | MAT_TYPE.08 | 미기재 | 미기재 | - |
+
+### [material-MAT_000137] 큐리어스스킨 270g {verified}
+- type: material
+- anchor: t_mat_materials/MAT_000137
+- src: {source_file: "live-snapshot/latest/t_mat_materials.csv", source_locator: "키:MAT_000137", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {mat_typ_cd: "MAT_TYPE.01", 사양_ref: "전사표 MAT_000137", 사용: "037 오리지널박명함 본문(USAGE.07)·색상 자식 MAT_000361~365 부모"}
+
+### [material-MAT_000144] 투명 PET 260g {verified}
+- type: material
+- anchor: t_mat_materials/MAT_000144
+- src: {source_file: "live-snapshot/latest/t_mat_materials.csv", source_locator: "키:MAT_000144", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {mat_typ_cd: "MAT_TYPE.01", 상위자재: "MAT_000143", 사양_ref: "전사표 MAT_000144", 사용: "025 투명포토카드 dflt·019 투명엽서(gap-019-material 지연)(USAGE.07)"}
+
+### [material-MAT_000147] 반투명 PET 260g {verified}
+- type: material
+- anchor: t_mat_materials/MAT_000147
+- src: {source_file: "live-snapshot/latest/t_mat_materials.csv", source_locator: "키:MAT_000147", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {mat_typ_cd: "MAT_TYPE.01", 상위자재: "MAT_000146", 사양_ref: "전사표 MAT_000147", 사용: "025 투명포토카드·019 투명엽서(USAGE.07)"}
+
+### [material-MAT_000178] PET (투명명함) {verified}
+- type: material
+- anchor: t_mat_materials/MAT_000178
+- src: {source_file: "live-snapshot/latest/t_mat_materials.csv", source_locator: "키:MAT_000178", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {mat_typ_cd: "MAT_TYPE.08", 사양_ref: "전사표 MAT_000178(규격·평량 마스터 미기재)", 사용: "039 투명명함 단일 자재(bare PET·형제 019/025 MAT_TYPE.01과 상이)(USAGE.07)"}

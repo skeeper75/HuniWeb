@@ -68,7 +68,7 @@ POPT_000002 양면·PRF_DGP_E·엽서 사이즈)은 재사용하고 여기 중�
 ## 자재 (material) — 접지카드 전용 8종 (공유 6종 제외)
 
 자재 모델 = parent + usage_cd 단일 슬롯(USAGE.07·팩 §3.5). ★[HARD] 실무진이 IMPORT 시트로
-등록한 자재는 "배선 안 됐다"고 삭제 금지([[rule/rules#RULE_import_material_keep]]).
+등록한 자재는 "배선 안 됐다"고 삭제 금지([[rule/rules#RULE_import_material_no_delete]]).
 규격/평량이 "?"인 자재(347/348/349/350/356)는 **마스터 t_mat_materials에 사양 미기재**(전사 결과
 그대로·날조 금지). 채움은 실무진/자재 마스터 보강 소관.
 

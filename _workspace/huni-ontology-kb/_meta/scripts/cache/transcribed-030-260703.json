@@ -1,0 +1,236 @@
+{
+  "addons": [
+    {
+      "base_prd_cd": "PRD_000001",
+      "disp": "1",
+      "tmpl_cd": "TMPL-000005",
+      "tmpl_nm": "OPP접착봉투 110x160 mm  50장"
+    },
+    {
+      "base_prd_cd": "PRD_000002",
+      "disp": "2",
+      "tmpl_cd": "TMPL-000006",
+      "tmpl_nm": "OPP비접착봉투 110x160 mm 50장"
+    }
+  ],
+  "formula": [
+    {
+      "frm_cd": "PRF_DGP_C_6CR",
+      "frm_nm": "디지털인쇄 원자합산형C-6단접지 지그재그엽서",
+      "note": "PRF_DGP_C 복제+6단접지(COMP_FOLD_CARD_6CR) 교체. 인쇄비+용지비+6단접지비+타공비(미등록시0). 260701 지그재그엽서(030) 전용 신설."
+    }
+  ],
+  "formula_components": [
+    {
+      "addtn": "Y",
+      "comp_cd": "COMP_PRINT_DIGITAL_S1",
+      "comp_nm": "디지털인쇄비",
+      "disp_seq": "0",
+      "frm_cd": "PRF_DGP_C_6CR",
+      "prc_typ": "PRICE_TYPE.01",
+      "use_dims": "[\"proc_cd\", \"plt_siz_cd\", \"print_opt_cd\", \"min_qty\", \"proc_grp:PROC_000001\"]"
+    },
+    {
+      "addtn": "Y",
+      "comp_cd": "COMP_PAPER",
+      "comp_nm": "용지비(종이별 절가)",
+      "disp_seq": "1",
+      "frm_cd": "PRF_DGP_C_6CR",
+      "prc_typ": "PRICE_TYPE.01",
+      "use_dims": "[\"plt_siz_cd\", \"mat_cd\"]"
+    },
+    {
+      "addtn": "Y",
+      "comp_cd": "COMP_FOLD_CARD_6CR",
+      "comp_nm": "접지비 카드 6크리즈",
+      "disp_seq": "2",
+      "frm_cd": "PRF_DGP_C_6CR",
+      "prc_typ": "PRICE_TYPE.01",
+      "use_dims": "[\"min_qty\"]"
+    },
+    {
+      "addtn": "Y",
+      "comp_cd": "COMP_CUT_PERF_1H6",
+      "comp_nm": "타공비 (6mm)",
+      "disp_seq": "3",
+      "frm_cd": "PRF_DGP_C_6CR",
+      "prc_typ": "PRICE_TYPE.01",
+      "use_dims": "[\"proc_cd\", \"min_qty\", \"proc_grp:PROC_000079\"]"
+    }
+  ],
+  "materials": [
+    {
+      "mat_cd": "MAT_000105",
+      "mat_nm": "몽블랑 130g",
+      "mat_typ_cd": "MAT_TYPE.01",
+      "pm_del": "Y",
+      "spec": "316x467",
+      "upr_mat_cd": "MAT_000103",
+      "usage": "USAGE.07",
+      "weight": "130"
+    },
+    {
+      "mat_cd": "MAT_000110",
+      "mat_nm": "몽블랑 130g (3절)",
+      "mat_typ_cd": "MAT_TYPE.01",
+      "pm_del": "N",
+      "spec": "316x467",
+      "upr_mat_cd": "MAT_000103",
+      "usage": "USAGE.07",
+      "weight": "130"
+    }
+  ],
+  "meta": {
+    "captured_at": "2026-07-03",
+    "generated_by": "transcribe_product_030.py",
+    "snapshot": "live-snapshot/latest (snap_20260702_1119)"
+  },
+  "opt_groups": [
+    {
+      "disp": "2",
+      "mand": "N",
+      "opt_grp_cd": "OPT-000029",
+      "opt_grp_nm": "종이",
+      "sel_typ": "SEL_TYPE.01"
+    },
+    {
+      "disp": "1",
+      "mand": "N",
+      "opt_grp_cd": "OPT-000028",
+      "opt_grp_nm": "인쇄",
+      "sel_typ": "SEL_TYPE.01"
+    },
+    {
+      "disp": "3",
+      "mand": "N",
+      "opt_grp_cd": "OPT-000030",
+      "opt_grp_nm": "접지",
+      "sel_typ": "SEL_TYPE.01"
+    }
+  ],
+  "opt_items": [
+    {
+      "opt_cd": "OPV-000057",
+      "opt_grp_cd": "OPT-000030",
+      "opt_grp_nm": "접지",
+      "opt_nm": "6단오시접지",
+      "ref_dim_cd": "OPT_REF_DIM.04",
+      "ref_key1": "PROC_000073",
+      "ref_key2": ""
+    },
+    {
+      "opt_cd": "OPV-000058",
+      "opt_grp_cd": "OPT-000030",
+      "opt_grp_nm": "접지",
+      "opt_nm": "6단미싱접지",
+      "ref_dim_cd": "OPT_REF_DIM.04",
+      "ref_key1": "PROC_000074",
+      "ref_key2": ""
+    },
+    {
+      "opt_cd": "OPV-000055",
+      "opt_grp_cd": "OPT-000028",
+      "opt_grp_nm": "인쇄",
+      "opt_nm": "양면",
+      "ref_dim_cd": "OPT_REF_DIM.06",
+      "ref_key1": "1",
+      "ref_key2": ""
+    },
+    {
+      "opt_cd": "OPV-000056",
+      "opt_grp_cd": "OPT-000029",
+      "opt_grp_nm": "종이",
+      "opt_nm": "몽블랑 130g",
+      "ref_dim_cd": "OPT_REF_DIM.03",
+      "ref_key1": "MAT_000105",
+      "ref_key2": "USAGE.07"
+    }
+  ],
+  "plate": [
+    {
+      "del": "Y",
+      "dflt_plt": "Y",
+      "output_paper_typ_cd": "OUTPUT_PAPER_TYPE.03",
+      "siz_cd": "SIZ_000142",
+      "siz_nm": "604x154"
+    },
+    {
+      "del": "Y",
+      "dflt_plt": "Y",
+      "output_paper_typ_cd": "OUTPUT_PAPER_TYPE.03",
+      "siz_cd": "SIZ_000143",
+      "siz_nm": "154x604"
+    },
+    {
+      "del": "N",
+      "dflt_plt": "Y",
+      "output_paper_typ_cd": "OUTPUT_PAPER_TYPE.03",
+      "siz_cd": "SIZ_000475",
+      "siz_nm": "330x660"
+    }
+  ],
+  "print_options": [
+    {
+      "back": "CLR_000005(CMYK 4도)",
+      "front": "CLR_000005(CMYK 4도)",
+      "opt_id": "1",
+      "print_opt_cd": "POPT_000002",
+      "print_side": "양면"
+    }
+  ],
+  "processes": [
+    {
+      "disp": "1",
+      "mand": "N",
+      "proc_cd": "PROC_000073",
+      "proc_nm": "6단오시접지",
+      "upr_proc_cd": "PROC_000056"
+    },
+    {
+      "disp": "1",
+      "mand": "N",
+      "proc_cd": "PROC_000074",
+      "proc_nm": "6단미싱접지",
+      "upr_proc_cd": "PROC_000056"
+    },
+    {
+      "disp": "-1",
+      "mand": "Y",
+      "proc_cd": "PROC_000004",
+      "proc_nm": "디지털인쇄",
+      "upr_proc_cd": "PROC_000001"
+    }
+  ],
+  "qty": {
+    "del_yn": "N",
+    "editor_yn": "N",
+    "file_upload_yn": "Y",
+    "max_qty": "10000",
+    "min_qty": "2",
+    "prd_nm": "지그재그엽서",
+    "prd_typ_cd": "PRD_TYPE.01",
+    "qty_incr": "2",
+    "unit": "QTY_UNIT.02",
+    "use_yn": "Y"
+  },
+  "sizes": [
+    {
+      "cut": "600x150",
+      "dflt": "Y",
+      "disp": "1",
+      "note": "판걸이=2.0 / 전지=미지정 / 적용=지그재그카드",
+      "siz_cd": "SIZ_000031",
+      "siz_nm": "600x150",
+      "work": "604x154"
+    },
+    {
+      "cut": "150x600",
+      "dflt": "Y",
+      "disp": "1",
+      "note": "판걸이=2.0 / 전지=미지정 / 적용=지그재그카드",
+      "siz_cd": "SIZ_000032",
+      "siz_nm": "150x600",
+      "work": "154x604"
+    }
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "bind_counts": {
+    "addons": 0,
+    "bundle_qtys": 0,
+    "categories": 2,
+    "constraints": 0,
+    "materials": 0,
+    "option_groups": 0,
+    "option_items": 0,
+    "options": 0,
+    "page_rules": 0,
+    "plate_sizes": 1,
+    "price_formulas": 0,
+    "print_options": 2,
+    "processes": 2,
+    "sizes": 1
+  },
+  "bindings": {
+    "addons": [],
+    "bundle_qtys": [],
+    "categories": [
+      {
+        "cat_cd": "CAT_000313",
+        "disp_seq": "",
+        "main_cat_yn": "N"
+      },
+      {
+        "cat_cd": "CAT_000003",
+        "disp_seq": "8",
+        "main_cat_yn": "Y"
+      }
+    ],
+    "constraints": [],
+    "materials": [],
+    "option_groups": [],
+    "option_items": [],
+    "options": [],
+    "page_rules": [],
+    "plate_sizes": [
+      {
+        "dflt_plt_yn": "Y",
+        "output_paper_typ_cd": "OUTPUT_PAPER_TYPE.01",
+        "siz_cd": "SIZ_000499"
+      }
+    ],
+    "price_formulas": [],
+    "print_options": [
+      {
+        "back_clr_nm": "인쇄 안 함",
+        "back_colrcnt_cd": "CLR_000001",
+        "front_clr_nm": "CMYK 4도",
+        "front_colrcnt_cd": "CLR_000005",
+        "opt_id": "1",
+        "print_opt_cd": "POPT_000001",
+        "print_side": "단면"
+      },
+      {
+        "back_clr_nm": "CMYK 4도",
+        "back_colrcnt_cd": "CLR_000005",
+        "front_clr_nm": "CMYK 4도",
+        "front_colrcnt_cd": "CLR_000005",
+        "opt_id": "2",
+        "print_opt_cd": "POPT_000002",
+        "print_side": "양면"
+      }
+    ],
+    "processes": [
+      {
+        "mand_proc_yn": "N",
+        "proc_cd": "PROC_000027"
+      },
+      {
+        "mand_proc_yn": "N",
+        "proc_cd": "PROC_000028"
+      }
+    ],
+    "sizes": [
+      {
+        "dflt_yn": "Y",
+        "siz_cd": "SIZ_000008"
+      }
+    ]
+  },
+  "emboss_master": {
+    "bound_to_038": false,
+    "note": "embossing",
+    "proc_cd": "PROC_000050",
+    "proc_nm": "형압",
+    "use_yn": "Y"
+  },
+  "meta": {
+    "captured_at": "2026-07-03",
+    "generated_by": "transcribe_product_038.py",
+    "prd_cd": "PRD_000038",
+    "snapshot": "live-snapshot/latest (snap_20260702_1119)"
+  },
+  "product": {
+    "del_yn": "N",
+    "editor_yn": "N",
+    "file_upload_yn": "Y",
+    "max_qty": "10000",
+    "min_qty": "100",
+    "prd_nm": "형압명함",
+    "prd_typ_cd": "PRD_TYPE.01",
+    "qty_incr": "100",
+    "qty_unit_typ_cd": "QTY_UNIT.02",
+    "use_yn": "N"
+  },
+  "sizes": {
+    "SIZ_000008": {
+      "cut": "90x50",
+      "note": "판걸이=24.0 / 전지=316x467 / 적용=명함",
+      "siz_nm": "90x50mm",
+      "work": "92x52"
+    }
+  }
+}
