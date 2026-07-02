@@ -34,13 +34,15 @@ tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 | `isomorphism-classes.md` | 상품군별 **위젯 복잡도 동형 클래스**(고정가by-siz·면적입력·셋트조립·옵션캐스케이드·addon템플릿 등)·각 클래스 대표 상품 1개 선정·전파 대상 목록 |
 | `<group>/pilot-<prd_cd>.md` | 상품군별 대표 상품 **종단 파일럿** — 실제 라이브 데이터로 NormalizedProduct 1건 완전 조립(옵션 차원·componentType·캐스케이드·가격요청→evaluate_price→breakdown 골든) + 어댑터 fixture 후보 |
 | `evaluate-price-contract.md` | 위젯 `NormalizedPriceRequest` → `evaluate_price`/`evaluate_set_price` 입력(selections·qty·차원) → `final_price`/breakdown 매핑. PRICE≠0 골든 케이스. 서버 권위 경계 명시 |
-| `gaps-and-recommendations.md` | 계약이 못 담는 갭(어댑터/계약/DB 분류)·hw-architect 권고·미해결 OPEN |
+| `gaps-and-recommendations.md` | 계약이 못 담는 갭(어댑터(A)/계약(B)/DB(C)/**가격공식부재(C0)** 분류)·hw-architect 권고·미해결 OPEN |
+| `widget-forms-approach.md` | Figma 폼 복잡도 클래스(C1~C5) 분류 방법·isomorphism W-* 클래스 대응 |
+| `widget-forms/<group>/*.md` + `widget-forms/SYNTHESIS.md` | 5 복잡도 클래스 대표 종단 폼-계약-DB-제약-가격 명세 + 11군 전파 현황(골든 PRICE≠0). 전 상품군 컨버전 준비의 최광폭 커버 산출 |
 
 ## 동형 전파 방법 (사용자 결정 — 대표 1개 파일럿 → 전파)
 
-1. **동형 클래스 분류** — 전 상품군을 위젯 복잡도(옵션 구조·가격모델·캐스케이드 형태)로 동형 클래스화. §29 등급(L0~L4)·복잡도 클래스 재사용
+1. **동형 클래스 분류** — **정본 축=C1~C5(widget-forms Figma 폼 복잡도) [HARD·사용자 확정 2026-07-02]**. 대표 선정·전파 경계·카운트는 C1~C5 기준. §29 등급(L0~L4)·isomorphism W-*(렌더/가격모델)는 C1~C5로 사상해 참조하는 파생 렌즈(정본 아님)
 2. **대표 선정** — 각 상품군에서 데이터가 가장 완비된(준비도 높은) 대표 상품 1개 선정. 대표는 그 군의 모든 분기를 traverse하는 것으로
-3. **종단 파일럿** — 대표 상품을 라이브 DB로 NormalizedProduct 완전 조립 + evaluate_price 골든(PRICE≠0)까지 종단 검증. 갭은 여기서 적발
+3. **종단 파일럿** — 대표 상품을 라이브 DB로 NormalizedProduct 완전 조립 + evaluate_price 골든(PRICE≠0)까지 종단 검증. 갭은 여기서 적발. 파일럿 결과 PRICE=0이면 **(C)데이터 미적재인지 (C0)가격공식 부재인지 판별** — 후자(예 calendar/design-calendar: product_price_formulas 0행)는 §18 가격공식 설계 선행 블로커로 격상 표기(위젯 전파 대상 아님)
 4. **동형 전파** — 같은 클래스 나머지 상품은 "대표와 동형"임을 입증하고 매핑 규칙만 전파(전수 재조립 금지). 동형 깨지면 새 클래스로 분리
 
 ## 작업 원칙
@@ -61,4 +63,6 @@ tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 
 ## 재호출 지침
 
-`03_spec/db-cartography/` 산출이 존재하면 읽어서 갱신만 반영한다. 특정 상품군만 재요청 시 해당 `<group>/pilot-*.md`만 갱신한다. 라이브 DB가 변했으면(스냅샷 갱신) 영향받는 매핑 행만 수정하고 변경점을 `gaps-and-recommendations.md`에 기록한다.
+`03_spec/db-cartography/` 산출이 존재하면 읽어서 갱신만 반영한다. 특정 상품군만 재요청 시 해당 `<group>/pilot-*.md`만 갱신한다. 라이브 DB가 변했으면(스냅샷 갱신) 영향받는 매핑 행만 수정하고 변경점을 `gaps-and-recommendations.md`에 기록한다. `widget-forms/` 존재 여부도 부분 재실행 판정 신호로 본다.
+
+**재검증 반자동 [HARD·사용자 확정 2026-07-02]:** 재호출 시 `_foundation/batch/wiring/wiring-status.json`(§27) diff 확인을 의무화한다(완전 자동 트리거는 두지 않음). §7/§26이 (C)블로커를 COMMIT했으면(스냅샷 갱신) 해당 상품 pilot 골든을 재실측하고 저청구 해소 여부(**PRICE 값 크기까지**, PRICE≠0 통과만으로 해소 간주 금지)를 `gaps-and-recommendations.md`에 기록한다.

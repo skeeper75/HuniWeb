@@ -51,6 +51,14 @@ build-plan.md의 파일 트리·우선순위를 따른다. 표준 구성:
 - **캡처 vs 번들상수 판별**: 데이터가 product_info에 있으면 캡처, Vue 번들 상수(roundingConfigMap 등)면 deob 소스에서 추출·이식한다(날조 금지, 미등록은 명시 fallback).
 - **PRICE=0 = 결함 신호** [HARD]: RedPrinting은 PRICE=0 불가. `mapPriceResponse`가 0 받으면 `ok:false` 유지 + 명시 진단 사유(`priceUnavailableReason`)를 채운다. 0을 "정상 빈"으로 통과시키지 말 것(미캡처 fixture 보존 위해 throw는 회피하되 진단은 필수). 가격 동등성은 PRICE>0 실측으로만.
 
+## 컨버전 fixture 배선 (후니 어댑터 착수 규약) [HARD]
+
+임계경로 = `createHuniAdapter`(현재 0줄, `bff/stub.ts:25` 주석뿐). hw-db-cartographer 산출에서 후니 어댑터로 잇는 배선:
+
+- **(a) fixture 물질화**: 각 `03_spec/db-cartography/<group>/pilot-<prd_cd>.md`의 NormalizedProduct 골든을 `04_build/fixtures/huni/product_<PRD_CD>.json`·`price_<PRD_CD>_sample.json`으로 물질화(Red fixture 명명규칙 대칭). **후니 fixture는 파일럿 골든의 verbatim 물질화 — 날조 금지, 근거는 pilot-*.md 골든.**
+- **(b) 어댑터 신설**: `src/adapters/huni/createHuniAdapter.ts` — Red 어댑터와 **동일 인터페이스**(fixture-source→NormalizedProduct). sticker OPV.ref_key1 운반·셋트 evaluate_set_price arm·면적 ref_dim 환원 분기 포함. 위젯은 정규화 타입만 소비(후니 원시 필드 직접 참조 금지).
+- **(c) 어댑터 테스트**: fixture round-trip echo(opt_cd/mat_cd/proc_cd/siz_cd/print_opt_cd 왕복) + evaluate_price PRICE≠0 단언. **위젯 코어/정규화 계약 0줄 diff(INV-3) 전제** — 무손실 컨버전.
+
 ## 팀 통신 프로토콜
 
 - `hw-architect`로부터: 03_spec 명세를 단일 소스로 수신. 명세 공백·불일치 발견 시 SendMessage로 확인 요청 (silent 가정 금지)

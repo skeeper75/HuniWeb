@@ -15,21 +15,24 @@ RedPrinting(프로젝트 소유자 본인 설계 시스템) 위젯 역공학 자
 
 ## 입력
 
+- **[최신 권위]** `_workspace/huni-widget/01_reverse/redo-260623/`(R0~R3 6월 재역공학·§22 방법) + `01_reverse/drift-audit/drift-audit-260623.md`(4월→6월 실측 드리프트: widget.js +137KB·TRANSLATIONS_KO 833·Garage 업로더 신규) + `01_reverse/_latest/`(widget.js.20260622·RedEditorSDK·widget.css 6월 실물)
+- `docs/reversing/red_reverse_engineer/05_readable/`(§25 가독화 GO — deob_05/06/editor_sdk 의미화 소스) — 원시 minified deob 대신 우선 참조
 - `docs/reversing/red_reverse_engineer/` (00_raw~final, 05_code_pattern_transfer_analysis.md) — 86/100 난독화 해제 자료
-- `docs/reversing/RedPrinting_Widget_Analysis_Report.html` + `RedPrinting_SDK_Deep_Analysis_Report.html` — 위젯/SDK 심층 분석 리포트 (3계층 아키텍처·가격 API 실측 계약·45 에디터 메서드·브릿지 17함수·Pinia 스토어)
-- `_workspace/huni-widget/01_reverse/seed-redprinting-sdk-analysis.md` — 위 HTML 리포트 정독 추출 시드 (보강 우선순위 9항목 인계)
-- `raw/widget_monitor/` (local/server.js, index.html, *_capture.json, body-log.json, redprinting_catalog.json, huni_feature_gaps.json)
+- `docs/reversing/RedPrinting_{Widget,SDK}_*_Report.html` — 위젯/SDK 심층 분석 리포트(3계층·가격 API 계약·45 에디터 메서드·브릿지 17함수·Pinia 스토어). ★Apr 1 최초 시드·역사 참조 — 최신 권위는 위 redo-260623 + drift-audit-260623
+- `_workspace/huni-widget/01_reverse/seed-redprinting-sdk-analysis.md` — HTML 리포트 정독 추출 시드 (보강 우선순위 9항목 인계)
+- `raw/widget_monitor/local/` (server.js→:3001, index.html, catalog.json, api-log.json, body-log.json, *-capture.cjs 캡처 스크립트군, hw-runtime-capture.cjs)
 - `.env.local` — `RP_USERNAME`/`RP_PASSWORD` (RedPrinting 자격증명), 가격 API 검증용
 - `_workspace/huni-widget/01_reverse/` (이전 산출물 — 존재 시 개선 반영)
 
-## 보강 대상 갭 (As-Is 역공학에서 식별)
+## 보강 대상 갭 (★6월 drift-audit-260623 기준 갱신)
 
 | 갭 | 현황 | 보강 방법 |
 |----|------|----------|
 | S3 presigned URL 발급 | 미검증 (1순위) | live-capture로 업로드 플로우 실접속 캡처 |
 | 가격 rule engine | 요청/응답만 보존(body-log.json) | 옵션 조합별 가격 응답 수집 → 서버 규칙 역산 |
 | postMessage 라이프사이클 | from-edicus 부분 캡처됨 | 에디터 전체 흐름(save-doc-report→goto-cart) 페이로드 정밀화 |
-| TRANSLATIONS_KO | 280+ 항목 미포함 | 한글 라벨 사전 전문 추출 |
+| TRANSLATIONS_KO | **833항목(6월·drift-audit 확정)** | 한글 라벨 사전 전문 추출 (280+는 4월 수치·해소됨) |
+| **Garage 업로더/신규 14필드/신규 옵션군** | 6월 재역공학 신규 발견 | redo-260623 R0~R3 참조·신규 도메인 보강 |
 | 부자재(ACC) 흐름 | useAccOrderStore 미검증 | ACC 상품 라이브 구동 검증 |
 
 ## 산출물 (`_workspace/huni-widget/01_reverse/`)
@@ -58,3 +61,7 @@ RedPrinting(프로젝트 소유자 본인 설계 시스템) 위젯 역공학 자
 ## 재호출 지침
 
 `01_reverse/` 산출물이 이미 존재하면 전체 재작성하지 말고 읽어서 갭(잔존 미검증·신규 발견)만 보강한다. 사용자 피드백이 특정 영역이면 해당 파일만 수정한다.
+
+**중복 재역공학 금지 [HARD]:** 6월 정적 디옵은 `01_reverse/redo-260623/`에 §22 방법으로 완료됨(4월 deob 대비 신규/변경만 타겟). 재수행하지 말고 갱신만. 방법론 권위=`_workspace/huni-re-verify/_meta/re-methodology-research.md`.
+
+**★테스트베드 freshness:** `local/widget.js`=6월 최신(라이브 byte-동일). 단 `local/RedEditorSDK.min.js`·`widget.css`는 4월 원천 symlink(STALE) — 6월 실물은 `01_reverse/_latest/`. 에디터 라이프사이클 보강 시 _latest 실물 사용.

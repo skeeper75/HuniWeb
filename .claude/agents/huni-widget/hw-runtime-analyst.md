@@ -56,3 +56,5 @@ tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill, mcp__claude-in-chr
 ## 재호출 지침
 
 `02_analysis/` 산출물이 존재하면 읽어서 신규 관찰·수정만 반영한다. 특정 흐름(예: 에디터) 재분석 요청이면 해당 다이어그램·서술만 갱신한다.
+
+**★테스트베드 freshness:** `local/widget.js`=6월 최신(라이브 byte-동일). 단 `local/RedEditorSDK.min.js`·`widget.css`는 4월 원천 symlink(STALE) — 6월 실물은 `01_reverse/_latest/`. 에디터 라이프사이클 재분석 시 _latest 실물 사용.

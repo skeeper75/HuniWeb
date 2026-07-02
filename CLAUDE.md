@@ -101,7 +101,7 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 ## 6. Harness: Huni-Widget (인쇄 자동견적 위젯 구현)
 
-**목표:** RedPrinting 위젯 역공학 보강(`raw/widget_monitor/local` 동작 검증된 라이브 테스트베드 활용) → 동작 구조 분석 + 국내외 베스트프랙티스 리서치 → 위젯 개발 요소 상세 명세 → **React-in-Shadow-DOM 임베드 위젯** 구현 → 경계면 교차 QA 까지 6인 에이전트 파이프라인(hw-reverse-engineer / hw-runtime-analyst / hw-researcher / hw-architect / hw-builder / hw-qa)으로 수행. Print-Quote(설계 문서)와 별개의 신규 독립 하네스(구현 목적).
+**목표:** RedPrinting 위젯 역공학 보강(`raw/widget_monitor/local` 동작 검증된 라이브 테스트베드 활용) → 동작 구조 분석 + 국내외 베스트프랙티스 리서치 → 위젯 개발 요소 상세 명세 → **React-in-Shadow-DOM 임베드 위젯** 구현 → 경계면 교차 QA 까지 8인 에이전트 파이프라인(hw-reverse-engineer / hw-runtime-analyst / hw-researcher / hw-architect / hw-builder / hw-qa + hw-design-fidelity[시각재현] + hw-db-cartographer[후니 컨버전 ③'])으로 수행. Print-Quote(설계 문서)와 별개의 신규 독립 하네스(구현 목적).
 
 **트리거:** "후니 위젯 구현", "인쇄 자동견적 위젯", "위젯 하네스 실행", "huni-widget", "역공학 보강", "위젯 동작 분석", "위젯 명세 작성", "위젯 빌드", "위젯 QA", "위젯 다시 구현", "특정 단계만 재실행" 등 본 도메인 요청 시 `huni-widget-orchestrator` 스킬을 사용. 단순 질문은 직접 응답.
 
@@ -109,7 +109,7 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 **입력 자산·핵심 결정:** 입력자산(역공학 86/100·Widget/SDK 리포트·widget_monitor 테스트베드·DESIGN.md 14 componentType·`.env.local`)과 핵심결정 5건(역공학→구현 end-to-end·React-in-Shadow-DOM·미검증 영역 라이브 보강·정규화 계약 의존+어댑터 무손실 컨버전·RedPrinting=사용자 본인 시스템) → `_workspace/huni-widget/HANDOFF.md`·`CHANGELOG.md`
 
-**변경이력:** 최신: 2026-07-01 컨버전 트랙(③') 신설 — 8번째 에이전트 `hw-db-cartographer` + `huni-widget-db-cartography` 스킬 추가(현재 라이브 DB t_prd_*·t_prc_*·CPQ·evaluate_price → 정규화 계약 매핑·상품군별 대표 파일럿→동형 전파·§7/§13~§29 재사용·STALE huni-db-mapping.md 가격제약미작성 전제 폐기) → `_workspace/huni-widget/CHANGELOG.md`
+**변경이력:** 최신: 2026-07-02 하네스 4축 병렬 감사→개선 11건 적용(오케v1.5.0) — ①컨버전 인계 배선 규약(pilot 골든→`fixtures/huni/*`→`createHuniAdapter` a/b/c) 명문화 ②hw-architect/hw-qa charter 컨버전 갱신(evaluate_price 골든·종단 e2e) ③(C)블로커 원장·재검증(§27 wiring 신호·PRICE 값크기 대조·저청구 조용전파 차단) ④(C0)가격공식부재 하드블로커 신설(§18 선행) ⑤widget-forms 트랙 산출물 정식 등재 ⑥~⑧ 역공학 4월→6월 드리프트 정정(redo-260623·_latest·05_readable 입력화·중복 재역공학 금지·테스트베드 freshness) ⑨CLAUDE.md 6인→8인 ⑩⑪ workflow.yaml 참조/팀 다중렌즈 정리. ★OPEN 4건 확정: 동형 정본 축=**C1~C5**(W-*는 파생)·(C)재검증=**반자동**(§27 wiring diff 재호출 확인)·fixture=**첫 createHuniAdapter 착수 시점**·(C0)=**calendar류만 §18 하드게이트·나머지 병행**. 직전: 2026-07-01 컨버전 트랙(③') 신설(hw-db-cartographer+스킬) → `_workspace/huni-widget/CHANGELOG.md`
 
 ---
 

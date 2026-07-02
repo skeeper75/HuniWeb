@@ -10,10 +10,10 @@ description: >
 license: Apache-2.0
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash, Agent, AskUserQuestion, TodoWrite
 metadata:
-  version: "1.4.0"
+  version: "1.5.0"
   category: "domain"
   status: "active"
-  updated: "2026-07-01"
+  updated: "2026-07-02"
   tags: "huni, widget, redprinting, shadow-dom, edicus, pipeline, agent-team, reverse-engineering, code-parity, independent-verification, team-crossverify, db-cartography, conversion, normalized-contract, isomorphism"
 ---
 
@@ -133,12 +133,17 @@ test -f .env.local && echo ".env.local OK" || echo ".env.local MISSING"
 **실행(서브 에이전트 순차, model opus):**
 1. **hw-db-cartographer** — huni-widget-db-cartography 스킬. 현재 라이브 DB(스냅샷 `_foundation/live-snapshot/latest/` 우선)의 상품 구성요소·옵션·가격·제약을 정규화 계약으로 매핑 + **상품군별 대표 상품 1개 종단 파일럿(evaluate_price 골든 PRICE≠0)** → 동형 전파. §13/§21/§29/§7 산출 재사용(재조사 금지). 산출 `03_spec/db-cartography/`.
 2. **hw-architect** — db-cartography 산출로 `data-adapter.md` 후니 arm + `huni-db-mapping.md`(supersede) 갱신. 계약 변경 필요 갭(B분류)만 최소 권고.
-3. **hw-builder (메인 트리)** — pilot fixture + 매핑 규칙으로 `createHuniAdapter` 데이터소스 교체. 위젯 코어·정규화 계약 0줄 diff(INV-3) 전제. 무손실 컨버전.
+3. **hw-builder (메인 트리)** — pilot fixture + 매핑 규칙으로 `createHuniAdapter` 데이터소스 교체. **배선 규약 [HARD]**: (a) **fixture는 이 시점(첫 createHuniAdapter 착수)에 물질화** — cartography 단계는 읽기전용 설계로 유지(선제 생성 금지, stale 방지). `db-cartography/<group>/pilot-<prd_cd>.md` NormalizedProduct 골든 → `04_build/fixtures/huni/product_<PRD_CD>.json`·`price_<PRD_CD>_sample.json` verbatim 물질화(Red fixture 명명 대칭). (b) `src/adapters/huni/createHuniAdapter.ts` 신설 — Red 어댑터와 동일 인터페이스, sticker OPV.ref_key1·셋트 evaluate_set_price·면적 ref_dim 환원 분기 포함. (c) fixture round-trip echo(opt/mat/proc/siz/print_opt_cd) + evaluate_price PRICE≠0 단언. 위젯 코어·정규화 계약 0줄 diff(INV-3) 전제. 무손실 컨버전.
+   ※ 컨버전 매핑→명세→구현→QA는 선형 의존이라 서브 순차가 기본. 단 db-cartographer의 동형 클래스 분류·갭 헌팅·골든 발굴은 발견성 활동이라 필요 시 팀 다중렌즈(`TeamCreate`) 선택 가능(강제 아님).
 4. **hw-qa** — evaluate_price 골든(PRICE≠0)·종단 e2e(옵션 선택→차원 환원→가격→주문조립) 독립 재검증. GO/NO-GO.
 
-**게이트:** 대표 상품 NormalizedProduct 완전 조립(빈 필드 0)·evaluate_price PRICE≠0 재현·componentType 14종 사상·갭 (A)어댑터흡수/(B)계약변경/(C)DB교정 분류·(C)는 §7/§18/§26 라우팅(인간 승인). **가격 서버 권위** — 위젯은 evaluate_price 불투명 결과만, `t_prc_*` 공식 포팅 금지. **PRICE=0=결함 신호**([[huni-widget-red-price-never-zero]]).
+**게이트:** 대표 상품 NormalizedProduct 완전 조립(빈 필드 0)·evaluate_price PRICE≠0 재현·componentType 14종 사상·갭 (A)어댑터흡수/(B)계약변경/(C)DB교정/(C0)가격공식부재 분류·(C)는 §7/§18/§26 라우팅(인간 승인). **가격 서버 권위** — 위젯은 evaluate_price 불투명 결과만, `t_prc_*` 공식 포팅 금지. **PRICE=0=결함 신호**([[huni-widget-red-price-never-zero]]).
 
-**동형 전파:** §29 복잡도 클래스(고정가by-siz·면적입력·셋트조립·옵션캐스케이드·addon템플릿) 재사용. 대표 1개 종단 완주 → 동형 입증 후 매핑 규칙만 전파(전수 재조립 금지). 동형 깨지면 새 클래스 분리.
+**(C) 블로커 원장·재검증 [HARD]:** (C)DB교정 갭은 `gaps-and-recommendations.md`에 §7/§18/§26 라우팅 + `_foundation/batch/wiring/wiring-status.json`(§27) 대응 항목을 back-reference로 링크한다. **재검증은 반자동 [권장·사용자 확정 2026-07-02]** — 완전 자동 트리거는 읽기전용 설계 트랙에 과설계이므로 두지 않는다. 대신 hw-db-cartographer **재호출 시 wiring-status.json diff 확인을 의무화**: §7/§26이 해당 결함을 COMMIT했으면(스냅샷 갱신) 그 상품 파일럿 골든을 재계산해 **PRICE 변화(특히 저청구→정상)를 값 크기까지 확인한 뒤에만 동형 전파**. PRICE≠0 통과만으로 (C) 해소로 간주 금지 — 저청구(인쇄비0 등 C5)는 용지비로 PRICE≠0을 통과하나 정답 미달이다.
+
+**(C0) 게이팅 [HARD]:** `product_price_formulas` 0행 상품군(calendar/design-calendar 등)만 §18 가격공식 설계 선행 하드게이트(위젯 컨버전 착수 금지). **나머지 상품군 컨버전은 병행 허용** — (C0) 상품군이 전체 파이프라인을 막지 않는다.
+
+**동형 전파:** **정본 축=C1~C5(widget-forms Figma 폼 복잡도 클래스) [HARD·사용자 확정 2026-07-02]** — 대표 선정·전파 경계·카운트는 C1~C5 기준. isomorphism-classes.md의 W-*(렌더/가격모델 축)는 파생 렌즈로만 참조(정본 아님). 대표 1개 종단 완주 → 동형 입증 후 매핑 규칙만 전파(전수 재조립 금지). 동형 깨지면 새 클래스 분리.
 
 ## 코드 레벨 구조 정합 검증축 (S0~S3 — 캡처 표본을 넘어선 권위)
 
@@ -187,7 +192,7 @@ test -f .env.local && echo ".env.local OK" || echo ".env.local MISSING"
 
 **검증 게이트 호출**: 보정/구현 후 "독립 재검증" 명시 요청 → hw-qa가 자기보고 불신·직접 재실행으로 GO/NO-GO. 기준: tsc 0 / vitest green / build OK / `git diff` 코어 최소 / 캡처 field 대조 / 왕복 복원.
 
-**실행 모드 선택**: 다중 렌즈 분석·교차검증은 "팀으로", 단일 검증·순차 보정은 기본(서브). 강제 시 명시. 팀 모델은 `workflow.yaml` default_model: opus(추론집약 하네스). **하네스 전체 팀 모드 실행 절차·제약은 `_workspace/huni-widget/TEAM-MODE-GUIDE.md` 참조**(전제 확인·트리거·팀/서브 매핑·TeamCreate 워크플로우·하이브리드 예시).
+**실행 모드 선택**: 다중 렌즈 분석·교차검증은 "팀으로", 단일 검증·순차 보정은 기본(서브). 강제 시 명시. 팀 모델 기본값=opus(추론집약 하네스) — TeamCreate 런타임이 worktree에 workflow.yaml을 생성하며 정적 참조 파일이 아니다. **하네스 전체 팀 모드 실행 절차·제약은 `_workspace/huni-widget/TEAM-MODE-GUIDE.md` 참조**(전제 확인·트리거·팀/서브 매핑·TeamCreate 워크플로우·하이브리드 예시).
 
 ## 에러 핸들링
 

@@ -22,6 +22,8 @@ tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill, mcp__claude-in-chr
 | DESIGN.md ↔ 렌더 | 8 Critical Rules·토큰 vs 실제 렌더 — 선택상태·색·치수·폰트 일치 |
 | 동작 명세 ↔ 구현 | 02_analysis 시퀀스·캐스케이드 vs 구현 동작 — 이벤트·상태전이 일치 |
 | Edicus 브리지 ↔ 프로토콜 | editor-bridge-protocol.md postMessage vs 구현 핸들러 — origin 검증·페이로드 |
+| evaluate_price 골든 (컨버전) | pilot 골든 PRICE≠0 ↔ createHuniAdapter 재계산 | 값 단위 일치·0=결함 신호 |
+| 후니 DB 종단 e2e (컨버전) | 옵션 선택→차원 환원→evaluate_price→주문조립 | 대표 상품 1건 완주 |
 
 ## 입력
 

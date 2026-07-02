@@ -22,6 +22,7 @@ tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill, mcp__context7__res
 - `_workspace/huni-widget/02_analysis/` (동작 구조·시퀀스·상태머신·캐스케이드·이벤트 계약)
 - `_workspace/huni-widget/02_research/` (베스트프랙티스 권고)
 - `_workspace/print-quote/04_design/DESIGN.md` (14 componentType·브랜드 토큰·8 Critical Rules)
+- `_workspace/huni-widget/03_spec/db-cartography/` (hw-db-cartographer 산출 — 매핑 매트릭스·pilot·widget-forms·gaps) — **컨버전 트랙 시 `data-adapter.md` 후니 arm + `huni-db-mapping.md`(supersede)를 이 산출로 갱신하는 것이 본 에이전트 책임**
 - `.env.local` (Edicus/Shopby/Neon 연동 정보 — API 계약 설계용)
 
 ## 산출물 (`_workspace/huni-widget/03_spec/`)

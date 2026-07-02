@@ -101,9 +101,9 @@ CPQ 옵션의 polymorphic `ref_dim_cd`는 [[dbmap-cpq-option-layer-mapping]] 규
 
 ## 4. 동형 전파 (대표 1개 파일럿 → 전파)
 
-사용자 결정 = **상품군별 대표 상품 1개 종단 파일럿 → 동형 전파**.
+사용자 결정 = **상품군별 대표 상품 1개 종단 파일럿 → 동형 전파**. **정본 축=C1~C5(widget-forms Figma 폼 복잡도) [HARD·사용자 확정 2026-07-02]** — 대표 선정·전파 경계·카운트는 C1~C5로 확정. isomorphism-classes.md의 W-*(렌더/가격모델)는 파생 렌즈로만(정본 아님).
 
-1. **동형 클래스 분류** — §29 복잡도 클래스(고정가by-siz·면적입력·셋트조립·옵션캐스케이드·addon템플릿) 재사용. 위젯 렌더·가격모델·캐스케이드 형태가 같으면 동형
+1. **동형 클래스 분류** — **C1~C5 정본**(widget-forms-approach.md). §29 복잡도(고정가by-siz·면적입력·셋트조립·옵션캐스케이드·addon템플릿)·isomorphism W-*는 C1~C5로 사상해 참조. 폼 복잡도가 같으면 동형
 2. **대표 선정** — 각 상품군에서 준비도 높고(§29 L3+) 그 군의 분기를 모두 traverse하는 상품 1개
 3. **종단 파일럿** — 대표를 라이브 데이터로 NormalizedProduct 완전 조립 → componentType 렌더 가능 확인 → evaluate_price 골든(PRICE≠0)까지. `<group>/pilot-<prd_cd>.md`
 4. **동형 입증 후 전파** — 같은 클래스 나머지는 "대표와 동형"임을 입증하고 매핑 규칙만 전파(전수 재조립 금지). 동형 깨지면 새 클래스 분리·새 대표
@@ -117,14 +117,15 @@ CPQ 옵션의 polymorphic `ref_dim_cd`는 [[dbmap-cpq-option-layer-mapping]] 규
 
 ## 6. 갭 분류 (정직)
 
-매핑 불가·구멍은 은폐 말고 3분류:
+매핑 불가·구멍은 은폐 말고 분류:
 - **(A) 어댑터 흡수 가능** — 계약/위젯 무변경, 어댑터 파생/역매핑으로 해결 (대부분)
 - **(B) 계약 변경 필요** — 위젯 가시 계약 1필드 추가 등. hw-architect 권고(단순성 우선 최소화)
 - **(C) DB 작성/교정 필요** — 라이브에 데이터 없음/오적재. §7 dbmap/§18/§26 라우팅(인간 승인). 이 단계는 매핑·파일럿·갭까지
+- **(C0) 가격공식 부재 [하드 블로커]** — `product_price_formulas` 0행으로 evaluate_price가 PRICE=0(예 calendar/design-calendar). (C)데이터 미적재와 구분 — **§18 가격공식 설계가 위젯 컨버전보다 선행**. isomorphism-classes.md에 TBD로 묻지 말고 (C0)로 명시 분류(위젯 전파 대상 아님)
 
 ## 7. 산출물·게이트
 
-산출 `_workspace/huni-widget/03_spec/db-cartography/`: `db-contract-mapping.md`·`widget-db-entities.md`·`isomorphism-classes.md`·`<group>/pilot-<prd_cd>.md`·`evaluate-price-contract.md`·`gaps-and-recommendations.md`.
+산출 `_workspace/huni-widget/03_spec/db-cartography/`: `db-contract-mapping.md`·`widget-db-entities.md`·`isomorphism-classes.md`·`<group>/pilot-<prd_cd>.md`·`evaluate-price-contract.md`·`gaps-and-recommendations.md`·`widget-forms-approach.md`·`widget-forms/<group>/*.md`+`widget-forms/SYNTHESIS.md`(5 복잡도 클래스 대표 종단 + 11군 전파). 재호출 판정(Phase 0)은 `widget-forms/` 존재 여부도 부분 재실행 신호로 포함.
 
 **게이트(hw-architect/hw-qa 인계 전):**
 - 대표 상품 NormalizedProduct가 라이브 데이터로 완전 조립되는가(빈 필드·미매핑 없음)
