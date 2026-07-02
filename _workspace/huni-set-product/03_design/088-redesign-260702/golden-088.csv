@@ -1,0 +1,10 @@
+# 088 레더 링바인더 재설계 골든 케이스 — 게이트 evaluate_set_price 재계산 대조자
+# 전제: set_prd_cd=PRD_000088 · mode=lenient · grade 미전달 · cover_mult x1(표지출력매수=부수) · 할인 바인딩 없음 → final_price=base_total
+# member: 089(표지)=COMP_LEATHER_RINGBINDER_COVER flat 9000/부 · 090~093(면지)=0 · 부모(088)=COMP_BIND_SSABARI@PROC_000098
+# set_procs=[{proc_cd:PROC_000098}] · member 089 qty=copies · 값 verbatim(9000·싸바리 격자)
+copies,member_089_cover,member_면지_090_093,parent_sabari_band_unit,parent_sabari_total,base_total,final_price_expected
+1,9000,0,30000,30000,39000,39000
+10,90000,0,20000,200000,290000,290000
+100,900000,0,9000,900000,1800000,1800000
+# 검산: 1부=39,000(사용자 기대)·100부=1,800,000(사용자 기대) 일치
+# 참고(재설계 前 임시 COVERBIND): 1부=34,100 · 100부=796,900
