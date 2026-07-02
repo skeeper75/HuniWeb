@@ -1,0 +1,345 @@
+{
+  "state_before": {
+    "sets": [
+      [
+        "PRD_000094",
+        "PRD_000095",
+        "N"
+      ],
+      [
+        "PRD_000094",
+        "PRD_000096",
+        "N"
+      ]
+    ],
+    "formula_bind": [
+      [
+        "PRD_000094",
+        "PRF_PCB_FIXED"
+      ]
+    ],
+    "use_dims": [
+      [
+        "COMP_PCB_S1_20P",
+        "[\"siz_cd\", \"min_qty\", \"print_opt_cd\", \"opt_cd\", \"opt_grp:OPT_000082\"]"
+      ],
+      [
+        "COMP_PCB_S1_30P",
+        "[\"siz_cd\", \"min_qty\", \"print_opt_cd\", \"opt_cd\", \"opt_grp:OPT_000082\"]"
+      ],
+      [
+        "COMP_PCB_S2_20P",
+        "[\"siz_cd\", \"min_qty\", \"print_opt_cd\", \"opt_cd\", \"opt_grp:OPT_000082\"]"
+      ],
+      [
+        "COMP_PCB_S2_30P",
+        "[\"siz_cd\", \"min_qty\", \"print_opt_cd\", \"opt_cd\", \"opt_grp:OPT_000082\"]"
+      ]
+    ],
+    "direct_price": []
+  },
+  "S0a_baseline_ui_faithful": {
+    "pansu": 9,
+    "inner_eff_qty": 300,
+    "final_price": "0",
+    "base_total": "0",
+    "set_eval_source": null,
+    "set_eval_amount": "None",
+    "member_contrib": {
+      "inner": "0",
+      "cover": "0"
+    },
+    "warnings": [
+      "[inner] 가격 소스 없음(직접단가·공식 미구성)",
+      "[cover] 가격 소스 없음(직접단가·공식 미구성)",
+      "[셋트공식] 선택값에 매칭되는 구성요소가 없습니다(합계 0원).",
+      "셋트 합계 0원 — 구성원·셋트공식 모두 매칭 없음(데이터 미적재 가능성)."
+    ],
+    "member_evals": [
+      {
+        "label": "inner",
+        "source": "NONE",
+        "components": []
+      },
+      {
+        "label": "cover",
+        "source": "NONE",
+        "components": []
+      }
+    ],
+    "set_components": []
+  },
+  "S0b_baseline_sizcd_injected": {
+    "pansu": 9,
+    "inner_eff_qty": 300,
+    "final_price": "450000",
+    "base_total": "450000.00",
+    "set_eval_source": null,
+    "set_eval_amount": "None",
+    "member_contrib": {
+      "inner": "0",
+      "cover": "0"
+    },
+    "warnings": [
+      "[inner] 가격 소스 없음(직접단가·공식 미구성)",
+      "[cover] 가격 소스 없음(직접단가·공식 미구성)"
+    ],
+    "member_evals": [
+      {
+        "label": "inner",
+        "source": "NONE",
+        "components": []
+      },
+      {
+        "label": "cover",
+        "source": "NONE",
+        "components": []
+      }
+    ],
+    "set_components": []
+  },
+  "C_unset_set_membership": {
+    "is_set_rows_after_update": 0,
+    "single_100qty_final": "450000",
+    "single_100qty_source": "FORMULA",
+    "single_2qty_final": "22000",
+    "warnings": []
+  },
+  "A_rebind_to_inner__ui_faithful": {
+    "pansu": 9,
+    "inner_eff_qty": 300,
+    "final_price": "0",
+    "base_total": "0",
+    "set_eval_source": null,
+    "set_eval_amount": "None",
+    "member_contrib": {
+      "inner": "0",
+      "cover": "0"
+    },
+    "warnings": [
+      "[inner] 선택값에 매칭되는 구성요소가 없습니다(합계 0원).",
+      "[cover] 가격 소스 없음(직접단가·공식 미구성)",
+      "[셋트공식] 가격 소스 없음(직접단가·공식 미구성)",
+      "셋트 합계 0원 — 구성원·셋트공식 모두 매칭 없음(데이터 미적재 가능성)."
+    ],
+    "member_evals": [
+      {
+        "label": "inner",
+        "source": "FORMULA",
+        "components": [
+          {
+            "comp_cd": "COMP_PCB_S1_20P",
+            "included": false,
+            "error": null,
+            "note": "",
+            "data_gap": [],
+            "subtotal": "0"
+          },
+          {
+            "comp_cd": "COMP_PCB_S2_20P",
+            "included": false,
+            "error": null,
+            "note": "단가 없음 — print_opt_cd=POPT_000001",
+            "data_gap": [
+              {
+                "dim": "print_opt_cd",
+                "value": "POPT_000001"
+              }
+            ],
+            "subtotal": "0"
+          },
+          {
+            "comp_cd": "COMP_PCB_S1_30P",
+            "included": false,
+            "error": null,
+            "note": "",
+            "data_gap": [],
+            "subtotal": "0"
+          },
+          {
+            "comp_cd": "COMP_PCB_S2_30P",
+            "included": false,
+            "error": null,
+            "note": "단가 없음 — print_opt_cd=POPT_000001",
+            "data_gap": [
+              {
+                "dim": "print_opt_cd",
+                "value": "POPT_000001"
+              }
+            ],
+            "subtotal": "0"
+          }
+        ]
+      },
+      {
+        "label": "cover",
+        "source": "NONE",
+        "components": []
+      }
+    ],
+    "set_components": []
+  },
+  "A_rebind_to_inner__hypothetical_optcd_in_member": {
+    "pansu": 9,
+    "inner_eff_qty": 300,
+    "final_price": "1035000",
+    "base_total": "1035000.00",
+    "set_eval_source": null,
+    "set_eval_amount": "None",
+    "member_contrib": {
+      "inner": "1035000.00",
+      "cover": "0"
+    },
+    "warnings": [
+      "[cover] 가격 소스 없음(직접단가·공식 미구성)",
+      "[셋트공식] 가격 소스 없음(직접단가·공식 미구성)"
+    ],
+    "member_evals": [
+      {
+        "label": "inner",
+        "source": "FORMULA",
+        "components": [
+          {
+            "comp_cd": "COMP_PCB_S1_20P",
+            "included": true,
+            "error": null,
+            "note": "",
+            "data_gap": [],
+            "subtotal": "1035000.00"
+          },
+          {
+            "comp_cd": "COMP_PCB_S2_20P",
+            "included": false,
+            "error": null,
+            "note": "단가 없음 — print_opt_cd=POPT_000001",
+            "data_gap": [
+              {
+                "dim": "print_opt_cd",
+                "value": "POPT_000001"
+              }
+            ],
+            "subtotal": "0"
+          },
+          {
+            "comp_cd": "COMP_PCB_S1_30P",
+            "included": false,
+            "error": null,
+            "note": "단가 없음 — opt_cd=OPV_000491",
+            "data_gap": [
+              {
+                "dim": "opt_cd",
+                "value": "OPV_000491"
+              }
+            ],
+            "subtotal": "0"
+          },
+          {
+            "comp_cd": "COMP_PCB_S2_30P",
+            "included": false,
+            "error": null,
+            "note": "단가 없음 — print_opt_cd=POPT_000001, opt_cd=OPV_000491",
+            "data_gap": [
+              {
+                "dim": "print_opt_cd",
+                "value": "POPT_000001"
+              },
+              {
+                "dim": "opt_cd",
+                "value": "OPV_000491"
+              }
+            ],
+            "subtotal": "0"
+          }
+        ]
+      },
+      {
+        "label": "cover",
+        "source": "NONE",
+        "components": []
+      }
+    ],
+    "set_components": []
+  },
+  "D_remove_sizcd_from_use_dims": {
+    "pansu": 9,
+    "inner_eff_qty": 300,
+    "final_price": "0",
+    "base_total": "0",
+    "set_eval_source": null,
+    "set_eval_amount": "None",
+    "member_contrib": {
+      "inner": "0",
+      "cover": "0"
+    },
+    "warnings": [
+      "[inner] 가격 소스 없음(직접단가·공식 미구성)",
+      "[cover] 가격 소스 없음(직접단가·공식 미구성)",
+      "[셋트공식] 선택값에 매칭되는 구성요소가 없습니다(합계 0원).",
+      "셋트 합계 0원 — 구성원·셋트공식 모두 매칭 없음(데이터 미적재 가능성)."
+    ],
+    "member_evals": [
+      {
+        "label": "inner",
+        "source": "NONE",
+        "components": []
+      },
+      {
+        "label": "cover",
+        "source": "NONE",
+        "components": []
+      }
+    ],
+    "set_components": []
+  },
+  "B_direct_price": {
+    "copies_100": {
+      "final": "450000",
+      "set_source": null
+    },
+    "copies_2": {
+      "final": "9000",
+      "set_source": null,
+      "authority_expected_2copies": "22000 (2부 x 11,000/부)"
+    }
+  },
+  "state_after_all_rollbacks": {
+    "sets": [
+      [
+        "PRD_000094",
+        "PRD_000095",
+        "N"
+      ],
+      [
+        "PRD_000094",
+        "PRD_000096",
+        "N"
+      ]
+    ],
+    "formula_bind": [
+      [
+        "PRD_000094",
+        "PRF_PCB_FIXED"
+      ]
+    ],
+    "use_dims": [
+      [
+        "COMP_PCB_S1_20P",
+        "[\"siz_cd\", \"min_qty\", \"print_opt_cd\", \"opt_cd\", \"opt_grp:OPT_000082\"]"
+      ],
+      [
+        "COMP_PCB_S1_30P",
+        "[\"siz_cd\", \"min_qty\", \"print_opt_cd\", \"opt_cd\", \"opt_grp:OPT_000082\"]"
+      ],
+      [
+        "COMP_PCB_S2_20P",
+        "[\"siz_cd\", \"min_qty\", \"print_opt_cd\", \"opt_cd\", \"opt_grp:OPT_000082\"]"
+      ],
+      [
+        "COMP_PCB_S2_30P",
+        "[\"siz_cd\", \"min_qty\", \"print_opt_cd\", \"opt_cd\", \"opt_grp:OPT_000082\"]"
+      ]
+    ],
+    "direct_price": []
+  },
+  "residue_check_identical": true
+}

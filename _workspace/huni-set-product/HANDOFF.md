@@ -1,5 +1,38 @@
 # Huni-Set-Product (§23) — HANDOFF
 
+## ★2026-07-02(오후) 엽서북 시뮬레이터 수렴 + 전 상품 수량 진단·교정 + 권위 260702 채택
+
+### 다음 시작점 (fresh 세션 최우선)
+1. **셋트 시뮬레이터 코드 1점(개발 전달 or 직접수정 — 사용자 결정 대기)**: `_foundation/remediation/DEV-REQUEST-set-sim-sizcd-260702.md` — 셋트 화면이 set_selections에 siz_cd를 안 실어 고정가형 셋트(094 엽서북·097 떡메·100 포토북) 화면 0원. A/B 실증(siz_cd만 추가 시 450,000). 권장=price_views.py:1987 직후 **내지(SEMI_ROLE.01) member.selections.siz_cd 백필**(★백필 원천 반드시 내지 — 표지=책등 포함 펼침 사이즈라 가격표 좌표에 없음·문서에 명기). 착지 검수: 엽서북 100부→450,000·2부→22,000·회귀(068~082 부모공식 siz_cd 미사용=무영향). raw/webadmin=사용자 소유 레포(직접 커밋 가능·[[webadmin-git-repo-topology-260701]]).
+2. **실무진 컨펌 2건**: ① `_foundation/batch/CONFIRM-mini-qty-bands-260702.md` — 미니보드스탠딩(144)·미니배너(145) 수량축 4/19/49/99/10000이 "이하"면 25행 재키잉(현재 한 구간씩 과청구+1~3개 견적불가) ② 기존 088 Q2 재질문.
+3. **★High 재검증(버전 diff 발): 가격표 260702 스티커 소재 연당가 변경** — 투명 130k→149.5k·홀로그램 360k→253.7k·크라프트 156k→81.5k + 신규 `투명스티커(투명후지)` → 스티커 가격사슬 재적재(§7/§26). diff 산출=`_workspace/huni-dbmap/26_change-tracking-260702/change-manifest-260702.md`(그 외: 봉투 addon 50→10장·투명엽서 화이트양면 제거·MAP 트리·린넨 가공표 신규).
+4. **박(FOIL) 6상품 최소수량 제약규칙**(027/029/031/034/069/070 — "박 선택 시 최소 10/200부") → §31 제약 하네스.
+5. UI 4건(역전 절약배지·구간 프리셋 칩·셋트 부수 step/max·직접입력 스냅) — DEV-REQUEST 부록 추가 후보. 역전 데이터=`_foundation/batch/qtyrules/reversal-scan.csv`(66상품 4,071경계·최대: 미니배너 9,999개가 10,000개보다 699만원 비쌈).
+
+### 이번 세션 결정 (relitigate 금지)
+- **엽서북(094) = 부모 all-in 고정가형이 권위 정합**(가격표 260527/260702 "권당 완제품가" 단일표·계산공식집 고정가형 명시·468셀 라이브 전수 verbatim 일치). 공식을 자식으로 분리/재바인딩 금지 — ROLLBACK 실측으로 전 대안 NO-GO(재바인딩=opt_cd 화이트리스트 부재로 0원 또는 수량축 충돌 1,035,000 오답·직접단가=2부 41% 저청구·use_dims 편집 무효·분해공식=날조).
+- **menu-first 원칙**([[menu-first-before-code-fix-260702]]): C트랙 결론 전 webadmin 메뉴/데이터 경로 전수 검증. 이번에 데이터-only 후보 6개 전부 ROLLBACK DRY-RUN 실측 후 코드 필수 확정.
+- **수량 UI 권위 분리**: 주문 가능 수량=상품/사이즈 min·max·step(상품마스터), 가격=엔진 floor 구간. 제안 min=max(권위 최소, 가격표 최소구간)[엽서북·떡메 선례]. 역전 4,071건=결함 아닌 수량할인 구조(배지로 해소).
+- **권위 최신판=260702 채택**(상품마스터·가격표): diff 33+32셀뿐·시트/상품 증감 0. 진행 중 검증 영역(엽서북·떡메·스티커팩·미니·제작수량) 전부 무변화 확인.
+
+### 이번 세션 라이브 COMMIT (건드리지 말 것·전건 백업/undo/실화면 검증)
+| 대상 | 내용 | 실화면 |
+|---|---|---|
+| 094/095/096 매핑 13행 | 내지·표지 사이즈 6+자재 2+도수 4+부모 판형(SIZ_000499) 1 — 구성원 빈 껍데기 해소 | 드롭다운 전부 채워짐·판걸이 9·NaN 해소 |
+| 094 min_qty 1→2 | 가격표 최소구간 2부 정합 | 부수 기본값 2 |
+| 097 min_qty 3→6 | 동일 패턴 | 부수 기본값 6 |
+| 065 단가행 min 54→1 | "54장 1세트" 오키잉 교정 | 수량 1→4,000원 |
+| 사이즈 수량규칙 49행 | 판형별 min/max/incr 충전(2→51행·프리미엄엽서 등 19상품) | 사이즈 변경 시 15→4 리셋·소량 견적 발현 |
+| 016 max 2행 | 73x98·98x98 max 1,000→10,000(권위 verbatim) | 힌트 15~10000 |
+undo/backup: `07_sim_convergence/`·`_foundation/batch/qtyrule-*`·`_foundation/batch/qtyrules/`.
+
+### 산출물
+- 엽서북 수렴: `07_sim_convergence/`(diagnosis·menu-map·formula-design-verdict·data-only-verify·A/B 증거 json·스크린샷 9장) · `_foundation/remediation/DEV-REQUEST-set-sim-sizcd-260702.md`
+- 수량 트랙: `_foundation/batch/qty_rule_audit_260702.py`+`qty-rule-audit-260702.csv`(107상품 comp 레벨) · `_foundation/batch/qtyrules/`(qty_diag2.py·fill-plan·reversal-scan·max-mismatch·unmatched·SQL) — **최종: 신규 SIZE_TRAP 0·데이터 결함 0 도달**
+- 버전 diff: `_workspace/huni-dbmap/26_change-tracking-260702/`
+
+---
+
 ## ★2026-07-02 셋트상품 19개 전수 진단 완료 — 18 PRICE≠0(정상)·088만 결함
 - **전수 진단**(라이브 simulate-set 실호출·copies=100·독립 재현 검증): 19개 중 **18개 PRICE≠0(GO)·1개 결함(088)**. 산출=`05_gate/set-price-full-diagnosis-260702.md`·재현 스크립트 `_foundation/batch/{set_full_scan,set_fix3,gold_repro}.py`.
 - **088 레더링바인더 = 유일 진짜 결함(PRICE=0)**: 부모공식 바인딩 전무 + 구성원(표지+면지4) 전부 무공식 + **가격 낼 내지 member 부재**(082/077과 결정적 차이·빈 바인더). 데이터 dryrun만으로 교정 불가 — 실무진 제본방식(HOLD)+권위단가+cover_mult ×2 C트랙 확인 후 §23 SOP로 구성.

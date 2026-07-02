@@ -1,0 +1,262 @@
+{
+ "ok": true,
+ "kind": "set",
+ "set_prd": "PRD_000094",
+ "set_nm": "엽서북",
+ "copies": 100,
+ "as_of": "2026-07-02",
+ "mode": "lenient",
+ "members": [
+  {
+   "sub_prd_cd": "PRD_000095",
+   "role": "inner",
+   "role_nm": null,
+   "label": "내지",
+   "qty": 300,
+   "qty_breakdown": {
+    "mode": "derived",
+    "copies": 100,
+    "pages": 20,
+    "plate": "SIZ_000499",
+    "auto_plate": true,
+    "pansu": 9,
+    "per_book": 3,
+    "total_sheets": 300,
+    "sides": 1,
+    "plate_status": "single",
+    "plate_diag": "판형 1개(SIZ_000499) — 공통 자동 선택",
+    "plate_calc_mode": "single"
+   },
+   "eval": {
+    "ok": true,
+    "target": {
+     "kind": "product",
+     "code": "PRD_000095",
+     "name": "엽서북-내지(몽블랑240)"
+    },
+    "qty": 300,
+    "as_of": "2026-07-02",
+    "mode": "lenient",
+    "base": {
+     "source": "NONE",
+     "formula": null,
+     "amount": "0",
+     "components": [],
+     "warnings": []
+    },
+    "discounts": [],
+    "final_price": 0,
+    "warnings": [
+     "가격 소스 없음(직접단가·공식 미구성)"
+    ],
+    "errors": []
+   },
+   "contribution": "0",
+   "included": true
+  },
+  {
+   "sub_prd_cd": "PRD_000096",
+   "role": "cover",
+   "role_nm": null,
+   "label": "표지",
+   "qty": 100,
+   "qty_breakdown": {
+    "mode": "manual",
+    "qty": 100
+   },
+   "eval": {
+    "ok": true,
+    "target": {
+     "kind": "product",
+     "code": "PRD_000096",
+     "name": "엽서북-표지(스노우300)"
+    },
+    "qty": 100,
+    "as_of": "2026-07-02",
+    "mode": "lenient",
+    "base": {
+     "source": "NONE",
+     "formula": null,
+     "amount": "0",
+     "components": [],
+     "warnings": []
+    },
+    "discounts": [],
+    "final_price": 0,
+    "warnings": [
+     "가격 소스 없음(직접단가·공식 미구성)"
+    ],
+    "errors": []
+   },
+   "contribution": "0",
+   "included": true
+  }
+ ],
+ "set_eval": {
+  "eval": {
+   "ok": true,
+   "target": {
+    "kind": "product",
+    "code": "PRD_000094",
+    "name": "엽서북"
+   },
+   "qty": 100,
+   "as_of": "2026-07-02",
+   "mode": "lenient",
+   "base": {
+    "source": "FORMULA",
+    "formula": {
+     "frm_cd": "PRF_PCB_FIXED",
+     "frm_nm": "엽서북 사이즈/면/페이지/수량별 단가"
+    },
+    "amount": "450000.00",
+    "components": [
+     {
+      "comp_cd": "COMP_PCB_S1_20P",
+      "comp_nm": "엽서북 완제품가 단면·20p",
+      "disp_seq": 1,
+      "prc_typ": "PRICE_TYPE.01",
+      "use_dims": [
+       "siz_cd",
+       "min_qty",
+       "print_opt_cd",
+       "opt_cd",
+       "opt_grp:OPT_000082"
+      ],
+      "included": true,
+      "matched_row": {
+       "comp_price_id": 3597,
+       "apply_ymd": "2026-06-01",
+       "unit_price": "4500.00",
+       "min_qty": 100,
+       "siz_width": null,
+       "siz_height": null,
+       "siz_cd": "SIZ_000003",
+       "plt_siz_cd": null,
+       "print_opt_cd": "POPT_000001",
+       "mat_cd": null,
+       "proc_cd": null,
+       "opt_cd": "OPV_000491",
+       "coat_side_cnt": null,
+       "bdl_qty": null
+      },
+      "tier_min_qty": "100",
+      "per_item": "4500.00",
+      "subtotal": "450000.00",
+      "comp_qty": 100,
+      "error": null,
+      "calc_error": null,
+      "note": "",
+      "data_gap": [],
+      "matched_names": {
+       "siz_cd": "100x150",
+       "print_opt_cd": "단면"
+      }
+     },
+     {
+      "comp_cd": "COMP_PCB_S2_20P",
+      "comp_nm": "엽서북 완제품가 양면·20p",
+      "disp_seq": 2,
+      "prc_typ": "PRICE_TYPE.01",
+      "use_dims": [
+       "siz_cd",
+       "min_qty",
+       "print_opt_cd",
+       "opt_cd",
+       "opt_grp:OPT_000082"
+      ],
+      "included": false,
+      "matched_row": null,
+      "tier_min_qty": null,
+      "per_item": null,
+      "subtotal": "0",
+      "comp_qty": 100,
+      "error": null,
+      "calc_error": null,
+      "note": "단가 없음 — print_opt_cd=POPT_000001",
+      "data_gap": [
+       {
+        "dim": "print_opt_cd",
+        "value": "POPT_000001"
+       }
+      ]
+     },
+     {
+      "comp_cd": "COMP_PCB_S1_30P",
+      "comp_nm": "엽서북 완제품가 단면·30p",
+      "disp_seq": 3,
+      "prc_typ": "PRICE_TYPE.01",
+      "use_dims": [
+       "siz_cd",
+       "min_qty",
+       "print_opt_cd",
+       "opt_cd",
+       "opt_grp:OPT_000082"
+      ],
+      "included": false,
+      "matched_row": null,
+      "tier_min_qty": null,
+      "per_item": null,
+      "subtotal": "0",
+      "comp_qty": 100,
+      "error": null,
+      "calc_error": null,
+      "note": "단가 없음 — opt_cd=OPV_000491",
+      "data_gap": [
+       {
+        "dim": "opt_cd",
+        "value": "OPV_000491"
+       }
+      ]
+     },
+     {
+      "comp_cd": "COMP_PCB_S2_30P",
+      "comp_nm": "엽서북 완제품가 양면·30p",
+      "disp_seq": 4,
+      "prc_typ": "PRICE_TYPE.01",
+      "use_dims": [
+       "siz_cd",
+       "min_qty",
+       "print_opt_cd",
+       "opt_cd",
+       "opt_grp:OPT_000082"
+      ],
+      "included": false,
+      "matched_row": null,
+      "tier_min_qty": null,
+      "per_item": null,
+      "subtotal": "0",
+      "comp_qty": 100,
+      "error": null,
+      "calc_error": null,
+      "note": "단가 없음 — print_opt_cd=POPT_000001, opt_cd=OPV_000491",
+      "data_gap": [
+       {
+        "dim": "print_opt_cd",
+        "value": "POPT_000001"
+       },
+       {
+        "dim": "opt_cd",
+        "value": "OPV_000491"
+       }
+      ]
+     }
+    ],
+    "warnings": []
+   },
+   "discounts": [],
+   "final_price": 450000,
+   "warnings": [],
+   "errors": []
+  },
+  "contribution": "450000.00"
+ },
+ "base_total": "450000.00",
+ "discounts": [],
+ "final_price": 450000,
+ "warnings": [
+  "[내지] 가격 소스 없음(직접단가·공식 미구성)",
+  "[표지] 가격 소스 없음(직접단가·공식 미구성)"
+ ],
+ "errors": []
+}
