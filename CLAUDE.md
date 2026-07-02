@@ -415,7 +415,7 @@ The full original directive (all 17 sections, verbatim) is archived at
 
 **산출물 루트:** `_workspace/huni-constraint-rules/` (01_scenario·02_research·03_rules·04_register·05_gate·_meta). 5인 팀(`hcr-scenario-curator`∥`hcr-cpq-researcher` 기준점 팬아웃 → `hcr-rule-designer` 설계 → `hcr-gate-validator` CR1~CR7 게이트 → 인간 승인 → `hcr-ui-registrar` 등록+실화면 4항 검증). 핵심 결정: ① 규정 먼저(규정 밖 규칙 금지) ② 완료 정의=UI에서 읽고 조정 가능한 상태(DB 행 아님) ③ CN-2 엇갈림은 단가행 자동 유도(수동 나열 drift 금지) ④ 오차단 0이 최우선(정당 조합 차단=매출 차단·CR2) ⑤ evaluate_price는 제약 미참조 — 가격 0원은 §26/§27, validate 강제는 §6 라우팅 ⑥ 생성≠검증·COMMIT은 t_prd_product_constraints만·백업/DRY-RUN/undo/실화면(§1). 자격증명 `.env.local` RAILWAY_DB_*·HUNI_ADMIN_*. 구조 계약=[[constraint-builder-contract-demo-260702]].
 
-**변경이력:** 최신: 2026-07-02 첫 종단 실행 GO — 129/130 데모→자재별 8규칙(빌더 역파싱 가능) 교체 COMMIT+실화면 4항 PASS·CN-5 범위 19건 BLOCKED-UI(폼빌더 수치범위 미지원=개발 C-9)·옵션그룹 "그룹 폭발" 미실재(실체=명명 비일관→§12)·dev-handoff 확정(High 4·시각화 4·강제 로드맵 5)·058 죽은 규칙=사용자 지시 유지. 직전: 하네스 초기 구성(5 에이전트+5 스킬) → `_workspace/huni-constraint-rules/CHANGELOG.md`
+**변경이력:** 최신: 2026-07-02(재실행) 컨펌 큐 처리 — 디지털 34상품 "제약 MISSING" 해체(진짜 신규=047 1건·실무진 질문 5·타트랙 7종·BLOCKED 9)·wave-3 047 코팅×종이두께 COMMIT+실화면 4항 PASS(★.03 리스트 결과절=RAW-ONLY→금지형 .02 전환 패턴=C-10)·아크릴 5=미출시 확정(제약 안 만듦·168/169/170 use_yn N 정리 COMMIT). 직전: 첫 종단 실행 GO(129/130 자재별 8규칙 교체 COMMIT·CN-5 19 BLOCKED-UI·dev-handoff 확정) → `_workspace/huni-constraint-rules/CHANGELOG.md`
 
 When editing this file: it must stay lean. Keep only always-apply rules, the handoff
 routine, and the three harness sections. Move any growing detail into the relevant

@@ -83,6 +83,13 @@
   2. **폼빌더 수치범위 조건 타입 추가** — 연산자 `>=`/`<=`, var `width`/`height`/`size_mode`를 `VAR_KEY_MAP`·`_dim_clause`·`_is_leaf`·역파서에 확장. 추가되면 19건+기존 7건 모두 UI-관리 가능.
 - 우선순위 **High**(off-grid 0원/과금 위험 직결). 단, 규칙 신설이 아니라 **플랫폼 확장 또는 위젯 컬럼강제**로 해소(죽은/raw-only 규칙 mint 금지).
 
+### ★ C-10. 폼빌더 "결과절 리스트" implication을 못 담는다 (X→Y∈[리스트]는 RAW-ONLY) — **Med** [wave-3 실측 신설]
+- **현상**: "코팅 선택 → 종이 ∈ [180g 이상 32종]" 같은 **필수동반(.03)/호환(.01) implication의 결과절이 여러 값(리스트)** 이면 폼빌더로 관리할 수 없다(고급 raw JSON 창으로만 열림).
+- **근거(게이트 실측)**: 역파서(`views.py:200-315`)와 빌더의 **result 필드는 단일 `{dim, val}`** 만 담는다(`views.py:225-234`·`views.py:309-312`). 결과절이 `{"or":[32절]}` 이면 `res_part.get("===")`·`.get("in")` 모두 None → `result_dim=""` → 빌더 복원 실패(**RAW-ONLY 재현 확인**).
+- **해소(설계 패턴)**: 이런 "한쪽이 리스트"인 조건부는 **여집합을 .02(금지)로 뒤집어** `NOT( (선택) AND (금지 리스트) )` 로 모델링하면 폼빌더 복수조건 v2(그룹 or×2, groupOps=and)로 **PARSEABLE + 오차단 안전**(적극 선택 시에만 발동). wave-3 047(`R_EXCL_COATING_THIN_PAPER`)이 이 패턴의 전형 — .03 대신 .02, 허용 32종 대신 금지 15종 열거.
+- **동형 적용 대상**: 048·049 접지리플렛(코팅×종이두께 동일 규칙·현재 옵션그룹 0건 BLOCKED-UI) — §7 옵션그룹 선적재 후 `derive_coating_paper.py`의 PRD/그룹 파라미터만 바꿔 동형 생성.
+- **플랫폼 개선(선택)**: 빌더 result에 다중값(리스트) 결과절 타입을 추가하면 .03 implication을 직관적으로 관리 가능(단, .02 여집합 모델이 오차단 안전성에서 우위라 필수는 아님).
+
 ---
 
 ## 3. 시각화 보완 · 강화
@@ -135,3 +142,4 @@
 - 적재본: `03_rules/wave1-pilot/apply-fix.sql`(멱등 UPSERT·ON CONFLICT prd_cd,rule_cd). undo=`undo.sql`(대칭).
 - **주의**: 이 규칙들은 위젯/주문이 `/validate/`를 호출할 때만 실효(C-1·C-2·R-1~R-3 미구현 시 0원 오노출은 그대로). 등록=선택 차단 계약 확보, 강제 계층은 별도 개발.
 - **CONFIRM-QUEUE**: 058 RULE_001(type/shape 불일치+죽은 규칙+err 공백) — 실무진/curator 컨펌 후 정형 수정 또는 논리삭제.
+- **[wave-3 추가]** 047 소량전단지 CN-3 코팅×종이두께 1규칙(`R_EXCL_COATING_THIN_PAPER`, RULE_TYPE.02·차단 종이 15종) — 라이브 자동유도·전건 폼빌더 역파싱 가능·전수 188조합 오차단 0(게이트 CR2 PASS·GO). 적재본 `03_rules/wave3-dgp/apply-fix.sql`(멱등 UPSERT). C-10 패턴(implication 결과절 리스트→.02 여집합) 참조.

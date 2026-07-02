@@ -1,0 +1,219 @@
+{
+  "derived_at": "2026-07-02 17:04:07",
+  "source": "live t_prd_product_options/option_items (read-only)",
+  "threshold_g": 180,
+  "rules": [
+    {
+      "prd_cd": "PRD_000047",
+      "rule_cd": "R_EXCL_COATING_THIN_PAPER",
+      "rule_typ_cd": "RULE_TYPE.02",
+      "rule_nm": "[제약조건] 코팅은 두꺼운 종이(180g 이상)에서만 가능",
+      "err_msg": "코팅은 두꺼운 종이(180g 이상)에서만 가능합니다. 종이를 180g 이상으로 바꾸거나 코팅을 빼 주세요.",
+      "disp_seq": 1,
+      "logic": {
+        "!": {
+          "and": [
+            {
+              "or": [
+                {
+                  "in": [
+                    "OPV_000280",
+                    {
+                      "var": "sel_opts"
+                    }
+                  ]
+                },
+                {
+                  "in": [
+                    "OPV_000281",
+                    {
+                      "var": "sel_opts"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "or": [
+                {
+                  "===": [
+                    {
+                      "var": "mat_cd__usage_cd"
+                    },
+                    "MAT_000072__USAGE.07"
+                  ]
+                },
+                {
+                  "===": [
+                    {
+                      "var": "mat_cd__usage_cd"
+                    },
+                    "MAT_000073__USAGE.07"
+                  ]
+                },
+                {
+                  "===": [
+                    {
+                      "var": "mat_cd__usage_cd"
+                    },
+                    "MAT_000076__USAGE.07"
+                  ]
+                },
+                {
+                  "===": [
+                    {
+                      "var": "mat_cd__usage_cd"
+                    },
+                    "MAT_000077__USAGE.07"
+                  ]
+                },
+                {
+                  "===": [
+                    {
+                      "var": "mat_cd__usage_cd"
+                    },
+                    "MAT_000078__USAGE.07"
+                  ]
+                },
+                {
+                  "===": [
+                    {
+                      "var": "mat_cd__usage_cd"
+                    },
+                    "MAT_000086__USAGE.07"
+                  ]
+                },
+                {
+                  "===": [
+                    {
+                      "var": "mat_cd__usage_cd"
+                    },
+                    "MAT_000087__USAGE.07"
+                  ]
+                },
+                {
+                  "===": [
+                    {
+                      "var": "mat_cd__usage_cd"
+                    },
+                    "MAT_000088__USAGE.07"
+                  ]
+                },
+                {
+                  "===": [
+                    {
+                      "var": "mat_cd__usage_cd"
+                    },
+                    "MAT_000095__USAGE.07"
+                  ]
+                },
+                {
+                  "===": [
+                    {
+                      "var": "mat_cd__usage_cd"
+                    },
+                    "MAT_000096__USAGE.07"
+                  ]
+                },
+                {
+                  "===": [
+                    {
+                      "var": "mat_cd__usage_cd"
+                    },
+                    "MAT_000097__USAGE.07"
+                  ]
+                },
+                {
+                  "===": [
+                    {
+                      "var": "mat_cd__usage_cd"
+                    },
+                    "MAT_000104__USAGE.07"
+                  ]
+                },
+                {
+                  "===": [
+                    {
+                      "var": "mat_cd__usage_cd"
+                    },
+                    "MAT_000105__USAGE.07"
+                  ]
+                },
+                {
+                  "===": [
+                    {
+                      "var": "mat_cd__usage_cd"
+                    },
+                    "MAT_000106__USAGE.07"
+                  ]
+                },
+                {
+                  "===": [
+                    {
+                      "var": "mat_cd__usage_cd"
+                    },
+                    "MAT_000125__USAGE.07"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "block_case": {
+        "sel_opts": [
+          "OPV_000280"
+        ],
+        "mat_cd__usage_cd": "MAT_000072__USAGE.07"
+      },
+      "pass_case": {
+        "sel_opts": [
+          "OPV_000280"
+        ],
+        "mat_cd__usage_cd": "MAT_000074__USAGE.07"
+      },
+      "pass_case2": {
+        "sel_opts": [
+          "OPV_000279"
+        ],
+        "mat_cd__usage_cd": "MAT_000072__USAGE.07"
+      },
+      "coating_selected": [
+        {
+          "opt_cd": "OPV_000280",
+          "opt_nm": "유광",
+          "ref": "OPT_REF_DIM.04:PROC_000014"
+        },
+        {
+          "opt_cd": "OPV_000281",
+          "opt_nm": "무광",
+          "ref": "OPT_REF_DIM.04:PROC_000015"
+        }
+      ],
+      "coating_none": [
+        {
+          "opt_cd": "OPV_000279",
+          "opt_nm": "코팅없음"
+        }
+      ],
+      "thin_matkeys": [
+        "MAT_000072__USAGE.07",
+        "MAT_000073__USAGE.07",
+        "MAT_000076__USAGE.07",
+        "MAT_000077__USAGE.07",
+        "MAT_000078__USAGE.07",
+        "MAT_000086__USAGE.07",
+        "MAT_000087__USAGE.07",
+        "MAT_000088__USAGE.07",
+        "MAT_000095__USAGE.07",
+        "MAT_000096__USAGE.07",
+        "MAT_000097__USAGE.07",
+        "MAT_000104__USAGE.07",
+        "MAT_000105__USAGE.07",
+        "MAT_000106__USAGE.07",
+        "MAT_000125__USAGE.07"
+      ]
+    }
+  ],
+  "ambig": []
+}

@@ -160,3 +160,94 @@ psql -f 03_rules/wave1-pilot/apply-dryrun.sql   # BEGIN…ROLLBACK
 | 058 RULE_001 | NO-GO | type/shape 불일치+죽은 규칙+err 공백+의도 불명 | curator/실무진 CONFIRM-QUEUE |
 | wave-2 CN-5 19건 | BLOCKED-UI | 폼빌더 수치범위 미표현 | §6 컬럼 강제 / 폼빌더 확장(dev-handoff C-9) |
 | AMBIG 아크릴 5건 | 스코프 밖 | 단가 TBD(제약 아님) | 실무진 BLOCKED |
+
+---
+
+# ===== wave-3 증분 (PRD_000047 소량전단지 · CN-3 코팅×종이두께 1규칙) =====
+
+> §31 Phase 3 부분 재실행 · hcr-gate-validator · 2026-07-02 · 방법론 `hcr-gate-validation`(CR1~CR7).
+> designer 산출 전부 비신뢰 — 라이브 재유도·독립 스크립트·라이브 dryrun으로 전건 직접 재실측.
+> 대상 = `03_rules/wave3-dgp/` `R_EXCL_COATING_THIN_PAPER`(RULE_TYPE.02 금지·차단 종이 15종).
+
+## W0. 전체 판정 — **GO** (wave-3 1규칙)
+
+| 게이트 | 판정 | 근거(직접 재실측) |
+|--------|------|-------------------|
+| **CR1** 필요상황 충실 | **PASS** | 047→CN-3 귀속·권위 노트 실재(digital-print-l1.csv:200 `★종이두께선택시 : 180g이상 코팅가능`·red font·has_constraint_star)·.03→.02 전환 독립검증(옵션A RAW-ONLY 재현·의미 동등 0 불일치) |
+| **CR2** 정합·오차단 0 [HARD] | **PASS** | 라이브 재유도 스냅샷 0 드리프트·독립 gram 재파싱 15차단/32허용/0AMBIG 일치·굿즈오염 3종 240g(허용·차단목록 교집합 0)·전수 188조합 오차단 0·누락 0 |
+| **CR3** UI 역파싱 전수 | **PASS** | views.py `_parse_logic_to_conditions` 독립 재구현→PARSEABLE(그룹2·groupOps=['and']·g0 or/2·g1 or/15)·코팅2+종이15 전건 복원 |
+| **CR4** 가독성 | **PASS** | rule_cd `R_EXCL_*`(금지형 접두)·rule_nm/err_msg 쉬운 한국어·err_msg에 대안 2종("180g 이상으로 바꾸거나 코팅을 빼 주세요")·고객문 코드 미노출 |
+| **CR5** 이관 정합 | **N/A** | 옵션그룹 오용 이관 0건(순수 신규 CPQ 제약 mint) — 통과 위장 아님 |
+| **CR6** 등록 안전 | **PASS** | 라이브 search-before-mint 047 기존 0건·PK(prd_cd,rule_cd)·reg_dt DEFAULT now()·dryrun INSERT1/logic_type=object/ROLLBACK청결·멱등2회 active1/total1·undo 대칭(active0/soft_deleted1)·JSONB 500위험0 |
+| **CR7** 독립성·전달안 실재 | **PASS**(경미 doc 불일치 1) | 전 판정 직접 실측·047 옵션그룹/048·049 BLOCKED-UI 라이브 재확인·dev-handoff 근거 실재(wave-1 검증분 불변) |
+
+**UNVERIFIED 게이트 0 · HARD 게이트(CR2) PASS → wave-3 1규칙 GO.**
+GO분(`03_rules/wave3-dgp/apply-fix.sql`)만 인간 승인 큐로 → hcr-ui-registrar.
+**잔여 위험(GO 유지)**: wave-1과 동일 — `evaluate_price`/`simulate`가 제약 미참조. 위젯/주문이 `/validate/` 호출할 때만 실효(dev-handoff C-1·C-2·R-1~R-3). 규칙 자체 정확성·안전성은 GO.
+
+## W1. CR1 — 필요상황 충실 (PASS)
+
+- **CN 귀속**: 047 소량전단지 → CN-3(필수동반 코팅×종이두께). 근거 = `digital-print-l1.csv:200` 소량전단지 코팅(옵션) 노트 `★종이두께선택시 : 180g이상 코팅가능`(red font FFFF0000·`has_constraint_star: true`) — 권위 실재 재확인.
+- **라이브 구조 재확인**: 047 옵션그룹 = OPT_000059 인쇄(2)·OPT_000060 종이(47)·**OPT_000061 코팅(3)**·OPT_000062 후가공(2). 코팅 3항목 = 코팅없음(ref 없음)·유광(OPT_REF_DIM.04→PROC_000014)·무광(→PROC_000015) 라이브 재확인 → var 계약(sel_opts·mat_cd__usage_cd) 실재.
+- **.03→.02 전환 독립 검증**(designer 결정트리 재실측):
+  - **옵션 A**(단일 .03 "코팅→종이∈[32허용]"): 결과절이 `{"or":[32절]}` → 빌더 result 필드는 단일 {dim,val}만 담을 수 있어 result_dim 복원 실패 = **RAW-ONLY 재현**(designer 주장 확증).
+  - **의미 동등성**: C(.02) 차단집합 vs 의도 implication 차단집합 = 코팅선택 94조합 **불일치 0건**. 도메인(종이 47종=차단15∪허용32, AMBIG 0)에서 .02는 CN-3 implication과 완전 동등이며 미열거 종이엔 발동 안 함(오차단 방향으로 안전).
+- **판정 근거**: 규칙이 CN-3에 귀속·권위 근거 실재·규정 밖 규칙 0. RULE_TYPE 메커니즘이 CN 규정표(CN-3=.03)와 다르나(**.02 채택**), (a) [HARD] "UI-확인가능+오차단 금지"가 .03을 배제(RAW-ONLY), (b) 의미 동등 입증, (c) rule-spec §4에 "CN유형=CN-3·구현=.02" 명기 → **정당한 메커니즘 선택**(규정 위반 아님). → **PASS**.
+
+## W2. CR2 — 정합·오차단 0 [HARD] (PASS)
+
+- **① 스냅샷 신선도**: `derive_coating_paper.py` 라이브 재실행(2026-07-02 17:11) → 종이 47·차단 15·허용 32·AMBIG 0. 원 스냅샷(17:04)과 row 단위 diff = **IDENTICAL**, derived-rules.json = 타임스탬프 제외 **IDENTICAL**. 유도 후 옵션 변동 0.
+- **② 권위 임계 재확인**: `digital-print-l1.csv:200` "180g이상 코팅가능" → 임계 180g 원문 확증.
+- **③ 평량 전수 독립 재파싱**(derive의 parse_gram 미신뢰·별개 정규식): 47종 전건 gram 재추출 → 스냅샷 gram 불일치 **0건**. 차단 15종 전부 <180g, 허용 32종 전부 ≥180g. 규칙 thin_matkeys(15) ≡ 독립 차단목록(15) 차집합 양방향 공집합.
+- **④ 굿즈오염 3종**: MAT_000128/129/130 = 옵션명 스타드림(실버/골드/로즈쿼츠) **240g** → 전부 허용, 차단목록 교집합 **0**(자재마스터명 오염이 판정에 무영향 — 판정원=옵션명 평량).
+- **⑤ 병합 규칙집합 전수 평가**(독립 JSONLogic 평가기·코팅 4상태[유광/무광/코팅없음/미선택]×종이47 = **188조합**): 차단 30·통과 158. **오차단(false-positive·매출차단) 0 · 누락(막아야 하는데 통과) 0.** 차단 30 = 코팅2(유광·무광)×얇은종이15만. 코팅없음/미선택 상태는 전 종이 통과(안전 구조 실증).
+
+→ HARD 게이트 **PASS**.
+
+## W3. CR3 — UI 역파싱 전수 (PASS)
+
+- designer `parse_check.py` 미재사용. views.py:200-315 `_parse_logic_to_conditions`(RULE_TYPE.02 unwrap `logic.get("!")` 경로) **독립 재구현**으로 대조.
+- 결과: **PARSEABLE** · 그룹 2개(g0 op=or/rows=2 코팅, g1 op=or/rows=15 종이) · groupOps=['and'] · 코팅 2종(OPV_000280/281)+종이 15종 전건 빌더 복원 확인. raw 폴백 필요 0.
+- ★참고(플랫폼 한계): 빌더 result 필드가 단일 {dim,val}뿐이라 "X→Y∈[리스트]" 형태 .01/.03 implication은 역파싱 불가(W1 옵션A) — .02 complement-금지 모델링이 정답. dev-handoff 증분(C-10)에 기록.
+
+## W4. CR4 — 가독성 (PASS)
+
+- rule_cd `R_EXCL_COATING_THIN_PAPER` — 금지형 `R_EXCL_` 접두 규약(시나리오 R_REQ_는 필수동반 가정·.02 채택에 맞춰 정정).
+- rule_nm `[제약조건] 코팅은 두꺼운 종이(180g 이상)에서만 가능` — 쉬운 한국어.
+- err_msg `코팅은 두꺼운 종이(180g 이상)에서만 가능합니다. 종이를 180g 이상으로 바꾸거나 코팅을 빼 주세요.` — **왜**(두꺼운 종이 필요)+**대안 2종**(종이 상향/코팅 제거) 포함. 고객문에 MAT_/OPV_/PROC_ 코드 미노출.
+
+## W5. CR5 — 이관 정합 (N/A)
+
+- wave-3 옵션그룹 오용 이관(CN-6) 설계 0건. 순수 신규 CPQ 제약 mint 1건(047 기존 제약 0). 이관 대상 없음 → **N/A 명시**(통과 위장 아님).
+
+## W6. CR6 — 등록 안전 (PASS)
+
+- **search-before-mint**: 라이브 `t_prd_product_constraints WHERE prd_cd='PRD_000047'` = **0행** → 순수 신규 mint·rule_cd 충돌 없음.
+- **멱등 구조**: PK `(prd_cd, rule_cd)` 실재 → `ON CONFLICT (prd_cd,rule_cd) DO UPDATE` 유효. dryrun 내 fix 본문 2회 적용 → active=1·total=1·중복 0.
+- **컬럼 정합**: `reg_dt` NOT NULL DEFAULT now()(INSERT 생략 무결)·disp_seq/upd_dt nullable.
+- **dryrun 라이브 재실증**: `apply-dryrun.sql` BEGIN…ROLLBACK → INSERT 1·활성 1·`logic_type=object`·ROLLBACK 무기록.
+- **undo 대칭**: undo 본문 실행 후 active=0·soft_deleted=1(신규 규칙 논리삭제·047 이전 제약 없어 복원 대상 없음 — 대칭 정합).
+- **validate 시뮬**: 로컬 JSONLogic로 막힘(유광+백색모조지100g)·통과(유광+두꺼운종이)·통과2(코팅없음+얇은종이) 전건 재현. 결측키 평가 예외 없음.
+- **500 위험 0**: JSONB 캐스팅 정상(object)·var 계약 내 키만(sel_opts 배열 in·mat_cd__usage_cd 문자열 ===)·숫자형 var 미사용(타입 불일치 0). 결측키 시 조용 통과는 플랫폼 C-3 이슈(이 규칙 구조 결함 아님).
+
+재현:
+```
+psql -f 03_rules/wave3-dgp/apply-dryrun.sql   # BEGIN…ROLLBACK
+# 멱등+undo: BEGIN; <fix본문>×2; SELECT active/total; <undo본문>; ROLLBACK;
+python3 03_rules/wave3-dgp/derive_coating_paper.py   # 재유도 0 드리프트
+```
+
+## W7. CR7 — 독립성·전달안 실재 (PASS · 경미 doc 불일치 1)
+
+- 전 판정이 재인용 아닌 직접 실측(라이브 재유도·독립 스크립트·라이브 dryrun·라이브 SELECT).
+- dgp-resolution 근거 실재: 권위 노트(:200) 확인·047 옵션그룹 실재·**048/049 옵션그룹 0행**(BLOCKED-UI 정당) 라이브 재확인. PROMOTE 1/BLOCKED-UI 2 표본 재확인 통과.
+- dev-handoff-final 근거(파일:라인)는 wave-1에서 전건 실재 확인·wave-3 미변경.
+- ★**경미 doc 불일치**(비-load-bearing): `rule-spec.md §3 line 104` pass_case를 `MAT_000079`(아트지 180g)로 표기했으나 `derived-rules.json` pass_case = `MAT_000074`(백색모조지 220g). 둘 다 허용(≥180)·규칙 거동 동일·적재 SQL은 json 기준이라 무영향. 문서 표기만 정정 권고(GO 불변).
+
+## W8. NO-GO / 라우팅 (wave-3)
+
+| 항목 | 판정 | 사유 | 라우팅 |
+|------|------|------|--------|
+| wave-3 `R_EXCL_COATING_THIN_PAPER` | **GO** | CR1~CR7 통과(CR5 N/A) | 인간 승인 → hcr-ui-registrar(apply-fix.sql COMMIT + webadmin 실화면 재현) |
+| 048·049 코팅×종이두께 | BLOCKED-UI | 코팅/종이 옵션그룹 0건 | §7 옵션그룹 선적재 후 047 동형 유도(derive PRD/그룹 파라미터 교체) |
+| AMBIG 5건(043·046·018·041·042) | 스코프 밖 | 커팅×사이즈 매핑 미명시·오시×미싱 권위 부재 | 실무진 컨펌 큐(Q-DGP-CUTSIZE·Q-DGP-OSMS) |

@@ -11,6 +11,7 @@
 |------|------|-------------|-------------|------|
 | **wave-1 파일럿** | 129 폼보드·130 포맥스보드 CN-2 | **8** (상품당 4) | **8 셀** (오프대각) | 단가행 자동유도·전건 폼빌더 역파싱 가능 |
 | **wave-2 CN-5** | nonspec 자유치수 High 19건 | **0** | — | 전건 BLOCKED-UI(범위=raw-only) |
+| **wave-3 DGP** | 047 소량전단지 CN-3 코팅×종이두께 | **1** | **30** (코팅2×얇은종이15) | 옵션명 평량 자동유도·AMBIG 0·금지형(.02) 채택 |
 | **부수 점검** | 016·058 기존 규칙 | 점검 3건 | — | 016 PASS×2 · 058 FAIL(CONFIRM-QUEUE) |
 
 ## wave-1 상세 (설계·산출 GO)
@@ -40,6 +41,27 @@
 - **해소 경로(하네스 밖)**: ① §6 위젯이 `nonspec_*_min/max/incr` 컬럼으로 입력 직접 강제(규칙 불요·최단),
   ② 폼빌더에 수치범위 조건 타입 추가(개발 요청) 시 19건+기존 7건 UI-관리 가능.
 - 산출: `wave2-cn5/rule-spec.md`(판정·목록·라우팅).
+
+## wave-3 상세 (설계·산출 GO — `wave3-dgp/`)
+
+- **대상:** `01_scenario/dgp-constraint-resolution.md` §1.1 PROMOTE 1건(047 소량전단지 M5 코팅×종이두께).
+- **유도(자동):** 라이브 종이 47종 옵션명(전부 평량 g 명시) 파싱 → 차단 15종(<180g)·허용 32종(≥180g)·
+  **AMBIG 0**. 코팅 선택집합 = 유광 OPV_000280·무광 OPV_000281(코팅없음 OPV_000279 제외). 종이는
+  ref_dim_cd=OPT_REF_DIM.03 으로 `mat_cd__usage_cd` 환원 → var 로 사용. 재생성=`derive_coating_paper.py`.
+- **shape 결정(결정트리·rule-spec §2):** 시나리오는 CN-3 필수동반/implication 표기였으나 결과절이
+  32-리스트라 단일 .03(A안)=RAW-ONLY(반려), .03 대우명제(B안)=기본값 sel_opts 직렬화 의존→오차단 위험(반려),
+  **금지형 .02(C안)=역파싱 가능+안전** 채택. 코팅을 적극 선택했을 때만 발동 → 정당조합 오차단 구조적 불가
+  ([HARD] 준수). rule_cd 접두=`R_EXCL_*`(금지형).
+- **설계 규칙 = 1건** `R_EXCL_COATING_THIN_PAPER`(RULE_TYPE.02). 막는 조합 = 코팅 2 × 얇은종이 15 = **30**.
+  허용(코팅2×두꺼운종이32=64) 오차단 0.
+- **정형성 자가검사:** `parse_check.py`(views.py `_parse_logic_to_conditions` verbatim) → **1/1 PARSEABLE**
+  (그룹 2개: 코팅 or-2 · 종이 or-15, groupOps=['and']) · 막힘/통과/통과2 전건 재현 True.
+- **search-before-mint:** 047 기존 제약 0건 → 논리삭제 대상 없음·순수 신규 mint 1건. 멱등 UPSERT.
+- **dryrun 실증:** `apply-dryrun.sql` 라이브 실행(BEGIN…ROLLBACK) — INSERT 1·멱등 2회 동일·JSONB 캐스팅
+  정상(logic_type=object·500 위험 없음)·ROLLBACK 무기록.
+- **동형 확장:** 048·049(BLOCKED-UI)는 §7 옵션그룹 선적재 후 스크립트 파라미터만 바꿔 동형 생성 가능.
+- 산출: `wave3-dgp/`(rule-spec.md·rules.csv·derive_coating_paper.py·derive-snapshot.csv·derived-rules.json·
+  gen_sql.py·parse_check.py·apply-dryrun.sql·apply-fix.sql·undo.sql).
 
 ## 부수 점검 상세 (016·058 — `wave1-pilot/conformance-check.md`)
 
