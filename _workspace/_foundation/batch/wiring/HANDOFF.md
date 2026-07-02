@@ -1,3 +1,52 @@
+# 배선 연결 서브트랙 HANDOFF — 2026-07-02(7세션·전수 수렴) 갱신
+
+## ★7세션 요약 (2026-07-02) — 전수 수렴 라운드: 데이터로 닫을 수 있는 배선 결함 0 달성
+
+**출발점(사용자 directive)**: "전체 상품 — 구성요소·가격공식·가격구성요소 전수 진단·교정 → 적대적 검증 루프
+(오류 0까지) → 라이브 적재 후 webadmin 실화면 검증 후 단계 진행."
+
+**측정(신선 스냅샷 2회·결정론)**:
+- `wiring_scan --round 21`(snap_1034): 결함 10 = 고아 3·빈배선 6(*_TBD)·삭제오염 1.
+- `set_full_scan`(셋트 19): §23 전수진단 정본과 정합 — 신규 결함 0(094/097/100 "0원"=set_selections 미충전 스캐너 한계 FP).
+- `contribution_sim_scan`(단순 120 F층): HIGH 13건/7상품 → **표적 실측으로 진짜 2상품만 확정**(아래), 나머지 FP 반증
+  (017 코팅=coat detail 전달 시 7,200/14,400 정상 발현·040 CL=opt 택일 7/1 골든 기검증·020 DIGITAL=CMYK 미제공 상품).
+
+**교정 5건 COMMIT (conv21-260702-fix.sql·백업 conv21-backup-260702.txt·undo 보존·codex high 교차검증 7/8 AGREE·사용자 승인)**:
+1. **삭제오염 복원**: COMP_BIND_HC_TWINRING del_yn Y→N (082 셋트 공식이 참조 중이던 6/17 논리삭제분·가격 무변화 위생).
+2. **110 엽서캘린더 인쇄비 영구0 교정**: PROC_000004(디지털인쇄 base) 미등록이 병인 — 7/1 캘린더 세션에서 108/109만
+   등록되고 110 누락. 1행 INSERT(Y,-1). qty100 **1,057→16,357원**(인쇄비 15,300 발현).
+3. **020 화이트인쇄엽서 SPOT 영구0 교정**: print_options 0건이 병인(SPOT comp가 print_opt_cd 차원 요구) —
+   021/022 동형 단면(POPT_000001·dflt Y)/양면(POPT_000002·N) 등록. 별색인쇄비 단면 13,500/양면 27,000 발현.
+4. **고아 3 은퇴(use_yn=N·삭제 0)**: FOLD_CARD_3H(리플렛 3FOLD 48/48 verbatim 동일=중복)·FOAMBOARD BLACK/WHITE
+   (BOARD(mat×siz)로 대체·WHITE는 구 사이즈 키 영구 NO_MATCH 지뢰) + WHITE stale 배선 DELETE.
+5. **포맥스(130) 5mm 두께축 BOARD 동형 확장**: 실무진 등록 자재 4종(MAT_000022/554/23/555) 재사용(mint 0)·
+   COMP_POSTER_FOMEXBOARD_BOARD(mat×siz) 신설+단가 4행 verbatim(8500/13000/10000/16000)+배선·구 WHITE3MM 배선
+   DELETE(이중합산 차단)+구 comp 2종 은퇴. codex가 실행 리스크(자재 미선택 호출=0원) 지적 → reconcile: 폼보드
+   기채택·검증된 동일 모델 특성으로 판정·사용자 전체 승인.
+
+**검증(3중)**: ① dryrun 어서션 V1~V7 전건 PASS(disjoint 4/4) ② `conv21_postverify.py` ALL PASS(110/020/130 골든+
+129 폼보드 회귀 4조합+048 회귀) ③ **webadmin 가격시뮬레이터 실화면**[HARD]: 110=16,357(제외0)·020=10,628
+(별색 6,900 발현·제외0)·130 3mm=8,500/5mm=10,000(제외0). 스크린샷 /tmp/sim-130-5mm-pass.png 등.
+
+**재스캔 `--round 22`(snap_1119): 결함 6 = 전부 아크릴 *_TBD 빈배선(실무진 단가 대기 BLOCKED)** — 고아 0·
+삭제오염 0·미배선공식 0. **데이터로 닫을 수 있는 배선 결함 0 도달**(종료척도 잔여분모=실무진 답변만).
+
+**다음 시작점**:
+1. `contribution_sim_scan.py` 재실행해 110/020 HIGH 소멸 공식 확인(재스캔 미실행분·5분).
+2. 실무진 답변 수신 시: 아크릴 *_TBD 6건(단가/구성) + §23 088 질문서 5항 해소 → wiring 결함 0 완성.
+3. 컨펌큐(report-only·conv21-design §4): 포맥스 A1 3종 미적재(§26)·포맥스 3mm 권위충돌(마스터 8,300/11,500 vs
+   가격표·DB 8,500/13,000)·mat×siz 교차조합 0원 위젯 제약(§6)·028 미니접지카드 접지옵션(미출시).
+
+**이번 세션 결정**: 포맥스=폼보드 BOARD 모델 동형 통일(사용자 승인·codex 우려는 기채택 특성으로 reconcile)·
+FP 판정은 반드시 표적 실측(payload에 base proc 유지+detail 전달)으로 반증 후 확정·codex "놓친 후보"는
+legit_unused 화이트리스트 의미론 재확인으로 기각.
+
+**건드리지 말 것(7세션 COMMIT·실화면 검증 완료)**: 110 PROC_000004·020 POPT 2행·COMP_POSTER_FOMEXBOARD_BOARD
+(+단가 4행·배선)·COMP_BIND_HC_TWINRING del_yn=N·은퇴 5comp(use_yn=N·note 마커 '[use_yn=N 260702')·
+undo=`conv21-260702-undo.sql`. 산출물=conv21-design-260702.md·conv21-codex-reconcile-260702.md.
+
+---
+
 # 배선 연결 서브트랙 HANDOFF — 2026-07-02(6세션) 갱신
 
 ## ★6세션 요약 (2026-07-02) — CONFIRM 12건 전부 해소 + 스티커 4상품 사이즈 재키잉 파손 복구

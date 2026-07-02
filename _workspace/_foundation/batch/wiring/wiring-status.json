@@ -1,43 +1,21 @@
 {
  "summary": {
   "source": "snapshot",
-  "snap": "snap_20260702_0042",
-  "formulas": 105,
+  "snap": "snap_20260702_1119",
+  "formulas": 106,
   "wired_links": 249,
-  "components_total": 182,
-  "components_with_price": 178,
-  "components_wired": 138,
-  "orphan_comps": 3,
+  "components_total": 183,
+  "components_with_price": 179,
+  "components_wired": 137,
+  "orphan_comps": 0,
   "legit_unused": 7,
   "dead_wires": 6,
-  "deleted_wires": 1,
+  "deleted_wires": 0,
   "no_formula_products": 0,
-  "total_wiring_defects": 10,
-  "verdict": "NO-GO(결함 10)"
+  "total_wiring_defects": 6,
+  "verdict": "NO-GO(결함 6)"
  },
- "orphans": [
-  {
-   "comp_cd": "COMP_FOLD_CARD_3H",
-   "comp_nm": "접지비 카드 3단",
-   "price_rows": 48,
-   "prc_typ": ".01",
-   "use_dims": "[\"min_qty\"]"
-  },
-  {
-   "comp_cd": "COMP_POSTER_FOAMBOARD_BLACK",
-   "comp_nm": "폼보드(블랙) 완제품가",
-   "price_rows": 2,
-   "prc_typ": ".01",
-   "use_dims": "[\"siz_cd\"]"
-  },
-  {
-   "comp_cd": "COMP_POSTER_FOMEXBOARD_WHITE5MM",
-   "comp_nm": "포맥스보드(화이트5mm) 완제품가",
-   "price_rows": 2,
-   "prc_typ": ".01",
-   "use_dims": "[\"siz_cd\"]"
-  }
- ],
+ "orphans": [],
  "legit_unused": [
   {
    "comp_cd": "COMP_ACRYL_MIRROR3T",
@@ -135,13 +113,7 @@
    "comp_nm": "단가/구성 확인필요 (실무진)"
   }
  ],
- "deleted_wires": [
-  {
-   "frm_cd": "PRF_HC_TWINRING_SET",
-   "comp_cd": "COMP_BIND_HC_TWINRING",
-   "comp_nm": "제본비 하드커버트윈링"
-  }
- ],
+ "deleted_wires": [],
  "products": {
   "PRD_000016": {
    "frm_cds": [
@@ -669,8 +641,17 @@
    ],
    "wired": 1,
    "dead": 0,
-   "deleted": 1,
-   "status": "BROKEN"
+   "deleted": 0,
+   "status": "WIRED_OK"
+  },
+  "PRD_000088": {
+   "frm_cds": [
+    "PRF_LEATHER_RINGBINDER_SET"
+   ],
+   "wired": 1,
+   "dead": 0,
+   "deleted": 0,
+   "status": "WIRED_OK"
   },
   "PRD_000094": {
    "frm_cds": [
@@ -856,7 +837,7 @@
    "frm_cds": [
     "PRF_POSTER_FOAMBOARD"
    ],
-   "wired": 2,
+   "wired": 1,
    "dead": 0,
    "deleted": 0,
    "status": "WIRED_OK"

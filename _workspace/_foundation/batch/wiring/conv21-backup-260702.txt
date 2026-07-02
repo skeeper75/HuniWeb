@@ -1,0 +1,25 @@
+== t_prc_price_components (대상 comp 7) ==
+comp_cd|comp_nm|comp_typ_cd|note|use_yn|reg_dt|upd_dt|prc_typ_cd|use_dims|del_yn|del_dt
+COMP_FOLD_CARD_3H|접지비 카드 3단|PRC_COMPONENT_TYPE.04|접지(접는 가공)비(후가공). 접지 종류·주문수량 구간별 작업 1건 고정 금액(수량을 곱하지 않음).|Y|2026-06-06 11:30:40.467045|2026-06-17 22:03:47.160763|PRICE_TYPE.01|["min_qty"]|N|
+COMP_BIND_HC_TWINRING|제본비 하드커버트윈링|PRC_COMPONENT_TYPE.04|제본 가공비(후가공). 제본 종류·수량별 단가표.|Y|2026-06-06 11:30:40.467045|2026-06-17 22:03:47.160763|PRICE_TYPE.01|["proc_cd", "min_qty", "proc_grp:PROC_000017"]|Y|2026-06-17 15:31:27.294557
+COMP_POSTER_FOMEXBOARD_WHITE3MM|포맥스보드(화이트3mm) 완제품가|PRC_COMPONENT_TYPE.06|포스터·사인 완제품가(소재+출력+가공 포함 통가격). 사이즈·수량별 단가표.|Y|2026-06-06 11:30:40.467045|2026-06-17 22:03:47.160763|PRICE_TYPE.01|["siz_cd"]|N|
+COMP_POSTER_FOMEXBOARD_WHITE5MM|포맥스보드(화이트5mm) 완제품가|PRC_COMPONENT_TYPE.06|포스터·사인 완제품가(소재+출력+가공 포함 통가격). 사이즈·수량별 단가표.|Y|2026-06-06 11:30:40.467045|2026-06-17 22:03:47.160763|PRICE_TYPE.01|["siz_cd"]|N|
+COMP_POSTER_FOAMBOARD_BLACK|폼보드(블랙) 완제품가|PRC_COMPONENT_TYPE.06|포스터·사인 완제품가(소재+출력+가공 포함 통가격). 사이즈·수량별 단가표.|Y|2026-06-06 11:30:40.467045|2026-06-17 22:03:47.160763|PRICE_TYPE.01|["siz_cd"]|N|
+COMP_POSTER_FOAMBOARD_WHITE|폼보드(화이트) 완제품가|PRC_COMPONENT_TYPE.06|포스터·사인 완제품가(소재+출력+가공 포함 통가격). 사이즈·수량별 단가표.|Y|2026-06-06 11:30:40.467045|2026-06-17 22:03:47.160763|PRICE_TYPE.01|["siz_cd"]|N|
+(6 rows)
+== t_prc_formula_components (두 공식) ==
+frm_cd|comp_cd|disp_seq|addtn_yn|reg_dt|upd_dt
+PRF_POSTER_FOAMBOARD|COMP_POSTER_FOAMBOARD_WHITE|1|Y|2026-06-17 13:00:58.993206|2026-06-18 20:31:50.050932
+PRF_POSTER_FOMEXBOARD|COMP_POSTER_FOMEXBOARD_WHITE3MM|1|Y|2026-06-17 13:00:58.993206|2026-06-18 20:31:38.267558
+PRF_POSTER_FOAMBOARD|COMP_POSTER_FOAMBOARD_BOARD|2|Y|2026-07-01 15:38:41.774157|
+(3 rows)
+== 110 procs ==
+prd_cd|proc_cd|mand_proc_yn|disp_seq|reg_dt|upd_dt|del_yn|del_dt
+PRD_000110|PROC_000079|N|1|2026-06-03 12:46:02.974607||N|
+(1 row)
+== 020 popts ==
+prd_cd|opt_id|print_side|front_colrcnt_cd|back_colrcnt_cd|dflt_yn|disp_seq|reg_dt|upd_dt|del_yn|del_dt|print_opt_cd
+(0 rows)
+== 130 mats ==
+prd_cd|mat_cd|usage_cd|dflt_yn|disp_seq|reg_dt|upd_dt|del_yn|del_dt
+(0 rows)
