@@ -407,6 +407,16 @@ To use MoAI workflows explicitly, invoke the `moai` skill (`/moai plan|run|sync|
 The full original directive (all 17 sections, verbatim) is archived at
 `.moai/_archive/CLAUDE-full-moai-2026-06-05.md` — restore from there or `git revert` if needed.
 
+## 31. Harness: Huni-Constraint-Rules (제약규칙 거버넌스 · UI-확인가능 등록)
+
+**목표:** 전 상품의 제약조건이 되는 부분을 찾아 webadmin 제약규칙(`t_prd_product_constraints`·JSONLogic)으로 등록하되, ★[HARD] **규칙·차원을 UI(폼빌더)에서 확인·조정 가능한 정형 shape로만** 작성한다(raw JSONLogic escape hatch 금지 — JSON은 프로그램용, 사람은 UI로 본다는 사용자 directive). "제약규칙이 필요한 상황"을 **CN-1~CN-6 분류체계**(물리불가·단가행 부재 엇갈림·필수동반·상호배제·범위증분·옵션그룹 오용 이관)로 먼저 규정한 후 작성하고, ★옵션그룹이 제약 역할을 대행해 관리가 어려워진 오용 사례를 정규 옵션그룹+명시 제약으로 이관한다. CPQ 베스트프랙티스 리서치로 개발자 전달 문서(잘된점·개선/보완/강화/수정·★시각화 보완강화·validate 강제 지점 로드맵)까지 산출. 파일럿=129 폼보드·130 포맥스보드 제약조건데모 수정 → 전 상품 데모형 전파.
+
+**트리거:** "제약규칙", "제약조건 등록", "제약규칙 작성/수정", "포맥스 제약 수정", "제약조건데모", "전 상품 제약", "옵션그룹 제약 이관", "제약 필요상황 규정", "CPQ 베스트프랙티스", "제약 시각화 강화", "제약 개발자 전달", "제약 하네스 실행/재실행/업데이트/보완", "특정 상품만 제약" 등 본 도메인 요청 시 `huni-constraint-rules-orchestrator` 스킬을 사용. 제약 정합 "검증만"은 §21(hcc-cpq-link), 위젯/주문 validate 강제 구현은 §6/§24 위임. 단순 질문은 직접 응답.
+
+**산출물 루트:** `_workspace/huni-constraint-rules/` (01_scenario·02_research·03_rules·04_register·05_gate·_meta). 5인 팀(`hcr-scenario-curator`∥`hcr-cpq-researcher` 기준점 팬아웃 → `hcr-rule-designer` 설계 → `hcr-gate-validator` CR1~CR7 게이트 → 인간 승인 → `hcr-ui-registrar` 등록+실화면 4항 검증). 핵심 결정: ① 규정 먼저(규정 밖 규칙 금지) ② 완료 정의=UI에서 읽고 조정 가능한 상태(DB 행 아님) ③ CN-2 엇갈림은 단가행 자동 유도(수동 나열 drift 금지) ④ 오차단 0이 최우선(정당 조합 차단=매출 차단·CR2) ⑤ evaluate_price는 제약 미참조 — 가격 0원은 §26/§27, validate 강제는 §6 라우팅 ⑥ 생성≠검증·COMMIT은 t_prd_product_constraints만·백업/DRY-RUN/undo/실화면(§1). 자격증명 `.env.local` RAILWAY_DB_*·HUNI_ADMIN_*. 구조 계약=[[constraint-builder-contract-demo-260702]].
+
+**변경이력:** 최신: 2026-07-02 하네스 초기 구성(5 에이전트+5 스킬·CN-1~CN-6·CR1~CR7) → 첫 실행 시 `_workspace/huni-constraint-rules/CHANGELOG.md`
+
 When editing this file: it must stay lean. Keep only always-apply rules, the handoff
 routine, and the three harness sections. Move any growing detail into the relevant
 harness workspace and leave a pointer here.
