@@ -1,0 +1,430 @@
+{"dst": "component-COMP_PRINT_DIGITAL_S1", "note": "미바인딩=인쇄비 영구 0 → 정상화", "origin": "doc", "qualifier": null, "rel": "decided_because", "source_node": "DEC_baseproc_260701", "src": "DEC_baseproc_260701"}
+{"dst": "process-PROC_000004", "note": "디지털인쇄 base 공정 mand 바인딩 추가", "origin": "doc", "qualifier": null, "rel": "decided_because", "source_node": "DEC_baseproc_260701", "src": "DEC_baseproc_260701"}
+{"dst": "component-COMP_PP_CORNER_RIGHT", "note": "1건 고정금액 ×수량 100~1000배 과대청구 해소", "origin": "doc", "qualifier": null, "rel": "decided_because", "source_node": "DEC_corner_260702", "src": "DEC_corner_260702"}
+{"dst": "component-COMP_CUT_FULL_DIECUT", "note": "prc_typ .01→.03 고정(이중적용 과대청구 해소)", "origin": "doc", "qualifier": null, "rel": "decided_because", "source_node": "DEC_diecut_260701", "src": "DEC_diecut_260701"}
+{"dst": "process-PROC_000053", "note": "완칼 공정", "origin": "doc", "qualifier": null, "rel": "decided_because", "source_node": "DEC_diecut_260701", "src": "DEC_diecut_260701"}
+{"dst": "component-COMP_NAMECARD_COAT_S1", "note": "단면 완제품가(용지포함) 배선", "origin": "doc", "qualifier": null, "rel": "decided_because", "source_node": "DEC_namecard032_wiring_260630", "src": "DEC_namecard032_wiring_260630"}
+{"dst": "component-COMP_NAMECARD_COAT_S2", "note": "양면 완제품가(용지포함) 배선", "origin": "doc", "qualifier": null, "rel": "decided_because", "source_node": "DEC_namecard032_wiring_260630", "src": "DEC_namecard032_wiring_260630"}
+{"dst": "plate-OUTPUT_PAPER_TYPE_01", "note": "출력용지 판걸이수 계산 정본화", "origin": "doc", "qualifier": null, "rel": "decided_because", "source_node": "DEC_pansu_260701", "src": "DEC_pansu_260701"}
+{"dst": "size-SIZ_000001", "note": "사이즈별 수량규칙 49행 충전(판형별 min 상이)", "origin": "doc", "qualifier": null, "rel": "decided_because", "source_node": "DEC_qty_audit_260702", "src": "DEC_qty_audit_260702"}
+{"dst": "component-COMP_PRINT_SPOT_WHITE_S1", "note": "5별색×단면양면 통합 1 component(개별 CLEAR/GOLD use=N)·이중과금 가드", "origin": "doc", "qualifier": null, "rel": "decided_because", "source_node": "DEC_spotwhite_260630", "src": "DEC_spotwhite_260630"}
+{"dst": "component-COMP_PAPER", "note": "배선 수렴 종료척도=결함 0+PRICE≠0", "origin": "doc", "qualifier": null, "rel": "decided_because", "source_node": "DEC_wiring_round22_260702", "src": "DEC_wiring_round22_260702"}
+{"dst": "material-MAT_000074", "note": "대표 배선 축 노드(같은 016 종이 옵션풀)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "GAP_016_material", "src": "GAP_016_material"}
+{"dst": "optgroup-032-coating", "note": "이 옵션 그룹의 면수 파라미터 공백", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "GAP_032_coat_side", "src": "GAP_032_coat_side"}
+{"dst": "component-COMP_CUT_PERF_1H6", "note": "배선된 타공비 구성요소", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "GAP_043_perf_process", "src": "GAP_043_perf_process"}
+{"dst": "process-PROC_000079", "note": "발현 조건 공정(미등록)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "GAP_043_perf_process", "src": "GAP_043_perf_process"}
+{"dst": "product-043-bg-opp", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "GAP_043_perf_process", "src": "GAP_043_perf_process"}
+{"dst": "optgroup-041-finish", "note": "이 옵션그룹의 파라미터 보존 공백", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "GAP_finish_param_041", "src": "GAP_finish_param_041"}
+{"dst": "size-SIZ_000001", "note": "판걸이수는 이 사이즈(73x98)의 파생값", "origin": "derived", "qualifier": null, "rel": "derived_from", "source_node": "GAP_pansu_73x98", "src": "GAP_pansu_73x98"}
+{"dst": "category-CAT_000062", "note": "쿠폰/상품권", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "INTENT_cafe_opening", "src": "INTENT_cafe_opening"}
+{"dst": "category-CAT_000307", "note": "엽서(오픈 안내·쿠폰)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "INTENT_cafe_opening", "src": "INTENT_cafe_opening"}
+{"dst": "category-CAT_000307", "note": "프리미엄엽서", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "INTENT_premium", "src": "INTENT_premium"}
+{"dst": "category-CAT_000313", "note": "명함(프리미엄·펄·박)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "INTENT_premium", "src": "INTENT_premium"}
+{"dst": "category-CAT_000001", "note": "엽서/카드 계열", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "INTENT_wedding", "src": "INTENT_wedding"}
+{"dst": "category-CAT_000307", "note": "엽서/청첩 카드", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "INTENT_wedding", "src": "INTENT_wedding"}
+{"dst": "TERM_pansu", "note": "투영 라벨", "origin": "derived", "qualifier": null, "rel": "alias_of", "source_node": "TERM_pansu", "src": "aliaslabel:UP수"}
+{"dst": "TERM_atomic_sum", "note": "투영 라벨", "origin": "derived", "qualifier": null, "rel": "alias_of", "source_node": "TERM_atomic_sum", "src": "aliaslabel:atomic sum"}
+{"dst": "TERM_die_cut", "note": "투영 라벨", "origin": "derived", "qualifier": null, "rel": "alias_of", "source_node": "TERM_die_cut", "src": "aliaslabel:die-cut"}
+{"dst": "TERM_spot_color", "note": "투영 라벨", "origin": "derived", "qualifier": null, "rel": "alias_of", "source_node": "TERM_spot_color", "src": "aliaslabel:spot color"}
+{"dst": "TERM_die_cut", "note": "투영 라벨", "origin": "derived", "qualifier": null, "rel": "alias_of", "source_node": "TERM_die_cut", "src": "aliaslabel:도무송"}
+{"dst": "TERM_digital_print", "note": "투영 라벨", "origin": "derived", "qualifier": null, "rel": "alias_of", "source_node": "TERM_digital_print", "src": "aliaslabel:디지털 인쇄"}
+{"dst": "TERM_digital_print", "note": "투영 라벨", "origin": "derived", "qualifier": null, "rel": "alias_of", "source_node": "TERM_digital_print", "src": "aliaslabel:디지털출력"}
+{"dst": "TERM_digital_print", "note": "투영 라벨", "origin": "derived", "qualifier": null, "rel": "alias_of", "source_node": "TERM_digital_print", "src": "aliaslabel:디지털프린팅"}
+{"dst": "TERM_corner_round", "note": "투영 라벨", "origin": "derived", "qualifier": null, "rel": "alias_of", "source_node": "TERM_corner_round", "src": "aliaslabel:라운딩"}
+{"dst": "TERM_corner_round", "note": "투영 라벨", "origin": "derived", "qualifier": null, "rel": "alias_of", "source_node": "TERM_corner_round", "src": "aliaslabel:모서리둥글리기"}
+{"dst": "TERM_corner_round", "note": "투영 라벨", "origin": "derived", "qualifier": null, "rel": "alias_of", "source_node": "TERM_corner_round", "src": "aliaslabel:모서리라운딩"}
+{"dst": "TERM_spot_color", "note": "투영 라벨", "origin": "derived", "qualifier": null, "rel": "alias_of", "source_node": "TERM_spot_color", "src": "aliaslabel:스팟"}
+{"dst": "TERM_spot_color", "note": "투영 라벨", "origin": "derived", "qualifier": null, "rel": "alias_of", "source_node": "TERM_spot_color", "src": "aliaslabel:스팟컬러"}
+{"dst": "TERM_die_cut", "note": "투영 라벨", "origin": "derived", "qualifier": null, "rel": "alias_of", "source_node": "TERM_die_cut", "src": "aliaslabel:완칼따기"}
+{"dst": "TERM_atomic_sum", "note": "투영 라벨", "origin": "derived", "qualifier": null, "rel": "alias_of", "source_node": "TERM_atomic_sum", "src": "aliaslabel:원자합산"}
+{"dst": "TERM_pansu", "note": "투영 라벨", "origin": "derived", "qualifier": null, "rel": "alias_of", "source_node": "TERM_pansu", "src": "aliaslabel:절수"}
+{"dst": "TERM_plate", "note": "투영 라벨", "origin": "derived", "qualifier": null, "rel": "alias_of", "source_node": "TERM_plate", "src": "aliaslabel:출력용지규격"}
+{"dst": "TERM_plate", "note": "투영 라벨", "origin": "derived", "qualifier": null, "rel": "alias_of", "source_node": "TERM_plate", "src": "aliaslabel:출력판형"}
+{"dst": "TERM_pansu", "note": "투영 라벨", "origin": "derived", "qualifier": null, "rel": "alias_of", "source_node": "TERM_pansu", "src": "aliaslabel:판수"}
+{"dst": "optgroup-016-crease", "note": "오시", "origin": "fk", "qualifier": null, "rel": "constrains", "source_node": "constraint-016-demo-exc", "src": "constraint-016-demo-exc"}
+{"dst": "optgroup-016-perf", "note": "미싱", "origin": "fk", "qualifier": null, "rel": "constrains", "source_node": "constraint-016-demo-exc", "src": "constraint-016-demo-exc"}
+{"dst": "optgroup-016-vartext", "note": "양면(POPT_000002)일 때 가변텍스트 노출", "origin": "fk", "qualifier": null, "rel": "constrains", "source_node": "constraint-016-demo-vis", "src": "constraint-016-demo-vis"}
+{"dst": "component-COMP_COAT_GLOSSY", "note": null, "origin": "fk", "qualifier": null, "rel": "has_component", "source_node": "formula-PRF_DGP_A", "src": "formula-PRF_DGP_A"}
+{"dst": "component-COMP_COAT_MATTE", "note": null, "origin": "fk", "qualifier": null, "rel": "has_component", "source_node": "formula-PRF_DGP_A", "src": "formula-PRF_DGP_A"}
+{"dst": "component-COMP_PAPER", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 2}, "rel": "has_component", "source_node": "formula-PRF_DGP_A", "src": "formula-PRF_DGP_A"}
+{"dst": "component-COMP_PP_CORNER_RIGHT", "note": null, "origin": "fk", "qualifier": {"disp_seq": 3}, "rel": "has_component", "source_node": "formula-PRF_DGP_A", "src": "formula-PRF_DGP_A"}
+{"dst": "component-COMP_PP_CREASE_1L", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 4}, "rel": "has_component", "source_node": "formula-PRF_DGP_A", "src": "formula-PRF_DGP_A"}
+{"dst": "component-COMP_PP_PERF_1L", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 5}, "rel": "has_component", "source_node": "formula-PRF_DGP_A", "src": "formula-PRF_DGP_A"}
+{"dst": "component-COMP_PP_VARIMG_1EA", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 7}, "rel": "has_component", "source_node": "formula-PRF_DGP_A", "src": "formula-PRF_DGP_A"}
+{"dst": "component-COMP_PP_VARTEXT_1EA", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 6}, "rel": "has_component", "source_node": "formula-PRF_DGP_A", "src": "formula-PRF_DGP_A"}
+{"dst": "component-COMP_PRINT_DIGITAL_S1", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 0}, "rel": "has_component", "source_node": "formula-PRF_DGP_A", "src": "formula-PRF_DGP_A"}
+{"dst": "component-COMP_PRINT_SPOT_WHITE_S1", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 1}, "rel": "has_component", "source_node": "formula-PRF_DGP_A", "src": "formula-PRF_DGP_A"}
+{"dst": "component-COMP_CUT_FULL_DIECUT", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 2}, "rel": "has_component", "source_node": "formula-PRF_DGP_B", "src": "formula-PRF_DGP_B"}
+{"dst": "component-COMP_PAPER", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 1}, "rel": "has_component", "source_node": "formula-PRF_DGP_B", "src": "formula-PRF_DGP_B"}
+{"dst": "component-COMP_PRINT_DIGITAL_S1", "note": null, "origin": "fk", "qualifier": {"disp_seq": 0}, "rel": "has_component", "source_node": "formula-PRF_DGP_B", "src": "formula-PRF_DGP_B"}
+{"dst": "component-COMP_CUT_PERF_1H6", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 3}, "rel": "has_component", "source_node": "formula-PRF_DGP_C", "src": "formula-PRF_DGP_C"}
+{"dst": "component-COMP_FOLD_CARD_2H", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 2}, "rel": "has_component", "source_node": "formula-PRF_DGP_C", "src": "formula-PRF_DGP_C"}
+{"dst": "component-COMP_PAPER", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 1}, "rel": "has_component", "source_node": "formula-PRF_DGP_C", "src": "formula-PRF_DGP_C"}
+{"dst": "component-COMP_PRINT_DIGITAL_S1", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 0}, "rel": "has_component", "source_node": "formula-PRF_DGP_C", "src": "formula-PRF_DGP_C"}
+{"dst": "component-COMP_COAT_GLOSSY", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 1}, "rel": "has_component", "source_node": "formula-PRF_DGP_D", "src": "formula-PRF_DGP_D"}
+{"dst": "component-COMP_COAT_MATTE", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 2}, "rel": "has_component", "source_node": "formula-PRF_DGP_D", "src": "formula-PRF_DGP_D"}
+{"dst": "component-COMP_CUT_PERF_1H6", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 4}, "rel": "has_component", "source_node": "formula-PRF_DGP_D", "src": "formula-PRF_DGP_D"}
+{"dst": "component-COMP_PAPER", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 3}, "rel": "has_component", "source_node": "formula-PRF_DGP_D", "src": "formula-PRF_DGP_D"}
+{"dst": "component-COMP_PP_CORNER_RIGHT", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 9}, "rel": "has_component", "source_node": "formula-PRF_DGP_D", "src": "formula-PRF_DGP_D"}
+{"dst": "component-COMP_PP_CREASE_1L", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 5}, "rel": "has_component", "source_node": "formula-PRF_DGP_D", "src": "formula-PRF_DGP_D"}
+{"dst": "component-COMP_PP_PERF_1L", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 6}, "rel": "has_component", "source_node": "formula-PRF_DGP_D", "src": "formula-PRF_DGP_D"}
+{"dst": "component-COMP_PP_VARIMG_1EA", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 8}, "rel": "has_component", "source_node": "formula-PRF_DGP_D", "src": "formula-PRF_DGP_D"}
+{"dst": "component-COMP_PP_VARTEXT_1EA", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 7}, "rel": "has_component", "source_node": "formula-PRF_DGP_D", "src": "formula-PRF_DGP_D"}
+{"dst": "component-COMP_PRINT_DIGITAL_S1", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 0}, "rel": "has_component", "source_node": "formula-PRF_DGP_D", "src": "formula-PRF_DGP_D"}
+{"dst": "component-COMP_COAT_GLOSSY", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 1}, "rel": "has_component", "source_node": "formula-PRF_DGP_E", "src": "formula-PRF_DGP_E"}
+{"dst": "component-COMP_COAT_MATTE", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 2}, "rel": "has_component", "source_node": "formula-PRF_DGP_E", "src": "formula-PRF_DGP_E"}
+{"dst": "component-COMP_CUT_PERF_1H6", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 8}, "rel": "has_component", "source_node": "formula-PRF_DGP_E", "src": "formula-PRF_DGP_E"}
+{"dst": "component-COMP_FOLD_LEAF_3FOLD", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 5}, "rel": "has_component", "source_node": "formula-PRF_DGP_E", "src": "formula-PRF_DGP_E"}
+{"dst": "component-COMP_FOLD_LEAF_4ACC", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 6}, "rel": "has_component", "source_node": "formula-PRF_DGP_E", "src": "formula-PRF_DGP_E"}
+{"dst": "component-COMP_FOLD_LEAF_4GATE", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 7}, "rel": "has_component", "source_node": "formula-PRF_DGP_E", "src": "formula-PRF_DGP_E"}
+{"dst": "component-COMP_FOLD_LEAF_HALF", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 4}, "rel": "has_component", "source_node": "formula-PRF_DGP_E", "src": "formula-PRF_DGP_E"}
+{"dst": "component-COMP_PAPER", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 3}, "rel": "has_component", "source_node": "formula-PRF_DGP_E", "src": "formula-PRF_DGP_E"}
+{"dst": "component-COMP_PP_VARIMG_1EA", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 10}, "rel": "has_component", "source_node": "formula-PRF_DGP_E", "src": "formula-PRF_DGP_E"}
+{"dst": "component-COMP_PP_VARTEXT_1EA", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 9}, "rel": "has_component", "source_node": "formula-PRF_DGP_E", "src": "formula-PRF_DGP_E"}
+{"dst": "component-COMP_PRINT_DIGITAL_S1", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 0}, "rel": "has_component", "source_node": "formula-PRF_DGP_E", "src": "formula-PRF_DGP_E"}
+{"dst": "component-COMP_COAT_GLOSSY", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 1}, "rel": "has_component", "source_node": "formula-PRF_DGP_E_FOIL", "src": "formula-PRF_DGP_E_FOIL"}
+{"dst": "component-COMP_COAT_MATTE", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 2}, "rel": "has_component", "source_node": "formula-PRF_DGP_E_FOIL", "src": "formula-PRF_DGP_E_FOIL"}
+{"dst": "component-COMP_CUT_PERF_1H6", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 8}, "rel": "has_component", "source_node": "formula-PRF_DGP_E_FOIL", "src": "formula-PRF_DGP_E_FOIL"}
+{"dst": "component-COMP_FOIL_PROC_LARGE_SPECIAL", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 11}, "rel": "has_component", "source_node": "formula-PRF_DGP_E_FOIL", "src": "formula-PRF_DGP_E_FOIL"}
+{"dst": "component-COMP_FOIL_PROC_LARGE_STD", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 10}, "rel": "has_component", "source_node": "formula-PRF_DGP_E_FOIL", "src": "formula-PRF_DGP_E_FOIL"}
+{"dst": "component-COMP_FOIL_SETUP_LARGE", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 9}, "rel": "has_component", "source_node": "formula-PRF_DGP_E_FOIL", "src": "formula-PRF_DGP_E_FOIL"}
+{"dst": "component-COMP_FOLD_LEAF_3FOLD", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 5}, "rel": "has_component", "source_node": "formula-PRF_DGP_E_FOIL", "src": "formula-PRF_DGP_E_FOIL"}
+{"dst": "component-COMP_FOLD_LEAF_4ACC", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 6}, "rel": "has_component", "source_node": "formula-PRF_DGP_E_FOIL", "src": "formula-PRF_DGP_E_FOIL"}
+{"dst": "component-COMP_FOLD_LEAF_4GATE", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 7}, "rel": "has_component", "source_node": "formula-PRF_DGP_E_FOIL", "src": "formula-PRF_DGP_E_FOIL"}
+{"dst": "component-COMP_FOLD_LEAF_HALF", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 4}, "rel": "has_component", "source_node": "formula-PRF_DGP_E_FOIL", "src": "formula-PRF_DGP_E_FOIL"}
+{"dst": "component-COMP_PAPER", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 3}, "rel": "has_component", "source_node": "formula-PRF_DGP_E_FOIL", "src": "formula-PRF_DGP_E_FOIL"}
+{"dst": "component-COMP_PP_VARIMG_1EA", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 13}, "rel": "has_component", "source_node": "formula-PRF_DGP_E_FOIL", "src": "formula-PRF_DGP_E_FOIL"}
+{"dst": "component-COMP_PP_VARTEXT_1EA", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 12}, "rel": "has_component", "source_node": "formula-PRF_DGP_E_FOIL", "src": "formula-PRF_DGP_E_FOIL"}
+{"dst": "component-COMP_PRINT_DIGITAL_S1", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 0}, "rel": "has_component", "source_node": "formula-PRF_DGP_E_FOIL", "src": "formula-PRF_DGP_E_FOIL"}
+{"dst": "component-COMP_CUT_FULL_DIECUT", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 2}, "rel": "has_component", "source_node": "formula-PRF_DGP_F", "src": "formula-PRF_DGP_F"}
+{"dst": "component-COMP_PAPER", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 1}, "rel": "has_component", "source_node": "formula-PRF_DGP_F", "src": "formula-PRF_DGP_F"}
+{"dst": "component-COMP_PRINT_DIGITAL_S1", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 0}, "rel": "has_component", "source_node": "formula-PRF_DGP_F", "src": "formula-PRF_DGP_F"}
+{"dst": "component-COMP_NAMECARD_COAT_S1", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 1}, "rel": "has_component", "source_node": "formula-PRF_NAMECARD_COAT", "src": "formula-PRF_NAMECARD_COAT"}
+{"dst": "component-COMP_NAMECARD_COAT_S2", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 2}, "rel": "has_component", "source_node": "formula-PRF_NAMECARD_COAT", "src": "formula-PRF_NAMECARD_COAT"}
+{"dst": "component-COMP_NAMECARD_STD_S1", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 1}, "rel": "has_component", "source_node": "formula-PRF_NAMECARD_FIXED", "src": "formula-PRF_NAMECARD_FIXED"}
+{"dst": "component-COMP_NAMECARD_STD_S2", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 2}, "rel": "has_component", "source_node": "formula-PRF_NAMECARD_FIXED", "src": "formula-PRF_NAMECARD_FIXED"}
+{"dst": "component-COMP_PHOTOCARD_BULK", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 2}, "rel": "has_component", "source_node": "formula-PRF_PHOTOCARD_NORMAL", "src": "formula-PRF_PHOTOCARD_NORMAL"}
+{"dst": "component-COMP_PHOTOCARD_SET", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 1}, "rel": "has_component", "source_node": "formula-PRF_PHOTOCARD_NORMAL", "src": "formula-PRF_PHOTOCARD_NORMAL"}
+{"dst": "GAP_envelope_set_model", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-027-addon-envelope", "src": "gap-027-addon-envelope"}
+{"dst": "process-PROC_000031", "note": null, "origin": "derived", "qualifier": null, "rel": "derived_from", "source_node": "gap-033-vardata-param", "src": "gap-033-vardata-param"}
+{"dst": "DEC_diecut_260701", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-046-diecut-golden", "src": "gap-046-diecut-golden"}
+{"dst": "formula-PRF_DGP_B", "note": "이 공식의 완칼 구성요소 골든이 대상", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-046-diecut-golden", "src": "gap-046-diecut-golden"}
+{"dst": "process-PROC_000085", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "material-MAT_000105", "src": "material-MAT_000105"}
+{"dst": "GAP_foil_parent_children", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "material-MAT_000356", "src": "material-MAT_000356"}
+{"dst": "RULE_dosu_is_printopt", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "material-MAT_000356", "src": "material-MAT_000356"}
+{"dst": "process-PROC_000027", "note": "직각(R2 배선)", "origin": "fk", "qualifier": null, "rel": "option_refs", "source_node": "optgroup-016-corner", "src": "optgroup-016-corner"}
+{"dst": "process-PROC_000028", "note": "둥근(R2 배선)", "origin": "fk", "qualifier": null, "rel": "option_refs", "source_node": "optgroup-016-corner", "src": "optgroup-016-corner"}
+{"dst": "process-PROC_000029", "note": "오시(crease)", "origin": "fk", "qualifier": null, "rel": "option_refs", "source_node": "optgroup-016-crease", "src": "optgroup-016-crease"}
+{"dst": "material-MAT_000074", "note": "종이 옵션→자재 차원(대표)", "origin": "fk", "qualifier": null, "rel": "option_refs", "source_node": "optgroup-016-paper", "src": "optgroup-016-paper"}
+{"dst": "material-MAT_000082", "note": null, "origin": "fk", "qualifier": null, "rel": "option_refs", "source_node": "optgroup-016-paper", "src": "optgroup-016-paper"}
+{"dst": "material-MAT_000092", "note": null, "origin": "fk", "qualifier": null, "rel": "option_refs", "source_node": "optgroup-016-paper", "src": "optgroup-016-paper"}
+{"dst": "material-MAT_000101", "note": null, "origin": "fk", "qualifier": null, "rel": "option_refs", "source_node": "optgroup-016-paper", "src": "optgroup-016-paper"}
+{"dst": "process-PROC_000030", "note": "미싱(perforation)", "origin": "fk", "qualifier": null, "rel": "option_refs", "source_node": "optgroup-016-perf", "src": "optgroup-016-perf"}
+{"dst": "printopt-POPT_000001", "note": "단면", "origin": "fk", "qualifier": null, "rel": "option_refs", "source_node": "optgroup-016-print", "src": "optgroup-016-print"}
+{"dst": "printopt-POPT_000002", "note": "양면", "origin": "fk", "qualifier": null, "rel": "option_refs", "source_node": "optgroup-016-print", "src": "optgroup-016-print"}
+{"dst": "process-PROC_000032", "note": "가변이미지(R2 배선)", "origin": "fk", "qualifier": null, "rel": "option_refs", "source_node": "optgroup-016-varimg", "src": "optgroup-016-varimg"}
+{"dst": "process-PROC_000031", "note": "가변텍스트(R2 배선)", "origin": "fk", "qualifier": null, "rel": "option_refs", "source_node": "optgroup-016-vartext", "src": "optgroup-016-vartext"}
+{"dst": "process-PROC_000014", "note": "유광", "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.04", "ref_key1": "PROC_000014"}, "rel": "option_refs", "source_node": "optgroup-032-coating", "src": "optgroup-032-coating"}
+{"dst": "process-PROC_000015", "note": "무광", "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.04", "ref_key1": "PROC_000015"}, "rel": "option_refs", "source_node": "optgroup-032-coating", "src": "optgroup-032-coating"}
+{"dst": "GAP_032_coat_side", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "optgroup-032-coating", "src": "optgroup-032-coating"}
+{"dst": "process-PROC_000027", "note": "직각", "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.04", "ref_key1": "PROC_000027"}, "rel": "option_refs", "source_node": "optgroup-032-corner", "src": "optgroup-032-corner"}
+{"dst": "process-PROC_000028", "note": "둥근", "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.04", "ref_key1": "PROC_000028"}, "rel": "option_refs", "source_node": "optgroup-032-corner", "src": "optgroup-032-corner"}
+{"dst": "material-MAT_000081", "note": "아트지 250g", "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.03", "ref_key1": "MAT_000081", "ref_key2": "USAGE.07"}, "rel": "option_refs", "source_node": "optgroup-032-paper", "src": "optgroup-032-paper"}
+{"dst": "material-MAT_000082", "note": "아트지 300g", "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.03", "ref_key1": "MAT_000082", "ref_key2": "USAGE.07"}, "rel": "option_refs", "source_node": "optgroup-032-paper", "src": "optgroup-032-paper"}
+{"dst": "printopt-POPT_000001", "note": "단면=opt_id 1", "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.06", "ref_key1": 1}, "rel": "option_refs", "source_node": "optgroup-032-print", "src": "optgroup-032-print"}
+{"dst": "printopt-POPT_000002", "note": "양면=opt_id 2", "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.06", "ref_key1": 2}, "rel": "option_refs", "source_node": "optgroup-032-print", "src": "optgroup-032-print"}
+{"dst": "RULE_dosu_is_printopt", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "optgroup-032-print", "src": "optgroup-032-print"}
+{"dst": "process-PROC_000027", "note": null, "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.04", "ref_key1": "PROC_000027"}, "rel": "option_refs", "source_node": "optgroup-033-corner", "src": "optgroup-033-corner"}
+{"dst": "process-PROC_000028", "note": null, "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.04", "ref_key1": "PROC_000028"}, "rel": "option_refs", "source_node": "optgroup-033-corner", "src": "optgroup-033-corner"}
+{"dst": "material-MAT_000074", "note": null, "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.03", "ref_key1": "MAT_000074", "ref_key2": "USAGE.07"}, "rel": "option_refs", "source_node": "optgroup-033-paper", "src": "optgroup-033-paper"}
+{"dst": "material-MAT_000081", "note": null, "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.03", "ref_key1": "MAT_000081", "ref_key2": "USAGE.07"}, "rel": "option_refs", "source_node": "optgroup-033-paper", "src": "optgroup-033-paper"}
+{"dst": "material-MAT_000082", "note": null, "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.03", "ref_key1": "MAT_000082", "ref_key2": "USAGE.07"}, "rel": "option_refs", "source_node": "optgroup-033-paper", "src": "optgroup-033-paper"}
+{"dst": "material-MAT_000091", "note": null, "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.03", "ref_key1": "MAT_000091", "ref_key2": "USAGE.07"}, "rel": "option_refs", "source_node": "optgroup-033-paper", "src": "optgroup-033-paper"}
+{"dst": "material-MAT_000092", "note": null, "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.03", "ref_key1": "MAT_000092", "ref_key2": "USAGE.07"}, "rel": "option_refs", "source_node": "optgroup-033-paper", "src": "optgroup-033-paper"}
+{"dst": "process-PROC_000031", "note": null, "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.04", "ref_key1": "PROC_000031"}, "rel": "option_refs", "source_node": "optgroup-033-postpress", "src": "optgroup-033-postpress"}
+{"dst": "process-PROC_000032", "note": null, "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.04", "ref_key1": "PROC_000032"}, "rel": "option_refs", "source_node": "optgroup-033-postpress", "src": "optgroup-033-postpress"}
+{"dst": "gap-033-vardata-param", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "optgroup-033-postpress", "src": "optgroup-033-postpress"}
+{"dst": "printopt-POPT_000001", "note": null, "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.06", "ref_key1": "1"}, "rel": "option_refs", "source_node": "optgroup-033-print", "src": "optgroup-033-print"}
+{"dst": "printopt-POPT_000002", "note": null, "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.06", "ref_key1": "2"}, "rel": "option_refs", "source_node": "optgroup-033-print", "src": "optgroup-033-print"}
+{"dst": "process-PROC_000029", "note": "오시(OPV_000203)", "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.04", "ref_key1": "PROC_000029"}, "rel": "option_refs", "source_node": "optgroup-041-finish", "src": "optgroup-041-finish"}
+{"dst": "process-PROC_000030", "note": "미싱(OPV_000204)", "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.04", "ref_key1": "PROC_000030"}, "rel": "option_refs", "source_node": "optgroup-041-finish", "src": "optgroup-041-finish"}
+{"dst": "process-PROC_000031", "note": "가변텍스트(OPV_000205·R2 라이브 부합 배선)", "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.04", "ref_key1": "PROC_000031"}, "rel": "option_refs", "source_node": "optgroup-041-finish", "src": "optgroup-041-finish"}
+{"dst": "process-PROC_000032", "note": "가변이미지(OPV_000206·R2 라이브 부합 배선)", "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.04", "ref_key1": "PROC_000032"}, "rel": "option_refs", "source_node": "optgroup-041-finish", "src": "optgroup-041-finish"}
+{"dst": "GAP_finish_param_041", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "optgroup-041-finish", "src": "optgroup-041-finish"}
+{"dst": "material-MAT_000072", "note": "OPV_000199", "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.03", "ref_key1": "MAT_000072", "ref_key2": "USAGE.07"}, "rel": "option_refs", "source_node": "optgroup-041-paper", "src": "optgroup-041-paper"}
+{"dst": "material-MAT_000078", "note": "OPV_000200", "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.03", "ref_key1": "MAT_000078", "ref_key2": "USAGE.07"}, "rel": "option_refs", "source_node": "optgroup-041-paper", "src": "optgroup-041-paper"}
+{"dst": "material-MAT_000088", "note": "OPV_000201", "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.03", "ref_key1": "MAT_000088", "ref_key2": "USAGE.07"}, "rel": "option_refs", "source_node": "optgroup-041-paper", "src": "optgroup-041-paper"}
+{"dst": "material-MAT_000105", "note": "OPV_000202", "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.03", "ref_key1": "MAT_000105", "ref_key2": "USAGE.07"}, "rel": "option_refs", "source_node": "optgroup-041-paper", "src": "optgroup-041-paper"}
+{"dst": "printopt-POPT_000001", "note": "단면(OPV_000197)", "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.06", "ref_key1": "opt_id=1"}, "rel": "option_refs", "source_node": "optgroup-041-print", "src": "optgroup-041-print"}
+{"dst": "printopt-POPT_000002", "note": "양면(OPV_000198)", "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.06", "ref_key1": "opt_id=2"}, "rel": "option_refs", "source_node": "optgroup-041-print", "src": "optgroup-041-print"}
+{"dst": "RULE_dosu_is_printopt", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "optgroup-041-print", "src": "optgroup-041-print"}
+{"dst": "printopt-POPT_000001", "note": "단면(ref_key1=opt_id 1)", "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.06", "ref_key1": "1"}, "rel": "option_refs", "source_node": "optgroup-OPT_000017", "src": "optgroup-OPT_000017"}
+{"dst": "printopt-POPT_000002", "note": "양면(ref_key1=opt_id 2)", "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.06", "ref_key1": "2"}, "rel": "option_refs", "source_node": "optgroup-OPT_000017", "src": "optgroup-OPT_000017"}
+{"dst": "material-MAT_000082", "note": "아트지 300g", "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.03", "ref_key1": "MAT_000082", "ref_key2": "USAGE.07"}, "rel": "option_refs", "source_node": "optgroup-OPT_000018", "src": "optgroup-OPT_000018"}
+{"dst": "process-PROC_000014", "note": "유광→유광라미네이팅", "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.04", "ref_key1": "PROC_000014"}, "rel": "option_refs", "source_node": "optgroup-OPT_000019", "src": "optgroup-OPT_000019"}
+{"dst": "process-PROC_000015", "note": "무광→무광라미네이팅", "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.04", "ref_key1": "PROC_000015"}, "rel": "option_refs", "source_node": "optgroup-OPT_000019", "src": "optgroup-OPT_000019"}
+{"dst": "process-PROC_000027", "note": "직각", "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.04", "ref_key1": "PROC_000027"}, "rel": "option_refs", "source_node": "optgroup-OPT_000020", "src": "optgroup-OPT_000020"}
+{"dst": "process-PROC_000028", "note": "둥근", "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.04", "ref_key1": "PROC_000028"}, "rel": "option_refs", "source_node": "optgroup-OPT_000020", "src": "optgroup-OPT_000020"}
+{"dst": "printopt-POPT_000002", "note": null, "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.06", "ref_key1": "1"}, "rel": "option_refs", "source_node": "optgroup-OPT_000029", "src": "optgroup-OPT_000029"}
+{"dst": "material-MAT_000074", "note": null, "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.03", "ref_key1": "MAT_000074", "ref_key2": "USAGE.07"}, "rel": "option_refs", "source_node": "optgroup-OPT_000030", "src": "optgroup-OPT_000030"}
+{"dst": "material-MAT_000081", "note": null, "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.03", "ref_key1": "MAT_000081", "ref_key2": "USAGE.07"}, "rel": "option_refs", "source_node": "optgroup-OPT_000030", "src": "optgroup-OPT_000030"}
+{"dst": "material-MAT_000082", "note": null, "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.03", "ref_key1": "MAT_000082", "ref_key2": "USAGE.07"}, "rel": "option_refs", "source_node": "optgroup-OPT_000030", "src": "optgroup-OPT_000030"}
+{"dst": "material-MAT_000091", "note": null, "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.03", "ref_key1": "MAT_000091", "ref_key2": "USAGE.07"}, "rel": "option_refs", "source_node": "optgroup-OPT_000030", "src": "optgroup-OPT_000030"}
+{"dst": "material-MAT_000092", "note": null, "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.03", "ref_key1": "MAT_000092", "ref_key2": "USAGE.07"}, "rel": "option_refs", "source_node": "optgroup-OPT_000030", "src": "optgroup-OPT_000030"}
+{"dst": "material-MAT_000101", "note": null, "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.03", "ref_key1": "MAT_000101", "ref_key2": "USAGE.07"}, "rel": "option_refs", "source_node": "optgroup-OPT_000030", "src": "optgroup-OPT_000030"}
+{"dst": "material-MAT_000108", "note": null, "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.03", "ref_key1": "MAT_000108", "ref_key2": "USAGE.07"}, "rel": "option_refs", "source_node": "optgroup-OPT_000030", "src": "optgroup-OPT_000030"}
+{"dst": "material-MAT_000109", "note": null, "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.03", "ref_key1": "MAT_000109", "ref_key2": "USAGE.07"}, "rel": "option_refs", "source_node": "optgroup-OPT_000030", "src": "optgroup-OPT_000030"}
+{"dst": "material-MAT_000123", "note": null, "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.03", "ref_key1": "MAT_000123", "ref_key2": "USAGE.07"}, "rel": "option_refs", "source_node": "optgroup-OPT_000030", "src": "optgroup-OPT_000030"}
+{"dst": "material-MAT_000347", "note": null, "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.03", "ref_key1": "MAT_000347", "ref_key2": "USAGE.07"}, "rel": "option_refs", "source_node": "optgroup-OPT_000030", "src": "optgroup-OPT_000030"}
+{"dst": "material-MAT_000348", "note": null, "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.03", "ref_key1": "MAT_000348", "ref_key2": "USAGE.07"}, "rel": "option_refs", "source_node": "optgroup-OPT_000030", "src": "optgroup-OPT_000030"}
+{"dst": "material-MAT_000349", "note": null, "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.03", "ref_key1": "MAT_000349", "ref_key2": "USAGE.07"}, "rel": "option_refs", "source_node": "optgroup-OPT_000030", "src": "optgroup-OPT_000030"}
+{"dst": "material-MAT_000350", "note": null, "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.03", "ref_key1": "MAT_000350", "ref_key2": "USAGE.07"}, "rel": "option_refs", "source_node": "optgroup-OPT_000030", "src": "optgroup-OPT_000030"}
+{"dst": "material-MAT_000356", "note": null, "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.03", "ref_key1": "MAT_000356", "ref_key2": "USAGE.07"}, "rel": "option_refs", "source_node": "optgroup-OPT_000030", "src": "optgroup-OPT_000030"}
+{"dst": "process-PROC_000031", "note": null, "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.04", "ref_key1": "PROC_000031"}, "rel": "option_refs", "source_node": "optgroup-OPT_000031", "src": "optgroup-OPT_000031"}
+{"dst": "process-PROC_000032", "note": null, "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.04", "ref_key1": "PROC_000032"}, "rel": "option_refs", "source_node": "optgroup-OPT_000031", "src": "optgroup-OPT_000031"}
+{"dst": "process-PROC_000065", "note": null, "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.04", "ref_key1": "PROC_000065"}, "rel": "option_refs", "source_node": "optgroup-OPT_000032", "src": "optgroup-OPT_000032"}
+{"dst": "process-PROC_000066", "note": null, "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.04", "ref_key1": "PROC_000066"}, "rel": "option_refs", "source_node": "optgroup-OPT_000032", "src": "optgroup-OPT_000032"}
+{"dst": "process-PROC_000037", "note": null, "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.04", "ref_key1": "PROC_000037"}, "rel": "option_refs", "source_node": "optgroup-OPT_000033", "src": "optgroup-OPT_000033"}
+{"dst": "process-PROC_000038", "note": null, "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.04", "ref_key1": "PROC_000038"}, "rel": "option_refs", "source_node": "optgroup-OPT_000033", "src": "optgroup-OPT_000033"}
+{"dst": "process-PROC_000039", "note": null, "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.04", "ref_key1": "PROC_000039"}, "rel": "option_refs", "source_node": "optgroup-OPT_000033", "src": "optgroup-OPT_000033"}
+{"dst": "process-PROC_000040", "note": null, "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.04", "ref_key1": "PROC_000040"}, "rel": "option_refs", "source_node": "optgroup-OPT_000033", "src": "optgroup-OPT_000033"}
+{"dst": "process-PROC_000041", "note": null, "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.04", "ref_key1": "PROC_000041"}, "rel": "option_refs", "source_node": "optgroup-OPT_000033", "src": "optgroup-OPT_000033"}
+{"dst": "process-PROC_000042", "note": null, "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.04", "ref_key1": "PROC_000042"}, "rel": "option_refs", "source_node": "optgroup-OPT_000033", "src": "optgroup-OPT_000033"}
+{"dst": "process-PROC_000043", "note": null, "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.04", "ref_key1": "PROC_000043"}, "rel": "option_refs", "source_node": "optgroup-OPT_000033", "src": "optgroup-OPT_000033"}
+{"dst": "process-PROC_000044", "note": null, "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.04", "ref_key1": "PROC_000044"}, "rel": "option_refs", "source_node": "optgroup-OPT_000033", "src": "optgroup-OPT_000033"}
+{"dst": "GAP_foil_parent_children", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "optgroup-OPT_000033", "src": "optgroup-OPT_000033"}
+{"dst": "component-COMP_PHOTOCARD_SET", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "optgroup-OPT_000084", "src": "optgroup-OPT_000084"}
+{"dst": "DEC_baseproc_260701", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "process-PROC_000004", "src": "process-PROC_000004"}
+{"dst": "RULE_dataline_neq_wiring", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "process-PROC_000004", "src": "process-PROC_000004"}
+{"dst": "TERM_corner_round", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "process-PROC_000026", "src": "process-PROC_000026"}
+{"dst": "GAP_foil_parent_children", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "process-PROC_000033", "src": "process-PROC_000033"}
+{"dst": "RULE_price_value_boundary", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "process-PROC_000044", "src": "process-PROC_000044"}
+{"dst": "formula-PRF_DGP_E", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "process-PROC_000044", "src": "process-PROC_000044"}
+{"dst": "DEC_diecut_260701", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "process-PROC_000053", "src": "process-PROC_000053"}
+{"dst": "optgroup-016-corner", "note": null, "origin": "fk", "qualifier": null, "rel": "has_option_group", "source_node": "product-016-premium-postcard", "src": "product-016-premium-postcard"}
+{"dst": "optgroup-016-crease", "note": null, "origin": "fk", "qualifier": null, "rel": "has_option_group", "source_node": "product-016-premium-postcard", "src": "product-016-premium-postcard"}
+{"dst": "optgroup-016-paper", "note": null, "origin": "fk", "qualifier": null, "rel": "has_option_group", "source_node": "product-016-premium-postcard", "src": "product-016-premium-postcard"}
+{"dst": "optgroup-016-perf", "note": null, "origin": "fk", "qualifier": null, "rel": "has_option_group", "source_node": "product-016-premium-postcard", "src": "product-016-premium-postcard"}
+{"dst": "optgroup-016-print", "note": null, "origin": "fk", "qualifier": null, "rel": "has_option_group", "source_node": "product-016-premium-postcard", "src": "product-016-premium-postcard"}
+{"dst": "optgroup-016-varimg", "note": null, "origin": "fk", "qualifier": null, "rel": "has_option_group", "source_node": "product-016-premium-postcard", "src": "product-016-premium-postcard"}
+{"dst": "optgroup-016-vartext", "note": null, "origin": "fk", "qualifier": null, "rel": "has_option_group", "source_node": "product-016-premium-postcard", "src": "product-016-premium-postcard"}
+{"dst": "plate-OUTPUT_PAPER_TYPE_01", "note": "국전 출력용지(종이류·fn_best_plate 자동선택)", "origin": "fk", "qualifier": null, "rel": "has_plate_size", "source_node": "product-016-premium-postcard", "src": "product-016-premium-postcard"}
+{"dst": "printopt-POPT_000001", "note": "단면 칼라", "origin": "fk", "qualifier": null, "rel": "has_print_option", "source_node": "product-016-premium-postcard", "src": "product-016-premium-postcard"}
+{"dst": "printopt-POPT_000002", "note": "양면 칼라", "origin": "fk", "qualifier": null, "rel": "has_print_option", "source_node": "product-016-premium-postcard", "src": "product-016-premium-postcard"}
+{"dst": "process-PROC_000004", "note": "디지털인쇄 base(mand_proc_yn=Y·인쇄비 원천)", "origin": "fk", "qualifier": "mandatory", "rel": "has_process", "source_node": "product-016-premium-postcard", "src": "product-016-premium-postcard"}
+{"dst": "process-PROC_000027", "note": "직각 모서리(옵션·귀돌이 PROC_000026 자식·R2 배선)", "origin": "fk", "qualifier": null, "rel": "has_process", "source_node": "product-016-premium-postcard", "src": "product-016-premium-postcard"}
+{"dst": "process-PROC_000028", "note": "둥근 모서리(옵션·귀돌이 R·R2 배선)", "origin": "fk", "qualifier": null, "rel": "has_process", "source_node": "product-016-premium-postcard", "src": "product-016-premium-postcard"}
+{"dst": "process-PROC_000029", "note": "오시(옵션)", "origin": "fk", "qualifier": null, "rel": "has_process", "source_node": "product-016-premium-postcard", "src": "product-016-premium-postcard"}
+{"dst": "process-PROC_000030", "note": "미싱(옵션)", "origin": "fk", "qualifier": null, "rel": "has_process", "source_node": "product-016-premium-postcard", "src": "product-016-premium-postcard"}
+{"dst": "process-PROC_000031", "note": "가변텍스트(옵션·가변데이타 PROC_000085 자식·R2 배선)", "origin": "fk", "qualifier": null, "rel": "has_process", "source_node": "product-016-premium-postcard", "src": "product-016-premium-postcard"}
+{"dst": "process-PROC_000032", "note": "가변이미지(옵션·가변데이타 자식·R2 배선)", "origin": "fk", "qualifier": null, "rel": "has_process", "source_node": "product-016-premium-postcard", "src": "product-016-premium-postcard"}
+{"dst": "qty-016", "note": null, "origin": "fk", "qualifier": null, "rel": "has_qty_rule", "source_node": "product-016-premium-postcard", "src": "product-016-premium-postcard"}
+{"dst": "size-SIZ_000001", "note": null, "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "product-016-premium-postcard", "src": "product-016-premium-postcard"}
+{"dst": "size-SIZ_000002", "note": null, "origin": "fk", "qualifier": {"qty_incr": 8}, "rel": "has_size", "source_node": "product-016-premium-postcard", "src": "product-016-premium-postcard"}
+{"dst": "size-SIZ_000003", "note": null, "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "product-016-premium-postcard", "src": "product-016-premium-postcard"}
+{"dst": "size-SIZ_000004", "note": null, "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "product-016-premium-postcard", "src": "product-016-premium-postcard"}
+{"dst": "size-SIZ_000005", "note": null, "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "product-016-premium-postcard", "src": "product-016-premium-postcard"}
+{"dst": "size-SIZ_000006", "note": null, "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "product-016-premium-postcard", "src": "product-016-premium-postcard"}
+{"dst": "size-SIZ_000007", "note": null, "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "product-016-premium-postcard", "src": "product-016-premium-postcard"}
+{"dst": "category-CAT_000001", "note": "엽서/카드 상위(main_cat_yn=N)", "origin": "fk", "qualifier": null, "rel": "in_category", "source_node": "product-016-premium-postcard", "src": "product-016-premium-postcard"}
+{"dst": "category-CAT_000307", "note": "엽서(main_cat_yn=N)", "origin": "fk", "qualifier": null, "rel": "in_category", "source_node": "product-016-premium-postcard", "src": "product-016-premium-postcard"}
+{"dst": "formula-PRF_DGP_A", "note": null, "origin": "fk", "qualifier": null, "rel": "priced_by", "source_node": "product-016-premium-postcard", "src": "product-016-premium-postcard"}
+{"dst": "DEC_baseproc_260701", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-016-premium-postcard", "src": "product-016-premium-postcard"}
+{"dst": "DEC_corner_260702", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-016-premium-postcard", "src": "product-016-premium-postcard"}
+{"dst": "DEC_qty_audit_260702", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-016-premium-postcard", "src": "product-016-premium-postcard"}
+{"dst": "GAP_016_material", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-016-premium-postcard", "src": "product-016-premium-postcard"}
+{"dst": "GAP_pansu_73x98", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-016-premium-postcard", "src": "product-016-premium-postcard"}
+{"dst": "RULE_import_material_no_delete", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-016-premium-postcard", "src": "product-016-premium-postcard"}
+{"dst": "RULE_pansu_db_function", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-016-premium-postcard", "src": "product-016-premium-postcard"}
+{"dst": "RULE_plate_paper_only", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-016-premium-postcard", "src": "product-016-premium-postcard"}
+{"dst": "RULE_price_value_boundary", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-016-premium-postcard", "src": "product-016-premium-postcard"}
+{"dst": "gap-016-addon-target", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-016-premium-postcard", "src": "product-016-premium-postcard"}
+{"dst": "material-MAT_000074", "note": "대표(활성 21종 중)·USAGE.07", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-016-premium-postcard", "src": "product-016-premium-postcard"}
+{"dst": "material-MAT_000082", "note": "아트지 300g", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-016-premium-postcard", "src": "product-016-premium-postcard"}
+{"dst": "material-MAT_000092", "note": "스노우지 300g", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-016-premium-postcard", "src": "product-016-premium-postcard"}
+{"dst": "material-MAT_000101", "note": "랑데뷰 WH 240g", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-016-premium-postcard", "src": "product-016-premium-postcard"}
+{"dst": "optgroup-OPT_000017", "note": "인쇄(도수)", "origin": "fk", "qualifier": null, "rel": "has_option_group", "source_node": "product-024-photocard", "src": "product-024-photocard"}
+{"dst": "optgroup-OPT_000018", "note": "종이", "origin": "fk", "qualifier": null, "rel": "has_option_group", "source_node": "product-024-photocard", "src": "product-024-photocard"}
+{"dst": "optgroup-OPT_000019", "note": "코팅", "origin": "fk", "qualifier": null, "rel": "has_option_group", "source_node": "product-024-photocard", "src": "product-024-photocard"}
+{"dst": "optgroup-OPT_000020", "note": "모서리", "origin": "fk", "qualifier": null, "rel": "has_option_group", "source_node": "product-024-photocard", "src": "product-024-photocard"}
+{"dst": "optgroup-OPT_000084", "note": "제작방식(세트/대량)=가격 분기축", "origin": "fk", "qualifier": null, "rel": "has_option_group", "source_node": "product-024-photocard", "src": "product-024-photocard"}
+{"dst": "plate-OUTPUT_PAPER_TYPE_01", "note": "종이류(아트지)라 판형 유효·국전 SIZ_000499·fn_best_plate 자동선택", "origin": "fk", "qualifier": null, "rel": "has_plate_size", "source_node": "product-024-photocard", "src": "product-024-photocard"}
+{"dst": "printopt-POPT_000001", "note": "단면(칼라)", "origin": "fk", "qualifier": null, "rel": "has_print_option", "source_node": "product-024-photocard", "src": "product-024-photocard"}
+{"dst": "printopt-POPT_000002", "note": "양면(칼라)", "origin": "fk", "qualifier": null, "rel": "has_print_option", "source_node": "product-024-photocard", "src": "product-024-photocard"}
+{"dst": "process-PROC_000014", "note": "유광라미네이팅(코팅옵션)", "origin": "fk", "qualifier": {"mand": "N"}, "rel": "has_process", "source_node": "product-024-photocard", "src": "product-024-photocard"}
+{"dst": "process-PROC_000015", "note": "무광라미네이팅(코팅옵션)", "origin": "fk", "qualifier": {"mand": "N"}, "rel": "has_process", "source_node": "product-024-photocard", "src": "product-024-photocard"}
+{"dst": "process-PROC_000027", "note": "직각 모서리(모서리옵션)", "origin": "fk", "qualifier": {"mand": "N"}, "rel": "has_process", "source_node": "product-024-photocard", "src": "product-024-photocard"}
+{"dst": "process-PROC_000028", "note": "둥근 모서리(모서리옵션)", "origin": "fk", "qualifier": {"mand": "N"}, "rel": "has_process", "source_node": "product-024-photocard", "src": "product-024-photocard"}
+{"dst": "qty-024", "note": "min 20·incr 20·묶음 20 QTY_UNIT.06", "origin": "fk", "qualifier": null, "rel": "has_qty_rule", "source_node": "product-024-photocard", "src": "product-024-photocard"}
+{"dst": "size-SIZ_000012", "note": "55x86 단일 재단사이즈(포토카드 전용)", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "product-024-photocard", "src": "product-024-photocard"}
+{"dst": "category-CAT_000001", "note": "엽서/카드(상위 계열)", "origin": "fk", "qualifier": null, "rel": "in_category", "source_node": "product-024-photocard", "src": "product-024-photocard"}
+{"dst": "category-CAT_000310", "note": "포토카드(main_cat_yn=Y)", "origin": "fk", "qualifier": null, "rel": "in_category", "source_node": "product-024-photocard", "src": "product-024-photocard"}
+{"dst": "formula-PRF_PHOTOCARD_NORMAL", "note": "고정가·세트 vs 대량 분기(opt_grp:OPT_000084)", "origin": "fk", "qualifier": null, "rel": "priced_by", "source_node": "product-024-photocard", "src": "product-024-photocard"}
+{"dst": "RULE_dosu_is_printopt", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-024-photocard", "src": "product-024-photocard"}
+{"dst": "component-COMP_PHOTOCARD_SET", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-024-photocard", "src": "product-024-photocard"}
+{"dst": "gap-024-addon-envelope", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-024-photocard", "src": "product-024-photocard"}
+{"dst": "material-MAT_000082", "note": "아트지 300g·USAGE.07 단일 슬롯", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-024-photocard", "src": "product-024-photocard"}
+{"dst": "optgroup-OPT_000029", "note": null, "origin": "fk", "qualifier": null, "rel": "has_option_group", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "optgroup-OPT_000030", "note": null, "origin": "fk", "qualifier": null, "rel": "has_option_group", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "optgroup-OPT_000031", "note": null, "origin": "fk", "qualifier": null, "rel": "has_option_group", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "optgroup-OPT_000032", "note": null, "origin": "fk", "qualifier": null, "rel": "has_option_group", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "optgroup-OPT_000033", "note": null, "origin": "fk", "qualifier": null, "rel": "has_option_group", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "plate-OUTPUT_PAPER_TYPE_01", "note": null, "origin": "fk", "qualifier": null, "rel": "has_plate_size", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "printopt-POPT_000002", "note": null, "origin": "fk", "qualifier": null, "rel": "has_print_option", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "process-PROC_000004", "note": null, "origin": "fk", "qualifier": {"mand": "Y", "note": "디지털인쇄 base·미바인딩=인쇄비0"}, "rel": "has_process", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "process-PROC_000031", "note": null, "origin": "fk", "qualifier": {"mand": "N", "note": "가변텍스트 옵션"}, "rel": "has_process", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "process-PROC_000032", "note": null, "origin": "fk", "qualifier": {"mand": "N", "note": "가변이미지 옵션"}, "rel": "has_process", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "process-PROC_000037", "note": null, "origin": "fk", "qualifier": {"mand": "N", "note": "박칼라 옵션(홀로그램)"}, "rel": "has_process", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "process-PROC_000038", "note": null, "origin": "fk", "qualifier": {"mand": "N", "note": "박칼라 옵션(금유광)"}, "rel": "has_process", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "process-PROC_000039", "note": null, "origin": "fk", "qualifier": {"mand": "N", "note": "박칼라 옵션(은유광)"}, "rel": "has_process", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "process-PROC_000040", "note": null, "origin": "fk", "qualifier": {"mand": "N", "note": "박칼라 옵션(먹유광)"}, "rel": "has_process", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "process-PROC_000041", "note": null, "origin": "fk", "qualifier": {"mand": "N", "note": "박칼라 옵션(동박)"}, "rel": "has_process", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "process-PROC_000042", "note": null, "origin": "fk", "qualifier": {"mand": "N", "note": "박칼라 옵션(적박)"}, "rel": "has_process", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "process-PROC_000043", "note": null, "origin": "fk", "qualifier": {"mand": "N", "note": "박칼라 옵션(청박)"}, "rel": "has_process", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "process-PROC_000044", "note": null, "origin": "fk", "qualifier": {"mand": "N", "note": "박칼라 옵션(트윙클)"}, "rel": "has_process", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "process-PROC_000065", "note": null, "origin": "fk", "qualifier": {"mand": "N", "note": "접지 옵션"}, "rel": "has_process", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "process-PROC_000066", "note": null, "origin": "fk", "qualifier": {"mand": "N", "note": "접지 옵션"}, "rel": "has_process", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "size-SIZ_000124", "note": null, "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "size-SIZ_000129", "note": null, "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "size-SIZ_000523", "note": null, "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "size-SIZ_000524", "note": null, "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "size-SIZ_000525", "note": null, "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "size-SIZ_000526", "note": null, "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "category-CAT_000021", "note": null, "origin": "fk", "qualifier": null, "rel": "in_category", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "formula-PRF_DGP_E", "note": null, "origin": "fk", "qualifier": null, "rel": "priced_by", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "formula-PRF_DGP_E_FOIL", "note": "박 선택 시 재바인딩", "origin": "fk", "qualifier": null, "rel": "priced_by", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "GAP_foil_parent_children", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "INTENT_wedding", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "RULE_dosu_is_printopt", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "RULE_pansu_db_function", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "RULE_price_value_boundary", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "gap-027-addon-envelope", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "material-MAT_000074", "note": null, "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "material-MAT_000081", "note": null, "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "material-MAT_000082", "note": null, "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "material-MAT_000091", "note": null, "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "material-MAT_000092", "note": null, "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "material-MAT_000101", "note": null, "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "material-MAT_000108", "note": null, "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "material-MAT_000109", "note": null, "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "material-MAT_000123", "note": null, "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "material-MAT_000347", "note": null, "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "material-MAT_000348", "note": null, "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "material-MAT_000349", "note": null, "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "material-MAT_000350", "note": null, "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "material-MAT_000356", "note": null, "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-027-bifold-card", "src": "product-027-bifold-card"}
+{"dst": "optgroup-032-coating", "note": null, "origin": "fk", "qualifier": null, "rel": "has_option_group", "source_node": "product-032-coated-namecard", "src": "product-032-coated-namecard"}
+{"dst": "optgroup-032-corner", "note": null, "origin": "fk", "qualifier": null, "rel": "has_option_group", "source_node": "product-032-coated-namecard", "src": "product-032-coated-namecard"}
+{"dst": "optgroup-032-paper", "note": null, "origin": "fk", "qualifier": null, "rel": "has_option_group", "source_node": "product-032-coated-namecard", "src": "product-032-coated-namecard"}
+{"dst": "optgroup-032-print", "note": null, "origin": "fk", "qualifier": null, "rel": "has_option_group", "source_node": "product-032-coated-namecard", "src": "product-032-coated-namecard"}
+{"dst": "plate-OUTPUT_PAPER_TYPE_01", "note": "종이류(아트지)→판형 국전 SIZ_000499·fn_best_plate 자동선택", "origin": "fk", "qualifier": null, "rel": "has_plate_size", "source_node": "product-032-coated-namecard", "src": "product-032-coated-namecard"}
+{"dst": "printopt-POPT_000001", "note": "단면(칼라)", "origin": "fk", "qualifier": null, "rel": "has_print_option", "source_node": "product-032-coated-namecard", "src": "product-032-coated-namecard"}
+{"dst": "printopt-POPT_000002", "note": "양면(칼라)", "origin": "fk", "qualifier": null, "rel": "has_print_option", "source_node": "product-032-coated-namecard", "src": "product-032-coated-namecard"}
+{"dst": "process-PROC_000014", "note": "유광라미네이팅(코팅 옵션)", "origin": "fk", "qualifier": {"mand": "N"}, "rel": "has_process", "source_node": "product-032-coated-namecard", "src": "product-032-coated-namecard"}
+{"dst": "process-PROC_000015", "note": "무광라미네이팅(코팅 옵션)", "origin": "fk", "qualifier": {"mand": "N"}, "rel": "has_process", "source_node": "product-032-coated-namecard", "src": "product-032-coated-namecard"}
+{"dst": "process-PROC_000027", "note": "직각(모서리 옵션)", "origin": "fk", "qualifier": {"mand": "N"}, "rel": "has_process", "source_node": "product-032-coated-namecard", "src": "product-032-coated-namecard"}
+{"dst": "process-PROC_000028", "note": "둥근(모서리 옵션)", "origin": "fk", "qualifier": {"mand": "N"}, "rel": "has_process", "source_node": "product-032-coated-namecard", "src": "product-032-coated-namecard"}
+{"dst": "size-SIZ_000008", "note": "90x50(공유 명함 사이즈·033 정의 재사용)", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "product-032-coated-namecard", "src": "product-032-coated-namecard"}
+{"dst": "size-SIZ_000133", "note": "86x52(공유 명함 사이즈·033 정의 재사용)", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "product-032-coated-namecard", "src": "product-032-coated-namecard"}
+{"dst": "category-CAT_000003", "note": "인쇄홍보물(main_cat_yn=Y)", "origin": "fk", "qualifier": null, "rel": "in_category", "source_node": "product-032-coated-namecard", "src": "product-032-coated-namecard"}
+{"dst": "category-CAT_000313", "note": "명함(2차·main_cat_yn=N)", "origin": "fk", "qualifier": null, "rel": "in_category", "source_node": "product-032-coated-namecard", "src": "product-032-coated-namecard"}
+{"dst": "formula-PRF_NAMECARD_COAT", "note": null, "origin": "fk", "qualifier": null, "rel": "priced_by", "source_node": "product-032-coated-namecard", "src": "product-032-coated-namecard"}
+{"dst": "DEC_namecard032_wiring_260630", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-032-coated-namecard", "src": "product-032-coated-namecard"}
+{"dst": "GAP_032_coat_side", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-032-coated-namecard", "src": "product-032-coated-namecard"}
+{"dst": "RULE_dataline_neq_wiring", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-032-coated-namecard", "src": "product-032-coated-namecard"}
+{"dst": "RULE_dosu_is_printopt", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-032-coated-namecard", "src": "product-032-coated-namecard"}
+{"dst": "RULE_price_value_boundary", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-032-coated-namecard", "src": "product-032-coated-namecard"}
+{"dst": "TERM_corner_round", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-032-coated-namecard", "src": "product-032-coated-namecard"}
+{"dst": "material-MAT_000081", "note": "아트지 250g(USAGE.07·dflt)", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-032-coated-namecard", "src": "product-032-coated-namecard"}
+{"dst": "material-MAT_000082", "note": "아트지 300g(USAGE.07)", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-032-coated-namecard", "src": "product-032-coated-namecard"}
+{"dst": "optgroup-033-corner", "note": null, "origin": "fk", "qualifier": null, "rel": "has_option_group", "source_node": "product-033-standard-namecard", "src": "product-033-standard-namecard"}
+{"dst": "optgroup-033-paper", "note": null, "origin": "fk", "qualifier": null, "rel": "has_option_group", "source_node": "product-033-standard-namecard", "src": "product-033-standard-namecard"}
+{"dst": "optgroup-033-postpress", "note": null, "origin": "fk", "qualifier": null, "rel": "has_option_group", "source_node": "product-033-standard-namecard", "src": "product-033-standard-namecard"}
+{"dst": "optgroup-033-print", "note": null, "origin": "fk", "qualifier": null, "rel": "has_option_group", "source_node": "product-033-standard-namecard", "src": "product-033-standard-namecard"}
+{"dst": "plate-OUTPUT_PAPER_TYPE_01", "note": "SIZ_000499 출력용지·OUTPUT_PAPER_TYPE.01", "origin": "fk", "qualifier": null, "rel": "has_plate_size", "source_node": "product-033-standard-namecard", "src": "product-033-standard-namecard"}
+{"dst": "printopt-POPT_000001", "note": "단면(front CLR_000005 4도·back CLR_000001 인쇄안함)", "origin": "fk", "qualifier": null, "rel": "has_print_option", "source_node": "product-033-standard-namecard", "src": "product-033-standard-namecard"}
+{"dst": "printopt-POPT_000002", "note": "양면(front/back CLR_000005 4도)", "origin": "fk", "qualifier": null, "rel": "has_print_option", "source_node": "product-033-standard-namecard", "src": "product-033-standard-namecard"}
+{"dst": "process-PROC_000027", "note": "직각 모서리(default 재단)", "origin": "fk", "qualifier": {"mand": "N"}, "rel": "has_process", "source_node": "product-033-standard-namecard", "src": "product-033-standard-namecard"}
+{"dst": "process-PROC_000028", "note": "둥근 모서리(귀돌이 R)", "origin": "fk", "qualifier": {"mand": "N"}, "rel": "has_process", "source_node": "product-033-standard-namecard", "src": "product-033-standard-namecard"}
+{"dst": "process-PROC_000031", "note": "가변텍스트", "origin": "fk", "qualifier": {"mand": "N"}, "rel": "has_process", "source_node": "product-033-standard-namecard", "src": "product-033-standard-namecard"}
+{"dst": "process-PROC_000032", "note": "가변이미지", "origin": "fk", "qualifier": {"mand": "N"}, "rel": "has_process", "source_node": "product-033-standard-namecard", "src": "product-033-standard-namecard"}
+{"dst": "size-SIZ_000008", "note": "90x50mm 기본", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "product-033-standard-namecard", "src": "product-033-standard-namecard"}
+{"dst": "size-SIZ_000133", "note": "86x52mm", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "product-033-standard-namecard", "src": "product-033-standard-namecard"}
+{"dst": "category-CAT_000003", "note": "인쇄홍보물(주·main_cat_yn=Y)", "origin": "fk", "qualifier": null, "rel": "in_category", "source_node": "product-033-standard-namecard", "src": "product-033-standard-namecard"}
+{"dst": "category-CAT_000313", "note": "명함(부·main_cat_yn=N)", "origin": "fk", "qualifier": null, "rel": "in_category", "source_node": "product-033-standard-namecard", "src": "product-033-standard-namecard"}
+{"dst": "formula-PRF_NAMECARD_FIXED", "note": null, "origin": "fk", "qualifier": null, "rel": "priced_by", "source_node": "product-033-standard-namecard", "src": "product-033-standard-namecard"}
+{"dst": "gap-033-vardata-param", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-033-standard-namecard", "src": "product-033-standard-namecard"}
+{"dst": "material-MAT_000074", "note": null, "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-033-standard-namecard", "src": "product-033-standard-namecard"}
+{"dst": "material-MAT_000081", "note": null, "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-033-standard-namecard", "src": "product-033-standard-namecard"}
+{"dst": "material-MAT_000082", "note": null, "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-033-standard-namecard", "src": "product-033-standard-namecard"}
+{"dst": "material-MAT_000091", "note": null, "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-033-standard-namecard", "src": "product-033-standard-namecard"}
+{"dst": "material-MAT_000092", "note": null, "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-033-standard-namecard", "src": "product-033-standard-namecard"}
+{"dst": "optgroup-041-finish", "note": null, "origin": "fk", "qualifier": null, "rel": "has_option_group", "source_node": "product-041-coupon", "src": "product-041-coupon"}
+{"dst": "optgroup-041-paper", "note": null, "origin": "fk", "qualifier": null, "rel": "has_option_group", "source_node": "product-041-coupon", "src": "product-041-coupon"}
+{"dst": "optgroup-041-print", "note": null, "origin": "fk", "qualifier": null, "rel": "has_option_group", "source_node": "product-041-coupon", "src": "product-041-coupon"}
+{"dst": "plate-OUTPUT_PAPER_TYPE_01", "note": null, "origin": "fk", "qualifier": null, "rel": "has_plate_size", "source_node": "product-041-coupon", "src": "product-041-coupon"}
+{"dst": "printopt-POPT_000001", "note": null, "origin": "fk", "qualifier": null, "rel": "has_print_option", "source_node": "product-041-coupon", "src": "product-041-coupon"}
+{"dst": "printopt-POPT_000002", "note": null, "origin": "fk", "qualifier": null, "rel": "has_print_option", "source_node": "product-041-coupon", "src": "product-041-coupon"}
+{"dst": "process-PROC_000004", "note": null, "origin": "fk", "qualifier": "mandatory", "rel": "has_process", "source_node": "product-041-coupon", "src": "product-041-coupon"}
+{"dst": "process-PROC_000029", "note": null, "origin": "fk", "qualifier": null, "rel": "has_process", "source_node": "product-041-coupon", "src": "product-041-coupon"}
+{"dst": "process-PROC_000030", "note": null, "origin": "fk", "qualifier": null, "rel": "has_process", "source_node": "product-041-coupon", "src": "product-041-coupon"}
+{"dst": "process-PROC_000031", "note": "가변텍스트(R2·라이브 실바인딩·형제 033/027 동일)", "origin": "fk", "qualifier": null, "rel": "has_process", "source_node": "product-041-coupon", "src": "product-041-coupon"}
+{"dst": "process-PROC_000032", "note": "가변이미지(R2·라이브 실바인딩)", "origin": "fk", "qualifier": null, "rel": "has_process", "source_node": "product-041-coupon", "src": "product-041-coupon"}
+{"dst": "size-SIZ_000013", "note": null, "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "product-041-coupon", "src": "product-041-coupon"}
+{"dst": "size-SIZ_000014", "note": null, "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "product-041-coupon", "src": "product-041-coupon"}
+{"dst": "category-CAT_000062", "note": null, "origin": "fk", "qualifier": null, "rel": "in_category", "source_node": "product-041-coupon", "src": "product-041-coupon"}
+{"dst": "formula-PRF_DGP_A", "note": null, "origin": "fk", "qualifier": null, "rel": "priced_by", "source_node": "product-041-coupon", "src": "product-041-coupon"}
+{"dst": "DEC_baseproc_260701", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-041-coupon", "src": "product-041-coupon"}
+{"dst": "DEC_qty_audit_260702", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-041-coupon", "src": "product-041-coupon"}
+{"dst": "RULE_dosu_is_printopt", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-041-coupon", "src": "product-041-coupon"}
+{"dst": "RULE_import_material_no_delete", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-041-coupon", "src": "product-041-coupon"}
+{"dst": "RULE_pansu_db_function", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-041-coupon", "src": "product-041-coupon"}
+{"dst": "RULE_plate_paper_only", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-041-coupon", "src": "product-041-coupon"}
+{"dst": "RULE_price_value_boundary", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-041-coupon", "src": "product-041-coupon"}
+{"dst": "RULE_scope_boundary", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-041-coupon", "src": "product-041-coupon"}
+{"dst": "material-MAT_000072", "note": null, "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-041-coupon", "src": "product-041-coupon"}
+{"dst": "material-MAT_000078", "note": null, "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-041-coupon", "src": "product-041-coupon"}
+{"dst": "material-MAT_000088", "note": null, "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-041-coupon", "src": "product-041-coupon"}
+{"dst": "material-MAT_000105", "note": null, "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-041-coupon", "src": "product-041-coupon"}
+{"dst": "plate-OUTPUT_PAPER_TYPE_01", "note": "국전계열(316x467)@SIZ_000499·종이류·fn_best_plate 자동선택", "origin": "fk", "qualifier": null, "rel": "has_plate_size", "source_node": "product-043-bg-opp", "src": "product-043-bg-opp"}
+{"dst": "printopt-POPT_000001", "note": "단면(front CLR_000005)", "origin": "fk", "qualifier": null, "rel": "has_print_option", "source_node": "product-043-bg-opp", "src": "product-043-bg-opp"}
+{"dst": "printopt-POPT_000002", "note": "양면(front/back CLR_000005)", "origin": "fk", "qualifier": null, "rel": "has_print_option", "source_node": "product-043-bg-opp", "src": "product-043-bg-opp"}
+{"dst": "process-PROC_000004", "note": "디지털인쇄 base·2026-06-30 결합(DEC_baseproc_260701 18건 중 1건)", "origin": "fk", "qualifier": "mandatory", "rel": "has_process", "source_node": "product-043-bg-opp", "src": "product-043-bg-opp"}
+{"dst": "size-SIZ_000033", "note": null, "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "product-043-bg-opp", "src": "product-043-bg-opp"}
+{"dst": "size-SIZ_000034", "note": null, "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "product-043-bg-opp", "src": "product-043-bg-opp"}
+{"dst": "size-SIZ_000035", "note": null, "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "product-043-bg-opp", "src": "product-043-bg-opp"}
+{"dst": "size-SIZ_000036", "note": null, "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "product-043-bg-opp", "src": "product-043-bg-opp"}
+{"dst": "size-SIZ_000037", "note": null, "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "product-043-bg-opp", "src": "product-043-bg-opp"}
+{"dst": "size-SIZ_000038", "note": null, "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "product-043-bg-opp", "src": "product-043-bg-opp"}
+{"dst": "category-CAT_000327", "note": "인쇄포장재(main_cat_yn=N)·팩 §3.1 포장 계열", "origin": "fk", "qualifier": null, "rel": "in_category", "source_node": "product-043-bg-opp", "src": "product-043-bg-opp"}
+{"dst": "formula-PRF_DGP_C", "note": "원자합산형C(인쇄비+용지비+접지비+타공비)", "origin": "fk", "qualifier": null, "rel": "priced_by", "source_node": "product-043-bg-opp", "src": "product-043-bg-opp"}
+{"dst": "DEC_baseproc_260701", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-043-bg-opp", "src": "product-043-bg-opp"}
+{"dst": "GAP_043_perf_process", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-043-bg-opp", "src": "product-043-bg-opp"}
+{"dst": "GAP_envelope_set_model", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-043-bg-opp", "src": "product-043-bg-opp"}
+{"dst": "RULE_dataline_neq_wiring", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-043-bg-opp", "src": "product-043-bg-opp"}
+{"dst": "RULE_dosu_is_printopt", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-043-bg-opp", "src": "product-043-bg-opp"}
+{"dst": "RULE_pansu_db_function", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-043-bg-opp", "src": "product-043-bg-opp"}
+{"dst": "RULE_plate_paper_only", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-043-bg-opp", "src": "product-043-bg-opp"}
+{"dst": "RULE_price_value_boundary", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-043-bg-opp", "src": "product-043-bg-opp"}
+{"dst": "material-MAT_000091", "note": "스노우지 250g·USAGE.07 공통 슬롯(단일 본문 자재)", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-043-bg-opp", "src": "product-043-bg-opp"}
+{"dst": "optgroup-046-cutting-shape", "note": "커팅모양 3택(나뭇잎/별타공/리니니)", "origin": "fk", "qualifier": null, "rel": "has_option_group", "source_node": "product-046-label-tag", "src": "product-046-label-tag"}
+{"dst": "plate-OUTPUT_PAPER_TYPE_01", "note": "국전 출력용지 SIZ_000499·종이류라 판형 유효·fn_best_plate 자동선택", "origin": "fk", "qualifier": null, "rel": "has_plate_size", "source_node": "product-046-label-tag", "src": "product-046-label-tag"}
+{"dst": "printopt-POPT_000001", "note": "단면(칼라)", "origin": "fk", "qualifier": null, "rel": "has_print_option", "source_node": "product-046-label-tag", "src": "product-046-label-tag"}
+{"dst": "printopt-POPT_000002", "note": "양면(칼라)", "origin": "fk", "qualifier": null, "rel": "has_print_option", "source_node": "product-046-label-tag", "src": "product-046-label-tag"}
+{"dst": "process-PROC_000004", "note": "디지털인쇄 base·mand_proc_yn=Y(07-01 18건 COMMIT분)", "origin": "fk", "qualifier": "mandatory", "rel": "has_process", "source_node": "product-046-label-tag", "src": "product-046-label-tag"}
+{"dst": "size-SIZ_000011", "note": "50x50", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "product-046-label-tag", "src": "product-046-label-tag"}
+{"dst": "size-SIZ_000047", "note": "40x80 (완칼 재단)", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "product-046-label-tag", "src": "product-046-label-tag"}
+{"dst": "size-SIZ_000048", "note": "25x110", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "product-046-label-tag", "src": "product-046-label-tag"}
+{"dst": "category-CAT_000327", "note": "인쇄포장재 — main_cat_yn=N(부카테고리)", "origin": "fk", "qualifier": null, "rel": "in_category", "source_node": "product-046-label-tag", "src": "product-046-label-tag"}
+{"dst": "formula-PRF_DGP_B", "note": "원자합산형B(인쇄+용지+완칼)", "origin": "fk", "qualifier": null, "rel": "priced_by", "source_node": "product-046-label-tag", "src": "product-046-label-tag"}
+{"dst": "DEC_baseproc_260701", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-046-label-tag", "src": "product-046-label-tag"}
+{"dst": "DEC_diecut_260701", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-046-label-tag", "src": "product-046-label-tag"}
+{"dst": "RULE_dataline_neq_wiring", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-046-label-tag", "src": "product-046-label-tag"}
+{"dst": "RULE_dosu_is_printopt", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-046-label-tag", "src": "product-046-label-tag"}
+{"dst": "RULE_pansu_db_function", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-046-label-tag", "src": "product-046-label-tag"}
+{"dst": "RULE_scope_boundary", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-046-label-tag", "src": "product-046-label-tag"}
+{"dst": "gap-046-diecut-golden", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-046-label-tag", "src": "product-046-label-tag"}
+{"dst": "material-MAT_000109", "note": "몽블랑 240g·USAGE.07 단일 슬롯", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-046-label-tag", "src": "product-046-label-tag"}
+{"dst": "product-046-label-tag", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "size-SIZ_000047", "src": "size-SIZ_000047"}
+{"dst": "RULE_import_material_no_delete", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "size-SIZ_000048", "src": "size-SIZ_000048"}
+{"dst": "material-MAT_000109", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "size-SIZ_000048", "src": "size-SIZ_000048"}

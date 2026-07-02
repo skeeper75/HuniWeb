@@ -1,0 +1,307 @@
+{
+  "bindings": {
+    "addons": [],
+    "bundle_qtys": [],
+    "categories": [
+      {
+        "cat_cd": "CAT_000313",
+        "main_cat_yn": "N"
+      },
+      {
+        "cat_cd": "CAT_000003",
+        "main_cat_yn": "Y"
+      }
+    ],
+    "constraints": [],
+    "materials": [
+      {
+        "dflt_yn": "Y",
+        "mat_cd": "MAT_000074",
+        "usage_cd": "USAGE.07"
+      },
+      {
+        "dflt_yn": "Y",
+        "mat_cd": "MAT_000081",
+        "usage_cd": "USAGE.07"
+      },
+      {
+        "dflt_yn": "Y",
+        "mat_cd": "MAT_000082",
+        "usage_cd": "USAGE.07"
+      },
+      {
+        "dflt_yn": "Y",
+        "mat_cd": "MAT_000091",
+        "usage_cd": "USAGE.07"
+      },
+      {
+        "dflt_yn": "Y",
+        "mat_cd": "MAT_000092",
+        "usage_cd": "USAGE.07"
+      }
+    ],
+    "option_groups": [
+      {
+        "disp_seq": "1",
+        "mand_yn": "Y",
+        "max_sel_cnt": "1",
+        "min_sel_cnt": "1",
+        "opt_grp_cd": "OPT_000048",
+        "opt_grp_nm": "인쇄",
+        "sel_typ_cd": "SEL_TYPE.01"
+      },
+      {
+        "disp_seq": "2",
+        "mand_yn": "Y",
+        "max_sel_cnt": "1",
+        "min_sel_cnt": "1",
+        "opt_grp_cd": "OPT_000049",
+        "opt_grp_nm": "종이",
+        "sel_typ_cd": "SEL_TYPE.01"
+      },
+      {
+        "disp_seq": "3",
+        "mand_yn": "N",
+        "max_sel_cnt": "1",
+        "min_sel_cnt": "0",
+        "opt_grp_cd": "OPT_000050",
+        "opt_grp_nm": "모서리",
+        "sel_typ_cd": "SEL_TYPE.01"
+      },
+      {
+        "disp_seq": "4",
+        "mand_yn": "N",
+        "max_sel_cnt": "2",
+        "min_sel_cnt": "0",
+        "opt_grp_cd": "OPT_000051",
+        "opt_grp_nm": "후가공",
+        "sel_typ_cd": "SEL_TYPE.02"
+      }
+    ],
+    "option_items": [
+      {
+        "opt_cd": "OPV_000186",
+        "ref_dim_cd": "OPT_REF_DIM.06",
+        "ref_key1": "1",
+        "ref_key2": ""
+      },
+      {
+        "opt_cd": "OPV_000187",
+        "ref_dim_cd": "OPT_REF_DIM.06",
+        "ref_key1": "2",
+        "ref_key2": ""
+      },
+      {
+        "opt_cd": "OPV_000188",
+        "ref_dim_cd": "OPT_REF_DIM.03",
+        "ref_key1": "MAT_000074",
+        "ref_key2": "USAGE.07"
+      },
+      {
+        "opt_cd": "OPV_000189",
+        "ref_dim_cd": "OPT_REF_DIM.03",
+        "ref_key1": "MAT_000081",
+        "ref_key2": "USAGE.07"
+      },
+      {
+        "opt_cd": "OPV_000190",
+        "ref_dim_cd": "OPT_REF_DIM.03",
+        "ref_key1": "MAT_000082",
+        "ref_key2": "USAGE.07"
+      },
+      {
+        "opt_cd": "OPV_000191",
+        "ref_dim_cd": "OPT_REF_DIM.03",
+        "ref_key1": "MAT_000091",
+        "ref_key2": "USAGE.07"
+      },
+      {
+        "opt_cd": "OPV_000192",
+        "ref_dim_cd": "OPT_REF_DIM.03",
+        "ref_key1": "MAT_000092",
+        "ref_key2": "USAGE.07"
+      },
+      {
+        "opt_cd": "OPV_000193",
+        "ref_dim_cd": "OPT_REF_DIM.04",
+        "ref_key1": "PROC_000027",
+        "ref_key2": ""
+      },
+      {
+        "opt_cd": "OPV_000194",
+        "ref_dim_cd": "OPT_REF_DIM.04",
+        "ref_key1": "PROC_000028",
+        "ref_key2": ""
+      },
+      {
+        "opt_cd": "OPV_000195",
+        "ref_dim_cd": "OPT_REF_DIM.04",
+        "ref_key1": "PROC_000031",
+        "ref_key2": ""
+      },
+      {
+        "opt_cd": "OPV_000196",
+        "ref_dim_cd": "OPT_REF_DIM.04",
+        "ref_key1": "PROC_000032",
+        "ref_key2": ""
+      }
+    ],
+    "options": [
+      {
+        "opt_cd": "OPV_000186",
+        "opt_grp_cd": "OPT_000048",
+        "opt_nm": "단면"
+      },
+      {
+        "opt_cd": "OPV_000187",
+        "opt_grp_cd": "OPT_000048",
+        "opt_nm": "양면"
+      },
+      {
+        "opt_cd": "OPV_000193",
+        "opt_grp_cd": "OPT_000050",
+        "opt_nm": "직각"
+      },
+      {
+        "opt_cd": "OPV_000194",
+        "opt_grp_cd": "OPT_000050",
+        "opt_nm": "둥근"
+      },
+      {
+        "opt_cd": "OPV_000195",
+        "opt_grp_cd": "OPT_000051",
+        "opt_nm": "가변텍스트"
+      },
+      {
+        "opt_cd": "OPV_000196",
+        "opt_grp_cd": "OPT_000051",
+        "opt_nm": "가변이미지"
+      },
+      {
+        "opt_cd": "OPV_000188",
+        "opt_grp_cd": "OPT_000049",
+        "opt_nm": "백색모조지 220g"
+      },
+      {
+        "opt_cd": "OPV_000189",
+        "opt_grp_cd": "OPT_000049",
+        "opt_nm": "아트지 250g"
+      },
+      {
+        "opt_cd": "OPV_000190",
+        "opt_grp_cd": "OPT_000049",
+        "opt_nm": "아트지 300g"
+      },
+      {
+        "opt_cd": "OPV_000191",
+        "opt_grp_cd": "OPT_000049",
+        "opt_nm": "스노우지 250g"
+      },
+      {
+        "opt_cd": "OPV_000192",
+        "opt_grp_cd": "OPT_000049",
+        "opt_nm": "스노우지 300g"
+      }
+    ],
+    "plate_sizes": [
+      {
+        "output_paper_typ_cd": "OUTPUT_PAPER_TYPE.01",
+        "siz_cd": "SIZ_000499"
+      }
+    ],
+    "price_formulas": [
+      {
+        "frm_cd": "PRF_NAMECARD_FIXED"
+      }
+    ],
+    "print_options": [
+      {
+        "opt_id": "1",
+        "print_opt_cd": "POPT_000001",
+        "print_side": "단면"
+      },
+      {
+        "opt_id": "2",
+        "print_opt_cd": "POPT_000002",
+        "print_side": "양면"
+      }
+    ],
+    "processes": [
+      {
+        "mand_proc_yn": "N",
+        "proc_cd": "PROC_000027"
+      },
+      {
+        "mand_proc_yn": "N",
+        "proc_cd": "PROC_000028"
+      },
+      {
+        "mand_proc_yn": "N",
+        "proc_cd": "PROC_000031"
+      },
+      {
+        "mand_proc_yn": "N",
+        "proc_cd": "PROC_000032"
+      }
+    ],
+    "sizes": [
+      {
+        "dflt_yn": "Y",
+        "siz_cd": "SIZ_000008"
+      },
+      {
+        "dflt_yn": "Y",
+        "siz_cd": "SIZ_000133"
+      }
+    ]
+  },
+  "meta": {
+    "captured_at": "2026-07-03",
+    "generated_by": "transcribe_product_033.py",
+    "prd_cd": "PRD_000033",
+    "snapshot": "live-snapshot/latest (snap_20260702_1119)"
+  },
+  "processes": {
+    "PROC_000027": {
+      "proc_nm": "직각",
+      "upr_proc_cd": "PROC_000026"
+    },
+    "PROC_000028": {
+      "proc_nm": "둥근",
+      "upr_proc_cd": "PROC_000026"
+    },
+    "PROC_000031": {
+      "proc_nm": "가변텍스트",
+      "upr_proc_cd": "PROC_000085"
+    },
+    "PROC_000032": {
+      "proc_nm": "가변이미지",
+      "upr_proc_cd": "PROC_000085"
+    }
+  },
+  "product": {
+    "del_yn": "N",
+    "editor_yn": "N",
+    "file_upload_yn": "Y",
+    "max_qty": "10000",
+    "min_qty": "100",
+    "prd_nm": "스탠다드명함",
+    "prd_typ_cd": "PRD_TYPE.01",
+    "qty_incr": "100",
+    "qty_unit_typ_cd": "QTY_UNIT.02"
+  },
+  "sizes": {
+    "SIZ_000008": {
+      "cut": "90x50",
+      "note": "판걸이=24.0 / 전지=316x467 / 적용=명함",
+      "siz_nm": "90x50mm",
+      "work": "92x52"
+    },
+    "SIZ_000133": {
+      "cut": "86x52",
+      "note": "",
+      "siz_nm": "86x52mm",
+      "work": "88x54"
+    }
+  }
+}

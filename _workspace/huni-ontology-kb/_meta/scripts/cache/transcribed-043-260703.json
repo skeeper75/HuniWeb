@@ -1,0 +1,113 @@
+{
+  "categories": [
+    {
+      "cat_cd": "CAT_000327",
+      "main_cat_yn": "N"
+    }
+  ],
+  "counts": {
+    "addons": 0,
+    "bundle_qtys": 0,
+    "constraints": 0,
+    "option_groups": 0,
+    "sets": 0
+  },
+  "formulas": [
+    {
+      "frm_cd": "PRF_DGP_C",
+      "note": "인쇄배경지(OPP봉투타입) → PRF_DGP_C"
+    }
+  ],
+  "materials": [
+    {
+      "dflt": "Y",
+      "mat_cd": "MAT_000091",
+      "usage_cd": "USAGE.07"
+    }
+  ],
+  "meta": {
+    "captured_at": "2026-07-03",
+    "generated_by": "transcribe_043.py",
+    "prd_cd": "PRD_000043",
+    "snapshot": "live-snapshot/latest (snap_20260702_1119)"
+  },
+  "plates": [
+    {
+      "dflt_plt": "Y",
+      "output_paper_typ_cd": "OUTPUT_PAPER_TYPE.01",
+      "siz_cd": "SIZ_000499"
+    }
+  ],
+  "print_options": [
+    {
+      "back": "CLR_000001",
+      "front": "CLR_000005",
+      "opt_id": "1",
+      "print_opt_cd": "POPT_000001",
+      "print_side": "단면"
+    },
+    {
+      "back": "CLR_000005",
+      "front": "CLR_000005",
+      "opt_id": "2",
+      "print_opt_cd": "POPT_000002",
+      "print_side": "양면"
+    }
+  ],
+  "processes": [
+    {
+      "mand": "Y",
+      "proc_cd": "PROC_000004"
+    }
+  ],
+  "product": {
+    "del_yn": "N",
+    "editor_yn": "N",
+    "file_upload_yn": "Y",
+    "max_qty": "1000",
+    "min_qty": "20",
+    "prd_nm": "인쇄배경지(OPP봉투타입)",
+    "prd_typ_cd": "PRD_TYPE.01",
+    "qty_incr": "20",
+    "qty_unit_typ_cd": "QTY_UNIT.02",
+    "use_yn": "Y"
+  },
+  "sizes": [
+    {
+      "cut": "76x100",
+      "siz_cd": "SIZ_000033",
+      "siz_nm": "76x100",
+      "work": "80x104"
+    },
+    {
+      "cut": "76x120",
+      "siz_cd": "SIZ_000034",
+      "siz_nm": "76x120",
+      "work": "80x124"
+    },
+    {
+      "cut": "86x120",
+      "siz_cd": "SIZ_000035",
+      "siz_nm": "86x120",
+      "work": "90x124"
+    },
+    {
+      "cut": "94x94",
+      "siz_cd": "SIZ_000036",
+      "siz_nm": "94x94",
+      "work": "98x98"
+    },
+    {
+      "cut": "62x180",
+      "siz_cd": "SIZ_000037",
+      "siz_nm": "62x180",
+      "work": "66x184"
+    },
+    {
+      "cut": "105x160",
+      "siz_cd": "SIZ_000038",
+      "siz_nm": "105x160",
+      "work": "109x164"
+    }
+  ]
+}
