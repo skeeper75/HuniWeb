@@ -4,6 +4,19 @@
 
 ---
 
+## 2026-07-02 셋트상품 19개 가격레벨 전수 진단 + 088 구성 COMMIT + 088 재점검·실무진 질문서
+- **전수 진단(라이브 simulate-set·copies=100·독립 재현)**: 19개 중 **18 PRICE≠0(GO)·1 결함(088)**. 산출 `05_gate/set-price-full-diagnosis-260702.md`·재현 스크립트 `_foundation/batch/{set_full_scan,set_fix3,gold_repro}.py`.
+  - **094/097/100 오진단 정정**: 부모 고정형 공식이 옵션차원 요구 → set_selections 채우면 정상(094=450,000[opt OPV_000491+siz003]·097=135,000[bdl_qty=50]·100=1,500,000[opt OPV_000484]). 데이터 정상·교정 불요.
+  - **문구 172~181** 전부 정상(부모 PRF_STN_* 고정가 all-in).
+  - **★셋트 simulate 페이로드 정본**: 판형=t_prd_product_plate_sizes(068표지 SIZ_000499)·구성원 procs=제본그룹(PROC_000017) 제외·셋트본체 제본=set_procs·내지=derived+pages·표지=manual qty=copies.
+  - **신규 C트랙**: price_views.py:1930 price_simulate_set이 member selections에 coat_side_cnt 드롭 → 셋트경로 표지코팅(068/069/070) 저평가(개발팀). 명세 `_foundation/remediation/CODEBUG-set-coat-side-cnt-drop.md`.
+- **088 레더링바인더 = 유일 결함(PRICE=0)**: 부모공식 전무·내지 member 부재(빈 바인더). ① use_yn=N 숨김 → ② 실무진 답(제본비=077 COVERBIND 동형·D링두께 무관) 후 전용공식 PRF_LEATHER_RINGBINDER_SET mint+COVERBIND 재사용 **구성 COMMIT(0→1부34,100/100부796,900)**·use_yn N→Y 재노출.
+- **★088 재점검(정확 모델 조사)**: 레더 프리미엄은 계산공식집(권위)의 **커버 분해**(표지인쇄+코팅+용지+제본)이지 +3,900 정액 아님(라이브 COVERBIND 뭉침이 손실). 도메인+국내외 경쟁사 리서치(`03_design/leather-ringbinder-pricing-research-260702.md`)=**링 두께는 수용량 제약이지 가격축 아님**(도메인·RedPrinting·Hartnack·국내도매 3자 수렴)·**싸바리(하드케이스 wrapping)≠링바인더(D링 메커니즘)**(후니 별도 싸바리바인더 상품 pcode=44). 상품마스터·가격표 전수=**D링 바인더 제작비 없음(보류중 정당)**·표지 레더인쇄=COMP_POSTER_CANVAS_FABRIC(레더아트프린트 611×374→19,000 재사용가능)·레더프리미엄 참고 다이어리+3,000.
+- **실무진 질문서 5항 산출**(`03_design/레더링바인더-실무진질문서-260702.md`·쉬운 인쇄용어): D링 제작비/표지 레더인쇄/D링 두께/면지 유무료/O·D링.
+- **다음 시작점**: 실무진 답(특히 D링 제작비) 후 088을 커버 분해 정확모델(표지 레더아트프린트+D링조립+면지)로 §23 SOP 재설계·COMMIT. 그 전 현 build(077 근사·동작·두께무관)는 유지. 상세 [[set-product-full-diagnosis-260702]].
+
+---
+
 ## 2026-07-01 — 069 무선·070 PUR 소프트커버 셋트 완전 동작화 COMMIT (저청구 → 138,688·288,688·068 동형 전파)
 
 068 중철에서 확립한 분해형 소프트커버 패턴(표지공식 PRF_BOOK_COVER + 표지 member 분리)을 069 무선·070 PUR에 전파. 둘 다 완전 동작화 COMMIT.
