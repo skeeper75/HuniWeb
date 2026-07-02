@@ -417,6 +417,36 @@ The full original directive (all 17 sections, verbatim) is archived at
 
 **변경이력:** 최신: 2026-07-02(재실행) 컨펌 큐 처리 — 디지털 34상품 "제약 MISSING" 해체(진짜 신규=047 1건·실무진 질문 5·타트랙 7종·BLOCKED 9)·wave-3 047 코팅×종이두께 COMMIT+실화면 4항 PASS(★.03 리스트 결과절=RAW-ONLY→금지형 .02 전환 패턴=C-10)·아크릴 5=미출시 확정(제약 안 만듦·168/169/170 use_yn N 정리 COMMIT). 직전: 첫 종단 실행 GO(129/130 자재별 8규칙 교체 COMMIT·CN-5 19 BLOCKED-UI·dev-handoff 확정) → `_workspace/huni-constraint-rules/CHANGELOG.md`
 
+## 32. Harness: Excel-to-DB (범용 엑셀→DB 파이프라인 · 리서치 기반 방법론)
+
+**목표:** 임의의 업무 엑셀(상품마스터·가격표류)을 받아 **분석 → 컬럼 의미 확정 → DB 스키마 설계 → 적재 코드 → 검증 게이트**까지 종단 산출하는 범용 파이프라인. 방법론 정본 = `_workspace/excel-to-db/_meta/best-practices-playbook.md`(학술 23·산업 20+·LLM 29 출처 리서치 + 이 레포 26라운드 실전 실증 종합). 6단계: ⓪권위(SOT) 선언 → ①1회 추출·프로파일(CSV 캐시·셀 역할·매트릭스 unpivot) → ②컬럼 의미 사전(애매모호 0·질문 큐·종료척도 선언) → ③스키마 설계(WHY 필수·long 단가+차원 코드테이블·EAV 금지) → ④적재 코드(결정론 변환·멱등 UPSERT·dryrun/apply 분리·대사) → ⑤X1~X7 게이트(생성≠검증·골든 재현 오차 0). 신 버전 엑셀=전면 재분석 금지·셀 diff 델타만. **범용 설계용 — 후니 라이브 t_* 작업은 기존 전용 하네스(§7 등)가 우선.**
+
+**트리거:** "엑셀 분석해서 DB로", "엑셀 DB화", "엑셀 스키마 설계", "엑셀 파이프라인", "엑셀 프로파일링", "컬럼 의미 사전", "새 엑셀 버전 반영", "엑셀 델타 적재", "x2d 하네스 실행/재실행/업데이트/보완", "특정 시트만/특정 단계만 다시" 등 본 도메인 요청 시 `excel-to-db-orchestrator` 스킬을 사용. 단순 질문은 직접 응답.
+
+**산출물 루트:** `_workspace/excel-to-db/` (`00_research` 리서치 3건·`_meta` 플레이북·`<dataset>/01_profile·02_semantics·03_schema·04_load·05_gate`). 6인 팀(`x2d-methodology-researcher` 방법론 갱신 / `x2d-profiler` 1회 추출[HARD 반복 Read 금지] / `x2d-semantic-analyst` 의미·SOT·종료척도 / `x2d-schema-designer` ERD·DDL·매핑 / `x2d-load-engineer` 멱등 적재·DRY-RUN·undo / `x2d-gate-validator` X1~X7) + 5 방법론 스킬(x2d-*) + 번들 스크립트(profile_workbook.py·workbook_diff.py). 핵심 원칙: LLM은 숫자 전사·계산 금지[HARD]·결정론 스크립트 우선·생성≠검증·실 COMMIT 인간 승인·기존 후니 하네스 자산은 참조만(독립 신규).
+
+**변경이력:** 최신: 2026-07-02 하네스 초기 구성(리서치 3건 선행→6 에이전트+6 스킬+스크립트 2종·상품마스터 260702 스모크 13시트 PASS) → `_workspace/excel-to-db/_meta/CHANGELOG.md`
+
+## 33. Harness: Huni-Ontology-KB (온톨로지 지식베이스 · 자연어→상품 추천→가격)
+
+**목표:** 전 분석 자산(`docs/kb` 6문서·권위 엑셀 260702 2종·§9 print-kb 위키[승계]·전 하네스 산출물·라이브 DB)을 **온톨로지 기반 지식베이스**로 재구성해, 자연어 질의→상품 추천→가격 제시를 KB 탐색만으로 가능하게 한다. 적대적 검증으로 오염/오해석 데이터를 필터링(권위 260702 결정론 대조). 핵심 결정[사용자 확정]: ① §9 위키 **승계+재사용 신규 하네스**(재병합 금지·상보) ② **파일=정본(SOT)·그래프 DB=결정론 빌드 파생물**(그래프에만 있는 사실 금지) ③ **대표 상품군 1개 종단 파일럿**→동형 전파 ④ 실행 모드=**dynamic workflow**(Workflow 툴·게이트 루프).
+
+**트리거:** "온톨로지 지식베이스", "온톨로지 KB", "지식데이터베이스 구축", "지식그래프 구축", "자연어 상품 추천", "질의 게이트", "KB 구축/확장/재실행/업데이트/보완", "적대적 검증 실행", "그래프 재빌드", "위키 승계", "특정 상품군만 KB" 등 본 도메인 요청 시 `huni-ontology-kb-orchestrator` 스킬을 사용. §9 위키 집필 자체는 print-kb-wiki-orchestrator, 범용 엑셀→DB는 §32. 단순 조회는 `_workspace/huni-ontology-kb/03_kb/index.md` 직접.
+
+**산출물 루트:** `_workspace/huni-ontology-kb/` (00_research·01_curation·02_ontology·03_kb[정본]·04_graph[파생]·05_verification·06_query_gate·_meta). 6인 팀(`okb-methodology-researcher`∥`okb-source-curator` 기준점 팬아웃 → `okb-ontology-architect` 스키마[★인간 승인 게이트] → `okb-knowledge-builder` 구축 → `okb-adversarial-verifier` 6축 적대 검증 루프 → `okb-query-gate` 블라인드 NL 시나리오·O1~O7) + 스킬 3종(orchestrator·okb-ontology-authoring·okb-adversarial-gate). 권위=260702 엑셀·가격값 권위=evaluate_price·생성≠검증·LLM 숫자 손전사 금지·STALE 인용 금지·라이브 읽기전용·DB 미적재.
+
+**변경이력:** 최신: 2026-07-03 하네스 초기 구성(6 에이전트+3 스킬·§9 승계+그래프 병행+파일럿 종단 결정) → `_workspace/huni-ontology-kb/_meta/CHANGELOG.md`
+
+## 34. Harness: Huni-Load-Governance (적재 거버넌스 · 그릇 규범 + 옵션 쓰임새 전수 판정)
+
+**목표:** webadmin(기준정보·상품·가격관리)에 실무진이 사람 판단으로 넣은 데이터를 "올바른 그릇 규범"으로 다스린다 — ① **적재 규범 정본**(상품유형[일반 완제품/셋트 완제품/반제품] × 그릇[기준정보·옵션·템플릿·제약규칙·가격공식/구성요소] 배치, SOT 종합·항목마다 가격 파손 모드 병기) ② ★**옵션 3용도 원칙[HARD·사용자 directive]**(U-1 2개 이상 혼재 자재·공정 묶음 / U-2 기준정보에 없는 손님 선택 / U-3 생산 전달 — 이 외는 처분 후보. 옵션은 개방적이어서 많이 쓰면 독)으로 옵션 전수 판정·기준정보 중복("기준정보를 적재하고 똑같이 옵션도 넣은 것") 적발·처분 명세(KEEP/RETIRE/MOVE-기준정보/MOVE-제약/MOVE-템플릿/EXTEND) ③ codex 적대적 교차검증 ④ 코드 결함은 재현 가능한 **개발자 전달 문서**(DEV-REQUEST 표준: 왜 작성했는지 이유 먼저→현상 증거→재현 절차→원인 파일:라인→제안→수용 기준) ⑤ **최종 검증=가격**(evaluate_price/evaluate_set_price 골든·PRICE≠0). 오적재 진단(§21·§26)·제약 발굴(§31)·셋트 설계(§23)·배선(§27) 산출물은 입력으로 재사용(재병합 금지·상보).
+
+**트리거:** "적재 거버넌스", "옵션 정리", "옵션 쓰임새 판정", "옵션 중복 진단", "기준정보 옵션 중복", "옵션 오남용", "그릇 규범", "적재 규범표", "어디에 적재해야", "개발자 전달 문서 작성", "적재하며 진단", "거버넌스 하네스 실행/재실행/업데이트/보완", "특정 상품군만 거버넌스" 등 본 도메인 요청 시 `huni-load-governance-orchestrator` 스킬을 사용. 제약규칙 등록은 §31, 정합 검증만은 §21, 가격테이블 셀 무결성은 §26, 셋트 구성·적재는 §23, 실 적재 실행은 §7 위임. 단순 질문은 직접 응답.
+
+**산출물 루트:** `_workspace/huni-load-governance/` (01_norm·02_audit·03_devdoc·04_codex·05_gate·_meta). 5인 팀(`hlg-vessel-norm-curator` 규범 기준점 → `hlg-option-usage-auditor` 전수 판정 → `hlg-codex-verifier` 적대 교차 → `hlg-dev-doc-writer` C트랙 문서 → `hlg-governance-gate` LG1~LG7[규범 충실·근거 실재·★오차단 0·가격 무손상·셋트 정합·문서 재현성·독립성/수렴]) + 스킬 4종. 핵심 결정: ① 규범 먼저(규범 없이 판정 금지) ② 파일럿=일반 1+셋트 1 완주 후 동형 전파 ③ 명세까지 — 실 COMMIT은 인간 승인 후 기존 트랙(§7·§31·§17) 위임(webadmin 실화면 [HARD]은 위임 트랙 의무) ④ 가격종속 옵션=BLOCKED·선택지 손실 0·실무진 IMPORT 존중 ⑤ 생성≠검증·codex 주장=가설. 권위=상품마스터·인쇄상품 가격표 260702. 라이브 읽기전용 SELECT만(`.env.local RAILWAY_DB_*`).
+
+**변경이력:** 최신: 2026-07-03 하네스 초기 구성(5 에이전트+4 스킬·옵션 3용도 잣대·LG1~LG7 게이트) → 첫 실행 시 `_workspace/huni-load-governance/_meta/CHANGELOG.md` 생성
+
 When editing this file: it must stay lean. Keep only always-apply rules, the handoff
 routine, and the three harness sections. Move any growing detail into the relevant
 harness workspace and leave a pointer here.
