@@ -1,0 +1,9 @@
+prd_cd,rule_cd,rule_typ_cd,규칙명,err_msg,CN유형,유도방식,근거
+PRD_000129,R_MATSIZ_FB_A3_WHITE_5MM,RULE_TYPE.03,[제약조건데모] A3 폼보드(화이트) 5mm 는 A3 크기 전용,이 자재(A3 폼보드(화이트) 5mm)는 A3 크기 전용입니다. 크기를 A3로 선택해 주세요.,CN-2,단가행유도,COMP_POSTER_FOAMBOARD_BOARD 단가행 실존 (MAT_000398__USAGE.07 x SIZ_000315) — 나머지 사이즈 단가행 없음(0원 위험) → 필수동반 차단
+PRD_000129,R_MATSIZ_FB_A3_BLACK_5MM,RULE_TYPE.03,[제약조건데모] A3 폼보드(블랙) 5mm 는 A3 크기 전용,이 자재(A3 폼보드(블랙) 5mm)는 A3 크기 전용입니다. 크기를 A3로 선택해 주세요.,CN-2,단가행유도,COMP_POSTER_FOAMBOARD_BOARD 단가행 실존 (MAT_000399__USAGE.07 x SIZ_000315)
+PRD_000129,R_MATSIZ_FB_A2_WHITE_5MM,RULE_TYPE.03,[제약조건데모] A2 폼보드(화이트) 5mm 는 A2 크기 전용,이 자재(A2 폼보드(화이트) 5mm)는 A2 크기 전용입니다. 크기를 A2로 선택해 주세요.,CN-2,단가행유도,COMP_POSTER_FOAMBOARD_BOARD 단가행 실존 (MAT_000612__USAGE.07 x SIZ_000198)
+PRD_000129,R_MATSIZ_FB_A2_BLACK_5MM,RULE_TYPE.03,[제약조건데모] A2 폼보드(블랙) 5mm 는 A2 크기 전용,이 자재(A2 폼보드(블랙) 5mm)는 A2 크기 전용입니다. 크기를 A2로 선택해 주세요.,CN-2,단가행유도,COMP_POSTER_FOAMBOARD_BOARD 단가행 실존 (MAT_000613__USAGE.07 x SIZ_000198)
+PRD_000130,R_MATSIZ_FX_A3_WHITE_3MM,RULE_TYPE.03,[제약조건데모] 포맥스(화이트) 3mm A3 는 A3 크기 전용,이 자재(포맥스(화이트) 3mm A3)는 A3 크기 전용입니다. 크기를 A3로 선택해 주세요.,CN-2,단가행유도,COMP_POSTER_FOMEXBOARD_BOARD 단가행 실존 (MAT_000022__USAGE.07 x SIZ_000174)
+PRD_000130,R_MATSIZ_FX_A2_WHITE_3MM,RULE_TYPE.03,[제약조건데모] 포맥스(화이트) 3mm A2 는 A2 크기 전용,이 자재(포맥스(화이트) 3mm A2)는 A2 크기 전용입니다. 크기를 A2로 선택해 주세요.,CN-2,단가행유도,COMP_POSTER_FOMEXBOARD_BOARD 단가행 실존 (MAT_000554__USAGE.07 x SIZ_000197)
+PRD_000130,R_MATSIZ_FX_A3_WHITE_5MM,RULE_TYPE.03,[제약조건데모] 포맥스(화이트) 5mm A3 는 A3 크기 전용,이 자재(포맥스(화이트) 5mm A3)는 A3 크기 전용입니다. 크기를 A3로 선택해 주세요.,CN-2,단가행유도,COMP_POSTER_FOMEXBOARD_BOARD 단가행 실존 (MAT_000023__USAGE.07 x SIZ_000174)
+PRD_000130,R_MATSIZ_FX_A2_WHITE_5MM,RULE_TYPE.03,[제약조건데모] 포맥스(화이트) 5mm A2 는 A2 크기 전용,이 자재(포맥스(화이트) 5mm A2)는 A2 크기 전용입니다. 크기를 A2로 선택해 주세요.,CN-2,단가행유도,COMP_POSTER_FOMEXBOARD_BOARD 단가행 실존 (MAT_000555__USAGE.07 x SIZ_000197)

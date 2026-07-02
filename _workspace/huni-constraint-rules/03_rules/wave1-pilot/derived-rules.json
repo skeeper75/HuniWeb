@@ -1,0 +1,326 @@
+{
+  "derived_at": "2026-07-02 13:59:30",
+  "source": "live t_prc_component_prices (read-only)",
+  "rules": [
+    {
+      "prd_cd": "PRD_000129",
+      "rule_cd": "R_MATSIZ_FB_A3_WHITE_5MM",
+      "rule_typ_cd": "RULE_TYPE.03",
+      "rule_nm": "[제약조건데모] A3 폼보드(화이트) 5mm 는 A3 크기 전용",
+      "err_msg": "이 자재(A3 폼보드(화이트) 5mm)는 A3 크기 전용입니다. 크기를 A3로 선택해 주세요.",
+      "disp_seq": 1,
+      "mat_key": "MAT_000398__USAGE.07",
+      "siz_cd": "SIZ_000315",
+      "logic": {
+        "or": [
+          {
+            "!": {
+              "===": [
+                {
+                  "var": "mat_cd__usage_cd"
+                },
+                "MAT_000398__USAGE.07"
+              ]
+            }
+          },
+          {
+            "===": [
+              {
+                "var": "siz_cd"
+              },
+              "SIZ_000315"
+            ]
+          }
+        ]
+      },
+      "pass_case": {
+        "mat_cd__usage_cd": "MAT_000398__USAGE.07",
+        "siz_cd": "SIZ_000315"
+      },
+      "block_case": {
+        "mat_cd__usage_cd": "MAT_000398__USAGE.07",
+        "siz_cd": "SIZ_000198"
+      }
+    },
+    {
+      "prd_cd": "PRD_000129",
+      "rule_cd": "R_MATSIZ_FB_A3_BLACK_5MM",
+      "rule_typ_cd": "RULE_TYPE.03",
+      "rule_nm": "[제약조건데모] A3 폼보드(블랙) 5mm 는 A3 크기 전용",
+      "err_msg": "이 자재(A3 폼보드(블랙) 5mm)는 A3 크기 전용입니다. 크기를 A3로 선택해 주세요.",
+      "disp_seq": 2,
+      "mat_key": "MAT_000399__USAGE.07",
+      "siz_cd": "SIZ_000315",
+      "logic": {
+        "or": [
+          {
+            "!": {
+              "===": [
+                {
+                  "var": "mat_cd__usage_cd"
+                },
+                "MAT_000399__USAGE.07"
+              ]
+            }
+          },
+          {
+            "===": [
+              {
+                "var": "siz_cd"
+              },
+              "SIZ_000315"
+            ]
+          }
+        ]
+      },
+      "pass_case": {
+        "mat_cd__usage_cd": "MAT_000399__USAGE.07",
+        "siz_cd": "SIZ_000315"
+      },
+      "block_case": {
+        "mat_cd__usage_cd": "MAT_000399__USAGE.07",
+        "siz_cd": "SIZ_000198"
+      }
+    },
+    {
+      "prd_cd": "PRD_000129",
+      "rule_cd": "R_MATSIZ_FB_A2_WHITE_5MM",
+      "rule_typ_cd": "RULE_TYPE.03",
+      "rule_nm": "[제약조건데모] A2 폼보드(화이트) 5mm 는 A2 크기 전용",
+      "err_msg": "이 자재(A2 폼보드(화이트) 5mm)는 A2 크기 전용입니다. 크기를 A2로 선택해 주세요.",
+      "disp_seq": 3,
+      "mat_key": "MAT_000612__USAGE.07",
+      "siz_cd": "SIZ_000198",
+      "logic": {
+        "or": [
+          {
+            "!": {
+              "===": [
+                {
+                  "var": "mat_cd__usage_cd"
+                },
+                "MAT_000612__USAGE.07"
+              ]
+            }
+          },
+          {
+            "===": [
+              {
+                "var": "siz_cd"
+              },
+              "SIZ_000198"
+            ]
+          }
+        ]
+      },
+      "pass_case": {
+        "mat_cd__usage_cd": "MAT_000612__USAGE.07",
+        "siz_cd": "SIZ_000198"
+      },
+      "block_case": {
+        "mat_cd__usage_cd": "MAT_000612__USAGE.07",
+        "siz_cd": "SIZ_000315"
+      }
+    },
+    {
+      "prd_cd": "PRD_000129",
+      "rule_cd": "R_MATSIZ_FB_A2_BLACK_5MM",
+      "rule_typ_cd": "RULE_TYPE.03",
+      "rule_nm": "[제약조건데모] A2 폼보드(블랙) 5mm 는 A2 크기 전용",
+      "err_msg": "이 자재(A2 폼보드(블랙) 5mm)는 A2 크기 전용입니다. 크기를 A2로 선택해 주세요.",
+      "disp_seq": 4,
+      "mat_key": "MAT_000613__USAGE.07",
+      "siz_cd": "SIZ_000198",
+      "logic": {
+        "or": [
+          {
+            "!": {
+              "===": [
+                {
+                  "var": "mat_cd__usage_cd"
+                },
+                "MAT_000613__USAGE.07"
+              ]
+            }
+          },
+          {
+            "===": [
+              {
+                "var": "siz_cd"
+              },
+              "SIZ_000198"
+            ]
+          }
+        ]
+      },
+      "pass_case": {
+        "mat_cd__usage_cd": "MAT_000613__USAGE.07",
+        "siz_cd": "SIZ_000198"
+      },
+      "block_case": {
+        "mat_cd__usage_cd": "MAT_000613__USAGE.07",
+        "siz_cd": "SIZ_000315"
+      }
+    },
+    {
+      "prd_cd": "PRD_000130",
+      "rule_cd": "R_MATSIZ_FX_A3_WHITE_3MM",
+      "rule_typ_cd": "RULE_TYPE.03",
+      "rule_nm": "[제약조건데모] 포맥스(화이트) 3mm A3 는 A3 크기 전용",
+      "err_msg": "이 자재(포맥스(화이트) 3mm A3)는 A3 크기 전용입니다. 크기를 A3로 선택해 주세요.",
+      "disp_seq": 1,
+      "mat_key": "MAT_000022__USAGE.07",
+      "siz_cd": "SIZ_000174",
+      "logic": {
+        "or": [
+          {
+            "!": {
+              "===": [
+                {
+                  "var": "mat_cd__usage_cd"
+                },
+                "MAT_000022__USAGE.07"
+              ]
+            }
+          },
+          {
+            "===": [
+              {
+                "var": "siz_cd"
+              },
+              "SIZ_000174"
+            ]
+          }
+        ]
+      },
+      "pass_case": {
+        "mat_cd__usage_cd": "MAT_000022__USAGE.07",
+        "siz_cd": "SIZ_000174"
+      },
+      "block_case": {
+        "mat_cd__usage_cd": "MAT_000022__USAGE.07",
+        "siz_cd": "SIZ_000197"
+      }
+    },
+    {
+      "prd_cd": "PRD_000130",
+      "rule_cd": "R_MATSIZ_FX_A2_WHITE_3MM",
+      "rule_typ_cd": "RULE_TYPE.03",
+      "rule_nm": "[제약조건데모] 포맥스(화이트) 3mm A2 는 A2 크기 전용",
+      "err_msg": "이 자재(포맥스(화이트) 3mm A2)는 A2 크기 전용입니다. 크기를 A2로 선택해 주세요.",
+      "disp_seq": 2,
+      "mat_key": "MAT_000554__USAGE.07",
+      "siz_cd": "SIZ_000197",
+      "logic": {
+        "or": [
+          {
+            "!": {
+              "===": [
+                {
+                  "var": "mat_cd__usage_cd"
+                },
+                "MAT_000554__USAGE.07"
+              ]
+            }
+          },
+          {
+            "===": [
+              {
+                "var": "siz_cd"
+              },
+              "SIZ_000197"
+            ]
+          }
+        ]
+      },
+      "pass_case": {
+        "mat_cd__usage_cd": "MAT_000554__USAGE.07",
+        "siz_cd": "SIZ_000197"
+      },
+      "block_case": {
+        "mat_cd__usage_cd": "MAT_000554__USAGE.07",
+        "siz_cd": "SIZ_000174"
+      }
+    },
+    {
+      "prd_cd": "PRD_000130",
+      "rule_cd": "R_MATSIZ_FX_A3_WHITE_5MM",
+      "rule_typ_cd": "RULE_TYPE.03",
+      "rule_nm": "[제약조건데모] 포맥스(화이트) 5mm A3 는 A3 크기 전용",
+      "err_msg": "이 자재(포맥스(화이트) 5mm A3)는 A3 크기 전용입니다. 크기를 A3로 선택해 주세요.",
+      "disp_seq": 3,
+      "mat_key": "MAT_000023__USAGE.07",
+      "siz_cd": "SIZ_000174",
+      "logic": {
+        "or": [
+          {
+            "!": {
+              "===": [
+                {
+                  "var": "mat_cd__usage_cd"
+                },
+                "MAT_000023__USAGE.07"
+              ]
+            }
+          },
+          {
+            "===": [
+              {
+                "var": "siz_cd"
+              },
+              "SIZ_000174"
+            ]
+          }
+        ]
+      },
+      "pass_case": {
+        "mat_cd__usage_cd": "MAT_000023__USAGE.07",
+        "siz_cd": "SIZ_000174"
+      },
+      "block_case": {
+        "mat_cd__usage_cd": "MAT_000023__USAGE.07",
+        "siz_cd": "SIZ_000197"
+      }
+    },
+    {
+      "prd_cd": "PRD_000130",
+      "rule_cd": "R_MATSIZ_FX_A2_WHITE_5MM",
+      "rule_typ_cd": "RULE_TYPE.03",
+      "rule_nm": "[제약조건데모] 포맥스(화이트) 5mm A2 는 A2 크기 전용",
+      "err_msg": "이 자재(포맥스(화이트) 5mm A2)는 A2 크기 전용입니다. 크기를 A2로 선택해 주세요.",
+      "disp_seq": 4,
+      "mat_key": "MAT_000555__USAGE.07",
+      "siz_cd": "SIZ_000197",
+      "logic": {
+        "or": [
+          {
+            "!": {
+              "===": [
+                {
+                  "var": "mat_cd__usage_cd"
+                },
+                "MAT_000555__USAGE.07"
+              ]
+            }
+          },
+          {
+            "===": [
+              {
+                "var": "siz_cd"
+              },
+              "SIZ_000197"
+            ]
+          }
+        ]
+      },
+      "pass_case": {
+        "mat_cd__usage_cd": "MAT_000555__USAGE.07",
+        "siz_cd": "SIZ_000197"
+      },
+      "block_case": {
+        "mat_cd__usage_cd": "MAT_000555__USAGE.07",
+        "siz_cd": "SIZ_000174"
+      }
+    }
+  ]
+}
