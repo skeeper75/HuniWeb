@@ -1,0 +1,5 @@
+scope,item,reason,routing_track
+# 077 면지 통합 = 차단 0. 전 구성원·자재·옵션·공식 라이브 기존 참조(신규 mint 불요).
+# 아래는 후속 트랙(면지 통합의 블로커 아님 — 072 계열 공통 DEV-REQUEST):
+member,079 옵션그룹 렌더,셋트 시뮬레이터가 구성원 opt_groups 미동봉(_set_members_meta) → 이관 OPT_065 휴면(색 택1은 자재 드롭다운 발현),DEV-REQUEST D-1(§6 072 계열)
+member,285 내지 페이지가격,내지 285 semi_role.01 부재 → is_inner=false → 페이지 입력 미렌더·내지비 manual,§23-inner 트랙(D-2)

@@ -13,7 +13,7 @@
 
 ## 검색 라우팅 시작점 (nl-query-paths §0)
 
-1. **구체 상품 질의**("프리미엄엽서 100장 얼마") → [product/product-016-premium-postcard.md](product/product-016-premium-postcard.md)(프리미엄엽서 시작점) → `priced_by`→[formula/digital-formulas.md](formula/digital-formulas.md) → `has_component`→구성요소. (타 상품 진입점=아래 §상품 노드 E1)
+1. **구체 상품 질의**("프리미엄엽서 100장 얼마") → [product/product-016-premium-postcard.md](product/product-016-premium-postcard.md)(프리미엄엽서 시작점) → `priced_by`→[formula/digital-formulas.md](formula/digital-formulas.md) → `has_component`→구성요소. (타 상품 진입점=아래 §상품 노드 E1) · **셋트/책자 질의**("하드커버책자 50부")=아래 §상품 노드 **셋트 계열**(부모 [product/product-072-hardcover-booklet.md](product/product-072-hardcover-booklet.md) 등 → `has_member`→구성원 → evaluate_set_price).
 2. **용도 추천**("카페 오픈 나눠줄 것") → [intent/intents.md](intent/intents.md) `INTENT_*` → `references`→카테고리/상품.
 3. **조건 탐색**("양면 되는 엽서") → [axis/print-options.md](axis/print-options.md)·[axis/materials.md](axis/materials.md) 역탐색.
 4. **옵션 조합·제약**("오시랑 미싱 같이 돼?") → 상품 내 `optgroup-*`·`constraint-*` (예: [product/product-016-premium-postcard.md](product/product-016-premium-postcard.md) `optgroup-016-*` + `constraint-016-demo-exc`=오시↔미싱 상호배제 데모·`constraint-016-demo-vis`=표시조건). [DEMO] 제약은 badge=candidate(§31 거버넌스 확정 대기).
@@ -149,6 +149,34 @@
 - [product/product-144-mini-board-standing.md](product/product-144-mini-board-standing.md) — 미니보드스탠딩(PRD_000144·완제품·실사·사인/POP·고정가형). ★**고정가형**(PRF_POSTER_MINI_STANDBOARD→COMP_POSTER_MINI_STANDBOARD·use_dims=`[siz_cd,min_qty]`·규격3×수량5밴드=15셀 격자완전·★수량축 실충전). 거치대·보드접착·출력 통가격 baked(자재/공정/CPQ 0행)·POP CAT_000097(canonical)·비종이류 판형없음. 하위=[product/product-144-mini-board-standing-nodes.md](product/product-144-mini-board-standing-nodes.md)(canonical: CAT_000097·PRF_POSTER_MINI_STANDBOARD). GAP 4·A5 SIZ_000170 양면(axis 소유 참조).
 
 > **★스티커 공유 축 통합(2026-07-03·consolidation):** 병렬 스티커 빌더 16종이 각자 product-local로 중복 mint하던 공유 원자(category/material/process/size/plate/formula/component)를 단일 소유권으로 이관 — [axis/categories.md](axis/categories.md)(CAT_000002/309/037/311/312)·[axis/sizes.md](axis/sizes.md)(스티커 19 사이즈)·[axis/materials.md](axis/materials.md)(스티커 점착지 18)·[axis/processes.md](axis/processes.md)(반칼/완칼/쿨코팅 4)·[axis/plate-sizes.md](axis/plate-sizes.md)(46전지 OUTPUT_PAPER_TYPE.02)·[formula/sticker-formulas.md](formula/sticker-formulas.md)(PRF_STK_FIXED·PRF_GANGPAN_FIXED·PRF_STK_PACK·PRF_STK_TATTOO)·[formula/sticker-components.md](formula/sticker-components.md)(COMP_STK_PRINT·COMP_GANGPAN_PRINT·COMP_STK_PACK·COMP_STK_TATTOO). 결과=L-3 중복 id 0·전 16 스티커 상품이 shared 노드 참조(`_meta/scripts/consolidate_sticker_axes.py`). 연당가 재적재 워크리스트=양면 defect 6(matcost-053-white/clear-backing·matcost-054-hologram·material-MAT_000162/372·size-SIZ_000170 A5)=실무진+인간 승인 대기.
+
+**셋트 계열 (파일럿 4번째 상품군·부품조립형 완제품 ← 반제품 구성원·t_prd_product_sets)**
+> 셋트 완제품(prd_cd) ← 반제품 구성원(sub_prd_cd·표지/내지/면지)을 `has_member`로 조립. 가격=**evaluate_set_price**(구성원 합산 + 셋트 부모공식 + 할인·pricing.py:718). 구성원 노드는 자체 가격 기여 0(부모 all-in) 또는 페이지 단가형. 축(카테고리/사이즈/자재/공정/판형)은 Stage C2 상품→축 배선(260703·live-snapshot 20260702_1119 실측). 은퇴 색멤버 제외.
+
+_책자 셋트(중철/무선/PUR·표지 펼침 + 내지 가변페이지)_
+- [product/product-068-saddle-stitch-booklet.md](product/product-068-saddle-stitch-booklet.md) — 중철책자(PRD_000068·셋트 완제품). 표지 [product/product-288-saddle-stitch-booklet-cover.md](product/product-288-saddle-stitch-booklet-cover.md)(중철 펼침·cover_mult=1)+내지 [product/product-287-saddle-stitch-booklet-inner.md](product/product-287-saddle-stitch-booklet-inner.md)(페이지 4~28/+4·칼라/흑백). PRF_BIND_SUM·책자 CAT_000006/일반책자 316·중철제본 PROC_000018.
+- [product/product-069-perfect-bound-booklet.md](product/product-069-perfect-bound-booklet.md) — 무선책자(PRD_000069·셋트). 표지 [product/product-290-perfect-bound-booklet-cover.md](product/product-290-perfect-bound-booklet-cover.md)+내지 [product/product-289-perfect-bound-booklet-inner.md](product/product-289-perfect-bound-booklet-inner.md)(24~300/+2). PRF_BIND_MUSEON·무선제본 PROC_000019·부가공정(수축포장 076·후가공 051/052).
+- [product/product-070-pur-booklet.md](product/product-070-pur-booklet.md) — PUR책자(PRD_000070·셋트). 표지 [product/product-292-pur-booklet-cover.md](product/product-292-pur-booklet-cover.md)+내지 [product/product-291-pur-booklet-inner.md](product/product-291-pur-booklet-inner.md). PRF_BIND_PUR·PUR제본 PROC_000020·부가공정(076/051/052).
+
+_하드커버 셋트(표지 + 내지 + 면지 1멤버·COVERBIND/링 통가)_
+- [product/product-072-hardcover-booklet.md](product/product-072-hardcover-booklet.md) — 하드커버책자(PRD_000072·셋트). 표지 [product/product-073-hardcover-booklet-cover.md](product/product-073-hardcover-booklet-cover.md)(전용지 MAT_000246)+내지 [product/product-284-hardcover-booklet-inner.md](product/product-284-hardcover-booklet-inner.md)(종이 7종·24~300/+2)+면지 [product/product-074-hardcover-booklet-membrane.md](product/product-074-hardcover-booklet-membrane.md)(색 택1·무가격). PRF_HC_MUSEON_SET·하드커버무선제본 PROC_000023·하위=[product/product-072-hardcover-booklet-nodes.md](product/product-072-hardcover-booklet-nodes.md).
+- [product/product-077-leather-hardcover-booklet.md](product/product-077-leather-hardcover-booklet.md) — 레더 하드커버책자(PRD_000077·셋트). 표지 [product/product-078-leather-hardcover-booklet-cover.md](product/product-078-leather-hardcover-booklet-cover.md)(레더 MAT_000379)+내지 [product/product-285-leather-hardcover-booklet-inner.md](product/product-285-leather-hardcover-booklet-inner.md)+면지 [product/product-079-leather-hardcover-booklet-membrane.md](product/product-079-leather-hardcover-booklet-membrane.md). PRF_HC_MUSEON_SET·레더하드커버책자 CAT_000106·PROC_000023.
+- [product/product-082-hardcover-ring-booklet.md](product/product-082-hardcover-ring-booklet.md) — 하드커버 링책자(PRD_000082·셋트). 표지/내지/면지 구성원 = [product/product-082-hardcover-ring-booklet-nodes.md](product/product-082-hardcover-ring-booklet-nodes.md)(083 표지·286 내지·084 면지 4택1). PRF_HC_TWINRING_SET·트윈링 링자재 MAT_000013/14/15(불가침)·하드커버링책자 CAT_000107·트윈링제본 PROC_000024.
+- [product/product-088-leather-ring-binder.md](product/product-088-leather-ring-binder.md) — 레더 링바인더(PRD_000088·셋트·문구 CAT_000008). 표지/면지 구성원 = [product/product-088-leather-ring-binder-nodes.md](product/product-088-leather-ring-binder-nodes.md)(089 표지·090 면지 4택1). PRF_LEATHER_RINGBINDER_SET(현행 COVERBIND·088-redesign 싸바리 PROC_000098=인간 승인 대기 gap).
+
+_엽서북·떡메모지·포토북(부모 all-in 고정가형)_
+- [product/product-094-postcard-book.md](product/product-094-postcard-book.md) — 엽서북(PRD_000094·셋트·엽서북 CAT_000308). 내지 [product/product-095-postcard-book-inner.md](product/product-095-postcard-book-inner.md)+표지 [product/product-096-postcard-book-cover.md](product/product-096-postcard-book-cover.md). PRF_PCB_FIXED 고정가형·떡제본 PROC_000022·수축포장 076·하위=[product/product-094-postcard-book-nodes.md](product/product-094-postcard-book-nodes.md).
+- [product/product-097-tteok-memo.md](product/product-097-tteok-memo.md) — 떡메모지(PRD_000097·셋트·떡메모지 CAT_000129/문구 008). 내지 [product/product-098-tteok-memo-inner.md](product/product-098-tteok-memo-inner.md)(백모조120·묶음 50/100장). PRF_TTEOKME_FIXED 고정가형·떡제본 PROC_000022·하위=[product/product-097-tteok-memo-nodes.md](product/product-097-tteok-memo-nodes.md).
+- [product/product-100-photobook.md](product/product-100-photobook.md) — 포토북(PRD_000100·셋트). 내지 몽블랑130 + 표지 5택1(하드커버/아트무광/레더하드커버/레더/소프트) + 면지 그레이 = 구성원 [product/product-100-photobook-nodes.md](product/product-100-photobook-nodes.md)(101~107). PRF_PHOTOBOOK_FIXED 고정가형(base24P+추가2P)·제본 PROC_000020·사이즈 8x8/10x10/A4.
+
+_캘린더(단품 완제품·셋트 아님)_
+- [product/product-108-desk-calendar.md](product/product-108-desk-calendar.md) — 탁상형캘린더(PRD_000108·완제품·탁상형 CAT_000112/디자인캘린더 118). PRF_DGP_CAL_DESK·탁상형캘린더제본 PROC_000100·디지털인쇄 base 004.
+- [product/product-109-mini-desk-calendar.md](product/product-109-mini-desk-calendar.md) — 미니탁상형캘린더(PRD_000109·완제품·미니탁상형 CAT_000113). PRF_DGP_CAL_DESK·미니 제본 PROC_000102.
+- [product/product-110-postcard-calendar.md](product/product-110-postcard-calendar.md) — 엽서캘린더(PRD_000110·완제품·엽서캘린더 CAT_000114). PRF_DGP_INNER·타공 PROC_000079(묶음 고리)·base 004.
+- [product/product-111-wall-calendar.md](product/product-111-wall-calendar.md) — 벽걸이캘린더(PRD_000111·완제품·벽걸이 CAT_000115/디자인캘린더 118). PRF_DGP_CAL_WIDE·벽걸이캘린더제본(트윈링) PROC_000099·타공 079.
+- [product/product-112-wide-wall-calendar.md](product/product-112-wide-wall-calendar.md) — 와이드벽걸이캘린더(PRD_000112·완제품·와이드벽걸이 CAT_000116). PRF_DGP_CAL_WIDE·벽걸이 제본 PROC_000099·3절 판형.
+
+> **★셋트 축 배선(2026-07-03·Stage C2):** Stage B가 브로큰링크 회피로 프로즈로만 기록한 상품→축 엣지 132개를 실 relations로 배선(in_category 30·uses_material 60·has_size 14·has_process 13·has_plate_size 3·has_print_option 12·근거=set-needs-axis.md + live-snapshot 20260702_1119·`_meta/scripts/…`). Stage C1 미민팅 잔여는 Phase 4(2026-07-03·C-3/C-4)에서 처리: size-SIZ_000499 삭제(plate-SIZ_000499-gukc4가 판형 담당·종이류만 판형)·process-PROC_000001/017/056(택소노미 그룹 루트 references 명시)·PROC_000021→gap-071·PROC_000098→gap-set-088-redesign-pending 연결.
 
 ---
 

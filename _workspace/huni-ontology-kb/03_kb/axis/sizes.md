@@ -69,11 +69,7 @@
 - src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "키:SIZ_000007", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
 - props: {siz_nm_ref: "전사표 SIZ_000007"}
 
-### [size-SIZ_000499] 316x467 (국전 출력용지) {verified}
-- type: size
-- anchor: t_siz_sizes/SIZ_000499
-- src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "키:SIZ_000499", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
-- props: {siz_nm_ref: "전사표 SIZ_000499", note: "출력용지 국전계열(OUTPUT_PAPER_TYPE.01)의 사이즈 — 판형 노드와 연동"}
+<!-- [size-SIZ_000499] 삭제(Phase4·C-3 2026-07-03): 종이류 판형은 plate-SIZ_000499-gukc4(axis/plate-sizes.md)가 실배선 담당(095/096/098 has_plate_size). t_prd_product_sizes 0행(재단/작업 사이즈 캐리어 부재·live 재실측) → size 표현 불필요. 중복·조용한 고아 제거(도메인: 종이류만 판형). -->
 
 ## 명함 사이즈 (축 승격 260703 — 032/033 공용)
 
@@ -221,3 +217,133 @@
 - anchor: t_siz_sizes/SIZ_000520
 - src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "테이블:t_siz_sizes 키:SIZ_000520 note:판걸이=2.0/적용=반칼스티커(058~061)/낱장 SIZ_172와 분리(반칼 전용가)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
 - props: {siz_nm_ref: "전사표 SIZ_000520(A4 반칼)", note: "★work/cut 치수 컬럼 공란(라벨만)·반칼 전용 사이즈·master del_yn=N·승격 후보"}
+
+## 셋트 계열 공유 사이즈 — Stage A(okb-knowledge-builder 260703)
+
+<!-- 셋트 구성원 다수 공유. has_size(product→size·R2)는 상품/구성원 노드(Stage B) 배선. -->
+<!-- ★재사용(중복 mint 금지): SIZ_000170 A5·SIZ_000172 A4(product-047-small-flyer.md)·SIZ_000174 A3(product-047)는 기존 노드 — set 구성원 has_size가 그 id로 해소. 여기 신규=SIZ_000380 B5만. -->
+<!-- ★셋트 사이즈=구성원 단위(표지 펼침 siz≠내지 siz). 가격 좌표 기준=내지(pack §3.2). 표지 펼침 siz는 COVERBIND 통가라 무영향. -->
+<!-- transcribed-by: _meta/scripts/transcribe_set_axis_260703.py from live-snapshot/latest (snap_20260702_1119) t_siz_sizes @ 2026-07-03 -->
+| siz_cd | 라벨 | 작업(work mm) | 재단(cut mm) | 셋트 소유 |
+|---|---|---|---|---|
+| SIZ_000172 | A4(210x297mm) | 210x297 | 210x297 | 재사용(product-047) |
+| SIZ_000380 | B5 (182X257) | 182x257 | 182x257 | ★신규(아래 노드) |
+| SIZ_000174 | A3(297x420mm) | 297x420 | 297x420 | 재사용(product-047) |
+
+### [size-SIZ_000380] B5 (182x257) {verified}
+- type: size
+- anchor: t_siz_sizes/SIZ_000380
+- src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "테이블:t_siz_sizes 키:SIZ_000380", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {siz_nm_ref: "전사표 SIZ_000380(B5·work 182x257)", note: "셋트 내지 공유(284/285/286/287 하드커버 내지). ★A4(SIZ_000172)·A3(SIZ_000174)는 product-047 기존 재사용(승격 후보·architect)."}
+
+## 셋트 포토북·캘린더 사이즈 — Stage C1(okb-knowledge-builder 260703)
+
+<!-- 포토북(100)·떡메모지(097)·캘린더(108~112) 사이즈. Stage B가 프로즈로만 기록·엣지 미배선. -->
+<!-- Stage C1=노드 mint·Stage C2=상품→사이즈(R2 has_size) 엣지 배선. 치수는 전사표에만(D-9·§4). -->
+<!-- ★판걸이수(UP수)는 사이즈 컬럼 아님=파생(fn_calc_pansu·[[rule/rules#RULE_pansu_db_function]])·마스터 note 값은 참고. -->
+<!-- ★재사용(중복 mint 금지): A4=SIZ_000172·A3=SIZ_000174(product-047)·A5=SIZ_000170(sticker)·150x100=SIZ_000124(product-027)·90x90=SIZ_000119(product-023)·B5=SIZ_000380(Stage A). -->
+<!-- transcribed-by: _meta/scripts/transcribe_set_axis_c1_260703.py sizes from live-snapshot/latest (snap_20260702_1119) t_siz_sizes @ 2026-07-03 -->
+| siz_cd | 라벨 | 작업(work mm) | 재단(cut mm) | 마스터del |
+|---|---|---|---|---|
+| SIZ_000266 | 70x120 | 70x120 | 70x120 | N |
+| SIZ_000269 | 8x8(200x200mm) | 200x200 | 200x200 | N |
+| SIZ_000274 | 10x10(250x250mm) | 250x250 | 250x250 | N |
+| SIZ_000069 | 220x145 | 224x149 | 220x145 | N |
+| SIZ_000070 | 130x220 | 134x224 | 130x220 | N |
+| SIZ_000018 | 90x100 | 92x102 | 90x100 | N |
+| SIZ_000071 | 148x60 | 152x64 | 148x60 | N |
+| SIZ_000072 | 145x145 | 149x149 | 145x145 | N |
+| SIZ_000073 | 220x130 | 224x134 | 220x130 | N |
+| SIZ_000074 | 145x300 | 149x304 | 145x300 | N |
+| SIZ_000050 | A4 (210X297) | 216x303 | 210x297 | N |
+| SIZ_000075 | 210x420 | 214x424 | 210x420 | N |
+| SIZ_000076 | 300x420 | 304x424 | 300x420 | N |
+| SIZ_000077 | 300x625 | 304x629 | 300x625 | N |
+
+### 포토북·떡메모지 사이즈
+
+### [size-SIZ_000269] 8x8 (200x200mm·★포토북 골든 기준) {verified}
+- type: size
+- anchor: t_siz_sizes/SIZ_000269
+- src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "키:SIZ_000269", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {siz_nm_ref: "전사표 SIZ_000269(8x8·200x200)", note: "★100 포토북 골든 기준선택 사이즈(정사각 200x200). has_size는 상품 노드(Stage B)."}
+
+### [size-SIZ_000274] 10x10 (250x250mm) {verified}
+- type: size
+- anchor: t_siz_sizes/SIZ_000274
+- src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "키:SIZ_000274", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {siz_nm_ref: "전사표 SIZ_000274(10x10·250x250)", note: "100 포토북 사이즈(정사각 250x250)"}
+
+### [size-SIZ_000266] 70x120 (떡메모지) {verified}
+- type: size
+- anchor: t_siz_sizes/SIZ_000266
+- src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "키:SIZ_000266", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {siz_nm_ref: "전사표 SIZ_000266(70x120·work=cut)", note: "097 떡메모지 사이즈"}
+
+### 캘린더 사이즈 (108~112)
+
+### [size-SIZ_000069] 220x145 (탁상형캘린더) {verified}
+- type: size
+- anchor: t_siz_sizes/SIZ_000069
+- src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "키:SIZ_000069 note:판걸이=4.0/전지 316x467/적용 탁상형캘린더", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {siz_nm_ref: "전사표 SIZ_000069(220x145)", pangeori_ref: "마스터 note 판걸이=4.0(파생·fn_calc_pansu)", note: "108 탁상형캘린더 사이즈"}
+
+### [size-SIZ_000070] 130x220 (탁상형캘린더 세로) {verified}
+- type: size
+- anchor: t_siz_sizes/SIZ_000070
+- src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "키:SIZ_000070 note:판걸이=4.0/전지 316x467/적용 탁상형캘린더", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {siz_nm_ref: "전사표 SIZ_000070(130x220)", pangeori_ref: "마스터 note 판걸이=4.0(파생)", note: "108 탁상형캘린더 세로 사이즈"}
+
+### [size-SIZ_000018] 90x100 (미니·판걸이 12) {verified}
+- type: size
+- anchor: t_siz_sizes/SIZ_000018
+- src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "키:SIZ_000018 note:판걸이=12.0/전지 316x467/적용 미니접지카드", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {siz_nm_ref: "전사표 SIZ_000018(90x100)", pangeori_ref: "마스터 note 판걸이=12.0(파생)", note: "★마스터 적용 note=미니접지카드이나 캘린더 계열(109 미니탁상) 공유 사이즈로 Stage B 지목. 적용 라벨과 소비 상품 상이 관찰(단정 금지)"}
+
+### [size-SIZ_000071] 148x60 (미니탁상형캘린더) {verified}
+- type: size
+- anchor: t_siz_sizes/SIZ_000071
+- src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "키:SIZ_000071 note:판걸이=12.0/전지 316x467/적용 미니탁상형캘린더", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {siz_nm_ref: "전사표 SIZ_000071(148x60)", pangeori_ref: "마스터 note 판걸이=12.0(파생)", note: "109 미니탁상형캘린더 사이즈"}
+
+### [size-SIZ_000072] 145x145 (엽서캘린더 정사각) {verified}
+- type: size
+- anchor: t_siz_sizes/SIZ_000072
+- src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "키:SIZ_000072 note:판걸이=6.0/전지 316x467/적용 엽서캘린더", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {siz_nm_ref: "전사표 SIZ_000072(145x145)", pangeori_ref: "마스터 note 판걸이=6.0(파생)", note: "110 엽서캘린더 정사각 사이즈"}
+
+### [size-SIZ_000073] 220x130 (엽서캘린더) {verified}
+- type: size
+- anchor: t_siz_sizes/SIZ_000073
+- src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "키:SIZ_000073 note:판걸이=4.0/전지 316x467/적용 엽서캘린더", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {siz_nm_ref: "전사표 SIZ_000073(220x130)", pangeori_ref: "마스터 note 판걸이=4.0(파생)", note: "110 엽서캘린더 가로 사이즈"}
+
+### [size-SIZ_000074] 145x300 (엽서캘린더 세로) {verified}
+- type: size
+- anchor: t_siz_sizes/SIZ_000074
+- src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "키:SIZ_000074 note:판걸이=3.0/전지 316x467/적용 엽서캘린더", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {siz_nm_ref: "전사표 SIZ_000074(145x300)", pangeori_ref: "마스터 note 판걸이=3.0(파생)", note: "110 엽서캘린더 세로 사이즈"}
+
+### [size-SIZ_000050] A4 (210x297·전단지/책자내지) {verified}
+- type: size
+- anchor: t_siz_sizes/SIZ_000050
+- src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "키:SIZ_000050 note:판걸이=2.0/전지 316x467/적용 전단지·책자내지", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {siz_nm_ref: "전사표 SIZ_000050(A4 210x297)", pangeori_ref: "마스터 note 판걸이=2.0(파생)", note: "★A4이나 SIZ_000172(product-047 A4)와 별 코드=전단지/책자내지 전용 A4 마스터. 캘린더/책자 내지 공유. 중복 mint 아님(다른 siz_cd)"}
+
+### [size-SIZ_000075] 210x420 (벽걸이캘린더) {verified}
+- type: size
+- anchor: t_siz_sizes/SIZ_000075
+- src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "키:SIZ_000075 note:판걸이=1.0/전지 316x467/적용 벽걸이캘린더", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {siz_nm_ref: "전사표 SIZ_000075(210x420)", pangeori_ref: "마스터 note 판걸이=1.0(파생)", note: "111 벽걸이캘린더 사이즈"}
+
+### [size-SIZ_000076] 300x420 (벽걸이캘린더) {verified}
+- type: size
+- anchor: t_siz_sizes/SIZ_000076
+- src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "키:SIZ_000076 note:판걸이=1.0/전지 316x467/적용 벽걸이캘린더", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {siz_nm_ref: "전사표 SIZ_000076(300x420)", pangeori_ref: "마스터 note 판걸이=1.0(파생)", note: "111 벽걸이캘린더 대형 사이즈(impos_yn=Y)"}
+
+### [size-SIZ_000077] 300x625 (와이드벽걸이캘린더) {verified}
+- type: size
+- anchor: t_siz_sizes/SIZ_000077
+- src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "키:SIZ_000077 note:판걸이=1.0/전지 미지정/적용 와이드벽걸이캘린더", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {siz_nm_ref: "전사표 SIZ_000077(300x625)", pangeori_ref: "마스터 note 판걸이=1.0(파생·전지 미지정)", note: "112 와이드벽걸이캘린더 사이즈(impos_yn=Y·전지 미지정)"}

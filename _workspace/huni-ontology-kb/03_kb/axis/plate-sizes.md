@@ -25,3 +25,18 @@
 - src: {source_file: "live-snapshot/latest/t_cod_base_codes.csv", source_locator: "테이블:t_cod_base_codes 키:OUTPUT_PAPER_TYPE.02 (46계열)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
 - src: {source_file: "live-snapshot/latest/t_prd_product_plate_sizes.csv", source_locator: "테이블:t_prd_product_plate_sizes 키:(PRD_000052,SIZ_000521) output_paper_typ_cd=OUTPUT_PAPER_TYPE.02·dflt_plt=Y·note:전지(46계열) 반칼 스티커 표준전지", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
 - props: {output_paper_typ_cd: "OUTPUT_PAPER_TYPE.02", plate_siz_cd: "SIZ_000521(330x470)", note: "공유 axis/plate-sizes는 국전 OUTPUT_PAPER_TYPE_01만 등재 → 46계열은 needed_shared_node(반칼스티커 표준전지)"}
+
+## 셋트 내지 판형 (국4절) — Stage C1(okb-knowledge-builder 260703)
+
+<!-- 엽서북/떡메모지(095/096/098) 내지·표지 판형=국4절 316x467. output_paper_typ_cd 공란(OUTPUT_PAPER_TYPE 미배정) → -->
+<!-- 기존 plate-OUTPUT_PAPER_TYPE_01/02/03 중 어느 것도 아님(신규 축 노드 필요). SIZ_000499(316x467) 출력용지. -->
+<!-- 앵커=정션(t_prd_product_plate_sizes/PRD_000095·L-20 제외·복합키 대신 prd_cd 대표키). 소비 095/096/098 공유. -->
+<!-- has_plate_size(product→plate·R6)는 상품 노드(Stage B/C2)가 종이류에만 배선. plate-OUTPUT_PAPER_TYPE_03(3절·112)은 product-030에 이미 존재=재사용. -->
+
+### [plate-SIZ_000499-gukc4] 국4절 (316x467·엽서북/떡메모지 내지) {verified}
+- type: plate_size
+- anchor: t_prd_product_plate_sizes/PRD_000095
+- src: {source_file: "live-snapshot/latest/t_prd_product_plate_sizes.csv", source_locator: "테이블:t_prd_product_plate_sizes 키:(PRD_000095,SIZ_000499)·(PRD_000098,SIZ_000499) dflt_plt_yn=Y·output_paper_typ_cd 공란·note '엽서북/떡메모지 내지 판형 국4절 등록(260701 교정)'·del_yn=N", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "키:SIZ_000499(316x467·국전 출력용지·치수 원천)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {plate_siz_cd: "SIZ_000499", output_paper_typ_cd: "(공란·OUTPUT_PAPER_TYPE 미배정)", 규격: "316x467(t_siz_sizes SIZ_000499 치수)", 소비상품: "095/096/098 엽서북·떡메모지 내지/표지", note: "★output_paper_typ_cd 공란이라 기존 plate-OUTPUT_PAPER_TYPE_01/02/03 어느 것도 아님(신규 축). 260701 판형 교정으로 등록. 라벨 '국4절' vs SIZ_000499 '국전 출력용지' 명칭 상이 관찰(원천 표기 그대로·단정 금지). 종이류 판형(fn_best_plate 자동선택)·이 판형이 316x467 표현을 단독 담당(size 노드 미민팅·C-3)"}
+- 본문: 엽서북(095/096)·떡메모지(098) 내지/표지의 국4절(316x467) 출력용지 판형. output_paper_typ_cd가 공란이라 기존 3판형 노드(01 국전·02 46계열·03 3절)와 별개의 신규 축이다. 판형은 고객이 안 고르고 fn_best_plate가 자동선택([[rule/rules#RULE_pansu_db_function]]). has_plate_size는 상품/구성원 노드(Stage C2)가 배선한다.

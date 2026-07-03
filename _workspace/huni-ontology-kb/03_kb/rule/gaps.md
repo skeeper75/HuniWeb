@@ -160,3 +160,86 @@
 - gap-143-* (143 mirror-acrylic-sticker) — uv-print-routing(레이저커팅만·UV 부재)·fixedprice-basis. owner=staff
 - gap-144-* (144 mini-board-standing) — material-absent(baked)·stand-attribution·qty-band-floor(min_qty 1 vs 격자 하한 4)·price-basis. +공유 참조 size-SIZ_000170 A5 양면. owner=staff
 - gap-145-* (145 mini-banner) — qtytier-floor(min_qty 1 vs 격자 최저 tier 4)·fixedprice-basis. owner=staff
+
+## 셋트 계열 GAP (2026-07-03·Stage A okb-knowledge-builder·정직 공백)
+
+<!-- 셋트 계열 원천 부재·미COMMIT·코드 C트랙. badge=unknown(⚪). 라우팅 대상 하네스 명기. -->
+<!-- ★"가격 있는 것처럼" 넣지 않는다(pack §5). rel은 Stage A 실재 노드(공식/구성요소)만 참조. -->
+
+### [gap-071-set-notmembered] 071 트윈링책자 셋트 미성립 {unknown}
+- type: gap
+- anchor: none  # 사유: 구성원 미mint(t_prd_product_sets 0행)·cover_mult ×2 엔진 BLOCKED
+- src: {source_file: "_workspace/huni-ontology-kb/01_curation/pack-set-series.md", source_locator: "§1.1 [잔존 GAP] 071·§4 071 GAP·§5 GAP-SET-1", captured_at: "2026-07-03", badge: unknown, src_id: SR-pack-set}
+- gap_what: "071 트윈링책자 = 셋트 미성립(t_prd_product_sets 0행·구성원 미mint). 부모 071은 PRF_BIND_TWINRING 바인딩(제본비만)이나 셋트로 성립 안 함"
+- gap_fill_from: "개발팀 엔진 수정(CODEBUG-cover-mult-x2-undercharge·표지 개별×2 곱셈경로) 후 082 동형 구성원 mint(dbmap 위임·search-before-mint)"
+- gap_owner: dev
+- rel: {rel: references, target: formula-PRF_BIND_TWINRING, note: "071 부모공식(제본비만·셋트 미성립)"}
+
+### [gap-set-088-redesign-pending] 088 레더링바인더 재설계 적재 승인 대기 {unknown}
+- type: gap
+- anchor: none  # 사유: 088-redesign 표지 9,000·싸바리 = S1~S8 GO·codex 13/13이나 인간 승인 대기(COMMIT 미실행)
+- src: {source_file: "_workspace/huni-ontology-kb/01_curation/pack-set-series.md", source_locator: "§1.1 [양면·미COMMIT]·§4 088 양면·§5 GAP-SET-8", captured_at: "2026-07-03", badge: unknown, src_id: SR-pack-set}
+- gap_what: "088 현재값 100부 796,900(COVERBIND·live) vs 088-redesign-260702 100부 1,800,000(표지 9,000/부·싸바리 제본)=적재 승인 대기. 두 워크스트림 직교(088-post-verify §5)"
+- gap_fill_from: "인간 승인 → §23 load-executor COMMIT(COMP_BIND_SSABARI@PROC_000098 배선·COVERBIND 폐기)·승인 시 796,900→1,800,000"
+- gap_owner: 사용자
+- rel: {rel: references, target: formula-PRF_LEATHER_RINGBINDER_SET, note: "현재값 COVERBIND 부모공식(재설계 시 싸바리 전환)"}
+- rel: {rel: references, target: component-COMP_BIND_SSABARI, note: "재설계 배선 예정 제본 comp(현행 미배선)"}
+
+### [gap-set-069-070-foil] 069/070 _FOIL 박분기 공식 정본화 {unknown}
+- type: gap
+- anchor: none  # 사유: base(active) vs _FOIL(candidate) 활성 정본 미확정
+- src: {source_file: "_workspace/huni-ontology-kb/01_curation/pack-set-series.md", source_locator: "§1.1 [불변·양면] 069/070·§4 069/070·§5 GAP-SET-6", captured_at: "2026-07-03", badge: unknown, src_id: SR-pack-set}
+- gap_what: "069/070 라이브에 base 공식(PRF_BIND_MUSEON/PUR·active) + _FOIL 박분기 공식(PRF_BIND_MUSEON_FOIL/PUR_FOIL·note '인간승인 후 COMMIT') 이중 바인딩 행 실재. 박 선택 시 활성 정본 미확정"
+- gap_fill_from: "인간 승인 — base vs _FOIL 활성 정본 확정(박분기 조건부 발현 규약)"
+- gap_owner: 사용자
+- rel: {rel: references, target: formula-PRF_BIND_MUSEON_FOIL, note: "069 박분기 candidate"}
+- rel: {rel: references, target: formula-PRF_BIND_PUR_FOIL, note: "070 박분기 candidate"}
+
+### [gap-set-simulate-sizcd] 094/097/100 화면 0원 = 셋트 UI siz_cd 미전파 {unknown}
+- type: gap
+- anchor: none  # 사유: 코드 C트랙(엔진 골든 PRICE≠0·화면만 0원·가격사실 아님)
+- src: {source_file: "_workspace/_foundation/remediation/DEV-REQUEST-set-sim-sizcd-260702.md", source_locator: "셋트 UI set_selections siz_cd 미전파·백필 원천=내지[HARD]·094/097/100 동시 해소", captured_at: "2026-07-03", badge: unknown, src_id: SR-set-devreq}
+- gap_what: "094/097/100 엔진골든 PRICE≠0(450k/135k/1.5M)이나 셋트 화면 final=0원. 원인=셋트 UI가 set_selections에 siz_cd 미전파(코드 1점). 가격사실 아님"
+- gap_fill_from: "개발팀(C트랙·DEV-REQUEST-set-sim-sizcd·백필 원천=내지 SEMI_ROLE.01[HARD]·094/097/100 동시 해소)"
+- gap_owner: dev
+
+### [gap-set-s1s2-double] S1/S2 내지인쇄 이중합산 + 068~070 코팅 드롭 {unknown}
+- type: gap
+- anchor: none  # 사유: 가격엔진 구조결함(전 책자 공통·엔진 use_dims·배타선택 부재)
+- src: {source_file: "_workspace/huni-ontology-kb/01_curation/pack-set-series.md", source_locator: "§3.3 GAP-SET-3·§3.6 표지 코팅드롭 C트랙", captured_at: "2026-07-03", badge: unknown, src_id: SR-pack-set}
+- gap_what: "① 내지 양면 주문 시 S1(단면)+S2(양면) 둘 다 매칭·배타선택 부재(전 책자·094 포함) ② 068~070 셋트경로 시뮬(price_views.py:1930)이 표지 coat_side_cnt 미전달→표지 코팅비(100부 50,000) 저평가. 둘 다 PRICE≠0 무해·골든만 영향"
+- gap_fill_from: "개발팀(C트랙·엔진 use_dims 배타선택·member selections coat_side_cnt 전달)"
+- gap_owner: dev
+
+### [gap-set-inner-page-price] 내지 페이지 단가(D-2) {unknown}
+- type: gap
+- anchor: none  # 사유: hlg O-1 후속·내지 페이지 단가 배선 후속
+- src: {source_file: "_workspace/huni-ontology-kb/01_curation/pack-set-series.md", source_locator: "§3.4 GAP-SET-4·§5 D-2", captured_at: "2026-07-03", badge: unknown, src_id: SR-pack-set}
+- gap_what: "셋트 내지 페이지 단가(D-2) 후속 설계. 내지 member min/max/incr=페이지 가변(엽서북 20~30/+10·중철 4~28/+4·무선/PUR 24~300/+2)·db_comment는 '구성원 개수' 오등록이나 load-bearing(페이지수)"
+- gap_fill_from: "§34 hlg O-1 후속(내지 페이지가격)·페이지 단가 무손상[HARD]·라벨 정정은 표시만"
+- gap_owner: 설계
+
+### [gap-set-print-membrane] 인쇄면지(385) 인쇄비 배선(D-3) {unknown}
+- type: gap
+- anchor: none  # 사유: hlg O-1 후속·인쇄면지 인쇄비 배선 미결(기여 0)
+- src: {source_file: "_workspace/huni-ontology-kb/01_curation/pack-set-series.md", source_locator: "§3.5 GAP-SET-5·§5 D-3", captured_at: "2026-07-03", badge: unknown, src_id: SR-pack-set}
+- gap_what: "인쇄면지(MAT_000385·082/088 4번째 면지색) 인쇄비 배선(D-3). 현재 기여 0(면지 무가격)이나 인쇄면지는 인쇄 대상"
+- gap_fill_from: "§34 hlg O-1 후속(인쇄면지 인쇄비)·선택지 보존"
+- gap_owner: 설계
+- rel: {rel: references, target: material-MAT_000385, note: "인쇄면지 자재(인쇄비 배선 대상)"}
+
+### [gap-set-member-optgroup-ui] 구성원 옵션그룹 UI 렌더(D-1) {unknown}
+- type: gap
+- anchor: none  # 사유: hlg O-1 후속·구성원(면지 등) 옵션그룹 UI 렌더 미결
+- src: {source_file: "_workspace/huni-ontology-kb/01_curation/pack-set-series.md", source_locator: "§3.9 GAP-SET-7·§5 D-1", captured_at: "2026-07-03", badge: unknown, src_id: SR-pack-set}
+- gap_what: "셋트 구성원(면지 멤버 색 택1 등) 옵션그룹 UI 렌더(D-1). 면지 색=면지멤버 옵션그룹(OPT_064/067)으로 이관됐으나 위젯/화면 렌더 후속"
+- gap_fill_from: "§34 hlg O-1 후속·§6 위젯(구성원 옵션 UI)"
+- gap_owner: 설계
+
+### [gap-design-calendar-fixedprice] design-calendar 고정가 미적재 {unknown}
+- type: gap
+- anchor: none  # 사유: t_prd_product_prices 캘린더 0행(고정가 직접단가 미적재)·110 editor_yn=N
+- src: {source_file: "_workspace/huni-ontology-kb/01_curation/pack-set-series.md", source_locator: "§0.1 [GAP-CAL]·§5 GAP-CAL", captured_at: "2026-07-03", badge: unknown, src_id: SR-pack-set}
+- gap_what: "design-calendar 고정가 미적재(t_prd_product_prices 캘린더=0행·110 엽서캘린더 editor_yn=N 디자인 surface 미구성). ★업로드 캘린더 가격공식(PRF_DGP_CAL_*)은 바인딩됨(별개)·design surface 고정가만 GAP"
+- gap_fill_from: "실무진·§26(원천 부재). 위키 [CAL-DC-001] 🔴 여전"
+- gap_owner: staff

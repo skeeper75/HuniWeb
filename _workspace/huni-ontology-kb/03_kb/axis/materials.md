@@ -251,3 +251,244 @@
 - anchor: t_mat_materials/MAT_000611
 - src: {source_file: "live-snapshot/latest/t_mat_materials.csv", source_locator: "테이블:t_mat_materials 키:MAT_000611 (MAT_TYPE.11·상위 MAT_000610)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
 - props: {mat_typ_cd: "MAT_TYPE.11", upr_mat_cd: "MAT_000610", 사양_ref: "전사표 MAT_000611(아트 90g)", note: "아트지 점착지·비코팅·승격 후보"}
+
+## 셋트 계열 공유 자재 (면지·D링) — Stage A(okb-knowledge-builder 260703)
+
+<!-- 셋트 공유축: 면지 자재(MAT_TYPE.04·072/082/088 면지멤버 색 택1)+D링 자재(088 USAGE.07 불가침). -->
+<!-- ★면지 재설계(2026-07-03): 면지 색이 부모→면지멤버로 이관(fn_chk_opt_item_ref 정합·색 내부 택1·기본 화이트). -->
+<!-- ★[HARD] 면지 자재는 기여 0(무가격·제본비 포함)이어도 삭제 금지=선택지(pack §3.5). D링(USAGE.07)은 불가침 보존(은퇴 아님). -->
+<!-- transcribed-by: _meta/scripts/transcribe_set_axis_260703.py(수동 확장 awk t_mat_materials) from live-snapshot/latest (snap_20260702_1119) @ 2026-07-03 -->
+
+### [material-MAT_000382] 화이트면지 {verified}
+- type: material
+- anchor: t_mat_materials/MAT_000382
+- src: {source_file: "live-snapshot/latest/t_mat_materials.csv", source_locator: "테이블:t_mat_materials 키:MAT_000382 (MAT_TYPE.04·상위 MAT_000001·2026-06-27 신설·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {mat_typ_cd: "MAT_TYPE.04", upr_mat_cd: "MAT_000001", note: "★면지 색(기본·072/082/088 면지멤버 074/084/090 택1·용지 드롭다운 dflt). 무가격(제본비 포함·기여0). 면지멤버 귀속(fn_chk_opt_item_ref 정합·재설계 2026-07-03). uses_material 배선=면지 member 노드(Stage B)."}
+
+### [material-MAT_000383] 블랙면지 {verified}
+- type: material
+- anchor: t_mat_materials/MAT_000383
+- src: {source_file: "live-snapshot/latest/t_mat_materials.csv", source_locator: "테이블:t_mat_materials 키:MAT_000383 (MAT_TYPE.04·상위 MAT_000001·2026-06-27 신설)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {mat_typ_cd: "MAT_TYPE.04", upr_mat_cd: "MAT_000001", note: "면지 색(블랙·072/082/088 면지멤버 택1). 무가격·면지멤버 귀속."}
+
+### [material-MAT_000384] 그레이면지 {verified}
+- type: material
+- anchor: t_mat_materials/MAT_000384
+- src: {source_file: "live-snapshot/latest/t_mat_materials.csv", source_locator: "테이블:t_mat_materials 키:MAT_000384 (MAT_TYPE.04·상위 MAT_000001·2026-06-27 신설)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {mat_typ_cd: "MAT_TYPE.04", upr_mat_cd: "MAT_000001", note: "면지 색(그레이·072=3색 382/383/384 완결·082/088=4색 +385). 무가격·면지멤버 귀속."}
+
+### [material-MAT_000385] 인쇄면지 {verified}
+- type: material
+- anchor: t_mat_materials/MAT_000385
+- src: {source_file: "live-snapshot/latest/t_mat_materials.csv", source_locator: "테이블:t_mat_materials 키:MAT_000385 (MAT_TYPE.04·상위 MAT_000001·2026-06-27 신설)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {mat_typ_cd: "MAT_TYPE.04", upr_mat_cd: "MAT_000001", note: "면지 4번째 색(082/088 4택1). ★기여 0이나 선택지로 보존. 인쇄면지 인쇄비 배선(D-3)은 후속=gaps.md#gap-set-print-membrane."}
+
+### [material-MAT_000247] D링(31mm) {verified}
+- type: material
+- anchor: t_mat_materials/MAT_000247
+- src: {source_file: "live-snapshot/latest/t_mat_materials.csv", source_locator: "테이블:t_mat_materials 키:MAT_000247 (MAT_TYPE.07·상위 MAT_000017·2026-06-03·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {mat_typ_cd: "MAT_TYPE.07", upr_mat_cd: "MAT_000017", note: "★[HARD] 088 레더 링바인더 D링(USAGE.07 불가침·활성 3 불변). 면지 재설계(USAGE.03)가 미터치·격리(088-post-verify §4). 은퇴 아님."}
+
+### [material-MAT_000248] D링(42mm) {verified}
+- type: material
+- anchor: t_mat_materials/MAT_000248
+- src: {source_file: "live-snapshot/latest/t_mat_materials.csv", source_locator: "테이블:t_mat_materials 키:MAT_000248 (MAT_TYPE.07·상위 MAT_000017·2026-06-03)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {mat_typ_cd: "MAT_TYPE.07", upr_mat_cd: "MAT_000017", note: "★[HARD] 088 D링(USAGE.07 불가침·활성 보존)."}
+
+### [material-MAT_000249] D링 {verified}
+- type: material
+- anchor: t_mat_materials/MAT_000249
+- src: {source_file: "live-snapshot/latest/t_mat_materials.csv", source_locator: "테이블:t_mat_materials 키:MAT_000249 (MAT_TYPE.04·상위 없음·2026-06-03·upd 2026-06-29·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {mat_typ_cd: "MAT_TYPE.04", upr_mat_cd: "", note: "★[HARD] 088 D링 자재(USAGE.07 불가침). mat_typ .04(247/248의 .07과 상이·라이브 실값 전사·단정 금지)."}
+
+## 셋트 계열 표지·내지·링·캘린더 자재 — Stage C1(okb-knowledge-builder 260703)
+
+<!-- 셋트/책자/캘린더 계열이 쓰는 표지·내지 종이·트윈링·캘린더 용지. Stage B가 프로즈로만 기록·엣지 미배선. -->
+<!-- Stage C1=노드 mint·Stage C2=상품/구성원→자재(R3 uses_material) 엣지 배선. 규격/평량은 전사표에만(D-9·§4). -->
+<!-- ★[HARD] 트윈링 링자재(MAT_000013/014/015·082 USAGE.07)=불가침·은퇴 금지(pack §3.5). -->
+<!-- ★일부 마스터 del_yn=Y(논리삭제)이나 상품 정션(t_prd_product_materials) 활성=load-bearing → 노드 보존·note 정직 표기. -->
+<!-- ★규격/평량 미기재 자재(전용지·레더·링·하드커버 등 별색/비종이·구자재)는 마스터 원천 공란 → 날조 0·미상 정직(GAP). -->
+<!-- transcribed-by: _meta/scripts/transcribe_set_axis_c1_260703.py materials from live-snapshot/latest (snap_20260702_1119) t_mat_materials @ 2026-07-03 -->
+| mat_cd | 자재명 | mat_typ | 규격(mm) | 평량(g) | 상위 | 마스터del |
+|---|---|---|---|---|---|---|
+| MAT_000246 | 전용지 | MAT_TYPE.01 | 미기재 | 미기재 | - | Y |
+| MAT_000379 | 레더(화이트) | MAT_TYPE.05 | 미기재 | 미기재 | MAT_000186 | N |
+| MAT_000073 | 백색모조지 120g | MAT_TYPE.01 | 316x467 | 120 | MAT_000071 | N |
+| MAT_000076 | 아트지 100g | MAT_TYPE.01 | 316x467 | 100 | MAT_000075 | N |
+| MAT_000077 | 아트지 120g | MAT_TYPE.01 | 316x467 | 120 | MAT_000075 | N |
+| MAT_000086 | 스노우지 100g | MAT_TYPE.01 | 316x467 | 100 | MAT_000085 | N |
+| MAT_000087 | 스노우지 120g | MAT_TYPE.01 | 316x467 | 120 | MAT_000085 | N |
+| MAT_000095 | 앙상블 100g | MAT_TYPE.01 | 316x467 | 100 | MAT_000094 | N |
+| MAT_000104 | 몽블랑 100g | MAT_TYPE.01 | 316x467 | 100 | MAT_000103 | N |
+| MAT_000013 | 화이트링 | MAT_TYPE.02 | 미기재 | 미기재 | MAT_000012 | N |
+| MAT_000014 | 블랙링 | MAT_TYPE.02 | 미기재 | 미기재 | MAT_000012 | N |
+| MAT_000015 | 링 메탈링 | MAT_TYPE.04 | 미기재 | 미기재 | MAT_000012 | Y |
+| MAT_000079 | 아트지 180g | MAT_TYPE.01 | 316x467 | 180 | MAT_000075 | N |
+| MAT_000080 | 아트지 200g | MAT_TYPE.01 | 316x467 | 200 | MAT_000075 | N |
+| MAT_000090 | 스노우지 200g | MAT_TYPE.01 | 316x467 | 200 | MAT_000085 | N |
+| MAT_000096 | 앙상블 130g | MAT_TYPE.01 | 316x467 | 130 | MAT_000094 | Y |
+| MAT_000106 | 몽블랑 160g | MAT_TYPE.01 | 316x467 | 160 | MAT_000103 | N |
+| MAT_000005 | 하드커버 | MAT_TYPE.01 | 미기재 | 미기재 | - | Y |
+| MAT_000250 | 아트250+무광코팅 | MAT_TYPE.01 | 미기재 | 미기재 | - | Y |
+| MAT_000251 | 그레이 | MAT_TYPE.01 | 미기재 | 미기재 | - | Y |
+| MAT_000006 | 레더하드커버 | MAT_TYPE.06 | 미기재 | 미기재 | - | Y |
+| MAT_000007 | 소프트커버 | MAT_TYPE.01 | 미기재 | 미기재 | - | Y |
+| MAT_000127 | 스타드림 | MAT_TYPE.01 | 316x467 | 240 | - | N |
+| MAT_000098 | 앙상블 190g | MAT_TYPE.01 | 316x467 | 190 | MAT_000094 | Y |
+
+### 표지 자재 (USAGE.02)
+
+### [material-MAT_000246] 전용지 (표지·규격 미상) {verified}
+- type: material
+- anchor: t_mat_materials/MAT_000246
+- src: {source_file: "live-snapshot/latest/t_mat_materials.csv", source_locator: "키:MAT_000246(전용지·MAT_TYPE.01·규격/평량 공란·del_yn=Y)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {mat_typ_cd: "MAT_TYPE.01", 사양_ref: "전사표 MAT_000246(규격·평량 마스터 미기재=미상)", note: "073 하드커버책자·082 하드커버링책자 표지 전용지(USAGE.02). ★마스터 del_yn=Y이나 상품 정션 활성=load-bearing → 보존. 규격/평량 미상(원천 공란·날조 0)"}
+
+### [material-MAT_000379] 레더(화이트) (표지·MAT_TYPE.05) {verified}
+- type: material
+- anchor: t_mat_materials/MAT_000379
+- src: {source_file: "live-snapshot/latest/t_mat_materials.csv", source_locator: "키:MAT_000379(레더(화이트)·MAT_TYPE.05·상위 MAT_000186·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {mat_typ_cd: "MAT_TYPE.05", upr_mat_cd: "MAT_000186", 사양_ref: "전사표 MAT_000379(규격·평량 미기재)", note: "078 레더·088 레더링바인더 표지 레더 자재(USAGE.02). 레더=비종이(MAT_TYPE.05·판형 불요). 상위 MAT_000186(레더)"}
+
+### [material-MAT_000005] 하드커버 (표지·규격 미상) {verified}
+- type: material
+- anchor: t_mat_materials/MAT_000005
+- src: {source_file: "live-snapshot/latest/t_mat_materials.csv", source_locator: "키:MAT_000005(하드커버·MAT_TYPE.01·규격/평량 공란·del_yn=Y)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- src: {source_file: "live-snapshot/latest/t_prd_product_materials.csv", source_locator: "키:(PRD_000100,MAT_000005) usage_cd=USAGE.02 dflt_yn=Y del_yn=N(정션 활성)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {mat_typ_cd: "MAT_TYPE.01", 사양_ref: "전사표 MAT_000005(규격·평량 미상)", note: "100 포토북 하드커버 표지(USAGE.02). ★마스터 del_yn=Y이나 정션 활성=load-bearing → 보존·삭제 금지"}
+
+### [material-MAT_000250] 아트250+무광코팅 (표지·규격 미상) {verified}
+- type: material
+- anchor: t_mat_materials/MAT_000250
+- src: {source_file: "live-snapshot/latest/t_mat_materials.csv", source_locator: "키:MAT_000250(아트250+무광코팅·MAT_TYPE.01·규격/평량 공란·del_yn=Y)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- src: {source_file: "live-snapshot/latest/t_prd_product_materials.csv", source_locator: "키:(PRD_000100,MAT_000250) usage_cd=USAGE.02 del_yn=N(정션 활성)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {mat_typ_cd: "MAT_TYPE.01", 사양_ref: "전사표 MAT_000250(규격·평량 미상)", note: "100 포토북 표지(아트지250g+무광코팅 내장·USAGE.02). ★마스터 del_yn=Y이나 정션 활성=load-bearing → 보존"}
+
+### [material-MAT_000006] 레더하드커버 (표지·MAT_TYPE.06) {verified}
+- type: material
+- anchor: t_mat_materials/MAT_000006
+- src: {source_file: "live-snapshot/latest/t_mat_materials.csv", source_locator: "키:MAT_000006(레더하드커버·MAT_TYPE.06·규격/평량 공란·del_yn=Y)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- src: {source_file: "live-snapshot/latest/t_prd_product_materials.csv", source_locator: "키:(PRD_000100,MAT_000006) usage_cd=USAGE.02 del_yn=N(정션 활성)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {mat_typ_cd: "MAT_TYPE.06", 사양_ref: "전사표 MAT_000006(규격·평량 미상)", note: "100 포토북 레더 하드커버 표지(USAGE.02·MAT_TYPE.06 비종이). ★마스터 del_yn=Y이나 정션 활성=load-bearing → 보존"}
+
+### [material-MAT_000007] 소프트커버 (표지·규격 미상) {verified}
+- type: material
+- anchor: t_mat_materials/MAT_000007
+- src: {source_file: "live-snapshot/latest/t_mat_materials.csv", source_locator: "키:MAT_000007(소프트커버·MAT_TYPE.01·규격/평량 공란·del_yn=Y)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- src: {source_file: "live-snapshot/latest/t_prd_product_materials.csv", source_locator: "키:(PRD_000100,MAT_000007) usage_cd=USAGE.02 del_yn=N(정션 활성)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {mat_typ_cd: "MAT_TYPE.01", 사양_ref: "전사표 MAT_000007(규격·평량 미상)", note: "100 포토북 소프트커버 표지(USAGE.02). ★마스터 del_yn=Y이나 정션 활성=load-bearing → 보존"}
+
+### 면지 자재 (USAGE.03·무가격)
+
+### [material-MAT_000251] 그레이 (면지·무가격) {verified}
+- type: material
+- anchor: t_mat_materials/MAT_000251
+- src: {source_file: "live-snapshot/latest/t_mat_materials.csv", source_locator: "키:MAT_000251(그레이·MAT_TYPE.01·규격/평량 공란·del_yn=Y)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- src: {source_file: "live-snapshot/latest/t_prd_product_materials.csv", source_locator: "키:(PRD_000100,MAT_000251) usage_cd=USAGE.03 del_yn=N(정션 활성)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {mat_typ_cd: "MAT_TYPE.01", 사양_ref: "전사표 MAT_000251(규격·평량 미상)", note: "100 포토북 면지(USAGE.03·무가격·제본비 포함·기여0). ★셋트 면지멤버(MAT_000382~385·Stage A)와는 별개(100 포토북 전용). 마스터 del_yn=Y이나 정션 활성=load-bearing → 보존·선택지 삭제 금지"}
+
+### 내지 종이 자재 (USAGE.07 / USAGE.01)
+
+### [material-MAT_000073] 백색모조지 120g {verified}
+- type: material
+- anchor: t_mat_materials/MAT_000073
+- src: {source_file: "live-snapshot/latest/t_mat_materials.csv", source_locator: "키:MAT_000073", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {mat_typ_cd: "MAT_TYPE.01", upr_mat_cd: "MAT_000071", 사양_ref: "전사표 MAT_000073", note: "284/285/286/287 내지·097 부모 본문 종이(USAGE.07/.01). 상위 MAT_000071(백색모조지)"}
+
+### [material-MAT_000076] 아트지 100g {verified}
+- type: material
+- anchor: t_mat_materials/MAT_000076
+- src: {source_file: "live-snapshot/latest/t_mat_materials.csv", source_locator: "키:MAT_000076", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {mat_typ_cd: "MAT_TYPE.01", upr_mat_cd: "MAT_000075", 사양_ref: "전사표 MAT_000076", note: "284/285/286/287 하드커버 내지 종이(USAGE.07). 상위 MAT_000075(아트지)"}
+
+### [material-MAT_000077] 아트지 120g {verified}
+- type: material
+- anchor: t_mat_materials/MAT_000077
+- src: {source_file: "live-snapshot/latest/t_mat_materials.csv", source_locator: "키:MAT_000077", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {mat_typ_cd: "MAT_TYPE.01", upr_mat_cd: "MAT_000075", 사양_ref: "전사표 MAT_000077", note: "284/285/286/287 내지·표지군 종이(USAGE.07/.01). 상위 MAT_000075(아트지)"}
+
+### [material-MAT_000079] 아트지 180g {verified}
+- type: material
+- anchor: t_mat_materials/MAT_000079
+- src: {source_file: "live-snapshot/latest/t_mat_materials.csv", source_locator: "키:MAT_000079", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {mat_typ_cd: "MAT_TYPE.01", upr_mat_cd: "MAT_000075", 사양_ref: "전사표 MAT_000079", note: "책자 표지군 종이(USAGE.01·288/290/292). 상위 MAT_000075(아트지)"}
+
+### [material-MAT_000080] 아트지 200g {verified}
+- type: material
+- anchor: t_mat_materials/MAT_000080
+- src: {source_file: "live-snapshot/latest/t_mat_materials.csv", source_locator: "키:MAT_000080", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {mat_typ_cd: "MAT_TYPE.01", upr_mat_cd: "MAT_000075", 사양_ref: "전사표 MAT_000080", note: "책자 표지군 종이(USAGE.01). 상위 MAT_000075(아트지)"}
+
+### [material-MAT_000086] 스노우지 100g {verified}
+- type: material
+- anchor: t_mat_materials/MAT_000086
+- src: {source_file: "live-snapshot/latest/t_mat_materials.csv", source_locator: "키:MAT_000086", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {mat_typ_cd: "MAT_TYPE.01", upr_mat_cd: "MAT_000085", 사양_ref: "전사표 MAT_000086", note: "284/285/286/287 내지 종이(USAGE.07). 상위 MAT_000085(스노우지)"}
+
+### [material-MAT_000087] 스노우지 120g {verified}
+- type: material
+- anchor: t_mat_materials/MAT_000087
+- src: {source_file: "live-snapshot/latest/t_mat_materials.csv", source_locator: "키:MAT_000087", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {mat_typ_cd: "MAT_TYPE.01", upr_mat_cd: "MAT_000085", 사양_ref: "전사표 MAT_000087", note: "284/285/286/287 내지·표지군 종이(USAGE.07/.01). 상위 MAT_000085(스노우지)"}
+
+### [material-MAT_000090] 스노우지 200g {verified}
+- type: material
+- anchor: t_mat_materials/MAT_000090
+- src: {source_file: "live-snapshot/latest/t_mat_materials.csv", source_locator: "키:MAT_000090", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {mat_typ_cd: "MAT_TYPE.01", upr_mat_cd: "MAT_000085", 사양_ref: "전사표 MAT_000090", note: "표지군·캘린더 기본용지(스노우지200g). 상위 MAT_000085(스노우지)"}
+
+### [material-MAT_000095] 앙상블 100g {verified}
+- type: material
+- anchor: t_mat_materials/MAT_000095
+- src: {source_file: "live-snapshot/latest/t_mat_materials.csv", source_locator: "키:MAT_000095", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {mat_typ_cd: "MAT_TYPE.01", upr_mat_cd: "MAT_000094", 사양_ref: "전사표 MAT_000095", note: "284/285/286/287 내지·표지군 종이(USAGE.07/.01). 상위 MAT_000094(앙상블)"}
+
+### [material-MAT_000096] 앙상블 130g (마스터 논리삭제) {verified}
+- type: material
+- anchor: t_mat_materials/MAT_000096
+- src: {source_file: "live-snapshot/latest/t_mat_materials.csv", source_locator: "키:MAT_000096(앙상블 130g·MAT_TYPE.01·상위 MAT_000094·del_yn=Y)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {mat_typ_cd: "MAT_TYPE.01", upr_mat_cd: "MAT_000094", 사양_ref: "전사표 MAT_000096", note: "책자 표지군 종이(USAGE.01). ★마스터 del_yn=Y이나 상품 정션 활성=load-bearing → 보존"}
+
+### [material-MAT_000098] 앙상블 190g (마스터 논리삭제) {verified}
+- type: material
+- anchor: t_mat_materials/MAT_000098
+- src: {source_file: "live-snapshot/latest/t_mat_materials.csv", source_locator: "키:MAT_000098(앙상블 190g·MAT_TYPE.01·상위 MAT_000094·del_yn=Y)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {mat_typ_cd: "MAT_TYPE.01", upr_mat_cd: "MAT_000094", 사양_ref: "전사표 MAT_000098", note: "캘린더 기본용지(앙상블190g). ★마스터 del_yn=Y이나 정션 활성=load-bearing → 보존"}
+
+### [material-MAT_000104] 몽블랑 100g {verified}
+- type: material
+- anchor: t_mat_materials/MAT_000104
+- src: {source_file: "live-snapshot/latest/t_mat_materials.csv", source_locator: "키:MAT_000104", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {mat_typ_cd: "MAT_TYPE.01", upr_mat_cd: "MAT_000103", 사양_ref: "전사표 MAT_000104", note: "284/285/286/287 내지·표지군 종이(USAGE.07/.01). 상위 MAT_000103(몽블랑)"}
+
+### [material-MAT_000106] 몽블랑 160g {verified}
+- type: material
+- anchor: t_mat_materials/MAT_000106
+- src: {source_file: "live-snapshot/latest/t_mat_materials.csv", source_locator: "키:MAT_000106", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {mat_typ_cd: "MAT_TYPE.01", upr_mat_cd: "MAT_000103", 사양_ref: "전사표 MAT_000106", note: "책자 표지군 종이(USAGE.01·288/290/292). 상위 MAT_000103(몽블랑)"}
+
+### [material-MAT_000127] 스타드림 (캘린더 기본용지) {verified}
+- type: material
+- anchor: t_mat_materials/MAT_000127
+- src: {source_file: "live-snapshot/latest/t_mat_materials.csv", source_locator: "키:MAT_000127(스타드림·MAT_TYPE.01·240g·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {mat_typ_cd: "MAT_TYPE.01", 사양_ref: "전사표 MAT_000127", note: "캘린더 기본용지 3종의 하나(스타드림 240g). 108~112 캘린더 uses_material 후보(Stage B 배선)"}
+
+### 트윈링 링자재 (USAGE.07·★불가침·은퇴 금지)
+
+### [material-MAT_000013] 화이트링 (트윈링·불가침) {verified}
+- type: material
+- anchor: t_mat_materials/MAT_000013
+- src: {source_file: "live-snapshot/latest/t_mat_materials.csv", source_locator: "키:MAT_000013(화이트링·MAT_TYPE.02·상위 MAT_000012·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {mat_typ_cd: "MAT_TYPE.02", upr_mat_cd: "MAT_000012", 사양_ref: "전사표 MAT_000013(규격·평량 미기재=비종이 링)", note: "★[HARD] 082 하드커버링책자 트윈링 링자재(USAGE.07·불가침·은퇴 금지·pack §3.5). 비종이(MAT_TYPE.02·판형 불요)"}
+
+### [material-MAT_000014] 블랙링 (트윈링·불가침) {verified}
+- type: material
+- anchor: t_mat_materials/MAT_000014
+- src: {source_file: "live-snapshot/latest/t_mat_materials.csv", source_locator: "키:MAT_000014(블랙링·MAT_TYPE.02·상위 MAT_000012·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {mat_typ_cd: "MAT_TYPE.02", upr_mat_cd: "MAT_000012", 사양_ref: "전사표 MAT_000014(규격·평량 미기재)", note: "★[HARD] 082 트윈링 링자재(USAGE.07·불가침·은퇴 금지). 비종이"}
+
+### [material-MAT_000015] 링 메탈링 (트윈링·불가침·마스터 논리삭제) {verified}
+- type: material
+- anchor: t_mat_materials/MAT_000015
+- src: {source_file: "live-snapshot/latest/t_mat_materials.csv", source_locator: "키:MAT_000015(링 메탈링·MAT_TYPE.04·상위 MAT_000012·del_yn=Y)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {mat_typ_cd: "MAT_TYPE.04", upr_mat_cd: "MAT_000012", 사양_ref: "전사표 MAT_000015(규격·평량 미기재)", note: "★[HARD] 082 트윈링 링자재 계열(불가침·은퇴 금지). 마스터 del_yn=Y이나 링 자재군(MAT_000012 하위)·비종이. 규격/평량 미상"}

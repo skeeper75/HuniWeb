@@ -1,0 +1,62 @@
+codex
+**1. MOVE-기준정보=0 공격**
+
+VERDICT: AGREE
+
+EVIDENCE: `PRD_000024 / 종이 / 아트지 300g`, `PRD_000026 / 종이 / 아트지 300g`  
+board: `기준정보중복여부=Y-트리거정합(1/1)`, `가격종속여부=Y`, `처분=KEEP`, 근거=`ref .03→mat_cd 환원`.
+
+판정: 1-choice라 UI dead-choice처럼 보이지만, 4개 파일 안에는 “기준정보만 남겨도 mat_cd 선택/가격이 자동 성립한다”는 증거가 없다. 규범도 옵션 선택→`ref_dim_cd` 환원을 CPQ 경로로 둔다. MOVE-basedata로 바꿀 근거 부족.
+
+**2. EXTEND 21건 적정성**
+
+VERDICT: UNCERTAIN(need live/authority)
+
+EVIDENCE: 기존 옵션 보강류는 대체로 EXTEND 타당. 예: `PRD_000031 / 종이` board=`부분(6/14 일치)`, `가격종속여부=Y`, 근거=`8건 product_materials 미실재 → 배선 보강. 삭제금지`.
+
+단, 9개 “옵션그룹 없음” 제품은 증거가 얇다: `PRD_000034/035/036/039/043/044/045/048/049` board 근거가 전부 `§21 cpq-defect-board 기대 옵션[...]` 인용이다. 제공된 4파일만으로는 그 “기대 옵션”이 실제 260702 권위인지, base-info only로 충분한 단일축인지 검증 불가. KEEP/RETIRE로 교정할 증거도 없으므로 보류가 맞다.
+
+**3. BLOCKED miss / PRD_037**
+
+VERDICT: DISAGREE
+
+EVIDENCE: `PRD_000037 / 박종류 / 일반박·홀로그램/트윙클`  
+board: `opt_item=(무참조 항목)`, `기준정보중복여부=N(opt_cd 판별)`, `가격종속여부=Y(opt_cd)`, `처분=EXTEND`, 근거=`가격종속=BLOCKED성`.  
+spec §3-D도 “evaluate_price PRICE≠0 입증 후에만”이라고 적었다.
+
+Corrected disposition: `BLOCKED` 또는 최소 `EXTEND-BLOCKED`.  
+WHY: 현재 가격축이 `opt_cd`인데 `.03자재+.04공정 BUNDLE` 대체가 가격 보존된다는 증거가 없다. criteria §4상 가격종속 재배선은 대체 placement의 PRICE 보존 입증 전까지 BLOCKED로 분리해야 한다.
+
+**4. Hallucination / Thin Evidence**
+
+VERDICT: DISAGREE
+
+EVIDENCE 1: `PRD_000042 / 종이`는 KEEP인데 board 자체가 의미 불일치를 보인다.  
+`스타드림(실버) 240g => 자재:MAT_000128(면끈)`  
+`스타드림(골드) 240g => 자재:MAT_000129(아크릴키링고리)`  
+`스타드림(다이아) 240g => 자재:MAT_000240(보드스탠딩)`  
+`스타드림(로츠쿼츠) 240g => 자재:MAT_000241(핀버튼)`
+
+Corrected disposition: `KEEP`이 아니라 `EXTEND` + 가격검증 게이트.  
+WHY: “ref 대상 존재”만으로 “올바른 자재 ref”를 증명하지 못한다. 트리거 정합은 의미 정합이 아니다.
+
+EVIDENCE 2: `PRD_000047 / 종이`도 `부분(46/47 일치)`라고 하지만  
+`스타드림(실버)=>MAT_000128(면끈)`, `골드=>MAT_000129(아크릴키링고리)`, `로즈쿼츠=>MAT_000130(네오디움자석)`가 있다.  
+Corrected: EXTEND 자체는 맞지만 근거를 “1건 미실재”가 아니라 “미실재 + 의미오매핑”으로 수정해야 한다.
+
+**5. EXTEND false-positive / choice-loss risk**
+
+VERDICT: AGREE
+
+EVIDENCE: `PRD_000031 / 종이` board=`부분(6/14 일치)`, 근거=`배선 보강. 삭제금지`.  
+`PRD_000047 / 종이` board=`부분(46/47 일치)`, 근거=`배선 보강. 삭제금지`.
+
+판정: Claude가 “missing materials를 삭제”하라고 하지는 않았다. EXTEND는 정당한 고객 선택지를 살리는 보강이어야 한다. 다만 `PRD_000047`은 위 4번처럼 “missing만 보강”하면 부족하고, 잘못 해소된 자재 ref도 함께 교정해야 한다.
+
+**codex 단독 주장 (미검증 가설)**
+
+- `PRD_000034/035/036/039/043/044/045/048/049`가 base-info only로 충분할 수 있다는 주장은 현재 4파일만으로 미검증 가설.
+- `PRD_037`의 `.03+.04 BUNDLE` 재배선이 가격을 보존한다는 주장도 미검증 가설.
+
+Overall: AGREE 2 / DISAGREE 2 / UNCERTAIN 1.  
+Claude가 가장 크게 놓친 것: `ref target exists`를 `semantic ref correct`로 착각한 점. 특히 `PRD_000042` KEEP 판정은 board 내부 증거만으로도 깨진다.

@@ -17,8 +17,9 @@
 ### [process-PROC_000001] 인쇄 {verified}
 - type: process
 - anchor: t_proc_processes/PROC_000001
-- src: {source_file: "live-snapshot/latest/t_proc_processes.csv", source_locator: "키:PROC_000001", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
-- props: {proc_nm: "인쇄", role: "인쇄 상위공정(proc_grp:PROC_000001 채점 그룹)"}
+- src: {source_file: "live-snapshot/latest/t_proc_processes.csv", source_locator: "키:PROC_000001(upr 공란·note 'Decision 14 v3 — 1상품=1인쇄방식'=그룹 루트·자식 004/003/005…)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {proc_nm: "인쇄", role: "인쇄 상위공정(proc_grp:PROC_000001 채점 그룹)·택소노미 그룹 루트(상품은 자식 리프를 직접 소비·t_prd_product_processes 루트 0행 정상)"}
+- rel: {rel: references, target: process-PROC_000004, note: "택소노미 그룹 루트 → 대표 자식(디지털인쇄 base·upr_proc_cd=PROC_000001 live). 상품 has_process는 리프(004 등)에 배선·루트 직접 캐리어 없음(C-4 명시 처리·조용한 고아 아님)"}
 
 ### [process-PROC_000007] 별색인쇄 {verified}
 - type: process
@@ -65,8 +66,9 @@
 ### [process-PROC_000056] 접지 {verified}
 - type: process
 - anchor: t_proc_processes/PROC_000056
-- src: {source_file: "live-snapshot/latest/t_proc_processes.csv", source_locator: "키:PROC_000056", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
-- props: {proc_nm: "접지", role: "접지(fold)·리플렛/접지카드"}
+- src: {source_file: "live-snapshot/latest/t_proc_processes.csv", source_locator: "키:PROC_000056(upr 공란·note '그룹 root'·자식 057~063/106/107 접지 변형)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {proc_nm: "접지", role: "접지(fold)·리플렛/접지카드·택소노미 그룹 루트(상품은 자식 리프 소비·루트 t_prd_product_processes 0행 정상)"}
+- rel: {rel: references, target: process-PROC_000060, note: "택소노미 그룹 루트 → 대표 자식(3단접지·upr_proc_cd=PROC_000056 live·049 와이드접지리플렛 소비). 루트 직접 캐리어 없음(C-4 명시 처리)"}
 
 ### [process-PROC_000079] 타공 {verified}
 - type: process
@@ -156,3 +158,119 @@
 - src: {source_file: "live-snapshot/latest/t_proc_processes.csv", source_locator: "테이블:t_proc_processes 키:PROC_000122 (upr_proc_cd=PROC_000121 커팅·2026-06-29 신설)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
 - src: {source_file: "live-snapshot/latest/t_prd_product_processes.csv", source_locator: "테이블:t_prd_product_processes 소비:PRD_000052(mand Y·disp 1)·구 PROC_000054 반칼은 052에서 del_yn=Y 이관", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
 - props: {proc_nm: "반칼커팅", upr_proc_cd: "PROC_000121", role: "반칼 Kiss Cut(자유형 모양·뒷지 남김)·스티커 정체 공정", note: "★구 PROC_000054(반칼 Kiss Cut·prcs_dtl_opt 모양+조각수)에서 이관·pack §3.6 '반칼=PROC_000054'는 live 재측정 갱신·023 완칼 PROC_000053→123 이관과 동형·승격 후보"}
+
+## 셋트 계열 공유 제본 공정 — Stage A(okb-knowledge-builder 260703)
+
+<!-- 셋트 공유축: 제본 공정이 셋트 form을 만든다(정체 공정·pack §3.6). has_process(product→process·R5)는 상품/구성원 노드(Stage B)가 배선. -->
+<!-- ★소비자(Stage B가 배선): 068→중철·069→무선·070→PUR·071→트윈링·094/097→떡·072/077→하드커버무선·082→하드커버트윈링(t_prd_product_processes 실측). -->
+<!-- 싸바리 PROC_000098=088 redesign pending(현행 미배선). 캘린더 제본=단품 참고(99/100/102). -->
+
+### [process-PROC_000017] 제본(그룹) {verified}
+- type: process
+- anchor: t_proc_processes/PROC_000017
+- src: {source_file: "live-snapshot/latest/t_proc_processes.csv", source_locator: "테이블:t_proc_processes 키:PROC_000017 (upr 없음·disp 4·use_yn=Y·note '필수,단일'·inputs=방향/묶음단위/책등mm/고리형)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {proc_nm: "제본", upr_proc_cd: "", mand: "필수·단일", role: "셋트 제본 공정 그룹(자식=중철/무선/PUR/트윈링/떡/하드커버 등). proc_grp:PROC_000017=제본 comp use_dims 게이트·택소노미 그룹 루트(상품은 자식 리프 소비·루트 t_prd_product_processes 0행 정상)."}
+- rel: {rel: references, target: process-PROC_000018, note: "택소노미 그룹 루트 → 대표 자식(중철제본·upr_proc_cd=PROC_000017 live·068 소비). 루트 직접 캐리어 없음(C-4 명시 처리·조용한 고아 아님)"}
+
+### [process-PROC_000018] 중철제본 {verified}
+- type: process
+- anchor: t_proc_processes/PROC_000018
+- src: {source_file: "live-snapshot/latest/t_proc_processes.csv", source_locator: "테이블:t_proc_processes 키:PROC_000018 (upr PROC_000017·disp 1)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- src: {source_file: "live-snapshot/latest/t_prd_product_processes.csv", source_locator: "테이블:t_prd_product_processes 소비:PRD_000068(중철책자 셋트)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {proc_nm: "중철제본", upr_proc_cd: "PROC_000017", role: "068 중철책자 제본(COMP_BIND_JUNGCHEOL·PRF_BIND_SUM)."}
+
+### [process-PROC_000019] 무선제본 {verified}
+- type: process
+- anchor: t_proc_processes/PROC_000019
+- src: {source_file: "live-snapshot/latest/t_proc_processes.csv", source_locator: "테이블:t_proc_processes 키:PROC_000019 (upr PROC_000017·disp 2)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- src: {source_file: "live-snapshot/latest/t_prd_product_processes.csv", source_locator: "테이블:t_prd_product_processes 소비:PRD_000069(무선책자 셋트)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {proc_nm: "무선제본", upr_proc_cd: "PROC_000017", role: "069 무선책자 제본(COMP_BIND_MUSEON·PRF_BIND_MUSEON)."}
+
+### [process-PROC_000020] PUR제본 {verified}
+- type: process
+- anchor: t_proc_processes/PROC_000020
+- src: {source_file: "live-snapshot/latest/t_proc_processes.csv", source_locator: "테이블:t_proc_processes 키:PROC_000020 (upr PROC_000017·disp 3)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- src: {source_file: "live-snapshot/latest/t_prd_product_processes.csv", source_locator: "테이블:t_prd_product_processes 소비:PRD_000070·PRD_000100(PUR책자·포토북)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {proc_nm: "PUR제본", upr_proc_cd: "PROC_000017", role: "070 PUR책자·100 포토북 제본(COMP_BIND_PUR·PRF_BIND_PUR)."}
+
+### [process-PROC_000021] 트윈링제본 {verified}
+- type: process
+- anchor: t_proc_processes/PROC_000021
+- src: {source_file: "live-snapshot/latest/t_proc_processes.csv", source_locator: "테이블:t_proc_processes 키:PROC_000021 (upr PROC_000017·disp 4)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- src: {source_file: "live-snapshot/latest/t_prd_product_processes.csv", source_locator: "테이블:t_prd_product_processes 소비:PRD_000071(트윈링책자·셋트 미성립)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {proc_nm: "트윈링제본", upr_proc_cd: "PROC_000017", role: "071 트윈링책자 제본(COMP_BIND_TWINRING). ★071 셋트 미성립=gaps.md#gap-071-set-notmembered. 캘린더 111/112도 트윈링(단품)."}
+- rel: {rel: references, target: gap-071-set-notmembered, note: "범위 내 유일 캐리어 PRD_000071이 셋트 미성립 GAP(t_prd_product_processes 소비=071·177/178은 문구셋트 범위밖 live 재실측). 상품 has_process 배선 불가 사유를 GAP으로 명시 연결(C-4·조용한 고아 아님)"}
+
+### [process-PROC_000022] 떡제본 {verified}
+- type: process
+- anchor: t_proc_processes/PROC_000022
+- src: {source_file: "live-snapshot/latest/t_proc_processes.csv", source_locator: "테이블:t_proc_processes 키:PROC_000022 (upr PROC_000017·disp 5)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- src: {source_file: "live-snapshot/latest/t_prd_product_processes.csv", source_locator: "테이블:t_prd_product_processes 소비:PRD_000094·PRD_000097(엽서북·떡메모지)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {proc_nm: "떡제본", upr_proc_cd: "PROC_000017", role: "094 엽서북·097 떡메모지 제본(묶음단위 50/100장1권)."}
+
+### [process-PROC_000023] 하드커버무선제본 {verified}
+- type: process
+- anchor: t_proc_processes/PROC_000023
+- src: {source_file: "live-snapshot/latest/t_proc_processes.csv", source_locator: "테이블:t_proc_processes 키:PROC_000023 (upr PROC_000017·disp 6)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- src: {source_file: "live-snapshot/latest/t_prd_product_processes.csv", source_locator: "테이블:t_prd_product_processes 소비:PRD_000072·PRD_000077(하드커버·레더하드커버)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {proc_nm: "하드커버무선제본", upr_proc_cd: "PROC_000017", role: "072/077 하드커버책자 제본(COMP_HC_MUSEON_COVERBIND 통가·PRF_HC_MUSEON_SET)."}
+
+### [process-PROC_000024] 하드커버트윈링제본 {verified}
+- type: process
+- anchor: t_proc_processes/PROC_000024
+- src: {source_file: "live-snapshot/latest/t_proc_processes.csv", source_locator: "테이블:t_proc_processes 키:PROC_000024 (upr PROC_000017·disp 7)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- src: {source_file: "live-snapshot/latest/t_prd_product_processes.csv", source_locator: "테이블:t_prd_product_processes 소비:PRD_000082(하드커버링책자)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {proc_nm: "하드커버트윈링제본", upr_proc_cd: "PROC_000017", role: "082 하드커버 링책자 제본(COMP_BIND_HC_TWINRING·PRF_HC_TWINRING_SET)."}
+
+### [process-PROC_000098] 싸바리바인더 {candidate}
+- type: process
+- anchor: t_proc_processes/PROC_000098
+- src: {source_file: "live-snapshot/latest/t_proc_processes.csv", source_locator: "테이블:t_proc_processes 키:PROC_000098 (upr PROC_000017·disp 9·use_yn=Y)", captured_at: "live 20260702_1119", badge: candidate, src_id: SR-5-livesnap}
+- props: {proc_nm: "싸바리바인더", upr_proc_cd: "PROC_000017", role: "088 레더 링바인더 싸바리 제본. ★live 실재(use_yn=Y)이나 t_prd_product_processes 소비 0행(현행 미배선)·088-redesign pending에서 COMP_BIND_SSABARI@PROC_000098 배선 예정(인간승인 후). gaps.md#gap-set-088-redesign-pending."}
+- rel: {rel: references, target: gap-set-088-redesign-pending, note: "t_prd_product_processes 소비 0행(live 재실측)=상품 has_process 배선 불가. 088-redesign(인간 승인 대기·미COMMIT)에서 배선 예정이므로 pending GAP으로 명시 연결(C-4·조용한 고아 아님)"}
+
+### [process-PROC_000099] 벽걸이캘린더제본(참고) {verified}
+- type: process
+- anchor: t_proc_processes/PROC_000099
+- src: {source_file: "live-snapshot/latest/t_proc_processes.csv", source_locator: "테이블:t_proc_processes 키:PROC_000099 (upr PROC_000017·disp 10)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- src: {source_file: "live-snapshot/latest/t_prd_product_processes.csv", source_locator: "테이블:t_prd_product_processes 소비:PRD_000111·PRD_000112(벽걸이/와이드캘린더·단품)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {proc_nm: "벽걸이캘린더제본", upr_proc_cd: "PROC_000017", role: "캘린더 단품(참고·셋트 아님). 111/112 벽걸이 제본(PRF_DGP_CAL_WIDE)."}
+
+### [process-PROC_000100] 탁상형캘린더제본(220·참고) {verified}
+- type: process
+- anchor: t_proc_processes/PROC_000100
+- src: {source_file: "live-snapshot/latest/t_proc_processes.csv", source_locator: "테이블:t_proc_processes 키:PROC_000100 (upr PROC_000017·disp 11)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- src: {source_file: "live-snapshot/latest/t_prd_product_processes.csv", source_locator: "테이블:t_prd_product_processes 소비:PRD_000108(탁상형캘린더·단품)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {proc_nm: "탁상형캘린더제본(220)", upr_proc_cd: "PROC_000017", role: "캘린더 단품(참고). 108 탁상형 제본(PRF_DGP_CAL_DESK)."}
+
+### [process-PROC_000102] 탁상형캘린더제본(미니·참고) {verified}
+- type: process
+- anchor: t_proc_processes/PROC_000102
+- src: {source_file: "live-snapshot/latest/t_proc_processes.csv", source_locator: "테이블:t_proc_processes 키:PROC_000102 (upr PROC_000017·disp 13)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- src: {source_file: "live-snapshot/latest/t_prd_product_processes.csv", source_locator: "테이블:t_prd_product_processes 소비:PRD_000109(미니탁상캘린더·단품)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {proc_nm: "탁상형캘린더제본(미니)", upr_proc_cd: "PROC_000017", role: "캘린더 단품(참고). 109 미니탁상 제본(PRF_DGP_CAL_DESK)."}
+
+## 셋트 부가공정·포장 — Stage C1(okb-knowledge-builder 260703)
+
+<!-- 무선/PUR 부가 후가공(양각/음각)·수축포장. Stage B가 프로즈로만 기록·엣지 미배선. -->
+<!-- Stage C1=노드 mint·Stage C2=상품→공정(R5 has_process·mand/opt) 엣지 배선. -->
+<!-- ★박 자식 공정(PROC_000037~044)은 product-027(product-027-nodes.md)에 이미 존재=재사용(중복 mint 금지·L-3). -->
+
+### [process-PROC_000051] 양각 {verified}
+- type: process
+- anchor: t_proc_processes/PROC_000051
+- src: {source_file: "live-snapshot/latest/t_proc_processes.csv", source_locator: "테이블:t_proc_processes 키:PROC_000051 (upr PROC_000050·disp 1·use_yn=Y)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {proc_nm: "양각", upr_proc_cd: "PROC_000050", role: "무선/PUR 책자 부가 후가공(양각 엠보싱). 069/070 부모 보유(has_process opt)."}
+
+### [process-PROC_000052] 음각 {verified}
+- type: process
+- anchor: t_proc_processes/PROC_000052
+- src: {source_file: "live-snapshot/latest/t_proc_processes.csv", source_locator: "테이블:t_proc_processes 키:PROC_000052 (upr PROC_000050·disp 2·use_yn=Y)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {proc_nm: "음각", upr_proc_cd: "PROC_000050", role: "무선/PUR 책자 부가 후가공(음각 디보싱). 069/070 부모 보유(has_process opt)."}
+
+### [process-PROC_000076] 수축포장 {verified}
+- type: process
+- anchor: t_proc_processes/PROC_000076
+- src: {source_file: "live-snapshot/latest/t_proc_processes.csv", source_locator: "테이블:t_proc_processes 키:PROC_000076 (upr PROC_000075·disp 1·use_yn=Y·note 기본)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- src: {source_file: "live-snapshot/latest/t_prd_product_processes.csv", source_locator: "소비:PRD_000094(수축포장 mand)·PRD_000108/109(탁상캘린더)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {proc_nm: "수축포장", upr_proc_cd: "PROC_000075", role: "094 엽서북 수축포장(mand)·108/109 캘린더 포장 공정. has_process는 상품 노드(Stage B)."}

@@ -1,0 +1,6 @@
+prd_cd,sub_prd_cd,sub_prd_qty,min_cnt,max_cnt,cnt_incr,disp_seq,del_yn,note
+PRD_000077,PRD_000078,1,1,1,,1,N,표지(레더) — 반제품 SEMI_ROLE.02 · 미변경
+PRD_000077,PRD_000285,1,24,300,2,2,N,내지 — 반제품 PRF_DGP_INNER · 미변경(선택 정정 min1/max1 주석블록)
+PRD_000077,PRD_000079,1,,,,3,N,면지(통합) — 리네임 '레더 하드커버책자-면지' · 자재 MAT_382/383/384+OPT_065 이관 · 색 택1
+PRD_000077,PRD_000080,1,,,,4,Y,면지(블랙) 은퇴 — del_yn=Y + 상품마스터 use_yn=N (079로 통합)
+PRD_000077,PRD_000081,1,,,,5,Y,면지(그레이) 은퇴 — del_yn=Y + 상품마스터 use_yn=N (079로 통합)

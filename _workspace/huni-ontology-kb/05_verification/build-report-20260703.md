@@ -2,52 +2,53 @@
 
 > build_graph.py · 정본 /Users/innojini/Dev/HuniWeb/_workspace/huni-ontology-kb/03_kb → 04_graph. 생성=빌드(검증은 별도 레인·okb-adversarial-gate).
 
-- 판정: **PASS(하드 0)** · 하드 위반 0 · 소프트 경고 432
-- 노드 963 · 엣지 3047
-- 멱등 해시: nodes.jsonl=03dcccaf21c42be8 · edges.jsonl=bfc516b8c14e0e3a
+- 판정: **PASS(하드 0)** · 하드 위반 0 · 소프트 경고 530
+- 노드 1142 · 엣지 3534
+- 멱등 해시: nodes.jsonl=dd19381b7b50e005 · edges.jsonl=6f2ec4b9541fffea
 
 ## 노드 수 (타입별)
-- bundle_qty: 52
-- category: 25
+- bundle_qty: 55
+- category: 41
 - constraint: 10
 - decision: 12
-- gap: 199
+- gap: 217
 - intent: 3
-- material: 115
-- option_group: 126
-- plate_size: 17
-- price_component: 97
-- price_formula: 55
+- material: 146
+- option_group: 132
+- plate_size: 18
+- price_component: 112
+- price_formula: 72
 - print_option: 4
-- process: 52
-- product: 80
+- process: 67
+- product: 122
 - rule: 7
-- size: 102
+- size: 117
 - term: 7
 
 ## 엣지 수 (rel별)
 - alias_of: 19
 - constrains: 11
 - decided_because: 19
-- derived_from: 8
-- has_component: 157
-- has_option_group: 126
-- has_plate_size: 53
-- has_print_option: 75
-- has_process: 221
-- has_qty_rule: 52
-- has_size: 223
-- in_category: 134
-- option_refs: 277
-- priced_by: 83
-- references: 1348
-- uses_material: 241
+- derived_from: 23
+- has_component: 190
+- has_member: 27
+- has_option_group: 132
+- has_plate_size: 69
+- has_print_option: 105
+- has_process: 264
+- has_qty_rule: 55
+- has_size: 254
+- in_category: 164
+- option_refs: 291
+- priced_by: 111
+- references: 1441
+- uses_material: 359
 
 ## badge 분포
-- candidate: 16
+- candidate: 20
 - defect: 20
-- unknown: 197
-- verified: 730
+- unknown: 215
+- verified: 887
 
 ## 무결성 6검사
 - I-1 고아(하드 유형 product/formula/component): 0
@@ -64,6 +65,11 @@
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): material-MAT_000372 :: - authority_value: "260702 신규행(row 86)=투명스티커(투명후지)·평량=50·연당가
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): material-MAT_000372 :: - 본문: 260702가 새로 추가한 투명후지 소재(연당가 222,000/국4절 740/평량 50). 라이브
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): material-MAT_000164 :: - authority_value: "260702 연당가=81,500·국4절가=272·평량=57(무변)·규격 
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): component-COMP_HC_MUSEON_COVERBIND :: - props: {prc_typ_cd: "PRICE_TYPE.01", comp_typ_cd: "PRC_COM
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): formula-PRF_LEATHER_RINGBINDER_SET :: - props: {archetype: "원자합산형", prc_typ: "셋트조합(COVERBIND)", no
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): formula-PRF_PCB_FIXED :: - props: {archetype: "고정가", prc_typ: "부모 all-in", note: "094
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): formula-PRF_TTEOKME_FIXED :: - props: {archetype: "고정가", prc_typ: "부모 all-in", note: "097
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): formula-PRF_PHOTOBOOK_FIXED :: - props: {archetype: "고정가", prc_typ: "부모 all-in(base24+per2p
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): component-COMP_GANGPAN_PRINT :: - src: {source_file: "live-snapshot/latest/t_prc_component_p
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): component-COMP_GANGPAN_PRINT :: - props: {prc_typ_cd: "PRICE_TYPE.02", use_dims_ref: "전사표 [s
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): component-COMP_STK_PACK :: - props: {comp_cd: "COMP_STK_PACK", prc_typ_cd: "PRICE_TYPE.
@@ -99,6 +105,38 @@
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-055-sticker-sheet-freeform :: 최소 1매·최대 10,000매·1매 증분(단위 QTY_UNIT.02 "매"). 수량·치수·배선 raw 값은
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-055-sticker-sheet-freeform :: - **수량규칙:** 제품 레벨 min 1 / max 10,000 / incr 1(QTY_UNIT.02 "매
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-057-material-cost :: - gap_what: "스티커 소재 연당가(원자재 원가)는 라이브 가격 사슬에 노드로 존재하지 않는다. 05
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-068-saddle-stitch-booklet :: 미전달해 표지 코팅비(100부 50,000)를 드롭 → 셋트경로 final은 게이트 골든보다 저평가된다. *
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-070-pur-booklet :: 구조는 동형이나 제본비가 높다(100부 제본 200,000 vs 무선 50,000).
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-set-leather-coverbind-delta :: - src: {source_file: "_workspace/huni-set-product/06_load/le
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-set-leather-coverbind-delta :: - gap_what: "072(전용지 표지)와 077(레더 표지)의 셋트 골든이 동일(34,100/159,1
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-088-leather-ring-binder :: - **★양면 정직 표기(pack §4·badge=verified·현재값 정본+pending gap)**: 
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-088-leather-ring-binder :: 이나, 별개 직교 워크스트림 **088-redesign-260702**(표지 9,000/부·싸바리 제본·S1
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-088-leather-ring-binder :: 가 **인간 승인 시 100부 1,800,000**으로 변경된다(COMMIT 미실행·pending). 두 값
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-088-leather-ring-binder :: 1,800,000은 별도 gap 노드(현재값 아님).
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-089-leather-ring-binder-cover :: - props: {prd_typ_cd: "PRD_TYPE.02", semi_role_cd: "SEMI_ROL
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-089-leather-ring-binder-cover :: - 본문: 레더 링바인더 표지 반제품. 레더 자재 MAT_000379(USAGE.02·MAT_TYPE.05·
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-090-leather-ring-binder-membrane :: - 본문: 레더 링바인더 면지 반제품(2026-07-03 통합 재설계·기존 090/091/092/093 4멤
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-094-postcard-book :: - **★양면 정직 표기(pack §4·T-5·badge≠defect)**: 이 셋트의 **가격 사실 = 엔
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-094-postcard-book :: 이다(아래 골든 전사표). webadmin **화면 0원**은 가격 결함이 아니라 **셋트 UI가 set_s
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-094-postcard-book :: 미전파하는 코드 C트랙**(`DEV-REQUEST-set-sim-sizcd-260702`·백필 원천=내지[H
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): qty-097 :: - 본문: 떡메모지 수량 그릇 = 묶음수(bundle_qtys 50/100장·★셋트 특유 수량축·pack §
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-097-tteok-memo :: - **★양면 정직 표기(pack §4·T-5·badge≠defect)**: 가격 사실 = **엔진 골든 1
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-097-tteok-memo :: webadmin 화면 0원은 셋트 UI siz_cd 미전파 **코드 C트랙**(가격 결함 아님) → [[ru
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-102-photobook-cover-hardcover :: - props: {prd_typ_cd: "PRD_TYPE.02", semi_role_cd: "SEMI_ROL
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-100-photobook :: - **★양면(정직 표기·pack §4·T-5)**: **가격 사실 = 엔진 골든 100부 1,500,000
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-100-photobook :: **화면 0원**은 셋트 UI가 set_selections에 siz_cd를 미전파하는 **코드 C트랙**(가
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-100-photobook :: → [[../rule/gaps.md#gap-set-simulate-sizcd]]. 화면 0원을 "가격 결함"
+- L-16 수치 표 transcribed-by 마커 없음(손전사 의심): product-108-desk-calendar
+- L-16 수치 표 transcribed-by 마커 없음(손전사 의심): product-108-desk-calendar
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-108-tripod-ring-material :: - 본문: 캘린더 잔존 결함(팩 §0.1·위키 REVERIFY 승계). 조용한 누락 대신 정직 선언. 골든(
+- L-16 수치 표 transcribed-by 마커 없음(손전사 의심): product-109-mini-desk-calendar
+- L-16 수치 표 transcribed-by 마커 없음(손전사 의심): product-109-mini-desk-calendar
+- L-16 수치 표 transcribed-by 마커 없음(손전사 의심): product-110-postcard-calendar
+- L-16 수치 표 transcribed-by 마커 없음(손전사 의심): product-110-postcard-calendar
+- L-16 수치 표 transcribed-by 마커 없음(손전사 의심): product-111-wall-calendar
+- L-16 수치 표 transcribed-by 마커 없음(손전사 의심): product-111-wall-calendar
+- L-16 수치 표 transcribed-by 마커 없음(손전사 의심): product-112-wide-wall-calendar
+- L-16 수치 표 transcribed-by 마커 없음(손전사 의심): product-112-wide-wall-calendar
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): component-COMP_POSTER_ADH_CLEAR_PVC :: - src: {source_file: "live-snapshot/latest/t_prc_component_p
 - L-16 수치 표 transcribed-by 마커 없음(손전사 의심): product-122-adhesive-clear-poster
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-122-adhesive-clear-poster :: > ((가로,세로)≠(세로,가로) 가능). off-grid=가로·세로 각 한 단계 큰 규격 ceiling(앱
@@ -111,6 +149,14 @@
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): optgroup-135-gagong :: - src: {source_file: "live-snapshot/latest/t_prd_product_opt
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-144-material-absent :: - gap_fill_from: "실무진(보드/우드 5상품 소재 정책·pack §3.5) + L1 원본 자재 
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-145-qtytier-floor :: - gap_what: "상품 마스터 min_qty=1인데 가격 구성요소(COMP_POSTER_MINI_BAN
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-288-saddle-stitch-booklet-cover :: `simulate` = 88,688(print 35,000+coat 50,000+paper 3,688·pan
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-288-saddle-stitch-booklet-cover :: `coat_side_cnt`를 미전달 → 표지 코팅비(100부 50,000)가 셋트경로에서 드롭됨 → 셋트경
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-288-saddle-stitch-booklet-cover :: (단품 88,688 대비 코팅 50,000 저평가). **코팅 단가행은 라이브 실재(COMP_COAT_MAT
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-289-perfect-bound-booklet-inner :: 내지 기여가 중철(287)보다 크다(100부 42,384 vs 18,438).
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-290-perfect-bound-booklet-cover :: 부모 `evaluate_set_price` 합산(068/069/070 표지 골든 동일 88,688 단품 기준
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-290-perfect-bound-booklet-cover :: 38,688(코팅 50,000 저평가·PRICE≠0 무해) = 코드 C트랙 [[rule/gaps#gap-se
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-292-pur-booklet-cover :: 부모 `evaluate_set_price` 합산(068/069/070 표지 동형·단품 88,688).
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-292-pur-booklet-cover :: 38,688(코팅 50,000 저평가·PRICE≠0 무해) = 코드 C트랙 [[rule/gaps#gap-se
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-gangpan-diecut :: `CAT_000037`). ★**파일 업로드 전용**(`file_upload_yn=Y·editor_yn=N`
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-gangpan-diecut :: 증분 1,000매(단위 QTY_UNIT.02 "매")·형상별 시트당 EA는 bundle_qtys(8/6/3/
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-gangpan-diecut :: 구간할인(t_dsc_*) 비대상. 격자 충전 실측(companion 전사표): COMP_GANGPAN_PRI
@@ -155,6 +201,12 @@
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): DEC_baseproc_260701 :: - props: {일자: "2026-07-01", 내용: "16상품+019(흰토너008+CMYK004)+02
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): DEC_diecut_260701 :: - props: {일자: "2026-07-01", 내용: "COMP_CUT_FULL_DIECUT .01→.0
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): GAP_product_count :: > 스티커 공통 열린 질문: ①코팅=자재 vs 공정 vs 가격축 3원천 CONFLICT(BATCH-3·GAP
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-set-088-redesign-pending :: - anchor: none  # 사유: 088-redesign 표지 9,000·싸바리 = S1~S8 GO·c
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-set-088-redesign-pending :: - gap_what: "088 현재값 100부 796,900(COVERBIND·live) vs 088-red
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-set-088-redesign-pending :: - gap_fill_from: "인간 승인 → §23 load-executor COMMIT(COMP_BIND
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-set-simulate-sizcd :: - anchor: none  # 사유: 코드 C트랙(엔진 골든 PRICE≠0·화면만 0원·가격사실 아님)
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-set-simulate-sizcd :: - gap_what: "094/097/100 엔진골든 PRICE≠0(450k/135k/1.5M)이나 셋트 화
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-set-s1s2-double :: - gap_what: "① 내지 양면 주문 시 S1(단면)+S2(양면) 둘 다 매칭·배타선택 부재(전 책자·
 - L-20 마스터 앵커 중복소유(동형결합 단일소유권 위반): t_mat_materials/MAT_000163 type=material owners=['matcost-054-hologram', 'material-MAT_000163']
 - L-20 마스터 앵커 중복소유(동형결합 단일소유권 위반): t_mat_materials/MAT_000371 type=material owners=['matcost-053-white-backing', 'material-MAT_000371']
 - L-20 마스터 앵커 중복소유(동형결합 단일소유권 위반): t_mat_materials/MAT_000372 type=material owners=['matcost-053-clear-backing', 'material-MAT_000372']
@@ -261,6 +313,20 @@
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-057-sticker-large-freeform -> product-type-classification-sot
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-057-sticker-large-freeform -> harness-domain-rules-12-260701
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-057-sticker-large-freeform -> product-057-sticker-large-freeform-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): optgroup-084-membrane -> product-082-hardcover-ring-booklet-membrane
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): qty-286-inner-page -> product-082-hardcover-ring-booklet-inner
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): qty-094 -> qty-system-audit-260702
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-094-postcard-book -> postcard-book-sim-convergence-260702
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-094-postcard-book -> postcard-book-sim-convergence-260702
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-094-postcard-book -> set-membrane-1member-taku1-target-model-260703
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-094-postcard-book -> product-094-postcard-book-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-095-postcard-book-inner -> postcard-book-sim-convergence-260702
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-095-postcard-book-inner -> postcard-book-sim-convergence-260702
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): qty-097 -> qty-system-audit-260702
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-097-tteok-memo -> product-097-tteok-memo-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-101-photobook-inner -> book-set-page-pricing-inner-member
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-100-photobook -> postcard-book-sim-convergence-260702
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-100-photobook -> product-100-photobook-nodes
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-118-artprint-poster -> product-118-artprint-poster-nodes
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-118-artprint-poster -> product-118-artprint-poster-nodes
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-118-artprint-poster -> harness-domain-rules-12-260701
@@ -428,11 +494,44 @@
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-tattoo -> 가격구성요소-완제품가-합가형-룩업
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-tattoo -> 옵션그룹-cpq
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-tattoo -> sticker-tattoo-nodes
-- I-1 고아 노드(연결 대기·Phase 4): printopt-POPT_000008 (print_option)
-- I-1 고아 노드(연결 대기·Phase 4): printopt-POPT_000009 (print_option)
 - I-1 고아 노드(연결 대기·Phase 4): process-PROC_000001 (process)
 - I-1 고아 노드(연결 대기·Phase 4): process-PROC_000056 (process)
+- I-1 고아 노드(연결 대기·Phase 4): process-PROC_000017 (process)
+- I-1 고아 노드(연결 대기·Phase 4): process-PROC_000021 (process)
+- I-1 고아 노드(연결 대기·Phase 4): process-PROC_000098 (process)
 - I-1 고아 노드(연결 대기·Phase 4): size-SIZ_000499 (size)
+- O4 index 미등재 파일: formula/set-components.md (component-COMP_HC_MUSEON_COVERBIND)
+- O4 index 미등재 파일: formula/set-components.md (component-COMP_BIND_HC_TWINRING)
+- O4 index 미등재 파일: formula/set-components.md (component-COMP_BIND_JUNGCHEOL)
+- O4 index 미등재 파일: formula/set-components.md (component-COMP_BIND_MUSEON)
+- O4 index 미등재 파일: formula/set-components.md (component-COMP_BIND_PUR)
+- O4 index 미등재 파일: formula/set-components.md (component-COMP_BIND_TWINRING)
+- O4 index 미등재 파일: formula/set-components.md (component-COMP_BIND_SSABARI)
+- O4 index 미등재 파일: formula/set-components.md (component-COMP_BIND_CAL_WALL)
+- O4 index 미등재 파일: formula/set-components.md (component-COMP_PCB_S1_20P)
+- O4 index 미등재 파일: formula/set-components.md (component-COMP_PCB_S2_20P)
+- O4 index 미등재 파일: formula/set-components.md (component-COMP_PCB_S1_30P)
+- O4 index 미등재 파일: formula/set-components.md (component-COMP_PCB_S2_30P)
+- O4 index 미등재 파일: formula/set-components.md (component-COMP_TTEOKME)
+- O4 index 미등재 파일: formula/set-components.md (component-COMP_PHOTOBOOK_BASE)
+- O4 index 미등재 파일: formula/set-components.md (component-COMP_PHOTOBOOK_PAGE)
+- O4 index 미등재 파일: formula/set-formulas.md (formula-PRF_HC_MUSEON_SET)
+- O4 index 미등재 파일: formula/set-formulas.md (formula-PRF_HC_TWINRING_SET)
+- O4 index 미등재 파일: formula/set-formulas.md (formula-PRF_LEATHER_RINGBINDER_SET)
+- O4 index 미등재 파일: formula/set-formulas.md (formula-PRF_BIND_SUM)
+- O4 index 미등재 파일: formula/set-formulas.md (formula-PRF_BIND_MUSEON)
+- O4 index 미등재 파일: formula/set-formulas.md (formula-PRF_BIND_MUSEON_FOIL)
+- O4 index 미등재 파일: formula/set-formulas.md (formula-PRF_BIND_PUR)
+- O4 index 미등재 파일: formula/set-formulas.md (formula-PRF_BIND_PUR_FOIL)
+- O4 index 미등재 파일: formula/set-formulas.md (formula-PRF_BIND_TWINRING)
+- O4 index 미등재 파일: formula/set-formulas.md (formula-PRF_PCB_FIXED)
+- O4 index 미등재 파일: formula/set-formulas.md (formula-PRF_TTEOKME_FIXED)
+- O4 index 미등재 파일: formula/set-formulas.md (formula-PRF_PHOTOBOOK_FIXED)
+- O4 index 미등재 파일: formula/set-formulas.md (formula-PRF_DGP_INNER)
+- O4 index 미등재 파일: formula/set-formulas.md (formula-PRF_BOOK_COVER)
+- O4 index 미등재 파일: formula/set-formulas.md (formula-PRF_PHOTOBOOK_INNER)
+- O4 index 미등재 파일: formula/set-formulas.md (formula-PRF_DGP_CAL_DESK)
+- O4 index 미등재 파일: formula/set-formulas.md (formula-PRF_DGP_CAL_WIDE)
 - O4 index 미등재 파일: product/product-055-sticker-sheet-freeform-nodes.md (qty-055)
 - O4 index 미등재 파일: product/product-055-sticker-sheet-freeform-nodes.md (optgroup-055-paper)
 - O4 index 미등재 파일: product/product-055-sticker-sheet-freeform-nodes.md (optgroup-055-print)

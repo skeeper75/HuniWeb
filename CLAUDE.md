@@ -125,7 +125,7 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 **진행 상태:** round-24까지 진행(round-1~24 누적 서술 상세 → `_workspace/huni-dbmap/CHANGELOG.md` "## 진행 상태 스냅샷"). GO분 적재됨·차단/결정분만 미적재 원칙.
 
-**변경이력:** 최신: 2026-06-18 round-24 MAP 카테고리 IA 검증+카테고리-상품 매핑 GO·격상 183건 junction COMMIT → `_workspace/huni-dbmap/CHANGELOG.md`
+**변경이력:** 최신: 2026-07-03(2) 상품마스터 전 13시트 컬럼 이해 완료(사용자 "내 이해 나열→교정" 방식·정본 `15_domain-spec/_ALL-SHEETS-column-understanding-260703.md`) — 가격 두 갈래(공식형/가격포함형)·별색=공정·소재 통합(폴더=인쇄장비)·★비용흡수(면지→제본비)·★사이즈선택=사이즈조건부 옵션·비규격 nonspec_* 14상품·판수 이중성 정립 미결. ★다음 세션=적재단계(`15_domain-spec/HANDOFF-NEXT-적재단계-260703.md`: 파일럿 상품군→기준정보·상품·가격 적재→가격시뮬 검증). 직전: 2026-07-03 접지리플렛·와이드 접지리플렛 완전 견적 종단 COMMIT(§31 코팅 제약 요청→옵션0건→§7 확대) — 048 스텁공식 PRF_FOLD_SUM(구성요소1·견적0)→family PRF_DGP_E 재바인딩+base print PROC_000004+접지4공정+사이즈3(기존코드 정확일치)+옵션5그룹+코팅 제약, 049 대문접지 보강+옵션+제약·신규 mint 0·물리 DELETE 0. 게이트 GO·골든 실측 PRICE≠0(048 A4/3단/1000=313,325·+유광코팅=508,875·A5=224,438·A3=328,875)·family 027/028/029/049 무영향·webadmin 실화면(가격시뮬 PRICE≠0·코팅 제약 폼빌더 역파싱·validate 오차단0)·undo+물리백업. ★스텁공식→동형 family 재바인딩 패턴·접지=공정축(049동형). 잔여=사이즈↔접지 과허용(§31)·굿즈오염(§17)·전파 접지카드 027/028/029. [[leaflet-fold-full-quote-stub-formula-rebind-260703]]. 직전: 2026-06-18 round-24 MAP 카테고리 IA 검증+카테고리-상품 매핑 GO·183건 junction COMMIT → `_workspace/huni-dbmap/CHANGELOG.md`
 
 ---
 
