@@ -8,7 +8,11 @@ sources:
   - {source_file: "_workspace/huni-ontology-kb/01_curation/pack-stationery-goods.md", source_locator: "§1.3 하위군③ 파우치·백(레더 파우치/미니/필통 230~237·251~260)·§3.10 가격아키타입·§4 GAP표·§3.5 자재 empty-shell·§3.6 봉제 MISSING", captured_at: "2026-07-03", badge: verified, src_id: SR-pack-stn}
   - {source_file: "live-snapshot/latest/t_prd_product_prices.csv", source_locator: "키:PRD_000259 unit_price (GP-1 base 단일고정가·260610 verbatim)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
 relations:
+  - {rel: in_category, target: category-CAT_000011, qualifier: main, note: "굿즈 카테고리(main·live t_prd_product_categories 20260702_1119)"}
+  - {rel: in_category, target: category-CAT_000243, qualifier: sub, note: "굿즈 카테고리(보조·live t_prd_product_categories 20260702_1119)"}
+  - {rel: uses_material, target: material-MAT_000008, note: "레더 substrate(USAGE.07)·마스터 del_yn=Y이나 정션 활성=load-bearing(정직 관찰·127 선례)"}
   - {rel: references, target: gap-goods-sewing-missing, note: "봉제 공정 0행(has_process 미배선·empty on process axis)"}
+  - {rel: references, target: gap-goods-fixed-lookup-no-formula, note: "고정가룩업(t_prd_product_prices 단일 unit_price·frm_cd 없음)·O5 가격gap 정직 선언(07-04 live 재프라이싱)"}
 props:
   prd_typ_cd: "PRD_TYPE.01"
   min_qty: 1   # 단일 스칼라(§2.4)·src=SR-5-livesnap
@@ -20,6 +24,8 @@ props:
   가격아키타입: "고정가룩업(t_prd_product_prices 단일 unit_price·9500.00원·transcribed·priced_by 불요=완결 원천)"
   판형: "없음(비종이=레더 MAT_TYPE.06·plate_sizes 전행 del_yn=Y 파일사양·종이류만 판형 도메인[HARD])"
   구분: "봉제 굿즈(레더 파우치/미니파우치/필통 단품·셋트 아님·has_member 없음)"
+  fixed_price: "9500원 (t_prd_product_prices unit_price·transcribed-by reprice_goods_260704 @ 07-04 live)"
+  가격상태: "고정가룩업·9500원(unit_price·transcribed·07-04 live·reg_dt=2026-06-22)"
 standards: {schema_org: "Product", xjdf: "Product(봉제 파우치)", config_ont: "component type"}
 tags: ["#굿즈", "#파우치", "#레더", "#봉제", "#고정가룩업"]
 updated: 2026-07-03

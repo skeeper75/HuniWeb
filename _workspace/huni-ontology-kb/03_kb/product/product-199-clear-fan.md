@@ -7,6 +7,7 @@ sources:
   - {source_file: "live-snapshot/latest/t_prd_products.csv", source_locator: "테이블:t_prd_products 키:PRD_000199(prd_nm=투명부채·prd_typ_cd=PRD_TYPE.01·use_yn=N·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
   - {source_file: "_workspace/huni-ontology-kb/01_curation/pack-stationery-goods.md", source_locator: "문서:§1.2 굿즈/악세사리(과업명시 199 투명부채)·§0.1 use_yn=N 미출시·§3.10 NEITHER-gap·§4 적재 미완 정직표", captured_at: "2026-07-04", badge: verified, src_id: SR-pack-sg}
 relations:
+  - {rel: in_category, target: category-CAT_000181, qualifier: main, note: "굿즈 카테고리(main·live t_prd_product_categories 20260702_1119)"}
   - {rel: derived_from, target: gap-goods-neither, note: "가격 원천 부재(공식·고정가 둘 다 없음)를 GAP으로 정직 선언·O5 gap 연결 예외"}
   - {rel: references, target: gap-goods-price-unloaded, note: "채움 경로=상품마스터 고정가 verbatim 적재 대기(현재 미적재)"}
 props:

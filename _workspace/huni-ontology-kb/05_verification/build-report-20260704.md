@@ -1,0 +1,706 @@
+# 그래프 빌드 리포트 — 2026-07-04
+
+> build_graph.py · 정본 /Users/innojini/Dev/HuniWeb/_workspace/huni-ontology-kb/03_kb → 04_graph. 생성=빌드(검증은 별도 레인·okb-adversarial-gate).
+
+- 판정: **PASS(하드 0)** · 하드 위반 0 · 소프트 경고 640
+- 노드 1361 · 엣지 4295
+- 멱등 해시: nodes.jsonl=8e5cc7c6efe16c2d · edges.jsonl=dd69ecd03252f51d
+
+## 노드 수 (타입별)
+- bundle_qty: 58
+- category: 65
+- constraint: 10
+- decision: 12
+- gap: 229
+- intent: 3
+- material: 152
+- option_group: 134
+- plate_size: 23
+- price_component: 122
+- price_formula: 82
+- print_option: 4
+- process: 67
+- product: 250
+- rule: 7
+- size: 136
+- term: 7
+
+## 엣지 수 (rel별)
+- alias_of: 19
+- constrains: 11
+- decided_because: 19
+- derived_from: 54
+- has_component: 200
+- has_member: 43
+- has_option_group: 134
+- has_plate_size: 74
+- has_print_option: 112
+- has_process: 283
+- has_qty_rule: 58
+- has_size: 283
+- in_category: 365
+- option_refs: 291
+- priced_by: 118
+- references: 1807
+- uses_material: 424
+
+## badge 분포
+- candidate: 72
+- defect: 20
+- unknown: 227
+- verified: 1042
+
+## 무결성 6검사
+- I-1 고아(하드 유형 product/formula/component): 0
+- I-2 끊긴 링크: 0
+- I-3 타입 위반: 0
+- I-4 필수 엣지(O5/O6): 0
+- I-5 멱등: nodes/edges 해시 재현(위 해시 — --idem로 자체검사)
+- L-20 마스터 앵커 중복소유(소프트·동형결합 단일소유권): 7 (실사 D-SILSA-INT-1 교정 후 잔여=스티커 축 등 타 레인 소관·회귀 가드)
+- I-6 오염(blocklist): 0 (원천 실재 — hard src_id 5·path 5·advisory src_id 2·path 2 로드)
+
+## 소프트 경고 (빌드 계속·검토용)
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): material-MAT_000162 :: - authority_value: "260702 명=투명스티커(백색후지)·평량=50·연당가=149,500·국
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): material-MAT_000162 :: - 본문: 260702 권위가 투명스티커를 백색후지/투명후지로 나누고 연당가를 130,000→149,500(
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): material-MAT_000372 :: - authority_value: "260702 신규행(row 86)=투명스티커(투명후지)·평량=50·연당가
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): material-MAT_000372 :: - 본문: 260702가 새로 추가한 투명후지 소재(연당가 222,000/국4절 740/평량 50). 라이브
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): material-MAT_000164 :: - authority_value: "260702 연당가=81,500·국4절가=272·평량=57(무변)·규격 
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): size-SIZ_000170 :: - current_value: "052 has_size junction SIZ_000170 활성(del_yn
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): component-COMP_HC_MUSEON_COVERBIND :: - props: {prc_typ_cd: "PRICE_TYPE.01", comp_typ_cd: "PRC_COM
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): formula-PRF_LEATHER_RINGBINDER_SET :: - props: {archetype: "원자합산형", prc_typ: "셋트조합(COVERBIND)", no
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): formula-PRF_PCB_FIXED :: - props: {archetype: "고정가", prc_typ: "부모 all-in", note: "094
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): formula-PRF_TTEOKME_FIXED :: - props: {archetype: "고정가", prc_typ: "부모 all-in", note: "097
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): formula-PRF_PHOTOBOOK_FIXED :: - props: {archetype: "고정가", prc_typ: "부모 all-in(base24+per2p
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): formula-PRF_STN_DIARY_HARD :: - rel: {rel: references, target: gap-stn-sparse-grid, note: 
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): formula-PRF_STN_MEMOPAD :: - rel: {rel: references, target: gap-stn-sparse-grid, note: 
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): component-COMP_GANGPAN_PRINT :: - src: {source_file: "live-snapshot/latest/t_prc_component_p
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): component-COMP_GANGPAN_PRINT :: - props: {prc_typ_cd: "PRICE_TYPE.02", use_dims_ref: "전사표 [s
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): component-COMP_STK_PACK :: - props: {comp_cd: "COMP_STK_PACK", prc_typ_cd: "PRICE_TYPE.
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): component-COMP_STK_PRINT :: - src: {source_file: "live-snapshot/latest/t_prc_component_p
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): component-COMP_STK_PRINT :: - 본문: use_dims=[siz_cd, mat_cd, min_qty] 차원 선언까지가 온톨로지 경계(값=
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): formula-PRF_STK_PACK :: - props: {archetype: "완제품가 합가형 고정가 룩업", use_yn: "Y", note: "
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-023-shaped-postcard :: 최소 12매·최대 10,000매·12매 증분(단위 QTY_UNIT.02 "매"). 수량·치수 raw 값은
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-023-shaped-postcard :: - **수량규칙:** 제품 레벨 min 12 / max 10,000 / incr 12(QTY_UNIT.02)
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-023-shaped-postcard :: 계열([[rule/decisions#DEC_diecut_260701]]·팩 §4-B: 023 8,040,00
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-031-premium-namecard :: 업로드형(editor_yn=N). 최소 100매·100매 증분·최대 10,000매(QTY_UNIT.02 "매
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-033-standard-namecard :: `evaluate_price` 권위(온톨로지는 배선까지·D-18). 최소 100매·100매 증분·최대 10,
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-035-shaped-namecard :: 칼라 단/양면을 손님이 고른다. 최소 100매·100매 증분·최대 10,000매(QTY_UNIT.02 "매"
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-036-mini-shaped-namecard :: (`file_upload_yn=Y`·에디터 미사용). 출시 상태(`use_yn=Y`). 최소 100매·100
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-036-mini-shaped-namecard :: - **수량규칙:** 제품 레벨 min 100 / max 10,000 / incr 100(QTY_UNIT.0
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-036-mini-shaped-namecard :: (가격표260527 B08 앵커·수량 100~10,000 전 구간 동일 고정단가). 값은 evaluate_p
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-036-mini-shaped-namecard :: 완제품가 단가표 포함). 위키 🔴 결함표(T-6)를 그대로 옮기지 않고 §4 원장·live-snapshot로
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-041-coupon :: 파일 업로드형(`file_upload_yn=Y`·에디터 미사용 `editor_yn=N`). 최소 12매·12
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-046-diecut-golden :: - gap_what: "완칼 die-cut 단가 .03 고정 교정(046 1,350,000→50,000) 후
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-046-label-tag :: `CAT_000327`). 파일 업로드 방식(`file_upload_yn=Y`, 에디터 미사용). 최소 20
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-046-label-tag :: - **수량규칙:** 제품 레벨 min 20 / max 1,000 / incr 20(QTY_UNIT.02).
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-046-label-tag :: ([[rule/decisions#DEC_diecut_260701]]·046 1,350,000→50,000).
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-050-envelope-making :: 에디터 미사용). 최소 1,000매·최대 5,000매·1,000매 증분(단위 QTY_UNIT.02). 수량·
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-050-envelope-making :: - **수량규칙:** 제품 레벨 min 1,000 / max 5,000 / incr 1,000(QTY_UNI
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): qty-052 :: 스티커 전용 공식/구성요소를 여기 신설(6,498행 완제품가를 공유하는 16 스티커 향후 승격 후보).
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-052-coating-conflict :: - anchor: none  # 사유: 라이브 코팅=자재(585/586) + 공정(014/015) 이중 표현
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-052-liandan-out-of-scope :: - src: {source_file: "_workspace/huni-dbmap/26_change-tracki
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-052-liandan-out-of-scope :: - gap_fill_from: "063 등 투명/홀로/크라프트 사용 스티커 상품 노드에서 4소재 양면 노드(
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-052-sticker-halfcut-freeform :: 미사용). 최소 8매·최대 10,000매·8매 증분(단위 QTY_UNIT.02 "매"). 카테고리 = 스티커
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-052-sticker-halfcut-freeform :: - **수량규칙:** 제품 레벨 min 8 / max 10,000 / incr 8(QTY_UNIT.02). 
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-052-sticker-halfcut-freeform :: 반환(스티커 6,498행 완제품가를 공유하는 16상품 향후 승격 후보). 공유 파일 미수정.
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-052-sticker-halfcut-freeform :: (전사표 "연당가 대조" 전행 NO·N2 라벨/무변). 팩 §4-A 돈-크리티컬 연당가 대개편(투명 149,
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-052-sticker-halfcut-freeform :: 253,700/크라프트 81,500/투명후지 222,000)은 **투명·홀로·크라프트** 소재 몫이라 052
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-055-sticker-sheet-freeform :: 최소 1매·최대 10,000매·1매 증분(단위 QTY_UNIT.02 "매"). 수량·치수·배선 raw 값은
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-055-sticker-sheet-freeform :: - **수량규칙:** 제품 레벨 min 1 / max 10,000 / incr 1(QTY_UNIT.02 "매
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-057-material-cost :: - gap_what: "스티커 소재 연당가(원자재 원가)는 라이브 가격 사슬에 노드로 존재하지 않는다. 05
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-068-saddle-stitch-booklet :: 미전달해 표지 코팅비(100부 50,000)를 드롭 → 셋트경로 final은 게이트 골든보다 저평가된다. *
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-070-pur-booklet :: 구조는 동형이나 제본비가 높다(100부 제본 200,000 vs 무선 50,000).
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-set-leather-coverbind-delta :: - src: {source_file: "_workspace/huni-set-product/06_load/le
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-set-leather-coverbind-delta :: - gap_what: "072(전용지 표지)와 077(레더 표지)의 셋트 골든이 동일(34,100/159,1
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-088-leather-ring-binder :: - **★양면 정직 표기(pack §4·badge=verified·현재값 정본+pending gap)**: 
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-088-leather-ring-binder :: 이나, 별개 직교 워크스트림 **088-redesign-260702**(표지 9,000/부·싸바리 제본·S1
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-088-leather-ring-binder :: 가 **인간 승인 시 100부 1,800,000**으로 변경된다(COMMIT 미실행·pending). 두 값
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-088-leather-ring-binder :: 1,800,000은 별도 gap 노드(현재값 아님).
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-089-leather-ring-binder-cover :: - props: {prd_typ_cd: "PRD_TYPE.02", semi_role_cd: "SEMI_ROL
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-089-leather-ring-binder-cover :: - 본문: 레더 링바인더 표지 반제품. 레더 자재 MAT_000379(USAGE.02·MAT_TYPE.05·
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-090-leather-ring-binder-membrane :: - 본문: 레더 링바인더 면지 반제품(2026-07-03 통합 재설계·기존 090/091/092/093 4멤
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-094-postcard-book :: - **★양면 정직 표기(pack §4·T-5·badge≠defect)**: 이 셋트의 **가격 사실 = 엔
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-094-postcard-book :: 이다(아래 골든 전사표). webadmin **화면 0원**은 가격 결함이 아니라 **셋트 UI가 set_s
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-094-postcard-book :: 미전파하는 코드 C트랙**(`DEV-REQUEST-set-sim-sizcd-260702`·백필 원천=내지[H
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): qty-097 :: - 본문: 떡메모지 수량 그릇 = 묶음수(bundle_qtys 50/100장·★셋트 특유 수량축·pack §
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-097-tteok-memo :: - **★양면 정직 표기(pack §4·T-5·badge≠defect)**: 가격 사실 = **엔진 골든 1
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-097-tteok-memo :: webadmin 화면 0원은 셋트 UI siz_cd 미전파 **코드 C트랙**(가격 결함 아님) → [[ru
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-102-photobook-cover-hardcover :: - props: {prd_typ_cd: "PRD_TYPE.02", semi_role_cd: "SEMI_ROL
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-100-photobook :: - **★양면(정직 표기·pack §4·T-5)**: **가격 사실 = 엔진 골든 100부 1,500,000
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-100-photobook :: **화면 0원**은 셋트 UI가 set_selections에 siz_cd를 미전파하는 **코드 C트랙**(가
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-100-photobook :: → [[../rule/gaps.md#gap-set-simulate-sizcd]]. 화면 0원을 "가격 결함"
+- L-16 수치 표 transcribed-by 마커 없음(손전사 의심): product-108-desk-calendar
+- L-16 수치 표 transcribed-by 마커 없음(손전사 의심): product-108-desk-calendar
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-108-tripod-ring-material :: - 본문: 캘린더 잔존 결함(팩 §0.1·위키 REVERIFY 승계). 조용한 누락 대신 정직 선언. 골든(
+- L-16 수치 표 transcribed-by 마커 없음(손전사 의심): product-109-mini-desk-calendar
+- L-16 수치 표 transcribed-by 마커 없음(손전사 의심): product-109-mini-desk-calendar
+- L-16 수치 표 transcribed-by 마커 없음(손전사 의심): product-110-postcard-calendar
+- L-16 수치 표 transcribed-by 마커 없음(손전사 의심): product-110-postcard-calendar
+- L-16 수치 표 transcribed-by 마커 없음(손전사 의심): product-111-wall-calendar
+- L-16 수치 표 transcribed-by 마커 없음(손전사 의심): product-111-wall-calendar
+- L-16 수치 표 transcribed-by 마커 없음(손전사 의심): product-112-wide-wall-calendar
+- L-16 수치 표 transcribed-by 마커 없음(손전사 의심): product-112-wide-wall-calendar
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): component-COMP_POSTER_ADH_CLEAR_PVC :: - src: {source_file: "live-snapshot/latest/t_prc_component_p
+- L-16 수치 표 transcribed-by 마커 없음(손전사 의심): product-122-adhesive-clear-poster
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-122-adhesive-clear-poster :: > ((가로,세로)≠(세로,가로) 가능). off-grid=가로·세로 각 한 단계 큰 규격 ceiling(앱
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-123-graphicfabric-mattype :: - gap_what: "그래픽천(MAT_000181) 자재유형 최종 목표 코드 — 현재 .08 실사소재, 형
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): material-MAT_000187 :: - props: {mat_cd: "MAT_000187", mat_nm: "타이벡", mat_typ_cd: "
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-127-tyvek-print :: 원단.05 product-bom §146"·pack §1.1). round-13 목표 라벨 ".05 원단/.
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-131-material-absent :: - gap_fill_from: "실무진(보드/우드 5상품 소재 정책·pack §3.5) + L1 원본 자재 
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-134-linen-woodrod-scroll :: 교정·구 `.08 실사소재`에서 이동)는 현재값이자 개편 후 정답 — round-13 목표 라벨 ".05 원
+- L-16 수치 표 transcribed-by 마커 없음(손전사 의심): product-134-linen-woodrod-scroll
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): optgroup-135-gagong :: - src: {source_file: "live-snapshot/latest/t_prd_product_opt
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-144-material-absent :: - gap_fill_from: "실무진(보드/우드 5상품 소재 정책·pack §3.5) + L1 원본 자재 
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-145-qtytier-floor :: - gap_what: "상품 마스터 min_qty=1인데 가격 구성요소(COMP_POSTER_MINI_BAN
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-173-perpetual-diary-hard :: - **★가격 sparse(pack §4·T-9·badge=candidate)**: COMP_STN_DIAR
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-173-perpetual-diary-hard :: pack §1.1)만 채워진 sparse grid다. **등록=선택가능 사이즈는 PRICE≠0**(130x1
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-173-perpetual-diary-hard :: 사이즈만 견적0**이며, 수량은 단가행 min_qty=1 단일밴드로 전량 선형 커버(예 100권=1,200,
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-174-perpetual-diary-leather-hard :: - **★가격 sparse(pack §4·T-9·badge=candidate)**: COMP_STN_DIAR
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-175-perpetual-diary-leather-soft :: - **★가격 sparse(pack §4·T-9·badge=candidate)**: COMP_STN_DIAR
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-176-monthly-planner :: **등록 사이즈 1셀**(SIZ_000170 A5)만 채워진 sparse grid다. **등록=선택가능 사이
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-177-spring-note :: (SIZ_000170 A5)만 채워진 sparse grid다. **등록=선택가능 사이즈는 PRICE≠0**(
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-178-spring-notebook :: (SIZ_000377)만 채워진 sparse grid다. **등록=선택가능 사이즈는 PRICE≠0**(=3,
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-179-memo-pad :: **등록 사이즈 2셀(144x206=5,000·B5 182x257=6,000)**만 채워진 sparse gr
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-181-jungcheol-note :: **등록 사이즈 1셀**(A6 SIZ_000196=2,500)만 채워진 sparse grid다. **등록=선
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-183-tin-mirror :: > **★재프라이싱 정정(07-04 live·H-1 스냅샷 드리프트):** 이 상품은 라이브 `t_prd_p
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-184-compact-mirror :: > **★재프라이싱 정정(07-04 live·H-1 스냅샷 드리프트):** 이 상품은 라이브 `t_prd_p
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-185-card-mirror :: 실재**하는 상품 — **고정가룩업**(`t_prd_product_prices` 단일 unit_price *
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-188-leather-coaster :: > **★재프라이싱 정정(07-04 live·H-1 스냅샷 드리프트):** 이 상품은 라이브 `t_prd_p
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-188-leather-coaster :: product_materials 3행(MAT_000263 원형90mm·MAT_000264 사각90mm·MAT
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-189-cork-coaster :: > **★재프라이싱 정정(07-04 live·H-1 스냅샷 드리프트):** 이 상품은 라이브 `t_prd_p
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-190-wood-coaster :: > **★재프라이싱 정정(07-04 live·H-1 스냅샷 드리프트):** 이 상품은 라이브 `t_prd_p
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-190-wood-coaster :: **고정가룩업(07-04 재프라이싱 정정)** → [[gap-goods-fixed-lookup-no-form
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-191-linen-fabric-coaster :: > **★재프라이싱 정정(07-04 live·H-1 스냅샷 드리프트):** 이 상품은 라이브 `t_prd_p
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-191-linen-fabric-coaster :: substrate 실재** — **린넨(MAT_000184·MAT_TYPE.05 원단·활성)**을 `uses
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-192-diatomite-coaster :: > **★재프라이싱 정정(07-04 live·H-1 스냅샷 드리프트):** 이 상품은 라이브 `t_prd_p
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-192-diatomite-coaster :: **고정가룩업(07-04 재프라이싱 정정)** → [[gap-goods-fixed-lookup-no-form
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-196-leather-passport-case :: (`t_prd_product_sets` 미등록·단품). 가격은 **고정가룩업**(`t_prd_product_
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-197-mini-mat :: > **★재프라이싱 정정(07-04 live·H-1 스냅샷 드리프트):** 이 상품은 라이브 `t_prd_p
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-205-socks :: (단품). 가격은 **고정가룩업**(`t_prd_product_prices` 단일 unit_price 3,0
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-206-short-sleeve-tshirt :: > **★재프라이싱 정정(07-04 live·H-1 스냅샷 드리프트):** 이 상품은 라이브 `t_prd_p
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-208-slogan :: > **★재프라이싱 정정(07-04 live·H-1 스냅샷 드리프트):** 이 상품은 라이브 `t_prd_p
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-209-hoodie :: > **★재프라이싱 정정(07-04 live·H-1 스냅샷 드리프트):** 이 상품은 라이브 `t_prd_p
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-210-slim-mousepad :: 셋트 아님(단품). 가격은 **고정가룩업**(`t_prd_product_prices` 단일 unit_pric
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-211-desk-pad :: 아님(단품). 가격은 **고정가룩업**(`t_prd_product_prices` 단일 unit_price 1
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-212-microfiber-cleaner :: 셋트 아님(단품). 가격은 **고정가룩업**(`t_prd_product_prices` 단일 unit_pric
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-213-tin-case :: > **★재프라이싱 정정(07-04 live·H-1 스냅샷 드리프트):** 이 상품은 라이브 `t_prd_p
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-214-magnet-bookmark :: > **★재프라이싱 정정(07-04 live·H-1 스냅샷 드리프트):** 이 상품은 라이브 `t_prd_p
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-221-mallang-keyring :: > **★재프라이싱 정정(07-04 live·H-1 스냅샷 드리프트):** 이 상품은 라이브 `t_prd_p
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-227-mini-uchiwa-keyring :: > **★재프라이싱 정정(07-04 live·H-1 스냅샷 드리프트):** 이 상품은 라이브 `t_prd_p
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-228-heart-picket :: > **★재프라이싱 정정(07-04 live·H-1 스냅샷 드리프트):** 이 상품은 라이브 `t_prd_p
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-234-leather-string-pouch :: > **★재프라이싱 정정(07-04 live·H-1 스냅샷 드리프트):** 이 상품은 라이브 `t_prd_p
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-235-leather-string-round-pouch :: 고정가룩업 = 완결 원천(공식 사슬 불요). 값 16500.00원은 260610 verbatim(260702
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-236-leather-flat-clutch :: 고정가룩업 = 완결 원천(공식 사슬 불요). 값 18000.00원은 260610 verbatim(260702
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-237-leather-triangle-clutch :: 고정가룩업 = 완결 원천(공식 사슬 불요). 값 20000.00원은 260610 verbatim(260702
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-241-canvas-strap-label-pouch :: > **★재프라이싱 정정(07-04 live·H-1 스냅샷 드리프트):** 이 상품은 라이브 `t_prd_p
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-242-cotton-string-label-pouch :: > **★재프라이싱 정정(07-04 live·H-1 스냅샷 드리프트):** 이 상품은 라이브 `t_prd_p
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-250-mesh-volume-pouch :: > **★재프라이싱 정정(07-04 live·H-1 스냅샷 드리프트):** 이 상품은 라이브 `t_prd_p
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-251-leather-flat-mini-pouch :: 고정가룩업 = 완결 원천(공식 사슬 불요). 값 6500.00원은 260610 verbatim(260702 
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-253-leather-triangle-mini-pouch :: 고정가룩업 = 완결 원천(공식 사슬 불요). 값 7200.00원은 260610 verbatim(260702 
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-255-leather-round-mini-pouch :: > **★재프라이싱 정정(07-04 live·H-1 스냅샷 드리프트):** 이 상품은 라이브 `t_prd_p
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-256-leather-flat-pencil-case :: 고정가룩업 = 완결 원천(공식 사슬 불요). 값 7500.00원은 260610 verbatim(260702 
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-257-leather-slim-pencil-case :: 고정가룩업 = 완결 원천(공식 사슬 불요). 값 8500.00원은 260610 verbatim(260702 
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-258-leather-triangle-pencil-case :: 고정가룩업 = 완결 원천(공식 사슬 불요). 값 8500.00원은 260610 verbatim(260702 
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-259-leather-volume-pencil-case :: 고정가룩업 = 완결 원천(공식 사슬 불요). 값 9500.00원은 260610 verbatim(260702 
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-260-leather-round-pencil-case :: 고정가룩업 = 완결 원천(공식 사슬 불요). 값 10500.00원은 260610 verbatim(260702
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-261-canvas-flat-pencilcase :: > **★재프라이싱 정정(07-04 live·H-1 스냅샷 드리프트):** 이 상품은 라이브 `t_prd_p
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-262-canvas-triangle-pencilcase :: > **★재프라이싱 정정(07-04 live·H-1 스냅샷 드리프트):** 이 상품은 라이브 `t_prd_p
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-264-leather-shoulder-bag :: > **★재프라이싱 정정(07-04 live·H-1 스냅샷 드리프트):** 이 상품은 라이브 `t_prd_p
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-267-linen-eco-bag :: > **★재프라이싱 정정(07-04 live·H-1 스냅샷 드리프트):** 이 상품은 라이브 `t_prd_p
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-268-canvas-simple-bag :: > **★재프라이싱 정정(07-04 live·H-1 스냅샷 드리프트):** 이 상품은 라이브 `t_prd_p
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-269-canvas-pocket-simple-bag :: > **★재프라이싱 정정(07-04 live·H-1 스냅샷 드리프트):** 이 상품은 라이브 `t_prd_p
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-270-canvas-eco-bag :: > **★재프라이싱 정정(07-04 live·H-1 스냅샷 드리프트):** 이 상품은 라이브 `t_prd_p
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-271-canvas-shoulder-bag :: > **★재프라이싱 정정(07-04 live·H-1 스냅샷 드리프트):** 이 상품은 라이브 `t_prd_p
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-276-tyvek-eco-bag :: > **★재프라이싱 정정(07-04 live·H-1 스냅샷 드리프트):** 이 상품은 라이브 `t_prd_p
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-277-tyvek-cooler-eco-bag :: > **★재프라이싱 정정(07-04 live·H-1 스냅샷 드리프트):** 이 상품은 라이브 `t_prd_p
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-278-mesh-tote-bag :: > **★재프라이싱 정정(07-04 live·H-1 스냅샷 드리프트):** 이 상품은 라이브 `t_prd_p
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-279-mesh-eco-bag :: > **★재프라이싱 정정(07-04 live·H-1 스냅샷 드리프트):** 이 상품은 라이브 `t_prd_p
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-288-saddle-stitch-booklet-cover :: `simulate` = 88,688(print 35,000+coat 50,000+paper 3,688·pan
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-288-saddle-stitch-booklet-cover :: `coat_side_cnt`를 미전달 → 표지 코팅비(100부 50,000)가 셋트경로에서 드롭됨 → 셋트경
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-288-saddle-stitch-booklet-cover :: (단품 88,688 대비 코팅 50,000 저평가). **코팅 단가행은 라이브 실재(COMP_COAT_MAT
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-289-perfect-bound-booklet-inner :: 내지 기여가 중철(287)보다 크다(100부 42,384 vs 18,438).
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-290-perfect-bound-booklet-cover :: 부모 `evaluate_set_price` 합산(068/069/070 표지 골든 동일 88,688 단품 기준
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-290-perfect-bound-booklet-cover :: 38,688(코팅 50,000 저평가·PRICE≠0 무해) = 코드 C트랙 [[rule/gaps#gap-se
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-292-pur-booklet-cover :: 부모 `evaluate_set_price` 합산(068/069/070 표지 동형·단품 88,688).
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-292-pur-booklet-cover :: 38,688(코팅 50,000 저평가·PRICE≠0 무해) = 코드 C트랙 [[rule/gaps#gap-se
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-gangpan-diecut :: `CAT_000037`). ★**파일 업로드 전용**(`file_upload_yn=Y·editor_yn=N`
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-gangpan-diecut :: 증분 1,000매(단위 QTY_UNIT.02 "매")·형상별 시트당 EA는 bundle_qtys(8/6/3/
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-gangpan-diecut :: 구간할인(t_dsc_*) 비대상. 격자 충전 실측(companion 전사표): COMP_GANGPAN_PRI
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-gangpan-diecut :: **완전 충전**(예 정사각10x10 유포 1,000매 26,100·수량 5단 26,100→39,200→52
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-066-coating-conflict :: - anchor: none  # 사유: 라이브=자재(MAT_000155/156 스티커 variant) vs 
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-066-coating-conflict :: - 본문: 코팅을 자재로 볼지 공정으로 볼지 3원천이 엇갈린다(팩 §3.9·058 gap-058-coatin
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-066-price-golden :: - gap_what: "066 완제품가(COMP_GANGPAN_PRINT·형상×소재×수량) 격자 충전은 실측
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): matcost-054-hologram :: - authority_value: "260702 권위(price-diff 전사): 연당가 253,700(36
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-054-yeondangga-repricing :: - gap_what: "260702 홀로그램 연당가 360,000→253,700(국4절 936→846) 급락
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-065-set-composition :: - gap_what: "상품명·카테고리(스티커팩)는 여러 스티커를 묶는 세트를 시사하나 t_prd_produ
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-065-pack-qty-band :: - gap_what: "제품 수량 그릇은 1~1000(incr 1·QTY_UNIT.02)인데 가격 격자는 m
+- L-16 수치 표 transcribed-by 마커 없음(손전사 의심): gap-065-cpq-option-layer
+- L-16 수치 표 transcribed-by 마커 없음(손전사 의심): gap-065-cpq-option-layer
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-pack :: 한 팩(**54장 = 1세트**)으로 묶어 **고정가(4,000원)** 로 파는 상품이다. 에디터로 편집
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-pack :: (`editor_yn=Y`)하고 파일 업로드는 안 쓴다(`file_upload_yn=N`). 최소 1·최대 
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-pack :: (`COMP_STK_PACK`·PRICE_TYPE.02) — 54장 1세트를 4,000원에 통째로 룩업한다.
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-pack :: **합가형 완제품가(54장1세트 4,000)** 단일 룩업으로 구현. 팩이 반제품 구성원을 갖는 셋트여야 하
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-pack :: - **수량규칙:** 제품 레벨 min 1 / max 1,000 / incr 1(QTY_UNIT.02). `
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-pack :: 단위(1~1,000)와 가격 격자 밴드(54장)의 관계가 합가형 특유라 [[gap-065-pack-qty-b
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-pack :: live 격자 = **단 1행**(SIZ_000068·min_qty=54·unit_price 4,000·no
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-pack :: §4-A 돈-크리티컬 4소재(투명스 149,500·홀로 253,700·크라프트 81,500·투명후지 222,
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-pack :: - 합가형(PRF_STK_PACK·COMP_STK_PACK·54장1세트 4,000·min_qty=54)·공정
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): plate-056-OUTPUT_PAPER_TYPE_03 :: > COMP_STK_PRINT 6,498행은 스티커 전 상품 공유 격자이고 056은 A4/A3/A2/B4/B
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-056-material-cost-storage :: - gap_what: "260702 권위 연당가/국4절가(백색후지 149,500/499·투명후지 222,00
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-056-retail-cost-propagation :: - anchor: none  # 사유: 연당가 급변(투명스 국4절 1,300→499·크라프 156k→81.5
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-sheet-clear-white :: 파일 업로드 방식(`file_upload_yn=Y`, 에디터 미사용). 최소 1매·최대 10,000매·1매 
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-sheet-clear-white :: - **수량규칙:** 제품 레벨 min 1 / max 10,000 / incr 1(QTY_UNIT.02). 
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-sheet-clear-white :: t_dsc_* 비대상·pack §3.10). 라이브 COMP_STK_PRINT 6,498행(스티커 전 상품 
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): plate-058-SIZ_000521 :: 권위([[rule/rules#RULE_price_value_boundary]]). ★단가행(COMP_STK_
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-spec-circle :: (companion 전사표): COMP_STK_PRINT 6,498행 중 058 active 5소재에 각 5
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-058-coating-conflict :: - anchor: none  # 사유: 라이브=자재(MAT_000585/586 스티커 variant) vs 
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-058-coating-conflict :: - 본문: 코팅을 자재로 볼지 공정으로 볼지 3원천이 엇갈린다(팩 §3.9). KB는 양쪽 실재를 기록하되 
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-058-shape-storage :: - anchor: none  # 사유: 058 원형 형상=CPQ 커팅 옵션값(OPT-000031) vs 06
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-spec-fancy-clear :: (라이브 명 "투명스티커"·평량 105·연당가 미저장 vs 260702 "투명스티커(백색후지)"·평량 50·
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-spec-fancy-clear :: (PRICE_TYPE.01). 격자 충전 실측(companion 전사표): COMP_STK_PRINT 6,4
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-spec-fancy-clear :: (공유 스티커 공식·중복 mint 없음). COMP_STK_PRINT 단가행(완제품가) 총 6,498행 중 
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-spec-fancy-clear :: 백색후지 149,500/499·badge=defect)에 이미 존재 → **재사용**(중복 mint 금지).
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-spec-fancy :: 형상을 **어디에도 저장하지 않는다**(사이즈=치수 격자·CPQ 커팅 그룹 없음·058 원형처럼 옵션값도 아
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-spec-fancy :: 배선 HANDOFF round22 원장으로 재조준([[rule/decisions#DEC_wiring_roun
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-062-coating-conflict :: - anchor: none  # 사유: 라이브=자재(MAT_000585/586 스티커 variant) vs 
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-062-coating-conflict :: - 본문: 코팅을 자재로 볼지 공정으로 볼지 3원천이 엇갈린다(팩 §3.9). KB는 양쪽 실재를 기록하되 
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): DEC_baseproc_260701 :: - props: {일자: "2026-07-01", 내용: "16상품+019(흰토너008+CMYK004)+02
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): DEC_diecut_260701 :: - props: {일자: "2026-07-01", 내용: "COMP_CUT_FULL_DIECUT .01→.0
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): GAP_product_count :: > 스티커 공통 열린 질문: ①코팅=자재 vs 공정 vs 가격축 3원천 CONFLICT(BATCH-3·GAP
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-set-088-redesign-pending :: - anchor: none  # 사유: 088-redesign 표지 9,000·싸바리 = S1~S8 GO·c
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-set-088-redesign-pending :: - gap_what: "088 현재값 100부 796,900(COVERBIND·live) vs 088-red
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-set-088-redesign-pending :: - gap_fill_from: "인간 승인 → §23 load-executor COMMIT(COMP_BIND
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-set-simulate-sizcd :: - anchor: none  # 사유: 코드 C트랙(엔진 골든 PRICE≠0·화면만 0원·가격사실 아님)
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-set-simulate-sizcd :: - gap_what: "094/097/100 엔진골든 PRICE≠0(450k/135k/1.5M)이나 셋트 화
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-set-s1s2-double :: - gap_what: "① 내지 양면 주문 시 S1(단면)+S2(양면) 둘 다 매칭·배타선택 부재(전 책자·
+- L-20 마스터 앵커 중복소유(동형결합 단일소유권 위반): t_mat_materials/MAT_000163 type=material owners=['matcost-054-hologram', 'material-MAT_000163']
+- L-20 마스터 앵커 중복소유(동형결합 단일소유권 위반): t_mat_materials/MAT_000371 type=material owners=['matcost-053-white-backing', 'material-MAT_000371']
+- L-20 마스터 앵커 중복소유(동형결합 단일소유권 위반): t_mat_materials/MAT_000372 type=material owners=['matcost-053-clear-backing', 'material-MAT_000372']
+- L-20 마스터 앵커 중복소유(동형결합 단일소유권 위반): t_siz_sizes/SIZ_000521 type=plate_size owners=['plate-058-SIZ_000521', 'plate-062-SIZ_000521']
+- L-20 마스터 앵커 중복소유(동형결합 단일소유권 위반): t_siz_sizes/SIZ_000057 type=size owners=['size-053-SIZ_000057', 'size-SIZ_000057']
+- L-20 마스터 앵커 중복소유(동형결합 단일소유권 위반): t_siz_sizes/SIZ_000170 type=size owners=['size-053-SIZ_000170', 'size-054-SIZ_000170', 'size-SIZ_000170']
+- L-20 마스터 앵커 중복소유(동형결합 단일소유권 위반): t_siz_sizes/SIZ_000520 type=size owners=['size-053-SIZ_000520', 'size-054-SIZ_000520', 'size-SIZ_000520']
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-001-opp-adhesive-envelope -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-020-white-print-postcard -> product-020-white-print-postcard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-020-white-print-postcard -> product-020-white-print-postcard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-020-white-print-postcard -> product-020-white-print-postcard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-020-white-print-postcard -> product-020-white-print-postcard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-023-shaped-postcard -> product-023-shaped-postcard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-023-shaped-postcard -> product-023-shaped-postcard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-024-photocard -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-024-photocard -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-025-transparent-photocard -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-025-transparent-photocard -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-026-paper-slogan -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-026-paper-slogan -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-027-bifold-card -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-027-bifold-card -> product-027-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-027-bifold-card -> product-027-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-027-bifold-card -> product-027-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-027-bifold-card -> product-027-cpq
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-028-mini-folded-card -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-028-mini-folded-card -> product-028-mini-folded-card-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-028-mini-folded-card -> product-027-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-028-mini-folded-card -> product-023-shaped-postcard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-028-mini-folded-card -> product-027-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-028-mini-folded-card -> product-028-mini-folded-card-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): process-PROC_000068 -> product-027-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-029-trifold-card -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-029-trifold-card -> product-029-trifold-card-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-029-trifold-card -> product-027-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-029-trifold-card -> product-027-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-029-trifold-card -> product-023-shaped-postcard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-029-trifold-card -> product-029-trifold-card-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-029-trifold-card -> product-027-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-029-trifold-card -> product-027-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-029-trifold-card -> product-029-trifold-card-cpq
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-029-trifold-card -> product-029-trifold-card-cpq
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-030-zigzag-postcard -> product-030-zigzag-postcard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-030-zigzag-postcard -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-030-zigzag-postcard -> product-030-zigzag-postcard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-030-zigzag-postcard -> product-030-zigzag-postcard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-031-premium-namecard -> product-031-premium-namecard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): gap-031-vardata-param -> product-031-premium-namecard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-034-pearl-namecard -> product-034-pearl-namecard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-034-pearl-namecard -> product-034-pearl-namecard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): GAP_034_foil_optgroup -> product-034-pearl-namecard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-039-transparent-namecard -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-040-white-print-namecard -> product-020-white-print-postcard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-040-white-print-namecard -> product-020-white-print-postcard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-040-white-print-namecard -> product-040-white-print-namecard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-040-white-print-namecard -> product-040-white-print-namecard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-040-white-print-namecard -> product-020-white-print-postcard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): DEC_namecard040_flat_260630 -> product-040-white-print-namecard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): DEC_namecard040_flat_260630 -> product-020-white-print-postcard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-046-label-tag -> product-046-label-tag-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-046-label-tag -> product-046-label-tag-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-046-label-tag -> product-046-label-tag-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-046-label-tag -> product-046-label-tag-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-047-small-flyer -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-047-small-flyer -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-047-small-flyer -> goods-material-contamination-260630
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-047-small-flyer -> goods-material-contamination-260630
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): gap-047-optref-mat129 -> goods-material-contamination-260630
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-048-folded-leaflet -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-048-folded-leaflet -> product-048-folded-leaflet-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-048-folded-leaflet -> product-048-folded-leaflet-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-048-folded-leaflet -> product-048-folded-leaflet-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-048-folded-leaflet -> product-027-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-048-folded-leaflet -> product-023-shaped-postcard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-048-folded-leaflet -> product-048-folded-leaflet-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-048-folded-leaflet -> product-048-folded-leaflet-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-048-folded-leaflet -> product-048-folded-leaflet-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-048-folded-leaflet -> product-048-folded-leaflet-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): size-SIZ_000055 -> product-030-zigzag-postcard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): material-MAT_000093 -> product-030-zigzag-postcard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): process-PROC_000071 -> product-030-zigzag-postcard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-049-wide-folded-leaflet -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-049-wide-folded-leaflet -> product-049-wide-folded-leaflet-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-049-wide-folded-leaflet -> product-049-wide-folded-leaflet-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-049-wide-folded-leaflet -> product-030-zigzag-postcard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-049-wide-folded-leaflet -> product-049-wide-folded-leaflet-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-049-wide-folded-leaflet -> product-030-zigzag-postcard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-049-wide-folded-leaflet -> product-049-wide-folded-leaflet-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): component-COMP_ENV_MAKING -> product-050-envelope-making-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-050-envelope-making -> product-050-envelope-making-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-050-envelope-making -> product-050-envelope-making-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-050-envelope-making -> product-050-envelope-making-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-050-envelope-making -> product-050-envelope-making-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-050-envelope-making -> product-050-envelope-making-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-050-envelope-making -> product-050-envelope-making-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-051-suncap -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-051-suncap -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-052-sticker-halfcut-freeform -> product-052-sticker-halfcut-freeform-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-052-sticker-halfcut-freeform -> 전사표-권위-라이브-스냅샷스크립트-전사
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-052-sticker-halfcut-freeform -> 가격구성요소-완제품가-룩업
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-052-sticker-halfcut-freeform -> 옵션그룹-cpq
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-052-sticker-halfcut-freeform -> product-052-sticker-halfcut-freeform-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-055-sticker-sheet-freeform -> product-055-sticker-sheet-freeform-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-055-sticker-sheet-freeform -> product-055-sticker-sheet-freeform-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-057-sticker-large-freeform -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-057-sticker-large-freeform -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-057-sticker-large-freeform -> product-057-sticker-large-freeform-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): optgroup-084-membrane -> product-082-hardcover-ring-booklet-membrane
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): qty-286-inner-page -> product-082-hardcover-ring-booklet-inner
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): qty-094 -> qty-system-audit-260702
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-094-postcard-book -> postcard-book-sim-convergence-260702
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-094-postcard-book -> postcard-book-sim-convergence-260702
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-094-postcard-book -> set-membrane-1member-taku1-target-model-260703
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-094-postcard-book -> product-094-postcard-book-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-095-postcard-book-inner -> postcard-book-sim-convergence-260702
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-095-postcard-book-inner -> postcard-book-sim-convergence-260702
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): qty-097 -> qty-system-audit-260702
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-097-tteok-memo -> product-097-tteok-memo-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-101-photobook-inner -> book-set-page-pricing-inner-member
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-100-photobook -> postcard-book-sim-convergence-260702
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-100-photobook -> product-100-photobook-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-118-artprint-poster -> product-118-artprint-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-118-artprint-poster -> product-118-artprint-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-118-artprint-poster -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-118-artprint-poster -> product-118-artprint-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-118-artprint-poster -> product-118-artprint-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-118-artprint-poster -> product-118-artprint-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-119-artpaper-poster -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-119-artpaper-poster -> product-119-artpaper-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): formula-PRF_POSTER_WATERPROOF -> product-121-adhesive-waterproof-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-120-waterproof-poster -> product-120-waterproof-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-120-waterproof-poster -> product-121-adhesive-waterproof-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-120-waterproof-poster -> product-120-waterproof-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-120-waterproof-poster -> product-120-waterproof-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-121-adhesive-waterproof-poster -> product-121-adhesive-waterproof-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-121-adhesive-waterproof-poster -> product-121-adhesive-waterproof-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-121-adhesive-waterproof-poster -> product-121-adhesive-waterproof-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-121-adhesive-waterproof-poster -> product-121-adhesive-waterproof-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-121-adhesive-waterproof-poster -> product-121-adhesive-waterproof-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-122-adhesive-clear-poster -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-122-adhesive-clear-poster -> product-020-white-print-postcard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-122-adhesive-clear-poster -> product-122-adhesive-clear-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-123-artfabric-poster -> product-123-artfabric-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-123-artfabric-poster -> 사이즈
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-123-artfabric-poster -> 판형
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-123-artfabric-poster -> 가격
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-123-artfabric-poster -> product-123-artfabric-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-124-linen-fabric-poster -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-124-linen-fabric-poster -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-124-linen-fabric-poster -> product-124-linen-fabric-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-125-canvas-fabric-poster -> product-125-canvas-fabric-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-125-canvas-fabric-poster -> 가격구성요소-면적매트릭스
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-125-canvas-fabric-poster -> product-125-canvas-fabric-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-126-leather-artprint -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-126-leather-artprint -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-126-leather-artprint -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-126-leather-artprint -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-126-leather-artprint -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-127-tyvek-print -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-127-tyvek-print -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-127-tyvek-print -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-127-tyvek-print -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-127-tyvek-print -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-128-mesh-print -> product-128-mesh-print-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-128-mesh-print -> product-128-mesh-print-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-128-mesh-print -> product-128-mesh-print-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-128-mesh-print -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-129-foam-board -> product-129-foam-board-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-129-foam-board -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-129-foam-board -> product-129-foam-board-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-130-formax-board -> product-130-formax-board-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-130-formax-board -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-131-frameless-wood-frame -> product-131-frameless-wood-frame-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-131-frameless-wood-frame -> product-131-frameless-wood-frame-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-131-frameless-wood-frame -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-131-frameless-wood-frame -> product-131-frameless-wood-frame-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-132-leather-art-frame -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-132-leather-art-frame -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-132-leather-art-frame -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-132-leather-art-frame -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-133-canvas-hanging-poster -> product-133-canvas-hanging-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-133-canvas-hanging-poster -> product-133-canvas-hanging-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-134-linen-woodrod-scroll -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-134-linen-woodrod-scroll -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-134-linen-woodrod-scroll -> product-134-linen-woodrod-scroll-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-135-scroll-poster -> product-135-scroll-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-135-scroll-poster -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-135-scroll-poster -> product-135-scroll-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-135-scroll-poster -> product-131-frameless-wood-frame-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-136-pet-banner -> product-136-pet-banner-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-136-pet-banner -> product-136-pet-banner-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-136-pet-banner -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-136-pet-banner -> product-136-pet-banner-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-136-pet-banner -> product-136-pet-banner-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-136-pet-banner -> product-136-pet-banner-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-137-mesh-banner -> product-137-mesh-banner-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-137-mesh-banner -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-138-standard-hanging-banner -> product-138-standard-hanging-banner-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-138-standard-hanging-banner -> 자재
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-138-standard-hanging-banner -> 공정
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-138-standard-hanging-banner -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-138-standard-hanging-banner -> product-138-standard-hanging-banner-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-139-mesh-hanging-banner -> product-139-mesh-hanging-banner-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-139-mesh-hanging-banner -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-139-mesh-hanging-banner -> product-139-mesh-hanging-banner-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-139-mesh-hanging-banner -> product-139-mesh-hanging-banner-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-140-matte-sheet-cutting -> product-140-matte-sheet-cutting-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-140-matte-sheet-cutting -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-141-hologram-sheet-cutting -> product-141-hologram-sheet-cutting-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-141-hologram-sheet-cutting -> product-141-hologram-sheet-cutting-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-141-hologram-sheet-cutting -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-141-hologram-sheet-cutting -> product-141-hologram-sheet-cutting-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-142-glossy-acrylic-sticker -> product-142-glossy-acrylic-sticker-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-143-mirror-acrylic-sticker -> product-143-mirror-acrylic-sticker-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-143-mirror-acrylic-sticker -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-144-mini-board-standing -> product-144-mini-board-standing-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-144-mini-board-standing -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-144-mini-board-standing -> product-144-mini-board-standing-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-145-mini-banner -> product-145-mini-banner-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-145-mini-banner -> product-145-mini-banner-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-145-mini-banner -> product-145-mini-banner-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-202-keycap-keyring -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-203-led-keycap-keyring -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-204-mini-cd-album -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-226-acrylic-shaker-corotto -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-227-mini-uchiwa-keyring -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-228-heart-picket -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-229-image-picket -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-230-leather-flat-pouch -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-231-leather-slim-pouch -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-232-leather-triangle-pouch -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-233-leather-volume-pouch -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-234-leather-string-pouch -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-235-leather-string-round-pouch -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-236-leather-flat-clutch -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-237-leather-triangle-clutch -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-238-leather-ipad-laptop-pouch -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-251-leather-flat-mini-pouch -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-252-leather-slim-mini-pouch -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-253-leather-triangle-mini-pouch -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-254-leather-volume-mini-pouch -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-255-leather-round-mini-pouch -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-256-leather-flat-pencil-case -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-257-leather-slim-pencil-case -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-258-leather-triangle-pencil-case -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-259-leather-volume-pencil-case -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-260-leather-round-pencil-case -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-300-monthly-planner-inner -> set-membrane-1member-taku1-target-model-260703
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-gangpan-diecut -> sticker-gangpan-diecut-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-gangpan-diecut -> sticker-gangpan-diecut-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-gangpan-diecut -> sticker-gangpan-diecut-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-gangpan-diecut -> sticker-gangpan-diecut-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-gangpan-diecut -> sticker-gangpan-diecut-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): plate-053-SIZ_000521 -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-halfcut-clear -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-halfcut-clear -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): plate-054-SIZ_000521 -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): matcost-054-hologram -> product-020-white-print-postcard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-halfcut-hologram -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-halfcut-hologram -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-halfcut-hologram -> sticker-halfcut-hologram-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-pack -> sticker-pack-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-pack -> 전사표-권위-라이브-스냅샷-스크립트-전사
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-pack -> 전사표-권위-라이브-스냅샷-스크립트-전사
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-pack -> sticker-pack-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): plate-056-OUTPUT_PAPER_TYPE_03 -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-sheet-clear-white -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-sheet-clear-white -> sticker-sheet-clear-white-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-smallqty-freeform -> sticker-smallqty-freeform-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-smallqty-freeform -> 전사표-권위-라이브-스냅샷스크립트-전사
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-smallqty-freeform -> 가격구성요소-완제품가-룩업
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-smallqty-freeform -> sticker-smallqty-freeform-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): gap-061-a5-size-master-deleted -> dbmap-del-yn-soft-delete-authority
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-061-band-sticker -> plate
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-061-band-sticker -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-061-band-sticker -> price-grid
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-061-band-sticker -> reused
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-061-band-sticker -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-061-band-sticker -> plate
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-061-band-sticker -> reused
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-061-band-sticker -> price-grid
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-061-band-sticker -> sticker-spec-band-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-spec-circle -> sticker-spec-circle-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-spec-circle -> sticker-spec-circle-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-spec-circle -> sticker-spec-circle-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-spec-circle -> sticker-spec-circle-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-spec-circle -> sticker-spec-circle-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-spec-circle -> sticker-spec-circle-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): plate-063-SIZ_000521 -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-spec-fancy-clear -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-spec-fancy-clear -> sticker-spec-fancy-clear-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-spec-fancy-clear -> sticker-spec-fancy-clear-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-spec-fancy -> sticker-spec-fancy-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-spec-fancy -> sticker-spec-fancy-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-spec-fancy -> sticker-spec-fancy-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): gap-060-a5-size-master-deleted -> dbmap-del-yn-soft-delete-authority
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-spec-rectangle -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-spec-rectangle -> price-grid
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-spec-rectangle -> size
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-spec-rectangle -> material
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-spec-rectangle -> process
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-spec-rectangle -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-spec-rectangle -> plate
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-spec-rectangle -> product-060-rectangle-sticker-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-spec-rectangle -> price-grid
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-spec-rectangle -> product-060-rectangle-sticker-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-059-sticker-spec-square -> sticker-spec-square-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-059-sticker-spec-square -> sticker-spec-square-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-059-sticker-spec-square -> sticker-spec-square-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-059-sticker-spec-square -> sticker-spec-square-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-tattoo -> sticker-tattoo-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-tattoo -> 전사표-권위-라이브-스냅샷스크립트-전사
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-tattoo -> 가격구성요소-완제품가-합가형-룩업
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-tattoo -> 옵션그룹-cpq
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-tattoo -> sticker-tattoo-nodes
+- I-1 고아 노드(연결 대기·Phase 4): gap-goods-cardenv-addon (gap)
+- O4 index 미등재 파일: axis/quantities.md (qty-176)
+- O4 index 미등재 파일: axis/quantities.md (qty-177)
+- O4 index 미등재 파일: axis/quantities.md (qty-178)
+- O4 index 미등재 파일: formula/set-components.md (component-COMP_HC_MUSEON_COVERBIND)
+- O4 index 미등재 파일: formula/set-components.md (component-COMP_BIND_HC_TWINRING)
+- O4 index 미등재 파일: formula/set-components.md (component-COMP_BIND_JUNGCHEOL)
+- O4 index 미등재 파일: formula/set-components.md (component-COMP_BIND_MUSEON)
+- O4 index 미등재 파일: formula/set-components.md (component-COMP_BIND_PUR)
+- O4 index 미등재 파일: formula/set-components.md (component-COMP_BIND_TWINRING)
+- O4 index 미등재 파일: formula/set-components.md (component-COMP_BIND_SSABARI)
+- O4 index 미등재 파일: formula/set-components.md (component-COMP_BIND_CAL_WALL)
+- O4 index 미등재 파일: formula/set-components.md (component-COMP_PCB_S1_20P)
+- O4 index 미등재 파일: formula/set-components.md (component-COMP_PCB_S2_20P)
+- O4 index 미등재 파일: formula/set-components.md (component-COMP_PCB_S1_30P)
+- O4 index 미등재 파일: formula/set-components.md (component-COMP_PCB_S2_30P)
+- O4 index 미등재 파일: formula/set-components.md (component-COMP_TTEOKME)
+- O4 index 미등재 파일: formula/set-components.md (component-COMP_PHOTOBOOK_BASE)
+- O4 index 미등재 파일: formula/set-components.md (component-COMP_PHOTOBOOK_PAGE)
+- O4 index 미등재 파일: formula/set-formulas.md (formula-PRF_HC_MUSEON_SET)
+- O4 index 미등재 파일: formula/set-formulas.md (formula-PRF_HC_TWINRING_SET)
+- O4 index 미등재 파일: formula/set-formulas.md (formula-PRF_LEATHER_RINGBINDER_SET)
+- O4 index 미등재 파일: formula/set-formulas.md (formula-PRF_BIND_SUM)
+- O4 index 미등재 파일: formula/set-formulas.md (formula-PRF_BIND_MUSEON)
+- O4 index 미등재 파일: formula/set-formulas.md (formula-PRF_BIND_MUSEON_FOIL)
+- O4 index 미등재 파일: formula/set-formulas.md (formula-PRF_BIND_PUR)
+- O4 index 미등재 파일: formula/set-formulas.md (formula-PRF_BIND_PUR_FOIL)
+- O4 index 미등재 파일: formula/set-formulas.md (formula-PRF_BIND_TWINRING)
+- O4 index 미등재 파일: formula/set-formulas.md (formula-PRF_PCB_FIXED)
+- O4 index 미등재 파일: formula/set-formulas.md (formula-PRF_TTEOKME_FIXED)
+- O4 index 미등재 파일: formula/set-formulas.md (formula-PRF_PHOTOBOOK_FIXED)
+- O4 index 미등재 파일: formula/set-formulas.md (formula-PRF_DGP_INNER)
+- O4 index 미등재 파일: formula/set-formulas.md (formula-PRF_BOOK_COVER)
+- O4 index 미등재 파일: formula/set-formulas.md (formula-PRF_PHOTOBOOK_INNER)
+- O4 index 미등재 파일: formula/set-formulas.md (formula-PRF_DGP_CAL_DESK)
+- O4 index 미등재 파일: formula/set-formulas.md (formula-PRF_DGP_CAL_WIDE)
+- O4 index 미등재 파일: formula/stationery-components.md (component-COMP_STN_DIARY_SOFT)
+- O4 index 미등재 파일: formula/stationery-components.md (component-COMP_STN_DIARY_HARD)
+- O4 index 미등재 파일: formula/stationery-components.md (component-COMP_STN_DIARY_LHARD)
+- O4 index 미등재 파일: formula/stationery-components.md (component-COMP_STN_DIARY_LSOFT)
+- O4 index 미등재 파일: formula/stationery-components.md (component-COMP_STN_MONTHLY)
+- O4 index 미등재 파일: formula/stationery-components.md (component-COMP_STN_SPRINGNOTE)
+- O4 index 미등재 파일: formula/stationery-components.md (component-COMP_STN_SPRINGNOTEBK)
+- O4 index 미등재 파일: formula/stationery-components.md (component-COMP_STN_MEMOPAD)
+- O4 index 미등재 파일: formula/stationery-components.md (component-COMP_STN_JUNGCHEOL)
+- O4 index 미등재 파일: formula/stationery-formulas.md (formula-PRF_STN_DIARY_SOFT)
+- O4 index 미등재 파일: formula/stationery-formulas.md (formula-PRF_STN_DIARY_HARD)
+- O4 index 미등재 파일: formula/stationery-formulas.md (formula-PRF_STN_DIARY_LHARD)
+- O4 index 미등재 파일: formula/stationery-formulas.md (formula-PRF_STN_DIARY_LSOFT)
+- O4 index 미등재 파일: formula/stationery-formulas.md (formula-PRF_STN_MONTHLY)
+- O4 index 미등재 파일: formula/stationery-formulas.md (formula-PRF_STN_SPRINGNOTE)
+- O4 index 미등재 파일: formula/stationery-formulas.md (formula-PRF_STN_SPRINGNOTEBK)
+- O4 index 미등재 파일: formula/stationery-formulas.md (formula-PRF_STN_MEMOPAD)
+- O4 index 미등재 파일: formula/stationery-formulas.md (formula-PRF_STN_JUNGCHEOL)
+- O4 index 미등재 파일: product/product-055-sticker-sheet-freeform-nodes.md (qty-055)
+- O4 index 미등재 파일: product/product-055-sticker-sheet-freeform-nodes.md (optgroup-055-paper)
+- O4 index 미등재 파일: product/product-055-sticker-sheet-freeform-nodes.md (optgroup-055-print)
+- O4 index 미등재 파일: product/product-055-sticker-sheet-freeform-nodes.md (optgroup-055-cutting)
+- O4 index 미등재 파일: product/product-055-sticker-sheet-freeform-nodes.md (optgroup-055-jogaksu)
+- O4 index 미등재 파일: product/product-055-sticker-sheet-freeform-nodes.md (gap-055-cutting-optref-stale)
+- O4 index 미등재 파일: product/product-055-sticker-sheet-freeform-nodes.md (gap-055-jogaksu-storage)
+- O4 index 미등재 파일: product/product-055-sticker-sheet-freeform-nodes.md (gap-055-material-name-cst10)
+- O4 index 미등재 파일: product/product-055-sticker-sheet-freeform-nodes.md (gap-055-material-cost-storage)
+- O4 index 미등재 파일: product/product-057-sticker-large-freeform-nodes.md (plate-057-SIZ_000199)
+- O4 index 미등재 파일: product/product-057-sticker-large-freeform-nodes.md (qty-057)
+- O4 index 미등재 파일: product/product-057-sticker-large-freeform-nodes.md (gap-057-material-cost)
+- O4 index 미등재 파일: product/sticker-halfcut-hologram-nodes.md (size-054-SIZ_000170)
+- O4 index 미등재 파일: product/sticker-halfcut-hologram-nodes.md (size-054-SIZ_000520)
+- O4 index 미등재 파일: product/sticker-halfcut-hologram-nodes.md (plate-054-SIZ_000521)
+- O4 index 미등재 파일: product/sticker-halfcut-hologram-nodes.md (matcost-054-hologram)
+- O4 index 미등재 파일: product/sticker-halfcut-hologram-nodes.md (gap-054-yeondangga-repricing)
+- O4 index 미등재 파일: product/sticker-halfcut-hologram-nodes.md (gap-054-white-underbase-price)
+- O4 index 미등재 파일: product/sticker-halfcut-hologram-nodes.md (gap-054-piece-count-storage)
+- O4 index 미등재 파일: product/sticker-sheet-clear-white-nodes.md (plate-056-OUTPUT_PAPER_TYPE_03)
+- O4 index 미등재 파일: product/sticker-sheet-clear-white-nodes.md (qty-056)
+- O4 index 미등재 파일: product/sticker-sheet-clear-white-nodes.md (gap-056-material-cost-storage)
+- O4 index 미등재 파일: product/sticker-sheet-clear-white-nodes.md (gap-056-retail-cost-propagation)
+- O4 index 미등재 파일: product/sticker-sheet-clear-white-nodes.md (gap-056-cpq-option-layer)
+- O4 index 미등재 파일: product/sticker-smallqty-freeform-nodes.md (qty-064)
+- O4 index 미등재 파일: product/sticker-smallqty-freeform-nodes.md (gap-064-cpq-missing)
+- O4 index 미등재 파일: product/sticker-smallqty-freeform-nodes.md (gap-064-coating-conflict)
+- O4 index 미등재 파일: product/sticker-smallqty-freeform-nodes.md (gap-064-liandan-out-of-scope)
+- O4 index 미등재 파일: product/sticker-spec-band-nodes.md (plate-061-SIZ_000521)
+- O4 index 미등재 파일: product/sticker-spec-band-nodes.md (qty-061)
+- O4 index 미등재 파일: product/sticker-spec-band-nodes.md (gap-061-coating-conflict)
+- O4 index 미등재 파일: product/sticker-spec-band-nodes.md (gap-061-halfcut-process)
+- O4 index 미등재 파일: product/sticker-spec-band-nodes.md (gap-061-a5-size-master-deleted)
+- O4 index 미등재 파일: product/sticker-spec-band-nodes.md (gap-061-mat084-typ)
+- O4 index 미등재 파일: product/sticker-spec-band-nodes.md (gap-061-yeondangga-scope)
+- O4 index 미등재 파일: product/sticker-spec-band-nodes.md (gap-061-golden)
+- O4 index 미등재 파일: product/sticker-spec-circle-nodes.md (plate-058-SIZ_000521)
+- O4 index 미등재 파일: product/sticker-spec-fancy-clear-nodes.md (plate-063-SIZ_000521)
+- O4 index 미등재 파일: product/sticker-spec-fancy-clear-nodes.md (qty-063)
+- O4 index 미등재 파일: product/sticker-spec-fancy-clear-nodes.md (gap-063-halfcut-process)
+- O4 index 미등재 파일: product/sticker-spec-fancy-clear-nodes.md (gap-063-cpq-option-layer)
+- O4 index 미등재 파일: product/sticker-spec-fancy-clear-nodes.md (gap-063-material-unmigrated)
+- O4 index 미등재 파일: product/sticker-spec-fancy-nodes.md (plate-062-SIZ_000521)
+- O4 index 미등재 파일: product/sticker-spec-rectangle-nodes.md (plate-060-SIZ_000521)
+- O4 index 미등재 파일: product/sticker-spec-rectangle-nodes.md (qty-060)
+- O4 index 미등재 파일: product/sticker-spec-rectangle-nodes.md (gap-060-coating-conflict)
+- O4 index 미등재 파일: product/sticker-spec-rectangle-nodes.md (gap-060-halfcut-process)
+- O4 index 미등재 파일: product/sticker-spec-rectangle-nodes.md (gap-060-a5-size-master-deleted)
+- O4 index 미등재 파일: product/sticker-spec-rectangle-nodes.md (gap-060-mat084-typ)
+- O4 index 미등재 파일: product/sticker-spec-rectangle-nodes.md (gap-060-yeondangga-scope)
+- O4 index 미등재 파일: product/sticker-spec-rectangle-nodes.md (gap-060-golden)
+- O4 index 미등재 파일: product/sticker-spec-square-nodes.md (qty-059)
+- O4 index 미등재 파일: product/sticker-spec-square-nodes.md (gap-059-coating-conflict)
+- O4 index 미등재 파일: product/sticker-spec-square-nodes.md (gap-059-spec-shape-cut)
+- O4 index 미등재 파일: product/sticker-tattoo-nodes.md (qty-067)
+- O4 index 미등재 파일: product/sticker-tattoo-nodes.md (optgroup-067-paper)
+- O4 index 미등재 파일: product/sticker-tattoo-nodes.md (gap-067-mattype-transfer-paper)
+- O4 index 미등재 파일: product/sticker-tattoo-nodes.md (gap-067-liandan-out-of-scope)
+
+## 비고
+- 상품 노드 8개 집필 완료(파일럿 디지털인쇄). 현행 소프트 고아는 ① 파일럿 8상품이 쓰지 않는 축 원자 항목(자재/공정/사이즈/판형/도수/카테고리 일부)과 ② 어떤 노드도 아직 링크하지 않는 floating GAP 노드다 — 'Phase 4 대기'가 아니라 현재 커버리지 경계. floating GAP의 상품 연결 여부는 연결 완전성(축5) 라운드에서 재판정(조용한 고아 gap 방지).
+- 고아 하드 유형(product/formula/component)·끊긴 링크·타입 위반·L-18 부모정합·blocklist 오염(HARD)·blocklist 원천 부재 = 0 이어야 PASS.

@@ -8,8 +8,11 @@ sources:
   - {source_file: "_workspace/huni-ontology-kb/01_curation/pack-stationery-goods.md", source_locator: "§1.3 파우치·백(봉제)·§3.5 자재 오염/empty-shell·§3.10 굿즈 고정가룩업/NEITHER-gap·§4 정직표기표", captured_at: "2026-07-03", badge: verified, src_id: SR-pack-stn}
   - {source_file: "live-snapshot/latest/t_prd_product_prices.csv", source_locator: "키:PRD_000275 unit_price(GP-1 base 단일고정가·260610 verbatim·전사표)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
 relations:
+  - {rel: in_category, target: category-CAT_000263, qualifier: sub, note: "굿즈 카테고리(보조·live t_prd_product_categories 20260702_1119)"}
+  - {rel: in_category, target: category-CAT_000011, qualifier: main, note: "굿즈 카테고리(main·live t_prd_product_categories 20260702_1119)"}
   - {rel: references, target: gap-goods-sewing-missing, note: "봉제/부착 정체공정 has_process 0행(MISSING)"}
   - {rel: references, target: gap-pouch-empty-shell, note: "자재·공정 0행(순수 empty-shell)"}
+  - {rel: references, target: gap-goods-fixed-lookup-no-formula, note: "고정가룩업(t_prd_product_prices 단일 unit_price·frm_cd 없음)·O5 가격gap 정직 선언(07-04 live 재프라이싱)"}
 props:
   prd_typ_cd: "PRD_TYPE.01"
   min_qty: 1
@@ -23,6 +26,8 @@ props:
   substrate_ref: "없음(미등록/empty-shell)"
   size_print_status: "has_size 0행·has_print_option 0행(라이브 미적재·정직 표기)"
   main_category_ref: "CAT_000011 에코백(축 노드 미민팅·needs_axis·in_category 미배선)"
+  fixed_price: "25000원 (t_prd_product_prices unit_price·transcribed-by reprice_goods_260704 @ 07-04 live)"
+  가격상태: "고정가룩업·25000원(unit_price·transcribed·07-04 live·reg_dt=2026-06-22)"
 standards: {schema_org: "Product", xjdf: "Product(백류·봉제)", config_ont: "component type"}
 answers_cq: ["구체 상품 질의(타이벡 보냉 미니백 구성·가격)", "백류/에코백 탐색"]
 tags: ["#백류", "#봉제상품", "#비종이류판형없음", "#고정가룩업", "#empty-shell"]

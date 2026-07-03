@@ -8,6 +8,10 @@ sources:
   - {source_file: "live-snapshot/latest/t_prd_product_price_formulas.csv", source_locator: "키:PRD_000193 formula 0행 + t_prd_product_prices.csv 키:PRD_000193 0행 (NEITHER-gap·가격 원천 둘 다 부재)", captured_at: "live 20260702_1119", badge: unknown, src_id: SR-5-livesnap}
   - {source_file: "_workspace/huni-ontology-kb/01_curation/pack-stationery-goods.md", source_locator: "§1.2 굿즈·§3.10 GAP-GD-1 NEITHER-gap·§4 굿즈/파우치 NEITHER-gap 행", captured_at: "2026-07-04", badge: unknown, src_id: SR-pack-stn}
 relations:
+  - {rel: in_category, target: category-CAT_000328, qualifier: sub, note: "굿즈 카테고리(보조·live t_prd_product_categories 20260702_1119)"}
+  - {rel: in_category, target: category-CAT_000010, qualifier: main, note: "굿즈 카테고리(main·live t_prd_product_categories 20260702_1119)"}
+  - {rel: uses_material, target: material-MAT_000268, note: "substrate 자재(usage USAGE.07·live t_prd_product_materials 활성)"}
+  - {rel: uses_material, target: material-MAT_000255, note: "substrate 자재(usage USAGE.07·live t_prd_product_materials 활성)"}
   - {rel: references, target: gap-goods-neither, note: "가격 공식·고정가 둘 다 0행(견적 원천 부재)·O5 gap 선언"}
 props:
   prd_typ_cd: PRD_TYPE.01

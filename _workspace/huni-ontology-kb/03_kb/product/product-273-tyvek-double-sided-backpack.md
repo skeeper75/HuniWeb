@@ -7,6 +7,8 @@ sources:
   - {source_file: "live-snapshot/latest/t_prd_products.csv", source_locator: "키:PRD_000273 (타이벡 양면 백팩·prd_typ_cd=PRD_TYPE.01·nonspec_yn=N·use_yn=Y·del_yn=N·min1/max10000/incr1·QTY_UNIT.01)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
   - {source_file: "_workspace/huni-ontology-kb/01_curation/pack-stationery-goods.md", source_locator: "§1.3 파우치·백(봉제)·§3.5 자재 오염/empty-shell·§3.10 굿즈 고정가룩업/NEITHER-gap·§4 정직표기표", captured_at: "2026-07-03", badge: verified, src_id: SR-pack-stn}
 relations:
+  - {rel: in_category, target: category-CAT_000263, qualifier: sub, note: "굿즈 카테고리(보조·live t_prd_product_categories 20260702_1119)"}
+  - {rel: in_category, target: category-CAT_000011, qualifier: main, note: "굿즈 카테고리(main·live t_prd_product_categories 20260702_1119)"}
   - {rel: references, target: gap-goods-neither, note: "가격 원천 부재(공식·고정가 둘 다 0행·NEITHER-gap)"}
   - {rel: references, target: gap-goods-sewing-missing, note: "봉제/부착 정체공정 has_process 0행(MISSING)"}
   - {rel: references, target: gap-pouch-empty-shell, note: "실 원단 substrate 미등록(.09 형상값만)·공정 0행"}

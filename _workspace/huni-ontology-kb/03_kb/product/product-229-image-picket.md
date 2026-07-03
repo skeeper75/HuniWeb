@@ -7,6 +7,8 @@ sources:
   - {source_file: "live-snapshot/latest/t_prd_products.csv", source_locator: "키:PRD_000229 (prd_typ_cd=PRD_TYPE.01·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
   - {source_file: "_workspace/huni-ontology-kb/01_curation/pack-stationery-goods.md", source_locator: "§1.2 굿즈 226~229 미러/이미지피켓 family·§4 NEITHER-gap 행", captured_at: "2026-07-04", badge: candidate, src_id: SR-pack-stn}
 relations:
+  - {rel: in_category, target: category-CAT_000010, qualifier: main, note: "굿즈 카테고리(main·live t_prd_product_categories 20260702_1119)"}
+  - {rel: in_category, target: category-CAT_000198, qualifier: sub, note: "굿즈 카테고리(보조·live t_prd_product_categories 20260702_1119)"}
   - {rel: references, target: gap-goods-neither, note: "가격 원천 부재(t_prd_product_price_formulas 0행·t_prd_product_prices 0행)=NEITHER-gap. O5 충족(priced_by 없음)"}
   - {rel: references, target: gap-goods-material-contamination, note: "자재 2행(양면유광 M/L)=사이즈+인쇄면/코팅을 자재로 등록(비-소재 값 자재화·GP-ST-003)·substrate 아님"}
 props:

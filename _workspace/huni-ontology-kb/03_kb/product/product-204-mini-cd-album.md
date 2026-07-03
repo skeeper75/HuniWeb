@@ -7,6 +7,7 @@ sources:
   - {source_file: "live-snapshot/latest/t_prd_products.csv", source_locator: "키:PRD_000204 (prd_typ_cd=PRD_TYPE.01·use_yn=N·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
   - {source_file: "_workspace/huni-ontology-kb/01_curation/pack-stationery-goods.md", source_locator: "§1.2 굿즈 204 미니CD앨범(use_yn=N)·§0.1 use_yn=N 미출시·§4 NEITHER-gap 행", captured_at: "2026-07-04", badge: candidate, src_id: SR-pack-stn}
 relations:
+  - {rel: in_category, target: category-CAT_000189, qualifier: main, note: "굿즈 카테고리(main·live t_prd_product_categories 20260702_1119)"}
   - {rel: references, target: gap-goods-neither, note: "가격 원천 부재(t_prd_product_price_formulas 0행·t_prd_product_prices 0행)=NEITHER-gap. O5 충족(priced_by 없음)"}
   - {rel: references, target: gap-goods-material-contamination, note: "자재 1행(미니CD키링 세트·MAT_TYPE.12)=키트/부속을 자재로 등록·substrate 아님"}
 props:

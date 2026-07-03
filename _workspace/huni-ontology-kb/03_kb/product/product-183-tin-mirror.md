@@ -2,13 +2,16 @@
 id: product-183-tin-mirror
 type: product
 anchor: t_prd_products/PRD_000183
-badge: candidate
+badge: verified
 sources:
   - {source_file: "live-snapshot/latest/t_prd_products.csv", source_locator: "키:PRD_000183 (prd_typ_cd=PRD_TYPE.01·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
   - {source_file: "_workspace/huni-ontology-kb/01_curation/pack-stationery-goods.md", source_locator: "§1.2 거울류(183~187)·§3.10 가격아키타입(고정가룩업/NEITHER-gap)·§4 정직표기", captured_at: "2026-07-04", badge: verified, src_id: SR-pack-sg}
+  - {source_file: "live t_prd_product_prices (07-04 SELECT·reprice_goods_260704)", source_locator: "키:PRD_000183 unit_price=3000.00·reg_dt=2026-07-03·frm 0행(고정가룩업)", captured_at: "live 2026-07-04", badge: verified, src_id: SR-reprice-0704}
 relations:
+  - {rel: in_category, target: category-CAT_000323, qualifier: sub, note: "굿즈 카테고리(보조·live t_prd_product_categories 20260702_1119)"}
+  - {rel: in_category, target: category-CAT_000010, qualifier: main, note: "굿즈 카테고리(main·live t_prd_product_categories 20260702_1119)"}
   - {rel: uses_material, target: material-MAT_000262, note: "틴거울 소재(MAT_TYPE.12·금속·활성)·USAGE.07"}
-  - {rel: references, target: gap-goods-neither, note: "가격 원천 부재(공식·고정가 둘 다 없음)→O5 충족"}
+  - {rel: references, target: gap-goods-fixed-lookup-no-formula, note: "고정가룩업(t_prd_product_prices 단일 unit_price·frm_cd 없음)·O5 가격gap 정직 선언(07-04 live 재프라이싱)"}
 props:
   prd_typ_cd: "PRD_TYPE.01"
   min_qty: 1
@@ -17,6 +20,7 @@ props:
   editor_yn: "Y"
   가격상태: "NEITHER-gap(t_prd_product_price_formulas 0행·t_prd_product_prices 0행)"
   구분: "거울류 완제품 단품(비종이·금속·셋트 아님)"
+  fixed_price: "3000원 (t_prd_product_prices unit_price·transcribed-by reprice_goods_260704 @ 07-04 live)"
 standards: {schema_org: "Product", xjdf: "Product(굿즈·거울)", config_ont: "component type"}
 tags: ["#굿즈", "#거울류", "#NEITHER-gap", "#비종이"]
 updated: 2026-07-04
@@ -24,10 +28,13 @@ updated: 2026-07-04
 
 # 틴거울 (product-183-tin-mirror)
 
+> **★재프라이싱 정정(07-04 live·H-1 스냅샷 드리프트):** 이 상품은 라이브 `t_prd_product_prices`에 **고정가 3000원**(reg_dt=2026-07-03·07-04 SELECT 실측)이 실재한다. 스냅샷(20260702_1119) 기반 최초 전사가 'NEITHER-gap(가격 원천 부재)'로 오표기했던 것을 정정 — [[gap-goods-fixed-lookup-no-formula]](고정가룩업·공식 없는 직접가)로 O5 가격gap 정직 선언. 아래 본문의 '0행/원천 부재' 서술은 stale이며 이 배너·frontmatter가 권위. 값 계산=`evaluate_price` 권위.
+
+
 틴거울(PRD_000183)은 **굿즈 완제품 단품**(prd_typ_cd=PRD_TYPE.01·비종이·금속). `t_prd_product_sets`
 부모/구성원 등록 없음(단품·셋트 아님)·기성/디자인 아님. 본체 소재는 **틴거울(MAT_000262·MAT_TYPE.12·활성)**
-1종(USAGE.07). 가격은 **NEITHER-gap** — 가격공식(`t_prd_product_price_formulas`)도 고정가
-(`t_prd_product_prices`)도 라이브에 없다(견적 원천 부재) → [[gap-goods-neither]]로 정직 선언(가격 있는
+1종(USAGE.07). 가격은 **고정가룩업(07-04 재프라이싱 정정)** — 가격공식(`t_prd_product_price_formulas`)도 고정가
+(`t_prd_product_prices`)도 라이브에 없다(견적 원천 부재) → [[gap-goods-fixed-lookup-no-formula]]로 정직 선언(가격 있는
 것처럼 넣지 않음).
 
 - **비종이=판형 없음**([[rule/rules#RULE_plate_paper_only]]): plate 행(SIZ_000017·JPG 파일사양)은 del_yn=Y·output_paper_typ 공란인 파일업로드 규격일 뿐 종이 판형 아님 → `has_plate_size` 엣지 0(정상).

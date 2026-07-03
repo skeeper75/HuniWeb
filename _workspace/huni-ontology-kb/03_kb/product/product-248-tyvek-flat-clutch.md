@@ -8,8 +8,11 @@ sources:
   - {source_file: "_workspace/huni-ontology-kb/01_curation/pack-stationery-goods.md", source_locator: "§1.3 파우치(★248 클러치=고정가 12,500)·§3.10 고정가룩업·§4 굿즈 고정가 행", captured_at: "2026-07-04", badge: verified, src_id: SR-pack-stn}
   - {source_file: "live-snapshot/latest/t_prd_product_prices.csv", source_locator: "테이블:t_prd_product_prices 키:PRD_000248 apply_ymd=2026-06-10 unit_price(GP-1 base 단일고정가 §21 R-GP4-1·260610 verbatim)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
 relations:
+  - {rel: in_category, target: category-CAT_000228, qualifier: sub, note: "굿즈 카테고리(보조·live t_prd_product_categories 20260702_1119)"}
+  - {rel: in_category, target: category-CAT_000011, qualifier: main, note: "굿즈 카테고리(main·live t_prd_product_categories 20260702_1119)"}
   - {rel: references, target: gap-pouch-empty-shell, note: "가격은 고정가룩업 실재이나 BOM은 자재 0행·공정 0행(empty-shell)·O5는 이 gap 참조로 충족(공식 노드 없음)"}
   - {rel: references, target: gap-goods-sewing-missing, note: "봉제 공정 has_process 0행(MISSING)"}
+  - {rel: references, target: gap-goods-fixed-lookup-no-formula, note: "고정가룩업(t_prd_product_prices 단일 unit_price·frm_cd 없음)·O5 가격gap 정직 선언(07-04 live 재프라이싱)"}
 props:
   prd_typ_cd: "PRD_TYPE.01"
   min_qty: 1
@@ -21,6 +24,8 @@ props:
   price_archetype: "고정가룩업(t_prd_product_prices 단일 unit_price·260610 verbatim·전사표 참조·priced_by 공식 노드 없음)"
   substrate: "실 원단 자재 미적재(empty-shell·가격만 고정가 실재)"
   구분: "파우치·백(봉제 상품·비종이·판형 없음)"
+  fixed_price: "12500원 (t_prd_product_prices unit_price·transcribed-by reprice_goods_260704 @ 07-04 live)"
+  가격상태: "고정가룩업·12500원(unit_price·transcribed·07-04 live·reg_dt=2026-06-22)"
 standards: {schema_org: "Product", xjdf: "Product(파우치)", config_ont: "component type"}
 answers_cq: ["타이벡 플랫 클러치 구성·가격 질의(고정가 실재·값=엔진 권위)"]
 tags: ["#파우치", "#타이벡", "#클러치", "#봉제", "#비종이", "#고정가룩업"]

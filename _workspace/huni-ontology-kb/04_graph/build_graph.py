@@ -426,11 +426,22 @@ def build():
             deg[e["src"]] += 1
         if e["dst"] in deg:
             deg[e["dst"]] += 1
+    # spec §151: "priced_by ≥1 또는 gap/양면 선언" → 단, 가격 사슬 게이트이므로 **가격류 gap 선언만** O5 충족
+    # (비가격 gap = 봉제/자재오염/옵션UI 등은 O5 우회 불가·D-GD-INT-2 강화 2026-07-04). 가격 gap id 힌트 화이트리스트.
+    PRICE_GAP_HINTS = ("neither", "fixed-lookup", "price-unloaded", "sparse-grid",
+                       "redesign-pending", "fixedprice", "price-pending", "tbd")
+    # "tbd" = 가격 TBD placeholder(예 gap-226-acryl-tbd: 라이브 공식이 TBD·단가 미설정) = 가격류 gap.
+    # (2026-07-04 굿즈 재프라이싱 시 확인: 'tbd' 포함 gap은 gap-226-acryl-tbd 유일·비가격 gap 아님)
     for nid, n in nodes.items():
         if n.type == "product":
             has_price = any(e["rel"] in ("priced_by", "derived_from") for e in out_by.get(nid, []))
-            if not has_price and n.anchor != "none":
-                hard.append(f"O5 product 끊긴 가격사슬(priced_by/gap 없음): {nid}")
+            has_price_gap_decl = any(
+                (nodes.get(e["dst"]) is not None and nodes[e["dst"]].type == "gap"
+                 and any(h in e["dst"] for h in PRICE_GAP_HINTS))
+                for e in out_by.get(nid, [])
+            )
+            if not has_price and not has_price_gap_decl and n.anchor != "none":
+                hard.append(f"O5 product 끊긴 가격사슬(priced_by/가격gap 없음): {nid}")
         if n.type == "price_formula":
             if not any(e["rel"] == "has_component" for e in out_by.get(nid, [])):
                 hard.append(f"O6 고아 공식(has_component 0): {nid}")

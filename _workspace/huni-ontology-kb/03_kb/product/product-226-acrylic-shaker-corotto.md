@@ -7,6 +7,8 @@ sources:
   - {source_file: "live-snapshot/latest/t_prd_products.csv", source_locator: "키:PRD_000226 (prd_typ_cd=PRD_TYPE.01·use_yn=N·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
   - {source_file: "_workspace/huni-ontology-kb/01_curation/pack-stationery-goods.md", source_locator: "§1.2 굿즈 226 아크릴쉐이커코롯토(use_yn=N·gap)·§0.1 아크릴 *_TBD BLOCKED·§4 NEITHER-gap 행", captured_at: "2026-07-04", badge: candidate, src_id: SR-pack-stn}
 relations:
+  - {rel: in_category, target: category-CAT_000009, qualifier: main, note: "굿즈 카테고리(main·live t_prd_product_categories 20260702_1119)"}
+  - {rel: in_category, target: category-CAT_000159, qualifier: sub, note: "굿즈 카테고리(보조·live t_prd_product_categories 20260702_1119)"}
   - {rel: references, target: gap-226-acryl-tbd, note: "라이브 priced_by=PRF_ACRYL_SHCOROTTO_TBD(구성/단가 미설정 placeholder)·실 가격 원천 부재. O5 충족(gap 선언)"}
   - {rel: references, target: gap-goods-material-contamination, note: "자재 7행(인쇄면 3·글리터색 4)=옵션 값을 자재로 등록(비-소재 값 자재화·GP-ST-003)·substrate 아님"}
 props:

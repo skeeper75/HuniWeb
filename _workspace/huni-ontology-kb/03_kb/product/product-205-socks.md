@@ -7,6 +7,10 @@ sources:
   - {source_file: "live-snapshot/latest/t_prd_products.csv", source_locator: "키:PRD_000205 (prd_nm=양말·prd_typ_cd=PRD_TYPE.01·nonspec_yn=N·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
   - {source_file: "live-snapshot/latest/t_prd_product_prices.csv", source_locator: "키:PRD_000205 unit_price=3000.00 apply_ymd=2026-06-10 (GP-1 base 단일고정가·260610 verbatim)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
   - {source_file: "_workspace/huni-ontology-kb/01_curation/pack-stationery-goods.md", source_locator: "§1.2 패브릭·의류(205 양말=3,000)·§3.10 고정가룩업·§4 굿즈 고정가 행", captured_at: "2026-07-04", badge: verified, src_id: SR-pack-stn}
+relations:
+  - {rel: in_category, target: category-CAT_000206, qualifier: sub, note: "굿즈 카테고리(보조·live t_prd_product_categories 20260702_1119)"}
+  - {rel: in_category, target: category-CAT_000010, qualifier: main, note: "굿즈 카테고리(main·live t_prd_product_categories 20260702_1119)"}
+  - {rel: references, target: gap-goods-fixed-lookup-no-formula, note: "고정가룩업·가격 실재(unit_price verified)·공식 아키타입 부재(185 패턴·O5 충족)"}
 props:
   prd_typ_cd: PRD_TYPE.01
   nonspec_yn: N
@@ -20,6 +24,8 @@ props:
   del_yn: N
   archetype: "고정가룩업(t_prd_product_prices·3,000원·transcribed·공식 없음)"
   in_category_ref: "CAT_000010 라이프(main)·CAT_000206 패션 — 카테고리 축 노드 미민팅(needs_axis)"
+  fixed_price: "3000원 (t_prd_product_prices unit_price·transcribed-by reprice_goods_260704 @ 07-04 live)"
+  가격상태: "고정가룩업·3000원(unit_price·transcribed·07-04 live·reg_dt=2026-06-22)"
 standards: {schema_org: Product, xjdf: "Product(패브릭 굿즈)", config_ont: "component type"}
 answers_cq: ["구체 상품 질의(양말 가격)", "조건 탐색(패션 패브릭 고정가)"]
 tags: ["#굿즈", "#패브릭의류패드", "#고정가룩업", "#비종이류"]

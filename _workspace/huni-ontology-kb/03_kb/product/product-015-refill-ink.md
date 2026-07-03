@@ -7,6 +7,7 @@ sources:
   - {source_file: "live-snapshot/latest/t_prd_products.csv", source_locator: "키:PRD_000015 (prd_typ_cd=PRD_TYPE.03·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
   - {source_file: "_workspace/huni-ontology-kb/01_curation/pack-stationery-goods.md", source_locator: "§1.2 015 리필잉크(addon성)·§3.12 굿즈 addon(리필잉크)·§0.1 기성상품", captured_at: "2026-07-04", badge: candidate, src_id: SR-pack-stn}
 relations:
+  - {rel: in_category, target: category-CAT_000287, qualifier: main, note: "굿즈 카테고리(main·live t_prd_product_categories 20260702_1119)"}
   - {rel: references, target: gap-goods-neither, note: "가격 원천 부재(price_formulas 0행·prices 0행)=NEITHER-gap. O5 충족"}
   - {rel: references, target: gap-goods-material-contamination, note: "015 자재 7행이 무관 부속 grab-bag(카드봉투/케이스/끈/액자/판넬)=비-substrate 오염 의심"}
 props:

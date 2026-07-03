@@ -187,6 +187,14 @@ SELECT src FROM edge WHERE rel='uses_material' AND dst='material-MAT_000074';
 
 ## 변경 이력
 
+### v1.0.5 — 2026-07-04 (O5 코드-스펙 정렬 + 가격 gap 화이트리스트 — 굿즈/파우치/봉투 확장)
+> 실질 변경: O5(끊긴 가격사슬) 게이트를 spec §5.4(§151 "priced_by ≥1 또는 gap/양면 선언")에 정렬하되, **가격류 gap 선언만** 인정하도록 강화.
+
+- **배경**: 굿즈/파우치/봉투 다수가 진짜 가격 원천 부재(NEITHER-gap)이거나 고정가룩업(t_prd_product_prices 직접 unit_price·공식 없음→priced_by 불가). 기존 O5 코드는 priced_by/derived_from 엣지만 인정해 스펙의 "gap 선언" 경로가 미구현이었다(88 하드).
+- **변경**(`build_graph.py` O5 블록): product가 (a) priced_by/derived_from, **또는** (b) **가격류 gap 노드로의 out-edge**(type=gap ∧ id ∈ `PRICE_GAP_HINTS`=`neither·fixed-lookup·price-unloaded·sparse-grid·redesign-pending·fixedprice·price-pending·tbd`)를 보유하면 O5 충족. **비가격 gap**(sewing·contamination·empty-shell·option-ui)만으로는 O5 우회 불가(가격 사슬 게이트 의도 보존·D-GD-INT-2 강화).
+- **정직 경로**: NEITHER-gap→`gap-goods-neither`(가격 gap)·고정가룩업→`gap-goods-fixed-lookup-no-formula`(가격 gap·값은 props 기재·엔진 권위)·미출시(use_yn=N)도 가격 gap 선언. 가산적 변경(기존 통과 상품 회귀 0). file-format-spec §O5와 정합.
+- **후속(비차단)**: `PRICE_GAP_HINTS` 화이트리스트를 gap 노드 필드 마커(`price_slot`)로 대체하면 더 견고(architect 판단).
+
 ### v1.0.4 — 2026-07-03 (실사 검증 결함 교정 — `_meta/fix-log-silsa-260703.md`)
 > 실질 신규: §5.6b L-20(마스터 앵커 단일소유권·소프트) 추가. 빌더 구현과 정합.
 

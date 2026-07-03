@@ -8,6 +8,9 @@ sources:
   - {source_file: "_workspace/huni-ontology-kb/01_curation/pack-stationery-goods.md", source_locator: "§1.3 파우치·§3.5 자재 오염·§3.10 NEITHER-gap·§4 파우치 봉제 행", captured_at: "2026-07-04", badge: candidate, src_id: SR-pack-stn}
   - {source_file: "live-snapshot/latest/t_prd_product_price_formulas.csv", source_locator: "키:PRD_000239 가격공식 0행 + t_prd_product_prices.csv 동키 0행(전수 실측=NEITHER-gap)", captured_at: "live 20260702_1119", badge: candidate, src_id: SR-5-livesnap}
 relations:
+  - {rel: in_category, target: category-CAT_000222, qualifier: sub, note: "굿즈 카테고리(보조·live t_prd_product_categories 20260702_1119)"}
+  - {rel: in_category, target: category-CAT_000011, qualifier: main, note: "굿즈 카테고리(main·live t_prd_product_categories 20260702_1119)"}
+  - {rel: uses_material, target: material-MAT_000185, note: "substrate 자재(usage USAGE.07·live t_prd_product_materials 활성)"}
   - {rel: references, target: gap-goods-neither, note: "PRF·고정가 둘 다 0행=견적 원천 부재(O5 충족·가격 사슬 없음)"}
   - {rel: references, target: gap-goods-material-contamination, note: "MAT_000319(M)·MAT_000320(L)=사이즈 라벨을 자재(.09)로 오적재·비-소재 값 자재화(GP-ST-003)"}
   - {rel: references, target: gap-goods-sewing-missing, note: "정체 공정=봉제인데 PROC_000081 부착만 배선(봉제→부착 오적재·GP-ST-004)"}

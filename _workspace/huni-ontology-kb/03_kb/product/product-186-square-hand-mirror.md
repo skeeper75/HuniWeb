@@ -8,6 +8,8 @@ sources:
   - {source_file: "live-snapshot/latest/t_prd_product_sizes.csv", source_locator: "키:PRD_000186 siz_cd SIZ_000384/386/388 (del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
   - {source_file: "_workspace/huni-ontology-kb/01_curation/pack-stationery-goods.md", source_locator: "§1.2 거울류·§3.10 NEITHER-gap·§4 정직표기", captured_at: "2026-07-04", badge: verified, src_id: SR-pack-sg}
 relations:
+  - {rel: in_category, target: category-CAT_000010, qualifier: main, note: "굿즈 카테고리(main·live t_prd_product_categories 20260702_1119)"}
+  - {rel: in_category, target: category-CAT_000323, qualifier: sub, note: "굿즈 카테고리(보조·live t_prd_product_categories 20260702_1119)"}
   - {rel: has_size, target: size-SIZ_000384, note: "S(75x130mm)"}
   - {rel: has_size, target: size-SIZ_000386, note: "M(95x166mm)"}
   - {rel: has_size, target: size-SIZ_000388, note: "L(120x218mm)"}

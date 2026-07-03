@@ -8,7 +8,9 @@ sources:
   - {source_file: "live-snapshot/latest/t_prd_product_prices.csv", source_locator: "키:PRD_000185 unit_price=2500.00·apply_ymd=2026-06-10·note 'GP-1 base 단일고정가 §21 R-GP4-1 (260610 verbatim)'", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
   - {source_file: "_workspace/huni-ontology-kb/01_curation/pack-stationery-goods.md", source_locator: "§1.2 거울류·§3.10 고정가룩업(t_prd_product_prices 단일 unit_price)·§4", captured_at: "2026-07-04", badge: verified, src_id: SR-pack-sg}
 relations:
-  - {rel: references, target: gap-185-fixed-lookup-no-formula, note: "가격은 t_prd_product_prices에 실재(2,500)이나 priced_by 공식 부재→O5 아키타입 공백 정직 선언"}
+  - {rel: in_category, target: category-CAT_000010, qualifier: main, note: "굿즈 카테고리(main·live t_prd_product_categories 20260702_1119)"}
+  - {rel: in_category, target: category-CAT_000323, qualifier: sub, note: "굿즈 카테고리(보조·live t_prd_product_categories 20260702_1119)"}
+  - {rel: references, target: gap-goods-fixed-lookup-no-formula, note: "고정가룩업·공식 아키타입 부재→공유 gap 표준화(로컬 gap 은퇴·C2 260704)"}
 props:
   prd_typ_cd: "PRD_TYPE.01"
   min_qty: 3
@@ -18,6 +20,7 @@ props:
   가격상태: "고정가룩업(t_prd_product_prices·2,500원·transcribed·260610 verbatim)"
   가격아키타입: "fixed-lookup(단일 unit_price·frm_cd 없음)"
   구분: "거울류 완제품 단품(비종이·유리/금속)"
+  fixed_price: "2500원 (t_prd_product_prices unit_price·transcribed-by reprice_goods_260704 @ 07-04 live)"
 standards: {schema_org: "Product", xjdf: "Product(굿즈·거울)", config_ont: "component type"}
 answers_cq: ["카드거울 가격(고정가 조회)"]
 tags: ["#굿즈", "#거울류", "#고정가룩업", "#비종이"]
@@ -31,7 +34,7 @@ updated: 2026-07-04
 가격공식(`t_prd_product_price_formulas`)은 없다(frm_cd 미바인딩). 온톨로지는 "가격이 존재한다"는 사실까지만
 기록하고 값 계산은 엔진 권위([[rule/rules#RULE_price_value_boundary]]).
 
-- **★고정가룩업 아키타입(첫 사례)**: 앞선 고정가 상품(024 포토카드·134 족자)은 모두 **공식**(PRF_*)을 거쳤으나, 185는 공식 없이 `t_prd_product_prices`에서 직접 단일가를 읽는다. `priced_by` 엣지를 걸 대상(price_formula)이 없어 O5(priced_by≥1)와 어긋난다 → [[gap-185-fixed-lookup-no-formula]]로 정직 선언(가격은 verified·아키타입 모델만 공백). architect O5 예외/fixed-lookup 정책 대기.
+- **★고정가룩업 아키타입(첫 사례)**: 앞선 고정가 상품(024 포토카드·134 족자)은 모두 **공식**(PRF_*)을 거쳤으나, 185는 공식 없이 `t_prd_product_prices`에서 직접 단일가를 읽는다. `priced_by` 엣지를 걸 대상(price_formula)이 없어 O5(priced_by≥1)와 어긋난다 → [[gap-goods-fixed-lookup-no-formula]]로 정직 선언(가격은 verified·아키타입 모델만 공백). architect O5 예외/fixed-lookup 정책 대기.
 - **비종이=판형 없음**: plate 행(SIZ_000383·"JPG x 3P")은 del_yn=Y 파일업로드 규격 → `has_plate_size` 0.
 - **없는 축(정직)**: 자재 product_materials 0행·도수·인쇄옵션·CPQ·제약·추가상품·product_sizes 전부 0행.
 - 수량규칙: **3개 단위 주문**(min 3·incr 3·max 10000·QTY_UNIT.01·bundle_qtys 0행).
@@ -48,13 +51,3 @@ updated: 2026-07-04
 ---
 
 ## 이 상품 전용 하위 노드
-
-### [gap-185-fixed-lookup-no-formula] 카드거울 고정가룩업이 priced_by 공식 모델과 어긋남 (O5 아키타입 공백) {unknown}
-- type: gap
-- anchor: none  # 사유: 185 가격은 t_prd_product_prices에 실재(정상)하나 frm_cd 공식이 없어 priced_by 엣지를 걸 대상이 없음 — 원천 부재가 아니라 스키마 아키타입 미수용
-- badge: unknown
-- src: {source_file: "live-snapshot/latest/t_prd_product_prices.csv", source_locator: "키:PRD_000185 unit_price=2500.00 (공식 0행)", captured_at: "live 20260702_1119", badge: unknown, src_id: SR-5-livesnap}
-- gap_what: "185 카드거울 가격=t_prd_product_prices 단일 unit_price(2,500·verbatim·정상)로 완결이나 t_prd_product_price_formulas frm_cd 바인딩이 없어 priced_by 엣지 불가. O5(product는 priced_by≥1 또는 gap/양면)를 만족시키려 이 gap을 선언 — 실제 결함이 아니라 '고정가룩업(공식 없는 직접가)' 아키타입을 스키마 O5가 아직 1급으로 수용하지 않는 모델 공백(이 클러스터 첫 사례)"
-- gap_fill_from: "architect가 O5에 fixed-lookup 예외(t_prd_product_prices unit_price 실재 시 O5 충족) 추가하거나 fixed-lookup 아키타입 표현을 정의. 굿즈/파우치 고정가 상품(210·211·251·263 등) 전반에 재사용될 정책"
-- gap_owner: 설계
-- 본문: 가격 값은 아는데(verified·2,500) 온톨로지 배선 형식이 없어 정직 선언. 가격 있는 상품을 거짓 NEITHER-gap으로 넣지 않기 위한 구분 노드.

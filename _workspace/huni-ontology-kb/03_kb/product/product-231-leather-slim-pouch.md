@@ -7,6 +7,11 @@ sources:
   - {source_file: "live-snapshot/latest/t_prd_products.csv", source_locator: "키:PRD_000231 (prd_typ=PRD_TYPE.01·use_yn=Y·del_yn=N·nonspec_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
   - {source_file: "_workspace/huni-ontology-kb/01_curation/pack-stationery-goods.md", source_locator: "§1.3 하위군③ 파우치·백(레더 파우치/미니/필통 230~237·251~260)·§3.10 가격아키타입·§4 GAP표·§3.5 자재 empty-shell·§3.6 봉제 MISSING", captured_at: "2026-07-03", badge: candidate, src_id: SR-pack-stn}
 relations:
+  - {rel: in_category, target: category-CAT_000324, qualifier: sub, note: "굿즈 카테고리(보조·live t_prd_product_categories 20260702_1119)"}
+  - {rel: in_category, target: category-CAT_000011, qualifier: main, note: "굿즈 카테고리(main·live t_prd_product_categories 20260702_1119)"}
+  - {rel: uses_material, target: material-MAT_000008, note: "레더 substrate(USAGE.07)·마스터 del_yn=Y이나 정션 활성=load-bearing(정직 관찰·127 선례)"}
+  - {rel: has_size, target: size-SIZ_000435, note: "실 사이즈(t_prd_product_sizes 활성·dflt=Y)"}
+  - {rel: has_size, target: size-SIZ_000436, note: "실 사이즈(t_prd_product_sizes 활성·dflt=N)"}
   - {rel: references, target: gap-goods-sewing-missing, note: "봉제 공정 0행(has_process 미배선·empty on process axis)"}
   - {rel: references, target: gap-goods-neither, note: "가격 원천 부재(공식·고정가 둘 다 0행=견적 불가)"}
 props:

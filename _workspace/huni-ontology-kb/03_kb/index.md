@@ -4,7 +4,7 @@
 > 정본(SOT) = `03_kb/`. 그래프(`04_graph/`)는 이 파일들에서 빌드된 파생물 — 그래프만의 사실 없음.
 > 스키마 = `../02_ontology/`(v1.0.1) · 집필 컨벤션 = `.claude/skills/okb-ontology-authoring/SKILL.md`.
 >
-> **상태(2026-07-03·확장):** Phase 4 상품 노드 집필 완료 — 디지털인쇄 파일럿 **36상품(E1·PRD_000016~051)** + **스티커 파일럿 16상품(PRD_000052~067)** + 공유 축 + 공식/구성요소 + 용어·규칙·결정·의도·GAP. ★2026-07-03 스티커 공유 축 통합(병렬 L-3 중복 → 단일 소유권·하드 위반 0).
+> **상태(2026-07-04·확장):** Phase 4 상품 노드 집필 완료 — 굿즈/파우치/봉투 103상품(C2 축 배선·O5 하드 0·고정가룩업 26/NEITHER 다수) 추가. 이전: — 디지털인쇄 파일럿 **36상품(E1·PRD_000016~051)** + **스티커 파일럿 16상품(PRD_000052~067)** + 공유 축 + 공식/구성요소 + 용어·규칙·결정·의도·GAP. ★2026-07-03 스티커 공유 축 통합(병렬 L-3 중복 → 단일 소유권·하드 위반 0).
 > 36상품 전부 `priced_by`→공식→`has_component`→구성요소 **가격경로 연결**(038 형압명함만 `derived_from`→gap-038-no-price-path 정직 선언·O5 예외). 공유축 통합(260703)으로
 > 브로큰링크 해소 공유노드 21종(투명/명함박 자재 4·명함 고정가 공식 5·완제품가 구성요소 12) 일괄 mint(025/035/036/037/039 배선).
 > 나머지 needed_shared_nodes(018 자재2·019 PET/화이트공정·박색 8자식 등)는 상품별 GAP으로 정직 지연(rewire 미실행·honest GAP=위반 아님).
@@ -13,7 +13,7 @@
 
 ## 검색 라우팅 시작점 (nl-query-paths §0)
 
-1. **구체 상품 질의**("프리미엄엽서 100장 얼마") → [product/product-016-premium-postcard.md](product/product-016-premium-postcard.md)(프리미엄엽서 시작점) → `priced_by`→[formula/digital-formulas.md](formula/digital-formulas.md) → `has_component`→구성요소. (타 상품 진입점=아래 §상품 노드 E1) · **셋트/책자 질의**("하드커버책자 50부")=아래 §상품 노드 **셋트 계열**(부모 [product/product-072-hardcover-booklet.md](product/product-072-hardcover-booklet.md) 등 → `has_member`→구성원 → evaluate_set_price). · **문구 셋트 질의**("만년다이어리 얼마"·"스프링노트"·"먼슬리플래너")=§상품 노드 **문구 셋트 SB-1**(부모 [product/product-172-perpetual-diary-soft.md](product/product-172-perpetual-diary-soft.md)·[product/product-177-spring-note.md](product/product-177-spring-note.md) 등 → 고정가형·★단가행 sparse=badge candidate).
+1. **구체 상품 질의**("프리미엄엽서 100장 얼마") → [product/product-016-premium-postcard.md](product/product-016-premium-postcard.md)(프리미엄엽서 시작점) → `priced_by`→[formula/digital-formulas.md](formula/digital-formulas.md) → `has_component`→구성요소. (타 상품 진입점=아래 §상품 노드 E1) · **셋트/책자 질의**("하드커버책자 50부")=아래 §상품 노드 **셋트 계열**(부모 [product/product-072-hardcover-booklet.md](product/product-072-hardcover-booklet.md) 등 → `has_member`→구성원 → evaluate_set_price). · **문구 셋트 질의**("만년다이어리 얼마"·"스프링노트"·"먼슬리플래너")=§상품 노드 **문구 셋트 SB-1**(부모 [product/product-172-perpetual-diary-soft.md](product/product-172-perpetual-diary-soft.md)·[product/product-177-spring-note.md](product/product-177-spring-note.md) 등 → 고정가형·★단가행 sparse=badge candidate). · **굿즈/파우치/봉투 질의**("카드거울 얼마"·"에코백"·"레더 필통"·"양말")=아래 §상품 노드 **굿즈/파우치/봉투 계열**(비종이 단품·**고정가룩업**이면 [[gap-goods-fixed-lookup-no-formula]] 경유 t_prd_product_prices 단일가·**NEITHER-gap/empty-shell**이면 가격 미적재 정직 표기). 예: [product/product-185-card-mirror.md](product/product-185-card-mirror.md)(카드거울 2,500)·[product/product-270-canvas-eco-bag.md](product/product-270-canvas-eco-bag.md)(에코백 NEITHER)·[product/product-256-leather-flat-pencil-case.md](product/product-256-leather-flat-pencil-case.md)(레더필통 7,500).
 2. **용도 추천**("카페 오픈 나눠줄 것") → [intent/intents.md](intent/intents.md) `INTENT_*` → `references`→카테고리/상품.
 3. **조건 탐색**("양면 되는 엽서") → [axis/print-options.md](axis/print-options.md)·[axis/materials.md](axis/materials.md) 역탐색.
 4. **옵션 조합·제약**("오시랑 미싱 같이 돼?") → 상품 내 `optgroup-*`·`constraint-*` (예: [product/product-016-premium-postcard.md](product/product-016-premium-postcard.md) `optgroup-016-*` + `constraint-016-demo-exc`=오시↔미싱 상호배제 데모·`constraint-016-demo-vis`=표시조건). [DEMO] 제약은 badge=candidate(§31 거버넌스 확정 대기).
@@ -189,6 +189,152 @@ _캘린더(단품 완제품·셋트 아님)_
 - [product/product-112-wide-wall-calendar.md](product/product-112-wide-wall-calendar.md) — 와이드벽걸이캘린더(PRD_000112·완제품·와이드벽걸이 CAT_000116). PRF_DGP_CAL_WIDE·벽걸이 제본 PROC_000099·3절 판형.
 
 > **★셋트 축 배선(2026-07-03·Stage C2):** Stage B가 브로큰링크 회피로 프로즈로만 기록한 상품→축 엣지 132개를 실 relations로 배선(in_category 30·uses_material 60·has_size 14·has_process 13·has_plate_size 3·has_print_option 12·근거=set-needs-axis.md + live-snapshot 20260702_1119·`_meta/scripts/…`). Stage C1 미민팅 잔여는 Phase 4(2026-07-03·C-3/C-4)에서 처리: size-SIZ_000499 삭제(plate-SIZ_000499-gukc4가 판형 담당·종이류만 판형)·process-PROC_000001/017/056(택소노미 그룹 루트 references 명시)·PROC_000021→gap-071·PROC_000098→gap-set-088-redesign-pending 연결.
+
+**굿즈/파우치/봉투 계열 (파일럿 5번째 상품군·비종이 단품·★2 가격모델: 고정가룩업 26 + NEITHER/empty-shell 나머지·전부 완제품 단일)**
+> 굿즈/악세사리/파우치/백 완제품 단품(prd_typ_cd=PRD_TYPE.01·비종이=판형 없음). 가격 아키타입 2종=**고정가룩업**(t_prd_product_prices 단일 unit_price·공식 없음→[[gap-goods-fixed-lookup-no-formula]]·185 패턴) / **NEITHER-gap**(가격·공식 둘 다 부재→[[gap-goods-neither]])·일부 **empty-shell**(BOM 미충전). 축(카테고리/자재/사이즈)은 Stage C2 상품→축 배선(260704·live-snapshot 20260702_1119 실측·비종이 부속 오염은 uses_material 제외).
+
+_봉투/케이스 (CAT_000276)_
+- [product/product-001-opp-adhesive-envelope.md](product/product-001-opp-adhesive-envelope.md) — OPP접착봉투(001·PRD_000001). NEITHER-gap(가격/공식 부재).
+- [product/product-002-opp-non-adhesive-envelope.md](product/product-002-opp-non-adhesive-envelope.md) — OPP비접착봉투(002·PRD_000002). NEITHER-gap(가격/공식 부재).
+- [product/product-005-calendar-envelope.md](product/product-005-calendar-envelope.md) — 캘린더봉투(005·PRD_000005). NEITHER-gap(가격/공식 부재).
+- [product/product-283-tracing-paper-envelope.md](product/product-283-tracing-paper-envelope.md) — 트레싱지봉투(283·PRD_000283). NEITHER-gap(가격/공식 부재).
+
+_포장부자재·상품액세서리_
+- [product/product-011-magnet-rubber-plate.md](product/product-011-magnet-rubber-plate.md) — 자석고정용고무판(011·PRD_000011). NEITHER-gap(가격/공식 부재).
+- [product/product-015-refill-ink.md](product/product-015-refill-ink.md) — 만년스탬프 리필잉크(015·PRD_000015). NEITHER-gap(가격/공식 부재).
+
+_거울류 (CAT_000323/010)_
+- [product/product-183-tin-mirror.md](product/product-183-tin-mirror.md) — 틴거울(183·PRD_000183). NEITHER-gap(가격/공식 부재).
+- [product/product-184-compact-mirror.md](product/product-184-compact-mirror.md) — 컴팩트거울(184·PRD_000184). NEITHER-gap(가격/공식 부재).
+- [product/product-185-card-mirror.md](product/product-185-card-mirror.md) — 카드거울(185·PRD_000185). 고정가룩업 2,500원.
+- [product/product-186-square-hand-mirror.md](product/product-186-square-hand-mirror.md) — 사각손거울(186·PRD_000186). NEITHER-gap(가격/공식 부재).
+- [product/product-187-black-square-hand-mirror.md](product/product-187-black-square-hand-mirror.md) — 블랙사각손거울(187·PRD_000187). NEITHER-gap(가격/공식 부재).
+
+_코스터_
+- [product/product-188-leather-coaster.md](product/product-188-leather-coaster.md) — 레더코스터(188·PRD_000188). NEITHER-gap(가격/공식 부재).
+- [product/product-189-cork-coaster.md](product/product-189-cork-coaster.md) — 코르크코스터(189·PRD_000189). NEITHER-gap(가격/공식 부재).
+- [product/product-190-wood-coaster.md](product/product-190-wood-coaster.md) — 우드코스터(190·PRD_000190). NEITHER-gap(가격/공식 부재).
+- [product/product-191-linen-fabric-coaster.md](product/product-191-linen-fabric-coaster.md) — 린넨패브릭코스터(191·PRD_000191). NEITHER-gap(가격/공식 부재).
+- [product/product-192-diatomite-coaster.md](product/product-192-diatomite-coaster.md) — 규조토코스터(192·PRD_000192). NEITHER-gap(가격/공식 부재).
+
+_데코·생활소품_
+- [product/product-193-mug-cup.md](product/product-193-mug-cup.md) — 머그컵(193·PRD_000193). NEITHER-gap(가격/공식 부재).
+- [product/product-194-water-book-bottle.md](product/product-194-water-book-bottle.md) — 워터북보틀(194·PRD_000194). NEITHER-gap(가격/공식 부재).
+- [product/product-195-velvet-cushion.md](product/product-195-velvet-cushion.md) — 벨벳쿠션(195·PRD_000195). NEITHER-gap(가격/공식 부재).
+- [product/product-199-clear-fan.md](product/product-199-clear-fan.md) — 투명부채(199·PRD_000199). NEITHER-gap(가격/공식 부재) ·미출시(use_yn=N).
+
+_여행/아웃도어·데스크패드_
+- [product/product-196-leather-passport-case.md](product/product-196-leather-passport-case.md) — 레더여권케이스(196·PRD_000196). 고정가룩업 5,000원.
+- [product/product-197-mini-mat.md](product/product-197-mini-mat.md) — 미니매트(197·PRD_000197). NEITHER-gap(가격/공식 부재).
+- [product/product-198-picnic-mat.md](product/product-198-picnic-mat.md) — 피크닉매트(198·PRD_000198). NEITHER-gap(가격/공식 부재).
+- [product/product-210-slim-mousepad.md](product/product-210-slim-mousepad.md) — 초슬림마우스패드(210·PRD_000210). 고정가룩업 5,000원.
+- [product/product-211-desk-pad.md](product/product-211-desk-pad.md) — 장패드(211·PRD_000211). 고정가룩업 18,000원.
+
+_패션·패브릭 의류_
+- [product/product-205-socks.md](product/product-205-socks.md) — 양말(205·PRD_000205). 고정가룩업 3,000원.
+- [product/product-206-short-sleeve-tshirt.md](product/product-206-short-sleeve-tshirt.md) — 반팔티셔츠(206·PRD_000206). NEITHER-gap(가격/공식 부재).
+- [product/product-207-microfiber-towel.md](product/product-207-microfiber-towel.md) — 극세사타월(207·PRD_000207). NEITHER-gap(가격/공식 부재) ·미출시(use_yn=N).
+- [product/product-208-slogan.md](product/product-208-slogan.md) — 슬로건(208·PRD_000208). NEITHER-gap(가격/공식 부재) ·미출시(use_yn=N).
+- [product/product-209-hoodie.md](product/product-209-hoodie.md) — 후드티셔츠(209·PRD_000209). NEITHER-gap(가격/공식 부재).
+- [product/product-212-microfiber-cleaner.md](product/product-212-microfiber-cleaner.md) — 극세사클리너(212·PRD_000212). 고정가룩업 2,500원.
+
+_키링/톡/폰액세서리_
+- [product/product-200-pin-button.md](product/product-200-pin-button.md) — 핀버튼(200·PRD_000200). NEITHER-gap(가격/공식 부재).
+- [product/product-201-leather-strap-keyring.md](product/product-201-leather-strap-keyring.md) — 레더스트랩키링(201·PRD_000201). NEITHER-gap(가격/공식 부재).
+- [product/product-202-keycap-keyring.md](product/product-202-keycap-keyring.md) — 키캡키링(202·PRD_000202). NEITHER-gap(가격/공식 부재) ·미출시(use_yn=N).
+- [product/product-203-led-keycap-keyring.md](product/product-203-led-keycap-keyring.md) — LED투명키캡키링(203·PRD_000203). NEITHER-gap(가격/공식 부재) ·미출시(use_yn=N).
+- [product/product-219-band-tok.md](product/product-219-band-tok.md) — 밴드톡(219·PRD_000219). 고정가룩업 4,500원.
+- [product/product-220-phone-strap.md](product/product-220-phone-strap.md) — 폰스트랩(220·PRD_000220). NEITHER-gap(가격/공식 부재).
+- [product/product-227-mini-uchiwa-keyring.md](product/product-227-mini-uchiwa-keyring.md) — 미니우치와키링(227·PRD_000227). NEITHER-gap(가격/공식 부재) ·미출시(use_yn=N).
+
+_말랑 시리즈 (CAT_000189)_
+- [product/product-221-mallang-keyring.md](product/product-221-mallang-keyring.md) — 말랑키링(221·PRD_000221). NEITHER-gap(가격/공식 부재).
+- [product/product-222-mallang-jeungsa-holder.md](product/product-222-mallang-jeungsa-holder.md) — 말랑증사홀더(222·PRD_000222). NEITHER-gap(가격/공식 부재) ·미출시(use_yn=N).
+- [product/product-223-mallang-poca-holder.md](product/product-223-mallang-poca-holder.md) — 말랑포카홀더(223·PRD_000223). 고정가룩업 14,000원.
+- [product/product-224-mallang-name-tag.md](product/product-224-mallang-name-tag.md) — 말랑네임택(224·PRD_000224). 고정가룩업 12,000원.
+- [product/product-225-mallang-passport-case.md](product/product-225-mallang-passport-case.md) — 말랑여권케이스(225·PRD_000225). 고정가룩업 14,500원.
+
+_데스크·문구소품/북커버_
+- [product/product-204-mini-cd-album.md](product/product-204-mini-cd-album.md) — 미니CD앨범(204·PRD_000204). NEITHER-gap(가격/공식 부재) ·미출시(use_yn=N).
+- [product/product-213-tin-case.md](product/product-213-tin-case.md) — 틴케이스(213·PRD_000213). NEITHER-gap(가격/공식 부재).
+- [product/product-214-magnet-bookmark.md](product/product-214-magnet-bookmark.md) — 자석북마크(214·PRD_000214). NEITHER-gap(가격/공식 부재).
+- [product/product-215-clipboard.md](product/product-215-clipboard.md) — 클립보드(215·PRD_000215). NEITHER-gap(가격/공식 부재).
+- [product/product-216-clear-clipboard.md](product/product-216-clear-clipboard.md) — 투명클립보드(216·PRD_000216). NEITHER-gap(가격/공식 부재).
+- [product/product-217-perpetual-stamp.md](product/product-217-perpetual-stamp.md) — 만년스탬프(217·PRD_000217). NEITHER-gap(가격/공식 부재).
+- [product/product-218-tyvek-book-cover.md](product/product-218-tyvek-book-cover.md) — 타이벡북커버(218·PRD_000218). NEITHER-gap(가격/공식 부재).
+
+_응원/시즌·아크릴 굿즈_
+- [product/product-226-acrylic-shaker-corotto.md](product/product-226-acrylic-shaker-corotto.md) — 아크릴쉐이커코롯토(226·PRD_000226). 미출시·가격 미설정(gap-226-acryl-tbd placeholder).
+- [product/product-228-heart-picket.md](product/product-228-heart-picket.md) — 하트 이미지피켓(228·PRD_000228). NEITHER-gap(가격/공식 부재) ·미출시(use_yn=N).
+- [product/product-229-image-picket.md](product/product-229-image-picket.md) — 이미지피켓(229·PRD_000229). NEITHER-gap(가격/공식 부재).
+
+_레더파우치 (CAT_000324)_
+- [product/product-230-leather-flat-pouch.md](product/product-230-leather-flat-pouch.md) — 레더 플랫 파우치(230·PRD_000230). NEITHER-gap(가격/공식 부재).
+- [product/product-231-leather-slim-pouch.md](product/product-231-leather-slim-pouch.md) — 레더 슬림 파우치(231·PRD_000231). NEITHER-gap(가격/공식 부재).
+- [product/product-232-leather-triangle-pouch.md](product/product-232-leather-triangle-pouch.md) — 레더 삼각 파우치(232·PRD_000232). NEITHER-gap(가격/공식 부재).
+- [product/product-233-leather-volume-pouch.md](product/product-233-leather-volume-pouch.md) — 레더 볼륨 파우치(233·PRD_000233). NEITHER-gap(가격/공식 부재).
+- [product/product-234-leather-string-pouch.md](product/product-234-leather-string-pouch.md) — 레더 스트링 파우치(234·PRD_000234). NEITHER-gap(가격/공식 부재).
+- [product/product-235-leather-string-round-pouch.md](product/product-235-leather-string-round-pouch.md) — 레더 스트링 원형파우치(235·PRD_000235). 고정가룩업 16,500원.
+- [product/product-236-leather-flat-clutch.md](product/product-236-leather-flat-clutch.md) — 레더 플랫 클러치(236·PRD_000236). 고정가룩업 18,000원.
+- [product/product-237-leather-triangle-clutch.md](product/product-237-leather-triangle-clutch.md) — 레더 삼각 클러치(237·PRD_000237). 고정가룩업 20,000원.
+- [product/product-238-leather-ipad-laptop-pouch.md](product/product-238-leather-ipad-laptop-pouch.md) — 레더 아이패드/노트북 파우치(238·PRD_000238). NEITHER-gap(가격/공식 부재).
+
+_캔버스/광목/린넨 파우치 (CAT_000222)_
+- [product/product-239-canvas-flat-pouch.md](product/product-239-canvas-flat-pouch.md) — 캔버스 플랫 파우치(239·PRD_000239). NEITHER-gap(가격/공식 부재).
+- [product/product-240-canvas-triangle-pouch.md](product/product-240-canvas-triangle-pouch.md) — 캔버스 삼각 파우치(240·PRD_000240). NEITHER-gap(가격/공식 부재).
+- [product/product-241-canvas-strap-label-pouch.md](product/product-241-canvas-strap-label-pouch.md) — 캔버스 스트랩 라벨파우치(241·PRD_000241). empty-shell(BOM 미충전·NEITHER).
+- [product/product-242-cotton-string-label-pouch.md](product/product-242-cotton-string-label-pouch.md) — 광목 스트링 라벨파우치(242·PRD_000242). empty-shell(BOM 미충전·NEITHER).
+- [product/product-243-linen-string-pouch.md](product/product-243-linen-string-pouch.md) — 린넨 스트링 파우치(243·PRD_000243). NEITHER-gap(가격/공식 부재).
+
+_타이벡파우치 (CAT_000228)_
+- [product/product-244-tyvek-flat-pouch.md](product/product-244-tyvek-flat-pouch.md) — 타이벡 플랫 파우치(244·PRD_000244). empty-shell(BOM 미충전·NEITHER).
+- [product/product-245-tyvek-slim-pouch.md](product/product-245-tyvek-slim-pouch.md) — 타이벡 슬림 파우치(245·PRD_000245). empty-shell(BOM 미충전·NEITHER).
+- [product/product-246-tyvek-triangle-pouch.md](product/product-246-tyvek-triangle-pouch.md) — 타이벡 삼각 파우치(246·PRD_000246). empty-shell(BOM 미충전·NEITHER).
+- [product/product-247-tyvek-string-pouch.md](product/product-247-tyvek-string-pouch.md) — 타이벡 스트링 파우치(247·PRD_000247). empty-shell(BOM 미충전·NEITHER).
+- [product/product-248-tyvek-flat-clutch.md](product/product-248-tyvek-flat-clutch.md) — 타이벡 플랫 클러치(248·PRD_000248). 고정가룩업 12,500원.
+
+_메쉬파우치 (CAT_000234)_
+- [product/product-249-mesh-slim-pouch.md](product/product-249-mesh-slim-pouch.md) — 메쉬슬림파우치(249·PRD_000249). NEITHER-gap(가격/공식 부재).
+- [product/product-250-mesh-volume-pouch.md](product/product-250-mesh-volume-pouch.md) — 메쉬볼륨파우치(250·PRD_000250). NEITHER-gap(가격/공식 부재).
+
+_레더 미니파우치 (CAT_000237)_
+- [product/product-251-leather-flat-mini-pouch.md](product/product-251-leather-flat-mini-pouch.md) — 레더 플랫 미니파우치(251·PRD_000251). 고정가룩업 6,500원.
+- [product/product-252-leather-slim-mini-pouch.md](product/product-252-leather-slim-mini-pouch.md) — 레더 슬림 미니파우치(252·PRD_000252). NEITHER-gap(가격/공식 부재).
+- [product/product-253-leather-triangle-mini-pouch.md](product/product-253-leather-triangle-mini-pouch.md) — 레더 삼각 미니파우치(253·PRD_000253). 고정가룩업 7,200원.
+- [product/product-254-leather-volume-mini-pouch.md](product/product-254-leather-volume-mini-pouch.md) — 레더 볼륨 미니파우치(254·PRD_000254). NEITHER-gap(가격/공식 부재).
+- [product/product-255-leather-round-mini-pouch.md](product/product-255-leather-round-mini-pouch.md) — 레더 원형 미니파우치(255·PRD_000255). NEITHER-gap(가격/공식 부재).
+
+_레더 필통 (CAT_000243)_
+- [product/product-256-leather-flat-pencil-case.md](product/product-256-leather-flat-pencil-case.md) — 레더 플랫 필통(256·PRD_000256). 고정가룩업 7,500원.
+- [product/product-257-leather-slim-pencil-case.md](product/product-257-leather-slim-pencil-case.md) — 레더 슬림 필통(257·PRD_000257). 고정가룩업 8,500원.
+- [product/product-258-leather-triangle-pencil-case.md](product/product-258-leather-triangle-pencil-case.md) — 레더 삼각 필통(258·PRD_000258). 고정가룩업 8,500원.
+- [product/product-259-leather-volume-pencil-case.md](product/product-259-leather-volume-pencil-case.md) — 레더 볼륨 필통(259·PRD_000259). 고정가룩업 9,500원.
+- [product/product-260-leather-round-pencil-case.md](product/product-260-leather-round-pencil-case.md) — 레더 원형 필통(260·PRD_000260). 고정가룩업 10,500원.
+
+_캔버스 필통_
+- [product/product-261-canvas-flat-pencilcase.md](product/product-261-canvas-flat-pencilcase.md) — 캔버스 플랫 필통(261·PRD_000261). NEITHER-gap(가격/공식 부재).
+- [product/product-262-canvas-triangle-pencilcase.md](product/product-262-canvas-triangle-pencilcase.md) — 캔버스 삼각 필통(262·PRD_000262). NEITHER-gap(가격/공식 부재).
+
+_백류 에코백/토트/숄더/백팩 (CAT_000011)_
+- [product/product-263-leather-tote-bag.md](product/product-263-leather-tote-bag.md) — 레더토트백(263·PRD_000263). 고정가룩업 31,000원.
+- [product/product-264-leather-shoulder-bag.md](product/product-264-leather-shoulder-bag.md) — 레더숄더백(264·PRD_000264). NEITHER-gap(가격/공식 부재).
+- [product/product-265-linen-mini-eco-bag.md](product/product-265-linen-mini-eco-bag.md) — 린넨 미니에코백(265·PRD_000265). 고정가룩업 16,500원.
+- [product/product-266-linen-tote-bag.md](product/product-266-linen-tote-bag.md) — 린넨 토트백(266·PRD_000266). 고정가룩업 24,000원.
+- [product/product-267-linen-eco-bag.md](product/product-267-linen-eco-bag.md) — 린넨 에코백(267·PRD_000267). NEITHER-gap(가격/공식 부재).
+- [product/product-268-canvas-simple-bag.md](product/product-268-canvas-simple-bag.md) — 캔버스심플백(268·PRD_000268). NEITHER-gap(가격/공식 부재).
+- [product/product-269-canvas-pocket-simple-bag.md](product/product-269-canvas-pocket-simple-bag.md) — 캔버스 포켓심플백(269·PRD_000269). NEITHER-gap(가격/공식 부재).
+- [product/product-270-canvas-eco-bag.md](product/product-270-canvas-eco-bag.md) — 캔버스에코백(270·PRD_000270). NEITHER-gap(가격/공식 부재).
+- [product/product-271-canvas-shoulder-bag.md](product/product-271-canvas-shoulder-bag.md) — 캔버스숄더백(271·PRD_000271). NEITHER-gap(가격/공식 부재).
+- [product/product-272-canvas-pocket-shoulder-bag.md](product/product-272-canvas-pocket-shoulder-bag.md) — 캔버스 포켓숄더백(272·PRD_000272). 고정가룩업 58,000원.
+- [product/product-273-tyvek-double-sided-backpack.md](product/product-273-tyvek-double-sided-backpack.md) — 타이벡 양면 백팩(273·PRD_000273). empty-shell(BOM 미충전·NEITHER).
+- [product/product-274-tyvek-cooler-bottle-bag.md](product/product-274-tyvek-cooler-bottle-bag.md) — 타이벡보냉보틀백(274·PRD_000274). empty-shell(BOM 미충전·NEITHER).
+- [product/product-275-tyvek-cooler-mini-bag.md](product/product-275-tyvek-cooler-mini-bag.md) — 타이벡 보냉 미니백(275·PRD_000275). 고정가룩업 25,000원.
+- [product/product-276-tyvek-eco-bag.md](product/product-276-tyvek-eco-bag.md) — 타이벡 에코백(276·PRD_000276). empty-shell(BOM 미충전·NEITHER).
+- [product/product-277-tyvek-cooler-eco-bag.md](product/product-277-tyvek-cooler-eco-bag.md) — 타이벡 보냉에코백(277·PRD_000277). empty-shell(BOM 미충전·NEITHER).
+- [product/product-278-mesh-tote-bag.md](product/product-278-mesh-tote-bag.md) — 메쉬 토트백(278·PRD_000278). NEITHER-gap(가격/공식 부재).
+- [product/product-279-mesh-eco-bag.md](product/product-279-mesh-eco-bag.md) — 메쉬에코백(279·PRD_000279). NEITHER-gap(가격/공식 부재).
+
+> **★굿즈/파우치/봉투 축 배선(2026-07-04·Stage C2):** Stage B가 needs_axis로 보류한 상품→축 엣지를 live-snapshot 20260702_1119 junction 기준으로 배선(in_category 177·uses_material 38·has_size 10). 비종이 부속 오염(핀버튼 핀·키링고리 등)은 C1이 자재 노드를 mint하지 않아 uses_material 자동 제외([[gap-goods-material-contamination]]). 레더 MAT_000008=마스터 del_yn=Y이나 정션 활성=load-bearing 배선(127 선례). O5 잔여 5(196·205·210·211·212)=고정가룩업→[[gap-goods-fixed-lookup-no-formula]] references 추가·185 로컬 gap+219/223/224/225 로컬 price-formula-unbound gap 5종을 공유 gap으로 표준화(로컬 노드 은퇴). 근거=`_meta/goods-needs-axis.md`.
 
 ---
 

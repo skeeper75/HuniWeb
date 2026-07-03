@@ -360,3 +360,19 @@
 - gap_what: "281 카드봉투(화이트)·282 카드봉투(블랙) = 라이브 del_yn=Y(2026-06-30 논리삭제·상품 노드 미생성이 정답). 실체는 엽서(디지털인쇄 016 등)의 추가상품(addon) 라벨로 살아있고 260702에서 '165x115mm 50장→10장'으로 변경(master-diff AL6/AL7). ★판매 상품 노드로 오인 금지(T-10)·엽서 addon 축에서 현재값=10장(260702)으로 반영해야 함"
 - gap_fill_from: "Stage B 엽서(디지털인쇄) 노드의 has_addon(R14) 축에서 현재값(10장·260702) 반영·§7 dbmap. 카드봉투 상품 노드는 미생성 유지(del_yn=Y)"
 - gap_owner: staff
+
+## 굿즈/파우치/봉투 고정가룩업 공유 gap — Stage C1(okb-knowledge-builder 260704)
+
+<!-- 고정가룩업(t_prd_product_prices 직접 unit_price·공식 0행)의 O5 아키타입 공백 공유 노드. -->
+<!-- 185 로컬 gap(gap-185-fixed-lookup-no-formula)의 상위 공유본. 참조 재지정·로컬 제거는 C2/architect. C1은 공유 노드만 mint. -->
+
+### [gap-goods-fixed-lookup-no-formula] 굿즈/파우치 고정가룩업이 priced_by 공식 모델과 어긋남 (O5 아키타입 공백·공유) {unknown}
+- type: gap
+- anchor: none  # 사유: 가격은 t_prd_product_prices에 실재(verified)하나 frm_cd 공식이 없어 priced_by 엣지를 걸 대상(price_formula)이 없음 — 원천 부재가 아니라 스키마 아키타입(고정가 룩업) 미수용
+- badge: unknown
+- src: {source_file: "live-snapshot/latest/t_prd_product_prices.csv", source_locator: "키:PRD_000196/205/210/211/212 unit_price 실재(5000/3000/5000/18000/2500·260610 verbatim·GP-1 base 단일고정가) + t_prd_product_price_formulas 공식 0행(전수 실측)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- src: {source_file: "_workspace/huni-ontology-kb/01_curation/pack-stationery-goods.md", source_locator: "§3.10 고정가룩업(t_prd_product_prices 단일 unit_price)·§4", captured_at: "2026-07-04", badge: verified, src_id: SR-pack-sg}
+- gap_what: "굿즈/파우치/봉투 고정가룩업 상품(185·196·205·210·211·212·219·223·224·225·248·263·265·266·272·275 등)의 가격 = t_prd_product_prices 단일 unit_price(verbatim·실재·verified)로 완결이나 t_prd_product_price_formulas frm_cd 바인딩이 없어 priced_by 엣지 불가. O5(product는 priced_by≥1 또는 gap/양면)를 만족시키려 이 gap을 참조 — 실제 결함이 아니라 '고정가룩업(공식 없는 직접가)' 아키타입을 스키마 O5가 아직 1급으로 수용하지 않는 모델 공백(굿즈/파우치/봉투 클러스터 공유). 값은 스크립트 전사(손전사 금지·라이브 CSV 권위)"
+- gap_fill_from: "architect가 O5에 fixed-lookup 예외(t_prd_product_prices unit_price 실재 시 O5 충족) 추가하거나 fixed-lookup 가격아키타입 표현을 정의. 185 로컬 gap(gap-185-fixed-lookup-no-formula)은 이 공유 노드로 대체 권장 — 참조 재지정(product-185)·로컬 gap 제거는 C2/architect 소관"
+- gap_owner: 설계
+- 본문: 가격 값은 아는데(verified·라이브 unit_price 실재) 온톨로지 배선 형식이 없어 정직 선언하는 공유 노드. C2가 196/205/210/211/212 등 고정가룩업 product 노드에 `references → gap-goods-fixed-lookup-no-formula` 추가하면 O5 충족(현 빌드 O5 하드 5 → 0 준비). 가격 있는 상품을 거짓 NEITHER-gap으로 넣지 않기 위한 구분 노드.

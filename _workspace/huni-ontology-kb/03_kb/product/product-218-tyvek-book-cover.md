@@ -7,6 +7,7 @@ sources:
   - {source_file: "live-snapshot/latest/t_prd_products.csv", source_locator: "키:PRD_000218 (prd_typ_cd=PRD_TYPE.03·use_yn=Y·del_yn=N·min/max/incr 공란)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
   - {source_file: "_workspace/huni-ontology-kb/01_curation/pack-stationery-goods.md", source_locator: "§0.1 218 타이벡북커버(기성.03·인쇄 BOM N/A)·§1.2 굿즈", captured_at: "2026-07-04", badge: candidate, src_id: SR-pack-stn}
 relations:
+  - {rel: in_category, target: category-CAT_000130, qualifier: sub, note: "굿즈 카테고리(보조·live t_prd_product_categories 20260702_1119)"}
   - {rel: references, target: gap-goods-neither, note: "가격 원천 부재(price_formulas 0행·prices 0행)=NEITHER-gap. O5 충족"}
 props:
   prd_typ_cd: "PRD_TYPE.03"

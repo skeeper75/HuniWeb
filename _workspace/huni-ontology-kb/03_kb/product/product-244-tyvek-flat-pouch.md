@@ -8,6 +8,8 @@ sources:
   - {source_file: "_workspace/huni-ontology-kb/01_curation/pack-stationery-goods.md", source_locator: "§1.3 파우치(타이벡)·§3.5 자재 오염·§3.6 봉제 MISSING·§3.10 NEITHER-gap·§4", captured_at: "2026-07-04", badge: candidate, src_id: SR-pack-stn}
   - {source_file: "live-snapshot/latest/t_prd_product_price_formulas.csv", source_locator: "키:PRD_000244 가격공식 0행 + t_prd_product_prices.csv 동키 0행 + t_prd_product_processes.csv 0행(전수 실측)", captured_at: "live 20260702_1119", badge: candidate, src_id: SR-5-livesnap}
 relations:
+  - {rel: in_category, target: category-CAT_000228, qualifier: sub, note: "굿즈 카테고리(보조·live t_prd_product_categories 20260702_1119)"}
+  - {rel: in_category, target: category-CAT_000011, qualifier: main, note: "굿즈 카테고리(main·live t_prd_product_categories 20260702_1119)"}
   - {rel: references, target: gap-goods-neither, note: "PRF·고정가 둘 다 0행=견적 원천 부재(O5 충족)"}
   - {rel: references, target: gap-pouch-empty-shell, note: "실 타이벡 원단 자재 0행(MAT_000319/320/327=사이즈 라벨뿐)·공정 0행"}
   - {rel: references, target: gap-goods-sewing-missing, note: "봉제 공정 has_process 0행(MISSING)"}

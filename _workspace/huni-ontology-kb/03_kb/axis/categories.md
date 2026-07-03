@@ -209,3 +209,146 @@
 - anchor: t_cat_categories/CAT_000321
 - src: {source_file: "live-snapshot/latest/t_cat_categories.csv", source_locator: "키:CAT_000321(플래너·cat_lvl 2·상위 CAT_000008·disp_seq 1·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
 - props: {cat_nm: "플래너", cat_lvl: 2, upr_cat_cd: "CAT_000008", note: "만년다이어리 클러스터(172~175·293~298 완제품 10노드) + 먼슬리플래너(176)의 카테고리 축. 문구(CAT_000008) 하위. in_category는 상품 노드(Stage C2)가 배선"}
+
+## 굿즈/파우치/봉투 카테고리 — Stage C1(okb-knowledge-builder 260704)
+
+<!-- goods-needs-axis category 33줄 → dedup 24 unique. CAT_000181(여행/아웃도어)는 product-051-suncap이 이미 노드로 소유(canonical) → skip(L-3 중복 회피·consolidation은 C2/architect). 나머지 23 mint. -->
+<!-- in_category(product→category)는 상품 노드(Stage C2)가 배선. C1은 축 노드만 mint. upr_cat_cd는 props만(카테고리→상위 관계는 스키마 19종에 없음). -->
+
+### [category-CAT_000276] 봉투/케이스 {verified}
+- type: category
+- anchor: t_cat_categories/CAT_000276
+- src: {source_file: "live-snapshot/latest/t_cat_categories.csv", source_locator: "키:CAT_000276(봉투/케이스·cat_lvl 2·상위 CAT_000012·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {cat_nm: "봉투/케이스", cat_lvl: 2, upr_cat_cd: "CAT_000012", note: "001/002/005/283 in_category 대상(봉투 계열)"}
+
+### [category-CAT_000285] 포장부자재 {verified}
+- type: category
+- anchor: t_cat_categories/CAT_000285
+- src: {source_file: "live-snapshot/latest/t_cat_categories.csv", source_locator: "키:CAT_000285(포장부자재·cat_lvl 2·상위 CAT_000012·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {cat_nm: "포장부자재", cat_lvl: 2, upr_cat_cd: "CAT_000012", note: "011 in_category 대상"}
+
+### [category-CAT_000287] 상품액세서리 {verified}
+- type: category
+- anchor: t_cat_categories/CAT_000287
+- src: {source_file: "live-snapshot/latest/t_cat_categories.csv", source_locator: "키:CAT_000287(상품액세서리·cat_lvl 2·상위 CAT_000012·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {cat_nm: "상품액세서리", cat_lvl: 2, upr_cat_cd: "CAT_000012", note: "015 in_category 대상"}
+
+### [category-CAT_000130] 홀더/클립보드 {verified}
+- type: category
+- anchor: t_cat_categories/CAT_000130
+- src: {source_file: "live-snapshot/latest/t_cat_categories.csv", source_locator: "키:CAT_000130(홀더/클립보드·cat_lvl 2·상위 CAT_000008·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {cat_nm: "홀더/클립보드", cat_lvl: 2, upr_cat_cd: "CAT_000008", note: "215/216/218 in_category 대상(문구 하위)"}
+
+### [category-CAT_000010] 라이프 (root) {verified}
+- type: category
+- anchor: t_cat_categories/CAT_000010
+- src: {source_file: "live-snapshot/latest/t_cat_categories.csv", source_locator: "키:CAT_000010(라이프·cat_lvl 1·root·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {cat_nm: "라이프", cat_lvl: 1, upr_cat_cd: "", note: "굿즈 공통 root 카테고리(전 굿즈 상품 다수 공유·타 family 재사용). lvl2 데코소품/여행/패션/생활소품/응원시즌/기념품/폰케이스의 부모"}
+
+### [category-CAT_000328] 데코소품 {verified}
+- type: category
+- anchor: t_cat_categories/CAT_000328
+- src: {source_file: "live-snapshot/latest/t_cat_categories.csv", source_locator: "키:CAT_000328(데코소품·cat_lvl 2·상위 CAT_000010·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {cat_nm: "데코소품", cat_lvl: 2, upr_cat_cd: "CAT_000010", note: "193/194/195 in_category 대상"}
+
+### [category-CAT_000206] 패션 {verified}
+- type: category
+- anchor: t_cat_categories/CAT_000206
+- src: {source_file: "live-snapshot/latest/t_cat_categories.csv", source_locator: "키:CAT_000206(패션·cat_lvl 2·상위 CAT_000010·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {cat_nm: "패션", cat_lvl: 2, upr_cat_cd: "CAT_000010", note: "205/206/209 in_category 대상"}
+
+### [category-CAT_000323] 생활소품 {verified}
+- type: category
+- anchor: t_cat_categories/CAT_000323
+- src: {source_file: "live-snapshot/latest/t_cat_categories.csv", source_locator: "키:CAT_000323(생활소품·cat_lvl 2·상위 CAT_000010·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {cat_nm: "생활소품", cat_lvl: 2, upr_cat_cd: "CAT_000010", note: "207/212 in_category 대상"}
+
+### [category-CAT_000198] 응원/시즌 {verified}
+- type: category
+- anchor: t_cat_categories/CAT_000198
+- src: {source_file: "live-snapshot/latest/t_cat_categories.csv", source_locator: "키:CAT_000198(응원/시즌·cat_lvl 2·상위 CAT_000010·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {cat_nm: "응원/시즌", cat_lvl: 2, upr_cat_cd: "CAT_000010", note: "208·227/228/229(보조) in_category 대상"}
+
+### [category-CAT_000134] 데스크소품 {verified}
+- type: category
+- anchor: t_cat_categories/CAT_000134
+- src: {source_file: "live-snapshot/latest/t_cat_categories.csv", source_locator: "키:CAT_000134(데스크소품·cat_lvl 2·상위 CAT_000008·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {cat_nm: "데스크소품", cat_lvl: 2, upr_cat_cd: "CAT_000008", note: "210/211·213/214/217 in_category 대상(문구 하위)"}
+
+### [category-CAT_000189] 기념품/액세서리 {verified}
+- type: category
+- anchor: t_cat_categories/CAT_000189
+- src: {source_file: "live-snapshot/latest/t_cat_categories.csv", source_locator: "키:CAT_000189(기념품/액세서리·cat_lvl 2·상위 CAT_000010·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {cat_nm: "기념품/액세서리", cat_lvl: 2, upr_cat_cd: "CAT_000010", note: "200/201/202/203/204·221/222/223 in_category 대상"}
+
+### [category-CAT_000210] 폰케이스&액세서리 {verified}
+- type: category
+- anchor: t_cat_categories/CAT_000210
+- src: {source_file: "live-snapshot/latest/t_cat_categories.csv", source_locator: "키:CAT_000210(폰케이스&액세서리·cat_lvl 2·상위 CAT_000010·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {cat_nm: "폰케이스&액세서리", cat_lvl: 2, upr_cat_cd: "CAT_000010", note: "219/220 in_category 대상"}
+
+### [category-CAT_000009] 아크릴 (root) {verified}
+- type: category
+- anchor: t_cat_categories/CAT_000009
+- src: {source_file: "live-snapshot/latest/t_cat_categories.csv", source_locator: "키:CAT_000009(아크릴·cat_lvl 1·root·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {cat_nm: "아크릴", cat_lvl: 1, upr_cat_cd: "", note: "226 main 카테고리 root. 코롯토(CAT_000159)의 부모"}
+
+### [category-CAT_000159] 코롯토 {verified}
+- type: category
+- anchor: t_cat_categories/CAT_000159
+- src: {source_file: "live-snapshot/latest/t_cat_categories.csv", source_locator: "키:CAT_000159(코롯토·cat_lvl 2·상위 CAT_000009·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {cat_nm: "코롯토", cat_lvl: 2, upr_cat_cd: "CAT_000009", note: "226 보조 카테고리(아크릴 하위)"}
+
+### [category-CAT_000011] 에코백 (root) {verified}
+- type: category
+- anchor: t_cat_categories/CAT_000011
+- src: {source_file: "live-snapshot/latest/t_cat_categories.csv", source_locator: "키:CAT_000011(에코백·cat_lvl 1·root·main_cat_yn=Y·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {cat_nm: "에코백", cat_lvl: 1, upr_cat_cd: "", note: "굿즈 봉제(파우치/백) root. 전 파우치/에코백 상품 공통 상위. 레더파우치/미니파우치/필통/패브릭/타이벡/메쉬 파우치·타이벡/메쉬에코백의 부모. 261~275·277·278 main 분류"}
+
+### [category-CAT_000324] 레더파우치 {verified}
+- type: category
+- anchor: t_cat_categories/CAT_000324
+- src: {source_file: "live-snapshot/latest/t_cat_categories.csv", source_locator: "키:CAT_000324(레더파우치·cat_lvl 2·상위 CAT_000011·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {cat_nm: "레더파우치", cat_lvl: 2, upr_cat_cd: "CAT_000011", note: "230~238 in_category 대상"}
+
+### [category-CAT_000237] 미니파우치 {verified}
+- type: category
+- anchor: t_cat_categories/CAT_000237
+- src: {source_file: "live-snapshot/latest/t_cat_categories.csv", source_locator: "키:CAT_000237(미니파우치·cat_lvl 2·상위 CAT_000011·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {cat_nm: "미니파우치", cat_lvl: 2, upr_cat_cd: "CAT_000011", note: "251~255 in_category 대상"}
+
+### [category-CAT_000243] 필통 {verified}
+- type: category
+- anchor: t_cat_categories/CAT_000243
+- src: {source_file: "live-snapshot/latest/t_cat_categories.csv", source_locator: "키:CAT_000243(필통·cat_lvl 2·상위 CAT_000011·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {cat_nm: "필통", cat_lvl: 2, upr_cat_cd: "CAT_000011", note: "256~260 in_category 대상"}
+
+### [category-CAT_000222] 패브릭파우치 {verified}
+- type: category
+- anchor: t_cat_categories/CAT_000222
+- src: {source_file: "live-snapshot/latest/t_cat_categories.csv", source_locator: "키:CAT_000222(패브릭파우치·cat_lvl 2·상위 CAT_000011·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {cat_nm: "패브릭파우치", cat_lvl: 2, upr_cat_cd: "CAT_000011", note: "239/240/241/242 in_category 대상(리프)"}
+
+### [category-CAT_000228] 타이벡파우치 {verified}
+- type: category
+- anchor: t_cat_categories/CAT_000228
+- src: {source_file: "live-snapshot/latest/t_cat_categories.csv", source_locator: "키:CAT_000228(타이벡파우치·cat_lvl 2·상위 CAT_000011·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {cat_nm: "타이벡파우치", cat_lvl: 2, upr_cat_cd: "CAT_000011", note: "244/245/246/247/248 in_category 대상(리프)"}
+
+### [category-CAT_000234] 메쉬파우치 {verified}
+- type: category
+- anchor: t_cat_categories/CAT_000234
+- src: {source_file: "live-snapshot/latest/t_cat_categories.csv", source_locator: "키:CAT_000234(메쉬파우치·cat_lvl 2·상위 CAT_000011·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {cat_nm: "메쉬파우치", cat_lvl: 2, upr_cat_cd: "CAT_000011", note: "249/250 in_category 대상(리프)"}
+
+### [category-CAT_000263] 타이벡에코백 {verified}
+- type: category
+- anchor: t_cat_categories/CAT_000263
+- src: {source_file: "live-snapshot/latest/t_cat_categories.csv", source_locator: "키:CAT_000263(타이벡에코백·cat_lvl 2·상위 CAT_000011·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {cat_nm: "타이벡에코백", cat_lvl: 2, upr_cat_cd: "CAT_000011", note: "276 main 분류 in_category 대상"}
+
+### [category-CAT_000269] 메쉬에코백 {verified}
+- type: category
+- anchor: t_cat_categories/CAT_000269
+- src: {source_file: "live-snapshot/latest/t_cat_categories.csv", source_locator: "키:CAT_000269(메쉬에코백·cat_lvl 2·상위 CAT_000011·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {cat_nm: "메쉬에코백", cat_lvl: 2, upr_cat_cd: "CAT_000011", note: "279 main 분류 in_category 대상"}

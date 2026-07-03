@@ -514,3 +514,33 @@
 - src: {source_file: "live-snapshot/latest/t_mat_materials.csv", source_locator: "키:MAT_000261(무지내지·MAT_TYPE.21·규격/평량 공란·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
 - src: {source_file: "live-snapshot/latest/t_prd_product_materials.csv", source_locator: "키:(PRD_000302/304/306/308,MAT_000261) usage_cd=USAGE.01(정션 활성·내지 대표)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
 - props: {mat_typ_cd: "MAT_TYPE.21", 사양_ref: "전사표 MAT_000261(규격·평량 마스터 미기재)", note: "무지 내지 자재(302 스프링노트·304 스프링수첩·306 메모패드·308 중철노트 내지 USAGE.01). 무지 내지 4종 공용. ★min/max 미설정(커스텀인쇄 확장 예정)=gap-stn-muji-inner-minmax. 규격/평량 미상(원천 공란)"}
+
+## 굿즈/파우치 자재 — Stage C1(okb-knowledge-builder 260704)
+
+<!-- goods-needs-axis material 9줄 → dedup 8 unique. 이미 product-local canonical 4종 skip(consolidation은 C2/architect): MAT_000262 틴거울(product-183)·MAT_000185 캔버스(product-125)·MAT_000184 린넨(product-134)·MAT_000183 메쉬(product-128). 나머지 4 mint. -->
+<!-- uses_material(product→material)는 상품 노드(Stage C2)가 배선. C1은 축 노드만 mint. 규격/평량 없음(본체 substrate·마스터 공란)→props에 mat_typ_cd만. -->
+
+### [material-MAT_000268] 머그컵 (11온스) {verified}
+- type: material
+- anchor: t_mat_materials/MAT_000268
+- src: {source_file: "live-snapshot/latest/t_mat_materials.csv", source_locator: "키:MAT_000268(머그컵 (11온스)·mat_typ_cd MAT_TYPE.12·규격/평량 공란·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {mat_typ_cd: "MAT_TYPE.12", note: "머그컵 본체 substrate(193 uses_material 배선 대상). 비종이 굿즈 본체·규격/평량 마스터 공란"}
+
+### [material-MAT_000269] 워터북보틀 {verified}
+- type: material
+- anchor: t_mat_materials/MAT_000269
+- src: {source_file: "live-snapshot/latest/t_mat_materials.csv", source_locator: "키:MAT_000269(워터북보틀·mat_typ_cd MAT_TYPE.12·규격/평량 공란·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {mat_typ_cd: "MAT_TYPE.12", note: "워터북보틀 본체 substrate(194 uses_material 배선 대상). 500ml 변형=MAT_000343"}
+
+### [material-MAT_000343] 워터북보틀 500ml {verified}
+- type: material
+- anchor: t_mat_materials/MAT_000343
+- src: {source_file: "live-snapshot/latest/t_mat_materials.csv", source_locator: "키:MAT_000343(워터북보틀 500ml·mat_typ_cd MAT_TYPE.12·규격/평량 공란·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {mat_typ_cd: "MAT_TYPE.12", note: "워터북보틀 500ml 변형 substrate(194). 기본형=MAT_000269"}
+
+### [material-MAT_000008] 레더 (마스터 논리삭제·load-bearing) {verified}
+- type: material
+- anchor: t_mat_materials/MAT_000008
+- src: {source_file: "live-snapshot/latest/t_mat_materials.csv", source_locator: "키:MAT_000008(레더·mat_typ_cd MAT_TYPE.06·sel_typ_cd SEL_TYPE.01·규격/평량 공란·use_yn=Y·del_yn=Y)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- src: {source_file: "live-snapshot/latest/t_prd_product_materials.csv", source_locator: "키:(PRD_000251,MAT_000008) usage_cd=USAGE.07(정션 활성·레더 substrate 대표)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {mat_typ_cd: "MAT_TYPE.06", note: "★레더(가죽) substrate — 레더파우치/미니파우치/필통 등 다수 굿즈 공통 자재(uses_material 배선 대상). 마스터 del_yn=Y이나 정션(예 251) 활성=load-bearing → 보존(CAT_000116·SIZ_000196 선례). 263/264 등 실 substrate"}

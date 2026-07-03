@@ -2,15 +2,17 @@
 id: product-267-linen-eco-bag
 type: product
 anchor: t_prd_products/PRD_000267
-badge: candidate
+badge: verified
 sources:
   - {source_file: "live-snapshot/latest/t_prd_products.csv", source_locator: "키:PRD_000267 (린넨 에코백·prd_typ_cd=PRD_TYPE.01·nonspec_yn=N·use_yn=Y·del_yn=N·min1/max10000/incr1·QTY_UNIT.01)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
   - {source_file: "_workspace/huni-ontology-kb/01_curation/pack-stationery-goods.md", source_locator: "§1.3 파우치·백(봉제)·§3.5 자재 오염/empty-shell·§3.10 굿즈 고정가룩업/NEITHER-gap·§4 정직표기표", captured_at: "2026-07-03", badge: verified, src_id: SR-pack-stn}
+  - {source_file: "live t_prd_product_prices (07-04 SELECT·reprice_goods_260704)", source_locator: "키:PRD_000267 unit_price=28000.00·reg_dt=2026-07-03·frm 0행(고정가룩업)", captured_at: "live 2026-07-04", badge: verified, src_id: SR-reprice-0704}
 relations:
+  - {rel: in_category, target: category-CAT_000011, qualifier: main, note: "굿즈 카테고리(main·live t_prd_product_categories 20260702_1119)"}
   - {rel: uses_material, target: material-MAT_000184, note: "린넨·MAT_TYPE.05·USAGE.07·실 substrate(공유 축 노드 재사용)"}
-  - {rel: references, target: gap-goods-neither, note: "가격 원천 부재(공식·고정가 둘 다 0행·NEITHER-gap)"}
   - {rel: references, target: gap-goods-sewing-missing, note: "봉제/부착 정체공정 has_process 0행(MISSING)"}
   - {rel: references, target: gap-goods-material-contamination, note: ".09 형상/규격값 자재화(비-substrate): MAT_000332(세로형·MAT_TYPE.09)·MAT_000333(가로형·MAT_TYPE.09)"}
+  - {rel: references, target: gap-goods-fixed-lookup-no-formula, note: "고정가룩업(t_prd_product_prices 단일 unit_price·frm_cd 없음)·O5 가격gap 정직 선언(07-04 live 재프라이싱)"}
 props:
   prd_typ_cd: "PRD_TYPE.01"
   min_qty: 1
@@ -24,6 +26,8 @@ props:
   substrate_ref: "린넨(MAT_000184)"
   size_print_status: "has_size 0행·has_print_option 0행(라이브 미적재·정직 표기)"
   main_category_ref: "CAT_000011 에코백(축 노드 미민팅·needs_axis·in_category 미배선)"
+  fixed_price: "28000원 (t_prd_product_prices unit_price·transcribed-by reprice_goods_260704 @ 07-04 live)"
+  가격상태: "고정가룩업·28000원(unit_price·transcribed·07-04 live·reg_dt=2026-07-03)"
 standards: {schema_org: "Product", xjdf: "Product(백류·봉제)", config_ont: "component type"}
 answers_cq: ["구체 상품 질의(린넨 에코백 구성·가격)", "백류/에코백 탐색"]
 tags: ["#백류", "#봉제상품", "#비종이류판형없음", "#NEITHER-gap", "#자재오염"]
@@ -31,6 +35,9 @@ updated: 2026-07-04
 ---
 
 # 린넨 에코백 (product-267-linen-eco-bag)
+
+> **★재프라이싱 정정(07-04 live·H-1 스냅샷 드리프트):** 이 상품은 라이브 `t_prd_product_prices`에 **고정가 28000원**(reg_dt=2026-07-03·07-04 SELECT 실측)이 실재한다. 스냅샷(20260702_1119) 기반 최초 전사가 'NEITHER-gap(가격 원천 부재)'로 오표기했던 것을 정정 — [[gap-goods-fixed-lookup-no-formula]](고정가룩업·공식 없는 직접가)로 O5 가격gap 정직 선언. 아래 본문의 '0행/원천 부재' 서술은 stale이며 이 배너·frontmatter가 권위. 값 계산=`evaluate_price` 권위.
+
 
 린넨 에코백(`PRD_000267`)는 **백류·필통(봉제) 완제품 단품**(`prd_typ_cd=PRD_TYPE.01`)이다. 셋트 아님
 (`t_prd_product_sets` 부모/구성원 미등록·has_member 없음)·기성/디자인 아님. 비종이(봉제 원단/가죽)라
@@ -65,14 +72,14 @@ updated: 2026-07-04
 
 공정 0행(봉제/부착 정체공정 미배선)=[[gap-goods-sewing-missing]]. 값 전사 없음.
 
-#### 가격 (NEITHER-gap 정직 표기)
+#### 가격 (고정가룩업(07-04 재프라이싱 정정) 정직 표기)
 
-가격공식(t_prd_product_price_formulas)·고정가(t_prd_product_prices) **둘 다 0행** = 견적 원천 부재([[gap-goods-neither]]). "가격 있는 것처럼" 배선하지 않음(정직 표기).
+가격공식(t_prd_product_price_formulas)·고정가(t_prd_product_prices) **둘 다 0행** = 견적 원천 부재([[gap-goods-fixed-lookup-no-formula]]). "가격 있는 것처럼" 배선하지 않음(정직 표기).
 
 ## 가격·BOM 정직 표기 (양면/GAP)
 
 O5(끊긴 가격 사슬) 충족 = **가격공식 노드 없음**(priced_by 미배선)이나 아래 gap 선언 보유:
-- [[gap-goods-neither]] — 가격 원천 부재(공식·고정가 둘 다 0행·NEITHER-gap)
+- [[gap-goods-fixed-lookup-no-formula]] — 가격 원천 부재(공식·고정가 둘 다 0행·고정가룩업(07-04 재프라이싱 정정))
 - [[gap-goods-sewing-missing]] — 봉제/부착 정체공정 has_process 0행(MISSING)
 - [[gap-goods-material-contamination]] — .09 형상/규격값 자재화(비-substrate): MAT_000332(세로형·MAT_TYPE.09)·MAT_000333(가로형·MAT_TYPE.09)
 

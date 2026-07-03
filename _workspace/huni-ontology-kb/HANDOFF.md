@@ -1,10 +1,17 @@
-# HANDOFF — Huni-Ontology-KB (§33) · 2026-07-03
+# HANDOFF — Huni-Ontology-KB (§33) · 2026-07-04
 
 ## 다음 시작점
 
-**디지털36+스티커16+실사28+셋트계열42+문구셋트25 = 147상품 완성(GO)** — 다음은 **문구/굿즈 나머지 서브배치**(SB-4 봉투5 → SB-2 굿즈~70 → SB-3 파우치~33·팩 `pack-stationery-goods.md` §5). ★대부분 empty-shell/NEITHER-gap(가격 원천 부재)이라 "정직 GAP 표기"가 주 산출. **아크릴 146~171(26)은 별도 pack-acrylic 권장**(면적매트릭스). `huni-ontology-kb-orchestrator`로 "<서브배치> KB 확장".
+**디지털36+스티커16+실사28+셋트42+문구셋트25+굿즈파우치봉투103 = 250상품 완성(GO)** — 문구/굿즈 그룹(순번 5) 전체 완료. 다음은 **아크릴 146~171(26·순번 6)** — 별도 `pack-acrylic` 필요(면적매트릭스·전용 recipe·226 쉐이커코롯토 등 TBD 포함). `huni-ontology-kb-orchestrator`로 "아크릴 KB 확장".
 루프는 `_meta/expansion-plan.md` §1~§4 그대로(팩[slug=product-NNN-kebab 강제]→Stage A 공유 스캐폴드 선민팅→Stage B 클러스터 팬아웃[자기 파일만·미민팅축은 needs_axis 반환]→Stage C1 축민팅+C2 엣지배선/index→3축 적대검증→질의 게이트).
-★실측 워크플로 재사용: `_meta/workflows/okb-{set,stn}-build-stageB.js`(클러스터 팬아웃)·`okb-{set,stn}-verify.js`(3축 검증) 복사·수정.
+★실측 워크플로 재사용: `_meta/workflows/okb-{set,stn,goods}-build-stageB.js`(클러스터 팬아웃)·`okb-{set,stn,goods}-verify.js`(3축 검증) 복사·수정.
+
+## 굿즈/파우치/봉투(SB-2/3/4) 교훈 (반영됨·중요)
+- ★**O5 코드 spec §151 정렬 + 가격 gap 화이트리스트**(`04_graph/build_graph.py` L429~·2026-07-04): O5(끊긴 가격사슬)는 priced_by/derived_from **또는 가격류 gap 선언**(type=gap·id 힌트 `PRICE_GAP_HINTS`=neither/fixed-lookup/price-unloaded/sparse-grid/redesign-pending/fixedprice/price-pending/tbd)으로 충족. **비가격 gap**(sewing/contamination/empty-shell/UI)만으로는 O5 우회 불가. → NEITHER-gap·미출시 등 진짜 가격 부재 상품의 정직 표기 경로. **graph-build-spec 변경이력에 기록 필요**.
+- ★**고정가룩업(fixed-lookup) 모델**: 굿즈 다수 = t_prd_product_prices 직접 unit_price·공식 없음 → priced_by 불가 → `references → gap-goods-fixed-lookup-no-formula`(가격 gap·O5) + **props에 값 기재**(그래프-only 질의) + badge=verified. NEITHER-gap = prices AND formulas 둘 다 0행(진짜 부재)·gap-goods-neither·candidate.
+- ★**live-snapshot(20260702_1119) 노후 — 굿즈 재프라이싱은 신규 라이브 SELECT로**: 병행 세션이 굿즈 가격 적재 중(07-03/04)이라 스냅샷 기반 빌드가 ~33상품을 "가격 부재"로 오표기(H-1·Phase4 NO-GO). 교정=신규 라이브 07-04 전수 SELECT 재프라이싱. **스냅샷 재캡처가 후속 필요**(240 신규 공식 등 anchor:none 승격 대기).
+- ★**색상값(화이트/블랙·MAT_TYPE.08)은 substrate 자재 아님** — uses_material 배선 금지(오염·gap-goods-material-contamination). 실 원단/금속만.
+- **비종이(굿즈/파우치/봉투) 판형없음**·봉투 001/002/005 라이브=기성(.03)(팩 §1.4 ".01" STALE).
 
 ## 문구 셋트(SB-1) 교훈 (반영됨)
 - **sparse grid 정직 프레이밍**[중요]: 단가행 1~2셀=**등록 사이즈가 적을 뿐·등록 사이즈는 PRICE≠0**(off-grid만 견적0·수량 min_qty=1 단일밴드로 전량 커버). "전 사이즈 견적0" 과대 기술 금지 → 부모 badge=candidate + gap-stn-sparse-grid 워딩 정밀(게이트 오판 방지).

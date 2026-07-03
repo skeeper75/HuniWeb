@@ -379,3 +379,90 @@
 - src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "키:SIZ_000196(A6(105x148mm)·work 105.00x148.00·cut 105.00x148.00·use_yn=Y·del_yn=Y)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
 - src: {source_file: "live-snapshot/latest/t_prd_product_sizes.csv", source_locator: "키:(PRD_000181,SIZ_000196) dflt_yn=Y·del_yn=N(정션 활성)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
 - props: {siz_nm_ref: "전사표 SIZ_000196(A6 105x148mm)", note: "★181 정철노트 부모 유일 사이즈. 마스터 del_yn=Y이나 정션(PRD_000181,SIZ_000196) 활성=load-bearing → 보존. has_size는 상품 노드(Stage C2)가 배선"}
+
+## 굿즈/파우치 사이즈 — Stage C1(okb-knowledge-builder 260704)
+
+<!-- goods-needs-axis size 11줄 → 실 사이즈 코드 13(explicit 10 + pouch-axis 복합키 대표 3: 448/246/449). 이미 product-186 local canonical 3종 skip(consolidation은 C2/architect): SIZ_000384(S)·SIZ_000386(M)·SIZ_000388(L). 나머지 10 mint. -->
+<!-- L-17 정션 복합키 대표키: 448(241)·246·449(242)는 t_prd_product_sizes 실재이나 마스터 t_siz_sizes에도 실재→anchor=t_siz_sizes/SIZ_xxx(대표키). 나머지 파우치 사이즈가 t_prd_product_plate_sizes에만 있는 것(비종이 판형 오용)은 has_plate_size 금지·미민팅. -->
+<!-- has_size(product→size)는 상품 노드(Stage C2)가 배선. 치수는 아래 전사표(transcribed-by)에만. -->
+
+## 굿즈/파우치 치수 전사표 (권위 = 라이브 마스터)
+
+<!-- transcribed-by: awk -F',' from live-snapshot/latest/t_siz_sizes.csv (snap_20260702_1119) work=work_width x work_height·cut=cut_width x cut_height @ 2026-07-04 -->
+| siz_cd | 라벨 | 작업(work mm) | 재단(cut mm) |
+|---|---|---|---|
+| SIZ_000406 | 2x2구 | 2x2 | 2x2 |
+| SIZ_000433 | 220x300 | 220x300 | — |
+| SIZ_000434 | 260x340 | 260x340 | — |
+| SIZ_000435 | 220x294 | 220x294 | — |
+| SIZ_000436 | 260x374 | 260x374 | — |
+| SIZ_000437 | 440x160 | 440x160 | — |
+| SIZ_000438 | 520x200 | 520x200 | — |
+| SIZ_000448 | 70x100 | 70x100 | — |
+| SIZ_000246 | 100x70 | 100x70 | 100x70 |
+| SIZ_000449 | 100x40 | 100x40 | — |
+
+## 굿즈/파우치 사이즈 노드
+
+### [size-SIZ_000406] 2x2구 (키캡 구수 규격) {verified}
+- type: size
+- anchor: t_siz_sizes/SIZ_000406
+- src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "키:SIZ_000406(2x2구·impos_yn=N·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {siz_nm_ref: "전사표 SIZ_000406", note: "202 유일 사이즈. 키캡 구수(2x2) 규격 — 길이 mm가 아닌 구수 축(작업/재단 동일·impos_yn=N)"}
+
+### [size-SIZ_000433] 220x300 (플랫파우치 M) {verified}
+- type: size
+- anchor: t_siz_sizes/SIZ_000433
+- src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "키:SIZ_000433(220x300·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {siz_nm_ref: "전사표 SIZ_000433", note: "230 플랫파우치 M(dflt·option_group OPT_000073 사이즈 참조). 재단치수 마스터 공란"}
+
+### [size-SIZ_000434] 260x340 (플랫파우치 L) {verified}
+- type: size
+- anchor: t_siz_sizes/SIZ_000434
+- src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "키:SIZ_000434(260x340·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {siz_nm_ref: "전사표 SIZ_000434", note: "230 플랫파우치 L. 재단치수 마스터 공란"}
+
+### [size-SIZ_000435] 220x294 (슬림파우치) {verified}
+- type: size
+- anchor: t_siz_sizes/SIZ_000435
+- src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "키:SIZ_000435(220x294·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {siz_nm_ref: "전사표 SIZ_000435", note: "231 슬림파우치(dflt). 재단치수 마스터 공란"}
+
+### [size-SIZ_000436] 260x374 (슬림파우치) {verified}
+- type: size
+- anchor: t_siz_sizes/SIZ_000436
+- src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "키:SIZ_000436(260x374·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {siz_nm_ref: "전사표 SIZ_000436", note: "231 슬림파우치. 재단치수 마스터 공란"}
+
+### [size-SIZ_000437] 440x160 (삼각파우치) {verified}
+- type: size
+- anchor: t_siz_sizes/SIZ_000437
+- src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "키:SIZ_000437(440x160·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {siz_nm_ref: "전사표 SIZ_000437", note: "232 삼각파우치(dflt). 재단치수 마스터 공란"}
+
+### [size-SIZ_000438] 520x200 (삼각파우치) {verified}
+- type: size
+- anchor: t_siz_sizes/SIZ_000438
+- src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "키:SIZ_000438(520x200·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {siz_nm_ref: "전사표 SIZ_000438", note: "232 삼각파우치. 재단치수 마스터 공란"}
+
+### [size-SIZ_000448] 70x100 (파우치) {verified}
+- type: size
+- anchor: t_siz_sizes/SIZ_000448
+- src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "키:SIZ_000448(70x100·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- src: {source_file: "live-snapshot/latest/t_prd_product_sizes.csv", source_locator: "키:(PRD_000241,SIZ_000448) dflt_yn=Y·del_yn=N(정션 활성·대표키)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {siz_nm_ref: "전사표 SIZ_000448", note: "241 파우치 유일 사이즈(t_prd_product_sizes 실재). 재단치수 마스터 공란"}
+
+### [size-SIZ_000246] 100x70 (파우치) {verified}
+- type: size
+- anchor: t_siz_sizes/SIZ_000246
+- src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "키:SIZ_000246(100x70·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- src: {source_file: "live-snapshot/latest/t_prd_product_sizes.csv", source_locator: "키:(PRD_000242,SIZ_000246) dflt_yn=Y·del_yn=N(정션 활성·대표키)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {siz_nm_ref: "전사표 SIZ_000246", note: "242 파우치 사이즈(dflt·t_prd_product_sizes 실재). 449와 공유"}
+
+### [size-SIZ_000449] 100x40 (파우치) {verified}
+- type: size
+- anchor: t_siz_sizes/SIZ_000449
+- src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "키:SIZ_000449(100x40·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- src: {source_file: "live-snapshot/latest/t_prd_product_sizes.csv", source_locator: "키:(PRD_000242,SIZ_000449) del_yn=N(정션 활성·대표키)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {siz_nm_ref: "전사표 SIZ_000449", note: "242 파우치 2번째 사이즈(t_prd_product_sizes 실재). 246과 공유"}
