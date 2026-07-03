@@ -62,6 +62,12 @@
 
 ## 진행 이력
 
+### 2026-07-04 굿즈파우치 GB-2 파일럿 COMMIT 완료·실화면 검증 통과 (`09_load/goods-pouch-gb2-pilot-260704/`)
+- 캔버스 삼각 파우치(240) variant 고정가 **공식식(방향2)** 종단 15행. ★방향 판별: evaluate_price는 직접단가 XOR 공식(배타)라 variant 선택형은 공식+구성요소가 유일 정합·단 base 구성요소=명시가 grid(현수막 "완제품가" 동형).
+- 공유 자산 `PRF_GOODS_FIXED_SIZ`+`COMP_GOODS_FIXED_SIZ`(use_dims=[siz_cd]·단가형) mint → 전 32 variant 동형 전파용. siz mint 2 + CPQ 옵션(사이즈 택1) + 오적재 M/L 자재 정리(240만·공유 무영향).
+- webadmin 실화면: 240 M=9,800·L=11,500·M×10=98,000(src=FORMULA). 필수 사이즈옵션이 선택 가드.
+- 잔여: variant 32 동형 전파·무가격 5 BLOCKED·추가상품 addon·수량구간 할인 t_dsc_*.
+
 ### 2026-07-04 굿즈파우치 Phase 1 COMMIT 완료·실화면 검증 통과 (`09_load/goods-pouch-price-260704/`)
 - `t_prd_product_prices` UPSERT **33행**(단일가 미적재분·엑셀 verbatim·단가합 516,800·§21 GP-1 동형·신규 mint 0).
 - 무가격 **71→38**(=variant 33 + 무가격 5). with_direct 26→59.

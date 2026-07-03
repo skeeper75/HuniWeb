@@ -1,6 +1,33 @@
 # Huni-DBMap — HANDOFF (다음 세션 재시작 포인터)
 
-## ★★최신 현황 (**상품마스터 11시트 적재단계 = 전 시트 진단 + 돈영향 갭 라이브 COMMIT** — 2026-07-03)
+## ★★최신 현황 (**미적재 2시트 가격 적재 + 굿즈 variant 공식식 파일럿 — 라이브 COMMIT 4건** — 2026-07-04)
+
+적재단계 진단(07-03)이 지목한 **진짜 미적재 2시트**(상품악세사리·굿즈파우치)의 가격을 라이브 적재. 전부 webadmin 실화면(admin simulate) 검증·undo/물리백업 보유.
+
+### ★가격 구성 모델 정본 (사용자 확정·relitigate 금지)
+- **본체 가격 = 원자합산형 | 고정단가형**(상품군별 택1). 그 위에 **추가상품·추가옵션(부자재) = 별도 합산**(evaluate_price 밖 addon_total).
+- evaluate_price base source = **직접단가(product_prices/template_prices) XOR 공식**(pricing.py if/else 배타). 직접단가는 (prd_cd,apply_ymd) 단일가라 variant 불가.
+- **variant 선택형 본체**(M/L·구수·기종 등)는 **공식+구성요소가 유일 정합 경로**(base 구성요소 use_dims=[siz_cd]·명시가 grid·일반현수막 "실사 완제품가" 동형). 단 명시가라 (가격포함) 성격 유지 — **"고정단가 ≠ 공식 배타"**.
+- 단일가(no variant)=직접단가(product_prices). 추가상품=addon 별도합산. 수량구간할인(문구·굿즈·아크릴)=t_dsc_* 별도 곱.
+
+### 이번 세션 라이브 COMMIT (되돌리지 말 것·전부 실화면 검증·undo 보유)
+1. **상품악세사리 Phase 1** (`09_load/product-accessory-price-260703/`): `t_prd_template_prices` 34행(엑셀 verbatim·단가합 82,000). 저청구 22 템플릿 해소(엽서·포토카드·접지카드·스티커·만년스탬프·아크릴키링 addon). simulate 직접4+addon경로 2,200.
+2. **상품악세사리 GAP-4** (`09_load/product-accessory-gap4-260704/`): 누락 24 variant 템플릿 mint(TMPL-000067~090)+가격(단가합 87,550·봉투누락치수17+행택끈3+자석1+우드행거3). 활성 템플릿 34→58·priced 58/58.
+3. **굿즈파우치 Phase 1** (`09_load/goods-pouch-price-260704/`): `t_prd_product_prices` 33행(단일가·단가합 516,800·§21 GP-1 동형). 무가격 71→38. simulate 5건 정확.
+4. **굿즈파우치 GB-2 파일럿** (`09_load/goods-pouch-gb2-pilot-260704/`): 캔버스 삼각 파우치(240) variant 고정가 **공식식(방향2)** 종단 15행. ★공유 자산 `PRF_GOODS_FIXED_SIZ`+`COMP_GOODS_FIXED_SIZ`(use_dims=[siz_cd]·단가형) mint=전 32 전파용. siz mint 2+product_sizes+단가행 verbatim+바인딩+CPQ 사이즈옵션(택1·mand)+오적재 M/L 자재 정리(240만·공유 14/13상품 무영향). webadmin M=9,800/L=11,500/M×10=98,000(src=FORMULA).
+
+### 다음 시작점 (우선순위)
+1. **[권장] GB-2 동형 전파** — variant 나머지 **32상품**에 파일럿 패턴 적용. 공유 `PRF_GOODS_FIXED_SIZ`/`COMP_GOODS_FIXED_SIZ` **재사용**, 상품마다 {variant siz mint(product-unique)+product_sizes+component_prices verbatim+바인딩+CPQ 옵션→siz_cd+오적재 자재 링크 정리}. variant 축 이질(구수/기종/치수/인용)이나 전부 **이산 variant→siz_cd→고정가**로 통일. 대표(240) superset 완주로 전파 준비 완료. variant 33=240 완주+32 잔여. 엑셀 값=`24_master-extract-260610/goods-pouch-l1.csv` 상품(옵션)↔가격.
+2. **추가상품/수량구간할인 배선** — 볼체인/스탠드/잉크 addon 연결(`t_prd_product_addons`·상품악세사리 템플릿 재사용) + 굿즈/문구/아크릴 `t_dsc_*` 구간할인 링크(현재 상품 미연결).
+3. **상품악세사리 후속** — GAP-4 신규 치수 템플릿을 부모상품 addon 메뉴 노출(①UI·per-parent)·003 트래싱지 카드봉투(del_yn=Y) 삭제의도 실무진 확인.
+4. **무가격 5**(투명부채·미니CD앨범·극세사타월·타이벡북커버·말랑증사홀더)=엑셀도 가격無·실무진 BLOCKED.
+
+### 미해결/블로커
+- 굿즈 variant 32 전파(대규모·기계적)·무가격 5(실무진)·추가상품 addon·수량구간할인 링크·가공 추가옵션(에폭시/맥세이프 7행)·GAP-4 addon 노출·003 삭제의도. 굿즈 variant 축이 siz_cd로 통일되나 폰케이스 기종 40종=siz 40 mint 규모.
+
+---
+
+## ★직전 현황 (**상품마스터 11시트 적재단계 = 전 시트 진단 + 돈영향 갭 라이브 COMMIT** — 2026-07-03)
 전체 지도·상세 = `29_readiness/_SUMMARY-5sheets-260703.md`(11시트 표). 핵심 반전: "새 적재" 전제는 **8/11 시트 stale**(이미 적재됨). 진짜 미적재=상품악세사리·굿즈파우치 2시트.
 
 ### 다음 시작점 (우선순위)
