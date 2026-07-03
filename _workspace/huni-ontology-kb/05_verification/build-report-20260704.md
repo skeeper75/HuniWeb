@@ -2,27 +2,27 @@
 
 > build_graph.py · 정본 /Users/innojini/Dev/HuniWeb/_workspace/huni-ontology-kb/03_kb → 04_graph. 생성=빌드(검증은 별도 레인·okb-adversarial-gate).
 
-- 판정: **PASS(하드 0)** · 하드 위반 0 · 소프트 경고 640
-- 노드 1361 · 엣지 4295
-- 멱등 해시: nodes.jsonl=8e5cc7c6efe16c2d · edges.jsonl=dd69ecd03252f51d
+- 판정: **PASS(하드 0)** · 하드 위반 0 · 소프트 경고 720
+- 노드 1485 · 엣지 4568
+- 멱등 해시: nodes.jsonl=f4be9775d3e220d4 · edges.jsonl=a7fa19e5ca6596c0
 
 ## 노드 수 (타입별)
-- bundle_qty: 58
-- category: 65
+- bundle_qty: 64
+- category: 68
 - constraint: 10
 - decision: 12
 - gap: 229
 - intent: 3
-- material: 152
-- option_group: 134
+- material: 162
+- option_group: 146
 - plate_size: 23
-- price_component: 122
-- price_formula: 82
+- price_component: 134
+- price_formula: 97
 - print_option: 4
-- process: 67
-- product: 250
+- process: 71
+- product: 274
 - rule: 7
-- size: 136
+- size: 174
 - term: 7
 
 ## 엣지 수 (rel별)
@@ -30,25 +30,25 @@
 - constrains: 11
 - decided_because: 19
 - derived_from: 54
-- has_component: 200
+- has_component: 218
 - has_member: 43
-- has_option_group: 134
+- has_option_group: 146
 - has_plate_size: 74
 - has_print_option: 112
-- has_process: 283
-- has_qty_rule: 58
-- has_size: 283
-- in_category: 365
-- option_refs: 291
-- priced_by: 118
-- references: 1807
-- uses_material: 424
+- has_process: 302
+- has_qty_rule: 64
+- has_size: 363
+- in_category: 392
+- option_refs: 298
+- priced_by: 143
+- references: 1859
+- uses_material: 451
 
 ## badge 분포
-- candidate: 72
+- candidate: 86
 - defect: 20
 - unknown: 227
-- verified: 1042
+- verified: 1152
 
 ## 무결성 6검사
 - I-1 고아(하드 유형 product/formula/component): 0
@@ -66,6 +66,15 @@
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): material-MAT_000372 :: - 본문: 260702가 새로 추가한 투명후지 소재(연당가 222,000/국4절 740/평량 50). 라이브
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): material-MAT_000164 :: - authority_value: "260702 연당가=81,500·국4절가=272·평량=57(무변)·규격 
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): size-SIZ_000170 :: - current_value: "052 has_size junction SIZ_000170 활성(del_yn
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): component-COMP_ACRYL_CLEAR3T :: - props: {prc_typ_cd: "PRICE_TYPE.02", use_dims: '["mat_cd",
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): component-COMP_ACRYL_NAMETAG_GS :: - props: {prc_typ_cd: "PRICE_TYPE.02", use_dims: '["siz_cd",
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): component-COMP_ACRYL_BALLPEN :: - props: {prc_typ_cd: "PRICE_TYPE.02", use_dims: '["siz_cd",
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): component-COMP_ACRYL_FREESTAND :: - props: {prc_typ_cd: "PRICE_TYPE.02", use_dims: '["siz_cd",
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): component-COMP_ACRYL_CARABINER :: - props: {prc_typ_cd: "PRICE_TYPE.02", use_dims: '["siz_cd",
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): component-COMP_ACRYL_MINIPART_TBD :: - rel: {rel: references, target: gap-acryl-tbd-formula-no-pr
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): component-COMP_ACRYL_MINIPART_TBD :: - props: {prc_typ_cd: "PRICE_TYPE.02", use_dims: '["siz_cd",
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): component-COMP_ACRYL_COROTTO :: - props: {prc_typ_cd: "PRICE_TYPE.01", use_dims: '["siz_widt
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): formula-PRF_ACRYL_MINIPART :: - rel: {rel: references, target: gap-acryl-tbd-formula-no-pr
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): component-COMP_HC_MUSEON_COVERBIND :: - props: {prc_typ_cd: "PRICE_TYPE.01", comp_typ_cd: "PRC_COM
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): formula-PRF_LEATHER_RINGBINDER_SET :: - props: {archetype: "원자합산형", prc_typ: "셋트조합(COVERBIND)", no
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): formula-PRF_PCB_FIXED :: - props: {archetype: "고정가", prc_typ: "부모 all-in", note: "094
@@ -152,6 +161,31 @@
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): optgroup-135-gagong :: - src: {source_file: "live-snapshot/latest/t_prd_product_opt
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-144-material-absent :: - gap_fill_from: "실무진(보드/우드 5상품 소재 정책·pack §3.5) + L1 원본 자재 
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-145-qtytier-floor :: - gap_what: "상품 마스터 min_qty=1인데 가격 구성요소(COMP_POSTER_MINI_BAN
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-146-acrylic-keyring :: - **추가상품(addon):** `t_prd_product_addons` = 146에 **볼체인 8종**(
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-146-acrylic-keyring :: - ★과업/구 문서의 "146 키링=480,000" 대형 숫자는 **라이브 부재=STALE**(T-1) — 
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-146-acrylic-keyring :: 32,700·볼체인 1,000. 인용 금지.
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-147-acrylic-magnet :: - 가격/부속 = 07-04 신규 라이브 SELECT 캐시(§0.2·H-1·T-2). ★"부속 자석 330,
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-148-acrylic-badge :: addon 템플릿(TMPL-000019 원형핀 600·TMPL-000020 1구자석 1,000)로 별도 가산
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-148-acrylic-badge :: **면적매트릭스형**(silsa 포스터사인 [가로×세로] off-grid ceiling 동형). 단가행 27
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-149-acrylic-clip :: - 가격/부속 = 07-04 신규 라이브 SELECT 캐시(§0.2·H-1·T-2). ★"부속 집게 380,
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-150-acrylic-smart-tok :: (TMPL-000022 2,600·TMPL-000023 3,000)로 별도 가산·`uses_material`
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-151-magsafe-smart-tok :: - 07-04 신규 SELECT 캐시(pack §0.2·note '맥세이프 바디 업체가 미정·본체만'). ★
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-151-magsafe-smart-tok :: 라이브 부재=STALE(T-1) — 실측 면적 최대 32,700. snapshot 가격 금지(T-2).
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-152-acrylic-nametag :: (TMPL-000024 700·TMPL-000025 1,700)로 별도 가산·`uses_material` 미
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-153-acrylic-nametag-goldsilver :: **가격 경로 연결됨**(고아 아님) — 공식이 완제품가 구성요소 1건(3셀·3,400~4,700) 배선.
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-154-acrylic-hairband :: - 가격/부속 = 07-04 신규 라이브 SELECT 캐시(§0.2·H-1·T-2). ★"부속 머리끈 300
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-155-acrylic-ballpen :: **연결됨**(3셀·1,800~2,700). 고정가형 by-siz(`[siz_cd,min_qty]`)·★직접
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-156-acrylic-zibitz :: 단가행 2개·200~600원)를 **가공 선택(opt_cd)** 으로 조회한다. `priced_by`→[[f
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-156-acrylic-zibitz :: - 과업/구 문서 대형 부속 숫자(480k/590k 등)는 라이브 부재 STALE(T-1) — 지비츠 단가 
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): size-SIZ_000355 :: - 본문: 아크릴 코스터 규격 100x100 원형. has_size 대상(미출시 상품). 면적매트릭스 W×H
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): size-SIZ_000356 :: - props: {siz_nm_ref: "전사 SIZ_000356(100x100mm사각·work=cut 10
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-160-acrylic-free-standing :: **연결됨**(5셀·8,800~22,600). 고정가형 by-siz(`[siz_cd,min_qty]`)·★직
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-163-acrylic-minipart :: 10,000원**(라이브 note "단가 미정 시그널 — 실무진 확인 후 단가행 추가")이다. 즉 **견적은
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-163-acrylic-minipart :: 아님) 값이 확정 안 됨** → 양면 정직 표기: **current=10,000(placeholder) / 
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-163-acrylic-minipart :: - ★live-snapshot `snap_20260702_1119`은 아크릴 가격 정본 아님(H-1·T-2)
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-163-acrylic-minipart :: - ★과업/구 문서 대형 부속 숫자(480k/590k 등)는 라이브 부재 STALE(T-1) — 163 pl
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-164-acrylic-corotto :: 공식 아님·단가행 36셀 실재·3,600~8,400).
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-166-acrylic-carabiner :: **연결됨**(4셀·5,800~6,900·완전 미적재 해소 R1). 고정가형 by-siz(`[siz_cd,m
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-173-perpetual-diary-hard :: - **★가격 sparse(pack §4·T-9·badge=candidate)**: COMP_STN_DIAR
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-173-perpetual-diary-hard :: pack §1.1)만 채워진 sparse grid다. **등록=선택가능 사이즈는 PRICE≠0**(130x1
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-173-perpetual-diary-hard :: 사이즈만 견적0**이며, 수량은 단가행 min_qty=1 단일밴드로 전량 선형 커버(예 100권=1,200,
@@ -186,6 +220,13 @@
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-213-tin-case :: > **★재프라이싱 정정(07-04 live·H-1 스냅샷 드리프트):** 이 상품은 라이브 `t_prd_p
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-214-magnet-bookmark :: > **★재프라이싱 정정(07-04 live·H-1 스냅샷 드리프트):** 이 상품은 라이브 `t_prd_p
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-221-mallang-keyring :: > **★재프라이싱 정정(07-04 live·H-1 스냅샷 드리프트):** 이 상품은 라이브 `t_prd_p
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): size-SIZ_000611 :: - props: {siz_nm_ref: "아크릴쉐이커코롯토 양면인쇄", note: "인쇄면 siz화(양면·d
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): size-SIZ_000612 :: - props: {siz_nm_ref: "아크릴쉐이커코롯토 전면만 인쇄", note: "인쇄면 siz화(전면
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): size-SIZ_000613 :: - props: {siz_nm_ref: "아크릴쉐이커코롯토 배면만 인쇄", note: "인쇄면 siz화(배면
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): optgroup-226-print-face :: - 본문: 손님이 인쇄면을 고르는 CPQ 옵션(택1·mand). 각 item이 siz(SIZ_000611/6
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): optgroup-226-glitter :: 226 자기 3사이즈(611/612/613)는 COMP_GOODS_FIXED_SIZ에 단가행 3건 실재(61
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-226-acrylic-shaker-corotto :: `acryl-226-reselect-260704.csv`): 양면(611)=**9,000**·전면만(612)
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-226-acrylic-shaker-corotto :: - ★live-snapshot 20260702_1119은 아크릴 가격 정본 금지(T-2)·구 노드 STALE
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-227-mini-uchiwa-keyring :: > **★재프라이싱 정정(07-04 live·H-1 스냅샷 드리프트):** 이 상품은 라이브 `t_prd_p
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-228-heart-picket :: > **★재프라이싱 정정(07-04 live·H-1 스냅샷 드리프트):** 이 상품은 라이브 `t_prd_p
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-234-leather-string-pouch :: > **★재프라이싱 정정(07-04 live·H-1 스냅샷 드리프트):** 이 상품은 라이브 `t_prd_p
@@ -273,6 +314,10 @@
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-set-simulate-sizcd :: - anchor: none  # 사유: 코드 C트랙(엔진 골든 PRICE≠0·화면만 0원·가격사실 아님)
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-set-simulate-sizcd :: - gap_what: "094/097/100 엔진골든 PRICE≠0(450k/135k/1.5M)이나 셋트 화
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-set-s1s2-double :: - gap_what: "① 내지 양면 주문 시 S1(단면)+S2(양면) 둘 다 매칭·배타선택 부재(전 책자·
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-goods-fixed-lookup-no-formula :: <!-- slug에 'tbd' 포함 → O5 PRICE_GAP_HINTS 화이트리스트 충족(graph-bui
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-acryl-tbd-formula-no-priced-rows :: - src: {source_file: "01_curation/_cache/acryl-price-chain-2
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-acryl-tbd-formula-no-priced-rows :: - gap_what: "아크릴 TBD 4상품(165 포카코롯토·168 입체코롯토·169 입체블럭·170 쉐이
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-acryl-tbd-formula-no-priced-rows :: - 본문: 아크릴 TBD 공유 gap. 공식/구성요소는 실재하나 단가행이 없어 견적이 불가한 것을 정직 선언
 - L-20 마스터 앵커 중복소유(동형결합 단일소유권 위반): t_mat_materials/MAT_000163 type=material owners=['matcost-054-hologram', 'material-MAT_000163']
 - L-20 마스터 앵커 중복소유(동형결합 단일소유권 위반): t_mat_materials/MAT_000371 type=material owners=['matcost-053-white-backing', 'material-MAT_000371']
 - L-20 마스터 앵커 중복소유(동형결합 단일소유권 위반): t_mat_materials/MAT_000372 type=material owners=['matcost-053-clear-backing', 'material-MAT_000372']
@@ -494,10 +539,45 @@
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-145-mini-banner -> product-145-mini-banner-nodes
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-145-mini-banner -> product-145-mini-banner-nodes
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-145-mini-banner -> product-145-mini-banner-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-146-acrylic-keyring -> product-146-acrylic-keyring-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-146-acrylic-keyring -> product-146-acrylic-keyring-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-146-acrylic-keyring -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-146-acrylic-keyring -> goods-variant-formula-fixed-price-model-260704
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-146-acrylic-keyring -> product-146-acrylic-keyring-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-146-acrylic-keyring -> product-146-acrylic-keyring-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-147-acrylic-magnet -> goods-variant-formula-fixed-price-model-260704
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-147-acrylic-magnet -> product-146-acrylic-keyring-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-147-acrylic-magnet -> product-147-acrylic-magnet-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-148-acrylic-badge -> product-046-label-tag-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-148-acrylic-badge -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-149-acrylic-clip -> product-146-acrylic-keyring-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-149-acrylic-clip -> product-149-acrylic-clip-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-150-acrylic-smart-tok -> product-150-acrylic-smart-tok-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-153-acrylic-nametag-goldsilver -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-153-acrylic-nametag-goldsilver -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-154-acrylic-hairband -> product-146-acrylic-keyring-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-154-acrylic-hairband -> product-154-acrylic-hairband-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): optgroup-156-gagong -> constraint-builder-contract-demo-260702
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-156-acrylic-zibitz -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-156-acrylic-zibitz -> product-156-acrylic-zibitz-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-157-acrylic-nametag-photocard -> product-157-acrylic-nametag-photocard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-158-acrylic-photocard-keyring -> product-158-acrylic-photocard-keyring-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-159-acrylic-coaster -> product-159-acrylic-coaster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-159-acrylic-coaster -> product-159-acrylic-coaster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-161-plate-acrylic -> product-161-plate-acrylic-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-161-plate-acrylic -> product-161-plate-acrylic-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-162-acrylic-photocard-stand -> product-162-acrylic-photocard-stand-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-162-acrylic-photocard-stand -> product-162-acrylic-photocard-stand-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-163-acrylic-minipart -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-163-acrylic-minipart -> product-163-acrylic-minipart-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-164-acrylic-corotto -> product-164-acrylic-corotto-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-170-acrylic-shaker -> product-170-acrylic-shaker-nodes
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-202-keycap-keyring -> product-type-classification-sot
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-203-led-keycap-keyring -> product-type-classification-sot
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-204-mini-cd-album -> product-type-classification-sot
-- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-226-acrylic-shaker-corotto -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-226-acrylic-shaker-corotto -> product-226-acrylic-shaker-corotto-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-226-acrylic-shaker-corotto -> product-226-acrylic-shaker-corotto-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-226-acrylic-shaker-corotto -> product-226-acrylic-shaker-corotto-nodes
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-227-mini-uchiwa-keyring -> product-type-classification-sot
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-228-heart-picket -> product-type-classification-sot
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-229-image-picket -> product-type-classification-sot

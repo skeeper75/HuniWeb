@@ -264,7 +264,7 @@ _데스크·문구소품/북커버_
 - [product/product-218-tyvek-book-cover.md](product/product-218-tyvek-book-cover.md) — 타이벡북커버(218·PRD_000218). NEITHER-gap(가격/공식 부재).
 
 _응원/시즌·아크릴 굿즈_
-- [product/product-226-acrylic-shaker-corotto.md](product/product-226-acrylic-shaker-corotto.md) — 아크릴쉐이커코롯토(226·PRD_000226). 미출시·가격 미설정(gap-226-acryl-tbd placeholder).
+- [product/product-226-acrylic-shaker-corotto.md](product/product-226-acrylic-shaker-corotto.md) — 아크릴쉐이커코롯토(226·PRD_000226). 미출시·견적가능(자기 siz 단가 실재·PRF_GOODS_FIXED_SIZ·611=9,000/612·613=7,500·재-SELECT 07-04). 상세=[product/product-226-acrylic-shaker-corotto-nodes.md](product/product-226-acrylic-shaker-corotto-nodes.md)(SIZ_000611~613 인쇄면·글리터 CPQ). ★아크릴 굿즈 계열 본문=아래 별도 절.
 - [product/product-228-heart-picket.md](product/product-228-heart-picket.md) — 하트 이미지피켓(228·PRD_000228). NEITHER-gap(가격/공식 부재) ·미출시(use_yn=N).
 - [product/product-229-image-picket.md](product/product-229-image-picket.md) — 이미지피켓(229·PRD_000229). NEITHER-gap(가격/공식 부재).
 
@@ -335,6 +335,35 @@ _백류 에코백/토트/숄더/백팩 (CAT_000011)_
 - [product/product-279-mesh-eco-bag.md](product/product-279-mesh-eco-bag.md) — 메쉬에코백(279·PRD_000279). NEITHER-gap(가격/공식 부재).
 
 > **★굿즈/파우치/봉투 축 배선(2026-07-04·Stage C2):** Stage B가 needs_axis로 보류한 상품→축 엣지를 live-snapshot 20260702_1119 junction 기준으로 배선(in_category 177·uses_material 38·has_size 10). 비종이 부속 오염(핀버튼 핀·키링고리 등)은 C1이 자재 노드를 mint하지 않아 uses_material 자동 제외([[gap-goods-material-contamination]]). 레더 MAT_000008=마스터 del_yn=Y이나 정션 활성=load-bearing 배선(127 선례). O5 잔여 5(196·205·210·211·212)=고정가룩업→[[gap-goods-fixed-lookup-no-formula]] references 추가·185 로컬 gap+219/223/224/225 로컬 price-formula-unbound gap 5종을 공유 gap으로 표준화(로컬 노드 은퇴). 근거=`_meta/goods-needs-axis.md`.
+
+**아크릴 굿즈 계열 (파일럿 6번째 상품군·25상품[활성18+미출시7]·★면적매트릭스 지배(silsa 동형)+고정가형+TBD·비종이=판형 가격축 아님 T-9·t_prd_product_prices 0행=직접룩업 아님 T-7·167 결번/171 del 미생성)**
+> 공유 가격축=[formula/acrylic-formulas.md](formula/acrylic-formulas.md)(PRF_CLR_ACRYL 면적본체·M2 부속·M3 고정가·M4/M5·TBD 4)·[formula/acrylic-components.md](formula/acrylic-components.md)(COMP_ACRYL_CLEAR3T 277셀 13상품 공유·부속단일가·COMP_ACRYL_PENDING_TBD 0셀). substrate 두께 SA-1=[axis/materials.md](axis/materials.md)(MAT_000042/043/044/192/195/196)·공정 SA-2=[axis/processes.md](axis/processes.md)(UV/UV평판/굿즈가공/가공)·면적 프리셋 사이즈 승격 10=[axis/sizes.md](axis/sizes.md)(SIZ_000329~336·011·148)·카테고리=[axis/categories.md](axis/categories.md)(단품형 CAT_000322·조합형 CAT_000155·액세서리 CAT_000163·아크릴 CAT_000009/코롯토 CAT_000159 재사용). TBD 4(165/168/169/170)=[[gap-acryl-tbd-formula-no-priced-rows]].
+- [product/product-146-acrylic-keyring.md](product/product-146-acrylic-keyring.md) — 아크릴키링·M2b 면적매트릭스+볼체인 addon(볼체인 8색 has_addon·본체 COMP_ACRYL_CLEAR3T). 상세=[product/product-146-acrylic-keyring-nodes.md](product/product-146-acrylic-keyring-nodes.md).
+- [product/product-147-acrylic-magnet.md](product/product-147-acrylic-magnet.md) — 아크릴마그넷·M2 면적+자석 부속선택(본체+COMP_ACRYL_MAGNET 별도합산). 상세=[product/product-147-acrylic-magnet-nodes.md](product/product-147-acrylic-magnet-nodes.md).
+- [product/product-148-acrylic-badge.md](product/product-148-acrylic-badge.md) — 아크릴뱃지·M1 면적매트릭스(COMP_ACRYL_CLEAR3T 공유).
+- [product/product-149-acrylic-clip.md](product/product-149-acrylic-clip.md) — 아크릴집게·M2 면적+집게 부속선택(본체+COMP_ACRYL_CLIP). 상세=[product/product-149-acrylic-clip-nodes.md](product/product-149-acrylic-clip-nodes.md).
+- [product/product-150-acrylic-smart-tok.md](product/product-150-acrylic-smart-tok.md) — 아크릴스마트톡·M1 면적매트릭스(화이트/투명 바디=addon). 상세=[product/product-150-acrylic-smart-tok-nodes.md](product/product-150-acrylic-smart-tok-nodes.md).
+- [product/product-151-magsafe-smart-tok.md](product/product-151-magsafe-smart-tok.md) — 맥세이프스마트톡·M1 면적매트릭스.
+- [product/product-152-acrylic-nametag.md](product/product-152-acrylic-nametag.md) — 아크릴명찰·M1 면적매트릭스.
+- [product/product-153-acrylic-nametag-goldsilver.md](product/product-153-acrylic-nametag-goldsilver.md) — 아크릴명찰(골드/실버)·M3 고정가형 by-siz(PRF_ACRYL_NAMETAG_GS·직접룩업 아님 T-7).
+- [product/product-154-acrylic-hairband.md](product/product-154-acrylic-hairband.md) — 아크릴머리끈·M2 면적+블랙헤어끈 부속선택(본체+COMP_ACRYL_BLACK_HAIR_BAND). 상세=[product/product-154-acrylic-hairband-nodes.md](product/product-154-acrylic-hairband-nodes.md).
+- [product/product-155-acrylic-ballpen.md](product/product-155-acrylic-ballpen.md) — 아크릴볼펜·M3 고정가형 by-siz(PRF_ACRYL_BALLPEN).
+- [product/product-156-acrylic-zibitz.md](product/product-156-acrylic-zibitz.md) — 아크릴지비츠·M4 부속선택 공식(PRF_ZIBITZ_ACRYL 가공 택1·171 del 미생성). 상세=[product/product-156-acrylic-zibitz-nodes.md](product/product-156-acrylic-zibitz-nodes.md).
+- [product/product-157-acrylic-nametag-photocard.md](product/product-157-acrylic-nametag-photocard.md) — 아크릴네임택(포카)·M1 면적매트릭스+사이즈 옵션. 상세=[product/product-157-acrylic-nametag-photocard-nodes.md](product/product-157-acrylic-nametag-photocard-nodes.md).
+- [product/product-158-acrylic-photocard-keyring.md](product/product-158-acrylic-photocard-keyring.md) — 아크릴포카키링·M1 면적매트릭스+사이즈 옵션. 상세=[product/product-158-acrylic-photocard-keyring-nodes.md](product/product-158-acrylic-photocard-keyring-nodes.md).
+- [product/product-159-acrylic-coaster.md](product/product-159-acrylic-coaster.md) — 아크릴코스터·M1 면적매트릭스·★미출시(use_yn=N). 상세=[product/product-159-acrylic-coaster-nodes.md](product/product-159-acrylic-coaster-nodes.md).
+- [product/product-160-acrylic-free-standing.md](product/product-160-acrylic-free-standing.md) — 아크릴자유형스탠드·M3 고정가형 by-siz(PRF_ACRYL_FREESTAND 5셀).
+- [product/product-161-plate-acrylic.md](product/product-161-plate-acrylic.md) — 판아크릴·M1 면적매트릭스+사이즈 옵션. 상세=[product/product-161-plate-acrylic-nodes.md](product/product-161-plate-acrylic-nodes.md).
+- [product/product-162-acrylic-photocard-stand.md](product/product-162-acrylic-photocard-stand.md) — 아크릴포카스탠드·M1 면적매트릭스+사이즈 옵션. 상세=[product/product-162-acrylic-photocard-stand-nodes.md](product/product-162-acrylic-photocard-stand-nodes.md).
+- [product/product-163-acrylic-minipart.md](product/product-163-acrylic-minipart.md) — 아크릴미니파츠·M4 고정가형 placeholder(COMP_ACRYL_MINIPART_TBD 10,000 TBD·candidate)·in_category CAT_000163(260704 mint). 상세=[product/product-163-acrylic-minipart-nodes.md](product/product-163-acrylic-minipart-nodes.md).
+- [product/product-164-acrylic-corotto.md](product/product-164-acrylic-corotto.md) — 아크릴코롯토·M5 코롯토 면적공식(PRF_COROTTO_ACRYL 36셀)·★미출시. 상세=[product/product-164-acrylic-corotto-nodes.md](product/product-164-acrylic-corotto-nodes.md).
+- [product/product-165-photocard-corotto.md](product/product-165-photocard-corotto.md) — 아크릴포카코롯토·GAP TBD(PRF_ACRYL_PHCOROTTO_TBD·단가행0=견적불가·gap-acryl-tbd)·★미출시.
+- [product/product-166-acrylic-carabiner.md](product/product-166-acrylic-carabiner.md) — 아크릴카라비너·M3 고정가형 by-siz(PRF_ACRYL_CARABINER 4셀).
+- [product/product-168-acrylic-3d-corotto.md](product/product-168-acrylic-3d-corotto.md) — 아크릴입체코롯토·GAP TBD(단가행0=견적불가·gap-acryl-tbd)·★미출시.
+- [product/product-169-acrylic-3d-block.md](product/product-169-acrylic-3d-block.md) — 아크릴입체블럭·GAP TBD(단가행0·PROC_000083 가공 1행만·gap-acryl-tbd)·★미출시.
+- [product/product-170-acrylic-shaker.md](product/product-170-acrylic-shaker.md) — 아크릴쉐이커·GAP TBD(단가행0=견적불가·gap-acryl-tbd)·★미출시. 상세=[product/product-170-acrylic-shaker-nodes.md](product/product-170-acrylic-shaker-nodes.md).
+
+> **★아크릴 굿즈 축 통합(2026-07-04·Stage C):** Stage A 공유축(substrate 6·공정 4·카테고리 3)+Stage B 25상품+Stage C 승격분(면적 프리셋 사이즈 10 SIZ_000329~336/011/148 axis 승격=L-3 중복 6 해소·카테고리 CAT_000163 액세서리 mint+163 in_category 배선·TBD 공식/구성요소 badge gap→candidate 7 정정). ★live-snapshot 20260702_1119에 없던 07-03/04 라이브 신규코드(PROC_000151·SIZ_000611~613·opt_grp PRD_000146/147/149/154/226) 스냅샷 append(신규 read-only SELECT·H-1 staleness 해소·anchor 닫힌세계 L-17 정합). 근거=pack-acrylic §5.2·`_cache/acryl-*-260704.csv`.
 
 ---
 

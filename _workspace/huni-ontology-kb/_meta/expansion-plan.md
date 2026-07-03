@@ -19,7 +19,9 @@
 | 3 | 실사 28상품 | CPQ 옵션 유일 실적재·면적매트릭스 | Medium | ✅ GO(2026-07-03) |
 | 4 | 셋트계열 42(책자/포토북/캘린더) | has_member·evaluate_set_price·§23 재사용·양면표기(088 등) | Medium | ✅ GO(2026-07-03·122상품 누적) |
 | 5 | 문구·굿즈파우치·악세사리(128·아크릴 별도) | 원천 결함 잔존·empty-shell/NEITHER-gap 다수 | Low | ✅ GO(2026-07-04·누적250) — SB-1 문구셋트25 + SB-2/3/4 굿즈파우치봉투103 |
-| 6 | 아크릴 146~171(26) | 면적매트릭스·전용 recipe(226 쉐이커코롯토 TBD 등) | Low | ⏳ 다음(별도 pack-acrylic) |
+| 6 | 아크릴 146~171(25노드) | 면적매트릭스(silsa 동형·COMP_ACRYL_CLEAR3T 공유)·고정가형 공식·TBD/미출시 정직 | Low | ✅ GO(2026-07-04·누적275·전 상품군 완주) |
+
+> **★전 상품군(순번1~6) 완주 — 275상품 O1~O7 GO.** 확장 순서 종료. 이후는 KB 인프라 후속(§5 미결 큐·live-snapshot 재캡처·price_slot 필드마커)만.
 
 > **문구/굿즈 그룹(순번 5·GO) 실측:** ① SB-1 문구셋트25(evaluate_set_price·sparse 정직·구성원 slug=자기 prd_cd[HARD]) ② SB-2/3/4 굿즈파우치봉투103(단품·고정가룩업59·NEITHER-gap42·공식3·미출시10). 워크플로 정본=`_meta/workflows/okb-{stn,goods}-*.js`. ★교훈: **O5 코드 spec §151 정렬+가격 gap 화이트리스트**(비가격 gap O5 우회 차단·graph-build-spec v1.0.5)·**고정가룩업**=직접 unit_price·공식없음→gap-goods-fixed-lookup-no-formula(가격 gap·값 props)·**live-snapshot 노후**(병행 세션 굿즈 적재 중→신규 라이브 SELECT 재프라이싱·H-1)·색상값≠substrate.
 

@@ -7,9 +7,9 @@
 디지털 사이즈 = 이산(離散) 사이즈 행(면적매트릭스 아님·팩 §3.2). 프리미엄엽서(016) 7행 +
 출력용지 국전(SIZ_000499) + 명함 2종(승격 260703). 상품→사이즈(R2 `has_size`)는 상품 노드가 건다.
 
-> 승격 대기(단일 소비자라 아직 상품-local): 라벨택 사이즈 SIZ_000047(40x80)·SIZ_000011(50x50·미니모양명함
-> 공용 후보)·SIZ_000048(25x110)는 product-046-label-tag-nodes.md에 임시 거처. 2번째 소비 상품(미니모양명함 등)
-> 집필 시 이 축으로 승격(canonical id 그대로 안정 resolve). owner=architect.
+> 승격 대기(단일 소비자라 아직 상품-local): 라벨택 사이즈 SIZ_000047(40x80)·SIZ_000048(25x110)는
+> product-046-label-tag-nodes.md에 임시 거처. 2번째 소비 상품 집필 시 이 축으로 승격. owner=architect.
+> ★SIZ_000011(50x50)은 아크릴(146/147/149)이 2번째 소비 상품으로 확정→260704 axis 승격 완료(아래 "아크릴/공용 면적 프리셋" 절).
 
 ## 치수 전사표 (권위 = 라이브 마스터)
 
@@ -466,3 +466,71 @@
 - src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "키:SIZ_000449(100x40·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
 - src: {source_file: "live-snapshot/latest/t_prd_product_sizes.csv", source_locator: "키:(PRD_000242,SIZ_000449) del_yn=N(정션 활성·대표키)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
 - props: {siz_nm_ref: "전사표 SIZ_000449", note: "242 파우치 2번째 사이즈(t_prd_product_sizes 실재). 246과 공유"}
+
+## 아크릴/공용 면적 프리셋 사이즈 (승격 260704·okb-knowledge-builder)
+
+<!-- 2026-07-04 Stage C 승격(pack-acrylic §5.2 SA-3·needs_axis 반환분): 아크릴 면적매트릭스 프리셋 사이즈 10종을
+     product-local(146-nodes 잠정 canonical·046-nodes SIZ_000011)에서 axis로 승격. 2+ 소비 상품(CL-1/CL-2 다수·155·156·라벨택)이
+     공유하는 shared 축이라 단일 소유권(L-3 중복 해소·L-20 단일소유). has_size는 각 상품 노드가 건다. -->
+<!-- ★비종이(아크릴)=판형 가격축 아님(T-9)·면적공식 COMP_ACRYL_CLEAR3T use_dims [mat_cd,siz_width,siz_height,min_qty] 참조. 치수 raw는 라벨+snapshot source_locator에만(L-12). -->
+<!-- transcribed-by: live-snapshot/latest t_siz_sizes.csv (siz_nm·work/cut mm 전수 실재·구조축 FRESH) @ 2026-07-04 -->
+
+### [size-SIZ_000329] 20x30 (아크릴 면적 프리셋) {verified}
+- type: size
+- anchor: t_siz_sizes/SIZ_000329
+- src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "키:SIZ_000329(20x30·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {siz_nm_ref: "전사표 SIZ_000329", note: "아크릴 면적매트릭스 프리셋(146 소비). 공유 축 승격(260704·이전 146-nodes 잠정)."}
+
+### [size-SIZ_000330] 30x30 (아크릴 면적 프리셋) {verified}
+- type: size
+- anchor: t_siz_sizes/SIZ_000330
+- src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "키:SIZ_000330(30x30·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {siz_nm_ref: "전사표 SIZ_000330", note: "아크릴 면적 프리셋 최다 공유(146·147·149·154·155·156). 공유 축 승격(260704)."}
+
+### [size-SIZ_000331] 30x40 (아크릴 면적 프리셋) {verified}
+- type: size
+- anchor: t_siz_sizes/SIZ_000331
+- src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "키:SIZ_000331(30x40·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {siz_nm_ref: "전사표 SIZ_000331", note: "아크릴 면적 프리셋(146·147). 공유 축 승격(260704)."}
+
+### [size-SIZ_000332] 30x70 (아크릴 면적 프리셋) {verified}
+- type: size
+- anchor: t_siz_sizes/SIZ_000332
+- src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "키:SIZ_000332(30x70·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {siz_nm_ref: "전사표 SIZ_000332", note: "아크릴 면적 프리셋(146). 공유 축 승격(260704)."}
+
+### [size-SIZ_000333] 40x40 (아크릴 면적 프리셋) {verified}
+- type: size
+- anchor: t_siz_sizes/SIZ_000333
+- src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "키:SIZ_000333(40x40·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {siz_nm_ref: "전사표 SIZ_000333", note: "아크릴 면적 프리셋 공유(146·147·149·154·155). 공유 축 승격(260704)."}
+
+### [size-SIZ_000334] 40x50 (아크릴 면적 프리셋) {verified}
+- type: size
+- anchor: t_siz_sizes/SIZ_000334
+- src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "키:SIZ_000334(40x50·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {siz_nm_ref: "전사표 SIZ_000334", note: "아크릴 면적 프리셋(146·147). 공유 축 승격(260704)."}
+
+### [size-SIZ_000335] 40x60 (아크릴 면적 프리셋) {verified}
+- type: size
+- anchor: t_siz_sizes/SIZ_000335
+- src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "키:SIZ_000335(40x60·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {siz_nm_ref: "전사표 SIZ_000335", note: "아크릴 면적 프리셋(146). 공유 축 승격(260704)."}
+
+### [size-SIZ_000336] 20x20 (아크릴 면적 프리셋) {verified}
+- type: size
+- anchor: t_siz_sizes/SIZ_000336
+- src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "키:SIZ_000336(20x20·작업치수 마스터 공란·재단 20x20·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {siz_nm_ref: "전사표 SIZ_000336", note: "아크릴 면적 프리셋 공유(147·154·155·156). 공유 축 승격(260704)."}
+
+### [size-SIZ_000011] 50x50 (아크릴/라벨택·미니모양명함 공용) {verified}
+- type: size
+- anchor: t_siz_sizes/SIZ_000011
+- src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "키:SIZ_000011(50x50·work 60x60·cut 50x50·적용 미니모양명함/라벨택·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {siz_nm_ref: "전사표 SIZ_000011", note: "50x50 공용 사이즈. 아크릴(146·147·149) + 라벨택(046)/미니모양명함 공용. 046-local→axis 승격(260704·2번째+ 소비 상품 확정)."}
+
+### [size-SIZ_000148] 60x60 (아크릴 면적 프리셋) {verified}
+- type: size
+- anchor: t_siz_sizes/SIZ_000148
+- src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "키:SIZ_000148(60x60·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {siz_nm_ref: "전사표 SIZ_000148", note: "아크릴 면적 프리셋(147 등). 공유 축 승격(260704)."}

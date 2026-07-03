@@ -544,3 +544,46 @@
 - src: {source_file: "live-snapshot/latest/t_mat_materials.csv", source_locator: "키:MAT_000008(레더·mat_typ_cd MAT_TYPE.06·sel_typ_cd SEL_TYPE.01·규격/평량 공란·use_yn=Y·del_yn=Y)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
 - src: {source_file: "live-snapshot/latest/t_prd_product_materials.csv", source_locator: "키:(PRD_000251,MAT_000008) usage_cd=USAGE.07(정션 활성·레더 substrate 대표)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
 - props: {mat_typ_cd: "MAT_TYPE.06", note: "★레더(가죽) substrate — 레더파우치/미니파우치/필통 등 다수 굿즈 공통 자재(uses_material 배선 대상). 마스터 del_yn=Y이나 정션(예 251) 활성=load-bearing → 보존(CAT_000116·SIZ_000196 선례). 263/264 등 실 substrate"}
+
+## 아크릴 substrate 자재 (두께·SA-1 Stage A 공유축 260704)
+
+<!-- 2026-07-04 SA-1 공유축(okb-knowledge-builder·pack-acrylic §5.2): 아크릴 substrate = 투명 아크릴 "두께 변형"(1.5/3/8mm)·색상값 아님(T-8). -->
+<!-- ★부속(고리/자석/핀/바디/헤어끈/볼체인)은 substrate 아님 = has_addon/부자재(uses_material에 배선 금지·오염·pack §3.5). 여기는 substrate만. -->
+<!-- ★비종이(UV 평판)·판형은 가격축 아님(T-9). 면적매트릭스 mat_cd 차원 = 이 두께(MAT_000042/043/044). -->
+<!-- transcribed-by: 01_curation/_cache/acryl-materials-named-260704.csv (07-04 라이브 SELECT·mat_nm·mat_typ_cd) @ 2026-07-04 -->
+
+### [material-MAT_000042] 아크릴 투명 1.5mm {verified}
+- type: material
+- anchor: t_mat_materials/MAT_000042
+- src: {source_file: "01_curation/_cache/acryl-materials-named-260704.csv", source_locator: "키:MAT_000042·mat_nm '아크릴 투명 1.5mm'·mat_typ_cd MAT_TYPE.03·dflt_yn=Y(163 substrate)", captured_at: "live 2026-07-04", badge: verified, src_id: SR-ac-0704}
+- props: {mat_typ_cd: "MAT_TYPE.03", 두께: "1.5mm", note: "아크릴 substrate 두께(163 미니파츠). ★mat_typ .03(아크릴부자재 라벨)이나 substrate — 오타이핑 현재값 기록·정정=§7/§12(GAP-AC-1). 색상값 아님(T-8)."}
+
+### [material-MAT_000043] 아크릴 투명 3mm {verified}
+- type: material
+- anchor: t_mat_materials/MAT_000043
+- src: {source_file: "01_curation/_cache/acryl-materials-named-260704.csv", source_locator: "키:MAT_000043·mat_nm '아크릴 투명 3mm'·mat_typ_cd MAT_TYPE.03·dflt_yn=Y(최다 substrate)", captured_at: "live 2026-07-04", badge: verified, src_id: SR-ac-0704}
+- props: {mat_typ_cd: "MAT_TYPE.03", 두께: "3mm", note: "아크릴 substrate 최다 사용(146~162 대다수·면적매트릭스 mat_cd 대표값). mat_typ .03 오타이핑(GAP-AC-1)."}
+
+### [material-MAT_000044] 아크릴 투명 8mm {verified}
+- type: material
+- anchor: t_mat_materials/MAT_000044
+- src: {source_file: "01_curation/_cache/acryl-materials-named-260704.csv", source_locator: "키:MAT_000044·mat_nm '아크릴 투명 8mm'·mat_typ_cd MAT_TYPE.03·dflt_yn=Y(164/165 코롯토)", captured_at: "live 2026-07-04", badge: verified, src_id: SR-ac-0704}
+- props: {mat_typ_cd: "MAT_TYPE.03", 두께: "8mm", note: "아크릴 substrate 두꺼운(164 코롯토·165 포카코롯토). mat_typ .03 오타이핑(GAP-AC-1)."}
+
+### [material-MAT_000192] 투명아크릴 {verified}
+- type: material
+- anchor: t_mat_materials/MAT_000192
+- src: {source_file: "01_curation/_cache/acryl-materials-named-260704.csv", source_locator: "키:MAT_000192·mat_nm '투명아크릴'·mat_typ_cd MAT_TYPE.03·dflt_yn=Y(169 입체블럭)", captured_at: "live 2026-07-04", badge: verified, src_id: SR-ac-0704}
+- props: {mat_typ_cd: "MAT_TYPE.03", note: "투명아크릴 substrate(169 입체블럭). mat_typ .03 오타이핑(GAP-AC-1)."}
+
+### [material-MAT_000195] 아크릴(골드) {verified}
+- type: material
+- anchor: t_mat_materials/MAT_000195
+- src: {source_file: "01_curation/_cache/acryl-materials-named-260704.csv", source_locator: "키:MAT_000195·mat_nm '아크릴(골드)'·mat_typ_cd MAT_TYPE.20·dflt_yn=Y(153 명찰)", captured_at: "live 2026-07-04", badge: verified, src_id: SR-ac-0704}
+- props: {mat_typ_cd: "MAT_TYPE.20", note: "골드 아크릴 substrate(153 골드실버 명찰 전용). ★153만 MAT_TYPE.20(아크릴)·타 아크릴 .03과 유형 상이(GAP-AC-1)."}
+
+### [material-MAT_000196] 아크릴(실버) {verified}
+- type: material
+- anchor: t_mat_materials/MAT_000196
+- src: {source_file: "01_curation/_cache/acryl-materials-named-260704.csv", source_locator: "키:MAT_000196·mat_nm '아크릴(실버)'·mat_typ_cd MAT_TYPE.20·dflt_yn=Y(153 명찰)", captured_at: "live 2026-07-04", badge: verified, src_id: SR-ac-0704}
+- props: {mat_typ_cd: "MAT_TYPE.20", note: "실버 아크릴 substrate(153 골드실버 명찰 전용). 153은 골드/실버 2 substrate 병존(dflt_yn=Y 둘 다). MAT_TYPE.20(GAP-AC-1)."}

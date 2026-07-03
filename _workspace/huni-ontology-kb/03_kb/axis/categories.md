@@ -352,3 +352,32 @@
 - anchor: t_cat_categories/CAT_000269
 - src: {source_file: "live-snapshot/latest/t_cat_categories.csv", source_locator: "키:CAT_000269(메쉬에코백·cat_lvl 2·상위 CAT_000011·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
 - props: {cat_nm: "메쉬에코백", cat_lvl: 2, upr_cat_cd: "CAT_000011", note: "279 main 분류 in_category 대상"}
+
+## 아크릴 굿즈 카테고리 (SA-6 Stage A 공유축 260704)
+
+<!-- 2026-07-04 SA-6 공유축(okb-knowledge-builder·pack-acrylic §5.2): 아크릴 굿즈(146~166·226)가 걸리는 분류. -->
+<!-- ★search-before-mint: CAT_000009(아크릴 root)·CAT_000159(코롯토)는 226 굿즈팩이 이미 민팅함(위쪽 블록 재사용·여기 재-mint 금지). SA-6 신규 = CAT_000322(단품형)·CAT_000155(조합형)만. -->
+<!-- 라이브 혼재(단품형/조합형/코롯토가 아크릴 루트 CAT_000009 하위·상품별 leaf는 다수 del_yn=Y). in_category는 상품 노드(Stage B). -->
+<!-- transcribed-by: live-snapshot/latest t_cat_categories.csv (snap_20260702_1119·cat_nm·upr_cat_cd·cat_lvl·use_yn=Y·del_yn=N 전수 실측) @ 2026-07-04 -->
+
+### [category-CAT_000322] 단품형 {verified}
+- type: category
+- anchor: t_cat_categories/CAT_000322
+- src: {source_file: "live-snapshot/latest/t_cat_categories.csv", source_locator: "키:CAT_000322(단품형·cat_lvl 2·상위 CAT_000009·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {cat_nm: "단품형", cat_lvl: 2, upr_cat_cd: "CAT_000009", note: "단품 아크릴(키링/마그넷/뱃지 등). 상품 in_category 대상(Stage B)."}
+
+### [category-CAT_000155] 조합형 {verified}
+- type: category
+- anchor: t_cat_categories/CAT_000155
+- src: {source_file: "live-snapshot/latest/t_cat_categories.csv", source_locator: "키:CAT_000155(조합형·cat_lvl 2·상위 CAT_000009·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {cat_nm: "조합형", cat_lvl: 2, upr_cat_cd: "CAT_000009", note: "조합 아크릴(자유형스탠드/판아크릴/포카스탠드 등·157/158/160/161/162 계열). 상품 in_category 대상(Stage B)."}
+
+### [category-CAT_000163] 액세서리 {verified}
+- type: category
+- anchor: t_cat_categories/CAT_000163
+- src: {source_file: "live-snapshot/latest/t_cat_categories.csv", source_locator: "키:CAT_000163(액세서리·cat_lvl 2·상위 CAT_000009 아크릴·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- src: {source_file: "live-snapshot/latest/t_prd_product_categories.csv", source_locator: "키:(PRD_000163,CAT_000163) main_cat_yn=N·del_yn=N(정션 실재)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {cat_nm: "액세서리", cat_lvl: 2, upr_cat_cd: "CAT_000009", note: "아크릴 액세서리 leaf. 163 아크릴미니파츠 in_category 대상(260704 Stage C 민팅·needs_axis 반환분)."}
+
+<!-- CAT_000009(아크릴 root)·CAT_000159(코롯토)는 위쪽(226 굿즈팩 민팅) 블록 재사용 — 여기 재정의 금지(search-before-mint). 코롯토 계열=164/165/168/226 등 in_category CAT_000159. -->
+

@@ -37,12 +37,6 @@
 - props: {siz_nm_ref: "전사표 SIZ_000047", note: "판걸이수 24는 사이즈 파생값(fn_calc_pansu)"}
 - 본문: 라벨/택 재단 사이즈. 작업 50x90/재단 40x80(전사표). [[product-046-label-tag]] has_size 대상.
 
-### [size-SIZ_000011] 50x50 (라벨택·미니모양명함 공용) {verified}
-- type: size
-- anchor: t_siz_sizes/SIZ_000011
-- src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "키:SIZ_000011", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
-- props: {siz_nm_ref: "전사표 SIZ_000011", note: "미니모양명함과 공용 사이즈 — 승격 시 공유 축 원자"}
-
 ### [size-SIZ_000048] 25x110 (라벨택 완칼) {verified}
 - type: size
 - anchor: t_siz_sizes/SIZ_000048

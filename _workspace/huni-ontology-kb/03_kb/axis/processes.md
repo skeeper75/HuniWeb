@@ -274,3 +274,37 @@
 - src: {source_file: "live-snapshot/latest/t_proc_processes.csv", source_locator: "테이블:t_proc_processes 키:PROC_000076 (upr PROC_000075·disp 1·use_yn=Y·note 기본)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
 - src: {source_file: "live-snapshot/latest/t_prd_product_processes.csv", source_locator: "소비:PRD_000094(수축포장 mand)·PRD_000108/109(탁상캘린더)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
 - props: {proc_nm: "수축포장", upr_proc_cd: "PROC_000075", role: "094 엽서북 수축포장(mand)·108/109 캘린더 포장 공정. has_process는 상품 노드(Stage B)."}
+
+## 아크릴 굿즈 공정 (UV·레이저커팅·부착·SA-2 Stage A 공유축 260704)
+
+<!-- 2026-07-04 SA-2 공유축(okb-knowledge-builder·pack-acrylic §5.2): 아크릴 정체 공정 = UV 인쇄 + 레이저커팅 + 굿즈가공 + 부착. -->
+<!-- ★비종이(UV 평판)·판형 가격축 아님(T-9). has_process는 상품 노드(Stage B). 공정 MISSING 10상품=[GAP-AC-2]. -->
+<!-- transcribed-by: 01_curation/_cache/acryl-processes-named-260704.csv (07-04 라이브 SELECT·proc_nm·mand_proc_yn) @ 2026-07-04 -->
+
+### [process-PROC_000002] UV {verified}
+- type: process
+- anchor: t_proc_processes/PROC_000002
+- src: {source_file: "01_curation/_cache/acryl-processes-named-260704.csv", source_locator: "proc:PROC_000002 'UV'·mand_proc_yn=Y·소비 147/148/149/150/152/155/157/158/160/161/162/163", captured_at: "live 2026-07-04", badge: verified, src_id: SR-ac-0704}
+- props: {proc_nm: "UV", role: "아크릴 UV 인쇄(다수 아크릴 정체 공정·mand). 도수는 면적단가에 흡수(clr_cd=NULL·pack §3.3). has_process는 상품 노드(Stage B)."}
+
+### [process-PROC_000111] UV평판인쇄 {verified}
+- type: process
+- anchor: t_proc_processes/PROC_000111
+- src: {source_file: "01_curation/_cache/acryl-processes-named-260704.csv", source_locator: "proc:PROC_000111 'UV평판인쇄'·mand_proc_yn=Y·소비 146(공정 세분화판)", captured_at: "live 2026-07-04", badge: verified, src_id: SR-ac-0704}
+- props: {proc_nm: "UV평판인쇄", role: "146 키링 UV 평판인쇄(6월 이후 세분화). 대다수는 PROC_000002 UV뿐(T-3 위키 'UV 단일코드' 함정). 세분 미전파=GAP-AC-2."}
+
+<!-- ★process-PROC_000124(레이저커팅)=product-143-mirror-acrylic-sticker-nodes.md에 이미 정의(product-local·재사용)·여기 재-mint 금지(search-before-mint·L-3). 아크릴 146 완칼=이 노드 참조(위키 'PROC_000053'은 STALE·T-3). -->
+
+### [process-PROC_000151] 굿즈가공 {verified}
+- type: process
+- anchor: t_proc_processes/PROC_000151
+- src: {source_file: "01_curation/_cache/acryl-processes-named-260704.csv", source_locator: "proc:PROC_000151 '굿즈가공'·mand_proc_yn=Y·소비 146", captured_at: "live 2026-07-04", badge: verified, src_id: SR-ac-0704}
+- props: {proc_nm: "굿즈가공", role: "굿즈 후가공(146). 조립/부착 등 정체 공정. MISSING 10상품(GAP-AC-2)."}
+
+<!-- ★process-PROC_000081(부착)=product-138-standard-hanging-banner-nodes.md에 이미 정의(product-local·재사용)·여기 재-mint 금지(search-before-mint·L-3). 아크릴 147 자석/151 맥세이프 바디 부착=이 노드 참조(mand_proc_yn=N 선택). -->
+
+### [process-PROC_000083] 가공 {verified}
+- type: process
+- anchor: t_proc_processes/PROC_000083
+- src: {source_file: "01_curation/_cache/acryl-processes-named-260704.csv", source_locator: "proc:PROC_000083 '가공'·mand_proc_yn=Y·소비 169(입체블럭·유일 공정행)", captured_at: "live 2026-07-04", badge: verified, src_id: SR-ac-0704}
+- props: {proc_nm: "가공", role: "일반 가공(169 입체블럭·TBD 미출시). 169는 이 공정 1행만 실재(단가행 0=견적불가·gap-acryl-tbd)."}

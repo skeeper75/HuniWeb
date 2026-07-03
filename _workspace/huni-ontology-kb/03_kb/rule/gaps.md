@@ -376,3 +376,20 @@
 - gap_fill_from: "architect가 O5에 fixed-lookup 예외(t_prd_product_prices unit_price 실재 시 O5 충족) 추가하거나 fixed-lookup 가격아키타입 표현을 정의. 185 로컬 gap(gap-185-fixed-lookup-no-formula)은 이 공유 노드로 대체 권장 — 참조 재지정(product-185)·로컬 gap 제거는 C2/architect 소관"
 - gap_owner: 설계
 - 본문: 가격 값은 아는데(verified·라이브 unit_price 실재) 온톨로지 배선 형식이 없어 정직 선언하는 공유 노드. C2가 196/205/210/211/212 등 고정가룩업 product 노드에 `references → gap-goods-fixed-lookup-no-formula` 추가하면 O5 충족(현 빌드 O5 하드 5 → 0 준비). 가격 있는 상품을 거짓 NEITHER-gap으로 넣지 않기 위한 구분 노드.
+
+## 아크릴 TBD 공유 gap — SA-4 Stage A(okb-knowledge-builder 260704)
+
+<!-- 아크릴 TBD 4상품(165/168/169/170)의 공식은 바인딩됐으나 COMP_ACRYL_PENDING_TBD 단가행 0=견적 원천 부재. -->
+<!-- slug에 'tbd' 포함 → O5 PRICE_GAP_HINTS 화이트리스트 충족(graph-build-spec v1.0.5·가격류 gap). 163 placeholder(1셀 10,000)도 참조. -->
+<!-- 226(아크릴쉐이커코롯토)은 07-04 PRF_GOODS_FIXED_SIZ 재바인딩+자기 siz 3행 단가 실재(견적가능·미출시)=이 TBD 계열 아님. 구 gap-226-acryl-tbd는 D-AC-P1(재-SELECT false-gap 정정)로 제거됨. -->
+
+### [gap-acryl-tbd-formula-no-priced-rows] 아크릴 TBD 공식 바인딩·단가행 0(견적 원천 부재·공유) {unknown}
+- type: gap
+- anchor: none  # 사유: 공식(PRF_ACRYL_*_TBD)·구성요소(COMP_ACRYL_PENDING_TBD)는 실재하나 component_prices 단가행 0 = 견적 원천 부재(실무진 단가 미확정 BLOCKED)
+- badge: unknown
+- src: {source_file: "01_curation/_cache/acryl-price-chain-260704.csv", source_locator: "PRD_000165/168/169/170 → PRF_ACRYL_{PHCOROTTO,3DCOROTTO,3DBLOCK,SHAKER}_TBD → COMP_ACRYL_PENDING_TBD·price_rows=0(전수 실측) + 163 COMP_ACRYL_MINIPART_TBD 1셀 placeholder 10,000", captured_at: "live 2026-07-04", badge: verified, src_id: SR-ac-0704}
+- src: {source_file: "_workspace/huni-ontology-kb/01_curation/pack-acrylic.md", source_locator: "§1.1 GAP TBD·§3.10 GAP-AC-5·§4 미출시/TBD 정직 표기·§5.2 SA-4", captured_at: "2026-07-04", badge: verified, src_id: SR-pack-ac}
+- gap_what: "아크릴 TBD 4상품(165 포카코롯토·168 입체코롯토·169 입체블럭·170 쉐이커·전부 use_yn=N 미출시)의 가격공식 PRF_ACRYL_*_TBD가 구성요소 COMP_ACRYL_PENDING_TBD(use_dims [min_qty])에 바인딩됐으나 component_prices 단가행이 0셀 = 견적 원천 부재(견적 불가). 163 아크릴미니파츠(PRF_ACRYL_MINIPART→COMP_ACRYL_MINIPART_TBD)는 단가행 1셀이나 placeholder 10,000(note '단가 미정')=양면(current_value 10,000 / authority 미정). ★t_prd_product_prices 직접단가룩업은 0행(gap-goods-fixed-lookup 아키타입 아님·pack T-7). 공식은 있으므로 '고아 공식'이 아니라 '단가 미충전'이 본질. slug에 'tbd' 포함→O5 가격류 gap 충족(graph-build-spec v1.0.5)"
+- gap_fill_from: "실무진 단가 확정(source-registry §9 GAP-5·_foundation/batch/wiring HANDOFF 아크릴 *_TBD BLOCKED) → COMP_ACRYL_PENDING_TBD/COMP_ACRYL_MINIPART_TBD component_prices 단가행 충전 → §18 가격공식 설계·§7 dbmap 적재(인간 승인). 미출시(use_yn=N)라 추천 결과 제외·팬텀 가격 금지"
+- gap_owner: staff
+- 본문: 아크릴 TBD 공유 gap. 공식/구성요소는 실재하나 단가행이 없어 견적이 불가한 것을 정직 선언하는 공유 노드(165/168/169/170이 references로 O5 충족). ★226(아크릴쉐이커코롯토)은 이 TBD 계열 아님 — 07-04 라이브에서 PRF_GOODS_FIXED_SIZ 재바인딩+자기 siz 3행 단가 실재(611=9,000·612/613=7,500·견적가능·미출시). 구 gap-226-acryl-tbd는 D-AC-P1(재-SELECT false-gap 정정)로 제거·226 O5=priced_by 충족.
