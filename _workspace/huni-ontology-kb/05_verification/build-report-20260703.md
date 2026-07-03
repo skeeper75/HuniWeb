@@ -2,9 +2,9 @@
 
 > build_graph.py · 정본 /Users/innojini/Dev/HuniWeb/_workspace/huni-ontology-kb/03_kb → 04_graph. 생성=빌드(검증은 별도 레인·okb-adversarial-gate).
 
-- 판정: **PASS(하드 0)** · 하드 위반 0 · 소프트 경고 530
-- 노드 1142 · 엣지 3534
-- 멱등 해시: nodes.jsonl=dd19381b7b50e005 · edges.jsonl=6f2ec4b9541fffea
+- 판정: **PASS(하드 0)** · 하드 위반 0 · 소프트 경고 524
+- 노드 1141 · 엣지 3534
+- 멱등 해시: nodes.jsonl=37aa87c6bfd5b6a7 · edges.jsonl=b2f44d6b7f2d65cc
 
 ## 노드 수 (타입별)
 - bundle_qty: 55
@@ -22,14 +22,14 @@
 - process: 67
 - product: 122
 - rule: 7
-- size: 117
+- size: 116
 - term: 7
 
 ## 엣지 수 (rel별)
 - alias_of: 19
 - constrains: 11
 - decided_because: 19
-- derived_from: 23
+- derived_from: 26
 - has_component: 190
 - has_member: 27
 - has_option_group: 132
@@ -40,7 +40,7 @@
 - has_size: 254
 - in_category: 164
 - option_refs: 291
-- priced_by: 111
+- priced_by: 108
 - references: 1441
 - uses_material: 359
 
@@ -48,7 +48,7 @@
 - candidate: 20
 - defect: 20
 - unknown: 215
-- verified: 887
+- verified: 886
 
 ## 무결성 6검사
 - I-1 고아(하드 유형 product/formula/component): 0
@@ -494,12 +494,6 @@
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-tattoo -> 가격구성요소-완제품가-합가형-룩업
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-tattoo -> 옵션그룹-cpq
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-tattoo -> sticker-tattoo-nodes
-- I-1 고아 노드(연결 대기·Phase 4): process-PROC_000001 (process)
-- I-1 고아 노드(연결 대기·Phase 4): process-PROC_000056 (process)
-- I-1 고아 노드(연결 대기·Phase 4): process-PROC_000017 (process)
-- I-1 고아 노드(연결 대기·Phase 4): process-PROC_000021 (process)
-- I-1 고아 노드(연결 대기·Phase 4): process-PROC_000098 (process)
-- I-1 고아 노드(연결 대기·Phase 4): size-SIZ_000499 (size)
 - O4 index 미등재 파일: formula/set-components.md (component-COMP_HC_MUSEON_COVERBIND)
 - O4 index 미등재 파일: formula/set-components.md (component-COMP_BIND_HC_TWINRING)
 - O4 index 미등재 파일: formula/set-components.md (component-COMP_BIND_JUNGCHEOL)

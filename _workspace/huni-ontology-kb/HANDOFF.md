@@ -2,38 +2,44 @@
 
 ## 다음 시작점
 
-**디지털36+스티커16+실사28 = 80상품 완성(GO)** — 다음 상품군은 **셋트 계열(책자/포토북/캘린더·§23 연계)** 또는 **문구/굿즈파우치/악세사리**. `huni-ontology-kb-orchestrator`로 "<상품군> KB 확장".
-루프는 `_meta/expansion-plan.md` §1~§4 그대로(팩[slug=product-NNN-kebab 강제]→구축[자기 파일만·공유축은 반환]→3축 적대검증[결정론 우선]→질의 게이트).
-★확장 교훈(반영됨): ① slug 정본=product-NNN-kebab(실사에서 팩이 강제→dead-link 0·명명분열 0, 스티커 D-STK-2 재발 안 함). ② 가격 아키타입을 prc_typ로 정확 기록(디지털=원자합산 / 스티커=고정룩업+band+팩 / 실사=면적매트릭스 [가로×세로]·off-grid ceiling·가로세로 스왑 비대칭 주의). ③ 셋트 계열은 §23 산출(member_of·evaluate_set_price) 재사용·라이브 미결(088 적재 승인 대기 등)과 얽힘 주의.
+**디지털36+스티커16+실사28+셋트계열42 = 122상품 완성(GO)** — 다음 상품군은 **문구·굿즈파우치·악세사리**(확장계획 순번 5·Low·원천 결함 잔존 많음→양면 표기 비중 높을 것). `huni-ontology-kb-orchestrator`로 "<상품군> KB 확장".
+루프는 `_meta/expansion-plan.md` §1~§4 그대로(팩[slug=product-NNN-kebab 강제]→Stage A 공유 스캐폴드 선민팅→Stage B 클러스터 팬아웃[자기 파일만·미민팅축은 needs_axis 반환]→Stage C1 축민팅+C2 엣지배선/index→3축 적대검증→질의 게이트).
+★셋트 확장 실측 워크플로 재사용: `_meta/workflows/okb-set-build-stageB.js`(클러스터 팬아웃)·`okb-set-verify.js`(3축 검증) 복사·수정.
 
-## 미해결 / 블로커 (전부 비차단)
+## 이번 세션(셋트 계열) 교훈 (반영됨)
 
-- 판수 GAP(마스터 15 vs 판걸이수 18, 73×98) — 실무진 확인 대기 · `GAP_pansu_73x98` 노드로 정직 표기
-- 016 자재 대표 subset vs 전수 민팅 정책 — architect 상신(`GAP_016_material`)
-- 확장 advisory 4건(비차단·게이트 GO): meta orphan GAP 2·log 미기록·use_yn 포맷 편차·042 굿즈 원천컨펌(라이브 오적재 KB가 이미 defect+GAP 표기)
-- PROC_000085(상품 미바인딩 공정) 축 노드 지위 — architect 판단
-- 봉투/케이스 세트 모델(Q-ID-A)·박색 옵션풀(C-06) — 타 하네스 공통 미결 큐
+- ★**스키마 `member_of` 없음** — 셋트 관계는 **has_member(부모→구성원·R13) 단방향**만. 구성원→부모는 `references [[부모]]` backlink + props. 구성원(자체 공식 0행)의 O5 충족 = **`derived_from → 부모 product`**(priced_by 위조 금지 — 095/096/098이 Phase 4에서 적발·교정). 고정가형 셋트 구성원 규약 = derived_from 부모.
+- ★**product(프론트매터) 노드는 badge=defect 불가**(L-9는 블록노드 current/authority만 파싱). 양면은 **badge=verified + gap 노드 references**로(088 선례: 현재값 796,900 verified + gap-set-088-redesign-pending).
+- ★**공유축 동시 mint 충돌 방지 = Stage A 선민팅 + Stage B는 needs_axis 반환(직접 mint 금지) + Stage C 일괄 민팅/배선.** 클러스터 병렬이 shared 파일(materials/processes/index) 동시편집하면 충돌 — 상품 파일만 쓰게 격리.
+- ★**latest-wins 필수**: readiness-master(06-26)·live-snapshot(20260702_1119)은 셋트 면지 재설계(2026-07-03)·068~070 mint(06-30)·캘린더 공식 바인딩(07-01) 前이라 STALE. §23 post-verify 실호출이 정본.
+- ★**캘린더 108~112 = 셋트 아님(단품·PRF_DGP_CAL_*)** — has_member 금지. design-calendar 고정가만 GAP.
+
+## 미해결 / 블로커 (전부 비차단·KB는 정직 표기)
+
+- **088-redesign-260702** 적재 승인 대기(표지9,000·싸바리·100부 1,800,000) → 승인 시 현재값 796,900 교체. `gap-set-088-redesign-pending`.
+- **셋트 UI siz_cd 미전파**(094/097/100 화면0원·코드 C트랙 `_foundation/remediation/DEV-REQUEST-set-sim-sizcd-260702.md`) — 엔진골든은 정상·화면 실견적의 선행. `gap-set-simulate-sizcd`.
+- **071 트윈링책자** 셋트 미성립(구성원 미mint·cover_mult ×2 엔진 C트랙 BLOCKED). `gap-071-set-notmembered`.
+- **069/070 _FOIL 박분기** 정본화 인간 승인 대기·**S1/S2 내지인쇄 이중합산·068~070 코팅드롭** 코드 C트랙(전 책자 공통).
+- 용도 추천형 커버리지 GAP(앨범/포토 전용 INTENT 미등재) — 후속 확장 시 intent 노드 보강.
+- 이전 세션 잔여(비차단): 판수 GAP 73×98·016 자재 subset 정책·PROC_000085 축 지위.
 
 ## 현재 상태 (2026-07-03 종료 시점)
 
-- **80상품 완성 GO** = 디지털인쇄 36 + 스티커 16 + 실사 28. 그래프 노드 963·엣지 3047·하드 위반 0·멱등(직접 재빌드 확인). product 노드 정확히 80.
-- 전 상품군 O1~O7 게이트 GO(라이브 evaluate_price 대조 오차 0·환각 0·미출시 정직). 커밋 4건(`ce29002`→`9b3ccd9`→`65936c9`→`7a62395`).
-- 4단 확장 루프 검증 완료: 팩 → 구축(자기 파일만) → 3축 적대검증(결정론 우선) → 질의 게이트. `_meta/expansion-plan.md` §1~§4.
-- 재개 방법: `huni-ontology-kb-orchestrator` 스킬에 "<상품군> KB 확장". 워크플로 스크립트 선례 = `.claude/.../workflows/scripts/okb-expand-silsa-*.js`(팩+구축+통합) + `okb-silsa-verify-gate-*.js`(검증+게이트) 복사·수정.
+- **122상품 완성 GO** = 디지털36 + 스티커16 + 실사28 + 셋트계열42(부모10: 068/069/070/072/077/082/088/094/097/100 + 구성원27 + 캘린더5 108~112). 그래프 노드 1141·엣지 3534·하드 0·소프트 524·멱등(재빌드 해시 동일 37aa87c6…). product 파일 180.
+- 셋트 계열 O1~O7 전 게이트 GO(`06_query_gate/gate-verdict-set-series-260703.md`·14시나리오·라이브 EXACT 오차0 9건·거절형 4/4 정직·양면 정직).
+- Phase 4 적대검증 1라운드 수렴(High 0·Medium 4·Low 2 전부 교정·I-1 고아 6→0).
+- 셋트 공유 스캐폴드: `formula/set-formulas.md`(공식17)·`set-components.md`(구성요소15)·축 58 신규·GAP 9.
 
 ## 이번 세션 결정 (relitigate 금지)
 
-1. **하네스 §33 신규 구축** — 에이전트 6인(okb-*) + 스킬 3종 + dynamic workflow 실행 모드
-2. **§9 위키 승계+재사용**(재병합 금지) · **파일=정본, 그래프=결정론 빌드 파생물**(md→jsonl→SQLite 3층·Kuzu 기각) · **파일럿=디지털인쇄** · **KB 범위=상품+가격만**(주문/배송/회원/쿠폰=거절)
-3. 스키마 v1.0.1 **사용자 승인 완료** — 개체 17종·관계 19종·출처 5필드·badge 4종·양면/GAP 노드·가격은 연결까지(값=evaluate_price 권위). 실사에서 L-20 lint(size 앵커 중복 방지) 추가.
-4. **가격 아키타입 3종 확정**(prc_typ로 기록): 디지털=원자합산 / 스티커=고정룩업+band+팩 / 실사=면적매트릭스 [가로×세로]·off-grid ceiling·가로세로 스왑 비대칭.
-5. **slug 정본 = product-NNN-kebab**[HARD] — 팩 단계에서 강제해 넘긴다(스티커 명명 분열 재발 방지·실사에서 dead-link 0 실증).
-6. 워크플로 운영 교훈[HARD급]: 서브에이전트 구조화 반환은 초소형(경로+숫자+한 문장)만 — 대형 반환은 필수 필드 누락으로 5회 재시도 실패 재발(3회 실증). 실패해도 작업 파일은 디스크에 남으므로 진단은 파일 실측부터.
+1. 셋트 계열 확장 = 검증된 4단 루프에 **Stage A(공유 스캐폴드 선민팅)·Stage C(축민팅+엣지배선 분리)** 추가(공유축 동시 mint 충돌 방지). 워크플로 스크립트 `_meta/workflows/okb-set-*.js` 정본.
+2. 셋트 가격 = evaluate_set_price(구성원 evaluate_price 합산+부모공식+할인). 구성원 자체공식 0행 = derived_from 부모(O5 충족·priced_by 위조 금지).
+3. 캘린더 = 단품 완제품(셋트 아님)·has_member 금지. 별도 캘린더 전용 팩은 미작성(§0.1 판정으로 단품 5개 흡수).
+4. 088·094/097/100·069/070 = 양면 정직 표기(현재값 verified + pending/코드결함 gap). 라이브 미결과 얽힘을 현재값/GAP로 정직 분리.
 
 ## 건드리지 말 것
 
-- `03_kb/` 정본 노드(product 80 + 축·공식·용어·규칙·GAP) + `04_graph/build_graph.py`(하드 위반 0·멱등·L-20 포함) — 수정은 반드시 정본 파일 경유 후 재빌드
-- `02_ontology/` 스키마 v1.0.1(승인본) — 변경 시 이력 절+마이그레이션 노트 필수
-- `00_research/methodology-playbook.md`(7대 원칙·D-1~D-22) · `01_curation/`(source-registry STALE 금지·pack-digital-print·pack-sticker·pack-silsa)
-- 검증 판정 문서(`05_verification/`·`06_query_gate/gate-verdict-*.md`) — 재게이트 시 append, 덮어쓰기 금지
-- 연당가 양면 노드(스티커 6+SIZ_170·실사 원천결함 2) = §23 재적재 워크리스트 입력 — 삭제 금지(라이브 재적재 완료 시 현재값=정답으로 승격)
+- `03_kb/` 정본 노드(product 122 + 축·공식·용어·규칙·GAP) + `04_graph/build_graph.py`(하드0·멱등·L-20) — 수정은 정본 파일 경유 후 재빌드.
+- `01_curation/pack-set-series.md`(셋트 정답소스·STALE함정·양면표기)·`02_ontology/` 스키마 v1.0.1(승인본).
+- 검증/게이트 판정 문서(`05_verification/defect-setseries-*`·`06_query_gate/gate-verdict-set-series-260703.md`) — 재게이트 시 append, 덮어쓰기 금지.
+- 양면/GAP 노드(088 pending·071·design-calendar·siz_cd·_FOIL·s1s2) = 라이브 재적재/승인/C트랙 완료 시 현재값=정답 승격 입력 — 삭제 금지.

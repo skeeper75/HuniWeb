@@ -435,7 +435,7 @@ The full original directive (all 17 sections, verbatim) is archived at
 
 **산출물 루트:** `_workspace/huni-ontology-kb/` (00_research·01_curation·02_ontology·03_kb[정본]·04_graph[파생]·05_verification·06_query_gate·_meta). 6인 팀(`okb-methodology-researcher`∥`okb-source-curator` 기준점 팬아웃 → `okb-ontology-architect` 스키마[★인간 승인 게이트] → `okb-knowledge-builder` 구축 → `okb-adversarial-verifier` 6축 적대 검증 루프 → `okb-query-gate` 블라인드 NL 시나리오·O1~O7) + 스킬 3종(orchestrator·okb-ontology-authoring·okb-adversarial-gate). 권위=260702 엑셀·가격값 권위=evaluate_price·생성≠검증·LLM 숫자 손전사 금지·STALE 인용 금지·라이브 읽기전용·DB 미적재.
 
-**변경이력:** 최신: 2026-07-03 디지털36+스티커16+실사28=80상품 완성 GO(그래프 노드 963·엣지 3047·하드 0·멱등·실사 면적매트릭스 [가로×세로]·off-grid ceiling 실증·slug 정본·게이트 18시나리오 라이브 가격 14건 오차0·O1~O7 GO — 다음=셋트 계열/문구) → `_workspace/huni-ontology-kb/_meta/CHANGELOG.md`
+**변경이력:** 최신: 2026-07-03 셋트계열42 완성 GO(누적 122상품=디지털36+스티커16+실사28+셋트42[부모10 068/069/070/072/077/082/088/094/097/100+구성원27+캘린더5 108~112])·그래프 노드1141·엣지3534·하드0·멱등·게이트 14시나리오 라이브 EXACT 오차0 9건·거절4/4·O1~O7 GO. ★교훈: 스키마 member_of 없음(has_member만)·product 노드 badge=defect 불가(양면=verified+gap·088 선례)·구성원 O5=derived_from 부모(priced_by 위조 금지)·Stage A선민팅+Stage C축민팅/배선 분리로 공유축 충돌 방지·캘린더=단품(셋트 아님). 다음=문구/굿즈 → `_workspace/huni-ontology-kb/_meta/CHANGELOG.md`
 
 ## 34. Harness: Huni-Load-Governance (적재 거버넌스 · 그릇 규범 + 옵션 쓰임새 전수 판정)
 
