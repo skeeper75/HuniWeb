@@ -1,0 +1,745 @@
+[
+ {
+  "prd_cd": "PRD_000186",
+  "prd_nm": "사각손거울",
+  "grp": "사이즈",
+  "per_prod_comp": true,
+  "cpq": "new",
+  "variants": [
+   [
+    "S (75x130 mm)",
+    5000,
+    "SIZ_000384",
+    "reuse"
+   ],
+   [
+    "M (95x166 mm)",
+    5500,
+    "SIZ_000386",
+    "reuse"
+   ],
+   [
+    "L (120x218 mm)",
+    6000,
+    "SIZ_000388",
+    "reuse"
+   ]
+  ],
+  "delink": []
+ },
+ {
+  "prd_cd": "PRD_000187",
+  "prd_nm": "블랙사각손거울",
+  "grp": "사이즈",
+  "per_prod_comp": true,
+  "cpq": "new",
+  "variants": [
+   [
+    "S (75x130 mm)",
+    6000,
+    "SIZ_000384",
+    "reuse"
+   ],
+   [
+    "M (95x166 mm)",
+    7500,
+    "SIZ_000386",
+    "reuse"
+   ],
+   [
+    "L (120x218 mm)",
+    9000,
+    "SIZ_000388",
+    "reuse"
+   ]
+  ],
+  "delink": []
+ },
+ {
+  "prd_cd": "PRD_000195",
+  "prd_nm": "벨벳쿠션",
+  "grp": "인쇄면",
+  "per_prod_comp": false,
+  "cpq": "new",
+  "variants": [
+   [
+    "단면",
+    15000,
+    "SIZ_000564",
+    "mint"
+   ],
+   [
+    "양면",
+    16000,
+    "SIZ_000565",
+    "mint"
+   ]
+  ],
+  "delink": [
+   "MAT_000271",
+   "MAT_000272"
+  ]
+ },
+ {
+  "prd_cd": "PRD_000200",
+  "prd_nm": "핀버튼",
+  "grp": "사이즈",
+  "per_prod_comp": false,
+  "cpq": "new",
+  "variants": [
+   [
+    "원형 58mm",
+    900,
+    "SIZ_000548",
+    "reuse"
+   ],
+   [
+    "사각 57mm",
+    1000,
+    "SIZ_000549",
+    "reuse"
+   ]
+  ],
+  "delink": []
+ },
+ {
+  "prd_cd": "PRD_000201",
+  "prd_nm": "레더스트랩키링",
+  "grp": "사이즈",
+  "per_prod_comp": false,
+  "cpq": "new",
+  "variants": [
+   [
+    "미니 50mm",
+    3000,
+    "SIZ_000550",
+    "reuse"
+   ],
+   [
+    "일반 100mm",
+    3500,
+    "SIZ_000551",
+    "reuse"
+   ]
+  ],
+  "delink": []
+ },
+ {
+  "prd_cd": "PRD_000202",
+  "prd_nm": "키캡키링",
+  "grp": "구수",
+  "per_prod_comp": false,
+  "cpq": "new",
+  "variants": [
+   [
+    "2구",
+    8000,
+    "SIZ_000566",
+    "mint"
+   ],
+   [
+    "3구",
+    10000,
+    "SIZ_000567",
+    "mint"
+   ],
+   [
+    "4구",
+    12000,
+    "SIZ_000568",
+    "mint"
+   ],
+   [
+    "2x2구",
+    12000,
+    "SIZ_000406",
+    "reuse"
+   ]
+  ],
+  "delink": [
+   "MAT_000277",
+   "MAT_000278",
+   "MAT_000279"
+  ]
+ },
+ {
+  "prd_cd": "PRD_000203",
+  "prd_nm": "LED투명키캡키링",
+  "grp": "구수",
+  "per_prod_comp": false,
+  "cpq": "new",
+  "variants": [
+   [
+    "1구",
+    6000,
+    "SIZ_000569",
+    "mint"
+   ],
+   [
+    "2구",
+    8000,
+    "SIZ_000570",
+    "mint"
+   ],
+   [
+    "3구",
+    10000,
+    "SIZ_000571",
+    "mint"
+   ],
+   [
+    "4구",
+    12000,
+    "SIZ_000572",
+    "mint"
+   ]
+  ],
+  "delink": [
+   "MAT_000277",
+   "MAT_000278",
+   "MAT_000279",
+   "MAT_000280"
+  ]
+ },
+ {
+  "prd_cd": "PRD_000215",
+  "prd_nm": "클립보드",
+  "grp": "규격",
+  "per_prod_comp": false,
+  "cpq": "new",
+  "variants": [
+   [
+    "A5용 (164 x 230 mm)",
+    8000,
+    "SIZ_000413",
+    "reuse"
+   ],
+   [
+    "A4용 (230 x 330 mm)",
+    10000,
+    "SIZ_000415",
+    "reuse"
+   ]
+  ],
+  "delink": []
+ },
+ {
+  "prd_cd": "PRD_000216",
+  "prd_nm": "투명클립보드",
+  "grp": "규격",
+  "per_prod_comp": false,
+  "cpq": "new",
+  "variants": [
+   [
+    "A5용",
+    9000,
+    "SIZ_000573",
+    "mint"
+   ],
+   [
+    "A4용",
+    15000,
+    "SIZ_000574",
+    "mint"
+   ]
+  ],
+  "delink": [
+   "MAT_000295",
+   "MAT_000296"
+  ]
+ },
+ {
+  "prd_cd": "PRD_000220",
+  "prd_nm": "폰스트랩",
+  "grp": "인쇄면",
+  "per_prod_comp": false,
+  "cpq": "new",
+  "variants": [
+   [
+    "단면",
+    4500,
+    "SIZ_000575",
+    "mint"
+   ],
+   [
+    "양면",
+    6000,
+    "SIZ_000576",
+    "mint"
+   ]
+  ],
+  "delink": []
+ },
+ {
+  "prd_cd": "PRD_000229",
+  "prd_nm": "이미지피켓",
+  "grp": "인쇄면",
+  "per_prod_comp": false,
+  "cpq": "new",
+  "variants": [
+   [
+    "양면유광 M",
+    12000,
+    "SIZ_000577",
+    "mint"
+   ],
+   [
+    "양면유광 L",
+    15000,
+    "SIZ_000578",
+    "mint"
+   ]
+  ],
+  "delink": [
+   "MAT_000317",
+   "MAT_000318"
+  ]
+ },
+ {
+  "prd_cd": "PRD_000230",
+  "prd_nm": "레더 플랫 파우치",
+  "grp": "사이즈",
+  "per_prod_comp": false,
+  "cpq": "reuse",
+  "variants": [
+   [
+    "M",
+    8600,
+    "SIZ_000433",
+    "reuse"
+   ],
+   [
+    "L",
+    9800,
+    "SIZ_000434",
+    "reuse"
+   ]
+  ],
+  "delink": []
+ },
+ {
+  "prd_cd": "PRD_000231",
+  "prd_nm": "레더 슬림 파우치",
+  "grp": "사이즈",
+  "per_prod_comp": false,
+  "cpq": "new",
+  "variants": [
+   [
+    "M",
+    8600,
+    "SIZ_000435",
+    "reuse"
+   ],
+   [
+    "L",
+    10200,
+    "SIZ_000436",
+    "reuse"
+   ]
+  ],
+  "delink": []
+ },
+ {
+  "prd_cd": "PRD_000232",
+  "prd_nm": "레더 삼각 파우치",
+  "grp": "사이즈",
+  "per_prod_comp": false,
+  "cpq": "new",
+  "variants": [
+   [
+    "M",
+    11000,
+    "SIZ_000437",
+    "reuse"
+   ],
+   [
+    "L",
+    12500,
+    "SIZ_000438",
+    "reuse"
+   ]
+  ],
+  "delink": []
+ },
+ {
+  "prd_cd": "PRD_000233",
+  "prd_nm": "레더 볼륨 파우치",
+  "grp": "형태",
+  "per_prod_comp": false,
+  "cpq": "new",
+  "variants": [
+   [
+    "정사각M",
+    10800,
+    "SIZ_000579",
+    "mint"
+   ],
+   [
+    "직사각M",
+    11500,
+    "SIZ_000580",
+    "mint"
+   ]
+  ],
+  "delink": [
+   "MAT_000321",
+   "MAT_000322"
+  ]
+ },
+ {
+  "prd_cd": "PRD_000238",
+  "prd_nm": "레더 아이패드/노트북 파우치",
+  "grp": "사이즈",
+  "per_prod_comp": false,
+  "cpq": "new",
+  "variants": [
+   [
+    "11인치",
+    35000,
+    "SIZ_000581",
+    "mint"
+   ],
+   [
+    "13인치",
+    48000,
+    "SIZ_000582",
+    "mint"
+   ],
+   [
+    "15인치",
+    58000,
+    "SIZ_000583",
+    "mint"
+   ]
+  ],
+  "delink": [
+   "MAT_000323",
+   "MAT_000324",
+   "MAT_000325"
+  ]
+ },
+ {
+  "prd_cd": "PRD_000239",
+  "prd_nm": "캔버스 플랫 파우치",
+  "grp": "사이즈",
+  "per_prod_comp": false,
+  "cpq": "new",
+  "variants": [
+   [
+    "M",
+    8800,
+    "SIZ_000584",
+    "mint"
+   ],
+   [
+    "L",
+    9800,
+    "SIZ_000585",
+    "mint"
+   ]
+  ],
+  "delink": [
+   "MAT_000319",
+   "MAT_000320"
+  ]
+ },
+ {
+  "prd_cd": "PRD_000243",
+  "prd_nm": "린넨 스트링 파우치",
+  "grp": "사이즈",
+  "per_prod_comp": false,
+  "cpq": "new",
+  "variants": [
+   [
+    "S",
+    8500,
+    "SIZ_000586",
+    "mint"
+   ],
+   [
+    "M",
+    10000,
+    "SIZ_000587",
+    "mint"
+   ],
+   [
+    "L",
+    11000,
+    "SIZ_000588",
+    "mint"
+   ]
+  ],
+  "delink": [
+   "MAT_000319",
+   "MAT_000320",
+   "MAT_000326"
+  ]
+ },
+ {
+  "prd_cd": "PRD_000244",
+  "prd_nm": "타이벡 플랫 파우치",
+  "grp": "사이즈",
+  "per_prod_comp": false,
+  "cpq": "new",
+  "variants": [
+   [
+    "M",
+    8600,
+    "SIZ_000589",
+    "mint"
+   ],
+   [
+    "L",
+    9800,
+    "SIZ_000590",
+    "mint"
+   ],
+   [
+    "XL",
+    13500,
+    "SIZ_000591",
+    "mint"
+   ]
+  ],
+  "delink": [
+   "MAT_000319",
+   "MAT_000320",
+   "MAT_000327"
+  ]
+ },
+ {
+  "prd_cd": "PRD_000245",
+  "prd_nm": "타이벡 슬림 파우치",
+  "grp": "사이즈",
+  "per_prod_comp": false,
+  "cpq": "new",
+  "variants": [
+   [
+    "M",
+    6800,
+    "SIZ_000592",
+    "mint"
+   ],
+   [
+    "L",
+    8000,
+    "SIZ_000593",
+    "mint"
+   ]
+  ],
+  "delink": [
+   "MAT_000319",
+   "MAT_000320"
+  ]
+ },
+ {
+  "prd_cd": "PRD_000246",
+  "prd_nm": "타이벡 삼각 파우치",
+  "grp": "사이즈",
+  "per_prod_comp": false,
+  "cpq": "new",
+  "variants": [
+   [
+    "M",
+    7000,
+    "SIZ_000594",
+    "mint"
+   ],
+   [
+    "L",
+    8000,
+    "SIZ_000595",
+    "mint"
+   ]
+  ],
+  "delink": [
+   "MAT_000319",
+   "MAT_000320"
+  ]
+ },
+ {
+  "prd_cd": "PRD_000247",
+  "prd_nm": "타이벡 스트링 파우치",
+  "grp": "사이즈",
+  "per_prod_comp": false,
+  "cpq": "new",
+  "variants": [
+   [
+    "M",
+    10000,
+    "SIZ_000596",
+    "mint"
+   ],
+   [
+    "L",
+    12000,
+    "SIZ_000597",
+    "mint"
+   ],
+   [
+    "XL",
+    15000,
+    "SIZ_000598",
+    "mint"
+   ]
+  ],
+  "delink": [
+   "MAT_000319",
+   "MAT_000320",
+   "MAT_000327"
+  ]
+ },
+ {
+  "prd_cd": "PRD_000249",
+  "prd_nm": "메쉬슬림파우치",
+  "grp": "사이즈",
+  "per_prod_comp": false,
+  "cpq": "new",
+  "variants": [
+   [
+    "M",
+    8600,
+    "SIZ_000599",
+    "mint"
+   ],
+   [
+    "L",
+    10000,
+    "SIZ_000600",
+    "mint"
+   ]
+  ],
+  "delink": [
+   "MAT_000319",
+   "MAT_000320"
+  ]
+ },
+ {
+  "prd_cd": "PRD_000252",
+  "prd_nm": "레더 슬림 미니파우치",
+  "grp": "형태",
+  "per_prod_comp": false,
+  "cpq": "new",
+  "variants": [
+   [
+    "직사각",
+    6000,
+    "SIZ_000601",
+    "mint"
+   ],
+   [
+    "정사각",
+    6500,
+    "SIZ_000602",
+    "mint"
+   ]
+  ],
+  "delink": [
+   "MAT_000329",
+   "MAT_000330"
+  ]
+ },
+ {
+  "prd_cd": "PRD_000254",
+  "prd_nm": "레더 볼륨 미니파우치",
+  "grp": "형태",
+  "per_prod_comp": false,
+  "cpq": "new",
+  "variants": [
+   [
+    "정사각",
+    7500,
+    "SIZ_000603",
+    "mint"
+   ],
+   [
+    "직사각",
+    8000,
+    "SIZ_000604",
+    "mint"
+   ]
+  ],
+  "delink": [
+   "MAT_000329",
+   "MAT_000330"
+  ]
+ },
+ {
+  "prd_cd": "PRD_000273",
+  "prd_nm": "타이벡 양면 백팩",
+  "grp": "사이즈",
+  "per_prod_comp": false,
+  "cpq": "new",
+  "variants": [
+   [
+    "M",
+    17500,
+    "SIZ_000605",
+    "mint"
+   ],
+   [
+    "L",
+    22000,
+    "SIZ_000606",
+    "mint"
+   ]
+  ],
+  "delink": [
+   "MAT_000319",
+   "MAT_000320"
+  ]
+ },
+ {
+  "prd_cd": "PRD_000274",
+  "prd_nm": "타이벡보냉보틀백",
+  "grp": "사이즈",
+  "per_prod_comp": false,
+  "cpq": "new",
+  "variants": [
+   [
+    "M",
+    19500,
+    "SIZ_000607",
+    "mint"
+   ],
+   [
+    "L",
+    21000,
+    "SIZ_000608",
+    "mint"
+   ]
+  ],
+  "delink": [
+   "MAT_000319",
+   "MAT_000320"
+  ]
+ },
+ {
+  "prd_cd": "PRD_000280",
+  "prd_nm": "레더라벨제작",
+  "grp": "사이즈",
+  "per_prod_comp": false,
+  "cpq": "new",
+  "variants": [
+   [
+    "레더 15x30mm",
+    200,
+    "SIZ_000492",
+    "reuse"
+   ],
+   [
+    "레더 20x40mm",
+    240,
+    "SIZ_000494",
+    "reuse"
+   ],
+   [
+    "레더 30x50mm",
+    290,
+    "SIZ_000496",
+    "reuse"
+   ]
+  ],
+  "delink": []
+ }
+]

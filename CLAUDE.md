@@ -125,7 +125,7 @@ fresh session reads HANDOFF.md + the harness CHANGELOG and resumes with zero re-
 
 **진행 상태:** round-24까지 진행(round-1~24 누적 서술 상세 → `_workspace/huni-dbmap/CHANGELOG.md` "## 진행 상태 스냅샷"). GO분 적재됨·차단/결정분만 미적재 원칙.
 
-**변경이력:** 최신: 2026-07-04 미적재 2시트(상품악세사리·굿즈파우치) 가격 적재 + 굿즈 variant 공식식 파일럿 — 라이브 COMMIT 4건(전부 webadmin simulate 검증·undo/백업). ①상품악세사리 Phase1(t_prd_template_prices 34·저청구 22템플릿 해소)②GAP-4(누락 24 variant 템플릿 mint TMPL-067~090·활성34→58)③굿즈 Phase1(t_prd_product_prices 33 단일가·무가격71→38)④굿즈 GB-2 파일럿(캔버스삼각파우치240 variant 고정가 공식식 종단·공유 PRF_GOODS_FIXED_SIZ+COMP_GOODS_FIXED_SIZ mint=전32전파용·M9,800/L11,500). ★가격모델 정본(사용자확정): 본체=원자합산형|고정단가형+부자재 별도합산·evaluate_price base=직접단가 XOR 공식(배타)·variant 선택형은 공식+구성요소 유일정합(base=명시가 grid=현수막 완제품가 동형·"고정단가≠공식 배타")·[[goods-variant-formula-fixed-price-model-260704]]. 다음=GB-2 동형전파 32·추가상품 addon+수량구간할인 t_dsc_* 배선. 직전: 2026-07-03(3) 적재단계 11시트 전 진단+돈영향 갭 COMMIT 3배치(반전:8/11 stale·진짜미적재 2시트·[[calendar-price-model-atomic-sum-260703]]) → `_workspace/huni-dbmap/CHANGELOG.md`
+**변경이력:** 최신: 2026-07-04(2) 굿즈 variant 32상품 GB-2 전파 완주 — 라이브 COMMIT 2배치(전부 webadmin simulate 검증·undo/백업). ①clean 28(파우치15·거울2·키링3·클립보드2·기타6·siz재사용22/신규45·단가행67·CPQ그룹27+아이템65·자재delink43)②특수 4(194 워터북보틀·198 피크닉매트·217 만년스탬프·226 아크릴쉐이커[TBD공식 은퇴+rebind·인쇄면 siz화+글리터 무가CPQ]). ★교정 3건: search-before-mint(기존 정확 치수 siz 재사용·중복방지[HARD])·186/187 동일siz 공유·가격상이→상품별 구성요소(공유COMP는 siz당 단일가·라이브/webadmin 무충돌 입증)·OPT_REF_DIM.03(자재) 옵션은 ref_key2=usage_cd 필수. 다음=폰케이스 등록(미등록 40기종)·OPTION-same-price 계열 CPQ·addon/수량구간 배선. [[goods-variant-formula-fixed-price-model-260704]]. 직전: 2026-07-04 미적재 2시트 가격 적재+굿즈 variant 공식식 파일럿(240·공유 PRF/COMP_GOODS_FIXED_SIZ mint) → `_workspace/huni-dbmap/CHANGELOG.md`
 
 ---
 

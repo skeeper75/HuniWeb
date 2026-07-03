@@ -1,0 +1,15 @@
+-- 특수 4상품 UNDO
+\set ON_ERROR_STOP on
+BEGIN;
+DELETE FROM t_prc_component_prices WHERE comp_cd='COMP_GOODS_FIXED_SIZ' AND apply_ymd='2026-07-03' AND siz_cd IN ('SIZ_000609','SIZ_000610','SIZ_000399','SIZ_000402','SIZ_000419','SIZ_000420','SIZ_000421','SIZ_000422','SIZ_000423','SIZ_000424','SIZ_000425','SIZ_000611','SIZ_000612','SIZ_000613');
+UPDATE t_prd_product_price_formulas SET frm_cd='PRF_ACRYL_SHCOROTTO_TBD' WHERE prd_cd='PRD_000226';
+UPDATE t_prc_price_formulas SET use_yn='Y' WHERE frm_cd='PRF_ACRYL_SHCOROTTO_TBD';
+DELETE FROM t_prd_product_price_formulas WHERE prd_cd IN ('PRD_000194','PRD_000198','PRD_000217') AND apply_bgn_ymd='2026-07-03';
+DELETE FROM t_prd_product_option_items WHERE prd_cd IN ('PRD_000194','PRD_000198','PRD_000217','PRD_000226') AND opt_cd BETWEEN 'OPV_000734' AND 'OPV_000751';
+DELETE FROM t_prd_product_options WHERE prd_cd IN ('PRD_000194','PRD_000198','PRD_000217','PRD_000226') AND opt_cd BETWEEN 'OPV_000734' AND 'OPV_000751';
+DELETE FROM t_prd_product_option_groups WHERE prd_cd IN ('PRD_000194','PRD_000198','PRD_000217','PRD_000226') AND opt_grp_cd BETWEEN 'OPT_000200' AND 'OPT_000204';
+DELETE FROM t_prd_product_sizes WHERE siz_cd IN ('SIZ_000609','SIZ_000610','SIZ_000611','SIZ_000612','SIZ_000613');
+DELETE FROM t_siz_sizes WHERE siz_cd IN ('SIZ_000609','SIZ_000610','SIZ_000611','SIZ_000612','SIZ_000613');
+UPDATE t_prd_product_materials SET del_yn='N',del_dt=NULL WHERE prd_cd='PRD_000194' AND mat_cd IN ('MAT_000269','MAT_000343');
+UPDATE t_prd_product_materials SET del_yn='N',del_dt=NULL WHERE prd_cd='PRD_000226' AND mat_cd IN ('MAT_000309','MAT_000311','MAT_000313');
+COMMIT;
