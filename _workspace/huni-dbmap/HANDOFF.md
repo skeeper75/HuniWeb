@@ -17,8 +17,12 @@
 ### 이번 세션 추가 COMMIT — OPTION-same-price 7상품 형상/방향 CPQ (되돌리지 말 것)
 `09_load/goods-same-price-cpq-260704/`: 레더/우드/규조토코스터·슬로건·말랑키링·광목파우치·린넨에코백. 가격동일 variant라 공식 없이 **CPQ 옵션만**(옵션그룹7·아이템17·siz mint9). 자재보유=ref→mat(유지)·미보유=siz mint. webadmin PASS(레더코스터3,300·말랑키링10,000·src=PRODUCT_PRICE·형상무관). ★[HARD] **폰케이스류=준비단계**(상품명만·구성요소/가격구성요소 없음·실무진 대기·작업금지 [[goods-phonecase-prep-stage-not-workable-260704]]).
 
-### 이번 세션 추가 — 판형사이즈 오배선 전수 검수·교정 COMMIT
-`09_load/plate-size-audit-260704/`: 판걸이수 시트 판형사이즈↔상품명 정합 전수 검수. 정본=국4절 316x467=SIZ_499·3절 330x540=SIZ_535/330x660=SIZ_475. 진단=오배선 82링크/38상품(완제품사이즈 as-plate)·★가격영향 4상품뿐(016·030·049·112). **14상품 COMMIT**: 국4절 11(책자7·명함2·포토카드1·엽서1)=오배선행 삭제+SIZ_499 generic(016 중복 SIZ_522 정리)·3절660 3(지그재그·와이드2)=SIZ_475 impos_yn='Y'. 검증=fn_best_plate 전건 정합·오배선잔존0·webadmin 지그재그30,000·016 완전견적424(무회귀). 제외=스티커(시트 판형없음)·문구/봉투(시트 미등재). [[plate-size-authority-pangeori-sheet-260704]]
+### 이번 세션 추가 — 판형사이즈 오배선 전수 검수·교정 (1차+2차·전상품 결함0)
+`09_load/plate-size-audit-260704/`: 판걸이수 시트 판형사이즈↔상품명 정합 전수 검수. 정의[HARD]=판형=impos_yn='Y' OR 판걸이수 시트(국4절316x467=SIZ_499·3절330x540=SIZ_535/660=SIZ_475·스티커=SIZ_521).
+- **1차 14상품**: 국4절 11(책자7·명함2·포토카드1·엽서1)=오배선행 삭제+SIZ_499 generic(016 중복 SIZ_522 정리)·3절660 3(지그재그·와이드2)=SIZ_475 impos_yn='Y'.
+- **2차 13상품(★1차 임의제외 오류 교정)**: 합판도무송066/타투067=완제품 as-plate→스티커판형 SIZ_521·낱장자유형055/056=A4 garbage제거(A3/A2 유지)·대형자유형057/문구셋트7/봉투050=판형 불요 제거.
+- 검증=**전 상품 잔존결함 0**·fn_best_plate 정합·016 완전견적424·합판도무송 무회귀·undo/백업.
+- ★재발방지: 원인분석 `ROOT-CAUSE-재발방지-260704.md`(가격영향으로 결함 묵살 금지·묵시적 제외 금지) + **상시 게이트** `_foundation/batch/plate_wiring_integrity_check.sql`(전 상품군 자동·결함0=정합). [[plate-size-authority-pangeori-sheet-260704]]
 
 ### 이전 세션 — addon 배선 COMMIT + 수량구간 할인 검증(NO-OP)
 `09_load/goods-addon-bolchain-260704/`: ①**볼체인 8색 addon → 말랑키링(221)·말랑포카홀더(223)** COMMIT(16링크·TMPL-056~063 기존·1,000원·webadmin grand 11,000 검증). ②**수량구간 할인=이미 완비 검증**(★"미연결"은 stale 오해·링크103+구간details 존재·evaluate_price 실적용 말랑키링100=단가7,000[30%↓]·FABRIC/GOODSA 10%↓·엑셀 대조 미링크갭0). addon 블로커: 아크릴스탠드(226)=base 상품 없음·말랑증사홀더=무가격.
