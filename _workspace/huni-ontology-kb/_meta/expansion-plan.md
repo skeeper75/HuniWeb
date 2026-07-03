@@ -18,7 +18,10 @@
 | 2 | 스티커 16상품 | pilot-candidates 2순위·소재 연당가 변경분 반영 | High | ✅ GO(2026-07-03) |
 | 3 | 실사 28상품 | CPQ 옵션 유일 실적재·면적매트릭스 | Medium | ✅ GO(2026-07-03) |
 | 4 | 셋트계열 42(책자/포토북/캘린더) | has_member·evaluate_set_price·§23 재사용·양면표기(088 등) | Medium | ✅ GO(2026-07-03·122상품 누적) |
-| 5 | 문구·굿즈파우치·악세사리 | 원천 결함 잔존 많음(round-13 계열) — 양면 표기 비중 높을 것 | Low | ⏳ 다음 |
+| 5 | 문구·굿즈파우치·악세사리(~133·아크릴 26 별도) | 원천 결함 잔존 많음·empty-shell/NEITHER-gap 다수 | Low | 🔵 진행중 — SB-1 문구셋트25 GO(2026-07-03·누적147). 잔여 SB-4봉투5→SB-2굿즈~70→SB-3파우치~33 |
+| 6 | 아크릴 146~171(26) | 면적매트릭스·전용 recipe(문구/굿즈 팩 §0.1 판정=별도) | Low | ⏳ 다음(별도 pack-acrylic) |
+
+> **문구/굿즈 서브배치(순번 5·팩 pack-stationery-goods §5):** universe ~133(문구셋트25·굿즈~70·파우치~33·봉투5)이라 서브배치. **SB-1 문구셋트 GO**(evaluate_set_price·sparse 정직·구성원 slug=자기 prd_cd[HARD]). 잔여 SB-2/3/4는 empty-shell/NEITHER-gap 다수→"정직 GAP 표기"가 주 산출(가격 완성 아님). 워크플로 정본=`_meta/workflows/okb-stn-*.js`.
 
 > **셋트 계열 확장 실측(순번 4):** 부모10+구성원27+캘린더5=42노드·축58신규·공식17·구성요소15. 루프에 **Stage A(공유 스캐폴드 선민팅)·Stage C(축민팅 C1 + 엣지배선/index C2 분리)** 를 추가해 공유축 동시 mint 충돌을 막았다(클러스터 병렬은 상품 파일만·미민팅축은 needs_axis 반환). 워크플로 정본 = `_meta/workflows/okb-set-build-stageB.js`·`okb-set-verify.js`. ★교훈: 스키마 member_of 없음(has_member만)·product 노드 badge=defect 불가(양면=verified+gap)·구성원 O5=derived_from 부모(priced_by 위조 금지).
 

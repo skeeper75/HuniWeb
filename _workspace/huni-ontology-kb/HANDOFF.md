@@ -2,9 +2,15 @@
 
 ## 다음 시작점
 
-**디지털36+스티커16+실사28+셋트계열42 = 122상품 완성(GO)** — 다음 상품군은 **문구·굿즈파우치·악세사리**(확장계획 순번 5·Low·원천 결함 잔존 많음→양면 표기 비중 높을 것). `huni-ontology-kb-orchestrator`로 "<상품군> KB 확장".
+**디지털36+스티커16+실사28+셋트계열42+문구셋트25 = 147상품 완성(GO)** — 다음은 **문구/굿즈 나머지 서브배치**(SB-4 봉투5 → SB-2 굿즈~70 → SB-3 파우치~33·팩 `pack-stationery-goods.md` §5). ★대부분 empty-shell/NEITHER-gap(가격 원천 부재)이라 "정직 GAP 표기"가 주 산출. **아크릴 146~171(26)은 별도 pack-acrylic 권장**(면적매트릭스). `huni-ontology-kb-orchestrator`로 "<서브배치> KB 확장".
 루프는 `_meta/expansion-plan.md` §1~§4 그대로(팩[slug=product-NNN-kebab 강제]→Stage A 공유 스캐폴드 선민팅→Stage B 클러스터 팬아웃[자기 파일만·미민팅축은 needs_axis 반환]→Stage C1 축민팅+C2 엣지배선/index→3축 적대검증→질의 게이트).
-★셋트 확장 실측 워크플로 재사용: `_meta/workflows/okb-set-build-stageB.js`(클러스터 팬아웃)·`okb-set-verify.js`(3축 검증) 복사·수정.
+★실측 워크플로 재사용: `_meta/workflows/okb-{set,stn}-build-stageB.js`(클러스터 팬아웃)·`okb-{set,stn}-verify.js`(3축 검증) 복사·수정.
+
+## 문구 셋트(SB-1) 교훈 (반영됨)
+- **sparse grid 정직 프레이밍**[중요]: 단가행 1~2셀=**등록 사이즈가 적을 뿐·등록 사이즈는 PRICE≠0**(off-grid만 견적0·수량 min_qty=1 단일밴드로 전량 커버). "전 사이즈 견적0" 과대 기술 금지 → 부모 badge=candidate + gap-stn-sparse-grid 워딩 정밀(게이트 오판 방지).
+- **구성원 slug=자기 prd_cd**[HARD·재발주의]: 구성원 노드 id/파일명은 **자기 prd_cd**(product-305-… not product-179-…). 부모 prd_cd 오사용=slug HARD 위반(Phase4 적발·개명). anchor는 자기 PRD.
+- 177 분류 conflict(prd_typ .02 라이브 vs 셋트완제품 SOT) = badge=candidate + props(prd_typ_cd_live/authority) + gap-stn-177-classification(defect 프론트매터 금지·088 선례).
+- 삭제 사이즈(SIZ_000170 등 del_yn=Y·정션 활성 load-bearing) 참조 시 del 정직 note 일관 표기.
 
 ## 이번 세션(셋트 계열) 교훈 (반영됨)
 

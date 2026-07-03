@@ -198,3 +198,14 @@
 - anchor: t_cat_categories/CAT_000118
 - src: {source_file: "live-snapshot/latest/t_cat_categories.csv", source_locator: "키:CAT_000118(디자인캘린더·cat_lvl 2·상위 CAT_000007·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
 - props: {cat_nm: "디자인캘린더", cat_lvl: 2, upr_cat_cd: "CAT_000007", note: "디자인캘린더 분류(캘린더 CAT_000007 하위·캘린더 6종 축의 하나)"}
+
+## 문구 셋트(SB-1) 카테고리 — Stage C1(okb-knowledge-builder 260703)
+
+<!-- 만년다이어리 클러스터(172~175·293~298) + 먼슬리플래너(176) 유일 카테고리 축. 문구 CAT_000008 하위. -->
+<!-- in_category(product→category·R?)는 상품 노드(Stage B/C2)가 배선. C1은 축 노드만 mint. dedup: stn-needs-axis 2줄→1노드. -->
+
+### [category-CAT_000321] 플래너 (문구 하위) {verified}
+- type: category
+- anchor: t_cat_categories/CAT_000321
+- src: {source_file: "live-snapshot/latest/t_cat_categories.csv", source_locator: "키:CAT_000321(플래너·cat_lvl 2·상위 CAT_000008·disp_seq 1·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {cat_nm: "플래너", cat_lvl: 2, upr_cat_cd: "CAT_000008", note: "만년다이어리 클러스터(172~175·293~298 완제품 10노드) + 먼슬리플래너(176)의 카테고리 축. 문구(CAT_000008) 하위. in_category는 상품 노드(Stage C2)가 배선"}

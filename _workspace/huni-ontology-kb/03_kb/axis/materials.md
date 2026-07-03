@@ -492,3 +492,25 @@
 - anchor: t_mat_materials/MAT_000015
 - src: {source_file: "live-snapshot/latest/t_mat_materials.csv", source_locator: "키:MAT_000015(링 메탈링·MAT_TYPE.04·상위 MAT_000012·del_yn=Y)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
 - props: {mat_typ_cd: "MAT_TYPE.04", upr_mat_cd: "MAT_000012", 사양_ref: "전사표 MAT_000015(규격·평량 미기재)", note: "★[HARD] 082 트윈링 링자재 계열(불가침·은퇴 금지). 마스터 del_yn=Y이나 링 자재군(MAT_000012 하위)·비종이. 규격/평량 미상"}
+
+## 문구 셋트 자재 (SB-1 Stage A·신규 1종·okb-knowledge-builder 260703)
+
+<!-- 문구 셋트(172~181) 구성원(293~308)이 쓰는 표지·내지·레더 자재 중 어느 파일에도 미민팅인 것은 MAT_000261(무지내지) 1종뿐(search-before-mint 전수). -->
+<!-- ★재사용(이미 mint·재-mint 금지·L-3): MAT_000072 백색모조지100g(product/product-041-coupon-axes.md)·MAT_000186 레더(product/product-126-leather-artprint-nodes.md)· -->
+<!--   MAT_000073 백색모조지120g·MAT_000250 아트250+무광코팅·MAT_000379 레더화이트(materials.md 기존). Stage B 구성원 노드는 이 기존 id를 그대로 uses_material로 배선. -->
+<!--   ※MAT_000072/186은 현재 product 파일 소유(로컬 프리셋)=L-20 소프트 후보. 공유 축 re-home은 architect 소관(Stage A는 재-mint 안 함). -->
+<!-- ★무지내지(MAT_TYPE.21)는 내지 종이. 규격/평량 미기재는 마스터 원천 공란(날조 0·미상 정직). -->
+<!-- ★상품/구성원→자재(R3 uses_material) 엣지는 Stage B(구성원 노드)가 배선. Stage A는 자재 노드 mint만. -->
+<!-- transcribed-by: _meta/scripts/transcribe_stationery_axis_260703.py(수동 확장 awk t_mat_materials) from live-snapshot/latest (snap_20260702_1119) @ 2026-07-03 -->
+| mat_cd | 자재명 | mat_typ | 규격(mm) | 평량(g) | 상위 | 마스터del | 상태 |
+|---|---|---|---|---|---|---|---|
+| MAT_000261 | 무지내지 | MAT_TYPE.21 | 미기재 | 미기재 | - | N | 신규 mint |
+| MAT_000072 | 백색모조지 100g | MAT_TYPE.01 | 316x467 | 100 | MAT_000071 | N | 재사용(product-041) |
+| MAT_000186 | 레더 | MAT_TYPE.05 | 미기재 | 미기재 | - | N | 재사용(product-126) |
+
+### [material-MAT_000261] 무지내지 (내지·MAT_TYPE.21) {verified}
+- type: material
+- anchor: t_mat_materials/MAT_000261
+- src: {source_file: "live-snapshot/latest/t_mat_materials.csv", source_locator: "키:MAT_000261(무지내지·MAT_TYPE.21·규격/평량 공란·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- src: {source_file: "live-snapshot/latest/t_prd_product_materials.csv", source_locator: "키:(PRD_000302/304/306/308,MAT_000261) usage_cd=USAGE.01(정션 활성·내지 대표)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {mat_typ_cd: "MAT_TYPE.21", 사양_ref: "전사표 MAT_000261(규격·평량 마스터 미기재)", note: "무지 내지 자재(302 스프링노트·304 스프링수첩·306 메모패드·308 중철노트 내지 USAGE.01). 무지 내지 4종 공용. ★min/max 미설정(커스텀인쇄 확장 예정)=gap-stn-muji-inner-minmax. 규격/평량 미상(원천 공란)"}

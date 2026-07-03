@@ -243,3 +243,45 @@
 - gap_what: "design-calendar 고정가 미적재(t_prd_product_prices 캘린더=0행·110 엽서캘린더 editor_yn=N 디자인 surface 미구성). ★업로드 캘린더 가격공식(PRF_DGP_CAL_*)은 바인딩됨(별개)·design surface 고정가만 GAP"
 - gap_fill_from: "실무진·§26(원천 부재). 위키 [CAL-DC-001] 🔴 여전"
 - gap_owner: staff
+
+## 문구 셋트(SB-1) 계열 GAP (2026-07-03·Stage A okb-knowledge-builder·정직 공백)
+
+<!-- 문구 셋트(172~181) 공유축 GAP. badge=unknown(⚪). 라우팅 대상 하네스 명기. -->
+<!-- ★"가격 있는 것처럼" 넣지 않는다(pack §5·§6). rel은 Stage A 실재 노드(공식/구성요소/자재/타 gap)만 참조. 상품 노드(Stage B)는 미참조. -->
+
+### [gap-stn-177-classification] 177 스프링노트 분류 conflict(prd_typ .02 vs 셋트 완제품) {unknown}
+- type: gap
+- anchor: none  # 사유: 라이브 라벨(.02 반제품)과 SOT(셋트 완제품·sets 부모)가 상충·SOT 재분류 대기
+- src: {source_file: "_workspace/huni-ontology-kb/01_curation/pack-stationery-goods.md", source_locator: "§1.1 [★177 분류 conflict]·§3.1 GAP-STN-1·§4 177 양면", captured_at: "2026-07-03", badge: unknown, src_id: SR-pack-stn}
+- src: {source_file: "live-snapshot/latest/t_prd_products.csv", source_locator: "키:PRD_000177 prd_typ_cd=PRD_TYPE.02(반제품)", captured_at: "live 20260702_1119", badge: unknown, src_id: SR-5-livesnap}
+- gap_what: "177 스프링노트 = t_prd_product_sets 부모(셋트 완제품)인데 prd_typ_cd=PRD_TYPE.02(반제품)로 라벨됨. SOT(셋트 완제품=부모 등록)상 완제품이 정답. 177 상품 노드는 Stage B에서 양면(defect·current .02 / authority 셋트 완제품)으로 표기 예정"
+- gap_fill_from: "SOT 재분류(product-type-classification-sot·라이브를 SOT에 맞춰 교정·역방향 금지) — dbmap/실무진 승인 후 prd_typ 정정"
+- gap_owner: staff
+- rel: {rel: references, target: formula-PRF_STN_SPRINGNOTE, note: "177 부모공식(분류 conflict 상품)"}
+
+### [gap-stn-sparse-grid] 문구 셋트 완제품가 단가행 sparse(등록 사이즈 1~2셀·off-grid 사이즈만 견적0) {unknown}
+- type: gap
+- anchor: none  # 사유: 상품마스터 문구 시트 grid 미충전(원천 부재)·라이브 단가행 1~2셀만 실재
+- src: {source_file: "_workspace/huni-ontology-kb/01_curation/pack-stationery-goods.md", source_locator: "§3.10 GAP-STN-3·§4 문구 셋트 sparse·T-9", captured_at: "2026-07-03", badge: unknown, src_id: SR-pack-stn}
+- src: {source_file: "live-snapshot/latest/t_prc_component_prices.csv", source_locator: "COMP_STN_* 9종 단가행: 179 메모패드=2셀·나머지 8종=1셀(transcribe_stationery_axis_260703.py)", captured_at: "live 20260702_1119", badge: unknown, src_id: SR-5-livesnap}
+- gap_what: "문구 셋트 완제품가 구성요소(COMP_STN_* 9종)의 component_prices 단가행이 등록 사이즈 1~2셀만 채워진 sparse grid(179만 2셀·나머지 1셀). 공식·구성요소·배선 완료. ★등록=선택가능 사이즈(t_prd_product_sizes junction=단가행 사이즈)는 전부 PRICE≠0(라이브 simulate-set 실증)·미등록(off-grid) 사이즈만 견적0(고정가 룩업 PRICE_TYPE.01·ceiling 없음)·수량은 단가행 min_qty=1 단일밴드로 전량 선형 커버(수량축은 sparse 아님). GAP=등록 외 사이즈로 grid를 확장할 때만 셀 충전 필요(정상 구성에서 손님은 0을 만나지 않음)"
+- gap_fill_from: "상품마스터 문구 시트 완제품가 격자 → §26 무결성 진단·dbmap 셀 충전(등록 외 사이즈 확장 시 grid 충전). ※수량은 이미 전량 커버(min_qty=1 단일밴드)이므로 대상 아님"
+- gap_owner: staff
+
+### [gap-stn-member-optgroup-ui] 문구 셋트 구성원 가격/옵션 UI 렌더(D-1 동류) {unknown}
+- type: gap
+- anchor: none  # 사유: 구성원(표지/내지) 옵션그룹·가격 화면 렌더 미결(set-series D-1 동형)
+- src: {source_file: "_workspace/huni-ontology-kb/01_curation/pack-stationery-goods.md", source_locator: "§3.12 GAP-STN-4(구성원 가격/옵션 UI 렌더·set-series D-1 동류)", captured_at: "2026-07-03", badge: unknown, src_id: SR-pack-stn}
+- gap_what: "문구 셋트 구성원(293~308 표지/내지/면지)의 옵션그룹·가격이 위젯/화면에서 렌더되는지 미확정. set-series D-1(구성원 옵션그룹 UI 렌더)과 동류 후속"
+- gap_fill_from: "§34 hlg O-1 후속·§6 위젯(구성원 옵션 UI 렌더)"
+- gap_owner: 설계
+- rel: {rel: references, target: gap-set-member-optgroup-ui, note: "set-series D-1 동류(구성원 옵션그룹 UI)"}
+
+### [gap-stn-muji-inner-minmax] 무지 내지(302/304/306/308) min/max 미설정 {unknown}
+- type: gap
+- anchor: none  # 사유: 무지 내지 구성원 수량규칙(min/max) 미설정·커스텀인쇄 확장 예정
+- src: {source_file: "_workspace/huni-ontology-kb/01_curation/pack-stationery-goods.md", source_locator: "§3.4 GAP(무지 내지 302/304/306/308 min/max 미설정·추후 커스텀인쇄 확장 note)", captured_at: "2026-07-03", badge: unknown, src_id: SR-pack-stn}
+- gap_what: "스프링노트/수첩/메모패드/중철노트 무지 내지 구성원(302/304/306/308·MAT_000261 무지내지)의 페이지 수량규칙 min/max/incr 미설정. 현재 무지(고정 본문)이나 추후 커스텀인쇄(페이지 가변) 확장 예정"
+- gap_fill_from: "실무진·§23 set-inner(커스텀인쇄 확장 시 page_rule·min/max 설정)·페이지 단가 무손상[HARD]"
+- gap_owner: 설계
+- rel: {rel: references, target: material-MAT_000261, note: "무지 내지 자재(min/max 미설정 대상)"}

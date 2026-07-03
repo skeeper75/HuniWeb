@@ -2,53 +2,53 @@
 
 > build_graph.py · 정본 /Users/innojini/Dev/HuniWeb/_workspace/huni-ontology-kb/03_kb → 04_graph. 생성=빌드(검증은 별도 레인·okb-adversarial-gate).
 
-- 판정: **PASS(하드 0)** · 하드 위반 0 · 소프트 경고 524
-- 노드 1141 · 엣지 3534
-- 멱등 해시: nodes.jsonl=37aa87c6bfd5b6a7 · edges.jsonl=b2f44d6b7f2d65cc
+- 판정: **PASS(하드 0)** · 하드 위반 0 · 소프트 경고 559
+- 노드 1202 · 엣지 3706
+- 멱등 해시: nodes.jsonl=f4f21d4afe95d106 · edges.jsonl=251774e6c03917b4
 
 ## 노드 수 (타입별)
-- bundle_qty: 55
-- category: 41
+- bundle_qty: 58
+- category: 42
 - constraint: 10
 - decision: 12
-- gap: 217
+- gap: 221
 - intent: 3
-- material: 146
+- material: 147
 - option_group: 132
-- plate_size: 18
-- price_component: 112
-- price_formula: 72
+- plate_size: 23
+- price_component: 121
+- price_formula: 81
 - print_option: 4
 - process: 67
-- product: 122
+- product: 147
 - rule: 7
-- size: 116
+- size: 120
 - term: 7
 
 ## 엣지 수 (rel별)
 - alias_of: 19
 - constrains: 11
 - decided_because: 19
-- derived_from: 26
-- has_component: 190
-- has_member: 27
+- derived_from: 42
+- has_component: 199
+- has_member: 43
 - has_option_group: 132
-- has_plate_size: 69
-- has_print_option: 105
-- has_process: 264
-- has_qty_rule: 55
-- has_size: 254
-- in_category: 164
+- has_plate_size: 74
+- has_print_option: 112
+- has_process: 279
+- has_qty_rule: 58
+- has_size: 264
+- in_category: 183
 - option_refs: 291
-- priced_by: 108
-- references: 1441
-- uses_material: 359
+- priced_by: 117
+- references: 1486
+- uses_material: 377
 
 ## badge 분포
-- candidate: 20
+- candidate: 29
 - defect: 20
-- unknown: 215
-- verified: 886
+- unknown: 219
+- verified: 934
 
 ## 무결성 6검사
 - I-1 고아(하드 유형 product/formula/component): 0
@@ -65,11 +65,14 @@
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): material-MAT_000372 :: - authority_value: "260702 신규행(row 86)=투명스티커(투명후지)·평량=50·연당가
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): material-MAT_000372 :: - 본문: 260702가 새로 추가한 투명후지 소재(연당가 222,000/국4절 740/평량 50). 라이브
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): material-MAT_000164 :: - authority_value: "260702 연당가=81,500·국4절가=272·평량=57(무변)·규격 
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): size-SIZ_000170 :: - current_value: "052 has_size junction SIZ_000170 활성(del_yn
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): component-COMP_HC_MUSEON_COVERBIND :: - props: {prc_typ_cd: "PRICE_TYPE.01", comp_typ_cd: "PRC_COM
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): formula-PRF_LEATHER_RINGBINDER_SET :: - props: {archetype: "원자합산형", prc_typ: "셋트조합(COVERBIND)", no
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): formula-PRF_PCB_FIXED :: - props: {archetype: "고정가", prc_typ: "부모 all-in", note: "094
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): formula-PRF_TTEOKME_FIXED :: - props: {archetype: "고정가", prc_typ: "부모 all-in", note: "097
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): formula-PRF_PHOTOBOOK_FIXED :: - props: {archetype: "고정가", prc_typ: "부모 all-in(base24+per2p
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): formula-PRF_STN_DIARY_HARD :: - rel: {rel: references, target: gap-stn-sparse-grid, note: 
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): formula-PRF_STN_MEMOPAD :: - rel: {rel: references, target: gap-stn-sparse-grid, note: 
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): component-COMP_GANGPAN_PRINT :: - src: {source_file: "live-snapshot/latest/t_prc_component_p
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): component-COMP_GANGPAN_PRINT :: - props: {prc_typ_cd: "PRICE_TYPE.02", use_dims_ref: "전사표 [s
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): component-COMP_STK_PACK :: - props: {comp_cd: "COMP_STK_PACK", prc_typ_cd: "PRICE_TYPE.
@@ -149,6 +152,16 @@
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): optgroup-135-gagong :: - src: {source_file: "live-snapshot/latest/t_prd_product_opt
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-144-material-absent :: - gap_fill_from: "실무진(보드/우드 5상품 소재 정책·pack §3.5) + L1 원본 자재 
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-145-qtytier-floor :: - gap_what: "상품 마스터 min_qty=1인데 가격 구성요소(COMP_POSTER_MINI_BAN
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-173-perpetual-diary-hard :: - **★가격 sparse(pack §4·T-9·badge=candidate)**: COMP_STN_DIAR
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-173-perpetual-diary-hard :: pack §1.1)만 채워진 sparse grid다. **등록=선택가능 사이즈는 PRICE≠0**(130x1
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-173-perpetual-diary-hard :: 사이즈만 견적0**이며, 수량은 단가행 min_qty=1 단일밴드로 전량 선형 커버(예 100권=1,200,
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-174-perpetual-diary-leather-hard :: - **★가격 sparse(pack §4·T-9·badge=candidate)**: COMP_STN_DIAR
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-175-perpetual-diary-leather-soft :: - **★가격 sparse(pack §4·T-9·badge=candidate)**: COMP_STN_DIAR
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-176-monthly-planner :: **등록 사이즈 1셀**(SIZ_000170 A5)만 채워진 sparse grid다. **등록=선택가능 사이
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-177-spring-note :: (SIZ_000170 A5)만 채워진 sparse grid다. **등록=선택가능 사이즈는 PRICE≠0**(
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-178-spring-notebook :: (SIZ_000377)만 채워진 sparse grid다. **등록=선택가능 사이즈는 PRICE≠0**(=3,
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-179-memo-pad :: **등록 사이즈 2셀(144x206=5,000·B5 182x257=6,000)**만 채워진 sparse gr
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-181-jungcheol-note :: **등록 사이즈 1셀**(A6 SIZ_000196=2,500)만 채워진 sparse grid다. **등록=선
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-288-saddle-stitch-booklet-cover :: `simulate` = 88,688(print 35,000+coat 50,000+paper 3,688·pan
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-288-saddle-stitch-booklet-cover :: `coat_side_cnt`를 미전달 → 표지 코팅비(100부 50,000)가 셋트경로에서 드롭됨 → 셋트경
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-288-saddle-stitch-booklet-cover :: (단품 88,688 대비 코팅 50,000 저평가). **코팅 단가행은 라이브 실재(COMP_COAT_MAT
@@ -427,6 +440,7 @@
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-145-mini-banner -> product-145-mini-banner-nodes
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-145-mini-banner -> product-145-mini-banner-nodes
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-145-mini-banner -> product-145-mini-banner-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-300-monthly-planner-inner -> set-membrane-1member-taku1-target-model-260703
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-gangpan-diecut -> sticker-gangpan-diecut-nodes
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-gangpan-diecut -> sticker-gangpan-diecut-nodes
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-gangpan-diecut -> sticker-gangpan-diecut-nodes
@@ -494,6 +508,9 @@
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-tattoo -> 가격구성요소-완제품가-합가형-룩업
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-tattoo -> 옵션그룹-cpq
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-tattoo -> sticker-tattoo-nodes
+- O4 index 미등재 파일: axis/quantities.md (qty-176)
+- O4 index 미등재 파일: axis/quantities.md (qty-177)
+- O4 index 미등재 파일: axis/quantities.md (qty-178)
 - O4 index 미등재 파일: formula/set-components.md (component-COMP_HC_MUSEON_COVERBIND)
 - O4 index 미등재 파일: formula/set-components.md (component-COMP_BIND_HC_TWINRING)
 - O4 index 미등재 파일: formula/set-components.md (component-COMP_BIND_JUNGCHEOL)
@@ -526,6 +543,24 @@
 - O4 index 미등재 파일: formula/set-formulas.md (formula-PRF_PHOTOBOOK_INNER)
 - O4 index 미등재 파일: formula/set-formulas.md (formula-PRF_DGP_CAL_DESK)
 - O4 index 미등재 파일: formula/set-formulas.md (formula-PRF_DGP_CAL_WIDE)
+- O4 index 미등재 파일: formula/stationery-components.md (component-COMP_STN_DIARY_SOFT)
+- O4 index 미등재 파일: formula/stationery-components.md (component-COMP_STN_DIARY_HARD)
+- O4 index 미등재 파일: formula/stationery-components.md (component-COMP_STN_DIARY_LHARD)
+- O4 index 미등재 파일: formula/stationery-components.md (component-COMP_STN_DIARY_LSOFT)
+- O4 index 미등재 파일: formula/stationery-components.md (component-COMP_STN_MONTHLY)
+- O4 index 미등재 파일: formula/stationery-components.md (component-COMP_STN_SPRINGNOTE)
+- O4 index 미등재 파일: formula/stationery-components.md (component-COMP_STN_SPRINGNOTEBK)
+- O4 index 미등재 파일: formula/stationery-components.md (component-COMP_STN_MEMOPAD)
+- O4 index 미등재 파일: formula/stationery-components.md (component-COMP_STN_JUNGCHEOL)
+- O4 index 미등재 파일: formula/stationery-formulas.md (formula-PRF_STN_DIARY_SOFT)
+- O4 index 미등재 파일: formula/stationery-formulas.md (formula-PRF_STN_DIARY_HARD)
+- O4 index 미등재 파일: formula/stationery-formulas.md (formula-PRF_STN_DIARY_LHARD)
+- O4 index 미등재 파일: formula/stationery-formulas.md (formula-PRF_STN_DIARY_LSOFT)
+- O4 index 미등재 파일: formula/stationery-formulas.md (formula-PRF_STN_MONTHLY)
+- O4 index 미등재 파일: formula/stationery-formulas.md (formula-PRF_STN_SPRINGNOTE)
+- O4 index 미등재 파일: formula/stationery-formulas.md (formula-PRF_STN_SPRINGNOTEBK)
+- O4 index 미등재 파일: formula/stationery-formulas.md (formula-PRF_STN_MEMOPAD)
+- O4 index 미등재 파일: formula/stationery-formulas.md (formula-PRF_STN_JUNGCHEOL)
 - O4 index 미등재 파일: product/product-055-sticker-sheet-freeform-nodes.md (qty-055)
 - O4 index 미등재 파일: product/product-055-sticker-sheet-freeform-nodes.md (optgroup-055-paper)
 - O4 index 미등재 파일: product/product-055-sticker-sheet-freeform-nodes.md (optgroup-055-print)

@@ -162,9 +162,9 @@
 ### [size-SIZ_000170] A5 148x210 (양면 defect — junction 활성·master 삭제) {defect}
 - type: size
 - anchor: t_siz_sizes/SIZ_000170
-- src: {source_file: "live-snapshot/latest/t_prd_product_sizes.csv", source_locator: "테이블:t_prd_product_sizes 키:(PRD_000052,SIZ_000170) del_yn=N(junction 활성)·dflt_yn=Y", captured_at: "live 20260702_1119", badge: defect, src_id: SR-5-livesnap}
+- src: {source_file: "live-snapshot/latest/t_prd_product_sizes.csv", source_locator: "테이블:t_prd_product_sizes 키:(PRD_000052,SIZ_000170)·(PRD_000176,SIZ_000170)·(PRD_000177,SIZ_000170) 전부 del_yn=N(junction 활성)·dflt_yn=Y", captured_at: "live 20260702_1119", badge: defect, src_id: SR-5-livesnap}
 - src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "테이블:t_siz_sizes 키:SIZ_000170 del_yn=Y(master 논리삭제 2026-06-17)", captured_at: "live 20260702_1119", badge: defect, src_id: SR-5-livesnap}
-- current_value: "052 has_size junction SIZ_000170 활성(del_yn=N·dflt=Y)·COMP_STK_PRINT 단가행 실재(15조합 중 SIZ_000170×5소재 각 36행) — 손님 선택·가격 산출 가능한 상태 (live 20260702_1119)"
+- current_value: "052 has_size junction SIZ_000170 활성(del_yn=N·dflt=Y)·COMP_STK_PRINT 단가행 실재(15조합 중 SIZ_000170×5소재 각 36행) — 손님 선택·가격 산출 가능한 상태. **추가로 문구 셋트 176 먼슬리플래너(COMP_STN_MONTHLY=12,000)·177 스프링노트(COMP_STN_SPRINGNOTE=4,500)도 유일 단가행 사이즈로 SIZ_000170 junction 활성**(둘 다 load-bearing·마스터 삭제 미반영) (live 20260702_1119)"
 - authority_value: "t_siz_sizes master SIZ_000170(A5 148x210) del_yn=Y 논리삭제(2026-06-17) — 사이즈 마스터상 은퇴. A5 재키잉 정리 대상(정답=마스터 삭제 반영해 junction도 정리하거나 마스터 복원 중 택1·미확정)"
 - props: {siz_nm_ref: "전사표 SIZ_000170(A5 148x210)", note: "정리 워크리스트·양면 어느 쪽도 삭제 금지·§4-C 사이즈 재키잉 파손복구 계열 잔존분 의심(실무진 확인)"}
 - 본문: junction은 활성·가격도 붙는데 사이즈 마스터가 삭제된 dangling-but-priced 상태. 손님이 A5를 고르면 견적은 나오나 마스터 정합이 깨진 상태. current(활성·priced)와 authority(마스터 삭제) 둘 다 보존해 재적재/정리 추적. 판정은 실무진(A5 유지 여부)·§4-C 배선 수렴 소관.
@@ -347,3 +347,35 @@
 - anchor: t_siz_sizes/SIZ_000077
 - src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "키:SIZ_000077 note:판걸이=1.0/전지 미지정/적용 와이드벽걸이캘린더", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
 - props: {siz_nm_ref: "전사표 SIZ_000077(300x625)", pangeori_ref: "마스터 note 판걸이=1.0(파생·전지 미지정)", note: "112 와이드벽걸이캘린더 사이즈(impos_yn=Y·전지 미지정)"}
+
+## 문구 셋트(SB-1) 사이즈 — Stage C1(okb-knowledge-builder 260703)
+
+<!-- 만년다이어리 완제품 dflt(SIZ_000375) + 문구 셋트(스프링수첩178/메모패드179/정철노트181) 부모 dflt 사이즈. -->
+<!-- has_size(product→size)는 상품 노드(Stage B/C2)가 배선. C1은 축 노드만 mint. SIZ_000007(148x210)은 이미 존재(재사용). -->
+
+### [size-SIZ_000375] 130x190 (만년다이어리 완제품) {verified}
+- type: size
+- anchor: t_siz_sizes/SIZ_000375
+- src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "키:SIZ_000375(130x190·work 130.00x190.00·cut 130.00x190.00·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {siz_nm_ref: "전사표 SIZ_000375(130x190)", note: "만년다이어리 4종 완제품(172~175) dflt 사이즈·완제품가 sparse 유일 단가행 좌표. has_size는 상품 노드(Stage C2)가 배선"}
+
+### [size-SIZ_000377] 90x145 (스프링수첩) {verified}
+- type: size
+- anchor: t_siz_sizes/SIZ_000377
+- src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "키:SIZ_000377(90x145·work 90.00x145.00·cut 90.00x145.00·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- src: {source_file: "live-snapshot/latest/t_prd_product_sizes.csv", source_locator: "키:(PRD_000178,SIZ_000377) dflt_yn=Y·del_yn=N", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {siz_nm_ref: "전사표 SIZ_000377(90x145)", note: "178 스프링수첩 기본 사이즈. has_size는 상품 노드(Stage C2)가 배선"}
+
+### [size-SIZ_000379] 144x206 (메모패드 부모) {verified}
+- type: size
+- anchor: t_siz_sizes/SIZ_000379
+- src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "키:SIZ_000379(144x206·work 144.00x206.00·cut 144.00x206.00·use_yn=Y·del_yn=N)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- src: {source_file: "live-snapshot/latest/t_prd_product_sizes.csv", source_locator: "키:(PRD_000179,SIZ_000379) dflt_yn=Y·del_yn=N", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {siz_nm_ref: "전사표 SIZ_000379(144x206)", note: "179 메모패드 부모 dflt 사이즈(SIZ_000380도 dflt_yn=Y 존재·이 노드는 379만). has_size는 상품 노드(Stage C2)가 배선"}
+
+### [size-SIZ_000196] A6 (105x148mm·정철노트 부모·마스터 논리삭제) {verified}
+- type: size
+- anchor: t_siz_sizes/SIZ_000196
+- src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "키:SIZ_000196(A6(105x148mm)·work 105.00x148.00·cut 105.00x148.00·use_yn=Y·del_yn=Y)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- src: {source_file: "live-snapshot/latest/t_prd_product_sizes.csv", source_locator: "키:(PRD_000181,SIZ_000196) dflt_yn=Y·del_yn=N(정션 활성)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {siz_nm_ref: "전사표 SIZ_000196(A6 105x148mm)", note: "★181 정철노트 부모 유일 사이즈. 마스터 del_yn=Y이나 정션(PRD_000181,SIZ_000196) 활성=load-bearing → 보존. has_size는 상품 노드(Stage C2)가 배선"}
