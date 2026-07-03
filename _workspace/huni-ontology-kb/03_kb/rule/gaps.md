@@ -285,3 +285,78 @@
 - gap_fill_from: "실무진·§23 set-inner(커스텀인쇄 확장 시 page_rule·min/max 설정)·페이지 단가 무손상[HARD]"
 - gap_owner: 설계
 - rel: {rel: references, target: material-MAT_000261, note: "무지 내지 자재(min/max 미설정 대상)"}
+
+## 굿즈·파우치·봉투(SB-2/SB-3/SB-4) 계열 공유 GAP (2026-07-03·Stage A okb-knowledge-builder·정직 공백)
+
+<!-- 굿즈/악세사리(183~229·263~280)·파우치/백(230~262)·봉투(001/002/005/050/283) 공유축 GAP. badge=unknown(⚪). 라우팅 대상 하네스 명기. -->
+<!-- ★"가격 있는 것처럼" 넣지 않는다(pack §5·§6). rel은 Stage A 실재 노드(공정/자재/타 gap)만 참조. 상품 노드(Stage B)는 미참조. -->
+<!-- ★수치·상태값 전부 라이브 실측(awk t_prd_product_*.csv·transcribed) — 손전사 0. 위키 🔴 결함표 직접 인용 금지(pack §4 재판정). -->
+<!--
+  ★★Stage A search-before-mint / REVERIFY 결과(공유 스캐폴드 실측 — 신규 mint 최소):
+  1) 봉투 가격공식(PRF_ENV_MAKING·COMP_ENV_MAKING) = 이미 minted(product/product-050-envelope-making-nodes.md·공유축 승격 대기).
+     → envelope-formulas.md 신규 생성 안 함(L-3 중복 방지). ★GAP-ENV-1(봉투종류 siz_cd 미등록→siz 미충전)은 RESOLVED —
+     live 실측 COMP_ENV_MAKING 단가행=4 사이즈(SIZ_000191~194 티켓/소/자켓/대)×3 자재(MAT_000159/168/169)×5 수량구간(1000~5000)
+     =60행 격자완전(grid_full=True·미적재 셀 0·050-nodes 매트릭스 전사표) + 050 t_prd_product_sizes 4행 등록(2026-06-30).
+     → gap-goods-envelope-siz는 활성 gap으로 생성하지 않음(거짓 gap 금지·정직 재판정).
+  2) 봉제/부착/굿즈 공정 = 라이브 실재분 전부 이미 minted(process-PROC_000080 봉제=product-125-nodes·process-PROC_000081 부착=product-138-nodes·
+     process-PROC_000130 봉제가공=product-124-nodes). 봉제 자식 PROC_000088·부착 자식 PROC_000089·에폭시 PROC_000095는 del_yn=Y+소비 0행(비활성)이라 미mint.
+     → processes.md 신규 노드 0(전부 재사용·search-before-mint). 맥세이프=PROC_000081 부착의 input 값(대상=라벨/맥세이프/끈/테입)이라 별도 공정 아님.
+  3) 공유 자재 = 봉투 자재(MAT_000159/168/169)는 050-nodes에 이미 minted·굿즈 오염 부속은 정리 COMMIT됨(비 substrate)·파우치 원단은 empty-shell(Stage B needs_axis).
+     → materials.md 신규 노드 0(명백히 공유되는 미민팅 자재 없음).
+  ∴ Stage A 실 산출 = 아래 공유 GAP 노드 6종(gaps.md append)만. 공식/공정/자재 mint는 이미 존재해 NO-OP(정직 기록).
+-->
+
+### [gap-goods-neither] 굿즈/파우치/봉투 NEITHER-gap(공식·고정가 둘 다 없음=견적 원천 부재) {unknown}
+- type: gap
+- anchor: none  # 사유: 다수 상품이 t_prd_product_price_formulas·t_prd_product_prices 둘 다 0행(원천 부재)·개별 상품 노드는 Stage B
+- src: {source_file: "_workspace/huni-ontology-kb/01_curation/pack-stationery-goods.md", source_locator: "§3.10 GAP-GD-1·§4 NEITHER-gap 행·§1.4 봉투 001/002/005", captured_at: "2026-07-03", badge: unknown, src_id: SR-pack-stn}
+- src: {source_file: "live-snapshot/latest/t_prd_product_price_formulas.csv", source_locator: "키:PRD_000001/PRD_000002/PRD_000005 formula 0행 + t_prd_product_prices.csv 동 3키 0행(전수 실측)", captured_at: "live 20260702_1119", badge: unknown, src_id: SR-5-livesnap}
+- gap_what: "굿즈/파우치/봉투 다수 상품이 가격공식(t_prd_product_price_formulas)·고정가(t_prd_product_prices) 둘 다 0행=견적 원천 부재(NEITHER-gap). 확정 실측: 봉투 001 OPP접착봉투·002 OPP비접착봉투·005 캘린더봉투(★live prd_typ_cd=PRD_TYPE.03 기성·use_yn=Y·del_yn=N — pack §1.4의 .01 표기와 상이·라이브 정직 표기) 3건 formula/price 둘 다 0행. 굿즈/파우치 NEITHER-gap 다수(199 투명부채[use_yn=N]·201 레더스트랩키링·214 자석북마크·217 만년스탬프·242 광목스트링라벨파우치 등). ★값 계산 이전에 원천 자체가 없어 손님이 0/최소가를 만남"
+- gap_fill_from: "상품마스터 문구/굿즈 시트 + 실무진 가격표(고정가 verbatim) → §26 무결성 진단·§7 dbmap 적재(공식형이면 PRF_*·고정가형이면 t_prd_product_prices). 기성(.03)은 제조없음이 정상이나 use_yn=Y 판매중이면 가격 원천 필요"
+- gap_owner: staff
+
+### [gap-goods-price-unloaded] 굿즈/파우치 고정가 미적재 다수(상품마스터 verbatim 대기) {unknown}
+- type: gap
+- anchor: none  # 사유: 고정가룩업 아키타입 상품 중 t_prd_product_prices 미적재 다수·개별 상품 노드는 Stage B
+- src: {source_file: "_workspace/huni-ontology-kb/01_curation/pack-stationery-goods.md", source_locator: "§3.10 굿즈/파우치 고정가룩업 or 미적재·§4 굿즈 고정가 행", captured_at: "2026-07-03", badge: unknown, src_id: SR-pack-stn}
+- src: {source_file: "live-snapshot/latest/t_prd_product_prices.csv", source_locator: "183~283 범위 고정가 실재 26상품(185=2500·210=5000·211=18000·251=6500·263=31000·272=58000 등)·나머지 다수 0행(전수 실측)", captured_at: "live 20260702_1119", badge: unknown, src_id: SR-5-livesnap}
+- gap_what: "굿즈/파우치 가격아키타입=고정가룩업(t_prd_product_prices 단일 unit_price)이나 라이브 실측상 183~283 범위에서 고정가 실재는 26상품뿐이고 나머지 다수 상품은 미적재(0행). 고정가 실재분은 260610 verbatim(260702 diff 미해당=권위 일치 확인 필요). ★고정가 미적재 상품은 gap-goods-neither와 교집합(공식도 없으면 NEITHER)"
+- gap_fill_from: "상품마스터 굿즈/파우치 시트 고정가 verbatim → §7 dbmap 적재(t_prd_product_prices unit_price)·§26 대조. 값 스크립트 전사(손전사 금지)"
+- gap_owner: staff
+
+### [gap-pouch-empty-shell] 파우치·백 empty-shell(자재·공정 0행·봉제 미적재) {unknown}
+- type: gap
+- anchor: none  # 사유: 파우치/백 다수 t_prd_product_materials·t_prd_product_processes 둘 다 0행(순수 empty-shell)·개별 상품 노드는 Stage B
+- src: {source_file: "_workspace/huni-ontology-kb/01_curation/pack-stationery-goods.md", source_locator: "§3.5 GAP-PCH-1·§1.3 파우치 empty-shell·§4 파우치 봉제 행", captured_at: "2026-07-03", badge: unknown, src_id: SR-pack-stn}
+- src: {source_file: "live-snapshot/latest/t_prd_product_materials.csv", source_locator: "키:PRD_000242 자재 0행·공정 0행(순수 empty-shell)·PRD_000251 자재 1행(MAT_000008 USAGE.07)·공정 0행(t_prd_product_processes 동 확인)", captured_at: "live 20260702_1119", badge: unknown, src_id: SR-5-livesnap}
+- gap_what: "파우치·백(230~262) 다수가 자재(t_prd_product_materials)·공정(t_prd_product_processes) 둘 다 0행인 empty-shell. 확정 실측: 242 광목스트링라벨파우치=자재 0행+공정 0행(순수 empty-shell)·251 레더미니파우치=자재 1행(MAT_000008)+공정 0행. 봉제 공정·원단 자재가 채워지지 않아 BOM이 비어 있음(가격은 별개=고정가 실재분만 견적 가능)"
+- gap_fill_from: "실무진 BOM(원단 자재 MAT_TYPE.05/.09·봉제 공정) → §7 dbmap 자재/공정 충전. 봉제 공정 MISSING은 gap-goods-sewing-missing과 연동"
+- gap_owner: staff
+
+### [gap-goods-sewing-missing] 봉제 공정 MISSING(파우치/백 has_process 0행) {unknown}
+- type: gap
+- anchor: none  # 사유: 봉제 공정 노드(PROC_000080)는 실재하나 파우치/백 소비 0행(정체 공정 미배선)
+- src: {source_file: "_workspace/huni-ontology-kb/01_curation/pack-stationery-goods.md", source_locator: "§3.6 GAP-PCH-2·§1.3 봉제 공정 MISSING(GP-ST-005)·§4 파우치 봉제 행", captured_at: "2026-07-03", badge: unknown, src_id: SR-pack-stn}
+- src: {source_file: "live-snapshot/latest/t_prd_product_processes.csv", source_locator: "봉제 PROC_000080 소비=silsa 패브릭 124/125/133/134/138뿐(파우치 230~262 0행)·굿즈 부착 PROC_000081 소비=239/240/261/262/268/270 6상품(전수 실측)", captured_at: "live 20260702_1119", badge: unknown, src_id: SR-5-livesnap}
+- gap_what: "파우치·백의 정체 공정=봉제(PROC_000080 봉제·PROC_000130 봉제가공)인데 라이브 t_prd_product_processes 실측상 봉제 소비 상품은 실사(silsa) 패브릭 포스터(124/125/133/134/138)뿐이고 파우치/백(230~262)은 봉제 has_process 0행(MISSING). 굿즈는 부착(PROC_000081·input 대상=라벨/맥세이프/끈/테입)만 6상품(239/240/261/262/268/270) 배선·캔버스 6상품 '봉제→부착 오적재' 이력(GP-ST-004). ★공정 노드는 이미 존재(silsa가 mint)이나 파우치 상품→공정 엣지가 없음"
+- gap_fill_from: "실무진 공정 확정(파우치 봉제 vs 부착 판정·GP-ST-004 오적재 재판정) → §7 dbmap has_process 배선(t_prd_product_processes). 봉제 자식 PROC_000088·에폭시 PROC_000095는 현재 del_yn=Y+소비 0행(비활성)"
+- gap_owner: staff
+- rel: {rel: references, target: process-PROC_000080, note: "봉제 공정 노드(live 실재·silsa가 소비·파우치는 has_process 0행=배선 대상). 상품→공정 배선 불가 사유를 GAP으로 명시 연결"}
+
+### [gap-goods-material-contamination] 굿즈 비종이 부속 오염(substrate 자재 아님·정정본 교훈) {unknown}
+- type: gap
+- anchor: none  # 사유: 굿즈 부속의 substrate 자재 오적재는 6상품 정리 COMMIT됨·잔존 자재유형 무차별 오염은 §17 소관
+- src: {source_file: "_workspace/huni-ontology-kb/01_curation/pack-stationery-goods.md", source_locator: "§3.5 GAP-GD-4·T-4 부속=자재 함정·§4 굿즈 부속 오염 행", captured_at: "2026-07-03", badge: unknown, src_id: SR-pack-stn}
+- src: {source_file: "_workspace/huni-ontology-kb/01_curation/pack-stationery-goods.md", source_locator: "§3.5 정정본 교훈 인용: 거치대/키링고리/볼펜/면끈/핀버튼 등 굿즈 부속이 용지성 상품 자재+단가행 오적재→6상품 정리 COMMIT(goods-material-contamination-260630·undo 보유)", captured_at: "2026-07-03", badge: unknown, src_id: SR-pack-stn}
+- gap_what: "거치대·키링고리·볼펜·면끈·핀버튼·보드스탠딩 등 굿즈 부속이 용지성 상품 자재(t_prd_product_materials)·단가행(COMP_NAMECARD_PEARL 등)에 오적재된 시스템 오염. ★substrate 자재가 아니라 부속(부자재/addon). 6상품 정리 COMMIT됨(undo 보유). 잔존=goods-pouch GP-ST-003(자재유형 .09 무차별 오염·비-소재 값 자재화). 굿즈 노드의 부속은 has_addon(R14)로 모델(substrate uses_material 아님)"
+- gap_fill_from: "§17 huni-basedata-dedup(자재유형 무차별 오염 잔존분 정리)·실무진 판정(부속 vs 자재). ★[HARD] 실무진 IMPORT 등록 자재는 '배선 안 됨'을 사유로 삭제 금지(formula-components-wiring-subtrack)"
+- gap_owner: 실무진
+
+### [gap-goods-cardenv-addon] 281/282 카드봉투 엽서 addon(del_yn=Y·260702 50→10장) {unknown}
+- type: gap
+- anchor: none  # 사유: 281/282 상품 노드 미생성(del_yn=Y)·실체=엽서 추가상품 라벨·엽서 addon 축은 Stage B(디지털인쇄 엽서 노드)
+- src: {source_file: "_workspace/huni-ontology-kb/01_curation/pack-stationery-goods.md", source_locator: "§0.1 del_yn=Y 미생성·§3.12 카드봉투 addon 50→10장·§4 카드봉투 행·T-10", captured_at: "2026-07-03", badge: unknown, src_id: SR-pack-stn}
+- src: {source_file: "live-snapshot/latest/t_prd_products.csv", source_locator: "키:PRD_000281 카드봉투(화이트)·PRD_TYPE.03·use_yn=Y·del_yn=Y(del_dt 2026-06-30 16:06)·PRD_000282 동형(전수 실측)", captured_at: "live 20260702_1119", badge: unknown, src_id: SR-5-livesnap}
+- gap_what: "281 카드봉투(화이트)·282 카드봉투(블랙) = 라이브 del_yn=Y(2026-06-30 논리삭제·상품 노드 미생성이 정답). 실체는 엽서(디지털인쇄 016 등)의 추가상품(addon) 라벨로 살아있고 260702에서 '165x115mm 50장→10장'으로 변경(master-diff AL6/AL7). ★판매 상품 노드로 오인 금지(T-10)·엽서 addon 축에서 현재값=10장(260702)으로 반영해야 함"
+- gap_fill_from: "Stage B 엽서(디지털인쇄) 노드의 has_addon(R14) 축에서 현재값(10장·260702) 반영·§7 dbmap. 카드봉투 상품 노드는 미생성 유지(del_yn=Y)"
+- gap_owner: staff

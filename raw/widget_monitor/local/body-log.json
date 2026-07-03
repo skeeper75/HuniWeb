@@ -1,64 +1,5 @@
 [
   {
-    "timestamp": "2026-07-02T03:03:37.055Z",
-    "method": "POST",
-    "path": "/makers-api/token",
-    "status": 502,
-    "responseShape": {
-      "error": "string"
-    }
-  },
-  {
-    "timestamp": "2026-07-02T03:23:24.283Z",
-    "method": "GET",
-    "path": "/ko/product/get_digital_product_info",
-    "status": 200,
-    "responseShape": {
-      "_raw": "non-JSON",
-      "byteLength": 2227
-    }
-  },
-  {
-    "timestamp": "2026-07-02T03:23:24.265Z",
-    "method": "GET",
-    "path": "/ko/product/get_digital_product_info",
-    "status": 200,
-    "responseShape": {
-      "_raw": "non-JSON",
-      "byteLength": 2274
-    }
-  },
-  {
-    "timestamp": "2026-07-02T03:23:24.423Z",
-    "method": "GET",
-    "path": "/ko/product/get_digital_product_info",
-    "status": 200,
-    "responseShape": {
-      "_raw": "non-JSON",
-      "byteLength": 1837
-    }
-  },
-  {
-    "timestamp": "2026-07-02T03:23:24.286Z",
-    "method": "GET",
-    "path": "/ko/product/get_digital_product_info",
-    "status": 200,
-    "responseShape": {
-      "_raw": "non-JSON",
-      "byteLength": 1878
-    }
-  },
-  {
-    "timestamp": "2026-07-02T03:53:33.075Z",
-    "method": "POST",
-    "path": "/makers-api/token",
-    "status": 200,
-    "responseShape": {
-      "_raw": "non-JSON",
-      "byteLength": 386
-    }
-  },
-  {
     "timestamp": "2026-07-02T04:43:32.919Z",
     "method": "POST",
     "path": "/makers-api/token",
@@ -493,6 +434,66 @@
     "responseShape": {
       "_raw": "non-JSON",
       "byteLength": 387
+    }
+  },
+  {
+    "timestamp": "2026-07-03T10:43:36.938Z",
+    "method": "POST",
+    "path": "/makers-api/token",
+    "status": 200,
+    "responseShape": {
+      "_raw": "non-JSON",
+      "byteLength": 389
+    }
+  },
+  {
+    "timestamp": "2026-07-03T11:33:34.786Z",
+    "method": "POST",
+    "path": "/makers-api/token",
+    "status": 200,
+    "responseShape": {
+      "_raw": "non-JSON",
+      "byteLength": 387
+    }
+  },
+  {
+    "timestamp": "2026-07-03T12:23:36.833Z",
+    "method": "POST",
+    "path": "/makers-api/token",
+    "status": 200,
+    "responseShape": {
+      "_raw": "non-JSON",
+      "byteLength": 388
+    }
+  },
+  {
+    "timestamp": "2026-07-03T13:13:36.994Z",
+    "method": "POST",
+    "path": "/makers-api/token",
+    "status": 200,
+    "responseShape": {
+      "_raw": "non-JSON",
+      "byteLength": 389
+    }
+  },
+  {
+    "timestamp": "2026-07-03T14:03:36.972Z",
+    "method": "POST",
+    "path": "/makers-api/token",
+    "status": 200,
+    "responseShape": {
+      "_raw": "non-JSON",
+      "byteLength": 389
+    }
+  },
+  {
+    "timestamp": "2026-07-03T14:53:36.991Z",
+    "method": "POST",
+    "path": "/makers-api/token",
+    "status": 200,
+    "responseShape": {
+      "_raw": "non-JSON",
+      "byteLength": 389
     }
   }
 ]

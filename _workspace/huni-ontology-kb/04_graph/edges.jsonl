@@ -628,6 +628,7 @@
 {"dst": "DEC_qty_audit_260702", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-145-qtytier-floor", "src": "gap-145-qtytier-floor"}
 {"dst": "component-COMP_POSTER_MINI_BANNER", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-145-qtytier-floor", "src": "gap-145-qtytier-floor"}
 {"dst": "formula-PRF_POSTER_MINI_BANNER", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-145-qtytier-floor", "src": "gap-145-qtytier-floor"}
+{"dst": "process-PROC_000080", "note": "봉제 공정 노드(live 실재·silsa가 소비·파우치는 has_process 0행=배선 대상). 상품→공정 배선 불가 사유를 GAP으로 명시 연결", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-goods-sewing-missing", "src": "gap-goods-sewing-missing"}
 {"dst": "formula-PRF_BIND_MUSEON_FOIL", "note": "069 박분기 candidate", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-set-069-070-foil", "src": "gap-set-069-070-foil"}
 {"dst": "formula-PRF_BIND_PUR_FOIL", "note": "070 박분기 candidate", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-set-069-070-foil", "src": "gap-set-069-070-foil"}
 {"dst": "component-COMP_BIND_SSABARI", "note": "재설계 배선 예정 제본 comp(현행 미배선)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-set-088-redesign-pending", "src": "gap-set-088-redesign-pending"}

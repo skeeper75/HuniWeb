@@ -2,16 +2,16 @@
 
 > build_graph.py · 정본 /Users/innojini/Dev/HuniWeb/_workspace/huni-ontology-kb/03_kb → 04_graph. 생성=빌드(검증은 별도 레인·okb-adversarial-gate).
 
-- 판정: **PASS(하드 0)** · 하드 위반 0 · 소프트 경고 559
-- 노드 1202 · 엣지 3706
-- 멱등 해시: nodes.jsonl=f4f21d4afe95d106 · edges.jsonl=251774e6c03917b4
+- 판정: **PASS(하드 0)** · 하드 위반 0 · 소프트 경고 564
+- 노드 1208 · 엣지 3707
+- 멱등 해시: nodes.jsonl=e152e8cda95ae5e9 · edges.jsonl=ec2323f3efcaae42
 
 ## 노드 수 (타입별)
 - bundle_qty: 58
 - category: 42
 - constraint: 10
 - decision: 12
-- gap: 221
+- gap: 227
 - intent: 3
 - material: 147
 - option_group: 132
@@ -41,13 +41,13 @@
 - in_category: 183
 - option_refs: 291
 - priced_by: 117
-- references: 1486
+- references: 1487
 - uses_material: 377
 
 ## badge 분포
 - candidate: 29
 - defect: 20
-- unknown: 219
+- unknown: 225
 - verified: 934
 
 ## 무결성 6검사
@@ -508,6 +508,11 @@
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-tattoo -> 가격구성요소-완제품가-합가형-룩업
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-tattoo -> 옵션그룹-cpq
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-tattoo -> sticker-tattoo-nodes
+- I-1 고아 노드(연결 대기·Phase 4): gap-goods-neither (gap)
+- I-1 고아 노드(연결 대기·Phase 4): gap-goods-price-unloaded (gap)
+- I-1 고아 노드(연결 대기·Phase 4): gap-pouch-empty-shell (gap)
+- I-1 고아 노드(연결 대기·Phase 4): gap-goods-material-contamination (gap)
+- I-1 고아 노드(연결 대기·Phase 4): gap-goods-cardenv-addon (gap)
 - O4 index 미등재 파일: axis/quantities.md (qty-176)
 - O4 index 미등재 파일: axis/quantities.md (qty-177)
 - O4 index 미등재 파일: axis/quantities.md (qty-178)

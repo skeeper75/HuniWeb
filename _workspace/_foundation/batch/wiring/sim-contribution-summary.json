@@ -7,17 +7,45 @@
   "errors": 0,
   "high_silent_zero": 0,
   "high_products": 0,
-  "review": 0,
+  "review": 3,
   "verdict": "GO(코어 기여 정합)"
  },
- "defects": [],
+ "defects": [
+  [
+   "PRD_000016",
+   "PRF_DGP_A",
+   "COMP_PRINT_SPOT_WHITE_S1",
+   "별색인쇄비",
+   530,
+   "OPT_NOTSEL",
+   "REVIEW"
+  ],
+  [
+   "PRD_000016",
+   "PRF_DGP_A",
+   "COMP_COAT_GLOSSY",
+   "유광코팅비",
+   138,
+   "OPT_NOTSEL",
+   "REVIEW"
+  ],
+  [
+   "PRD_000016",
+   "PRF_DGP_A",
+   "COMP_COAT_MATTE",
+   "무광코팅비",
+   138,
+   "OPT_NOTSEL",
+   "REVIEW"
+  ]
+ ],
  "products": [
   {
-   "prd_cd": "PRD_000112",
-   "frm_cd": "PRF_DGP_CAL_WIDE",
-   "final_price": 261922,
-   "wired": 3,
-   "contributed": 3,
+   "prd_cd": "PRD_000016",
+   "frm_cd": "PRF_DGP_A",
+   "final_price": 2048024,
+   "wired": 10,
+   "contributed": 7,
    "high_zero": 0
   }
  ],
