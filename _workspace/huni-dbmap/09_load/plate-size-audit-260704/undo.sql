@@ -1,0 +1,32 @@
+-- 판형 교정 UNDO — 원본 복원
+\set ON_ERROR_STOP on
+BEGIN;
+DELETE FROM t_prd_product_plate_sizes WHERE prd_cd IN ('PRD_000069','PRD_000068','PRD_000071','PRD_000072','PRD_000082','PRD_000077','PRD_000070','PRD_000037','PRD_000039','PRD_000025','PRD_000016');
+INSERT INTO t_prd_product_plate_sizes (prd_cd,siz_cd,item_siz_cd,output_paper_typ_cd,output_file_typ,dflt_plt_yn,del_yn,reg_dt) VALUES ('PRD_000016','SIZ_000499','','OUTPUT_PAPER_TYPE.01',NULL,'N','N',now());
+INSERT INTO t_prd_product_plate_sizes (prd_cd,siz_cd,item_siz_cd,output_paper_typ_cd,output_file_typ,dflt_plt_yn,del_yn,reg_dt) VALUES ('PRD_000016','SIZ_000522','SIZ_000003',NULL,NULL,'N','N',now());
+INSERT INTO t_prd_product_plate_sizes (prd_cd,siz_cd,item_siz_cd,output_paper_typ_cd,output_file_typ,dflt_plt_yn,del_yn,reg_dt) VALUES ('PRD_000025','SIZ_000522','','OUTPUT_PAPER_TYPE.01',NULL,'Y','N',now());
+INSERT INTO t_prd_product_plate_sizes (prd_cd,siz_cd,item_siz_cd,output_paper_typ_cd,output_file_typ,dflt_plt_yn,del_yn,reg_dt) VALUES ('PRD_000037','SIZ_000008','',NULL,'AI','Y','N',now());
+INSERT INTO t_prd_product_plate_sizes (prd_cd,siz_cd,item_siz_cd,output_paper_typ_cd,output_file_typ,dflt_plt_yn,del_yn,reg_dt) VALUES ('PRD_000039','SIZ_000522','','OUTPUT_PAPER_TYPE.01',NULL,'Y','N',now());
+INSERT INTO t_prd_product_plate_sizes (prd_cd,siz_cd,item_siz_cd,output_paper_typ_cd,output_file_typ,dflt_plt_yn,del_yn,reg_dt) VALUES ('PRD_000068','SIZ_000181','',NULL,NULL,'Y','N',now());
+INSERT INTO t_prd_product_plate_sizes (prd_cd,siz_cd,item_siz_cd,output_paper_typ_cd,output_file_typ,dflt_plt_yn,del_yn,reg_dt) VALUES ('PRD_000068','SIZ_000250','',NULL,'PDF','Y','N',now());
+INSERT INTO t_prd_product_plate_sizes (prd_cd,siz_cd,item_siz_cd,output_paper_typ_cd,output_file_typ,dflt_plt_yn,del_yn,reg_dt) VALUES ('PRD_000068','SIZ_000251','',NULL,'PDF','Y','N',now());
+INSERT INTO t_prd_product_plate_sizes (prd_cd,siz_cd,item_siz_cd,output_paper_typ_cd,output_file_typ,dflt_plt_yn,del_yn,reg_dt) VALUES ('PRD_000068','SIZ_000252','',NULL,NULL,'Y','N',now());
+INSERT INTO t_prd_product_plate_sizes (prd_cd,siz_cd,item_siz_cd,output_paper_typ_cd,output_file_typ,dflt_plt_yn,del_yn,reg_dt) VALUES ('PRD_000069','SIZ_000250','',NULL,'PDF','Y','N',now());
+INSERT INTO t_prd_product_plate_sizes (prd_cd,siz_cd,item_siz_cd,output_paper_typ_cd,output_file_typ,dflt_plt_yn,del_yn,reg_dt) VALUES ('PRD_000069','SIZ_000252','',NULL,NULL,'Y','N',now());
+INSERT INTO t_prd_product_plate_sizes (prd_cd,siz_cd,item_siz_cd,output_paper_typ_cd,output_file_typ,dflt_plt_yn,del_yn,reg_dt) VALUES ('PRD_000070','SIZ_000250','',NULL,'PDF','Y','N',now());
+INSERT INTO t_prd_product_plate_sizes (prd_cd,siz_cd,item_siz_cd,output_paper_typ_cd,output_file_typ,dflt_plt_yn,del_yn,reg_dt) VALUES ('PRD_000070','SIZ_000252','',NULL,NULL,'Y','N',now());
+INSERT INTO t_prd_product_plate_sizes (prd_cd,siz_cd,item_siz_cd,output_paper_typ_cd,output_file_typ,dflt_plt_yn,del_yn,reg_dt) VALUES ('PRD_000071','SIZ_000173','',NULL,NULL,'Y','N',now());
+INSERT INTO t_prd_product_plate_sizes (prd_cd,siz_cd,item_siz_cd,output_paper_typ_cd,output_file_typ,dflt_plt_yn,del_yn,reg_dt) VALUES ('PRD_000071','SIZ_000250','',NULL,'PDF','Y','N',now());
+INSERT INTO t_prd_product_plate_sizes (prd_cd,siz_cd,item_siz_cd,output_paper_typ_cd,output_file_typ,dflt_plt_yn,del_yn,reg_dt) VALUES ('PRD_000071','SIZ_000252','',NULL,NULL,'Y','N',now());
+INSERT INTO t_prd_product_plate_sizes (prd_cd,siz_cd,item_siz_cd,output_paper_typ_cd,output_file_typ,dflt_plt_yn,del_yn,reg_dt) VALUES ('PRD_000071','SIZ_000254','',NULL,NULL,'Y','N',now());
+INSERT INTO t_prd_product_plate_sizes (prd_cd,siz_cd,item_siz_cd,output_paper_typ_cd,output_file_typ,dflt_plt_yn,del_yn,reg_dt) VALUES ('PRD_000071','SIZ_000256','',NULL,NULL,'Y','N',now());
+INSERT INTO t_prd_product_plate_sizes (prd_cd,siz_cd,item_siz_cd,output_paper_typ_cd,output_file_typ,dflt_plt_yn,del_yn,reg_dt) VALUES ('PRD_000072','SIZ_000250','',NULL,'PDF','Y','N',now());
+INSERT INTO t_prd_product_plate_sizes (prd_cd,siz_cd,item_siz_cd,output_paper_typ_cd,output_file_typ,dflt_plt_yn,del_yn,reg_dt) VALUES ('PRD_000072','SIZ_000252','',NULL,NULL,'Y','N',now());
+INSERT INTO t_prd_product_plate_sizes (prd_cd,siz_cd,item_siz_cd,output_paper_typ_cd,output_file_typ,dflt_plt_yn,del_yn,reg_dt) VALUES ('PRD_000077','SIZ_000250','',NULL,'PDF','Y','N',now());
+INSERT INTO t_prd_product_plate_sizes (prd_cd,siz_cd,item_siz_cd,output_paper_typ_cd,output_file_typ,dflt_plt_yn,del_yn,reg_dt) VALUES ('PRD_000077','SIZ_000252','',NULL,NULL,'Y','N',now());
+INSERT INTO t_prd_product_plate_sizes (prd_cd,siz_cd,item_siz_cd,output_paper_typ_cd,output_file_typ,dflt_plt_yn,del_yn,reg_dt) VALUES ('PRD_000082','SIZ_000173','',NULL,NULL,'Y','N',now());
+INSERT INTO t_prd_product_plate_sizes (prd_cd,siz_cd,item_siz_cd,output_paper_typ_cd,output_file_typ,dflt_plt_yn,del_yn,reg_dt) VALUES ('PRD_000082','SIZ_000179','',NULL,NULL,'Y','N',now());
+INSERT INTO t_prd_product_plate_sizes (prd_cd,siz_cd,item_siz_cd,output_paper_typ_cd,output_file_typ,dflt_plt_yn,del_yn,reg_dt) VALUES ('PRD_000082','SIZ_000250','',NULL,'PDF','Y','N',now());
+INSERT INTO t_prd_product_plate_sizes (prd_cd,siz_cd,item_siz_cd,output_paper_typ_cd,output_file_typ,dflt_plt_yn,del_yn,reg_dt) VALUES ('PRD_000082','SIZ_000254','',NULL,NULL,'Y','N',now());
+UPDATE t_siz_sizes SET impos_yn='N' WHERE siz_cd='SIZ_000475';
+COMMIT;
