@@ -1,0 +1,242 @@
+{
+  "addons": [],
+  "bundle_qty": [],
+  "categories": [
+    {
+      "cat_cd": "CAT_000080",
+      "cat_lvl": "2",
+      "cat_nm": "보드액자",
+      "main_cat_yn": "N",
+      "upr_cat_cd": "CAT_000004"
+    },
+    {
+      "cat_cd": "CAT_000004",
+      "cat_lvl": "1",
+      "cat_nm": "포스터",
+      "main_cat_yn": "Y",
+      "upr_cat_cd": ""
+    }
+  ],
+  "cellsum": {
+    "COMP_POSTEROPT_CANVAS_HANGING_WOODHANGER": {
+      "cell_dim_cols": [
+        "siz_cd",
+        "opt_cd"
+      ],
+      "cells": 3,
+      "comp_nm": "캔버스행잉포스터 우드행거+면끈 추가가격",
+      "declared_use_dims": "[\"opt_cd\", \"siz_cd\", \"opt_grp:OPT_000012\"]",
+      "distinct_min_qty": [],
+      "distinct_opt_cd": [
+        "OPV_000429"
+      ],
+      "distinct_siz_cd": [
+        "SIZ_000172",
+        "SIZ_000174",
+        "SIZ_000197"
+      ],
+      "master_note": "포스터·사인 추가옵션 가격(거치대·끈·타공 등 별도 추가). 옵션·수량별 단가표.",
+      "price_max": 20000.0,
+      "price_min": 16000.0
+    },
+    "COMP_POSTER_CANVAS_HANGING": {
+      "cell_dim_cols": [
+        "siz_cd",
+        "min_qty"
+      ],
+      "cells": 3,
+      "comp_nm": "캔버스 행잉포스터 완제품가",
+      "declared_use_dims": "[\"siz_width\", \"siz_height\", \"min_qty\"]",
+      "distinct_min_qty": [
+        "1"
+      ],
+      "distinct_opt_cd": [],
+      "distinct_siz_cd": [
+        "SIZ_000172",
+        "SIZ_000174",
+        "SIZ_000197"
+      ],
+      "master_note": "포스터·사인 완제품가(소재+출력+가공 포함 통가격). 사이즈·수량별 단가표.",
+      "price_max": 20000.0,
+      "price_min": 6000.0
+    }
+  },
+  "constraints": [],
+  "formula_master": {
+    "PRF_POSTER_CANVAS_HANGING": {
+      "frm_nm": "캔버스 행잉포스터 완제품가(면적/규격 단가)",
+      "use_yn": "Y"
+    }
+  },
+  "formulas": [
+    "PRF_POSTER_CANVAS_HANGING"
+  ],
+  "materials": [
+    {
+      "dflt_yn": "Y",
+      "mat_cd": "MAT_000185",
+      "mat_nm": "캔버스(옥스포드)",
+      "mat_typ_cd": "MAT_TYPE.05",
+      "usage_cd": "USAGE.07"
+    }
+  ],
+  "meta": {
+    "captured_at": "2026-07-03",
+    "generated_by": "transcribe_product_133.py",
+    "prd_cd": "PRD_000133",
+    "snapshot": "live-snapshot/latest (snap_20260702_1119)"
+  },
+  "option_groups": [
+    {
+      "disp_seq": "1",
+      "mand_yn": "Y",
+      "max_sel_cnt": "1",
+      "min_sel_cnt": "1",
+      "note": "오버로크 봉제 필수",
+      "opt_grp_cd": "OPT_000011",
+      "opt_grp_nm": "가공",
+      "sel_typ_cd": "SEL_TYPE.01"
+    },
+    {
+      "disp_seq": "2",
+      "mand_yn": "N",
+      "max_sel_cnt": "1",
+      "min_sel_cnt": "0",
+      "note": "우드행거 추가 선택",
+      "opt_grp_cd": "OPT_000012",
+      "opt_grp_nm": "추가",
+      "sel_typ_cd": "SEL_TYPE.01"
+    }
+  ],
+  "option_items": [
+    {
+      "item_seq": "1",
+      "opt_cd": "OPV_000029",
+      "qty": "1",
+      "ref_dim_cd": "OPT_REF_DIM.04",
+      "ref_key1": "PROC_000080"
+    }
+  ],
+  "options": [
+    {
+      "dflt_yn": "N",
+      "disp_seq": "2",
+      "opt_cd": "OPV_000429",
+      "opt_grp_cd": "OPT_000012",
+      "opt_nm": "우드행거+면끈 추가"
+    },
+    {
+      "dflt_yn": "Y",
+      "disp_seq": "1",
+      "opt_cd": "OPV_000029",
+      "opt_grp_cd": "OPT_000011",
+      "opt_nm": "오버로크"
+    },
+    {
+      "dflt_yn": "Y",
+      "disp_seq": "1",
+      "opt_cd": "OPV_000030",
+      "opt_grp_cd": "OPT_000012",
+      "opt_nm": "출력만"
+    }
+  ],
+  "plates_all": [
+    {
+      "del_yn": "Y",
+      "dflt_plt_yn": "Y",
+      "note": "파일사양",
+      "output_file_typ": "JPG",
+      "output_paper_typ_cd": "",
+      "siz_cd": "SIZ_000050"
+    },
+    {
+      "del_yn": "Y",
+      "dflt_plt_yn": "Y",
+      "note": "파일사양",
+      "output_file_typ": "JPG",
+      "output_paper_typ_cd": "",
+      "siz_cd": "SIZ_000052"
+    },
+    {
+      "del_yn": "Y",
+      "dflt_plt_yn": "Y",
+      "note": "파일사양",
+      "output_file_typ": "JPG",
+      "output_paper_typ_cd": "",
+      "siz_cd": "SIZ_000198"
+    }
+  ],
+  "print_options": [],
+  "processes": [
+    {
+      "mand_proc_yn": "N",
+      "proc_cd": "PROC_000080",
+      "proc_nm": "봉제",
+      "upr_proc_cd": ""
+    }
+  ],
+  "product": {
+    "del_yn": "N",
+    "editor_yn": "Y",
+    "file_upload_yn": "Y",
+    "max_qty": "10000",
+    "min_qty": "1",
+    "nonspec_yn": "N",
+    "output_paper_typ_cd": null,
+    "prd_cd": "PRD_000133",
+    "prd_nm": "캔버스 행잉포스터",
+    "prd_typ_cd": "PRD_TYPE.01",
+    "qty_incr": "1",
+    "qty_unit_typ_cd": "QTY_UNIT.01",
+    "use_yn": "Y"
+  },
+  "sets_child": [],
+  "sets_parent": [],
+  "size_dims": {
+    "SIZ_000172": {
+      "cut": "210x297",
+      "dflt": "Y",
+      "master_del": "N",
+      "siz_nm": "A4(210x297mm)",
+      "work": "210x297"
+    },
+    "SIZ_000174": {
+      "cut": "297x420",
+      "dflt": "Y",
+      "master_del": "N",
+      "siz_nm": "A3(297x420mm)",
+      "work": "297x420"
+    },
+    "SIZ_000197": {
+      "cut": "420x594",
+      "dflt": "Y",
+      "master_del": "N",
+      "siz_nm": "A2(420x594mm)",
+      "work": "420x594"
+    }
+  },
+  "wiring": {
+    "PRF_POSTER_CANVAS_HANGING": [
+      {
+        "addtn_yn": "Y",
+        "comp_cd": "COMP_POSTER_CANVAS_HANGING",
+        "comp_nm": "캔버스 행잉포스터 완제품가",
+        "comp_typ_cd": "PRC_COMPONENT_TYPE.06",
+        "disp_seq": "1",
+        "master_note": "포스터·사인 완제품가(소재+출력+가공 포함 통가격). 사이즈·수량별 단가표.",
+        "prc_typ_cd": "PRICE_TYPE.01",
+        "use_dims": "[\"siz_width\", \"siz_height\", \"min_qty\"]"
+      },
+      {
+        "addtn_yn": "Y",
+        "comp_cd": "COMP_POSTEROPT_CANVAS_HANGING_WOODHANGER",
+        "comp_nm": "캔버스행잉포스터 우드행거+면끈 추가가격",
+        "comp_typ_cd": "PRC_COMPONENT_TYPE.06",
+        "disp_seq": "2",
+        "master_note": "포스터·사인 추가옵션 가격(거치대·끈·타공 등 별도 추가). 옵션·수량별 단가표.",
+        "prc_typ_cd": "PRICE_TYPE.01",
+        "use_dims": "[\"opt_cd\", \"siz_cd\", \"opt_grp:OPT_000012\"]"
+      }
+    ]
+  }
+}

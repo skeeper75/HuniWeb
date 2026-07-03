@@ -1,0 +1,195 @@
+{
+  "addons": [],
+  "bundle_qty": [],
+  "categories": [
+    {
+      "cat_cd": "CAT_000097",
+      "cat_lvl": "2",
+      "cat_nm": "POP",
+      "main_cat_yn": "N",
+      "upr_cat_cd": "CAT_000005"
+    }
+  ],
+  "constraints": [],
+  "formula_meta": {
+    "PRF_POSTER_MINI_BANNER": {
+      "frm_cd": "PRF_POSTER_MINI_BANNER",
+      "frm_nm": "미니배너 완제품가(면적/규격 단가)",
+      "note": "포스터사인 미니배너 소재/사이즈/수량별 완제품 통가격",
+      "reg_dt": "2026-06-17 13:00:58.993206",
+      "upd_dt": "2026-06-18 20:29:03.249047",
+      "use_yn": "Y"
+    }
+  },
+  "formulas": [
+    "PRF_POSTER_MINI_BANNER"
+  ],
+  "grid": {
+    "COMP_POSTER_MINI_BANNER": {
+      "cells_present": 10,
+      "combos_potential": 10,
+      "comp_nm": "미니배너 완제품가",
+      "price_max": 6500.0,
+      "price_min": 2800.0,
+      "qtys": [
+        "4",
+        "19",
+        "49",
+        "99",
+        "10000"
+      ],
+      "rows": 10,
+      "sizes": [
+        "SIZ_000028",
+        "SIZ_000328"
+      ],
+      "use_dims": "[\"siz_cd\", \"min_qty\"]",
+      "use_yn": "Y"
+    }
+  },
+  "materials": [
+    {
+      "dflt_yn": "Y",
+      "mat_cd": "MAT_000178",
+      "mat_nm": "PET",
+      "mat_typ_cd": "MAT_TYPE.08",
+      "upr_mat_cd": "",
+      "usage_cd": "USAGE.07"
+    }
+  ],
+  "meta": {
+    "captured_at": "2026-07-03",
+    "generated_by": "transcribe_product_145.py",
+    "prd_cd": "PRD_000145",
+    "snapshot": "live-snapshot/latest (snap_20260702_1119)"
+  },
+  "option_groups": [
+    {
+      "mand_yn": "N",
+      "max_sel": "1",
+      "min_sel": "0",
+      "note": "코팅 택1 선택",
+      "opt_grp_cd": "OPT_000024",
+      "opt_grp_nm": "코팅",
+      "options": [
+        {
+          "dflt": "Y",
+          "opt_cd": "OPV_000046",
+          "opt_nm": "무광코팅"
+        },
+        {
+          "dflt": "N",
+          "opt_cd": "OPV_000047",
+          "opt_nm": "유광코팅"
+        }
+      ],
+      "sel_typ_cd": "SEL_TYPE.01"
+    }
+  ],
+  "option_items": [
+    {
+      "item_seq": "1",
+      "opt_cd": "OPV_000046",
+      "qty": "1",
+      "ref_dim_cd": "OPT_REF_DIM.04",
+      "ref_key1": "PROC_000015",
+      "ref_key2": ""
+    },
+    {
+      "item_seq": "1",
+      "opt_cd": "OPV_000047",
+      "qty": "1",
+      "ref_dim_cd": "OPT_REF_DIM.04",
+      "ref_key1": "PROC_000014",
+      "ref_key2": ""
+    }
+  ],
+  "plates": [
+    {
+      "del": "Y",
+      "dflt": "Y",
+      "note": "파일사양",
+      "output_file_typ": "JPG",
+      "output_paper_typ_cd": "",
+      "siz_cd": "SIZ_000028"
+    },
+    {
+      "del": "Y",
+      "dflt": "Y",
+      "note": "파일사양",
+      "output_file_typ": "JPG",
+      "output_paper_typ_cd": "",
+      "siz_cd": "SIZ_000328"
+    }
+  ],
+  "print_options": [],
+  "processes": [
+    {
+      "dtl_opt": "",
+      "link_del": "N",
+      "mand": "N",
+      "proc_cd": "PROC_000015",
+      "proc_nm": "무광라미네이팅",
+      "upr": "PROC_000013"
+    },
+    {
+      "dtl_opt": "",
+      "link_del": "N",
+      "mand": "N",
+      "proc_cd": "PROC_000014",
+      "proc_nm": "유광라미네이팅",
+      "upr": "PROC_000013"
+    }
+  ],
+  "product": {
+    "del_yn": "N",
+    "editor_yn": "N",
+    "file_upload_yn": "Y",
+    "max_qty": "10000",
+    "min_qty": "1",
+    "nonspec_yn": "N",
+    "prd_cd": "PRD_000145",
+    "prd_nm": "미니배너",
+    "prd_typ_cd": "PRD_TYPE.01",
+    "qty_incr": "1",
+    "qty_unit_typ_cd": "QTY_UNIT.01",
+    "use_yn": "Y"
+  },
+  "sets_parent": [],
+  "sizes": [
+    {
+      "dflt": "Y",
+      "impos_yn": "N",
+      "link_del": "N",
+      "master_del": "N",
+      "master_note": "판걸이=3.0 / 전지=316x467 / 적용=3단접지카드",
+      "nonspec": "N",
+      "siz_cd": "SIZ_000028",
+      "siz_nm": "150x300",
+      "work": "152x302"
+    },
+    {
+      "dflt": "Y",
+      "impos_yn": "N",
+      "link_del": "N",
+      "master_del": "N",
+      "master_note": "",
+      "nonspec": "N",
+      "siz_cd": "SIZ_000328",
+      "siz_nm": "180x420",
+      "work": "180x420"
+    }
+  ],
+  "wiring": {
+    "PRF_POSTER_MINI_BANNER": [
+      {
+        "addtn_yn": "Y",
+        "comp_cd": "COMP_POSTER_MINI_BANNER",
+        "comp_nm": "미니배너 완제품가",
+        "disp_seq": "1",
+        "prc_typ_cd": "PRICE_TYPE.01",
+        "use_dims": "[\"siz_cd\", \"min_qty\"]"
+      }
+    ]
+  }
+}

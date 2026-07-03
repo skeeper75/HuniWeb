@@ -1,0 +1,101 @@
+{
+  "materials": {
+    "MAT_000176": {
+      "del_yn": "N",
+      "mat_nm": "인화지",
+      "mat_typ_cd": "MAT_TYPE.08",
+      "upr_mat_cd": ""
+    },
+    "MAT_000599": {
+      "del_yn": "N",
+      "mat_nm": "인화지",
+      "mat_typ_cd": "MAT_TYPE.08",
+      "upr_mat_cd": "MAT_000176"
+    }
+  },
+  "matrix_shape": {
+    "asymmetric": true,
+    "combo_count": 52,
+    "comp_cd": "COMP_POSTER_ARTPRINT_PHOTO",
+    "distinct_h": 13,
+    "distinct_w": 4,
+    "grid_full": true,
+    "grid_h_range": "600~3000",
+    "grid_w_range": "600~1200",
+    "qty_populated": false,
+    "row_count": 52,
+    "use_dims": [
+      "siz_width",
+      "siz_height",
+      "min_qty"
+    ]
+  },
+  "meta": {
+    "captured_at": "2026-07-03",
+    "generated_by": "transcribe_product_118.py",
+    "snapshot": "live-snapshot/latest (snap_20260702_1119)"
+  },
+  "processes_active": {
+    "PROC_000115": {
+      "proc_nm": "유광코팅",
+      "upr_proc_cd": "PROC_000114"
+    },
+    "PROC_000116": {
+      "proc_nm": "무광코팅",
+      "upr_proc_cd": "PROC_000114"
+    }
+  },
+  "processes_superseded": {
+    "PROC_000014": {
+      "proc_nm": "유광라미네이팅",
+      "upr_proc_cd": "PROC_000013"
+    },
+    "PROC_000015": {
+      "proc_nm": "무광라미네이팅",
+      "upr_proc_cd": "PROC_000013"
+    }
+  },
+  "qty": {
+    "max_qty": "1000",
+    "min_qty": "1",
+    "nonspec_h": "200~3000",
+    "nonspec_w": "200~1200",
+    "nonspec_yn": "Y",
+    "qty_incr": "1",
+    "unit": "QTY_UNIT.01"
+  },
+  "sizes_active": {
+    "SIZ_000198": {
+      "del_yn": "N",
+      "impos_yn": "Y",
+      "siz_nm": "A2 (420X594mm)",
+      "work": "420x594"
+    },
+    "SIZ_000294": {
+      "del_yn": "N",
+      "impos_yn": "Y",
+      "siz_nm": "A1 (594X841mm)",
+      "work": "594x841"
+    },
+    "SIZ_000315": {
+      "del_yn": "N",
+      "impos_yn": "N",
+      "siz_nm": "A3 (297x420mm)",
+      "work": "297x420"
+    }
+  },
+  "sizes_superseded": {
+    "SIZ_000174": {
+      "del_yn": "N",
+      "siz_nm": "A3(297x420mm)"
+    },
+    "SIZ_000197": {
+      "del_yn": "N",
+      "siz_nm": "A2(420x594mm)"
+    },
+    "SIZ_000293": {
+      "del_yn": "Y",
+      "siz_nm": "A1(594x841mm)"
+    }
+  }
+}

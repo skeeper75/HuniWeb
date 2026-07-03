@@ -1,0 +1,108 @@
+{
+  "addon_rows": 0,
+  "bundle_qty_rows": 0,
+  "categories": [
+    {
+      "cat_cd": "CAT_000092",
+      "cat_nm": "시트커팅/스티커",
+      "lvl": "2",
+      "main": "N",
+      "upr": "CAT_000005"
+    }
+  ],
+  "component": {
+    "comp_cd": "COMP_POSTER_SHEETCUT_HOLO",
+    "comp_typ_cd": "PRC_COMPONENT_TYPE.06",
+    "del_yn": "N",
+    "prc_typ_cd": "PRICE_TYPE.01",
+    "use_dims": "[\"siz_cd\"]"
+  },
+  "constraint_rows": 0,
+  "fixed_shape": {
+    "comp_cd": "COMP_POSTER_SHEETCUT_HOLO",
+    "distinct_siz": 3,
+    "grid_full": true,
+    "qty_bands": [],
+    "qty_populated": false,
+    "row_count": 3,
+    "siz_cells": [
+      "SIZ_000172",
+      "SIZ_000174",
+      "SIZ_000197"
+    ],
+    "size_price_match": true
+  },
+  "formula": {
+    "bound": true,
+    "comp_wired": [
+      {
+        "addtn": "Y",
+        "comp_cd": "COMP_POSTER_SHEETCUT_HOLO",
+        "disp_seq": "1"
+      }
+    ],
+    "frm_cd": "PRF_POSTER_SHEETCUT_HOLO"
+  },
+  "material": {
+    "junc_del_yn": "N",
+    "master_del_yn": "Y",
+    "mat_cd": "MAT_000257",
+    "mat_nm": "홀로그램",
+    "mat_typ_cd": "MAT_TYPE.08",
+    "usage_cd": "USAGE.07"
+  },
+  "materials_junction_rows": 1,
+  "meta": {
+    "captured_at": "2026-07-03",
+    "generated_by": "transcribe_product_141.py",
+    "snapshot": "live-snapshot/latest (snap_20260702_1119)"
+  },
+  "option_group_rows": 0,
+  "plate_placeholder": {
+    "SIZ_000050": {
+      "siz_nm": "A4 (210X297)"
+    },
+    "SIZ_000052": {
+      "siz_nm": "A3 (297X420mm)"
+    },
+    "SIZ_000198": {
+      "siz_nm": "A2 (420X594mm)"
+    }
+  },
+  "print_option_rows": 0,
+  "process_rows": 0,
+  "qty": {
+    "del_yn": "N",
+    "editor_yn": "N",
+    "file_upload_yn": "Y",
+    "max_qty": "(공란)",
+    "min_qty": "(공란)",
+    "nonspec_yn": "N",
+    "prd_nm": "홀로그램 시트커팅",
+    "prd_typ_cd": "PRD_TYPE.01",
+    "qty_incr": "(공란)",
+    "unit": "QTY_UNIT.01",
+    "use_yn": "Y"
+  },
+  "set_rows": 0,
+  "sizes_active": {
+    "SIZ_000172": {
+      "junc_del_yn": "N",
+      "master_del_yn": "N",
+      "siz_nm": "A4(210x297mm)",
+      "work": "210x297"
+    },
+    "SIZ_000174": {
+      "junc_del_yn": "N",
+      "master_del_yn": "N",
+      "siz_nm": "A3(297x420mm)",
+      "work": "297x420"
+    },
+    "SIZ_000197": {
+      "junc_del_yn": "N",
+      "master_del_yn": "N",
+      "siz_nm": "A2(420x594mm)",
+      "work": "420x594"
+    }
+  }
+}

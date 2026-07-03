@@ -1,0 +1,83 @@
+{
+  "fixed_shape_add": {
+    "comp_cd": "COMP_POSTEROPT_JOKJA_CEILHOOK",
+    "distinct_opt": 1,
+    "distinct_qty": 0,
+    "opts": [
+      "OPV_000431"
+    ],
+    "prc_typ_cd": "PRICE_TYPE.01",
+    "row_count": 1,
+    "use_dims": "[\"opt_cd\", \"min_qty\"]"
+  },
+  "fixed_shape_main": {
+    "comp_cd": "COMP_POSTER_JOKJA",
+    "comp_typ_cd": "PRC_COMPONENT_TYPE.06",
+    "distinct_qty": 1,
+    "distinct_siz": 5,
+    "grid_full": true,
+    "missing_cells": [],
+    "prc_typ_cd": "PRICE_TYPE.01",
+    "product_size_count": 5,
+    "row_count": 5,
+    "use_dims": "[\"siz_cd\", \"min_qty\"]"
+  },
+  "materials": {
+    "MAT_000178": {
+      "del_yn": "N",
+      "mat_nm": "PET",
+      "mat_typ_cd": "MAT_TYPE.08",
+      "upr_mat_cd": ""
+    }
+  },
+  "meta": {
+    "captured_at": "2026-07-03",
+    "generated_by": "transcribe_product_135.py",
+    "snapshot": "live-snapshot/latest (snap_20260702_1119)"
+  },
+  "processes": {
+    "PROC_000082": {
+      "proc_nm": "족자제작",
+      "upr_proc_cd": ""
+    }
+  },
+  "qty": {
+    "max_qty": "10000",
+    "min_qty": "1",
+    "nonspec_yn": "N",
+    "qty_incr": "1",
+    "unit": "QTY_UNIT.01"
+  },
+  "sizes": {
+    "SIZ_000174": {
+      "del_yn": "N",
+      "impos_yn": "N",
+      "siz_nm": "A3(297x420mm)",
+      "work": "297x420"
+    },
+    "SIZ_000197": {
+      "del_yn": "N",
+      "impos_yn": "N",
+      "siz_nm": "A2(420x594mm)",
+      "work": "420x594"
+    },
+    "SIZ_000294": {
+      "del_yn": "N",
+      "impos_yn": "Y",
+      "siz_nm": "A1 (594X841mm)",
+      "work": "594x841"
+    },
+    "SIZ_000319": {
+      "del_yn": "N",
+      "impos_yn": "N",
+      "siz_nm": "300x600",
+      "work": "300x600"
+    },
+    "SIZ_000320": {
+      "del_yn": "N",
+      "impos_yn": "N",
+      "siz_nm": "900x1200",
+      "work": "900x1200"
+    }
+  }
+}

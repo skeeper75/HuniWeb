@@ -1,0 +1,183 @@
+{
+  "component": {
+    "COMP_POSTER_ARTPRINT_PHOTO": {
+      "comp_nm": "실사 완제품가 (아트프린트포스터·접착방수포스터·아트패브릭포스터·방수포스터)",
+      "comp_typ_cd": "PRC_COMPONENT_TYPE.06",
+      "note": "[동형결합] 가격표 동일 4소재 통합 · 결합소재: 아트프린트포스터, 접착방수포스터, 아트패브릭포스터, 방수포스터 · 가격축: 가로×세로 구간(52셀) · 골든 600×1800=21,600원 · 정본 COMP_POSTER_ARTPRINT_PHOTO(레거시 3종)",
+      "prc_typ_cd": "PRICE_TYPE.01",
+      "use_dims": "[\"siz_width\", \"siz_height\", \"min_qty\"]",
+      "use_yn": "Y"
+    }
+  },
+  "constraints": [
+    {
+      "err_msg": "가로 200~1200mm, 세로 200~3000mm 범위로 입력하세요",
+      "logic_len": 198,
+      "rule_cd": "RULE_001",
+      "rule_nm": "사용자입력 치수 범위",
+      "rule_typ_cd": "RULE_TYPE.01",
+      "use_yn": "Y"
+    }
+  ],
+  "materials": {
+    "MAT_000178": {
+      "dflt": "Y",
+      "mat_nm": "PET",
+      "mat_typ_cd": "MAT_TYPE.08",
+      "usage_cd": "USAGE.07"
+    }
+  },
+  "matrix_shape": {
+    "cell_count": 52,
+    "comp_cd": "COMP_POSTER_ARTPRINT_PHOTO",
+    "grid_full": true,
+    "heights": [
+      "600",
+      "800",
+      "1000",
+      "1200",
+      "1400",
+      "1600",
+      "1800",
+      "2000",
+      "2200",
+      "2400",
+      "2600",
+      "2800",
+      "3000"
+    ],
+    "qty_bands": [
+      "(EMPTY·수량축 없음)"
+    ],
+    "row_count": 52,
+    "widths": [
+      "600",
+      "800",
+      "1000",
+      "1200"
+    ]
+  },
+  "meta": {
+    "captured_at": "2026-07-03",
+    "generated_by": "transcribe_product_120.py",
+    "snapshot": "live-snapshot/latest (snap_20260702_1119)"
+  },
+  "option_group": {
+    "grp": {
+      "del_dt": "",
+      "del_yn": "N",
+      "disp_seq": "1",
+      "mand_yn": "N",
+      "max_sel_cnt": "1",
+      "min_sel_cnt": "0",
+      "note": "코팅 택1 선택",
+      "opt_grp_cd": "OPT_000006",
+      "opt_grp_nm": "코팅",
+      "prd_cd": "PRD_000120",
+      "reg_dt": "2026-06-14 07:22:24.811887",
+      "sel_typ_cd": "SEL_TYPE.01",
+      "upd_dt": "",
+      "use_yn": "Y",
+      "usr_def_nm": ""
+    },
+    "items": [
+      {
+        "dflt": "Y",
+        "opt_cd": "OPV_000020",
+        "opt_nm": "무광코팅",
+        "ref_dim_cd": "OPT_REF_DIM.04",
+        "ref_key1": "PROC_000015"
+      },
+      {
+        "dflt": "N",
+        "opt_cd": "OPV_000021",
+        "opt_nm": "유광코팅",
+        "ref_dim_cd": "OPT_REF_DIM.04",
+        "ref_key1": "PROC_000014"
+      }
+    ]
+  },
+  "plate": [
+    {
+      "del_yn": "Y",
+      "note": "파일사양",
+      "output_file_typ": "JPG",
+      "output_paper_typ_cd": "",
+      "siz_cd": "SIZ_000052"
+    },
+    {
+      "del_yn": "Y",
+      "note": "파일사양",
+      "output_file_typ": "JPG",
+      "output_paper_typ_cd": "",
+      "siz_cd": "SIZ_000198"
+    },
+    {
+      "del_yn": "Y",
+      "note": "파일사양",
+      "output_file_typ": "JPG",
+      "output_paper_typ_cd": "",
+      "siz_cd": "SIZ_000294"
+    }
+  ],
+  "print_options": {
+    "row_count": 0
+  },
+  "processes": {
+    "PROC_000014": {
+      "mand": "N",
+      "proc_nm": "유광라미네이팅",
+      "upr": "PROC_000013"
+    },
+    "PROC_000015": {
+      "mand": "N",
+      "proc_nm": "무광라미네이팅",
+      "upr": "PROC_000013"
+    }
+  },
+  "product": {
+    "del_yn": "N",
+    "editor_yn": "N",
+    "file_upload_yn": "Y",
+    "max_qty": "1000",
+    "min_qty": "1",
+    "nonspec_h": "200~3000",
+    "nonspec_h_incr": "200",
+    "nonspec_w": "200~1200",
+    "nonspec_w_incr": "200",
+    "nonspec_yn": "Y",
+    "prd_nm": "방수포스터",
+    "prd_typ_cd": "PRD_TYPE.01",
+    "qty_incr": "1",
+    "qty_unit_typ_cd": "QTY_UNIT.01",
+    "use_yn": "Y"
+  },
+  "sizes": {
+    "SIZ_000174": {
+      "junction_del": "N",
+      "master_del": "N",
+      "siz_nm": "A3(297x420mm)",
+      "work": "297x420"
+    },
+    "SIZ_000197": {
+      "junction_del": "N",
+      "master_del": "N",
+      "siz_nm": "A2(420x594mm)",
+      "work": "420x594"
+    },
+    "SIZ_000293": {
+      "junction_del": "N",
+      "master_del": "Y",
+      "siz_nm": "A1(594x841mm)",
+      "work": "594x841"
+    }
+  },
+  "wiring": [
+    {
+      "addtn_yn": "Y",
+      "comp_cd": "COMP_POSTER_ARTPRINT_PHOTO",
+      "disp_seq": "1",
+      "frm_cd": "PRF_POSTER_WATERPROOF"
+    }
+  ]
+}

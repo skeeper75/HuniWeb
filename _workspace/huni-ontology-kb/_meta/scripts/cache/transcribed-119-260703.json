@@ -1,0 +1,147 @@
+{
+  "addons": [],
+  "bundle_qty": [],
+  "categories": [
+    {
+      "cat_cd": "CAT_000314",
+      "cat_lvl": "2",
+      "cat_nm": "아트포스터",
+      "main_cat_yn": "N",
+      "upr": "CAT_000004"
+    },
+    {
+      "cat_cd": "CAT_000004",
+      "cat_lvl": "1",
+      "cat_nm": "포스터",
+      "main_cat_yn": "Y",
+      "upr": ""
+    }
+  ],
+  "comp_rows": {
+    "COMP_POSTER_ARTPAPER_MATTE": {
+      "distinct_wh_pairs": 39,
+      "h_max": 3000.0,
+      "h_min": 600.0,
+      "total_rows": 39,
+      "w_max": 900.0,
+      "w_min": 600.0
+    }
+  },
+  "constraints": [],
+  "formula_meta": {
+    "PRF_POSTER_ARTPAPER": {
+      "frm_nm": "아트페이퍼포스터 완제품가(면적/규격 단가)",
+      "note": "포스터사인 아트페이퍼포스터 소재/사이즈/수량별 완제품 통가격",
+      "use_yn": "Y"
+    }
+  },
+  "formulas": [
+    "PRF_POSTER_ARTPAPER"
+  ],
+  "materials": [
+    {
+      "dflt_yn": "Y",
+      "mat_cd": "MAT_000177",
+      "mat_nm": "매트지",
+      "mat_typ_cd": "MAT_TYPE.08",
+      "usage_cd": "USAGE.07"
+    }
+  ],
+  "meta": {
+    "captured_at": "2026-07-03",
+    "generated_by": "transcribe_product_119.py",
+    "prd_cd": "PRD_000119",
+    "snapshot": "live-snapshot/latest (snap_20260702_1119)"
+  },
+  "option_groups": [],
+  "plates": [
+    {
+      "dflt_plt_yn": "Y",
+      "note": "파일사양",
+      "output_file_typ": "JPG",
+      "output_paper_typ_cd": "",
+      "siz_cd": "SIZ_000052"
+    },
+    {
+      "dflt_plt_yn": "Y",
+      "note": "파일사양",
+      "output_file_typ": "JPG",
+      "output_paper_typ_cd": "",
+      "siz_cd": "SIZ_000198"
+    },
+    {
+      "dflt_plt_yn": "Y",
+      "note": "파일사양",
+      "output_file_typ": "JPG",
+      "output_paper_typ_cd": "",
+      "siz_cd": "SIZ_000294"
+    }
+  ],
+  "print_options": [],
+  "processes": [],
+  "prod_sizes": [
+    {
+      "cut": "297x420",
+      "dflt_yn": "Y",
+      "disp_seq": "1",
+      "master_del_yn": "N",
+      "siz_cd": "SIZ_000174",
+      "siz_nm": "A3(297x420mm)",
+      "tags": "",
+      "work": "297x420"
+    },
+    {
+      "cut": "420x594",
+      "dflt_yn": "Y",
+      "disp_seq": "1",
+      "master_del_yn": "N",
+      "siz_cd": "SIZ_000197",
+      "siz_nm": "A2(420x594mm)",
+      "tags": "",
+      "work": "420x594"
+    },
+    {
+      "cut": "594x841",
+      "dflt_yn": "Y",
+      "disp_seq": "1",
+      "master_del_yn": "Y",
+      "siz_cd": "SIZ_000293",
+      "siz_nm": "A1(594x841mm)",
+      "tags": "",
+      "work": "594x841"
+    }
+  ],
+  "product": {
+    "del_yn": "N",
+    "editor_yn": "N",
+    "file_upload_yn": "Y",
+    "max_qty": "1000",
+    "min_qty": "1",
+    "nonspec_height_incr": "200.00",
+    "nonspec_height_max": "3000.00",
+    "nonspec_height_min": "200.00",
+    "nonspec_width_incr": "200.00",
+    "nonspec_width_max": "900.00",
+    "nonspec_width_min": "200.00",
+    "nonspec_yn": "Y",
+    "prd_cd": "PRD_000119",
+    "prd_nm": "아트페이퍼포스터",
+    "prd_typ_cd": "PRD_TYPE.01",
+    "qty_incr": "1",
+    "qty_unit_typ_cd": "QTY_UNIT.01",
+    "use_yn": "Y"
+  },
+  "wiring": {
+    "PRF_POSTER_ARTPAPER": [
+      {
+        "addtn_yn": "Y",
+        "comp_cd": "COMP_POSTER_ARTPAPER_MATTE",
+        "comp_nm": "실사 완제품가 (아트페이퍼포스터)",
+        "comp_typ_cd": "PRC_COMPONENT_TYPE.06",
+        "disp_seq": "1",
+        "prc_typ_cd": "PRICE_TYPE.01",
+        "use_dims": "[\"siz_width\", \"siz_height\"]"
+      }
+    ]
+  }
+}

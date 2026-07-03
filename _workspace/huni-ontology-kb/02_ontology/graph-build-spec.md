@@ -158,6 +158,11 @@ SELECT src FROM edge WHERE rel='uses_material' AND dst='material-MAT_000074';
 ### 5.6 오염 검사 (I-6, 하드)
 - 전 노드 sources.src_id가 blocklist.md에 없음(O2). 있으면 FAIL(STALE/v03·환각 인용 차단).
 
+### 5.6b 마스터 앵커 단일소유권 (L-20, 소프트 — 동형결합 계약)
+- 같은 `t_*/CODE` **마스터** 앵커를 2+ 노드가 **동일 type**으로 소유하면 소프트 경고(공유 축 파편화·질의 누락 위험). L-3(id 중복)이 못 잡는 앵커 중복 사각지대(동형결합 단일소유권 = 공유 마스터행은 단일 owner 노드).
+- **제외:** `t_prd_product_*` 정션 테이블(prd_cd 조밀 앵커=자식행 by-design 공유·D-SILSA-INT-2 architect 소관). 크로스타입 공유(product↔bundle_qty·decision↔component)는 (type,anchor) 그룹핑으로 자동 제외(적대 패널 by-design 판정 정합).
+- **소프트 사유:** 로컬 preset 재선언이 같은 마스터 앵커로 해석되면 가격사슬은 무손상(가격 무영향)이나 공유 축 모델이 파편화되므로 회귀 가드로 노출. 하드 승격은 전 축 로컬 preset 정리 후 검토(현 잔여=스티커 축 등 타 레인 소관). 실사 축은 D-SILSA-INT-1 교정으로 0.
+
 ### 5.7 빌드 리포트 필수 항목
 노드 수(타입별)·엣지 수(rel별)·lint 위반 목록(하드/소프트)·고아 노드·끊긴 링크·멱등 해시·blocklist 히트. 게이트(okb-adversarial-gate O1~O7)가 이 리포트를 판정 입력으로.
 
@@ -181,6 +186,11 @@ SELECT src FROM edge WHERE rel='uses_material' AND dst='material-MAT_000074';
 ---
 
 ## 변경 이력
+
+### v1.0.4 — 2026-07-03 (실사 검증 결함 교정 — `_meta/fix-log-silsa-260703.md`)
+> 실질 신규: §5.6b L-20(마스터 앵커 단일소유권·소프트) 추가. 빌더 구현과 정합.
+
+- **D-SILSA-INT-1(b)/INT-3 [Medium/Low]** §5.6b 신설 — 마스터 `t_*/CODE` 앵커를 2+ 노드가 동일 type으로 소유하는 앵커 중복을 소프트 경고(L-20). `t_prd_product_*` 정션·크로스타입 제외. 빌더 `build_graph.py`에 `_anchor_owners` 그룹핑 구현. 실사 size 중복은 정본 재지향으로 0·잔여는 회귀 가드. file-format-spec §5.3 L-20과 통일.
 
 ### v1.0.3 — 2026-07-03 (검증 라운드 2 결함 교정 — `_meta/fix-log-260703.md` R2)
 > 실질 불변(빌더 코드 무수정). §3.1 블록 파싱 서술을 실제 구현대로 정정 — 명세-구현 불일치 해소.

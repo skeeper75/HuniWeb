@@ -1,0 +1,165 @@
+{
+  "addons": [],
+  "bundle_qty": [],
+  "categories": [
+    {
+      "cat_cd": "CAT_000315",
+      "cat_lvl": "2",
+      "cat_nm": "배너/현수막",
+      "main_cat_yn": "N",
+      "upr_cat_cd": "CAT_000005"
+    }
+  ],
+  "constraints": [],
+  "formula_meta": {
+    "PRF_POSTER_MESH_BANNER": {
+      "frm_cd": "PRF_POSTER_MESH_BANNER",
+      "frm_nm": "메쉬배너 완제품가(면적/규격 단가)",
+      "note": "포스터사인 메쉬배너 소재/사이즈/수량별 완제품 통가격",
+      "reg_dt": "2026-06-17 13:00:58.993206",
+      "upd_dt": "2026-06-18 20:29:12.132681",
+      "use_yn": "Y"
+    }
+  },
+  "formulas": [
+    "PRF_POSTER_MESH_BANNER"
+  ],
+  "grid": {
+    "COMP_POSTER_MESH_BANNER": {
+      "cells_present": 1,
+      "combos_potential": 1,
+      "comp_nm": "메쉬배너 완제품가",
+      "price_max": 38000.0,
+      "price_min": 38000.0,
+      "qtys": [
+        "1"
+      ],
+      "rows": 1,
+      "sizes": [
+        "SIZ_000321"
+      ],
+      "use_dims": "[\"siz_cd\", \"min_qty\"]",
+      "use_yn": "Y"
+    }
+  },
+  "materials": [
+    {
+      "dflt_yn": "Y",
+      "mat_cd": "MAT_000183",
+      "mat_nm": "메쉬",
+      "mat_typ_cd": "MAT_TYPE.08",
+      "upr_mat_cd": "",
+      "usage_cd": "USAGE.07"
+    }
+  ],
+  "meta": {
+    "captured_at": "2026-07-03",
+    "generated_by": "transcribe_product_137.py",
+    "prd_cd": "PRD_000137",
+    "snapshot": "live-snapshot/latest (snap_20260702_1119)"
+  },
+  "option_groups": [
+    {
+      "mand_yn": "Y",
+      "max_sel": "1",
+      "min_sel": "1",
+      "note": "4구타공 필수 (구수 param=GAP)",
+      "opt_grp_cd": "OPT_000020",
+      "opt_grp_nm": "가공",
+      "options": [
+        {
+          "dflt": "Y",
+          "opt_cd": "OPV_000040",
+          "opt_nm": "4구타공"
+        }
+      ],
+      "sel_typ_cd": "SEL_TYPE.01"
+    },
+    {
+      "mand_yn": "N",
+      "max_sel": "1",
+      "min_sel": "0",
+      "note": "배너거치대 추가 (template·BLOCKED)",
+      "opt_grp_cd": "OPT_000021",
+      "opt_grp_nm": "추가",
+      "options": [
+        {
+          "dflt": "Y",
+          "opt_cd": "OPV_000041",
+          "opt_nm": "거치대없음"
+        }
+      ],
+      "sel_typ_cd": "SEL_TYPE.01"
+    }
+  ],
+  "option_items": [
+    {
+      "item_seq": "1",
+      "opt_cd": "OPV_000040",
+      "qty": "1",
+      "ref_dim_cd": "OPT_REF_DIM.04",
+      "ref_key1": "PROC_000079",
+      "ref_key2": ""
+    }
+  ],
+  "plates": [
+    {
+      "del": "Y",
+      "dflt": "Y",
+      "note": "파일사양",
+      "output_file_typ": "JPG",
+      "output_paper_typ_cd": "",
+      "siz_cd": "SIZ_000321"
+    }
+  ],
+  "print_options": [],
+  "processes": [
+    {
+      "dtl_opt": "{\"inputs\": [{\"key\": \"구수\", \"max\": 8, \"min\": 1, \"type\": \"integer\", \"unit\": \"개\"}]}",
+      "link_del": "N",
+      "mand": "N",
+      "proc_cd": "PROC_000079",
+      "proc_nm": "타공",
+      "upr": ""
+    }
+  ],
+  "product": {
+    "del_yn": "N",
+    "editor_yn": "N",
+    "file_upload_yn": "Y",
+    "max_qty": "10000",
+    "min_qty": "1",
+    "nonspec_yn": "N",
+    "prd_cd": "PRD_000137",
+    "prd_nm": "메쉬배너",
+    "prd_typ_cd": "PRD_TYPE.01",
+    "qty_incr": "1",
+    "qty_unit_typ_cd": "QTY_UNIT.01",
+    "use_yn": "Y"
+  },
+  "sets_parent": [],
+  "sizes": [
+    {
+      "dflt": "Y",
+      "impos_yn": "N",
+      "link_del": "N",
+      "master_del": "N",
+      "nonspec": "N",
+      "siz_cd": "SIZ_000321",
+      "siz_nm": "600x1800mm",
+      "work": "600x1800"
+    }
+  ],
+  "wiring": {
+    "PRF_POSTER_MESH_BANNER": [
+      {
+        "addtn_yn": "Y",
+        "comp_cd": "COMP_POSTER_MESH_BANNER",
+        "comp_nm": "메쉬배너 완제품가",
+        "disp_seq": "1",
+        "prc_typ_cd": "PRICE_TYPE.01",
+        "use_dims": "[\"siz_cd\", \"min_qty\"]"
+      }
+    ]
+  }
+}

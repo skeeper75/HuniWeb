@@ -335,6 +335,27 @@ def build():
         # L-12/L-16(소프트): 본문 수치·표 마커 스캔
         scan_body_lint(nid, n.tables, soft)
 
+    # --- L-20(소프트): 마스터 테이블 동일타입 앵커 중복소유 (D-SILSA-INT-1/3 동형결합 단일소유권) ---
+    # 같은 t_*/CODE 마스터 앵커를 2+ 노드가 동일 type으로 소유 = 공유 축 파편화(질의 누락 위험).
+    # L-3(id 중복)이 못 잡는 앵커 중복 사각지대. 제외: t_prd_product_* 정션 테이블(prd_cd 조밀 앵커=
+    # 자식행 by-design 공유·D-SILSA-INT-2 architect 소관). 크로스타입 공유(product↔qty·decision↔component)는
+    # 동일(type,anchor) 그룹핑으로 자동 제외(적대 패널 by-design 판정 정합).
+    _anchor_owners = {}
+    for nid, n in nodes.items():
+        a = n.anchor
+        if not isinstance(a, str):
+            continue
+        am = ANCHOR_TABLE_RE.match(a)
+        if not am:
+            continue
+        if am.group(1).startswith("t_prd_product_"):  # 정션(product-scoped)=조밀 앵커 by-design 제외
+            continue
+        _anchor_owners.setdefault((n.type, a), []).append(nid)
+    for (typ, a), owners in sorted(_anchor_owners.items()):
+        if len(owners) > 1:
+            soft.append(f"L-20 마스터 앵커 중복소유(동형결합 단일소유권 위반): {a} "
+                        f"type={typ} owners={sorted(owners)}")
+
     # --- 엣지 추출 ---
     node_ids = set(nodes)
     edges = []
@@ -579,6 +600,8 @@ def report(nodes, edges, hard, soft, hashes):
     L.append(f"- I-3 타입 위반: {sum(1 for h in hard if 'I-3' in h)}")
     L.append(f"- I-4 필수 엣지(O5/O6): {sum(1 for h in hard if h.startswith(('O5','O6')) or 'O5' in h or 'O6' in h)}")
     L.append(f"- I-5 멱등: nodes/edges 해시 재현(위 해시 — --idem로 자체검사)")
+    L.append(f"- L-20 마스터 앵커 중복소유(소프트·동형결합 단일소유권): {sum(1 for s in soft if s.startswith('L-20'))} "
+             f"(실사 D-SILSA-INT-1 교정 후 잔여=스티커 축 등 타 레인 소관·회귀 가드)")
     _bl = load_blocklist()
     if _bl["present"]:
         L.append(f"- I-6 오염(blocklist): {sum(1 for h in hard if 'I-6' in h or 'O2/I-6' in h)} "

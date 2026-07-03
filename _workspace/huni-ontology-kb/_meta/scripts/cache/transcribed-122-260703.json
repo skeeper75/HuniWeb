@@ -1,0 +1,165 @@
+{
+  "addons": [],
+  "bundle_qty": [],
+  "categories": [
+    {
+      "cat_cd": "CAT_000314",
+      "cat_nm": "아트포스터",
+      "main_cat_yn": "N"
+    },
+    {
+      "cat_cd": "CAT_000004",
+      "cat_nm": "포스터",
+      "main_cat_yn": "Y"
+    }
+  ],
+  "constraints": [
+    {
+      "err_msg": "가로 200~1200mm, 세로 200~3000mm 범위로 입력하세요",
+      "logic": "{\"or\": [{\"!=\": [{\"var\": \"size_mode\"}, \"nonspec\"]}, {\"and\": [{\">=\": [{\"var\": \"width\"}, 200]}, {\"<=\": [{\"var\": \"width\"}, 1200]}, {\">=\": [{\"var\": \"height\"}, 200]}, {\"<=\": [{\"var\": \"height\"}, 3000]}]}]}",
+      "rule_cd": "RULE_001",
+      "rule_nm": "사용자입력 치수 범위",
+      "rule_typ_cd": "RULE_TYPE.01",
+      "use_yn": "Y"
+    }
+  ],
+  "formulas": [
+    "PRF_POSTER_ADH_CLEAR"
+  ],
+  "materials": [
+    {
+      "dflt_yn": "Y",
+      "mat_cd": "MAT_000180",
+      "mat_nm": "투명PVC",
+      "mat_typ_cd": "MAT_TYPE.08",
+      "usage_cd": "USAGE.07"
+    }
+  ],
+  "matrix": {
+    "COMP_POSTER_ADH_CLEAR_PVC": {
+      "cells": 52,
+      "master_note": "[단독] 동형 없음 · 가격축: 가로×세로 구간(52셀) · 골든 600×1800=59,400원",
+      "price_max": 198000.0,
+      "price_min": 16000.0,
+      "wh_pairs": 52
+    }
+  },
+  "meta": {
+    "captured_at": "2026-07-03",
+    "generated_by": "transcribe_product_122.py",
+    "prd_cd": "PRD_000122",
+    "snapshot": "live-snapshot/latest (snap_20260702_1119)"
+  },
+  "option_groups": [
+    {
+      "mand_yn": "N",
+      "max_sel_cnt": "1",
+      "min_sel_cnt": "0",
+      "note": "화이트 underbase 별색 선택",
+      "opt_grp_cd": "OPT_000008",
+      "opt_grp_nm": "화이트별색",
+      "sel_typ_cd": "SEL_TYPE.01"
+    }
+  ],
+  "option_items": [
+    {
+      "item_seq": "1",
+      "opt_cd": "OPV_000024",
+      "qty": "1",
+      "ref_dim_cd": "OPT_REF_DIM.04",
+      "ref_key1": "PROC_000008"
+    }
+  ],
+  "options": [
+    {
+      "dflt_yn": "N",
+      "opt_cd": "OPV_000024",
+      "opt_grp_cd": "OPT_000008",
+      "opt_nm": "단면"
+    }
+  ],
+  "plates_all": [
+    {
+      "del_yn": "Y",
+      "dflt_plt_yn": "Y",
+      "note": "파일사양",
+      "output_file_typ": "PDF",
+      "output_paper_typ_cd": "",
+      "siz_cd": "SIZ_000052"
+    },
+    {
+      "del_yn": "Y",
+      "dflt_plt_yn": "Y",
+      "note": "파일사양",
+      "output_file_typ": "PDF",
+      "output_paper_typ_cd": "",
+      "siz_cd": "SIZ_000198"
+    },
+    {
+      "del_yn": "Y",
+      "dflt_plt_yn": "Y",
+      "note": "파일사양",
+      "output_file_typ": "PDF",
+      "output_paper_typ_cd": "",
+      "siz_cd": "SIZ_000294"
+    }
+  ],
+  "print_options": [],
+  "processes": [
+    {
+      "mand_proc_yn": "N",
+      "proc_cd": "PROC_000008",
+      "proc_nm": "화이트인쇄",
+      "upr_proc_cd": "PROC_000007"
+    }
+  ],
+  "product": {
+    "del_yn": "N",
+    "editor_yn": "N",
+    "file_upload_yn": "Y",
+    "max_qty": "1000",
+    "min_qty": "1",
+    "nonspec_yn": "Y",
+    "output_paper_typ_cd": null,
+    "prd_cd": "PRD_000122",
+    "prd_nm": "접착투명포스터",
+    "prd_typ_cd": "PRD_TYPE.01",
+    "qty_incr": "1",
+    "qty_unit_typ_cd": "QTY_UNIT.01",
+    "use_yn": "Y"
+  },
+  "size_dims": {
+    "SIZ_000174": {
+      "cut": "297x420",
+      "dflt": "Y",
+      "siz_nm": "A3(297x420mm)",
+      "work": "297x420"
+    },
+    "SIZ_000197": {
+      "cut": "420x594",
+      "dflt": "Y",
+      "siz_nm": "A2(420x594mm)",
+      "work": "420x594"
+    },
+    "SIZ_000293": {
+      "cut": "594x841",
+      "dflt": "Y",
+      "siz_nm": "A1(594x841mm)",
+      "work": "594x841"
+    }
+  },
+  "wiring": {
+    "PRF_POSTER_ADH_CLEAR": [
+      {
+        "addtn_yn": "Y",
+        "comp_cd": "COMP_POSTER_ADH_CLEAR_PVC",
+        "comp_nm": "실사 완제품가 (접착투명포스터)",
+        "comp_typ_cd": "PRC_COMPONENT_TYPE.06",
+        "disp_seq": "1",
+        "master_note": "[단독] 동형 없음 · 가격축: 가로×세로 구간(52셀) · 골든 600×1800=59,400원",
+        "prc_typ_cd": "PRICE_TYPE.01",
+        "use_dims": "[\"siz_width\", \"siz_height\"]"
+      }
+    ]
+  }
+}

@@ -1,0 +1,201 @@
+{
+  "addons": [],
+  "bundle_qty": [],
+  "categories": [
+    {
+      "cat_cd": "CAT_000076",
+      "cat_lvl": "2",
+      "cat_nm": "아트프린트",
+      "main_cat_yn": "N",
+      "upr_cat_cd": "CAT_000004"
+    }
+  ],
+  "constraints": [],
+  "formula_meta": {
+    "PRF_POSTER_TYVEK": {
+      "frm_cd": "PRF_POSTER_TYVEK",
+      "frm_nm": "타이벡프린트 완제품가(면적/규격 단가)",
+      "note": "포스터사인 타이벡프린트 소재/사이즈/수량별 완제품 통가격",
+      "reg_dt": "2026-06-17 13:00:58.993206",
+      "upd_dt": "2026-06-18 20:27:47.19335",
+      "use_yn": "Y"
+    }
+  },
+  "formulas": [
+    "PRF_POSTER_TYVEK"
+  ],
+  "grid": {
+    "COMP_POSTER_CANVAS_FABRIC": {
+      "comp_nm": "실사 완제품가 (캔버스패브릭포스터·레더아트프린트·메쉬프린트·타이벡프린트)",
+      "heights": [
+        "600",
+        "800",
+        "1000",
+        "1200",
+        "1400",
+        "1600",
+        "1800",
+        "2000",
+        "2200",
+        "2400",
+        "2600",
+        "2800",
+        "3000"
+      ],
+      "price_max": 126000.0,
+      "price_min": 19000.0,
+      "rows": 52,
+      "use_dims": "[\"siz_width\", \"siz_height\", \"min_qty\"]",
+      "use_yn": "Y",
+      "widths": [
+        "600",
+        "800",
+        "1000",
+        "1200"
+      ]
+    },
+    "COMP_POSTER_TYVEK_PRINT": {
+      "comp_nm": "타이벡프린트 완제품가[레거시]",
+      "heights": [
+        "600",
+        "800",
+        "1000",
+        "1200",
+        "1400",
+        "1600",
+        "1800",
+        "2000",
+        "2200",
+        "2400",
+        "2600",
+        "2800",
+        "3000"
+      ],
+      "price_max": 126000.0,
+      "price_min": 19000.0,
+      "rows": 52,
+      "use_dims": "[\"siz_width\", \"siz_height\"]",
+      "use_yn": "N",
+      "widths": [
+        "600",
+        "800",
+        "1000",
+        "1200"
+      ]
+    }
+  },
+  "materials": [
+    {
+      "dflt_yn": "Y",
+      "link_del": "N",
+      "master_del": "N",
+      "mat_cd": "MAT_000187",
+      "mat_nm": "타이벡",
+      "mat_typ_cd": "MAT_TYPE.05",
+      "usage_cd": "USAGE.07"
+    },
+    {
+      "dflt_yn": "Y",
+      "link_del": "N",
+      "master_del": "Y",
+      "mat_cd": "MAT_000188",
+      "mat_nm": "타이벡(소프트)",
+      "mat_typ_cd": "MAT_TYPE.05",
+      "usage_cd": "USAGE.07"
+    }
+  ],
+  "meta": {
+    "captured_at": "2026-07-03",
+    "generated_by": "transcribe_product_127.py",
+    "prd_cd": "PRD_000127",
+    "snapshot": "live-snapshot/latest (snap_20260702_1119)"
+  },
+  "option_groups": [],
+  "plates": [
+    {
+      "del": "Y",
+      "dflt": "Y",
+      "note": "파일사양",
+      "output_file_typ": "JPG",
+      "output_paper_typ_cd": "",
+      "siz_cd": "SIZ_000052"
+    },
+    {
+      "del": "Y",
+      "dflt": "Y",
+      "note": "파일사양",
+      "output_file_typ": "JPG",
+      "output_paper_typ_cd": "",
+      "siz_cd": "SIZ_000198"
+    },
+    {
+      "del": "Y",
+      "dflt": "Y",
+      "note": "파일사양",
+      "output_file_typ": "JPG",
+      "output_paper_typ_cd": "",
+      "siz_cd": "SIZ_000294"
+    }
+  ],
+  "print_options": [],
+  "processes": [],
+  "product": {
+    "del_yn": "N",
+    "editor_yn": "N",
+    "file_upload_yn": "Y",
+    "max_qty": "10000",
+    "min_qty": "1",
+    "nonspec_height_incr": "200.00",
+    "nonspec_height_max": "3000.00",
+    "nonspec_height_min": "200.00",
+    "nonspec_width_incr": "200.00",
+    "nonspec_width_max": "1200.00",
+    "nonspec_width_min": "200.00",
+    "nonspec_yn": "Y",
+    "prd_cd": "PRD_000127",
+    "prd_nm": "타이벡프린트",
+    "prd_typ_cd": "PRD_TYPE.01",
+    "qty_incr": "1",
+    "qty_unit_typ_cd": "QTY_UNIT.01",
+    "use_yn": "Y"
+  },
+  "sets_parent": [],
+  "sizes": [
+    {
+      "dflt": "Y",
+      "link_del": "N",
+      "master_del": "N",
+      "siz_cd": "SIZ_000174",
+      "siz_nm": "A3(297x420mm)",
+      "work": "297x420"
+    },
+    {
+      "dflt": "Y",
+      "link_del": "N",
+      "master_del": "N",
+      "siz_cd": "SIZ_000197",
+      "siz_nm": "A2(420x594mm)",
+      "work": "420x594"
+    },
+    {
+      "dflt": "Y",
+      "link_del": "N",
+      "master_del": "Y",
+      "siz_cd": "SIZ_000293",
+      "siz_nm": "A1(594x841mm)",
+      "work": "594x841"
+    }
+  ],
+  "wiring": {
+    "PRF_POSTER_TYVEK": [
+      {
+        "addtn_yn": "Y",
+        "comp_cd": "COMP_POSTER_CANVAS_FABRIC",
+        "comp_nm": "실사 완제품가 (캔버스패브릭포스터·레더아트프린트·메쉬프린트·타이벡프린트)",
+        "disp_seq": "1",
+        "prc_typ_cd": "PRICE_TYPE.01",
+        "use_dims": "[\"siz_width\", \"siz_height\", \"min_qty\"]"
+      }
+    ]
+  }
+}

@@ -1,0 +1,152 @@
+{
+  "meta": {
+    "snapshot": "live-snapshot/latest (snap_20260702_1119)",
+    "captured_at": "2026-07-03",
+    "prd_cd": "PRD_000129",
+    "archetype": "고정가형(fixed-lookup·use_dims=[mat_cd,siz_cd])"
+  },
+  "product": {
+    "min_qty": "1",
+    "max_qty": "10000",
+    "qty_incr": "1",
+    "qty_unit_typ_cd": "QTY_UNIT.01",
+    "nonspec_yn": "N"
+  },
+  "sizes_active": [
+    {
+      "siz_cd": "SIZ_000315",
+      "siz_nm": "A3 (297x420mm)",
+      "work_w": "297",
+      "work_h": "420",
+      "link_del": "N"
+    },
+    {
+      "siz_cd": "SIZ_000198",
+      "siz_nm": "A2 (420X594mm)",
+      "work_w": "420",
+      "work_h": "594",
+      "link_del": "N"
+    }
+  ],
+  "sizes_superseded": [
+    {
+      "siz_cd": "SIZ_000174",
+      "siz_nm": "A3(297x420mm)",
+      "link_del": "Y(07-01 재키잉)"
+    },
+    {
+      "siz_cd": "SIZ_000197",
+      "siz_nm": "A2(420x594mm)",
+      "link_del": "Y(07-01 재키잉)"
+    }
+  ],
+  "materials": [
+    {
+      "mat_cd": "MAT_000398",
+      "mat_nm": "A3 폼보드(화이트) 5mm",
+      "mat_typ": "MAT_TYPE.16",
+      "del": "N"
+    },
+    {
+      "mat_cd": "MAT_000399",
+      "mat_nm": "A3 폼보드(블랙) 5mm",
+      "mat_typ": "MAT_TYPE.16",
+      "del": "N"
+    },
+    {
+      "mat_cd": "MAT_000612",
+      "mat_nm": "A2 폼보드(화이트) 5mm",
+      "mat_typ": "MAT_TYPE.16",
+      "del": "N"
+    },
+    {
+      "mat_cd": "MAT_000613",
+      "mat_nm": "A2 폼보드(블랙) 5mm",
+      "mat_typ": "MAT_TYPE.16",
+      "del": "N"
+    }
+  ],
+  "procs_active": [
+    {
+      "proc_cd": "PROC_000115",
+      "proc_nm": "유광코팅",
+      "upr": "PROC_000114"
+    },
+    {
+      "proc_cd": "PROC_000116",
+      "proc_nm": "무광코팅",
+      "upr": "PROC_000114"
+    },
+    {
+      "proc_cd": "PROC_000135",
+      "proc_nm": "실사가공",
+      "upr": "PROC_000083"
+    }
+  ],
+  "procs_superseded": [
+    {
+      "proc_cd": "PROC_000014",
+      "proc_nm": "유광라미네이팅"
+    },
+    {
+      "proc_cd": "PROC_000015",
+      "proc_nm": "무광라미네이팅"
+    }
+  ],
+  "grid": {
+    "comp_cd": "COMP_POSTER_FOAMBOARD_BOARD",
+    "row_count": 4,
+    "combos_priced": [
+      [
+        "SIZ_000198",
+        "MAT_000612"
+      ],
+      [
+        "SIZ_000198",
+        "MAT_000613"
+      ],
+      [
+        "SIZ_000315",
+        "MAT_000398"
+      ],
+      [
+        "SIZ_000315",
+        "MAT_000399"
+      ]
+    ],
+    "prod_sizes": [
+      "SIZ_000198",
+      "SIZ_000315"
+    ],
+    "prod_mats": [
+      "MAT_000398",
+      "MAT_000399",
+      "MAT_000612",
+      "MAT_000613"
+    ],
+    "naive_combos": 8,
+    "priced_combos": 4,
+    "unpriced_combos": [
+      [
+        "SIZ_000198",
+        "MAT_000398"
+      ],
+      [
+        "SIZ_000198",
+        "MAT_000399"
+      ],
+      [
+        "SIZ_000315",
+        "MAT_000612"
+      ],
+      [
+        "SIZ_000315",
+        "MAT_000613"
+      ]
+    ],
+    "optref_mats": [
+      "MAT_000398",
+      "MAT_000399"
+    ]
+  }
+}

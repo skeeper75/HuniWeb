@@ -127,3 +127,36 @@
 - gap-065-* (065 sticker-pack) — set-composition(sets 0행·Q-ST-E)·material-type-label(084 .13 vs .11)·pack-qty-band·cpq-option-layer·liandan-out-of-scope. owner=staff/dev
 - gap-066-* (066 gangpan-diecut) — coating-conflict·yeondangga·price-golden·plate-otyp·rekeying-skew·mattype-note-skew·shape-model-family·empty-optgroup-resolved(해소). owner=staff/dev
 - gap-067-* (067 tattoo) — mattype-transfer-paper(.11 vs .01 표본 컨펌)·liandan-out-of-scope. owner=staff
+
+## 실사 계열 GAP 색인 (2026-07-03·118~145 28상품·정직 공백·노드 정의는 각 product/*-nodes.md·여기는 링크만)
+
+> 실사 공통 열린 질문: ①롤 소재→면적매트릭스 셀단가/고정가 통가격 산정 로직=엑셀 미기재 암묵지([[GAP_roll_material_price]]·source-registry §9 GAP-2·실사 전체 영향·값=evaluate_price 권위·가격경로는 연결됨=견적0 아님) ②면적매트릭스 min_qty 차원 선언 vs 단가행 공란(수량축 없음 원칙과 어긋남·검증/개발 레인) ③패브릭/메쉬 자재유형 MAT_TYPE.08 미교정(코드 개편으로 목표라벨 STALE T-2) ④부속(거치대/우드봉/천정고리) 귀속=CPQ 옵션 vs addon/set 미결(pack §3.12 GAP-SL-4) ⑤삭제 마스터 드리프트(자재/공정 del_yn=Y인데 옵션/링크 활성). ★가격모델=면적매트릭스형(118~128·138/139 base)+고정가형(129~137·140~145).
+> ★양면 defect 노드(어느 쪽도 삭제 금지·정리 워크리스트·실무진+인간 승인): material-MAT_000181(그래픽천 .08→.05·123)·component-COMP_POSTER_CANVAS_HANGING(use_dims 면적템플릿 vs 셀키 siz_cd·133)·gap-136-coating-optref-stale·gap-136-stand-orphan-components(136)·optgroup-137-standoff(거치대 template 미배선·137)·material-MAT_000069 양면테입·material-MAT_000340 봉제사·process-PROC_000084 열재단(138 삭제 마스터 드리프트)·size-SIZ_000170 A5(axis/sizes 소유·144 활성 참조자). ※SIZ_000293 A1은 gap-119-a1-master-deleted(GAP·authority=마스터 del_yn=Y)로 병기.
+
+- gap-118-* (118 artprint-poster) — roll-price-logic·small-size-price-floor(A3/A2 최소셀 미만 off-grid 수렴). owner=staff
+- gap-119-* (119 artpaper-poster) — a1-master-deleted(SIZ_000293 junction 활성 vs 마스터 del_yn=Y)·offgrid-golden. owner=dev
+- gap-120-* (120 waterproof-poster) — coating-price-verify·nonspec-range-authority(GAP-SL-7)·roll-material-pricing-logic. owner=staff
+- gap-121: 공유 참조(gap-119-a1-master-deleted·[[GAP_roll_material_price]])·레거시 comp COMP_POSTER_ADH_WATERPROOF_PVC(use_yn=N) 은퇴 추적=§12/§26 소관(노드 미민팅). owner=staff
+- gap-123-* (123 artfabric-poster) — graphicfabric-mattype(그래픽천 자재유형 목표코드·양면 아님)·a1-size-deleted. +양면 defect material-MAT_000181. owner=staff
+- gap-124-finish-process (124 linen-fabric) — 활성공정 PROC_000130 vs 마감옵션 5variant가 구 PROC_000080 참조(GAP-SL-2). owner=staff
+- gap-125-* (125 canvas-fabric) — roll-price-logic·seam-variant-location(봉제 5variant 적재 위치 CPQ vs prcs_dtl_opt). owner=staff
+- gap-126-* (126 leather-artprint) — roll-material-pricing·minqty-axis(use_dims min_qty 선언 vs 단가행 공란). owner=staff/dev
+- gap-127-* (127 tyvek-print) — roll-material-pricing·minqty-axis(126 동형). owner=staff/dev
+- gap-128-mesh-mattype-correction (128 mesh-print) — 메쉬 MAT_000183 .08 미교정·정정 목표유형 미확정(양면 아님=원천 부재)+공유 gap-126-roll/minqty 참조. owner=staff
+- gap-129-* (129 foam-board) — matsize-mismatch(CN-2 엇갈림 대각선 4셀·견적0 위험·§31)·qty-band-absent·glossy-coating-optref·board-price-logic. owner=staff
+- gap-130-* (130 formax-board) — lamination-no-optiongroup·cpq-option-layer(BATCH-6)·fixedprice-basis. owner=staff
+- gap-131-* (131 frameless-wood-frame) — material-absent(우드 소재 baked)·lamination-no-option·frame-attribution(공정 vs 부속 AMBIGUOUS)·price-basis. owner=staff
+- gap-132-* (132 leather-art-frame) — material-unwired(레더 미배선 AMBIGUOUS)·frame-attribution·qty-tier+공유 [[GAP_roll_material_price]]. owner=staff/dev
+- gap-133-* (133 canvas-hanging-poster) — woodhanger-addon-reconnect(SL-DEF-005)·usedims-cellkey-mismatch. +양면 defect component-COMP_POSTER_CANVAS_HANGING. owner=staff/dev
+- gap-134-woodbong-addon (134 linen-woodrod-scroll) — 우드봉 가격 배선됨·물리 부속 PRD_000013 addon/set 미연결(SL-DEF-005·GAP-SL-4). owner=staff
+- gap-135-* (135 scroll-poster) — jokja-shape-param(사각/원형 param)·ceilhook-addon-path·jokja-material-partial·price-basis. owner=staff
+- gap-136-* (136 pet-banner) — punch-param·stand-attribution·roll-price-logic. +양면 defect gap-136-coating-optref-stale·gap-136-stand-orphan-components. owner=staff
+- gap-137-* (137 mesh-banner) — holepunch-param·standoff-addon-blocked(배너거치대 template BLOCKED)·fixedprice-basis. +양면 defect optgroup-137-standoff. owner=staff
+- gap-138-* (138 standard-hanging-banner) — roll-price-logic·nonspec-no-constraint(★REVERIFY: 138은 여전히 0행이 사실·GAP-SL-7)·gakmok-gt-material(MAT_000339 삭제 드리프트). +양면 defect material-MAT_000069·material-MAT_000340·process-PROC_000084. owner=staff
+- gap-139-* (139 mesh-hanging-banner) — add-option-unwired(큐방/끈 option_items 미배선)·qty-null·wide-size-grid-coverage(5000x900 격자 밖). owner=staff/dev
+- gap-140-fixedprice-basis (140 matte-sheet-cutting) — 고정가 3셀 통가격 산정 근거 암묵지(130 동형). owner=staff
+- gap-141-* (141 hologram-sheet-cutting) — white-underbase(PROC_000008 도메인필수 라이브 부재)·qty-empty·material-master-mismatch(MAT_000257 del_yn=Y)·price-basis. owner=staff
+- gap-142-* (142 glossy-acrylic-sticker) — qty-blank·uv-process(PROC_000002 미적재 GAP-SL-A)·color-material-deleted(MAT_000255/256 del_yn=Y)·fixedprice-basis. owner=staff
+- gap-143-* (143 mirror-acrylic-sticker) — uv-print-routing(레이저커팅만·UV 부재)·fixedprice-basis. owner=staff
+- gap-144-* (144 mini-board-standing) — material-absent(baked)·stand-attribution·qty-band-floor(min_qty 1 vs 격자 하한 4)·price-basis. +공유 참조 size-SIZ_000170 A5 양면. owner=staff
+- gap-145-* (145 mini-banner) — qtytier-floor(min_qty 1 vs 격자 최저 tier 4)·fixedprice-basis. owner=staff

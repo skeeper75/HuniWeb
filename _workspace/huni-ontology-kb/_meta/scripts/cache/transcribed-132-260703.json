@@ -1,0 +1,188 @@
+{
+  "addons": [],
+  "bundle_qty": [],
+  "categories": [
+    {
+      "cat_cd": "CAT_000080",
+      "cat_lvl": "2",
+      "cat_nm": "보드액자",
+      "main_cat_yn": "N",
+      "upr_cat_cd": "CAT_000004"
+    }
+  ],
+  "constraints": [],
+  "discount_tables": [],
+  "formula_meta": {
+    "PRF_POSTER_LEATHER_FRAME": {
+      "frm_cd": "PRF_POSTER_LEATHER_FRAME",
+      "frm_nm": "레더아트액자 완제품가(면적/규격 단가)",
+      "note": "포스터사인 레더아트액자 소재/사이즈/수량별 완제품 통가격",
+      "reg_dt": "2026-06-17 13:00:58.993206",
+      "upd_dt": "2026-06-18 20:30:22.05806",
+      "use_yn": "Y"
+    }
+  },
+  "formulas": [
+    "PRF_POSTER_LEATHER_FRAME"
+  ],
+  "grid": {
+    "COMP_POSTER_LEATHER_FRAME": {
+      "comp_nm": "레더아트액자 완제품가",
+      "min_qtys": [
+        "1"
+      ],
+      "prc_typ": "PRICE_TYPE.01",
+      "price_max": 21000.0,
+      "price_min": 9000.0,
+      "rows": 6,
+      "siz_cds": [
+        "SIZ_000172",
+        "SIZ_000174",
+        "SIZ_000304",
+        "SIZ_000306",
+        "SIZ_000308",
+        "SIZ_000310"
+      ],
+      "use_dims": "[\"siz_cd\", \"min_qty\"]",
+      "use_yn": "Y"
+    }
+  },
+  "materials": [],
+  "meta": {
+    "captured_at": "2026-07-03",
+    "generated_by": "transcribe_product_132.py",
+    "prd_cd": "PRD_000132",
+    "snapshot": "live-snapshot/latest (snap_20260702_1119)"
+  },
+  "option_groups": [],
+  "plates": [
+    {
+      "del": "Y",
+      "dflt": "Y",
+      "note": "파일사양",
+      "output_file_typ": "JPG",
+      "output_paper_typ_cd": "",
+      "siz_cd": "SIZ_000305"
+    },
+    {
+      "del": "Y",
+      "dflt": "Y",
+      "note": "파일사양",
+      "output_file_typ": "JPG",
+      "output_paper_typ_cd": "",
+      "siz_cd": "SIZ_000307"
+    },
+    {
+      "del": "Y",
+      "dflt": "Y",
+      "note": "파일사양",
+      "output_file_typ": "JPG",
+      "output_paper_typ_cd": "",
+      "siz_cd": "SIZ_000309"
+    },
+    {
+      "del": "Y",
+      "dflt": "Y",
+      "note": "파일사양",
+      "output_file_typ": "JPG",
+      "output_paper_typ_cd": "",
+      "siz_cd": "SIZ_000311"
+    },
+    {
+      "del": "Y",
+      "dflt": "Y",
+      "note": "파일사양",
+      "output_file_typ": "JPG",
+      "output_paper_typ_cd": "",
+      "siz_cd": "SIZ_000312"
+    },
+    {
+      "del": "Y",
+      "dflt": "Y",
+      "note": "파일사양",
+      "output_file_typ": "JPG",
+      "output_paper_typ_cd": "",
+      "siz_cd": "SIZ_000313"
+    }
+  ],
+  "print_options": [],
+  "processes": [],
+  "product": {
+    "del_yn": "N",
+    "editor_yn": "Y",
+    "file_upload_yn": "Y",
+    "max_qty": "1000",
+    "min_qty": "1",
+    "nonspec_yn": "N",
+    "prd_cd": "PRD_000132",
+    "prd_nm": "레더아트액자",
+    "prd_typ_cd": "PRD_TYPE.01",
+    "qty_incr": "1",
+    "qty_unit_typ_cd": "QTY_UNIT.01",
+    "use_yn": "Y"
+  },
+  "sets_member": [],
+  "sets_parent": [],
+  "sizes": [
+    {
+      "dflt": "Y",
+      "link_del": "N",
+      "master_del": "N",
+      "siz_cd": "SIZ_000304",
+      "siz_nm": "5x5(127x127mm)",
+      "work": "127x127"
+    },
+    {
+      "dflt": "Y",
+      "link_del": "N",
+      "master_del": "N",
+      "siz_cd": "SIZ_000306",
+      "siz_nm": "5x7(127x178mm)",
+      "work": "127x178"
+    },
+    {
+      "dflt": "Y",
+      "link_del": "N",
+      "master_del": "N",
+      "siz_cd": "SIZ_000308",
+      "siz_nm": "8x8(203x203mm)",
+      "work": "203x203"
+    },
+    {
+      "dflt": "Y",
+      "link_del": "N",
+      "master_del": "N",
+      "siz_cd": "SIZ_000310",
+      "siz_nm": "8x10(203x254mm)",
+      "work": "203x254"
+    },
+    {
+      "dflt": "Y",
+      "link_del": "N",
+      "master_del": "N",
+      "siz_cd": "SIZ_000172",
+      "siz_nm": "A4(210x297mm)",
+      "work": "210x297"
+    },
+    {
+      "dflt": "Y",
+      "link_del": "N",
+      "master_del": "N",
+      "siz_cd": "SIZ_000174",
+      "siz_nm": "A3(297x420mm)",
+      "work": "297x420"
+    }
+  ],
+  "wiring": {
+    "PRF_POSTER_LEATHER_FRAME": [
+      {
+        "addtn_yn": "Y",
+        "comp_cd": "COMP_POSTER_LEATHER_FRAME",
+        "comp_nm": "레더아트액자 완제품가",
+        "disp_seq": "1",
+        "prc_typ_cd": "PRICE_TYPE.01",
+        "use_dims": "[\"siz_cd\", \"min_qty\"]"
+      }
+    ]
+  }
+}

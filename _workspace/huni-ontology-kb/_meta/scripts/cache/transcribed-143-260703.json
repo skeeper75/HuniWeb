@@ -1,0 +1,265 @@
+{
+  "addons": [],
+  "bundle_qty": [],
+  "categories": [
+    {
+      "cat_cd": "CAT_000092",
+      "cat_lvl": "2",
+      "cat_nm": "시트커팅/스티커",
+      "main_cat_yn": "N",
+      "upr_cat_cd": "CAT_000005"
+    },
+    {
+      "cat_cd": "CAT_000005",
+      "cat_lvl": "1",
+      "cat_nm": "사인",
+      "main_cat_yn": "Y",
+      "upr_cat_cd": ""
+    }
+  ],
+  "constraints": [],
+  "formula_meta": {
+    "PRF_POSTER_ACRYLSTK_MIRROR": {
+      "frm_cd": "PRF_POSTER_ACRYLSTK_MIRROR",
+      "frm_nm": "미러아크릴스티커 완제품가(면적/규격 단가)",
+      "note": "포스터사인 미러아크릴스티커 소재/사이즈/수량별 완제품 통가격",
+      "reg_dt": "2026-06-17 13:00:58.993206",
+      "upd_dt": "2026-06-18 20:33:57.918562",
+      "use_yn": "Y"
+    }
+  },
+  "formulas": [
+    "PRF_POSTER_ACRYLSTK_MIRROR"
+  ],
+  "grid": {
+    "COMP_POSTER_ACRYLSTK_MIRROR": {
+      "cells_present": 4,
+      "combos_potential": 4,
+      "comp_nm": "미러아크릴스티커 완제품가",
+      "mats": [],
+      "price_max": 50000.0,
+      "price_min": 11000.0,
+      "rows": 4,
+      "sizes": [
+        "SIZ_000324",
+        "SIZ_000325",
+        "SIZ_000326",
+        "SIZ_000327"
+      ],
+      "use_dims": "[\"siz_cd\"]",
+      "use_yn": "Y"
+    }
+  },
+  "materials": [
+    {
+      "dflt_yn": "Y",
+      "link_del": "Y",
+      "master_del": "Y",
+      "mat_cd": "MAT_000258",
+      "mat_nm": "골드",
+      "mat_typ_cd": "MAT_TYPE.08",
+      "upr_mat_cd": "",
+      "usage_cd": "USAGE.07"
+    },
+    {
+      "dflt_yn": "Y",
+      "link_del": "Y",
+      "master_del": "Y",
+      "mat_cd": "MAT_000259",
+      "mat_nm": "실버",
+      "mat_typ_cd": "MAT_TYPE.08",
+      "upr_mat_cd": "",
+      "usage_cd": "USAGE.07"
+    },
+    {
+      "dflt_yn": "Y",
+      "link_del": "N",
+      "master_del": "N",
+      "mat_cd": "MAT_000377",
+      "mat_nm": "아크릴(골드) 3mm",
+      "mat_typ_cd": "MAT_TYPE.20",
+      "upr_mat_cd": "MAT_000195",
+      "usage_cd": "USAGE.07"
+    },
+    {
+      "dflt_yn": "Y",
+      "link_del": "N",
+      "master_del": "N",
+      "mat_cd": "MAT_000378",
+      "mat_nm": "아크릴(실버) 3mm",
+      "mat_typ_cd": "MAT_TYPE.20",
+      "upr_mat_cd": "MAT_000196",
+      "usage_cd": "USAGE.07"
+    }
+  ],
+  "meta": {
+    "captured_at": "2026-07-03",
+    "generated_by": "transcribe_product_143.py",
+    "prd_cd": "PRD_000143",
+    "snapshot": "live-snapshot/latest (snap_20260702_1119)"
+  },
+  "option_groups": [
+    {
+      "del_dt": "",
+      "del_yn": "N",
+      "disp_seq": "1",
+      "mand_yn": "N",
+      "max_sel_cnt": "1",
+      "min_sel_cnt": "0",
+      "note": "",
+      "opt_grp_cd": "OPT-000046",
+      "opt_grp_nm": "칼라",
+      "prd_cd": "PRD_000143",
+      "reg_dt": "2026-07-01 20:15:40.642677",
+      "sel_typ_cd": "SEL_TYPE.01",
+      "upd_dt": "2026-07-01 15:39:07.395195",
+      "use_yn": "Y",
+      "usr_def_nm": ""
+    }
+  ],
+  "option_layer": [
+    {
+      "mand_yn": "N",
+      "max_sel_cnt": "1",
+      "min_sel_cnt": "0",
+      "opt_grp_cd": "OPT-000046",
+      "opt_grp_nm": "칼라",
+      "options": [
+        {
+          "dflt_yn": "N",
+          "items": [
+            {
+              "item_seq": "1",
+              "qty": "",
+              "ref_dim_cd": "OPT_REF_DIM.03",
+              "ref_key1": "MAT_000377",
+              "ref_key2": "USAGE.07"
+            }
+          ],
+          "opt_cd": "OPV-000095",
+          "opt_nm": "골드아크릴"
+        },
+        {
+          "dflt_yn": "N",
+          "items": [
+            {
+              "item_seq": "1",
+              "qty": "",
+              "ref_dim_cd": "OPT_REF_DIM.03",
+              "ref_key1": "MAT_000378",
+              "ref_key2": "USAGE.07"
+            }
+          ],
+          "opt_cd": "OPV-000096",
+          "opt_nm": "실버아크릴"
+        }
+      ],
+      "sel_typ_cd": "SEL_TYPE.01"
+    }
+  ],
+  "plates": [
+    {
+      "del": "Y",
+      "dflt": "Y",
+      "note": "파일사양",
+      "output_file_typ": "AI",
+      "output_paper_typ_cd": "",
+      "siz_cd": "SIZ_000324"
+    },
+    {
+      "del": "Y",
+      "dflt": "Y",
+      "note": "파일사양",
+      "output_file_typ": "AI",
+      "output_paper_typ_cd": "",
+      "siz_cd": "SIZ_000325"
+    },
+    {
+      "del": "Y",
+      "dflt": "Y",
+      "note": "파일사양",
+      "output_file_typ": "AI",
+      "output_paper_typ_cd": "",
+      "siz_cd": "SIZ_000326"
+    },
+    {
+      "del": "Y",
+      "dflt": "Y",
+      "note": "파일사양",
+      "output_file_typ": "AI",
+      "output_paper_typ_cd": "",
+      "siz_cd": "SIZ_000327"
+    }
+  ],
+  "print_options": [],
+  "processes": [
+    {
+      "link_del": "N",
+      "mand": "Y",
+      "proc_cd": "PROC_000124",
+      "proc_nm": "레이저커팅",
+      "upr": "PROC_000121"
+    }
+  ],
+  "product": {
+    "del_yn": "N",
+    "editor_yn": "N",
+    "file_upload_yn": "Y",
+    "max_qty": "10000",
+    "min_qty": "1",
+    "nonspec_yn": "N",
+    "prd_cd": "PRD_000143",
+    "prd_nm": "미러아크릴스티커",
+    "prd_typ_cd": "PRD_TYPE.01",
+    "qty_incr": "1",
+    "qty_unit_typ_cd": "QTY_UNIT.01",
+    "use_yn": "Y"
+  },
+  "sets_parent": [],
+  "sizes": [
+    {
+      "dflt": "Y",
+      "link_del": "N",
+      "master_del": "N",
+      "siz_cd": "SIZ_000324",
+      "siz_nm": "290x90mm",
+      "work": "290x90"
+    },
+    {
+      "dflt": "Y",
+      "link_del": "N",
+      "master_del": "N",
+      "siz_cd": "SIZ_000325",
+      "siz_nm": "290x190mm",
+      "work": "290x190"
+    },
+    {
+      "dflt": "Y",
+      "link_del": "N",
+      "master_del": "N",
+      "siz_cd": "SIZ_000326",
+      "siz_nm": "390x290mm",
+      "work": "390x290"
+    },
+    {
+      "dflt": "Y",
+      "link_del": "N",
+      "master_del": "N",
+      "siz_cd": "SIZ_000327",
+      "siz_nm": "590x390mm",
+      "work": "590x390"
+    }
+  ],
+  "wiring": {
+    "PRF_POSTER_ACRYLSTK_MIRROR": [
+      {
+        "addtn_yn": "Y",
+        "comp_cd": "COMP_POSTER_ACRYLSTK_MIRROR",
+        "comp_nm": "미러아크릴스티커 완제품가",
+        "disp_seq": "1",
+        "prc_typ_cd": "PRICE_TYPE.01",
+        "use_dims": "[\"siz_cd\"]"
+      }
+    ]
+  }
+}

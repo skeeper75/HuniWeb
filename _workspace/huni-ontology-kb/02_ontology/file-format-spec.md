@@ -150,6 +150,7 @@ relations:
 | L-13 | 노드 badge와 source badge 불일치 없음(노드 verified인데 source 전부 비verified 경고) |
 | L-16 | 수치 표에 transcribed-by 마커 존재(표 직전 5줄 룩백) |
 | L-19 | 고아 노드 없음(어떤 엣지에도 안 닿는 노드) — 단 term·rule·decision·intent은 예외 허용(graph-build I-1과 통일) |
+| L-20 | 마스터 앵커 단일소유권 — 같은 `t_*/CODE` 마스터 앵커를 2+ 노드가 동일 type으로 소유하지 않음(동형결합 공유 축=단일 owner). `t_prd_product_*` 정션(prd_cd 조밀 앵커) 제외·크로스타입 자동 제외. graph-build §5.6b와 통일 |
 
 ### 5.4 lint 예외 태그
 raw 수치가 불가피한 경우(단일 스칼라 설명 등) 인라인 태그로 예외 선언:
@@ -175,6 +176,11 @@ raw 수치가 불가피한 경우(단일 스칼라 설명 등) 인라인 태그�
 ---
 
 ## 변경 이력
+
+### v1.0.4 — 2026-07-03 (실사 검증 결함 교정 — `_meta/fix-log-silsa-260703.md`)
+> 스키마 실질 신규: L-20(마스터 앵커 단일소유권·소프트) 신설. 빌더 구현과 정합.
+
+- **D-SILSA-INT-1(b)/INT-3 [Medium/Low]** L-20(마스터 앵커 단일소유권) 소프트 lint 신설. 같은 `t_*/CODE` 마스터 앵커를 2+ 노드가 동일 type으로 소유하는 앵커 중복(L-3 id중복이 못 잡는 사각지대)을 소프트 경고. `t_prd_product_*` 정션(prd_cd 조밀 앵커·D-SILSA-INT-2) 제외·크로스타입(product↔qty 등) 자동 제외. §5.3 소프트 표 + graph-build-spec §5.6b 동시 등재. 실사 size 축 중복 13노드(6앵커)는 has_size 정본 재지향으로 0 달성·잔여(스티커 축 등)는 회귀 가드로 노출.
 
 ### v1.0.3 — 2026-07-03 (검증 라운드 2 결함 교정 — `_meta/fix-log-260703.md` R2)
 > 스키마 실질: `updated` 필드를 필수 → 선택(권장)으로 강등·유령 규칙 참조 제거. 명세-구현 정합.

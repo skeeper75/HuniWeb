@@ -1,0 +1,390 @@
+{
+  "addons": [],
+  "bundle_qty": [],
+  "categories": [
+    {
+      "cat_cd": "CAT_000315",
+      "cat_lvl": "2",
+      "cat_nm": "배너/현수막",
+      "main_cat_yn": "N",
+      "upr_cat_cd": "CAT_000005"
+    }
+  ],
+  "cells": {
+    "COMP_POSTEROPT_BANNER_MESH_ADD_QBANG_4": {
+      "comp_nm": "메쉬현수막 큐방(4개) 추가가격",
+      "heights": [],
+      "price_max": 3000.0,
+      "price_min": 3000.0,
+      "rep_dim_vals": "",
+      "rep_opt": "OPV_000425",
+      "rep_proc": "",
+      "rows": 1,
+      "use_dims": "[\"opt_cd\", \"opt_grp:OPT_000023\"]",
+      "use_yn": "Y",
+      "widths": []
+    },
+    "COMP_POSTEROPT_BANNER_MESH_ADD_STRING_4": {
+      "comp_nm": "메쉬현수막 끈(4개) 추가가격",
+      "heights": [],
+      "price_max": 4000.0,
+      "price_min": 4000.0,
+      "rep_dim_vals": "",
+      "rep_opt": "OPV_000426",
+      "rep_proc": "",
+      "rows": 1,
+      "use_dims": "[\"opt_cd\", \"opt_grp:OPT_000023\"]",
+      "use_yn": "Y",
+      "widths": []
+    },
+    "COMP_POSTEROPT_BANNER_MESH_PROC_PUNCH_4": {
+      "comp_nm": "메쉬현수막 타공(4개) 추가가격",
+      "heights": [],
+      "price_max": 3000.0,
+      "price_min": 3000.0,
+      "rep_dim_vals": "{\"타공수\": 4}",
+      "rep_opt": "",
+      "rep_proc": "PROC_000079",
+      "rows": 1,
+      "use_dims": "[\"proc_cd\", \"min_qty\", \"proc_grp:PROC_000079\"]",
+      "use_yn": "Y",
+      "widths": []
+    },
+    "COMP_POSTEROPT_BANNER_MESH_PROC_PUNCH_6": {
+      "comp_nm": "메쉬현수막 타공(6개) 추가가격",
+      "heights": [],
+      "price_max": 4000.0,
+      "price_min": 4000.0,
+      "rep_dim_vals": "{\"타공수\": 6}",
+      "rep_opt": "",
+      "rep_proc": "PROC_000079",
+      "rows": 1,
+      "use_dims": "[\"proc_cd\", \"min_qty\", \"proc_grp:PROC_000079\"]",
+      "use_yn": "Y",
+      "widths": []
+    },
+    "COMP_POSTEROPT_BANNER_MESH_PROC_PUNCH_8": {
+      "comp_nm": "메쉬현수막 타공(8개) 추가가격",
+      "heights": [],
+      "price_max": 5000.0,
+      "price_min": 5000.0,
+      "rep_dim_vals": "{\"타공수\": 8}",
+      "rep_opt": "",
+      "rep_proc": "PROC_000079",
+      "rows": 1,
+      "use_dims": "[\"proc_cd\", \"min_qty\", \"proc_grp:PROC_000079\"]",
+      "use_yn": "Y",
+      "widths": []
+    },
+    "COMP_POSTER_BANNER_MESH": {
+      "comp_nm": "실사 완제품가 (메쉬현수막)",
+      "heights": [
+        "900",
+        "1000",
+        "1200",
+        "1400",
+        "1600",
+        "1800",
+        "2000",
+        "2200",
+        "2400",
+        "2600",
+        "2800",
+        "3000",
+        "3500",
+        "4000",
+        "4500",
+        "5000"
+      ],
+      "price_max": 120000.0,
+      "price_min": 20000.0,
+      "rep_dim_vals": "",
+      "rep_opt": "",
+      "rep_proc": "",
+      "rows": 48,
+      "use_dims": "[\"siz_width\", \"siz_height\"]",
+      "use_yn": "Y",
+      "widths": [
+        "900",
+        "1000",
+        "1200"
+      ]
+    }
+  },
+  "constraints": [
+    {
+      "rule_cd": "RULE_001",
+      "rule_nm": "사용자입력 치수 범위",
+      "rule_typ_cd": "RULE_TYPE.01",
+      "use_yn": "Y"
+    }
+  ],
+  "formula_meta": {
+    "PRF_POSTER_BANNER_M": {
+      "frm_cd": "PRF_POSTER_BANNER_M",
+      "frm_nm": "메쉬현수막 완제품가(면적/규격 단가)",
+      "note": "포스터사인 메쉬현수막 소재/사이즈/수량별 완제품 통가격",
+      "reg_dt": "2026-06-17 13:00:58.993206",
+      "upd_dt": "2026-06-18 20:32:31.649845",
+      "use_yn": "Y"
+    }
+  },
+  "formulas": [
+    "PRF_POSTER_BANNER_M"
+  ],
+  "materials": [
+    {
+      "dflt_yn": "Y",
+      "mat_cd": "MAT_000183",
+      "mat_nm": "메쉬",
+      "mat_typ_cd": "MAT_TYPE.08",
+      "usage_cd": "USAGE.07"
+    },
+    {
+      "dflt_yn": "N",
+      "mat_cd": "MAT_000070",
+      "mat_nm": "설치용끈",
+      "mat_typ_cd": "MAT_TYPE.16",
+      "usage_cd": "USAGE.07"
+    }
+  ],
+  "meta": {
+    "captured_at": "2026-07-03",
+    "generated_by": "transcribe_product_139.py",
+    "prd_cd": "PRD_000139",
+    "snapshot": "live-snapshot/latest (snap_20260702_1119)"
+  },
+  "option_groups": [
+    {
+      "mand_yn": "Y",
+      "max_sel_cnt": "1",
+      "min_sel_cnt": "1",
+      "note": "타공 필수 (구수 param=GAP). 재단만=L1 LINK 의존 BLOCKED",
+      "opt_grp_cd": "OPT_000022",
+      "opt_grp_nm": "가공",
+      "sel_typ_cd": "SEL_TYPE.01"
+    },
+    {
+      "mand_yn": "N",
+      "max_sel_cnt": "1",
+      "min_sel_cnt": "0",
+      "note": "끈추가=L1 LINK 의존 BLOCKED. 추가없음만 INSERTABLE",
+      "opt_grp_cd": "OPT_000023",
+      "opt_grp_nm": "추가",
+      "sel_typ_cd": "SEL_TYPE.01"
+    }
+  ],
+  "option_items": [
+    {
+      "opt_cd": "OPV_000042",
+      "qty": "1",
+      "ref_dim_cd": "OPT_REF_DIM.04",
+      "ref_key1": "PROC_000079",
+      "ref_key2": ""
+    },
+    {
+      "opt_cd": "OPV_000043",
+      "qty": "1",
+      "ref_dim_cd": "OPT_REF_DIM.04",
+      "ref_key1": "PROC_000079",
+      "ref_key2": ""
+    },
+    {
+      "opt_cd": "OPV_000044",
+      "qty": "1",
+      "ref_dim_cd": "OPT_REF_DIM.04",
+      "ref_key1": "PROC_000079",
+      "ref_key2": ""
+    }
+  ],
+  "options": [
+    {
+      "dflt_yn": "N",
+      "opt_cd": "OPV_000425",
+      "opt_grp_cd": "OPT_000023",
+      "opt_nm": "큐방(4개)추가"
+    },
+    {
+      "dflt_yn": "N",
+      "opt_cd": "OPV_000426",
+      "opt_grp_cd": "OPT_000023",
+      "opt_nm": "끈(4개)추가"
+    },
+    {
+      "dflt_yn": "Y",
+      "opt_cd": "OPV_000042",
+      "opt_grp_cd": "OPT_000022",
+      "opt_nm": "타공(4개)"
+    },
+    {
+      "dflt_yn": "N",
+      "opt_cd": "OPV_000043",
+      "opt_grp_cd": "OPT_000022",
+      "opt_nm": "타공(6개)"
+    },
+    {
+      "dflt_yn": "N",
+      "opt_cd": "OPV_000044",
+      "opt_grp_cd": "OPT_000022",
+      "opt_nm": "타공(8개)"
+    },
+    {
+      "dflt_yn": "Y",
+      "opt_cd": "OPV_000045",
+      "opt_grp_cd": "OPT_000023",
+      "opt_nm": "추가없음"
+    }
+  ],
+  "plates": [
+    {
+      "del": "Y",
+      "dflt": "Y",
+      "note": "파일사양",
+      "output_file_typ": "JPG",
+      "output_paper_typ_cd": "",
+      "siz_cd": "SIZ_000323"
+    },
+    {
+      "del": "Y",
+      "dflt": "Y",
+      "note": "파일사양",
+      "output_file_typ": "JPG",
+      "output_paper_typ_cd": "",
+      "siz_cd": "SIZ_000320"
+    },
+    {
+      "del": "Y",
+      "dflt": "Y",
+      "note": "파일사양",
+      "output_file_typ": "",
+      "output_paper_typ_cd": "",
+      "siz_cd": "SIZ_000322"
+    }
+  ],
+  "print_options": [],
+  "processes": [
+    {
+      "link_del": "N",
+      "mand": "N",
+      "master_del": "N",
+      "param": "Y",
+      "proc_cd": "PROC_000079",
+      "proc_nm": "타공"
+    },
+    {
+      "link_del": "N",
+      "mand": "N",
+      "master_del": "Y",
+      "param": "N",
+      "proc_cd": "PROC_000084",
+      "proc_nm": "열재단"
+    },
+    {
+      "link_del": "N",
+      "mand": "N",
+      "master_del": "N",
+      "param": "Y",
+      "proc_cd": "PROC_000081",
+      "proc_nm": "부착"
+    }
+  ],
+  "product": {
+    "del_yn": "N",
+    "editor_yn": "N",
+    "file_upload_yn": "Y",
+    "max_qty": "",
+    "min_qty": "",
+    "nonspec_height_incr": "100.00",
+    "nonspec_height_max": "3000.00",
+    "nonspec_height_min": "500.00",
+    "nonspec_width_incr": "100.00",
+    "nonspec_width_max": "900.00",
+    "nonspec_width_min": "500.00",
+    "nonspec_yn": "Y",
+    "prd_cd": "PRD_000139",
+    "prd_nm": "메쉬현수막",
+    "prd_typ_cd": "PRD_TYPE.01",
+    "qty_incr": "",
+    "qty_unit_typ_cd": "QTY_UNIT.01",
+    "use_yn": "Y"
+  },
+  "sets_parent": [],
+  "sizes": [
+    {
+      "dflt": "Y",
+      "link_del": "N",
+      "master_del": "N",
+      "siz_cd": "SIZ_000323",
+      "siz_nm": "900x900",
+      "work": "900x900"
+    },
+    {
+      "dflt": "Y",
+      "link_del": "N",
+      "master_del": "N",
+      "siz_cd": "SIZ_000320",
+      "siz_nm": "900x1200",
+      "work": "900x1200"
+    },
+    {
+      "dflt": "Y",
+      "link_del": "N",
+      "master_del": "N",
+      "siz_cd": "SIZ_000322",
+      "siz_nm": "5000x900",
+      "work": "5000x900"
+    }
+  ],
+  "wiring": {
+    "PRF_POSTER_BANNER_M": [
+      {
+        "addtn_yn": "Y",
+        "comp_cd": "COMP_POSTER_BANNER_MESH",
+        "comp_nm": "실사 완제품가 (메쉬현수막)",
+        "disp_seq": "1",
+        "prc_typ_cd": "PRICE_TYPE.01",
+        "use_dims": "[\"siz_width\", \"siz_height\"]"
+      },
+      {
+        "addtn_yn": "Y",
+        "comp_cd": "COMP_POSTEROPT_BANNER_MESH_ADD_QBANG_4",
+        "comp_nm": "메쉬현수막 큐방(4개) 추가가격",
+        "disp_seq": "2",
+        "prc_typ_cd": "PRICE_TYPE.01",
+        "use_dims": "[\"opt_cd\", \"opt_grp:OPT_000023\"]"
+      },
+      {
+        "addtn_yn": "Y",
+        "comp_cd": "COMP_POSTEROPT_BANNER_MESH_ADD_STRING_4",
+        "comp_nm": "메쉬현수막 끈(4개) 추가가격",
+        "disp_seq": "3",
+        "prc_typ_cd": "PRICE_TYPE.01",
+        "use_dims": "[\"opt_cd\", \"opt_grp:OPT_000023\"]"
+      },
+      {
+        "addtn_yn": "Y",
+        "comp_cd": "COMP_POSTEROPT_BANNER_MESH_PROC_PUNCH_4",
+        "comp_nm": "메쉬현수막 타공(4개) 추가가격",
+        "disp_seq": "4",
+        "prc_typ_cd": "PRICE_TYPE.01",
+        "use_dims": "[\"proc_cd\", \"min_qty\", \"proc_grp:PROC_000079\"]"
+      },
+      {
+        "addtn_yn": "Y",
+        "comp_cd": "COMP_POSTEROPT_BANNER_MESH_PROC_PUNCH_6",
+        "comp_nm": "메쉬현수막 타공(6개) 추가가격",
+        "disp_seq": "5",
+        "prc_typ_cd": "PRICE_TYPE.01",
+        "use_dims": "[\"proc_cd\", \"min_qty\", \"proc_grp:PROC_000079\"]"
+      },
+      {
+        "addtn_yn": "Y",
+        "comp_cd": "COMP_POSTEROPT_BANNER_MESH_PROC_PUNCH_8",
+        "comp_nm": "메쉬현수막 타공(8개) 추가가격",
+        "disp_seq": "6",
+        "prc_typ_cd": "PRICE_TYPE.01",
+        "use_dims": "[\"proc_cd\", \"min_qty\", \"proc_grp:PROC_000079\"]"
+      }
+    ]
+  }
+}

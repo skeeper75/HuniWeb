@@ -1,0 +1,336 @@
+{
+  "addon_rows": 0,
+  "body_shape": {
+    "comp_cd": "COMP_POSTER_PET_BANNER",
+    "distinct_siz": 1,
+    "grid_full": true,
+    "qty_bands": [
+      "1"
+    ],
+    "qty_populated": false,
+    "row_count": 1,
+    "siz_cells": [
+      "SIZ_000321"
+    ],
+    "size_price_match": true,
+    "use_dims": [
+      "siz_cd",
+      "min_qty"
+    ]
+  },
+  "categories": [
+    {
+      "cat_cd": "CAT_000315",
+      "cat_nm": "배너/현수막",
+      "lvl": "2",
+      "main": "N",
+      "upr": "CAT_000005"
+    }
+  ],
+  "components": {
+    "COMP_POSTEROPT_PET_BANNER_STAND_SEL": {
+      "comp_typ_cd": "PRC_COMPONENT_TYPE.01",
+      "prc_typ_cd": "PRICE_TYPE.01",
+      "use_dims": "[\"mat_cd\"]"
+    },
+    "COMP_POSTER_PET_BANNER": {
+      "comp_typ_cd": "PRC_COMPONENT_TYPE.06",
+      "prc_typ_cd": "PRICE_TYPE.01",
+      "use_dims": "[\"siz_cd\", \"min_qty\"]"
+    }
+  },
+  "formula": {
+    "bound": true,
+    "comp_wired": [
+      {
+        "addtn": "Y",
+        "comp_cd": "COMP_POSTER_PET_BANNER",
+        "disp_seq": "1"
+      },
+      {
+        "addtn": "Y",
+        "comp_cd": "COMP_POSTEROPT_PET_BANNER_STAND_SEL",
+        "disp_seq": "2"
+      }
+    ],
+    "frm_cd": "PRF_POSTER_PET_BANNER"
+  },
+  "materials_active": {
+    "MAT_000409": {
+      "dflt": "N",
+      "junc_del_yn": "N",
+      "mat_nm": "실내용거치대",
+      "mat_typ_cd": "MAT_TYPE.16",
+      "upr": "MAT_000227"
+    },
+    "MAT_000410": {
+      "dflt": "N",
+      "junc_del_yn": "N",
+      "mat_nm": "실외용거치대",
+      "mat_typ_cd": "MAT_TYPE.16",
+      "upr": "MAT_000227"
+    },
+    "MAT_000601": {
+      "dflt": "Y",
+      "junc_del_yn": "N",
+      "mat_nm": "PET",
+      "mat_typ_cd": "MAT_TYPE.08",
+      "upr": "MAT_000178"
+    }
+  },
+  "materials_superseded": {
+    "MAT_000178": {
+      "junc_del_yn": "Y",
+      "master_del_yn": "N",
+      "mat_nm": "PET"
+    },
+    "MAT_000223": {
+      "junc_del_yn": "Y",
+      "master_del_yn": "Y",
+      "mat_nm": "우드거치대"
+    }
+  },
+  "meta": {
+    "captured_at": "2026-07-03",
+    "generated_by": "transcribe_product_136.py",
+    "snapshot": "live-snapshot/latest (snap_20260702_1119)"
+  },
+  "option_groups": [
+    {
+      "del_yn": "N",
+      "mand": "N",
+      "max_sel": "1",
+      "min_sel": "0",
+      "nm": "코팅",
+      "note": "코팅 택1 선택",
+      "opt_grp_cd": "OPT_000017",
+      "sel_typ": "SEL_TYPE.01",
+      "use_yn": "Y"
+    },
+    {
+      "del_yn": "N",
+      "mand": "Y",
+      "max_sel": "1",
+      "min_sel": "1",
+      "nm": "가공",
+      "note": "4구타공 필수 (구수 param=GAP)",
+      "opt_grp_cd": "OPT_000018",
+      "sel_typ": "SEL_TYPE.01",
+      "use_yn": "Y"
+    },
+    {
+      "del_yn": "Y",
+      "mand": "N",
+      "max_sel": "1",
+      "min_sel": "0",
+      "nm": "추가",
+      "note": "배너거치대 추가 (template·BLOCKED)",
+      "opt_grp_cd": "OPT_000019",
+      "sel_typ": "SEL_TYPE.01",
+      "use_yn": "Y"
+    },
+    {
+      "del_yn": "N",
+      "mand": "Y",
+      "max_sel": "",
+      "min_sel": "",
+      "nm": "거치대",
+      "note": "",
+      "opt_grp_cd": "OPT-000009",
+      "sel_typ": "SEL_TYPE.01",
+      "use_yn": "Y"
+    }
+  ],
+  "option_items": [
+    {
+      "del_yn": "N",
+      "opt_cd": "OPV_000036",
+      "ref_dim": "OPT_REF_DIM.04",
+      "ref_key1": "PROC_000015",
+      "ref_key2": "",
+      "seq": "1"
+    },
+    {
+      "del_yn": "N",
+      "opt_cd": "OPV_000037",
+      "ref_dim": "OPT_REF_DIM.04",
+      "ref_key1": "PROC_000014",
+      "ref_key2": "",
+      "seq": "1"
+    },
+    {
+      "del_yn": "Y",
+      "opt_cd": "OPV-000019",
+      "ref_dim": "OPT_REF_DIM.03",
+      "ref_key1": "MAT_000178",
+      "ref_key2": "USAGE.07",
+      "seq": "1"
+    },
+    {
+      "del_yn": "N",
+      "opt_cd": "OPV_000038",
+      "ref_dim": "OPT_REF_DIM.04",
+      "ref_key1": "PROC_000135",
+      "ref_key2": "",
+      "seq": "1"
+    },
+    {
+      "del_yn": "N",
+      "opt_cd": "OPV-000020",
+      "ref_dim": "OPT_REF_DIM.03",
+      "ref_key1": "MAT_000410",
+      "ref_key2": "USAGE.07",
+      "seq": "1"
+    },
+    {
+      "del_yn": "N",
+      "opt_cd": "OPV-000019",
+      "ref_dim": "OPT_REF_DIM.03",
+      "ref_key1": "MAT_000409",
+      "ref_key2": "USAGE.07",
+      "seq": "2"
+    }
+  ],
+  "options": [
+    {
+      "del_yn": "N",
+      "dflt": "Y",
+      "grp": "OPT-000009",
+      "nm": "거치대없음",
+      "opt_cd": "OPV-000094"
+    },
+    {
+      "del_yn": "N",
+      "dflt": "Y",
+      "grp": "OPT_000017",
+      "nm": "무광코팅",
+      "opt_cd": "OPV_000036"
+    },
+    {
+      "del_yn": "N",
+      "dflt": "N",
+      "grp": "OPT_000017",
+      "nm": "유광코팅",
+      "opt_cd": "OPV_000037"
+    },
+    {
+      "del_yn": "N",
+      "dflt": "Y",
+      "grp": "OPT_000019",
+      "nm": "거치대없음",
+      "opt_cd": "OPV_000039"
+    },
+    {
+      "del_yn": "N",
+      "dflt": "Y",
+      "grp": "OPT_000018",
+      "nm": "4구타공",
+      "opt_cd": "OPV_000038"
+    },
+    {
+      "del_yn": "N",
+      "dflt": "N",
+      "grp": "OPT-000009",
+      "nm": "실내용거치대",
+      "opt_cd": "OPV-000019"
+    },
+    {
+      "del_yn": "N",
+      "dflt": "N",
+      "grp": "OPT-000009",
+      "nm": "실외용거치대",
+      "opt_cd": "OPV-000020"
+    }
+  ],
+  "orphan_components": {
+    "COMP_POSTEROPT_PET_BANNER_STAND_IN": {
+      "in_formula": false,
+      "price_rows": 1,
+      "use_dims": "[]"
+    },
+    "COMP_POSTEROPT_PET_BANNER_STAND_OUT_S1": {
+      "in_formula": false,
+      "price_rows": 1,
+      "use_dims": "[]"
+    },
+    "COMP_POSTEROPT_PET_BANNER_STAND_OUT_S2": {
+      "in_formula": false,
+      "price_rows": 1,
+      "use_dims": "[]"
+    }
+  },
+  "plate_placeholder": {
+    "SIZ_000321": {
+      "siz_nm": "600x1800mm"
+    }
+  },
+  "processes_active": {
+    "PROC_000115": {
+      "junc_del_yn": "N",
+      "mand": "N",
+      "proc_nm": "유광코팅",
+      "upr_proc_cd": "PROC_000114"
+    },
+    "PROC_000116": {
+      "junc_del_yn": "N",
+      "mand": "N",
+      "proc_nm": "무광코팅",
+      "upr_proc_cd": "PROC_000114"
+    },
+    "PROC_000135": {
+      "junc_del_yn": "N",
+      "mand": "N",
+      "proc_nm": "실사가공",
+      "upr_proc_cd": "PROC_000083"
+    }
+  },
+  "processes_superseded": {
+    "PROC_000014": {
+      "junc_del_yn": "Y",
+      "proc_nm": "유광라미네이팅"
+    },
+    "PROC_000015": {
+      "junc_del_yn": "Y",
+      "proc_nm": "무광라미네이팅"
+    },
+    "PROC_000079": {
+      "junc_del_yn": "Y",
+      "proc_nm": "타공"
+    }
+  },
+  "qty": {
+    "del_yn": "N",
+    "editor_yn": "N",
+    "file_upload_yn": "Y",
+    "max_qty": "10000",
+    "min_qty": "1",
+    "nonspec_yn": "N",
+    "prd_nm": "PET배너",
+    "prd_typ_cd": "PRD_TYPE.01",
+    "qty_incr": "1",
+    "unit": "QTY_UNIT.01",
+    "use_yn": "Y"
+  },
+  "set_parent_rows": 0,
+  "sizes_active": {
+    "SIZ_000321": {
+      "junc_del_yn": "N",
+      "master_del_yn": "N",
+      "siz_nm": "600x1800mm",
+      "work": "600x1800"
+    }
+  },
+  "stand_shape": {
+    "comp_cd": "COMP_POSTEROPT_PET_BANNER_STAND_SEL",
+    "covers_option_mats": true,
+    "distinct_mat": 2,
+    "mat_cells": [
+      "MAT_000409",
+      "MAT_000410"
+    ],
+    "row_count": 2,
+    "use_dims": [
+      "mat_cd"
+    ]
+  }
+}

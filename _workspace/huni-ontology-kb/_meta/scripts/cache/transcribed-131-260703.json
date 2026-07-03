@@ -1,0 +1,102 @@
+{
+  "categories": [
+    {
+      "cat_cd": "CAT_000080",
+      "cat_nm": "보드액자",
+      "lvl": "2",
+      "main": "N",
+      "upr": "CAT_000004"
+    }
+  ],
+  "component": {
+    "comp_cd": "COMP_POSTER_FRAMELESS_WOOD",
+    "comp_typ_cd": "PRC_COMPONENT_TYPE.06",
+    "prc_typ_cd": "PRICE_TYPE.01",
+    "use_dims": "[\"siz_cd\", \"min_qty\"]"
+  },
+  "fixed_shape": {
+    "comp_cd": "COMP_POSTER_FRAMELESS_WOOD",
+    "distinct_siz": 2,
+    "grid_full": true,
+    "qty_bands": [
+      "1"
+    ],
+    "qty_populated": false,
+    "row_count": 2,
+    "siz_cells": [
+      "SIZ_000174",
+      "SIZ_000197"
+    ],
+    "size_price_match": true,
+    "use_dims": [
+      "siz_cd",
+      "min_qty"
+    ]
+  },
+  "formula": {
+    "bound": true,
+    "comp_wired": [
+      {
+        "addtn": "Y",
+        "comp_cd": "COMP_POSTER_FRAMELESS_WOOD",
+        "disp_seq": "1"
+      }
+    ],
+    "frm_cd": "PRF_POSTER_FRAMELESS"
+  },
+  "materials_junction_rows": 0,
+  "meta": {
+    "captured_at": "2026-07-03",
+    "generated_by": "transcribe_product_131.py",
+    "snapshot": "live-snapshot/latest (snap_20260702_1119)"
+  },
+  "plate_placeholder": {
+    "SIZ_000175": {
+      "siz_nm": "303x426"
+    },
+    "SIZ_000303": {
+      "siz_nm": "426x600"
+    }
+  },
+  "processes": {
+    "PROC_000014": {
+      "junc_del_yn": "N",
+      "mand": "N",
+      "proc_nm": "유광라미네이팅",
+      "upr_proc_cd": "PROC_000013"
+    },
+    "PROC_000015": {
+      "junc_del_yn": "N",
+      "mand": "N",
+      "proc_nm": "무광라미네이팅",
+      "upr_proc_cd": "PROC_000013"
+    }
+  },
+  "qty": {
+    "del_yn": "N",
+    "editor_yn": "N",
+    "file_upload_yn": "Y",
+    "max_qty": "1000",
+    "min_qty": "1",
+    "nonspec_yn": "N",
+    "prd_nm": "프레임리스우드액자",
+    "prd_typ_cd": "PRD_TYPE.01",
+    "qty_incr": "1",
+    "unit": "QTY_UNIT.01",
+    "use_yn": "Y"
+  },
+  "sizes_active": {
+    "SIZ_000174": {
+      "junc_del_yn": "N",
+      "master_del_yn": "N",
+      "siz_nm": "A3(297x420mm)",
+      "work": "297x420"
+    },
+    "SIZ_000197": {
+      "junc_del_yn": "N",
+      "master_del_yn": "N",
+      "siz_nm": "A2(420x594mm)",
+      "work": "420x594"
+    }
+  }
+}

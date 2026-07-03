@@ -1,0 +1,219 @@
+{
+  "base_matrix": {
+    "asymmetric": true,
+    "combo_count": 80,
+    "comp_cd": "COMP_POSTER_BANNER_NORMAL",
+    "distinct_h": 16,
+    "distinct_w": 5,
+    "grid_full": true,
+    "grid_h_range": "900~5000",
+    "grid_w_range": "900~1750",
+    "qty_populated": true,
+    "row_count": 81,
+    "use_dims": "[\"siz_width\", \"siz_height\"]"
+  },
+  "category": {
+    "CAT_000315": {
+      "cat_lvl": "2",
+      "cat_nm": "배너/현수막",
+      "del_yn": "N",
+      "upr_cat_cd": "CAT_000005"
+    }
+  },
+  "formula": {
+    "comp_count": 9,
+    "comps": [
+      [
+        "COMP_POSTER_BANNER_NORMAL",
+        "1",
+        "Y"
+      ],
+      [
+        "COMP_POSTEROPT_BANNER_NORMAL_PROC_PUNCH_4",
+        "2",
+        "Y"
+      ],
+      [
+        "COMP_POSTEROPT_BANNER_NORMAL_PROC_CUTEDGE",
+        "3",
+        "Y"
+      ],
+      [
+        "COMP_POSTEROPT_BANNER_NORMAL_PROC_DTAPE",
+        "4",
+        "Y"
+      ],
+      [
+        "COMP_POSTEROPT_BANNER_NORMAL_PROC_BONGSEW",
+        "5",
+        "Y"
+      ],
+      [
+        "COMP_POSTEROPT_BANNER_NORMAL_ADD_QBANG_4",
+        "6",
+        "Y"
+      ],
+      [
+        "COMP_POSTEROPT_BANNER_NORMAL_ADD_STRING_4",
+        "7",
+        "Y"
+      ],
+      [
+        "COMP_POPT_BNR_GAKMOK_STR_900_4_LE",
+        "8",
+        "Y"
+      ],
+      [
+        "COMP_POPT_BNR_GAKMOK_STR_900_4_GT",
+        "9",
+        "Y"
+      ]
+    ],
+    "frm_cd": "PRF_POSTER_BANNER_N"
+  },
+  "materials": {
+    "MAT_000069": {
+      "link_del": "N",
+      "master_del": "Y",
+      "mat_nm": "양면테입",
+      "mat_typ_cd": "MAT_TYPE.07"
+    },
+    "MAT_000070": {
+      "link_del": "N",
+      "master_del": "N",
+      "mat_nm": "설치용끈",
+      "mat_typ_cd": "MAT_TYPE.16"
+    },
+    "MAT_000182": {
+      "link_del": "N",
+      "master_del": "N",
+      "mat_nm": "현수막천",
+      "mat_typ_cd": "MAT_TYPE.08"
+    },
+    "MAT_000337": {
+      "link_del": "N",
+      "master_del": "N",
+      "mat_nm": "큐방",
+      "mat_typ_cd": "MAT_TYPE.16"
+    },
+    "MAT_000338": {
+      "link_del": "N",
+      "master_del": "N",
+      "mat_nm": "각목",
+      "mat_typ_cd": "MAT_TYPE.07"
+    },
+    "MAT_000339": {
+      "link_del": "Y",
+      "master_del": "Y",
+      "mat_nm": "각목(900초과)",
+      "mat_typ_cd": "MAT_TYPE.07"
+    },
+    "MAT_000340": {
+      "link_del": "N",
+      "master_del": "Y",
+      "mat_nm": "봉제사",
+      "mat_typ_cd": "MAT_TYPE.07"
+    }
+  },
+  "meta": {
+    "captured_at": "2026-07-03",
+    "generated_by": "transcribe_product_138.py",
+    "snapshot": "live-snapshot/latest (snap_20260702_1119)"
+  },
+  "opt_components": {
+    "COMP_POPT_BNR_GAKMOK_STR_900_4_GT": {
+      "comp_nm": "현수막 각목(900mm 초과)+끈(4개) 추가가격",
+      "del_yn": "N",
+      "row_count": 1,
+      "use_dims": "[\"opt_cd\", \"opt_grp:OPT_000004\"]"
+    },
+    "COMP_POPT_BNR_GAKMOK_STR_900_4_LE": {
+      "comp_nm": "현수막 각목(900mm이하)+끈(4개) 추가가격",
+      "del_yn": "N",
+      "row_count": 1,
+      "use_dims": "[\"opt_cd\", \"opt_grp:OPT_000004\"]"
+    },
+    "COMP_POSTEROPT_BANNER_NORMAL_ADD_QBANG_4": {
+      "comp_nm": "일반현수막 큐방(4개) 추가가격",
+      "del_yn": "N",
+      "row_count": 1,
+      "use_dims": "[\"opt_cd\", \"opt_grp:OPT_000004\"]"
+    },
+    "COMP_POSTEROPT_BANNER_NORMAL_ADD_STRING_4": {
+      "comp_nm": "일반현수막 끈(4개) 추가가격",
+      "del_yn": "N",
+      "row_count": 1,
+      "use_dims": "[\"opt_cd\", \"opt_grp:OPT_000004\"]"
+    },
+    "COMP_POSTEROPT_BANNER_NORMAL_PROC_BONGSEW": {
+      "comp_nm": "일반현수막 봉미싱 추가가격",
+      "del_yn": "N",
+      "row_count": 1,
+      "use_dims": "[\"opt_cd\", \"opt_grp:OPT_000003\"]"
+    },
+    "COMP_POSTEROPT_BANNER_NORMAL_PROC_CUTEDGE": {
+      "comp_nm": "일반현수막 열재단 추가가격",
+      "del_yn": "N",
+      "row_count": 1,
+      "use_dims": "[\"opt_cd\", \"opt_grp:OPT_000003\"]"
+    },
+    "COMP_POSTEROPT_BANNER_NORMAL_PROC_DTAPE": {
+      "comp_nm": "일반현수막 양면테잎 추가가격",
+      "del_yn": "N",
+      "row_count": 1,
+      "use_dims": "[\"opt_cd\", \"opt_grp:OPT_000003\"]"
+    },
+    "COMP_POSTEROPT_BANNER_NORMAL_PROC_PUNCH_4": {
+      "comp_nm": "일반현수막 타공(4개) 추가가격",
+      "del_yn": "N",
+      "row_count": 3,
+      "use_dims": "[\"proc_cd\", \"min_qty\", \"proc_grp:PROC_000104\"]"
+    }
+  },
+  "processes": {
+    "PROC_000079": {
+      "link_del": "Y",
+      "master_del": "N",
+      "proc_nm": "타공"
+    },
+    "PROC_000080": {
+      "link_del": "N",
+      "master_del": "N",
+      "proc_nm": "봉제"
+    },
+    "PROC_000081": {
+      "link_del": "N",
+      "master_del": "N",
+      "proc_nm": "부착"
+    },
+    "PROC_000084": {
+      "link_del": "N",
+      "master_del": "Y",
+      "proc_nm": "열재단"
+    },
+    "PROC_000104": {
+      "link_del": "N",
+      "master_del": "N",
+      "proc_nm": "현수막타공"
+    }
+  },
+  "qty": {
+    "h_incr": "100",
+    "max_qty": "10000",
+    "min_qty": "1",
+    "nonspec_h": "500~5000",
+    "nonspec_w": "500~1750",
+    "nonspec_yn": "Y",
+    "qty_incr": "1",
+    "unit": "QTY_UNIT.01",
+    "w_incr": "100"
+  },
+  "sizes": {
+    "SIZ_000322": {
+      "del_yn": "N",
+      "impos_yn": "N",
+      "siz_nm": "5000x900",
+      "work": "5000x900"
+    }
+  }
+}

@@ -1,0 +1,183 @@
+{
+  "addons": [],
+  "bundle_qty": [],
+  "categories": [
+    {
+      "cat_cd": "CAT_000080",
+      "cat_lvl": "2",
+      "cat_nm": "보드액자",
+      "main_cat_yn": "N",
+      "upr_cat_cd": "CAT_000004"
+    },
+    {
+      "cat_cd": "CAT_000004",
+      "cat_lvl": "1",
+      "cat_nm": "포스터",
+      "main_cat_yn": "Y",
+      "upr_cat_cd": ""
+    }
+  ],
+  "constraints": [],
+  "formula_meta": {
+    "PRF_POSTER_FOMEXBOARD": {
+      "frm_cd": "PRF_POSTER_FOMEXBOARD",
+      "frm_nm": "포맥스보드 완제품가(면적/규격 단가)",
+      "note": "포스터사인 포맥스보드 소재/사이즈/수량별 완제품 통가격",
+      "reg_dt": "2026-06-17 13:00:58.993206",
+      "upd_dt": "2026-06-18 20:31:38.267558",
+      "use_yn": "Y"
+    }
+  },
+  "formulas": [
+    "PRF_POSTER_FOMEXBOARD"
+  ],
+  "grid": {
+    "COMP_POSTER_FOMEXBOARD_BOARD": {
+      "cells_present": 4,
+      "combos_potential": 8,
+      "comp_nm": "포맥스보드(두께×사이즈) 완제품가",
+      "mat_labels": {
+        "MAT_000022": "포맥스(화이트) 3mm A3",
+        "MAT_000023": "포맥스(화이트) 5mm A3",
+        "MAT_000554": "포맥스(화이트) 3mm A2",
+        "MAT_000555": "포맥스(화이트) 5mm A2"
+      },
+      "mats": [
+        "MAT_000022",
+        "MAT_000023",
+        "MAT_000554",
+        "MAT_000555"
+      ],
+      "price_max": 16000.0,
+      "price_min": 8500.0,
+      "rows": 4,
+      "sizes": [
+        "SIZ_000174",
+        "SIZ_000197"
+      ],
+      "use_dims": "[\"mat_cd\", \"siz_cd\"]",
+      "use_yn": "Y"
+    }
+  },
+  "materials": [
+    {
+      "dflt_yn": "N",
+      "mat_cd": "MAT_000023",
+      "mat_nm": "포맥스(화이트) 5mm A3",
+      "mat_typ_cd": "MAT_TYPE.16",
+      "upr_mat_cd": "MAT_000021",
+      "usage_cd": "USAGE.07"
+    },
+    {
+      "dflt_yn": "N",
+      "mat_cd": "MAT_000555",
+      "mat_nm": "포맥스(화이트) 5mm A2",
+      "mat_typ_cd": "MAT_TYPE.16",
+      "upr_mat_cd": "MAT_000021",
+      "usage_cd": "USAGE.07"
+    },
+    {
+      "dflt_yn": "N",
+      "mat_cd": "MAT_000554",
+      "mat_nm": "포맥스(화이트) 3mm A2",
+      "mat_typ_cd": "MAT_TYPE.16",
+      "upr_mat_cd": "MAT_000021",
+      "usage_cd": "USAGE.07"
+    },
+    {
+      "dflt_yn": "N",
+      "mat_cd": "MAT_000022",
+      "mat_nm": "포맥스(화이트) 3mm A3",
+      "mat_typ_cd": "MAT_TYPE.16",
+      "upr_mat_cd": "MAT_000021",
+      "usage_cd": "USAGE.07"
+    }
+  ],
+  "meta": {
+    "captured_at": "2026-07-03",
+    "generated_by": "transcribe_product_130.py",
+    "prd_cd": "PRD_000130",
+    "snapshot": "live-snapshot/latest (snap_20260702_1119)"
+  },
+  "option_groups": [],
+  "plates": [
+    {
+      "del": "Y",
+      "dflt": "Y",
+      "note": "파일사양",
+      "output_file_typ": "JPG",
+      "output_paper_typ_cd": "",
+      "siz_cd": "SIZ_000175"
+    },
+    {
+      "del": "Y",
+      "dflt": "Y",
+      "note": "파일사양",
+      "output_file_typ": "JPG",
+      "output_paper_typ_cd": "",
+      "siz_cd": "SIZ_000303"
+    }
+  ],
+  "print_options": [],
+  "processes": [
+    {
+      "link_del": "N",
+      "mand": "N",
+      "proc_cd": "PROC_000015",
+      "proc_nm": "무광라미네이팅",
+      "upr": "PROC_000013"
+    },
+    {
+      "link_del": "N",
+      "mand": "N",
+      "proc_cd": "PROC_000014",
+      "proc_nm": "유광라미네이팅",
+      "upr": "PROC_000013"
+    }
+  ],
+  "product": {
+    "del_yn": "N",
+    "editor_yn": "N",
+    "file_upload_yn": "Y",
+    "max_qty": "10000",
+    "min_qty": "1",
+    "nonspec_yn": "N",
+    "prd_cd": "PRD_000130",
+    "prd_nm": "포맥스보드",
+    "prd_typ_cd": "PRD_TYPE.01",
+    "qty_incr": "1",
+    "qty_unit_typ_cd": "QTY_UNIT.01",
+    "use_yn": "Y"
+  },
+  "sets_parent": [],
+  "sizes": [
+    {
+      "dflt": "Y",
+      "link_del": "N",
+      "master_del": "N",
+      "siz_cd": "SIZ_000174",
+      "siz_nm": "A3(297x420mm)",
+      "work": "297x420"
+    },
+    {
+      "dflt": "Y",
+      "link_del": "N",
+      "master_del": "N",
+      "siz_cd": "SIZ_000197",
+      "siz_nm": "A2(420x594mm)",
+      "work": "420x594"
+    }
+  ],
+  "wiring": {
+    "PRF_POSTER_FOMEXBOARD": [
+      {
+        "addtn_yn": "Y",
+        "comp_cd": "COMP_POSTER_FOMEXBOARD_BOARD",
+        "comp_nm": "포맥스보드(두께×사이즈) 완제품가",
+        "disp_seq": "1",
+        "prc_typ_cd": "PRICE_TYPE.01",
+        "use_dims": "[\"mat_cd\", \"siz_cd\"]"
+      }
+    ]
+  }
+}

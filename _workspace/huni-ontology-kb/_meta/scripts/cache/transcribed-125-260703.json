@@ -1,0 +1,181 @@
+{
+  "area_grid": {
+    "distinct_heights": 13,
+    "distinct_wh_pairs": 52,
+    "distinct_widths": 4,
+    "height_max": "3000.00",
+    "height_min": "600.00",
+    "total_rows": 52,
+    "width_max": "1200.00",
+    "width_min": "600.00"
+  },
+  "categories": [
+    {
+      "cat_cd": "CAT_000004",
+      "cat_lvl": "1",
+      "cat_nm": "포스터",
+      "disp": "",
+      "main": "N",
+      "upr_cat_cd": ""
+    },
+    {
+      "cat_cd": "CAT_000072",
+      "cat_lvl": "2",
+      "cat_nm": "패브릭포스터",
+      "disp": "2",
+      "main": "Y",
+      "upr_cat_cd": "CAT_000004"
+    }
+  ],
+  "constraints": [
+    {
+      "err_msg": "가로 200~1200mm, 세로 200~3000mm 범위로 입력하세요",
+      "logic": "{\"or\": [{\"!=\": [{\"var\": \"size_mode\"}, \"nonspec\"]}, {\"and\": [{\">=\": [{\"var\": \"width\"}, 200]}, {\"<=\": [{\"var\": \"width\"}, 1200]}, {\">=\": [{\"var\": \"height\"}, 200]}, {\"<=\": [{\"var\": \"height\"}, 3000]}]}]}",
+      "rule_cd": "RULE_001",
+      "rule_nm": "사용자입력 치수 범위",
+      "rule_typ_cd": "RULE_TYPE.01",
+      "use_yn": "Y"
+    }
+  ],
+  "formula": [
+    {
+      "frm_cd": "PRF_POSTER_CANVAS",
+      "note": ""
+    }
+  ],
+  "formula_components": [
+    {
+      "addtn": "Y",
+      "comp_cd": "COMP_POSTER_CANVAS_FABRIC",
+      "disp_seq": "1",
+      "frm_cd": "PRF_POSTER_CANVAS"
+    }
+  ],
+  "materials": [
+    {
+      "dflt": "Y",
+      "disp": "1",
+      "mat_cd": "MAT_000185",
+      "mat_nm": "캔버스(옥스포드)",
+      "mat_typ_cd": "MAT_TYPE.05",
+      "upr_mat_cd": "",
+      "usage": "USAGE.07"
+    }
+  ],
+  "meta": {
+    "area_comp": "COMP_POSTER_CANVAS_FABRIC",
+    "captured_at": "2026-07-03",
+    "generated_by": "transcribe_product_125.py",
+    "snapshot": "live-snapshot/latest (snap_20260702_1119)"
+  },
+  "option_groups": [
+    {
+      "disp": "1",
+      "items": [
+        {
+          "dflt": "Y",
+          "opt_cd": "OPV_000028",
+          "opt_nm": "오버로크",
+          "ref_dim_cd": "OPT_REF_DIM.04",
+          "ref_key1": "PROC_000080",
+          "ref_key2": ""
+        }
+      ],
+      "mand": "N",
+      "max_sel": "1",
+      "min_sel": "0",
+      "opt_grp_cd": "OPT_000010",
+      "opt_grp_nm": "가공",
+      "sel_typ_cd": "SEL_TYPE.01"
+    }
+  ],
+  "plate_all": [
+    {
+      "del_yn": "Y",
+      "note": "파일사양",
+      "output_file_typ": "JPG",
+      "output_paper_typ_cd": "(빈값)",
+      "siz_cd": "SIZ_000052"
+    },
+    {
+      "del_yn": "Y",
+      "note": "파일사양",
+      "output_file_typ": "JPG",
+      "output_paper_typ_cd": "(빈값)",
+      "siz_cd": "SIZ_000198"
+    },
+    {
+      "del_yn": "Y",
+      "note": "파일사양",
+      "output_file_typ": "JPG",
+      "output_paper_typ_cd": "(빈값)",
+      "siz_cd": "SIZ_000294"
+    }
+  ],
+  "price_components": [
+    {
+      "comp_cd": "COMP_POSTER_CANVAS_FABRIC",
+      "comp_nm": "실사 완제품가 (캔버스패브릭포스터·레더아트프린트·메쉬프린트·타이벡프린트)",
+      "comp_typ_cd": "PRC_COMPONENT_TYPE.06",
+      "note": "[동형결합] 가격표 동일 4소재 통합 · 결합소재: 캔버스패브릭포스터, 레더아트프린트, 메쉬프린트, 타이벡프린트",
+      "prc_typ_cd": "PRICE_TYPE.01",
+      "use_dims": "[\"siz_width\", \"siz_height\", \"min_qty\"]"
+    }
+  ],
+  "print_options_count": 0,
+  "processes": [
+    {
+      "disp": "1",
+      "mand": "N",
+      "proc_cd": "PROC_000080",
+      "proc_nm": "봉제",
+      "upr_proc_cd": ""
+    }
+  ],
+  "product": {
+    "del_yn": "N",
+    "editor_yn": "N",
+    "file_upload_yn": "Y",
+    "max_qty": "10000",
+    "min_qty": "1",
+    "nonspec_h": "200~3000",
+    "nonspec_h_incr": "200",
+    "nonspec_w": "200~1200",
+    "nonspec_w_incr": "200",
+    "nonspec_yn": "Y",
+    "prd_nm": "캔버스패브릭포스터",
+    "prd_typ_cd": "PRD_TYPE.01",
+    "qty_incr": "1",
+    "unit": "QTY_UNIT.01",
+    "use_yn": "Y"
+  },
+  "sizes": [
+    {
+      "cut": "297x420",
+      "dflt": "Y",
+      "disp": "1",
+      "master_del_yn": "N",
+      "siz_cd": "SIZ_000174",
+      "siz_nm": "A3(297x420mm)",
+      "work": "297x420"
+    },
+    {
+      "cut": "420x594",
+      "dflt": "Y",
+      "disp": "1",
+      "master_del_yn": "N",
+      "siz_cd": "SIZ_000197",
+      "siz_nm": "A2(420x594mm)",
+      "work": "420x594"
+    },
+    {
+      "cut": "594x841",
+      "dflt": "Y",
+      "disp": "1",
+      "master_del_yn": "Y",
+      "siz_cd": "SIZ_000293",
+      "siz_nm": "A1(594x841mm)",
+      "work": "594x841"
+    }
+  ]
+}

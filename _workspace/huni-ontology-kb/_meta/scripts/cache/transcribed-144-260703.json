@@ -1,0 +1,121 @@
+{
+  "addons_rows": 0,
+  "bundle_qtys_rows": 0,
+  "categories": [
+    {
+      "cat_cd": "CAT_000097",
+      "cat_nm": "POP",
+      "lvl": "2",
+      "main": "N",
+      "upr": "CAT_000005"
+    },
+    {
+      "cat_cd": "CAT_000005",
+      "cat_nm": "사인",
+      "lvl": "1",
+      "main": "Y",
+      "upr": ""
+    }
+  ],
+  "component": {
+    "comp_cd": "COMP_POSTER_MINI_STANDBOARD",
+    "comp_typ_cd": "PRC_COMPONENT_TYPE.06",
+    "prc_typ_cd": "PRICE_TYPE.01",
+    "use_dims": "[siz_cd, min_qty]"
+  },
+  "constraints_rows": 0,
+  "fixed_shape": {
+    "band_floor": 4,
+    "comp_cd": "COMP_POSTER_MINI_STANDBOARD",
+    "distinct_siz": 3,
+    "grid_full": true,
+    "product_min_qty": 1,
+    "qty_bands": [
+      4,
+      19,
+      49,
+      99,
+      10000
+    ],
+    "qty_populated": true,
+    "row_count": 15,
+    "siz_cells": [
+      "SIZ_000170",
+      "SIZ_000172",
+      "SIZ_000174"
+    ],
+    "size_price_match": true,
+    "use_dims": [
+      "siz_cd",
+      "min_qty"
+    ]
+  },
+  "formula": {
+    "bound": true,
+    "comp_wired": [
+      {
+        "addtn": "Y",
+        "comp_cd": "COMP_POSTER_MINI_STANDBOARD",
+        "disp_seq": "1"
+      }
+    ],
+    "frm_cd": "PRF_POSTER_MINI_STANDBOARD"
+  },
+  "materials_junction_rows": 0,
+  "meta": {
+    "captured_at": "2026-07-03",
+    "generated_by": "transcribe_product_144.py",
+    "snapshot": "live-snapshot/latest (snap_20260702_1119)"
+  },
+  "option_groups_rows": 0,
+  "plate_placeholder": {
+    "SIZ_000007": {
+      "junc_del_yn": "Y",
+      "siz_nm": "148x210"
+    },
+    "SIZ_000050": {
+      "junc_del_yn": "Y",
+      "siz_nm": "A4 (210X297)"
+    },
+    "SIZ_000052": {
+      "junc_del_yn": "Y",
+      "siz_nm": "A3 (297X420mm)"
+    }
+  },
+  "print_options_rows": 0,
+  "processes_junction_rows": 0,
+  "qty": {
+    "del_yn": "N",
+    "editor_yn": "N",
+    "file_upload_yn": "Y",
+    "max_qty": "10000",
+    "min_qty": "1",
+    "nonspec_yn": "N",
+    "prd_nm": "미니보드스탠딩",
+    "prd_typ_cd": "PRD_TYPE.01",
+    "qty_incr": "1",
+    "unit": "QTY_UNIT.01",
+    "use_yn": "Y"
+  },
+  "sets_parent_rows": 0,
+  "sizes_active": {
+    "SIZ_000170": {
+      "junc_del_yn": "N",
+      "master_del_yn": "Y",
+      "siz_nm": "A5(148x210mm)",
+      "work": "148x210"
+    },
+    "SIZ_000172": {
+      "junc_del_yn": "N",
+      "master_del_yn": "N",
+      "siz_nm": "A4(210x297mm)",
+      "work": "210x297"
+    },
+    "SIZ_000174": {
+      "junc_del_yn": "N",
+      "master_del_yn": "N",
+      "siz_nm": "A3(297x420mm)",
+      "work": "297x420"
+    }
+  }
+}

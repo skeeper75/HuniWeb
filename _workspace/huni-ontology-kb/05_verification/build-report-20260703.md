@@ -2,52 +2,52 @@
 
 > build_graph.py · 정본 /Users/innojini/Dev/HuniWeb/_workspace/huni-ontology-kb/03_kb → 04_graph. 생성=빌드(검증은 별도 레인·okb-adversarial-gate).
 
-- 판정: **PASS(하드 0)** · 하드 위반 0 · 소프트 경고 315
-- 노드 654 · 엣지 2128
-- 멱등 해시: nodes.jsonl=e39020760303c641 · edges.jsonl=d84168c28f089f1b
+- 판정: **PASS(하드 0)** · 하드 위반 0 · 소프트 경고 432
+- 노드 963 · 엣지 3047
+- 멱등 해시: nodes.jsonl=03dcccaf21c42be8 · edges.jsonl=bfc516b8c14e0e3a
 
 ## 노드 수 (타입별)
-- bundle_qty: 31
-- category: 16
-- constraint: 3
+- bundle_qty: 52
+- category: 25
+- constraint: 10
 - decision: 12
-- gap: 130
+- gap: 199
 - intent: 3
-- material: 78
-- option_group: 97
-- plate_size: 14
-- price_component: 57
-- price_formula: 27
+- material: 115
+- option_group: 126
+- plate_size: 17
+- price_component: 97
+- price_formula: 55
 - print_option: 4
-- process: 41
-- product: 52
+- process: 52
+- product: 80
 - rule: 7
-- size: 75
+- size: 102
 - term: 7
 
 ## 엣지 수 (rel별)
 - alias_of: 19
-- constrains: 4
+- constrains: 11
 - decided_because: 19
-- derived_from: 7
-- has_component: 111
-- has_option_group: 97
-- has_plate_size: 50
+- derived_from: 8
+- has_component: 157
+- has_option_group: 126
+- has_plate_size: 53
 - has_print_option: 75
-- has_process: 186
-- has_qty_rule: 31
-- has_size: 139
-- in_category: 91
-- option_refs: 237
-- priced_by: 55
-- references: 810
-- uses_material: 197
+- has_process: 221
+- has_qty_rule: 52
+- has_size: 223
+- in_category: 134
+- option_refs: 277
+- priced_by: 83
+- references: 1348
+- uses_material: 241
 
 ## badge 분포
-- candidate: 15
-- defect: 12
-- unknown: 130
-- verified: 497
+- candidate: 16
+- defect: 20
+- unknown: 197
+- verified: 730
 
 ## 무결성 6검사
 - I-1 고아(하드 유형 product/formula/component): 0
@@ -55,6 +55,7 @@
 - I-3 타입 위반: 0
 - I-4 필수 엣지(O5/O6): 0
 - I-5 멱등: nodes/edges 해시 재현(위 해시 — --idem로 자체검사)
+- L-20 마스터 앵커 중복소유(소프트·동형결합 단일소유권): 7 (실사 D-SILSA-INT-1 교정 후 잔여=스티커 축 등 타 레인 소관·회귀 가드)
 - I-6 오염(blocklist): 0 (원천 실재 — hard src_id 5·path 5·advisory src_id 2·path 2 로드)
 
 ## 소프트 경고 (빌드 계속·검토용)
@@ -98,6 +99,18 @@
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-055-sticker-sheet-freeform :: 최소 1매·최대 10,000매·1매 증분(단위 QTY_UNIT.02 "매"). 수량·치수·배선 raw 값은
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-055-sticker-sheet-freeform :: - **수량규칙:** 제품 레벨 min 1 / max 10,000 / incr 1(QTY_UNIT.02 "매
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-057-material-cost :: - gap_what: "스티커 소재 연당가(원자재 원가)는 라이브 가격 사슬에 노드로 존재하지 않는다. 05
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): component-COMP_POSTER_ADH_CLEAR_PVC :: - src: {source_file: "live-snapshot/latest/t_prc_component_p
+- L-16 수치 표 transcribed-by 마커 없음(손전사 의심): product-122-adhesive-clear-poster
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-122-adhesive-clear-poster :: > ((가로,세로)≠(세로,가로) 가능). off-grid=가로·세로 각 한 단계 큰 규격 ceiling(앱
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-123-graphicfabric-mattype :: - gap_what: "그래픽천(MAT_000181) 자재유형 최종 목표 코드 — 현재 .08 실사소재, 형
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): material-MAT_000187 :: - props: {mat_cd: "MAT_000187", mat_nm: "타이벡", mat_typ_cd: "
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-127-tyvek-print :: 원단.05 product-bom §146"·pack §1.1). round-13 목표 라벨 ".05 원단/.
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-131-material-absent :: - gap_fill_from: "실무진(보드/우드 5상품 소재 정책·pack §3.5) + L1 원본 자재 
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-134-linen-woodrod-scroll :: 교정·구 `.08 실사소재`에서 이동)는 현재값이자 개편 후 정답 — round-13 목표 라벨 ".05 원
+- L-16 수치 표 transcribed-by 마커 없음(손전사 의심): product-134-linen-woodrod-scroll
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): optgroup-135-gagong :: - src: {source_file: "live-snapshot/latest/t_prd_product_opt
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-144-material-absent :: - gap_fill_from: "실무진(보드/우드 5상품 소재 정책·pack §3.5) + L1 원본 자재 
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-145-qtytier-floor :: - gap_what: "상품 마스터 min_qty=1인데 가격 구성요소(COMP_POSTER_MINI_BAN
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-gangpan-diecut :: `CAT_000037`). ★**파일 업로드 전용**(`file_upload_yn=Y·editor_yn=N`
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-gangpan-diecut :: 증분 1,000매(단위 QTY_UNIT.02 "매")·형상별 시트당 EA는 bundle_qtys(8/6/3/
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-gangpan-diecut :: 구간할인(t_dsc_*) 비대상. 격자 충전 실측(companion 전사표): COMP_GANGPAN_PRI
@@ -142,6 +155,13 @@
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): DEC_baseproc_260701 :: - props: {일자: "2026-07-01", 내용: "16상품+019(흰토너008+CMYK004)+02
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): DEC_diecut_260701 :: - props: {일자: "2026-07-01", 내용: "COMP_CUT_FULL_DIECUT .01→.0
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): GAP_product_count :: > 스티커 공통 열린 질문: ①코팅=자재 vs 공정 vs 가격축 3원천 CONFLICT(BATCH-3·GAP
+- L-20 마스터 앵커 중복소유(동형결합 단일소유권 위반): t_mat_materials/MAT_000163 type=material owners=['matcost-054-hologram', 'material-MAT_000163']
+- L-20 마스터 앵커 중복소유(동형결합 단일소유권 위반): t_mat_materials/MAT_000371 type=material owners=['matcost-053-white-backing', 'material-MAT_000371']
+- L-20 마스터 앵커 중복소유(동형결합 단일소유권 위반): t_mat_materials/MAT_000372 type=material owners=['matcost-053-clear-backing', 'material-MAT_000372']
+- L-20 마스터 앵커 중복소유(동형결합 단일소유권 위반): t_siz_sizes/SIZ_000521 type=plate_size owners=['plate-058-SIZ_000521', 'plate-062-SIZ_000521']
+- L-20 마스터 앵커 중복소유(동형결합 단일소유권 위반): t_siz_sizes/SIZ_000057 type=size owners=['size-053-SIZ_000057', 'size-SIZ_000057']
+- L-20 마스터 앵커 중복소유(동형결합 단일소유권 위반): t_siz_sizes/SIZ_000170 type=size owners=['size-053-SIZ_000170', 'size-054-SIZ_000170', 'size-SIZ_000170']
+- L-20 마스터 앵커 중복소유(동형결합 단일소유권 위반): t_siz_sizes/SIZ_000520 type=size owners=['size-053-SIZ_000520', 'size-054-SIZ_000520', 'size-SIZ_000520']
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-020-white-print-postcard -> product-020-white-print-postcard-nodes
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-020-white-print-postcard -> product-020-white-print-postcard-nodes
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-020-white-print-postcard -> product-020-white-print-postcard-nodes
@@ -241,6 +261,106 @@
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-057-sticker-large-freeform -> product-type-classification-sot
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-057-sticker-large-freeform -> harness-domain-rules-12-260701
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-057-sticker-large-freeform -> product-057-sticker-large-freeform-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-118-artprint-poster -> product-118-artprint-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-118-artprint-poster -> product-118-artprint-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-118-artprint-poster -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-118-artprint-poster -> product-118-artprint-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-118-artprint-poster -> product-118-artprint-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-118-artprint-poster -> product-118-artprint-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-119-artpaper-poster -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-119-artpaper-poster -> product-119-artpaper-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): formula-PRF_POSTER_WATERPROOF -> product-121-adhesive-waterproof-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-120-waterproof-poster -> product-120-waterproof-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-120-waterproof-poster -> product-121-adhesive-waterproof-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-120-waterproof-poster -> product-120-waterproof-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-120-waterproof-poster -> product-120-waterproof-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-121-adhesive-waterproof-poster -> product-121-adhesive-waterproof-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-121-adhesive-waterproof-poster -> product-121-adhesive-waterproof-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-121-adhesive-waterproof-poster -> product-121-adhesive-waterproof-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-121-adhesive-waterproof-poster -> product-121-adhesive-waterproof-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-121-adhesive-waterproof-poster -> product-121-adhesive-waterproof-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-122-adhesive-clear-poster -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-122-adhesive-clear-poster -> product-020-white-print-postcard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-122-adhesive-clear-poster -> product-122-adhesive-clear-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-123-artfabric-poster -> product-123-artfabric-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-123-artfabric-poster -> 사이즈
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-123-artfabric-poster -> 판형
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-123-artfabric-poster -> 가격
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-123-artfabric-poster -> product-123-artfabric-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-124-linen-fabric-poster -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-124-linen-fabric-poster -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-124-linen-fabric-poster -> product-124-linen-fabric-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-125-canvas-fabric-poster -> product-125-canvas-fabric-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-125-canvas-fabric-poster -> 가격구성요소-면적매트릭스
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-125-canvas-fabric-poster -> product-125-canvas-fabric-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-126-leather-artprint -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-126-leather-artprint -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-126-leather-artprint -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-126-leather-artprint -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-126-leather-artprint -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-127-tyvek-print -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-127-tyvek-print -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-127-tyvek-print -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-127-tyvek-print -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-127-tyvek-print -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-128-mesh-print -> product-128-mesh-print-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-128-mesh-print -> product-128-mesh-print-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-128-mesh-print -> product-128-mesh-print-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-128-mesh-print -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-129-foam-board -> product-129-foam-board-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-129-foam-board -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-129-foam-board -> product-129-foam-board-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-130-formax-board -> product-130-formax-board-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-130-formax-board -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-131-frameless-wood-frame -> product-131-frameless-wood-frame-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-131-frameless-wood-frame -> product-131-frameless-wood-frame-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-131-frameless-wood-frame -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-131-frameless-wood-frame -> product-131-frameless-wood-frame-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-132-leather-art-frame -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-132-leather-art-frame -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-132-leather-art-frame -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-132-leather-art-frame -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-133-canvas-hanging-poster -> product-133-canvas-hanging-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-133-canvas-hanging-poster -> product-133-canvas-hanging-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-134-linen-woodrod-scroll -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-134-linen-woodrod-scroll -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-134-linen-woodrod-scroll -> product-134-linen-woodrod-scroll-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-135-scroll-poster -> product-135-scroll-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-135-scroll-poster -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-135-scroll-poster -> product-135-scroll-poster-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-135-scroll-poster -> product-131-frameless-wood-frame-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-136-pet-banner -> product-136-pet-banner-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-136-pet-banner -> product-136-pet-banner-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-136-pet-banner -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-136-pet-banner -> product-136-pet-banner-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-136-pet-banner -> product-136-pet-banner-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-136-pet-banner -> product-136-pet-banner-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-137-mesh-banner -> product-137-mesh-banner-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-137-mesh-banner -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-138-standard-hanging-banner -> product-138-standard-hanging-banner-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-138-standard-hanging-banner -> 자재
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-138-standard-hanging-banner -> 공정
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-138-standard-hanging-banner -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-138-standard-hanging-banner -> product-138-standard-hanging-banner-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-139-mesh-hanging-banner -> product-139-mesh-hanging-banner-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-139-mesh-hanging-banner -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-139-mesh-hanging-banner -> product-139-mesh-hanging-banner-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-139-mesh-hanging-banner -> product-139-mesh-hanging-banner-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-140-matte-sheet-cutting -> product-140-matte-sheet-cutting-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-140-matte-sheet-cutting -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-141-hologram-sheet-cutting -> product-141-hologram-sheet-cutting-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-141-hologram-sheet-cutting -> product-141-hologram-sheet-cutting-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-141-hologram-sheet-cutting -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-141-hologram-sheet-cutting -> product-141-hologram-sheet-cutting-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-142-glossy-acrylic-sticker -> product-142-glossy-acrylic-sticker-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-143-mirror-acrylic-sticker -> product-143-mirror-acrylic-sticker-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-143-mirror-acrylic-sticker -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-144-mini-board-standing -> product-144-mini-board-standing-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-144-mini-board-standing -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-144-mini-board-standing -> product-144-mini-board-standing-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-145-mini-banner -> product-145-mini-banner-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-145-mini-banner -> product-145-mini-banner-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-145-mini-banner -> product-145-mini-banner-nodes
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-gangpan-diecut -> sticker-gangpan-diecut-nodes
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-gangpan-diecut -> sticker-gangpan-diecut-nodes
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-gangpan-diecut -> sticker-gangpan-diecut-nodes
@@ -313,8 +433,6 @@
 - I-1 고아 노드(연결 대기·Phase 4): process-PROC_000001 (process)
 - I-1 고아 노드(연결 대기·Phase 4): process-PROC_000056 (process)
 - I-1 고아 노드(연결 대기·Phase 4): size-SIZ_000499 (size)
-- I-1 고아 노드(연결 대기·Phase 4): GAP_roll_material_price (gap)
-- I-1 고아 노드(연결 대기·Phase 4): GAP_product_count (gap)
 - O4 index 미등재 파일: product/product-055-sticker-sheet-freeform-nodes.md (qty-055)
 - O4 index 미등재 파일: product/product-055-sticker-sheet-freeform-nodes.md (optgroup-055-paper)
 - O4 index 미등재 파일: product/product-055-sticker-sheet-freeform-nodes.md (optgroup-055-print)

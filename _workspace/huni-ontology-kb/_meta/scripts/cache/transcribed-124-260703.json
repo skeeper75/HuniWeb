@@ -1,0 +1,186 @@
+{
+  "addons": [],
+  "bundle_qty": [],
+  "categories": [
+    {
+      "cat_cd": "CAT_000072",
+      "cat_nm": "패브릭포스터",
+      "main_cat_yn": "Y"
+    },
+    {
+      "cat_cd": "CAT_000004",
+      "cat_nm": "포스터",
+      "main_cat_yn": "N"
+    }
+  ],
+  "constraints": [
+    {
+      "rule_cd": "RULE_001",
+      "rule_nm": "사용자입력 치수 범위",
+      "rule_typ_cd": "RULE_TYPE.01",
+      "use_yn": "Y"
+    }
+  ],
+  "formulas": [
+    "PRF_POSTER_LINEN"
+  ],
+  "materials": [
+    {
+      "dflt_yn": "Y",
+      "mat_cd": "MAT_000607",
+      "mat_nm": "린넨(내추럴)",
+      "mat_typ_cd": "MAT_TYPE.05",
+      "upr_mat_cd": "MAT_000184",
+      "usage_cd": "USAGE.07"
+    }
+  ],
+  "meta": {
+    "captured_at": "2026-07-03",
+    "generated_by": "transcribe_product_124.py",
+    "prd_cd": "PRD_000124",
+    "snapshot": "live-snapshot/latest (snap_20260702_1119)"
+  },
+  "option_groups": [
+    {
+      "mand_yn": "N",
+      "max_sel": "1",
+      "min_sel": "0",
+      "note": "봉제 가공 (유형 param=GAP-PARAM)",
+      "opt_grp_cd": "OPT_000009",
+      "opt_grp_nm": "마감",
+      "sel_typ_cd": "SEL_TYPE.01"
+    }
+  ],
+  "option_items": [
+    {
+      "dtl_opt": "{\"유형\": \"오버로크+리본끈\"}",
+      "item_seq": "3",
+      "opt_cd": "OPV-000024",
+      "ref_dim_cd": "OPT_REF_DIM.04",
+      "ref_key1": "PROC_000080"
+    },
+    {
+      "dtl_opt": "{\"유형\": \"오버로크\"}",
+      "item_seq": "2",
+      "opt_cd": "OPV_000025",
+      "ref_dim_cd": "OPT_REF_DIM.04",
+      "ref_key1": "PROC_000080"
+    },
+    {
+      "dtl_opt": "{\"유형\": \"말아박기\"}",
+      "item_seq": "2",
+      "opt_cd": "OPV_000026",
+      "ref_dim_cd": "OPT_REF_DIM.04",
+      "ref_key1": "PROC_000080"
+    },
+    {
+      "dtl_opt": "{\"폭\": 7.0, \"유형\": \"봉미싱(7cm)\"}",
+      "item_seq": "2",
+      "opt_cd": "OPV_000027",
+      "ref_dim_cd": "OPT_REF_DIM.04",
+      "ref_key1": "PROC_000080"
+    },
+    {
+      "dtl_opt": "{\"유형\": \"말아박기+면끈\"}",
+      "item_seq": "2",
+      "opt_cd": "OPV_000424",
+      "ref_dim_cd": "OPT_REF_DIM.04",
+      "ref_key1": "PROC_000080"
+    }
+  ],
+  "plates_active": [],
+  "plates_total": 6,
+  "print_options": [],
+  "processes": [
+    {
+      "del_yn": "Y",
+      "has_param": "Y",
+      "mand_proc_yn": "N",
+      "proc_cd": "PROC_000080",
+      "proc_nm": "봉제",
+      "upr_proc_cd": ""
+    },
+    {
+      "del_yn": "N",
+      "has_param": "N",
+      "mand_proc_yn": "N",
+      "proc_cd": "PROC_000130",
+      "proc_nm": "봉제가공",
+      "upr_proc_cd": "PROC_000080"
+    }
+  ],
+  "product": {
+    "del_yn": "N",
+    "editor_yn": "N",
+    "file_upload_yn": "Y",
+    "max_qty": "10000",
+    "min_qty": "1",
+    "nonspec_height_incr": "200.00",
+    "nonspec_height_max": "3000.00",
+    "nonspec_height_min": "200.00",
+    "nonspec_width_incr": "200.00",
+    "nonspec_width_max": "1200.00",
+    "nonspec_width_min": "200.00",
+    "nonspec_yn": "Y",
+    "prd_cd": "PRD_000124",
+    "prd_nm": "린넨패브릭포스터",
+    "prd_typ_cd": "PRD_TYPE.01",
+    "qty_incr": "1",
+    "qty_unit_typ_cd": "QTY_UNIT.01",
+    "use_yn": "Y"
+  },
+  "size_dims": {
+    "SIZ_000542": {
+      "siz_nm": "A3세로 (297x420mm)",
+      "tags": "[\"패브릭포스터\"]",
+      "work": "(공백·라벨전용)"
+    },
+    "SIZ_000543": {
+      "siz_nm": "A3가로 (420x297mm)",
+      "tags": "[\"패브릭포스터\"]",
+      "work": "(공백·라벨전용)"
+    },
+    "SIZ_000544": {
+      "siz_nm": "A2세로 (420x594mm)",
+      "tags": "[\"패브릭포스터\"]",
+      "work": "(공백·라벨전용)"
+    },
+    "SIZ_000545": {
+      "siz_nm": "A2가로(594x420mm)",
+      "tags": "[\"패브릭포스터\"]",
+      "work": "(공백·라벨전용)"
+    },
+    "SIZ_000546": {
+      "siz_nm": "A1세로(594x841mm)",
+      "tags": "[\"패브릭포스터\"]",
+      "work": "(공백·라벨전용)"
+    },
+    "SIZ_000547": {
+      "siz_nm": "A1가로 (841x594mm)",
+      "tags": "[\"패브릭포스터\"]",
+      "work": "(공백·라벨전용)"
+    }
+  },
+  "wiring": {
+    "PRF_POSTER_LINEN": [
+      {
+        "addtn_yn": "Y",
+        "comp_cd": "COMP_POSTER_LINEN_FABRIC",
+        "comp_nm": "실사 완제품가 (린넨패브릭포스터)",
+        "disp_seq": "1",
+        "n_rows": 52,
+        "prc_typ_cd": "PRICE_TYPE.01",
+        "use_dims": "[\"siz_width\", \"siz_height\"]"
+      },
+      {
+        "addtn_yn": "Y",
+        "comp_cd": "COMP_POSTEROPT_LINEN_FINISH",
+        "comp_nm": "린넨 마감가공비",
+        "disp_seq": "2",
+        "n_rows": 5,
+        "prc_typ_cd": "PRICE_TYPE.01",
+        "use_dims": "[\"opt_cd\", \"min_qty\"]"
+      }
+    ]
+  }
+}
