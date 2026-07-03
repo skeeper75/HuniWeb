@@ -106,3 +106,24 @@
 - gap-048-price-path-incomplete·gap-048-no-size·gap-048-material (048) — ★가격경로 불완전(접지비만·인쇄/용지 미배선)·사이즈 0행·자재 30 미민팅+2 오염의심. owner=설계
 - gap-049-cpq-optiongroups (049) — 접지/라미/가변 has_process 있으나 CPQ 옵션그룹 0행(027/029 동형 참조). owner=설계
 - gap-051-golden (051) — 썬캡 완칼 골든 미검증+미출시(대조 정답 부재). owner=dev
+
+## 스티커 계열 GAP 색인 (2026-07-03·16상품·정직 공백·노드 정의는 각 product/*-nodes.md·여기는 링크만)
+
+> 스티커 공통 열린 질문: ①코팅=자재 vs 공정 vs 가격축 3원천 CONFLICT(BATCH-3·GAP-ST-1·owner=staff) ②소재 연당가(원가) 저장처 부재(systemic·§4-B·owner=staff) ③규격형 형상 저장 모델 불일치(058 옵션값 vs 066 siz_nm·GAP-ST-3) ④조각수 저장처 부재(OM-7). ★연당가 재적재 워크리스트(돈-크리티컬)=양면 defect 노드(matcost-053-white/clear-backing·matcost-054-hologram·material-MAT_000162/372)+size-SIZ_000170(A5 사이즈 재키잉)=실무진+인간 승인 대기.
+
+- gap-052-* (052 halfcut-freeform) — coating-conflict·cut-optref-dangling(OPV_000023→삭제 PROC_000054·fn_chk_opt_item_ref)·liandan-out-of-scope. owner=staff/dev
+- gap-053-* (053 halfcut-clear) — cutting-rekey·yeondangga-repricing·piece-count-storage. +양면 defect matcost-053-white/clear-backing. owner=dev/staff
+- gap-054-* (054 halfcut-hologram) — yeondangga-repricing·white-underbase-price·piece-count-storage. +양면 defect matcost-054-hologram. owner=staff/dev
+- gap-055-* (055 sheet-freeform) — cutting-optref-stale·jogaksu-storage·material-name-cst10·material-cost-storage. owner=staff/dev
+- gap-056-* (056 sheet-clear-white) — material-cost-storage·retail-cost-propagation·cpq-option-layer. +양면 defect material-MAT_000162/372. owner=staff/dev
+- gap-057-material-cost (057 large-freeform) — 유포 원가 저장처 부재(057 retail 정상·원가 축만 미상). owner=staff
+- gap-058-* (058 spec-circle) — coating-conflict·shape-storage·yeondangga·price-golden·constraint-stale-size(RULE_001 삭제 SIZ_000426). owner=staff/dev/§31
+- gap-059-* (059 spec-square) — coating-conflict·spec-shape-cut(형상·커팅공정 명칭 불일치). owner=staff
+- gap-060-* (060 spec-rectangle) — coating-conflict·halfcut-process·a5-size-master-deleted·mat084-typ·yeondangga-scope·golden. owner=staff/dev
+- gap-061-* (061 spec-band) — coating-conflict·halfcut-process·a5-size-master-deleted·mat084-typ·yeondangga-scope·golden. owner=staff/dev
+- gap-062-* (062 spec-fancy) — siz058-price-missing(silent-0)·paper-unwired(OPT_000041 미배선)·shape-storage·coating-conflict·yeondangga·price-golden. owner=staff/dev
+- gap-063-* (063 spec-fancy-clear·use_yn=N) — halfcut-process·cpq-option-layer·material-unmigrated(구코드 MAT_000162 직결). owner=staff
+- gap-064-* (064 smallqty-freeform·use_yn=N) — cpq-missing(CPQ 0행)·coating-conflict·liandan-out-of-scope. owner=dev/staff
+- gap-065-* (065 sticker-pack) — set-composition(sets 0행·Q-ST-E)·material-type-label(084 .13 vs .11)·pack-qty-band·cpq-option-layer·liandan-out-of-scope. owner=staff/dev
+- gap-066-* (066 gangpan-diecut) — coating-conflict·yeondangga·price-golden·plate-otyp·rekeying-skew·mattype-note-skew·shape-model-family·empty-optgroup-resolved(해소). owner=staff/dev
+- gap-067-* (067 tattoo) — mattype-transfer-paper(.11 vs .01 표본 컨펌)·liandan-out-of-scope. owner=staff

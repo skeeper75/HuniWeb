@@ -1,0 +1,377 @@
+{
+  "authority": {
+    "투명스": [
+      {
+        "after": "투명스티커(백색후지)",
+        "before": "투명스티커",
+        "column": "종이명"
+      },
+      {
+        "after": "50",
+        "before": "105",
+        "column": "평량"
+      },
+      {
+        "after": "점착 투명데드롱 50mic (후지:백색박리지150g) / 1박스당 300매",
+        "before": "점착 투명105g pet/ 1박스당 100매",
+        "column": "구매정보"
+      },
+      {
+        "after": "149500",
+        "before": "130000",
+        "column": "연당가"
+      },
+      {
+        "after": "499",
+        "before": "1300",
+        "column": "가격 (국4절)"
+      }
+    ],
+    "투명투": [
+      {
+        "after": "C=투명스티커(투명후지) | D=50 | E=투명투 | F=점착 투명데드롱 50mic (후지:투명 PET 100mic) / 1박스당 300매 | G=330*480 | H=222000 | I=740 | K=330x480",
+        "before": "",
+        "column": "(ADDED row)"
+      }
+    ]
+  },
+  "categories": [
+    {
+      "cat_cd": "CAT_000002",
+      "cat_nm": "스티커",
+      "main_cat_yn": "Y"
+    },
+    {
+      "cat_cd": "CAT_000309",
+      "cat_nm": "자유형스티커",
+      "main_cat_yn": "N"
+    }
+  ],
+  "cover": {
+    "MAT_000371": 282,
+    "MAT_000372": 282
+  },
+  "formulas": [
+    "PRF_STK_FIXED"
+  ],
+  "materials": [
+    {
+      "del_yn": "Y",
+      "dflt_yn": "Y",
+      "mat_cd": "MAT_000162",
+      "mat_nm": "투명스티커",
+      "mat_typ_cd": "MAT_TYPE.11",
+      "upr_mat_cd": "",
+      "usage_cd": "USAGE.07",
+      "weight": "105.00"
+    },
+    {
+      "del_yn": "N",
+      "dflt_yn": "Y",
+      "mat_cd": "MAT_000371",
+      "mat_nm": "투명스티커(백색후지)",
+      "mat_typ_cd": "MAT_TYPE.11",
+      "upr_mat_cd": "MAT_000162",
+      "usage_cd": "USAGE.07",
+      "weight": ""
+    },
+    {
+      "del_yn": "N",
+      "dflt_yn": "N",
+      "mat_cd": "MAT_000372",
+      "mat_nm": "투명스티커(투명후지)",
+      "mat_typ_cd": "MAT_TYPE.11",
+      "upr_mat_cd": "MAT_000162",
+      "usage_cd": "USAGE.07",
+      "weight": ""
+    }
+  ],
+  "meta": {
+    "captured_at": "2026-07-03",
+    "generated_by": "transcribe_sticker_halfcut_clear.py",
+    "pdiff": "huni-dbmap/26_change-tracking-260702/price-diff-260527-260702.csv",
+    "prd_cd": "PRD_000053",
+    "snapshot": "live-snapshot/latest (snap_20260702_1119)"
+  },
+  "option_groups": [
+    {
+      "del_yn": "N",
+      "mand_yn": "Y",
+      "max_sel": "1",
+      "min_sel": "1",
+      "note": "종이(자재) 택1 필수. 투명스티커 1종.",
+      "opt_grp_cd": "OPT_000009",
+      "opt_grp_nm": "종이",
+      "sel_typ_cd": "SEL_TYPE.01",
+      "use_yn": "Y"
+    },
+    {
+      "del_yn": "N",
+      "mand_yn": "Y",
+      "max_sel": "1",
+      "min_sel": "1",
+      "note": "인쇄(도수) 택1 필수. 단면 단일(opt_id=1).",
+      "opt_grp_cd": "OPT_000010",
+      "opt_grp_nm": "인쇄",
+      "sel_typ_cd": "SEL_TYPE.01",
+      "use_yn": "Y"
+    },
+    {
+      "del_yn": "N",
+      "mand_yn": "N",
+      "max_sel": "1",
+      "min_sel": "0",
+      "note": "화이트별색(공정) 택1 선택. 화이트 PROC_000008(L1 화이트인쇄(단면))·화이트없음 센티넬. 별색=공정 정합(C-S5).",
+      "opt_grp_cd": "OPT_000011",
+      "opt_grp_nm": "화이트별색",
+      "sel_typ_cd": "SEL_TYPE.01",
+      "use_yn": "Y"
+    },
+    {
+      "del_yn": "N",
+      "mand_yn": "Y",
+      "max_sel": "1",
+      "min_sel": "1",
+      "note": "커팅(공정) 택1 필수. 반칼 PROC_000054.",
+      "opt_grp_cd": "OPT_000012",
+      "opt_grp_nm": "커팅",
+      "sel_typ_cd": "SEL_TYPE.01",
+      "use_yn": "Y"
+    }
+  ],
+  "option_items": [
+    {
+      "del_yn": "N",
+      "item_seq": "1",
+      "opt_cd": "OPV_000025",
+      "ref_dim_cd": "OPT_REF_DIM.06",
+      "ref_key1": "1",
+      "ref_key2": ""
+    },
+    {
+      "del_yn": "N",
+      "item_seq": "1",
+      "opt_cd": "OPV_000027",
+      "ref_dim_cd": "OPT_REF_DIM.04",
+      "ref_key1": "PROC_000008",
+      "ref_key2": ""
+    },
+    {
+      "del_yn": "N",
+      "item_seq": "1",
+      "opt_cd": "OPV_000028",
+      "ref_dim_cd": "OPT_REF_DIM.04",
+      "ref_key1": "PROC_000054",
+      "ref_key2": ""
+    },
+    {
+      "del_yn": "N",
+      "item_seq": "1",
+      "opt_cd": "OPV_000024",
+      "ref_dim_cd": "OPT_REF_DIM.03",
+      "ref_key1": "MAT_000371",
+      "ref_key2": "USAGE.07"
+    },
+    {
+      "del_yn": "N",
+      "item_seq": "2",
+      "opt_cd": "OPV_000024",
+      "ref_dim_cd": "OPT_REF_DIM.03",
+      "ref_key1": "MAT_000372",
+      "ref_key2": "USAGE.07"
+    }
+  ],
+  "options": [
+    {
+      "del_yn": "N",
+      "dflt_yn": "N",
+      "opt_cd": "OPV-000059",
+      "opt_grp_cd": "OPT_000009",
+      "opt_nm": "투명스티커 (투명후지)"
+    },
+    {
+      "del_yn": "N",
+      "dflt_yn": "Y",
+      "opt_cd": "OPV_000025",
+      "opt_grp_cd": "OPT_000010",
+      "opt_nm": "단면"
+    },
+    {
+      "del_yn": "N",
+      "dflt_yn": "Y",
+      "opt_cd": "OPV_000026",
+      "opt_grp_cd": "OPT_000011",
+      "opt_nm": "화이트없음"
+    },
+    {
+      "del_yn": "N",
+      "dflt_yn": "N",
+      "opt_cd": "OPV_000027",
+      "opt_grp_cd": "OPT_000011",
+      "opt_nm": "화이트인쇄"
+    },
+    {
+      "del_yn": "N",
+      "dflt_yn": "Y",
+      "opt_cd": "OPV_000028",
+      "opt_grp_cd": "OPT_000012",
+      "opt_nm": "반칼(자유형)"
+    },
+    {
+      "del_yn": "N",
+      "dflt_yn": "Y",
+      "opt_cd": "OPV_000024",
+      "opt_grp_cd": "OPT_000009",
+      "opt_nm": "투명스티커 (백색후지)"
+    }
+  ],
+  "paper_rows": 0,
+  "plates": [
+    {
+      "del_yn": "Y",
+      "dflt": "Y",
+      "note": "파일사양",
+      "opt": "",
+      "output_file_typ": "AI (칼선)",
+      "siz_cd": "SIZ_000007"
+    },
+    {
+      "del_yn": "Y",
+      "dflt": "Y",
+      "note": "파일사양",
+      "opt": "",
+      "output_file_typ": "*아이마크",
+      "siz_cd": "SIZ_000050"
+    },
+    {
+      "del_yn": "Y",
+      "dflt": "Y",
+      "note": "파일사양",
+      "opt": "OUTPUT_PAPER_TYPE.03",
+      "output_file_typ": "PDF(W)",
+      "siz_cd": "SIZ_000057"
+    },
+    {
+      "del_yn": "N",
+      "dflt": "Y",
+      "note": "",
+      "opt": "OUTPUT_PAPER_TYPE.02",
+      "output_file_typ": "",
+      "siz_cd": "SIZ_000521"
+    }
+  ],
+  "print_options": [
+    {
+      "back_clr": "인쇄 안 함",
+      "front_clr": "CMYK 4도",
+      "opt_id": "1",
+      "print_opt_cd": "POPT_000001",
+      "print_side": "단면"
+    }
+  ],
+  "processes": [
+    {
+      "del_yn": "Y",
+      "mand": "N",
+      "proc_cd": "PROC_000054",
+      "proc_nm": "반칼",
+      "upr": ""
+    },
+    {
+      "del_yn": "N",
+      "mand": "N",
+      "proc_cd": "PROC_000008",
+      "proc_nm": "화이트인쇄",
+      "upr": "PROC_000007"
+    },
+    {
+      "del_yn": "N",
+      "mand": "N",
+      "proc_cd": "PROC_000122",
+      "proc_nm": "반칼커팅",
+      "upr": "PROC_000121"
+    }
+  ],
+  "product": {
+    "del_yn": "N",
+    "editor_yn": "N",
+    "file_upload_yn": "Y",
+    "max_qty": "10000",
+    "min_qty": "8",
+    "prd_cd": "PRD_000053",
+    "prd_nm": "반칼 자유형 투명스티커",
+    "prd_typ_cd": "PRD_TYPE.01",
+    "qty_incr": "8",
+    "qty_unit_typ_cd": "QTY_UNIT.02",
+    "use_yn": "Y"
+  },
+  "sizes": [
+    {
+      "del_yn": "Y",
+      "dflt_yn": "Y",
+      "mst_del": "Y",
+      "note": "",
+      "siz_cd": "SIZ_000196",
+      "siz_nm": "A6(105x148mm)",
+      "work": "105x148"
+    },
+    {
+      "del_yn": "N",
+      "dflt_yn": "Y",
+      "mst_del": "Y",
+      "note": "",
+      "siz_cd": "SIZ_000170",
+      "siz_nm": "A5(148x210mm)",
+      "work": "148x210"
+    },
+    {
+      "del_yn": "N",
+      "dflt_yn": "Y",
+      "mst_del": "N",
+      "note": "판걸이=8.0 / 전지=미지정 / 적용=반칼스티커",
+      "siz_cd": "SIZ_000057",
+      "siz_nm": "A6 (105X148)",
+      "work": "105x148"
+    },
+    {
+      "del_yn": "N",
+      "dflt_yn": "N",
+      "mst_del": "N",
+      "note": "판걸이=2.0 / 적용=반칼스티커(058~061) / B02 낱장 SIZ_172와 분리(반칼 전용가)",
+      "siz_cd": "SIZ_000520",
+      "siz_nm": "A4(210x297mm) 반칼",
+      "work": "x"
+    },
+    {
+      "del_yn": "Y",
+      "dflt_yn": "Y",
+      "mst_del": "N",
+      "note": "",
+      "siz_cd": "SIZ_000426",
+      "siz_nm": "A5 (148x210)",
+      "work": "148x210"
+    },
+    {
+      "del_yn": "Y",
+      "dflt_yn": "N",
+      "mst_del": "N",
+      "note": "",
+      "siz_cd": "SIZ_000258",
+      "siz_nm": "A4 (210x297mm)",
+      "work": "210x297"
+    }
+  ],
+  "stk_total": 6498,
+  "wiring": {
+    "PRF_STK_FIXED": [
+      {
+        "addtn_yn": "Y",
+        "comp_cd": "COMP_STK_PRINT",
+        "comp_nm": "스티커 완제품가(소재·규격)",
+        "disp_seq": "1",
+        "prc_typ_cd": "PRICE_TYPE.01",
+        "use_dims": "[\"siz_cd\", \"mat_cd\", \"min_qty\"]"
+      }
+    ]
+  }
+}

@@ -4,7 +4,7 @@
 > 정본(SOT) = `03_kb/`. 그래프(`04_graph/`)는 이 파일들에서 빌드된 파생물 — 그래프만의 사실 없음.
 > 스키마 = `../02_ontology/`(v1.0.1) · 집필 컨벤션 = `.claude/skills/okb-ontology-authoring/SKILL.md`.
 >
-> **상태(2026-07-03·확장):** Phase 4 상품 노드 집필 완료 — 디지털인쇄 파일럿 **36상품(E1·PRD_000016~051) + 공유 축 + 공식/구성요소 + 용어·규칙·결정·의도·GAP**.
+> **상태(2026-07-03·확장):** Phase 4 상품 노드 집필 완료 — 디지털인쇄 파일럿 **36상품(E1·PRD_000016~051)** + **스티커 파일럿 16상품(PRD_000052~067)** + 공유 축 + 공식/구성요소 + 용어·규칙·결정·의도·GAP. ★2026-07-03 스티커 공유 축 통합(병렬 L-3 중복 → 단일 소유권·하드 위반 0).
 > 36상품 전부 `priced_by`→공식→`has_component`→구성요소 **가격경로 연결**(038 형압명함만 `derived_from`→gap-038-no-price-path 정직 선언·O5 예외). 공유축 통합(260703)으로
 > 브로큰링크 해소 공유노드 21종(투명/명함박 자재 4·명함 고정가 공식 5·완제품가 구성요소 12) 일괄 mint(025/035/036/037/039 배선).
 > 나머지 needed_shared_nodes(018 자재2·019 PET/화이트공정·박색 8자식 등)는 상품별 GAP으로 정직 지연(rewire 미실행·honest GAP=위반 아님).
@@ -26,7 +26,7 @@
 ## 유형별 노드 파일 (현재 등재)
 
 ### 상품군·분류
-- [axis/categories.md](axis/categories.md) — E2 category 8종(엽서 CAT_000307·명함 CAT_000313·접지카드 CAT_000021·쿠폰상품권 CAT_000062·포토카드 CAT_000310·인쇄포장재 CAT_000327·인쇄홍보물 CAT_000003·엽서카드 CAT_000001).
+- [axis/categories.md](axis/categories.md) — E2 category 13종(디지털 8 + 스티커 5 승격 260703: 스티커 CAT_000002·자유형 CAT_000309·규격 CAT_000037·특수 CAT_000311·스티커팩 CAT_000312).
 - [_glossary.md](_glossary.md) — E13 term(디지털인쇄·귀돌이·별색·판걸이수·원자합산형·완칼·판형). altLabel→alias_of 투영.
 
 ### 차원·자재·공정 축
@@ -39,6 +39,8 @@
 ### 가격
 - [formula/digital-formulas.md](formula/digital-formulas.md) — E9 price_formula 14종(PRF_DGP_A~F 원자합산·명함/포토카드 고정가 +투명포토카드/모양/미니모양/박/투명명함 5종 통합 mint 260703). has_component 배선. ★상품-local 공식(031/040/042/048/030 등 companion) 합 23종.
 - [formula/digital-components.md](formula/digital-components.md) — E10 price_component 35종(+투명세트/모양명함S1S2/미니모양S1S2/박6/투명명함 12종 통합 mint 260703). use_dims 차원 선언(값=evaluate_price). ★companion 포함 합 53종.
+- [formula/sticker-formulas.md](formula/sticker-formulas.md) — E9 스티커 가격공식 4종(PRF_STK_FIXED 완제품가 고정룩업·PRF_GANGPAN_FIXED 합판도무송·PRF_STK_PACK 팩 합가형·PRF_STK_TATTOO 타투 합가형). 16 스티커 단일 소유(consolidation 260703).
+- [formula/sticker-components.md](formula/sticker-components.md) — E10 스티커 가격구성요소 4종(COMP_STK_PRINT·COMP_GANGPAN_PRINT·COMP_STK_PACK·COMP_STK_TATTOO). use_dims 격자(6,498/1,110행류 D-22 접기·값=evaluate_price).
 
 ### KB 전용 레이어
 - [intent/intents.md](intent/intents.md) — 용도 축 INTENT 3종(카페오픈·웨딩·프리미엄).
@@ -97,6 +99,26 @@
 - [product/product-049-wide-folded-leaflet.md](product/product-049-wide-folded-leaflet.md) — 와이드 접지리플렛(PRD_000049·인쇄홍보물). 640×297·양면·자재 5(3절)·공정 7(base+3단/병풍접지+라미+가변)·PRF_DGP_E·CPQ 0행 GAP. 전용=[product/product-049-wide-folded-leaflet-nodes.md](product/product-049-wide-folded-leaflet-nodes.md).
 - [product/product-050-envelope-making.md](product/product-050-envelope-making.md) — 봉투제작(PRD_000050·인쇄홍보물). ★완제품가 매트릭스형 PRF_ENV_MAKING→COMP_ENV_MAKING(봉투종류×소재×수량·60행 격자완전)·봉투옵션→사이즈 환원. 하위=[product/product-050-envelope-making-nodes.md](product/product-050-envelope-making-nodes.md).
 - [product/product-051-suncap.md](product/product-051-suncap.md) — 썬캡(PRD_000051·인쇄홍보물/여행아웃도어·★use_yn=N). 전용 3절 판형(SIZ_000535·fn_best_plate)·완칼 die-cut·PRF_DGP_F(인쇄+용지+완칼). 하위 6(category-CAT_000181·size·plate·material·qty·gap-051-golden).
+
+**스티커 계열 (파일럿 2번째 상품군·완제품가 룩업형)**
+- [product/product-052-sticker-halfcut-freeform.md](product/product-052-sticker-halfcut-freeform.md) — 반칼 자유형 스티커(PRD_000052·스티커·완제품 단일·use_yn=Y). ★완제품가 고정가 룩업(원자합산 아님·PRF_STK_FIXED→COMP_STK_PRINT use_dims=[siz_cd,mat_cd,min_qty]·연당가 직접노드 없음). 점착지 5(유포/아트/무광코팅/유광코팅/미색·MAT_TYPE.11)·단면·반칼커팅 PROC_000122(구 054 이관)·46전지 판형·옵션그룹 3(종이/인쇄/커팅). 하위=[product/product-052-sticker-halfcut-freeform-nodes.md](product/product-052-sticker-halfcut-freeform-nodes.md)(카테고리2·사이즈3·자재5·공정1·판형1·수량1·공식1·구성요소1·옵션그룹3·양면 defect 1(size-SIZ_000170)·GAP 3). ★스티커 첫 상품이라 신규 축(category-CAT_000002/309·formula-PRF_STK_FIXED·component-COMP_STK_PRINT·process-PROC_000122·plate-OUTPUT_PAPER_TYPE_02·size/material 다수)=needed_shared_nodes(16 스티커 승격 후보·공유 파일 미수정). ★연당가: 052 소재는 260702 substantive 연당가 변경 대상 아님(clean·false-defect 방지)·진짜 워크리스트(투명/홀로/크라프트/투명후지)는 063 등 몫(gap-052-liandan-out-of-scope 포인터). ★코팅 CONFLICT(자재 585/586 vs 공정 014/015·Q9)=gap-052-coating-conflict(양면·단정 금지).
+- [product/sticker-pack.md](product/sticker-pack.md) — 스티커팩(PRD_000065·스티커·완제품 단일·use_yn=Y·editor_yn=Y). ★완제품가 **합가형** 고정가 룩업(PRF_STK_PACK→COMP_STK_PACK use_dims=[siz_cd,min_qty]·54장1세트 4,000·소재무관·연당가 직접노드 없음). 단일 사이즈 75x110(SIZ_000068·판걸이16)·자재 2(비코팅 084·미색 242·둘 다 BOM·가격 차원 아님)·단면·46전지 판형(reuse)·**공정/옵션그룹/제약/셋트 0행=순수 인쇄물**. 하위=[product/sticker-pack-nodes.md](product/sticker-pack-nodes.md)(카테고리1(CAT_000312)·사이즈1·공식1·구성요소1·수량1·GAP5). ★재사용(중복 mint 없음): category-CAT_000002·material-MAT_000084/242·printopt-POPT_000001·plate-OUTPUT_PAPER_TYPE_02. ★신규 needed_shared: category-CAT_000312·formula-PRF_STK_PACK·component-COMP_STK_PACK(팩 합가형·052 자유형과 별개). ★연당가: 065 소재(비코팅/미색)=260702 substantive 변경 아님→clean(dual 금지·false-defect 방지·gap-065-liandan-out-of-scope). ★GAP: gap-065-set-composition(팩=세트 여부·sets 0행·Q-ST-E)·gap-065-material-type-label(084 mat_typ .13 vs note .11·§12)·gap-065-pack-qty-band(제품 1~1000 vs 격자 min54)·gap-065-cpq-option-layer(BATCH-6).
+- [product/sticker-halfcut-clear.md](product/sticker-halfcut-clear.md) — 반칼 자유형 투명스티커(PRD_000053·스티커·완제품 단일·use_yn=Y). ★완제품가 고정가 룩업(PRF_STK_FIXED→COMP_STK_PRINT use_dims=[siz_cd,mat_cd,min_qty]·연당가 직접노드 없음). 투명 점착지 2(백색후지 MAT_000371·투명후지 MAT_000372·MAT_TYPE.11)·단면·화이트별색 공정 PROC_000008(선택)·반칼커팅 PROC_000122(구 054 재키잉)·46전지 판형·옵션그룹 4(종이/인쇄/화이트별색/커팅). 하위=[product/sticker-halfcut-clear-nodes.md](product/sticker-halfcut-clear-nodes.md)(사이즈3·자재 identity1·판형1·수량1·옵션그룹4·GAP3+양면 defect 2). ★재사용(중복 mint 없음): category-CAT_000002/309·formula-PRF_STK_FIXED·component-COMP_STK_PRINT·process-PROC_000008(홀로 054)·material-MAT_000372·process-PROC_000122(052)·printopt-POPT_000001. ★★연당가 양면 재적재 워크리스트=matcost-053-white-backing(백색후지 국4절 1300→499·연당가 130000→149500·평량105→50)·matcost-053-clear-backing(투명후지 신규 연당가 222000/국4절 740·라이브 미저장)=defect(§4-D 돈-크리티컬·retail COMP_STK_PRINT은 260702 무변경이라 dual 아님). ★GAP: gap-053-cutting-rekey(옵션참조 삭제 PROC_000054 지목·fn_chk_opt_item_ref)·gap-053-yeondangga-repricing·gap-053-piece-count-storage(조각수 저장처 OM-7).
+- [product/sticker-halfcut-hologram.md](product/sticker-halfcut-hologram.md) — 반칼 자유형 홀로그램스티커(PRD_000054·완제품 단일). PRF_STK_FIXED→COMP_STK_PRINT·홀로 점착지 MAT_000163·단면·반칼 Kiss Cut PROC_000054+화이트 underbase PROC_000008·46전지. ★연당가 양면 defect=matcost-054-hologram(360,000→253,700·국4절 936→846·재적재 워크리스트). GAP 3.
+- [product/sticker-sheet-clear-white.md](product/sticker-sheet-clear-white.md) — 낱장 자유형 투명스티커(PRD_000056·완제품 단일). PRF_STK_FIXED→COMP_STK_PRINT·투명 점착지 MAT_000162/372·완칼 PROC_000053+화이트 PROC_000008·A4/A3/A2/B4/B3·단면. ★연당가 양면 defect 2=material-MAT_000162/372(재적재 워크리스트·systemic gap-056-material-cost-storage/retail-cost-propagation). CPQ 0행.
+- [product/product-055-sticker-sheet-freeform.md](product/product-055-sticker-sheet-freeform.md) — 낱장 자유형 스티커(PRD_000055·완제품·use_yn=Y). PRF_STK_FIXED→COMP_STK_PRINT·유포+무광쿨코팅(PROC_000114) 단면 완칼·A4/A3/A2·CPQ 4그룹. GAP 4(커팅 stale optref·조각수 저장처·자재명 C-ST-10·연당가 원가 저장처). 연당가 dual 없음(055 유포=무변경).
+- [product/product-057-sticker-large-freeform.md](product/product-057-sticker-large-freeform.md) — 대형 자유형 스티커(PRD_000057·완제품·use_yn=Y). PRF_STK_FIXED→COMP_STK_PRINT·유포스티커·완칼(PROC_000053)·판형=파일사양(OUTPUT_PAPER_TYPE.03). 연당가 양면 없음(유포=260702 무변경)·gap-057-material-cost.
+- [product/sticker-spec-circle.md](product/sticker-spec-circle.md) — 반칼원형스티커(PRD_000058·규격스티커·use_yn=Y). PRF_STK_FIXED→COMP_STK_PRINT(6,498행 격자 충전)·형상(원형 25~90mm)=CPQ 커팅 옵션값(GAP-ST-3)·코팅 CONFLICT(585/586). CPQ 3그룹. 연당가 dual 불요(058 소재 무변경). GAP 5.
+- [product/sticker-spec-square.md](product/sticker-spec-square.md) — 반칼정사각스티커(PRD_000059·규격스티커·use_yn=Y). (파일명=sticker-slug·노드ID=product-059-sticker-spec-square: 명명 2규칙은 architect 통일 대기 D-STK-2) PRF_STK_FIXED→COMP_STK_PRINT·점착지 5(153/084/242/155/156). gap-059-coating-conflict·gap-059-spec-shape-cut(형상·커팅공정 명칭 불일치). 연당가 워크리스트 밖(059 무관).
+- [product/sticker-spec-rectangle.md](product/sticker-spec-rectangle.md) — 반칼직사각스티커(PRD_000060·규격스티커·use_yn=Y·editor_yn=Y). PRF_STK_FIXED→COMP_STK_PRINT(10조합×36행 완비)·형상=size(A4반칼 SIZ_000520·A5 SIZ_000170)·코팅자재 155/156 CONFLICT. GAP 6·연당가 dual 없음.
+- [product/sticker-spec-band.md](product/sticker-spec-band.md) — 반칼띠지스티커(PRD_000061·규격형 058~062 family·use_yn=Y). PRF_STK_FIXED→COMP_STK_PRINT·점착지 5·스티커완칼 PROC_000055·46전지. CPQ/제약/셋트 0행. 연당가 dual 없음(gap-061-yeondangga-scope). GAP 6.
+- [product/sticker-spec-fancy.md](product/sticker-spec-fancy.md) — 반칼팬시스티커(PRD_000062·완제품 단일). PRF_STK_FIXED→COMP_STK_PRINT·07-01 재키잉(자식자재·반칼커팅 PROC_000122)·CPQ 부분배선·팬시 실치수 3종(SIZ_000058/059/060). GAP 6.
+- [product/sticker-spec-fancy-clear.md](product/sticker-spec-fancy-clear.md) — 반칼팬시투명스티커(PRD_000063·규격 family·★use_yn=N 미출시). PRF_STK_FIXED→COMP_STK_PRINT·구코드 투명스티커 MAT_000162 직결·단면·스티커완칼 PROC_000055·화이트별색 PROC_000008·46전지·CPQ 0행. ★연당가 재적재 워크리스트=material-MAT_000162 재사용(defect). GAP 3+systemic gap-056-*.
+- [product/sticker-smallqty-freeform.md](product/sticker-smallqty-freeform.md) — 소량자유형스티커(PRD_000064·★use_yn=N 미출시). PRF_STK_FIXED→COMP_STK_PRINT(35/35 격자 완전 충전)·소형 사이즈 7(50x70~94x94)·점착지 5·반칼 PROC_000054·46전지. ★CPQ 0행(손님 구성 불가). GAP 3·연당가 clean.
+- [product/sticker-gangpan-diecut.md](product/sticker-gangpan-diecut.md) — 합판도무송스티커(PRD_000066·완제품·use_yn=Y·파일업로드 전용). ★형상=size 아키타입 정본(37 형상행 siz_nm 흡수). PRF_GANGPAN_FIXED→COMP_GANGPAN_PRINT(PRICE_TYPE.02·1,110행=6소재×185 완전충전)·자재 6(유포153/무광155/유광156=.11·비코팅084/투명데드롱170/은데드롱171=.13)·스티커완칼 도무송 PROC_000055·수량 2층(min1000+bundle EA 5행). 연당가 dual FALSE(교집합 0). GAP 8.
+- [product/sticker-tattoo.md](product/sticker-tattoo.md) — 타투스티커(PRD_000067·완제품·use_yn=Y). ★완제품가 **합가형** 룩업(PRF_STK_TATTOO→COMP_STK_TATTOO·PRICE_TYPE.02·3장 1세트당 합산가)·타투전용지 MAT_000594·단면·★공정 0행(순수 인쇄물)·기타(.03) 판형. category-CAT_000311(특수스티커). '3장세트'=가격 번들이지 t_prd_product_sets 아님. 연당가 clean. GAP 2.
+
+> **★스티커 공유 축 통합(2026-07-03·consolidation):** 병렬 스티커 빌더 16종이 각자 product-local로 중복 mint하던 공유 원자(category/material/process/size/plate/formula/component)를 단일 소유권으로 이관 — [axis/categories.md](axis/categories.md)(CAT_000002/309/037/311/312)·[axis/sizes.md](axis/sizes.md)(스티커 19 사이즈)·[axis/materials.md](axis/materials.md)(스티커 점착지 18)·[axis/processes.md](axis/processes.md)(반칼/완칼/쿨코팅 4)·[axis/plate-sizes.md](axis/plate-sizes.md)(46전지 OUTPUT_PAPER_TYPE.02)·[formula/sticker-formulas.md](formula/sticker-formulas.md)(PRF_STK_FIXED·PRF_GANGPAN_FIXED·PRF_STK_PACK·PRF_STK_TATTOO)·[formula/sticker-components.md](formula/sticker-components.md)(COMP_STK_PRINT·COMP_GANGPAN_PRINT·COMP_STK_PACK·COMP_STK_TATTOO). 결과=L-3 중복 id 0·전 16 스티커 상품이 shared 노드 참조(`_meta/scripts/consolidate_sticker_axes.py`). 연당가 재적재 워크리스트=양면 defect 6(matcost-053-white/clear-backing·matcost-054-hologram·material-MAT_000162/372·size-SIZ_000170 A5)=실무진+인간 승인 대기.
 
 ---
 

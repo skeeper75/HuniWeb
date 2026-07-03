@@ -1,0 +1,6 @@
+# 정본 그래프 산출물 경로 = 04_graph/graph.db (build_graph.py 출력).
+# KB 루트에 생기는 graph.db는 경로 오지정 산물(빈 DB·조용한 0결과 위험·D-STK-5) — 무시/커밋 금지.
+/graph.db
+*.db-journal
+*.db-wal
+*.db-shm

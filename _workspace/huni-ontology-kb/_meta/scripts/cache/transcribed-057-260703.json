@@ -1,0 +1,168 @@
+{
+  "addons": [],
+  "bundle_qty": [],
+  "categories": [
+    {
+      "cat_cd": "CAT_000002",
+      "cat_nm": "스티커",
+      "main_cat_yn": "Y",
+      "upr_cat_cd": ""
+    },
+    {
+      "cat_cd": "CAT_000309",
+      "cat_nm": "자유형스티커",
+      "main_cat_yn": "N",
+      "upr_cat_cd": "CAT_000002"
+    }
+  ],
+  "constraints": [],
+  "formulas": [
+    "PRF_STK_FIXED"
+  ],
+  "frm_master": {
+    "PRF_STK_FIXED": {
+      "frm_cd": "PRF_STK_FIXED",
+      "frm_nm": "스티커 규격/소재/수량별 단가",
+      "note": "스티커 단가. 수량×(출력매수·소재) 표에서 단가 조회.",
+      "reg_dt": "2026-06-06 11:30:40.467045",
+      "upd_dt": "2026-06-13 14:07:23.869094",
+      "use_yn": "Y"
+    }
+  },
+  "grid": [
+    {
+      "mat_cd": "MAT_000153",
+      "min_qty": "1",
+      "note": "대형(완칼) 자유형 스티커/400x600 제작수량 1 이상",
+      "siz_cd": "SIZ_000199",
+      "unit_price": "16000.00"
+    },
+    {
+      "mat_cd": "MAT_000153",
+      "min_qty": "20",
+      "note": "대형(완칼) 자유형 스티커/400x600 제작수량 20 이상",
+      "siz_cd": "SIZ_000199",
+      "unit_price": "15520.00"
+    },
+    {
+      "mat_cd": "MAT_000153",
+      "min_qty": "50",
+      "note": "대형(완칼) 자유형 스티커/400x600 제작수량 50 이상",
+      "siz_cd": "SIZ_000199",
+      "unit_price": "15200.00"
+    },
+    {
+      "mat_cd": "MAT_000153",
+      "min_qty": "100",
+      "note": "대형(완칼) 자유형 스티커/400x600 제작수량 100 이상",
+      "siz_cd": "SIZ_000199",
+      "unit_price": "14400.00"
+    },
+    {
+      "mat_cd": "MAT_000153",
+      "min_qty": "200",
+      "note": "대형(완칼) 자유형 스티커/400x600 제작수량 200 이상",
+      "siz_cd": "SIZ_000199",
+      "unit_price": "13600.00"
+    },
+    {
+      "mat_cd": "MAT_000153",
+      "min_qty": "300",
+      "note": "대형(완칼) 자유형 스티커/400x600 제작수량 300 이상",
+      "siz_cd": "SIZ_000199",
+      "unit_price": "12800.00"
+    }
+  ],
+  "grid_variants": {
+    "MAT_000153": 6,
+    "MAT_000584": 6,
+    "MAT_000593": 6,
+    "MAT_000611": 6
+  },
+  "materials": [
+    {
+      "dflt_yn": "Y",
+      "height": "470.00",
+      "mat_cd": "MAT_000153",
+      "mat_nm": "유포스티커",
+      "mat_typ_cd": "MAT_TYPE.11",
+      "usage_cd": "USAGE.07",
+      "weight": "80.00",
+      "width": "330.00"
+    }
+  ],
+  "meta": {
+    "captured_at": "2026-07-03",
+    "generated_by": "transcribe_product_057.py",
+    "prd_cd": "PRD_000057",
+    "snapshot": "live-snapshot/latest (snap_20260702_1119)"
+  },
+  "option_groups": [],
+  "plates": [
+    {
+      "dflt_plt_yn": "Y",
+      "note": "파일사양",
+      "output_file_typ": "PDF",
+      "output_paper_typ_cd": "OUTPUT_PAPER_TYPE.03",
+      "siz_cd": "SIZ_000199"
+    }
+  ],
+  "print_options": [
+    {
+      "back_clr": "인쇄 안 함",
+      "front_clr": "CMYK 4도",
+      "opt_id": "1",
+      "print_opt_cd": "POPT_000001",
+      "print_side": "단면"
+    }
+  ],
+  "processes": [
+    {
+      "mand_proc_yn": "N",
+      "prcs_dtl_opt": "{\"inputs\": [{\"key\": \"모양\", \"type\": \"string\", \"required\": false}]}",
+      "proc_cd": "PROC_000053",
+      "proc_nm": "완칼"
+    }
+  ],
+  "product": {
+    "del_yn": "N",
+    "editor_yn": "N",
+    "file_upload_yn": "Y",
+    "max_qty": "10000",
+    "min_qty": "1",
+    "prd_cd": "PRD_000057",
+    "prd_nm": "대형 자유형 스티커",
+    "prd_typ_cd": "PRD_TYPE.01",
+    "qty_incr": "1",
+    "qty_unit_typ_cd": "QTY_UNIT.02",
+    "use_yn": "Y"
+  },
+  "sets_member": [],
+  "sets_parent": [],
+  "size_dims": {
+    "SIZ_000199": {
+      "cut": "400x600",
+      "impos_yn": "N",
+      "note": "",
+      "siz_nm": "400x600",
+      "tags": "",
+      "work": "400x600"
+    }
+  },
+  "sizes_linked": [
+    "SIZ_000199"
+  ],
+  "wiring": {
+    "PRF_STK_FIXED": [
+      {
+        "addtn_yn": "Y",
+        "comp_cd": "COMP_STK_PRINT",
+        "comp_nm": "스티커 완제품가(소재·규격)",
+        "comp_typ_cd": "PRC_COMPONENT_TYPE.06",
+        "disp_seq": "1",
+        "prc_typ_cd": "PRICE_TYPE.01",
+        "use_dims": "[\"siz_cd\", \"mat_cd\", \"min_qty\"]"
+      }
+    ]
+  }
+}

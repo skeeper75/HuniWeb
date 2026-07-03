@@ -1,0 +1,171 @@
+{
+  "addons": [],
+  "bundle_qty": [],
+  "categories": [
+    {
+      "cat_cd": "CAT_000002",
+      "cat_nm": "스티커",
+      "main_cat_yn": "Y",
+      "upr_cat_cd": "(root)"
+    },
+    {
+      "cat_cd": "CAT_000309",
+      "cat_nm": "자유형스티커",
+      "main_cat_yn": "N",
+      "upr_cat_cd": "CAT_000002"
+    }
+  ],
+  "constraints": [],
+  "formulas": [
+    {
+      "frm_cd": "PRF_STK_FIXED",
+      "frm_nm": "스티커 규격/소재/수량별 단가",
+      "note": "스티커 단가. 수량×(출력매수·소재) 표에서 단가 조회.",
+      "use_yn": "Y"
+    }
+  ],
+  "material_children": [
+    {
+      "mat_cd": "MAT_000590",
+      "mat_nm": "홀로그램 스티커 50g",
+      "reg_dt": "2026-06-30 19:06:42.179119",
+      "weight": ""
+    }
+  ],
+  "materials": [
+    {
+      "dflt_yn": "Y",
+      "mat_cd": "MAT_000163",
+      "mat_nm": "홀로그램스티커",
+      "mat_typ_cd": "MAT_TYPE.11",
+      "usage_cd": "USAGE.07",
+      "weight": "50.00"
+    }
+  ],
+  "meta": {
+    "captured_at": "2026-07-03",
+    "diff_source": "huni-dbmap/26_change-tracking-260702/price-diff-260527-260702.csv",
+    "generated_by": "transcribe_product_054.py",
+    "prd_cd": "PRD_000054",
+    "snapshot": "live-snapshot/latest (snap_20260702_1119)"
+  },
+  "option_groups": [],
+  "plates": [
+    {
+      "dflt_plt_yn": "Y",
+      "note": "",
+      "output_file_typ": "",
+      "output_paper_typ_cd": "OUTPUT_PAPER_TYPE.02",
+      "siz_cd": "SIZ_000521"
+    }
+  ],
+  "price_grid": {
+    "coat_side_cnt_values": [
+      "(공백)"
+    ],
+    "per_siz": {
+      "SIZ_000059": 36,
+      "SIZ_000060": 36,
+      "SIZ_000170": 36,
+      "SIZ_000518": 36,
+      "SIZ_000519": 36,
+      "SIZ_000520": 36
+    },
+    "total_rows": 216
+  },
+  "print_options": [
+    {
+      "back_clr": "인쇄 안 함",
+      "front_clr": "CMYK 4도",
+      "print_opt_cd": "POPT_000001",
+      "print_side": "단면"
+    }
+  ],
+  "processes": [
+    {
+      "mand_proc_yn": "N",
+      "note": "Kiss Cut, 종이만 (스티커)",
+      "proc_cd": "PROC_000054",
+      "proc_nm": "반칼",
+      "upr_proc_cd": ""
+    },
+    {
+      "mand_proc_yn": "N",
+      "note": "",
+      "proc_cd": "PROC_000008",
+      "proc_nm": "화이트인쇄",
+      "upr_proc_cd": "PROC_000007"
+    }
+  ],
+  "product": {
+    "del_yn": "N",
+    "editor_yn": "N",
+    "file_upload_yn": "Y",
+    "max_qty": "10000",
+    "min_qty": "8",
+    "prd_cd": "PRD_000054",
+    "prd_nm": "반칼 자유형 홀로그램스티커",
+    "prd_typ_cd": "PRD_TYPE.01",
+    "qty_incr": "8",
+    "qty_unit_typ_cd": "QTY_UNIT.02",
+    "use_yn": "Y"
+  },
+  "size_dims": {
+    "SIZ_000170": {
+      "cut": "148x210",
+      "master_del_yn": "Y",
+      "note": "",
+      "siz_nm": "A5(148x210mm)",
+      "tags": "",
+      "work": "148x210"
+    },
+    "SIZ_000520": {
+      "cut": "?x?",
+      "master_del_yn": "N",
+      "note": "판걸이=2.0 / 적용=반칼스티커(058~061) / B02 낱장 SIZ_172와 분리(반칼 전용가)",
+      "siz_nm": "A4(210x297mm) 반칼",
+      "tags": "",
+      "work": "?x?"
+    },
+    "SIZ_000521": {
+      "cut": "320x460",
+      "master_del_yn": "N",
+      "note": "전지(46계열)·반칼 스티커 표준전지 / 출처: 상품마스터260610·출력소재IMPORT",
+      "siz_nm": "330x470",
+      "tags": "[\"46전지\"]",
+      "work": "330x470"
+    }
+  },
+  "wiring": {
+    "PRF_STK_FIXED": [
+      {
+        "addtn_yn": "Y",
+        "comp_cd": "COMP_STK_PRINT",
+        "comp_nm": "스티커 완제품가(소재·규격)",
+        "disp_seq": "1",
+        "prc_typ_cd": "PRICE_TYPE.01",
+        "use_dims": "[\"siz_cd\", \"mat_cd\", \"min_qty\"]"
+      }
+    ]
+  },
+  "yeondangga_diff": [
+    {
+      "after": "홀로그램50g / 1박스당 300매",
+      "before": "홀로그램50g / 1박스당 500매",
+      "cell": "F",
+      "column": "구매정보"
+    },
+    {
+      "after": "253700",
+      "before": "360000",
+      "cell": "H",
+      "column": "연당가"
+    },
+    {
+      "after": "846",
+      "before": "936",
+      "cell": "I",
+      "column": "가격 (국4절)"
+    }
+  ]
+}

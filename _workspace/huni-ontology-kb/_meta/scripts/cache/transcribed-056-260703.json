@@ -1,0 +1,130 @@
+{
+  "formula": [
+    {
+      "frm_cd": "PRF_STK_FIXED",
+      "note": ""
+    }
+  ],
+  "formula_components": [
+    {
+      "addtn": "Y",
+      "comp_cd": "COMP_STK_PRINT",
+      "disp_seq": "1",
+      "frm_cd": "PRF_STK_FIXED"
+    }
+  ],
+  "materials": [
+    {
+      "mat_cd": "MAT_000162",
+      "mat_nm": "투명스티커",
+      "mat_typ_cd": "MAT_TYPE.11",
+      "spec": "330x480",
+      "upr_mat_cd": "",
+      "usage": "USAGE.07",
+      "weight": "105"
+    }
+  ],
+  "meta": {
+    "captured_at": "2026-07-03",
+    "generated_by": "transcribe_product_056.py",
+    "snapshot": "live-snapshot/latest (snap_20260702_1119)"
+  },
+  "plate": [
+    {
+      "dflt_plt": "Y",
+      "item_siz_cd": "",
+      "output_paper_typ_cd": "OUTPUT_PAPER_TYPE.03",
+      "siz_cd": "SIZ_000050"
+    },
+    {
+      "dflt_plt": "Y",
+      "item_siz_cd": "",
+      "output_paper_typ_cd": "OUTPUT_PAPER_TYPE.03",
+      "siz_cd": "SIZ_000052"
+    },
+    {
+      "dflt_plt": "Y",
+      "item_siz_cd": "",
+      "output_paper_typ_cd": "OUTPUT_PAPER_TYPE.03",
+      "siz_cd": "SIZ_000198"
+    }
+  ],
+  "print_options": [
+    {
+      "back": "CLR_000001(인쇄 안 함)",
+      "front": "CLR_000005(CMYK 4도)",
+      "opt_id": "1",
+      "print_opt_cd": "POPT_000001",
+      "print_side": "단면"
+    }
+  ],
+  "processes": [
+    {
+      "disp": "1",
+      "mand": "N",
+      "proc_cd": "PROC_000053",
+      "proc_nm": "완칼",
+      "upr_proc_cd": ""
+    },
+    {
+      "disp": "2",
+      "mand": "N",
+      "proc_cd": "PROC_000008",
+      "proc_nm": "화이트인쇄",
+      "upr_proc_cd": "PROC_000007"
+    }
+  ],
+  "qty": {
+    "del_yn": "N",
+    "editor_yn": "N",
+    "file_upload_yn": "Y",
+    "max_qty": "10000",
+    "min_qty": "1",
+    "prd_typ_cd": "PRD_TYPE.01",
+    "qty_incr": "1",
+    "unit": "QTY_UNIT.02",
+    "use_yn": "Y"
+  },
+  "sizes": [
+    {
+      "cut": "210x297",
+      "dflt": "Y",
+      "disp": "1",
+      "siz_cd": "SIZ_000172",
+      "siz_nm": "A4(210x297mm)",
+      "work": "210x297"
+    },
+    {
+      "cut": "297x420",
+      "dflt": "Y",
+      "disp": "1",
+      "siz_cd": "SIZ_000174",
+      "siz_nm": "A3(297x420mm)",
+      "work": "297x420"
+    },
+    {
+      "cut": "420x594",
+      "dflt": "Y",
+      "disp": "1",
+      "siz_cd": "SIZ_000197",
+      "siz_nm": "A2(420x594mm)",
+      "work": "420x594"
+    },
+    {
+      "cut": "257x364",
+      "dflt": "N",
+      "disp": "2",
+      "siz_cd": "SIZ_000515",
+      "siz_nm": "B4 (257X364)",
+      "work": "?x?"
+    },
+    {
+      "cut": "364x515",
+      "dflt": "N",
+      "disp": "3",
+      "siz_cd": "SIZ_000514",
+      "siz_nm": "B3 (364X515)",
+      "work": "?x?"
+    }
+  ]
+}

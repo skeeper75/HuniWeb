@@ -71,10 +71,18 @@
 {"dst": "TERM_plate", "note": "투영 라벨", "origin": "derived", "qualifier": null, "rel": "alias_of", "source_node": "TERM_plate", "src": "aliaslabel:출력판형"}
 {"dst": "TERM_pansu", "note": "투영 라벨", "origin": "derived", "qualifier": null, "rel": "alias_of", "source_node": "TERM_pansu", "src": "aliaslabel:판수"}
 {"dst": "RULE_pansu_db_function", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "category-CAT_000058", "src": "category-CAT_000058"}
+{"dst": "category-CAT_000002", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "category-CAT_000312", "src": "category-CAT_000312"}
+{"dst": "sticker-pack", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "category-CAT_000312", "src": "category-CAT_000312"}
 {"dst": "RULE_price_value_boundary", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "component-COMP_NAMECARD_PEARL_S2", "src": "component-COMP_NAMECARD_PEARL_S2"}
+{"dst": "RULE_price_value_boundary", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "component-COMP_STK_PACK", "src": "component-COMP_STK_PACK"}
+{"dst": "formula-PRF_STK_PACK", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "component-COMP_STK_PACK", "src": "component-COMP_STK_PACK"}
+{"dst": "RULE_price_value_boundary", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "component-COMP_STK_PRINT", "src": "component-COMP_STK_PRINT"}
+{"dst": "RULE_price_value_boundary", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "component-COMP_STK_TATTOO", "src": "component-COMP_STK_TATTOO"}
 {"dst": "optgroup-016-crease", "note": "오시", "origin": "fk", "qualifier": null, "rel": "constrains", "source_node": "constraint-016-demo-exc", "src": "constraint-016-demo-exc"}
 {"dst": "optgroup-016-perf", "note": "미싱", "origin": "fk", "qualifier": null, "rel": "constrains", "source_node": "constraint-016-demo-exc", "src": "constraint-016-demo-exc"}
 {"dst": "optgroup-016-vartext", "note": "양면(POPT_000002)일 때 가변텍스트 노출", "origin": "fk", "qualifier": null, "rel": "constrains", "source_node": "constraint-016-demo-vis", "src": "constraint-016-demo-vis"}
+{"dst": "sticker-spec-circle", "note": "A5×특정 원형커팅 조합 금지(NOT and)·단 참조 사이즈가 stale", "origin": "fk", "qualifier": null, "rel": "constrains", "source_node": "constraint-058-a5-cutting", "src": "constraint-058-a5-cutting"}
+{"dst": "gap-058-constraint-stale-size", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "constraint-058-a5-cutting", "src": "constraint-058-a5-cutting"}
 {"dst": "component-COMP_COAT_GLOSSY", "note": null, "origin": "fk", "qualifier": null, "rel": "has_component", "source_node": "formula-PRF_DGP_A", "src": "formula-PRF_DGP_A"}
 {"dst": "component-COMP_COAT_MATTE", "note": null, "origin": "fk", "qualifier": null, "rel": "has_component", "source_node": "formula-PRF_DGP_A", "src": "formula-PRF_DGP_A"}
 {"dst": "component-COMP_PAPER", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 2}, "rel": "has_component", "source_node": "formula-PRF_DGP_A", "src": "formula-PRF_DGP_A"}
@@ -138,6 +146,7 @@
 {"dst": "RULE_price_value_boundary", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "formula-PRF_ENV_MAKING", "src": "formula-PRF_ENV_MAKING"}
 {"dst": "component-COMP_FOLD_CARD_2H", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 1}, "rel": "has_component", "source_node": "formula-PRF_FOLD_SUM", "src": "formula-PRF_FOLD_SUM"}
 {"dst": "RULE_price_value_boundary", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "formula-PRF_FOLD_SUM", "src": "formula-PRF_FOLD_SUM"}
+{"dst": "component-COMP_GANGPAN_PRINT", "note": "완제품가 단일 구성요소(disp_seq 1·addtn Y)", "origin": "fk", "qualifier": null, "rel": "has_component", "source_node": "formula-PRF_GANGPAN_FIXED", "src": "formula-PRF_GANGPAN_FIXED"}
 {"dst": "component-COMP_NAMECARD_CLEAR_S1", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 1}, "rel": "has_component", "source_node": "formula-PRF_NAMECARD_CLEAR", "src": "formula-PRF_NAMECARD_CLEAR"}
 {"dst": "component-COMP_NAMECARD_COAT_S1", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 1}, "rel": "has_component", "source_node": "formula-PRF_NAMECARD_COAT", "src": "formula-PRF_NAMECARD_COAT"}
 {"dst": "component-COMP_NAMECARD_COAT_S2", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 2}, "rel": "has_component", "source_node": "formula-PRF_NAMECARD_COAT", "src": "formula-PRF_NAMECARD_COAT"}
@@ -184,6 +193,10 @@
 {"dst": "component-COMP_PHOTOCARD_CLEAR_SET", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 1}, "rel": "has_component", "source_node": "formula-PRF_PHOTOCARD_CLEAR", "src": "formula-PRF_PHOTOCARD_CLEAR"}
 {"dst": "component-COMP_PHOTOCARD_BULK", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 2}, "rel": "has_component", "source_node": "formula-PRF_PHOTOCARD_NORMAL", "src": "formula-PRF_PHOTOCARD_NORMAL"}
 {"dst": "component-COMP_PHOTOCARD_SET", "note": null, "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 1}, "rel": "has_component", "source_node": "formula-PRF_PHOTOCARD_NORMAL", "src": "formula-PRF_PHOTOCARD_NORMAL"}
+{"dst": "component-COMP_STK_PRINT", "note": "완제품가 격자(disp_seq 1·addtn Y)", "origin": "fk", "qualifier": null, "rel": "has_component", "source_node": "formula-PRF_STK_FIXED", "src": "formula-PRF_STK_FIXED"}
+{"dst": "component-COMP_STK_PACK", "note": "팩 완제품가(합가형·유일 구성요소)", "origin": "fk", "qualifier": {"addtn": "Y", "disp_seq": 1}, "rel": "has_component", "source_node": "formula-PRF_STK_PACK", "src": "formula-PRF_STK_PACK"}
+{"dst": "sticker-pack", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "formula-PRF_STK_PACK", "src": "formula-PRF_STK_PACK"}
+{"dst": "component-COMP_STK_TATTOO", "note": "완제품가 격자(disp_seq 1·addtn Y)", "origin": "fk", "qualifier": null, "rel": "has_component", "source_node": "formula-PRF_STK_TATTOO", "src": "formula-PRF_STK_TATTOO"}
 {"dst": "process-PROC_000029", "note": "오시(줄수 파라미터 대상 공정)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-018-postpress-param", "src": "gap-018-postpress-param"}
 {"dst": "component-COMP_PRINT_SPOT_WHITE_S1", "note": "화이트인쇄 가격측 통합별색 구성요소(같은 019 공정풀)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-019-white-process", "src": "gap-019-white-process"}
 {"dst": "gap-016-addon-target", "note": "동일 봉투 addon 대상 노드 부재(016과 공유 — 봉투 상품군 집필 시 일괄 해소)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-020-addon-target", "src": "gap-020-addon-target"}
@@ -231,6 +244,97 @@
 {"dst": "formula-PRF_FOLD_SUM", "note": "불완전 바인딩 대상 공식", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-048-price-path-incomplete", "src": "gap-048-price-path-incomplete"}
 {"dst": "size-SIZ_000195", "note": "완칼 커팅·판걸이수는 사이즈/판형의 파생", "origin": "derived", "qualifier": null, "rel": "derived_from", "source_node": "gap-051-golden", "src": "gap-051-golden"}
 {"dst": "gap-046-diecut-golden", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-051-golden", "src": "gap-051-golden"}
+{"dst": "material-MAT_000585", "note": "코팅 자재측(무광)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-052-coating-conflict", "src": "gap-052-coating-conflict"}
+{"dst": "material-MAT_000586", "note": "코팅 자재측(유광)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-052-coating-conflict", "src": "gap-052-coating-conflict"}
+{"dst": "process-PROC_000014", "note": "코팅 공정측(유광라미)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-052-coating-conflict", "src": "gap-052-coating-conflict"}
+{"dst": "process-PROC_000015", "note": "코팅 공정측(무광라미)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-052-coating-conflict", "src": "gap-052-coating-conflict"}
+{"dst": "optgroup-052-cut", "note": "이 그룹의 매달린 옵션참조", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-052-cut-optref-dangling", "src": "gap-052-cut-optref-dangling"}
+{"dst": "process-PROC_000122", "note": "재키잉 대상(활성 반칼커팅)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-052-cut-optref-dangling", "src": "gap-052-cut-optref-dangling"}
+{"dst": "component-COMP_STK_PRINT", "note": "052 완제품가=260702 무변경(retail dual 금지)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-052-liandan-out-of-scope", "src": "gap-052-liandan-out-of-scope"}
+{"dst": "process-PROC_000122", "note": "옵션참조가 가리켜야 할 활성 커팅 공정", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-053-cutting-rekey", "src": "gap-053-cutting-rekey"}
+{"dst": "component-COMP_STK_PRINT", "note": "전파 대상이 될 완제품가 격자(현재 260702 무변경=dual 아님)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-053-yeondangga-repricing", "src": "gap-053-yeondangga-repricing"}
+{"dst": "matcost-053-clear-backing", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-053-yeondangga-repricing", "src": "gap-053-yeondangga-repricing"}
+{"dst": "matcost-053-white-backing", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-053-yeondangga-repricing", "src": "gap-053-yeondangga-repricing"}
+{"dst": "process-PROC_000054", "note": "이 공정의 조각수 param 저장처가 부재", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-054-piece-count-storage", "src": "gap-054-piece-count-storage"}
+{"dst": "process-PROC_000008", "note": "이 공정의 가격 반영이 미해결", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-054-white-underbase-price", "src": "gap-054-white-underbase-price"}
+{"dst": "matcost-054-hologram", "note": "연당가 양면 노드가 이 미해결의 대상", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-054-yeondangga-repricing", "src": "gap-054-yeondangga-repricing"}
+{"dst": "process-PROC_000123", "note": "정답 후보=활성 완칼커팅 PROC_000123", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-055-cutting-optref-stale", "src": "gap-055-cutting-optref-stale"}
+{"dst": "material-MAT_000593", "note": "명칭 컨펌 대상 자재", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-055-material-name-cst10", "src": "gap-055-material-name-cst10"}
+{"dst": "sticker-sheet-clear-white", "note": "이 상품 CPQ 옵션 레이어 미적재", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-056-cpq-option-layer", "src": "gap-056-cpq-option-layer"}
+{"dst": "material-MAT_000162", "note": "이 소재의 연당가 저장처 부재", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-056-material-cost-storage", "src": "gap-056-material-cost-storage"}
+{"dst": "material-MAT_000372", "note": "신규 투명후지 소재도 동일", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-056-material-cost-storage", "src": "gap-056-material-cost-storage"}
+{"dst": "component-COMP_STK_PRINT", "note": "완제품가 격자 전파 여부", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-056-retail-cost-propagation", "src": "gap-056-retail-cost-propagation"}
+{"dst": "material-MAT_000162", "note": "원가 급변 원천", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-056-retail-cost-propagation", "src": "gap-056-retail-cost-propagation"}
+{"dst": "material-MAT_000153", "note": "연당가(원가)는 소재(유포스티커)의 파생 속성 — 저장처 부재로 노드화 못함. material 노드는 공유 축(needed_shared)에서 단일 선언", "origin": "derived", "qualifier": null, "rel": "derived_from", "source_node": "gap-057-material-cost", "src": "gap-057-material-cost"}
+{"dst": "material-MAT_000585", "note": "코팅 CONFLICT 당사 자재", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-058-coating-conflict", "src": "gap-058-coating-conflict"}
+{"dst": "material-MAT_000586", "note": "코팅 CONFLICT 당사 자재", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-058-coating-conflict", "src": "gap-058-coating-conflict"}
+{"dst": "constraint-058-a5-cutting", "note": "stale 사이즈 참조 제약", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-058-constraint-stale-size", "src": "gap-058-constraint-stale-size"}
+{"dst": "formula-PRF_STK_FIXED", "note": "이 공식의 완제품가 골든 미검증", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-058-price-golden", "src": "gap-058-price-golden"}
+{"dst": "gap-023-diecut-golden", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-058-price-golden", "src": "gap-058-price-golden"}
+{"dst": "optgroup-058-cutting", "note": "형상이 저장된 커팅 옵션그룹", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-058-shape-storage", "src": "gap-058-shape-storage"}
+{"dst": "component-COMP_STK_PRINT", "note": "058 가격은 완제품가 격자로 성립(연당가 원가 미참조)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-058-yeondangga", "src": "gap-058-yeondangga"}
+{"dst": "material-MAT_000164", "note": "크라프트 연당가 재적재 owner(라이브 상품 미사용→axis 소유·허위 위임 교정 D-STK-01)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-058-yeondangga", "src": "gap-058-yeondangga"}
+{"dst": "material-MAT_000155", "note": "이 자재가 CONFLICT 당사자(형제 소유 공유노드 참조)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-059-coating-conflict", "src": "gap-059-coating-conflict"}
+{"dst": "material-MAT_000156", "note": "이 자재가 CONFLICT 당사자(형제 소유 공유노드 참조)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-059-coating-conflict", "src": "gap-059-coating-conflict"}
+{"dst": "process-PROC_000055", "note": "명칭 불일치 당사 공정(형제 소유 공유노드 참조)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-059-spec-shape-cut", "src": "gap-059-spec-shape-cut"}
+{"dst": "size-SIZ_000520", "note": "형상 미저장 사이즈(A4 시트)·형제 소유 공유노드 참조", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-059-spec-shape-cut", "src": "gap-059-spec-shape-cut"}
+{"dst": "size-SIZ_000170", "note": "마스터 삭제·링크 활성 불일치 대상", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-061-a5-size-master-deleted", "src": "gap-061-a5-size-master-deleted"}
+{"dst": "material-MAT_000155", "note": "코팅=자재 뷰(현재 라이브)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-061-coating-conflict", "src": "gap-061-coating-conflict"}
+{"dst": "material-MAT_000156", "note": "코팅=자재 뷰(현재 라이브)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-061-coating-conflict", "src": "gap-061-coating-conflict"}
+{"dst": "process-PROC_000013", "note": "코팅=공정 뷰(Q9 권위·공유 축)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-061-coating-conflict", "src": "gap-061-coating-conflict"}
+{"dst": "component-COMP_STK_PRINT", "note": "완제품가 절대값 골든 미검증", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-061-golden", "src": "gap-061-golden"}
+{"dst": "process-PROC_000055", "note": "라이브 등록 공정(스티커완칼)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-061-halfcut-process", "src": "gap-061-halfcut-process"}
+{"dst": "material-MAT_000084", "note": "자재유형 note-값 불일치 대상", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-061-mat084-typ", "src": "gap-061-mat084-typ"}
+{"dst": "material-MAT_000585", "note": "코팅 CONFLICT 당사 자재(형제 소유 공유노드)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-062-coating-conflict", "src": "gap-062-coating-conflict"}
+{"dst": "material-MAT_000586", "note": "코팅 CONFLICT 당사 자재(형제 소유 공유노드)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-062-coating-conflict", "src": "gap-062-coating-conflict"}
+{"dst": "optgroup-062-paper", "note": "ref_dim 미배선 옵션그룹", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-062-paper-unwired", "src": "gap-062-paper-unwired"}
+{"dst": "formula-PRF_STK_FIXED", "note": "이 공식의 완제품가 골든 미검증", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-062-price-golden", "src": "gap-062-price-golden"}
+{"dst": "gap-058-price-golden", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-062-price-golden", "src": "gap-062-price-golden"}
+{"dst": "process-PROC_000122", "note": "형상을 실현하는 반칼커팅 공정(param 없음)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-062-shape-storage", "src": "gap-062-shape-storage"}
+{"dst": "component-COMP_STK_PRINT", "note": "완제품가 격자에 이 사이즈 단가행 부재", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-062-siz058-price-missing", "src": "gap-062-siz058-price-missing"}
+{"dst": "size-SIZ_000058", "note": "격자 미충전 사이즈", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-062-siz058-price-missing", "src": "gap-062-siz058-price-missing"}
+{"dst": "component-COMP_STK_PRINT", "note": "062 가격은 완제품가 격자로 성립(연당가 원가 미참조)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-062-yeondangga", "src": "gap-062-yeondangga"}
+{"dst": "material-MAT_000164", "note": "크라프트 연당가 재적재 owner(라이브 상품 미사용→axis 소유·허위 위임 교정 D-STK-01)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-062-yeondangga", "src": "gap-062-yeondangga"}
+{"dst": "sticker-spec-fancy-clear", "note": "CPQ 옵션 레이어 미적재 당사 상품", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-063-cpq-option-layer", "src": "gap-063-cpq-option-layer"}
+{"dst": "process-PROC_000055", "note": "명칭 관찰 대상 커팅 공정(스티커완칼)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-063-halfcut-process", "src": "gap-063-halfcut-process"}
+{"dst": "material-MAT_000162", "note": "미마이그레이션 구코드 자재(연당가 dual 겸)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-063-material-unmigrated", "src": "gap-063-material-unmigrated"}
+{"dst": "material-MAT_000155", "note": "코팅 자재측(무광·064는 material-only)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-064-coating-conflict", "src": "gap-064-coating-conflict"}
+{"dst": "material-MAT_000156", "note": "코팅 자재측(유광·064는 material-only)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-064-coating-conflict", "src": "gap-064-coating-conflict"}
+{"dst": "material-MAT_000153", "note": "옵션화 대상(종이 그룹 후보)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-064-cpq-missing", "src": "gap-064-cpq-missing"}
+{"dst": "process-PROC_000054", "note": "커팅 옵션참조 후보(064 활성 → 정합 가능)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-064-cpq-missing", "src": "gap-064-cpq-missing"}
+{"dst": "component-COMP_STK_PRINT", "note": "064 완제품가=260702 무변경(retail dual 금지)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-064-liandan-out-of-scope", "src": "gap-064-liandan-out-of-scope"}
+{"dst": "sticker-pack", "note": "CPQ 옵션 0행 상품", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-065-cpq-option-layer", "src": "gap-065-cpq-option-layer"}
+{"dst": "component-COMP_STK_PACK", "note": "260702 무변경 완제품가(연당가 급변 무관)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-065-liandan-out-of-scope", "src": "gap-065-liandan-out-of-scope"}
+{"dst": "matcost-053-white-backing", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-065-liandan-out-of-scope", "src": "gap-065-liandan-out-of-scope"}
+{"dst": "material-MAT_000084", "note": "라벨 nuance 대상 자재(공유 노드·재정의 금지)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-065-material-type-label", "src": "gap-065-material-type-label"}
+{"dst": "component-COMP_STK_PACK", "note": "54장1세트 밴드 격자", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-065-pack-qty-band", "src": "gap-065-pack-qty-band"}
+{"dst": "sticker-pack", "note": "세트 여부가 미결인 상품", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-065-set-composition", "src": "gap-065-set-composition"}
+{"dst": "material-MAT_000155", "note": "코팅 CONFLICT 당사 자재", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-066-coating-conflict", "src": "gap-066-coating-conflict"}
+{"dst": "material-MAT_000156", "note": "코팅 CONFLICT 당사 자재", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-066-coating-conflict", "src": "gap-066-coating-conflict"}
+{"dst": "material-MAT_000084", "note": "note-vs-value 시점 차이 자재", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-066-mattype-note-skew", "src": "gap-066-mattype-note-skew"}
+{"dst": "RULE_plate_paper_only", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-066-plate-otyp", "src": "gap-066-plate-otyp"}
+{"dst": "plate-066-SIZ_000203", "note": "output_paper_typ 공란 대표 판형", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-066-plate-otyp", "src": "gap-066-plate-otyp"}
+{"dst": "formula-PRF_GANGPAN_FIXED", "note": "이 공식의 완제품가 골든 미검증", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-066-price-golden", "src": "gap-066-price-golden"}
+{"dst": "material-MAT_000153", "note": "066이 직접 참조하는 parent 코드", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-066-rekeying-skew", "src": "gap-066-rekeying-skew"}
+{"dst": "size-SIZ_000212", "note": "066 형상=size 정본(058은 옵션값)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-066-shape-model-family", "src": "gap-066-shape-model-family"}
+{"dst": "component-COMP_GANGPAN_PRINT", "note": "066 가격은 완제품가 격자로 성립(연당가 원가 미참조)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-066-yeondangga", "src": "gap-066-yeondangga"}
+{"dst": "material-MAT_000164", "note": "크라프트 연당가 재적재 owner(라이브 상품 미사용→axis 소유·허위 위임 교정 D-STK-01)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-066-yeondangga", "src": "gap-066-yeondangga"}
+{"dst": "component-COMP_STK_TATTOO", "note": "067 완제품가=260702 무변경(retail dual 금지)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-067-liandan-out-of-scope", "src": "gap-067-liandan-out-of-scope"}
+{"dst": "material-MAT_000594", "note": "자재유형 미확정 대상(활성)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "gap-067-mattype-transfer-paper", "src": "gap-067-mattype-transfer-paper"}
+{"dst": "gap-053-cutting-rekey", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "matcost-053-clear-backing", "src": "matcost-053-clear-backing"}
+{"dst": "gap-053-yeondangga-repricing", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "matcost-053-clear-backing", "src": "matcost-053-clear-backing"}
+{"dst": "material-MAT_000372", "note": "이 원가 defect가 가리키는 소재 identity 노드", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "matcost-053-clear-backing", "src": "matcost-053-clear-backing"}
+{"dst": "process-PROC_000008", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "matcost-053-clear-backing", "src": "matcost-053-clear-backing"}
+{"dst": "sticker-halfcut-clear", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "matcost-053-clear-backing", "src": "matcost-053-clear-backing"}
+{"dst": "component-COMP_STK_PRINT", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "matcost-053-white-backing", "src": "matcost-053-white-backing"}
+{"dst": "gap-053-yeondangga-repricing", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "matcost-053-white-backing", "src": "matcost-053-white-backing"}
+{"dst": "material-MAT_000371", "note": "이 원가 defect가 가리키는 소재 identity 노드", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "matcost-053-white-backing", "src": "matcost-053-white-backing"}
+{"dst": "RULE_dosu_is_printopt", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "matcost-054-hologram", "src": "matcost-054-hologram"}
+{"dst": "component-COMP_STK_PRINT", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "matcost-054-hologram", "src": "matcost-054-hologram"}
+{"dst": "gap-054-white-underbase-price", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "matcost-054-hologram", "src": "matcost-054-hologram"}
+{"dst": "gap-054-yeondangga-repricing", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "matcost-054-hologram", "src": "matcost-054-hologram"}
+{"dst": "material-MAT_000163", "note": "이 원가 defect가 가리키는 소재 identity 노드", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "matcost-054-hologram", "src": "matcost-054-hologram"}
+{"dst": "sticker-halfcut-hologram", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "matcost-054-hologram", "src": "matcost-054-hologram"}
 {"dst": "process-PROC_000085", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "material-MAT_000105", "src": "material-MAT_000105"}
 {"dst": "RULE_dosu_is_printopt", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "material-MAT_000112", "src": "material-MAT_000112"}
 {"dst": "product-023-shaped-postcard", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "material-MAT_000113", "src": "material-MAT_000113"}
@@ -238,6 +342,10 @@
 {"dst": "RULE_import_material_no_delete", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "material-MAT_000121", "src": "material-MAT_000121"}
 {"dst": "GAP_paper_material_042", "note": "이 오염의 교정 owner", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "material-MAT_000128", "src": "material-MAT_000128"}
 {"dst": "GAP_paper_material_042", "note": "이 오염의 교정 owner", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "material-MAT_000129", "src": "material-MAT_000129"}
+{"dst": "gap-056-material-cost-storage", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "material-MAT_000162", "src": "material-MAT_000162"}
+{"dst": "material-MAT_000372", "note": "260702 권위 split 형제(백색후지↔투명후지) — 같은 투명스티커 계열", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "material-MAT_000162", "src": "material-MAT_000162"}
+{"dst": "matcost-054-hologram", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "material-MAT_000163", "src": "material-MAT_000163"}
+{"dst": "sticker-halfcut-hologram", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "material-MAT_000163", "src": "material-MAT_000163"}
 {"dst": "GAP_paper_material_042", "note": "이 오염의 교정 owner", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "material-MAT_000240", "src": "material-MAT_000240"}
 {"dst": "GAP_paper_material_042", "note": "이 오염의 교정 owner", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "material-MAT_000241", "src": "material-MAT_000241"}
 {"dst": "GAP_foil_parent_children", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "material-MAT_000356", "src": "material-MAT_000356"}
@@ -247,6 +355,12 @@
 {"dst": "formula-PRF_NAMECARD_PREMIUM_FOIL", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "material-MAT_000357", "src": "material-MAT_000357"}
 {"dst": "TERM_spot_color", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "material-MAT_000365", "src": "material-MAT_000365"}
 {"dst": "component-COMP_PRINT_SPOT_WHITE_S1", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "material-MAT_000365", "src": "material-MAT_000365"}
+{"dst": "matcost-053-clear-backing", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "material-MAT_000371", "src": "material-MAT_000371"}
+{"dst": "matcost-053-white-backing", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "material-MAT_000371", "src": "material-MAT_000371"}
+{"dst": "sticker-halfcut-clear", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "material-MAT_000371", "src": "material-MAT_000371"}
+{"dst": "gap-052-coating-conflict", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "material-MAT_000585", "src": "material-MAT_000585"}
+{"dst": "gap-052-coating-conflict", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "material-MAT_000586", "src": "material-MAT_000586"}
+{"dst": "gap-067-mattype-transfer-paper", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "material-MAT_000594", "src": "material-MAT_000594"}
 {"dst": "process-PROC_000027", "note": "직각(R2 배선)", "origin": "fk", "qualifier": null, "rel": "option_refs", "source_node": "optgroup-016-corner", "src": "optgroup-016-corner"}
 {"dst": "process-PROC_000028", "note": "둥근(R2 배선)", "origin": "fk", "qualifier": null, "rel": "option_refs", "source_node": "optgroup-016-corner", "src": "optgroup-016-corner"}
 {"dst": "process-PROC_000029", "note": "오시(crease)", "origin": "fk", "qualifier": null, "rel": "option_refs", "source_node": "optgroup-016-crease", "src": "optgroup-016-crease"}
@@ -412,6 +526,45 @@
 {"dst": "size-SIZ_000192", "note": "소봉투(OPV-000030)→사이즈", "origin": "fk", "qualifier": null, "rel": "option_refs", "source_node": "optgroup-050-envelope-type", "src": "optgroup-050-envelope-type"}
 {"dst": "size-SIZ_000193", "note": "자켓봉투(OPV-000029)→사이즈", "origin": "fk", "qualifier": null, "rel": "option_refs", "source_node": "optgroup-050-envelope-type", "src": "optgroup-050-envelope-type"}
 {"dst": "size-SIZ_000194", "note": "대봉투(OPV-000031)→사이즈", "origin": "fk", "qualifier": null, "rel": "option_refs", "source_node": "optgroup-050-envelope-type", "src": "optgroup-050-envelope-type"}
+{"dst": "gap-052-cut-optref-dangling", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "optgroup-052-cut", "src": "optgroup-052-cut"}
+{"dst": "material-MAT_000584", "note": "유포스티커(OPV_000017·ref_key1=MAT_000584·dflt)", "origin": "fk", "qualifier": null, "rel": "option_refs", "source_node": "optgroup-052-paper", "src": "optgroup-052-paper"}
+{"dst": "material-MAT_000585", "note": "무광코팅스티커(OPV_000019·ref_key1=MAT_000585)", "origin": "fk", "qualifier": null, "rel": "option_refs", "source_node": "optgroup-052-paper", "src": "optgroup-052-paper"}
+{"dst": "material-MAT_000586", "note": "유광코팅스티커(OPV_000020·ref_key1=MAT_000586)", "origin": "fk", "qualifier": null, "rel": "option_refs", "source_node": "optgroup-052-paper", "src": "optgroup-052-paper"}
+{"dst": "material-MAT_000609", "note": "미색스티커(OPV_000021·ref_key1=MAT_000609)", "origin": "fk", "qualifier": null, "rel": "option_refs", "source_node": "optgroup-052-paper", "src": "optgroup-052-paper"}
+{"dst": "material-MAT_000611", "note": "아트스티커(OPV_000018·ref_key1=MAT_000611)", "origin": "fk", "qualifier": null, "rel": "option_refs", "source_node": "optgroup-052-paper", "src": "optgroup-052-paper"}
+{"dst": "gap-052-coating-conflict", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "optgroup-052-paper", "src": "optgroup-052-paper"}
+{"dst": "printopt-POPT_000001", "note": "단면(OPV_000022·OPT_REF_DIM.06 ref_key1=1=opt_id→POPT_000001)", "origin": "fk", "qualifier": null, "rel": "option_refs", "source_node": "optgroup-052-print", "src": "optgroup-052-print"}
+{"dst": "gap-053-cutting-rekey", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "optgroup-053-cutting", "src": "optgroup-053-cutting"}
+{"dst": "material-MAT_000371", "note": "백색후지(option_item OPV_000024 seq1·OPT_REF_DIM.03)", "origin": "fk", "qualifier": null, "rel": "option_refs", "source_node": "optgroup-053-paper", "src": "optgroup-053-paper"}
+{"dst": "material-MAT_000372", "note": "투명후지(option_item OPV_000024 seq2·OPT_REF_DIM.03)", "origin": "fk", "qualifier": null, "rel": "option_refs", "source_node": "optgroup-053-paper", "src": "optgroup-053-paper"}
+{"dst": "printopt-POPT_000001", "note": "단면(option_item OPV_000025→opt_id=1=POPT_000001)", "origin": "fk", "qualifier": null, "rel": "option_refs", "source_node": "optgroup-053-print", "src": "optgroup-053-print"}
+{"dst": "RULE_dosu_is_printopt", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "optgroup-053-print", "src": "optgroup-053-print"}
+{"dst": "process-PROC_000008", "note": "화이트인쇄(option_item OPV_000027·OPT_REF_DIM.04·process)", "origin": "fk", "qualifier": null, "rel": "option_refs", "source_node": "optgroup-053-white", "src": "optgroup-053-white"}
+{"dst": "RULE_dosu_is_printopt", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "optgroup-053-white", "src": "optgroup-053-white"}
+{"dst": "gap-055-cutting-optref-stale", "note": "stale option_item 참조 정직 선언(fn_chk_opt_item_ref 위반 소지)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "optgroup-055-cutting", "src": "optgroup-055-cutting"}
+{"dst": "gap-055-jogaksu-storage", "note": "조각수 저장처 부재 정직 선언", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "optgroup-055-jogaksu", "src": "optgroup-055-jogaksu"}
+{"dst": "material-MAT_000593", "note": null, "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.03", "ref_key1": "MAT_000593", "ref_key2": "USAGE.07"}, "rel": "option_refs", "source_node": "optgroup-055-paper", "src": "optgroup-055-paper"}
+{"dst": "printopt-POPT_000001", "note": null, "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.06", "ref_key1": "1"}, "rel": "option_refs", "source_node": "optgroup-055-print", "src": "optgroup-055-print"}
+{"dst": "gap-058-shape-storage", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "optgroup-058-cutting", "src": "optgroup-058-cutting"}
+{"dst": "material-MAT_000584", "note": "유포스티커", "origin": "fk", "qualifier": null, "rel": "option_refs", "source_node": "optgroup-058-paper", "src": "optgroup-058-paper"}
+{"dst": "material-MAT_000585", "note": "무광코팅스티커·코팅 CONFLICT", "origin": "fk", "qualifier": null, "rel": "option_refs", "source_node": "optgroup-058-paper", "src": "optgroup-058-paper"}
+{"dst": "material-MAT_000586", "note": "유광코팅스티커·코팅 CONFLICT", "origin": "fk", "qualifier": null, "rel": "option_refs", "source_node": "optgroup-058-paper", "src": "optgroup-058-paper"}
+{"dst": "material-MAT_000609", "note": "미색스티커", "origin": "fk", "qualifier": null, "rel": "option_refs", "source_node": "optgroup-058-paper", "src": "optgroup-058-paper"}
+{"dst": "material-MAT_000611", "note": "아트스티커", "origin": "fk", "qualifier": null, "rel": "option_refs", "source_node": "optgroup-058-paper", "src": "optgroup-058-paper"}
+{"dst": "gap-058-coating-conflict", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "optgroup-058-paper", "src": "optgroup-058-paper"}
+{"dst": "printopt-POPT_000001", "note": "도수 옵션값→인쇄옵션 차원(단면·공유 축)·fn_chk_opt_item_ref 정합(부모 has_print_option 실재)", "origin": "fk", "qualifier": null, "rel": "option_refs", "source_node": "optgroup-058-print", "src": "optgroup-058-print"}
+{"dst": "gap-062-coating-conflict", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "optgroup-062-paper", "src": "optgroup-062-paper"}
+{"dst": "gap-062-paper-unwired", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "optgroup-062-paper", "src": "optgroup-062-paper"}
+{"dst": "printopt-POPT_000001", "note": "도수 옵션값→인쇄옵션 차원(단면·공유 축)·fn_chk_opt_item_ref 정합(부모 062 has_print_option 실재)", "origin": "fk", "qualifier": null, "rel": "option_refs", "source_node": "optgroup-062-print", "src": "optgroup-062-print"}
+{"dst": "material-MAT_000084", "note": "비코팅스티커", "origin": "fk", "qualifier": null, "rel": "option_refs", "source_node": "optgroup-066-paper", "src": "optgroup-066-paper"}
+{"dst": "material-MAT_000153", "note": "유포스티커", "origin": "fk", "qualifier": null, "rel": "option_refs", "source_node": "optgroup-066-paper", "src": "optgroup-066-paper"}
+{"dst": "material-MAT_000155", "note": "무광코팅스티커·코팅 CONFLICT", "origin": "fk", "qualifier": null, "rel": "option_refs", "source_node": "optgroup-066-paper", "src": "optgroup-066-paper"}
+{"dst": "material-MAT_000156", "note": "유광코팅스티커·코팅 CONFLICT", "origin": "fk", "qualifier": null, "rel": "option_refs", "source_node": "optgroup-066-paper", "src": "optgroup-066-paper"}
+{"dst": "material-MAT_000170", "note": "투명데드롱스티커", "origin": "fk", "qualifier": null, "rel": "option_refs", "source_node": "optgroup-066-paper", "src": "optgroup-066-paper"}
+{"dst": "material-MAT_000171", "note": "은데드롱스티커", "origin": "fk", "qualifier": null, "rel": "option_refs", "source_node": "optgroup-066-paper", "src": "optgroup-066-paper"}
+{"dst": "gap-066-coating-conflict", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "optgroup-066-paper", "src": "optgroup-066-paper"}
+{"dst": "printopt-POPT_000001", "note": "도수 옵션값→인쇄옵션 차원(단면·공유 축)·fn_chk_opt_item_ref 정합(부모 has_print_option 실재)", "origin": "fk", "qualifier": null, "rel": "option_refs", "source_node": "optgroup-066-print", "src": "optgroup-066-print"}
+{"dst": "material-MAT_000594", "note": "타투스티커(OPV-000088·ref_key1=MAT_000594·활성 자재·부모 has_material 실재→L-18 정합)", "origin": "fk", "qualifier": null, "rel": "option_refs", "source_node": "optgroup-067-paper", "src": "optgroup-067-paper"}
 {"dst": "printopt-POPT_000002", "note": null, "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.06", "ref_key1": "1"}, "rel": "option_refs", "source_node": "optgroup-OPT-000028", "src": "optgroup-OPT-000028"}
 {"dst": "gap-030-paper-optref-mismatch", "note": "종이 옵션이 삭제 자재(MAT_000105) 참조 — 활성 MAT_000110과 불일치 관찰(정직 GAP)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "optgroup-OPT-000029", "src": "optgroup-OPT-000029"}
 {"dst": "process-PROC_000073", "note": null, "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.04", "ref_key1": "PROC_000073"}, "rel": "option_refs", "source_node": "optgroup-OPT-000030", "src": "optgroup-OPT-000030"}
@@ -498,6 +651,29 @@
 {"dst": "process-PROC_000031", "note": "가변텍스트→PROC_000031", "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.04", "ref_key1": "PROC_000031"}, "rel": "option_refs", "source_node": "optgroup-OPT_000062", "src": "optgroup-OPT_000062"}
 {"dst": "process-PROC_000032", "note": "가변이미지→PROC_000032", "origin": "fk", "qualifier": {"ref_dim_cd": "OPT_REF_DIM.04", "ref_key1": "PROC_000032"}, "rel": "option_refs", "source_node": "optgroup-OPT_000062", "src": "optgroup-OPT_000062"}
 {"dst": "component-COMP_PHOTOCARD_SET", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "optgroup-OPT_000084", "src": "optgroup-OPT_000084"}
+{"dst": "RULE_plate_paper_only", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "plate-053-SIZ_000521", "src": "plate-053-SIZ_000521"}
+{"dst": "plate-OUTPUT_PAPER_TYPE_01", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "plate-053-SIZ_000521", "src": "plate-053-SIZ_000521"}
+{"dst": "sticker-halfcut-clear", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "plate-053-SIZ_000521", "src": "plate-053-SIZ_000521"}
+{"dst": "RULE_plate_paper_only", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "plate-054-SIZ_000521", "src": "plate-054-SIZ_000521"}
+{"dst": "plate-OUTPUT_PAPER_TYPE_01", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "plate-054-SIZ_000521", "src": "plate-054-SIZ_000521"}
+{"dst": "sticker-halfcut-hologram", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "plate-054-SIZ_000521", "src": "plate-054-SIZ_000521"}
+{"dst": "RULE_pansu_db_function", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "plate-056-OUTPUT_PAPER_TYPE_03", "src": "plate-056-OUTPUT_PAPER_TYPE_03"}
+{"dst": "RULE_plate_paper_only", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "plate-056-OUTPUT_PAPER_TYPE_03", "src": "plate-056-OUTPUT_PAPER_TYPE_03"}
+{"dst": "RULE_price_value_boundary", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "plate-056-OUTPUT_PAPER_TYPE_03", "src": "plate-056-OUTPUT_PAPER_TYPE_03"}
+{"dst": "component-COMP_STK_PRINT", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "plate-056-OUTPUT_PAPER_TYPE_03", "src": "plate-056-OUTPUT_PAPER_TYPE_03"}
+{"dst": "RULE_plate_paper_only", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "plate-057-SIZ_000199", "src": "plate-057-SIZ_000199"}
+{"dst": "DEC_wiring_round22_260702", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "plate-058-SIZ_000521", "src": "plate-058-SIZ_000521"}
+{"dst": "RULE_import_material_no_delete", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "plate-058-SIZ_000521", "src": "plate-058-SIZ_000521"}
+{"dst": "RULE_price_value_boundary", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "plate-058-SIZ_000521", "src": "plate-058-SIZ_000521"}
+{"dst": "gap-058-yeondangga", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "plate-058-SIZ_000521", "src": "plate-058-SIZ_000521"}
+{"dst": "RULE_plate_paper_only", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "plate-062-SIZ_000521", "src": "plate-062-SIZ_000521"}
+{"dst": "component-COMP_STK_PRINT", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "plate-062-SIZ_000521", "src": "plate-062-SIZ_000521"}
+{"dst": "gap-062-coating-conflict", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "plate-062-SIZ_000521", "src": "plate-062-SIZ_000521"}
+{"dst": "gap-062-siz058-price-missing", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "plate-062-SIZ_000521", "src": "plate-062-SIZ_000521"}
+{"dst": "RULE_plate_paper_only", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "plate-063-SIZ_000521", "src": "plate-063-SIZ_000521"}
+{"dst": "sticker-spec-fancy-clear", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "plate-063-SIZ_000521", "src": "plate-063-SIZ_000521"}
+{"dst": "RULE_plate_paper_only", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "plate-066-SIZ_000203", "src": "plate-066-SIZ_000203"}
+{"dst": "gap-066-plate-otyp", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "plate-066-SIZ_000203", "src": "plate-066-SIZ_000203"}
 {"dst": "DEC_baseproc_260701", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "process-PROC_000004", "src": "process-PROC_000004"}
 {"dst": "RULE_dataline_neq_wiring", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "process-PROC_000004", "src": "process-PROC_000004"}
 {"dst": "TERM_corner_round", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "process-PROC_000026", "src": "process-PROC_000026"}
@@ -505,6 +681,8 @@
 {"dst": "RULE_price_value_boundary", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "process-PROC_000044", "src": "process-PROC_000044"}
 {"dst": "formula-PRF_DGP_E", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "process-PROC_000044", "src": "process-PROC_000044"}
 {"dst": "DEC_diecut_260701", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "process-PROC_000053", "src": "process-PROC_000053"}
+{"dst": "gap-054-piece-count-storage", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "process-PROC_000054", "src": "process-PROC_000054"}
+{"dst": "sticker-halfcut-hologram", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "process-PROC_000054", "src": "process-PROC_000054"}
 {"dst": "RULE_price_value_boundary", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "process-PROC_000068", "src": "process-PROC_000068"}
 {"dst": "formula-PRF_DGP_E", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "process-PROC_000068", "src": "process-PROC_000068"}
 {"dst": "RULE_plate_paper_only", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "process-PROC_000071", "src": "process-PROC_000071"}
@@ -1507,12 +1685,152 @@
 {"dst": "gap-051-golden", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-051-suncap", "src": "product-051-suncap"}
 {"dst": "plate-OUTPUT_PAPER_TYPE_01", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-051-suncap", "src": "product-051-suncap"}
 {"dst": "material-MAT_000149", "note": "아이보리(MAT_TYPE.01)·USAGE.07 단일 슬롯·dflt Y", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-051-suncap", "src": "product-051-suncap"}
+{"dst": "optgroup-052-cut", "note": "커팅(공정) 택1 필수·반칼(자유형)·★ref_key1=PROC_000054(삭제됨)→gap", "origin": "fk", "qualifier": null, "rel": "has_option_group", "source_node": "product-052-sticker-halfcut-freeform", "src": "product-052-sticker-halfcut-freeform"}
+{"dst": "optgroup-052-paper", "note": "종이(자재) 택1 필수·5옵션값", "origin": "fk", "qualifier": null, "rel": "has_option_group", "source_node": "product-052-sticker-halfcut-freeform", "src": "product-052-sticker-halfcut-freeform"}
+{"dst": "optgroup-052-print", "note": "인쇄(도수) 택1 필수·단면 단일", "origin": "fk", "qualifier": null, "rel": "has_option_group", "source_node": "product-052-sticker-halfcut-freeform", "src": "product-052-sticker-halfcut-freeform"}
+{"dst": "plate-OUTPUT_PAPER_TYPE_02", "note": "46계열 출력용지(SIZ_000521 330x470 표준전지)·점착지=종이류라 판형 유효·fn_best_plate 자동선택", "origin": "fk", "qualifier": null, "rel": "has_plate_size", "source_node": "product-052-sticker-halfcut-freeform", "src": "product-052-sticker-halfcut-freeform"}
+{"dst": "printopt-POPT_000001", "note": "단면 단일(front CMYK 4도·back 인쇄 안 함)·공유 축 재사용", "origin": "fk", "qualifier": null, "rel": "has_print_option", "source_node": "product-052-sticker-halfcut-freeform", "src": "product-052-sticker-halfcut-freeform"}
+{"dst": "process-PROC_000014", "note": "유광라미네이팅(opt·상위 PROC_000013 코팅)·★코팅=공정 표현(자재 585/586와 이중·CONFLICT)·공유 축 재사용", "origin": "fk", "qualifier": null, "rel": "has_process", "source_node": "product-052-sticker-halfcut-freeform", "src": "product-052-sticker-halfcut-freeform"}
+{"dst": "process-PROC_000015", "note": "무광라미네이팅(opt·상위 PROC_000013 코팅)·★코팅=공정 표현·공유 축 재사용", "origin": "fk", "qualifier": null, "rel": "has_process", "source_node": "product-052-sticker-halfcut-freeform", "src": "product-052-sticker-halfcut-freeform"}
+{"dst": "process-PROC_000122", "note": "반칼커팅(Kiss Cut·mand·disp 1·상위 PROC_000121 커팅)·★PROC_000054 반칼→122로 이관(구 코드 논리삭제)", "origin": "fk", "qualifier": "mandatory", "rel": "has_process", "source_node": "product-052-sticker-halfcut-freeform", "src": "product-052-sticker-halfcut-freeform"}
+{"dst": "qty-052", "note": null, "origin": "fk", "qualifier": null, "rel": "has_qty_rule", "source_node": "product-052-sticker-halfcut-freeform", "src": "product-052-sticker-halfcut-freeform"}
+{"dst": "size-SIZ_000057", "note": "A6 105x148·반칼(판걸이=8.0·master 실재)", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "product-052-sticker-halfcut-freeform", "src": "product-052-sticker-halfcut-freeform"}
+{"dst": "size-SIZ_000170", "note": "A5 148x210·★junction 활성이나 master del_yn=Y(양면 defect·정리 워크리스트)", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "product-052-sticker-halfcut-freeform", "src": "product-052-sticker-halfcut-freeform"}
+{"dst": "size-SIZ_000520", "note": "A4 반칼(판걸이=2.0·반칼 전용가·낱장 SIZ_172와 분리)", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "product-052-sticker-halfcut-freeform", "src": "product-052-sticker-halfcut-freeform"}
+{"dst": "category-CAT_000002", "note": "스티커(root·main_cat_yn=Y·cat_lvl 1)", "origin": "fk", "qualifier": null, "rel": "in_category", "source_node": "product-052-sticker-halfcut-freeform", "src": "product-052-sticker-halfcut-freeform"}
+{"dst": "category-CAT_000309", "note": "자유형스티커(cat_lvl 2·main_cat_yn=N·상위 CAT_000002)", "origin": "fk", "qualifier": null, "rel": "in_category", "source_node": "product-052-sticker-halfcut-freeform", "src": "product-052-sticker-halfcut-freeform"}
+{"dst": "formula-PRF_STK_FIXED", "note": "완제품가 고정가 룩업형(COMP_STK_PRINT·형상×치수×소재×수량 격자)", "origin": "fk", "qualifier": null, "rel": "priced_by", "source_node": "product-052-sticker-halfcut-freeform", "src": "product-052-sticker-halfcut-freeform"}
+{"dst": "RULE_dosu_is_printopt", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-052-sticker-halfcut-freeform", "src": "product-052-sticker-halfcut-freeform"}
+{"dst": "RULE_import_material_no_delete", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-052-sticker-halfcut-freeform", "src": "product-052-sticker-halfcut-freeform"}
+{"dst": "RULE_pansu_db_function", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-052-sticker-halfcut-freeform", "src": "product-052-sticker-halfcut-freeform"}
+{"dst": "RULE_price_value_boundary", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-052-sticker-halfcut-freeform", "src": "product-052-sticker-halfcut-freeform"}
+{"dst": "gap-052-coating-conflict", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-052-sticker-halfcut-freeform", "src": "product-052-sticker-halfcut-freeform"}
+{"dst": "gap-052-cut-optref-dangling", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-052-sticker-halfcut-freeform", "src": "product-052-sticker-halfcut-freeform"}
+{"dst": "gap-052-liandan-out-of-scope", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-052-sticker-halfcut-freeform", "src": "product-052-sticker-halfcut-freeform"}
+{"dst": "material-MAT_000584", "note": "유포스티커 80g·dflt(종이 옵션값)", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-052-sticker-halfcut-freeform", "src": "product-052-sticker-halfcut-freeform"}
+{"dst": "material-MAT_000585", "note": "무광코팅스티커(아트지90g+무광라미)·★코팅=자재 흡수(BATCH-3 CONFLICT)", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-052-sticker-halfcut-freeform", "src": "product-052-sticker-halfcut-freeform"}
+{"dst": "material-MAT_000586", "note": "유광코팅스티커(아트지90g+유광라미)·★코팅=자재 흡수(BATCH-3 CONFLICT)", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-052-sticker-halfcut-freeform", "src": "product-052-sticker-halfcut-freeform"}
+{"dst": "material-MAT_000609", "note": "미색스티커(모조80g)", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-052-sticker-halfcut-freeform", "src": "product-052-sticker-halfcut-freeform"}
+{"dst": "material-MAT_000611", "note": "아트스티커 90g", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-052-sticker-halfcut-freeform", "src": "product-052-sticker-halfcut-freeform"}
+{"dst": "optgroup-055-cutting", "note": "커팅(공정) 택1 필수·option_item ref PROC_000053 stale(gap)", "origin": "fk", "qualifier": null, "rel": "has_option_group", "source_node": "product-055-sticker-sheet-freeform", "src": "product-055-sticker-sheet-freeform"}
+{"dst": "optgroup-055-jogaksu", "note": "조각수(5~10) 선택·리터럴값(물리차원 미참조·GAP-ST-2)", "origin": "fk", "qualifier": null, "rel": "has_option_group", "source_node": "product-055-sticker-sheet-freeform", "src": "product-055-sticker-sheet-freeform"}
+{"dst": "optgroup-055-paper", "note": "종이(자재) 택1 필수", "origin": "fk", "qualifier": null, "rel": "has_option_group", "source_node": "product-055-sticker-sheet-freeform", "src": "product-055-sticker-sheet-freeform"}
+{"dst": "optgroup-055-print", "note": "인쇄(도수) 택1 필수", "origin": "fk", "qualifier": null, "rel": "has_option_group", "source_node": "product-055-sticker-sheet-freeform", "src": "product-055-sticker-sheet-freeform"}
+{"dst": "plate-OUTPUT_PAPER_TYPE_03", "note": "출력용지 기타(.03)·파일사양(A4/A3/A2)·완제품가 모델이라 국전 판걸이수 미적용", "origin": "fk", "qualifier": null, "rel": "has_plate_size", "source_node": "product-055-sticker-sheet-freeform", "src": "product-055-sticker-sheet-freeform"}
+{"dst": "printopt-POPT_000001", "note": "단면 단일(front CMYK 4도·back 인쇄 안 함)·공유 축 재사용", "origin": "fk", "qualifier": null, "rel": "has_print_option", "source_node": "product-055-sticker-sheet-freeform", "src": "product-055-sticker-sheet-freeform"}
+{"dst": "process-PROC_000114", "note": "쿨코팅(mand_proc_yn=N·자재명에 내장된 무광쿨코팅의 공정 표현)", "origin": "fk", "qualifier": null, "rel": "has_process", "source_node": "product-055-sticker-sheet-freeform", "src": "product-055-sticker-sheet-freeform"}
+{"dst": "process-PROC_000123", "note": "완칼커팅(mand_proc_yn=N·023 companion 노드 재사용·2소비 상품 023/055)", "origin": "fk", "qualifier": null, "rel": "has_process", "source_node": "product-055-sticker-sheet-freeform", "src": "product-055-sticker-sheet-freeform"}
+{"dst": "qty-055", "note": null, "origin": "fk", "qualifier": null, "rel": "has_qty_rule", "source_node": "product-055-sticker-sheet-freeform", "src": "product-055-sticker-sheet-freeform"}
+{"dst": "size-SIZ_000172", "note": "A4(210x297)·dflt_yn=Y(재키잉 복구 활성)", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "product-055-sticker-sheet-freeform", "src": "product-055-sticker-sheet-freeform"}
+{"dst": "size-SIZ_000174", "note": "A3(297x420)·활성", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "product-055-sticker-sheet-freeform", "src": "product-055-sticker-sheet-freeform"}
+{"dst": "size-SIZ_000197", "note": "A2(420x594)·활성", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "product-055-sticker-sheet-freeform", "src": "product-055-sticker-sheet-freeform"}
+{"dst": "category-CAT_000002", "note": "스티커(main_cat_yn=Y·disp 3)", "origin": "fk", "qualifier": null, "rel": "in_category", "source_node": "product-055-sticker-sheet-freeform", "src": "product-055-sticker-sheet-freeform"}
+{"dst": "category-CAT_000309", "note": "자유형스티커(스티커 하위·main_cat_yn=N)", "origin": "fk", "qualifier": null, "rel": "in_category", "source_node": "product-055-sticker-sheet-freeform", "src": "product-055-sticker-sheet-freeform"}
+{"dst": "formula-PRF_STK_FIXED", "note": "완제품가 고정룩업(COMP_STK_PRINT·siz×mat×수량구간)", "origin": "fk", "qualifier": null, "rel": "priced_by", "source_node": "product-055-sticker-sheet-freeform", "src": "product-055-sticker-sheet-freeform"}
+{"dst": "DEC_baseproc_260701", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-055-sticker-sheet-freeform", "src": "product-055-sticker-sheet-freeform"}
+{"dst": "DEC_qty_audit_260702", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-055-sticker-sheet-freeform", "src": "product-055-sticker-sheet-freeform"}
+{"dst": "DEC_wiring_round22_260702", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-055-sticker-sheet-freeform", "src": "product-055-sticker-sheet-freeform"}
+{"dst": "RULE_dataline_neq_wiring", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-055-sticker-sheet-freeform", "src": "product-055-sticker-sheet-freeform"}
+{"dst": "RULE_dosu_is_printopt", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-055-sticker-sheet-freeform", "src": "product-055-sticker-sheet-freeform"}
+{"dst": "RULE_import_material_no_delete", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-055-sticker-sheet-freeform", "src": "product-055-sticker-sheet-freeform"}
+{"dst": "RULE_price_value_boundary", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-055-sticker-sheet-freeform", "src": "product-055-sticker-sheet-freeform"}
+{"dst": "RULE_scope_boundary", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-055-sticker-sheet-freeform", "src": "product-055-sticker-sheet-freeform"}
+{"dst": "component-COMP_STK_PRINT", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-055-sticker-sheet-freeform", "src": "product-055-sticker-sheet-freeform"}
+{"dst": "gap-055-cutting-optref-stale", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-055-sticker-sheet-freeform", "src": "product-055-sticker-sheet-freeform"}
+{"dst": "gap-055-jogaksu-storage", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-055-sticker-sheet-freeform", "src": "product-055-sticker-sheet-freeform"}
+{"dst": "gap-055-material-cost-storage", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-055-sticker-sheet-freeform", "src": "product-055-sticker-sheet-freeform"}
+{"dst": "gap-055-material-name-cst10", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-055-sticker-sheet-freeform", "src": "product-055-sticker-sheet-freeform"}
+{"dst": "material-MAT_000593", "note": "유포+무광쿨코팅·MAT_TYPE.11(스티커 점착지)·USAGE.07·dflt(활성 자재 1종)", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-055-sticker-sheet-freeform", "src": "product-055-sticker-sheet-freeform"}
+{"dst": "plate-057-SIZ_000199", "note": "판형=SIZ_000199·output_paper_typ_cd=OUTPUT_PAPER_TYPE.03(기타)·note 파일사양(free-form 업로드 규격)·dflt Y", "origin": "fk", "qualifier": null, "rel": "has_plate_size", "source_node": "product-057-sticker-large-freeform", "src": "product-057-sticker-large-freeform"}
+{"dst": "printopt-POPT_000001", "note": "단면 단일(앞 CMYK4도 CLR_000005·뒤 인쇄안함 CLR_000001)·양면 미보유", "origin": "fk", "qualifier": null, "rel": "has_print_option", "source_node": "product-057-sticker-large-freeform", "src": "product-057-sticker-large-freeform"}
+{"dst": "process-PROC_000053", "note": "완칼(die-cut·종이+후지 자름)·모양 string input·mand_proc_yn=N(완제품가에 출력+가공 포함이라 base print 공정 미필요)", "origin": "fk", "qualifier": {"mand": "N"}, "rel": "has_process", "source_node": "product-057-sticker-large-freeform", "src": "product-057-sticker-large-freeform"}
+{"dst": "qty-057", "note": "상품레벨 min 1·max 10000·incr 1·QTY_UNIT.02(bundle_qtys 0행)", "origin": "fk", "qualifier": null, "rel": "has_qty_rule", "source_node": "product-057-sticker-large-freeform", "src": "product-057-sticker-large-freeform"}
+{"dst": "size-SIZ_000199", "note": "400x600 자유형 최대 바운딩 사이즈(t_prd_product_sizes 단일 행·work=cut·impos_yn=N)", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "product-057-sticker-large-freeform", "src": "product-057-sticker-large-freeform"}
+{"dst": "category-CAT_000002", "note": "스티커(main_cat_yn=Y·주 카테고리·disp 7·라이브 실측)", "origin": "fk", "qualifier": null, "rel": "in_category", "source_node": "product-057-sticker-large-freeform", "src": "product-057-sticker-large-freeform"}
+{"dst": "category-CAT_000309", "note": "자유형스티커(main_cat_yn=N·부·상위 CAT_000002·depth 2)", "origin": "fk", "qualifier": null, "rel": "in_category", "source_node": "product-057-sticker-large-freeform", "src": "product-057-sticker-large-freeform"}
+{"dst": "formula-PRF_STK_FIXED", "note": "고정가 완제품가 룩업(원자합산형 아님)·COMP_STK_PRINT use_dims=[siz_cd,mat_cd,min_qty]", "origin": "fk", "qualifier": null, "rel": "priced_by", "source_node": "product-057-sticker-large-freeform", "src": "product-057-sticker-large-freeform"}
+{"dst": "DEC_diecut_260701", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-057-sticker-large-freeform", "src": "product-057-sticker-large-freeform"}
+{"dst": "RULE_dataline_neq_wiring", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-057-sticker-large-freeform", "src": "product-057-sticker-large-freeform"}
+{"dst": "RULE_dosu_is_printopt", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-057-sticker-large-freeform", "src": "product-057-sticker-large-freeform"}
+{"dst": "RULE_import_material_no_delete", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-057-sticker-large-freeform", "src": "product-057-sticker-large-freeform"}
+{"dst": "RULE_plate_paper_only", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-057-sticker-large-freeform", "src": "product-057-sticker-large-freeform"}
+{"dst": "RULE_price_value_boundary", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-057-sticker-large-freeform", "src": "product-057-sticker-large-freeform"}
+{"dst": "gap-057-material-cost", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-057-sticker-large-freeform", "src": "product-057-sticker-large-freeform"}
+{"dst": "material-MAT_000153", "note": "유포스티커(MAT_TYPE.11 스티커 정답유형·점착지·USAGE.07 단일 슬롯·비코팅·dflt Y)", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-057-sticker-large-freeform", "src": "product-057-sticker-large-freeform"}
+{"dst": "plate-OUTPUT_PAPER_TYPE_02", "note": "46계열 전지(SIZ_000521 330x470)·점착지=종이류라 판형 유효(RULE_plate_paper_only)·활성. 국전 SIZ_000007/A4 SIZ_000050은 06-30 del_yn=Y", "origin": "fk", "qualifier": null, "rel": "has_plate_size", "source_node": "product-059-sticker-spec-square", "src": "product-059-sticker-spec-square"}
+{"dst": "printopt-POPT_000001", "note": "단면(front CLR_000005 4도·back CLR_000001)·공유축 기존 노드", "origin": "fk", "qualifier": null, "rel": "has_print_option", "source_node": "product-059-sticker-spec-square", "src": "product-059-sticker-spec-square"}
+{"dst": "process-PROC_000055", "note": "스티커완칼(Die Cut+조각수)·mand_proc_yn=N. 상품명 '반칼'과 명칭 불일치→gap", "origin": "fk", "qualifier": null, "rel": "has_process", "source_node": "product-059-sticker-spec-square", "src": "product-059-sticker-spec-square"}
+{"dst": "qty-059", "note": "상품레벨 min 4·max 10000·incr 4·QTY_UNIT.02(bundle_qtys 0행)·형제 15상품 동형", "origin": "fk", "qualifier": null, "rel": "has_qty_rule", "source_node": "product-059-sticker-spec-square", "src": "product-059-sticker-spec-square"}
+{"dst": "size-SIZ_000520", "note": "A4(210x297) 반칼 전용가·활성. SIZ_000170(A5)은 master del_yn=Y 06-17(폐지)→prose", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "product-059-sticker-spec-square", "src": "product-059-sticker-spec-square"}
+{"dst": "category-CAT_000002", "note": "스티커(root·main_cat_yn=Y·disp_seq 9)", "origin": "fk", "qualifier": null, "rel": "in_category", "source_node": "product-059-sticker-spec-square", "src": "product-059-sticker-spec-square"}
+{"dst": "category-CAT_000037", "note": "규격스티커(2단·main_cat_yn=N·부카테고리)", "origin": "fk", "qualifier": null, "rel": "in_category", "source_node": "product-059-sticker-spec-square", "src": "product-059-sticker-spec-square"}
+{"dst": "formula-PRF_STK_FIXED", "note": "스티커 규격/소재/수량별 단가(완제품가 고정가 룩업)", "origin": "fk", "qualifier": null, "rel": "priced_by", "source_node": "product-059-sticker-spec-square", "src": "product-059-sticker-spec-square"}
+{"dst": "DEC_qty_audit_260702", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-059-sticker-spec-square", "src": "product-059-sticker-spec-square"}
+{"dst": "RULE_dataline_neq_wiring", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-059-sticker-spec-square", "src": "product-059-sticker-spec-square"}
+{"dst": "RULE_dosu_is_printopt", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-059-sticker-spec-square", "src": "product-059-sticker-spec-square"}
+{"dst": "RULE_import_material_no_delete", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-059-sticker-spec-square", "src": "product-059-sticker-spec-square"}
+{"dst": "RULE_scope_boundary", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-059-sticker-spec-square", "src": "product-059-sticker-spec-square"}
+{"dst": "gap-059-coating-conflict", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-059-sticker-spec-square", "src": "product-059-sticker-spec-square"}
+{"dst": "gap-059-spec-shape-cut", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-059-sticker-spec-square", "src": "product-059-sticker-spec-square"}
+{"dst": "material-MAT_000084", "note": "비코팅스티커·라이브 MAT_TYPE.13(note는 .11 주장·불일치→prose)", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-059-sticker-spec-square", "src": "product-059-sticker-spec-square"}
+{"dst": "material-MAT_000153", "note": "유포스티커·MAT_TYPE.11·dflt", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-059-sticker-spec-square", "src": "product-059-sticker-spec-square"}
+{"dst": "material-MAT_000155", "note": "무광코팅스티커·MAT_TYPE.11(코팅=자재 CONFLICT·gap)", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-059-sticker-spec-square", "src": "product-059-sticker-spec-square"}
+{"dst": "material-MAT_000156", "note": "유광코팅스티커·MAT_TYPE.11(코팅=자재 CONFLICT·gap)", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-059-sticker-spec-square", "src": "product-059-sticker-spec-square"}
+{"dst": "material-MAT_000242", "note": "미색스티커·MAT_TYPE.11", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-059-sticker-spec-square", "src": "product-059-sticker-spec-square"}
+{"dst": "plate-061-SIZ_000521", "note": "46전지 330x470(OUTPUT_PAPER_TYPE.02)·반칼 스티커 표준전지·활성·fn_best_plate 자동선택. 061 전용 노드([[sticker-spec-band-nodes#plate]])", "origin": "fk", "qualifier": null, "rel": "has_plate_size", "source_node": "product-061-band-sticker", "src": "product-061-band-sticker"}
+{"dst": "printopt-POPT_000001", "note": "단면 단일(앞 CMYK 4도·뒤 인쇄 안 함)·양면 미보유. 공유 축 재사용", "origin": "fk", "qualifier": null, "rel": "has_print_option", "source_node": "product-061-band-sticker", "src": "product-061-band-sticker"}
+{"dst": "process-PROC_000055", "note": "스티커완칼(Die Cut+조각수)·mand_proc_yn=N·★상품명 '반칼'과 불일치→[[gap-061-halfcut-process]]. 공유 재사용 노드", "origin": "fk", "qualifier": null, "rel": "has_process", "source_node": "product-061-band-sticker", "src": "product-061-band-sticker"}
+{"dst": "qty-061", "note": "상품레벨 min 4·max 10000·incr 4·QTY_UNIT.02(bundle_qtys 0행). 061 전용 노드", "origin": "fk", "qualifier": null, "rel": "has_qty_rule", "source_node": "product-061-band-sticker", "src": "product-061-band-sticker"}
+{"dst": "size-SIZ_000170", "note": "A5(148x210)·링크 활성이나 master del_yn=Y(6-17)→[[gap-061-a5-size-master-deleted]]. 047 정의 공유 재사용 노드", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "product-061-band-sticker", "src": "product-061-band-sticker"}
+{"dst": "size-SIZ_000520", "note": "A4(210x297) 반칼 전용가·활성·형제 060과 공유 규격 노드(적용=058~061). 공유 재사용 노드", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "product-061-band-sticker", "src": "product-061-band-sticker"}
+{"dst": "category-CAT_000002", "note": "스티커(root·main_cat_yn=Y). 공유 재사용 노드(rectangle-nodes 등재)", "origin": "fk", "qualifier": null, "rel": "in_category", "source_node": "product-061-band-sticker", "src": "product-061-band-sticker"}
+{"dst": "category-CAT_000037", "note": "규격스티커(상위 CAT_000002·main_cat_yn=N 부). 공유 재사용 노드", "origin": "fk", "qualifier": null, "rel": "in_category", "source_node": "product-061-band-sticker", "src": "product-061-band-sticker"}
+{"dst": "formula-PRF_STK_FIXED", "note": "완제품가 고정가 룩업(원자합산형 아님)·COMP_STK_PRINT (siz_cd,mat_cd,min_qty) 격자. 공유 재사용 노드", "origin": "fk", "qualifier": null, "rel": "priced_by", "source_node": "product-061-band-sticker", "src": "product-061-band-sticker"}
+{"dst": "DEC_qty_audit_260702", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-061-band-sticker", "src": "product-061-band-sticker"}
+{"dst": "DEC_wiring_round22_260702", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-061-band-sticker", "src": "product-061-band-sticker"}
+{"dst": "RULE_dataline_neq_wiring", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-061-band-sticker", "src": "product-061-band-sticker"}
+{"dst": "RULE_dosu_is_printopt", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-061-band-sticker", "src": "product-061-band-sticker"}
+{"dst": "RULE_import_material_no_delete", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-061-band-sticker", "src": "product-061-band-sticker"}
+{"dst": "RULE_pansu_db_function", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-061-band-sticker", "src": "product-061-band-sticker"}
+{"dst": "RULE_plate_paper_only", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-061-band-sticker", "src": "product-061-band-sticker"}
+{"dst": "RULE_scope_boundary", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-061-band-sticker", "src": "product-061-band-sticker"}
+{"dst": "gap-061-a5-size-master-deleted", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-061-band-sticker", "src": "product-061-band-sticker"}
+{"dst": "gap-061-coating-conflict", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-061-band-sticker", "src": "product-061-band-sticker"}
+{"dst": "gap-061-golden", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-061-band-sticker", "src": "product-061-band-sticker"}
+{"dst": "gap-061-halfcut-process", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-061-band-sticker", "src": "product-061-band-sticker"}
+{"dst": "gap-061-mat084-typ", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-061-band-sticker", "src": "product-061-band-sticker"}
+{"dst": "gap-061-yeondangga-scope", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-061-band-sticker", "src": "product-061-band-sticker"}
+{"dst": "process-PROC_000013", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "product-061-band-sticker", "src": "product-061-band-sticker"}
+{"dst": "material-MAT_000084", "note": "비코팅스티커·live MAT_TYPE.13(note는 .11 주장·불일치→[[gap-061-mat084-typ]]). 공유 재사용 노드(candidate)", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-061-band-sticker", "src": "product-061-band-sticker"}
+{"dst": "material-MAT_000153", "note": "유포스티커·MAT_TYPE.11·dflt. 공유 재사용 노드(rectangle-nodes)", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-061-band-sticker", "src": "product-061-band-sticker"}
+{"dst": "material-MAT_000155", "note": "무광코팅스티커·MAT_TYPE.11·★코팅=자재(BATCH-3 CONFLICT·[[gap-061-coating-conflict]]). 공유 재사용 노드", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-061-band-sticker", "src": "product-061-band-sticker"}
+{"dst": "material-MAT_000156", "note": "유광코팅스티커·MAT_TYPE.11·★코팅=자재(BATCH-3 CONFLICT·[[gap-061-coating-conflict]]). 공유 재사용 노드", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-061-band-sticker", "src": "product-061-band-sticker"}
+{"dst": "material-MAT_000242", "note": "미색스티커·MAT_TYPE.11·6-14 종이(.01)→스티커(.11) 정정 note. 공유 재사용 노드", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "product-061-band-sticker", "src": "product-061-band-sticker"}
 {"dst": "DEC_qty_audit_260702", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "qty-017", "src": "qty-017"}
 {"dst": "DEC_qty_audit_260702", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "qty-018", "src": "qty-018"}
 {"dst": "DEC_qty_audit_260702", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "qty-020", "src": "qty-020"}
 {"dst": "DEC_qty_audit_260702", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "qty-021", "src": "qty-021"}
 {"dst": "DEC_qty_audit_260702", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "qty-022", "src": "qty-022"}
 {"dst": "DEC_qty_audit_260702", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "qty-040", "src": "qty-040"}
+{"dst": "DEC_qty_audit_260702", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "qty-053", "src": "qty-053"}
+{"dst": "sticker-halfcut-clear", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "qty-053", "src": "qty-053"}
+{"dst": "DEC_qty_audit_260702", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "qty-054", "src": "qty-054"}
+{"dst": "gap-054-piece-count-storage", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "qty-054", "src": "qty-054"}
+{"dst": "DEC_qty_audit_260702", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "qty-055", "src": "qty-055"}
+{"dst": "DEC_qty_audit_260702", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "qty-057", "src": "qty-057"}
+{"dst": "DEC_qty_audit_260702", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "qty-063", "src": "qty-063"}
+{"dst": "sticker-spec-fancy-clear", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "qty-063", "src": "qty-063"}
+{"dst": "DEC_qty_audit_260702", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "qty-065", "src": "qty-065"}
+{"dst": "gap-065-pack-qty-band", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "qty-065", "src": "qty-065"}
+{"dst": "sticker-pack", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "qty-065", "src": "qty-065"}
+{"dst": "size-SIZ_000212", "note": "bdl_qty(시트당 EA)는 형상(=size)의 파생(정사각10x10=8EA)", "origin": "derived", "qualifier": null, "rel": "derived_from", "source_node": "qty-066", "src": "qty-066"}
+{"dst": "RULE_pansu_db_function", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "size-053-SIZ_000057", "src": "size-053-SIZ_000057"}
+{"dst": "sticker-halfcut-clear", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "size-053-SIZ_000057", "src": "size-053-SIZ_000057"}
+{"dst": "sticker-halfcut-clear", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "size-053-SIZ_000170", "src": "size-053-SIZ_000170"}
+{"dst": "sticker-halfcut-clear", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "size-053-SIZ_000520", "src": "size-053-SIZ_000520"}
+{"dst": "sticker-halfcut-hologram", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "size-054-SIZ_000170", "src": "size-054-SIZ_000170"}
+{"dst": "RULE_pansu_db_function", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "size-054-SIZ_000520", "src": "size-054-SIZ_000520"}
+{"dst": "sticker-halfcut-hologram", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "size-054-SIZ_000520", "src": "size-054-SIZ_000520"}
 {"dst": "GAP_031_paper_parent_child", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "size-SIZ_000009", "src": "size-SIZ_000009"}
 {"dst": "RULE_import_material_no_delete", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "size-SIZ_000009", "src": "size-SIZ_000009"}
 {"dst": "gap-030-paper-optref-mismatch", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "size-SIZ_000032", "src": "size-SIZ_000032"}
@@ -1520,7 +1838,291 @@
 {"dst": "RULE_import_material_no_delete", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "size-SIZ_000048", "src": "size-SIZ_000048"}
 {"dst": "material-MAT_000109", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "size-SIZ_000048", "src": "size-SIZ_000048"}
 {"dst": "RULE_import_material_no_delete", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "size-SIZ_000055", "src": "size-SIZ_000055"}
+{"dst": "RULE_pansu_db_function", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "size-SIZ_000058", "src": "size-SIZ_000058"}
+{"dst": "gap-062-siz058-price-missing", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "size-SIZ_000058", "src": "size-SIZ_000058"}
+{"dst": "RULE_pansu_db_function", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "size-SIZ_000068", "src": "size-SIZ_000068"}
+{"dst": "sticker-pack", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "size-SIZ_000068", "src": "size-SIZ_000068"}
 {"dst": "RULE_import_material_no_delete", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "size-SIZ_000119", "src": "size-SIZ_000119"}
 {"dst": "RULE_import_material_no_delete", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "size-SIZ_000129", "src": "size-SIZ_000129"}
 {"dst": "product-050-envelope-making", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "size-SIZ_000191", "src": "size-SIZ_000191"}
 {"dst": "RULE_import_material_no_delete", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "size-SIZ_000194", "src": "size-SIZ_000194"}
+{"dst": "optgroup-066-paper", "note": "종이=자재 6종(mand·코팅 포함)", "origin": "fk", "qualifier": null, "rel": "has_option_group", "source_node": "sticker-gangpan-diecut", "src": "sticker-gangpan-diecut"}
+{"dst": "optgroup-066-print", "note": "인쇄=단면 도수(mand)", "origin": "fk", "qualifier": null, "rel": "has_option_group", "source_node": "sticker-gangpan-diecut", "src": "sticker-gangpan-diecut"}
+{"dst": "plate-066-SIZ_000203", "note": "72x46 작업규격 대표(26행·output_paper_typ 전부 공란·gap-066-plate-otyp)", "origin": "fk", "qualifier": null, "rel": "has_plate_size", "source_node": "sticker-gangpan-diecut", "src": "sticker-gangpan-diecut"}
+{"dst": "printopt-POPT_000001", "note": "단면(front CMYK 4도·back 인쇄 안 함)·공유 축 재사용", "origin": "fk", "qualifier": null, "rel": "has_print_option", "source_node": "sticker-gangpan-diecut", "src": "sticker-gangpan-diecut"}
+{"dst": "process-PROC_000055", "note": "스티커완칼(도무송·mand_proc_yn=N·상위 없음)·합판 정체 공정", "origin": "fk", "qualifier": null, "rel": "has_process", "source_node": "sticker-gangpan-diecut", "src": "sticker-gangpan-diecut"}
+{"dst": "qty-066", "note": "상품 min 1000·incr 1000 + bundle_qtys 5행(EA 8/6/3/2/1)", "origin": "fk", "qualifier": null, "rel": "has_qty_rule", "source_node": "sticker-gangpan-diecut", "src": "sticker-gangpan-diecut"}
+{"dst": "size-SIZ_000212", "note": "정사각10x10mm(8EA)·dflt·형상=size 정사각 family(12) 대표", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "sticker-gangpan-diecut", "src": "sticker-gangpan-diecut"}
+{"dst": "size-SIZ_000224", "note": "직사각35x25mm(2EA)·직사각 family(14) 대표", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "sticker-gangpan-diecut", "src": "sticker-gangpan-diecut"}
+{"dst": "size-SIZ_000501", "note": "원형10x10·원형 family(11) 대표(전체 37 형상=companion 전사표)", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "sticker-gangpan-diecut", "src": "sticker-gangpan-diecut"}
+{"dst": "category-CAT_000002", "note": "스티커(main_cat_yn=Y·disp 4)", "origin": "fk", "qualifier": null, "rel": "in_category", "source_node": "sticker-gangpan-diecut", "src": "sticker-gangpan-diecut"}
+{"dst": "category-CAT_000037", "note": "규격스티커(부·main_cat_yn=N·상위 CAT_000002)", "origin": "fk", "qualifier": null, "rel": "in_category", "source_node": "sticker-gangpan-diecut", "src": "sticker-gangpan-diecut"}
+{"dst": "formula-PRF_GANGPAN_FIXED", "note": "합판도무송 완제품가 고정가 룩업(원자합산 아님·COMP_GANGPAN_PRINT)", "origin": "fk", "qualifier": null, "rel": "priced_by", "source_node": "sticker-gangpan-diecut", "src": "sticker-gangpan-diecut"}
+{"dst": "DEC_wiring_round22_260702", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-gangpan-diecut", "src": "sticker-gangpan-diecut"}
+{"dst": "RULE_dosu_is_printopt", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-gangpan-diecut", "src": "sticker-gangpan-diecut"}
+{"dst": "RULE_import_material_no_delete", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-gangpan-diecut", "src": "sticker-gangpan-diecut"}
+{"dst": "RULE_pansu_db_function", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-gangpan-diecut", "src": "sticker-gangpan-diecut"}
+{"dst": "RULE_plate_paper_only", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-gangpan-diecut", "src": "sticker-gangpan-diecut"}
+{"dst": "gap-066-coating-conflict", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-gangpan-diecut", "src": "sticker-gangpan-diecut"}
+{"dst": "gap-066-empty-optgroup-resolved", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-gangpan-diecut", "src": "sticker-gangpan-diecut"}
+{"dst": "gap-066-mattype-note-skew", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-gangpan-diecut", "src": "sticker-gangpan-diecut"}
+{"dst": "gap-066-plate-otyp", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-gangpan-diecut", "src": "sticker-gangpan-diecut"}
+{"dst": "gap-066-price-golden", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-gangpan-diecut", "src": "sticker-gangpan-diecut"}
+{"dst": "gap-066-rekeying-skew", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-gangpan-diecut", "src": "sticker-gangpan-diecut"}
+{"dst": "gap-066-shape-model-family", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-gangpan-diecut", "src": "sticker-gangpan-diecut"}
+{"dst": "gap-066-yeondangga", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-gangpan-diecut", "src": "sticker-gangpan-diecut"}
+{"dst": "material-MAT_000084", "note": "비코팅스티커 90g·MAT_TYPE.13 합판스티커용지", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "sticker-gangpan-diecut", "src": "sticker-gangpan-diecut"}
+{"dst": "material-MAT_000153", "note": "유포스티커 80g·MAT_TYPE.11·parent 직접참조", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "sticker-gangpan-diecut", "src": "sticker-gangpan-diecut"}
+{"dst": "material-MAT_000155", "note": "무광코팅스티커·★코팅 CONFLICT(자재 vs 공정)", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "sticker-gangpan-diecut", "src": "sticker-gangpan-diecut"}
+{"dst": "material-MAT_000156", "note": "유광코팅스티커·★코팅 CONFLICT", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "sticker-gangpan-diecut", "src": "sticker-gangpan-diecut"}
+{"dst": "material-MAT_000170", "note": "투명데드롱스티커 25g·MAT_TYPE.13", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "sticker-gangpan-diecut", "src": "sticker-gangpan-diecut"}
+{"dst": "material-MAT_000171", "note": "은데드롱스티커 25g·MAT_TYPE.13", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "sticker-gangpan-diecut", "src": "sticker-gangpan-diecut"}
+{"dst": "optgroup-053-cutting", "note": "커팅(공정) 택1 필수 — 반칼(자유형)·★ref 재키잉 불일치", "origin": "fk", "qualifier": null, "rel": "has_option_group", "source_node": "sticker-halfcut-clear", "src": "sticker-halfcut-clear"}
+{"dst": "optgroup-053-paper", "note": "종이(자재) 택1 필수 — 백색후지/투명후지", "origin": "fk", "qualifier": null, "rel": "has_option_group", "source_node": "sticker-halfcut-clear", "src": "sticker-halfcut-clear"}
+{"dst": "optgroup-053-print", "note": "인쇄(도수) 택1 필수 — 단면 단일", "origin": "fk", "qualifier": null, "rel": "has_option_group", "source_node": "sticker-halfcut-clear", "src": "sticker-halfcut-clear"}
+{"dst": "optgroup-053-white", "note": "화이트별색(공정) 택1 선택 — 화이트인쇄/화이트없음", "origin": "fk", "qualifier": null, "rel": "has_option_group", "source_node": "sticker-halfcut-clear", "src": "sticker-halfcut-clear"}
+{"dst": "plate-053-SIZ_000521", "note": "46계열 전지(330x470·OUTPUT_PAPER_TYPE.02)·종이류(점착지) 판형 유효·fn_best_plate 자동선택", "origin": "fk", "qualifier": null, "rel": "has_plate_size", "source_node": "sticker-halfcut-clear", "src": "sticker-halfcut-clear"}
+{"dst": "printopt-POPT_000001", "note": "단면(앞 CMYK4도 CLR_000005·뒤 인쇄안함 CLR_000001)·양면 미보유", "origin": "fk", "qualifier": null, "rel": "has_print_option", "source_node": "sticker-halfcut-clear", "src": "sticker-halfcut-clear"}
+{"dst": "process-PROC_000008", "note": "화이트 underbase(별색 자식·선택)·투명 베이스 위 가시화·도수 아님", "origin": "fk", "qualifier": {"mand": "N"}, "rel": "has_process", "source_node": "sticker-halfcut-clear", "src": "sticker-halfcut-clear"}
+{"dst": "process-PROC_000122", "note": "반칼커팅(active·upr PROC_000121·2026-06-29 재발급)·구 반칼 PROC_000054는 del_yn=Y", "origin": "fk", "qualifier": {"mand": "N"}, "rel": "has_process", "source_node": "sticker-halfcut-clear", "src": "sticker-halfcut-clear"}
+{"dst": "qty-053", "note": "상품레벨 min 8·max 10000·incr 8·QTY_UNIT.02(bundle_qtys 0행)", "origin": "fk", "qualifier": null, "rel": "has_qty_rule", "source_node": "sticker-halfcut-clear", "src": "sticker-halfcut-clear"}
+{"dst": "size-053-SIZ_000057", "note": "A6(105x148)·판걸이=8.0", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "sticker-halfcut-clear", "src": "sticker-halfcut-clear"}
+{"dst": "size-053-SIZ_000170", "note": "A5(148x210)·상품행 활성/마스터 삭제 불일치 관찰", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "sticker-halfcut-clear", "src": "sticker-halfcut-clear"}
+{"dst": "size-053-SIZ_000520", "note": "A4(210x297) 반칼 규격 래퍼·판걸이=2.0", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "sticker-halfcut-clear", "src": "sticker-halfcut-clear"}
+{"dst": "category-CAT_000002", "note": "스티커(main_cat_yn=Y 주 카테고리·라이브 실측)", "origin": "fk", "qualifier": null, "rel": "in_category", "source_node": "sticker-halfcut-clear", "src": "sticker-halfcut-clear"}
+{"dst": "category-CAT_000309", "note": "자유형스티커(main_cat_yn=N 부·CAT_000002 자식)", "origin": "fk", "qualifier": null, "rel": "in_category", "source_node": "sticker-halfcut-clear", "src": "sticker-halfcut-clear"}
+{"dst": "formula-PRF_STK_FIXED", "note": "스티커 완제품가 고정가 룩업(형상×치수×수량 격자)·원자합산형 아님(§3.10)", "origin": "fk", "qualifier": null, "rel": "priced_by", "source_node": "sticker-halfcut-clear", "src": "sticker-halfcut-clear"}
+{"dst": "DEC_qty_audit_260702", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-halfcut-clear", "src": "sticker-halfcut-clear"}
+{"dst": "DEC_wiring_round22_260702", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-halfcut-clear", "src": "sticker-halfcut-clear"}
+{"dst": "RULE_dosu_is_printopt", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-halfcut-clear", "src": "sticker-halfcut-clear"}
+{"dst": "RULE_import_material_no_delete", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-halfcut-clear", "src": "sticker-halfcut-clear"}
+{"dst": "RULE_pansu_db_function", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-halfcut-clear", "src": "sticker-halfcut-clear"}
+{"dst": "RULE_plate_paper_only", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-halfcut-clear", "src": "sticker-halfcut-clear"}
+{"dst": "RULE_price_value_boundary", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-halfcut-clear", "src": "sticker-halfcut-clear"}
+{"dst": "RULE_scope_boundary", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-halfcut-clear", "src": "sticker-halfcut-clear"}
+{"dst": "component-COMP_STK_PRINT", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-halfcut-clear", "src": "sticker-halfcut-clear"}
+{"dst": "gap-053-cutting-rekey", "note": "커팅 옵션참조가 삭제된 PROC_000054 지목(fn_chk_opt_item_ref 위험)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-halfcut-clear", "src": "sticker-halfcut-clear"}
+{"dst": "gap-053-piece-count-storage", "note": "반칼 조각수 상품레벨 저장처 부재(GAP-ST-2/OM-7)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-halfcut-clear", "src": "sticker-halfcut-clear"}
+{"dst": "gap-053-yeondangga-repricing", "note": "연당가 급변→완제품가 전파 여부 열린 질문", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-halfcut-clear", "src": "sticker-halfcut-clear"}
+{"dst": "matcost-053-clear-backing", "note": "투명후지 소재 연당가 현재값 vs 260702 정답(신규행·재적재 워크리스트)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-halfcut-clear", "src": "sticker-halfcut-clear"}
+{"dst": "matcost-053-white-backing", "note": "백색후지 소재 연당가 현재값 vs 260702 정답(재적재 워크리스트)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-halfcut-clear", "src": "sticker-halfcut-clear"}
+{"dst": "sticker-halfcut-hologram", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-halfcut-clear", "src": "sticker-halfcut-clear"}
+{"dst": "material-MAT_000371", "note": "투명스티커(백색후지)·MAT_TYPE.11·dflt·원가는 양면 matcost-053-white-backing", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "sticker-halfcut-clear", "src": "sticker-halfcut-clear"}
+{"dst": "material-MAT_000372", "note": "투명스티커(투명후지)·MAT_TYPE.11·260702 신규행·원가는 양면 matcost-053-clear-backing", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "sticker-halfcut-clear", "src": "sticker-halfcut-clear"}
+{"dst": "plate-054-SIZ_000521", "note": "46계열 전지 330x470(국전 아님)·반칼 표준전지·fn_best_plate 자동선택", "origin": "fk", "qualifier": null, "rel": "has_plate_size", "source_node": "sticker-halfcut-hologram", "src": "sticker-halfcut-hologram"}
+{"dst": "printopt-POPT_000001", "note": "단면(앞 CMYK4도·뒤 인쇄안함)·양면 미보유", "origin": "fk", "qualifier": null, "rel": "has_print_option", "source_node": "sticker-halfcut-hologram", "src": "sticker-halfcut-hologram"}
+{"dst": "process-PROC_000008", "note": "화이트인쇄 underbase(별색 자식·홀로그램 위 흰 밑판·가격배선 GAP)", "origin": "fk", "qualifier": {"mand": "N"}, "rel": "has_process", "source_node": "sticker-halfcut-hologram", "src": "sticker-halfcut-hologram"}
+{"dst": "process-PROC_000054", "note": "반칼 Kiss Cut(자유형 칼틀·모양+조각수 input)", "origin": "fk", "qualifier": {"mand": "N"}, "rel": "has_process", "source_node": "sticker-halfcut-hologram", "src": "sticker-halfcut-hologram"}
+{"dst": "qty-054", "note": "상품레벨 min 8·max 10000·incr 8·QTY_UNIT.02(bundle_qtys 0행)", "origin": "fk", "qualifier": null, "rel": "has_qty_rule", "source_node": "sticker-halfcut-hologram", "src": "sticker-halfcut-hologram"}
+{"dst": "size-054-SIZ_000170", "note": "A5 148x210(주문 사이즈·마스터 del_yn=Y vs 링크 활성 불일치)", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "sticker-halfcut-hologram", "src": "sticker-halfcut-hologram"}
+{"dst": "size-054-SIZ_000520", "note": "A4 반칼 규격 래퍼(판걸이=2.0·반칼 전용가)", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "sticker-halfcut-hologram", "src": "sticker-halfcut-hologram"}
+{"dst": "category-CAT_000002", "note": "스티커(main_cat_yn=Y 주 카테고리)", "origin": "fk", "qualifier": null, "rel": "in_category", "source_node": "sticker-halfcut-hologram", "src": "sticker-halfcut-hologram"}
+{"dst": "category-CAT_000309", "note": "자유형스티커(main_cat_yn=N 부 카테고리·자유 칼틀)", "origin": "fk", "qualifier": null, "rel": "in_category", "source_node": "sticker-halfcut-hologram", "src": "sticker-halfcut-hologram"}
+{"dst": "formula-PRF_STK_FIXED", "note": "완제품가 고정가 룩업(원자합산형 아님)·COMP_STK_PRINT 격자", "origin": "fk", "qualifier": null, "rel": "priced_by", "source_node": "sticker-halfcut-hologram", "src": "sticker-halfcut-hologram"}
+{"dst": "DEC_qty_audit_260702", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-halfcut-hologram", "src": "sticker-halfcut-hologram"}
+{"dst": "RULE_dosu_is_printopt", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-halfcut-hologram", "src": "sticker-halfcut-hologram"}
+{"dst": "RULE_plate_paper_only", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-halfcut-hologram", "src": "sticker-halfcut-hologram"}
+{"dst": "RULE_price_value_boundary", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-halfcut-hologram", "src": "sticker-halfcut-hologram"}
+{"dst": "component-COMP_STK_PRINT", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-halfcut-hologram", "src": "sticker-halfcut-hologram"}
+{"dst": "gap-054-piece-count-storage", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-halfcut-hologram", "src": "sticker-halfcut-hologram"}
+{"dst": "gap-054-white-underbase-price", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-halfcut-hologram", "src": "sticker-halfcut-hologram"}
+{"dst": "gap-054-yeondangga-repricing", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-halfcut-hologram", "src": "sticker-halfcut-hologram"}
+{"dst": "matcost-054-hologram", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-halfcut-hologram", "src": "sticker-halfcut-hologram"}
+{"dst": "plate-OUTPUT_PAPER_TYPE_01", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-halfcut-hologram", "src": "sticker-halfcut-hologram"}
+{"dst": "material-MAT_000163", "note": "홀로그램 점착지(MAT_TYPE.11·USAGE.07 단일 슬롯·dflt Y)", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "sticker-halfcut-hologram", "src": "sticker-halfcut-hologram"}
+{"dst": "plate-OUTPUT_PAPER_TYPE_02", "note": "46계열 전지 SIZ_000521 330x470(active·dflt)·점착지=종이류라 판형 유효·fn_best_plate 자동선택·공유 재사용(052)", "origin": "fk", "qualifier": null, "rel": "has_plate_size", "source_node": "sticker-pack", "src": "sticker-pack"}
+{"dst": "printopt-POPT_000001", "note": "단면 단일(front CMYK 4도·back 인쇄 안 함)·공유 축 재사용", "origin": "fk", "qualifier": null, "rel": "has_print_option", "source_node": "sticker-pack", "src": "sticker-pack"}
+{"dst": "qty-065", "note": null, "origin": "fk", "qualifier": null, "rel": "has_qty_rule", "source_node": "sticker-pack", "src": "sticker-pack"}
+{"dst": "size-SIZ_000068", "note": "75x110·판걸이=16·적용 스티커팩(단일 사이즈)", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "sticker-pack", "src": "sticker-pack"}
+{"dst": "category-CAT_000002", "note": "스티커(root·main_cat_yn=Y·cat_lvl 1)·공유 재사용", "origin": "fk", "qualifier": null, "rel": "in_category", "source_node": "sticker-pack", "src": "sticker-pack"}
+{"dst": "category-CAT_000312", "note": "스티커팩(cat_lvl 2·main_cat_yn=N·상위 CAT_000002)·local", "origin": "fk", "qualifier": null, "rel": "in_category", "source_node": "sticker-pack", "src": "sticker-pack"}
+{"dst": "formula-PRF_STK_PACK", "note": "완제품가 합가형(54장1세트 4000·COMP_STK_PACK·소재무관)", "origin": "fk", "qualifier": null, "rel": "priced_by", "source_node": "sticker-pack", "src": "sticker-pack"}
+{"dst": "RULE_dosu_is_printopt", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-pack", "src": "sticker-pack"}
+{"dst": "RULE_import_material_no_delete", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-pack", "src": "sticker-pack"}
+{"dst": "RULE_pansu_db_function", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-pack", "src": "sticker-pack"}
+{"dst": "RULE_price_value_boundary", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-pack", "src": "sticker-pack"}
+{"dst": "gap-053-yeondangga-repricing", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-pack", "src": "sticker-pack"}
+{"dst": "gap-065-cpq-option-layer", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-pack", "src": "sticker-pack"}
+{"dst": "gap-065-liandan-out-of-scope", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-pack", "src": "sticker-pack"}
+{"dst": "gap-065-material-type-label", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-pack", "src": "sticker-pack"}
+{"dst": "gap-065-pack-qty-band", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-pack", "src": "sticker-pack"}
+{"dst": "gap-065-set-composition", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-pack", "src": "sticker-pack"}
+{"dst": "material-MAT_000084", "note": "비코팅스티커(★live mat_typ=MAT_TYPE.13·note는 .11 주장·dflt)·공유 재사용(spec-rectangle)", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "sticker-pack", "src": "sticker-pack"}
+{"dst": "material-MAT_000242", "note": "미색스티커(MAT_TYPE.11·dflt)·공유 재사용(spec-rectangle)", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "sticker-pack", "src": "sticker-pack"}
+{"dst": "plate-056-OUTPUT_PAPER_TYPE_03", "note": "규격 낱장 출력용지(A4/A3/A2·OUTPUT_PAPER_TYPE.03)·종이류(점착지)라 판형 유효·fn_best_plate 자동선택", "origin": "fk", "qualifier": null, "rel": "has_plate_size", "source_node": "sticker-sheet-clear-white", "src": "sticker-sheet-clear-white"}
+{"dst": "printopt-POPT_000001", "note": "단면(앞 CMYK 4도·뒤 인쇄 안 함)·양면 미보유", "origin": "fk", "qualifier": null, "rel": "has_print_option", "source_node": "sticker-sheet-clear-white", "src": "sticker-sheet-clear-white"}
+{"dst": "process-PROC_000008", "note": "화이트인쇄 underbase(투명 베이스 가시화·PROC_000007 별색 자식·clr_cd=NULL)·053/054/056 CORRECT(C-ST-14)·도수 아님", "origin": "fk", "qualifier": {"mand": "N"}, "rel": "has_process", "source_node": "sticker-sheet-clear-white", "src": "sticker-sheet-clear-white"}
+{"dst": "process-PROC_000053", "note": "완칼(Die Cut·종이+후지 자름)·자유형 칼틀·disp 1(공유 축 재사용)", "origin": "fk", "qualifier": {"mand": "N"}, "rel": "has_process", "source_node": "sticker-sheet-clear-white", "src": "sticker-sheet-clear-white"}
+{"dst": "qty-056", "note": "상품레벨 min 1·max 10000·incr 1·QTY_UNIT.02(bundle_qtys 0행)", "origin": "fk", "qualifier": null, "rel": "has_qty_rule", "source_node": "sticker-sheet-clear-white", "src": "sticker-sheet-clear-white"}
+{"dst": "size-SIZ_000172", "note": "A4(210x297)·dflt Y", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "sticker-sheet-clear-white", "src": "sticker-sheet-clear-white"}
+{"dst": "size-SIZ_000174", "note": "A3(297x420)·dflt Y", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "sticker-sheet-clear-white", "src": "sticker-sheet-clear-white"}
+{"dst": "size-SIZ_000197", "note": "A2(420x594)·dflt Y", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "sticker-sheet-clear-white", "src": "sticker-sheet-clear-white"}
+{"dst": "size-SIZ_000514", "note": "B3(364x515)·dflt N 보조", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "sticker-sheet-clear-white", "src": "sticker-sheet-clear-white"}
+{"dst": "size-SIZ_000515", "note": "B4(257x364)·dflt N 보조", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "sticker-sheet-clear-white", "src": "sticker-sheet-clear-white"}
+{"dst": "category-CAT_000002", "note": "스티커(main_cat_yn=Y 주 카테고리·라이브 실측)", "origin": "fk", "qualifier": null, "rel": "in_category", "source_node": "sticker-sheet-clear-white", "src": "sticker-sheet-clear-white"}
+{"dst": "category-CAT_000309", "note": "자유형스티커(main_cat_yn=N 부·CAT_000002 자식)", "origin": "fk", "qualifier": null, "rel": "in_category", "source_node": "sticker-sheet-clear-white", "src": "sticker-sheet-clear-white"}
+{"dst": "formula-PRF_STK_FIXED", "note": "스티커 완제품가 고정가 룩업(형상×치수×수량 격자)·원자합산형 아님(§3.10)", "origin": "fk", "qualifier": null, "rel": "priced_by", "source_node": "sticker-sheet-clear-white", "src": "sticker-sheet-clear-white"}
+{"dst": "RULE_dosu_is_printopt", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-sheet-clear-white", "src": "sticker-sheet-clear-white"}
+{"dst": "RULE_import_material_no_delete", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-sheet-clear-white", "src": "sticker-sheet-clear-white"}
+{"dst": "RULE_pansu_db_function", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-sheet-clear-white", "src": "sticker-sheet-clear-white"}
+{"dst": "component-COMP_STK_PRINT", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-sheet-clear-white", "src": "sticker-sheet-clear-white"}
+{"dst": "gap-056-cpq-option-layer", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-sheet-clear-white", "src": "sticker-sheet-clear-white"}
+{"dst": "gap-056-retail-cost-propagation", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-sheet-clear-white", "src": "sticker-sheet-clear-white"}
+{"dst": "material-MAT_000372", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-sheet-clear-white", "src": "sticker-sheet-clear-white"}
+{"dst": "material-MAT_000162", "note": "투명스티커(점착지 MAT_TYPE.11·USAGE.07)·★연당가 양면 defect(§4-D 재적재 워크리스트)", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "sticker-sheet-clear-white", "src": "sticker-sheet-clear-white"}
+{"dst": "plate-OUTPUT_PAPER_TYPE_02", "note": "46계열 출력용지(SIZ_000521 330x470)·점착지=종이류라 판형 유효·fn_best_plate 자동선택·공유 재사용(052 companion 정의)", "origin": "fk", "qualifier": null, "rel": "has_plate_size", "source_node": "sticker-smallqty-freeform", "src": "sticker-smallqty-freeform"}
+{"dst": "printopt-POPT_000001", "note": "단면 단일(front CMYK 4도·back 인쇄 안 함)·공유 축 재사용", "origin": "fk", "qualifier": null, "rel": "has_print_option", "source_node": "sticker-smallqty-freeform", "src": "sticker-smallqty-freeform"}
+{"dst": "process-PROC_000054", "note": "반칼(Kiss Cut·종이만·opt disp 1·모양+조각수 param)·★052는 PROC_000122로 이관했으나 064는 구 PROC_000054 그대로 활성·공유 재사용(halfcut-hologram 정의)", "origin": "fk", "qualifier": null, "rel": "has_process", "source_node": "sticker-smallqty-freeform", "src": "sticker-smallqty-freeform"}
+{"dst": "qty-064", "note": null, "origin": "fk", "qualifier": null, "rel": "has_qty_rule", "source_node": "sticker-smallqty-freeform", "src": "sticker-smallqty-freeform"}
+{"dst": "size-SIZ_000036", "note": "94x94(판걸이 12.0·재단 94·작업 98)·공유 재사용(product-043 bg-opp 정의)", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "sticker-smallqty-freeform", "src": "sticker-smallqty-freeform"}
+{"dst": "size-SIZ_000043", "note": "80x80(판걸이 15.0·재단 80·작업 84)·공유 재사용(product-045 header-tag 정의)", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "sticker-smallqty-freeform", "src": "sticker-smallqty-freeform"}
+{"dst": "size-SIZ_000061", "note": "50x70 소형반칼(판걸이 32.0·064 전용 신설)", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "sticker-smallqty-freeform", "src": "sticker-smallqty-freeform"}
+{"dst": "size-SIZ_000062", "note": "70x50 소형반칼(판걸이 32.0·064 전용 신설)", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "sticker-smallqty-freeform", "src": "sticker-smallqty-freeform"}
+{"dst": "size-SIZ_000063", "note": "50x94 소형반칼(판걸이 24.0·064 전용 신설)", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "sticker-smallqty-freeform", "src": "sticker-smallqty-freeform"}
+{"dst": "size-SIZ_000064", "note": "94x50 소형반칼(판걸이 24.0·064 전용 신설)", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "sticker-smallqty-freeform", "src": "sticker-smallqty-freeform"}
+{"dst": "size-SIZ_000065", "note": "65x65 소형반칼(판걸이 24.0·064 전용 신설)", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "sticker-smallqty-freeform", "src": "sticker-smallqty-freeform"}
+{"dst": "category-CAT_000002", "note": "스티커(root·main_cat_yn=Y·cat_lvl 1)·공유 재사용(052 companion 정의)", "origin": "fk", "qualifier": null, "rel": "in_category", "source_node": "sticker-smallqty-freeform", "src": "sticker-smallqty-freeform"}
+{"dst": "category-CAT_000309", "note": "자유형스티커(cat_lvl 2·상위 CAT_000002)·공유 재사용", "origin": "fk", "qualifier": null, "rel": "in_category", "source_node": "sticker-smallqty-freeform", "src": "sticker-smallqty-freeform"}
+{"dst": "formula-PRF_STK_FIXED", "note": "완제품가 고정가 룩업형(COMP_STK_PRINT·siz×mat×수량 격자)·공유 재사용", "origin": "fk", "qualifier": null, "rel": "priced_by", "source_node": "sticker-smallqty-freeform", "src": "sticker-smallqty-freeform"}
+{"dst": "RULE_dosu_is_printopt", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-smallqty-freeform", "src": "sticker-smallqty-freeform"}
+{"dst": "RULE_import_material_no_delete", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-smallqty-freeform", "src": "sticker-smallqty-freeform"}
+{"dst": "RULE_pansu_db_function", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-smallqty-freeform", "src": "sticker-smallqty-freeform"}
+{"dst": "RULE_plate_paper_only", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-smallqty-freeform", "src": "sticker-smallqty-freeform"}
+{"dst": "RULE_price_value_boundary", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-smallqty-freeform", "src": "sticker-smallqty-freeform"}
+{"dst": "gap-064-coating-conflict", "note": "코팅=자재(155/156)만·Q9 공정 권위와 상충(material-only·052보다 단일)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-smallqty-freeform", "src": "sticker-smallqty-freeform"}
+{"dst": "gap-064-cpq-missing", "note": "CPQ 옵션 레이어 전면 부재(BATCH-6)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-smallqty-freeform", "src": "sticker-smallqty-freeform"}
+{"dst": "gap-064-liandan-out-of-scope", "note": "064 소재 연당가 clean·워크리스트 포인터", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-smallqty-freeform", "src": "sticker-smallqty-freeform"}
+{"dst": "material-MAT_000084", "note": "비코팅스티커 90g·★mat_typ_cd=MAT_TYPE.13(note는 .11 선언·유형 드리프트 관찰)·공유 재사용", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "sticker-smallqty-freeform", "src": "sticker-smallqty-freeform"}
+{"dst": "material-MAT_000153", "note": "유포스티커 80g(parent 코드·dflt)·공유 재사용(spec-rectangle 정의)", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "sticker-smallqty-freeform", "src": "sticker-smallqty-freeform"}
+{"dst": "material-MAT_000155", "note": "무광코팅스티커 90g·★코팅=자재 흡수(BATCH-3 CONFLICT 자재측)·공유 재사용", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "sticker-smallqty-freeform", "src": "sticker-smallqty-freeform"}
+{"dst": "material-MAT_000156", "note": "유광코팅스티커 90g·★코팅=자재 흡수(BATCH-3 CONFLICT 자재측)·공유 재사용", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "sticker-smallqty-freeform", "src": "sticker-smallqty-freeform"}
+{"dst": "material-MAT_000242", "note": "미색스티커·공유 재사용(note '정정 종이(.01)→스티커(.11)')", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "sticker-smallqty-freeform", "src": "sticker-smallqty-freeform"}
+{"dst": "optgroup-058-cutting", "note": "커팅=원형 형상 25~90mm 10값(형상 저장처)", "origin": "fk", "qualifier": null, "rel": "has_option_group", "source_node": "sticker-spec-circle", "src": "sticker-spec-circle"}
+{"dst": "optgroup-058-paper", "note": "종이=자재 5종(코팅 포함)", "origin": "fk", "qualifier": null, "rel": "has_option_group", "source_node": "sticker-spec-circle", "src": "sticker-spec-circle"}
+{"dst": "optgroup-058-print", "note": "인쇄=단면 도수", "origin": "fk", "qualifier": null, "rel": "has_option_group", "source_node": "sticker-spec-circle", "src": "sticker-spec-circle"}
+{"dst": "plate-058-SIZ_000521", "note": "330x470·OUTPUT_PAPER_TYPE.02(46계열)·종이류=점착지 판형 유효·fn_best_plate", "origin": "fk", "qualifier": null, "rel": "has_plate_size", "source_node": "sticker-spec-circle", "src": "sticker-spec-circle"}
+{"dst": "printopt-POPT_000001", "note": "단면(front CMYK 4도·back 인쇄 안 함)·공유 축 재사용", "origin": "fk", "qualifier": null, "rel": "has_print_option", "source_node": "sticker-spec-circle", "src": "sticker-spec-circle"}
+{"dst": "process-PROC_000122", "note": "반칼커팅(mand_proc_yn=N·상위 PROC_000121)", "origin": "fk", "qualifier": null, "rel": "has_process", "source_node": "sticker-spec-circle", "src": "sticker-spec-circle"}
+{"dst": "qty-058", "note": null, "origin": "fk", "qualifier": null, "rel": "has_qty_rule", "source_node": "sticker-spec-circle", "src": "sticker-spec-circle"}
+{"dst": "size-SIZ_000170", "note": "A5 148x210·dflt(가격격자 B01 col1 키)", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "sticker-spec-circle", "src": "sticker-spec-circle"}
+{"dst": "size-SIZ_000520", "note": "A4 반칼(시트 규격·라벨 인코딩)", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "sticker-spec-circle", "src": "sticker-spec-circle"}
+{"dst": "category-CAT_000002", "note": "스티커(main_cat_yn=Y·disp 8)", "origin": "fk", "qualifier": null, "rel": "in_category", "source_node": "sticker-spec-circle", "src": "sticker-spec-circle"}
+{"dst": "category-CAT_000037", "note": "규격스티커(부·main_cat_yn=N·disp 11·상위 CAT_000002)", "origin": "fk", "qualifier": null, "rel": "in_category", "source_node": "sticker-spec-circle", "src": "sticker-spec-circle"}
+{"dst": "formula-PRF_STK_FIXED", "note": "스티커 완제품가 고정가 룩업(원자합산 아님)", "origin": "fk", "qualifier": null, "rel": "priced_by", "source_node": "sticker-spec-circle", "src": "sticker-spec-circle"}
+{"dst": "DEC_wiring_round22_260702", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-circle", "src": "sticker-spec-circle"}
+{"dst": "RULE_dosu_is_printopt", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-circle", "src": "sticker-spec-circle"}
+{"dst": "RULE_import_material_no_delete", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-circle", "src": "sticker-spec-circle"}
+{"dst": "RULE_pansu_db_function", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-circle", "src": "sticker-spec-circle"}
+{"dst": "gap-023-diecut-golden", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-circle", "src": "sticker-spec-circle"}
+{"dst": "gap-058-coating-conflict", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-circle", "src": "sticker-spec-circle"}
+{"dst": "gap-058-constraint-stale-size", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-circle", "src": "sticker-spec-circle"}
+{"dst": "gap-058-price-golden", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-circle", "src": "sticker-spec-circle"}
+{"dst": "gap-058-shape-storage", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-circle", "src": "sticker-spec-circle"}
+{"dst": "gap-058-yeondangga", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-circle", "src": "sticker-spec-circle"}
+{"dst": "material-MAT_000584", "note": "유포스티커 80g·USAGE.07·MAT_TYPE.11", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "sticker-spec-circle", "src": "sticker-spec-circle"}
+{"dst": "material-MAT_000585", "note": "무광코팅스티커·★코팅 CONFLICT(자재 vs 공정)", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "sticker-spec-circle", "src": "sticker-spec-circle"}
+{"dst": "material-MAT_000586", "note": "유광코팅스티커·★코팅 CONFLICT", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "sticker-spec-circle", "src": "sticker-spec-circle"}
+{"dst": "material-MAT_000609", "note": "미색스티커 모조 80g·USAGE.07", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "sticker-spec-circle", "src": "sticker-spec-circle"}
+{"dst": "material-MAT_000611", "note": "아트스티커 90g·USAGE.07(07-01 재키잉 art-clone)", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "sticker-spec-circle", "src": "sticker-spec-circle"}
+{"dst": "optgroup-062-paper", "note": "용지=자재 5종(OPT-000041)·★ref_dim 미배선(circle와 다름)", "origin": "fk", "qualifier": null, "rel": "has_option_group", "source_node": "sticker-spec-fancy", "src": "sticker-spec-fancy"}
+{"dst": "optgroup-062-print", "note": "인쇄=단면 도수(OPT-000040)", "origin": "fk", "qualifier": null, "rel": "has_option_group", "source_node": "sticker-spec-fancy", "src": "sticker-spec-fancy"}
+{"dst": "plate-062-SIZ_000521", "note": "330x470·OUTPUT_PAPER_TYPE.02(46계열)·종이류=점착지 판형 유효·fn_best_plate. SIZ_000200/201/202(파일사양)는 06-30 del_yn=Y", "origin": "fk", "qualifier": null, "rel": "has_plate_size", "source_node": "sticker-spec-fancy", "src": "sticker-spec-fancy"}
+{"dst": "printopt-POPT_000001", "note": "단면(front CLR_000005 4도·back CLR_000001 인쇄 안 함)·공유 축 재사용", "origin": "fk", "qualifier": null, "rel": "has_print_option", "source_node": "sticker-spec-fancy", "src": "sticker-spec-fancy"}
+{"dst": "process-PROC_000122", "note": "반칼커팅(mand_proc_yn=N·상위 PROC_000121)·★상품명 '반칼'과 일치(059의 PROC_000055 불일치와 다름)", "origin": "fk", "qualifier": null, "rel": "has_process", "source_node": "sticker-spec-fancy", "src": "sticker-spec-fancy"}
+{"dst": "qty-062", "note": null, "origin": "fk", "qualifier": null, "rel": "has_qty_rule", "source_node": "sticker-spec-fancy", "src": "sticker-spec-fancy"}
+{"dst": "size-SIZ_000058", "note": "100x140·dflt_yn=N·★COMP_STK_PRINT 0행(silent-0·[[sticker-spec-fancy#gap-062-siz058-price-missing]])", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "sticker-spec-fancy", "src": "sticker-spec-fancy"}
+{"dst": "size-SIZ_000059", "note": "124x186(A5 4판)·dflt·가격격자 충전 180행", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "sticker-spec-fancy", "src": "sticker-spec-fancy"}
+{"dst": "size-SIZ_000060", "note": "90x190·dflt·가격격자 충전 180행", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "sticker-spec-fancy", "src": "sticker-spec-fancy"}
+{"dst": "category-CAT_000002", "note": "스티커(main_cat_yn=Y·disp 12)", "origin": "fk", "qualifier": null, "rel": "in_category", "source_node": "sticker-spec-fancy", "src": "sticker-spec-fancy"}
+{"dst": "category-CAT_000037", "note": "규격스티커(부·main_cat_yn=N·상위 CAT_000002)", "origin": "fk", "qualifier": null, "rel": "in_category", "source_node": "sticker-spec-fancy", "src": "sticker-spec-fancy"}
+{"dst": "formula-PRF_STK_FIXED", "note": "스티커 완제품가 고정가 룩업(원자합산 아님)", "origin": "fk", "qualifier": null, "rel": "priced_by", "source_node": "sticker-spec-fancy", "src": "sticker-spec-fancy"}
+{"dst": "DEC_wiring_round22_260702", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-fancy", "src": "sticker-spec-fancy"}
+{"dst": "RULE_dataline_neq_wiring", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-fancy", "src": "sticker-spec-fancy"}
+{"dst": "RULE_dosu_is_printopt", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-fancy", "src": "sticker-spec-fancy"}
+{"dst": "RULE_import_material_no_delete", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-fancy", "src": "sticker-spec-fancy"}
+{"dst": "RULE_pansu_db_function", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-fancy", "src": "sticker-spec-fancy"}
+{"dst": "component-COMP_STK_PRINT", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-fancy", "src": "sticker-spec-fancy"}
+{"dst": "gap-058-price-golden", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-fancy", "src": "sticker-spec-fancy"}
+{"dst": "gap-062-coating-conflict", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-fancy", "src": "sticker-spec-fancy"}
+{"dst": "gap-062-paper-unwired", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-fancy", "src": "sticker-spec-fancy"}
+{"dst": "gap-062-price-golden", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-fancy", "src": "sticker-spec-fancy"}
+{"dst": "gap-062-shape-storage", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-fancy", "src": "sticker-spec-fancy"}
+{"dst": "gap-062-siz058-price-missing", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-fancy", "src": "sticker-spec-fancy"}
+{"dst": "gap-062-yeondangga", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-fancy", "src": "sticker-spec-fancy"}
+{"dst": "material-MAT_000584", "note": "유포스티커 80g·USAGE.07·MAT_TYPE.11", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "sticker-spec-fancy", "src": "sticker-spec-fancy"}
+{"dst": "material-MAT_000585", "note": "무광코팅스티커·★코팅 CONFLICT(자재 vs 공정)", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "sticker-spec-fancy", "src": "sticker-spec-fancy"}
+{"dst": "material-MAT_000586", "note": "유광코팅스티커·★코팅 CONFLICT", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "sticker-spec-fancy", "src": "sticker-spec-fancy"}
+{"dst": "material-MAT_000609", "note": "미색스티커 모조 80g·USAGE.07", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "sticker-spec-fancy", "src": "sticker-spec-fancy"}
+{"dst": "material-MAT_000611", "note": "아트스티커 90g·USAGE.07(07-01 재키잉 art-clone)", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "sticker-spec-fancy", "src": "sticker-spec-fancy"}
+{"dst": "plate-063-SIZ_000521", "note": "330x470·OUTPUT_PAPER_TYPE.02(46계열)·종이류=점착지 판형 유효·fn_best_plate 자동선택", "origin": "fk", "qualifier": null, "rel": "has_plate_size", "source_node": "sticker-spec-fancy-clear", "src": "sticker-spec-fancy-clear"}
+{"dst": "printopt-POPT_000001", "note": "단면(앞 CMYK 4도 CLR_000005·뒤 인쇄안함 CLR_000001)·양면 미보유·공유 축 재사용", "origin": "fk", "qualifier": null, "rel": "has_print_option", "source_node": "sticker-spec-fancy-clear", "src": "sticker-spec-fancy-clear"}
+{"dst": "process-PROC_000008", "note": "화이트인쇄(별색 PROC_000007 자식·투명 베이스 위 가시화)·2026-06-13 추가 실재→pack GAP-ST(화이트) MISSING은 REVERIFY로 해소·홀로 054가 정의한 공정 재사용", "origin": "fk", "qualifier": {"mand": "N"}, "rel": "has_process", "source_node": "sticker-spec-fancy-clear", "src": "sticker-spec-fancy-clear"}
+{"dst": "process-PROC_000055", "note": "스티커완칼(Die Cut+조각수)·★상품명 '반칼'과 명칭 관찰 불일치([[sticker-spec-fancy-clear#gap-063-halfcut-process]])·060 rectangle이 정의한 공정 재사용", "origin": "fk", "qualifier": {"mand": "N"}, "rel": "has_process", "source_node": "sticker-spec-fancy-clear", "src": "sticker-spec-fancy-clear"}
+{"dst": "qty-063", "note": "상품레벨 min 8·max 10000·incr 8·QTY_UNIT.02(bundle_qtys 0행)", "origin": "fk", "qualifier": null, "rel": "has_qty_rule", "source_node": "sticker-spec-fancy-clear", "src": "sticker-spec-fancy-clear"}
+{"dst": "size-SIZ_000059", "note": "124x186(작업 128x190)·판걸이4·규격 팬시 사이즈·dflt", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "sticker-spec-fancy-clear", "src": "sticker-spec-fancy-clear"}
+{"dst": "size-SIZ_000060", "note": "90x190(작업 94x194)·판걸이6·규격 팬시 사이즈·dflt", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "sticker-spec-fancy-clear", "src": "sticker-spec-fancy-clear"}
+{"dst": "category-CAT_000002", "note": "스티커(main_cat_yn=Y·disp 13)·공유 축 재사용", "origin": "fk", "qualifier": null, "rel": "in_category", "source_node": "sticker-spec-fancy-clear", "src": "sticker-spec-fancy-clear"}
+{"dst": "category-CAT_000037", "note": "규격스티커(부·main_cat_yn=N·상위 CAT_000002)·058 circle이 정의한 축 재사용", "origin": "fk", "qualifier": null, "rel": "in_category", "source_node": "sticker-spec-fancy-clear", "src": "sticker-spec-fancy-clear"}
+{"dst": "formula-PRF_STK_FIXED", "note": "스티커 완제품가 고정가 룩업(형상×치수×수량 격자)·원자합산형 아님(§3.10)·공유 공식 재사용", "origin": "fk", "qualifier": null, "rel": "priced_by", "source_node": "sticker-spec-fancy-clear", "src": "sticker-spec-fancy-clear"}
+{"dst": "DEC_qty_audit_260702", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-fancy-clear", "src": "sticker-spec-fancy-clear"}
+{"dst": "RULE_dosu_is_printopt", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-fancy-clear", "src": "sticker-spec-fancy-clear"}
+{"dst": "RULE_import_material_no_delete", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-fancy-clear", "src": "sticker-spec-fancy-clear"}
+{"dst": "RULE_pansu_db_function", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-fancy-clear", "src": "sticker-spec-fancy-clear"}
+{"dst": "RULE_plate_paper_only", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-fancy-clear", "src": "sticker-spec-fancy-clear"}
+{"dst": "RULE_price_value_boundary", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-fancy-clear", "src": "sticker-spec-fancy-clear"}
+{"dst": "RULE_scope_boundary", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-fancy-clear", "src": "sticker-spec-fancy-clear"}
+{"dst": "component-COMP_STK_PRINT", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-fancy-clear", "src": "sticker-spec-fancy-clear"}
+{"dst": "gap-056-material-cost-storage", "note": "스티커 소재 연당가 저장처 부재 systemic GAP(056 companion 재사용)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-fancy-clear", "src": "sticker-spec-fancy-clear"}
+{"dst": "gap-056-retail-cost-propagation", "note": "연당가 급변→완제품가 전파 여부 열린 질문(056 companion 재사용)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-fancy-clear", "src": "sticker-spec-fancy-clear"}
+{"dst": "gap-058-price-golden", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-fancy-clear", "src": "sticker-spec-fancy-clear"}
+{"dst": "gap-063-cpq-option-layer", "note": "CPQ 옵션 레이어 전면 미적재(option_groups 0행·BATCH-6·use_yn=N 미출시와 정합)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-fancy-clear", "src": "sticker-spec-fancy-clear"}
+{"dst": "gap-063-halfcut-process", "note": "상품명 반칼 vs 등록 공정 PROC_000055 완칼 명칭 불일치(GAP-ST-3 Q-ST-C)", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-fancy-clear", "src": "sticker-spec-fancy-clear"}
+{"dst": "gap-063-material-unmigrated", "note": "063은 구코드 MAT_000162 직결(053은 371/372로 마이그레이션)·미마이그레이션 관찰", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-fancy-clear", "src": "sticker-spec-fancy-clear"}
+{"dst": "material-MAT_000162", "note": "★연당가 양면(defect) 재적재 워크리스트(투명스 백색후지 국4절 1300→499·연당가 130000→149500)·056 companion 재사용", "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-fancy-clear", "src": "sticker-spec-fancy-clear"}
+{"dst": "sticker-spec-circle", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-fancy-clear", "src": "sticker-spec-fancy-clear"}
+{"dst": "sticker-spec-rectangle", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-fancy-clear", "src": "sticker-spec-fancy-clear"}
+{"dst": "material-MAT_000162", "note": "투명스티커(구코드 parent·MAT_TYPE.11·USAGE.07·dflt)·★056 companion의 dual(defect) 노드 재사용=063 연당가 워크리스트", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "sticker-spec-fancy-clear", "src": "sticker-spec-fancy-clear"}
+{"dst": "plate-060-SIZ_000521", "note": "46전지 330x470(OUTPUT_PAPER_TYPE.02)·반칼 스티커 표준전지·활성(삭제 판형 2행 별도)·fn_best_plate 자동선택", "origin": "fk", "qualifier": null, "rel": "has_plate_size", "source_node": "sticker-spec-rectangle", "src": "sticker-spec-rectangle"}
+{"dst": "printopt-POPT_000001", "note": "단면 단일(앞 CMYK 4도·뒤 인쇄 안 함)·양면 미보유·공유 축 재사용", "origin": "fk", "qualifier": null, "rel": "has_print_option", "source_node": "sticker-spec-rectangle", "src": "sticker-spec-rectangle"}
+{"dst": "process-PROC_000055", "note": "스티커완칼(Die Cut+조각수)·mand_proc_yn=N·★상품명 '반칼'과 불일치(반칼=PROC_000054 Kiss Cut)→관찰 gap-060-halfcut-process", "origin": "fk", "qualifier": {"mand": "N"}, "rel": "has_process", "source_node": "sticker-spec-rectangle", "src": "sticker-spec-rectangle"}
+{"dst": "qty-060", "note": "상품레벨 min 4·max 10000·incr 4·QTY_UNIT.02(bundle_qtys 0행)", "origin": "fk", "qualifier": null, "rel": "has_qty_rule", "source_node": "sticker-spec-rectangle", "src": "sticker-spec-rectangle"}
+{"dst": "size-SIZ_000170", "note": "A5(148x210mm)·dflt=Y·★t_siz_sizes 마스터 del_yn=Y(링크는 활성)→관찰 gap-060-a5-size-master-deleted", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "sticker-spec-rectangle", "src": "sticker-spec-rectangle"}
+{"dst": "size-SIZ_000520", "note": "A4(210x297mm) 반칼·dflt=Y·형상=size(규격형·반칼 전용가)", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "sticker-spec-rectangle", "src": "sticker-spec-rectangle"}
+{"dst": "category-CAT_000002", "note": "스티커(main_cat_yn=Y·disp 10)", "origin": "fk", "qualifier": null, "rel": "in_category", "source_node": "sticker-spec-rectangle", "src": "sticker-spec-rectangle"}
+{"dst": "category-CAT_000037", "note": "규격스티커(상위 CAT_000002·main_cat_yn=N 부)", "origin": "fk", "qualifier": null, "rel": "in_category", "source_node": "sticker-spec-rectangle", "src": "sticker-spec-rectangle"}
+{"dst": "formula-PRF_STK_FIXED", "note": "완제품가 고정가 룩업(원자합산형 아님)·COMP_STK_PRINT (siz_cd,mat_cd,min_qty) 격자", "origin": "fk", "qualifier": null, "rel": "priced_by", "source_node": "sticker-spec-rectangle", "src": "sticker-spec-rectangle"}
+{"dst": "DEC_qty_audit_260702", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-rectangle", "src": "sticker-spec-rectangle"}
+{"dst": "DEC_wiring_round22_260702", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-rectangle", "src": "sticker-spec-rectangle"}
+{"dst": "RULE_dosu_is_printopt", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-rectangle", "src": "sticker-spec-rectangle"}
+{"dst": "RULE_import_material_no_delete", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-rectangle", "src": "sticker-spec-rectangle"}
+{"dst": "RULE_pansu_db_function", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-rectangle", "src": "sticker-spec-rectangle"}
+{"dst": "RULE_plate_paper_only", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-rectangle", "src": "sticker-spec-rectangle"}
+{"dst": "RULE_price_value_boundary", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-rectangle", "src": "sticker-spec-rectangle"}
+{"dst": "RULE_scope_boundary", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-rectangle", "src": "sticker-spec-rectangle"}
+{"dst": "gap-060-a5-size-master-deleted", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-rectangle", "src": "sticker-spec-rectangle"}
+{"dst": "gap-060-coating-conflict", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-rectangle", "src": "sticker-spec-rectangle"}
+{"dst": "gap-060-golden", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-rectangle", "src": "sticker-spec-rectangle"}
+{"dst": "gap-060-halfcut-process", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-rectangle", "src": "sticker-spec-rectangle"}
+{"dst": "gap-060-mat084-typ", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-rectangle", "src": "sticker-spec-rectangle"}
+{"dst": "gap-060-yeondangga-scope", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-rectangle", "src": "sticker-spec-rectangle"}
+{"dst": "process-PROC_000013", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-spec-rectangle", "src": "sticker-spec-rectangle"}
+{"dst": "material-MAT_000084", "note": "비코팅스티커·★live mat_typ=MAT_TYPE.13(note는 .11 정정 주장)→관찰 gap-060-mat084-typ", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "sticker-spec-rectangle", "src": "sticker-spec-rectangle"}
+{"dst": "material-MAT_000153", "note": "유포스티커·MAT_TYPE.11·USAGE.07 단일 슬롯·dflt Y", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "sticker-spec-rectangle", "src": "sticker-spec-rectangle"}
+{"dst": "material-MAT_000155", "note": "무광코팅스티커·MAT_TYPE.11·★코팅=자재(BATCH-3 CONFLICT·gap-060-coating-conflict)", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "sticker-spec-rectangle", "src": "sticker-spec-rectangle"}
+{"dst": "material-MAT_000156", "note": "유광코팅스티커·MAT_TYPE.11·★코팅=자재(BATCH-3 CONFLICT·gap-060-coating-conflict)", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "sticker-spec-rectangle", "src": "sticker-spec-rectangle"}
+{"dst": "material-MAT_000242", "note": "미색스티커·MAT_TYPE.11·6-14 종이(.01)→스티커(.11) 정정 note", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "sticker-spec-rectangle", "src": "sticker-spec-rectangle"}
+{"dst": "optgroup-067-paper", "note": "용지(자재) 택1 선택(mand=N·min_sel 0)·1옵션값→자재 MAT_000594", "origin": "fk", "qualifier": null, "rel": "has_option_group", "source_node": "sticker-tattoo", "src": "sticker-tattoo"}
+{"dst": "plate-OUTPUT_PAPER_TYPE_03", "note": "기타(OUTPUT_PAPER_TYPE.03) 출력용지·플레이트 사이즈 SIZ_000050(A4 316x467 전지)·점착지=종이류라 판형 유효·fn_best_plate 자동선택·구 SIZ_000060 플레이트행은 06-30 논리삭제(재키잉)·공유 축 재사용", "origin": "fk", "qualifier": null, "rel": "has_plate_size", "source_node": "sticker-tattoo", "src": "sticker-tattoo"}
+{"dst": "printopt-POPT_000001", "note": "단면 단일(front CLR_000005 CMYK 4도·back CLR_000001 인쇄 안 함)·공유 축 재사용", "origin": "fk", "qualifier": null, "rel": "has_print_option", "source_node": "sticker-tattoo", "src": "sticker-tattoo"}
+{"dst": "qty-067", "note": "상품 레벨 min3/max1000/incr3(3장 단위·QTY_UNIT.02)", "origin": "fk", "qualifier": null, "rel": "has_qty_rule", "source_node": "sticker-tattoo", "src": "sticker-tattoo"}
+{"dst": "size-SIZ_000060", "note": "90x190(작업 94x194·재단 90x190·dflt·master del_yn=N)·단일 사이즈", "origin": "fk", "qualifier": null, "rel": "has_size", "source_node": "sticker-tattoo", "src": "sticker-tattoo"}
+{"dst": "category-CAT_000002", "note": "스티커(root·main_cat_yn=Y·cat_lvl 1·067 disp 16)", "origin": "fk", "qualifier": null, "rel": "in_category", "source_node": "sticker-tattoo", "src": "sticker-tattoo"}
+{"dst": "category-CAT_000311", "note": "특수스티커(cat_lvl 2·main_cat_yn=N·상위 CAT_000002·052의 자유형스티커 CAT_000309와 다른 sub)", "origin": "fk", "qualifier": null, "rel": "in_category", "source_node": "sticker-tattoo", "src": "sticker-tattoo"}
+{"dst": "formula-PRF_STK_TATTOO", "note": "완제품가 합가형 룩업(COMP_STK_TATTOO·3장 1세트당 합산가·PRICE_TYPE.02)", "origin": "fk", "qualifier": null, "rel": "priced_by", "source_node": "sticker-tattoo", "src": "sticker-tattoo"}
+{"dst": "RULE_dosu_is_printopt", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-tattoo", "src": "sticker-tattoo"}
+{"dst": "RULE_import_material_no_delete", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-tattoo", "src": "sticker-tattoo"}
+{"dst": "RULE_pansu_db_function", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-tattoo", "src": "sticker-tattoo"}
+{"dst": "RULE_price_value_boundary", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-tattoo", "src": "sticker-tattoo"}
+{"dst": "gap-067-liandan-out-of-scope", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-tattoo", "src": "sticker-tattoo"}
+{"dst": "gap-067-mattype-transfer-paper", "note": null, "origin": "doc", "qualifier": null, "rel": "references", "source_node": "sticker-tattoo", "src": "sticker-tattoo"}
+{"dst": "material-MAT_000594", "note": "타투스티커(MAT_TYPE.11·상위 MAT_000167·활성 자식·2026-06-30 신설)·구 부모 MAT_000167(타투전용지)는 07-01 junction 논리삭제(재키잉)", "origin": "fk", "qualifier": null, "rel": "uses_material", "source_node": "sticker-tattoo", "src": "sticker-tattoo"}

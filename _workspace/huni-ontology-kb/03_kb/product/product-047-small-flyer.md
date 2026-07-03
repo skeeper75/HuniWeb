@@ -272,12 +272,6 @@ updated: 2026-07-03
 > 종이슬로건 SIZ_000015/016 선례). ★표준 A규격이라 다른 상품과 공유될 여지가 커 **공유 축 승격 후보**로
 > needed_shared_nodes에 반환한다. 자재·공정·인쇄옵션·판형·공식은 공유 축의 기존 노드로 해소(중복 금지).
 
-### [size-SIZ_000170] A5 148x210 (전단지) {verified}
-- type: size
-- anchor: t_siz_sizes/SIZ_000170
-- src: {source_file: "live-snapshot/latest/t_siz_sizes.csv", source_locator: "테이블:t_siz_sizes 키:SIZ_000170", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
-- props: {siz_nm_ref: "본문 전사표 SIZ_000170", note: "A5(148x210)·재단=작업 동일·전단지 표준"}
-
 ### [size-SIZ_000172] A4 210x297 (전단지) {verified}
 - type: size
 - anchor: t_siz_sizes/SIZ_000172

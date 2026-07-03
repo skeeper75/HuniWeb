@@ -1,0 +1,208 @@
+{
+  "categories": [
+    {
+      "cat_cd": "CAT_000002",
+      "cat_lvl": "1",
+      "cat_nm": "스티커",
+      "disp": "15",
+      "main_cat_yn": "Y",
+      "upr": ""
+    },
+    {
+      "cat_cd": "CAT_000312",
+      "cat_lvl": "2",
+      "cat_nm": "스티커팩",
+      "disp": "",
+      "main_cat_yn": "N",
+      "upr": "CAT_000002"
+    }
+  ],
+  "constraints_count": 0,
+  "diff": [
+    {
+      "after": "A6(8판)/100*148(8판)",
+      "before": "100*148(8판)",
+      "column": "A6(8판)/100*148(8판) / 유포/비코팅/미색",
+      "key": "(좌표)",
+      "sheet": "스티커"
+    },
+    {
+      "after": "81500",
+      "before": "156000",
+      "column": "연당가",
+      "key": "크라프",
+      "sheet": "출력소재(IMPORT)"
+    },
+    {
+      "after": "272",
+      "before": "312",
+      "column": "가격 (국4절)",
+      "key": "크라프",
+      "sheet": "출력소재(IMPORT)"
+    },
+    {
+      "after": "50",
+      "before": "105",
+      "column": "평량",
+      "key": "투명스",
+      "sheet": "출력소재(IMPORT)"
+    },
+    {
+      "after": "149500",
+      "before": "130000",
+      "column": "연당가",
+      "key": "투명스",
+      "sheet": "출력소재(IMPORT)"
+    },
+    {
+      "after": "499",
+      "before": "1300",
+      "column": "가격 (국4절)",
+      "key": "투명스",
+      "sheet": "출력소재(IMPORT)"
+    },
+    {
+      "after": "253700",
+      "before": "360000",
+      "column": "연당가",
+      "key": "홀로스",
+      "sheet": "출력소재(IMPORT)"
+    },
+    {
+      "after": "846",
+      "before": "936",
+      "column": "가격 (국4절)",
+      "key": "홀로스",
+      "sheet": "출력소재(IMPORT)"
+    }
+  ],
+  "empty_axes": {
+    "addons": 0,
+    "bundle_qtys": 0,
+    "constraints": 0,
+    "direct_prices": 0,
+    "option_groups": 0,
+    "processes": 0,
+    "sets": 0
+  },
+  "formulas": [
+    {
+      "frm": "PRF_STK_PACK",
+      "frm_nm": "스티커팩 합가형(54장1세트 4000)",
+      "note": "",
+      "use_yn": "Y"
+    }
+  ],
+  "materials_active": [
+    {
+      "dflt": "Y",
+      "mat_cd": "MAT_000084",
+      "mat_nm": "비코팅스티커",
+      "mat_typ": "MAT_TYPE.13",
+      "note": "| 정정 2026-06-14: 자재유형 종이(.01)→스티커(.11) 점착지",
+      "upr": "",
+      "usage": "USAGE.07",
+      "weight": "90.00"
+    },
+    {
+      "dflt": "Y",
+      "mat_cd": "MAT_000242",
+      "mat_nm": "미색스티커",
+      "mat_typ": "MAT_TYPE.11",
+      "note": " | 정정 2026-06-14: 자재유형 종이(.01)→스티커(.11) 점착지",
+      "upr": "",
+      "usage": "USAGE.07",
+      "weight": ""
+    }
+  ],
+  "meta": {
+    "captured_at": "2026-07-03",
+    "diff_src": "huni-dbmap/26_change-tracking-260702/price-diff-260527-260702.csv",
+    "generated_by": "transcribe_sticker_065.py",
+    "prd_cd": "PRD_000065",
+    "snapshot": "live-snapshot/latest (snap_20260702_1119)"
+  },
+  "opt_groups_count": 0,
+  "opt_items_count": 0,
+  "opt_values_count": 0,
+  "pack_grid": {
+    "rows": [
+      {
+        "mat_cd": "",
+        "min_qty": "54",
+        "note": "스티커팩 54장1세트 4000(합가형·min_qty=54 필수)",
+        "siz_cd": "SIZ_000068",
+        "unit_price": "4000.00"
+      }
+    ],
+    "total_rows": 1
+  },
+  "paper_rows": {
+    "MAT_000084": 0,
+    "MAT_000242": 0
+  },
+  "plates_active": [
+    {
+      "cut": "320x460",
+      "dflt": "Y",
+      "note": "전지(46계열)·반칼 스티커 표준전지 / 출처: 상품마스터260610·출력소재IMPORT",
+      "otyp": "OUTPUT_PAPER_TYPE.02",
+      "siz_cd": "SIZ_000521",
+      "siz_nm": "330x470",
+      "work": "330x470"
+    }
+  ],
+  "plates_deleted": [
+    {
+      "otyp": "OUTPUT_PAPER_TYPE.03",
+      "siz_cd": "SIZ_000068"
+    }
+  ],
+  "print_options": [
+    {
+      "back_clr": "인쇄 안 함",
+      "front_clr": "CMYK 4도",
+      "print_opt_cd": "POPT_000001",
+      "print_side": "단면"
+    }
+  ],
+  "processes_active": [],
+  "product": {
+    "del_yn": "N",
+    "editor_yn": "Y",
+    "file_upload_yn": "N",
+    "max_qty": "1000",
+    "min_qty": "1",
+    "prd_cd": "PRD_000065",
+    "prd_nm": "스티커팩",
+    "prd_typ_cd": "PRD_TYPE.01",
+    "qty_incr": "1",
+    "qty_unit_typ_cd": "QTY_UNIT.02",
+    "semi_role_cd": "",
+    "use_yn": "Y"
+  },
+  "sizes_active": [
+    {
+      "cut": "75x110",
+      "dflt": "Y",
+      "note": "판걸이=16.0 / 전지=미지정 / 적용=스티커팩",
+      "siz_cd": "SIZ_000068",
+      "siz_nm": "75x110",
+      "work": "75x110"
+    }
+  ],
+  "sizes_deleted": [],
+  "wiring": {
+    "PRF_STK_PACK": [
+      {
+        "addtn_yn": "Y",
+        "comp_cd": "COMP_STK_PACK",
+        "comp_nm": "스티커 완제품가 팩(54장1세트)",
+        "comp_typ_cd": "PRC_COMPONENT_TYPE.06",
+        "disp_seq": "1",
+        "prc_typ_cd": "PRICE_TYPE.02",
+        "use_dims": "[\"siz_cd\", \"min_qty\"]"
+      }
+    ]
+  }
+}

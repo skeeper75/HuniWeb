@@ -2,52 +2,52 @@
 
 > build_graph.py · 정본 /Users/innojini/Dev/HuniWeb/_workspace/huni-ontology-kb/03_kb → 04_graph. 생성=빌드(검증은 별도 레인·okb-adversarial-gate).
 
-- 판정: **PASS(하드 0)** · 하드 위반 0 · 소프트 경고 116
-- 노드 466 · 엣지 1526
-- 멱등 해시: nodes.jsonl=b22b58bd451ffd6a · edges.jsonl=a829dcb8ac7241a9
+- 판정: **PASS(하드 0)** · 하드 위반 0 · 소프트 경고 315
+- 노드 654 · 엣지 2128
+- 멱등 해시: nodes.jsonl=e39020760303c641 · edges.jsonl=d84168c28f089f1b
 
 ## 노드 수 (타입별)
-- bundle_qty: 15
-- category: 11
-- constraint: 2
+- bundle_qty: 31
+- category: 16
+- constraint: 3
 - decision: 12
-- gap: 67
+- gap: 130
 - intent: 3
-- material: 56
-- option_group: 78
-- plate_size: 3
-- price_component: 53
-- price_formula: 23
+- material: 78
+- option_group: 97
+- plate_size: 14
+- price_component: 57
+- price_formula: 27
 - print_option: 4
-- process: 37
-- product: 36
+- process: 41
+- product: 52
 - rule: 7
-- size: 52
+- size: 75
 - term: 7
 
 ## 엣지 수 (rel별)
 - alias_of: 19
-- constrains: 3
+- constrains: 4
 - decided_because: 19
-- derived_from: 5
-- has_component: 107
-- has_option_group: 78
-- has_plate_size: 34
-- has_print_option: 59
-- has_process: 165
-- has_qty_rule: 15
-- has_size: 98
-- in_category: 59
-- option_refs: 210
-- priced_by: 39
-- references: 470
-- uses_material: 146
+- derived_from: 7
+- has_component: 111
+- has_option_group: 97
+- has_plate_size: 50
+- has_print_option: 75
+- has_process: 186
+- has_qty_rule: 31
+- has_size: 139
+- in_category: 91
+- option_refs: 237
+- priced_by: 55
+- references: 810
+- uses_material: 197
 
 ## badge 분포
-- candidate: 6
-- defect: 5
-- unknown: 67
-- verified: 388
+- candidate: 15
+- defect: 12
+- unknown: 130
+- verified: 497
 
 ## 무결성 6검사
 - I-1 고아(하드 유형 product/formula/component): 0
@@ -58,6 +58,17 @@
 - I-6 오염(blocklist): 0 (원천 실재 — hard src_id 5·path 5·advisory src_id 2·path 2 로드)
 
 ## 소프트 경고 (빌드 계속·검토용)
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): material-MAT_000162 :: - authority_value: "260702 명=투명스티커(백색후지)·평량=50·연당가=149,500·국
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): material-MAT_000162 :: - 본문: 260702 권위가 투명스티커를 백색후지/투명후지로 나누고 연당가를 130,000→149,500(
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): material-MAT_000372 :: - authority_value: "260702 신규행(row 86)=투명스티커(투명후지)·평량=50·연당가
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): material-MAT_000372 :: - 본문: 260702가 새로 추가한 투명후지 소재(연당가 222,000/국4절 740/평량 50). 라이브
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): material-MAT_000164 :: - authority_value: "260702 연당가=81,500·국4절가=272·평량=57(무변)·규격 
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): component-COMP_GANGPAN_PRINT :: - src: {source_file: "live-snapshot/latest/t_prc_component_p
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): component-COMP_GANGPAN_PRINT :: - props: {prc_typ_cd: "PRICE_TYPE.02", use_dims_ref: "전사표 [s
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): component-COMP_STK_PACK :: - props: {comp_cd: "COMP_STK_PACK", prc_typ_cd: "PRICE_TYPE.
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): component-COMP_STK_PRINT :: - src: {source_file: "live-snapshot/latest/t_prc_component_p
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): component-COMP_STK_PRINT :: - 본문: use_dims=[siz_cd, mat_cd, min_qty] 차원 선언까지가 온톨로지 경계(값=
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): formula-PRF_STK_PACK :: - props: {archetype: "완제품가 합가형 고정가 룩업", use_yn: "Y", note: "
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-023-shaped-postcard :: 최소 12매·최대 10,000매·12매 증분(단위 QTY_UNIT.02 "매"). 수량·치수 raw 값은
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-023-shaped-postcard :: - **수량규칙:** 제품 레벨 min 12 / max 10,000 / incr 12(QTY_UNIT.02)
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-023-shaped-postcard :: 계열([[rule/decisions#DEC_diecut_260701]]·팩 §4-B: 023 8,040,00
@@ -75,8 +86,62 @@
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-046-label-tag :: ([[rule/decisions#DEC_diecut_260701]]·046 1,350,000→50,000).
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-050-envelope-making :: 에디터 미사용). 최소 1,000매·최대 5,000매·1,000매 증분(단위 QTY_UNIT.02). 수량·
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-050-envelope-making :: - **수량규칙:** 제품 레벨 min 1,000 / max 5,000 / incr 1,000(QTY_UNI
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): qty-052 :: 스티커 전용 공식/구성요소를 여기 신설(6,498행 완제품가를 공유하는 16 스티커 향후 승격 후보).
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-052-coating-conflict :: - anchor: none  # 사유: 라이브 코팅=자재(585/586) + 공정(014/015) 이중 표현
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-052-liandan-out-of-scope :: - src: {source_file: "_workspace/huni-dbmap/26_change-tracki
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-052-liandan-out-of-scope :: - gap_fill_from: "063 등 투명/홀로/크라프트 사용 스티커 상품 노드에서 4소재 양면 노드(
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-052-sticker-halfcut-freeform :: 미사용). 최소 8매·최대 10,000매·8매 증분(단위 QTY_UNIT.02 "매"). 카테고리 = 스티커
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-052-sticker-halfcut-freeform :: - **수량규칙:** 제품 레벨 min 8 / max 10,000 / incr 8(QTY_UNIT.02). 
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-052-sticker-halfcut-freeform :: 반환(스티커 6,498행 완제품가를 공유하는 16상품 향후 승격 후보). 공유 파일 미수정.
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-052-sticker-halfcut-freeform :: (전사표 "연당가 대조" 전행 NO·N2 라벨/무변). 팩 §4-A 돈-크리티컬 연당가 대개편(투명 149,
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-052-sticker-halfcut-freeform :: 253,700/크라프트 81,500/투명후지 222,000)은 **투명·홀로·크라프트** 소재 몫이라 052
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-055-sticker-sheet-freeform :: 최소 1매·최대 10,000매·1매 증분(단위 QTY_UNIT.02 "매"). 수량·치수·배선 raw 값은
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): product-055-sticker-sheet-freeform :: - **수량규칙:** 제품 레벨 min 1 / max 10,000 / incr 1(QTY_UNIT.02 "매
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-057-material-cost :: - gap_what: "스티커 소재 연당가(원자재 원가)는 라이브 가격 사슬에 노드로 존재하지 않는다. 05
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-gangpan-diecut :: `CAT_000037`). ★**파일 업로드 전용**(`file_upload_yn=Y·editor_yn=N`
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-gangpan-diecut :: 증분 1,000매(단위 QTY_UNIT.02 "매")·형상별 시트당 EA는 bundle_qtys(8/6/3/
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-gangpan-diecut :: 구간할인(t_dsc_*) 비대상. 격자 충전 실측(companion 전사표): COMP_GANGPAN_PRI
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-gangpan-diecut :: **완전 충전**(예 정사각10x10 유포 1,000매 26,100·수량 5단 26,100→39,200→52
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-066-coating-conflict :: - anchor: none  # 사유: 라이브=자재(MAT_000155/156 스티커 variant) vs 
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-066-coating-conflict :: - 본문: 코팅을 자재로 볼지 공정으로 볼지 3원천이 엇갈린다(팩 §3.9·058 gap-058-coatin
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-066-price-golden :: - gap_what: "066 완제품가(COMP_GANGPAN_PRINT·형상×소재×수량) 격자 충전은 실측
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): matcost-054-hologram :: - authority_value: "260702 권위(price-diff 전사): 연당가 253,700(36
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-054-yeondangga-repricing :: - gap_what: "260702 홀로그램 연당가 360,000→253,700(국4절 936→846) 급락
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-065-set-composition :: - gap_what: "상품명·카테고리(스티커팩)는 여러 스티커를 묶는 세트를 시사하나 t_prd_produ
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-065-pack-qty-band :: - gap_what: "제품 수량 그릇은 1~1000(incr 1·QTY_UNIT.02)인데 가격 격자는 m
+- L-16 수치 표 transcribed-by 마커 없음(손전사 의심): gap-065-cpq-option-layer
+- L-16 수치 표 transcribed-by 마커 없음(손전사 의심): gap-065-cpq-option-layer
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-pack :: 한 팩(**54장 = 1세트**)으로 묶어 **고정가(4,000원)** 로 파는 상품이다. 에디터로 편집
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-pack :: (`editor_yn=Y`)하고 파일 업로드는 안 쓴다(`file_upload_yn=N`). 최소 1·최대 
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-pack :: (`COMP_STK_PACK`·PRICE_TYPE.02) — 54장 1세트를 4,000원에 통째로 룩업한다.
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-pack :: **합가형 완제품가(54장1세트 4,000)** 단일 룩업으로 구현. 팩이 반제품 구성원을 갖는 셋트여야 하
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-pack :: - **수량규칙:** 제품 레벨 min 1 / max 1,000 / incr 1(QTY_UNIT.02). `
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-pack :: 단위(1~1,000)와 가격 격자 밴드(54장)의 관계가 합가형 특유라 [[gap-065-pack-qty-b
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-pack :: live 격자 = **단 1행**(SIZ_000068·min_qty=54·unit_price 4,000·no
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-pack :: §4-A 돈-크리티컬 4소재(투명스 149,500·홀로 253,700·크라프트 81,500·투명후지 222,
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-pack :: - 합가형(PRF_STK_PACK·COMP_STK_PACK·54장1세트 4,000·min_qty=54)·공정
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): plate-056-OUTPUT_PAPER_TYPE_03 :: > COMP_STK_PRINT 6,498행은 스티커 전 상품 공유 격자이고 056은 A4/A3/A2/B4/B
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-056-material-cost-storage :: - gap_what: "260702 권위 연당가/국4절가(백색후지 149,500/499·투명후지 222,00
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-056-retail-cost-propagation :: - anchor: none  # 사유: 연당가 급변(투명스 국4절 1,300→499·크라프 156k→81.5
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-sheet-clear-white :: 파일 업로드 방식(`file_upload_yn=Y`, 에디터 미사용). 최소 1매·최대 10,000매·1매 
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-sheet-clear-white :: - **수량규칙:** 제품 레벨 min 1 / max 10,000 / incr 1(QTY_UNIT.02). 
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-sheet-clear-white :: t_dsc_* 비대상·pack §3.10). 라이브 COMP_STK_PRINT 6,498행(스티커 전 상품 
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): plate-058-SIZ_000521 :: 권위([[rule/rules#RULE_price_value_boundary]]). ★단가행(COMP_STK_
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-spec-circle :: (companion 전사표): COMP_STK_PRINT 6,498행 중 058 active 5소재에 각 5
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-058-coating-conflict :: - anchor: none  # 사유: 라이브=자재(MAT_000585/586 스티커 variant) vs 
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-058-coating-conflict :: - 본문: 코팅을 자재로 볼지 공정으로 볼지 3원천이 엇갈린다(팩 §3.9). KB는 양쪽 실재를 기록하되 
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-058-shape-storage :: - anchor: none  # 사유: 058 원형 형상=CPQ 커팅 옵션값(OPT-000031) vs 06
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-spec-fancy-clear :: (라이브 명 "투명스티커"·평량 105·연당가 미저장 vs 260702 "투명스티커(백색후지)"·평량 50·
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-spec-fancy-clear :: (PRICE_TYPE.01). 격자 충전 실측(companion 전사표): COMP_STK_PRINT 6,4
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-spec-fancy-clear :: (공유 스티커 공식·중복 mint 없음). COMP_STK_PRINT 단가행(완제품가) 총 6,498행 중 
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-spec-fancy-clear :: 백색후지 149,500/499·badge=defect)에 이미 존재 → **재사용**(중복 mint 금지).
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-spec-fancy :: 형상을 **어디에도 저장하지 않는다**(사이즈=치수 격자·CPQ 커팅 그룹 없음·058 원형처럼 옵션값도 아
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): sticker-spec-fancy :: 배선 HANDOFF round22 원장으로 재조준([[rule/decisions#DEC_wiring_roun
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-062-coating-conflict :: - anchor: none  # 사유: 라이브=자재(MAT_000585/586 스티커 variant) vs 
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): gap-062-coating-conflict :: - 본문: 코팅을 자재로 볼지 공정으로 볼지 3원천이 엇갈린다(팩 §3.9). KB는 양쪽 실재를 기록하되 
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): DEC_baseproc_260701 :: - props: {일자: "2026-07-01", 내용: "16상품+019(흰토너008+CMYK004)+02
 - L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): DEC_diecut_260701 :: - props: {일자: "2026-07-01", 내용: "COMP_CUT_FULL_DIECUT .01→.0
+- L-12 본문 raw 가격형 수치(스크립트 전사·예외태그 권장): GAP_product_count :: > 스티커 공통 열린 질문: ①코팅=자재 vs 공정 vs 가격축 3원천 CONFLICT(BATCH-3·GAP
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-020-white-print-postcard -> product-020-white-print-postcard-nodes
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-020-white-print-postcard -> product-020-white-print-postcard-nodes
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-020-white-print-postcard -> product-020-white-print-postcard-nodes
@@ -166,14 +231,148 @@
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-050-envelope-making -> product-050-envelope-making-nodes
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-051-suncap -> product-type-classification-sot
 - 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-051-suncap -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-052-sticker-halfcut-freeform -> product-052-sticker-halfcut-freeform-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-052-sticker-halfcut-freeform -> 전사표-권위-라이브-스냅샷스크립트-전사
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-052-sticker-halfcut-freeform -> 가격구성요소-완제품가-룩업
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-052-sticker-halfcut-freeform -> 옵션그룹-cpq
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-052-sticker-halfcut-freeform -> product-052-sticker-halfcut-freeform-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-055-sticker-sheet-freeform -> product-055-sticker-sheet-freeform-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-055-sticker-sheet-freeform -> product-055-sticker-sheet-freeform-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-057-sticker-large-freeform -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-057-sticker-large-freeform -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-057-sticker-large-freeform -> product-057-sticker-large-freeform-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-gangpan-diecut -> sticker-gangpan-diecut-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-gangpan-diecut -> sticker-gangpan-diecut-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-gangpan-diecut -> sticker-gangpan-diecut-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-gangpan-diecut -> sticker-gangpan-diecut-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-gangpan-diecut -> sticker-gangpan-diecut-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): plate-053-SIZ_000521 -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-halfcut-clear -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-halfcut-clear -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): plate-054-SIZ_000521 -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): matcost-054-hologram -> product-020-white-print-postcard-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-halfcut-hologram -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-halfcut-hologram -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-halfcut-hologram -> sticker-halfcut-hologram-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-pack -> sticker-pack-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-pack -> 전사표-권위-라이브-스냅샷-스크립트-전사
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-pack -> 전사표-권위-라이브-스냅샷-스크립트-전사
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-pack -> sticker-pack-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): plate-056-OUTPUT_PAPER_TYPE_03 -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-sheet-clear-white -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-sheet-clear-white -> sticker-sheet-clear-white-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-smallqty-freeform -> sticker-smallqty-freeform-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-smallqty-freeform -> 전사표-권위-라이브-스냅샷스크립트-전사
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-smallqty-freeform -> 가격구성요소-완제품가-룩업
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-smallqty-freeform -> sticker-smallqty-freeform-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): gap-061-a5-size-master-deleted -> dbmap-del-yn-soft-delete-authority
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-061-band-sticker -> plate
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-061-band-sticker -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-061-band-sticker -> price-grid
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-061-band-sticker -> reused
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-061-band-sticker -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-061-band-sticker -> plate
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-061-band-sticker -> reused
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-061-band-sticker -> price-grid
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-061-band-sticker -> sticker-spec-band-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-spec-circle -> sticker-spec-circle-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-spec-circle -> sticker-spec-circle-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-spec-circle -> sticker-spec-circle-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-spec-circle -> sticker-spec-circle-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-spec-circle -> sticker-spec-circle-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-spec-circle -> sticker-spec-circle-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): plate-063-SIZ_000521 -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-spec-fancy-clear -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-spec-fancy-clear -> sticker-spec-fancy-clear-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-spec-fancy-clear -> sticker-spec-fancy-clear-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-spec-fancy -> sticker-spec-fancy-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-spec-fancy -> sticker-spec-fancy-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-spec-fancy -> sticker-spec-fancy-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): gap-060-a5-size-master-deleted -> dbmap-del-yn-soft-delete-authority
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-spec-rectangle -> product-type-classification-sot
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-spec-rectangle -> price-grid
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-spec-rectangle -> size
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-spec-rectangle -> material
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-spec-rectangle -> process
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-spec-rectangle -> harness-domain-rules-12-260701
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-spec-rectangle -> plate
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-spec-rectangle -> product-060-rectangle-sticker-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-spec-rectangle -> price-grid
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-spec-rectangle -> product-060-rectangle-sticker-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-059-sticker-spec-square -> sticker-spec-square-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-059-sticker-spec-square -> sticker-spec-square-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-059-sticker-spec-square -> sticker-spec-square-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): product-059-sticker-spec-square -> sticker-spec-square-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-tattoo -> sticker-tattoo-nodes
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-tattoo -> 전사표-권위-라이브-스냅샷스크립트-전사
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-tattoo -> 가격구성요소-완제품가-합가형-룩업
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-tattoo -> 옵션그룹-cpq
+- 본문 [[ ]] 미해결 참조(서술로 간주·엣지 미생성): sticker-tattoo -> sticker-tattoo-nodes
 - I-1 고아 노드(연결 대기·Phase 4): printopt-POPT_000008 (print_option)
 - I-1 고아 노드(연결 대기·Phase 4): printopt-POPT_000009 (print_option)
 - I-1 고아 노드(연결 대기·Phase 4): process-PROC_000001 (process)
-- I-1 고아 노드(연결 대기·Phase 4): process-PROC_000013 (process)
 - I-1 고아 노드(연결 대기·Phase 4): process-PROC_000056 (process)
 - I-1 고아 노드(연결 대기·Phase 4): size-SIZ_000499 (size)
 - I-1 고아 노드(연결 대기·Phase 4): GAP_roll_material_price (gap)
 - I-1 고아 노드(연결 대기·Phase 4): GAP_product_count (gap)
+- O4 index 미등재 파일: product/product-055-sticker-sheet-freeform-nodes.md (qty-055)
+- O4 index 미등재 파일: product/product-055-sticker-sheet-freeform-nodes.md (optgroup-055-paper)
+- O4 index 미등재 파일: product/product-055-sticker-sheet-freeform-nodes.md (optgroup-055-print)
+- O4 index 미등재 파일: product/product-055-sticker-sheet-freeform-nodes.md (optgroup-055-cutting)
+- O4 index 미등재 파일: product/product-055-sticker-sheet-freeform-nodes.md (optgroup-055-jogaksu)
+- O4 index 미등재 파일: product/product-055-sticker-sheet-freeform-nodes.md (gap-055-cutting-optref-stale)
+- O4 index 미등재 파일: product/product-055-sticker-sheet-freeform-nodes.md (gap-055-jogaksu-storage)
+- O4 index 미등재 파일: product/product-055-sticker-sheet-freeform-nodes.md (gap-055-material-name-cst10)
+- O4 index 미등재 파일: product/product-055-sticker-sheet-freeform-nodes.md (gap-055-material-cost-storage)
+- O4 index 미등재 파일: product/product-057-sticker-large-freeform-nodes.md (plate-057-SIZ_000199)
+- O4 index 미등재 파일: product/product-057-sticker-large-freeform-nodes.md (qty-057)
+- O4 index 미등재 파일: product/product-057-sticker-large-freeform-nodes.md (gap-057-material-cost)
+- O4 index 미등재 파일: product/sticker-halfcut-hologram-nodes.md (size-054-SIZ_000170)
+- O4 index 미등재 파일: product/sticker-halfcut-hologram-nodes.md (size-054-SIZ_000520)
+- O4 index 미등재 파일: product/sticker-halfcut-hologram-nodes.md (plate-054-SIZ_000521)
+- O4 index 미등재 파일: product/sticker-halfcut-hologram-nodes.md (matcost-054-hologram)
+- O4 index 미등재 파일: product/sticker-halfcut-hologram-nodes.md (gap-054-yeondangga-repricing)
+- O4 index 미등재 파일: product/sticker-halfcut-hologram-nodes.md (gap-054-white-underbase-price)
+- O4 index 미등재 파일: product/sticker-halfcut-hologram-nodes.md (gap-054-piece-count-storage)
+- O4 index 미등재 파일: product/sticker-sheet-clear-white-nodes.md (plate-056-OUTPUT_PAPER_TYPE_03)
+- O4 index 미등재 파일: product/sticker-sheet-clear-white-nodes.md (qty-056)
+- O4 index 미등재 파일: product/sticker-sheet-clear-white-nodes.md (gap-056-material-cost-storage)
+- O4 index 미등재 파일: product/sticker-sheet-clear-white-nodes.md (gap-056-retail-cost-propagation)
+- O4 index 미등재 파일: product/sticker-sheet-clear-white-nodes.md (gap-056-cpq-option-layer)
+- O4 index 미등재 파일: product/sticker-smallqty-freeform-nodes.md (qty-064)
+- O4 index 미등재 파일: product/sticker-smallqty-freeform-nodes.md (gap-064-cpq-missing)
+- O4 index 미등재 파일: product/sticker-smallqty-freeform-nodes.md (gap-064-coating-conflict)
+- O4 index 미등재 파일: product/sticker-smallqty-freeform-nodes.md (gap-064-liandan-out-of-scope)
+- O4 index 미등재 파일: product/sticker-spec-band-nodes.md (plate-061-SIZ_000521)
+- O4 index 미등재 파일: product/sticker-spec-band-nodes.md (qty-061)
+- O4 index 미등재 파일: product/sticker-spec-band-nodes.md (gap-061-coating-conflict)
+- O4 index 미등재 파일: product/sticker-spec-band-nodes.md (gap-061-halfcut-process)
+- O4 index 미등재 파일: product/sticker-spec-band-nodes.md (gap-061-a5-size-master-deleted)
+- O4 index 미등재 파일: product/sticker-spec-band-nodes.md (gap-061-mat084-typ)
+- O4 index 미등재 파일: product/sticker-spec-band-nodes.md (gap-061-yeondangga-scope)
+- O4 index 미등재 파일: product/sticker-spec-band-nodes.md (gap-061-golden)
+- O4 index 미등재 파일: product/sticker-spec-circle-nodes.md (plate-058-SIZ_000521)
+- O4 index 미등재 파일: product/sticker-spec-fancy-clear-nodes.md (plate-063-SIZ_000521)
+- O4 index 미등재 파일: product/sticker-spec-fancy-clear-nodes.md (qty-063)
+- O4 index 미등재 파일: product/sticker-spec-fancy-clear-nodes.md (gap-063-halfcut-process)
+- O4 index 미등재 파일: product/sticker-spec-fancy-clear-nodes.md (gap-063-cpq-option-layer)
+- O4 index 미등재 파일: product/sticker-spec-fancy-clear-nodes.md (gap-063-material-unmigrated)
+- O4 index 미등재 파일: product/sticker-spec-fancy-nodes.md (plate-062-SIZ_000521)
+- O4 index 미등재 파일: product/sticker-spec-rectangle-nodes.md (plate-060-SIZ_000521)
+- O4 index 미등재 파일: product/sticker-spec-rectangle-nodes.md (qty-060)
+- O4 index 미등재 파일: product/sticker-spec-rectangle-nodes.md (gap-060-coating-conflict)
+- O4 index 미등재 파일: product/sticker-spec-rectangle-nodes.md (gap-060-halfcut-process)
+- O4 index 미등재 파일: product/sticker-spec-rectangle-nodes.md (gap-060-a5-size-master-deleted)
+- O4 index 미등재 파일: product/sticker-spec-rectangle-nodes.md (gap-060-mat084-typ)
+- O4 index 미등재 파일: product/sticker-spec-rectangle-nodes.md (gap-060-yeondangga-scope)
+- O4 index 미등재 파일: product/sticker-spec-rectangle-nodes.md (gap-060-golden)
+- O4 index 미등재 파일: product/sticker-spec-square-nodes.md (qty-059)
+- O4 index 미등재 파일: product/sticker-spec-square-nodes.md (gap-059-coating-conflict)
+- O4 index 미등재 파일: product/sticker-spec-square-nodes.md (gap-059-spec-shape-cut)
+- O4 index 미등재 파일: product/sticker-tattoo-nodes.md (qty-067)
+- O4 index 미등재 파일: product/sticker-tattoo-nodes.md (optgroup-067-paper)
+- O4 index 미등재 파일: product/sticker-tattoo-nodes.md (gap-067-mattype-transfer-paper)
+- O4 index 미등재 파일: product/sticker-tattoo-nodes.md (gap-067-liandan-out-of-scope)
 
 ## 비고
 - 상품 노드 8개 집필 완료(파일럿 디지털인쇄). 현행 소프트 고아는 ① 파일럿 8상품이 쓰지 않는 축 원자 항목(자재/공정/사이즈/판형/도수/카테고리 일부)과 ② 어떤 노드도 아직 링크하지 않는 floating GAP 노드다 — 'Phase 4 대기'가 아니라 현재 커버리지 경계. floating GAP의 상품 연결 여부는 연결 완전성(축5) 라운드에서 재판정(조용한 고아 gap 방지).

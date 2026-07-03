@@ -121,3 +121,38 @@
 - anchor: t_proc_processes/PROC_000032
 - src: {source_file: "live-snapshot/latest/t_proc_processes.csv", source_locator: "테이블:t_proc_processes 키:PROC_000032", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
 - props: {proc_nm: "가변이미지", upr_proc_cd: "PROC_000085", role: "가변데이타(PROC_000085)의 자식·개인화 이미지", 사용: "033·027·041"}
+
+
+<!-- 스티커 공유 원자(consolidation 2026-07-03·병렬 product-local L-3 중복을 단일 소유권으로 이관·consolidate_sticker_axes.py) -->
+
+### [process-PROC_000054] 반칼 (Kiss Cut·종이만) {verified}
+- type: process
+- anchor: t_proc_processes/PROC_000054
+- src: {source_file: "live-snapshot/latest/t_proc_processes.csv", source_locator: "키:PROC_000054(반칼·note 'Kiss Cut, 종이만 (스티커)'·prcs_dtl_opt inputs=모양/조각수)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- src: {source_file: "live-snapshot/latest/t_prd_product_processes.csv", source_locator: "키:(PRD_000054,PROC_000054) mand_proc_yn=N", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {mand_proc_yn: "N", inputs: "모양(string)·조각수(integer 개)", note: "반칼=Kiss Cut(자유형 칼틀·종이만·pack §3.6). 조각수 input은 prcs_dtl_opt에 있으나 상품레벨 저장처 부재([[gap-054-piece-count-storage]]·GAP-ST-2/OM-7). 공유 axis/processes.md 미등재(스티커 커팅 첫 등장)·승격 대기(needed_shared)"}
+- 본문: 반칼(kiss cut) = 스티커 정체 공정([[sticker-halfcut-hologram]] has_process·mand=N). 자유형 칼틀 모양대로 점착지만 절개(대지 남김).
+
+### [process-PROC_000055] 스티커완칼 (승격 대기·명칭 관찰) {verified}
+- type: process
+- anchor: t_proc_processes/PROC_000055
+- src: {source_file: "live-snapshot/latest/t_proc_processes.csv", source_locator: "테이블:t_proc_processes 키:PROC_000055 (proc_nm=스티커완칼·note=Die Cut + 조각수·prcs_dtl_opt inputs=조각수 integer)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- src: {source_file: "live-snapshot/latest/t_prd_product_processes.csv", source_locator: "테이블:t_prd_product_processes 키:(PRD_000060,PROC_000055) mand_proc_yn=N", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {proc_nm: "스티커완칼", role: "스티커 도무송 Die Cut(조각수 param)", 소비상품: "PRD_000060 등(mand=N)", note: "★상품명 '반칼직사각'인데 등록 공정=스티커완칼(PROC_000055 Die Cut). 반칼(Kiss Cut)=PROC_000054·완칼(종이+후지)=PROC_000053(공유 축)와 별 코드. pack §3.6=디지털은 반칼(PROC_000054) → 불일치 관찰 gap-060-halfcut-process. 스티커 공유 축 승격 후보"}
+
+<!-- [process-PROC_000013] 라미네이팅 코팅 = 공유 축 노드(axis/processes.md) 재사용 — 중복 생성 금지(L-3). 코팅 CONFLICT의 '공정 뷰'가 이 노드로 해소(gap-060-coating-conflict가 references). -->
+<!-- [printopt-POPT_000001] 단면 = 공유 축(axis/print-options.md) 재사용 — 위 전사표에 실재 기록·has_print_option 엣지가 그 노드로 해소. -->
+
+### [process-PROC_000114] 쿨코팅 {verified}
+- type: process
+- anchor: t_proc_processes/PROC_000114
+- src: {source_file: "live-snapshot/latest/t_proc_processes.csv", source_locator: "테이블:t_proc_processes 키:PROC_000114 (upr_proc_cd 없음·2026-06-29 mint)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- src: {source_file: "live-snapshot/latest/t_prd_product_processes.csv", source_locator: "테이블:t_prd_product_processes 소비:PRD_000055(mand_proc_yn=N·disp 2)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {proc_nm: "쿨코팅", upr_proc_cd: "", mand: "N", role: "무광쿨코팅(자재 MAT_000593 내장 코팅의 공정 표현)", note: "코팅=공정 vs 자재 CONFLICT(팩 §3.9·BATCH-3 GAP-ST-1)의 스티커 사례 — 055는 공정(PROC_000114)+자재명 내장 양쪽에 존재. 단정 금지·공유 축 승격 후보"}
+
+### [process-PROC_000122] 반칼커팅 (Kiss Cut) {verified}
+- type: process
+- anchor: t_proc_processes/PROC_000122
+- src: {source_file: "live-snapshot/latest/t_proc_processes.csv", source_locator: "테이블:t_proc_processes 키:PROC_000122 (upr_proc_cd=PROC_000121 커팅·2026-06-29 신설)", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- src: {source_file: "live-snapshot/latest/t_prd_product_processes.csv", source_locator: "테이블:t_prd_product_processes 소비:PRD_000052(mand Y·disp 1)·구 PROC_000054 반칼은 052에서 del_yn=Y 이관", captured_at: "live 20260702_1119", badge: verified, src_id: SR-5-livesnap}
+- props: {proc_nm: "반칼커팅", upr_proc_cd: "PROC_000121", role: "반칼 Kiss Cut(자유형 모양·뒷지 남김)·스티커 정체 공정", note: "★구 PROC_000054(반칼 Kiss Cut·prcs_dtl_opt 모양+조각수)에서 이관·pack §3.6 '반칼=PROC_000054'는 live 재측정 갱신·023 완칼 PROC_000053→123 이관과 동형·승격 후보"}

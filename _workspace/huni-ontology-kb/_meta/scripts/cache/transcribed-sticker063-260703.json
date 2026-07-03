@@ -1,0 +1,198 @@
+{
+  "addons": 0,
+  "authority": {
+    "투명스": [
+      {
+        "after": "투명스티커(백색후지)",
+        "before": "투명스티커",
+        "column": "종이명"
+      },
+      {
+        "after": "50",
+        "before": "105",
+        "column": "평량"
+      },
+      {
+        "after": "점착 투명데드롱 50mic (후지:백색박리지150g) / 1박스당 300매",
+        "before": "점착 투명105g pet/ 1박스당 100매",
+        "column": "구매정보"
+      },
+      {
+        "after": "149500",
+        "before": "130000",
+        "column": "연당가"
+      },
+      {
+        "after": "499",
+        "before": "1300",
+        "column": "가격 (국4절)"
+      }
+    ]
+  },
+  "bundle_qtys": 0,
+  "categories": [
+    {
+      "cat_cd": "CAT_000002",
+      "cat_nm": "스티커",
+      "main_cat_yn": "Y"
+    },
+    {
+      "cat_cd": "CAT_000037",
+      "cat_nm": "규격스티커",
+      "main_cat_yn": "N"
+    }
+  ],
+  "coat_axis": [
+    "(공백)"
+  ],
+  "constraints": 0,
+  "cover": {
+    "MAT_000162": 246
+  },
+  "cover_siz": {
+    "SIZ_000058": 0,
+    "SIZ_000059": 36,
+    "SIZ_000060": 36
+  },
+  "formulas": [
+    "PRF_STK_FIXED"
+  ],
+  "materials": [
+    {
+      "del_yn": "N",
+      "dflt_yn": "Y",
+      "mat_cd": "MAT_000162",
+      "mat_nm": "투명스티커",
+      "mat_typ_cd": "MAT_TYPE.11",
+      "upr_mat_cd": "",
+      "usage_cd": "USAGE.07",
+      "weight": "105.00"
+    }
+  ],
+  "meta": {
+    "captured_at": "2026-07-03",
+    "generated_by": "transcribe_sticker_063.py",
+    "pdiff": "huni-dbmap/26_change-tracking-260702/price-diff-260527-260702.csv",
+    "prd_cd": "PRD_000063",
+    "snapshot": "live-snapshot/latest (snap_20260702_1119)"
+  },
+  "option_group_rows": 0,
+  "option_items": 0,
+  "options": 0,
+  "paper_rows": 0,
+  "plates": [
+    {
+      "del_yn": "Y",
+      "dflt": "Y",
+      "note": "파일사양",
+      "opt": "OUTPUT_PAPER_TYPE.03",
+      "output_file_typ": "PDF",
+      "siz_cd": "SIZ_000200"
+    },
+    {
+      "del_yn": "Y",
+      "dflt": "Y",
+      "note": "파일사양",
+      "opt": "",
+      "output_file_typ": "",
+      "siz_cd": "SIZ_000201"
+    },
+    {
+      "del_yn": "Y",
+      "dflt": "Y",
+      "note": "파일사양",
+      "opt": "",
+      "output_file_typ": "",
+      "siz_cd": "SIZ_000202"
+    },
+    {
+      "del_yn": "N",
+      "dflt": "Y",
+      "note": "",
+      "opt": "OUTPUT_PAPER_TYPE.02",
+      "output_file_typ": "",
+      "siz_cd": "SIZ_000521"
+    }
+  ],
+  "print_options": [
+    {
+      "back_clr": "인쇄 안 함",
+      "front_clr": "CMYK 4도",
+      "opt_id": "1",
+      "print_opt_cd": "POPT_000001",
+      "print_side": "단면"
+    }
+  ],
+  "processes": [
+    {
+      "del_yn": "N",
+      "mand": "N",
+      "proc_cd": "PROC_000055",
+      "proc_nm": "스티커완칼",
+      "upr": ""
+    },
+    {
+      "del_yn": "N",
+      "mand": "N",
+      "proc_cd": "PROC_000008",
+      "proc_nm": "화이트인쇄",
+      "upr": "PROC_000007"
+    }
+  ],
+  "product": {
+    "del_yn": "N",
+    "editor_yn": "Y",
+    "file_upload_yn": "Y",
+    "max_qty": "10000",
+    "min_qty": "8",
+    "prd_cd": "PRD_000063",
+    "prd_nm": "반칼팬시투명스티커",
+    "prd_typ_cd": "PRD_TYPE.01",
+    "qty_incr": "8",
+    "qty_unit_typ_cd": "QTY_UNIT.02",
+    "use_yn": "N"
+  },
+  "sets": 0,
+  "sizes": [
+    {
+      "del_yn": "N",
+      "dflt_yn": "Y",
+      "mst_del": "N",
+      "note": "판걸이=4.0 / 전지=미지정 / 적용=반칼스티커",
+      "siz_cd": "SIZ_000059",
+      "siz_nm": "124x186",
+      "work": "128x190"
+    },
+    {
+      "del_yn": "N",
+      "dflt_yn": "Y",
+      "mst_del": "N",
+      "note": "판걸이=6.0 / 전지=미지정 / 적용=반칼스티커",
+      "siz_cd": "SIZ_000060",
+      "siz_nm": "90x190",
+      "work": "94x194"
+    },
+    {
+      "del_yn": "Y",
+      "dflt_yn": "Y",
+      "mst_del": "N",
+      "note": "판걸이=8.0 / 전지=미지정 / 적용=반칼스티커",
+      "siz_cd": "SIZ_000058",
+      "siz_nm": "100x140",
+      "work": "104x144"
+    }
+  ],
+  "stk_total": 6498,
+  "wiring": {
+    "PRF_STK_FIXED": [
+      {
+        "addtn_yn": "Y",
+        "comp_cd": "COMP_STK_PRINT",
+        "comp_nm": "스티커 완제품가(소재·규격)",
+        "disp_seq": "1",
+        "prc_typ_cd": "PRICE_TYPE.01",
+        "use_dims": "[\"siz_cd\", \"mat_cd\", \"min_qty\"]"
+      }
+    ]
+  }
+}

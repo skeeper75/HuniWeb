@@ -457,6 +457,16 @@ def build():
     for nid, n in nodes.items():
         if n.file_path.replace(os.sep, "/") not in idx and os.path.basename(n.file_path) not in idx:
             soft.append(f"O4 index 미등재 파일: {n.file_path} ({nid})")
+    # --- O4b index dead-link 스캔: 마크다운 링크 target(.md) 파일 실재 검사 ---
+    # (기존 O4 부분문자열 매칭은 dead-link 텍스트를 '등재됨'으로 오판=false-negative·D-STK-3.
+    #  링크 target 파일 실재를 직접 검사해 존재하지 않는 index 링크를 소프트 경고로 적발.)
+    if idx:
+        for m in re.finditer(r"\]\(([^)]+)\)", idx):
+            tgt = m.group(1).split("#")[0].strip()
+            if not tgt or tgt.startswith(("http://", "https://", "mailto:")) or not tgt.endswith(".md"):
+                continue
+            if not os.path.exists(os.path.join(KB, tgt)):
+                soft.append(f"O4b index dead-link(링크 target 파일 부재): index.md -> {tgt}")
 
     # --- 역링크(backlinks) 파생 ---
     backlinks = {nid: [] for nid in nodes}

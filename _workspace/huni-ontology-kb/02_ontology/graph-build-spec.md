@@ -187,6 +187,11 @@ SELECT src FROM edge WHERE rel='uses_material' AND dst='material-MAT_000074';
 
 - **V2-02 [Low]** §3.1 블록 노드 파싱 서술 정정. 종전 "블록 로컬 frontmatter 없으면 파일 frontmatter 상속 + 블록 내 `- 출처:`·`- 연결:` 파싱"은 구현과 불일치(빌더 `parse_block`은 ①영문 키 `- type:`/`- src:`/`- rel:`/`- anchor:` 등만 파싱, 한글 라벨 무시 ②파일 frontmatter 상속 미구현). 명세를 실제 구현(영문 키 파싱·상속 없음·블록 필수필드 자체 기술)으로 맞춤. 상속을 실제 원하면 별도 결정으로 `parse_block`에 상속 로직 추가(현재는 엄격 파싱이 회귀 안전 — 명세가 이를 채택). 파싱 대상 영문 키 목록 명기.
 
+### v1.0.3 — 2026-07-03 (스티커 검증 라운드 결함 교정 — `_meta/fix-log-sticker-260703.md`)
+> 실질 불변. O4 발견성 규칙 강화만(무결성 I-set 불변·하드 0 유지).
+
+- **D-STK-3 [Low]** O4(index 등재)에 **O4b index dead-link 스캔** 추가(소프트) — 기존 O4는 `basename in idx` 부분문자열 매칭이라 존재하지 않는 index 링크 텍스트(예 `product-059-sticker-spec-square.md`)가 실파일 basename(`sticker-spec-square.md`)을 부분포함하면 "등재됨"으로 오판(false-negative)하여 실 dead-link(404)를 놓쳤음. O4b는 index.md 마크다운 링크 `](path.md)` target 파일 실재를 직접 검사해 부재 링크를 소프트 경고. 발견성 규칙이므로 소프트 유지(I-set 미포함·V1-04B 정합). 빌더 `build_graph.py` O4 블록에 O4b 구현.
+
 ### v1.0.2 — 2026-07-03 (검증 라운드 1 결함 교정 — `_meta/fix-log-260703.md` R1)
 > 실질 불변. file-format-spec과의 정합 확인·명시만.
 

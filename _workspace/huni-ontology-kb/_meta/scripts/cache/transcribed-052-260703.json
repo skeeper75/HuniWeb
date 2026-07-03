@@ -1,0 +1,363 @@
+{
+  "formula": [
+    {
+      "frm_cd": "PRF_STK_FIXED",
+      "note": "반칼 자유형 스티커→규격/소재/수량 단가"
+    }
+  ],
+  "formula_components": [
+    {
+      "addtn": "Y",
+      "comp_cd": "COMP_STK_PRINT",
+      "disp_seq": "1",
+      "frm_cd": "PRF_STK_FIXED"
+    }
+  ],
+  "liandan_crosscheck": [
+    {
+      "mat_cd": "MAT_000584",
+      "mat_nm": "유포스티커 80g",
+      "substantive_price_change": false,
+      "upr_mat_cd": "MAT_000153"
+    },
+    {
+      "mat_cd": "MAT_000585",
+      "mat_nm": "무광코팅스티커 (아트지 90g + 무광라미네이팅)",
+      "substantive_price_change": false,
+      "upr_mat_cd": "MAT_000155"
+    },
+    {
+      "mat_cd": "MAT_000586",
+      "mat_nm": "유광코팅스티커 (아트지 90g +유광라미네이팅)",
+      "substantive_price_change": false,
+      "upr_mat_cd": "MAT_000156"
+    },
+    {
+      "mat_cd": "MAT_000609",
+      "mat_nm": "미색스티커 (모조 80g)",
+      "substantive_price_change": false,
+      "upr_mat_cd": "MAT_000242"
+    },
+    {
+      "mat_cd": "MAT_000611",
+      "mat_nm": "아트스티커 90g",
+      "substantive_price_change": false,
+      "upr_mat_cd": "MAT_000610"
+    }
+  ],
+  "materials": [
+    {
+      "dflt": "Y",
+      "disp": "1",
+      "mat_cd": "MAT_000584",
+      "mat_nm": "유포스티커 80g",
+      "mat_typ_cd": "MAT_TYPE.11",
+      "upr_mat_cd": "MAT_000153",
+      "usage": "USAGE.07",
+      "weight": "?"
+    },
+    {
+      "dflt": "Y",
+      "disp": "4",
+      "mat_cd": "MAT_000585",
+      "mat_nm": "무광코팅스티커 (아트지 90g + 무광라미네이팅)",
+      "mat_typ_cd": "MAT_TYPE.11",
+      "upr_mat_cd": "MAT_000155",
+      "usage": "USAGE.07",
+      "weight": "?"
+    },
+    {
+      "dflt": "Y",
+      "disp": "5",
+      "mat_cd": "MAT_000586",
+      "mat_nm": "유광코팅스티커 (아트지 90g +유광라미네이팅)",
+      "mat_typ_cd": "MAT_TYPE.11",
+      "upr_mat_cd": "MAT_000156",
+      "usage": "USAGE.07",
+      "weight": "?"
+    },
+    {
+      "dflt": "N",
+      "disp": "2",
+      "mat_cd": "MAT_000609",
+      "mat_nm": "미색스티커 (모조 80g)",
+      "mat_typ_cd": "MAT_TYPE.11",
+      "upr_mat_cd": "MAT_000242",
+      "usage": "USAGE.07",
+      "weight": "?"
+    },
+    {
+      "dflt": "Y",
+      "disp": "3",
+      "mat_cd": "MAT_000611",
+      "mat_nm": "아트스티커 90g",
+      "mat_typ_cd": "MAT_TYPE.11",
+      "upr_mat_cd": "MAT_000610",
+      "usage": "USAGE.07",
+      "weight": "?"
+    }
+  ],
+  "meta": {
+    "captured_at": "2026-07-03",
+    "generated_by": "transcribe_product_052.py",
+    "snapshot": "live-snapshot/latest (snap_20260702_1119)"
+  },
+  "option_groups": [
+    {
+      "disp": "1",
+      "items": [
+        {
+          "dflt": "N",
+          "opt_cd": "OPV_000021",
+          "opt_nm": "미색스티커",
+          "ref_dim_cd": "OPT_REF_DIM.03",
+          "ref_key1": "MAT_000609",
+          "ref_key2": "USAGE.07"
+        },
+        {
+          "dflt": "Y",
+          "opt_cd": "OPV_000017",
+          "opt_nm": "유포스티커",
+          "ref_dim_cd": "OPT_REF_DIM.03",
+          "ref_key1": "MAT_000584",
+          "ref_key2": "USAGE.07"
+        },
+        {
+          "dflt": "N",
+          "opt_cd": "OPV_000018",
+          "opt_nm": "아트스티커",
+          "ref_dim_cd": "OPT_REF_DIM.03",
+          "ref_key1": "MAT_000611",
+          "ref_key2": "USAGE.07"
+        },
+        {
+          "dflt": "N",
+          "opt_cd": "OPV_000019",
+          "opt_nm": "무광코팅스티커",
+          "ref_dim_cd": "OPT_REF_DIM.03",
+          "ref_key1": "MAT_000585",
+          "ref_key2": "USAGE.07"
+        },
+        {
+          "dflt": "N",
+          "opt_cd": "OPV_000020",
+          "opt_nm": "유광코팅스티커",
+          "ref_dim_cd": "OPT_REF_DIM.03",
+          "ref_key1": "MAT_000586",
+          "ref_key2": "USAGE.07"
+        }
+      ],
+      "mand": "Y",
+      "max_sel": "1",
+      "min_sel": "1",
+      "opt_grp_cd": "OPT_000006",
+      "opt_grp_nm": "종이",
+      "sel_typ_cd": "SEL_TYPE.01"
+    },
+    {
+      "disp": "2",
+      "items": [
+        {
+          "dflt": "Y",
+          "opt_cd": "OPV_000022",
+          "opt_nm": "단면",
+          "ref_dim_cd": "OPT_REF_DIM.06",
+          "ref_key1": "1",
+          "ref_key2": ""
+        }
+      ],
+      "mand": "Y",
+      "max_sel": "1",
+      "min_sel": "1",
+      "opt_grp_cd": "OPT_000007",
+      "opt_grp_nm": "인쇄",
+      "sel_typ_cd": "SEL_TYPE.01"
+    },
+    {
+      "disp": "4",
+      "items": [
+        {
+          "dflt": "Y",
+          "opt_cd": "OPV_000023",
+          "opt_nm": "반칼(자유형)",
+          "ref_dim_cd": "OPT_REF_DIM.04",
+          "ref_key1": "PROC_000054",
+          "ref_key2": ""
+        }
+      ],
+      "mand": "Y",
+      "max_sel": "1",
+      "min_sel": "1",
+      "opt_grp_cd": "OPT_000008",
+      "opt_grp_nm": "커팅",
+      "sel_typ_cd": "SEL_TYPE.01"
+    }
+  ],
+  "plate": [
+    {
+      "dflt_plt": "Y",
+      "note": "",
+      "output_paper_typ_cd": "OUTPUT_PAPER_TYPE.02",
+      "siz_cd": "SIZ_000521"
+    }
+  ],
+  "price_components": [
+    {
+      "comp_cd": "COMP_STK_PRINT",
+      "comp_nm": "스티커 완제품가(소재·규격)",
+      "comp_typ_cd": "PRC_COMPONENT_TYPE.06",
+      "prc_typ_cd": "PRICE_TYPE.01",
+      "use_dims": "[\"siz_cd\", \"mat_cd\", \"min_qty\"]"
+    }
+  ],
+  "price_grid_rows": [
+    {
+      "mat_cd": "MAT_000584",
+      "rows": 36,
+      "siz_cd": "SIZ_000057"
+    },
+    {
+      "mat_cd": "MAT_000585",
+      "rows": 36,
+      "siz_cd": "SIZ_000057"
+    },
+    {
+      "mat_cd": "MAT_000586",
+      "rows": 36,
+      "siz_cd": "SIZ_000057"
+    },
+    {
+      "mat_cd": "MAT_000609",
+      "rows": 36,
+      "siz_cd": "SIZ_000057"
+    },
+    {
+      "mat_cd": "MAT_000611",
+      "rows": 36,
+      "siz_cd": "SIZ_000057"
+    },
+    {
+      "mat_cd": "MAT_000584",
+      "rows": 36,
+      "siz_cd": "SIZ_000170"
+    },
+    {
+      "mat_cd": "MAT_000585",
+      "rows": 36,
+      "siz_cd": "SIZ_000170"
+    },
+    {
+      "mat_cd": "MAT_000586",
+      "rows": 36,
+      "siz_cd": "SIZ_000170"
+    },
+    {
+      "mat_cd": "MAT_000609",
+      "rows": 36,
+      "siz_cd": "SIZ_000170"
+    },
+    {
+      "mat_cd": "MAT_000611",
+      "rows": 36,
+      "siz_cd": "SIZ_000170"
+    },
+    {
+      "mat_cd": "MAT_000584",
+      "rows": 36,
+      "siz_cd": "SIZ_000520"
+    },
+    {
+      "mat_cd": "MAT_000585",
+      "rows": 36,
+      "siz_cd": "SIZ_000520"
+    },
+    {
+      "mat_cd": "MAT_000586",
+      "rows": 36,
+      "siz_cd": "SIZ_000520"
+    },
+    {
+      "mat_cd": "MAT_000609",
+      "rows": 36,
+      "siz_cd": "SIZ_000520"
+    },
+    {
+      "mat_cd": "MAT_000611",
+      "rows": 36,
+      "siz_cd": "SIZ_000520"
+    }
+  ],
+  "print_options": [
+    {
+      "back": "CLR_000001(인쇄 안 함)",
+      "front": "CLR_000005(CMYK 4도)",
+      "opt_id": "1",
+      "print_opt_cd": "POPT_000001",
+      "print_side": "단면"
+    }
+  ],
+  "processes": [
+    {
+      "disp": "3",
+      "mand": "N",
+      "proc_cd": "PROC_000014",
+      "proc_nm": "유광라미네이팅",
+      "upr_proc_cd": "PROC_000013"
+    },
+    {
+      "disp": "2",
+      "mand": "N",
+      "proc_cd": "PROC_000015",
+      "proc_nm": "무광라미네이팅",
+      "upr_proc_cd": "PROC_000013"
+    },
+    {
+      "disp": "1",
+      "mand": "Y",
+      "proc_cd": "PROC_000122",
+      "proc_nm": "반칼커팅",
+      "upr_proc_cd": "PROC_000121"
+    }
+  ],
+  "qty": {
+    "del_yn": "N",
+    "editor_yn": "N",
+    "file_upload_yn": "Y",
+    "max_qty": "10000",
+    "min_qty": "8",
+    "prd_nm": "반칼 자유형 스티커",
+    "prd_typ_cd": "PRD_TYPE.01",
+    "qty_incr": "8",
+    "unit": "QTY_UNIT.02",
+    "use_yn": "Y"
+  },
+  "sizes": [
+    {
+      "cut": "105x148",
+      "dflt": "N",
+      "disp": "1",
+      "master_del_yn": "N",
+      "siz_cd": "SIZ_000057",
+      "siz_nm": "A6 (105X148)",
+      "work": "105x148"
+    },
+    {
+      "cut": "?x?",
+      "dflt": "N",
+      "disp": "1",
+      "master_del_yn": "N",
+      "siz_cd": "SIZ_000520",
+      "siz_nm": "A4(210x297mm) 반칼",
+      "work": "?x?"
+    },
+    {
+      "cut": "148x210",
+      "dflt": "Y",
+      "disp": "1",
+      "master_del_yn": "Y",
+      "siz_cd": "SIZ_000170",
+      "siz_nm": "A5(148x210mm)",
+      "work": "148x210"
+    }
+  ]
+}

@@ -1,0 +1,472 @@
+{
+  "cpq_layer": {
+    "option_groups": 0,
+    "option_items": 0,
+    "options": 0
+  },
+  "formula": [
+    {
+      "frm_cd": "PRF_STK_FIXED",
+      "note": ""
+    }
+  ],
+  "formula_components": [
+    {
+      "addtn": "Y",
+      "comp_cd": "COMP_STK_PRINT",
+      "disp_seq": "1",
+      "frm_cd": "PRF_STK_FIXED"
+    }
+  ],
+  "liandan_crosscheck": [
+    {
+      "mat_cd": "MAT_000153",
+      "mat_nm": "유포스티커",
+      "substantive_price_change": false,
+      "upr_mat_cd": ""
+    },
+    {
+      "mat_cd": "MAT_000084",
+      "mat_nm": "비코팅스티커",
+      "substantive_price_change": false,
+      "upr_mat_cd": ""
+    },
+    {
+      "mat_cd": "MAT_000242",
+      "mat_nm": "미색스티커",
+      "substantive_price_change": false,
+      "upr_mat_cd": ""
+    },
+    {
+      "mat_cd": "MAT_000155",
+      "mat_nm": "무광코팅스티커",
+      "substantive_price_change": false,
+      "upr_mat_cd": ""
+    },
+    {
+      "mat_cd": "MAT_000156",
+      "mat_nm": "유광코팅스티커",
+      "substantive_price_change": false,
+      "upr_mat_cd": ""
+    }
+  ],
+  "materials": [
+    {
+      "dflt": "Y",
+      "disp": "1",
+      "mat_cd": "MAT_000153",
+      "mat_nm": "유포스티커",
+      "mat_typ_cd": "MAT_TYPE.11",
+      "note": "",
+      "upr_mat_cd": "",
+      "usage": "USAGE.07",
+      "weight": "80"
+    },
+    {
+      "dflt": "Y",
+      "disp": "1",
+      "mat_cd": "MAT_000084",
+      "mat_nm": "비코팅스티커",
+      "mat_typ_cd": "MAT_TYPE.13",
+      "note": "| 정정 2026-06-14: 자재유형 종이(.01)→스티커(.11) 점착지",
+      "upr_mat_cd": "",
+      "usage": "USAGE.07",
+      "weight": "90"
+    },
+    {
+      "dflt": "Y",
+      "disp": "1",
+      "mat_cd": "MAT_000242",
+      "mat_nm": "미색스티커",
+      "mat_typ_cd": "MAT_TYPE.11",
+      "note": " | 정정 2026-06-14: 자재유형 종이(.01)→스티커(.11) 점착지",
+      "upr_mat_cd": "",
+      "usage": "USAGE.07",
+      "weight": "?"
+    },
+    {
+      "dflt": "Y",
+      "disp": "1",
+      "mat_cd": "MAT_000155",
+      "mat_nm": "무광코팅스티커",
+      "mat_typ_cd": "MAT_TYPE.11",
+      "note": "",
+      "upr_mat_cd": "",
+      "usage": "USAGE.07",
+      "weight": "90"
+    },
+    {
+      "dflt": "Y",
+      "disp": "1",
+      "mat_cd": "MAT_000156",
+      "mat_nm": "유광코팅스티커",
+      "mat_typ_cd": "MAT_TYPE.11",
+      "note": "",
+      "upr_mat_cd": "",
+      "usage": "USAGE.07",
+      "weight": "90"
+    }
+  ],
+  "meta": {
+    "captured_at": "2026-07-03",
+    "generated_by": "transcribe_product_064.py",
+    "snapshot": "live-snapshot/latest (snap_20260702_1119)"
+  },
+  "plate": [
+    {
+      "dflt_plt": "Y",
+      "note": "",
+      "output_paper_typ_cd": "OUTPUT_PAPER_TYPE.02",
+      "siz_cd": "SIZ_000521"
+    }
+  ],
+  "plate_deleted": [
+    {
+      "del_dt": "2026-06-30 08:42:39.27075",
+      "note": "파일사양",
+      "output_file_typ": "",
+      "output_paper_typ_cd": "",
+      "siz_cd": "SIZ_000036"
+    },
+    {
+      "del_dt": "2026-06-30 08:42:39.27075",
+      "note": "파일사양",
+      "output_file_typ": "",
+      "output_paper_typ_cd": "",
+      "siz_cd": "SIZ_000043"
+    },
+    {
+      "del_dt": "2026-06-30 08:42:39.27075",
+      "note": "파일사양",
+      "output_file_typ": "PDF",
+      "output_paper_typ_cd": "OUTPUT_PAPER_TYPE.03",
+      "siz_cd": "SIZ_000061"
+    },
+    {
+      "del_dt": "2026-06-30 08:42:39.27075",
+      "note": "파일사양",
+      "output_file_typ": "",
+      "output_paper_typ_cd": "",
+      "siz_cd": "SIZ_000062"
+    },
+    {
+      "del_dt": "2026-06-30 08:42:39.27075",
+      "note": "파일사양",
+      "output_file_typ": "",
+      "output_paper_typ_cd": "",
+      "siz_cd": "SIZ_000063"
+    },
+    {
+      "del_dt": "2026-06-30 08:42:39.27075",
+      "note": "파일사양",
+      "output_file_typ": "",
+      "output_paper_typ_cd": "",
+      "siz_cd": "SIZ_000064"
+    },
+    {
+      "del_dt": "2026-06-30 08:42:39.27075",
+      "note": "파일사양",
+      "output_file_typ": "",
+      "output_paper_typ_cd": "",
+      "siz_cd": "SIZ_000065"
+    }
+  ],
+  "price_components": [
+    {
+      "comp_cd": "COMP_STK_PRINT",
+      "comp_nm": "스티커 완제품가(소재·규격)",
+      "comp_typ_cd": "PRC_COMPONENT_TYPE.06",
+      "prc_typ_cd": "PRICE_TYPE.01",
+      "use_dims": "[\"siz_cd\", \"mat_cd\", \"min_qty\"]"
+    }
+  ],
+  "price_grid_coverage": {
+    "expected": 35,
+    "present": 35
+  },
+  "price_grid_rows": [
+    {
+      "mat_cd": "MAT_000084",
+      "rows": 36,
+      "siz_cd": "SIZ_000036"
+    },
+    {
+      "mat_cd": "MAT_000153",
+      "rows": 36,
+      "siz_cd": "SIZ_000036"
+    },
+    {
+      "mat_cd": "MAT_000155",
+      "rows": 36,
+      "siz_cd": "SIZ_000036"
+    },
+    {
+      "mat_cd": "MAT_000156",
+      "rows": 36,
+      "siz_cd": "SIZ_000036"
+    },
+    {
+      "mat_cd": "MAT_000242",
+      "rows": 36,
+      "siz_cd": "SIZ_000036"
+    },
+    {
+      "mat_cd": "MAT_000084",
+      "rows": 36,
+      "siz_cd": "SIZ_000043"
+    },
+    {
+      "mat_cd": "MAT_000153",
+      "rows": 36,
+      "siz_cd": "SIZ_000043"
+    },
+    {
+      "mat_cd": "MAT_000155",
+      "rows": 36,
+      "siz_cd": "SIZ_000043"
+    },
+    {
+      "mat_cd": "MAT_000156",
+      "rows": 36,
+      "siz_cd": "SIZ_000043"
+    },
+    {
+      "mat_cd": "MAT_000242",
+      "rows": 36,
+      "siz_cd": "SIZ_000043"
+    },
+    {
+      "mat_cd": "MAT_000084",
+      "rows": 36,
+      "siz_cd": "SIZ_000061"
+    },
+    {
+      "mat_cd": "MAT_000153",
+      "rows": 36,
+      "siz_cd": "SIZ_000061"
+    },
+    {
+      "mat_cd": "MAT_000155",
+      "rows": 36,
+      "siz_cd": "SIZ_000061"
+    },
+    {
+      "mat_cd": "MAT_000156",
+      "rows": 36,
+      "siz_cd": "SIZ_000061"
+    },
+    {
+      "mat_cd": "MAT_000242",
+      "rows": 36,
+      "siz_cd": "SIZ_000061"
+    },
+    {
+      "mat_cd": "MAT_000084",
+      "rows": 36,
+      "siz_cd": "SIZ_000062"
+    },
+    {
+      "mat_cd": "MAT_000153",
+      "rows": 36,
+      "siz_cd": "SIZ_000062"
+    },
+    {
+      "mat_cd": "MAT_000155",
+      "rows": 36,
+      "siz_cd": "SIZ_000062"
+    },
+    {
+      "mat_cd": "MAT_000156",
+      "rows": 36,
+      "siz_cd": "SIZ_000062"
+    },
+    {
+      "mat_cd": "MAT_000242",
+      "rows": 36,
+      "siz_cd": "SIZ_000062"
+    },
+    {
+      "mat_cd": "MAT_000084",
+      "rows": 36,
+      "siz_cd": "SIZ_000063"
+    },
+    {
+      "mat_cd": "MAT_000153",
+      "rows": 36,
+      "siz_cd": "SIZ_000063"
+    },
+    {
+      "mat_cd": "MAT_000155",
+      "rows": 36,
+      "siz_cd": "SIZ_000063"
+    },
+    {
+      "mat_cd": "MAT_000156",
+      "rows": 36,
+      "siz_cd": "SIZ_000063"
+    },
+    {
+      "mat_cd": "MAT_000242",
+      "rows": 36,
+      "siz_cd": "SIZ_000063"
+    },
+    {
+      "mat_cd": "MAT_000084",
+      "rows": 36,
+      "siz_cd": "SIZ_000064"
+    },
+    {
+      "mat_cd": "MAT_000153",
+      "rows": 36,
+      "siz_cd": "SIZ_000064"
+    },
+    {
+      "mat_cd": "MAT_000155",
+      "rows": 36,
+      "siz_cd": "SIZ_000064"
+    },
+    {
+      "mat_cd": "MAT_000156",
+      "rows": 36,
+      "siz_cd": "SIZ_000064"
+    },
+    {
+      "mat_cd": "MAT_000242",
+      "rows": 36,
+      "siz_cd": "SIZ_000064"
+    },
+    {
+      "mat_cd": "MAT_000084",
+      "rows": 36,
+      "siz_cd": "SIZ_000065"
+    },
+    {
+      "mat_cd": "MAT_000153",
+      "rows": 36,
+      "siz_cd": "SIZ_000065"
+    },
+    {
+      "mat_cd": "MAT_000155",
+      "rows": 36,
+      "siz_cd": "SIZ_000065"
+    },
+    {
+      "mat_cd": "MAT_000156",
+      "rows": 36,
+      "siz_cd": "SIZ_000065"
+    },
+    {
+      "mat_cd": "MAT_000242",
+      "rows": 36,
+      "siz_cd": "SIZ_000065"
+    }
+  ],
+  "print_options": [
+    {
+      "back": "CLR_000001(인쇄 안 함)",
+      "front": "CLR_000005(CMYK 4도)",
+      "opt_id": "1",
+      "print_opt_cd": "POPT_000001",
+      "print_side": "단면"
+    }
+  ],
+  "processes": [
+    {
+      "disp": "1",
+      "mand": "N",
+      "proc_cd": "PROC_000054",
+      "proc_nm": "반칼",
+      "upr_proc_cd": ""
+    }
+  ],
+  "qty": {
+    "del_yn": "N",
+    "editor_yn": "Y",
+    "file_upload_yn": "Y",
+    "max_qty": "1000",
+    "min_qty": "32",
+    "prd_nm": "소량자유형스티커",
+    "prd_typ_cd": "PRD_TYPE.01",
+    "qty_incr": "32",
+    "unit": "QTY_UNIT.02",
+    "use_yn": "N"
+  },
+  "relations_absent": {
+    "addons": 0,
+    "bundle_qtys": 0,
+    "constraints": 0,
+    "sets": 0
+  },
+  "sizes": [
+    {
+      "cut": "50x70",
+      "dflt": "Y",
+      "disp": "1",
+      "master_del_yn": "N",
+      "note": "판걸이=32.0 / 전지=미지정 / 적용=소형반칼스티커",
+      "siz_cd": "SIZ_000061",
+      "siz_nm": "50x70",
+      "work": "50x70"
+    },
+    {
+      "cut": "70x50",
+      "dflt": "Y",
+      "disp": "1",
+      "master_del_yn": "N",
+      "note": "판걸이=32.0 / 전지=미지정 / 적용=소형반칼스티커",
+      "siz_cd": "SIZ_000062",
+      "siz_nm": "70x50",
+      "work": "70x50"
+    },
+    {
+      "cut": "50x94",
+      "dflt": "Y",
+      "disp": "1",
+      "master_del_yn": "N",
+      "note": "판걸이=24.0 / 전지=미지정 / 적용=소형반칼스티커",
+      "siz_cd": "SIZ_000063",
+      "siz_nm": "50x94",
+      "work": "50x94"
+    },
+    {
+      "cut": "94x50",
+      "dflt": "Y",
+      "disp": "1",
+      "master_del_yn": "N",
+      "note": "판걸이=24.0 / 전지=미지정 / 적용=소형반칼스티커",
+      "siz_cd": "SIZ_000064",
+      "siz_nm": "94x50",
+      "work": "94x50"
+    },
+    {
+      "cut": "65x65",
+      "dflt": "Y",
+      "disp": "1",
+      "master_del_yn": "N",
+      "note": "판걸이=24.0 / 전지=미지정 / 적용=소형반칼스티커",
+      "siz_cd": "SIZ_000065",
+      "siz_nm": "65x65",
+      "work": "65x65"
+    },
+    {
+      "cut": "80x80",
+      "dflt": "Y",
+      "disp": "1",
+      "master_del_yn": "N",
+      "note": "판걸이=15.0 / 전지=316x467 / 적용=인쇄해더택",
+      "siz_cd": "SIZ_000043",
+      "siz_nm": "80x80",
+      "work": "84x84"
+    },
+    {
+      "cut": "94x94",
+      "dflt": "Y",
+      "disp": "1",
+      "master_del_yn": "N",
+      "note": "판걸이=12.0 / 전지=316x467 / 적용=인쇄배경지",
+      "siz_cd": "SIZ_000036",
+      "siz_nm": "94x94",
+      "work": "98x98"
+    }
+  ]
+}

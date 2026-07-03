@@ -1,0 +1,537 @@
+{
+  "categories": [
+    {
+      "cat_cd": "CAT_000002",
+      "cat_nm": "스티커",
+      "disp": "8",
+      "main_cat_yn": "Y",
+      "upr": ""
+    },
+    {
+      "cat_cd": "CAT_000037",
+      "cat_nm": "규격스티커",
+      "disp": "11",
+      "main_cat_yn": "N",
+      "upr": "CAT_000002"
+    }
+  ],
+  "constraints": [
+    {
+      "logic": "{\"!\": {\"and\": [{\"===\": [{\"var\": \"siz_cd\"}, \"SIZ_000426\"]}, {\"in\": [\"OPV-000066\", {\"var\": \"sel_opts\"}]}, {\"in\": [\"OPV-000067\", {\"var\": \"sel_opts\"}]}, {\"in\": [\"OPV-000068\", {\"var\": \"sel_opts\"}]}, {\"in\": [\"OPV-000069\", {\"var\": \"sel_opts\"}]}, {\"in\": [\"OPV-000070\", {\"var\": \"sel_opts\"}]}, {\"in\": [\"OPV-000071\", {\"var\": \"sel_opts\"}]}, {\"in\": [\"OPV-000072\", {\"var\": \"sel_opts\"}]}, {\"in\": [\"OPV-000073\", {\"va",
+      "nm": "A5 커팅",
+      "rule": "RULE_001",
+      "typ": "RULE_TYPE.03"
+    }
+  ],
+  "diff": [
+    {
+      "after": "C=투명스티커(투명후지) | D=50 | E=투명투 | F=점착 투명데드롱 50mic (후지:투명 PET 100mic) / 1박스당 300매 | G=330*480 | H=222000 | I=740 | K=330x480",
+      "before": "",
+      "column": "(ADDED row)",
+      "key": "투명투",
+      "sheet": "출력소재(IMPORT)"
+    },
+    {
+      "after": "81500",
+      "before": "156000",
+      "column": "연당가",
+      "key": "크라프",
+      "sheet": "출력소재(IMPORT)"
+    },
+    {
+      "after": "272",
+      "before": "312",
+      "column": "가격 (국4절)",
+      "key": "크라프",
+      "sheet": "출력소재(IMPORT)"
+    },
+    {
+      "after": "투명스티커(백색후지)",
+      "before": "투명스티커",
+      "column": "종이명",
+      "key": "투명스",
+      "sheet": "출력소재(IMPORT)"
+    },
+    {
+      "after": "50",
+      "before": "105",
+      "column": "평량",
+      "key": "투명스",
+      "sheet": "출력소재(IMPORT)"
+    },
+    {
+      "after": "149500",
+      "before": "130000",
+      "column": "연당가",
+      "key": "투명스",
+      "sheet": "출력소재(IMPORT)"
+    },
+    {
+      "after": "499",
+      "before": "1300",
+      "column": "가격 (국4절)",
+      "key": "투명스",
+      "sheet": "출력소재(IMPORT)"
+    },
+    {
+      "after": "253700",
+      "before": "360000",
+      "column": "연당가",
+      "key": "홀로스",
+      "sheet": "출력소재(IMPORT)"
+    },
+    {
+      "after": "846",
+      "before": "936",
+      "column": "가격 (국4절)",
+      "key": "홀로스",
+      "sheet": "출력소재(IMPORT)"
+    }
+  ],
+  "empty_axes": {
+    "addons": 0,
+    "bundle_qtys": 0,
+    "direct_prices": 0,
+    "sets": 0
+  },
+  "formulas": [
+    {
+      "frm": "PRF_STK_FIXED",
+      "frm_nm": "스티커 규격/소재/수량별 단가",
+      "note": "스티커 단가. 수량×(출력매수·소재) 표에서 단가 조회.",
+      "use_yn": "Y"
+    }
+  ],
+  "grid": {
+    "COMP_STK_PRINT_total": 6498,
+    "by_mat": {
+      "MAT_000584": {
+        "rows": 540,
+        "sample": {
+          "min_qty": "3",
+          "note": "B01 col1(A5) 유포 [mint260701 src=MAT_0001",
+          "siz_cd": "SIZ_000170",
+          "unit_price": "5900.00"
+        }
+      },
+      "MAT_000585": {
+        "rows": 504,
+        "sample": {
+          "min_qty": "1",
+          "note": "B01 col1(A5) 무광코팅 [mint260701 src=MAT_00",
+          "siz_cd": "SIZ_000170",
+          "unit_price": "7000.00"
+        }
+      },
+      "MAT_000586": {
+        "rows": 504,
+        "sample": {
+          "min_qty": "150",
+          "note": "B01 col1(A5) 유광코팅 [mint260701 src=MAT_00",
+          "siz_cd": "SIZ_000170",
+          "unit_price": "6000.00"
+        }
+      },
+      "MAT_000609": {
+        "rows": 504,
+        "sample": {
+          "min_qty": "350",
+          "note": "[잠정] 소형반칼 B01 규격가(col1·124x186) 사이즈무관 적용",
+          "siz_cd": "SIZ_000065",
+          "unit_price": "4200.00"
+        }
+      },
+      "MAT_000611": {
+        "rows": 540,
+        "sample": {
+          "min_qty": "3",
+          "note": "STK-RESTORE-260702 art-clone-from-153",
+          "siz_cd": "SIZ_000170",
+          "unit_price": "5900.00"
+        }
+      }
+    }
+  },
+  "materials_active": [
+    {
+      "dflt": "Y",
+      "mat_cd": "MAT_000584",
+      "mat_nm": "유포스티커 80g",
+      "mat_typ": "MAT_TYPE.11",
+      "note": "",
+      "upr": "MAT_000153",
+      "usage": "USAGE.07"
+    },
+    {
+      "dflt": "Y",
+      "mat_cd": "MAT_000611",
+      "mat_nm": "아트스티커 90g",
+      "mat_typ": "MAT_TYPE.11",
+      "note": "",
+      "upr": "MAT_000610",
+      "usage": "USAGE.07"
+    },
+    {
+      "dflt": "Y",
+      "mat_cd": "MAT_000609",
+      "mat_nm": "미색스티커 (모조 80g)",
+      "mat_typ": "MAT_TYPE.11",
+      "note": "",
+      "upr": "MAT_000242",
+      "usage": "USAGE.07"
+    },
+    {
+      "dflt": "Y",
+      "mat_cd": "MAT_000585",
+      "mat_nm": "무광코팅스티커 (아트지 90g + 무광라미네이팅)",
+      "mat_typ": "MAT_TYPE.11",
+      "note": "",
+      "upr": "MAT_000155",
+      "usage": "USAGE.07"
+    },
+    {
+      "dflt": "Y",
+      "mat_cd": "MAT_000586",
+      "mat_nm": "유광코팅스티커 (아트지 90g +유광라미네이팅)",
+      "mat_typ": "MAT_TYPE.11",
+      "note": "",
+      "upr": "MAT_000156",
+      "usage": "USAGE.07"
+    }
+  ],
+  "materials_deleted": [
+    {
+      "mat_cd": "MAT_000153",
+      "mat_nm": "유포스티커"
+    },
+    {
+      "mat_cd": "MAT_000084",
+      "mat_nm": "비코팅스티커"
+    },
+    {
+      "mat_cd": "MAT_000242",
+      "mat_nm": "미색스티커"
+    },
+    {
+      "mat_cd": "MAT_000155",
+      "mat_nm": "무광코팅스티커"
+    },
+    {
+      "mat_cd": "MAT_000156",
+      "mat_nm": "유광코팅스티커"
+    }
+  ],
+  "meta": {
+    "captured_at": "2026-07-03",
+    "diff_src": "huni-dbmap/26_change-tracking-260702/price-diff-260527-260702.csv",
+    "generated_by": "transcribe_sticker_058.py",
+    "prd_cd": "PRD_000058",
+    "snapshot": "live-snapshot/latest (snap_20260702_1119)"
+  },
+  "opt_groups": [
+    {
+      "del": "Y",
+      "disp": "3",
+      "grp": "OPT-000033",
+      "mand": "N",
+      "nm": "원형 35mm (15ea)",
+      "sel": ""
+    },
+    {
+      "del": "Y",
+      "disp": "7",
+      "grp": "OPT-000037",
+      "mand": "N",
+      "nm": "원형 55mm (6ea)",
+      "sel": ""
+    },
+    {
+      "del": "Y",
+      "disp": "8",
+      "grp": "OPT-000038",
+      "mand": "N",
+      "nm": "원형 60mm (6ea)",
+      "sel": ""
+    },
+    {
+      "del": "N",
+      "disp": "1",
+      "grp": "OPT-000031",
+      "mand": "N",
+      "nm": "커팅",
+      "sel": "SEL_TYPE.01"
+    },
+    {
+      "del": "Y",
+      "disp": "2",
+      "grp": "OPT-000032",
+      "mand": "N",
+      "nm": "원형 30mm (20ea)",
+      "sel": ""
+    },
+    {
+      "del": "Y",
+      "disp": "4",
+      "grp": "OPT-000034",
+      "mand": "N",
+      "nm": "원형 40mm (12ea)",
+      "sel": ""
+    },
+    {
+      "del": "N",
+      "disp": "5",
+      "grp": "OPT-000035",
+      "mand": "N",
+      "nm": "인쇄",
+      "sel": "SEL_TYPE.01"
+    },
+    {
+      "del": "N",
+      "disp": "6",
+      "grp": "OPT-000036",
+      "mand": "N",
+      "nm": "종이",
+      "sel": "SEL_TYPE.01"
+    }
+  ],
+  "opt_items": [
+    {
+      "del": "N",
+      "opt": "OPV-000060",
+      "ref_dim": "OPT_REF_DIM.06",
+      "ref_key1": "1",
+      "ref_key2": ""
+    },
+    {
+      "del": "N",
+      "opt": "OPV-000064",
+      "ref_dim": "OPT_REF_DIM.03",
+      "ref_key1": "MAT_000585",
+      "ref_key2": "USAGE.07"
+    },
+    {
+      "del": "N",
+      "opt": "OPV-000065",
+      "ref_dim": "OPT_REF_DIM.03",
+      "ref_key1": "MAT_000586",
+      "ref_key2": "USAGE.07"
+    },
+    {
+      "del": "N",
+      "opt": "OPV-000061",
+      "ref_dim": "OPT_REF_DIM.03",
+      "ref_key1": "MAT_000584",
+      "ref_key2": "USAGE.07"
+    },
+    {
+      "del": "N",
+      "opt": "OPV-000062",
+      "ref_dim": "OPT_REF_DIM.03",
+      "ref_key1": "MAT_000609",
+      "ref_key2": "USAGE.07"
+    },
+    {
+      "del": "N",
+      "opt": "OPV-000063",
+      "ref_dim": "OPT_REF_DIM.03",
+      "ref_key1": "MAT_000611",
+      "ref_key2": "USAGE.07"
+    }
+  ],
+  "opt_values": [
+    {
+      "del": "N",
+      "disp": "1",
+      "grp": "OPT-000031",
+      "nm": "원형 25mm (24ea)",
+      "opt": "OPV-000066"
+    },
+    {
+      "del": "N",
+      "disp": "4",
+      "grp": "OPT-000036",
+      "nm": "무광코팅스티커",
+      "opt": "OPV-000064"
+    },
+    {
+      "del": "N",
+      "disp": "3",
+      "grp": "OPT-000036",
+      "nm": "아트스티커",
+      "opt": "OPV-000063"
+    },
+    {
+      "del": "N",
+      "disp": "7",
+      "grp": "OPT-000031",
+      "nm": "원형 55mm (6ea)",
+      "opt": "OPV-000072"
+    },
+    {
+      "del": "N",
+      "disp": "6",
+      "grp": "OPT-000031",
+      "nm": "원형 50mm (6ea)",
+      "opt": "OPV-000071"
+    },
+    {
+      "del": "N",
+      "disp": "9",
+      "grp": "OPT-000031",
+      "nm": "원형 80mm (6ea)",
+      "opt": "OPV-000074"
+    },
+    {
+      "del": "N",
+      "disp": "4",
+      "grp": "OPT-000031",
+      "nm": "원형 40mm (12ea)",
+      "opt": "OPV-000069"
+    },
+    {
+      "del": "N",
+      "disp": "2",
+      "grp": "OPT-000031",
+      "nm": "원형 30mm (20ea)",
+      "opt": "OPV-000067"
+    },
+    {
+      "del": "N",
+      "disp": "3",
+      "grp": "OPT-000031",
+      "nm": "원형 35mm (15ea)",
+      "opt": "OPV-000068"
+    },
+    {
+      "del": "N",
+      "disp": "5",
+      "grp": "OPT-000031",
+      "nm": "원형 45mm (8ea)",
+      "opt": "OPV-000070"
+    },
+    {
+      "del": "N",
+      "disp": "8",
+      "grp": "OPT-000031",
+      "nm": "원형 60mm (6ea)",
+      "opt": "OPV-000073"
+    },
+    {
+      "del": "N",
+      "disp": "10",
+      "grp": "OPT-000031",
+      "nm": "원형 90mm (6ea)",
+      "opt": "OPV-000075"
+    },
+    {
+      "del": "N",
+      "disp": "1",
+      "grp": "OPT-000035",
+      "nm": "단면",
+      "opt": "OPV-000060"
+    },
+    {
+      "del": "N",
+      "disp": "5",
+      "grp": "OPT-000036",
+      "nm": "유광코팅스티커",
+      "opt": "OPV-000065"
+    },
+    {
+      "del": "N",
+      "disp": "1",
+      "grp": "OPT-000036",
+      "nm": "유포스티커",
+      "opt": "OPV-000061"
+    },
+    {
+      "del": "N",
+      "disp": "2",
+      "grp": "OPT-000036",
+      "nm": "미색스티커",
+      "opt": "OPV-000062"
+    }
+  ],
+  "plates_active": [
+    {
+      "cut": "320x460",
+      "dflt": "Y",
+      "otyp": "OUTPUT_PAPER_TYPE.02",
+      "siz_cd": "SIZ_000521",
+      "siz_nm": "330x470",
+      "work": "330x470"
+    }
+  ],
+  "plates_deleted": [
+    "SIZ_000007",
+    "SIZ_000050"
+  ],
+  "print_options": [
+    {
+      "back_clr": "인쇄 안 함",
+      "front_clr": "CMYK 4도",
+      "print_opt_cd": "POPT_000001",
+      "print_side": "단면"
+    }
+  ],
+  "processes_active": [
+    {
+      "mand": "N",
+      "proc_cd": "PROC_000122",
+      "proc_nm": "반칼커팅",
+      "upr": "PROC_000121"
+    }
+  ],
+  "processes_deleted": [
+    {
+      "proc_cd": "PROC_000055",
+      "proc_nm": "스티커완칼"
+    }
+  ],
+  "product": {
+    "del_yn": "N",
+    "editor_yn": "Y",
+    "file_upload_yn": "Y",
+    "max_qty": "10000",
+    "min_qty": "4",
+    "prd_cd": "PRD_000058",
+    "prd_nm": "반칼원형스티커",
+    "prd_typ_cd": "PRD_TYPE.01",
+    "qty_incr": "4",
+    "qty_unit_typ_cd": "QTY_UNIT.02",
+    "semi_role_cd": "",
+    "use_yn": "Y"
+  },
+  "sizes_active": [
+    {
+      "cut": "x",
+      "dflt": "N",
+      "siz_cd": "SIZ_000520",
+      "siz_nm": "A4(210x297mm) 반칼",
+      "work": "x"
+    },
+    {
+      "cut": "148x210",
+      "dflt": "Y",
+      "siz_cd": "SIZ_000170",
+      "siz_nm": "A5(148x210mm)",
+      "work": "148x210"
+    }
+  ],
+  "sizes_deleted": [
+    "SIZ_000426",
+    "SIZ_000258"
+  ],
+  "wiring": {
+    "PRF_STK_FIXED": [
+      {
+        "addtn_yn": "Y",
+        "comp_cd": "COMP_STK_PRINT",
+        "comp_nm": "스티커 완제품가(소재·규격)",
+        "disp_seq": "1",
+        "prc_typ_cd": "PRICE_TYPE.01",
+        "use_dims": "[\"siz_cd\", \"mat_cd\", \"min_qty\"]"
+      }
+    ]
+  }
+}

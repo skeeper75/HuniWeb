@@ -1,0 +1,281 @@
+{
+  "categories": [
+    {
+      "cat_cd": "CAT_000002",
+      "cat_nm": "스티커",
+      "disp": "3",
+      "main": "Y",
+      "upr_cat_cd": ""
+    },
+    {
+      "cat_cd": "CAT_000309",
+      "cat_nm": "자유형스티커",
+      "disp": "",
+      "main": "N",
+      "upr_cat_cd": "CAT_000002"
+    }
+  ],
+  "formula": [
+    {
+      "frm_cd": "PRF_STK_FIXED",
+      "note": "낱장 자유형 스티커(완칼)→규격/수량 단가"
+    }
+  ],
+  "formula_components": [
+    {
+      "addtn": "Y",
+      "comp_cd": "COMP_STK_PRINT",
+      "disp_seq": "1",
+      "frm_cd": "PRF_STK_FIXED",
+      "prc_typ_cd": "PRICE_TYPE.01",
+      "use_dims": "[\"siz_cd\", \"mat_cd\", \"min_qty\"]"
+    }
+  ],
+  "materials": [
+    {
+      "dflt": "Y",
+      "mat_cd": "MAT_000593",
+      "mat_nm": "유포 + 무광쿨코팅",
+      "mat_typ_cd": "MAT_TYPE.11",
+      "spec": "?x?",
+      "upr_mat_cd": "MAT_000165",
+      "usage": "USAGE.07",
+      "weight": "?"
+    }
+  ],
+  "meta": {
+    "captured_at": "2026-07-03",
+    "generated_by": "transcribe_product_055.py",
+    "snapshot": "live-snapshot/latest (snap_20260702_1119)"
+  },
+  "option_groups": [
+    {
+      "disp": "1",
+      "mand": "Y",
+      "max_sel": "1",
+      "min_sel": "1",
+      "opt_grp_cd": "OPT_000013",
+      "opt_grp_nm": "종이",
+      "sel_typ_cd": "SEL_TYPE.01"
+    },
+    {
+      "disp": "2",
+      "mand": "Y",
+      "max_sel": "1",
+      "min_sel": "1",
+      "opt_grp_cd": "OPT_000014",
+      "opt_grp_nm": "인쇄",
+      "sel_typ_cd": "SEL_TYPE.01"
+    },
+    {
+      "disp": "4",
+      "mand": "Y",
+      "max_sel": "1",
+      "min_sel": "1",
+      "opt_grp_cd": "OPT_000015",
+      "opt_grp_nm": "커팅",
+      "sel_typ_cd": "SEL_TYPE.01"
+    },
+    {
+      "disp": "5",
+      "mand": "N",
+      "max_sel": "1",
+      "min_sel": "0",
+      "opt_grp_cd": "OPT-000039",
+      "opt_grp_nm": "조각수",
+      "sel_typ_cd": "SEL_TYPE.01"
+    }
+  ],
+  "option_items": [
+    {
+      "opt_cd": "OPV_000030",
+      "qty": "1",
+      "ref_dim_cd": "OPT_REF_DIM.06",
+      "ref_key1": "1",
+      "ref_key2": ""
+    },
+    {
+      "opt_cd": "OPV_000031",
+      "qty": "1",
+      "ref_dim_cd": "OPT_REF_DIM.04",
+      "ref_key1": "PROC_000053",
+      "ref_key2": ""
+    },
+    {
+      "opt_cd": "OPV_000029",
+      "qty": "1",
+      "ref_dim_cd": "OPT_REF_DIM.03",
+      "ref_key1": "MAT_000593",
+      "ref_key2": "USAGE.07"
+    }
+  ],
+  "options": [
+    {
+      "dflt": "N",
+      "disp": "1",
+      "opt_cd": "OPV-000076",
+      "opt_grp_cd": "OPT-000039",
+      "opt_nm": "5조각"
+    },
+    {
+      "dflt": "N",
+      "disp": "2",
+      "opt_cd": "OPV-000077",
+      "opt_grp_cd": "OPT-000039",
+      "opt_nm": "6조각"
+    },
+    {
+      "dflt": "N",
+      "disp": "3",
+      "opt_cd": "OPV-000078",
+      "opt_grp_cd": "OPT-000039",
+      "opt_nm": "7조각"
+    },
+    {
+      "dflt": "N",
+      "disp": "4",
+      "opt_cd": "OPV-000079",
+      "opt_grp_cd": "OPT-000039",
+      "opt_nm": "8조각"
+    },
+    {
+      "dflt": "N",
+      "disp": "5",
+      "opt_cd": "OPV-000080",
+      "opt_grp_cd": "OPT-000039",
+      "opt_nm": "9조각"
+    },
+    {
+      "dflt": "N",
+      "disp": "6",
+      "opt_cd": "OPV-000081",
+      "opt_grp_cd": "OPT-000039",
+      "opt_nm": "10조각"
+    },
+    {
+      "dflt": "Y",
+      "disp": "1",
+      "opt_cd": "OPV_000029",
+      "opt_grp_cd": "OPT_000013",
+      "opt_nm": "유포지+엠포코팅"
+    },
+    {
+      "dflt": "Y",
+      "disp": "1",
+      "opt_cd": "OPV_000030",
+      "opt_grp_cd": "OPT_000014",
+      "opt_nm": "단면"
+    },
+    {
+      "dflt": "Y",
+      "disp": "1",
+      "opt_cd": "OPV_000031",
+      "opt_grp_cd": "OPT_000015",
+      "opt_nm": "완칼(자유형)"
+    }
+  ],
+  "plate": [
+    {
+      "dflt_plt": "Y",
+      "note": "파일사양",
+      "output_paper_typ_cd": "OUTPUT_PAPER_TYPE.03",
+      "siz_cd": "SIZ_000050",
+      "siz_nm": "A4 (210X297)"
+    },
+    {
+      "dflt_plt": "Y",
+      "note": "파일사양",
+      "output_paper_typ_cd": "OUTPUT_PAPER_TYPE.03",
+      "siz_cd": "SIZ_000052",
+      "siz_nm": "A3 (297X420mm)"
+    },
+    {
+      "dflt_plt": "Y",
+      "note": "파일사양",
+      "output_paper_typ_cd": "OUTPUT_PAPER_TYPE.03",
+      "siz_cd": "SIZ_000198",
+      "siz_nm": "A2 (420X594mm)"
+    }
+  ],
+  "print_options": [
+    {
+      "back": "CLR_000001(인쇄 안 함)",
+      "front": "CLR_000005(CMYK 4도)",
+      "opt_id": "1",
+      "print_opt_cd": "POPT_000001",
+      "print_side": "단면"
+    }
+  ],
+  "processes": [
+    {
+      "disp": "1",
+      "mand": "N",
+      "proc_cd": "PROC_000123",
+      "proc_nm": "완칼커팅",
+      "upr_proc_cd": "PROC_000121"
+    },
+    {
+      "disp": "2",
+      "mand": "N",
+      "proc_cd": "PROC_000114",
+      "proc_nm": "쿨코팅",
+      "upr_proc_cd": ""
+    }
+  ],
+  "qty": {
+    "del_yn": "N",
+    "editor_yn": "N",
+    "file_upload_yn": "Y",
+    "max_qty": "10000",
+    "min_qty": "1",
+    "nonspec_yn": "N",
+    "prd_nm": "낱장 자유형 스티커",
+    "prd_typ_cd": "PRD_TYPE.01",
+    "qty_incr": "1",
+    "unit": "QTY_UNIT.02",
+    "use_yn": "Y"
+  },
+  "retail_coverage": [
+    {
+      "mat_cd": "MAT_000593",
+      "rows": 6,
+      "siz_cd": "SIZ_000172"
+    },
+    {
+      "mat_cd": "MAT_000593",
+      "rows": 6,
+      "siz_cd": "SIZ_000174"
+    },
+    {
+      "mat_cd": "MAT_000593",
+      "rows": 6,
+      "siz_cd": "SIZ_000197"
+    }
+  ],
+  "sizes": [
+    {
+      "cut": "420x594",
+      "dflt": "N",
+      "disp": "1",
+      "siz_cd": "SIZ_000197",
+      "siz_nm": "A2(420x594mm)",
+      "work": "420x594"
+    },
+    {
+      "cut": "297x420",
+      "dflt": "N",
+      "disp": "1",
+      "siz_cd": "SIZ_000174",
+      "siz_nm": "A3(297x420mm)",
+      "work": "297x420"
+    },
+    {
+      "cut": "210x297",
+      "dflt": "Y",
+      "disp": "1",
+      "siz_cd": "SIZ_000172",
+      "siz_nm": "A4(210x297mm)",
+      "work": "210x297"
+    }
+  ]
+}

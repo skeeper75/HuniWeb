@@ -1,0 +1,51 @@
+{
+  "authority": {
+    "백색후지": {
+      "gukjeol": "499",
+      "mat_nm": "투명스티커(백색후지)",
+      "weight": "50",
+      "yeondang": "149500"
+    },
+    "투명후지": {
+      "gukjeol": "740",
+      "mat_nm": "투명스티커(투명후지)",
+      "weight": "50",
+      "yeondang": "222000"
+    }
+  },
+  "live": [
+    {
+      "mat_cd": "MAT_000162",
+      "mat_nm": "투명스티커",
+      "mat_typ_cd": "MAT_TYPE.11",
+      "reg_dt": "2026-06-03",
+      "upr_mat_cd": "",
+      "weight": "105.00",
+      "yeondang_stored": "미저장(t_mat_materials 가격컬럼 없음)"
+    },
+    {
+      "mat_cd": "MAT_000371",
+      "mat_nm": "투명스티커(백색후지)",
+      "mat_typ_cd": "MAT_TYPE.11",
+      "reg_dt": "2026-06-27",
+      "upr_mat_cd": "MAT_000162",
+      "weight": "",
+      "yeondang_stored": "미저장(t_mat_materials 가격컬럼 없음)"
+    },
+    {
+      "mat_cd": "MAT_000372",
+      "mat_nm": "투명스티커(투명후지)",
+      "mat_typ_cd": "MAT_TYPE.11",
+      "reg_dt": "2026-06-27",
+      "upr_mat_cd": "MAT_000162",
+      "weight": "",
+      "yeondang_stored": "미저장(t_mat_materials 가격컬럼 없음)"
+    }
+  ],
+  "meta": {
+    "authority": "26_change-tracking-260702/price-diff-260527-260702.csv",
+    "captured_at": "2026-07-03",
+    "generated_by": "transcribe_sticker_material_dual_056.py",
+    "live": "live-snapshot/latest (snap_20260702_1119)"
+  }
+}
