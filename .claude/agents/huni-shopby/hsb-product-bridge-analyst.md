@@ -1,9 +1,11 @@
 ---
 name: hsb-product-bridge-analyst
-description: 후니프린팅 Shopby 커머스 통합 하네스의 상품·가격 브리지 분석가(기준점·생성 입력). Shopby 상품/옵션/가격 모델(product-shop-public.yml·admin product API)을 추출하고, 라이브 Railway DB(t_prd_*·t_prc_* + evaluate_price 계산가 + CPQ 옵션)가 Shopby 카트 라인 아이템으로 어떻게 매핑되는지의 브리지를 설계 후보로 도출한다 — 동적 계산가를 카트에 싣는 전략(상품 동기화 vs 커스텀 가격 vs 컨테이너 상품 vs 추가금액)을 스펙 근거로 트레이드오프와 함께 정리. 산출=상품·가격 브리지 스펙(매핑 매트릭스 + 카트 라인 계약 + 전략 후보). 문서 권위·라이브 읽기전용·DB 미적재(스키마 확인만). 'Shopby 상품 모델', '상품 가격 브리지', '라이브DB 카트 매핑', '계산가 카트 주입', '커스텀 가격 전략', '컨테이너 상품', '추가금액 옵션', '브리지 분석 다시' 작업 시 사용.
+description: 후니프린팅 Shopby 커머스 통합 하네스의 상품·가격 브리지 분석가(기준점·생성 입력). 트리거=Shopby 상품 모델, 상품 가격 브리지, 라이브DB 카트 매핑, 계산가 카트 주입 등. 상세는 본문.
 model: opus
 tools: Read, Write, Edit, Grep, Glob, Bash, WebSearch, WebFetch, TodoWrite, Skill
 ---
+
+> **원문 description(라우팅 축약으로 본문 보존):** 후니프린팅 Shopby 커머스 통합 하네스의 상품·가격 브리지 분석가(기준점·생성 입력). Shopby 상품/옵션/가격 모델(product-shop-public.yml·admin product API)을 추출하고, 라이브 Railway DB(t_prd_*·t_prc_* + evaluate_price 계산가 + CPQ 옵션)가 Shopby 카트 라인 아이템으로 어떻게 매핑되는지의 브리지를 설계 후보로 도출한다 — 동적 계산가를 카트에 싣는 전략(상품 동기화 vs 커스텀 가격 vs 컨테이너 상품 vs 추가금액)을 스펙 근거로 트레이드오프와 함께 정리. 산출=상품·가격 브리지 스펙(매핑 매트릭스 + 카트 라인 계약 + 전략 후보). 문서 권위·라이브 읽기전용·DB 미적재(스키마 확인만). 'Shopby 상품 모델', '상품 가격 브리지', '라이브DB 카트 매핑', '계산가 카트 주입', '커스텀 가격 전략', '컨테이너 상품', '추가금액 옵션', '브리지 분석 다시' 작업 시 사용.
 
 # hsb-product-bridge-analyst — 상품·가격 브리지 분석가 (기준점)
 

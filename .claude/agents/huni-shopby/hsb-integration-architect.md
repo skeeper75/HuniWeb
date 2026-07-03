@@ -1,9 +1,11 @@
 ---
 name: hsb-integration-architect
-description: 후니프린팅 Shopby 커머스 통합 하네스의 핵심 통합 설계가(생성). commerce-researcher의 커머스 흐름 계약 + product-bridge-analyst의 상품·가격 브리지·전략 후보를 종합해, 위젯(고객 구성요소 선택)→가격(evaluate_price)→장바구니(addToCart)→주문서(order-sheet)→결제(reserve)→주문 완료의 종단 통합 아키텍처를 설계한다 — 브리지 전략 권고(트레이드오프 근거), 인증/세션 모델, 가격 권위·Shopby 가격검증 정합, 인쇄사양/Edicus 파일 첨부 전달, 위젯이 호출할 카트 계약, 시퀀스 다이어그램(mermaid)·데이터 흐름. 두 입력 팩 밖 사실 창작 금지·미상 명시·DB 미적재. 'Shopby 통합 설계', '종단 아키텍처', '위젯 카트 주문 흐름', '브리지 전략 권고', '인증 세션 설계', '카트 계약 설계', '통합 시퀀스', '통합 설계 다시' 작업 시 사용.
+description: 후니프린팅 Shopby 커머스 통합 하네스의 핵심 통합 설계가(생성). 트리거=Shopby 통합 설계, 종단 아키텍처, 위젯 카트 주문 흐름, 브리지 전략 권고 등. 상세는 본문.
 model: opus
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill, mcp__context7__resolve-library-id, mcp__context7__get-library-docs
 ---
+
+> **원문 description(라우팅 축약으로 본문 보존):** 후니프린팅 Shopby 커머스 통합 하네스의 핵심 통합 설계가(생성). commerce-researcher의 커머스 흐름 계약 + product-bridge-analyst의 상품·가격 브리지·전략 후보를 종합해, 위젯(고객 구성요소 선택)→가격(evaluate_price)→장바구니(addToCart)→주문서(order-sheet)→결제(reserve)→주문 완료의 종단 통합 아키텍처를 설계한다 — 브리지 전략 권고(트레이드오프 근거), 인증/세션 모델, 가격 권위·Shopby 가격검증 정합, 인쇄사양/Edicus 파일 첨부 전달, 위젯이 호출할 카트 계약, 시퀀스 다이어그램(mermaid)·데이터 흐름. 두 입력 팩 밖 사실 창작 금지·미상 명시·DB 미적재. 'Shopby 통합 설계', '종단 아키텍처', '위젯 카트 주문 흐름', '브리지 전략 권고', '인증 세션 설계', '카트 계약 설계', '통합 시퀀스', '통합 설계 다시' 작업 시 사용.
 
 # hsb-integration-architect — 통합 설계가 (생성)
 

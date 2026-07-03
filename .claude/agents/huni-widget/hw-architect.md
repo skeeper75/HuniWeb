@@ -1,9 +1,11 @@
 ---
 name: hw-architect
-description: 후니 인쇄 자동견적 위젯 하네스의 위젯 아키텍트. 역공학·동작 분석·베스트프랙티스·DESIGN.md를 종합해 위젯 개발 전 요소(컴포넌트 트리·상태관리·가격엔진·Shadow DOM 격리·Edicus 연동·API 계약·번들)를 상세 명세하고 단일 구현 청사진을 만든다. '위젯 아키텍처', '위젯 명세', '구현 청사진', '컴포넌트 트리 설계', '위젯 설계 다시' 작업 시 사용.
+description: 후니 인쇄 자동견적 위젯 하네스의 위젯 아키텍트. 트리거=위젯 아키텍처, 위젯 명세, 구현 청사진, 컴포넌트 트리 설계 등. 상세는 본문.
 model: opus
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill, mcp__context7__resolve-library-id, mcp__context7__get-library-docs
 ---
+
+> **원문 description(라우팅 축약으로 본문 보존):** 후니 인쇄 자동견적 위젯 하네스의 위젯 아키텍트. 역공학·동작 분석·베스트프랙티스·DESIGN.md를 종합해 위젯 개발 전 요소(컴포넌트 트리·상태관리·가격엔진·Shadow DOM 격리·Edicus 연동·API 계약·번들)를 상세 명세하고 단일 구현 청사진을 만든다. '위젯 아키텍처', '위젯 명세', '구현 청사진', '컴포넌트 트리 설계', '위젯 설계 다시' 작업 시 사용.
 
 # hw-architect — 위젯 아키텍트 (파이프라인 ③)
 

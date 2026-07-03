@@ -1,10 +1,12 @@
 ---
 name: rpm-deepcheck
-description: 후니 RP-Meta 하네스의 codex-cli 심층 보강가. RedPrinting 카테고리 분석 자료(reverse+metamodel+gap)를 codex(gpt-5.5·읽기전용)에 주어 "우리 분석이 놓친 옵션/자재/공정/관리축/제약/엣지케이스"를 독립 second-opinion으로 발굴한다. codex 제안=가설(라이브 검증 전 사실 아님·환각 경계)→"확인 필요 후보"로 라우팅·채택은 라이브 실측 후. 'codex 심층보강', '누락 정보 확인', 'second opinion', '분석 외 정보', 'deepcheck', '심층 발굴', '심층보강 다시' 작업 시 사용.
+description: 후니 RP-Meta 하네스의 codex-cli 심층 보강가. 트리거=codex 심층보강, 누락 정보 확인, second opinion, 분석 외 정보 등. 상세는 본문.
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 model: opus
 color: orange
 ---
+
+> **원문 description(라우팅 축약으로 본문 보존):** 후니 RP-Meta 하네스의 codex-cli 심층 보강가. RedPrinting 카테고리 분석 자료(reverse+metamodel+gap)를 codex(gpt-5.5·읽기전용)에 주어 "우리 분석이 놓친 옵션/자재/공정/관리축/제약/엣지케이스"를 독립 second-opinion으로 발굴한다. codex 제안=가설(라이브 검증 전 사실 아님·환각 경계)→"확인 필요 후보"로 라우팅·채택은 라이브 실측 후. 'codex 심층보강', '누락 정보 확인', 'second opinion', '분석 외 정보', 'deepcheck', '심층 발굴', '심층보강 다시' 작업 시 사용.
 
 # rpm-deepcheck — codex-cli Deep-Augmentation (external second opinion)
 

@@ -1,9 +1,11 @@
 ---
 name: hsp-set-designer
-description: 후니프린팅 셋트상품 구성 하네스의 핵심 설계가(생성). 큐레이터 권위 기준 + 도메인/경쟁사 참조를 종합해 셋트상품(부품조립형) 구성을 라이브 t_prd_product_sets 적재본으로 설계한다 — 셋트 완제품(prd_cd) ← 반제품 구성원(sub_prd_cd) × sub_prd_qty + min_cnt/max_cnt/cnt_incr + disp_seq, 그리고 가격 바인딩 정합(구성원 공식 + 셋트 제본/조립 공식이 evaluate_set_price로 계산되도록). search-before-mint(반제품·공식 재사용 우선)·복합PK·FK 위상 준수·적재본 CSV+멱등 SQL 조립까지(실 COMMIT은 load-executor·인간 승인). 'set-product 설계', '셋트 구성 설계', 't_prd_product_sets 적재본', '부품조립 행 설계', '셋트 가격 바인딩', '적재본 조립', '설계 다시', '특정 셋트만 설계' 작업 시 사용.
+description: 후니프린팅 셋트상품 구성 하네스의 핵심 설계가(생성). 트리거=set-product 설계, 셋트 구성 설계, t_prd_product_sets 적재본, 부품조립 행 설계 등. 상세는 본문.
 model: opus
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 ---
+
+> **원문 description(라우팅 축약으로 본문 보존):** 후니프린팅 셋트상품 구성 하네스의 핵심 설계가(생성). 큐레이터 권위 기준 + 도메인/경쟁사 참조를 종합해 셋트상품(부품조립형) 구성을 라이브 t_prd_product_sets 적재본으로 설계한다 — 셋트 완제품(prd_cd) ← 반제품 구성원(sub_prd_cd) × sub_prd_qty + min_cnt/max_cnt/cnt_incr + disp_seq, 그리고 가격 바인딩 정합(구성원 공식 + 셋트 제본/조립 공식이 evaluate_set_price로 계산되도록). search-before-mint(반제품·공식 재사용 우선)·복합PK·FK 위상 준수·적재본 CSV+멱등 SQL 조립까지(실 COMMIT은 load-executor·인간 승인). 'set-product 설계', '셋트 구성 설계', 't_prd_product_sets 적재본', '부품조립 행 설계', '셋트 가격 바인딩', '적재본 조립', '설계 다시', '특정 셋트만 설계' 작업 시 사용.
 
 # hsp-set-designer — 셋트 구성 설계가 (생성)
 

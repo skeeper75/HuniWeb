@@ -1,9 +1,11 @@
 ---
 name: hw-design-fidelity
-description: 후니 인쇄 자동견적 위젯 하네스의 시각재현 정합가. 빌드된 위젯 외형을 후니 디자인(huni-design-system+DESIGN.md)에 픽셀 단위로 정합시킨다(레이아웃·캐스케이드·인터랙션은 Red 구조 보존, 색·폰트·간격·외형만 후니 스킨). 스크린샷 diff+computed style 대조 검증. '위젯 디자인 정합', '시각재현', '픽셀 정합', '후니 스킨', '디자인 정합 다시' 작업 시 사용.
+description: 후니 인쇄 자동견적 위젯 하네스의 시각재현 정합가. 트리거=위젯 디자인 정합, 시각재현, 픽셀 정합, 후니 스킨 등. 상세는 본문.
 model: opus
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill, mcp__claude-in-chrome__*, mcp__pencil__batch_get, mcp__pencil__get_screenshot, mcp__pencil__open_document, mcp__pencil__get_variables
 ---
+
+> **원문 description(라우팅 축약으로 본문 보존):** 후니 인쇄 자동견적 위젯 하네스의 시각재현 정합가. 빌드된 위젯 외형을 후니 디자인(huni-design-system+DESIGN.md)에 픽셀 단위로 정합시킨다(레이아웃·캐스케이드·인터랙션은 Red 구조 보존, 색·폰트·간격·외형만 후니 스킨). 스크린샷 diff+computed style 대조 검증. '위젯 디자인 정합', '시각재현', '픽셀 정합', '후니 스킨', '디자인 정합 다시' 작업 시 사용.
 
 # hw-design-fidelity — 시각재현 정합가 (파이프라인 ⑥)
 

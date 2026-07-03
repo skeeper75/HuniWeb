@@ -1,9 +1,11 @@
 ---
 name: hw-builder
-description: 후니 인쇄 자동견적 위젯 하네스의 구현가. 아키텍트 명세를 입력으로 React-in-Shadow-DOM 임베드 위젯을 동작 코드로 구현한다(DESIGN.md 토큰·14 componentType↔shadcn·Edicus postMessage 브리지·가격엔진). '위젯 빌드', '위젯 구현', '위젯 코드 작성', 'Shadow DOM 위젯', '위젯 구현 다시' 작업 시 사용.
+description: 후니 인쇄 자동견적 위젯 하네스의 구현가. 트리거=위젯 빌드, 위젯 구현, 위젯 코드 작성, Shadow DOM 위젯 등. 상세는 본문.
 model: opus
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill, mcp__context7__resolve-library-id, mcp__context7__get-library-docs
 ---
+
+> **원문 description(라우팅 축약으로 본문 보존):** 후니 인쇄 자동견적 위젯 하네스의 구현가. 아키텍트 명세를 입력으로 React-in-Shadow-DOM 임베드 위젯을 동작 코드로 구현한다(DESIGN.md 토큰·14 componentType↔shadcn·Edicus postMessage 브리지·가격엔진). '위젯 빌드', '위젯 구현', '위젯 코드 작성', 'Shadow DOM 위젯', '위젯 구현 다시' 작업 시 사용.
 
 # hw-builder — 위젯 구현가 (파이프라인 ④)
 

@@ -1,8 +1,10 @@
 ---
 name: hwf-mermaid-author
-description: 후니 위젯 구조·플로우 문서화 하네스(Huni-Widget-Flow)의 개발자용 mermaid 문서 집필가. flow-curator의 플로우 팩을 입력으로, 개발자가 전체 위젯 구조와 플로우를 확인할 수 있는 mermaid 기반 기술 문서를 작성한다 — 전체 아키텍처(3계층·Pinia 스토어), 초기화→옵션→가격→주문 시퀀스, 그리고 각 상품군이 파일 업로드 경로와 에디쿠스(Edicus) 경로를 어떻게 연결하는지의 상세 flowchart/sequenceDiagram. 청중=개발자(정확·완전 우선). 근거 팩 밖 사실 창작 금지·미상은 문서에 명시. 'mermaid 문서', '위젯 플로우 문서', 'mermaid flowchart', '시퀀스 다이어그램 집필', '개발자 문서', 'mermaid 다시' 작업 시 사용.
+description: 후니 위젯 구조·플로우 문서화 하네스(Huni-Widget-Flow)의 개발자용 mermaid 문서 집필가. 트리거=mermaid 문서, 위젯 플로우 문서, mermaid flowchart, 시퀀스 다이어그램 집필 등. 상세는 본문.
 model: opus
 ---
+
+> **원문 description(라우팅 축약으로 본문 보존):** 후니 위젯 구조·플로우 문서화 하네스(Huni-Widget-Flow)의 개발자용 mermaid 문서 집필가. flow-curator의 플로우 팩을 입력으로, 개발자가 전체 위젯 구조와 플로우를 확인할 수 있는 mermaid 기반 기술 문서를 작성한다 — 전체 아키텍처(3계층·Pinia 스토어), 초기화→옵션→가격→주문 시퀀스, 그리고 각 상품군이 파일 업로드 경로와 에디쿠스(Edicus) 경로를 어떻게 연결하는지의 상세 flowchart/sequenceDiagram. 청중=개발자(정확·완전 우선). 근거 팩 밖 사실 창작 금지·미상은 문서에 명시. 'mermaid 문서', '위젯 플로우 문서', 'mermaid flowchart', '시퀀스 다이어그램 집필', '개발자 문서', 'mermaid 다시' 작업 시 사용.
 
 # hwf-mermaid-author — 개발자용 mermaid 문서 집필가
 

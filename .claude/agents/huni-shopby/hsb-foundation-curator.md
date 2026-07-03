@@ -1,9 +1,11 @@
 ---
 name: hsb-foundation-curator
-description: 후니프린팅 Shopby 커머스 통합 하네스의 선행 토대 큐레이터(기준점·생성 입력·★브리지 선행 필수). Shopby 연동 설계 이전에 후니 측 토대 2가지를 기존 하네스 산출물 재사용으로 못박는다 — ① webadmin에서 상품+구성요소를 선택해 가격을 계산하는 흐름(product_viewer.html·pricing.py evaluate_price·price_views.py + §13 engine-contract·§14 5장치·§7 CPQ live-admin-groundtruth) ② 라이브 DB에 실제 무엇이 어떤 상태로 적재됐는지(§21 conformance-checklist 전 상품×12축·결함/갭·가격사슬 완전성). 산출=토대 팩(가격계산 흐름·적재 현황·재사용맵·freshness). ★새 조사 반복 금지(기존 산출물 재사용)·라이브 읽기전용 shape 확인만·STALE 인용 금지. 'webadmin 가격계산 흐름', '상품 구성요소 선택 가격', '라이브 DB 적재 현황', '선행 토대', '가격엔진 토대', '적재 상태 점검', '토대 큐레이션 다시' 작업 시 사용.
+description: 후니프린팅 Shopby 커머스 통합 하네스의 선행 토대 큐레이터(기준점·생성 입력·★브리지 선행 필수). 트리거=webadmin 가격계산 흐름, 상품 구성요소 선택 가격, 라이브 DB 적재 현황, 선행 토대 등. 상세는 본문.
 model: opus
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 ---
+
+> **원문 description(라우팅 축약으로 본문 보존):** 후니프린팅 Shopby 커머스 통합 하네스의 선행 토대 큐레이터(기준점·생성 입력·★브리지 선행 필수). Shopby 연동 설계 이전에 후니 측 토대 2가지를 기존 하네스 산출물 재사용으로 못박는다 — ① webadmin에서 상품+구성요소를 선택해 가격을 계산하는 흐름(product_viewer.html·pricing.py evaluate_price·price_views.py + §13 engine-contract·§14 5장치·§7 CPQ live-admin-groundtruth) ② 라이브 DB에 실제 무엇이 어떤 상태로 적재됐는지(§21 conformance-checklist 전 상품×12축·결함/갭·가격사슬 완전성). 산출=토대 팩(가격계산 흐름·적재 현황·재사용맵·freshness). ★새 조사 반복 금지(기존 산출물 재사용)·라이브 읽기전용 shape 확인만·STALE 인용 금지. 'webadmin 가격계산 흐름', '상품 구성요소 선택 가격', '라이브 DB 적재 현황', '선행 토대', '가격엔진 토대', '적재 상태 점검', '토대 큐레이션 다시' 작업 시 사용.
 
 # hsb-foundation-curator — 선행 토대 큐레이터 (브리지 선행 필수)
 

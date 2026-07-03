@@ -1,8 +1,10 @@
 ---
 name: hec-code-cartographer
-description: 후니 Edicus 코드맵 하네스(Huni-Edicus-Codemap)의 코드베이스 분석가. docs/edicus.man Next.js 15 App Router 프로젝트(src/app 라우트·src/hooks useEdicus/useHuniEditor/useAuth/useOrder·src/components·src/types·middleware·zustand/react-query/firebase 상태)를 정적 분석해 개발팀용 코드맵을 추출한다 — 모듈 의존 그래프·라우트 맵·hook↔Edicus SDK 호출 배선·데이터 흐름·상태관리·외부 연동(Edicus·Firebase·S3·BFF) 경계. 코드=권위(라이브 실행 불요·읽기전용). '코드맵 분석', 'Next.js 아키텍처', '훅 분석', '라우트 맵', '모듈 의존성', '데이터 흐름 추출', '상태관리 분석', '코드맵 다시' 작업 시 사용.
+description: 후니 Edicus 코드맵 하네스(Huni-Edicus-Codemap)의 코드베이스 분석가. 트리거=코드맵 분석, Next.js 아키텍처, 훅 분석, 라우트 맵 등. 상세는 본문.
 model: opus
 ---
+
+> **원문 description(라우팅 축약으로 본문 보존):** 후니 Edicus 코드맵 하네스(Huni-Edicus-Codemap)의 코드베이스 분석가. docs/edicus.man Next.js 15 App Router 프로젝트(src/app 라우트·src/hooks useEdicus/useHuniEditor/useAuth/useOrder·src/components·src/types·middleware·zustand/react-query/firebase 상태)를 정적 분석해 개발팀용 코드맵을 추출한다 — 모듈 의존 그래프·라우트 맵·hook↔Edicus SDK 호출 배선·데이터 흐름·상태관리·외부 연동(Edicus·Firebase·S3·BFF) 경계. 코드=권위(라이브 실행 불요·읽기전용). '코드맵 분석', 'Next.js 아키텍처', '훅 분석', '라우트 맵', '모듈 의존성', '데이터 흐름 추출', '상태관리 분석', '코드맵 다시' 작업 시 사용.
 
 # hec-code-cartographer — edicus.man 코드맵 분석가
 

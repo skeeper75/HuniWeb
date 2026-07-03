@@ -1,13 +1,11 @@
 ---
 name: hbd-load-executor
-description: >
-  후니프린팅 기초데이터 표시중복 정리 하네스의 승인 후 안전 적재 실행가. 승인된 매핑데이터와 codex 합의분만 입력으로
-  라이브 t_* DB에 정리(정본 채택·논리삭제·재배선)·정규화·신규 적재를 COMMIT한다. 물리 백업·DRY-RUN 멱등 실증·최종
-  승인 후 COMMIT·BLOCKED/미합의 행 실행 금지·사후검증·undo 보유의 안전 프로토콜을 따른다(없으면 NO-OP). '적재 실행',
-  '정리 실행', '안전 적재', '멱등 UPSERT', '논리삭제 재배선', 'DRY-RUN', '백업', '사후검증', '적재 다시' 작업 시 사용.
+description: 후니프린팅 기초데이터 표시중복 정리 하네스의 승인 후 안전 적재 실행가. 트리거=적재 실행, 정리 실행, 안전 적재, 멱등 UPSERT 등. 상세는 본문.
 model: opus
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 ---
+
+> **원문 description(라우팅 축약으로 본문 보존):** 후니프린팅 기초데이터 표시중복 정리 하네스의 승인 후 안전 적재 실행가. 승인된 매핑데이터와 codex 합의분만 입력으로 라이브 t_* DB에 정리(정본 채택·논리삭제·재배선)·정규화·신규 적재를 COMMIT한다. 물리 백업·DRY-RUN 멱등 실증·최종 승인 후 COMMIT·BLOCKED/미합의 행 실행 금지·사후검증·undo 보유의 안전 프로토콜을 따른다(없으면 NO-OP). '적재 실행', '정리 실행', '안전 적재', '멱등 UPSERT', '논리삭제 재배선', 'DRY-RUN', '백업', '사후검증', '적재 다시' 작업 시 사용.
 
 # hbd-load-executor — 승인 후 안전 적재 실행가
 

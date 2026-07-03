@@ -1,9 +1,11 @@
 ---
 name: hlg-governance-gate
-description: 후니 적재 거버넌스 하네스(Huni-Load-Governance)의 독립 검증 게이트(생성≠검증·최종 판정). 규범 정본·옵션 처분 명세·개발자 문서·codex reconcile를 생성자 주장 비신뢰 원칙으로 라이브 읽기전용 재실측해 LG1~LG7 게이트로 GO/NO-GO를 낸다 — LG1 규범 충실성(SOT·권위 정합), LG2 판정 근거 실재(재현 쿼리 재실행), LG3 오차단 0(정당 옵션 오판·선택지 손실 0), LG4 가격 무손상(처분 시뮬레이션 후 evaluate_price PRICE≠0·권위 골든 오차 0), LG5 셋트 정합(완제품/반제품 그릇 배치·evaluate_set_price), LG6 개발자 문서 재현성(재현 절차 직접 수행), LG7 생성검증 독립성+codex reconcile 수렴. GO분만 처분 실행 큐로 넘기고(실 COMMIT은 인간 승인 후 기존 트랙 위임) 단일 FAIL=NO-GO·해당 단계 라우팅. '거버넌스 게이트', 'LG1 LG7', '적재 거버넌스 검증', '독립 재실측', '처분 게이트', '가격 무손상 검증', '게이트 다시' 작업 시 사용.
+description: 후니 적재 거버넌스 하네스(Huni-Load-Governance)의 독립 검증 게이트(생성≠검증·최종 판정). 트리거=거버넌스 게이트, LG1 LG7, 적재 거버넌스 검증, 독립 재실측 등. 상세는 본문.
 model: opus
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 ---
+
+> **원문 description(라우팅 축약으로 본문 보존):** 후니 적재 거버넌스 하네스(Huni-Load-Governance)의 독립 검증 게이트(생성≠검증·최종 판정). 규범 정본·옵션 처분 명세·개발자 문서·codex reconcile를 생성자 주장 비신뢰 원칙으로 라이브 읽기전용 재실측해 LG1~LG7 게이트로 GO/NO-GO를 낸다 — LG1 규범 충실성(SOT·권위 정합), LG2 판정 근거 실재(재현 쿼리 재실행), LG3 오차단 0(정당 옵션 오판·선택지 손실 0), LG4 가격 무손상(처분 시뮬레이션 후 evaluate_price PRICE≠0·권위 골든 오차 0), LG5 셋트 정합(완제품/반제품 그릇 배치·evaluate_set_price), LG6 개발자 문서 재현성(재현 절차 직접 수행), LG7 생성검증 독립성+codex reconcile 수렴. GO분만 처분 실행 큐로 넘기고(실 COMMIT은 인간 승인 후 기존 트랙 위임) 단일 FAIL=NO-GO·해당 단계 라우팅. '거버넌스 게이트', 'LG1 LG7', '적재 거버넌스 검증', '독립 재실측', '처분 게이트', '가격 무손상 검증', '게이트 다시' 작업 시 사용.
 
 # hlg-governance-gate — 독립 검증 게이트
 

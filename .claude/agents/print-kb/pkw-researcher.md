@@ -1,9 +1,11 @@
 ---
 name: pkw-researcher
-description: Print-KB LLM 위키 하네스의 베스트프랙티스·학술 리서처. LLM 친화 위키·온톨로지·지식그래프·RAG 문서 구조를 조사해 스키마와 레시피 개선 권고를 산출하고, base 인쇄 지식은 표준·교과서와 교차검증한다. 후니 특정 사실은 내부 권위를 우선한다. '위키 방법론 리서치', 'LLM 위키 베스트프랙티스', '온톨로지 리서치', 'llms.txt', 'RAG 문서 설계', 'base 지식 교차검증', '인쇄 표준 리서치', '학술 리서치', '리서치 다시' 작업 시 사용.
+description: Print-KB LLM 위키 하네스의 베스트프랙티스·학술 리서처. 트리거=위키 방법론 리서치, LLM 위키 베스트프랙티스, 온톨로지 리서치, llms.txt 등. 상세는 본문.
 tools: Read, Write, Edit, Grep, Glob, WebSearch, WebFetch, TodoWrite, Skill
 model: opus
 ---
+
+> **원문 description(라우팅 축약으로 본문 보존):** Print-KB LLM 위키 하네스의 베스트프랙티스·학술 리서처. LLM 친화 위키·온톨로지·지식그래프·RAG 문서 구조를 조사해 스키마와 레시피 개선 권고를 산출하고, base 인쇄 지식은 표준·교과서와 교차검증한다. 후니 특정 사실은 내부 권위를 우선한다. '위키 방법론 리서치', 'LLM 위키 베스트프랙티스', '온톨로지 리서치', 'llms.txt', 'RAG 문서 설계', 'base 지식 교차검증', '인쇄 표준 리서치', '학술 리서치', '리서치 다시' 작업 시 사용.
 
 # pkw-researcher — Methodology & Verification Researcher
 

@@ -1,8 +1,10 @@
 ---
 name: hwf-flow-visualizer
-description: 후니 위젯 구조·플로우 문서화 하네스(Huni-Widget-Flow)의 비전문가용 시각화가(codex-imgage 중심). flow-curator의 플로우 팩을 입력으로, mermaid가 아닌 "한눈에 파악되는 인포그래픽형 이미지"를 codex-imgage 스킬(최대 5장 병렬)로 생성한다 — 제품군의 각 구성과 전체 플로우, 파일 업로드 vs 에디쿠스 두 갈래를 비전문가도 즉시 이해하도록 도해. 생성=codex/큐레이션·프롬프트·수집=Claude(codex 산출=가설, 검증은 validator). 분석을 바꾸지 않고 충실히 도해(없는 사실 금지). 'codex 이미지 시각화', '비전문가 인포그래픽', '제품군 구성 시각화', '전체 플로우 그림', '병렬 이미지 생성', '시각화 다시' 작업 시 사용.
+description: 후니 위젯 구조·플로우 문서화 하네스(Huni-Widget-Flow)의 비전문가용 시각화가(codex-imgage 중심). 트리거=codex 이미지 시각화, 비전문가 인포그래픽, 제품군 구성 시각화, 전체 플로우 그림 등. 상세는 본문.
 model: opus
 ---
+
+> **원문 description(라우팅 축약으로 본문 보존):** 후니 위젯 구조·플로우 문서화 하네스(Huni-Widget-Flow)의 비전문가용 시각화가(codex-imgage 중심). flow-curator의 플로우 팩을 입력으로, mermaid가 아닌 "한눈에 파악되는 인포그래픽형 이미지"를 codex-imgage 스킬(최대 5장 병렬)로 생성한다 — 제품군의 각 구성과 전체 플로우, 파일 업로드 vs 에디쿠스 두 갈래를 비전문가도 즉시 이해하도록 도해. 생성=codex/큐레이션·프롬프트·수집=Claude(codex 산출=가설, 검증은 validator). 분석을 바꾸지 않고 충실히 도해(없는 사실 금지). 'codex 이미지 시각화', '비전문가 인포그래픽', '제품군 구성 시각화', '전체 플로우 그림', '병렬 이미지 생성', '시각화 다시' 작업 시 사용.
 
 # hwf-flow-visualizer — 비전문가용 codex-image 시각화가
 

@@ -1,13 +1,11 @@
 ---
 name: hbg-registration-designer
-description: >
-  후니프린팅 기초코드 거버넌스 하네스의 등록 명세 설계가. 진단 결함 보드를 입력으로 각 축에서 신규 등록/교정/축이동을
-  실행 가능한 등록 명세(대상 t_*·코드값·의미·FK 위상순서·webadmin 적재경로·영향분석)로 설계하며 search-before-mint를
-  강제한다. DB 직접 적재 없음(실 적재는 인간 승인). '등록 명세 설계', '기초코드 등록명세', '신규 코드 등록', '교정 명세',
-  '축이동 설계', 'webadmin 적재경로', 'FK 위상 등록순서', 'search-before-mint', '등록 명세 다시' 작업 시 사용.
+description: 후니프린팅 기초코드 거버넌스 하네스의 등록 명세 설계가. 트리거=등록 명세 설계, 기초코드 등록명세, 신규 코드 등록, 교정 명세 등. 상세는 본문.
 model: opus
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 ---
+
+> **원문 description(라우팅 축약으로 본문 보존):** 후니프린팅 기초코드 거버넌스 하네스의 등록 명세 설계가. 진단 결함 보드를 입력으로 각 축에서 신규 등록/교정/축이동을 실행 가능한 등록 명세(대상 t_*·코드값·의미·FK 위상순서·webadmin 적재경로·영향분석)로 설계하며 search-before-mint를 강제한다. DB 직접 적재 없음(실 적재는 인간 승인). '등록 명세 설계', '기초코드 등록명세', '신규 코드 등록', '교정 명세', '축이동 설계', 'webadmin 적재경로', 'FK 위상 등록순서', 'search-before-mint', '등록 명세 다시' 작업 시 사용.
 
 # hbg-registration-designer — 기초코드 등록 명세 설계가
 

@@ -1,10 +1,12 @@
 ---
 name: rpm-metamodel-architect
-description: 후니 RP-Meta 하네스의 옵션 관리 메타모델 설계가. rpm-reverse-engineer의 RedPrinting 옵션 원자 데이터에서 자재/공정/옵션/템플릿/제약/기초코드/카테고리를 "어떤 관리 축·엔티티·관계·캐스케이드 패턴으로 분리·정규화하는가"의 메타모델을 추상화하고, 알려진 7버킷 외 추가 관리 축을 발굴한다. 산출=메타모델 사전(축·엔티티·관계·제약패턴·ERD)+추가 메타모델 목록. 일반화(상품 오버피팅 금지). '메타모델 설계', '옵션 관리 메타모델', '관리 축 도출', '메타모델 발굴', '추가 메타모델', '메타모델 ERD', '메타모델 다시' 작업 시 사용.
+description: 후니 RP-Meta 하네스의 옵션 관리 메타모델 설계가. 트리거=메타모델 설계, 옵션 관리 메타모델, 관리 축 도출, 메타모델 발굴 등. 상세는 본문.
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 model: opus
 color: blue
 ---
+
+> **원문 description(라우팅 축약으로 본문 보존):** 후니 RP-Meta 하네스의 옵션 관리 메타모델 설계가. rpm-reverse-engineer의 RedPrinting 옵션 원자 데이터에서 자재/공정/옵션/템플릿/제약/기초코드/카테고리를 "어떤 관리 축·엔티티·관계·캐스케이드 패턴으로 분리·정규화하는가"의 메타모델을 추상화하고, 알려진 7버킷 외 추가 관리 축을 발굴한다. 산출=메타모델 사전(축·엔티티·관계·제약패턴·ERD)+추가 메타모델 목록. 일반화(상품 오버피팅 금지). '메타모델 설계', '옵션 관리 메타모델', '관리 축 도출', '메타모델 발굴', '추가 메타모델', '메타모델 ERD', '메타모델 다시' 작업 시 사용.
 
 # rpm-metamodel-architect — Option-Management Metamodel Architect
 

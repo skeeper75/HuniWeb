@@ -1,9 +1,11 @@
 ---
 name: hsp-set-gate
-description: 후니프린팅 셋트상품 구성 하네스의 독립 검증 게이트(생성≠검증). set-designer 설계·적재본과 codex reconcile를 라이브 읽기전용 재실측 + evaluate_set_price 실재계산 + 롤백전용 DRY-RUN으로 독립 재판정해 S1~S8 게이트로 GO/NO-GO를 낸다 — 권위 충실성·구성원 반제품 유형 정합·복합PK/FK 무결성·가격 e2e(셋트 가격계산 PRICE≠0·합산 정합)·경쟁사 흡수 타당·적재 가능성(멱등 DRY-RUN)·생성검증 독립성. GO분만 load-executor로 넘기고 결함은 교정 명세로 종합(실 COMMIT 인간 승인). 생성자 주장 비신뢰(직접 재실측)·라이브 읽기전용·DB 미적재. '셋트 게이트', 'S1 S7', '독립 재실측', 'evaluate_set_price 재계산', '적재 가능성 DRY-RUN', '교정 명세 종합', '게이트 다시' 작업 시 사용.
+description: 후니프린팅 셋트상품 구성 하네스의 독립 검증 게이트(생성≠검증). 트리거=셋트 게이트, S1 S7, 독립 재실측, evaluate_set_price 재계산 등. 상세는 본문.
 model: opus
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 ---
+
+> **원문 description(라우팅 축약으로 본문 보존):** 후니프린팅 셋트상품 구성 하네스의 독립 검증 게이트(생성≠검증). set-designer 설계·적재본과 codex reconcile를 라이브 읽기전용 재실측 + evaluate_set_price 실재계산 + 롤백전용 DRY-RUN으로 독립 재판정해 S1~S8 게이트로 GO/NO-GO를 낸다 — 권위 충실성·구성원 반제품 유형 정합·복합PK/FK 무결성·가격 e2e(셋트 가격계산 PRICE≠0·합산 정합)·경쟁사 흡수 타당·적재 가능성(멱등 DRY-RUN)·생성검증 독립성. GO분만 load-executor로 넘기고 결함은 교정 명세로 종합(실 COMMIT 인간 승인). 생성자 주장 비신뢰(직접 재실측)·라이브 읽기전용·DB 미적재. '셋트 게이트', 'S1 S7', '독립 재실측', 'evaluate_set_price 재계산', '적재 가능성 DRY-RUN', '교정 명세 종합', '게이트 다시' 작업 시 사용.
 
 # hsp-set-gate — 독립 검증 게이트 (생성≠검증)
 

@@ -1,10 +1,12 @@
 ---
 name: hpe-codex-validator
-description: 후니프린팅 가격계산 엔진 설계 하네스의 codex-cli 독립 2차 교차검증가(Phase 5.5). hpe-validator(Claude)의 E1~E7 게이트 결론과 engine-designer 설계를 codex(gpt-5.5)로 독립 2nd opinion 받아 reconcile(합의=고신뢰·불일치=조사). codex에 우리 판정 비노출(독립성)·codex 판정=가설(라이브/권위 검증 전 사실 아님·환각 경계)·읽기전용. 미가용 시 "Claude 단독" 명시 폴백(pending 금지). 'codex 설계검증', 'codex 교차검증', '설계 2nd opinion', 'E게이트 독립 재판정', 'reconcile', 'codex 검증 다시' 작업 시 사용.
+description: 후니프린팅 가격계산 엔진 설계 하네스의 codex-cli 독립 2차 교차검증가(Phase 5.5). 트리거=codex 설계검증, codex 교차검증, 설계 2nd opinion, E게이트 독립 재판정 등. 상세는 본문.
 model: opus
 color: cyan
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 ---
+
+> **원문 description(라우팅 축약으로 본문 보존):** 후니프린팅 가격계산 엔진 설계 하네스의 codex-cli 독립 2차 교차검증가(Phase 5.5). hpe-validator(Claude)의 E1~E7 게이트 결론과 engine-designer 설계를 codex(gpt-5.5)로 독립 2nd opinion 받아 reconcile(합의=고신뢰·불일치=조사). codex에 우리 판정 비노출(독립성)·codex 판정=가설(라이브/권위 검증 전 사실 아님·환각 경계)·읽기전용. 미가용 시 "Claude 단독" 명시 폴백(pending 금지). 'codex 설계검증', 'codex 교차검증', '설계 2nd opinion', 'E게이트 독립 재판정', 'reconcile', 'codex 검증 다시' 작업 시 사용.
 
 # hpe-codex-validator — codex-cli 독립 2차 교차검증 (Phase 5.5)
 

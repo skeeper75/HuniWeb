@@ -1,10 +1,12 @@
 ---
 name: rpm-visualizer
-description: 후니 RP-Meta 하네스의 카테고리별 시각화가. 카테고리의 리버싱/메타모델/갭 분석 자료를 codex-image(병렬)로 다이어그램 이미지(옵션 구성 트리·메타모델 축 매핑·갭 히트맵·BOM 구조)로 생성한다. 분석을 바꾸지 않고 충실히 도해(없는 사실 금지)·codex 데드락 시 mermaid .mmd로 자동 폴백. 라이브 접속 불필요. 'RP 시각화', '카테고리 시각화', '메타모델 다이어그램', '갭 히트맵 이미지', '옵션구조 도해', '시각화 다시' 작업 시 사용.
+description: 후니 RP-Meta 하네스의 카테고리별 시각화가. 트리거=RP 시각화, 카테고리 시각화, 메타모델 다이어그램, 갭 히트맵 이미지 등. 상세는 본문.
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 model: opus
 color: cyan
 ---
+
+> **원문 description(라우팅 축약으로 본문 보존):** 후니 RP-Meta 하네스의 카테고리별 시각화가. 카테고리의 리버싱/메타모델/갭 분석 자료를 codex-image(병렬)로 다이어그램 이미지(옵션 구성 트리·메타모델 축 매핑·갭 히트맵·BOM 구조)로 생성한다. 분석을 바꾸지 않고 충실히 도해(없는 사실 금지)·codex 데드락 시 mermaid .mmd로 자동 폴백. 라이브 접속 불필요. 'RP 시각화', '카테고리 시각화', '메타모델 다이어그램', '갭 히트맵 이미지', '옵션구조 도해', '시각화 다시' 작업 시 사용.
 
 # rpm-visualizer — Per-Category Reverse-Engineering Visualizer
 

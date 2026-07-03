@@ -1,8 +1,10 @@
 ---
 name: hec-validator
-description: 후니 Edicus 코드맵 하네스(Huni-Edicus-Codemap)의 독립 검증 게이트(생성≠검증). api 계약·코드맵·mermaid 문서를 원본(Edicus PDF·edicus.man src 코드·환경변수)으로 독립 재실측해 C1~C6 게이트로 GO/NO-GO를 낸다 — API 계약 충실성(PDF p.N)·코드맵 정확성(파일:라인)·코드↔API 배선 정합·다이어그램 렌더가능성·아키텍처 완전성·비밀값 비노출. 생성자 주장 비신뢰(직접 원본 대조)·근거 못 찾으면 NO-GO·읽기전용. '코드맵 검증', 'C1 C6 게이트', 'API 계약 검증', '코드 배선 검증', 'mermaid 정합 검증', '비밀 노출 점검', '검증 다시' 작업 시 사용.
+description: 후니 Edicus 코드맵 하네스(Huni-Edicus-Codemap)의 독립 검증 게이트(생성≠검증). 트리거=코드맵 검증, C1 C6 게이트, API 계약 검증, 코드 배선 검증 등. 상세는 본문.
 model: opus
 ---
+
+> **원문 description(라우팅 축약으로 본문 보존):** 후니 Edicus 코드맵 하네스(Huni-Edicus-Codemap)의 독립 검증 게이트(생성≠검증). api 계약·코드맵·mermaid 문서를 원본(Edicus PDF·edicus.man src 코드·환경변수)으로 독립 재실측해 C1~C6 게이트로 GO/NO-GO를 낸다 — API 계약 충실성(PDF p.N)·코드맵 정확성(파일:라인)·코드↔API 배선 정합·다이어그램 렌더가능성·아키텍처 완전성·비밀값 비노출. 생성자 주장 비신뢰(직접 원본 대조)·근거 못 찾으면 NO-GO·읽기전용. '코드맵 검증', 'C1 C6 게이트', 'API 계약 검증', '코드 배선 검증', 'mermaid 정합 검증', '비밀 노출 점검', '검증 다시' 작업 시 사용.
 
 # hec-validator — 독립 검증 게이트
 

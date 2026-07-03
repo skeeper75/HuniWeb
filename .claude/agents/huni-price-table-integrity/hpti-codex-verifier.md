@@ -1,9 +1,11 @@
 ---
 name: hpti-codex-verifier
-description: 후니 권위 가격테이블 무결성 진단 하네스의 codex-cli 독립 2차 교차검증가. load-inspector의 결함 보드와 정답 격자를 Codex(gpt-5.5) 읽기전용으로 넘겨 "놓친 이 빠진 적재·미해소 차원 누락·간과한 정합 불일치"를 독립 2nd opinion으로 발굴하고, false-positive(정당한 의미축 차이를 결함으로 오판)도 함께 적발해 Claude 판정과 reconcile한다. ★codex 주장=가설(라이브/권위 검증 전 사실 아님·환각 경계)·codex 미가용 시 'Claude 단독' 명시 폴백(pending 금지)·codex 읽기전용 샌드박스. 'codex 교차검증', '독립 2nd opinion', 'codex 무결성 검토', '놓친 gap 발굴', 'reconcile', 'codex 검증 다시' 작업 시 사용.
+description: 후니 권위 가격테이블 무결성 진단 하네스의 codex-cli 독립 2차 교차검증가. 트리거=Claude 단독, codex 교차검증, 독립 2nd opinion, codex 무결성 검토 등. 상세는 본문.
 model: opus
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 ---
+
+> **원문 description(라우팅 축약으로 본문 보존):** 후니 권위 가격테이블 무결성 진단 하네스의 codex-cli 독립 2차 교차검증가. load-inspector의 결함 보드와 정답 격자를 Codex(gpt-5.5) 읽기전용으로 넘겨 "놓친 이 빠진 적재·미해소 차원 누락·간과한 정합 불일치"를 독립 2nd opinion으로 발굴하고, false-positive(정당한 의미축 차이를 결함으로 오판)도 함께 적발해 Claude 판정과 reconcile한다. ★codex 주장=가설(라이브/권위 검증 전 사실 아님·환각 경계)·codex 미가용 시 'Claude 단독' 명시 폴백(pending 금지)·codex 읽기전용 샌드박스. 'codex 교차검증', '독립 2nd opinion', 'codex 무결성 검토', '놓친 gap 발굴', 'reconcile', 'codex 검증 다시' 작업 시 사용.
 
 # hpti-codex-verifier — codex 독립 2차 교차검증가
 

@@ -1,10 +1,12 @@
 ---
 name: hpe-engine-designer
-description: 후니프린팅 가격계산 엔진 설계 하네스의 핵심 설계가(생성). 가격공식 지도(cartographer)+경쟁사 흡수 후보(benchmark)를 종합해, 각 상품군 완제품·반제품(세트상품)의 가격공식+가격구성요소+t_prc_* 그릇 매핑+세트 조합 가격 모델을 설계 명세로 산출한다. 라이브 evaluate_price 단일 권위 알고리즘이 그대로 먹을 수 있는 형태(공식→formula_components→price_components→component_prices·use_dims 차원)로, search-before-mint(기존 공식/구성요소 재사용 우선)·DB 미적재(실 적용 인간 승인). '가격엔진 설계', '가격공식 설계', '가격구성요소 설계', 't_prc 그릇 설계', '세트상품 가격 설계', '엔진 설계 다시', '특정 상품군 설계' 작업 시 사용.
+description: 후니프린팅 가격계산 엔진 설계 하네스의 핵심 설계가(생성). 트리거=가격엔진 설계, 가격공식 설계, 가격구성요소 설계, t_prc 그릇 설계 등. 상세는 본문.
 model: opus
 color: green
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 ---
+
+> **원문 description(라우팅 축약으로 본문 보존):** 후니프린팅 가격계산 엔진 설계 하네스의 핵심 설계가(생성). 가격공식 지도(cartographer)+경쟁사 흡수 후보(benchmark)를 종합해, 각 상품군 완제품·반제품(세트상품)의 가격공식+가격구성요소+t_prc_* 그릇 매핑+세트 조합 가격 모델을 설계 명세로 산출한다. 라이브 evaluate_price 단일 권위 알고리즘이 그대로 먹을 수 있는 형태(공식→formula_components→price_components→component_prices·use_dims 차원)로, search-before-mint(기존 공식/구성요소 재사용 우선)·DB 미적재(실 적용 인간 승인). '가격엔진 설계', '가격공식 설계', '가격구성요소 설계', 't_prc 그릇 설계', '세트상품 가격 설계', '엔진 설계 다시', '특정 상품군 설계' 작업 시 사용.
 
 # hpe-engine-designer — 가격계산 엔진 핵심 설계가 (생성)
 

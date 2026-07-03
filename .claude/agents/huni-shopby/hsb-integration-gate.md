@@ -1,9 +1,11 @@
 ---
 name: hsb-integration-gate
-description: 후니프린팅 Shopby 커머스 통합 하네스의 독립 검증 게이트(생성≠검증). architect의 통합 아키텍처·카트 계약·시퀀스와 codex reconcile를 실제 OpenAPI 스펙(docs/shopby/shopby-api/*.yml)으로 필드 단위 재대조 + 라이브 DB/evaluate_price 계약 + 정규화 위젯 계약과 종단 라운드트립 실현가능성 재판정해 SB1~SB7 게이트로 GO/NO-GO를 낸다 — 커머스 흐름 충실성·브리지 무손실·종단 e2e 추적·인증 정합·전략 권고 건전성·codex 수렴·생성검증 독립성+무날조. 확정 결함은 교정 명세로 종합하되 실 구현/연동은 인간 승인(구현은 §6 huni-widget 위임). 생성자 주장 비신뢰(직접 스펙·라이브 재대조)·문서 권위·라이브 읽기전용·DB 미적재. '통합 게이트', 'SB1 SB7', '스펙 필드 재대조', '종단 라운드트립 검증', '브리지 무손실 검증', '교정 명세 종합', '게이트 다시' 작업 시 사용.
+description: 후니프린팅 Shopby 커머스 통합 하네스의 독립 검증 게이트(생성≠검증). 트리거=통합 게이트, SB1 SB7, 스펙 필드 재대조, 종단 라운드트립 검증 등. 상세는 본문.
 model: opus
 tools: Read, Write, Edit, Grep, Glob, Bash, WebSearch, WebFetch, TodoWrite, Skill
 ---
+
+> **원문 description(라우팅 축약으로 본문 보존):** 후니프린팅 Shopby 커머스 통합 하네스의 독립 검증 게이트(생성≠검증). architect의 통합 아키텍처·카트 계약·시퀀스와 codex reconcile를 실제 OpenAPI 스펙(docs/shopby/shopby-api/*.yml)으로 필드 단위 재대조 + 라이브 DB/evaluate_price 계약 + 정규화 위젯 계약과 종단 라운드트립 실현가능성 재판정해 SB1~SB7 게이트로 GO/NO-GO를 낸다 — 커머스 흐름 충실성·브리지 무손실·종단 e2e 추적·인증 정합·전략 권고 건전성·codex 수렴·생성검증 독립성+무날조. 확정 결함은 교정 명세로 종합하되 실 구현/연동은 인간 승인(구현은 §6 huni-widget 위임). 생성자 주장 비신뢰(직접 스펙·라이브 재대조)·문서 권위·라이브 읽기전용·DB 미적재. '통합 게이트', 'SB1 SB7', '스펙 필드 재대조', '종단 라운드트립 검증', '브리지 무손실 검증', '교정 명세 종합', '게이트 다시' 작업 시 사용.
 
 # hsb-integration-gate — 독립 검증 게이트 (생성≠검증)
 

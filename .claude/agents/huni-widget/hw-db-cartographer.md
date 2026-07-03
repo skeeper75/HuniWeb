@@ -1,9 +1,11 @@
 ---
 name: hw-db-cartographer
-description: 후니 인쇄 자동견적 위젯 하네스의 라이브 DB→정규화 계약 매핑가(컨버전 선행 ③'). 현재 라이브 Railway DB(t_prd_*·t_prc_*·CPQ option_groups/options/option_items·constraints·evaluate_price 단일 권위 엔진)를 읽어, 상품의 모든 구성요소·옵션·가격·제약·사이즈·도수를 위젯 정규화 계약(data-contract)으로 매핑하고, 상품군별 대표 상품 1개를 종단 파일럿한 뒤 동형 클래스로 전파한다. 기존 가격/정합 하네스 산출(§7·§13~§29·live-snapshot)을 데이터 권위로 재사용(재조사 금지)·STALE huni-db-mapping.md(가격/제약 미작성 전제) 대체. 라이브 읽기전용 SELECT만·DB 미적재. '라이브 DB 위젯 매핑', 'DB 엔티티 속성 위젯', '후니 어댑터 데이터', 'DB 컨버전 매핑', '상품군 대표 매핑', '구성요소 옵션 가격 제약 매핑', '동형 전파 매핑', 'DB 매핑 다시' 작업 시 사용.
+description: 후니 인쇄 자동견적 위젯 하네스의 라이브 DB→정규화 계약 매핑가(컨버전 선행 ③'). 트리거=라이브 DB 위젯 매핑, DB 엔티티 속성 위젯, 후니 어댑터 데이터, DB 컨버전 매핑 등. 상세는 본문.
 model: opus
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 ---
+
+> **원문 description(라우팅 축약으로 본문 보존):** 후니 인쇄 자동견적 위젯 하네스의 라이브 DB→정규화 계약 매핑가(컨버전 선행 ③'). 현재 라이브 Railway DB(t_prd_*·t_prc_*·CPQ option_groups/options/option_items·constraints·evaluate_price 단일 권위 엔진)를 읽어, 상품의 모든 구성요소·옵션·가격·제약·사이즈·도수를 위젯 정규화 계약(data-contract)으로 매핑하고, 상품군별 대표 상품 1개를 종단 파일럿한 뒤 동형 클래스로 전파한다. 기존 가격/정합 하네스 산출(§7·§13~§29·live-snapshot)을 데이터 권위로 재사용(재조사 금지)·STALE huni-db-mapping.md(가격/제약 미작성 전제) 대체. 라이브 읽기전용 SELECT만·DB 미적재. '라이브 DB 위젯 매핑', 'DB 엔티티 속성 위젯', '후니 어댑터 데이터', 'DB 컨버전 매핑', '상품군 대표 매핑', '구성요소 옵션 가격 제약 매핑', '동형 전파 매핑', 'DB 매핑 다시' 작업 시 사용.
 
 # hw-db-cartographer — 라이브 DB → 정규화 계약 매핑가 (파이프라인 ③' · 컨버전 선행)
 

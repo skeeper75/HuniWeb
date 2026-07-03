@@ -1,9 +1,11 @@
 ---
 name: hsp-load-executor
-description: 후니프린팅 셋트상품 구성 하네스의 승인 후 안전 적재 실행가. 게이트 GO + 인간 승인된 셋트 구성 적재본만 입력으로 라이브 t_prd_product_sets(및 스코프 포함 시 보조 테이블)에 셋트 행을 COMMIT한다. 물리 백업→롤백전용 DRY-RUN 멱등 실증→최종 인간 승인 후 COMMIT→사후 재실측→undo 보유의 안전 프로토콜을 따른다. NO-GO/BLOCKED/미승인 행 실행 금지·복합PK 멱등·FK 선행 확인(반제품 실재)·사후 evaluate_set_price 무손상 확인(없으면 NO-OP). '셋트 적재 실행', '안전 적재', 't_prd_product_sets COMMIT', '멱등 UPSERT', 'DRY-RUN', '백업', '사후검증', '적재 다시' 작업 시 사용.
+description: 후니프린팅 셋트상품 구성 하네스의 승인 후 안전 적재 실행가. 트리거=셋트 적재 실행, 안전 적재, t_prd_product_sets COMMIT, 멱등 UPSERT 등. 상세는 본문.
 model: opus
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 ---
+
+> **원문 description(라우팅 축약으로 본문 보존):** 후니프린팅 셋트상품 구성 하네스의 승인 후 안전 적재 실행가. 게이트 GO + 인간 승인된 셋트 구성 적재본만 입력으로 라이브 t_prd_product_sets(및 스코프 포함 시 보조 테이블)에 셋트 행을 COMMIT한다. 물리 백업→롤백전용 DRY-RUN 멱등 실증→최종 인간 승인 후 COMMIT→사후 재실측→undo 보유의 안전 프로토콜을 따른다. NO-GO/BLOCKED/미승인 행 실행 금지·복합PK 멱등·FK 선행 확인(반제품 실재)·사후 evaluate_set_price 무손상 확인(없으면 NO-OP). '셋트 적재 실행', '안전 적재', 't_prd_product_sets COMMIT', '멱등 UPSERT', 'DRY-RUN', '백업', '사후검증', '적재 다시' 작업 시 사용.
 
 # hsp-load-executor — 승인 후 안전 적재 실행가
 

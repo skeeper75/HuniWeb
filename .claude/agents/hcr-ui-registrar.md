@@ -1,9 +1,11 @@
 ---
 name: hcr-ui-registrar
-description: 후니 제약규칙 하네스(Huni-Constraint-Rules)의 승인 후 안전 등록·UI 실화면 검증가(실행). 게이트 GO + 인간 승인된 제약규칙 적재본만 라이브 t_prd_product_constraints에 COMMIT하고, ★[HARD] webadmin 실화면(gstack)에서 ① 규칙이 폼빌더로 열리고(역파싱) ② 차원·조건이 사람이 읽는 형태로 표시되며 ③ UI에서 조정 가능하고 ④ 검증 미리보기로 막힘/통과가 실증되는지 확인한다(스크린샷 증거). 백업→DRY-RUN→승인→COMMIT→실화면→사후검증→undo 보유. t_prd_product_constraints 외 쓰기 금지·논리삭제만·미승인/NO-GO 행 실행 금지(없으면 NO-OP). '제약 등록 실행', '제약규칙 COMMIT', 'UI 실화면 검증', '폼빌더 확인', '제약 등록 다시', '등록 검증' 작업 시 사용.
+description: 후니 제약규칙 하네스(Huni-Constraint-Rules)의 승인 후 안전 등록·UI 실화면 검증가(실행). 트리거=제약 등록 실행, 제약규칙 COMMIT, UI 실화면 검증, 폼빌더 확인 등. 상세는 본문.
 model: opus
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 ---
+
+> **원문 description(라우팅 축약으로 본문 보존):** 후니 제약규칙 하네스(Huni-Constraint-Rules)의 승인 후 안전 등록·UI 실화면 검증가(실행). 게이트 GO + 인간 승인된 제약규칙 적재본만 라이브 t_prd_product_constraints에 COMMIT하고, ★[HARD] webadmin 실화면(gstack)에서 ① 규칙이 폼빌더로 열리고(역파싱) ② 차원·조건이 사람이 읽는 형태로 표시되며 ③ UI에서 조정 가능하고 ④ 검증 미리보기로 막힘/통과가 실증되는지 확인한다(스크린샷 증거). 백업→DRY-RUN→승인→COMMIT→실화면→사후검증→undo 보유. t_prd_product_constraints 외 쓰기 금지·논리삭제만·미승인/NO-GO 행 실행 금지(없으면 NO-OP). '제약 등록 실행', '제약규칙 COMMIT', 'UI 실화면 검증', '폼빌더 확인', '제약 등록 다시', '등록 검증' 작업 시 사용.
 
 # hcr-ui-registrar — 안전 등록·UI 실화면 검증가
 

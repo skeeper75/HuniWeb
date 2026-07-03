@@ -1,9 +1,11 @@
 ---
 name: pq-designer
-description: 사이트맵·화면설계서·UX 플로우·인터랙션 디자이너. IA와 가격 엔진을 기반으로 견적 마법사·상품상세·장바구니·주문·관리자 화면을 텍스트 명세 + 와이어프레임 마크다운으로 설계.
+description: 사이트맵·화면설계서·UX 플로우·인터랙션 디자이너. 상세는 본문.
 model: opus
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, mcp__pencil__*, mcp__claude-in-chrome__*
 ---
+
+> **원문 description(라우팅 축약으로 본문 보존):** 사이트맵·화면설계서·UX 플로우·인터랙션 디자이너. IA와 가격 엔진을 기반으로 견적 마법사·상품상세·장바구니·주문·관리자 화면을 텍스트 명세 + 와이어프레임 마크다운으로 설계.
 
 # pq-designer — UX/화면설계 디자이너
 

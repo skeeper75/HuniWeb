@@ -1,9 +1,11 @@
 ---
 name: hlg-codex-verifier
-description: 후니 적재 거버넌스 하네스(Huni-Load-Governance)의 codex-cli 독립 2차 교차검증가(적대적 검증). 규범 정본·옵션 쓰임새 판정·처분 명세를 Codex(gpt-5.5) 읽기전용으로 넘겨 "놓친 중복·잘못된 처분(정당 옵션을 정리 대상으로 오판=선택지 손실)·가격종속 누락(정리 시 가격 파손)·규범 위반·근거 없는 단정(환각)"을 독립 2nd opinion으로 발굴하고 Claude 판정과 reconcile한다. ★codex 주장=가설(라이브/권위 검증 전 사실 아님·환각 경계)·codex 미가용 시 'Claude 단독' 명시 폴백(pending 금지)·codex 읽기전용 샌드박스·비밀값 비노출. 'codex 교차검증', '독립 2nd opinion', 'codex 옵션 판정 검토', '오판 적발', 'reconcile', 'codex 검증 다시' 작업 시 사용.
+description: 후니 적재 거버넌스 하네스(Huni-Load-Governance)의 codex-cli 독립 2차 교차검증가(적대적 검증). 트리거=Claude 단독, codex 교차검증, 독립 2nd opinion, codex 옵션 판정 검토 등. 상세는 본문.
 model: opus
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 ---
+
+> **원문 description(라우팅 축약으로 본문 보존):** 후니 적재 거버넌스 하네스(Huni-Load-Governance)의 codex-cli 독립 2차 교차검증가(적대적 검증). 규범 정본·옵션 쓰임새 판정·처분 명세를 Codex(gpt-5.5) 읽기전용으로 넘겨 "놓친 중복·잘못된 처분(정당 옵션을 정리 대상으로 오판=선택지 손실)·가격종속 누락(정리 시 가격 파손)·규범 위반·근거 없는 단정(환각)"을 독립 2nd opinion으로 발굴하고 Claude 판정과 reconcile한다. ★codex 주장=가설(라이브/권위 검증 전 사실 아님·환각 경계)·codex 미가용 시 'Claude 단독' 명시 폴백(pending 금지)·codex 읽기전용 샌드박스·비밀값 비노출. 'codex 교차검증', '독립 2nd opinion', 'codex 옵션 판정 검토', '오판 적발', 'reconcile', 'codex 검증 다시' 작업 시 사용.
 
 # hlg-codex-verifier — codex 독립 2차 교차검증가
 

@@ -1,9 +1,11 @@
 ---
 name: hcc-conformance-gate
-description: 후니프린팅 카탈로그 종단 정합 하네스의 독립 검증 게이트(생성≠검증). 인스펙터 결함 보드·커버리지 셀·codex reconcile를 라이브 읽기전용 재실측 + ★gstack browse로 product-viewer 라이브 화면(엑셀↔DB↔화면 3원) 대조 + evaluate_price 재계산으로 독립 재판정해 K1~K8 게이트로 GO/NO-GO를 낸다 — 누락 0 커버리지·기초데이터 정합·CPQ 연결 무결성·가격엔진 정합·종단 e2e 추적·codex reconcile 수렴·생성검증 독립성. 확정 결함은 교정 명세(무엇을·어느 t_*·어떻게·dbmap 어느 트랙)로 종합하되 실 COMMIT은 인간 승인. 생성자 주장 비신뢰(직접 재실측)·라이브 읽기전용·DB 미적재. '정합 게이트', 'K1 K8', '독립 재실측', 'product-viewer 라이브 확인', '커버리지 누락 0 검증', '교정 명세 종합', '게이트 다시' 작업 시 사용.
+description: 후니프린팅 카탈로그 종단 정합 하네스의 독립 검증 게이트(생성≠검증). 트리거=정합 게이트, K1 K8, 독립 재실측, product-viewer 라이브 확인 등. 상세는 본문.
 model: opus
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 ---
+
+> **원문 description(라우팅 축약으로 본문 보존):** 후니프린팅 카탈로그 종단 정합 하네스의 독립 검증 게이트(생성≠검증). 인스펙터 결함 보드·커버리지 셀·codex reconcile를 라이브 읽기전용 재실측 + ★gstack browse로 product-viewer 라이브 화면(엑셀↔DB↔화면 3원) 대조 + evaluate_price 재계산으로 독립 재판정해 K1~K8 게이트로 GO/NO-GO를 낸다 — 누락 0 커버리지·기초데이터 정합·CPQ 연결 무결성·가격엔진 정합·종단 e2e 추적·codex reconcile 수렴·생성검증 독립성. 확정 결함은 교정 명세(무엇을·어느 t_*·어떻게·dbmap 어느 트랙)로 종합하되 실 COMMIT은 인간 승인. 생성자 주장 비신뢰(직접 재실측)·라이브 읽기전용·DB 미적재. '정합 게이트', 'K1 K8', '독립 재실측', 'product-viewer 라이브 확인', '커버리지 누락 0 검증', '교정 명세 종합', '게이트 다시' 작업 시 사용.
 
 # hcc-conformance-gate — 독립 검증 게이트 (생성≠검증)
 

@@ -1,9 +1,11 @@
 ---
 name: dbm-category-mapper
-description: 후니프린팅 DB매핑 하네스의 카테고리-상품 매퍼. 감사가가 검증한 매칭 매트릭스·출시상태 분류를 입력으로 카테고리(t_cat_categories)↔실상품(t_prd_products) 매핑 명세를 설계한다 — MAP IA→카테고리 노드 매핑(search-before-mint)+각 prd_cd→올바른 cat_cd 귀속(다중분류·별칭), FK 위상·채번 준수, 매핑 명세+적재순서+영향분석까지만(DB 직접 적재 없음·실 적재 인간 승인). '카테고리 매핑', '카테고리 상품 매핑', '상품 카테고리 귀속', 'cat_cd 매핑', '다중분류 매핑', '카테고리 매핑 다시' 작업 시 사용.
+description: 후니프린팅 DB매핑 하네스의 카테고리-상품 매퍼. 트리거=카테고리 매핑, 카테고리 상품 매핑, 상품 카테고리 귀속, cat_cd 매핑 등. 상세는 본문.
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 model: opus
 ---
+
+> **원문 description(라우팅 축약으로 본문 보존):** 후니프린팅 DB매핑 하네스의 카테고리-상품 매퍼. 감사가가 검증한 매칭 매트릭스·출시상태 분류를 입력으로 카테고리(t_cat_categories)↔실상품(t_prd_products) 매핑 명세를 설계한다 — MAP IA→카테고리 노드 매핑(search-before-mint)+각 prd_cd→올바른 cat_cd 귀속(다중분류·별칭), FK 위상·채번 준수, 매핑 명세+적재순서+영향분석까지만(DB 직접 적재 없음·실 적재 인간 승인). '카테고리 매핑', '카테고리 상품 매핑', '상품 카테고리 귀속', 'cat_cd 매핑', '다중분류 매핑', '카테고리 매핑 다시' 작업 시 사용.
 
 # dbm-category-mapper — 카테고리↔상품 매퍼 (round-24 2단계)
 

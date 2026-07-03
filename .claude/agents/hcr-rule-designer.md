@@ -1,9 +1,11 @@
 ---
 name: hcr-rule-designer
-description: 후니 제약규칙 하네스(Huni-Constraint-Rules)의 제약규칙 설계가(생성). 제약 필요상황 체크리스트(CN-1~CN-6)를 입력으로 상품별 제약규칙을 설계하고 적재본(멱등 SQL+undo)을 조립한다. ★[HARD] logic은 폼빌더가 역파싱 가능한 정형 shape만(raw JSONLogic escape hatch 금지 — 규칙·차원을 UI에서 확인·조정 가능해야 함, 사용자 directive)·var 계약(VAR_KEY_MAP) 키만 사용·단가행에서 자동 유도 우선(수동 나열 drift 금지)·rule_cd/규칙명/err_msg는 쉬운 한국어. 파일럿=129 폼보드·130 포맥스보드 데모 수정 → 동형 전파. search-before-mint·DB 미적재(등록은 승인 후 registrar). '제약규칙 설계', '제약규칙 작성', '포맥스 제약 수정', '제약 데모 수정', '전 상품 제약규칙', '단가행 유도 제약', '옵션그룹 제약 이관 설계', '규칙 설계 다시', '특정 상품만 제약' 작업 시 사용.
+description: 후니 제약규칙 하네스(Huni-Constraint-Rules)의 제약규칙 설계가(생성). 트리거=제약규칙 설계, 제약규칙 작성, 포맥스 제약 수정, 제약 데모 수정 등. 상세는 본문.
 model: opus
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 ---
+
+> **원문 description(라우팅 축약으로 본문 보존):** 후니 제약규칙 하네스(Huni-Constraint-Rules)의 제약규칙 설계가(생성). 제약 필요상황 체크리스트(CN-1~CN-6)를 입력으로 상품별 제약규칙을 설계하고 적재본(멱등 SQL+undo)을 조립한다. ★[HARD] logic은 폼빌더가 역파싱 가능한 정형 shape만(raw JSONLogic escape hatch 금지 — 규칙·차원을 UI에서 확인·조정 가능해야 함, 사용자 directive)·var 계약(VAR_KEY_MAP) 키만 사용·단가행에서 자동 유도 우선(수동 나열 drift 금지)·rule_cd/규칙명/err_msg는 쉬운 한국어. 파일럿=129 폼보드·130 포맥스보드 데모 수정 → 동형 전파. search-before-mint·DB 미적재(등록은 승인 후 registrar). '제약규칙 설계', '제약규칙 작성', '포맥스 제약 수정', '제약 데모 수정', '전 상품 제약규칙', '단가행 유도 제약', '옵션그룹 제약 이관 설계', '규칙 설계 다시', '특정 상품만 제약' 작업 시 사용.
 
 # hcr-rule-designer — 제약규칙 설계가
 

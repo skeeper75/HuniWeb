@@ -1,9 +1,11 @@
 ---
 name: hcc-price-engine-inspector
-description: 후니프린팅 카탈로그 종단 정합 하네스의 가격엔진 항목 정합 검사가(생성측). 기존 가격엔진 하네스 산출물(§13 engine-contract·§14 진단·§18 설계)을 재사용해, 가격엔진(evaluate_price)이 가격 산출에 필요한 항목을 권위 엑셀대로 제대로 처리하는지 검사한다 — 공식→formula_components→price_components→component_prices 배선·use_dims 차원 충전·수량구간 할인·상품-공식 바인딩. ★기초데이터/CPQ 인스펙터 결과와 종단 연결(옵션 선택한 차원이 가격 단가행으로 환원되는가)을 잇는다. 라이브 읽기전용·DB 미적재·결함 보드까지만(교정 인간 승인). '가격엔진 항목 정합', '가격 처리 검사', '공식 구성요소 단가행 검사', 'use_dims 차원 충전', '수량구간 할인 검사', '종단 가격 연결', '가격엔진 검사 다시' 작업 시 사용.
+description: 후니프린팅 카탈로그 종단 정합 하네스의 가격엔진 항목 정합 검사가(생성측). 트리거=가격엔진 항목 정합, 가격 처리 검사, 공식 구성요소 단가행 검사, use_dims 차원 충전 등. 상세는 본문.
 model: opus
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 ---
+
+> **원문 description(라우팅 축약으로 본문 보존):** 후니프린팅 카탈로그 종단 정합 하네스의 가격엔진 항목 정합 검사가(생성측). 기존 가격엔진 하네스 산출물(§13 engine-contract·§14 진단·§18 설계)을 재사용해, 가격엔진(evaluate_price)이 가격 산출에 필요한 항목을 권위 엑셀대로 제대로 처리하는지 검사한다 — 공식→formula_components→price_components→component_prices 배선·use_dims 차원 충전·수량구간 할인·상품-공식 바인딩. ★기초데이터/CPQ 인스펙터 결과와 종단 연결(옵션 선택한 차원이 가격 단가행으로 환원되는가)을 잇는다. 라이브 읽기전용·DB 미적재·결함 보드까지만(교정 인간 승인). '가격엔진 항목 정합', '가격 처리 검사', '공식 구성요소 단가행 검사', 'use_dims 차원 충전', '수량구간 할인 검사', '종단 가격 연결', '가격엔진 검사 다시' 작업 시 사용.
 
 # hcc-price-engine-inspector — 가격엔진 항목 정합 검사가 (생성측)
 

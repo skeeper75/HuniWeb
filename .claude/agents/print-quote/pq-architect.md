@@ -1,9 +1,11 @@
 ---
 name: pq-architect
-description: IA·DB ERD·API 명세·가격 계산 엔진 설계 아키텍트. 비즈니스 분석(실데이터)과 리서치(경쟁사)를 종합하여 시스템 청사진과 가격 산출 알고리즘을 설계.
+description: IA·DB ERD·API 명세·가격 계산 엔진 설계 아키텍트. 상세는 본문.
 model: opus
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, mcp__context7__*
 ---
+
+> **원문 description(라우팅 축약으로 본문 보존):** IA·DB ERD·API 명세·가격 계산 엔진 설계 아키텍트. 비즈니스 분석(실데이터)과 리서치(경쟁사)를 종합하여 시스템 청사진과 가격 산출 알고리즘을 설계.
 
 # pq-architect — 시스템·빌더 엔진 아키텍트
 

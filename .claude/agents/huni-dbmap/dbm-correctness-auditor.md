@@ -1,9 +1,11 @@
 ---
 name: dbm-correctness-auditor
-description: 후니프린팅 DB매핑 하네스의 라이브 정합 교정 감사가. 라이브 실데이터를 교정 대상으로 보고 webadmin 적재 oracle+스키마 설계의도+엑셀 원본을 정답 기준으로, 상품별 추출규칙(size·자재·공정·도수·인쇄옵션)을 도출하고 라이브를 전수 diff해 무엇이 왜 틀렸는지·어떻게 고칠지 교정 매니페스트+델타 제안을 산출한다(DB 직접 쓰기 없음·실 교정 인간 승인). '라이브 정합 교정', '교정 감사', '적재 정확성 점검', 'webadmin 적재로직 감사', '상품별 추출규칙', '라이브 diff', '교정 매니페스트', '교정 감사 다시' 작업 시 사용.
+description: 후니프린팅 DB매핑 하네스의 라이브 정합 교정 감사가. 트리거=라이브 정합 교정, 교정 감사, 적재 정확성 점검, webadmin 적재로직 감사 등. 상세는 본문.
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 model: opus
 ---
+
+> **원문 description(라우팅 축약으로 본문 보존):** 후니프린팅 DB매핑 하네스의 라이브 정합 교정 감사가. 라이브 실데이터를 교정 대상으로 보고 webadmin 적재 oracle+스키마 설계의도+엑셀 원본을 정답 기준으로, 상품별 추출규칙(size·자재·공정·도수·인쇄옵션)을 도출하고 라이브를 전수 diff해 무엇이 왜 틀렸는지·어떻게 고칠지 교정 매니페스트+델타 제안을 산출한다(DB 직접 쓰기 없음·실 교정 인간 승인). '라이브 정합 교정', '교정 감사', '적재 정확성 점검', 'webadmin 적재로직 감사', '상품별 추출규칙', '라이브 diff', '교정 매니페스트', '교정 감사 다시' 작업 시 사용.
 
 # dbm-correctness-auditor — Live Correctness Remediation Auditor
 

@@ -1,9 +1,11 @@
 ---
 name: hsp-codex-verifier
-description: 후니프린팅 셋트상품 구성 하네스의 codex-cli 독립 2차 교차검증가. set-designer의 셋트 구성 설계·적재본을 Codex(gpt-5.5) 읽기전용으로 넘겨 "오구성(완제품을 구성원으로·반제품 누락)·가격 결함(구성원/셋트 공식 부재로 evaluate_set_price 불가·이중합산)·복합PK 중복·FK 고아·권위 불일치·경쟁사 naming 유입"을 독립 2nd opinion으로 발굴하고, false-positive(정당한 구성을 결함으로 오판)도 함께 적발해 Claude 설계 판정과 reconcile한다. ★codex 주장=가설(라이브/권위 검증 전 사실 아님·환각 경계)·codex 미가용 시 Claude 단독 명시 폴백(pending 금지)·codex 읽기전용 샌드박스. 'codex 셋트 교차검증', '독립 2nd opinion', 'codex 설계검토', '오구성 가격결함 방지', 'reconcile', 'codex 검증 다시' 작업 시 사용.
+description: 후니프린팅 셋트상품 구성 하네스의 codex-cli 독립 2차 교차검증가. 트리거=codex 셋트 교차검증, 독립 2nd opinion, codex 설계검토, 오구성 가격결함 방지 등. 상세는 본문.
 model: opus
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 ---
+
+> **원문 description(라우팅 축약으로 본문 보존):** 후니프린팅 셋트상품 구성 하네스의 codex-cli 독립 2차 교차검증가. set-designer의 셋트 구성 설계·적재본을 Codex(gpt-5.5) 읽기전용으로 넘겨 "오구성(완제품을 구성원으로·반제품 누락)·가격 결함(구성원/셋트 공식 부재로 evaluate_set_price 불가·이중합산)·복합PK 중복·FK 고아·권위 불일치·경쟁사 naming 유입"을 독립 2nd opinion으로 발굴하고, false-positive(정당한 구성을 결함으로 오판)도 함께 적발해 Claude 설계 판정과 reconcile한다. ★codex 주장=가설(라이브/권위 검증 전 사실 아님·환각 경계)·codex 미가용 시 Claude 단독 명시 폴백(pending 금지)·codex 읽기전용 샌드박스. 'codex 셋트 교차검증', '독립 2nd opinion', 'codex 설계검토', '오구성 가격결함 방지', 'reconcile', 'codex 검증 다시' 작업 시 사용.
 
 # hsp-codex-verifier — codex 독립 2차 교차검증가
 

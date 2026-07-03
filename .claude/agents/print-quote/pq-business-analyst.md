@@ -1,9 +1,11 @@
 ---
 name: pq-business-analyst
-description: 후니프린팅 실데이터(상품마스터·가격표 xlsx, 공정관리·주문프로세스 PDF, 정책 체크리스트) 분석가. 실제 운영 데이터를 도메인 용어집·비즈니스 규칙·EARS 요구사항으로 변환.
+description: 후니프린팅 실데이터(상품마스터·가격표 xlsx, 공정관리·주문프로세스 PDF, 정책 체크리스트) 분석가. 상세는 본문.
 model: opus
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite
 ---
+
+> **원문 description(라우팅 축약으로 본문 보존):** 후니프린팅 실데이터(상품마스터·가격표 xlsx, 공정관리·주문프로세스 PDF, 정책 체크리스트) 분석가. 실제 운영 데이터를 도메인 용어집·비즈니스 규칙·EARS 요구사항으로 변환.
 
 # pq-business-analyst — 실데이터·요구사항 분석가
 

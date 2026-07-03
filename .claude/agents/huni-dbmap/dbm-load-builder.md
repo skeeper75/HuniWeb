@@ -1,10 +1,12 @@
 ---
 name: dbm-load-builder
-description: 후니프린팅 DB매핑 하네스의 적재 빌더. 검증된 매핑 산출물을 입력으로 라이브 t_* 적재본을 조립한다 — FK 위상정렬 적재순서·코드행 선적재 제안·적재 매니페스트(적재 준비), 그리고 GO 적재본을 멱등 INSERT … ON CONFLICT UPSERT+단일 트랜잭션+FK순 apply.sql+적재 로더로 실행 가능한 SQL 산출본으로 확장(적재 실행본). DB 직접 적재 없음·실 적재 인간 승인. '적재 조립', '적재본 빌드', 'FK 위상정렬', '적재 매니페스트', '적재 준비', '적재 SQL', '멱등 적재', 'UPSERT', '적재 로더', '적재 실행본', '적재 스크립트 다시' 작업 시 사용.
+description: 후니프린팅 DB매핑 하네스의 적재 빌더. 트리거=적재 조립, 적재본 빌드, FK 위상정렬, 적재 매니페스트 등. 상세는 본문.
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 model: opus
 color: orange
 ---
+
+> **원문 description(라우팅 축약으로 본문 보존):** 후니프린팅 DB매핑 하네스의 적재 빌더. 검증된 매핑 산출물을 입력으로 라이브 t_* 적재본을 조립한다 — FK 위상정렬 적재순서·코드행 선적재 제안·적재 매니페스트(적재 준비), 그리고 GO 적재본을 멱등 INSERT … ON CONFLICT UPSERT+단일 트랜잭션+FK순 apply.sql+적재 로더로 실행 가능한 SQL 산출본으로 확장(적재 실행본). DB 직접 적재 없음·실 적재 인간 승인. '적재 조립', '적재본 빌드', 'FK 위상정렬', '적재 매니페스트', '적재 준비', '적재 SQL', '멱등 적재', 'UPSERT', '적재 로더', '적재 실행본', '적재 스크립트 다시' 작업 시 사용.
 
 # dbm-load-builder — Load Builder
 

@@ -1,9 +1,11 @@
 ---
 name: dbm-loadspec-extractor
-description: 후니프린팅 DB매핑 하네스의 라이브 적재명세 추출가. raw/webadmin Django 소스를 읽어 각 t_* 엔티티가 무엇을 어떻게(폼 위젯·검증·코드값 그룹·자동채번·논리삭제·FK·드릴다운 적재경로) 적재하는지 코드 근거로 추출해 적재명세(load-spec)로 정리한다(소스 읽기 전용·DB 미접속). 'webadmin 적재명세', '적재 로직 추출', 't_* 적재방법', 'Django admin 적재 분석', 'BaseAdmin 폼 분석', '코드값 그룹 추출', '상품뷰어 적재경로', '적재명세 추출 다시' 작업 시 사용.
+description: 후니프린팅 DB매핑 하네스의 라이브 적재명세 추출가. 트리거=webadmin 적재명세, 적재 로직 추출, t_* 적재방법, Django admin 적재 분석 등. 상세는 본문.
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 model: opus
 ---
+
+> **원문 description(라우팅 축약으로 본문 보존):** 후니프린팅 DB매핑 하네스의 라이브 적재명세 추출가. raw/webadmin Django 소스를 읽어 각 t_* 엔티티가 무엇을 어떻게(폼 위젯·검증·코드값 그룹·자동채번·논리삭제·FK·드릴다운 적재경로) 적재하는지 코드 근거로 추출해 적재명세(load-spec)로 정리한다(소스 읽기 전용·DB 미접속). 'webadmin 적재명세', '적재 로직 추출', 't_* 적재방법', 'Django admin 적재 분석', 'BaseAdmin 폼 분석', '코드값 그룹 추출', '상품뷰어 적재경로', '적재명세 추출 다시' 작업 시 사용.
 
 # dbm-loadspec-extractor — Live Load-Spec Extractor
 

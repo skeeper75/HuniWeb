@@ -1,9 +1,11 @@
 ---
 name: hcr-gate-validator
-description: 후니 제약규칙 하네스(Huni-Constraint-Rules)의 독립 검증 게이트(생성≠검증). 설계된 제약규칙·개발자 전달안을 라이브 읽기전용 재실측으로 독립 재판정해 CR1~CR7 게이트로 GO/NO-GO를 낸다 — 필요상황 규정 충실·권위/단가행 정합(허용 조합 오차단 0=false-positive 가드)·UI 역파싱 가능성 전수·가독성(쉬운 한국어)·옵션그룹 이관 정합(선택지 손실 0)·등록 안전(멱등·undo·validate 케이스)·생성검증 독립성+전달안 근거 실재. 생성자 주장 비신뢰(직접 재실측)·단일 FAIL=NO-GO·라이브 읽기전용·DB 미적재. '제약 게이트', 'CR1 CR7', '제약규칙 검증', '오차단 검증', '역파싱 검증', '게이트 다시' 작업 시 사용.
+description: 후니 제약규칙 하네스(Huni-Constraint-Rules)의 독립 검증 게이트(생성≠검증). 트리거=제약 게이트, CR1 CR7, 제약규칙 검증, 오차단 검증 등. 상세는 본문.
 model: opus
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 ---
+
+> **원문 description(라우팅 축약으로 본문 보존):** 후니 제약규칙 하네스(Huni-Constraint-Rules)의 독립 검증 게이트(생성≠검증). 설계된 제약규칙·개발자 전달안을 라이브 읽기전용 재실측으로 독립 재판정해 CR1~CR7 게이트로 GO/NO-GO를 낸다 — 필요상황 규정 충실·권위/단가행 정합(허용 조합 오차단 0=false-positive 가드)·UI 역파싱 가능성 전수·가독성(쉬운 한국어)·옵션그룹 이관 정합(선택지 손실 0)·등록 안전(멱등·undo·validate 케이스)·생성검증 독립성+전달안 근거 실재. 생성자 주장 비신뢰(직접 재실측)·단일 FAIL=NO-GO·라이브 읽기전용·DB 미적재. '제약 게이트', 'CR1 CR7', '제약규칙 검증', '오차단 검증', '역파싱 검증', '게이트 다시' 작업 시 사용.
 
 # hcr-gate-validator — 독립 검증 게이트
 

@@ -1,8 +1,10 @@
 ---
 name: hwf-flow-curator
-description: 후니 위젯 구조·플로우 문서화 하네스(Huni-Widget-Flow)의 역공학 증거 큐레이션가. docs/reversing 역공학 자료(productRedWidgetSDK·widget.js·RedEditorSDK·최종보고서)와 raw/widget_monitor 캡처(cascade·constraints·monitor_report)를 읽어, RedPrinting 위젯의 전체 구조와 26개 상품군별 "파일 업로드 vs 에디쿠스(Edicus) 경로 분기"를 근거(파일:라인)와 함께 플로우 팩으로 추출한다. 권위=역공학 자료, 미상은 "모름"으로 명시(추정 금지). 라이브 접속 불필요·읽기전용. '플로우 큐레이션', '위젯 구조 추출', '경로 분기 증거', '상품군 경로 매핑', '에디쿠스 업로드 분기', '큐레이션 다시' 작업 시 사용.
+description: 후니 위젯 구조·플로우 문서화 하네스(Huni-Widget-Flow)의 역공학 증거 큐레이션가. 트리거=플로우 큐레이션, 위젯 구조 추출, 경로 분기 증거, 상품군 경로 매핑 등. 상세는 본문.
 model: opus
 ---
+
+> **원문 description(라우팅 축약으로 본문 보존):** 후니 위젯 구조·플로우 문서화 하네스(Huni-Widget-Flow)의 역공학 증거 큐레이션가. docs/reversing 역공학 자료(productRedWidgetSDK·widget.js·RedEditorSDK·최종보고서)와 raw/widget_monitor 캡처(cascade·constraints·monitor_report)를 읽어, RedPrinting 위젯의 전체 구조와 26개 상품군별 "파일 업로드 vs 에디쿠스(Edicus) 경로 분기"를 근거(파일:라인)와 함께 플로우 팩으로 추출한다. 권위=역공학 자료, 미상은 "모름"으로 명시(추정 금지). 라이브 접속 불필요·읽기전용. '플로우 큐레이션', '위젯 구조 추출', '경로 분기 증거', '상품군 경로 매핑', '에디쿠스 업로드 분기', '큐레이션 다시' 작업 시 사용.
 
 # hwf-flow-curator — 위젯 구조·플로우 증거 큐레이션가
 

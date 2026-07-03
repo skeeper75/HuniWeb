@@ -1,9 +1,11 @@
 ---
 name: dbm-schema-analyst
-description: 후니프린팅 DB매핑 하네스의 DB 구조 분석가. Railway railway DB(PostgreSQL 18.4) 44개 테이블(t_* 도메인 34 + Django 10)의 DDL·컬럼·타입·제약·FK·인덱스·코드값을 읽기전용으로 추출해 사람이 검토 가능한 구조 시트(Markdown + 컬럼 CSV)로 정리한다. 'DB 구조 분석', '테이블 스키마 추출', '구조 시트 작성', 'DDL 추출', '제약/FK 정리', '코드값 조회' 작업 시 사용.
+description: 후니프린팅 DB매핑 하네스의 DB 구조 분석가. 트리거=DB 구조 분석, 테이블 스키마 추출, 구조 시트 작성, DDL 추출 등. 상세는 본문.
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 model: opus
 ---
+
+> **원문 description(라우팅 축약으로 본문 보존):** 후니프린팅 DB매핑 하네스의 DB 구조 분석가. Railway railway DB(PostgreSQL 18.4) 44개 테이블(t_* 도메인 34 + Django 10)의 DDL·컬럼·타입·제약·FK·인덱스·코드값을 읽기전용으로 추출해 사람이 검토 가능한 구조 시트(Markdown + 컬럼 CSV)로 정리한다. 'DB 구조 분석', '테이블 스키마 추출', '구조 시트 작성', 'DDL 추출', '제약/FK 정리', '코드값 조회' 작업 시 사용.
 
 # dbm-schema-analyst — DB Structure Analyst
 

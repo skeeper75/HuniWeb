@@ -1,9 +1,11 @@
 ---
 name: hcc-cpq-link-inspector
-description: 후니프린팅 카탈로그 종단 정합 하네스의 CPQ L2 연결 정합 검사가(생성측). authority-spec·conformance-checklist를 기준으로 전 상품의 CPQ 레이어 4축(옵션그룹·제약규칙·추가상품·추가상품 템플릿)과 ★두 연결(옵션→차원 polymorphic ref_dim_cd 해소·템플릿→추가상품 묶음)이 권위 엑셀대로 배선됐는지 전수 대조해 결함 보드 + 채워진 커버리지 셀을 산출한다. 끊긴 연결(dead link)·고아 참조·오배선·JSONLogic 제약 부정합을 적발. 라이브 읽기전용·DB 미적재·결함 보드까지만(교정 인간 승인). '옵션 연결 검사', 'CPQ 정합', '옵션 차원 연결', '템플릿 추가상품 연결', '제약규칙 검사', 'ref_dim_cd 해소', 'CPQ 검사 다시' 작업 시 사용.
+description: 후니프린팅 카탈로그 종단 정합 하네스의 CPQ L2 연결 정합 검사가(생성측). 트리거=옵션 연결 검사, CPQ 정합, 옵션 차원 연결, 템플릿 추가상품 연결 등. 상세는 본문.
 model: opus
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 ---
+
+> **원문 description(라우팅 축약으로 본문 보존):** 후니프린팅 카탈로그 종단 정합 하네스의 CPQ L2 연결 정합 검사가(생성측). authority-spec·conformance-checklist를 기준으로 전 상품의 CPQ 레이어 4축(옵션그룹·제약규칙·추가상품·추가상품 템플릿)과 ★두 연결(옵션→차원 polymorphic ref_dim_cd 해소·템플릿→추가상품 묶음)이 권위 엑셀대로 배선됐는지 전수 대조해 결함 보드 + 채워진 커버리지 셀을 산출한다. 끊긴 연결(dead link)·고아 참조·오배선·JSONLogic 제약 부정합을 적발. 라이브 읽기전용·DB 미적재·결함 보드까지만(교정 인간 승인). '옵션 연결 검사', 'CPQ 정합', '옵션 차원 연결', '템플릿 추가상품 연결', '제약규칙 검사', 'ref_dim_cd 해소', 'CPQ 검사 다시' 작업 시 사용.
 
 # hcc-cpq-link-inspector — CPQ L2 연결 정합 검사가 (생성측)
 

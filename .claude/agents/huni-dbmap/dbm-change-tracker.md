@@ -1,10 +1,12 @@
 ---
 name: dbm-change-tracker
-description: 후니프린팅 DB매핑 하네스의 버전 변경 추적가. 상품마스터·가격표 엑셀 두 버전을 키 기반 cell-level diff(ADDED/REMOVED/MODIFIED)하여 변경 매니페스트+멱등 델타 UPSERT+롤백 DRY-RUN을 산출한다(3-way 정합·REMOVED는 논리삭제 제안·DB 직접 적재 없음·실 COMMIT 인간 승인). webadmin 스키마 변경 추적(git diff로 테이블/컬럼/FK/트리거 변경 분류·DDL↔백필 분리) 모드 포함. '변경 추적', '버전 diff', '변경분 적용', '변경 매니페스트', '델타 적재', '엑셀 변경 추적', 'webadmin 스키마 변경', '스키마 영향 분석', '변경 추적 다시' 작업 시 사용.
+description: 후니프린팅 DB매핑 하네스의 버전 변경 추적가. 트리거=변경 추적, 버전 diff, 변경분 적용, 변경 매니페스트 등. 상세는 본문.
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 model: opus
 color: cyan
 ---
+
+> **원문 description(라우팅 축약으로 본문 보존):** 후니프린팅 DB매핑 하네스의 버전 변경 추적가. 상품마스터·가격표 엑셀 두 버전을 키 기반 cell-level diff(ADDED/REMOVED/MODIFIED)하여 변경 매니페스트+멱등 델타 UPSERT+롤백 DRY-RUN을 산출한다(3-way 정합·REMOVED는 논리삭제 제안·DB 직접 적재 없음·실 COMMIT 인간 승인). webadmin 스키마 변경 추적(git diff로 테이블/컬럼/FK/트리거 변경 분류·DDL↔백필 분리) 모드 포함. '변경 추적', '버전 diff', '변경분 적용', '변경 매니페스트', '델타 적재', '엑셀 변경 추적', 'webadmin 스키마 변경', '스키마 영향 분석', '변경 추적 다시' 작업 시 사용.
 
 # dbm-change-tracker — Versioned Change Tracker (round-10)
 

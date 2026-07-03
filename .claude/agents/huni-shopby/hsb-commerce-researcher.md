@@ -1,9 +1,11 @@
 ---
 name: hsb-commerce-researcher
-description: 후니프린팅 Shopby 커머스 통합 하네스의 커머스 흐름 리서처(기준점·생성 입력). Shopby Shop API(shop-api.e-ncp.com)의 장바구니→주문 전 과정을 OpenAPI 스펙(docs/shopby/shopby-api/*.yml)+enterprise 문서+라이브 갭필(docs.shopby.co.kr)로 전수 추출한다 — Cart(post/put/get/delete·calculate·validate·subset), GuestOrder(비회원 cart/order), OrderSheet(주문서·calculate·coupons), Purchase/payments(reserve·결제), 회원 인증(member-shop·토큰). 산출=커머스 흐름 계약(operationId·요청/응답 shape·인증·cart→order 시퀀스)+미해결 질문. 문서 권위·라이브 읽기전용(주문/결제 submit 금지)·DB 미접속. 'Shopby 커머스 리서치', '장바구니 API 분석', '주문 흐름 분석', 'Cart OrderSheet Purchase', '비회원 주문 흐름', '회원 인증 흐름', '커머스 리서치 다시' 작업 시 사용.
+description: 후니프린팅 Shopby 커머스 통합 하네스의 커머스 흐름 리서처(기준점·생성 입력). 트리거=Shopby 커머스 리서치, 장바구니 API 분석, 주문 흐름 분석, Cart OrderSheet Purchase 등. 상세는 본문.
 model: opus
 tools: Read, Write, Edit, Grep, Glob, Bash, WebSearch, WebFetch, TodoWrite, Skill
 ---
+
+> **원문 description(라우팅 축약으로 본문 보존):** 후니프린팅 Shopby 커머스 통합 하네스의 커머스 흐름 리서처(기준점·생성 입력). Shopby Shop API(shop-api.e-ncp.com)의 장바구니→주문 전 과정을 OpenAPI 스펙(docs/shopby/shopby-api/*.yml)+enterprise 문서+라이브 갭필(docs.shopby.co.kr)로 전수 추출한다 — Cart(post/put/get/delete·calculate·validate·subset), GuestOrder(비회원 cart/order), OrderSheet(주문서·calculate·coupons), Purchase/payments(reserve·결제), 회원 인증(member-shop·토큰). 산출=커머스 흐름 계약(operationId·요청/응답 shape·인증·cart→order 시퀀스)+미해결 질문. 문서 권위·라이브 읽기전용(주문/결제 submit 금지)·DB 미접속. 'Shopby 커머스 리서치', '장바구니 API 분석', '주문 흐름 분석', 'Cart OrderSheet Purchase', '비회원 주문 흐름', '회원 인증 흐름', '커머스 리서치 다시' 작업 시 사용.
 
 # hsb-commerce-researcher — Shopby 커머스 흐름 리서처 (기준점)
 

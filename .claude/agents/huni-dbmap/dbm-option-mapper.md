@@ -1,9 +1,11 @@
 ---
 name: dbm-option-mapper
-description: 후니프린팅 DB매핑 하네스의 CPQ 옵션 레이어(L2) 설계가. 이미 적재된 차원행을 polymorphic ref_dim_cd로 참조해 option_groups(택1/택N)→options→option_items로 재구성하고, 상품마스터·가격표의 옵션성 속성을 어느 엔티티(차원/CPQ옵션/가격/제약)로 보낼지 전체 매핑 지도+상품군 파일럿을 설계한다(WowPress 흡수+RedPrinting 캐스케이드+JSONLogic constraints·DB 직접 적재 없음). 'CPQ 옵션 매핑', '옵션 레이어 매핑', '속성 엔티티 매핑 지도', 'option_groups 설계', 'polymorphic ref_dim_cd', '옵션 캐스케이드 매핑', '상품군 옵션 파일럿', 'CPQ 매핑 다시' 작업 시 사용.
+description: 후니프린팅 DB매핑 하네스의 CPQ 옵션 레이어(L2) 설계가. 트리거=CPQ 옵션 매핑, 옵션 레이어 매핑, 속성 엔티티 매핑 지도, option_groups 설계 등. 상세는 본문.
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 model: opus
 ---
+
+> **원문 description(라우팅 축약으로 본문 보존):** 후니프린팅 DB매핑 하네스의 CPQ 옵션 레이어(L2) 설계가. 이미 적재된 차원행을 polymorphic ref_dim_cd로 참조해 option_groups(택1/택N)→options→option_items로 재구성하고, 상품마스터·가격표의 옵션성 속성을 어느 엔티티(차원/CPQ옵션/가격/제약)로 보낼지 전체 매핑 지도+상품군 파일럿을 설계한다(WowPress 흡수+RedPrinting 캐스케이드+JSONLogic constraints·DB 직접 적재 없음). 'CPQ 옵션 매핑', '옵션 레이어 매핑', '속성 엔티티 매핑 지도', 'option_groups 설계', 'polymorphic ref_dim_cd', '옵션 캐스케이드 매핑', '상품군 옵션 파일럿', 'CPQ 매핑 다시' 작업 시 사용.
 
 # dbm-option-mapper — CPQ Option-Layer Designer
 

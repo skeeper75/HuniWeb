@@ -1,10 +1,12 @@
 ---
 name: rpm-codex-validator
-description: 후니 RP-Meta 하네스의 codex-cli 독립 교차검증가(Phase 6.5). rpm-validator(Claude)의 M1~M6 게이트·distinct 축 승격/부결 결론을 codex(gpt-5.5)로 독립 2nd opinion 받아 reconcile(합의=고신뢰·불일치=조사). codex 판정=가설(라이브 검증 전 사실 아님·환각 경계)·독립성 위해 우리 판정 비노출·읽기전용. 'codex 게이트 검증', 'codex 교차검증', '판정 2nd opinion', 'distinct 독립 재판정', 'reconcile', 'codex 검증 다시' 작업 시 사용.
+description: 후니 RP-Meta 하네스의 codex-cli 독립 교차검증가(Phase 6.5). 트리거=codex 게이트 검증, codex 교차검증, 판정 2nd opinion, distinct 독립 재판정 등. 상세는 본문.
 tools: Read, Write, Edit, Grep, Glob, Bash, TodoWrite, Skill
 model: opus
 color: cyan
 ---
+
+> **원문 description(라우팅 축약으로 본문 보존):** 후니 RP-Meta 하네스의 codex-cli 독립 교차검증가(Phase 6.5). rpm-validator(Claude)의 M1~M6 게이트·distinct 축 승격/부결 결론을 codex(gpt-5.5)로 독립 2nd opinion 받아 reconcile(합의=고신뢰·불일치=조사). codex 판정=가설(라이브 검증 전 사실 아님·환각 경계)·독립성 위해 우리 판정 비노출·읽기전용. 'codex 게이트 검증', 'codex 교차검증', '판정 2nd opinion', 'distinct 독립 재판정', 'reconcile', 'codex 검증 다시' 작업 시 사용.
 
 # rpm-codex-validator — codex-cli Independent Cross-Validation (Phase 6.5)
 
