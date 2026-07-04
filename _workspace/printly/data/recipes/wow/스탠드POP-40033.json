@@ -1,0 +1,98 @@
+{
+  "_note": "와우 매장용품 레시피(동형 전파 6). ★후니 대응 없는 와우-단독 상품(비대칭 케이스). 카페 DISPLAY(메뉴판) GAP를 부분 대체. 진열대=매장용품(프린트허브 3번째 축). 라이브 devshop 재확인(2026-07-05).",
+  "product": {
+    "node_id": "wow-product-40033",
+    "anchor": "catalog:products/40033.json#raw.prod_info",
+    "prodno": "40033",
+    "name": "스탠드POP",
+    "brand": "wowpress",
+    "selType": "M", "pjoin": "0", "unit": "매",
+    "product_group": "매장용품",
+    "useCases": ["매장 탁상 게시", "삼각 테이블POP"],
+    "live_verified": "devshop /prodt/40033 · 2026-07-05 · 규격·재질·코팅 catalog 일치"
+  },
+  "recipe": {
+    "재료": {
+      "material": [
+        { "ref": "paper:20423", "label": "스노우지 300g", "gram": 300, "source": "catalog:products/40033.json#raw.prod_info.paperinfo", "badge": "verified" }
+      ],
+      "size": [
+        { "ref": "size:10663", "label": "삼각A(가로형)", "w": 306, "h": 138, "source": "#sizeinfo", "badge": "verified" },
+        { "ref": "size:5700", "label": "삼각A(세로형)", "w": 421, "h": 93, "source": "#sizeinfo" },
+        { "ref": "size:10664", "label": "삼각B(가로형)", "w": 306, "h": 138, "source": "#sizeinfo" },
+        { "ref": "size:5701", "label": "삼각B(세로형)", "w": 421, "h": 93, "source": "#sizeinfo" }
+      ],
+      "print_method": [
+        { "ref": "prsjob:3120", "label": "합판디지털인쇄", "jobpresetno": 3120, "method_family": "합판디지털", "source": "#prsjobinfo", "badge": "verified" }
+      ],
+      "color": [
+        { "ref": "color:255", "label": "단면 칼라4도", "req_prsjob": 3120, "source": "#colorinfo", "badge": "verified" }
+      ]
+    },
+    "공정": {
+      "_note": "후가공 1종 = 유광코팅. 삼각 세움 구조는 재단/접지(형태).",
+      "processes": [
+        { "group": "코팅", "n": 1, "red_layer": "Coat", "example": "유광코팅", "source": "catalog:products/40033.json#raw.prod_info.awkjobinfo" }
+      ]
+    },
+    "가격구성요소": {
+      "_note": "와우 가격=jobcost 단일 권위. 값=엔진.",
+      "engine": "jobcost", "endpoint": "POST /std/prod/jobcost", "output_field": "ordcost_bill",
+      "components": [
+        { "ref": "price_prsjob", "label": "인쇄비", "calc_class": "구성(규격·수량)", "source": "wowpress-api:6.4#ordcost_base.base_price.price_prsjob", "value": "엔진(jobcost)" }
+      ],
+      "live_price_samples": {
+        "_note": "엔진 관측값(devshop·2026-07-05). 수량=진열 단위(2~60매·소량).",
+        "spec": "삼각A(가로형) · 스노우지300g · 단면4도 · 합판디지털 · 유광코팅 · 1건",
+        "samples": [
+          { "qty": 2, "ordcost_sup": 5800, "ordcost_bill": 6380 },
+          { "qty": 30, "ordcost_sup": 31800, "ordcost_bill": 34980 },
+          { "qty": 60, "ordcost_sup": 51000, "ordcost_bill": 56100 }
+        ]
+      }
+    },
+    "옵션": {
+      "option_groups": [
+        { "ref": "opt:size", "label": "규격(삼각형)", "sel_typ": "단일", "mand": "Y", "n": 4, "source": "#sizeinfo" },
+        { "ref": "opt:coating", "label": "유광코팅", "sel_typ": "단일", "mand": "N", "n": 1, "source": "#awkjobinfo" },
+        { "ref": "opt:ordqty", "label": "수량", "sel_typ": "단일", "mand": "Y", "range": "2~60(진열 단위)", "source": "#ordqty" }
+      ]
+    },
+    "제약": {
+      "constraints": [
+        { "ref": "req_prsjob:color→3120", "label": "단면4도=합판디지털인쇄 필수", "cn_type": "CN-3", "source": "catalog:products/40033.json#raw.prod_info.colorinfo[].req_prsjob" }
+      ]
+    },
+    "생산가능성": {
+      "_note": "삼각 세움 구조(접지/조립). 재단 복잡도 낮음.",
+      "file_conditions": ["catalog:#raw.prod_info.filetype", "삼각 접지선/조립 = 다음 스텝"],
+      "cut_complexity": { "applies": "N", "note": "삼각 재단·접지(형태 고정)", "value": "엔진" },
+      "device_capability": "합판디지털 + 코팅 + 삼각 성형 — 다음 스텝(벤더 장비)"
+    }
+  },
+  "상위개념_연결": {
+    "instance_of": {
+      "product": "UPPER_ProductConcept (U-1)", "size": "UPPER_DimensionSpec (U-3)",
+      "print_method": "UPPER_PrintMethodIntent (U-4·디지털)", "color": "UPPER_ColorSpec (U-5)",
+      "material": "UPPER_MediaClass (U-6)", "coating": "UPPER_FinishingOp (U-8·Coat)",
+      "jobcost": "UPPER_QuoteFunction (U-18)", "family": "UPPER_ProductFamily (U-20·매장용품/POP)"
+    }
+  },
+  "후니_교차": {
+    "_note": "★비대칭 케이스: 후니 KB에 대응 상품 없음(테이블텐트/삼각POP/메뉴판 미보유). family-alignment A-* 무해당. wow-only 매장용품.",
+    "same_family_as": {
+      "family": "매장용품/탁상POP (GAP · 후니 미대응)",
+      "huni_products": [],
+      "gap": "후니 KB에 테이블텐트·삼각POP·메뉴판 상품군 부재. ★카페 DISPLAY(메뉴판) GAP-MENU는 후니·와우 연결 벤더 공통(프린트허브엔 메뉴판 有나 미연결 벤더). 스탠드POP=탁상 게시 부분 대체.",
+      "wow_anchor": "catalog:products/40033.json · 프린트허브 진열대=매장용품"
+    },
+    "recommendation_implication": "카페 '매장 탁상 게시' 니즈에 연결 벤더 중 와우만 보유 → 이 상품군은 와우 강제(point 1 연결-앵커·비대칭 케이스). 메뉴판 전용은 여전히 GAP(양 벤더)."
+  },
+  "인쇄소_연결": { "produced_by": ["wowpress"], "printshop_ref": "printshops/wow.json", "handoff": "주문=와우 API·생산=와우(다음 스텝)" },
+  "meta": {
+    "badge": "verified", "status": "filled",
+    "sources": ["catalog:products/40033.json(2025-10-14)", "devshop 라이브(2026-07-05)", "smb-product-taxonomy(매장용품 진열대)"],
+    "pilot": "매장용품(삼각POP) · ★와우-단독(후니 미대응) 비대칭 케이스 · GAP-MENU 부분 대체",
+    "updated": "2026-07-05"
+  }
+}

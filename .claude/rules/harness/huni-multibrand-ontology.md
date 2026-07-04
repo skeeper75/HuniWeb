@@ -28,7 +28,7 @@ paths:
   라이브(gstack 읽기전용) 재확인. **생성≠검증**·search-before-mint(§33 스키마·표준 이름표 재사용 우선).
 - **codex 폴백**(전 하네스 공통 프로토콜 ⑤): 필요 시 verify-gate가 codex 독립 교차, 미가용 시 "Claude 단독" 명시.
 
-변경이력: 최신은 `_workspace/huni-multibrand-ontology/_meta/CHANGELOG.md`(이 파일은 최신 1줄 포인터만). 최신(2026-07-04): Phase 1~5 완주(MB 게이트 GO)·아키텍처=독립 후 통합 확정·북극성 재정의(원자 의미→추천→가격→인쇄소 라우팅)·구조 리서치(후니 방식 정통 검증·과공학 기각)·라우팅 층 E22~E25 설계·검증(GO 7/7·전 노드 GAP).
+변경이력: 최신은 `_workspace/huni-multibrand-ontology/_meta/CHANGELOG.md`(이 파일은 최신 1줄 포인터만). 최신(2026-07-05): 와우프레스 전 상품 온톨로지 등록(`04_wow-registration/`·catalog 324상품 결정론 전사·구성요소 dedup[인쇄방식12백본·재질504·규격919·후가공474]+used_by 공유맥락+제약그래프)·gstack browse 라이브대조(292 vs 326·신규4)·아키텍처=후니 권위 최상→나머지 전환·Printly 어댑터 브로커.
 
 > 전문 원천: `docs/wowpress/`(OPEN API 문서·products_spec·price_order_spec PDF·catalog JSON 326상품).
 > 후니 온톨로지 스키마 승계 원천: `_workspace/huni-ontology-kb/02_ontology/ontology-schema.md`(개체17·관계19·출처5필드·badge4).

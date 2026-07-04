@@ -19,6 +19,22 @@
     "note": "생산 능력(장비·후가공 커버) = §35 production_capability(E23) — 데이터 부재(다음 스텝·G-ROUTE-1)",
     "status": "미준비"
   },
+  "connection": {
+    "status": "connected",
+    "level": "full",
+    "note": "라이브 DB(§33 t_prd_*) + evaluate_price 실호출 실증. 추천 후보 = 연결된 벤더 우선(지니 지시)."
+  },
+  "print_rules": {
+    "_note": "벤더별 인쇄 주문 룰(선언 SPEC). 값 변환=엔진(장비가상화 C3)·온톨로지는 축·룰까지만. 상세 미확보=GAP(webadmin/입고규정 재확인).",
+    "file_formats": "GAP(webadmin 업로드 규정 미추출)",
+    "bleed_mm": "GAP",
+    "safety_mm": "GAP",
+    "color_profile": "GAP(CMYK/별색)",
+    "imposition": "판걸이수 fn_calc_pansu·판형 fn_best_plate(§33 라이브)",
+    "cutline": "도무송/반칼 path(스티커·모양) — C2 커팅 프리플라이트 대상",
+    "upload_spec": "GAP(주문/입고 API 미확인)",
+    "status": "축만 배선·값 GAP(후속 webadmin 재확인)"
+  },
   "handoff": {
     "to": "후니 생산 파이프라인",
     "via": "잡티켓(공정 라우트) — 05_part2-bridge-jobticket.md",

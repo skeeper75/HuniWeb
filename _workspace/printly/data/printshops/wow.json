@@ -8,8 +8,9 @@
     "name": "jobcost API",
     "endpoint": "POST /std/prod/jobcost",
     "output_field": "ordcost_bill",
-    "contract": "전량 configuration(정적 가격표 0)·ordcost_base 내역 은닉",
-    "note": "후니 evaluate_price와 동형 경계(값=서버). ★차이: 로컬 호출 불가·라이브 API 연동 필요(후니는 venv 직접호출)"
+    "contract": "전량 configuration(정적 가격표 0)·ordcost_base 내역 은닉(base_price.price_prsjob/price_awkjob는 노출)",
+    "note": "후니 evaluate_price와 동형 경계(값=서버). ★차이: 로컬 호출 불가·라이브 API 연동 필요(후니는 venv 직접호출)",
+    "verified": "라이브 실호출 실증(2026-07-04·devshop 가격조회 콘솔 /prodt/<prodno>·일반명함40073 양면500=4,510원 등). 접속=.env.local WOWPRESS_SITE_ID/PW. 가격조회=읽기(주문·결제 아님)"
   },
   "data_source": {
     "catalog": "docs/wowpress/catalog/ (326 products JSON · 2025-10-14 수집)",
@@ -25,6 +26,22 @@
   "brand_link": {
     "instance_of": "와우 노드 → 상위 개념(§35 upper-ontology-schema §4 · U-1~U-22)",
     "same_family_as": "같은 상품군 → 후니 (§35 02_crossbrand/family-alignment.md · 16쌍)"
+  },
+  "connection": {
+    "status": "connected",
+    "level": "price_api",
+    "note": "jobcost 가격조회 API 실호출 실증(devshop). 주문 API(POST /std/prod)=미실증. 추천 후보=연결 벤더 우선(지니 지시)."
+  },
+  "print_rules": {
+    "_note": "벤더별 인쇄 주문 룰(선언 SPEC). 상품별 filetype는 catalog에 실재(앵커). 나머지=order/products spec PDF·GAP.",
+    "file_formats": "상품별 raw.prod_info.filetype (예 40073=AI,EPS,JPG,PNG,CDR,PSD,SIT,ZIP,ALZ,PDF)",
+    "file_formats_anchor": "catalog:products/<id>.json#raw.prod_info.filetype",
+    "bleed_mm": "GAP(products_spec PDF 재확인)",
+    "color_profile": "GAP",
+    "imposition": "pjoin(0독판/9합판/1별도) — 상품 속성",
+    "cutline": "도무송/모양 상품 — C2 대상",
+    "upload_spec": "주문 API=wowpress-api:6.5 주문하기·price_order_spec PDF(미전개·GAP-PRICE-1 인접)",
+    "status": "filetype 앵커 有·나머지 GAP"
   },
   "handoff": { "status": "다음 스텝(생산=와우 소유)" },
   "meta": { "badge": "candidate", "sources": ["§35 01_analysis · 02_crossbrand", "docs/wowpress"], "updated": "2026-07-04" }

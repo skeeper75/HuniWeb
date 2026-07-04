@@ -1,0 +1,120 @@
+{
+  "_note": "와우 전단 레시피(동형 전파 4). 6부류·와우 catalog 앵커·상위개념·후니 same_family_as·jobcost 경계. ★인쇄방식 2종(독판옵셋/독판UV)=손님 선택 축·수량 자유입력(대량). 라이브 devshop 재확인(2026-07-05).",
+  "product": {
+    "node_id": "wow-product-40054",
+    "anchor": "catalog:products/40054.json#raw.prod_info",
+    "prodno": "40054",
+    "name": "독판전단",
+    "brand": "wowpress",
+    "selType": "M", "pjoin": "1", "unit": "매",
+    "useCases": ["flyer", "poster"],
+    "live_verified": "devshop /prodt/40054 · 2026-07-05 · 규격·인쇄방식·도수 catalog 일치"
+  },
+  "recipe": {
+    "재료": {
+      "material": [
+        { "ref": "paper:20415", "label": "스노우지 100g", "gram": 100, "source": "catalog:products/40054.json#raw.prod_info.paperinfo", "badge": "verified" },
+        { "ref": "paper:20417", "label": "스노우지 150g", "gram": 150, "source": "#paperinfo", "badge": "verified" },
+        { "ref": "paper:20077", "label": "랑데뷰 105g", "gram": 105, "source": "#paperinfo" },
+        { "_note": "재질 74종(랑데뷰·스노우지·아트지 등 평량 다양) — #paperinfo 전체" }
+      ],
+      "size": [
+        { "ref": "size:5437", "label": "16절(B5)", "w": 183, "h": 258, "source": "#sizeinfo", "badge": "verified" },
+        { "ref": "size:5436", "label": "8절(B4)", "w": 258, "h": 368, "source": "#sizeinfo" },
+        { "ref": "size:5430", "label": "A3(국4절)", "w": 297, "h": 420, "source": "#sizeinfo" },
+        { "_note": "규격 18종(절·A·B 대형~소형·비규격 자유입력) — #sizeinfo 전체" }
+      ],
+      "print_method": [
+        { "ref": "prsjob:3210", "label": "독판옵셋인쇄", "jobpresetno": 3210, "method_family": "독판옵셋", "source": "#prsjobinfo", "badge": "verified" },
+        { "ref": "prsjob:3230", "label": "독판UV인쇄", "jobpresetno": 3230, "method_family": "독판UV", "source": "#prsjobinfo", "badge": "verified", "note": "★인쇄방식이 손님 선택 축(명함/엽서=단일과 다름)" }
+      ],
+      "color": [
+        { "ref": "color:238", "label": "칼라4도", "req_prsjob": "3210 or 3230", "source": "#colorinfo", "badge": "verified" },
+        { "ref": "color:237", "label": "먹1도", "source": "#colorinfo" },
+        { "ref": "color:242", "label": "별색1도", "source": "#colorinfo" },
+        { "_note": "도수 14종(칼라4도·먹1도·금/은/별색1도·베다 등) — #colorinfo 전체·전/후면 도수 슬롯" }
+      ]
+    },
+    "공정": {
+      "_note": "후가공 139종. 그룹 요약.",
+      "processes": [
+        { "group": "오시", "n": 10, "red_layer": "Crease", "source": "catalog:products/40054.json#raw.prod_info.awkjobinfo" },
+        { "group": "미싱", "n": 8, "red_layer": "Perforation", "source": "#awkjobinfo" },
+        { "group": "타공", "n": 18, "red_layer": "Drill", "source": "#awkjobinfo" },
+        { "group": "박(금/은/기타)", "n": 72, "red_layer": "Foil", "source": "#awkjobinfo" },
+        { "group": "코팅", "n": 8, "red_layer": "Coat", "source": "#awkjobinfo" },
+        { "group": "재단", "n": 9, "red_layer": "Cut", "source": "#awkjobinfo" },
+        { "group": "기타", "n": 14, "red_layer": "Misc", "source": "#awkjobinfo" }
+      ]
+    },
+    "가격구성요소": {
+      "_note": "와우 가격=jobcost 단일 권위. 값=엔진.",
+      "engine": "jobcost", "endpoint": "POST /std/prod/jobcost", "output_field": "ordcost_bill",
+      "components": [
+        { "ref": "price_prsjob", "label": "인쇄비", "calc_class": "구성(규격·재질·도수·인쇄방식·수량)", "source": "wowpress-api:6.4#ordcost_base.base_price.price_prsjob", "value": "엔진(jobcost)" },
+        { "ref": "price_awkjob", "label": "후가공비", "calc_class": "후가공 선택별", "source": "#price_awkjob", "value": "엔진(jobcost)" }
+      ],
+      "live_price_samples": {
+        "_note": "엔진 관측값(devshop·2026-07-05). 수량=자유입력(대량 전단).",
+        "spec": "16절(B5) · 칼라4도 · 스노우지150g · 독판옵셋 · 1건",
+        "samples": [
+          { "qty": 1000, "ordcost_sup": 75420, "ordcost_bill": 82962 },
+          { "qty": 2000, "ordcost_sup": 92870, "ordcost_bill": 102157 }
+        ]
+      }
+    },
+    "옵션": {
+      "option_groups": [
+        { "ref": "opt:size", "label": "규격", "sel_typ": "단일", "mand": "Y", "n": 18, "source": "#sizeinfo" },
+        { "ref": "opt:print_method", "label": "인쇄방식", "sel_typ": "단일", "mand": "Y", "n": 2, "source": "#prsjobinfo", "note": "옵셋/UV 선택 축" },
+        { "ref": "opt:color", "label": "도수", "sel_typ": "단일", "mand": "Y", "n": 14, "source": "#colorinfo" },
+        { "ref": "opt:paper", "label": "재질", "sel_typ": "단일", "mand": "Y", "n": 74, "source": "#paperinfo" },
+        { "ref": "opt:awkjob", "label": "후가공", "sel_typ": "다중", "mand": "N", "n": 139, "source": "#awkjobinfo" },
+        { "ref": "opt:ordqty", "label": "수량", "sel_typ": "자유입력", "mand": "Y", "source": "#ordqty", "note": "input 방식(대량)" }
+      ]
+    },
+    "제약": {
+      "constraints": [
+        { "ref": "req_prsjob:color", "label": "각 도수는 옵셋 or UV 인쇄방식 필수(req_prsjob)", "cn_type": "CN-3", "source": "catalog:products/40054.json#raw.prod_info.colorinfo[].req_prsjob" }
+      ]
+    },
+    "생산가능성": {
+      "_note": "전단=사각 재단(칼선 복잡도 없음). 대량 인쇄.",
+      "file_conditions": ["catalog:#raw.prod_info.filetype", "재단여백/해상도 = 다음 스텝"],
+      "cut_complexity": { "applies": "N", "note": "전단=사각 재단", "value": "엔진" },
+      "device_capability": "독판 옵셋/UV 라인 — 다음 스텝(벤더 장비)"
+    }
+  },
+  "상위개념_연결": {
+    "instance_of": {
+      "product": "UPPER_ProductConcept (U-1)", "size": "UPPER_DimensionSpec (U-3)",
+      "print_method": "UPPER_PrintMethodIntent (U-4·옵셋/UV 2종)", "color": "UPPER_ColorSpec (U-5)",
+      "material": "UPPER_MediaClass (U-6)", "awkjob": "UPPER_FinishingOp (U-8)",
+      "jobcost": "UPPER_QuoteFunction (U-18)", "family": "UPPER_ProductFamily (U-20·전단)"
+    }
+  },
+  "후니_교차": {
+    "_note": "§35 family-alignment A-7(전단·partial: 후니=소량 1상품·와우=독판/UV 폭넓음).",
+    "same_family_as": {
+      "family": "전단 (A-7 · partial)",
+      "huni_products": [
+        { "prd_cd": "PRD_000047", "name": "소량전단지", "node_id": "product-047", "match": "primary" }
+      ],
+      "huni_anchor": "t_prd_products/PRD_000047 · formula-PRF_DGP_D",
+      "wow_anchor": "catalog:products/40054.json",
+      "asymmetry": "후니=소량 1상품 vs 와우=독판/UV·74재질·14도수 폭넓음(component_differs 강)"
+    },
+    "price_model_differs": {
+      "huni": { "engine": "evaluate_price", "note": "소량전단=PRF_DGP_D" },
+      "wow": { "engine": "jobcost", "sample": "16절 칼라4도 스노우지150g 1000매=82,962원" },
+      "note": "와우=대량 독판(수량 자유입력)·후니=소량 → 수량대역 상이로 직접 대조 주의"
+    }
+  },
+  "인쇄소_연결": { "produced_by": ["wowpress"], "printshop_ref": "printshops/wow.json", "handoff": "주문=와우 API·생산=와우(다음 스텝)" },
+  "meta": {
+    "badge": "verified", "status": "filled",
+    "sources": ["catalog:products/40054.json(2025-10-14)", "devshop 라이브(2026-07-05)", "§35 crossbrand A-7"],
+    "pilot": "A-7 전단 · 후니 소량전단지(PRD_000047) 대응 · ★인쇄방식 선택축(옵셋/UV) 실증",
+    "updated": "2026-07-05"
+  }
+}

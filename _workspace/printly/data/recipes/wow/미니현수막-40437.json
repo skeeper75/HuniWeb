@@ -1,0 +1,107 @@
+{
+  "_note": "와우 현수막 레시피(동형 전파 5). 6부류·와우 catalog 앵커·상위개념·후니 same_family_as·jobcost 경계. ★대형출력(현수막천·개 단위·아일렛/미싱 마감). 라이브 devshop 재확인(2026-07-05).",
+  "product": {
+    "node_id": "wow-product-40437",
+    "anchor": "catalog:products/40437.json#raw.prod_info",
+    "prodno": "40437",
+    "name": "미니현수막",
+    "brand": "wowpress",
+    "selType": "M", "pjoin": "9", "unit": "개",
+    "useCases": ["banner", "large-format"],
+    "live_verified": "devshop /prodt/40437 · 2026-07-05 · 규격·재질·마감 catalog 일치"
+  },
+  "recipe": {
+    "재료": {
+      "material": [
+        { "ref": "paper:20848", "label": "현수막천 150denier", "group": "현수막천", "source": "catalog:products/40437.json#raw.prod_info.paperinfo", "badge": "verified", "note": "대형출력 소재(종이 아님)" }
+      ],
+      "size": [
+        { "ref": "size:10209", "label": "기본형 900x900", "w": 900, "h": 900, "source": "#sizeinfo", "badge": "verified" },
+        { "ref": "size:10208", "label": "핸디형 700x200", "w": 700, "h": 200, "source": "#sizeinfo" },
+        { "ref": "size:10210", "label": "행사용 1400x1800", "w": 1400, "h": 1800, "source": "#sizeinfo" },
+        { "ref": "size:10211", "label": "행사용 2000x1300", "w": 2000, "h": 1300, "source": "#sizeinfo" },
+        { "ref": "size:5666", "label": "비규격", "nonstd": true, "source": "#sizeinfo", "note": "대형=면적(가로×세로) 과금" }
+      ],
+      "print_method": [
+        { "ref": "prsjob:live", "label": "대형출력(실사)", "source": "devshop #prsjobinfo", "badge": "verified", "note": "현수막=실사출력·판형/합판 개념 대신 면적" }
+      ],
+      "color": [
+        { "ref": "color:live", "label": "단면 칼라", "source": "devshop #colorinfo", "badge": "verified" }
+      ]
+    },
+    "공정": {
+      "_note": "후가공 15종 = 현수막 마감(미싱 hemming·열재단·아일렛 hole). 대형출력 특화.",
+      "processes": [
+        { "group": "현수막 미싱(사방/상하/좌우)", "n": 3, "red_layer": "Hem", "source": "catalog:products/40437.json#raw.prod_info.awkjobinfo" },
+        { "group": "현수막 열재단(사방/상하/좌우)", "n": 3, "red_layer": "HeatCut", "source": "#awkjobinfo" },
+        { "group": "아일렛(고리)", "n": 9, "red_layer": "Eyelet", "source": "#awkjobinfo", "note": "걸이용 구멍" }
+      ]
+    },
+    "가격구성요소": {
+      "_note": "와우 가격=jobcost 단일 권위. 값=엔진. 대형=면적(가로×세로) 기반.",
+      "engine": "jobcost", "endpoint": "POST /std/prod/jobcost", "output_field": "ordcost_bill",
+      "components": [
+        { "ref": "price_prsjob", "label": "출력비", "calc_class": "면적(가로×세로)", "source": "wowpress-api:6.4#ordcost_base.base_price.price_prsjob", "value": "엔진(jobcost)" },
+        { "ref": "price_awkjob", "label": "마감비", "calc_class": "미싱/열재단/아일렛", "source": "#price_awkjob", "value": "엔진(jobcost)" }
+      ],
+      "live_price_samples": {
+        "_note": "엔진 관측값(devshop·2026-07-05). 단면·현수막천·1개. 크기(면적)에 따라 가격.",
+        "spec": "단면 · 현수막천150denier · 1건",
+        "samples": [
+          { "size": "기본형 900x900", "qty": 1, "ordcost_sup": 6700, "ordcost_bill": 7370 },
+          { "size": "행사용 1400x1800", "qty": 1, "ordcost_sup": 15600, "ordcost_bill": 17160 }
+        ]
+      }
+    },
+    "옵션": {
+      "option_groups": [
+        { "ref": "opt:size", "label": "규격(면적)", "sel_typ": "단일", "mand": "Y", "n": 6, "source": "#sizeinfo" },
+        { "ref": "opt:awkjob", "label": "마감(미싱/열재단/아일렛)", "sel_typ": "다중", "mand": "N", "n": 15, "source": "#awkjobinfo" },
+        { "ref": "opt:ordqty", "label": "수량(개)", "sel_typ": "단일", "mand": "Y", "source": "#ordqty" }
+      ]
+    },
+    "제약": {
+      "constraints": [
+        { "ref": "size_area", "label": "대형=면적(가로×세로) 과금·비규격 W×H 입력", "cn_type": "CN-5(범위/증분)", "source": "catalog:products/40437.json#raw.prod_info.sizeinfo" }
+      ]
+    },
+    "생산가능성": {
+      "_note": "현수막=대형 실사출력·아일렛 마감. 재단 복잡도 낮음(사각).",
+      "file_conditions": ["catalog:#raw.prod_info.filetype", "대형 해상도(저dpi 허용)·컬러 = 다음 스텝"],
+      "cut_complexity": { "applies": "N", "note": "현수막=사각·아일렛(구멍)", "value": "엔진" },
+      "device_capability": "대형 실사출력기(현수막천) — 다음 스텝(벤더 장비)"
+    }
+  },
+  "상위개념_연결": {
+    "instance_of": {
+      "product": "UPPER_ProductConcept (U-1)", "size": "UPPER_DimensionSpec (U-3·면적)",
+      "print_method": "UPPER_PrintMethodIntent (U-4·실사)", "material": "UPPER_MediaClass (U-6·현수막천)",
+      "awkjob": "UPPER_FinishingOp (U-8·Hem/Eyelet)", "jobcost": "UPPER_QuoteFunction (U-18)",
+      "family": "UPPER_ProductFamily (U-20·사인/현수막)"
+    }
+  },
+  "후니_교차": {
+    "_note": "§35 family-alignment A-4(사인·실사/대형출력·strong).",
+    "same_family_as": {
+      "family": "사인·실사 (A-4 · strong)",
+      "huni_products": [
+        { "prd_cd": "PRD_000138", "name": "일반현수막", "node_id": "product-138", "match": "primary" },
+        { "prd_cd": "PRD_000145", "name": "미니배너" }
+      ],
+      "huni_anchor": "t_prd_products/PRD_000138 · formula-PRF_POSTER_*(면적매트릭스)",
+      "wow_anchor": "catalog:products/40437.json"
+    },
+    "price_model_differs": {
+      "huni": { "engine": "evaluate_price", "note": "현수막=면적매트릭스(PRF_POSTER_*)" },
+      "wow": { "engine": "jobcost", "sample": "기본형900x900 단면 1개=7,370원·행사용1400x1800=17,160원" },
+      "note": "양쪽 면적 기반 가격(동형 계산 클래스). 후니 면적매트릭스 ↔ 와우 jobcost 면적 = 상위개념 UPPER_PriceModel 정렬 가능."
+    }
+  },
+  "인쇄소_연결": { "produced_by": ["wowpress"], "printshop_ref": "printshops/wow.json", "handoff": "주문=와우 API·생산=와우(다음 스텝)" },
+  "meta": {
+    "badge": "verified", "status": "filled",
+    "sources": ["catalog:products/40437.json(2025-10-14)", "devshop 라이브(2026-07-05)", "§35 crossbrand A-4"],
+    "pilot": "A-4 사인/실사 · 후니 일반현수막(PRD_000138) 대응 · ★면적기반 가격 양브랜드 동형",
+    "updated": "2026-07-05"
+  }
+}

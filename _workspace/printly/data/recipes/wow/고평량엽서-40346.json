@@ -1,0 +1,114 @@
+{
+  "_note": "와우 엽서 레시피(동형 전파 3). 6부류·와우 catalog 앵커·상위개념·후니 same_family_as·jobcost 경계. ★인쇄방식=합판디지털(명함=옵셋과 다름). 라이브 devshop 재확인(2026-07-04·재질 라이브가 catalog보다 풍부).",
+  "product": {
+    "node_id": "wow-product-40346",
+    "anchor": "catalog:products/40346.json#raw.prod_info",
+    "prodno": "40346",
+    "name": "고평량엽서",
+    "brand": "wowpress",
+    "selType": "M", "pjoin": "0", "unit": "매",
+    "useCases": ["stationery"],
+    "live_verified": "devshop /prodt/40346 · 2026-07-04 · ★재질 라이브 목록이 catalog보다 풍부(띤또레또순백 등)·라이브 권위"
+  },
+  "recipe": {
+    "재료": {
+      "material": [
+        { "ref": "paper:22905", "label": "스노우지(무코팅) 300g", "gram": 300, "source": "catalog:products/40346.json#raw.prod_info.paperinfo", "badge": "verified" },
+        { "ref": "paper:22906", "label": "스노우지(무코팅) 400g", "gram": 400, "source": "#paperinfo" },
+        { "ref": "paper:20443", "label": "스타드림(실버) 300g", "gram": 300, "source": "#paperinfo" },
+        { "ref": "paper:20706", "label": "엑스트라누보 350g", "gram": 350, "source": "#paperinfo" },
+        { "ref": "paper:live", "label": "띤또레또순백 300g", "source": "devshop 라이브(catalog 미수록)", "badge": "live-only", "note": "catalog(2025-10-14) 이후 추가·라이브 권위" },
+        { "_note": "재질 catalog 10종 + 라이브 추가분. #paperinfo + devshop." }
+      ],
+      "size": [
+        { "ref": "size:10198", "label": "102x152", "w": 102, "h": 152, "source": "#sizeinfo", "badge": "verified" },
+        { "ref": "size:10199", "label": "127x178", "w": 127, "h": 178, "source": "#sizeinfo" },
+        { "ref": "size:10200", "label": "130x130", "w": 130, "h": 130, "source": "#sizeinfo" }
+      ],
+      "print_method": [
+        { "ref": "prsjob:3120", "label": "합판디지털인쇄", "jobpresetno": 3120, "method_family": "합판디지털", "source": "#prsjobinfo", "badge": "verified", "note": "★명함(옵셋 3110)과 다른 인쇄방식" }
+      ],
+      "color": [
+        { "ref": "color:255", "label": "단면 칼라4도", "req_prsjob": 3120, "source": "#colorinfo", "badge": "verified" },
+        { "ref": "color:256", "label": "양면 칼라8도", "req_prsjob": 3120, "source": "#colorinfo", "badge": "verified" }
+      ]
+    },
+    "공정": {
+      "_note": "후가공 104종. 그룹 요약(명함과 동형 어휘).",
+      "processes": [
+        { "group": "오시", "n": 8, "red_layer": "Crease", "source": "catalog:products/40346.json#raw.prod_info.awkjobinfo" },
+        { "group": "박(금/은/적/청/먹/홀로그램)", "n": 64, "red_layer": "Foil", "source": "#awkjobinfo" },
+        { "group": "타공", "n": 18, "red_layer": "Drill", "source": "#awkjobinfo" },
+        { "group": "형압", "n": 4, "red_layer": "Emboss", "source": "#awkjobinfo" },
+        { "group": "기타", "n": 10, "red_layer": "Misc", "source": "#awkjobinfo" }
+      ]
+    },
+    "가격구성요소": {
+      "_note": "와우 가격=jobcost 단일 권위. 값=엔진.",
+      "engine": "jobcost", "endpoint": "POST /std/prod/jobcost", "output_field": "ordcost_bill",
+      "components": [
+        { "ref": "price_prsjob", "label": "인쇄비", "calc_class": "구성(규격·재질·도수·수량)", "source": "wowpress-api:6.4#ordcost_base.base_price.price_prsjob", "value": "엔진(jobcost)" },
+        { "ref": "price_awkjob", "label": "후가공비", "calc_class": "후가공 선택별", "source": "#price_awkjob", "value": "엔진(jobcost)" }
+      ],
+      "live_price_samples": {
+        "_note": "엔진 관측값(devshop·2026-07-04). ★후니 프리미엄엽서(500=24,378원)보다 와우가 비쌈=명함과 반대 순위(가격순위 상품군마다 뒤집힘).",
+        "spec": "102x152 · 띤또레또순백 300g · 합판디지털 · 1건",
+        "samples": [
+          { "color": "단면 칼라4도", "qty": 500, "ordcost_sup": 25800, "ordcost_bill": 28380 },
+          { "color": "양면 칼라8도", "qty": 500, "ordcost_sup": 29900, "ordcost_bill": 32890 }
+        ]
+      }
+    },
+    "옵션": {
+      "option_groups": [
+        { "ref": "opt:size", "label": "규격", "sel_typ": "단일", "mand": "Y", "n": 4, "source": "#sizeinfo" },
+        { "ref": "opt:paper", "label": "재질", "sel_typ": "단일", "mand": "Y", "n": "10+", "source": "#paperinfo+라이브" },
+        { "ref": "opt:color", "label": "도수", "sel_typ": "단일", "mand": "Y", "n": 2, "source": "#colorinfo" },
+        { "ref": "opt:awkjob", "label": "후가공", "sel_typ": "다중", "mand": "N", "n": 104, "source": "#awkjobinfo" },
+        { "ref": "opt:ordqty", "label": "수량", "sel_typ": "단일", "mand": "Y", "source": "#ordqty" }
+      ]
+    },
+    "제약": {
+      "constraints": [
+        { "ref": "req_prsjob:color→3120", "label": "단면4도·양면8도=합판디지털인쇄(3120) 필수", "cn_type": "CN-3", "source": "catalog:products/40346.json#raw.prod_info.colorinfo[].req_prsjob" }
+      ]
+    },
+    "생산가능성": {
+      "_note": "엽서=사각 재단(칼선 복잡도 없음). 고평량지 특성.",
+      "file_conditions": ["catalog:#raw.prod_info.filetype", "재단여백/해상도 = 다음 스텝"],
+      "cut_complexity": { "applies": "N", "note": "엽서=사각 재단", "value": "엔진" },
+      "device_capability": "합판디지털 라인 — 다음 스텝(벤더 장비)"
+    }
+  },
+  "상위개념_연결": {
+    "instance_of": {
+      "product": "UPPER_ProductConcept (U-1)", "size": "UPPER_DimensionSpec (U-3)",
+      "print_method": "UPPER_PrintMethodIntent (U-4·디지털)", "color": "UPPER_ColorSpec (U-5)",
+      "material": "UPPER_MediaClass (U-6)", "awkjob": "UPPER_FinishingOp (U-8)",
+      "jobcost": "UPPER_QuoteFunction (U-18)", "family": "UPPER_ProductFamily (U-20·엽서)"
+    }
+  },
+  "후니_교차": {
+    "_note": "§35 family-alignment A-3(엽서·strong).",
+    "same_family_as": {
+      "family": "엽서·카드 (A-3 · strong)",
+      "huni_products": [
+        { "prd_cd": "PRD_000016", "name": "프리미엄엽서", "node_id": "product-016", "match": "primary(고평량 엽서)" }
+      ],
+      "huni_anchor": "t_prd_products/PRD_000016 · formula-PRF_DGP_A",
+      "wow_anchor": "catalog:products/40346.json"
+    },
+    "price_model_differs": {
+      "huni": { "engine": "evaluate_price", "sample": "프리미엄엽서 100장=9,424원·500장=24,378원(FORMULA)" },
+      "wow": { "engine": "jobcost", "sample": "고평량엽서 102x152 띤또레또순백300g 단면 500매=28,380원" },
+      "note": "★가격순위 역전: 명함=와우 쌈(4,510<17,500)·엽서=와우 비쌈(28,380>24,378). 상품군마다 순위 다름→나이브 가격비교 위험 재확인(price_basis 정규화 필요)."
+    }
+  },
+  "인쇄소_연결": { "produced_by": ["wowpress"], "printshop_ref": "printshops/wow.json", "handoff": "주문=와우 API·생산=와우(다음 스텝)" },
+  "meta": {
+    "badge": "verified", "status": "filled",
+    "sources": ["catalog:products/40346.json(2025-10-14)", "devshop 라이브(2026-07-04)", "§35 crossbrand A-3"],
+    "pilot": "A-3 엽서 · 후니 프리미엄엽서(PRD_000016) 대응 · ★가격순위 역전 실증",
+    "updated": "2026-07-04"
+  }
+}

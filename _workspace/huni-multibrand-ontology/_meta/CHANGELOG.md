@@ -2,6 +2,15 @@
 
 > 최신이 위(PREPEND). rules 파일(`.claude/rules/harness/huni-multibrand-ontology.md`)의 "변경이력:" 라인은 최신 1줄 포인터만.
 
+## 2026-07-05 — 와우프레스 전 상품 온톨로지 등록 (04_wow-registration)
+
+- **트리거**(지니): Printly=어댑터로 여러 인쇄소 연결·주문·**권위 후니 최상→나머지 전환**. devshop 전 상품군 온톨로지 등록(구성요소·제약으로 상품 구성 요소를 맥락 파악). gstack browse 실접근.
+- **와우 전량 등록**(`04_wow-registration/`·스크립트 `_workspace/printly/data/_scripts/wow_ontology_register.py`): catalog 324상품 결정론 전사 → 구성요소 dedup(재질504·규격919·도수115·**인쇄방식12**·후가공474·부자재32) + `used_by`(공유 맥락) + 제약 그래프(paper.rst_prsjob758·paper.rst_awkjob713·color.req_prsjob484·size.req_w/h105…). 산출=`wow-products.json`·`wow-components.json`·`wow-registration-summary.md`·`README.md`.
+- **맥락 발견**: 인쇄방식 12 백본(합판디지털106·합판옵셋47·합판UV17·독판인디고7…·`30`분류=플레이스홀더 주의)·명함케이스 3종 27~28상품 공유·스노우지250g 31상품·제약이 상품 구성 규칙(도수→인쇄방식 필수).
+- **gstack browse 라이브 대조**: devshop `/maint` 전 `/prodt` 링크 **292 vs catalog 326**·★라이브 신규4(40086 2026캘린더·40617/40618 특수초강접스티커·40625 접착포스터·catalog 부재 GAP-REG-1)·제외3(selType=None). catalog 2025-10-14 노후→의심분 라이브 재확인.
+- **아키텍처 확정**: 후니=권위 최상(정본 §33)·와우/레드=매핑·전환. §35 스키마 정합(E1/E3~6·E18·E12·X-1 instance_of·X-3 same_family_as). 골든 자산·build_graph 미수정(등록은 신규 04 산출).
+- **정합(printly)**: 이 등록 = 프린틀리 와우 파일럿 7종 레시피(`_workspace/printly/data/recipes/wow/`)의 전량 확장본. 추천 3층(06/07/08)·질의검증(crossbrand_query)과 연결.
+
 ## 2026-07-04 — tykimos 추출 + 질의 시뮬레이터 명세
 
 - **tykimos/ontoair·onto-osint 추출**(→ `00_research/structure/tykimos-onto-projects-extraction.md`): Onto-OSINT=후니 형제 아키텍처(Claude·파일 핸드오프·경량 JSON·Neo4j/임베딩 배제)→경량 원칙 외부검증. 추출 개선(엣지 confidence·추론로그)/보완(★근거 N+ 승격 임계=키스톤 게이트·시간태깅 노후/드리프트)/확장(Reasoner 추론규칙·자동 재수집·config 브랜드확장). OntoAir=시각화 도구(RDF/OWL·연구용 비오픈)·아이디어만.

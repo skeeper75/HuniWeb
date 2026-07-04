@@ -1,0 +1,142 @@
+{
+  "_note": "와우프레스 첫 레시피(파일럿). 후니와 같은 6부류 그릇에 와우 앵커(catalog:)로 채움. 값(가격)=jobcost 엔진·지어내기 금지. 상위개념 instance_of + 후니 same_family_as 교차연결. 원천=docs/wowpress/catalog/products/40073.json(2025-10-14) ★라이브 devshop 재확인 완료(2026-07-04).",
+  "product": {
+    "node_id": "wow-product-40073",
+    "anchor": "catalog:products/40073.json#raw.prod_info",
+    "prodno": "40073",
+    "name": "일반명함",
+    "brand": "wowpress",
+    "selType": "M",
+    "pjoin": "0",
+    "unit": "매",
+    "useCases": ["business-card", "corporate-identity"],
+    "live_verified": "devshop.wowpress.co.kr/prodt/40073 · 2026-07-04 · 규격·재질·도수 catalog와 일치 확인(재질명 verbatim)"
+  },
+  "recipe": {
+    "재료": {
+      "material": [
+        { "ref": "paper:22904", "label": "스노우지(무코팅) 250g", "group": "스노우지(무코팅)", "gram": 250, "source": "catalog:products/40073.json#raw.prod_info.paperinfo", "badge": "verified" },
+        { "ref": "paper:22907", "label": "스노우지(무광코팅) 219g", "group": "스노우지(무광코팅)", "gram": 219, "source": "#paperinfo", "badge": "verified" },
+        { "ref": "paper:22908", "label": "스노우지(무광코팅) 250g", "group": "스노우지(무광코팅)", "gram": 250, "source": "#paperinfo", "badge": "verified" }
+      ],
+      "size": [
+        { "ref": "size:5456", "label": "86x52", "w": 86, "h": 52, "nonstd": false, "source": "#sizeinfo", "badge": "verified" },
+        { "ref": "size:5458", "label": "90x50", "w": 90, "h": 50, "nonstd": false, "source": "#sizeinfo", "badge": "verified" },
+        { "ref": "size:7071", "label": "비규격(90x50 이하)", "nonstd": true, "source": "#sizeinfo", "badge": "verified" }
+      ],
+      "print_method": [
+        { "ref": "prsjob:3110", "label": "합판옵셋인쇄", "jobpresetno": 3110, "method_family": "합판옵셋", "source": "#prsjobinfo", "badge": "verified", "note": "pjoin=0이나 인쇄방식=합판옵셋(jobno 3110)" }
+      ],
+      "color": [
+        { "ref": "color:255", "label": "단면 칼라4도", "req_prsjob": 3110, "source": "#colorinfo", "badge": "verified" },
+        { "ref": "color:256", "label": "양면 칼라8도", "req_prsjob": 3110, "source": "#colorinfo", "badge": "verified" }
+      ]
+    },
+    "공정": {
+      "_note": "후가공(awkjobinfo) 114종. 그룹 요약(RED 별색/공정 어휘 매핑). 손님 선택 축이자 가격 후가공비(price_awkjob) 원천.",
+      "processes": [
+        { "group": "오시", "n": 8, "red_layer": "Crease", "example": "오시1줄(가로)/2줄/3줄", "source": "catalog:products/40073.json#raw.prod_info.awkjobinfo" },
+        { "group": "박(금박)", "n": 16, "red_layer": "Foil", "example": "금박무광(앞면) 15mm/30mm/70mm/90mm이하", "source": "#awkjobinfo" },
+        { "group": "박(은박)", "n": 16, "red_layer": "Foil", "source": "#awkjobinfo" },
+        { "group": "박(적박)", "n": 8, "red_layer": "Foil", "source": "#awkjobinfo" },
+        { "group": "박(청박)", "n": 8, "red_layer": "Foil", "source": "#awkjobinfo" },
+        { "group": "박(먹박)", "n": 8, "red_layer": "Foil", "source": "#awkjobinfo" },
+        { "group": "박(홀로그램박)", "n": 8, "red_layer": "Foil", "source": "#awkjobinfo" },
+        { "group": "타공", "n": 18, "red_layer": "Drill", "source": "#awkjobinfo" },
+        { "group": "미싱", "n": 8, "red_layer": "Perforation", "source": "#awkjobinfo" },
+        { "group": "형압", "n": 4, "red_layer": "Emboss", "source": "#awkjobinfo" },
+        { "group": "넘버링", "n": 2, "red_layer": "Numbering", "source": "#awkjobinfo" },
+        { "group": "기타", "n": 10, "red_layer": "Misc", "source": "#awkjobinfo" }
+      ]
+    },
+    "가격구성요소": {
+      "_note": "와우 가격 = jobcost API 단일 권위(정적 가격표 0·전량 configuration). 온톨로지는 축·경계까지만. 값=엔진.",
+      "engine": "jobcost",
+      "endpoint": "POST /std/prod/jobcost (devshop 콘솔=/prodt/40073 가격조회)",
+      "output_field": "ordcost_bill(청구가)",
+      "components": [
+        { "ref": "price_prsjob", "label": "인쇄비", "calc_class": "구성(규격·재질·도수·수량)", "source": "wowpress-api:6.4#ordcost_base.base_price.price_prsjob", "value": "엔진(jobcost)" },
+        { "ref": "price_awkjob", "label": "후가공비", "calc_class": "후가공 선택별", "source": "#price_awkjob", "value": "엔진(jobcost)" },
+        { "ref": "prodadd", "label": "부자재비", "calc_class": "부속 상품 참조", "source": "#raw.prod_info.prodaddinfo", "value": "엔진(jobcost)" }
+      ],
+      "live_price_samples": {
+        "_note": "★엔진 관측값(devshop 실 가격조회·2026-07-04). 지어내기 아님. 그릇엔 축까지만이나, 경계 실증용 샘플 보존(후니 printshop 실증노트와 동형).",
+        "spec": "90x50 · 스노우지(무코팅)250g · 합판옵셋 · 1건",
+        "samples": [
+          { "color": "단면 칼라4도", "qty": 500,  "ordcost_sup": 3100, "ordcost_bill": 3410 },
+          { "color": "양면 칼라8도", "qty": 500,  "ordcost_sup": 4100, "ordcost_bill": 4510 },
+          { "color": "단면 칼라4도", "qty": 1000, "ordcost_sup": 5400, "ordcost_bill": 5940 },
+          { "color": "양면 칼라8도", "qty": 1000, "ordcost_sup": 7900, "ordcost_bill": 8690 }
+        ]
+      }
+    },
+    "옵션": {
+      "_note": "와우 6+2축 중 손님 노출 축 = option group. 규격·재질·도수·후가공은 다옵션, 인쇄방식은 도수에 종속.",
+      "option_groups": [
+        { "ref": "opt:size",      "label": "규격",   "sel_typ": "단일", "mand": "Y", "n": 3,   "source": "#sizeinfo" },
+        { "ref": "opt:paper",     "label": "재질",   "sel_typ": "단일", "mand": "Y", "n": 3,   "source": "#paperinfo" },
+        { "ref": "opt:color",     "label": "도수",   "sel_typ": "단일", "mand": "Y", "n": 2,   "source": "#colorinfo" },
+        { "ref": "opt:awkjob",    "label": "후가공", "sel_typ": "다중", "mand": "N", "n": 114, "source": "#awkjobinfo" },
+        { "ref": "opt:ordqty",    "label": "수량",   "sel_typ": "단일", "mand": "Y", "range": "500~100000", "source": "#ordqty" },
+        { "ref": "opt:ordcnt",    "label": "건수",   "sel_typ": "단일", "mand": "Y", "source": "#coverinfo" }
+      ]
+    },
+    "제약": {
+      "_note": "와우 제약 = 옵션 항목 인라인 req_(필수)·rst_(제약). 온톨로지 constraint(CN-1~6)의 1차 원천.",
+      "constraints": [
+        { "ref": "req_prsjob:color→3110", "label": "단면4도·양면8도 모두 합판옵셋인쇄(3110) 필수", "cn_type": "CN-3(필수동반)", "source": "catalog:products/40073.json#raw.prod_info.colorinfo[].req_prsjob" }
+      ]
+    },
+    "생산가능성": {
+      "_note": "§33에 없는 신규 축. 값=엔진. 그릇엔 축만. 일반명함=도무송 없음(모양명함 40060 계열이 커팅).",
+      "file_conditions": ["허용 파일: AI,EPS,JPG,PNG,CDR,PSD,SIT,ZIP,ALZ,PDF (catalog:#raw.prod_info.filetype)", "재단여백/해상도/컬러프로파일 = 다음 스텝"],
+      "cut_complexity": { "applies": "N", "note": "일반명함=사각 재단(칼선 복잡도 없음). 타공/미싱은 후가공 축(도무송 아님).", "value": "엔진(production_time)" },
+      "device_capability": "합판옵셋 라인 — 다음 스텝(벤더 장비 데이터)"
+    }
+  },
+  "상위개념_연결": {
+    "_note": "브랜드-중립 상위 온톨로지(§35 upper-ontology-schema §4). 각 와우 축 → instance_of → U-*. 후니도 같은 U-*에 걸려 교차 매핑 성립.",
+    "instance_of": {
+      "product":      "UPPER_ProductConcept (U-1)",
+      "size":         "UPPER_DimensionSpec (U-3)",
+      "print_method": "UPPER_PrintMethodIntent (U-4) — wow-prsjob-3110",
+      "color":        "UPPER_ColorSpec (U-5)",
+      "material":     "UPPER_MediaClass (U-6)",
+      "awkjob":       "UPPER_FinishingOp (U-8) · 박=UPPER? Foil · 오시=CreaseScore · 미싱=Perforation",
+      "prodadd":      "UPPER_AccessoryComponent (U-14) — 명함케이스",
+      "req_rst":      "UPPER_CrossAxisConstraint (U-15)",
+      "jobcost":      "UPPER_QuoteFunction (U-18) + UPPER_PriceModel (U-16)",
+      "family":       "UPPER_ProductFamily (U-20) — 명함"
+    }
+  },
+  "후니_교차": {
+    "_note": "§35 family-alignment A-1(명함·strong). same_family_as = 두 브랜드 같은 상품군. 가격 티어 상이 = price_model_differs.",
+    "same_family_as": {
+      "family": "명함 (A-1 · strong)",
+      "huni_products": [
+        { "prd_cd": "PRD_000033", "name": "스탠다드명함", "node_id": "product-033", "match": "primary(일반↔스탠다드)" },
+        { "prd_cd": "PRD_000032", "name": "코팅명함" },
+        { "prd_cd": "PRD_000031", "name": "프리미엄명함" }
+      ],
+      "huni_anchor": "t_prd_products/PRD_000033 · category-CAT_000313 · formula-PRF_NAMECARD_*",
+      "wow_anchor": "catalog:products/40073.json · catalog:categories/cat-e05ae543.json(명함)"
+    },
+    "price_model_differs": {
+      "huni": { "engine": "evaluate_price", "sample": "스탠다드명함 500개 대표사양=17,500원(소매·src=FORMULA)" },
+      "wow":  { "engine": "jobcost", "sample": "일반명함 90x50 양면8도 스노우지250g 500매=4,510원(devshop 도매 API가)" },
+      "note": "★격차 큼=시장 티어 상이(후니 소매 vs 와우 devshop 도매). 스펙 정규화 대조는 후속(후니 auto-pick 사양 미고정)."
+    }
+  },
+  "인쇄소_연결": {
+    "produced_by": ["wowpress"],
+    "printshop_ref": "printshops/wow.json",
+    "handoff": "주문=POST /std/prod (주문요청)·생산=와우 소유(다음 스텝)"
+  },
+  "meta": {
+    "badge": "verified",
+    "status": "filled",
+    "sources": ["catalog:products/40073.json(2025-10-14)", "devshop.wowpress.co.kr 라이브 재확인(2026-07-04)", "§35 01_analysis·02_crossbrand·03_upper_ontology"],
+    "pilot": "family-alignment A-1 명함 · 후니 스탠다드명함(PRD_000033) 대응",
+    "updated": "2026-07-04"
+  }
+}

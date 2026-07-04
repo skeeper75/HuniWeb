@@ -1,0 +1,114 @@
+{
+  "_note": "와우 쿠폰 레시피(동형 전파 7). 카페 RETAIN(재방문/단골) 상품군. 6부류·와우 catalog 앵커·상위개념·후니 same_family_as·jobcost 경계. ★미싱(절취선)=쿠폰 특성. 라이브 devshop 재확인(2026-07-05).",
+  "product": {
+    "node_id": "wow-product-40110",
+    "anchor": "catalog:products/40110.json#raw.prod_info",
+    "prodno": "40110",
+    "name": "쿠폰",
+    "brand": "wowpress",
+    "selType": "M", "pjoin": "0", "unit": "매",
+    "product_group": "명함/쿠폰",
+    "useCases": ["coupon", "loyalty"],
+    "live_verified": "devshop /prodt/40110 · 2026-07-05 · 규격·재질·도수 catalog 일치(명함과 동일 스노우지·옵셋)"
+  },
+  "recipe": {
+    "재료": {
+      "material": [
+        { "ref": "paper:22904", "label": "스노우지(무코팅) 250g", "gram": 250, "source": "catalog:products/40110.json#raw.prod_info.paperinfo", "badge": "verified" },
+        { "ref": "paper:22907", "label": "스노우지(무광코팅) 219g", "gram": 219, "source": "#paperinfo", "badge": "verified" }
+      ],
+      "size": [
+        { "ref": "size:5458", "label": "90x50", "w": 90, "h": 50, "source": "#sizeinfo", "badge": "verified", "note": "명함형 쿠폰" },
+        { "ref": "size:5456", "label": "86x52", "w": 86, "h": 52, "source": "#sizeinfo" },
+        { "ref": "size:5462", "label": "86x104", "w": 86, "h": 104, "source": "#sizeinfo" },
+        { "ref": "size:5463", "label": "90x100", "w": 90, "h": 100, "source": "#sizeinfo" }
+      ],
+      "print_method": [
+        { "ref": "prsjob:3110", "label": "합판옵셋인쇄", "jobpresetno": 3110, "method_family": "합판옵셋", "source": "#prsjobinfo", "badge": "verified" }
+      ],
+      "color": [
+        { "ref": "color:255", "label": "단면 칼라4도", "req_prsjob": 3110, "source": "#colorinfo", "badge": "verified" },
+        { "ref": "color:256", "label": "양면 칼라8도", "req_prsjob": 3110, "source": "#colorinfo", "badge": "verified" }
+      ]
+    },
+    "공정": {
+      "_note": "후가공 112종. ★미싱(절취선)=쿠폰/티켓 특성. 오시·박도.",
+      "processes": [
+        { "group": "미싱(절취선)", "n": 8, "red_layer": "Perforation", "source": "catalog:products/40110.json#raw.prod_info.awkjobinfo", "note": "★쿠폰 뜯는 선(재방문 회수)" },
+        { "group": "오시", "n": 8, "red_layer": "Crease", "source": "#awkjobinfo" },
+        { "group": "박(금/은/적/청/먹/홀로그램)", "n": 64, "red_layer": "Foil", "source": "#awkjobinfo" },
+        { "group": "타공", "n": 18, "red_layer": "Drill", "source": "#awkjobinfo" },
+        { "group": "형압", "n": 4, "red_layer": "Emboss", "source": "#awkjobinfo" },
+        { "group": "기타", "n": 10, "red_layer": "Misc", "source": "#awkjobinfo" }
+      ]
+    },
+    "가격구성요소": {
+      "_note": "와우 가격=jobcost 단일 권위. 값=엔진.",
+      "engine": "jobcost", "endpoint": "POST /std/prod/jobcost", "output_field": "ordcost_bill",
+      "components": [
+        { "ref": "price_prsjob", "label": "인쇄비", "calc_class": "구성(규격·재질·도수·수량)", "source": "wowpress-api:6.4#ordcost_base.base_price.price_prsjob", "value": "엔진(jobcost)" },
+        { "ref": "price_awkjob", "label": "후가공비", "calc_class": "미싱/오시/박 선택별", "source": "#price_awkjob", "value": "엔진(jobcost)" }
+      ],
+      "live_price_samples": {
+        "_note": "엔진 관측값(devshop·2026-07-05). ★단면 500=3,410원=일반명함과 동가(같은 스노우지·옵셋·90x50). 미싱 추가 시 후가공비 별도.",
+        "spec": "90x50 · 스노우지(무코팅)250g · 합판옵셋 · 1건",
+        "samples": [
+          { "color": "단면 칼라4도", "qty": 500, "ordcost_sup": 3100, "ordcost_bill": 3410 },
+          { "color": "양면 칼라8도", "qty": 500, "ordcost_sup": 4000, "ordcost_bill": 4400 }
+        ]
+      }
+    },
+    "옵션": {
+      "option_groups": [
+        { "ref": "opt:size", "label": "규격", "sel_typ": "단일", "mand": "Y", "n": 5, "source": "#sizeinfo" },
+        { "ref": "opt:paper", "label": "재질", "sel_typ": "단일", "mand": "Y", "n": 2, "source": "#paperinfo" },
+        { "ref": "opt:color", "label": "도수", "sel_typ": "단일", "mand": "Y", "n": 2, "source": "#colorinfo" },
+        { "ref": "opt:awkjob", "label": "후가공(미싱·오시·박)", "sel_typ": "다중", "mand": "N", "n": 112, "source": "#awkjobinfo" },
+        { "ref": "opt:ordqty", "label": "수량", "sel_typ": "단일", "mand": "Y", "source": "#ordqty" }
+      ]
+    },
+    "제약": {
+      "constraints": [
+        { "ref": "req_prsjob:color→3110", "label": "단면4도·양면8도=합판옵셋인쇄 필수", "cn_type": "CN-3", "source": "catalog:products/40110.json#raw.prod_info.colorinfo[].req_prsjob" }
+      ]
+    },
+    "생산가능성": {
+      "_note": "쿠폰=사각 재단 + 미싱(절취). 재단 복잡도 낮음.",
+      "file_conditions": ["catalog:#raw.prod_info.filetype", "미싱선 위치 = 파일 지정"],
+      "cut_complexity": { "applies": "N", "note": "사각 재단·미싱(직선 절취)", "value": "엔진" },
+      "device_capability": "합판옵셋 + 미싱 — 다음 스텝(벤더 장비)"
+    }
+  },
+  "상위개념_연결": {
+    "instance_of": {
+      "product": "UPPER_ProductConcept (U-1)", "size": "UPPER_DimensionSpec (U-3)",
+      "print_method": "UPPER_PrintMethodIntent (U-4)", "color": "UPPER_ColorSpec (U-5)",
+      "material": "UPPER_MediaClass (U-6)", "awkjob": "UPPER_FinishingOp (U-8·Perforation/Foil)",
+      "jobcost": "UPPER_QuoteFunction (U-18)", "family": "UPPER_ProductFamily (U-20·쿠폰)"
+    }
+  },
+  "후니_교차": {
+    "_note": "§35 family-alignment A-13(쿠폰·상품권·partial: 와우는 쿠폰/행택 별개·후니 쿠폰/상품권 묶음).",
+    "same_family_as": {
+      "family": "쿠폰·상품권 (A-13 · partial)",
+      "huni_products": [
+        { "prd_cd": "PRD_000041", "name": "스탠다드 쿠폰/상품권", "node_id": "product-041", "match": "primary" },
+        { "prd_cd": "PRD_000042", "name": "프리미엄 쿠폰/상품권" }
+      ],
+      "huni_anchor": "t_prd_products/PRD_000041 · formula-PRF_DGP_A(+박분기)",
+      "wow_anchor": "catalog:products/40110.json · 프린트허브 진열대=명함/쿠폰"
+    },
+    "price_model_differs": {
+      "huni": { "engine": "evaluate_price", "note": "쿠폰/상품권=PRF_DGP_A" },
+      "wow": { "engine": "jobcost", "sample": "쿠폰 90x50 스노우지250g 단면 500매=3,410원(명함과 동가)" },
+      "note": "카페 RETAIN(재방문 도장쿠폰) 상품군. 미싱(절취) 후가공이 쿠폰 회수 특성."
+    }
+  },
+  "인쇄소_연결": { "produced_by": ["wowpress"], "printshop_ref": "printshops/wow.json", "handoff": "주문=와우 API·생산=와우(다음 스텝)" },
+  "meta": {
+    "badge": "verified", "status": "filled",
+    "sources": ["catalog:products/40110.json(2025-10-14)", "devshop 라이브(2026-07-05)", "§35 crossbrand A-13"],
+    "pilot": "A-13 쿠폰·상품권 · 후니 스탠다드쿠폰(PRD_000041) 대응 · ★카페 RETAIN 완성",
+    "updated": "2026-07-05"
+  }
+}

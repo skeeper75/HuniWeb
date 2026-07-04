@@ -1,0 +1,107 @@
+{
+  "_note": "와우 스티커 레시피(동형 전파 2). 6부류·와우 catalog 앵커·상위개념·후니 same_family_as·jobcost 경계. ★칼선 단순 N개=커팅 복잡도(C2) 축이 데이터로 실재. 라이브 devshop 재확인(2026-07-04).",
+  "product": {
+    "node_id": "wow-product-40008",
+    "anchor": "catalog:products/40008.json#raw.prod_info",
+    "prodno": "40008",
+    "name": "가성비스티커(도무송)",
+    "brand": "wowpress",
+    "selType": "M", "pjoin": "0", "unit": "매",
+    "useCases": ["sticker", "label"],
+    "live_verified": "devshop /prodt/40008 · 2026-07-04 · 규격·재질·칼선 옵션 catalog 일치"
+  },
+  "recipe": {
+    "재료": {
+      "material": [
+        { "ref": "paper:22927", "label": "아트지(무코팅) 80g", "gram": 80, "source": "catalog:products/40008.json#raw.prod_info.paperinfo", "badge": "verified" },
+        { "ref": "paper:22930", "label": "아트지(무광코팅) 80g", "gram": 80, "source": "#paperinfo", "badge": "verified" },
+        { "ref": "paper:22932", "label": "아트지(유광코팅) 80g", "gram": 80, "source": "#paperinfo", "badge": "verified" }
+      ],
+      "size": [
+        { "ref": "size:5509", "label": "사각60x40", "w": 60, "h": 40, "source": "#sizeinfo", "badge": "verified" },
+        { "ref": "size:5510", "label": "사각85x40", "w": 85, "h": 40, "source": "#sizeinfo" },
+        { "ref": "size:6066", "label": "비규격", "nonstd": true, "source": "#sizeinfo" },
+        { "_note": "규격 45종(사각 다수·균등·비규격) — catalog:#sizeinfo 전체" }
+      ],
+      "print_method": [
+        { "ref": "prsjob:3110", "label": "합판옵셋인쇄", "jobpresetno": 3110, "method_family": "합판옵셋", "source": "#prsjobinfo", "badge": "verified" }
+      ],
+      "color": [
+        { "ref": "color:302", "label": "단면 칼라", "req_prsjob": 3110, "source": "#colorinfo", "badge": "verified", "note": "스티커=단면만" }
+      ]
+    },
+    "공정": {
+      "_note": "후가공 30종 = 전부 '칼선 단순 N개'(도무송 커팅 수). 커팅 복잡도 축이 옵션으로 실재.",
+      "processes": [
+        { "group": "도무송 커팅", "n": 30, "red_layer": "Cut", "example": "칼선 단순 1개~30개", "source": "catalog:products/40008.json#raw.prod_info.awkjobinfo" }
+      ]
+    },
+    "가격구성요소": {
+      "_note": "와우 가격=jobcost 단일 권위. 값=엔진.",
+      "engine": "jobcost", "endpoint": "POST /std/prod/jobcost", "output_field": "ordcost_bill",
+      "components": [
+        { "ref": "price_prsjob", "label": "인쇄비", "calc_class": "구성(규격·재질·수량)", "source": "wowpress-api:6.4#ordcost_base.base_price.price_prsjob", "value": "엔진(jobcost)" },
+        { "ref": "price_awkjob", "label": "커팅비", "calc_class": "칼선 수", "source": "#price_awkjob", "value": "엔진(jobcost)" }
+      ],
+      "live_price_samples": {
+        "_note": "엔진 관측값(devshop·2026-07-04). ★칼선 1/5/10개 동가=가성비 도무송은 커팅복잡도 가격무관(flat). 정직 기록.",
+        "spec": "사각60x40 · 아트지(무광코팅)80g · 단면 · 합판옵셋 · 1건",
+        "samples": [
+          { "qty": 500, "cutline": "1/5/10개(동가)", "ordcost_sup": 5900, "ordcost_bill": 6490 }
+        ]
+      }
+    },
+    "옵션": {
+      "option_groups": [
+        { "ref": "opt:size", "label": "규격", "sel_typ": "단일", "mand": "Y", "n": 45, "source": "#sizeinfo" },
+        { "ref": "opt:paper", "label": "재질", "sel_typ": "단일", "mand": "Y", "n": 3, "source": "#paperinfo" },
+        { "ref": "opt:cutline", "label": "칼선 수(도무송)", "sel_typ": "단일", "mand": "Y", "n": 30, "source": "#awkjobinfo", "note": "커팅 복잡도 = 생산가능성 축(C2)이 옵션으로" },
+        { "ref": "opt:ordqty", "label": "수량", "sel_typ": "단일", "mand": "Y", "source": "#ordqty" }
+      ]
+    },
+    "제약": {
+      "constraints": [
+        { "ref": "req_prsjob:color→3110", "label": "단면칼라=합판옵셋인쇄 필수", "cn_type": "CN-3", "source": "catalog:products/40008.json#raw.prod_info.colorinfo[].req_prsjob" }
+      ]
+    },
+    "생산가능성": {
+      "_note": "★스티커=커팅 복잡도 축을 정면 exercise. 칼선=도무송 path. C2 커팅 프리플라이트 대상.",
+      "file_conditions": ["catalog:#raw.prod_info.filetype", "칼선 데이터(cutline) = 도무송 경로 파일"],
+      "cut_complexity": { "applies": "Y", "axis": "칼선 수·경로 복잡도", "value": "엔진(production_time·C2)", "live_finding": "가성비 도무송은 칼선 수 가격무관(flat)·복잡도는 생산시간(C1)엔 영향 가능" },
+      "device_capability": "합판옵셋 + 도무송 커팅 — 다음 스텝(벤더 장비)"
+    }
+  },
+  "상위개념_연결": {
+    "instance_of": {
+      "product": "UPPER_ProductConcept (U-1)", "size": "UPPER_DimensionSpec (U-3)",
+      "print_method": "UPPER_PrintMethodIntent (U-4)", "color": "UPPER_ColorSpec (U-5)",
+      "material": "UPPER_MediaClass (U-6)", "cutline": "UPPER_FinishingOp (U-8·Cut) + 생산가능성(C2)",
+      "jobcost": "UPPER_QuoteFunction (U-18)", "family": "UPPER_ProductFamily (U-20·스티커)"
+    }
+  },
+  "후니_교차": {
+    "_note": "§35 family-alignment A-2(스티커·strong).",
+    "same_family_as": {
+      "family": "스티커 (A-2 · strong)",
+      "huni_products": [
+        { "prd_cd": "PRD_000058", "name": "반칼원형스티커", "node_id": "product-058", "match": "primary(도무송/반칼 커팅)" },
+        { "prd_cd": "PRD_000065", "name": "스티커팩" },
+        { "prd_cd": "PRD_000067", "name": "타투스티커" }
+      ],
+      "huni_anchor": "t_prd_products/PRD_000058 · formula-PRF_STK_FIXED/GANGPAN_FIXED",
+      "wow_anchor": "catalog:products/40008.json"
+    },
+    "price_model_differs": {
+      "huni": { "engine": "evaluate_price", "note": "스티커=고정가 by-siz(PRF_STK_FIXED)" },
+      "wow": { "engine": "jobcost", "sample": "사각60x40 아트지무광80g 단면 500매=6,490원" },
+      "note": "양쪽 커팅 축 有(후니 반칼/도무송·와우 칼선 수). 커팅복잡도 가격반영=벤더별 상이(와우 flat)."
+    }
+  },
+  "인쇄소_연결": { "produced_by": ["wowpress"], "printshop_ref": "printshops/wow.json", "handoff": "주문=와우 API·생산=와우(다음 스텝)" },
+  "meta": {
+    "badge": "verified", "status": "filled",
+    "sources": ["catalog:products/40008.json(2025-10-14)", "devshop 라이브(2026-07-04)", "§35 crossbrand A-2"],
+    "pilot": "A-2 스티커 · 후니 반칼원형스티커(PRD_000058) 대응 · ★커팅복잡도 축 실증",
+    "updated": "2026-07-04"
+  }
+}

@@ -1,88 +1,61 @@
-# HANDOFF — 프린틀리(Printly) · 2026-07-04 (2세션)
+# HANDOFF — 프린틀리(Printly) · 2026-07-05 (4세션)
 
-## 다음 시작점 = ★와우프레스를 후니처럼 채우기 (지니 확정)
+## ★다음 시작점 = feasibility 척추 배선 (instance_of)
 
-**지니 지시 = "다음 세션에서 와우프레스를 후니처럼 더 채우도록 정리."** 준비 완료 — 플레이북·와우 인쇄소 그릇 마련.
-1. **`_workspace/printly/data/_WOW-FILL-PLAN.md` 읽기**(다음 세션 시작점) — 와우 원천·후니와 차이(catalog JSON 앵커·6+2축·jobcost API)·채우는 절차 7단계·[HARD] 원칙.
-2. 파일럿 = `§35 02_crossbrand/family-alignment.md` 16쌍 중 후니와 대응되는 상품(권장=명함류·후니 이미 실동).
-3. catalog JSON(`docs/wowpress/catalog/` 326상품) 파싱 스크립트로 6부류 추출 → `data/recipes/wow/` 채움 → 상위 개념 instance_of + 후니 same_family_as 연결 → jobcost 견적.
-4. 완료 판정 = "카페 오픈 홍보물"류에 **후니·와우 견적 나란히**.
+와우 전 상품이 온톨로지에 등록됐다(324상품·구성요소·제약). 이제 **구성요소별 `instance_of` 상위개념 배선**을 놓으면 06/08의 feasibility 필터("옵션 조합으로 어느 벤더가 만들 수 있나")가 실제로 돈다. = 질의 검증의 다음 depth.
 
-**★차이 유의**: 후니 가격=evaluate_price(venv 로컬 호출 실증) · 와우 가격=**jobcost API**(라이브 연동 필요·로컬 호출 불가). 값=엔진 경계는 동형(D-18).
+1. **구성요소 → instance_of → 상위개념(U-3~U-8·U-18)** 배선 — `04_wow-registration/wow-components.json`의 dedup 구성요소(재질504·규격919·도수115·인쇄방식12·후가공474)를 브랜드-중립 상위개념에 건다. 후니 §33 구성요소도 같은 상위개념에.
+2. 그 위에 **feasibility 질의** 데모: "홀로그램박 명함" → 어느 벤더가 그 후가공 보유? (06 하드필터·08 연결-앵커 실증).
+3. 병행 후속: **스펙 정규화**(후니 auto-pick `.first()` 비대표 교정 — 스티커200만·현수막 견적불가·쿠폰28,591 과대) · **라이브 신규4 fetch**(catalog 부재·GAP-REG-1) · **후니 same_family_as 전 상품 정렬**(현재 대표만).
 
-### 후니 진행분 후속(병행 가능)
-- (a) 후니 레시피 실채움(`data/recipes/` 첫 상품=반칼원형스티커·커팅 복잡도) · (b) 견적0 결함(프리미엄명함 031·펄명함 034 미배선) · (c) NL 입력 진입 · (d) PART 2-2 런타임 루프.
+## ★프린틀리 정체·아키텍처 (지니 확정 · relitigate 금지)
 
-**★전반부 파일럿 완료**(`_workspace/printly/pilot/`·커밋 2141d89): `recommendation-layer.json`(선언)+`run_front_half.py`(실엔진 견적)+README. 업종→기능→홍보물→실견적 자동 종단·되묻기 게이트·근거 경로. 실행=`raw/.venv/bin/python _workspace/printly/pilot/run_front_half.py 미용실 100`. ★파일럿이 실 결함 자동 적발(프리미엄명함/펄명함 견적0=로드맵 G-DATA 일치).
+**여러 벤더(후니·와우·레드) 엔진을 연결하는 소상공인 맞춤 AI 인쇄 에이전트(브로커).** = §35 다중브랜드 온톨로지+라우팅 런타임.
+- **권위 서열(★260705 확정)**: **후니=권위 최상**(정본 참조모델 §33) → 와우/레드=후니에 매핑·**전환(fallback)**. 추천도 후니 우선→미보유/미가용 시 타 벤더 전환.
+- **어댑터 브로커**: Printly가 논리파일 1개 + 벤더별 어댑터 소유(파일변환=특허 C3 장비가상화). 벤더 추가=어댑터 1개(선형).
+- 견적=벤더별 엔진(D-18): 후니=evaluate_price(venv 로컬 실증)·와우=jobcost API(devshop 콘솔 실증)·레드=지니 WebToProduct 엔진.
 
-**지니 입력 대기(Step0부터)**: Q5 파일포맷 원천(장비 매뉴얼/후니 실무)·Q6 배송 범위(1차=리드타임 축만)·Q7 엔진 방식(신규 vs 래핑).
+## ★추천 3층 파이프라인 (순서 고정 1→2→3 · 이번 세션 정립)
 
-## ★이번 세션 결정·실증 (relitigate 금지)
+- **1층 왜 이 홍보물**(`07_recommendation-basis.md`): 근거=소진공 분류+AliCoCo 원자기능8+셀별 출처·등급. 지니 확정 기준="출처+신뢰등급 표기로 충분"(verified 단정/candidate 완충/△ 미노출). 근거 두껍게=국내외 4슬라이스 리서치(`research/print-materials-evidence-base-260704.md`·업종8→12+·홍보물9→50+·교차확증). 상품군 축=`research/smb-product-taxonomy-miricanvas-260704.md`(프린트허브 10버킷·3축=업종/원자기능/상품군).
+- **2~3층 어느 회사·가격**(`06_crossvendor-recommendation-design.md`): 4단 필터=**0.연결→1.가능(feasibility)→2.가격/납기→+이유**. 가격 값 온톨로지化 금지(경계+price_basis만). 옵션 충돌=상품 못 쪼갬→명시적 되묻기.
+- **파일·주문**(`08_vendor-anchored-fulfillment-design.md`): 상품가이드→논리파일→벤더어댑터→벤더룰파일→잡티켓 주문. ★지니 확정: Q1 파일변환=하이브리드(프린틀리 논리+어댑터 소유·레드=지니엔진 위임) · Q2 착수=후니 1벤더 end-to-end 먼저.
 
-- **Step 2 결정 확정**: ①마케팅 기능 §33 intent 노드화 승인(신규 개체0) ②recommendation_function 보류(경계 규칙 D-REC만) ③Step3 진행.
-- **★라이브 길찾기 실증(생성≠검증)**: 설계한 관계·제약이 라이브 노드에 그대로 먹힘 + 실엔진 견적(프리미엄엽서 100장=9,424원 등). 사양 담체=evaluate_price `selections` 실계약 동형.
-- **핵심 재사용 발견**: 잡티켓=§35 fulfillment_order(E24)의 런타임 실현(신규 그릇0). §35 G-ROUTE-3 "런타임 접합점"이 곧 이 브릿지.
-- **원칙3 필드 경계**: 잡티켓의 견적·판수·리드타임 3칸=엔진 전용(AI 지어내기 금지). 제약 vs 능력 vs 가격갭 vs 되묻기 층 분리("90만원"=제약 아님).
+## ★이번 세션(4) 산출·실증 (relitigate 금지)
 
-## ★프린틀리 정체 (지니 확정 · relitigate 금지)
+- **와우 파일럿 7종 레시피**(`data/recipes/wow/`): 명함40073(A-1)·스티커40008(A-2)·엽서40346(A-3)·전단40054(A-7)·현수막40437(A-4)·매장용품POP40033(GAP)·쿠폰40110(A-13). 6부류+상위개념+same_family_as+jobcost 라이브 실견적. = **카페 오픈 6기능 교차브랜드 완성**.
+- **질의 검증 데모**(`data/_scripts/crossbrand_query.py`): "카페 오픈"→7상품군 same_family_as 순회→후니 evaluate_price∥와우 jobcost 나란히. ★교차 3케이스 검증: ①양쪽보유=가격대조 ②와우단독(POP)=와우강제(비대칭) ③양벤더GAP=메뉴판.
+- **추천 이유 배선**(`recommendation-layer.json`+`reason_demo.py`): 카페 파일럿 evidence 블록(등급·출처·이유)+products.group(진열대). 업종→기능→홍보물→이유(출처+등급)→진열대→엔진견적 종단.
+- **★와우 전 상품 온톨로지 등록**(`_workspace/huni-multibrand-ontology/04_wow-registration/`): catalog 324상품 결정론 전사·구성요소 dedup(인쇄방식12백본·재질504·규격919·후가공474·부자재32)+used_by(공유맥락)+제약그래프(paper.rst_prsjob758·color.req_prsjob484). gstack browse 라이브대조(292 vs 326·신규4 발견).
+- **실측 발견**: 가격순위 상품군마다 뒤집힘(명함 와우쌈·엽서 후니쌈)→나이브 비교 위험·price_basis 정규화 필요 / 커팅복잡도 축 실재(스티커 칼선N개·가성비 도무송 flat) / 인쇄방식 4종 U-4 포섭 / GAP-MENU=후니·와우 공통.
 
-**후니 내부 시스템이 아니라, 후니프린팅·와우프레스·레드프린팅 등 여러 벤더의 엔진을 연결하는 소상공인 맞춤 AI 인쇄 에이전트(브로커).** = **§35 다중브랜드 온톨로지 + 라우팅 층의 런타임 실현체**.
-- ⑤ 인쇄소 = 벤더/브랜드(후니·와우·레드 = §35 supplier+brand). 라우팅 = 어느 벤더에 주문 넘길지(§35 E22~E25).
-- 견적 = 벤더별 엔진(§35 브랜드별 quote_function·D-18): 후니=evaluate_price·와우=jobcost API·레드=레드 견적+**지니 WebToProduct 엔진**.
-- ①업종②홍보물③사양 = §35 상위 온톨로지(브랜드-중립) → same_family_as 교차 → 벤더별 견적 비교.
+## 미해결 / 블로커
 
-## 5대 원칙 [HARD] (지니 빌드 지침 PART 0)
+- **스펙 정규화 미완**(병목): 후니 auto-pick `.first()`가 면적매트릭스 상품 극단사이즈 선택(비대표). 질의 검증 신뢰도 위해 후니 대표사양 고정 필요.
+- **GAP-REG-1**: 라이브 신규4(40086 2026캘린더·40617/40618 특수초강접스티커·40625 접착포스터) catalog 부재→API/refresh fetch.
+- **catalog 노후**(2025-10-14): 의심분 라이브 재확인(재질 드리프트 실측: 엽서 띤또레또순백 라이브 추가).
+- **견적0 결함**: 프리미엄명함031·펄명함034 미배선(가격 하네스 §13/§27 위임).
+- **§36 정식 하네스화 미정**: 프린틀리 오케스트레이터+에이전트 정식화 여부.
+- **지니 입력 대기**: Q5 파일포맷 원천·Q6 배송 범위·Q7 엔진 방식(신규 vs 래핑).
 
-1. 온톨로지=유일 진실원본(코드 하드코딩 금지·로직=그래프 순회).
-2. 3추론 분리(선언=온톨로지·절차=에이전트·결정론=엔진).
-3. AI는 견적/프리플라이트/파일변환 **판단 금지**(결정론 엔진 호출·LLM 값 추정=버그).
-4. 모든 제안 온톨로지 node_id 근거(지어내기 차단·근거 없으면 미제시).
-5. 소단위 쪼갬·매 단계 지니 확인.
+## 실행 방법 (재사용)
 
-## WebToProduct 이해 (RED 원본 자료 · docs/redprinting/)
-
-- **덱**(`디지털을인쇄생태계를 만드는힘.pdf` 133p·2017): Web-to-Print와 구분한 지니 신조어. 주문→완제품→배송 논스톱 시스템. ★20단계 파이프라인·잡티켓(데이터 계약)·장비별 파일변환 매트릭스·**후가공 공정 축**. → `research/webtoproduct-analysis.md`.
-- **특허**(`20200319_레드프린팅_특허출원.pdf` 5p): ★**지니 본인 발명·등재 = 프린틀리 자산**(경쟁사 제약 아님). 4청구항(전부 결정론 엔진·원칙3 실증): C1 생산시간예측·C2 커팅 프리플라이트·C3 장비 가상화·C4 무센서커팅(하드웨어·범위밖). → `research/patent-analysis.md`.
-
-## 지니 확정 결정 (게이트)
-
-1. Step0 입력 = **기존 §33/§35 정규화 코퍼스 재사용**(백지 X).
-2. 업종 = **§33 intent 축 확장 재사용**(intent_kind=industry).
-3. 홍보물 파일럿 = **마케팅 아키타입 우선**(명함·전단·배너·스티커·메뉴판…).
-4. 리서치 진입 = **전반부(추천→견적) 먼저**.
-
-## 산출 현황 (`_workspace/printly/`)
-
-- `00_step0-concept-normalization.md` — 개념 정규화·게이트 3확정.
-- `01_step1-entities.md` — 엔티티 7종 그릇+속성 + **§1-C(다중벤더 정체·특허 통합)**.
-- `02_front-half-spec.md` — 전반부 흐름(업종→추천→사양→후가공 포함 견적). ★R3=evaluate_price 후가공까지 견적 확인.
-- `03_step2-relations.md` — 전반부 엣지 정형화(신규 0)·마케팅 기능 노드화·추천 랭킹/되묻기 층 분리·§9 지니 확정+라이브 실증.
-- `04_step3-constraints.md` — 제약(§33 E12/R12·CN-1~6·신규 0)·제약 vs 능력/가격갭/되묻기 경계·제약 게이트(엔진 앞단).
-- `05_part2-bridge-jobticket.md` — ★브릿지=잡티켓 데이터 계약(§35 fulfillment_order 재사용)·필드 채움 층 분리·계약 연쇄(C1~C3 엔진)·논리/가상 2층·다중벤더.
-- `_map/master-map.html` — 지도 아티팩트(목적+3지도+지금여기·PART1 완료 반영).
-- **`pilot/`** — 전반부 종단 파일럿: `recommendation-layer.json`(8업종×기능8×홍보물18)·`run_front_half.py`(실엔진 견적+opts 옵션타입)·README. 실행=`raw/.venv/bin/python _workspace/printly/pilot/run_front_half.py 미용실 100`.
-- **`data/`** — 데이터 쌓을 공간(후니 먼저·인쇄소 가기 전까지): `README·SCHEMA`(그릇 3종·레시피 6부류)·`recipes/{_TEMPLATE·_INDEX}`·`printshops/{huni·wow}.json`·**`_WOW-FILL-PLAN.md`**(다음 세션 와우 채우기 플레이북).
-- **`research/red-docs/`** — RED 4문서 정독 5노트+종합(배송여정 16단계·후가공14·조판/커팅 특허·`_SYNTHESIS-delivery-journey.md`).
-- `research/` — industry-classification(업종8·원자기능8)·print-production-standards(CIP4·장비·파일포맷)·delivery-research·**webtoproduct-analysis**(덱)·**patent-analysis**(특허).
-
-## 특허 반영 (Step1 §1-C 통합)
-
-- ⑥ 파일포맷 = **논리/가상 2층 교정**(정적 매트릭스 X·C3 장비 가상화·장비 추가=가상 드라이버 1개).
-- 신규 결정론 엔진: `production_time_function`(C1·리드타임·배송 GAP 해소)·커팅 특화 preflight(C2)·다중주문 imposition 최적화(C1).
-- 라우팅 기준 + production_time·device_capability 축.
-
-## 미해결 / 결정 대기 · 블로커
-
-- **★와우 가격 = jobcost API 연동 방식 미정(블로커)** — 후니는 evaluate_price를 venv 로컬 호출로 실증했으나, 와우는 `POST /std/prod/jobcost` **라이브 API**라 로컬 호출 불가. 실 견적 검증 = API 실호출 vs catalog 캐시 대조 중 택 필요(`_WOW-FILL-PLAN.md` 6단계).
-- **견적 0원 결함** — 파일럿이 적발: 프리미엄명함(PRD_000031)·펄명함(PRD_000034) 미배선(source=FORMULA·final=0). 로드맵 G-DATA 일치. 가격 하네스(§13/§27) 위임.
-- **§36 정식 하네스화 미정** — 프린틀리를 §36 오케스트레이터+에이전트로 정식화할지(harness 스킬 Phase0 감사=시스템 구현/로드맵 오케스트레이터 부재 확인). 로드맵 문서·프린틀리 산출은 하네스 결정 무관 재사용 가능.
-- **PART 3 지니 확정 대기 항목**: 추천 랭킹·되묻기 N 정책·인쇄소(벤더) seed·파일포맷 원천·엔진 인터페이스(견적/프리플라이트/임포지션/생산시간).
-- **R3 실화면 점검** 미실행(구조 정합까지·파일럿 8종 후가공 견적 반영 확인 필요).
-- **레드프린팅** 벤더 연결 = 지니 WebToProduct 엔진 접속(구조는 §35 라우팅·엔진은 지니 특허).
+- **후니 실엔진 견적**: `raw/.venv/bin/python _workspace/printly/data/_scripts/crossbrand_query.py`(교차브랜드) · `reason_demo.py 카페 500`(추천 이유) · `compare_namecard.py`(명함).
+- **와우 라이브 견적(devshop)**: gstack browse → `devshop.wowpress.co.kr/loginform`(`.env.local` WOWPRESS_SITE_ID/PW) → **★click 미제출·press Enter로 제출** → `/maint` → `/prodt/<prodno>` → 옵션 select → "가격조회" → `ordcost_bill`. 읽기(주문·결제 아님).
+- **와우 축 전사**: `wow_extract.py <prodno>` · **전 상품 등록 재현**: `wow_ontology_register.py`.
 
 ## 건드리지 말 것
 
-- §33/§35 골든 자산(읽기 재사용만·수정 금지).
-- 원칙 3 경계: AI/온톨로지가 견적·프리플라이트·시간예측·파일변환을 계산 판단하지 말 것(벤더 엔진 호출까지).
-- 근거 없는 노드·가격·판정 생성 금지(원칙 4).
-- 매 단계 지니 확인 없이 다음 Step 진입 금지(원칙 5·PART 4).
+- §33/§35 골든 자산(읽기 재사용만·수정 금지). §35 build_graph·03_kb 정본.
+- 원칙3 경계: AI/온톨로지가 견적·프리플라이트·파일변환 판단 금지(벤더 엔진 호출까지).
+- 근거 없는 노드·가격·판정 생성 금지(원칙4). 가격 값은 엔진 관측만(지어내기 0).
+- 5대 원칙[HARD]·매 단계 지니 확인(원칙5).
+
+## 5대 원칙 [HARD]
+1. 온톨로지=유일 진실원본(하드코딩 금지). 2. 3추론 분리(선언=온톨로지·절차=에이전트·결정론=엔진). 3. AI 값판단 금지(엔진 호출). 4. 모든 제안 node_id 근거. 5. 소단위·매 단계 지니 확인.
+
+## 산출 인덱스 (`_workspace/printly/`)
+- 설계: `00~05`(PART1~2)·`06 크로스벤더 추천`·`07 추천 근거`·`08 벤더앵커 파일변환`.
+- research: industry-classification·**print-materials-evidence-base**·**smb-product-taxonomy-miricanvas**·webtoproduct-analysis·patent-analysis·red-docs.
+- data: `recipes/{wow/*7종·_INDEX·_TEMPLATE}`·`printshops/{huni·wow}.json`(connection·print_rules)·`_scripts/{wow_extract·wow_ontology_register·crossbrand_query·reason_demo·compare_namecard·run_front_half}`·`recommendation-layer.json`(evidence·group 배선).
+- §35 등록: `_workspace/huni-multibrand-ontology/04_wow-registration/{wow-products·wow-components·summary·README}`.

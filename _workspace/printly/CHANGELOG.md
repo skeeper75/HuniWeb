@@ -2,6 +2,16 @@
 
 > 최신이 위(PREPEND). 프린틀리 = 다중 벤더 소상공인 AI 인쇄 에이전트(§35 런타임 실현체).
 
+## 2026-07-04~05 (4세션) — 와우 채움(7종) + 추천 3층 설계 정립 + 근거 두껍게 + 와우 전 상품 온톨로지 등록
+
+- **와우 파일럿 7종 레시피**(`data/recipes/wow/`): 명함40073(A-1)·스티커40008(A-2·커팅복잡도축 실증)·엽서40346(A-3·합판디지털·가격순위 역전)·전단40054(A-7·인쇄방식 옵셋/UV 선택축)·현수막40437(A-4·대형실사·면적)·매장용품POP40033(★후니 미대응 비대칭)·쿠폰40110(A-13·카페 RETAIN·미싱 절취). 6부류+상위개념 instance_of+후니 same_family_as+jobcost **라이브 실견적**(devshop 콘솔). = 카페 오픈 6기능 교차브랜드 완성.
+- **와우 라이브 실증 방법 확립**: devshop.wowpress.co.kr=개발자 가격조회 콘솔·로그인=`.env.local` WOWPRESS_SITE_ID/PW·★click 미제출→**press Enter**·`/prodt/<prodno>` select→"가격조회"→`ordcost_bill`(읽기). catalog(2025-10-14)=라이브 대조 확인·드리프트(엽서 재질 라이브 추가). 블로커1(실호출 vs 캐시) 해소=캐시 봉쇄(catalog 가격0)→devshop 실호출 유일.
+- **질의 검증 데모**(`data/_scripts/crossbrand_query.py`): "카페 오픈"→7상품군 same_family_as 순회→후니 evaluate_price∥와우 jobcost 나란히·값=엔진·지어내기0. ★교차 3케이스: ①양쪽보유=가격대조(순위 상품군마다 뒤집힘·명함 와우쌈·엽서 후니쌈) ②와우단독(POP)=와우강제(연결-앵커 비대칭) ③양벤더GAP=메뉴판(후니·와우 공통·프린트허브만 有).
+- **추천 3층 설계 정립**(순서 고정 1→2→3): `06_crossvendor-recommendation-design.md`(어느 회사·가격·4단 필터 0.연결→1.가능→2.가격·옵션충돌 되묻기·가격값 온톨로지化 금지)·`07_recommendation-basis.md`(왜 이 홍보물·출처+등급 사슬·지니 기준 "출처+신뢰등급으로 충분")·`08_vendor-anchored-fulfillment-design.md`(파일변환=논리파일+어댑터 C3·지니 확정 하이브리드/후니 1벤더 먼저).
+- **추천 근거 두껍게**(국내외 4슬라이스 병렬 리서치): `research/print-materials-evidence-base-260704.md`(교차확증·업종8→12+·홍보물9→50+·정량=매크로 광고비만·소상공인 세분 부재 확정)·`research/smb-product-taxonomy-miricanvas-260704.md`(미리캔버스/프린트허브 렌즈=상품군 3번째 축·10버킷·매장용품 신규). 추천 이유 배선=`recommendation-layer.json`(카페 evidence 블록·products.group)+`reason_demo.py`(등급 어조).
+- **★와우 전 상품 온톨로지 등록**(`_workspace/huni-multibrand-ontology/04_wow-registration/`·스크립트 `wow_ontology_register.py`): catalog 324상품 결정론 전사·구성요소 dedup(인쇄방식12백본·재질504·규격919·도수115·후가공474·부자재32)+used_by(공유맥락)+제약그래프(paper.rst_prsjob758·color.req_prsjob484). gstack browse 라이브대조(292 vs 326·신규4 발견). ★아키텍처 확정=**후니 권위 최상→나머지 전환**·Printly 어댑터 브로커.
+- **벤더 그릇 배선**: `printshops/{huni·wow}.json`에 `connection`(후니 full·와우 price_api)+`print_rules`(축만·값 GAP).
+
 ## 2026-07-04 (3세션) — 데이터 공간 준비 + 소상공인 채움 + 와우 채우기 정리
 
 - **RED 문서 4군 정독**(자동화 시스템 기획서 50p·자동견적/파일처리 V8·자동조판 V1/V3/V4·자동커팅+상품제안 → `research/red-docs/` 5노트+종합): 인쇄물 배송 전 여정=16단계 무인 파이프라인·후가공 14종 별색 레이어·견적 과금=길이/면적/개수 계산클래스·자동조판(다중주문 통합·판수최소·큰사이즈 RIP시간)·자동커팅(오일러/Bezier·1·2차 재단선). ★핵심: 스펙 확정되면 7~16단계=결정론 엔진·벤더 소유(RED 무인운영 증명)→프린틀리=앞단+오케스트레이션+온톨로지.
