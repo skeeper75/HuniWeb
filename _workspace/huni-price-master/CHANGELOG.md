@@ -1,5 +1,13 @@
 # §27 price-master — CHANGELOG (최신 위 PREPEND)
 
+## 2026-07-04 — 통합 배치 hdx P5-②b: 도메인 전파(QtyRuleDx 수량·PlatesizeDx 판형)
+
+Diagnoser 계약을 수량·판형 차원으로 전파 → 진단 8차원. QtyRuleDx(←qty_rule_audit Snapshot 포팅·TRAP_MIN
+수량 함정 저청구)·PlatesizeDx(←diagnose_all verbatim+상시게이트·판형 미스매치/오배선). 충실성 드리프트 0
+(qty TRAP_MIN 8·plate 미스매치 0 = 원본 일치). 라운드7 총 407·qty_rule 52(TRAP_MIN 8 저청구)·platesize GO
+(dbmap 판형 교정 완료 확인). PriceGridDx(19시트)는 §26 하네스 규모라 별도 어댑터 후속(P5-②c). 전 레이어 5/5 GO.
+상세=`_foundation/hdx/CHANGELOG.md`.
+
 ## 2026-07-04 — 통합 배치 hdx P5-②a: OptionCpqDx(옵션 파라미터 연결 끊김·저청구)
 
 실무진 옵션 수정 중 파라미터 연결(dtl_opt) 누락 저청구를 전용 스캐너로 전수 검출(갭#5). 옵션 dtl_opt↔단가행

@@ -13,8 +13,8 @@ import sys
 import pathlib
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[2]))  # _foundation/
-from hdx.foundation import Snapshot
-from hdx.diagnose import OptionCpqDx
+from hdx.foundation import Snapshot, Defect
+from hdx.diagnose import OptionCpqDx, QtyRuleDx, PlatesizeDx, PRICE_DIAGNOSERS
 
 
 def main():
@@ -42,7 +42,27 @@ def main():
     assert all(d.severity == "low" for d in review), "REVIEW 인데 low 아님"
     print("[3] 판별 건전성 OK (HIGH=undercharge·REVIEW=low)")
 
-    print("SELFTEST OK — hdx.diagnose OptionCpqDx 정합")
+    # [4] QtyRuleDx: TRAP_MIN(수량 함정)=high·undercharge (원본 대조 8건·drift 0)
+    qds = QtyRuleDx().scan(snap)
+    trap = [d for d in qds if "TRAP_MIN" in d.summary or "NO_RULES" in d.summary]
+    assert all(d.severity == "high" and d.money_impact == "undercharge" for d in trap), \
+        "QtyRule 함정이 high·undercharge 아님"
+    print(f"[4] QtyRuleDx OK (총 {len(qds)}·함정 {len(trap)}건 high·undercharge)")
+
+    # [5] PlatesizeDx: MISMATCH=high·undercharge (원본 diagnose_all 대조·drift 0)
+    pds = PlatesizeDx().scan(snap)
+    mm = [d for d in pds if "MISMATCH" in d.summary]
+    assert all(d.severity == "high" and d.money_impact == "undercharge" for d in mm), \
+        "Platesize MISMATCH 가 high·undercharge 아님"
+    print(f"[5] PlatesizeDx OK (총 {len(pds)}·미스매치 {len(mm)}건)")
+
+    # [6] 전 Diagnoser 스모크: 예외 없이 실행·Defect 형식 유효
+    for dx in PRICE_DIAGNOSERS:
+        res = dx.scan(snap)
+        assert all(isinstance(d, Defect) for d in res), f"{dx.dimension} 비-Defect 산출"
+    print(f"[6] 전 Diagnoser 스모크 OK ({len(PRICE_DIAGNOSERS)}종 무예외·Defect 유효)")
+
+    print("SELFTEST OK — hdx.diagnose 정합(OptionCpq/QtyRule/Platesize + 전 Dx 스모크)")
 
 
 if __name__ == "__main__":

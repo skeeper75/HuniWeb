@@ -1,5 +1,32 @@
 # hdx — CHANGELOG (최신 위 PREPEND)
 
+## 2026-07-04 — P5-②b 도메인 전파: QtyRuleDx(수량) + PlatesizeDx(판형)
+
+**목표**: 파일럿 검증된 Diagnoser 계약을 수량·판형 차원으로 전파 → 진단 커버리지 8차원(설계 §3).
+
+- **QtyRuleDx** ← `batch/qty_rule_audit_260702.py`(라이브 psql) **Snapshot 포팅**(결정론화). 판정 verbatim:
+  TRAP_MIN(상품 min_qty < 가격구간 하한 → 구간 아래 주문 시 comp 무료·저청구·high)·NO_RULES(min 미등록+구간·
+  high)·INFO_MAX(초대량 검토·low). 대응 `QtyRuleRmd`(함정→needs_authority[올바른 min=권위/가격표 하한·값 날조
+  금지]·INFO_MAX→review).
+- **PlatesizeDx** ← `platesize-remediation/diagnose_all.py`(이미 스냅샷·로직 verbatim) + 상시게이트
+  `plate_wiring_integrity_check.sql`. 판정: PLATE_MISMATCH(상품 판형 ∩ comp 단가 판형 = 0 → 부분 견적0·저청구·
+  high)·PLATE_MISWIRE(plate_sizes.siz_cd 가 유효 판형[impos_yn=Y·시트판형 포함] 아님·데이터 위생·medium).
+  대응 `PlatesizeRmd`(needs_authority/review).
+
+**충실성 검증(드리프트 0)**: QtyRuleDx TRAP_MIN 8 = 원본 qty_rule_audit(라이브) 8 완전 일치(INFO_MAX 44도 일치).
+PlatesizeDx MISMATCH 0 = 원본 diagnose_all 0 일치. 시트판형(SIZ_499/535/475/521) 전부 impos_yn=Y 확인 → 오배선 0.
+
+**실적**(라운드7·8 Diagnoser): 총 355→407. qty_rule 52(TRAP_MIN 8 저청구=2/3단접지카드·프리미엄/펄명함·
+무선/PUR책자·미니보드/배너·INFO_MAX 44)·platesize GO(미스매치0·오배선0=이번 세션 dbmap 판형 13상품 교정 완료 확인).
+
+**PriceGridDx(19시트) 제외 명시(no silent caps)**: §26 huni-price-table-integrity 하네스 전체 규모(권위 CSV
+추출+시트별 매트릭스 파서)라 단일 Diagnoser 어댑트는 조립 수준 초과 → 별도 어댑터로 후속(P5-②c). 재구현 금지·재사용.
+
+**셀프테스트**: `diagnose/_selftest.py` 확장(QtyRule 함정=high·undercharge·PlatesizeDx MISMATCH 가드 + 전 8 Dx
+스모크 무예외·Defect 유효). 전 레이어 5/5 GO.
+
+**다음**: P5-②c PriceGridDx 19시트 어댑터(§26 배치 브릿지) + codex 2차(선택).
+
 ## 2026-07-04 — P5-②a OptionCpqDx 신규 (옵션 파라미터 연결 끊김·저청구)
 
 **목표**: 실무진이 webadmin 에서 옵션 수정 중 파라미터 연결(dtl_opt)을 빠뜨려 생기는 저청구를 전용

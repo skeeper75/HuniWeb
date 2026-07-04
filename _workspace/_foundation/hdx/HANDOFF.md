@@ -3,20 +3,25 @@
 > 새 세션은 이 파일 + `README.md` + 설계 청사진만 읽고 재발견 0으로 재개.
 > 설계: [`../DIAGNOSE-REMEDIATE-UNIFIED-BATCH-DESIGN-260704.md`](../DIAGNOSE-REMEDIATE-UNIFIED-BATCH-DESIGN-260704.md)
 
-## 다음 시작점 — P5-②b (codex 2차 선택 + 도메인 전파)
+## 다음 시작점 — P5-②c (codex 2차 선택 + PriceGridDx 19시트 어댑터)
 
-**① codex 2차(선택)**(`hdx/verify/codex_gate.py`·설계 §6): `codex exec -s read-only` 로 교정본을 독립
-판정·reconcile. `hpe-codex-validate` 스킬 로직 훅화. 미가용 시 "Claude 단독" 명시 폴백. 배치가 codex 부르는 최초 지점.
-(현재 auto_data 0 상태라 재실측 대상이 없을 때는 NO-OP — auto_data 재등장 시 유효.)
+**① PriceGridDx(19시트 가격격자)** — 유일 남은 전파 차원. 원본=§26 `huni-price-table-integrity/_batch/
+scripts/grid_diff.py`+`run_all.py`. **규모 큼**(권위 CSV 24_master-extract + 시트별 매트릭스 파서 + live-snapshot
+대조)이라 단일 Diagnoser 어댑트는 조립 수준 초과 → **별도 어댑터**로 §26 배치를 호출해 산출을 `Defect` 로
+변환하는 얇은 브릿지 권장(§26 배치 자체는 재구현 금지·재사용).
 
-**② 도메인 전파**(파일럿 종단 GO 후): 판형(PlatesizeDx←`diagnose_all.py`)·가격격자(PriceGridDx 19시트←
-`grid_diff.py`)·수량(QtyRuleDx←`qty_rule_audit_260702.py`) 차원 어댑트 → `SCOPES` 에 추가·`--scope platesize|qty|all`.
+**② codex 2차(선택)**(`hdx/verify/codex_gate.py`·설계 §6): `codex exec -s read-only` 로 교정본 독립
+판정·reconcile. `hpe-codex-validate` 로직 훅화. 미가용 시 "Claude 단독" 폴백. 현재 auto_data 0 이면 NO-OP.
 
-**③ 실무진 액션 대기(OptionCpqDx 적발)**: 메쉬배너(PRD_000137) 타공 옵션 OPV_000542 dtl_opt 누락 저청구
-(needs_authority) — 실무진이 그 옵션의 타공수 값 확인 후 dtl_opt 채움(형제 PRD_000139={타공수:4/6/8} 참조).
-※이번 세션 메쉬 타공 교정(PRD_000138/139) 시 놓친 상품 — 배치 스윕이 전수로 포착.
+**③ 실무진 액션 대기(배치 적발 저청구)**: (a) 메쉬배너(PRD_000137) 타공 dtl_opt 누락(OptionCpqDx) (b) 수량
+함정 TRAP_MIN 8상품(2/3단접지카드·프리미엄/펄명함·무선/PUR책자·미니보드/배너·QtyRuleDx) — 전부 needs_authority
+(올바른 값=권위/실무진). 실무진 확인 후 값 채움→라운드 재실행 결함 감소 확인.
 
 ## 완료 (직전 세션)
+- **P5-②b 도메인 전파(수량·판형)** — `QtyRuleDx`(←`qty_rule_audit_260702.py` Snapshot 포팅·TRAP_MIN/NO_RULES/
+  INFO_MAX·드리프트0 TRAP_MIN 8) + `PlatesizeDx`(←`diagnose_all.py` verbatim + 상시게이트 impos_yn·미스매치0·
+  오배선0=판형 GO) + 각 Remediator(needs_authority/review). 라운드7 = 8 Diagnoser·총 407·qty_rule 52(TRAP_MIN 8
+  저청구)·platesize GO. `diagnose/_selftest.py` 확장(QtyRule/Platesize 가드 + 전 Dx 스모크). 전 레이어 5/5 GO.
 - **P5-②a OptionCpqDx 신규**(갭#5) — `hdx/diagnose/option_cpq_dx.py`(+`PRICE_DIAGNOSERS`) + `OptionCpqRmd`.
   옵션 dtl_opt↔단가행 dim_vals 연결 끊김(저청구) 검출. ★신뢰도 모델(오탐 가드): HIGH=형제 dtl_opt 가
   param 채움(옵션선택형 확정)·REVIEW=형제 미충전(개수/줄수 수치입력 가능성). 실적: option_cpq 29건
@@ -67,4 +72,4 @@
 - **[HARD] 건드리지 말 것**: `foundation/engine.py`는 pricing.py와 verbatim(엔진 변경 시 재이식·드리프트 0). `db.py`는 읽기전용 유지. 원본 스캐너(`batch/*.py`)·`dim_conformance.py`는 미변경(import·call 또는 포팅만). auto_data SQL 도 자동 COMMIT 금지(dryrun→P4→인간 승인). 완전 무인 자기회귀 금지(COMMIT=인간+webadmin).
 
 ## 큰 로드맵
-~~P2 보드~~ → ~~P3 Remediator~~ → ~~P4 적대적 재실측~~ → ~~P5-① 반자동 루프~~ → ~~P5-②a OptionCpqDx~~(전부 완료·첫 실적재 포함) → **P5-②b codex 2차 선택 + 도메인 전파(판형·가격격자·수량)**. 가격 파일럿 종단 실증 완료 → 타 도메인 전파.
+~~P2 보드~~ → ~~P3 Remediator~~ → ~~P4 재실측~~ → ~~P5-① 루프~~ → ~~P5-②a OptionCpqDx~~ → ~~P5-②b 전파 수량·판형~~(전부 완료·첫 실적재 포함) → **P5-②c PriceGridDx 19시트 어댑터 + codex 2차 선택**. 진단 8차원 커버·가격 파일럿 종단 실증.
