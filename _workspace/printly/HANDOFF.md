@@ -60,7 +60,10 @@
 - `04_step3-constraints.md` — 제약(§33 E12/R12·CN-1~6·신규 0)·제약 vs 능력/가격갭/되묻기 경계·제약 게이트(엔진 앞단).
 - `05_part2-bridge-jobticket.md` — ★브릿지=잡티켓 데이터 계약(§35 fulfillment_order 재사용)·필드 채움 층 분리·계약 연쇄(C1~C3 엔진)·논리/가상 2층·다중벤더.
 - `_map/master-map.html` — 지도 아티팩트(목적+3지도+지금여기·PART1 완료 반영).
-- `research/` — industry-classification(업종8·원자기능8)·print-production-standards(CIP4·장비·파일포맷)·delivery-research·**webtoproduct-analysis**(덱)·**patent-analysis**(특허·개선/보완/확장/수정/추가).
+- **`pilot/`** — 전반부 종단 파일럿: `recommendation-layer.json`(8업종×기능8×홍보물18)·`run_front_half.py`(실엔진 견적+opts 옵션타입)·README. 실행=`raw/.venv/bin/python _workspace/printly/pilot/run_front_half.py 미용실 100`.
+- **`data/`** — 데이터 쌓을 공간(후니 먼저·인쇄소 가기 전까지): `README·SCHEMA`(그릇 3종·레시피 6부류)·`recipes/{_TEMPLATE·_INDEX}`·`printshops/{huni·wow}.json`·**`_WOW-FILL-PLAN.md`**(다음 세션 와우 채우기 플레이북).
+- **`research/red-docs/`** — RED 4문서 정독 5노트+종합(배송여정 16단계·후가공14·조판/커팅 특허·`_SYNTHESIS-delivery-journey.md`).
+- `research/` — industry-classification(업종8·원자기능8)·print-production-standards(CIP4·장비·파일포맷)·delivery-research·**webtoproduct-analysis**(덱)·**patent-analysis**(특허).
 
 ## 특허 반영 (Step1 §1-C 통합)
 
@@ -68,8 +71,10 @@
 - 신규 결정론 엔진: `production_time_function`(C1·리드타임·배송 GAP 해소)·커팅 특화 preflight(C2)·다중주문 imposition 최적화(C1).
 - 라우팅 기준 + production_time·device_capability 축.
 
-## 미해결 / 결정 대기
+## 미해결 / 결정 대기 · 블로커
 
+- **★와우 가격 = jobcost API 연동 방식 미정(블로커)** — 후니는 evaluate_price를 venv 로컬 호출로 실증했으나, 와우는 `POST /std/prod/jobcost` **라이브 API**라 로컬 호출 불가. 실 견적 검증 = API 실호출 vs catalog 캐시 대조 중 택 필요(`_WOW-FILL-PLAN.md` 6단계).
+- **견적 0원 결함** — 파일럿이 적발: 프리미엄명함(PRD_000031)·펄명함(PRD_000034) 미배선(source=FORMULA·final=0). 로드맵 G-DATA 일치. 가격 하네스(§13/§27) 위임.
 - **§36 정식 하네스화 미정** — 프린틀리를 §36 오케스트레이터+에이전트로 정식화할지(harness 스킬 Phase0 감사=시스템 구현/로드맵 오케스트레이터 부재 확인). 로드맵 문서·프린틀리 산출은 하네스 결정 무관 재사용 가능.
 - **PART 3 지니 확정 대기 항목**: 추천 랭킹·되묻기 N 정책·인쇄소(벤더) seed·파일포맷 원천·엔진 인터페이스(견적/프리플라이트/임포지션/생산시간).
 - **R3 실화면 점검** 미실행(구조 정합까지·파일럿 8종 후가공 견적 반영 확인 필요).
