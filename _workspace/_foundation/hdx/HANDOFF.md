@@ -3,38 +3,37 @@
 > 새 세션은 이 파일 + `README.md` + 설계 청사진만 읽고 재발견 0으로 재개.
 > 설계: [`../DIAGNOSE-REMEDIATE-UNIFIED-BATCH-DESIGN-260704.md`](../DIAGNOSE-REMEDIATE-UNIFIED-BATCH-DESIGN-260704.md)
 
-## 다음 시작점 — P2 (가격 파일럿)
+## 다음 시작점 — P3 (Remediator 교정생성 통일)
 
-기존 결정론 스캐너를 **공통 `Diagnoser` 계약**으로 어댑트하고 **통합 결함보드**를 만든다.
+P2 통합 결함보드가 낸 `Defect`(가격 파일럿 331건·돈영향 33·치명 5)를 입력으로,
+**공통 `Remediator` 계약**으로 교정본(dryrun/fix/undo SQL + 백업 + 게이트)을 생성한다.
+`Fix` 스키마는 이미 `foundation/models.py`에 정의됨(P3 산출 형식 확정).
 
-**계약** (신규 `hdx/diagnose/base.py`):
+**계약** (신규 `hdx/remediate/base.py`):
 ```python
-class Diagnoser:
+class Remediator:
     dimension: str
-    def scan(self, snap: Snapshot) -> list[Defect]: ...
-    def stop_predicate(self, defects: list[Defect]) -> bool: ...   # 이 차원 결함 0?
+    def generate(self, defects: list[Defect], snap: Snapshot) -> list[Fix]: ...
+    # Fix.dryrun_sql(롤백전용 멱등 실증) · fix_sql(백업+게이트 하드어서션 내장) · undo_sql
 ```
 
-**가격 파일럿 대상 5 스캐너 → Diagnoser 래핑** (각 원본을 import/이식, 산출을 `Defect`로 변환):
-| Diagnoser | 원본 | 결함 차원 |
-|---|---|---|
-| `WiringDx` | `_foundation/batch/wiring_scan.py` | 배선 고아/빈배선/오염/미바인딩 |
-| `DimConformanceDx` | `huni-price-table-integrity/_batch/scripts/dim_conformance.py` | use_dims↔단가행↔선택수단 |
-| `ContributionDx` | `_foundation/batch/contribution_scan.py` | 공정 저청구(silent-0) |
-| `ComponentMergeDx` | `_foundation/batch/component_merge_scan.py` | 같은차원 분리 comp |
-| `CalcabilityDx` | `_foundation/batch/score_batch.py`(PRICED-0/CALC) | 계산가능성 PRICE≠0 |
+**승계 원본** (이번 세션 COMMIT SQL 패턴 = `z_bak_*` 백업 + 게이트 하드어서션):
+`30_component-merge/_commit/*.sql`(병합 undo)·`z_bak_tagong8_fix`·`z_bak_mesh_tagong_dtlopt`(타공).
+★자동은 여기까지(dryrun/fix/undo 생성). **적재 COMMIT·webadmin 실화면은 인간 게이트**(L7·설계 [HARD]).
 
-**통합 결함보드** (`hdx/board/`): 전 Diagnoser 결함을 `Defect` 하나로 병합 →
-`defect-board.csv`(차원×상품·돈영향 정렬) + `defect-board.html`(실무진 열람). 전역 verdict = Σ stop_predicate.
+**파일럿 교정 대상 우선순위**(돈영향순): ① CalcabilityDx 5건(아크릴 `COMP_ACRYL_PENDING_TBD`
+미확정 — 실무진 단가 입력 필요·데이터로 못 닫음 → **needs_engine_change/실무진 입력** 플래그)
+② ContributionDx HIGH(공정 저청구) ③ DimConformanceDx MISSING-HIGH.
 
-**진입점 초안** `hdx/diagnose_remediate.py --scope price --round N` → snap 로드 → 5 Diagnoser.scan → board → verdict 출력(교정생성 P3·재실측 P4·루프 P5).
-
-## 완료 (이번 세션)
+## 완료 (직전 세션)
+- **P2 진단·보드** — `hdx/diagnose/`(5 Diagnoser) + `hdx/board/`(CSV+HTML+전역 verdict) + 진입점
+  `diagnose_remediate.py --scope price`. 실행 GO(331건·차원별 배지·돈영향 정렬).
+  - **충실성 드리프트 0**: wiring 6·contribution 274·component_merge 9 = 원본 카운트 완전 일치.
+  - `WiringDx`·`ContributionDx` = 원본 순수함수 import·call(재구현 0). `DimConformanceDx` =
+    라이브 psql 원본을 **Snapshot 포팅**(결정론화·갭#2). `ComponentMergeDx` = 헬퍼 import+분류루프 재바인딩.
+  - `CalcabilityDx` = **구조 프록시**(공식 바인딩 있으나 wired 단가행 총합 0). simulate 정밀 PRICED-0은 P4.
+  - 실행: `python3 _workspace/_foundation/hdx/diagnose_remediate.py --scope price --round N`
 - **P1 foundation** — `hdx/foundation/`(env·db·snapshot·engine·models·sim). 셀프테스트 GO. 커밋 `401436e`.
-  - `snapshot.py`: live-snapshot/latest CSV·ACTIVE·`engine_rows()`(''→None·dim_vals→dict 정규화)
-  - `engine.py`: pricing.py `match_component` verbatim 이식(_gate_harness 1-88 범용화)
-  - `models.py`: 공통 `Defect`/`Fix` 스키마 — P2 산출 형식이 이미 정의됨
-- 셀프테스트: `python3 _workspace/_foundation/hdx/foundation/_selftest.py`
 
 ## 확정 결정 (사용자 260704)
 1. 위치 = `_workspace/_foundation/hdx/`
@@ -43,9 +42,9 @@ class Diagnoser:
 4. **가격 도메인 파일럿** 종단 → 판형·수량·옵션CPQ 전파.
 
 ## 블로커·주의
-- 블로커 없음(P1 독립 완결).
-- **스냅샷 시점 주의**: `live-snapshot/latest`는 시점 사본(현재 snap_20260702·이번 세션 병합/타공 교정 이전). 정본 comp(예 병합 결과)를 스냅샷으로 검증하려면 스냅샷 재생성 필요. 교정/게이트 단계는 **라이브 재-SELECT**로 드리프트 재확인(메모리 H-1).
-- **[HARD] 건드리지 말 것**: `foundation/engine.py`는 pricing.py와 verbatim(엔진 변경 시 재이식·드리프트 0). `db.py`는 읽기전용 유지. 완전 무인 자기회귀 금지(COMMIT=인간+webadmin).
+- 블로커 없음(P2 독립 완결).
+- **스냅샷 시점 주의**: `live-snapshot/latest`=snap_20260702(이번 세션 병합/타공 교정 이전). **보드 331건은 그 시점 상태** — component_merge 9·일부 contribution/dim 은 라이브에 이미 반영됐을 수 있음. 정본 검증엔 **스냅샷 재생성 후 재실행**(권장 P3 착수 전) 또는 게이트 단계 **라이브 재-SELECT**(메모리 H-1).
+- **[HARD] 건드리지 말 것**: `foundation/engine.py`는 pricing.py와 verbatim(엔진 변경 시 재이식·드리프트 0). `db.py`는 읽기전용 유지. 원본 스캐너(`batch/*.py`)는 미변경(import·call 또는 포팅만). 완전 무인 자기회귀 금지(COMMIT=인간+webadmin).
 
 ## 큰 로드맵
-P2 스캐너 어댑트+보드 → P3 Remediator 통일 → P4 적대적 재실측 → P5 반자동 루프+OptionCpqDx 신규+codex. 파일럿 검증 후 타 도메인 전파.
+~~P2 스캐너 어댑트+보드~~(완료) → **P3 Remediator 통일** → P4 적대적 재실측(engine verbatim) → P5 반자동 루프+OptionCpqDx 신규+codex. 파일럿 검증 후 판형·수량·옵션CPQ 도메인 전파.

@@ -10,8 +10,8 @@
 | Phase | 내용 | 상태 |
 |---|---|---|
 | **P1** | `foundation/` 공용 토대(snapshot·db·engine·models·env·sim) | **완료**(셀프테스트 GO) |
-| P2 | 기존 6 스캐너 → `Diagnoser` 계약 어댑트 + 통합 결함보드 | 다음 |
-| P3 | `Remediator` 교정생성 통일(dryrun/fix/undo·백업·게이트) | — |
+| **P2** | 5 스캐너 → `Diagnoser` 계약 어댑트 + 통합 결함보드 | **완료**(가격 파일럿 GO) |
+| P3 | `Remediator` 교정생성 통일(dryrun/fix/undo·백업·게이트) | 다음 |
 | P4 | 적대적 재실측(engine verbatim) 배치 편입 | — |
 | P5 | 반자동 라운드 루프 + OptionCpqDx 신규 + (선택)codex | — |
 
@@ -45,6 +45,34 @@ rows = snap.engine_rows("COMP_NAMECARD_STD")            # 정규화 단가행
 m = engine.match_component(rows, {"print_opt_cd": "POPT_000001", "mat_cd": "MAT_000074"}, qty=100, as_of="2026-12-31")
 # m["row"]["unit_price"] → 매칭 단가 (없으면 m["error"]/m["reason"])
 ```
+
+## diagnose/ + board/ (P2)
+
+입체(다차원) 진단 → 통합 결함보드. 파편 스캐너를 공통 `Diagnoser` 계약으로 어댑트.
+
+```bash
+python3 _workspace/_foundation/hdx/diagnose_remediate.py --scope price [--round N --note "..."]
+# → board/defect-board.csv (차원×상품·돈영향 정렬)
+# → board/defect-board.html (실무진 열람·필터/정렬)
+# → 콘솔: 전역 GO/NO-GO + 차원별 결함수 + 돈영향/치명 카운트
+```
+
+**가격 파일럿 5 Diagnoser** (`hdx/diagnose/`) — 각 원본 알고리즘 verbatim, 산출을 공통 `Defect`로 통일:
+
+| Diagnoser | 원본 | 어댑트 | 결함 차원 | stop_predicate |
+|---|---|---|---|---|
+| `WiringDx` | `batch/wiring_scan.py` | import·call(scan_from_snapshot) | 고아·빈배선·오염 | 결함 0 |
+| `DimConformanceDx` | `…/dim_conformance.py`(라이브 psql) | **Snapshot 포팅**(갭#2) | MISSING·UNDECLARED | HIGH 0 |
+| `ContributionDx` | `batch/contribution_scan.py` | import·call(scan) | 공정 저청구 silent-0 | HIGH 0 |
+| `ComponentMergeDx` | `batch/component_merge_scan.py` | 헬퍼 import + 분류루프 재바인딩 | 같은차원 분리 comp | A/B 후보 0 |
+| `CalcabilityDx` | `batch/score_batch.py`(PRICED-0) | **구조 프록시**(결정론) | 전 상품 PRICE≠0 | PRICED-0 0 |
+
+- 전역 verdict = Σ stop_predicate(AND). 정렬 = 돈영향(저/과청구 상단) → 심각도 → 차원 → 상품.
+- **충실성 검증(드리프트 0)**: wiring 6·contribution 274·component_merge 9 = 원본 카운트와 완전 일치.
+- **CalcabilityDx 스코프 명시**(no silent caps): 결정론·토큰0 **구조 프록시**만(공식 바인딩 있으나
+  wired comp 단가행 총합 0 = PRICE 반드시 0). simulate 기반 정밀 PRICED-0(선택조합별 0원)은 **P4 재실측**으로 이관.
+- **스냅샷 시점 주의**: `latest`=snap_20260702(이번 세션 병합/타공 교정 이전) → 보드는 그 시점 상태.
+  라이브 반영 재확인은 스냅샷 재생성 후 재실행 또는 게이트 단계 라이브 재-SELECT(메모리 H-1).
 
 ## [HARD] 규칙
 - 라이브 = `RAILWAY_DB_*` 읽기전용 SELECT + 롤백전용 DRY-RUN만. 쓰기는 인간 승인 채널.

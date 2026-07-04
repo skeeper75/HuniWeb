@@ -1,5 +1,12 @@
 # §27 price-master — CHANGELOG (최신 위 PREPEND)
 
+## 2026-07-04 — 통합 배치 hdx P2: 진단·통합 결함보드
+
+파편 스캐너 5종을 공통 `Diagnoser` 계약으로 어댑트하고 통합 결함보드(CSV+HTML+전역 verdict) 산출.
+가격 파일럿 실행 GO(331건·돈영향 33·치명 5). **충실성 드리프트 0**(wiring 6·contribution 274·
+component_merge 9 = 원본 카운트 일치). CalcabilityDx 5건=아크릴 미확정 상품 계산불가 정확 검출.
+상세 = `_workspace/_foundation/hdx/CHANGELOG.md` + `HANDOFF.md`(다음=P3 Remediator 통일).
+
 ## 2026-07-04 — 가격구성요소 병합 서브트랙 (`30_component-merge/`)
 
 **문제**: 인쇄 가격표 각 시트=차원으로 이뤄진 가격테이블. "같은 테이블 차원인데 분리 작성된 가격구성요소(comp)" 병합 필요.
