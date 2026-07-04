@@ -1,5 +1,13 @@
 # §27 price-master — CHANGELOG (최신 위 PREPEND)
 
+## 2026-07-04 — 통합 배치 hdx 첫 실적재: 포스터 use_dims += siz_cd (라이브 COMMIT)
+
+hdx 파이프라인이 낸 첫 실적재 교정을 인간 승인 후 라이브 반영. 검증 체인 전 게이트 GO: 드리프트0 재-SELECT
+→ dryrun → P4 재실측(가격중립) → **[HARD] webadmin 라이브 시뮬레이터**(A4=6000·A3=10500·A2=20000·PRICE≠0)
+→ COMMIT → 사후 시뮬 전 사이즈 불변(가격중립 실서비스 확증) → 라운드4 결함 해소(dim_conformance 38→37·
+UNDECLARED siz_cd 0). 백업/undo 라이브 보유. **반자동 라운드 종단 실증**(진단→교정→재실측→승인→적재→재진단).
+기록=`_foundation/hdx/remediate/COMMITTED-260704-poster-usedims.md`.
+
 ## 2026-07-04 — 통합 배치 hdx P5-①: 반자동 라운드 러너
 
 scan→board→remediate→verify 를 한 라운드로 묶어 **인간 게이트용 종합 리포트**(적재 후보[P4 GO]·인간 입력

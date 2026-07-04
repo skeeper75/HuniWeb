@@ -1,5 +1,18 @@
 # hdx — CHANGELOG (최신 위 PREPEND)
 
+## 2026-07-04 — ★첫 실적재: 포스터 use_dims += siz_cd (인간 승인·라이브 COMMIT)
+
+hdx 파이프라인이 낸 **첫 실적재 교정**을 라이브에 반영(인간 승인). 반자동 라운드 종단 실증 —
+진단→교정생성→재실측→인간 승인→라이브 COMMIT→재진단 결함 해소를 실제 라이브에서 완주.
+
+- **대상**: `t_prc_price_components.use_dims` / `COMP_POSTER_CANVAS_HANGING` +=siz_cd(사이즈별가 실재하나 미선언).
+- **검증 체인**: 라이브 재-SELECT(드리프트 0) → dryrun(무오류·ROLLBACK) → P4 재실측(가격중립 GO) →
+  **[HARD] webadmin 실화면**(라이브 가격시뮬레이터: A4=6000·A3=10500·A2=20000·PRICE≠0) → COMMIT →
+  **사후 라이브 시뮬 재대조 전 사이즈 불변**(가격중립 실서비스 확증) → 스냅샷 재생성 → 라운드4.
+- **라운드4 결함 해소**: dim_conformance 38→37·총 327→326·포스터 UNDECLARED siz_cd **0**·auto_go 1→0.
+- **백업/undo**: 라이브 `z_bak_dimconf_usedims_comp_poster_canvas_hanging` 보유·undo SQL 기록.
+- 기록: `remediate/COMMITTED-260704-poster-usedims.md`.
+
 ## 2026-07-04 — P5-① 반자동 라운드 러너 (`hdx/loop/`)
 
 **목표**: `scan→board→remediate→verify` 를 한 라운드로 묶고 **인간 게이트용 종합 리포트** + 수렴 추이를

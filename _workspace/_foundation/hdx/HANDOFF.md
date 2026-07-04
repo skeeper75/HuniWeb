@@ -16,10 +16,16 @@ Diagnoser 편입(`PRICE_DIAGNOSERS` 추가). 대응 `OptionCpqRmd`(needs_authori
 **③ 도메인 전파**(파일럿 검증 후): 판형(PlatesizeDx←`diagnose_all.py`)·가격격자(PriceGridDx 19시트←
 `grid_diff.py`)·수량(QtyRuleDx←`qty_rule_audit_260702.py`) 차원 어댑트 → `SCOPES` 에 추가·`--scope platesize|qty|all`.
 
-**참고**: 파일럿 첫 라운드 실적재 실행(포스터 use_dims P4 GO)은 인간 승인 트랙 — 사용자에게 제시 후
-승인 시 fix SQL 실행→snapshot.sh 재생성→`--loop --round 4` 로 결함 감소(UNDECLARED siz_cd 소멸) 확인.
+**참고**: 파일럿 첫 실적재(포스터 use_dims += siz_cd)는 **완료**(인간 승인·라이브 COMMIT·라운드4 결함 해소).
+남은 결함 326건은 전부 인간 입력 바운드(blocked_human/needs_authority/needs_design/review) — 자동 auto_data 0.
+다음 auto_data 후보는 새 도메인 전파(판형/수량/옵션CPQ) 또는 UNDECLARED 추가 발생 시.
 
 ## 완료 (직전 세션)
+- **★첫 실적재** — 포스터 `use_dims += siz_cd`(auto_data) 라이브 COMMIT(인간 승인). 검증 체인 전 게이트 GO:
+  드리프트0 재-SELECT → dryrun → P4 재실측 → **webadmin 라이브 시뮬(A4/A3/A2 PRICE≠0)** → COMMIT →
+  사후 시뮬 전 사이즈 불변(가격중립 실서비스 확증) → 스냅샷 재생성 → 라운드4(dim_conformance 38→37·
+  총 327→326·UNDECLARED siz_cd 0). 백업 `z_bak_dimconf_usedims_comp_poster_canvas_hanging`·undo 보유.
+  기록 `remediate/COMMITTED-260704-poster-usedims.md`.
 - **P5-① 반자동 라운드 러너** — `hdx/loop/`(runner) + 진입점 `--loop` 플래그. scan→board→remediate→verify 를
   한 라운드로 묶어 **인간 게이트용 `round-report.md`**(적재 후보[P4 GO]·재실측 NO-GO·인간 입력 대기·다음 액션)
   + `loop-rounds.csv`(수렴 추이) 산출 후 **인간 승인 지점서 정지**([HARD] 완전 무인 금지·적재/webadmin=인간).
