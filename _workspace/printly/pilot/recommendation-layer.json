@@ -1,79 +1,59 @@
 {
   "meta": {
-    "what": "프린틀리 전반부 추천 층(선언 데이터) — 업종→기능→홍보물. 원칙1: 로직 아님 데이터. 순회=실행기, 견적=엔진.",
+    "what": "프린틀리 전반부 추천 층(선언 데이터) — 소상공인 업종→마케팅 목적→홍보물. 원칙1: 로직 아님 데이터. 순회=실행기, 견적=엔진.",
     "created": "2026-07-04",
-    "boundary": "이 파일은 후보를 잇는 references 엣지(dominance/fit)까지. 최종 순위=엔진(recommendation_function 보류·D-REC). 견적값=evaluate_price.",
-    "grounding": "product 노드는 전부 라이브 prd_cd 실재(DB 확인). 기능→홍보물 매핑 근거=research/industry-classification.md 원자기능8.",
-    "badge": "candidate (N>=3 승격 전·pilot)"
+    "scope": "소상공인 중심 8업종 × 원자 마케팅 기능 8 × 홍보물(후니 라이브 상품). 와우·레드 미적재(벤더 확장 대비).",
+    "boundary": "references 엣지(dominance/fit)까지. 최종 순위=엔진(recommendation_function 보류·D-REC). 견적값=evaluate_price. 옵션 타입별 추천=옵션 데이터+엔진.",
+    "grounding": "업종·원자기능=research/industry-classification.md(소진공 업종분류·원자 마케팅 기능 8). product=라이브 t_prd_products 실측 prd_cd. 업종→기능 dominance=마케팅 기능 논리(candidate·N>=3 승격 전).",
+    "badge": "candidate"
   },
   "industries": {
-    "INTENT_BIZ_cafe": {
-      "label": "카페",
-      "note": "오픈(신규 유치)+단골 관리가 둘 다 지배 → 되묻기 트리거",
-      "functions": {
-        "INTENT_FN_ACQUIRE": "primary",
-        "INTENT_FN_RETAIN": "primary",
-        "INTENT_FN_IDENTITY": "secondary",
-        "INTENT_FN_BRAND": "secondary"
-      }
-    },
-    "INTENT_BIZ_beauty": {
-      "label": "미용실",
-      "note": "단골 관리 지배(단일 primary) → 되묻기 불필요",
-      "functions": {
-        "INTENT_FN_RETAIN": "primary",
-        "INTENT_FN_IDENTITY": "secondary",
-        "INTENT_FN_BRAND": "secondary"
-      }
-    },
-    "INTENT_BIZ_restaurant": {
-      "label": "음식점",
-      "note": "매장 게시(메뉴/포스터)+신규 유치",
-      "functions": {
-        "INTENT_FN_DISPLAY": "primary",
-        "INTENT_FN_ACQUIRE": "primary",
-        "INTENT_FN_IDENTITY": "secondary"
-      }
-    }
+    "INTENT_BIZ_cafe":       { "label": "카페/베이커리", "functions": { "INTENT_FN_ACQUIRE": "primary", "INTENT_FN_RETAIN": "primary", "INTENT_FN_DISPLAY": "secondary", "INTENT_FN_BRAND": "secondary", "INTENT_FN_IDENTITY": "secondary" } },
+    "INTENT_BIZ_restaurant": { "label": "음식점",       "functions": { "INTENT_FN_DISPLAY": "primary", "INTENT_FN_ACQUIRE": "primary", "INTENT_FN_RETAIN": "secondary", "INTENT_FN_IDENTITY": "secondary" } },
+    "INTENT_BIZ_beauty":     { "label": "미용/뷰티",     "functions": { "INTENT_FN_RETAIN": "primary", "INTENT_FN_IDENTITY": "secondary", "INTENT_FN_BRAND": "secondary" } },
+    "INTENT_BIZ_academy":    { "label": "학원/교육",     "functions": { "INTENT_FN_ACQUIRE": "primary", "INTENT_FN_IDENTITY": "secondary", "INTENT_FN_FORM": "secondary", "INTENT_FN_DISPLAY": "secondary" } },
+    "INTENT_BIZ_clinic":     { "label": "병원/의원",     "functions": { "INTENT_FN_IDENTITY": "primary", "INTENT_FN_FORM": "primary", "INTENT_FN_DISPLAY": "secondary", "INTENT_FN_SIGN": "secondary" } },
+    "INTENT_BIZ_realestate": { "label": "부동산",       "functions": { "INTENT_FN_IDENTITY": "primary", "INTENT_FN_ACQUIRE": "primary", "INTENT_FN_DISPLAY": "secondary" } },
+    "INTENT_BIZ_retail":     { "label": "소매/판매",     "functions": { "INTENT_FN_RETAIN": "primary", "INTENT_FN_BRAND": "primary", "INTENT_FN_ACQUIRE": "secondary", "INTENT_FN_DISPLAY": "secondary" } },
+    "INTENT_BIZ_florist":    { "label": "꽃집",         "functions": { "INTENT_FN_BRAND": "primary", "INTENT_FN_IDENTITY": "secondary", "INTENT_FN_RETAIN": "secondary" } }
   },
   "functions": {
-    "INTENT_FN_IDENTITY": {
-      "label": "대표성 (명함)",
-      "products": { "product-033": "primary", "product-031": "primary", "product-034": "secondary" }
-    },
-    "INTENT_FN_ACQUIRE": {
-      "label": "신규 유치 (전단·배너·엽서)",
-      "products": { "product-047": "primary", "product-145": "secondary", "product-016": "secondary" }
-    },
-    "INTENT_FN_RETAIN": {
-      "label": "단골 관리 (쿠폰·스탬프)",
-      "products": { "product-041": "primary", "product-042": "primary", "product-217": "secondary" }
-    },
-    "INTENT_FN_DISPLAY": {
-      "label": "매장 게시 (포스터)",
-      "products": { "product-120": "primary" }
-    },
-    "INTENT_FN_BRAND": {
-      "label": "브랜딩 (스티커)",
-      "products": { "product-058": "primary", "product-065": "secondary" }
-    }
+    "INTENT_FN_IDENTITY": { "label": "대표성 (명함)",            "products": { "product-033": "primary", "product-031": "primary", "product-032": "secondary", "product-034": "secondary" } },
+    "INTENT_FN_ACQUIRE":  { "label": "신규 유치 (전단·리플렛·엽서)", "products": { "product-047": "primary", "product-048": "primary", "product-016": "secondary", "product-145": "secondary" } },
+    "INTENT_FN_RETAIN":   { "label": "단골 관리 (쿠폰·스탬프)",    "products": { "product-041": "primary", "product-042": "primary", "product-217": "secondary" } },
+    "INTENT_FN_DISPLAY":  { "label": "매장 게시 (포스터·리플렛)",   "products": { "product-120": "primary", "product-135": "secondary", "product-048": "secondary" } },
+    "INTENT_FN_BRAND":    { "label": "브랜딩 (스티커)",          "products": { "product-058": "primary", "product-065": "secondary", "product-067": "secondary" } },
+    "INTENT_FN_EVENT":    { "label": "오픈·행사 고지 (현수막·배너)", "products": { "product-138": "primary", "product-145": "primary" } },
+    "INTENT_FN_SIGN":     { "label": "안내 사인",               "products": { "product-135": "secondary" }, "gap": "전용 안내사인 상품 미보유 — 족자포스터로 임시(GAP-SIGN)" },
+    "INTENT_FN_FORM":     { "label": "봉투·서식",               "products": { "product-050": "primary" } }
   },
   "products": {
     "product-033": { "prd_cd": "PRD_000033", "name": "스탠다드명함" },
     "product-031": { "prd_cd": "PRD_000031", "name": "프리미엄명함" },
+    "product-032": { "prd_cd": "PRD_000032", "name": "코팅명함" },
     "product-034": { "prd_cd": "PRD_000034", "name": "펄명함" },
     "product-047": { "prd_cd": "PRD_000047", "name": "소량전단지" },
-    "product-145": { "prd_cd": "PRD_000145", "name": "미니배너" },
+    "product-048": { "prd_cd": "PRD_000048", "name": "접지리플렛" },
     "product-016": { "prd_cd": "PRD_000016", "name": "프리미엄엽서" },
+    "product-145": { "prd_cd": "PRD_000145", "name": "미니배너" },
+    "product-138": { "prd_cd": "PRD_000138", "name": "일반현수막" },
     "product-041": { "prd_cd": "PRD_000041", "name": "스탠다드 쿠폰/상품권" },
     "product-042": { "prd_cd": "PRD_000042", "name": "프리미엄 쿠폰/상품권" },
     "product-217": { "prd_cd": "PRD_000217", "name": "만년스탬프" },
     "product-120": { "prd_cd": "PRD_000120", "name": "방수포스터" },
+    "product-135": { "prd_cd": "PRD_000135", "name": "족자포스터" },
     "product-058": { "prd_cd": "PRD_000058", "name": "반칼원형스티커" },
-    "product-065": { "prd_cd": "PRD_000065", "name": "스티커팩" }
+    "product-065": { "prd_cd": "PRD_000065", "name": "스티커팩" },
+    "product-067": { "prd_cd": "PRD_000067", "name": "타투스티커" },
+    "product-050": { "prd_cd": "PRD_000050", "name": "봉투제작" }
+  },
+  "gaps": {
+    "홍보물": "메뉴판·전용 안내사인 상품 미보유(GAP-MENU·GAP-SIGN) — 포스터/리플렛로 임시.",
+    "벤더": "와우프레스·레드프린팅 상품 미적재(후니 단독). 브랜드-중립 상위 개념 연결은 §35 재사용 대비.",
+    "행사(occasion)": "결혼식 등 소비자 행사 intent 미포함(소상공인 중심). occasion 축은 후속."
   },
   "sources": {
-    "기능→홍보물": "research/industry-classification.md (원자 마케팅 기능 8)",
+    "업종·기능": "research/industry-classification.md (소진공 업종분류 대10/중75/소247 · 원자 마케팅 기능 8)",
     "엣지 스키마": "03_step2-relations.md (H1 references dominance · H2 references fit)",
     "product prd_cd": "라이브 t_prd_products (DB 실측 2026-07-04)"
   }

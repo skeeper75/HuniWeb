@@ -47,8 +47,27 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
 import django  # noqa: E402
 django.setup()
 from catalog import models as M, pricing as P  # noqa: E402
+from django.db import connection  # noqa: E402
 
 DOM_ORDER = {"primary": 0, "secondary": 1, "tertiary": 2}
+
+
+def show_options(prd_cd):
+    """상품의 CPQ 옵션 타입(그룹) + 항목수 — '옵션 타입별 추천'(3단계)의 데이터."""
+    with connection.cursor() as c:
+        c.execute(
+            """SELECT COALESCE(NULLIF(g.usr_def_nm,''), g.opt_grp_nm), g.sel_typ_cd, g.mand_yn
+               FROM t_prd_product_option_groups g
+               WHERE g.prd_cd=%s AND COALESCE(g.del_yn,'N')='N' AND COALESCE(g.use_yn,'Y')='Y'
+               ORDER BY g.disp_seq""", [prd_cd])
+        return c.fetchall()
+
+
+def find_product(layer, name):
+    for pid, p in layer["products"].items():
+        if name == p["name"] or name in p["name"] or name == p["prd_cd"]:
+            return pid, p
+    return None, None
 
 
 def pick_and_quote(prd_cd, qty):
@@ -79,12 +98,39 @@ def resolve_industry(layer, arg):
 
 def main():
     if len(sys.argv) < 2:
-        print("사용법: run_front_half.py <업종> [수량] [기능node]"); return 1
+        print("사용법: run_front_half.py <업종> [수량] [기능node]")
+        print("       run_front_half.py opts <상품명> [수량]   (옵션 타입별 보기·3단계)")
+        return 1
+    layer = json.load(open(LAYER, encoding="utf-8"))
+
+    # 모드: opts <상품명> — 선택한 홍보물의 옵션 타입 + 실견적 (3단계)
+    if sys.argv[1] == "opts":
+        name = sys.argv[2] if len(sys.argv) > 2 else ""
+        qty = int(sys.argv[3]) if len(sys.argv) > 3 else 100
+        pid, p = find_product(layer, name)
+        if not p:
+            print(f"상품 '{name}' 없음."); return 1
+        print("=" * 66)
+        print(f"선택: {p['name']}  [{pid} · {p['prd_cd']}] · {qty}개")
+        print("=" * 66)
+        rows = show_options(p["prd_cd"])
+        if rows:
+            print(f"\n▶ 옵션 타입 {len(rows)}종 (손님이 고르는 축 — 타입별 추천 대상):")
+            for nm, sel, mand in rows:
+                req = "필수" if mand == "Y" else "선택"
+                print(f"    · {nm or '(무명)':<20} [{req}·{sel}]")
+        else:
+            print("\n▶ 옵션 타입 없음(사양 고정).")
+        res = pick_and_quote(p["prd_cd"], qty)
+        if res:
+            print(f"\n▶ 기본 구성 견적 = {res.get('final_price'):,}원  (src={res.get('base',{}).get('source')})")
+        print("\n" + "-" * 66)
+        print("옵션 타입 데이터=라이브 실재 · '타입별 3개 추천' 순위=엔진 몫(recommendation_function 보류)")
+        return 0
+
     arg_ind = sys.argv[1]
     qty = int(sys.argv[2]) if len(sys.argv) > 2 else 100
     want_fn = sys.argv[3] if len(sys.argv) > 3 else None
-
-    layer = json.load(open(LAYER, encoding="utf-8"))
     iid, ind = resolve_industry(layer, arg_ind)
     if not ind:
         print(f"업종 '{arg_ind}' 없음. 가능: " + ", ".join(n["label"] for n in layer["industries"].values()))
