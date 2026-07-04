@@ -70,6 +70,8 @@ class Fix:
     needs_engine_change: bool = False    # 엔진 코드 변경 필요(=C트랙·데이터만으로 못 닫음)
     worklist_note: str = ""              # worklist 계열: 실무진/권위/설계에 넘길 지시(SQL 대체)
     root_comps: list = field(default_factory=list)  # 근본원인 comp_cd(들) — plan 근본원인 dedup·추적용
+    mutation: dict = field(default_factory=dict)    # fix_sql 의 기계판독 쌍 — P4 재실측이 in-memory 적용
+    # mutation 형식: {"table":..., "key":{col:val}, "set":{col:new}} (auto_data 만·값 날조 없는 변경)
 
     def __post_init__(self):
         if self.remediation_class not in REMEDIATION_CLASS:

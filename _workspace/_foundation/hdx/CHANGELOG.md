@@ -1,5 +1,36 @@
 # hdx — CHANGELOG (최신 위 PREPEND)
 
+## 2026-07-04 — P4 적대적 재실측 (`hdx/verify/`)
+
+**목표**: auto_data 교정본을 적재 **전**, `foundation/engine.py`(pricing.py verbatim)로 독립 재계산해
+배치가 스스로 검증(생성≠검증·설계 §2 L5·§6). auto_data 게이트의 "★P4 재실측" 술어를 실제로 충전.
+
+**3면 판정**(전부 통과=GO·하나라도 실패=NO-GO·적재 금지):
+1. **가격중립** — engine 재계산이 교정 전/후 단가 동일(허용오차 0). 영향 comp 를 `mutation` 에서 해석
+   (price_components→key.comp_cd·component_prices→comp_price_id 역추적).
+2. **결함해소** — 교정이 겨냥한 결함(fix.defects)이 재진단에서 사라짐.
+3. **무회귀** — 어떤 차원에도 새 결함 0(적대적: 교정이 다른 곳을 깨지 않는가). 전 Diagnoser 재실행 diff.
+
+**구조**:
+- `overlay.py` `MutableSnapshot` — `Fix.mutation`(기계판독 쌍·`models.py` 가산)을 스냅샷 사본에 in-memory
+  적용(라이브 미변경·JSON 컬럼 직렬화). Diagnoser·engine_rows 가 `table()` 경유하므로 오버레이 전파.
+- `golden.py` — engine.match_component 로 comp 단가 재실측(대표 선택=각 단가행 자기 차원값).
+- `base.py` — `Verdict` + `verify_fix(fix, snap_dir)`.
+- 진입점 `--verify` 플래그(→ remediate 자동 활성). `verify/verify-report.md` 산출.
+
+**파일럿 결과**(snap_20260704_1507): `COMP_POSTER_CANVAS_HANGING` use_dims += siz_cd = **GO**.
+- 가격중립: engine 이 siz_cd 를 use_dims 무관하게 하드코딩(NON_QTY_DIMS) 매칭 → 단가 불변 실증
+  (실단가 10500/20000/6000 매칭·**허수 GO 아님**). 결함해소: UNDECLARED·siz_cd 1→0. 무회귀: 새 결함 0.
+  → 순수 정합 개선(가격 안 바뀌고 UI/차원 인식만 교정).
+- **음성 대조**(항상-GO 버그 배제): 단가행 unit_price 변조 mutation → 검증기가 **NO-GO**(가격중립 아님)를 낸다.
+  검증기가 GO/NO-GO 를 실제 구별함 증명.
+
+**셀프테스트**(`verify/_selftest.py`): 재실측 실질성·파일럿 GO·음성대조 NO-GO·worklist SKIP 4검증 GO.
+foundation/remediate 셀프테스트 회귀 GO(models.py `mutation` 가산 무해).
+
+**다음**: P5 반자동 라운드 루프(scan→board→remediate→verify→[인간]→적재→재scan) + OptionCpqDx 신규(메쉬
+타공 dtl_opt 근거) + codex 2차(선택). 파일럿 포스터 교정 = P4 GO → 첫 라운드 인간 승인·적재 후보.
+
 ## 2026-07-04 — P3 교정생성 (`hdx/remediate/`)
 
 **목표**: 진단 결함(Defect) → 교정본(Fix)을 공통 `Remediator` 계약으로 생성(설계 §2 L4).

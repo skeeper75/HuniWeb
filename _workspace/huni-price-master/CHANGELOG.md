@@ -1,5 +1,13 @@
 # §27 price-master — CHANGELOG (최신 위 PREPEND)
 
+## 2026-07-04 — 통합 배치 hdx P4: 적대적 재실측(engine verbatim)
+
+auto_data 교정본을 적재 전 `foundation/engine.py`(pricing.py verbatim)로 독립 재계산해 자체검증(생성≠검증).
+3면 판정=가격중립(교정 전/후 단가 허용오차 0)·결함해소·무회귀(새 결함 0). `MutableSnapshot` 오버레이로
+`Fix.mutation`을 스냅샷 사본에 in-memory 적용(라이브 미변경). 파일럿=포스터 use_dims+=siz_cd **GO**
+(엔진 siz_cd 하드코딩 매칭→가격중립·UNDECLARED 1→0·무회귀·실단가 매칭 실증). 음성대조(단가 변조→NO-GO)로
+검증기 GO/NO-GO 구별 증명. 상세=`_workspace/_foundation/hdx/CHANGELOG.md`(다음 P5 반자동 루프+OptionCpqDx+codex).
+
 ## 2026-07-04 — 통합 배치 hdx P3: 교정생성(값 날조 금지 라우팅)
 
 진단 결함(Defect)→교정본(Fix)을 공통 `Remediator` 계약으로 생성. **[HARD] 값 날조 금지**:

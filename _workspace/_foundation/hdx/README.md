@@ -12,8 +12,8 @@
 | **P1** | `foundation/` 공용 토대(snapshot·db·engine·models·env·sim) | **완료**(셀프테스트 GO) |
 | **P2** | 5 스캐너 → `Diagnoser` 계약 어댑트 + 통합 결함보드 | **완료**(가격 파일럿 GO) |
 | **P3** | `Remediator` 교정생성 통일(dryrun/fix/undo·백업·게이트·worklist) | **완료**(값 날조 금지 라우팅) |
-| P4 | 적대적 재실측(engine verbatim) 배치 편입 | 다음 |
-| P5 | 반자동 라운드 루프 + OptionCpqDx 신규 + (선택)codex | — |
+| **P4** | 적대적 재실측(engine verbatim·가격중립·결함해소·무회귀) | **완료**(파일럿 GO·음성대조 검증) |
+| P5 | 반자동 라운드 루프 + OptionCpqDx 신규 + (선택)codex | 다음 |
 
 파일럿 = **가격 도메인** 종단 후 판형·수량·옵션CPQ 전파.
 
@@ -104,6 +104,28 @@ python3 _workspace/_foundation/hdx/diagnose_remediate.py --scope price --remedia
 - **전 결함 라우팅**(no silent caps): Σ Fix.defects == 진단 결함 총수(누락 0).
 - 셀프테스트: `python3 _workspace/_foundation/hdx/remediate/_selftest.py`
   (전 결함 라우팅·SQL 건전성·근본원인 dedup·값 날조 금지 4검증).
+
+## verify/ (P4)
+
+`auto_data` 교정본을 적재 **전**, `foundation/engine.py`(pricing.py verbatim)로 독립 재계산해
+자체 검증(생성≠검증). 교정본 `mutation`(기계판독 쌍)을 스냅샷 사본에 **in-memory 적용**(라이브 미변경).
+
+```bash
+python3 _workspace/_foundation/hdx/diagnose_remediate.py --scope price --verify
+# → verify/verify-report.md (교정본별 GO/NO-GO·가격중립·결함해소·무회귀)
+```
+
+각 auto_data Fix 를 3면으로 판정(전부 통과=GO):
+1. **가격중립** — engine 재계산이 교정 전/후 단가 동일(허용오차 0). 영향 comp 를 mutation 에서 해석.
+2. **결함해소** — 교정이 겨냥한 결함(fix.defects)이 재진단에서 사라짐.
+3. **무회귀** — 어떤 차원에도 새 결함 0(적대적: 교정이 다른 곳을 깨지 않는가).
+
+- **파일럿 결과**: `COMP_POSTER_CANVAS_HANGING` use_dims += siz_cd = **GO**(가격중립·결함해소·무회귀).
+  엔진은 siz_cd 를 use_dims 무관하게 하드코딩 매칭 → 순수 정합 개선(가격 안 바뀜) 실증.
+- **음성 대조**(항상-GO 버그 배제): 단가행 unit_price 변조 mutation → 가격중립 아님·NO-GO 를 검증기가 낸다.
+- worklist 계열(값 날조 대상)은 SKIP(verifiable=False). codex 2차는 P5(선택).
+- 셀프테스트: `python3 _workspace/_foundation/hdx/verify/_selftest.py`
+  (재실측 실질성·파일럿 GO·음성대조 NO-GO·worklist SKIP 4검증).
 
 ## [HARD] 규칙
 - 라이브 = `RAILWAY_DB_*` 읽기전용 SELECT + 롤백전용 DRY-RUN만. 쓰기는 인간 승인 채널.

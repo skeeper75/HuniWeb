@@ -57,6 +57,9 @@ class DimConformanceRmd(Remediator):
                 title=f"use_dims 선언 추가: {comp_cd} += {dims_to_add}",
                 defects=[d.key() for d in ds],
                 backup_table=bak,
+                mutation={"table": "t_prc_price_components",
+                          "key": {"comp_cd": comp_cd},
+                          "set": {"use_dims": new}},   # 기계판독(P4 in-memory 적용·값 날조 없음)
                 gates=[
                     f"사후: use_dims 에 {dims_to_add} 포함(선언 반영)",
                     "★P4 재실측: 이 comp 를 쓰는 상품 골든가 변동 0(가격중립 확인) — 변동 시 NO-GO",

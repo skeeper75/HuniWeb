@@ -23,9 +23,29 @@ from hdx.foundation import Snapshot            # noqa: E402
 from hdx.diagnose import PRICE_DIAGNOSERS      # noqa: E402
 from hdx import board                          # noqa: E402
 from hdx.remediate import PRICE_REMEDIATORS, plan  # noqa: E402
+from hdx import verify as vf                   # noqa: E402
 
 SCOPES = {"price": PRICE_DIAGNOSERS}           # 전파 시 platesize/option/qty 추가
 REMEDIATORS = {"price": PRICE_REMEDIATORS}
+
+
+def _verify_report(verdicts, snap_name) -> pathlib.Path:
+    """P4 재실측 결과 → verify/verify-report.md."""
+    out_dir = _HERE / "verify"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    L = [f"# hdx P4 적대적 재실측 리포트 — {snap_name}\n",
+         "> engine(pricing.py verbatim) 독립 재계산. auto_data 교정본을 in-memory 적용해 "
+         "가격중립·결함해소·무회귀 검증. GO 만 인간 승인·적재 후보.\n",
+         "| 판정 | 교정 | 가격중립 | 결함해소 | 새결함 | 비고 |",
+         "|---|---|---|---|---|---|"]
+    for v in verdicts:
+        L.append(f"| **{v.mark}** | {v.fix_title} | "
+                 f"{'○' if v.price_neutral else f'✗({len(v.price_deltas)})'} | "
+                 f"{v.defects_closed}/{v.target_defects} | "
+                 f"{len(v.new_defects)} | {v.notes} |")
+    p = out_dir / "verify-report.md"
+    p.write_text("\n".join(L), encoding="utf-8")
+    return p
 
 
 def main():
@@ -37,7 +57,11 @@ def main():
     ap.add_argument("--note", default="", help="라운드 메모")
     ap.add_argument("--remediate", action="store_true",
                     help="진단 후 교정 플랜(P3) 생성: worklist(md/csv) + auto_data SQL 트리플")
+    ap.add_argument("--verify", action="store_true",
+                    help="auto_data 교정본을 engine verbatim 로 적대적 재실측(P4·가격중립·결함해소·무회귀)")
     args = ap.parse_args()
+    if args.verify:
+        args.remediate = True  # 재실측은 교정본이 필요
 
     snap = Snapshot(args.snap)
     diagnosers = SCOPES[args.scope]
@@ -74,6 +98,22 @@ def main():
         print(f"    auto_data SQL 파일 {len(sql_files)}개 (dryrun/fix/undo·인간 승인 전 실행 금지)")
         print(f"  -> {plan_md}")
         print(f"  -> {plan_csv}")
+
+        # ── P4 적대적 재실측(auto_data 만) ──
+        if args.verify:
+            autos = pres.by_class.get("auto_data", [])
+            verdicts = [vf.verify_fix(f, args.snap) for f in autos]
+            report = _verify_report(verdicts, res.snap_name)
+            print("  [verify P4 · engine verbatim 재실측]")
+            n_go = sum(1 for v in verdicts if v.verifiable and v.go)
+            n_nogo = sum(1 for v in verdicts if v.verifiable and not v.go)
+            n_skip = sum(1 for v in verdicts if not v.verifiable)
+            for v in verdicts:
+                print(f"    [{v.mark}] {v.fix_title[:70]}")
+                if v.notes:
+                    print(f"           {v.notes}")
+            print(f"    재실측 GO {n_go} · NO-GO {n_nogo} · SKIP {n_skip}")
+            print(f"  -> {report}")
 
     # 라운드 추적(append-only) — 수렴 추이
     if args.rnd is not None:
