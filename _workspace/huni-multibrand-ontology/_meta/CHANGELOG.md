@@ -2,6 +2,11 @@
 
 > 최신이 위(PREPEND). rules 파일(`.claude/rules/harness/huni-multibrand-ontology.md`)의 "변경이력:" 라인은 최신 1줄 포인터만.
 
+## 2026-07-04 — tykimos 추출 + 질의 시뮬레이터 명세
+
+- **tykimos/ontoair·onto-osint 추출**(→ `00_research/structure/tykimos-onto-projects-extraction.md`): Onto-OSINT=후니 형제 아키텍처(Claude·파일 핸드오프·경량 JSON·Neo4j/임베딩 배제)→경량 원칙 외부검증. 추출 개선(엣지 confidence·추론로그)/보완(★근거 N+ 승격 임계=키스톤 게이트·시간태깅 노후/드리프트)/확장(Reasoner 추론규칙·자동 재수집·config 브랜드확장). OntoAir=시각화 도구(RDF/OWL·연구용 비오픈)·아이디어만.
+- **질의 결합 시뮬레이터 명세**(→ `00_research/structure/query-simulator-spec.md`): ★결정 — 온톨로지 스튜디오 *행위*(질의→순회→답+하이라이트) 채택, 무거운 기질(Neo4j/OCR/임베딩) 기각→**우리 경량 그래프+nl-query-paths 위에** 얹음. OntoAir=시각화 아이디어만(코드 재사용 불가). 5단계 파이프라인(용어해석→경로순회→경계호출→답합성→시각화)·재사용 자산 조립(nl-query-paths×3·product_viewer/Cytoscape·evaluate_price)·경계=엔진 값 권위(D-18/D-ROUTE). 파일럿 P1(Q1 명함 후니vs와우 종단)→P2~P4. 명세까지·DB 미적재.
+
 ## 2026-07-04 — Phase 1~5 실행 + 구조 리서치 + 라우팅 층 설계·검증
 
 - **Phase 1~4 완주** — mbo-standards-researcher(00_research·상위개념22)∥mbo-catalog-analyst(01_analysis·와우 326상품 전량 quoted/jobcost·13 CSV 스크립트 전사) → mbo-crossbrand-mapper(02_crossbrand·정렬16쌍·4대 델타·최대=인쇄방식 prsjob) → mbo-ontology-architect(03_upper_ontology·개체17→22·관계19→23·NL질의10) → mbo-verify-gate(04_verification·**MB1~MB7 전부 GO**·codex 교차). ★팀 파일 버그: Agent `name` 파라미터 사용 시 "team file not found" → **name 없이 foreground 실행**으로 우회(전 에이전트 정상).
