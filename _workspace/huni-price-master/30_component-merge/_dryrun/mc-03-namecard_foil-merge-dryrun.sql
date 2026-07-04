@@ -1,0 +1,47 @@
+-- ============================================================
+-- MC-03  병합 DRY-RUN (ROLLBACK 전용 · COMMIT 아님 · 멱등 실증)
+-- 정본 COMP_NAMECARD_FOIL ← 4 멤버.  단가행 이관 36 · 영향공식 ['PRF_NAMECARD_FOIL']
+-- 실 적용은 인간 승인 후 별도 단계(ROLLBACK 을 COMMIT 으로 교체).
+-- ============================================================
+BEGIN;
+
+-- [가드0] 이관 전 정본 nat_key 충돌 사전검증 (0 이어야 안전):
+--   멤버 단가행을 정본으로 옮겼을 때 ux_t_prc_comp_prices_nat_key(15열) 중복이 없음을 예측 확인.
+WITH moved AS (
+  SELECT apply_ymd,siz_cd,plt_siz_cd,clr_cd,mat_cd,proc_cd,opt_cd,print_opt_cd,
+         coat_side_cnt,bdl_qty,siz_width,siz_height,min_qty,COALESCE(dim_vals,'{}'::jsonb) dv
+  FROM t_prc_component_prices WHERE comp_cd IN ('COMP_NAMECARD_FOIL_S1_STD', 'COMP_NAMECARD_FOIL_S1_HOLO', 'COMP_NAMECARD_FOIL_S2_STD', 'COMP_NAMECARD_FOIL_S2_HOLO'))
+SELECT '가드0 nat_key 충돌수(0 기대)' lbl, COUNT(*)-COUNT(DISTINCT (apply_ymd,siz_cd,plt_siz_cd,clr_cd,mat_cd,proc_cd,opt_cd,print_opt_cd,coat_side_cnt,bdl_qty,siz_width,siz_height,min_qty,dv::text)) AS collisions FROM moved;
+
+-- [1] 정본 comp 카탈로그 확정 (멱등 upsert)
+INSERT INTO t_prc_price_components (comp_cd, comp_nm, comp_typ_cd, note, use_yn, prc_typ_cd, use_dims, del_yn, reg_dt)
+VALUES ('COMP_NAMECARD_FOIL', '오리지널박명함 완제품가 단면·일반박(종이+동판+박)', 'PRC_COMPONENT_TYPE.06', '오리지널 박명함 완제품가(종이+동판+박 가공 합산). 인쇄면·박 종류·수량별 단가표. [차원통합] 통합축=print_opt_cd(면)·opt_cd(박종류)', 'Y', 'PRICE_TYPE.02', '["print_opt_cd", "opt_cd", "min_qty", "opt_grp:OPT_000080"]', 'N', now())
+ON CONFLICT (comp_cd) DO UPDATE SET comp_nm=EXCLUDED.comp_nm, comp_typ_cd=EXCLUDED.comp_typ_cd,
+  note=EXCLUDED.note, use_yn='Y', prc_typ_cd=EXCLUDED.prc_typ_cd, use_dims=EXCLUDED.use_dims, del_yn='N', upd_dt=now();
+
+-- [2] 단가행 이관: 멤버 comp_cd → 정본 (분리축 print_opt_cd/opt_cd/mat_cd 값은 행에 이미 충전됨·verbatim 불변)
+UPDATE t_prc_component_prices SET comp_cd='COMP_NAMECARD_FOIL', upd_dt=now()
+ WHERE comp_cd IN ('COMP_NAMECARD_FOIL_S1_STD', 'COMP_NAMECARD_FOIL_S1_HOLO', 'COMP_NAMECARD_FOIL_S2_STD', 'COMP_NAMECARD_FOIL_S2_HOLO');
+--   기대 이관 건수 = 36 (재실행 시 0 = 멱등)
+
+-- [3] formula_components 재배선: 멤버 배선행 DELETE + 정본 1행 UPSERT (공식별)
+DELETE FROM t_prc_formula_components WHERE comp_cd IN ('COMP_NAMECARD_FOIL_S1_STD', 'COMP_NAMECARD_FOIL_S1_HOLO', 'COMP_NAMECARD_FOIL_S2_STD', 'COMP_NAMECARD_FOIL_S2_HOLO');
+INSERT INTO t_prc_formula_components (frm_cd, comp_cd, disp_seq, addtn_yn, reg_dt) VALUES
+  ('PRF_NAMECARD_FOIL', 'COMP_NAMECARD_FOIL', 1, 'Y', now())
+ON CONFLICT (frm_cd, comp_cd) DO UPDATE SET disp_seq=EXCLUDED.disp_seq, addtn_yn=EXCLUDED.addtn_yn, upd_dt=now();
+
+-- [3b] 잔여(bystander) 구성요소 disp_seq 재정렬 (정본=1 뒤로 밀기)
+UPDATE t_prc_formula_components SET disp_seq=2, upd_dt=now() WHERE frm_cd='PRF_NAMECARD_FOIL' AND comp_cd='COMP_NAMECARD_FOIL_SETUP_S1_STD';
+UPDATE t_prc_formula_components SET disp_seq=3, upd_dt=now() WHERE frm_cd='PRF_NAMECARD_FOIL' AND comp_cd='COMP_NAMECARD_FOIL_SETUP_S2_STD';
+
+-- [4] 멤버 comp 논리삭제 (hard-delete 금지 · 기초코드 삭제금지 준수)
+UPDATE t_prc_price_components SET use_yn='N', del_yn='Y', del_dt=now(),
+  note='[차원통합→COMP_NAMECARD_FOIL]', upd_dt=now() WHERE comp_cd IN ('COMP_NAMECARD_FOIL_S1_STD', 'COMP_NAMECARD_FOIL_S1_HOLO', 'COMP_NAMECARD_FOIL_S2_STD', 'COMP_NAMECARD_FOIL_S2_HOLO');
+
+-- [검증] 오염가드: 정본 1개만 각 공식에 배선·멤버 잔존 배선 0·정본 단가행수 확인
+SELECT 'PRF_NAMECARD_FOIL 배선 comp수' lbl, string_agg(comp_cd||':'||disp_seq, ', ' ORDER BY disp_seq) FROM t_prc_formula_components WHERE frm_cd='PRF_NAMECARD_FOIL';
+SELECT '멤버 잔존배선(0기대)' lbl, COUNT(*) FROM t_prc_formula_components WHERE comp_cd IN ('COMP_NAMECARD_FOIL_S1_STD', 'COMP_NAMECARD_FOIL_S1_HOLO', 'COMP_NAMECARD_FOIL_S2_STD', 'COMP_NAMECARD_FOIL_S2_HOLO');
+SELECT '정본 단가행수(36기대)' lbl, COUNT(*) FROM t_prc_component_prices WHERE comp_cd='COMP_NAMECARD_FOIL';
+SELECT '멤버 잔존 단가행(0기대)' lbl, COUNT(*) FROM t_prc_component_prices WHERE comp_cd IN ('COMP_NAMECARD_FOIL_S1_STD', 'COMP_NAMECARD_FOIL_S1_HOLO', 'COMP_NAMECARD_FOIL_S2_STD', 'COMP_NAMECARD_FOIL_S2_HOLO');
+
+ROLLBACK;  -- DRY-RUN: 영속화 없음. 실 적용은 인간 승인 후 COMMIT 으로 교체.
