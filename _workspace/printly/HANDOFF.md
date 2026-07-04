@@ -1,4 +1,19 @@
-# HANDOFF — 프린틀리(Printly) · 2026-07-05 (4세션)
+# HANDOFF — 프린틀리(Printly) · 2026-07-05 (5세션)
+
+## ★다음 시작점 (5세션 종료 시점 · 재발견 0)
+
+**이번 세션 = 벤더 배정(소싱) 정책 정립 + 정확성 축 + 와우 제약/가격 인프라.** 메커니즘은 다 갖춰졌고, 남은 건 **큐레이션·정렬** 2가지로 수렴한다.
+
+- **정본 문서**: `09_vendor-sourcing-policy.md`(배정 정책·정체성·relitigate 금지) · `06/07/08`(추천 3층). 아래 섹션들은 근거 기록.
+- **완성된 것**: ①배정 기준 3층(능력→납기→경제성)·가격정책(원가+마진)·정체성(경쟁자=대행사·무기=디자인자동화) ②정확성 축(A-1 price_basis·A-5 same_family 게이트·family-verdicts.json) ③24 상품군 서비스 커버리지(양벤더 18·와우단독 6·`wow-service-coverage-260705.md`) ④와우 제약 그래프 ~21,000(`wow-constraints.json`·feasibility 토대) ⑤jobcost API 직접 배치(`wow_price_fetch.py`·인증·payload 검증) ⑥후니 부가세 별도 확정.
+- **★다음 (수렴 2트랙)**:
+  1. **대표 큐레이션**(후니·와우 공통 관문) — 상품군별 대표 사양 짝맞춤(스티커=합판도무송·명함=일반명함). 이게 되면 24군 깔끔한 배정표(양쪽 기본구성 공급가 비교). 후니 스펙=`.first()`→dflt_yn 이미 착수·와우=폴백 비전형 교정.
+  2. **제약 상위개념 정렬**(instance_of) — 후니↔와우 req/rst 제약(~21k)+구성요소를 브랜드-중립 상위개념에 걸어 **feasibility 질의**("어느 벤더가 이 조합 만드나") 실동. 착수 전: "미등록 vs 불가" 표식 분리(닫힌세계×노후catalog 오배제 방지).
+- **미해결/블로커**: ①후니 반칼원형 작은 원형 사이즈 미등록+dflt_yn 3중복(지니 교정 영역) ②쿠폰 A-13 재앵커(40110/40038)·A-11→40292·A-8→40232/40210 ③표준 리드타임 미수집(후니 모델 납기필드 없음·v2=API/MCP 실시간) ④라이브 신규4 fetch(catalog 부재) ⑤★open API=기본구성가만(colorno/ordqty 불변·양면/수량배수는 devshop콘솔/주문엔진·D-18) ⑥배치 실패 3군(부자재/와우기획=인쇄축無·책자=402).
+- **건드리지 말 것**: `wow-components.json`(§35 골든 dedup)·§33/§35 골든 자산·`09` 정책(지니 확정)·`.env.local`(WOWPRESS_AUTH 갱신됨·gitignored). 원칙3(AI 값판단 금지)·원칙4(node_id 근거).
+- **재사용 실행법**: 와우 API=`raw/.venv/bin/python`으로 `/api/login/issue`(WOWPRESS_AUTH_UID/PW)→token→`/api/v1/ord/cjson_jobcost`(Bearer). 비규격=width/height 필수. 후니 견적=crossbrand_query.huni_repr_price(dflt_yn). 배정표=sourcing_table.py·커버리지=service_coverage.py.
+
+---
 
 ## ★★5세션 재구성(260705·지니 확정) = 벤더 배정(소싱) 정책 — 소비자는 비교 안 본다
 

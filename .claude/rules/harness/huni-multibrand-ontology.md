@@ -28,7 +28,7 @@ paths:
   라이브(gstack 읽기전용) 재확인. **생성≠검증**·search-before-mint(§33 스키마·표준 이름표 재사용 우선).
 - **codex 폴백**(전 하네스 공통 프로토콜 ⑤): 필요 시 verify-gate가 codex 독립 교차, 미가용 시 "Claude 단독" 명시.
 
-변경이력: 최신은 `_workspace/huni-multibrand-ontology/_meta/CHANGELOG.md`(이 파일은 최신 1줄 포인터만). 최신(2026-07-05): 와우프레스 전 상품 온톨로지 등록(`04_wow-registration/`·catalog 324상품 결정론 전사·구성요소 dedup[인쇄방식12백본·재질504·규격919·후가공474]+used_by 공유맥락+제약그래프)·gstack browse 라이브대조(292 vs 326·신규4)·아키텍처=후니 권위 최상→나머지 전환·Printly 어댑터 브로커.
+변경이력: 최신은 `_workspace/huni-multibrand-ontology/_meta/CHANGELOG.md`(이 파일은 최신 1줄 포인터만). 최신(2026-07-05·5세션): 와우 전상품 온톨로지 등록(324·24군) 위에 → same_family_as 16쌍 독립검증 게이트(`02_crossbrand/family-verdicts.json`·GO11/DOWNGRADE5·쿠폰A-13 NO_GO) + **전체 req/rst 제약 그래프 등록**(`04_wow-registration/wow-constraints.json`·~21,000 제약·엣지 19,927+규칙 1,065·전 catalog 앵커·wow-components 골든 무손상) + products_spec 분석(`products-spec-ontology-mapping-260705.md`·D-18 경계) + jobcost API 직접 배치 언블록(open API=기본구성가·D-18). 다음=제약 상위개념 정렬(instance_of)→feasibility 질의.
 
 > 전문 원천: `docs/wowpress/`(OPEN API 문서·products_spec·price_order_spec PDF·catalog JSON 326상품).
 > 후니 온톨로지 스키마 승계 원천: `_workspace/huni-ontology-kb/02_ontology/ontology-schema.md`(개체17·관계19·출처5필드·badge4).
