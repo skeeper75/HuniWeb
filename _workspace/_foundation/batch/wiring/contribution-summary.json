@@ -1,49 +1,17 @@
 {
  "summary": {
-  "snap": "snap_20260701_0443",
-  "products_scanned": 91,
-  "bound_products": 122,
-  "set_skipped": 9,
-  "uncovered_process": 175,
-  "uncovered_HIGH": 8,
+  "snap": "snap_20260705_0041",
+  "products_scanned": 92,
+  "bound_products": 153,
+  "set_skipped": 19,
+  "uncovered_process": 167,
+  "uncovered_HIGH": 7,
   "proc_mismatch": 96,
-  "mismatch_HIGH": 10,
-  "orphan_proc_value": 12,
-  "verdict": "NO-GO(UNCOVERED-HIGH 8·MISMATCH-HIGH 10)"
+  "mismatch_HIGH": 6,
+  "orphan_proc_value": 7,
+  "verdict": "NO-GO(UNCOVERED-HIGH 7·MISMATCH-HIGH 6)"
  },
  "uncovered": [
-  [
-   "PRD_000016",
-   "PRF_DGP_A",
-   "PROC_000029",
-   "오시",
-   "HIGH",
-   "UNCOVERED_PROCESS"
-  ],
-  [
-   "PRD_000016",
-   "PRF_DGP_A",
-   "PROC_000030",
-   "미싱",
-   "HIGH",
-   "UNCOVERED_PROCESS"
-  ],
-  [
-   "PRD_000018",
-   "PRF_DGP_A",
-   "PROC_000029",
-   "오시",
-   "HIGH",
-   "UNCOVERED_PROCESS"
-  ],
-  [
-   "PRD_000018",
-   "PRF_DGP_A",
-   "PROC_000030",
-   "미싱",
-   "HIGH",
-   "UNCOVERED_PROCESS"
-  ],
   [
    "PRD_000023",
    "PRF_DGP_B",
@@ -87,6 +55,14 @@
   [
    "PRD_000025",
    "PRF_PHOTOCARD_CLEAR",
+   "PROC_000008",
+   "화이트인쇄",
+   "REVIEW",
+   "UNCOVERED_BAKED"
+  ],
+  [
+   "PRD_000025",
+   "PRF_PHOTOCARD_CLEAR",
    "PROC_000027",
    "직각",
    "REVIEW",
@@ -293,36 +269,20 @@
    "UNCOVERED_PROCESS"
   ],
   [
-   "PRD_000031",
-   "PRF_NAMECARD_PREMIUM",
-   "PROC_000027",
-   "직각",
-   "REVIEW",
-   "UNCOVERED_BAKED"
+   "PRD_000030",
+   "PRF_DGP_C_6CR",
+   "PROC_000073",
+   "6단오시접지",
+   "HIGH",
+   "UNCOVERED_PROCESS"
   ],
   [
-   "PRD_000031",
-   "PRF_NAMECARD_PREMIUM",
-   "PROC_000028",
-   "둥근",
-   "REVIEW",
-   "UNCOVERED_BAKED"
-  ],
-  [
-   "PRD_000031",
-   "PRF_NAMECARD_PREMIUM",
-   "PROC_000031",
-   "가변텍스트",
-   "REVIEW",
-   "UNCOVERED_BAKED"
-  ],
-  [
-   "PRD_000031",
-   "PRF_NAMECARD_PREMIUM",
-   "PROC_000032",
-   "가변이미지",
-   "REVIEW",
-   "UNCOVERED_BAKED"
+   "PRD_000030",
+   "PRF_DGP_C_6CR",
+   "PROC_000074",
+   "6단미싱접지",
+   "HIGH",
+   "UNCOVERED_PROCESS"
   ],
   [
    "PRD_000031",
@@ -616,7 +576,7 @@
    "PRD_000040",
    "PRF_NAMECARD_WHITE",
    "PROC_000008",
-   "화이트",
+   "화이트인쇄",
    "REVIEW",
    "UNCOVERED_BAKED"
   ],
@@ -624,7 +584,7 @@
    "PRD_000040",
    "PRF_NAMECARD_WHITE",
    "PROC_000009",
-   "클리어",
+   "클리어인쇄",
    "REVIEW",
    "UNCOVERED_BAKED"
   ],
@@ -643,38 +603,6 @@
    "둥근",
    "REVIEW",
    "UNCOVERED_BAKED"
-  ],
-  [
-   "PRD_000041",
-   "PRF_DGP_A",
-   "PROC_000029",
-   "오시",
-   "HIGH",
-   "UNCOVERED_PROCESS"
-  ],
-  [
-   "PRD_000041",
-   "PRF_DGP_A",
-   "PROC_000030",
-   "미싱",
-   "HIGH",
-   "UNCOVERED_PROCESS"
-  ],
-  [
-   "PRD_000042",
-   "PRF_DGP_A",
-   "PROC_000029",
-   "오시",
-   "HIGH",
-   "UNCOVERED_PROCESS"
-  ],
-  [
-   "PRD_000042",
-   "PRF_DGP_A",
-   "PROC_000030",
-   "미싱",
-   "HIGH",
-   "UNCOVERED_PROCESS"
   ],
   [
    "PRD_000042",
@@ -741,42 +669,26 @@
    "UNCOVERED_PROCESS"
   ],
   [
-   "PRD_000048",
-   "PRF_FOLD_SUM",
+   "PRD_000052",
+   "PRF_STK_FIXED",
    "PROC_000014",
    "유광라미네이팅",
    "REVIEW",
-   "UNCOVERED_PROCESS"
-  ],
-  [
-   "PRD_000048",
-   "PRF_FOLD_SUM",
-   "PROC_000015",
-   "무광라미네이팅",
-   "REVIEW",
-   "UNCOVERED_PROCESS"
-  ],
-  [
-   "PRD_000048",
-   "PRF_FOLD_SUM",
-   "PROC_000031",
-   "가변텍스트",
-   "REVIEW",
-   "UNCOVERED_PROCESS"
-  ],
-  [
-   "PRD_000048",
-   "PRF_FOLD_SUM",
-   "PROC_000032",
-   "가변이미지",
-   "REVIEW",
-   "UNCOVERED_PROCESS"
+   "UNCOVERED_BAKED"
   ],
   [
    "PRD_000052",
    "PRF_STK_FIXED",
-   "PROC_000054",
-   "반칼",
+   "PROC_000015",
+   "무광라미네이팅",
+   "REVIEW",
+   "UNCOVERED_BAKED"
+  ],
+  [
+   "PRD_000052",
+   "PRF_STK_FIXED",
+   "PROC_000122",
+   "반칼커팅",
    "REVIEW",
    "UNCOVERED_BAKED"
   ],
@@ -784,15 +696,15 @@
    "PRD_000053",
    "PRF_STK_FIXED",
    "PROC_000008",
-   "화이트",
+   "화이트인쇄",
    "REVIEW",
    "UNCOVERED_BAKED"
   ],
   [
    "PRD_000053",
    "PRF_STK_FIXED",
-   "PROC_000054",
-   "반칼",
+   "PROC_000122",
+   "반칼커팅",
    "REVIEW",
    "UNCOVERED_BAKED"
   ],
@@ -800,7 +712,7 @@
    "PRD_000054",
    "PRF_STK_FIXED",
    "PROC_000008",
-   "화이트",
+   "화이트인쇄",
    "REVIEW",
    "UNCOVERED_BAKED"
   ],
@@ -815,8 +727,16 @@
   [
    "PRD_000055",
    "PRF_STK_FIXED",
-   "PROC_000053",
-   "완칼",
+   "PROC_000114",
+   "쿨코팅",
+   "REVIEW",
+   "UNCOVERED_BAKED"
+  ],
+  [
+   "PRD_000055",
+   "PRF_STK_FIXED",
+   "PROC_000123",
+   "완칼커팅",
    "REVIEW",
    "UNCOVERED_BAKED"
   ],
@@ -824,7 +744,7 @@
    "PRD_000056",
    "PRF_STK_FIXED",
    "PROC_000008",
-   "화이트",
+   "화이트인쇄",
    "REVIEW",
    "UNCOVERED_BAKED"
   ],
@@ -847,40 +767,40 @@
   [
    "PRD_000058",
    "PRF_STK_FIXED",
-   "PROC_000055",
-   "스티커완칼",
+   "PROC_000122",
+   "반칼커팅",
    "REVIEW",
    "UNCOVERED_BAKED"
   ],
   [
    "PRD_000059",
    "PRF_STK_FIXED",
-   "PROC_000055",
-   "스티커완칼",
+   "PROC_000122",
+   "반칼커팅",
    "REVIEW",
    "UNCOVERED_BAKED"
   ],
   [
    "PRD_000060",
    "PRF_STK_FIXED",
-   "PROC_000055",
-   "스티커완칼",
+   "PROC_000122",
+   "반칼커팅",
    "REVIEW",
    "UNCOVERED_BAKED"
   ],
   [
    "PRD_000061",
    "PRF_STK_FIXED",
-   "PROC_000055",
-   "스티커완칼",
+   "PROC_000122",
+   "반칼커팅",
    "REVIEW",
    "UNCOVERED_BAKED"
   ],
   [
    "PRD_000062",
    "PRF_STK_FIXED",
-   "PROC_000055",
-   "스티커완칼",
+   "PROC_000122",
+   "반칼커팅",
    "REVIEW",
    "UNCOVERED_BAKED"
   ],
@@ -888,15 +808,15 @@
    "PRD_000063",
    "PRF_STK_FIXED",
    "PROC_000008",
-   "화이트",
+   "화이트인쇄",
    "REVIEW",
    "UNCOVERED_BAKED"
   ],
   [
    "PRD_000063",
    "PRF_STK_FIXED",
-   "PROC_000055",
-   "스티커완칼",
+   "PROC_000122",
+   "반칼커팅",
    "REVIEW",
    "UNCOVERED_BAKED"
   ],
@@ -905,14 +825,6 @@
    "PRF_STK_FIXED",
    "PROC_000054",
    "반칼",
-   "REVIEW",
-   "UNCOVERED_BAKED"
-  ],
-  [
-   "PRD_000066",
-   "PRF_GANGPAN_FIXED",
-   "PROC_000055",
-   "스티커완칼",
    "REVIEW",
    "UNCOVERED_BAKED"
   ],
@@ -941,18 +853,50 @@
    "UNCOVERED_PROCESS"
   ],
   [
+   "PRD_000108",
+   "PRF_DGP_CAL_DESK",
+   "PROC_000076",
+   "수축포장",
+   "REVIEW",
+   "UNCOVERED_PROCESS"
+  ],
+  [
+   "PRD_000109",
+   "PRF_DGP_CAL_DESK",
+   "PROC_000076",
+   "수축포장",
+   "REVIEW",
+   "UNCOVERED_PROCESS"
+  ],
+  [
+   "PRD_000110",
+   "PRF_DGP_INNER",
+   "PROC_000079",
+   "타공",
+   "HIGH",
+   "UNCOVERED_PROCESS"
+  ],
+  [
+   "PRD_000111",
+   "PRF_DGP_CAL_WIDE",
+   "PROC_000079",
+   "타공",
+   "HIGH",
+   "UNCOVERED_PROCESS"
+  ],
+  [
    "PRD_000118",
    "PRF_POSTER_ARTPRINT",
-   "PROC_000014",
-   "유광라미네이팅",
+   "PROC_000115",
+   "유광코팅",
    "REVIEW",
    "UNCOVERED_BAKED"
   ],
   [
    "PRD_000118",
    "PRF_POSTER_ARTPRINT",
-   "PROC_000015",
-   "무광라미네이팅",
+   "PROC_000116",
+   "무광코팅",
    "REVIEW",
    "UNCOVERED_BAKED"
   ],
@@ -992,15 +936,15 @@
    "PRD_000122",
    "PRF_POSTER_ADH_CLEAR",
    "PROC_000008",
-   "화이트",
+   "화이트인쇄",
    "REVIEW",
    "UNCOVERED_BAKED"
   ],
   [
    "PRD_000124",
    "PRF_POSTER_LINEN",
-   "PROC_000080",
-   "봉제",
+   "PROC_000130",
+   "봉제가공",
    "REVIEW",
    "UNCOVERED_BAKED"
   ],
@@ -1015,18 +959,26 @@
   [
    "PRD_000129",
    "PRF_POSTER_FOAMBOARD",
-   "PROC_000014",
-   "유광라미네이팅",
+   "PROC_000115",
+   "유광코팅",
    "REVIEW",
-   "UNCOVERED_BAKED"
+   "UNCOVERED_PROCESS"
   ],
   [
    "PRD_000129",
    "PRF_POSTER_FOAMBOARD",
-   "PROC_000015",
-   "무광라미네이팅",
+   "PROC_000116",
+   "무광코팅",
    "REVIEW",
-   "UNCOVERED_BAKED"
+   "UNCOVERED_PROCESS"
+  ],
+  [
+   "PRD_000129",
+   "PRF_POSTER_FOAMBOARD",
+   "PROC_000135",
+   "실사가공",
+   "REVIEW",
+   "UNCOVERED_PROCESS"
   ],
   [
    "PRD_000130",
@@ -1087,24 +1039,24 @@
   [
    "PRD_000136",
    "PRF_POSTER_PET_BANNER",
-   "PROC_000014",
-   "유광라미네이팅",
+   "PROC_000115",
+   "유광코팅",
    "REVIEW",
    "UNCOVERED_BAKED"
   ],
   [
    "PRD_000136",
    "PRF_POSTER_PET_BANNER",
-   "PROC_000015",
-   "무광라미네이팅",
+   "PROC_000116",
+   "무광코팅",
    "REVIEW",
    "UNCOVERED_BAKED"
   ],
   [
    "PRD_000136",
    "PRF_POSTER_PET_BANNER",
-   "PROC_000079",
-   "타공",
+   "PROC_000135",
+   "실사가공",
    "REVIEW",
    "UNCOVERED_BAKED"
   ],
@@ -1157,6 +1109,22 @@
    "UNCOVERED_BAKED"
   ],
   [
+   "PRD_000140",
+   "PRF_POSTER_SHEETCUT_MATTE",
+   "PROC_000125",
+   "시트커팅",
+   "REVIEW",
+   "UNCOVERED_BAKED"
+  ],
+  [
+   "PRD_000143",
+   "PRF_POSTER_ACRYLSTK_MIRROR",
+   "PROC_000124",
+   "레이저커팅",
+   "REVIEW",
+   "UNCOVERED_BAKED"
+  ],
+  [
    "PRD_000145",
    "PRF_POSTER_MINI_BANNER",
    "PROC_000014",
@@ -1175,6 +1143,30 @@
   [
    "PRD_000146",
    "PRF_CLR_ACRYL",
+   "PROC_000111",
+   "UV평판인쇄",
+   "HIGH",
+   "UNCOVERED_PROCESS"
+  ],
+  [
+   "PRD_000146",
+   "PRF_CLR_ACRYL",
+   "PROC_000124",
+   "레이저커팅",
+   "REVIEW",
+   "UNCOVERED_PROCESS"
+  ],
+  [
+   "PRD_000146",
+   "PRF_CLR_ACRYL",
+   "PROC_000151",
+   "굿즈가공",
+   "REVIEW",
+   "UNCOVERED_PROCESS"
+  ],
+  [
+   "PRD_000147",
+   "PRF_ACRYL_MAGNET",
    "PROC_000002",
    "UV",
    "REVIEW",
@@ -1182,15 +1174,7 @@
   ],
   [
    "PRD_000147",
-   "PRF_CLR_ACRYL",
-   "PROC_000002",
-   "UV",
-   "REVIEW",
-   "UNCOVERED_PROCESS"
-  ],
-  [
-   "PRD_000147",
-   "PRF_CLR_ACRYL",
+   "PRF_ACRYL_MAGNET",
    "PROC_000081",
    "부착",
    "REVIEW",
@@ -1206,7 +1190,7 @@
   ],
   [
    "PRD_000149",
-   "PRF_CLR_ACRYL",
+   "PRF_ACRYL_CLIP",
    "PROC_000002",
    "UV",
    "REVIEW",
@@ -1217,6 +1201,22 @@
    "PRF_CLR_ACRYL",
    "PROC_000002",
    "UV",
+   "REVIEW",
+   "UNCOVERED_PROCESS"
+  ],
+  [
+   "PRD_000151",
+   "PRF_CLR_ACRYL",
+   "PROC_000002",
+   "UV",
+   "REVIEW",
+   "UNCOVERED_PROCESS"
+  ],
+  [
+   "PRD_000151",
+   "PRF_CLR_ACRYL",
+   "PROC_000081",
+   "부착",
    "REVIEW",
    "UNCOVERED_PROCESS"
   ],
@@ -1293,124 +1293,60 @@
    "UNCOVERED_PROCESS"
   ],
   [
-   "PRD_000172",
-   "PRF_STN_DIARY_SOFT",
-   "PROC_000015",
-   "무광라미네이팅",
-   "REVIEW",
-   "UNCOVERED_BAKED"
+   "PRD_000217",
+   "PRF_GOODS_FIXED_SIZ",
+   "PROC_000112",
+   "도장인쇄",
+   "HIGH",
+   "UNCOVERED_PROCESS"
   ],
   [
-   "PRD_000173",
-   "PRF_STN_DIARY_HARD",
-   "PROC_000015",
-   "무광라미네이팅",
+   "PRD_000217",
+   "PRF_GOODS_FIXED_SIZ",
+   "PROC_000139",
+   "도장가공",
    "REVIEW",
-   "UNCOVERED_BAKED"
+   "UNCOVERED_PROCESS"
   ],
   [
-   "PRD_000173",
-   "PRF_STN_DIARY_HARD",
-   "PROC_000023",
-   "하드커버무선제본",
-   "REVIEW",
-   "UNCOVERED_BAKED"
+   "PRD_000220",
+   "PRF_GOODS_FIXED_SIZ",
+   "PROC_000110",
+   "전사인쇄",
+   "HIGH",
+   "UNCOVERED_PROCESS"
   ],
   [
-   "PRD_000173",
-   "PRF_STN_DIARY_HARD",
-   "PROC_000076",
-   "수축포장",
+   "PRD_000232",
+   "PRF_GOODS_FIXED_SIZ",
+   "PROC_000108",
+   "패브릭출력",
    "REVIEW",
-   "UNCOVERED_BAKED"
+   "UNCOVERED_PROCESS"
   ],
   [
-   "PRD_000174",
-   "PRF_STN_DIARY_LHARD",
-   "PROC_000023",
-   "하드커버무선제본",
+   "PRD_000232",
+   "PRF_GOODS_FIXED_SIZ",
+   "PROC_000130",
+   "봉제가공",
    "REVIEW",
-   "UNCOVERED_BAKED"
+   "UNCOVERED_PROCESS"
   ],
   [
-   "PRD_000176",
-   "PRF_STN_MONTHLY",
-   "PROC_000015",
-   "무광라미네이팅",
+   "PRD_000239",
+   "PRF_GOODS_FIXED_SIZ",
+   "PROC_000081",
+   "부착",
    "REVIEW",
-   "UNCOVERED_BAKED"
+   "UNCOVERED_PROCESS"
   ],
   [
-   "PRD_000177",
-   "PRF_STN_SPRINGNOTE",
-   "PROC_000015",
-   "무광라미네이팅",
+   "PRD_000240",
+   "PRF_GOODS_FIXED_SIZ",
+   "PROC_000081",
+   "부착",
    "REVIEW",
-   "UNCOVERED_BAKED"
-  ],
-  [
-   "PRD_000177",
-   "PRF_STN_SPRINGNOTE",
-   "PROC_000021",
-   "트윈링제본",
-   "REVIEW",
-   "UNCOVERED_BAKED"
-  ],
-  [
-   "PRD_000177",
-   "PRF_STN_SPRINGNOTE",
-   "PROC_000076",
-   "수축포장",
-   "REVIEW",
-   "UNCOVERED_BAKED"
-  ],
-  [
-   "PRD_000178",
-   "PRF_STN_SPRINGNOTEBK",
-   "PROC_000015",
-   "무광라미네이팅",
-   "REVIEW",
-   "UNCOVERED_BAKED"
-  ],
-  [
-   "PRD_000178",
-   "PRF_STN_SPRINGNOTEBK",
-   "PROC_000021",
-   "트윈링제본",
-   "REVIEW",
-   "UNCOVERED_BAKED"
-  ],
-  [
-   "PRD_000179",
-   "PRF_STN_MEMOPAD",
-   "PROC_000015",
-   "무광라미네이팅",
-   "REVIEW",
-   "UNCOVERED_BAKED"
-  ],
-  [
-   "PRD_000179",
-   "PRF_STN_MEMOPAD",
-   "PROC_000022",
-   "떡제본",
-   "REVIEW",
-   "UNCOVERED_BAKED"
-  ],
-  [
-   "PRD_000181",
-   "PRF_STN_JUNGCHEOL",
-   "PROC_000015",
-   "무광라미네이팅",
-   "REVIEW",
-   "UNCOVERED_BAKED"
-  ],
-  [
-   "PRD_000181",
-   "PRF_STN_JUNGCHEOL",
-   "PROC_000018",
-   "중철제본",
-   "REVIEW",
-   "UNCOVERED_BAKED"
+   "UNCOVERED_PROCESS"
   ]
  ],
  "mismatch": [
@@ -2027,6 +1963,15 @@
    "PROC_MISMATCH"
   ],
   [
+   "PRD_000030",
+   "PRF_DGP_C_6CR",
+   "COMP_CUT_PERF_1H6",
+   "타공비 (6mm)",
+   "PROC_000092",
+   "REVIEW",
+   "PROC_MISMATCH"
+  ],
+  [
    "PRD_000041",
    "PRF_DGP_A",
    "COMP_PRINT_SPOT_WHITE_S1",
@@ -2198,12 +2143,30 @@
    "PROC_MISMATCH"
   ],
   [
-   "PRD_000051",
-   "PRF_DGP_F",
-   "COMP_PRINT_DIGITAL_S1",
-   "디지털인쇄비",
-   "PROC_000004",
-   "HIGH",
+   "PRD_000048",
+   "PRF_DGP_E",
+   "COMP_CUT_PERF_1H6",
+   "타공비 (6mm)",
+   "PROC_000092",
+   "REVIEW",
+   "PROC_MISMATCH"
+  ],
+  [
+   "PRD_000049",
+   "PRF_DGP_E",
+   "COMP_FOLD_LEAF_HALF",
+   "접지비 리플렛 반접지",
+   "PROC_000065;PROC_000066;PROC_000107",
+   "REVIEW",
+   "PROC_MISMATCH"
+  ],
+  [
+   "PRD_000049",
+   "PRF_DGP_E",
+   "COMP_CUT_PERF_1H6",
+   "타공비 (6mm)",
+   "PROC_000092",
+   "REVIEW",
    "PROC_MISMATCH"
   ],
   [
@@ -2234,26 +2197,8 @@
    "PROC_MISMATCH"
   ],
   [
-   "PRD_000288",
-   "PRF_BOOK_COVER",
-   "COMP_PRINT_DIGITAL_S1",
-   "디지털인쇄비",
-   "PROC_000004",
-   "HIGH",
-   "PROC_MISMATCH"
-  ],
-  [
    "PRD_000289",
    "PRF_DGP_INNER",
-   "COMP_PRINT_DIGITAL_S1",
-   "디지털인쇄비",
-   "PROC_000004",
-   "HIGH",
-   "PROC_MISMATCH"
-  ],
-  [
-   "PRD_000290",
-   "PRF_BOOK_COVER",
    "COMP_PRINT_DIGITAL_S1",
    "디지털인쇄비",
    "PROC_000004",
@@ -2268,37 +2213,21 @@
    "PROC_000004",
    "HIGH",
    "PROC_MISMATCH"
-  ],
-  [
-   "PRD_000292",
-   "PRF_BOOK_COVER",
-   "COMP_PRINT_DIGITAL_S1",
-   "디지털인쇄비",
-   "PROC_000004",
-   "HIGH",
-   "PROC_MISMATCH"
   ]
  ],
  "orphan_proc": [
   [
    "COMP_PRINT_SPOT_WHITE_S1",
    "별색인쇄비",
-   "PROC_000012",
-   "은색",
+   "PROC_000011",
+   "금색인쇄",
    "ORPHAN_PROC_VALUE"
   ],
   [
    "COMP_PRINT_SPOT_WHITE_S1",
    "별색인쇄비",
-   "PROC_000011",
-   "금색",
-   "ORPHAN_PROC_VALUE"
-  ],
-  [
-   "COMP_FOLD_LEAF_4GATE",
-   "접지비 리플렛 4단게이트",
-   "PROC_000106",
-   "4단대문접지",
+   "PROC_000012",
+   "은색인쇄",
    "ORPHAN_PROC_VALUE"
   ],
   [
@@ -2311,29 +2240,15 @@
   [
    "COMP_BIND_CAL_WALL",
    "제본비 벽걸이캘린더",
-   "PROC_000100",
-   "탁상형캘린더제본(220)",
-   "ORPHAN_PROC_VALUE"
-  ],
-  [
-   "COMP_BIND_CAL_WALL",
-   "제본비 벽걸이캘린더",
-   "PROC_000102",
-   "탁상형캘린더제본(미니)",
-   "ORPHAN_PROC_VALUE"
-  ],
-  [
-   "COMP_BIND_CAL_WALL",
-   "제본비 벽걸이캘린더",
    "PROC_000101",
    "탁상형캘린더제본(130)",
    "ORPHAN_PROC_VALUE"
   ],
   [
-   "COMP_BIND_CAL_WALL",
-   "제본비 벽걸이캘린더",
-   "PROC_000099",
-   "벽걸이캘린더제본",
+   "COMP_CUT_PERF_1H6",
+   "타공비 (6mm)",
+   "PROC_000092",
+   "1구 4mm 타공",
    "ORPHAN_PROC_VALUE"
   ],
   [
@@ -2349,20 +2264,6 @@
    "PROC_000086",
    "미싱",
    "ORPHAN_PROC_VALUE"
-  ],
-  [
-   "COMP_CUT_PERF_1H6",
-   "타공비 (6mm)",
-   "PROC_000092",
-   "1구 4mm 타공",
-   "ORPHAN_PROC_VALUE"
-  ],
-  [
-   "COMP_FOLD_LEAF_HALF",
-   "접지비 리플렛 반접지",
-   "PROC_000107",
-   "반접지",
-   "ORPHAN_PROC_VALUE"
   ]
  ],
  "set_skipped": [
@@ -2372,8 +2273,18 @@
   "PRD_000072",
   "PRD_000077",
   "PRD_000082",
+  "PRD_000088",
   "PRD_000094",
   "PRD_000097",
-  "PRD_000100"
+  "PRD_000100",
+  "PRD_000172",
+  "PRD_000173",
+  "PRD_000174",
+  "PRD_000175",
+  "PRD_000176",
+  "PRD_000177",
+  "PRD_000178",
+  "PRD_000179",
+  "PRD_000181"
  ]
 }

@@ -91,6 +91,28 @@ def scan(prd_only=None, snap=None):
         if c and pc:
             comp_procs.setdefault(c, set()).add(pc)
 
+    # ★정밀화(260705 hdx): COMP use_dims 의 proc_grp:PROC_XXX 도 그 COMP 가 '커버하는 공정'
+    #   으로 인정한다. 공정코드 이원화(상품연결 PROC_000029/030 오시·미싱 ↔ 단가행 유령
+    #   PROC_000090/086) 때문에 단가행 proc_cd 만 보면 배선·과금 완비인데도 UNCOVERED 오탐이
+    #   났다(오시·미싱·쿠폰 4상품). proc_grp 는 COMP 가 어느 공정을 겨냥하는지의 권위 선언이므로
+    #   이를 커버로 흡수. ★미배선 공정은 wired 에 없어 covered 에 안 들어가므로(캘린더 타공 등)
+    #   진짜 저청구는 그대로 잡힌다 — 오탐만 제거, 진짜는 보존.
+    #   ★[분리] 커버 판정 전용(comp_cover)에만 proc_grp 를 흡수한다. orphan_proc·conf(dual)
+    #   판정은 원래 단가행 proc_cd(comp_procs)만 써야 한다 — proc_grp 를 comp_procs 에 섞으면
+    #   orphan 집합이 오염돼 무관한 REVIEW 가 HIGH 로 오승격된다(생성검증서 적발).
+    comp_cover: dict[str, set] = {c: set(v) for c, v in comp_procs.items()}
+    for c, m in comp_meta.items():
+        ud = (m.get("use_dims") or "").strip()
+        try:
+            dims = json.loads(ud) if ud.startswith("[") else []
+        except Exception:
+            dims = []
+        for tok in dims:
+            if isinstance(tok, str) and tok.startswith("proc_grp:"):
+                pc = tok.split(":", 1)[1].strip()
+                if pc:
+                    comp_cover.setdefault(c, set()).add(pc)
+
     # 공식 → wired 구성요소
     frm_comps: dict[str, list] = {}
     for r in fc:
@@ -146,10 +168,10 @@ def scan(prd_only=None, snap=None):
             set_skipped.append(prd)
             continue
         wired = [c for c in frm_comps.get(frm, []) if c not in comp_del]
-        # 이 상품 공식의 wired 구성요소들이 커버하는 proc 값 집합(가격행 보유분)
+        # 이 상품 공식의 wired 구성요소들이 커버하는 proc 값 집합(단가행 proc + proc_grp 흡수)
         covered = set()
         for c in wired:
-            covered |= comp_procs.get(c, set())
+            covered |= comp_cover.get(c, set())
         # ★완제품가 가드: 공식에 완제품가(PRC_COMPONENT_TYPE.06) 비목이 있으면 소재+출력+가공이
         #   통가격에 포함 → 개별 공정 proc-coverage 무관(가공은 baked). UNCOVERED 오탐 방지.
         allin = any(comp_meta.get(c, {}).get("comp_typ_cd") == "PRC_COMPONENT_TYPE.06"
