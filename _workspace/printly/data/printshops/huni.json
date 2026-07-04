@@ -15,8 +15,8 @@
     "_note": "가격 '값'의 의미 경계(원칙3·06 §1). 값 자체는 엔진 권위. ★크로스벤더 비교는 이 basis가 벤더 간 정합할 때만 순위 판정(다르면 기권·A-1).",
     "channel": "retail",
     "channel_source": "evaluate_price=고객 견적 엔진(§33 라이브 고객가). 도매 채널 미제공.",
-    "vat_included": "unknown",
-    "vat_source": "raw/webadmin/webadmin/catalog/pricing.py final_price=round_won(running)·부가세 가산 코드 없음 → VAT 별도(excl) 추정·미확정(GAP-BASIS-1)",
+    "vat_included": false,
+    "vat_source": "★확정(260705·이전사이트 대조): huniprinting.com/product/goods.asp가 가격을 '공급가 : N원(부가세 전)'으로 표시(golden_fetch.py read_supply_price). evaluate_price 엔진도 부가세 미가산(pricing.py *1.1/VAT 0건)·엔진 결과=공급가. 새 시스템 스키마도 VAT_RATE=0.1로 공급가×0.1=부가세 별도 가산. → 후니 값=공급가(VAT-excl). GAP-BASIS-1 해소.",
     "output_field": "final_price",
     "included_baseline": "GAP(기본 제공물·기본 수량 미명세)",
     "gap": ["GAP-BASIS-1: vat_included 미확정(별도 추정)", "included_baseline 미명세"]
