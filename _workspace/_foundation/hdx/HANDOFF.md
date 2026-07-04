@@ -3,24 +3,27 @@
 > 새 세션은 이 파일 + `README.md` + 설계 청사진만 읽고 재발견 0으로 재개.
 > 설계: [`../DIAGNOSE-REMEDIATE-UNIFIED-BATCH-DESIGN-260704.md`](../DIAGNOSE-REMEDIATE-UNIFIED-BATCH-DESIGN-260704.md)
 
-## 다음 시작점 — P5 (반자동 라운드 루프 + OptionCpqDx 신규 + codex 선택)
+## 다음 시작점 — P5-② (OptionCpqDx 신규 + codex 선택 + 도메인 전파)
 
-**① 반자동 라운드 러너**(`hdx/loop/`): `scan→board→remediate→verify→[인간 승인]→적재→재스냅샷→재scan`
-을 한 라운드로 묶고 `board-rounds.csv`(이미 존재) 패턴으로 수렴 추이 기록. 전역 정지 = 전 차원 defect0
-+ 전 상품 PRICE≠0. **[HARD] 7·8(적재 COMMIT·webadmin)은 인간 게이트** — 러너는 거기서 정지(완전 무인 금지).
-현재 auto_data 파일럿(포스터 use_dims)이 **P4 GO** 상태 → 이 교정이 "인간 승인 후 적재→재스냅샷→
-component_merge 처럼 결함 해소 확인"의 첫 라운드 후보.
-
-**② OptionCpqDx 신규**(갭#5·설계 §3): 이번 세션 발견(메쉬 타공 옵션 `dtl_opt` 누락 → 저청구)이 근거.
-`t_prd_product_option_items.dtl_opt` 누락·ref_key 불일치·저청구를 전용 스캐너로 검출 → Diagnoser 편입.
+**① OptionCpqDx 신규**(갭#5·설계 §3): 이번 세션 발견(메쉬 타공 옵션 `dtl_opt` 누락 → 저청구)이 근거.
+`t_prd_product_option_items.dtl_opt` 누락·ref_key 불일치·저청구를 전용 스캐너로 검출 → `hdx/diagnose/option_cpq_dx.py`
+Diagnoser 편입(`PRICE_DIAGNOSERS` 추가). 대응 `OptionCpqRmd`(needs_authority/blocked_human 분류).
 (HANDOFF 후속 2번 "옵션 dtl_opt 누락 전수 점검"과 동일 트랙.)
 
-**③ codex 2차(선택)**(`hdx/verify/codex_gate.py`·설계 §6): `codex exec -s read-only` 로 교정본을 독립
+**② codex 2차(선택)**(`hdx/verify/codex_gate.py`·설계 §6): `codex exec -s read-only` 로 교정본을 독립
 판정·reconcile. `hpe-codex-validate` 스킬 로직 훅화. 미가용 시 "Claude 단독" 명시 폴백. 배치가 codex 부르는 최초 지점.
 
-**전파**(파일럿 검증 후): 판형(PlatesizeDx)·가격격자(PriceGridDx 19시트)·수량(QtyRuleDx) 차원 어댑트 → `--scope` 확장.
+**③ 도메인 전파**(파일럿 검증 후): 판형(PlatesizeDx←`diagnose_all.py`)·가격격자(PriceGridDx 19시트←
+`grid_diff.py`)·수량(QtyRuleDx←`qty_rule_audit_260702.py`) 차원 어댑트 → `SCOPES` 에 추가·`--scope platesize|qty|all`.
+
+**참고**: 파일럿 첫 라운드 실적재 실행(포스터 use_dims P4 GO)은 인간 승인 트랙 — 사용자에게 제시 후
+승인 시 fix SQL 실행→snapshot.sh 재생성→`--loop --round 4` 로 결함 감소(UNDECLARED siz_cd 소멸) 확인.
 
 ## 완료 (직전 세션)
+- **P5-① 반자동 라운드 러너** — `hdx/loop/`(runner) + 진입점 `--loop` 플래그. scan→board→remediate→verify 를
+  한 라운드로 묶어 **인간 게이트용 `round-report.md`**(적재 후보[P4 GO]·재실측 NO-GO·인간 입력 대기·다음 액션)
+  + `loop-rounds.csv`(수렴 추이) 산출 후 **인간 승인 지점서 정지**([HARD] 완전 무인 금지·적재/webadmin=인간).
+  실행 GO(라운드3: 적재 후보 1·인간 입력 326·전역 NO-GO). 셀프테스트 `loop/_selftest.py`(4검증 GO).
 - **P4 적대적 재실측** — `hdx/verify/`(base 계약 + overlay + golden) + 진입점 `--verify` 플래그.
   auto_data 교정본을 `foundation/engine.py`(pricing.py verbatim)로 독립 재계산·자체검증(생성≠검증).
   - 3면 판정(전부 통과=GO): ① **가격중립**(engine 재계산 교정 전/후 단가 허용오차 0) ② **결함해소**
@@ -51,9 +54,9 @@ component_merge 처럼 결함 해소 확인"의 첫 라운드 후보.
 4. **가격 도메인 파일럿** 종단 → 판형·수량·옵션CPQ 전파.
 
 ## 블로커·주의
-- 블로커 없음(P4 독립 완결·전 셀프테스트 GO).
+- 블로커 없음(P5-① 독립 완결·전 셀프테스트 4/4 GO).
 - **스냅샷 신선도**: 현재 latest=snap_20260704_1507(재생성·병합/타공 반영). 정본 검증엔 재생성(`live-snapshot/snapshot.sh`) 후 재실행 또는 게이트 단계 **라이브 재-SELECT**(메모리 H-1).
 - **[HARD] 건드리지 말 것**: `foundation/engine.py`는 pricing.py와 verbatim(엔진 변경 시 재이식·드리프트 0). `db.py`는 읽기전용 유지. 원본 스캐너(`batch/*.py`)·`dim_conformance.py`는 미변경(import·call 또는 포팅만). auto_data SQL 도 자동 COMMIT 금지(dryrun→P4→인간 승인). 완전 무인 자기회귀 금지(COMMIT=인간+webadmin).
 
 ## 큰 로드맵
-~~P2 보드~~ → ~~P3 Remediator~~ → ~~P4 적대적 재실측~~(전부 완료) → **P5 반자동 루프+OptionCpqDx 신규+codex**. 파일럿(가격) 종단 GO → 판형·수량·옵션CPQ 도메인 전파.
+~~P2 보드~~ → ~~P3 Remediator~~ → ~~P4 적대적 재실측~~ → ~~P5-① 반자동 루프~~(전부 완료) → **P5-② OptionCpqDx 신규 + codex 선택 + 도메인 전파**. 파일럿(가격) 종단 GO(진단→교정→재실측→라운드) → 판형·수량·옵션CPQ 전파.

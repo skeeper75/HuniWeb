@@ -24,6 +24,7 @@ from hdx.diagnose import PRICE_DIAGNOSERS      # noqa: E402
 from hdx import board                          # noqa: E402
 from hdx.remediate import PRICE_REMEDIATORS, plan  # noqa: E402
 from hdx import verify as vf                   # noqa: E402
+from hdx import loop as loop_mod               # noqa: E402
 
 SCOPES = {"price": PRICE_DIAGNOSERS}           # 전파 시 platesize/option/qty 추가
 REMEDIATORS = {"price": PRICE_REMEDIATORS}
@@ -59,7 +60,11 @@ def main():
                     help="진단 후 교정 플랜(P3) 생성: worklist(md/csv) + auto_data SQL 트리플")
     ap.add_argument("--verify", action="store_true",
                     help="auto_data 교정본을 engine verbatim 로 적대적 재실측(P4·가격중립·결함해소·무회귀)")
+    ap.add_argument("--loop", action="store_true",
+                    help="반자동 라운드(P5): 진단+교정+재실측 종합 → 인간 게이트용 round-report + 수렴 추이")
     args = ap.parse_args()
+    if args.loop:
+        args.verify = True     # 라운드 종합엔 재실측 결과가 필요
     if args.verify:
         args.remediate = True  # 재실측은 교정본이 필요
 
@@ -114,6 +119,17 @@ def main():
                     print(f"           {v.notes}")
             print(f"    재실측 GO {n_go} · NO-GO {n_nogo} · SKIP {n_skip}")
             print(f"  -> {report}")
+
+            # ── P5 반자동 라운드 종합(인간 게이트) ──
+            if args.loop:
+                rr = loop_mod.run_round(res, pres, list(zip(autos, verdicts)),
+                                        round_no=args.rnd or "", note=args.note)
+                print("  [loop P5 · 라운드 종합 → 인간 게이트]")
+                print(f"    적재 후보(P4 GO) {len(rr.actionable)}건 · 재실측 NO-GO {len(rr.auto_nogo)}건 · "
+                      f"인간 입력 대기 {sum(c for _, c in ([rr.class_counts.get(k, (0, 0)) for k in ('blocked_human', 'needs_authority', 'needs_design', 'review')]))} 결함")
+                print(f"    전역: {'GO(수렴)' if rr.global_go else 'NO-GO(라운드 계속)'} — 적재 COMMIT·webadmin=인간 게이트")
+                print(f"  -> {rr.report_path}")
+                print(f"  -> {loop_mod.runner._HERE / 'loop-rounds.csv'}")
 
     # 라운드 추적(append-only) — 수렴 추이
     if args.rnd is not None:

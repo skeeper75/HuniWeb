@@ -1,5 +1,13 @@
 # §27 price-master — CHANGELOG (최신 위 PREPEND)
 
+## 2026-07-04 — 통합 배치 hdx P5-①: 반자동 라운드 러너
+
+scan→board→remediate→verify 를 한 라운드로 묶어 **인간 게이트용 종합 리포트**(적재 후보[P4 GO]·인간 입력
+대기·다음 액션) + 수렴 추이(loop-rounds.csv) 산출 후 **인간 승인 지점서 정지**([HARD] 완전 무인 금지·적재
+COMMIT·webadmin=인간). 진입점 `--loop`. 실행 GO(적재 후보 1·인간 입력 326·전건 회계). **가격 파일럿 종단 GO**
+(진단→교정→재실측→라운드). 전 레이어 셀프테스트 4/4 GO. 상세=`_workspace/_foundation/hdx/CHANGELOG.md`
+(다음 P5-② OptionCpqDx+codex+도메인 전파).
+
 ## 2026-07-04 — 통합 배치 hdx P4: 적대적 재실측(engine verbatim)
 
 auto_data 교정본을 적재 전 `foundation/engine.py`(pricing.py verbatim)로 독립 재계산해 자체검증(생성≠검증).

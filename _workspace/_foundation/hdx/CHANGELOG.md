@@ -1,5 +1,31 @@
 # hdx — CHANGELOG (최신 위 PREPEND)
 
+## 2026-07-04 — P5-① 반자동 라운드 러너 (`hdx/loop/`)
+
+**목표**: `scan→board→remediate→verify` 를 한 라운드로 묶고 **인간 게이트용 종합 리포트** + 수렴 추이를
+낸 뒤 인간 승인 지점서 정지(설계 §2 L6·§5). **[HARD] 완전 무인 금지** — 적재 COMMIT·webadmin 실화면
+(7·8)은 인간 게이트. 인간이 승인·적재·`snapshot.sh` 재생성 후 재실행하면 다음 라운드(N+1)가 돈다.
+
+**구조**(`hdx/loop/runner.py`): `run_round(board_res, plan_res, fix_verdicts, round_no, note)` →
+이미 계산된 board/plan/verify 결과를 종합 →
+- `round-report.md` — 인간이 게이트서 읽는 단일 산출물: 전역 verdict·차원별 결함·**적재 후보**
+  (P4 GO auto_data·승인 대상·SQL 포인터)·**재실측 NO-GO**(재조사)·**인간 입력 대기**(worklist·값 날조 금지)·
+  **다음 액션**(번호 단계: 승인→적재→snapshot 재생성→재실행).
+- `loop-rounds.csv` — 수렴 추이 append(round·total·auto GO/NO-GO·분류별 결함·global verdict).
+- 진입점 `--loop` 플래그(→ verify·remediate 자동 활성).
+
+**실행 결과**(snap_20260704_1507·round 3): 전역 NO-GO(라운드 계속). **적재 후보 1**(포스터 use_dims·P4 GO)
+· 재실측 NO-GO 0 · 인간 입력 대기 326 결함(blocked_human 10·needs_authority 37·needs_design 21·review 258).
+1 + 326 = 327 전건 회계(누락 0). 전역 정지 = `board.global_go`(전 차원 stop_predicate·전 상품 PRICE≠0).
+
+**셀프테스트**(`loop/_selftest.py`): 종합 무손실(차원 결함·전역 verdict 일치)·적재 후보=P4 GO만·
+전 결함 회계(worklist+auto=총수·누락 0)·산출물 4검증 GO. 전 레이어 셀프테스트 4/4 GO(foundation·remediate·verify·loop).
+
+**의미**: 가격 파일럿이 **종단으로 GO** — 진단(P2)→교정생성(P3)→적대적 재실측(P4)→라운드 종합(P5-①)까지
+한 명령(`--loop`)으로 돌고, 인간 게이트에서 무엇을 승인·적재·재실행할지 단일 리포트로 제시된다.
+
+**다음**: P5-② OptionCpqDx 신규(메쉬 타공 dtl_opt 저청구 근거) + codex 2차(선택) + 판형/가격격자/수량 도메인 전파.
+
 ## 2026-07-04 — P4 적대적 재실측 (`hdx/verify/`)
 
 **목표**: auto_data 교정본을 적재 **전**, `foundation/engine.py`(pricing.py verbatim)로 독립 재계산해

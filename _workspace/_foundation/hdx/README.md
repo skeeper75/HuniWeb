@@ -13,9 +13,10 @@
 | **P2** | 5 스캐너 → `Diagnoser` 계약 어댑트 + 통합 결함보드 | **완료**(가격 파일럿 GO) |
 | **P3** | `Remediator` 교정생성 통일(dryrun/fix/undo·백업·게이트·worklist) | **완료**(값 날조 금지 라우팅) |
 | **P4** | 적대적 재실측(engine verbatim·가격중립·결함해소·무회귀) | **완료**(파일럿 GO·음성대조 검증) |
-| P5 | 반자동 라운드 루프 + OptionCpqDx 신규 + (선택)codex | 다음 |
+| **P5-①** | 반자동 라운드 루프(`hdx/loop/`·인간 게이트 종합·수렴 추이) | **완료**(가격 파일럿 종단) |
+| P5-② | OptionCpqDx 신규(옵션 dtl_opt 저청구) + (선택)codex 2차 | 다음 |
 
-파일럿 = **가격 도메인** 종단 후 판형·수량·옵션CPQ 전파.
+파일럿 = **가격 도메인** 종단(진단→교정→재실측→라운드) 후 판형·수량·옵션CPQ 전파.
 
 ## foundation/ (P1)
 
@@ -126,6 +127,26 @@ python3 _workspace/_foundation/hdx/diagnose_remediate.py --scope price --verify
 - worklist 계열(값 날조 대상)은 SKIP(verifiable=False). codex 2차는 P5(선택).
 - 셀프테스트: `python3 _workspace/_foundation/hdx/verify/_selftest.py`
   (재실측 실질성·파일럿 GO·음성대조 NO-GO·worklist SKIP 4검증).
+
+## loop/ (P5-①·반자동 라운드)
+
+`scan→board→remediate→verify` 를 한 라운드로 묶고 **인간 게이트용 종합 리포트** + 수렴 추이를 낸 뒤
+**인간 승인 지점에서 정지**한다. **[HARD] 완전 무인 금지** — 적재 COMMIT·webadmin 실화면(7·8)은 인간.
+
+```bash
+python3 _workspace/_foundation/hdx/diagnose_remediate.py --scope price --loop --round N --note "..."
+# → loop/round-report.md  (전역 verdict·차원별·적재 후보[P4 GO]·인간 입력 대기·다음 액션 단계)
+# → loop/loop-rounds.csv  (수렴 추이 append: round·결함·분류별·auto GO/NO-GO·verdict)
+```
+
+한 라운드 = "돌린다→검토→승인→재실행". 러너는 6단계(진단·교정생성·재실측·종합)까지 자동, 7·8(적재·
+webadmin)은 인간. 인간이 승인·적재·`snapshot.sh` 재생성 후 재실행하면 다음 라운드(N+1)가 돈다.
+전역 정지 = `board.global_go`(전 차원 stop_predicate·전 상품 PRICE≠0) — 코드가 계산·정지 판단은 인간.
+
+- `round-report.md` = 인간이 게이트에서 읽는 단일 산출물: **적재 후보**(P4 GO auto_data·승인 대상) /
+  **재실측 NO-GO**(재조사) / **인간 입력 대기**(worklist·값 날조 금지) / **다음 액션**(번호 단계).
+- 셀프테스트: `python3 _workspace/_foundation/hdx/loop/_selftest.py`
+  (종합 무손실·적재 후보=P4 GO만·전 결함 회계 누락 0·산출물 4검증).
 
 ## [HARD] 규칙
 - 라이브 = `RAILWAY_DB_*` 읽기전용 SELECT + 롤백전용 DRY-RUN만. 쓰기는 인간 승인 채널.
