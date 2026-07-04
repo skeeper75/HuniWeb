@@ -8,6 +8,7 @@ from .calcability_rmd import CalcabilityRmd
 from .dim_conformance_rmd import DimConformanceRmd
 from .contribution_rmd import ContributionRmd
 from .component_merge_rmd import ComponentMergeRmd
+from .option_cpq_rmd import OptionCpqRmd
 from . import plan
 
 PRICE_REMEDIATORS = [
@@ -16,7 +17,8 @@ PRICE_REMEDIATORS = [
     DimConformanceRmd(),
     ContributionRmd(),
     ComponentMergeRmd(),
+    OptionCpqRmd(),
 ]
 
 __all__ = ["Remediator", "WiringRmd", "CalcabilityRmd", "DimConformanceRmd",
-           "ContributionRmd", "ComponentMergeRmd", "PRICE_REMEDIATORS", "plan"]
+           "ContributionRmd", "ComponentMergeRmd", "OptionCpqRmd", "PRICE_REMEDIATORS", "plan"]

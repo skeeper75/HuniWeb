@@ -3,24 +3,26 @@
 > 새 세션은 이 파일 + `README.md` + 설계 청사진만 읽고 재발견 0으로 재개.
 > 설계: [`../DIAGNOSE-REMEDIATE-UNIFIED-BATCH-DESIGN-260704.md`](../DIAGNOSE-REMEDIATE-UNIFIED-BATCH-DESIGN-260704.md)
 
-## 다음 시작점 — P5-② (OptionCpqDx 신규 + codex 선택 + 도메인 전파)
+## 다음 시작점 — P5-②b (codex 2차 선택 + 도메인 전파)
 
-**① OptionCpqDx 신규**(갭#5·설계 §3): 이번 세션 발견(메쉬 타공 옵션 `dtl_opt` 누락 → 저청구)이 근거.
-`t_prd_product_option_items.dtl_opt` 누락·ref_key 불일치·저청구를 전용 스캐너로 검출 → `hdx/diagnose/option_cpq_dx.py`
-Diagnoser 편입(`PRICE_DIAGNOSERS` 추가). 대응 `OptionCpqRmd`(needs_authority/blocked_human 분류).
-(HANDOFF 후속 2번 "옵션 dtl_opt 누락 전수 점검"과 동일 트랙.)
-
-**② codex 2차(선택)**(`hdx/verify/codex_gate.py`·설계 §6): `codex exec -s read-only` 로 교정본을 독립
+**① codex 2차(선택)**(`hdx/verify/codex_gate.py`·설계 §6): `codex exec -s read-only` 로 교정본을 독립
 판정·reconcile. `hpe-codex-validate` 스킬 로직 훅화. 미가용 시 "Claude 단독" 명시 폴백. 배치가 codex 부르는 최초 지점.
+(현재 auto_data 0 상태라 재실측 대상이 없을 때는 NO-OP — auto_data 재등장 시 유효.)
 
-**③ 도메인 전파**(파일럿 검증 후): 판형(PlatesizeDx←`diagnose_all.py`)·가격격자(PriceGridDx 19시트←
+**② 도메인 전파**(파일럿 종단 GO 후): 판형(PlatesizeDx←`diagnose_all.py`)·가격격자(PriceGridDx 19시트←
 `grid_diff.py`)·수량(QtyRuleDx←`qty_rule_audit_260702.py`) 차원 어댑트 → `SCOPES` 에 추가·`--scope platesize|qty|all`.
 
-**참고**: 파일럿 첫 실적재(포스터 use_dims += siz_cd)는 **완료**(인간 승인·라이브 COMMIT·라운드4 결함 해소).
-남은 결함 326건은 전부 인간 입력 바운드(blocked_human/needs_authority/needs_design/review) — 자동 auto_data 0.
-다음 auto_data 후보는 새 도메인 전파(판형/수량/옵션CPQ) 또는 UNDECLARED 추가 발생 시.
+**③ 실무진 액션 대기(OptionCpqDx 적발)**: 메쉬배너(PRD_000137) 타공 옵션 OPV_000542 dtl_opt 누락 저청구
+(needs_authority) — 실무진이 그 옵션의 타공수 값 확인 후 dtl_opt 채움(형제 PRD_000139={타공수:4/6/8} 참조).
+※이번 세션 메쉬 타공 교정(PRD_000138/139) 시 놓친 상품 — 배치 스윕이 전수로 포착.
 
 ## 완료 (직전 세션)
+- **P5-②a OptionCpqDx 신규**(갭#5) — `hdx/diagnose/option_cpq_dx.py`(+`PRICE_DIAGNOSERS`) + `OptionCpqRmd`.
+  옵션 dtl_opt↔단가행 dim_vals 연결 끊김(저청구) 검출. ★신뢰도 모델(오탐 가드): HIGH=형제 dtl_opt 가
+  param 채움(옵션선택형 확정)·REVIEW=형제 미충전(개수/줄수 수치입력 가능성). 실적: option_cpq 29건
+  (HIGH 1=메쉬배너 타공 저청구·REVIEW 28=개수). 라운드5 총 326→355(신규 표면화·전건 라우팅). 셀프테스트
+  `diagnose/_selftest.py`(HIGH/REVIEW 판별 가드). 전 레이어 5/5 GO.
+- **★첫 실적재** — 포스터 `use_dims += siz_cd`(auto_data) 라이브 COMMIT(인간 승인). 라운드4 결함 해소.
 - **★첫 실적재** — 포스터 `use_dims += siz_cd`(auto_data) 라이브 COMMIT(인간 승인). 검증 체인 전 게이트 GO:
   드리프트0 재-SELECT → dryrun → P4 재실측 → **webadmin 라이브 시뮬(A4/A3/A2 PRICE≠0)** → COMMIT →
   사후 시뮬 전 사이즈 불변(가격중립 실서비스 확증) → 스냅샷 재생성 → 라운드4(dim_conformance 38→37·
@@ -65,4 +67,4 @@ Diagnoser 편입(`PRICE_DIAGNOSERS` 추가). 대응 `OptionCpqRmd`(needs_authori
 - **[HARD] 건드리지 말 것**: `foundation/engine.py`는 pricing.py와 verbatim(엔진 변경 시 재이식·드리프트 0). `db.py`는 읽기전용 유지. 원본 스캐너(`batch/*.py`)·`dim_conformance.py`는 미변경(import·call 또는 포팅만). auto_data SQL 도 자동 COMMIT 금지(dryrun→P4→인간 승인). 완전 무인 자기회귀 금지(COMMIT=인간+webadmin).
 
 ## 큰 로드맵
-~~P2 보드~~ → ~~P3 Remediator~~ → ~~P4 적대적 재실측~~ → ~~P5-① 반자동 루프~~(전부 완료) → **P5-② OptionCpqDx 신규 + codex 선택 + 도메인 전파**. 파일럿(가격) 종단 GO(진단→교정→재실측→라운드) → 판형·수량·옵션CPQ 전파.
+~~P2 보드~~ → ~~P3 Remediator~~ → ~~P4 적대적 재실측~~ → ~~P5-① 반자동 루프~~ → ~~P5-②a OptionCpqDx~~(전부 완료·첫 실적재 포함) → **P5-②b codex 2차 선택 + 도메인 전파(판형·가격격자·수량)**. 가격 파일럿 종단 실증 완료 → 타 도메인 전파.

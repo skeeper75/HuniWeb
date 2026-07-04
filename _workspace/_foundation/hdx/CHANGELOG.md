@@ -1,5 +1,30 @@
 # hdx — CHANGELOG (최신 위 PREPEND)
 
+## 2026-07-04 — P5-②a OptionCpqDx 신규 (옵션 파라미터 연결 끊김·저청구)
+
+**목표**: 실무진이 webadmin 에서 옵션 수정 중 파라미터 연결(dtl_opt)을 빠뜨려 생기는 저청구를 전용
+스캐너로 전수 검출(설계 §3 갭#5). 근거=이번 세션 실증(메쉬 타공 옵션 dtl_opt 누락→무료).
+
+**연결 구조**: 옵션 `dtl_opt`(공급 param `{"타공수":4}`) ↔ 단가행 `dim_vals`(요구 param). 엔진은 선택이
+dim_vals 키·값을 공급해야 그 단가행 매칭 → 옵션 dtl_opt 비면 param 미공급 → 매칭 실패 → 무료(저청구).
+
+**신뢰도 모델(오탐 가드·핵심)**: 옵션이 공정 참조(ref_dim=OPT_REF_DIM.04)·그 proc 단가행이 dim_vals
+param 요구·옵션 dtl_opt 미공급 = 후보. **HIGH** = 같은 (proc,param)을 dtl_opt 로 채운 **형제 옵션 존재**
+(param 이 옵션선택형임을 입증) → 저청구 확정. **REVIEW** = 형제 미충전(개수/줄수 = 고객 수치입력 가능성·오탐 회피).
+
+**구조**: `diagnose/option_cpq_dx.py`(OptionCpqDx·`PRICE_DIAGNOSERS` 추가) + `remediate/option_cpq_rmd.py`
+(OptionCpqRmd: HIGH→needs_authority[실무진 dtl_opt 값 확인·값 날조 금지]·REVIEW→review).
+
+**실적**(snap_20260704_1554·라운드5): option_cpq 29건(HIGH 1·REVIEW 28). 총 326→355(신규 표면화·전건
+라우팅 누락 0). **HIGH 1 = 메쉬배너(PRD_000137) 타공 옵션 OPV_000542 dtl_opt 누락 저청구** — 이번 세션
+메쉬 타공 교정(PRD_000138/139)에서 **놓친 상품을 배치 스윕이 전수로 포착**. needs_authority 로 실무진 확인 라우팅
+(형제 PRD_000139={타공수:4/6/8} 패턴 참조·값 날조 금지). REVIEW 28 = 개수(변수텍스트/이미지·수치입력 가능성).
+
+**셀프테스트**: `diagnose/_selftest.py`(HIGH=형제 입증형 저청구·REVIEW=수치입력 가능성 판별 가드). verify
+셀프테스트 자기완결형으로 견고화(라이브 결함 존재 비의존·합성 Fix). 전 레이어 5/5 GO(foundation·diagnose·remediate·verify·loop).
+
+**다음**: P5-②b codex 2차(선택) + 도메인 전파(판형·가격격자·수량).
+
 ## 2026-07-04 — ★첫 실적재: 포스터 use_dims += siz_cd (인간 승인·라이브 COMMIT)
 
 hdx 파이프라인이 낸 **첫 실적재 교정**을 라이브에 반영(인간 승인). 반자동 라운드 종단 실증 —

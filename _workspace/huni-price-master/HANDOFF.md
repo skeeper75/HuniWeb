@@ -11,7 +11,8 @@
 - **통합 진단·교정 배치 설계 + P1**: → `_workspace/_foundation/hdx/HANDOFF.md`(별도 재시작 포인터).
 
 ## 미해결·후속 (다음 세션 후보)
-1. **[활성 빌드] 통합 배치 hdx P5-②** — OptionCpqDx 신규(메쉬 타공 dtl_opt 저청구 근거) + codex 2차(선택) + 도메인 전파(판형/가격격자/수량). P2~P4 + P5-① 완료 + **첫 실적재 완료**(포스터 use_dims += siz_cd 라이브 COMMIT·라운드4 결함 해소) = **가격 파일럿 종단 실증**(진단→교정→재실측→승인→적재→재진단 한 바퀴 완주). **`_workspace/_foundation/hdx/HANDOFF.md` 참조.**
+1. **[활성 빌드] 통합 배치 hdx P5-②b** — codex 2차(선택) + 도메인 전파(판형/가격격자/수량). P2~P5-①+P5-②a(OptionCpqDx) 완료 + **첫 실적재 완료**(포스터 use_dims 라이브 COMMIT·라운드4 해소) = **가격 파일럿 종단 실증**. **`_workspace/_foundation/hdx/HANDOFF.md` 참조.**
+   - ★실무진 액션: 메쉬배너(PRD_000137) 타공 옵션 dtl_opt 누락 저청구 적발(배치가 이번 메쉬 교정서 놓친 상품 포착) — 실무진 타공수 확인 후 dtl_opt 채움.
 2. **★옵션 dtl_opt 누락 전수 점검**(저청구 헌팅) — 메쉬 타공처럼 다른 상품의 공정 옵션도 `dtl_opt` 누락으로 저청구될 수 있음. dim_vals 요구 단가행 + 옵션 dtl_opt 빈 경우 전수 스캔(= hdx OptionCpqDx 후보).
 3. **최종 프로덕션 검증(타공)** — 실 견적조립은 신규 BFF/위젯(저장소 밖·개발중). 그 시스템이 붙는 시점에 타공(및 유사 공정옵션) 실제 청구 확인. 현 관리자 시뮬레이터는 비대표.
 4. **스캐너 dim_vals 축 탐지 보강** — `component_merge_scan.py`가 표준컬럼만 보고 dim_vals(jsonb) 축 병합을 미탐지(타공이 그 예).

@@ -1,5 +1,13 @@
 # §27 price-master — CHANGELOG (최신 위 PREPEND)
 
+## 2026-07-04 — 통합 배치 hdx P5-②a: OptionCpqDx(옵션 파라미터 연결 끊김·저청구)
+
+실무진 옵션 수정 중 파라미터 연결(dtl_opt) 누락 저청구를 전용 스캐너로 전수 검출(갭#5). 옵션 dtl_opt↔단가행
+dim_vals 연결. ★신뢰도 모델: HIGH=형제 옵션이 dtl_opt 채움(옵션선택형 입증)→저청구 확정·REVIEW=형제 미충전
+(수치입력 가능성). ★실적=**메쉬배너(PRD_000137) 타공 dtl_opt 누락 저청구 1건 적발** — 이번 세션 메쉬 타공 교정 시
+놓친 상품을 배치가 전수로 포착(needs_authority 실무진 확인). option_cpq 29건(HIGH1·REVIEW28)·전건 라우팅.
+전 레이어 5/5 GO. 상세=`_foundation/hdx/CHANGELOG.md`(다음 P5-②b codex+도메인 전파).
+
 ## 2026-07-04 — 통합 배치 hdx 첫 실적재: 포스터 use_dims += siz_cd (라이브 COMMIT)
 
 hdx 파이프라인이 낸 첫 실적재 교정을 인간 승인 후 라이브 반영. 검증 체인 전 게이트 GO: 드리프트0 재-SELECT

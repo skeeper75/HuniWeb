@@ -6,8 +6,9 @@
   ContributionDx    ← contribution_scan.py     공정 저청구(silent-0)
   ComponentMergeDx  ← component_merge_scan.py   같은차원 분리 comp
   CalcabilityDx     ← score_batch.py(구조 프록시) 전 상품 PRICE≠0
+  OptionCpqDx       ★신규(갭#5)                 옵션 dtl_opt 파라미터 연결 끊김(저청구)
 
-전파 예정(설계 §3): PlatesizeDx·PriceGridDx·QtyRuleDx·OptionCpqDx(★신규).
+전파 예정(설계 §3): PlatesizeDx·PriceGridDx·QtyRuleDx.
 """
 from .base import Diagnoser
 from .wiring_dx import WiringDx
@@ -15,6 +16,7 @@ from .dim_conformance_dx import DimConformanceDx
 from .contribution_dx import ContributionDx
 from .component_merge_dx import ComponentMergeDx
 from .calcability_dx import CalcabilityDx
+from .option_cpq_dx import OptionCpqDx
 
 # 가격 도메인 파일럿 진단기 집합(diagnose_remediate --scope price)
 PRICE_DIAGNOSERS = [
@@ -23,7 +25,8 @@ PRICE_DIAGNOSERS = [
     ContributionDx(),
     ComponentMergeDx(),
     CalcabilityDx(),
+    OptionCpqDx(),
 ]
 
 __all__ = ["Diagnoser", "WiringDx", "DimConformanceDx", "ContributionDx",
-           "ComponentMergeDx", "CalcabilityDx", "PRICE_DIAGNOSERS"]
+           "ComponentMergeDx", "CalcabilityDx", "OptionCpqDx", "PRICE_DIAGNOSERS"]

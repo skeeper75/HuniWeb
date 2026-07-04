@@ -14,7 +14,8 @@
 | **P3** | `Remediator` 교정생성 통일(dryrun/fix/undo·백업·게이트·worklist) | **완료**(값 날조 금지 라우팅) |
 | **P4** | 적대적 재실측(engine verbatim·가격중립·결함해소·무회귀) | **완료**(파일럿 GO·음성대조 검증) |
 | **P5-①** | 반자동 라운드 루프(`hdx/loop/`·인간 게이트 종합·수렴 추이) | **완료**(가격 파일럿 종단) |
-| P5-② | OptionCpqDx 신규(옵션 dtl_opt 저청구) + (선택)codex 2차 | 다음 |
+| **P5-②a** | OptionCpqDx 신규(옵션 dtl_opt 파라미터 연결 끊김·저청구) | **완료**(메쉬배너 타공 저청구 적발) |
+| P5-②b | codex 2차(선택) + 도메인 전파(판형·가격격자·수량) | 다음 |
 
 파일럿 = **가격 도메인** 종단(진단→교정→재실측→라운드) 후 판형·수량·옵션CPQ 전파.
 
@@ -67,8 +68,13 @@ python3 _workspace/_foundation/hdx/diagnose_remediate.py --scope price [--round 
 | `ContributionDx` | `batch/contribution_scan.py` | import·call(scan) | 공정 저청구 silent-0 | HIGH 0 |
 | `ComponentMergeDx` | `batch/component_merge_scan.py` | 헬퍼 import + 분류루프 재바인딩 | 같은차원 분리 comp | A/B 후보 0 |
 | `CalcabilityDx` | `batch/score_batch.py`(PRICED-0) | **구조 프록시**(결정론) | 전 상품 PRICE≠0 | PRICED-0 0 |
+| `OptionCpqDx` ★신규 | 갭#5(메쉬 타공 dtl_opt) | 옵션 dtl_opt↔단가행 dim_vals 연결 | 옵션 파라미터 미공급(저청구) | HIGH 0 |
 
 - 전역 verdict = Σ stop_predicate(AND). 정렬 = 돈영향(저/과청구 상단) → 심각도 → 차원 → 상품.
+- **OptionCpqDx 신뢰도 모델(오탐 가드)**: 옵션이 공정 참조·단가행이 dim_vals param(타공수 등) 요구·옵션
+  dtl_opt 미공급 = 후보. HIGH = 같은 (proc,param)을 dtl_opt 로 채운 **형제 옵션 존재**(옵션선택형 확정)
+  → 저청구. REVIEW = 형제 미충전(개수/줄수 = 고객 수치입력 가능성). 파일럿 실적: 메쉬배너(PRD_000137)
+  타공 옵션 dtl_opt 누락 저청구 **1건 HIGH 적발**(이번 세션 메쉬 타공 교정 시 놓친 상품을 배치가 전수로 포착).
 - **충실성 검증(드리프트 0)**: wiring 6·contribution 274·component_merge 9 = 원본 카운트와 완전 일치.
 - **CalcabilityDx 스코프 명시**(no silent caps): 결정론·토큰0 **구조 프록시**만(공식 바인딩 있으나
   wired comp 단가행 총합 0 = PRICE 반드시 0). simulate 기반 정밀 PRICED-0(선택조합별 0원)은 **P4 재실측**으로 이관.
