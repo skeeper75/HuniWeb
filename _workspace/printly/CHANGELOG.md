@@ -10,7 +10,8 @@
 - **Step 3 제약 정의**(`04_step3-constraints.md`): 안 되는 조합=§33 E12 constraint·R12 constrains·JSONLogic·§31 CN-1~CN-6 재사용(**신규 0**·라이브 26건/15상품 실재). ★경계: evaluate_price 제약 미참조(검증=위젯/에이전트). ★오분류 방지: "90만원"=제약 아님(되묻기 사안)·제약 vs 능력(can_produce) vs 가격갭 vs 되묻기 층 분리. → PART 1(Step0~3) 완결.
 - **★PART 2 (1) 브릿지=잡티켓 데이터 계약**(`05_part2-bridge-jobticket.md`): 잡티켓=§35 fulfillment_order(E24)의 런타임 실현(**신규 그릇 0**·G-ROUTE-3 접합점이 이 브릿지). 사양 담체=evaluate_price `selections` 실계약과 동형(라이브 접지). ★원칙3 필드분리: 견적·판수·리드타임 3칸=엔진 전용(AI 지어내기 금지)·나머지=온톨로지. 계약 연쇄=preflight(C2)→imposition(C1)→장비가상화(C3)→생산 후가공 10단계. 파일변환=논리/가상 2층(장비추가=가상드라이버1개). 다중벤더=routed_to/quote_from→벤더 엔진(레드=지니 WebToProduct 엔진).
 - **지도 아티팩트**(`_map/master-map.html`): 목적+3지도(WebToProduct 20단계·6층·Stage0~6)+지금여기. PART1 완료·결정확정·라이브실증 반영 재배포(동일 URL).
-- 상태: PART 1 완결·PART 2 브릿지 설계 완료·미커밋분 커밋 대기. 다음=PART 2-2 런타임 루프 or 잡티켓 정형 스키마 or Q5/6/7(파일포맷 원천·배송범위·엔진 인터페이스 지니 입력).
+- **★전반부 종단 파일럿**(`pilot/`·커밋 2141d89): `recommendation-layer.json`(추천 층 선언 데이터·업종3×기능5×홍보물12·라이브 prd_cd 접지·원칙1) + `run_front_half.py`(층 순회+evaluate_price 실견적+근거 node_id 경로+되묻기 게이트) + README. 업종→기능→홍보물→실견적 **자동 종단**(미용실/카페 실행). 시스템 Stage 2(질의 시뮬레이터) 크리티컬 패스 최소 실현체. ★파일럿이 **실 결함 자동 적발**: 프리미엄명함(PRD_000031)·펄명함(034) 견적 0원(미배선·source=FORMULA)=로드맵 G-DATA "프리미엄명함 견적0" 일치→추천 데모+커버리지 진단 이중효과. 만년스탬프 90만원=되묻기 사안(Step3 경계 실증). 순위=결정론 placeholder(최종=엔진·recommendation_function 보류).
+- 커밋: 6f404ff(Step2/3+브릿지)·2141d89(파일럿). 상태: PART1 완결·PART2 브릿지·파일럿 실동. 다음=NL 입력 진입(권장)/견적0 결함 교정/PART 2-2 런타임 루프.
 
 ## 2026-07-04 — 빌드 착수 (Step0~1 + 전반부 + WebToProduct/특허 분석)
 
