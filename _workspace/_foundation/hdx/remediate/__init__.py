@@ -12,6 +12,7 @@ from .option_cpq_rmd import OptionCpqRmd
 from .qty_rule_rmd import QtyRuleRmd
 from .platesize_rmd import PlatesizeRmd
 from .price_grid_rmd import PriceGridRmd
+from .linkage_rmd import LinkageRmd
 from . import plan
 
 PRICE_REMEDIATORS = [
@@ -26,6 +27,12 @@ PRICE_REMEDIATORS = [
     PriceGridRmd(),
 ]
 
+# 연결 무결성 스코프 교정기
+LINKAGE_REMEDIATORS = [
+    LinkageRmd(),
+]
+
 __all__ = ["Remediator", "WiringRmd", "CalcabilityRmd", "DimConformanceRmd",
            "ContributionRmd", "ComponentMergeRmd", "OptionCpqRmd", "QtyRuleRmd",
-           "PlatesizeRmd", "PriceGridRmd", "PRICE_REMEDIATORS", "plan"]
+           "PlatesizeRmd", "PriceGridRmd", "LinkageRmd",
+           "PRICE_REMEDIATORS", "LINKAGE_REMEDIATORS", "plan"]

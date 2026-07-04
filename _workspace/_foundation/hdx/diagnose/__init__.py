@@ -20,6 +20,7 @@ from .option_cpq_dx import OptionCpqDx
 from .qty_rule_dx import QtyRuleDx
 from .platesize_dx import PlatesizeDx
 from .price_grid_dx import PriceGridDx
+from .linkage_dx import LinkageDx
 
 # 가격 도메인 파일럿 진단기 집합(diagnose_remediate --scope price)
 PRICE_DIAGNOSERS = [
@@ -34,6 +35,12 @@ PRICE_DIAGNOSERS = [
     PriceGridDx(),
 ]
 
+# 연결 무결성 스코프(diagnose_remediate --scope linkage) — 배선 단절 전용 렌즈(양방향)
+LINKAGE_DIAGNOSERS = [
+    LinkageDx(),
+]
+
 __all__ = ["Diagnoser", "WiringDx", "DimConformanceDx", "ContributionDx",
            "ComponentMergeDx", "CalcabilityDx", "OptionCpqDx", "QtyRuleDx",
-           "PlatesizeDx", "PriceGridDx", "PRICE_DIAGNOSERS"]
+           "PlatesizeDx", "PriceGridDx", "LinkageDx",
+           "PRICE_DIAGNOSERS", "LINKAGE_DIAGNOSERS"]

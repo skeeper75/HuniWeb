@@ -20,14 +20,14 @@ _HERE = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(_HERE.parent))          # _foundation/ (hdx 패키지 루트)
 
 from hdx.foundation import Snapshot            # noqa: E402
-from hdx.diagnose import PRICE_DIAGNOSERS      # noqa: E402
+from hdx.diagnose import PRICE_DIAGNOSERS, LINKAGE_DIAGNOSERS  # noqa: E402
 from hdx import board                          # noqa: E402
-from hdx.remediate import PRICE_REMEDIATORS, plan  # noqa: E402
+from hdx.remediate import PRICE_REMEDIATORS, LINKAGE_REMEDIATORS, plan  # noqa: E402
 from hdx import verify as vf                   # noqa: E402
 from hdx import loop as loop_mod               # noqa: E402
 
-SCOPES = {"price": PRICE_DIAGNOSERS}           # 전파 시 platesize/option/qty 추가
-REMEDIATORS = {"price": PRICE_REMEDIATORS}
+SCOPES = {"price": PRICE_DIAGNOSERS, "linkage": LINKAGE_DIAGNOSERS}
+REMEDIATORS = {"price": PRICE_REMEDIATORS, "linkage": LINKAGE_REMEDIATORS}
 
 
 def _verify_report(verdicts, snap_name) -> pathlib.Path:
