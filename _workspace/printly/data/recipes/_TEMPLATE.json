@@ -1,0 +1,50 @@
+{
+  "_note": "홍보물 레시피 빈 그릇. 복사해 recipes/<상품>.json 로 채운다. 슬롯의 <...>=채울 자리. 값(가격/칼선/시간)=엔진, 그릇엔 축·근거만.",
+  "product": {
+    "node_id": "<product-XXX>",
+    "prd_cd": "<PRD_XXXXXX>",
+    "name": "<상품명>",
+    "brand": "huni"
+  },
+  "recipe": {
+    "재료": {
+      "material": [{ "ref": "<MAT_XXXXXX>", "label": "<용지/소재>", "source": "t_prd_product_materials", "badge": "candidate" }],
+      "size": [{ "ref": "<SIZ_XXXXXX>", "label": "<가로x세로>", "source": "t_prd_product_sizes" }],
+      "print_option": [{ "ref": "<POPT_XXXXXX>", "label": "<도수/인쇄방식>", "source": "t_prd_product_print_options" }]
+    },
+    "공정": {
+      "processes": [
+        { "ref": "<PROC_XXXXXX>", "label": "<인쇄/후가공 이름>", "mand": "<Y/N>", "red_layer": "<CMYK/Cut/Foil/Coat…>", "order": "<순서>", "source": "t_prd_product_processes" }
+      ]
+    },
+    "가격구성요소": {
+      "formula": "<PRF_XXXX>",
+      "components": [
+        { "ref": "<COMP_XXXX>", "label": "<원가 항목>", "calc_class": "<길이|면적|개수|수량>", "source": "t_prc_formula_components", "value": "엔진(evaluate_price)" }
+      ]
+    },
+    "옵션": {
+      "option_groups": [{ "ref": "<OPT_GRP>", "label": "<옵션 타입>", "sel_typ": "<단일/다중>", "mand": "<Y/N>", "source": "t_prd_product_option_groups" }]
+    },
+    "제약": {
+      "constraints": [{ "ref": "<RULE_XXXX>", "label": "<안 되는 조합>", "cn_type": "<CN-1~6>", "source": "t_prd_product_constraints" }]
+    },
+    "생산가능성": {
+      "_note": "§33에 없는 신규 축. 값=엔진(preflight/production_time). 그릇엔 '무엇이 생산가능성/단가에 영향 주나'의 축만.",
+      "file_conditions": ["<재단여백/해상도/컬러프로파일 등 파일 규칙 — 다음 스텝>"],
+      "cut_complexity": { "applies": "<Y/N: 반칼/도무송 등 커팅 있으면 Y>", "axis": "칼선 길이·경로 복잡도", "value": "엔진(production_time)" },
+      "device_capability": "<이 사양을 만들 수 있는 장비 능력 — 다음 스텝(벤더 데이터)>"
+    }
+  },
+  "인쇄소_연결": {
+    "produced_by": ["huni"],
+    "printshop_ref": "printshops/huni.json",
+    "handoff": "잡티켓(공정 라우트) = 다음 스텝(그릇 미준비)"
+  },
+  "meta": {
+    "badge": "candidate",
+    "status": "empty",
+    "sources": ["라이브 t_prd_* (§33)", "권위 엑셀 260702", "RED 생산지식 research/red-docs"],
+    "updated": "<날짜>"
+  }
+}

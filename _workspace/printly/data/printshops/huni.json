@@ -1,0 +1,32 @@
+{
+  "_note": "인쇄소(벤더) 연결 그릇. 후니 = 첫 인쇄소. §35 E22 supplier 재사용. 생산과정(handoff 뒤)=다음 스텝.",
+  "id": "supplier-huni",
+  "brand": "huni",
+  "name": "후니프린팅",
+  "roles": ["supplier", "broker"],
+  "region": "<지역 — 후속>",
+  "quote_engine": {
+    "name": "evaluate_price",
+    "location": "raw/webadmin/webadmin/catalog/pricing.py",
+    "contract": "evaluate_price(target, selections, qty, proc_sels=...)",
+    "verified": "라이브 실호출 실증(2026-07-04·프리미엄엽서 100장=9,424원 등)"
+  },
+  "data_source": {
+    "products": "라이브 t_prd_* (§33 275상품)",
+    "authority": "상품마스터260610 · 인쇄상품 가격표260527"
+  },
+  "capability_ref": {
+    "note": "생산 능력(장비·후가공 커버) = §35 production_capability(E23) — 데이터 부재(다음 스텝·G-ROUTE-1)",
+    "status": "미준비"
+  },
+  "handoff": {
+    "to": "후니 생산 파이프라인",
+    "via": "잡티켓(공정 라우트) — 05_part2-bridge-jobticket.md",
+    "status": "다음 스텝(그릇 미준비)"
+  },
+  "meta": {
+    "badge": "candidate",
+    "sources": ["§35 routing-layer-schema.md E22", "라이브 evaluate_price"],
+    "updated": "2026-07-04"
+  }
+}
