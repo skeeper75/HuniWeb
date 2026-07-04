@@ -114,6 +114,48 @@ def huni_price(prd_cd, qty):
         return None
 
 
+def huni_repr_price(prd_cd, qty):
+    """★스펙 정규화: .first() 대신 **기본값(dflt_yn='Y')** 사양으로 견적.
+    반환 dict {price, siz_nm, status}. status = ok / below_min(최소수량 미달) / zero / error / no_product.
+    최소수량 미달 0원을 '견적불가'와 구분(후니 엔진 정상·비교 설정 문제)."""
+    global _P
+    if _P is None:
+        huni_price(prd_cd, qty)  # django 부트스트랩 트리거
+    if _P is None:
+        return {"price": None, "siz_nm": "", "status": "error"}
+    M, P = _P
+    if not M.TPrdProducts.objects.filter(pk=prd_cd).exists():
+        return {"price": None, "siz_nm": "", "status": "no_product"}
+
+    def dflt_or_first(model, col, **flt):
+        q = model.objects.filter(**flt)
+        return (q.filter(dflt_yn="Y").values_list(col, flat=True).first()
+                or q.values_list(col, flat=True).first())
+    siz = dflt_or_first(M.TPrdProductSizes, "siz_cd", prd_cd=prd_cd)
+    mat = dflt_or_first(M.TPrdProductMaterials, "mat_cd", prd_cd=prd_cd)
+    popt = (M.TPrdProductPrintOptions.objects.filter(prd_cd=prd_cd)
+            .exclude(print_opt_cd__isnull=True).values_list("print_opt_cd", flat=True).first())
+    plt = M.TPrdProductPlateSizes.objects.filter(prd_cd=prd_cd).values_list("siz_cd", flat=True).first()
+    mand = list(M.TPrdProductProcesses.objects.filter(prd_cd=prd_cd, mand_proc_yn="Y")
+                .values_list("proc_cd", flat=True))
+    siz_nm = M.TSizSizes.objects.filter(siz_cd=siz).values_list("siz_nm", flat=True).first() or ""
+    sel = {k: v for k, v in {"plt_siz_cd": plt, "siz_cd": siz, "mat_cd": mat, "print_opt_cd": popt}.items() if v}
+    try:
+        r = P.evaluate_price({"prd_cd": prd_cd}, sel, qty, mode="lenient",
+                             proc_sels=[{"proc_cd": p} for p in mand] or None)
+    except Exception:
+        return {"price": None, "siz_nm": siz_nm, "status": "error"}
+    fp = r.get("final_price")
+    warns = " ".join(r.get("warnings", []))
+    if fp and fp > 0:
+        status = "ok"
+    elif "최소" in warns and ("미달" in warns or "미만" in warns):
+        status = "below_min"   # 후니 최소수량 미달(엔진 정상)
+    else:
+        status = "zero"
+    return {"price": fp or None, "siz_nm": siz_nm, "status": status}
+
+
 def wow_rep_sample(recipe):
     """레시피 대표 샘플(첫) → (bill, spec, qty). 상품군마다 자연 수량(매/개)."""
     lp = recipe["recipe"]["가격구성요소"].get("live_price_samples", {})
