@@ -12,6 +12,17 @@
     "note": "후니 evaluate_price와 동형 경계(값=서버). ★차이: 로컬 호출 불가·라이브 API 연동 필요(후니는 venv 직접호출)",
     "verified": "라이브 실호출 실증(2026-07-04·devshop 가격조회 콘솔 /prodt/<prodno>·일반명함40073 양면500=4,510원 등). 접속=.env.local WOWPRESS_SITE_ID/PW. 가격조회=읽기(주문·결제 아님)"
   },
+  "price_basis": {
+    "_note": "가격 '값'의 의미 경계(원칙3·06 §1). 값 자체는 jobcost 권위. ★크로스벤더 비교는 이 basis가 벤더 간 정합할 때만 순위 판정(다르면 기권·A-1).",
+    "channel": "partner_billed",
+    "channel_source": "devshop 셀러 계정(WOWPRESS_SITE_ID) 청구가=도매/파트너 채널 추정. 도매마진 미확정(GAP-BASIS-2).",
+    "vat_included": true,
+    "vat_source": "§35 01_analysis/wowpress-price-mechanism §3.2: ordcost_bill(청구가)=ordcost_sup(공급가)+ordcost_tax(부가세). VAT 포함 확정(anchor: wowpress-api:6.4#ordcost_*).",
+    "vat_excl_field": "ordcost_sup",
+    "output_field": "ordcost_bill",
+    "included_baseline": "GAP",
+    "gap": ["GAP-BASIS-2: channel 도매마진 미확정", "GAP-BASIS-3: 레시피 live_price_samples에 ordcost_sup(VAT-excl) 미보존 → 부가세축 정규화 위해 재캡처 필요"]
+  },
   "data_source": {
     "catalog": "docs/wowpress/catalog/ (326 products JSON · 2025-10-14 수집)",
     "api_spec": "docs/wowpress/wowpress-api-document.txt · products_spec_v1.0.pdf · price_order_spec_v1.01.pdf",

@@ -1,0 +1,30 @@
+{
+  "_note": "same_family_as 16쌍 독립 검증 게이트(§35 G-FAM) 판정의 기계가독 전사. 원천=family-alignment-VERIFY-260705.md(무손상). 파이프라인(crossbrand_query.py)이 이 판정을 소비: NO_GO=크로스벤더 추천 제외·DOWNGRADE=사양 상이 경고 강제·GO=정상.",
+  "verified_at": "2026-07-05",
+  "gate": "mbo-verify-gate · G-FAM-1~4 · 생성≠검증 · 파일 앵커 재파싱(codex 미가용→Claude 단독)",
+  "source": "_workspace/huni-multibrand-ontology/02_crossbrand/family-alignment-VERIFY-260705.md",
+  "verdicts": {
+    "A-1": {"family": "명함", "verdict": "GO", "grade": "strong"},
+    "A-2": {"family": "스티커", "verdict": "GO", "grade": "strong"},
+    "A-3": {"family": "엽서·카드", "verdict": "GO", "grade": "strong", "note": "40346 실명=고평량엽서(생성측 '프리미엄엽서'는 카테고리명)"},
+    "A-4": {"family": "사인·실사", "verdict": "GO", "grade": "strong", "note": "PRF_POSTER_*는 product-118/145 노드에 실재(formula/ 아님·앵커 정밀도 경미)"},
+    "A-5": {"family": "책자", "verdict": "GO", "grade": "strong", "warn": "후니 셋트(2단 has_member) vs 와우 단일 = price_model_differs 강함. 크로스벤더 가격비교 시 구조차 경고."},
+    "A-6": {"family": "리플렛·접지", "verdict": "GO", "grade": "strong"},
+    "A-7": {"family": "전단", "verdict": "GO", "grade": "partial", "note": "커버리지 비대칭(후니1 vs 와우 독판/UV)"},
+    "A-8": {"family": "캘린더", "verdict": "DOWNGRADE", "grade": "partial", "warn": "대표앵커 40619=기성 완제품(pjoin9·awk0·업로드無)≠후니 업로드형. 재앵커→40232(소량탁상)·40210(우드스탠드).", "reanchor": ["40232", "40210"]},
+    "A-9": {"family": "봉투·부자재", "verdict": "DOWNGRADE", "grade": "partial", "warn": "봉투(40035)+부자재(40339) 2카테고리 혼합·40339 사양無(paper0). 봉투 core만 정렬."},
+    "A-10": {"family": "홀더·클립보드", "verdict": "DOWNGRADE", "grade": "weak", "warn": "클립보드/북커버 ≠ 종이홀더(종이폴더)·자재/형태 상이. 크로스벤더 가격비교 금지·용도 유사만 표기."},
+    "A-11": {"family": "폰케이스·액세서리", "verdict": "DOWNGRADE", "grade": "partial", "warn": "대표앵커 40463=케이스 본체(후니 미보유). 재앵커→40292 스마트톡(밴드톡 대응).", "reanchor": ["40292"]},
+    "A-12": {"family": "자석제품", "verdict": "GO", "grade": "partial", "note": "자석 소재군 공유·형태 상이(고무판/아크릴 vs 스티커)"},
+    "A-13": {"family": "쿠폰·상품권", "verdict": "NO_GO", "grade": "partial", "warn": "★앵커 40109=행택(쿠폰 아님). 실제 쿠폰=40110·상품권/티켓=40038 동일 family 존재하나 미선택. 재앵커(40110/40038) 전까지 크로스벤더 추천 제외.", "reanchor": ["40110", "40038"]},
+    "A-14": {"family": "굿즈·판촉(떡메모지)", "verdict": "GO", "grade": "partial", "warn": "떡메모지 core만 유효(후니셋트 vs 와우단일). 183~225 굿즈 광범위 lump은 느슨·경고."},
+    "A-15": {"family": "버튼·뱃지", "verdict": "GO", "grade": "partial", "warn": "핀버튼 core 강함. 후니 227(미니부채키링=키링≠버튼) 앵커 제거 권고."},
+    "A-16": {"family": "어패럴", "verdict": "GO", "grade": "partial", "note": "반팔T core 공유·커버리지 비대칭"}
+  },
+  "summary": {
+    "GO": 11,
+    "DOWNGRADE": 5,
+    "NO_GO_effective": ["A-13"],
+    "note": "full NO-GO 0쌍이나 A-13은 재앵커 전 NO_GO 취급. core 주력군(A-1~A-6)은 견고. 주변 5쌍(A-8·9·10·11·13) 재앵커 없이는 크로스벤더 가격추천 위험."
+  }
+}

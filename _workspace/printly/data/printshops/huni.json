@@ -11,6 +11,16 @@
     "contract": "evaluate_price(target, selections, qty, proc_sels=...)",
     "verified": "라이브 실호출 실증(2026-07-04·프리미엄엽서 100장=9,424원 등)"
   },
+  "price_basis": {
+    "_note": "가격 '값'의 의미 경계(원칙3·06 §1). 값 자체는 엔진 권위. ★크로스벤더 비교는 이 basis가 벤더 간 정합할 때만 순위 판정(다르면 기권·A-1).",
+    "channel": "retail",
+    "channel_source": "evaluate_price=고객 견적 엔진(§33 라이브 고객가). 도매 채널 미제공.",
+    "vat_included": "unknown",
+    "vat_source": "raw/webadmin/webadmin/catalog/pricing.py final_price=round_won(running)·부가세 가산 코드 없음 → VAT 별도(excl) 추정·미확정(GAP-BASIS-1)",
+    "output_field": "final_price",
+    "included_baseline": "GAP(기본 제공물·기본 수량 미명세)",
+    "gap": ["GAP-BASIS-1: vat_included 미확정(별도 추정)", "included_baseline 미명세"]
+  },
   "data_source": {
     "products": "라이브 t_prd_* (§33 275상품)",
     "authority": "상품마스터260610 · 인쇄상품 가격표260527"

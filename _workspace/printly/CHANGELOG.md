@@ -2,6 +2,15 @@
 
 > 최신이 위(PREPEND). 프린틀리 = 다중 벤더 소상공인 AI 인쇄 에이전트(§35 런타임 실현체).
 
+## 2026-07-05 (5세션) — 정확성 축 교정: price_basis 정규화(A-1) + same_family_as 독립 게이트(A-5)
+
+- **트리거**: HANDOFF blind-spot 감사 → 지니 "정확성 축 먼저" 선택. 다음 시작점(instance_of)이 **이미 도는 층(가격 비교·상품군 정렬)의 정확성 미검증 위에** 쌓이는 것을 발견 → 토대부터 교정.
+- **A-1 price_basis 정규화**(완료·실증): `crossbrand_query.py:108`이 후니 소매(evaluate_price) vs 와우 도매(ordcost_bill)를 **부등호로 직접 비교**(코드가 "참고용"이라 자백하면서도 순위 출력)하던 근본결함 교정. 근거 확보=§35 wowpress-price-mechanism §3.2로 `ordcost_bill=ordcost_sup(공급가)+ordcost_tax(부가세)` → 와우 **VAT 포함 확정** / 후니 pricing.py `final_price=round_won(running)`·부가세 가산 없음 → **VAT 별도 추정**. `printshops/{huni,wow}.json`에 `price_basis`(channel·vat_included·output_field·GAP) 추가, 스크립트가 basis 정합할 때만 순위·다르면 **기권**(★도매→소매 환산계수 발명 금지=원칙3). 지니 확정="순위 기권·basis 나란히". 실증: GO 7상품군 전부 순위 기권. ★부수: 정직한 기권이 숨은 결함 노출(스티커 후니 2백만원=auto-pick 극단사이즈·쿠폰 와우샘플=명함스펙).
+- **A-5 same_family_as 독립 검증 게이트**(완료·실증): keystone 엣지(후니↔와우 상품군 정렬 16쌍)가 생성측(mbo-crossbrand-mapper) 자기등급 strong/partial뿐·독립검증 부재 → §35 mbo-verify-gate로 재실측(생성≠검증·파일앵커 결정론 재파싱). 산출 `02_crossbrand/family-alignment-VERIFY-260705.md` + `family-verdicts.json`(기계가독). **G-FAM-1~4**: GO 11 / DOWNGRADE 5(A-8캘린더·A-9봉투·A-10홀더·A-11폰·A-13쿠폰). 결정적 결함=대표앵커 3건 오류(A-13 행택40109≠쿠폰[진짜=40110/40038]·A-11 케이스본체≠스마트톡40292·A-8 기성품≠업로드형). **A-13은 재앵커 전 NO_GO**. `crossbrand_query.py`가 verdict 소비: NO_GO=추천제외·DOWNGRADE=사양상이 경고. 실증: 쿠폰이 `A-5=NO_GO`로 헤더 표시·크로스벤더 제외.
+- **★교차확증**: A-1(basis 정직 출력)과 A-5(독립 게이트)가 **쿠폰 결함에 무관하게 수렴**=우연 아님(생성≠검증 성과).
+- **재앵커 백로그**(verdict JSON에 앵커 박힘·다음): A-13→40110/40038·A-11→40292·A-8→40232/40210·A-9 봉투core·A-10 가격비교금지. GAP-BASIS-1~3(후니 VAT 확정·와우 ordcost_sup 재캡처).
+- 변경: `printshops/{huni,wow}.json`·`data/_scripts/crossbrand_query.py`·`HANDOFF.md`·신규 `02_crossbrand/{family-alignment-VERIFY-260705.md,family-verdicts.json}`.
+
 ## 2026-07-04~05 (4세션) — 와우 채움(7종) + 추천 3층 설계 정립 + 근거 두껍게 + 와우 전 상품 온톨로지 등록
 
 - **와우 파일럿 7종 레시피**(`data/recipes/wow/`): 명함40073(A-1)·스티커40008(A-2·커팅복잡도축 실증)·엽서40346(A-3·합판디지털·가격순위 역전)·전단40054(A-7·인쇄방식 옵셋/UV 선택축)·현수막40437(A-4·대형실사·면적)·매장용품POP40033(★후니 미대응 비대칭)·쿠폰40110(A-13·카페 RETAIN·미싱 절취). 6부류+상위개념 instance_of+후니 same_family_as+jobcost **라이브 실견적**(devshop 콘솔). = 카페 오픈 6기능 교차브랜드 완성.
