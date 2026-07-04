@@ -14,7 +14,7 @@ import openpyxl
 
 ROOT = pathlib.Path("/Users/innojini/Dev/HuniWeb")
 SNAP = ROOT / "_workspace/_foundation/live-snapshot/latest"
-XLSX = ROOT / "docs/huni/후니프린팅_상품마스터_260610.xlsx"
+XLSX = ROOT / "docs/huni/후니프린팅_상품마스터_260702.xlsx"
 
 
 def load(t):
@@ -102,7 +102,7 @@ def check():
 
 def main():
     print("=" * 70)
-    print("상품 등록 매핑 점검표 — 아크릴 (엑셀 의도 260610 ↔ DB 등록 대조)")
+    print("상품 등록 매핑 점검표 — 아크릴 (엑셀 의도 260702 ↔ DB 등록 대조)")
     print("=" * 70)
     res = check()
     ok = sum(1 for _, s, _ in res if s.startswith("✅"))

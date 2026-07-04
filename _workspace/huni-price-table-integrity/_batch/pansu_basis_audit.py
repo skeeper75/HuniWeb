@@ -13,7 +13,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "_foundat
 import lib_huni as H
 H.load_env()
 
-PANGEORI = os.path.join(os.path.dirname(__file__), "..", "..", "huni-dbmap", "06_extract", "pangeori-l1.csv")
+PANGEORI = os.path.join(os.path.dirname(__file__), "..", "..", "huni-dbmap", "24_price-extract-260702", "pangeori-l1.csv")
 OUT = os.path.join(os.path.dirname(__file__), "pansu-basis-audit-260701.csv")
 
 def dims(s):

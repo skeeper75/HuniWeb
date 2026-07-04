@@ -1,0 +1,5 @@
+defect,key,auth_value,live_value,money_impact,repro
+unmapped,COMP_NAMECARD_PEARL(note부재),"4셀·값집합[9000, 10000, 11000]",note 부재(mat_cd만)·셀키 결정론 매핑 불가,확인 필요(mat_cd↔소재그룹 A/B 확정 시 셀키 매핑 가능·값집합은 권위와 일치 여부 별도 대조),COMP_NAMECARD_PEARL 단가행 note 공란 → 소재그룹 매핑 사람 확정 필요
+unmapped,COMP_NAMECARD_PREMIUM(note부재),"4셀·값집합[4500, 5000, 5500, 6500]",note 부재(mat_cd만)·셀키 결정론 매핑 불가,확인 필요(mat_cd↔소재그룹 A/B 확정 시 셀키 매핑 가능·값집합은 권위와 일치 여부 별도 대조),COMP_NAMECARD_PREMIUM 단가행 note 공란 → 소재그룹 매핑 사람 확정 필요
+mismatch,"COMP_NAMECARD_FOIL/단면/금유광, 은유광, 먹유광, 청박, 적박, 동박/1000",63000,64000,과청구(권위 63000 vs 라이브 64000),comp_price_id=3385 64000→63000
+mismatch,"COMP_NAMECARD_FOIL/양면/금유광, 은유광, 먹유광, 청박, 적박, 동박/1000",63000,64000,과청구(권위 63000 vs 라이브 64000),comp_price_id=3387 64000→63000

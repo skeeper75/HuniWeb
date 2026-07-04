@@ -13,6 +13,7 @@ from .qty_rule_rmd import QtyRuleRmd
 from .platesize_rmd import PlatesizeRmd
 from .price_grid_rmd import PriceGridRmd
 from .linkage_rmd import LinkageRmd
+from .registration_rmd import RegistrationRmd
 from . import plan
 
 PRICE_REMEDIATORS = [
@@ -32,7 +33,16 @@ LINKAGE_REMEDIATORS = [
     LinkageRmd(),
 ]
 
+# 스텝2 통합 스코프 교정기(--scope all) — 4축 대응(진단 ALL_DIAGNOSERS 와 짝).
+#   Linkage=auto(E3 use_dims)+worklist · PriceGrid/Registration/Contribution=worklist(값 날조 금지).
+ALL_REMEDIATORS = [
+    LinkageRmd(),
+    PriceGridRmd(),
+    RegistrationRmd(),
+    ContributionRmd(),
+]
+
 __all__ = ["Remediator", "WiringRmd", "CalcabilityRmd", "DimConformanceRmd",
            "ContributionRmd", "ComponentMergeRmd", "OptionCpqRmd", "QtyRuleRmd",
-           "PlatesizeRmd", "PriceGridRmd", "LinkageRmd",
-           "PRICE_REMEDIATORS", "LINKAGE_REMEDIATORS", "plan"]
+           "PlatesizeRmd", "PriceGridRmd", "LinkageRmd", "RegistrationRmd",
+           "PRICE_REMEDIATORS", "LINKAGE_REMEDIATORS", "ALL_REMEDIATORS", "plan"]

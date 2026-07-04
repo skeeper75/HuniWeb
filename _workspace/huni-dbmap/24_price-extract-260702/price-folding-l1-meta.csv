@@ -1,0 +1,12 @@
+﻿sheet,type,row_seq,col,ref,block_id,meta_json
+접지옵션,block,,,,B01,"{""title"": ""카드접지 단가 (오시+접지)"", ""r_title"": 1, ""row_range"": [1, 55], ""col_range"": [""A"", ""E""], ""header_rows"": [2, 3], ""data_start_row"": 4}"
+접지옵션,block,,,,B02,"{""title"": ""리플렛 접지 단가 (오시+접지)"", ""r_title"": 56, ""row_range"": [56, 105], ""col_range"": [""A"", ""E""], ""header_rows"": [57], ""data_start_row"": 58}"
+접지옵션,cell,1,A,A1,B01,"{""fill_rgb"": ""FFFFFF00"", ""merged_range"": ""A1:D1""}"
+접지옵션,cell,1,B,B1,B01,"{""merged_range"": ""A1:D1""}"
+접지옵션,cell,1,C,C1,B01,"{""merged_range"": ""A1:D1""}"
+접지옵션,cell,1,D,D1,B01,"{""merged_range"": ""A1:D1""}"
+접지옵션,cell,56,A,A56,B02,"{""fill_rgb"": ""FFFFFF00"", ""merged_range"": ""A56:E56""}"
+접지옵션,cell,56,B,B56,B02,"{""merged_range"": ""A56:E56""}"
+접지옵션,cell,56,C,C56,B02,"{""merged_range"": ""A56:E56""}"
+접지옵션,cell,56,D,D56,B02,"{""merged_range"": ""A56:E56""}"
+접지옵션,cell,56,E,E56,B02,"{""merged_range"": ""A56:E56""}"

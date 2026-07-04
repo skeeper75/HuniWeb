@@ -20,14 +20,16 @@ _HERE = pathlib.Path(__file__).resolve().parent
 sys.path.insert(0, str(_HERE.parent))          # _foundation/ (hdx 패키지 루트)
 
 from hdx.foundation import Snapshot            # noqa: E402
-from hdx.diagnose import PRICE_DIAGNOSERS, LINKAGE_DIAGNOSERS  # noqa: E402
+from hdx.diagnose import PRICE_DIAGNOSERS, LINKAGE_DIAGNOSERS, ALL_DIAGNOSERS  # noqa: E402
 from hdx import board                          # noqa: E402
-from hdx.remediate import PRICE_REMEDIATORS, LINKAGE_REMEDIATORS, plan  # noqa: E402
+from hdx.remediate import (PRICE_REMEDIATORS, LINKAGE_REMEDIATORS,  # noqa: E402
+                           ALL_REMEDIATORS, plan)
 from hdx import verify as vf                   # noqa: E402
 from hdx import loop as loop_mod               # noqa: E402
 
-SCOPES = {"price": PRICE_DIAGNOSERS, "linkage": LINKAGE_DIAGNOSERS}
-REMEDIATORS = {"price": PRICE_REMEDIATORS, "linkage": LINKAGE_REMEDIATORS}
+# 스텝2: --scope all = 4축(Linkage·PriceGrid·Registration·Contribution) 한 명령 통합 진단.
+SCOPES = {"price": PRICE_DIAGNOSERS, "linkage": LINKAGE_DIAGNOSERS, "all": ALL_DIAGNOSERS}
+REMEDIATORS = {"price": PRICE_REMEDIATORS, "linkage": LINKAGE_REMEDIATORS, "all": ALL_REMEDIATORS}
 
 
 def _verify_report(verdicts, snap_name) -> pathlib.Path:
@@ -52,7 +54,7 @@ def _verify_report(verdicts, snap_name) -> pathlib.Path:
 def main():
     ap = argparse.ArgumentParser(description="hdx 통합 진단·교정 배치(P2 진단·보드)")
     ap.add_argument("--scope", default="price", choices=sorted(SCOPES),
-                    help="진단 도메인(파일럿=price)")
+                    help="진단 도메인: price(9 Dx)·linkage(양방향)·all(4축 통합: 배선·격자·등록·공정)")
     ap.add_argument("--round", dest="rnd", default=None, help="라운드 번호(수렴 추이 기록)")
     ap.add_argument("--snap", default=None, help="스냅샷 디렉토리(기본=live-snapshot/latest)")
     ap.add_argument("--note", default="", help="라운드 메모")

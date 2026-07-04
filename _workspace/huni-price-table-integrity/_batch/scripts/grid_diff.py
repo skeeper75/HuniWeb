@@ -317,8 +317,10 @@ L2_SHEETS = {
         "note_re": r"^([^/]+(?: x [^/]+)?)/(.+?) 제작수량 (\d+)",
     },
     "postcard-book": {
-        # 엽서북(COMP_PCB_*) — 떡메(COMP_TTEOKME)는 차원 다름(별도). 엽서북만 4축.
-        "comps": ["COMP_PCB_S1_20P", "COMP_PCB_S2_20P", "COMP_PCB_S1_30P", "COMP_PCB_S2_30P"],
+        # 엽서북 = 통합 comp COMP_PCB(구 COMP_PCB_S1/S2_20P·30P 4개는 차원통합→del_yn=Y).
+        # 통합축=print_opt_cd(면)·opt_cd(페이지). note 형식 '엽서북/{size}/{면}/{page} 수량 {qty} 이상' 보존.
+        # 떡메(COMP_TTEOKME)는 차원 다름(별도·band에 '>' 없어 미검사).
+        "comps": ["COMP_PCB"],
         # note: '엽서북/{size}/{면}/{page} 수량 {qty} 이상' → kind=size, material=면+page
         "note_re": r"엽서북/([^/]+)/([^/]+)/([^/ ]+) 수량 (\d+)",
         "note_groups": "size_side_page_qty",  # 4-그룹 → (kind=size, material=면/page, qty)
@@ -614,6 +616,178 @@ def detect_paper(auth_grid, live):
 
 
 # ─────────────────────────────────────────────────────────────────────
+# 명함포토카드 family — 통합 active comp(del_yn=N)의 note 시그니처 ↔ 권위 블록 격자.
+# 블록별 note 형식이 4종(facemat·combo·foil·bulk/set) → 블록→(comp,mode) 로 분기.
+# 소재는 권위가 그룹('백모조220 / 아트250 / 스노우250')이나 라이브는 개별/그룹 혼재 →
+# 권위 셀당 (그룹키 + 개별멤버키) 이중발행(dual-emit)해 어느 쪽이든 매칭. 값 verbatim.
+# note 부재 comp(펄·프리미엄)는 mat_cd↔소재그룹 매핑이 없어 셀키 결정론 불가 → unmapped(정직).
+# ─────────────────────────────────────────────────────────────────────
+import re as _re_nc
+
+NAMECARD_BLOCK_COMP = {
+    "B01": ("COMP_NAMECARD_STD", "facemat"),
+    "B02": ("COMP_NAMECARD_PREMIUM", "noteempty"),   # note 부재 → 셀키 미상(값집합만 대조)
+    "B03": ("COMP_NAMECARD_COAT", "facemat"),
+    "B04": ("COMP_NAMECARD_PEARL", "noteempty"),      # note 부재 → 셀키 미상
+    "B05": ("COMP_NAMECARD_CLEAR_S1", "facemat"),
+    "B06": ("COMP_NAMECARD_WHITE", "combo"),
+    "B07": ("COMP_NAMECARD_SHAPE", "facemat"),
+    "B08": ("COMP_NAMECARD_MINISHAPE", "facemat"),
+    "B09": ("COMP_NAMECARD_FOIL", "foil"),            # 종이+동판+박 합가(동판셋업 5000은 별도 comp)
+    "B10": ("COMP_PHOTOCARD_SET", "set"),
+    "B11": ("COMP_PHOTOCARD_CLEAR_SET", "set"),
+    "B12": ("COMP_PHOTOCARD_BULK", "bulk"),
+}
+_NC_COMP_MODE = {c: m for c, m in NAMECARD_BLOCK_COMP.values()}
+_NC_RE_A = _re_nc.compile(r"^(.+?)/([^/]+)/(.+?) 제작수량 (\d+) 이상")
+_NC_RE_FOIL = _re_nc.compile(r"합가 ([^/]+)/(.+?) 제작수량 (\d+) 이상")
+_NC_RE_BULK = _re_nc.compile(r"총제작수량 (\d+) 이상")
+
+
+def live_grid_namecard(comp_prices, components):
+    """라이브 명함/포토카드 통합 comp → {canonical_key: {...}}. 활성(del_yn=N)만.
+
+    canonical_key(모드별):
+      facemat/foil = (comp, 면, 소재, qty) · combo = (comp, '', 조합, qty)
+      bulk = (comp, qty) · set = (comp,)
+    """
+    active = {c["comp_cd"] for c in components if c["del_yn"] == "N"}
+    comp_prc_typ = {c["comp_cd"]: c["prc_typ_cd"] for c in components}
+    live = {}
+    unparsed = 0
+    for r in comp_prices:
+        comp = r["comp_cd"]
+        if comp not in _NC_COMP_MODE or comp not in active:
+            continue
+        mode = _NC_COMP_MODE[comp]
+        if mode == "noteempty":
+            continue  # 펄·프리미엄: note 부재(mat_cd만)·셀키 결정론 불가
+        note = (r["note"] or "").strip()
+        try:
+            price = int(float(r["unit_price"]))
+        except (ValueError, TypeError):
+            continue
+        cpid = int(r["comp_price_id"])
+        if mode == "facemat":
+            m = _NC_RE_A.search(note)
+            if not m:
+                unparsed += 1; continue
+            key = (comp, m.group(2).strip(), m.group(3).strip(), int(m.group(4)))
+        elif mode == "combo":
+            m = _NC_RE_A.search(note)
+            if not m:
+                unparsed += 1; continue
+            key = (comp, "", m.group(3).strip(), int(m.group(4)))
+        elif mode == "foil":
+            m = _NC_RE_FOIL.search(note)
+            if not m:
+                unparsed += 1; continue
+            key = (comp, m.group(1).strip(), m.group(2).strip(), int(m.group(3)))
+        elif mode == "bulk":
+            m = _NC_RE_BULK.search(note)
+            if not m:
+                unparsed += 1; continue
+            key = (comp, int(m.group(1)))
+        elif mode == "set":
+            key = (comp,)
+        else:
+            continue
+        if key not in live or cpid < int(live[key]["comp_price_id"]):
+            live[key] = {"price": price, "comp_cd": comp, "comp_price_id": r["comp_price_id"],
+                         "prc_typ": comp_prc_typ.get(comp, ""), "note": note}
+    return live, {"unparsed_live_rows": unparsed}
+
+
+def _nc_auth_keys(block_id, band, qty):
+    """권위 데이터셀 → (comp, mode, [canonical_keys], disp). dual-emit(그룹+멤버)."""
+    if block_id not in NAMECARD_BLOCK_COMP:
+        return None
+    comp, mode = NAMECARD_BLOCK_COMP[block_id]
+    parts = [x.strip() for x in band.split(">")]
+    if mode == "facemat":
+        side = parts[0]; group = parts[1] if len(parts) > 1 else ""
+        keys = [(comp, side, group, qty)]
+        for mem in [m.strip() for m in group.split("/") if m.strip()]:
+            keys.append((comp, side, mem, qty))
+        return comp, mode, keys, f"{comp}/{side}/{group}/{qty}"
+    if mode == "combo":
+        combo = parts[0]
+        return comp, mode, [(comp, "", combo, qty)], f"{comp}/{combo}/{qty}"
+    if mode == "foil":
+        side = parts[0]; mat = parts[1] if len(parts) > 1 else ""
+        return comp, mode, [(comp, side, mat, qty)], f"{comp}/{side}/{mat}/{qty}"
+    if mode == "bulk":
+        return comp, mode, [(comp, qty)], f"{comp}/{qty}"
+    if mode == "set":
+        return comp, mode, [(comp,)], f"{comp}/set(qty={qty})"
+    if mode == "noteempty":
+        return comp, mode, [], f"{comp}/{band}/{qty}"
+    return None
+
+
+def detect_namecard(auth_cells, live):
+    """명함포토카드 결함: mismatch(값 불일치)·missing_cell·unmapped(note 부재 comp).
+
+    note 부재 comp(펄·프리미엄)는 셀키 결정론 불가 → block 단위 unmapped 1행(정직·날조 금지).
+    """
+    defects = []
+    direct = 0
+    seen_set = set()          # set 모드 권위 중복표현(qty=1/20) 1회만
+    noteempty_blocks = {}     # comp → (auth_price_set, cell_cnt)
+    for c in auth_cells:
+        r = _nc_auth_keys(c["block_id"], c["band"], c["qty"])
+        if r is None:
+            continue
+        comp, mode, keys, disp = r
+        if mode == "noteempty":
+            info = noteempty_blocks.setdefault(comp, {"prices": set(), "n": 0})
+            info["prices"].add(c["price"]); info["n"] += 1
+            continue
+        if mode == "set":
+            if comp in seen_set:
+                continue
+            seen_set.add(comp)
+        hit = next((k for k in keys if k in live), None)
+        if hit is None:
+            defects.append({
+                "defect": "missing_cell", "key": disp,
+                "auth_value": str(c["price"]), "live_value": "없음(note 시그니처 미매칭)",
+                "money_impact": "견적불가/매핑미상(권위 셀이 라이브 note 와 안 맞음·확인 필요)",
+                "repro": f"권위 {disp}={c['price']} → 라이브 미매칭",
+            })
+        elif live[hit]["price"] == c["price"]:
+            direct += 1
+        else:
+            lp = live[hit]["price"]
+            defects.append({
+                "defect": "mismatch", "key": disp,
+                "auth_value": str(c["price"]), "live_value": str(lp),
+                "money_impact": ("저청구" if lp < c["price"] else "과청구") +
+                                f"(권위 {c['price']} vs 라이브 {lp})",
+                "repro": f"comp_price_id={live[hit]['comp_price_id']} {lp}→{c['price']}",
+            })
+    # note 부재 comp: 셀키 미상·값집합 대조 결과를 정직 보고(unmapped)
+    live_by_comp = {}
+    for k, v in live.items():
+        live_by_comp.setdefault(v["comp_cd"], set()).add(v["price"])
+    from collections import defaultdict as _dd
+    live_prices_all = _dd(set)
+    # noteempty comp 의 라이브 값집합은 live_grid 에서 제외됐으므로 별도 계산 불가 →
+    # 여기선 권위 값집합만 표기(라이브 값집합 대조는 요약 md/보고에서 서술).
+    for comp, info in sorted(noteempty_blocks.items()):
+        defects.append({
+            "defect": "unmapped", "key": f"{comp}(note부재)",
+            "auth_value": f"{info['n']}셀·값집합{sorted(info['prices'])}",
+            "live_value": "note 부재(mat_cd만)·셀키 결정론 매핑 불가",
+            "money_impact": "확인 필요(mat_cd↔소재그룹 A/B 확정 시 셀키 매핑 가능·값집합은 권위와 일치 여부 별도 대조)",
+            "repro": f"{comp} 단가행 note 공란 → 소재그룹 매핑 사람 확정 필요",
+        })
+    order = {"unmapped": 0, "missing_cell": 1, "mismatch": 2}
+    defects.sort(key=lambda d: (order[d["defect"]], d["key"]))
+    return defects, {"direct_hit": direct}
+
+
+# ─────────────────────────────────────────────────────────────────────
 # 검출 규칙
 # ─────────────────────────────────────────────────────────────────────
 def detect(auth_grid, live, dim_present):
@@ -774,6 +948,34 @@ def run(l1_csv, snap_dir, sheet_key, out_csv):
                 "defect_counts": dict(Counter(d["defect"] for d in defects)),
                 "match_stats": stats, "total_defects": len(defects)}
 
+    if sheet_key == "namecard":
+        from matrix_parse import parse_l1_namecard
+        auth = parse_l1_namecard(l1_csv)
+        live, lstats = live_grid_namecard(comp_prices, components)
+        defects, stats = detect_namecard(auth, live)
+        _write(defects)
+        from collections import Counter
+        stats.update(lstats)
+        # auth_cells = note-매칭 대상 셀만(noteempty·set 중복 제외)
+        seen_set = set()
+        eff = 0
+        for c in auth:
+            r = _nc_auth_keys(c["block_id"], c["band"], c["qty"])
+            if r is None:
+                continue
+            _comp, _mode, _keys, _ = r
+            if _mode == "noteempty":
+                continue
+            if _mode == "set":
+                if _comp in seen_set:
+                    continue
+                seen_set.add(_comp)
+            eff += 1
+        return {"auth_cells": eff, "live_cells": len(live),
+                "live_clrs": [], "live_grades": [],
+                "defect_counts": dict(Counter(d["defect"] for d in defects)),
+                "match_stats": stats, "total_defects": len(defects)}
+
     if sheet_key in BANDKEY_SHEETS:
         from matrix_parse import parse_l1_bandkey
         cfg = BANDKEY_SHEETS[sheet_key]
@@ -818,7 +1020,7 @@ if __name__ == "__main__":
     # usage: grid_diff.py [sheet_key] [l1_csv] [snap_dir] [out_csv]
     sheet_key = sys.argv[1] if len(sys.argv) > 1 else "digital-print"
     l1 = os.path.abspath(sys.argv[2]) if len(sys.argv) > 2 else os.path.abspath(
-        os.path.join(HERE, "..", "..", "..", "huni-dbmap", "06_extract",
+        os.path.join(HERE, "..", "..", "..", "huni-dbmap", "24_price-extract-260702",
                      "price-digital-print-price-l1.csv"))
     snap = os.path.abspath(sys.argv[3]) if len(sys.argv) > 3 else os.path.abspath(
         os.path.join(HERE, "..", "..", "..", "_foundation", "live-snapshot", "latest"))

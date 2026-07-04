@@ -225,6 +225,31 @@ def parse_l1_bandkey(l1_csv, exclude_titles=("올립니다", "100장당", "1장�
     return out
 
 
+def parse_l1_namecard(l1_csv):
+    """명함포토카드 L1 CSV → 권위 데이터셀(원자). 결정론.
+
+    블록별 band 형식이 달라 여기선 '순수 추출'만 하고, block→comp·mode·dual-emit 은
+    grid_diff.detect_namecard 가 담당(관심사 분리). 데이터셀 = row_key 숫자 + value 숫자 + rk≠val.
+    band 에 '>' 없어도 포함(포토카드 세트/대량은 band='' 또는 '가격').
+    """
+    rows = read_csv(l1_csv)
+    out = []
+    for r in rows:
+        rk = (r.get("row_key") or "").strip().replace(",", "")
+        band = (r.get("band_header_path") or "").strip()
+        val = (r.get("value") or "").strip().replace(",", "")
+        if not (rk.isdigit() and val.replace(".", "").lstrip("-").isdigit() and rk != val):
+            continue
+        out.append({
+            "sheet": r.get("sheet", "명함포토카드"),
+            "block_id": r["block_id"], "block_title": r.get("block_title", ""),
+            "band": band, "qty": int(rk), "price": int(float(val)),
+            "src_ref": r.get("cell_ref", ""),
+        })
+    out.sort(key=lambda c: (c["block_id"], c["band"], c["qty"]))
+    return out
+
+
 def parse_l1_paper(l1_csv):
     """출력소재IMPORT(용지비) wide-format → 정규 셀(종이명·판형→연당 절가). 결정론.
 

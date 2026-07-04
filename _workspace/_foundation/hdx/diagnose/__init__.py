@@ -21,6 +21,7 @@ from .qty_rule_dx import QtyRuleDx
 from .platesize_dx import PlatesizeDx
 from .price_grid_dx import PriceGridDx
 from .linkage_dx import LinkageDx
+from .registration_dx import RegistrationDx
 
 # 가격 도메인 파일럿 진단기 집합(diagnose_remediate --scope price)
 PRICE_DIAGNOSERS = [
@@ -40,7 +41,19 @@ LINKAGE_DIAGNOSERS = [
     LinkageDx(),
 ]
 
+# 스텝2 통합 스코프(diagnose_remediate --scope all) — 4축 한 명령 진단.
+#   A LinkageDx      배선 끊김(양방향)          — --scope linkage 재사용
+#   B PriceGridDx    권위 가격격자 값 대조(§26)  — --scope price 재사용(이제 260702 권위)
+#   C RegistrationDx 유료옵션 등록 도달성        — registration_check 어댑터(브리지 조인·전 시트)
+#   D ContributionDx 공정 무료화(silent-0)      — contribution_scan 어댑터(기존 재사용)
+ALL_DIAGNOSERS = [
+    LinkageDx(),
+    PriceGridDx(),
+    RegistrationDx(),
+    ContributionDx(),
+]
+
 __all__ = ["Diagnoser", "WiringDx", "DimConformanceDx", "ContributionDx",
            "ComponentMergeDx", "CalcabilityDx", "OptionCpqDx", "QtyRuleDx",
-           "PlatesizeDx", "PriceGridDx", "LinkageDx",
-           "PRICE_DIAGNOSERS", "LINKAGE_DIAGNOSERS"]
+           "PlatesizeDx", "PriceGridDx", "LinkageDx", "RegistrationDx",
+           "PRICE_DIAGNOSERS", "LINKAGE_DIAGNOSERS", "ALL_DIAGNOSERS"]

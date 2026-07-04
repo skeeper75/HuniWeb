@@ -1,5 +1,47 @@
 # hdx — CHANGELOG (최신 위 PREPEND)
 
+## 2026-07-05 — 4축 통합 --scope all + prd_nm 브리지 + 권위 260702 재고정 · 진단 도구 오탐 정리
+
+**목표**: 실무진 webadmin 배선 끊김을 최신 상품마스터·인쇄상품 가격표와 대조해 전수 진단·검증·교정하는 배치.
+**발견**: 이 일의 **~85%가 이미 hdx에 존재** → 새로 안 짜고 hdx 확장(search-before-mint).
+
+**권위 260702 재고정**: L1 재추출 `huni-dbmap/24_master-extract-260702/`·`24_price-extract-260702/`(러너
+`huni-dbmap/_scripts/run_extract_master_260702.py`·`run_extract_price_260702.py`). 버전 상수 6곳(260610/260527→
+260702) 교체: registration_check.py:22·build_prd_nm_bridge.py:26·registration_check_pilot.py:17·§26 run_all.py:29·
+grid_diff.py:821·pansu_basis_audit.py:16. **prd_nm 집합 불변(249=249) 검증** — 최신 권위=둘 다 260702.
+
+**prd_nm→prd_cd 브리지**: `board/prd_nm_bridge.csv`·`build_prd_nm_bridge.py`·`prd_nm_bridge-summary.md`.
+253상품·**EXACT 234(92%)**·needs_human 20(AMBIGUOUS 13·UNMATCHED 5·DOMAIN_INFERRED 1·del 1). 엑셀 권위 절대·
+후니 이전사이트 보강·레드 보조.
+
+**4축 통합 `--scope all`**: Linkage + PriceGrid(§26 어댑터) + **Registration(신규 Diagnoser 편입·브리지 조인·전 11
+시트)** + Contribution. 신규 `diagnose/registration_dx.py`·`remediate/registration_rmd.py`·`all_selftest.py`.
+드리프트0 셀프테스트 **8/8**·독립검증 GO. 첫 실산출 371→(엽서북 해소 후)370.
+
+**권위 이해 문서**: `huni-price-table-integrity/25_price-sheet-understanding-260702/`(INDEX+A/B/C/D). [핵심] 값의미
+규칙 = .01단가(수량↑값↓)/.02총액·합가(수량↑값↑)·판별=제목 "(단가)/(합가)" 라벨+수량방향. 시트 3분류=본체/
+추가가격/기반. blind spot 등기부 11항.
+
+**진단 도구 오탐 대거 정리**:
+- **엽서북 468 거짓 missing** = component-merge tombstone(grid_diff config가 del_yn=Y 옛 comp 겨냥) → `COMP_PCB`로
+  갱신, 468/468 값일치 해소.
+- **명함포토카드 103/105 값일치 해소**(grid_diff+matrix_parse+run_all에 namecard config 추가·UNMAPPED→DIFFED).
+  잔여: 금유광 qty1000 2셀 진짜불일치(권위63000 vs 라이브64000·권위 오타의심) + 펄/프리미엄 8셀 미상(note 부재·
+  값집합 일치·소재그룹↔mat_cd 확정 필요).
+- **스티커 결정론 매핑 불가**(COMP_STK_PRINT 6498행 6개 관례층 혼재·중간교정)·config 미변경(정직 보류).
+- **공정 278 트리아지**: 진짜 저청구 ~5근본원인(오시·미싱·타공·책자내지 디지털인쇄·접지)/상품~20(=플랜
+  needs_design 16)·나머지~210 오탐(BAKED 98·옵션경로~100·UNCOVERED+MISMATCH+ORPHAN 3중계상).
+
+**재프레이밍**: 겁났던 **371 → 진짜 돈크리티컬 ~40상품**, 나머지 오탐/사람판정 대기.
+
+**미해결(사람 판정 대기)**: ①명함 금유광 63000 vs 64000(권위 오타?) ②명함 펄/프리미엄 소재그룹↔mat_cd
+③스티커 캐노니컬 관례층 선정 ④브리지 20건 ⑤판수 이중권위(판걸이수 vs 상품마스터·예전사이트 tiebreaker 대기)
+⑥ceiling 규칙·박 등급 boundaries(권위 미명문).
+
+**[HARD] 교훈**: "미적재"로 보이는 것이 진단 도구 드리프트/포맷 미매칭일 수 있다 → 채우기 전 "라이브에 정말 없나
+vs 도구가 못찾나" 판별 필수. 값의미(.01/.02/합가) 시트·블록 단위 선확정. 사용자 위험 감지가 money-critical
+자동채우기 중단시킴. **건드리지 말 것**: 엽서북 config(COMP_PCB) 해소됨·라이브 DB 무변경(교정=인간+webadmin).
+
 ## 2026-07-05 — 등록 점검표 전 상품 대조 + 키링류 저청구 7상품 라이브 교정(addon 방식)
 
 **지니 재설정(2건)**: ① **needs_authority ≠ 실무진 대기** — 권위 엑셀은 실무진 산출이나 webadmin DB 설계·매핑은

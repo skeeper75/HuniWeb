@@ -26,7 +26,7 @@ import os
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-EXTRACT = os.path.abspath(os.path.join(HERE, "..", "..", "..", "huni-dbmap", "06_extract"))
+EXTRACT = os.path.abspath(os.path.join(HERE, "..", "..", "..", "huni-dbmap", "24_price-extract-260702"))
 SNAP = os.path.abspath(os.path.join(HERE, "..", "..", "..", "_foundation", "live-snapshot", "latest"))
 BATCH = os.path.abspath(os.path.join(HERE, ".."))
 
@@ -54,13 +54,16 @@ SHEET_REGISTRY = [
     (6, "커팅타공", "price-cutting-l1.csv", None, "L1-밴드", "UNMAPPED",
      "COMP_CUT_*(타공 multi-column·완칼+타공 combo)", "타공 다중값컬럼 추출 정밀화 필요(사람 확인)"),
     (7, "스티커", "price-sticker-price-l1.csv", None, "L2-합가", "UNMAPPED",
-     "COMP_STK_PRINT(note=블록좌표 'B01 col1(A5)')", "라이브 note=블록좌표·권위 라벨 직접 매칭 불가(col-map 사람 확인)"),
+     "COMP_STK_PRINT(6498행·6개 note관례 층 혼재: 잠정35%·RESTORE19%·mint21%·col7%·라벨3%·평문14%)",
+     "결정론 매핑 불가: (siz,qty)셀 93%가 2개+ 관례층에 중복 → 권위셀당 단일 정답행 미확정. "
+     "사람 확정 필요=①캐노니컬 관례층 선정(잠정/RESTORE/mint 처분 여부) ②사이즈라벨→siz_cd(6↔20) ③소재그룹→mat_cd(3↔15) ④수량밴드 정렬"),
     (8, "합판도무송스티커", "price-gangpan-sticker-l1.csv", "gangpan-sticker", "L2-합가", "DIFFED",
      "COMP_GANGPAN_PRINT", "L2 verbatim 일치"),
     (9, "봉투제작", "price-envelope-l1.csv", "envelope", "L2-합가", "DIFFED",
      "COMP_ENV_MAKING", "L2 verbatim 일치"),
-    (10, "명함포토카드", "price-namecard-photocard-l1.csv", None, "L2-합가", "UNMAPPED",
-     "COMP_NAMECARD_*·COMP_PHOTOCARD_*(다종·이중합산 history)", "block→comp 다종 분기·.01 교정행 보존·사람 확인"),
+    (10, "명함포토카드", "price-namecard-photocard-l1.csv", "namecard", "L2-합가", "DIFFED",
+     "COMP_NAMECARD_STD/COAT/CLEAR/SHAPE/MINISHAPE/WHITE/FOIL·COMP_PHOTOCARD_SET/CLEAR_SET/BULK",
+     "105셀 중 103 verbatim 일치·FOIL qty1000 2셀 과청구(권위63000/라이브64000)·펄·프리미엄 note부재 8셀 미상(값집합 일치)"),
     (11, "후가공_박소형", "price-foil-small-l1.csv", None, "L1-면적/수량", "UNMAPPED",
      "라이브 면적박 comp 부재(명함박만 min_qty)", "대형박과 동일·면적박 가공비 라이브 미적재(사람 확인)"),
     (12, "엽서북떡메", "price-postcard-book-l1.csv", "postcard-book", "L2-합가", "DIFFED",
@@ -141,7 +144,7 @@ def write_summary_md(records, path):
     sct = Counter(r["status"] for r in records)
     lines = []
     lines.append("# 전 19시트 가격테이블 무결성 배치 요약 (결정론)\n")
-    lines.append("권위=인쇄상품 가격표 260527(절대) ↔ 라이브 스냅샷(`live-snapshot/latest` 20:11). "
+    lines.append("권위=인쇄상품 가격표 260702(절대) ↔ 라이브 스냅샷(`live-snapshot/latest` 20:11). "
                  "라이브 읽기전용·DB 미적재. 적재본은 생성측 산출 — **인간 승인 전 COMMIT 금지**.\n")
     lines.append("## status 분포\n")
     for s in ["DIFFED", "L2_PENDING", "AREA_PENDING", "OUT_OF_SCOPE", "UNMAPPED"]:
@@ -167,7 +170,8 @@ def write_summary_md(records, path):
     lines.append("- **제본 중철제본 8셀**: COMP_BIND_JUNGCHEOL del_yn=Y(논리삭제)·활성 엔진 견적불가→comp 복원/재설계 결정.")
     lines.append("- **출력소재IMPORT 32 specialty 용지**: 뉴크라프트·띤또레또·레더하드커버·반투명PET 등 권위 종이 절가가 COMP_PAPER 미적재(mat_cd 신규 필요)→dbmap 적재.")
     lines.append("### C. 매핑미상 (사람 확인·날조 금지)\n")
-    lines.append("- 커팅타공(타공 multi-value 컬럼 추출 정밀화)·스티커(note=블록좌표)·명함포토카드(다종 comp·.01 교정행 보존)·박대형/박소형(면적박 가공비 라이브 미적재)·후가공_박백업(L1 CSV 부재)·아크릴 B02 투명1.5T(81셀 별도 comp 부재).")
+    lines.append("- 커팅타공(타공 multi-value 컬럼 추출 정밀화)·스티커(COMP_STK_PRINT 6498행에 6개 note관례 층 혼재·(siz,qty)셀 93% 다층 중복→캐노니컬 층+siz_cd/mat_cd 매핑 사람 확정 필요)·박대형/박소형(면적박 가공비 라이브 미적재)·후가공_박백업(L1 CSV 부재)·아크릴 B02 투명1.5T(81셀 별도 comp 부재).")
+    lines.append("- **명함포토카드 부분 미상**: 펄·프리미엄(B02/B04) 단가행 note 공란→소재그룹 A/B↔mat_cd 매핑 사람 확정 필요(값집합은 권위와 일치). FOIL qty1000 2셀=권위63000 vs 라이브64000 과청구(권위 +5600/밴드 패턴상 64000이 자연스러워 권위 오타 의심·사람 판정).")
     lines.append("\n### DIFFED 검증 완료(결함 0)\n")
     lines.append("- 접지 336·인쇄후가공 117·봉투 40·합판 370·엽서북 468·포스터사인 687·아크릴 313(매핑분) = L1밴드/L2합가/면적 verbatim 정확 일치(라이브=권위 거울). transpose 0(포스터/아크릴 재적재 검증).")
     lines.append("- **범위 밖**: 판걸이수·굿즈파우치 구간할인(t_dsc_* 타깃·component_prices diff 대상 아님).")
