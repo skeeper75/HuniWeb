@@ -9,9 +9,9 @@ paths:
 8개 가격 하네스를 의존 순서(§26→§7→§18→§7→§21/§13/§15)로 엮어 상품군을 "제대로된 가격값"까지 완주.
 스킬=`huni-price-master-orchestrator` (트리거: 가격 종단 파이프라인·formula_components 배선·배선 진척 보드).
 RTM=`_workspace/_foundation/price-pipeline-rtm.csv`. 배선 측도=`_foundation/batch/wiring_scan.py`
-(종료척도[HARD]=배선 결함 0+PRICE≠0). 변경이력: 최신 2026-07-04 ★통합 진단·교정 배치 hdx **가격 파일럿 완성**
-(P5-②c PriceGridDx 19시트 §26 어댑터로 **진단 9차원 전 커버**·한 명령 --loop·전 레이어 5/5 GO·남음 codex/타도메인=선택)
-← P5-②b 전파 수량·판형 ← P5-②a OptionCpqDx(메쉬배너 타공 저청구 적발) ← 첫 실적재(포스터 use_dims 라이브 COMMIT)
+(종료척도[HARD]=배선 결함 0+PRICE≠0). 변경이력: 최신 2026-07-05 ★hdx **등록 점검표(권위 엑셀↔DB 대조)로
+키링류 저청구 7상품 라이브 교정**(webadmin 실화면이 오진단 자기교정=고리 base자재 오모델→addon 방식·HIGH 4→0·
+지니 재설정: 엑셀=권위값 매핑·default-approve) ← 통합 진단·교정 배치 hdx 가격 파일럿 완성(진단 9차원 전 커버·--loop)
 ← P5-① 반자동 라운드 러너 ← P4 적대적 재실측 ← P3 교정생성(값 날조 금지) ← P2 진단·보드(드리프트 0) ← P1 foundation
 → `_workspace/huni-price-master/HANDOFF.md`·`_workspace/_foundation/hdx/HANDOFF.md`·각 CHANGELOG
 

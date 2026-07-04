@@ -1,5 +1,36 @@
 # hdx — CHANGELOG (최신 위 PREPEND)
 
+## 2026-07-05 — 등록 점검표 전 상품 대조 + 키링류 저청구 7상품 라이브 교정(addon 방식)
+
+**지니 재설정(2건)**: ① **needs_authority ≠ 실무진 대기** — 권위 엑셀은 실무진 산출이나 webadmin DB 설계·매핑은
+Claude 소관 → 빠진 값은 엑셀 실값 읽어 설계대로 매핑(= 권위 전사·[HARD] 날조 아님). ② 작업 루프 = 진단 →
+교정여부 제시 → **별말없으면 승인 처리**(default-approve·검증체인 유지). 메모리 hdx-remediation-authority-workflow.
+
+**등록 점검표 일반화**(`board/registration_check.py` — 파일럿 아크릴 → 5시트):
+- 인라인 유료옵션 5시트(아크릴·캘린더·디자인캘린더·실사·굿즈파우치) 상품별 대조. **3경로 종합 판정**:
+  옵션 opt_cd 직접 + option_items 차원환원(mat_cd 등) + **addon 템플릿**(t_prd_product_addons→templates→prices).
+- 오탐 제거 실증: PET배너 거치대(option_items→자재 경로)·볼체인(칼라볼체인 addon)이 v1서 오탐 → 3경로로 소거.
+- 신뢰도 2단계: HIGH(가격경로 끊김·addon 삭제=옵션/addon 실재하나 도달0=키링류) / REVIEW(옵션·addon 모두 없음).
+
+**★webadmin 실화면이 오진단 자기교정**(핵심 교훈): 아크릴키링 저청구 첫 교정안 = opt_cd 재키잉 → 라이브
+시뮬레이터(sim.py=webadmin 백엔드) 실측이 **진짜 버그 규명** = 고리가 base 자재(mat_cd)로 오모델 → 선택 시
+base comp 매칭 실패 → **상품 전체 0원**(고리 +1100 누락이 아니라 전부 0). opt_cd 접근 폐기(SUPERSEDED).
+[HARD] webadmin 확인이 잘못된 COMMIT 막음 = 생성(내 SQL)≠검증(라이브 sim) 분리의 실증.
+
+**키링류 저청구 7상품 라이브 교정**(전 검증체인: 라이브 sim 선검증→드리프트0→dryrun→COMMIT→사후 sim·백업·undo):
+- **템플릿 복원+오모델 자재 제거**(4상품·9부속): 아크릴키링(은색고리1100·금색고리1200·은색구슬줄300) +
+  아크릴뱃지(원형핀600·1구자석1000)·스마트톡(화이트바디2600·투명바디3000)·명찰(일자핀700·2구자석1700).
+  삭제된 addon 템플릿 복원(del_yn=N·신규 mint 0·template_prices 권위값 보유) + 오모델 자재(product_materials)
+  논리삭제(0원 트랩 제거). `remediate/acryl-keyring-addon/`·`acryl-accessories-addon/`.
+- **addon 링크만 추가**(3상품·11링크): 포카키링(칼라볼체인8)·엽서캘린더(우드거치대4000)·탁상형캘린더(캘린더봉투
+  2500/2400). 오모델 아님·순수 INSERT. `remediate/acryl-review-addonlink/`.
+- 결과: 등록 점검표 **HIGH 4→0·보드 18→11**. 사후 라이브 sim 전건 정상 청구 확인.
+
+**남은 REVIEW 11**: 신규 템플릿 필요(라벨부착300×6·맥세이프6500·아크릴스탠드1400·정가표 값 有) + base 미가격
+(말랑증사홀더·설계 선행) + 조사(메쉬배너 거치대·볼펜 블랙). 등록 점검표 형식가격 6시트 확장은 별도 축.
+
+**기록**: `COMMITTED-260704-acryl-keyring-addon.md`·`COMMITTED-260704-acryl-accessories-addon.md`. undo SQL 3세트.
+
 ## 2026-07-04 — 연결 무결성 스코프(linkage·양방향) + 아크릴키링 저청구 규명 + 등록 점검 파일럿
 
 **배경(지니 재정의)**: 실무진이 webadmin 에서 기준정보를 수정·이름변경·삭제후재등록 하면서 상품↔공식↔
