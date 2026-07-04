@@ -1,0 +1,342 @@
+<title>프린틀리 전체 지도와 현재 위치</title>
+<style>
+  :root{
+    --paper:#FAF8F3; --card:#FFFFFF; --card-2:#F4F0E7;
+    --ink:#1B1F2A; --slate:#656B79; --faint:#8A8F9B;
+    --line:#E4DECF; --line-2:#EDE8DC;
+    --accent:#0E7C86; --accent-soft:#0E7C8614; --accent-line:#0E7C8633;
+    --done:#3C7D5B; --prog:#B9822B; --pend:#9AA0AC; --here:#C0392B;
+    --font-sans:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard","Malgun Gothic","Noto Sans KR",sans-serif;
+    --font-mono:"SF Mono","JetBrains Mono","D2Coding",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0}
+  .wrap{
+    font-family:var(--font-sans); color:var(--ink); background:var(--paper);
+    -webkit-font-smoothing:antialiased; line-height:1.6;
+    padding:clamp(20px,5vw,64px) clamp(16px,5vw,40px);
+  }
+  .page{max-width:960px; margin:0 auto; display:flex; flex-direction:column; gap:clamp(30px,5vw,52px)}
+  .eyebrow{font-family:var(--font-mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); font-weight:600}
+  h1{font-size:clamp(26px,4.4vw,40px); line-height:1.18; margin:.5em 0 .3em; text-wrap:balance; letter-spacing:-.02em; font-weight:750}
+  .lede{font-size:clamp(15px,2.1vw,18px); color:var(--slate); max-width:62ch; margin:0}
+  h2{font-size:clamp(19px,2.8vw,25px); margin:0 0 .15em; letter-spacing:-.01em; font-weight:700; text-wrap:balance}
+  .sec-note{color:var(--slate); font-size:14.5px; margin:0 0 20px; max-width:64ch}
+  section{display:flex; flex-direction:column}
+  .sec-head{display:flex; align-items:baseline; gap:12px; margin-bottom:14px}
+  .sec-num{font-family:var(--font-mono); font-size:13px; color:var(--faint); font-weight:600; font-variant-numeric:tabular-nums}
+
+  /* purpose */
+  .purpose{background:var(--ink); color:#F3F1EC; border-radius:16px; padding:clamp(22px,4vw,36px); display:flex; flex-direction:column; gap:18px}
+  .purpose .oneliner{font-size:clamp(18px,2.8vw,24px); line-height:1.4; font-weight:650; text-wrap:balance; margin:0}
+  .purpose .oneliner b{color:#6FD3DA; font-weight:750}
+  .purpose p{margin:0; color:#C3C6CE; font-size:15px; max-width:64ch}
+  .rail{display:flex; flex-wrap:wrap; gap:10px; margin-top:2px}
+  .rail .chip{font-size:12.5px; color:#D7DAE1; background:#2A2F3C; border:1px solid #363C4A; border-radius:999px; padding:5px 12px}
+  .rail .chip b{color:#6FD3DA}
+
+  /* legend */
+  .legend{display:flex; flex-wrap:wrap; gap:16px; font-size:13px; color:var(--slate); margin-top:4px}
+  .lg{display:inline-flex; align-items:center; gap:7px}
+  .dot{width:10px; height:10px; border-radius:3px; flex:none}
+  .d-done{background:var(--done)} .d-prog{background:var(--prog)} .d-pend{background:var(--pend)} .d-here{background:var(--here)}
+
+  .pill{display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:650; padding:3px 10px; border-radius:999px; white-space:nowrap; font-family:var(--font-sans)}
+  .pill .dot{width:7px; height:7px; border-radius:50%}
+  .p-done{background:#3C7D5B14; color:var(--done)} .p-done .dot{background:var(--done)}
+  .p-prog{background:#B9822B18; color:#946717} .p-prog .dot{background:var(--prog)}
+  .p-pend{background:#9AA0AC1F; color:#6E7481} .p-pend .dot{background:var(--pend)}
+  .p-here{background:#C0392B14; color:var(--here)} .p-here .dot{background:var(--here)}
+
+  /* 20-stage ribbon */
+  .phases{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
+  .phase{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px 15px; display:flex; flex-direction:column; gap:12px}
+  .phase.focus{border-color:var(--accent-line); box-shadow:0 0 0 3px var(--accent-soft)}
+  .phase-h{display:flex; align-items:center; justify-content:space-between; gap:8px}
+  .phase-h .name{font-family:var(--font-mono); font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); font-weight:700}
+  .phase-h .who{font-size:11.5px; color:var(--faint)}
+  .steps{display:flex; flex-direction:column; gap:6px}
+  .step{display:flex; align-items:flex-start; gap:9px; font-size:13.5px; color:var(--ink)}
+  .step .n{font-family:var(--font-mono); font-size:11.5px; color:var(--slate); background:var(--card-2); border-radius:6px; min-width:22px; height:20px; display:inline-flex; align-items:center; justify-content:center; flex:none; margin-top:1px; font-variant-numeric:tabular-nums}
+  .phase.focus .step .n{background:var(--accent-soft); color:var(--accent); font-weight:700}
+  .focus-tag{font-size:11.5px; color:var(--here); font-weight:650; margin-top:2px; display:flex; align-items:center; gap:5px}
+
+  /* building */
+  .building{display:flex; flex-direction:column; border:1px solid var(--line); border-radius:14px; overflow:hidden; background:var(--card)}
+  .floor{display:grid; grid-template-columns:52px 1fr auto; align-items:center; gap:14px; padding:14px 16px; border-bottom:1px solid var(--line-2)}
+  .floor:last-child{border-bottom:0}
+  .floor.ground{background:var(--card-2)}
+  .floor .lv{font-family:var(--font-mono); font-size:20px; font-weight:700; color:var(--accent); text-align:center; font-variant-numeric:tabular-nums}
+  .floor .body .ft{font-weight:650; font-size:15px}
+  .floor .body .fd{font-size:13px; color:var(--slate); margin-top:1px}
+  .floor .body .fd b{color:var(--ink); font-weight:600}
+  .updir{font-size:12px; color:var(--faint); text-align:center; padding:8px; font-family:var(--font-mono); letter-spacing:.05em}
+
+  /* here banner */
+  .here-banner{background:#C0392B0D; border:1px solid #C0392B33; border-left:4px solid var(--here); border-radius:12px; padding:16px 18px; display:flex; flex-direction:column; gap:6px}
+  .here-banner .k{font-family:var(--font-mono); font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--here); font-weight:700; display:flex; align-items:center; gap:7px}
+  .here-banner .t{font-size:15.5px; font-weight:600; text-wrap:balance}
+  .here-banner .t b{color:var(--here)}
+  .here-banner .s{font-size:13.5px; color:var(--slate)}
+  .pin{width:9px; height:9px; border-radius:50%; background:var(--here); box-shadow:0 0 0 4px #C0392B26; flex:none}
+
+  /* stage timeline */
+  .track{display:flex; flex-direction:column; gap:10px}
+  .stage{display:grid; grid-template-columns:60px 1fr auto; gap:14px; align-items:center; background:var(--card); border:1px solid var(--line); border-radius:12px; padding:12px 15px; position:relative}
+  .stage.now{border-color:#C0392B44; box-shadow:0 0 0 3px #C0392B12}
+  .stage .sid{font-family:var(--font-mono); font-size:12px; color:var(--slate); font-weight:650}
+  .stage .sid b{display:block; font-size:16px; color:var(--ink); font-variant-numeric:tabular-nums}
+  .stage .sbody .st{font-weight:650; font-size:14.5px}
+  .stage .sbody .ss{font-size:12.5px; color:var(--slate); margin-top:1px}
+  .crit{font-size:11.5px; font-family:var(--font-mono); color:var(--accent); border:1px solid var(--accent-line); border-radius:6px; padding:2px 7px; margin-left:6px; letter-spacing:.03em}
+
+  /* printly steps */
+  .parts{display:flex; flex-direction:column; gap:10px}
+  .part{border:1px solid var(--line); border-radius:12px; background:var(--card); overflow:hidden}
+  .part-h{display:flex; align-items:center; gap:11px; padding:12px 15px; background:var(--card-2)}
+  .part-h .pk{font-family:var(--font-mono); font-size:12px; color:var(--accent); font-weight:700}
+  .part-h .pt{font-weight:650; font-size:14.5px}
+  .part-h .pmeta{margin-left:auto; font-size:12px; color:var(--faint)}
+  .substeps{display:flex; flex-wrap:wrap; gap:8px; padding:12px 15px}
+  .ss-chip{display:inline-flex; align-items:center; gap:7px; font-size:13px; border:1px solid var(--line); border-radius:9px; padding:6px 11px; background:var(--paper)}
+  .ss-chip.done{border-color:#3C7D5B33; background:#3C7D5B0A}
+  .ss-chip.now{border-color:#C0392B44; background:#C0392B0C; font-weight:650}
+  .ss-chip.next{border-style:dashed; color:var(--slate)}
+  .ss-chip .tick{font-size:11px}
+  .ss-chip.done .tick{color:var(--done)}
+  .ss-chip.now .tick{color:var(--here)}
+
+  /* decisions */
+  .decs{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
+  .dec{border:1px solid var(--line); border-radius:12px; background:var(--card); padding:15px; display:flex; flex-direction:column; gap:7px}
+  .dec .dn{font-family:var(--font-mono); font-size:11px; color:var(--faint); font-weight:600}
+  .dec .dq{font-weight:650; font-size:14px; text-wrap:balance}
+  .dec .da{font-size:12.5px; color:var(--slate)}
+  .dec .rec{font-size:12px; color:var(--accent); font-weight:650; margin-top:auto; padding-top:4px}
+
+  footer{border-top:1px solid var(--line); padding-top:18px; color:var(--faint); font-size:12px; line-height:1.7}
+  footer b{color:var(--slate)}
+
+  @media(max-width:720px){
+    .phases{grid-template-columns:1fr}
+    .decs{grid-template-columns:1fr}
+    .floor{grid-template-columns:44px 1fr; grid-template-areas:"lv body" "lv pill"}
+    .floor .lv{grid-area:lv} .floor .body{grid-area:body}
+    .floor .pill{grid-area:pill; justify-self:start}
+    .stage{grid-template-columns:48px 1fr; grid-template-areas:"sid body" "sid pill"}
+    .stage .sid{grid-area:sid} .stage .sbody{grid-area:body} .stage .pill{grid-area:pill; justify-self:start; margin-top:4px}
+  }
+</style>
+
+<div class="wrap">
+<div class="page">
+
+  <header>
+    <div class="eyebrow">프린틀리 · 전체 지도와 현재 위치</div>
+    <h1>내가 만들고 있는 것, 그리고 지금 어디쯤인지</h1>
+    <p class="lede">같은 여정을 세 가지 방식으로 그린 지도입니다 — RED의 <b>WebToProduct 20단계</b>, 시스템 <b>6층 건물</b>, 실행 <b>Stage 0~6</b>. 세 지도 위에 "지금 여기"를 찍었습니다.</p>
+  </header>
+
+  <!-- 목적 -->
+  <section>
+    <div class="purpose">
+      <div class="eyebrow" style="color:#6FD3DA">무엇을·왜 만드나</div>
+      <p class="oneliner">손님이 평소 말로 <b>"카페 오픈용 고급 명함 500장 얼마?"</b> 하고 물으면 — 알아듣고, 알맞은 상품·가격을 알려주고, 주문을 받고, <b>여러 인쇄소(후니·와우·레드) 중 어디에 맡길지까지</b> 정해주는 대화형 AI 인쇄 에이전트.</p>
+      <p>프린틀리는 후니 내부 시스템이 아니라 <b style="color:#fff">여러 벤더의 견적 엔진을 연결하는 중개(브로커)</b>입니다. 그래서 "브랜드에 상관없는 공통 지식 지도" 위에서 추천하고, 벤더마다 다른 계산기로 견적을 비교합니다.</p>
+      <div class="rail">
+        <span class="chip">원칙 1 · <b>지식 지도가 유일한 진실</b> (코드에 값 박기 금지)</span>
+        <span class="chip">원칙 3 · <b>AI는 값을 지어내지 않음</b> (견적·순위 = 계산기 몫)</span>
+        <span class="chip">원칙 5 · <b>소단위로 쪼개고 매 단계 확인</b></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 세 지도 안내 + 범례 -->
+  <section>
+    <div class="sec-head"><span class="sec-num">01</span><h2>먼저 — 세 지도는 같은 길</h2></div>
+    <p class="sec-note">아래 세 그림은 서로 다른 시스템이 아니라 <b>한 여정을 다른 각도에서 본 것</b>입니다. 20단계는 "주문이 흘러가는 순서", 6층은 "무엇을 쌓아 올리나", Stage는 "우리가 실제로 지어가는 차례". 색으로 진행 상태를 표시합니다.</p>
+    <div class="legend">
+      <span class="lg"><span class="dot d-done"></span>완료 · 재사용 가능</span>
+      <span class="lg"><span class="dot d-prog"></span>진행 중</span>
+      <span class="lg"><span class="dot d-pend"></span>예정 · 미착수</span>
+      <span class="lg"><span class="dot d-here"></span>지금 여기</span>
+    </div>
+  </section>
+
+  <!-- 20단계 -->
+  <section>
+    <div class="sec-head"><span class="sec-num">02</span><h2>지도 A — WebToProduct 20단계 (주문이 흐르는 순서)</h2></div>
+    <p class="sec-note">RED 원본 덱의 파이프라인. <b>WEB</b>(고객 대면)에서 시작해 <b>PRINT</b>(생산 준비)를 거쳐 <b>PRODUCT</b>(생산·후가공·배송)로 끝납니다. 프린틀리가 <b>지금 다루는 구간은 맨 앞 WEB</b> — 추천과 견적의 "지식 토대"입니다.</p>
+    <div class="phases">
+      <div class="phase focus">
+        <div class="phase-h"><span class="name">WEB</span><span class="who">고객 대면</span></div>
+        <div class="steps">
+          <div class="step"><span class="n">01</span>주문 접수 (대화·추천)</div>
+          <div class="step"><span class="n">02</span>견적 (인쇄+후가공 포함)</div>
+          <div class="step"><span class="n">03</span>결제</div>
+        </div>
+        <div class="focus-tag"><span class="pin"></span>프린틀리 지금 여기 (지식 설계)</div>
+      </div>
+      <div class="phase">
+        <div class="phase-h"><span class="name">PRINT</span><span class="who">생산 준비·결정론 엔진</span></div>
+        <div class="steps">
+          <div class="step"><span class="n">04</span>인쇄파일 검사 (프리플라이트)</div>
+          <div class="step"><span class="n">05</span>자동 수정</div>
+          <div class="step"><span class="n">06</span>똑똑한 조판 (임포지션)</div>
+          <div class="step"><span class="n">07</span>후가공별 파일 분리</div>
+          <div class="step"><span class="n">08</span>장비별 파일 변환</div>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-h"><span class="name">PRODUCT</span><span class="who">생산·후가공·배송</span></div>
+        <div class="steps">
+          <div class="step"><span class="n">09</span>인쇄 출력</div>
+          <div class="step"><span class="n">10</span>커팅 · <span class="n" style="margin-left:2px">11</span>금은박</div>
+          <div class="step"><span class="n">12</span>스코딕스 · <span class="n" style="margin-left:2px">13</span>미싱 · <span class="n" style="margin-left:2px">14</span>오시</div>
+          <div class="step"><span class="n">15</span>반칼 · <span class="n" style="margin-left:2px">16</span>재단 · <span class="n" style="margin-left:2px">17</span>제본</div>
+          <div class="step"><span class="n">18</span>분류 · <span class="n" style="margin-left:2px">19</span>포장 · <span class="n" style="margin-left:2px">20</span>배송</div>
+        </div>
+      </div>
+    </div>
+    <p class="sec-note" style="margin-top:14px">두 구간(WEB↔PRODUCT)을 잇는 다리 = <b>잡티켓(작업지시서 데이터 계약)</b>. 프린틀리에선 이게 <b>브릿지(PART 2)</b>이며 아직 착수 전입니다.</p>
+  </section>
+
+  <!-- 6층 -->
+  <section>
+    <div class="sec-head"><span class="sec-num">03</span><h2>지도 B — 시스템 6층 건물 (무엇을 쌓아 올리나)</h2></div>
+    <p class="sec-note">건물 짓기 비유. <b>바닥 3층(①②④)은 이미 튼튼</b>합니다 — 새로 만들 게 아니라 재사용할 자산. 위로 갈수록 목표에 가깝고, 꼭대기 ⑥이 최종 목표입니다.</p>
+    <div class="building">
+      <div class="updir">▲ 위로 갈수록 목표에 가까움</div>
+      <div class="floor">
+        <div class="lv">⑥</div>
+        <div class="body"><div class="ft">대화하는 AI 점원</div><div class="fd">손님과 <b>말로 주고받는 직원</b> — 계산기·지도를 불러 쓰는 지휘자 (값은 직접 안 만듦)</div></div>
+        <span class="pill p-pend"><span class="dot"></span>미착수 · 최종 목표</span>
+      </div>
+      <div class="floor">
+        <div class="lv">⑤</div>
+        <div class="body"><div class="ft">주문 · 인쇄소 배정</div><div class="fd">장바구니→결제, 그리고 <b>어느 인쇄소에 넘길지</b></div></div>
+        <span class="pill p-prog"><span class="dot"></span>설계 완료 · 구현 전</span>
+      </div>
+      <div class="floor">
+        <div class="lv">③</div>
+        <div class="body"><div class="ft">질문 알아듣기 (질의 결합)</div><div class="fd">손님 말 → <b>지도에서 길 찾기</b>. ← 프린틀리 관계 설계가 이 재료</div></div>
+        <span class="pill p-prog"><span class="dot"></span>설계도 완성 · 짓는 중</span>
+      </div>
+      <div class="floor ground">
+        <div class="lv">④</div>
+        <div class="body"><div class="ft">가격 계산기 (견적 엔진)</div><div class="fd">재료 넣으면 값이 나옴 · <b>실화면에서 실제로 돌아감</b></div></div>
+        <span class="pill p-done"><span class="dot"></span>작동 중 (LIVE)</span>
+      </div>
+      <div class="floor ground">
+        <div class="lv">②</div>
+        <div class="body"><div class="ft">지식 지도 (온톨로지)</div><div class="fd">"이 벽돌은 저 시멘트랑 쓴다" 관계도 · <b>275개 상품 완성</b></div></div>
+        <span class="pill p-done"><span class="dot"></span>완료</span>
+      </div>
+      <div class="floor ground">
+        <div class="lv">①</div>
+        <div class="body"><div class="ft">재료 창고 정리 (데이터)</div><div class="fd">벽돌·시멘트 종류별 정리 · 거의 다 됨 (<b>일부 상품 가격 비었음</b>)</div></div>
+        <span class="pill p-prog"><span class="dot"></span>진행 중</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 지금 여기 배너 -->
+  <section>
+    <div class="here-banner">
+      <div class="k"><span class="pin"></span>지금 하는 일 = 전체에서 어디인가</div>
+      <div class="t"><b>PART 1(온톨로지 설계) 완료</b> — 점(Step 1)·선(Step 2)·제약(Step 3)까지. 6층의 <b>지도 ②를 다중벤더로 넓혀 ③(길 찾기)의 재료를 완성</b>했습니다.</div>
+      <div class="s"><b style="color:var(--here)">라이브 길찾기 실증</b> — "카페 오픈 나눠줄 거 → 프리미엄엽서 100장"을 실엔진으로 종단 실행: <b style="color:var(--ink)">9,424원 (source=FORMULA)</b>. 설계한 선·제약이 라이브 노드에 그대로 먹힘. <b style="color:var(--ink)">다음 = PART 2 브릿지</b>(생산으로 잇기).</div>
+    </div>
+  </section>
+
+  <!-- Stage 0~6 -->
+  <section>
+    <div class="sec-head"><span class="sec-num">04</span><h2>지도 C — 실행 Stage 0~6 (우리가 짓는 차례)</h2></div>
+    <p class="sec-note">의존성 순서대로 지어가는 실제 작업 단계. <b>크리티컬 패스</b>(꼭 거쳐야 하는 외길) = Stage 2. 여기가 서면 "온톨로지→추천→가격"이 처음으로 실동합니다.</p>
+    <div class="track">
+      <div class="stage"><div class="sid">Stage<b>0</b></div><div class="sbody"><div class="st">데이터 기반 마감</div><div class="ss">질의에 걸리는 상품 가격 채우기 (전체 100% 아님·파일럿 우선)</div></div><span class="pill p-prog"><span class="dot"></span>진행 중</span></div>
+      <div class="stage now"><div class="sid">Stage<b>1</b></div><div class="sbody"><div class="st">질의 형식화 · 관계/의도 설계 <span class="crit">← 프린틀리 재료</span></div><div class="ss">지도의 선을 실행 가능한 형태로 · 용도(intent) 분해 — <b style="color:var(--here)">Step 2·3 완료 = 재료 확보</b></div></div><span class="pill p-here"><span class="dot"></span>지금 여기</span></div>
+      <div class="stage"><div class="sid">Stage<b>2</b></div><div class="sbody"><div class="st">질의 결합 시뮬레이터 P1 <span class="crit">크리티컬 패스</span></div><div class="ss">"고급 명함 얼마?" 한 질문을 종단 실행 (추천+가격+경로 시각화)</div></div><span class="pill p-pend"><span class="dot"></span>예정</span></div>
+      <div class="stage"><div class="sid">Stage<b>3</b></div><div class="sbody"><div class="st">시뮬레이터 P2 확장</div><div class="ss">여러 질문 + 브랜드 교차 비교 + 시각화 다듬기</div></div><span class="pill p-pend"><span class="dot"></span>예정</span></div>
+      <div class="stage"><div class="sid">Stage<b>4</b></div><div class="sbody"><div class="st">AI 에이전트 런타임 (⑥)</div><div class="ss">대화형 점원이 위 기능들을 도구로 불러 씀 · 최종 목표</div></div><span class="pill p-pend"><span class="dot"></span>미착수</span></div>
+      <div class="stage"><div class="sid">Stage<b>5</b></div><div class="sbody"><div class="st">주문 통합 (Shopby) · 병렬 가능</div><div class="ss">추천→가격 뒤 장바구니→주문 · 계산가 무손실 주입 난제</div></div><span class="pill p-prog"><span class="dot"></span>설계 완료</span></div>
+      <div class="stage"><div class="sid">Stage<b>6</b></div><div class="sbody"><div class="st">인쇄소 라우팅</div><div class="ss">주문을 어느 벤더에 넘길지 · 공급자 데이터 확보 후 (외부 대기)</div></div><span class="pill p-pend"><span class="dot"></span>추후 · 형만</span></div>
+    </div>
+  </section>
+
+  <!-- 프린틀리 빌드 세부 -->
+  <section>
+    <div class="sec-head"><span class="sec-num">05</span><h2>확대 — 프린틀리 빌드의 세부 단계</h2></div>
+    <p class="sec-note">이 대화에서 진행 중인 작업의 내부 단계입니다. <b>PART 1(온톨로지 설계) 완료</b> — 지도의 점(엔티티)·선(관계)·제약(안 되는 조합)을 모두 정의했고, 라이브로 검증했습니다. 이제 생산으로 넘기는 다리(브릿지·PART 2)가 다음입니다.</p>
+    <div class="parts">
+      <div class="part">
+        <div class="part-h"><span class="pk">PART 0</span><span class="pt">빌드 원칙 5가지</span><span class="pmeta">토대 · 항상 적용</span></div>
+        <div class="substeps">
+          <span class="ss-chip done"><span class="tick">✓</span>지식 지도=진실원본</span>
+          <span class="ss-chip done"><span class="tick">✓</span>3추론 분리</span>
+          <span class="ss-chip done"><span class="tick">✓</span>AI 값 판단 금지</span>
+          <span class="ss-chip done"><span class="tick">✓</span>근거 필수</span>
+          <span class="ss-chip done"><span class="tick">✓</span>소단위·매 단계 확인</span>
+        </div>
+      </div>
+      <div class="part">
+        <div class="part-h"><span class="pk">PART 1</span><span class="pt">온톨로지 설계 (지도 그리기)</span><span class="pmeta">4/4 완료 ✓</span></div>
+        <div class="substeps">
+          <span class="ss-chip done"><span class="tick">✓</span>Step 0 · 개념 정규화</span>
+          <span class="ss-chip done"><span class="tick">✓</span>Step 1 · 엔티티(점) 7종</span>
+          <span class="ss-chip done"><span class="tick">✓</span>Step 2 · 관계(선) 정의</span>
+          <span class="ss-chip done"><span class="tick">✓</span>Step 3 · 제약 (안 되는 조합)</span>
+        </div>
+      </div>
+      <div class="part">
+        <div class="part-h"><span class="pk">PART 2</span><span class="pt">브릿지 · 런타임 루프 (생산으로 잇기)</span><span class="pmeta">← 다음 단계</span></div>
+        <div class="substeps">
+          <span class="ss-chip next">잡티켓 데이터 계약</span>
+          <span class="ss-chip next">맥락→제안→선택→견적→매칭 루프</span>
+          <span class="ss-chip next">벤더 엔진 접속 (후니·와우·레드)</span>
+        </div>
+      </div>
+      <div class="part">
+        <div class="part-h"><span class="pk">PART 3·4</span><span class="pt">지니 확정 · 매 단계 게이트</span><span class="pmeta">상시</span></div>
+        <div class="substeps">
+          <span class="ss-chip done"><span class="tick">✓</span>관계 설계 3개 결정 확정</span>
+          <span class="ss-chip done"><span class="tick">✓</span>라이브 길찾기 실증 (실엔진 견적)</span>
+          <span class="ss-chip next">R3 실화면 점검 (일부 실증됨)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 다음 갈림길 -->
+  <section>
+    <div class="sec-head"><span class="sec-num">06</span><h2>확정된 결정 (2026-07-04) · 라이브로 검증됨</h2></div>
+    <p class="sec-note">Step 2의 세 결정을 확정했고, 라이브 길찾기가 그 근거를 실데이터로 뒷받침했습니다.</p>
+    <div class="decs">
+      <div class="dec">
+        <div class="dn">결정 1 · 확정</div>
+        <div class="dq">마케팅 목적을 지도에 별도 점으로</div>
+        <div class="da">실증: "오픈 기념 나눠줄 거"가 목적 점을 반드시 거쳐 프리미엄엽서에 도착 — 목적이 점이 아니면 경로 불성립.</div>
+        <div class="rec">✓ 별도 점으로 (신규 개체 0)</div>
+      </div>
+      <div class="dec">
+        <div class="dn">결정 2 · 확정</div>
+        <div class="dq">추천 순위 계산기 자리는 보류</div>
+        <div class="da">실증: 단골관리 후보가 1만원(쿠폰)~90만원(스탬프)로 성격이 달라 단순 정렬 불가 → 순위=계산기 몫 확인. 자리는 엔진 구현 시.</div>
+        <div class="rec">✓ 규칙만 적고 자리는 보류</div>
+      </div>
+      <div class="dec">
+        <div class="dn">결정 3 · 완료</div>
+        <div class="dq">Step 3 제약 정의 진행</div>
+        <div class="da">완료: 제약 vs 능력 vs 가격갭 vs 되묻기 층을 가름. "90만원"은 제약 아님(되묻기 사안)으로 정형화.</div>
+        <div class="rec">✓ Step 3 완료 → PART 1 종료</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    근거 문서 · <b>WebToProduct 20단계</b> = <span style="font-family:var(--font-mono)">_workspace/printly/research/webtoproduct-analysis.md</span> · <b>6층·Stage 로드맵</b> = <span style="font-family:var(--font-mono)">_workspace/_foundation/SYSTEM-IMPLEMENTATION-ROADMAP-260704.md</span> · <b>관계 정의</b> = <span style="font-family:var(--font-mono)">_workspace/printly/03_step2-relations.md</span><br>
+    상태 표기는 로드맵 문서 §1 기준 (④ 견적 엔진 = 작동 중 LIVE로 격상됨). 값(가격·순위·배정)은 전부 엔진 권위 — 지도는 "무엇이 무엇과 연결되나"까지만.
+  </footer>
+
+</div>
+</div>

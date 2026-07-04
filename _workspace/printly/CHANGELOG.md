@@ -2,6 +2,16 @@
 
 > 최신이 위(PREPEND). 프린틀리 = 다중 벤더 소상공인 AI 인쇄 에이전트(§35 런타임 실현체).
 
+## 2026-07-04 (2세션) — PART 1 완결(Step2·3) + PART 2 브릿지 + 라이브 실증
+
+- **Step 2 관계 정의**(`03_step2-relations.md`): 전반부 엣지 체인 정형화 — **신규 엣지 0**(search-before-mint). H1업종→기능·H2기능→홍보물=`references`(R19·한정자 dominance/fit)·H3~H6=§33 has_size/print_option/process/material/priced_by/has_component·V1~V4 다중벤더=§35 same_family_as/can_produce/quote_from. 마케팅 기능 8종=§33 intent 노드화(`intent_kind=marketing_function`·신규 개체0·키스톤). 추천 랭킹=경계(D-REC·값=엔진)·되묻기=에이전트 절차.
+- **지니 확정 3결정**(Step2 §9): ①기능 노드화 승인 ②recommendation_function 보류(경계 규칙만) ③Step3 진행. **라이브 길찾기로 실증**(생성≠검증).
+- **★라이브 길찾기 실증**: "카페 오픈 나눠줄 거→프리미엄엽서" 종단 순회를 라이브 DB로 검증(PRD_000016·사양7·공정7·PRF_DGP_A·구성요소10 전부 실재) + **실엔진 견적**(evaluate_price·venv django5.2): 프리미엄엽서 100장=9,424원/500장=24,378원(source=FORMULA)·단골관리 후보 3종(쿠폰 10,177/10,913·만년스탬프 900,000). 후보 가격 격차(만원 vs 90만원)가 결정2(순위 계산기)·되묻기 근거 확증.
+- **Step 3 제약 정의**(`04_step3-constraints.md`): 안 되는 조합=§33 E12 constraint·R12 constrains·JSONLogic·§31 CN-1~CN-6 재사용(**신규 0**·라이브 26건/15상품 실재). ★경계: evaluate_price 제약 미참조(검증=위젯/에이전트). ★오분류 방지: "90만원"=제약 아님(되묻기 사안)·제약 vs 능력(can_produce) vs 가격갭 vs 되묻기 층 분리. → PART 1(Step0~3) 완결.
+- **★PART 2 (1) 브릿지=잡티켓 데이터 계약**(`05_part2-bridge-jobticket.md`): 잡티켓=§35 fulfillment_order(E24)의 런타임 실현(**신규 그릇 0**·G-ROUTE-3 접합점이 이 브릿지). 사양 담체=evaluate_price `selections` 실계약과 동형(라이브 접지). ★원칙3 필드분리: 견적·판수·리드타임 3칸=엔진 전용(AI 지어내기 금지)·나머지=온톨로지. 계약 연쇄=preflight(C2)→imposition(C1)→장비가상화(C3)→생산 후가공 10단계. 파일변환=논리/가상 2층(장비추가=가상드라이버1개). 다중벤더=routed_to/quote_from→벤더 엔진(레드=지니 WebToProduct 엔진).
+- **지도 아티팩트**(`_map/master-map.html`): 목적+3지도(WebToProduct 20단계·6층·Stage0~6)+지금여기. PART1 완료·결정확정·라이브실증 반영 재배포(동일 URL).
+- 상태: PART 1 완결·PART 2 브릿지 설계 완료·미커밋분 커밋 대기. 다음=PART 2-2 런타임 루프 or 잡티켓 정형 스키마 or Q5/6/7(파일포맷 원천·배송범위·엔진 인터페이스 지니 입력).
+
 ## 2026-07-04 — 빌드 착수 (Step0~1 + 전반부 + WebToProduct/특허 분석)
 
 - **지니 빌드 지침 수령**(PART 0~4): 온톨로지 기반 인쇄 견적·생산 에이전트. 5대 원칙[HARD](온톨로지=진실원본·3추론 분리·AI 값판단 금지·node_id 근거·소단위 확인). 참조=tykimos ANA/ANL·uEngine Ontology Studio.
