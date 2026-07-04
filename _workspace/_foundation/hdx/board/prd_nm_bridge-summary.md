@@ -1,6 +1,6 @@
 # prd_nm→prd_cd 브리지 신뢰도 맵 — 요약 (스텝1b)
 
-> 권위 엑셀(상품마스터 260610, prd_nm) ↔ 라이브 DB(prd_cd) 조인 다리. 매칭=가설(사실 아님). 잘못된 매칭=엉뚱한 상품에 엉뚱한 가격=no-match보다 나쁨.
+> 권위 엑셀(상품마스터 260703, prd_nm) ↔ 라이브 DB(prd_cd) 조인 다리. 매칭=가설(사실 아님). 잘못된 매칭=엉뚱한 상품에 엉뚱한 가격=no-match보다 나쁨.
 
 - **권위 상품 총계**: 253건 (11 상품시트 distinct prd_nm; 비상품 노트행 2건 제외)
 - **EXACT**: 234건 (92%) — 233건 자동 확정(needs_human=FALSE), 1건 생애주기 재확인(라이브 del_yn=Y)
@@ -12,7 +12,7 @@
 ## 재사용한 기존 자산 (search-before-mint)
 - `registration_check.py` db_state() `nm2cd` — 라이브 prd_nm→prd_cd 역맵(EXACT 판정 근거).
 - `35_category-map/matching.csv` (type=product, norm→live_prd_cd 252건) — 카테고리맵 상품 매칭 harvest(EXACT 보강·불일치건 후보).
-- `24_master-extract-260610/*-l1.csv` `MES ITEM_CD` ↔ 라이브 `t_prd_products.MES_ITEM_CD`(16건) — 보강 근거.
+- `24_master-extract-260703/*-l1.csv` `MES ITEM_CD` ↔ 라이브 `t_prd_products.MES_ITEM_CD`(16건) — 보강 근거.
 - 라이브 스냅샷 `live-snapshot/latest/t_prd_products.csv`(300 상품, prd_nm 전량 유니크) — 대상.
 
 ## DOMAIN_INFERRED (문자열 불일치·단일 후보 추론) — 1건

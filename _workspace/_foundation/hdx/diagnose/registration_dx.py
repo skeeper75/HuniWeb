@@ -1,6 +1,6 @@
 """RegistrationDx — 유료옵션 등록 도달성 진단. `board/registration_check.py` **어댑터**(재구현 0).
 
-★목적(지니 260704·260705): 실무진 권위 엑셀(상품마스터 260702)을 '의도'로, 라이브 DB 를 '실제
+★목적(지니 260704·260705): 실무진 권위 엑셀(상품마스터 260703)을 '의도'로, 라이브 DB 를 '실제
 등록'으로 보고 **상품별 유료 추가옵션이 DB에 등록·가격연결됐나** 대조. 내부 정합만으론 못 잡는
 저청구 갭(예: 키링류 고리 0원)을 엑셀 대조로 포착.
 
@@ -41,7 +41,7 @@ class RegistrationDx(Diagnoser):
             return [Defect(dimension=self.dimension, severity="low", money_impact="unknown",
                            summary=f"등록 점검표 배치 미가용(graceful): {type(e).__name__}",
                            evidence={"error": str(e)[:160]},
-                           suggested_fix="권위 엑셀(상품마스터 260702)·prd_nm 브리지·시트명 config 확인")]
+                           suggested_fix="권위 엑셀(상품마스터 260703)·prd_nm 브리지·시트명 config 확인")]
 
         out: list[Defect] = []
         for rec in recs:
@@ -58,7 +58,7 @@ class RegistrationDx(Diagnoser):
                     evidence={"sheet": rec.get("sheet"), "tier": rec.get("tier"),
                               "needs_human": True, "gaps": gapstr[:200]},
                     suggested_fix="prd_nm→prd_cd 브리지 확정(스텝1b·엑셀=권위) 후 재진단 — 자동 결론 금지",
-                    authority_ref=f"상품마스터260702:{rec.get('sheet')}"))
+                    authority_ref=f"상품마스터260703:{rec.get('sheet')}"))
                 continue
 
             # (B) EXACT 조인 → 도달성 판정. HIGH=끊김/addon삭제, REVIEW=그 외
@@ -73,7 +73,7 @@ class RegistrationDx(Diagnoser):
                 suggested_fix=("권위 엑셀 유료옵션을 DB 옵션 단가행/addon 템플릿에 연결(값=권위·날조 금지·"
                                "webadmin 실화면 확인)" if high else
                                "DB 옵션·addon 모두 없음 — 진짜 미연결/이름차이/별도상품 수동 확정"),
-                authority_ref=f"상품마스터260702:{rec.get('sheet')}"))
+                authority_ref=f"상품마스터260703:{rec.get('sheet')}"))
         return out
 
     def stop_predicate(self, defects: list[Defect]) -> bool:

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """상품 등록 매핑 점검표 — 엑셀 의도↔DB 등록 대조 (전 시트 일반화).
 
-★목적(지니 260704): 실무진이 만든 권위 엑셀(상품마스터 260702)을 '의도'로, 라이브 DB 를
+★목적(지니 260704): 실무진이 만든 권위 엑셀(상품마스터 260703)을 '의도'로, 라이브 DB 를
 '실제 등록'으로 보고 **상품별 유료 옵션이 DB에 등록·가격연결됐나** 대조. 내부 정합만으론 못 잡는
 갭(예: 아크릴키링 고리 저청구 = 엑셀 유료인데 DB 0원)을 엑셀 대조로 전 상품 포착.
 
@@ -19,14 +19,14 @@ import openpyxl
 
 ROOT = pathlib.Path("/Users/innojini/Dev/HuniWeb")
 SNAP = ROOT / "_workspace/_foundation/live-snapshot/latest"
-XLSX = ROOT / "docs/huni/후니프린팅_상품마스터_260702.xlsx"
+XLSX = ROOT / "docs/huni/후니프린팅_상품마스터_260703.xlsx"
 OUT = ROOT / "_workspace/_foundation/hdx/board/registration-check.csv"
 BRIDGE = ROOT / "_workspace/_foundation/hdx/board/prd_nm_bridge.csv"   # 스텝1b 조인 다리(신뢰도 등급)
 
 # ── 시트별 config (전 상품시트) ─────────────────────────────────────────
 #   pid/nm = 상품블록 식별 컬럼. opt_price = 인라인 유료 옵션(옵션명 col, 증분가격 col) 쌍 목록.
 #   opt_price=[] = 이 시트엔 인라인 유료 추가옵션 열이 없음(가격격자=§26 축B 또는 addon 정가표 소관).
-#   ★260702 실측: 형식가격 6시트 중 인라인 (추가상품·추가가격) 쌍이 실재하는 건 디지털인쇄(37/38)·
+#   ★260703 실측: 형식가격 6시트 중 인라인 (추가상품·추가가격) 쌍이 실재하는 건 디지털인쇄(37/38)·
 #   스티커(30/31)뿐. 책자·포토북·문구·상품악세사리는 격자/addon 가격이라 인라인 열 없음 → [](날조 금지).
 SHEETS = {
     # ── 인라인 유료옵션 시트(파일럿 검증분) ──
@@ -289,7 +289,7 @@ def main():
     n_human = sum(1 for r in recs if r["needs_human"])
     n_review = len(recs) - n_high - n_human
     print("=" * 78)
-    print("상품 등록 매핑 점검표 — 유료 추가옵션 대조(상품마스터 260702 ↔ DB · 브리지 조인)")
+    print("상품 등록 매핑 점검표 — 유료 추가옵션 대조(상품마스터 260703 ↔ DB · 브리지 조인)")
     print("=" * 78)
     for sheet, items in by_sheet.items():
         print(f"\n### {sheet} — 후보 {len(items)}상품")

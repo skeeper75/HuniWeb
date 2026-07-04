@@ -43,7 +43,7 @@ LINKAGE_DIAGNOSERS = [
 
 # 스텝2 통합 스코프(diagnose_remediate --scope all) — 4축 한 명령 진단.
 #   A LinkageDx      배선 끊김(양방향)          — --scope linkage 재사용
-#   B PriceGridDx    권위 가격격자 값 대조(§26)  — --scope price 재사용(이제 260702 권위)
+#   B PriceGridDx    권위 가격격자 값 대조(§26)  — --scope price 재사용(이제 260703 권위)
 #   C RegistrationDx 유료옵션 등록 도달성        — registration_check 어댑터(브리지 조인·전 시트)
 #   D ContributionDx 공정 무료화(silent-0)      — contribution_scan 어댑터(기존 재사용)
 ALL_DIAGNOSERS = [

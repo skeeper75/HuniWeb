@@ -26,7 +26,7 @@ import os
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-EXTRACT = os.path.abspath(os.path.join(HERE, "..", "..", "..", "huni-dbmap", "24_price-extract-260702"))
+EXTRACT = os.path.abspath(os.path.join(HERE, "..", "..", "..", "huni-dbmap", "24_price-extract-260705"))
 SNAP = os.path.abspath(os.path.join(HERE, "..", "..", "..", "_foundation", "live-snapshot", "latest"))
 BATCH = os.path.abspath(os.path.join(HERE, ".."))
 
@@ -144,7 +144,7 @@ def write_summary_md(records, path):
     sct = Counter(r["status"] for r in records)
     lines = []
     lines.append("# 전 19시트 가격테이블 무결성 배치 요약 (결정론)\n")
-    lines.append("권위=인쇄상품 가격표 260702(절대) ↔ 라이브 스냅샷(`live-snapshot/latest` 20:11). "
+    lines.append("권위=인쇄상품 가격표 260705(절대) ↔ 라이브 스냅샷(`live-snapshot/latest` 20:11). "
                  "라이브 읽기전용·DB 미적재. 적재본은 생성측 산출 — **인간 승인 전 COMMIT 금지**.\n")
     lines.append("## status 분포\n")
     for s in ["DIFFED", "L2_PENDING", "AREA_PENDING", "OUT_OF_SCOPE", "UNMAPPED"]:

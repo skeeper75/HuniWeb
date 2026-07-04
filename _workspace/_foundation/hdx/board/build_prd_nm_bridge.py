@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """스텝1b — prd_nm→prd_cd 브리지 신뢰도 맵 빌더.
 
-★목적: 권위 엑셀(상품마스터 260702, prd_nm) ↔ 라이브 DB(prd_cd) 조인 다리를 신뢰도 등급으로
+★목적: 권위 엑셀(상품마스터 260703, prd_nm) ↔ 라이브 DB(prd_cd) 조인 다리를 신뢰도 등급으로
 만들고, 저신뢰·미상 케이스를 인간 게이트로 분리한다. 잘못된 매칭 = 엉뚱한 상품에 엉뚱한 가격 =
 no-match 보다 나쁨. 매칭은 가설이지 사실이 아니다.
 
@@ -23,7 +23,7 @@ from collections import defaultdict
 
 ROOT = pathlib.Path("/Users/innojini/Dev/HuniWeb")
 SNAP = ROOT / "_workspace/_foundation/live-snapshot/latest/t_prd_products.csv"
-MASTER = ROOT / "_workspace/huni-dbmap/24_master-extract-260702"
+MASTER = ROOT / "_workspace/huni-dbmap/24_master-extract-260703"
 MATCHING = ROOT / "_workspace/huni-dbmap/35_category-map/matching.csv"
 OUT_CSV = ROOT / "_workspace/_foundation/hdx/board/prd_nm_bridge.csv"
 OUT_MD = ROOT / "_workspace/_foundation/hdx/board/prd_nm_bridge-summary.md"
@@ -222,7 +222,7 @@ def main():
 
     lines = []
     lines.append("# prd_nm→prd_cd 브리지 신뢰도 맵 — 요약 (스텝1b)\n")
-    lines.append("> 권위 엑셀(상품마스터 260702, prd_nm) ↔ 라이브 DB(prd_cd) 조인 다리. "
+    lines.append("> 권위 엑셀(상품마스터 260703, prd_nm) ↔ 라이브 DB(prd_cd) 조인 다리. "
                  "매칭=가설(사실 아님). 잘못된 매칭=엉뚱한 상품에 엉뚱한 가격=no-match보다 나쁨.\n")
     ex_auto = sum(1 for r in rows if r["tier"] == "EXACT" and r["needs_human"] == "FALSE")
     ex_flag = ex - ex_auto
@@ -237,7 +237,7 @@ def main():
     lines.append("## 재사용한 기존 자산 (search-before-mint)")
     lines.append("- `registration_check.py` db_state() `nm2cd` — 라이브 prd_nm→prd_cd 역맵(EXACT 판정 근거).")
     lines.append("- `35_category-map/matching.csv` (type=product, norm→live_prd_cd 252건) — 카테고리맵 상품 매칭 harvest(EXACT 보강·불일치건 후보).")
-    lines.append("- `24_master-extract-260702/*-l1.csv` `MES ITEM_CD` ↔ 라이브 `t_prd_products.MES_ITEM_CD`(16건) — 보강 근거.")
+    lines.append("- `24_master-extract-260703/*-l1.csv` `MES ITEM_CD` ↔ 라이브 `t_prd_products.MES_ITEM_CD`(16건) — 보강 근거.")
     lines.append("- 라이브 스냅샷 `live-snapshot/latest/t_prd_products.csv`(300 상품, prd_nm 전량 유니크) — 대상.\n")
 
     for t, label in [("DOMAIN_INFERRED", "DOMAIN_INFERRED (문자열 불일치·단일 후보 추론)"),

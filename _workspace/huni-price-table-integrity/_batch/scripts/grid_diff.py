@@ -1020,7 +1020,7 @@ if __name__ == "__main__":
     # usage: grid_diff.py [sheet_key] [l1_csv] [snap_dir] [out_csv]
     sheet_key = sys.argv[1] if len(sys.argv) > 1 else "digital-print"
     l1 = os.path.abspath(sys.argv[2]) if len(sys.argv) > 2 else os.path.abspath(
-        os.path.join(HERE, "..", "..", "..", "huni-dbmap", "24_price-extract-260702",
+        os.path.join(HERE, "..", "..", "..", "huni-dbmap", "24_price-extract-260705",
                      "price-digital-print-price-l1.csv"))
     snap = os.path.abspath(sys.argv[3]) if len(sys.argv) > 3 else os.path.abspath(
         os.path.join(HERE, "..", "..", "..", "_foundation", "live-snapshot", "latest"))
