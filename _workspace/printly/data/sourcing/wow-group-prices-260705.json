@@ -1,0 +1,840 @@
+{
+  "_note": "와우프레스 jobcost API 24군 대표 가격(읽기전용·값=API 관측·지어내기 0). 대표=카테고리별 완비옵션 상품 1개, 유효 조합 자동탐색(유효 ordqty·필수 후가공 주입·size×paper×color 스윕). 각 값=engine 관측 ordcost_sup/bill.",
+  "generated": "2026-07-05",
+  "source_api": "POST /api/v1/ord/cjson_jobcost",
+  "basis": {
+    "ordcnt": 1,
+    "spec": "카테고리 대표 상품, 첫/기본 유효옵션(size·paper·color), 필수 후가공만 주입, 유효 ordqty(500 우선·상품 ordqtylist 내)",
+    "vat": "ordcost_sup=부가세 전 · ordcost_bill=부가세 포함"
+  },
+  "finding_api_behavior": "★jobcost API는 colorno(단면/양면)·ordqty 변경에 가격 불변(합판옵셋·디지털 공통 실측). paper/size/ordcnt만 가격 변동. 따라서 여기 값=상품 '기본 구성(첫 도수·기본 수량티어)' 가격. devshop 콘솔은 별색×수량 배수를 추가 적용해 값이 다를 수 있음(레시피 live_price_samples 대비). 이 파일 값은 jobcost API 관측 그대로(지어내기 0).",
+  "ok": 21,
+  "fail": 3,
+  "total": 24,
+  "groups": [
+    {
+      "category": "굿즈/다꾸",
+      "prodno": "40146",
+      "prodname": "투명포토카드",
+      "ordcnt": "1",
+      "spec": {
+        "sizeno": 5460,
+        "sizename": "90x50",
+        "non_standard": false,
+        "width": null,
+        "height": null,
+        "paperno": 21036,
+        "papername": "PET(투명) 300&mu;",
+        "colorno": 1355,
+        "colorname": "단면 칼라+백색",
+        "jobpresetno": 3130,
+        "jobno": 3130,
+        "covercd": 0,
+        "ordqty": "500",
+        "awkjob_injected": null
+      },
+      "ordqty": "500",
+      "http_status": 200,
+      "api_status": 200.0,
+      "errmsg": "성공하였습니다.",
+      "ordcost_sup": 11800.0,
+      "ordcost_bill": 12980.0,
+      "solve_calls": 1
+    },
+    {
+      "category": "디지털인쇄",
+      "prodno": "40029",
+      "prodname": "소량포스터",
+      "ordcnt": "1",
+      "spec": {
+        "sizeno": 5590,
+        "sizename": "2절(B2)",
+        "non_standard": false,
+        "width": null,
+        "height": null,
+        "paperno": 20081,
+        "papername": "랑데뷰 210g",
+        "colorno": 255,
+        "colorname": "단면 칼라4도",
+        "jobpresetno": 3120,
+        "jobno": 3120,
+        "covercd": 0,
+        "ordqty": "500",
+        "awkjob_injected": [
+          {
+            "covercd": 0,
+            "jobgroupno": 29000,
+            "jobno": 29032
+          },
+          {
+            "covercd": 0,
+            "jobgroupno": 31000,
+            "jobno": 31102
+          }
+        ]
+      },
+      "ordqty": "500",
+      "http_status": 200,
+      "api_status": 200.0,
+      "errmsg": "성공하였습니다.",
+      "ordcost_sup": 9280.0,
+      "ordcost_bill": 10208.0,
+      "solve_calls": 3
+    },
+    {
+      "category": "명함",
+      "prodno": "40056",
+      "prodname": "레이저마킹명함",
+      "ordcnt": "1",
+      "spec": {
+        "sizeno": 5458,
+        "sizename": "90x50",
+        "non_standard": false,
+        "width": null,
+        "height": null,
+        "paperno": 20796,
+        "papername": "크라프트팩 356g",
+        "colorno": 302,
+        "colorname": "단면 칼라",
+        "jobpresetno": 3120,
+        "jobno": 3120,
+        "covercd": 0,
+        "ordqty": "500",
+        "awkjob_injected": [
+          {
+            "covercd": 0,
+            "jobgroupno": 34000,
+            "jobno": 34010
+          }
+        ]
+      },
+      "ordqty": "500",
+      "http_status": 200,
+      "api_status": 200.0,
+      "errmsg": "성공하였습니다.",
+      "ordcost_sup": 21000.0,
+      "ordcost_bill": 23100.0,
+      "solve_calls": 1
+    },
+    {
+      "category": "봉투",
+      "prodno": "40034",
+      "prodname": "칼라봉투",
+      "ordcnt": "1",
+      "spec": {
+        "sizeno": 5629,
+        "sizename": "1호(5절)봉투(330x245)",
+        "non_standard": false,
+        "width": null,
+        "height": null,
+        "paperno": 20078,
+        "papername": "랑데뷰 130g",
+        "colorno": 255,
+        "colorname": "단면 칼라4도",
+        "jobpresetno": 3110,
+        "jobno": 3110,
+        "covercd": 0,
+        "ordqty": "1000",
+        "awkjob_injected": [
+          {
+            "covercd": 0,
+            "jobgroupno": 37000,
+            "jobno": 37010
+          },
+          {
+            "covercd": 0,
+            "jobgroupno": 38000,
+            "jobno": 38100
+          }
+        ]
+      },
+      "ordqty": "1000",
+      "http_status": 200,
+      "api_status": 200.0,
+      "errmsg": "성공하였습니다.",
+      "ordcost_sup": 310000.0,
+      "ordcost_bill": 341000.0,
+      "solve_calls": 1
+    },
+    {
+      "category": "부자재",
+      "prodno": "40079",
+      "prodname": "철제입간판",
+      "ordcnt": "1",
+      "spec": {
+        "reason": "no size/paper/color"
+      },
+      "ordqty": null,
+      "http_status": null,
+      "api_status": "SKIP_missing_axis",
+      "errmsg": null,
+      "ordcost_sup": null,
+      "ordcost_bill": null,
+      "solve_calls": 0
+    },
+    {
+      "category": "사인제품",
+      "prodno": "40023",
+      "prodname": "아크릴보드",
+      "ordcnt": "1",
+      "spec": {
+        "sizeno": 5683,
+        "sizename": "16절(B5)",
+        "non_standard": false,
+        "width": null,
+        "height": null,
+        "paperno": 21041,
+        "papername": "아크릴 백색(3T)",
+        "colorno": 302,
+        "colorname": "단면 칼라",
+        "jobpresetno": 30,
+        "jobno": 30,
+        "covercd": 0,
+        "ordqty": "100",
+        "awkjob_injected": null
+      },
+      "ordqty": "100",
+      "http_status": 200,
+      "api_status": 200.0,
+      "errmsg": "성공하였습니다.",
+      "ordcost_sup": 22200.0,
+      "ordcost_bill": 24420.0,
+      "solve_calls": 1
+    },
+    {
+      "category": "서식류",
+      "prodno": "40512",
+      "prodname": "칼라옵셋-양식지",
+      "ordcnt": "1",
+      "spec": {
+        "sizeno": 10511,
+        "sizename": "A4",
+        "non_standard": false,
+        "width": null,
+        "height": null,
+        "paperno": 20239,
+        "papername": "모조지(백색) 100g",
+        "colorno": 302,
+        "colorname": "단면 칼라",
+        "jobpresetno": 3110,
+        "jobno": 3110,
+        "covercd": 0,
+        "ordqty": "1000",
+        "awkjob_injected": [
+          {
+            "covercd": 0,
+            "jobgroupno": 11352,
+            "jobno": 11359
+          },
+          {
+            "covercd": 0,
+            "jobgroupno": 11353,
+            "jobno": 11369
+          },
+          {
+            "covercd": 0,
+            "jobgroupno": 28000,
+            "jobno": 28001
+          },
+          {
+            "covercd": 0,
+            "jobgroupno": 29000,
+            "jobno": 29032
+          }
+        ]
+      },
+      "ordqty": "1000",
+      "http_status": 200,
+      "api_status": 200.0,
+      "errmsg": "성공하였습니다.",
+      "ordcost_sup": 86500.0,
+      "ordcost_bill": 95150.0,
+      "solve_calls": 7
+    },
+    {
+      "category": "선거홍보물",
+      "prodno": "40449",
+      "prodname": "어깨띠",
+      "ordcnt": "1",
+      "spec": {
+        "sizeno": 5687,
+        "sizename": "100x1800(벨크로 별도)",
+        "non_standard": false,
+        "width": null,
+        "height": null,
+        "paperno": 22923,
+        "papername": "부직포 0.3T",
+        "colorno": 255,
+        "colorname": "단면 칼라4도",
+        "jobpresetno": 3120,
+        "jobno": 3120,
+        "covercd": 0,
+        "ordqty": "100",
+        "awkjob_injected": null
+      },
+      "ordqty": "100",
+      "http_status": 200,
+      "api_status": 200.0,
+      "errmsg": "성공하였습니다.",
+      "ordcost_sup": 3900.0,
+      "ordcost_bill": 4290.0,
+      "solve_calls": 1
+    },
+    {
+      "category": "스티커",
+      "prodno": "40006",
+      "prodname": "롤스티커",
+      "ordcnt": "1",
+      "spec": {
+        "sizeno": 5545,
+        "sizename": "원형(55x55)",
+        "non_standard": false,
+        "width": null,
+        "height": null,
+        "paperno": 21205,
+        "papername": "유포지스티커 80g",
+        "colorno": 302,
+        "colorname": "단면 칼라",
+        "jobpresetno": 30,
+        "jobno": 30,
+        "covercd": 0,
+        "ordqty": "1000",
+        "awkjob_injected": null
+      },
+      "ordqty": "1000",
+      "http_status": 200,
+      "api_status": 200.0,
+      "errmsg": "성공하였습니다.",
+      "ordcost_sup": 121000.0,
+      "ordcost_bill": 133100.0,
+      "solve_calls": 1
+    },
+    {
+      "category": "시스템상품",
+      "prodno": "40072",
+      "prodname": "기존-NCR지",
+      "ordcnt": "1",
+      "spec": {
+        "sizeno": 5634,
+        "sizename": "16절",
+        "non_standard": false,
+        "width": null,
+        "height": null,
+        "paperno": 22875,
+        "papername": "NCR(흰색) 53g",
+        "colorno": 1306,
+        "colorname": "군청1도",
+        "jobpresetno": 3140,
+        "jobno": 3140,
+        "covercd": 0,
+        "ordqty": "100",
+        "awkjob_injected": [
+          {
+            "covercd": 0,
+            "jobgroupno": 11352,
+            "jobno": 11359
+          },
+          {
+            "covercd": 0,
+            "jobgroupno": 11415,
+            "jobno": 11417
+          },
+          {
+            "covercd": 0,
+            "jobgroupno": 11353,
+            "jobno": 11367
+          }
+        ]
+      },
+      "ordqty": "100",
+      "http_status": 200,
+      "api_status": 200.0,
+      "errmsg": "성공하였습니다.",
+      "ordcost_sup": 78000.0,
+      "ordcost_bill": 85800.0,
+      "solve_calls": 1
+    },
+    {
+      "category": "어패럴",
+      "prodno": "40468",
+      "prodname": "반팔T-프린트스타(17수)",
+      "ordcnt": "1",
+      "spec": {
+        "sizeno": 10430,
+        "sizename": "성인용 2XL",
+        "non_standard": false,
+        "width": null,
+        "height": null,
+        "paperno": 25089,
+        "papername": "화이트",
+        "colorno": 1376,
+        "colorname": "뒷면",
+        "jobpresetno": 30,
+        "jobno": 30,
+        "covercd": 0,
+        "ordqty": "100",
+        "awkjob_injected": null
+      },
+      "ordqty": "100",
+      "http_status": 200,
+      "api_status": 200.0,
+      "errmsg": "성공하였습니다.",
+      "ordcost_sup": 13500.0,
+      "ordcost_bill": 14850.0,
+      "solve_calls": 1
+    },
+    {
+      "category": "와우기획상품",
+      "prodno": "40024",
+      "prodname": "명함샘플팩",
+      "ordcnt": "1",
+      "spec": {
+        "reason": "no size/paper/color"
+      },
+      "ordqty": null,
+      "http_status": null,
+      "api_status": "SKIP_missing_axis",
+      "errmsg": null,
+      "ordcost_sup": null,
+      "ordcost_bill": null,
+      "solve_calls": 0
+    },
+    {
+      "category": "자석제품",
+      "prodno": "40040",
+      "prodname": "종이자석광고지(UV코팅)",
+      "ordcnt": "1",
+      "spec": {
+        "sizeno": 10690,
+        "sizename": "라운드형 130x180",
+        "non_standard": false,
+        "width": null,
+        "height": null,
+        "paperno": 22948,
+        "papername": "스노우지(UV유광코팅) 270g",
+        "colorno": 255,
+        "colorname": "단면 칼라4도",
+        "jobpresetno": 3130,
+        "jobno": 3130,
+        "covercd": 0,
+        "ordqty": "1000",
+        "awkjob_injected": [
+          {
+            "covercd": 0,
+            "jobgroupno": 35000,
+            "jobno": 35010
+          }
+        ]
+      },
+      "ordqty": "1000",
+      "http_status": 200,
+      "api_status": 200.0,
+      "errmsg": "성공하였습니다.",
+      "ordcost_sup": 35200.0,
+      "ordcost_bill": 38720.0,
+      "solve_calls": 1
+    },
+    {
+      "category": "전단",
+      "prodno": "40005",
+      "prodname": "소량독판전단_옵셋",
+      "ordcnt": "1",
+      "spec": {
+        "sizeno": 5603,
+        "sizename": "16절(B5)",
+        "non_standard": false,
+        "width": null,
+        "height": null,
+        "paperno": 20079,
+        "papername": "랑데뷰 160g",
+        "colorno": 255,
+        "colorname": "단면 칼라4도",
+        "jobpresetno": 3110,
+        "jobno": 3110,
+        "covercd": 0,
+        "ordqty": "500",
+        "awkjob_injected": [
+          {
+            "covercd": 0,
+            "jobgroupno": 11341,
+            "jobno": 11347
+          },
+          {
+            "covercd": 0,
+            "jobgroupno": 11352,
+            "jobno": 11359
+          },
+          {
+            "covercd": 0,
+            "jobgroupno": 11353,
+            "jobno": 11367
+          },
+          {
+            "covercd": 0,
+            "jobgroupno": 11528,
+            "jobno": 11622
+          },
+          {
+            "covercd": 0,
+            "jobgroupno": 11584,
+            "jobno": 11654
+          },
+          {
+            "covercd": 0,
+            "jobgroupno": 11682,
+            "jobno": 11708
+          },
+          {
+            "covercd": 0,
+            "jobgroupno": 23000,
+            "jobno": 23010
+          },
+          {
+            "covercd": 0,
+            "jobgroupno": 28000,
+            "jobno": 28001
+          },
+          {
+            "covercd": 0,
+            "jobgroupno": 29000,
+            "jobno": 29032
+          },
+          {
+            "covercd": 0,
+            "jobgroupno": 31000,
+            "jobno": 31102
+          }
+        ]
+      },
+      "ordqty": "500",
+      "http_status": 200,
+      "api_status": 200.0,
+      "errmsg": "성공하였습니다.",
+      "ordcost_sup": 419500.0,
+      "ordcost_bill": 461450.0,
+      "solve_calls": 7
+    },
+    {
+      "category": "책자",
+      "prodno": "40201",
+      "prodname": "윤전책자",
+      "ordcnt": "1",
+      "spec": {
+        "ordqty": "500",
+        "tried": 40
+      },
+      "ordqty": "500",
+      "http_status": 200,
+      "api_status": "402",
+      "errmsg": "상품 필수 후가공 체크 에러",
+      "ordcost_sup": null,
+      "ordcost_bill": null,
+      "solve_calls": 40
+    },
+    {
+      "category": "카페용품",
+      "prodno": "40214",
+      "prodname": "종이컵",
+      "ordcnt": "1",
+      "spec": {
+        "sizeno": 10044,
+        "sizename": "10온스",
+        "non_standard": false,
+        "width": null,
+        "height": null,
+        "paperno": 24959,
+        "papername": "무형광 천연펄프(320g)",
+        "colorno": 302,
+        "colorname": "단면 칼라",
+        "jobpresetno": 30,
+        "jobno": 30,
+        "covercd": 0,
+        "ordqty": "1000",
+        "awkjob_injected": null
+      },
+      "ordqty": "1000",
+      "http_status": 200,
+      "api_status": 200.0,
+      "errmsg": "성공하였습니다.",
+      "ordcost_sup": 40000.0,
+      "ordcost_bill": 44000.0,
+      "solve_calls": 3
+    },
+    {
+      "category": "캘린더",
+      "prodno": "40208",
+      "prodname": "한장 포스터 캘린더",
+      "ordcnt": "1",
+      "spec": {
+        "sizeno": 5589,
+        "sizename": "A2(국2절)",
+        "non_standard": false,
+        "width": null,
+        "height": null,
+        "paperno": 20081,
+        "papername": "랑데뷰 210g",
+        "colorno": 255,
+        "colorname": "단면 칼라4도",
+        "jobpresetno": 3120,
+        "jobno": 3120,
+        "covercd": 0,
+        "ordqty": "500",
+        "awkjob_injected": [
+          {
+            "covercd": 0,
+            "jobgroupno": 29000,
+            "jobno": 29010
+          },
+          {
+            "covercd": 0,
+            "jobgroupno": 31000,
+            "jobno": 31102
+          }
+        ]
+      },
+      "ordqty": "500",
+      "http_status": 200,
+      "api_status": 200.0,
+      "errmsg": "성공하였습니다.",
+      "ordcost_sup": 7880.0,
+      "ordcost_bill": 8668.0,
+      "solve_calls": 1
+    },
+    {
+      "category": "판촉물",
+      "prodno": "40043",
+      "prodname": "사원증",
+      "ordcnt": "1",
+      "spec": {
+        "sizeno": 5735,
+        "sizename": "54x86",
+        "non_standard": false,
+        "width": null,
+        "height": null,
+        "paperno": 25120,
+        "papername": "PVC 0.8T",
+        "colorno": 302,
+        "colorname": "단면 칼라",
+        "jobpresetno": 30,
+        "jobno": 30,
+        "covercd": 0,
+        "ordqty": "500",
+        "awkjob_injected": [
+          {
+            "covercd": 0,
+            "jobgroupno": 11800,
+            "jobno": 11802
+          },
+          {
+            "covercd": 0,
+            "jobgroupno": 43184,
+            "jobno": 43187
+          },
+          {
+            "covercd": 0,
+            "jobgroupno": 12303,
+            "jobno": 43181
+          }
+        ]
+      },
+      "ordqty": "500",
+      "http_status": 200,
+      "api_status": 200.0,
+      "errmsg": "성공하였습니다.",
+      "ordcost_sup": 9300.0,
+      "ordcost_bill": 10230.0,
+      "solve_calls": 1
+    },
+    {
+      "category": "팬시제품",
+      "prodno": "40274",
+      "prodname": "마스킹테이프",
+      "ordcnt": "1",
+      "spec": {
+        "sizeno": 10072,
+        "sizename": "12mm(정/역방향-원터치재단)",
+        "non_standard": false,
+        "width": null,
+        "height": null,
+        "paperno": 24967,
+        "papername": "마스킹테이프지 42g",
+        "colorno": 302,
+        "colorname": "단면 칼라",
+        "jobpresetno": 30,
+        "jobno": 30,
+        "covercd": 0,
+        "ordqty": "500",
+        "awkjob_injected": null
+      },
+      "ordqty": "500",
+      "http_status": 200,
+      "api_status": 200.0,
+      "errmsg": "성공하였습니다.",
+      "ordcost_sup": 58900.0,
+      "ordcost_bill": 64790.0,
+      "solve_calls": 1
+    },
+    {
+      "category": "포토/액자",
+      "prodno": "40002",
+      "prodname": "페이퍼포토SET",
+      "ordcnt": "1",
+      "spec": {
+        "sizeno": 5750,
+        "sizename": "4R(102x152)_12장",
+        "non_standard": false,
+        "width": null,
+        "height": null,
+        "paperno": 20081,
+        "papername": "랑데뷰 210g",
+        "colorno": 255,
+        "colorname": "단면 칼라4도",
+        "jobpresetno": 3120,
+        "jobno": 3120,
+        "covercd": 0,
+        "ordqty": "100",
+        "awkjob_injected": null
+      },
+      "ordqty": "100",
+      "http_status": 200,
+      "api_status": 200.0,
+      "errmsg": "성공하였습니다.",
+      "ordcost_sup": 3940.0,
+      "ordcost_bill": 4334.0,
+      "solve_calls": 1
+    },
+    {
+      "category": "폰 액세서리",
+      "prodno": "40292",
+      "prodname": "스마트톡",
+      "ordcnt": "1",
+      "spec": {
+        "sizeno": 10121,
+        "sizename": "원형",
+        "non_standard": false,
+        "width": null,
+        "height": null,
+        "paperno": 24984,
+        "papername": "인화지(에폭시)1T",
+        "colorno": 302,
+        "colorname": "단면 칼라",
+        "jobpresetno": 30,
+        "jobno": 30,
+        "covercd": 0,
+        "ordqty": "100",
+        "awkjob_injected": null
+      },
+      "ordqty": "100",
+      "http_status": 200,
+      "api_status": 200.0,
+      "errmsg": "성공하였습니다.",
+      "ordcost_sup": 3800.0,
+      "ordcost_bill": 4180.0,
+      "solve_calls": 1
+    },
+    {
+      "category": "행택/쿠폰/안내장",
+      "prodno": "40038",
+      "prodname": "상품권/티켓",
+      "ordcnt": "1",
+      "spec": {
+        "sizeno": 5465,
+        "sizename": "148x68",
+        "non_standard": false,
+        "width": null,
+        "height": null,
+        "paperno": 20369,
+        "papername": "반누보화이트 227g",
+        "colorno": 255,
+        "colorname": "단면 칼라4도",
+        "jobpresetno": 3110,
+        "jobno": 3110,
+        "covercd": 0,
+        "ordqty": "200",
+        "awkjob_injected": null
+      },
+      "ordqty": "200",
+      "http_status": 200,
+      "api_status": 200.0,
+      "errmsg": "성공하였습니다.",
+      "ordcost_sup": 13200.0,
+      "ordcost_bill": 14520.0,
+      "solve_calls": 37
+    },
+    {
+      "category": "홀더",
+      "prodno": "40004",
+      "prodname": "PP홀더(칼라)",
+      "ordcnt": "1",
+      "spec": {
+        "sizeno": 5733,
+        "sizename": "220x310",
+        "non_standard": false,
+        "width": null,
+        "height": null,
+        "paperno": 21032,
+        "papername": "PP(반투명) 0.2T",
+        "colorno": 255,
+        "colorname": "단면 칼라4도",
+        "jobpresetno": 3130,
+        "jobno": 3130,
+        "covercd": 0,
+        "ordqty": "500",
+        "awkjob_injected": [
+          {
+            "covercd": 0,
+            "jobgroupno": 11528,
+            "jobno": 43353
+          },
+          {
+            "covercd": 0,
+            "jobgroupno": 11682,
+            "jobno": 43355
+          }
+        ]
+      },
+      "ordqty": "500",
+      "http_status": 200,
+      "api_status": 200.0,
+      "errmsg": "성공하였습니다.",
+      "ordcost_sup": 369000.0,
+      "ordcost_bill": 405900.0,
+      "solve_calls": 1
+    },
+    {
+      "category": "홍보물",
+      "prodno": "40031",
+      "prodname": "테이블세팅지",
+      "ordcnt": "1",
+      "spec": {
+        "sizeno": 5609,
+        "sizename": "8절(B4)",
+        "non_standard": false,
+        "width": null,
+        "height": null,
+        "paperno": 20245,
+        "papername": "모조지(백색) 70g",
+        "colorno": 301,
+        "colorname": "단면 1도",
+        "jobpresetno": 3110,
+        "jobno": 3110,
+        "covercd": 0,
+        "ordqty": "4000",
+        "awkjob_injected": [
+          {
+            "covercd": 0,
+            "jobgroupno": 29000,
+            "jobno": 29032
+          }
+        ]
+      },
+      "ordqty": "4000",
+      "http_status": 200,
+      "api_status": 200.0,
+      "errmsg": "성공하였습니다.",
+      "ordcost_sup": 95500.0,
+      "ordcost_bill": 105050.0,
+      "solve_calls": 1
+    }
+  ]
+}

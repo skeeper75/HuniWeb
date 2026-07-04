@@ -1,3 +1,11 @@
+## 2026-07-05 (5세션·병렬 2트랙) — 제약 그래프 등록 + jobcost API 배치 언블록
+
+- **지니 "1번·2번 병렬"**. 두 에이전트 동시 실행(독립 파일·시스템).
+- **① 와우 전체 req/rst 제약 그래프 등록**(신규 `04_wow-registration/wow-constraints.json` 6.6MB + summary + `wow_constraint_extract.py`): catalog 326상품 결정론 파싱. 현 2종(paper.rst_prsjob·color.req_prsjob)→**~21,000 제약**. 노드→노드 엣지 19,927(req_awkjob 6972·rst_awkjob 6942·rst_paper 5546·rst_prsjob 186·req_color 141·req_prsjob 140) + 값-규칙 1,065(rst_jobqty 493·rst_size 416·req_height 58·req_width 57·rst_ordqty 19·rst_cutcnt 10·req_jobsize 7·req_joboption 5). 구조=meta+edges[]+rules[]+gaps[]. wow-components.json(골든 dedup) 무손상. ★검증: 드리프트0(재파싱 집합일치)·값 지어내기0(전 catalog 앵커·독립 truthful 대조 40005 awkjob28001→11345)·GAP 80엣지(to_node 미등록=조사신호) 정직기록. = 프린틀리 배정 능력/feasibility 데이터 토대·후니 §33 동형 req/rst→상위개념 정렬 시 브랜드중립.
+- **② jobcost API 직접 배치 fetch**(`wow_price_fetch.py`·`wow-group-prices-260705.json`·21/24군): 인증(JWT)+payload 형식 검증(40073 단면500=ordcost_sup 3100 재현=정답). 견고성=유효 ordqty·필수후가공 자동주입·옵션조합 스윕·카테고리 폴백·비규격 width/height. ★**중대 발견(정직)**: open API는 colorno(단면/양면)·ordqty 불변·paper/size/ordcnt만 가격변동(직접 재검증 확인)→**API=기본구성가·양면/수량배수는 devshop콘솔/주문엔진(D-18 정합)**. ★대표 큐레이션 이슈: 폴백이 비전형 대표 선정(명함→레이저마킹21000·스티커→롤스티커121000·전단419500)→군간 비교 아직 불가(후니 스펙정규화 동일 테마). 실패 3군(부자재40079/와우기획40024=인쇄축無·책자40201=402 후가공).
+- **결론**: 메커니즘 2개(제약 그래프·가격 API) 완성. 깔끔한 배정표·feasibility 질의는 대표 큐레이션 + 상위개념 정렬이 다음.
+- 변경: 신규 wow-constraints.json/summary·wow_constraint_extract.py·wow_price_fetch.py·wow-group-prices-260705.json·HANDOFF.
+
 ## 2026-07-05 (5세션·서비스 커버리지) — 와우 24 상품군 프린틀리 서비스 전개
 
 - **지니 "와우 전 상품 온톨로지 등록해 프린틀리 상품군수 확보"**. 확인=와우 온톨로지는 **이미 324상품·24카테고리 등록 완료**(4세션 wow-products.json·dict). 미등록 catalog 3(40078/40089/40297)=selType·prod_nm None(견적불가 빈항목·제외 정당). 라이브 신규4만 catalog 밖(fetch 남음).
