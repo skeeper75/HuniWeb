@@ -11,8 +11,8 @@
 |---|---|---|
 | **P1** | `foundation/` 공용 토대(snapshot·db·engine·models·env·sim) | **완료**(셀프테스트 GO) |
 | **P2** | 5 스캐너 → `Diagnoser` 계약 어댑트 + 통합 결함보드 | **완료**(가격 파일럿 GO) |
-| P3 | `Remediator` 교정생성 통일(dryrun/fix/undo·백업·게이트) | 다음 |
-| P4 | 적대적 재실측(engine verbatim) 배치 편입 | — |
+| **P3** | `Remediator` 교정생성 통일(dryrun/fix/undo·백업·게이트·worklist) | **완료**(값 날조 금지 라우팅) |
+| P4 | 적대적 재실측(engine verbatim) 배치 편입 | 다음 |
 | P5 | 반자동 라운드 루프 + OptionCpqDx 신규 + (선택)codex | — |
 
 파일럿 = **가격 도메인** 종단 후 판형·수량·옵션CPQ 전파.
@@ -71,8 +71,39 @@ python3 _workspace/_foundation/hdx/diagnose_remediate.py --scope price [--round 
 - **충실성 검증(드리프트 0)**: wiring 6·contribution 274·component_merge 9 = 원본 카운트와 완전 일치.
 - **CalcabilityDx 스코프 명시**(no silent caps): 결정론·토큰0 **구조 프록시**만(공식 바인딩 있으나
   wired comp 단가행 총합 0 = PRICE 반드시 0). simulate 기반 정밀 PRICED-0(선택조합별 0원)은 **P4 재실측**으로 이관.
-- **스냅샷 시점 주의**: `latest`=snap_20260702(이번 세션 병합/타공 교정 이전) → 보드는 그 시점 상태.
-  라이브 반영 재확인은 스냅샷 재생성 후 재실행 또는 게이트 단계 라이브 재-SELECT(메모리 H-1).
+- **스냅샷 시점 주의**: 라이브 반영 재확인은 스냅샷 재생성(`live-snapshot/snapshot.sh`) 후 재실행 또는
+  게이트 단계 라이브 재-SELECT(메모리 H-1). 최신 재생성 snap_20260704_1507 = 이번 세션 병합/타공 반영
+  → component_merge 9→0(GO 전환·드리프트 재확인 실증).
+
+## remediate/ (P3)
+
+진단 결함 → 교정본. **[HARD] 값 날조 금지** = 단가값이 권위(엑셀/실무진)에서 와야 하는 결함은
+SQL 을 만들지 않고 **worklist** 로만 라우팅. `auto_data`(값 날조 없는 결정론 데이터/메타 교정)만
+dryrun/fix/undo SQL 트리플 생성. auto_data 라도 자동 COMMIT 금지(dryrun→P4 재실측→인간 승인).
+
+```bash
+python3 _workspace/_foundation/hdx/diagnose_remediate.py --scope price --remediate
+# → remediate/remediation-plan.md (분류별 worklist·실무진 열람)
+# → remediate/remediation-plan.csv
+# → remediate/sql/*.{dryrun,fix,undo}.sql (auto_data 만·인간 승인 전 실행 금지)
+```
+
+**교정 분류**(`foundation/models.py` `REMEDIATION_CLASS`):
+
+| 분류 | 의미 | 산출 |
+|---|---|---|
+| `auto_data` | 값 날조 없는 결정론 데이터/메타 교정 | dryrun/fix/undo SQL(백업+게이트) |
+| `blocked_human` | placeholder(PENDING/TBD) 실무진 단가·구성 입력 대기 | worklist |
+| `needs_authority` | 누락 단가값이 권위 엑셀/실무진에서 와야 함 | worklist |
+| `needs_design` | §18 가격설계 필요(공정 comp 신규 등) | worklist |
+| `needs_engine` | C트랙 엔진 코드변경 | worklist |
+| `review` | 저신뢰(오탐 가능) 수동 검토 | worklist |
+
+- **입체 근본원인 dedup**: 한 근본원인(예 `COMP_ACRYL_PENDING_TBD`)이 여러 차원(wiring+calcability)에
+  걸치면 `plan.py` 가 `root_comps` 로 병합 → 실무진 한 작업으로 통합(가격 파일럿: 6+4=10결함 1건).
+- **전 결함 라우팅**(no silent caps): Σ Fix.defects == 진단 결함 총수(누락 0).
+- 셀프테스트: `python3 _workspace/_foundation/hdx/remediate/_selftest.py`
+  (전 결함 라우팅·SQL 건전성·근본원인 dedup·값 날조 금지 4검증).
 
 ## [HARD] 규칙
 - 라이브 = `RAILWAY_DB_*` 읽기전용 SELECT + 롤백전용 DRY-RUN만. 쓰기는 인간 승인 채널.

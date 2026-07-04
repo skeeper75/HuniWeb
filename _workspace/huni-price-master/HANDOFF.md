@@ -11,7 +11,7 @@
 - **통합 진단·교정 배치 설계 + P1**: → `_workspace/_foundation/hdx/HANDOFF.md`(별도 재시작 포인터).
 
 ## 미해결·후속 (다음 세션 후보)
-1. **[활성 빌드] 통합 배치 hdx P3** — Remediator 교정생성 통일(dryrun/fix/undo·백업·게이트). P2(진단·통합 결함보드) 완료(가격 파일럿 331건·드리프트 0). **`_workspace/_foundation/hdx/HANDOFF.md` 참조.**
+1. **[활성 빌드] 통합 배치 hdx P4** — 적대적 재실측(engine verbatim·auto_data 가격중립 확인). P2(진단·보드)+P3(교정생성·값 날조 금지 라우팅) 완료(정본 재진단 327건·전건 라우팅·근본원인 dedup). **`_workspace/_foundation/hdx/HANDOFF.md` 참조.**
 2. **★옵션 dtl_opt 누락 전수 점검**(저청구 헌팅) — 메쉬 타공처럼 다른 상품의 공정 옵션도 `dtl_opt` 누락으로 저청구될 수 있음. dim_vals 요구 단가행 + 옵션 dtl_opt 빈 경우 전수 스캔(= hdx OptionCpqDx 후보).
 3. **최종 프로덕션 검증(타공)** — 실 견적조립은 신규 BFF/위젯(저장소 밖·개발중). 그 시스템이 붙는 시점에 타공(및 유사 공정옵션) 실제 청구 확인. 현 관리자 시뮬레이터는 비대표.
 4. **스캐너 dim_vals 축 탐지 보강** — `component_merge_scan.py`가 표준컬럼만 보고 dim_vals(jsonb) 축 병합을 미탐지(타공이 그 예).

@@ -1,5 +1,13 @@
 # §27 price-master — CHANGELOG (최신 위 PREPEND)
 
+## 2026-07-04 — 통합 배치 hdx P3: 교정생성(값 날조 금지 라우팅)
+
+진단 결함(Defect)→교정본(Fix)을 공통 `Remediator` 계약으로 생성. **[HARD] 값 날조 금지**:
+단가값이 권위(엑셀/실무진)에서 와야 하는 결함은 SQL 안 만들고 worklist(blocked_human/needs_*/review)로만,
+`auto_data`(메타·값 날조 없음)만 dryrun/fix/undo SQL 트리플. 스냅샷 재생성 후 327 결함 전건 라우팅.
+**입체 근본원인 dedup**: wiring 6+calcability 4(같은 아크릴 미확정 comp)→blocked_human 1건(10결함). auto_data
+파일럿=포스터 use_dims+=siz_cd(P4 재실측 대기). 상세=`_workspace/_foundation/hdx/CHANGELOG.md`(다음 P4 적대적 재실측).
+
 ## 2026-07-04 — 통합 배치 hdx P2: 진단·통합 결함보드
 
 파편 스캐너 5종을 공통 `Diagnoser` 계약으로 어댑트하고 통합 결함보드(CSV+HTML+전역 verdict) 산출.

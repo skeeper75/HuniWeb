@@ -1,5 +1,46 @@
 # hdx — CHANGELOG (최신 위 PREPEND)
 
+## 2026-07-04 — P3 교정생성 (`hdx/remediate/`)
+
+**목표**: 진단 결함(Defect) → 교정본(Fix)을 공통 `Remediator` 계약으로 생성(설계 §2 L4).
+자동은 교정본 생성까지 — 적재 COMMIT·webadmin 실화면은 인간 게이트(L7·[HARD]).
+
+**[HARD] 값 날조 금지 라우팅**(핵심 설계): 단가값이 권위(엑셀/실무진)에서 와야 하는 결함은
+**SQL 을 만들지 않는다** — `blocked_human`/`needs_authority`/`needs_design`/`review` worklist 로만.
+`auto_data`(값 날조 없는 결정론 데이터/메타 교정)만 dryrun/fix/undo SQL 트리플 생성.
+`foundation/models.py` `Fix` 확장: `remediation_class`·`worklist_note`·`root_comps`·`is_auto`(가산·P1 회귀 GO).
+
+**5 Remediator**(`hdx/remediate/`) — 각 차원 Defect 를 분류·교정:
+- `WiringRmd` — placeholder(PENDING/TBD) 빈배선 → blocked_human · 그 외 → needs_authority · 고아 → review
+- `CalcabilityRmd` — placeholder wired → blocked_human(같은 근본원인) · 그 외 → needs_design
+- `DimConformanceRmd` — **UNDECLARED → auto_data**(use_dims 선언 추가·메타·값 날조 없음) · MISSING → needs_authority
+- `ContributionRmd` — HIGH → needs_design(§18) · 저신뢰/유령 → review
+- `ComponentMergeRmd` — A/B → auto_data(실 SQL 은 검증된 `gen_commit_sql.py` 승계)
+
+**plan(`plan.py`)**: Fix 병합(**입체 근본원인 dedup**: 같은 root_comps 가 여러 차원에 걸치면 하나로)
+→ `remediation-plan.md`(분류별 worklist·실무진 열람) + `.csv` + `sql/*.{dryrun,fix,undo}.sql`(auto_data 만).
+
+**SQL 패턴 승계**(`base.py`): `30_component-merge/_commit/`의 백업(DROP IF EXISTS + CREATE TABLE AS·멱등)
++ 게이트 하드어서션(DO $$ … RAISE→abort) + 트랜잭션 래핑. dryrun=BEGIN…ROLLBACK·undo=백업 원복.
+
+**실행 결과**(snap_20260704_1507·재생성): 327 결함 **전건 라우팅**(누락 0·no silent caps) —
+auto_data 1(1결함)·blocked_human 1(10결함)·needs_authority 4(37)·needs_design 1(21)·review 1(258).
+- **입체 근본원인 dedup 실증**: wiring 6 + calcability 4 = 같은 `COMP_ACRYL_PENDING_TBD`(실무진 미확정)
+  → blocked_human **1건(10결함·wiring+calcability 교차)**으로 병합. 실무진 한 작업으로 통합.
+- **auto_data 파일럿**: `COMP_POSTER_CANVAS_HANGING` use_dims += siz_cd(사이즈별 가격 6000/10500/20000
+  실재하나 use_dims 미선언) → SQL 트리플 생성. 기존 use_dims 보존하며 siz_cd 추가·백업·사전/사후 게이트·undo.
+  ★가격중립 예상(엔진은 siz_cd 하드코딩 매칭) → **P4 재실측이 확인**(게이트 술어).
+
+**셀프테스트**(`remediate/_selftest.py`): 전 결함 라우팅·auto_data SQL 건전성(BEGIN/COMMIT·백업·게이트·
+dryrun·undo)·근본원인 dedup(차원 교차)·값 날조 금지(worklist SQL 없음) 4검증 GO.
+
+**다음**: P4 적대적 재실측(engine verbatim) — auto_data 게이트의 "★P4 재실측(가격중립 확인)" 술어 충전.
+
+## 2026-07-04 — 스냅샷 재생성 (snap_20260704_1507)
+
+이번 세션 병합/타공 교정이 라이브 반영됨 확인(`db-check` prc_comp 183→197 드리프트) → `snapshot.sh` 재생성.
+재진단 결과 **component_merge 9→0(GO 전환)** — 병합 라이브 COMMIT 반영 실증(드리프트 재확인·메모리 H-1).
+
 ## 2026-07-04 — P2 진단·보드 (`hdx/diagnose/` + `hdx/board/`)
 
 **목표**: 파편화된 결정론 스캐너를 공통 `Diagnoser` 계약으로 어댑트하고, 제각각이던 출력을

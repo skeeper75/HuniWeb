@@ -22,8 +22,10 @@ sys.path.insert(0, str(_HERE.parent))          # _foundation/ (hdx 패키지 루
 from hdx.foundation import Snapshot            # noqa: E402
 from hdx.diagnose import PRICE_DIAGNOSERS      # noqa: E402
 from hdx import board                          # noqa: E402
+from hdx.remediate import PRICE_REMEDIATORS, plan  # noqa: E402
 
 SCOPES = {"price": PRICE_DIAGNOSERS}           # 전파 시 platesize/option/qty 추가
+REMEDIATORS = {"price": PRICE_REMEDIATORS}
 
 
 def main():
@@ -33,6 +35,8 @@ def main():
     ap.add_argument("--round", dest="rnd", default=None, help="라운드 번호(수렴 추이 기록)")
     ap.add_argument("--snap", default=None, help="스냅샷 디렉토리(기본=live-snapshot/latest)")
     ap.add_argument("--note", default="", help="라운드 메모")
+    ap.add_argument("--remediate", action="store_true",
+                    help="진단 후 교정 플랜(P3) 생성: worklist(md/csv) + auto_data SQL 트리플")
     args = ap.parse_args()
 
     snap = Snapshot(args.snap)
@@ -54,6 +58,22 @@ def main():
     print(f"    돈영향(저/과청구) {money_n}건 · 치명 {crit_n}건")
     print(f"  -> {csv_path}")
     print(f"  -> {html_path}")
+
+    # ── P3 교정 플랜(옵션) ──
+    if args.remediate:
+        pres = plan.run(REMEDIATORS[args.scope], res.defects, snap)
+        sql_files = plan.write_sql(pres)
+        plan_md = plan.write_plan(pres)
+        plan_csv = plan.write_csv(pres)
+        print("  [remediate P3]")
+        for c in plan.CLASS_ORDER:
+            fs = pres.by_class.get(c, [])
+            if fs:
+                ndef = sum(len(f.defects) for f in fs)
+                print(f"    {c:16s} {len(fs):3d} Fix / {ndef:4d} 결함  ({plan.CLASS_LABEL[c]})")
+        print(f"    auto_data SQL 파일 {len(sql_files)}개 (dryrun/fix/undo·인간 승인 전 실행 금지)")
+        print(f"  -> {plan_md}")
+        print(f"  -> {plan_csv}")
 
     # 라운드 추적(append-only) — 수렴 추이
     if args.rnd is not None:
