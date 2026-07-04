@@ -24,6 +24,8 @@
 | `recipes/_INDEX.md` | ② 후니 홍보물 진척판(무엇을 채웠나) | 진척판 |
 | `recipes/<상품>.json` | ② 홍보물별 채운 레시피 | 채워가며 추가 |
 | `printshops/huni.json` | ③ 후니 인쇄소 연결 그릇 | 준비됨(candidate) |
+| `printshops/wow.json` | ③ 와우 인쇄소 그릇(다음 세션) | 준비됨(candidate) |
+| `_WOW-FILL-PLAN.md` | 와우를 후니처럼 채우는 플레이북(다음 세션) | 준비됨 |
 
 ## 채우는 법 (다음 스텝부터)
 

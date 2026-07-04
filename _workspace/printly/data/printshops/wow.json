@@ -1,0 +1,31 @@
+{
+  "_note": "와우프레스 인쇄소 그릇. 후니 다음 채울 벤더(다음 세션). §35 E22 supplier + 와우 앵커. 채우는 법=_WOW-FILL-PLAN.md.",
+  "id": "wow-supplier-1",
+  "brand": "wowpress",
+  "name": "와우프레스",
+  "roles": ["supplier"],
+  "quote_engine": {
+    "name": "jobcost API",
+    "endpoint": "POST /std/prod/jobcost",
+    "output_field": "ordcost_bill",
+    "contract": "전량 configuration(정적 가격표 0)·ordcost_base 내역 은닉",
+    "note": "후니 evaluate_price와 동형 경계(값=서버). ★차이: 로컬 호출 불가·라이브 API 연동 필요(후니는 venv 직접호출)"
+  },
+  "data_source": {
+    "catalog": "docs/wowpress/catalog/ (326 products JSON · 2025-10-14 수집)",
+    "api_spec": "docs/wowpress/wowpress-api-document.txt · products_spec_v1.0.pdf · price_order_spec_v1.01.pdf",
+    "analysis": "§35 01_analysis/{wowpress-structure, wowpress-catalog-map, wowpress-price-mechanism}.md"
+  },
+  "anchor_types": [
+    "catalog:products/<id>.json#<jsonpath>",
+    "wowpress-api:<endpoint>#<field>",
+    "wowpress-pdf:<file>#p<page>"
+  ],
+  "axes_6plus2": "size·paper·color·prsjob(인쇄방식)·awkjob(후가공)·prodadd(부자재) + selType(M/S)·pjoin(합판9/독판0/별도1)",
+  "brand_link": {
+    "instance_of": "와우 노드 → 상위 개념(§35 upper-ontology-schema §4 · U-1~U-22)",
+    "same_family_as": "같은 상품군 → 후니 (§35 02_crossbrand/family-alignment.md · 16쌍)"
+  },
+  "handoff": { "status": "다음 스텝(생산=와우 소유)" },
+  "meta": { "badge": "candidate", "sources": ["§35 01_analysis · 02_crossbrand", "docs/wowpress"], "updated": "2026-07-04" }
+}
