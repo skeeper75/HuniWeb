@@ -16,9 +16,11 @@
 | **P5-①** | 반자동 라운드 루프(`hdx/loop/`·인간 게이트 종합·수렴 추이) | **완료**(가격 파일럿 종단) |
 | **P5-②a** | OptionCpqDx 신규(옵션 dtl_opt 파라미터 연결 끊김·저청구) | **완료**(메쉬배너 타공 저청구 적발) |
 | **P5-②b** | 도메인 전파 QtyRuleDx(수량)·PlatesizeDx(판형) | **완료**(드리프트 0·8 Diagnoser) |
-| P5-②c | codex 2차(선택) + PriceGridDx(19시트 격자·§26 어댑터) | 다음 |
+| **P5-②c** | PriceGridDx(19시트 §26 어댑터) — 가격 도메인 진단 전 차원 | **완료**(9 Diagnoser) |
+| P5-③ | codex 2차(선택) — 배치가 codex 부르는 최초 지점 | 다음(선택) |
 
-파일럿 = **가격 도메인** 종단(진단→교정→재실측→라운드). 진단 8차원(배선·차원정합·공정·병합·계산가능성·옵션CPQ·수량·판형).
+파일럿 = **가격 도메인 진단 9차원 전 커버**(배선·차원정합·공정·병합·계산가능성·옵션CPQ·수량·판형·가격격자).
+종단(진단→교정→재실측→라운드) + 첫 실적재 완료.
 
 ## foundation/ (P1)
 
@@ -72,6 +74,7 @@ python3 _workspace/_foundation/hdx/diagnose_remediate.py --scope price [--round 
 | `OptionCpqDx` ★신규 | 갭#5(메쉬 타공 dtl_opt) | 옵션 dtl_opt↔단가행 dim_vals 연결 | 옵션 파라미터 미공급(저청구) | HIGH 0 |
 | `QtyRuleDx` | `batch/qty_rule_audit_260702.py` | 라이브 psql→Snapshot 포팅 | 수량 함정 TRAP_MIN(저청구) | HIGH 0 |
 | `PlatesizeDx` | `platesize-remediation/diagnose_all.py` + 상시게이트 | 로직 verbatim(이미 스냅샷) | 판형 미스매치·오배선 | 결함 0 |
+| `PriceGridDx` | §26 `run_all.py`+`grid_diff.py`(19시트) | **어댑터**(배치 호출·재구현 0) | 미적재셀·transpose·불일치·매핑미상 | HIGH 0 |
 
 - 전역 verdict = Σ stop_predicate(AND). 정렬 = 돈영향(저/과청구 상단) → 심각도 → 차원 → 상품.
 - **OptionCpqDx 신뢰도 모델(오탐 가드)**: 옵션이 공정 참조·단가행이 dim_vals param(타공수 등) 요구·옵션
@@ -80,8 +83,10 @@ python3 _workspace/_foundation/hdx/diagnose_remediate.py --scope price [--round 
   타공 옵션 dtl_opt 누락 저청구 **1건 HIGH 적발**(이번 세션 메쉬 타공 교정 시 놓친 상품을 배치가 전수로 포착).
 - **충실성 검증(드리프트 0)**: wiring 6·contribution 274·component_merge 9·qty TRAP_MIN 8·platesize 0
   = 원본 스캐너 카운트와 완전 일치(각 원본 대조).
-- **PriceGridDx(19시트 격자) 제외 명시**(no silent caps): §26 huni-price-table-integrity 하네스 전체 규모
-  (권위 CSV 추출 + 시트별 매트릭스 파서)라 단일 Diagnoser 어댑트는 조립 수준 초과 → 별도 어댑터로 후속(P5-②c).
+- **PriceGridDx = §26 배치 어댑터**(재구현 0): §26 `run_all.main()`(19시트 권위↔라이브 격자 diff)를 호출해
+  산출을 Defect 로 변환만. 보드 입도 = **시트×결함유형 요약** 1건(셀 상세는 §26 `ALL-SHEETS-defects.csv`).
+  DIFFED 시트 결함유형별 + UNMAPPED 시트(사람 확인) + OUT_OF_SCOPE 제외. §26 배치 미가용 시 graceful(빈+note).
+  ★§26 배치는 자체 SNAP=latest 사용(--snap 미반영)·시점종속 드리프트(병합/적재 후) 재스냅 후 재확인 권장.
 - **CalcabilityDx 스코프 명시**(no silent caps): 결정론·토큰0 **구조 프록시**만(공식 바인딩 있으나
   wired comp 단가행 총합 0 = PRICE 반드시 0). simulate 기반 정밀 PRICED-0(선택조합별 0원)은 **P4 재실측**으로 이관.
 - **스냅샷 시점 주의**: 라이브 반영 재확인은 스냅샷 재생성(`live-snapshot/snapshot.sh`) 후 재실행 또는

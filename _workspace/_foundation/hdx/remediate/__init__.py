@@ -11,6 +11,7 @@ from .component_merge_rmd import ComponentMergeRmd
 from .option_cpq_rmd import OptionCpqRmd
 from .qty_rule_rmd import QtyRuleRmd
 from .platesize_rmd import PlatesizeRmd
+from .price_grid_rmd import PriceGridRmd
 from . import plan
 
 PRICE_REMEDIATORS = [
@@ -22,8 +23,9 @@ PRICE_REMEDIATORS = [
     OptionCpqRmd(),
     QtyRuleRmd(),
     PlatesizeRmd(),
+    PriceGridRmd(),
 ]
 
 __all__ = ["Remediator", "WiringRmd", "CalcabilityRmd", "DimConformanceRmd",
            "ContributionRmd", "ComponentMergeRmd", "OptionCpqRmd", "QtyRuleRmd",
-           "PlatesizeRmd", "PRICE_REMEDIATORS", "plan"]
+           "PlatesizeRmd", "PriceGridRmd", "PRICE_REMEDIATORS", "plan"]

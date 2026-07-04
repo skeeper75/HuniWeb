@@ -1,5 +1,13 @@
 # §27 price-master — CHANGELOG (최신 위 PREPEND)
 
+## 2026-07-04 — 통합 배치 hdx P5-②c: PriceGridDx(19시트 §26 어댑터) — 진단 9차원 완성
+
+가격격자 19시트를 §26 배치(run_all) **어댑터**(재구현 0)로 편입 → 가격 도메인 **진단 9차원 전 커버**
+(배선·차원정합·공정·병합·계산가능성·옵션CPQ·수량·판형·가격격자). §26 산출을 시트×결함유형 요약 Defect 로 변환
+(셀 상세는 §26 CSV). 라운드8 총 416·price_grid 9(출력소재 30셀·엽서북 468[드리프트 의심]·UNMAPPED 6시트).
+graceful(§26 미가용 시 빈+note). ★**가격 파일럿 완성**(진단 9차원+교정+재실측+라운드+첫 실적재·전 레이어 5/5 GO).
+남음(선택)=codex 2차·실무진 액션. 상세=`_foundation/hdx/CHANGELOG.md`·`HANDOFF.md`(다음 세션 재시작 포인터).
+
 ## 2026-07-04 — 통합 배치 hdx P5-②b: 도메인 전파(QtyRuleDx 수량·PlatesizeDx 판형)
 
 Diagnoser 계약을 수량·판형 차원으로 전파 → 진단 8차원. QtyRuleDx(←qty_rule_audit Snapshot 포팅·TRAP_MIN

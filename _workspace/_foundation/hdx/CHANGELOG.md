@@ -1,5 +1,30 @@
 # hdx — CHANGELOG (최신 위 PREPEND)
 
+## 2026-07-04 — P5-②c PriceGridDx(19시트 §26 어댑터) — 가격 진단 9차원 완성
+
+**목표**: 남은 전파 차원(가격격자 19시트)을 §26 배치 **어댑터**로 편입 → 가격 도메인 진단 9차원 전 커버.
+
+**얇은 어댑터(재구현 0)**: `diagnose/price_grid_dx.py` 가 §26 `run_all.main()`(권위 엑셀 L1 CSV ↔ 라이브
+스냅샷 시트별 매트릭스 diff·19시트)를 **호출**하고 산출을 공통 Defect 로 변환만. §26 로직 자체는 재사용(재구현 금지).
+- **보드 입도**: 셀 단위(499행) 아닌 **시트×결함유형 요약** 1건씩(셀 상세는 §26 `ALL-SHEETS-defects.csv`).
+- DIFFED 시트 = 결함유형별(missing_cell/mismatch/transpose/dim_missing…) 요약 · UNMAPPED 시트 = 매핑 미상
+  (사람 확인·review) · OUT_OF_SCOPE(판걸이수·굿즈파우치 t_dsc_*) = 제외.
+- graceful: §26 배치 미가용(권위 CSV 부재 등) 시 빈 결과 + note(파이프라인 안 깨짐).
+- `PriceGridRmd`: HIGH(미적재/불일치)→needs_authority(§26·§7 dbmap 적재·값 날조 금지)·나머지→review.
+
+**실적**(라운드8·9 Diagnoser): 총 407→416. price_grid 9 = missing_cell HIGH 2(출력소재 30셀 specialty 용지
+미적재·엽서북 468셀[병합 후 comp_hint 시점종속 드리프트 의심]) + 아크릴 unmapped 1 + UNMAPPED 6시트(커팅타공·
+명함포토카드·스티커·박대형/소형/백업). 11 DIFFED 중 7시트 100% 일치(디지털954·코팅184·접지336·인쇄후가공117·
+합판370·봉투40·제본74·포스터687) — 라이브=권위 거울 확인.
+
+**주의**: §26 배치는 자체 SNAP=latest 사용(--snap 미반영)·시점종속 드리프트(엽서북 468이 그 예) 재스냅 후 재확인.
+§26 dir 산출물(ALL-SHEETS-defects.csv 등)은 §26 소유·재생성물(hdx 커밋 대상 아님).
+
+**셀프테스트**: diagnose 스모크가 9 Diagnoser 커버(§26 어댑터 무네트워크 동작). 전 레이어 5/5 GO.
+
+**가격 파일럿 완성**: 진단 9차원(배선·차원정합·공정·병합·계산가능성·옵션CPQ·수량·판형·가격격자) 전 커버 +
+교정생성(값 날조 금지) + 적대적 재실측 + 반자동 라운드 + 첫 실적재. 남음(선택)=codex 2차·실무진 액션·타 도메인 확장.
+
 ## 2026-07-04 — P5-②b 도메인 전파: QtyRuleDx(수량) + PlatesizeDx(판형)
 
 **목표**: 파일럿 검증된 Diagnoser 계약을 수량·판형 차원으로 전파 → 진단 커버리지 8차원(설계 §3).

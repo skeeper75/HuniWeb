@@ -3,25 +3,33 @@
 > 새 세션은 이 파일 + `README.md` + 설계 청사진만 읽고 재발견 0으로 재개.
 > 설계: [`../DIAGNOSE-REMEDIATE-UNIFIED-BATCH-DESIGN-260704.md`](../DIAGNOSE-REMEDIATE-UNIFIED-BATCH-DESIGN-260704.md)
 
-## 다음 시작점 — P5-②c (codex 2차 선택 + PriceGridDx 19시트 어댑터)
+## 다음 시작점 — 가격 파일럿 완성. 남은 것 = codex(선택) · 실무진 액션 · 도메인 확장
 
-**① PriceGridDx(19시트 가격격자)** — 유일 남은 전파 차원. 원본=§26 `huni-price-table-integrity/_batch/
-scripts/grid_diff.py`+`run_all.py`. **규모 큼**(권위 CSV 24_master-extract + 시트별 매트릭스 파서 + live-snapshot
-대조)이라 단일 Diagnoser 어댑트는 조립 수준 초과 → **별도 어댑터**로 §26 배치를 호출해 산출을 `Defect` 로
-변환하는 얇은 브릿지 권장(§26 배치 자체는 재구현 금지·재사용).
+**가격 도메인 진단 9차원 전 커버 완료.** 파이프라인 골격은 성숙 — 한 명령(`--loop`)으로 진단→교정생성→
+재실측→라운드 종합이 돈다. 다음 세션은 아래 중 택일(모두 선택적·긴급도 낮음):
 
-**② codex 2차(선택)**(`hdx/verify/codex_gate.py`·설계 §6): `codex exec -s read-only` 로 교정본 독립
-판정·reconcile. `hpe-codex-validate` 로직 훅화. 미가용 시 "Claude 단독" 폴백. 현재 auto_data 0 이면 NO-OP.
+**① codex 2차(선택·설계 §6)**: `hdx/verify/codex_gate.py` 신규 — `codex exec -s read-only` 로 auto_data
+교정본을 독립 판정·reconcile(`hpe-codex-validate` 로직 훅화). 미가용 시 "Claude 단독" 폴백. **현재 auto_data 0
+이면 NO-OP** → auto_data 재등장(새 UNDECLARED 등) 시 유효. 우선순위 낮음.
 
-**③ 실무진 액션 대기(배치 적발 저청구)**: (a) 메쉬배너(PRD_000137) 타공 dtl_opt 누락(OptionCpqDx) (b) 수량
-함정 TRAP_MIN 8상품(2/3단접지카드·프리미엄/펄명함·무선/PUR책자·미니보드/배너·QtyRuleDx) — 전부 needs_authority
-(올바른 값=권위/실무진). 실무진 확인 후 값 채움→라운드 재실행 결함 감소 확인.
+**② 실무진 액션(배치 적발 저청구·needs_authority)** — 배치가 찾은 실제 돈 결함, 실무진 값 확인 후 채움:
+  - (a) 메쉬배너(PRD_000137) 타공 옵션 OPV_000542 dtl_opt 누락(OptionCpqDx) — 형제 PRD_000139={타공수:4/6/8}
+  - (b) 수량 함정 TRAP_MIN 8상품(2/3단접지카드·프리미엄/펄명함·무선/PUR책자·미니보드/배너·QtyRuleDx)
+  - (c) 출력소재 specialty 용지 30셀 미적재(PriceGridDx→§26/§7 dbmap)
+  값 확보 후 §7 적재→`snapshot.sh` 재생성→`--loop --round N` 재실행으로 결함 감소 확인.
 
-## 완료 (직전 세션)
-- **P5-②b 도메인 전파(수량·판형)** — `QtyRuleDx`(←`qty_rule_audit_260702.py` Snapshot 포팅·TRAP_MIN/NO_RULES/
-  INFO_MAX·드리프트0 TRAP_MIN 8) + `PlatesizeDx`(←`diagnose_all.py` verbatim + 상시게이트 impos_yn·미스매치0·
-  오배선0=판형 GO) + 각 Remediator(needs_authority/review). 라운드7 = 8 Diagnoser·총 407·qty_rule 52(TRAP_MIN 8
-  저청구)·platesize GO. `diagnose/_selftest.py` 확장(QtyRule/Platesize 가드 + 전 Dx 스모크). 전 레이어 5/5 GO.
+**③ 새 도메인 확장(선택)**: 가격 외 도메인(예 셋트·제약규칙·카탈로그 정합)으로 `--scope` 확장 시 동형 패턴
+  (Diagnoser/Remediator 어댑트). 현재 `SCOPES={"price":...}` 한 스코프만.
+
+**주의(재시작 시)**: 스냅샷 신선도 먼저 확인 — `db-check.sh` 후 필요시 `snapshot.sh` 재생성(H-1 드리프트).
+PriceGridDx 는 §26 배치를 호출하며 §26 dir 에 `ALL-SHEETS-defects.csv` 등 산출(§26 소유·재생성물·hdx 커밋 대상 아님).
+
+## 완료 (직전 세션·P2~P5-②c 종단)
+- **P5-②c PriceGridDx**(9번째 Diagnoser) — §26 `run_all.main()` **어댑터**(재구현 0). 19시트 권위↔라이브 격자
+  diff 산출을 **시트×결함유형 요약** Defect 로 변환(셀 상세는 §26 CSV). 라운드8 = 9 Diagnoser·총 416·price_grid 9
+  (missing_cell: 출력소재 30·엽서북 468[병합후 comp_hint 드리프트 의심]·아크릴 unmapped 1 + UNMAPPED 6시트).
+  `PriceGridRmd`(needs_authority/review). graceful(§26 미가용 시 빈+note). 전 레이어 5/5 GO.
+- **P5-②b 도메인 전파(수량·판형)** — `QtyRuleDx`(TRAP_MIN 저청구·드리프트0 8) + `PlatesizeDx`(미스매치0·판형 GO).
 - **P5-②a OptionCpqDx 신규**(갭#5) — `hdx/diagnose/option_cpq_dx.py`(+`PRICE_DIAGNOSERS`) + `OptionCpqRmd`.
   옵션 dtl_opt↔단가행 dim_vals 연결 끊김(저청구) 검출. ★신뢰도 모델(오탐 가드): HIGH=형제 dtl_opt 가
   param 채움(옵션선택형 확정)·REVIEW=형제 미충전(개수/줄수 수치입력 가능성). 실적: option_cpq 29건
@@ -67,9 +75,9 @@ scripts/grid_diff.py`+`run_all.py`. **규모 큼**(권위 CSV 24_master-extract 
 4. **가격 도메인 파일럿** 종단 → 판형·수량·옵션CPQ 전파.
 
 ## 블로커·주의
-- 블로커 없음(P5-① 독립 완결·전 셀프테스트 4/4 GO).
+- 블로커 없음(P5-②c 독립 완결·전 레이어 셀프테스트 5/5 GO·가격 파일럿 진단 9차원 완성).
 - **스냅샷 신선도**: 현재 latest=snap_20260704_1507(재생성·병합/타공 반영). 정본 검증엔 재생성(`live-snapshot/snapshot.sh`) 후 재실행 또는 게이트 단계 **라이브 재-SELECT**(메모리 H-1).
 - **[HARD] 건드리지 말 것**: `foundation/engine.py`는 pricing.py와 verbatim(엔진 변경 시 재이식·드리프트 0). `db.py`는 읽기전용 유지. 원본 스캐너(`batch/*.py`)·`dim_conformance.py`는 미변경(import·call 또는 포팅만). auto_data SQL 도 자동 COMMIT 금지(dryrun→P4→인간 승인). 완전 무인 자기회귀 금지(COMMIT=인간+webadmin).
 
 ## 큰 로드맵
-~~P2 보드~~ → ~~P3 Remediator~~ → ~~P4 재실측~~ → ~~P5-① 루프~~ → ~~P5-②a OptionCpqDx~~ → ~~P5-②b 전파 수량·판형~~(전부 완료·첫 실적재 포함) → **P5-②c PriceGridDx 19시트 어댑터 + codex 2차 선택**. 진단 8차원 커버·가격 파일럿 종단 실증.
+~~P1 foundation~~ → ~~P2 보드~~ → ~~P3 Remediator~~ → ~~P4 재실측~~ → ~~P5-① 루프~~ → ~~P5-②abc 전파(옵션·수량·판형·가격격자)~~ → **가격 파일럿 완성**(진단 9차원 전 커버·첫 실적재 완료·전 레이어 5/5 GO). 남음(선택)=codex 2차·실무진 액션·타 도메인 확장.

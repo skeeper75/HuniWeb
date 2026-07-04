@@ -19,6 +19,7 @@ from .calcability_dx import CalcabilityDx
 from .option_cpq_dx import OptionCpqDx
 from .qty_rule_dx import QtyRuleDx
 from .platesize_dx import PlatesizeDx
+from .price_grid_dx import PriceGridDx
 
 # 가격 도메인 파일럿 진단기 집합(diagnose_remediate --scope price)
 PRICE_DIAGNOSERS = [
@@ -30,8 +31,9 @@ PRICE_DIAGNOSERS = [
     OptionCpqDx(),
     QtyRuleDx(),
     PlatesizeDx(),
+    PriceGridDx(),
 ]
 
 __all__ = ["Diagnoser", "WiringDx", "DimConformanceDx", "ContributionDx",
            "ComponentMergeDx", "CalcabilityDx", "OptionCpqDx", "QtyRuleDx",
-           "PlatesizeDx", "PRICE_DIAGNOSERS"]
+           "PlatesizeDx", "PriceGridDx", "PRICE_DIAGNOSERS"]
