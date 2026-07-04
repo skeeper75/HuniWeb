@@ -112,6 +112,7 @@ MoAI-ADK는 설치돼 있으나 거의 미사용 — 아카이브 `.moai/_archiv
 | 32 | excel-to-db | `excel-to-db-orchestrator` | 범용 엑셀→DB 파이프라인(x2d·X1~X7) |
 | 33 | huni-ontology-kb | `huni-ontology-kb-orchestrator` | 온톨로지 KB·자연어→상품 추천→가격(O1~O7) |
 | 34 | huni-load-governance | `huni-load-governance-orchestrator` | 적재 거버넌스·옵션 3용도 판정(LG1~LG7) |
+| 35 | huni-multibrand-ontology | `huni-multibrand-ontology-orchestrator` | 다중 브랜드 온톨로지·와우/레드 분석·CIP4 표준 상위 온톨로지·교차 연관(MB1~MB7) |
 
 ---
 
