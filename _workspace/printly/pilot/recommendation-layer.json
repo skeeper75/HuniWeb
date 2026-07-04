@@ -1,0 +1,80 @@
+{
+  "meta": {
+    "what": "프린틀리 전반부 추천 층(선언 데이터) — 업종→기능→홍보물. 원칙1: 로직 아님 데이터. 순회=실행기, 견적=엔진.",
+    "created": "2026-07-04",
+    "boundary": "이 파일은 후보를 잇는 references 엣지(dominance/fit)까지. 최종 순위=엔진(recommendation_function 보류·D-REC). 견적값=evaluate_price.",
+    "grounding": "product 노드는 전부 라이브 prd_cd 실재(DB 확인). 기능→홍보물 매핑 근거=research/industry-classification.md 원자기능8.",
+    "badge": "candidate (N>=3 승격 전·pilot)"
+  },
+  "industries": {
+    "INTENT_BIZ_cafe": {
+      "label": "카페",
+      "note": "오픈(신규 유치)+단골 관리가 둘 다 지배 → 되묻기 트리거",
+      "functions": {
+        "INTENT_FN_ACQUIRE": "primary",
+        "INTENT_FN_RETAIN": "primary",
+        "INTENT_FN_IDENTITY": "secondary",
+        "INTENT_FN_BRAND": "secondary"
+      }
+    },
+    "INTENT_BIZ_beauty": {
+      "label": "미용실",
+      "note": "단골 관리 지배(단일 primary) → 되묻기 불필요",
+      "functions": {
+        "INTENT_FN_RETAIN": "primary",
+        "INTENT_FN_IDENTITY": "secondary",
+        "INTENT_FN_BRAND": "secondary"
+      }
+    },
+    "INTENT_BIZ_restaurant": {
+      "label": "음식점",
+      "note": "매장 게시(메뉴/포스터)+신규 유치",
+      "functions": {
+        "INTENT_FN_DISPLAY": "primary",
+        "INTENT_FN_ACQUIRE": "primary",
+        "INTENT_FN_IDENTITY": "secondary"
+      }
+    }
+  },
+  "functions": {
+    "INTENT_FN_IDENTITY": {
+      "label": "대표성 (명함)",
+      "products": { "product-033": "primary", "product-031": "primary", "product-034": "secondary" }
+    },
+    "INTENT_FN_ACQUIRE": {
+      "label": "신규 유치 (전단·배너·엽서)",
+      "products": { "product-047": "primary", "product-145": "secondary", "product-016": "secondary" }
+    },
+    "INTENT_FN_RETAIN": {
+      "label": "단골 관리 (쿠폰·스탬프)",
+      "products": { "product-041": "primary", "product-042": "primary", "product-217": "secondary" }
+    },
+    "INTENT_FN_DISPLAY": {
+      "label": "매장 게시 (포스터)",
+      "products": { "product-120": "primary" }
+    },
+    "INTENT_FN_BRAND": {
+      "label": "브랜딩 (스티커)",
+      "products": { "product-058": "primary", "product-065": "secondary" }
+    }
+  },
+  "products": {
+    "product-033": { "prd_cd": "PRD_000033", "name": "스탠다드명함" },
+    "product-031": { "prd_cd": "PRD_000031", "name": "프리미엄명함" },
+    "product-034": { "prd_cd": "PRD_000034", "name": "펄명함" },
+    "product-047": { "prd_cd": "PRD_000047", "name": "소량전단지" },
+    "product-145": { "prd_cd": "PRD_000145", "name": "미니배너" },
+    "product-016": { "prd_cd": "PRD_000016", "name": "프리미엄엽서" },
+    "product-041": { "prd_cd": "PRD_000041", "name": "스탠다드 쿠폰/상품권" },
+    "product-042": { "prd_cd": "PRD_000042", "name": "프리미엄 쿠폰/상품권" },
+    "product-217": { "prd_cd": "PRD_000217", "name": "만년스탬프" },
+    "product-120": { "prd_cd": "PRD_000120", "name": "방수포스터" },
+    "product-058": { "prd_cd": "PRD_000058", "name": "반칼원형스티커" },
+    "product-065": { "prd_cd": "PRD_000065", "name": "스티커팩" }
+  },
+  "sources": {
+    "기능→홍보물": "research/industry-classification.md (원자 마케팅 기능 8)",
+    "엣지 스키마": "03_step2-relations.md (H1 references dominance · H2 references fit)",
+    "product prd_cd": "라이브 t_prd_products (DB 실측 2026-07-04)"
+  }
+}
