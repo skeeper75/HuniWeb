@@ -79,6 +79,13 @@ def scan(prd_only=None, snap=None):
     pp = _read_csv(snap / "t_prd_product_processes.csv")
     proc_tbl = _read_csv(snap / "t_proc_processes.csv")
     sets = _read_csv(snap / "t_prd_product_sets.csv")
+    products = _read_csv(snap / "t_prd_products.csv")
+
+    # ★활성 상품만 진단(260705 hdx): 삭제(del_yn=Y)·비활성(use_yn=N) 상품은 제외한다.
+    #   누락 시 죽은 상품(공식 바인딩 잔존)이 UNCOVERED/REVIEW 결함으로 부풀려진다
+    #   (실측: 죽은 상품 17개가 REVIEW 34건 오염). HIGH 는 영향 없으나 카운트 정합 위해 필터.
+    active_prd = {r["prd_cd"] for r in products if r.get("prd_cd")
+                  and r.get("del_yn", "N") != "Y" and (r.get("use_yn") or "Y") != "N"}
 
     proc_nm = {r["proc_cd"]: r.get("proc_nm", "") for r in proc_tbl if r.get("proc_cd")}
     comp_meta = {r["comp_cd"]: r for r in pcs if r.get("comp_cd")}
@@ -124,7 +131,7 @@ def scan(prd_only=None, snap=None):
     prod_frm: dict[str, str] = {}
     for r in pf:
         p, f = r.get("prd_cd"), r.get("frm_cd")
-        if p and f:
+        if p and f and p in active_prd:
             prod_frm.setdefault(p, f)
 
     # 상품 → 바인딩 공정(활성)

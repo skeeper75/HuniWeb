@@ -1,25 +1,17 @@
 {
  "summary": {
   "snap": "snap_20260705_0041",
-  "products_scanned": 92,
-  "bound_products": 153,
+  "products_scanned": 85,
+  "bound_products": 136,
   "set_skipped": 19,
-  "uncovered_process": 167,
+  "uncovered_process": 154,
   "uncovered_HIGH": 7,
-  "proc_mismatch": 96,
+  "proc_mismatch": 75,
   "mismatch_HIGH": 6,
   "orphan_proc_value": 7,
   "verdict": "NO-GO(UNCOVERED-HIGH 7·MISMATCH-HIGH 6)"
  },
  "uncovered": [
-  [
-   "PRD_000023",
-   "PRF_DGP_B",
-   "PROC_000123",
-   "완칼커팅",
-   "REVIEW",
-   "UNCOVERED_BAKED"
-  ],
   [
    "PRD_000024",
    "PRF_PHOTOCARD_NORMAL",
@@ -134,70 +126,6 @@
   ],
   [
    "PRD_000027",
-   "PRF_DGP_E",
-   "PROC_000044",
-   "트윙클",
-   "REVIEW",
-   "UNCOVERED_PROCESS"
-  ],
-  [
-   "PRD_000028",
-   "PRF_DGP_E",
-   "PROC_000037",
-   "홀로그램",
-   "REVIEW",
-   "UNCOVERED_PROCESS"
-  ],
-  [
-   "PRD_000028",
-   "PRF_DGP_E",
-   "PROC_000038",
-   "금유광",
-   "REVIEW",
-   "UNCOVERED_PROCESS"
-  ],
-  [
-   "PRD_000028",
-   "PRF_DGP_E",
-   "PROC_000039",
-   "은유광",
-   "REVIEW",
-   "UNCOVERED_PROCESS"
-  ],
-  [
-   "PRD_000028",
-   "PRF_DGP_E",
-   "PROC_000040",
-   "먹유광",
-   "REVIEW",
-   "UNCOVERED_PROCESS"
-  ],
-  [
-   "PRD_000028",
-   "PRF_DGP_E",
-   "PROC_000041",
-   "동박",
-   "REVIEW",
-   "UNCOVERED_PROCESS"
-  ],
-  [
-   "PRD_000028",
-   "PRF_DGP_E",
-   "PROC_000042",
-   "적박",
-   "REVIEW",
-   "UNCOVERED_PROCESS"
-  ],
-  [
-   "PRD_000028",
-   "PRF_DGP_E",
-   "PROC_000043",
-   "청박",
-   "REVIEW",
-   "UNCOVERED_PROCESS"
-  ],
-  [
-   "PRD_000028",
    "PRF_DGP_E",
    "PROC_000044",
    "트윙클",
@@ -805,30 +733,6 @@
    "UNCOVERED_BAKED"
   ],
   [
-   "PRD_000063",
-   "PRF_STK_FIXED",
-   "PROC_000008",
-   "화이트인쇄",
-   "REVIEW",
-   "UNCOVERED_BAKED"
-  ],
-  [
-   "PRD_000063",
-   "PRF_STK_FIXED",
-   "PROC_000122",
-   "반칼커팅",
-   "REVIEW",
-   "UNCOVERED_BAKED"
-  ],
-  [
-   "PRD_000064",
-   "PRF_STK_FIXED",
-   "PROC_000054",
-   "반칼",
-   "REVIEW",
-   "UNCOVERED_BAKED"
-  ],
-  [
    "PRD_000071",
    "PRF_BIND_TWINRING",
    "PROC_000014",
@@ -1285,14 +1189,6 @@
    "UNCOVERED_PROCESS"
   ],
   [
-   "PRD_000169",
-   "PRF_ACRYL_3DBLOCK_TBD",
-   "PROC_000083",
-   "가공",
-   "REVIEW",
-   "UNCOVERED_PROCESS"
-  ],
-  [
    "PRD_000217",
    "PRF_GOODS_FIXED_SIZ",
    "PROC_000112",
@@ -1612,141 +1508,6 @@
    "PROC_MISMATCH"
   ],
   [
-   "PRD_000021",
-   "PRF_DGP_A",
-   "COMP_PP_CORNER_RIGHT",
-   "귀돌이비",
-   "PROC_000027;PROC_000028",
-   "REVIEW",
-   "PROC_MISMATCH"
-  ],
-  [
-   "PRD_000021",
-   "PRF_DGP_A",
-   "COMP_PP_CREASE_1L",
-   "오시비",
-   "PROC_000090",
-   "REVIEW",
-   "PROC_MISMATCH"
-  ],
-  [
-   "PRD_000021",
-   "PRF_DGP_A",
-   "COMP_PP_PERF_1L",
-   "미싱비",
-   "PROC_000086",
-   "REVIEW",
-   "PROC_MISMATCH"
-  ],
-  [
-   "PRD_000021",
-   "PRF_DGP_A",
-   "COMP_PP_VARTEXT_1EA",
-   "가변텍스트",
-   "PROC_000031",
-   "REVIEW",
-   "PROC_MISMATCH"
-  ],
-  [
-   "PRD_000021",
-   "PRF_DGP_A",
-   "COMP_PP_VARIMG_1EA",
-   "가변이미지",
-   "PROC_000032",
-   "REVIEW",
-   "PROC_MISMATCH"
-  ],
-  [
-   "PRD_000021",
-   "PRF_DGP_A",
-   "COMP_COAT_GLOSSY",
-   "유광코팅비",
-   "PROC_000014",
-   "REVIEW",
-   "PROC_MISMATCH"
-  ],
-  [
-   "PRD_000021",
-   "PRF_DGP_A",
-   "COMP_COAT_MATTE",
-   "무광코팅비",
-   "PROC_000015",
-   "REVIEW",
-   "PROC_MISMATCH"
-  ],
-  [
-   "PRD_000022",
-   "PRF_DGP_A",
-   "COMP_PRINT_SPOT_WHITE_S1",
-   "별색인쇄비",
-   "PROC_000008;PROC_000009;PROC_000010;PROC_000011;PROC_000012",
-   "REVIEW",
-   "PROC_MISMATCH"
-  ],
-  [
-   "PRD_000022",
-   "PRF_DGP_A",
-   "COMP_PP_CORNER_RIGHT",
-   "귀돌이비",
-   "PROC_000027;PROC_000028",
-   "REVIEW",
-   "PROC_MISMATCH"
-  ],
-  [
-   "PRD_000022",
-   "PRF_DGP_A",
-   "COMP_PP_CREASE_1L",
-   "오시비",
-   "PROC_000090",
-   "REVIEW",
-   "PROC_MISMATCH"
-  ],
-  [
-   "PRD_000022",
-   "PRF_DGP_A",
-   "COMP_PP_PERF_1L",
-   "미싱비",
-   "PROC_000086",
-   "REVIEW",
-   "PROC_MISMATCH"
-  ],
-  [
-   "PRD_000022",
-   "PRF_DGP_A",
-   "COMP_PP_VARTEXT_1EA",
-   "가변텍스트",
-   "PROC_000031",
-   "REVIEW",
-   "PROC_MISMATCH"
-  ],
-  [
-   "PRD_000022",
-   "PRF_DGP_A",
-   "COMP_PP_VARIMG_1EA",
-   "가변이미지",
-   "PROC_000032",
-   "REVIEW",
-   "PROC_MISMATCH"
-  ],
-  [
-   "PRD_000022",
-   "PRF_DGP_A",
-   "COMP_COAT_GLOSSY",
-   "유광코팅비",
-   "PROC_000014",
-   "REVIEW",
-   "PROC_MISMATCH"
-  ],
-  [
-   "PRD_000022",
-   "PRF_DGP_A",
-   "COMP_COAT_MATTE",
-   "무광코팅비",
-   "PROC_000015",
-   "REVIEW",
-   "PROC_MISMATCH"
-  ],
-  [
    "PRD_000026",
    "PRF_DGP_A",
    "COMP_PRINT_SPOT_WHITE_S1",
@@ -1847,60 +1608,6 @@
   ],
   [
    "PRD_000027",
-   "PRF_DGP_E",
-   "COMP_CUT_PERF_1H6",
-   "타공비 (6mm)",
-   "PROC_000092",
-   "REVIEW",
-   "PROC_MISMATCH"
-  ],
-  [
-   "PRD_000028",
-   "PRF_DGP_E",
-   "COMP_COAT_GLOSSY",
-   "유광코팅비",
-   "PROC_000014",
-   "REVIEW",
-   "PROC_MISMATCH"
-  ],
-  [
-   "PRD_000028",
-   "PRF_DGP_E",
-   "COMP_COAT_MATTE",
-   "무광코팅비",
-   "PROC_000015",
-   "REVIEW",
-   "PROC_MISMATCH"
-  ],
-  [
-   "PRD_000028",
-   "PRF_DGP_E",
-   "COMP_FOLD_LEAF_3FOLD",
-   "접지비 리플렛 3단",
-   "PROC_000060;PROC_000067;PROC_000068",
-   "REVIEW",
-   "PROC_MISMATCH"
-  ],
-  [
-   "PRD_000028",
-   "PRF_DGP_E",
-   "COMP_FOLD_LEAF_4ACC",
-   "접지비 리플렛 4단아코디언",
-   "PROC_000071",
-   "REVIEW",
-   "PROC_MISMATCH"
-  ],
-  [
-   "PRD_000028",
-   "PRF_DGP_E",
-   "COMP_FOLD_LEAF_4GATE",
-   "접지비 리플렛 4단게이트",
-   "PROC_000106",
-   "REVIEW",
-   "PROC_MISMATCH"
-  ],
-  [
-   "PRD_000028",
    "PRF_DGP_E",
    "COMP_CUT_PERF_1H6",
    "타공비 (6mm)",
@@ -2219,15 +1926,15 @@
   [
    "COMP_PRINT_SPOT_WHITE_S1",
    "별색인쇄비",
-   "PROC_000011",
-   "금색인쇄",
+   "PROC_000012",
+   "은색인쇄",
    "ORPHAN_PROC_VALUE"
   ],
   [
    "COMP_PRINT_SPOT_WHITE_S1",
    "별색인쇄비",
-   "PROC_000012",
-   "은색인쇄",
+   "PROC_000011",
+   "금색인쇄",
    "ORPHAN_PROC_VALUE"
   ],
   [
