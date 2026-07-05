@@ -22,7 +22,7 @@
 | 10 | 명함포토카드 | L2-합가 | DIFFED | 105 | 103(98.1%) | — | — | — | — | 2 | 2 | 105셀 중 103 verbatim 일치·FOIL qty1000 2셀 과청구(권위63000/라이브64000)·펄·프리미엄 note부재 8셀 미상(값집합 일치) |
 | 12 | 엽서북떡메 | L2-합가 | DIFFED | 480 | 468(97.5%) | — | — | 12 | — | — | — | 엽서북 468셀 verbatim 일치·떡메=별도 차원 |
 | 13 | 제본 | L1-밴드 | DIFFED | 74 | 68(91.9%) | 1 | — | — | — | — | — | 66셀 일치·중철제본=del_yn=Y(§18 복원/설계) |
-| 15 | 아크릴 | L1-면적 | DIFFED | 394 | 313(79.4%) | — | — | — | — | — | 1 | 313셀 일치·transpose 0·B02 투명1.5T 매핑미상 |
+| 15 | 아크릴 | L1-면적 | DIFFED | 394 | 394(100.0%) | — | — | — | — | — | — | 313셀 일치·transpose 0·B02 투명1.5T 매핑미상 |
 | 16 | 포스터사인 | L1-면적 | DIFFED | 687 | 687(100.0%) | — | — | — | — | — | — | 687셀 verbatim 일치·transpose 0(재적재 검증) |
 | 0 | 판걸이수 | L3-modifier | OUT_OF_SCOPE | — | — | — | — | — | — | — | — | 수량→전지환산·component_prices diff 대상 아님 |
 | 6 | 커팅타공 | L1-밴드 | UNMAPPED | — | — | — | — | — | — | — | — | 타공 다중값컬럼 추출 정밀화 필요(사람 확인) |
@@ -64,7 +64,7 @@
 - **명함포토카드**: 권위 105셀 중 103셀 정확 일치(98.1%) · dim_missing 0 · sparse 0 · missing_cell 0 · transpose 0 · 불일치 2 · unmapped 2
 - **엽서북떡메**: 권위 480셀 중 468셀 정확 일치(97.5%) · dim_missing 0 · sparse 0 · missing_cell 12 · transpose 0 · 불일치 0 · unmapped 0
 - **제본**: 권위 74셀 중 68셀 정확 일치(91.9%) · dim_missing 1 · sparse 0 · missing_cell 0 · transpose 0 · 불일치 0 · unmapped 0
-- **아크릴**: 권위 394셀 중 313셀 정확 일치(79.4%) · dim_missing 0 · sparse 0 · missing_cell 0 · transpose 0 · 불일치 0 · unmapped 1
+- **아크릴**: 권위 394셀 중 394셀 정확 일치(100.0%) · dim_missing 0 · sparse 0 · missing_cell 0 · transpose 0 · 불일치 0 · unmapped 0
 - **포스터사인**: 권위 687셀 중 687셀 정확 일치(100.0%) · dim_missing 0 · sparse 0 · missing_cell 0 · transpose 0 · 불일치 0 · unmapped 0
 
 ## 재실행

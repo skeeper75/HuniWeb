@@ -1,6 +1,36 @@
 # Huni-Price-Table-Integrity (§26) HANDOFF — 차원 정합 진단·교정
 
-> ★★★★2026-07-05 (권위 260702 재고정 + 권위 이해 문서 + 격자 오탐 해소) — **최신·여기서 이어감**:
+> ★★★★★2026-07-06 (가격구성요소 차원정합 감사 + 전 사슬 프레임워크 + 옵션코드 라이브 교정) — **최신·여기서 이어감**:
+> 산출물 전부 `dim-editor-audit/`. 시작 트리거=스크린샷 "가격구성요소MD 단가표 편집 차원(자재·공정상세옵션)".
+>
+> - **★최신 권위 = 상품마스터 260703 · 인쇄상품 가격표 260705** (260702도 stale·지니 지적). 이후 전 작업 최신본.
+>   가격표 260702→260705 델타=3시트만 변경(엽서북떡메·제본·출력소재IMPORT) → **재추출 미완(라 트랙)**.
+> - **전 사슬 정합 원칙 정립**(지니 directive): 상품→공식→구성요소→(차원)→기준정보 마스터, 전체가 시트 각 차원과
+>   정합. [HARD] **grid_diff "N% 일치"=한 차원 L6일 뿐, 시트 정합 아님**. 프레임워크=`FULLCYCLE-CONFORMANCE-FRAMEWORK-260706.md`.
+> - **순환고리 4계층 전수 센서스**(`cycle_census.py`): 계층1 구조(죽은공식11·공식미연결상품125·죽은구성요소21)·
+>   계층2 마스터정합(차원코드 미해결0·opt_cd 폴리모픽)·계층3 선언충전(UNDECLARED0·EMPTY_DECL54)·
+>   계층4 시트매핑(`LAYER4-SHEET-CYCLE-MATRIX-260706.md`·SHEET_REGISTRY 재사용·아크릴 79→100%). **결과: 진단 닫힘(재발견0)**.
+> - **굿즈 57 미적재 규명**: 활성완제품57 무공식=굿즈파우치(셋트0·템플릿0·공식0). **권위 260703 굿즈시트가 57/57 커버**·
+>   band 4종 DB기적재 골든일치(DSC_GOODSA/B/SQUISHY/FABRIC). 적재본 준비=`goods-authority-extract-260706.csv`(323행)·
+>   band배정=`goods-57-band-assignment-260706.csv`(FABRIC35/B10/A8/말랑4·35 fabric은 지니 승인 FABRIC 기본배정). **적재 미실행(다 트랙)**.
+> - **(가) 아크릴 결함A = 거짓양성으로 해소**: 투명1.5T "81셀 부재"=grid_diff config 오탐(골든 81/81·CLEAR3T mat_cd MAT_042 실재).
+>   **grid_diff.py를 mat_cd-aware keying으로 교정**(B01→CLEAR3T+MAT_043·B02→+MAT_042·live_full 인덱스·백업 grid_diff.py.bak_260706)→아크릴 100%.
+>   아크릴 자재차원은 실제로 올바름(투명 두께=mat_cd·아크릴키링이 두께 선택 제공·미러=별도 스티커상품).
+> - **★★옵션코드 정합 = 라이브 railway DB COMMIT 완료**(webadmin `raw/webadmin/tools/verify_optcode_integrity.py` 사후검증 ✅ 전항목 정상):
+>   ① 키링 고리 4행 opt_cd repoint→정본 OPV_000624~627(백업 z_bak_keyring_optcd_260706)
+>   ② 아크릴키링 PRD_000146 재배선 PRF_CLR_ACRYL→**PRF_ACRYL_KEYRING**(면적+고리·"146 저청구 교정" 공식 실현)+볼체인 tombstone(백업 z_bak_keyring_rewire_*·z_bak_ballchain_260706)→[4] 11→0
+>   ③ 교차상품 중복14 재번호(webadmin migrate_optcode_global_unique.py·keeper유지)→[1] 14→0
+>   ④ 전역 UNIQUE 인덱스 2개(ux_opt_grp_cd_active·ux_opt_cd_active·부분·CONCURRENTLY)→재발차단. **라이브 base가격 무변경**.
+>
+> ★다음 시작점(우선순위): (나) 결함B 박 공정상세옵션 JSON 설계(박3시트 UNMAPPED·면적박 comp 부재·prcs_dtl_opt 가로×세로) /
+>   (다) 굿즈57 적재 파일럿(적재본·band 준비완) / (라) 권위 3시트 260705 재추출→grid_diff / 계층4 전19시트 전사슬 배치화.
+> ★미해결·블로커: 하이픈 레거시(그룹31·옵션85) 언더통일=**지니 보류**(순수미화·도구 범위밖). 담당자 확인 대기=
+>   webadmin 시뮬레이터 아크릴키링 고리 견적 실화면 + 7/3 오후 아크릴3상품(154·147·149) 입력경로 규명(migrate로 증상은 해소).
+> ★건드리지 말 것: 옵션코드 UNIQUE 인덱스·키링 배선(PRF_ACRYL_KEYRING·되돌리지 말 것)·grid_diff.py mat_cd config·
+>   z_bak_* 백업 테이블·webadmin sql/_backup_...20260703.json(7/3 baseline·PRESERVED 사본 있음).
+> ★webadmin repo 상태: `.env`(gitignored·메인 RAILWAY_DB_*로 생성)·`.venv`(psycopg2)·PRESERVED 백업 생성. 그 repo는 별도 git.
+
+> ★★★★2026-07-05 (권위 260702 재고정 + 권위 이해 문서 + 격자 오탐 해소) — (260706에 계승·아래는 이력):
 > - **권위 260702 재고정**: L1 재추출 `huni-dbmap/24_master-extract-260702/`·`24_price-extract-260702/`.
 >   §26 배치 버전 상수(run_all.py:29·grid_diff.py:821·pansu_basis_audit.py:16) 260527→260702 교체.
 >   최신 권위=상품마스터·인쇄상품 가격표 둘 다 260702(prd_nm 집합 불변 249=249).

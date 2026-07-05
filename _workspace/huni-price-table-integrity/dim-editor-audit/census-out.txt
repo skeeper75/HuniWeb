@@ -1,0 +1,114 @@
+======================================================================
+A. 순환고리 엣지 고아(blind spot: 끊긴 연결)
+======================================================================
+
+[A1] 상품 미연결 공식(죽은 공식): 11
+     PRF_ACRYL_BADGE            아크릴뱃지 공식
+     PRF_ACRYL_KEYRING          아크릴키링 공식
+     PRF_ACRYL_NAMETAG          아크릴명찰 공식
+     PRF_ACRYL_SHCOROTTO_TBD    아크릴쉐이커코롯토 (★구성/단가 미설정)
+     PRF_ACRYL_SMARTTOK         아크릴스마트톡 공식
+     PRF_ACRYL_ZIBITZ2_TBD      지비츠★ (★사이즈/자재/단가 미설정)
+     PRF_ACRYL_ZIBITZ_TBD       아크릴지비츠 (★본체 미세격자15mm·가공 슈츠참 단가 확인필
+     PRF_FOLD_SUM               접지 합산형(오시+접지 후가공 구성요소)
+     PRF_NAMECARD_FIXED_FOIL    프리미엄명함 면/소재/수량별 단가(용지포함)+박
+     PRF_PHOTOCARD_FIXED        포토카드 세트 고정가
+     PRF_POSTER_FIXED           포스터사인 소재/사이즈/수량별 완제품가(포함항목 통가격)
+
+[A2] 공식 미연결 상품(del_yn=N): 125
+
+[A3] 공식 미배선 구성요소(죽은 구성요소): 21
+     COMP_ACRYL_MIRROR3T                미러아크릴3T 인쇄가공비
+     COMP_BIND_SSABARI                  제본비 싸바리바인더
+     COMP_CUT_FULL_PERF_1H6             커팅 완제품가 완칼+타공1구
+     COMP_CUT_FULL_PERF_2H6             커팅 완제품가 완칼+타공2구
+     COMP_FOLD_CARD_3H                  접지비 카드 3단
+     COMP_POPT_BNR_GAKMOK_STR_900_4     포스터 추가옵션 추가가격(별도 add-on 통가격) [
+     COMP_POSTER_ADH_WATERPROOF_PVC     접착방수포스터 완제품가[레거시]
+     COMP_POSTER_ARTFABRIC_GRAPHIC      아트패브릭포스터 완제품가[레거시]
+     COMP_POSTER_FOAMBOARD_BLACK        폼보드(블랙) 완제품가
+     COMP_POSTER_FOAMBOARD_WHITE        폼보드(화이트) 완제품가
+     COMP_POSTER_FOMEXBOARD_WHITE3MM    포맥스보드(화이트3mm) 완제품가
+     COMP_POSTER_FOMEXBOARD_WHITE5MM    포맥스보드(화이트5mm) 완제품가
+     COMP_POSTER_LEATHER_ARTPRINT       레더아트프린트 완제품가[레거시]
+     COMP_POSTER_MESH_PRINT             메쉬프린트 완제품가[레거시]
+     COMP_POSTEROPT_BANNER_MESH_PROC_OPT 포스터 추가옵션 추가가격(별도 add-on 통가격)
+     COMP_POSTEROPT_PET_BANNER_STAND_IN PET배너 실내용배너거치대 추가가격
+     COMP_POSTEROPT_PET_BANNER_STAND_OUT_S1 PET배너 실외용배너거치대(단면용) 추가가격
+     COMP_POSTEROPT_PET_BANNER_STAND_OUT_S2 PET배너 실외용배너거치대(양면용) 추가가격
+     COMP_POSTER_TYVEK_PRINT            타이벡프린트 완제품가[레거시]
+     COMP_POSTER_WATERPROOF_PET         방수포스터 완제품가[레거시]
+     CUT_FULL_DIECUT                    커팅(완칼) 후가공
+
+[A4] 구성요소 미배선 공식: 1
+     PRF_ACRYL_ZIBITZ_TBD       아크릴지비츠 (★본체 미세격자15mm·가공 슈츠참 단가 확인필
+
+[A5] 단가행 0 구성요소: 4
+     COMP_ACRYL_PENDING_TBD             단가/구성 확인필요 (실무진)
+     COMP_POPT_BNR_GAKMOK_STR_900_4     포스터 추가옵션 추가가격(별도 add-on 통가격) [
+     COMP_POSTEROPT_BANNER_MESH_PROC_OPT 포스터 추가옵션 추가가격(별도 add-on 통가격)
+     CUT_FULL_DIECUT                    커팅(완칼) 후가공
+
+======================================================================
+B. 차원 코드 → 기준정보 마스터 미해결(blind spot: 마스터에 없는 값)
+======================================================================
+
+  mat_cd         사용값 120종 · 마스터(t_mat_materials) 미해결 0종
+
+  proc_cd        사용값 44종 · 마스터(t_proc_processes) 미해결 0종
+
+  siz_cd         사용값 191종 · 마스터(t_siz_sizes) 미해결 0종
+
+  plt_siz_cd     사용값 4종 · 마스터(t_siz_sizes) 미해결 0종
+
+  clr_cd         사용값 0종 · 마스터(t_clr_color_counts) 미해결 0종
+
+  print_opt_cd   사용값 4종 · 마스터(t_prt_print_options) 미해결 0종
+
+======================================================================
+C. Face A(use_dims 선언) vs Face B(단가행 실충전) 불일치
+======================================================================
+
+[C1] UNDECLARED(단가행은 차원 구분·use_dims 미선언=silent): 0
+
+[C2] EMPTY_DECL(use_dims 선언·단가행 미구분): 54
+     COMP_ACRYL_BLACK_HAIR_BAND         아크릴 머리끈                  ['opt_cd']
+     COMP_ACRYL_CLIP                    집게 부속                    ['opt_cd']
+     COMP_ACRYL_MAGNET                  마그넷 자석부착                 ['opt_cd']
+     COMP_ACRYL_MINIPART_TBD            미니파츠 단가 미정 · 실무진 확인필요    ['siz_cd']
+     COMP_BIND_HC_TWINRING              제본비 하드커버트윈링              ['proc_cd']
+     COMP_BIND_JUNGCHEOL                제본비 중철                   ['proc_cd']
+     COMP_BIND_MUSEON                   제본비 무선                   ['proc_cd']
+     COMP_BIND_PUR                      제본비 PUR                  ['proc_cd']
+     COMP_COAT_GLOSSY                   유광코팅비                    ['proc_cd']
+     COMP_COAT_MATTE                    무광코팅비                    ['proc_cd']
+     COMP_CUT_PERF_1H6                  타공비 (6mm)                ['proc_cd']
+     COMP_FOLD_LEAF_4ACC                접지비 리플렛 4단아코디언           ['proc_cd']
+     COMP_FOLD_LEAF_4GATE               접지비 리플렛 4단게이트            ['proc_cd']
+     COMP_NAMECARD_FOIL_SETUP_S1_STD    박·형압 동판셋업비 단면            ['print_opt_cd']
+     COMP_NAMECARD_FOIL_SETUP_S2_STD    박·형압 동판셋업비 양면            ['print_opt_cd']
+     COMP_NAMECARD_MINISHAPE            미니모양명함 완제품가(용지포함)        ['siz_cd']
+     COMP_NAMECARD_SHAPE                모양명함 완제품가(용지포함)          ['siz_cd']
+     COMP_PHOTOCARD_BULK                포토카드 완제품가 대량             ['opt_cd']
+     COMP_PHOTOCARD_CLEAR_SET           포토카드 완제품가 투명세트           ['bdl_qty', 'siz_cd']
+     COMP_PHOTOCARD_SET                 포토카드 완제품가 일반세트           ['bdl_qty', 'opt_cd', 'siz_cd']
+     COMP_POPT_BNR_GAKMOK_STR_900_4_GT  현수막 각목(900mm 초과)+끈(4개)   ['opt_cd']
+     COMP_POPT_BNR_GAKMOK_STR_900_4_LE  현수막 각목(900mm이하)+끈(4개)    ['opt_cd']
+     COMP_POSTER_CANVAS_HANGING         캔버스 행잉포스터 완제품가           ['siz_height', 'siz_width']
+     COMP_POSTER_MESH_BANNER            메쉬배너 완제품가                ['siz_cd']
+     COMP_POSTEROPT_BANNER_MESH_ADD_QBANG_4 메쉬현수막 큐방(4개) 추가가격        ['opt_cd']
+     COMP_POSTEROPT_BANNER_MESH_ADD_STRING_4 메쉬현수막 끈(4개) 추가가격         ['opt_cd']
+     COMP_POSTEROPT_BANNER_MESH_PROC_PUNCH 메쉬현수막 타공 추가가격            ['proc_cd']
+     COMP_POSTEROPT_BANNER_NORMAL_ADD_QBANG_4 일반현수막 큐방(4개) 추가가격        ['opt_cd']
+     COMP_POSTEROPT_BANNER_NORMAL_ADD_STRING_4 일반현수막 끈(4개) 추가가격         ['opt_cd']
+     COMP_POSTEROPT_BANNER_NORMAL_PROC_BONGSEW 일반현수막 봉미싱 추가가격           ['opt_cd']
+     COMP_POSTEROPT_BANNER_NORMAL_PROC_CUTEDGE 일반현수막 열재단 추가가격           ['opt_cd']
+     COMP_POSTEROPT_BANNER_NORMAL_PROC_DTAPE 일반현수막 양면테잎 추가가격          ['opt_cd']
+     COMP_POSTEROPT_BANNER_NORMAL_PROC_PUNCH 일반현수막 타공 추가가격            ['proc_cd']
+     COMP_POSTEROPT_CANVAS_HANGING_WOODHANGER 캔버스행잉포스터 우드행거+면끈 추가가격    ['opt_cd']
+     COMP_POSTEROPT_JOKJA_CEILHOOK      족자포스터 천정형고리 추가가격         ['opt_cd']
+     COMP_POSTEROPT_LINEN_WOODBONG_WOODBONG 린넨우드봉족자 우드봉+면끈 추가가격      ['opt_cd']
+     COMP_POSTER_PET_BANNER             PET배너 완제품가               ['siz_cd']
+     COMP_PP_CREASE_1L                  오시비                      ['proc_cd']
+     COMP_PP_PERF_1L                    미싱비                      ['proc_cd']
+     COMP_PP_VARIMG_1EA                 가변이미지                    ['proc_cd']

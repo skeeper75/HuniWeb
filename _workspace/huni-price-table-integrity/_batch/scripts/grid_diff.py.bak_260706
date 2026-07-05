@@ -173,9 +173,8 @@ def live_grid_coating(comp_prices, components):
 # ─────────────────────────────────────────────────────────────────────
 AREA_BLOCK_COMP = {
     "acrylic": {
-        # 값이 (comp, mat_cd) 튜플이면 그 comp 안에서 mat_cd 로 격자 분리(한 comp 다중 두께).
-        "B01": ("COMP_ACRYL_CLEAR3T", "MAT_000043"),  # 투명아크릴3T (196셀·3mm)
-        "B02": ("COMP_ACRYL_CLEAR3T", "MAT_000042"),  # 투명아크릴1.5T (81셀·1.5mm·CLEAR3T 내 mat_cd 적재·260706 골든81/81)
+        "B01": "COMP_ACRYL_CLEAR3T",    # 투명아크릴3T (196셀 일치)
+        "B02": None,                     # 투명아크릴1.5T — 라이브 별도 comp 부재(매핑미상)
         "B03": "COMP_ACRYL_MIRROR3T",   # 미러아크릴3T (81셀 일치)
         "B05": "COMP_ACRYL_COROTTO",    # 아크릴코롯토 (36셀 일치)
         "B06": None,                     # 아크릴카라비너 — 면적 아님(siz_cd 본체·매핑미상)
@@ -202,24 +201,16 @@ AREA_BLOCK_COMP = {
 }
 
 
-def _split_block_comp(v):
-    """block_comp 값 정규화 → (comp_cd, mat_cd_or_None). tuple=(comp,mat)면 mat 제약, str=제약 없음."""
-    if isinstance(v, (tuple, list)):
-        return v[0], (v[1] or None)
-    return v, None
-
-
 def live_grid_area(comp_prices, components, sheet_key, block_comp):
-    """라이브 area comp → (live_nomat, live_full).
+    """라이브 area comp → {(comp_cd, width, height): {...}}. 활성(del_yn=N)만.
 
-    live_nomat: (comp,w,h)→cell (mat 무제약 block용·기존 동작 보존).
-    live_full : (comp,mat,w,h)→cell (한 comp 다중 mat_cd 격자 분리용·B01/B02 CLEAR3T).
-    타깃 comp 집합으로 필터·활성(del_yn=N)만.
+    block_comp = {block_id: comp_cd} (이 시트). 타깃 comp 집합으로 필터.
+    반환 live 는 comp_cd 별 (width,height)→price. detect 는 comp 단위로 권위와 대조.
     """
-    targets = {_split_block_comp(v)[0] for v in block_comp.values() if v}
+    targets = {c for c in block_comp.values() if c}
     active = {c["comp_cd"] for c in components if c["del_yn"] == "N"}
     comp_prc_typ = {c["comp_cd"]: c["prc_typ_cd"] for c in components}
-    live_nomat, live_full = {}, {}
+    live = {}
     for r in comp_prices:
         comp = r["comp_cd"]
         if comp not in targets or comp not in active:
@@ -231,22 +222,18 @@ def live_grid_area(comp_prices, components, sheet_key, block_comp):
             price = int(float(r["unit_price"]))
         except (ValueError, TypeError):
             continue
-        mat = (r["mat_cd"] or None)
-        cell = {"price": price, "comp_price_id": r["comp_price_id"],
-                "prc_typ": comp_prc_typ.get(comp, ""), "note": r["note"]}
-        for key, store in (((comp, w, h), live_nomat), ((comp, mat, w, h), live_full)):
-            if key not in store or int(r["comp_price_id"]) < int(store[key]["comp_price_id"]):
-                store[key] = cell
-    return live_nomat, live_full
+        key = (comp, w, h)
+        if key not in live or int(r["comp_price_id"]) < int(live[key]["comp_price_id"]):
+            live[key] = {"price": price, "comp_price_id": r["comp_price_id"],
+                         "prc_typ": comp_prc_typ.get(comp, ""), "note": r["note"]}
+    return live
 
 
-def detect_area(auth_grid, live_pair, block_comp):
+def detect_area(auth_grid, live, block_comp):
     """면적격자 결함 검출: missing_cell·mismatch·transpose(가로세로 swap)·매핑미상.
 
     auth_grid = parse_l1_area 산출(block_id·width·height·unit_price).
-    live_pair = (live_nomat, live_full). mat 제약 block 은 live_full, 무제약은 live_nomat 조회.
     """
-    live_nomat, live_full = live_pair
     defects = []
     # block → comp 결정. 매핑미상 block 은 별도 보고.
     unmapped_blocks = {}
@@ -271,18 +258,11 @@ def detect_area(auth_grid, live_pair, block_comp):
     swap_hit = 0
     for c in auth_grid:
         b = c["block_id"]
-        raw = block_comp.get(b)
-        if not raw:
+        comp = block_comp.get(b)
+        if not comp:
             continue
-        comp, mat = _split_block_comp(raw)
-        if mat is not None:
-            live = live_full
-            k = (comp, mat, c["width"], c["height"])
-            ks = (comp, mat, c["height"], c["width"])  # 가로세로 swap
-        else:
-            live = live_nomat
-            k = (comp, c["width"], c["height"])
-            ks = (comp, c["height"], c["width"])  # 가로세로 swap
+        k = (comp, c["width"], c["height"])
+        ks = (comp, c["height"], c["width"])  # 가로세로 swap
         if k in live:
             if live[k]["price"] == c["unit_price"]:
                 direct += 1
@@ -938,7 +918,7 @@ def run(l1_csv, snap_dir, sheet_key, out_csv):
         defects, stats = detect_area(auth, live, block_comp)
         _write(defects)
         from collections import Counter
-        return {"auth_cells": len(auth), "live_cells": len(live[1]),
+        return {"auth_cells": len(auth), "live_cells": len(live),
                 "live_clrs": [], "live_grades": [],
                 "defect_counts": dict(Counter(d["defect"] for d in defects)),
                 "match_stats": stats, "total_defects": len(defects)}
