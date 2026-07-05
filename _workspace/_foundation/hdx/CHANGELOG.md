@@ -1,5 +1,37 @@
 # hdx — CHANGELOG (최신 위 PREPEND)
 
+## 2026-07-05 (후속) — 권위 재고정 260703/260705 + 스캐너 정밀화 + 수량정합 진단
+
+**권위 재고정 260702→260703(상품마스터)/260705(가격표)**: extract 러너 신설(`run_extract_master_260703.py`·
+`run_extract_price_260705.py`)·산출 `24_master-extract-260703`·`24_price-extract-260705`·버전상수 8파일
+(master 5→260703·price 3→260705·스냅샷 날짜 오염0)·브리지 재빌드=불변(253·EXACT 234·CSV diff 0). **델타 6건
+실질 라이브 갭=신규 돈크리티컬 0**: 출력소재 레더링바인더A4 9000 미적재(specialty 계열+1)·제본 싸바리→링바인더
+명칭·엽서북 수량1신설(가격중립·mismatch0)·MAP 만년스탬프(기존 addon 색인등재)·굿즈파우치 사이즈3정정·
+디자인캘린더 디자인보유축 제거.
+
+**★needs_design "저청구 16" 파일럿 판별 → 오시/미싱/6단접지=스캐너 오탐**(배선·과금 완비). 근본원인=공정코드
+이원화(상품 PROC_000029/030 오시·미싱 ↔ 단가행 유령 PROC_000090/086·6단접지 COMP proc_grp 미선언).
+무작정 §18 설계 시 이중과금 → "채우기 전 판별"이 스캐너 정밀화로 귀결(HANDOFF [HARD] 실증).
+
+**스캐너 정밀화(contribution_scan.py)**: ⓐ**proc_grp 흡수**(COMP use_dims 의 proc_grp:PROC_XXX 를 covered
+전용 comp_cover 로 흡수·orphan/conf 는 단가행 proc_cd 유지→부작용0·A/B동일스냅샷 UNCOVERED HIGH 15→7·오시미싱
+오탐8 제거) ⓑ**활성 상품 필터**(지니 지적: 죽은 상품 17개[지비츠 del=Y+비활성16]가 REVIEW 34건 오염→
+active_prd 필터로 제거·REVIEW 250→216·HIGH 13→13 불변). 셀프테스트 OK(9 Diagnoser 무예외).
+
+**6단접지 잔존오탐 교정 SQL**(`remediate/fold6cr-procgrp/` dryrun/fix/undo+README): COMP_FOLD_CARD_6CR
+use_dims += proc_grp:PROC_000073·074(오시/미싱 COMP와 동일패턴 데이터 일관성). 가격중립(엔진 proc_grp 미사용·
+단가행 min_qty 매칭 불변[묶음 동일단가])·overlay 재스캔 확증(지그재그 오탐2 소멸·HIGH 7→5). **인간+webadmin 게이트 대기**.
+
+**수량·최소주문수량 정합 진단**(`board/qty-minqty-conformance/`): 지니 원칙=**가격표 시작수량=최소주문수량**
+(사이즈별 가능). 엔진=min_qty **floor tier**·`ERR_BELOW_MIN`(qty<최소). 저청구 메커니즘=옵션 comp(박) 시작수량>
+상품min(명함 박200>min100·접지카드 박10>min8=TRAP). 완제품가형(.06) 정합: **OK39**(명함100·포토카드20·봉투1000·
+엽서북2·떡메6=완제품가시작=상품min)·**저청구2**(미니보드/배너 min1<완제품가시작4)·검토11(반칼스티커/수첩 min>시작1·
+권위대조 필요). 미해결=원자합산형(엽서/쿠폰) 판수↔장수 환산·사이즈별 시작수량 차이(현 0건).
+
+**[HARD] 교훈**: ①저청구로 보이는 것이 스캐너 오탐(proc_grp 미선언)일 수 있다 ②진단 스크립트는 상품 del_yn=Y·
+use_yn=N·comp use_yn=N 반드시 필터(미필터=죽은 상품 오염) ③완제품가형=완제품가 시작수량이 최소주문수량 권위·
+원자합산형=인쇄비 판수기준(장수 min과 차원 다름).
+
 ## 2026-07-05 — 4축 통합 --scope all + prd_nm 브리지 + 권위 260702 재고정 · 진단 도구 오탐 정리
 
 **목표**: 실무진 webadmin 배선 끊김을 최신 상품마스터·인쇄상품 가격표와 대조해 전수 진단·검증·교정하는 배치.
