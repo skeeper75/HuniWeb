@@ -1,5 +1,15 @@
 # Huni-Webadmin-Load (§36) — CHANGELOG (최신 위 PREPEND)
 
+## 2026-07-07 — 박 소형 차원 교정 = 라이브 완료 (dim_vals·프리미엄명함 파일럿)
+
+지니 지시대로 **siz_width/height(소재 전용) 제외·새 차원(dim_vals 가로/세로)으로 값 이전** 완료(전부 webadmin UI 엔드포인트).
+- **PROC_000033 prcs_dtl_opt**: "크기"→가로·세로(**integer**·price_dim 없음). integer 필수(`_norm(v)=str(v)`·number면 40.0≠"40" 매칭실패·오시 줄수 동형).
+- **STD 1620·SPECIAL 540**: siz 컬럼→dim_vals{가로,세로} 결정론 full-sync(라이브 현행서 생성·LLM 전사 0), use_dims=`[proc_cd,min_qty,proc_grp:PROC_000033]`(siz 제외·SPECIAL proc_grp 보강). SETUP 무변경.
+- **전 사슬 검증**(지니 지시): 가격공식(PREMIUM_FOIL 최신 채택)·구성요소 7·상품공정 박8·기준마스터 단가행 모두 정상 확인 → 시뮬레이터 **실화면** 금유광 가로40세로40 200장 = 완제품9000+동판5000+박17,800 = **31,800·제외0**. 권위 B03 일치(19,200·22,700·14,300도).
+- **교훈**: ①그리드저장→use_dims siz제거 **순서 필수**(역순=자연키 붕괴·orphan 잔존·ERR_AMBIGUOUS; SPECIAL서 발생·siz 임시복원→재저장→재제거로 복구). ②use_dims 편집기: form 2개(logout-form 함정)·`getElementById('tprcpricecomponents_form')` 타겟·hidden 직접set은 위젯 re-sync에 덮임(항목 .click() 후 올바른 폼 submit).
+- **blind spot 정정**: 라이브 시뮬레이터 먼저 안 보고 메모리서 설계 시작→price_dim:siz_width(소재 재사용)로 이탈. 지니가 "siz는 소재 전용·새 차원으로 이전" 반복 지적→dim_vals 원안 복귀. **원본·라이브 먼저·재질문 금지** 강화.
+- HUNI_ADMIN_URL=printly.co.kr 도메인으로 갱신(.env.local). 다음: 대형 박 6 comp 전파 + 박크기 상품별 제약 개발요청서(제약엔진 VAR_KEY_MAP에 siz 없음·범위 유형 없음).
+
 ## 2026-07-06 (후속) — 박 차원 교정 설계 확정 (공정상세옵션→dim_vals·오시 동형)
 
 지니 정정: 박 가로×세로는 **공정상세옵션(prcs_dtl_opt)→dim_vals**로 매핑 = 오시/타공/가변 등 **16개 공정이 이미

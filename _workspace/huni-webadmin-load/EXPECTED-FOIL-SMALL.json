@@ -1,0 +1,4069 @@
+{
+ "setup_donpan": 5000.0,
+ "zone_std": {
+  "10x20": "A",
+  "10x40": "A",
+  "10x60": "B",
+  "10x80": "C",
+  "20x10": "A",
+  "20x20": "A",
+  "20x40": "B",
+  "20x60": "C",
+  "20x80": "D",
+  "40x10": "A",
+  "40x20": "B",
+  "40x40": "D",
+  "40x60": "E",
+  "40x80": "E"
+ },
+ "zone_spc": {
+  "10x20": "A",
+  "10x40": "A",
+  "10x60": "B",
+  "10x80": "C",
+  "20x10": "A",
+  "20x20": "A",
+  "20x40": "B",
+  "20x60": "C",
+  "20x80": "D",
+  "40x10": "A",
+  "40x20": "B",
+  "40x40": "D",
+  "40x60": "E",
+  "40x80": "E"
+ },
+ "rows": [
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 20,
+   "zone": "A",
+   "qty": 200,
+   "proc_price": 12200.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 20,
+   "zone": "A",
+   "qty": 300,
+   "proc_price": 14300.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 20,
+   "zone": "A",
+   "qty": 400,
+   "proc_price": 16400.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 20,
+   "zone": "A",
+   "qty": 500,
+   "proc_price": 18500.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 20,
+   "zone": "A",
+   "qty": 600,
+   "proc_price": 20600.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 20,
+   "zone": "A",
+   "qty": 700,
+   "proc_price": 22700.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 20,
+   "zone": "A",
+   "qty": 800,
+   "proc_price": 24800.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 20,
+   "zone": "A",
+   "qty": 900,
+   "proc_price": 26900.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 20,
+   "zone": "A",
+   "qty": 1000,
+   "proc_price": 29000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 20,
+   "zone": "A",
+   "qty": 2000,
+   "proc_price": 50000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 20,
+   "zone": "A",
+   "qty": 3000,
+   "proc_price": 71000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 20,
+   "zone": "A",
+   "qty": 4000,
+   "proc_price": 92000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 20,
+   "zone": "A",
+   "qty": 5000,
+   "proc_price": 113000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 20,
+   "zone": "A",
+   "qty": 6000,
+   "proc_price": 134000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 20,
+   "zone": "A",
+   "qty": 7000,
+   "proc_price": 155000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 20,
+   "zone": "A",
+   "qty": 8000,
+   "proc_price": 176000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 20,
+   "zone": "A",
+   "qty": 9000,
+   "proc_price": 197000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 20,
+   "zone": "A",
+   "qty": 10000,
+   "proc_price": 218000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 40,
+   "zone": "A",
+   "qty": 200,
+   "proc_price": 12200.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 40,
+   "zone": "A",
+   "qty": 300,
+   "proc_price": 14300.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 40,
+   "zone": "A",
+   "qty": 400,
+   "proc_price": 16400.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 40,
+   "zone": "A",
+   "qty": 500,
+   "proc_price": 18500.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 40,
+   "zone": "A",
+   "qty": 600,
+   "proc_price": 20600.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 40,
+   "zone": "A",
+   "qty": 700,
+   "proc_price": 22700.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 40,
+   "zone": "A",
+   "qty": 800,
+   "proc_price": 24800.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 40,
+   "zone": "A",
+   "qty": 900,
+   "proc_price": 26900.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 40,
+   "zone": "A",
+   "qty": 1000,
+   "proc_price": 29000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 40,
+   "zone": "A",
+   "qty": 2000,
+   "proc_price": 50000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 40,
+   "zone": "A",
+   "qty": 3000,
+   "proc_price": 71000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 40,
+   "zone": "A",
+   "qty": 4000,
+   "proc_price": 92000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 40,
+   "zone": "A",
+   "qty": 5000,
+   "proc_price": 113000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 40,
+   "zone": "A",
+   "qty": 6000,
+   "proc_price": 134000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 40,
+   "zone": "A",
+   "qty": 7000,
+   "proc_price": 155000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 40,
+   "zone": "A",
+   "qty": 8000,
+   "proc_price": 176000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 40,
+   "zone": "A",
+   "qty": 9000,
+   "proc_price": 197000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 40,
+   "zone": "A",
+   "qty": 10000,
+   "proc_price": 218000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 60,
+   "zone": "B",
+   "qty": 200,
+   "proc_price": 15000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 60,
+   "zone": "B",
+   "qty": 300,
+   "proc_price": 18500.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 60,
+   "zone": "B",
+   "qty": 400,
+   "proc_price": 22000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 60,
+   "zone": "B",
+   "qty": 500,
+   "proc_price": 25500.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 60,
+   "zone": "B",
+   "qty": 600,
+   "proc_price": 29000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 60,
+   "zone": "B",
+   "qty": 700,
+   "proc_price": 32500.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 60,
+   "zone": "B",
+   "qty": 800,
+   "proc_price": 36000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 60,
+   "zone": "B",
+   "qty": 900,
+   "proc_price": 39500.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 60,
+   "zone": "B",
+   "qty": 1000,
+   "proc_price": 43000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 60,
+   "zone": "B",
+   "qty": 2000,
+   "proc_price": 78000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 60,
+   "zone": "B",
+   "qty": 3000,
+   "proc_price": 113000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 60,
+   "zone": "B",
+   "qty": 4000,
+   "proc_price": 148000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 60,
+   "zone": "B",
+   "qty": 5000,
+   "proc_price": 183000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 60,
+   "zone": "B",
+   "qty": 6000,
+   "proc_price": 218000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 60,
+   "zone": "B",
+   "qty": 7000,
+   "proc_price": 253000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 60,
+   "zone": "B",
+   "qty": 8000,
+   "proc_price": 288000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 60,
+   "zone": "B",
+   "qty": 9000,
+   "proc_price": 323000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 60,
+   "zone": "B",
+   "qty": 10000,
+   "proc_price": 358000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 80,
+   "zone": "C",
+   "qty": 200,
+   "proc_price": 16400.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 80,
+   "zone": "C",
+   "qty": 300,
+   "proc_price": 20600.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 80,
+   "zone": "C",
+   "qty": 400,
+   "proc_price": 24800.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 80,
+   "zone": "C",
+   "qty": 500,
+   "proc_price": 29000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 80,
+   "zone": "C",
+   "qty": 600,
+   "proc_price": 33200.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 80,
+   "zone": "C",
+   "qty": 700,
+   "proc_price": 37400.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 80,
+   "zone": "C",
+   "qty": 800,
+   "proc_price": 41600.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 80,
+   "zone": "C",
+   "qty": 900,
+   "proc_price": 45800.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 80,
+   "zone": "C",
+   "qty": 1000,
+   "proc_price": 50000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 80,
+   "zone": "C",
+   "qty": 2000,
+   "proc_price": 92000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 80,
+   "zone": "C",
+   "qty": 3000,
+   "proc_price": 134000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 80,
+   "zone": "C",
+   "qty": 4000,
+   "proc_price": 176000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 80,
+   "zone": "C",
+   "qty": 5000,
+   "proc_price": 218000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 80,
+   "zone": "C",
+   "qty": 6000,
+   "proc_price": 260000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 80,
+   "zone": "C",
+   "qty": 7000,
+   "proc_price": 302000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 80,
+   "zone": "C",
+   "qty": 8000,
+   "proc_price": 344000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 80,
+   "zone": "C",
+   "qty": 9000,
+   "proc_price": 386000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 10,
+   "sero": 80,
+   "zone": "C",
+   "qty": 10000,
+   "proc_price": 428000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 10,
+   "zone": "A",
+   "qty": 200,
+   "proc_price": 12200.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 10,
+   "zone": "A",
+   "qty": 300,
+   "proc_price": 14300.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 10,
+   "zone": "A",
+   "qty": 400,
+   "proc_price": 16400.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 10,
+   "zone": "A",
+   "qty": 500,
+   "proc_price": 18500.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 10,
+   "zone": "A",
+   "qty": 600,
+   "proc_price": 20600.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 10,
+   "zone": "A",
+   "qty": 700,
+   "proc_price": 22700.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 10,
+   "zone": "A",
+   "qty": 800,
+   "proc_price": 24800.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 10,
+   "zone": "A",
+   "qty": 900,
+   "proc_price": 26900.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 10,
+   "zone": "A",
+   "qty": 1000,
+   "proc_price": 29000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 10,
+   "zone": "A",
+   "qty": 2000,
+   "proc_price": 50000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 10,
+   "zone": "A",
+   "qty": 3000,
+   "proc_price": 71000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 10,
+   "zone": "A",
+   "qty": 4000,
+   "proc_price": 92000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 10,
+   "zone": "A",
+   "qty": 5000,
+   "proc_price": 113000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 10,
+   "zone": "A",
+   "qty": 6000,
+   "proc_price": 134000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 10,
+   "zone": "A",
+   "qty": 7000,
+   "proc_price": 155000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 10,
+   "zone": "A",
+   "qty": 8000,
+   "proc_price": 176000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 10,
+   "zone": "A",
+   "qty": 9000,
+   "proc_price": 197000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 10,
+   "zone": "A",
+   "qty": 10000,
+   "proc_price": 218000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 20,
+   "zone": "A",
+   "qty": 200,
+   "proc_price": 12200.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 20,
+   "zone": "A",
+   "qty": 300,
+   "proc_price": 14300.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 20,
+   "zone": "A",
+   "qty": 400,
+   "proc_price": 16400.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 20,
+   "zone": "A",
+   "qty": 500,
+   "proc_price": 18500.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 20,
+   "zone": "A",
+   "qty": 600,
+   "proc_price": 20600.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 20,
+   "zone": "A",
+   "qty": 700,
+   "proc_price": 22700.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 20,
+   "zone": "A",
+   "qty": 800,
+   "proc_price": 24800.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 20,
+   "zone": "A",
+   "qty": 900,
+   "proc_price": 26900.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 20,
+   "zone": "A",
+   "qty": 1000,
+   "proc_price": 29000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 20,
+   "zone": "A",
+   "qty": 2000,
+   "proc_price": 50000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 20,
+   "zone": "A",
+   "qty": 3000,
+   "proc_price": 71000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 20,
+   "zone": "A",
+   "qty": 4000,
+   "proc_price": 92000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 20,
+   "zone": "A",
+   "qty": 5000,
+   "proc_price": 113000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 20,
+   "zone": "A",
+   "qty": 6000,
+   "proc_price": 134000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 20,
+   "zone": "A",
+   "qty": 7000,
+   "proc_price": 155000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 20,
+   "zone": "A",
+   "qty": 8000,
+   "proc_price": 176000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 20,
+   "zone": "A",
+   "qty": 9000,
+   "proc_price": 197000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 20,
+   "zone": "A",
+   "qty": 10000,
+   "proc_price": 218000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 40,
+   "zone": "B",
+   "qty": 200,
+   "proc_price": 15000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 40,
+   "zone": "B",
+   "qty": 300,
+   "proc_price": 18500.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 40,
+   "zone": "B",
+   "qty": 400,
+   "proc_price": 22000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 40,
+   "zone": "B",
+   "qty": 500,
+   "proc_price": 25500.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 40,
+   "zone": "B",
+   "qty": 600,
+   "proc_price": 29000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 40,
+   "zone": "B",
+   "qty": 700,
+   "proc_price": 32500.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 40,
+   "zone": "B",
+   "qty": 800,
+   "proc_price": 36000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 40,
+   "zone": "B",
+   "qty": 900,
+   "proc_price": 39500.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 40,
+   "zone": "B",
+   "qty": 1000,
+   "proc_price": 43000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 40,
+   "zone": "B",
+   "qty": 2000,
+   "proc_price": 78000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 40,
+   "zone": "B",
+   "qty": 3000,
+   "proc_price": 113000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 40,
+   "zone": "B",
+   "qty": 4000,
+   "proc_price": 148000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 40,
+   "zone": "B",
+   "qty": 5000,
+   "proc_price": 183000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 40,
+   "zone": "B",
+   "qty": 6000,
+   "proc_price": 218000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 40,
+   "zone": "B",
+   "qty": 7000,
+   "proc_price": 253000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 40,
+   "zone": "B",
+   "qty": 8000,
+   "proc_price": 288000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 40,
+   "zone": "B",
+   "qty": 9000,
+   "proc_price": 323000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 40,
+   "zone": "B",
+   "qty": 10000,
+   "proc_price": 358000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 60,
+   "zone": "C",
+   "qty": 200,
+   "proc_price": 16400.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 60,
+   "zone": "C",
+   "qty": 300,
+   "proc_price": 20600.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 60,
+   "zone": "C",
+   "qty": 400,
+   "proc_price": 24800.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 60,
+   "zone": "C",
+   "qty": 500,
+   "proc_price": 29000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 60,
+   "zone": "C",
+   "qty": 600,
+   "proc_price": 33200.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 60,
+   "zone": "C",
+   "qty": 700,
+   "proc_price": 37400.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 60,
+   "zone": "C",
+   "qty": 800,
+   "proc_price": 41600.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 60,
+   "zone": "C",
+   "qty": 900,
+   "proc_price": 45800.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 60,
+   "zone": "C",
+   "qty": 1000,
+   "proc_price": 50000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 60,
+   "zone": "C",
+   "qty": 2000,
+   "proc_price": 92000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 60,
+   "zone": "C",
+   "qty": 3000,
+   "proc_price": 134000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 60,
+   "zone": "C",
+   "qty": 4000,
+   "proc_price": 176000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 60,
+   "zone": "C",
+   "qty": 5000,
+   "proc_price": 218000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 60,
+   "zone": "C",
+   "qty": 6000,
+   "proc_price": 260000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 60,
+   "zone": "C",
+   "qty": 7000,
+   "proc_price": 302000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 60,
+   "zone": "C",
+   "qty": 8000,
+   "proc_price": 344000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 60,
+   "zone": "C",
+   "qty": 9000,
+   "proc_price": 386000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 60,
+   "zone": "C",
+   "qty": 10000,
+   "proc_price": 428000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 80,
+   "zone": "D",
+   "qty": 200,
+   "proc_price": 17800.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 80,
+   "zone": "D",
+   "qty": 300,
+   "proc_price": 22700.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 80,
+   "zone": "D",
+   "qty": 400,
+   "proc_price": 27600.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 80,
+   "zone": "D",
+   "qty": 500,
+   "proc_price": 32500.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 80,
+   "zone": "D",
+   "qty": 600,
+   "proc_price": 37400.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 80,
+   "zone": "D",
+   "qty": 700,
+   "proc_price": 42300.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 80,
+   "zone": "D",
+   "qty": 800,
+   "proc_price": 47200.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 80,
+   "zone": "D",
+   "qty": 900,
+   "proc_price": 52100.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 80,
+   "zone": "D",
+   "qty": 1000,
+   "proc_price": 57000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 80,
+   "zone": "D",
+   "qty": 2000,
+   "proc_price": 106000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 80,
+   "zone": "D",
+   "qty": 3000,
+   "proc_price": 155000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 80,
+   "zone": "D",
+   "qty": 4000,
+   "proc_price": 204000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 80,
+   "zone": "D",
+   "qty": 5000,
+   "proc_price": 253000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 80,
+   "zone": "D",
+   "qty": 6000,
+   "proc_price": 302000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 80,
+   "zone": "D",
+   "qty": 7000,
+   "proc_price": 351000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 80,
+   "zone": "D",
+   "qty": 8000,
+   "proc_price": 400000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 80,
+   "zone": "D",
+   "qty": 9000,
+   "proc_price": 449000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 20,
+   "sero": 80,
+   "zone": "D",
+   "qty": 10000,
+   "proc_price": 498000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 10,
+   "zone": "A",
+   "qty": 200,
+   "proc_price": 12200.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 10,
+   "zone": "A",
+   "qty": 300,
+   "proc_price": 14300.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 10,
+   "zone": "A",
+   "qty": 400,
+   "proc_price": 16400.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 10,
+   "zone": "A",
+   "qty": 500,
+   "proc_price": 18500.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 10,
+   "zone": "A",
+   "qty": 600,
+   "proc_price": 20600.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 10,
+   "zone": "A",
+   "qty": 700,
+   "proc_price": 22700.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 10,
+   "zone": "A",
+   "qty": 800,
+   "proc_price": 24800.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 10,
+   "zone": "A",
+   "qty": 900,
+   "proc_price": 26900.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 10,
+   "zone": "A",
+   "qty": 1000,
+   "proc_price": 29000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 10,
+   "zone": "A",
+   "qty": 2000,
+   "proc_price": 50000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 10,
+   "zone": "A",
+   "qty": 3000,
+   "proc_price": 71000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 10,
+   "zone": "A",
+   "qty": 4000,
+   "proc_price": 92000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 10,
+   "zone": "A",
+   "qty": 5000,
+   "proc_price": 113000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 10,
+   "zone": "A",
+   "qty": 6000,
+   "proc_price": 134000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 10,
+   "zone": "A",
+   "qty": 7000,
+   "proc_price": 155000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 10,
+   "zone": "A",
+   "qty": 8000,
+   "proc_price": 176000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 10,
+   "zone": "A",
+   "qty": 9000,
+   "proc_price": 197000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 10,
+   "zone": "A",
+   "qty": 10000,
+   "proc_price": 218000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 20,
+   "zone": "B",
+   "qty": 200,
+   "proc_price": 15000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 20,
+   "zone": "B",
+   "qty": 300,
+   "proc_price": 18500.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 20,
+   "zone": "B",
+   "qty": 400,
+   "proc_price": 22000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 20,
+   "zone": "B",
+   "qty": 500,
+   "proc_price": 25500.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 20,
+   "zone": "B",
+   "qty": 600,
+   "proc_price": 29000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 20,
+   "zone": "B",
+   "qty": 700,
+   "proc_price": 32500.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 20,
+   "zone": "B",
+   "qty": 800,
+   "proc_price": 36000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 20,
+   "zone": "B",
+   "qty": 900,
+   "proc_price": 39500.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 20,
+   "zone": "B",
+   "qty": 1000,
+   "proc_price": 43000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 20,
+   "zone": "B",
+   "qty": 2000,
+   "proc_price": 78000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 20,
+   "zone": "B",
+   "qty": 3000,
+   "proc_price": 113000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 20,
+   "zone": "B",
+   "qty": 4000,
+   "proc_price": 148000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 20,
+   "zone": "B",
+   "qty": 5000,
+   "proc_price": 183000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 20,
+   "zone": "B",
+   "qty": 6000,
+   "proc_price": 218000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 20,
+   "zone": "B",
+   "qty": 7000,
+   "proc_price": 253000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 20,
+   "zone": "B",
+   "qty": 8000,
+   "proc_price": 288000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 20,
+   "zone": "B",
+   "qty": 9000,
+   "proc_price": 323000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 20,
+   "zone": "B",
+   "qty": 10000,
+   "proc_price": 358000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 40,
+   "zone": "D",
+   "qty": 200,
+   "proc_price": 17800.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 40,
+   "zone": "D",
+   "qty": 300,
+   "proc_price": 22700.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 40,
+   "zone": "D",
+   "qty": 400,
+   "proc_price": 27600.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 40,
+   "zone": "D",
+   "qty": 500,
+   "proc_price": 32500.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 40,
+   "zone": "D",
+   "qty": 600,
+   "proc_price": 37400.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 40,
+   "zone": "D",
+   "qty": 700,
+   "proc_price": 42300.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 40,
+   "zone": "D",
+   "qty": 800,
+   "proc_price": 47200.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 40,
+   "zone": "D",
+   "qty": 900,
+   "proc_price": 52100.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 40,
+   "zone": "D",
+   "qty": 1000,
+   "proc_price": 57000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 40,
+   "zone": "D",
+   "qty": 2000,
+   "proc_price": 106000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 40,
+   "zone": "D",
+   "qty": 3000,
+   "proc_price": 155000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 40,
+   "zone": "D",
+   "qty": 4000,
+   "proc_price": 204000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 40,
+   "zone": "D",
+   "qty": 5000,
+   "proc_price": 253000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 40,
+   "zone": "D",
+   "qty": 6000,
+   "proc_price": 302000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 40,
+   "zone": "D",
+   "qty": 7000,
+   "proc_price": 351000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 40,
+   "zone": "D",
+   "qty": 8000,
+   "proc_price": 400000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 40,
+   "zone": "D",
+   "qty": 9000,
+   "proc_price": 449000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 40,
+   "zone": "D",
+   "qty": 10000,
+   "proc_price": 498000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 60,
+   "zone": "E",
+   "qty": 200,
+   "proc_price": 19200.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 60,
+   "zone": "E",
+   "qty": 300,
+   "proc_price": 24800.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 60,
+   "zone": "E",
+   "qty": 400,
+   "proc_price": 30400.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 60,
+   "zone": "E",
+   "qty": 500,
+   "proc_price": 36000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 60,
+   "zone": "E",
+   "qty": 600,
+   "proc_price": 41600.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 60,
+   "zone": "E",
+   "qty": 700,
+   "proc_price": 47200.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 60,
+   "zone": "E",
+   "qty": 800,
+   "proc_price": 52800.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 60,
+   "zone": "E",
+   "qty": 900,
+   "proc_price": 58400.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 60,
+   "zone": "E",
+   "qty": 1000,
+   "proc_price": 64000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 60,
+   "zone": "E",
+   "qty": 2000,
+   "proc_price": 120000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 60,
+   "zone": "E",
+   "qty": 3000,
+   "proc_price": 176000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 60,
+   "zone": "E",
+   "qty": 4000,
+   "proc_price": 232000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 60,
+   "zone": "E",
+   "qty": 5000,
+   "proc_price": 288000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 60,
+   "zone": "E",
+   "qty": 6000,
+   "proc_price": 344000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 60,
+   "zone": "E",
+   "qty": 7000,
+   "proc_price": 400000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 60,
+   "zone": "E",
+   "qty": 8000,
+   "proc_price": 456000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 60,
+   "zone": "E",
+   "qty": 9000,
+   "proc_price": 512000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 60,
+   "zone": "E",
+   "qty": 10000,
+   "proc_price": 568000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 80,
+   "zone": "E",
+   "qty": 200,
+   "proc_price": 19200.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 80,
+   "zone": "E",
+   "qty": 300,
+   "proc_price": 24800.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 80,
+   "zone": "E",
+   "qty": 400,
+   "proc_price": 30400.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 80,
+   "zone": "E",
+   "qty": 500,
+   "proc_price": 36000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 80,
+   "zone": "E",
+   "qty": 600,
+   "proc_price": 41600.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 80,
+   "zone": "E",
+   "qty": 700,
+   "proc_price": 47200.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 80,
+   "zone": "E",
+   "qty": 800,
+   "proc_price": 52800.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 80,
+   "zone": "E",
+   "qty": 900,
+   "proc_price": 58400.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 80,
+   "zone": "E",
+   "qty": 1000,
+   "proc_price": 64000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 80,
+   "zone": "E",
+   "qty": 2000,
+   "proc_price": 120000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 80,
+   "zone": "E",
+   "qty": 3000,
+   "proc_price": 176000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 80,
+   "zone": "E",
+   "qty": 4000,
+   "proc_price": 232000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 80,
+   "zone": "E",
+   "qty": 5000,
+   "proc_price": 288000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 80,
+   "zone": "E",
+   "qty": 6000,
+   "proc_price": 344000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 80,
+   "zone": "E",
+   "qty": 7000,
+   "proc_price": 400000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 80,
+   "zone": "E",
+   "qty": 8000,
+   "proc_price": 456000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 80,
+   "zone": "E",
+   "qty": 9000,
+   "proc_price": 512000.0
+  },
+  {
+   "kind": "일반박",
+   "garo": 40,
+   "sero": 80,
+   "zone": "E",
+   "qty": 10000,
+   "proc_price": 568000.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 20,
+   "zone": "A",
+   "qty": 200,
+   "proc_price": 14300.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 20,
+   "zone": "A",
+   "qty": 300,
+   "proc_price": 17500.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 20,
+   "zone": "A",
+   "qty": 400,
+   "proc_price": 20700.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 20,
+   "zone": "A",
+   "qty": 500,
+   "proc_price": 23900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 20,
+   "zone": "A",
+   "qty": 600,
+   "proc_price": 27100.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 20,
+   "zone": "A",
+   "qty": 700,
+   "proc_price": 30300.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 20,
+   "zone": "A",
+   "qty": 800,
+   "proc_price": 33500.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 20,
+   "zone": "A",
+   "qty": 900,
+   "proc_price": 36700.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 20,
+   "zone": "A",
+   "qty": 1000,
+   "proc_price": 39900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 20,
+   "zone": "A",
+   "qty": 2000,
+   "proc_price": 71900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 20,
+   "zone": "A",
+   "qty": 3000,
+   "proc_price": 103900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 20,
+   "zone": "A",
+   "qty": 4000,
+   "proc_price": 135900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 20,
+   "zone": "A",
+   "qty": 5000,
+   "proc_price": 167900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 20,
+   "zone": "A",
+   "qty": 6000,
+   "proc_price": 199900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 20,
+   "zone": "A",
+   "qty": 7000,
+   "proc_price": 231900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 20,
+   "zone": "A",
+   "qty": 8000,
+   "proc_price": 263900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 20,
+   "zone": "A",
+   "qty": 9000,
+   "proc_price": 295900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 20,
+   "zone": "A",
+   "qty": 10000,
+   "proc_price": 327900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 40,
+   "zone": "A",
+   "qty": 200,
+   "proc_price": 14300.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 40,
+   "zone": "A",
+   "qty": 300,
+   "proc_price": 17500.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 40,
+   "zone": "A",
+   "qty": 400,
+   "proc_price": 20700.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 40,
+   "zone": "A",
+   "qty": 500,
+   "proc_price": 23900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 40,
+   "zone": "A",
+   "qty": 600,
+   "proc_price": 27100.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 40,
+   "zone": "A",
+   "qty": 700,
+   "proc_price": 30300.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 40,
+   "zone": "A",
+   "qty": 800,
+   "proc_price": 33500.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 40,
+   "zone": "A",
+   "qty": 900,
+   "proc_price": 36700.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 40,
+   "zone": "A",
+   "qty": 1000,
+   "proc_price": 39900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 40,
+   "zone": "A",
+   "qty": 2000,
+   "proc_price": 71900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 40,
+   "zone": "A",
+   "qty": 3000,
+   "proc_price": 103900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 40,
+   "zone": "A",
+   "qty": 4000,
+   "proc_price": 135900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 40,
+   "zone": "A",
+   "qty": 5000,
+   "proc_price": 167900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 40,
+   "zone": "A",
+   "qty": 6000,
+   "proc_price": 199900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 40,
+   "zone": "A",
+   "qty": 7000,
+   "proc_price": 231900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 40,
+   "zone": "A",
+   "qty": 8000,
+   "proc_price": 263900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 40,
+   "zone": "A",
+   "qty": 9000,
+   "proc_price": 295900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 40,
+   "zone": "A",
+   "qty": 10000,
+   "proc_price": 327900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 60,
+   "zone": "B",
+   "qty": 200,
+   "proc_price": 18500.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 60,
+   "zone": "B",
+   "qty": 300,
+   "proc_price": 23800.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 60,
+   "zone": "B",
+   "qty": 400,
+   "proc_price": 29100.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 60,
+   "zone": "B",
+   "qty": 500,
+   "proc_price": 34400.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 60,
+   "zone": "B",
+   "qty": 600,
+   "proc_price": 39700.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 60,
+   "zone": "B",
+   "qty": 700,
+   "proc_price": 45000.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 60,
+   "zone": "B",
+   "qty": 800,
+   "proc_price": 50300.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 60,
+   "zone": "B",
+   "qty": 900,
+   "proc_price": 55600.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 60,
+   "zone": "B",
+   "qty": 1000,
+   "proc_price": 60900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 60,
+   "zone": "B",
+   "qty": 2000,
+   "proc_price": 113900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 60,
+   "zone": "B",
+   "qty": 3000,
+   "proc_price": 166900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 60,
+   "zone": "B",
+   "qty": 4000,
+   "proc_price": 219900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 60,
+   "zone": "B",
+   "qty": 5000,
+   "proc_price": 272900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 60,
+   "zone": "B",
+   "qty": 6000,
+   "proc_price": 325900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 60,
+   "zone": "B",
+   "qty": 7000,
+   "proc_price": 378900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 60,
+   "zone": "B",
+   "qty": 8000,
+   "proc_price": 431900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 60,
+   "zone": "B",
+   "qty": 9000,
+   "proc_price": 484900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 60,
+   "zone": "B",
+   "qty": 10000,
+   "proc_price": 537900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 80,
+   "zone": "C",
+   "qty": 200,
+   "proc_price": 20600.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 80,
+   "zone": "C",
+   "qty": 300,
+   "proc_price": 26900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 80,
+   "zone": "C",
+   "qty": 400,
+   "proc_price": 33200.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 80,
+   "zone": "C",
+   "qty": 500,
+   "proc_price": 39500.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 80,
+   "zone": "C",
+   "qty": 600,
+   "proc_price": 45800.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 80,
+   "zone": "C",
+   "qty": 700,
+   "proc_price": 52100.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 80,
+   "zone": "C",
+   "qty": 800,
+   "proc_price": 58400.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 80,
+   "zone": "C",
+   "qty": 900,
+   "proc_price": 64700.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 80,
+   "zone": "C",
+   "qty": 1000,
+   "proc_price": 71000.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 80,
+   "zone": "C",
+   "qty": 2000,
+   "proc_price": 134000.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 80,
+   "zone": "C",
+   "qty": 3000,
+   "proc_price": 197000.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 80,
+   "zone": "C",
+   "qty": 4000,
+   "proc_price": 260000.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 80,
+   "zone": "C",
+   "qty": 5000,
+   "proc_price": 323000.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 80,
+   "zone": "C",
+   "qty": 6000,
+   "proc_price": 386000.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 80,
+   "zone": "C",
+   "qty": 7000,
+   "proc_price": 449000.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 80,
+   "zone": "C",
+   "qty": 8000,
+   "proc_price": 512000.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 80,
+   "zone": "C",
+   "qty": 9000,
+   "proc_price": 575000.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 10,
+   "sero": 80,
+   "zone": "C",
+   "qty": 10000,
+   "proc_price": 638000.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 10,
+   "zone": "A",
+   "qty": 200,
+   "proc_price": 14300.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 10,
+   "zone": "A",
+   "qty": 300,
+   "proc_price": 17500.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 10,
+   "zone": "A",
+   "qty": 400,
+   "proc_price": 20700.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 10,
+   "zone": "A",
+   "qty": 500,
+   "proc_price": 23900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 10,
+   "zone": "A",
+   "qty": 600,
+   "proc_price": 27100.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 10,
+   "zone": "A",
+   "qty": 700,
+   "proc_price": 30300.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 10,
+   "zone": "A",
+   "qty": 800,
+   "proc_price": 33500.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 10,
+   "zone": "A",
+   "qty": 900,
+   "proc_price": 36700.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 10,
+   "zone": "A",
+   "qty": 1000,
+   "proc_price": 39900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 10,
+   "zone": "A",
+   "qty": 2000,
+   "proc_price": 71900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 10,
+   "zone": "A",
+   "qty": 3000,
+   "proc_price": 103900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 10,
+   "zone": "A",
+   "qty": 4000,
+   "proc_price": 135900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 10,
+   "zone": "A",
+   "qty": 5000,
+   "proc_price": 167900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 10,
+   "zone": "A",
+   "qty": 6000,
+   "proc_price": 199900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 10,
+   "zone": "A",
+   "qty": 7000,
+   "proc_price": 231900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 10,
+   "zone": "A",
+   "qty": 8000,
+   "proc_price": 263900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 10,
+   "zone": "A",
+   "qty": 9000,
+   "proc_price": 295900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 10,
+   "zone": "A",
+   "qty": 10000,
+   "proc_price": 327900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 20,
+   "zone": "A",
+   "qty": 200,
+   "proc_price": 14300.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 20,
+   "zone": "A",
+   "qty": 300,
+   "proc_price": 17500.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 20,
+   "zone": "A",
+   "qty": 400,
+   "proc_price": 20700.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 20,
+   "zone": "A",
+   "qty": 500,
+   "proc_price": 23900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 20,
+   "zone": "A",
+   "qty": 600,
+   "proc_price": 27100.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 20,
+   "zone": "A",
+   "qty": 700,
+   "proc_price": 30300.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 20,
+   "zone": "A",
+   "qty": 800,
+   "proc_price": 33500.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 20,
+   "zone": "A",
+   "qty": 900,
+   "proc_price": 36700.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 20,
+   "zone": "A",
+   "qty": 1000,
+   "proc_price": 39900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 20,
+   "zone": "A",
+   "qty": 2000,
+   "proc_price": 71900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 20,
+   "zone": "A",
+   "qty": 3000,
+   "proc_price": 103900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 20,
+   "zone": "A",
+   "qty": 4000,
+   "proc_price": 135900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 20,
+   "zone": "A",
+   "qty": 5000,
+   "proc_price": 167900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 20,
+   "zone": "A",
+   "qty": 6000,
+   "proc_price": 199900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 20,
+   "zone": "A",
+   "qty": 7000,
+   "proc_price": 231900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 20,
+   "zone": "A",
+   "qty": 8000,
+   "proc_price": 263900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 20,
+   "zone": "A",
+   "qty": 9000,
+   "proc_price": 295900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 20,
+   "zone": "A",
+   "qty": 10000,
+   "proc_price": 327900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 40,
+   "zone": "B",
+   "qty": 200,
+   "proc_price": 18500.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 40,
+   "zone": "B",
+   "qty": 300,
+   "proc_price": 23800.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 40,
+   "zone": "B",
+   "qty": 400,
+   "proc_price": 29100.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 40,
+   "zone": "B",
+   "qty": 500,
+   "proc_price": 34400.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 40,
+   "zone": "B",
+   "qty": 600,
+   "proc_price": 39700.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 40,
+   "zone": "B",
+   "qty": 700,
+   "proc_price": 45000.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 40,
+   "zone": "B",
+   "qty": 800,
+   "proc_price": 50300.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 40,
+   "zone": "B",
+   "qty": 900,
+   "proc_price": 55600.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 40,
+   "zone": "B",
+   "qty": 1000,
+   "proc_price": 60900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 40,
+   "zone": "B",
+   "qty": 2000,
+   "proc_price": 113900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 40,
+   "zone": "B",
+   "qty": 3000,
+   "proc_price": 166900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 40,
+   "zone": "B",
+   "qty": 4000,
+   "proc_price": 219900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 40,
+   "zone": "B",
+   "qty": 5000,
+   "proc_price": 272900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 40,
+   "zone": "B",
+   "qty": 6000,
+   "proc_price": 325900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 40,
+   "zone": "B",
+   "qty": 7000,
+   "proc_price": 378900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 40,
+   "zone": "B",
+   "qty": 8000,
+   "proc_price": 431900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 40,
+   "zone": "B",
+   "qty": 9000,
+   "proc_price": 484900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 40,
+   "zone": "B",
+   "qty": 10000,
+   "proc_price": 537900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 60,
+   "zone": "C",
+   "qty": 200,
+   "proc_price": 20600.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 60,
+   "zone": "C",
+   "qty": 300,
+   "proc_price": 26900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 60,
+   "zone": "C",
+   "qty": 400,
+   "proc_price": 33200.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 60,
+   "zone": "C",
+   "qty": 500,
+   "proc_price": 39500.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 60,
+   "zone": "C",
+   "qty": 600,
+   "proc_price": 45800.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 60,
+   "zone": "C",
+   "qty": 700,
+   "proc_price": 52100.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 60,
+   "zone": "C",
+   "qty": 800,
+   "proc_price": 58400.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 60,
+   "zone": "C",
+   "qty": 900,
+   "proc_price": 64700.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 60,
+   "zone": "C",
+   "qty": 1000,
+   "proc_price": 71000.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 60,
+   "zone": "C",
+   "qty": 2000,
+   "proc_price": 134000.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 60,
+   "zone": "C",
+   "qty": 3000,
+   "proc_price": 197000.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 60,
+   "zone": "C",
+   "qty": 4000,
+   "proc_price": 260000.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 60,
+   "zone": "C",
+   "qty": 5000,
+   "proc_price": 323000.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 60,
+   "zone": "C",
+   "qty": 6000,
+   "proc_price": 386000.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 60,
+   "zone": "C",
+   "qty": 7000,
+   "proc_price": 449000.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 60,
+   "zone": "C",
+   "qty": 8000,
+   "proc_price": 512000.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 60,
+   "zone": "C",
+   "qty": 9000,
+   "proc_price": 575000.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 60,
+   "zone": "C",
+   "qty": 10000,
+   "proc_price": 638000.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 80,
+   "zone": "D",
+   "qty": 200,
+   "proc_price": 22700.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 80,
+   "zone": "D",
+   "qty": 300,
+   "proc_price": 30100.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 80,
+   "zone": "D",
+   "qty": 400,
+   "proc_price": 37500.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 80,
+   "zone": "D",
+   "qty": 500,
+   "proc_price": 44900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 80,
+   "zone": "D",
+   "qty": 600,
+   "proc_price": 52300.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 80,
+   "zone": "D",
+   "qty": 700,
+   "proc_price": 59700.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 80,
+   "zone": "D",
+   "qty": 800,
+   "proc_price": 67100.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 80,
+   "zone": "D",
+   "qty": 900,
+   "proc_price": 74500.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 80,
+   "zone": "D",
+   "qty": 1000,
+   "proc_price": 81900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 80,
+   "zone": "D",
+   "qty": 2000,
+   "proc_price": 155900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 80,
+   "zone": "D",
+   "qty": 3000,
+   "proc_price": 229900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 80,
+   "zone": "D",
+   "qty": 4000,
+   "proc_price": 303900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 80,
+   "zone": "D",
+   "qty": 5000,
+   "proc_price": 377900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 80,
+   "zone": "D",
+   "qty": 6000,
+   "proc_price": 451900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 80,
+   "zone": "D",
+   "qty": 7000,
+   "proc_price": 525900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 80,
+   "zone": "D",
+   "qty": 8000,
+   "proc_price": 599900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 80,
+   "zone": "D",
+   "qty": 9000,
+   "proc_price": 673900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 20,
+   "sero": 80,
+   "zone": "D",
+   "qty": 10000,
+   "proc_price": 747900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 10,
+   "zone": "A",
+   "qty": 200,
+   "proc_price": 14300.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 10,
+   "zone": "A",
+   "qty": 300,
+   "proc_price": 17500.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 10,
+   "zone": "A",
+   "qty": 400,
+   "proc_price": 20700.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 10,
+   "zone": "A",
+   "qty": 500,
+   "proc_price": 23900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 10,
+   "zone": "A",
+   "qty": 600,
+   "proc_price": 27100.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 10,
+   "zone": "A",
+   "qty": 700,
+   "proc_price": 30300.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 10,
+   "zone": "A",
+   "qty": 800,
+   "proc_price": 33500.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 10,
+   "zone": "A",
+   "qty": 900,
+   "proc_price": 36700.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 10,
+   "zone": "A",
+   "qty": 1000,
+   "proc_price": 39900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 10,
+   "zone": "A",
+   "qty": 2000,
+   "proc_price": 71900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 10,
+   "zone": "A",
+   "qty": 3000,
+   "proc_price": 103900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 10,
+   "zone": "A",
+   "qty": 4000,
+   "proc_price": 135900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 10,
+   "zone": "A",
+   "qty": 5000,
+   "proc_price": 167900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 10,
+   "zone": "A",
+   "qty": 6000,
+   "proc_price": 199900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 10,
+   "zone": "A",
+   "qty": 7000,
+   "proc_price": 231900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 10,
+   "zone": "A",
+   "qty": 8000,
+   "proc_price": 263900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 10,
+   "zone": "A",
+   "qty": 9000,
+   "proc_price": 295900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 10,
+   "zone": "A",
+   "qty": 10000,
+   "proc_price": 327900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 20,
+   "zone": "B",
+   "qty": 200,
+   "proc_price": 18500.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 20,
+   "zone": "B",
+   "qty": 300,
+   "proc_price": 23800.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 20,
+   "zone": "B",
+   "qty": 400,
+   "proc_price": 29100.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 20,
+   "zone": "B",
+   "qty": 500,
+   "proc_price": 34400.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 20,
+   "zone": "B",
+   "qty": 600,
+   "proc_price": 39700.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 20,
+   "zone": "B",
+   "qty": 700,
+   "proc_price": 45000.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 20,
+   "zone": "B",
+   "qty": 800,
+   "proc_price": 50300.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 20,
+   "zone": "B",
+   "qty": 900,
+   "proc_price": 55600.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 20,
+   "zone": "B",
+   "qty": 1000,
+   "proc_price": 60900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 20,
+   "zone": "B",
+   "qty": 2000,
+   "proc_price": 113900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 20,
+   "zone": "B",
+   "qty": 3000,
+   "proc_price": 166900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 20,
+   "zone": "B",
+   "qty": 4000,
+   "proc_price": 219900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 20,
+   "zone": "B",
+   "qty": 5000,
+   "proc_price": 272900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 20,
+   "zone": "B",
+   "qty": 6000,
+   "proc_price": 325900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 20,
+   "zone": "B",
+   "qty": 7000,
+   "proc_price": 378900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 20,
+   "zone": "B",
+   "qty": 8000,
+   "proc_price": 431900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 20,
+   "zone": "B",
+   "qty": 9000,
+   "proc_price": 484900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 20,
+   "zone": "B",
+   "qty": 10000,
+   "proc_price": 537900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 40,
+   "zone": "D",
+   "qty": 200,
+   "proc_price": 22700.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 40,
+   "zone": "D",
+   "qty": 300,
+   "proc_price": 30100.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 40,
+   "zone": "D",
+   "qty": 400,
+   "proc_price": 37500.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 40,
+   "zone": "D",
+   "qty": 500,
+   "proc_price": 44900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 40,
+   "zone": "D",
+   "qty": 600,
+   "proc_price": 52300.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 40,
+   "zone": "D",
+   "qty": 700,
+   "proc_price": 59700.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 40,
+   "zone": "D",
+   "qty": 800,
+   "proc_price": 67100.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 40,
+   "zone": "D",
+   "qty": 900,
+   "proc_price": 74500.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 40,
+   "zone": "D",
+   "qty": 1000,
+   "proc_price": 81900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 40,
+   "zone": "D",
+   "qty": 2000,
+   "proc_price": 155900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 40,
+   "zone": "D",
+   "qty": 3000,
+   "proc_price": 229900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 40,
+   "zone": "D",
+   "qty": 4000,
+   "proc_price": 303900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 40,
+   "zone": "D",
+   "qty": 5000,
+   "proc_price": 377900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 40,
+   "zone": "D",
+   "qty": 6000,
+   "proc_price": 451900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 40,
+   "zone": "D",
+   "qty": 7000,
+   "proc_price": 525900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 40,
+   "zone": "D",
+   "qty": 8000,
+   "proc_price": 599900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 40,
+   "zone": "D",
+   "qty": 9000,
+   "proc_price": 673900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 40,
+   "zone": "D",
+   "qty": 10000,
+   "proc_price": 747900.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 60,
+   "zone": "E",
+   "qty": 200,
+   "proc_price": 24800.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 60,
+   "zone": "E",
+   "qty": 300,
+   "proc_price": 33200.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 60,
+   "zone": "E",
+   "qty": 400,
+   "proc_price": 41600.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 60,
+   "zone": "E",
+   "qty": 500,
+   "proc_price": 50000.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 60,
+   "zone": "E",
+   "qty": 600,
+   "proc_price": 58400.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 60,
+   "zone": "E",
+   "qty": 700,
+   "proc_price": 66800.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 60,
+   "zone": "E",
+   "qty": 800,
+   "proc_price": 75200.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 60,
+   "zone": "E",
+   "qty": 900,
+   "proc_price": 83600.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 60,
+   "zone": "E",
+   "qty": 1000,
+   "proc_price": 92000.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 60,
+   "zone": "E",
+   "qty": 2000,
+   "proc_price": 176000.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 60,
+   "zone": "E",
+   "qty": 3000,
+   "proc_price": 260000.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 60,
+   "zone": "E",
+   "qty": 4000,
+   "proc_price": 344000.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 60,
+   "zone": "E",
+   "qty": 5000,
+   "proc_price": 428000.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 60,
+   "zone": "E",
+   "qty": 6000,
+   "proc_price": 512000.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 60,
+   "zone": "E",
+   "qty": 7000,
+   "proc_price": 596000.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 60,
+   "zone": "E",
+   "qty": 8000,
+   "proc_price": 680000.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 60,
+   "zone": "E",
+   "qty": 9000,
+   "proc_price": 764000.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 60,
+   "zone": "E",
+   "qty": 10000,
+   "proc_price": 848000.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 80,
+   "zone": "E",
+   "qty": 200,
+   "proc_price": 24800.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 80,
+   "zone": "E",
+   "qty": 300,
+   "proc_price": 33200.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 80,
+   "zone": "E",
+   "qty": 400,
+   "proc_price": 41600.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 80,
+   "zone": "E",
+   "qty": 500,
+   "proc_price": 50000.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 80,
+   "zone": "E",
+   "qty": 600,
+   "proc_price": 58400.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 80,
+   "zone": "E",
+   "qty": 700,
+   "proc_price": 66800.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 80,
+   "zone": "E",
+   "qty": 800,
+   "proc_price": 75200.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 80,
+   "zone": "E",
+   "qty": 900,
+   "proc_price": 83600.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 80,
+   "zone": "E",
+   "qty": 1000,
+   "proc_price": 92000.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 80,
+   "zone": "E",
+   "qty": 2000,
+   "proc_price": 176000.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 80,
+   "zone": "E",
+   "qty": 3000,
+   "proc_price": 260000.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 80,
+   "zone": "E",
+   "qty": 4000,
+   "proc_price": 344000.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 80,
+   "zone": "E",
+   "qty": 5000,
+   "proc_price": 428000.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 80,
+   "zone": "E",
+   "qty": 6000,
+   "proc_price": 512000.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 80,
+   "zone": "E",
+   "qty": 7000,
+   "proc_price": 596000.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 80,
+   "zone": "E",
+   "qty": 8000,
+   "proc_price": 680000.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 80,
+   "zone": "E",
+   "qty": 9000,
+   "proc_price": 764000.0
+  },
+  {
+   "kind": "특수박",
+   "garo": 40,
+   "sero": 80,
+   "zone": "E",
+   "qty": 10000,
+   "proc_price": 848000.0
+  }
+ ]
+}
