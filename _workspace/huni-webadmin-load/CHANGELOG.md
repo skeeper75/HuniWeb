@@ -1,5 +1,13 @@
 # Huni-Webadmin-Load (§36) — CHANGELOG (최신 위 PREPEND)
 
+## 2026-07-07 (후속2) — 형압 별도 컴포넌트 신설·배선·검증 완료
+
+박 컴포넌트가 형압을 못 담는 구조 블로커(proc_grp=박)를 별도 EMBOSS 컴포넌트 신설로 해결.
+- **신설**: `COMP_EMBOSS_SETUP_LARGE`(128행)·`COMP_EMBOSS_PROC_LARGE_STD`(1664행) = 박형압비(PRC_COMPONENT_TYPE.05)·PRICE_TYPE.03·use_dims `[proc_cd,min_qty,proc_grp:PROC_000050]`. 그리드=대형 박 동판/일반박 값 복제(양각 PROC_000051·음각 PROC_000052·금유광 소스).
+- **배선**: `PRF_BIND_MUSEON_FOIL`(무선책자)·`PRF_BIND_PUR_FOIL`(PUR책자) 인라인 formset에 disp_seq 5·6·addtn_yn=Y.
+- **검증**: 무선책자 양각 가로90세로90 1000장=동판18,000+가공120,000(구역C)·음각 가로50세로50 200장=11,000+65,000(구역A). 권위 일치.
+- **UI 교훈**: 컴포넌트 생성=tprcpricecomponents/add(hidden set), 공식배선=tprcpriceformulas change **인라인**(tprcformulacomponents 단독 add 404), comp_cd=autocomplete select(옵션 AJAX·빈값)→`<option>` 주입 후 value 설정·TOTAL_FORMS 증가.
+
 ## 2026-07-07 (후속) — 박 대형 차원 교정 완료 + 형압 진행(구조 블로커)
 
 박 방식을 전체로 확장. **라이브 실측으로 범위 확정**: siz_width/height use_dims 쓰는 20 comp 중 `has_proc=t`(공정) 3개(박 대형)만 대상, 나머지 17개(포스터·아크릴)=소재 정당 사용·제외.

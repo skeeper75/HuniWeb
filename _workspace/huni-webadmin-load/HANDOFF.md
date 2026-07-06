@@ -1,6 +1,6 @@
 # Huni-Webadmin-Load (§36) HANDOFF — webadmin UI 전용 적재·가격시뮬레이터 완성
 
-> ★다음 시작점: **형압 별도 컴포넌트 생성+배선**(값 준비됨·아래) + (별도) **박크기 상품별 제약 개발 요청서**.
+> ★다음 시작점: **박크기 상품별 제약 개발 요청서**(제약엔진 확장) + 커버리지 갭 보완(펄박·백박·대형 금무광/은무광).
 > 목표=라이브 DB 직접 적재 금지·오직 webadmin UI로 → 가격시뮬레이터 **예측(권위)=실제·제외0**.
 
 ## ★박 확장 = 소형+대형 완료 (260707)
@@ -11,13 +11,14 @@
 - **★3단계 순서**(대형서 확립): ①use_dims proc_grp 추가+siz 유지 ②그리드 /save(dim_vals·siz 유니크키 clean delete) ③siz 제거.
   (proc_grp 없이 저장하면 가로/세로 파라미터 미인식; siz 먼저 빼면 orphan.)
 
-## ★형압(PROC_000050) = 진행중·구조 블로커
-- prcs_dtl_opt 크기→가로/세로 integer **완료**. 양각(PROC_000051)/음각(PROC_000052)=무선책자·PUR책자(책자=대형)에 등록.
-- 지니 확정: 형압=박과 동일(동판+**일반박STD** 복제). 값 준비됨=`browser/*.hyungap.js`(금유광 복제·기존+양각+음각).
-- **블로커**: 박 컴포넌트 proc_grp=PROC_000033(박)이라 형압 하위공정 **거부**("그룹 하위공정 아님"). → **별도 EMBOSS 컴포넌트 필요**:
-  - 신설 `COMP_EMBOSS_SETUP_LARGE`·`COMP_EMBOSS_PROC_LARGE_STD`(prc_typ=PRICE_TYPE.03·use_dims=`[proc_cd,min_qty,proc_grp:PROC_000050]`)
-  - 그리드=동판/일반박 대형 값 복제(양각·음각), 공식 배선=`PRF_BIND_MUSEON_FOIL`(무선책자)·`PRF_BIND_PUR_FOIL`(PUR책자)에 addtn_yn=Y.
-  - 생성 UI=Django admin `tprcpricecomponents/add`·`tprcformulacomponents/add`(또는 price-formula-md). 백업=`backup/hyungap-BEFORE-*.json`.
+## ★형압(PROC_000050) = 완료 (별도 EMBOSS 컴포넌트 신설·배선·검증)
+- prcs_dtl_opt 크기→가로/세로 integer. 양각(PROC_000051)/음각(PROC_000052)=무선책자·PUR책자(책자=대형).
+- 지니 확정: 형압=박과 동일(동판+**일반박STD** 복제·금유광 소스).
+- **박 컴포넌트가 형압 못 담음**(proc_grp=박) → 별도 EMBOSS 신설로 해결:
+  - 신설 `COMP_EMBOSS_SETUP_LARGE`(128)·`COMP_EMBOSS_PROC_LARGE_STD`(1664) = comp_typ **박형압비(PRC_COMPONENT_TYPE.05)**·prc_typ.03·use_dims `[proc_cd,min_qty,proc_grp:PROC_000050]`.
+  - 그리드=동판/일반박 대형 값 복제(양각·음각). 공식 배선=`PRF_BIND_MUSEON_FOIL`·`PRF_BIND_PUR_FOIL` disp_seq 5·6·addtn_yn=Y.
+  - **검증**: 무선책자 양각 가로90세로90 1000장=동판18,000+가공120,000(구역C)·음각 가로50세로50 200장=11,000+65,000(구역A). 권위 일치.
+- **UI 방법 교훈**: ①컴포넌트 생성=`tprcpricecomponents/add`(hidden set+올바른 폼 submit·use_dims에 proc_grp:PROC_000050) ②공식배선=`tprcpriceformulas/<frm>/change` **인라인 formset**(tprcformulacomponents_set)·comp_cd=**autocomplete select**(옵션 AJAX·빈값)→`<option>` 주입 후 value 설정·TOTAL_FORMS 증가·INITIAL부터 채움. (tprcformulacomponents 단독 add는 404·인라인 전용.)
 
 ## 정책 [HARD] (relitigate 금지·지니)
 - **라이브 DB 직접 적재/psql 쓰기 금지.** 등록·교정=webadmin UI 엔드포인트만(gstack browse). `HUNI_ADMIN_URL=https://huni-admin.printly.co.kr/admin/product-viewer/`(260707 printly 도메인으로 갱신).
