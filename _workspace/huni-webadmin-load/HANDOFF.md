@@ -18,6 +18,8 @@
   - 신설 `COMP_EMBOSS_SETUP_LARGE`(128)·`COMP_EMBOSS_PROC_LARGE_STD`(1664) = comp_typ **박형압비(PRC_COMPONENT_TYPE.05)**·prc_typ.03·use_dims `[proc_cd,min_qty,proc_grp:PROC_000050]`.
   - 그리드=동판/일반박 대형 값 복제(양각·음각). 공식 배선=`PRF_BIND_MUSEON_FOIL`·`PRF_BIND_PUR_FOIL` disp_seq 5·6·addtn_yn=Y.
   - **검증**: 무선책자 양각 가로90세로90 1000장=동판18,000+가공120,000(구역C)·음각 가로50세로50 200장=11,000+65,000(구역A). 권위 일치.
+- **형압 소형**(260707 후속3): `COMP_EMBOSS_SETUP_SMALL`(동판 flat 5000·2행)·`COMP_EMBOSS_PROC_SMALL_STD`(소형 일반박 복제·540행·proc_grp:PROC_000050) 신설·적재. **grill만 준비·미배선/미검증**(형압명함 PRD_000038=미구축 stub·공식0·base 완제품가 "별도설정"·use_yn=N; 활성 명함 형압 사용 0). 형압명함 활성화 시 base 세팅+배선 필요.
+- 형압 컴포넌트 4종 완비: 소형/대형 × SETUP/PROC.
 - **UI 방법 교훈**: ①컴포넌트 생성=`tprcpricecomponents/add`(hidden set+올바른 폼 submit·use_dims에 proc_grp:PROC_000050) ②공식배선=`tprcpriceformulas/<frm>/change` **인라인 formset**(tprcformulacomponents_set)·comp_cd=**autocomplete select**(옵션 AJAX·빈값)→`<option>` 주입 후 value 설정·TOTAL_FORMS 증가·INITIAL부터 채움. (tprcformulacomponents 단독 add는 404·인라인 전용.)
 
 ## 정책 [HARD] (relitigate 금지·지니)
