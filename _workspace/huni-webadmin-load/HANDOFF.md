@@ -1,7 +1,23 @@
 # Huni-Webadmin-Load (§36) HANDOFF — webadmin UI 전용 적재·가격시뮬레이터 완성
 
-> ★다음 시작점: **대형 박 6 comp 전파** + (별도) **박크기 상품별 제약 개발 요청서**. 아래 참조.
+> ★다음 시작점: **형압 별도 컴포넌트 생성+배선**(값 준비됨·아래) + (별도) **박크기 상품별 제약 개발 요청서**.
 > 목표=라이브 DB 직접 적재 금지·오직 webadmin UI로 → 가격시뮬레이터 **예측(권위)=실제·제외0**.
+
+## ★박 확장 = 소형+대형 완료 (260707)
+- **박 소형 3 + 대형 3 = 전부 dim_vals 교정 완료·검증**. use_dims=`[proc_cd,min_qty,proc_grp:PROC_000033]`·siz 0.
+  - 소형: STD1620·SPECIAL540 (명함). 대형: STD3328·SPECIAL3328·SETUP512 (책자·접지카드·쿠폰). SETUP_SMALL만 flat 유지.
+  - 검증: 대형 2단접지카드 금유광 가로90세로90 1000장=동판18,000+박120,000(구역C)·특수홀로그램=150,000·격자밖 제외. 권위 일치.
+- **범위 판별**: `has_proc=t`(공정)만 대상. 포스터·아크릴 17 comp=siz_width/height **정당한 소재 사용·건드리지 말 것**.
+- **★3단계 순서**(대형서 확립): ①use_dims proc_grp 추가+siz 유지 ②그리드 /save(dim_vals·siz 유니크키 clean delete) ③siz 제거.
+  (proc_grp 없이 저장하면 가로/세로 파라미터 미인식; siz 먼저 빼면 orphan.)
+
+## ★형압(PROC_000050) = 진행중·구조 블로커
+- prcs_dtl_opt 크기→가로/세로 integer **완료**. 양각(PROC_000051)/음각(PROC_000052)=무선책자·PUR책자(책자=대형)에 등록.
+- 지니 확정: 형압=박과 동일(동판+**일반박STD** 복제). 값 준비됨=`browser/*.hyungap.js`(금유광 복제·기존+양각+음각).
+- **블로커**: 박 컴포넌트 proc_grp=PROC_000033(박)이라 형압 하위공정 **거부**("그룹 하위공정 아님"). → **별도 EMBOSS 컴포넌트 필요**:
+  - 신설 `COMP_EMBOSS_SETUP_LARGE`·`COMP_EMBOSS_PROC_LARGE_STD`(prc_typ=PRICE_TYPE.03·use_dims=`[proc_cd,min_qty,proc_grp:PROC_000050]`)
+  - 그리드=동판/일반박 대형 값 복제(양각·음각), 공식 배선=`PRF_BIND_MUSEON_FOIL`(무선책자)·`PRF_BIND_PUR_FOIL`(PUR책자)에 addtn_yn=Y.
+  - 생성 UI=Django admin `tprcpricecomponents/add`·`tprcformulacomponents/add`(또는 price-formula-md). 백업=`backup/hyungap-BEFORE-*.json`.
 
 ## 정책 [HARD] (relitigate 금지·지니)
 - **라이브 DB 직접 적재/psql 쓰기 금지.** 등록·교정=webadmin UI 엔드포인트만(gstack browse). `HUNI_ADMIN_URL=https://huni-admin.printly.co.kr/admin/product-viewer/`(260707 printly 도메인으로 갱신).

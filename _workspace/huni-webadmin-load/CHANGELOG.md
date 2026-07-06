@@ -1,5 +1,12 @@
 # Huni-Webadmin-Load (§36) — CHANGELOG (최신 위 PREPEND)
 
+## 2026-07-07 (후속) — 박 대형 차원 교정 완료 + 형압 진행(구조 블로커)
+
+박 방식을 전체로 확장. **라이브 실측으로 범위 확정**: siz_width/height use_dims 쓰는 20 comp 중 `has_proc=t`(공정) 3개(박 대형)만 대상, 나머지 17개(포스터·아크릴)=소재 정당 사용·제외.
+- **박 대형 3 comp 완료**: SETUP_LARGE 512·LARGE_STD 3328·LARGE_SPECIAL 3328 → dim_vals{가로,세로} 결정론 full-sync(권위 후가공_박 대형·verbatim), use_dims siz 제외+proc_grp 보강. **3단계 순서 확립**(use_dims proc_grp+siz유지 → 그리드저장 clean delete → siz제거). 검증: 2단접지카드 금유광 가로90세로90 1000장=동판18,000+박120,000(구역C)·특수150,000·격자밖 제외. 권위 일치.
+- **형압 PROC_000050**: prcs_dtl_opt 크기→가로/세로 integer 완료. 지니 확정=동판+일반박STD 복제(무선책자·PUR책자=책자=대형). 값 준비(금유광 복제). **구조 블로커**: 박 컴포넌트 proc_grp=박이라 형압 하위(양각PROC_000051·음각PROC_000052) 거부 → 별도 EMBOSS 컴포넌트 신설+PRF_BIND_MUSEON/PUR_FOIL 배선 필요(다음). SETUP_LARGE 원상(거부 원자적).
+- 산출물: EXPECTED-FOIL-LARGE.json·browser/*.save.js·*.hyungap.js·backup 3종.
+
 ## 2026-07-07 — 박 소형 차원 교정 = 라이브 완료 (dim_vals·프리미엄명함 파일럿)
 
 지니 지시대로 **siz_width/height(소재 전용) 제외·새 차원(dim_vals 가로/세로)으로 값 이전** 완료(전부 webadmin UI 엔드포인트).
