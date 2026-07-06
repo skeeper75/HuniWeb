@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 """배치 스캔 결과 분석 — 상품별 진단을 문제 버킷으로 분류·랭킹.
-입력: results/all.jsonl (스캐너 산출). 출력: 요약 + 버킷별 상품 목록 + CSV.
-읽기전용 분석. 실 교정은 별도(원인별 하나씩)."""
-import json, csv, collections, sys
+입력: results/all-v4.jsonl (스캐너 v4 산출). 출력: 요약 + 버킷별 + CSV.
+읽기전용 분석. 실 교정은 별도(원인별 하나씩).
+v4 스캐너: 필수공정 자동선택·수량 재시도·final>0 재분류·조합 재시도로 오탐 저감(17→6)."""
+import json, csv, collections, sys, os
 
-ROWS=[json.loads(l) for l in open('_workspace/huni-webadmin-load/batch-scan/results/all.jsonl') if l.strip()]
+_f='_workspace/huni-webadmin-load/batch-scan/results/all-v4.jsonl'
+if not os.path.exists(_f): _f='_workspace/huni-webadmin-load/batch-scan/results/all.jsonl'
+ROWS=[json.loads(l) for l in open(_f) if l.strip()]
 
 # 상품유형 라벨
 TYP={'PRD_TYPE.01':'완제품','PRD_TYPE.02':'반제품','PRD_TYPE.03':'기성'}
@@ -19,13 +22,13 @@ def bucket(r):
     if typ=='PRD_TYPE.02':
         if st=='OK': return 'A_정상'
         return 'B1_반제품_셋트경유(정상가능)'
-    # 완제품(.01) — 실제 견적돼야
+    # 완제품(.01) — 실제 견적돼야 (v4: final>0=OK, final 0/null만 결함)
     if st=='OK': return 'A_정상'
-    if st=='HAS_EXCLUDED': return 'C1_제외있음(차원/배선/셀누락)'
     if st=='ZERO_PRICE':
         if not frm: return 'C2_공식무배선(0원)'
-        return 'C3_공식있으나0원'
+        return 'C3_공식있으나0원(차원/셀/옵션)'
     if st=='NO_PRICE': return 'C4_가격없음'
+    if st=='HAS_EXCLUDED': return 'C1_제외있음(구버전)'
     if st and st.startswith('SIM_HTTP'): return 'D_SIM오류'
     if st in ('META_FAIL','EXC'): return 'D_스캔오류'
     return 'Z_미분류_'+str(st)
