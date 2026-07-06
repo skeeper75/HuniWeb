@@ -68,7 +68,9 @@ MoAI-ADK는 설치돼 있으나 거의 미사용 — 아카이브 `.moai/_archiv
 2. 변경이력: 전체 서술은 하네스 `CHANGELOG.md`에 PREPEND(최신 위), 해당
    `.claude/rules/harness/<slug>.md`의 "변경이력:" 라인을 최신 1줄로 교체.
    **루트 CLAUDE.md는 건드리지 않는다**(새 하네스 추가로 레지스트리 행이 늘 때만 수정).
-3. auto-memory 갱신(비자명한 사실만) + `MEMORY.md` 인덱스.
+3. auto-memory 갱신(비자명한 사실만). 인덱스는 **도메인별 `memory/_index-<domain>.md`만 편집**
+   (active·price-set·price-widget·conformance·session·archive). 얇은 루트 `MEMORY.md`는
+   새 도메인/하네스 추가 시에만(병행 세션 충돌 방지·260706 샤딩).
 4. 커밋(git_commit_messages: ko) — `.env.local` IGNORED 검증 후. Push는 요청 시만.
 
 핸드오프는 재시작 포인터다 — 새 세션이 HANDOFF.md + CHANGELOG만 읽고 재발견 0으로 재개.
@@ -113,6 +115,7 @@ MoAI-ADK는 설치돼 있으나 거의 미사용 — 아카이브 `.moai/_archiv
 | 33 | huni-ontology-kb | `huni-ontology-kb-orchestrator` | 온톨로지 KB·자연어→상품 추천→가격(O1~O7) |
 | 34 | huni-load-governance | `huni-load-governance-orchestrator` | 적재 거버넌스·옵션 3용도 판정(LG1~LG7) |
 | 35 | huni-multibrand-ontology | `huni-multibrand-ontology-orchestrator` | 다중 브랜드 온톨로지·와우/레드 분석·CIP4 표준 상위 온톨로지·교차 연관(MB1~MB7) |
+| 36 | huni-webadmin-load | `huni-webadmin-load-orchestrator` | webadmin UI 전용 적재(직접 DB 금지)·전 메뉴 경로·잘못된 차원 매핑 교정·가격시뮬레이터 예측=실제 |
 
 ---
 
