@@ -1,5 +1,14 @@
 # Huni-Webadmin-Load (§36) — CHANGELOG (최신 위 PREPEND)
 
+## 2026-07-07 (후속8) — 떡메모지 de-set 진단·설계·검증 + 미팅 결정 기록
+
+지니: "셋트=완제품←반제품인데 떡메는 셋트 아님" → 인쇄지식+RED 확인 후 교정. DB읽기전용·WebUI만.
+- ✅ **판정: 떡메모지(097)=껍데기 셋트** — 19셋트 중 유일 **단일구성원**(내지098 자재0/공식0/가격0). 삼중 corroboration(사용자직관 + 가격표 SOT "떡메=사이즈×장수/수량·셋트로 안쪼갬" + **RED 라이브 역공학**=단일 완제품·용지1택·표지없음·가격축 규격×부수×매수).
+- ✅ **명목상-셋트 전수 스캔** `batch-scan/NOMINAL-SET-SCAN.md` — 셋트 19건 4버킷: 진짜셋트8(원자합산)·떡메형1(097)·고정가세트1(엽서북094)·문구류10(172~181·메모패드179). de-set 동형 후보 도출.
+- ✅ **전 사슬 검증(지니 지시)+가격중립 실증** `batch-scan/DESET-SPEC-TTEOKME.md` — 공식 PRF_TTEOKME_FIXED(set플래그 없음)←COMP_TTEOKME(use_dims[siz,bdl_qty,min_qty]·그리드 2×2×28 완비)←상품구성요소(siz2·매수2·mat백색모조120·떡제본·단면). 098 전참조=sets 외 고아. **셋트경로=단일경로 동일가 실측**(43,200/39,600/66,000/19,200·제외0) → de-set 리그레션0 증명.
+- ⚠️ **실행 BLOCKER(미결정)**: 셋트행 t_prd_product_sets 논리삭제 경로가 WebUI에 없음(복합PK 인라인=물리삭제만·`admin.py:911-914`·del_yn 미노출·clean 강제"N"). 098 상품 삭제=논리삭제지만 098만으론 de-set 안됨(`_set_members_meta`가 셋트행 del_yn만 봄·`price_views.py:1718`). 두 갈래=(a)셋트행 WebUI 물리삭제 수용 (b)DEV-REQUEST([W-04] 이식). raw/webadmin 코드 수정 금지·DB 직접 금지 [HARD] 확정. **앞선 ui-loader 에이전트 "DELETE 체크박스 없음" 오진단=라이브 HTML(`tprdproductsets_set-0-DELETE` 실재)로 자기교정**(생성≠검증).
+- ✅ **미팅 결정 6항 기록** `_workspace/_foundation/MEETING-NOTES-260707.md` + 항목3(카테고리·자재·공정 정본=DB관리자 입력·엑셀 아님) 메모리化.
+
 ## 2026-07-07 (후속7) — 상품↔사이즈 매핑 감사(인쇄도메인·블리드) + 비규격(사용자입력) 정합
 
 지니: 사이즈 태그·상품뷰어 매핑 전수 확인(이름 같아도 작업사이즈 다름) → 비규격 nonspec_yn 정합.
