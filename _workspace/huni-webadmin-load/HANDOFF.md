@@ -1,80 +1,44 @@
-# Huni-Webadmin-Load (§36) HANDOFF — webadmin UI 전용 적재·가격시뮬레이터 완성
+# Huni-Webadmin-Load (§36) HANDOFF — webadmin UI 전용 적재·가격시뮬레이터·드리프트·사이즈 정합
 
-> ★다음 시작점: **드리프트 전수 스캐너**(상품 base코드≠가격 base코드 전상품 탐지) → 나머지 결함 발견·교정.
-> 또는: 박크기 상품별 제약 개발요청서·커버리지 갭(펄박/백박/대형 금무광은무광)·형압명함 활성화.
-> 목표=라이브 DB 직접 적재 금지·오직 webadmin UI로 → 가격시뮬레이터 **예측(권위)=실제·제외0**.
+> ★다음 시작점 후보(택1):
+> 1. **사이즈 WRONG_CODE 4건 교정**(스티커 059/060/053→SIZ_000426·맥세이프151→SIZ_000559) — 그리드 결합(아래 블로커).
+> 2. **폼보드(129) 비규격 완성** — 방금 nonspec_yn=Y 플립·범위 미설정+커스텀 가격(면적가) 미배선.
+> 3. **데이터 위생** — WORK_NULL 115·MULTI_DFLT 86·미태깅 421·규격-0size 48·테스트태그 SIZ_000510.
+> 4. **무공식 57**(굿즈 가격 미구축·별도 트랙).
+> 목표=라이브 DB 직접 적재 금지·webadmin UI로만 → 시뮬레이터 예측(권위)=실제·제외0.
 
-## ★전상품 결함 진단·교정 = 5 전부 완료 (260707)
-배치 스캐너(batch-scan/·v4)로 260상품 진단→진짜결함 6→5교정(화이트인쇄명함=오탐). **상세=batch-scan/DEFECT-FUNNEL.md**.
-- ✅ **모양명함**(PRD_000035): COMP_NAMECARD_SHAPE siz 재키 SIZ_000008→147(작업100x60·모양명함·[[size-dedup-by-work-dimension-not-name-260707]]). 단면18000·양면19000.
-- ✅ **봉투제작**(PRD_000050): ①COMP_ENV_MAKING 레자크 mat 재키 168→595·169→596 ②4사이즈 등록(티켓191·소192·자켓193·대194). 티켓모조1000=96000.
-- ✅ **반칼홀로그램스티커**(PRD_000054): 스티커 반칼 판수표(A6=8판·A4=2판·A5=4판×홀로×36수량=108행) 개별 add. A6·100=670000.
-- ✅ **낱장투명스티커**(PRD_000056): 스티커 낱장 사이즈표(A4/A3/A2×수량=18행) 개별 add. A4·1=7000·A2·1=28000.
-- ✅ **머그컵**(PRD_000193): 굿즈=직접가 t_prd_product_prices 6500(공식 아님·source/ kind=price). 1개=6500.
-- **★체계적 근본원인**: 상품 등록 base코드 ≠ 가격 적재 base코드(드리프트). 상품코드가 정본→가격을 상품에 정합. 검증쌍 MAT 595=168·596=169·590=163 / SIZ 147≠008(작업치수 별개).
-- **스캐너 한계**: v4는 final=0만 잡음(어떤 조합도 0). **일부 조합만 되는 드리프트는 놓침** → 드리프트 전수 스캐너(상품 siz/mat vs 구성요소 커버리지 diff) 필요.
-- **적재 방법**(재사용): 그리드 재키=comp/save(소규모)·공유대규모=개별 add(tprccomponentprices/add·기존무영향)·직접가=source/(kind=price)·컴포넌트신설=tprcpricecomponents/add·공식배선=tprcpriceformulas change 인라인.
+## ★도구 2종 (raw/webadmin/tools/·결정론·읽기전용·exit0/1)
+- **`verify_price_coverage.py`** — 가격 커버리지 드리프트. base 구성요소 use_dims 차원마다 상품 등록값이 t_prc_component_prices에 **값별 any-row-exists**인지 검사. 상관차원 오탐0(브라우저 대체). 실행 `../.venv/bin/python tools/verify_price_coverage.py [--prd|--json]`. **현재 전수 DRIFT 0.**
+- **`verify_size_mapping.py`** — 상품↔사이즈 매핑 정합. **재단사이즈 그룹 + 블리드 + 비규격 인지**. `--only WRONG_CODE|TAG_MISMATCH|WORK_NULL|MULTI_DFLT`. WRONG_CODE 4·기타 다수.
+- 브라우저 스캐너 `batch-scan/drift_scan.js`(gen_drift·run_drift·analyze_drift)=런타임 실엔진 교차검증 보조(상관차원 오탐 있음·판정은 결정론 우선).
 
-## ★전상품 배치 진단 스캐너 = 구축·v4 개선 완료 (260707)
-- **도구**(`batch-scan/`·재사용): scan_body.js(v4)·gen_scan.py(슬라이스)·run_all.sh(배치)·analyze.py. 읽기전용. 사용법=DEFECT-FUNNEL.md.
-- **v4 4대 오탐저감 개선**: ①필수공정 자동선택(그룹당1=제본·빈detail) ②수량 재시도(below_min_qty→≤5000) ③final>0 재분류(옵션 add-on 제외 정상) ④조합 재시도(기본옵션0→대체조합).
-- **260 v4 재스캔**: 정상**205**(v1 162)·기성15·반제품34·**진짜결함 6**(real-defects-v4.csv). 오탐 43 자동제거.
-- **진짜 결함 6**: 모양명함(siz_cd 147vs008 dedup)·화이트인쇄명함(base 무매칭)·봉투제작(상품siz 0등록)·반칼홀로그램스티커·낱장투명스티커(siz불일치)·머그컵(공식0).
-- **다음(수정 루프)**: 6개 하나씩 원인실측→권위확인→webadmin교정→재스캔. siz_cd불일치는 §17 dedup 정본. 머그컵=base 완제품가 권위 필요.
+## ★드리프트 전수 = 완결·DRIFT 0 (실 7건 교정)
+5유형(재키·미적재·과등록·구조복원·오탐). 상세=`batch-scan/DRIFT-SCAN.md`·`PREMIUM-NAMECARD-DRIFT-FIX.md`·대시보드 `batch-scan/drift-dashboard.html`.
+- 프리미엄명함(031)=mat 재키 113→347 등 16행 / 반칼팬시(062)=siz 058=A6/057 8판 복사 180행 / 폰스트랩(220)=siz 428 과등록 제거 / 화이트인쇄명함(040)=인쇄옵션 단면/양면 2행 구조복원+opt_cd 490→810 / 아크릴마그넷·집게·머리끈(147/149/154)=부자재-as-소재 과등록 제거(후가공 add-on 800/700/500 유지).
+- 폼보드·포맥스보드=상관차원 오탐(가격 정상·무조치).
+- method-skill `hwl-drift-remediation`(§36) 추가.
 
-## ★박 확장 = 소형+대형 완료 (260707)
-- **박 소형 3 + 대형 3 = 전부 dim_vals 교정 완료·검증**. use_dims=`[proc_cd,min_qty,proc_grp:PROC_000033]`·siz 0.
-  - 소형: STD1620·SPECIAL540 (명함). 대형: STD3328·SPECIAL3328·SETUP512 (책자·접지카드·쿠폰). SETUP_SMALL만 flat 유지.
-  - 검증: 대형 2단접지카드 금유광 가로90세로90 1000장=동판18,000+박120,000(구역C)·특수홀로그램=150,000·격자밖 제외. 권위 일치.
-- **범위 판별**: `has_proc=t`(공정)만 대상. 포스터·아크릴 17 comp=siz_width/height **정당한 소재 사용·건드리지 말 것**.
-- **★3단계 순서**(대형서 확립): ①use_dims proc_grp 추가+siz 유지 ②그리드 /save(dim_vals·siz 유니크키 clean delete) ③siz 제거.
-  (proc_grp 없이 저장하면 가로/세로 파라미터 미인식; siz 먼저 빼면 orphan.)
+## ★사이즈 감사 (지니 인쇄도메인 렌즈) — 진단완·교정 대기
+상세=`batch-scan/SIZE-AUDIT.md`. **사이즈=재단사이즈·작업사이즈=재단+블리드**(용도별 다름: 엽서1·전단지2·반칼스티커0).
+- **WRONG_CODE 4(고신뢰·블리드 근거)**: 053/059/060 스티커=엽서/전단지 코드(블리드2/4)→**SIZ_000426 스티커(블리드0)** · 151 맥세이프=미니모양명함(블리드10)→**SIZ_000559 아크릴키링(블리드0)**.
+  - 권위=pangeori row78(반칼스티커 A5 작업148x210·블리드0·아이마크 사방10mm).
+  - 반칼원형(058)은 정상 SIZ_000426 매핑(대조 확인).
+- **★교정 블로커(스티커)**: COMP_STK_PRINT 가격그리드 A5가 SIZ_000007(엽서·15소재·540행)에 지어짐·SIZ_000426은 1소재(36행). 상품 매핑만 426으로 바꾸면 **가격 깨짐** → 그리드 540행 007→426 재키 동반 필요(dedup·공유 컴포넌트). 실행 방식 결정 대기.
+- 맥세이프(151)=아크릴 면적가(siz_width/height)+비규격 → 별도 트랙.
+- 기타 버킷: TAG_MISMATCH 55(검토·오탐 있음)·WORK_NULL 115·MULTI_DFLT 86·미태깅 421.
 
-## ★형압(PROC_000050) = 완료 (별도 EMBOSS 컴포넌트 신설·배선·검증)
-- prcs_dtl_opt 크기→가로/세로 integer. 양각(PROC_000051)/음각(PROC_000052)=무선책자·PUR책자(책자=대형).
-- 지니 확정: 형압=박과 동일(동판+**일반박STD** 복제·금유광 소스).
-- **박 컴포넌트가 형압 못 담음**(proc_grp=박) → 별도 EMBOSS 신설로 해결:
-  - 신설 `COMP_EMBOSS_SETUP_LARGE`(128)·`COMP_EMBOSS_PROC_LARGE_STD`(1664) = comp_typ **박형압비(PRC_COMPONENT_TYPE.05)**·prc_typ.03·use_dims `[proc_cd,min_qty,proc_grp:PROC_000050]`.
-  - 그리드=동판/일반박 대형 값 복제(양각·음각). 공식 배선=`PRF_BIND_MUSEON_FOIL`·`PRF_BIND_PUR_FOIL` disp_seq 5·6·addtn_yn=Y.
-  - **검증**: 무선책자 양각 가로90세로90 1000장=동판18,000+가공120,000(구역C)·음각 가로50세로50 200장=11,000+65,000(구역A). 권위 일치.
-- **형압 소형**(260707 후속3): `COMP_EMBOSS_SETUP_SMALL`(동판 flat 5000·2행)·`COMP_EMBOSS_PROC_SMALL_STD`(소형 일반박 복제·540행·proc_grp:PROC_000050) 신설·적재. **grill만 준비·미배선/미검증**(형압명함 PRD_000038=미구축 stub·공식0·base 완제품가 "별도설정"·use_yn=N; 활성 명함 형압 사용 0). 형압명함 활성화 시 base 세팅+배선 필요.
-- 형압 컴포넌트 4종 완비: 소형/대형 × SETUP/PROC.
-- **UI 방법 교훈**: ①컴포넌트 생성=`tprcpricecomponents/add`(hidden set+올바른 폼 submit·use_dims에 proc_grp:PROC_000050) ②공식배선=`tprcpriceformulas/<frm>/change` **인라인 formset**(tprcformulacomponents_set)·comp_cd=**autocomplete select**(옵션 AJAX·빈값)→`<option>` 주입 후 value 설정·TOTAL_FORMS 증가·INITIAL부터 채움. (tprcformulacomponents 단독 add는 404·인라인 전용.)
+## ★비규격(nonspec_yn) — 폼보드 플립 완료
+- **권위 신호 = 상품마스터 사이즈옵션 "사용자입력"**(실사15+아크릴12=27종). 라이브 활성 24종 이미 Y·**폼보드(129)만 N→Y 플립 완료**(Django admin·DB확인). 포맥스보드=사용자입력 없음(규격) N 유지 정확.
+- ⚠️ 폼보드 후속: 비규격 범위(nonspec_width/height) 미설정·커스텀 가격(COMP_POSTER_FOAMBOARD_BOARD siz_cd 키잉→면적가) 미지원. 사용자입력 사이즈는 현재 0원.
+- 편집 경로: `/admin/catalog/tprdproducts/<prd>/change/` nonspec_yn SELECT(Y/N).
 
 ## 정책 [HARD] (relitigate 금지·지니)
-- **라이브 DB 직접 적재/psql 쓰기 금지.** 등록·교정=webadmin UI 엔드포인트만(gstack browse). `HUNI_ADMIN_URL=https://huni-admin.printly.co.kr/admin/product-viewer/`(260707 printly 도메인으로 갱신).
-- 착수 전 **preflight 필수**: `python3 _workspace/huni-webadmin-load/preflight.py "<상품명>"`. 추측·재질문 금지.
-- **★전 사슬 확인**(지니): 가격공식 ← 가격구성요소 / 상품구성요소 / 기준마스터 모두 점검 후 시뮬레이터 검증.
-- **siz_width/siz_height = 소재(자재) 전용 차원**. 가공(박·형압)의 가로/세로는 **공정상세옵션→dim_vals**(재사용 금지).
-
-## ★박 소형 교정 = 완료 (프리미엄명함 파일럿·260707)
-- **PROC_000033 prcs_dtl_opt**: "크기" → 가로·세로(**integer**·mm·price_dim 없음). integer 필수(_norm str 매칭·오시 동형).
-- **COMP_FOIL_PROC_SMALL_STD(1620)·SPECIAL(540)**: siz_width/height 컬럼→dim_vals{가로,세로} 이전, siz 컬럼 NULL,
-  use_dims=`[proc_cd, min_qty, proc_grp:PROC_000033]`(siz 제외·SPECIAL은 proc_grp 보강). SETUP_SMALL 무변경.
-- **검증 통과**: 실화면 금유광 가로40세로40 200장 → 박17,800+동판5,000, 최종 31,800, **제외0**. 권위 B03 일치(19,200·22,700·14,300도).
-- 상세·교훈=`REMAP-SPEC-FOIL-SMALL.md`. 값=권위 verbatim(EXPECTED-FOIL-SMALL.json 504행).
-
-## ★적재 순서 교훈 [HARD] (재발방지)
-- **그리드 저장 → use_dims siz 제거 순서 필수.** 역순=자연키 붕괴→orphan(empty dim_vals) 잔존→ERR_AMBIGUOUS.
-  (SPECIAL에서 발생·복구: siz 임시복원→페이로드 재저장(orphan 전삭제)→siz 재제거.)
-- use_dims 편집기(OrderedDimsWidget) 함정: 페이지에 form 2개(logout-form·tprcpricecomponents_form).
-  **반드시 `document.getElementById('tprcpricecomponents_form')` 타겟**(querySelector('form')=logout→세션끊김).
-  hidden 직접set은 위젯 re-sync에 덮임 → available 항목 .click()으로 이동 후 올바른 폼 submit.
-
-## 다음 세션 순서
-1. **대형 박 전파**: COMP_FOIL_PROC_LARGE_STD/SPECIAL·SETUP_LARGE. 대형은 siz 컬럼 사용/동판 구간별 여부 preflight 먼저.
-   PROC_000050(형압)도 "크기"→가로/세로 동형(명함 미사용이라 후속). 순서=그리드 저장→use_dims 정리(위 교훈).
-2. **박크기 상품별 min/max 제약 = 개발 요청서**: 제약엔진 VAR_KEY_MAP(7차원)에 siz_width/height 없음·범위 규칙유형 없음.
-   상품군마다 박 상한 다름(명함 세로≤50) → 코드 확장 필요(§31 또는 개발 전달). 현재는 격자상한 40/80 자동 ERR_ABOVE_MAX만 방어.
-3. **커버리지 갭**: 일반박 펄박(PROC_000045)·특수박 백박(PROC_000046) 단가행 누락 보완 판단.
-4. 위젯 레이어: dim_vals 정확매칭이라 손님 격자밖(35mm) 입력 시 no_match → 위젯이 tier 제시/올림(프런트).
-
-## 산출물 (260706~07)
-- `REMAP-SPEC-FOIL-SMALL.md`(완료 실적재본·교훈)·`EXPECTED-FOIL-SMALL.json`·`WEBADMIN-LOAD-PATH-MAP.md`·`preflight.py`.
-- `tmp/foil-remap/`(페이로드·browser 스크립트·백업 2168행).
-- 에이전트5·오케스트레이터 스킬·rules §36.
+- 라이브 DB 직접 적재/psql 쓰기 금지. 등록·교정=webadmin UI만(gstack). 검증 SELECT만 psql 허용.
+- 착수 전 preflight. 권위=상품마스터 260703+가격표 260705(+pangeori 판걸이수). **최신버전 검증 선행**(재추출/diff).
+- **사이즈=재단사이즈·작업사이즈=재단+블리드**(소재/상품/인쇄방식별)·**"사용자입력"=비규격**·**부자재 add-on 확인**(과등록 판정).
+- 전 사슬 확인: 가격공식←구성요소/상품구성요소/기준마스터 점검 후 시뮬 검증.
 
 ## 라이브 상태 / 건드리지 말 것
-- 박 소형 3 comp = **교정 완료**(위 상태). 되돌리지 말 것.
-- 결함1(아크릴 수량할인 배선)·결함3(책자내지 PROC_000004)= 정책 전 COMMIT·검증완·유지.
-- raw/webadmin 코드 = 무수정. `.env.local` IGNORED 검증됨(HUNI_ADMIN_URL printly로 갱신).
+- 드리프트 교정 7건·폼보드 nonspec Y = 완료·되돌리지 말 것.
+- 사이즈 WRONG_CODE 4건 = **미교정**(그리드 결합 결정 대기).
+- 브라우저 세션 불안정(재시작 시 재로그인 필요·`HUNI_ADMIN_*`). `.env.local` IGNORED.

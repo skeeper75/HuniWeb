@@ -1,0 +1,261 @@
+bucket,prd_cd,nm,typ,frm,baseline_final,swept_dims,covered,uncovered,missing_dims
+DRIFT,PRD_000031,프리미엄명함,완제품,PRF_NAMECARD_PREMIUM_FOIL,4500,print_opt_cd|mat_cd,8,8,
+DRIFT,PRD_000062,반칼팬시스티커,완제품,PRF_STK_FIXED,45600,siz_cd|mat_cd,7,1,
+DRIFT,PRD_000129,폼보드,완제품,PRF_POSTER_FOAMBOARD,12000,siz_cd|mat_cd,3,3,
+DRIFT,PRD_000130,포맥스보드,완제품,PRF_POSTER_FOMEXBOARD,8500,siz_cd|mat_cd,3,3,
+DRIFT,PRD_000220,폰스트랩,완제품,PRF_GOODS_FIXED_SIZ,4500,siz_cd,2,1,
+MISSING_DIM_DRIFT,PRD_000040,화이트인쇄명함,완제품,PRF_NAMECARD_WHITE,0,,,,print_opt_cd
+CLEAN,PRD_000016,프리미엄엽서,완제품,PRF_DGP_A,6071,print_opt_cd|mat_cd,23,0,plt_siz_cd
+CLEAN,PRD_000017,코팅엽서,완제품,PRF_DGP_A,4078,print_opt_cd|mat_cd,4,0,plt_siz_cd
+CLEAN,PRD_000018,스탠다드엽서,완제품,PRF_DGP_A,4071,print_opt_cd|mat_cd,9,0,plt_siz_cd
+CLEAN,PRD_000019,투명엽서,완제품,PRF_DGP_A,8100,print_opt_cd|mat_cd,3,0,plt_siz_cd
+CLEAN,PRD_000020,화이트인쇄엽서,완제품,PRF_DGP_A,1243,print_opt_cd|mat_cd,6,0,plt_siz_cd|coat_side_cnt
+CLEAN,PRD_000024,포토카드,완제품,PRF_PHOTOCARD_NORMAL,6000,siz_cd|opt_cd|bdl_qty,4,0,
+CLEAN,PRD_000025,투명포토카드,완제품,PRF_PHOTOCARD_CLEAR,8500,siz_cd|bdl_qty,2,0,
+CLEAN,PRD_000026,종이슬로건,완제품,PRF_DGP_A,4093,print_opt_cd|mat_cd,3,0,plt_siz_cd
+CLEAN,PRD_000027,2단접지카드,완제품,PRF_DGP_E_FOIL,9341,print_opt_cd|mat_cd,15,0,plt_siz_cd
+CLEAN,PRD_000029,3단접지카드,완제품,PRF_DGP_E_FOIL,13112,print_opt_cd|mat_cd,15,0,plt_siz_cd
+CLEAN,PRD_000030,지그재그엽서,완제품,PRF_DGP_C_6CR,18348,print_opt_cd|mat_cd,2,0,plt_siz_cd
+CLEAN,PRD_000032,코팅명함,완제품,PRF_NAMECARD_COAT,5500,print_opt_cd|mat_cd,4,0,
+CLEAN,PRD_000033,스탠다드명함,완제품,PRF_NAMECARD_FIXED,3500,print_opt_cd|mat_cd,7,0,
+CLEAN,PRD_000034,펄명함,완제품,PRF_NAMECARD_PEARL_FOIL,9000,print_opt_cd|mat_cd,6,0,
+CLEAN,PRD_000035,모양명함,완제품,PRF_NAMECARD_SHAPE,18000,siz_cd|print_opt_cd,3,0,
+CLEAN,PRD_000036,미니모양명함,완제품,PRF_NAMECARD_MINISHAPE,16000,siz_cd|print_opt_cd,3,0,
+CLEAN,PRD_000054,반칼 자유형 홀로그램스티커,완제품,PRF_STK_FIXED,58400,siz_cd|mat_cd,4,0,
+CLEAN,PRD_000055,낱장 자유형 스티커,완제품,PRF_STK_FIXED,4000,siz_cd|mat_cd,4,0,
+CLEAN,PRD_000056,낱장 자유형 투명스티커,완제품,PRF_STK_FIXED,28000,siz_cd|mat_cd,4,0,
+CLEAN,PRD_000057,대형 자유형 스티커,완제품,PRF_STK_FIXED,16000,siz_cd|mat_cd,2,0,
+CLEAN,PRD_000058,반칼원형스티커,완제품,PRF_STK_FIXED,23200,siz_cd|mat_cd,7,0,
+CLEAN,PRD_000059,반칼정사각스티커,완제품,PRF_STK_FIXED,23200,siz_cd|mat_cd,7,0,
+CLEAN,PRD_000060,반칼직사각스티커,완제품,PRF_STK_FIXED,23200,siz_cd|mat_cd,7,0,
+CLEAN,PRD_000061,반칼띠지스티커,완제품,PRF_STK_FIXED,23200,siz_cd|mat_cd,7,0,
+CLEAN,PRD_000065,스티커팩,완제품,PRF_STK_PACK,4000,siz_cd,1,0,
+CLEAN,PRD_000066,합판도무송스티커,완제품,PRF_GANGPAN_FIXED,20000,siz_cd|mat_cd,43,0,
+CLEAN,PRD_000067,타투스티커,완제품,PRF_STK_TATTOO,6000,siz_cd|mat_cd,2,0,
+CLEAN,PRD_000068,중철책자,완제품,PRF_BIND_SUM,6000,,0,0,
+CLEAN,PRD_000069,무선책자,완제품,PRF_BIND_MUSEON_FOIL,6000,,0,0,
+CLEAN,PRD_000070,PUR책자,완제품,PRF_BIND_PUR_FOIL,10000,,0,0,
+CLEAN,PRD_000071,트윈링책자,완제품,PRF_BIND_TWINRING,4000,,0,0,
+CLEAN,PRD_000072,하드커버책자,완제품,PRF_HC_MUSEON_SET,34100,,0,0,
+CLEAN,PRD_000077,레더 하드커버책자,완제품,PRF_HC_MUSEON_SET,34100,,0,0,
+CLEAN,PRD_000082,하드커버 링책자,완제품,PRF_HC_TWINRING_SET,30000,,0,0,
+CLEAN,PRD_000088,레더 링바인더,완제품,PRF_LEATHER_RINGBINDER_SET,34100,,0,0,
+CLEAN,PRD_000094,엽서북,완제품,PRF_PCB_FIXED,23000,siz_cd|print_opt_cd|opt_cd,7,0,
+CLEAN,PRD_000097,떡메모지,완제품,PRF_TTEOKME_FIXED,18000,siz_cd|bdl_qty,4,0,
+CLEAN,PRD_000100,포토북 [디자인명],완제품,PRF_PHOTOBOOK_FIXED,12000,siz_cd|opt_cd,7,0,
+CLEAN,PRD_000108,탁상형캘린더,완제품,PRF_DGP_CAL_DESK,11062,print_opt_cd|mat_cd,9,0,plt_siz_cd
+CLEAN,PRD_000109,미니탁상형캘린더,완제품,PRF_DGP_CAL_DESK,10562,print_opt_cd|mat_cd,8,0,plt_siz_cd
+CLEAN,PRD_000110,엽서캘린더,완제품,PRF_DGP_INNER,4062,print_opt_cd|mat_cd,11,0,plt_siz_cd
+CLEAN,PRD_000111,벽걸이캘린더,완제품,PRF_DGP_CAL_WIDE,9071,print_opt_cd|mat_cd,24,0,plt_siz_cd
+CLEAN,PRD_000112,와이드벽걸이캘린더,완제품,PRF_DGP_CAL_WIDE,9649,print_opt_cd|mat_cd,5,0,plt_siz_cd
+CLEAN,PRD_000118,아트프린트포스터,완제품,PRF_POSTER_ARTPRINT,12000,,0,0,siz_width|siz_height
+CLEAN,PRD_000119,아트페이퍼포스터,완제품,PRF_POSTER_ARTPAPER,12000,,0,0,siz_width|siz_height
+CLEAN,PRD_000120,방수포스터,완제품,PRF_POSTER_WATERPROOF,12000,,0,0,siz_width|siz_height
+CLEAN,PRD_000121,접착방수포스터,완제품,PRF_POSTER_ADH_WP,12000,,0,0,siz_width|siz_height
+CLEAN,PRD_000122,접착투명포스터,완제품,PRF_POSTER_ADH_CLEAR,16000,,0,0,siz_width|siz_height
+CLEAN,PRD_000123,아트패브릭포스터,완제품,PRF_POSTER_ARTFABRIC,12000,,0,0,siz_width|siz_height
+CLEAN,PRD_000124,린넨패브릭포스터,완제품,PRF_POSTER_LINEN,17000,opt_cd,6,0,siz_width|siz_height
+CLEAN,PRD_000125,캔버스패브릭포스터,완제품,PRF_POSTER_CANVAS,19000,,0,0,siz_width|siz_height
+CLEAN,PRD_000126,레더아트프린트,완제품,PRF_POSTER_LEATHER_AP,19000,,0,0,siz_width|siz_height
+CLEAN,PRD_000127,타이벡프린트,완제품,PRF_POSTER_TYVEK,19000,,0,0,siz_width|siz_height
+CLEAN,PRD_000128,메쉬프린트,완제품,PRF_POSTER_MESH,19000,,0,0,siz_width|siz_height
+CLEAN,PRD_000131,프레임리스우드액자,완제품,PRF_POSTER_FRAMELESS,16000,siz_cd,2,0,
+CLEAN,PRD_000132,레더아트액자,완제품,PRF_POSTER_LEATHER_FRAME,16000,siz_cd,6,0,
+CLEAN,PRD_000133,캔버스 행잉포스터,완제품,PRF_POSTER_CANVAS_HANGING,6000,siz_cd|opt_cd,5,0,siz_width|siz_height
+CLEAN,PRD_000134,린넨 우드봉 족자,완제품,PRF_POSTER_LINEN_WOODBONG,6000,siz_cd|opt_cd,5,0,
+CLEAN,PRD_000135,족자포스터,완제품,PRF_POSTER_JOKJA,13000,siz_cd|opt_cd,9,0,
+CLEAN,PRD_000136,PET배너,완제품,PRF_POSTER_PET_BANNER,22000,siz_cd|mat_cd,4,0,
+CLEAN,PRD_000137,메쉬배너,완제품,PRF_POSTER_MESH_BANNER,38000,siz_cd,1,0,
+CLEAN,PRD_000138,일반현수막,완제품,PRF_POSTER_BANNER_N,11000,opt_cd,11,0,siz_width|siz_height
+CLEAN,PRD_000139,메쉬현수막,완제품,PRF_POSTER_BANNER_M,20000,opt_cd,3,0,siz_width|siz_height
+CLEAN,PRD_000140,무광시트커팅,완제품,PRF_POSTER_SHEETCUT_MATTE,32000,siz_cd,3,0,
+CLEAN,PRD_000141,홀로그램 시트커팅,완제품,PRF_POSTER_SHEETCUT_HOLO,8000,siz_cd,3,0,
+CLEAN,PRD_000142,유광아크릴스티커,완제품,PRF_POSTER_ACRYLSTK_GLOSS,9000,siz_cd,4,0,
+CLEAN,PRD_000143,미러아크릴스티커,완제품,PRF_POSTER_ACRYLSTK_MIRROR,11000,siz_cd,4,0,
+CLEAN,PRD_000144,미니보드스탠딩,완제품,PRF_POSTER_MINI_STANDBOARD,15500000,siz_cd,3,0,
+CLEAN,PRD_000145,미니배너,완제품,PRF_POSTER_MINI_BANNER,17500000,siz_cd,2,0,
+CLEAN,PRD_000146,아크릴키링,완제품,PRF_ACRYL_KEYRING,2500,mat_cd,1,0,siz_width|siz_height|opt_cd
+CLEAN,PRD_000147,아크릴마그넷,완제품,PRF_ACRYL_MAGNET,3300,mat_cd|opt_cd,3,0,siz_width|siz_height
+CLEAN,PRD_000148,아크릴뱃지,완제품,PRF_CLR_ACRYL,2500,mat_cd,1,0,siz_width|siz_height
+CLEAN,PRD_000149,아크릴집게,완제품,PRF_ACRYL_CLIP,3200,mat_cd|opt_cd,3,0,siz_width|siz_height
+CLEAN,PRD_000150,아크릴스마트톡,완제품,PRF_CLR_ACRYL,2500,mat_cd,1,0,siz_width|siz_height
+CLEAN,PRD_000151,맥세이프 스마트톡,완제품,PRF_CLR_ACRYL,2500,mat_cd,1,0,siz_width|siz_height
+CLEAN,PRD_000152,아크릴명찰,완제품,PRF_CLR_ACRYL,2500,mat_cd,1,0,siz_width|siz_height
+CLEAN,PRD_000153,아크릴명찰(골드실버),완제품,PRF_ACRYL_NAMETAG_GS,3400,siz_cd,3,0,
+CLEAN,PRD_000154,아크릴 머리끈,완제품,PRF_ACRYL_HAIRBAND,3000,mat_cd|opt_cd,3,0,siz_width|siz_height
+CLEAN,PRD_000155,아크릴볼펜,완제품,PRF_ACRYL_BALLPEN,2200,siz_cd,3,0,
+CLEAN,PRD_000156,아크릴지비츠,완제품,PRF_ZIBITZ_ACRYL,16000,opt_cd,2,0,
+CLEAN,PRD_000157,아크릴네임택,완제품,PRF_CLR_ACRYL,2500,mat_cd,1,0,siz_width|siz_height
+CLEAN,PRD_000158,아크릴 포카키링,완제품,PRF_CLR_ACRYL,2500,mat_cd,1,0,siz_width|siz_height
+CLEAN,PRD_000160,아크릴자유형스탠드,완제품,PRF_ACRYL_FREESTAND,8800,siz_cd,5,0,
+CLEAN,PRD_000161,판아크릴,완제품,PRF_CLR_ACRYL,2500,mat_cd,1,0,siz_width|siz_height
+CLEAN,PRD_000162,아크릴포카스탠드,완제품,PRF_CLR_ACRYL,2500,mat_cd,1,0,siz_width|siz_height
+CLEAN,PRD_000163,아크릴미니파츠,완제품,PRF_ACRYL_MINIPART,10000,siz_cd,1,0,
+CLEAN,PRD_000166,아크릴카라비너,완제품,PRF_ACRYL_CARABINER,5800,siz_cd,4,0,
+CLEAN,PRD_000172,만년다이어리(소프트커버),완제품,PRF_STN_DIARY_SOFT,9000,siz_cd,1,0,
+CLEAN,PRD_000173,만년다이어리(하드커버),완제품,PRF_STN_DIARY_HARD,12000,siz_cd,1,0,
+CLEAN,PRD_000174,만년다이어리(레더하드커버),완제품,PRF_STN_DIARY_LHARD,15000,siz_cd,1,0,
+CLEAN,PRD_000175,만년다이어리(레더소프트커버),완제품,PRF_STN_DIARY_LSOFT,15000,siz_cd,1,0,
+CLEAN,PRD_000176,먼슬리플래너,완제품,PRF_STN_MONTHLY,12000,siz_cd,1,0,
+CLEAN,PRD_000178,스프링수첩,완제품,PRF_STN_SPRINGNOTEBK,12000,siz_cd,1,0,
+CLEAN,PRD_000179,메모패드,완제품,PRF_STN_MEMOPAD,5000,siz_cd,2,0,
+CLEAN,PRD_000181,중철노트,완제품,PRF_STN_JUNGCHEOL,10000,siz_cd,1,0,
+CLEAN,PRD_000183,틴거울,완제품,,3000,,0,0,
+CLEAN,PRD_000184,컴팩트거울,완제품,,3600,,0,0,
+CLEAN,PRD_000185,카드거울,완제품,,7500,,0,0,
+CLEAN,PRD_000186,사각손거울,완제품,PRF_GOODS_FIX_186,5000,siz_cd,3,0,
+CLEAN,PRD_000187,블랙사각손거울,완제품,PRF_GOODS_FIX_187,6000,siz_cd,3,0,
+CLEAN,PRD_000188,레더코스터,완제품,,3300,,0,0,
+CLEAN,PRD_000189,코르크코스터,완제품,,3000,,0,0,
+CLEAN,PRD_000190,우드코스터,완제품,,7000,,0,0,
+CLEAN,PRD_000191,린넨패브릭코스터,완제품,,4500,,0,0,
+CLEAN,PRD_000192,규조토코스터,완제품,,5000,,0,0,
+CLEAN,PRD_000193,머그컵,완제품,,6500,,0,0,
+CLEAN,PRD_000194,워터북보틀,완제품,PRF_GOODS_FIXED_SIZ,9000,siz_cd,2,0,
+CLEAN,PRD_000195,벨벳쿠션,완제품,PRF_GOODS_FIXED_SIZ,15000,siz_cd,2,0,
+CLEAN,PRD_000196,레더여권케이스,완제품,,5000,,0,0,
+CLEAN,PRD_000197,미니매트,완제품,,16000,,0,0,
+CLEAN,PRD_000198,피크닉매트,완제품,PRF_GOODS_FIXED_SIZ,40000,siz_cd,2,0,
+CLEAN,PRD_000200,핀버튼,완제품,PRF_GOODS_FIXED_SIZ,3600,siz_cd,2,0,
+CLEAN,PRD_000201,레더스트랩키링,완제품,PRF_GOODS_FIXED_SIZ,3000,siz_cd,2,0,
+CLEAN,PRD_000205,양말,완제품,,3000,,0,0,
+CLEAN,PRD_000206,반팔티셔츠,완제품,,12000,,0,0,
+CLEAN,PRD_000209,후드티셔츠,완제품,,35000,,0,0,
+CLEAN,PRD_000210,초슬림마우스패드,완제품,,5000,,0,0,
+CLEAN,PRD_000211,장패드,완제품,,18000,,0,0,
+CLEAN,PRD_000212,극세사클리너,완제품,,2500,,0,0,
+CLEAN,PRD_000213,틴케이스,완제품,,3600,,0,0,
+CLEAN,PRD_000214,자석북마크,완제품,,2500,,0,0,
+CLEAN,PRD_000215,클립보드,완제품,PRF_GOODS_FIXED_SIZ,8000,siz_cd,2,0,
+CLEAN,PRD_000216,투명클립보드,완제품,PRF_GOODS_FIXED_SIZ,9000,siz_cd,2,0,
+CLEAN,PRD_000217,만년스탬프,완제품,PRF_GOODS_FIXED_SIZ,9000,siz_cd,7,0,
+CLEAN,PRD_000219,밴드톡,완제품,,4500,,0,0,
+CLEAN,PRD_000221,말랑키링,완제품,,10000,,0,0,
+CLEAN,PRD_000223,말랑포카홀더,완제품,,14000,,0,0,
+CLEAN,PRD_000224,말랑네임택,완제품,,12000,,0,0,
+CLEAN,PRD_000225,말랑여권케이스,완제품,,14500,,0,0,
+CLEAN,PRD_000229,이미지피켓,완제품,PRF_GOODS_FIXED_SIZ,12000,siz_cd,2,0,
+CLEAN,PRD_000230,레더 플랫 파우치,완제품,PRF_GOODS_FIXED_SIZ,8600,siz_cd,2,0,
+CLEAN,PRD_000231,레더 슬림 파우치,완제품,PRF_GOODS_FIXED_SIZ,8600,siz_cd,2,0,
+CLEAN,PRD_000232,레더 삼각 파우치,완제품,PRF_GOODS_FIXED_SIZ,11000,siz_cd,2,0,
+CLEAN,PRD_000233,레더 볼륨 파우치,완제품,PRF_GOODS_FIXED_SIZ,10800,siz_cd,2,0,
+CLEAN,PRD_000234,레더 스트링 파우치,완제품,,15000,,0,0,
+CLEAN,PRD_000235,레더 스트링 원형파우치,완제품,,16500,,0,0,
+CLEAN,PRD_000236,레더 플랫 클러치,완제품,,18000,,0,0,
+CLEAN,PRD_000237,레더 삼각 클러치,완제품,,20000,,0,0,
+CLEAN,PRD_000238,레더 아이패드/노트북 파우치,완제품,PRF_GOODS_FIXED_SIZ,35000,siz_cd,3,0,
+CLEAN,PRD_000239,캔버스 플랫 파우치,완제품,PRF_GOODS_FIXED_SIZ,8800,siz_cd,2,0,
+CLEAN,PRD_000240,캔버스 삼각 파우치,완제품,PRF_GOODS_FIXED_SIZ,9800,siz_cd,2,0,
+CLEAN,PRD_000241,캔버스 스트랩 라벨파우치,완제품,,8500,,0,0,
+CLEAN,PRD_000242,광목 스트링 라벨파우치,완제품,,7000,,0,0,
+CLEAN,PRD_000243,린넨 스트링 파우치,완제품,PRF_GOODS_FIXED_SIZ,8500,siz_cd,3,0,
+CLEAN,PRD_000244,타이벡 플랫 파우치,완제품,PRF_GOODS_FIXED_SIZ,8600,siz_cd,3,0,
+CLEAN,PRD_000245,타이벡 슬림 파우치,완제품,PRF_GOODS_FIXED_SIZ,6800,siz_cd,2,0,
+CLEAN,PRD_000246,타이벡 삼각 파우치,완제품,PRF_GOODS_FIXED_SIZ,7000,siz_cd,2,0,
+CLEAN,PRD_000247,타이벡 스트링 파우치,완제품,PRF_GOODS_FIXED_SIZ,10000,siz_cd,3,0,
+CLEAN,PRD_000248,타이벡 플랫 클러치,완제품,,12500,,0,0,
+CLEAN,PRD_000249,메쉬슬림파우치,완제품,PRF_GOODS_FIXED_SIZ,8600,siz_cd,2,0,
+CLEAN,PRD_000250,메쉬볼륨파우치,완제품,,15000,,0,0,
+CLEAN,PRD_000251,레더 플랫 미니파우치,완제품,,6500,,0,0,
+CLEAN,PRD_000252,레더 슬림 미니파우치,완제품,PRF_GOODS_FIXED_SIZ,6000,siz_cd,2,0,
+CLEAN,PRD_000253,레더 삼각 미니파우치,완제품,,7200,,0,0,
+CLEAN,PRD_000254,레더 볼륨 미니파우치,완제품,PRF_GOODS_FIXED_SIZ,7500,siz_cd,2,0,
+CLEAN,PRD_000255,레더 원형 미니파우치,완제품,,10000,,0,0,
+CLEAN,PRD_000256,레더 플랫 필통,완제품,,7500,,0,0,
+CLEAN,PRD_000257,레더 슬림 필통,완제품,,8500,,0,0,
+CLEAN,PRD_000258,레더 삼각 필통,완제품,,8500,,0,0,
+CLEAN,PRD_000259,레더 볼륨 필통,완제품,,9500,,0,0,
+CLEAN,PRD_000260,레더 원형 필통,완제품,,10500,,0,0,
+CLEAN,PRD_000261,캔버스 플랫 필통,완제품,,7500,,0,0,
+CLEAN,PRD_000262,캔버스 삼각 필통,완제품,,9000,,0,0,
+CLEAN,PRD_000263,레더토트백,완제품,,31000,,0,0,
+CLEAN,PRD_000264,레더숄더백,완제품,,58000,,0,0,
+CLEAN,PRD_000265,린넨 미니에코백,완제품,,16500,,0,0,
+CLEAN,PRD_000266,린넨 토트백,완제품,,24000,,0,0,
+CLEAN,PRD_000267,린넨 에코백,완제품,,28000,,0,0,
+CLEAN,PRD_000268,캔버스심플백,완제품,,17600,,0,0,
+CLEAN,PRD_000269,캔버스 포켓심플백,완제품,,16500,,0,0,
+CLEAN,PRD_000270,캔버스에코백,완제품,,35200,,0,0,
+CLEAN,PRD_000271,캔버스숄더백,완제품,,59500,,0,0,
+CLEAN,PRD_000272,캔버스 포켓숄더백,완제품,,58000,,0,0,
+CLEAN,PRD_000273,타이벡 양면 백팩,완제품,PRF_GOODS_FIXED_SIZ,17500,siz_cd,2,0,
+CLEAN,PRD_000274,타이벡보냉보틀백,완제품,PRF_GOODS_FIXED_SIZ,19500,siz_cd,2,0,
+CLEAN,PRD_000275,타이벡 보냉 미니백,완제품,,25000,,0,0,
+CLEAN,PRD_000276,타이벡 에코백,완제품,,22500,,0,0,
+CLEAN,PRD_000277,타이벡 보냉에코백,완제품,,28000,,0,0,
+CLEAN,PRD_000278,메쉬 토트백,완제품,,20500,,0,0,
+CLEAN,PRD_000279,메쉬에코백,완제품,,25500,,0,0,
+CLEAN,PRD_000280,레더라벨제작,완제품,PRF_GOODS_FIXED_SIZ,2000,siz_cd,3,0,
+CLEAN,PRD_000037,오리지널박명함,완제품,PRF_NAMECARD_FOIL,24200,print_opt_cd|opt_cd,4,0,
+CLEAN,PRD_000039,투명명함,완제품,PRF_NAMECARD_CLEAR,13500,,0,0,
+CLEAN,PRD_000041,스탠다드 쿠폰/상품권,완제품,PRF_DGP_A,4031,print_opt_cd|mat_cd,6,0,plt_siz_cd
+CLEAN,PRD_000042,프리미엄 쿠폰/상품권,완제품,PRF_DGP_A_FOIL,4113,print_opt_cd|mat_cd,9,0,plt_siz_cd
+CLEAN,PRD_000043,인쇄배경지(OPP봉투타입),완제품,PRF_DGP_C,17756,print_opt_cd|mat_cd,3,0,plt_siz_cd
+CLEAN,PRD_000044,인쇄배경지(투명케이스타입),완제품,PRF_DGP_C,17756,print_opt_cd|mat_cd,3,0,plt_siz_cd
+CLEAN,PRD_000045,인쇄헤더택,완제품,PRF_DGP_C,17756,print_opt_cd|mat_cd,2,0,plt_siz_cd
+CLEAN,PRD_000046,라벨/택,완제품,PRF_DGP_B,6142,print_opt_cd|mat_cd,3,0,plt_siz_cd
+CLEAN,PRD_000047,소량전단지,완제품,PRF_DGP_D,4031,print_opt_cd|mat_cd,44,0,plt_siz_cd
+CLEAN,PRD_000048,접지리플렛,완제품,PRF_DGP_E,6031,print_opt_cd|mat_cd,47,0,plt_siz_cd
+CLEAN,PRD_000049,와이드 접지리플렛,완제품,PRF_DGP_E,9379,print_opt_cd|mat_cd,6,0,plt_siz_cd
+CLEAN,PRD_000050,봉투제작,완제품,PRF_ENV_MAKING,96000,siz_cd|mat_cd,7,0,
+CLEAN,PRD_000052,반칼 자유형 스티커,완제품,PRF_STK_FIXED,45600,siz_cd|mat_cd,8,0,
+CLEAN,PRD_000053,반칼 자유형 투명스티커,완제품,PRF_STK_FIXED,53600,siz_cd|mat_cd,5,0,
+SKIP_기성,PRD_000001,OPP접착봉투,기성,,,,,,
+SKIP_기성,PRD_000002,OPP비접착봉투,기성,,,,,,
+SKIP_기성,PRD_000004,카드봉투,기성,,,,,,
+SKIP_기성,PRD_000005,캘린더봉투,기성,,,,,,
+SKIP_기성,PRD_000006,볼체인,기성,,,,,,
+SKIP_기성,PRD_000007,와이어링,기성,,,,,,
+SKIP_기성,PRD_000009,투명케이스,기성,,,,,,
+SKIP_기성,PRD_000010,행택끈,기성,,,,,,
+SKIP_기성,PRD_000011,자석고정용고무판,기성,,,,,,
+SKIP_기성,PRD_000012,우드거치대,기성,,,,,,
+SKIP_기성,PRD_000013,우드봉,기성,,,,,,
+SKIP_기성,PRD_000014,우드행거,기성,,,,,,
+SKIP_기성,PRD_000015,만년스탬프 리필잉크,기성,,,,,,
+SKIP_기성,PRD_000218,타이벡북커버,기성,,,,,,
+SKIP_기성,PRD_000283,트레싱지봉투,기성,,,,,,
+SKIP_반제품,PRD_000073,하드커버책자-표지(전용지),반제품,,0,,,,
+SKIP_반제품,PRD_000074,하드커버책자-면지,반제품,,0,,,,
+SKIP_반제품,PRD_000078,레더 하드커버책자-표지(레더(화이트)),반제품,,0,,,,
+SKIP_반제품,PRD_000079,레더 하드커버책자-면지,반제품,,0,,,,
+SKIP_반제품,PRD_000083,하드커버 링책자-표지(전용지),반제품,,0,,,,
+SKIP_반제품,PRD_000084,하드커버 링책자-면지,반제품,,0,,,,
+SKIP_반제품,PRD_000089,레더 링바인더-표지(레더(화이트)),반제품,,0,,,,
+SKIP_반제품,PRD_000090,레더 링바인더-면지,반제품,,0,,,,
+SKIP_반제품,PRD_000095,엽서북-내지(몽블랑240),반제품,,0,,,,
+SKIP_반제품,PRD_000096,엽서북-표지(스노우300),반제품,,0,,,,
+SKIP_반제품,PRD_000098,떡메모지-내지(백모조120),반제품,,0,,,,
+SKIP_반제품,PRD_000101,포토북 [디자인명]-내지(몽블랑130),반제품,PRF_PHOTOBOOK_INNER,0,,,,siz_cd
+SKIP_반제품,PRD_000102,포토북 [디자인명]-표지(하드커버),반제품,,0,,,,
+SKIP_반제품,PRD_000103,포토북 [디자인명]-표지(아트250+무광코팅),반제품,,0,,,,
+SKIP_반제품,PRD_000104,포토북 [디자인명]-면지(그레이),반제품,,0,,,,
+SKIP_반제품,PRD_000105,포토북 [디자인명]-표지(레더하드커버),반제품,,0,,,,
+SKIP_반제품,PRD_000106,포토북 [디자인명]-표지(레더),반제품,,0,,,,
+SKIP_반제품,PRD_000107,포토북 [디자인명]-표지(소프트커버),반제품,,0,,,,
+SKIP_반제품,PRD_000177,스프링노트,반제품,PRF_STN_SPRINGNOTE,4500,siz_cd,1,0,
+SKIP_반제품,PRD_000284,하드커버책자-내지,반제품,PRF_DGP_INNER,6031,print_opt_cd|mat_cd,11,0,plt_siz_cd
+SKIP_반제품,PRD_000285,레더 하드커버책자-내지,반제품,PRF_DGP_INNER,6031,print_opt_cd|mat_cd,11,0,plt_siz_cd
+SKIP_반제품,PRD_000286,하드커버 링책자-내지,반제품,PRF_DGP_INNER,6031,print_opt_cd|mat_cd,11,0,plt_siz_cd
+SKIP_반제품,PRD_000287,중철책자-내지,반제품,PRF_DGP_INNER,4031,print_opt_cd|mat_cd,13,0,plt_siz_cd
+SKIP_반제품,PRD_000288,중철책자-표지,반제품,PRF_BOOK_COVER,4037,print_opt_cd|mat_cd,10,0,plt_siz_cd
+SKIP_반제품,PRD_000289,무선책자-내지,반제품,PRF_DGP_INNER,4071,print_opt_cd|mat_cd,10,0,plt_siz_cd
+SKIP_반제품,PRD_000290,무선책자-표지,반제품,PRF_BOOK_COVER,4037,print_opt_cd|mat_cd,9,0,plt_siz_cd
+SKIP_반제품,PRD_000291,PUR책자-내지,반제품,PRF_DGP_INNER,4071,print_opt_cd|mat_cd,10,0,plt_siz_cd
+SKIP_반제품,PRD_000292,PUR책자-표지,반제품,PRF_BOOK_COVER,4037,print_opt_cd|mat_cd,9,0,plt_siz_cd
+SKIP_반제품,PRD_000293,만년다이어리(소프트커버)-표지(아트250+무광코팅),반제품,,0,,,,
+SKIP_반제품,PRD_000294,만년다이어리(하드커버)-표지(아트250+무광코팅),반제품,,0,,,,
+SKIP_반제품,PRD_000295,만년다이어리(하드커버)-면지,반제품,,0,,,,
+SKIP_반제품,PRD_000296,만년다이어리(레더하드커버)-표지(레더),반제품,,0,,,,
+SKIP_반제품,PRD_000297,만년다이어리(레더하드커버)-면지,반제품,,0,,,,
+SKIP_반제품,PRD_000298,만년다이어리(레더소프트커버)-표지(레더),반제품,,0,,,,
+SKIP_반제품,PRD_000299,먼슬리플래너-표지(아트250+무광코팅),반제품,,0,,,,
+SKIP_반제품,PRD_000300,먼슬리플래너-내지(백모조100),반제품,,0,,,,
+SKIP_반제품,PRD_000301,스프링노트-표지(아트250+무광코팅),반제품,,0,,,,
+SKIP_반제품,PRD_000302,스프링노트-내지(무지),반제품,,0,,,,
+SKIP_반제품,PRD_000303,스프링수첩-표지(아트250+무광코팅),반제품,,0,,,,
+SKIP_반제품,PRD_000304,스프링수첩-내지(무지),반제품,,0,,,,
+SKIP_반제품,PRD_000305,메모패드-표지(아트250+무광코팅),반제품,,0,,,,
+SKIP_반제품,PRD_000306,메모패드-내지(무지),반제품,,0,,,,
+SKIP_반제품,PRD_000307,중철노트-표지(아트250+무광코팅),반제품,,0,,,,
+SKIP_반제품,PRD_000308,중철노트-내지(무지),반제품,,0,,,,

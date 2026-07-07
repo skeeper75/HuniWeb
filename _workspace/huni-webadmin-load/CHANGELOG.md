@@ -1,5 +1,23 @@
 # Huni-Webadmin-Load (§36) — CHANGELOG (최신 위 PREPEND)
 
+## 2026-07-07 (후속7) — 상품↔사이즈 매핑 감사(인쇄도메인·블리드) + 비규격(사용자입력) 정합
+
+지니: 사이즈 태그·상품뷰어 매핑 전수 확인(이름 같아도 작업사이즈 다름) → 비규격 nonspec_yn 정합.
+- ✅ **결정론 사이즈 감사기 `raw/webadmin/tools/verify_size_mapping.py`** — 지니 인쇄도메인 렌즈: **사이즈=재단사이즈·작업사이즈=재단+블리드**(용도별 다름). 이름 아닌 **재단사이즈 그룹 + 블리드 + 비규격** 인지. WRONG_CODE/TAG_MISMATCH/WORK_NULL/MULTI_DFLT/UNTAGGED 검출.
+- ✅ **WRONG_CODE 4 진단(고신뢰)**: 반칼스티커 053/059/060=엽서/전단지 코드(블리드2/4)→SIZ_000426 스티커(블리드0·pangeori row78 권위 확정) · 맥세이프151=미니모양명함(블리드10)→SIZ_000559 아크릴키링(블리드0). **교정 대기**(스티커는 COMP_STK_PRINT 그리드가 007에 지어져 결합·540행 재키 동반 필요).
+- ✅ **비규격 정합**: 권위=상품마스터 사이즈옵션 **"사용자입력"**(실사15+아크릴12=27종). 라이브 활성 24종 이미 Y·**폼보드(129)만 N→Y 플립**(Django admin `tprdproducts/change`·DB확인). 포맥스보드=사용자입력 없음(규격) N 유지 정확. 폼보드 후속=비규격 범위+커스텀 면적가 미배선.
+- **데이터 전경**: t_siz_sizes 556 중 미태깅 421·작업사이즈 없음 128·동명이작업(135x135=5종 등). 규격전용인데 사이즈0개 48·테스트태그 SIZ_000510.
+
+## 2026-07-07 (후속6) — 드리프트 전수 진단·교정 완결 + 결정론 verifier + method-skill
+
+지니: 드리프트 전수 스캐너 → 진단·교정 → 동적 Artifact → 하네스 판단 → verify_price_coverage → §36 method-skill.
+- ✅ **결정론 verifier 신설** `raw/webadmin/tools/verify_price_coverage.py` — base 구성요소 use_dims 차원마다 상품 등록값이 t_prc_component_prices에 **값별 any-row-exists**인지 검사(읽기전용·exit0/1). **상관차원 오탐 0**(브라우저 스윕이 폼/포맥스보드 대각 그리드를 오검출하던 것 해결)·verify_load.py와 한 결. 브라우저 스캐너(batch-scan/drift_scan.js)는 런타임 교차검증 보조로 강등.
+- ✅ **실 드리프트 7건 교정·전수 DRIFT 0**: 프리미엄명함(mat 재키 113→347 등 16행)·반칼팬시스티커(siz 058=A6/057 8판 복사 180행)·폰스트랩(siz 428 과등록 제거)·화이트인쇄명함(인쇄옵션 단면/양면 2행 구조복원+opt_cd 490→810)·아크릴마그넷/집게/머리끈(부자재-as-소재 과등록 제거·후가공 add-on 800/700/500 유지).
+- ✅ **드리프트 4유형 확립**(재키·미적재·과등록·구조복원)+오탐(상관차원). 브라우저가 add-on final>0에 가려 놓친 base 갭(아크릴3)을 결정론 verifier가 신규 검출.
+- ✅ **제약엔진 한계 규명**: 시뮬 제약=프런트 cascade용·print_opt_cd/opt_id 미지원 → 「단면만」은 옵션 미등록으로 처리(제약 아님).
+- ✅ **method-skill `hwl-drift-remediation` 추가**(§36) + 동적 Artifact `batch-scan/drift-dashboard.html`. 상세=`batch-scan/DRIFT-SCAN.md`·`PREMIUM-NAMECARD-DRIFT-FIX.md`.
+- **다음**: 사이즈정보 태그·상품뷰어 매핑 전수 감사(사이즈명 같아도 작업사이즈 다를 수 있음).
+
 ## 2026-07-07 (후속5) — 전상품 결함 5 전부 교정 + 머그컵 직접가
 
 지니: 스티커 판수기반 구축부터 → 머그컵 → 다음세션 정리.

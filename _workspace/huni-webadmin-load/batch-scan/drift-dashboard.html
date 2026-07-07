@@ -1,0 +1,356 @@
+<title>드리프트 전수 감사 · 화이트인쇄명함 외</title>
+<style>
+  :root{
+    --paper:#ECEDEF; --card:#FFFFFF; --ink:#191B21; --ink-soft:#4A4F5A;
+    --muted:#79818E; --line:#D8DBE0; --line-soft:#E7E9EC;
+    --cyan:#0B7E9C; --cyan-ink:#075E75; --magenta:#BB2E63;
+    --good:#178A67; --warn:#B27714; --slate:#6E7684;
+    --good-bg:#E4F3ED; --warn-bg:#F6ECD8; --slate-bg:#E9EBEE; --cyan-bg:#DEEEF3; --mag-bg:#F6E1E9;
+    --shadow:0 1px 2px rgba(20,30,40,.06),0 8px 24px -12px rgba(20,30,40,.18);
+    --mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
+    --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",sans-serif;
+    --r:14px;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --paper:#131519; --card:#1B1E25; --ink:#E9EBF0; --ink-soft:#AEB4C0;
+      --muted:#7C8492; --line:#2C313A; --line-soft:#232830;
+      --cyan:#3BB6D6; --cyan-ink:#7FD2E8; --magenta:#E8659A;
+      --good:#3FC495; --warn:#E0A63C; --slate:#8993A4;
+      --good-bg:#123027; --warn-bg:#2E2513; --slate-bg:#20252E; --cyan-bg:#0E2C36; --mag-bg:#2E1522;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 32px -14px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="light"]{
+    --paper:#ECEDEF;--card:#FFFFFF;--ink:#191B21;--ink-soft:#4A4F5A;--muted:#79818E;--line:#D8DBE0;--line-soft:#E7E9EC;
+    --cyan:#0B7E9C;--cyan-ink:#075E75;--magenta:#BB2E63;--good:#178A67;--warn:#B27714;--slate:#6E7684;
+    --good-bg:#E4F3ED;--warn-bg:#F6ECD8;--slate-bg:#E9EBEE;--cyan-bg:#DEEEF3;--mag-bg:#F6E1E9;
+    --shadow:0 1px 2px rgba(20,30,40,.06),0 8px 24px -12px rgba(20,30,40,.18);
+  }
+  :root[data-theme="dark"]{
+    --paper:#131519;--card:#1B1E25;--ink:#E9EBF0;--ink-soft:#AEB4C0;--muted:#7C8492;--line:#2C313A;--line-soft:#232830;
+    --cyan:#3BB6D6;--cyan-ink:#7FD2E8;--magenta:#E8659A;--good:#3FC495;--warn:#E0A63C;--slate:#8993A4;
+    --good-bg:#123027;--warn-bg:#2E2513;--slate-bg:#20252E;--cyan-bg:#0E2C36;--mag-bg:#2E1522;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 32px -14px rgba(0,0,0,.6);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+    line-height:1.55;-webkit-font-smoothing:antialiased;font-size:15px}
+  .wrap{max-width:1080px;margin:0 auto;padding:clamp(20px,4vw,44px) clamp(16px,4vw,32px) 72px}
+  code,.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+  h1,h2,h3{text-wrap:balance;margin:0}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan-ink);font-weight:600}
+  :root[data-theme="dark"] .eyebrow{color:var(--cyan)}
+
+  /* ── header ── */
+  header{position:relative;border-bottom:1px solid var(--line);padding-bottom:26px;margin-bottom:30px}
+  .reg{position:absolute;top:-4px;right:0;width:34px;height:34px;opacity:.5}
+  h1{font-size:clamp(26px,4.4vw,40px);font-weight:820;letter-spacing:-.025em;line-height:1.04;margin:12px 0 8px}
+  .sub{color:var(--ink-soft);max-width:60ch;font-size:15px}
+  .metaline{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:16px;font-family:var(--mono);font-size:12px;color:var(--muted)}
+  .metaline b{color:var(--ink);font-weight:600}
+
+  /* ── funnel ── */
+  .funnel{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:26px 0 8px}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .stat .n{font-family:var(--mono);font-size:34px;font-weight:700;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
+  .stat .k{font-size:12.5px;color:var(--ink-soft);margin-top:7px;font-weight:500}
+  .stat .bar{position:absolute;left:0;top:0;bottom:0;width:4px}
+  .stat.big .n{color:var(--ink)} .stat.big .bar{background:var(--ink)}
+  .stat.clean .n{color:var(--good)} .stat.clean .bar{background:var(--good)}
+  .stat.skip .n{color:var(--slate)} .stat.skip .bar{background:var(--slate)}
+  .stat.fix .n{color:var(--cyan)} .stat.fix .bar{background:var(--cyan)}
+  .stat.fp .n{color:var(--warn)} .stat.fp .bar{background:var(--warn)}
+  .stat .sub2{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:2px}
+
+  /* ── section ── */
+  section{margin-top:44px}
+  .sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+  h2{font-size:19px;font-weight:720;letter-spacing:-.01em}
+  .sec-note{color:var(--muted);font-size:13.5px;margin:2px 0 18px;max-width:72ch}
+
+  /* ── filter chips ── */
+  .filters{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px}
+  .chip{font-family:var(--mono);font-size:12px;letter-spacing:.02em;border:1px solid var(--line);
+    background:var(--card);color:var(--ink-soft);padding:7px 13px;border-radius:999px;cursor:pointer;
+    display:inline-flex;align-items:center;gap:7px;transition:.14s;user-select:none}
+  .chip:hover{border-color:var(--cyan);color:var(--ink)}
+  .chip .ct{font-weight:700;color:var(--ink)}
+  .chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .chip[aria-pressed="true"] .ct{color:var(--paper)}
+  .chip:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+
+  /* ── product cards ── */
+  .cards{display:flex;flex-direction:column;gap:12px}
+  .pc{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+  .pc-head{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;padding:16px 18px;cursor:pointer}
+  .pc-head:focus-visible{outline:2px solid var(--cyan);outline-offset:-2px}
+  .ty{width:42px;height:42px;border-radius:10px;display:grid;place-items:center;font-family:var(--mono);font-weight:700;font-size:13px;flex:none}
+  .pc-title{min-width:0}
+  .pc-title .nm{font-weight:680;font-size:16px;letter-spacing:-.01em}
+  .pc-title .cd{font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:1px}
+  .pc-right{display:flex;align-items:center;gap:10px}
+  .pill{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.03em;padding:4px 9px;border-radius:999px;white-space:nowrap}
+  .caret{width:18px;height:18px;color:var(--muted);transition:transform .18s;flex:none}
+  .pc.open .caret{transform:rotate(90deg)}
+
+  .typ-rekey{background:var(--cyan-bg);color:var(--cyan-ink)}
+  .typ-missing{background:var(--mag-bg);color:var(--magenta)}
+  .typ-over{background:var(--warn-bg);color:var(--warn)}
+  .typ-struct{background:var(--good-bg);color:var(--good)}
+  .typ-fp{background:var(--slate-bg);color:var(--slate)}
+  .st-fixed{background:var(--good-bg);color:var(--good)}
+  .st-fp{background:var(--slate-bg);color:var(--slate)}
+
+  .pc-body{display:none;padding:0 18px 18px;border-top:1px solid var(--line-soft)}
+  .pc.open .pc-body{display:block}
+  .pc-body .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 22px;margin-top:16px}
+  @media (max-width:620px){.pc-body .grid{grid-template-columns:1fr}}
+  .fld .lb{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+  .fld .vl{font-size:13.5px;color:var(--ink-soft)}
+  .fld .vl b{color:var(--ink);font-weight:640}
+  .codes{display:flex;flex-direction:column;gap:3px}
+  .codes span{font-family:var(--mono);font-size:12px}
+  .ba{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;background:var(--paper);
+    border:1px solid var(--line-soft);border-radius:10px;padding:12px 14px;margin-top:4px}
+  .ba .arw{color:var(--cyan);font-size:18px}
+  .ba .col .h{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+  .ba .col span{display:block;font-family:var(--mono);font-size:12px;line-height:1.5}
+  .verify{margin-top:14px;background:var(--good-bg);border-radius:10px;padding:11px 14px;font-size:13px;color:var(--ink);display:flex;gap:9px;align-items:flex-start}
+  .verify.res{background:var(--warn-bg)}
+  .verify .ic{flex:none;margin-top:1px}
+  .verify .ck{color:var(--good)} .verify.res .ck{color:var(--warn)}
+
+  /* ── taxonomy legend ── */
+  .legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+  .lg{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;box-shadow:var(--shadow)}
+  .lg .top{display:flex;align-items:center;gap:9px;margin-bottom:7px}
+  .lg .dot{width:12px;height:12px;border-radius:3px;flex:none}
+  .lg .nm{font-weight:660;font-size:14px}
+  .lg .ct{margin-left:auto;font-family:var(--mono);font-size:12px;color:var(--muted)}
+  .lg .ds{font-size:12.5px;color:var(--ink-soft);line-height:1.5}
+
+  /* ── panels ── */
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;box-shadow:var(--shadow)}
+  .panel.dev{border-left:4px solid var(--warn)}
+  .panel.verdict{border-left:4px solid var(--cyan)}
+  .panel h3{font-size:16px;font-weight:700;margin-bottom:4px}
+  .panel p{color:var(--ink-soft);font-size:14px;margin:8px 0}
+  .panel code{background:var(--paper);padding:1px 6px;border-radius:5px;font-size:12.5px;border:1px solid var(--line-soft)}
+  .rows{display:flex;flex-direction:column;gap:0;margin-top:10px}
+  .row2{display:grid;grid-template-columns:130px 1fr;gap:14px;padding:11px 0;border-top:1px solid var(--line-soft);font-size:13.5px}
+  .row2 .k{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);padding-top:2px}
+  .row2 .v{color:var(--ink-soft)} .row2 .v b{color:var(--ink)}
+  .tag{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:600;padding:2px 8px;border-radius:6px;margin-right:6px}
+  .tag.yes{background:var(--good-bg);color:var(--good)} .tag.no{background:var(--mag-bg);color:var(--magenta)}
+  .tag.diag{background:var(--cyan-bg);color:var(--cyan-ink)} .tag.fix{background:var(--good-bg);color:var(--good)}
+
+  footer{margin-top:52px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px;font-family:var(--mono);line-height:1.7}
+  .hidden{display:none !important}
+  @media (prefers-reduced-motion:reduce){*{transition:none !important}}
+</style>
+
+<div class="wrap">
+  <header>
+    <canvas class="reg" id="reg" width="68" height="68" aria-hidden="true"></canvas>
+    <div class="eyebrow">§36 Huni-Webadmin-Load · 가격 커버리지 감사</div>
+    <h1>드리프트 전수 스캐너 — 진단과 교정</h1>
+    <p class="sub">「상품 등록 base코드 ≠ 가격 적재 base코드」 드리프트를 전 상품에서 잡아내고, 권위(상품마스터·가격표) 대조로 원인을 규명해 webadmin UI로만 교정한 기록.</p>
+    <div class="metaline">
+      <span>스캔 <b>260</b> 상품</span>
+      <span>기준 <b>상품마스터 260703 · 가격표 260705</b></span>
+      <span>실 드리프트 <b>7</b> 교정 · 결정론 <b>DRIFT 0</b></span>
+      <span>직접 DB 쓰기 <b>0</b> · webadmin UI only</span>
+    </div>
+  </header>
+
+  <div class="funnel" id="funnel"></div>
+
+  <section>
+    <div class="sec-head"><span class="eyebrow">Taxonomy</span><h2>드리프트 4유형 + 오탐</h2></div>
+    <p class="sec-note">v4 배치 스캐너는 「기본조합 1개가 가격 나오면 정상」이라 <b>일부 값만 미적재</b>인 부분 드리프트를 놓쳤다. 전수 스캐너는 상품이 등록한 모든 차원 값을 스윕해 가격 그리드에 매칭 행이 없는 셀을 찾는다.</p>
+    <div class="legend" id="legend"></div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="eyebrow">Remediation</span><h2>상품별 진단·교정</h2></div>
+    <p class="sec-note">칩으로 필터. 카드를 눌러 before → after·교정 방식·권위 검증을 펼친다.</p>
+    <div class="filters" id="filters"></div>
+    <div class="cards" id="cards"></div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="eyebrow">Engine limit</span><h2>제약엔진 한계 — 지니 질문 답</h2></div>
+    <p class="sec-note">화이트인쇄명함의 잔여 오탐(클리어양면)과 「단면만」 처리 방식을 결정한 근거.</p>
+    <div class="panel dev">
+      <h3>시뮬레이터 제약규칙은 「프런트 cascade(비활성화)」용이지 가격 차단이 아니다</h3>
+      <p><code>_sim_constraints_meta()</code>가 활성 제약을 읽어 <b>지금 선택으론 불가능한 값</b>을 계산해 위젯에 넘겨 grey-out 시킬 뿐, 가격계산은 그리드 매칭만 한다(불가조합 = 매칭행 없어 0원).</p>
+      <div class="rows">
+        <div class="row2"><div class="k">cascade 지원</div><div class="v"><span class="tag yes">siz</span><span class="tag yes">plt_siz</span><span class="tag yes">mat(usage)</span><span class="tag yes">proc</span><span class="tag yes">bdl_qty</span><span class="tag yes">옵션그룹/옵션</span></div></div>
+        <div class="row2"><div class="k">미지원</div><div class="v"><span class="tag no">print_opt_cd (인쇄면)</span><span class="tag no">opt_id (도수)</span><span class="tag no">sub_prd_cd (셋트)</span> — <b>모델(VAR_KEY_MAP)엔 있으나 <code>_SIM_DIM_CONSTRAINT</code>엔 없음</b></div></div>
+        <div class="row2"><div class="k">결론</div><div class="v">인쇄면(단면/양면) 관련 제약은 <b>현재 시뮬에서 미작동</b>. 「단면만」은 제약이 아니라 <b>옵션 미등록</b>으로 처리. 화이트인쇄명함의 「클리어는 화이트 면수를 따라야 함」도 못 막음 → <b>제약 cascade에 opt_id 추가 = 개발 전달 후보</b>.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="eyebrow">Architecture</span><h2>하네스로 재구축해야 하나 — 판단</h2></div>
+    <p class="sec-note"><code>raw/webadmin/tools</code>의 verifier들과 대비한 결론.</p>
+    <div class="panel verdict">
+      <h3>새 하네스는 불필요 — 진단은 tools/ verifier로, 교정은 기존 §36 harness로 분리</h3>
+      <div class="rows">
+        <div class="row2"><div class="k">tools/ 성격</div><div class="v"><code>verify_load.py</code>·<code>verify_optcode_integrity.py</code> = <b>결정론 · 읽기전용 DB SELECT · exit 0/1 리포트</b>. 교정은 안 함(수동 webadmin 또는 <code>_apply_*.py</code>).</div></div>
+        <div class="row2"><div class="k">진단</div><div class="v"><span class="tag fix">신설·검증됨</span><code>tools/verify_price_coverage.py</code> 작성 완료. 「값별 any-row-exists」 결정론 검사라 <b>상관차원 오탐 0</b>(폼·포맥스 CLEAN 판정). 게다가 브라우저 스캐너가 <b>add-on final&gt;0에 가려 놓친 base 갭 3건(아크릴 자석·집게·헤어끈)</b>을 신규 검출 → 교정 후 <b>전수 DRIFT 0</b>. 브라우저 스캐너는 런타임 교차검증용으로 유지.</div></div>
+        <div class="row2"><div class="k">교정</div><div class="v"><span class="tag fix">기존 활용</span>재키·미적재·과등록·구조복원 각각 <b>권위 대조 + 도메인 판단 + 서로 다른 webadmin 메커니즘</b>이 필요 → 이미 <b>§36 huni-webadmin-load</b>의 목적·에이전트(hwl-preflight·mapping-auditor·ui-loader·sim-verifier)가 담당. <b>method-skill(드리프트 4유형 교정 루프)만 추가</b>하면 형식화 완성.</div></div>
+        <div class="row2"><div class="k">한 줄</div><div class="v"><b>새 하네스 X.</b> 진단 = 결정론 tools verifier 신설, 교정 = §36에 드리프트 method-skill 추가. 스캐너 자산은 <code>batch-scan/</code>에 이미 존재.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    도구 · batch-scan/drift_scan.js (스윕 스캐너) · gen_drift.py · analyze_drift.py · results/drift-v3.jsonl<br>
+    산출 · DRIFT-SCAN.md · PREMIUM-NAMECARD-DRIFT-FIX.md · 백업 JSON(재키/복원 페이로드) · 이 대시보드<br>
+    원칙 · 라이브 DB 직접쓰기 금지 · 착수 전 preflight · 권위=상품마스터+가격표 · 생성≠검증
+  </footer>
+</div>
+
+<script>
+const FUNNEL=[
+  {k:'스캔 상품',n:260,c:'big',s:'전 활성 카탈로그'},
+  {k:'CLEAN',n:198,c:'clean',s:'브라우저 스캔 기준'},
+  {k:'SKIP',n:59,c:'skip',s:'반제품 44 · 기성 15'},
+  {k:'실 드리프트 교정',n:7,c:'fix',s:'브라우저 4 + 결정론 3'},
+  {k:'오탐(가격정상)',n:2,c:'fp',s:'폼·포맥스보드'},
+];
+const TYPES={
+  rekey:{nm:'재키 (re-key)',dot:'var(--cyan)',ds:'그리드가 구 mat/siz 코드로 가격을 이미 보유·상품은 신코드(spec 추가 정본) 참조. 코드를 상품 신코드로 정합.',ct:'1'},
+  missing:{nm:'미적재',dot:'var(--magenta)',ds:'값이 그리드 어디에도 없음. 권위 대조 후 동등값(같은 판수 등) 복사 적재.',ct:'1'},
+  over:{nm:'과등록',dot:'var(--warn)',ds:'상품이 잉여 값 등록·권위엔 base로 없음. 상품 옵션/소재에서 논리삭제(부자재는 add-on으로 이미 가격 있음).',ct:'4'},
+  struct:{nm:'구조복원',dot:'var(--good)',ds:'base가 요구하는 차원이 상품에서 통째 논리삭제/미등록. 행 복원 + 코드 정합.',ct:'1'},
+  fp:{nm:'오탐 (상관차원)',dot:'var(--slate)',ds:'mat이 siz를 결정하는 1:1 대각 그리드. 브라우저 스윕이 대각 밖 조합을 오검출. 결정론 verifier는 오탐 0.',ct:'2'},
+};
+const PRODUCTS=[
+  {id:'PRD_000031',nm:'프리미엄명함',ty:'rekey',tyl:'재키',st:'fixed',frm:'PRF_NAMECARD_PREMIUM',
+   problem:'특수지 8종을 그리드가 구 mat 코드로 보유·상품은 신코드 참조 → 8종 가격 0',
+   before:['MAT_000113 아코팩','MAT_000116 린넨커버','…구코드 8종'],
+   after:['MAT_000347 아코팩 웜화이트 250g','MAT_000350 린넨커버 216g','…신코드 재키'],
+   mech:'그리드 full-sync · mat_cd 16행 재키(가격 무변경)',
+   verify:'14소재 전부 가격 · A등급 4500/5500 · B등급 5000/6500 · 제외 0'},
+  {id:'PRD_000062',nm:'반칼팬시스티커',ty:'missing',tyl:'미적재',st:'fixed',frm:'PRF_STK_FIXED',
+   problem:'siz 058(100x140=8판) 단가행 미적재 · A6(8판)만 존재',
+   before:['SIZ_000058 → 가격 0'],
+   after:['SIZ_000058 = A6/057(8판) 복사 180행'],
+   mech:'Django admin 개별 add 180행 (공유 COMP_STK_PRINT 6624행 무영향)',
+   verify:'058 5소재 가격 산출(6700 / 7700) · 제외 0 · 판수 기반'},
+  {id:'PRD_000220',nm:'폰스트랩',ty:'over',tyl:'과등록',st:'fixed',frm:'PRF_GOODS_FIXED_SIZ',
+   problem:'siz 428(17x320) 중복 물리치수 · 단면/양면(575/576)이 권위가 보유',
+   before:['SIZ_000428 (17x320) → 가격 0'],
+   after:['428 제거 · 단면 4500 / 양면 6000 유지'],
+   mech:'상품 사이즈 논리삭제 (del_yn · 물리삭제 아님)',
+   verify:'단면 4500 · 양면 6000 · 제외 0 (상품마스터 단일 17x320 확정)'},
+  {id:'PRD_000040',nm:'화이트인쇄명함',ty:'struct',tyl:'구조복원',st:'fixed',frm:'PRF_NAMECARD_WHITE',
+   problem:'인쇄옵션 단면·양면 둘 다 논리삭제(del_yn=Y) + opt_id1 print_opt_cd NULL → 활성 print_opt 0개(MISSING_DIM)',
+   before:['print_opt 활성 0','opt_id1 print_opt_cd = NULL','그리드 양면행 opt_cd=490'],
+   after:['단면 POPT_000001 · 양면 POPT_000002 복원','단면 기본Y','그리드 opt_cd 490→810'],
+   mech:'섹션 endpoint로 2행 복원 + 그리드 재키(insert1/delete1)',
+   verify:'권위 4조합 14500 / 16000 / 16000 / 19000 · 제외 0',
+   residual:'클리어양면 = 상관차원 잔여 오탐(제약엔진 print_opt 미지원)'},
+  {id:'PRD_000147',nm:'아크릴마그넷',ty:'over',tyl:'과등록',st:'fixed',frm:'COMP_ACRYL_CLEAR3T',
+   problem:'네오디움 자석을 base 소재(MAT_000050·usage.07)로 중복 등록 → base mat 단가 0. 자석은 후가공 옵션이라 add-on(opt_cd)으로 이미 800원',
+   before:['소재: 아크릴투명3mm + 네오디움 자석','MAT_000050 → base 단가 0'],
+   after:['소재: 아크릴투명3mm 1종','자석 800 = 자석부착 옵션(add-on) 유지'],
+   mech:'상품 소재 논리삭제(del_yn) · add-on opt_cd 무영향',
+   verify:'base 소재 드롭다운 자석 제거 · 자석부착 800(권위 일치) · 결정론 verifier CLEAN'},
+  {id:'PRD_000149',nm:'아크릴집게',ty:'over',tyl:'과등록',st:'fixed',frm:'COMP_ACRYL_CLEAR3T',
+   problem:'투명집게(MAT_000056)를 base 소재로 중복 등록 → base mat 단가 0',
+   before:['소재: 아크릴투명3mm + 투명집게'],
+   after:['소재 1종 · 투명집게 700 = add-on(COMP_ACRYL_CLIP) 유지'],
+   mech:'상품 소재 논리삭제(del_yn)',
+   verify:'집게 700(권위 일치) · 결정론 verifier CLEAN'},
+  {id:'PRD_000154',nm:'아크릴 머리끈',ty:'over',tyl:'과등록',st:'fixed',frm:'COMP_ACRYL_CLEAR3T',
+   problem:'블랙헤어끈(MAT_000057)을 base 소재로 중복 등록 → base mat 단가 0',
+   before:['소재: 아크릴투명3mm + 블랙헤어끈'],
+   after:['소재 1종 · 헤어끈 500 = add-on(COMP_ACRYL_BLACK_HAIR_BAND) 유지'],
+   mech:'상품 소재 논리삭제(del_yn)',
+   verify:'헤어끈 500(권위 일치) · 결정론 verifier CLEAN'},
+  {id:'PRD_000129',nm:'폼보드',ty:'fp',tyl:'오탐',st:'fp',frm:'PRF_POSTER_FOAMBOARD',
+   problem:'mat명이 사이즈 내포(A3/A2) · mat×siz 1:1 대각 그리드 → 스윕이 대각 밖 조합 오검출',
+   verify:'정상 대각 A3화이트×A3=60000 · A2화이트×A2=120000 전부 가격 · §31 제약(mat↔siz 동반) 후보'},
+  {id:'PRD_000130',nm:'포맥스보드',ty:'fp',tyl:'오탐',st:'fp',frm:'PRF_POSTER_FOMEXBOARD',
+   problem:'동일 대각 상관 그리드(mat이 사이즈 결정)',
+   verify:'3mmA2×A2=130000 · 5mmA2×A2=160000 전부 가격 · 대각 밖만 0 · §31 후보'},
+];
+
+/* funnel */
+document.getElementById('funnel').innerHTML=FUNNEL.map(f=>
+  `<div class="stat ${f.c}"><div class="bar"></div><div class="n" data-n="${f.n}">0</div><div class="k">${f.k}</div><div class="sub2">${f.s}</div></div>`).join('');
+
+/* legend */
+document.getElementById('legend').innerHTML=Object.entries(TYPES).map(([k,t])=>
+  `<div class="lg"><div class="top"><span class="dot" style="background:${t.dot}"></span><span class="nm">${t.nm}</span><span class="ct">${t.ct}건</span></div><div class="ds">${t.ds}</div></div>`).join('');
+
+/* filters */
+const FILTERS=[{k:'all',l:'전체',n:PRODUCTS.length},{k:'fixed',l:'교정 완료',n:7},{k:'fp',l:'오탐(가격정상)',n:2}];
+const fbox=document.getElementById('filters');
+fbox.innerHTML=FILTERS.map((f,i)=>`<button class="chip" role="button" aria-pressed="${i===0}" data-f="${f.k}">${f.l} <span class="ct">${f.n}</span></button>`).join('');
+
+/* cards */
+const caret='<svg class="caret" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 5l6 5-6 5"/></svg>';
+function ba(p){
+  if(!p.before) return '';
+  return `<div class="ba"><div class="col"><div class="h">before</div>${p.before.map(x=>`<span>${x}</span>`).join('')}</div><div class="arw">→</div><div class="col"><div class="h">after</div>${p.after.map(x=>`<span>${x}</span>`).join('')}</div></div>`;
+}
+function card(p){
+  const stPill=p.st==='fixed'?'<span class="pill st-fixed">교정 완료</span>':'<span class="pill st-fp">오탐 · 가격정상</span>';
+  const body=`<div class="pc-body"><div class="grid">
+      <div class="fld" style="grid-column:1/-1"><div class="lb">진단</div><div class="vl">${p.problem}</div></div>
+      ${p.before?`<div class="fld" style="grid-column:1/-1"><div class="lb">코드 정합</div>${ba(p)}</div>`:''}
+      ${p.mech?`<div class="fld"><div class="lb">교정 방식</div><div class="vl">${p.mech}</div></div>`:''}
+      <div class="fld"><div class="lb">공식</div><div class="vl"><code>${p.frm}</code></div></div>
+    </div>
+    <div class="verify"><span class="ic ck">✓</span><div><b>검증</b> — ${p.verify}</div></div>
+    ${p.residual?`<div class="verify res"><span class="ic ck">◑</span><div><b>잔여</b> — ${p.residual}</div></div>`:''}
+  </div>`;
+  return `<div class="pc" data-st="${p.st}"><div class="pc-head" role="button" tabindex="0" aria-expanded="false">
+      <div class="ty typ-${p.ty}">${p.tyl.slice(0,2)}</div>
+      <div class="pc-title"><div class="nm">${p.nm}</div><div class="cd">${p.id} · ${p.tyl}</div></div>
+      <div class="pc-right">${stPill}${caret}</div>
+    </div>${body}</div>`;
+}
+const cbox=document.getElementById('cards');
+cbox.innerHTML=PRODUCTS.map(card).join('');
+
+/* interactions */
+function toggle(pc){const open=pc.classList.toggle('open');pc.querySelector('.pc-head').setAttribute('aria-expanded',open);}
+cbox.querySelectorAll('.pc-head').forEach(h=>{
+  h.addEventListener('click',()=>toggle(h.parentElement));
+  h.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle(h.parentElement);}});
+});
+fbox.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>{
+  fbox.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed','false'));
+  c.setAttribute('aria-pressed','true');
+  const f=c.dataset.f;
+  cbox.querySelectorAll('.pc').forEach(pc=>{
+    pc.classList.toggle('hidden', !(f==='all'||pc.dataset.st===f));
+  });
+}));
+
+/* count-up (reduced-motion aware) */
+const rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+document.querySelectorAll('.stat .n').forEach(el=>{
+  const t=+el.dataset.n;
+  if(rm){el.textContent=t;return;}
+  let s=null;const dur=680;
+  function step(ts){if(!s)s=ts;const p=Math.min((ts-s)/dur,1);el.textContent=Math.round((1-Math.pow(1-p,3))*t);if(p<1)requestAnimationFrame(step);}
+  requestAnimationFrame(step);
+});
+
+/* CMYK registration mark */
+const cv=document.getElementById('reg');if(cv){const x=cv.getContext('2d');const cs=getComputedStyle(document.documentElement);
+  function reg(){const w=cv.width,h=cv.height,cx=w/2,cy=h/2;x.clearRect(0,0,w,h);
+    const mk=(color,ox,oy)=>{x.strokeStyle=color;x.lineWidth=2;x.globalAlpha=.9;
+      x.beginPath();x.moveTo(cx+ox-11,cy+oy);x.lineTo(cx+ox+11,cy+oy);x.moveTo(cx+ox,cy+oy-11);x.lineTo(cx+ox,cy+oy+11);x.stroke();
+      x.globalAlpha=.5;x.beginPath();x.arc(cx+ox,cy+oy,7,0,7);x.stroke();};
+    mk('#0BA6CE',-4,-4);mk('#D6438A',4,-4);mk(cs.getPropertyValue('--warn')||'#C2871C',-4,4);mk(cs.getPropertyValue('--ink')||'#888',4,4);x.globalAlpha=1;}
+  reg();}
+</script>

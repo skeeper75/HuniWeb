@@ -27,8 +27,13 @@ description: 후니프린팅 상품 가격을 라이브DB 직접 적재 없이 �
 - **P4 검증**: sim-verifier가 시뮬레이터 예측=실제·제외0 확인. 미달 시 P2로.
 - **파일럿**: 프리미엄명함(PRD_000031) 먼저 종단 완주 → 동형 전파.
 
+## 드리프트 진단·교정 → `hwl-drift-remediation` method-skill
+「상품 등록 base코드 ≠ 가격 적재 base코드」 전수 진단·교정은 **`hwl-drift-remediation`** 스킬로 라우팅.
+결정론 verifier `raw/webadmin/tools/verify_price_coverage.py`(값별 any-row-exists·오탐0·exit0/1)로 진단 →
+4유형(재키·미적재·과등록·구조복원)+오탐 분류 → 권위 대조 → webadmin UI 교정 → 재검증 DRIFT 0.
+
 ## 데이터 전달
-파일 기반(`_workspace/huni-webadmin-load/`: PATH-MAP·MAPPING-DEFECTS·LOAD-LOG·VERIFY-*) + 태스크(조율).
+파일 기반(`_workspace/huni-webadmin-load/`: PATH-MAP·MAPPING-DEFECTS·LOAD-LOG·VERIFY-*·batch-scan/) + 태스크(조율).
 
 ## 테스트 시나리오
 - 정상: 프리미엄명함 preflight→진단→UI적재→시뮬레이터 예측=실제·제외0.
