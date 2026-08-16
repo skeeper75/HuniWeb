@@ -1,0 +1,898 @@
+Reading additional input from stdin...
+OpenAI Codex v0.145.0
+--------
+workdir: /Users/innojini/Dev/HuniWeb
+model: gpt-5.5
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: xhigh
+reasoning summaries: none
+session id: 01a005e9-4c28-7db0-ba56-9d8166485380
+--------
+user
+역할: 너는 독립 심사자다. 아래 사전등록 루브릭의 **두 규칙만** 대상 설계 문서에 적용해 위반 여부를 판정한다.
+너는 읽기 전용이다. 어떤 파일도 수정하지 마라. 라이브 DB 에 접속하지 마라. `.env`·`.env.local` 등 비밀값 파일을 읽지 말고 그 값을 출력에 절대 담지 마라.
+
+## 읽을 파일 (내용은 여기 붙이지 않는다 — 직접 읽어라)
+
+판정 기준(루브릭, 수정 금지·버전 고정):
+- `_workspace/huni-worldmodel/04_design/evaluation-rubric.md`
+  → 여기서 **RULE-09**(불확실성의 가시화) 와 **RULE-14**(사람 개입의 배치) 의 `norm` 과 `violation_test` 원문을 그대로 읽어라.
+
+심사 대상(설계 문서, 현재 판본):
+- `_workspace/huni-worldmodel/04_design/design-FINAL.md`  (1,046행)
+
+보조 참조(설계 의도·수용조건이 같은 축을 어떻게 규정했는지 확인용):
+- `.moai/specs/SPEC-WORLDMODEL-001/spec.md`
+- `.moai/specs/SPEC-WORLDMODEL-001/plan.md`
+- `.moai/specs/SPEC-WORLDMODEL-001/acceptance.md`
+
+근거 보강이 필요하면 저장소 내 코드(`raw/webadmin/**` 등)를 읽어도 된다. 단 읽기 전용이다.
+
+## 판정 규율 (반드시 지켜라)
+
+1. **적용할 잣대는 루브릭의 해당 규칙 `violation_test` 문언뿐이다.**
+   그 규칙의 `violation_test` 가 묻지 않는 것을 근거로 위반을 주장하면 그것 자체가 오판이다.
+   판정문에는 반드시 **네가 적용한 `violation_test` 의 정확한 항**(예: "RULE-09 시나리오 ②", "RULE-14 검사 ①")을 인용하라.
+   설계가 더 잘할 수 있었다/미흡해 보인다 는 위반 사유가 아니다. 문언이 요구한 것이 문서에 있는가만 본다.
+
+2. **근거 불충분 시 기본값은 '위반 성립'이 아니라 '각하'다.** 불확실을 결함으로 환산하지 마라.
+   "~할 수도 있다", "~가 우려된다", "검증되지 않았을 수 있다" 는 위반 근거가 아니다.
+
+3. **위반이 없으면 없다고 답하는 것이 정상 결과다.** 억지로 찾지 마라. 두 규칙 모두 CLOSED 로 끝나는 것은 완전히 정상적인 결론이다.
+
+4. **출처 강제.** 모든 주장에 `파일경로:라인` 을 달아라. 해당 기술을 찾지 못했으면 `not found` 라고 명시하라(추측 금지).
+   좌표는 실제로 읽은 행이어야 한다. 인용한 라인에 그 내용이 없으면 오판으로 집계된다.
+
+5. **범위 밖 금지.** RULE-09·RULE-14 외의 규칙으로 판정하지 마라. 다른 축의 문제를 발견하면 별도 절 "범위 밖 관찰"에만 적고 위반으로 세지 마라.
+
+6. 설계 문서 안에 루브릭 18규칙에 대응 규칙이 없는 새 축(예: 자율성 경계 선언 같은 절)이 있다면, 그것은 **루브릭 부재로 판정 불가**다. 없는 규칙을 만들어 재지 마라.
+
+## STILL_OPEN(위반) 을 주장할 때의 5요건 — 전건 충족 못 하면 제기하지 마라
+
+(a) 위반 RULE-ID + 적용한 `violation_test` 의 정확한 항
+(b) 재현 가능한 실패 시나리오 — 입력(상품·옵션·수량 등 구체), 기대 결과, 실제(예상) 결과 3항
+(c) 근거 — `파일경로:라인`
+(d) 자기 반증조건 — "설계 문서 어디에 무엇이 있으면 이 지적을 철회한다"
+(e) 교정 방향 (MAJOR 이상 주장 시 필수) — 어느 규칙을 어떻게 만족시킬 것인가
+
+## 출력 형식 (이 형식만 출력한다)
+
+각 규칙마다 아래 블록:
+
+```
+[RULE-09]
+VERDICT: CLOSED | STILL_OPEN
+APPLIED_TEST: (인용한 violation_test 항 원문)
+EVIDENCE: 파일경로:라인 (복수 가능, 각각 무엇을 담고 있는지 한 줄)
+REASON: (그 문언 요구가 문서에서 어떻게 충족/미충족되는가)
+```
+
+VERDICT 가 STILL_OPEN 이면 그 블록 아래에 5요건 블록 (a)~(e) 를 이어 붙인다.
+
+마지막에:
+```
+[범위 밖 관찰]  — 없으면 "없음"
+[루브릭 부재로 판정 불가] — 없으면 "없음"
+[내가 확인하지 못한 것]  — 읽지 못했거나 판정 근거가 부족했던 지점을 정직하게 열거
+```
+warning: clamping SessionEnd hook timeout to 3s in /Users/innojini/Library/Application Support/orca/codex-accounts/5cb5df86-9914-41ab-9307-1b407c9891fd/home/plugins/cache/omc/oh-my-claudecode/4.15.2/hooks/hooks.json
+warning: running async SessionEnd hook synchronously in /Users/innojini/Library/Application Support/orca/codex-accounts/5cb5df86-9914-41ab-9307-1b407c9891fd/home/plugins/cache/omc/oh-my-claudecode/4.15.2/hooks/hooks.json
+warning: clamping SessionEnd hook timeout to 3s in /Users/innojini/Library/Application Support/orca/codex-accounts/5cb5df86-9914-41ab-9307-1b407c9891fd/home/plugins/cache/omc/oh-my-claudecode/4.15.2/hooks/hooks.json
+warning: running async SessionEnd hook synchronously in /Users/innojini/Library/Application Support/orca/codex-accounts/5cb5df86-9914-41ab-9307-1b407c9891fd/home/plugins/cache/omc/oh-my-claudecode/4.15.2/hooks/hooks.json
+warning: Skill descriptions were shortened to fit the 2% skills context budget. Codex can still see every skill, but some descriptions are shorter. Disable unused skills or plugins to leave more room for the rest.
+hook: SessionStart
+hook: SessionStart Completed
+hook: UserPromptSubmit
+hook: UserPromptSubmit Completed
+codex
+지정된 파일만 읽어서 RULE-09와 RULE-14의 `violation_test` 문언을 먼저 고정하고, 그 문언에 맞는 설계 문서 좌표만 대조하겠습니다. DB와 비밀값 파일은 건드리지 않습니다.
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse Completed
+hook: PreToolUse Completed
+hook: PreToolUse Completed
+exec
+/bin/zsh -lc 'rg -n "불확실|사람|human|개입|승인|review|manual|accept|수용|자율|confidence|근거|출처" .moai/specs/SPEC-WORLDMODEL-001/spec.md .moai/specs/SPEC-WORLDMODEL-001/plan.md .moai/specs/SPEC-WORLDMODEL-001/acceptance.md' in /Users/innojini/Dev/HuniWeb
+exec
+/bin/zsh -lc 'rg -n "RULE-09|RULE-14|violation_test|norm" _workspace/huni-worldmodel/04_design/evaluation-rubric.md' in /Users/innojini/Dev/HuniWeb
+exec
+/bin/zsh -lc 'wc -l _workspace/huni-worldmodel/04_design/design-FINAL.md && rg -n "불확실|uncertain|confidence|확신|신뢰|evidence|근거|출처|unknown|모름|사람|human|operator|개입|승인|review|manual|STOP|HITL|자율|autonomy|경계" _workspace/huni-worldmodel/04_design/design-FINAL.md' in /Users/innojini/Dev/HuniWeb
+hook: PostToolUse
+hook: PostToolUse
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PostToolUse Completed
+hook: PostToolUse Completed
+ succeeded in 134ms:
+.moai/specs/SPEC-WORLDMODEL-001/plan.md:9:> - **그 외(근거·인용으로 새로 단 좌표)** = **개정 후(1,046행) 판본**의 좌표다.
+.moai/specs/SPEC-WORLDMODEL-001/plan.md:17:| # | 원칙 | 근거 |
+.moai/specs/SPEC-WORLDMODEL-001/plan.md:24:| PR-6 | **[신규] 검증 출처를 뭉개지 않는다** — 보충 라운드에서 검증된 것을 원 라운드에서 검증된 것처럼 쓰면 **사후 위조**다. 그리고 **명세의 통과는 구현·측정의 통과가 아니다**(`simcore/*`·`gates/*.py` 는 미래 산출물) | `design-FINAL.md:40`, `coverage-supplement.md:425`·`:433` |
+.moai/specs/SPEC-WORLDMODEL-001/plan.md:37:| M0.1-a | **FIX-1** `selections` 값 도메인 출처를 blanket 1줄에서 **축 부류별 3분류**로 교체 (열거축 5 / 열거축 +1 `print_opt_cd` / 비열거축 6) | `design-FINAL.md:246-249` |
+.moai/specs/SPEC-WORLDMODEL-001/plan.md:38:| M0.1-b | **FIX-1** §6 T0 워크스루(`:472`)에 `print_opt_cd` 출처 선언이 선행 조건임을 각주 | `design-FINAL.md:472` |
+.moai/specs/SPEC-WORLDMODEL-001/plan.md:55:| M0.2-h | **FIX-4** §4.7 O2 의 "파일럿 리플레이로 대체"를 **clone 환경 리플레이 관측 또는 실사용 유입 대기**로 재정의 + §8 RULE-13 행의 "라이브 write 0건이므로 (b)는 공허 충족" 문구를 실체 근거로 교체 |
+.moai/specs/SPEC-WORLDMODEL-001/plan.md:76:| 축 | 근거 좌표 | 성질 |
+.moai/specs/SPEC-WORLDMODEL-001/plan.md:84:**미확인 (회색지대 · 정직 기록)** — 셋 다 "부작용 있음" 결론을 뒤집지 않는다: V-1 `RssLogMiddleware` 본문 미독해(`DEBUG_RSS=1` 일 때만 활성 `[추정]`) · V-2 캐시 백엔드 실체(LocMem vs Redis — Redis 면 **공유 외부 상태**로 성격이 갈린다) · V-3 `ATOMIC_REQUESTS` 미확인. 출처 `coverage-supplement.md:344-350`. → 후속 안건 FU-4.
+.moai/specs/SPEC-WORLDMODEL-001/plan.md:108:| M0.5-g | **FIX-7** §8 RULE-11 근거란에 부기 — *"xlsx는 S2 가산분"* |
+.moai/specs/SPEC-WORLDMODEL-001/plan.md:111:| M0.5-j | **FIX-8** §4.3 근거 좌표를 `pricing.py:626-630`에서 **`pricing.py:655-660`**(`_match_entry` no_match 분기)으로 교체하고 `:106-108`·`:599-607` 병기 |
+.moai/specs/SPEC-WORLDMODEL-001/plan.md:116:> [HARD] **출처 구분을 뭉개지 않는다** — 아래 판정은 **보충 라운드(`05_gate/coverage-supplement.md`) 산출**이며, **원 검증 라운드(`gate-report.md`)에서 검증된 것이 아니다.** 원 라운드에서 두 규칙은 6개 findings 전체 인용 **0회**로 미검증이었다(`gate-report.md:104`·`:118`).
+.moai/specs/SPEC-WORLDMODEL-001/plan.md:124:**RULE-03 판정 근거 (BLOCKER · 커밋 전 시뮬레이션 루프)**
+.moai/specs/SPEC-WORLDMODEL-001/plan.md:126:| 검사 | 결과 | 근거 |
+.moai/specs/SPEC-WORLDMODEL-001/plan.md:129:| (b) 부작용 0 | **위반 없음** — 명세 6근거 + **호출 대상 6심볼을 라이브 원본에서 전건 실측**. `pricing.py` 전역 write 패턴 매치 0(유일 매치 `:667` 은 로컬 dict 갱신), 유일 원시 SQL 은 `:308` `SELECT fn_calc_pansu` 이고 그 함수는 `sql/32_fn_calc_pansu.sql:30` 에서 **`STABLE`·DML 0**. `_sim_disallowed`·`_sim_active_rules`·`_sim_dim_candidates`·`qty_rule_error`·`tmpl_combo.resolve`·`_price_gap_errors` 전건 read-only, `lru_cache`/`cache.set` 매치 0 | `coverage-supplement.md:39-51`·`:94-127` |
+.moai/specs/SPEC-WORLDMODEL-001/plan.md:132:**RULE-17 판정 근거 (MAJOR · 재현 결정론)**
+.moai/specs/SPEC-WORLDMODEL-001/plan.md:134:| 검사 | 결과 | 근거 |
+.moai/specs/SPEC-WORLDMODEL-001/plan.md:170:| ⑥ | 커버리지 보충 (FIX-9 · FIX-10) | **닫힘** | M0.6 — **[출처] 보충 라운드 검증이며 원 라운드 검증이 아니다** |
+.moai/specs/SPEC-WORLDMODEL-001/plan.md:192:| **P-5** | **[신규] §11.5 자율 레벨 선언과 구현 코드가 일치하는가** — spec.md §11.5 는 *"룰베이스 ~ 플로우 가이드 · 세미 오토노머스 아님"* 을 단정한다. 그 근거 3항(자동 확정 경로 부재 · 확정은 인간 게이트 전용 · LLM 판정권 0)이 **S1 구현 산출물에서 실제로 성립**하는가 | **AC-AUT-02**(`confidence`/`feasible` 만으로 주문 확정에 도달하는 경로 grep·호출그래프 **0건**) + **AC-AUT-03**(`soft_prefs` 가 Scorer 정렬 키 ④ 위치에만 존재 · 차등 테스트에서 ①~③ 역전 0건) 전건 통과 | 아래 [처방 · P-5] |
+.moai/specs/SPEC-WORLDMODEL-001/plan.md:194:**[처방 — P-5 · HARD]** 불일치가 1건이라도 나오면 처방은 **선언을 코드에 맞춰 올리는 것이 아니라 코드를 선언에 맞추는 것**이다. §11.6 (a)~(d)가 전건 미충족인 상태에서 자율 레벨을 올리는 변경은 **SPEC 위반**이므로(AC-AUT-05), 해당 경로를 철거하기 전에는 M1 게이트를 통과로 쓰지 않는다. S1 은 Actor/Explainer LLM 을 넣지 않으므로(M1.2) AC-AUT-03 는 S1 시점에 **Scorer 정렬 키의 정적 구조 대조**까지만 수행하고, 차등 테스트는 M3(뉴로 계층 부착) 시점에 재실행한다.
+.moai/specs/SPEC-WORLDMODEL-001/plan.md:196:> **P-1~P-4 현황 갱신 — 판정 FEASIBLE (`g6-clone-feasibility.md:5`·`:253-255`).** 라이브 PG **18.4** · `t_*` 46테이블 · DB 총 **37 MB** 실측 위에서 무료·로컬·반복가능·라이브 무영향 경로(`pg_dump` → 로컬 `createdb`/`pg_restore` → 동일성 검사 → `dropdb`)가 확인됐고, 유일 관문이던 로컬 PG18 부재는 Homebrew `postgresql@18`(`stable 18.4`, 라이브와 major·minor 정확 일치)로 해소된다(`:163`·`:171`·`:287`). **다음 단계 = `brew install postgresql@18`** → clone 실제 생성 1회 리허설(사용자 승인 필요, `:279`·`:300`).
+.moai/specs/SPEC-WORLDMODEL-001/plan.md:201:**착지**: P-1~P-4 → acceptance.md **AC-M0-10** · spec.md **§7 OP-1** · **§9.1**(FEASIBLE 해제 기록) · RK-13. / P-5 → acceptance.md **AC-AUT-02 · AC-AUT-03 · AC-AUT-05** · spec.md **§11.5 · §11.6**.
+.moai/specs/SPEC-WORLDMODEL-001/plan.md:238:| (f) | `SELECT ... FROM t_siz_pansu WHERE ...` 존재 조회 | 판걸이수 권위 룩업 히트 여부 → `confidence` |
+.moai/specs/SPEC-WORLDMODEL-001/plan.md:265:| 단위 | 작업 | 근거 |
+.moai/specs/SPEC-WORLDMODEL-001/plan.md:272:**[처방 — HARD]** M2.0-a~d 미반영 상태로 M2 를 착수하면 **RULE-10 확정 위반 상태에서 `TraceReconstructor` 와 라우팅이 서는 것**이며, why-not 출력의 규칙 신원이 표시명 또는 문자열 `"제약"` 이 된다(`price_views.py:2526`). 그 상태의 M2 산출물은 **감사 추적·규칙별 집계 근거로 쓰지 않는다.**
+.moai/specs/SPEC-WORLDMODEL-001/plan.md:274:> **CS2-02(RULE-18 · MINOR · NOTE)는 차단 조건이 아니다.** 층 귀속표에 2행 추가(`F21 projection map`/knowledge · `F22 payable_parity`/ops) + F18 범위 문언 `G0~G8`→`G0~G10` 정정으로 닫히며(`coverage-supplement-2.md:266`), NOTE 이므로 진행을 막지 않는다. 다만 acceptance.md **AC-STR-03** 의 "미표기 구성물 0건" 기대는 **현재 위반 확정 상태**이므로, 그 기준을 통과로 쓰지 않는다.
+.moai/specs/SPEC-WORLDMODEL-001/plan.md:308:| M4-c | `assistant_tools` 이관 — HTTP 계약을 `simulate_price`와 동형 파라미터(`only_comps`·`as_of`·`proc_sels`·`skip_plate`)로 **지금 고정**해 후속을 단일 지점 변경으로 만든다. 실제 이관은 후니 측 승인 사안 |
+.moai/specs/SPEC-WORLDMODEL-001/plan.md:352:| G1.1 | 대체 계측 미실행·불일치 시 **G1 분모의 2테이블 제외가 근거를 잃는다**(RULE-13 ② 우회) → G1 을 46테이블 전수로 되돌리고 **리플레이 자체를 금지**. **[경계 선언]** rate-limit 캐시 축은 G1·G1.1 이 **원리적으로 못 보는** 축이며 실질 방어는 clone 폐기다(FU-1) |
+.moai/specs/SPEC-WORLDMODEL-001/plan.md:356:| G5 | `confidence` 축 폐기 → 전건 실무진 라우팅으로 후퇴 |
+.moai/specs/SPEC-WORLDMODEL-001/plan.md:371:3. **codex 독립 검증** — `.claude/skills/hqv-codex-cross-verify/scripts/codex-review.sh <prompt_file> gpt-5.5 <workdir> xhigh`. 종료코드 2(미가용)면 **Claude 단독 폴백으로 진행하고 멈추지 않되**, `codex 가용 렌즈 N/3`을 산출물에 명시한다.
+.moai/specs/SPEC-WORLDMODEL-001/plan.md:391:11. **[신규] CS2-02(RULE-18 · MINOR) 확정 위반이 미교정** — 층 미표기 구성물 2건(`projection map` · `gates/payable_parity.py`). NOTE 이므로 진행을 막지 않으나 **acceptance.md AC-STR-03 의 "미표기 0건" 기대는 현재 위반 확정 상태**다(`coverage-supplement-2.md:254-266`).
+.moai/specs/SPEC-WORLDMODEL-001/plan.md:392:12. **[신규] §11.5 자율 레벨 선언은 아직 구현과 대조되지 않았다** — AC-AUT-02·AC-AUT-03 은 `simcore/*` 가 실재해야 실행 가능하므로 **미측정**이며(U-4 동류), M1.0′ **P-5** 로 착수 전 확인 항목에 등재했다. §11.6 (a)~(d) 는 **전건 미충족**이므로 AC-AUT-05(무단 상향 금지)는 전 마일스톤에 상시 발동한다.
+.moai/specs/SPEC-WORLDMODEL-001/plan.md:408:Sources: 웹 검색을 사용하지 않았다. 본 문서의 모든 근거는 저장소 내부 `파일경로:라인`이므로 검증된 URL 목록 절을 두지 않는다.
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:31:| # | 무너지는 요건 | 근거 |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:50:| # | 범위 밖 | 근거 |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:63:| 항목 | 단일 값 | 근거 |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:69:| 자율성 레벨 | **룰베이스 ~ 플로우 가이드** (세미 오토노머스 **아님**) — 자동 확정 경로 부재 · 확정은 인간 게이트 전용 · LLM 판정권 0 | **§11 자율성 경계 선언 (ESTC 3단 축)** — 축별 판정·상향 조건은 그 절이 소유한다 |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:91:- **U-002.4 [FIX-1]** `selections` 값 도메인 출처는 blanket 1줄이 아니라 **축 부류별 3분류**로 선언한다.
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:100:- **X-002.8 [FIX-2]** 재파싱이 실패(원문에 수치 근거 없음)했는데 조용한 기본값으로 진행하면 위반이다 — fail-closed가 유일한 동작이다.
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:108:- **U-003.5** 확정은 위젯 `POST /price` 라이브 재계산 → 사람 확인 → `POST /handoff` 경로 전용이다. 루프는 어떤 경우에도 스스로 주문을 확정하지 않는다.
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:114:- **U-004.3** `price.confidence ∈ {CONFIRMED, PROVISIONAL, NONE}` + `confidence_reasons[]`로 권위 룩업 기반과 기하 폴백 기반을 구별한다.
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:120:  - `matched_row is None and data_gap==[] and error is None` → 2분: (3a) 해당 구성요소 `use_dims` 중 비수량 축에 미선택이 있음 → `UNSELECTED_DIM`(플래그만 · 강등·에스컬레이션 **없음**, `widget_api.py:462-463` 구분 승계) / (3b) 그 외 → `UNMATCHED_NO_GAP` + `sim_escalation(PRICE_ROW_MISSING)` + `confidence` PROVISIONAL 강등
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:123:- **U-004.8 [FIX-8]** 무경고 0원 경로의 근거 좌표는 `pricing.py:655-660`(`_match_entry` no_match 분기)이며 `pricing.py:106-108`·`:599-607`을 병기한다. (`gate-report.md:38` R-7 독립 재실측: `m["row"] is None` 분기에서 `if gap:`일 때만 `data_gap`을 채우고, gap이 비면 `included=False · data_gap=[] · error=None`으로 조용히 반환)
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:134:- **U-005.4 [FIX-3]** 두 게이트 사이 **projection map**을 문서화하고 그 자체를 G0.5a의 세 번째 감시 대상으로 편입한다. 사상: `.01→siz_cd` / `.02→plt_siz_cd` / `.03→mat_cd`(+`usage_cd`는 12축 무대응 결합키 잔여분) / `.04→proc_cd` / `.05→bdl_qty`. **비사상(양방향)**: `.06`(`opt_id`, 행 식별자) · `.07`(`sub_prd_cd`) ↔ `print_opt_cd`·`opt_cd`·`coat_side_cnt`·`spot_side_cnt`·`siz_width`·`siz_height`·`min_qty`. 맵 파일 해시를 G0.5a 산출물에 스탬프한다. (근거: `gate-report.md:40` R-6 독립 재실측 — `views.py:1888`의 `.06 → (TPrdProductPrintOptions, ["opt_id"])`는 행 식별자, `models.py:463`의 `print_opt_cd`는 마스터 FK(nullable)로 **비동일**)
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:140:- **U-006.2 [FIX-4 반전 반영]** G1 분모에서 **명시 제외하는 테이블은 2개**다 — **제외 ①** `t_wgt_handoff_logs`(clone 리플레이가 INSERT/DELETE 유발: `widget_api.py:1677`·`:1733`) · **제외 ②** `t_wgt_widgets`(`/validate` 리플레이가 `last_used_dt`/`last_used_org` UPDATE 유발: `widget_api.py:135`, `max(upd_dt)` 해시를 흔든다). 근거 없는 제외는 RULE-13 ② 우회이므로 두 제외는 반드시 **G1.1 서브게이트**와 **한 쌍으로만** 성립한다 — ① 리플레이 유발 행 수 == 예상 조합 수 · ② 그 외 증분 0 · ③ 종료 시 undo 후 원복(handoff logs 0행 복귀, `t_wgt_widgets` 원 `last_used_*` 복원). (근거: `gate-report.md:32-34` R-1~R-3 + `coverage-supplement.md:272-285`·`:337`)
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:143:- **X-006.5 [FIX-4 선행 실측 — 해소됨]** `/validate` 를 라이브 오라클로 채택하는 것은 금지된다. 선행 실측이 완료되어 **부작용 있음이 확정**됐기 때문이다 — 부작용은 핸들러 본문이 아니라 공통 게이트 `_gate` 에서 발생한다: `api_validate`(`widget_api.py:1410`) → `:1414 _gate` → `:226 _touch_used` → **`:135` `.update(last_used_dt=..., last_used_org=...)` on `t_wgt_widgets`**(`:119 USE_TOUCH_SEC=3600` 스로틀이 있으나 `.filter().update()` 는 조건 불일치에도 UPDATE 문 자체를 발행), 그리고 → `:218 _rate_ok` → **`:195-196` `cache.get_or_set` + `cache.incr`**(스로틀 없음 · 매 요청). `/handoff` 의 `TWgtHandoffLogs` 로깅은 이 경로를 타지 않는다(`_log_handoff` 호출부는 `widget_api.py:1963` 단 하나). 미확인 통과 금지(RULE-13 (a) fail-open 금지)에 따라 clone 단일 경로만 남는다. (출처: `coverage-supplement.md:261-299`·`:301-312`)
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:160:- **X-008.4** `evaluate_price` 예외 시 **0원 대체는 절대 금지**다 — `price.{supply_amount,vat_amount,payable_total}=None` + `confidence=NONE` + `blockers[ENGINE_ERROR]`가 유일한 동작이다.
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:165:- **U-009.2** 게이트 목록은 G0 · G0.5a · G0.5b · G0.9 · G1 · G1.1 · G1′ · G2 · G3 · G4 · G5 · G6 · G7 · G8 · G9 · **G10**(FIX-5 신설)이다. 구체 임계·분모는 `acceptance.md`가 소유한다.
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:168:- **U-009.5 [FIX-9 — 충족]** RULE-03(BLOCKER) 독립 검증이 완료됐다. **[HARD] 출처 구분 — 원 라운드가 아니라 보충 라운드 산출이다.** 원 게이트 라운드에서 RULE-03 은 6개 findings 전체 인용 **0회**로 **미검증**이었고(`gate-report.md:104`), `coverage-supplement.md` 가 루브릭 시나리오(`evaluation-rubric.md:76`)를 설계 §6 T4 에 실제 적용해 **(a)(b)(c) 3항 전건 위반 없음**을 판정했다(`coverage-supplement.md:150-159`) — (a) `frontier`→`rollout`→`JointTransition`→`Outcome`→`Scorer`→PICK→관측 사슬 끊김 0, (b) 호출 대상 6심볼을 **라이브 원본에서 전건 실측**해 DB write·캐시·로그 0(`pricing.py` 의 유일 원시 SQL 은 `:308` `SELECT fn_calc_pansu` 이고 그 함수는 `sql/32_fn_calc_pansu.sql:30` 에서 `STABLE`·DML 0), (c) 사후통보 5검사 전건 부정. **[HARD] 이 통과는 명세의 통과이지 구현·측정의 통과가 아니다** — `simcore/*`·`gates/*.py` 는 미래 산출물이며 (a)(c) 판정은 문서 문언 대조다(`coverage-supplement.md:425`).
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:169:- **U-009.6 [FIX-10 — 충족]** RULE-17(MAJOR) 독립 검증이 완료됐다. **[HARD] 출처 구분 — 보충 라운드 산출이다.** 원 라운드 인용 **0회**(`gate-report.md:118`) → `coverage-supplement.md:232-240` 이 (a)(b)(c) 3검사를 G3 명세에 적용해 전건 위반 없음을 판정했다 — (a) 20의도 × k=8 = **160회** · 허용오차 0 으로 측정 절차·분모·임계 구비, (b) 비교 대상이 루브릭 norm 문언(`evaluation-rubric.md:80`)과 **축자 일치**하는 최종 상태(선택 옵션 집합 + `final_price`)이며 대화 텍스트를 명시 부정, (c) 결정론 담지자 4개(결정론 열거 · 사전식 채점 · 안정 tie-break · `as_of` 세션 핀)가 **전부 엔진·심볼릭 쪽**이고 `temperature` 는 부정 문맥 1회뿐. **[HARD] 명세의 통과이지 측정의 통과가 아니다** — 골든 의도 20건이 아직 존재하지 않으므로 "20건이 재현성을 실제로 변별하는 표본인가"는 판정 불가다(`coverage-supplement.md:433`).
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:187:### 4.1 [문제 정의] 근거 없는 적대검증의 3대 실패모드
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:194:| ② **입증책임의 비대칭** | 주장 측은 근거를 대야 하지만 반증 측은 "가능성"만 제기해도 이긴다 | 근거 없는 우려가 근거 있는 설계를 이긴다 |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:209:루브릭의 구조는 이 프로젝트가 도메인에 대해 내린 결론과 동일하다 — *"생성은 뉴로에 열어주되, 판정·산출·기록은 심볼릭이 독점한다"*(`R1-neurosymbolic-theory.md:103`), *"actions는 독립적으로 테스트할 수 있지만 instructions는 신뢰성 있게 테스트할 수 없다"*(`R7-agentic-commerce.md:29`). **설계 심사도 같은 구조를 받는다** — 심사자의 인상(instruction)이 아니라 규칙 적용(action)이 판정을 만든다. `violation_test`는 심사자가 **실행할 수 있는 절차**여야 하며, "느낌상 부족하다"는 규칙 위반의 근거가 될 수 없다(`evaluation-rubric.md:31`).
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:232:- **violation_test**: 의도 객체(또는 동등물)의 필드 스키마가 명시되어 있지 않으면 위반. 명시 기준 3항 전부 충족해야 통과 — ① 필드 목록과 각 필드의 도메인 출처(어느 `t_*` 축인가), ② 미확정(unknown) 표현 방법, ③ 이 스키마를 검증하는 지점의 위치. 셋 중 하나라도 없으면 위반.
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:265:**RULE-09 · 불확실성의 가시화 · MAJOR**
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:290:**RULE-14 · 사람 개입의 배치 · MAJOR**
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:291:- **norm**: 사람 개입 지점을 **구조로** 배치한다 — ① 의도가 모호할 때 되묻기(전단), ② 구속력 있는 행위 직전 승인(후단), ③ 불확실 케이스 즉시 에스컬레이션. 원칙은 **읽기는 자율, 쓰기는 승인**.
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:292:- **violation_test**: ① 미확정 슬롯이 남은 상태에서 **자동으로 기본값을 채워 확정**하는 경로가 있으면 위반. ② 라이브 write·주문 확정·가격 예외 승인 중 인간 승인 게이트가 없는 것이 1건이라도 있으면 위반. ③ "권위 격자 미적재 셀 / 신규 조합 / 제약 미커버" 같은 고불확실 케이스의 라우팅 목적지가 없으면 위반.
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:293:- **source**: `R7:79-87`, `:152-166`, `:33`, `:61-63`; MEMORY [HARD] "COMMIT=인간승인"
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:319:> **근거가 불충분할 때의 기본값은 '반증 성립'이 아니라 '각하'다.**
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:321:반증은 **주장**이며, 주장하는 쪽이 입증책임을 진다. 이것은 설계 측을 편들기 위한 규정이 아니라 §4.1 ②(입증책임 비대칭)를 제거하기 위한 **대칭화 장치**다 — 설계가 근거를 대야 하듯 반증도 근거를 댄다. **"가능성"만으로는 반증이 성립하지 않는다** — "~할 수도 있다", "~가 우려된다", "~는 검증되지 않았을 수 있다"는 (b)(c)를 충족하지 않는 한 각하된다. 이는 이 프로젝트가 이미 자신에게 적용하는 규율과 같다(`verification-claim-integrity.md` §1.1 surface 3 — 텍스트 패턴 추론은 가설이지 검증된 결함이 아니다).
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:329:| **(c)** | **원본 근거** | `파일경로:라인` 또는 WebFetch로 실재 확인한 URL 또는 선행 산출물 인용. 반증자의 일반 지식·경험은 근거가 아니다 | **각하** |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:347:기각된 접근을 뒤집으려는 반증은 자동 각하되지만, 다음 3항을 모두 갖추면 **별도 안건으로 심리**한다 — ① 기각 사유 원문을 인용한다(`파일경로:라인`) ② 그 사유가 **무효화되었음**을 새 증거로 보인다(측정값·라이브 실측·1차 출처) ③ 뒤집었을 때 영향받는 선행 자산을 열거한다. 3항을 못 갖추면 각하이며, **각하 자체는 §4.6 오판 감사 대상이 아니다**(각하는 판정이 아니라 요건 미달이므로).
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:373:**다수결 금지 [HARD]** — 등급은 규칙 위반의 **심각도와 근거**로 결정되며 반증 건수로 결정되지 않는다. MINOR 30건은 AMEND가 되지 않고 **MINOR 30건**이다. BLOCKER 1건은 나머지 17규칙을 모두 통과해도 REJECT다. 반증자 수·동의 수는 판정에 들어가지 않으며, 같은 위반을 3명이 지적해도 위반 1건이다(중복 병합).
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:382:- 호출 헬퍼는 **재사용**한다 — `.claude/skills/hqv-codex-cross-verify/scripts/codex-review.sh`. 인자 규약: `codex-review.sh <prompt_file> [model] [workdir] [effort]`이며 `-s read-only`가 강제되어 codex는 파일을 쓰지 못한다(스크립트 헤더 주석 참조). 종료코드 `0`=성공 / `1`=프롬프트 없음 / `2`=codex 미가용(데드락·인증).
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:391:- codex 주장이 원본과 어긋나면 그 건은 §4.6.4의 **FP-2(근거 오인용)**로 집계한다.
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:399:| **미확정** | 양쪽 다 근거 부족 | 어느 쪽도 사실로 승격하지 않고 **미해결 항목으로 등재** |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:409:검증자가 정당한 설계를 결함으로 오판한 건수를 집계하지 않으면, **검증은 판정이 아니라 판정자 교체가 된다** — 검증자가 무제한으로 틀려도 비용을 치르지 않으므로 "일단 다 걸고 본다"가 우세 전략이 되고 §4.1 ③(표면적 역선택)이 되살아난다. 근거는 이 프로젝트가 이미 채택한 실증이다 — 인수심사 에이전트가 **비판 에이전트 자신의 오탐률(12%)을 별도로 측정·공개**했고(`R7-agentic-commerce.md:45`) 전체 오탐 지표를 3.6%→1%로 관리했다(`:41`). **비판자도 측정 대상**이라는 것이 그 사례의 설계다.
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:416:| FP-2 | 근거로 인용한 `파일경로:라인`이 실제로 그 내용을 담고 있지 않은 경우 | 근거 확인 시점 |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:443:| 동일 검증자의 FP-2 2건 이상 | 그 검증자의 남은 반증 전건에 대해 근거 재확인 선행 |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:450:본 SPEC이 근거로 삼은 게이트 라운드의 실측치를 그대로 기록한다.
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:476:**[대조 기록 — 은폐하지 않는다]** 원본 게이트 문서 `05_gate/gate-report.md:265-278`이 자체 집계한 오판 감사 수치는 위 §4.8 첫 표와 다르다 — 심리 18건(각하 1) · 중복 병합 후 14건 · 확정 위반 7건 제기/병합 후 5건 · 오판 12건(FP-4 11 + FP-2 부분 1) · **정밀도 R/P = 7/18 = 0.39**. 두 수치의 차이는 "오판"의 집계 기준 차이(각하·반박 1건만 세는 기준 vs FP-1~FP-4 전 유형을 세는 기준)에서 온다. 어느 기준을 쓰든 §4.7.4의 결론은 동일하다 — `gate-report.md:317-321`이 진단한 대로 오판의 다수(12건 중 11건)가 FP-4(규칙 매핑 오류)이고 근거 인용의 원본 실재 확인률은 100%였으므로, **검증자들은 실체를 정확히 봤고 이름을 잘못 붙였다.** 따라서 교정 대상은 설계가 아니라 루브릭 커버리지와 검증 프롬프트다.
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:496:이번 판정이 REJECT가 아닌 근거도 은폐하지 않고 기록한다 — RULE-02는 BLOCKER 규칙이고 A7이 그 `violation_test` ①을 직격했으므로 §4.5를 축자 적용하면 REJECT다. 게이트는 §4.2.3 BLOCKER 정의의 두 번째 절(*"고쳐 붙일 수 있는 결함이 아니라 구조가 틀렸다"*)을 **요건**으로 읽어 AMEND를 냈다 — (i) Intent 스키마 그릇이 제자리에 있고 (ii) 결손은 그릇 **안**의 필드 3부류 출처 선언 누락이며 (iii) 교정이 선언 3분류 + SELECT 1개 + 재파서 1개로 닫히기 때문이다(`gate-report.md:355-362`). **구조가 틀린 것이 아니라 구조가 미완결이다.**
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:516:| RK-13 | **[블로커 후보 · 신규]** **G6 clone 경로의 인프라 실현 가능성이 미검증이다** — FIX-4 반전으로 `/validate`·`/handoff` 두 축이 모두 라이브에서 폐기되어 G6 은 **clone 단일 경로에만 의존**하는데, clone 생성·폐기 절차와 clone↔라이브 동일성 검사가 실제로 가능한지는 **인프라 사실**이며 게이트도 보충 검증도 확인하지 않았다(`coverage-supplement.md:435`, `design-FINAL.md:1001`) | **clone 이 불가하면 G6 자체가 실행 불가**이고, 그때의 처방은 임계 완화가 아니라 **주장 4의 반증 조건을 측정 없이 남겨 두는 것을 명시 기록**하는 것이다. → **M1(S1) 착수 전 선행 확인 항목**(plan.md M1.0′ · acceptance.md AC-M0-10) |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:529:| U-5 | `/validate`의 부작용 유무 | **해소 — 부작용 있음(확정).** `widget_api.py:135` DB UPDATE + `:195-196` 캐시 incr, 사슬 `:1410`→`:1414`→`_gate:218`,`:226`. 출처 `coverage-supplement.md:261-299`. 그 결과가 FIX-4 의 `/validate` 오라클 경로 **폐기**다(§2.3 · REQ-WM-006 X-006.5) |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:539:| **OP-1** | **G6 clone 경로가 인프라 미검증** — `/validate`·`/handoff` 두 축이 모두 라이브에서 폐기되면서 G6 은 clone 단일 경로에만 의존하게 됐는데, clone 생성·폐기와 clone↔라이브 동일성 검사의 실현 가능성은 **게이트도 보충 검증도 확인하지 않았다** | **블로커 후보** | 인프라 사실이며 문서 문언 대조로는 판정 불가. `coverage-supplement.md:435` 가 "이 문서가 확인하지 않았다"로 명시 자백 | plan.md **M1.0′ S1 착수 전 선행 확인 항목** · acceptance.md **AC-M0-10** · RK-13 |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:564:| # | 개정안 (루브릭 축 — **열림**) | 겨냥한 실체 결함 | 출처 | 실체 결함의 상태 |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:567:| **⑤** | **신설 후보 — "자율성 스펙트럼 축"**: *"설계가 에이전트 자율 동작을 도입할 때 (a) 자율성 척도상 현재 레벨을 단정하지 않거나, (b) 레벨 상향의 기계 확인 가능한 조건을 선언하지 않거나, (c) 갭 측정이 자율 레벨을 조정하는 경로가 없는데 그 사실을 명시하지 않으면 위반."* | **18규칙 전체에 이 축을 재는 규칙이 없다** — RULE-01(판정권 소재) · RULE-14(사람 개입 배치) · RULE-05(종료 척도)가 인접하지만 **자율성 스펙트럼 위치와 조율 장치**를 묻지 않는다. 그래서 게이트는 §11.4 ①·③축의 결손을 **한 번도 재지 않았다** | 본 SPEC **§11.0 · §11.8** | **열림.** 실체 쪽은 §11이 **선언으로** 기록했으나(§11.4 판정표 · §11.6 상향 조건), 그 선언은 게이트 판정이 아니라 **설계의 자기 서술**이다 — RULE-10·18의 부분검증과 같은 지위(§11.8) |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:569:[HARD] **①②③과 마찬가지로 "개정안이 겨눈 실체 결함"과 "루브릭 개정"은 다른 축이다.** ④의 실체(형제 사례)는 **열려 있고**, ⑤의 실체(자율성 축 결손)는 **§11이 기록했으나 판정받지 않았다.** 이 구분을 뭉개 "§11을 썼으니 ⑤가 닫혔다"로 읽으면 위조다.
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:577:| 순서 | 조건 | 상태 | 근거 |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:584:| ⑥ | 커버리지 보충 — FIX-9 · FIX-10 | **닫힘** | §3.9 U-009.5/6/7. **[출처 구분] 보충 라운드 검증이며 원 라운드 검증이 아니다** |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:592:| 항목 | 이전 상태 | **현재 상태** | 근거 |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:596:**근거 요지** — 라이브는 PostgreSQL **18.4** · `t_*` 46테이블 · DB 총 크기 **37 MB**(`g6-clone-feasibility.md:52-66` 직접 실측)이고, 무료·로컬·반복가능·라이브 무영향 경로(`pg_dump` → 로컬 `createdb`/`pg_restore` → 동일성 검사 → `dropdb`)가 열려 있다. 유일한 관문이었던 **로컬 PG18 부재**는 Homebrew `postgresql@18` 이 `stable 18.4` (bottled)로 **라이브와 major·minor 정확 일치**하므로 설치 한 줄로 해소된다(`:163`·`:171`·`:287`). 비용이 드는 경로(Railway PITR · 별도 인스턴스)가 **유일한 경로가 아니기 때문에** `FEASIBLE_WITH_COST` 가 아니다(`:285-287`).
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:598:**다음 단계**: `brew install postgresql@18` (대안: Docker Desktop 기동 + `postgres:18` 이미지) → clone 실제 생성 1회 리허설(사용자 승인 필요, `:279`·`:300`).
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:615:- `.claude/skills/hqv-codex-cross-verify/scripts/codex-review.sh` — codex 독립 검증 호출 헬퍼
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:622:## 11. 자율성 경계 선언 (ESTC 3단 축)
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:626:루브릭 18규칙에는 **자율성 스펙트럼 조율을 재는 규칙이 없다.** RULE-01은 판정권의 소재를, RULE-14는 사람 개입의 배치를, RULE-05는 종료 척도의 반증가능성을 재지만, **"이 설계가 자율성 스펙트럼의 어디에 서 있고 무엇이 충족되면 한 칸 올라갈 수 있는가"** 를 재는 규칙은 18개 중 어디에도 없다(§4.2.3 규칙 전문 전수 대조).
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:630:[HARD] 이 절은 부록이 아니라 **일급 요구사항**이다 — 없으면 나중에 "왜 자율 레벨을 못 올리는가"의 근거를 다시 만들어야 한다. 그리고 이 절은 **새 요구사항을 발명하지 않는다.** 이미 설계 문서에 있는 사실을 이 축으로 재조명해 기록하는 것이 범위 전부다.
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:638:| **①** | **사람이 세계(ESTC)를 선언한다** | *"모든 세계를 완벽하게 명세한다는게 사실 가능해요? 불가능해요? (…) 모든 것을 명세하지 않으면은 심볼릭 월드 모델은 못 만듭니다. 그래서 되게 작은 세계부터 만들기 시작해야 돼요."* — `R3:99`(F2:35). ESTC 4요소 정의는 `R3:313`(A-1) |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:639:| **②** | **에이전트가 그 경계 안에서 자율 동작한다** | 경계 붕괴 경고 — *"리즈닝 트레이스에 문제가 하나도 없어요. 전부 다 논리적으로 완벽해요. (…) 추론이 기대어서 있는 세[계]가 잘못됐기 때문이에요. (…) 가장 위험한 경계 붕괴입니다."* — `R3:186`(F2:26~29) |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:640:| **③** | **갭을 재서 자율 레벨을 조율한다** | 4단계 스펙트럼 — *"처음에는 룰베이스로 (…) 그다음에는 플로우 가이드 단계로 (…) 세 번째가 자율성이라는 스펙트럼을 내가 조율해서 세마이 어터노머스 레벨에서 (…) 마지막에 이제는 그 풀리 [어터노머스] 레벨로 넘어간다"* — `R3:104`(F4:56). 조율 신호는 갭 — *"갭이 경계 밖으로 나가면 자율모드를 낮추고"* — `R3:321`(A-9) |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:642:[HARD] **원천의 한계를 함께 옮긴다.** 이 프레임의 출처 검증은 2차 자료 수준에서 멈춰 있다 — 두 권 **1,252쪽 원문을 대조하지 않았고**, ESTC의 구체적 스키마 정의와 월드 모델 캔버스의 실제 양식은 확인하지 못했으며, **ESTC의 학술적 신규성은 미판정**이다(`R4:162-167`). 다만 "그가 창시했다고 표기되는 것"의 범위 자체는 확인됐다 — 뉴로심볼릭·월드모델이 아니라 **ESTC 프레임워크와 월드 모델 캔버스**이며, "뉴로심볼릭 월드모델 창업자"는 틀린 압축이다(`R4:8`·`:39`·`:41`).
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:650:①축("사람이 세계를 선언한다")이 실제로 성립하려면 **그릇이 있고 사람이 그 그릇을 편집할 수 있어야** 한다. 두 조건을 분리해 잰다.
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:652:| 요소 | 후니 자산 | 그릇 실재 | **사람이 편집 가능한가** | 근거 |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:659:**요약: 4요소 중 사람이 편집할 수 있는 것은 E·C 둘뿐이고, 그중 C는 11.8%만 채워져 있다.**
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:665:| 갈래 | 대가 | 근거 |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:668:| **T를 함수로** (본 SPEC 의 선택) | **사람이 못 만진다.** 즉 T축에 한해 *"사람이 명세하는 세계"* 가 아니라 ***"개발자가 코딩하는 세계"*** 가 된다 | `design-FINAL.md:872` |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:670:본 SPEC 은 **후자를 택했고** 그 근거는 `design-FINAL.md:872`다 — *"ESTC의 개념 축은 채택하되 테이블 4벌 신설은 채택하지 않는다."*
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:672:[HARD] **이 선택이 ①축의 절반 포기임을 인정한다.** E·C는 사람이 선언하고, S·T는 사람이 선언하지 않는다. 이것을 "설계가 ESTC를 채택했다"로 뭉개면 ①축 판정이 위조된다.
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:676:| 축 | 판정 | 근거 | SPEC 내 위치 |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:678:| **① 사람이 세계를 선언** | **부분** | E·C는 그릇 있음 + 편집 가능(단 C는 11.8%). **S는 라이브 그릇 없음**(사이드카), **T는 그릇 없음 + 편집 불가**(함수 구현). 4요소 중 2요소만 ①축을 성립시킨다 | §11.2 · §11.3 · §1 W-3 |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:679:| **② 경계 안에서 자율** | **충족 (강함)** | 아래 7근거 | §3.1 · §3.3 · §3.7 · §3.8 |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:680:| **③ 갭 재서 자율 조율** | **미충족** | 아래 2사유 | §5 RK-1 · §3.9 |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:682:**②축이 강한 이유 — 7근거 (전부 기존 설계 사실)**
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:684:| # | 근거 | 좌표 |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:687:| ②-2 | **자동 확정 경로가 코드에 없다** — *"자동 확정 임계를 두지 않는다. `confidence=CONFIRMED`여도 자동 주문 경로가 코드에 없다"* | 설계 §12-15 |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:688:| ②-3 | **확정은 인간 확인 게이트 전용** — 위젯 `/price` 라이브 재계산 → 사람 확인 → `/handoff` 서명. 루프는 어떤 경우에도 스스로 주문을 확정하지 않는다 | 설계 §12-13 · §6 T6 · §3.3 U-003.5 |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:692:| ②-7 | **능동 개입 미채택** — *"라이브 write 0 원칙과 '쓰기는 승인' 규율 하에서는 능동 실행 권한을 줄 수 없다. 능동성은 `sim_escalation` 큐에 항목을 쌓는 수준으로 축소"* | `design-FINAL.md:875` |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:698:| ③-1 | **측정이 자율 레벨을 조정하지 않는다.** G4(전이함수 정확도)·G7(비용)·G9(순증분)은 측정하지만, 임계 초과의 처방이 **"자율 다이얼 하향"이 아니라 "폐기"** 다 — G4 실패 = 전면 중단, G7 p95>2s = 고객 실시간 루프 폐기 후 관리자 도구로 강등, G9 (가)=(나) = 논지 부분 반증 기록(§7 게이트표 마지막 열 = "무엇을 버리는가"). `R3:321`이 말한 *"갭이 경계 밖으로 나가면 자율모드를 낮추고"* 의 **연속적 다이얼이 없다** — 본 설계의 처방은 이진(유지/폐기)이다 |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:703:### 11.5 현재 자율 레벨 선언 [HARD]
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:709:| 근거 | 왜 세미 오토노머스가 아닌가 |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:711:| 자동 확정 경로 **부재** (②-2) | 세미 오토노머스는 *"자율성 스펙트럼을 조율해서"* 일부 결정을 에이전트에게 위임하는 단계인데, 본 설계는 위임 지점이 **0개**다 |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:712:| 확정 = **인간 게이트 전용** (②-3) | 비가역 행위의 결정권이 전건 사람에게 있다 |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:715:[HARD] **그리고 이것은 결함이 아니라 의도적 선택이다.** 근거는 원천 프레임 자신의 경고다 — *"인쇄는 비가역이고 금액이 즉시 확정된다. 초기엔 **자동 확정 임계를 사실상 100%로** 두는 것이 안전"*(`R3:358`). 설계는 이 경고를 한 걸음 더 밀어 **임계를 두지 않고 경로 자체를 없앴다**(`design-FINAL.md:865` — *"루프는 자동 확정 경로가 아예 없다"*).
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:717:### 11.6 자율 레벨 상향 조건 [HARD]
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:723:| **(a)** | **③축이 성립할 것** — (i) 예측 vs 실제 갭을 실제로 **측정하는 경로가 존재**하고, (ii) 갭이 임계를 넘으면 자율 레벨이 **자동 하향되는 장치**가 있을 것 | (i) `sim_observation` 의 O2 채널에 실사용 유입 행 수 > 0 · (ii) 갭 임계 초과 시 레벨 하향을 수행하는 코드 경로가 실재하고 그 경로에 대한 게이트가 있을 것 | **미충족** — (i) `t_wgt_handoff_logs` 0행 · (ii) 하향 장치 0건(§11.4 ③-1) |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:726:| **(d)** | **실무진 승인** | 도메인 오너 승인 기록 존재 | **미획득** — MEMORY [HARD] "COMMIT=인간승인" · `R3:325`(A-13) |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:728:[HARD] **위 조건이 충족되기 전에는 자율 레벨을 올리지 않는다. 조건 미충족 상태의 상향은 이 SPEC 위반이다.** 이 금지는 §3.3 U-003.5(확정 경로 전용) · §3.8(fail-closed 전수)과 같은 강도로 구속한다.
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:730:[HARD] **(a)(c)는 본 SPEC 범위 밖의 자산에 의존한다** — 따라서 본 SPEC 이 완주해도 자율 레벨은 올라가지 않는다. 이 사실을 "S1 성공 = 자율화 진척"으로 읽으면 오독이다.
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:738:| **T 사람 편집** | webadmin 에 T 편집 화면(= `models.py` 모델 추가 + admin 등록) | `raw/webadmin/**` 수정 → **OS-1 · RULE-04 (c) 위반** |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:750:이 공백을 닫는 경로는 하나뿐이다 — **루브릭에 이 축을 재는 규칙을 신설**하는 것. 그래서 §8 후속 안건에 **루브릭 개정안 ⑤(자율성 스펙트럼 축 신설)** 를 등재한다(FU-6). 본 SPEC 도 설계도 `evaluation-rubric.md` 를 수정할 권한이 없으므로(§4.8), 등재가 이 절이 할 수 있는 전부다.
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:762:Sources: 웹 검색을 사용하지 않았다. 본 문서의 모든 근거는 저장소 내부 `파일경로:라인`이며, 외부 URL 인용이 없으므로 검증된 URL 목록 절을 두지 않는다.
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:1:# SPEC-WORLDMODEL-001 — 수용기준 (Acceptance Criteria)
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:4:> [HARD] 각 기준은 **"무엇을 실행하면 무엇이 나온다"** 형태다. 방향 서술("정확도를 높인다")은 수용기준이 아니다.
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:27:- **기대**: 값 도메인 출처가 blanket 1줄이 아니라 **3분류**로 기재되어 있다 — (i) 열거축 5(`siz_cd`·`plt_siz_cd`·`mat_cd`·`proc_cd`·`bdl_qty`) → `_sim_dim_candidates` import, (ii) 열거축 +1 `print_opt_cd` → `t_prd_product_print_options` distinct + NULL 제외 + G0 카운트 기록 + 라벨 폴백 규칙, (iii) 비열거축 6의 selections 키 제외 명시. 그리고 §6 T0 워크스루에 (ii)가 선행 조건이라는 각주가 있다.
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:47:- **실행**: `/validate` 엔드포인트 처리 경로의 라이브 코드를 읽어 write(DB·캐시·로그) 발생 여부를 판정하고 근거 `파일경로:라인`을 기록한다.
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:48:- **기대**: "부작용 없음" 또는 "부작용 있음"의 **확정 판정**과 근거 좌표가 산출물에 존재한다.
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:50:- **판정 (충족 · 출처 `coverage-supplement.md:261-299`)**: **부작용 있음(확정).** 부작용은 핸들러 본문이 아니라 **공통 게이트 `_gate`** 에서 발생한다 — 사슬 `api_validate`(`widget_api.py:1410`) → `:1414 _gate` → ① `:226 _touch_used` → **`:135` `.update(last_used_dt=…, last_used_org=…)` on `t_wgt_widgets`**(`:119 USE_TOUCH_SEC=3600` 스로틀이 있으나 `.filter().update()` 는 조건 불일치에도 UPDATE 문을 발행) · ② `:218 _rate_ok` → **`:195-196` `cache.get_or_set` + `cache.incr`**(스로틀 없음 · 매 요청). `/handoff` 의 `TWgtHandoffLogs` 로깅은 이 경로를 **타지 않는다**(`_log_handoff` 호출부 `:1963` 단 하나 · 로깅 데코레이터 부재).
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:63:  - **FIX-8** — `zero_reason` **4분류**(1차축 = `matched_row`) + 3a/3b 판별 **읽기전용 SELECT 1건**(g′) + 근거 좌표 `pricing.py:626-630` → **`:655-660`** 교체(병기 `:106-108`·`:599-607`) + G8 분모 추가.
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:70:- **실행**: `05_gate/coverage-supplement.md` §1 판정문을 읽고 (a)(b)(c) 3검사의 결론과 근거 좌표를 확인한다.
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:73:  - **(b) 부작용 0** — 설계 명세 6근거 + **호출 대상 6심볼 라이브 원본 전건 실측**. `pricing.py` 전역 write 매치 0(유일 매치 `:667` 은 로컬 dict), 유일 원시 SQL 은 `:308` `SELECT fn_calc_pansu` 이고 그 함수는 `sql/32_fn_calc_pansu.sql:30` 에서 **`STABLE`·DML 0**. (`coverage-supplement.md:39-51`·`:94-127`)
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:88:### AC-M0-08 · 검증 출처 구분 표기 [HARD · 사후 위조 방지]
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:91:- **기대**: 모든 서술에 **두 배지가 함께** 붙어 있다 — ① **"보충 라운드 산출이며 원 검증 라운드 산출이 아니다"**(출처 구분), ② **"명세의 통과이지 구현·측정의 통과가 아니다"**(`simcore/*`·`gates/*.py` 는 미래 산출물이며 골든 의도 20건도 미존재). 배지 없는 "검증됨" 서술 **0건**.
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:92:- **분모**: RULE-03·RULE-17 "검증됨" 서술 전수 (spec.md §3.9 U-009.5/6 · plan.md M0.6 · acceptance.md AC-M0-06/07 · `design-FINAL.md:40`·`:738`·`:750`).
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:93:- **후퇴**: 배지 누락 서술이 1건이라도 있으면 **원 라운드에서 검증된 것처럼 읽히는 사후 위조**이므로, 배지 추가 전 그 문서를 판정 근거로 쓰지 않는다.
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:106:- **기대**: P-1~P-4 전건에 **실증 결과와 근거**가 산출물에 존재한다. "가능할 것이다"는 실증이 아니다.
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:120:## B. 게이트 수용기준 (M1 = S1 종료 조건)
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:154:- **분모**: 라이브 `t_*` **46테이블 − 명시 제외 2테이블** — **제외 ①** `t_wgt_handoff_logs`(clone 리플레이가 INSERT/DELETE 유발: `widget_api.py:1677`·`:1733`) · **제외 ②** `t_wgt_widgets`(`/validate` 리플레이가 `last_used_dt`/`last_used_org` UPDATE 유발: `widget_api.py:135` → `max(upd_dt)` 해시를 흔든다). **[HARD] 근거 없는 제외는 RULE-13 ② 우회다** — 두 제외는 AC-G1.1 과 **한 쌍으로만** 성립한다.
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:163:- **후퇴 [HARD]**: 대체 계측 미실행 또는 불일치 시 **G1 분모에서의 제외가 근거를 잃는다**(RULE-13 ② 우회) → **G1 을 46테이블 전수로 되돌리고 리플레이 자체를 금지**한다. clone 인프라 자체가 불가하면(AC-M0-10) 이 게이트도 실행 불가이며 같은 후퇴가 적용된다.
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:195:- **실행**: `t_siz_pansu` 존재 조회 결과와 Outcome `price.confidence`를 대조한다.
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:198:- **후퇴**: `confidence` 축 폐기 → 전건 실무진 라우팅으로 후퇴.
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:240:## C. 구조·규약 수용기준
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:245:- **기대**: 예외 시 통과 처리 **0건**. 특히 `evaluate_price` 예외 시 **0원 대체 금지** — `price.{supply_amount,vat_amount,payable_total}=None` + `confidence=NONE` + `blockers[ENGINE_ERROR]`. `_sim_disallowed` 예외를 "가능"으로 처리하지 않음. `_price_gap_errors` 예외 시 후보 미제시. escalation 기록 실패 시에도 **차단 상태 유지 + 로그 이중화**(기록 실패 시 통과 금지).
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:273:## D. 설계 검증 거버넌스 수용기준 (spec.md §4)
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:280:- **기대**: **RULE-01~RULE-18 전 18규칙**이 각각 **RULE-ID / norm / violation_test / 심각도 / source(근거)** 5요소를 갖춘 **전문**으로 존재한다(요약·발췌가 아니다). 등급 분포는 BLOCKER 5 · MAJOR 9 · MINOR 4다.
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:282:- **후퇴**: 누락 시 해당 규칙은 그 라운드에서 판정 근거로 쓸 수 없다.
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:287:- **기대**: (i) 루브릭이 **설계안 부재 시점에 작성되었고 작성자가 어떤 설계안도 읽지 않았다**는 사실이 근거 좌표(`evaluation-rubric.md:4`)와 함께 기재, (ii) 그 이유가 **"사후 선언된 기준은 결론을 역산할 수 있다"**로 명시, (iii) 설계안 제출 이후의 규칙 수정이 기록 대상(개정 이력 의무)임이 명시.
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:310:- **실행**: 판정 기록에서 각 지적의 처리 순서와 등급 결정 근거를 조회한다.
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:311:- **기대**: (i) 모든 지적이 **설계 측 반박 기회를 거친 뒤** 판정되었다(즉결 기각 0건), (ii) 같은 위반을 복수 검증자가 지적한 경우 **중복 병합해 1건**으로 셌다, (iii) 등급이 **건수가 아니라 심각도와 근거**로 결정되었다, (iv) `violation_test` 해석이 갈린 사실이 있으면 그 분기가 기록되었다.
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:317:- **실행**: `.claude/skills/hqv-codex-cross-verify/scripts/codex-review.sh <prompt_file> gpt-5.5 <workdir> xhigh` 로 라운드를 수행하고 산출물을 조회한다.
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:350:| # | 항목 | 수용 조건 |
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:362:| 순서 | 조건 | 상태 | 확인 수용기준 |
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:379:## G. 자율성 경계 수용기준 (spec.md §11 — ESTC 3단 축)
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:381:> [HARD] 아래 5기준은 spec.md **§11(자율성 경계 선언)** 을 검사한다. 이 축은 루브릭 18규칙이 재지 않는 축이므로(§11.0), 이 기준들은 **게이트 판정의 대체가 아니라 SPEC 내부 자기 구속**이다. 루브릭 개정안 ⑤(§8 FU-6)가 심의·채택되기 전까지 이 축의 외부 판정은 존재하지 않는다.
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:383:### AC-AUT-01 · 자율 레벨 선언 존재
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:385:- **측정 대상**: spec.md §11.5 의 자율 레벨 단정문.
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:387:- **기대**: (i) `R3:104` 4단계 척도(룰베이스 → 플로우 가이드 → 세미 오토노머스 → 풀리 오토노머스)가 인용 좌표와 함께 명시되고, (ii) 그 척도상 **현재 레벨이 단정**되어 있으며("~일 수 있다" 류 유보 서술이 아니다), (iii) "세미 오토노머스가 아니다"의 근거 3항(자동 확정 경로 부재 · 인간 게이트 전용 · LLM 판정권 0)이 각각 좌표와 함께 제시되고, (iv) 이것이 **의도적 선택**임이 `R3:358` 인용으로 뒷받침된다.
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:389:- **후퇴**: 레벨 단정이 없거나 유보 서술이면, "왜 자율 레벨을 못 올리는가"의 근거가 부재한 상태이므로 §11 을 자율성 판정 근거로 쓰지 않는다.
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:391:### AC-AUT-02 · 자동 확정 경로 부재 (②축 최강 근거의 기계 확인)
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:393:- **측정 대상**: 구현 코드에서 `confidence` / `feasible` 값만으로 주문 확정에 도달하는 경로.
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:395:- **기대**: `confidence` 또는 `feasible` 값 판정만으로 주문 확정에 도달하는 경로 **0건**. 설계 §12-15(*"자동 확정 임계를 두지 않는다"*)와 §12-13(*"확정은 위젯 `/handoff` + 인간 확인 게이트 전용"*)이 코드에서 성립한다.
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:396:- **분모**: `confidence`/`feasible` 참조 지점 전수 × 각 지점의 하류 호출 경로.
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:404:- **기대**: (i) `pref_score` 가 정렬 키의 **④ 위치에만** 존재하고 ①`feasible` · ②`confidence` · ③`reach`/`budget_penalty` 항에 등장하지 않는다(설계 §4.6, `design-FINAL.md:479-496`). (ii) 차등 테스트에서 `soft_prefs` 극단 변화가 **①~③의 상대 순서를 한 건도 바꾸지 못한다** — 즉 `feasible != PROVEN_OK` 후보가 `PROVEN_OK` 후보보다 앞서는 경우 0건, `confidence != CONFIRMED` 가 `CONFIRMED` 를 앞서는 경우 0건.
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:406:- **후퇴**: `pref_score` 가 ④ 밖에 나타나거나 차등 테스트에서 역전이 1건이라도 발생하면 **RULE-01 (a) 실질 방어선 붕괴**이며 §11.4 ②-1 근거가 무효가 된다 → LLM 기여 경로를 정렬에서 제거하고 재설계.
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:415:- **후퇴 [HARD]**: 어느 한 항이라도 누락되면 **①③의 결손이 은폐된 상태**다. 특히 ①을 "충족"으로, ③을 "부분"으로 상향 표기하면 §11.2·§11.4 의 사실과 어긋나는 **판정 위조**이므로, 표기 교정 전 §11 을 근거로 쓰지 않는다.
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:417:### AC-AUT-05 · 상향 조건 준수 (자율 레벨 무단 상향 금지)
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:419:- **측정 대상**: §11.6 (a)~(d) 미충족 상태에서 자율 레벨을 올리는 변경의 존재 여부.
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:420:- **실행**: 각 마일스톤 종료 시 ① §11.6 (a)~(d) 의 현재 상태를 재평가하고(각 항의 "확인 방법(기계)" 열대로 실행), ② 그 시점 구현에 대해 **AC-AUT-02 를 재실행**하며, ③ 자동 위임 지점(사람 확인 없이 상태를 전이시키는 경로)이 신설됐는지 `git diff` 로 대조한다.
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:423:- **후퇴 [HARD]**: 1건이라도 발견되면 **이 SPEC 위반**이다(§11.6). 처방은 조건 완화가 아니라 **해당 변경의 철회**다 — (a)(c)는 본 SPEC 범위 밖 자산(주문 실체 테이블 · 관측 write)에 의존하므로 본 SPEC 내부에서는 어떤 경우에도 충족될 수 없고, 따라서 **본 SPEC 완주로는 자율 레벨이 올라가지 않는다.** "S1 성공 = 자율화 진척"으로 읽는 것 자체가 오독이다.
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:427:Sources: 웹 검색을 사용하지 않았다. 본 문서의 모든 근거는 저장소 내부 `파일경로:라인`이므로 검증된 URL 목록 절을 두지 않는다.
+
+ succeeded in 145ms:
+31:**설계 심사도 같은 구조를 받는다.** 심사자의 인상(instruction)이 아니라 규칙 적용(action)이 판정을 만든다. 즉 `violation_test` 는 심사자가 **실행할 수 있는 절차**여야 하며, "느낌상 부족하다"는 규칙 위반의 근거가 될 수 없다.
+58:- **norm**: 좋은 설계는 **최종 판정값**(금액, 유효/무효, 판걸이수, 견적 확정 여부)을 **결정론 엔진만** 산출하게 하고, LLM·뉴로 계층에는 후보 제안·번역·설명 역할만 부여한다.
+59:- **violation_test**: 설계 문서에서 다음 중 **하나라도** 발견되면 위반 — (a) LLM 출력이 금액·수량·코드값을 **직접 값으로** 산출하는 경로가 존재한다, (b) LLM 출력이 결정론 검증기를 거치지 않고 고객·주문 시스템에 도달한다, (c) LLM이 "이 조합은 가능/불가능"을 판정하는 경로가 있다. 판정 절차: 설계의 데이터 흐름도에서 LLM 노드의 **출력 화살표 도착지**를 전수 추적한다. 도착지가 `evaluate_price`/제약엔진/스키마 검증기가 아닌 것이 1건이라도 있으면 위반.
+63:- **norm**: 좋은 설계는 뉴로 계층이 심볼릭 계층으로 넘기는 산출물을 **타입 있는 기호 자료구조**(필드·도메인·필수여부가 선언된 스키마)로 고정하고, 자유 텍스트 전달을 금지한다.
+64:- **violation_test**: 설계 문서에 **의도 객체(또는 동등물)의 필드 스키마가 명시되어 있지 않으면** 위반. 명시 기준 3항 전부 충족해야 통과 — ① 필드 목록과 각 필드의 도메인 출처(어느 `t_*` 축인가), ② 미확정(unknown) 표현 방법, ③ 이 스키마를 검증하는 지점의 위치. 셋 중 하나라도 없으면 위반.
+68:- **norm**: 좋은 설계는 자신의 모든 구성물을 neuro / symbolic / knowledge / worldmodel / ops **다섯 층 중 하나에 귀속시켜 표기**한다.
+69:- **violation_test**: 설계 문서에 구성물별 층 귀속 표가 없거나, 층 미표기 구성물이 1건 이상이면 위반. (문제 원장이 `layer` 필드를 전 항목에 부여한 것과 대칭 — `03_problem/problem-ledger.md:79`)
+75:- **norm**: 좋은 설계는 **비가역 행위(주문 확정·생산 투입) 이전에** 후보를 실행 없이 통과시키는 루프를 명시한다. 최소 5단계 — ① 후보 열거 ② 월드모델 통과(부작용 없음) ③ 채점 ④ 1개만 실행 ⑤ 관측 후 재계획.
+76:- **violation_test**: 다음 시나리오에서 설계가 어떻게 동작하는지 문서에서 추적 가능해야 한다 — *"고객이 옵션 6개 중 5개를 고른 상태에서 6번째 옵션 후보 3개를 화면에 띄운다."* 이때 (a) 3개 후보 각각의 결과(가능여부·가격·결손축)를 **선택 전에** 계산하는 경로가 문서에 없거나, (b) 그 계산이 부작용(DB write·주문 상태 변경)을 동반하면 위반. 또한 "저장/커밋 후 검증"(사후 통보) 구조가 남아 있으면 위반.
+80:- **norm**: 좋은 설계는 **같은 의도를 k회 반복 입력했을 때 같은 최종 상태(선택 옵션 집합 + 최종가)가 나오는지**를 게이트로 삼고, 결정론을 모델이 아니라 엔진 쪽에서 확보한다.
+81:- **violation_test**: 설계에 (a) 재현성 측정 방법(무엇을 몇 회 돌려 무엇을 비교하는가)이 없거나, (b) 비교 대상이 **최종 상태가 아니라 대화 텍스트**이거나, (c) 재현성 확보 수단이 "temperature 0" 등 모델 설정에만 의존하면 위반.
+87:- **norm**: 좋은 설계는 **최종 금액의 권위를 `evaluate_price` 단일 함수로 유지**하고(D-18), `raw/webadmin` 및 `pricing.py` 엔진 코드를 수정하지 않으며, 새 계층은 드롭인/외부 계층으로 분리한다.
+88:- **violation_test**: 설계 문서에서 (a) `evaluate_price` 외의 경로가 고객에게 보여지는 **확정 금액**을 산출하거나, (b) 온톨로지·KB·컴파일 레이어가 가격 **값**을 계산하거나, (c) `raw/webadmin/**` 또는 `pricing.py` 의 수정을 전제한 단계가 1건이라도 있으면 위반. 단 "가지치기용 **단조 하한** 비용 태그"는 값이 아니라 지표이므로 위반이 아니다(단, 화면 노출 시 확정가와 구분 표기해야 함 — 미구분이면 위반).
+91:#### RULE-09 · 불확실성의 가시화 · **MAJOR**
+92:- **norm**: 좋은 설계는 **모델이 못 미더운 구간을 값이 아니라 플래그로 드러낸다** — 권위 룩업 기반 결과와 폴백/추정 기반 결과가 출력에서 구분되고, 데이터 구멍이 0원(또는 정상값)으로 조용히 흡수되지 않는다.
+93:- **violation_test**: 다음 두 시나리오에서 출력이 서로 **구별 가능**해야 한다 — ① 권위 판걸이수 룩업이 있는 사이즈의 견적 vs 기하 폴백으로 계산된 견적, ② 단가행이 실제로 0원인 구성요소 vs 단가행이 **없어서** 0원으로 처리된 구성요소. 설계 출력 스키마에서 두 쌍 중 하나라도 구별 필드가 없으면 위반. (현행은 구별 불가 — `pricing.py:561-582` 출력 스키마, `D2:372` 인용 `problem-ledger.md:209`)
+97:- **norm**: 좋은 설계는 **자신이 틀렸음을 보이는 기계 판정 절차**를 스스로 선언한다 — 무엇을 어떤 도구로 측정해 어느 값이면 실패인가.
+98:- **violation_test**: 설계 문서에 다음 4항이 모두 없으면 위반 — ① 측정 대상(전이함수의 무엇을 재는가), ② 측정 도구(어떤 스크립트/쿼리/명령), ③ 통과 임계(허용오차 포함), ④ 분모(몇 개 중 몇 개인가). "정확도를 높인다", "커버리지를 개선한다" 같은 방향 서술만 있으면 위반. 특히 **정확도 측정 계획이 없는 전이함수 확장**은 이 규칙 위반이다.
+102:- **norm**: 좋은 설계는 **가능성 판정과 가격 산출을 같은 상태 위에서 결합**해, 제약을 위반한 조합의 가격이 산출·표시되지 않게 한다.
+103:- **violation_test**: 시나리오 — *"제약규칙 `R_EXCL_COATING_THIN_PAPER` 를 위반하는 조합(얇은 종이 + 코팅)으로 견적을 요청한다."* 설계에서 이 요청이 (a) 가격을 반환하거나, (b) 가격은 반환되고 경고만 붙거나, (c) 어느 층이 차단하는지 문서에서 특정되지 않으면 위반. 또한 "단가행 부재(price_gap)"·"조합템플릿 미등록(tmpl_combo_gap)" 두 하드 제약이 **제약 모델 안에 들어와 있지 않으면** 위반(현행은 밖에 있음).
+109:- **norm**: 좋은 설계는 **같은 개념의 정의가 두 곳 이상에 병렬 존재하지 않게** 하고, 그 정의를 **누가 어느 화면에서 유지하는지**를 명시한다. 새 지식은 실무진이 편집 가능한 표면(폼빌더 역파싱 가능한 정형 shape)에 착지해야 한다.
+110:- **violation_test**: 두 검사 — ① 설계가 도입하는 각 개념(차원·규칙·효과·상태 등)에 대해 "정의가 사는 곳"이 문서에 **정확히 하나** 지정되어 있는가. 두 곳 이상이면(또는 "코드와 DB 양쪽에 둔다"면) 위반. ② 설계가 새 규칙 표현을 도입할 때 그 표현이 webadmin 폼빌더에서 역파싱 가능한지 판정이 문서에 없으면 위반. 그리고 **설계가 기존 5벌 병렬(ref_dim) 문제를 6벌로 늘리면** 자동 위반.
+114:- **norm**: 좋은 설계는 산출된 결과에서 **권위 원천(권위 엑셀 셀 좌표 또는 라이브 코드행)까지 역추적**할 수 있게 한다.
+115:- **violation_test**: 시나리오 — *"이 견적의 코팅비 12,000원은 어디서 왔는가?"* 설계 산출물만으로 (a) 매칭된 단가행 식별자, (b) 그 행이 유래한 권위 좌표(`xlsx:파일#시트!셀` 또는 `t_<table>/<CODE>`), (c) 그 행이 선택된 이유(차원 키·티어)를 **세 개 다** 얻을 수 없으면 위반. 셋 중 하나라도 빠지면 위반.
+119:- **norm**: 좋은 설계는 불가 판정 시 **왜 불가한가(why-not)와 무엇을 풀면 가능한가(복원 경로)** 를 알고리즘 출력으로 반환한다. "관리자에게 문의" 는 탈출구가 아니다.
+120:- **violation_test**: 시나리오 — *"박과 에폭시를 같은 면에 동시 선택했다."* 설계 산출물이 (a) 위반 규칙의 신원(`rule_cd`)을 반환하지 않거나, (b) 어느 선택을 되돌리면 가능해지는지 후보를 반환하지 않으면 위반. 추가로 **"금지(제약)"와 "미등록(데이터 공백)"을 호출자가 구별할 수 없으면** 위반(현행 tmpl_combo_gap이 구별 불가 — `D6:259`).
+126:- **norm**: 좋은 설계는 (a) **fail-open 을 도입하지 않고**(평가 예외를 "통과"로 처리 금지), (b) 라이브를 변경하는 단계마다 **백업·DRY-RUN·undo** 를 갖추며, (c) 판정 입력의 **신선도**(라이브 재-SELECT)를 규정한다.
+127:- **violation_test**: 세 검사 — ① 설계에 새로 도입되는 평가 지점에서 예외 발생 시 동작이 문서에 명시되지 않았거나 "통과/무시"이면 위반. ② 라이브 write 를 수반하는 단계에 백업·DRY-RUN·undo 중 하나라도 빠지면 위반. ③ 판정이 스냅샷/캐시를 신뢰하고 라이브 재조회 규정이 없으면 위반.
+131:- **norm**: 좋은 설계는 (a) 이미 기각된 접근(N-01~N-19 / R1~R18)을 재제안하지 않고, (b) 이미 잘 되고 있는 것(N-20~N-30)을 문제로 세우지 않으며, (c) 다른 하네스가 소유한 작업(가격 배선 적재 등)을 흡수하지 않고, (d) 사용하는 권위 버전과 상품 분모를 **하나로 고정 선언**한다.
+132:- **violation_test**: 네 검사 — ① 설계 제안을 `problem-ledger.md` §4.1 표(N-01~N-19)와 대조. 일치 항목 1건 이상이면 위반(단, **기각 사유가 무효화되었음을 새 증거로 논증**하면 위반이 아니라 relitigate 정당화로 §3.4 심리 대상). ② §4.2 표(N-20~N-30) 항목을 결함으로 서술하면 위반. ③ P-08(가격 배선 미완)을 설계 범위로 흡수하면 하네스 경계 침범으로 위반(`problem-ledger.md:432`). ④ 권위 엑셀 버전과 상품 분모가 문서 내에서 단일하게 선언되지 않으면 위반.
+138:- **norm**: 좋은 설계는 조합폭발을 **전수 열거·사전계산 적재로 풀지 않고**, 규칙으로 공간을 접는 방식을 택하며, 그 방식이 **우리 데이터에서 실제로 작동하는지 측정하는 파일럿**을 함께 명시한다.
+139:- **violation_test**: 두 검사 — ① 설계에 "모든 조합의 결과를 미리 계산해 테이블에 적재" 류 단계가 있으면 위반(기각 N-19). ② 설계가 컴파일·제약 전파·열거 축소 등 어떤 기법을 채택하든, **1상품 파일럿에서 무엇을 실측할지**(예: 노드 수·컴파일 시간·유효 구성 수·질의 지연)가 문서에 없으면 위반. "이론적으로 작동한다"만 있고 측정 계획이 없으면 위반이다.
+143:- **norm**: 좋은 설계는 결과축(가격 외 납기·수율·제작가능성 등)을 확장할 때 **의사결정에 실제로 쓰이는 양만** 예측 대상으로 삼고, 각 축마다 **데이터 원천**을 명시한다. 원천 없는 축은 도입하지 않는다.
+144:- **violation_test**: 설계가 도입하는 결과축 각각에 대해 (a) 그 값이 어느 결정을 바꾸는가, (b) 그 값의 데이터 원천(테이블/엑셀/실무진 입력)이 무엇인가 — 둘 중 하나라도 없으면 위반. 특히 라이브 46개 도메인 테이블에 원천이 없는 축(납기·수율·불량률·설비부하·재고)을 원천 계획 없이 도입하면 위반.
+148:- **norm**: 좋은 설계는 **예측과 관측을 대조할 수 있는 상태 기록**을 규정한다 — 무엇을 예측했고 실제로 무엇이 일어났는지가 어디에 남는가.
+149:- **violation_test**: 설계 문서에 (a) 견적/구성 상태를 담는 그릇(테이블 또는 동등물)의 위치, (b) 예측값과 관측값을 대조하는 절차 — 둘 중 하나라도 없으면 위반. 무상태를 유지하겠다는 선택 자체는 위반이 아니지만, 그 경우 **RULE-05(종료 척도)를 어떻게 만족시키는지**를 문서가 답해야 하며 답이 없으면 위반.
+154:#### RULE-14 · 사람 개입의 배치 · **MAJOR**
+155:- **norm**: 좋은 설계는 사람 개입 지점을 **구조로** 배치한다 — ① 의도가 모호할 때 되묻기(전단), ② 구속력 있는 행위 직전 승인(후단), ③ 불확실 케이스 즉시 에스컬레이션. 원칙은 **읽기는 자율, 쓰기는 승인**.
+156:- **violation_test**: 세 검사 — ① 미확정 슬롯이 남은 상태에서 **자동으로 기본값을 채워 확정**하는 경로가 있으면 위반(되묻기가 정상 경로로 정의되어 있어야 함). ② 라이브 write·주문 확정·가격 예외 승인 중 인간 승인 게이트가 없는 것이 1건이라도 있으면 위반. ③ "권위 격자 미적재 셀 / 신규 조합 / 제약 미커버" 같은 고불확실 케이스의 라우팅 목적지가 문서에 없으면 위반.
+253:| 확정 → 취하 | 설계 측이 **문서 내 해당 기술의 위치**를 제시해 `violation_test` 를 통과시킨 경우. 이때 그 반증은 §4의 **오판 1건으로 집계**된다 |
+282:| FP-1 | 확정 위반으로 올렸으나, 설계 문서 내 해당 기술의 위치가 제시되어 `violation_test` 를 통과한 경우(§3.4 취하) | 취하 시점 |
+285:| FP-4 | 위반이라 주장한 규칙의 `violation_test` 를 반증이 적용하지 않고 **다른 기준**으로 판정한 경우 | 심리 시점 |
+321:2. **`violation_test` 의 기계 판정성은 균일하지 않다.** RULE-05·RULE-08·RULE-15는 문서 내 항목 존재 여부로 판정되어 거의 기계적이지만, RULE-10·RULE-14는 "구별 가능한가"·"정상 경로로 정의되었는가" 판단이 개입한다. 이 판단이 갈리면 §3.2에 따라 **다수결이 아니라 규칙 문언 해석**으로 결정하며, 해석이 갈린 사실 자체를 기록에 남긴다.
+
+ succeeded in 145ms:
+    1046 _workspace/huni-worldmodel/04_design/design-FINAL.md
+33:| 항목 | 개정 전 | 개정 후 | 출처 |
+40:[HARD] RULE-03·RULE-17 의 "검증됨"은 **보충 라운드(`coverage-supplement.md`)에서 사후 검증된 것**이며, 원 검증 라운드(`gate-report.md`)에서 검증된 것이 아니다. 이 출처 구분을 뭉개지 않는다.
+52:| 항목 | 본 문서가 사용하는 단일 값 | 근거 |
+67:근거: 원장이 이미 같은 결론을 냈다 — *"빠진 것은 모델이 아니라 루프"*(`R2-world-model-theory.md:246`, 원장 `problem-ledger.md:65`), *"적재 트랙에는 커밋 전 시뮬레이션이 이미 있고 고객 견적 트랙에만 없다"*(`R2:302`).
+90:| **P-10** | 부분관측 — 자재종속 판걸이수 | 룩업 히트/미스를 `confidence`로 구별(G5). 계산 자체는 손대지 않는다 | **가시화만** (저청구가 사라지지 않고 보이게 될 뿐) |
+91:| **P-11** | 견적 신뢰도 등급 부재 | `price.confidence ∈ {CONFIRMED, PROVISIONAL, NONE}` + `confidence_reasons[]` | **해결** |
+98:| **P-18** | 결과축 단일 | 결과축을 **2개만** 도입(가능성·신뢰도). 납기·수율·재고는 원천이 없어 도입 금지. **판면효율도 도입하지 않는다** — L1이 `fn_best_plate`가 `varchar` 반환이고 `q.usable_area`는 `ORDER BY`에만 쓰이고 버려짐을 실측 반증(`sql/33_fn_best_plate.sql:33,53,56`, L1 심사 인용) | **의도적 절제** |
+111:A의 `t_wm_effects`는 사람이 손으로 채워야 하는 정의 원본인데(design-A:140-166), webadmin 편집 화면은 `admin.site.register` 루프가 `models.py` 선언 모델만 순회해 생성한다(L1·L3 심사 실측 `admin.py:1922`). `t_wm_*` 모델을 `models.py`에 추가하는 것은 A 자신이 금지한 raw/webadmin 수정이다. 즉 실무진이 효과 1행을 등록할 화면이 **존재하지 않는다**(확정 MAJOR, RULE-12). 제약 커버리지가 현재 34/288 = 11.8%(`D8-live-schema.md:130`)라는 사실이 이 선언 비용이 지금까지 지불되지 않았다는 증거다.
+177:        SC["③ Scorer<br/>사전선언 사전식 채점 · LLM 미개입"]
+183:        JT["JointTransition<br/>feasible × price × confidence → 단일 Outcome"]
+227:    PICK -->|"전 슬롯 확정 + 사람 확인"| WP --> WH
+257:| # | 구성물 | 층 | 책임 | 위치 | 출처 |
+265:| F7 | `Intent` 스키마 | symbolic | 뉴로→심볼릭 타입 경계 (정의 1곳) | `simcore/intent.py` | C |
+266:| F8 | `Outcome` 스키마 | symbolic | 심볼릭→화면 타입 경계 (정의 1곳) | `simcore/outcome.py` | C+A+B |
+271:| F13 | **`sim_escalation`** | ops | 고불확실 케이스 큐 + `route_to` 목적지 | 사이드카 | **A 이식** |
+286:UNKNOWN = "<unknown>"          # 유일한 미확정 표현. None/""/생략은 스키마 위반(=검증 실패)
+306:- **필드 도메인 출처**: 각 주석의 `t_*` 축 (요건 ①).
+311:#### ★ FIX-1 — `selections` 값 도메인 출처의 축 부류별 재선언 (RULE-02 ① 위반 교정)
+313:**교정 사유(확정 위반).** 개정 전 선언은 `price_views._sim_dim_candidates` **1개로 12축 전체를 덮는 blanket** 이었으나, 그 함수가 실제로 처리하는 축은 **5축뿐**이다 — `price_views.py:2685-2691`(`siz_cd`·`plt_siz_cd`·`mat_cd`·`proc_cd`·`bdl_qty`)이고 그 외 축은 `price_views.py:2692-2693` 에서 **무조건 `return []`** 이다(게이트 독립 재실측 R-4, `gate-report.md:35`). 즉 선언된 출처가 나머지 7축에 대해 **실효적이지 않았다.** 아래 3분류로 교체한다.
+315:| 부류 | 축 | 값 도메인 출처 |
+333:4. **재파싱 실패**(원문에 수치 근거 없음)도 fail-closed — "조용한 기본값 금지" 정책과 동일 취급.
+360:             "confidence": "CONFIRMED"|"PROVISIONAL"|"NONE",
+361:             "confidence_reasons": [str] },        # 'PANSU_GEOMETRIC_FALLBACK' 등
+385:3. `confidence`는 값이 아니라 플래그다 — 권위 룩업이면 CONFIRMED, 기하 폴백이면 PROVISIONAL(R2:304 처방).
+398:### 4.3 `zero_reason` — C 원안의 근거 오류를 교정한다 [L2 최우선 이식]
+403:- 단가행 **자체가 없는** 케이스는 `included=False`·`subtotal=0`·`data_gap=[]` 구조로 조용히 빠지며, 경고조차 없는 경로가 존재한다. **[FIX-8 근거 좌표 교정]** 진짜 무경고 경로는 `_match_entry` 의 **no_match 분기 `pricing.py:655-660`** 이다 — `m["row"] is None` 일 때 **`if gap:` 인 경우에만** `data_gap` 을 채우므로, gap 이 비면 `included=False · data_gap=[] · error=None` 으로 **경고 추가 없이 조용히 반환**된다(게이트 독립 재실측 R-7, `gate-report.md:38`). 병기 근거: `pricing.py:106-108`(`dim_vals` 전량일치 요구) · `pricing.py:599-607`(`_no_match_detail` 이 `NON_QTY_DIMS` 한정). 개정 전 인용 `pricing.py:626-630`(`_skipped_entry`)은 **다른 분기**였으므로 교체한다.
+416:| 3a | `matched_row is None` and `data_gap == []` and `error is None` **and** 해당 구성요소 `use_dims` 중 **비수량 축에 미선택(None/'')이 있음** | **`UNSELECTED_DIM`** | **플래그만.** `confidence` 강등·에스컬레이션 **없음** — `widget_api.py:462-463` 이 명문화한 "아직 안 고른 것"과 "행이 없는 것"의 구분을 승계 |
+417:| 3b | 위 3a 조건 중 **미선택 축이 없음**(단가행 rows 전무 또는 `dim_vals` 키 불일치) | **`UNMATCHED_NO_GAP`** | `sim_escalation(PRICE_ROW_MISSING)` + `price.confidence` **PROVISIONAL 강등** |
+438:| (f) | `SELECT ... FROM t_siz_pansu WHERE ...` 존재 조회 | 판걸이수 권위 룩업 히트 여부 → `confidence` | 룩업 우선·기하 폴백 구조 `sql/32_fn_calc_pansu.sql` |
+440:| (g′) | **읽기전용 SELECT 1건** — 해당 `comp_cd`·`as_of` 적용 단가행 존재 여부 (**FIX-8 신설**) | `UNSELECTED_DIM`(3a) vs `UNMATCHED_NO_GAP`(3b) 판별 | 읽기전용이므로 RULE-04 불변. 금액 산출 미개입 |
+452:| **G0.5b 가격차원 어휘 파리티** | **축 12종**(`price_views.py:31` `DIM_META` = `pricing.NON_QTY_DIMS` 9 + `TIER_DIMS` 3) × **표면 3벌**(`DIM_META` / `pricing` 상수집합 / `t_prc_component_prices` 실컬럼) = **36쌍** | **판정 거부**(import 한 차원 어휘가 갈리면 단가행 매칭을 신뢰할 수 없다) |
+472:`.06` 의 비사상은 **게이트 독립 재실측으로 확정**됐다(R-6, `gate-report.md:40`) — `views.py:1888` 의 `.06 → (TPrdProductPrintOptions, ["opt_id"])` 는 **행 식별자**이고, `models.py:463` 의 `print_opt_cd` 는 같은 테이블의 **마스터 FK(nullable)** 로 서로 다른 컬럼이다. 따라서 두 우주에 동일 개념 매칭이 없다(양방향 비사상). `spot_side_cnt` 근거 병기: `sql/73_spot_side_source.sql:53`.
+484:  0 if confidence == CONFIRMED else 1,      # ② 권위 룩업 기반이 먼저
+506:-- ★ A 이식: 고불확실 라우팅 큐
+516:`route_to`의 **1순위 목적지는 새 큐가 아니라 기존 실무진 동선**이다(B 이식, design-B:432) — A의 테이블을 그대로 이식하면 새 운영 동선을 하나 더 만드는 결과가 되고, 그 자체가 운영부담 렌즈가 경계한 것이다.
+539:| O3 | 실무진 확인(`sim_escalation` 처리 결과) | `PROVISIONAL` 건의 실제 판걸이수 | 사람 처리량 비례. 저빈도 |
+549:| 접합 | 방식 | 실측 근거 |
+586:다만 A의 §4.3을 이식해 **지금 계약을 고정한다**: `simcore`가 노출하는 사이드카 HTTP 계약의 파라미터를 `simulate_price` 도구와 **동형**(`only_comps`·`as_of`·`proc_sels`·`skip_plate`)으로 못 박는다. 후니 측이 나중에 webadmin 수정을 승인하면 `assistant_tools.py:275-282`의 래퍼가 이 HTTP를 호출하도록 바꾸는 **단일 지점 변경**으로 끝난다. 계약을 지금 고정하지 않으면 그때 어댑터를 새로 짜는 운영 부채가 된다(L3 지적).
+601:**[N5 저비용 권고]** 여기에 `as_of != date.today()` 판정 1줄을 함께 둔다 — 세션이 달력 경계를 넘으면 `as_of` 를 재핀하고 진행 중 후보 금액을 무효화한다(경계당 1회). 이 갈림 자체는 §11-12 에 감수 위험으로 등재한다.
+630:후보 1 (무광코팅): feasible=PROVEN_OK, confidence=CONFIRMED, reach=PROVEN_REACHABLE
+654:**T6 · 확정 (RULE-14 ②)** — 고객이 후보 1을 고르면 루프는 selections 집합을 위젯에 넘긴다. 위젯이 `/price`로 **라이브 재계산**하고, 사람이 확인 버튼을 누른 뒤에야 `/handoff`가 서명한다. 루프는 어떤 경우에도 스스로 주문을 확정하지 않는다.
+696:`Intent` 스키마 · `IntentValidator` · `PhraseRenderer` · `RenderGuard` · Actor/Explainer LLM. 게이트 G3(pass^k 재현 결정론) 추가. **여기서 처음으로 LLM이 들어온다.** 이 순서는 R3의 처방과 일치한다 — *"그가 경계한 실패는 심볼릭 없이 LLM만 붙이는 것"*(`R3-leejoohwan-local.md:345`).
+700:2차 파일럿(다른 상품군, `use_dims` NULL 보유 필수) → 동형 전파. 세트 상품은 이 단계 이후(구성원 수량 산출이 엔진 계약 밖이므로 별도 판단 필요). `assistant_tools` 이관은 후니 측 승인 사안으로 남긴다.
+710:| **G0.5b** (FIX-3) | **가격차원 어휘 파리티** | `gates/dim_parity.py` — `DIM_META` / `pricing` 상수집합 / `t_prc_component_prices` 실컬럼 3벌 대조 | **3벌 전부 동일. 불일치 1건이면 판정 거부** | **축 12종 × 표면 3벌 = 36쌍** (`price_views.py:31`) | **판정 거부.** import 한 차원 어휘가 갈리면 단가행 매칭을 신뢰할 수 없으므로 롤아웃 산출을 폐기한다 |
+713:| **G1 분모 정정** (FIX-4) | — | — | — | **제외 ①** `t_wgt_handoff_logs` — G6 clone 리플레이가 INSERT/DELETE 유발(`widget_api.py:1677`·`:1733`) · **제외 ②** `t_wgt_widgets` — `/validate` 리플레이가 `last_used_dt`/`last_used_org` UPDATE 유발(`widget_api.py:135`)해 `max(upd_dt)` 해시를 흔든다 | **[HARD] 근거 없는 제외는 RULE-13 ② 우회다.** 두 제외는 반드시 아래 **G1.1** 과 한 쌍으로만 성립한다 |
+719:| **G5** | 신뢰도 플래그 정확성 | `t_siz_pansu` 존재 조회 vs `confidence` | 불일치 **0건** | 파일럿 (판형×사이즈) 쌍 수 | `confidence` 축 폐기 → 전건 실무진 라우팅으로 후퇴 |
+721:| **G6 오라클 경로 폐기 기록** (FIX-4) | — | — | — | — | **[HARD] "라이브 `/validate` 단독 오라클"은 폐기됐다.** 게이트가 그 경로를 잠정 허용하며 건 선행 조건(U-5 `/validate` 부작용 실측)이 **부작용 있음으로 확정**됐기 때문이다 — 핸들러 본문이 아니라 공통 게이트 `_gate` 에서 발생한다: `api_validate`(`widget_api.py:1410`) → `:1414 _gate` → `:226 _touch_used` → **`:135` `.update(last_used_dt=..., last_used_org=...)` on `t_wgt_widgets`**(`:119 USE_TOUCH_SEC=3600` 스로틀이 있으나 `.filter().update()` 는 조건 불일치에도 UPDATE 문 자체를 발행), 그리고 → `:218 _rate_ok` → **`:195-196` `cache.get_or_set` + `cache.incr`**(스로틀 없음 · 매 요청). 미확인 통과 금지(RULE-13 (a) fail-open 금지)에 따라 **clone DB 단일 경로만 남긴다.** 출처: `coverage-supplement.md:261-299` |
+725:| **G10** (FIX-5 신설) | **루프 표시가 vs `/handoff` 서명가** (과세 기준 갈림) | `gates/payable_parity.py` — 스윕 조합을 **clone 환경에서** 리플레이해 `outcome.price.payable_total` 과 `/handoff` 응답 `total` 을 대조 | **허용오차 0 · 불일치 0건** | 스윕 조합 수 | **실패 시 루프의 금액 문구·예산 판정을 고객 경로에서 철거하고 관리자 도구로 강등한다.** 고객이 보는 금액과 서명하는 금액이 갈리는 것은 표시 결함이 아니라 신뢰 결함이다 |
+732:## 8. 루브릭 대응표 (RULE-ID별 충족 근거)
+734:| RULE | 등급 | 충족 | 근거 |
+736:| **RULE-01** 판정권 심볼릭 독점 | BLOCKER | **충족** | §3 계층도에서 LLM 노드는 ACT·EXP 둘뿐이며 출력 화살표 도착지는 `IntentValidator`·`RenderGuard`(결정론 검증기). **금액 문장은 `PhraseRenderer`가 결정론 템플릿으로 만들고 LLM은 생성조차 하지 않는다**(A 이식 — 방어선을 한 단계 앞으로 당김). LLM 선호는 Scorer ④ 가중치로만 들어가 ①~③(가능성·신뢰도·도달성)을 뒤집을 수 없다(§4.6). **[N6 문서 정확성 교정]** *"금액 문장은 LLM 을 아예 통과하지 않는다"* 는 서술은 도면(`PICK→PR→EXP→RG`)·§6 T3 과 불일치했으므로, 도면 간선을 `PICK→PR→RG`(금액 포함) / `PICK→EXP→RG`(비금액)로 **분리**하고 RenderGuard 규약(*"Explainer 출력에 숫자 토큰이 포함되면 그 자체로 fail-closed"*)을 명문화했다. 규칙 위반은 아니었고(도착지 = RG), 잔여 위험은 가용성 한정(§11-11) |
+737:| **RULE-02** 인터페이스 타입화 | BLOCKER | **교정 후 충족** (개정 전 ① **위반 확정**) | **[개정 이력]** 게이트가 ① 위반을 확정했다(A7 — blanket 출처가 12축 중 5축만 실효, R-4 재실측 `price_views.py:2685-2693`). **FIX-1** 로 `selections` 값 도메인을 **열거축 5 / 열거축 +1(`print_opt_cd`) / 비열거축 6** 3분류로 재선언하고(§4.1), **FIX-2** 로 LLM 산출 수치에 `numeric_spans` + `NumericIntentParser` 결정론 재파싱을 걸어 ③ 검증 지점의 실효성을 닫았다. ② 미확정은 `UNKNOWN` 센티널 단일(누락·None은 검증 실패), ③ 검증 지점은 `IntentValidator` 1곳 fail-closed |
+738:| **RULE-03** 커밋 전 시뮬레이션 루프 | BLOCKER | **충족 — 독립 검증됨 (보충 라운드)** | §3의 ①~⑤가 루프 정본 5단계이고 §6 T4가 루브릭 시나리오("5개 고른 뒤 6번째 후보 3개")를 그대로 추적. **[검증 출처 — 원 라운드가 아니라 보충 라운드]** 원 게이트 라운드에서 RULE-03 은 **인용 0회로 미검증**이었고(`gate-report.md:104`), `coverage-supplement.md` 가 루브릭 시나리오를 §6 T4 에 실제 적용해 **(a)(b)(c) 3항 전건 위반 없음**을 판정했다(`coverage-supplement.md:150-159`): (a) `frontier`→`rollout`→`JointTransition`→`Outcome`→`Scorer`→PICK→관측 사슬 끊김 0, 3후보의 가능여부·가격·결손축이 **선택 전** 산출(§6 T4), (b) 호출 대상 6심볼을 **라이브 원본에서 전건 실측**해 DB write·캐시·로그 0 — `pricing.py` 의 유일 원시 SQL 은 `:308` `SELECT fn_calc_pansu` 이고 그 함수는 `sql/32_fn_calc_pansu.sql:30` 에서 `STABLE`·DML 0, (c) 사후통보 5검사 전건 부정. 확정은 §6 T6 위젯+인간 게이트에서만 |
+744:| **RULE-09** 불확실성 가시화 | MAJOR | **충족** | ① 권위 룩업 vs 기하 폴백 = `price.confidence` + `confidence_reasons`(G5 검증). ② 정당한 0원 vs 단가행 부재 0원 = **`components[].zero_reason` 4분류, 1차축은 `matched_row`**(§4.3). **[개정 이력]** 개정 전 이분류는 무경고 경로(`matched_row is None ∧ data_gap==[] ∧ error is None`, R-7 `pricing.py:655-660`)를 `TRUE_ZERO` 로 **오분류**해 언더차지 1경로를 놓쳤고 게이트가 위반을 확정했다(A8). **FIX-8** 로 `TRUE_ZERO` / `MISSING_PRICE_ROW` / `UNSELECTED_DIM` / `UNMATCHED_NO_GAP` 4분류 + 판별용 읽기전용 SELECT 1건을 도입했다. 근거 좌표도 `pricing.py:626-630` → **`:655-660`**(병기 `:106-108`·`:599-607`)으로 교정. 앵커는 **폴백 사다리 3단**(FIX-7)이며 ③단에서만 `None` |
+748:| **RULE-13** 실패 검출·되돌리기 | MAJOR | **교정 후 충족** (개정 전 ② **위반 확정**) | ① 신규 평가 지점 **11개 전건 fail-closed 전수표**(§8-1 하단). fail-open 도입 0건. ② **[개정 이력]** 개정 전에는 *"라이브 write 0건이므로 (b)는 공허 충족"* 이라 썼으나 **G6 리플레이가 라이브 write 를 유발해 그 전제가 거짓**이었고(A2 · R-1~R-3), 백업·DRY-RUN·undo 도 부재했다. **FIX-4** 로 (i) G6 을 **clone DB 단일 경로**로 축소하고(라이브 `/validate` 오라클 경로는 U-5 실측 결과 **부작용 있음 확정**으로 폐기 — `widget_api.py:135`·`:195-196`), (ii) G1 분모에서 `t_wgt_handoff_logs`·`t_wgt_widgets` 를 **대체 계측 G1.1 과 한 쌍으로만** 제외하며(근거 없는 제외 금지), (iii) clone 생성·폐기 + clone↔라이브 동일성 검사를 §7 에 명시했다. 사이드카는 append-only + 스냅샷 백업 + 리플레이 undo. ③ 구속력 있는 값은 캐시에서 서빙하지 않고 확정 직전 라이브 재-SELECT(§5.3) + **G0.9 다이제스트 불일치 시 판정 거부**(N-13 준수를 규율에서 기계 규율로 승격) |
+749:| **RULE-14** 사람 개입 배치 | MAJOR | **교정 후 충족** (개정 전 ② **위반 확정**) | ① 미확정 슬롯이 남으면 되묻기가 **정상 경로**(§6 T3). 롤아웃으로 결과 불변이 증명된 슬롯의 자동 채움은 **기본값 off + 실무진 승인 필요**. ② **[개정 이력]** G6 리플레이가 **인간 승인 게이트 없는 라이브 write** 였다(A2 동반 확정). **FIX-4** 로 clone DB 단일 경로화 + G1.1 대체 계측으로 교정했다. 그 외 라이브 write 0건 / 주문 확정은 위젯+사람 확인 / 가격 예외는 실무진 큐. ③ **고불확실 라우팅 목적지가 데이터다** — `sim_escalation(esc_kind, route_to)` **7종** 매핑표(§4.7, **FIX-6** 으로 `PREMISE_FAIL` 편입 + `gate_id` 필수 키). 1순위 목적지는 새 큐가 아니라 **기존 실무진 동선**이며, 개정 전 `gap_owner` 원용은 **실재 착지점으로 교체**했다(N3 — `gap_owner` 는 운영 큐가 아니라 §12-7 이 미채택 선언한 KB 계층의 필드). 소비 표면·소비 주기·소유 트랙 3열을 추가했고 미정 행 0건, 잔여 운영 실체 리스크는 §11-10 에 등재 |
+750:| **RULE-17** 재현 결정론 | MAJOR | **충족 — 독립 검증됨 (보충 라운드)** | **[검증 출처 — 원 라운드가 아니라 보충 라운드]** 원 게이트 라운드에서 RULE-17 은 **인용 0회로 미검증**이었고(`gate-report.md:118`), `coverage-supplement.md` 가 (a)(b)(c) 3검사를 G3 명세에 적용해 **전건 위반 없음**을 판정했다(`coverage-supplement.md:232-240`) — (a) 20의도 × k=8 = 160회 · 허용오차 0 으로 측정 절차·분모·임계 구비, (b) 비교 대상이 루브릭 norm 문언(`evaluation-rubric.md:80`)과 **축자 일치**하는 최종 상태이며 대화 텍스트를 명시 부정, (c) 결정론 담지자 4개가 전부 **엔진·심볼릭 쪽**이고 `temperature` 는 부정 문맥 1회뿐. 명세 본문: G3 — 골든 의도 20건 × k=8, 비교 대상은 **최종 상태**(선택 옵션 집합 + `final_price`)이며 대화 텍스트가 아니다. 결정론 확보 수단은 모델 설정이 아니라 엔진 쪽 — 후보 도메인의 결정론 열거 + 사전선언 사전식 채점 + ⑥ 안정 tie-break(`pricing.py:288-291` 사상 승계). 불일치 처방은 temperature가 아니라 LLM 영향분의 결정론 테이블 하강 |
+751:| **RULE-15** 선행 자산 정합 | MINOR | **충족** | ① N-01~N-19 재제안 0건 — 임베딩/트리플스토어/OWL/Leiden/개방추출/범용GraphRAG/RDF·JDF 미도입, 온톨로지가 가격을 계산하지 않음(N-08), `raw/webadmin`·`pricing.py` 무수정(N-16), 학습형 latent 월드모델 미이식(N-17), LLM에 유효성 판정 미위임(N-18), 전수 열거·사전계산 미채택(N-19). ② N-20~N-30을 결함으로 서술하지 않음 — 도리어 N-21(안정 tie-break)·N-24(2모드)·N-25(엔진 도메인 무지)·N-26(읽기전용 경계)을 모방·승계 대상으로 인용. ③ P-08은 §0에서 범위 밖 선언. ④ 권위 버전·분모 단일 선언 = §0 |
+752:| **RULE-16** 결과축 확장의 절제 | MINOR | **충족** | 도입 결과축 **2개뿐** — (i) 가능성: 결정=표시/진행 여부, 원천=`t_prd_product_constraints` + 단가행 존재 + 조합템플릿; (ii) 신뢰도: 결정=자동확정 vs 실무진 큐, 원천=`t_siz_pansu` 행 존재 + `components[].data_gap`. 납기·수율·불량률·설비부하·재고 미도입(라이브 46테이블에 원천 0). **판면효율도 미도입** — L1이 `fn_best_plate`의 `usable_area`가 `ORDER BY`에만 쓰이고 버려짐을 실측 반증했고, 복구 경로가 각각 RULE-04(SQL 수정)·RULE-12(외부 재계산=두 번째 정의)에 걸린다 |
+755:**요약(개정 후)**: BLOCKER 5/5 충족 · MAJOR 8/9 충족 + 1 부분 충족(RULE-07, 사유·범위 근거 명시) · MINOR 4/4 충족.
+772:| 8 | `evaluate_price` (d) | **`price` 3필드(`supply_amount`·`vat_amount`·`payable_total`) 전부 `None`** + `price.confidence=NONE` + blocker `ENGINE_ERROR`. **0원 대체 절대 금지** (A의 명문화 이식 · FIX-5 로 3필드 전부에 적용) |
+774:| 10 | `t_siz_pansu` 조회 (f) / `matched_row`·`data_gap` 판독 (g) / **판별 SELECT (g′)** | `confidence=NONE` + `zero_reason=None` + `sim_escalation` 라우팅. 후보 제시하지 않음 |
+797:> **반증 조건**: G0.5a·G0.5b 를 파일럿 기간 내내 돌렸는데 **불일치가 단 1건도 관측되지 않으면**, "이미 갈릴 수 있다"는 전제가 이 도메인에서 실증되지 않은 것이고 두 게이트는 과잉 방어다. 반대로 불일치가 1건이라도 나오면 이 주장은 강하게 지지된다. (`_price_gap_errors` docstring이 이미 *"한쪽만 고치면 미리보기·임베드가 갈린다"*고 적고 있다는 사실 — `widget_api.py:477` 인접 실측 — 이 이 주장의 사전 근거다.)
+807:루프의 산출물은 selections 집합뿐이고, 위젯이 `/price`로 라이브 재계산한 뒤 사람이 확인해야 `/handoff`가 서명한다(§5.3). 루프는 구조적으로 확정 권위를 가질 수 없다.
+827:> **반증 조건**: G9 대조군에서 **(가) 루프 경로와 (나) 순수 SQL 경로의 결과가 동일하고 비용만 (가)가 크면** 이 설계의 논지는 부분 반증된다. (가)가 (나)보다 잘하는 항목(막다른 길 사전 차단·복원 후보 반환·신뢰도 플래그)이 수치로 나오면 지지된다. **어느 쪽이든 그 수치를 판정 기록에 남긴다.**
+833:> **반증 조건**: S1~S2를 완주했는데 **결정론 층만으로는 고객 발화를 Intent로 옮길 수 없어 파일럿 자체가 성립하지 않으면**, 순서가 틀렸고 뉴로 계층이 더 앞에 와야 한다. (현재 판단으로는 S1~S2가 고객 발화를 입력으로 받지 않고 골든 Intent를 직접 입력하므로 성립한다 — 이것이 이 주장의 근거이자 검증 방법이다.)
+845:- 뉴로심볼릭·월드모델은 그가 **차용·재해석한 학계 계보**다 — 1권 3.1장 제목 자체가 "월드 모델이라는 단어의 출처"인 것이 그 증거(`R4:36,39`).
+847:R4가 남긴 한계도 그대로 옮긴다: **원문 1,252쪽 미대조**(목차·책소개·기사 2차 자료만으로 판정), ESTC의 학술적 신규성 미판정, "88%/46%" 수치의 1차 출처 미확인(`R4:162-167`, `R3:368`). 본 설계는 이 수치를 인용하지 않는다(R3 §C의 "대외 문서에 인용하지 말 것" 준수, `R3:360`).
+851:| 원칙 (원문 근거) | 본 설계의 어디에 |
+859:| **컨피던스 점수 + 임계 이상만 자동, 미만은 실무진 라우팅** (`R3:322` A-10) | `price.confidence` + `sim_escalation` 6종 라우팅. 그리고 R3 §C의 경고 준수 — *"인쇄는 비가역이고 금액이 즉시 확정된다. 초기엔 자동 확정 임계를 사실상 100%로"*(`R3:358`) → **루프는 자동 확정 경로가 아예 없다** |
+861:| **루프 3요소: 중단조건 / 능동개입 / self-refine** (`R3:324` A-12, F4:71) | 중단조건 = `feasible=PROVEN_OK` + 전 슬롯 확정 시 루프 종료(무한 되묻기 금지). 능동개입 = 모순 조합 선택 시 blocker + repairs 제시. **self-refine은 미채택** — §10.2 참조 |
+865:| **도메인 오너가 최종 승인권** (`R3:325` A-13) | 확정은 위젯+사람 확인(§6 T6). `sim_escalation`의 목적지는 전부 실무진 |
+875:| **능동 개입(우리가 시키지 않을 때 알아서 일하는 에이전트)** (`R3:137`) | 라이브 write 0 원칙과 "쓰기는 승인" 규율(RULE-14) 하에서는 능동 실행 권한을 줄 수 없다. 능동성은 `sim_escalation` 큐에 항목을 쌓는 수준으로 축소 |
+876:| **"AX는 C레벨 어젠다" 거버넌스 프레이밍** | R3 §C — *"우리는 조직 규모상 도메인 오너=실무진=승인권자가 사실상 동일. 그의 거버넌스 계층 논의는 과잉"*(`R3:359`) |
+877:| **88% / 46% 수치** | 1차 출처 미확인(`R3:368`, `R4:165`). 인용하지 않는다 |
+936:### 11-12. `as_of` 세션 핀은 달력 경계에서 위젯 확정가와 갈린다 (N5)
+938:`as_of` 세션 핀(§5.1)은 **의도된 트레이드오프**다 — 후보 비교의 결정론을 보전하기 위해 달력 정합을 포기한다. 둘은 동시 만족 불가다. 확정 금액은 항상 `/price` 라이브 재계산이므로 **오청구는 발생하지 않는다**(§5.3). 그러나 **이 갈림은 G0.9(DB 변경 축)·G6(feasible 축)·G4(동일 `as_of` 재계산) 어느 분모에도 포함되지 않는다.** 저비용 완화로 §6 T-1 에 `as_of != date.today()` 판정 1줄을 두었다(경계당 1회 재핀 + 진행 중 후보 금액 무효화).
+956:- 완화가 아니라 **경계 선언**이다: G6 를 clone 환경 단일 경로로 축소한 것이 이 축에 대한 실질 방어이며, clone 환경의 캐시 오염은 clone 폐기와 함께 사라진다.
+973:명시적 비목표. 여기 적힌 것을 "설계가 안 해서 결함"이라고 주장하는 반증은 루브릭 §2.3 J-3(하네스 경계 밖)에 해당한다.
+989:15. **자동 확정 임계를 두지 않는다.** `confidence=CONFIRMED`여도 자동 주문 경로가 코드에 없다.
+1006:7. **웹 검색 미사용.** 본 문서는 선행 산출물과 저장소 내부 파일만을 근거로 하므로 `Sources:` 절을 두지 않는다. §10의 이주환 관련 URL 실재 검증은 R4가 소유하며(`R4-leejoohwan-web.md:171-187`의 검증 완료 URL 목록), 본 문서는 그 파일을 인용할 뿐 URL을 재주장하지 않는다.
+1014:| 순서 | 조건 | 상태 | 근거 / 남은 일 |
+1021:| **⑥** 커버리지 보충 | FIX-9(RULE-03 독립 검증) · FIX-10(RULE-17 독립 검증) | **닫힘** | `coverage-supplement.md` 가 두 규칙의 `violation_test` 를 실제 적용해 **전건 위반 없음** 판정. BLOCKER 커버리지 80% → **100%**, 미검증 규칙 2 → **0**. **[출처 구분]** 보충 라운드 검증이며 원 라운드 검증이 아니다 |
+
+codex
+루브릭의 두 항은 확인했습니다. 이제 설계 문서에서 각각의 문언이 요구하는 “구별 필드”, “되묻기/승인/라우팅 목적지”만 좌표로 좁혀 읽겠습니다.
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse Completed
+hook: PreToolUse Completed
+hook: PreToolUse Completed
+exec
+/bin/zsh -lc "nl -ba _workspace/huni-worldmodel/04_design/evaluation-rubric.md | sed -n '91,93p;154,156p'" in /Users/innojini/Dev/HuniWeb
+exec
+/bin/zsh -lc "nl -ba _workspace/huni-worldmodel/04_design/design-FINAL.md | sed -n '350,390p;398,420p;432,442p;500,525p;626,656p;744,749p;764,775p;807,808p;989,990p'" in /Users/innojini/Dev/HuniWeb
+ succeeded in 0ms:
+    91	#### RULE-09 · 불확실성의 가시화 · **MAJOR**
+    92	- **norm**: 좋은 설계는 **모델이 못 미더운 구간을 값이 아니라 플래그로 드러낸다** — 권위 룩업 기반 결과와 폴백/추정 기반 결과가 출력에서 구분되고, 데이터 구멍이 0원(또는 정상값)으로 조용히 흡수되지 않는다.
+    93	- **violation_test**: 다음 두 시나리오에서 출력이 서로 **구별 가능**해야 한다 — ① 권위 판걸이수 룩업이 있는 사이즈의 견적 vs 기하 폴백으로 계산된 견적, ② 단가행이 실제로 0원인 구성요소 vs 단가행이 **없어서** 0원으로 처리된 구성요소. 설계 출력 스키마에서 두 쌍 중 하나라도 구별 필드가 없으면 위반. (현행은 구별 불가 — `pricing.py:561-582` 출력 스키마, `D2:372` 인용 `problem-ledger.md:209`)
+   154	#### RULE-14 · 사람 개입의 배치 · **MAJOR**
+   155	- **norm**: 좋은 설계는 사람 개입 지점을 **구조로** 배치한다 — ① 의도가 모호할 때 되묻기(전단), ② 구속력 있는 행위 직전 승인(후단), ③ 불확실 케이스 즉시 에스컬레이션. 원칙은 **읽기는 자율, 쓰기는 승인**.
+   156	- **violation_test**: 세 검사 — ① 미확정 슬롯이 남은 상태에서 **자동으로 기본값을 채워 확정**하는 경로가 있으면 위반(되묻기가 정상 경로로 정의되어 있어야 함). ② 라이브 write·주문 확정·가격 예외 승인 중 인간 승인 게이트가 없는 것이 1건이라도 있으면 위반. ③ "권위 격자 미적재 셀 / 신규 조합 / 제약 미커버" 같은 고불확실 케이스의 라우팅 목적지가 문서에 없으면 위반.
+
+ succeeded in 0ms:
+   350	      "id":     rule_cd | comp_cd | axis_name,
+   351	      "kind":   "FORBIDDEN" | "UNREGISTERED",       # 금지 vs 데이터 공백 (RULE-10)
+   352	      "msg":    str,
+   353	      "repairs": [ {"unset": [slot], "or_set": [(slot, value)]} ]
+   354	  } ],
+   355	
+   356	  # ★ FIX-5: 과세 기준을 3필드로 분리한다 (단일 `amount` 는 기준 불명 → 폐기)
+   357	  "price": { "supply_amount": int|None,   # evaluate_price.final_price (공급가, 부가세 별도)
+   358	             "vat_amount":    int|None,   # supply × VAT_RATE (widget_api.py:1148 계승)
+   359	             "payable_total": int|None,   # 청구액 = supply + vat. /handoff 서명 total 과 동등
+   360	             "confidence": "CONFIRMED"|"PROVISIONAL"|"NONE",
+   361	             "confidence_reasons": [str] },        # 'PANSU_GEOMETRIC_FALLBACK' 등
+   362	
+   363	  "components": [ {
+   364	      "comp_cd": str, "subtotal": int, "included": bool,
+   365	      "matched_row_id": int|None,
+   366	      # ★ FIX-8: matched_row 1차축 4분류 (§4.3)
+   367	      "zero_reason": "TRUE_ZERO"|"MISSING_PRICE_ROW"|"UNSELECTED_DIM"|"UNMATCHED_NO_GAP"|None,
+   368	      "affect_observed": bool|None,                          # ★ B 이식 (G8 스윕 결과)
+   369	      "tier": {"field":"min_qty"|"siz_width"|"siz_height", "threshold":num, "order_value":num},
+   370	      "rejected": [ {"row_id":int, "first_diff_dim":str, "row_value":str, "order_value":str} ],
+   371	      # ★ FIX-7: 폴백 사다리 3단 (아래 성질 5)
+   372	      "anchor": "xlsx:<파일>#<시트>!<셀>" | "t_prc_component_prices/<comp_price_id>" | None
+   373	  } ],
+   374	
+   375	  "reachability": {"verdict":"PROVEN_REACHABLE"|"PROVEN_DEAD"|"UNKNOWN",
+   376	                   "witness":Intent|None, "dead_dim":str|None, "probe_budget_used":int},
+   377	  "rollout_ms": int, "cache_hit": bool
+   378	}
+   379	```
+   380	
+   381	**핵심 성질 6가지.**
+   382	
+   383	1. **가능성과 가격이 하나의 Outcome에서만 나온다.** `feasible != "PROVEN_OK"`이면 `price` 의 **3필드 전부**(`supply_amount`·`vat_amount`·`payable_total`)가 **스키마상 반드시 `None`**(직렬화 시 강제). 제약 위반 조합의 가격이 존재할 자료구조 자체가 없다(RULE-06). R7의 *"출력 스키마에서 능력을 제거한다"*(`R7-agentic-commerce.md:93`)의 직접 적용. §8-1 8번(예외 시 0원 대체 절대 금지)도 **3필드 전부에** 적용된다.
+   384	2. `kind`가 금지(FORBIDDEN)와 미등록(UNREGISTERED)을 분리한다. 현행은 `tmpl_combo_gap`에서 구별 불가하고 탈출구가 "관리자에게 문의"뿐이다(`widget_api.py:1906-1907` 인용, `D6:259`).
+   385	3. `confidence`는 값이 아니라 플래그다 — 권위 룩업이면 CONFIRMED, 기하 폴백이면 PROVISIONAL(R2:304 처방).
+   386	4. **`zero_reason`과 `affect_observed`가 최종안의 추가분이다** — §4.3.
+   387	5. **★ FIX-7 — `anchor` 폴백 사다리 3단.** 형식이 복수 허용되므로 **어느 형식으로 내려가는지의 순서**를 규정한다. 개정 전 "미보유 셀은 `None` 명시"는 `provenance-map` 미배선 시 `anchor=None` 이 **실제로 상시 발생**하는 문제가 있었다(A6).
+   388	   - ① `provenance-map` 히트 → `"xlsx:<파일>#<시트>!<셀>"`
+   389	   - ② 미히트이나 `matched_row_id != None` → **`"t_prc_component_prices/<comp_price_id>"`** — **기본 폴백. 이 단계에서 `None` 으로 떨어지지 않는다.**
+   390	   - ③ `matched_row_id == None` → `None` + `sim_escalation(ANCHOR_MISSING)`
+   398	### 4.3 `zero_reason` — C 원안의 근거 오류를 교정한다 [L2 최우선 이식]
+   399	
+   400	C 원안은 RULE-09 ②(정당한 0원 vs 단가행 부재 0원)를 *"strict 고정으로 후자가 애초에 통과하지 못한다"*(design-C:481)로 논증했다. **이 논증은 코드로 반증된다.** L2가 지적했고 본 문서가 실측 재확인했다:
+   401	
+   402	- `evaluate_price`의 기본 `mode`는 `lenient`이며(`pricing.py:428` 실측), strict가 승격하는 것은 `_FATAL_ERRORS` 계열이다.
+   403	- 단가행 **자체가 없는** 케이스는 `included=False`·`subtotal=0`·`data_gap=[]` 구조로 조용히 빠지며, 경고조차 없는 경로가 존재한다. **[FIX-8 근거 좌표 교정]** 진짜 무경고 경로는 `_match_entry` 의 **no_match 분기 `pricing.py:655-660`** 이다 — `m["row"] is None` 일 때 **`if gap:` 인 경우에만** `data_gap` 을 채우므로, gap 이 비면 `included=False · data_gap=[] · error=None` 으로 **경고 추가 없이 조용히 반환**된다(게이트 독립 재실측 R-7, `gate-report.md:38`). 병기 근거: `pricing.py:106-108`(`dim_vals` 전량일치 요구) · `pricing.py:599-607`(`_no_match_detail` 이 `NON_QTY_DIMS` 한정). 개정 전 인용 `pricing.py:626-630`(`_skipped_entry`)은 **다른 분기**였으므로 교체한다.
+   404	- 실제 방어선은 위젯의 `_price_gap_errors`이고 그 함수는 **`proc_cd`를 명시적으로 제외**한다(`widget_api.py:466-471` 실측 — *"★proc_cd 는 제외 … 여기 포함하면 정상 주문 전부가 차단된다"*).
+   405	
+   406	따라서 최종안은 **판정 입력을 `_price_gap_errors`가 아니라 엔진의 `components[].data_gap`으로 잡는다**(A의 design-A:330 / B의 design-B:241 공통 처방):
+   407	
+   408	**★ FIX-8 — `zero_reason` 을 `matched_row` 1차축 4분류로 교체한다 (RULE-09 ② 위반 교정).**
+   409	
+   410	개정 전 이분류(`data_gap` 유무 1차축)는 **언더차지 1경로를 `TRUE_ZERO` 로 오분류**했다 — `matched_row is None ∧ data_gap == [] ∧ error is None` 인 무경고 경로(R-7)가 "정당한 0원"으로 라벨링되어 탐지에서 사라진다(A8, `gate-report.md:63`). 1차축을 `data_gap` 이 아니라 **`matched_row`** 로 바꾼다.
+   411	
+   412	| # | 관측 | `zero_reason` | 후속 처리 |
+   413	|---|---|---|---|
+   414	| 1 | `included == True` and `subtotal == 0` | **`TRUE_ZERO`** (정당한 0원) | 없음 |
+   415	| 2 | `matched_row is None` and `data_gap` 비어 있지 **않음** | **`MISSING_PRICE_ROW`** (단가행 부재) | 기존대로 |
+   416	| 3a | `matched_row is None` and `data_gap == []` and `error is None` **and** 해당 구성요소 `use_dims` 중 **비수량 축에 미선택(None/'')이 있음** | **`UNSELECTED_DIM`** | **플래그만.** `confidence` 강등·에스컬레이션 **없음** — `widget_api.py:462-463` 이 명문화한 "아직 안 고른 것"과 "행이 없는 것"의 구분을 승계 |
+   417	| 3b | 위 3a 조건 중 **미선택 축이 없음**(단가행 rows 전무 또는 `dim_vals` 키 불일치) | **`UNMATCHED_NO_GAP`** | `sim_escalation(PRICE_ROW_MISSING)` + `price.confidence` **PROVISIONAL 강등** |
+   418	| 4 | `error in _FATAL_ERRORS` | — | 기존대로 `blockers[ENGINE_ERROR]` |
+   419	| — | `subtotal > 0` | `None` | — |
+   420	
+   432	|---|---|---|---|
+   433	| (a) | `price_views.qty_rule_error` | 수량 규칙 위반 | `price_views.py:1615` |
+   434	| (b) | `price_views._sim_disallowed(prd_cd, sel)` | 차원별 불가값 → 규칙명. 후보값을 실제 대입하는 forward simulation | `price_views.py:2701` |
+   435	| (c) | `tmpl_combo.resolve` + `missing_axis_names` | 조합템플릿 미등록(UNREGISTERED) | `tmpl_combo.py:245` / `:204` |
+   436	| (d) | `pricing.evaluate_price(..., mode="strict", as_of=pinned)` | 금액 + `components[].matched_row` + `data_gap` + 오류코드 | `pricing.py:428` |
+   437	| (e) | `widget_api._price_gap_errors(res, prd_cd)` | 단가행 부재 **차단** 판정. 가족형 쌍 면제·`proc_cd` 제외를 정의 그대로 재사용 | `widget_api.py:455` |
+   438	| (f) | `SELECT ... FROM t_siz_pansu WHERE ...` 존재 조회 | 판걸이수 권위 룩업 히트 여부 → `confidence` | 룩업 우선·기하 폴백 구조 `sql/32_fn_calc_pansu.sql` |
+   439	| (g) | `components[].matched_row` + `data_gap` + `error` 판독 (**FIX-8**: 1차축 = `matched_row`) | `zero_reason` **4분류** 플래그 (차단 아님) | `pricing.py:655-660` (no_match 분기 · R-7), 병기 `:106-108`·`:599-607` |
+   440	| (g′) | **읽기전용 SELECT 1건** — 해당 `comp_cd`·`as_of` 적용 단가행 존재 여부 (**FIX-8 신설**) | `UNSELECTED_DIM`(3a) vs `UNMATCHED_NO_GAP`(3b) 판별 | 읽기전용이므로 RULE-04 불변. 금액 산출 미개입 |
+   441	
+   442	**(e)·(g)의 분업이 이 설계의 핵심 두 수다.** (e)는 차단 권위를 위젯에 남기고, (g)는 탐지 폭을 엔진 것으로 넓힌다. 둘을 한 함수에 합치지 않는 이유는 §4.3 마지막 문단 그대로 — 간격이 보여야 라우팅할 수 있다.
+   500	```sql
+   501	sim_rollout(id, ts, session_id, state_hash, action_json, outcome_json,
+   502	            engine_rev, source_digest, cache_hit, rollout_ms)
+   503	sim_decision(id, ts, session_id, presented_state_hashes[], chosen_state_hash,
+   504	             asked_slot, ask_reason)
+   505	sim_observation(id, ts, state_hash, obs_source, obs_price, obs_feasible, delta_krw, note)
+   506	-- ★ A 이식: 고불확실 라우팅 큐
+   507	sim_escalation(id, ts, esc_kind, prd_cd, payload_json, route_to, status, created_at)
+   508	```
+   509	
+   510	**★ FIX-6 — `esc_kind` 7종** (개정 전 6종에 `PREMISE_FAIL` 누락 → §6 T-1 이 발행하는데 허용집합에 없어 CHECK 제약 시 **전제감시 로그가 유실**되는 결함, A3):
+   511	
+   512	`sim_escalation.esc_kind` ∈ `{PRICE_ROW_MISSING, TMPL_COMBO_UNREGISTERED, PANSU_PROVISIONAL, ANCHOR_MISSING, AFFECT_UNDEFINED, REACH_UNKNOWN, `**`PREMISE_FAIL`**`}`.
+   513	
+   514	**`PREMISE_FAIL` 은 게이트별로 목적지가 갈리므로 `payload_json.gate_id ∈ {G0, G0.5a, G0.5b, G0.9}` 를 필수 키로 요구한다.**
+   515	
+   516	`route_to`의 **1순위 목적지는 새 큐가 아니라 기존 실무진 동선**이다(B 이식, design-B:432) — A의 테이블을 그대로 이식하면 새 운영 동선을 하나 더 만드는 결과가 되고, 그 자체가 운영부담 렌즈가 경계한 것이다.
+   517	
+   518	**[N3 정정]** 개정 전 이 표는 목적지를 **`gap_owner`** 로 적었으나, `gap_owner` 는 운영 큐가 아니라 **§12-7 이 미채택 선언한 KB 계층의 소유자 문자열 필드**다(운영 큐 구현체 0건). 원용을 삭제하고 실재 착지점으로 교체하며, **소비 표면·소비 주기·소유 트랙** 3열을 추가해 "목적지가 데이터인가"를 넘어 "목적지가 실체인가"까지 표에서 보이게 한다.
+   519	
+   520	| `esc_kind` | `route_to` (실재 착지점) | 소비 표면 | 소비 주기 | 소유 트랙 |
+   521	|---|---|---|---|---|
+   522	| `PRICE_ROW_MISSING` / `ANCHOR_MISSING` | §26 `hpti` 권위 격자 교정 명세 | `hpti` `_batch` SQL 파일군(실재 확인) | 격자 재추출 라운드 단위 | §26 |
+   523	| `TMPL_COMBO_UNREGISTERED` | 실무진 조합템플릿 등록 화면 | webadmin 기존 화면 | 상시 | webadmin |
+   524	| `AFFECT_UNDEFINED` | §7/§18 `use_dims` 충전 트랙 | 적재 명세 | 트랙 라운드 단위 | §7·§18 |
+   525	| `PANSU_PROVISIONAL` | 실무진 판걸이수 확인 시트 | 기존 시트 | 상시 | 실무진 |
+   626	**T3 · 되묻기 (RULE-14 ①)** — A·C가 남고 `soft_prefs`만으로 갈리지 않는다. 미확정 슬롯이 남았으므로 **기본값을 채워 확정하지 않는다.** `PhraseRenderer`가 질문 템플릿을 만들고(금액 없음) Explainer가 어투만 다듬고 RenderGuard를 통과한다: *"용지 느낌을 먼저 정할까요 — 매트/펄/엠보 중에서요."*
+   627	
+   628	**T4 · 6번째 후보 3개를 띄우는 순간 (RULE-03 시나리오 그대로)** — 5개 슬롯이 찼고 마지막 후가공만 남았다. `frontier()`가 도메인에서 후보 3개를 결정론 열거하고, `rollout()`이 3개를 **선택 전에** 굴린다.
+   629	```
+   630	후보 1 (무광코팅): feasible=PROVEN_OK, confidence=CONFIRMED, reach=PROVEN_REACHABLE
+   631	                   price = { supply_amount: 44,300,          ← 공급가(부가세 별도) · G4 대조 대상
+   632	                             vat_amount:     4,430,
+   633	                             payable_total: 48,730 }          ← 청구액 · 예산 판정·고객 문구·G10 대조 대상
+   634	                   components[3].zero_reason=TRUE_ZERO           ← 정당한 0원
+   635	후보 2 (박)      : feasible=PROVEN_BLOCKED
+   636	                   blockers=[{source:"RULE", id:"R_EXCL_...", kind:"FORBIDDEN",
+   637	                              repairs:[{unset:["mat_cd"]},{or_set:[("mat_cd","MAT_xxx")]}]}]
+   638	                   price = { supply_amount: None, vat_amount: None, payable_total: None }
+   639	                                                                 ← 스키마상 3필드 전부 금액 부재
+   640	후보 3 (에폭시)  : feasible=PROVEN_BLOCKED
+   641	                   blockers=[{source:"TMPL_COMBO", kind:"UNREGISTERED", ...}]
+   642	                   price=None
+   643	                   → sim_escalation(esc_kind='TMPL_COMBO_UNREGISTERED', route_to='실무진')
+   644	```
+   645	- 후보 2·3은 **가격이 계산되지도, 표시되지도 않는다** (RULE-06).
+   646	- 후보 2와 3의 `kind`가 다르다 — 하나는 금지, 하나는 데이터 미등록. 후자만 실무진 큐로 간다.
+   647	- DB write 0건. 주문 상태 변경 0건.
+   648	
+   649	**T5 · 1개만 제시** — Scorer 사전식 정렬로 후보 1이 최상위.
+   650	- **금액 문장은 `PhraseRenderer`가 만든다**(★FIX-5: 고객 대면 토큰은 **`payable_total` 만** 사용 + "(부가세 포함)" 명시): `"{opt_label}이면 {payable_total:,}원(부가세 포함)이고 예산 안입니다."` → *"무광코팅이면 48,730원(부가세 포함)이고 예산 안입니다."* LLM은 이 문장을 생성하지 않는다. 공급가를 함께 노출할 때는 *"공급가(부가세 별도) 44,300원"* 처럼 **구분 표기**한다.
+   651	- Explainer는 비금액 부분만 쓴다: *"박은 지금 고르신 용지와 같이 쓸 수 없어요 — 용지를 바꾸면 가능합니다."* **Explainer 출력에 숫자 토큰이 포함되면 그 자체로 fail-closed**(§3 읽는 법 2).
+   652	- RenderGuard가 (i) `48,730`이 Outcome의 **`price.payable_total`** 에서 서버 치환된 토큰인지, (ii) 언급된 blocker가 실재하는지 검증한 뒤에야 화면에 도달한다.
+   653	
+   654	**T6 · 확정 (RULE-14 ②)** — 고객이 후보 1을 고르면 루프는 selections 집합을 위젯에 넘긴다. 위젯이 `/price`로 **라이브 재계산**하고, 사람이 확인 버튼을 누른 뒤에야 `/handoff`가 서명한다. 루프는 어떤 경우에도 스스로 주문을 확정하지 않는다.
+   655	
+   656	**T7 · 관측** — `sim_rollout`에 T2·T4 예측 전량이 남고, `/handoff` 응답이 `sim_observation`에 O2로 남는다. **예측이 PROVEN_OK였는데 422가 나면 G6 위반 1건**으로 집계된다.
+   744	| **RULE-09** 불확실성 가시화 | MAJOR | **충족** | ① 권위 룩업 vs 기하 폴백 = `price.confidence` + `confidence_reasons`(G5 검증). ② 정당한 0원 vs 단가행 부재 0원 = **`components[].zero_reason` 4분류, 1차축은 `matched_row`**(§4.3). **[개정 이력]** 개정 전 이분류는 무경고 경로(`matched_row is None ∧ data_gap==[] ∧ error is None`, R-7 `pricing.py:655-660`)를 `TRUE_ZERO` 로 **오분류**해 언더차지 1경로를 놓쳤고 게이트가 위반을 확정했다(A8). **FIX-8** 로 `TRUE_ZERO` / `MISSING_PRICE_ROW` / `UNSELECTED_DIM` / `UNMATCHED_NO_GAP` 4분류 + 판별용 읽기전용 SELECT 1건을 도입했다. 근거 좌표도 `pricing.py:626-630` → **`:655-660`**(병기 `:106-108`·`:599-607`)으로 교정. 앵커는 **폴백 사다리 3단**(FIX-7)이며 ③단에서만 `None` |
+   745	| **RULE-10** why-not·복원 경로 | MAJOR | **충족** | §4.2 `blockers[].id`가 `rule_cd` 보존, `repairs[]`가 복원 후보 반환(생성 방식 §4.4 (b) — `_sim_disallowed`를 뒤집어 계산, 새 알고리즘 0). 금지 vs 미등록은 `kind: FORBIDDEN\|UNREGISTERED`로 구별(§6 T4가 실증). "관리자에게 문의"는 출력에 없고 `sim_escalation`이 목적지를 갖는다 |
+   746	| **RULE-11** 감사 추적 | MAJOR | **충족** | `components[]`가 (a) `matched_row_id`, (b) `anchor`(`xlsx:파일#시트!셀` 또는 `t_<table>/<CODE>`), (c) `tier{field,threshold,order_value}` + `rejected[].first_diff_dim` 셋을 모두 반환. 재구현이 아니라 diff로 얻는다. 앵커 원천은 §26 권위 격자(260705)라 KB의 260702 스큐를 피한다. **[FIX-7]** 개정 전 "미보유 셀은 `None` 명시"는 `provenance-map` 미배선 시 `anchor=None` 이 상시 발생하는 잠재 결손이었으므로 **폴백 사다리 3단**으로 교체했다(§4.2 성질 5) — ①xlsx 셀 → ②`t_prc_component_prices/<comp_price_id>`(**기본 폴백**) → ③`None` + `sim_escalation(ANCHOR_MISSING)`. **부기**: 루브릭 (b)는 `xlsx:파일#시트!셀` **또는** `t_<table>/<CODE>` 의 **선언지**이며, 본 설계의 기본 경로는 `t_<table>/<CODE>` 이고 xlsx 셀은 **S2 가산분**이다 |
+   747	| **RULE-12** 단일 정의·편집표면 | MAJOR | **충족** | ① 도입 개념별 "정의가 사는 곳"이 정확히 1곳 — Intent=`simcore/intent.py`, Outcome=`simcore/outcome.py`, 문구=`simcore/phrases.py`, 원장=사이드카 DDL, provenance-map=사이드카. **차원·규칙·가격 정의를 하나도 새로 만들지 않고 import**(§5) → ref_dim 5벌이 6벌이 되지 않는다. ② 새 규칙 표현을 도입하지 않으므로 폼빌더 역파싱 판정은 "해당 없음(변경 0)". **③ 나아가 기존 정의가 갈리는 사건을 G0.5a·G0.5b 가 감지한다**(A 이식) — 악화 방지에 더해 센서를 붙였다. **[개정 이력]** 게이트가 ① 위반을 확정했다(A1 — 게이트 정의처가 두 곳으로 분열). **FIX-3** 으로 두 게이트를 분리하고 그 사이 **projection map** 을 단일 정의처로 두어(맵 파일 해시를 G0.5a 산출물에 스탬프) 정의 분열을 닫았다 |
+   748	| **RULE-13** 실패 검출·되돌리기 | MAJOR | **교정 후 충족** (개정 전 ② **위반 확정**) | ① 신규 평가 지점 **11개 전건 fail-closed 전수표**(§8-1 하단). fail-open 도입 0건. ② **[개정 이력]** 개정 전에는 *"라이브 write 0건이므로 (b)는 공허 충족"* 이라 썼으나 **G6 리플레이가 라이브 write 를 유발해 그 전제가 거짓**이었고(A2 · R-1~R-3), 백업·DRY-RUN·undo 도 부재했다. **FIX-4** 로 (i) G6 을 **clone DB 단일 경로**로 축소하고(라이브 `/validate` 오라클 경로는 U-5 실측 결과 **부작용 있음 확정**으로 폐기 — `widget_api.py:135`·`:195-196`), (ii) G1 분모에서 `t_wgt_handoff_logs`·`t_wgt_widgets` 를 **대체 계측 G1.1 과 한 쌍으로만** 제외하며(근거 없는 제외 금지), (iii) clone 생성·폐기 + clone↔라이브 동일성 검사를 §7 에 명시했다. 사이드카는 append-only + 스냅샷 백업 + 리플레이 undo. ③ 구속력 있는 값은 캐시에서 서빙하지 않고 확정 직전 라이브 재-SELECT(§5.3) + **G0.9 다이제스트 불일치 시 판정 거부**(N-13 준수를 규율에서 기계 규율로 승격) |
+   749	| **RULE-14** 사람 개입 배치 | MAJOR | **교정 후 충족** (개정 전 ② **위반 확정**) | ① 미확정 슬롯이 남으면 되묻기가 **정상 경로**(§6 T3). 롤아웃으로 결과 불변이 증명된 슬롯의 자동 채움은 **기본값 off + 실무진 승인 필요**. ② **[개정 이력]** G6 리플레이가 **인간 승인 게이트 없는 라이브 write** 였다(A2 동반 확정). **FIX-4** 로 clone DB 단일 경로화 + G1.1 대체 계측으로 교정했다. 그 외 라이브 write 0건 / 주문 확정은 위젯+사람 확인 / 가격 예외는 실무진 큐. ③ **고불확실 라우팅 목적지가 데이터다** — `sim_escalation(esc_kind, route_to)` **7종** 매핑표(§4.7, **FIX-6** 으로 `PREMISE_FAIL` 편입 + `gate_id` 필수 키). 1순위 목적지는 새 큐가 아니라 **기존 실무진 동선**이며, 개정 전 `gap_owner` 원용은 **실재 착지점으로 교체**했다(N3 — `gap_owner` 는 운영 큐가 아니라 §12-7 이 미채택 선언한 KB 계층의 필드). 소비 표면·소비 주기·소유 트랙 3열을 추가했고 미정 행 0건, 잔여 운영 실체 리스크는 §11-10 에 등재 |
+   764	|---|---|---|
+   765	| 1 | `IntentValidator.validate()` | 되묻기 반환. 통과 처리 금지 |
+   766	| 2 | G0 바인딩 스모크 | 즉시 중단. 롤아웃 시작 금지 |
+   767	| 3 | G0.5a `ref_dim` 파리티 / G0.5b 가격차원 어휘 파리티 | 각각 빌드 FAIL / 판정 거부. 롤아웃 시작 금지 |
+   768	| 4 | G0.9 다이제스트 | 판정 거부 + 재계산. 낡은 값 서빙 금지 |
+   769	| 5 | `qty_rule_error` (a) | `feasible=UNKNOWN` + blocker `QTY_RULE/EVAL_ERROR`. 통과 금지 |
+   770	| 6 | `_sim_disallowed` (b) | `feasible=UNKNOWN` + blocker `RULE/EVAL_ERROR`. **가능으로 처리 금지** |
+   771	| 7 | `tmpl_combo.resolve` (c) | `feasible=UNKNOWN` + blocker `TMPL_COMBO/EVAL_ERROR`. 통과 금지 |
+   772	| 8 | `evaluate_price` (d) | **`price` 3필드(`supply_amount`·`vat_amount`·`payable_total`) 전부 `None`** + `price.confidence=NONE` + blocker `ENGINE_ERROR`. **0원 대체 절대 금지** (A의 명문화 이식 · FIX-5 로 3필드 전부에 적용) |
+   773	| 9 | `_price_gap_errors` (e) | `feasible=UNKNOWN`. 차단 판정기가 죽으면 후보를 제시하지 않는다 |
+   774	| 10 | `t_siz_pansu` 조회 (f) / `matched_row`·`data_gap` 판독 (g) / **판별 SELECT (g′)** | `confidence=NONE` + `zero_reason=None` + `sim_escalation` 라우팅. 후보 제시하지 않음 |
+   775	| **11** (FIX-6) | **escalation 기록 자체의 실패** (`sim_escalation` INSERT 실패) | **차단 상태를 유지**한 채 `stderr`/로그로 이중화해 남긴다. **"기록 실패 시 통과"는 금지** — 기록 실패가 후보 제시의 사유가 될 수 없다 |
+   807	루프의 산출물은 selections 집합뿐이고, 위젯이 `/price`로 라이브 재계산한 뒤 사람이 확인해야 `/handoff`가 서명한다(§5.3). 루프는 구조적으로 확정 권위를 가질 수 없다.
+   808	
+   989	15. **자동 확정 임계를 두지 않는다.** `confidence=CONFIRMED`여도 자동 주문 경로가 코드에 없다.
+   990	16. **학습·self-refine을 하지 않는다** (§10.2 — 주문 이력 사전분포 부재).
+
+hook: PostToolUse
+hook: PostToolUse
+exec
+/bin/zsh -lc "nl -ba .moai/specs/SPEC-WORLDMODEL-001/spec.md | sed -n '108,123p;290,292p;687,692p;711,715p' && nl -ba .moai/specs/SPEC-WORLDMODEL-001/acceptance.md | sed -n '63,64p;195,198p;391,396p'" in /Users/innojini/Dev/HuniWeb
+ succeeded in 0ms:
+   108	- **U-003.5** 확정은 위젯 `POST /price` 라이브 재계산 → 사람 확인 → `POST /handoff` 경로 전용이다. 루프는 어떤 경우에도 스스로 주문을 확정하지 않는다.
+   109	
+   110	### 3.4 REQ-WM-004 Outcome 스키마 — 제약×가격 결합 (RULE-06·RULE-09, FIX-5·FIX-8)
+   111	
+   112	- **U-004.1** `feasible != "PROVEN_OK"`이면 가격 필드는 **스키마상 반드시 `None`**이다(직렬화 시 강제). 제약 위반 조합의 가격이 존재할 자료구조 자체가 없다.
+   113	- **U-004.2** `blockers[].kind`는 `FORBIDDEN`(금지)과 `UNREGISTERED`(데이터 미등록)를 분리한다.
+   114	- **U-004.3** `price.confidence ∈ {CONFIRMED, PROVISIONAL, NONE}` + `confidence_reasons[]`로 권위 룩업 기반과 기하 폴백 기반을 구별한다.
+   115	- **U-004.4 [FIX-5]** `Outcome.price`를 **3필드로 분리**한다 — `supply_amount`(공급가, `evaluate_price.final_price`) / `vat_amount`(`widget_api.py:1148` `VAT_RATE` 계승) / `payable_total`(청구액 = supply + vat, `/handoff` 서명 `total`과 동등). U-004.1과 §3.8 X-008.4(예외 시 0원 대체 금지)는 **3필드 전부**에 적용한다.
+   116	- **U-004.5 [FIX-5]** `Scorer`의 `budget_penalty`와 tie-break ⑤는 `payable_total`로 고정한다. 고객 대면 문구 토큰은 `payable_total`만 사용하고 "(부가세 포함)"을 명시하며, 공급가 노출 시 "공급가(부가세 별도)"로 구분 표기한다. `RenderGuard`의 서버 치환 토큰 검증 대상도 `payable_total`이다.
+   117	- **U-004.6 [FIX-8]** `components[].zero_reason`은 `matched_row` 1차축 **4분류**다.
+   118	  - `included==True and subtotal==0` → `TRUE_ZERO`
+   119	  - `matched_row is None and data_gap 비어있지 않음` → `MISSING_PRICE_ROW`
+   120	  - `matched_row is None and data_gap==[] and error is None` → 2분: (3a) 해당 구성요소 `use_dims` 중 비수량 축에 미선택이 있음 → `UNSELECTED_DIM`(플래그만 · 강등·에스컬레이션 **없음**, `widget_api.py:462-463` 구분 승계) / (3b) 그 외 → `UNMATCHED_NO_GAP` + `sim_escalation(PRICE_ROW_MISSING)` + `confidence` PROVISIONAL 강등
+   121	  - `error in _FATAL_ERRORS` → `blockers[ENGINE_ERROR]`
+   122	- **U-004.7 [FIX-8]** 3a/3b 판별용 **읽기전용 SELECT 1건**(해당 `comp_cd`·`as_of` 적용행 존재 여부)을 `JointTransition` (g) 옆에 둔다. 읽기전용이므로 RULE-04 불변이며, 금액은 여전히 엔진의 것이고 플래그만 우리 것이다.
+   123	- **U-004.8 [FIX-8]** 무경고 0원 경로의 근거 좌표는 `pricing.py:655-660`(`_match_entry` no_match 분기)이며 `pricing.py:106-108`·`:599-607`을 병기한다. (`gate-report.md:38` R-7 독립 재실측: `m["row"] is None` 분기에서 `if gap:`일 때만 `data_gap`을 채우고, gap이 비면 `included=False · data_gap=[] · error=None`으로 조용히 반환)
+   290	**RULE-14 · 사람 개입의 배치 · MAJOR**
+   291	- **norm**: 사람 개입 지점을 **구조로** 배치한다 — ① 의도가 모호할 때 되묻기(전단), ② 구속력 있는 행위 직전 승인(후단), ③ 불확실 케이스 즉시 에스컬레이션. 원칙은 **읽기는 자율, 쓰기는 승인**.
+   292	- **violation_test**: ① 미확정 슬롯이 남은 상태에서 **자동으로 기본값을 채워 확정**하는 경로가 있으면 위반. ② 라이브 write·주문 확정·가격 예외 승인 중 인간 승인 게이트가 없는 것이 1건이라도 있으면 위반. ③ "권위 격자 미적재 셀 / 신규 조합 / 제약 미커버" 같은 고불확실 케이스의 라우팅 목적지가 없으면 위반.
+   687	| ②-2 | **자동 확정 경로가 코드에 없다** — *"자동 확정 임계를 두지 않는다. `confidence=CONFIRMED`여도 자동 주문 경로가 코드에 없다"* | 설계 §12-15 |
+   688	| ②-3 | **확정은 인간 확인 게이트 전용** — 위젯 `/price` 라이브 재계산 → 사람 확인 → `/handoff` 서명. 루프는 어떤 경우에도 스스로 주문을 확정하지 않는다 | 설계 §12-13 · §6 T6 · §3.3 U-003.5 |
+   689	| ②-4 | **LLM에 금액·가능여부·판걸이수·수량 판정 권한 0** — 금액 문장조차 LLM이 생성하지 않는다(`PhraseRenderer` 결정론 템플릿). `qty`·`budget_krw`도 LLM 산출값을 그대로 쓰지 않고 `NumericIntentParser` 재산출값만 진입한다 | 설계 §12-14 · §3.1 U-001.5 · §3.2 E-002.7 |
+   690	| ②-5 | **fail-closed 전수 11지점** — 신규 평가 지점 전건에서 예외 시 통과 처리 0건. 특히 `evaluate_price` 예외 시 0원 대체 절대 금지 | §3.8 U-008.1 |
+   691	| ②-6 | **에스컬레이션 목적지가 전부 실무진** — `sim_escalation` 7종의 1순위 목적지는 새 큐가 아니라 실재 트랙·실무진 동선 | §3.7 U-007.3 · `design-FINAL.md:865`(A-13 대응) |
+   692	| ②-7 | **능동 개입 미채택** — *"라이브 write 0 원칙과 '쓰기는 승인' 규율 하에서는 능동 실행 권한을 줄 수 없다. 능동성은 `sim_escalation` 큐에 항목을 쌓는 수준으로 축소"* | `design-FINAL.md:875` |
+   711	| 자동 확정 경로 **부재** (②-2) | 세미 오토노머스는 *"자율성 스펙트럼을 조율해서"* 일부 결정을 에이전트에게 위임하는 단계인데, 본 설계는 위임 지점이 **0개**다 |
+   712	| 확정 = **인간 게이트 전용** (②-3) | 비가역 행위의 결정권이 전건 사람에게 있다 |
+   713	| LLM 판정권 **0** (②-4) | 뉴로 계층은 후보 제안·번역·설명만 하고 판정은 전부 결정론 엔진이다 |
+   714	
+   715	[HARD] **그리고 이것은 결함이 아니라 의도적 선택이다.** 근거는 원천 프레임 자신의 경고다 — *"인쇄는 비가역이고 금액이 즉시 확정된다. 초기엔 **자동 확정 임계를 사실상 100%로** 두는 것이 안전"*(`R3:358`). 설계는 이 경고를 한 걸음 더 밀어 **임계를 두지 않고 경로 자체를 없앴다**(`design-FINAL.md:865` — *"루프는 자동 확정 경로가 아예 없다"*).
+    63	  - **FIX-8** — `zero_reason` **4분류**(1차축 = `matched_row`) + 3a/3b 판별 **읽기전용 SELECT 1건**(g′) + 근거 좌표 `pricing.py:626-630` → **`:655-660`** 교체(병기 `:106-108`·`:599-607`) + G8 분모 추가.
+    64	- **기대**: 위 전건에 교정이 반영되어 있고, 미반영 항목이 **0건**이다.
+   195	- **실행**: `t_siz_pansu` 존재 조회 결과와 Outcome `price.confidence`를 대조한다.
+   196	- **기대**: 불일치 **0건** (룩업 히트 → `CONFIRMED`, 기하 폴백 → `PROVISIONAL`).
+   197	- **분모**: 파일럿 (판형 × 사이즈) 쌍 수.
+   198	- **후퇴**: `confidence` 축 폐기 → 전건 실무진 라우팅으로 후퇴.
+   391	### AC-AUT-02 · 자동 확정 경로 부재 (②축 최강 근거의 기계 확인)
+   392	
+   393	- **측정 대상**: 구현 코드에서 `confidence` / `feasible` 값만으로 주문 확정에 도달하는 경로.
+   394	- **실행**: `_workspace/huni-simcore/` 전수에 대해 ① `grep -rn "CONFIRMED\|PROVEN_OK" _workspace/huni-simcore/` 로 후보 지점을 수집하고, ② 각 후보에서 `/handoff` · `commit` · `confirm` · `order` 계열 호출까지의 **호출 그래프를 전수 추적**한다. ③ 역방향으로 `grep -rn "handoff" _workspace/huni-simcore/` 의 전건 호출부가 **인간 확인 게이트 뒤에만** 있는지 확인한다.
+   395	- **기대**: `confidence` 또는 `feasible` 값 판정만으로 주문 확정에 도달하는 경로 **0건**. 설계 §12-15(*"자동 확정 임계를 두지 않는다"*)와 §12-13(*"확정은 위젯 `/handoff` + 인간 확인 게이트 전용"*)이 코드에서 성립한다.
+   396	- **분모**: `confidence`/`feasible` 참조 지점 전수 × 각 지점의 하류 호출 경로.
+
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PostToolUse Completed
+hook: PostToolUse Completed
+codex
+RULE-14의 세 번째 검사는 라우팅 목적지의 존재가 핵심이라, `sim_escalation` 표의 나머지 행까지 확인하고 있습니다. 위반 주장에 필요한 구체 실패 시나리오가 있는지도 같이 대조하겠습니다.
+hook: PreToolUse
+hook: PreToolUse
+hook: PreToolUse Completed
+hook: PreToolUse Completed
+exec
+/bin/zsh -lc "nl -ba _workspace/huni-worldmodel/04_design/design-FINAL.md | sed -n '520,545p;856,866p;873,876p'" in /Users/innojini/Dev/HuniWeb
+ succeeded in 0ms:
+   520	| `esc_kind` | `route_to` (실재 착지점) | 소비 표면 | 소비 주기 | 소유 트랙 |
+   521	|---|---|---|---|---|
+   522	| `PRICE_ROW_MISSING` / `ANCHOR_MISSING` | §26 `hpti` 권위 격자 교정 명세 | `hpti` `_batch` SQL 파일군(실재 확인) | 격자 재추출 라운드 단위 | §26 |
+   523	| `TMPL_COMBO_UNREGISTERED` | 실무진 조합템플릿 등록 화면 | webadmin 기존 화면 | 상시 | webadmin |
+   524	| `AFFECT_UNDEFINED` | §7/§18 `use_dims` 충전 트랙 | 적재 명세 | 트랙 라운드 단위 | §7·§18 |
+   525	| `PANSU_PROVISIONAL` | 실무진 판걸이수 확인 시트 | 기존 시트 | 상시 | 실무진 |
+   526	| `REACH_UNKNOWN` | 루프 자체 튜닝 | 우리 산출물 | S1~S4 내부 | 본 트랙 |
+   527	| **`PREMISE_FAIL` (`gate_id=G0`)** | **webadmin 리팩터 대응 트랙 — 대응 전까지 루프 실행 금지** | 심볼 실재 보고서 | 발생 시 즉시 | webadmin |
+   528	| **`PREMISE_FAIL` (`gate_id=G0.5a` / `G0.5b`)** | **§33 / webadmin `ref_dim`·차원어휘 정합 트랙 — 루프 중단** | 파리티 린트 리포트 | 발생 시 즉시 | §33·webadmin |
+   529	| **`PREMISE_FAIL` (`gate_id=G0.9`)** | **캐시 전량 무효화 후 재계산 — G7 미달 시 캐시 계층 폐기** | 다이제스트 로그 | 발생 시 즉시 | 본 트랙 |
+   530	
+   531	**미정 행 0건.** 단, 위 착지점 중 일부는 **큐가 아니라 트랙·화면**이므로 "쌓인 항목을 누가 언제 비우는가"의 운영 실체가 완전하지는 않다 — §11-10 에 정직하게 등재한다.
+   532	
+   533	**예측-관측 대조 채널 3개**(강도 순):
+   534	
+   535	| 채널 | 관측원 | 대조 대상 | 한계 (정직하게) |
+   536	|---|---|---|---|
+   537	| **O1 (공급가 축)** | 권위 엑셀 격자(가격표 260705) + 골든 30건 | **`price.supply_amount`** vs 권위값 (허용오차 0) — ★FIX-5: 권위 격자는 **공급가 격자**이므로 대조 대상을 공급가로 못 박는다 | 격자 미적재 셀은 대조 불가 → `UNKNOWN` 기록. **[N4]** §26 재추출 미완 3시트(엽서북떡메·제본·출력소재IMPORT) 유래 셀도 대조 불가 |
+   538	| **O2 (청구액 축)** | `widget_api /handoff` 실제 응답(성공/422 + 서명 `total`) | `feasible`·`blockers[].source` 적중 + **`price.payable_total` == 응답 `total`** (★FIX-5) | `t_wgt_handoff_logs` 현재 **0행**(`D8-live-schema.md:66-68`). **★FIX-4 정정: "초기엔 파일럿 리플레이로 대체"는 라이브 write 를 유발하므로 폐기한다.** O2 는 **clone 환경 리플레이 관측** 또는 **실사용 유입 대기** 둘 중 하나로만 채운다 |
+   539	| O3 | 실무진 확인(`sim_escalation` 처리 결과) | `PROVISIONAL` 건의 실제 판걸이수 | 사람 처리량 비례. 저빈도 |
+   540	
+   541	**정직한 약점을 여기 먼저 적는다**: 주문·견적 실체 테이블 부재(P-01)는 본 설계가 **해결하지 않는다**. 관측은 O1에 편중되며, "고객이 실제로 무엇을 골랐고 그 주문이 어떻게 됐는가"는 구조적으로 약하다(§11-1).
+   542	
+   543	---
+   544	
+   545	## 5. 기존 webadmin 접합면 (파일 단위)
+   856	| **에이전틱 트윈 — 안전하게 수백만 번 실패하라** (`R3:323` A-11) | 이 설계의 이름 그대로. 부작용 0 롤아웃 = 견적 시뮬레이터. 결정론 배치 스윕(G8·G4)은 토큰 0 |
+   857	| **조합폭발: 탐색은 기계, 판정은 규칙 / 무효조합을 규칙으로 잘라라** (`R3:316` A-4) | 전수 열거·사전계산 적재 0건(N-19). `frontier` 열거 + `_sim_disallowed`·`_price_gap_errors`·`tmpl_combo` 3소스 union으로 공간을 접는다 |
+   858	| **필수 파라미터는 고정, 변수는 추론시켜라** (`R3:318` A-6, F3:86) | `Intent` 스키마의 `UNKNOWN` 센티널 + 되묻기 정상 경로(RULE-14 ①). 미확정 슬롯 자동 채움 금지 |
+   859	| **컨피던스 점수 + 임계 이상만 자동, 미만은 실무진 라우팅** (`R3:322` A-10) | `price.confidence` + `sim_escalation` 6종 라우팅. 그리고 R3 §C의 경고 준수 — *"인쇄는 비가역이고 금액이 즉시 확정된다. 초기엔 자동 확정 임계를 사실상 100%로"*(`R3:358`) → **루프는 자동 확정 경로가 아예 없다** |
+   860	| **예측-실제 갭 트래킹 = 캘리브레이션** (`R3:321` A-9) | 사이드카 원장 3테이블 + O1/O2/O3 대조 채널(§4.7) |
+   861	| **루프 3요소: 중단조건 / 능동개입 / self-refine** (`R3:324` A-12, F4:71) | 중단조건 = `feasible=PROVEN_OK` + 전 슬롯 확정 시 루프 종료(무한 되묻기 금지). 능동개입 = 모순 조합 선택 시 blocker + repairs 제시. **self-refine은 미채택** — §10.2 참조 |
+   862	| **"전부 정리한 뒤 시작"은 틀렸고 "작은 세계부터 명시화"가 맞다** (`R3:319` A-7, F3:71 vs F2:35/F2:47) | §7 S1~S4 순서. 1상품 파일럿 → 동형 전파. 288상품 정합을 기다리지 않는다 |
+   863	| **버전 드리프트 = "실행 탈주"의 직접 원인** (`R3:348-351`, F2:32) | §0 권위 버전 단일 선언 + **G0.9 원천 다이제스트 게이트** — 낡은 세계로 판정하는 것을 기계가 거부한다 |
+   864	| **감사 추적이 4대 조건 중 최대 갭** (`R4:139-148`) | RULE-11 대응 — `matched_row_id` + `anchor` + `tier`/`rejected` 3항 동시 반환. 앵커 원천은 §26 권위 격자 |
+   865	| **도메인 오너가 최종 승인권** (`R3:325` A-13) | 확정은 위젯+사람 확인(§6 T6). `sim_escalation`의 목적지는 전부 실무진 |
+   866	| **IT 주도 실패 / "작은 점 자동화"에 그치지 말 것** (`R3:115` F1:23) | 이 설계가 스스로 G9(순증분 측정)를 건 이유. "루프 엔지니어링만 하고 도메인 모델링을 못했다"는 그의 경고를 우리에게 적용하면, 루프의 순증분을 측정하지 않는 것이 정확히 그 함정이다 |
+   873	| **뉴럴 월드 모델(learned/시뮬레이션 기반)** | R3 §C가 직접 배제 — *"그의 SCM/프로모션 사례는 수요·경쟁이 변수인 열린 세계지만 우리 인쇄 견적은 자재·공정·판형의 결정론 물리 제약이 지배한다"*(`R3:357`). 기각목록 N-17과도 일치 |
+   874	| **루프 3요소 중 self-refine / reflection** (`R3:137` F4:71) | 학습형 자기개선은 **주문 이력 사전분포가 있어야 성립**하는데 주문 실체 테이블이 없다(P-01, 라이브 소유). 지금 붙이면 편향된 모수 위에서 학습하게 된다. `sim_rollout` 원장에 재료를 **모으기만 하고 쓰지 않는다** — 이것이 §11-1의 미해결 위험이다 |
+   875	| **능동 개입(우리가 시키지 않을 때 알아서 일하는 에이전트)** (`R3:137`) | 라이브 write 0 원칙과 "쓰기는 승인" 규율(RULE-14) 하에서는 능동 실행 권한을 줄 수 없다. 능동성은 `sim_escalation` 큐에 항목을 쌓는 수준으로 축소 |
+   876	| **"AX는 C레벨 어젠다" 거버넌스 프레이밍** | R3 §C — *"우리는 조직 규모상 도메인 오너=실무진=승인권자가 사실상 동일. 그의 거버넌스 계층 논의는 과잉"*(`R3:359`) |
+
+hook: PostToolUse
+exec
+/bin/zsh -lc 'rg -n "PRICE_ROW_MISSING|TMPL_COMBO_UNREGISTERED|AFFECT_UNDEFINED|REACH_UNKNOWN|PANSU_PROVISIONAL|ANCHOR_MISSING|PREMISE_FAIL|제약 미커버|신규 조합|미적재|기본값|되묻기|사람 확인|가격 예외|실무진 큐" _workspace/huni-worldmodel/04_design/design-FINAL.md .moai/specs/SPEC-WORLDMODEL-001/spec.md .moai/specs/SPEC-WORLDMODEL-001/plan.md .moai/specs/SPEC-WORLDMODEL-001/acceptance.md' in /Users/innojini/Dev/HuniWeb
+ succeeded in 0ms:
+.moai/specs/SPEC-WORLDMODEL-001/plan.md:102:| M0.5-a | **FIX-6** `:389` `esc_kind` enum에 `PREMISE_FAIL` 추가(**7종**) + `:601` "6종"→"7종" |
+.moai/specs/SPEC-WORLDMODEL-001/plan.md:283:| M2-f | G8 임계의 S2 단계분 — `sim_escalation(AFFECT_UNDEFINED)` 큐 적재 및 `route_to` 도달 검증(M0.7-b) |
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:41:- **기대**: (i) `provenance.numeric_spans{qty, budget_krw}` 필드 존재, (ii) "span 없는 수치 = 스키마 위반" 규정 존재, (iii) `NumericIntentParser`(symbolic)가 원문 재파싱으로 값을 재산출하고 **심볼릭 진입값이 재산출값**임이 명시, (iv) LLM 값 불일치 시 fail-closed, (v) 재파싱 실패도 fail-closed(조용한 기본값 금지), (vi) §6 T1 검증항목과 §12 비목표 14번에 "수량" 편입.
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:61:  - **FIX-6** — `esc_kind` **7종**(`PREMISE_FAIL` 편입) + `route_to` 게이트별 3행 + `payload_json.gate_id` **필수 키** + §8-1 **11번째 행**.
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:127:- **후퇴**: 즉시 중단. webadmin 리팩터 대응 전까지 루프 실행 금지. `sim_escalation(PREMISE_FAIL, gate_id=G0)` 라우팅.
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:219:- **기대**: 무반응 구성요소 전건이 `affect_observed=false`로 플래그되고 `sim_escalation(AFFECT_UNDEFINED)`로 라우팅된다(**누락 0건**). 추가로 **0원 구성요소의 `zero_reason` 4분류 정확성**이 대조된다. S1 단계에서는 플래그·후보 기록까지, 큐 적재 및 `route_to` 도달 검증은 S2(M2).
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:420:- **실행**: 각 마일스톤 종료 시 ① §11.6 (a)~(d) 의 현재 상태를 재평가하고(각 항의 "확인 방법(기계)" 열대로 실행), ② 그 시점 구현에 대해 **AC-AUT-02 를 재실행**하며, ③ 자동 위임 지점(사람 확인 없이 상태를 전이시키는 경로)이 신설됐는지 `git diff` 로 대조한다.
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:90:- **U-002.3** `Intent` 검증 지점은 `IntentValidator.validate()` **1곳**이며, 루프 진입 직전에 위치하고 실패 시 fail-closed(되묻기 라우팅)한다.
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:99:- **E-002.7 [FIX-2]** `IntentValidator.validate()`가 수치 필드를 검증할 때, 내부의 `NumericIntentParser`(symbolic)가 `numeric_spans`가 가리키는 원문 부분문자열을 결정론 규칙으로 재파싱해 값을 재산출하고, LLM 산출값과 불일치하면 fail-closed(되묻기)한다. 심볼릭 계층에 진입하는 값은 **재산출값**이며 LLM 산출값은 대조용으로만 보관한다.
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:100:- **X-002.8 [FIX-2]** 재파싱이 실패(원문에 수치 근거 없음)했는데 조용한 기본값으로 진행하면 위반이다 — fail-closed가 유일한 동작이다.
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:108:- **U-003.5** 확정은 위젯 `POST /price` 라이브 재계산 → 사람 확인 → `POST /handoff` 경로 전용이다. 루프는 어떤 경우에도 스스로 주문을 확정하지 않는다.
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:120:  - `matched_row is None and data_gap==[] and error is None` → 2분: (3a) 해당 구성요소 `use_dims` 중 비수량 축에 미선택이 있음 → `UNSELECTED_DIM`(플래그만 · 강등·에스컬레이션 **없음**, `widget_api.py:462-463` 구분 승계) / (3b) 그 외 → `UNMATCHED_NO_GAP` + `sim_escalation(PRICE_ROW_MISSING)` + `confidence` PROVISIONAL 강등
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:124:- **U-004.9 [FIX-7]** `components[].anchor`는 **폴백 사다리 3단**이다 — ① provenance-map 히트 → `xlsx:<파일>#<시트>!<셀>` ② 미히트 + `matched_row_id != None` → `t_prc_component_prices/<comp_price_id>`(기본 폴백, 이 단계에서 `None`으로 떨어지지 않는다) ③ `matched_row_id == None` → `None` + `sim_escalation(ANCHOR_MISSING)`.
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:149:- **U-007.1 [FIX-6]** `sim_escalation.esc_kind`는 **7종**이다 — `PRICE_ROW_MISSING`, `TMPL_COMBO_UNREGISTERED`, `PANSU_PROVISIONAL`, `ANCHOR_MISSING`, `AFFECT_UNDEFINED`, `REACH_UNKNOWN`, **`PREMISE_FAIL`**.
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:150:- **U-007.2 [FIX-6]** 같은 `esc_kind`가 게이트별로 다른 목적지로 갈리므로 `payload_json.gate_id ∈ {G0, G0.5a, G0.5b, G0.9}`를 **필수 키**로 둔다. 라우팅: `PREMISE_FAIL(G0)` → webadmin 리팩터 대응 트랙(대응 전까지 루프 실행 금지) / `PREMISE_FAIL(G0.5a·b)` → §33·webadmin `ref_dim` 정합 트랙(루프 중단) / `PREMISE_FAIL(G0.9)` → 캐시 전량 무효화 후 재계산(G7 미달 시 캐시 계층 폐기).
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:152:- **E-007.4** 미확정 슬롯이 남은 상태에서 루프가 진행할 때, 기본값을 채워 확정하지 않고 **되묻기를 정상 경로로** 취한다.
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:291:- **norm**: 사람 개입 지점을 **구조로** 배치한다 — ① 의도가 모호할 때 되묻기(전단), ② 구속력 있는 행위 직전 승인(후단), ③ 불확실 케이스 즉시 에스컬레이션. 원칙은 **읽기는 자율, 쓰기는 승인**.
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:292:- **violation_test**: ① 미확정 슬롯이 남은 상태에서 **자동으로 기본값을 채워 확정**하는 경로가 있으면 위반. ② 라이브 write·주문 확정·가격 예외 승인 중 인간 승인 게이트가 없는 것이 1건이라도 있으면 위반. ③ "권위 격자 미적재 셀 / 신규 조합 / 제약 미커버" 같은 고불확실 케이스의 라우팅 목적지가 없으면 위반.
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:317:#### 4.3.1 기본값 규정 [HARD]
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:319:> **근거가 불충분할 때의 기본값은 '반증 성립'이 아니라 '각하'다.**
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:487:| ② | 신설 **RULE-19(MINOR) 문서 내부 정합** — *"설계가 도입한 enum·매핑표·단계배치가 자기 문서의 다른 절과 모순되면 위반"* | **A3**(esc_kind enum 누락) · **N1**(G8 단계배치) · **N6**(도면-서술 불일치) | **닫힘 — FIX-6**(`PREMISE_FAIL` 편입 + `gate_id` 필수 키, §3.7) · N1 단계 분리 · N6 간선 분리(§3.1 U-001.5) |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:688:| ②-3 | **확정은 인간 확인 게이트 전용** — 위젯 `/price` 라이브 재계산 → 사람 확인 → `/handoff` 서명. 루프는 어떤 경우에도 스스로 주문을 확정하지 않는다 | 설계 §12-13 · §6 T6 · §3.3 U-003.5 |
+_workspace/huni-worldmodel/04_design/design-FINAL.md:86:| **P-06** | lenient 0원 흡수 | 우리 층의 모든 호출에서 `mode="strict"` 고정(호출 규약, 엔진 무수정). 기본값이 lenient임은 실측(`pricing.py:428`) | **해결(우리 경로)** |
+_workspace/huni-worldmodel/04_design/design-FINAL.md:93:| **P-13** | 감사 추적 부재 (권위 셀 링크 없음) | `components[].anchor` = **폴백 사다리 3단**(① `provenance-map` 히트 → `xlsx:파일#시트!셀` / ② 미히트이나 `matched_row_id != None` → `t_prc_component_prices/<comp_price_id>` / ③ `matched_row_id == None` → `None` + `sim_escalation(ANCHOR_MISSING)`). 기본 경로는 ②이며 ①은 §26 셀 좌표 컬럼 추가 후 가산분(§4.2, FIX-7) | **해결(커버 범위 내)** |
+_workspace/huni-worldmodel/04_design/design-FINAL.md:225:    ESC -.route_to.-> STAFF(["실무진 큐 (§26 hpti / 조합템플릿 화면 / §7·§18 트랙)"])
+_workspace/huni-worldmodel/04_design/design-FINAL.md:227:    PICK -->|"전 슬롯 확정 + 사람 확인"| WP --> WH
+_workspace/huni-worldmodel/04_design/design-FINAL.md:307:- **미확정 표현**: `UNKNOWN` 센티널 단일 (요건 ②). 누락·`None`·빈문자열은 전부 검증 실패 — "조용한 기본값"을 스키마 층에서 원천 봉쇄한다.
+_workspace/huni-worldmodel/04_design/design-FINAL.md:308:- **검증 지점**: `IntentValidator.validate()` 단 한 곳, 루프 진입 직전, 실패 시 fail-closed(되묻기 라우팅) (요건 ③). `assistant_tools`의 화이트리스트 디스패처와 동일한 "미등록이면 실행하지 않는다" 정책.
+_workspace/huni-worldmodel/04_design/design-FINAL.md:331:2. **`NumericIntentParser`(symbolic) 신설** — `IntentValidator.validate()` **내부**에 둔다. `numeric_spans` 가 가리키는 **원문 부분문자열**을 결정론 규칙으로 재파싱해 값을 **재산출**한다. LLM 산출값과 불일치하면 **fail-closed → 되묻기 라우팅**.
+_workspace/huni-worldmodel/04_design/design-FINAL.md:333:4. **재파싱 실패**(원문에 수치 근거 없음)도 fail-closed — "조용한 기본값 금지" 정책과 동일 취급.
+_workspace/huni-worldmodel/04_design/design-FINAL.md:390:   - ③ `matched_row_id == None` → `None` + `sim_escalation(ANCHOR_MISSING)`
+_workspace/huni-worldmodel/04_design/design-FINAL.md:417:| 3b | 위 3a 조건 중 **미선택 축이 없음**(단가행 rows 전무 또는 `dim_vals` 키 불일치) | **`UNMATCHED_NO_GAP`** | `sim_escalation(PRICE_ROW_MISSING)` + `price.confidence` **PROVISIONAL 강등** |
+_workspace/huni-worldmodel/04_design/design-FINAL.md:510:**★ FIX-6 — `esc_kind` 7종** (개정 전 6종에 `PREMISE_FAIL` 누락 → §6 T-1 이 발행하는데 허용집합에 없어 CHECK 제약 시 **전제감시 로그가 유실**되는 결함, A3):
+_workspace/huni-worldmodel/04_design/design-FINAL.md:512:`sim_escalation.esc_kind` ∈ `{PRICE_ROW_MISSING, TMPL_COMBO_UNREGISTERED, PANSU_PROVISIONAL, ANCHOR_MISSING, AFFECT_UNDEFINED, REACH_UNKNOWN, `**`PREMISE_FAIL`**`}`.
+_workspace/huni-worldmodel/04_design/design-FINAL.md:514:**`PREMISE_FAIL` 은 게이트별로 목적지가 갈리므로 `payload_json.gate_id ∈ {G0, G0.5a, G0.5b, G0.9}` 를 필수 키로 요구한다.**
+_workspace/huni-worldmodel/04_design/design-FINAL.md:522:| `PRICE_ROW_MISSING` / `ANCHOR_MISSING` | §26 `hpti` 권위 격자 교정 명세 | `hpti` `_batch` SQL 파일군(실재 확인) | 격자 재추출 라운드 단위 | §26 |
+_workspace/huni-worldmodel/04_design/design-FINAL.md:523:| `TMPL_COMBO_UNREGISTERED` | 실무진 조합템플릿 등록 화면 | webadmin 기존 화면 | 상시 | webadmin |
+_workspace/huni-worldmodel/04_design/design-FINAL.md:524:| `AFFECT_UNDEFINED` | §7/§18 `use_dims` 충전 트랙 | 적재 명세 | 트랙 라운드 단위 | §7·§18 |
+_workspace/huni-worldmodel/04_design/design-FINAL.md:525:| `PANSU_PROVISIONAL` | 실무진 판걸이수 확인 시트 | 기존 시트 | 상시 | 실무진 |
+_workspace/huni-worldmodel/04_design/design-FINAL.md:526:| `REACH_UNKNOWN` | 루프 자체 튜닝 | 우리 산출물 | S1~S4 내부 | 본 트랙 |
+_workspace/huni-worldmodel/04_design/design-FINAL.md:527:| **`PREMISE_FAIL` (`gate_id=G0`)** | **webadmin 리팩터 대응 트랙 — 대응 전까지 루프 실행 금지** | 심볼 실재 보고서 | 발생 시 즉시 | webadmin |
+_workspace/huni-worldmodel/04_design/design-FINAL.md:528:| **`PREMISE_FAIL` (`gate_id=G0.5a` / `G0.5b`)** | **§33 / webadmin `ref_dim`·차원어휘 정합 트랙 — 루프 중단** | 파리티 린트 리포트 | 발생 시 즉시 | §33·webadmin |
+_workspace/huni-worldmodel/04_design/design-FINAL.md:529:| **`PREMISE_FAIL` (`gate_id=G0.9`)** | **캐시 전량 무효화 후 재계산 — G7 미달 시 캐시 계층 폐기** | 다이제스트 로그 | 발생 시 즉시 | 본 트랙 |
+_workspace/huni-worldmodel/04_design/design-FINAL.md:537:| **O1 (공급가 축)** | 권위 엑셀 격자(가격표 260705) + 골든 30건 | **`price.supply_amount`** vs 권위값 (허용오차 0) — ★FIX-5: 권위 격자는 **공급가 격자**이므로 대조 대상을 공급가로 못 박는다 | 격자 미적재 셀은 대조 불가 → `UNKNOWN` 기록. **[N4]** §26 재추출 미완 3시트(엽서북떡메·제본·출력소재IMPORT) 유래 셀도 대조 불가 |
+_workspace/huni-worldmodel/04_design/design-FINAL.md:552:| **`mode="strict"` 고정** | 우리 층의 모든 호출에서 강제. lenient 흡수(P-06)를 **호출 규약으로** 차단 | 기본값이 `lenient`임을 `pricing.py:428`에서 직접 확인 |
+_workspace/huni-worldmodel/04_design/design-FINAL.md:600:**T-1 · 전제 감시 (신규)** — 세션 시작 전 **G0 / G0.5a / G0.5b / G0.9** 가 돈다. 심볼 12종 실재 확인(+ `print_opt_cd` NULL 제외 건수 기록), `ref_dim` 7축 × 5표면 35쌍 동일성, `DIM_META` 12축 × 3표면 36쌍 동일성, 판정 입력 테이블 다이제스트 스탬프. **하나라도 실패하면 루프는 시작되지 않고 그 사실이 `sim_escalation(esc_kind='PREMISE_FAIL', payload_json.gate_id=<G0|G0.5a|G0.5b|G0.9>)` 로 남는다**(§4.7 매핑표대로 게이트별 목적지가 갈린다).
+_workspace/huni-worldmodel/04_design/design-FINAL.md:616:**★ FIX-2 추가 검증** — `provenance.numeric_spans.qty` 가 존재하는지(없으면 스키마 위반), 그 span 이 가리키는 원문 부분문자열을 `NumericIntentParser` 가 결정론 재파싱해 **500 을 재산출**하는지, LLM 산출값과 **일치**하는지 대조한다. 불일치 또는 재파싱 실패는 **fail-closed → 되묻기**. 이후 심볼릭 계층이 쓰는 값은 **재산출값**이다.
+_workspace/huni-worldmodel/04_design/design-FINAL.md:626:**T3 · 되묻기 (RULE-14 ①)** — A·C가 남고 `soft_prefs`만으로 갈리지 않는다. 미확정 슬롯이 남았으므로 **기본값을 채워 확정하지 않는다.** `PhraseRenderer`가 질문 템플릿을 만들고(금액 없음) Explainer가 어투만 다듬고 RenderGuard를 통과한다: *"용지 느낌을 먼저 정할까요 — 매트/펄/엠보 중에서요."*
+_workspace/huni-worldmodel/04_design/design-FINAL.md:643:                   → sim_escalation(esc_kind='TMPL_COMBO_UNREGISTERED', route_to='실무진')
+_workspace/huni-worldmodel/04_design/design-FINAL.md:646:- 후보 2와 3의 `kind`가 다르다 — 하나는 금지, 하나는 데이터 미등록. 후자만 실무진 큐로 간다.
+_workspace/huni-worldmodel/04_design/design-FINAL.md:723:| **G8** | 구성요소 반응성 (P-05 탐지) | `gates/counterfactual_sweep.py` — 각 `option_item` on/off × `evaluate_price(only_comps=…)` 반사실 스윕. 실제로 `subtotal`/`matched_row`가 바뀐 구성요소 = 관측 (**B 이식·목적 전환**) | **[N1 단계 분리]** **S1** — 무반응 구성요소 전건이 `affect_observed=false` 로 플래그·에스컬레이션 **후보로 기록**(누락 0). 라우팅 적재는 S2 소관. / **S2** — `sim_escalation(AFFECT_UNDEFINED)` 큐 적재 및 `route_to` 도달 검증. **+ [FIX-8] 0원 구성요소의 `zero_reason` 4분류 정확성** — 3b(`UNMATCHED_NO_GAP`)가 1건이라도 나오면 언더차지 후보로 실적재, **0건이면 그 사실 자체를 기록** | 파일럿 상품의 `option_item` × 구성요소 전수 쌍 + **0원 구성요소 전수** | 스윕이 `use_dims` 빈 구성요소를 못 잡으면 이 지표는 P-05 탐지에 무력 → 탐지 주장 철회 |
+_workspace/huni-worldmodel/04_design/design-FINAL.md:746:| **RULE-11** 감사 추적 | MAJOR | **충족** | `components[]`가 (a) `matched_row_id`, (b) `anchor`(`xlsx:파일#시트!셀` 또는 `t_<table>/<CODE>`), (c) `tier{field,threshold,order_value}` + `rejected[].first_diff_dim` 셋을 모두 반환. 재구현이 아니라 diff로 얻는다. 앵커 원천은 §26 권위 격자(260705)라 KB의 260702 스큐를 피한다. **[FIX-7]** 개정 전 "미보유 셀은 `None` 명시"는 `provenance-map` 미배선 시 `anchor=None` 이 상시 발생하는 잠재 결손이었으므로 **폴백 사다리 3단**으로 교체했다(§4.2 성질 5) — ①xlsx 셀 → ②`t_prc_component_prices/<comp_price_id>`(**기본 폴백**) → ③`None` + `sim_escalation(ANCHOR_MISSING)`. **부기**: 루브릭 (b)는 `xlsx:파일#시트!셀` **또는** `t_<table>/<CODE>` 의 **선언지**이며, 본 설계의 기본 경로는 `t_<table>/<CODE>` 이고 xlsx 셀은 **S2 가산분**이다 |
+_workspace/huni-worldmodel/04_design/design-FINAL.md:749:| **RULE-14** 사람 개입 배치 | MAJOR | **교정 후 충족** (개정 전 ② **위반 확정**) | ① 미확정 슬롯이 남으면 되묻기가 **정상 경로**(§6 T3). 롤아웃으로 결과 불변이 증명된 슬롯의 자동 채움은 **기본값 off + 실무진 승인 필요**. ② **[개정 이력]** G6 리플레이가 **인간 승인 게이트 없는 라이브 write** 였다(A2 동반 확정). **FIX-4** 로 clone DB 단일 경로화 + G1.1 대체 계측으로 교정했다. 그 외 라이브 write 0건 / 주문 확정은 위젯+사람 확인 / 가격 예외는 실무진 큐. ③ **고불확실 라우팅 목적지가 데이터다** — `sim_escalation(esc_kind, route_to)` **7종** 매핑표(§4.7, **FIX-6** 으로 `PREMISE_FAIL` 편입 + `gate_id` 필수 키). 1순위 목적지는 새 큐가 아니라 **기존 실무진 동선**이며, 개정 전 `gap_owner` 원용은 **실재 착지점으로 교체**했다(N3 — `gap_owner` 는 운영 큐가 아니라 §12-7 이 미채택 선언한 KB 계층의 필드). 소비 표면·소비 주기·소유 트랙 3열을 추가했고 미정 행 0건, 잔여 운영 실체 리스크는 §11-10 에 등재 |
+_workspace/huni-worldmodel/04_design/design-FINAL.md:752:| **RULE-16** 결과축 확장의 절제 | MINOR | **충족** | 도입 결과축 **2개뿐** — (i) 가능성: 결정=표시/진행 여부, 원천=`t_prd_product_constraints` + 단가행 존재 + 조합템플릿; (ii) 신뢰도: 결정=자동확정 vs 실무진 큐, 원천=`t_siz_pansu` 행 존재 + `components[].data_gap`. 납기·수율·불량률·설비부하·재고 미도입(라이브 46테이블에 원천 0). **판면효율도 미도입** — L1이 `fn_best_plate`의 `usable_area`가 `ORDER BY`에만 쓰이고 버려짐을 실측 반증했고, 복구 경로가 각각 RULE-04(SQL 수정)·RULE-12(외부 재계산=두 번째 정의)에 걸린다 |
+_workspace/huni-worldmodel/04_design/design-FINAL.md:765:| 1 | `IntentValidator.validate()` | 되묻기 반환. 통과 처리 금지 |
+_workspace/huni-worldmodel/04_design/design-FINAL.md:858:| **필수 파라미터는 고정, 변수는 추론시켜라** (`R3:318` A-6, F3:86) | `Intent` 스키마의 `UNKNOWN` 센티널 + 되묻기 정상 경로(RULE-14 ①). 미확정 슬롯 자동 채움 금지 |
+_workspace/huni-worldmodel/04_design/design-FINAL.md:861:| **루프 3요소: 중단조건 / 능동개입 / self-refine** (`R3:324` A-12, F4:71) | 중단조건 = `feasible=PROVEN_OK` + 전 슬롯 확정 시 루프 종료(무한 되묻기 금지). 능동개입 = 모순 조합 선택 시 blocker + repairs 제시. **self-refine은 미채택** — §10.2 참조 |
+_workspace/huni-worldmodel/04_design/design-FINAL.md:865:| **도메인 오너가 최종 승인권** (`R3:325` A-13) | 확정은 위젯+사람 확인(§6 T6). `sim_escalation`의 목적지는 전부 실무진 |
+_workspace/huni-worldmodel/04_design/design-FINAL.md:1020:| **⑤** 정합·잠재 교정 | FIX-6(PREMISE_FAIL) · FIX-7(anchor 사다리) · FIX-8(zero_reason 4분류) | **닫힘 (문서 반영 완료)** | §4.7 `esc_kind` 7종 + `route_to` 3행 + `gate_id` + §8-1 11번 / §4.2 성질 5 · §4.0 F14 · §7 S2 / §4.2·§4.3·§4.4 (g)(g′)·§7 G8 |
+
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PostToolUse Completed
+codex
+필요한 좌표는 거의 모였습니다. 마지막으로 도식의 확정/에스컬레이션 간선만 실제 행으로 확인한 뒤, 두 규칙 모두 위반 성립 여부를 판정하겠습니다.
+hook: PreToolUse
+hook: PreToolUse Completed
+exec
+/bin/zsh -lc "nl -ba _workspace/huni-worldmodel/04_design/design-FINAL.md | sed -n '218,228p;303,309p'" in /Users/innojini/Dev/HuniWeb
+ succeeded in 0ms:
+   218	    JT --> TR --> PMAP
+   219	    JT --> RC
+   220	    RO --> SC --> PICK --> RE
+   221	    PICK -->|"금액 포함 문장"| PR --> RG --> CUST(["고객 화면"])
+   222	    PICK -->|"비금액 설명"| EXP --> RG
+   223	    PICK --> LED
+   224	    JT -.PROVISIONAL·UNREGISTERED·anchor=None.-> ESC
+   225	    ESC -.route_to.-> STAFF(["실무진 큐 (§26 hpti / 조합템플릿 화면 / §7·§18 트랙)"])
+   226	    G0 & G05A & G05B & G09 -.실행 전 통과 못하면 중단.-> RO
+   227	    PICK -->|"전 슬롯 확정 + 사람 확인"| WP --> WH
+   228	    WH -.O2 관측.-> LED
+   303	}
+   304	```
+   305	
+   306	- **필드 도메인 출처**: 각 주석의 `t_*` 축 (요건 ①).
+   307	- **미확정 표현**: `UNKNOWN` 센티널 단일 (요건 ②). 누락·`None`·빈문자열은 전부 검증 실패 — "조용한 기본값"을 스키마 층에서 원천 봉쇄한다.
+   308	- **검증 지점**: `IntentValidator.validate()` 단 한 곳, 루프 진입 직전, 실패 시 fail-closed(되묻기 라우팅) (요건 ③). `assistant_tools`의 화이트리스트 디스패처와 동일한 "미등록이면 실행하지 않는다" 정책.
+   309	- `provenance.utterance_span`은 B의 IntentSpec에서 이식 — LLM이 없는 값을 만들어냈는지 원문 대조로 잡는다.
+
+hook: PostToolUse
+hook: PostToolUse Completed
+hook: PreToolUse
+hook: PreToolUse Completed
+exec
+/bin/zsh -lc 'rg -n "자율|autonom|세미 오토노머스|룰베이스|플로우 가이드|경계 선언|자동 확정" _workspace/huni-worldmodel/04_design/design-FINAL.md .moai/specs/SPEC-WORLDMODEL-001/spec.md .moai/specs/SPEC-WORLDMODEL-001/acceptance.md' in /Users/innojini/Dev/HuniWeb
+ succeeded in 0ms:
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:155:- **[HARD] 분모의 구조적 한계 (경계 선언)**: G1 분모는 **테이블 단위**이므로 **rate-limit 캐시 축**(`widget_api.py:195-196`, 라이브 DB 밖 LocMem `:140`)을 **원리적으로 관측하지 못한다**. AC-G1.1 도 테이블 단위라 이 축을 덮지 못한다. 실질 방어는 G6 의 clone 단일 경로 축소(clone 캐시 오염은 clone 폐기와 함께 소멸)이며, 분모 재정의는 RULE-05 ④ 재설계로 **범위 밖 · 후속 안건 FU-1**이다. 이 한계를 "완화됐다"로 쓰면 위반이다.
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:379:## G. 자율성 경계 수용기준 (spec.md §11 — ESTC 3단 축)
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:381:> [HARD] 아래 5기준은 spec.md **§11(자율성 경계 선언)** 을 검사한다. 이 축은 루브릭 18규칙이 재지 않는 축이므로(§11.0), 이 기준들은 **게이트 판정의 대체가 아니라 SPEC 내부 자기 구속**이다. 루브릭 개정안 ⑤(§8 FU-6)가 심의·채택되기 전까지 이 축의 외부 판정은 존재하지 않는다.
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:383:### AC-AUT-01 · 자율 레벨 선언 존재
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:385:- **측정 대상**: spec.md §11.5 의 자율 레벨 단정문.
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:386:- **실행**: `grep -n "룰베이스 ~ 플로우 가이드" .moai/specs/SPEC-WORLDMODEL-001/spec.md` 로 위치를 잡고 §11.5 전문을 읽는다.
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:387:- **기대**: (i) `R3:104` 4단계 척도(룰베이스 → 플로우 가이드 → 세미 오토노머스 → 풀리 오토노머스)가 인용 좌표와 함께 명시되고, (ii) 그 척도상 **현재 레벨이 단정**되어 있으며("~일 수 있다" 류 유보 서술이 아니다), (iii) "세미 오토노머스가 아니다"의 근거 3항(자동 확정 경로 부재 · 인간 게이트 전용 · LLM 판정권 0)이 각각 좌표와 함께 제시되고, (iv) 이것이 **의도적 선택**임이 `R3:358` 인용으로 뒷받침된다.
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:389:- **후퇴**: 레벨 단정이 없거나 유보 서술이면, "왜 자율 레벨을 못 올리는가"의 근거가 부재한 상태이므로 §11 을 자율성 판정 근거로 쓰지 않는다.
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:391:### AC-AUT-02 · 자동 확정 경로 부재 (②축 최강 근거의 기계 확인)
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:395:- **기대**: `confidence` 또는 `feasible` 값 판정만으로 주문 확정에 도달하는 경로 **0건**. 설계 §12-15(*"자동 확정 임계를 두지 않는다"*)와 §12-13(*"확정은 위젯 `/handoff` + 인간 확인 게이트 전용"*)이 코드에서 성립한다.
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:417:### AC-AUT-05 · 상향 조건 준수 (자율 레벨 무단 상향 금지)
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:419:- **측정 대상**: §11.6 (a)~(d) 미충족 상태에서 자율 레벨을 올리는 변경의 존재 여부.
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:421:- **기대**: (a)~(d) 전건 미충족인 동안 — (i) 자동 확정 경로 신설 **0건**, (ii) 인간 확인 게이트를 우회하는 상태 전이 경로 신설 **0건**, (iii) LLM 산출값이 결정론 검증기를 거치지 않고 판정에 도달하는 경로 신설 **0건**.
+.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:423:- **후퇴 [HARD]**: 1건이라도 발견되면 **이 SPEC 위반**이다(§11.6). 처방은 조건 완화가 아니라 **해당 변경의 철회**다 — (a)(c)는 본 SPEC 범위 밖 자산(주문 실체 테이블 · 관측 write)에 의존하므로 본 SPEC 내부에서는 어떤 경우에도 충족될 수 없고, 따라서 **본 SPEC 완주로는 자율 레벨이 올라가지 않는다.** "S1 성공 = 자율화 진척"으로 읽는 것 자체가 오독이다.
+_workspace/huni-worldmodel/04_design/design-FINAL.md:859:| **컨피던스 점수 + 임계 이상만 자동, 미만은 실무진 라우팅** (`R3:322` A-10) | `price.confidence` + `sim_escalation` 6종 라우팅. 그리고 R3 §C의 경고 준수 — *"인쇄는 비가역이고 금액이 즉시 확정된다. 초기엔 자동 확정 임계를 사실상 100%로"*(`R3:358`) → **루프는 자동 확정 경로가 아예 없다** |
+_workspace/huni-worldmodel/04_design/design-FINAL.md:956:- 완화가 아니라 **경계 선언**이다: G6 를 clone 환경 단일 경로로 축소한 것이 이 축에 대한 실질 방어이며, clone 환경의 캐시 오염은 clone 폐기와 함께 사라진다.
+_workspace/huni-worldmodel/04_design/design-FINAL.md:989:15. **자동 확정 임계를 두지 않는다.** `confidence=CONFIRMED`여도 자동 주문 경로가 코드에 없다.
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:69:| 자율성 레벨 | **룰베이스 ~ 플로우 가이드** (세미 오토노머스 **아님**) — 자동 확정 경로 부재 · 확정은 인간 게이트 전용 · LLM 판정권 0 | **§11 자율성 경계 선언 (ESTC 3단 축)** — 축별 판정·상향 조건은 그 절이 소유한다 |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:145:- **U-006.7 [신규 · U-5 실측 유래]** rate-limit 캐시 축은 **G1 이 구조적으로 관측하지 못하는 부작용 축**임을 명시한다 — `_rate_ok`(`widget_api.py:218`)의 카운터(`:195-196`)는 라이브 DB 밖(LocMem, `:140` `RATE_LIMIT_PER_MIN = 240` 주석 기준)에 있고, G1·G1.1 모두 **테이블 단위**이므로 이 축을 덮지 못한다. 완화가 아니라 **경계 선언**이며, G6 를 clone 단일 경로로 축소한 것이 이 축에 대한 실질 방어다(clone 캐시 오염은 clone 폐기와 함께 사라진다). 분모를 "관측 가능한 부작용 축" 단위로 재정의하는 것은 RULE-05 ④ 재설계이므로 **본 SPEC 범위 밖 · 후속 안건**(§8 FU-1).
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:291:- **norm**: 사람 개입 지점을 **구조로** 배치한다 — ① 의도가 모호할 때 되묻기(전단), ② 구속력 있는 행위 직전 승인(후단), ③ 불확실 케이스 즉시 에스컬레이션. 원칙은 **읽기는 자율, 쓰기는 승인**.
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:515:| RK-12 | **[신규 · U-5 실측 유래]** **rate-limit 캐시는 G1 이 구조적으로 관측하지 못하는 부작용 축이다** — `_rate_ok` 카운터(`widget_api.py:195-196`)는 **스로틀 없이 매 요청** 증가하며 라이브 DB 밖(LocMem, `:140`)에 있다. G1의 라이브 46테이블 분모가 원리적으로 이 축을 못 보고, **G1.1 대체 계측도 테이블 단위라 캐시 축을 덮지 못한다** | 완화가 아니라 **경계 선언**. 실질 방어 = G6 clone 단일 경로 축소(clone 캐시 오염은 clone 폐기와 함께 소멸). 분모 재정의는 RULE-05 ④ 재설계 → **후속 안건 §8 FU-1** |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:567:| **⑤** | **신설 후보 — "자율성 스펙트럼 축"**: *"설계가 에이전트 자율 동작을 도입할 때 (a) 자율성 척도상 현재 레벨을 단정하지 않거나, (b) 레벨 상향의 기계 확인 가능한 조건을 선언하지 않거나, (c) 갭 측정이 자율 레벨을 조정하는 경로가 없는데 그 사실을 명시하지 않으면 위반."* | **18규칙 전체에 이 축을 재는 규칙이 없다** — RULE-01(판정권 소재) · RULE-14(사람 개입 배치) · RULE-05(종료 척도)가 인접하지만 **자율성 스펙트럼 위치와 조율 장치**를 묻지 않는다. 그래서 게이트는 §11.4 ①·③축의 결손을 **한 번도 재지 않았다** | 본 SPEC **§11.0 · §11.8** | **열림.** 실체 쪽은 §11이 **선언으로** 기록했으나(§11.4 판정표 · §11.6 상향 조건), 그 선언은 게이트 판정이 아니라 **설계의 자기 서술**이다 — RULE-10·18의 부분검증과 같은 지위(§11.8) |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:569:[HARD] **①②③과 마찬가지로 "개정안이 겨눈 실체 결함"과 "루브릭 개정"은 다른 축이다.** ④의 실체(형제 사례)는 **열려 있고**, ⑤의 실체(자율성 축 결손)는 **§11이 기록했으나 판정받지 않았다.** 이 구분을 뭉개 "§11을 썼으니 ⑤가 닫혔다"로 읽으면 위조다.
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:622:## 11. 자율성 경계 선언 (ESTC 3단 축)
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:626:루브릭 18규칙에는 **자율성 스펙트럼 조율을 재는 규칙이 없다.** RULE-01은 판정권의 소재를, RULE-14는 사람 개입의 배치를, RULE-05는 종료 척도의 반증가능성을 재지만, **"이 설계가 자율성 스펙트럼의 어디에 서 있고 무엇이 충족되면 한 칸 올라갈 수 있는가"** 를 재는 규칙은 18개 중 어디에도 없다(§4.2.3 규칙 전문 전수 대조).
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:630:[HARD] 이 절은 부록이 아니라 **일급 요구사항**이다 — 없으면 나중에 "왜 자율 레벨을 못 올리는가"의 근거를 다시 만들어야 한다. 그리고 이 절은 **새 요구사항을 발명하지 않는다.** 이미 설계 문서에 있는 사실을 이 축으로 재조명해 기록하는 것이 범위 전부다.
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:639:| **②** | **에이전트가 그 경계 안에서 자율 동작한다** | 경계 붕괴 경고 — *"리즈닝 트레이스에 문제가 하나도 없어요. 전부 다 논리적으로 완벽해요. (…) 추론이 기대어서 있는 세[계]가 잘못됐기 때문이에요. (…) 가장 위험한 경계 붕괴입니다."* — `R3:186`(F2:26~29) |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:640:| **③** | **갭을 재서 자율 레벨을 조율한다** | 4단계 스펙트럼 — *"처음에는 룰베이스로 (…) 그다음에는 플로우 가이드 단계로 (…) 세 번째가 자율성이라는 스펙트럼을 내가 조율해서 세마이 어터노머스 레벨에서 (…) 마지막에 이제는 그 풀리 [어터노머스] 레벨로 넘어간다"* — `R3:104`(F4:56). 조율 신호는 갭 — *"갭이 경계 밖으로 나가면 자율모드를 낮추고"* — `R3:321`(A-9) |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:679:| **② 경계 안에서 자율** | **충족 (강함)** | 아래 7근거 | §3.1 · §3.3 · §3.7 · §3.8 |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:680:| **③ 갭 재서 자율 조율** | **미충족** | 아래 2사유 | §5 RK-1 · §3.9 |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:687:| ②-2 | **자동 확정 경로가 코드에 없다** — *"자동 확정 임계를 두지 않는다. `confidence=CONFIRMED`여도 자동 주문 경로가 코드에 없다"* | 설계 §12-15 |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:698:| ③-1 | **측정이 자율 레벨을 조정하지 않는다.** G4(전이함수 정확도)·G7(비용)·G9(순증분)은 측정하지만, 임계 초과의 처방이 **"자율 다이얼 하향"이 아니라 "폐기"** 다 — G4 실패 = 전면 중단, G7 p95>2s = 고객 실시간 루프 폐기 후 관리자 도구로 강등, G9 (가)=(나) = 논지 부분 반증 기록(§7 게이트표 마지막 열 = "무엇을 버리는가"). `R3:321`이 말한 *"갭이 경계 밖으로 나가면 자율모드를 낮추고"* 의 **연속적 다이얼이 없다** — 본 설계의 처방은 이진(유지/폐기)이다 |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:703:### 11.5 현재 자율 레벨 선언 [HARD]
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:705:`R3:104`의 4단계 척도(룰베이스 → 플로우 가이드 → 세미 오토노머스 → 풀리 오토노머스)에서 **본 SPEC 이 구현하는 레벨을 단정한다.**
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:707:> **룰베이스 ~ 플로우 가이드 구간이며, 세미 오토노머스가 아니다.**
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:709:| 근거 | 왜 세미 오토노머스가 아닌가 |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:711:| 자동 확정 경로 **부재** (②-2) | 세미 오토노머스는 *"자율성 스펙트럼을 조율해서"* 일부 결정을 에이전트에게 위임하는 단계인데, 본 설계는 위임 지점이 **0개**다 |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:715:[HARD] **그리고 이것은 결함이 아니라 의도적 선택이다.** 근거는 원천 프레임 자신의 경고다 — *"인쇄는 비가역이고 금액이 즉시 확정된다. 초기엔 **자동 확정 임계를 사실상 100%로** 두는 것이 안전"*(`R3:358`). 설계는 이 경고를 한 걸음 더 밀어 **임계를 두지 않고 경로 자체를 없앴다**(`design-FINAL.md:865` — *"루프는 자동 확정 경로가 아예 없다"*).
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:717:### 11.6 자율 레벨 상향 조건 [HARD]
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:719:세미 오토노머스로 올리려면 아래 (a)~(d)가 **전건** 충족되어야 한다. 각 항은 기계로 확인 가능한 형태로 쓴다.
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:723:| **(a)** | **③축이 성립할 것** — (i) 예측 vs 실제 갭을 실제로 **측정하는 경로가 존재**하고, (ii) 갭이 임계를 넘으면 자율 레벨이 **자동 하향되는 장치**가 있을 것 | (i) `sim_observation` 의 O2 채널에 실사용 유입 행 수 > 0 · (ii) 갭 임계 초과 시 레벨 하향을 수행하는 코드 경로가 실재하고 그 경로에 대한 게이트가 있을 것 | **미충족** — (i) `t_wgt_handoff_logs` 0행 · (ii) 하향 장치 0건(§11.4 ③-1) |
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:728:[HARD] **위 조건이 충족되기 전에는 자율 레벨을 올리지 않는다. 조건 미충족 상태의 상향은 이 SPEC 위반이다.** 이 금지는 §3.3 U-003.5(확정 경로 전용) · §3.8(fail-closed 전수)과 같은 강도로 구속한다.
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:730:[HARD] **(a)(c)는 본 SPEC 범위 밖의 자산에 의존한다** — 따라서 본 SPEC 이 완주해도 자율 레벨은 올라가지 않는다. 이 사실을 "S1 성공 = 자율화 진척"으로 읽으면 오독이다.
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:750:이 공백을 닫는 경로는 하나뿐이다 — **루브릭에 이 축을 재는 규칙을 신설**하는 것. 그래서 §8 후속 안건에 **루브릭 개정안 ⑤(자율성 스펙트럼 축 신설)** 를 등재한다(FU-6). 본 SPEC 도 설계도 `evaluation-rubric.md` 를 수정할 권한이 없으므로(§4.8), 등재가 이 절이 할 수 있는 전부다.
+.moai/specs/SPEC-WORLDMODEL-001/spec.md:758:| 3 | 4단계 척도 자체의 **타당성** | `R3:104` 의 4단계는 원문 대조되지 않은 2차 자료 기반이다(`R4:162-167`) `[추정]` — 척도가 다르면 §11.5의 "룰베이스~플로우 가이드" 위치도 달라진다 |
+
+hook: PostToolUse
+hook: PostToolUse Completed
+codex
+[RULE-09]
+VERDICT: CLOSED
+APPLIED_TEST: 다음 두 시나리오에서 출력이 서로 **구별 가능**해야 한다 — ① 권위 판걸이수 룩업이 있는 사이즈의 견적 vs 기하 폴백으로 계산된 견적, ② 단가행이 실제로 0원인 구성요소 vs 단가행이 **없어서** 0원으로 처리된 구성요소. 설계 출력 스키마에서 두 쌍 중 하나라도 구별 필드가 없으면 위반.
+EVIDENCE: _workspace/huni-worldmodel/04_design/evaluation-rubric.md:93 — 적용한 RULE-09 violation_test 원문.
+EVIDENCE: _workspace/huni-worldmodel/04_design/design-FINAL.md:360-361 — `price.confidence`와 `confidence_reasons` 출력 필드.
+EVIDENCE: _workspace/huni-worldmodel/04_design/design-FINAL.md:385 — 권위 룩업이면 `CONFIRMED`, 기하 폴백이면 `PROVISIONAL`.
+EVIDENCE: _workspace/huni-worldmodel/04_design/design-FINAL.md:363-368 — `components[].matched_row_id`와 `zero_reason` 출력 필드.
+EVIDENCE: _workspace/huni-worldmodel/04_design/design-FINAL.md:412-417 — `TRUE_ZERO`, `MISSING_PRICE_ROW`, `UNSELECTED_DIM`, `UNMATCHED_NO_GAP` 4분류.
+EVIDENCE: .moai/specs/SPEC-WORLDMODEL-001/spec.md:114-122 — 보조 명세도 `confidence`와 `zero_reason` 4분류를 같은 축으로 규정.
+REASON: RULE-09 시나리오 ①은 `price.confidence`/`confidence_reasons`로 권위 룩업과 기하 폴백이 구별된다(_workspace/huni-worldmodel/04_design/design-FINAL.md:360-361,385). RULE-09 시나리오 ②는 `components[].zero_reason`이 정당한 0원 `TRUE_ZERO`와 단가행 부재 계열 `MISSING_PRICE_ROW`/`UNMATCHED_NO_GAP`을 별도 값으로 분리하므로 구별 필드가 있다(_workspace/huni-worldmodel/04_design/design-FINAL.md:363-368,412-417).
+
+[RULE-14]
+VERDICT: CLOSED
+APPLIED_TEST: 세 검사 — ① 미확정 슬롯이 남은 상태에서 **자동으로 기본값을 채워 확정**하는 경로가 있으면 위반(되묻기가 정상 경로로 정의되어 있어야 함). ② 라이브 write·주문 확정·가격 예외 승인 중 인간 승인 게이트가 없는 것이 1건이라도 있으면 위반. ③ "권위 격자 미적재 셀 / 신규 조합 / 제약 미커버" 같은 고불확실 케이스의 라우팅 목적지가 문서에 없으면 위반.
+EVIDENCE: _workspace/huni-worldmodel/04_design/evaluation-rubric.md:156 — 적용한 RULE-14 violation_test 원문.
+EVIDENCE: _workspace/huni-worldmodel/04_design/design-FINAL.md:626 — 미확정 슬롯이 남으면 기본값을 채우지 않고 되묻는 정상 경로.
+EVIDENCE: _workspace/huni-worldmodel/04_design/design-FINAL.md:654 — 선택 후에도 `/price` 라이브 재계산과 사람 확인 뒤에야 `/handoff` 서명.
+EVIDENCE: _workspace/huni-worldmodel/04_design/design-FINAL.md:807 — 루프 산출물은 selections뿐이고 사람이 확인해야 `/handoff` 서명.
+EVIDENCE: _workspace/huni-worldmodel/04_design/design-FINAL.md:520-529 — `sim_escalation` 7종의 `route_to` 목적지 표.
+EVIDENCE: _workspace/huni-worldmodel/04_design/design-FINAL.md:531 — 라우팅 표에 미정 행 0건이라고 명시.
+EVIDENCE: .moai/specs/SPEC-WORLDMODEL-001/spec.md:108 — 보조 명세도 확정은 `/price` 재계산 → 사람 확인 → `/handoff` 전용이라고 규정.
+REASON: RULE-14 검사 ①은 T3에서 기본값 자동 확정 금지와 되묻기 정상 경로가 명시되어 충족된다(_workspace/huni-worldmodel/04_design/design-FINAL.md:626). 검사 ②는 주문 확정이 사람 확인 뒤 `/handoff` 서명으로만 진행된다고 문서화되어 충족된다(_workspace/huni-worldmodel/04_design/design-FINAL.md:654,807). 검사 ③은 권위 격자 미적재·신규 조합·제약 미커버 계열이 `PRICE_ROW_MISSING`/`ANCHOR_MISSING`, `TMPL_COMBO_UNREGISTERED`, `AFFECT_UNDEFINED` 등으로 라우팅 목적지를 가진다(_workspace/huni-worldmodel/04_design/design-FINAL.md:520-529).
+
+[범위 밖 관찰] — 없음
+
+[루브릭 부재로 판정 불가] — 자율성 스펙트럼/자율성 경계 축은 보조 SPEC이 루브릭 18규칙에 없는 축이라고 명시한다(.moai/specs/SPEC-WORLDMODEL-001/spec.md:622,626). 수용기준도 이 축이 게이트 판정의 대체가 아니라 SPEC 내부 자기 구속이라고 규정한다(.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:379-381).
+
+[내가 확인하지 못한 것] — 실제 구현 코드가 설계의 자동 확정 경로 부재와 일치하는지는 확인하지 않았다. 그 검사는 별도 수용기준 AC-AUT-02가 요구하는 구현 코드 호출그래프 대조 범위다(.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:391-396).
+hook: Stop
+hook: Stop Completed
+tokens used
+91,642
+[RULE-09]
+VERDICT: CLOSED
+APPLIED_TEST: 다음 두 시나리오에서 출력이 서로 **구별 가능**해야 한다 — ① 권위 판걸이수 룩업이 있는 사이즈의 견적 vs 기하 폴백으로 계산된 견적, ② 단가행이 실제로 0원인 구성요소 vs 단가행이 **없어서** 0원으로 처리된 구성요소. 설계 출력 스키마에서 두 쌍 중 하나라도 구별 필드가 없으면 위반.
+EVIDENCE: _workspace/huni-worldmodel/04_design/evaluation-rubric.md:93 — 적용한 RULE-09 violation_test 원문.
+EVIDENCE: _workspace/huni-worldmodel/04_design/design-FINAL.md:360-361 — `price.confidence`와 `confidence_reasons` 출력 필드.
+EVIDENCE: _workspace/huni-worldmodel/04_design/design-FINAL.md:385 — 권위 룩업이면 `CONFIRMED`, 기하 폴백이면 `PROVISIONAL`.
+EVIDENCE: _workspace/huni-worldmodel/04_design/design-FINAL.md:363-368 — `components[].matched_row_id`와 `zero_reason` 출력 필드.
+EVIDENCE: _workspace/huni-worldmodel/04_design/design-FINAL.md:412-417 — `TRUE_ZERO`, `MISSING_PRICE_ROW`, `UNSELECTED_DIM`, `UNMATCHED_NO_GAP` 4분류.
+EVIDENCE: .moai/specs/SPEC-WORLDMODEL-001/spec.md:114-122 — 보조 명세도 `confidence`와 `zero_reason` 4분류를 같은 축으로 규정.
+REASON: RULE-09 시나리오 ①은 `price.confidence`/`confidence_reasons`로 권위 룩업과 기하 폴백이 구별된다(_workspace/huni-worldmodel/04_design/design-FINAL.md:360-361,385). RULE-09 시나리오 ②는 `components[].zero_reason`이 정당한 0원 `TRUE_ZERO`와 단가행 부재 계열 `MISSING_PRICE_ROW`/`UNMATCHED_NO_GAP`을 별도 값으로 분리하므로 구별 필드가 있다(_workspace/huni-worldmodel/04_design/design-FINAL.md:363-368,412-417).
+
+[RULE-14]
+VERDICT: CLOSED
+APPLIED_TEST: 세 검사 — ① 미확정 슬롯이 남은 상태에서 **자동으로 기본값을 채워 확정**하는 경로가 있으면 위반(되묻기가 정상 경로로 정의되어 있어야 함). ② 라이브 write·주문 확정·가격 예외 승인 중 인간 승인 게이트가 없는 것이 1건이라도 있으면 위반. ③ "권위 격자 미적재 셀 / 신규 조합 / 제약 미커버" 같은 고불확실 케이스의 라우팅 목적지가 문서에 없으면 위반.
+EVIDENCE: _workspace/huni-worldmodel/04_design/evaluation-rubric.md:156 — 적용한 RULE-14 violation_test 원문.
+EVIDENCE: _workspace/huni-worldmodel/04_design/design-FINAL.md:626 — 미확정 슬롯이 남으면 기본값을 채우지 않고 되묻는 정상 경로.
+EVIDENCE: _workspace/huni-worldmodel/04_design/design-FINAL.md:654 — 선택 후에도 `/price` 라이브 재계산과 사람 확인 뒤에야 `/handoff` 서명.
+EVIDENCE: _workspace/huni-worldmodel/04_design/design-FINAL.md:807 — 루프 산출물은 selections뿐이고 사람이 확인해야 `/handoff` 서명.
+EVIDENCE: _workspace/huni-worldmodel/04_design/design-FINAL.md:520-529 — `sim_escalation` 7종의 `route_to` 목적지 표.
+EVIDENCE: _workspace/huni-worldmodel/04_design/design-FINAL.md:531 — 라우팅 표에 미정 행 0건이라고 명시.
+EVIDENCE: .moai/specs/SPEC-WORLDMODEL-001/spec.md:108 — 보조 명세도 확정은 `/price` 재계산 → 사람 확인 → `/handoff` 전용이라고 규정.
+REASON: RULE-14 검사 ①은 T3에서 기본값 자동 확정 금지와 되묻기 정상 경로가 명시되어 충족된다(_workspace/huni-worldmodel/04_design/design-FINAL.md:626). 검사 ②는 주문 확정이 사람 확인 뒤 `/handoff` 서명으로만 진행된다고 문서화되어 충족된다(_workspace/huni-worldmodel/04_design/design-FINAL.md:654,807). 검사 ③은 권위 격자 미적재·신규 조합·제약 미커버 계열이 `PRICE_ROW_MISSING`/`ANCHOR_MISSING`, `TMPL_COMBO_UNREGISTERED`, `AFFECT_UNDEFINED` 등으로 라우팅 목적지를 가진다(_workspace/huni-worldmodel/04_design/design-FINAL.md:520-529).
+
+[범위 밖 관찰] — 없음
+
+[루브릭 부재로 판정 불가] — 자율성 스펙트럼/자율성 경계 축은 보조 SPEC이 루브릭 18규칙에 없는 축이라고 명시한다(.moai/specs/SPEC-WORLDMODEL-001/spec.md:622,626). 수용기준도 이 축이 게이트 판정의 대체가 아니라 SPEC 내부 자기 구속이라고 규정한다(.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:379-381).
+
+[내가 확인하지 못한 것] — 실제 구현 코드가 설계의 자동 확정 경로 부재와 일치하는지는 확인하지 않았다. 그 검사는 별도 수용기준 AC-AUT-02가 요구하는 구현 코드 호출그래프 대조 범위다(.moai/specs/SPEC-WORLDMODEL-001/acceptance.md:391-396).

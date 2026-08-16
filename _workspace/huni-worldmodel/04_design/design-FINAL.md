@@ -1,0 +1,1227 @@
+# 최종 설계 — 계측 롤아웃 루프 (Instrumented Rollout Loop)
+
+> 트랙 `huni-worldmodel/04_design` · 3설계안(A/B/C) + 3렌즈 심사(L1/L2/L3) 종합 최종안
+> 뼈대 = **설계안 C(시뮬레이터 루프)**. L1·L2·L3 세 렌즈가 모두 C를 승자로 판정했다(L1 9점 / L2 8점 / L3 8점).
+> A·B에서 "이식할 것"으로 지목된 항목은 나열이 아니라 **세 개의 하위 체계**(전제 감시 · 관측 강화 · 자기 반증)로 재구성해 접합했다(§2.3).
+> [HARD] 규율: 모든 주장에 `파일경로:라인` 또는 선행 산출물 인용. 추정은 `[추정]` 배지. `raw/webadmin`·라이브 DB는 **읽기 전용**(본 설계의 어떤 단계도 두 곳을 수정하지 않는다).
+> 사전등록 루브릭(`04_design/evaluation-rubric.md` v1.0) 18규칙 대응표는 §8.
+
+## 0.0 개정 이력
+
+| 항목 | 값 |
+|---|---|
+| 개정 일자 | **2026-08-15** |
+| 개정 사유 | 게이트 판정 **CONDITIONAL_GO**(루브릭 등급 AMEND)의 조건 이행 — `05_gate/gate-report.md:341-351` |
+| 원 판정 문서 | `_workspace/huni-worldmodel/05_gate/gate-report.md` (§3 확정 교정사항 · §4 감수 위험 N1~N6 · §6.3 통과 조건 8항) |
+| 보충 검증 문서 | `_workspace/huni-worldmodel/05_gate/coverage-supplement.md` (RULE-03 · RULE-17 · U-5 `/validate` 부작용 실측) |
+
+**이번 개정이 반영한 확정 교정사항 (FIX-1 ~ FIX-8)**
+
+| FIX | 지목 규칙 | 반영 위치 |
+|---|---|---|
+| **FIX-1** (A7) | RULE-02 ① | §4.1 `selections` 값 도메인 3분류 · §4.1 C1 판정 기록 · §6 T0 각주 · G0.5a 감시 1항 |
+| **FIX-2** (A4) | RULE-02 ①③ | §4.1 `provenance.numeric_spans` · §4.1 `NumericIntentParser` · §6 T1 · §12 비목표 14 |
+| **FIX-3** (A1) | RULE-05 ④ · RULE-12 ① | §2.1 P-16 · §4.5 G0.5a/G0.5b 분할 + projection map · §5.2 · §7 게이트표 |
+| **FIX-4** (A2, **반전 반영판**) | RULE-13 ② · RULE-14 ② | §0 'G6 실행 환경' 행 · §4.7 O2 · §7 G1/G1.1/G6 · §8 RULE-13 · §11-10 |
+| **FIX-5** (A5) | 루브릭 커버리지 밖(실체 결함) | §4.2 `price` 3필드 · §4.6 Scorer · §6 T5 · §7 G4·**G10 신설** · §4.7 O1/O2 |
+| **FIX-6** (A3) | RULE-13 ① (문서 정합) | §4.7 `esc_kind` 7종 + `route_to` 3행 + `gate_id` 필수 키 · §8-1 11번 · §8 RULE-14 |
+| **FIX-7** (A6) | RULE-11 (b) | §2.1 P-13 · §4.0 F14 · §4.2 anchor 사다리 3단 · §7 S2 · §8 RULE-11 |
+| **FIX-8** (A8) | RULE-09 ② | §4.2 `zero_reason` 4분류 · §4.3 · §4.4 (g) · §7 G8 |
+
+**보충 검증으로 해소된 항목**
+
+| 항목 | 개정 전 | 개정 후 | 출처 |
+|---|---|---|---|
+| **FIX-9 / RULE-03** (BLOCKER) | **미검증** (원 라운드 인용 0회) | **보충 라운드에서 검증됨 — 위반 없음** | `coverage-supplement.md:150-159` |
+| **FIX-10 / RULE-17** (MAJOR) | **미검증** | **보충 라운드에서 검증됨 — 위반 없음** | `coverage-supplement.md:232-240` |
+| **U-5 `/validate` 부작용** | 미확인 | **부작용 있음(확정)** — `widget_api.py:135` DB UPDATE + `:195-196` 캐시 incr | `coverage-supplement.md:261-299` |
+| BLOCKER 커버리지 | 4/5 (80%) | **5/5 (100%)** · 미검증 규칙 2 → **0** | `coverage-supplement.md:398-404` |
+
+[HARD] RULE-03·RULE-17 의 "검증됨"은 **보충 라운드(`coverage-supplement.md`)에서 사후 검증된 것**이며, 원 검증 라운드(`gate-report.md`)에서 검증된 것이 아니다. 이 출처 구분을 뭉개지 않는다.
+
+**[HARD] 재심 트리거 (게이트가 건 조건 · `gate-report.md:366`)**
+
+> **FIX-1·FIX-2 가 이 문서에 반영되지 않은 채 S1 이 착수되면, 게이트 판정은 CONDITIONAL_GO 에서 REJECT 로 승격한다.** AMEND 는 "고칠 것을 전제로 한 통과"이지 "안 고쳐도 되는 통과"가 아니다.
+
+잔여 미이행 조건(통과 조건 8항 중 이번 개정으로 닫힌 것과 남은 것)은 **§14**에 있다.
+
+**[재심 반영 — 2026-08-16 · R-02 · R-18]**
+
+> **[HARD] 좌표 기준 변경** — 재심이 판정한 판본은 **1,046행**이고, R-02·R-18 반영으로 1,123행, **R-10 반영으로 1,203행**이 됐다. 따라서 `gate-rehearing.md` 가 인용한 `design-FINAL.md:NNN` 좌표(예: `:306` blanket · `:608` `mat_grade` · `:763-775` fail-closed 표 · `:281` 자기 선언)는 **재심 시점(1,046행) 판본 기준**이며, 이 문서 본문이 새로 다는 좌표는 **현행(1,203행) 판본 기준**이다. 두 부류를 섞어 읽지 않는다 — 판정 기록은 사후 변경하지 않으므로(`:1031` 승계) 재심의 좌표는 그대로 두고, 절 번호(§4.0 · §4.1 · §4.6 · §6 T0 · §8 · §8-1 · §14 · §15)로 상호 참조한다.
+
+재심 게이트(`05_gate/gate-rehearing.md`)가 8규칙을 재판정했다 — **CLOSED 5 · STILL_OPEN 3**(RULE-02 ① 잔여 · RULE-10 (a) · RULE-18 검사②) · 오판 0건 · `amend_cleared = false`. **원 지적 6건은 전건 닫혔다**(`gate-rehearing.md:239`). 남은 채무 3건 중 이번 반영분은 2건이다.
+
+| 채무 | 규칙 | 효과 | 반영 위치 |
+|---|---|---|---|
+| **R-02** — `soft_prefs.axis` 값 도메인 화이트리스트 + `IntentValidator` 검증 1행 + fail-closed 표 1행 + `:306` blanket 2분류 교체 + 워크스루 `mat_grade` 소속 명시 + `budget_krw` 표기 정확화 | RULE-02 ① 잔여 | **AMEND · S1 착수 전 필수** | §4.1 ★R-02 · §4.1 필드 도메인 출처 2분류 · §4.1 검증 지점 · §4.6 · §6 T0 · §8-1 12번 · §8 RULE-02 |
+| **R-18** — §4.0 층 귀속표 F21·F22 2행 추가 + F18 범위 문언 정정 + 자기 선언 갱신 | RULE-18 검사② | **NOTE · 차단 없음** | §4.0 · §8 RULE-18 |
+| **R-10** — 보충2-FIX-A(`nm → rule_cd` 해소 배선) | RULE-10 (a) | **AMEND · S2 착수 전** (S1 불차단) | **명세 반영됨(2026-08-16 2차)** — §4.2 `blockers[].id` 주석 · §4.4 (b) 문구 정정 + **(b′) 역인덱스 SELECT 신설** · **§4.4 ★R-10** 절 · §8-1 fail-closed 표 **13번** 행(12→13지점) · §8 RULE-10 행 정정 + 개정 이력 · §9 주장 1 접점 기록. **구현은 여전히 S2 소관** |
+
+[HARD] **R-10 의 상태 구분 — 명세 반영 ≠ 구현.** 2026-08-16 2차 개정으로 보충2-FIX-A 의 4항(역인덱스 SELECT · 충돌 시 fail-closed · 주장 1 접점 기록 · 문구 정정 2곳)이 **이 문서에 명세로 반영**됐다. 그러나 재심이 못 박은 **차단 지점(S2 착수 전)은 유지**된다 — 실제 배선 구현은 `TraceReconstructor`·`sim_escalation` 라우팅과 함께 S2(plan.md M2.0-a~d) 소관이기 때문이다. 그리고 §8 RULE-10 행의 판정은 여전히 **게이트의 독립 확인이 아니라 본 설계의 자기 주장**이며(`:757` 승계), 이번 반영이 그 지위를 바꾸지 않는다.
+
+[HARD] **R-10 반영으로 "새 알고리즘 0" 주장의 강도가 한 칸 더 약화된다.** FIX-1 의 `print_opt_cd` 동등 SELECT 에 이어 **두 번째 우리 층 SELECT** 이므로, §9 주장 1 의 반증조건과 접하는 지점으로 은폐 없이 기록했다(§4.4 ★R-10 · §9 주장 1 부기 2).
+
+[HARD] **재심 트리거(R-02)** — `soft_prefs.axis` 화이트리스트가 반영되지 않은 채 S1 이 착수되면 판정은 **REJECT 로 승격**한다(`gate-rehearing.md:112`·`:394`). S1 범위에 `loop.Scorer`(F6)가 포함되고 `soft_prefs` 는 Scorer ④ 의 입력이기 때문이다. 이번 개정으로 문서 반영은 완료됐으나, **구현 단계에서 이 선언과 어긋나면 트리거는 그대로 살아 있다.**
+
+---
+
+## 0. 고정 선언 (RULE-15 (d))
+
+| 항목 | 본 문서가 사용하는 단일 값 | 근거 |
+|---|---|---|
+| 권위 엑셀 | **인쇄상품 가격표 260705 · 상품마스터 260703** (260702/260610/260527 = stale) | `_workspace/_foundation/PRICE-SHEET-SOT-260705.md:4,52` (원장 `problem-ledger.md:311`) |
+| 상품 분모 | **288** (라이브 실측) | `02_diagnosis/D8-live-schema.md:79` (원장 `problem-ledger.md:318`) |
+| 가격 값 권위 | **`pricing.evaluate_price` 단일** (D-18) | `raw/webadmin/webadmin/catalog/pricing.py:428` **직접 실측** — `def evaluate_price(target, selections, qty, grade_cd=None, mode="lenient", ...)` |
+| 범위 밖 (다른 트랙 소유) | P-08 가격 사슬 배선(미바인딩 117·고아 79·단가행 0인 32) = §7 dbmap / §18 설계 트랙 | `problem-ledger.md:432`, `D7-prior-harness.md:35` |
+| 라이브 write | **0건** (사이드카 저장소만 사용) | 본 설계 §4.7 |
+| **G6 실행 환경** (FIX-4 신설) | **clone DB 단일 경로.** G6 리플레이(`/validate`·`/handoff`)는 **폐기 가능한 clone DB에서만** 실행한다. 라이브 대상 리플레이는 **경로 자체를 폐기**한다 — `/handoff` 는 `t_wgt_handoff_logs` INSERT/DELETE(`widget_api.py:1677`·`:1733`)를, **`/validate` 는 공통 게이트 `_gate` 에서 `t_wgt_widgets` UPDATE(`widget_api.py:135`)와 rate-limit 캐시 mutation(`:195-196`)을** 각각 유발하므로 둘 다 "라이브 write 0건"과 양립하지 않는다 | `coverage-supplement.md:261-299`(U-5 실측), `gate-report.md:32-34`(R-1~R-3) · 본 설계 §7 G6 |
+
+---
+
+## 1. 한 문장 논지
+
+**이미 라이브에서 돌고 있는 결정론 엔진 6종(`evaluate_price`·`_sim_disallowed`·`_price_gap_errors`·`tmpl_combo.resolve`·`qty_rule_error`·판걸이수 룩업)을 규칙 한 줄 쓰지 않고 import해 "하나의 부작용 없는 전이함수"로 묶은 얇은 롤아웃 계층(`simcore`)을 webadmin 바깥에 얹고, 고객이 옵션을 하나 고를 때마다 후보를 실행 없이 전부 굴려 비교 제시하는 MPC 루프를 돌리되 — 재사용은 전제를 감시할 의무를 낳으므로, 그 루프가 딛고 선 전제(심볼 실재·차원 정의 일치·원천 신선도·전이함수 정확도)를 매 실행 기계 게이트로 계측한다.**
+
+근거: 원장이 이미 같은 결론을 냈다 — *"빠진 것은 모델이 아니라 루프"*(`R2-world-model-theory.md:246`, 원장 `problem-ledger.md:65`), *"적재 트랙에는 커밋 전 시뮬레이션이 이미 있고 고객 견적 트랙에만 없다"*(`R2:302`).
+
+C 원안과의 차이는 뒷문장 하나다. C는 "import하므로 정의를 늘리지 않는다"까지만 논증했고, 세 렌즈가 공통으로 지적한 것이 **"그러면 import한 그 정의가 맞다는 것은 누가 보증하는가"**였다. 최종안은 그 보증을 산문이 아니라 게이트로 만든다.
+
+---
+
+## 2. 왜 이 구조인가
+
+### 2.1 문제 원장 26항 대응표
+
+각 항목에 대해 이 설계가 **해결 / 가시화(탐지만) / 범위 밖 / 미해결**을 정직하게 표기한다. "가시화"는 해결이 아니다 — 그 구분을 뭉개지 않는 것이 이 표의 목적이다.
+
+| P | 요지 | 본 설계의 대응 | 판정 |
+|---|---|---|---|
+| **P-01** | 상태 그릇 부재 (주문·견적 실체 테이블 없음) | 사이드카 원장 `sim_rollout`/`sim_decision`/`sim_observation`에 **예측**을 전량 남긴다. 라이브 `t_ord_*` 신설은 하지 않는다(위젯·주문 트랙 소유) | **부분 — 예측만, 관측은 얇음** (§11-1) |
+| **P-02** | 커밋 전 시뮬레이션 루프 부재 (고객 견적 트랙) | 본 설계의 존재 이유. §3 MPC 5단 루프가 선택 **전에** 후보를 굴린다 | **해결** |
+| **P-03** | 제약과 가격 미결합 | `Outcome` 스키마상 `feasible != PROVEN_OK` → `price` **3필드 전부**(`supply_amount`·`vat_amount`·`payable_total`)가 반드시 `None`. 위반 조합의 가격이 존재할 자료구조 자체가 없다(§4.2). **한정의 의미**: 이는 **우리 층 스키마 안에서만** 참이며, 위젯 트랙 `/price` 는 `ok:false` 에서도 `total` 1필드를 호스트에 노출한다(§11-15 N2) | **해결(우리 층 안에서)** |
+| **P-04** | price_gap이 제약 모델 밖 | `widget_api._price_gap_errors`(`widget_api.py:455` 실측)를 **가능성 오라클의 1급 소스로 승격**. JSONLogic 행으로 복제하지 않는다 — 복제가 곧 드리프트(§4.4) | **해결(예고 가능해짐)** |
+| **P-05** | 판별차원 0 구성요소 상시 과금 | `only_comps` 반사실 스윕(G8)으로 **어느 구성요소가 실제로 선택에 반응하는가**를 관측하고, 무반응 구성요소를 `affect_undefined`로 플래그 | **가시화만** — 충전은 §7/§18 소관 (§11-2) |
+| **P-06** | lenient 0원 흡수 | 우리 층의 모든 호출에서 `mode="strict"` 고정(호출 규약, 엔진 무수정). 기본값이 lenient임은 실측(`pricing.py:428`) | **해결(우리 경로)** |
+| **P-07** | NULL 와일드카드 + 전용행 공존 → 구성요소 탈락 | `evaluate_price`의 `ERR_AMBIGUOUS`(`pricing.py:637` 실측)를 `blockers[source="ENGINE_ERROR"]`로 승격. 엔진이 경고로 처리하는 것을 우리는 후보 차단으로 처리 | **가시화 + 우리 층 차단** |
+| **P-08** | 가격 사슬 절반 끊김 | **범위 밖 선언**(§0). 미바인딩 상품은 `NOT_PRICEABLE`로 판정만 하고 라우팅 | **범위 밖** |
+| **P-09** | 전이함수 정확도 미측정 | **G4 = 이 설계의 심장.** 권위 격자 셀 ≥20 + 골든 30건(A의 G-A 이식) 이중 분모로 오차 0원 요구 | **해결(측정 개시)** |
+| **P-10** | 부분관측 — 자재종속 판걸이수 | 룩업 히트/미스를 `confidence`로 구별(G5). 계산 자체는 손대지 않는다 | **가시화만** (저청구가 사라지지 않고 보이게 될 뿐) |
+| **P-11** | 견적 신뢰도 등급 부재 | `price.confidence ∈ {CONFIRMED, PROVISIONAL, NONE}` + `confidence_reasons[]` | **해결** |
+| **P-12** | why-this / why-not 미반환 | `TraceReconstructor`가 `matched_row_id`·`tier{field,threshold,order_value}`·`rejected[].first_diff_dim`을 diff로 복원(재계산 0). **[R-10 정정]** 규칙 신원(`rule_cd`) 축은 §4.4 (b′) 역인덱스 SELECT + `UNKNOWN_RULE_ID` fail-closed 로 닫는다 | **해결(명세) — 단서 있음** · 보충2 가 지적했듯 원장이 P-12 근본원인으로 지목한 *"제약 평가가 규칙 신원을 병합 시점에 소실"*(`problem-ledger.md:218`, `cfg_utils.py:42-79`)의 **형제 경로가 `_sim_disallowed` 에도 있었고**(`coverage-supplement-2.md:103`), 개정 전 이 행의 "해결"은 그 사실을 반영하지 않은 상태였다. R-10 명세 반영으로 신원 축이 닫혔으나 **구현·실측은 S2 소관**이다 |
+| **P-13** | 감사 추적 부재 (권위 셀 링크 없음) | `components[].anchor` = **폴백 사다리 3단**(① `provenance-map` 히트 → `xlsx:파일#시트!셀` / ② 미히트이나 `matched_row_id != None` → `t_prc_component_prices/<comp_price_id>` / ③ `matched_row_id == None` → `None` + `sim_escalation(ANCHOR_MISSING)`). 기본 경로는 ②이며 ①은 §26 셀 좌표 컬럼 추가 후 가산분(§4.2, FIX-7) | **해결(커버 범위 내)** |
+| **P-14** | 효과(effect) 표현 그릇 부재 | 선언 테이블을 만들지 않고 **관측으로 대체** — `only_comps` 스윕이 (옵션 → 반응 구성요소) 관계를 실측한다(G8) | **대체 접근** (§2.2 (2)) |
+| **P-15** | 온톨로지 의미론 비형식화 | **미해결.** 시뮬레이터는 틀린 값을 충실히 재현한다 | **미해결** (§11-2) |
+| **P-16** | ref_dim 정의 5벌 병렬 | 6벌로 늘리지 않고 import. **그리고 갈리는 순간을 파리티 린트로 감지**하되, 감시 우주가 둘임을 인정해 **G0.5a(`OPT_REF_DIM` 7축 × 표면 5벌, 정의처 `sql/12_phase7_seed.sql:27,37-61`)** 와 **G0.5b(`DIM_META` 12축 × 표면 3벌, `price_views.py:31`)** 로 분할한다(FIX-3). P-16 이 가리키는 "ref_dim 5벌"은 **G0.5a 의 분모**다 | **악화 방지 + 센서** (통합 아님) |
+| **P-17** | 의도 진입 노드 미완 | `Intent` 스키마 + `IntentValidator`가 자연어의 유일 착지점. 별칭 사전 확충은 §33/§35 소관 | **부분** |
+| **P-18** | 결과축 단일 | 결과축을 **2개만** 도입(가능성·신뢰도). 납기·수율·재고는 원천이 없어 도입 금지. **판면효율도 도입하지 않는다** — L1이 `fn_best_plate`가 `varchar` 반환이고 `q.usable_area`는 `ORDER BY`에만 쓰이고 버려짐을 실측 반증(`sql/33_fn_best_plate.sql:33,53,56`, L1 심사 인용) | **의도적 절제** |
+| **P-19** | 제약 평가 fail-open | 우리 층은 fail-open을 승계하지 않는다 — 신규 평가 지점 10개 전건 fail-closed 전수표(§8-1, A의 §7① 이식·확장) | **해결(우리 경로)** |
+| **P-20** | tmpl_combo_gap — 가격 다 보고 주문에서만 422 | `tmpl_combo.resolve`(`tmpl_combo.py:245` 실측)를 게이트로 앞당겨 **선택 전에** `UNREGISTERED`로 예고 | **해결** |
+| **P-21** | 캐스케이드 이중 구현 | **미해결.** 규칙을 한 줄도 안 쓰므로 정의는 안 늘지만 **판정 주체는 하나 는다**(§11-4) | **미해결** |
+| **P-22** | 전이함수가 DB 밖 | 루브릭 §5-6이 이 축을 평가하지 않는다고 선언. 어느 편도 들지 않는다 | **판단 보류** |
+| **P-23** | 권위 엑셀 버전 모순 | §0 단일 선언(260705/260703). 앵커 원천을 §26 권위 격자로 고정해 KB의 260702 스큐를 피한다 | **회피** |
+| **P-24** | 상품 분모 불일치 | §0 단일 선언(288) | **회피** |
+| **P-25** | 원고 승격 워커 미착수 | **범위 밖** (아트워크 트랙 소유) | **범위 밖** |
+| **P-26** | 비서에 월드모델 미연결 | `assistant_tools.py` 수정은 RULE-04 위반. 대신 **HTTP 계약을 `simulate_price`와 동형 파라미터로 지금 고정**해 후속을 1지점 변경으로 만든다(A의 §4.3 이식, §4.5) | **미해결 + 이관 명세** |
+
+### 2.2 세 설계안 중 C를 뼈대로 삼은 이유 (심사 결과의 재진술이 아니라 구조적 이유)
+
+**(1) A(선언적 월드모델)의 심장이 착지할 표면이 없다.**
+A의 `t_wm_effects`는 사람이 손으로 채워야 하는 정의 원본인데(design-A:140-166), webadmin 편집 화면은 `admin.site.register` 루프가 `models.py` 선언 모델만 순회해 생성한다(L1·L3 심사 실측 `admin.py:1922`). `t_wm_*` 모델을 `models.py`에 추가하는 것은 A 자신이 금지한 raw/webadmin 수정이다. 즉 실무진이 효과 1행을 등록할 화면이 **존재하지 않는다**(확정 MAJOR, RULE-12). 제약 커버리지가 현재 34/288 = 11.8%(`D8-live-schema.md:130`)라는 사실이 이 선언 비용이 지금까지 지불되지 않았다는 증거다.
+
+**(2) 그러나 A의 문제의식(효과를 어딘가에 적어야 한다, P-14)은 옳다 — 답을 선언이 아니라 관측으로 바꾼다.**
+B가 `affects` 파생으로 답했고(그래프의 `use_dims` + `option_refs` 조인), 그 파생은 `use_dims`가 선언됐을 때만 작동한다(design-B:163-166). 그런데 돈이 가장 크게 새는 P-05는 **정확히 `use_dims`가 빈 케이스**다 — 실측 확인: `pricing.py:632-634`가 `non_qty_dims`가 비면 `"판별차원 없음 — 선택과 무관하게 항상 매칭"` 노트만 달고 `included=True`로 합산한다. 선언에서 답을 찾으면 이 케이스가 영원히 안 보인다.
+최종안의 답: **선언도 그래프도 아니라 `only_comps` 반사실 스윕으로 관측한다**(G8). 옵션을 켜고 끄며 실제로 `subtotal`/`matched_row`가 바뀌는 구성요소를 세면, `use_dims` 선언 유무와 무관하게 "이 구성요소는 선택에 반응하지 않는다"가 **데이터로** 나온다. B의 A1 지표(design-B:378)를 지식 파생 검증용에서 **결함 탐지용으로 목적 전환**한 것이 이 설계의 핵심 이식이다.
+
+**(3) B의 그래프는 자기 지분을 스스로 의심했다.**
+B는 판정을 전부 라이브 재-SELECT가 하므로 그래프 역할이 축 열거·팬아웃·감사 앵커·설명 4가지뿐임을 인정하고, "라이브 SQL 3개로 대체 가능"이 나올 가능성을 first slice 대조군으로 측정 대상에 넣었다(design-B:461-467). 최종안은 그 정직함을 **방법론으로 이식**하되(§7 S1 대조군), 그래프 계층 자체는 도입하지 않는다 — 축 열거는 `price_views._sim_dim_candidates`(`price_views.py:2683` 실측)가 이미 하고 있기 때문이다.
+
+**(4) C의 재사용 표면은 100% 실증됐다 — 그리고 그것이 곧 새 의무를 만든다.**
+본 문서 작성 중 직접 실측한 심볼 위치:
+
+| 심볼 | 실측 위치 |
+|---|---|
+| `pricing.evaluate_price` | `pricing.py:428` (기본 `mode="lenient"` 확인) |
+| `pricing.NON_QTY_DIMS` / `TIER_DIMS` | `pricing.py:45` / `pricing.py:52` |
+| `pricing._component_rows_bulk` | `pricing.py:284` |
+| `price_views.DIM_META` | `price_views.py:31` |
+| `price_views.qty_rule_error` | `price_views.py:1615` |
+| `price_views._select_default_plate` | `price_views.py:2223` |
+| `price_views._SIM_DIM_CONSTRAINT` | `price_views.py:2480` |
+| `price_views._sim_active_rules` | `price_views.py:2513` |
+| `price_views._sim_dim_candidates` | `price_views.py:2683` |
+| `price_views._sim_disallowed` | `price_views.py:2701` |
+| `widget_api._price_gap_errors` | `widget_api.py:455` |
+| `tmpl_combo.missing_axis_names` / `resolve` | `tmpl_combo.py:204` / `:245` |
+
+12개 전건 실재 확인(L1 심사의 11개 + `tmpl_combo.resolve` 추가 확인). **재사용은 공짜가 아니다** — 위 심볼들은 다수가 밑줄 접두(private)이고, 그 중 `_price_gap_errors`는 docstring 자체가 *"빌더 미리보기(builderPrice)의 가드도 같은 규칙을 미러한다 — 한쪽만 고치면 미리보기·임베드가 갈린다"*(`widget_api.py:477` 인접, 직접 실측)라고 적고 있다. 즉 **이 도메인은 이미 "정의가 갈리면 화면이 갈린다"를 경험했고 그것을 주석으로 남겼다.** 우리가 세 번째 소비자가 되는 이상, 갈림을 감지할 센서를 붙이는 것은 선택이 아니라 의무다.
+
+### 2.3 이식 항목의 재구성 — 나열이 아니라 세 하위 체계
+
+세 렌즈가 지목한 이식 항목 12건을 그대로 붙이면 게이트가 15개인 잡동사니가 된다. 최종안은 그것을 **하나의 논리로 묶는다: "이 설계는 남의 정의를 빌려 쓰므로, 빌린 것이 여전히 참인지 매 실행 계측한다."**
+
+| 하위 체계 | 답하는 질문 | 이식 원천 | 산출물 |
+|---|---|---|---|
+| **① 전제 감시 (Premise Sensors)** | 내가 import한 것이 지금도 내가 생각한 그것인가? | A의 G-D 차원 파리티 린트(design-A:462) · A의 `source_digest` 판정 거부(design-A:437-439) · C의 G0 바인딩 스모크 | **G0**(심볼 실재) · **G0.5a**(`ref_dim` 7축×5벌) · **G0.5b**(가격차원 12축×3벌) · **G0.9**(원천 다이제스트 신선도) — FIX-3 으로 G0.5 가 2종으로 분할됐다 |
+| **② 관측 강화 (Observation)** | 내 예측이 맞았는지 무엇으로 아는가? | A의 G-A 골든 30건(design-A:459) · B의 A1 `only_comps` 스윕(design-B:378) · B의 A2 저비용 무부작용 측정(design-B:379) · A/B의 `zero_reason` 필드 · A의 `t_wm_escalations` route_to(design-A:229) · B의 기존 `gap_owner` 큐 착지(design-B:432) | **G1**(저비용 해시) · **G4**(권위격자+골든 이중분모) · **G8**(반사실 스윕) · `zero_reason` 필드 · `sim_escalation` 사이드카 테이블 |
+| **③ 자기 반증 (Self-refutation)** | 내가 틀렸다는 걸 내가 먼저 말하게 만드는 장치는? | B의 §9-2 순수 SQL 대조군(design-B:467) · B의 §9-1 파일럿 편향 자백(design-B:459) · B의 A9 "미측정이면 실패"(design-B:387) · A의 §8.3 게이트 실패 시 계층 후퇴 선언(design-A:468-470) | S1 **대조군** · 파일럿 선정 **6번째 조건** · G7 **기록-아니면-실패** · 게이트표의 **후퇴 열** |
+
+이식하지 **않은** 것도 명시한다.
+
+- **A의 `t_wm_support_tuples`(price_gap 판정기)** — L2가 반면교사로 지목했다. 위젯 함수 본문에만 사는 가족형 쌍 면제·`proc_cd` 제외 규칙을 밖에서 사영으로 재구현하는 구조이며, 그것이 A의 확정 MAJOR(OBJ-A-01)의 원인이다. 실측으로 확인: `_price_gap_errors` docstring이 `proc_cd` 제외 사유(*"고른 공정이 어떤 구성요소에 없음 = 그 공정엔 그 비용 없음이 정상"*)와 가족형 면제(*"형제 구성요소가 그 (차원,값)을 명시적 행으로 매칭했다면 가족 분담"*)를 **함수 본문 주석으로만** 보유한다(`widget_api.py:461-477`). 밖에서 재현 불가능하다. **호출만 한다.**
+- **A의 판면효율 결과축** — L1이 원천 반증(§2.1 P-18).
+- **B의 KB 그래프 계층 전체** — §2.2 (3).
+- **B의 `wm.db` 오버레이** — 사이드카 원장으로 동일 기능을 얻으므로 이중 그릇을 만들지 않는다.
+
+---
+
+## 3. 아키텍처 전경
+
+```mermaid
+graph TD
+    subgraph NEURO["neuro — 제안·번역 전용 (판정권 0)"]
+        ACT["Actor LLM<br/>발화 → Intent 후보 k개<br/>숫자·가능여부 산출 금지"]
+        EXP["Explainer LLM<br/>Outcome → 설명 산문<br/>금액 문장은 생성 금지"]
+    end
+
+    subgraph GUARD["symbolic 검증기 — 모든 LLM 화살표의 도착지"]
+        IV["IntentValidator<br/>타입·도메인·UNKNOWN 검증<br/>fail-closed"]
+        PR["PhraseRenderer<br/>금액 포함 문장 = 결정론 템플릿 치환<br/>(LLM 미생성)"]
+        RG["RenderGuard<br/>숫자=서버 토큰 · blocker 실재 대조<br/>fail-closed"]
+    end
+
+    subgraph LOOP["worldmodel — MPC 루프 (신규 · webadmin 외부)"]
+        FR["① frontier(state)<br/>후보 열거 (도메인은 DB에서 결정론 추출)"]
+        RO["② rollout(state, actions)<br/>월드모델 통과 · 부작용 0"]
+        SC["③ Scorer<br/>사전선언 사전식 채점 · LLM 미개입"]
+        PICK["④ 1개 추천 제시 (커밋 아님)"]
+        RE["⑤ 관측 후 재계획"]
+    end
+
+    subgraph SIM["worldmodel — simcore (조립층 · 규칙 정의 0)"]
+        JT["JointTransition<br/>feasible × price × confidence → 단일 Outcome"]
+        TR["TraceReconstructor<br/>why-this / why-not / anchor (diff만)"]
+        RC["ReachabilityProbe<br/>REACHABLE / DEAD / UNKNOWN"]
+    end
+
+    subgraph SENS["ops — 전제 감시 (신규 · 이식 ①)"]
+        G0["G0 바인딩 스모크<br/>심볼 12종 실재"]
+        G05A["G0.5a ref_dim 파리티<br/>OPT_REF_DIM 7축 × 표면 5벌"]
+        G05B["G0.5b 가격차원 어휘 파리티<br/>DIM_META 12축 × 표면 3벌"]
+        G09["G0.9 원천 다이제스트<br/>불일치 → 판정 거부"]
+    end
+
+    subgraph ENG["기존 결정론 엔진 — 무수정 · import 재사용"]
+        EP["pricing.evaluate_price<br/>mode=strict 고정 (py:428)"]
+        SD["price_views._sim_disallowed (py:2701)"]
+        PG["widget_api._price_gap_errors (py:455)"]
+        TC["tmpl_combo.resolve (py:245)"]
+        QR["price_views.qty_rule_error (py:1615)"]
+        PL["fn_calc_pansu / t_siz_pansu 존재 조회"]
+    end
+
+    subgraph LEDG["worldmodel·ops — 사이드카 (라이브 밖 · write 0)"]
+        LED["sim_rollout / sim_decision / sim_observation"]
+        ESC["sim_escalation<br/>esc_kind · route_to · status"]
+        PMAP["provenance-map<br/>comp_price_id → xlsx 셀"]
+    end
+
+    subgraph OUT["구속력 있는 행위 — 기존 경로 그대로"]
+        WP["widget_api /price (라이브 재계산)"]
+        WH["widget_api /handoff<br/>★인간 확인 게이트"]
+    end
+
+    ACT --> IV --> FR
+    FR --> RO --> JT
+    JT --> EP & SD & PG & TC & QR & PL
+    JT --> TR --> PMAP
+    JT --> RC
+    RO --> SC --> PICK --> RE
+    PICK -->|"금액 포함 문장"| PR --> RG --> CUST(["고객 화면"])
+    PICK -->|"비금액 설명"| EXP --> RG
+    PICK --> LED
+    JT -.PROVISIONAL·UNREGISTERED·anchor=None.-> ESC
+    ESC -.route_to.-> STAFF(["실무진 큐 (§26 hpti / 조합템플릿 화면 / §7·§18 트랙)"])
+    G0 & G05A & G05B & G09 -.실행 전 통과 못하면 중단.-> RO
+    PICK -->|"전 슬롯 확정 + 사람 확인"| WP --> WH
+    WH -.O2 관측.-> LED
+
+    classDef neuro fill:#FFF6DF,stroke:#E6B93F,color:#424242
+    classDef guard fill:#E6B93F,stroke:#E6B93F,color:#16121F
+    classDef wm fill:#9580D9,stroke:#5538B6,color:#fff
+    classDef sens fill:#C4B5FD,stroke:#5538B6,color:#16121F
+    classDef eng fill:#351D87,stroke:#351D87,color:#fff
+    classDef out fill:#EEEBF9,stroke:#CACACA,color:#424242
+    class ACT,EXP neuro
+    class IV,RG,PR guard
+    class FR,RO,SC,PICK,RE,JT,TR,RC,LED,ESC,PMAP wm
+    class G0,G05A,G05B,G09 sens
+    class EP,SD,PG,TC,QR,PL eng
+    class WP,WH,CUST,STAFF out
+```
+
+**읽는 법 4줄**
+
+1. LLM 노드(ACT·EXP)의 출력 화살표는 예외 없이 결정론 검증기(IV·RG)로 들어간다. 고객·주문 시스템에 직접 닿는 LLM 화살표가 0개다(RULE-01 위반판정 절차 그대로 전수 추적 가능).
+2. **금액이 들어간 문장은 LLM이 생성하지 않는다** — `PhraseRenderer`가 결정론 템플릿으로 만들고(`PICK→PR→RG`), EXP는 **금액이 없는** 주변 설명만 쓴다(`PICK→EXP→RG`)(A의 §3 문구 렌더러 이식, design-A:375). 두 간선은 도면에서 분리되어 있으며 **둘 다 도착지는 RenderGuard**다. RenderGuard 규약: *"화면 문자열의 금액 토큰은 `PhraseRenderer` 출력에서만 유래하며, Explainer 출력에 숫자 토큰이 포함되면 그 자체로 fail-closed"*. **[N6 정정]** 따라서 "금액 문장이 LLM을 아예 통과하지 않는다"는 **"LLM이 금액 문장을 생성하지 않는다"의 부정확한 압축**이었다 — EXP 산출물도 RG 를 통과하므로 경로상 LLM 계층을 거치는 문장은 존재하며, 그 문장에 금액 토큰이 있으면 차단된다. 잔여 위험은 금전 손해가 아니라 **가용성**(정당한 후보의 오차단)이다(§11-11).
+3. 파란 박스(ENG)는 한 줄도 수정하지 않는다. `simcore`는 조립층일 뿐이며 가격·제약·기하 규칙을 새로 정의하지 않는다.
+4. **연보라 박스(SENS)가 최종안의 추가분이다** — **네 센서**(G0 · G0.5a · G0.5b · G0.9)가 통과하지 못하면 롤아웃 자체가 시작되지 않는다(fail-closed).
+
+---
+
+## 4. 계층별 책임과 데이터 모델
+
+### 4.0 층 귀속표 (RULE-18)
+
+| # | 구성물 | 층 | 책임 | 위치 | 출처 |
+|---|---|---|---|---|---|
+| F1 | `simcore.JointTransition` | worldmodel | 상태+행동 → 단일 Outcome | `_workspace/huni-simcore/` | C |
+| F2 | `simcore.TraceReconstructor` | symbolic | why-this/why-not/anchor 복원 (diff만) | 동일 | C |
+| F3 | `simcore.ReachabilityProbe` | worldmodel | 완주 경로 존재 3값 판정 | 동일 | C |
+| F4 | `loop.frontier()` | worldmodel | 다음 슬롯 후보 결정론 열거 | 동일 | C |
+| F5 | `loop.rollout()` | worldmodel | 후보 배치 부작용 0 실행 | 동일 | C |
+| F6 | `loop.Scorer` | symbolic | 사전선언 사전식 비용함수 | 동일 | C |
+| F7 | `Intent` 스키마 | symbolic | 뉴로→심볼릭 타입 경계 (정의 1곳) | `simcore/intent.py` | C |
+| F8 | `Outcome` 스키마 | symbolic | 심볼릭→화면 타입 경계 (정의 1곳) | `simcore/outcome.py` | C+A+B |
+| F9 | `IntentValidator` | symbolic | Intent 검증 게이트 (fail-closed) | 동일 | C |
+| F10 | `PhraseRenderer` | symbolic | **금액 포함 문장의 결정론 렌더러** | `simcore/phrases.py` | **A 이식** |
+| F11 | `RenderGuard` | symbolic | LLM 산문의 숫자·주장 사후 검증 | 동일 | C |
+| F12 | `Rollout Ledger` 3테이블 | worldmodel·ops | 예측 기록 + 관측 대조 | 사이드카(라이브 밖) | C |
+| F13 | **`sim_escalation`** | ops | 고불확실 케이스 큐 + `route_to` 목적지 | 사이드카 | **A 이식** |
+| F14 | `provenance-map` | knowledge | `comp_price_id` → `xlsx:파일#시트!셀` | 사이드카(§26 산출물 소비) | C |
+| ↳ | **[FIX-7 지위 조건화]** F14 는 **§26 격자 CSV 에 `src_file`/`src_sheet`/`src_cell` 3컬럼이 추가되기 전까지 미배선**이며, 그 동안 `anchor` 는 폴백 사다리 ②(`t_prc_component_prices/<comp_price_id>`)로 서빙한다. 셀 좌표 컬럼 추가는 **§26 트랙에 선행 요청으로 등록**하며 본 설계가 흡수하지 않는다(흡수 시 RULE-15 ③ 위반). 배선 시점은 §7 S2 | — | — | — | — |
+| F15 | `Actor LLM` | neuro | 발화 → Intent 후보 k개 + soft_prefs | 사이드카 에이전트 | C |
+| F16 | `Explainer LLM` | neuro | 비금액 설명 산문 | 동일 | C |
+| F17 | **`premise_sensors`** (G0 / **G0.5a** / **G0.5b** / G0.9) | ops | 전제 감시 **4종** (FIX-3 로 G0.5 가 2종으로 분할) | `simcore/gates/` | **A 이식** |
+| F18 | `golden-rollout` 하네스 | ops | **G0~G10 중 하네스가 자동 측정하는 범위** — 원 문언은 `G0~G8` 이었으나 §7 게이트표가 G10 까지 늘어나면서 **§8 RULE-05 행**(*"게이트표 G0~G10 전건"* — **[W-6 좌표 정정]** 구 인용 `:740` 은 구 판본 좌표이며 현행 `:740` 은 §6 워크스루다)과 갈렸다. **[R-18]** 문언을 `G0~G10` 기준으로 정정하되, G9(`sql_control`)·G10(`payable_parity`)은 각각 F20·**F22** 가 자기 행을 갖는 별도 구성물이므로 F18 의 직접 책임은 **G0~G8**, 그 밖 G9·G10 은 F20·F22 로 위임한다 | `simcore/gates/` | C+A+B |
+| F19 | **`counterfactual_sweep`** | ops | `only_comps` 반사실 스윕(G8) | `simcore/gates/` | **B 이식** |
+| F20 | **`sql_control`** | ops | 순수 SQL 대조군(루프 순증분 측정) | `simcore/gates/` | **B 이식** |
+| **F21** (R-18) | **`projection map`** | knowledge | `OPT_REF_DIM` 7축 ↔ `DIM_META` 12축 **사상 정본** (**§4.5** · G0.5a 의 세 번째 감시 대상 — 맵 파일 해시를 G0.5a 산출물에 스탬프. **[W-6 좌표 정정]** 구 인용 `:459` 는 구 판본 좌표이며 현행 `:459` 는 §4.3 판별 SELECT 문단이다) | 사이드카 맵 파일 | **FIX-3 산출** |
+| **F22** (R-18) | **`payable_parity`** | ops | 루프 표시가(`outcome.price.payable_total`) ↔ `/handoff` 서명가(`total`) 대조 (**§7 기계 판정 게이트표 G10 행** — **[W-6 좌표 정정]** 구 인용 `:725` 는 구 판본 좌표이며 현행 `:725` 는 §6 워크스루 입력 문장이다) | `simcore/gates/` | **FIX-5 산출** |
+
+**[R-18 · 재심 반영]** 개정 전 이 줄은 *"미표기 구성물 0건. F1~F20 외에 본 설계가 도입하는 것은 없다"* 였으나, 재심이 **표 밖 도입 구성물 2건**을 확정했다(`gate-rehearing.md:204-207` — `projection map` 은 개별 명명 + 파일 실체 + 단일 정의처 지위를 모두 갖고, `gates/payable_parity.py` 는 G10 의 도구인데 F18 문언 `G0~G8` 이 덮지 못했다). 두 건을 **F21·F22 로 등재**하고 F18 범위 문언을 정정했다. **현재 상태: 데이터행 F1~F22 · 미표기 구성물 0건 · 표 밖 도입 0건.** 이 선언은 자기 서술이며, RULE-18 의 독립 확인은 여전히 게이트 소관이다(`:757` 규약 승계).
+
+### 4.1 `Intent` — 뉴로→심볼릭 인계 스키마 (RULE-02)
+
+```python
+UNKNOWN = "<unknown>"          # 유일한 미확정 표현. None/""/생략은 스키마 위반(=검증 실패)
+
+Intent = {
+  "prd_cd":     str | UNKNOWN,      # 도메인: t_prd_products.prd_cd where del_yn='N'
+  "qty":        int | UNKNOWN,      # 도메인: t_prd_products / t_prd_product_sizes 의 min/max/incr
+  "selections": { dim: (str|int|UNKNOWN) },
+                                    # dim 키 도메인 = 아래 ★FIX-1 3분류 중 "열거축"만.
+                                    #   (pricing.NON_QTY_DIMS ∪ pricing.TIER_DIMS 를 blanket 으로 쓰지 않는다)
+  "opt_sels":   [opt_cd] | UNKNOWN, # 도메인: t_prd_product_options (상품 소속만)
+  "proc_sels":  [ {"proc_cd": str, "detail": {k: v}} ] | UNKNOWN,
+                                    # 도메인: widget_api._allowed_procs / _coerce_detail 화이트리스트
+  "soft_prefs": [ {"axis": PREF_AXES, "dir": "up"|"down", "w": float} ],
+                                    # "고급스럽게" 류 서술의 유일한 착지점. 값이 아니라 선호.
+                                    # 도메인: ★R-02 PREF_AXES 화이트리스트(정의처 1곳 = simcore/intent.py).
+                                    #   열린 str 아님. 미등록 axis 는 IntentValidator 에서 fail-closed.
+                                    # ★W-8: w 의 값 도메인 = 0.0 <= w <= 1.0 (유한 실수).
+                                    #   NaN / inf / 범위 밖은 스키마 위반(검증 실패).
+                                    #   근거: pref_score 가 정렬 키에 들어가므로 비유한 값은
+                                    #         정렬 결정론(G3 / RULE-17)을 깬다.
+  "budget_krw": int | None,         # 채점에만 쓰는 상한. 어떤 경로로도 가격 값이 되지 않는다.
+                                    # 도메인: t_* 축 아님(차원이 아니라 채점 상한 스칼라).
+                                    #   값 도메인은 ★FIX-2 numeric_spans 원문 재파싱으로 결박된다.
+  "provenance": {"utterance_id": str, "turn": int, "utterance_span": [int,int],
+                 # ★FIX-2: 필드별 수치 span. 없는 수치는 스키마 위반(=검증 실패, UNKNOWN 취급)
+                 "numeric_spans": {"qty": [int,int]|None, "budget_krw": [int,int]|None}}
+}
+```
+
+- **필드 도메인 출처** (요건 ①) — **[R-02] 개정: blanket 1줄을 2분류로 교체한다.** 개정 전 문언은 *"각 주석의 `t_*` 축"* 이었으나, 그 선언은 `soft_prefs.axis`·`budget_krw` 두 필드에 **실효적이지 않았다**(두 주석에 `t_*` 축이 없다). 이는 A7 이 지적한 것과 **동일한 결함 유형**(선언 범위 > 실효 범위)이며 재심이 잔여 인스턴스로 확정했다(`gate-rehearing.md:94-99`).
+
+  | 부류 | 필드 | 값 도메인의 출처 (정의처) |
+  |---|---|---|
+  | **(가) `t_*` 축이 도메인인 필드** | `prd_cd` · `qty` · `selections` · `opt_sels` | 각 주석의 `t_*` 축 그대로. `selections` 은 ★FIX-1 3분류표(아래)가 축 부류별로 재선언한다 |
+  | **(나) 별도 화이트리스트가 도메인인 필드** | `proc_sels` · **`soft_prefs.axis`** | `proc_sels` = `widget_api._allowed_procs` / `_coerce_detail` 화이트리스트(기존). **`soft_prefs.axis` = ★R-02 `PREF_AXES` 화이트리스트**(신설 · 정의처 1곳) |
+  | **(다) 축이 아닌 스칼라** | **`budget_krw`** · **[W-8 신설] `soft_prefs[].w`** | **`t_*` 축이 아니다** — 차원 코드값이 아니라 **채점 상한 스칼라**다. 요건 ① 은 *"어느 `t_*` 축인가"* 를 묻지만 이 필드는 축에 대응하지 않으므로, 값 도메인을 **★FIX-2 `numeric_spans` 원문 재파싱 대조**로 닫는다(`:330-334`) — 심볼릭에 진입하는 값은 LLM 산출값이 아니라 **원문에서 결정론 파서가 재산출한 값**이며, 근거 span 이 없으면 스키마 위반이다 |
+
+  (가)(나)(다) 밖의 필드는 없다(`provenance` 는 값이 아니라 출처 메타이며 그 자체가 FIX-2 검증 대상이다). **미분류 필드 0건.**
+
+  **★ W-8 (R3 재판정 §2.1 잠재 등재 선제 해소) — `soft_prefs[].w` 값 도메인.** R3 재판정은 RULE-02 ① 을 **하위필드 수준**으로 더 내리면 `w` 가 `float` 타입만 있고 **값 범위가 어디에도 선언되지 않았다**는 것을 찾아냈고, 해석이 갈린다는 이유로(최상위 필드 기준이면 `soft_prefs` 는 (나)로 통과) **확정하지 않고 잠재 등재로만 남겼다**. 그 잔여를 여기서 선제 해소한다 — **비용은 주석 1줄 + 검사 1행이며 뼈대 변경이 없다.**
+  - **값 도메인**: `w: float` · **`0.0 ≤ w ≤ 1.0`** · **`NaN`/`inf` 는 스키마 위반**(검증 실패 → 되묻기 fail-closed).
+  - **근거**: `pref_score` 가 `Scorer` **정렬 키 ④** 에 들어가므로, 비유한(`NaN`/`inf`) 값이 정렬 키에 실리면 **정렬 결정론이 깨져 G3(RULE-17 재현 결정론)와 직접 접한다.** 즉 이것은 미관 문제가 아니라 게이트 축의 문제다.
+  - **같은 층위에서 이미 닫힌 것**: `dir` 은 스키마가 `"up"|"down"` 리터럴로 닫아 두었으므로, 이 층위의 결손은 `w` **1건뿐**이었다.
+  - **검증 배치**: `IntentValidator.validate()` **기존 1곳 안의 검사 1행**에 편입한다 — `axis` 화이트리스트 검사(★R-02)와 **같은 형식**이며 **검증 지점 수를 늘리지 않는다.** §8-1 fail-closed 전수표에서도 **12번 행에 병기**하고 새 행을 만들지 않는다(지점 수 13 불변).
+  - **[HARD] R3 재판정이 남긴 재심 트리거는 이 반영으로 소진된다** — *"S3 구현에서 `pref_score` 가 비유한 `w` 를 정렬 키에 그대로 태우면 위반으로 승격 심리"*. 다만 **명세의 반영이지 구현의 통과가 아니다** — 구현 대조는 M3 소관이다.
+- **미확정 표현**: `UNKNOWN` 센티널 단일 (요건 ②). 누락·`None`·빈문자열은 전부 검증 실패 — "조용한 기본값"을 스키마 층에서 원천 봉쇄한다.
+- **검증 지점**: `IntentValidator.validate()` 단 한 곳, 루프 진입 직전, 실패 시 fail-closed(되묻기 라우팅) (요건 ③). `assistant_tools`의 화이트리스트 디스패처와 동일한 "미등록이면 실행하지 않는다" 정책.
+  - **[R-02] 검증 1행 추가**: `all(p["axis"] in PREF_AXES for p in intent.soft_prefs)` — **미등록 `axis` 는 fail-closed → 되묻기 라우팅**. 검증 지점은 늘어나지 않는다(기존 `IntentValidator.validate()` 단 한 곳 안의 검사 1행이며, `NumericIntentParser` 를 그 내부에 둔 FIX-2 와 같은 형식이다). §8-1 fail-closed 전수표 **12번** 행에 편입.
+- `provenance.utterance_span`은 B의 IntentSpec에서 이식 — LLM이 없는 값을 만들어냈는지 원문 대조로 잡는다.
+
+#### ★ FIX-1 — `selections` 값 도메인 출처의 축 부류별 재선언 (RULE-02 ① 위반 교정)
+
+**교정 사유(확정 위반).** 개정 전 선언은 `price_views._sim_dim_candidates` **1개로 12축 전체를 덮는 blanket** 이었으나, 그 함수가 실제로 처리하는 축은 **5축뿐**이다 — `price_views.py:2685-2691`(`siz_cd`·`plt_siz_cd`·`mat_cd`·`proc_cd`·`bdl_qty`)이고 그 외 축은 `price_views.py:2692-2693` 에서 **무조건 `return []`** 이다(게이트 독립 재실측 R-4, `gate-report.md:35`). 즉 선언된 출처가 나머지 7축에 대해 **실효적이지 않았다.** 아래 3분류로 교체한다.
+
+| 부류 | 축 | 값 도메인 출처 |
+|---|---|---|
+| **열거축 5** | `siz_cd` · `plt_siz_cd` · `mat_cd` · `proc_cd` · `bdl_qty` | `price_views._sim_dim_candidates(prd_cd, dim)` (`price_views.py:2683`) — **무수정 import** |
+| **열거축 +1** | `print_opt_cd` | `t_prd_product_print_options(prd_cd=?, del_yn≠'Y')` 의 `print_opt_cd` **distinct**. **NULL 행 제외**(`models.py:463` 이 nullable 마스터 FK) + **제외 건수를 G0 에 카운트 기록**(조용한 누락 금지). 라벨은 `print_side` 우선 → 마스터 `print_opt_nm` 폴백(`price_views.py:1832-1841` 기존 계약 승계). 결과 집합이 `_dim_options`(`price_views.py:1775`) 내부 클로저 산출과 동일함을 **G0.5a 가 기계 감시**(§4.5) |
+| **비열거축 6** | `siz_width` · `siz_height` · `min_qty` | `TIER_DIMS` **파생축**(`pricing.py:52`, `_reduce_siz_dims` `pricing.py:315`). **`selections` 키에서 제외** |
+| | `coat_side_cnt` · `spot_side_cnt` | **상품설정 파생 카운트**. 열거 대상이 아니며 `selections` 키에서 제외 |
+| | `opt_cd` | `opt_sels` 와 **중복**이므로 `selections` 키에서 **제외** 명시 |
+
+**[FIX-1 부기 · 주장 1(C1) 판정 기록]** 위 "열거축 +1"의 로직은 라이브에 존재하나 `_dim_options` 내부 **중첩 클로저**라 import 불가하므로, **동등 SELECT 1개를 우리 층이 작성해야 한다.** 이 사실을 §9 주장 1의 반증조건(*"새 도메인 규칙을 1줄이라도 작성해야 하면 틀렸다"*)과 접하는 지점으로 은폐 없이 기록한다.
+게이트 판정: **재배선(비재사용 위치에 있던 기존 규칙의 이식)이며 신규 도메인 규칙 작성이 아니다** — 값 집합·라벨 규칙·`del_yn` 필터가 전부 기존 계약의 복제이고 새 판단 규칙이 0건이기 때문이다(`gate-report.md:156`). 단 **주장 1이 "조립만으로 성립"이라 말한 강도는 약화된다.**
+
+#### ★ FIX-2 — LLM 산출 수치의 결정론 재파싱 (RULE-02 ①③ 교정)
+
+**교정 사유.** `Intent.qty`·`budget_krw` 는 LLM 산출 수치이면서 개정 전에는 **결정론 재파싱 대조가 없었다.** 전사 오류가 min/max/incr 통과 후 `evaluate_price` 에 도달할 수 있다(A4, `gate-report.md:59`).
+
+1. **`provenance.numeric_spans` 필수화** — `qty`·`budget_krw` 가 UNKNOWN/None 이 아니면 대응 span 이 반드시 있어야 한다. **span 없는 수치는 스키마 위반**(검증 실패 → UNKNOWN 취급).
+2. **`NumericIntentParser`(symbolic) 신설** — `IntentValidator.validate()` **내부**에 둔다. `numeric_spans` 가 가리키는 **원문 부분문자열**을 결정론 규칙으로 재파싱해 값을 **재산출**한다. LLM 산출값과 불일치하면 **fail-closed → 되묻기 라우팅**.
+3. **심볼릭 계층에 진입하는 값은 재산출값**이고, LLM 산출값은 **대조용으로만** 보관한다.
+4. **재파싱 실패**(원문에 수치 근거 없음)도 fail-closed — "조용한 기본값 금지" 정책과 동일 취급.
+
+이로써 `Intent` 의 수치 필드는 LLM 출력이 아니라 **원문에서 결정론 파서가 뽑은 값**이 되며, RULE-01 의 판정 절차(LLM 출력 화살표 도착지 = 스키마 검증기)와 RULE-02 ③(검증 지점의 실효성)이 동시에 닫힌다.
+
+#### ★ R-02 — `soft_prefs.axis` 값 도메인 화이트리스트 (RULE-02 ① 잔여 인스턴스 교정)
+
+**교정 사유(재심 확정).** FIX-1 이 `selections` 축을 닫은 뒤에도 RULE-02 `violation_test` ①(*"각 필드의 도메인 출처"*)이 `soft_prefs.axis` 에서 재실패했다 — 이 필드는 **열린 `str`** 이었고 허용 축 집합이 어디에도 선언되지 않았다(`gate-rehearing.md:96`). 공허한 지적이 아니다: `axis` 는 Actor LLM(F15)이 산출해 심볼릭 `Scorer ④`(**§4.6 Scorer** — **[W-6 좌표 정정]** 구 인용 `:488` 은 구 판본(1,046행) 좌표이며 현행 `:488` 은 FIX-5 과세 기준 문단이다)까지 도달하는 값이며, 개정 전 §6 워크스루가 쓰던 `axis:"mat_grade"` 는 **12축 어디에도 없고 문서 전체에서 그 한 곳에서만 등장했다**(재심 전수 grep, `gate-rehearing.md:99`·`:343`). 즉 LLM 이 만든 어휘가 어떤 선언에도 걸리지 않은 채 심볼릭 채점에 진입하는 상태였고, 이것이 RULE-02 norm 이 *"자유 텍스트 전달 금지"* 로 겨눈 형태다.
+
+**`PREF_AXES` — 허용 축 화이트리스트 (정의처 1곳).**
+
+정의처는 **`simcore/intent.py` 의 `PREF_AXES` 단일 상수**이며, `proc_sels` 가 `widget_api._allowed_procs`/`_coerce_detail` 화이트리스트로 도메인을 명시한 것과 **같은 형식**이다.
+
+[HARD] **새 어휘를 발명하지 않는다.** `PREF_AXES` 의 원소는 전부 `DIM_META`(`price_views.py:31`)의 실재 축 이름이며, `PREF_AXES` 는 그 부분집합을 **§4.1 FIX-1 3분류표의 "열거축" 부류로부터 파생 산출**한다(축 이름의 원 정의처는 여전히 `price_views.py:31` 1곳 — 차원 어휘를 6벌째로 늘리지 않는다, RULE-12 ③). 갈리는 사건은 G0.5b 가 기계 감시한다.
+
+| 축 | 왜 포함하는가 | 원 정의처 |
+|---|---|---|
+| `siz_cd` | FIX-1 열거축 5 · 고객 선택 대상 | `DIM_META`(`price_views.py:31`) |
+| `mat_cd` | FIX-1 열거축 5 · **"고급스럽게" 류 서술의 착지축** | 〃 |
+| `proc_cd` | FIX-1 열거축 5 · 고객 선택 대상 | 〃 |
+| `bdl_qty` | FIX-1 열거축 5 · 정수축(방향 의미가 자명) | 〃 |
+| `print_opt_cd` | FIX-1 열거축 +1 · 고객 선택 대상 | 〃 (열거는 §4.1 FIX-1 동등 SELECT) |
+
+**제외 축과 그 사유 (전수).**
+
+| 제외 축 | 사유 |
+|---|---|
+| `plt_siz_cd` | 열거축이긴 하나 **완제품 사이즈에서 내부 도출하는 생산 개념이며 사용자 선택 대상이 아니다**(`price_views.py:52-53` 실측 주석 · §5.2 `_select_default_plate`). 선호를 받을 축이 아니므로 제외 |
+| `siz_width` · `siz_height` · `min_qty` | FIX-1 **비열거축 6** — `TIER_DIMS` 파생축(`pricing.py:52`). `selections` 키에서 제외한 것과 같은 사유 |
+| `coat_side_cnt` · `spot_side_cnt` | 〃 상품설정 파생 카운트 |
+| `opt_cd` | 〃 `opt_sels` 와 중복 |
+
+**`dir` 의 의미 (선언 범위 = 여기까지).** `dir` 은 해당 축의 **후보 열거 순서**(표시순서 `disp_seq` → 이름 자연정렬 → 코드, `price_views.py:64` 기존 계약)에 대한 방향이며, **"품질 등급"이 아니다.** 그 순서가 등급과 일치하는지는 **미확정**이고, 등급 사상이 필요하면 그것은 새 도메인 지식의 신설이므로 본 설계가 흡수하지 않는다(흡수 시 RULE-15 ③ 위반) — **§15 FU-5 후속 안건**으로 남긴다. `bdl_qty` 만 정수축이라 방향이 자명하다.
+
+**영향 범위 (왜 뼈대 변경이 아닌가).** 추가되는 것은 **선언 1블록 + 검증 1행 + fail-closed 표 1행**이다. `Intent` 그릇·`UNKNOWN` 센티널·단일 검증 지점·FIX-2 재파싱은 전부 제자리에 있고, `soft_prefs` 가 `Scorer ④` 가중치에만 들어간다는 성질(§4.6)도 변하지 않는다. 다만 재심이 정확히 짚었듯 **④ 안에서 존재하지 않는 축을 발명할 수 있었던 구멍**이 이 화이트리스트로 닫힌다.
+
+### 4.2 `Outcome` — simcore 반환 스키마
+
+```python
+Outcome = {
+  "state_hash":   str,        # (prd_cd, selections, qty, opt_sels, proc_sels) 정규화 해시
+  "as_of":        "yyyy-MM-dd",
+  "engine_mode":  "strict",   # 고정. lenient 금지 (P-06 차단)
+  "source_digest": str,       # ★ 판정 직전 라이브 재-SELECT 다이제스트 (A 이식, G0.9 입력)
+  "live_read_at": str,
+
+  "feasible":  "PROVEN_OK" | "PROVEN_BLOCKED" | "UNKNOWN",
+  "blockers": [ {
+      "source": "RULE"|"PRICE_GAP"|"TMPL_COMBO"|"QTY_RULE"|"PLATE"|"ENGINE_ERROR",
+      "id":     rule_cd | comp_cd | axis_name,
+                # ★R-10: RULE 소스의 rule_cd 는 생성원(_sim_disallowed)이 산출하지 못한다(규칙명 nm 만 반환).
+                #   §4.4 (b′) 읽기전용 역인덱스 SELECT 로 해소하며, 해소 실패·이름 충돌 시
+                #   id = UNKNOWN_RULE_ID + sim_escalation(RULE_ID_UNRESOLVED) 로 fail-closed (§8-1 13번).
+      "kind":   "FORBIDDEN" | "UNREGISTERED",       # 금지 vs 데이터 공백 (RULE-10)
+      "msg":    str,
+      "repairs": [ {"unset": [slot], "or_set": [(slot, value)]} ]
+  } ],
+
+  # ★ FIX-5: 과세 기준을 3필드로 분리한다 (단일 `amount` 는 기준 불명 → 폐기)
+  "price": { "supply_amount": int|None,   # evaluate_price.final_price (공급가, 부가세 별도)
+             "vat_amount":    int|None,   # supply × VAT_RATE (widget_api.py:1148 계승)
+             "payable_total": int|None,   # 청구액 = supply + vat. /handoff 서명 total 과 동등
+             "confidence": "CONFIRMED"|"PROVISIONAL"|"NONE",
+             "confidence_reasons": [str] },        # 'PANSU_GEOMETRIC_FALLBACK' 등
+
+  "components": [ {
+      "comp_cd": str, "subtotal": int, "included": bool,
+      "matched_row_id": int|None,
+      # ★ FIX-8: matched_row 1차축 4분류 (§4.3)
+      "zero_reason": "TRUE_ZERO"|"MISSING_PRICE_ROW"|"UNSELECTED_DIM"|"UNMATCHED_NO_GAP"|None,
+      "affect_observed": bool|None,                          # ★ B 이식 (G8 스윕 결과)
+      "tier": {"field":"min_qty"|"siz_width"|"siz_height", "threshold":num, "order_value":num},
+      "rejected": [ {"row_id":int, "first_diff_dim":str, "row_value":str, "order_value":str} ],
+      # ★ FIX-7: 폴백 사다리 3단 (아래 성질 5)
+      "anchor": "xlsx:<파일>#<시트>!<셀>" | "t_prc_component_prices/<comp_price_id>" | None
+  } ],
+
+  "reachability": {"verdict":"PROVEN_REACHABLE"|"PROVEN_DEAD"|"UNKNOWN",
+                   "witness":Intent|None, "dead_dim":str|None, "probe_budget_used":int},
+  "rollout_ms": int, "cache_hit": bool
+}
+```
+
+**핵심 성질 6가지.**
+
+1. **가능성과 가격이 하나의 Outcome에서만 나온다.** `feasible != "PROVEN_OK"`이면 `price` 의 **3필드 전부**(`supply_amount`·`vat_amount`·`payable_total`)가 **스키마상 반드시 `None`**(직렬화 시 강제). 제약 위반 조합의 가격이 존재할 자료구조 자체가 없다(RULE-06). R7의 *"출력 스키마에서 능력을 제거한다"*(`R7-agentic-commerce.md:93`)의 직접 적용. §8-1 8번(예외 시 0원 대체 절대 금지)도 **3필드 전부에** 적용된다.
+2. `kind`가 금지(FORBIDDEN)와 미등록(UNREGISTERED)을 분리한다. 현행은 `tmpl_combo_gap`에서 구별 불가하고 탈출구가 "관리자에게 문의"뿐이다(`widget_api.py:1906-1907` 인용, `D6:259`).
+3. `confidence`는 값이 아니라 플래그다 — 권위 룩업이면 CONFIRMED, 기하 폴백이면 PROVISIONAL(R2:304 처방).
+4. **`zero_reason`과 `affect_observed`가 최종안의 추가분이다** — §4.3.
+5. **★ FIX-7 — `anchor` 폴백 사다리 3단.** 형식이 복수 허용되므로 **어느 형식으로 내려가는지의 순서**를 규정한다. 개정 전 "미보유 셀은 `None` 명시"는 `provenance-map` 미배선 시 `anchor=None` 이 **실제로 상시 발생**하는 문제가 있었다(A6).
+   - ① `provenance-map` 히트 → `"xlsx:<파일>#<시트>!<셀>"`
+   - ② 미히트이나 `matched_row_id != None` → **`"t_prc_component_prices/<comp_price_id>"`** — **기본 폴백. 이 단계에서 `None` 으로 떨어지지 않는다.**
+   - ③ `matched_row_id == None` → `None` + `sim_escalation(ANCHOR_MISSING)`
+   F14(`provenance-map`)는 §26 격자 CSV 에 `src_file`/`src_sheet`/`src_cell` 3컬럼이 추가되기 전까지 미배선이므로(§4.0 F14 비고), **S2 시점의 기본 경로는 ②**다.
+6. **★ FIX-5 — 과세 기준 단일화.** 개정 전 단일 `price.amount` 는 공급가/청구액 구분이 없어 **예산 판정·고객 문구는 공급가 기준인데 서명액은 VAT 포함가**(`widget_api.py:1148` `VAT_RATE`, `:1216-1220`)라는 갈림을 무계측 상태로 남겼다(A5). 이제 판정 기준을 축별로 못 박는다.
+   - **고객이 인식하는 예산·표시 금액 = `payable_total`** (Scorer ③ `budget_penalty`, tie-break ⑤, PhraseRenderer 고객 대면 토큰, RenderGuard 서버 치환 토큰 검증 대상)
+   - **권위 격자(260705) 대조 = `supply_amount`** (권위 격자가 공급가 격자이므로 — §7 G4)
+   - 공급가를 고객에게 노출할 때는 **"공급가(부가세 별도)"**, 청구액에는 **"(부가세 포함)"** 를 반드시 병기한다(RULE-04 단서의 구분표기 규범).
+   - **[미확정 · U-1]** 이 갈림의 **실제 오차 규모는 미측정**이다. 게이트·두 검증자 모두 라이브 DB 를 조회하지 않았으므로 이는 **코드 구조상 가능한 경로이지 실측된 결함이 아니다**(`gate-report.md:76`). 실측은 **G10**(§7)이 첫 대상이다.
+
+### 4.3 `zero_reason` — C 원안의 근거 오류를 교정한다 [L2 최우선 이식]
+
+C 원안은 RULE-09 ②(정당한 0원 vs 단가행 부재 0원)를 *"strict 고정으로 후자가 애초에 통과하지 못한다"*(design-C:481)로 논증했다. **이 논증은 코드로 반증된다.** L2가 지적했고 본 문서가 실측 재확인했다:
+
+- `evaluate_price`의 기본 `mode`는 `lenient`이며(`pricing.py:428` 실측), strict가 승격하는 것은 `_FATAL_ERRORS` 계열이다.
+- 단가행 **자체가 없는** 케이스는 `included=False`·`subtotal=0`·`data_gap=[]` 구조로 조용히 빠지며, 경고조차 없는 경로가 존재한다. **[FIX-8 근거 좌표 교정]** 진짜 무경고 경로는 `_match_entry` 의 **no_match 분기 `pricing.py:655-660`** 이다 — `m["row"] is None` 일 때 **`if gap:` 인 경우에만** `data_gap` 을 채우므로, gap 이 비면 `included=False · data_gap=[] · error=None` 으로 **경고 추가 없이 조용히 반환**된다(게이트 독립 재실측 R-7, `gate-report.md:38`). 병기 근거: `pricing.py:106-108`(`dim_vals` 전량일치 요구) · `pricing.py:599-607`(`_no_match_detail` 이 `NON_QTY_DIMS` 한정). 개정 전 인용 `pricing.py:626-630`(`_skipped_entry`)은 **다른 분기**였으므로 교체한다.
+- 실제 방어선은 위젯의 `_price_gap_errors`이고 그 함수는 **`proc_cd`를 명시적으로 제외**한다(`widget_api.py:466-471` 실측 — *"★proc_cd 는 제외 … 여기 포함하면 정상 주문 전부가 차단된다"*).
+
+따라서 최종안은 **판정 입력을 `_price_gap_errors`가 아니라 엔진의 `components[].data_gap`으로 잡는다**(A의 design-A:330 / B의 design-B:241 공통 처방):
+
+**★ FIX-8 — `zero_reason` 을 `matched_row` 1차축 4분류로 교체한다 (RULE-09 ② 위반 교정).**
+
+개정 전 이분류(`data_gap` 유무 1차축)는 **언더차지 1경로를 `TRUE_ZERO` 로 오분류**했다 — `matched_row is None ∧ data_gap == [] ∧ error is None` 인 무경고 경로(R-7)가 "정당한 0원"으로 라벨링되어 탐지에서 사라진다(A8, `gate-report.md:63`). 1차축을 `data_gap` 이 아니라 **`matched_row`** 로 바꾼다.
+
+| # | 관측 | `zero_reason` | 후속 처리 |
+|---|---|---|---|
+| 1 | `included == True` and `subtotal == 0` | **`TRUE_ZERO`** (정당한 0원) | 없음 |
+| 2 | `matched_row is None` and `data_gap` 비어 있지 **않음** | **`MISSING_PRICE_ROW`** (단가행 부재) | 기존대로 |
+| 3a | `matched_row is None` and `data_gap == []` and `error is None` **and** 해당 구성요소 `use_dims` 중 **비수량 축에 미선택(None/'')이 있음** | **`UNSELECTED_DIM`** | **플래그만.** `confidence` 강등·에스컬레이션 **없음** — `widget_api.py:462-463` 이 명문화한 "아직 안 고른 것"과 "행이 없는 것"의 구분을 승계 |
+| 3b | 위 3a 조건 중 **미선택 축이 없음**(단가행 rows 전무 또는 `dim_vals` 키 불일치) | **`UNMATCHED_NO_GAP`** | `sim_escalation(PRICE_ROW_MISSING)` + `price.confidence` **PROVISIONAL 강등** |
+| 4 | `error in _FATAL_ERRORS` | — | 기존대로 `blockers[ENGINE_ERROR]` |
+| — | `subtotal > 0` | `None` | — |
+
+3a/3b 판별을 위해 §4.4 (g) 옆에 **읽기전용 SELECT 1건**(해당 `comp_cd`·`as_of` 적용행 존재 여부)을 추가한다. 읽기전용이므로 RULE-04 불변 — **금액은 여전히 엔진 것이고 플래그만 우리 것**이다.
+
+**[미확정 · 실측 아님]** 3b 경로의 **실제 발생 건수는 미측정**이다(`gate-report.md:253`). 파일럿 전수 스윕에서 3b 가 1건이라도 나오면 언더차지 후보로 실적재하고, **0건이면 그 사실 자체를 기록**한다(G8, §7).
+
+**차단 규칙은 바꾸지 않는다.** 차단은 여전히 `_price_gap_errors`가 하고(그 함수의 가족형 면제·`proc_cd` 제외 도메인 지식을 그대로 존중), `zero_reason`은 **표시·라우팅용 플래그**다. 이렇게 하면 `_price_gap_errors`가 의도적으로 안 막는 공정 차원의 공백도 최소한 플래그로는 보이고, `MISSING_PRICE_ROW`인데 차단되지 않은 건은 `sim_escalation`으로 라우팅된다. 즉 **엔진의 넓은 탐지폭과 위젯의 좁은 차단폭 사이의 간격 자체를 관측 대상으로 만든다.**
+
+### 4.4 `JointTransition` — 무엇을 어떻게 합치는가
+
+`step(state, action) -> Outcome` 한 함수. 내부는 **호출 조립만** 한다.
+
+| 순서 | 호출 대상 (전부 기존 코드) | 얻는 것 | 실측 위치 |
+|---|---|---|---|
+| (a) | `price_views.qty_rule_error` | 수량 규칙 위반 | `price_views.py:1615` |
+| (b) | `price_views._sim_disallowed(prd_cd, sel)` | 차원별 불가값 → **규칙명(`nm`)**. 후보값을 실제 대입하는 forward simulation. **[R-10 정정]** 이 생성원이 산출하는 것은 `dis[cand] = r["nm"]`(`price_views.py:2731`) 이며 **`rule_cd` 가 아니다** — 상위 `_sim_active_rules` 의 `.values("rule_nm","err_msg","logic","rule_typ_cd")`(`:2520`)에 `rule_cd` 가 없고, `rule_nm` 이 비면 `err_msg`, 그것도 비면 문자열 `"제약"` 으로 폴백한다(`:2526`). 따라서 `blockers[].id` 는 (b) 단독으로 채워지지 않고 **(b′) 를 거친다** | `price_views.py:2701` |
+| **(b′)** | **읽기전용 SELECT 1건 (★R-10 신설)** — `t_prd_product_constraints` 의 `rule_cd ↔ rule_nm` 역인덱스 | (b) 산출 `nm` 을 **`rule_cd` 로 해소**해 `blockers[].id` 에 규칙 신원을 싣는다. 해소 실패·이름 충돌 시 `UNKNOWN_RULE_ID` + `sim_escalation` **fail-closed** | 원천 `models.py:777`·`:779`(`rule_cd` 실재 · 복합 PK 구성원). `raw/webadmin` **무수정**이므로 RULE-04 (c) 보존 |
+| (c) | `tmpl_combo.resolve` + `missing_axis_names` | 조합템플릿 미등록(UNREGISTERED) | `tmpl_combo.py:245` / `:204` |
+| (d) | `pricing.evaluate_price(..., mode="strict", as_of=pinned)` | 금액 + `components[].matched_row` + `data_gap` + 오류코드 | `pricing.py:428` |
+| (e) | `widget_api._price_gap_errors(res, prd_cd)` | 단가행 부재 **차단** 판정. 가족형 쌍 면제·`proc_cd` 제외를 정의 그대로 재사용 | `widget_api.py:455` |
+| (f) | `SELECT ... FROM t_siz_pansu WHERE ...` 존재 조회 | 판걸이수 권위 룩업 히트 여부 → `confidence` | 룩업 우선·기하 폴백 구조 `sql/32_fn_calc_pansu.sql` |
+| (g) | `components[].matched_row` + `data_gap` + `error` 판독 (**FIX-8**: 1차축 = `matched_row`) | `zero_reason` **4분류** 플래그 (차단 아님) | `pricing.py:655-660` (no_match 분기 · R-7), 병기 `:106-108`·`:599-607` |
+| (g′) | **읽기전용 SELECT 1건** — 해당 `comp_cd`·`as_of` 적용 단가행 존재 여부 (**FIX-8 신설**) | `UNSELECTED_DIM`(3a) vs `UNMATCHED_NO_GAP`(3b) 판별 | 읽기전용이므로 RULE-04 불변. 금액 산출 미개입 |
+
+**(e)·(g)의 분업이 이 설계의 핵심 두 수다.** (e)는 차단 권위를 위젯에 남기고, (g)는 탐지 폭을 엔진 것으로 넓힌다. 둘을 한 함수에 합치지 않는 이유는 §4.3 마지막 문단 그대로 — 간격이 보여야 라우팅할 수 있다.
+
+**부작용 0의 기계적 보장**: 모든 롤아웃은 `assistant_tools.run_sql`이 이미 쓰는 방어선을 복제한다 — `transaction.atomic()` + `SET TRANSACTION READ ONLY` + `SET LOCAL statement_timeout` + **무조건 롤백 예외**(`assistant_tools.py:689-701`, C 실측 인용). 새 안전 논증을 만들지 않고 라이브에서 검증된 논증을 재사용한다.
+
+#### ★ R-10 — `blockers[].id` 의 `rule_cd` 해소 배선 (RULE-10 (a) 교정 · 보충2-FIX-A)
+
+**교정 사유(재심 확정 · CS2-01).** §4.2 는 `blockers[].id = rule_cd` 로 선언하는데, 설계가 지목한 **유일한 생성원**이 그 값을 산출할 수 없다. 사슬을 좌표로 그리면 끊긴 지점이 하나다.
+
+```
+[선언]  §4.2 Outcome.blockers[].id = rule_cd | comp_cd | axis_name
+   ↑
+[생성원] §4.4 (b) price_views._sim_disallowed  →  dis[cand] = r["nm"]      (price_views.py:2731)
+   ↑
+        price_views.py:2526   "nm": rule_nm or err_msg or "제약"          ← 문자열 리터럴까지 폴백
+   ↑
+        price_views.py:2520   .values("rule_nm","err_msg","logic","rule_typ_cd")   ← rule_cd 부재
+   ↑
+[원천]  models.py:779         TPrdProductConstraints.rule_cd (복합 PK 구성원 · 실재)
+```
+
+원천에는 `rule_cd` 가 **실재하는데** 재사용 경로가 그것을 떨어뜨린다. 즉 **데이터 부재가 아니라 배선 결손**이며(재심 V-1~V-5, `gate-rehearing.md:190`), 교정 비용이 낮다. 개정 전 문서는 이 결손을 기록하지 않은 채 §4.4 (b) 를 *"규칙명"* 이라 쓰고 §8 RULE-10 을 *"`rule_cd` 보존 · 새 알고리즘 0"* 이라 썼다 — 두 문구가 서로를 반증하고 있었다.
+
+**(1) 우리 층 읽기전용 역인덱스 SELECT 1건 (명세).**
+
+`raw/webadmin` 을 수정하지 않는다(RULE-04 (c) 보존 — `.values(...)` 에 `rule_cd` 를 더하는 길은 금지된다). 대신 우리 층에서 **동등 범위의 읽기전용 SELECT 1건**을 발행해 역인덱스를 만든다.
+
+```sql
+-- simcore/joint.py (b′) — 읽기전용. 롤아웃 트랜잭션(READ ONLY) 안에서 실행.
+SELECT rule_cd, rule_nm, err_msg
+  FROM t_prd_product_constraints
+ WHERE prd_cd  = %(prd_cd)s
+   AND del_yn  = 'N'
+   AND use_yn  = 'Y';
+```
+
+- **필터 3항은 신설이 아니라 복제다** — `prd_cd` 범위·`del_yn='N'`·`use_yn='Y'` 는 `_sim_active_rules`(`price_views.py:2513`)가 이미 쓰는 활성 규칙 조건과 같다. 새 판단 규칙을 만들지 않는다.
+- **해소 키는 (b) 의 폴백 사다리와 같은 순서**로 맞춘다 — `nm` 이 `rule_nm` 에서 왔으면 `rule_nm → rule_cd`, `err_msg` 에서 왔으면 `err_msg → rule_cd` 로 대조한다(`:2526` 의 사다리 승계). `nm == "제약"`(양쪽 모두 빈 행)이면 대조 키가 없으므로 아래 (2) 로 간다.
+- 결과는 **롤아웃 1회당 `prd_cd` 단위 1건**이며 후보 수만큼 반복하지 않는다(G7 비용 축에 상수항 1개 추가).
+
+**(2) 해소 실패·이름 충돌 시 fail-closed (조용한 폴백 금지).**
+
+`rule_nm` 은 **유일성 제약이 없는 `CharField(200)`**(`models.py:780`)이므로 역해소가 **다중 매치**일 수 있고, `"제약"` 폴백 행은 **무매치**다. 두 경우 모두 조용히 표시명을 그대로 싣지 **않는다**.
+
+| 해소 결과 | `blockers[].id` | 부수 동작 |
+|---|---|---|
+| 단일 매치 | 해소된 **`rule_cd`** | 없음 |
+| 다중 매치 (`rule_nm` 충돌) | **`UNKNOWN_RULE_ID`** | `sim_escalation(RULE_ID_UNRESOLVED [제안 명칭 · 미채번])` + `payload_json` 에 후보 `rule_cd` 집합 기록 |
+| 무매치 (`nm == "제약"` 또는 대조 실패) | **`UNKNOWN_RULE_ID`** | 〃 |
+
+[HARD] **`esc_kind` 채번은 이번 개정이 하지 않는다.** 위 `RULE_ID_UNRESOLVED` 는 **제안 명칭**이며, 현행 `esc_kind` **7종**(§4.7 · §3.7 U-007.1)에 아직 편입되지 않았다. 채번은 `sim_escalation` 실체가 서는 **S2**(plan.md M2-c 사이드카 Ledger) 시점 소관이고, 그때 (i) `esc_kind` 7종 → 8종 갱신, (ii) `route_to` 매핑표 1행 추가(소비 표면·소비 주기·소유 트랙 3열 포함, 미정 행 0건 유지), (iii) 요구사항 §3.7 U-007.1 의 "7종" 선언 갱신이 **한 묶음으로** 이뤄져야 한다. **S2 착수 전 선행 조건**(plan.md M2.0)에 등재한다. 이번 개정이 요구사항 수치를 앞질러 바꾸지 않는 이유는, 채번 없이 종수만 올리면 §4.7 "미정 행 0건" 이 깨지기 때문이다.
+
+[HARD] **조용한 폴백은 CS2-01 을 그대로 재현한다.** 해소 실패를 표시명으로 덮으면 `blockers[].id` 가 다시 신원이 아닌 이름이 되고, 그 이름이 `sim_escalation` 라우팅 키·감사 추적·규칙별 재현 집계에 고착된다. 그래서 실패는 **감추는 것이 아니라 이름을 붙여 드러낸다** — `UNKNOWN_RULE_ID` 는 "신원을 못 구했다"는 **관측 가능한 값**이며, RULE-13 (a) fail-open 금지와 정합한다. 이 지점은 §8-1 fail-closed 전수표 **13번**이다.
+
+**(3) 주장 1 반증조건 접점 기록 (FIX-1 과 동일 형식).**
+
+이 SELECT 신설을 §9 주장 1(*"조립만으로 성립"*)의 반증조건과 접하는 지점으로 은폐 없이 기록한다.
+
+**판정: 재배선이며 신규 도메인 규칙 작성이 아니다.** FIX-1 의 `print_opt_cd` SELECT 에 게이트가 적용한 잣대(`gate-report.md:156` — *"값 집합·라벨 규칙·`del_yn` 필터가 전부 기존 계약의 복제이고 새 판단 규칙이 0건"*)를 그대로 적용하면, 이 SELECT 도 (i) 조회 대상 테이블이 이미 재사용 중인 `t_prd_product_constraints` 이고, (ii) 활성 조건 3항이 `_sim_active_rules` 계약의 복제이며, (iii) 새 판단 규칙이 **0건**(값을 해석하지 않고 키를 대조할 뿐)이므로 **재배선**이다. **단 "조립만으로 성립"이라 말한 강도는 한 칸 더 약화된다** — 우리 층 SELECT 가 FIX-1 의 1건에서 **2건**이 됐기 때문이다. 이 사실을 §9 주장 1 부기 2 에 적는다.
+
+**(4) 문구 정정 2곳.** §4.4 (b) 행의 *"차원별 불가값 → 규칙명"* 서술과 §8 RULE-10 행의 *"`rule_cd` 보존 · 새 알고리즘 0"* 주장을 실제 배선에 맞게 정정했다(각 절 참조).
+
+**[HARD] 구현 시점은 S2 다.** 이 절은 **명세**이며, 배선 구현은 `TraceReconstructor`·`sim_escalation` 라우팅과 함께 S2(plan.md M2.0-a~d) 소관이다. 재심이 못 박은 차단 지점(*"S2 착수 전"* · S1 불차단, `gate-rehearing.md:196`·`:380`)은 유지된다.
+
+### 4.5 전제 감시 3종 (이식 ①) — 재사용이 낳는 의무
+
+| 센서 | 감시 대상 | 실패 시 |
+|---|---|---|
+| **G0 바인딩 스모크** | `_bindings.py`가 참조하는 심볼 12종(§2.2 표)의 `getattr` 실재 **+ FIX-1 의 `print_opt_cd` NULL 제외 건수 카운트 기록** | 즉시 중단(fail-closed). 조용한 degrade 금지 |
+| **G0.5a `ref_dim` 파리티** | **축 7종**(`OPT_REF_DIM.01~.07`, 정의처 `sql/12_phase7_seed.sql:27,37-61`) × **표면 5벌**(`views.py:61-69` `VAR_KEY_MAP` / `:1882-1890` `DIM_REF_MODELS` / `:1893-1901` `_DIM_LABEL_FIELDS` / `:3670-3678` `_IMPACT_SECTIONS` + DB 트리거 `fn_chk_opt_item_ref`) = **35쌍**. **추가 1항** — FIX-1 의 `print_opt_cd` 열거 결과 집합이 `_dim_options`(`price_views.py:1775`) 내부 클로저 산출과 동일한가 | 빌드 FAIL. 불일치 1건이면 롤아웃 금지 |
+| **G0.5b 가격차원 어휘 파리티** | **축 12종**(`price_views.py:31` `DIM_META` = `pricing.NON_QTY_DIMS` 9 + `TIER_DIMS` 3) × **표면 3벌**(`DIM_META` / `pricing` 상수집합 / `t_prc_component_prices` 실컬럼) = **36쌍** | **판정 거부**(import 한 차원 어휘가 갈리면 단가행 매칭을 신뢰할 수 없다) |
+| **G0.9 원천 다이제스트** | `t_prc_component_prices`·`t_prd_product_constraints` 등 판정 입력 테이블의 `(행수, max(upd_dt))` 해시 | 캐시된 롤아웃 결과 무효화 + 재계산. 낡은 산출물로 답하지 않는다 |
+
+**★ FIX-3 — G0.5 를 두 게이트로 분할한 사유 (RULE-05 ④ · RULE-12 ① 위반 교정).**
+
+개정 전 G0.5 는 **분모(12축 `DIM_META`)와 감시 대상(7축 `OPT_REF_DIM` 5표면)이 서로 다른 우주**였다. 규정대로 구현하면 **드리프트가 0인 상태에서도 상시 FAIL** 한다(A1, `gate-report.md:56`). 두 우주는 겹치되 동일하지 않으므로 각자의 분모로 분리한다.
+
+**두 게이트 사이 projection map** (그 자체가 G0.5a 의 **세 번째 감시 대상**이며, 맵 파일 해시를 G0.5a 산출물에 스탬프한다):
+
+| `OPT_REF_DIM` | `DIM_META` 사상 |
+|---|---|
+| `.01` | `siz_cd` |
+| `.02` | `plt_siz_cd` |
+| `.03` | `mat_cd` (+ `usage_cd` 는 12축 무대응 · 결합키 잔여분) |
+| `.04` | `proc_cd` |
+| `.05` | `bdl_qty` |
+| **`.06`** (`opt_id`, **행 식별자**) | **비사상** |
+| **`.07`** (`sub_prd_cd`) | **비사상** |
+| — | **비사상(역방향)**: `print_opt_cd` · `opt_cd` · `coat_side_cnt` · `spot_side_cnt` · `siz_width` · `siz_height` · `min_qty` |
+
+`.06` 의 비사상은 **게이트 독립 재실측으로 확정**됐다(R-6, `gate-report.md:40`) — `views.py:1888` 의 `.06 → (TPrdProductPrintOptions, ["opt_id"])` 는 **행 식별자**이고, `models.py:463` 의 `print_opt_cd` 는 같은 테이블의 **마스터 FK(nullable)** 로 서로 다른 컬럼이다. 따라서 두 우주에 동일 개념 매칭이 없다(양방향 비사상). `spot_side_cnt` 근거 병기: `sql/73_spot_side_source.sql:53`.
+
+**G0.5a·G0.5b 의 논리적 필연성**(A의 G-D 이식 사유): C는 "import만 하므로 차원 정의가 6벌이 되지 않는다"로 RULE-12를 충족했다. 맞다. 그러나 **이미 갈려 있으면 어느 벌을 import했느냐에 따라 판정이 갈린다.** C의 G0은 심볼 *이름*의 존재만 보고 *내용* 일치는 보지 않는다. 차원 어휘가 갈리면 다른 단가행 매칭 = 다른 금액이다(L2의 지적).
+**그리고 [FIX-3 추가 논증]: 감시 대상 5벌(`ref_dim` 7축)과 실제 import 대상(`DIM_META` 12축)은 겹치되 동일하지 않으므로, 후자를 덮는 G0.5b 가 없으면 §4.5 가 선언한 전제 감시는 정작 import 대상에 대해 미충족이다.**
+
+**G0.9의 논리적 필연성**(A의 `source_digest` 이식 사유): C 자신이 *"캐시가 사전계산(N-19)으로 미끄러질 유혹이 상시 있다 … 이것은 규율이지 기계적 봉쇄가 아니다"*(design-C:452-453)라고 자백했다. 다이제스트 불일치 시 **판정 거부**를 박아 두는 것이 그 미끄럼의 유일한 기계적 봉쇄다.
+
+### 4.6 Scorer — 사전선언 사전식 비용함수
+
+```
+key(outcome) = (
+  0 if feasible == PROVEN_OK else 1,        # ① 가능한 것이 먼저
+  0 if confidence == CONFIRMED else 1,      # ② 권위 룩업 기반이 먼저
+  0 if reach == PROVEN_REACHABLE else (1 if UNKNOWN else 2),
+  budget_penalty(price.payable_total,       # ③ 예산 초과분(원). ★FIX-5: 기준 = 청구액
+                 intent.budget_krw),        #    (고객이 인식하는 예산은 공급가가 아니라 청구액)
+  -pref_score(outcome, intent.soft_prefs),  # ④ LLM 선호는 여기 가중치로만
+  price.payable_total,                      # ⑤ 동률이면 저가 (★FIX-5: 청구액 기준)
+  candidate_key                             # ⑥ 안정 tie-break (결정론 보장)
+)
+```
+
+⑥은 `pricing.py:288-291`이 `_component_rows_bulk`에서 *"타이브레이크가 r.items() 전체를 훑으므로 여분 키가 있으면 선택 결과가 바뀔 수 있음"*이라고 명시한 **행 내용 기반 안정 tie-break 사상**과 같다(직접 실측). 이미 잘 되고 있는 것을 모방한다(N-21).
+
+`soft_prefs`가 ④에만 들어간다는 점이 RULE-01의 실질적 방어선이다: LLM은 **순서에만** 영향을 주고 ①~③을 뒤집을 수 없다.
+
+**[R-02 보강]** 다만 "④에만 들어간다"는 **④ 안에서 무엇이든 될 수 있다**를 배제하지 못했다 — 재심이 이 지점을 찾았다(`gate-rehearing.md:99`). `pref_score` 의 정의역은 이제 **`PREF_AXES` 화이트리스트로 닫히며**(§4.1 ★R-02), 미등록 축은 Scorer 에 도달하기 전 `IntentValidator` 에서 fail-closed 된다. 즉 방어선은 **(i) 위치(④ 고정) + (ii) 정의역(화이트리스트) 두 겹**이다.
+
+### 4.7 사이드카 저장소 (라이브 밖 · write 0)
+
+```sql
+sim_rollout(id, ts, session_id, state_hash, action_json, outcome_json,
+            engine_rev, source_digest, cache_hit, rollout_ms)
+sim_decision(id, ts, session_id, presented_state_hashes[], chosen_state_hash,
+             asked_slot, ask_reason)
+sim_observation(id, ts, state_hash, obs_source, obs_price, obs_feasible, delta_krw, note)
+-- ★ A 이식: 고불확실 라우팅 큐
+sim_escalation(id, ts, esc_kind, prd_cd, payload_json, route_to, status, created_at)
+```
+
+**★ FIX-6 — `esc_kind` 7종** (개정 전 6종에 `PREMISE_FAIL` 누락 → §6 T-1 이 발행하는데 허용집합에 없어 CHECK 제약 시 **전제감시 로그가 유실**되는 결함, A3):
+
+`sim_escalation.esc_kind` ∈ `{PRICE_ROW_MISSING, TMPL_COMBO_UNREGISTERED, PANSU_PROVISIONAL, ANCHOR_MISSING, AFFECT_UNDEFINED, REACH_UNKNOWN, `**`PREMISE_FAIL`**`}`.
+
+**`PREMISE_FAIL` 은 게이트별로 목적지가 갈리므로 `payload_json.gate_id ∈ {G0, G0.5a, G0.5b, G0.9}` 를 필수 키로 요구한다.**
+
+`route_to`의 **1순위 목적지는 새 큐가 아니라 기존 실무진 동선**이다(B 이식, design-B:432) — A의 테이블을 그대로 이식하면 새 운영 동선을 하나 더 만드는 결과가 되고, 그 자체가 운영부담 렌즈가 경계한 것이다.
+
+**[N3 정정]** 개정 전 이 표는 목적지를 **`gap_owner`** 로 적었으나, `gap_owner` 는 운영 큐가 아니라 **§12-7 이 미채택 선언한 KB 계층의 소유자 문자열 필드**다(운영 큐 구현체 0건). 원용을 삭제하고 실재 착지점으로 교체하며, **소비 표면·소비 주기·소유 트랙** 3열을 추가해 "목적지가 데이터인가"를 넘어 "목적지가 실체인가"까지 표에서 보이게 한다.
+
+| `esc_kind` | `route_to` (실재 착지점) | 소비 표면 | 소비 주기 | 소유 트랙 |
+|---|---|---|---|---|
+| `PRICE_ROW_MISSING` / `ANCHOR_MISSING` | §26 `hpti` 권위 격자 교정 명세 | `hpti` `_batch` SQL 파일군(실재 확인) | 격자 재추출 라운드 단위 | §26 |
+| `TMPL_COMBO_UNREGISTERED` | 실무진 조합템플릿 등록 화면 | webadmin 기존 화면 | 상시 | webadmin |
+| `AFFECT_UNDEFINED` | §7/§18 `use_dims` 충전 트랙 | 적재 명세 | 트랙 라운드 단위 | §7·§18 |
+| `PANSU_PROVISIONAL` | 실무진 판걸이수 확인 시트 | 기존 시트 | 상시 | 실무진 |
+| `REACH_UNKNOWN` | 루프 자체 튜닝 | 우리 산출물 | S1~S4 내부 | 본 트랙 |
+| **`PREMISE_FAIL` (`gate_id=G0`)** | **webadmin 리팩터 대응 트랙 — 대응 전까지 루프 실행 금지** | 심볼 실재 보고서 | 발생 시 즉시 | webadmin |
+| **`PREMISE_FAIL` (`gate_id=G0.5a` / `G0.5b`)** | **§33 / webadmin `ref_dim`·차원어휘 정합 트랙 — 루프 중단** | 파리티 린트 리포트 | 발생 시 즉시 | §33·webadmin |
+| **`PREMISE_FAIL` (`gate_id=G0.9`)** | **캐시 전량 무효화 후 재계산 — G7 미달 시 캐시 계층 폐기** | 다이제스트 로그 | 발생 시 즉시 | 본 트랙 |
+
+**미정 행 0건.** 단, 위 착지점 중 일부는 **큐가 아니라 트랙·화면**이므로 "쌓인 항목을 누가 언제 비우는가"의 운영 실체가 완전하지는 않다 — §11-10 에 정직하게 등재한다.
+
+**예측-관측 대조 채널 3개**(강도 순):
+
+| 채널 | 관측원 | 대조 대상 | 한계 (정직하게) |
+|---|---|---|---|
+| **O1 (공급가 축)** | 권위 엑셀 격자(가격표 260705) + 골든 30건 | **`price.supply_amount`** vs 권위값 (허용오차 0) — ★FIX-5: 권위 격자는 **공급가 격자**이므로 대조 대상을 공급가로 못 박는다 | 격자 미적재 셀은 대조 불가 → `UNKNOWN` 기록. **[N4]** §26 재추출 미완 3시트(엽서북떡메·제본·출력소재IMPORT) 유래 셀도 대조 불가 |
+| **O2 (청구액 축)** | `widget_api /handoff` 실제 응답(성공/422 + 서명 `total`) | `feasible`·`blockers[].source` 적중 + **`price.payable_total` == 응답 `total`** (★FIX-5) | `t_wgt_handoff_logs` 현재 **0행**(`D8-live-schema.md:66-68`). **★FIX-4 정정: "초기엔 파일럿 리플레이로 대체"는 라이브 write 를 유발하므로 폐기한다.** O2 는 **clone 환경 리플레이 관측** 또는 **실사용 유입 대기** 둘 중 하나로만 채운다 |
+| O3 | 실무진 확인(`sim_escalation` 처리 결과) | `PROVISIONAL` 건의 실제 판걸이수 | 사람 처리량 비례. 저빈도 |
+
+**정직한 약점을 여기 먼저 적는다**: 주문·견적 실체 테이블 부재(P-01)는 본 설계가 **해결하지 않는다**. 관측은 O1에 편중되며, "고객이 실제로 무엇을 골랐고 그 주문이 어떻게 됐는가"는 구조적으로 약하다(§11-1).
+
+---
+
+## 5. 기존 webadmin 접합면 (파일 단위)
+
+### 5.1 `pricing.py` — 무수정 · import only
+
+| 접합 | 방식 | 실측 근거 |
+|---|---|---|
+| 호출 | `evaluate_price(target, selections, qty, grade_cd, mode="strict", as_of=<핀 고정>, only_comps=None, proc_sels=..., skip_plate=False)` | `pricing.py:428` |
+| **`mode="strict"` 고정** | 우리 층의 모든 호출에서 강제. lenient 흡수(P-06)를 **호출 규약으로** 차단 | 기본값이 `lenient`임을 `pricing.py:428`에서 직접 확인 |
+| `as_of` 핀 | 세션 시작 시각으로 고정 → 세션 중 시계열 변경이 후보 비교를 무너뜨리지 않음 | `pricing.py:428` 시그니처 |
+| **`only_comps` 사용 규율** | **반사실 감사 전용(G8). 고객 견적 경로에서 미사용** — 부분 합산 금액이 화면에 나가는 순간 그것이 언더차지 표시다 | **B 이식**(design-B:284). C 원안은 "코팅만 빼면?" what-if에 쓰겠다고 했으나(design-C:308) 철회한다 |
+| `components[].matched_row` + `data_gap` + `error` | `zero_reason` **4분류** 판정 입력 (§4.3, FIX-8: 1차축 = `matched_row`) | `pricing.py:655-660`(no_match 분기), 병기 `:106-108`·`:599-607` |
+| 세트 | **1차 범위 밖.** 구성원 수량 산출이 뷰 레이어에 있어(`pricing.py:860-862` 인용, D2 F9) 조립층에서 재구현하면 RULE-12 위반 | 범위 선언 |
+
+### 5.2 `price_views.py` — 무수정 · import only
+
+| 심볼 (실측 위치) | 얻는 것 | 왜 재구현하지 않는가 |
+|---|---|---|
+| `_sim_disallowed` (:2701), `_sim_active_rules` (:2513), `_sim_dim_candidates` (:2683), `_SIM_DIM_CONSTRAINT` (:2480) | 제약 forward simulation + 차원 도메인 열거 | 관리자 시뮬레이터 전용으로 **이미 완성돼 있고 위젯 호출 0건**(`D3:118`). 만들 게 아니라 배선할 것 |
+| `_select_default_plate` (:2223), `qty_rule_error` (:1615) | 판형 자동도출·수량규칙 | 5상태 분기를 다시 쓰면 6번째 병렬 정의 |
+| `DIM_META` (:31) | 차원 어휘 **12축** | 차원 정의를 6벌째로 늘리지 않는다 (RULE-12 ③). **이 12축이 G0.5b 의 분모**이며, `OPT_REF_DIM` 7축(G0.5a 분모)과는 **다른 우주**다(§4.5 projection map) |
+| `_sim_dim_candidates` (:2683) 처리 축 | **5축뿐** — `siz_cd`·`plt_siz_cd`·`mat_cd`·`proc_cd`·`bdl_qty` (`price_views.py:2685-2691`), 그 외는 `:2692-2693` 에서 무조건 `return []` | **[FIX-1]** 이 한계 때문에 `selections` 값 도메인을 blanket 으로 선언할 수 없다. `print_opt_cd` 는 동등 SELECT 를 우리 층이 작성한다(§4.1 C1 판정 기록) |
+
+### 5.3 `widget_api.py` — 무수정 · import only + 확정 경로 불변
+
+| 접합 | 방식 |
+|---|---|
+| `_price_gap_errors` (:455) | **차단 판정 권위.** 가족형 쌍 면제(260805 오리지널박명함)·`proc_cd` 제외 규칙이 **함수 본문 주석에만** 존재하므로(실측 :461-477) 재구현 = 즉시 드리프트. 호출만 한다 |
+| `POST /price` | 그대로 둔다. 확정 금액은 여전히 위젯이 라이브 재계산 |
+| `POST /validate` · `POST /handoff` | 그대로 둔다. 주문 확정 권위는 `/handoff` + 인간 확인 |
+| 신설 | **없음.** webadmin에 엔드포인트를 추가하지 않는다(A안은 `GET /wm/next`를 신설했으나 최종안은 사이드카 HTTP로 처리) |
+
+루프의 산출물은 "전 슬롯이 확정된 selections 집합"이며, 그것을 위젯에 넘기면 위젯이 자기 `/price`로 다시 계산해 표시하고 `/handoff`로 확정한다. **루프가 아무리 틀려도 고객이 서명하는 금액은 루프가 만들지 않는다.**
+
+### 5.4 `tmpl_combo.py` — 무수정 · import only
+
+`resolve` (:245) / `missing_axis_names` (:204) 실측. 조합템플릿 미등록을 **주문 단계가 아니라 선택 단계에서** 예고하는 데 쓴다(P-20 대응).
+
+### 5.5 `assistant_tools.py` / `assistant.py` — 접합하지 않음 + 계약 선고정 (A 이식)
+
+`TOOL_SPECS` 순서 동결(`assistant_tools.py:872-874`, D4 §(f)-3)과 `SYSTEM_BLOCKS` 전역 고정(`assistant.py:226`)이 계약이며, 그것을 깨는 것은 raw/webadmin 수정이다(RULE-04 (c)). 따라서 **P-26(비서 미연결)은 범위 밖**이다.
+
+다만 A의 §4.3을 이식해 **지금 계약을 고정한다**: `simcore`가 노출하는 사이드카 HTTP 계약의 파라미터를 `simulate_price` 도구와 **동형**(`only_comps`·`as_of`·`proc_sels`·`skip_plate`)으로 못 박는다. 후니 측이 나중에 webadmin 수정을 승인하면 `assistant_tools.py:275-282`의 래퍼가 이 HTTP를 호출하도록 바꾸는 **단일 지점 변경**으로 끝난다. 계약을 지금 고정하지 않으면 그때 어댑터를 새로 짜는 운영 부채가 된다(L3 지적).
+
+### 5.6 `admin.py` / `models.py` — 접촉 0
+
+**본 설계는 라이브 테이블을 신설하지 않으므로 `models.py`·`admin.py`를 건드리지 않는다.** A안이 확정 MAJOR를 받은 지점(새 지식의 편집 표면 부재)을 최종안은 **새 지식을 만들지 않음으로써** 회피한다. 실무진이 유지해야 할 새 정의가 0건이다.
+
+---
+
+## 6. 종단 워크스루 — 자연어 주문 → 확정 견적
+
+입력: **"명함 500장, 고급스럽게, 예산 5만원"**
+
+> 아래 값은 흐름 설명용 형태 예시다. 실제 코드값·금액은 파일럿 실측으로 채워진다.
+
+**T-1 · 전제 감시 (신규)** — 세션 시작 전 **G0 / G0.5a / G0.5b / G0.9** 가 돈다. 심볼 12종 실재 확인(+ `print_opt_cd` NULL 제외 건수 기록), `ref_dim` 7축 × 5표면 35쌍 동일성, `DIM_META` 12축 × 3표면 36쌍 동일성, 판정 입력 테이블 다이제스트 스탬프. **하나라도 실패하면 루프는 시작되지 않고 그 사실이 `sim_escalation(esc_kind='PREMISE_FAIL', payload_json.gate_id=<G0|G0.5a|G0.5b|G0.9>)` 로 남는다**(§4.7 매핑표대로 게이트별 목적지가 갈린다).
+**[N5 저비용 권고]** 여기에 `as_of != date.today()` 판정 1줄을 함께 둔다 — 세션이 달력 경계를 넘으면 `as_of` 를 재핀하고 진행 중 후보 금액을 무효화한다(경계당 1회). 이 갈림 자체는 §11-12 에 감수 위험으로 등재한다.
+
+**T0 · Actor (neuro)** — 발화를 Intent 후보 k=3으로 번역. 숫자를 만들지 않는다.
+```
+Intent#1 { prd_cd: UNKNOWN(후보 3), qty: 500,
+           selections:{ siz_cd: UNKNOWN, mat_cd: UNKNOWN, print_opt_cd: UNKNOWN },
+           proc_sels: UNKNOWN,
+           soft_prefs:[{axis:"mat_cd", dir:"up", w:0.8}],
+           budget_krw: 50000 }
+```
+"고급스럽게"는 값이 아니라 `soft_prefs`로 착지한다. "5만원"은 `budget_krw`로 들어가되 **Scorer ③ 페널티에만** 쓰인다.
+
+> **[R-02 각주 — `axis` 값의 소속]** 개정 전 이 워크스루는 `axis:"mat_grade"` 를 썼다. `mat_grade` 는 **12축 어디에도 없고 이 문서에서 그 한 곳에서만 등장하던 정체불명 어휘**였으며(재심 전수 grep, `gate-rehearing.md:99`·`:343`), 선언 없는 값이 심볼릭 `Scorer ④` 에 진입하는 경로였다. 실재 축 **`mat_cd`**(`DIM_META`, `price_views.py:31` · §4.1 ★R-02 `PREF_AXES` 원소)로 교체한다. "고급스럽게"의 착지축이 자재축이라는 의미는 그대로이며, `dir:"up"` 은 **자재 후보 열거 순서에 대한 방향**이지 품질 등급 순서가 아니다(§4.1 ★R-02 `dir` 절 — 등급 사상은 §15 FU-5 후속 안건).
+
+> **[FIX-1 각주 — 이 워크스루의 선행 조건]** 위 예시가 `selections` 에 `print_opt_cd` 를 태우고 있다. 이 축은 `_sim_dim_candidates` 가 처리하지 **않는** 축이므로(`price_views.py:2692-2693`), **§4.1 FIX-1 의 "열거축 +1" 선언(동등 SELECT + NULL 제외 + G0.5a 감시)이 선행되어야** 이 워크스루가 성립한다. 선행 없이는 이 슬롯의 후보 열거가 빈 집합이다.
+
+**T1 · IntentValidator (symbolic)** — `qty=500`이 int인지, `prd_cd` 후보가 `t_prd_products(del_yn='N')`에 실재하는지, `provenance.utterance_span`이 원문 범위와 대조되는지 검증. 실패 시 진행 금지.
+**★ FIX-2 추가 검증** — `provenance.numeric_spans.qty` 가 존재하는지(없으면 스키마 위반), 그 span 이 가리키는 원문 부분문자열을 `NumericIntentParser` 가 결정론 재파싱해 **500 을 재산출**하는지, LLM 산출값과 **일치**하는지 대조한다. 불일치 또는 재파싱 실패는 **fail-closed → 되묻기**. 이후 심볼릭 계층이 쓰는 값은 **재산출값**이다.
+
+**T2 · frontier + rollout** — 상품 후보 3개를 굴린다. 각각 부작용 0.
+```
+→ Outcome A: feasible=UNKNOWN(슬롯 미확정), reachability=PROVEN_REACHABLE(witness), price=None
+→ Outcome B: reachability=PROVEN_DEAD(mat_cd)   ← 500장 도메인에 유효 자재 0
+→ Outcome C: PROVEN_REACHABLE
+```
+B는 **여기서 사라진다.** 현행 구조라면 고객이 B를 끝까지 고른 뒤 주문 단계 422를 맞는다.
+
+**T3 · 되묻기 (RULE-14 ①)** — A·C가 남고 `soft_prefs`만으로 갈리지 않는다. 미확정 슬롯이 남았으므로 **기본값을 채워 확정하지 않는다.** `PhraseRenderer`가 질문 템플릿을 만들고(금액 없음) Explainer가 어투만 다듬고 RenderGuard를 통과한다: *"용지 느낌을 먼저 정할까요 — 매트/펄/엠보 중에서요."*
+
+**T4 · 6번째 후보 3개를 띄우는 순간 (RULE-03 시나리오 그대로)** — 5개 슬롯이 찼고 마지막 후가공만 남았다. `frontier()`가 도메인에서 후보 3개를 결정론 열거하고, `rollout()`이 3개를 **선택 전에** 굴린다.
+```
+후보 1 (무광코팅): feasible=PROVEN_OK, confidence=CONFIRMED, reach=PROVEN_REACHABLE
+                   price = { supply_amount: 44,300,          ← 공급가(부가세 별도) · G4 대조 대상
+                             vat_amount:     4,430,
+                             payable_total: 48,730 }          ← 청구액 · 예산 판정·고객 문구·G10 대조 대상
+                   components[3].zero_reason=TRUE_ZERO           ← 정당한 0원
+후보 2 (박)      : feasible=PROVEN_BLOCKED
+                   blockers=[{source:"RULE", id:"R_EXCL_...", kind:"FORBIDDEN",
+                              repairs:[{unset:["mat_cd"]},{or_set:[("mat_cd","MAT_xxx")]}]}]
+                   price = { supply_amount: None, vat_amount: None, payable_total: None }
+                                                                 ← 스키마상 3필드 전부 금액 부재
+후보 3 (에폭시)  : feasible=PROVEN_BLOCKED
+                   blockers=[{source:"TMPL_COMBO", kind:"UNREGISTERED", ...}]
+                   price=None
+                   → sim_escalation(esc_kind='TMPL_COMBO_UNREGISTERED', route_to='실무진')
+```
+- 후보 2·3은 **가격이 계산되지도, 표시되지도 않는다** (RULE-06).
+- 후보 2와 3의 `kind`가 다르다 — 하나는 금지, 하나는 데이터 미등록. 후자만 실무진 큐로 간다.
+- DB write 0건. 주문 상태 변경 0건.
+
+**T5 · 1개만 제시** — Scorer 사전식 정렬로 후보 1이 최상위.
+- **금액 문장은 `PhraseRenderer`가 만든다**(★FIX-5: 고객 대면 토큰은 **`payable_total` 만** 사용 + "(부가세 포함)" 명시): `"{opt_label}이면 {payable_total:,}원(부가세 포함)이고 예산 안입니다."` → *"무광코팅이면 48,730원(부가세 포함)이고 예산 안입니다."* LLM은 이 문장을 생성하지 않는다. 공급가를 함께 노출할 때는 *"공급가(부가세 별도) 44,300원"* 처럼 **구분 표기**한다.
+- Explainer는 비금액 부분만 쓴다: *"박은 지금 고르신 용지와 같이 쓸 수 없어요 — 용지를 바꾸면 가능합니다."* **Explainer 출력에 숫자 토큰이 포함되면 그 자체로 fail-closed**(§3 읽는 법 2).
+- RenderGuard가 (i) `48,730`이 Outcome의 **`price.payable_total`** 에서 서버 치환된 토큰인지, (ii) 언급된 blocker가 실재하는지 검증한 뒤에야 화면에 도달한다.
+
+**T6 · 확정 (RULE-14 ②)** — 고객이 후보 1을 고르면 루프는 selections 집합을 위젯에 넘긴다. 위젯이 `/price`로 **라이브 재계산**하고, 사람이 확인 버튼을 누른 뒤에야 `/handoff`가 서명한다. 루프는 어떤 경우에도 스스로 주문을 확정하지 않는다.
+
+**T7 · 관측** — `sim_rollout`에 T2·T4 예측 전량이 남고, `/handoff` 응답이 `sim_observation`에 O2로 남는다. **예측이 PROVEN_OK였는데 422가 나면 G6 위반 1건**으로 집계된다.
+
+---
+
+## 7. 단계별 도입 순서
+
+시간 추정을 쓰지 않는다. 각 조각은 **이전 조각의 게이트가 통과해야만** 시작한다.
+
+### S1 — "1상품 × 프론티어 스윕 × 부작용 0 × 전제 감시"
+
+만드는 것 6개:
+1. `simcore/_bindings.py` — import 모음 (심볼 12종)
+2. `simcore/joint.py` — `JointTransition` (a)~(g)
+3. `loop/frontier.py` + `loop/rollout.py` — 읽기전용 트랜잭션 + 무조건 롤백
+4. `gates/premise.py` — **G0 / G0.5a / G0.5b / G0.9** (이식 ①, FIX-3 분할)
+5. `gates/golden_rollout.py` — G1·G2·G4·G7·G8 측정
+6. `gates/sql_control.py` — **순수 SQL 대조군** (이식 ③)
+
+**S1에 넣지 않는 것**: Actor LLM · Explainer · PhraseRenderer · RenderGuard · Ledger 3테이블 · ReachabilityProbe. **월드모델이 정확한지 먼저 재는 것이 순서다.**
+
+#### ★ W-7 (R3 재판정 반영) — `loop.Scorer` · `Intent` / `IntentValidator` 의 S1 지위 명시 [HARD]
+
+**왜 이 문단이 필요한가.** 위 두 목록(만드는 것 6개 / 넣지 않는 것 6개)에 `loop.Scorer`(F6)와 `Intent` 스키마·`IntentValidator`(F7·F9)는 **어느 쪽에도 없다** — 명시 포함도 명시 제외도 아닌 **미언급 상태**였다. 그 미언급이 재심의 전제 오류를 낳았다(재심은 *"S1 범위에 `loop.Scorer` 가 포함된다"* 를 전제로 R-02 를 S1 유일 차단으로 판정했다, `gate-rehearing.md:394`). R3 재판정이 그 전제를 틀린 것으로 판정했으므로(`07_reverify/R3-adversarial-review.md` §4.1), 같은 오독이 재발하지 않도록 지위를 여기서 못 박는다.
+
+| 구성물 | S1 지위 | 근거 | 실제 배정 |
+|---|---|---|---|
+| **`loop.Scorer`** (F6) | **S1 산출물이 아니다** | "만드는 것 6개" 에 없고, 그 목록이 `spec.md` **U-010.1** · `plan.md` **M1.1** 과 축자 일치하며 **AC-TR-06 의 기계 판정 분모 6** 이다 — 미언급은 "S1 산출물 아님"으로 읽는 것이 문서 정합적이다 | S2 이후(채점이 필요한 시점) |
+| **`Intent` 스키마 / `IntentValidator`** (F7·F9) | **S1 산출물이 아니다** | 아래 §7 **S3** 가 이미 *"`Intent` 스키마 · `IntentValidator` … 여기서 처음으로 LLM 이 들어온다"* 로 배정했고, `plan.md` **M3-a·M3-b** 가 같은 배정을 반복한다 | **S3(M3)** |
+
+[HARD] **이 문단은 두 목록을 바꾸지 않는다.** "만드는 것 6개"(= 요구사항 `U-010.1`)와 "넣지 않는 것 6개"(= `X-010.2`, `AC-TR-06` 의 금지 심볼 **5종** 분모)는 **손대지 않는다** — 두 목록에 항목을 더하면 `AC-TR-06` 의 분모가 함께 움직여 **범위 확대**가 되고, 그것은 갈래 (B) 선례(§H.4 ①)가 기각한 방향이다. 여기서 하는 것은 **지위의 명시**이지 목록의 변경이 아니다.
+
+[HARD] **따라서 G9 가 S1 에서 실행하는 "루프 경로"는 `Scorer` 를 포함하지 않는다.** §3 루프 5단계 중 ③ `Scorer` 사전식 채점이 S1 에 없으므로, S1 의 G9 **(가) 루프 경로**는 **① `frontier` 후보 결정론 열거 → ② `rollout` 부작용 0 통과 → ⑤ 관측** 으로 실행하고, ③④(채점·추천 제시)는 **미실행으로 명시 기록**한다. 같은 이유로 G9 분모의 *"골든 의도 20건"* 은 S1 에서 **`Intent` 스키마 객체가 아니라 골든 `selections` 상태 20건**을 뜻한다 — `spec.md:656` 이 *"S1 은 고객 발화를 입력으로 받지 않는다 — 골든 Intent 를 직접 입력한다"* 로 못 박은 것의 구체화이며, S1 에 `Intent` 스키마·`IntentValidator` 가 없으므로 그 입력은 **스키마 검증을 거치지 않은 직접 상태 투입**이다. **이 사실을 "G9 통과"로 뭉개지 않는다** — S1 의 G9 는 축소된 경로에 대한 측정이며, 5단계 전체에 대한 측정은 S2 이후다.
+
+**파일럿 상품 선정 기준** (코드값을 단정하지 않고 기준만 선언 — 실행 시 라이브 SELECT로 확정):
+1. `t_prd_product_price_formulas` 바인딩 있음 (전이함수 정의역 안)
+2. `t_prd_product_constraints` 활성 규칙 ≥ 1 (라이브 커버리지 34/288 `D8:130`)
+3. `t_prd_product_plate_sizes` 연결 ≥ 2 (판형 자동도출 분기 생존)
+4. `t_siz_pansu` 룩업 히트와 미스가 **둘 다** 존재 (CONFIRMED/PROVISIONAL 실측 가능)
+5. 권위 가격표 260705에 대조 가능한 격자 셀 ≥ 20 (G4 분모). **[N4 단서]** 해당 시트가 **260705 재추출 완료본일 것** — §26 재추출 미완 3시트(엽서북떡메·제본·출력소재IMPORT, `hpti/HANDOFF.md:6-7,26`)는 **파일럿 분모에서 제외**한다
+6. **★ `use_dims`가 빈(판별차원 0) 구성요소를 최소 1개 보유** (이식 ③ — B의 파일럿 편향 자백을 반복하지 않기 위한 조건)
+
+조건 1~6을 만족하는 상품이 0건이면 그 사실 자체가 S1의 첫 산출물이며, **6을 완화하지 않고 4를 먼저 완화**한다 — 6이 P-05를 첫 파일럿에서 드러나게 하는 유일한 장치이기 때문이다. 6까지 완화해야 한다면 **2차 파일럿을 `use_dims` NULL 보유 상품으로 잡는 것을 의무로 기록**한다.
+
+**S1 종료 조건**: G0·**G0.5a**·**G0.5b**·G0.9·G1(+**G1.1**)·G2 통과 + G4·G7·G8 실측치 기록.
+
+### S2 — "설명·복원·원장"
+
+`TraceReconstructor`(why-this / why-not / anchor) · `provenance-map` 배선 · Ledger 3테이블 + `sim_escalation` · `ReachabilityProbe`. 게이트 G5·G6·**G10** 추가. **S1의 G4가 실패했으면 S2를 시작하지 않는다** — 틀린 월드모델의 설명을 정교하게 만드는 것은 손해다.
+
+**[FIX-7 · `provenance-map` 배선의 선행 조건]** F14 배선은 **§26 격자 CSV 에 `src_file`/`src_sheet`/`src_cell` 3컬럼이 추가된 뒤에만** 가능하다. 컬럼 추가는 §26 트랙에 **선행 요청으로 등록**하며 본 설계가 흡수하지 않는다(흡수 시 RULE-15 ③ 위반). 그 전까지 `anchor` 는 폴백 사다리 ②(`t_prc_component_prices/<comp_price_id>`)로 서빙하고, 사다리 ①은 컬럼 추가 후의 **가산분**이다.
+
+### S3 — "뉴로 계층 부착"
+
+`Intent` 스키마 · `IntentValidator` · `PhraseRenderer` · `RenderGuard` · Actor/Explainer LLM. 게이트 G3(pass^k 재현 결정론) 추가. **여기서 처음으로 LLM이 들어온다.** 이 순서는 R3의 처방과 일치한다 — *"그가 경계한 실패는 심볼릭 없이 LLM만 붙이는 것"*(`R3-leejoohwan-local.md:345`).
+
+### S4 — "자유도 확대"
+
+2차 파일럿(다른 상품군, `use_dims` NULL 보유 필수) → 동형 전파. 세트 상품은 이 단계 이후(구성원 수량 산출이 엔진 계약 밖이므로 별도 판단 필요). `assistant_tools` 이관은 후니 측 승인 사안으로 남긴다.
+
+이 순서는 R3 A-7의 원칙 — *"전부 정리한 뒤 시작은 틀렸고, 작은 세계를 명시화해서 시작이 맞다"*(`R3:319`) — 의 직접 적용이다.
+
+### 기계 판정 게이트 (RULE-05 · 4항 전부 명시 + 실패 시 후퇴)
+
+| ID | ① 측정 대상 | ② 도구 | ③ 임계 (허용오차) | ④ 분모 | **실패 시 무엇을 버리는가** (이식 ③) |
+|---|---|---|---|---|---|
+| **G0** | 바인딩 심볼 실재 | `pytest gates/test_bindings.py` — 전 심볼 `getattr` **+ `print_opt_cd` NULL 제외 건수 카운트**(FIX-1) | 실재 100%. 1건 미실재면 즉시 중단. **NULL 제외 건수는 값이 아니라 기록 여부로 판정**(조용한 누락 금지) | 심볼 12종 | 즉시 중단. webadmin 리팩터 대응 전까지 루프 실행 금지 |
+| **G0.5a** (FIX-3) | **`ref_dim` 파리티** | `gates/dim_parity.py` — `OPT_REF_DIM` 축 집합 × 표면 5벌 + **projection map 파일 해시 스탬프** | **5벌 전부 동일. 불일치 1건이면 빌드 FAIL** | **축 7종 × 표면 5벌 = 35쌍** (정의처 `sql/12_phase7_seed.sql:27,37-61`) | 빌드 FAIL. 갈린 표면을 §33/webadmin 트랙에 라우팅하고 루프 중단 |
+| **G0.5b** (FIX-3) | **가격차원 어휘 파리티** | `gates/dim_parity.py` — `DIM_META` / `pricing` 상수집합 / `t_prc_component_prices` 실컬럼 3벌 대조 | **3벌 전부 동일. 불일치 1건이면 판정 거부** | **축 12종 × 표면 3벌 = 36쌍** (`price_views.py:31`) | **판정 거부.** import 한 차원 어휘가 갈리면 단가행 매칭을 신뢰할 수 없으므로 롤아웃 산출을 폐기한다 |
+| **G0.9** | 원천 신선도 | `gates/digest.py` — 판정 입력 테이블 `(행수, max(upd_dt))` 해시 | 판정 시점 재계산 해시 == 스탬프. 불일치면 **판정 거부** | 판정 입력 테이블 전수 | 캐시 전량 무효화 후 재계산. 재계산이 G7을 못 지키면 캐시 계층 자체를 폐기 |
+| **G1** | 롤아웃 부작용 | `gates/sideeffect.sh` — 스윕 전후 라이브 46테이블 `count(*)` + `max(upd_dt)` 해시 비교 (**B 이식** — `pg_dump` 대신) | **완전 일치. 변경 행 0** | 라이브 `t_*` 46테이블 **− 명시 제외 2테이블**(아래) | 부작용 발견 시 설계 즉시 폐기 (부작용 0이 전제) |
+| **G1 분모 정정** (FIX-4) | — | — | — | **제외 ①** `t_wgt_handoff_logs` — G6 clone 리플레이가 INSERT/DELETE 유발(`widget_api.py:1677`·`:1733`) · **제외 ②** `t_wgt_widgets` — `/validate` 리플레이가 `last_used_dt`/`last_used_org` UPDATE 유발(`widget_api.py:135`)해 `max(upd_dt)` 해시를 흔든다 | **[HARD] 근거 없는 제외는 RULE-13 ② 우회다.** 두 제외는 반드시 아래 **G1.1** 과 한 쌍으로만 성립한다 |
+| **G1.1** (FIX-4 신설) | **제외 테이블의 대체 계측** | `gates/sideeffect_excluded.sh` — 제외 2테이블을 개별 계측 | ① 리플레이가 유발한 행 수 **== 예상 조합 수** · ② 그 외 증분 **0** · ③ 종료 시 undo 후 **원복**(handoff logs 0행 복귀, `t_wgt_widgets` 원 `last_used_*` 복원) | 제외 2테이블 | 대체 계측 미실행 = G1 제외 무효 → **G1 을 46테이블 전수로 되돌리고 리플레이 자체를 금지**한다 |
+| **G1′** | (보조) 전수 데이터 해시 | `pg_dump --data-only` 해시 | 완전 일치 | 라이브 t_* | 파일럿 **종료 시 1회만** 확인 (권한·시간·용량 부담으로 상시 측정에서 강등) |
+| **G2** | 제약×가격 결합 | 프론티어 전수 스윕 후 `jq 'select(.feasible!="PROVEN_OK" and (.price.supply_amount!=null or .price.vat_amount!=null or .price.payable_total!=null))'` (★FIX-5: 3필드 전부 검사) | 해당 건수 **0** | 파일럿 상품 스윕 Outcome 총수 | 1건이라도 나오면 `Outcome` 직렬화 강제 로직 결함 → 스키마 재설계 |
+| **G3** | 재현 결정론 (RULE-17) | `gates/repeat_k.py` — 골든 의도 20건 × k=8, **최종 상태**(선택 옵션 집합 + `final_price`) 비교 | 8/8 일치 = 100% (금액 허용오차 0) | 20 의도 × 8 = 160회 | 불일치 시 처방은 temperature가 아니라 **LLM 영향분(Scorer ④)의 결정론 테이블 하강**. 그래도 안 되면 뉴로 계층 폐기, 관리자 도구로 강등 |
+| **G4** | 전이함수 정확도 (P-09) | `gates/golden_sweep.py` — **(가)** 권위 격자 셀 ↔ 롤아웃 **`price.supply_amount`** 대조(★FIX-5: 권위 격자 = 공급가 격자) + **(나)** 골든 케이스 30건 × 라이브 재-SELECT 재계산 diff (**A 이식 — 이중 분모**). **(가) 입력에 (파일 해시 · `authority_version` · 추출 시점) 스탬프 대조를 의무화**하고 260705 가 아니면 **UNKNOWN 강등**(N4) | **불일치 0건.** 커버리지 ≥ 20셀 **AND** 골든 ≥ 30건 | 파일럿 권위 격자 셀 수(**260705 재추출 완료 시트 한정**) + 골든 30건 | 불일치 원인이 배선 미완(P-08)이면 우리 층 가치가 그 트랙에 종속됨을 기록하고 대기. 엔진 오차이면 **월드모델을 얹을 자격이 없다** → 전면 중단 |
+| **G5** | 신뢰도 플래그 정확성 | `t_siz_pansu` 존재 조회 vs `confidence` | 불일치 **0건** | 파일럿 (판형×사이즈) 쌍 수 | `confidence` 축 폐기 → 전건 실무진 라우팅으로 후퇴 |
+| **G6** (FIX-4 **반전 반영**) | 막다른 길 예측 | 스윕 조합을 **clone DB 환경에서만** `/validate`·`/handoff`(테스트 사이트키)로 리플레이. **라이브 대상 리플레이 경로는 폐기**(§0 'G6 실행 환경'). clone 생성·폐기 절차 + **clone↔라이브 동일성 검사**(테이블별 `count` + `max(upd_dt)` 대조)를 리플레이 전후로 실행 | 예측 PROVEN_OK인데 422 = **0건**, 예측 BLOCKED인데 통과 = **0건** | 스윕 조합 수 | 갈림 1건 = 재사용 목록(§5) 불완전 증거. 누락 검증층을 찾을 때까지 고객 경로 진입 금지 |
+| **G6 오라클 경로 폐기 기록** (FIX-4) | — | — | — | — | **[HARD] "라이브 `/validate` 단독 오라클"은 폐기됐다.** 게이트가 그 경로를 잠정 허용하며 건 선행 조건(U-5 `/validate` 부작용 실측)이 **부작용 있음으로 확정**됐기 때문이다 — 핸들러 본문이 아니라 공통 게이트 `_gate` 에서 발생한다: `api_validate`(`widget_api.py:1410`) → `:1414 _gate` → `:226 _touch_used` → **`:135` `.update(last_used_dt=..., last_used_org=...)` on `t_wgt_widgets`**(`:119 USE_TOUCH_SEC=3600` 스로틀이 있으나 `.filter().update()` 는 조건 불일치에도 UPDATE 문 자체를 발행), 그리고 → `:218 _rate_ok` → **`:195-196` `cache.get_or_set` + `cache.incr`**(스로틀 없음 · 매 요청). 미확인 통과 금지(RULE-13 (a) fail-open 금지)에 따라 **clone DB 단일 경로만 남긴다.** 출처: `coverage-supplement.md:261-299` |
+| **G7** | 롤아웃 비용 | 스윕 계측 로그 (`rollout_ms` p50/p95, 쿼리 수, `UNKNOWN` 판정률) | 후보 1건 p95 ≤ **300ms**, 스텝 배치(≤40후보) p95 ≤ **2s**, `UNKNOWN` ≤ **30%**. **[추정] 임계.** 값이 아니라 **기록 여부로도 판정** — 미측정이면 실패 (**B 이식**) | 스윕 롤아웃 호출 수 | **p95 > 2s면 고객 실시간 루프를 폐기하고 관리자·CS 도구로 강등한다. §6 종단 시나리오는 그 시점에 폐기된다.** 임계 미달의 처방은 "재설정"이 아니라 "무엇을 버리는가"다 |
+| **G8** | 구성요소 반응성 (P-05 탐지) | `gates/counterfactual_sweep.py` — 각 `option_item` on/off × `evaluate_price(only_comps=…)` 반사실 스윕. 실제로 `subtotal`/`matched_row`가 바뀐 구성요소 = 관측 (**B 이식·목적 전환**) | **[N1 단계 분리]** **S1** — 무반응 구성요소 전건이 `affect_observed=false` 로 플래그·에스컬레이션 **후보로 기록**(누락 0). 라우팅 적재는 S2 소관. / **S2** — `sim_escalation(AFFECT_UNDEFINED)` 큐 적재 및 `route_to` 도달 검증. **+ [FIX-8] 0원 구성요소의 `zero_reason` 4분류 정확성** — 3b(`UNMATCHED_NO_GAP`)가 1건이라도 나오면 언더차지 후보로 실적재, **0건이면 그 사실 자체를 기록** | 파일럿 상품의 `option_item` × 구성요소 전수 쌍 + **0원 구성요소 전수** | 스윕이 `use_dims` 빈 구성요소를 못 잡으면 이 지표는 P-05 탐지에 무력 → 탐지 주장 철회 |
+| **G9** | **루프의 순증분** (자기 반증) | `gates/sql_control.py` — 같은 시나리오를 **(가)** 루프 경로 **(나)** 순수 `/price` + `_sim_disallowed` 직접 호출 경로로 각각 실행해 결과·비용 대조 (**B 이식**) | 임계 없음. **미측정이면 실패.** (가)가 (나)보다 더 잘 답하는 항목을 수치로 기록 | 골든 의도 20건 | (가)=(나)이면 이 설계의 논지("루프를 얹으면 달라진다")가 **부분 반증**된다. 그 사실을 판정 기록에 남긴다 |
+| **G10** (FIX-5 신설) | **루프 표시가 vs `/handoff` 서명가** (과세 기준 갈림) | `gates/payable_parity.py` — 스윕 조합을 **clone 환경에서** 리플레이해 `outcome.price.payable_total` 과 `/handoff` 응답 `total` 을 대조 | **허용오차 0 · 불일치 0건** | 스윕 조합 수 | **실패 시 루프의 금액 문구·예산 판정을 고객 경로에서 철거하고 관리자 도구로 강등한다.** 고객이 보는 금액과 서명하는 금액이 갈리는 것은 표시 결함이 아니라 신뢰 결함이다 |
+
+**G4가 이 설계의 심장이다.** P-09를 해소하지 않은 채 시뮬레이터를 얹으면 우리는 **틀린 월드모델을 빠르게 굴리는 기계**를 만드는 것이다(Ha&Schmidhuber model exploitation, `R2:58`).
+**G9가 이 설계의 양심이다.** C 원안이 §8-(6)에서 *"성공해도 에이전트가 잘한다가 아니라 엔진이 이미 좋았다의 증거일 수 있다"*(design-C:465)고 자백한 것을 산문에서 측정으로 옮긴 것이다.
+
+---
+
+## 8. 루브릭 대응표 (RULE-ID별 충족 근거)
+
+| RULE | 등급 | 충족 | 근거 |
+|---|---|---|---|
+| **RULE-01** 판정권 심볼릭 독점 | BLOCKER | **충족** | §3 계층도에서 LLM 노드는 ACT·EXP 둘뿐이며 출력 화살표 도착지는 `IntentValidator`·`RenderGuard`(결정론 검증기). **금액 문장은 `PhraseRenderer`가 결정론 템플릿으로 만들고 LLM은 생성조차 하지 않는다**(A 이식 — 방어선을 한 단계 앞으로 당김). LLM 선호는 Scorer ④ 가중치로만 들어가 ①~③(가능성·신뢰도·도달성)을 뒤집을 수 없다(§4.6). **[N6 문서 정확성 교정]** *"금액 문장은 LLM 을 아예 통과하지 않는다"* 는 서술은 도면(`PICK→PR→EXP→RG`)·§6 T3 과 불일치했으므로, 도면 간선을 `PICK→PR→RG`(금액 포함) / `PICK→EXP→RG`(비금액)로 **분리**하고 RenderGuard 규약(*"Explainer 출력에 숫자 토큰이 포함되면 그 자체로 fail-closed"*)을 명문화했다. 규칙 위반은 아니었고(도착지 = RG), 잔여 위험은 가용성 한정(§11-11) |
+| **RULE-02** 인터페이스 타입화 | BLOCKER | **교정 후 충족** (개정 전 ① **위반 확정**) | **[개정 이력]** 게이트가 ① 위반을 확정했다(A7 — blanket 출처가 12축 중 5축만 실효, R-4 재실측 `price_views.py:2685-2693`). **FIX-1** 로 `selections` 값 도메인을 **열거축 5 / 열거축 +1(`print_opt_cd`) / 비열거축 6** 3분류로 재선언하고(§4.1), **FIX-2** 로 LLM 산출 수치에 `numeric_spans` + `NumericIntentParser` 결정론 재파싱을 걸어 ③ 검증 지점의 실효성을 닫았다. ② 미확정은 `UNKNOWN` 센티널 단일(누락·None은 검증 실패), ③ 검증 지점은 `IntentValidator` 1곳 fail-closed. **[개정 이력 2 · 재심]** 원 라운드 A7(`selections`) 교정 후 **재심에서 잔여 인스턴스가 확정**됐다 — `:306` blanket 문장이 `soft_prefs.axis`(열린 `str`)·`budget_krw`(`t_*` 축 없음) 두 필드에 실효적이지 않았고, 워크스루의 `axis:"mat_grade"` 가 12축 어디에도 없는 채 `Scorer ④` 에 도달했다(`gate-rehearing.md:94-104` · 판정 STILL_OPEN · 효과 AMEND · **S1 착수 전 필수**, `:379`·`:394`). **R-02** 로 교정했다 — (i) `PREF_AXES` 화이트리스트 신설(정의처 1곳, §4.1 ★R-02), (ii) `IntentValidator` 검증 1행 추가(미등록 axis fail-closed), (iii) §8-1 전수표 12번 행 편입(11→12지점), (iv) `:306` blanket 을 (가)`t_*` 축 / (나)별도 화이트리스트 / (다)채점 상한 스칼라 **3분류로 교체**, (v) 워크스루 `mat_grade` → **`mat_cd`** 교체, (vi) `budget_krw` 를 *"`t_*` 축 아님 · FIX-2 `numeric_spans` 재파싱으로 원문 결박 · 채점 상한 전용"* 으로 표기 정확화 |
+| **RULE-03** 커밋 전 시뮬레이션 루프 | BLOCKER | **충족 — 독립 검증됨 (보충 라운드)** | §3의 ①~⑤가 루프 정본 5단계이고 §6 T4가 루브릭 시나리오("5개 고른 뒤 6번째 후보 3개")를 그대로 추적. **[검증 출처 — 원 라운드가 아니라 보충 라운드]** 원 게이트 라운드에서 RULE-03 은 **인용 0회로 미검증**이었고(`gate-report.md:104`), `coverage-supplement.md` 가 루브릭 시나리오를 §6 T4 에 실제 적용해 **(a)(b)(c) 3항 전건 위반 없음**을 판정했다(`coverage-supplement.md:150-159`): (a) `frontier`→`rollout`→`JointTransition`→`Outcome`→`Scorer`→PICK→관측 사슬 끊김 0, 3후보의 가능여부·가격·결손축이 **선택 전** 산출(§6 T4), (b) 호출 대상 6심볼을 **라이브 원본에서 전건 실측**해 DB write·캐시·로그 0 — `pricing.py` 의 유일 원시 SQL 은 `:308` `SELECT fn_calc_pansu` 이고 그 함수는 `sql/32_fn_calc_pansu.sql:30` 에서 `STABLE`·DML 0, (c) 사후통보 5검사 전건 부정. 확정은 §6 T6 위젯+인간 게이트에서만 |
+| **RULE-04** 가격 단일권위·기존코드 무수정 | BLOCKER | **충족** | 확정 금액 경로는 §5.3대로 위젯 `/price`→`/handoff` 그대로. 새 계층은 `_workspace/huni-simcore/` 드롭인이며 `raw/webadmin/**` 수정 단계 0건(§5 전체가 호출/import). `models.py`·`admin.py` 접촉 0(§5.6). 단조 하한 비용 태그를 쓰지 않는다. **`only_comps` 부분 합산 금액을 고객 경로에 노출하지 않는다**(B 이식, §5.1) |
+| **RULE-05** 반증 가능한 종료 척도 | BLOCKER | **교정 후 충족** (개정 전 ④ **위반 확정**) | **[개정 이력]** 게이트가 ④ 위반을 확정했다(A1 — G0.5 의 분모 12축과 감시 대상 7축이 **다른 우주**여서 드리프트 0에서도 상시 FAIL). **FIX-3** 으로 **G0.5a**(7축×5벌=35쌍) / **G0.5b**(12축×3벌=36쌍)로 분할하고 projection map 을 문서화했다(§4.5). 이제 §7 게이트표 **G0~G10** 전건에 ①측정 대상 ②도구 ③임계(허용오차) ④분모 기재 + **⑤실패 시 무엇을 버리는가**(A 이식). G4가 전이함수 정확도를 이중 분모(권위 격자 ≥20셀 + 골든 30건)로 측정 |
+| **RULE-06** 제약×가격 결합 | MAJOR | **충족** | §4.2 `Outcome` 스키마에서 `feasible != PROVEN_OK` → `price` **3필드 전부가 구조상 None**(FIX-5). 차단 층은 `simcore.JointTransition`으로 특정. `price_gap`·`tmpl_combo_gap`은 §4.4 (c)(e)에서 가능성 오라클의 1급 소스로 승격(JSONLogic 행으로 복제하지 않는 이유 = 복제가 곧 RULE-12 위반). G2가 기계 검증 |
+| **RULE-07** 상태 그릇·교정 루프 | MAJOR | **부분 충족 (정직 기록)** | (a) 그릇 = §4.7 사이드카 4테이블(라이브 밖), (b) 대조 절차 = O1(권위 격자 + 골든 30)·O2(handoff)·O3(실무진). **약점**: 주문 실체 테이블 부재(P-01)는 라이브 소유라 해결하지 않으므로 관측은 O1 편중(§11-1). 흡수하면 RULE-15 ③ 위반이므로 **범위 밖**이며, 종료 척도(RULE-05)를 O1 기반으로 설계해 우회했다. C 원안 대비 개선분은 골든 30건 추가와 `sim_escalation` 실체화뿐이며 **구조적 약점은 그대로 남는다** |
+| **RULE-08** 조합폭발 대응의 작동성 | MAJOR | **충족** | 전수 열거·사전계산 적재 단계 0건. 캐시는 수요 기반·`source_digest` 무효화·비구속력이며, **G0.9가 그 규율을 기계 봉쇄로 승격**(A 이식). 채택 기법 = 1스텝 프론티어 롤아웃 + 재계획(MPC) + 예산 제한 도달성 프로브. 파일럿 실측 항목(스텝당 후보 수·지연 p50/p95·캐시 적중률·유효 후보 비율·UNKNOWN 비율·쿼리 수)과 임계를 G7에 명시하며 **미측정이면 실패**(B 이식) |
+| **RULE-09** 불확실성 가시화 | MAJOR | **충족** | ① 권위 룩업 vs 기하 폴백 = `price.confidence` + `confidence_reasons`(G5 검증). ② 정당한 0원 vs 단가행 부재 0원 = **`components[].zero_reason` 4분류, 1차축은 `matched_row`**(§4.3). **[개정 이력]** 개정 전 이분류는 무경고 경로(`matched_row is None ∧ data_gap==[] ∧ error is None`, R-7 `pricing.py:655-660`)를 `TRUE_ZERO` 로 **오분류**해 언더차지 1경로를 놓쳤고 게이트가 위반을 확정했다(A8). **FIX-8** 로 `TRUE_ZERO` / `MISSING_PRICE_ROW` / `UNSELECTED_DIM` / `UNMATCHED_NO_GAP` 4분류 + 판별용 읽기전용 SELECT 1건을 도입했다. 근거 좌표도 `pricing.py:626-630` → **`:655-660`**(병기 `:106-108`·`:599-607`)으로 교정. 앵커는 **폴백 사다리 3단**(FIX-7)이며 ③단에서만 `None` |
+| **RULE-10** why-not·복원 경로 | MAJOR | **교정 후 충족(명세)** (개정 전 (a) **위반 확정**) | **[개정 이력 · 보충2 + 재심]** 개정 전 이 행은 *"`blockers[].id` 가 `rule_cd` 보존 … 새 알고리즘 0"* 이라 적었으나 **거짓이었다.** 유일 생성원 `_sim_disallowed` 가 반환하는 것은 `dis[cand] = r["nm"]`(`price_views.py:2731`) = 규칙**명**이고, 상위 `_sim_active_rules` 의 `.values(...)`(`:2520`)에 `rule_cd` 가 없어 하류 복원이 불가하며, `rule_nm` 이 비면 `err_msg` → 문자열 `"제약"` 까지 폴백한다(`:2526`). 보충2 가 CS2-01 로 확정하고(`coverage-supplement-2.md:242-252`) 재심이 원본 재확인으로 **STILL_OPEN 을 유지**했다(`gate-rehearing.md:184-196` · 효과 AMEND · **S2 착수 전**). **R-10**(보충2-FIX-A)로 교정했다 — (i) **§4.4 (b′) 읽기전용 역인덱스 SELECT 1건** 신설(`t_prd_product_constraints` `prd_cd`·`del_yn='N'`·`use_yn='Y'` → `rule_cd ↔ rule_nm`, `raw/webadmin` 무수정으로 RULE-04 (c) 보존), (ii) **해소 실패·이름 충돌 시 `UNKNOWN_RULE_ID` + `sim_escalation(RULE_ID_UNRESOLVED [제안 명칭 · 미채번])` fail-closed**(조용한 폴백 금지 · §8-1 **13번** 행 편입, 12→13지점), (iii) 이 SELECT 신설을 **§9 주장 1 반증조건 접점에 FIX-1 과 동일 형식으로 기록**(판정 = 재배선 · 새 판단 규칙 0건, 단 "조립만으로 성립" 강도는 한 칸 더 약화), (iv) §4.4 (b) 문구와 이 행의 *"새 알고리즘 0"* 주장 정정. (b) `repairs[]` 복원 후보 반환과 (c) `kind: FORBIDDEN\|UNREGISTERED` 구별은 보충2 가 각각 **위반 미확정**·**위반 없음** 으로 판정했다(`coverage-supplement-2.md:73-74`). "관리자에게 문의"는 출력에 없고 `sim_escalation` 이 목적지를 갖는다. **[HARD] 이 "교정 후 충족"은 명세 수준의 자기평가이며 구현·게이트 재심의 통과가 아니다** — 배선 구현은 S2(plan.md M2.0-a~d) 소관이고, 재심의 차단 지점(S2 착수 전)은 유지된다 |
+| **RULE-11** 감사 추적 | MAJOR | **충족** | `components[]`가 (a) `matched_row_id`, (b) `anchor`(`xlsx:파일#시트!셀` 또는 `t_<table>/<CODE>`), (c) `tier{field,threshold,order_value}` + `rejected[].first_diff_dim` 셋을 모두 반환. 재구현이 아니라 diff로 얻는다. 앵커 원천은 §26 권위 격자(260705)라 KB의 260702 스큐를 피한다. **[FIX-7]** 개정 전 "미보유 셀은 `None` 명시"는 `provenance-map` 미배선 시 `anchor=None` 이 상시 발생하는 잠재 결손이었으므로 **폴백 사다리 3단**으로 교체했다(§4.2 성질 5) — ①xlsx 셀 → ②`t_prc_component_prices/<comp_price_id>`(**기본 폴백**) → ③`None` + `sim_escalation(ANCHOR_MISSING)`. **부기**: 루브릭 (b)는 `xlsx:파일#시트!셀` **또는** `t_<table>/<CODE>` 의 **선언지**이며, 본 설계의 기본 경로는 `t_<table>/<CODE>` 이고 xlsx 셀은 **S2 가산분**이다 |
+| **RULE-12** 단일 정의·편집표면 | MAJOR | **충족** | ① 도입 개념별 "정의가 사는 곳"이 정확히 1곳 — Intent=`simcore/intent.py`, Outcome=`simcore/outcome.py`, 문구=`simcore/phrases.py`, 원장=사이드카 DDL, provenance-map=사이드카. **차원·규칙·가격 정의를 하나도 새로 만들지 않고 import**(§5) → ref_dim 5벌이 6벌이 되지 않는다. ② 새 규칙 표현을 도입하지 않으므로 폼빌더 역파싱 판정은 "해당 없음(변경 0)". **③ 나아가 기존 정의가 갈리는 사건을 G0.5a·G0.5b 가 감지한다**(A 이식) — 악화 방지에 더해 센서를 붙였다. **[개정 이력]** 게이트가 ① 위반을 확정했다(A1 — 게이트 정의처가 두 곳으로 분열). **FIX-3** 으로 두 게이트를 분리하고 그 사이 **projection map** 을 단일 정의처로 두어(맵 파일 해시를 G0.5a 산출물에 스탬프) 정의 분열을 닫았다 |
+| **RULE-13** 실패 검출·되돌리기 | MAJOR | **교정 후 충족** (개정 전 ② **위반 확정**) | ① 신규 평가 지점 **13개 전건 fail-closed 전수표**(§8-1 하단 · R-02 로 12번째, **R-10 으로 13번째 행 편입**). fail-open 도입 0건. ② **[개정 이력]** 개정 전에는 *"라이브 write 0건이므로 (b)는 공허 충족"* 이라 썼으나 **G6 리플레이가 라이브 write 를 유발해 그 전제가 거짓**이었고(A2 · R-1~R-3), 백업·DRY-RUN·undo 도 부재했다. **FIX-4** 로 (i) G6 을 **clone DB 단일 경로**로 축소하고(라이브 `/validate` 오라클 경로는 U-5 실측 결과 **부작용 있음 확정**으로 폐기 — `widget_api.py:135`·`:195-196`), (ii) G1 분모에서 `t_wgt_handoff_logs`·`t_wgt_widgets` 를 **대체 계측 G1.1 과 한 쌍으로만** 제외하며(근거 없는 제외 금지), (iii) clone 생성·폐기 + clone↔라이브 동일성 검사를 §7 에 명시했다. 사이드카는 append-only + 스냅샷 백업 + 리플레이 undo. ③ 구속력 있는 값은 캐시에서 서빙하지 않고 확정 직전 라이브 재-SELECT(§5.3) + **G0.9 다이제스트 불일치 시 판정 거부**(N-13 준수를 규율에서 기계 규율로 승격) |
+| **RULE-14** 사람 개입 배치 | MAJOR | **교정 후 충족** (개정 전 ② **위반 확정**) | ① 미확정 슬롯이 남으면 되묻기가 **정상 경로**(§6 T3). 롤아웃으로 결과 불변이 증명된 슬롯의 자동 채움은 **기본값 off + 실무진 승인 필요**. ② **[개정 이력]** G6 리플레이가 **인간 승인 게이트 없는 라이브 write** 였다(A2 동반 확정). **FIX-4** 로 clone DB 단일 경로화 + G1.1 대체 계측으로 교정했다. 그 외 라이브 write 0건 / 주문 확정은 위젯+사람 확인 / 가격 예외는 실무진 큐. ③ **고불확실 라우팅 목적지가 데이터다** — `sim_escalation(esc_kind, route_to)` **7종** 매핑표(§4.7, **FIX-6** 으로 `PREMISE_FAIL` 편입 + `gate_id` 필수 키). 1순위 목적지는 새 큐가 아니라 **기존 실무진 동선**이며, 개정 전 `gap_owner` 원용은 **실재 착지점으로 교체**했다(N3 — `gap_owner` 는 운영 큐가 아니라 §12-7 이 미채택 선언한 KB 계층의 필드). 소비 표면·소비 주기·소유 트랙 3열을 추가했고 미정 행 0건, 잔여 운영 실체 리스크는 §11-10 에 등재 |
+| **RULE-17** 재현 결정론 | MAJOR | **충족 — 독립 검증됨 (보충 라운드)** | **[검증 출처 — 원 라운드가 아니라 보충 라운드]** 원 게이트 라운드에서 RULE-17 은 **인용 0회로 미검증**이었고(`gate-report.md:118`), `coverage-supplement.md` 가 (a)(b)(c) 3검사를 G3 명세에 적용해 **전건 위반 없음**을 판정했다(`coverage-supplement.md:232-240`) — (a) 20의도 × k=8 = 160회 · 허용오차 0 으로 측정 절차·분모·임계 구비, (b) 비교 대상이 루브릭 norm 문언(`evaluation-rubric.md:80`)과 **축자 일치**하는 최종 상태이며 대화 텍스트를 명시 부정, (c) 결정론 담지자 4개가 전부 **엔진·심볼릭 쪽**이고 `temperature` 는 부정 문맥 1회뿐. 명세 본문: G3 — 골든 의도 20건 × k=8, 비교 대상은 **최종 상태**(선택 옵션 집합 + `final_price`)이며 대화 텍스트가 아니다. 결정론 확보 수단은 모델 설정이 아니라 엔진 쪽 — 후보 도메인의 결정론 열거 + 사전선언 사전식 채점 + ⑥ 안정 tie-break(`pricing.py:288-291` 사상 승계). 불일치 처방은 temperature가 아니라 LLM 영향분의 결정론 테이블 하강 |
+| **RULE-15** 선행 자산 정합 | MINOR | **충족** | ① N-01~N-19 재제안 0건 — 임베딩/트리플스토어/OWL/Leiden/개방추출/범용GraphRAG/RDF·JDF 미도입, 온톨로지가 가격을 계산하지 않음(N-08), `raw/webadmin`·`pricing.py` 무수정(N-16), 학습형 latent 월드모델 미이식(N-17), LLM에 유효성 판정 미위임(N-18), 전수 열거·사전계산 미채택(N-19). ② N-20~N-30을 결함으로 서술하지 않음 — 도리어 N-21(안정 tie-break)·N-24(2모드)·N-25(엔진 도메인 무지)·N-26(읽기전용 경계)을 모방·승계 대상으로 인용. ③ P-08은 §0에서 범위 밖 선언. ④ 권위 버전·분모 단일 선언 = §0 |
+| **RULE-16** 결과축 확장의 절제 | MINOR | **충족** | 도입 결과축 **2개뿐** — (i) 가능성: 결정=표시/진행 여부, 원천=`t_prd_product_constraints` + 단가행 존재 + 조합템플릿; (ii) 신뢰도: 결정=자동확정 vs 실무진 큐, 원천=`t_siz_pansu` 행 존재 + `components[].data_gap`. 납기·수율·불량률·설비부하·재고 미도입(라이브 46테이블에 원천 0). **판면효율도 미도입** — L1이 `fn_best_plate`의 `usable_area`가 `ORDER BY`에만 쓰이고 버려짐을 실측 반증했고, 복구 경로가 각각 RULE-04(SQL 수정)·RULE-12(외부 재계산=두 번째 정의)에 걸린다 |
+| **RULE-18** 층 귀속 명시 | MINOR | **교정 후 충족** (재심 검사② **위반 확정**) | §4.0 표 — 전 구성물에 neuro/symbolic/knowledge/worldmodel/ops 귀속. **[개정 이력 · 재심]** 재심이 **표 밖 도입 구성물 2건**을 확정했다(`gate-rehearing.md:204-207` — `projection map` · `gates/payable_parity.py`, 효과 **NOTE**·차단 없음). **R-18** 로 **F21**(`projection map`/knowledge) · **F22**(`payable_parity`/ops) 2행을 추가하고, F18 의 범위 문언(`G0~G8`)과 `:740`(*"G0~G10 전건"*)의 내부 불일치를 정정했으며 `:281` 자기 선언을 갱신했다. 현재 **데이터행 F1~F22 · 미표기 0건** |
+
+**요약(개정 후)**: BLOCKER 5/5 충족 · MAJOR 8/9 충족 + 1 부분 충족(RULE-07, 사유·범위 근거 명시) · MINOR 4/4 충족.
+
+**[HARD] 이 요약은 자기평가이며 게이트 판정과 구분한다.** 게이트가 확정한 위반은 **RULE-02 ①**(A7) · **RULE-05 ④**(A1) · **RULE-09 ②**(A8) · **RULE-12 ①**(A1) · **RULE-13 ②**(A2) · **RULE-14 ②**(A2)이며, 위 표의 "교정 후 충족"은 **FIX-1~FIX-8 반영을 전제로 한 자기평가**다. **재심 권한은 게이트에 있다**(루브릭 §3.1 AMEND 효과 — "교정 후 해당 규칙만 재심"). 또한 **RULE-10 · RULE-18 은 원 라운드에서 `부분검증`** 상태로 남았고 보충 라운드도 이를 해소하지 않았다(`coverage-supplement.md:431`) — 이 두 규칙의 "충족"은 **독립 확인이 아니라 본 설계의 자기 주장**이다.
+
+### 8-1. fail-closed 전수표 (RULE-13 ①, A의 §7① 이식·확장)
+
+C 원안은 fail-closed를 3지점(IntentValidator·G0·RenderGuard)에만 명시했다(design-C:485). 최종안은 `JointTransition` (a)~(g)(g′)(b′) 호출을 포함해 **13지점 전수**로 확장한다(FIX-3 으로 G0.5 가 2행으로, FIX-6 으로 11번째 행이, R-02 로 12번째 행이, **R-10 으로 13번째 행이** 추가됐다).
+
+| # | 평가 지점 | 예외 발생 시 동작 |
+|---|---|---|
+| 1 | `IntentValidator.validate()` | 되묻기 반환. 통과 처리 금지 |
+| 2 | G0 바인딩 스모크 | 즉시 중단. 롤아웃 시작 금지 |
+| 3 | G0.5a `ref_dim` 파리티 / G0.5b 가격차원 어휘 파리티 | 각각 빌드 FAIL / 판정 거부. 롤아웃 시작 금지 |
+| 4 | G0.9 다이제스트 | 판정 거부 + 재계산. 낡은 값 서빙 금지 |
+| 5 | `qty_rule_error` (a) | `feasible=UNKNOWN` + blocker `QTY_RULE/EVAL_ERROR`. 통과 금지 |
+| 6 | `_sim_disallowed` (b) | `feasible=UNKNOWN` + blocker `RULE/EVAL_ERROR`. **가능으로 처리 금지** |
+| 7 | `tmpl_combo.resolve` (c) | `feasible=UNKNOWN` + blocker `TMPL_COMBO/EVAL_ERROR`. 통과 금지 |
+| 8 | `evaluate_price` (d) | **`price` 3필드(`supply_amount`·`vat_amount`·`payable_total`) 전부 `None`** + `price.confidence=NONE` + blocker `ENGINE_ERROR`. **0원 대체 절대 금지** (A의 명문화 이식 · FIX-5 로 3필드 전부에 적용) |
+| 9 | `_price_gap_errors` (e) | `feasible=UNKNOWN`. 차단 판정기가 죽으면 후보를 제시하지 않는다 |
+| 10 | `t_siz_pansu` 조회 (f) / `matched_row`·`data_gap` 판독 (g) / **판별 SELECT (g′)** | `confidence=NONE` + `zero_reason=None` + `sim_escalation` 라우팅. 후보 제시하지 않음 |
+| **11** (FIX-6) | **escalation 기록 자체의 실패** (`sim_escalation` INSERT 실패) | **차단 상태를 유지**한 채 `stderr`/로그로 이중화해 남긴다. **"기록 실패 시 통과"는 금지** — 기록 실패가 후보 제시의 사유가 될 수 없다 |
+| **12** (R-02) | **`soft_prefs.axis` 화이트리스트 검사** (`IntentValidator.validate()` 내부 1행 — `axis ∉ PREF_AXES`) | **되묻기 반환**(Intent 검증 실패와 동일 처리). 미등록 축을 **무시하고 진행 금지 · 가중치 0 으로 조용히 강등 금지** — 조용한 무시는 "선언 없는 어휘가 통과했다"를 감추므로 §4.1 UNKNOWN 정책과 동일 강도로 차단한다. **[W-8 병기 · 지점 수 불변]** 같은 1행에 **`soft_prefs[].w` 값 도메인 검사**(`0.0 ≤ w ≤ 1.0` · `NaN`/`inf` 배제)를 함께 둔다 — 위반 시 동작은 동일한 **되묻기 fail-closed** 이며, **새 평가 지점을 만들지 않는다**(전수표는 13지점 그대로) |
+| **13** (R-10) | **`nm → rule_cd` 역해소의 실패·이름 충돌** (§4.4 (b′) 읽기전용 역인덱스 SELECT — 다중 매치 또는 무매치) | **`blockers[].id = UNKNOWN_RULE_ID`** + `sim_escalation(RULE_ID_UNRESOLVED [제안 명칭 · 미채번])`(후보 `rule_cd` 집합을 `payload_json` 에 기록). **표시명(`rule_nm`·`err_msg`·문자열 `"제약"`)을 신원 자리에 조용히 싣는 것을 금지** — 조용한 오식별은 라우팅 키·감사 추적·규칙별 집계를 이름 충돌에 노출시키며(`rule_nm` 은 유일성 제약 없는 `CharField(200)` — `models.py:780`) CS2-01 을 그대로 재현한다. 차단 자체는 유지된다(신원을 못 구했다고 후보를 통과시키지 않는다) |
+
+8번의 명문화가 특히 중요하다: `evaluate_price` 예외 시 0원 대체를 금지하는 것은 `price` 3필드 `None` 규약(§4.2 성질 1)과 정합하며, P-06의 실패 형태가 우리 층에서 재발할 경로를 봉쇄한다.
+
+---
+
+## 9. 핵심 주장과 반증 조건
+
+각 주장은 **반증 가능한 형태**로 쓴다. 반증 조건이 없는 주장은 검증 불가능하므로 주장 자격이 없다.
+
+### 주장 1 — 이 도메인의 월드모델은 이미 존재하며, 빠진 것은 루프다
+
+행동→결과를 실행 없이 계산하는 결정론 함수 6종이 라이브 코드에 실재하고(§2.2 12심볼 실측표), 그것들을 조립하는 것만으로 "선택 전 결과 예측"이 성립한다. 새 전이함수를 만들 필요가 없다.
+
+> **[개정 기록 · FIX-1 부기]** 이 반증조건은 이미 한 번 접촉했다 — `print_opt_cd` 열거는 라이브 로직이 중첩 클로저라 import 불가하므로 **동등 SELECT 1개를 우리 층이 작성해야 한다**(§4.1). 게이트 판정은 **"재배선이며 신규 도메인 규칙 작성이 아니다"**(값 집합·라벨 규칙·`del_yn` 필터가 전부 기존 계약의 복제, 새 판단 규칙 0건)이지만, **"조립만으로 성립"이라 말한 강도는 약화된다.**
+>
+> **[개정 기록 · R-10 부기 2 — 2026-08-16 2차]** 이 반증조건은 **두 번째로 접촉했다** — `blockers[].id` 의 `rule_cd` 는 유일 생성원 `_sim_disallowed` 가 규칙명(`nm`)만 반환해 산출 불가이므로(`price_views.py:2520`·`:2526`·`:2731`), **역인덱스 해소용 읽기전용 SELECT 1개를 우리 층이 추가로 작성해야 한다**(§4.4 ★R-10). 판정은 FIX-1 과 같은 잣대로 **"재배선이며 신규 도메인 규칙 작성이 아니다"** 다 — 조회 대상은 이미 재사용 중인 `t_prd_product_constraints` 이고, 활성 조건 3항(`prd_cd`·`del_yn='N'`·`use_yn='Y'`)은 `_sim_active_rules`(`price_views.py:2513`) 계약의 복제이며, **새 판단 규칙이 0건**(값을 해석하지 않고 키를 대조할 뿐)이기 때문이다. 다만 **우리 층 SELECT 가 1건에서 2건이 됐으므로 "조립만으로 성립" 강도는 한 칸 더 약화된다.** 은폐하지 않고 여기 적는다.
+>
+> **반증 조건**: S1에서 `JointTransition` (a)~(g) 조립만으로 프론티어 스윕이 성립하지 않고 **새 도메인 규칙을 1줄이라도 작성해야 하면** 이 주장은 틀렸다. G0이 심볼 실재를 100% 확인했는데도 조립이 안 되면, "있는 것을 배선하면 된다"가 아니라 "없는 것을 만들어야 한다"가 참이다.
+>
+> **[HARD] 누적 계상**: 현재까지 우리 층이 작성해야 하는 SELECT 는 **2건**(FIX-1 `print_opt_cd` 열거 · R-10 `rule_cd` 역인덱스)이며 둘 다 **재배선 판정**이다. 이 수가 늘어날 때마다 이 부기에 누적 기록하고, **새 판단 규칙이 1건이라도 포함되는 순간** 주장 1 은 반증된 것으로 처리한다.
+
+### 주장 2 — 재사용은 정의 증식을 막지만, 그 대신 전제 감시 의무를 낳는다
+
+규칙을 한 줄도 쓰지 않고 import하면 ref_dim 5벌이 6벌이 되지 않는다(RULE-12). 그러나 5벌이 이미 갈려 있으면 어느 벌을 import했느냐로 판정이 갈리므로, **G0.5a·G0.5b 없는 import-only 설계는 안전하지 않다.** (FIX-3: 감시 우주가 둘이므로 게이트도 둘이어야 한다 — `ref_dim` 7축 축과 `DIM_META` 12축 축)
+
+> **반증 조건**: G0.5a·G0.5b 를 파일럿 기간 내내 돌렸는데 **불일치가 단 1건도 관측되지 않으면**, "이미 갈릴 수 있다"는 전제가 이 도메인에서 실증되지 않은 것이고 두 게이트는 과잉 방어다. 반대로 불일치가 1건이라도 나오면 이 주장은 강하게 지지된다. (`_price_gap_errors` docstring이 이미 *"한쪽만 고치면 미리보기·임베드가 갈린다"*고 적고 있다는 사실 — `widget_api.py:477` 인접 실측 — 이 이 주장의 사전 근거다.)
+
+### 주장 3 — 판별차원 0 과금(P-05)은 선언으로 찾을 수 없고 반사실 관측으로만 찾을 수 있다
+
+`use_dims`가 빈 구성요소는 정의상 어떤 선언 스키마·지식 그래프에도 "어느 옵션에 반응한다"는 사실이 적혀 있지 않다(`pricing.py:632-634` 실측 — 판별차원이 없으면 노트만 달고 항상 합산). `only_comps` on/off 스윕은 선언 없이 반응 여부를 직접 관측한다.
+
+> **반증 조건**: G8 스윕이 `use_dims` 빈 구성요소를 `affect_observed=false`로 잡아내지 못하면(예: `only_comps` 인자가 그 구성요소의 포함 여부를 실제로 바꾸지 못하는 구조라면) 이 주장은 틀렸고, P-05 탐지 주장을 철회한다. S1의 파일럿 선정 6번째 조건이 이 반증을 **첫 조각에서** 가능하게 만든다.
+
+### 주장 4 — 확정 금액 권위를 위젯에 남기면 루프가 틀려도 고객이 서명하는 금액은 틀리지 않는다
+
+루프의 산출물은 selections 집합뿐이고, 위젯이 `/price`로 라이브 재계산한 뒤 사람이 확인해야 `/handoff`가 서명한다(§5.3). 루프는 구조적으로 확정 권위를 가질 수 없다.
+
+> **반증 조건**: G6 리플레이에서 **예측 PROVEN_OK인데 `/handoff` 422** 또는 **예측 BLOCKED인데 통과**가 1건이라도 나오면, 루프와 구속 경로의 판정이 갈린다는 뜻이다. 갈림 자체가 고객 오안내를 만들므로 "루프가 틀려도 안전하다"는 주장은 **부분 반증**된다(금액은 안전하나 안내는 안전하지 않다).
+
+### 주장 5 — 이 설계의 첫 반증은 정확도가 아니라 비용에서 온다
+
+`_component_rows_bulk`가 `comp_cd` 전 행을 메모리로 끌어와 파이썬에서 필터한다(`pricing.py:284-295` 실측 — `filter(comp_cd__in=...).values(...)` 전량 로드 후 그룹핑). 후보 40개 스윕은 그 비용을 40배 한다.
+
+> **반증 조건**: G7 실측에서 스텝 배치 p95가 **2s 이하로 나오면** 이 주장은 틀렸고, 첫 반증 지점은 비용이 아니라 다른 축(G4 정확도 또는 G6 갈림)이다. p95 > 2s면 주장은 지지되고, 그 즉시 §6 종단 시나리오를 폐기하고 관리자·CS 도구로 강등한다.
+
+### 주장 6 — 전이함수의 오차를 모르는 채 그 위에 플래너를 얹으면 오차를 증폭할 뿐이다
+
+P-09("계산이 된다 ≠ 맞다", `D7:155`)가 미해소인 상태에서 롤아웃 계층을 얹으면 틀린 값을 빠르게 재생산한다.
+
+> **반증 조건**: G4에서 권위 격자 ≥20셀 + 골든 30건 대조가 **전건 오차 0원**으로 통과하면 이 우려는 이 파일럿 상품에 한해 기각된다. 불일치가 나오는데도 S2~S3을 진행한다면 이 주장을 스스로 배반하는 것이다. (그래서 §7이 "S1의 G4가 실패하면 S2를 시작하지 않는다"를 명시적 게이트로 걸었다.)
+
+### 주장 7 — 이 계층의 순증분은 측정되어야 하며, 측정 없이 주장하면 과잉 프레이밍이다
+
+루프가 하는 일의 상당 부분은 기존 `/price` + `_sim_disallowed` 직접 호출로도 가능할 수 있다. 그렇다면 "월드모델 루프"는 이름값이고 실체는 "기존 호출의 오케스트레이터"다.
+
+> **반증 조건**: G9 대조군에서 **(가) 루프 경로와 (나) 순수 SQL 경로의 결과가 동일하고 비용만 (가)가 크면** 이 설계의 논지는 부분 반증된다. (가)가 (나)보다 잘하는 항목(막다른 길 사전 차단·복원 후보 반환·신뢰도 플래그)이 수치로 나오면 지지된다. **어느 쪽이든 그 수치를 판정 기록에 남긴다.**
+
+### 주장 8 — 뉴로 계층은 마지막에 붙여야 하며, 먼저 붙이면 실패 원인을 분리할 수 없다
+
+S1~S2는 LLM 없이 진행하고 S3에서 처음 부착한다. 결정론 층의 정확도가 먼저 확정되어야 LLM 기여분/해악분을 분리 측정할 수 있다.
+
+> **반증 조건**: S1~S2를 완주했는데 **결정론 층만으로는 고객 발화를 Intent로 옮길 수 없어 파일럿 자체가 성립하지 않으면**, 순서가 틀렸고 뉴로 계층이 더 앞에 와야 한다. (현재 판단으로는 S1~S2가 고객 발화를 입력으로 받지 않고 골든 Intent를 직접 입력하므로 성립한다 — 이것이 이 주장의 근거이자 검증 방법이다.)
+
+---
+
+## 10. 이주환 대표 리서치(R3/R4) 반영 현황
+
+### 10.0 [HARD] 전제의 정확한 표기 — 과장하지 않는다
+
+R4는 "이주환 = 뉴로심볼릭 월드모델" **전제 자체는 실재함을 확인**했다(`R4-leejoohwan-web.md:7` — 『AI 에이전트 실행 세계 1: 원리편 — 뉴로심볼릭 월드 모델의 이론과 적용』 저자, 출판사·서점·언론 3경로 동일 확인). **그러나 "뉴로심볼릭 월드모델 창업자"는 틀린 압축이다**(`R4:8,41`):
+
+- "창업자"는 **Swit Technologies Inc.의 회사 창업자·CEO**라는 뜻이다.
+- 그가 **창시했다고 표기되는 것**은 뉴로심볼릭·월드모델 그 자체가 아니라 **ESTC(Entity·State·Transition·Constraint) 프레임워크와 월드 모델 캔버스**다.
+- 뉴로심볼릭·월드모델은 그가 **차용·재해석한 학계 계보**다 — 1권 3.1장 제목 자체가 "월드 모델이라는 단어의 출처"인 것이 그 증거(`R4:36,39`).
+
+R4가 남긴 한계도 그대로 옮긴다: **원문 1,252쪽 미대조**(목차·책소개·기사 2차 자료만으로 판정), ESTC의 학술적 신규성 미판정, "88%/46%" 수치의 1차 출처 미확인(`R4:162-167`, `R3:368`). 본 설계는 이 수치를 인용하지 않는다(R3 §C의 "대외 문서에 인용하지 말 것" 준수, `R3:360`).
+
+### 10.1 실제로 반영된 원칙
+
+| 원칙 (원문 근거) | 본 설계의 어디에 |
+|---|---|
+| **뉴로심볼릭 분업** — *"신경망이 후보를 생성하고, 심볼릭 시스템이 실행 가능한 결과를 검증하고 결정을 커밋한다"* (`R4:50`; `R3:315` A-3) | §3 계층도 전체. Actor LLM = 후보 생성기, `evaluate_price`/제약엔진 = 집행기. LLM 출력 화살표 도착지가 100% 결정론 검증기 |
+| **[HARD 함의] LLM이 가격을 계산하게 두면 안 된다** (`R4:137`) | RULE-01 대응 + `PhraseRenderer`(금액 문장을 LLM이 **생성조차 하지 않게** 함) |
+| **실행의 환각 ≠ 언어의 환각 · 비가역성** (`R3:314` A-2) | 인쇄는 비가역 산업이므로 판정 미통과분은 "후보"로만 존재. §4.2 성질 1(위반 조합의 가격이 존재할 자료구조 자체를 제거) |
+| **에이전틱 트윈 — 안전하게 수백만 번 실패하라** (`R3:323` A-11) | 이 설계의 이름 그대로. 부작용 0 롤아웃 = 견적 시뮬레이터. 결정론 배치 스윕(G8·G4)은 토큰 0 |
+| **조합폭발: 탐색은 기계, 판정은 규칙 / 무효조합을 규칙으로 잘라라** (`R3:316` A-4) | 전수 열거·사전계산 적재 0건(N-19). `frontier` 열거 + `_sim_disallowed`·`_price_gap_errors`·`tmpl_combo` 3소스 union으로 공간을 접는다 |
+| **필수 파라미터는 고정, 변수는 추론시켜라** (`R3:318` A-6, F3:86) | `Intent` 스키마의 `UNKNOWN` 센티널 + 되묻기 정상 경로(RULE-14 ①). 미확정 슬롯 자동 채움 금지 |
+| **컨피던스 점수 + 임계 이상만 자동, 미만은 실무진 라우팅** (`R3:322` A-10) | `price.confidence` + `sim_escalation` 6종 라우팅. 그리고 R3 §C의 경고 준수 — *"인쇄는 비가역이고 금액이 즉시 확정된다. 초기엔 자동 확정 임계를 사실상 100%로"*(`R3:358`) → **루프는 자동 확정 경로가 아예 없다** |
+| **예측-실제 갭 트래킹 = 캘리브레이션** (`R3:321` A-9) | 사이드카 원장 3테이블 + O1/O2/O3 대조 채널(§4.7) |
+| **루프 3요소: 중단조건 / 능동개입 / self-refine** (`R3:324` A-12, F4:71) | 중단조건 = `feasible=PROVEN_OK` + 전 슬롯 확정 시 루프 종료(무한 되묻기 금지). 능동개입 = 모순 조합 선택 시 blocker + repairs 제시. **self-refine은 미채택** — §10.2 참조 |
+| **"전부 정리한 뒤 시작"은 틀렸고 "작은 세계부터 명시화"가 맞다** (`R3:319` A-7, F3:71 vs F2:35/F2:47) | §7 S1~S4 순서. 1상품 파일럿 → 동형 전파. 288상품 정합을 기다리지 않는다 |
+| **버전 드리프트 = "실행 탈주"의 직접 원인** (`R3:348-351`, F2:32) | §0 권위 버전 단일 선언 + **G0.9 원천 다이제스트 게이트** — 낡은 세계로 판정하는 것을 기계가 거부한다 |
+| **감사 추적이 4대 조건 중 최대 갭** (`R4:139-148`) | RULE-11 대응 — `matched_row_id` + `anchor` + `tier`/`rejected` 3항 동시 반환. 앵커 원천은 §26 권위 격자 |
+| **도메인 오너가 최종 승인권** (`R3:325` A-13) | 확정은 위젯+사람 확인(§6 T6). `sim_escalation`의 목적지는 전부 실무진 |
+| **IT 주도 실패 / "작은 점 자동화"에 그치지 말 것** (`R3:115` F1:23) | 이 설계가 스스로 G9(순증분 측정)를 건 이유. "루프 엔지니어링만 하고 도메인 모델링을 못했다"는 그의 경고를 우리에게 적용하면, 루프의 순증분을 측정하지 않는 것이 정확히 그 함정이다 |
+
+### 10.2 반영하지 않은 것과 그 이유
+
+| 원칙 | 미반영 사유 |
+|---|---|
+| **ESTC를 스키마로 신설** (E/S/T/C 4테이블) | R3 A-1이 지적한 대로 **E와 C의 그릇은 이미 있다**(6축 기초데이터 = E, `t_prd_product_constraints` = C). 없는 것은 S/T의 그릇인데, S(견적 상태)를 라이브에 신설하면 주문 트랙 침범(RULE-15 ③)이고, T(전이)를 선언 테이블로 만들면 A안의 확정 MAJOR(편집 표면 부재)를 그대로 반복한다. 최종안은 **T를 선언하지 않고 `JointTransition` 함수로 구현**하고, S는 사이드카 원장에 둔다. ESTC의 개념 축은 채택하되 **테이블 4벌 신설은 채택하지 않는다** |
+| **뉴럴 월드 모델(learned/시뮬레이션 기반)** | R3 §C가 직접 배제 — *"그의 SCM/프로모션 사례는 수요·경쟁이 변수인 열린 세계지만 우리 인쇄 견적은 자재·공정·판형의 결정론 물리 제약이 지배한다"*(`R3:357`). 기각목록 N-17과도 일치 |
+| **루프 3요소 중 self-refine / reflection** (`R3:137` F4:71) | 학습형 자기개선은 **주문 이력 사전분포가 있어야 성립**하는데 주문 실체 테이블이 없다(P-01, 라이브 소유). 지금 붙이면 편향된 모수 위에서 학습하게 된다. `sim_rollout` 원장에 재료를 **모으기만 하고 쓰지 않는다** — 이것이 §11-1의 미해결 위험이다 |
+| **능동 개입(우리가 시키지 않을 때 알아서 일하는 에이전트)** (`R3:137`) | 라이브 write 0 원칙과 "쓰기는 승인" 규율(RULE-14) 하에서는 능동 실행 권한을 줄 수 없다. 능동성은 `sim_escalation` 큐에 항목을 쌓는 수준으로 축소 |
+| **"AX는 C레벨 어젠다" 거버넌스 프레이밍** | R3 §C — *"우리는 조직 규모상 도메인 오너=실무진=승인권자가 사실상 동일. 그의 거버넌스 계층 논의는 과잉"*(`R3:359`) |
+| **88% / 46% 수치** | 1차 출처 미확인(`R3:368`, `R4:165`). 인용하지 않는다 |
+| **루프 엔지니어링 "7단계 런타임"** | R3가 *"이것이 우리 견적 루프 설계에 가장 직접 쓰일 재료일 가능성이 높은데 로컬 자료로는 접근 불가"*(`R3:367`)라고 기록. **원문 미확보이므로 이 설계는 그것을 반영했다고 주장하지 않는다.** 본 설계의 5단 루프는 R2 §6.2(`R2:185-201`)에서 왔고, 그것이 그의 7단계와 어떻게 대응하는지는 [추정]조차 하지 않는다 |
+
+---
+
+## 11. 감수하는 위험 (해결 못 함)
+
+정직하게, 해결하지 못하는 것을 해결한 것처럼 쓰지 않는다.
+
+### 11-1. 관측 채널이 구조적으로 얇다 — 월드모델의 절반이 약하다
+
+예측-관측 루프의 관측 쪽은 주문 실체 테이블이 있어야 제대로 선다. 그 그릇은 라이브 소유이고 우리는 라이브에 쓰지 않는다(P-01). 결과적으로 관측은 권위 엑셀(O1)에 편중되며, `t_wgt_handoff_logs`는 현재 **0행**이다(`D8-live-schema.md:66-68`). **"고객이 실제로 무엇을 골랐고 그 주문이 어떻게 됐는가"가 원리적으로 들어오지 않는다.** 골든 30건 이식은 O1을 두껍게 할 뿐 O2를 만들지 못한다. RULE-07을 "부분 충족"으로 남긴 이유이며, 시뮬레이터 관점의 가장 큰 자기모순이다.
+
+### 11-2. 시뮬레이터는 의미론 공백을 고치지 못한다 — 탐지는 해결이 아니다
+
+P-15(온톨로지 의미론 비형식화)는 본 설계가 손대지 않는 축이다. 엔진이 "이 구성요소는 자재비인데 자재 축이 없다"를 모르는 한, 판별차원 0 상시 과금(P-05, 실측 동판비 5,000~64,000원)은 롤아웃해도 **일관되게 과금된 결과**가 나올 뿐이다 — 시뮬레이터는 틀린 값을 충실히 재현한다. G8은 그것을 **보이게** 만들 뿐이며, 충전은 §7/§18 소관이다(흡수하면 RULE-15 ③ 위반). **저청구가 사라지는 것이 아니라 보이게 될 뿐이라는 사실을 이 문서는 감추지 않는다.**
+
+### 11-3. G0.5a·G0.5b 는 센서이지 통합이 아니다 — P-16은 남는다
+
+차원 정의 병렬(`ref_dim` 5표면 · `DIM_META` 3표면)은 이 설계가 해결하지 않는다. 두 게이트는 **갈리는 순간을 알려줄 뿐** 정의를 하나로 만들지 않으며, 갈렸을 때 우리가 할 수 있는 일은 "루프를 멈추고 §33/webadmin 트랙에 라우팅"뿐이다. 통합은 webadmin 소유다.
+
+### 11-4. 판정 주체가 하나 늘어난다 — P-21은 남고 우리는 네 번째가 된다
+
+현재 캐스케이드는 클라이언트(렌더러)·서버(`_eval_violations`) 2벌이고 관리자 시뮬레이터(`_sim_disallowed`)까지 3벌로 볼 수 있다. 우리 루프는 규칙을 새로 쓰지 않으므로 규칙 정의는 늘지 않지만, **"고객에게 무엇을 보여줄지 판정하는 주체"는 하나 늘어난다.** 루프 화면과 위젯 화면이 갈릴 가능성이 남고, G6은 그것을 **측정**할 뿐 봉합하지 못한다. 봉합은 위젯 트랙과의 조율 없이는 불가능하다.
+
+### 11-5. private 심볼 의존은 계약이 아니라 관행에 기댄다
+
+`_sim_disallowed`·`_price_gap_errors`·`_sim_dim_candidates`는 밑줄 접두다. webadmin 트랙이 리팩터하면 우리 층이 깨진다. G0이 조용한 실패를 막지만 **깨진 뒤 고치는 비용은 우리가 낸다.** "무수정 재사용"의 대가다.
+
+### 11-6. 캐시가 사전계산으로 미끄러질 유혹은 줄었으나 사라지지 않았다
+
+G0.9(다이제스트 판정 거부)가 규율을 기계 봉쇄로 한 단계 승격시켰지만, 다이제스트는 **캐시가 낡았는지**를 막을 뿐 **누군가 인기 조합을 미리 굴려 적재하는 것**(N-19)을 막지 못한다. G7이 안 나올 때 가장 쉬운 처방이 그것이며, 현재 방어는 여전히 규율이다.
+
+### 11-7. G7 임계는 [추정]이고, 이 설계는 비용에서 먼저 깨질 것이다
+
+300ms / 2s / 30%는 후니 데이터로 측정된 값이 아니라 "고객 대화 응답 안에서 스텝당 1회 굴려야 한다"는 요구에서 온 [추정]이다. 첫 실측 후 재설정 대상이며, 재설정의 방향은 "임계를 낮춘다"가 아니라 **"무엇을 버리는가"**여야 한다(§7 게이트표 마지막 열).
+
+### 11-8. LLM 기여분이 작고, 성공해도 그것이 엔진의 공일 수 있다
+
+설계상 LLM은 `soft_prefs` 가중치와 비금액 설명만 만든다. **이 설계가 성공해도 그것은 "에이전트가 잘한다"의 증거가 아니라 "엔진이 이미 좋았다"의 증거일 수 있다.** G9이 그 가능성을 수치로 정산하도록 만들어 두었으나, 정산 결과가 후자로 나오는 것을 이 설계는 감수한다.
+
+### 11-9. 세트 상품과 비서 연결은 범위 밖 (선행 항목)
+
+세트는 구성원 수량 산출이 엔진 계약 밖(뷰 레이어)에 있어 조립층에서 다루면 규칙 2벌이 된다 — S4 이후. P-26(비서 연결)은 `assistant_tools.py` 수정이 RULE-04 위반이라 이관 명세(§5.5)로만 남는다.
+
+---
+
+## 11-A. 게이트가 확정한 감수 위험 (N1~N6 + 신규) [개정 반영]
+
+> 아래는 `gate-report.md` §4 가 **NOTE**(위반은 아니나 기록할 위험)로 확정한 항목이다. 등재 자체가 CONDITIONAL_GO 조건 ⑦다.
+
+### 11-10. 에스컬레이션 큐의 소비 표면이 일부 미실체다 (N3)
+
+`route_to` 매핑표(§4.7)는 미정 행 0건이지만, 착지점 중 일부는 **큐가 아니라 트랙·화면**이다. `gap_owner` 는 운영 큐가 아니라 §12-7 이 미채택 선언한 KB 계층의 **소유자 문자열 필드**였고(운영 큐 구현체 0건), 이를 실재 착지점으로 교체했으나 "쌓인 항목을 누가 언제 비우는가"의 운영 실체는 완전하지 않다. **신규 운영 표면 1개의 순증분이 될 수 있다** — 이 설계의 "운영부담 0" 서술은 그만큼 정직하게 상계된다.
+
+### 11-11. RenderGuard 의 잔여 위험은 금전이 아니라 가용성이다 (N6)
+
+`PICK→EXP→RG` 간선상 Explainer 산출물이 RenderGuard 를 통과한다. 금액 토큰이 섞이면 fail-closed 로 차단되므로 **금전 손해는 발생하지 않지만**, **정당한 후보가 오차단될 수 있다**(가용성 위험). 이 갈림은 G2·G6·G10 어느 임계에도 잡히지 않으며, 파일럿에서 오차단 건수를 별도 기록한다.
+
+### 11-12. `as_of` 세션 핀은 달력 경계에서 위젯 확정가와 갈린다 (N5)
+
+`as_of` 세션 핀(§5.1)은 **의도된 트레이드오프**다 — 후보 비교의 결정론을 보전하기 위해 달력 정합을 포기한다. 둘은 동시 만족 불가다. 확정 금액은 항상 `/price` 라이브 재계산이므로 **오청구는 발생하지 않는다**(§5.3). 그러나 **이 갈림은 G0.9(DB 변경 축)·G6(feasible 축)·G4(동일 `as_of` 재계산) 어느 분모에도 포함되지 않는다.** 저비용 완화로 §6 T-1 에 `as_of != date.today()` 판정 1줄을 두었다(경계당 1회 재핀 + 진행 중 후보 금액 무효화).
+
+### 11-13. §26 권위 격자 3시트 재추출 미완 — G4 오라클 stale 가능성 (N4)
+
+`hpti/HANDOFF.md:6-7,26` 기준 엽서북떡메·제본·출력소재IMPORT 3시트가 260705 재추출 미완이다. 파일럿이 이 시트에 걸리면 **G4 오라클이 stale** 하다. 완화: 파일럿 선정 기준 ⑤ 단서(미완 3시트 분모 제외) + G4 (가) 입력의 (파일 해시·`authority_version`·추출 시점) 스탬프 대조 의무화 + 260705 아니면 **UNKNOWN 강등** + O1 한계란을 '미재추출 시트 유래 셀'까지 확장(§4.7).
+
+### 11-14. G8 임계는 S1 에서 완전 충족될 수 없다 (N1)
+
+G8 ③임계가 요구하는 `sim_escalation` 라우팅의 저장소는 **S2 산출물**이므로 S1 에서 만족 불가다. 규칙 위반은 아니고(그릇·절차·목적지가 §4.7 에 모두 명시) 단계 배치의 내부 불일치였다. §7 G8 임계를 **S1(플래그·후보 기록) / S2(큐 적재·`route_to` 도달 검증)** 로 쪼개 해소했다.
+
+### 11-15. `/price` 가 `ok:false` 에서도 `total` 을 호스트에 노출한다 (N2)
+
+`/price` 응답이 `ok:false` 에서도 `total` 을 남겨 `huni:state`/`getStatus()` 로 호스트에 노출된다. **범위 정정**: 게이트 재실측 결과 `supply/vat/total_with_vat` 는 `if ok:` 블록 안에서만 설정되므로(`widget_api.py:1216-1220`) 노출되는 것은 **`total` 1필드뿐**이다(4필드가 아니다). 결함 소재가 본 설계의 신설물이 아니라 **기존 위젯 트랙 자산**(§12-12)이고, 내장 렌더러는 `widget_renderer.js:3378-3382` 에서 "— 원"으로 숨기므로 후니 자체 화면은 무영향이다. **교정 소유권은 위젯 트랙**이며 라우팅 대상으로만 기록한다.
+→ 이 노출 경로는 §2.1 **P-03 "해결(우리 층 안에서)"** 의 **한정의 의미**다 — 우리 층의 `Outcome` 스키마에서는 위반 조합의 가격이 존재할 수 없지만, 위젯 트랙 응답에는 남아 있다.
+
+### 11-16. **rate-limit 캐시는 G1 이 구조적으로 관측하지 못하는 부작용 축이다** (신규 · U-5 실측 유래)
+
+`/validate` 리플레이가 건드리는 것은 DB 만이 아니다. `_rate_ok`(`widget_api.py:218`)의 카운터(`:195-196` `cache.get_or_set` + `cache.incr`)는 **스로틀 없이 매 요청** 증가하며, 이 상태는 **라이브 DB 밖**(LocMem, `:140` `RATE_LIMIT_PER_MIN = 240` 주석 기준)에 있다. 따라서 **G1 의 라이브 46테이블 분모가 원리적으로 이 축을 관측하지 못한다.** G1.1 대체 계측도 테이블 단위이므로 캐시 축을 덮지 못한다.
+- 완화가 아니라 **경계 선언**이다: G6 를 clone 환경 단일 경로로 축소한 것이 이 축에 대한 실질 방어이며, clone 환경의 캐시 오염은 clone 폐기와 함께 사라진다.
+- **[미확인]** 캐시 백엔드 실체(LocMem vs Redis)는 미확인이다(`coverage-supplement.md:347`). Redis 라면 프로세스 로컬이 아니라 **공유 외부 상태**이므로 부작용의 성격이 달라진다 — 단, "부작용 있음" 판정 자체는 불변이다.
+
+### 11-17. 미확정 5건 (U-1~U-5) — 어느 쪽도 사실로 승격하지 않는다
+
+| # | 항목 | 상태 |
+|---|---|---|
+| U-1 | A5(과세 기준 갈림)의 **실제 오차 규모** | **미측정.** 라이브 DB 미조회 — 코드 구조상 가능한 경로이지 실측된 결함이 아니다. 첫 실측 = **G10** |
+| U-2 | `only_comps` 의 **정확한 의미론** | 미확인(§13-4). 첫 실측 = **G8** |
+| U-3 | G7 지연 임계 300ms/2s 의 **타당성** | `[추정]` 배지 유지. 어느 검증자도 반증하지 않았고 실측도 없다(§11-7) |
+| U-4 | `gates/*.py` · `simcore/*` 의 **구현 정합** | 미래 산출물. **모든 게이트 판정은 문서 문언 대조이지 구현 검증이 아니다** |
+| U-5 | `/validate` 의 **부작용 유무** | **해소 — 부작용 있음(확정).** `coverage-supplement.md:261-299`. 그 결과가 FIX-4 의 `/validate` 오라클 경로 폐기다 |
+
+---
+
+## 12. 이 설계가 하지 않는 일
+
+명시적 비목표. 여기 적힌 것을 "설계가 안 해서 결함"이라고 주장하는 반증은 루브릭 §2.3 J-3(하네스 경계 밖)에 해당한다.
+
+1. **`raw/webadmin/**` 및 `pricing.py`를 수정하지 않는다.** `models.py`·`admin.py`·`assistant_tools.py`·`widget_api.py` 전부 접촉 0.
+2. **라이브 DB에 단 한 행도 쓰지 않는다.** 테이블 신설 0, DDL 0, UPDATE 0. 모든 상태는 사이드카에 있다. **★FIX-4 정정(전제 명시)**: 이 선언이 성립하려면 **G6 리플레이가 clone DB 에서만 실행되어야 한다** — `/handoff` 는 `t_wgt_handoff_logs` INSERT/DELETE 를, `/validate` 는 `t_wgt_widgets` UPDATE 와 캐시 mutation 을 유발하므로(§0 'G6 실행 환경'), 라이브 대상 리플레이는 이 비목표와 **양립하지 않는다**. 개정 전 §4.7 O2 의 "초기엔 파일럿 리플레이로 대체"는 그 이유로 폐기됐다.
+3. **가격을 계산하지 않는다.** `evaluate_price`의 반환값을 전재할 뿐이며 금액에 산술 연산을 하지 않는다. `only_comps` 부분 합산 금액을 고객에게 표시하지 않는다.
+4. **제약 규칙을 새로 작성하지 않는다.** JSONLogic 행 신규 등록 0. `price_gap`을 규칙으로 복제하지 않는다.
+5. **차원 정의를 새로 만들지 않는다.** import만 하며, 6벌째 목록을 만들지 않는다.
+6. **전수 열거·사전계산 적재를 하지 않는다** (N-19).
+7. **온톨로지/지식그래프 계층을 도입하지 않는다** (B안 미채택 사유 §2.2 (3)).
+8. **선언 테이블(`t_wm_*`)을 신설하지 않는다** (A안 미채택 사유 §2.2 (1)).
+9. **납기·수율·불량률·설비부하·재고·판면효율을 결과축으로 도입하지 않는다** (원천 부재 또는 원천 반증).
+10. **P-08(가격 사슬 배선)을 흡수하지 않는다.** 미바인딩 상품은 판정만 하고 §7/§18로 라우팅.
+11. **주문·견적 실체 테이블을 신설하지 않는다** (P-01, 위젯·주문 트랙 소유).
+12. **위젯 렌더러/클라이언트 캐스케이드를 건드리지 않는다** (P-21, 위젯 트랙 소유).
+13. **스스로 주문을 확정하지 않는다.** 확정은 위젯 `/handoff` + 인간 확인 게이트 전용.
+14. **LLM에게 금액·가능여부·판걸이수·수량 판정 권한을 주지 않는다.** 금액 문장은 LLM이 생성하지 않는다. **★FIX-2: `qty`·`budget_krw` 도 LLM 산출값을 그대로 쓰지 않는다** — `numeric_spans` 가 가리키는 원문을 `NumericIntentParser` 가 결정론 재파싱한 **재산출값**만 심볼릭 계층에 진입하며, 불일치·재파싱 실패는 fail-closed 다(§4.1).
+15. **자동 확정 임계를 두지 않는다.** `confidence=CONFIRMED`여도 자동 주문 경로가 코드에 없다.
+16. **학습·self-refine을 하지 않는다** (§10.2 — 주문 이력 사전분포 부재).
+17. **세트 상품을 1차 범위에 넣지 않는다.**
+18. **이주환 대표의 "7단계 런타임 루프"를 반영했다고 주장하지 않는다** (원문 미확보, §10.2).
+
+---
+
+## 13. 미확인 · 한계
+
+1. **라이브 재실측 미수행 (일부).** 본 문서의 심볼 위치 12건과 `pricing.py:284-295`·`:626-634`, `widget_api.py:455-477`은 **직접 실측**했다. 그 외 수치(라이브 행수·커버리지·`t_wgt_handoff_logs` 0행 등)는 D1~D8 및 선행 하네스 인용이며, 착수 시 파일럿 상품 선정 단계에서 재실측한다(N-13/R14).
+2. **G7 임계(300ms/2s/30%)는 [추정]** — 후니 데이터 측정값이 아니다.
+3. **G0.5a의 DB 트리거 대조 방법 미확정** — `fn_chk_opt_item_ref`의 축 집합을 어떤 쿼리로 추출할지는 S1에서 확정한다. `views.py`의 4개 파이썬 표면 대조는 정적 파싱으로 가능하나 트리거 본문 파싱은 [추정] 난이도 미평가.
+3-a. **G6 clone DB 경로의 실현 가능성 미검증** — FIX-4 로 G6 오라클이 **clone 단일 경로**가 됐으나, clone 생성·폐기 절차와 clone↔라이브 동일성 검사가 실제로 가능한지는 **인프라 사실**이며 게이트도 보충 검증도 확인하지 않았다(`coverage-supplement.md:435`). **clone 이 불가하면 G6 자체가 실행 불가**이고, 그때의 처방은 임계 완화가 아니라 **주장 4의 반증 조건을 측정 없이 남겨 두는 것을 명시 기록**하는 것이다.
+3-b. **G3 골든 의도 20건의 선정 기준 미명세** — `violation_test` 가 표본 선정을 묻지 않으므로 위반은 아니나, **편향된 20건은 k=8 을 쉽게 통과시킨다**(`coverage-supplement.md:227`). 파일럿 선정에 이미 건 규율(§7 6번째 조건 · 완화 순서 고정)을 G3 골든 표본에도 적용하는 것이 정합적이다 — **권고이지 요구가 아니다.**
+4. **`only_comps`의 정확한 의미론 미확인** — 시그니처 존재는 `pricing.py:428`에서 실측했으나, 판별차원 0 구성요소가 `only_comps`로 배제될 때 실제로 `subtotal`이 달라지는지는 **G8이 첫 실측 대상**이다(주장 3의 반증 조건이 바로 이 지점).
+5. **위젯 렌더러(`widget_renderer.js`) 미독해** — 루프 화면과 위젯 화면의 판정 일치는 G6 리플레이로만 간접 확인된다.
+6. **P-22(전이함수 DB 이관)에 어느 편도 들지 않았다** — 루브릭 §5-6이 이 축을 평가하지 않는다고 선언했다.
+7. **웹 검색 미사용.** 본 문서는 선행 산출물과 저장소 내부 파일만을 근거로 하므로 `Sources:` 절을 두지 않는다. §10의 이주환 관련 URL 실재 검증은 R4가 소유하며(`R4-leejoohwan-web.md:171-187`의 검증 완료 URL 목록), 본 문서는 그 파일을 인용할 뿐 URL을 재주장하지 않는다.
+
+---
+
+## 14. 잔여 미이행 조건 (CONDITIONAL_GO 통과 조건 8항 대비)
+
+> 기준: `gate-report.md:370-379` §6.3. **닫힘**은 이번 개정으로 문서 교정이 완결됐다는 뜻이며, **게이트 재심 권한은 여전히 게이트에 있다**(루브릭 §3.1 — "교정 후 해당 규칙만 재심").
+
+| 순서 | 조건 | 상태 | 근거 / 남은 일 |
+|---|---|---|---|
+| **①** 뼈대 교정 | FIX-1(`selections` 도메인 3분류) · FIX-2(수치 재파싱) | **닫힘 (문서 반영 완료)** | §4.1 FIX-1 3분류표 + C1 판정 기록 / §4.1 FIX-2 `numeric_spans` + `NumericIntentParser` · §6 T0 각주 · §6 T1 · §12-14 |
+| **②** 게이트 명세 교정 | FIX-3(G0.5 분할) · FIX-4(G6 환경 분리 + G1 분모 정정 + G1.1 신설) | **닫힘 (문서 반영 완료)** | §4.5 G0.5a/G0.5b + projection map · §7 게이트표 / §0 'G6 실행 환경' · §7 G1·G1.1·G6 · §4.7 O2 · §12-2 |
+| **③** 선행 실측 (U-5 `/validate` 부작용) | 실측 후 결과 반영 | **닫힘** | `coverage-supplement.md:261-299` 가 **부작용 있음**을 확정 → 라이브 `/validate` 오라클 경로 **폐기**, clone 단일 경로 확정(§0·§7 G6) |
+| **④** 돈 축 교정 | FIX-5(price 3필드 + G4 대조축 + G10 신설) | **닫힘 (문서 반영 완료)** | §4.2 성질 6 · §4.6 Scorer · §6 T4/T5 · §4.7 O1/O2 · §7 G4·**G10** · §8-1 8번 |
+| **⑤** 정합·잠재 교정 | FIX-6(PREMISE_FAIL) · FIX-7(anchor 사다리) · FIX-8(zero_reason 4분류) | **닫힘 (문서 반영 완료)** | §4.7 `esc_kind` 7종 + `route_to` 3행 + `gate_id` + §8-1 11번 / §4.2 성질 5 · §4.0 F14 · §7 S2 / §4.2·§4.3·§4.4 (g)(g′)·§7 G8 |
+| **⑥** 커버리지 보충 | FIX-9(RULE-03 독립 검증) · FIX-10(RULE-17 독립 검증) | **닫힘** | `coverage-supplement.md` 가 두 규칙의 `violation_test` 를 실제 적용해 **전건 위반 없음** 판정. BLOCKER 커버리지 80% → **100%**, 미검증 규칙 2 → **0**. **[출처 구분]** 보충 라운드 검증이며 원 라운드 검증이 아니다 |
+| **⑦** NOTE 기록 | N1~N6 · U-1~U-5 를 감수 위험 목록에 등재 | **닫힘 (문서 반영 완료)** | §11-A(11-10 ~ 11-17). **rate-limit 캐시 축(11-16)은 U-5 실측에서 새로 인지된 항목**으로 신설 등재 |
+| **⑧** 루브릭 개정 심의 | 개정안 ①(RULE-04 과세 기준) ②(신설 RULE-19 문서 내부 정합) ③(RULE-11 (b) 폴백 사다리 요구) 심의 | **열림 — 이번 개정의 소관 아님** | **다음 검증 라운드 전에 게이트·루브릭 트랙이 심의한다.** 본 설계 문서는 `evaluation-rubric.md` 를 **수정할 권한이 없다**(판정 기록의 사후 변경 금지). 다만 개정안 ①②③ 이 겨눈 실체 결함(A5·A3/N1/N6·A6)은 FIX-5·FIX-6·FIX-7 로 **설계 쪽에서는 이미 닫혔다** |
+
+**요약**: 8항 중 **①②③④⑤⑥⑦ 7항 닫힘 · ⑧ 1항 열림**(루브릭 트랙 소관).
+
+**[재심 재판정 반영]** 게이트가 위 8조건을 독립 재판정했다(`gate-rehearing.md:364-373`). 조건 ①(FIX-1·FIX-2)은 설계 자기평가 "닫힘"에 대해 **"부분 닫힘"** 으로 재판정됐다 — `selections` 축은 닫혔으나 RULE-02 ① 이 `soft_prefs.axis` 에서 재실패했기 때문이다. **이번 R-02 반영으로 그 잔여가 교정됐다**(§0.0 재심 반영 블록 · §4.1 ★R-02). 조건 ②③④⑤⑥⑦ 은 게이트 재판정에서도 **닫힘**이고, ⑧ 은 **열림이며 안건이 증가**했다 — 기존 ①②③ + 개정안 ④(재사용 실현가능성) + **개정안 ⑤(자율성 경계 축)**. 조건 ④(FIX-5)는 게이트가 *"문서 반영은 확인했으나 이 축은 루브릭 커버리지 밖이라 위반/비위반 등급을 내지 않았다"* 로 단서를 달았다(`gate-rehearing.md:369`) — 이 구분을 뭉개지 않는다.
+
+**[HARD] 재심 트리거 재확인** — FIX-1·FIX-2 미반영 상태의 S1 착수는 판정을 **REJECT 로 승격**시킨다(§0.0). 이번 개정으로 두 FIX 는 문서에 반영됐으나, **구현 단계에서 이 선언과 어긋나면 트리거는 그대로 살아 있다.**
+
+### 14.1 [HARD] 이 개정이 하지 않은 것
+
+- **게이트·루브릭 문서를 수정하지 않았다.** `05_gate/*`·`04_design/evaluation-rubric.md` 는 판정 기록이므로 사후 변경 시 감사 추적이 깨진다. 이번 편집 대상은 `design-FINAL.md` 1개 파일뿐이다.
+- **새 사실 주장을 만들지 않았다.** 모든 교정은 `gate-report.md` §3 의 확정 지시와 `coverage-supplement.md` 의 실측 범위 안에서만 이뤄졌다.
+- **미측정 항목을 측정된 것처럼 쓰지 않았다.** A5 오차 규모(U-1)·3b 발생 건수·G7 임계 타당성(U-3)·`only_comps` 의미론(U-2)은 전부 **미측정** 표기를 유지했다.
+
+**[재심 반영분(R-02·R-18)이 하지 않은 것 — 2026-08-16]**
+
+- **판정 기록을 수정하지 않았다.** `05_gate/gate-report.md`·`coverage-supplement.md`·`coverage-supplement-2.md`·**`gate-rehearing.md`**·`g6-clone-feasibility.md`·`evaluation-rubric.md` 는 **읽기만** 했다. 재심 자신도 같은 규율을 지켰다(`gate-rehearing.md:432`).
+- **R-10 을 교정하지 않았다.** (R-02·R-18 반영분 기준. **2026-08-16 2차 개정에서 R-10 의 명세 반영이 이뤄졌다** — §0.0 재심 반영 블록 · §4.4 ★R-10 · §8-1 13번 참조. 구현은 여전히 S2 소관이며 재심의 차단 지점은 유지된다.)
+- **`PREF_AXES` 의 축을 발명하지 않았다.** 5축 전부 `DIM_META`(`price_views.py:31`)의 실재 축이며, 제외 4부류도 기존 선언(FIX-1 비열거축 · `price_views.py:52-53`)의 사유를 그대로 승계했다. `dir` 의 등급 사상은 **넣지 않고** §15 FU-5 로 남겼다.
+- **범위 밖 개선을 본문에 넣지 않았다.** 재심이 범위 밖 신규 발견 다수를 판정에 산입하지 않은 것과 같은 규율이다.
+
+**[R-10 반영분(2026-08-16 2차)이 하지 않은 것]**
+
+- **코드를 만들지 않았다.** §4.4 ★R-10 은 **명세**이며 `simcore/*` 파일은 여전히 저장소에 실재하지 않는다(U-4 유지). SQL 문을 명세로 적은 것까지가 이번 범위다.
+- **라이브 DB 를 조회하지 않았다.** 따라서 (i) `rule_nm` 중복 실재 여부, (ii) `nm` 이 `"제약"` 으로 떨어지는 행 수는 **여전히 미측정**이다(`gate-rehearing.md:424` 승계). 미측정을 결함으로도, 통과의 증거로도 쓰지 않는다 — 두 수치는 S2 실행 시 첫 실측 대상이다.
+- **`raw/webadmin` 을 수정하지 않았다.** `_sim_active_rules` 의 `.values(...)` 에 `rule_cd` 를 더하는 길은 RULE-04 (c) 가 금지하므로 택하지 않았고, 우리 층 SELECT 로 우회했다.
+- **RULE-10 (b) 의 잠재 결손을 닫지 않았다.** TMPL_COMBO 등 비-RULE 소스의 `repairs` 생성 방식은 보충2 가 **위반 미확정 · 잠재 등재**로 남긴 상태 그대로이며(`coverage-supplement-2.md:128-130`), 이번 교정 범위는 (a)항이다.
+- **판정 기록을 수정하지 않았다.** `05_gate/*`·`evaluation-rubric.md` 는 읽기만 했다.
+
+---
+
+## 15. 후속 안건 (본문 미반영 · 기록만)
+
+> [HARD] 아래는 이번 교정 범위를 **넘는** 개선 아이디어다. 게이트가 확정한 교정 범위 밖이므로 **본문에 반영하지 않았고**, 다음 라운드의 안건으로만 남긴다.
+
+| # | 안건 | 왜 이번에 반영하지 않았나 |
+|---|---|---|
+| FU-1 | G1 의 부작용 분모를 테이블 단위가 아니라 **"관측 가능한 부작용 축" 단위**(DB 행 · 캐시 · 외부 호출 · 파일)로 재정의 | §11-16 이 드러낸 구조적 공백이지만, 분모 재정의는 RULE-05 ④의 재설계이며 게이트가 지시한 교정 범위 밖이다 |
+| FU-2 | RULE-10 · RULE-18 의 **부분검증 해소** (박·에폭시 동시 선택 시나리오 실행 / 미표기 구성물 전수 대조) | 두 규칙은 FIX-9·FIX-10 조건에 포함되지 않아 보충 라운드도 손대지 않았다. **설계 교정이 아니라 게이트 재실행 사안**이다 |
+| FU-3 | `_price_gap_errors` 의 함수 본문 주석에만 사는 도메인 지식(가족형 면제·`proc_cd` 제외)을 **기계 판독 가능한 형태로 승격** 요청 | webadmin 트랙 소유이며, 본 설계가 흡수하면 RULE-04·RULE-15 ③ 위반이다 |
+| FU-4 | 캐시 백엔드 실체(LocMem vs Redis)·`ATOMIC_REQUESTS`·`RssLogMiddleware` 본문 확인 | `coverage-supplement.md:344-350` 이 미확인으로 남긴 회색지대. **"부작용 있음" 결론을 뒤집지 않으므로** 이번 교정의 선행 조건이 아니다 |
+| **FU-6** | **[신규 · 2026-08-16 2차] `esc_kind` 채번 1건 대기** — ★R-10 의 `UNKNOWN_RULE_ID` 에 붙는 esc_kind(제안 명칭 `RULE_ID_UNRESOLVED`)가 미채번 상태다. 채번 시 §4.7 `esc_kind` **7종 → 8종** + `route_to` 1행(3열 포함) + spec.md §3.7 U-007.1 갱신을 **한 묶음으로** 수행해야 한다 | `sim_escalation` 실체가 서는 **S2**(plan.md M2-c) 소관이다. 채번 없이 종수만 올리면 §4.7 *"미정 행 0건"* 이 깨지므로 이번 개정이 앞질러 바꾸지 않았다 |
+| **FU-7** | **[신규 · 2026-08-16 2차] 재심의 "S1 범위에 `loop.Scorer`(F6) 포함" 전제 ↔ §7 S1 산출물 6개 목록의 어긋남** — 재심이 R-02 의 S1 차단 근거로 든 전제(`gate-rehearing.md:394`)가 §7 S1 의 *"만드는 것 6개"* 에 `Scorer` 를 포함하지 않는 이 문서의 선언과 갈린다 | **판정 전제의 재확인 사안**이며 설계 교정 사안이 아니다. §7 S1 목록을 바꾸면 범위 확대이고, 재심 판정문은 사후 변경 불가다. **다음 재심 라운드가 판정한다.** R-02 반영을 되돌리자는 뜻이 아니다 |
+| **FU-5** | **`soft_prefs.dir` 의 순서 근거 정립** — `dir:"up"/"down"` 은 현재 해당 축의 **후보 열거 순서**(`disp_seq` 계약, `price_views.py:64`)에 대한 방향이며, 그 순서가 **품질 등급**과 일치하는지는 미확정이다. 등급 사상(예: 자재 등급 서열)이 필요하면 그것은 **새 도메인 지식의 신설** | R-02 는 게이트가 *"값 도메인 화이트리스트 선언 + 검증 + 표 1행"* 으로 범위를 명시했고(`gate-rehearing.md:379`), 등급 사상은 그 범위 밖이다. 그리고 등급 서열을 본 설계가 만들면 **RULE-15 ③(선행 트랙 자산 흡수) 위반**이다 — 자재 등급은 기초데이터 트랙 소유 |

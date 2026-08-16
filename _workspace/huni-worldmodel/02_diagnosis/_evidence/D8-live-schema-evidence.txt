@@ -1,0 +1,168 @@
+# D8 라이브 스키마 실측 증거 로그 (읽기전용 SELECT, 관측시각 2026-08-15)
+## version
+                                                      version                                                       
+--------------------------------------------------------------------------------------------------------------------
+ PostgreSQL 18.4 (Debian 18.4-1.pgdg13+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit
+(1 row)
+
+## t_* 테이블 행수
+               t                | rows  
+--------------------------------+-------
+ auth_group                     |     0
+ auth_group_permissions         |     0
+ auth_permission                |   188
+ auth_user                      |     5
+ auth_user_groups               |     0
+ auth_user_user_permissions     |     0
+ django_admin_log               |  2833
+ django_content_type            |    47
+ django_migrations              |    18
+ django_session                 |  2424
+ t_ast_chat_logs                |   190
+ t_ast_issue_reports            |     4
+ t_cat_categories               |   327
+ t_clr_color_counts             |     9
+ t_cod_base_codes               |   148
+ t_cus_customers                |     0
+ t_dsc_discount_details         |    35
+ t_dsc_discount_tables          |     8
+ t_dsc_grade_discount_rates     |     0
+ t_mat_materials                |   660
+ t_prc_component_prices         | 23573
+ t_prc_formula_components       |   232
+ t_prc_price_components         |   202
+ t_prc_price_formulas           |   110
+ t_prd_edicus_configs           |    91
+ t_prd_edicus_templates         |   233
+ t_prd_product_addons           |   112
+ t_prd_product_bundle_qtys      |    34
+ t_prd_product_categories       |   418
+ t_prd_product_constraints      |    82
+ t_prd_product_discount_tables  |   110
+ t_prd_product_materials        |  1406
+ t_prd_product_option_groups    |   343
+ t_prd_product_option_items     |   906
+ t_prd_product_options          |  1103
+ t_prd_product_page_rules       |    23
+ t_prd_product_plate_sizes      |   404
+ t_prd_product_price_formulas   |   178
+ t_prd_product_prices           |    60
+ t_prd_product_print_options    |   231
+ t_prd_product_processes        |   659
+ t_prd_product_sets             |    47
+ t_prd_product_sizes            |   803
+ t_prd_products                 |   305
+ t_prd_template_prices          |    71
+ t_prd_template_selections      |   131
+ t_prd_templates                |   107
+ t_prd_tmpl_combo_configs       |     5
+ t_proc_processes               |   168
+ t_prt_print_options            |    13
+ t_siz_sizes                    |   629
+ t_wgt_handoff_logs             |     0
+ t_wgt_sites                    |     1
+ t_wgt_widget_items             |  2535
+ t_wgt_widget_versions          |     1
+ t_wgt_widgets                  |   387
+ vc_product_detail_publications |    60
+(57 rows)
+
+## 백업/총 테이블
+ bak | t_tables | all_tables 
+-----+----------+------------
+  97 |       46 |        154
+(1 row)
+
+## 가격사슬
+ prd_live | prd_with_formula | formulas | formula_with_comp | comps | comps_with_prices | comps_wired 
+----------+------------------+----------+-------------------+-------+-------------------+-------------
+      288 |              171 |      110 |               109 |   202 |               170 |         123
+(1 row)
+
+## 고아 구성요소 / 단가0 구성요소 / 빈 공식
+ unwired | no_price | empty_formula 
+---------+----------+---------------
+      79 |       32 |             1
+(1 row)
+
+## 단가행 차원 충전
+ rows  | siz  | clr | mat  | proc  | opt | prtopt | plt  | bdl | minq  | dimv  |  sw  | coat | spot | zero_price 
+-------+------+-----+------+-------+-----+--------+------+-----+-------+-------+------+------+------+------------
+ 23573 | 7301 |   0 | 6577 | 14665 | 953 |   2227 | 2279 | 114 | 22086 | 11994 | 1082 |  276 |  532 |         11
+(1 row)
+
+## 옵션/차원 커버리지
+ prd_live | optgrp | opt | constraint_ | siz | mat | proc | prtopt | cat 
+----------+--------+-----+-------------+-----+-----+------+--------+-----
+      288 |    150 | 149 |          34 | 240 | 268 |  217 |    130 | 275
+(1 row)
+
+## comp_typ_cd / prc_typ_cd / addtn_yn 결측
+      comp_typ_cd      | count 
+-----------------------+-------
+ PRC_COMPONENT_TYPE.06 |   118
+ PRC_COMPONENT_TYPE.04 |    42
+ PRC_COMPONENT_TYPE.01 |    27
+ PRC_COMPONENT_TYPE.05 |     8
+                       |     4
+ PRC_COMPONENT_TYPE.02 |     2
+ PRC_COMPONENT_TYPE.03 |     1
+(7 rows)
+
+  prc_typ_cd   | count | no_use_dims 
+---------------+-------+-------------
+ PRICE_TYPE.01 |   130 |           1
+ PRICE_TYPE.02 |    47 |           0
+ PRICE_TYPE.03 |    25 |           0
+(3 rows)
+
+ addtn_yn | count 
+----------+-------
+ Y        |   201
+          |     7
+ N        |    24
+(3 rows)
+
+## 함수/뷰/제약
+        proname        
+-----------------------
+ fn_best_plate
+ fn_best_plate_default
+ fn_calc_pansu
+ fn_chk_opt_item_ref
+ fn_upd_dt
+(5 rows)
+
+        table_name        
+--------------------------
+ v_cfg_ref_impact
+ vc_v_product_detail_tabs
+(2 rows)
+
+ contype | count 
+---------+-------
+ c       |    58
+ f       |    86
+ n       |   228
+ p       |    46
+(4 rows)
+
+## 최근 갱신
+             t              |            max             
+----------------------------+----------------------------
+ t_prd_products             | 2026-08-14 21:29:22.185871
+ t_prc_component_prices     | 2026-08-14 19:36:03.15856
+ t_prd_product_option_items | 2026-08-14 20:03:46.212612
+(3 rows)
+
+## dim_vals 키
+   k    | count 
+--------+-------
+ 세로   | 11660
+ 가로   | 11660
+ 개수   |   230
+ 줄수   |    80
+ 구수   |    18
+ 타공수 |     6
+(6 rows)
+
