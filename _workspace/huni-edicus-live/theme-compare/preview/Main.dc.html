@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap">
+  <style>
+    body { margin:0; font-family:"Noto Sans","Noto Sans KR",sans-serif; letter-spacing:-0.05em; }
+    a { color:#5538B6; } a:hover { color:#351D87; }
+    code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:11px; letter-spacing:0; }
+  </style>
+</helmet>
+
+<div style="width:1160px; height:700px; padding:36px 40px; box-sizing:border-box; background:#FFFFFF; display:flex; flex-direction:column; gap:26px">
+
+  <div style="display:flex; align-items:baseline; gap:14px">
+    <div style="font-size:24px; font-weight:700; color:#424242">private_css 색 매핑</div>
+    <div style="font-size:13px; color:#979797">후니 DS 토큰 → Edicus theme-* 클래스</div>
+  </div>
+
+  <!-- 왜 로고를 넣지 않는가 -->
+  <div style="display:flex; gap:16px; padding:16px 18px; border:1px solid #CACACA; border-radius:8px; align-items:flex-start">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#979797" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:1px"><circle cx="10" cy="10" r="7.5"/><path d="M10 6.5v4M10 13.5h.01"/></svg>
+    <div style="display:flex; flex-direction:column; gap:5px">
+      <div style="font-size:14px; font-weight:600; color:#424242">로고는 넣지 않는다</div>
+      <div style="font-size:12px; color:#565656; line-height:1.6">순정 스타일시트에 <code>.theme-header-logo</code> 슬롯이 있지만, 실측 DOM에 그 클래스를 단 노드가 하나도 없다. <code>app-header</code>의 자식은 <code>header-left</code> / <code>header-middle</code> / <code>header-right</code> 뿐이고, <code>header-left</code> 안은 이미 <code>product-info-box</code>(상품명)가 차지하고 있다.<br>배경이미지를 갈아끼워도 보이지 않고, 다른 설정에서 렌더링되면 상품명과 겹친다. 편집기 로고는 Edicus 쪽에 요청할 항목이다.</div>
+    </div>
+  </div>
+
+  <div style="height:1px; background:#E9E9E9"></div>
+
+  <!-- 매핑 표 -->
+  <div style="display:flex; flex-direction:column; gap:10px; flex-grow:1; min-height:0">
+    <div style="font-size:16px; font-weight:600; color:#424242">주요 매핑</div>
+    <div style="display:grid; grid-template-columns:repeat(4, minmax(0, 1fr)); gap:14px">
+
+      <div style="display:flex; flex-direction:column; gap:7px">
+        <div style="display:flex; gap:6px; height:38px">
+          <div style="flex-grow:1; border-radius:4px; background:#64c2ff"></div>
+          <div style="flex-grow:1; border-radius:4px; background:#5538B6"></div>
+        </div>
+        <div style="font-size:12px; font-weight:600; color:#424242">--color-brand</div>
+        <div style="font-size:11px; color:#979797">#64c2ff → #5538B6</div>
+        <div style="font-size:11px; color:#565656">header-cart-btn · modal-button · tab active</div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:7px">
+        <div style="display:flex; gap:6px; height:38px">
+          <div style="flex-grow:1; border-radius:4px; background:#3180d8"></div>
+          <div style="flex-grow:1; border-radius:4px; background:#351D87"></div>
+        </div>
+        <div style="font-size:12px; font-weight:600; color:#424242">--color-brand-strong</div>
+        <div style="font-size:11px; color:#979797">#3180d8 → #351D87</div>
+        <div style="font-size:11px; color:#565656">filled primary 의 hover</div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:7px">
+        <div style="display:flex; gap:6px; height:38px">
+          <div style="flex-grow:1; border-radius:4px; background:#3e4553"></div>
+          <div style="flex-grow:1; border-radius:4px; background:#FFFFFF; border:1px solid #CACACA; box-sizing:border-box"></div>
+        </div>
+        <div style="font-size:12px; font-weight:600; color:#424242">--surface-page</div>
+        <div style="font-size:11px; color:#979797">#3e4553 → #FFFFFF</div>
+        <div style="font-size:11px; color:#565656">A안에서만. B안은 순정 다크 유지</div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:7px">
+        <div style="display:flex; gap:6px; height:38px">
+          <div style="flex-grow:1; border-radius:4px; background:#626b7c"></div>
+          <div style="flex-grow:1; border-radius:4px; background:#CACACA"></div>
+        </div>
+        <div style="font-size:12px; font-weight:600; color:#424242">--border-default</div>
+        <div style="font-size:11px; color:#979797">#626b7c → #CACACA</div>
+        <div style="font-size:11px; color:#565656">panel-border · tab-border · modal-item</div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:7px">
+        <div style="display:flex; gap:6px; height:38px">
+          <div style="flex-grow:1; border-radius:4px; background:#8c919d"></div>
+          <div style="flex-grow:1; border-radius:4px; background:#979797"></div>
+        </div>
+        <div style="font-size:12px; font-weight:600; color:#424242">--text-secondary</div>
+        <div style="font-size:11px; color:#979797">#8c919d → #979797</div>
+        <div style="font-size:11px; color:#565656">tab-btn · toolbar-btn 비활성</div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:7px">
+        <div style="display:flex; gap:6px; height:38px">
+          <div style="flex-grow:1; border-radius:4px; background:#add8e6"></div>
+          <div style="flex-grow:1; border-radius:4px; background:#DED7F4"></div>
+        </div>
+        <div style="font-size:12px; font-weight:600; color:#424242">--huni-purple-100</div>
+        <div style="font-size:11px; color:#979797">#add8e6 → #DED7F4</div>
+        <div style="font-size:11px; color:#565656">cell-empty (빈 사진칸)</div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:7px">
+        <div style="display:flex; gap:6px; height:38px">
+          <div style="flex-grow:1; border-radius:4px; background:#d83131"></div>
+          <div style="flex-grow:1; border-radius:4px; background:#E60012"></div>
+        </div>
+        <div style="font-size:12px; font-weight:600; color:#424242">--color-error</div>
+        <div style="font-size:11px; color:#979797">#d83131 → #E60012</div>
+        <div style="font-size:11px; color:#565656">dialog-btn hover · header-fail-btn</div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:7px">
+        <div style="display:flex; gap:6px; height:38px">
+          <div style="flex-grow:1; border-radius:4px; background:#00a023"></div>
+          <div style="flex-grow:1; border-radius:4px; background:#00a023"></div>
+        </div>
+        <div style="font-size:12px; font-weight:600; color:#424242">재단선 — 유지</div>
+        <div style="font-size:11px; color:#979797">#00a023 그대로</div>
+        <div style="font-size:11px; color:#565656">브랜드색이 아니라 기능 표시</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div style="height:1px; background:#E9E9E9"></div>
+
+  <div style="display:flex; gap:44px; font-size:12px; color:#565656">
+    <div style="display:flex; flex-direction:column; gap:4px">
+      <div style="font-weight:600; color:#424242">덮어쓴 클래스</div>
+      <div>A안 56개 / B안 27개 (전체 86개 중)</div>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:4px">
+      <div style="font-weight:600; color:#424242">일부러 안 건드린 것</div>
+      <div>경고 · 재단선 · 보조선 · 고객 선택값</div>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:4px">
+      <div style="font-weight:600; color:#424242">토큰 출처</div>
+      <div>_ds/huni-printing-design-system-…/tokens/colors.css</div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+<script data-dc-script data-props='{}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

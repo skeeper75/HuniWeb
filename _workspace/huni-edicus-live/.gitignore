@@ -1,0 +1,17 @@
+# 캡처용 가상환경 (303MB) — capture-rp.py 주석의 명령으로 재생성
+.venv-cap/
+__pycache__/
+
+# 시드된 아티팩트 (2.2MB) — theme-compare/preview/*.dc.html + canvas.json 에서 재생성
+theme-compare/preview/edicus-editor-theme.html
+
+# ── 라이브 캡처 원자료 — git 에 넣지 않는다 ──────────────────
+# 아래 파일들에 실제 자격증명이 들어 있다(재현·검증용으로 로컬에는 남긴다):
+#   · RedPrinting 자산 API 키 2종  (Bearer …)
+#   · koiAccessToken 등 JWT 23종
+# 한 번 커밋하면 히스토리에서 지우기 어려우므로 통째로 제외한다.
+# 이 파일들이 필요하면 capture-rp.py 로 재캡처하거나 로컬 사본을 쓸 것.
+raw/key-events.jsonl
+raw/s2_bodies.json
+raw/cap-260819/ACTHPEN.json
+raw/cap-260819/CLSTDLD.json

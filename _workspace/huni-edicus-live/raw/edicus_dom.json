@@ -1,0 +1,603 @@
+{
+ "clicked": true,
+ "ed_url": "https://edicusbase.firebaseapp.com/ed#/d/editormain/new-project/144x204@PHSTPAN/gcs:%2F%2Ftemplate%2Fpartners%2Fredp%2Fres%2Ftemplate%2F3211940.json",
+ "tree": [
+  {
+   "d": 0,
+   "tag": "body",
+   "id": "",
+   "cls": "",
+   "txt": "",
+   "bg": "rgb(255, 255, 255)",
+   "fg": "rgb(51, 51, 51)",
+   "bd": "rgb(51, 51, 51)",
+   "ff": "Arial",
+   "fs": "14px",
+   "fw": "400"
+  },
+  {
+   "d": 1,
+   "tag": "app-root",
+   "id": "",
+   "cls": "",
+   "txt": "",
+   "bg": "rgba(0, 0, 0, 0)",
+   "fg": "rgb(51, 51, 51)",
+   "bd": "rgb(51, 51, 51)",
+   "ff": "Noto Sans KR",
+   "fs": "14px",
+   "fw": "400"
+  },
+  {
+   "d": 2,
+   "tag": "router-outlet",
+   "id": "",
+   "cls": "",
+   "txt": "",
+   "bg": "rgba(0, 0, 0, 0)",
+   "fg": "rgb(51, 51, 51)",
+   "bd": "rgb(51, 51, 51)",
+   "ff": "Noto Sans KR",
+   "fs": "14px",
+   "fw": "400"
+  },
+  {
+   "d": 2,
+   "tag": "editor-main",
+   "id": "",
+   "cls": "",
+   "txt": "",
+   "bg": "rgba(0, 0, 0, 0)",
+   "fg": "rgb(51, 51, 51)",
+   "bd": "rgb(51, 51, 51)",
+   "ff": "Noto Sans KR",
+   "fs": "14px",
+   "fw": "400"
+  },
+  {
+   "d": 3,
+   "tag": "div",
+   "id": "",
+   "cls": "app-main",
+   "txt": "",
+   "bg": "rgba(0, 0, 0, 0)",
+   "fg": "rgb(51, 51, 51)",
+   "bd": "rgb(51, 51, 51)",
+   "ff": "Noto Sans KR",
+   "fs": "14px",
+   "fw": "400"
+  },
+  {
+   "d": 4,
+   "tag": "div",
+   "id": "",
+   "cls": "app-header theme-header-bg theme-header-border",
+   "txt": "",
+   "bg": "rgb(255, 255, 255)",
+   "fg": "rgb(51, 51, 51)",
+   "bd": "rgb(218, 218, 214)",
+   "ff": "Noto Sans KR",
+   "fs": "14px",
+   "fw": "400"
+  },
+  {
+   "d": 5,
+   "tag": "div",
+   "id": "",
+   "cls": "header-left",
+   "txt": "",
+   "bg": "rgba(0, 0, 0, 0)",
+   "fg": "rgb(51, 51, 51)",
+   "bd": "rgb(51, 51, 51)",
+   "ff": "Noto Sans KR",
+   "fs": "14px",
+   "fw": "400"
+  },
+  {
+   "d": 6,
+   "tag": "div",
+   "id": "",
+   "cls": "product-info-box",
+   "txt": "",
+   "bg": "rgba(0, 0, 0, 0)",
+   "fg": "rgb(51, 51, 51)",
+   "bd": "rgb(51, 51, 51)",
+   "ff": "Noto Sans KR",
+   "fs": "14px",
+   "fw": "400"
+  },
+  {
+   "d": 5,
+   "tag": "div",
+   "id": "",
+   "cls": "header-middle",
+   "txt": "",
+   "bg": "rgba(0, 0, 0, 0)",
+   "fg": "rgb(51, 51, 51)",
+   "bd": "rgb(51, 51, 51)",
+   "ff": "Noto Sans KR",
+   "fs": "14px",
+   "fw": "400"
+  },
+  {
+   "d": 6,
+   "tag": "div",
+   "id": "",
+   "cls": "toolbar-headline-holder",
+   "txt": "",
+   "bg": "rgba(0, 0, 0, 0)",
+   "fg": "rgb(51, 51, 51)",
+   "bd": "rgb(51, 51, 51)",
+   "ff": "Noto Sans KR",
+   "fs": "14px",
+   "fw": "400"
+  },
+  {
+   "d": 5,
+   "tag": "div",
+   "id": "",
+   "cls": "header-right",
+   "txt": "",
+   "bg": "rgba(0, 0, 0, 0)",
+   "fg": "rgb(51, 51, 51)",
+   "bd": "rgb(51, 51, 51)",
+   "ff": "Noto Sans KR",
+   "fs": "14px",
+   "fw": "400"
+  },
+  {
+   "d": 6,
+   "tag": "div",
+   "id": "",
+   "cls": "comp-holder-2",
+   "txt": "",
+   "bg": "rgba(0, 0, 0, 0)",
+   "fg": "rgb(51, 51, 51)",
+   "bd": "rgb(51, 51, 51)",
+   "ff": "Noto Sans KR",
+   "fs": "14px",
+   "fw": "400"
+  },
+  {
+   "d": 3,
+   "tag": "div",
+   "id": "",
+   "cls": "app-body",
+   "txt": "",
+   "bg": "rgba(0, 0, 0, 0)",
+   "fg": "rgb(51, 51, 51)",
+   "bd": "rgb(51, 51, 51)",
+   "ff": "Noto Sans KR",
+   "fs": "14px",
+   "fw": "400"
+  },
+  {
+   "d": 4,
+   "tag": "div",
+   "id": "",
+   "cls": "left-section",
+   "txt": "",
+   "bg": "rgba(0, 0, 0, 0)",
+   "fg": "rgb(51, 51, 51)",
+   "bd": "rgb(51, 51, 51)",
+   "ff": "Noto Sans KR",
+   "fs": "14px",
+   "fw": "400"
+  },
+  {
+   "d": 5,
+   "tag": "div",
+   "id": "",
+   "cls": "w-embed",
+   "txt": "",
+   "bg": "rgba(0, 0, 0, 0)",
+   "fg": "rgb(51, 51, 51)",
+   "bd": "rgb(51, 51, 51)",
+   "ff": "Noto Sans KR",
+   "fs": "14px",
+   "fw": "400"
+  },
+  {
+   "d": 6,
+   "tag": "tool-panel",
+   "id": "",
+   "cls": "",
+   "txt": "",
+   "bg": "rgba(0, 0, 0, 0)",
+   "fg": "rgb(51, 51, 51)",
+   "bd": "rgb(51, 51, 51)",
+   "ff": "Noto Sans KR",
+   "fs": "14px",
+   "fw": "400"
+  },
+  {
+   "d": 4,
+   "tag": "div",
+   "id": "",
+   "cls": "right-section-main",
+   "txt": "",
+   "bg": "rgba(0, 0, 0, 0)",
+   "fg": "rgb(51, 51, 51)",
+   "bd": "rgb(51, 51, 51)",
+   "ff": "Noto Sans KR",
+   "fs": "14px",
+   "fw": "400"
+  },
+  {
+   "d": 5,
+   "tag": "div",
+   "id": "",
+   "cls": "edit-section",
+   "txt": "",
+   "bg": "rgba(0, 0, 0, 0)",
+   "fg": "rgb(51, 51, 51)",
+   "bd": "rgb(51, 51, 51)",
+   "ff": "Noto Sans KR",
+   "fs": "14px",
+   "fw": "400"
+  },
+  {
+   "d": 6,
+   "tag": "div",
+   "id": "",
+   "cls": "canvas-section",
+   "txt": "",
+   "bg": "rgba(0, 0, 0, 0)",
+   "fg": "rgb(51, 51, 51)",
+   "bd": "rgb(51, 51, 51)",
+   "ff": "Noto Sans KR",
+   "fs": "14px",
+   "fw": "400"
+  },
+  {
+   "d": 6,
+   "tag": "div",
+   "id": "",
+   "cls": "storyboard-section ng-star-inserted",
+   "txt": "",
+   "bg": "rgba(0, 0, 0, 0)",
+   "fg": "rgb(51, 51, 51)",
+   "bd": "rgb(51, 51, 51)",
+   "ff": "Noto Sans KR",
+   "fs": "14px",
+   "fw": "400"
+  },
+  {
+   "d": 3,
+   "tag": "canvas-precache",
+   "id": "",
+   "cls": "",
+   "txt": "",
+   "bg": "rgba(0, 0, 0, 0)",
+   "fg": "rgb(51, 51, 51)",
+   "bd": "rgb(51, 51, 51)",
+   "ff": "Noto Sans KR",
+   "fs": "14px",
+   "fw": "400"
+  },
+  {
+   "d": 4,
+   "tag": "div",
+   "id": "",
+   "cls": "",
+   "txt": "",
+   "bg": "rgba(0, 0, 0, 0)",
+   "fg": "rgb(51, 51, 51)",
+   "bd": "rgb(51, 51, 51)",
+   "ff": "Noto Sans KR",
+   "fs": "14px",
+   "fw": "400"
+  },
+  {
+   "d": 4,
+   "tag": "div",
+   "id": "",
+   "cls": "",
+   "txt": "",
+   "bg": "rgba(0, 0, 0, 0)",
+   "fg": "rgb(51, 51, 51)",
+   "bd": "rgb(51, 51, 51)",
+   "ff": "Noto Sans KR",
+   "fs": "14px",
+   "fw": "400"
+  },
+  {
+   "d": 4,
+   "tag": "div",
+   "id": "",
+   "cls": "",
+   "txt": "",
+   "bg": "rgba(0, 0, 0, 0)",
+   "fg": "rgb(51, 51, 51)",
+   "bd": "rgb(51, 51, 51)",
+   "ff": "Noto Sans KR",
+   "fs": "14px",
+   "fw": "400"
+  },
+  {
+   "d": 4,
+   "tag": "div",
+   "id": "",
+   "cls": "",
+   "txt": "",
+   "bg": "rgba(0, 0, 0, 0)",
+   "fg": "rgb(51, 51, 51)",
+   "bd": "rgb(51, 51, 51)",
+   "ff": "Noto Sans KR",
+   "fs": "14px",
+   "fw": "400"
+  },
+  {
+   "d": 3,
+   "tag": "editor-modal",
+   "id": "",
+   "cls": "",
+   "txt": "",
+   "bg": "rgba(0, 0, 0, 0)",
+   "fg": "rgb(51, 51, 51)",
+   "bd": "rgb(51, 51, 51)",
+   "ff": "Noto Sans KR",
+   "fs": "14px",
+   "fw": "400"
+  },
+  {
+   "d": 4,
+   "tag": "div",
+   "id": "",
+   "cls": "modal-surface",
+   "txt": "",
+   "bg": "rgba(0, 0, 0, 0)",
+   "fg": "rgb(51, 51, 51)",
+   "bd": "rgb(51, 51, 51)",
+   "ff": "Noto Sans KR",
+   "fs": "14px",
+   "fw": "400"
+  },
+  {
+   "d": 5,
+   "tag": "modal-progress",
+   "id": "",
+   "cls": "",
+   "txt": "",
+   "bg": "rgba(0, 0, 0, 0)",
+   "fg": "rgb(51, 51, 51)",
+   "bd": "rgb(51, 51, 51)",
+   "ff": "Noto Sans KR",
+   "fs": "14px",
+   "fw": "400"
+  },
+  {
+   "d": 6,
+   "tag": "div",
+   "id": "",
+   "cls": "modal-background bg-light-mid",
+   "txt": "",
+   "bg": "rgba(0, 0, 0, 0.176)",
+   "fg": "rgb(51, 51, 51)",
+   "bd": "rgb(51, 51, 51)",
+   "ff": "Noto Sans KR",
+   "fs": "14px",
+   "fw": "400"
+  },
+  {
+   "d": 1,
+   "tag": "script",
+   "id": "",
+   "cls": "",
+   "txt": "",
+   "bg": "rgba(0, 0, 0, 0)",
+   "fg": "rgb(51, 51, 51)",
+   "bd": "rgb(51, 51, 51)",
+   "ff": "Noto Sans KR",
+   "fs": "14px",
+   "fw": "400"
+  },
+  {
+   "d": 1,
+   "tag": "script",
+   "id": "",
+   "cls": "",
+   "txt": "",
+   "bg": "rgba(0, 0, 0, 0)",
+   "fg": "rgb(51, 51, 51)",
+   "bd": "rgb(51, 51, 51)",
+   "ff": "Noto Sans KR",
+   "fs": "14px",
+   "fw": "400"
+  },
+  {
+   "d": 1,
+   "tag": "script",
+   "id": "",
+   "cls": "",
+   "txt": "",
+   "bg": "rgba(0, 0, 0, 0)",
+   "fg": "rgb(51, 51, 51)",
+   "bd": "rgb(51, 51, 51)",
+   "ff": "Noto Sans KR",
+   "fs": "14px",
+   "fw": "400"
+  },
+  {
+   "d": 1,
+   "tag": "script",
+   "id": "",
+   "cls": "",
+   "txt": "",
+   "bg": "rgba(0, 0, 0, 0)",
+   "fg": "rgb(51, 51, 51)",
+   "bd": "rgb(51, 51, 51)",
+   "ff": "Noto Sans KR",
+   "fs": "14px",
+   "fw": "400"
+  },
+  {
+   "d": 1,
+   "tag": "script",
+   "id": "",
+   "cls": "",
+   "txt": "",
+   "bg": "rgba(0, 0, 0, 0)",
+   "fg": "rgb(51, 51, 51)",
+   "bd": "rgb(51, 51, 51)",
+   "ff": "Noto Sans KR",
+   "fs": "14px",
+   "fw": "400"
+  },
+  {
+   "d": 1,
+   "tag": "script",
+   "id": "",
+   "cls": "",
+   "txt": "",
+   "bg": "rgba(0, 0, 0, 0)",
+   "fg": "rgb(51, 51, 51)",
+   "bd": "rgb(51, 51, 51)",
+   "ff": "Noto Sans KR",
+   "fs": "14px",
+   "fw": "400"
+  },
+  {
+   "d": 1,
+   "tag": "script",
+   "id": "",
+   "cls": "",
+   "txt": "",
+   "bg": "rgba(0, 0, 0, 0)",
+   "fg": "rgb(51, 51, 51)",
+   "bd": "rgb(51, 51, 51)",
+   "ff": "Noto Sans KR",
+   "fs": "14px",
+   "fw": "400"
+  },
+  {
+   "d": 1,
+   "tag": "script",
+   "id": "",
+   "cls": "",
+   "txt": "/*\n    (function(i, s, o, ",
+   "bg": "rgba(0, 0, 0, 0)",
+   "fg": "rgb(51, 51, 51)",
+   "bd": "rgb(51, 51, 51)",
+   "ff": "Noto Sans KR",
+   "fs": "14px",
+   "fw": "400"
+  }
+ ],
+ "palette": [
+  [
+   "rgb(51, 51, 51)",
+   5082
+  ],
+  [
+   "rgb(0, 0, 0)",
+   118
+  ],
+  [
+   "rgb(247, 248, 251)",
+   64
+  ],
+  [
+   "rgb(189, 189, 189)",
+   64
+  ],
+  [
+   "rgb(255, 255, 255)",
+   44
+  ],
+  [
+   "rgb(119, 119, 119)",
+   31
+  ],
+  [
+   "rgba(0, 0, 0, 0.25)",
+   12
+  ],
+  [
+   "rgb(97, 165, 244)",
+   9
+  ],
+  [
+   "rgb(187, 187, 187)",
+   8
+  ],
+  [
+   "rgb(238, 238, 238)",
+   6
+  ],
+  [
+   "rgb(34, 34, 34)",
+   6
+  ],
+  [
+   "rgb(164, 164, 164)",
+   6
+  ],
+  [
+   "rgb(226, 226, 226)",
+   4
+  ],
+  [
+   "rgb(177, 177, 177)",
+   4
+  ],
+  [
+   "rgb(218, 218, 214)",
+   3
+  ],
+  [
+   "rgb(155, 155, 155)",
+   3
+  ],
+  [
+   "rgb(252, 252, 252)",
+   3
+  ],
+  [
+   "rgb(60, 60, 60)",
+   2
+  ],
+  [
+   "rgb(228, 228, 228)",
+   2
+  ],
+  [
+   "rgb(242, 97, 109)",
+   2
+  ],
+  [
+   "rgb(170, 170, 170)",
+   2
+  ],
+  [
+   "rgb(63, 63, 63)",
+   2
+  ],
+  [
+   "rgba(255, 255, 255, 0.9)",
+   2
+  ],
+  [
+   "rgb(254, 47, 72)",
+   1
+  ],
+  [
+   "rgb(155, 155, 155) rgba(0, 0, 0, 0) rgba(0, 0, 0, 0)",
+   1
+  ]
+ ],
+ "fonts": [
+  [
+   "\"Noto Sans KR\", sans-serif",
+   2684
+  ],
+  [
+   "edicus",
+   11
+  ],
+  [
+   "Arial, sans-serif",
+   1
+  ]
+ ]
+}

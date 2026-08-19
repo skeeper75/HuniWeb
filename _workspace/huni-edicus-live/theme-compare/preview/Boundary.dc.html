@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap">
+  <style>
+    body { margin:0; font-family:"Noto Sans","Noto Sans KR",sans-serif; letter-spacing:-0.05em; }
+    a { color:#5538B6; } a:hover { color:#351D87; }
+    code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:11px; letter-spacing:0; }
+  </style>
+</helmet>
+
+<div style="width:1160px; height:700px; padding:36px 40px; box-sizing:border-box; background:#FFFFFF; display:flex; flex-direction:column; gap:22px">
+
+  <div style="display:flex; align-items:baseline; gap:14px">
+    <div style="font-size:24px; font-weight:700; color:#424242">private_css 의 경계</div>
+    <div style="font-size:13px; color:#979797">RedEditorSDK.min.js · edicus-original-styles.css 실측</div>
+  </div>
+
+  <!-- 전달 경로 -->
+  <div style="display:flex; align-items:center; gap:10px; padding:14px 18px; background:#F6F6F6; border-radius:8px">
+    <div style="font-size:12px; color:#565656">호스트</div>
+    <svg width="18" height="12" viewBox="0 0 18 12" fill="none" stroke="#979797" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6h15M12 2l4 4-4 4"/></svg>
+    <div style="font-size:12px; color:#424242"><code>?wait_private_css=true</code></div>
+    <svg width="18" height="12" viewBox="0 0 18 12" fill="none" stroke="#979797" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6h15M12 2l4 4-4 4"/></svg>
+    <div style="font-size:12px; color:#424242"><code>waiting-for-extra-param</code></div>
+    <svg width="18" height="12" viewBox="0 0 18 12" fill="none" stroke="#979797" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6h15M12 2l4 4-4 4"/></svg>
+    <div style="font-size:12px; font-weight:600; color:#5538B6"><code>{name:"private_css", private_css:"…"}</code></div>
+  </div>
+
+  <div style="display:flex; gap:24px; flex-grow:1; min-height:0">
+
+    <!-- 되는 것 -->
+    <div style="flex-grow:1; display:flex; flex-direction:column; gap:12px; padding:20px; border:1px solid #CACACA; border-radius:8px; box-sizing:border-box">
+      <div style="display:flex; align-items:center; gap:8px">
+        <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="#5538B6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"/></svg>
+        <div style="font-size:16px; font-weight:600; color:#5538B6">private_css 로 되는 것</div>
+      </div>
+      <div style="font-size:12px; color:#979797">순정 theme-* 클래스 86개가 노출한 속성만</div>
+      <div style="display:flex; flex-direction:column; gap:9px; font-size:13px; color:#424242">
+        <div style="display:flex; justify-content:space-between"><span>background-color</span><span style="color:#979797">45회</span></div>
+        <div style="display:flex; justify-content:space-between"><span>color</span><span style="color:#979797">27회</span></div>
+        <div style="display:flex; justify-content:space-between"><span>border-color</span><span style="color:#979797">18회</span></div>
+        <div style="display:flex; justify-content:space-between"><span>outline-color</span><span style="color:#979797">6회</span></div>
+        <div style="display:flex; justify-content:space-between"><span>fill (SVG)</span><span style="color:#979797">2회</span></div>
+        <div style="display:flex; justify-content:space-between"><span>background-image (로고 슬롯)</span><span style="color:#979797">2회</span></div>
+        <div style="display:flex; justify-content:space-between"><span>--*-color (플러그인 변수)</span><span style="color:#979797">12회</span></div>
+      </div>
+      <div style="margin-top:auto; padding-top:12px; border-top:1px solid #E9E9E9; font-size:12px; color:#565656">
+        86개 중 <strong style="color:#424242">70개가 색 속성만</strong> 갖는다.
+        나머지 16개의 치수도 재단선·경고문구 같은 기능 표시라 손댈 물건이 아니다.
+      </div>
+    </div>
+
+    <!-- 안 되는 것 -->
+    <div style="flex-grow:1; display:flex; flex-direction:column; gap:12px; padding:20px; border:1px solid #CACACA; border-radius:8px; box-sizing:border-box; background:#F6F6F6">
+      <div style="display:flex; align-items:center; gap:8px">
+        <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="#979797" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5l10 10M15 5L5 15"/></svg>
+        <div style="font-size:16px; font-weight:600; color:#565656">Edicus 쪽에 요청할 것</div>
+      </div>
+      <div style="font-size:12px; color:#979797">편집기 URL 파라미터 · 플러그인 · 셸 선택</div>
+      <div style="display:flex; flex-direction:column; gap:8px; font-size:13px; color:#424242">
+        <div>좌측 레일 위치·순서·아이콘 &nbsp;<span style="color:#979797">— <code>ui_style</code> <code>editor_type</code></span></div>
+        <div>없던 옵션 패널 추가 &nbsp;<span style="color:#979797">— <code>customTabInfo</code> (상품 데이터)</span></div>
+        <div>「모양컷」 같은 전용 도구 &nbsp;<span style="color:#979797">— <code>force_plugin</code> <code>plugin_param</code></span></div>
+        <div>편집기 셸 자체 &nbsp;<span style="color:#979797">— <code>editor_landing</code> / <code>lite</code> / <code>preview</code> / <code>tnview</code></span></div>
+        <div>모서리 반경 · 자간 · 여백 · 컨트롤 높이 &nbsp;<span style="color:#979797">— 손잡이 없음</span></div>
+        <div>빈칸 아이콘 교체 &nbsp;<span style="color:#979797">— 별도 SVG 파일</span></div>
+      </div>
+      <div style="margin-top:auto; padding-top:12px; border-top:1px solid #E9E9E9; font-size:12px; color:#565656">
+        편집기 URL 공통 파라미터는 <strong style="color:#424242">30개</strong>.
+        화면 구성을 가르는 것은 전부 이쪽에 있다.
+      </div>
+    </div>
+  </div>
+
+  <div style="font-size:12px; color:#979797">
+    ACTHPEN(아크릴 젤펜)·CLSTDLD(티셔츠) 두 상품은 <code>useKoiEditor</code>·<code>usePDF</code>·<code>useRPEditor</code> 플래그가 완전히 같은데 편집기 화면은 서로 다르다 — 차이는 상품 플래그가 아니라 위 오른쪽 축에서 온다.
+  </div>
+
+</div>
+</x-dc>
+<script data-dc-script data-props='{}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,202 @@
+/* ============================================================
+   후니프린팅 Edicus 편집기 테마 — B안 · 패널 다크 (비교용)
+   생성물: build-theme.py 가 만든다. 이 파일을 직접 고치지 말 것.
+   토큰:   docs/design/…/_ds/huni-printing-design-system-…/tokens/
+   근거:   raw/edicus-original-styles.css (순정 theme-* 실측)
+           raw/cap-260819/RedEditorSDK.min.js (private_css 전달 경로)
+   주입:   wait_private_css=true → from-edicus-private /
+           waiting-for-extra-param → postMessage {name:"private_css"}
+   범위:   색만. 레이아웃·구조는 Edicus 쪽 파라미터 소관 (아래 주석 참조)
+   헤더만 후니 흰 헤더로 바꾸고 패널·캔버스는
+           Edicus 기본 다크 유지. 강조색은 purple-400.
+   ============================================================ */
+
+/* ── 후니 디자인시스템 토큰 ───────────────────────────────────
+   출처: docs/design/11가지상품옵션/_ds/huni-printing-design-system-…/tokens/colors.css
+   이름과 값을 DS 패키지에서 그대로 가져왔다. 값을 여기서 고치지 말고
+   DS 패키지를 고친 뒤 이 블록을 다시 옮겨 적을 것.
+   Edicus iframe 은 외부 스타일시트를 못 불러와 @import 를 못 쓴다.
+
+   :root 와 .app-main 두 곳에 건다 — private_css 가 문서 루트에 붙는지
+   컴포넌트 하위에 붙는지 확인되지 않았다. */
+:root,
+.app-main {
+  /* 브랜드 보라 */
+  --huni-purple-50:  #EEEBF9;
+  --huni-purple-100: #DED7F4;
+  --huni-purple-200: #C9C2DF;
+  --huni-purple-400: #9580D9;
+  --huni-purple-600: #5538B6;   /* MAIN COLOR */
+  --huni-purple-800: #351D87;
+
+  /* 중립 */
+  --huni-white:    #FFFFFF;
+  --huni-gray-50:  #F6F6F6;
+  --huni-gray-100: #E9E9E9;
+  --huni-gray-200: #CACACA;
+  --huni-gray-400: #979797;
+  --huni-gray-600: #565656;
+  --huni-gray-800: #424242;
+
+  /* 경고칼라 */
+  --huni-red: #E60012;
+
+  /* 의미 별칭 — DS 의 이름을 그대로 쓴다 */
+  --color-brand:         var(--huni-purple-600);
+  --color-brand-strong:  var(--huni-purple-800);
+  --color-brand-soft:    var(--huni-purple-400);
+  --color-brand-surface: var(--huni-purple-50);
+
+  --text-heading:   var(--huni-gray-800);
+  --text-body:      var(--huni-gray-600);
+  --text-secondary: var(--huni-gray-400);
+  --text-on-brand:  var(--huni-white);
+  --text-brand:     var(--huni-purple-600);
+
+  --surface-page:        var(--huni-white);
+  --surface-muted:       var(--huni-gray-50);
+  --surface-hover:       var(--huni-gray-50);
+  --surface-brand-hover: var(--huni-purple-50);
+  --surface-brand-press: var(--huni-purple-100);
+
+  --border-default:  var(--huni-gray-200);
+  --border-hairline: var(--huni-gray-100);
+  --border-brand:    var(--huni-purple-600);
+
+  --color-disabled-fill: var(--huni-gray-200);
+  --color-disabled-text: var(--huni-gray-400);
+  --color-error:         var(--huni-red);
+}
+
+/* ── 헤더 ─────────────────────────────────────────────────────
+   순정: 하늘색 #64c2ff 바탕 + 흰 글자.
+   후니: 흰 바탕 + 진한 글자.
+   ※ RedPrinting 실측에서도 헤더가 이미 흰색이었다
+     (raw/edicus_dom.json · div.app-header 의 bg = rgb(255,255,255)).
+
+   DS hover 규칙(readme.md VISUAL FOUNDATIONS):
+     "outline buttons fill a faint tint — gray-50 for neutral,
+      purple-50 for brand / filled primary darkens #5538B6 → #351D87" */
+.theme-header-bg            { background-color: var(--surface-page) !important}
+.theme-header-border        { border-color:     var(--border-default) !important}
+.theme-header-separator     { background-color: var(--border-default) !important}
+.theme-header-text          { color: var(--text-heading) !important}
+
+/* 헤더의 실행취소·미리보기 등은 중립 버튼 → hover 는 gray-50 */
+.theme-header-btn           { color: var(--text-body) !important}
+.theme-header-btn:hover     { background-color: var(--surface-hover) !important}
+.theme-header-btn:active    { background-color: var(--border-hairline) !important}
+.theme-header-btn[disabled=true] { color: var(--color-disabled-text) !important}
+
+/* 장바구니 = filled primary → hover 는 purple-800 */
+.theme-header-cart-btn      { color: var(--text-on-brand) !important;
+                              background-color: var(--color-brand) !important}
+.theme-header-cart-btn:hover{ background-color: var(--color-brand-strong) !important}
+
+/* 실패 버튼 — DS 에 오류색이 있다(--color-error #E60012) */
+.theme-header-fail-btn      { color: var(--text-on-brand) !important;
+                              background-color: var(--color-error) !important}
+.theme-header-fail-btn:hover{ background-color: var(--color-error) !important}
+
+/* ── 탭 ───────────────────────────────────────────────────────
+   Edicus 기본 다크면을 유지하고 강조색만 후니 보라로 바꾼다.
+   다크 위에서 purple-600 은 너무 어두워 안 읽히므로
+   DS 의 purple-400(--color-brand-soft)을 강조색으로 쓴다. */
+.theme-tab-btn              { color: #8c919d !important}
+.theme-tab-btn.active-tab   { color: var(--color-brand-soft) !important}
+
+/* ── 좌측 도구 패널 ─────────────────── (다크면 유지, 강조만 보라) */
+.theme-panel-round-btn:hover             { border-color: var(--color-brand-soft) !important}
+.theme-panel-toolbar-btn:hover           { border-color: var(--color-brand-soft) !important}
+.theme-panel-toolbar-btn[active=true]    { color:        var(--color-brand-soft) !important;
+                                           border-color: var(--color-brand-soft) !important}
+.theme-panel-item:hover     { outline-color: var(--color-brand-soft) !important;
+                              border-color:  var(--color-brand-soft) !important}
+.theme-panel-item:active    { outline-color: var(--huni-white) !important;
+                              border-color:  var(--huni-white) !important}
+.theme-panel-print-highlight         { color: var(--color-brand-soft) !important}
+.theme-panel-print-counter-btn:hover { color: var(--color-brand-soft) !important}
+
+/* ── 캔버스 ───────────────────────────────────────────────────
+   캔버스 주변은 순정 회색 그대로. 어두운 패널과 대비되어
+   작업물이 도드라지는 것이 B안의 존재 이유다. */
+.theme-canvas-bottom-btn       { background-color: var(--color-brand) !important}
+.theme-canvas-bottom-btn:hover { background-color: var(--color-brand-strong) !important}
+.theme-cell-empty              { fill: var(--huni-purple-200) !important}
+
+/* ── 모달 · 다이얼로그 · 셀렉트박스 ───────────────────────────
+   순정은 파란색(#61a5f4 / #64c2ff / #2284f4) 계열이라
+   손대지 않으면 편집 중 팝업만 파랗게 뜬다. */
+.theme-modal-title-bar      { background-color: var(--color-brand) !important}
+.theme-modal-button         { background-color: var(--color-brand) !important}
+.theme-modal-button-gray    { background-color: var(--color-disabled-fill) !important}
+.theme-modal-item           { outline-color: var(--border-default) !important;
+                              border-color:  var(--border-default) !important}
+.theme-modal-item:hover     { outline-color: var(--color-brand-soft) !important;
+                              border-color:  var(--color-brand-soft) !important}
+.theme-modal-item:active    { outline-color: var(--border-brand) !important;
+                              border-color:  var(--border-brand) !important}
+
+/* 닫기·삭제 — DS --color-error */
+.theme-dialog-btn:hover     { background-color: var(--color-error) !important}
+
+.theme-white-select-box            { background-color: var(--color-brand) !important}
+.theme-white-select-item-selected  { background-color: var(--color-brand-strong) !important}
+
+.theme-print-preview-box    { background-color: var(--surface-muted) !important}
+
+/* ── 드롭다운 ─────────────────────────────────────────────────
+   DS Select box: hover 배경 gray-50 */
+.theme-ui-dropdown-item:hover,
+.theme-ui-dropdown-item:active { color: var(--text-brand) !important}
+
+/* ── 플러그인(슬라이더 등) — CSS 변수로 열려 있음 ─────────────
+   DS Slider: track gray-200 · active track / thumb purple-600 */
+.theme-plugin,
+.theme-plugin.m2 {
+  --normal-color:  #5538B6;
+  --hover-color:   rgba(85,56,182,.90);
+  --active-color:  rgba(53,29,135,.97);
+  --track-color:   #CACACA;
+  --thumb-color:   #5538B6;
+  --select-color:  #5538B6;
+}
+.theme-plugin-button        { background-color: var(--color-brand) !important}
+.theme-plugin-button:hover  { background-color: var(--color-brand-strong) !important}
+.theme-plugin-button:active { background-color: var(--color-brand-strong) !important}
+
+
+/* ⚠ private_css 로는 못 하는 것 — Edicus 쪽에 요청해야 한다
+   근거: raw/cap-260819/RedEditorSDK.min.js (Qe._add_common_url_param)
+
+   편집기 URL 공통 파라미터 30개 중 화면 구성을 가르는 것들:
+     editor_type · parent_type · master_mode · ui_style ·
+     force_plugin · plugin_param · unlayers · edit_lock · unit_page
+   편집기 셸 자체도 넷이다:
+     /ed#/editor_landing · /ed#/lite/landing ·
+     /ed#/preview/landing · /ed#/tnview/landing
+
+   그래서 이 파일로는 다음을 할 수 없다 —
+     · 좌측 도구 레일의 위치·순서·아이콘 종류
+     · 없던 옵션 패널 추가 (customTabInfo 는 상품 데이터 쪽)
+     · 「모양컷」 같은 전용 도구 (force_plugin / plugin_param)
+     · 버튼 모서리 반경, 자간, 여백, 컨트롤 높이
+       (순정 theme-* 가 이 속성들을 노출하지 않는다)
+     · theme-cell-empty-icon 아이콘 교체 (배경이미지가 별도 SVG 파일)
+
+   ■ 로고를 넣지 않는 이유
+     순정 스타일시트에 .theme-header-logo 슬롯이 있고 흰 워드마크
+     SVG(103x15)를 배경이미지로 물고 있다. 하지만 실측 DOM
+     (raw/edicus_dom.json)에 그 클래스를 단 노드가 하나도 없다 —
+     app-header 의 자식은 header-left / header-middle / header-right 뿐이고
+     header-left 안에는 product-info-box(상품명)가 들어 있다.
+     즉 이 배포에서는 렌더링되지 않는 슬롯이다.
+
+     배경이미지를 갈아끼워도 아무 데도 안 보이고, 혹시 다른 설정에서
+     렌더링되면 이미 상품명이 앉아 있는 자리와 겹친다. 그래서 넣지 않는다.
+     편집기에 후니 로고를 세우는 일은 Edicus 쪽에 요청할 항목이다.
+
+   [미검증] run_mode=standard 전환 전이라 아직 적용해 본 적이 없다
+            (FINDINGS.md G0). !important 없이 먹는지도 미확인 —
+            주입 순서가 확인되면 필요한 곳에만 붙인다.
+*/
