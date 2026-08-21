@@ -142,8 +142,8 @@ AC7 재스모크 통과 → REPORT 수치 갱신. 백로그 이관 항목(AC5 �
 ## §E.4 Sync-phase Audit-Ready Signal
 
 - sync_status: audit-ready
-- sync_complete_at: 2026-08-22 00:5x
-- sync_commit_sha: pending-backfill-SPEC-WIDGET-WIRING-001
+- sync_complete_at: 2026-08-22 00:38
+- sync_commit_sha: 5c844f504a797bfe1a1e184df87beba1ca6e682e
 - sync 세션: `sync-huniweb`(칸반 t1 · 리드 디스패치 — HANDOFF/CHANGELOG·수치 확정·AC3 증거 문구 교체·커밋)
 - 산출:
   - `_workspace/huni-widget-wiring/HANDOFF.md`(재시작 지점·재키 드리프트 근본원인·t2~t5 연계·[HARD] 제약)
