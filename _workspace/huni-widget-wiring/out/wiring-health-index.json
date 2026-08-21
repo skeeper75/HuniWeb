@@ -1,0 +1,4015 @@
+{
+ "snapshot": "snap_20260821_2319",
+ "denominator": 266,
+ "verdict_counts": {
+  "BROKEN": 62,
+  "NOT_EVALUATED": 51,
+  "WARN": 90,
+  "OK": 63
+ },
+ "broken": 62,
+ "edges_evaluated": [
+  "C1",
+  "E1",
+  "E2",
+  "E3",
+  "E4",
+  "W1",
+  "W2",
+  "W3",
+  "W4",
+  "W5"
+ ],
+ "global_defects": [
+  {
+   "edge": "E4",
+   "code": "가격격자",
+   "summary": "가격격자 결함(dim_missing): '제본' 1셀 (권위 74·일치 68 91.9%)"
+  },
+  {
+   "edge": "E4",
+   "code": "가격격자",
+   "summary": "가격격자 결함(missing_cell): '명함포토카드' 2셀 (권위 105·일치 101 96.2%)"
+  },
+  {
+   "edge": "E4",
+   "code": "가격격자",
+   "summary": "가격격자 결함(missing_cell): '출력소재IMPORT' 32셀 (권위 81·일치 49 60.5%)"
+  },
+  {
+   "edge": "E4",
+   "code": "가격격자",
+   "summary": "가격격자 결함(missing_cell): '엽서북떡메' 12셀 (권위 480·일치 468 97.5%)"
+  },
+  {
+   "edge": "E2",
+   "code": "빈배선(배선됐으나",
+   "summary": "빈배선(배선됐으나 단가행 0): 단가/구성 확인필요 (실무진)"
+  },
+  {
+   "edge": "E2",
+   "code": "빈배선(배선됐으나",
+   "summary": "빈배선(배선됐으나 단가행 0): 단가/구성 확인필요 (실무진)"
+  },
+  {
+   "edge": "E2",
+   "code": "빈배선(배선됐으나",
+   "summary": "빈배선(배선됐으나 단가행 0): 단가/구성 확인필요 (실무진)"
+  },
+  {
+   "edge": "E2",
+   "code": "빈배선(배선됐으나",
+   "summary": "빈배선(배선됐으나 단가행 0): 단가/구성 확인필요 (실무진)"
+  },
+  {
+   "edge": "E2",
+   "code": "빈배선(배선됐으나",
+   "summary": "빈배선(배선됐으나 단가행 0): 단가/구성 확인필요 (실무진)"
+  },
+  {
+   "edge": "E2",
+   "code": "빈배선(배선됐으나",
+   "summary": "빈배선(배선됐으나 단가행 0): 단가/구성 확인필요 (실무진)"
+  },
+  {
+   "edge": "E2",
+   "code": "고아",
+   "summary": "고아 구성요소(단가행 540행 있으나 미배선): 형압 가공비(소형)"
+  },
+  {
+   "edge": "E2",
+   "code": "고아",
+   "summary": "고아 구성요소(단가행 2행 있으나 미배선): 형압 동판셋업비(소형)"
+  },
+  {
+   "edge": "E4",
+   "code": "가격격자",
+   "summary": "가격격자 결함(mismatch): '명함포토카드' 2셀 (권위 105·일치 101 96.2%)"
+  },
+  {
+   "edge": "E4",
+   "code": "유령",
+   "summary": "유령 가격코드(ORPHAN_PROC_VALUE): '제본비 벽걸이캘린더' 단가행 proc '탁상형캘린더제본(130)' 를 어떤 상품도 안 바인딩"
+  },
+  {
+   "edge": "E4",
+   "code": "유령",
+   "summary": "유령 가격코드(ORPHAN_PROC_VALUE): '제본비 싸바리바인더' 단가행 proc '싸바리바인더' 를 어떤 상품도 안 바인딩"
+  },
+  {
+   "edge": "E4",
+   "code": "유령",
+   "summary": "유령 가격코드(ORPHAN_PROC_VALUE): '타공비 (6mm)' 단가행 proc '1구 4mm 타공' 를 어떤 상품도 안 바인딩"
+  },
+  {
+   "edge": "E4",
+   "code": "유령",
+   "summary": "유령 가격코드(ORPHAN_PROC_VALUE): '메쉬현수막 타공 추가가격' 단가행 proc '타공' 를 어떤 상품도 안 바인딩"
+  },
+  {
+   "edge": "E4",
+   "code": "유령",
+   "summary": "유령 가격코드(ORPHAN_PROC_VALUE): '일반현수막 타공 추가가격' 단가행 proc '현수막타공' 를 어떤 상품도 안 바인딩"
+  },
+  {
+   "edge": "E4",
+   "code": "유령",
+   "summary": "유령 가격코드(ORPHAN_PROC_VALUE): '미싱비' 단가행 proc '미싱' 를 어떤 상품도 안 바인딩"
+  },
+  {
+   "edge": "E4",
+   "code": "유령",
+   "summary": "유령 가격코드(ORPHAN_PROC_VALUE): '별색인쇄비' 단가행 proc '금색인쇄' 를 어떤 상품도 안 바인딩"
+  },
+  {
+   "edge": "E4",
+   "code": "유령",
+   "summary": "유령 가격코드(ORPHAN_PROC_VALUE): '별색인쇄비' 단가행 proc '은색인쇄' 를 어떤 상품도 안 바인딩"
+  },
+  {
+   "edge": "E4",
+   "code": "가격격자",
+   "summary": "가격격자 매핑 미상(UNMAPPED): '커팅타공' 시트 comp 매핑 미확정 → 사람 확인"
+  },
+  {
+   "edge": "E4",
+   "code": "가격격자",
+   "summary": "가격격자 결함(unmapped): '명함포토카드' 2셀 (권위 105·일치 101 96.2%)"
+  },
+  {
+   "edge": "E4",
+   "code": "가격격자",
+   "summary": "가격격자 매핑 미상(UNMAPPED): '스티커' 시트 comp 매핑 미확정 → 사람 확인"
+  },
+  {
+   "edge": "E4",
+   "code": "가격격자",
+   "summary": "가격격자 매핑 미상(UNMAPPED): '후가공_박대형' 시트 comp 매핑 미확정 → 사람 확인"
+  },
+  {
+   "edge": "E4",
+   "code": "가격격자",
+   "summary": "가격격자 매핑 미상(UNMAPPED): '후가공_박소형' 시트 comp 매핑 미확정 → 사람 확인"
+  },
+  {
+   "edge": "E4",
+   "code": "가격격자",
+   "summary": "가격격자 매핑 미상(UNMAPPED): '후가공_박백업' 시트 comp 매핑 미확정 → 사람 확인"
+  }
+ ],
+ "products": [
+  {
+   "prd_cd": "PRD_000042",
+   "prd_nm": "프리미엄 쿠폰/상품권",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "W4"
+   ],
+   "n_defects": 41,
+   "money_impact": {
+    "undercharge": 7,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 34
+   }
+  },
+  {
+   "prd_cd": "PRD_000071",
+   "prd_nm": "트윈링책자",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 40,
+   "money_impact": {
+    "undercharge": 35,
+    "overcharge": 0,
+    "none": 3,
+    "unknown": 2
+   }
+  },
+  {
+   "prd_cd": "PRD_000069",
+   "prd_nm": "무선책자",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 31,
+   "money_impact": {
+    "undercharge": 28,
+    "overcharge": 0,
+    "none": 1,
+    "unknown": 2
+   }
+  },
+  {
+   "prd_cd": "PRD_000068",
+   "prd_nm": "중철책자",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 28,
+   "money_impact": {
+    "undercharge": 27,
+    "overcharge": 0,
+    "none": 1,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000155",
+   "prd_nm": "아크릴볼펜",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 26,
+   "money_impact": {
+    "undercharge": 23,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 3
+   }
+  },
+  {
+   "prd_cd": "PRD_000146",
+   "prd_nm": "아크릴키링",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 23,
+   "money_impact": {
+    "undercharge": 20,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 3
+   }
+  },
+  {
+   "prd_cd": "PRD_000100",
+   "prd_nm": "포토북 [디자인명]",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 22,
+   "money_impact": {
+    "undercharge": 21,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 1
+   }
+  },
+  {
+   "prd_cd": "PRD_000052",
+   "prd_nm": "반칼 자유형 스티커",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4",
+    "W4"
+   ],
+   "n_defects": 15,
+   "money_impact": {
+    "undercharge": 11,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 4
+   }
+  },
+  {
+   "prd_cd": "PRD_000147",
+   "prd_nm": "아크릴마그넷",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 15,
+   "money_impact": {
+    "undercharge": 12,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 3
+   }
+  },
+  {
+   "prd_cd": "PRD_000149",
+   "prd_nm": "아크릴집게",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 15,
+   "money_impact": {
+    "undercharge": 11,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 4
+   }
+  },
+  {
+   "prd_cd": "PRD_000148",
+   "prd_nm": "아크릴뱃지",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 14,
+   "money_impact": {
+    "undercharge": 11,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 3
+   }
+  },
+  {
+   "prd_cd": "PRD_000150",
+   "prd_nm": "아크릴스마트톡",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 13,
+   "money_impact": {
+    "undercharge": 11,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 2
+   }
+  },
+  {
+   "prd_cd": "PRD_000152",
+   "prd_nm": "아크릴명찰",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 13,
+   "money_impact": {
+    "undercharge": 11,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 2
+   }
+  },
+  {
+   "prd_cd": "PRD_000154",
+   "prd_nm": "아크릴 머리끈",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 13,
+   "money_impact": {
+    "undercharge": 10,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 3
+   }
+  },
+  {
+   "prd_cd": "PRD_000156",
+   "prd_nm": "아크릴지비츠",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 13,
+   "money_impact": {
+    "undercharge": 10,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 3
+   }
+  },
+  {
+   "prd_cd": "PRD_000138",
+   "prd_nm": "일반현수막",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "W4"
+   ],
+   "n_defects": 12,
+   "money_impact": {
+    "undercharge": 9,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 3
+   }
+  },
+  {
+   "prd_cd": "PRD_000151",
+   "prd_nm": "맥세이프 스마트톡",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 11,
+   "money_impact": {
+    "undercharge": 9,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 2
+   }
+  },
+  {
+   "prd_cd": "PRD_000062",
+   "prd_nm": "반칼팬시스티커",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 10,
+   "money_impact": {
+    "undercharge": 6,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 4
+   }
+  },
+  {
+   "prd_cd": "PRD_000135",
+   "prd_nm": "족자포스터",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 10,
+   "money_impact": {
+    "undercharge": 5,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 5
+   }
+  },
+  {
+   "prd_cd": "PRD_000060",
+   "prd_nm": "반칼직사각스티커",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 9,
+   "money_impact": {
+    "undercharge": 5,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 4
+   }
+  },
+  {
+   "prd_cd": "PRD_000061",
+   "prd_nm": "반칼띠지스티커",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 9,
+   "money_impact": {
+    "undercharge": 5,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 4
+   }
+  },
+  {
+   "prd_cd": "PRD_000133",
+   "prd_nm": "캔버스 행잉포스터",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4",
+    "W4"
+   ],
+   "n_defects": 9,
+   "money_impact": {
+    "undercharge": 5,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 4
+   }
+  },
+  {
+   "prd_cd": "PRD_000134",
+   "prd_nm": "린넨우드봉족자",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 8,
+   "money_impact": {
+    "undercharge": 4,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 4
+   }
+  },
+  {
+   "prd_cd": "PRD_000024",
+   "prd_nm": "포토카드",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 7,
+   "money_impact": {
+    "undercharge": 2,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 5
+   }
+  },
+  {
+   "prd_cd": "PRD_000025",
+   "prd_nm": "투명포토카드",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 7,
+   "money_impact": {
+    "undercharge": 3,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 4
+   }
+  },
+  {
+   "prd_cd": "PRD_000053",
+   "prd_nm": "반칼 자유형 투명스티커",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 7,
+   "money_impact": {
+    "undercharge": 4,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 3
+   }
+  },
+  {
+   "prd_cd": "PRD_000055",
+   "prd_nm": "낱장 자유형 스티커",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4",
+    "W4"
+   ],
+   "n_defects": 7,
+   "money_impact": {
+    "undercharge": 4,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 3
+   }
+  },
+  {
+   "prd_cd": "PRD_000058",
+   "prd_nm": "반칼원형스티커",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 7,
+   "money_impact": {
+    "undercharge": 5,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 2
+   }
+  },
+  {
+   "prd_cd": "PRD_000059",
+   "prd_nm": "반칼정사각스티커",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 7,
+   "money_impact": {
+    "undercharge": 5,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 2
+   }
+  },
+  {
+   "prd_cd": "PRD_000094",
+   "prd_nm": "엽서북",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 7,
+   "money_impact": {
+    "undercharge": 7,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000036",
+   "prd_nm": "미니모양명함",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 6,
+   "money_impact": {
+    "undercharge": 3,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 3
+   }
+  },
+  {
+   "prd_cd": "PRD_000097",
+   "prd_nm": "떡메모지",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 6,
+   "money_impact": {
+    "undercharge": 5,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 1
+   }
+  },
+  {
+   "prd_cd": "PRD_000130",
+   "prd_nm": "포맥스보드",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 6,
+   "money_impact": {
+    "undercharge": 3,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 3
+   }
+  },
+  {
+   "prd_cd": "PRD_000131",
+   "prd_nm": "프레임리스우드액자",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 6,
+   "money_impact": {
+    "undercharge": 2,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 4
+   }
+  },
+  {
+   "prd_cd": "PRD_000145",
+   "prd_nm": "미니배너",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 6,
+   "money_impact": {
+    "undercharge": 2,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 4
+   }
+  },
+  {
+   "prd_cd": "PRD_000157",
+   "prd_nm": "아크릴네임택",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 6,
+   "money_impact": {
+    "undercharge": 4,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 2
+   }
+  },
+  {
+   "prd_cd": "PRD_000159",
+   "prd_nm": "아크릴코스터",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 6,
+   "money_impact": {
+    "undercharge": 4,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 2
+   }
+  },
+  {
+   "prd_cd": "PRD_000161",
+   "prd_nm": "판아크릴",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 6,
+   "money_impact": {
+    "undercharge": 4,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 2
+   }
+  },
+  {
+   "prd_cd": "PRD_000244",
+   "prd_nm": "타이벡플랫파우치",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 6,
+   "money_impact": {
+    "undercharge": 4,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 2
+   }
+  },
+  {
+   "prd_cd": "PRD_000063",
+   "prd_nm": "반칼팬시투명스티커",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 5,
+   "money_impact": {
+    "undercharge": 3,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 2
+   }
+  },
+  {
+   "prd_cd": "PRD_000070",
+   "prd_nm": "PUR책자",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 5,
+   "money_impact": {
+    "undercharge": 3,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 2
+   }
+  },
+  {
+   "prd_cd": "PRD_000082",
+   "prd_nm": "하드커버링책자",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 5,
+   "money_impact": {
+    "undercharge": 4,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 1
+   }
+  },
+  {
+   "prd_cd": "PRD_000129",
+   "prd_nm": "폼보드",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 5,
+   "money_impact": {
+    "undercharge": 2,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 3
+   }
+  },
+  {
+   "prd_cd": "PRD_000141",
+   "prd_nm": "홀로그램 시트커팅",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 5,
+   "money_impact": {
+    "undercharge": 4,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 1
+   }
+  },
+  {
+   "prd_cd": "PRD_000144",
+   "prd_nm": "미니보드스탠딩",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 5,
+   "money_impact": {
+    "undercharge": 5,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000220",
+   "prd_nm": "폰스트랩",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E1",
+    "E4"
+   ],
+   "n_defects": 5,
+   "money_impact": {
+    "undercharge": 5,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000273",
+   "prd_nm": "타이벡양면백팩",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 5,
+   "money_impact": {
+    "undercharge": 4,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 1
+   }
+  },
+  {
+   "prd_cd": "PRD_000274",
+   "prd_nm": "타이벡보냉보틀백",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 5,
+   "money_impact": {
+    "undercharge": 4,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 1
+   }
+  },
+  {
+   "prd_cd": "PRD_000056",
+   "prd_nm": "낱장 자유형 투명스티커",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "W4"
+   ],
+   "n_defects": 4,
+   "money_impact": {
+    "undercharge": 1,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 3
+   }
+  },
+  {
+   "prd_cd": "PRD_000125",
+   "prd_nm": "캔버스패브릭포스터",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "W4"
+   ],
+   "n_defects": 4,
+   "money_impact": {
+    "undercharge": 2,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 2
+   }
+  },
+  {
+   "prd_cd": "PRD_000158",
+   "prd_nm": "아크릴 포카키링",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 4,
+   "money_impact": {
+    "undercharge": 3,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 1
+   }
+  },
+  {
+   "prd_cd": "PRD_000162",
+   "prd_nm": "아크릴포카스탠드",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 4,
+   "money_impact": {
+    "undercharge": 2,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 2
+   }
+  },
+  {
+   "prd_cd": "PRD_000198",
+   "prd_nm": "피크닉매트",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "W4"
+   ],
+   "n_defects": 4,
+   "money_impact": {
+    "undercharge": 2,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 2
+   }
+  },
+  {
+   "prd_cd": "PRD_000202",
+   "prd_nm": "키캡키링",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 4,
+   "money_impact": {
+    "undercharge": 4,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000038",
+   "prd_nm": "형압명함",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E1",
+    "E4"
+   ],
+   "n_defects": 3,
+   "money_impact": {
+    "undercharge": 3,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000067",
+   "prd_nm": "타투스티커",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 3,
+   "money_impact": {
+    "undercharge": 2,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 1
+   }
+  },
+  {
+   "prd_cd": "PRD_000176",
+   "prd_nm": "먼슬리플래너",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 3,
+   "money_impact": {
+    "undercharge": 2,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 1
+   }
+  },
+  {
+   "prd_cd": "PRD_000177",
+   "prd_nm": "스프링노트",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 3,
+   "money_impact": {
+    "undercharge": 2,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 1
+   }
+  },
+  {
+   "prd_cd": "PRD_000181",
+   "prd_nm": "중철노트",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 3,
+   "money_impact": {
+    "undercharge": 2,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 1
+   }
+  },
+  {
+   "prd_cd": "PRD_000226",
+   "prd_nm": "아크릴쉐이커코롯토",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "E4"
+   ],
+   "n_defects": 3,
+   "money_impact": {
+    "undercharge": 3,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000197",
+   "prd_nm": "미니매트",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "W4"
+   ],
+   "n_defects": 2,
+   "money_impact": {
+    "undercharge": 2,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000267",
+   "prd_nm": "린넨 에코백",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "BROKEN",
+   "broken_edges": [
+    "W4"
+   ],
+   "n_defects": 2,
+   "money_impact": {
+    "undercharge": 2,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000027",
+   "prd_nm": "2단접지카드",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 17,
+   "money_impact": {
+    "undercharge": 1,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 16
+   }
+  },
+  {
+   "prd_cd": "PRD_000029",
+   "prd_nm": "3단접지카드",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 17,
+   "money_impact": {
+    "undercharge": 1,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 16
+   }
+  },
+  {
+   "prd_cd": "PRD_000028",
+   "prd_nm": "미니접지카드",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 15,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 15
+   }
+  },
+  {
+   "prd_cd": "PRD_000031",
+   "prd_nm": "프리미엄명함",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 13,
+   "money_impact": {
+    "undercharge": 1,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 12
+   }
+  },
+  {
+   "prd_cd": "PRD_000034",
+   "prd_nm": "펄명함",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 13,
+   "money_impact": {
+    "undercharge": 1,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 12
+   }
+  },
+  {
+   "prd_cd": "PRD_000290",
+   "prd_nm": "무선책자-표지",
+   "prd_typ_cd": "PRD_TYPE.02",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 12,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 12
+   }
+  },
+  {
+   "prd_cd": "PRD_000292",
+   "prd_nm": "PUR책자-표지",
+   "prd_typ_cd": "PRD_TYPE.02",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 12,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 12
+   }
+  },
+  {
+   "prd_cd": "PRD_000020",
+   "prd_nm": "화이트인쇄엽서",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 8,
+   "money_impact": {
+    "undercharge": 1,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 7
+   }
+  },
+  {
+   "prd_cd": "PRD_000037",
+   "prd_nm": "오리지널박명함",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 8,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 8
+   }
+  },
+  {
+   "prd_cd": "PRD_000066",
+   "prd_nm": "합판도무송스티커",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 8,
+   "money_impact": {
+    "undercharge": 7,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 1
+   }
+  },
+  {
+   "prd_cd": "PRD_000016",
+   "prd_nm": "프리미엄엽서",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 7,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 7
+   }
+  },
+  {
+   "prd_cd": "PRD_000018",
+   "prd_nm": "스탠다드엽서",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 7,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 7
+   }
+  },
+  {
+   "prd_cd": "PRD_000021",
+   "prd_nm": "핑크별색엽서",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 7,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 7
+   }
+  },
+  {
+   "prd_cd": "PRD_000040",
+   "prd_nm": "화이트인쇄명함",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 7,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 2,
+    "unknown": 5
+   }
+  },
+  {
+   "prd_cd": "PRD_000041",
+   "prd_nm": "스탠다드 쿠폰/상품권",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 7,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 7
+   }
+  },
+  {
+   "prd_cd": "PRD_000019",
+   "prd_nm": "투명엽서",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 6,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 6
+   }
+  },
+  {
+   "prd_cd": "PRD_000026",
+   "prd_nm": "종이슬로건",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 6,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 6
+   }
+  },
+  {
+   "prd_cd": "PRD_000032",
+   "prd_nm": "코팅명함",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 6,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 6
+   }
+  },
+  {
+   "prd_cd": "PRD_000033",
+   "prd_nm": "스탠다드명함",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 6,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 6
+   }
+  },
+  {
+   "prd_cd": "PRD_000039",
+   "prd_nm": "투명명함",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 6,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 1,
+    "unknown": 5
+   }
+  },
+  {
+   "prd_cd": "PRD_000017",
+   "prd_nm": "코팅엽서",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 5,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 5
+   }
+  },
+  {
+   "prd_cd": "PRD_000047",
+   "prd_nm": "소량전단지",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 5,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 5
+   }
+  },
+  {
+   "prd_cd": "PRD_000124",
+   "prd_nm": "린넨패브릭포스터",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 5,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 5
+   }
+  },
+  {
+   "prd_cd": "PRD_000136",
+   "prd_nm": "PET배너",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 5,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 5
+   }
+  },
+  {
+   "prd_cd": "PRD_000030",
+   "prd_nm": "지그재그엽서",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 4,
+   "money_impact": {
+    "undercharge": 1,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 3
+   }
+  },
+  {
+   "prd_cd": "PRD_000045",
+   "prd_nm": "인쇄헤더택",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 4,
+   "money_impact": {
+    "undercharge": 1,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 3
+   }
+  },
+  {
+   "prd_cd": "PRD_000050",
+   "prd_nm": "봉투제작",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 4,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 4,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000035",
+   "prd_nm": "모양명함",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 3,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 3
+   }
+  },
+  {
+   "prd_cd": "PRD_000044",
+   "prd_nm": "인쇄배경지(커팅형)",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 3,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 3
+   }
+  },
+  {
+   "prd_cd": "PRD_000048",
+   "prd_nm": "접지리플렛",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 3,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 3
+   }
+  },
+  {
+   "prd_cd": "PRD_000049",
+   "prd_nm": "와이드 접지리플렛",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 3,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 3
+   }
+  },
+  {
+   "prd_cd": "PRD_000054",
+   "prd_nm": "반칼 자유형 홀로그램스티커",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 3,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 3
+   }
+  },
+  {
+   "prd_cd": "PRD_000057",
+   "prd_nm": "대형 자유형 스티커",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 3,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 3
+   }
+  },
+  {
+   "prd_cd": "PRD_000110",
+   "prd_nm": "엽서캘린더",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 3,
+   "money_impact": {
+    "undercharge": 1,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 2
+   }
+  },
+  {
+   "prd_cd": "PRD_000111",
+   "prd_nm": "벽걸이캘린더",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 3,
+   "money_impact": {
+    "undercharge": 1,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 2
+   }
+  },
+  {
+   "prd_cd": "PRD_000118",
+   "prd_nm": "아트프린트포스터",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 3,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 3
+   }
+  },
+  {
+   "prd_cd": "PRD_000120",
+   "prd_nm": "방수포스터",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 3,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 3
+   }
+  },
+  {
+   "prd_cd": "PRD_000121",
+   "prd_nm": "접착방수포스터",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 3,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 3
+   }
+  },
+  {
+   "prd_cd": "PRD_000137",
+   "prd_nm": "메쉬배너",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 3,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 3
+   }
+  },
+  {
+   "prd_cd": "PRD_000139",
+   "prd_nm": "메쉬현수막",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 3,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 3
+   }
+  },
+  {
+   "prd_cd": "PRD_000160",
+   "prd_nm": "아크릴자유형스탠드",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 3,
+   "money_impact": {
+    "undercharge": 1,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 2
+   }
+  },
+  {
+   "prd_cd": "PRD_000163",
+   "prd_nm": "아크릴미니파츠",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 3,
+   "money_impact": {
+    "undercharge": 1,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 2
+   }
+  },
+  {
+   "prd_cd": "PRD_000164",
+   "prd_nm": "아크릴코롯토",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 3,
+   "money_impact": {
+    "undercharge": 1,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 2
+   }
+  },
+  {
+   "prd_cd": "PRD_000046",
+   "prd_nm": "라벨/택",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 2,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 2
+   }
+  },
+  {
+   "prd_cd": "PRD_000065",
+   "prd_nm": "스티커팩",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 2,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 2
+   }
+  },
+  {
+   "prd_cd": "PRD_000109",
+   "prd_nm": "미니탁상형캘린더",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 2,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 2
+   }
+  },
+  {
+   "prd_cd": "PRD_000122",
+   "prd_nm": "접착투명포스터",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 2,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 2
+   }
+  },
+  {
+   "prd_cd": "PRD_000132",
+   "prd_nm": "레더아트액자",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 2,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 2
+   }
+  },
+  {
+   "prd_cd": "PRD_000215",
+   "prd_nm": "클립보드",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 2,
+   "money_impact": {
+    "undercharge": 1,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 1
+   }
+  },
+  {
+   "prd_cd": "PRD_000217",
+   "prd_nm": "만년스탬프",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 2,
+   "money_impact": {
+    "undercharge": 1,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 1
+   }
+  },
+  {
+   "prd_cd": "PRD_000230",
+   "prd_nm": "레더플랫파우치",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 2,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 2
+   }
+  },
+  {
+   "prd_cd": "PRD_000231",
+   "prd_nm": "레더슬림파우치",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 2,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 2
+   }
+  },
+  {
+   "prd_cd": "PRD_000232",
+   "prd_nm": "레더삼각파우치",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 2,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 2
+   }
+  },
+  {
+   "prd_cd": "PRD_000233",
+   "prd_nm": "레더볼륨파우치",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 2,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 2
+   }
+  },
+  {
+   "prd_cd": "PRD_000238",
+   "prd_nm": "레더아이패드노트북파우치",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 2,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 2
+   }
+  },
+  {
+   "prd_cd": "PRD_000246",
+   "prd_nm": "타이벡삼각파우치",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 2,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 2
+   }
+  },
+  {
+   "prd_cd": "PRD_000247",
+   "prd_nm": "타이벡스트링파우치",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 2,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 2
+   }
+  },
+  {
+   "prd_cd": "PRD_000249",
+   "prd_nm": "메쉬슬림파우치",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 2,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 2
+   }
+  },
+  {
+   "prd_cd": "PRD_000288",
+   "prd_nm": "중철책자-표지",
+   "prd_typ_cd": "PRD_TYPE.02",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 2,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 2
+   }
+  },
+  {
+   "prd_cd": "PRD_000043",
+   "prd_nm": "인쇄배경지(일반형)",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 1,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 1
+   }
+  },
+  {
+   "prd_cd": "PRD_000101",
+   "prd_nm": "포토북 [디자인명]-내지",
+   "prd_typ_cd": "PRD_TYPE.02",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 1,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 1
+   }
+  },
+  {
+   "prd_cd": "PRD_000119",
+   "prd_nm": "아트페이퍼포스터",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 1,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 1
+   }
+  },
+  {
+   "prd_cd": "PRD_000123",
+   "prd_nm": "아트패브릭포스터",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 1,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 1
+   }
+  },
+  {
+   "prd_cd": "PRD_000126",
+   "prd_nm": "레더아트프린트",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 1,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 1
+   }
+  },
+  {
+   "prd_cd": "PRD_000127",
+   "prd_nm": "타이벡프린트",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 1,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 1
+   }
+  },
+  {
+   "prd_cd": "PRD_000128",
+   "prd_nm": "메쉬프린트",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 1,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 1
+   }
+  },
+  {
+   "prd_cd": "PRD_000140",
+   "prd_nm": "무광시트커팅",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 1,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 1
+   }
+  },
+  {
+   "prd_cd": "PRD_000142",
+   "prd_nm": "유광아크릴스티커",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 1,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 1
+   }
+  },
+  {
+   "prd_cd": "PRD_000143",
+   "prd_nm": "미러아크릴스티커",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 1,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 1
+   }
+  },
+  {
+   "prd_cd": "PRD_000153",
+   "prd_nm": "아크릴명찰(골드실버)",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 1,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 1
+   }
+  },
+  {
+   "prd_cd": "PRD_000166",
+   "prd_nm": "아크릴카라비너",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 1,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 1
+   }
+  },
+  {
+   "prd_cd": "PRD_000172",
+   "prd_nm": "만년다이어리(소프트커버)",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 1,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 1
+   }
+  },
+  {
+   "prd_cd": "PRD_000173",
+   "prd_nm": "만년다이어리(하드커버)",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 1,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 1
+   }
+  },
+  {
+   "prd_cd": "PRD_000174",
+   "prd_nm": "만년다이어리(레더하드커버)",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 1,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 1
+   }
+  },
+  {
+   "prd_cd": "PRD_000175",
+   "prd_nm": "만년다이어리(레더소프트커버)",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 1,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 1
+   }
+  },
+  {
+   "prd_cd": "PRD_000178",
+   "prd_nm": "스프링수첩",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 1,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 1
+   }
+  },
+  {
+   "prd_cd": "PRD_000179",
+   "prd_nm": "메모패드",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 1,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 1
+   }
+  },
+  {
+   "prd_cd": "PRD_000186",
+   "prd_nm": "사각손거울",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 1,
+   "money_impact": {
+    "undercharge": 1,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000194",
+   "prd_nm": "워터북보틀",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 1,
+   "money_impact": {
+    "undercharge": 1,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000200",
+   "prd_nm": "핀버튼",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 1,
+   "money_impact": {
+    "undercharge": 1,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000201",
+   "prd_nm": "레더스트랩키링",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 1,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 1
+   }
+  },
+  {
+   "prd_cd": "PRD_000203",
+   "prd_nm": "LED투명키캡키링",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 1,
+   "money_impact": {
+    "undercharge": 1,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000216",
+   "prd_nm": "투명클립보드",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 1,
+   "money_impact": {
+    "undercharge": 1,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000239",
+   "prd_nm": "캔버스 플랫 파우치",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 1,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 1
+   }
+  },
+  {
+   "prd_cd": "PRD_000240",
+   "prd_nm": "캔버스 삼각 파우치",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 1,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 1
+   }
+  },
+  {
+   "prd_cd": "PRD_000243",
+   "prd_nm": "린넨 스트링 파우치",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 1,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 1
+   }
+  },
+  {
+   "prd_cd": "PRD_000245",
+   "prd_nm": "타이벡슬림파우치",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 1,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 1
+   }
+  },
+  {
+   "prd_cd": "PRD_000252",
+   "prd_nm": "레더슬림미니파우치",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 1,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 1
+   }
+  },
+  {
+   "prd_cd": "PRD_000254",
+   "prd_nm": "레더볼륨미니파우치",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 1,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 1
+   }
+  },
+  {
+   "prd_cd": "PRD_000280",
+   "prd_nm": "레더라벨제작",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "WARN",
+   "broken_edges": [],
+   "n_defects": 1,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 1
+   }
+  },
+  {
+   "prd_cd": "PRD_000001",
+   "prd_nm": "OPP접착봉투",
+   "prd_typ_cd": "PRD_TYPE.03",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000002",
+   "prd_nm": "OPP비접착봉투",
+   "prd_typ_cd": "PRD_TYPE.03",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000004",
+   "prd_nm": "카드봉투",
+   "prd_typ_cd": "PRD_TYPE.03",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000005",
+   "prd_nm": "캘린더봉투",
+   "prd_typ_cd": "PRD_TYPE.03",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000006",
+   "prd_nm": "볼체인",
+   "prd_typ_cd": "PRD_TYPE.03",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000007",
+   "prd_nm": "와이어링",
+   "prd_typ_cd": "PRD_TYPE.03",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000009",
+   "prd_nm": "투명케이스",
+   "prd_typ_cd": "PRD_TYPE.03",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000010",
+   "prd_nm": "행택끈",
+   "prd_typ_cd": "PRD_TYPE.03",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000011",
+   "prd_nm": "자석고정용고무판",
+   "prd_typ_cd": "PRD_TYPE.03",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000012",
+   "prd_nm": "우드거치대",
+   "prd_typ_cd": "PRD_TYPE.03",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000013",
+   "prd_nm": "우드봉",
+   "prd_typ_cd": "PRD_TYPE.03",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000014",
+   "prd_nm": "우드행거",
+   "prd_typ_cd": "PRD_TYPE.03",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000015",
+   "prd_nm": "만년스탬프 리필잉크",
+   "prd_typ_cd": "PRD_TYPE.03",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000072",
+   "prd_nm": "하드커버책자",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000073",
+   "prd_nm": "하드커버책자-표지",
+   "prd_typ_cd": "PRD_TYPE.02",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000074",
+   "prd_nm": "하드커버책자-면지",
+   "prd_typ_cd": "PRD_TYPE.02",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000077",
+   "prd_nm": "레더하드커버책자",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000078",
+   "prd_nm": "레더하드커버책자-표지",
+   "prd_typ_cd": "PRD_TYPE.02",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000083",
+   "prd_nm": "하드커버링책자-표지",
+   "prd_typ_cd": "PRD_TYPE.02",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000084",
+   "prd_nm": "하드커버링책자-면지",
+   "prd_typ_cd": "PRD_TYPE.02",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000088",
+   "prd_nm": "레더링바인더",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000089",
+   "prd_nm": "레더링바인더-표지",
+   "prd_typ_cd": "PRD_TYPE.02",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000090",
+   "prd_nm": "레더링바인더-면지",
+   "prd_typ_cd": "PRD_TYPE.02",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000095",
+   "prd_nm": "엽서북-내지",
+   "prd_typ_cd": "PRD_TYPE.02",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000096",
+   "prd_nm": "엽서북-표지",
+   "prd_typ_cd": "PRD_TYPE.02",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000102",
+   "prd_nm": "포토북 [디자인명]-하드커버",
+   "prd_typ_cd": "PRD_TYPE.02",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000104",
+   "prd_nm": "포토북 [디자인명]-면지",
+   "prd_typ_cd": "PRD_TYPE.02",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000105",
+   "prd_nm": "포토북 [디자인명]-레더하드커버",
+   "prd_typ_cd": "PRD_TYPE.02",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000107",
+   "prd_nm": "포토북 [디자인명]-소프트커버",
+   "prd_typ_cd": "PRD_TYPE.02",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000108",
+   "prd_nm": "탁상형캘린더",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000112",
+   "prd_nm": "와이드벽걸이캘린더",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000183",
+   "prd_nm": "틴거울",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000184",
+   "prd_nm": "컴팩트거울",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000185",
+   "prd_nm": "카드거울",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000187",
+   "prd_nm": "블랙사각손거울",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000188",
+   "prd_nm": "레더코스터",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000189",
+   "prd_nm": "코르크코스터",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000190",
+   "prd_nm": "우드코스터",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000191",
+   "prd_nm": "린넨패브릭코스터",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000192",
+   "prd_nm": "규조토코스터",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000193",
+   "prd_nm": "머그컵",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000195",
+   "prd_nm": "벨벳쿠션",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000196",
+   "prd_nm": "레더여권케이스",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000205",
+   "prd_nm": "양말",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000206",
+   "prd_nm": "반팔티셔츠",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000208",
+   "prd_nm": "슬로건",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000209",
+   "prd_nm": "후드티셔츠",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000210",
+   "prd_nm": "초슬림마우스패드",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000211",
+   "prd_nm": "장패드",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000212",
+   "prd_nm": "극세사클리너",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000213",
+   "prd_nm": "틴케이스",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000214",
+   "prd_nm": "자석북마크",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000218",
+   "prd_nm": "타이벡북커버",
+   "prd_typ_cd": "PRD_TYPE.03",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000219",
+   "prd_nm": "밴드톡",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000221",
+   "prd_nm": "말랑키링",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000223",
+   "prd_nm": "말랑포카홀더",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000224",
+   "prd_nm": "말랑네임택",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000225",
+   "prd_nm": "말랑여권케이스",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000228",
+   "prd_nm": "이미지피켓(소형)",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000229",
+   "prd_nm": "이미지피켓",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000234",
+   "prd_nm": "레더스트링파우치",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000235",
+   "prd_nm": "레더스트링원형파우치",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000236",
+   "prd_nm": "레더플랫클러치",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000237",
+   "prd_nm": "레더삼각클러치",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000241",
+   "prd_nm": "캔버스 스트랩 라벨파우치",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000242",
+   "prd_nm": "광목 스트링 라벨파우치",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000248",
+   "prd_nm": "타이벡플랫클러치",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000250",
+   "prd_nm": "메쉬볼륨파우치",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000251",
+   "prd_nm": "레더플랫미니파우치",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000253",
+   "prd_nm": "레더삼각미니파우치",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000255",
+   "prd_nm": "레더원형미니파우치",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000256",
+   "prd_nm": "레더플랫필통",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000257",
+   "prd_nm": "레더슬림필통",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000258",
+   "prd_nm": "레더삼각필통",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000259",
+   "prd_nm": "레더볼륨필통",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000260",
+   "prd_nm": "레더원형필통",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000263",
+   "prd_nm": "레더토트백",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000264",
+   "prd_nm": "레더숄더백",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000265",
+   "prd_nm": "린넨 미니에코백",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000266",
+   "prd_nm": "린넨 토트백",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000268",
+   "prd_nm": "캔버스심플백",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000269",
+   "prd_nm": "캔버스 포켓심플백",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000270",
+   "prd_nm": "캔버스에코백",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000271",
+   "prd_nm": "캔버스숄더백",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000272",
+   "prd_nm": "캔버스 포켓숄더백",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000275",
+   "prd_nm": "타이벡보냉미니백",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000276",
+   "prd_nm": "타이벡에코백",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000277",
+   "prd_nm": "타이벡보냉에코백",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000278",
+   "prd_nm": "메쉬토트백",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000279",
+   "prd_nm": "메쉬에코백",
+   "prd_typ_cd": "PRD_TYPE.01",
+   "verdict": "OK",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000283",
+   "prd_nm": "트레싱지봉투",
+   "prd_typ_cd": "PRD_TYPE.03",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000287",
+   "prd_nm": "중철책자-내지",
+   "prd_typ_cd": "PRD_TYPE.02",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000289",
+   "prd_nm": "무선책자-내지",
+   "prd_typ_cd": "PRD_TYPE.02",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000291",
+   "prd_nm": "PUR책자-내지",
+   "prd_typ_cd": "PRD_TYPE.02",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000293",
+   "prd_nm": "만년다이어리(소프트커버)-표지(아트250+무광코팅)",
+   "prd_typ_cd": "PRD_TYPE.02",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000294",
+   "prd_nm": "만년다이어리(하드커버)-표지(아트250+무광코팅)",
+   "prd_typ_cd": "PRD_TYPE.02",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000295",
+   "prd_nm": "만년다이어리(하드커버)-면지",
+   "prd_typ_cd": "PRD_TYPE.02",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000296",
+   "prd_nm": "만년다이어리(레더하드커버)-표지(레더)",
+   "prd_typ_cd": "PRD_TYPE.02",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000297",
+   "prd_nm": "만년다이어리(레더하드커버)-면지",
+   "prd_typ_cd": "PRD_TYPE.02",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000298",
+   "prd_nm": "만년다이어리(레더소프트커버)-표지(레더)",
+   "prd_typ_cd": "PRD_TYPE.02",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000299",
+   "prd_nm": "먼슬리플래너-표지",
+   "prd_typ_cd": "PRD_TYPE.02",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000300",
+   "prd_nm": "먼슬리플래너-내지",
+   "prd_typ_cd": "PRD_TYPE.02",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000301",
+   "prd_nm": "스프링노트-표지",
+   "prd_typ_cd": "PRD_TYPE.02",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000302",
+   "prd_nm": "스프링노트-내지(무지)",
+   "prd_typ_cd": "PRD_TYPE.02",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000303",
+   "prd_nm": "스프링수첩-표지(아트250+무광코팅)",
+   "prd_typ_cd": "PRD_TYPE.02",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000304",
+   "prd_nm": "스프링수첩-내지(무지)",
+   "prd_typ_cd": "PRD_TYPE.02",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000305",
+   "prd_nm": "메모패드-표지",
+   "prd_typ_cd": "PRD_TYPE.02",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000306",
+   "prd_nm": "메모패드-내지(무지)",
+   "prd_typ_cd": "PRD_TYPE.02",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000307",
+   "prd_nm": "중철노트-표지",
+   "prd_typ_cd": "PRD_TYPE.02",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000308",
+   "prd_nm": "중철노트-내지(무지)",
+   "prd_typ_cd": "PRD_TYPE.02",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000310",
+   "prd_nm": "트윈링책자-표지",
+   "prd_typ_cd": "PRD_TYPE.02",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000311",
+   "prd_nm": "트윈링책자-내지",
+   "prd_typ_cd": "PRD_TYPE.02",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000312",
+   "prd_nm": "미니CD앨범케이스",
+   "prd_typ_cd": "PRD_TYPE.02",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  },
+  {
+   "prd_cd": "PRD_000313",
+   "prd_nm": "미니CD",
+   "prd_typ_cd": "PRD_TYPE.02",
+   "verdict": "NOT_EVALUATED",
+   "broken_edges": [],
+   "n_defects": 0,
+   "money_impact": {
+    "undercharge": 0,
+    "overcharge": 0,
+    "none": 0,
+    "unknown": 0
+   }
+  }
+ ]
+}

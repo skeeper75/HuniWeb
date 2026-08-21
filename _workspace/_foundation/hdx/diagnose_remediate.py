@@ -13,6 +13,7 @@
 from __future__ import annotations
 import argparse
 import csv
+import json
 import pathlib
 import sys
 
@@ -21,6 +22,7 @@ sys.path.insert(0, str(_HERE.parent))          # _foundation/ (hdx 패키지 루
 
 from hdx.foundation import Snapshot            # noqa: E402
 from hdx.diagnose import PRICE_DIAGNOSERS, LINKAGE_DIAGNOSERS, ALL_DIAGNOSERS  # noqa: E402
+from hdx.diagnose.widget_wiring_dx import WidgetWiringDx  # noqa: E402 · SPEC-WIDGET-WIRING-001
 from hdx import board                          # noqa: E402
 from hdx.remediate import (PRICE_REMEDIATORS, LINKAGE_REMEDIATORS,  # noqa: E402
                            ALL_REMEDIATORS, plan)
@@ -28,7 +30,9 @@ from hdx import verify as vf                   # noqa: E402
 from hdx import loop as loop_mod               # noqa: E402
 
 # 스텝2: --scope all = 4축(Linkage·PriceGrid·Registration·Contribution) 한 명령 통합 진단.
-SCOPES = {"price": PRICE_DIAGNOSERS, "linkage": LINKAGE_DIAGNOSERS, "all": ALL_DIAGNOSERS}
+# 스텝3: --scope widget = 위젯 배선 어댑터(SPEC-WIDGET-WIRING-001 M2) — Defect.dimension=엣지ID.
+SCOPES = {"price": PRICE_DIAGNOSERS, "linkage": LINKAGE_DIAGNOSERS, "all": ALL_DIAGNOSERS,
+          "widget": [WidgetWiringDx()]}
 REMEDIATORS = {"price": PRICE_REMEDIATORS, "linkage": LINKAGE_REMEDIATORS, "all": ALL_REMEDIATORS}
 
 
@@ -77,6 +81,15 @@ def main():
     csv_path = board.write_csv(res)
     html_path = board.write_html(res)
 
+    # SPEC-WIDGET-WIRING-001 M2: 위젯 스코프 산출을 JSONL 로도 저장(조립기 M4 입력)
+    if args.scope == "widget":
+        ww_dir = _HERE.parent.parent / "huni-widget-wiring" / "out" / "defects"
+        ww_dir.mkdir(parents=True, exist_ok=True)
+        with (ww_dir / "widget-defects.jsonl").open("w", encoding="utf-8") as f:
+            for d in res.defects:
+                f.write(json.dumps(d.to_dict(), ensure_ascii=False) + "\n")
+        print(f"  -> {ww_dir / 'widget-defects.jsonl'}")
+
     # 콘솔 요약(연속 라운드 비교용 1줄 + 차원별)
     print(f"[hdx] scope={args.scope} snap={res.snap_name} "
           f"defects={len(res.defects)} => {'GO' if res.global_go else 'NO-GO'}")
@@ -92,7 +105,7 @@ def main():
 
     # ── P3 교정 플랜(옵션) ──
     if args.remediate:
-        pres = plan.run(REMEDIATORS[args.scope], res.defects, snap)
+        pres = plan.run(REMEDIATORS.get(args.scope, []), res.defects, snap)
         sql_files = plan.write_sql(pres)
         plan_md = plan.write_plan(pres)
         plan_csv = plan.write_csv(pres)

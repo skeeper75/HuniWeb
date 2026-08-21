@@ -263,3 +263,15 @@ docs/figma/*.fig
 
 # 별도 git repo (webadmin 소스 — embedded gitlink 방지·이 repo서 미추적)
 raw/webadmin/
+
+# ===========================================
+# huni-widget-wiring harness artifacts
+# (dir names collide with template bin/·out/ patterns — track explicitly)
+# ===========================================
+!_workspace/huni-widget-wiring/bin/
+!_workspace/huni-widget-wiring/out/
+# runtime state under the workspace stays untracked
+_workspace/huni-widget-wiring/.moai/
+_workspace/huni-widget-wiring/bin/.moai/
+_workspace/huni-widget-wiring/out/.moai/
+.moai/specs/SPEC-WIDGET-WIRING-001/.moai/
