@@ -16,7 +16,7 @@
 | 2 | 디지털인쇄비 | L1-밴드 | DIFFED | 954 | 954(100.0%) | — | — | — | — | — | — | 흑백축=§18 설계 / 별색=일치 |
 | 3 | 코팅 | L1-밴드 | DIFFED | 184 | 184(100.0%) | — | — | — | — | — | — | 유광=★라이브 COMMIT 완료(해소됨) |
 | 4 | 접지옵션 | L1-밴드 | DIFFED | 336 | 336(100.0%) | — | — | — | — | — | — | 336셀 verbatim 일치 |
-| 5 | 인쇄후가공 | L1-밴드 | DIFFED | 120 | 116(96.7%) | — | — | 3 | — | 1 | — | 117셀 verbatim 일치(가변 공정키) |
+| 5 | 인쇄후가공 | L1-밴드 | DIFFED | 117 | 117(100.0%) | — | — | — | — | — | — | 117셀 verbatim 일치(가변 공정키) |
 | 8 | 합판도무송스티커 | L2-합가 | DIFFED | 370 | 370(100.0%) | — | — | — | — | — | — | L2 verbatim 일치 |
 | 9 | 봉투제작 | L2-합가 | DIFFED | 40 | 40(100.0%) | — | — | — | — | — | — | L2 verbatim 일치 |
 | 10 | 명함포토카드 | L2-합가 | DIFFED | 105 | 101(96.2%) | — | — | 2 | — | 2 | 2 | 105셀 중 103 verbatim 일치·FOIL qty1000 2셀 과청구(권위63000/라이브64000)·펄·프리미엄 note부재 8셀 미상(값집합 일치) |
@@ -58,7 +58,7 @@
 - **디지털인쇄비**: 권위 954셀 중 954셀 정확 일치(100.0%) · dim_missing 0 · sparse 0 · missing_cell 0 · transpose 0 · 불일치 0 · unmapped 0
 - **코팅**: 권위 184셀 중 184셀 정확 일치(100.0%) · dim_missing 0 · sparse 0 · missing_cell 0 · transpose 0 · 불일치 0 · unmapped 0
 - **접지옵션**: 권위 336셀 중 336셀 정확 일치(100.0%) · dim_missing 0 · sparse 0 · missing_cell 0 · transpose 0 · 불일치 0 · unmapped 0
-- **인쇄후가공**: 권위 120셀 중 116셀 정확 일치(96.7%) · dim_missing 0 · sparse 0 · missing_cell 3 · transpose 0 · 불일치 1 · unmapped 0
+- **인쇄후가공**: 권위 117셀 중 117셀 정확 일치(100.0%) · dim_missing 0 · sparse 0 · missing_cell 0 · transpose 0 · 불일치 0 · unmapped 0
 - **합판도무송스티커**: 권위 370셀 중 370셀 정확 일치(100.0%) · dim_missing 0 · sparse 0 · missing_cell 0 · transpose 0 · 불일치 0 · unmapped 0
 - **봉투제작**: 권위 40셀 중 40셀 정확 일치(100.0%) · dim_missing 0 · sparse 0 · missing_cell 0 · transpose 0 · 불일치 0 · unmapped 0
 - **명함포토카드**: 권위 105셀 중 101셀 정확 일치(96.2%) · dim_missing 0 · sparse 0 · missing_cell 2 · transpose 0 · 불일치 2 · unmapped 2
