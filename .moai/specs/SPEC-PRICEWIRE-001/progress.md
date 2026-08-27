@@ -2175,6 +2175,109 @@ M1-1H 에서 「면적 매트릭스라 단일 단가 불가」로 보류했던 �
 
 ---
 
+### M1-1J — 구세대 템플릿 6종 정리 (2026-08-27, 지니 지시) — ✅ 라이브 반영
+
+지니 지시: 「구세대 우드봉·우드행거 6종 정리해줘」. M1-1I §F 잔여 과제 해소.
+
+#### A. 안전 확인 — `tmpl_cd` 참조 전수
+
+`information_schema` 실측: 라이브 참조 테이블은 **3개뿐**이며 전부 `t_prd_templates` FK.
+
+| 테이블 | FK |
+|---|---|
+| `t_prd_product_addons.tmpl_cd` | → `t_prd_templates` |
+| `t_prd_template_prices.tmpl_cd` | → 〃 |
+| `t_prd_template_selections.tmpl_cd` | → 〃 |
+
+**주문·장바구니 계열 테이블은 `tmpl_cd` 를 참조하지 않는다** — 판매 이력 손상 위험 없음. 나머지 매치는 전부 `z_bak_*` 백업 테이블.
+
+#### B. 🔍 정리 전 발견 — 신세대에서 **면끈 자재가 빠졌다**
+
+구·신 세대의 `t_prd_template_selections` 대조:
+
+| 템플릿 | 세대 | 선택 자재 |
+|---|---|---|
+| `TMPL-000046` 우드봉 270mm **+ 면끈** | 구 | `MAT_000405` 우드봉 270mm + **`MAT_000415` 면끈 80cm** |
+| `TMPL-000047` 우드봉 360mm + 면끈 | 구 | `MAT_000406` + **`MAT_000415` 면끈 80cm** |
+| `TMPL-000048` 우드봉 480mm + 면끈 | 구 | `MAT_000407` + **`MAT_000415` 면끈 80cm** |
+| `TMPL-000108` 우드봉-270mm | 신 | `MAT_000405` 우드봉 270mm **단독** |
+| `TMPL-000109` 우드봉-360mm | 신 | `MAT_000406` 단독 |
+| `TMPL-000110` 우드봉-480mm | 신 | `MAT_000407` 단독 |
+| `TMPL-000088~090` 우드행거 | 구 | **선택값 0** |
+| `TMPL-000111~113` 우드행거 | 신 | `MAT_000402/403/404` 우드행거 단독 |
+
+권위는 「우드봉 270mm **+ 면끈** 7,000」(상품악세사리 row57~62) — **면끈 포함 가격**이다.
+
+| 영향 | 판정 |
+|---|---|
+| **가격** | **이상 없음** — 직접단가(7,000 등)가 「계산 시 최우선」이라 `selections` 와 무관하게 권위값이 청구된다 |
+| **생산 구성(BOM)** | ⚠️ 신세대 `selections` 에 면끈이 없어 **생산 지시에서 면끈이 누락될 수 있다** |
+
+우드행거는 구세대가 선택값 0 이었으므로 신세대(자재 1개)가 오히려 개선이나, 면끈은 양 세대 모두 없다.
+
+⇒ **정리를 막을 사유는 아니다**(가격 정확·논리삭제라 데이터 보존). 다만 **신세대 `selections` 에 `MAT_000415` 면끈 보강**이 후속 과제로 남는다. **실무진 확인 사항.**
+
+#### C. 정리 방식 — 논리삭제 (물리 DELETE 금지)
+
+`t_prd_template_prices` 에는 `del_yn` 컬럼이 **없다**(`tmpl_cd, apply_ymd, unit_price, note, reg_dt, upd_dt`). 따라서 단가행은 논리삭제할 수 없으며, **감사 추적용으로 보존**한다(부모 템플릿이 `del_yn='Y'` 이면 조회되지 않으므로 무해).
+
+적용 SQL(단일 트랜잭션):
+
+```sql
+UPDATE t_prd_templates SET del_yn='Y', del_dt=now(), use_yn='N', upd_dt=now()
+ WHERE tmpl_cd IN ('TMPL-000046','TMPL-000047','TMPL-000048',
+                   'TMPL-000088','TMPL-000089','TMPL-000090');   -- 6행
+UPDATE t_prd_template_selections SET del_yn='Y', del_dt=now(), upd_dt=now()
+ WHERE tmpl_cd IN (…같은 6종…);                                  -- 6행
+```
+
+#### D. 드라이런(BEGIN…ROLLBACK) → 적재
+
+드라이런 실측:
+
+```
+UPDATE 6 / UPDATE 6
+AFTER_TMPL|TMPL-000046|use=N|del=Y      AFTER_TMPL|TMPL-000088|use=N|del=Y
+LIVE_TMPL_COUNT|미삭제=81               (87 → 81)
+NEWGEN_OK|TMPL-000108 del=N price=1     NEWGEN_OK|TMPL-000111 del=N price=1
+ORPHAN_PRICE|19  (삭제 템플릿의 잔존 단가행 — 감사추적 보존)
+ADDON_BROKEN|0   ★ 깨지는 상품 연결 없음
+ROLLBACK / ROLLBACK_VERIFY|6 (원상 확인)
+```
+
+**`ADDON_BROKEN=0`** 이 결정적이다 — 어느 상품의 추가상품도 구세대를 참조하지 않으므로 정리로 깨지는 연결이 없다.
+
+적재 후 psql 독립 재실측: 구세대 6종 전부 `use=N · del=Y · del_dt=2026-08-27`, 신세대 6종 전부 `use=Y · del=N` 유지, 미삭제 템플릿 **81**, 깨진 연결 **0**.
+
+백업: `out/backup/pre-oldtmpl-cleanup-260827.txt`(템플릿 6 · selections 6 · 단가행 6).
+
+되돌리기:
+
+```sql
+UPDATE t_prd_templates SET del_yn='N', del_dt=NULL, use_yn='Y' WHERE tmpl_cd IN (…6종…);
+UPDATE t_prd_template_selections SET del_yn='N', del_dt=NULL WHERE tmpl_cd IN (…6종…);
+```
+
+#### E. [HARD] 가격뷰어 실화면 확인 — ✅ 완료
+
+증거: `out/evidence/price-viewer-oldtmpl-cleaned-PRD_000013-260827.png`.
+
+```
+PRD_000013 우드봉                          PRD_000014 우드행거
+우드봉-270mm (TMPL-000108)  7,000원        우드행거-230mm (TMPL-000111)  16,000원
+우드봉-360mm (TMPL-000109)  9,800원        우드행거-320mm (TMPL-000112)  18,000원
+우드봉-480mm (TMPL-000110) 12,000원        우드행거-440mm (TMPL-000113)  20,000원
+```
+
+M1-1H §E 에서 6행(구 3 + 신 3)이던 중복 표시가 **신세대 3행만** 남았다.
+
+#### F. 잔여 과제
+
+- **신세대 `selections` 에 면끈(`MAT_000415`) 보강** — 우드봉 3종 + 우드행거 3종(§B). 가격 무관·생산 구성 문제
+- 템플릿 직접단가 미등록 3종(`TMPL-000010/011` 카드봉투 50장 · `TMPL-000092` 아크릴거치대) — 권위 근거 부재(M1-1I §E)
+
+---
+
 ## §G' 세션 마감 종합 (2026-08-27 재개 세션) — 다음 세션 인수인계 [현행]
 
 > 아래 §G 는 **오전 세션분**이며 이력으로 보존한다. 이 §G' 가 현행 인수인계다.
