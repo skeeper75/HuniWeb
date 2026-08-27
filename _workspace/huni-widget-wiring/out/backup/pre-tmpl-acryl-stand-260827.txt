@@ -1,0 +1,8 @@
+# 적재 직전 백업 — TMPL-000092 아크릴거치대 직접단가
+# 생성 2026-08-27 21:17:53 KST · 지니 확정값 1400.00
+
+## 적재 직전 상태 (t_prd_template_prices)
+#   (행 없음)
+
+## 되돌리기 SQL
+DELETE FROM t_prd_template_prices WHERE tmpl_cd='TMPL-000092' AND apply_ymd='2026-08-27';
