@@ -611,6 +611,242 @@ tier: L
 
 **M0-3 착수 조건 확정**: worklist 재산출 분모 = **192**(260827 실측), 재산출 직전 재실측 후 그 값과 일시를 원장에 기록한다.
 
+### M0-3 — worklist 재산출 (2026-08-27, 재개 세션) — 진행 중
+
+#### A. 분모 라이브 재실측 (AC-PW-016 이행)
+
+**재산출 착수 직전 실측** — 명령:
+
+```bash
+PGPASSWORD=… psql -h … -U … -d … -X -A -F'|' -t -c "SELECT to_char(now() AT TIME ZONE 'Asia/Seoul','YYYY-MM-DD HH24:MI:SS'),
+ (SELECT count(*) FROM t_wgt_widgets WHERE sts_typ_cd='WGT_STS_TYPE.02' AND COALESCE(del_yn,'N')='N'),
+ (SELECT count(DISTINCT prd_cd) FROM t_wgt_widgets WHERE sts_typ_cd='WGT_STS_TYPE.02' AND COALESCE(del_yn,'N')='N'),
+ (SELECT count(*) FROM t_wgt_widgets WHERE COALESCE(del_yn,'N')='N');"
+```
+
+출력(verbatim): `2026-08-27 13:05:16|192|192|436`
+
+| 항목 | 값 | 실측 일시 |
+|---|---|---|
+| 게시 위젯 | **192** | **2026-08-27 13:05:16 KST** |
+| 게시 상품(DISTINCT `prd_cd`) | **192** | 〃 |
+| 전체 위젯(`del_yn='N'`) | 436 | 〃 |
+
+M0-2 B 실측(260827 오전)과 **변동 없음**. 이 값이 M0-3 재산출의 분모다.
+
+#### B. `worklist.csv` 세대 실측 — 커밋본 925 vs 작업트리 1,431
+
+`widget-defects.jsonl`(M0-2 A)과 **동형 구조**로, 커밋본과 작업트리가 다른 세대다. 다만 이번에는 **문서가 stale 이 아니다** — 두 세대가 각각 자기 시점 문서와 정확히 일치한다.
+
+| 세대 | 행수 | `review` | `needs_authority` | `needs_design` | 대응 문서 |
+|---|---|---|---|---|---|
+| 커밋본 `5c844f50` (00:38) | **925** | 577 | 328 | 20 | `REPORT-260821.md:73-80` — 일치 |
+| 작업트리 (mtime 23:35) | **1,431** | 616 | **694** | 121 | `REPORT-260822.md:21` — 일치 |
+
+증분 +506 의 구성 (`edge` 분포 대조):
+
+| edge | 커밋본 | 작업트리 | 증분 | 성격 |
+|---|---|---|---|---|
+| `E1` | 2 | **77** | +75 | 렌즈 B `E1 NO_SOURCE` 75건 유입(`spec.md §1.2.1` 관측치와 일치) |
+| `E4` | 782 | 1,092 | +310 | ZERO_FINAL 조합행 확대 |
+| `G1` | — | 34 | +34 | 신규 edge |
+| `Q1` | — | 61 | +61 | 신규 edge |
+| `S1` | — | 26 | +26 | 신규 edge |
+| `E3`·`W2`·`W4`·`W5`·`C1` | 69·12·40·18·2 | 동일 | 0 | 무변동 |
+
+신규 3 edge 합 `34+61+26 = 121` = `needs_design` 121 과 정확히 일치.
+
+#### C. `needs_authority` 694 실측 — 전량 E4 ZERO_FINAL
+
+`edge` × `remediation_class` 교차표(작업트리 1,431행 전수):
+
+| edge | needs_authority | needs_design | review |
+|---|---|---|---|
+| `E4` | **694** | 6 | 392 |
+| `E1` | — | 77 | — |
+| `E3` | — | 1 | 68 |
+| `S1` | — | 26 | — |
+| `W4` | — | 11 | 29 |
+| `G1`·`Q1`·`W2`·`W5`·`C1` | — | — | 34·61·12·18·2 |
+
+⇒ **`needs_authority` 694건은 100% `E4` = ZERO_FINAL(최종가 0원)** 이다. `note` 형식은 조합 단위 — `ZERO_FINAL mat_cd=…|print_opt_cd=…|siz_cd=…|qty=…`.
+
+**게시 분모(192) 교차** — `prd_cd` 기준:
+
+| 구분 | 상품 | 행 |
+|---|---|---|
+| 694건이 걸친 상품 | **54** | 694 |
+| ↳ 게시 분모 **안** | **47** | **620** |
+| ↳ 게시 분모 **밖** | 7 | 74 |
+
+상위 상품: `PRD_000062` 반칼팬시스티커 41 · **`PRD_000146` 아크릴키링 40(미게시)** · `PRD_000071` 트윈링책자 32 · `PRD_000068` 중철책자 26 · `PRD_000069` 무선책자 26 · `PRD_000135` 족자포스터 25 · `PRD_000155` 아크릴볼펜 25 · `PRD_000147` 아크릴마그넷 24 · `PRD_000148` 아크릴뱃지 23 · `PRD_000149` 아크릴집게 23.
+
+`PRD_000146` 40행이 분모 밖인 것은 M0-2 B **파생 발견 J**(8/24 게시중단)와 정합한다 — 별도 결함이 아니다.
+
+**AC-PW-004 부분 판정**: `auto_data` **0건** — 작업트리 실측 클래스는 `review`/`needs_authority`/`needs_design` 3종뿐으로 `auto_data` 는 존재하지 않는다(PASS). `needs_authority` 재계산 조항은 D 결함으로 **미완**.
+
+#### D. 결함 L [차단] — `worklist.csv` 재산출 스크립트가 저장소에 없다
+
+M0-3 의 [HARD] 요구는 *"재추출 캐시 기준으로 `worklist.csv` 재생성"* 인데, **재생성을 수행할 코드가 존재하지 않는다.**
+
+| 탐색 | 명령 | 결과 |
+|---|---|---|
+| 전역 `.py` 문자열 | `grep -rln 'worklist.csv' --include='*.py' .` | **0건** |
+| `remediation_class` 스키마 보유 `.py` | `grep -rln 'remediation_class' --include='*.py' .` | 18건 — **전부 `hdx/`**, 출력 경로 `hdx/remediation-plan.csv`, 스키마 `remediation_class,dimension,title,n_defects,root_comps,has_sql,worklist_note` |
+| 위젯 하네스 `bin/` | `grep -rl 'worklist' bin/` | **0건** (`build_artifact.py`·`build_wiring_health.py`·`lens_b_runner.py`·`harvest_sim_meta.py`·`harvest_publish_cfg.py` 5개 전부) |
+
+`out/worklist.csv` 의 실제 스키마는 `prd_cd,prd_nm,edge,remediation_class,note` 로 `hdx/remediate/plan.py` 의 `write_csv()` 스키마와 **다르다**. 즉 이 파일은 hdx 교정 플랜 산출물이 아니라 위젯 스코프 전용 산출물이며, 그 생성기는 커밋되지 않았다(세션 중 애드혹 생성 추정 — `[추정]`, 근거 미확보).
+
+**재산출을 실행하려면 생성기를 새로 작성해야 하고**, 그 재분류 판정(694건 각 조합에 권위 단가가 존재하는가)에는 **라이브 코드 ↔ 권위 엑셀 명칭 정규화 조인 레이어**가 추가로 필요하다. 권위 캐시(`24_master-extract-260822` 28파일 · `24_price-extract-260822` 40파일)는 시트별 CSV 로 엑셀 원문 명칭 기준이고, ZERO_FINAL 조합은 `MAT_*`/`SIZ_*`/`POPT_*` 라이브 코드 기준이라 직접 조인되지 않는다.
+
+**미검증 (Gaps)**: (a) 생성기가 애드혹이었다는 것은 **추정**이다 — 삭제 이력·생성 로그를 찾지 못했다. (b) 커밋본 925 → 작업트리 1,431 의 재생성이 어떤 입력으로 이뤄졌는지 **미규명**(렌즈 B 유입은 edge 분포로 정황 확인했으나 실행 근거는 없다). (c) 694건 각 조합의 권위 단가 존재 여부는 **아직 대조하지 않았다** — 재분류 자체가 미착수다.
+
+**잔여 위험**: M0-5(렌즈 B 게시 전량 재스윕)가 `lens-b-defects.jsonl` 을 갱신하면 worklist 입력이 바뀐다. M0-3 을 먼저 완주하면 M0-5 직후 재산출을 한 번 더 해야 한다.
+
+#### E. 순서 결정 — M0-5 선행 (지니 결정, 2026-08-27 AskUserQuestion)
+
+**결정**: M0 내부 순서를 **M0-5 → M0-3** 으로 교체한다. 대안이었던 「지금 재산출기 신규 작성」과 「재산출 없이 대조표만」은 미채택 — 전자는 M0-5 직후 재실행이 강제되어 조인 레이어까지 두 번 태우게 되고, 후자는 결함 L 을 미해소로 남겨 M0-3 의 [HARD] 요구를 부분 충족에 그친다.
+
+**근거**: `lens-b-defects.jsonl`(렌즈 B 실호출)이 worklist 의 입력이다(§B 증분 +506 중 `E1` +75 가 렌즈 B 유입). M0-5 가 게시 192 전량을 재스윕하면 이 입력이 갱신되므로, 재산출기는 M0-5 이후 한 번만 작성·실행하면 된다.
+
+**게이트 정합**: `REQ-PW-005` [HARD] 는 「M0 완주 전 `needs_authority` 착수 금지」로 **M0 내부 순서를 제약하지 않는다**. 순서 교체는 게이트 위반이 아니다.
+
+**M0-3 잔여 작업 (M0-5 완료 후 재개)**:
+
+| # | 작업 | 선행 |
+|---|---|---|
+| 1 | 재산출기 신규 작성(`bin/build_worklist.py` 상당 — 결정론·토큰0) | M0-5 산출 `lens-b-defects.jsonl` |
+| 2 | 라이브 코드 ↔ 권위 명칭 정규화 조인 레이어 | 권위 캐시 260822_1 |
+| 3 | `worklist.csv` 재생성 + `needs_authority` 재분류 확정 | 1·2 |
+| 4 | 재산출 직전 분모 재실측(AC-PW-016 — 이번 실측 13:05:16 은 이번 회차분) | — |
+
+**M0-3 현재 상태**: A(분모 실측)·B(세대 실측)·C(694 구성 실측) **완료** · D(결함 L 확정) **완료** · 재산출 본체 **M0-5 대기**.
+
+### M0-5 — 렌즈 B 실호출 재스윕 (2026-08-27, 재개 세션) — 진행 중
+
+#### A. 260822 기준선 실측 (재스윕 전 · 비교 대상)
+
+파일 `out/defects/lens-b-defects.jsonl`(mtime 2026-08-22 16:21) 전수 파싱:
+
+| 항목 | 값 |
+|---|---|
+| 행 / DISTINCT `prd_cd` | **194 / 193** |
+| `verdict` | `OK` 119 · **`BROKEN` 66** · `NOT_EVALUATED` 6 · `WARN` 2 · `INFRA_FAIL` 1 |
+| 엣지×코드 | `E4 ZERO_FINAL` 200 · `E4 PRICE_GAP` 182 · **`E1 NO_SOURCE` 75** · `S1 SET_MEMBER_NO_SOURCE` 26 · `Q1 BELOW_MIN_QTY` 5 |
+| **`E5` 발화** | **0건** |
+
+`E1 NO_SOURCE` 75 는 `spec.md §1.2.1` 관측치와 일치 · `BROKEN` 66 은 `§1.3` 과 일치 — 승계 수치의 파일 실측 재확인(REQ-PW-004 이행).
+
+기준선은 `lens-b-defects.260822-baseline.jsonl` 로 백업했다(러너가 원본을 덮어쓰므로).
+
+#### B. 결함 M — 초판 판정 **철회**, 재정의: `use_yn` 191/1 은 실측 오류였다
+
+**초판 판정(철회)**: 「`spec.md:58` 정의문(`PRD_000165` 분모 제외 ⇒ 191) vs `spec.md:65` 표(192)가 모순이며, 러너가 `use_yn='Y'` 필터라 191 을 돌 것이므로 **코드가 옳고 표가 틀렸다**」 — 이 판정은 **틀렸다.** 러너 실행 결과 verbatim 첫 줄이 이를 반증한다:
+
+```
+게시 위젯 192개 · cap=40 · workers=8 · as_of=2026-08-27
+```
+
+러너 SQL 은 `WHERE w.sts_typ_cd=%s AND w.use_yn='Y' AND w.del_yn='N'`(`bin/lens_b_runner.py:337`)인데 **192** 를 집었다. 즉 게시 위젯 192 는 **전량 `use_yn='Y'`** 다.
+
+**라이브 재실측 (2026-08-27 13:34:17)** — `GROUP BY use_yn`:
+
+```
+Y|192|192
+```
+
+| 항목 | 값 |
+|---|---|
+| 게시 위젯 중 `use_yn='Y'` | **192** (위젯 192 / 상품 192) |
+| 게시 위젯 중 `use_yn≠'Y'` | **0** |
+
+`PRD_000165` 단건 조회: `WGT_000129|PRD_000165|Y|` · `WGT_000411|PRD_000165|Y|2026-08-19 21:02:18` — **위젯 2개 모두 `use_yn='Y'`**, 최종 변경은 8/19 로 오늘 변경 흔적이 없다.
+
+**재정의 — 진짜 결함은 반대편이다**: `progress.md §E.2 M0-2 B` 의 「`use_yn='Y'` 191 / `use_yn≠'Y'` 1(= `PRD_000165`)」 및 이를 승계한 `spec.md:65` 표 비고란이 **라이브와 불일치하는 미검증 수치**다. 두 스윕 산출 모두 `PRD_000165` 를 포함하고 있어(260822 기준선·260827 신규 양쪽 다 존재) 260822 시점에도 `use_yn='Y'` 였던 정황이 강하다.
+
+**판정**: **분모 정본 = 192.** `spec.md:65` 표의 숫자(192/192)는 옳았고, 그 **비고란의 191+1 분해가 틀렸다**. 정정 대상은 숫자가 아니라 비고란과 `spec.md:58` 정의문의 `PRD_000165` 별항 조항(전제였던 `use_yn=N` 이 사실이 아니다).
+
+**미검증 (Gaps)**: M0-2 B 의 191/1 이 (a) 당시 실제 상태였다가 8/19~8/27 사이 복구된 것인지, (b) 애초 집계 오류였는지 **규명하지 못했다** — `upd_dt` 는 8/19 로 그 사이 변경이 없어 (b) 쪽이 유력하나 확증 근거는 없다. 감사 이력 테이블을 조회하지 않았다.
+
+**교훈**: 실측 SELECT 는 SPEC 정의문의 조건을 **전부** 반영해야 한다. 이번엔 반대로, 정의문이 근거로 삼은 전제(`use_yn=N`)가 실측과 달랐고, 나는 그 전제를 재검증하지 않은 채 「코드가 옳다」는 판정을 먼저 내렸다.
+
+#### C. 재스윕 실행
+
+```bash
+raw/.venv/bin/python bin/lens_b_runner.py --cap 40 --workers 8
+```
+
+로그: `out/logs/lens-b-rescan-260827.log` · 산출: `out/defects/lens-b-defects.jsonl`(덮어쓰기). **읽기전용** — 러너는 라이브 SELECT + `pricing.evaluate_price` 재계산만 수행하고 DB 에 쓰지 않는다.
+
+**판정 목표(§B-2)**: `E5 NO_PLATE_PANSU` 발화 여부 기계 판정. 260822 기준선 0건이므로, 재스윕에서도 0 이면 E5 계열 계상은 **불요**로 확정된다.
+
+**실행 결과** — 로그 verbatim(`out/logs/lens-b-rescan-260827.log`):
+
+```
+게시 위젯 192개 · cap=40 · workers=8 · as_of=2026-08-27
+완료 568s · verdict {'OK': 162, 'NOT_EVALUATED': 6, 'WARN': 3, 'BROKEN': 21}
+엣지×코드: {('E4', 'PRICE_GAP'): 46, ('E4', 'ZERO_FINAL'): 39, ('S1', 'SET_MEMBER_NO_SOURCE'): 26, ('Q1', 'BELOW_MIN_QTY'): 8}
+EXIT=0
+```
+
+#### D. 기준선 대비 전수 diff
+
+| 항목 | 260822 기준선 | **260827 재스윕** | 증감 |
+|---|---|---|---|
+| 행 / DISTINCT `prd_cd` | 194 / 193 | **192 / 192** | −2 / −1 |
+| `OK` | 119 | **162** | **+43** |
+| **`BROKEN`** | 66 | **21** | **−45** |
+| `WARN` | 2 | 3 | +1 |
+| `NOT_EVALUATED` | 6 | 6 | 0 |
+| `INFRA_FAIL` | 1 | **0** | −1 |
+| `E4 ZERO_FINAL` | 200 | **39** | **−161** |
+| `E4 PRICE_GAP` | 182 | **46** | **−136** |
+| **`E1 NO_SOURCE`** | 75 | **0** | **−75** |
+| `S1 SET_MEMBER_NO_SOURCE` | 26 | 26 | 0 |
+| `Q1 BELOW_MIN_QTY` | 5 | 8 | +3 |
+| **`E5` 발화** | 0 | **0** | 0 |
+
+상품 차집합: 신규에만 = **없음** · 기준선에만 = **`PRD_000146`**(8/24 게시중단 — M0-2 B 와 정합, 별도 결함 아님).
+
+#### E. E5 판정 — 발화 0건 확정 (§B-2 해소)
+
+재스윕 엣지×코드에 `E5` 항목이 **없다**(`E5` 발화 0). 260822 기준선도 0. 판형 자동 도출 서버 경로는 정상이며, **E5 계열 계상은 불요**로 확정한다. `acceptance.md:100` 「14 \| E5 0건 … (M0-5 판정 전 계상 보류)」의 **보류를 해제**한다.
+
+#### F. E1 NO_SOURCE 75 → 0 — 독립 SQL 로 확증
+
+렌즈 B 판정만으로 닫지 않고 라이브 직접 조회로 교차검증했다. `pricing.py:630-658` verbatim 로직 — `source=NONE` ⟺ `TPrdProductPrices`(직접단가) 부재 **AND** `TPrdProductPriceFormulas`(공식) 부재.
+
+```sql
+WITH pub AS (SELECT DISTINCT prd_cd FROM t_wgt_widgets
+             WHERE sts_typ_cd='WGT_STS_TYPE.02' AND COALESCE(del_yn,'N')='N'),
+src AS (SELECT p.prd_cd,
+  EXISTS(SELECT 1 FROM t_prd_product_prices pp
+         WHERE pp.prd_cd=p.prd_cd AND pp.unit_price IS NOT NULL) AS has_pp,
+  EXISTS(SELECT 1 FROM t_prd_product_price_formulas pf
+         WHERE pf.prd_cd=p.prd_cd) AS has_frm
+  FROM pub p)
+SELECT … FROM src;
+```
+
+출력(verbatim):
+
+```
+total|192
+NONE(무소스)|0
+PRODUCT_PRICE|43
+FORMULA만|149
+```
+
+⇒ **게시 192 전량이 가격소스를 보유**한다. 렌즈 B 판정(E1 0건)과 독립 SQL 이 일치 — `E1 NO_SOURCE = 0` 확증.
+
+**원인 = 라이브 데이터 변경**이다. 러너 코드는 동일하다: `bin/lens_b_runner.py` 는 git **untracked**(`??`)이나 mtime 이 `2026-08-22 16:13` 으로 260822 산출(`lens-b-defects.jsonl` 16:21)보다 앞서고 그 뒤 수정 흔적이 없다. 즉 판정 로직 변화가 아니라 8/22~8/27 사이 **실제 배선이 이뤄졌다**.
+
+**SPEC 영향 [중대]**: `plan.md §D M1` 의 주 대상인 「렌즈 B `E1 NO_SOURCE` 75건 ∩ 게시 분모」가 **소멸**했다. `spec.md §1.2.1` 이 E1 종료 기준 분모를 렌즈 B 층 단일 기준으로 [HARD] 규정하므로, 그 기준으로 **E1 잔량 = 0**. M1 범위 재산정이 필요하다.
+
+**미검증 (Gaps)**: (a) 배선을 **누가·언제·무엇으로** 했는지 확인하지 않았다(운영 교정인지 다른 세션 적재인지). (b) `E4 ZERO_FINAL` −161 · `PRICE_GAP` −136 의 감소 원인은 **미규명** — E1 해소의 파생 효과로 추정되나(`[추정]`) 건별 대조하지 않았다. (c) `Q1 BELOW_MIN_QTY` +3 증가분 미규명. (d) `NOT_EVALUATED` 6건의 사유를 확인하지 않았다.
+
+**잔여 위험**: 라이브가 3일 만에 이만큼 움직였다. M1~M5 착수 시점에 또 달라질 수 있으므로, 교정 대상 목록은 **착수 직전 재스윕**을 전제로 다뤄야 한다.
+
 ---
 
 ## §G 세션 마감 종합 (2026-08-27) — 다음 세션 인수인계

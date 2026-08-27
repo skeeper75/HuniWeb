@@ -1,7 +1,7 @@
 ---
 id: SPEC-PRICEWIRE-001
 doc: acceptance
-version: "0.1.4"
+version: "0.1.5"
 updated: 2026-08-27
 status: draft
 tier: L
@@ -51,7 +51,7 @@ tier: L
 
 ## §C M5 — 종료 판정
 
-**AC-PW-016** — Given 점검 실행 직전 라이브 SELECT(`sts_typ_cd='WGT_STS_TYPE.02' AND COALESCE(del_yn,'N')='N'`)로 게시 분모를 재실측하고 그 값과 실측 일시를 원장에 기록한 상태에서, When `audit_published_prices.py` 로 전수 점검을 실행하면, Then **점검 대상 수가 그 실측 게시 위젯 수와 일치**하고 미점검 **0건**이며, 원장에 실측 일시가 기재되어 있다. 실측 없이 인용된 고정 숫자(194 등)를 분모로 쓴 경우 이 AC 는 FAIL 이다. (REQ-PW-018)
+**AC-PW-016** — Given 점검 실행 직전 라이브 SELECT(`sts_typ_cd='WGT_STS_TYPE.02' AND COALESCE(del_yn,'N')='N' AND use_yn='Y'` — 스윕 러너 `bin/lens_b_runner.py:337` 과 동일 술어. `use_yn` 은 260827 실측상 분모를 가르지 않으나(게시 전량 `Y`), 분모와 스윕 대상을 같은 술어로 유지하기 위해 명시한다)로 게시 분모를 재실측하고 그 값과 실측 일시를 원장에 기록한 상태에서, When `audit_published_prices.py` 로 전수 점검을 실행하면, Then **점검 대상 수가 그 실측 게시 위젯 수와 일치**하고 미점검 **0건**이며, 원장에 실측 일시가 기재되어 있다. 실측 없이 인용된 고정 숫자(194 등)를 분모로 쓴 경우 이 AC 는 FAIL 이다. (REQ-PW-018)
 
 **AC-PW-017** — Given 전량 스윕이 완료된 상태에서, When `verify_zero_quote.py` 결과를 (A)/(B)/(C) 3분류로 집계하면, Then **(A) 진짜 결함 = 0건**이며, (A) 집계의 근거 필드가 전건 `result_sum.PRICE` 이고 per-line `result[].PRICE=0` 을 근거로 계상된 건이 0건이다. **(A) 분자에서 G1 stale 기본값 34건은 제외**하며(`spec.md §2.2` 범위 밖), E1 잔량은 `spec.md §1.2.1` 의 렌즈 B 층 분모로만 센다.
 > **(A) 분자에 포함되는 항목 [명시]** — (i) **할인 적용 범위 위반**(REQ-PW-023: 인쇄가공비 외 구성요소를 보유한 공식인데 할인이 총액 스코프로 바인딩된 건) · (ii) **추가상품 템플릿 단가 부재**(REQ-PW-024: `t_prd_template_prices` 행이 없어 `_addons_strict` 가 422 로 막는 템플릿). 종료 시 **(i) = 0건 AND (ii) = 0건** 이어야 한다. (ii) 중 권위 단가 출처가 미확보인 건(트레싱지봉투 4종 · 천정고리)은 `needs_authority` 로 원장화하고 그 사유가 기재된 경우에 한해 잔량으로 계상하되, 사유 없는 잔량은 0건이어야 한다. [종료 조건] (REQ-PW-020, REQ-PW-023, REQ-PW-024)
@@ -60,7 +60,8 @@ tier: L
 
 **AC-PW-019** — Given TRUNCATED 가 존재하는 상품이 있을 때, When 그 상품의 verdict 를 확인하면, Then `OK` 로 판정된 건이 0건이다. (REQ-PW-021)
 
-**AC-PW-020** — Given `PRD_000165`(게시·`use_yn=N`)에 대해, When 원장을 조회하면, Then 분모와 분리된 별항으로 계상되고 결론(교정 또는 게시중단 권고)이 기재되어 있다. (REQ-PW-019)
+**AC-PW-020** — Given `PRD_000165`(아크릴포카코롯토)에 대해, When 게시 분모 실측과 렌즈 B 스윕 산출을 조회하면, Then 이 상품이 **분모 안의 일반 게시 상품으로 계상**되어 있고(별항 분리 0건), 스윕 산출에 레코드가 존재한다. (REQ-PW-019)
+> **개정 (v0.1.5)** — v0.1.4 까지 이 AC 는 「`PRD_000165`(게시·`use_yn=N`)를 분모와 분리한 별항으로 계상」할 것을 요구했으나, 그 전제인 `use_yn=N` 이 **사실이 아니었다**. 라이브 실측(2026-08-27 13:34:17) `WGT_000129`·`WGT_000411` 모두 `use_yn='Y'`. `spec.md §1.2` 별항 조항 철회에 맞춰 판정 방향을 **반전**한다 — 이제 별항으로 분리하면 FAIL 이다. 근거 정본: `progress.md §E.2 M0-5 B`.
 
 **AC-PW-021** — Given 종료 판정을 내릴 때, When 근거 출처를 확인하면, Then 1차 근거가 실호출 결과(`lens_b_runner` / `audit_published_prices` 계열)이고 오프라인 defects/health 는 보조 근거로만 인용된다. (REQ-PW-022)
 
@@ -97,7 +98,7 @@ tier: L
 | 11 | TRUNCATED(조합 절단) — 커버리지 고지 | AC-PW-019 |
 | 12 | `PARENT_DEAD` 대량 — 원본 정책 승계로 WARN, 분모 제외 금지 | AC-PW-016 |
 | 13 | 다중 항목 동시 변경 조합 미검사 — 설계상 한계 | AC-PW-021 |
-| 14 | E5 0건(판형 자동 도출, 서버 경로 정상) | AC-PW-017 (M0-5 판정 전 계상 보류) |
+| 14 | E5 0건(판형 자동 도출, 서버 경로 정상) | AC-PW-017 — **M0-5 판정 완료, 보류 해제**: 260827 재스윕(게시 192 전량) `E5` 발화 **0건**(260822 기준선도 0). E5 계열 계상 불요 확정 (`progress.md §E.2 M0-5 E`) |
 | 15 | `PRD_000108` 탁상형캘린더 · `PRD_000042` — 렌즈 B 전 조합 정상가 | AC-PW-017 |
 | 16 | per-line `result[].PRICE = 0` — 권위는 `result_sum.PRICE` | AC-PW-017 (REQ-PW-020 절) |
 
