@@ -1,7 +1,7 @@
 ---
 id: SPEC-PRICEWIRE-001
 doc: acceptance
-version: "0.1.5"
+version: "0.1.6"
 updated: 2026-08-27
 status: draft
 tier: L

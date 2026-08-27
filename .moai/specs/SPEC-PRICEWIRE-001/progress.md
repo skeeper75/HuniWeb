@@ -1121,6 +1121,135 @@ N-1~N-3 은 `REQ-PW-024` 계열(단가 미적재 → 견적 차단)과 동형이
 
 **M0-6 판정**: `admin-manual.html` **STALE** → 원고 1차 참조 확정 · `widget-manual.html` 동기(렌더 커버리지 Gap 별건) · `admin-quickstart.html` 동기 ⇒ **§B-4 해소, M0-6 완료**(단 §A 의 범위 정정을 전제로).
 
+### M0-7 — 정적 3소스 갱신 + M1 범위 재산정 (2026-08-27, 지니 지시) — 진행 중
+
+M0-3 §J 가 남긴 혼합 세대 한계를 해소하고, 그 위에서 M1 범위를 다시 잰다.
+
+#### A. `live-snapshot` 재생성 — 선행 조건
+
+정적 3소스(`widget`/`price`/`g1`)는 `live-snapshot/latest` 를 읽으므로 스냅샷이 먼저다.
+
+**신선도 실측**: `db-check.sh` → `CONN OK: railway | t_*=57 | prc_comp=209`. 구 스냅샷 `snap_20260822_1449` 는 **54테이블** ⇒ 라이브에 3테이블이 늘어난 상태로 stale 확정.
+
+```bash
+bash _workspace/_foundation/live-snapshot/snapshot.sh
+```
+
+출력(verbatim): `SNAPSHOT OK: …/snap_20260827_1422 (57 tables) · latest -> snap_20260827_1422` · `EXIT=0`
+
+| 항목 | 구 | 신 |
+|---|---|---|
+| 스냅샷 | `snap_20260822_1449` (54테이블) | **`snap_20260827_1422` (57테이블)** |
+
+읽기전용 COPY 이며 라이브에 쓰지 않는다. 3소스 기준선은 `*.260822-baseline.jsonl` 로 백업했다.
+
+**파생 발견 P [경미]**: `snapshot.sh` 는 스크립트 내부에서 프로젝트 루트 상대경로를 쓰므로 **반드시 프로젝트 루트에서 실행**해야 한다. 다른 cwd 에서 호출하면 `No such file or directory`(exit 127)로 죽는다. 1차 시도가 이 이유로 실패했다.
+
+#### B. M1 범위 재산정 — 라이브 직접 실측
+
+`plan.md §D M1` 의 대상 6계열 + 흡수 3계열을 **라이브 SELECT 로 건별 재판정**했다(2026-08-27).
+
+**전역 실측**:
+
+| 질의 | 값 |
+|---|---|
+| 게시중(`sts_typ_cd='WGT_STS_TYPE.02'`·`del_yn='N'`·`use_yn='Y'`) 가격소스 무 | **0** |
+| 미게시 가격소스 무 | 47 |
+| 전체 상품(`del_yn='N'`) | 289 |
+| 고아 공식(`t_prc_price_formulas` 중 바인딩 0) | **10** |
+
+**계열별 판정**:
+
+| 계열 | v0.1.4 기재 | 260827 실측 | 판정 |
+|---|---|---|---|
+| A. 렌즈 B `E1 NO_SOURCE` ∩ 게시 | 75건 | **0** | **소멸** (M0-5) |
+| B. `wiring-health-index` 치명 E1 | 15상품 | 게시중 무소스 0 | **소멸** |
+| C. 백로그 t6 게시중 무가격 | 15상품 | 〃 | **소멸** |
+| D. 백로그 t7 | 2건 | `PRD_000010` 행택끈 = 소스 `NONE`·**미게시** / `PRD_000218` = 소스 `NONE`·**미게시** | **분모 밖** |
+| E. 고아 공식 바인딩 | 10건 | **10** | **유효 — 무변동** |
+| F. `PRD_TYPE.01` 가격소스 전무 | 2건 | `PRD_000038` 형압명함 = **`FORMULA` 확보**·게시 Y / `PRD_000220` 폰스트랩 = **`FORMULA` 확보**·게시 Y | **소멸** |
+
+**흡수 대상 3계열**:
+
+| 흡수 | 대상 | 260827 실측 | 판정 |
+|---|---|---|---|
+| **1. 할인 적용 범위(REQ-PW-023)** | `PRD_000147`·`149`·`154` | `t_prd_product_discount_tables` 실측 — 3건 모두 `dsc_tbl_cd=DSC_ACR_QTY` · **`comp_cd` 미지정(총액 스코프)**. 기준 형태 `PRD_000146` 은 `comp_cd=COMP_ACRYL_CLEAR3T` | **전건 유효** |
+| **2. 할인 미연결** | 8건 | **게시 3건 유효** — `PRD_000097` 떡메모지 · `PRD_000217` 만년스탬프 · `PRD_000280` 레더라벨제작 (셋 다 소스 `FORMULA` 보유·게시 Y·할인 **없음**) / **미게시 5건** — `PRD_000199`·`204`·`218`·`227`·`312` | 게시 3 유효 · 5건 분모 밖 |
+| **3. 소스 부재 + 할인만** | `PRD_000222` 말랑증사홀더 | 할인 `DSC_SQUISHY_QTY` 연결 · 소스 `NONE` · **미게시** | **분모 밖** |
+
+#### C. M1 성격 전환 [중요]
+
+재산정 결과 **M1 의 이름과 내용이 어긋난다.**
+
+M1 은 「E1 가격소스 배선」인데, **게시 분모 안 E1 잔량이 0** 이다(A·B·C·F 전부 소멸). 남은 게시 분모 안 대상은 성격이 다르다:
+
+| 잔여 대상 | 건 | 성격 |
+|---|---|---|
+| 할인 적용 범위 교정(REQ-PW-023) | **3** | 저청구 — 「적용 대상」 필드 지정 |
+| 할인 미연결 | **3** | 할인표 바인딩 |
+| 고아 공식 바인딩 | **10** | 공식↔상품 바인딩(가격소스 배선의 잔존 형태) |
+
+⇒ **게시 분모 안 M1 실질 대상 = 16건**(v0.1.4 기재 대비 대폭 축소). 「E1 가격소스 배선」이라는 M1 제목은 고아 공식 10건에만 해당하고, 나머지 6건은 **할인 배선**이다.
+
+미게시로 빠진 건(t7 2 · 흡수2 5 · 흡수3 1 = 8건)은 `Out of Scope — 미게시 상품` 조항이 이미 커버하므로 신규 예외 조항을 두지 않는다(`spec.md §1.2` 원칙 유지).
+
+**미검증 (Gaps)**: (a) 고아 공식 10건이 **어느 상품에 바인딩되어야 하는지는 미확정** — 바인딩이 0이라 상품 후보가 없고, 권위 대조가 선행이다. (b) B·C 계열의 「소멸」은 **게시중 무소스 0 이라는 전역 실측에 근거한 집합 추론**이며, 15상품 목록을 건별로 대조하지 않았다(목록의 출처인 `wiring-health-index`·백로그가 260822 산출이라 건별 대조는 3소스 갱신 후에 의미가 있다). (c) `PRD_000038`·`PRD_000220` 이 **언제 `FORMULA` 를 얻었는지 미확인**.
+
+#### D. 3소스 재생성 — 전 소스 260827 정렬 완료
+
+| 소스 | 생성 경로 | 260822 | **260827** | 증감 |
+|---|---|---|---|---|
+| `widget-defects.jsonl` | `hdx/diagnose_remediate.py --scope widget` | 389 | **208** | **−181** |
+| `price-defects.jsonl` | `--scope price` → `hdx/board/defect-board.csv` **→ JSONL 변환** | 553 | **539** | −14 |
+| `g1-defects.jsonl` | `bin/harvest_publish_cfg.py` (venv) | 34 | **34** | 0 |
+| `lens-b-defects.jsonl` | `bin/lens_b_runner.py` (M0-5) | 194행/483결함 | **192행/119결함** | −364결함 |
+
+전 소스 mtime 실측: `widget` 08-27 14:35 · `price` 14:38 · `g1` 14:40 · `lens-b` 14:13 ⇒ **혼합 세대 해소**(M0-3 §J 한계 종료).
+
+**파생 발견 Q [결함 L 계열 확대] — `price-defects.jsonl` 도 생성기가 없다.** `--scope price` 는 `hdx/board/defect-board.csv` 에만 쓰고 `out/defects/price-defects.jsonl` 을 갱신하지 않는다(실행 후 mtime 무변동으로 확인). 전역 탐색 결과 이 파일을 **쓰는** `.py` 는 0건이고 **읽는** 곳만 2건(`build_wiring_health.py` · `build_worklist.py`)이다.
+
+다만 `defect-board.csv` 의 컬럼이 `price-defects.jsonl` 의 키와 **정확히 일치**한다 — `dimension,money_impact,severity,prd_cd,comp_cd,frm_cd,summary,suggested_fix,authority_ref,evidence`. `evidence` 도 양쪽 다 문자열이다. ⇒ **CSV 행을 그대로 dict 로 바꾸는 단순 컬럼 변환**이 원래 경로임을 확인하고 그대로 생성했다(변환 규칙 명시 = 재현 가능).
+
+`board` 산출 dimension 분포: `contribution` 389 · `qty_rule` 68 · `dim_conformance` 42 · `option_cpq` 18 · `price_grid` 12 · `wiring` 6 · `calcability` 4 = **539**.
+
+**파생 발견 R [경미]**: `harvest_publish_cfg.py` 는 django 를 import 하므로 시스템 python 이 아니라 **`raw/.venv/bin/python`** 으로 실행해야 한다(`lens_b_runner.py` 와 동일). `hdx/diagnose_remediate.py` 는 `.env.local` 의 `RAILWAY_DB_*` 를 환경변수로 요구한다(미주입 시 `KeyError`).
+
+#### E. `worklist.csv` 최종 재산출 — 전 소스 260827
+
+```bash
+python3 bin/build_worklist.py --compare out/worklist.260822-baseline.csv
+```
+
+| 항목 | 기존 260822 | M0-3 혼합 세대 | **최종 260827** |
+|---|---|---|---|
+| 총행 / 상품 | 1,431 / — | 981 / 162 | **787 / 172** |
+| `auto_data` | 0 | 0 | **0** |
+| **`needs_authority`** | **694 / 54상품** | 317 / 50상품 | **156 / 27상품** |
+| `needs_design` | 121 | 20 | **12** |
+| `review` | 616 | 644 | **619** |
+
+edge 분포: `E4` 556 · `Q1` 75 · `E3` 41 · `G1` 31 · `W4` 40 · `W5` 18 · `W2` 12 · `S1` 11 · `C1` 3 — **`E1` 항목 없음(0)**. M0-5 의 `E1 NO_SOURCE = 0` 과 정합한다.
+
+소스 기여(dedup 후): `price` 511 · `widget` 208 · `lens-b` 37 · `g1` 31.
+
+**게시 분모(192) 교차**:
+
+| 구분 | 상품 | 행 |
+|---|---|---|
+| `needs_authority` 게시 **안** | **22** | **141** |
+| `needs_authority` 게시 밖 | 5 | 15 |
+| 전체 worklist 게시 안 | 146 | 703 |
+
+`needs_authority` 근거별: `ZERO_FINAL` 134 · `PRICE_MISSING` 13 · `UNCOVERED` 9.
+
+기존 대비 `needs_authority` 상품 **54 → 27**(해소 29 · 신규 2 = `PRD_000082` · `PRD_000165`).
+
+**AC-PW-004 판정 갱신**: 「`auto_data` 0건」 **PASS** · 「`needs_authority` 가 재추출 캐시 기준으로 재계산」 **PASS** — 입력 4소스가 모두 260827 세대이고 `live-snapshot` 도 `snap_20260827_1422` 로 정렬됐다. M0-3 §J 의 부분 PASS 를 **완전 PASS 로 승격**한다.
+
+**미검증 (Gaps)**: (a) `widget-defects` 389 → 208 의 **−181 이 어떤 결함의 해소인지 건별 대조하지 않았다** — 전량 재생성이므로 세대 차이와 실제 해소가 섞여 있다. (b) 신규 편입 2상품(`PRD_000082`·`PRD_000165`)의 유입 경로 미확인. (c) `price-defects` 변환이 원래 경로라는 것은 **컬럼 완전 일치에 근거한 강한 정황**이며, 원 생성기를 찾아 대조한 것은 아니다(`[추정]`). (d) `Q1` 68 → 75 증가분 미규명.
+
+**잔여 위험**: `defect-board.csv` 는 `--scope` 실행마다 **덮어써진다**. widget 실행 후 price 를 실행했으므로 현재 board 는 price 산출이다. 순서를 바꾸면 다른 내용이 남으므로, 이 CSV 를 근거로 인용할 때는 **어느 scope 산출인지 함께 적어야 한다**.
+
 ---
 
 ## §G 세션 마감 종합 (2026-08-27) — 다음 세션 인수인계

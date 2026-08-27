@@ -1,12 +1,22 @@
 prd_cd,prd_nm,edge,remediation_class,note
+PRD_000001,OPP접착봉투,Q1,review,초대량 저청구 검토(INFO_MAX): 'OPP접착봉투' max 100 > 최대구간 1×10
+PRD_000002,OPP비접착봉투,Q1,review,초대량 저청구 검토(INFO_MAX): 'OPP비접착봉투' max 100 > 최대구간 1×10
+PRD_000004,카드봉투,Q1,review,초대량 저청구 검토(INFO_MAX): '카드봉투' max 100 > 최대구간 1×10
+PRD_000005,캘린더봉투,Q1,review,초대량 저청구 검토(INFO_MAX): '캘린더봉투' max 100 > 최대구간 1×10
+PRD_000006,볼체인,Q1,review,초대량 저청구 검토(INFO_MAX): '볼체인' max 100 > 최대구간 1×10
+PRD_000007,와이어링,Q1,review,초대량 저청구 검토(INFO_MAX): '와이어링' max 100 > 최대구간 1×10
+PRD_000009,투명케이스,Q1,review,초대량 저청구 검토(INFO_MAX): '투명케이스' max 100 > 최대구간 1×10
+PRD_000011,자석고정용고무판,Q1,review,초대량 저청구 검토(INFO_MAX): '자석고정용고무판' max 100 > 최대구간 1×10
+PRD_000012,우드거치대,Q1,review,초대량 저청구 검토(INFO_MAX): '우드거치대' max 100 > 최대구간 1×10
+PRD_000013,우드봉,Q1,review,초대량 저청구 검토(INFO_MAX): '우드봉' max 100 > 최대구간 1×10
+PRD_000014,우드행거,Q1,review,초대량 저청구 검토(INFO_MAX): '우드행거' max 100 > 최대구간 1×10
+PRD_000015,만년스탬프 리필잉크,Q1,review,초대량 저청구 검토(INFO_MAX): '만년스탬프 리필잉크' max 100 > 최대구간 1×10
 PRD_000016,프리미엄엽서,E3,review,차원 누락(MISSING·proc_cd): 손님선택 2값이 단가행에 없음
-PRD_000016,프리미엄엽서,E4,review,ENGINE_ERROR -
 PRD_000016,프리미엄엽서,E4,review,공정 오배선(PROC_MISMATCH): 코어 comp '무광코팅비' proc 가 상품 공정과 교집합 0
 PRD_000016,프리미엄엽서,E4,review,공정 오배선(PROC_MISMATCH): 코어 comp '미싱비' proc 가 상품 공정과 교집합 0
 PRD_000016,프리미엄엽서,E4,review,공정 오배선(PROC_MISMATCH): 코어 comp '별색인쇄비' proc 가 상품 공정과 교집합 0
 PRD_000016,프리미엄엽서,E4,review,공정 오배선(PROC_MISMATCH): 코어 comp '오시비' proc 가 상품 공정과 교집합 0
 PRD_000016,프리미엄엽서,E4,review,공정 오배선(PROC_MISMATCH): 코어 comp '유광코팅비' proc 가 상품 공정과 교집합 0
-PRD_000017,코팅엽서,E4,review,ENGINE_ERROR -
 PRD_000017,코팅엽서,E4,review,공정 오배선(PROC_MISMATCH): 코어 comp '가변이미지' proc 가 상품 공정과 교집합 0
 PRD_000017,코팅엽서,E4,review,공정 오배선(PROC_MISMATCH): 코어 comp '가변텍스트' proc 가 상품 공정과 교집합 0
 PRD_000017,코팅엽서,E4,review,공정 오배선(PROC_MISMATCH): 코어 comp '미싱비' proc 가 상품 공정과 교집합 0
@@ -33,7 +43,6 @@ PRD_000020,화이트인쇄엽서,E4,review,공정 오배선(PROC_MISMATCH): 코�
 PRD_000020,화이트인쇄엽서,E4,review,공정 오배선(PROC_MISMATCH): 코어 comp '미싱비' proc 가 상품 공정과 교집합 0
 PRD_000020,화이트인쇄엽서,E4,review,공정 오배선(PROC_MISMATCH): 코어 comp '오시비' proc 가 상품 공정과 교집합 0
 PRD_000020,화이트인쇄엽서,E4,review,공정 오배선(PROC_MISMATCH): 코어 comp '유광코팅비' proc 가 상품 공정과 교집합 0
-PRD_000021,핑크별색엽서,E4,review,ENGINE_ERROR -
 PRD_000021,핑크별색엽서,E4,review,공정 오배선(PROC_MISMATCH): 코어 comp '가변이미지' proc 가 상품 공정과 교집합 0
 PRD_000021,핑크별색엽서,E4,review,공정 오배선(PROC_MISMATCH): 코어 comp '가변텍스트' proc 가 상품 공정과 교집합 0
 PRD_000021,핑크별색엽서,E4,review,공정 오배선(PROC_MISMATCH): 코어 comp '귀돌이비' proc 가 상품 공정과 교집합 0
@@ -50,9 +59,10 @@ PRD_000024,포토카드,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '
 PRD_000024,포토카드,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '유광라미네이팅' 공정 제공하나 가격 comp 없음
 PRD_000024,포토카드,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '직각모서리' 공정 제공하나 가격 comp 없음
 PRD_000024,포토카드,Q1,review,수량 함정(TRAP_MIN): '포토카드' 최소수량 1 < 구간 comp 최소 → 구간 아래 주문 시 무료
-PRD_000025,투명포토카드,E4,review,ENGINE_ERROR -
 PRD_000025,투명포토카드,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000144|plt_siz_cd=SIZ_000499|print_opt_cd=POPT_000001|siz_cd=SIZ_000012|qty=1
+PRD_000025,투명포토카드,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000144|print_opt_cd=POPT_000001|siz_cd=SIZ_000012|qty=1
 PRD_000025,투명포토카드,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000147|plt_siz_cd=SIZ_000499|print_opt_cd=POPT_000001|siz_cd=SIZ_000012|qty=1
+PRD_000025,투명포토카드,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000147|print_opt_cd=POPT_000001|siz_cd=SIZ_000012|qty=1
 PRD_000025,투명포토카드,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '둥근모서리(4방4R)' 공정 제공하나 가격 comp 없음
 PRD_000025,투명포토카드,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '디지털인쇄' 공정 제공하나 가격 comp 없음
 PRD_000025,투명포토카드,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '직각모서리' 공정 제공하나 가격 comp 없음
@@ -160,9 +170,6 @@ PRD_000035,모양명함,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '
 PRD_000035,모양명함,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '완칼커팅' 공정 제공하나 가격 comp 없음
 PRD_000035,모양명함,G1,review,
 PRD_000035,모양명함,Q1,review,초대량 저청구 검토(INFO_MAX): '모양명함' max 10000 > 최대구간 100×10
-PRD_000036,미니모양명함,E3,review,차원 누락(MISSING·siz_cd): 손님선택 1값이 단가행에 없음
-PRD_000036,미니모양명함,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000109|print_opt_cd=POPT_000001|siz_cd=SIZ_000148|qty=100
-PRD_000036,미니모양명함,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000109|print_opt_cd=POPT_000002|siz_cd=SIZ_000148|qty=100
 PRD_000036,미니모양명함,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '디지털인쇄' 공정 제공하나 가격 comp 없음
 PRD_000036,미니모양명함,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '완칼커팅' 공정 제공하나 가격 comp 없음
 PRD_000036,미니모양명함,G1,review,
@@ -176,9 +183,8 @@ PRD_000037,오리지널박명함,E4,review,공정 무료화(UNCOVERED_BAKED): �
 PRD_000037,오리지널박명함,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '트윙클박' 공정 제공하나 가격 comp 없음
 PRD_000037,오리지널박명함,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '홀로그램박' 공정 제공하나 가격 comp 없음
 PRD_000037,오리지널박명함,G1,review,
-PRD_000038,형압명함,E1,needs_design,NO_FORMULA 직접단가도 없음(항상 0원): 형압명함
-PRD_000038,형압명함,E4,needs_design,NO_SOURCE mat_cd=MAT_000109|print_opt_cd=POPT_000001|siz_cd=SIZ_000008|qty=100
-PRD_000038,형압명함,E4,needs_design,NO_SOURCE mat_cd=MAT_000109|print_opt_cd=POPT_000002|siz_cd=SIZ_000008|qty=100
+PRD_000038,형압명함,E3,review,차원 누락(MISSING·proc_cd): 손님선택 1값이 단가행에 없음
+PRD_000038,형압명함,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '디지털인쇄' 공정 제공하나 가격 comp 없음
 PRD_000039,투명명함,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '둥근모서리(4방4R)' 공정 제공하나 가격 comp 없음
 PRD_000039,투명명함,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '디지털인쇄' 공정 제공하나 가격 comp 없음
 PRD_000039,투명명함,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '직각모서리' 공정 제공하나 가격 comp 없음
@@ -267,25 +273,11 @@ PRD_000050,봉투제작,W2,review,PARENT_DEAD OPV-000029#1:-=SIZ_000193
 PRD_000050,봉투제작,W2,review,PARENT_DEAD OPV-000030#1:-=SIZ_000192
 PRD_000050,봉투제작,W2,review,PARENT_DEAD OPV-000031#1:-=SIZ_000194
 PRD_000050,봉투제작,W2,review,PARENT_DEAD OPV_000834#1:-=SIZ_000191
-PRD_000052,반칼 자유형 스티커,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000584|print_opt_cd=POPT_000001|siz_cd=SIZ_000258|qty=2
-PRD_000052,반칼 자유형 스티커,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000584|print_opt_cd=POPT_000001|siz_cd=SIZ_000426|qty=4
-PRD_000052,반칼 자유형 스티커,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000585|print_opt_cd=POPT_000001|siz_cd=SIZ_000258|qty=2
-PRD_000052,반칼 자유형 스티커,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000585|print_opt_cd=POPT_000001|siz_cd=SIZ_000426|qty=4
-PRD_000052,반칼 자유형 스티커,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000586|print_opt_cd=POPT_000001|siz_cd=SIZ_000258|qty=2
-PRD_000052,반칼 자유형 스티커,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000586|print_opt_cd=POPT_000001|siz_cd=SIZ_000426|qty=4
-PRD_000052,반칼 자유형 스티커,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000609|print_opt_cd=POPT_000001|siz_cd=SIZ_000258|qty=2
-PRD_000052,반칼 자유형 스티커,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000609|print_opt_cd=POPT_000001|siz_cd=SIZ_000426|qty=4
-PRD_000052,반칼 자유형 스티커,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000611|print_opt_cd=POPT_000001|siz_cd=SIZ_000258|qty=2
-PRD_000052,반칼 자유형 스티커,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000611|print_opt_cd=POPT_000001|siz_cd=SIZ_000426|qty=4
 PRD_000052,반칼 자유형 스티커,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '디지털인쇄' 공정 제공하나 가격 comp 없음
 PRD_000052,반칼 자유형 스티커,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '무광라미네이팅' 공정 제공하나 가격 comp 없음
 PRD_000052,반칼 자유형 스티커,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '반칼커팅' 공정 제공하나 가격 comp 없음
 PRD_000052,반칼 자유형 스티커,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '유광라미네이팅' 공정 제공하나 가격 comp 없음
 PRD_000052,반칼 자유형 스티커,W4,review,ANCHOR_DELETED OPV_000509#1:proc_cd=PROC_000054
-PRD_000053,반칼 자유형 투명스티커,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000371|print_opt_cd=POPT_000001|siz_cd=SIZ_000258|qty=2
-PRD_000053,반칼 자유형 투명스티커,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000371|print_opt_cd=POPT_000001|siz_cd=SIZ_000426|qty=4
-PRD_000053,반칼 자유형 투명스티커,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000372|print_opt_cd=POPT_000001|siz_cd=SIZ_000258|qty=2
-PRD_000053,반칼 자유형 투명스티커,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000372|print_opt_cd=POPT_000001|siz_cd=SIZ_000426|qty=4
 PRD_000053,반칼 자유형 투명스티커,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '디지털인쇄' 공정 제공하나 가격 comp 없음
 PRD_000053,반칼 자유형 투명스티커,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '반칼커팅' 공정 제공하나 가격 comp 없음
 PRD_000053,반칼 자유형 투명스티커,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '화이트인쇄' 공정 제공하나 가격 comp 없음
@@ -293,9 +285,6 @@ PRD_000053,반칼 자유형 투명스티커,G1,review,
 PRD_000054,반칼 자유형 홀로그램스티커,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '디지털인쇄' 공정 제공하나 가격 comp 없음
 PRD_000054,반칼 자유형 홀로그램스티커,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '반칼커팅' 공정 제공하나 가격 comp 없음
 PRD_000054,반칼 자유형 홀로그램스티커,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '화이트인쇄' 공정 제공하나 가격 comp 없음
-PRD_000055,낱장 자유형 스티커,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000593|print_opt_cd=POPT_000001|siz_cd=SIZ_000198|qty=1
-PRD_000055,낱장 자유형 스티커,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000593|print_opt_cd=POPT_000001|siz_cd=SIZ_000258|qty=1
-PRD_000055,낱장 자유형 스티커,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000593|print_opt_cd=POPT_000001|siz_cd=SIZ_000315|qty=1
 PRD_000055,낱장 자유형 스티커,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '실사출력' 공정 제공하나 가격 comp 없음
 PRD_000055,낱장 자유형 스티커,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '완칼커팅' 공정 제공하나 가격 comp 없음
 PRD_000055,낱장 자유형 스티커,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '쿨코팅(무광)' 공정 제공하나 가격 comp 없음
@@ -308,51 +297,27 @@ PRD_000056,낱장 자유형 투명스티커,W4,review,ANCHOR_DELETED OPV_000775#
 PRD_000057,대형 자유형 스티커,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '실사출력' 공정 제공하나 가격 comp 없음
 PRD_000057,대형 자유형 스티커,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '완칼커팅' 공정 제공하나 가격 comp 없음
 PRD_000057,대형 자유형 스티커,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '쿨코팅(무광)' 공정 제공하나 가격 comp 없음
-PRD_000058,반칼원형스티커,E4,review,ENGINE_ERROR -
 PRD_000058,반칼원형스티커,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '디지털인쇄' 공정 제공하나 가격 comp 없음
 PRD_000058,반칼원형스티커,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '반칼커팅' 공정 제공하나 가격 comp 없음
-PRD_000059,반칼정사각스티커,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000584|print_opt_cd=POPT_000001|siz_cd=SIZ_000426|qty=4
-PRD_000059,반칼정사각스티커,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000585|print_opt_cd=POPT_000001|siz_cd=SIZ_000426|qty=4
-PRD_000059,반칼정사각스티커,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000586|print_opt_cd=POPT_000001|siz_cd=SIZ_000426|qty=4
-PRD_000059,반칼정사각스티커,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000609|print_opt_cd=POPT_000001|siz_cd=SIZ_000426|qty=4
-PRD_000059,반칼정사각스티커,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000611|print_opt_cd=POPT_000001|siz_cd=SIZ_000426|qty=4
 PRD_000059,반칼정사각스티커,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '디지털인쇄' 공정 제공하나 가격 comp 없음
 PRD_000059,반칼정사각스티커,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '반칼커팅' 공정 제공하나 가격 comp 없음
 PRD_000059,반칼정사각스티커,G1,review,
-PRD_000060,반칼직사각스티커,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000584|print_opt_cd=POPT_000001|siz_cd=SIZ_000426|qty=4
-PRD_000060,반칼직사각스티커,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000585|print_opt_cd=POPT_000001|siz_cd=SIZ_000426|qty=4
-PRD_000060,반칼직사각스티커,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000586|print_opt_cd=POPT_000001|siz_cd=SIZ_000426|qty=4
-PRD_000060,반칼직사각스티커,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000609|print_opt_cd=POPT_000001|siz_cd=SIZ_000426|qty=4
-PRD_000060,반칼직사각스티커,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000611|print_opt_cd=POPT_000001|siz_cd=SIZ_000426|qty=4
 PRD_000060,반칼직사각스티커,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '디지털인쇄' 공정 제공하나 가격 comp 없음
 PRD_000060,반칼직사각스티커,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '무광라미네이팅' 공정 제공하나 가격 comp 없음
 PRD_000060,반칼직사각스티커,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '반칼커팅' 공정 제공하나 가격 comp 없음
 PRD_000060,반칼직사각스티커,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '유광라미네이팅' 공정 제공하나 가격 comp 없음
 PRD_000060,반칼직사각스티커,G1,review,
-PRD_000061,반칼띠지스티커,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000584|print_opt_cd=POPT_000001|siz_cd=SIZ_000426|qty=4
-PRD_000061,반칼띠지스티커,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000585|print_opt_cd=POPT_000001|siz_cd=SIZ_000426|qty=4
-PRD_000061,반칼띠지스티커,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000586|print_opt_cd=POPT_000001|siz_cd=SIZ_000426|qty=4
-PRD_000061,반칼띠지스티커,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000609|print_opt_cd=POPT_000001|siz_cd=SIZ_000426|qty=4
-PRD_000061,반칼띠지스티커,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000611|print_opt_cd=POPT_000001|siz_cd=SIZ_000426|qty=4
 PRD_000061,반칼띠지스티커,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '디지털인쇄' 공정 제공하나 가격 comp 없음
 PRD_000061,반칼띠지스티커,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '무광라미네이팅' 공정 제공하나 가격 comp 없음
 PRD_000061,반칼띠지스티커,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '반칼커팅' 공정 제공하나 가격 comp 없음
 PRD_000061,반칼띠지스티커,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '유광라미네이팅' 공정 제공하나 가격 comp 없음
 PRD_000061,반칼띠지스티커,G1,review,
-PRD_000062,반칼팬시스티커,E3,review,차원 누락(MISSING·siz_cd): 손님선택 1값이 단가행에 없음
-PRD_000062,반칼팬시스티커,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000584|print_opt_cd=POPT_000001|siz_cd=SIZ_000067|qty=8
-PRD_000062,반칼팬시스티커,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000585|print_opt_cd=POPT_000001|siz_cd=SIZ_000067|qty=8
-PRD_000062,반칼팬시스티커,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000586|print_opt_cd=POPT_000001|siz_cd=SIZ_000067|qty=8
-PRD_000062,반칼팬시스티커,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000609|print_opt_cd=POPT_000001|siz_cd=SIZ_000067|qty=8
-PRD_000062,반칼팬시스티커,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000611|print_opt_cd=POPT_000001|siz_cd=SIZ_000067|qty=8
 PRD_000062,반칼팬시스티커,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '디지털인쇄' 공정 제공하나 가격 comp 없음
 PRD_000062,반칼팬시스티커,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '무광라미네이팅' 공정 제공하나 가격 comp 없음
 PRD_000062,반칼팬시스티커,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '반칼커팅' 공정 제공하나 가격 comp 없음
 PRD_000062,반칼팬시스티커,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '유광라미네이팅' 공정 제공하나 가격 comp 없음
 PRD_000062,반칼팬시스티커,G1,review,
-PRD_000063,반칼팬시투명스티커,E3,review,차원 누락(MISSING·siz_cd): 손님선택 1값이 단가행에 없음
-PRD_000063,반칼팬시투명스티커,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000371|print_opt_cd=POPT_000001|siz_cd=SIZ_000067|qty=8
-PRD_000063,반칼팬시투명스티커,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000372|print_opt_cd=POPT_000001|siz_cd=SIZ_000067|qty=8
+PRD_000063,반칼팬시투명스티커,C1,review,RULE_DEAD_REF RULE_001(140x100 커팅모양) — 없는 값 참조: siz_cd=SIZ_000067
 PRD_000063,반칼팬시투명스티커,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '반칼커팅' 공정 제공하나 가격 comp 없음
 PRD_000063,반칼팬시투명스티커,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '화이트인쇄' 공정 제공하나 가격 comp 없음
 PRD_000065,스티커팩,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '디지털인쇄' 공정 제공하나 가격 comp 없음
@@ -364,8 +329,6 @@ PRD_000066,합판도무송스티커,W4,needs_design,ANCHOR_MISSING OPV_000531#1:
 PRD_000066,합판도무송스티커,W4,needs_design,ANCHOR_MISSING OPV_000533#1:mat_cd=MAT_000156
 PRD_000066,합판도무송스티커,W4,needs_design,ANCHOR_MISSING OPV_000535#1:mat_cd=MAT_000170
 PRD_000066,합판도무송스티커,W4,needs_design,ANCHOR_MISSING OPV_000537#1:mat_cd=MAT_000171
-PRD_000067,타투스티커,E3,review,차원 누락(MISSING·siz_cd): 손님선택 1값이 단가행에 없음
-PRD_000067,타투스티커,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000594|print_opt_cd=POPT_000001|siz_cd=SIZ_000612|qty=3
 PRD_000067,타투스티커,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '전사인쇄' 공정 제공하나 가격 comp 없음
 PRD_000068,중철책자,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000073|siz_cd=SIZ_000250|qty=2
 PRD_000068,중철책자,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000073|siz_cd=SIZ_000252|qty=2
@@ -478,10 +441,11 @@ PRD_000072,하드커버책자,S1,review,"SET_MEMBER_NO_SOURCE copies=1|members=[
 PRD_000077,레더하드커버책자,G1,review,
 PRD_000077,레더하드커버책자,S1,review,"SET_MEMBER_NO_SOURCE copies=1|members=[{'sub_prd_cd': 'PRD_000078', 'mat_cd': 'MAT_000379', 'print_opt_cd': 'POPT_000001'}, {'sub_prd_cd': 'PRD_000074', 'mat_cd': 'MAT_000382'}, {'sub_prd_cd': 'PRD_000291', 'siz_cd': 'SIZ_000250', 'mat_cd': 'MAT_000073', 'print_opt_cd': 'POPT_000001'}]|mode=strict|qty=1"
 PRD_000082,하드커버링책자,E3,review,차원 누락(MISSING·proc_cd): 손님선택 1값이 단가행에 없음
-PRD_000082,하드커버링책자,E4,review,ENGINE_ERROR -
+PRD_000082,하드커버링책자,E4,needs_authority,ZERO_FINAL siz_cd=SIZ_000179|qty=1
+PRD_000082,하드커버링책자,E4,needs_authority,ZERO_FINAL siz_cd=SIZ_000254|qty=1
+PRD_000082,하드커버링책자,E4,needs_authority,ZERO_FINAL siz_cd=SIZ_000263|qty=1
+PRD_000082,하드커버링책자,E4,needs_authority,ZERO_FINAL siz_cd=SIZ_000613|qty=1
 PRD_000082,하드커버링책자,S1,review,"SET_MEMBER_NO_SOURCE copies=1|members=[{'sub_prd_cd': 'PRD_000083', 'mat_cd': 'MAT_000078', 'print_opt_cd': 'POPT_000001'}, {'sub_prd_cd': 'PRD_000084', 'mat_cd': 'MAT_000382'}, {'sub_prd_cd': 'PRD_000087'}, {'sub_prd_cd': 'PRD_000311', 'mat_cd': 'MAT_000072', 'print_opt_cd': 'POPT_000001'}]|mode=strict|qty=1"
-PRD_000088,레더링바인더,E4,review,ENGINE_ERROR -
-PRD_000094,엽서북,E3,review,차원 누락(MISSING·siz_cd): 손님선택 1값이 단가행에 없음
 PRD_000094,엽서북,E4,needs_authority,ZERO_FINAL print_opt_cd=POPT_000001|siz_cd=SIZ_000003|qty=2
 PRD_000094,엽서북,E4,needs_authority,ZERO_FINAL print_opt_cd=POPT_000001|siz_cd=SIZ_000004|qty=2
 PRD_000094,엽서북,E4,needs_authority,ZERO_FINAL print_opt_cd=POPT_000001|siz_cd=SIZ_000103|qty=2
@@ -499,26 +463,7 @@ PRD_000097,떡메모지,Q1,review,BELOW_MIN_QTY bdl_qty=100|mat_cd=MAT_000073|pr
 PRD_000097,떡메모지,Q1,review,BELOW_MIN_QTY bdl_qty=50|mat_cd=MAT_000073|print_opt_cd=POPT_000001|siz_cd=SIZ_000119|qty=3
 PRD_000097,떡메모지,Q1,review,BELOW_MIN_QTY bdl_qty=50|mat_cd=MAT_000073|print_opt_cd=POPT_000001|siz_cd=SIZ_000266|qty=3
 PRD_000097,떡메모지,Q1,review,수량 함정(TRAP_MIN): '떡메모지' 최소수량 3 < 구간 comp 최소 → 구간 아래 주문 시 무료
-PRD_000100,포토북 [디자인명],E3,review,차원 누락(MISSING·siz_cd): 손님선택 3값이 단가행에 없음
-PRD_000100,포토북 [디자인명],E4,needs_authority,ZERO_FINAL mat_cd=MAT_000105|opt_cd=OPV_000484|print_opt_cd=POPT_000001|siz_cd=SIZ_000250|qty=1
-PRD_000100,포토북 [디자인명],E4,needs_authority,ZERO_FINAL mat_cd=MAT_000105|opt_cd=OPV_000484|print_opt_cd=POPT_000001|siz_cd=SIZ_000252|qty=1
-PRD_000100,포토북 [디자인명],E4,needs_authority,ZERO_FINAL mat_cd=MAT_000105|opt_cd=OPV_000484|print_opt_cd=POPT_000001|siz_cd=SIZ_000270|qty=1
-PRD_000100,포토북 [디자인명],E4,needs_authority,ZERO_FINAL mat_cd=MAT_000105|opt_cd=OPV_000484|print_opt_cd=POPT_000002|siz_cd=SIZ_000250|qty=1
-PRD_000100,포토북 [디자인명],E4,needs_authority,ZERO_FINAL mat_cd=MAT_000105|opt_cd=OPV_000484|print_opt_cd=POPT_000002|siz_cd=SIZ_000252|qty=1
-PRD_000100,포토북 [디자인명],E4,needs_authority,ZERO_FINAL mat_cd=MAT_000105|opt_cd=OPV_000484|print_opt_cd=POPT_000002|siz_cd=SIZ_000270|qty=1
-PRD_000100,포토북 [디자인명],E4,needs_authority,ZERO_FINAL mat_cd=MAT_000105|opt_cd=OPV_000485|print_opt_cd=POPT_000001|siz_cd=SIZ_000250|qty=1
-PRD_000100,포토북 [디자인명],E4,needs_authority,ZERO_FINAL mat_cd=MAT_000105|opt_cd=OPV_000485|print_opt_cd=POPT_000001|siz_cd=SIZ_000252|qty=1
-PRD_000100,포토북 [디자인명],E4,needs_authority,ZERO_FINAL mat_cd=MAT_000105|opt_cd=OPV_000485|print_opt_cd=POPT_000001|siz_cd=SIZ_000270|qty=1
-PRD_000100,포토북 [디자인명],E4,needs_authority,ZERO_FINAL mat_cd=MAT_000105|opt_cd=OPV_000485|print_opt_cd=POPT_000002|siz_cd=SIZ_000250|qty=1
-PRD_000100,포토북 [디자인명],E4,needs_authority,ZERO_FINAL mat_cd=MAT_000105|opt_cd=OPV_000485|print_opt_cd=POPT_000002|siz_cd=SIZ_000252|qty=1
-PRD_000100,포토북 [디자인명],E4,needs_authority,ZERO_FINAL mat_cd=MAT_000105|opt_cd=OPV_000485|print_opt_cd=POPT_000002|siz_cd=SIZ_000270|qty=1
-PRD_000100,포토북 [디자인명],E4,needs_authority,ZERO_FINAL mat_cd=MAT_000105|opt_cd=OPV_000486|print_opt_cd=POPT_000001|siz_cd=SIZ_000250|qty=1
-PRD_000100,포토북 [디자인명],E4,needs_authority,ZERO_FINAL mat_cd=MAT_000105|opt_cd=OPV_000486|print_opt_cd=POPT_000001|siz_cd=SIZ_000252|qty=1
-PRD_000100,포토북 [디자인명],E4,needs_authority,ZERO_FINAL mat_cd=MAT_000105|opt_cd=OPV_000486|print_opt_cd=POPT_000001|siz_cd=SIZ_000270|qty=1
 PRD_000100,포토북 [디자인명],E4,needs_authority,ZERO_FINAL mat_cd=MAT_000105|opt_cd=OPV_000486|print_opt_cd=POPT_000001|siz_cd=SIZ_000274|qty=1
-PRD_000100,포토북 [디자인명],E4,needs_authority,ZERO_FINAL mat_cd=MAT_000105|opt_cd=OPV_000486|print_opt_cd=POPT_000002|siz_cd=SIZ_000250|qty=1
-PRD_000100,포토북 [디자인명],E4,needs_authority,ZERO_FINAL mat_cd=MAT_000105|opt_cd=OPV_000486|print_opt_cd=POPT_000002|siz_cd=SIZ_000252|qty=1
-PRD_000100,포토북 [디자인명],E4,needs_authority,ZERO_FINAL mat_cd=MAT_000105|opt_cd=OPV_000486|print_opt_cd=POPT_000002|siz_cd=SIZ_000270|qty=1
 PRD_000100,포토북 [디자인명],E4,needs_authority,ZERO_FINAL mat_cd=MAT_000105|opt_cd=OPV_000486|print_opt_cd=POPT_000002|siz_cd=SIZ_000274|qty=1
 PRD_000100,포토북 [디자인명],Q1,review,초대량 저청구 검토(INFO_MAX): '포토북 [디자인명]' max 1000 > 최대구간 1×10
 PRD_000101,포토북 [디자인명]-내지,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '디지털인쇄' 공정 제공하나 가격 comp 없음
@@ -527,9 +472,7 @@ PRD_000109,미니탁상형캘린더,E4,review,공정 무료화(UNCOVERED_PROCESS
 PRD_000110,엽서캘린더,E3,review,차원 누락(MISSING·proc_cd): 손님선택 1값이 단가행에 없음
 PRD_000110,엽서캘린더,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 '1구 6mm 타공' 공정 제공하나 가격 comp 없음
 PRD_000111,벽걸이캘린더,E3,review,차원 누락(MISSING·proc_cd): 손님선택 1값이 단가행에 없음
-PRD_000111,벽걸이캘린더,E4,review,ENGINE_ERROR -
 PRD_000111,벽걸이캘린더,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 '2구 6mm 타공' 공정 제공하나 가격 comp 없음
-PRD_000118,아트프린트포스터,E4,review,ENGINE_ERROR -
 PRD_000118,아트프린트포스터,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '실사출력' 공정 제공하나 가격 comp 없음
 PRD_000118,아트프린트포스터,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '쿨코팅(무광)' 공정 제공하나 가격 comp 없음
 PRD_000118,아트프린트포스터,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '쿨코팅(유광)' 공정 제공하나 가격 comp 없음
@@ -562,7 +505,6 @@ PRD_000129,폼보드,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000599|siz_cd=SIZ_
 PRD_000129,폼보드,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 '실사출력' 공정 제공하나 가격 comp 없음
 PRD_000129,폼보드,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 '쿨코팅(무광)' 공정 제공하나 가격 comp 없음
 PRD_000129,폼보드,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 '쿨코팅(유광)' 공정 제공하나 가격 comp 없음
-PRD_000130,포맥스보드,E3,review,차원 누락(MISSING·siz_cd): 손님선택 1값이 단가행에 없음
 PRD_000130,포맥스보드,E4,review,PRICE_GAP mat_cd=MAT_000593|siz_cd=SIZ_000175|qty=1
 PRD_000130,포맥스보드,E4,review,PRICE_GAP mat_cd=MAT_000593|siz_cd=SIZ_000197|qty=1
 PRD_000130,포맥스보드,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000593|siz_cd=SIZ_000175|qty=1
@@ -570,8 +512,6 @@ PRD_000130,포맥스보드,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000593|siz_c
 PRD_000130,포맥스보드,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '실사출력' 공정 제공하나 가격 comp 없음
 PRD_000130,포맥스보드,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '쿨코팅(무광)' 공정 제공하나 가격 comp 없음
 PRD_000130,포맥스보드,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '쿨코팅(유광)' 공정 제공하나 가격 comp 없음
-PRD_000131,프레임리스우드액자,E3,review,차원 누락(MISSING·siz_cd): 손님선택 1값이 단가행에 없음
-PRD_000131,프레임리스우드액자,E4,review,ENGINE_ERROR -
 PRD_000131,프레임리스우드액자,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '실사출력' 공정 제공하나 가격 comp 없음
 PRD_000131,프레임리스우드액자,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '쿨코팅(무광)' 공정 제공하나 가격 comp 없음
 PRD_000131,프레임리스우드액자,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '쿨코팅(유광)' 공정 제공하나 가격 comp 없음
@@ -579,34 +519,21 @@ PRD_000131,프레임리스우드액자,Q1,review,초대량 저청구 검토(INFO
 PRD_000132,레더아트액자,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '실사출력' 공정 제공하나 가격 comp 없음
 PRD_000132,레더아트액자,Q1,review,초대량 저청구 검토(INFO_MAX): '레더아트액자' max 1000 > 최대구간 1×10
 PRD_000133,캔버스 행잉포스터,E3,review,차원 누락(MISSING·opt_cd): 손님선택 1값이 단가행에 없음
-PRD_000133,캔버스 행잉포스터,E3,review,차원 누락(MISSING·siz_cd): 손님선택 3값이 단가행에 없음
-PRD_000133,캔버스 행잉포스터,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000185|siz_cd=SIZ_000198|qty=1
-PRD_000133,캔버스 행잉포스터,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000185|siz_cd=SIZ_000258|qty=1
-PRD_000133,캔버스 행잉포스터,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000185|siz_cd=SIZ_000315|qty=1
 PRD_000133,캔버스 행잉포스터,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '오버로크' 공정 제공하나 가격 comp 없음
 PRD_000133,캔버스 행잉포스터,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '패브릭출력' 공정 제공하나 가격 comp 없음
 PRD_000133,캔버스 행잉포스터,Q1,review,초대량 저청구 검토(INFO_MAX): '캔버스 행잉포스터' max 10000 > 최대구간 1×10
 PRD_000133,캔버스 행잉포스터,W4,review,ANCHOR_DELETED OPV_000522#1:proc_cd=PROC_000080
 PRD_000134,린넨우드봉족자,E3,review,차원 누락(MISSING·opt_cd): 손님선택 1값이 단가행에 없음
-PRD_000134,린넨우드봉족자,E3,review,차원 누락(MISSING·siz_cd): 손님선택 3값이 단가행에 없음
-PRD_000134,린넨우드봉족자,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000607|siz_cd=SIZ_000314|qty=1
-PRD_000134,린넨우드봉족자,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000607|siz_cd=SIZ_000316|qty=1
-PRD_000134,린넨우드봉족자,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000607|siz_cd=SIZ_000318|qty=1
 PRD_000134,린넨우드봉족자,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '오버로크' 공정 제공하나 가격 comp 없음
 PRD_000134,린넨우드봉족자,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '패브릭출력' 공정 제공하나 가격 comp 없음
 PRD_000134,린넨우드봉족자,Q1,review,초대량 저청구 검토(INFO_MAX): '린넨우드봉족자' max 10000 > 최대구간 1×10
 PRD_000135,족자포스터,E3,review,차원 누락(MISSING·opt_cd): 손님선택 2값이 단가행에 없음
-PRD_000135,족자포스터,E3,review,차원 누락(MISSING·siz_cd): 손님선택 2값이 단가행에 없음
 PRD_000135,족자포스터,E4,review,PRICE_GAP mat_cd=MAT_000178|opt_cd=OPV_000958|siz_cd=SIZ_000198|qty=1
 PRD_000135,족자포스터,E4,review,PRICE_GAP mat_cd=MAT_000178|opt_cd=OPV_000958|siz_cd=SIZ_000294|qty=1
 PRD_000135,족자포스터,E4,review,PRICE_GAP mat_cd=MAT_000178|opt_cd=OPV_000958|siz_cd=SIZ_000315|qty=1
 PRD_000135,족자포스터,E4,review,PRICE_GAP mat_cd=MAT_000178|opt_cd=OPV_000958|siz_cd=SIZ_000319|qty=1
 PRD_000135,족자포스터,E4,review,PRICE_GAP mat_cd=MAT_000178|opt_cd=OPV_000958|siz_cd=SIZ_000320|qty=1
 PRD_000135,족자포스터,E4,review,PRICE_GAP mat_cd=MAT_000178|opt_cd=OPV_000959|siz_cd=SIZ_000315|qty=1
-PRD_000135,족자포스터,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000178|opt_cd=OPV_000958|siz_cd=SIZ_000198|qty=1
-PRD_000135,족자포스터,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000178|opt_cd=OPV_000958|siz_cd=SIZ_000315|qty=1
-PRD_000135,족자포스터,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000178|opt_cd=OPV_000959|siz_cd=SIZ_000198|qty=1
-PRD_000135,족자포스터,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000178|opt_cd=OPV_000959|siz_cd=SIZ_000315|qty=1
 PRD_000135,족자포스터,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '실사출력' 공정 제공하나 가격 comp 없음
 PRD_000135,족자포스터,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '쿨코팅(무광)' 공정 제공하나 가격 comp 없음
 PRD_000135,족자포스터,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '쿨코팅(유광)' 공정 제공하나 가격 comp 없음
@@ -617,7 +544,6 @@ PRD_000136,PET배너,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '아
 PRD_000136,PET배너,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '쿨코팅(무광)' 공정 제공하나 가격 comp 없음
 PRD_000136,PET배너,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '쿨코팅(유광)' 공정 제공하나 가격 comp 없음
 PRD_000136,PET배너,Q1,review,초대량 저청구 검토(INFO_MAX): 'PET배너' max 10000 > 최대구간 1×10
-PRD_000137,메쉬배너,E4,review,ENGINE_ERROR -
 PRD_000137,메쉬배너,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '아일렛(4구)' 공정 제공하나 가격 comp 없음
 PRD_000137,메쉬배너,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '패브릭출력' 공정 제공하나 가격 comp 없음
 PRD_000137,메쉬배너,Q1,review,초대량 저청구 검토(INFO_MAX): '메쉬배너' max 10000 > 최대구간 1×10
@@ -642,15 +568,12 @@ PRD_000139,메쉬현수막,E4,review,공정 오배선(PROC_MISMATCH): 코어 com
 PRD_000139,메쉬현수막,G1,review,
 PRD_000140,무광시트커팅,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '시트커팅' 공정 제공하나 가격 comp 없음
 PRD_000140,무광시트커팅,G1,review,
-PRD_000141,홀로그램 시트커팅,E3,review,차원 누락(MISSING·siz_cd): 손님선택 3값이 단가행에 없음
-PRD_000141,홀로그램 시트커팅,E4,review,ENGINE_ERROR -
 PRD_000141,홀로그램 시트커팅,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '시트커팅' 공정 제공하나 가격 comp 없음
 PRD_000141,홀로그램 시트커팅,G1,review,
 PRD_000142,유광아크릴스티커,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '레이저커팅' 공정 제공하나 가격 comp 없음
 PRD_000142,유광아크릴스티커,G1,review,
 PRD_000143,미러아크릴스티커,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '레이저커팅' 공정 제공하나 가격 comp 없음
 PRD_000143,미러아크릴스티커,G1,review,
-PRD_000144,미니보드스탠딩,E3,review,차원 누락(MISSING·siz_cd): 손님선택 3값이 단가행에 없음
 PRD_000144,미니보드스탠딩,E4,needs_authority,ZERO_FINAL siz_cd=SIZ_000258|qty=1
 PRD_000144,미니보드스탠딩,E4,needs_authority,ZERO_FINAL siz_cd=SIZ_000315|qty=1
 PRD_000144,미니보드스탠딩,E4,needs_authority,ZERO_FINAL siz_cd=SIZ_000426|qty=1
@@ -665,87 +588,41 @@ PRD_000145,미니배너,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '
 PRD_000145,미니배너,E4,review,공정 무료화(UNCOVERED_BAKED): 상품이 '쿨코팅(유광)' 공정 제공하나 가격 comp 없음
 PRD_000145,미니배너,Q1,review,BELOW_MIN_QTY mat_cd=MAT_000178|siz_cd=SIZ_000328|qty=1
 PRD_000145,미니배너,Q1,review,수량 함정(TRAP_MIN): '미니배너' 최소수량 1 < 구간 comp 최소 → 구간 아래 주문 시 무료
-PRD_000146,아크릴키링,E3,review,차원 누락(MISSING·mat_cd): 손님선택 3값이 단가행에 없음
 PRD_000146,아크릴키링,E4,needs_authority,PRICE_MISSING OPV_000625#1:mat_cd=MAT_000417
 PRD_000146,아크릴키링,E4,needs_authority,PRICE_MISSING OPV_000626#1:mat_cd=MAT_000418
 PRD_000146,아크릴키링,E4,needs_authority,PRICE_MISSING OPV_000627#1:mat_cd=MAT_000456
-PRD_000146,아크릴키링,E4,needs_authority,"UNCOVERED mat_cd: 4개 값 그리드 매칭 없음 값=['MAT_000386', 'MAT_000417', 'MAT_000418', 'MAT_000456']"
-PRD_000146,아크릴키링,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000006|siz_cd=SIZ_000329|siz_height=100.0|siz_width=100.0|qty=1
-PRD_000146,아크릴키링,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000006|siz_cd=SIZ_000329|siz_height=20.0|siz_width=20.0|qty=1
-PRD_000146,아크릴키링,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000006|siz_cd=SIZ_000330|siz_height=100.0|siz_width=100.0|qty=1
-PRD_000146,아크릴키링,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000006|siz_cd=SIZ_000330|siz_height=20.0|siz_width=20.0|qty=1
-PRD_000146,아크릴키링,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000006|siz_cd=SIZ_000331|siz_height=100.0|siz_width=100.0|qty=1
-PRD_000146,아크릴키링,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000006|siz_cd=SIZ_000331|siz_height=20.0|siz_width=20.0|qty=1
-PRD_000146,아크릴키링,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000006|siz_cd=SIZ_000333|siz_height=100.0|siz_width=100.0|qty=1
-PRD_000146,아크릴키링,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000006|siz_cd=SIZ_000333|siz_height=20.0|siz_width=20.0|qty=1
-PRD_000146,아크릴키링,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000006|siz_cd=SIZ_000334|siz_height=100.0|siz_width=100.0|qty=1
-PRD_000146,아크릴키링,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000006|siz_cd=SIZ_000334|siz_height=20.0|siz_width=20.0|qty=1
-PRD_000146,아크릴키링,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000006|siz_cd=SIZ_000335|siz_height=100.0|siz_width=100.0|qty=1
-PRD_000146,아크릴키링,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000006|siz_cd=SIZ_000335|siz_height=20.0|siz_width=20.0|qty=1
-PRD_000146,아크릴키링,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000006|siz_cd=SIZ_000559|siz_height=100.0|siz_width=100.0|qty=1
-PRD_000146,아크릴키링,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000006|siz_cd=SIZ_000559|siz_height=20.0|siz_width=20.0|qty=1
+PRD_000146,아크릴키링,E4,needs_authority,"UNCOVERED mat_cd: 3개 값 그리드 매칭 없음 값=['MAT_000417', 'MAT_000418', 'MAT_000456']"
 PRD_000146,아크릴키링,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 'UV평판인쇄' 공정 제공하나 가격 comp 없음
 PRD_000146,아크릴키링,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 '굿즈가공' 공정 제공하나 가격 comp 없음
 PRD_000146,아크릴키링,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 '레이저커팅' 공정 제공하나 가격 comp 없음
 PRD_000146,아크릴키링,Q1,review,초대량 저청구 검토(INFO_MAX): '아크릴키링' max 10000 > 최대구간 1×10
-PRD_000147,아크릴마그넷,E3,review,차원 누락(MISSING·mat_cd): 손님선택 1값이 단가행에 없음
 PRD_000147,아크릴마그넷,E3,review,차원 누락(MISSING·opt_cd): 손님선택 1값이 단가행에 없음
 PRD_000147,아크릴마그넷,E4,needs_authority,PRICE_MISSING OPV_001020#1:mat_cd=MAT_000419
-PRD_000147,아크릴마그넷,E4,needs_authority,"UNCOVERED mat_cd: 2개 값 그리드 매칭 없음 값=['MAT_000386', 'MAT_000419']"
-PRD_000147,아크릴마그넷,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000007|siz_cd=SIZ_000011|siz_height=20.0|siz_width=20.0|qty=1
-PRD_000147,아크릴마그넷,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000007|siz_cd=SIZ_000011|siz_height=80.0|siz_width=80.0|qty=1
-PRD_000147,아크릴마그넷,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000007|siz_cd=SIZ_000216|siz_height=20.0|siz_width=20.0|qty=1
-PRD_000147,아크릴마그넷,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000007|siz_cd=SIZ_000216|siz_height=80.0|siz_width=80.0|qty=1
-PRD_000147,아크릴마그넷,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000007|siz_cd=SIZ_000218|siz_height=20.0|siz_width=20.0|qty=1
-PRD_000147,아크릴마그넷,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000007|siz_cd=SIZ_000218|siz_height=80.0|siz_width=80.0|qty=1
-PRD_000147,아크릴마그넷,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000007|siz_cd=SIZ_000336|siz_height=20.0|siz_width=20.0|qty=1
-PRD_000147,아크릴마그넷,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000007|siz_cd=SIZ_000336|siz_height=80.0|siz_width=80.0|qty=1
+PRD_000147,아크릴마그넷,E4,needs_authority,UNCOVERED mat_cd: 1개 값 그리드 매칭 없음 값=['MAT_000419']
 PRD_000147,아크릴마그넷,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 'UV평판인쇄' 공정 제공하나 가격 comp 없음
 PRD_000147,아크릴마그넷,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 '레이저커팅' 공정 제공하나 가격 comp 없음
 PRD_000147,아크릴마그넷,Q1,review,초대량 저청구 검토(INFO_MAX): '아크릴마그넷' max 10000 > 최대구간 1×10
-PRD_000148,아크릴뱃지,E3,review,차원 누락(MISSING·mat_cd): 손님선택 2값이 단가행에 없음
 PRD_000148,아크릴뱃지,E4,needs_authority,PRICE_MISSING OPV_001021#1:mat_cd=MAT_000420
 PRD_000148,아크릴뱃지,E4,needs_authority,PRICE_MISSING OPV_001022#1:mat_cd=MAT_000422
-PRD_000148,아크릴뱃지,E4,needs_authority,"UNCOVERED mat_cd: 3개 값 그리드 매칭 없음 값=['MAT_000386', 'MAT_000420', 'MAT_000422']"
-PRD_000148,아크릴뱃지,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000007|siz_cd=SIZ_000011|siz_height=30.0|siz_width=30.0|qty=1
-PRD_000148,아크릴뱃지,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000007|siz_cd=SIZ_000011|siz_height=80.0|siz_width=80.0|qty=1
-PRD_000148,아크릴뱃지,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000007|siz_cd=SIZ_000216|siz_height=30.0|siz_width=30.0|qty=1
-PRD_000148,아크릴뱃지,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000007|siz_cd=SIZ_000216|siz_height=80.0|siz_width=80.0|qty=1
-PRD_000148,아크릴뱃지,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000007|siz_cd=SIZ_000218|siz_height=30.0|siz_width=30.0|qty=1
-PRD_000148,아크릴뱃지,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000007|siz_cd=SIZ_000218|siz_height=80.0|siz_width=80.0|qty=1
+PRD_000148,아크릴뱃지,E4,needs_authority,"UNCOVERED mat_cd: 2개 값 그리드 매칭 없음 값=['MAT_000420', 'MAT_000422']"
 PRD_000148,아크릴뱃지,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 'UV평판인쇄' 공정 제공하나 가격 comp 없음
 PRD_000148,아크릴뱃지,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 '굿즈가공' 공정 제공하나 가격 comp 없음
 PRD_000148,아크릴뱃지,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 '레이저커팅' 공정 제공하나 가격 comp 없음
 PRD_000148,아크릴뱃지,Q1,review,초대량 저청구 검토(INFO_MAX): '아크릴뱃지' max 10000 > 최대구간 1×10
-PRD_000149,아크릴집게,E3,review,차원 누락(MISSING·mat_cd): 손님선택 2값이 단가행에 없음
 PRD_000149,아크릴집게,E3,review,차원 누락(MISSING·opt_cd): 손님선택 2값이 단가행에 없음
 PRD_000149,아크릴집게,E4,needs_authority,PRICE_MISSING OPV_001023#1:mat_cd=MAT_000424
 PRD_000149,아크릴집게,E4,needs_authority,PRICE_MISSING OPV_001024#1:mat_cd=MAT_000425
-PRD_000149,아크릴집게,E4,needs_authority,"UNCOVERED mat_cd: 3개 값 그리드 매칭 없음 값=['MAT_000386', 'MAT_000424', 'MAT_000425']"
-PRD_000149,아크릴집게,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000007|siz_cd=SIZ_000011|siz_height=30.0|siz_width=30.0|qty=1
-PRD_000149,아크릴집게,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000007|siz_cd=SIZ_000011|siz_height=60.0|siz_width=60.0|qty=1
-PRD_000149,아크릴집게,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000007|siz_cd=SIZ_000216|siz_height=30.0|siz_width=30.0|qty=1
-PRD_000149,아크릴집게,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000007|siz_cd=SIZ_000216|siz_height=60.0|siz_width=60.0|qty=1
-PRD_000149,아크릴집게,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000007|siz_cd=SIZ_000218|siz_height=30.0|siz_width=30.0|qty=1
-PRD_000149,아크릴집게,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000007|siz_cd=SIZ_000218|siz_height=60.0|siz_width=60.0|qty=1
+PRD_000149,아크릴집게,E4,needs_authority,"UNCOVERED mat_cd: 2개 값 그리드 매칭 없음 값=['MAT_000424', 'MAT_000425']"
 PRD_000149,아크릴집게,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 'UV평판인쇄' 공정 제공하나 가격 comp 없음
 PRD_000149,아크릴집게,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 '굿즈가공' 공정 제공하나 가격 comp 없음
 PRD_000149,아크릴집게,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 '레이저커팅' 공정 제공하나 가격 comp 없음
 PRD_000149,아크릴집게,Q1,review,초대량 저청구 검토(INFO_MAX): '아크릴집게' max 10000 > 최대구간 1×10
-PRD_000150,아크릴스마트톡,E3,review,차원 누락(MISSING·mat_cd): 손님선택 2값이 단가행에 없음
 PRD_000150,아크릴스마트톡,E4,needs_authority,PRICE_MISSING OPV_000966#1:mat_cd=MAT_000426
 PRD_000150,아크릴스마트톡,E4,needs_authority,PRICE_MISSING OPV_000967#1:mat_cd=MAT_000427
-PRD_000150,아크릴스마트톡,E4,needs_authority,"UNCOVERED mat_cd: 3개 값 그리드 매칭 없음 값=['MAT_000386', 'MAT_000426', 'MAT_000427']"
-PRD_000150,아크릴스마트톡,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000007|siz_cd=SIZ_000011|siz_height=50.0|siz_width=50.0|qty=1
-PRD_000150,아크릴스마트톡,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000007|siz_cd=SIZ_000011|siz_height=80.0|siz_width=80.0|qty=1
-PRD_000150,아크릴스마트톡,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000007|siz_cd=SIZ_000211|siz_height=50.0|siz_width=50.0|qty=1
-PRD_000150,아크릴스마트톡,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000007|siz_cd=SIZ_000211|siz_height=80.0|siz_width=80.0|qty=1
-PRD_000150,아크릴스마트톡,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000007|siz_cd=SIZ_000222|siz_height=50.0|siz_width=50.0|qty=1
-PRD_000150,아크릴스마트톡,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000007|siz_cd=SIZ_000222|siz_height=80.0|siz_width=80.0|qty=1
+PRD_000150,아크릴스마트톡,E4,needs_authority,"UNCOVERED mat_cd: 2개 값 그리드 매칭 없음 값=['MAT_000426', 'MAT_000427']"
 PRD_000150,아크릴스마트톡,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 'UV평판인쇄' 공정 제공하나 가격 comp 없음
 PRD_000150,아크릴스마트톡,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 '레이저커팅' 공정 제공하나 가격 comp 없음
 PRD_000150,아크릴스마트톡,Q1,review,초대량 저청구 검토(INFO_MAX): '아크릴스마트톡' max 10000 > 최대구간 1×10
-PRD_000151,맥세이프 스마트톡,E3,review,차원 누락(MISSING·mat_cd): 손님선택 1값이 단가행에 없음
 PRD_000151,맥세이프 스마트톡,E4,needs_authority,UNCOVERED mat_cd: 1개 값 그리드 매칭 없음 값=['MAT_000428']
 PRD_000151,맥세이프 스마트톡,E4,needs_authority,ZERO_FINAL print_opt_cd=POPT_000007|siz_cd=SIZ_000011|siz_height=50.0|siz_width=50.0|qty=1
 PRD_000151,맥세이프 스마트톡,E4,needs_authority,ZERO_FINAL print_opt_cd=POPT_000007|siz_cd=SIZ_000011|siz_height=80.0|siz_width=80.0|qty=1
@@ -756,55 +633,18 @@ PRD_000151,맥세이프 스마트톡,E4,needs_authority,ZERO_FINAL print_opt_cd=
 PRD_000151,맥세이프 스마트톡,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 'UV평판인쇄' 공정 제공하나 가격 comp 없음
 PRD_000151,맥세이프 스마트톡,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 '레이저커팅' 공정 제공하나 가격 comp 없음
 PRD_000151,맥세이프 스마트톡,Q1,review,초대량 저청구 검토(INFO_MAX): '맥세이프 스마트톡' max 10000 > 최대구간 1×10
-PRD_000152,아크릴명찰,E3,review,차원 누락(MISSING·mat_cd): 손님선택 2값이 단가행에 없음
 PRD_000152,아크릴명찰,E4,needs_authority,PRICE_MISSING OPV_001025#1:mat_cd=MAT_000421
 PRD_000152,아크릴명찰,E4,needs_authority,PRICE_MISSING OPV_001026#1:mat_cd=MAT_000423
-PRD_000152,아크릴명찰,E4,needs_authority,"UNCOVERED mat_cd: 3개 값 그리드 매칭 없음 값=['MAT_000386', 'MAT_000421', 'MAT_000423']"
-PRD_000152,아크릴명찰,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000007|siz_cd=SIZ_000346|siz_height=20.0|siz_width=60.0|qty=1
-PRD_000152,아크릴명찰,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000007|siz_cd=SIZ_000346|siz_height=50.0|siz_width=80.0|qty=1
-PRD_000152,아크릴명찰,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000007|siz_cd=SIZ_000348|siz_height=20.0|siz_width=60.0|qty=1
-PRD_000152,아크릴명찰,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000007|siz_cd=SIZ_000348|siz_height=50.0|siz_width=80.0|qty=1
-PRD_000152,아크릴명찰,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000007|siz_cd=SIZ_000350|siz_height=20.0|siz_width=60.0|qty=1
-PRD_000152,아크릴명찰,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000007|siz_cd=SIZ_000350|siz_height=50.0|siz_width=80.0|qty=1
+PRD_000152,아크릴명찰,E4,needs_authority,"UNCOVERED mat_cd: 2개 값 그리드 매칭 없음 값=['MAT_000421', 'MAT_000423']"
 PRD_000152,아크릴명찰,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 'UV평판인쇄' 공정 제공하나 가격 comp 없음
 PRD_000152,아크릴명찰,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 '레이저커팅' 공정 제공하나 가격 comp 없음
 PRD_000152,아크릴명찰,Q1,review,초대량 저청구 검토(INFO_MAX): '아크릴명찰' max 10000 > 최대구간 1×10
 PRD_000153,아크릴명찰(골드실버),Q1,review,초대량 저청구 검토(INFO_MAX): '아크릴명찰(골드실버)' max 10000 > 최대구간 1×10
-PRD_000154,아크릴 머리끈,E3,review,차원 누락(MISSING·mat_cd): 손님선택 1값이 단가행에 없음
-PRD_000154,아크릴 머리끈,E3,review,차원 누락(MISSING·opt_cd): 손님선택 1값이 단가행에 없음
 PRD_000154,아크릴 머리끈,E4,needs_authority,PRICE_MISSING OPV_001031#1:mat_cd=MAT_000429
-PRD_000154,아크릴 머리끈,E4,needs_authority,"UNCOVERED mat_cd: 2개 값 그리드 매칭 없음 값=['MAT_000386', 'MAT_000429']"
-PRD_000154,아크릴 머리끈,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000007|siz_cd=SIZ_000216|siz_height=20.0|siz_width=20.0|qty=1
-PRD_000154,아크릴 머리끈,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000007|siz_cd=SIZ_000216|siz_height=40.0|siz_width=40.0|qty=1
-PRD_000154,아크릴 머리끈,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000007|siz_cd=SIZ_000218|siz_height=20.0|siz_width=20.0|qty=1
-PRD_000154,아크릴 머리끈,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000007|siz_cd=SIZ_000218|siz_height=40.0|siz_width=40.0|qty=1
-PRD_000154,아크릴 머리끈,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000007|siz_cd=SIZ_000336|siz_height=20.0|siz_width=20.0|qty=1
-PRD_000154,아크릴 머리끈,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000007|siz_cd=SIZ_000336|siz_height=40.0|siz_width=40.0|qty=1
+PRD_000154,아크릴 머리끈,E4,needs_authority,UNCOVERED mat_cd: 1개 값 그리드 매칭 없음 값=['MAT_000429']
 PRD_000154,아크릴 머리끈,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 'UV평판인쇄' 공정 제공하나 가격 comp 없음
 PRD_000154,아크릴 머리끈,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 '레이저커팅' 공정 제공하나 가격 comp 없음
 PRD_000154,아크릴 머리끈,Q1,review,초대량 저청구 검토(INFO_MAX): '아크릴 머리끈' max 10000 > 최대구간 1×10
-PRD_000155,아크릴볼펜,E3,review,차원 누락(MISSING·siz_cd): 손님선택 2값이 단가행에 없음
-PRD_000155,아크릴볼펜,E4,needs_authority,"UNCOVERED siz_cd: 2개 값 그리드 매칭 없음 값=['SIZ_000216', 'SIZ_000218']"
-PRD_000155,아크릴볼펜,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000430|print_opt_cd=POPT_000007|siz_cd=SIZ_000216|siz_height=20.0|siz_width=20.0|qty=1
-PRD_000155,아크릴볼펜,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000430|print_opt_cd=POPT_000007|siz_cd=SIZ_000216|siz_height=40.0|siz_width=40.0|qty=1
-PRD_000155,아크릴볼펜,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000430|print_opt_cd=POPT_000007|siz_cd=SIZ_000218|siz_height=20.0|siz_width=20.0|qty=1
-PRD_000155,아크릴볼펜,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000431|print_opt_cd=POPT_000007|siz_cd=SIZ_000216|siz_height=40.0|siz_width=40.0|qty=1
-PRD_000155,아크릴볼펜,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000431|print_opt_cd=POPT_000007|siz_cd=SIZ_000218|siz_height=20.0|siz_width=20.0|qty=1
-PRD_000155,아크릴볼펜,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000431|print_opt_cd=POPT_000007|siz_cd=SIZ_000218|siz_height=40.0|siz_width=40.0|qty=1
-PRD_000155,아크릴볼펜,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000432|print_opt_cd=POPT_000007|siz_cd=SIZ_000216|siz_height=20.0|siz_width=20.0|qty=1
-PRD_000155,아크릴볼펜,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000432|print_opt_cd=POPT_000007|siz_cd=SIZ_000216|siz_height=40.0|siz_width=40.0|qty=1
-PRD_000155,아크릴볼펜,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000432|print_opt_cd=POPT_000007|siz_cd=SIZ_000218|siz_height=20.0|siz_width=20.0|qty=1
-PRD_000155,아크릴볼펜,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000433|print_opt_cd=POPT_000007|siz_cd=SIZ_000216|siz_height=20.0|siz_width=20.0|qty=1
-PRD_000155,아크릴볼펜,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000433|print_opt_cd=POPT_000007|siz_cd=SIZ_000216|siz_height=40.0|siz_width=40.0|qty=1
-PRD_000155,아크릴볼펜,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000433|print_opt_cd=POPT_000007|siz_cd=SIZ_000218|siz_height=20.0|siz_width=20.0|qty=1
-PRD_000155,아크릴볼펜,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000433|print_opt_cd=POPT_000007|siz_cd=SIZ_000218|siz_height=40.0|siz_width=40.0|qty=1
-PRD_000155,아크릴볼펜,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000434|print_opt_cd=POPT_000007|siz_cd=SIZ_000216|siz_height=20.0|siz_width=20.0|qty=1
-PRD_000155,아크릴볼펜,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000434|print_opt_cd=POPT_000007|siz_cd=SIZ_000216|siz_height=40.0|siz_width=40.0|qty=1
-PRD_000155,아크릴볼펜,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000434|print_opt_cd=POPT_000007|siz_cd=SIZ_000218|siz_height=20.0|siz_width=20.0|qty=1
-PRD_000155,아크릴볼펜,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000434|print_opt_cd=POPT_000007|siz_cd=SIZ_000218|siz_height=40.0|siz_width=40.0|qty=1
-PRD_000155,아크릴볼펜,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000435|print_opt_cd=POPT_000007|siz_cd=SIZ_000216|siz_height=20.0|siz_width=20.0|qty=1
-PRD_000155,아크릴볼펜,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000435|print_opt_cd=POPT_000007|siz_cd=SIZ_000216|siz_height=40.0|siz_width=40.0|qty=1
-PRD_000155,아크릴볼펜,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000435|print_opt_cd=POPT_000007|siz_cd=SIZ_000218|siz_height=20.0|siz_width=20.0|qty=1
 PRD_000155,아크릴볼펜,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 'UV평판인쇄' 공정 제공하나 가격 comp 없음
 PRD_000155,아크릴볼펜,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 '레이저커팅' 공정 제공하나 가격 comp 없음
 PRD_000155,아크릴볼펜,Q1,review,초대량 저청구 검토(INFO_MAX): '아크릴볼펜' max 10000 > 최대구간 1×10
@@ -821,28 +661,18 @@ PRD_000156,아크릴지비츠,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|pr
 PRD_000156,아크릴지비츠,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 'UV평판인쇄' 공정 제공하나 가격 comp 없음
 PRD_000156,아크릴지비츠,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 '레이저커팅' 공정 제공하나 가격 comp 없음
 PRD_000156,아크릴지비츠,Q1,review,초대량 저청구 검토(INFO_MAX): '아크릴지비츠' max 10000 > 최대구간 1×10
-PRD_000157,아크릴네임택,E4,needs_authority,UNCOVERED mat_cd: 1개 값 그리드 매칭 없음 값=['MAT_000386']
-PRD_000157,아크릴네임택,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000006|siz_cd=SIZ_000370|qty=1
-PRD_000157,아크릴네임택,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000006|siz_cd=SIZ_000406|qty=1
 PRD_000157,아크릴네임택,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 'UV평판인쇄' 공정 제공하나 가격 comp 없음
 PRD_000157,아크릴네임택,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 '레이저커팅' 공정 제공하나 가격 comp 없음
 PRD_000157,아크릴네임택,Q1,review,초대량 저청구 검토(INFO_MAX): '아크릴네임택' max 10000 > 최대구간 1×10
-PRD_000158,아크릴 포카키링,E4,needs_authority,UNCOVERED mat_cd: 1개 값 그리드 매칭 없음 값=['MAT_000386']
 PRD_000158,아크릴 포카키링,E4,needs_authority,ZERO_FINAL print_opt_cd=POPT_000006|siz_cd=SIZ_000406|qty=1
 PRD_000158,아크릴 포카키링,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 'UV평판인쇄' 공정 제공하나 가격 comp 없음
 PRD_000158,아크릴 포카키링,Q1,review,초대량 저청구 검토(INFO_MAX): '아크릴 포카키링' max 10000 > 최대구간 1×10
-PRD_000159,아크릴코스터,E4,needs_authority,UNCOVERED mat_cd: 1개 값 그리드 매칭 없음 값=['MAT_000386']
-PRD_000159,아크릴코스터,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000006|siz_cd=SIZ_000355|qty=1
-PRD_000159,아크릴코스터,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000006|siz_cd=SIZ_000356|qty=1
 PRD_000159,아크릴코스터,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 'UV평판인쇄' 공정 제공하나 가격 comp 없음
 PRD_000159,아크릴코스터,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 '레이저커팅' 공정 제공하나 가격 comp 없음
 PRD_000159,아크릴코스터,Q1,review,초대량 저청구 검토(INFO_MAX): '아크릴코스터' max 10000 > 최대구간 1×10
 PRD_000160,아크릴자유형스탠드,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 'UV평판인쇄' 공정 제공하나 가격 comp 없음
 PRD_000160,아크릴자유형스탠드,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 '레이저커팅' 공정 제공하나 가격 comp 없음
 PRD_000160,아크릴자유형스탠드,Q1,review,초대량 저청구 검토(INFO_MAX): '아크릴자유형스탠드' max 10000 > 최대구간 1×10
-PRD_000161,판아크릴,E4,needs_authority,UNCOVERED mat_cd: 1개 값 그리드 매칭 없음 값=['MAT_000386']
-PRD_000161,판아크릴,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000006|siz_cd=SIZ_000359|qty=1
-PRD_000161,판아크릴,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000386|print_opt_cd=POPT_000006|siz_cd=SIZ_000361|qty=1
 PRD_000161,판아크릴,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 'UV평판인쇄' 공정 제공하나 가격 comp 없음
 PRD_000161,판아크릴,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 '레이저커팅' 공정 제공하나 가격 comp 없음
 PRD_000161,판아크릴,Q1,review,초대량 저청구 검토(INFO_MAX): '판아크릴' max 10000 > 최대구간 1×10
@@ -867,19 +697,13 @@ PRD_000172,만년다이어리(소프트커버),Q1,review,초대량 저청구 검
 PRD_000173,만년다이어리(하드커버),Q1,review,초대량 저청구 검토(INFO_MAX): '만년다이어리(하드커버)' max 500 > 최대구간 1×10
 PRD_000174,만년다이어리(레더하드커버),Q1,review,초대량 저청구 검토(INFO_MAX): '만년다이어리(레더하드커버)' max 500 > 최대구간 1×10
 PRD_000175,만년다이어리(레더소프트커버),Q1,review,초대량 저청구 검토(INFO_MAX): '만년다이어리(레더소프트커버)' max 500 > 최대구간 1×10
-PRD_000176,먼슬리플래너,E3,review,차원 누락(MISSING·siz_cd): 손님선택 1값이 단가행에 없음
-PRD_000176,먼슬리플래너,E4,needs_authority,ZERO_FINAL siz_cd=SIZ_000250|qty=1
 PRD_000176,먼슬리플래너,Q1,review,초대량 저청구 검토(INFO_MAX): '먼슬리플래너' max 500 > 최대구간 1×10
-PRD_000177,스프링노트,E3,review,차원 누락(MISSING·siz_cd): 손님선택 1값이 단가행에 없음
-PRD_000177,스프링노트,E4,needs_authority,ZERO_FINAL siz_cd=SIZ_000171|qty=1
 PRD_000177,스프링노트,G1,review,
 PRD_000177,스프링노트,Q1,review,초대량 저청구 검토(INFO_MAX): '스프링노트' max 1000 > 최대구간 1×10
 PRD_000177,스프링노트,S1,review,"SET_MEMBER_NO_SOURCE copies=1|members=[{'sub_prd_cd': 'PRD_000301', 'siz_cd': 'SIZ_000171', 'mat_cd': 'MAT_000081', 'print_opt_cd': 'POPT_000001'}, {'sub_prd_cd': 'PRD_000302'}]|mode=strict|qty=1"
 PRD_000178,스프링수첩,Q1,review,초대량 저청구 검토(INFO_MAX): '스프링수첩' max 500 > 최대구간 1×10
 PRD_000179,메모패드,Q1,review,초대량 저청구 검토(INFO_MAX): '메모패드' max 1000 > 최대구간 1×10
 PRD_000179,메모패드,S1,review,"SET_MEMBER_NO_SOURCE copies=1|members=[{'sub_prd_cd': 'PRD_000305', 'siz_cd': 'SIZ_000614', 'mat_cd': 'MAT_000081', 'print_opt_cd': 'POPT_000001'}, {'sub_prd_cd': 'PRD_000306'}]|mode=strict|qty=1"
-PRD_000181,중철노트,E3,review,차원 누락(MISSING·siz_cd): 손님선택 1값이 단가행에 없음
-PRD_000181,중철노트,E4,needs_authority,ZERO_FINAL print_opt_cd=POPT_000001|siz_cd=SIZ_000382|qty=4
 PRD_000181,중철노트,Q1,review,초대량 저청구 검토(INFO_MAX): '중철노트' max 500 > 최대구간 1×10
 PRD_000181,중철노트,S1,review,"SET_MEMBER_NO_SOURCE copies=1|members=[{'sub_prd_cd': 'PRD_000307', 'siz_cd': 'SIZ_000382', 'mat_cd': 'MAT_000081', 'print_opt_cd': 'POPT_000001'}, {'sub_prd_cd': 'PRD_000308'}]|mode=strict|qty=1"
 PRD_000186,사각손거울,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 'UV평판인쇄' 공정 제공하나 가격 comp 없음
@@ -893,22 +717,14 @@ PRD_000198,피크닉매트,W4,review,ANCHOR_DELETED OPV_000454#1:mat_cd=MAT_0002
 PRD_000198,피크닉매트,W4,review,ANCHOR_DELETED OPV_000455#1:mat_cd=MAT_000256
 PRD_000200,핀버튼,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 '전사인쇄' 공정 제공하나 가격 comp 없음
 PRD_000201,레더스트랩키링,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 '패브릭출력' 공정 제공하나 가격 comp 없음
-PRD_000202,키캡키링,E3,review,차원 누락(MISSING·siz_cd): 손님선택 1값이 단가행에 없음
-PRD_000202,키캡키링,E4,needs_authority,UNCOVERED siz_cd: 1개 값 그리드 매칭 없음 값=['SIZ_000629']
-PRD_000202,키캡키링,E4,needs_authority,ZERO_FINAL siz_cd=SIZ_000629|qty=1
 PRD_000202,키캡키링,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 '전사인쇄' 공정 제공하나 가격 comp 없음
 PRD_000203,LED투명키캡키링,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 'UV평판인쇄' 공정 제공하나 가격 comp 없음
-PRD_000205,양말,E4,review,ENGINE_ERROR -
 PRD_000215,클립보드,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 '디지털인쇄' 공정 제공하나 가격 comp 없음
 PRD_000215,클립보드,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 '무광라미네이팅' 공정 제공하나 가격 comp 없음
 PRD_000216,투명클립보드,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 'UV평판인쇄' 공정 제공하나 가격 comp 없음
 PRD_000217,만년스탬프,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 '도장가공' 공정 제공하나 가격 comp 없음
 PRD_000217,만년스탬프,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 '도장인쇄' 공정 제공하나 가격 comp 없음
-PRD_000220,폰스트랩,E1,needs_design,NO_FORMULA 직접단가도 없음(항상 0원): 폰스트랩
-PRD_000220,폰스트랩,E4,needs_design,NO_SOURCE print_opt_cd=POPT_000001|siz_cd=SIZ_000428|qty=1
-PRD_000220,폰스트랩,E4,needs_design,NO_SOURCE print_opt_cd=POPT_000001|siz_cd=SIZ_000575|qty=1
-PRD_000220,폰스트랩,E4,needs_design,NO_SOURCE print_opt_cd=POPT_000002|siz_cd=SIZ_000428|qty=1
-PRD_000220,폰스트랩,E4,needs_design,NO_SOURCE print_opt_cd=POPT_000002|siz_cd=SIZ_000575|qty=1
+PRD_000220,폰스트랩,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 '전사인쇄' 공정 제공하나 가격 comp 없음
 PRD_000226,아크릴쉐이커코롯토,E3,review,차원 누락(MISSING·siz_cd): 손님선택 1값이 단가행에 없음
 PRD_000226,아크릴쉐이커코롯토,E4,review,PRICE_GAP siz_cd=SIZ_000506|qty=1
 PRD_000226,아크릴쉐이커코롯토,E4,needs_authority,UNCOVERED siz_cd: 1개 값 그리드 매칭 없음 값=['SIZ_000506']
@@ -926,10 +742,6 @@ PRD_000238,레더아이패드노트북파우치,E4,review,공정 무료화(UNCOV
 PRD_000239,캔버스 플랫 파우치,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 '부착' 공정 제공하나 가격 comp 없음
 PRD_000240,캔버스 삼각 파우치,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 '부착' 공정 제공하나 가격 comp 없음
 PRD_000243,린넨 스트링 파우치,W4,review,MASTER_DELETED OPV_000709#1:siz_cd=SIZ_000587
-PRD_000244,타이벡플랫파우치,E3,review,차원 누락(MISSING·siz_cd): 손님선택 2값이 단가행에 없음
-PRD_000244,타이벡플랫파우치,E4,needs_authority,"UNCOVERED siz_cd: 2개 값 그리드 매칭 없음 값=['SIZ_000453', 'SIZ_000454']"
-PRD_000244,타이벡플랫파우치,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000373|siz_cd=SIZ_000453|qty=1
-PRD_000244,타이벡플랫파우치,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000373|siz_cd=SIZ_000454|qty=1
 PRD_000244,타이벡플랫파우치,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 '오버로크' 공정 제공하나 가격 comp 없음
 PRD_000244,타이벡플랫파우치,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 '패브릭출력' 공정 제공하나 가격 comp 없음
 PRD_000245,타이벡슬림파우치,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 '패브릭출력' 공정 제공하나 가격 comp 없음
@@ -943,19 +755,12 @@ PRD_000252,레더슬림미니파우치,E4,review,공정 무료화(UNCOVERED_PROC
 PRD_000254,레더볼륨미니파우치,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 '패브릭출력' 공정 제공하나 가격 comp 없음
 PRD_000267,린넨 에코백,W4,review,ANCHOR_DELETED OPV_000758#1:mat_cd=MAT_000332
 PRD_000267,린넨 에코백,W4,review,ANCHOR_DELETED OPV_000759#1:mat_cd=MAT_000333
-PRD_000273,타이벡양면백팩,E3,review,차원 누락(MISSING·siz_cd): 손님선택 2값이 단가행에 없음
-PRD_000273,타이벡양면백팩,E4,needs_authority,"UNCOVERED siz_cd: 2개 값 그리드 매칭 없음 값=['SIZ_000401', 'SIZ_000485']"
-PRD_000273,타이벡양면백팩,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000381|siz_cd=SIZ_000401|qty=1
-PRD_000273,타이벡양면백팩,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000381|siz_cd=SIZ_000485|qty=1
 PRD_000273,타이벡양면백팩,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 '패브릭출력' 공정 제공하나 가격 comp 없음
-PRD_000274,타이벡보냉보틀백,E3,review,차원 누락(MISSING·siz_cd): 손님선택 2값이 단가행에 없음
-PRD_000274,타이벡보냉보틀백,E4,needs_authority,"UNCOVERED siz_cd: 2개 값 그리드 매칭 없음 값=['SIZ_000486', 'SIZ_000487']"
-PRD_000274,타이벡보냉보틀백,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000381|siz_cd=SIZ_000486|qty=1
-PRD_000274,타이벡보냉보틀백,E4,needs_authority,ZERO_FINAL mat_cd=MAT_000381|siz_cd=SIZ_000487|qty=1
 PRD_000274,타이벡보냉보틀백,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 '패브릭출력' 공정 제공하나 가격 comp 없음
 PRD_000280,레더라벨제작,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 '패브릭출력' 공정 제공하나 가격 comp 없음
 PRD_000288,중철책자-표지,E3,review,차원 누락(MISSING·proc_cd): 손님선택 1값이 단가행에 없음
 PRD_000288,중철책자-표지,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 '유광라미네이팅' 공정 제공하나 가격 comp 없음
+PRD_000290,무선책자-표지,E3,review,차원 누락(MISSING·plt_siz_cd): 손님선택 1값이 단가행에 없음
 PRD_000290,무선책자-표지,E3,review,차원 누락(MISSING·proc_cd): 손님선택 11값이 단가행에 없음
 PRD_000290,무선책자-표지,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 '금유광' 공정 제공하나 가격 comp 없음
 PRD_000290,무선책자-표지,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 '동박' 공정 제공하나 가격 comp 없음
@@ -968,6 +773,7 @@ PRD_000290,무선책자-표지,E4,review,공정 무료화(UNCOVERED_PROCESS): �
 PRD_000290,무선책자-표지,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 '형압(양각)' 공정 제공하나 가격 comp 없음
 PRD_000290,무선책자-표지,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 '형압(음각)' 공정 제공하나 가격 comp 없음
 PRD_000290,무선책자-표지,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 '홀로그램박' 공정 제공하나 가격 comp 없음
+PRD_000292,PUR책자-표지,E3,review,차원 누락(MISSING·plt_siz_cd): 손님선택 1값이 단가행에 없음
 PRD_000292,PUR책자-표지,E3,review,차원 누락(MISSING·proc_cd): 손님선택 11값이 단가행에 없음
 PRD_000292,PUR책자-표지,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 '금유광' 공정 제공하나 가격 comp 없음
 PRD_000292,PUR책자-표지,E4,review,공정 무료화(UNCOVERED_PROCESS): 상품이 '동박' 공정 제공하나 가격 comp 없음
