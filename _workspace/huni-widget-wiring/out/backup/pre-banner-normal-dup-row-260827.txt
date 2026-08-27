@@ -1,0 +1,30 @@
+# 적재 직전 백업 — 일반현수막 완제품가 중복행 물리 삭제
+# 생성 2026-08-27 22:52:24 KST
+# 삭제 대상 comp_price_id=38158 · 유지 comp_price_id=38147
+
+## 삭제 행 전체 값
+#   comp_price_id = 38158
+#   comp_cd = 'COMP_POSTER_BANNER_NORMAL'
+#   apply_ymd = '2026-06-01'
+#   siz_cd = None
+#   clr_cd = None
+#   mat_cd = None
+#   coat_side_cnt = None
+#   bdl_qty = None
+#   min_qty = 1
+#   unit_price = Decimal('12000.00')
+#   note = '일반현수막 가로1500mm×세로1000mm 완제품가[출력가]'
+#   reg_dt = datetime.datetime(2026, 6, 19, 6, 23, 6, 789684)
+#   upd_dt = None
+#   proc_cd = None
+#   opt_cd = None
+#   dim_vals = None
+#   print_opt_cd = None
+#   plt_siz_cd = None
+#   siz_width = Decimal('1500.00')
+#   siz_height = Decimal('1000.00')
+#   spot_side_cnt = None
+
+## 되돌리기 SQL (comp_price_id 를 그대로 복원한다)
+INSERT INTO t_prc_component_prices (comp_price_id, comp_cd, apply_ymd, siz_cd, clr_cd, mat_cd, coat_side_cnt, bdl_qty, min_qty, unit_price, note, reg_dt, upd_dt, proc_cd, opt_cd, dim_vals, print_opt_cd, plt_siz_cd, siz_width, siz_height, spot_side_cnt)
+VALUES (38158, 'COMP_POSTER_BANNER_NORMAL', '2026-06-01', NULL, NULL, NULL, NULL, NULL, 1, '12000.00', '일반현수막 가로1500mm×세로1000mm 완제품가[출력가]', '2026-06-19 06:23:06.789684', NULL, NULL, NULL, NULL, NULL, NULL, '1500.00', '1000.00', NULL);
