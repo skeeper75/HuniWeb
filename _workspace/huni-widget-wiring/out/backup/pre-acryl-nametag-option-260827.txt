@@ -1,0 +1,9 @@
+# 적재 직전 백업 — 현수막 옵션그룹 통합 가격구성요소 3종
+# 생성 2026-08-27 22:44:42 KST
+
+## 되돌리기 SQL (역순 실행)
+
+# --- COMP_ACRYL_NAMETAG_GS_OPTION ---
+DELETE FROM t_prc_formula_components WHERE frm_cd='PRF_ACRYL_NAMETAG_GS' AND comp_cd='COMP_ACRYL_NAMETAG_GS_OPTION';
+DELETE FROM t_prc_component_prices WHERE comp_cd='COMP_ACRYL_NAMETAG_GS_OPTION';
+DELETE FROM t_prc_price_components WHERE comp_cd='COMP_ACRYL_NAMETAG_GS_OPTION';
