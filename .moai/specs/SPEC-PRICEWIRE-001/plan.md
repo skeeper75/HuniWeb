@@ -1,7 +1,7 @@
 ---
 id: SPEC-PRICEWIRE-001
 doc: plan
-version: "0.1.1"
+version: "0.1.3"
 updated: 2026-08-27
 status: draft
 tier: L
@@ -23,7 +23,7 @@ tier: L
 | 아티팩트 | `research.md` 506줄 **이미 존재** | Tier L 아티팩트 셋과 정합 |
 | 성격 | 코드 중심 아님 — **운영(화면 조작) 중심** | LOC 축은 비적용, 대신 대상 건수·제약 밀도로 판정 |
 
-→ **Tier L**: `spec.md` + `plan.md` + `acceptance.md` + `design.md` + `research.md`. REQ ≤25 / AC ≤25 예산 준수(현재 REQ 22 / AC 25).
+→ **Tier L**: `spec.md` + `plan.md` + `acceptance.md` + `design.md` + `research.md`. REQ ≤25 / AC ≤25 예산 준수(현재 REQ 25 / AC 25 — 실측 `grep -c '^\- \*\*REQ-PW-' spec.md` = 25, `acceptance.md` §G 매핑표 = 25).
 
 **Tier M 이 아닌 이유**: 화면 절차 자체가 설계 산출물이어야 한다(`price_grid_save` full-sync 방어·인라인 폼셋 경로·blast_radius 게이트). 이를 `plan.md` 에 욱여넣으면 절차가 검토 불가능해진다 → `design.md` 분리가 필요하므로 L.
 
@@ -69,14 +69,17 @@ plan-audit iteration-1 의 해소 게이트 5건은 아래와 같이 종결됐�
 
 | 목적 | 자산 | 비고 |
 |---|---|---|
-| 권위 재추출 | `_scripts/run_extract_master_260703.py` · `run_extract_price_260705.py` · `06_extract/scripts/extract_price_sheets.py:36,43` | 경로 상수만 교체 |
-| 권위↔라이브 격자 diff | `huni-price-table-integrity/_batch/scripts/{matrix_parse,grid_diff,run_all,build_load}.py` | `run_all.py` 의 `EXTRACT` 상수 260822 로 교체 |
+| 권위 재추출 (기존본) | `_workspace/huni-dbmap/_scripts/run_extract_master_260703.py` · `_workspace/huni-dbmap/_scripts/run_extract_price_260705.py` · `_workspace/huni-dbmap/06_extract/scripts/extract_price_sheets.py:36,43` | 경로 상수만 교체 |
+| 권위 재추출 (260822 실행본) | `_workspace/huni-dbmap/_scripts/run_extract_master_260822.py` · `_workspace/huni-dbmap/_scripts/run_extract_price_260822.py` | M0-1 산출. 공용 추출기 무수정, 러너에서 상수만 교체 |
+| 권위↔라이브 격자 diff | `_workspace/huni-price-table-integrity/_batch/scripts/{matrix_parse,grid_diff,run_all,build_load}.py` | `run_all.py` 의 `EXTRACT` 상수 260822 로 교체 |
 | 배선 결함 전수 | `_workspace/_foundation/batch/wiring_scan.py` | ORPHAN/DEAD_WIRE/DELETED_WIRE/NO_FORMULA, 토큰 0 측도 |
 | 게시 실호출 스윕 | `huni-widget-wiring/bin/lens_b_runner.py` | 판정 mint 금지 계약 승계 |
 | 0원 전수 적발 | `raw/webadmin/tools/verify_zero_quote.py` | 종료조건과 1:1 |
 | 게시 194 전수 점검 | `raw/webadmin/tools/audit_published_prices.py` | `--products/--limit/--workers` |
 
 `build_load.py` 산출 SQL 은 **실행하지 않는다** — 화면 입력 값 명세로만 사용(spec.md §2.2).
+
+**경로 표기 정정 [M0-0 실측]**: v0.1.1 의 `_scripts/…` · `huni-price-table-integrity/…` 표기는 하네스 루트 상대 경로여서 프로젝트 루트에서 해석되지 않았다. 위 표는 프로젝트 루트 기준 절대 경로로 교정된 정본이다(`progress.md §E.2 M0-0` 재사용 자산 실재 확인).
 
 ### C.3 배치 공통 절차 (모든 M1~M4 에 적용)
 
@@ -109,6 +112,17 @@ C1·C9 해소. 이 마일스톤 완료 전 `needs_authority` 694건 착수 금�
 - **선행 확인 [HARD]**: 각 건마다 직접단가 보유 여부를 먼저 확인한 뒤에만 E1 로 올린다(REQ-PW-007).
 - blast_radius: 상품 단위 바인딩이므로 원칙적으로 1. 공식 공유 시 해당 공식의 바인딩 상품 수 표기.
 - 별항: `PRD_000218` 은 권위 엑셀 굿즈파우치 row88 가격 셀 **공란** → `needs_authority`, 실무진 문항으로 분리.
+**흡수 대상 [v0.1.2 — M0 산출]** (근거 정본: `progress.md §E.2 M0-1c`·`M0-1d`·`M0-1e`)
+
+1. **할인 적용 범위 교정 3건**(REQ-PW-023) — `PRD_000147` 아크릴마그넷 · `PRD_000149` 아크릴집게 · `PRD_000154` 아크릴 머리끈. 전부 `PRF_ACRYL_*` = `COMP_ACRYL_CLEAR3T`(인쇄가공비) + 부속[가산] 2구성요소인데 할인이 **총액 스코프**로 걸려 있다. 교정 = 가격 뷰어 「적용 대상」에 `COMP_ACRYL_CLEAR3T` 지정 후 재연결. **기준 형태 = `PRD_000146` 아크릴키링**(4형제 중 유일하게 이미 정상). 권위 = 「계산공식집초안」 row 109 `(2) 수량별할인 = 인쇄가공비에만 적용`.
+2. **할인 미연결 8건** — `PRD_000097` 떡메모지 · `PRD_000199` 투명부채 · `PRD_000217` 만년스탬프 · `PRD_000218` 타이벡북커버 · `PRD_000227` 미니우치와키링 · `PRD_000280` 레더라벨제작 · `PRD_000204` 미니CD앨범키링 · `PRD_000312` 미니CD앨범케이스. (`미니CD앨범` 권위 1행이 라이브에서 키링·케이스 2상품으로 분화되어 있으며 둘 다 미연결.)
+3. **가격소스 부재 + 할인만 연결 1건** — `PRD_000222` 말랑증사홀더(`DSC_SQUISHY_QTY` 연결 · 가격소스 `NONE`). **순서 [HARD]: 가격소스 배선이 할인 바인딩보다 앞선다.** 소스 없는 상태의 할인 연결은 계산되지 않는다.
+
+**연결 대상 할인표의 출처 [HARD]**
+- 굿즈파우치·문구: 권위 컬럼 **`구간할인적용테이블`** — 굿즈파우치 시트 33번째 컬럼 · 문구 시트 42번째 컬럼. 값이 빈 건은 추정하지 말고 `needs_authority` 로 분리한다.
+- 아크릴: **해당 컬럼이 없다.** 배정 권위는 **가격표 아크릴 블록 구조** — `B04` 「아크릴상품 수량별 구간할인」 6구간 ↔ `DSC_ACR_QTY`, `B07` 「아크릴카라비너 수량별 구간할인」 3구간 ↔ `DSC_ACRCARA_QTY` 로 1:1 대응한다(아크릴 할인표가 2종으로 갈린 이유가 권위에 있다).
+- 분모 = 상품마스터 아크릴 21 + 굿즈파우치 96 + 문구 5 = **122상품**(그레이배경 미출시·품절 8 제외 · 범례 오인 6 제외). 「라이브 없음」 0건 — 조인은 `prd_nm` 공백 정규화 기준.
+
 - **층별 중복 관계 [HARD · C6]**: 위 대상 목록의 앞 3개 항목은 **같은 "가격 소스 없음" 을 서로 다른 분모·판정층에서 본 관측치**이며 서로 중복된다 — 렌즈 B `E1 NO_SOURCE` 75건(게시 194 / 실호출) ⊇ `wiring-health-index` 치명 E1 15상품(게시 / 오프라인 집계) ⊇ t6 게시중 무가격 15상품(같은 15상품의 카드 표현). PRD_TYPE.01 2건은 `PRICE-DB-STATE` `d_none` 50건(분모 266)의 부분집합이다. **대상 목록은 4개 층의 합집합으로 구성하되, 종료 시 E1 잔량 계상은 렌즈 B 층 단일 기준으로만 센다**(`spec.md §1.2.1`). 건수를 합산하지 않는다.
 
 ### M2 — E4 재키 드리프트 교정 [우선순위 High]
@@ -118,6 +132,17 @@ C1·C9 해소. 이 마일스톤 완료 전 `needs_authority` 694건 착수 금�
 - **원칙 [HARD]**: 값 무변경·코드 이관만. 삭제 금지.
 - **안전 [HARD]**: 전체 그리드 로드 상태에서 행 추가만(REQ-PW-014). 부분 페이로드 저장 금지.
 - blast_radius: 단가표 1개 수정의 파급 상품 수 필수 표기(최대 31).
+
+**흡수 대상 [v0.1.2 — REQ-PW-024] 추가상품 템플릿 단가 등록 6종** (근거: `progress.md §E.2 M0-1e` ④)
+
+| tmpl_cd | 추가상품 | 권위 단가 | 처리 |
+|---|---|---|---|
+| `TMPL-000092` | 아크릴거치대 (권위 명칭 `아크릴스탠드`) | **1400 확보** | 즉시 등록 가능. **명칭도 권위와 불일치** — 등록 시 함께 확인 |
+| `TMPL-000009` · `TMPL-000032` · `TMPL-000033` · `TMPL-000034` | 트레싱지봉투 4종 | **미확인** | `needs_authority` — 실무진 문항 |
+| `TMPL-000096` | 천정고리(2개1세트) | **미확인** | `needs_authority` — 실무진 문항 |
+
+- 영향 8상품 전건이 게시 위젯 보유 ⇒ 게시 분모 안. 단가행 부재 시 `_addons_strict` 가 **422 로 견적을 차단**하므로 1차 배선층이다(`spec.md §1.1`).
+- 순서: **M2 에서 단가편집테이블을 만들고, M1 가격 뷰어에서 연결**한다(지니 지시 `progress.md §E.2 M0-1e` 작업 위치). 옵션가격 그릇(문구 `개별포장(옵션)` 등)의 필요 여부도 이 단계에서 판단한다.
 
 ### M3 — E2 공식↔구성요소 배선 [우선순위 Medium]
 
@@ -141,6 +166,9 @@ C1·C9 해소. 이 마일스톤 완료 전 `needs_authority` 694건 착수 금�
 - `PRD_000165` 별항 결론 기재.
 - **1차 근거 대체 규칙 [§B-5]**: 감사 도구 원본이 미확보이면 1차 근거를 `lens_b_runner` 실호출로 대체한다(REQ-PW-022). `research.md §15` 의 감사-1차-근거 권고를 이 규칙으로 갱신한다.
 - **G1 34건**: 범위 밖(§B-1) — 수정하지 않고 **발견 원장으로만** 기재, 후속 위젯 정비 트랙 이월.
+- **발견 원장 추가 항목 [v0.1.2 — M0 산출, 교정 대상 아님]**
+  - **`TEST_DC`("ㅇㅇㅇㅇ", 구간 0 · 바인딩 0)** 가 가격 뷰어 할인표 검색 드롭다운에 **실제로 노출**된다(실화면 캡처로 확증). 운영자 오선택 위험. **기초데이터 정리 트랙** 소관이며 본 SPEC 은 원장 기재까지.
+  - **권위 `구간할인적용테이블` 컬럼 오염 6셀** — 할인표명이 아니라 가격 메모가 들어 있다: `원가 6600원` · `7700` · `무광 6600` · `7150원 + 맥세이프 3850` · `옵션추가가격(1650원)` · `옵션추가가격(5500원)`. **권위 엑셀 자체의 입력 오염**이므로 이 SPEC 이 고칠 수 없다 — 실무진 확인 문항으로 원장 기재.
 - 종료: (A) = 0건(G1 34건 제외, E1 잔량은 `spec.md §1.2.1` 렌즈 B 층 기준).
 
 ---
@@ -155,6 +183,7 @@ C1·C9 해소. 이 마일스톤 완료 전 `needs_authority` 694건 착수 금�
 | 공유 구성요소 수정의 광역 파급(최대 31상품) | 회귀 | blast_radius 표기 + 인간 승인 |
 | 화면 조작 자동화 난도(M3 인라인 폼셋) | 일정 | §B-3 착수 조건(gstack 실화면 정찰 1건)으로 절차 확정 후 전개 |
 | 재게시 필요 시 시작가 재계산 | 미승인 변경 | **재게시 미수행**(§B-1) — 재게시를 요구하는 교정(G1 34건 등)은 범위 밖 이월 |
+| 「적용 대상」 기본값이 `전체 금액` — 비워두면 **조용히 과할인이 저장**된다 | 저청구(권위 위반). 실측 3건이 이미 이 형태 | REQ-PW-023(인쇄가공비 구성요소 지정 의무) + AC-PW-006(저장한 「적용 대상」 값과 권위 행을 기록 의무). 저장 전 드라이런에서 그 필드 값을 명시 확인 |
 
 ---
 

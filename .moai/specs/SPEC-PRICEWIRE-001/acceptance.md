@@ -1,7 +1,7 @@
 ---
 id: SPEC-PRICEWIRE-001
 doc: acceptance
-version: "0.1.1"
+version: "0.1.3"
 updated: 2026-08-27
 status: draft
 tier: L
@@ -29,7 +29,7 @@ tier: L
 
 ## §B M1~M4 — 배치 교정
 
-**AC-PW-006** — Given M1 대상 목록이 확정된 상태에서, When 각 대상의 교정 기록을 조회하면, Then 모든 건에 (대상 목록 출처 · 화면/엔드포인트 · 절차 · blast_radius)가 표기되어 있다(미표기 0건). (REQ-PW-015)
+**AC-PW-006** — Given M1 대상 목록이 확정된 상태에서, When 각 대상의 교정 기록을 조회하면, Then 모든 건에 (대상 목록 출처 · 화면/엔드포인트 · 절차 · blast_radius)가 표기되어 있다(미표기 0건). **추가로, 할인 바인딩 건은 저장한 「적용 대상」 값(구성요소 코드 또는 `전체 금액`)과 그 값이 도출된 권위 행(「계산공식집초안」 row 번호 또는 권위 `구간할인적용테이블` 셀 값)이 함께 기재되어 있다** — 두 필드 중 하나라도 빠진 할인 바인딩 건이 0건이다. (REQ-PW-015, REQ-PW-023)
 
 **AC-PW-007** — Given 직접단가를 보유한 상품이 있을 때, When 그 상품의 공식 바인딩 부재를 판정하면, Then 결함으로 계상되지 않는다(오탐 57건 재발 0). (REQ-PW-007)
 
@@ -53,7 +53,8 @@ tier: L
 
 **AC-PW-016** — Given 게시 분모(위젯 194 / 상품 193)가 확정된 상태에서, When `audit_published_prices.py` 로 전수 점검을 실행하면, Then 점검 대상 수가 194 이며 미점검 0건이다. (REQ-PW-018)
 
-**AC-PW-017** — Given 전량 스윕이 완료된 상태에서, When `verify_zero_quote.py` 결과를 (A)/(B)/(C) 3분류로 집계하면, Then **(A) 진짜 결함 = 0건**이며, (A) 집계의 근거 필드가 전건 `result_sum.PRICE` 이고 per-line `result[].PRICE=0` 을 근거로 계상된 건이 0건이다. **(A) 분자에서 G1 stale 기본값 34건은 제외**하며(`spec.md §2.2` 범위 밖), E1 잔량은 `spec.md §1.2.1` 의 렌즈 B 층 분모로만 센다. [종료 조건] (REQ-PW-020)
+**AC-PW-017** — Given 전량 스윕이 완료된 상태에서, When `verify_zero_quote.py` 결과를 (A)/(B)/(C) 3분류로 집계하면, Then **(A) 진짜 결함 = 0건**이며, (A) 집계의 근거 필드가 전건 `result_sum.PRICE` 이고 per-line `result[].PRICE=0` 을 근거로 계상된 건이 0건이다. **(A) 분자에서 G1 stale 기본값 34건은 제외**하며(`spec.md §2.2` 범위 밖), E1 잔량은 `spec.md §1.2.1` 의 렌즈 B 층 분모로만 센다.
+> **(A) 분자에 포함되는 항목 [명시]** — (i) **할인 적용 범위 위반**(REQ-PW-023: 인쇄가공비 외 구성요소를 보유한 공식인데 할인이 총액 스코프로 바인딩된 건) · (ii) **추가상품 템플릿 단가 부재**(REQ-PW-024: `t_prd_template_prices` 행이 없어 `_addons_strict` 가 422 로 막는 템플릿). 종료 시 **(i) = 0건 AND (ii) = 0건** 이어야 한다. (ii) 중 권위 단가 출처가 미확보인 건(트레싱지봉투 4종 · 천정고리)은 `needs_authority` 로 원장화하고 그 사유가 기재된 경우에 한해 잔량으로 계상하되, 사유 없는 잔량은 0건이어야 한다. [종료 조건] (REQ-PW-020, REQ-PW-023, REQ-PW-024)
 
 **AC-PW-018** — Given (B) 정상 미매칭 · (C) 미선택 차원 건이 존재할 때, When 원장을 조회하면, Then 각 건에 분류 사유가 개별 기재되어 있다(사유 없는 건 0). (REQ-PW-019)
 
@@ -65,13 +66,13 @@ tier: L
 
 ## §C' 미커버 REQ 보강 (D4)
 
-**AC-PW-022** — Given 재추출 대상 스크립트 4파일(`_scripts/run_extract_master_260703.py` · `run_extract_price_260705.py` · `06_extract/scripts/extract_price_sheets.py` · `run_all.py`)에 대해, When 260822 실행본과 기존본을 `git diff` 로 대조하면, Then 변경 라인이 **경로/EXTRACT 상수 정의부에 한정**되고 추출 로직 함수 본문의 변경이 **0라인**이다. (REQ-PW-002)
+**AC-PW-022** — Given 재추출 대상 스크립트 4파일(`_scripts/run_extract_master_260703.py` · `run_extract_price_260705.py` · `06_extract/scripts/extract_price_sheets.py` · `run_all.py`)에 대해, When 260822 실행본과 기존본을 `git diff` 로 대조하면, Then 변경 라인이 **경로/EXTRACT 상수 정의부에 한정**되고 추출 로직 함수 본문의 변경이 **0라인**이다. **260822 실행본의 러너는 `_workspace/huni-dbmap/_scripts/run_extract_master_260822.py` · `run_extract_price_260822.py` 2종이며, 상수 정의부 외의 변경은 선언된 비의미 예외 2건(① docstring 갱신 ② ruff `E401` 품질 게이트가 강제한 `import` 한 줄 분리)에 한정된다** — 그 외 변경이 0건이고, 공용 추출기(`06_extract/scripts/*`)의 함수 본문 변경이 0라인이다. (REQ-PW-002)
 
 **AC-PW-023** — Given 「계산공식집초안」에서 `[고정가형]` 으로 분류된 상품군에 대해, When M5 결함 원장을 조회하면, Then 해당 상품군의 공식/구성요소 부재를 결함으로 계상한 건이 **0건**이다. (REQ-PW-013)
 
 **AC-PW-024** — Given 본 SPEC 의 전체 작업 로그에 대해, When 위젯 재게시(`publish_widget`) 실행 기록을 조회하면, Then **일치 0건**이며, 재게시를 요구하는 교정(G1 34건 포함)은 전부 후속 트랙 이월로 원장에 기재되어 있다. (REQ-PW-016)
 
-**AC-PW-025** — Given 종료 판정에 사용된 도구 목록에 대해, When 실행 로그를 조회하면, Then 도구가 `verify_zero_quote.py` · `lens_b_runner.py` · `audit_published_prices.py` **3종에 한정**되고, 신규 판정 스크립트·심각도 등급 신설이 **0건**이다. (REQ-PW-018)
+**AC-PW-025** — Given 종료 판정에 사용된 도구 목록에 대해, When 실행 로그를 조회하면, Then 실행 도구가 `verify_zero_quote.py` · `lens_b_runner.py` · `audit_published_prices.py` **3종 + 라이브 읽기전용 SELECT** 로 한정되고(SELECT 는 REQ-PW-023 저청구 계열의 계측 수단이며 신규 스크립트가 아니다 — REQ-PW-018 참조), 신규 판정 스크립트·심각도 등급 신설이 **0건**이며, SELECT 외 라이브 쓰기(INSERT/UPDATE/DELETE)가 **0건**이다. **또한 권위 부재(`needs_authority`)를 판정한 전건에 대해 REQ-PW-025 의 판독 규약이 적용되어 있다** — 권위 엑셀 2종 **전부**와 「계산공식집초안」 시트를 연 근거가 기재되지 않은 채 내려진 「권위 없음」 판정이 **0건**이며, 1건이라도 존재하면 이 AC 는 FAIL 이다. (REQ-PW-018, REQ-PW-025)
 
 ---
 
@@ -119,6 +120,9 @@ tier: L
 - [ ] Negative Guard 16항 재적발 0건(바인딩 AC 기준)
 - [ ] 해소 게이트 5건 종결 상태 유지 — 미해소 마커 잔량 0건(`plan.md §B` 결정 기록)
 - [ ] G1 34건 = 발견 원장 기재 완료 + 후속 트랙 이월 명시(교정 0건)
+- [ ] 할인 적용 범위 위반 3건(`PRD_000147`·`PRD_000149`·`PRD_000154`) 교정 완료 — 「적용 대상」 = `COMP_ACRYL_CLEAR3T`
+- [ ] 추가상품 템플릿 단가 부재 6종 처리 완료 — 등록 또는 `needs_authority` 사유 기재
+- [ ] 할인표 밴드 값 변경 0건(범위 밖, `spec.md §2.2`)
 - [ ] 종료 조건(§C AC-PW-017 (A)=0건) 충족
 
 ---
@@ -149,5 +153,8 @@ tier: L
 | REQ-PW-020 | AC-PW-017 |
 | REQ-PW-021 | AC-PW-019 |
 | REQ-PW-022 | AC-PW-021 |
+| REQ-PW-023 | AC-PW-006 · AC-PW-017 |
+| REQ-PW-024 | AC-PW-017 |
+| REQ-PW-025 | AC-PW-025 |
 
-**커버리지**: REQ 22건 전건이 1개 이상의 번호 AC 로 커버된다(미커버 0건). AC 25건 전건이 1개 이상의 REQ 를 참조한다(Tier L 상한 25 준수).
+**커버리지**: REQ **25건** 전건이 1개 이상의 번호 AC 로 커버된다(미커버 0건). AC **25건** 전건이 1개 이상의 REQ 를 참조한다. **Tier L 예산 준수 — REQ 25 ≤ 상한 25 · AC 25 ≤ 상한 25**(두 상한은 독립 적용). v0.1.2 흡수분(REQ-PW-023/024/025)은 신규 AC 없이 **기존 AC 본문 확장**으로 커버했다 — AC 총량 불변.
