@@ -938,6 +938,80 @@ N-1~N-3 은 `REQ-PW-024` 계열(단가 미적재 → 견적 차단)과 동형이
 
 **M0-4 판정**: AC-PW-022 **PASS**(1줄 diff 실증) · 19시트 status 실측 완료 · 배치 diff 1회 실행 완료 ⇒ **M0-4 완료**.
 
+### M0-6 — 매뉴얼 HTML 동기화 확인 (2026-08-27, 재개 세션) — 판정 완료
+
+#### A. [HARD] 실행 범위 정정 — **완전 재생성 diff 는 수행하지 않았다**
+
+`plan.md §B-4` 는 「`gen_admin_manual.py` / `gen_widget_manual.py` **재생성 diff**」를 명시하나, 재생성은 실행 불가였다. 생성기 docstring verbatim(`gen_admin_manual.py:1-13`):
+
+```
+손글(tools/manual_content.py) + 라이브 사이트 스크린샷(Playwright)을 합쳐
+단일 자기완결 HTML(docs/admin-manual.html)을 만든다.
+재생성:
+  railway run --service huni-admin python tools/mint_session.py --create
+  E2E_SESSIONID=<SESSION_KEY> .venv/bin/python tools/gen_admin_manual.py
+```
+
+두 가지가 걸린다 — ① **railway 세션 발급(`mint_session.py --create`)이 선행**이며 이는 외부 서비스에 세션을 **생성**하는 쓰기성 작업이다 ② 재생성은 Playwright 로 **라이브 스크린샷을 재캡처**하므로 산출 HTML 의 바이너리가 매번 달라져, 순수 diff 는 원고 동기화 판정의 신뢰할 만한 척도가 되지 못한다.
+
+**대체 수행 — 원고↔HTML 결정론 내용 대조**: `ast` 파싱으로 원고의 사용자 노출 문자열(길이 ≥20자 + 한글 포함)을 최상위 변수별로 귀속시켜, 각 산출 HTML 에 존재하는지 대조했다. LLM 판독 0 · 토큰 0 · 재현 가능.
+
+⇒ **이 절의 판정은 「재생성 diff」가 아니라 「원고 문자열의 HTML 반영 여부」다.** 두 방법은 동치가 아니며, 완전 재생성 diff 는 **미수행 Gap** 으로 남는다.
+
+#### B. `manual_content.py` → admin 계열 반영률
+
+원고 mtime **2026-08-27 09:23** · HTML 3종 mtime **2026-08-24 22:22** (admin-manual · admin-quickstart · widget-manual 동일 시각 = 마지막 재생성 시점).
+
+| 원고 변수 | 문자열 | `admin-manual` | `admin-quickstart` |
+|---|---|---|---|
+| `SCREENS` | 134 | **134/134** | 0/134 |
+| `GLOSSARY` | 35 | **35/35** | 0/35 |
+| **`FIELD_REF`** | 33 | **30/33** ⚠️ | 0/33 |
+| `QUICKSTART` | 22 | 0/22 | **22/22** |
+| `FAQ` | 20 | **20/20** | 0/20 |
+| `MODEL_ADMIN_SCREENS` | 9 | **9/9** | 0/9 |
+| `OVERVIEW`·`DIAGRAMS` | 3·3 | **3/3**·**3/3** | 0 |
+| `SAMPLE`·`MODEL_ADMIN_COMMON`·`FOOTER` | 1·1·1 | **1/1** 각 | 0 |
+
+변수 귀속이 산출물과 정확히 1:1로 갈린다(`QUICKSTART` 만 quickstart 로) — 대조 방법의 타당성을 이 분리가 뒷받침한다.
+
+#### C. 판정 — `admin-manual.html` **STALE 확정**
+
+**`FIELD_REF` 3건이 HTML 에 없다.** 원고가 HTML 보다 3일 최신이라는 mtime 정황과 내용 실측이 일치한다 ⇒ **8/24 재생성 이후 8/27 09:23 에 원고가 수정됐고 그 수정분이 HTML 에 반영되지 않았다.**
+
+미반영 3건 전문(요지):
+
+| # | 소재 | 요지 |
+|---|---|---|
+| 1 | `ctrl: "btn"` | 선택지 상세항목을 버튼/드롭다운 중 무엇으로 보일지. 정의에 `"ctrl": "btn"` 을 넣으면 버튼, 안 넣으면 드롭다운 |
+| 2 | 하위공정 「상세옵션 조절」 | 물려받은 항목을 끄거나 값을 줄일 수 있음. **「단가표가 값으로 쓰고 있는 항목은 끄려 하면 저장이 막힙니다 — 끄면 그 비용이 계산에서 조용히 빠져 요금이 덜 청구되기 때문입니다」** |
+| 3 | 공정 입력칸 정의 | 상위(그룹)공정에서만 생성, 하위공정이 전부 물려받음. 상품별 허용 범위는 상품 뷰어 「공정」 섹션에서 좁힘 |
+
+**2번은 본 SPEC 과 직결한다** — 저청구(undercharge) 방지 장치의 존재와 이유를 서술한 문장이며, `REQ-PW-023` 할인 적용 범위 위반이 만들어내는 것과 **같은 종류의 손실**을 다룬다. 이 문장이 화면 매뉴얼에 없다는 것은, 운영자가 admin 화면에서 이 안전장치의 취지를 읽을 수 없다는 뜻이다.
+
+**§B-4 분기 확정**: 「diff 가 비면 화면 매뉴얼 = 원고로 확정, 비지 않으면 **원고(`manual_content.py`)를 1차 참조**로 삼는다」 ⇒ 비지 않았다 ⇒ **원고가 1차 참조**다. 이는 메모리 `webadmin-manual-first-260823`(앱 내장 매뉴얼 2종이 1차 참조)을 **원고 파일 우선으로 한 단계 좁히는** 갱신이다.
+
+#### D. `widget_manual_content.py` → `widget-manual.html` — STALE 아님
+
+원고 mtime **2026-08-24 22:22** = HTML 과 **동일 시각** ⇒ 같은 재생성 회차의 산출이며 stale 이 아니다.
+
+| 변수 | 반영 |
+|---|---|
+| `COMPONENTS` 79 · `FAQ` 22 · `COMMON_PROPS` 10 · `CTRL_TYPES` 8 · `BADGES` 8 · `CANVAS_OPS` 8 · `PUBLISH_NOTES` 8 · `QUICKSTEPS` 5 · `OVERVIEW` 3 · `FLOW_DIAGRAM` 1 · `EMBED_NOTES` 1 | **전건 100%** |
+| `SCREENS` 82 | **69/82** — 미반영 13 |
+
+미반영 13건의 소속 키: **`purpose` 11 / 20** · **`menu` 1 / 1** · (`label` 45/45 · `note` 10/10 은 전건 반영).
+
+`purpose` 가 20건 중 11건만 빠졌으므로 「해당 키를 렌더하지 않는다」로 설명되지 않는다 — 렌더 경로가 특정 섹션의 `purpose` 만 출력하는 구조로 `[추정]`한다. **원고와 HTML 의 재생성 시점이 같으므로 이는 동기화 결함이 아니라 렌더 커버리지 문제**이며, M0-6 의 질문(동기화 여부)과는 다른 축이다.
+
+#### E. 산출·백업
+
+`raw/` 는 **git 미추적**이라 재생성 시 복구 불가이므로, 판정 전에 기준선을 백업했다: `docs/admin-manual.260824-baseline.html` · `docs/widget-manual.260824-baseline.html`.
+
+**미검증 (Gaps)**: (a) **완전 재생성 diff 미수행**(§A) — railway 세션 발급 + Playwright 라이브 캡처가 필요하다. 원고 수정분이 HTML 에 반영되지 않았다는 판정은 **내용 대조로 확증**했으나, 재생성이 실제로 그 3건만 바꾸는지는 확인하지 않았다. (b) `manual_content.py` 를 **8/27 09:23 에 누가·왜 수정했는지 미확인** — `raw/` 가 git 미추적이라 이전 판이 없어 변경분을 diff 할 수 없다. FIELD_REF 3건이 그 수정분이라는 것은 mtime + 미반영 일치에 기반한 `[추정]`이다. (c) widget `purpose` 11건 미출력의 렌더 경로를 코드로 확인하지 않았다. (d) `admin-quickstart.html` 은 `QUICKSTART` 22/22 반영이나, 그 밖의 원고 변수가 quickstart 로 흘러가는지는 검사하지 않았다.
+
+**M0-6 판정**: `admin-manual.html` **STALE** → 원고 1차 참조 확정 · `widget-manual.html` 동기(렌더 커버리지 Gap 별건) · `admin-quickstart.html` 동기 ⇒ **§B-4 해소, M0-6 완료**(단 §A 의 범위 정정을 전제로).
+
 ---
 
 ## §G 세션 마감 종합 (2026-08-27) — 다음 세션 인수인계
