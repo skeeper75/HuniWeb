@@ -1,7 +1,7 @@
 ---
 id: SPEC-PRICEWIRE-001
 doc: acceptance
-version: "0.1.3"
+version: "0.1.4"
 updated: 2026-08-27
 status: draft
 tier: L
@@ -51,7 +51,7 @@ tier: L
 
 ## §C M5 — 종료 판정
 
-**AC-PW-016** — Given 게시 분모(위젯 194 / 상품 193)가 확정된 상태에서, When `audit_published_prices.py` 로 전수 점검을 실행하면, Then 점검 대상 수가 194 이며 미점검 0건이다. (REQ-PW-018)
+**AC-PW-016** — Given 점검 실행 직전 라이브 SELECT(`sts_typ_cd='WGT_STS_TYPE.02' AND COALESCE(del_yn,'N')='N'`)로 게시 분모를 재실측하고 그 값과 실측 일시를 원장에 기록한 상태에서, When `audit_published_prices.py` 로 전수 점검을 실행하면, Then **점검 대상 수가 그 실측 게시 위젯 수와 일치**하고 미점검 **0건**이며, 원장에 실측 일시가 기재되어 있다. 실측 없이 인용된 고정 숫자(194 등)를 분모로 쓴 경우 이 AC 는 FAIL 이다. (REQ-PW-018)
 
 **AC-PW-017** — Given 전량 스윕이 완료된 상태에서, When `verify_zero_quote.py` 결과를 (A)/(B)/(C) 3분류로 집계하면, Then **(A) 진짜 결함 = 0건**이며, (A) 집계의 근거 필드가 전건 `result_sum.PRICE` 이고 per-line `result[].PRICE=0` 을 근거로 계상된 건이 0건이다. **(A) 분자에서 G1 stale 기본값 34건은 제외**하며(`spec.md §2.2` 범위 밖), E1 잔량은 `spec.md §1.2.1` 의 렌즈 B 층 분모로만 센다.
 > **(A) 분자에 포함되는 항목 [명시]** — (i) **할인 적용 범위 위반**(REQ-PW-023: 인쇄가공비 외 구성요소를 보유한 공식인데 할인이 총액 스코프로 바인딩된 건) · (ii) **추가상품 템플릿 단가 부재**(REQ-PW-024: `t_prd_template_prices` 행이 없어 `_addons_strict` 가 422 로 막는 템플릿). 종료 시 **(i) = 0건 AND (ii) = 0건** 이어야 한다. (ii) 중 권위 단가 출처가 미확보인 건(트레싱지봉투 4종 · 천정고리)은 `needs_authority` 로 원장화하고 그 사유가 기재된 경우에 한해 잔량으로 계상하되, 사유 없는 잔량은 0건이어야 한다. [종료 조건] (REQ-PW-020, REQ-PW-023, REQ-PW-024)
@@ -93,7 +93,7 @@ tier: L
 | 7 | (C) 미선택 차원 — 손님이 아직 안 고른 축 | AC-PW-018 |
 | 8 | INFO-1 기본값 미지정(`dflt_val` 없음) — 고지만 | AC-PW-017 |
 | 9 | `A−B`(등록됐으나 미게시) — 런칭 대기 | AC-PW-016 |
-| 10 | 분모 차이(266 vs 194) — 정보 | AC-PW-016 |
+| 10 | 분모 차이(266 전체등록 vs 게시 실측) — 정보 | AC-PW-016 |
 | 11 | TRUNCATED(조합 절단) — 커버리지 고지 | AC-PW-019 |
 | 12 | `PARENT_DEAD` 대량 — 원본 정책 승계로 WARN, 분모 제외 금지 | AC-PW-016 |
 | 13 | 다중 항목 동시 변경 조합 미검사 — 설계상 한계 | AC-PW-021 |

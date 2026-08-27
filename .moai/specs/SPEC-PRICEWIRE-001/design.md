@@ -1,7 +1,7 @@
 ---
 id: SPEC-PRICEWIRE-001
 doc: design
-version: "0.1.3"
+version: "0.1.4"
 updated: 2026-08-27
 status: draft
 tier: L
@@ -70,7 +70,7 @@ price_views.py:1657 @require_POST / :1658 discount_grid_save(request, dsc_tbl_cd
 3. 대상 코드를 특정하지 못하면 **중단하고 원장에 `needs_authority` 로 기록**한다 — 추정으로 지정하지 않는다.
 4. 현재 할인 바인딩의 `dsc_tbl_cd` 와 `apply_bgn_ymd` 를 그대로 읽어 보존한다(할인표 자체는 건드리지 않는다, spec §2.2).
 5. 화면 필드 `#dsc-comp` 에 2 에서 특정한 `comp_cd` 를 지정 → 미리보기 → **인간 승인** → 저장(`update_or_create` → 멱등).
-6. 시뮬레이터 단건 재계산 → **후가공·부속 금액에 할인이 걸리지 않는지** 확인. 기준 형태는 이미 정상인 `PRD_000146`(아크릴키링)이며, 교정 결과가 이 형태와 같은 모양이면 통과다.
+6. 시뮬레이터 단건 재계산 → **후가공·부속 금액에 할인이 걸리지 않는지** 확인. 기준 형태는 이미 정상인 `PRD_000146`(아크릴키링) — 단 이 상품은 **2026-08-24 게시중단되어 현재 게시 분모 밖**이다(`progress.md §E.2 M0-2 B` 발견 J). 라이브 데이터는 남아 있어 **참조 형태로는 유효**하지만, 통과 판정을 「게시 상품과 같은 모양」으로 서술하지 않는다.
 7. 라이브 읽기전용 SELECT 로 `comp_cd` 가 빈값이 아님을 재확인하고 원장 기입(REQ-PW-018 계측 수단).
 
 **겹침은 금지가 아니라 허용이다 [실측 정정]**: `pricing.py:934` 의 "이중 적용" 경고는 *구성요소 스코프 행(`comp_cd≠''`)이 **총액 조회 경로에** 섞이는 것* 을 막는 불변식이며, 실제 총액 조회는 `filter(comp_cd="")` 로 이미 걸러진다(`pricing.py:936-937`). 총액 행과 구성요소 행의 **공존 자체는 설계상 허용**이다 — `pricing.py:970` docstring verbatim `총액 스코프('')가 그 뒤 순차 적용된다(겹침 허용, 사용자 확정)`, 적용 순서는 `pricing.py:679` verbatim `구성요소 스코프 → 총액 스코프('') → 등급 (순차·겹침 허용)`. 앱 내장 매뉴얼도 같다(`raw/webadmin/tools/manual_content.py:328-329` verbatim): `할인은 적용 대상별로 나란히 걸 수 있으며(전체 금액 1건 + 구성요소별 여러 건), 구성요소 할인 → 전체 금액 할인 → 등급 할인 순서로 차례로 적용됩니다.`
@@ -161,7 +161,7 @@ admin.py:1560 class TPrcFormulaComponentsInline(...)
 |---|---|---|
 | 1 | `verify_zero_quote.py` | ZERO_FINAL / NO_SOURCE / UNDERCHARGE / ENGINE_ERROR 전수 |
 | 2 | `lens_b_runner.py` | 게시 위젯 실호출 가격 스윕(판정 mint 금지) |
-| 3 | `audit_published_prices.py` | 게시 194 전수 가격계산 점검(`--products/--limit/--workers`) |
+| 3 | `audit_published_prices.py` | 게시 전수 가격계산 점검 — 분모는 실행 직전 라이브 재실측(`spec.md §1.2`), `--products/--limit/--workers` |
 | 4 | 위젯빌더 「가격 진단」 `#wb-diag-btn` | 가격 소스·구성요소별 매칭/제외 사유·할인 단계·오류 전문 |
 | 5 | 3분류 원장화 | (A) 진짜 결함 / (B) 정상 미매칭 / (C) 미선택 차원 |
 
