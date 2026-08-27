@@ -1,0 +1,11 @@
+# 적재 직전 백업 — PET배너 거치대 옵션차원 분리
+# 생성 2026-08-27 21:29:54 KST
+
+## 삭제 대상 (t_prc_formula_components)
+#   frm=PRF_POSTER_PET_BANNER comp=COMP_POSTEROPT_PET_BANNER_STAND_SEL disp_seq=2 addtn_yn=Y
+
+## 되돌리기 SQL
+INSERT INTO t_prc_formula_components (frm_cd, comp_cd, disp_seq, addtn_yn, reg_dt) VALUES ('PRF_POSTER_PET_BANNER', 'COMP_POSTEROPT_PET_BANNER_STAND_SEL', 2, 'Y', now());
+
+## 남겨두는 것 (삭제하지 않음)
+#   COMP_POSTEROPT_PET_BANNER_STAND_SEL 구성요소 자체 + 단가행 2행(MAT_000409=10000 · MAT_000410=23000) — 고아로 남긴다
