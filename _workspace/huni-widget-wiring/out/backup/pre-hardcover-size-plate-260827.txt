@@ -1,0 +1,68 @@
+==============================================================================
+하드커버 계열 사이즈·판형 연결   모드: DRY-RUN(강제 롤백 — DB 안 바뀜)
+==============================================================================
+
+[보류]
+  · PRD_000074     하드커버책자-면지              권위 판걸이수에 하드커버무선 계열의 면지 사이즈가 없다(A64/A65 는 표지만). SIZ_000637/639 는 링책자 전용이라 유용할 수 없다
+  · PRD_000087     하드커버링책자-인쇄면지           use_yn='N' + 차원 전무. 면지 계열이라 지니 확정에 따라 가격 불요
+
+▸ PRD_000083 하드커버링책자-표지
+    근거: 권위 46행 전용지+무광코팅(단면)+디지털인쇄 · 판걸이수 B66/B68·G66/G68 · 제본 E14 「표지비용 따로 계산」
+    교정 전 source=NONE
+    ✓ 사이즈  SIZ_000636 하드커버링책자 표지A5 (191.00x253.00) dflt=Y seq=1
+    ✓ 판형    SIZ_000499 316x467 dflt=Y item_siz_cd=''
+    ✓ 사이즈  SIZ_000638 하드커버링책자 표지A4 (253.00x340.00) dflt=N seq=2
+      판형 SIZ_000499 이미 연결됨 — 건너뜀
+    ✓ 공식    PRF_BOOK_COVER (적용일 2026-06-01)
+    교정 후 source=FORMULA
+
+▸ PRD_000084 하드커버링책자-면지
+    근거: 판걸이수 B67/B69·G67/G69. 지니 확정: MDF+면지는 제본비 포함 → 공식 바인딩 없음
+    교정 전 source=NONE
+    ✓ 사이즈  SIZ_000637 하드커버링책자 면지A5 (151.00x213.00) dflt=Y seq=1
+    ✓ 판형    SIZ_000499 316x467 dflt=Y item_siz_cd=''
+    ✓ 사이즈  SIZ_000639 하드커버링책자 면지A4 (213.00x300.00) dflt=N seq=2
+      판형 SIZ_000499 이미 연결됨 — 건너뜀
+    · 공식 바인딩 없음 — 부모가 청구하거나 제본에 포함
+    교정 후 source=NONE
+
+▸ PRD_000073 하드커버책자-표지
+    근거: 권위 38행 · 판걸이수 B64/G64(국4절)·B65/H65(3절) · 부모 COMP_HC_MUSEON_COVERBIND 가 표지비 합산 → 공식 바인딩 없음
+    교정 전 source=NONE
+    ✓ 사이즈  SIZ_000634 하드커버무선책자 표지A5 (390.00x268.00) dflt=Y seq=1
+    ✓ 판형    SIZ_000499 316x467 dflt=Y item_siz_cd=''
+    ✓ 사이즈  SIZ_000635 하드커버무선책자 표지A4 (532.00x355.00) dflt=N seq=2
+    ✓ 판형    SIZ_000475 330x660 dflt=N item_siz_cd='SIZ_000635'
+    · 공식 바인딩 없음 — 부모가 청구하거나 제본에 포함
+    교정 후 source=NONE
+
+▸ PRD_000078 레더하드커버책자-표지
+    근거: 권위 42행 레더(화이트)+특수인쇄+코팅없음 → PRF_BOOK_COVER 부적합. 부모가 표지비 합산 → 공식 바인딩 없음
+    교정 전 source=NONE
+    ✓ 사이즈  SIZ_000634 하드커버무선책자 표지A5 (390.00x268.00) dflt=Y seq=1
+    ✓ 판형    SIZ_000499 316x467 dflt=Y item_siz_cd=''
+    ✓ 사이즈  SIZ_000635 하드커버무선책자 표지A4 (532.00x355.00) dflt=N seq=2
+    ✓ 판형    SIZ_000475 330x660 dflt=N item_siz_cd='SIZ_000635'
+    · 공식 바인딩 없음 — 부모가 청구하거나 제본에 포함
+    교정 후 source=NONE
+
+[사후 실측] 「가격없음」 배지 = 44 · 미연결 하드커버 사이즈 = 0/6
+
+[되돌리기 SQL]
+  DELETE FROM t_prd_product_sizes WHERE prd_cd='PRD_000083' AND siz_cd='SIZ_000636';
+  DELETE FROM t_prd_product_plate_sizes WHERE prd_cd='PRD_000083' AND siz_cd='SIZ_000499';
+  DELETE FROM t_prd_product_sizes WHERE prd_cd='PRD_000083' AND siz_cd='SIZ_000638';
+  DELETE FROM t_prd_product_price_formulas WHERE prd_cd='PRD_000083' AND frm_cd='PRF_BOOK_COVER';
+  DELETE FROM t_prd_product_sizes WHERE prd_cd='PRD_000084' AND siz_cd='SIZ_000637';
+  DELETE FROM t_prd_product_plate_sizes WHERE prd_cd='PRD_000084' AND siz_cd='SIZ_000499';
+  DELETE FROM t_prd_product_sizes WHERE prd_cd='PRD_000084' AND siz_cd='SIZ_000639';
+  DELETE FROM t_prd_product_sizes WHERE prd_cd='PRD_000073' AND siz_cd='SIZ_000634';
+  DELETE FROM t_prd_product_plate_sizes WHERE prd_cd='PRD_000073' AND siz_cd='SIZ_000499';
+  DELETE FROM t_prd_product_sizes WHERE prd_cd='PRD_000073' AND siz_cd='SIZ_000635';
+  DELETE FROM t_prd_product_plate_sizes WHERE prd_cd='PRD_000073' AND siz_cd='SIZ_000475';
+  DELETE FROM t_prd_product_sizes WHERE prd_cd='PRD_000078' AND siz_cd='SIZ_000634';
+  DELETE FROM t_prd_product_plate_sizes WHERE prd_cd='PRD_000078' AND siz_cd='SIZ_000499';
+  DELETE FROM t_prd_product_sizes WHERE prd_cd='PRD_000078' AND siz_cd='SIZ_000635';
+  DELETE FROM t_prd_product_plate_sizes WHERE prd_cd='PRD_000078' AND siz_cd='SIZ_000475';
+
+결과: DRY-RUN 성공 — 15행 적재 가능. 강제 롤백했다.
