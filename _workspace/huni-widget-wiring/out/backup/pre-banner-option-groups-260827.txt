@@ -1,0 +1,26 @@
+# 적재 직전 백업 — 현수막 옵션그룹 통합 가격구성요소 3종
+# 생성 2026-08-27 22:36:51 KST
+
+## 되돌리기 SQL (역순 실행)
+
+# --- COMP_BANNER_ADDON ---
+DELETE FROM t_prc_formula_components WHERE frm_cd='PRF_POSTER_BANNER_N' AND comp_cd='COMP_BANNER_ADDON';
+DELETE FROM t_prc_component_prices WHERE comp_cd='COMP_BANNER_ADDON';
+DELETE FROM t_prc_price_components WHERE comp_cd='COMP_BANNER_ADDON';
+# (구세대 COMP_POSTEROPT_BANNER_NORMAL_ADD_QBANG_4 는 이미 PRF_POSTER_BANNER_N 에 미연결 — 되돌릴 것 없음)
+# (구세대 COMP_POSTEROPT_BANNER_NORMAL_ADD_STRING_4 는 이미 PRF_POSTER_BANNER_N 에 미연결 — 되돌릴 것 없음)
+# (구세대 COMP_POPT_BNR_GAKMOK_STR_900_4_LE 는 이미 PRF_POSTER_BANNER_N 에 미연결 — 되돌릴 것 없음)
+# (구세대 COMP_POPT_BNR_GAKMOK_STR_900_4_GT 는 이미 PRF_POSTER_BANNER_N 에 미연결 — 되돌릴 것 없음)
+
+# --- COMP_BANNER_MESH_OPTION ---
+DELETE FROM t_prc_formula_components WHERE frm_cd='PRF_POSTER_BANNER_M' AND comp_cd='COMP_BANNER_MESH_OPTION';
+DELETE FROM t_prc_component_prices WHERE comp_cd='COMP_BANNER_MESH_OPTION';
+DELETE FROM t_prc_price_components WHERE comp_cd='COMP_BANNER_MESH_OPTION';
+INSERT INTO t_prc_formula_components (frm_cd, comp_cd, disp_seq, addtn_yn, reg_dt) VALUES ('PRF_POSTER_BANNER_M', 'COMP_POSTEROPT_BANNER_MESH_PROC_PUNCH', 4, 'Y', now());
+
+# --- COMP_BANNER_MESH_ADDON ---
+DELETE FROM t_prc_formula_components WHERE frm_cd='PRF_POSTER_BANNER_M' AND comp_cd='COMP_BANNER_MESH_ADDON';
+DELETE FROM t_prc_component_prices WHERE comp_cd='COMP_BANNER_MESH_ADDON';
+DELETE FROM t_prc_price_components WHERE comp_cd='COMP_BANNER_MESH_ADDON';
+INSERT INTO t_prc_formula_components (frm_cd, comp_cd, disp_seq, addtn_yn, reg_dt) VALUES ('PRF_POSTER_BANNER_M', 'COMP_POSTEROPT_BANNER_MESH_ADD_QBANG_4', 2, 'Y', now());
+INSERT INTO t_prc_formula_components (frm_cd, comp_cd, disp_seq, addtn_yn, reg_dt) VALUES ('PRF_POSTER_BANNER_M', 'COMP_POSTEROPT_BANNER_MESH_ADD_STRING_4', 3, 'Y', now());
