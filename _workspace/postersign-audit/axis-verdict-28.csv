@@ -1,0 +1,29 @@
+prd_cd,prd_nm,axis1_구성요소존재,axis1_근거,axis2_가격배선,axis2_본품,axis2_중복구성요소,axis2_disp_seq,axis2_고아,axis2_고아_배선단위,axis2_고아_고객단위,axis2_근거,axis3_값정합,axis3_근거,axis4_위젯가격산출,axis4_근거,종단판정,종단_성격,잔여
+PRD_000118,아트프린트포스터,PASS,구성요소 1 · 단가행 보유 1,PASS,PASS,PASS,PASS,PASS,0,0,본품 PASS · 중복구성요소 PASS · disp_seq PASS · 고아 PASS,PASS,일치 52건 + 후보일치 0건,PASS,5조합 전건 supply 산출,PASS,결합추론(축③ DB↔권위 ∧ 축④ 위젯↔산출),
+PRD_000119,아트페이퍼포스터,PASS,구성요소 1 · 단가행 보유 1,PASS,PASS,PASS,PASS,PASS,0,0,본품 PASS · 중복구성요소 PASS · disp_seq PASS · 고아 PASS,PASS,일치 39건 + 후보일치 0건,PASS,5조합 전건 supply 산출,PASS,결합추론(축③ DB↔권위 ∧ 축④ 위젯↔산출),
+PRD_000120,방수포스터,PASS,구성요소 1 · 단가행 보유 1,PASS,PASS,PASS,PASS,PASS,0,0,본품 PASS · 중복구성요소 PASS · disp_seq PASS · 고아 PASS,PASS,일치 104건 + 후보일치 0건,PASS,5조합 전건 supply 산출,PASS,결합추론(축③ DB↔권위 ∧ 축④ 위젯↔산출),
+PRD_000121,접착방수포스터,PASS,구성요소 1 · 단가행 보유 1,PASS,PASS,PASS,PASS,PASS,0,0,본품 PASS · 중복구성요소 PASS · disp_seq PASS · 고아 PASS,PASS,일치 52건 + 후보일치 0건,PASS,5조합 전건 supply 산출,PASS,결합추론(축③ DB↔권위 ∧ 축④ 위젯↔산출),
+PRD_000122,접착투명포스터,PASS,구성요소 1 · 단가행 보유 1,PASS,PASS,PASS,PASS,PASS,0,0,본품 PASS · 중복구성요소 PASS · disp_seq PASS · 고아 PASS,PASS,일치 52건 + 후보일치 0건,PASS,5조합 전건 supply 산출,PASS,결합추론(축③ DB↔권위 ∧ 축④ 위젯↔산출),
+PRD_000123,아트패브릭포스터,PASS,구성요소 1 · 단가행 보유 1,PASS,PASS,PASS,PASS,PASS,0,0,본품 PASS · 중복구성요소 PASS · disp_seq PASS · 고아 PASS,PASS,일치 52건 + 후보일치 0건,PASS,5조합 전건 supply 산출,PASS,결합추론(축③ DB↔권위 ∧ 축④ 위젯↔산출),
+PRD_000124,린넨패브릭포스터,PASS,구성요소 2 · 단가행 보유 2,PASS,PASS,PASS,PASS,PASS,0,0,본품 PASS · 중복구성요소 PASS · disp_seq PASS · 고아 PASS,PASS,일치 52건 + 후보일치 0건,PASS,12조합 전건 supply 산출,PASS,결합추론(축③ DB↔권위 ∧ 축④ 위젯↔산출),
+PRD_000125,캔버스패브릭포스터,PASS,구성요소 1 · 단가행 보유 1,PASS,PASS,PASS,PASS,PASS,0,0,본품 PASS · 중복구성요소 PASS · disp_seq PASS · 고아 PASS,PASS,일치 52건 + 후보일치 0건,PASS,9조합 전건 supply 산출,PASS,결합추론(축③ DB↔권위 ∧ 축④ 위젯↔산출),
+PRD_000126,레더아트프린트,PASS,구성요소 1 · 단가행 보유 1,PASS,PASS,PASS,PASS,PASS,0,0,본품 PASS · 중복구성요소 PASS · disp_seq PASS · 고아 PASS,PASS,일치 52건 + 후보일치 0건,PASS,5조합 전건 supply 산출,PASS,결합추론(축③ DB↔권위 ∧ 축④ 위젯↔산출),
+PRD_000127,타이벡프린트,PASS,구성요소 1 · 단가행 보유 1,PASS,PASS,PASS,PASS,PASS,0,0,본품 PASS · 중복구성요소 PASS · disp_seq PASS · 고아 PASS,PASS,일치 52건 + 후보일치 0건,PASS,10조합 전건 supply 산출,PASS,결합추론(축③ DB↔권위 ∧ 축④ 위젯↔산출),
+PRD_000128,메쉬프린트,PASS,구성요소 1 · 단가행 보유 1,PASS,PASS,PASS,PASS,PASS,0,0,본품 PASS · 중복구성요소 PASS · disp_seq PASS · 고아 PASS,PASS,일치 52건 + 후보일치 0건,PASS,5조합 전건 supply 산출,PASS,결합추론(축③ DB↔권위 ∧ 축④ 위젯↔산출),
+PRD_000129,폼보드,PASS,구성요소 1 · 단가행 보유 1,FAIL,PASS,PASS,PASS,FAIL,2,2,"본품 PASS · 중복구성요소 PASS · disp_seq PASS · 고아 FAIL(배선 2 / 고객 2건: SIZ_000174, SIZ_000197)",FAIL,값 불일치 1건,FAIL,16조합 중 실패 12 — price_gap:8 · 현재:4,FAIL,,
+PRD_000130,포맥스보드,PASS,구성요소 1 · 단가행 보유 1,FAIL,PASS,PASS,PASS,FAIL,1,1,본품 PASS · 중복구성요소 PASS · disp_seq PASS · 고아 FAIL(배선 1 / 고객 1건: SIZ_000174),PASS,일치 0건 + 후보일치 4건,FAIL,12조합 중 실패 8 — 현재:4 · price_gap:4,FAIL,,
+PRD_000131,프레임리스우드액자,PASS,구성요소 1 · 단가행 보유 1,FAIL,PASS,PASS,PASS,FAIL,1,1,본품 PASS · 중복구성요소 PASS · disp_seq PASS · 고아 FAIL(배선 1 / 고객 1건: SIZ_000174),PASS,일치 2건 + 후보일치 0건,FAIL,3조합 중 실패 1 — price_gap:1,FAIL,,
+PRD_000132,레더아트액자,PASS,구성요소 1 · 단가행 보유 1,PASS,PASS,PASS,PASS,PASS,0,0,본품 PASS · 중복구성요소 PASS · disp_seq PASS · 고아 PASS,PASS,일치 6건 + 후보일치 0건,PASS,6조합 전건 supply 산출,PASS,결합추론(축③ DB↔권위 ∧ 축④ 위젯↔산출),
+PRD_000133,캔버스 행잉포스터,PASS,구성요소 2 · 단가행 보유 2,FAIL,PASS,PASS,PASS,FAIL,6,3,"본품 PASS · 중복구성요소 PASS · disp_seq PASS · 고아 FAIL(배선 6 / 고객 3건: SIZ_000172, SIZ_000174, SIZ_000197)",PASS,일치 3건 + 후보일치 0건,FAIL,6조합 중 실패 3 — price_gap:3,FAIL,,
+PRD_000134,린넨우드봉족자,PASS,구성요소 2 · 단가행 보유 2,FAIL,PASS,PASS,PASS,FAIL,6,3,"본품 PASS · 중복구성요소 PASS · disp_seq PASS · 고아 FAIL(배선 6 / 고객 3건: SIZ_000258, SIZ_000315, SIZ_000317)",PASS,일치 3건 + 후보일치 0건,FAIL,6조합 중 실패 3 — price_gap:3,FAIL,,
+PRD_000135,족자포스터,PASS,구성요소 1 · 단가행 보유 1,FAIL,PASS,PASS,PASS,FAIL,2,2,"본품 PASS · 중복구성요소 PASS · disp_seq PASS · 고아 FAIL(배선 2 / 고객 2건: SIZ_000174, SIZ_000197)",PASS,일치 3건 + 후보일치 2건,FAIL,7조합 중 실패 2 — price_gap:2,FAIL,,
+PRD_000136,PET배너,PASS,구성요소 1 · 단가행 보유 1,PASS,PASS,PASS,PASS,PASS,0,0,본품 PASS · 중복구성요소 PASS · disp_seq PASS · 고아 PASS,PASS,일치 0건 + 후보일치 1건,PASS,1조합 전건 supply 산출,PASS,결합추론(축③ DB↔권위 ∧ 축④ 위젯↔산출),
+PRD_000137,메쉬배너,PASS,구성요소 1 · 단가행 보유 1,PASS,PASS,PASS,PASS,PASS,0,0,본품 PASS · 중복구성요소 PASS · disp_seq PASS · 고아 PASS,PASS,일치 0건 + 후보일치 1건,PASS,1조합 전건 supply 산출,PASS,결합추론(축③ DB↔권위 ∧ 축④ 위젯↔산출),
+PRD_000138,일반현수막,PASS,구성요소 3 · 단가행 보유 3,FAIL,PASS,PASS,FAIL,PASS,0,0,본품 PASS · 중복구성요소 PASS · disp_seq FAIL(미설정 2/중복 0) · 고아 PASS,PASS,일치 80건 + 후보일치 0건,FAIL,1조합 중 실패 1 — 선택하신:1,FAIL,,
+PRD_000139,메쉬현수막,PASS,구성요소 3 · 단가행 보유 3,FAIL,PASS,PASS,FAIL,PASS,0,0,본품 PASS · 중복구성요소 PASS · disp_seq FAIL(미설정 2/중복 0) · 고아 PASS,PASS,일치 48건 + 후보일치 0건,FAIL,3조합 중 실패 1 — 선택하신:1,FAIL,,
+PRD_000140,무광시트커팅,PASS,구성요소 1 · 단가행 보유 1,PASS,PASS,PASS,PASS,PASS,0,0,본품 PASS · 중복구성요소 PASS · disp_seq PASS · 고아 PASS,UNVERIFIED,권위 블록 미대응 — 대조 불가,PASS,12조합 전건 supply 산출,UNVERIFIED,,축③
+PRD_000141,홀로그램 시트커팅,PASS,구성요소 1 · 단가행 보유 1,FAIL,PASS,PASS,PASS,FAIL,3,3,"본품 PASS · 중복구성요소 PASS · disp_seq PASS · 고아 FAIL(배선 3 / 고객 3건: SIZ_000172, SIZ_000174, SIZ_000197)",UNVERIFIED,권위 블록 미대응 — 대조 불가,FAIL,6조합 중 실패 3 — price_gap:3,FAIL,,축③
+PRD_000142,유광아크릴스티커,PASS,구성요소 1 · 단가행 보유 1,PASS,PASS,PASS,PASS,PASS,0,0,본품 PASS · 중복구성요소 PASS · disp_seq PASS · 고아 PASS,UNVERIFIED,권위 블록 미대응 — 대조 불가,PASS,8조합 전건 supply 산출,UNVERIFIED,,축③
+PRD_000143,미러아크릴스티커,PASS,구성요소 1 · 단가행 보유 1,PASS,PASS,PASS,PASS,PASS,0,0,본품 PASS · 중복구성요소 PASS · disp_seq PASS · 고아 PASS,UNVERIFIED,권위 블록 미대응 — 대조 불가,PASS,8조합 전건 supply 산출,UNVERIFIED,,축③
+PRD_000144,미니보드스탠딩,PASS,구성요소 1 · 단가행 보유 1,FAIL,PASS,PASS,PASS,FAIL,3,3,"본품 PASS · 중복구성요소 PASS · disp_seq PASS · 고아 FAIL(배선 3 / 고객 3건: SIZ_000007, SIZ_000172, SIZ_000174)",UNVERIFIED,권위 블록 미대응 — 대조 불가,FAIL,6조합 중 실패 3 — price_gap:3,FAIL,,축③
+PRD_000145,미니배너,PASS,구성요소 1 · 단가행 보유 1,PASS,PASS,PASS,PASS,PASS,0,0,본품 PASS · 중복구성요소 PASS · disp_seq PASS · 고아 PASS,PASS,일치 0건 + 후보일치 10건,FAIL,2조합 중 실패 1 — bad_qty:1,FAIL,,

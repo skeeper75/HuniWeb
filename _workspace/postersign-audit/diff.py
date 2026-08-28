@@ -230,6 +230,8 @@ def main():
     ap.add_argument('--refresh', action='store_true', help='라이브에서 스냅샷을 새로 뜬다')
     ap.add_argument('--lo', default='PRD_000118', help='대상 prd_cd 하한')
     ap.add_argument('--hi', default='PRD_000145', help='대상 prd_cd 상한')
+    ap.add_argument('--emit', metavar='CSV',
+                    help='상품별 축③ 판정을 기계판독 CSV 로 내보낸다(축③×축④ 결합용)')
     args = ap.parse_args()
 
     snap = refresh(args.lo, args.hi) if args.refresh else latest_snapshot()
@@ -379,7 +381,46 @@ def main():
               f'{r["comp_cd"]} {r["comp_nm"]:<24} {r["unit_price"] or "(단가없음)"}')
 
     print('\n※ 이 대조는 축 ③(값 정합)이다. 축 ④(위젯 supply 종단 대조)는 별도다 — AC-PC-013.')
+
+    if args.emit:
+        emit_axis3(args.emit, snap, live_prd, block2prd, matched, findings)
     return 0
+
+
+# ── 축③ 상품별 판정 내보내기 (AC-PC-009 결합용) ────────────────────────────────
+# 값은 전부 비교기 산출을 그대로 옮긴다. LLM 이 셀 값을 전사하지 않는다(AC-PC-011).
+def emit_axis3(path, snap, live_prd, block2prd, matched, findings):
+    covered = {q for prds in block2prd.values() for q in prds}
+
+    # CANDIDATE 는 「사람 확정 필요」지 결함 단정이 아니다(M4-2b).
+    # 다만 그 안에서 권위값과 라이브값이 실제로 어긋난 건은 값 불일치이므로 갈라 센다.
+    cand_ok, cand_bad = collections.Counter(), collections.Counter()
+    for p, _nm, _blk, _r, _c, want, prices in findings['CANDIDATE']:
+        (cand_ok if prices and want in prices else cand_bad)[p] += 1
+
+    per = {v: collections.Counter(r[0] for r in findings[v])
+           for v in ('VALUE', 'MISSING', 'EXTRA', 'UNRESOLVED')}
+
+    with open(path, 'w', newline='', encoding='utf-8') as f:
+        w = csv.writer(f)
+        w.writerow(['prd_cd', 'prd_nm', 'a3_verdict', 'a3_matched', 'a3_value_mismatch',
+                    'a3_candidate_ok', 'a3_candidate_mismatch', 'a3_missing',
+                    'a3_extra', 'a3_unresolved', 'a3_basis'])
+        for p in sorted(live_prd):
+            bad = per['VALUE'][p] + cand_bad[p]
+            if p not in covered:
+                # 권위 블록이 이 상품에 대응되지 않았다. 대조를 못 한 것이지 통과가 아니다.
+                verdict, basis = 'UNVERIFIED', '권위 블록 미대응 — 대조 불가'
+            elif bad:
+                verdict, basis = 'FAIL', f'값 불일치 {bad}건'
+            elif matched[p] or cand_ok[p]:
+                verdict, basis = 'PASS', f'일치 {matched[p]}건 + 후보일치 {cand_ok[p]}건'
+            else:
+                verdict, basis = 'UNVERIFIED', '대조된 셀 0건'
+            w.writerow([p, live_prd[p], verdict, matched[p], per['VALUE'][p],
+                        cand_ok[p], cand_bad[p], per['MISSING'][p],
+                        per['EXTRA'][p], per['UNRESOLVED'][p], basis])
+    print(f'\n축③ 상품별 판정 {len(live_prd)}행 → {path}  (스냅샷 {os.path.basename(snap)})')
 
 
 if __name__ == '__main__':
