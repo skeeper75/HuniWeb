@@ -51,8 +51,10 @@ WHERE ppf.prd_cd BETWEEN :LO AND :HI
 ORDER BY 1, 3, 5
 """
 
-# 고아 사이즈 — use_dims 가 siz_cd 를 가격축으로 선언한 구성요소에 한정한다.
-# 이 한정을 빼면 88건이 나오고, 그 88건은 오판이다(M4-6).
+# 고아 사이즈 — 두 겹의 한정이 **둘 다** 필요하다. 하나만 걸면 오판이 남는다.
+#   (1) use_dims 가 siz_cd 를 가격축으로 선언한 구성요소로 한정 — 빼면 88건(M4-6 오판)
+#   (2) 삭제·미사용 사이즈 제외(AC-PC-003) — 빼면 18건이 나오는데 전부 도달 불가였다.
+#       위젯 catalog 실측 결과 그 18종은 고객 선택지에 아예 없다(M4-14).
 SQL_ORPHAN = """
 SELECT ppf.prd_cd, pc.comp_cd, pps.siz_cd, s.siz_nm
 FROM t_prd_product_price_formulas ppf
@@ -61,7 +63,10 @@ JOIN t_prc_price_components pc   ON pc.comp_cd = fc.comp_cd
                                 AND COALESCE(pc.del_yn,'N') <> 'Y'
                                 AND pc.use_dims::text LIKE '%siz_cd%'
 JOIN t_prd_product_sizes pps     ON pps.prd_cd = ppf.prd_cd
+                                AND COALESCE(pps.del_yn,'N') <> 'Y'
 JOIN t_siz_sizes s               ON s.siz_cd = pps.siz_cd
+                                AND COALESCE(s.use_yn,'Y') = 'Y'
+                                AND COALESCE(s.del_yn,'N') <> 'Y'
 WHERE ppf.prd_cd BETWEEN :LO AND :HI
   AND NOT EXISTS (SELECT 1 FROM t_prc_component_prices cp
                   WHERE cp.comp_cd = pc.comp_cd AND cp.siz_cd = pps.siz_cd)
@@ -284,7 +289,8 @@ def main():
     ow = sum(r[ix['axis2_고아_배선단위']] or 0 for r in table)
     os_ = sum(r[ix['axis2_고아_고객단위']] or 0 for r in table)
     print(f'축② 고아 — 배선단위(comp × siz) {ow}건 · 고객단위(prd × siz) {os_}건')
-    print('  고객단위가 M4-6 기준선(18)과 맞물리는 쪽이다. 두 수는 단위가 달라 서로 어긋나지 않는다.')
+    print('  삭제·미사용 사이즈 제외 후의 수다(AC-PC-003). 필터를 빼면 18건이 나오지만,')
+    print('  그 18종은 위젯 선택지에 없어 고객이 도달할 수 없다 — 결함이 아니다(M4-14).')
 
     bad = [r for r in table if r[ix['종단판정']] != 'PASS']
     print(f'\n■ 종단 미통과 {len(bad)}건')

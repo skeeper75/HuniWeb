@@ -94,7 +94,14 @@ def main():
     for prd, siz, nm in psql(e, f"""
       SELECT ps.prd_cd, ps.siz_cd, COALESCE(s.siz_nm,'') FROM t_prd_product_sizes ps
       LEFT JOIN t_siz_sizes s ON s.siz_cd=ps.siz_cd
-      WHERE ps.prd_cd BETWEEN '{a.lo}' AND '{a.hi}' ORDER BY ps.prd_cd, s.siz_nm;"""):
+      WHERE ps.prd_cd BETWEEN '{a.lo}' AND '{a.hi}'
+        -- [HARD] 삭제·미사용 행을 빼지 않으면 팔지 않는 사이즈를 API 에 넣게 되고,
+        -- 그 price_gap 을 결함으로 오독한다(AC-PC-003). 실제로 그렇게 「고아 18종」이
+        -- 나왔고 위젯은 그 사이즈를 선택지로 내놓지도 않았다 — 도달 불가였다.
+        -- 바로 아래 자재 질의는 이 필터를 걸고 있었다. 사이즈만 빠져 있었다.
+        AND COALESCE(ps.del_yn,'N') <> 'Y'
+        AND COALESCE(s.use_yn,'Y') = 'Y' AND COALESCE(s.del_yn,'N') <> 'Y'
+      ORDER BY ps.prd_cd, s.siz_nm;"""):
         sizes.setdefault(prd, []).append((siz, nm))
     for prd, mat, nm in psql(e, f"""
       SELECT pm.prd_cd, pm.mat_cd, COALESCE(m.mat_nm,'') FROM t_prd_product_materials pm
