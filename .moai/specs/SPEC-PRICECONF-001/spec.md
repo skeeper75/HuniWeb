@@ -2,7 +2,7 @@
 id: SPEC-PRICECONF-001
 title: "게시 상품 전량 가격 정합 — 5소스 대조 절차 확립"
 version: "0.1.0"
-status: draft
+status: in-progress
 created: 2026-08-28
 updated: 2026-08-28
 author: 지니
