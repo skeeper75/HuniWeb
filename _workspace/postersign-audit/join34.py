@@ -74,6 +74,56 @@ ORDER BY 1, 2, 3
 """
 
 
+# 축① — 공식이 요구하는 차원 ↔ 상품뷰어가 보유한 차원 (REQ-PC-009)
+#
+# 초판은 이것을 「공식 바인딩·구성요소·단가행이 있는가」로 재고 28/28 PASS 를 냈다.
+# 그것은 REQ-PC-009 이 요구하는 **대조**가 아니다. 요구 차원을 실제로 뽑아 보유분과 맞춘다.
+#
+# 보유 판정은 살아있는 행만 센다(AC-PC-003) — 삭제행을 보유로 세면 M4-14 와 같은 오판이 난다.
+SQL_AXIS1 = """
+WITH req AS (
+  SELECT DISTINCT ppf.prd_cd, jsonb_array_elements_text(pc.use_dims::jsonb) AS k
+  FROM t_prd_product_price_formulas ppf
+  JOIN t_prc_formula_components fc ON fc.frm_cd = ppf.frm_cd
+  JOIN t_prc_price_components pc   ON pc.comp_cd = fc.comp_cd
+                                  AND COALESCE(pc.del_yn,'N') <> 'Y'
+  WHERE ppf.prd_cd BETWEEN :LO AND :HI
+)
+SELECT r.prd_cd, r.k,
+  CASE
+    -- 사이즈 축: 뷰어가 파는(삭제 아닌) 사이즈를 보유해야 한다
+    WHEN r.k = 'siz_cd' THEN (SELECT COUNT(*) FROM t_prd_product_sizes x
+        JOIN t_siz_sizes s ON s.siz_cd = x.siz_cd AND COALESCE(s.use_yn,'Y')='Y'
+                          AND COALESCE(s.del_yn,'N')<>'Y'
+        WHERE x.prd_cd = r.prd_cd AND COALESCE(x.del_yn,'N')<>'Y')
+    -- 자재 축
+    WHEN r.k = 'mat_cd' THEN (SELECT COUNT(*) FROM t_prd_product_materials x
+        WHERE x.prd_cd = r.prd_cd AND COALESCE(x.del_yn,'N')<>'Y')
+    -- 옵션 축
+    WHEN r.k = 'opt_cd' THEN (SELECT COUNT(*) FROM t_prd_product_options x
+        WHERE x.prd_cd = r.prd_cd AND COALESCE(x.del_yn,'N')<>'Y'
+          AND COALESCE(x.use_yn,'Y')='Y')
+    -- 특정 옵션그룹을 지목한 축: 그 그룹을 보유해야 한다
+    WHEN r.k LIKE 'opt_grp:%' THEN (SELECT COUNT(*) FROM t_prd_product_option_groups x
+        WHERE x.prd_cd = r.prd_cd AND x.opt_grp_cd = split_part(r.k, ':', 2)
+          AND COALESCE(x.del_yn,'N')<>'Y' AND COALESCE(x.use_yn,'Y')='Y')
+    -- 판형 축
+    WHEN r.k = 'plt_siz_cd' THEN (SELECT COUNT(*) FROM t_prd_product_plate_sizes x
+        WHERE x.prd_cd = r.prd_cd AND COALESCE(x.del_yn,'N')<>'Y')
+    -- 사용자 입력 치수·수량은 **뷰어 보유물이 아니다**. 고객이 값을 입력하는 축이라
+    -- 뷰어에 대응 행이 존재하지 않는 것이 정상이며, 대조 대상에서 제외한다.
+    --   [반증 기록] 초판은 siz_width/siz_height 를 「제약규칙 보유」로 매핑해 9건 FAIL 을 냈다.
+    --   그러나 PRD_000119 는 실화면 「제약 규칙 (0)」인데 축④ 가격이 정상으로 나오고,
+    --   PRD_000138 은 제약규칙 없이도 「사이즈 범위 초과」가 발동했다 — 범위 강제는
+    --   t_prd_product_constraints 에서만 오지 않는다. 매핑이 틀렸던 것이지 데이터 결함이 아니다.
+    WHEN r.k IN ('siz_width','siz_height','min_qty') THEN 1
+    ELSE -1                      -- 매핑 미정 키. 침묵하지 않고 드러낸다
+  END AS have
+FROM req r
+ORDER BY 1, 2
+"""
+
+
 def env():
     e = dict(os.environ)
     with open(os.path.join(ROOT, '.env.local'), encoding='utf-8') as f:
@@ -107,6 +157,11 @@ def axis12(lo, hi):
     wiring = sql(SQL_WIRING, lo, hi)
     orphan = sql(SQL_ORPHAN, lo, hi)
 
+    # 축① — 요구 차원별 보유 여부 (REQ-PC-009)
+    dims = collections.defaultdict(list)
+    for prd, key, have in sql(SQL_AXIS1, lo, hi):
+        dims[prd].append((key, int(have)))
+
     # 고아는 단위가 둘이고 값이 다르다 — 하나만 적으면 다음 사람이 같은 자리에서 헷갈린다.
     #   배선단위 (comp × siz) : 채워야 할 단가행 수. 한 상품에 siz_cd 축 구성요소가
     #                           둘이면(완제품가 + 옵션 추가가격) 같은 사이즈가 두 번 센다.
@@ -128,17 +183,24 @@ def axis12(lo, hi):
     for prd, rows in by_prd.items():
         comps = [r for r in rows if r[3]]                       # fc.comp_cd 가 있는 행
         dangling = [r for r in comps if not r[6]]               # fc 는 있는데 pc 가 없다
-        priced = [r for r in comps if r[6] and int(r[9]) > 0]
 
-        # 축① 구성요소 존재 — 공식이 있고, 구성요소가 실재하고, 단가행이 붙어 있는가
+        # 축① 구성요소 존재 (REQ-PC-009) — 공식이 요구하는 차원을 뷰어가 보유하는가.
+        # 배선 유무가 아니라 **요구 ↔ 보유 대조**다. 초판은 이 대조를 하지 않았다.
+        req = dims.get(prd, [])
+        missing = [k for k, n in req if n == 0]
+        unmapped = [k for k, n in req if n < 0]
         if not comps:
-            a1, a1b = 'FAIL', '공식에 구성요소 0건'
+            a1, a1b = 'FAIL', '공식에 구성요소 0건 — 요구 차원을 구할 수 없다'
         elif dangling:
             a1, a1b = 'FAIL', f'구성요소 참조 끊김 {len(dangling)}건'
-        elif not priced:
-            a1, a1b = 'FAIL', f'단가행 붙은 구성요소 0건(구성요소 {len(comps)})'
+        elif not req:
+            a1, a1b = 'UNVERIFIED', 'use_dims 비어 있음 — 요구 차원 미상'
+        elif unmapped:
+            a1, a1b = 'UNVERIFIED', f'매핑 미정 차원 {", ".join(unmapped)}'
+        elif missing:
+            a1, a1b = 'FAIL', f'요구 {len(req)}종 중 미보유 {len(missing)}: {", ".join(missing)}'
         else:
-            a1, a1b = 'PASS', f'구성요소 {len(comps)} · 단가행 보유 {len(priced)}'
+            a1, a1b = 'PASS', f'요구 {len(req)}종 전부 보유 ({", ".join(k for k, _ in req)})'
 
         # 축② 가격 배선 — AC-PC-010 이 요구하는 네 항목을 각각 판정한다
         s_main = 'PASS' if comps else 'FAIL'
