@@ -1,0 +1,29 @@
+prd_cd,prd_nm,use_dims,uses_opt_axis,csv_combo,need_min,need_max,missed_min,missed_max,note
+PRD_000118,아트프린트포스터,"[""siz_width"", ""siz_height"", ""min_qty""]",N,3,3,3,0,0,
+PRD_000119,아트페이퍼포스터,"[""siz_width"", ""siz_height""]",N,3,3,3,0,0,
+PRD_000120,방수포스터,"[""siz_width"", ""siz_height"", ""min_qty""]",N,3,3,3,0,0,
+PRD_000121,접착방수포스터,"[""siz_width"", ""siz_height"", ""min_qty""]",N,3,3,3,0,0,
+PRD_000122,접착투명포스터,"[""siz_width"", ""siz_height""]",N,3,3,3,0,0,
+PRD_000123,아트패브릭포스터,"[""siz_width"", ""siz_height"", ""min_qty""]",N,3,3,3,0,0,소재(OPT_000236) x1 가격무관
+PRD_000124,린넨패브릭포스터,"[""opt_cd"", ""min_qty""] [""siz_width"", ""siz_height""]",Y,6,30,30,24,24,마감(OPT_000096) 필수 x5
+PRD_000125,캔버스패브릭포스터,"[""siz_width"", ""siz_height"", ""min_qty""]",N,6,6,6,0,0,가공(OPT_000099) x2 가격무관
+PRD_000126,레더아트프린트,"[""siz_width"", ""siz_height"", ""min_qty""]",N,3,3,3,0,0,
+PRD_000127,타이벡프린트,"[""siz_width"", ""siz_height"", ""min_qty""]",N,6,6,6,0,0,
+PRD_000128,메쉬프린트,"[""siz_width"", ""siz_height"", ""min_qty""]",N,3,3,3,0,0,
+PRD_000129,폼보드,"[""mat_cd"", ""siz_cd""]",N,8,8,8,0,0,보드칼라(OPT_000281) x2 가격무관
+PRD_000130,포맥스보드,"[""mat_cd"", ""siz_cd""]",N,8,8,8,0,0,보드두께(OPT_000282) x2 가격무관
+PRD_000131,프레임리스우드액자,"[""siz_cd"", ""min_qty""]",N,2,2,2,0,0,
+PRD_000132,레더아트액자,"[""siz_cd"", ""min_qty""]",N,6,6,6,0,0,
+PRD_000133,캔버스 행잉포스터,"[""opt_cd"", ""siz_cd"", ""opt_grp:OPT_000283""] [""siz_width"", ""siz_height"", ""min_qty"", ""siz_cd""]",Y,3,3,6,0,3,마감(OPT_000102) x1 가격무관; 부자재(OPT_000283) 선택 x1+미선택
+PRD_000134,린넨우드봉족자,"[""opt_cd"", ""siz_cd"", ""opt_grp:OPT_000266""] [""siz_cd"", ""min_qty""]",Y,3,3,6,0,3,마감(OPT_000108) x1 가격무관; 부자재(OPT_000266) 선택 x1+미선택
+PRD_000135,족자포스터,"[""siz_cd"", ""min_qty""]",N,5,5,5,0,0,가공(OPT_000268) x2 가격무관
+PRD_000136,PET배너,"[""siz_cd"", ""min_qty""]",N,1,1,1,0,0,
+PRD_000137,메쉬배너,"[""siz_cd"", ""min_qty""]",N,1,1,1,0,0,
+PRD_000138,일반현수막,"[""opt_cd"", ""min_qty"", ""opt_grp:OPT_000003""] [""opt_cd"", ""min_qty"", ""opt_grp:OPT_000004""] [""siz_width"", ""siz_height"", ""min_qty""]",Y,1,6,30,5,29,가공(OPT_000003) 필수 x6; 부자재(OPT_000004) 선택 x4+미선택
+PRD_000139,메쉬현수막,"[""opt_cd"", ""min_qty"", ""opt_grp:OPT_000023""] [""opt_cd"", ""min_qty"", ""opt_grp:OPT_000285""] [""siz_width"", ""siz_height"", ""min_qty""]",Y,3,12,36,9,33,부자재(OPT_000023) 선택 x2+미선택; 가공(OPT_000285) 필수 x4
+PRD_000140,무광시트커팅,"[""siz_cd""]",N,6,6,6,0,0,
+PRD_000141,홀로그램 시트커팅,"[""siz_cd""]",N,3,3,3,0,0,
+PRD_000142,유광아크릴스티커,"[""siz_cd""]",N,8,8,8,0,0,
+PRD_000143,미러아크릴스티커,"[""siz_cd""]",N,8,8,8,0,0,
+PRD_000144,미니보드스탠딩,"[""siz_cd"", ""min_qty""]",N,3,3,3,0,0,
+PRD_000145,미니배너,"[""siz_cd"", ""min_qty""]",N,2,2,2,0,0,거치대(OPT_000286) x1 가격무관
