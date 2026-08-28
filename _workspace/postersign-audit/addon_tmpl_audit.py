@@ -131,6 +131,24 @@ def load_authority():
         if p == 0:
             continue                       # 「거치대없음 0」은 옵션 부재이지 단가가 아니다
         rows.append(dict(row=f'가격표!포스터사인!{r}', name=nm2, spec=nm2, price=p))
+
+    # ③ 굿즈류(워터북보틀·규조토코스터 등)의 권위는 상품마스터 「굿즈파우치(가격포함)」.
+    #    c4 상품명(병합) / c5 사양 / c18 가격.
+    ws3 = wb['굿즈파우치(가격포함)']
+    cur3 = ''
+    for r, row in enumerate(ws3.iter_rows(values_only=True), 1):
+        nm3 = (str(row[3]).strip() if len(row) > 3 and row[3] is not None else '')
+        spec3 = (str(row[4]).strip() if len(row) > 4 and row[4] is not None else '')
+        val = row[17] if len(row) > 17 else None
+        if nm3:
+            cur3 = nm3                     # 병합셀 forward-fill
+        if not cur3 or not spec3 or val in (None, ''):
+            continue
+        try:
+            p = float(str(val).replace(',', ''))
+        except ValueError:
+            continue
+        rows.append(dict(row=f'굿즈파우치!{r}', name=cur3, spec=spec3, price=p))
     return rows
 
 
