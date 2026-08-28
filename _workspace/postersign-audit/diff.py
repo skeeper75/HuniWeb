@@ -152,8 +152,38 @@ def label_kind(v):
 
 
 def cell_key(row_label, col_label):
-    """(종류, 값) 쌍 2개를 집합으로. 축 이름 순서에 의존하지 않는다."""
+    """(종류, 값) 쌍 2개를 집합으로. 축 이름 순서에 의존하지 않는다.
+
+    [주의] 무순서 집합이라 **전치를 못 잡는다.** 두 축이 같은 종류(둘 다 'mm')면
+    (가로1400, 세로900) 과 (가로900, 세로1400) 이 같은 키가 된다. 실제로 이 맹점 때문에
+    포스터·현수막 13상품의 가로/세로 전치 적재가 축③ PASS 로 통과했다(M4-16).
+    순서 의존으로 되돌리면 M4-3 의 「축 이름 순서 가정」 오판이 되살아나므로,
+    매칭은 이대로 두고 **방향은 axis_orient() 로 따로 검사한다.**
+    """
     return frozenset([label_kind(row_label), label_kind(col_label)])
+
+
+def axis_orient(row_label, col_label, live_row):
+    """권위 (가로=row, 세로=col) 와 라이브 (siz_width, siz_height) 의 방향을 대조한다.
+
+    반환: 'ok' | 'transposed' | None(검사 대상 아님)
+
+    검사 대상은 **두 축이 모두 치수(mm)이고 값이 서로 다른** 셀뿐이다.
+    가로=세로인 대각선 셀은 전치돼 있어도 구분되지 않으므로 판정하지 않는다 —
+    구분 못 하는 것을 ok 로 세면 전치가 그만큼 묻힌다.
+    """
+    kr, kc = label_kind(row_label), label_kind(col_label)
+    if kr[0] != 'mm' or kc[0] != 'mm':
+        return None
+    g, s = num(kr[1]), num(kc[1])
+    w, h = num(live_row.get('siz_width')), num(live_row.get('siz_height'))
+    if None in (g, s, w, h) or g == s:
+        return None
+    if (w, h) == (g, s):
+        return 'ok'
+    if (w, h) == (s, g):
+        return 'transposed'
+    return None
 
 
 def norm_name(s):
@@ -263,7 +293,8 @@ def main():
     for r in live:
         if r['kind'] != 'main' or not r['unit_price']:
             continue
-        live_cells[r['prd_cd']].append((live_key(r), num(r['unit_price'])))
+        # 원본 행을 함께 들고 간다 — 방향 검사(axis_orient)가 siz_width/siz_height 를 봐야 한다.
+        live_cells[r['prd_cd']].append((live_key(r), num(r['unit_price']), r))
 
     findings = collections.defaultdict(list)     # verdict -> rows
     matched = collections.Counter()
@@ -280,12 +311,29 @@ def main():
         seen_anywhere = False
         for p in prds:
             # 부분집합 매칭: 권위 축 ⊆ 라이브 축
-            got = [(i, pr) for i, (lk, pr) in enumerate(live_cells[p]) if k <= lk]
+            got = [(i, pr, lr) for i, (lk, pr, lr) in enumerate(live_cells[p]) if k <= lk]
             if not got:
                 continue
             seen_anywhere = True
-            consumed[p].update(i for i, _ in got)
-            prices = [pr for _, pr in got]
+            consumed[p].update(i for i, _, _ in got)
+            prices = [pr for _, pr, _ in got]
+
+            # 값이 맞아도 축 방향이 뒤집혔을 수 있다 — 무순서 키는 그것을 통과시킨다.
+            #
+            # [함정] 키가 무순서라 got 에는 **양쪽 방향이 모두** 걸린다. 권위에
+            # (가로600,세로800) 과 (가로800,세로600) 이 둘 다 있으면 라이브에도 둘 다 있고,
+            # 그중 반대 방향 행 하나만 보고 전치로 찍으면 정상 격자를 전건 오탐한다
+            # (실제로 교정 후 146건 오탐이 났다).
+            # 따라서 **바른 방향 행이 하나도 없을 때만** 전치로 판정한다.
+            orients = [axis_orient(a['row_label'], a['col_label'], lr) for _, _, lr in got]
+            if 'ok' not in orients and 'transposed' in orients:
+                lr = next(lr for (_, _, lr), o in zip(got, orients) if o == 'transposed')
+                findings['TRANSPOSED'].append(
+                    (p, live_prd[p], a['block'],
+                     f"권위 가로{a['row_label']}×세로{a['col_label']}",
+                     f"라이브 가로{lr['siz_width']}×세로{lr['siz_height']}",
+                     want, [lr['unit_price']]))
+
             if want in prices:
                 matched[p] += 1
             else:
@@ -306,7 +354,7 @@ def main():
         rest = frozenset((t, v) for t, v in k if t != 'txt')
         best = None
         for p in prds:
-            for i, (lk, pr) in enumerate(live_cells[p]):
+            for i, (lk, pr, _lr) in enumerate(live_cells[p]):
                 if not rest <= lk:                       # 사이즈·수량 축이 먼저 맞아야 한다
                     continue
                 if i in consumed[p]:
@@ -333,7 +381,7 @@ def main():
     for p, cells in live_cells.items():
         if p not in {q for prds in block2prd.values() for q in prds}:
             continue                       # 권위 블록이 대응되지 않은 상품은 판정 보류
-        for i, (lk, pr) in enumerate(cells):
+        for i, (lk, pr, _lr) in enumerate(cells):
             if i not in consumed[p]:
                 findings['EXTRA'].append((p, live_prd[p], '', sorted(lk), '', None, [pr]))
 
@@ -350,10 +398,11 @@ def main():
     print(f'\n{"판정":<9}{"건수":>5}')
     print('-' * 74)
     print(f'{"일치":<9}{sum(matched.values()):>5}')
-    for v in ('VALUE', 'CANDIDATE', 'MISSING', 'EXTRA', 'UNRESOLVED'):
+    for v in ('VALUE', 'TRANSPOSED', 'CANDIDATE', 'MISSING', 'EXTRA', 'UNRESOLVED'):
         print(f'{v:<11}{len(findings[v]):>5}')
 
-    for v, title in (('VALUE', '값 불일치 — 권위·라이브 둘 다 있는데 값이 다름 (8/22 감사가 못 잡는 유형)'),
+    for v, title in (('TRANSPOSED', '축 방향 전치 — 값은 맞아도 가로/세로가 뒤바뀌어 적재됨 (무순서 키가 통과시키는 유형)'),
+                     ('VALUE', '값 불일치 — 권위·라이브 둘 다 있는데 값이 다름 (8/22 감사가 못 잡는 유형)'),
                      ('CANDIDATE', '후보 — 자재명이 흩어져 있어 기계로 확정 못 함. **사람 확정 필요**, 결함 단정 아님'),
                      ('MISSING', '권위에만 있음 — 라이브 미적재 (상품뷰어가 그 상품을 보유할 때만 결함)'),
                      ('EXTRA', '라이브에만 있음 — 권위 근거 없는 단가'),
@@ -374,6 +423,41 @@ def main():
                     print(f'      {r[2]} [{r[3]} × {r[4]}]  권위={r[5]}  라이브={r[6]}')
             if len(by_p[p]) > 6:
                 print(f'      … 외 {len(by_p[p]) - 6}건')
+
+    # ── 축 구간집합 대조 (블록 단위) ─────────────────────────────────────────
+    # 셀 단위 방향 검사(TRANSPOSED)는 권위에 (가로A,세로B)와 (가로B,세로A)가 **둘 다**
+    # 있는 셀에서 판정 불가다 — 전치돼 있든 아니든 라이브 행 집합이 같기 때문이다.
+    # 축의 **구간 집합**을 통째로 비교하면 그 모호함을 받지 않는다: 라이브 가로 구간이
+    # 권위 세로 구간과 같고 라이브 세로 구간이 권위 가로 구간과 같으면 전치가 확정된다.
+    print('\n■ 축 구간집합 대조 (블록 단위 — 셀 단위 판정 불가 구간까지 덮는다)')
+    axis_bad = 0
+    for block in sorted(block2prd):
+        a_w = {num(label_kind(a['row_label'])[1]) for a in auth
+               if a['block'] == block and a['kind'] == 'main'
+               and label_kind(a['row_label'])[0] == 'mm'}
+        a_h = {num(label_kind(a['col_label'])[1]) for a in auth
+               if a['block'] == block and a['kind'] == 'main'
+               and label_kind(a['col_label'])[0] == 'mm'}
+        if not a_w or not a_h or a_w == a_h:
+            continue                      # 치수 격자가 아니거나 두 축이 같으면 판정 대상 아님
+        for p in block2prd[block]:
+            l_w = {num(r['siz_width']) for r in live
+                   if r['prd_cd'] == p and r['kind'] == 'main' and num(r['siz_width'])}
+            l_h = {num(r['siz_height']) for r in live
+                   if r['prd_cd'] == p and r['kind'] == 'main' and num(r['siz_height'])}
+            if not l_w or not l_h:
+                continue
+            if (l_w, l_h) == (a_w, a_h):
+                continue                  # 정상
+            if (l_w, l_h) == (a_h, a_w):
+                axis_bad += 1
+                print(f'  ❌ 전치 {p} {live_prd[p]:<16} '
+                      f'가로 권위{len(a_w)}구간(~{max(a_w):.0f}) ↔ 라이브{len(l_w)}구간(~{max(l_w):.0f})')
+            else:
+                print(f'  ⚠ 구간 불일치 {p} {live_prd[p]:<16} '
+                      f'권위 가로{len(a_w)}·세로{len(a_h)} vs 라이브 가로{len(l_w)}·세로{len(l_h)}')
+    if not axis_bad:
+        print('  ✅ 전치 0건')
 
     print(f'\n■ 추가상품 템플릿 경로 — 라이브 {len(addons)}행 / 권위 추가옵션 {len(auth_addon)}셀')
     for r in addons:
