@@ -1,0 +1,418 @@
+<title>포스터사인 가격 배선 점검</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+
+<style>
+:root{
+  --ground:#EEF2F3; --surface:#FFFFFF; --surface-2:#F6F9FA;
+  --ink:#132029; --ink-2:#3C4F5B; --muted:#677C88;
+  --line:#D3DDE1; --line-soft:#E4EBEE;
+  --accent:#0E7C90; --accent-soft:#D8ECF0;
+  --crit:#A81038; --crit-soft:#FBE3E9;
+  --warn:#9A6206; --warn-soft:#FAEEDA;
+  --ok:#276B4E; --ok-soft:#DDEEE5;
+  --hyp:#5B4B96; --hyp-soft:#E9E5F5;
+  --sans:"IBM Plex Sans KR",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#0D1418; --surface:#141F25; --surface-2:#18242B;
+    --ink:#E4EDF1; --ink-2:#B4C5CE; --muted:#879BA6;
+    --line:#26353D; --line-soft:#1E2C33;
+    --accent:#41B4CB; --accent-soft:#0F3138;
+    --crit:#FF6C88; --crit-soft:#3A1420;
+    --warn:#E2A63F; --warn-soft:#33260E;
+    --ok:#54C293; --ok-soft:#102E22;
+    --hyp:#A99BE0; --hyp-soft:#221D38;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0D1418; --surface:#141F25; --surface-2:#18242B;
+  --ink:#E4EDF1; --ink-2:#B4C5CE; --muted:#879BA6;
+  --line:#26353D; --line-soft:#1E2C33;
+  --accent:#41B4CB; --accent-soft:#0F3138;
+  --crit:#FF6C88; --crit-soft:#3A1420;
+  --warn:#E2A63F; --warn-soft:#33260E;
+  --ok:#54C293; --ok-soft:#102E22;
+  --hyp:#A99BE0; --hyp-soft:#221D38;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:var(--sans); font-size:15px; line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1040px; margin:0 auto; padding:40px 24px 96px; display:flex; flex-direction:column; gap:40px}
+
+.masthead{display:flex; flex-direction:column; gap:14px; padding-bottom:28px; border-bottom:2px solid var(--ink)}
+.eyebrow{
+  font-family:var(--mono); font-size:11.5px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--accent); font-weight:600;
+}
+h1{
+  margin:0; font-size:clamp(30px,5vw,44px); line-height:1.15; font-weight:700;
+  letter-spacing:-.02em; text-wrap:balance;
+}
+.standfirst{margin:0; max-width:62ch; color:var(--ink-2); font-size:16.5px}
+.meta{
+  display:flex; flex-wrap:wrap; gap:6px 20px; font-family:var(--mono);
+  font-size:12px; color:var(--muted);
+}
+.meta b{font-weight:500; color:var(--ink-2)}
+
+.figures{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:1px;
+  background:var(--line); border:1px solid var(--line); border-radius:4px; overflow:hidden;
+}
+.fig{background:var(--surface); padding:16px 18px; display:flex; flex-direction:column; gap:3px}
+.fig dt{font-size:11.5px; font-family:var(--mono); letter-spacing:.06em; color:var(--muted); text-transform:uppercase}
+.fig dd{
+  margin:0; font-size:27px; font-weight:600; letter-spacing:-.02em;
+  font-variant-numeric:tabular-nums;
+}
+.fig dd small{font-size:13px; font-weight:400; color:var(--muted); margin-left:3px}
+.fig[data-tone="crit"] dd{color:var(--crit)}
+.fig[data-tone="warn"] dd{color:var(--warn)}
+.fig[data-tone="ok"] dd{color:var(--ok)}
+
+.band{display:flex; flex-direction:column; gap:20px}
+.band-head{display:flex; flex-direction:column; gap:7px; padding-left:14px; border-left:4px solid var(--tone,var(--accent))}
+.band-tag{
+  display:inline-flex; align-self:flex-start; align-items:center; gap:7px;
+  font-family:var(--mono); font-size:11px; font-weight:600; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--tone,var(--accent)); background:var(--tone-soft,var(--accent-soft));
+  padding:4px 9px; border-radius:3px;
+}
+.band-tag::before{content:""; width:7px; height:7px; border-radius:50%; background:currentColor; flex:none}
+h2{margin:0; font-size:23px; font-weight:700; letter-spacing:-.015em; text-wrap:balance}
+.band-note{margin:0; color:var(--ink-2); max-width:66ch}
+
+.band[data-tone="crit"]{--tone:var(--crit); --tone-soft:var(--crit-soft)}
+.band[data-tone="warn"]{--tone:var(--warn); --tone-soft:var(--warn-soft)}
+.band[data-tone="hyp"]{--tone:var(--hyp); --tone-soft:var(--hyp-soft)}
+.band[data-tone="ok"]{--tone:var(--ok); --tone-soft:var(--ok-soft)}
+
+.card{
+  background:var(--surface); border:1px solid var(--line); border-radius:5px;
+  border-left:4px solid var(--tone,var(--accent));
+  padding:22px 24px; display:flex; flex-direction:column; gap:16px;
+}
+.card-head{display:flex; flex-wrap:wrap; align-items:baseline; gap:10px 14px}
+h3{margin:0; font-size:17.5px; font-weight:600; letter-spacing:-.01em}
+.code{font-family:var(--mono); font-size:12.5px; color:var(--muted)}
+.card p{margin:0; color:var(--ink-2); max-width:70ch}
+.card p strong{color:var(--ink); font-weight:600}
+
+.scroll{overflow-x:auto; border:1px solid var(--line-soft); border-radius:4px}
+table{border-collapse:collapse; width:100%; font-size:13.5px}
+caption{
+  caption-side:top; text-align:left; padding:10px 12px; font-family:var(--mono);
+  font-size:11.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted);
+  background:var(--surface-2); border-bottom:1px solid var(--line-soft);
+}
+th,td{padding:8px 12px; text-align:left; border-bottom:1px solid var(--line-soft); white-space:nowrap}
+thead th{
+  background:var(--surface-2); font-family:var(--mono); font-size:11px; font-weight:600;
+  letter-spacing:.06em; text-transform:uppercase; color:var(--muted);
+}
+tbody tr:last-child td{border-bottom:none}
+.num{text-align:right; font-family:var(--mono); font-variant-numeric:tabular-nums}
+.bad{color:var(--crit); font-weight:600}
+.good{color:var(--ok)}
+.dim{color:var(--muted)}
+.mono{font-family:var(--mono); font-size:12.5px}
+
+.chain{
+  font-family:var(--mono); font-size:12.5px; line-height:1.85; margin:0;
+  background:var(--surface-2); border:1px solid var(--line-soft); border-radius:4px;
+  padding:16px 18px; overflow-x:auto; white-space:pre; color:var(--ink-2);
+}
+.chain b{color:var(--crit); font-weight:600}
+.chain i{color:var(--ok); font-style:normal; font-weight:600}
+
+ul.tight{margin:0; padding-left:1.15em; display:flex; flex-direction:column; gap:7px; color:var(--ink-2); max-width:70ch}
+ul.tight strong{color:var(--ink); font-weight:600}
+ul.tight code{font-family:var(--mono); font-size:12.5px; color:var(--accent)}
+
+.callout{
+  background:var(--tone-soft,var(--accent-soft)); border-radius:4px;
+  padding:14px 16px; font-size:14px; color:var(--ink);
+  display:flex; flex-direction:column; gap:6px;
+}
+.callout .lbl{
+  font-family:var(--mono); font-size:11px; font-weight:600; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--tone,var(--accent));
+}
+.callout p{margin:0; color:var(--ink-2); max-width:68ch}
+
+footer{
+  border-top:1px solid var(--line); padding-top:22px; display:flex; flex-direction:column; gap:10px;
+  font-size:13px; color:var(--muted);
+}
+footer p{margin:0; max-width:70ch}
+footer code{font-family:var(--mono); font-size:12px; color:var(--ink-2)}
+
+@media (max-width:620px){
+  th,td{white-space:normal}
+  .wrap{padding:28px 16px 64px; gap:32px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important}}
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="eyebrow">가격표 260822_1 · 포스터사인 시트</div>
+    <h1>포스터사인 가격 배선 점검</h1>
+    <p class="standfirst">권위 엑셀 26개 상품 블록을 결정론 파서로 격자화해 라이브 DB의 가격공식·구성요소·단가행과 셀 단위로 맞췄다. 확정 결함은 고객 위젯 실가격으로 재현했고, 재현하지 못한 것은 가설로 남겨 두었다.</p>
+    <div class="meta">
+      <span>실측 <b>2026-08-28</b></span>
+      <span>엑셀 <b>788셀</b> (본품 760 · 추가옵션 28)</span>
+      <span>라이브 <b>28상품 / 785행</b></span>
+      <span>DB <b>읽기 전용</b> · 교정 미적용</span>
+    </div>
+  </header>
+
+  <dl class="figures">
+    <div class="fig" data-tone="crit"><dt>실측 재현 결함</dt><dd>2</dd></div>
+    <div class="fig" data-tone="ok"><dt>미적재</dt><dd>0</dd></div>
+    <div class="fig" data-tone="warn"><dt>가격 미검토 게시</dt><dd>131<small>/193</small></dd></div>
+    <div class="fig"><dt>정리 대상</dt><dd>28</dd></div>
+    <div class="fig"><dt>미검증 가설</dt><dd>4<small>묶음</small></dd></div>
+  </dl>
+
+  <section class="band" data-tone="warn">
+    <div class="band-head">
+      <span class="band-tag">정정 2026-08-28</span>
+      <h2>이 점검이 처음에 틀렸던 것</h2>
+      <p class="band-note">초판은 「미적재 4건」을 결함으로 셌다. 그 판정은 철회한다. 기준이 틀렸고, 무엇이 틀렸는지가 이 점검에서 가장 값진 소득이다.</p>
+    </div>
+    <article class="card" style="--tone:var(--warn)">
+      <p><strong>운영 실체는 엑셀이 아니라 상품뷰어다.</strong> 엑셀에 값이 있어도 상품뷰어에 등록돼 있지 않거나 <span class="mono">use_yn='N'</span> / <span class="mono">del_yn='Y'</span> 이면 그것은 팔지 않는 것이고, 결함으로 세지 않는다. 이 기준을 적용하니 미적재 4건이 모두 사라졌다.</p>
+      <div class="scroll">
+        <table>
+          <caption>철회된 판정 4건</caption>
+          <thead><tr><th>초판 판정</th><th>실제</th></tr></thead>
+          <tbody>
+            <tr><td>폼보드 A1 미적재</td><td>상품뷰어에 A1 사이즈가 없다 — 팔지 않는 규격</td></tr>
+            <tr><td>포맥스보드 A1 미적재</td><td>동일</td></tr>
+            <tr><td>프레임리스우드액자 A1 미적재</td><td>동일</td></tr>
+            <tr><td>족자포스터 천정형고리 미적재</td><td><strong>적재돼 있다</strong> — 옵션그룹에서 추가상품 템플릿 <span class="mono">TMPL-000096</span> 으로 이관됐고 6,500원이 들어가 있다. 대조 스크립트가 공식 경로만 보고 템플릿 경로를 안 봤다</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout" style="--tone:var(--warn); --tone-soft:var(--warn-soft)">
+        <span class="lbl">A1 3건에 대해 확인한 것</span>
+        <p>A1 부재가 의도적 철수인지 사고인지는 따로 조사했고, <strong>개편 중 유실</strong>로 판명됐다 — 폼보드는 2026-06-23에 A1 단가행 20,000원을 실제로 등록했다가 07-01 구성요소 축 개편에서 이관하지 못했다. 다만 <strong>지금 상품뷰어에 없으므로 이 점검의 결함 집계에는 넣지 않는다.</strong> 되살릴지는 판매 정책 결정이지 데이터 정합 문제가 아니다.</p>
+      </div>
+    </article>
+  </section>
+
+  <section class="band" data-tone="crit">
+    <div class="band-head">
+      <span class="band-tag">실측 재현됨</span>
+      <h2>돈이 지금 새고 있는 두 건</h2>
+      <p class="band-note">둘 다 고객 위젯의 실제 가격 응답으로 재현했다. 아래 숫자는 계산이 아니라 관측값이다. 엔진이 적재값을 공급가로 보고 부가세 10%를 얹으므로 표는 공급가 기준이다.</p>
+    </div>
+
+    <article class="card" style="--tone:var(--crit)">
+      <div class="card-head">
+        <h3>캔버스 행잉포스터 — 본품이 공식에 없고, 옵션이 두 번 더해진다</h3>
+        <span class="code">PRD_000133 · PRF_POSTER_CANVAS_HANGING</span>
+      </div>
+      <p>공식에 붙은 구성요소 두 개가 <strong>둘 다 우드행거 값</strong>이다. 본품 구성요소는 엑셀과 정확히 일치하는 단가행 3개를 가진 채 <strong>어느 공식에도 물리지 않은 고아</strong>로 남아 있다. 그 자리를 옵션 구성요소의 복제본이 차지했다.</p>
+      <pre class="chain">PRF_POSTER_CANVAS_HANGING
+ ├─ seq 2  <b>COMP_POSTEROPT_CANVAS_HANGING_WOODHANGER_0</b>  「우드행거 완제품가」
+ │           use_dims [siz_cd, min_qty] — opt_cd 없음 → <b>항상 매칭</b>
+ │           16,000 / 18,000 / 20,000   ← 엑셀 '추가옵션' 값
+ └─ seq —  <b>COMP_POSTEROPT_CANVAS_HANGING_WOODHANGER</b>   「우드행거+면끈 추가가격」
+             use_dims [opt_cd, siz_cd, opt_grp:OPT_000283]
+             16,000 / 18,000 / 20,000   ← 같은 값
+
+ ✕ 공식 어디에도 없음
+   <i>COMP_POSTER_CANVAS_HANGING</i>  「캔버스 행잉포스터 완제품가」  (고아)
+             6,000 / 10,500 / 20,000   ← 엑셀 본품 값, 정확함</pre>
+      <div class="scroll">
+        <table>
+          <caption>위젯 실측 공급가 · 6케이스 전수</caption>
+          <thead><tr><th>사이즈</th><th class="num">출력만 실제</th><th class="num">정답</th><th class="num">부자재 포함 실제</th><th class="num">정답</th><th class="num">차이</th></tr></thead>
+          <tbody>
+            <tr><td>A4</td><td class="num bad">16,000</td><td class="num dim">6,000</td><td class="num bad">32,000</td><td class="num dim">22,000</td><td class="num bad">+10,000</td></tr>
+            <tr><td>A3</td><td class="num bad">18,000</td><td class="num dim">10,500</td><td class="num bad">36,000</td><td class="num dim">28,500</td><td class="num bad">+7,500</td></tr>
+            <tr><td>A2</td><td class="num good">20,000</td><td class="num dim">20,000</td><td class="num good">40,000</td><td class="num dim">40,000</td><td class="num good">0</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout" style="--tone:var(--crit); --tone-soft:var(--crit-soft)">
+        <span class="lbl">이 결함이 여태 안 잡힌 이유</span>
+        <p>A2만 정확히 맞는다. 본품 20,000과 우드행거 20,000이 우연히 같은 값이라 오류가 상쇄된다. A2 하나로 검증하면 통과한다.</p>
+      </div>
+    </article>
+
+    <article class="card" style="--tone:var(--crit)">
+      <div class="card-head">
+        <h3>린넨우드봉족자 — 추가옵션 단가가 한 칸씩 밀렸다</h3>
+        <span class="code">PRD_000134 · COMP_POSTEROPT_LINEN_WOODBONG_WOODBONG</span>
+      </div>
+      <p>본품은 엑셀과 정확히 일치한다. 어긋난 것은 우드봉+면끈 옵션 3행뿐인데, 엑셀의 <span class="mono">[7,000 · 9,800 · 12,000]</span>이 <span class="mono">[12,000 · 7,000 · 9,800]</span>으로 <strong>오른쪽 한 칸 회전</strong>해 들어갔다.</p>
+      <div class="scroll">
+        <table>
+          <caption>단가행 대조 및 위젯 실측 공급가 (부자재 포함 기준)</caption>
+          <thead><tr><th>사이즈</th><th>사이즈코드</th><th class="num">옵션 적재</th><th class="num">엑셀</th><th class="num">실측 합계</th><th class="num">정답 합계</th><th class="num">차이</th></tr></thead>
+          <tbody>
+            <tr><td>A4</td><td class="mono">SIZ_000314</td><td class="num bad">12,000</td><td class="num dim">7,000</td><td class="num bad">18,000</td><td class="num dim">13,000</td><td class="num bad">+5,000</td></tr>
+            <tr><td>A3</td><td class="mono">SIZ_000316</td><td class="num bad">7,000</td><td class="num dim">9,800</td><td class="num bad">15,200</td><td class="num dim">18,000</td><td class="num bad">−2,800</td></tr>
+            <tr><td>A2</td><td class="mono">SIZ_000318</td><td class="num bad">9,800</td><td class="num dim">12,000</td><td class="num bad">25,800</td><td class="num dim">28,000</td><td class="num bad">−2,200</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>A4는 과다청구, A3·A2는 과소청구다. 한 방향으로만 새는 것이 아니라 사이즈마다 방향이 다르다.</p>
+    </article>
+  </section>
+
+  <section class="band" data-tone="warn">
+    <div class="band-head">
+      <span class="band-tag">규모</span>
+      <h2>이 두 건은 예외가 아닐 수 있다</h2>
+      <p class="band-note">게시된 위젯의 활성 버전에 붙은 메모를 세어 봤다.</p>
+    </div>
+    <article class="card" style="--tone:var(--warn)">
+      <div class="scroll">
+        <table>
+          <caption>게시 위젯 193개 활성 버전 메모</caption>
+          <thead><tr><th>메모</th><th class="num">위젯</th></tr></thead>
+          <tbody>
+            <tr><td class="bad">「일괄 게시 — 구성 검토용(가격 미검토)」</td><td class="num bad">131</td></tr>
+            <tr><td class="dim">(메모 없음)</td><td class="num">61</td></tr>
+            <tr><td class="dim">구성원 스코프 고아 정정 재게시</td><td class="num">1</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><strong>게시 상품의 68%가 「가격 미검토」라고 스스로 적힌 채 고객에게 열려 있다.</strong> 위에서 확정한 두 건은 이 131개 중 우연히 살펴본 두 개이며, 둘 다 어떤 가드에도 걸리지 않고 <span class="mono">ok=true</span> 로 통과했다. 표본이 이 비율이라면 개별 교정만으로는 끝나지 않는다.</p>
+    </article>
+  </section>
+
+  <section class="band" data-tone="ok">
+    <div class="band-head">
+      <span class="band-tag">전량 대조</span>
+      <h2>26개 블록 셀 대조</h2>
+      <p class="band-note">엑셀 격자 셀 수와 라이브 단가행 수를 상품별로 맞췄다. 두 가지를 양쪽에서 제외했다 — 엑셀의 0원 셀(「출력만」 류)은 라이브가 행을 만들지 않고 매칭 실패로 0을 내는 관행이고, 상품뷰어에 등록되지 않은 규격(A1)은 팔지 않는 것이므로 분모가 아니다.</p>
+    </div>
+    <article class="card" style="--tone:var(--ok)">
+      <div class="scroll">
+        <table>
+          <caption>기준 교정 후 — 일치 22 · 부족 0 · 초과 4</caption>
+          <thead><tr><th>엑셀 블록</th><th>라이브 상품</th><th class="num">엑셀</th><th class="num">라이브</th><th class="num">Δ</th><th>판정</th></tr></thead>
+          <tbody>
+            <tr><td>아트프린트포스터</td><td class="code">PRD_000118</td><td class="num">52</td><td class="num">52</td><td class="num">0</td><td class="good">일치</td></tr>
+            <tr><td>아트페이퍼포스터</td><td class="code">PRD_000119</td><td class="num">39</td><td class="num">39</td><td class="num">0</td><td class="good">일치</td></tr>
+            <tr><td>방수포스터</td><td class="code">PRD_000120</td><td class="num">52</td><td class="num">52</td><td class="num">0</td><td class="good">일치</td></tr>
+            <tr><td>접착방수포스터</td><td class="code">PRD_000121</td><td class="num">52</td><td class="num">52</td><td class="num">0</td><td class="good">일치</td></tr>
+            <tr><td>접착투명포스터</td><td class="code">PRD_000122</td><td class="num">52</td><td class="num">52</td><td class="num">0</td><td class="good">일치</td></tr>
+            <tr><td>아트패브릭포스터</td><td class="code">PRD_000123</td><td class="num">52</td><td class="num">52</td><td class="num">0</td><td class="good">일치</td></tr>
+            <tr><td>린넨패브릭포스터</td><td class="code">PRD_000124</td><td class="num">52</td><td class="num">56</td><td class="num">+4</td><td class="dim">초과 — 미검증</td></tr>
+            <tr><td>캔버스패브릭포스터</td><td class="code">PRD_000125</td><td class="num">52</td><td class="num">52</td><td class="num">0</td><td class="good">일치</td></tr>
+            <tr><td>레더아트프린트</td><td class="code">PRD_000126</td><td class="num">52</td><td class="num">52</td><td class="num">0</td><td class="good">일치</td></tr>
+            <tr><td>타이벡프린트</td><td class="code">PRD_000127</td><td class="num">52</td><td class="num">52</td><td class="num">0</td><td class="good">일치</td></tr>
+            <tr><td>메쉬프린트</td><td class="code">PRD_000128</td><td class="num">52</td><td class="num">52</td><td class="num">0</td><td class="good">일치</td></tr>
+            <tr><td>폼보드</td><td class="code">PRD_000129</td><td class="num">4</td><td class="num">4</td><td class="num">0</td><td class="dim">A1 제외 후 일치</td></tr>
+            <tr><td>포맥스보드</td><td class="code">PRD_000130</td><td class="num">4</td><td class="num">4</td><td class="num">0</td><td class="dim">A1 제외 후 일치</td></tr>
+            <tr><td>프레임리스우드액자</td><td class="code">PRD_000131</td><td class="num">2</td><td class="num">2</td><td class="num">0</td><td class="dim">A1 제외 후 일치</td></tr>
+            <tr><td>레더아트액자</td><td class="code">PRD_000132</td><td class="num">6</td><td class="num">6</td><td class="num">0</td><td class="good">일치</td></tr>
+            <tr><td>캔버스행잉포스터</td><td class="code">PRD_000133</td><td class="num">6</td><td class="num">6</td><td class="num">0</td><td class="bad">셀 수만 일치 · 값 오류</td></tr>
+            <tr><td>린넨우드봉족자</td><td class="code">PRD_000134</td><td class="num">6</td><td class="num">6</td><td class="num">0</td><td class="bad">셀 수만 일치 · 값 오류</td></tr>
+            <tr><td>족자포스터</td><td class="code">PRD_000135</td><td class="num">6</td><td class="num">6</td><td class="num">0</td><td class="dim">천정고리는 템플릿 경로</td></tr>
+            <tr><td>PET배너</td><td class="code">PRD_000136</td><td class="num">1</td><td class="num">1</td><td class="num">0</td><td class="good">일치</td></tr>
+            <tr><td>메쉬배너</td><td class="code">PRD_000137</td><td class="num">1</td><td class="num">1</td><td class="num">0</td><td class="good">일치</td></tr>
+            <tr><td>일반현수막</td><td class="code">PRD_000138</td><td class="num">86</td><td class="num">90</td><td class="num">+4</td><td class="dim">초과 — 미검증</td></tr>
+            <tr><td>메쉬현수막</td><td class="code">PRD_000139</td><td class="num">51</td><td class="num">53</td><td class="num">+2</td><td class="dim">초과 — 미검증</td></tr>
+            <tr><td>시트커팅 무광·홀로그램</td><td class="code">PRD_000140/141</td><td class="num">6</td><td class="num">9</td><td class="num">+3</td><td class="dim">초과 — 미검증</td></tr>
+            <tr><td>아크릴스티커 유광·미러</td><td class="code">PRD_000142/143</td><td class="num">8</td><td class="num">8</td><td class="num">0</td><td class="good">일치</td></tr>
+            <tr><td>미니스탠딩보드</td><td class="code">PRD_000144</td><td class="num">15</td><td class="num">15</td><td class="num">0</td><td class="good">일치</td></tr>
+            <tr><td>미니배너</td><td class="code">PRD_000145</td><td class="num">10</td><td class="num">10</td><td class="num">0</td><td class="good">일치</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>캔버스행잉·린넨우드봉은 <strong>셀 수로는 통과한다.</strong> 개수만 세는 점검은 이 두 결함을 놓친다. 그리고 이 표는 공식 경로만 센다 — 족자포스터의 천정고리처럼 추가상품 템플릿으로 이관된 항목은 보이지 않아, 초판에서 미적재로 오판했다.</p>
+    </article>
+  </section>
+
+  <section class="band" data-tone="warn">
+    <div class="band-head">
+      <span class="band-tag">전역 스캔</span>
+      <h2>정리 대상</h2>
+      <p class="band-note">공식 118 · 살아있는 구성요소 130 · 배선행 235 전체를 대상으로 여섯 가지를 훑었다. 개수는 사실이지만 「불필요하다」는 판정은 도메인 결정이라 두 건만 확실하다고 적는다.</p>
+    </div>
+    <article class="card" style="--tone:var(--warn)">
+      <div class="scroll">
+        <table>
+          <caption>전역 스캔 6종</caption>
+          <thead><tr><th>검사</th><th class="num">건수</th><th>비고</th></tr></thead>
+          <tbody>
+            <tr><td>고아 구성요소 — 어느 공식에도 미배선</td><td class="num">9</td><td class="dim">단가행 172개를 안고 있다</td></tr>
+            <tr><td>허위 차원 선언 — 선언했으나 전 행 NULL</td><td class="num">10</td><td class="dim">계산은 되나 선언이 사실과 다르다</td></tr>
+            <tr><td><code>_숫자</code> 복제본 명명</td><td class="num">1</td><td class="dim">전 시스템 유일 — 캔버스행잉</td></tr>
+            <tr><td>상품에 바인딩되지 않은 공식</td><td class="num">7</td><td class="dim">TBD 자리표시 3건 포함</td></tr>
+            <tr><td>단가행 0개 구성요소</td><td class="num">1</td><td class="dim">6개 공식에 배선됨 · 이름이 「확인필요」</td></tr>
+            <tr><td>단가 시그니처가 동일한 구성요소</td><td class="num">11묶음</td><td class="dim">대부분 정당 — 아래 참고</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout" style="--tone:var(--crit); --tone-soft:var(--crit-soft)">
+        <span class="lbl">확실한 폐기 대상 2건</span>
+        <p><span class="mono">COMP_POSTEROPT_PET_BANNER_STAND_SEL</span> — <code>use_dims=["mat_cd"]</code>인데 단가행 2개 모두 차원이 전부 비어 있어, 배선하는 순간 두 행이 동시 매칭돼 <span class="mono">ERR_AMBIGUOUS</span>가 난다. 값 10,000은 엑셀 어디에도 없다. 거치대를 공식으로 만들려다 만 잔재이고, 현재 템플릿 단가로 살아 있는 것과 같은 요금의 두 번째 구현이다.</p>
+        <p><span class="mono">COMP_POSTEROPT_CANVAS_HANGING_WOODHANGER_0</span> — 위 이중계상의 주범.</p>
+      </div>
+
+      <div class="callout" style="--tone:var(--ok); --tone-soft:var(--ok-soft)">
+        <span class="lbl">정정 — 공용 구성요소는 정당하다</span>
+        <p>여러 공식이 구성요소 하나를 공유하는 묶음을 처음엔 중복으로 의심했으나, 엑셀을 보니 그 상품들의 격자가 실제로 값까지 동일했다. <span class="mono">COMP_POSTER_ARTPRINT_PHOTO</span>가 아트프린트·접착방수·아트패브릭·방수 4상품을, <span class="mono">COMP_POSTER_CANVAS_FABRIC</span>이 캔버스패브릭·레더아트프린트·메쉬프린트·타이벡 4상품을 겸하는 것은 설계 의도이며 이름에도 그렇게 적혀 있다. 정리 대상이 아니다.</p>
+      </div>
+    </article>
+  </section>
+
+  <section class="band" data-tone="hyp">
+    <div class="band-head">
+      <span class="band-tag">미검증 가설</span>
+      <h2>아직 결함이라 부르지 않은 것</h2>
+      <p class="band-note">아래는 스크리닝에 걸린 후보이지 확인된 결함이 아니다. 하나도 개별 검증하지 않았다. 이 상태로 조치하면 없는 결함을 고치게 된다.</p>
+    </div>
+    <article class="card" style="--tone:var(--hyp)">
+      <ul class="tight">
+        <li><strong>셀 초과 4건</strong> — 린넨패브릭 +4, 일반현수막 +4, 메쉬현수막 +2, 시트커팅 +3. 라이브에 엑셀보다 행이 많다. 가공옵션이 엑셀에 안 적힌 것일 수도, 잉여 행일 수도 있다.</li>
+        <li><strong>옵션이 가격에 안 나타나는 후보 51개 그룹 / 39개 게시 상품</strong> — 「선택지가 둘 이상인 옵션그룹인데 그 옵션값이 단가행 어디에도 없다」는 조건으로 뽑았다. 선택지가 여럿이어도 가격이 같은 것이 정상인 경우(색상 선택 등)가 섞여 있다.</li>
+        <li><strong>단가 시그니처 동일 11묶음</strong> — 별색 금·핑크·은이 같은 가격표를 쓰는 식. 값이 같다는 것은 사실이지만, 생산 구분 때문에 나눠야 하는지는 도메인 판단이다.</li>
+        <li><strong>구성요소 집합이 동일한 공식 6묶음</strong> — 위 정정에서 두 묶음은 정당으로 판명됐다. 나머지는 미판정.</li>
+      </ul>
+    </article>
+  </section>
+
+  <section class="band" data-tone="ok">
+    <div class="band-head">
+      <span class="band-tag">방법</span>
+      <h2>어떻게 쟀나</h2>
+    </div>
+    <article class="card" style="--tone:var(--ok)">
+      <ul class="tight">
+        <li><strong>숫자는 사람도 모델도 옮기지 않았다.</strong> 엑셀 격자는 <code>parse_excel.py</code>가 셀 좌표에서 직접 읽어 CSV로 떨어뜨리고, 라이브는 <code>psql \COPY</code>로 뽑아 <code>diff.py</code>가 맞췄다.</li>
+        <li><strong>부가세는 실측으로 확정했다.</strong> 엑셀 전 19시트에 세금 표기가 0건이지만, 위젯 가격 응답이 <span class="mono">supply / vat / total</span>로 나뉘어 오고 <span class="mono">supply</span>가 엑셀 셀값과 정확히 일치한다. 엑셀은 공급가이고 부가세 10%는 엔진이 표시 시점에 붙인다.</li>
+        <li><strong>확정 결함은 위젯에서 재현했다.</strong> 관리자 화면의 표시가 아니라 고객이 실제로 보는 가격을 읽었다.</li>
+        <li><strong>라이브 DB는 읽기만 했다.</strong> 이 점검으로 바뀐 데이터는 없다.</li>
+      </ul>
+      <div class="callout" style="--tone:var(--warn); --tone-soft:var(--warn-soft)">
+        <span class="lbl">이 점검이 못 잡는 것</span>
+        <p>셀 수 대조는 캔버스행잉·린넨우드봉처럼 <strong>개수가 맞고 값이 틀린</strong> 경우를 통과시킨다. 두 건은 값 대조로 따로 잡았지만, 나머지 24개 블록의 값 전수 대조는 아직 하지 않았다.</p>
+      </div>
+    </article>
+  </section>
+
+  <footer>
+    <p>라이브 DB는 실무진과 함께 쓰는 곳이라 값이 세션 중에도 움직인다. 이 페이지의 숫자는 <b>2026-08-28</b> 실측이며, 조치 전에 재실측한다.</p>
+    <p>산출물 <code>_workspace/postersign-audit/</code> — <code>authority.csv</code> (엑셀 격자 788셀) · <code>live.csv</code> (라이브 785행) · <code>parse_excel.py</code> · <code>diff.py</code></p>
+  </footer>
+
+</div>
