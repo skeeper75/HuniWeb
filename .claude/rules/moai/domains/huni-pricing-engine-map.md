@@ -1,0 +1,260 @@
+---
+description: "후니 가격 장치 정본 — 가격공식·가격구성요소·단가표·할인·추가상품 템플릿이 어떤 순서로 최종가를 만드는가, 0원이 새는 갈래는 어디인가. 매뉴얼·코드·DB·실화면 4렌즈 교차 실측(2026-08-28)."
+paths: "**/raw/webadmin/webadmin/catalog/pricing.py,**/raw/webadmin/webadmin/catalog/price_views.py,**/raw/webadmin/webadmin/catalog/widget_api.py,**/raw/webadmin/webadmin/catalog/start_price.py,**/_workspace/huni-widget-wiring/**,**/.moai/specs/SPEC-PRICEWIRE-*/**"
+---
+
+# 후니 가격 장치 정본 (Pricing Engine Map)
+
+> **로딩 범위**: `paths:` 스코프 — 항상로딩 비용 0(`rule-authoring.md` §(d)).
+> **작성 근거**: 2026-08-28, 4렌즈 교차 실측 — 매뉴얼(`manual_content.py`·`widget_manual_content.py`) ·
+> 코드(`pricing.py`·`price_views.py`·`widget_api.py`·`widget_renderer.js`) · 라이브 DB 16테이블 실측 ·
+> webadmin 실화면(gstack A/B). 렌즈끼리 어긋난 곳은 어느 쪽이 이겼는지 본문에 적었다.
+> **목적**: 「가격이 어떻게 움직이는가」를 매 세션 다시 조사하지 않기 위한 정본.
+
+## 0. 한 줄 요약
+
+```
+최종가 = Σ(가격구성요소 소계) → 구성요소할인 → 총액할인 → 등급할인 → 반올림
+추가상품은 이 계산 밖에서 별도 합산된다(건수 곱셈에도 포함되지 않는다).
+```
+
+## 1. 가격 소스 우선순위 [4렌즈 일치·확정]
+
+`pricing.py:604-658`. 실화면 A/B 와 코드가 일치하고, 매뉴얼에는 **없다**(§7 M-1).
+
+| 순위 | 소스 | 테이블 | 위치 |
+|---|---|---|---|
+| 1 | `TEMPLATE_PRICE` | `t_prd_template_prices` | `pricing.py:611-616` |
+| 2 | `PRODUCT_PRICE` | `t_prd_product_prices` | `:631-636` |
+| 3 | `FORMULA` | `t_prd_product_price_formulas` → 공식 전개 | `:639-650` |
+| 4 | `NONE` | — | `:652-658` |
+
+- **템플릿 단가가 없으면** `prd_cd ← base_prd_cd` 로 강등하고 상품 경로로 재진입한다(`:617-620`).
+  가격 뷰어 화면의 「없음 → 상품 가격으로 계산」이 정확히 이 줄이다.
+- **상품 직접단가는 공식을 오버라이드한다** — 직접단가가 있으면 공식이 있어도 타지 않는다.
+- "현재"는 `_latest_ymd`(`:313-322`): `apply_ymd ≤ as_of` 중 최대. **미래분 제외.**
+
+### 추가상품 단가를 넣는 자리 [실화면 확정]
+
+가격 뷰어 상세에는 **완전히 다른 두 입구**가 있다.
+
+| | 패널 | 컨트롤 | 대상 |
+|---|---|---|---|
+| (가) | 「가격 소스」 | 콤보(직접단가/가격공식) + 적용일 + 단가 + **「추가」** | **상품** |
+| (나) | 「**추가상품 템플릿 직접단가**」 | 금액 + 적용일 + **「등록」** / 「삭제」 | **템플릿** |
+
+화면이 (나)에 직접 써 둔 문구: 「템플릿 전용 — 상품 가격소스와 별개, 추가상품 템플릿 계산 시 **최우선**」.
+**이 패널은 매뉴얼에 존재하지 않는다**(4파일 전수 grep 0건) — 매뉴얼만 읽으면 답이 안 나오는 자리다.
+
+실증 A/B (PET배너 `PRD_000136` + 배너거치대 실내용 `TMPL-000115`, 600x1800mm, 수량 1):
+
+```
+행 없음      → NONE            → 0원      → 총 22,000원 · 상품 가격으로 fallback
+행 0원       → TEMPLATE_PRICE  → 0원      → 총 22,000원 · fallback 차단(막힌 0원)
+행 7,000원   → TEMPLATE_PRICE  → 7,000원  → 총 29,000원
+```
+
+## 2. 공식 전개 사슬
+
+```
+t_prd_product_price_formulas → t_prc_price_formulas
+  → t_prc_formula_components (disp_seq 정렬)        pricing.py:848-851
+  → t_prc_price_components (prc_typ_cd, use_dims)
+  → t_prc_component_prices (차원 매칭)              pricing.py:176-232
+  → 구성요소 소계 component_subtotal()               pricing.py:235-256
+  → Σ(included) = base_amount                       pricing.py:668-669
+```
+
+`prc_typ_cd` 3종(`pricing.py:55-57`) — 라이브 실측 살아있는 것 130건 기준:
+
+| 코드 | 이름 | 계산 | 살아있는 수 |
+|---|---|---|---|
+| `PRICE_TYPE.01` | 단가형 | 단가 × 수량 | 80 |
+| `PRICE_TYPE.02` | 합가형 | 구간총액 ÷ 구간 `min_qty` × 수량 | 25 |
+| `PRICE_TYPE.03` | 고정금액 | 매칭 금액 그대로, 수량 무관 | **25** |
+
+`.03` 은 `models.py:226` 주석에 없지만 **라이브에 25건 살아 있고 코드에 정식 정의**돼 있다(주석이 뒤처진 것).
+
+구성요소 소계는 항상 원 단위 **올림**(`ceil_won`, `:87-96`), 최종가만 `ROUND_HALF_UP`(`:82-84, 697`).
+
+### 차원 매칭
+
+- `NON_QTY_DIMS` 9종은 정확매칭, 행의 값이 NULL 이면 와일드카드(`:45-46, 136-148`).
+- `dim_vals`(JSONB)는 **와일드카드 없음** — 전부 일치해야 한다(`:145-148`).
+- `TIER_DIMS` 3종: `min_qty` = 이상 하한 / `siz_width`·`siz_height` = 이하 상한(`:52-53, 199-220`).
+- 조합 2개 이상 → `ERR_AMBIGUOUS`, 동일 티어 2건 → `ERR_DUPLICATE`.
+- `use_dims` 의 `opt_grp:*` 는 매칭 차원이 아니라 **스코프 선언**이며 판별차원 계산에서 제외된다(`:778-781`).
+  판별차원이 0이면 「선택과 무관하게 항상 매칭」된다.
+
+### use_dims 라이브 분포 (살아있는 구성요소 130건)
+
+`min_qty` 109 · `siz_cd` 50 · `proc_cd` 32 · `opt_cd` **24** · `mat_cd` 14 · `print_opt_cd` 12 ·
+`siz_height`/`siz_width` 각 11 · `bdl_qty`/`plt_siz_cd` 각 6 · `spot_side_cnt`/`coat_side_cnt` 각 2.
+**12종 선언값 전부 사용 중, 미사용 0.** 추가로 선언에 없는 토큰 2계열: `opt_grp:` 22건 · `proc_grp:` 31건.
+
+물리 컬럼 `clr_cd`(도수)가 unique 제약에는 있으나 `_USE_DIM_CHOICES` 12종과 `NON_QTY_DIMS` 9종에는
+**없다** — 컬럼은 존재하되 엔진이 매칭 차원으로 읽지 않는다.
+
+## 3. 할인 3단계
+
+`pricing.py:678-695`. 순차·겹침 허용, 각 단계가 음수를 0으로 클램프(`:276-293`).
+
+| 단계 | 스코프 | 테이블 | 라이브 실측 |
+|---|---|---|---|
+| ① 구성요소 | `t_prd_product_discount_tables.comp_cd ≠ ''` | `:963-1021` | **실사용 1건** |
+| ② 총액 | `comp_cd = ''` | `:930-960` | 125행 / 124상품 |
+| ③ 등급 | 주카테고리 × `grade_cd` | `:1024-1053` | **`t_dsc_grade_discount_rates` 0행 → 항상 무효** |
+
+게시 상품 193개 중 할인테이블이 붙은 것 90개.
+
+## 4. 추가상품(끼워팔기) 서브사슬
+
+`addon_unit_amt(tmpl_cd, as_of)` — `price_views.py:1977-2022`. 자체 우선순위가 없고 **캐시(TTL 5분) →
+`evaluate_price` 위임** 두 단계다. 호출 인자가 결정적:
+
+```python
+r = pricing.evaluate_price({"tmpl_cd": tmpl_cd}, {}, 1, mode="strict", as_of=as_of)
+```
+— `price_views.py:2007`. **`selections={}`** 이므로 공식 경로로 내려가면 와일드카드 행만 매칭되고,
+차원을 실제로 구분하는 구성요소는 no-match 로 빠진다. 템플릿의 고정 옵션값(`dim_sels` /
+`t_prd_template_selections` 163행)이 **`selections` 에 주입되지 않는다** — 설계인지 누락인지 미판정.
+
+못 찾으면 **0이 아니라 `None`** 을 돌려준다(`:2012`), 그리고 `None` 도 캐시한다.
+
+### 표시 경로 vs 주문 경로 — 비대칭 [CRITICAL]
+
+| | `api_price` (가격 표시) | `/handoff` (주문 서명) |
+|---|---|---|
+| 헬퍼 | `_compute_addons(strict_none=False)` | `_addons_strict` → `strict_none=True` |
+| 위치 | `widget_api.py:2025` | `:2843`(셋트) · `:2928`(단일) |
+| `amount=None` 일 때 | 항목은 남고 화면은 문구 생략, 합계는 `or 0` 로 **0 취급**(`:1851`) | **422 차단**(`:1619-1620`, `:1869-1872`) |
+
+`_addons_strict` 주석 원문: 「계산 불가(amount=None)면 422 로 막는다 — **0원 폴백은 조용한 언더차지다**」.
+
+⇒ **가격 없는 추가상품은 화면에서는 담기고, 주문 버튼에서 422 가 난다.** 0원 청구는 이 경로에서 안 일어난다.
+
+### [HARD] 0원은 이 가드를 전부 통과한다
+
+가드는 전부 `is None` 만 본다. `0` 은 유효값이다.
+
+- `pricing.py:614`·`:634` — `unit_price is not None` 검사 통과 → `source=TEMPLATE_PRICE`, `ok=True`, `final=0`
+- `widget_api.py:1619` — `amount is None` 아님 → **422 차단 안 걸림 → 0원짜리로 정상 주문**
+
+실화면 실증(고객 위젯 미리보기, 2026-08-28):
+
+```
+배너거치대 (실내용) — 0원/개당      ← 단가 0원 행이 있는 것. 고객에게 「0원」이 그대로 노출
+배너거치대 (실외용-단면)            ← 단가 행 자체가 없는 것. 문구 생략(fail-closed 표시)
+배너거치대 (실외용-양면)            ← 동일
+```
+
+`widget_renderer.js:144-149` 의 fail-closed 표시 규칙(「값 없음이 '—원/개당' 으로, 0 이면 '0원/개당' 으로
+나가 유료 상품이 무료로 보인다」)은 **`null` 만 막고 `0` 은 막지 못한다.**
+
+**따라서 0원 행은 「가격 미입력」보다 나쁘다.** 세 가지가 동시에 일어난다:
+1. `TEMPLATE_PRICE` 가 최우선이라 **상품 가격으로의 fallback 이 영구 차단**된다.
+2. 422 가드를 통과해 **0원으로 실제 주문된다.**
+3. 「가격 소스 없음」 진단 집합에서 빠져 **결함 스캔에 잡히지 않는다.**
+
+되돌리기: 가격 뷰어 › 추가상품 템플릿 직접단가 행의 **「삭제」**(「등록」으로 0을 덮어쓰면 행이 남는다).
+
+## 5. 0원 / 음수 / 부재가 새는 갈래
+
+`−원`은 엔진 산출물이 **아니다** — `apply_discount` 클램프(`:291-292`)와 `max(...,0)`(`:687`)이 원천
+차단하고, 라이브에 음수 단가행 0건. 화면의 `—`는 **값 없음 표시**(`widget_renderer.js:106`)다.
+
+**SPEC-PRICEWIRE-001 이 겨냥할 실제 갈래 4개** (나머지는 이미 fail-closed):
+
+| 우선 | 갈래 | 위치 | 왜 새는가 |
+|---|---|---|---|
+| 1 | **`unit_price = 0` 이 strict 를 통과** | `pricing.py:614`·`634`, `widget_api.py:1619` | 모든 가드가 `is None` 만 본다 |
+| 2 | **순수 no-match 가 fatal 이 아님** | `pricing.py:799-811`, `74-76` | strict 도 못 잡음. 경고조차 안 냄(정상 no-match 와 구분 불가) |
+| 3 | **추가상품 `None` → 표시 합계에서 0 취급** | `widget_api.py:1851`·`1908` | 총액이 조용히 작아지고 차단이 주문 시점까지 밀림 |
+| 4 | **`_filter_set` 의 ok 가 `res["ok"]` 를 안 봄** | `widget_api.py:1877` | 셋트가 단일보다 한 겹 약함 |
+
+갈래 2를 막는 유일한 가드 `widget_api._price_gap_errors`(`:719-786`)에 구멍 셋:
+`proc_cd` 차원 제외(`:756-757`) · 가족형 쌍 면제(`:744-751`) · **셋트 경로 미적용**(`:728`).
+
+라이브 0원 단가행 **12건** 실재: `COMP_PP_CORNER_RIGHT`(귀돌이비) 9구간 전부 0 ·
+`COMP_ACRYL_KEYRING` · `COMP_BANNER_MESH_OPTION` · `COMP_POSTEROPT_LINEN_FINISH`.
+**의도된 무료인지 미입력 자리표시인지 코드는 구분할 수 없다** — 담당자 확인 대상.
+
+## 6. 라이브 상태 스냅샷 (2026-08-28 실측 · 재실측 필수)
+
+> [HARD] 아래 숫자를 **인용하지 말고 재실측한다.** 라이브는 움직인다.
+
+| 항목 | 값 |
+|---|---|
+| 게시 위젯 / 상품 (`sts_typ_cd='WGT_STS_TYPE.02'` AND `del_yn≠Y` AND `use_yn='Y'`) | **193 / 193** |
+| 게시 상품 가격소스 | 직접단가 43 · 공식 150 · **없음 0** |
+| 빈 공식(구성요소 0) | **0** |
+| 단가행 0개인 공식 | 1 (`PRD_000165` / `PRF_ACRYL_PHCOROTTO_TBD`) |
+| 살아있는 템플릿 / 단가 보유 | 99 / 80 |
+| **가격 소스 전무 + 게시 도달 추가상품** | **2건** (`TMPL-000116`·`TMPL-000117`) · 링크 4건 |
+| 삭제된 구성요소가 과금 중 | 게시 상품 **4개** (`PRD_000001`·`000002`·`000013`·`000014`) |
+| 게시 위젯이 미게시 상품(`use_yn='N'`)을 가리킴 | 1건 |
+| 미배선 구성요소(살아있음) / 그 단가행 | 9개 / 172행 |
+| `opt_cd` 고아 단가행 | 889 / 973 |
+| 공식 공유 최대 밀도 | `PRF_GOODS_FIXED_SIZ` → 게시 상품 27개 동시 영향 |
+
+## 7. 설계 ↔ 코드 ↔ 매뉴얼 괴리 (개발자 전달 대상)
+
+| # | 괴리 | 근거 |
+|---|---|---|
+| M-1 | 「추가상품 템플릿 직접단가」 패널이 **매뉴얼에 없다** | 4파일 grep 0건 · 실화면 실재·동작 |
+| D-8 | **`addtn_yn` 은 엔진에서 죽은 속성** — `pricing.py:848-851` `.values()` 에 없어 전 구성요소 무조건 가산. 그런데 **가격 다이어그램은 `addtn` 을 그려 보여 준다**(`price_views.py:1189`·`1273`). 라이브 `N` 24건도 전부 합산 | `admin.py:1571-1583` 이 「가격엔진 미사용」이라 명시하고 편집화면에서 숨김 |
+| D-9 | `t_prc_price_formulas.use_yn` 을 엔진이 **검사하지 않는다** | `pricing.py:645` 는 `frm_nm` 만 읽음. 현재 `use_yn='N'` 3건은 바인딩 0이라 무해 |
+| D-10 | `unit_price` 가 NULL 인 행이 매칭되면 `Decimal(None)` → **`TypeError` 가 except 에 안 잡혀 위젯 500** | `pricing.py:816`·`243` vs `:817`. 현재 NULL 0건이라 잠복 |
+| D-11 | `price_grid_save` 가 **부호·0 검사를 하지 않는다** — `0`·`-5000` 저장 가능 | `price_views.py:1470-1474` |
+
+## 8. `del_yn` — 예외의 실제 범위
+
+`raw/webadmin/CLAUDE.md` D-06 은 `pricing.py` 를 규칙에서 제외한다(「저장된 참조는 마스터 삭제와 무관하게
+계산 — 언더차지 방지」). 검증: `grep -n "del_yn" pricing.py` → **0건**. 감사 도구도 파일을 스캔에서 뺀다
+(`tools/audit_del_yn.py:22,32`).
+
+`del_yn` 을 가진 모델 중 **무필터로 조회되는 것**: `TPrdTemplates` · `TPrdProducts` ·
+**`TPrcPriceComponents`** · `TPrtPrintOptions` · `TProcProcesses` · `TSizSizes` · `TPrdProductSets`.
+
+⇒ **논리삭제된 구성요소가 살아있는 공식에 물려 지금도 정상 과금 중**이다(게시 상품 4건). 언더차지 방지
+관점에서는 의도대로, 마스터 관리 관점에서는 「삭제한 것이 삭제되지 않은」 상태 — 양쪽 다 사실이다.
+
+**옵션그룹 논리삭제 시 두 계층이 비대칭**이다:
+- 노출·MES 계층은 필터함(`price_views.py:2969-2971`, `widget_api.py:1685-1687`)
+- **가격 계층은 필터 안 함** — `_prep_selections`(`widget_api.py:688-696`)에 옵션 화이트리스트가 없어,
+  캐시된 위젯·재견적 payload 가 삭제된 `opt_cd` 를 보내면 그 단가행이 그대로 매칭돼 과금된다.
+
+## 9. 매뉴얼이 확정해 주는 것
+
+| # | 사실 | 근거 |
+|---|---|---|
+| 1 | 최종가 = 구성요소 합 → 구성요소할인 → 총액할인 → 등급할인 | `manual_content.py:101-103`, `:330` |
+| 2 | 단가는 구성요소의 **차원별 단가표**에서 뽑힘. **축 매칭 실패 = 0원** | `:61`, `:722` |
+| 3 | 상품에 가격 붙이는 곳은 **가격 뷰어 한 곳**, 적용일자별 **최신분이 현재가** | `:317`, `:329` |
+| 4 | **위젯은 가격을 만들지 않는다** — 보여줄 뿐 | `:417`, `widget_manual_content.py:129-130` |
+| 5 | 추가상품 템플릿 = **기준상품 + 고정 옵션 조합**. 편집 필드는 명·기준상품·표시순서 3개 | `:52`, `:216`, `:227` |
+| 6 | 상품뷰어 「추가상품」 섹션의 유일한 영향은 「위젯 추가상품 피커 후보」 — **가격 영향 명시 없음** | `:161` |
+| 7 | 차원(`WGT_SRC_TYPE.01`)은 「단가를 가르는 축」, 옵션그룹(`.02`)은 가격 문맥 밖 | `widget_manual_content.py:375` vs `:384-390` |
+| 8 | 추가상품 피커(`.13`) 전제 = 「상품에 연결된 추가상품 1개 이상」 | `widget_manual_content.py:463` |
+| 9 | 빨강 **「삭제됨」** 배지 = 참조하던 옵션그룹·추가상품이 상품에서 삭제됨 → **고객 화면에 표시 안 됨** | `:609-610` |
+
+## 10. 미판정 — 다음 세션의 과제
+
+1. 템플릿 `dim_sels` / `t_prd_template_selections` 가 `selections` 에 주입되지 않는 것이 설계인가 누락인가
+   (`pricing.py:604-620` · `price_views.py:2007`).
+2. 0원 단가행 12건이 의도된 무료인가 미입력인가 — 담당자 확인.
+3. `addtn_yn` `N` 24건 + NULL 24건의 원 의도 (`docs/prcx01`·논리 ERD 대조).
+4. `_component_discounts` 가 셋트 경로에서 이중 적용되는가 (`pricing.py:1200-1201` vs `:1218-1225`).
+5. `opt_cd` 고아 단가행 889건이 논리삭제 잔재인가 상품 단위로 보면 살아 있는가.
+6. 게시 위젯이 물고 있는 `use_yn='N'` 상품 1건이 준비 상태인가 사고인가.
+
+## 교차 참조
+
+- `.claude/rules/moai/domains/huni-webadmin-manual-first.md` — 원천 우선순위·화면 지도·접속 수단
+- `.moai/specs/SPEC-PRICEWIRE-001/` — 이 정본을 소비하는 교정 SPEC
+- `raw/webadmin/CLAUDE.md` § Conventions — D-06 논리삭제 규칙
+
+---
+
+Classification: Evolvable 도메인 규칙 — `paths:` 스코프, 항상로딩 표면 비용 0.
+Version: 1.0.0 (2026-08-28, 4렌즈 교차 실측)
