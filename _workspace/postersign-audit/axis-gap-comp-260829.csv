@@ -1,0 +1,283 @@
+prd_cd,prd_nm,frm_cd,comp_cd,comp_nm,요구축,위젯축,미충족축
+PRD_000004,카드봉투,PRF_ACC_ENV_CLR_BDL,COMP_ACC_ENV_CLR_BDL,카드봉투 완제품가(칼라×묶음수),"bdl_qty,min_qty,opt_cd","OPT-000012,bdl_qty,qty,siz_cd",opt_cd
+PRD_000013,우드봉,PRF_ACC_WOOD_SIZ,COMP_ACC_WOOD_SIZ,우드봉·행거 완제품가(길이),"mat_cd,min_qty,siz_cd","OPT_000292,qty,siz_cd",mat_cd
+PRD_000014,우드행거,PRF_ACC_WOOD_SIZ,COMP_ACC_WOOD_SIZ,우드봉·행거 완제품가(길이),"mat_cd,min_qty,siz_cd","OPT_000293,qty,siz_cd",mat_cd
+PRD_000016,프리미엄엽서,PRF_DGP_A,COMP_PRINT_DIGITAL_S1,디지털인쇄비,"min_qty,plt_siz_cd,print_opt_cd,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000016,프리미엄엽서,PRF_DGP_A,COMP_PRINT_SPOT_WHITE_S1,별색인쇄비,"min_qty,plt_siz_cd,proc_cd,spot_side_cnt","mat_cd,print_opt_cd,qty,siz_cd","proc_cd,spot_side_cnt"
+PRD_000016,프리미엄엽서,PRF_DGP_A,COMP_PP_CORNER_RIGHT,귀돌이비,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000016,프리미엄엽서,PRF_DGP_A,COMP_PP_CREASE_1L,오시비,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000016,프리미엄엽서,PRF_DGP_A,COMP_PP_PERF_1L,미싱비,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000016,프리미엄엽서,PRF_DGP_A,COMP_PP_VARTEXT_1EA,가변텍스트,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000016,프리미엄엽서,PRF_DGP_A,COMP_PP_VARIMG_1EA,가변이미지,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000016,프리미엄엽서,PRF_DGP_A,COMP_COAT_MATTE,무광코팅비,"coat_side_cnt,min_qty,plt_siz_cd,proc_cd","mat_cd,print_opt_cd,qty,siz_cd","coat_side_cnt,proc_cd"
+PRD_000016,프리미엄엽서,PRF_DGP_A,COMP_COAT_GLOSSY,유광코팅비,"coat_side_cnt,min_qty,plt_siz_cd,proc_cd","mat_cd,print_opt_cd,qty,siz_cd","coat_side_cnt,proc_cd"
+PRD_000017,코팅엽서,PRF_DGP_A,COMP_PRINT_DIGITAL_S1,디지털인쇄비,"min_qty,plt_siz_cd,print_opt_cd,proc_cd","OPT_000011,mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000017,코팅엽서,PRF_DGP_A,COMP_PRINT_SPOT_WHITE_S1,별색인쇄비,"min_qty,plt_siz_cd,proc_cd,spot_side_cnt","OPT_000011,mat_cd,print_opt_cd,qty,siz_cd","proc_cd,spot_side_cnt"
+PRD_000017,코팅엽서,PRF_DGP_A,COMP_PP_CORNER_RIGHT,귀돌이비,"min_qty,proc_cd","OPT_000011,mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000017,코팅엽서,PRF_DGP_A,COMP_PP_CREASE_1L,오시비,"min_qty,proc_cd","OPT_000011,mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000017,코팅엽서,PRF_DGP_A,COMP_PP_PERF_1L,미싱비,"min_qty,proc_cd","OPT_000011,mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000017,코팅엽서,PRF_DGP_A,COMP_PP_VARTEXT_1EA,가변텍스트,"min_qty,proc_cd","OPT_000011,mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000017,코팅엽서,PRF_DGP_A,COMP_PP_VARIMG_1EA,가변이미지,"min_qty,proc_cd","OPT_000011,mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000017,코팅엽서,PRF_DGP_A,COMP_COAT_MATTE,무광코팅비,"coat_side_cnt,min_qty,plt_siz_cd,proc_cd","OPT_000011,mat_cd,print_opt_cd,qty,siz_cd","coat_side_cnt,proc_cd"
+PRD_000017,코팅엽서,PRF_DGP_A,COMP_COAT_GLOSSY,유광코팅비,"coat_side_cnt,min_qty,plt_siz_cd,proc_cd","OPT_000011,mat_cd,print_opt_cd,qty,siz_cd","coat_side_cnt,proc_cd"
+PRD_000018,스탠다드엽서,PRF_DGP_A,COMP_PRINT_DIGITAL_S1,디지털인쇄비,"min_qty,plt_siz_cd,print_opt_cd,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000018,스탠다드엽서,PRF_DGP_A,COMP_PRINT_SPOT_WHITE_S1,별색인쇄비,"min_qty,plt_siz_cd,proc_cd,spot_side_cnt","mat_cd,print_opt_cd,qty,siz_cd","proc_cd,spot_side_cnt"
+PRD_000018,스탠다드엽서,PRF_DGP_A,COMP_PP_CORNER_RIGHT,귀돌이비,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000018,스탠다드엽서,PRF_DGP_A,COMP_PP_CREASE_1L,오시비,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000018,스탠다드엽서,PRF_DGP_A,COMP_PP_PERF_1L,미싱비,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000018,스탠다드엽서,PRF_DGP_A,COMP_PP_VARTEXT_1EA,가변텍스트,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000018,스탠다드엽서,PRF_DGP_A,COMP_PP_VARIMG_1EA,가변이미지,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000018,스탠다드엽서,PRF_DGP_A,COMP_COAT_GLOSSY,유광코팅비,"coat_side_cnt,min_qty,plt_siz_cd,proc_cd","mat_cd,print_opt_cd,qty,siz_cd","coat_side_cnt,proc_cd"
+PRD_000018,스탠다드엽서,PRF_DGP_A,COMP_COAT_MATTE,무광코팅비,"coat_side_cnt,min_qty,plt_siz_cd,proc_cd","mat_cd,print_opt_cd,qty,siz_cd","coat_side_cnt,proc_cd"
+PRD_000019,투명엽서,PRF_DGP_A,COMP_PRINT_DIGITAL_S1,디지털인쇄비,"min_qty,plt_siz_cd,print_opt_cd,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000019,투명엽서,PRF_DGP_A,COMP_PRINT_SPOT_WHITE_S1,별색인쇄비,"min_qty,plt_siz_cd,proc_cd,spot_side_cnt","mat_cd,print_opt_cd,qty,siz_cd","proc_cd,spot_side_cnt"
+PRD_000019,투명엽서,PRF_DGP_A,COMP_PP_CORNER_RIGHT,귀돌이비,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000019,투명엽서,PRF_DGP_A,COMP_PP_CREASE_1L,오시비,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000019,투명엽서,PRF_DGP_A,COMP_PP_PERF_1L,미싱비,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000019,투명엽서,PRF_DGP_A,COMP_PP_VARTEXT_1EA,가변텍스트,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000019,투명엽서,PRF_DGP_A,COMP_PP_VARIMG_1EA,가변이미지,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000019,투명엽서,PRF_DGP_A,COMP_COAT_MATTE,무광코팅비,"coat_side_cnt,min_qty,plt_siz_cd,proc_cd","mat_cd,print_opt_cd,qty,siz_cd","coat_side_cnt,proc_cd"
+PRD_000019,투명엽서,PRF_DGP_A,COMP_COAT_GLOSSY,유광코팅비,"coat_side_cnt,min_qty,plt_siz_cd,proc_cd","mat_cd,print_opt_cd,qty,siz_cd","coat_side_cnt,proc_cd"
+PRD_000020,화이트인쇄엽서,PRF_DGP_A,COMP_PRINT_DIGITAL_S1,디지털인쇄비,"min_qty,plt_siz_cd,print_opt_cd,proc_cd","OPT_000317,OPT_000318,mat_cd,qty,siz_cd","print_opt_cd,proc_cd"
+PRD_000020,화이트인쇄엽서,PRF_DGP_A,COMP_PRINT_SPOT_WHITE_S1,별색인쇄비,"min_qty,plt_siz_cd,proc_cd,spot_side_cnt","OPT_000317,OPT_000318,mat_cd,qty,siz_cd","proc_cd,spot_side_cnt"
+PRD_000020,화이트인쇄엽서,PRF_DGP_A,COMP_PP_CORNER_RIGHT,귀돌이비,"min_qty,proc_cd","OPT_000317,OPT_000318,mat_cd,qty,siz_cd",proc_cd
+PRD_000020,화이트인쇄엽서,PRF_DGP_A,COMP_PP_CREASE_1L,오시비,"min_qty,proc_cd","OPT_000317,OPT_000318,mat_cd,qty,siz_cd",proc_cd
+PRD_000020,화이트인쇄엽서,PRF_DGP_A,COMP_PP_PERF_1L,미싱비,"min_qty,proc_cd","OPT_000317,OPT_000318,mat_cd,qty,siz_cd",proc_cd
+PRD_000020,화이트인쇄엽서,PRF_DGP_A,COMP_PP_VARTEXT_1EA,가변텍스트,"min_qty,proc_cd","OPT_000317,OPT_000318,mat_cd,qty,siz_cd",proc_cd
+PRD_000020,화이트인쇄엽서,PRF_DGP_A,COMP_PP_VARIMG_1EA,가변이미지,"min_qty,proc_cd","OPT_000317,OPT_000318,mat_cd,qty,siz_cd",proc_cd
+PRD_000020,화이트인쇄엽서,PRF_DGP_A,COMP_COAT_GLOSSY,유광코팅비,"coat_side_cnt,min_qty,plt_siz_cd,proc_cd","OPT_000317,OPT_000318,mat_cd,qty,siz_cd","coat_side_cnt,proc_cd"
+PRD_000020,화이트인쇄엽서,PRF_DGP_A,COMP_COAT_MATTE,무광코팅비,"coat_side_cnt,min_qty,plt_siz_cd,proc_cd","OPT_000317,OPT_000318,mat_cd,qty,siz_cd","coat_side_cnt,proc_cd"
+PRD_000021,핑크별색엽서,PRF_DGP_A,COMP_PRINT_DIGITAL_S1,디지털인쇄비,"min_qty,plt_siz_cd,print_opt_cd,proc_cd","OPT_000315,mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000021,핑크별색엽서,PRF_DGP_A,COMP_PRINT_SPOT_WHITE_S1,별색인쇄비,"min_qty,plt_siz_cd,proc_cd,spot_side_cnt","OPT_000315,mat_cd,print_opt_cd,qty,siz_cd","proc_cd,spot_side_cnt"
+PRD_000021,핑크별색엽서,PRF_DGP_A,COMP_PP_CORNER_RIGHT,귀돌이비,"min_qty,proc_cd","OPT_000315,mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000021,핑크별색엽서,PRF_DGP_A,COMP_PP_CREASE_1L,오시비,"min_qty,proc_cd","OPT_000315,mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000021,핑크별색엽서,PRF_DGP_A,COMP_PP_PERF_1L,미싱비,"min_qty,proc_cd","OPT_000315,mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000021,핑크별색엽서,PRF_DGP_A,COMP_PP_VARTEXT_1EA,가변텍스트,"min_qty,proc_cd","OPT_000315,mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000021,핑크별색엽서,PRF_DGP_A,COMP_PP_VARIMG_1EA,가변이미지,"min_qty,proc_cd","OPT_000315,mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000021,핑크별색엽서,PRF_DGP_A,COMP_COAT_GLOSSY,유광코팅비,"coat_side_cnt,min_qty,plt_siz_cd,proc_cd","OPT_000315,mat_cd,print_opt_cd,qty,siz_cd","coat_side_cnt,proc_cd"
+PRD_000021,핑크별색엽서,PRF_DGP_A,COMP_COAT_MATTE,무광코팅비,"coat_side_cnt,min_qty,plt_siz_cd,proc_cd","OPT_000315,mat_cd,print_opt_cd,qty,siz_cd","coat_side_cnt,proc_cd"
+PRD_000024,포토카드,PRF_PHOTOCARD_NORMAL,COMP_PHOTOCARD_SET,포토카드 완제품가 일반세트,"bdl_qty,min_qty,opt_cd,siz_cd","OPT_000328,OPT_000329,mat_cd,print_opt_cd,qty,siz_cd","bdl_qty,opt_cd"
+PRD_000024,포토카드,PRF_PHOTOCARD_NORMAL,COMP_PHOTOCARD_BULK,포토카드 완제품가 대량,"min_qty,opt_cd","OPT_000328,OPT_000329,mat_cd,print_opt_cd,qty,siz_cd",opt_cd
+PRD_000025,투명포토카드,PRF_PHOTOCARD_CLEAR,COMP_PHOTOCARD_CLEAR_SET,포토카드 완제품가 투명세트,"bdl_qty,min_qty,siz_cd","OPT_000327,mat_cd,print_opt_cd,qty,siz_cd",bdl_qty
+PRD_000026,종이슬로건,PRF_DGP_A,COMP_PRINT_DIGITAL_S1,디지털인쇄비,"min_qty,plt_siz_cd,print_opt_cd,proc_cd","OPT_000316,mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000026,종이슬로건,PRF_DGP_A,COMP_PRINT_SPOT_WHITE_S1,별색인쇄비,"min_qty,plt_siz_cd,proc_cd,spot_side_cnt","OPT_000316,mat_cd,print_opt_cd,qty,siz_cd","proc_cd,spot_side_cnt"
+PRD_000026,종이슬로건,PRF_DGP_A,COMP_PP_CORNER_RIGHT,귀돌이비,"min_qty,proc_cd","OPT_000316,mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000026,종이슬로건,PRF_DGP_A,COMP_PP_CREASE_1L,오시비,"min_qty,proc_cd","OPT_000316,mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000026,종이슬로건,PRF_DGP_A,COMP_PP_PERF_1L,미싱비,"min_qty,proc_cd","OPT_000316,mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000026,종이슬로건,PRF_DGP_A,COMP_PP_VARTEXT_1EA,가변텍스트,"min_qty,proc_cd","OPT_000316,mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000026,종이슬로건,PRF_DGP_A,COMP_PP_VARIMG_1EA,가변이미지,"min_qty,proc_cd","OPT_000316,mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000026,종이슬로건,PRF_DGP_A,COMP_COAT_MATTE,무광코팅비,"coat_side_cnt,min_qty,plt_siz_cd,proc_cd","OPT_000316,mat_cd,print_opt_cd,qty,siz_cd","coat_side_cnt,proc_cd"
+PRD_000026,종이슬로건,PRF_DGP_A,COMP_COAT_GLOSSY,유광코팅비,"coat_side_cnt,min_qty,plt_siz_cd,proc_cd","OPT_000316,mat_cd,print_opt_cd,qty,siz_cd","coat_side_cnt,proc_cd"
+PRD_000027,2단접지카드,PRF_DGP_E_FOIL,COMP_PRINT_DIGITAL_S1,디지털인쇄비,"min_qty,plt_siz_cd,print_opt_cd,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000027,2단접지카드,PRF_DGP_E,COMP_PRINT_DIGITAL_S1,디지털인쇄비,"min_qty,plt_siz_cd,print_opt_cd,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000027,2단접지카드,PRF_DGP_E_FOIL,COMP_COAT_GLOSSY,유광코팅비,"coat_side_cnt,min_qty,plt_siz_cd,proc_cd","mat_cd,print_opt_cd,qty,siz_cd","coat_side_cnt,proc_cd"
+PRD_000027,2단접지카드,PRF_DGP_E,COMP_COAT_GLOSSY,유광코팅비,"coat_side_cnt,min_qty,plt_siz_cd,proc_cd","mat_cd,print_opt_cd,qty,siz_cd","coat_side_cnt,proc_cd"
+PRD_000027,2단접지카드,PRF_DGP_E,COMP_COAT_MATTE,무광코팅비,"coat_side_cnt,min_qty,plt_siz_cd,proc_cd","mat_cd,print_opt_cd,qty,siz_cd","coat_side_cnt,proc_cd"
+PRD_000027,2단접지카드,PRF_DGP_E_FOIL,COMP_COAT_MATTE,무광코팅비,"coat_side_cnt,min_qty,plt_siz_cd,proc_cd","mat_cd,print_opt_cd,qty,siz_cd","coat_side_cnt,proc_cd"
+PRD_000027,2단접지카드,PRF_DGP_E,COMP_FOLD_LEAF_HALF,접지비 리플렛 반접지,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000027,2단접지카드,PRF_DGP_E_FOIL,COMP_FOLD_LEAF_HALF,접지비 리플렛 반접지,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000027,2단접지카드,PRF_DGP_E_FOIL,COMP_FOLD_LEAF_3FOLD,접지비 리플렛 3단,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000027,2단접지카드,PRF_DGP_E,COMP_FOLD_LEAF_3FOLD,접지비 리플렛 3단,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000027,2단접지카드,PRF_DGP_E_FOIL,COMP_FOLD_LEAF_4ACC,접지비 리플렛 4단아코디언,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000027,2단접지카드,PRF_DGP_E,COMP_FOLD_LEAF_4ACC,접지비 리플렛 4단아코디언,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000027,2단접지카드,PRF_DGP_E,COMP_FOLD_LEAF_4GATE,접지비 리플렛 4단게이트,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000027,2단접지카드,PRF_DGP_E_FOIL,COMP_FOLD_LEAF_4GATE,접지비 리플렛 4단게이트,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000027,2단접지카드,PRF_DGP_E_FOIL,COMP_CUT_PERF_1H6,타공비 (6mm),"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000027,2단접지카드,PRF_DGP_E,COMP_CUT_PERF_1H6,타공비 (6mm),"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000027,2단접지카드,PRF_DGP_E_FOIL,COMP_FOIL_SETUP_LARGE,박·형압 동판셋업비(대형),"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000027,2단접지카드,PRF_DGP_E,COMP_PP_VARTEXT_1EA,가변텍스트,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000027,2단접지카드,PRF_DGP_E_FOIL,COMP_FOIL_PROC_LARGE_STD,박 가공비(대형·일반박),"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000027,2단접지카드,PRF_DGP_E,COMP_PP_VARIMG_1EA,가변이미지,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000027,2단접지카드,PRF_DGP_E_FOIL,COMP_FOIL_PROC_LARGE_SPECIAL,박 가공비(대형·특수박),"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000027,2단접지카드,PRF_DGP_E_FOIL,COMP_PP_VARTEXT_1EA,가변텍스트,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000027,2단접지카드,PRF_DGP_E_FOIL,COMP_PP_VARIMG_1EA,가변이미지,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000028,미니접지카드,PRF_DGP_E,COMP_PRINT_DIGITAL_S1,디지털인쇄비,"min_qty,plt_siz_cd,print_opt_cd,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000028,미니접지카드,PRF_DGP_E,COMP_COAT_GLOSSY,유광코팅비,"coat_side_cnt,min_qty,plt_siz_cd,proc_cd","mat_cd,print_opt_cd,qty,siz_cd","coat_side_cnt,proc_cd"
+PRD_000028,미니접지카드,PRF_DGP_E,COMP_COAT_MATTE,무광코팅비,"coat_side_cnt,min_qty,plt_siz_cd,proc_cd","mat_cd,print_opt_cd,qty,siz_cd","coat_side_cnt,proc_cd"
+PRD_000028,미니접지카드,PRF_DGP_E,COMP_FOLD_LEAF_HALF,접지비 리플렛 반접지,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000028,미니접지카드,PRF_DGP_E,COMP_FOLD_LEAF_3FOLD,접지비 리플렛 3단,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000028,미니접지카드,PRF_DGP_E,COMP_FOLD_LEAF_4ACC,접지비 리플렛 4단아코디언,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000028,미니접지카드,PRF_DGP_E,COMP_FOLD_LEAF_4GATE,접지비 리플렛 4단게이트,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000028,미니접지카드,PRF_DGP_E,COMP_CUT_PERF_1H6,타공비 (6mm),"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000028,미니접지카드,PRF_DGP_E,COMP_PP_VARTEXT_1EA,가변텍스트,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000028,미니접지카드,PRF_DGP_E,COMP_PP_VARIMG_1EA,가변이미지,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000029,3단접지카드,PRF_DGP_E,COMP_PRINT_DIGITAL_S1,디지털인쇄비,"min_qty,plt_siz_cd,print_opt_cd,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000029,3단접지카드,PRF_DGP_E_FOIL,COMP_PRINT_DIGITAL_S1,디지털인쇄비,"min_qty,plt_siz_cd,print_opt_cd,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000029,3단접지카드,PRF_DGP_E_FOIL,COMP_COAT_GLOSSY,유광코팅비,"coat_side_cnt,min_qty,plt_siz_cd,proc_cd","mat_cd,print_opt_cd,qty,siz_cd","coat_side_cnt,proc_cd"
+PRD_000029,3단접지카드,PRF_DGP_E,COMP_COAT_GLOSSY,유광코팅비,"coat_side_cnt,min_qty,plt_siz_cd,proc_cd","mat_cd,print_opt_cd,qty,siz_cd","coat_side_cnt,proc_cd"
+PRD_000029,3단접지카드,PRF_DGP_E,COMP_COAT_MATTE,무광코팅비,"coat_side_cnt,min_qty,plt_siz_cd,proc_cd","mat_cd,print_opt_cd,qty,siz_cd","coat_side_cnt,proc_cd"
+PRD_000029,3단접지카드,PRF_DGP_E_FOIL,COMP_COAT_MATTE,무광코팅비,"coat_side_cnt,min_qty,plt_siz_cd,proc_cd","mat_cd,print_opt_cd,qty,siz_cd","coat_side_cnt,proc_cd"
+PRD_000029,3단접지카드,PRF_DGP_E_FOIL,COMP_FOLD_LEAF_HALF,접지비 리플렛 반접지,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000029,3단접지카드,PRF_DGP_E,COMP_FOLD_LEAF_HALF,접지비 리플렛 반접지,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000029,3단접지카드,PRF_DGP_E,COMP_FOLD_LEAF_3FOLD,접지비 리플렛 3단,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000029,3단접지카드,PRF_DGP_E_FOIL,COMP_FOLD_LEAF_3FOLD,접지비 리플렛 3단,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000029,3단접지카드,PRF_DGP_E,COMP_FOLD_LEAF_4ACC,접지비 리플렛 4단아코디언,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000029,3단접지카드,PRF_DGP_E_FOIL,COMP_FOLD_LEAF_4ACC,접지비 리플렛 4단아코디언,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000029,3단접지카드,PRF_DGP_E,COMP_FOLD_LEAF_4GATE,접지비 리플렛 4단게이트,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000029,3단접지카드,PRF_DGP_E_FOIL,COMP_FOLD_LEAF_4GATE,접지비 리플렛 4단게이트,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000029,3단접지카드,PRF_DGP_E_FOIL,COMP_CUT_PERF_1H6,타공비 (6mm),"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000029,3단접지카드,PRF_DGP_E,COMP_CUT_PERF_1H6,타공비 (6mm),"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000029,3단접지카드,PRF_DGP_E_FOIL,COMP_FOIL_SETUP_LARGE,박·형압 동판셋업비(대형),"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000029,3단접지카드,PRF_DGP_E,COMP_PP_VARTEXT_1EA,가변텍스트,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000029,3단접지카드,PRF_DGP_E_FOIL,COMP_FOIL_PROC_LARGE_STD,박 가공비(대형·일반박),"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000029,3단접지카드,PRF_DGP_E,COMP_PP_VARIMG_1EA,가변이미지,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000029,3단접지카드,PRF_DGP_E_FOIL,COMP_FOIL_PROC_LARGE_SPECIAL,박 가공비(대형·특수박),"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000029,3단접지카드,PRF_DGP_E_FOIL,COMP_PP_VARTEXT_1EA,가변텍스트,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000029,3단접지카드,PRF_DGP_E_FOIL,COMP_PP_VARIMG_1EA,가변이미지,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000030,지그재그엽서,PRF_DGP_C_6CR,COMP_PRINT_DIGITAL_S1,디지털인쇄비,"min_qty,plt_siz_cd,print_opt_cd,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000030,지그재그엽서,PRF_DGP_C_6CR,COMP_CUT_PERF_1H6,타공비 (6mm),"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000031,프리미엄명함,PRF_NAMECARD_PREMIUM,COMP_PP_VARTEXT_1EA,가변텍스트,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000031,프리미엄명함,PRF_NAMECARD_PREMIUM_FOIL,COMP_FOIL_SETUP_SMALL,박·형압 동판셋업비(소형),proc_cd,"mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000031,프리미엄명함,PRF_NAMECARD_PREMIUM,COMP_PP_VARIMG_1EA,가변이미지,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000031,프리미엄명함,PRF_NAMECARD_PREMIUM_FOIL,COMP_FOIL_PROC_SMALL_STD,박 가공비(소형·일반박),"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000031,프리미엄명함,PRF_NAMECARD_PREMIUM_FOIL,COMP_FOIL_PROC_SMALL_SPECIAL,박 가공비(소형·특수박),"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000031,프리미엄명함,PRF_NAMECARD_PREMIUM,COMP_PP_CORNER_RIGHT,귀돌이비,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000031,프리미엄명함,PRF_NAMECARD_PREMIUM_FOIL,COMP_PP_VARTEXT_1EA,가변텍스트,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000031,프리미엄명함,PRF_NAMECARD_PREMIUM_FOIL,COMP_PP_VARIMG_1EA,가변이미지,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000031,프리미엄명함,PRF_NAMECARD_PREMIUM_FOIL,COMP_PP_CORNER_RIGHT,귀돌이비,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000034,펄명함,PRF_NAMECARD_PEARL_FOIL,COMP_FOIL_SETUP_SMALL,박·형압 동판셋업비(소형),proc_cd,"mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000034,펄명함,PRF_NAMECARD_PEARL_FOIL,COMP_FOIL_PROC_SMALL_STD,박 가공비(소형·일반박),"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000034,펄명함,PRF_NAMECARD_PEARL_FOIL,COMP_FOIL_PROC_SMALL_SPECIAL,박 가공비(소형·특수박),"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000037,오리지널박명함,PRF_NAMECARD_FOIL,COMP_NAMECARD_FOIL,오리지널박명함 완제품가(종이+동판+박),"min_qty,opt_cd,print_opt_cd","mat_cd,qty,siz_cd","opt_cd,print_opt_cd"
+PRD_000037,오리지널박명함,PRF_NAMECARD_FOIL,COMP_NAMECARD_FOIL_SETUP_S1_STD,박·형압 동판셋업비 단면,"min_qty,print_opt_cd","mat_cd,qty,siz_cd",print_opt_cd
+PRD_000037,오리지널박명함,PRF_NAMECARD_FOIL,COMP_NAMECARD_FOIL_SETUP_S2_STD,박·형압 동판셋업비 양면,print_opt_cd,"mat_cd,qty,siz_cd",print_opt_cd
+PRD_000038,형압명함,PRF_NAMECARD_EMBOSS,COMP_EMBOSS_SETUP_SMALL,형압 동판셋업비(소형),"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000038,형압명함,PRF_NAMECARD_EMBOSS,COMP_EMBOSS_PROC_SMALL_STD,형압 가공비(소형),"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000038,형압명함,PRF_NAMECARD_EMBOSS,COMP_PP_CORNER_RIGHT,귀돌이비,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000040,화이트인쇄명함,PRF_NAMECARD_WHITE,COMP_NAMECARD_WHITE,화이트인쇄명함 완제품가(용지포함),"min_qty,print_opt_cd","OPT_000319,OPT_000323,mat_cd,qty,siz_cd",print_opt_cd
+PRD_000040,화이트인쇄명함,PRF_NAMECARD_WHITE,COMP_NAMECARD_SPOT,명함 별색인쇄비,"min_qty,proc_cd,spot_side_cnt","OPT_000319,OPT_000323,mat_cd,qty,siz_cd","proc_cd,spot_side_cnt"
+PRD_000041,스탠다드 쿠폰/상품권,PRF_DGP_A,COMP_PRINT_DIGITAL_S1,디지털인쇄비,"min_qty,plt_siz_cd,print_opt_cd,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000041,스탠다드 쿠폰/상품권,PRF_DGP_A,COMP_PRINT_SPOT_WHITE_S1,별색인쇄비,"min_qty,plt_siz_cd,proc_cd,spot_side_cnt","mat_cd,print_opt_cd,qty,siz_cd","proc_cd,spot_side_cnt"
+PRD_000041,스탠다드 쿠폰/상품권,PRF_DGP_A,COMP_PP_CORNER_RIGHT,귀돌이비,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000041,스탠다드 쿠폰/상품권,PRF_DGP_A,COMP_PP_CREASE_1L,오시비,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000041,스탠다드 쿠폰/상품권,PRF_DGP_A,COMP_PP_PERF_1L,미싱비,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000041,스탠다드 쿠폰/상품권,PRF_DGP_A,COMP_PP_VARTEXT_1EA,가변텍스트,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000041,스탠다드 쿠폰/상품권,PRF_DGP_A,COMP_PP_VARIMG_1EA,가변이미지,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000041,스탠다드 쿠폰/상품권,PRF_DGP_A,COMP_COAT_GLOSSY,유광코팅비,"coat_side_cnt,min_qty,plt_siz_cd,proc_cd","mat_cd,print_opt_cd,qty,siz_cd","coat_side_cnt,proc_cd"
+PRD_000041,스탠다드 쿠폰/상품권,PRF_DGP_A,COMP_COAT_MATTE,무광코팅비,"coat_side_cnt,min_qty,plt_siz_cd,proc_cd","mat_cd,print_opt_cd,qty,siz_cd","coat_side_cnt,proc_cd"
+PRD_000042,프리미엄 쿠폰/상품권,PRF_DGP_A_FOIL,COMP_PRINT_DIGITAL_S1,디지털인쇄비,"min_qty,plt_siz_cd,print_opt_cd,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000042,프리미엄 쿠폰/상품권,PRF_DGP_A,COMP_PRINT_DIGITAL_S1,디지털인쇄비,"min_qty,plt_siz_cd,print_opt_cd,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000042,프리미엄 쿠폰/상품권,PRF_DGP_A_FOIL,COMP_PRINT_SPOT_WHITE_S1,별색인쇄비,"min_qty,plt_siz_cd,proc_cd,spot_side_cnt","mat_cd,print_opt_cd,qty,siz_cd","proc_cd,spot_side_cnt"
+PRD_000042,프리미엄 쿠폰/상품권,PRF_DGP_A,COMP_PRINT_SPOT_WHITE_S1,별색인쇄비,"min_qty,plt_siz_cd,proc_cd,spot_side_cnt","mat_cd,print_opt_cd,qty,siz_cd","proc_cd,spot_side_cnt"
+PRD_000042,프리미엄 쿠폰/상품권,PRF_DGP_A,COMP_PP_CORNER_RIGHT,귀돌이비,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000042,프리미엄 쿠폰/상품권,PRF_DGP_A_FOIL,COMP_PP_CORNER_RIGHT,귀돌이비,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000042,프리미엄 쿠폰/상품권,PRF_DGP_A,COMP_PP_CREASE_1L,오시비,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000042,프리미엄 쿠폰/상품권,PRF_DGP_A_FOIL,COMP_PP_CREASE_1L,오시비,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000042,프리미엄 쿠폰/상품권,PRF_DGP_A_FOIL,COMP_PP_PERF_1L,미싱비,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000042,프리미엄 쿠폰/상품권,PRF_DGP_A,COMP_PP_PERF_1L,미싱비,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000042,프리미엄 쿠폰/상품권,PRF_DGP_A,COMP_PP_VARTEXT_1EA,가변텍스트,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000042,프리미엄 쿠폰/상품권,PRF_DGP_A_FOIL,COMP_PP_VARTEXT_1EA,가변텍스트,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000042,프리미엄 쿠폰/상품권,PRF_DGP_A_FOIL,COMP_PP_VARIMG_1EA,가변이미지,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000042,프리미엄 쿠폰/상품권,PRF_DGP_A,COMP_PP_VARIMG_1EA,가변이미지,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000042,프리미엄 쿠폰/상품권,PRF_DGP_A_FOIL,COMP_FOIL_SETUP_LARGE,박·형압 동판셋업비(대형),"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000042,프리미엄 쿠폰/상품권,PRF_DGP_A_FOIL,COMP_FOIL_PROC_LARGE_STD,박 가공비(대형·일반박),"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000042,프리미엄 쿠폰/상품권,PRF_DGP_A_FOIL,COMP_FOIL_PROC_LARGE_SPECIAL,박 가공비(대형·특수박),"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000042,프리미엄 쿠폰/상품권,PRF_DGP_A_FOIL,COMP_COAT_GLOSSY,유광코팅비,"coat_side_cnt,min_qty,plt_siz_cd,proc_cd","mat_cd,print_opt_cd,qty,siz_cd","coat_side_cnt,proc_cd"
+PRD_000042,프리미엄 쿠폰/상품권,PRF_DGP_A,COMP_COAT_GLOSSY,유광코팅비,"coat_side_cnt,min_qty,plt_siz_cd,proc_cd","mat_cd,print_opt_cd,qty,siz_cd","coat_side_cnt,proc_cd"
+PRD_000042,프리미엄 쿠폰/상품권,PRF_DGP_A,COMP_COAT_MATTE,무광코팅비,"coat_side_cnt,min_qty,plt_siz_cd,proc_cd","mat_cd,print_opt_cd,qty,siz_cd","coat_side_cnt,proc_cd"
+PRD_000042,프리미엄 쿠폰/상품권,PRF_DGP_A_FOIL,COMP_COAT_MATTE,무광코팅비,"coat_side_cnt,min_qty,plt_siz_cd,proc_cd","mat_cd,print_opt_cd,qty,siz_cd","coat_side_cnt,proc_cd"
+PRD_000043,인쇄배경지(일반형),PRF_DGP_C,COMP_PRINT_DIGITAL_S1,디지털인쇄비,"min_qty,plt_siz_cd,print_opt_cd,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000043,인쇄배경지(일반형),PRF_DGP_C,COMP_CUT_PERF_1H6,타공비 (6mm),"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000044,인쇄배경지(커팅형),PRF_DGP_C,COMP_PRINT_DIGITAL_S1,디지털인쇄비,"min_qty,plt_siz_cd,print_opt_cd,proc_cd","OPT_000265,mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000044,인쇄배경지(커팅형),PRF_DGP_C,COMP_CUT_PERF_1H6,타공비 (6mm),"min_qty,proc_cd","OPT_000265,mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000045,인쇄헤더택,PRF_DGP_C,COMP_PRINT_DIGITAL_S1,디지털인쇄비,"min_qty,plt_siz_cd,print_opt_cd,proc_cd","OPT_000280,mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000045,인쇄헤더택,PRF_DGP_C,COMP_CUT_PERF_1H6,타공비 (6mm),"min_qty,proc_cd","OPT_000280,mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000046,라벨/택,PRF_DGP_B,COMP_PRINT_DIGITAL_S1,디지털인쇄비,"min_qty,plt_siz_cd,print_opt_cd,proc_cd","OPT-000010,mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000047,소량전단지,PRF_DGP_D,COMP_PRINT_DIGITAL_S1,디지털인쇄비,"min_qty,plt_siz_cd,print_opt_cd,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000047,소량전단지,PRF_DGP_D,COMP_COAT_GLOSSY,유광코팅비,"coat_side_cnt,min_qty,plt_siz_cd,proc_cd","mat_cd,print_opt_cd,qty,siz_cd","coat_side_cnt,proc_cd"
+PRD_000047,소량전단지,PRF_DGP_D,COMP_COAT_MATTE,무광코팅비,"coat_side_cnt,min_qty,plt_siz_cd,proc_cd","mat_cd,print_opt_cd,qty,siz_cd","coat_side_cnt,proc_cd"
+PRD_000047,소량전단지,PRF_DGP_D,COMP_CUT_PERF_1H6,타공비 (6mm),"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000047,소량전단지,PRF_DGP_D,COMP_PP_CREASE_1L,오시비,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000047,소량전단지,PRF_DGP_D,COMP_PP_PERF_1L,미싱비,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000047,소량전단지,PRF_DGP_D,COMP_PP_VARTEXT_1EA,가변텍스트,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000047,소량전단지,PRF_DGP_D,COMP_PP_VARIMG_1EA,가변이미지,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000047,소량전단지,PRF_DGP_D,COMP_PP_CORNER_RIGHT,귀돌이비,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000048,접지리플렛,PRF_DGP_E,COMP_PRINT_DIGITAL_S1,디지털인쇄비,"min_qty,plt_siz_cd,print_opt_cd,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000048,접지리플렛,PRF_DGP_E,COMP_COAT_GLOSSY,유광코팅비,"coat_side_cnt,min_qty,plt_siz_cd,proc_cd","mat_cd,print_opt_cd,qty,siz_cd","coat_side_cnt,proc_cd"
+PRD_000048,접지리플렛,PRF_DGP_E,COMP_COAT_MATTE,무광코팅비,"coat_side_cnt,min_qty,plt_siz_cd,proc_cd","mat_cd,print_opt_cd,qty,siz_cd","coat_side_cnt,proc_cd"
+PRD_000048,접지리플렛,PRF_DGP_E,COMP_FOLD_LEAF_HALF,접지비 리플렛 반접지,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000048,접지리플렛,PRF_DGP_E,COMP_FOLD_LEAF_3FOLD,접지비 리플렛 3단,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000048,접지리플렛,PRF_DGP_E,COMP_FOLD_LEAF_4ACC,접지비 리플렛 4단아코디언,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000048,접지리플렛,PRF_DGP_E,COMP_FOLD_LEAF_4GATE,접지비 리플렛 4단게이트,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000048,접지리플렛,PRF_DGP_E,COMP_CUT_PERF_1H6,타공비 (6mm),"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000048,접지리플렛,PRF_DGP_E,COMP_PP_VARTEXT_1EA,가변텍스트,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000048,접지리플렛,PRF_DGP_E,COMP_PP_VARIMG_1EA,가변이미지,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000049,와이드 접지리플렛,PRF_DGP_E,COMP_PRINT_DIGITAL_S1,디지털인쇄비,"min_qty,plt_siz_cd,print_opt_cd,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000049,와이드 접지리플렛,PRF_DGP_E,COMP_COAT_GLOSSY,유광코팅비,"coat_side_cnt,min_qty,plt_siz_cd,proc_cd","mat_cd,print_opt_cd,qty,siz_cd","coat_side_cnt,proc_cd"
+PRD_000049,와이드 접지리플렛,PRF_DGP_E,COMP_COAT_MATTE,무광코팅비,"coat_side_cnt,min_qty,plt_siz_cd,proc_cd","mat_cd,print_opt_cd,qty,siz_cd","coat_side_cnt,proc_cd"
+PRD_000049,와이드 접지리플렛,PRF_DGP_E,COMP_FOLD_LEAF_HALF,접지비 리플렛 반접지,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000049,와이드 접지리플렛,PRF_DGP_E,COMP_FOLD_LEAF_3FOLD,접지비 리플렛 3단,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000049,와이드 접지리플렛,PRF_DGP_E,COMP_FOLD_LEAF_4ACC,접지비 리플렛 4단아코디언,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000049,와이드 접지리플렛,PRF_DGP_E,COMP_FOLD_LEAF_4GATE,접지비 리플렛 4단게이트,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000049,와이드 접지리플렛,PRF_DGP_E,COMP_CUT_PERF_1H6,타공비 (6mm),"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000049,와이드 접지리플렛,PRF_DGP_E,COMP_PP_VARTEXT_1EA,가변텍스트,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000049,와이드 접지리플렛,PRF_DGP_E,COMP_PP_VARIMG_1EA,가변이미지,"min_qty,proc_cd","mat_cd,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000055,낱장 자유형 스티커,PRF_STK_FIXED,COMP_STK_PRINT,스티커 완제품가(소재·규격),"mat_cd,min_qty,siz_cd","OPT-000039,OPT_000112,OPT_000277,qty,siz_cd",mat_cd
+PRD_000057,대형 자유형 스티커,PRF_STK_FIXED,COMP_STK_PRINT,스티커 완제품가(소재·규격),"mat_cd,min_qty,siz_cd","OPT_000248,OPT_000249,OPT_000278,qty,siz_cd",mat_cd
+PRD_000068,중철책자,PRF_BIND_SUM,COMP_BIND_JUNGCHEOL,제본비 중철,"min_qty,proc_cd","mat_cd,pages,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000069,무선책자,PRF_BIND_MUSEON,COMP_BIND_MUSEON,제본비 무선,"min_qty,proc_cd","mat_cd,pages,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000069,무선책자,PRF_BIND_MUSEON_FOIL,COMP_BIND_MUSEON,제본비 무선,"min_qty,proc_cd","mat_cd,pages,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000069,무선책자,PRF_BIND_MUSEON_FOIL,COMP_FOIL_SETUP_LARGE,박·형압 동판셋업비(대형),"min_qty,proc_cd","mat_cd,pages,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000069,무선책자,PRF_BIND_MUSEON_FOIL,COMP_FOIL_PROC_LARGE_STD,박 가공비(대형·일반박),"min_qty,proc_cd","mat_cd,pages,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000069,무선책자,PRF_BIND_MUSEON_FOIL,COMP_FOIL_PROC_LARGE_SPECIAL,박 가공비(대형·특수박),"min_qty,proc_cd","mat_cd,pages,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000069,무선책자,PRF_BIND_MUSEON_FOIL,COMP_EMBOSS_SETUP_LARGE,형압 동판셋업비(대형),"min_qty,proc_cd","mat_cd,pages,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000069,무선책자,PRF_BIND_MUSEON_FOIL,COMP_EMBOSS_PROC_LARGE_STD,형압 가공비(대형),"min_qty,proc_cd","mat_cd,pages,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000070,PUR책자,PRF_BIND_PUR_FOIL,COMP_BIND_PUR,제본비 PUR,"min_qty,proc_cd","mat_cd,pages,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000070,PUR책자,PRF_BIND_PUR,COMP_BIND_PUR,제본비 PUR,"min_qty,proc_cd","mat_cd,pages,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000070,PUR책자,PRF_BIND_PUR_FOIL,COMP_FOIL_SETUP_LARGE,박·형압 동판셋업비(대형),"min_qty,proc_cd","mat_cd,pages,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000070,PUR책자,PRF_BIND_PUR_FOIL,COMP_FOIL_PROC_LARGE_STD,박 가공비(대형·일반박),"min_qty,proc_cd","mat_cd,pages,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000070,PUR책자,PRF_BIND_PUR_FOIL,COMP_FOIL_PROC_LARGE_SPECIAL,박 가공비(대형·특수박),"min_qty,proc_cd","mat_cd,pages,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000070,PUR책자,PRF_BIND_PUR_FOIL,COMP_EMBOSS_SETUP_LARGE,형압 동판셋업비(대형),"min_qty,proc_cd","mat_cd,pages,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000070,PUR책자,PRF_BIND_PUR_FOIL,COMP_EMBOSS_PROC_LARGE_STD,형압 가공비(대형),"min_qty,proc_cd","mat_cd,pages,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000071,트윈링책자,PRF_BIND_TWINRING,COMP_BIND_TWINRING,제본비,"min_qty,proc_cd","OPT_000136,OPT_000275,OPT_000276,mat_cd,pages,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000082,하드커버링책자,PRF_HC_TWINRING_SET,COMP_BIND_HC_TWINRING,제본비 하드커버트윈링,"min_qty,proc_cd","OPT_000311,OPT_000313,OPT_000326,mat_cd,pages,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000094,엽서북,PRF_PCB_FIXED,COMP_PCB,엽서북 완제품가 사이즈/양단면/페이지수별 단가,"min_qty,opt_cd,print_opt_cd,siz_cd","OPT_000325,mat_cd,pages,print_opt_cd,qty,siz_cd",opt_cd
+PRD_000108,탁상형캘린더,PRF_DGP_CAL_DESK,COMP_PRINT_DIGITAL_S1,디지털인쇄비,"min_qty,plt_siz_cd,print_opt_cd,proc_cd","OPT_000271,OPT_000272,mat_cd,pages,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000108,탁상형캘린더,PRF_DGP_CAL_DESK,COMP_BIND_CAL_WALL,제본비 벽걸이캘린더,"min_qty,proc_cd","OPT_000271,OPT_000272,mat_cd,pages,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000109,미니탁상형캘린더,PRF_DGP_CAL_DESK,COMP_PRINT_DIGITAL_S1,디지털인쇄비,"min_qty,plt_siz_cd,print_opt_cd,proc_cd","OPT_000308,OPT_000309,mat_cd,pages,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000109,미니탁상형캘린더,PRF_DGP_CAL_DESK,COMP_BIND_CAL_WALL,제본비 벽걸이캘린더,"min_qty,proc_cd","OPT_000308,OPT_000309,mat_cd,pages,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000110,엽서캘린더,PRF_DGP_INNER,COMP_PRINT_DIGITAL_S1,디지털인쇄비,"min_qty,plt_siz_cd,print_opt_cd,proc_cd","OPT_000305,mat_cd,pages,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000111,벽걸이캘린더,PRF_DGP_CAL_WIDE,COMP_PRINT_DIGITAL_S1,디지털인쇄비,"min_qty,plt_siz_cd,print_opt_cd,proc_cd","OPT_000273,mat_cd,pages,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000111,벽걸이캘린더,PRF_DGP_CAL_WIDE,COMP_BIND_CAL_WALL,제본비 벽걸이캘린더,"min_qty,proc_cd","OPT_000273,mat_cd,pages,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000112,와이드벽걸이캘린더,PRF_DGP_CAL_WIDE,COMP_PRINT_DIGITAL_S1,디지털인쇄비,"min_qty,plt_siz_cd,print_opt_cd,proc_cd","OPT_000310,mat_cd,pages,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000112,와이드벽걸이캘린더,PRF_DGP_CAL_WIDE,COMP_BIND_CAL_WALL,제본비 벽걸이캘린더,"min_qty,proc_cd","OPT_000310,mat_cd,pages,print_opt_cd,qty,siz_cd",proc_cd
+PRD_000118,아트프린트포스터,PRF_POSTER_ARTPRINT,COMP_POSTER_ARTPRINT_PHOTO,실사 완제품가 (아트프린트포스터·접착방수포스터·아트패브릭포스터·방수포스터),"min_qty,siz_height,siz_width","mat_cd,qty,siz_cd","siz_height,siz_width"
+PRD_000119,아트페이퍼포스터,PRF_POSTER_ARTPAPER,COMP_POSTER_ARTPAPER_MATTE,실사 완제품가 (아트페이퍼포스터),"siz_height,siz_width","mat_cd,qty,siz_cd","siz_height,siz_width"
+PRD_000120,방수포스터,PRF_POSTER_WATERPROOF,COMP_POSTER_ARTPRINT_PHOTO,실사 완제품가 (아트프린트포스터·접착방수포스터·아트패브릭포스터·방수포스터),"min_qty,siz_height,siz_width","mat_cd,qty,siz_cd","siz_height,siz_width"
+PRD_000121,접착방수포스터,PRF_POSTER_ADH_WP,COMP_POSTER_ARTPRINT_PHOTO,실사 완제품가 (아트프린트포스터·접착방수포스터·아트패브릭포스터·방수포스터),"min_qty,siz_height,siz_width","mat_cd,qty,siz_cd","siz_height,siz_width"
+PRD_000122,접착투명포스터,PRF_POSTER_ADH_CLEAR,COMP_POSTER_ADH_CLEAR_PVC,실사 완제품가 (접착투명포스터),"siz_height,siz_width","mat_cd,qty,siz_cd","siz_height,siz_width"
+PRD_000123,아트패브릭포스터,PRF_POSTER_ARTFABRIC,COMP_POSTER_ARTPRINT_PHOTO,실사 완제품가 (아트프린트포스터·접착방수포스터·아트패브릭포스터·방수포스터),"min_qty,siz_height,siz_width","mat_cd,qty,siz_cd","siz_height,siz_width"
+PRD_000124,린넨패브릭포스터,PRF_POSTER_LINEN,COMP_POSTER_LINEN_FABRIC,실사 완제품가 (린넨패브릭포스터),"siz_height,siz_width","OPT_000096,mat_cd,qty,siz_cd","siz_height,siz_width"
+PRD_000124,린넨패브릭포스터,PRF_POSTER_LINEN,COMP_POSTEROPT_LINEN_FINISH,린넨 마감가공비,"min_qty,opt_cd","OPT_000096,mat_cd,qty,siz_cd",opt_cd
+PRD_000125,캔버스패브릭포스터,PRF_POSTER_CANVAS,COMP_POSTER_CANVAS_FABRIC,실사 완제품가 (캔버스패브릭포스터·레더아트프린트·메쉬프린트·타이벡프린트),"min_qty,siz_height,siz_width","OPT_000099,mat_cd,qty,siz_cd","siz_height,siz_width"
+PRD_000126,레더아트프린트,PRF_POSTER_LEATHER_AP,COMP_POSTER_CANVAS_FABRIC,실사 완제품가 (캔버스패브릭포스터·레더아트프린트·메쉬프린트·타이벡프린트),"min_qty,siz_height,siz_width","mat_cd,qty,siz_cd","siz_height,siz_width"
+PRD_000127,타이벡프린트,PRF_POSTER_TYVEK,COMP_POSTER_CANVAS_FABRIC,실사 완제품가 (캔버스패브릭포스터·레더아트프린트·메쉬프린트·타이벡프린트),"min_qty,siz_height,siz_width","mat_cd,qty,siz_cd","siz_height,siz_width"
+PRD_000128,메쉬프린트,PRF_POSTER_MESH,COMP_POSTER_CANVAS_FABRIC,실사 완제품가 (캔버스패브릭포스터·레더아트프린트·메쉬프린트·타이벡프린트),"min_qty,siz_height,siz_width","mat_cd,qty,siz_cd","siz_height,siz_width"
+PRD_000133,캔버스 행잉포스터,PRF_POSTER_CANVAS_HANGING,COMP_POSTER_CANVAS_HANGING,캔버스 행잉포스터 완제품가,"min_qty,siz_cd,siz_height,siz_width","OPT_000102,OPT_000283,mat_cd,qty,siz_cd","siz_height,siz_width"
+PRD_000133,캔버스 행잉포스터,PRF_POSTER_CANVAS_HANGING,COMP_POSTEROPT_CANVAS_HANGING_WOODHANGER,캔버스행잉포스터 우드행거+면끈 추가가격,"opt_cd,siz_cd","OPT_000102,OPT_000283,mat_cd,qty,siz_cd",opt_cd
+PRD_000134,린넨우드봉족자,PRF_POSTER_LINEN_WOODBONG,COMP_POSTEROPT_LINEN_WOODBONG_WOODBONG,린넨우드봉족자 우드봉+면끈 추가가격,"opt_cd,siz_cd","OPT_000108,OPT_000266,mat_cd,qty,siz_cd",opt_cd
+PRD_000138,일반현수막,PRF_POSTER_BANNER_N,COMP_POSTER_BANNER_NORMAL,일반 현수막 완제품가,"min_qty,siz_height,siz_width","OPT_000003,OPT_000004,mat_cd,qty,siz_cd","siz_height,siz_width"
+PRD_000138,일반현수막,PRF_POSTER_BANNER_N,COMP_BANNER_OPTION,일반 현수막 가공옵션,"min_qty,opt_cd","OPT_000003,OPT_000004,mat_cd,qty,siz_cd",opt_cd
+PRD_000138,일반현수막,PRF_POSTER_BANNER_N,COMP_BANNER_ADDON,일반 현수막 부자재,"min_qty,opt_cd","OPT_000003,OPT_000004,mat_cd,qty,siz_cd",opt_cd
+PRD_000139,메쉬현수막,PRF_POSTER_BANNER_M,COMP_POSTER_BANNER_MESH,메쉬 현수막 완제품가,"min_qty,siz_height,siz_width","OPT_000023,OPT_000285,mat_cd,qty,siz_cd","siz_height,siz_width"
+PRD_000139,메쉬현수막,PRF_POSTER_BANNER_M,COMP_BANNER_MESH_ADDON,메쉬 현수막 부자재,"min_qty,opt_cd","OPT_000023,OPT_000285,mat_cd,qty,siz_cd",opt_cd
+PRD_000139,메쉬현수막,PRF_POSTER_BANNER_M,COMP_BANNER_MESH_OPTION,메쉬 현수막 가공옵션,"min_qty,opt_cd","OPT_000023,OPT_000285,mat_cd,qty,siz_cd",opt_cd
+PRD_000146,아크릴키링,PRF_ACRYL_KEYRING,COMP_ACRYL_CLEAR3T,투명아크릴 인쇄가공비,"mat_cd,min_qty,siz_height,siz_width","OPT_000157,mat_cd,qty,siz_cd","siz_height,siz_width"
+PRD_000146,아크릴키링,PRF_ACRYL_KEYRING,COMP_ACRYL_KEYRING,키링 열쇠고리,"min_qty,opt_cd","OPT_000157,mat_cd,qty,siz_cd",opt_cd
+PRD_000147,아크릴마그넷,PRF_ACRYL_MAGNET,COMP_ACRYL_CLEAR3T,투명아크릴 인쇄가공비,"mat_cd,min_qty,siz_height,siz_width","OPT_000295,mat_cd,qty,siz_cd","siz_height,siz_width"
+PRD_000147,아크릴마그넷,PRF_ACRYL_MAGNET,COMP_ACRYL_MAGNET,마그넷 자석부착,"min_qty,opt_cd","OPT_000295,mat_cd,qty,siz_cd",opt_cd
+PRD_000148,아크릴뱃지,PRF_ACRYL_BADGE,COMP_ACRYL_CLEAR3T,투명아크릴 인쇄가공비,"mat_cd,min_qty,siz_height,siz_width","OPT_000296,mat_cd,qty,siz_cd","siz_height,siz_width"
+PRD_000148,아크릴뱃지,PRF_ACRYL_BADGE,COMP_ACRYL_BADGE,뱃지 부속,"min_qty,opt_cd","OPT_000296,mat_cd,qty,siz_cd",opt_cd
+PRD_000149,아크릴집게,PRF_ACRYL_CLIP,COMP_ACRYL_CLEAR3T,투명아크릴 인쇄가공비,"mat_cd,min_qty,siz_height,siz_width","OPT_000297,mat_cd,qty,siz_cd","siz_height,siz_width"
+PRD_000149,아크릴집게,PRF_ACRYL_CLIP,COMP_ACRYL_CLIP,집게 부속,"min_qty,opt_cd","OPT_000297,mat_cd,qty,siz_cd",opt_cd
+PRD_000150,아크릴스마트톡,PRF_ACRYL_SMARTTOK,COMP_ACRYL_CLEAR3T,투명아크릴 인쇄가공비,"mat_cd,min_qty,siz_height,siz_width","OPT_000270,mat_cd,qty,siz_cd","siz_height,siz_width"
+PRD_000150,아크릴스마트톡,PRF_ACRYL_SMARTTOK,COMP_ACRYL_SMARTTOK,스마트톡 바디,"min_qty,opt_cd","OPT_000270,mat_cd,qty,siz_cd",opt_cd
+PRD_000152,아크릴명찰,PRF_ACRYL_NAMETAG,COMP_ACRYL_CLEAR3T,투명아크릴 인쇄가공비,"mat_cd,min_qty,siz_height,siz_width","OPT_000298,mat_cd,qty,siz_cd","siz_height,siz_width"
+PRD_000152,아크릴명찰,PRF_ACRYL_NAMETAG,COMP_ACRYL_NAMETAG_PIN,명찰 부속,"min_qty,opt_cd","OPT_000298,mat_cd,qty,siz_cd",opt_cd
+PRD_000153,아크릴명찰(골드실버),PRF_ACRYL_NAMETAG_GS,COMP_ACRYL_NAMETAG_GS_OPTION,아크릴명찰(골드실버) 가공옵션,"min_qty,opt_cd","OPT_000299,mat_cd,qty,siz_cd",opt_cd
+PRD_000154,아크릴 머리끈,PRF_ACRYL_HAIRBAND,COMP_ACRYL_CLEAR3T,투명아크릴 인쇄가공비,"mat_cd,min_qty,siz_height,siz_width","OPT_000301,mat_cd,qty,siz_cd","siz_height,siz_width"
+PRD_000154,아크릴 머리끈,PRF_ACRYL_HAIRBAND,COMP_ACRYL_BLACK_HAIR_BAND,아크릴 머리끈,"min_qty,opt_cd","OPT_000301,mat_cd,qty,siz_cd",opt_cd
+PRD_000156,아크릴지비츠,PRF_ZIBITZ_ACRYL,COMP_ACRYL_ZIBITZ,아크릴지비츠 가공(투명/스핀) 완제품가,"min_qty,opt_cd","OPT_000300,mat_cd,qty,siz_cd",opt_cd
+PRD_000159,아크릴코스터,PRF_CLR_ACRYL,COMP_ACRYL_CLEAR3T,투명아크릴 인쇄가공비,"mat_cd,min_qty,siz_height,siz_width","mat_cd,qty,siz_cd","siz_height,siz_width"
+PRD_000161,판아크릴,PRF_CLR_ACRYL,COMP_ACRYL_CLEAR3T,투명아크릴 인쇄가공비,"mat_cd,min_qty,siz_height,siz_width","mat_cd,qty,siz_cd","siz_height,siz_width"
+PRD_000164,아크릴코롯토,PRF_COROTTO_ACRYL,COMP_ACRYL_COROTTO,아크릴코롯토 인쇄가공비,"siz_height,siz_width","mat_cd,qty,siz_cd","siz_height,siz_width"
