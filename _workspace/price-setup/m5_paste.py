@@ -104,7 +104,10 @@ def main():
                         note += " · 권위값 없음 — 실무진 확정 대기"
                     row = [""]                       # 적용일 — 실무진이 정한다
                     for c in g["cols"]:
-                        row.append(el.vals.get(c["name"], "") if c["kind"] != "param" else "")
+                        # [HARD] param 컬럼(공정 상세 파라미터)도 값을 채운다. 비워 두면
+                        #        단가편집 그리드가 그 칸을 못 읽어 붙여넣기가 성립하지 않는다
+                        #        — 「줄수」·「개수」·「가로/세로」가 그 축이다(STATUS §4.5).
+                        row.append(el.vals.get(c["name"], ""))
                     row.append(el.auth_value if el.auth_value is not None else "")
                     row.append(note)
                     w.writerow(row)

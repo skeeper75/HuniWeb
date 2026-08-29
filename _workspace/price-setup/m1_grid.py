@@ -31,6 +31,7 @@
 import argparse
 import csv
 import itertools
+import json
 import os
 import sys
 from collections import defaultdict
@@ -137,25 +138,80 @@ def build_block_grid(b, dims, tr):
     return out, None
 
 
-def live_rows(comp, dims):
-    """라이브 단가행을 같은 키 모양으로. 대조 대상이지 생성자가 아니다."""
+def _as_dict(dv):
+    """`dim_vals`(jsonb) 를 dict 로. 원시 커서는 문자열로 돌려주기도 한다."""
+    if isinstance(dv, dict):
+        return dv
+    if isinstance(dv, str) and dv.strip():
+        try:
+            v = json.loads(dv)
+        except ValueError:
+            return {}
+        return v if isinstance(v, dict) else {}
+    return {}
+
+
+def comp_params(cobj):
+    """이 구성요소의 공정 상세 파라미터 축. 반환 (키 목록, {키: 컬럼스펙}).
+
+    [HARD] 화면이 정본이다(`huni-webadmin-manual-first.md` · STATUS §4.5). `use_dims` 12종만
+           보면 이 축을 통째로 놓친다 — 오시비·박에서 같은 형태로 두 번 틀렸다.
+           단가편집 화면은 `proc_grp` 의 상세입력을 `proc_cd` 바로 뒤 **컬럼**으로 세우고
+           (`price_views.proc_param_cols`), 값은 `dim_vals`(jsonb)에 담긴다.
+    """
+    from catalog import price_views as pv
+    _, scopes = pv.split_scopes(cobj.use_dims)
+    pg = scopes.get("proc_grp")
+    cols = pv.proc_param_cols(pg) if pg else []
+    return [c["name"] for c in cols], {c["name"]: c for c in cols}
+
+
+def live_param_vals(comp, params):
+    """라이브가 각 파라미터 축에 실제로 쓰는 값 집합.
+
+    비어 있으면 `translate_block` 이 그 축을 `null-dim` 으로 빼낸다 — 화면에 컬럼은
+    있으나 라이브가 그 칸을 전건 비워 둔 구성요소(별색·코팅·제본 계열)가 그 형태다.
+    """
+    out = {p: set() for p in params}
+    if not params:
+        return out
+    for (dv,) in _q("SELECT dim_vals FROM t_prc_component_prices "
+                    "WHERE comp_cd=%s AND dim_vals IS NOT NULL", [comp]):
+        d = _as_dict(dv)
+        for p in params:
+            v = d.get(p)
+            if v is not None and str(v).strip() != "":
+                out[p].add(_norm_val(v))
+    return out
+
+
+def live_rows(comp, dims, params=()):
+    """라이브 단가행을 같은 키 모양으로. 대조 대상이지 생성자가 아니다.
+
+    [HARD] `dim_vals` 의 파라미터를 키에 **펼쳐 넣는다** — `/grid/` 응답과 같은 모양이다
+           (`price_views.price_grid`: `for k in param_keys: r[k] = dv.get(k)`).
+           빠뜨리면 오시비 30행이 10행으로 접히고, 없는 조합이 누락으로 만들어진다.
+    """
     cols = ", ".join(dims)
-    rows = _q(f"SELECT {cols}, unit_price, apply_ymd FROM t_prc_component_prices "
-              f"WHERE comp_cd=%s", [comp])
+    rows = _q(f"SELECT {cols}, dim_vals, unit_price, apply_ymd "
+              f"FROM t_prc_component_prices WHERE comp_cd=%s", [comp])
     out = {}
     for r in rows:
-        key = tuple(_norm_val(x) for x in r[:len(dims)])
+        dv = _as_dict(r[len(dims)])
+        key = (tuple(_norm_val(x) for x in r[:len(dims)])
+               + tuple(_norm_val(dv.get(p)) for p in params))
         out.setdefault(key, []).append({"unit_price": r[-2], "apply_ymd": r[-1]})
     return out
 
 
-def build(comp, slots, dims, scopes, M, live_vals, all_blocks):
+def build(comp, slots, dims, scopes, M, live_vals, all_blocks, params=None):
     """3·4단계 — 하위표별 교차곱을 만들고 합집합한다."""
     merged, blockers, per_block = {}, [], []
     for key, v in slots.items():
         b = v["block"]
         tr = m3_axis.translate_block(comp, b, dims, scopes, M, live_vals,
-                                     m3_axis.foreign_labels(all_blocks, b))
+                                     m3_axis.foreign_labels(all_blocks, b),
+                                     params=params)
         grid, why = build_block_grid(b, dims, tr)
         if grid is None:
             blockers.append((b, why))
@@ -187,18 +243,23 @@ def run(only_comp=None, only_sheet=None):
             continue
         dims = pv._comp_dims(cobj)
         _, scopes = pv.split_scopes(cobj.use_dims)
+        param_keys, param_meta = comp_params(cobj)
+        # 격자 축 = 12종 차원 + 공정 상세 파라미터. 화면 컬럼과 같은 모양이다.
+        grid_dims = list(dims) + param_keys
         live_vals = {d: {r[0] for r in _q(
             f"SELECT DISTINCT {d} FROM t_prc_component_prices "
             f"WHERE comp_cd=%s AND {d} IS NOT NULL", [comp])} for d in dims}
+        live_vals.update(live_param_vals(comp, param_keys))
 
-        merged, blockers, per_block = build(comp, slots, dims, scopes, M,
-                                            live_vals, all_blocks)
-        live = live_rows(comp, dims)
+        merged, blockers, per_block = build(comp, slots, grid_dims, scopes, M,
+                                            live_vals, all_blocks, param_meta)
+        live = live_rows(comp, dims, param_keys)
         present = [k for k in merged if k in live]      # 실재
         missing = [k for k in merged if k not in live]  # 누락 — 단가 칸을 비운다
         extra = [k for k in live if k not in merged]    # 잉여 — 보고만(P-2)
         results.append({
-            "comp": comp, "comp_nm": names.get(comp, ""), "dims": dims,
+            "comp": comp, "comp_nm": names.get(comp, ""), "dims": grid_dims,
+            "base_dims": dims, "param_keys": param_keys,
             "merged": merged, "live": live, "per_block": per_block,
             "blockers": blockers, "present": present, "missing": missing,
             "extra": extra, "prc_typ": meta.get(comp, ("", ""))[1],

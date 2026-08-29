@@ -373,12 +373,43 @@ def foreign_labels(blocks, b):
     return out
 
 
-def translate_block(comp, b, dims, scopes, M, live_vals, foreign=frozenset()):
+def translate_param(label, meta):
+    """공정 상세 파라미터 축의 라벨 하나를 값으로. 못 읽으면 None.
+
+    [HARD] 이 축은 `use_dims` 12종에 없다 — `t_prc_component_prices.dim_vals`(jsonb)에
+           담기고, 단가편집 화면은 `proc_grp` 의 상세입력을 그리드 **컬럼**으로 세운다
+           (`price_views.proc_param_cols`). 화면 실측(2026-08-30):
+
+               COMP_PP_CREASE_1L 오시비   적용일·공정·**줄수(줄)**·수량·고정·비고  → 30행
+               COMP_PP_VARIMG_1EA 가변이미지 적용일·공정·**개수(개)**·수량·고정·비고
+
+           권위 「오시 (합가)」(인쇄후가공 B03)도 열 라벨이 **1줄·2줄·3줄**이다.
+           이 축을 버리면 권위 30칸이 11칸으로, 라이브 30행이 10행으로 접히고
+           그 어긋남이 통째로 「누락 1」로 둔갑한다.
+    """
+    vals = [str(v) for v in (meta.get("values") or []) if str(v).strip()]
+    if vals:                                   # 선택형 — 정의된 값 목록과 맞춘다
+        nl = norm(label)
+        for v in vals:
+            if norm(v) == nl:
+                return v
+        for v in vals:                         # 라벨에 값이 포함된 형태(「앞면 유광」)
+            if norm(v) and norm(v) in nl:
+                return v
+        return None
+    return parse_number(label)                 # 수치형(integer/number) — 「1줄」→1
+
+
+def translate_block(comp, b, dims, scopes, M, live_vals, foreign=frozenset(),
+                    params=None):
     """이 블록의 축들을 comp 의 차원에 배정하고 번역한다.
 
-    각 축은 최대 한 차원에만 배정된다. 배정 점수 = 번역 성공 라벨 비율의 합.
+    `dims` 는 `_comp_dims` 12종 + **공정 상세 파라미터 키**(`params` 의 key)를 합친
+    격자 축 전체다. 각 축은 최대 한 차원에만 배정된다.
+    배정 점수 = 번역 성공 라벨 비율의 합.
     반환: {dim: {"axis":…, "map":{라벨:[코드…]}, "channel":…, "status":…}}
     """
+    params = params or {}
     axes = block_axes(b)
 
     # [HARD] 상수 차원을 **먼저** 빼낸다 — 축 선점을 막는다.
@@ -418,11 +449,24 @@ def translate_block(comp, b, dims, scopes, M, live_vals, foreign=frozenset()):
             # 혼입 라벨은 축 라벨이 아니므로 분모에서 뺀다(제거가 아니라 분류다).
             eff = [lb for lb in labels if lb not in bleed[ax]]
             got, mp, chans = 0, {}, set()
-            if d in NUM_DIMS:
+            if d in params:
+                for lb in eff:
+                    v = translate_param(lb, params[d])
+                    if v is not None:
+                        mp[lb] = [v]
+                        got += 1
+                        chans.add("상세파라미터")
+            elif d in NUM_DIMS:
                 p = NUM_PARSER[d]
                 for lb in eff:
                     # 동가 묶음이면 조각마다 수치를 읽어 합집합으로 낸다.
-                    parts = [x.strip() for x in re.split(r"[/,·]", str(lb)) if x.strip()]
+                    # [HARD] 천단위 콤마는 묶음 구분자가 아니다. 먼저 지운다.
+                    #   실측(오시비 · 인쇄후가공 B03): 꼬리 주석 「1,000장당 20,000원씩
+                    #   올립니다.」를 `,` 로 쪼개 ["1","000장당 20","000원씩…"] → {0,1} 이
+                    #   되어 **존재하지 않는 min_qty=0** 이 분모에 생겼다. 그 3칸이 오시비의
+                    #   「누락 3」의 정체다 — 라이브 결손이 아니라 파서 결함이다.
+                    flat = re.sub(r"(?<=\d),(?=\d{3}(?!\d))", "", str(lb))
+                    parts = [x.strip() for x in re.split(r"[/,·]", flat) if x.strip()]
                     if len(parts) > 1:
                         vs = [p(x) for x in parts]
                         vs = [v for v in vs if v is not None]
