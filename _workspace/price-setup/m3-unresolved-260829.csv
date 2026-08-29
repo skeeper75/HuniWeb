@@ -1,0 +1,82 @@
+﻿sheet,block_id,block_title,geometry,col_label,n_cells,reason_class,reason
+아크릴,B04,아크릴상품 수량별 구간할인,recovered,,6,out-of-scope-discount,구간할인 표 — 단가표가 아니다(할인 테이블 계열). 범위 밖
+아크릴,B07,아크릴카라비너 수량별 구간할인,recovered,,3,out-of-scope-discount,구간할인 표 — 단가표가 아니다(할인 테이블 계열). 범위 밖
+커팅타공,B02,1장당 2000원씩 올립니다.,unresolved,,0,geometry-unresolved,수치셀 0 — 기하 unresolved
+디지털인쇄비,B02,디지털인쇄 출력비(3절),declared,흑백(1도) > 양면,212,ambiguous-tie,동점 후보 2개(여백 0.020 미만): COMP_PRINT_DIGITAL_S2 / COMP_PRINT_DIGITAL_S1 — 스코프 판별도 갈리지 않음
+디지털인쇄비,B02,디지털인쇄 출력비(3절),declared,칼라(CMYK) > 양면,212,ambiguous-tie,동점 후보 2개(여백 0.020 미만): COMP_PRINT_DIGITAL_S2 / COMP_PRINT_DIGITAL_S1 — 스코프 판별도 갈리지 않음
+후가공_박(대형),B01,동판비,recovered,30mm,64,ambiguous-tie,동점 후보 2개(여백 0.020 미만): COMP_EMBOSS_SETUP_LARGE / COMP_FOIL_SETUP_LARGE — 스코프 판별도 갈리지 않음
+후가공_박(대형),B01,동판비,recovered,50mm,64,ambiguous-tie,동점 후보 2개(여백 0.020 미만): COMP_EMBOSS_SETUP_LARGE / COMP_FOIL_SETUP_LARGE — 스코프 판별도 갈리지 않음
+후가공_박(대형),B01,동판비,recovered,70mm,64,ambiguous-tie,동점 후보 2개(여백 0.020 미만): COMP_EMBOSS_SETUP_LARGE / COMP_FOIL_SETUP_LARGE — 스코프 판별도 갈리지 않음
+후가공_박(대형),B01,동판비,recovered,90mm,64,ambiguous-tie,동점 후보 2개(여백 0.020 미만): COMP_EMBOSS_SETUP_LARGE / COMP_FOIL_SETUP_LARGE — 스코프 판별도 갈리지 않음
+후가공_박(대형),B01,동판비,recovered,110mm,64,ambiguous-tie,동점 후보 2개(여백 0.020 미만): COMP_EMBOSS_SETUP_LARGE / COMP_FOIL_SETUP_LARGE — 스코프 판별도 갈리지 않음
+후가공_박(대형),B01,동판비,recovered,130mm,64,ambiguous-tie,동점 후보 2개(여백 0.020 미만): COMP_EMBOSS_SETUP_LARGE / COMP_FOIL_SETUP_LARGE — 스코프 판별도 갈리지 않음
+후가공_박(대형),B01,동판비,recovered,150mm,64,ambiguous-tie,동점 후보 2개(여백 0.020 미만): COMP_EMBOSS_SETUP_LARGE / COMP_FOIL_SETUP_LARGE — 스코프 판별도 갈리지 않음
+후가공_박(대형),B01,동판비,recovered,170mm,64,ambiguous-tie,동점 후보 2개(여백 0.020 미만): COMP_EMBOSS_SETUP_LARGE / COMP_FOIL_SETUP_LARGE — 스코프 판별도 갈리지 않음
+후가공_박(대형),B02,*아연판,unresolved,,0,geometry-unresolved,수치셀 0 — 기하 unresolved
+후가공_박(대형),B03,"대형박 가공비 일반박 면적당가격 정의 (금유광, 금무광, 은유광, 은무광,동박,청박)",recovered,분류 / 수량,48,ambiguous-tie,동점 후보 4개(여백 0.020 미만): COMP_COAT_MATTE / COMP_COAT_GLOSSY / COMP_PRINT_DIGITAL_S2 / COMP_PRINT_DIGITAL_S1 — 스코프 판별도 갈리지 않음
+후가공_박(대형),B03,"대형박 가공비 일반박 면적당가격 정의 (금유광, 금무광, 은유광, 은무광,동박,청박)",recovered,A,48,ambiguous-tie,동점 후보 2개(여백 0.020 미만): COMP_FOIL_PROC_LARGE_STD / COMP_EMBOSS_PROC_LARGE_STD — 스코프 판별도 갈리지 않음
+후가공_박(대형),B03,"대형박 가공비 일반박 면적당가격 정의 (금유광, 금무광, 은유광, 은무광,동박,청박)",recovered,B,48,ambiguous-tie,동점 후보 2개(여백 0.020 미만): COMP_FOIL_PROC_LARGE_STD / COMP_EMBOSS_PROC_LARGE_STD — 스코프 판별도 갈리지 않음
+후가공_박(대형),B03,"대형박 가공비 일반박 면적당가격 정의 (금유광, 금무광, 은유광, 은무광,동박,청박)",recovered,C,48,ambiguous-tie,동점 후보 2개(여백 0.020 미만): COMP_FOIL_PROC_LARGE_STD / COMP_EMBOSS_PROC_LARGE_STD — 스코프 판별도 갈리지 않음
+후가공_박(대형),B03,"대형박 가공비 일반박 면적당가격 정의 (금유광, 금무광, 은유광, 은무광,동박,청박)",recovered,D,48,ambiguous-tie,동점 후보 2개(여백 0.020 미만): COMP_FOIL_PROC_LARGE_STD / COMP_EMBOSS_PROC_LARGE_STD — 스코프 판별도 갈리지 않음
+후가공_박(대형),B03,"대형박 가공비 일반박 면적당가격 정의 (금유광, 금무광, 은유광, 은무광,동박,청박)",recovered,E,48,ambiguous-tie,동점 후보 2개(여백 0.020 미만): COMP_FOIL_PROC_LARGE_STD / COMP_EMBOSS_PROC_LARGE_STD — 스코프 판별도 갈리지 않음
+후가공_박(대형),B04,"대형박 가공비 특수박 면적당가격 정의 (먹유광, 백박, 홀로그램, 트윙클, 적박, 녹박)",recovered,,0,geometry-unresolved,수치셀 0 — 기하 recovered
+후가공_박(소형),B01,동판비,declared,80x40mm,1,ambiguous-tie,동점 후보 4개(여백 0.020 미만): COMP_EMBOSS_SETUP_SMALL / COMP_FOIL_SETUP_SMALL / COMP_NAMECARD_FOIL_SETUP_S2_STD / COMP_NAMECARD_FOIL_SETUP_S1_STD — 스코프 판별도 갈리지 않음
+후가공_박(소형),B02,"소형박 가공비 일반박 면적당가격 정의 (금유광, 은유광, 먹유광, 청박, 적박, 동박, 펄박)",recovered,,0,geometry-unresolved,수치셀 0 — 기하 recovered
+후가공_박(소형),B03,"소형박 가공비 일반박 수량별 가격 (금유광, 은유광, 먹유광, 청박, 적박, 동박, 펄박)",declared,A,90,ambiguous-tie,동점 후보 2개(여백 0.020 미만): COMP_FOIL_PROC_SMALL_STD / COMP_EMBOSS_PROC_SMALL_STD — 스코프 판별도 갈리지 않음
+후가공_박(소형),B03,"소형박 가공비 일반박 수량별 가격 (금유광, 은유광, 먹유광, 청박, 적박, 동박, 펄박)",declared,B,90,ambiguous-tie,동점 후보 2개(여백 0.020 미만): COMP_FOIL_PROC_SMALL_STD / COMP_EMBOSS_PROC_SMALL_STD — 스코프 판별도 갈리지 않음
+후가공_박(소형),B03,"소형박 가공비 일반박 수량별 가격 (금유광, 은유광, 먹유광, 청박, 적박, 동박, 펄박)",declared,C,90,ambiguous-tie,동점 후보 2개(여백 0.020 미만): COMP_FOIL_PROC_SMALL_STD / COMP_EMBOSS_PROC_SMALL_STD — 스코프 판별도 갈리지 않음
+후가공_박(소형),B03,"소형박 가공비 일반박 수량별 가격 (금유광, 은유광, 먹유광, 청박, 적박, 동박, 펄박)",declared,D,90,ambiguous-tie,동점 후보 2개(여백 0.020 미만): COMP_FOIL_PROC_SMALL_STD / COMP_EMBOSS_PROC_SMALL_STD — 스코프 판별도 갈리지 않음
+후가공_박(소형),B03,"소형박 가공비 일반박 수량별 가격 (금유광, 은유광, 먹유광, 청박, 적박, 동박, 펄박)",declared,E,90,ambiguous-tie,동점 후보 2개(여백 0.020 미만): COMP_FOIL_PROC_SMALL_STD / COMP_EMBOSS_PROC_SMALL_STD — 스코프 판별도 갈리지 않음
+후가공_박(소형),B04,"소형박 가공비 특수박 면적당가격 정의 (백박, 홀로그램박, 트윙클박)",recovered,,0,geometry-unresolved,수치셀 0 — 기하 recovered
+굿즈파우치(구간할인),B01,파우치상품 수량별 구간할인,recovered,,5,out-of-scope-discount,구간할인 표 — 단가표가 아니다(할인 테이블 계열). 범위 밖
+굿즈파우치(구간할인),B02,문구상품 수량별 구간할인,recovered,,5,out-of-scope-discount,구간할인 표 — 단가표가 아니다(할인 테이블 계열). 범위 밖
+굿즈파우치(구간할인),B03,굿즈상품 수량별 구간할인 A타입,recovered,,5,out-of-scope-discount,구간할인 표 — 단가표가 아니다(할인 테이블 계열). 범위 밖
+굿즈파우치(구간할인),B04,굿즈상품 수량별 구간할인 B타입,recovered,,3,out-of-scope-discount,구간할인 표 — 단가표가 아니다(할인 테이블 계열). 범위 밖
+굿즈파우치(구간할인),B05,말랑상품 수량별 구간할인,declared,,8,out-of-scope-discount,구간할인 표 — 단가표가 아니다(할인 테이블 계열). 범위 밖
+명함포토카드,B06,화이트인쇄명함 (큐리어스스킨),declared,,0,geometry-unresolved,수치셀 0 — 기하 declared
+명함포토카드,B10,포토카드(20장1세트),declared,,0,geometry-unresolved,수치셀 0 — 기하 declared
+명함포토카드,B11,투명포토카드(20장1세트),declared,세트제작수량,1,below-overlap-threshold,최고 겹침 0.00 < 0.30 — 근사 매칭을 확정으로 올리지 않는다
+인쇄후가공,B02,100장당 1000원씩 올립니다.,unresolved,,0,geometry-unresolved,수치셀 0 — 기하 unresolved
+엽서북떡메,B02,떡메모지,recovered,,0,geometry-unresolved,수치셀 0 — 기하 recovered
+엽서북떡메,B03,장수 / 수량,unresolved,,0,geometry-unresolved,수치셀 0 — 기하 unresolved
+포스터사인,B01,아트프린트포스터 (인화지),recovered,600mm,52,ambiguous-tie,동점 후보 4개(여백 0.020 미만): COMP_POSTER_ARTPRINT_PHOTO / COMP_POSTER_ARTFABRIC_GRAPHIC / COMP_POSTER_WATERPROOF_PET / COMP_POSTER_ADH_WATERPROOF_PVC — 스코프 판별도 갈리지 않음
+포스터사인,B01,아트프린트포스터 (인화지),recovered,800mm,52,ambiguous-tie,동점 후보 4개(여백 0.020 미만): COMP_POSTER_ARTPRINT_PHOTO / COMP_POSTER_ARTFABRIC_GRAPHIC / COMP_POSTER_WATERPROOF_PET / COMP_POSTER_ADH_WATERPROOF_PVC — 스코프 판별도 갈리지 않음
+포스터사인,B01,아트프린트포스터 (인화지),recovered,1000mm,52,ambiguous-tie,동점 후보 4개(여백 0.020 미만): COMP_POSTER_ARTPRINT_PHOTO / COMP_POSTER_ARTFABRIC_GRAPHIC / COMP_POSTER_WATERPROOF_PET / COMP_POSTER_ADH_WATERPROOF_PVC — 스코프 판별도 갈리지 않음
+포스터사인,B01,아트프린트포스터 (인화지),recovered,1200mm,52,ambiguous-tie,동점 후보 4개(여백 0.020 미만): COMP_POSTER_ARTPRINT_PHOTO / COMP_POSTER_ARTFABRIC_GRAPHIC / COMP_POSTER_WATERPROOF_PET / COMP_POSTER_ADH_WATERPROOF_PVC — 스코프 판별도 갈리지 않음
+포스터사인,B03,방수포스터 (PET),recovered,600mm,52,ambiguous-tie,동점 후보 4개(여백 0.020 미만): COMP_POSTER_WATERPROOF_PET / COMP_POSTER_ADH_WATERPROOF_PVC / COMP_POSTER_ARTPRINT_PHOTO / COMP_POSTER_ARTFABRIC_GRAPHIC — 스코프 판별도 갈리지 않음
+포스터사인,B03,방수포스터 (PET),recovered,800mm,52,ambiguous-tie,동점 후보 4개(여백 0.020 미만): COMP_POSTER_WATERPROOF_PET / COMP_POSTER_ADH_WATERPROOF_PVC / COMP_POSTER_ARTPRINT_PHOTO / COMP_POSTER_ARTFABRIC_GRAPHIC — 스코프 판별도 갈리지 않음
+포스터사인,B03,방수포스터 (PET),recovered,1000mm,52,ambiguous-tie,동점 후보 4개(여백 0.020 미만): COMP_POSTER_WATERPROOF_PET / COMP_POSTER_ADH_WATERPROOF_PVC / COMP_POSTER_ARTPRINT_PHOTO / COMP_POSTER_ARTFABRIC_GRAPHIC — 스코프 판별도 갈리지 않음
+포스터사인,B03,방수포스터 (PET),recovered,1200mm,52,ambiguous-tie,동점 후보 4개(여백 0.020 미만): COMP_POSTER_WATERPROOF_PET / COMP_POSTER_ADH_WATERPROOF_PVC / COMP_POSTER_ARTPRINT_PHOTO / COMP_POSTER_ARTFABRIC_GRAPHIC — 스코프 판별도 갈리지 않음
+포스터사인,B04,접착방수포스터 (PVC),recovered,600mm,52,ambiguous-tie,동점 후보 3개(여백 0.020 미만): COMP_POSTER_ADH_WATERPROOF_PVC / COMP_POSTER_ARTPRINT_PHOTO / COMP_POSTER_WATERPROOF_PET — 스코프 판별도 갈리지 않음
+포스터사인,B04,접착방수포스터 (PVC),recovered,800mm,52,ambiguous-tie,동점 후보 3개(여백 0.020 미만): COMP_POSTER_ADH_WATERPROOF_PVC / COMP_POSTER_ARTPRINT_PHOTO / COMP_POSTER_WATERPROOF_PET — 스코프 판별도 갈리지 않음
+포스터사인,B04,접착방수포스터 (PVC),recovered,1000mm,52,ambiguous-tie,동점 후보 3개(여백 0.020 미만): COMP_POSTER_ADH_WATERPROOF_PVC / COMP_POSTER_ARTPRINT_PHOTO / COMP_POSTER_WATERPROOF_PET — 스코프 판별도 갈리지 않음
+포스터사인,B04,접착방수포스터 (PVC),recovered,1200mm,52,ambiguous-tie,동점 후보 3개(여백 0.020 미만): COMP_POSTER_ADH_WATERPROOF_PVC / COMP_POSTER_ARTPRINT_PHOTO / COMP_POSTER_WATERPROOF_PET — 스코프 판별도 갈리지 않음
+포스터사인,B06,아트패브릭포스터 (그래픽천),recovered,600mm,52,ambiguous-tie,동점 후보 2개(여백 0.020 미만): COMP_POSTER_ARTFABRIC_GRAPHIC / COMP_POSTER_ARTPRINT_PHOTO — 스코프 판별도 갈리지 않음
+포스터사인,B06,아트패브릭포스터 (그래픽천),recovered,800mm,52,ambiguous-tie,동점 후보 2개(여백 0.020 미만): COMP_POSTER_ARTFABRIC_GRAPHIC / COMP_POSTER_ARTPRINT_PHOTO — 스코프 판별도 갈리지 않음
+포스터사인,B06,아트패브릭포스터 (그래픽천),recovered,1000mm,52,ambiguous-tie,동점 후보 2개(여백 0.020 미만): COMP_POSTER_ARTFABRIC_GRAPHIC / COMP_POSTER_ARTPRINT_PHOTO — 스코프 판별도 갈리지 않음
+포스터사인,B06,아트패브릭포스터 (그래픽천),recovered,1200mm,52,ambiguous-tie,동점 후보 2개(여백 0.020 미만): COMP_POSTER_ARTFABRIC_GRAPHIC / COMP_POSTER_ARTPRINT_PHOTO — 스코프 판별도 갈리지 않음
+포스터사인,B10,타이벡프린트 (하드 / 소프트),recovered,600mm,52,ambiguous-tie,동점 후보 2개(여백 0.020 미만): COMP_POSTER_TYVEK_PRINT / COMP_POSTER_CANVAS_FABRIC — 스코프 판별도 갈리지 않음
+포스터사인,B10,타이벡프린트 (하드 / 소프트),recovered,800mm,52,ambiguous-tie,동점 후보 2개(여백 0.020 미만): COMP_POSTER_TYVEK_PRINT / COMP_POSTER_CANVAS_FABRIC — 스코프 판별도 갈리지 않음
+포스터사인,B10,타이벡프린트 (하드 / 소프트),recovered,1000mm,52,ambiguous-tie,동점 후보 2개(여백 0.020 미만): COMP_POSTER_TYVEK_PRINT / COMP_POSTER_CANVAS_FABRIC — 스코프 판별도 갈리지 않음
+포스터사인,B10,타이벡프린트 (하드 / 소프트),recovered,1200mm,52,ambiguous-tie,동점 후보 2개(여백 0.020 미만): COMP_POSTER_TYVEK_PRINT / COMP_POSTER_CANVAS_FABRIC — 스코프 판별도 갈리지 않음
+포스터사인,B12,프레임리스우드액자,unresolved,,0,geometry-unresolved,수치셀 0 — 기하 unresolved
+포스터사인,B13,사이즈 / 수량,unresolved,,0,geometry-unresolved,수치셀 0 — 기하 unresolved
+포스터사인,B14,레더아트액자,unresolved,,0,geometry-unresolved,수치셀 0 — 기하 unresolved
+포스터사인,B15,사이즈 / 수량,unresolved,,0,geometry-unresolved,수치셀 0 — 기하 unresolved
+포스터사인,B16,족자포스터,unresolved,,0,geometry-unresolved,수치셀 0 — 기하 unresolved
+포스터사인,B17,사이즈 / 수량,unresolved,,0,geometry-unresolved,수치셀 0 — 기하 unresolved
+포스터사인,B18,캔버스행잉포스터,unresolved,,0,geometry-unresolved,수치셀 0 — 기하 unresolved
+포스터사인,B19,사이즈 / 수량,unresolved,,0,geometry-unresolved,수치셀 0 — 기하 unresolved
+포스터사인,B20,린넨우드봉족자,unresolved,,0,geometry-unresolved,수치셀 0 — 기하 unresolved
+포스터사인,B21,사이즈 / 수량,unresolved,,0,geometry-unresolved,수치셀 0 — 기하 unresolved
+포스터사인,B22,PET배너,unresolved,,0,geometry-unresolved,수치셀 0 — 기하 unresolved
+포스터사인,B23,사이즈 / 수량,unresolved,,0,geometry-unresolved,수치셀 0 — 기하 unresolved
+포스터사인,B24,메쉬배너,unresolved,,0,geometry-unresolved,수치셀 0 — 기하 unresolved
+포스터사인,B25,사이즈 / 수량,unresolved,,0,geometry-unresolved,수치셀 0 — 기하 unresolved
+포스터사인,B28,미니스탠딩보드,unresolved,,0,geometry-unresolved,수치셀 0 — 기하 unresolved
+포스터사인,B29,사이즈 / 수량,unresolved,,0,geometry-unresolved,수치셀 0 — 기하 unresolved
+포스터사인,B30,미니배너,unresolved,,0,geometry-unresolved,수치셀 0 — 기하 unresolved
+포스터사인,B31,사이즈 / 수량,unresolved,,0,geometry-unresolved,수치셀 0 — 기하 unresolved
+스티커,B05,타투 스티커 (3장단위),recovered,,0,geometry-unresolved,수치셀 0 — 기하 recovered
+스티커,B06,기본가,unresolved,,0,geometry-unresolved,수치셀 0 — 기하 unresolved
+스티커,B08,new 스티커팩 (16장 1세트),declared,75x105,2,ambiguous-tie,동점 후보 3개(여백 0.020 미만): COMP_PHOTOCARD_SET / COMP_GOODS_FIX_187 / COMP_GOODS_FIX_186 — 스코프 판별도 갈리지 않음

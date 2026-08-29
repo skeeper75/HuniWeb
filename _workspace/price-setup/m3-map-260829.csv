@@ -1,0 +1,59 @@
+﻿comp_cd,comp_nm,use_dims,live_rows,sheet,block_id,block_title,geometry,cells,n_cols,overlap,score
+COMP_ACRYL_CLEAR3T,투명아크릴 인쇄가공비,"[""mat_cd"", ""siz_width"", ""siz_height"", ""min_qty""]",277,아크릴,B01,투명아크릴3T (직접입력형) 양면9도 / 단면7도 통용 단가,recovered,196,14,1.000,0.612
+COMP_ACRYL_CLEAR3T,투명아크릴 인쇄가공비,"[""mat_cd"", ""siz_width"", ""siz_height"", ""min_qty""]",277,아크릴,B02,투명아크릴1.5T (직접입력형) 양면9도 / 단면7도 통용 단가,recovered,81,9,1.000,0.539
+COMP_ACRYL_MIRROR3T,미러아크릴3T 인쇄가공비,"[""siz_width"", ""siz_height""]",81,아크릴,B03,미러아크릴3T (직접입력형) 전면5도 통용 단가,recovered,81,9,1.000,0.683
+COMP_ACRYL_COROTTO,아크릴코롯토 인쇄가공비,"[""siz_width"", ""siz_height""]",36,아크릴,B05,아크릴코롯토,recovered,36,6,1.000,0.705
+COMP_ACRYL_CARABINER,아크릴카라비너 본체(3T+3T접합),"[""siz_cd"", ""min_qty""]",4,아크릴,B06,아크릴카라비너 (투명아크릴 3T+3T 접합),recovered,4,1,1.000,0.725
+COMP_BIND_TWINRING,제본비,"[""proc_cd"", ""min_qty"", ""proc_grp:PROC_000017""]",32,제본,B01,제본비,declared,32,4,1.000,1.000
+COMP_BIND_SSABARI,제본비 싸바리바인더,"[""proc_cd"", ""min_qty"", ""proc_grp:PROC_000017""]",18,제본,B02,하드커버 제본비,declared,18,3,1.000,0.800
+COMP_BIND_CAL_WALL,제본비 벽걸이캘린더,"[""proc_cd"", ""min_qty"", ""proc_grp:PROC_000017""]",24,제본,B03,캘린더 제본비,declared,24,4,1.000,0.967
+COMP_COAT_MATTE,무광코팅비,"[""proc_cd"", ""plt_siz_cd"", ""coat_side_cnt"", ""min_qty"", ""proc_grp:PROC_000013""]",138,코팅,B01,코팅(국4절),declared,46,2,1.000,0.597
+COMP_COAT_MATTE,무광코팅비,"[""proc_cd"", ""plt_siz_cd"", ""coat_side_cnt"", ""min_qty"", ""proc_grp:PROC_000013""]",138,코팅,B02,코팅(3절),declared,46,2,1.000,0.609
+COMP_COAT_GLOSSY,유광코팅비,"[""proc_cd"", ""plt_siz_cd"", ""coat_side_cnt"", ""min_qty"", ""proc_grp:PROC_000013""]",138,코팅,B01,코팅(국4절),declared,46,2,1.000,0.597
+COMP_COAT_GLOSSY,유광코팅비,"[""proc_cd"", ""plt_siz_cd"", ""coat_side_cnt"", ""min_qty"", ""proc_grp:PROC_000013""]",138,코팅,B02,코팅(3절),declared,46,2,1.000,0.609
+COMP_CUT_FULL_DIECUT,커팅 완제품가 완칼(모양엽서·라벨택),"[""plt_siz_cd"", ""min_qty""]",72,커팅타공,B01,커팅(완칼) 가공비 (국4절),declared,36,1,1.000,0.676
+COMP_CUT_PERF_1H6,타공비 (6mm),"[""proc_cd"", ""min_qty"", ""proc_grp:PROC_000079""]",18,커팅타공,B03,타공 (단가),declared,41,2,1.000,0.666
+COMP_PRINT_DIGITAL_S1,디지털인쇄비,"[""proc_cd"", ""plt_siz_cd"", ""print_opt_cd"", ""min_qty"", ""proc_grp:PROC_000001""]",625,디지털인쇄비,B01,디지털인쇄 출력비(국4절),declared,212,4,1.000,0.641
+COMP_PRINT_DIGITAL_S1,디지털인쇄비,"[""proc_cd"", ""plt_siz_cd"", ""print_opt_cd"", ""min_qty"", ""proc_grp:PROC_000001""]",625,디지털인쇄비,B02,디지털인쇄 출력비(3절),declared,106,2,1.000,0.642
+COMP_PRINT_SPOT_WHITE_S1,별색인쇄비,"[""plt_siz_cd"", ""proc_cd"", ""spot_side_cnt"", ""min_qty"", ""proc_grp:PROC_000007""]",530,디지털인쇄비,B01,디지털인쇄 출력비(국4절),declared,530,10,1.000,0.608
+COMP_ENV_MAKING,봉투제작 완제품가,"[""siz_cd"", ""mat_cd"", ""min_qty""]",60,봉투제작,B01,봉투제작,declared,40,8,1.000,0.957
+COMP_FOIL_PROC_LARGE_SPECIAL,박 가공비(대형·특수박),"[""proc_cd"", ""min_qty"", ""proc_grp:PROC_000033""]",3328,후가공_박(대형),B05,"대형박 가공비 특수박 수량별 가격 (먹유광, 백박, 홀로그램, 트윙클, 적박, 녹박)",declared,65,5,1.000,0.683
+COMP_FOIL_PROC_SMALL_SPECIAL,박 가공비(소형·특수박),"[""proc_cd"", ""min_qty"", ""proc_grp:PROC_000033""]",540,후가공_박(소형),B05,"소형박 가공비 특수박 수량별 가격 (백박, 홀로그램박, 트윙클박)",declared,90,5,1.000,0.692
+COMP_FOLD_LEAF_HALF,접지비 리플렛 반접지,"[""proc_cd"", ""min_qty"", ""proc_grp:PROC_000056""]",144,접지옵션,B01,카드접지 단가 (오시+접지),declared,48,1,1.000,0.808
+COMP_FOLD_LEAF_HALF,접지비 리플렛 반접지,"[""proc_cd"", ""min_qty"", ""proc_grp:PROC_000056""]",144,접지옵션,B02,리플렛 접지 단가 (오시+접지),declared,48,1,1.000,0.850
+COMP_FOLD_LEAF_3FOLD,접지비 리플렛 3단,"[""proc_cd"", ""min_qty"", ""proc_grp:PROC_000056""]",144,접지옵션,B01,카드접지 단가 (오시+접지),declared,48,1,1.000,0.819
+COMP_FOLD_LEAF_3FOLD,접지비 리플렛 3단,"[""proc_cd"", ""min_qty"", ""proc_grp:PROC_000056""]",144,접지옵션,B02,리플렛 접지 단가 (오시+접지),declared,48,1,1.000,0.864
+COMP_FOLD_CARD_6CR,접지비 카드 6크리즈,"[""min_qty""]",48,접지옵션,B01,카드접지 단가 (오시+접지),declared,48,1,1.000,0.579
+COMP_FOLD_LEAF_4ACC,접지비 리플렛 4단아코디언,"[""proc_cd"", ""min_qty"", ""proc_grp:PROC_000056""]",48,접지옵션,B02,리플렛 접지 단가 (오시+접지),declared,48,1,1.000,0.856
+COMP_FOLD_LEAF_4GATE,접지비 리플렛 4단게이트,"[""proc_cd"", ""min_qty"", ""proc_grp:PROC_000056""]",48,접지옵션,B02,리플렛 접지 단가 (오시+접지),declared,48,1,1.000,0.859
+COMP_GANGPAN_PRINT,합판도무송 완제품가(형상·소재별),"[""siz_cd"", ""mat_cd"", ""min_qty""]",1110,합판도무송스티커,B01,합판 도무송 스티커(원형),declared,110,22,1.000,0.718
+COMP_GANGPAN_PRINT,합판도무송 완제품가(형상·소재별),"[""siz_cd"", ""mat_cd"", ""min_qty""]",1110,합판도무송스티커,B02,합판 도무송 스티커(정사각),declared,120,24,1.000,0.728
+COMP_GANGPAN_PRINT,합판도무송 완제품가(형상·소재별),"[""siz_cd"", ""mat_cd"", ""min_qty""]",1110,합판도무송스티커,B03,합판 도무송 스티커 (직사각),declared,140,28,1.000,0.744
+COMP_NAMECARD_STD,스탠다드명함 완제품가(용지포함),"[""mat_cd"", ""min_qty"", ""print_opt_cd""]",10,명함포토카드,B01,스탠다드명함,declared,4,4,1.000,0.821
+COMP_NAMECARD_PREMIUM,프리미엄명함A 완제품가(용지포함),"[""mat_cd"", ""print_opt_cd"", ""min_qty""]",28,명함포토카드,B02,프리미엄명함,declared,4,4,1.000,0.693
+COMP_NAMECARD_COAT,코팅명함 완제품가(용지포함),"[""mat_cd"", ""min_qty"", ""print_opt_cd""]",4,명함포토카드,B03,코팅명함,declared,4,4,1.000,0.811
+COMP_NAMECARD_PEARL,펄명함(스타드림) 완제품가(용지포함),"[""mat_cd"", ""min_qty"", ""print_opt_cd""]",8,명함포토카드,B04,펄명함 (스타드림),declared,4,4,1.000,0.825
+COMP_NAMECARD_CLEAR_S1,투명명함 완제품가 단면(용지포함),"[""min_qty""]",1,명함포토카드,B05,투명명함,declared,1,1,1.000,0.675
+COMP_NAMECARD_SHAPE,모양명함 완제품가(용지포함),"[""siz_cd"", ""min_qty"", ""print_opt_cd""]",2,명함포토카드,B07,모양명함 (90x50),declared,2,2,1.000,0.677
+COMP_NAMECARD_MINISHAPE,미니모양명함 완제품가(용지포함),"[""siz_cd"", ""min_qty"", ""print_opt_cd""]",2,명함포토카드,B08,미니모양명함 (50x50),declared,2,2,1.000,0.688
+COMP_FOIL_PROC_SMALL_STD,박 가공비(소형·일반박),"[""proc_cd"", ""min_qty"", ""proc_grp:PROC_000033""]",1620,명함포토카드,B09,오리지널박명함,declared,18,2,0.889,0.682
+COMP_PHOTOCARD_BULK,포토카드 완제품가 대량,"[""min_qty"", ""opt_cd"", ""opt_grp:OPT_000084""]",50,명함포토카드,B12,포토카드(대랑제작),declared,50,1,1.000,0.700
+COMP_PP_CORNER_RIGHT,귀돌이비,"[""proc_cd"", ""min_qty"", ""proc_grp:PROC_000026""]",18,인쇄후가공,B01,"모서리 (귀돌이, 합가)",declared,18,2,1.000,0.933
+COMP_PP_CREASE_1L,오시비,"[""proc_cd"", ""min_qty"", ""proc_grp:PROC_000029""]",30,인쇄후가공,B03,오시 (합가),declared,60,3,1.000,0.925
+COMP_PP_VARTEXT_1EA,가변텍스트,"[""proc_cd"", ""min_qty"", ""proc_grp:PROC_000085""]",69,인쇄후가공,B04,가변(텍스트),declared,72,3,1.000,0.992
+COMP_PP_VARIMG_1EA,가변이미지,"[""proc_cd"", ""min_qty"", ""proc_grp:PROC_000085""]",69,인쇄후가공,B05,가변(이미지),declared,72,3,1.000,0.992
+COMP_PCB,엽서북 완제품가 사이즈/양단면/페이지수별 단가,"[""siz_cd"", ""print_opt_cd"", ""opt_cd"", ""min_qty"", ""opt_grp:OPT_000082""]",468,엽서북떡메,B01,엽서북,declared,480,12,1.000,0.668
+COMP_POSTER_ARTPAPER_MATTE,실사 완제품가 (아트페이퍼포스터),"[""siz_width"", ""siz_height""]",39,포스터사인,B02,아트페이퍼포스터 (매트지),recovered,39,3,1.000,0.700
+COMP_POSTER_ADH_CLEAR_PVC,실사 완제품가 (접착투명포스터),"[""siz_width"", ""siz_height""]",52,포스터사인,B05,접착투명포스터 (투명PVC),recovered,52,4,1.000,0.694
+COMP_POSTER_LINEN_FABRIC,실사 완제품가 (린넨패브릭포스터),"[""siz_width"", ""siz_height""]",52,포스터사인,B07,린넨패브릭포스터,recovered,52,4,1.000,0.683
+COMP_POSTEROPT_LINEN_FINISH,린넨 마감가공비,"[""opt_cd"", ""min_qty""]",5,포스터사인,B07,린넨패브릭포스터,recovered,5,1,1.000,0.490
+COMP_POSTER_CANVAS_FABRIC,실사 완제품가 (캔버스패브릭포스터·레더아트프린트·메쉬프린트·타이벡프린트),"[""siz_width"", ""siz_height"", ""min_qty""]",52,포스터사인,B08,캔버스패브릭포스터,recovered,52,4,1.000,0.682
+COMP_POSTER_LEATHER_ARTPRINT,레더아트프린트 완제품가[레거시],"[""siz_width"", ""siz_height""]",52,포스터사인,B09,레더아트프린트,recovered,52,4,1.000,0.700
+COMP_POSTER_MESH_PRINT,메쉬프린트 완제품가[레거시],"[""siz_width"", ""siz_height""]",52,포스터사인,B11,메쉬프린트,recovered,64,4,1.000,0.637
+COMP_POSTER_BANNER_NORMAL,일반 현수막 완제품가,"[""siz_width"", ""siz_height"", ""min_qty""]",80,포스터사인,B26,일반현수막,recovered,80,5,1.000,0.706
+COMP_POSTER_BANNER_MESH,메쉬 현수막 완제품가,"[""siz_width"", ""siz_height"", ""min_qty""]",48,포스터사인,B27,메쉬현수막,recovered,60,3,0.944,0.645
+COMP_STK_PRINT,스티커 완제품가(소재·규격),"[""siz_cd"", ""mat_cd"", ""min_qty""]",5424,스티커,B01,반칼 자유형/규격 스티커 (국4절),declared,648,18,1.000,0.690
+COMP_STK_PRINT,스티커 완제품가(소재·규격),"[""siz_cd"", ""mat_cd"", ""min_qty""]",5424,스티커,B02,낱장(완칼) 자유형 스티커,declared,30,5,1.000,0.545
+COMP_STK_PRINT,스티커 완제품가(소재·규격),"[""siz_cd"", ""mat_cd"", ""min_qty""]",5424,스티커,B03,낱장(완칼) 자유형 투명스티커,declared,30,5,1.000,0.542
+COMP_STK_PRINT,스티커 완제품가(소재·규격),"[""siz_cd"", ""mat_cd"", ""min_qty""]",5424,스티커,B04,대형(완칼) 자유형 스티커,declared,6,1,1.000,0.614
+COMP_STK_PACK,스티커 완제품가 팩(54장1세트),"[""siz_cd"", ""min_qty""]",1,스티커,B07,스티커팩 (54장 1세트),declared,2,1,1.000,0.846
