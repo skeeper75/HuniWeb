@@ -1,0 +1,135 @@
+{
+ "header": {
+  "wgt_cd": "WGT_000443",
+  "prd_cd": "PRD_000026",
+  "site_cd": "SITE_OWN",
+  "wgt_nm": "종이슬로건 주문위젯",
+  "sts_typ_cd": "WGT_STS_TYPE.02",
+  "tmpl_yn": "N",
+  "theme_opts": null,
+  "upd_dt": "2026-08-30T08:51:53.897262"
+ },
+ "items": [
+  {
+   "item_cd": "WGTI_003494",
+   "parent_item_cd": null,
+   "mbr_prd_cd": null,
+   "src_typ_cd": "WGT_SRC_TYPE.01",
+   "ref_key": "siz_cd",
+   "ctrl_typ_cd": "WGT_CTRL_TYPE.01",
+   "label_nm": null,
+   "row_no": 1,
+   "col_no": 1,
+   "visible_yn": "Y",
+   "dflt_val": null,
+   "block_typ_cd": "WGT_BLOCK_TYPE.01",
+   "fold_yn": "N",
+   "props": {
+    "cols": 3,
+    "show_cut": true,
+    "show_work": true,
+    "show_margin": false
+   }
+  },
+  {
+   "item_cd": "WGTI_003496",
+   "parent_item_cd": null,
+   "mbr_prd_cd": null,
+   "src_typ_cd": "WGT_SRC_TYPE.01",
+   "ref_key": "mat_cd",
+   "ctrl_typ_cd": "WGT_CTRL_TYPE.02",
+   "label_nm": "종이",
+   "row_no": 2,
+   "col_no": 1,
+   "visible_yn": "Y",
+   "dflt_val": null,
+   "block_typ_cd": "WGT_BLOCK_TYPE.01",
+   "fold_yn": "N",
+   "props": null
+  },
+  {
+   "item_cd": "WGTI_003495",
+   "parent_item_cd": null,
+   "mbr_prd_cd": null,
+   "src_typ_cd": "WGT_SRC_TYPE.01",
+   "ref_key": "print_opt_cd",
+   "ctrl_typ_cd": "WGT_CTRL_TYPE.01",
+   "label_nm": null,
+   "row_no": 3,
+   "col_no": 1,
+   "visible_yn": "Y",
+   "dflt_val": "POPT_000001",
+   "block_typ_cd": "WGT_BLOCK_TYPE.01",
+   "fold_yn": "N",
+   "props": null
+  },
+  {
+   "item_cd": "WGTI_003510",
+   "parent_item_cd": null,
+   "mbr_prd_cd": null,
+   "src_typ_cd": "WGT_SRC_TYPE.02",
+   "ref_key": "OPT_000316",
+   "ctrl_typ_cd": "WGT_CTRL_TYPE.01",
+   "label_nm": null,
+   "row_no": 4,
+   "col_no": 1,
+   "visible_yn": "Y",
+   "dflt_val": null,
+   "block_typ_cd": "WGT_BLOCK_TYPE.01",
+   "fold_yn": "N",
+   "props": null
+  },
+  {
+   "item_cd": "WGTI_003497",
+   "parent_item_cd": null,
+   "mbr_prd_cd": null,
+   "src_typ_cd": "WGT_SRC_TYPE.03",
+   "ref_key": "qty",
+   "ctrl_typ_cd": "WGT_CTRL_TYPE.07",
+   "label_nm": null,
+   "row_no": 5,
+   "col_no": 1,
+   "visible_yn": "Y",
+   "dflt_val": null,
+   "block_typ_cd": "WGT_BLOCK_TYPE.01",
+   "fold_yn": "N",
+   "props": {
+    "tier_style": "gauge"
+   }
+  },
+  {
+   "item_cd": "WGTI_003499",
+   "parent_item_cd": null,
+   "mbr_prd_cd": null,
+   "src_typ_cd": "WGT_SRC_TYPE.09",
+   "ref_key": null,
+   "ctrl_typ_cd": "WGT_CTRL_TYPE.16",
+   "label_nm": "PDF 업로드",
+   "row_no": 6,
+   "col_no": 1,
+   "visible_yn": "Y",
+   "dflt_val": null,
+   "block_typ_cd": "WGT_BLOCK_TYPE.01",
+   "fold_yn": "N",
+   "props": null
+  },
+  {
+   "item_cd": "WGTI_003500",
+   "parent_item_cd": null,
+   "mbr_prd_cd": null,
+   "src_typ_cd": "WGT_SRC_TYPE.08",
+   "ref_key": null,
+   "ctrl_typ_cd": "WGT_CTRL_TYPE.15",
+   "label_nm": null,
+   "row_no": 7,
+   "col_no": 1,
+   "visible_yn": "Y",
+   "dflt_val": null,
+   "block_typ_cd": "WGT_BLOCK_TYPE.01",
+   "fold_yn": "N",
+   "props": {
+    "show_components": false
+   }
+  }
+ ]
+}
