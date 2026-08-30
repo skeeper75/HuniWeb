@@ -1,0 +1,6369 @@
+{
+  "findings": [
+    {
+      "prd": "PRD_000013",
+      "nm": "우드봉",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_ACC_WOOD_SIZ",
+      "comp_nm": "우드봉·행거 완제품가(길이)",
+      "dims": [
+        "siz_cd",
+        "mat_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "mat_cd"
+      ],
+      "rows": 6
+    },
+    {
+      "prd": "PRD_000014",
+      "nm": "우드행거",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_ACC_WOOD_SIZ",
+      "comp_nm": "우드봉·행거 완제품가(길이)",
+      "dims": [
+        "siz_cd",
+        "mat_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "mat_cd"
+      ],
+      "rows": 6
+    },
+    {
+      "prd": "PRD_000016",
+      "nm": "프리미엄엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PRINT_DIGITAL_S1",
+      "comp_nm": "디지털인쇄비",
+      "dims": [
+        "proc_cd",
+        "plt_siz_cd",
+        "print_opt_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 625
+    },
+    {
+      "prd": "PRD_000016",
+      "nm": "프리미엄엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PRINT_SPOT_WHITE_S1",
+      "comp_nm": "별색인쇄비",
+      "dims": [
+        "plt_siz_cd",
+        "proc_cd",
+        "앞면별색",
+        "뒷면별색",
+        "spot_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd",
+        "앞면별색",
+        "뒷면별색",
+        "spot_side_cnt"
+      ],
+      "rows": 530
+    },
+    {
+      "prd": "PRD_000016",
+      "nm": "프리미엄엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PAPER",
+      "comp_nm": "용지비(종이별 절가)",
+      "dims": [
+        "mat_cd",
+        "plt_siz_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 87
+    },
+    {
+      "prd": "PRD_000016",
+      "nm": "프리미엄엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_CREASE_1L",
+      "comp_nm": "오시비",
+      "dims": [
+        "proc_cd",
+        "줄수",
+        "min_qty"
+      ],
+      "missing": [
+        "줄수"
+      ],
+      "rows": 30
+    },
+    {
+      "prd": "PRD_000016",
+      "nm": "프리미엄엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_PERF_1L",
+      "comp_nm": "미싱비",
+      "dims": [
+        "proc_cd",
+        "줄수",
+        "min_qty"
+      ],
+      "missing": [
+        "줄수"
+      ],
+      "rows": 30
+    },
+    {
+      "prd": "PRD_000016",
+      "nm": "프리미엄엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_VARTEXT_1EA",
+      "comp_nm": "가변텍스트",
+      "dims": [
+        "proc_cd",
+        "개수",
+        "min_qty"
+      ],
+      "missing": [
+        "개수"
+      ],
+      "rows": 69
+    },
+    {
+      "prd": "PRD_000016",
+      "nm": "프리미엄엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_VARIMG_1EA",
+      "comp_nm": "가변이미지",
+      "dims": [
+        "proc_cd",
+        "개수",
+        "min_qty"
+      ],
+      "missing": [
+        "개수"
+      ],
+      "rows": 69
+    },
+    {
+      "prd": "PRD_000016",
+      "nm": "프리미엄엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_COAT_MATTE",
+      "comp_nm": "무광코팅비",
+      "dims": [
+        "proc_cd",
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt"
+      ],
+      "rows": 138
+    },
+    {
+      "prd": "PRD_000016",
+      "nm": "프리미엄엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_COAT_GLOSSY",
+      "comp_nm": "유광코팅비",
+      "dims": [
+        "proc_cd",
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt"
+      ],
+      "rows": 138
+    },
+    {
+      "prd": "PRD_000017",
+      "nm": "코팅엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PRINT_DIGITAL_S1",
+      "comp_nm": "디지털인쇄비",
+      "dims": [
+        "proc_cd",
+        "plt_siz_cd",
+        "print_opt_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 625
+    },
+    {
+      "prd": "PRD_000017",
+      "nm": "코팅엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PRINT_SPOT_WHITE_S1",
+      "comp_nm": "별색인쇄비",
+      "dims": [
+        "plt_siz_cd",
+        "proc_cd",
+        "앞면별색",
+        "뒷면별색",
+        "spot_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd",
+        "앞면별색",
+        "뒷면별색",
+        "spot_side_cnt"
+      ],
+      "rows": 530
+    },
+    {
+      "prd": "PRD_000017",
+      "nm": "코팅엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PAPER",
+      "comp_nm": "용지비(종이별 절가)",
+      "dims": [
+        "mat_cd",
+        "plt_siz_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 87
+    },
+    {
+      "prd": "PRD_000017",
+      "nm": "코팅엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_CREASE_1L",
+      "comp_nm": "오시비",
+      "dims": [
+        "proc_cd",
+        "줄수",
+        "min_qty"
+      ],
+      "missing": [
+        "줄수"
+      ],
+      "rows": 30
+    },
+    {
+      "prd": "PRD_000017",
+      "nm": "코팅엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_PERF_1L",
+      "comp_nm": "미싱비",
+      "dims": [
+        "proc_cd",
+        "줄수",
+        "min_qty"
+      ],
+      "missing": [
+        "줄수"
+      ],
+      "rows": 30
+    },
+    {
+      "prd": "PRD_000017",
+      "nm": "코팅엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_VARTEXT_1EA",
+      "comp_nm": "가변텍스트",
+      "dims": [
+        "proc_cd",
+        "개수",
+        "min_qty"
+      ],
+      "missing": [
+        "개수"
+      ],
+      "rows": 69
+    },
+    {
+      "prd": "PRD_000017",
+      "nm": "코팅엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_VARIMG_1EA",
+      "comp_nm": "가변이미지",
+      "dims": [
+        "proc_cd",
+        "개수",
+        "min_qty"
+      ],
+      "missing": [
+        "개수"
+      ],
+      "rows": 69
+    },
+    {
+      "prd": "PRD_000017",
+      "nm": "코팅엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_COAT_MATTE",
+      "comp_nm": "무광코팅비",
+      "dims": [
+        "proc_cd",
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt"
+      ],
+      "rows": 138
+    },
+    {
+      "prd": "PRD_000017",
+      "nm": "코팅엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_COAT_GLOSSY",
+      "comp_nm": "유광코팅비",
+      "dims": [
+        "proc_cd",
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt"
+      ],
+      "rows": 138
+    },
+    {
+      "prd": "PRD_000018",
+      "nm": "스탠다드엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PRINT_DIGITAL_S1",
+      "comp_nm": "디지털인쇄비",
+      "dims": [
+        "proc_cd",
+        "plt_siz_cd",
+        "print_opt_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 625
+    },
+    {
+      "prd": "PRD_000018",
+      "nm": "스탠다드엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PRINT_SPOT_WHITE_S1",
+      "comp_nm": "별색인쇄비",
+      "dims": [
+        "plt_siz_cd",
+        "proc_cd",
+        "앞면별색",
+        "뒷면별색",
+        "spot_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd",
+        "앞면별색",
+        "뒷면별색",
+        "spot_side_cnt"
+      ],
+      "rows": 530
+    },
+    {
+      "prd": "PRD_000018",
+      "nm": "스탠다드엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PAPER",
+      "comp_nm": "용지비(종이별 절가)",
+      "dims": [
+        "mat_cd",
+        "plt_siz_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 87
+    },
+    {
+      "prd": "PRD_000018",
+      "nm": "스탠다드엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_CREASE_1L",
+      "comp_nm": "오시비",
+      "dims": [
+        "proc_cd",
+        "줄수",
+        "min_qty"
+      ],
+      "missing": [
+        "줄수"
+      ],
+      "rows": 30
+    },
+    {
+      "prd": "PRD_000018",
+      "nm": "스탠다드엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_PERF_1L",
+      "comp_nm": "미싱비",
+      "dims": [
+        "proc_cd",
+        "줄수",
+        "min_qty"
+      ],
+      "missing": [
+        "줄수"
+      ],
+      "rows": 30
+    },
+    {
+      "prd": "PRD_000018",
+      "nm": "스탠다드엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_VARTEXT_1EA",
+      "comp_nm": "가변텍스트",
+      "dims": [
+        "proc_cd",
+        "개수",
+        "min_qty"
+      ],
+      "missing": [
+        "개수"
+      ],
+      "rows": 69
+    },
+    {
+      "prd": "PRD_000018",
+      "nm": "스탠다드엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_VARIMG_1EA",
+      "comp_nm": "가변이미지",
+      "dims": [
+        "proc_cd",
+        "개수",
+        "min_qty"
+      ],
+      "missing": [
+        "개수"
+      ],
+      "rows": 69
+    },
+    {
+      "prd": "PRD_000018",
+      "nm": "스탠다드엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_COAT_MATTE",
+      "comp_nm": "무광코팅비",
+      "dims": [
+        "proc_cd",
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt"
+      ],
+      "rows": 138
+    },
+    {
+      "prd": "PRD_000018",
+      "nm": "스탠다드엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_COAT_GLOSSY",
+      "comp_nm": "유광코팅비",
+      "dims": [
+        "proc_cd",
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt"
+      ],
+      "rows": 138
+    },
+    {
+      "prd": "PRD_000019",
+      "nm": "투명엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PRINT_DIGITAL_S1",
+      "comp_nm": "디지털인쇄비",
+      "dims": [
+        "proc_cd",
+        "plt_siz_cd",
+        "print_opt_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 625
+    },
+    {
+      "prd": "PRD_000019",
+      "nm": "투명엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PRINT_SPOT_WHITE_S1",
+      "comp_nm": "별색인쇄비",
+      "dims": [
+        "plt_siz_cd",
+        "proc_cd",
+        "앞면별색",
+        "뒷면별색",
+        "spot_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd",
+        "앞면별색",
+        "뒷면별색",
+        "spot_side_cnt"
+      ],
+      "rows": 530
+    },
+    {
+      "prd": "PRD_000019",
+      "nm": "투명엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PAPER",
+      "comp_nm": "용지비(종이별 절가)",
+      "dims": [
+        "mat_cd",
+        "plt_siz_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 87
+    },
+    {
+      "prd": "PRD_000019",
+      "nm": "투명엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_CREASE_1L",
+      "comp_nm": "오시비",
+      "dims": [
+        "proc_cd",
+        "줄수",
+        "min_qty"
+      ],
+      "missing": [
+        "줄수"
+      ],
+      "rows": 30
+    },
+    {
+      "prd": "PRD_000019",
+      "nm": "투명엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_PERF_1L",
+      "comp_nm": "미싱비",
+      "dims": [
+        "proc_cd",
+        "줄수",
+        "min_qty"
+      ],
+      "missing": [
+        "줄수"
+      ],
+      "rows": 30
+    },
+    {
+      "prd": "PRD_000019",
+      "nm": "투명엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_VARTEXT_1EA",
+      "comp_nm": "가변텍스트",
+      "dims": [
+        "proc_cd",
+        "개수",
+        "min_qty"
+      ],
+      "missing": [
+        "개수"
+      ],
+      "rows": 69
+    },
+    {
+      "prd": "PRD_000019",
+      "nm": "투명엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_VARIMG_1EA",
+      "comp_nm": "가변이미지",
+      "dims": [
+        "proc_cd",
+        "개수",
+        "min_qty"
+      ],
+      "missing": [
+        "개수"
+      ],
+      "rows": 69
+    },
+    {
+      "prd": "PRD_000019",
+      "nm": "투명엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_COAT_MATTE",
+      "comp_nm": "무광코팅비",
+      "dims": [
+        "proc_cd",
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt"
+      ],
+      "rows": 138
+    },
+    {
+      "prd": "PRD_000019",
+      "nm": "투명엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_COAT_GLOSSY",
+      "comp_nm": "유광코팅비",
+      "dims": [
+        "proc_cd",
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt"
+      ],
+      "rows": 138
+    },
+    {
+      "prd": "PRD_000020",
+      "nm": "화이트인쇄엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PRINT_DIGITAL_S1",
+      "comp_nm": "디지털인쇄비",
+      "dims": [
+        "proc_cd",
+        "plt_siz_cd",
+        "print_opt_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 625
+    },
+    {
+      "prd": "PRD_000020",
+      "nm": "화이트인쇄엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PRINT_SPOT_WHITE_S1",
+      "comp_nm": "별색인쇄비",
+      "dims": [
+        "plt_siz_cd",
+        "proc_cd",
+        "앞면별색",
+        "뒷면별색",
+        "spot_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd",
+        "앞면별색",
+        "뒷면별색",
+        "spot_side_cnt"
+      ],
+      "rows": 530
+    },
+    {
+      "prd": "PRD_000020",
+      "nm": "화이트인쇄엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PAPER",
+      "comp_nm": "용지비(종이별 절가)",
+      "dims": [
+        "mat_cd",
+        "plt_siz_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 87
+    },
+    {
+      "prd": "PRD_000020",
+      "nm": "화이트인쇄엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_CREASE_1L",
+      "comp_nm": "오시비",
+      "dims": [
+        "proc_cd",
+        "줄수",
+        "min_qty"
+      ],
+      "missing": [
+        "줄수"
+      ],
+      "rows": 30
+    },
+    {
+      "prd": "PRD_000020",
+      "nm": "화이트인쇄엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_PERF_1L",
+      "comp_nm": "미싱비",
+      "dims": [
+        "proc_cd",
+        "줄수",
+        "min_qty"
+      ],
+      "missing": [
+        "줄수"
+      ],
+      "rows": 30
+    },
+    {
+      "prd": "PRD_000020",
+      "nm": "화이트인쇄엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_VARTEXT_1EA",
+      "comp_nm": "가변텍스트",
+      "dims": [
+        "proc_cd",
+        "개수",
+        "min_qty"
+      ],
+      "missing": [
+        "개수"
+      ],
+      "rows": 69
+    },
+    {
+      "prd": "PRD_000020",
+      "nm": "화이트인쇄엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_VARIMG_1EA",
+      "comp_nm": "가변이미지",
+      "dims": [
+        "proc_cd",
+        "개수",
+        "min_qty"
+      ],
+      "missing": [
+        "개수"
+      ],
+      "rows": 69
+    },
+    {
+      "prd": "PRD_000020",
+      "nm": "화이트인쇄엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_COAT_MATTE",
+      "comp_nm": "무광코팅비",
+      "dims": [
+        "proc_cd",
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt"
+      ],
+      "rows": 138
+    },
+    {
+      "prd": "PRD_000020",
+      "nm": "화이트인쇄엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_COAT_GLOSSY",
+      "comp_nm": "유광코팅비",
+      "dims": [
+        "proc_cd",
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt"
+      ],
+      "rows": 138
+    },
+    {
+      "prd": "PRD_000021",
+      "nm": "핑크별색엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PRINT_DIGITAL_S1",
+      "comp_nm": "디지털인쇄비",
+      "dims": [
+        "proc_cd",
+        "plt_siz_cd",
+        "print_opt_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 625
+    },
+    {
+      "prd": "PRD_000021",
+      "nm": "핑크별색엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PRINT_SPOT_WHITE_S1",
+      "comp_nm": "별색인쇄비",
+      "dims": [
+        "plt_siz_cd",
+        "proc_cd",
+        "앞면별색",
+        "뒷면별색",
+        "spot_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd",
+        "앞면별색",
+        "뒷면별색",
+        "spot_side_cnt"
+      ],
+      "rows": 530
+    },
+    {
+      "prd": "PRD_000021",
+      "nm": "핑크별색엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PAPER",
+      "comp_nm": "용지비(종이별 절가)",
+      "dims": [
+        "mat_cd",
+        "plt_siz_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 87
+    },
+    {
+      "prd": "PRD_000021",
+      "nm": "핑크별색엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_CREASE_1L",
+      "comp_nm": "오시비",
+      "dims": [
+        "proc_cd",
+        "줄수",
+        "min_qty"
+      ],
+      "missing": [
+        "줄수"
+      ],
+      "rows": 30
+    },
+    {
+      "prd": "PRD_000021",
+      "nm": "핑크별색엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_PERF_1L",
+      "comp_nm": "미싱비",
+      "dims": [
+        "proc_cd",
+        "줄수",
+        "min_qty"
+      ],
+      "missing": [
+        "줄수"
+      ],
+      "rows": 30
+    },
+    {
+      "prd": "PRD_000021",
+      "nm": "핑크별색엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_VARTEXT_1EA",
+      "comp_nm": "가변텍스트",
+      "dims": [
+        "proc_cd",
+        "개수",
+        "min_qty"
+      ],
+      "missing": [
+        "개수"
+      ],
+      "rows": 69
+    },
+    {
+      "prd": "PRD_000021",
+      "nm": "핑크별색엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_VARIMG_1EA",
+      "comp_nm": "가변이미지",
+      "dims": [
+        "proc_cd",
+        "개수",
+        "min_qty"
+      ],
+      "missing": [
+        "개수"
+      ],
+      "rows": 69
+    },
+    {
+      "prd": "PRD_000021",
+      "nm": "핑크별색엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_COAT_MATTE",
+      "comp_nm": "무광코팅비",
+      "dims": [
+        "proc_cd",
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt"
+      ],
+      "rows": 138
+    },
+    {
+      "prd": "PRD_000021",
+      "nm": "핑크별색엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_COAT_GLOSSY",
+      "comp_nm": "유광코팅비",
+      "dims": [
+        "proc_cd",
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt"
+      ],
+      "rows": 138
+    },
+    {
+      "prd": "PRD_000022",
+      "nm": "금은별색엽서",
+      "pub": 0,
+      "is_set": false,
+      "comp": "COMP_PRINT_DIGITAL_S1",
+      "comp_nm": "디지털인쇄비",
+      "dims": [
+        "proc_cd",
+        "plt_siz_cd",
+        "print_opt_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 625
+    },
+    {
+      "prd": "PRD_000022",
+      "nm": "금은별색엽서",
+      "pub": 0,
+      "is_set": false,
+      "comp": "COMP_PRINT_SPOT_WHITE_S1",
+      "comp_nm": "별색인쇄비",
+      "dims": [
+        "plt_siz_cd",
+        "proc_cd",
+        "앞면별색",
+        "뒷면별색",
+        "spot_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd",
+        "앞면별색",
+        "뒷면별색",
+        "spot_side_cnt"
+      ],
+      "rows": 530
+    },
+    {
+      "prd": "PRD_000022",
+      "nm": "금은별색엽서",
+      "pub": 0,
+      "is_set": false,
+      "comp": "COMP_PAPER",
+      "comp_nm": "용지비(종이별 절가)",
+      "dims": [
+        "mat_cd",
+        "plt_siz_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 87
+    },
+    {
+      "prd": "PRD_000022",
+      "nm": "금은별색엽서",
+      "pub": 0,
+      "is_set": false,
+      "comp": "COMP_PP_CREASE_1L",
+      "comp_nm": "오시비",
+      "dims": [
+        "proc_cd",
+        "줄수",
+        "min_qty"
+      ],
+      "missing": [
+        "줄수"
+      ],
+      "rows": 30
+    },
+    {
+      "prd": "PRD_000022",
+      "nm": "금은별색엽서",
+      "pub": 0,
+      "is_set": false,
+      "comp": "COMP_PP_PERF_1L",
+      "comp_nm": "미싱비",
+      "dims": [
+        "proc_cd",
+        "줄수",
+        "min_qty"
+      ],
+      "missing": [
+        "줄수"
+      ],
+      "rows": 30
+    },
+    {
+      "prd": "PRD_000022",
+      "nm": "금은별색엽서",
+      "pub": 0,
+      "is_set": false,
+      "comp": "COMP_PP_VARTEXT_1EA",
+      "comp_nm": "가변텍스트",
+      "dims": [
+        "proc_cd",
+        "개수",
+        "min_qty"
+      ],
+      "missing": [
+        "개수"
+      ],
+      "rows": 69
+    },
+    {
+      "prd": "PRD_000022",
+      "nm": "금은별색엽서",
+      "pub": 0,
+      "is_set": false,
+      "comp": "COMP_PP_VARIMG_1EA",
+      "comp_nm": "가변이미지",
+      "dims": [
+        "proc_cd",
+        "개수",
+        "min_qty"
+      ],
+      "missing": [
+        "개수"
+      ],
+      "rows": 69
+    },
+    {
+      "prd": "PRD_000022",
+      "nm": "금은별색엽서",
+      "pub": 0,
+      "is_set": false,
+      "comp": "COMP_COAT_MATTE",
+      "comp_nm": "무광코팅비",
+      "dims": [
+        "proc_cd",
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt"
+      ],
+      "rows": 138
+    },
+    {
+      "prd": "PRD_000022",
+      "nm": "금은별색엽서",
+      "pub": 0,
+      "is_set": false,
+      "comp": "COMP_COAT_GLOSSY",
+      "comp_nm": "유광코팅비",
+      "dims": [
+        "proc_cd",
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt"
+      ],
+      "rows": 138
+    },
+    {
+      "prd": "PRD_000023",
+      "nm": "모양엽서",
+      "pub": 0,
+      "is_set": false,
+      "comp": "COMP_PRINT_DIGITAL_S1",
+      "comp_nm": "디지털인쇄비",
+      "dims": [
+        "proc_cd",
+        "plt_siz_cd",
+        "print_opt_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 625
+    },
+    {
+      "prd": "PRD_000023",
+      "nm": "모양엽서",
+      "pub": 0,
+      "is_set": false,
+      "comp": "COMP_PAPER",
+      "comp_nm": "용지비(종이별 절가)",
+      "dims": [
+        "mat_cd",
+        "plt_siz_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 87
+    },
+    {
+      "prd": "PRD_000023",
+      "nm": "모양엽서",
+      "pub": 0,
+      "is_set": false,
+      "comp": "COMP_CUT_FULL_DIECUT",
+      "comp_nm": "커팅 완제품가 완칼(모양엽서·라벨택)",
+      "dims": [
+        "plt_siz_cd",
+        "proc_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 72
+    },
+    {
+      "prd": "PRD_000024",
+      "nm": "포토카드",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PHOTOCARD_SET",
+      "comp_nm": "포토카드 완제품가 일반세트",
+      "dims": [
+        "siz_cd",
+        "bdl_qty",
+        "opt_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "bdl_qty",
+        "opt_cd"
+      ],
+      "rows": 1
+    },
+    {
+      "prd": "PRD_000024",
+      "nm": "포토카드",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PHOTOCARD_BULK",
+      "comp_nm": "포토카드 완제품가 대량",
+      "dims": [
+        "opt_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "opt_cd"
+      ],
+      "rows": 50
+    },
+    {
+      "prd": "PRD_000025",
+      "nm": "투명포토카드",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PHOTOCARD_CLEAR_SET",
+      "comp_nm": "포토카드 완제품가 투명세트",
+      "dims": [
+        "siz_cd",
+        "bdl_qty",
+        "min_qty"
+      ],
+      "missing": [
+        "bdl_qty"
+      ],
+      "rows": 1
+    },
+    {
+      "prd": "PRD_000026",
+      "nm": "종이슬로건",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PRINT_DIGITAL_S1",
+      "comp_nm": "디지털인쇄비",
+      "dims": [
+        "proc_cd",
+        "plt_siz_cd",
+        "print_opt_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 625
+    },
+    {
+      "prd": "PRD_000026",
+      "nm": "종이슬로건",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PRINT_SPOT_WHITE_S1",
+      "comp_nm": "별색인쇄비",
+      "dims": [
+        "plt_siz_cd",
+        "proc_cd",
+        "앞면별색",
+        "뒷면별색",
+        "spot_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd",
+        "앞면별색",
+        "뒷면별색",
+        "spot_side_cnt"
+      ],
+      "rows": 530
+    },
+    {
+      "prd": "PRD_000026",
+      "nm": "종이슬로건",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PAPER",
+      "comp_nm": "용지비(종이별 절가)",
+      "dims": [
+        "mat_cd",
+        "plt_siz_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 87
+    },
+    {
+      "prd": "PRD_000026",
+      "nm": "종이슬로건",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_CREASE_1L",
+      "comp_nm": "오시비",
+      "dims": [
+        "proc_cd",
+        "줄수",
+        "min_qty"
+      ],
+      "missing": [
+        "줄수"
+      ],
+      "rows": 30
+    },
+    {
+      "prd": "PRD_000026",
+      "nm": "종이슬로건",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_PERF_1L",
+      "comp_nm": "미싱비",
+      "dims": [
+        "proc_cd",
+        "줄수",
+        "min_qty"
+      ],
+      "missing": [
+        "줄수"
+      ],
+      "rows": 30
+    },
+    {
+      "prd": "PRD_000026",
+      "nm": "종이슬로건",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_VARTEXT_1EA",
+      "comp_nm": "가변텍스트",
+      "dims": [
+        "proc_cd",
+        "개수",
+        "min_qty"
+      ],
+      "missing": [
+        "개수"
+      ],
+      "rows": 69
+    },
+    {
+      "prd": "PRD_000026",
+      "nm": "종이슬로건",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_VARIMG_1EA",
+      "comp_nm": "가변이미지",
+      "dims": [
+        "proc_cd",
+        "개수",
+        "min_qty"
+      ],
+      "missing": [
+        "개수"
+      ],
+      "rows": 69
+    },
+    {
+      "prd": "PRD_000026",
+      "nm": "종이슬로건",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_COAT_MATTE",
+      "comp_nm": "무광코팅비",
+      "dims": [
+        "proc_cd",
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt"
+      ],
+      "rows": 138
+    },
+    {
+      "prd": "PRD_000026",
+      "nm": "종이슬로건",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_COAT_GLOSSY",
+      "comp_nm": "유광코팅비",
+      "dims": [
+        "proc_cd",
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt"
+      ],
+      "rows": 138
+    },
+    {
+      "prd": "PRD_000027",
+      "nm": "2단접지카드",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PRINT_DIGITAL_S1",
+      "comp_nm": "디지털인쇄비",
+      "dims": [
+        "proc_cd",
+        "plt_siz_cd",
+        "print_opt_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 625
+    },
+    {
+      "prd": "PRD_000027",
+      "nm": "2단접지카드",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_COAT_GLOSSY",
+      "comp_nm": "유광코팅비",
+      "dims": [
+        "proc_cd",
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt"
+      ],
+      "rows": 138
+    },
+    {
+      "prd": "PRD_000027",
+      "nm": "2단접지카드",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_COAT_MATTE",
+      "comp_nm": "무광코팅비",
+      "dims": [
+        "proc_cd",
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt"
+      ],
+      "rows": 138
+    },
+    {
+      "prd": "PRD_000027",
+      "nm": "2단접지카드",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PAPER",
+      "comp_nm": "용지비(종이별 절가)",
+      "dims": [
+        "mat_cd",
+        "plt_siz_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 87
+    },
+    {
+      "prd": "PRD_000027",
+      "nm": "2단접지카드",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_CUT_PERF_1H6",
+      "comp_nm": "타공비 (6mm)",
+      "dims": [
+        "proc_cd",
+        "구수",
+        "min_qty"
+      ],
+      "missing": [
+        "구수"
+      ],
+      "rows": 18
+    },
+    {
+      "prd": "PRD_000027",
+      "nm": "2단접지카드",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_FOIL_SETUP_LARGE",
+      "comp_nm": "박·형압 동판셋업비(대형)",
+      "dims": [
+        "proc_cd",
+        "가로",
+        "세로",
+        "min_qty"
+      ],
+      "missing": [
+        "가로",
+        "세로"
+      ],
+      "rows": 512
+    },
+    {
+      "prd": "PRD_000027",
+      "nm": "2단접지카드",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_FOIL_PROC_LARGE_STD",
+      "comp_nm": "박 가공비(대형·일반박)",
+      "dims": [
+        "proc_cd",
+        "가로",
+        "세로",
+        "min_qty"
+      ],
+      "missing": [
+        "가로",
+        "세로"
+      ],
+      "rows": 3328
+    },
+    {
+      "prd": "PRD_000027",
+      "nm": "2단접지카드",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_FOIL_PROC_LARGE_SPECIAL",
+      "comp_nm": "박 가공비(대형·특수박)",
+      "dims": [
+        "proc_cd",
+        "가로",
+        "세로",
+        "min_qty"
+      ],
+      "missing": [
+        "가로",
+        "세로"
+      ],
+      "rows": 3328
+    },
+    {
+      "prd": "PRD_000027",
+      "nm": "2단접지카드",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_VARTEXT_1EA",
+      "comp_nm": "가변텍스트",
+      "dims": [
+        "proc_cd",
+        "개수",
+        "min_qty"
+      ],
+      "missing": [
+        "개수"
+      ],
+      "rows": 69
+    },
+    {
+      "prd": "PRD_000027",
+      "nm": "2단접지카드",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_VARIMG_1EA",
+      "comp_nm": "가변이미지",
+      "dims": [
+        "proc_cd",
+        "개수",
+        "min_qty"
+      ],
+      "missing": [
+        "개수"
+      ],
+      "rows": 69
+    },
+    {
+      "prd": "PRD_000028",
+      "nm": "미니접지카드",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PRINT_DIGITAL_S1",
+      "comp_nm": "디지털인쇄비",
+      "dims": [
+        "proc_cd",
+        "plt_siz_cd",
+        "print_opt_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 625
+    },
+    {
+      "prd": "PRD_000028",
+      "nm": "미니접지카드",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_COAT_GLOSSY",
+      "comp_nm": "유광코팅비",
+      "dims": [
+        "proc_cd",
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt"
+      ],
+      "rows": 138
+    },
+    {
+      "prd": "PRD_000028",
+      "nm": "미니접지카드",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_COAT_MATTE",
+      "comp_nm": "무광코팅비",
+      "dims": [
+        "proc_cd",
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt"
+      ],
+      "rows": 138
+    },
+    {
+      "prd": "PRD_000028",
+      "nm": "미니접지카드",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PAPER",
+      "comp_nm": "용지비(종이별 절가)",
+      "dims": [
+        "mat_cd",
+        "plt_siz_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 87
+    },
+    {
+      "prd": "PRD_000028",
+      "nm": "미니접지카드",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_CUT_PERF_1H6",
+      "comp_nm": "타공비 (6mm)",
+      "dims": [
+        "proc_cd",
+        "구수",
+        "min_qty"
+      ],
+      "missing": [
+        "구수"
+      ],
+      "rows": 18
+    },
+    {
+      "prd": "PRD_000028",
+      "nm": "미니접지카드",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_FOIL_SETUP_LARGE",
+      "comp_nm": "박·형압 동판셋업비(대형)",
+      "dims": [
+        "proc_cd",
+        "가로",
+        "세로",
+        "min_qty"
+      ],
+      "missing": [
+        "가로",
+        "세로"
+      ],
+      "rows": 512
+    },
+    {
+      "prd": "PRD_000028",
+      "nm": "미니접지카드",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_FOIL_PROC_LARGE_STD",
+      "comp_nm": "박 가공비(대형·일반박)",
+      "dims": [
+        "proc_cd",
+        "가로",
+        "세로",
+        "min_qty"
+      ],
+      "missing": [
+        "가로",
+        "세로"
+      ],
+      "rows": 3328
+    },
+    {
+      "prd": "PRD_000028",
+      "nm": "미니접지카드",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_FOIL_PROC_LARGE_SPECIAL",
+      "comp_nm": "박 가공비(대형·특수박)",
+      "dims": [
+        "proc_cd",
+        "가로",
+        "세로",
+        "min_qty"
+      ],
+      "missing": [
+        "가로",
+        "세로"
+      ],
+      "rows": 3328
+    },
+    {
+      "prd": "PRD_000028",
+      "nm": "미니접지카드",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_VARTEXT_1EA",
+      "comp_nm": "가변텍스트",
+      "dims": [
+        "proc_cd",
+        "개수",
+        "min_qty"
+      ],
+      "missing": [
+        "개수"
+      ],
+      "rows": 69
+    },
+    {
+      "prd": "PRD_000028",
+      "nm": "미니접지카드",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_VARIMG_1EA",
+      "comp_nm": "가변이미지",
+      "dims": [
+        "proc_cd",
+        "개수",
+        "min_qty"
+      ],
+      "missing": [
+        "개수"
+      ],
+      "rows": 69
+    },
+    {
+      "prd": "PRD_000029",
+      "nm": "3단접지카드",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PRINT_DIGITAL_S1",
+      "comp_nm": "디지털인쇄비",
+      "dims": [
+        "proc_cd",
+        "plt_siz_cd",
+        "print_opt_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 625
+    },
+    {
+      "prd": "PRD_000029",
+      "nm": "3단접지카드",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_COAT_GLOSSY",
+      "comp_nm": "유광코팅비",
+      "dims": [
+        "proc_cd",
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt"
+      ],
+      "rows": 138
+    },
+    {
+      "prd": "PRD_000029",
+      "nm": "3단접지카드",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_COAT_MATTE",
+      "comp_nm": "무광코팅비",
+      "dims": [
+        "proc_cd",
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt"
+      ],
+      "rows": 138
+    },
+    {
+      "prd": "PRD_000029",
+      "nm": "3단접지카드",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PAPER",
+      "comp_nm": "용지비(종이별 절가)",
+      "dims": [
+        "mat_cd",
+        "plt_siz_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 87
+    },
+    {
+      "prd": "PRD_000029",
+      "nm": "3단접지카드",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_CUT_PERF_1H6",
+      "comp_nm": "타공비 (6mm)",
+      "dims": [
+        "proc_cd",
+        "구수",
+        "min_qty"
+      ],
+      "missing": [
+        "구수"
+      ],
+      "rows": 18
+    },
+    {
+      "prd": "PRD_000029",
+      "nm": "3단접지카드",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_FOIL_SETUP_LARGE",
+      "comp_nm": "박·형압 동판셋업비(대형)",
+      "dims": [
+        "proc_cd",
+        "가로",
+        "세로",
+        "min_qty"
+      ],
+      "missing": [
+        "가로",
+        "세로"
+      ],
+      "rows": 512
+    },
+    {
+      "prd": "PRD_000029",
+      "nm": "3단접지카드",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_FOIL_PROC_LARGE_STD",
+      "comp_nm": "박 가공비(대형·일반박)",
+      "dims": [
+        "proc_cd",
+        "가로",
+        "세로",
+        "min_qty"
+      ],
+      "missing": [
+        "가로",
+        "세로"
+      ],
+      "rows": 3328
+    },
+    {
+      "prd": "PRD_000029",
+      "nm": "3단접지카드",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_FOIL_PROC_LARGE_SPECIAL",
+      "comp_nm": "박 가공비(대형·특수박)",
+      "dims": [
+        "proc_cd",
+        "가로",
+        "세로",
+        "min_qty"
+      ],
+      "missing": [
+        "가로",
+        "세로"
+      ],
+      "rows": 3328
+    },
+    {
+      "prd": "PRD_000029",
+      "nm": "3단접지카드",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_VARTEXT_1EA",
+      "comp_nm": "가변텍스트",
+      "dims": [
+        "proc_cd",
+        "개수",
+        "min_qty"
+      ],
+      "missing": [
+        "개수"
+      ],
+      "rows": 69
+    },
+    {
+      "prd": "PRD_000029",
+      "nm": "3단접지카드",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_VARIMG_1EA",
+      "comp_nm": "가변이미지",
+      "dims": [
+        "proc_cd",
+        "개수",
+        "min_qty"
+      ],
+      "missing": [
+        "개수"
+      ],
+      "rows": 69
+    },
+    {
+      "prd": "PRD_000030",
+      "nm": "지그재그엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PRINT_DIGITAL_S1",
+      "comp_nm": "디지털인쇄비",
+      "dims": [
+        "proc_cd",
+        "plt_siz_cd",
+        "print_opt_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 625
+    },
+    {
+      "prd": "PRD_000030",
+      "nm": "지그재그엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PAPER",
+      "comp_nm": "용지비(종이별 절가)",
+      "dims": [
+        "mat_cd",
+        "plt_siz_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 87
+    },
+    {
+      "prd": "PRD_000030",
+      "nm": "지그재그엽서",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_CUT_PERF_1H6",
+      "comp_nm": "타공비 (6mm)",
+      "dims": [
+        "proc_cd",
+        "구수",
+        "min_qty"
+      ],
+      "missing": [
+        "구수"
+      ],
+      "rows": 18
+    },
+    {
+      "prd": "PRD_000031",
+      "nm": "프리미엄명함",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_FOIL_PROC_SMALL_STD",
+      "comp_nm": "박 가공비(소형·일반박)",
+      "dims": [
+        "proc_cd",
+        "가로",
+        "세로",
+        "min_qty"
+      ],
+      "missing": [
+        "가로",
+        "세로"
+      ],
+      "rows": 1620
+    },
+    {
+      "prd": "PRD_000031",
+      "nm": "프리미엄명함",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_FOIL_PROC_SMALL_SPECIAL",
+      "comp_nm": "박 가공비(소형·특수박)",
+      "dims": [
+        "proc_cd",
+        "가로",
+        "세로",
+        "min_qty"
+      ],
+      "missing": [
+        "가로",
+        "세로"
+      ],
+      "rows": 540
+    },
+    {
+      "prd": "PRD_000031",
+      "nm": "프리미엄명함",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_VARTEXT_1EA",
+      "comp_nm": "가변텍스트",
+      "dims": [
+        "proc_cd",
+        "개수",
+        "min_qty"
+      ],
+      "missing": [
+        "개수"
+      ],
+      "rows": 69
+    },
+    {
+      "prd": "PRD_000031",
+      "nm": "프리미엄명함",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_VARIMG_1EA",
+      "comp_nm": "가변이미지",
+      "dims": [
+        "proc_cd",
+        "개수",
+        "min_qty"
+      ],
+      "missing": [
+        "개수"
+      ],
+      "rows": 69
+    },
+    {
+      "prd": "PRD_000034",
+      "nm": "펄명함",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_FOIL_PROC_SMALL_STD",
+      "comp_nm": "박 가공비(소형·일반박)",
+      "dims": [
+        "proc_cd",
+        "가로",
+        "세로",
+        "min_qty"
+      ],
+      "missing": [
+        "가로",
+        "세로"
+      ],
+      "rows": 1620
+    },
+    {
+      "prd": "PRD_000034",
+      "nm": "펄명함",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_FOIL_PROC_SMALL_SPECIAL",
+      "comp_nm": "박 가공비(소형·특수박)",
+      "dims": [
+        "proc_cd",
+        "가로",
+        "세로",
+        "min_qty"
+      ],
+      "missing": [
+        "가로",
+        "세로"
+      ],
+      "rows": 540
+    },
+    {
+      "prd": "PRD_000038",
+      "nm": "형압명함",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_EMBOSS_PROC_SMALL_STD",
+      "comp_nm": "형압 가공비(소형)",
+      "dims": [
+        "proc_cd",
+        "가로",
+        "세로",
+        "min_qty"
+      ],
+      "missing": [
+        "가로",
+        "세로"
+      ],
+      "rows": 570
+    },
+    {
+      "prd": "PRD_000040",
+      "nm": "화이트인쇄명함",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_NAMECARD_WHITE",
+      "comp_nm": "화이트인쇄명함 완제품가(용지포함)",
+      "dims": [
+        "proc_cd",
+        "앞면별색",
+        "뒷면별색",
+        "spot_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "앞면별색",
+        "뒷면별색",
+        "spot_side_cnt"
+      ],
+      "rows": 2
+    },
+    {
+      "prd": "PRD_000040",
+      "nm": "화이트인쇄명함",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_NAMECARD_SPOT",
+      "comp_nm": "명함 별색인쇄비",
+      "dims": [
+        "proc_cd",
+        "앞면별색",
+        "뒷면별색",
+        "spot_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "앞면별색",
+        "뒷면별색",
+        "spot_side_cnt"
+      ],
+      "rows": 2
+    },
+    {
+      "prd": "PRD_000041",
+      "nm": "스탠다드 쿠폰/상품권",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PRINT_DIGITAL_S1",
+      "comp_nm": "디지털인쇄비",
+      "dims": [
+        "proc_cd",
+        "plt_siz_cd",
+        "print_opt_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 625
+    },
+    {
+      "prd": "PRD_000041",
+      "nm": "스탠다드 쿠폰/상품권",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PRINT_SPOT_WHITE_S1",
+      "comp_nm": "별색인쇄비",
+      "dims": [
+        "plt_siz_cd",
+        "proc_cd",
+        "앞면별색",
+        "뒷면별색",
+        "spot_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd",
+        "앞면별색",
+        "뒷면별색",
+        "spot_side_cnt"
+      ],
+      "rows": 530
+    },
+    {
+      "prd": "PRD_000041",
+      "nm": "스탠다드 쿠폰/상품권",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PAPER",
+      "comp_nm": "용지비(종이별 절가)",
+      "dims": [
+        "mat_cd",
+        "plt_siz_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 87
+    },
+    {
+      "prd": "PRD_000041",
+      "nm": "스탠다드 쿠폰/상품권",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_CREASE_1L",
+      "comp_nm": "오시비",
+      "dims": [
+        "proc_cd",
+        "줄수",
+        "min_qty"
+      ],
+      "missing": [
+        "줄수"
+      ],
+      "rows": 30
+    },
+    {
+      "prd": "PRD_000041",
+      "nm": "스탠다드 쿠폰/상품권",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_PERF_1L",
+      "comp_nm": "미싱비",
+      "dims": [
+        "proc_cd",
+        "줄수",
+        "min_qty"
+      ],
+      "missing": [
+        "줄수"
+      ],
+      "rows": 30
+    },
+    {
+      "prd": "PRD_000041",
+      "nm": "스탠다드 쿠폰/상품권",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_VARTEXT_1EA",
+      "comp_nm": "가변텍스트",
+      "dims": [
+        "proc_cd",
+        "개수",
+        "min_qty"
+      ],
+      "missing": [
+        "개수"
+      ],
+      "rows": 69
+    },
+    {
+      "prd": "PRD_000041",
+      "nm": "스탠다드 쿠폰/상품권",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_VARIMG_1EA",
+      "comp_nm": "가변이미지",
+      "dims": [
+        "proc_cd",
+        "개수",
+        "min_qty"
+      ],
+      "missing": [
+        "개수"
+      ],
+      "rows": 69
+    },
+    {
+      "prd": "PRD_000041",
+      "nm": "스탠다드 쿠폰/상품권",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_COAT_MATTE",
+      "comp_nm": "무광코팅비",
+      "dims": [
+        "proc_cd",
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt"
+      ],
+      "rows": 138
+    },
+    {
+      "prd": "PRD_000041",
+      "nm": "스탠다드 쿠폰/상품권",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_COAT_GLOSSY",
+      "comp_nm": "유광코팅비",
+      "dims": [
+        "proc_cd",
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt"
+      ],
+      "rows": 138
+    },
+    {
+      "prd": "PRD_000042",
+      "nm": "프리미엄 쿠폰/상품권",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PRINT_DIGITAL_S1",
+      "comp_nm": "디지털인쇄비",
+      "dims": [
+        "proc_cd",
+        "plt_siz_cd",
+        "print_opt_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 625
+    },
+    {
+      "prd": "PRD_000042",
+      "nm": "프리미엄 쿠폰/상품권",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PRINT_SPOT_WHITE_S1",
+      "comp_nm": "별색인쇄비",
+      "dims": [
+        "plt_siz_cd",
+        "proc_cd",
+        "앞면별색",
+        "뒷면별색",
+        "spot_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd",
+        "앞면별색",
+        "뒷면별색",
+        "spot_side_cnt"
+      ],
+      "rows": 530
+    },
+    {
+      "prd": "PRD_000042",
+      "nm": "프리미엄 쿠폰/상품권",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PAPER",
+      "comp_nm": "용지비(종이별 절가)",
+      "dims": [
+        "mat_cd",
+        "plt_siz_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 87
+    },
+    {
+      "prd": "PRD_000042",
+      "nm": "프리미엄 쿠폰/상품권",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_CREASE_1L",
+      "comp_nm": "오시비",
+      "dims": [
+        "proc_cd",
+        "줄수",
+        "min_qty"
+      ],
+      "missing": [
+        "줄수"
+      ],
+      "rows": 30
+    },
+    {
+      "prd": "PRD_000042",
+      "nm": "프리미엄 쿠폰/상품권",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_PERF_1L",
+      "comp_nm": "미싱비",
+      "dims": [
+        "proc_cd",
+        "줄수",
+        "min_qty"
+      ],
+      "missing": [
+        "줄수"
+      ],
+      "rows": 30
+    },
+    {
+      "prd": "PRD_000042",
+      "nm": "프리미엄 쿠폰/상품권",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_VARTEXT_1EA",
+      "comp_nm": "가변텍스트",
+      "dims": [
+        "proc_cd",
+        "개수",
+        "min_qty"
+      ],
+      "missing": [
+        "개수"
+      ],
+      "rows": 69
+    },
+    {
+      "prd": "PRD_000042",
+      "nm": "프리미엄 쿠폰/상품권",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_VARIMG_1EA",
+      "comp_nm": "가변이미지",
+      "dims": [
+        "proc_cd",
+        "개수",
+        "min_qty"
+      ],
+      "missing": [
+        "개수"
+      ],
+      "rows": 69
+    },
+    {
+      "prd": "PRD_000042",
+      "nm": "프리미엄 쿠폰/상품권",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_FOIL_SETUP_LARGE",
+      "comp_nm": "박·형압 동판셋업비(대형)",
+      "dims": [
+        "proc_cd",
+        "가로",
+        "세로",
+        "min_qty"
+      ],
+      "missing": [
+        "가로",
+        "세로"
+      ],
+      "rows": 512
+    },
+    {
+      "prd": "PRD_000042",
+      "nm": "프리미엄 쿠폰/상품권",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_FOIL_PROC_LARGE_STD",
+      "comp_nm": "박 가공비(대형·일반박)",
+      "dims": [
+        "proc_cd",
+        "가로",
+        "세로",
+        "min_qty"
+      ],
+      "missing": [
+        "가로",
+        "세로"
+      ],
+      "rows": 3328
+    },
+    {
+      "prd": "PRD_000042",
+      "nm": "프리미엄 쿠폰/상품권",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_FOIL_PROC_LARGE_SPECIAL",
+      "comp_nm": "박 가공비(대형·특수박)",
+      "dims": [
+        "proc_cd",
+        "가로",
+        "세로",
+        "min_qty"
+      ],
+      "missing": [
+        "가로",
+        "세로"
+      ],
+      "rows": 3328
+    },
+    {
+      "prd": "PRD_000042",
+      "nm": "프리미엄 쿠폰/상품권",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_COAT_GLOSSY",
+      "comp_nm": "유광코팅비",
+      "dims": [
+        "proc_cd",
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt"
+      ],
+      "rows": 138
+    },
+    {
+      "prd": "PRD_000042",
+      "nm": "프리미엄 쿠폰/상품권",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_COAT_MATTE",
+      "comp_nm": "무광코팅비",
+      "dims": [
+        "proc_cd",
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt"
+      ],
+      "rows": 138
+    },
+    {
+      "prd": "PRD_000043",
+      "nm": "인쇄배경지(일반형)",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PRINT_DIGITAL_S1",
+      "comp_nm": "디지털인쇄비",
+      "dims": [
+        "proc_cd",
+        "plt_siz_cd",
+        "print_opt_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 625
+    },
+    {
+      "prd": "PRD_000043",
+      "nm": "인쇄배경지(일반형)",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PAPER",
+      "comp_nm": "용지비(종이별 절가)",
+      "dims": [
+        "mat_cd",
+        "plt_siz_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 87
+    },
+    {
+      "prd": "PRD_000043",
+      "nm": "인쇄배경지(일반형)",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_CREASE_1L",
+      "comp_nm": "오시비",
+      "dims": [
+        "proc_cd",
+        "줄수",
+        "min_qty"
+      ],
+      "missing": [
+        "줄수"
+      ],
+      "rows": 30
+    },
+    {
+      "prd": "PRD_000043",
+      "nm": "인쇄배경지(일반형)",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_CUT_PERF_1H6",
+      "comp_nm": "타공비 (6mm)",
+      "dims": [
+        "proc_cd",
+        "구수",
+        "min_qty"
+      ],
+      "missing": [
+        "구수"
+      ],
+      "rows": 18
+    },
+    {
+      "prd": "PRD_000043",
+      "nm": "인쇄배경지(일반형)",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_CUT_FULL_DIECUT",
+      "comp_nm": "커팅 완제품가 완칼(모양엽서·라벨택)",
+      "dims": [
+        "plt_siz_cd",
+        "proc_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 72
+    },
+    {
+      "prd": "PRD_000044",
+      "nm": "인쇄배경지(커팅형)",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PRINT_DIGITAL_S1",
+      "comp_nm": "디지털인쇄비",
+      "dims": [
+        "proc_cd",
+        "plt_siz_cd",
+        "print_opt_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 625
+    },
+    {
+      "prd": "PRD_000044",
+      "nm": "인쇄배경지(커팅형)",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PAPER",
+      "comp_nm": "용지비(종이별 절가)",
+      "dims": [
+        "mat_cd",
+        "plt_siz_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 87
+    },
+    {
+      "prd": "PRD_000044",
+      "nm": "인쇄배경지(커팅형)",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_CREASE_1L",
+      "comp_nm": "오시비",
+      "dims": [
+        "proc_cd",
+        "줄수",
+        "min_qty"
+      ],
+      "missing": [
+        "줄수"
+      ],
+      "rows": 30
+    },
+    {
+      "prd": "PRD_000044",
+      "nm": "인쇄배경지(커팅형)",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_CUT_PERF_1H6",
+      "comp_nm": "타공비 (6mm)",
+      "dims": [
+        "proc_cd",
+        "구수",
+        "min_qty"
+      ],
+      "missing": [
+        "구수"
+      ],
+      "rows": 18
+    },
+    {
+      "prd": "PRD_000044",
+      "nm": "인쇄배경지(커팅형)",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_CUT_FULL_DIECUT",
+      "comp_nm": "커팅 완제품가 완칼(모양엽서·라벨택)",
+      "dims": [
+        "plt_siz_cd",
+        "proc_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 72
+    },
+    {
+      "prd": "PRD_000045",
+      "nm": "인쇄헤더택",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PRINT_DIGITAL_S1",
+      "comp_nm": "디지털인쇄비",
+      "dims": [
+        "proc_cd",
+        "plt_siz_cd",
+        "print_opt_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 625
+    },
+    {
+      "prd": "PRD_000045",
+      "nm": "인쇄헤더택",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PAPER",
+      "comp_nm": "용지비(종이별 절가)",
+      "dims": [
+        "mat_cd",
+        "plt_siz_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 87
+    },
+    {
+      "prd": "PRD_000045",
+      "nm": "인쇄헤더택",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_CREASE_1L",
+      "comp_nm": "오시비",
+      "dims": [
+        "proc_cd",
+        "줄수",
+        "min_qty"
+      ],
+      "missing": [
+        "줄수"
+      ],
+      "rows": 30
+    },
+    {
+      "prd": "PRD_000045",
+      "nm": "인쇄헤더택",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_CUT_PERF_1H6",
+      "comp_nm": "타공비 (6mm)",
+      "dims": [
+        "proc_cd",
+        "구수",
+        "min_qty"
+      ],
+      "missing": [
+        "구수"
+      ],
+      "rows": 18
+    },
+    {
+      "prd": "PRD_000045",
+      "nm": "인쇄헤더택",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_CUT_FULL_DIECUT",
+      "comp_nm": "커팅 완제품가 완칼(모양엽서·라벨택)",
+      "dims": [
+        "plt_siz_cd",
+        "proc_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 72
+    },
+    {
+      "prd": "PRD_000046",
+      "nm": "라벨/택",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PRINT_DIGITAL_S1",
+      "comp_nm": "디지털인쇄비",
+      "dims": [
+        "proc_cd",
+        "plt_siz_cd",
+        "print_opt_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 625
+    },
+    {
+      "prd": "PRD_000046",
+      "nm": "라벨/택",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PAPER",
+      "comp_nm": "용지비(종이별 절가)",
+      "dims": [
+        "mat_cd",
+        "plt_siz_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 87
+    },
+    {
+      "prd": "PRD_000046",
+      "nm": "라벨/택",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_CUT_FULL_DIECUT",
+      "comp_nm": "커팅 완제품가 완칼(모양엽서·라벨택)",
+      "dims": [
+        "plt_siz_cd",
+        "proc_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 72
+    },
+    {
+      "prd": "PRD_000047",
+      "nm": "소량전단지",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PRINT_DIGITAL_S1",
+      "comp_nm": "디지털인쇄비",
+      "dims": [
+        "proc_cd",
+        "plt_siz_cd",
+        "print_opt_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 625
+    },
+    {
+      "prd": "PRD_000047",
+      "nm": "소량전단지",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_COAT_GLOSSY",
+      "comp_nm": "유광코팅비",
+      "dims": [
+        "proc_cd",
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt"
+      ],
+      "rows": 138
+    },
+    {
+      "prd": "PRD_000047",
+      "nm": "소량전단지",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_COAT_MATTE",
+      "comp_nm": "무광코팅비",
+      "dims": [
+        "proc_cd",
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt"
+      ],
+      "rows": 138
+    },
+    {
+      "prd": "PRD_000047",
+      "nm": "소량전단지",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PAPER",
+      "comp_nm": "용지비(종이별 절가)",
+      "dims": [
+        "mat_cd",
+        "plt_siz_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 87
+    },
+    {
+      "prd": "PRD_000047",
+      "nm": "소량전단지",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_CUT_PERF_1H6",
+      "comp_nm": "타공비 (6mm)",
+      "dims": [
+        "proc_cd",
+        "구수",
+        "min_qty"
+      ],
+      "missing": [
+        "구수"
+      ],
+      "rows": 18
+    },
+    {
+      "prd": "PRD_000047",
+      "nm": "소량전단지",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_CREASE_1L",
+      "comp_nm": "오시비",
+      "dims": [
+        "proc_cd",
+        "줄수",
+        "min_qty"
+      ],
+      "missing": [
+        "줄수"
+      ],
+      "rows": 30
+    },
+    {
+      "prd": "PRD_000047",
+      "nm": "소량전단지",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_PERF_1L",
+      "comp_nm": "미싱비",
+      "dims": [
+        "proc_cd",
+        "줄수",
+        "min_qty"
+      ],
+      "missing": [
+        "줄수"
+      ],
+      "rows": 30
+    },
+    {
+      "prd": "PRD_000047",
+      "nm": "소량전단지",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_VARTEXT_1EA",
+      "comp_nm": "가변텍스트",
+      "dims": [
+        "proc_cd",
+        "개수",
+        "min_qty"
+      ],
+      "missing": [
+        "개수"
+      ],
+      "rows": 69
+    },
+    {
+      "prd": "PRD_000047",
+      "nm": "소량전단지",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_VARIMG_1EA",
+      "comp_nm": "가변이미지",
+      "dims": [
+        "proc_cd",
+        "개수",
+        "min_qty"
+      ],
+      "missing": [
+        "개수"
+      ],
+      "rows": 69
+    },
+    {
+      "prd": "PRD_000048",
+      "nm": "접지리플렛",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PRINT_DIGITAL_S1",
+      "comp_nm": "디지털인쇄비",
+      "dims": [
+        "proc_cd",
+        "plt_siz_cd",
+        "print_opt_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 625
+    },
+    {
+      "prd": "PRD_000048",
+      "nm": "접지리플렛",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_COAT_GLOSSY",
+      "comp_nm": "유광코팅비",
+      "dims": [
+        "proc_cd",
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt"
+      ],
+      "rows": 138
+    },
+    {
+      "prd": "PRD_000048",
+      "nm": "접지리플렛",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_COAT_MATTE",
+      "comp_nm": "무광코팅비",
+      "dims": [
+        "proc_cd",
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt"
+      ],
+      "rows": 138
+    },
+    {
+      "prd": "PRD_000048",
+      "nm": "접지리플렛",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PAPER",
+      "comp_nm": "용지비(종이별 절가)",
+      "dims": [
+        "mat_cd",
+        "plt_siz_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 87
+    },
+    {
+      "prd": "PRD_000048",
+      "nm": "접지리플렛",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_CUT_PERF_1H6",
+      "comp_nm": "타공비 (6mm)",
+      "dims": [
+        "proc_cd",
+        "구수",
+        "min_qty"
+      ],
+      "missing": [
+        "구수"
+      ],
+      "rows": 18
+    },
+    {
+      "prd": "PRD_000048",
+      "nm": "접지리플렛",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_VARTEXT_1EA",
+      "comp_nm": "가변텍스트",
+      "dims": [
+        "proc_cd",
+        "개수",
+        "min_qty"
+      ],
+      "missing": [
+        "개수"
+      ],
+      "rows": 69
+    },
+    {
+      "prd": "PRD_000048",
+      "nm": "접지리플렛",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_VARIMG_1EA",
+      "comp_nm": "가변이미지",
+      "dims": [
+        "proc_cd",
+        "개수",
+        "min_qty"
+      ],
+      "missing": [
+        "개수"
+      ],
+      "rows": 69
+    },
+    {
+      "prd": "PRD_000049",
+      "nm": "와이드 접지리플렛",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PRINT_DIGITAL_S1",
+      "comp_nm": "디지털인쇄비",
+      "dims": [
+        "proc_cd",
+        "plt_siz_cd",
+        "print_opt_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 625
+    },
+    {
+      "prd": "PRD_000049",
+      "nm": "와이드 접지리플렛",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_COAT_GLOSSY",
+      "comp_nm": "유광코팅비",
+      "dims": [
+        "proc_cd",
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt"
+      ],
+      "rows": 138
+    },
+    {
+      "prd": "PRD_000049",
+      "nm": "와이드 접지리플렛",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_COAT_MATTE",
+      "comp_nm": "무광코팅비",
+      "dims": [
+        "proc_cd",
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt"
+      ],
+      "rows": 138
+    },
+    {
+      "prd": "PRD_000049",
+      "nm": "와이드 접지리플렛",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PAPER",
+      "comp_nm": "용지비(종이별 절가)",
+      "dims": [
+        "mat_cd",
+        "plt_siz_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 87
+    },
+    {
+      "prd": "PRD_000049",
+      "nm": "와이드 접지리플렛",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_CUT_PERF_1H6",
+      "comp_nm": "타공비 (6mm)",
+      "dims": [
+        "proc_cd",
+        "구수",
+        "min_qty"
+      ],
+      "missing": [
+        "구수"
+      ],
+      "rows": 18
+    },
+    {
+      "prd": "PRD_000049",
+      "nm": "와이드 접지리플렛",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_VARTEXT_1EA",
+      "comp_nm": "가변텍스트",
+      "dims": [
+        "proc_cd",
+        "개수",
+        "min_qty"
+      ],
+      "missing": [
+        "개수"
+      ],
+      "rows": 69
+    },
+    {
+      "prd": "PRD_000049",
+      "nm": "와이드 접지리플렛",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PP_VARIMG_1EA",
+      "comp_nm": "가변이미지",
+      "dims": [
+        "proc_cd",
+        "개수",
+        "min_qty"
+      ],
+      "missing": [
+        "개수"
+      ],
+      "rows": 69
+    },
+    {
+      "prd": "PRD_000051",
+      "nm": "썬캡",
+      "pub": 0,
+      "is_set": false,
+      "comp": "COMP_PRINT_DIGITAL_S1",
+      "comp_nm": "디지털인쇄비",
+      "dims": [
+        "proc_cd",
+        "plt_siz_cd",
+        "print_opt_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 625
+    },
+    {
+      "prd": "PRD_000051",
+      "nm": "썬캡",
+      "pub": 0,
+      "is_set": false,
+      "comp": "COMP_PAPER",
+      "comp_nm": "용지비(종이별 절가)",
+      "dims": [
+        "mat_cd",
+        "plt_siz_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 87
+    },
+    {
+      "prd": "PRD_000051",
+      "nm": "썬캡",
+      "pub": 0,
+      "is_set": false,
+      "comp": "COMP_CUT_FULL_DIECUT",
+      "comp_nm": "커팅 완제품가 완칼(모양엽서·라벨택)",
+      "dims": [
+        "plt_siz_cd",
+        "proc_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 72
+    },
+    {
+      "prd": "PRD_000068",
+      "nm": "중철책자",
+      "pub": 1,
+      "is_set": true,
+      "comp": "COMP_BIND_JUNGCHEOL",
+      "comp_nm": "제본비 중철",
+      "dims": [
+        "proc_cd",
+        "제본방향",
+        "min_qty"
+      ],
+      "missing": [
+        "제본방향"
+      ],
+      "rows": 8
+    },
+    {
+      "prd": "PRD_000069",
+      "nm": "무선책자",
+      "pub": 1,
+      "is_set": true,
+      "comp": "COMP_BIND_MUSEON",
+      "comp_nm": "제본비 무선",
+      "dims": [
+        "proc_cd",
+        "제본방향",
+        "min_qty"
+      ],
+      "missing": [
+        "제본방향"
+      ],
+      "rows": 8
+    },
+    {
+      "prd": "PRD_000069",
+      "nm": "무선책자",
+      "pub": 1,
+      "is_set": true,
+      "comp": "COMP_FOIL_SETUP_LARGE",
+      "comp_nm": "박·형압 동판셋업비(대형)",
+      "dims": [
+        "proc_cd",
+        "가로",
+        "세로",
+        "min_qty"
+      ],
+      "missing": [
+        "가로",
+        "세로"
+      ],
+      "rows": 512
+    },
+    {
+      "prd": "PRD_000069",
+      "nm": "무선책자",
+      "pub": 1,
+      "is_set": true,
+      "comp": "COMP_FOIL_PROC_LARGE_STD",
+      "comp_nm": "박 가공비(대형·일반박)",
+      "dims": [
+        "proc_cd",
+        "가로",
+        "세로",
+        "min_qty"
+      ],
+      "missing": [
+        "가로",
+        "세로"
+      ],
+      "rows": 3328
+    },
+    {
+      "prd": "PRD_000069",
+      "nm": "무선책자",
+      "pub": 1,
+      "is_set": true,
+      "comp": "COMP_FOIL_PROC_LARGE_SPECIAL",
+      "comp_nm": "박 가공비(대형·특수박)",
+      "dims": [
+        "proc_cd",
+        "가로",
+        "세로",
+        "min_qty"
+      ],
+      "missing": [
+        "가로",
+        "세로"
+      ],
+      "rows": 3328
+    },
+    {
+      "prd": "PRD_000069",
+      "nm": "무선책자",
+      "pub": 1,
+      "is_set": true,
+      "comp": "COMP_EMBOSS_SETUP_LARGE",
+      "comp_nm": "형압 동판셋업비(대형)",
+      "dims": [
+        "proc_cd",
+        "가로",
+        "세로",
+        "min_qty"
+      ],
+      "missing": [
+        "가로",
+        "세로"
+      ],
+      "rows": 128
+    },
+    {
+      "prd": "PRD_000069",
+      "nm": "무선책자",
+      "pub": 1,
+      "is_set": true,
+      "comp": "COMP_EMBOSS_PROC_LARGE_STD",
+      "comp_nm": "형압 가공비(대형)",
+      "dims": [
+        "proc_cd",
+        "가로",
+        "세로",
+        "min_qty"
+      ],
+      "missing": [
+        "가로",
+        "세로"
+      ],
+      "rows": 1664
+    },
+    {
+      "prd": "PRD_000070",
+      "nm": "PUR책자",
+      "pub": 1,
+      "is_set": true,
+      "comp": "COMP_BIND_PUR",
+      "comp_nm": "제본비 PUR",
+      "dims": [
+        "proc_cd",
+        "제본방향",
+        "min_qty"
+      ],
+      "missing": [
+        "제본방향"
+      ],
+      "rows": 8
+    },
+    {
+      "prd": "PRD_000070",
+      "nm": "PUR책자",
+      "pub": 1,
+      "is_set": true,
+      "comp": "COMP_FOIL_SETUP_LARGE",
+      "comp_nm": "박·형압 동판셋업비(대형)",
+      "dims": [
+        "proc_cd",
+        "가로",
+        "세로",
+        "min_qty"
+      ],
+      "missing": [
+        "가로",
+        "세로"
+      ],
+      "rows": 512
+    },
+    {
+      "prd": "PRD_000070",
+      "nm": "PUR책자",
+      "pub": 1,
+      "is_set": true,
+      "comp": "COMP_FOIL_PROC_LARGE_STD",
+      "comp_nm": "박 가공비(대형·일반박)",
+      "dims": [
+        "proc_cd",
+        "가로",
+        "세로",
+        "min_qty"
+      ],
+      "missing": [
+        "가로",
+        "세로"
+      ],
+      "rows": 3328
+    },
+    {
+      "prd": "PRD_000070",
+      "nm": "PUR책자",
+      "pub": 1,
+      "is_set": true,
+      "comp": "COMP_FOIL_PROC_LARGE_SPECIAL",
+      "comp_nm": "박 가공비(대형·특수박)",
+      "dims": [
+        "proc_cd",
+        "가로",
+        "세로",
+        "min_qty"
+      ],
+      "missing": [
+        "가로",
+        "세로"
+      ],
+      "rows": 3328
+    },
+    {
+      "prd": "PRD_000070",
+      "nm": "PUR책자",
+      "pub": 1,
+      "is_set": true,
+      "comp": "COMP_EMBOSS_SETUP_LARGE",
+      "comp_nm": "형압 동판셋업비(대형)",
+      "dims": [
+        "proc_cd",
+        "가로",
+        "세로",
+        "min_qty"
+      ],
+      "missing": [
+        "가로",
+        "세로"
+      ],
+      "rows": 128
+    },
+    {
+      "prd": "PRD_000070",
+      "nm": "PUR책자",
+      "pub": 1,
+      "is_set": true,
+      "comp": "COMP_EMBOSS_PROC_LARGE_STD",
+      "comp_nm": "형압 가공비(대형)",
+      "dims": [
+        "proc_cd",
+        "가로",
+        "세로",
+        "min_qty"
+      ],
+      "missing": [
+        "가로",
+        "세로"
+      ],
+      "rows": 1664
+    },
+    {
+      "prd": "PRD_000071",
+      "nm": "트윈링책자",
+      "pub": 1,
+      "is_set": true,
+      "comp": "COMP_BIND_TWINRING",
+      "comp_nm": "제본비",
+      "dims": [
+        "proc_cd",
+        "제본방향",
+        "min_qty"
+      ],
+      "missing": [
+        "제본방향"
+      ],
+      "rows": 32
+    },
+    {
+      "prd": "PRD_000082",
+      "nm": "하드커버링책자",
+      "pub": 1,
+      "is_set": true,
+      "comp": "COMP_BIND_HC_TWINRING",
+      "comp_nm": "제본비 하드커버트윈링",
+      "dims": [
+        "proc_cd",
+        "제본방향",
+        "min_qty"
+      ],
+      "missing": [
+        "제본방향"
+      ],
+      "rows": 6
+    },
+    {
+      "prd": "PRD_000083",
+      "nm": "하드커버링책자-표지",
+      "pub": 0,
+      "is_set": false,
+      "comp": "COMP_PRINT_DIGITAL_S1",
+      "comp_nm": "디지털인쇄비",
+      "dims": [
+        "proc_cd",
+        "plt_siz_cd",
+        "print_opt_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 625
+    },
+    {
+      "prd": "PRD_000083",
+      "nm": "하드커버링책자-표지",
+      "pub": 0,
+      "is_set": false,
+      "comp": "COMP_COAT_MATTE",
+      "comp_nm": "무광코팅비",
+      "dims": [
+        "proc_cd",
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt"
+      ],
+      "rows": 138
+    },
+    {
+      "prd": "PRD_000083",
+      "nm": "하드커버링책자-표지",
+      "pub": 0,
+      "is_set": false,
+      "comp": "COMP_PAPER",
+      "comp_nm": "용지비(종이별 절가)",
+      "dims": [
+        "mat_cd",
+        "plt_siz_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 87
+    },
+    {
+      "prd": "PRD_000094",
+      "nm": "엽서북",
+      "pub": 1,
+      "is_set": true,
+      "comp": "COMP_PCB",
+      "comp_nm": "엽서북 완제품가 사이즈/양단면/페이지수별 단가",
+      "dims": [
+        "siz_cd",
+        "print_opt_cd",
+        "opt_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "opt_cd"
+      ],
+      "rows": 468
+    },
+    {
+      "prd": "PRD_000108",
+      "nm": "탁상형캘린더",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PRINT_DIGITAL_S1",
+      "comp_nm": "디지털인쇄비",
+      "dims": [
+        "proc_cd",
+        "plt_siz_cd",
+        "print_opt_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 625
+    },
+    {
+      "prd": "PRD_000108",
+      "nm": "탁상형캘린더",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PAPER",
+      "comp_nm": "용지비(종이별 절가)",
+      "dims": [
+        "mat_cd",
+        "plt_siz_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 87
+    },
+    {
+      "prd": "PRD_000108",
+      "nm": "탁상형캘린더",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_BIND_CAL_WALL",
+      "comp_nm": "제본비 벽걸이캘린더",
+      "dims": [
+        "proc_cd",
+        "제본방향",
+        "min_qty"
+      ],
+      "missing": [
+        "제본방향"
+      ],
+      "rows": 24
+    },
+    {
+      "prd": "PRD_000109",
+      "nm": "미니탁상형캘린더",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PRINT_DIGITAL_S1",
+      "comp_nm": "디지털인쇄비",
+      "dims": [
+        "proc_cd",
+        "plt_siz_cd",
+        "print_opt_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 625
+    },
+    {
+      "prd": "PRD_000109",
+      "nm": "미니탁상형캘린더",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PAPER",
+      "comp_nm": "용지비(종이별 절가)",
+      "dims": [
+        "mat_cd",
+        "plt_siz_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 87
+    },
+    {
+      "prd": "PRD_000109",
+      "nm": "미니탁상형캘린더",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_BIND_CAL_WALL",
+      "comp_nm": "제본비 벽걸이캘린더",
+      "dims": [
+        "proc_cd",
+        "제본방향",
+        "min_qty"
+      ],
+      "missing": [
+        "제본방향"
+      ],
+      "rows": 24
+    },
+    {
+      "prd": "PRD_000110",
+      "nm": "엽서캘린더",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PRINT_DIGITAL_S1",
+      "comp_nm": "디지털인쇄비",
+      "dims": [
+        "proc_cd",
+        "plt_siz_cd",
+        "print_opt_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 625
+    },
+    {
+      "prd": "PRD_000110",
+      "nm": "엽서캘린더",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PAPER",
+      "comp_nm": "용지비(종이별 절가)",
+      "dims": [
+        "mat_cd",
+        "plt_siz_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 87
+    },
+    {
+      "prd": "PRD_000111",
+      "nm": "벽걸이캘린더",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PRINT_DIGITAL_S1",
+      "comp_nm": "디지털인쇄비",
+      "dims": [
+        "proc_cd",
+        "plt_siz_cd",
+        "print_opt_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 625
+    },
+    {
+      "prd": "PRD_000111",
+      "nm": "벽걸이캘린더",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PAPER",
+      "comp_nm": "용지비(종이별 절가)",
+      "dims": [
+        "mat_cd",
+        "plt_siz_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 87
+    },
+    {
+      "prd": "PRD_000111",
+      "nm": "벽걸이캘린더",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_BIND_CAL_WALL",
+      "comp_nm": "제본비 벽걸이캘린더",
+      "dims": [
+        "proc_cd",
+        "제본방향",
+        "min_qty"
+      ],
+      "missing": [
+        "제본방향"
+      ],
+      "rows": 24
+    },
+    {
+      "prd": "PRD_000112",
+      "nm": "와이드벽걸이캘린더",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PRINT_DIGITAL_S1",
+      "comp_nm": "디지털인쇄비",
+      "dims": [
+        "proc_cd",
+        "plt_siz_cd",
+        "print_opt_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 625
+    },
+    {
+      "prd": "PRD_000112",
+      "nm": "와이드벽걸이캘린더",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_PAPER",
+      "comp_nm": "용지비(종이별 절가)",
+      "dims": [
+        "mat_cd",
+        "plt_siz_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 87
+    },
+    {
+      "prd": "PRD_000112",
+      "nm": "와이드벽걸이캘린더",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_BIND_CAL_WALL",
+      "comp_nm": "제본비 벽걸이캘린더",
+      "dims": [
+        "proc_cd",
+        "제본방향",
+        "min_qty"
+      ],
+      "missing": [
+        "제본방향"
+      ],
+      "rows": 24
+    },
+    {
+      "prd": "PRD_000118",
+      "nm": "아트프린트포스터",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_POSTER_ARTPRINT_PHOTO",
+      "comp_nm": "실사 완제품가 (아트프린트포스터·접착방수포스터·아트패브릭포스터·방수포스터)",
+      "dims": [
+        "siz_width",
+        "siz_height",
+        "min_qty"
+      ],
+      "missing": [
+        "siz_width",
+        "siz_height"
+      ],
+      "rows": 52
+    },
+    {
+      "prd": "PRD_000119",
+      "nm": "아트페이퍼포스터",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_POSTER_ARTPAPER_MATTE",
+      "comp_nm": "실사 완제품가 (아트페이퍼포스터)",
+      "dims": [
+        "siz_width",
+        "siz_height",
+        "min_qty"
+      ],
+      "missing": [
+        "siz_width",
+        "siz_height"
+      ],
+      "rows": 39
+    },
+    {
+      "prd": "PRD_000120",
+      "nm": "방수포스터",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_POSTER_ARTPRINT_PHOTO",
+      "comp_nm": "실사 완제품가 (아트프린트포스터·접착방수포스터·아트패브릭포스터·방수포스터)",
+      "dims": [
+        "siz_width",
+        "siz_height",
+        "min_qty"
+      ],
+      "missing": [
+        "siz_width",
+        "siz_height"
+      ],
+      "rows": 52
+    },
+    {
+      "prd": "PRD_000121",
+      "nm": "접착방수포스터",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_POSTER_ARTPRINT_PHOTO",
+      "comp_nm": "실사 완제품가 (아트프린트포스터·접착방수포스터·아트패브릭포스터·방수포스터)",
+      "dims": [
+        "siz_width",
+        "siz_height",
+        "min_qty"
+      ],
+      "missing": [
+        "siz_width",
+        "siz_height"
+      ],
+      "rows": 52
+    },
+    {
+      "prd": "PRD_000122",
+      "nm": "접착투명포스터",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_POSTER_ADH_CLEAR_PVC",
+      "comp_nm": "실사 완제품가 (접착투명포스터)",
+      "dims": [
+        "siz_width",
+        "siz_height",
+        "min_qty"
+      ],
+      "missing": [
+        "siz_width",
+        "siz_height"
+      ],
+      "rows": 52
+    },
+    {
+      "prd": "PRD_000123",
+      "nm": "아트패브릭포스터",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_POSTER_ARTPRINT_PHOTO",
+      "comp_nm": "실사 완제품가 (아트프린트포스터·접착방수포스터·아트패브릭포스터·방수포스터)",
+      "dims": [
+        "siz_width",
+        "siz_height",
+        "min_qty"
+      ],
+      "missing": [
+        "siz_width",
+        "siz_height"
+      ],
+      "rows": 52
+    },
+    {
+      "prd": "PRD_000124",
+      "nm": "린넨패브릭포스터",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_POSTER_LINEN_FABRIC",
+      "comp_nm": "실사 완제품가 (린넨패브릭포스터)",
+      "dims": [
+        "siz_width",
+        "siz_height",
+        "min_qty"
+      ],
+      "missing": [
+        "siz_width",
+        "siz_height"
+      ],
+      "rows": 52
+    },
+    {
+      "prd": "PRD_000125",
+      "nm": "캔버스패브릭포스터",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_POSTER_CANVAS_FABRIC",
+      "comp_nm": "실사 완제품가 (캔버스패브릭포스터·레더아트프린트·메쉬프린트·타이벡프린트)",
+      "dims": [
+        "siz_width",
+        "siz_height",
+        "min_qty"
+      ],
+      "missing": [
+        "siz_width",
+        "siz_height"
+      ],
+      "rows": 52
+    },
+    {
+      "prd": "PRD_000126",
+      "nm": "레더아트프린트",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_POSTER_CANVAS_FABRIC",
+      "comp_nm": "실사 완제품가 (캔버스패브릭포스터·레더아트프린트·메쉬프린트·타이벡프린트)",
+      "dims": [
+        "siz_width",
+        "siz_height",
+        "min_qty"
+      ],
+      "missing": [
+        "siz_width",
+        "siz_height"
+      ],
+      "rows": 52
+    },
+    {
+      "prd": "PRD_000127",
+      "nm": "타이벡프린트",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_POSTER_CANVAS_FABRIC",
+      "comp_nm": "실사 완제품가 (캔버스패브릭포스터·레더아트프린트·메쉬프린트·타이벡프린트)",
+      "dims": [
+        "siz_width",
+        "siz_height",
+        "min_qty"
+      ],
+      "missing": [
+        "siz_width",
+        "siz_height"
+      ],
+      "rows": 52
+    },
+    {
+      "prd": "PRD_000128",
+      "nm": "메쉬프린트",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_POSTER_CANVAS_FABRIC",
+      "comp_nm": "실사 완제품가 (캔버스패브릭포스터·레더아트프린트·메쉬프린트·타이벡프린트)",
+      "dims": [
+        "siz_width",
+        "siz_height",
+        "min_qty"
+      ],
+      "missing": [
+        "siz_width",
+        "siz_height"
+      ],
+      "rows": 52
+    },
+    {
+      "prd": "PRD_000133",
+      "nm": "캔버스 행잉포스터",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_POSTER_CANVAS_HANGING",
+      "comp_nm": "캔버스 행잉포스터 완제품가",
+      "dims": [
+        "siz_width",
+        "siz_height",
+        "siz_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "siz_width",
+        "siz_height"
+      ],
+      "rows": 3
+    },
+    {
+      "prd": "PRD_000138",
+      "nm": "일반현수막",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_POSTER_BANNER_NORMAL",
+      "comp_nm": "일반 현수막 완제품가",
+      "dims": [
+        "siz_width",
+        "siz_height",
+        "min_qty"
+      ],
+      "missing": [
+        "siz_width",
+        "siz_height"
+      ],
+      "rows": 80
+    },
+    {
+      "prd": "PRD_000139",
+      "nm": "메쉬현수막",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_POSTER_BANNER_MESH",
+      "comp_nm": "메쉬 현수막 완제품가",
+      "dims": [
+        "siz_width",
+        "siz_height",
+        "min_qty"
+      ],
+      "missing": [
+        "siz_width",
+        "siz_height"
+      ],
+      "rows": 48
+    },
+    {
+      "prd": "PRD_000146",
+      "nm": "아크릴키링",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_ACRYL_CLEAR3T",
+      "comp_nm": "투명아크릴 인쇄가공비",
+      "dims": [
+        "mat_cd",
+        "siz_width",
+        "siz_height",
+        "min_qty"
+      ],
+      "missing": [
+        "siz_width",
+        "siz_height"
+      ],
+      "rows": 277
+    },
+    {
+      "prd": "PRD_000147",
+      "nm": "아크릴마그넷",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_ACRYL_CLEAR3T",
+      "comp_nm": "투명아크릴 인쇄가공비",
+      "dims": [
+        "mat_cd",
+        "siz_width",
+        "siz_height",
+        "min_qty"
+      ],
+      "missing": [
+        "siz_width",
+        "siz_height"
+      ],
+      "rows": 277
+    },
+    {
+      "prd": "PRD_000148",
+      "nm": "아크릴뱃지",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_ACRYL_CLEAR3T",
+      "comp_nm": "투명아크릴 인쇄가공비",
+      "dims": [
+        "mat_cd",
+        "siz_width",
+        "siz_height",
+        "min_qty"
+      ],
+      "missing": [
+        "siz_width",
+        "siz_height"
+      ],
+      "rows": 277
+    },
+    {
+      "prd": "PRD_000149",
+      "nm": "아크릴집게",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_ACRYL_CLEAR3T",
+      "comp_nm": "투명아크릴 인쇄가공비",
+      "dims": [
+        "mat_cd",
+        "siz_width",
+        "siz_height",
+        "min_qty"
+      ],
+      "missing": [
+        "siz_width",
+        "siz_height"
+      ],
+      "rows": 277
+    },
+    {
+      "prd": "PRD_000150",
+      "nm": "아크릴스마트톡",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_ACRYL_CLEAR3T",
+      "comp_nm": "투명아크릴 인쇄가공비",
+      "dims": [
+        "mat_cd",
+        "siz_width",
+        "siz_height",
+        "min_qty"
+      ],
+      "missing": [
+        "siz_width",
+        "siz_height"
+      ],
+      "rows": 277
+    },
+    {
+      "prd": "PRD_000151",
+      "nm": "맥세이프 스마트톡",
+      "pub": 0,
+      "is_set": false,
+      "comp": "COMP_ACRYL_CLEAR3T",
+      "comp_nm": "투명아크릴 인쇄가공비",
+      "dims": [
+        "mat_cd",
+        "siz_width",
+        "siz_height",
+        "min_qty"
+      ],
+      "missing": [
+        "mat_cd",
+        "siz_width",
+        "siz_height"
+      ],
+      "rows": 277
+    },
+    {
+      "prd": "PRD_000152",
+      "nm": "아크릴명찰",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_ACRYL_CLEAR3T",
+      "comp_nm": "투명아크릴 인쇄가공비",
+      "dims": [
+        "mat_cd",
+        "siz_width",
+        "siz_height",
+        "min_qty"
+      ],
+      "missing": [
+        "siz_width",
+        "siz_height"
+      ],
+      "rows": 277
+    },
+    {
+      "prd": "PRD_000154",
+      "nm": "아크릴 머리끈",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_ACRYL_CLEAR3T",
+      "comp_nm": "투명아크릴 인쇄가공비",
+      "dims": [
+        "mat_cd",
+        "siz_width",
+        "siz_height",
+        "min_qty"
+      ],
+      "missing": [
+        "siz_width",
+        "siz_height"
+      ],
+      "rows": 277
+    },
+    {
+      "prd": "PRD_000157",
+      "nm": "아크릴네임택",
+      "pub": 0,
+      "is_set": false,
+      "comp": "COMP_ACRYL_CLEAR3T",
+      "comp_nm": "투명아크릴 인쇄가공비",
+      "dims": [
+        "mat_cd",
+        "siz_width",
+        "siz_height",
+        "min_qty"
+      ],
+      "missing": [
+        "siz_width",
+        "siz_height"
+      ],
+      "rows": 277
+    },
+    {
+      "prd": "PRD_000158",
+      "nm": "아크릴 포카키링",
+      "pub": 0,
+      "is_set": false,
+      "comp": "COMP_ACRYL_CLEAR3T",
+      "comp_nm": "투명아크릴 인쇄가공비",
+      "dims": [
+        "mat_cd",
+        "siz_width",
+        "siz_height",
+        "min_qty"
+      ],
+      "missing": [
+        "mat_cd",
+        "siz_width",
+        "siz_height"
+      ],
+      "rows": 277
+    },
+    {
+      "prd": "PRD_000159",
+      "nm": "아크릴코스터",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_ACRYL_CLEAR3T",
+      "comp_nm": "투명아크릴 인쇄가공비",
+      "dims": [
+        "mat_cd",
+        "siz_width",
+        "siz_height",
+        "min_qty"
+      ],
+      "missing": [
+        "siz_width",
+        "siz_height"
+      ],
+      "rows": 277
+    },
+    {
+      "prd": "PRD_000161",
+      "nm": "판아크릴",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_ACRYL_CLEAR3T",
+      "comp_nm": "투명아크릴 인쇄가공비",
+      "dims": [
+        "mat_cd",
+        "siz_width",
+        "siz_height",
+        "min_qty"
+      ],
+      "missing": [
+        "siz_width",
+        "siz_height"
+      ],
+      "rows": 277
+    },
+    {
+      "prd": "PRD_000162",
+      "nm": "아크릴포카스탠드",
+      "pub": 0,
+      "is_set": false,
+      "comp": "COMP_ACRYL_CLEAR3T",
+      "comp_nm": "투명아크릴 인쇄가공비",
+      "dims": [
+        "mat_cd",
+        "siz_width",
+        "siz_height",
+        "min_qty"
+      ],
+      "missing": [
+        "mat_cd",
+        "siz_width",
+        "siz_height"
+      ],
+      "rows": 277
+    },
+    {
+      "prd": "PRD_000164",
+      "nm": "아크릴코롯토",
+      "pub": 1,
+      "is_set": false,
+      "comp": "COMP_ACRYL_COROTTO",
+      "comp_nm": "아크릴코롯토 인쇄가공비",
+      "dims": [
+        "siz_width",
+        "siz_height",
+        "min_qty"
+      ],
+      "missing": [
+        "siz_width",
+        "siz_height"
+      ],
+      "rows": 36
+    },
+    {
+      "prd": "PRD_000287",
+      "nm": "중철책자-내지",
+      "pub": 0,
+      "is_set": false,
+      "comp": "COMP_PRINT_DIGITAL_S1",
+      "comp_nm": "디지털인쇄비",
+      "dims": [
+        "proc_cd",
+        "plt_siz_cd",
+        "print_opt_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 625
+    },
+    {
+      "prd": "PRD_000287",
+      "nm": "중철책자-내지",
+      "pub": 0,
+      "is_set": false,
+      "comp": "COMP_PAPER",
+      "comp_nm": "용지비(종이별 절가)",
+      "dims": [
+        "mat_cd",
+        "plt_siz_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 87
+    },
+    {
+      "prd": "PRD_000288",
+      "nm": "중철책자-표지",
+      "pub": 0,
+      "is_set": false,
+      "comp": "COMP_PRINT_DIGITAL_S1",
+      "comp_nm": "디지털인쇄비",
+      "dims": [
+        "proc_cd",
+        "plt_siz_cd",
+        "print_opt_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 625
+    },
+    {
+      "prd": "PRD_000288",
+      "nm": "중철책자-표지",
+      "pub": 0,
+      "is_set": false,
+      "comp": "COMP_COAT_MATTE",
+      "comp_nm": "무광코팅비",
+      "dims": [
+        "proc_cd",
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt"
+      ],
+      "rows": 138
+    },
+    {
+      "prd": "PRD_000288",
+      "nm": "중철책자-표지",
+      "pub": 0,
+      "is_set": false,
+      "comp": "COMP_PAPER",
+      "comp_nm": "용지비(종이별 절가)",
+      "dims": [
+        "mat_cd",
+        "plt_siz_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 87
+    },
+    {
+      "prd": "PRD_000289",
+      "nm": "무선책자-내지",
+      "pub": 0,
+      "is_set": false,
+      "comp": "COMP_PRINT_DIGITAL_S1",
+      "comp_nm": "디지털인쇄비",
+      "dims": [
+        "proc_cd",
+        "plt_siz_cd",
+        "print_opt_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 625
+    },
+    {
+      "prd": "PRD_000289",
+      "nm": "무선책자-내지",
+      "pub": 0,
+      "is_set": false,
+      "comp": "COMP_PAPER",
+      "comp_nm": "용지비(종이별 절가)",
+      "dims": [
+        "mat_cd",
+        "plt_siz_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 87
+    },
+    {
+      "prd": "PRD_000290",
+      "nm": "무선책자-표지",
+      "pub": 0,
+      "is_set": false,
+      "comp": "COMP_PRINT_DIGITAL_S1",
+      "comp_nm": "디지털인쇄비",
+      "dims": [
+        "proc_cd",
+        "plt_siz_cd",
+        "print_opt_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 625
+    },
+    {
+      "prd": "PRD_000290",
+      "nm": "무선책자-표지",
+      "pub": 0,
+      "is_set": false,
+      "comp": "COMP_COAT_MATTE",
+      "comp_nm": "무광코팅비",
+      "dims": [
+        "proc_cd",
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt"
+      ],
+      "rows": 138
+    },
+    {
+      "prd": "PRD_000290",
+      "nm": "무선책자-표지",
+      "pub": 0,
+      "is_set": false,
+      "comp": "COMP_PAPER",
+      "comp_nm": "용지비(종이별 절가)",
+      "dims": [
+        "mat_cd",
+        "plt_siz_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 87
+    },
+    {
+      "prd": "PRD_000291",
+      "nm": "PUR책자-내지",
+      "pub": 0,
+      "is_set": false,
+      "comp": "COMP_PRINT_DIGITAL_S1",
+      "comp_nm": "디지털인쇄비",
+      "dims": [
+        "proc_cd",
+        "plt_siz_cd",
+        "print_opt_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 625
+    },
+    {
+      "prd": "PRD_000291",
+      "nm": "PUR책자-내지",
+      "pub": 0,
+      "is_set": false,
+      "comp": "COMP_PAPER",
+      "comp_nm": "용지비(종이별 절가)",
+      "dims": [
+        "mat_cd",
+        "plt_siz_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 87
+    },
+    {
+      "prd": "PRD_000292",
+      "nm": "PUR책자-표지",
+      "pub": 0,
+      "is_set": false,
+      "comp": "COMP_PRINT_DIGITAL_S1",
+      "comp_nm": "디지털인쇄비",
+      "dims": [
+        "proc_cd",
+        "plt_siz_cd",
+        "print_opt_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 625
+    },
+    {
+      "prd": "PRD_000292",
+      "nm": "PUR책자-표지",
+      "pub": 0,
+      "is_set": false,
+      "comp": "COMP_COAT_MATTE",
+      "comp_nm": "무광코팅비",
+      "dims": [
+        "proc_cd",
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt"
+      ],
+      "rows": 138
+    },
+    {
+      "prd": "PRD_000292",
+      "nm": "PUR책자-표지",
+      "pub": 0,
+      "is_set": false,
+      "comp": "COMP_PAPER",
+      "comp_nm": "용지비(종이별 절가)",
+      "dims": [
+        "mat_cd",
+        "plt_siz_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 87
+    },
+    {
+      "prd": "PRD_000310",
+      "nm": "트윈링책자-표지",
+      "pub": 0,
+      "is_set": false,
+      "comp": "COMP_PRINT_DIGITAL_S1",
+      "comp_nm": "디지털인쇄비",
+      "dims": [
+        "proc_cd",
+        "plt_siz_cd",
+        "print_opt_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 625
+    },
+    {
+      "prd": "PRD_000310",
+      "nm": "트윈링책자-표지",
+      "pub": 0,
+      "is_set": false,
+      "comp": "COMP_COAT_MATTE",
+      "comp_nm": "무광코팅비",
+      "dims": [
+        "proc_cd",
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt",
+        "min_qty"
+      ],
+      "missing": [
+        "앞면코팅",
+        "뒷면코팅",
+        "plt_siz_cd",
+        "coat_side_cnt"
+      ],
+      "rows": 138
+    },
+    {
+      "prd": "PRD_000310",
+      "nm": "트윈링책자-표지",
+      "pub": 0,
+      "is_set": false,
+      "comp": "COMP_PAPER",
+      "comp_nm": "용지비(종이별 절가)",
+      "dims": [
+        "mat_cd",
+        "plt_siz_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 87
+    },
+    {
+      "prd": "PRD_000311",
+      "nm": "트윈링책자-내지",
+      "pub": 0,
+      "is_set": false,
+      "comp": "COMP_PRINT_DIGITAL_S1",
+      "comp_nm": "디지털인쇄비",
+      "dims": [
+        "proc_cd",
+        "plt_siz_cd",
+        "print_opt_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 625
+    },
+    {
+      "prd": "PRD_000311",
+      "nm": "트윈링책자-내지",
+      "pub": 0,
+      "is_set": false,
+      "comp": "COMP_PAPER",
+      "comp_nm": "용지비(종이별 절가)",
+      "dims": [
+        "mat_cd",
+        "plt_siz_cd",
+        "min_qty"
+      ],
+      "missing": [
+        "plt_siz_cd"
+      ],
+      "rows": 87
+    }
+  ],
+  "dead_groups": [
+    [
+      "PRD_000004",
+      "카드봉투",
+      1,
+      [
+        [
+          "OPT-000012",
+          "칼라",
+          2,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000013",
+      "우드봉",
+      1,
+      [
+        [
+          "OPT_000292",
+          "부자재",
+          1,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000014",
+      "우드행거",
+      1,
+      [
+        [
+          "OPT_000293",
+          "부자재",
+          1,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000017",
+      "코팅엽서",
+      1,
+      [
+        [
+          "OPT_000011",
+          "코팅",
+          4,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000020",
+      "화이트인쇄엽서",
+      1,
+      [
+        [
+          "OPT_000317",
+          "화이트인쇄",
+          2,
+          true,
+          false
+        ],
+        [
+          "OPT_000318",
+          "별색인쇄",
+          2,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000021",
+      "핑크별색엽서",
+      1,
+      [
+        [
+          "OPT_000315",
+          "핑크 별색",
+          2,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000024",
+      "포토카드",
+      1,
+      [
+        [
+          "OPT_000328",
+          "코팅",
+          2,
+          true,
+          false
+        ],
+        [
+          "OPT_000329",
+          "모서리",
+          1,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000025",
+      "투명포토카드",
+      1,
+      [
+        [
+          "OPT_000327",
+          "모서리",
+          1,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000026",
+      "종이슬로건",
+      1,
+      [
+        [
+          "OPT_000316",
+          "코팅 선택",
+          2,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000032",
+      "코팅명함",
+      1,
+      [
+        [
+          "OPT_000322",
+          "코팅",
+          4,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000035",
+      "모양명함",
+      1,
+      [
+        [
+          "OPT_000254",
+          "커팅",
+          4,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000036",
+      "미니모양명함",
+      1,
+      [
+        [
+          "OPT_000255",
+          "커팅",
+          3,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000040",
+      "화이트인쇄명함",
+      1,
+      [
+        [
+          "OPT_000319",
+          "화이트인쇄",
+          2,
+          true,
+          false
+        ],
+        [
+          "OPT_000323",
+          "클리어인쇄",
+          2,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000042",
+      "프리미엄 쿠폰/상품권",
+      1,
+      [
+        [
+          "OPT_000055",
+          "인쇄",
+          2,
+          true,
+          false
+        ],
+        [
+          "OPT_000056",
+          "종이",
+          8,
+          true,
+          false
+        ],
+        [
+          "OPT_000057",
+          "후가공",
+          4,
+          true,
+          false
+        ],
+        [
+          "OPT_000058",
+          "박칼라",
+          9,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000044",
+      "인쇄배경지(커팅형)",
+      1,
+      [
+        [
+          "OPT_000265",
+          "커팅모양",
+          9,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000045",
+      "인쇄헤더택",
+      1,
+      [
+        [
+          "OPT_000280",
+          "가공",
+          2,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000046",
+      "라벨/택",
+      1,
+      [
+        [
+          "OPT-000010",
+          "커팅모양",
+          8,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000052",
+      "반칼 자유형 스티커",
+      1,
+      [
+        [
+          "OPT_000008",
+          "커팅",
+          1,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000053",
+      "반칼 자유형 투명스티커",
+      1,
+      [
+        [
+          "OPT_000104",
+          "커팅",
+          1,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000054",
+      "반칼 자유형 홀로그램스티커",
+      1,
+      [
+        [
+          "OPT_000214",
+          "커팅",
+          1,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000055",
+      "낱장 자유형 스티커",
+      1,
+      [
+        [
+          "OPT_000112",
+          "커팅",
+          1,
+          true,
+          false
+        ],
+        [
+          "OPT-000039",
+          "조각수",
+          6,
+          true,
+          false
+        ],
+        [
+          "OPT_000277",
+          "소재",
+          1,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000056",
+      "낱장 자유형 투명스티커",
+      1,
+      [
+        [
+          "OPT_000216",
+          "커팅",
+          1,
+          true,
+          false
+        ],
+        [
+          "OPT_000251",
+          "조각수",
+          6,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000057",
+      "대형 자유형 스티커",
+      1,
+      [
+        [
+          "OPT_000248",
+          "커팅",
+          1,
+          true,
+          false
+        ],
+        [
+          "OPT_000249",
+          "조각수",
+          6,
+          true,
+          false
+        ],
+        [
+          "OPT_000278",
+          "소재",
+          1,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000058",
+      "반칼원형스티커",
+      1,
+      [
+        [
+          "OPT-000031",
+          "커팅",
+          8,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000059",
+      "반칼정사각스티커",
+      1,
+      [
+        [
+          "OPT_000162",
+          "커팅",
+          4,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000060",
+      "반칼직사각스티커",
+      1,
+      [
+        [
+          "OPT_000252",
+          "커팅",
+          17,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000061",
+      "반칼띠지스티커",
+      1,
+      [
+        [
+          "OPT_000168",
+          "커팅",
+          10,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000062",
+      "반칼팬시스티커",
+      1,
+      [
+        [
+          "OPT_000171",
+          "커팅",
+          6,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000063",
+      "반칼팬시투명스티커",
+      1,
+      [
+        [
+          "OPT_000253",
+          "커팅",
+          6,
+          true,
+          false
+        ],
+        [
+          "OPT_000279",
+          "화이트인쇄",
+          2,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000066",
+      "합판도무송스티커",
+      0,
+      [
+        [
+          "OPT_000115",
+          "종이",
+          6,
+          true,
+          false
+        ],
+        [
+          "OPT_000118",
+          "인쇄",
+          1,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000071",
+      "트윈링책자",
+      1,
+      [
+        [
+          "OPT_000136",
+          "제본방향",
+          4,
+          true,
+          false
+        ],
+        [
+          "OPT_000275",
+          "링칼라",
+          3,
+          true,
+          false
+        ],
+        [
+          "OPT_000276",
+          "투명커버",
+          2,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000073",
+      "하드커버책자-표지",
+      0,
+      [
+        [
+          "OPT_000324",
+          "표지코팅",
+          2,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000082",
+      "하드커버링책자",
+      1,
+      [
+        [
+          "OPT_000311",
+          "링칼라",
+          3,
+          true,
+          false
+        ],
+        [
+          "OPT_000313",
+          "제본방향",
+          2,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000083",
+      "하드커버링책자-표지",
+      0,
+      [
+        [
+          "OPT_000326",
+          "표지코팅",
+          2,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000090",
+      "레더링바인더-면지",
+      0,
+      [
+        [
+          "OPT_000067",
+          "면지색",
+          4,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000096",
+      "엽서북-표지",
+      0,
+      [
+        [
+          "OPT_000325",
+          "표지코팅",
+          1,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000100",
+      "포토북 [디자인명]",
+      0,
+      [
+        [
+          "OPT_000079",
+          "표지타입",
+          3,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000108",
+      "탁상형캘린더",
+      1,
+      [
+        [
+          "OPT_000271",
+          "삼각대",
+          1,
+          true,
+          false
+        ],
+        [
+          "OPT_000272",
+          "링칼라",
+          1,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000109",
+      "미니탁상형캘린더",
+      1,
+      [
+        [
+          "OPT_000308",
+          "삼각대",
+          1,
+          true,
+          false
+        ],
+        [
+          "OPT_000309",
+          "링칼라",
+          1,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000110",
+      "엽서캘린더",
+      1,
+      [
+        [
+          "OPT_000305",
+          "가공",
+          2,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000111",
+      "벽걸이캘린더",
+      1,
+      [
+        [
+          "OPT_000273",
+          "가공",
+          3,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000112",
+      "와이드벽걸이캘린더",
+      1,
+      [
+        [
+          "OPT_000310",
+          "가공",
+          1,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000123",
+      "아트패브릭포스터",
+      1,
+      [
+        [
+          "OPT_000236",
+          "소재",
+          1,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000124",
+      "린넨패브릭포스터",
+      1,
+      [
+        [
+          "OPT_000096",
+          "마감",
+          5,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000125",
+      "캔버스패브릭포스터",
+      1,
+      [
+        [
+          "OPT_000099",
+          "가공",
+          2,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000129",
+      "폼보드",
+      1,
+      [
+        [
+          "OPT_000281",
+          "보드칼라",
+          2,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000130",
+      "포맥스보드",
+      1,
+      [
+        [
+          "OPT_000282",
+          "보드두께",
+          2,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000133",
+      "캔버스 행잉포스터",
+      1,
+      [
+        [
+          "OPT_000102",
+          "마감",
+          1,
+          true,
+          false
+        ],
+        [
+          "OPT_000283",
+          "부자재",
+          1,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000134",
+      "린넨우드봉족자",
+      1,
+      [
+        [
+          "OPT_000108",
+          "마감",
+          1,
+          true,
+          false
+        ],
+        [
+          "OPT_000266",
+          "부자재",
+          1,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000135",
+      "족자포스터",
+      1,
+      [
+        [
+          "OPT_000268",
+          "가공",
+          2,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000138",
+      "일반현수막",
+      1,
+      [
+        [
+          "OPT_000003",
+          "가공",
+          6,
+          true,
+          false
+        ],
+        [
+          "OPT_000004",
+          "부자재",
+          4,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000139",
+      "메쉬현수막",
+      1,
+      [
+        [
+          "OPT_000023",
+          "부자재",
+          2,
+          true,
+          false
+        ],
+        [
+          "OPT_000285",
+          "가공",
+          4,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000145",
+      "미니배너",
+      1,
+      [
+        [
+          "OPT_000286",
+          "거치대",
+          1,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000146",
+      "아크릴키링",
+      1,
+      [
+        [
+          "OPT_000157",
+          "고리",
+          4,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000147",
+      "아크릴마그넷",
+      1,
+      [
+        [
+          "OPT_000295",
+          "가공",
+          1,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000148",
+      "아크릴뱃지",
+      1,
+      [
+        [
+          "OPT_000296",
+          "가공",
+          2,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000149",
+      "아크릴집게",
+      1,
+      [
+        [
+          "OPT_000297",
+          "가공",
+          2,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000150",
+      "아크릴스마트톡",
+      1,
+      [
+        [
+          "OPT_000270",
+          "톡바디",
+          2,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000152",
+      "아크릴명찰",
+      1,
+      [
+        [
+          "OPT_000298",
+          "가공",
+          2,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000153",
+      "아크릴명찰(골드실버)",
+      1,
+      [
+        [
+          "OPT_000299",
+          "가공",
+          2,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000154",
+      "아크릴 머리끈",
+      1,
+      [
+        [
+          "OPT_000301",
+          "가공",
+          1,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000156",
+      "아크릴지비츠",
+      1,
+      [
+        [
+          "OPT_000300",
+          "가공",
+          2,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000160",
+      "아크릴자유형스탠드",
+      1,
+      [
+        [
+          "OPT_000259",
+          "조각수",
+          5,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000163",
+      "아크릴미니파츠",
+      1,
+      [
+        [
+          "OPT_000260",
+          "조각수",
+          1,
+          true,
+          false
+        ],
+        [
+          "OPT_000304",
+          "부자재",
+          1,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000166",
+      "아크릴카라비너",
+      1,
+      [
+        [
+          "OPT_000258",
+          "카라비너고리",
+          7,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000179",
+      "메모패드",
+      1,
+      [
+        [
+          "OPT_000307",
+          "내지",
+          1,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000195",
+      "벨벳쿠션",
+      0,
+      [
+        [
+          "OPT_000175",
+          "인쇄면",
+          2,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000197",
+      "미니매트",
+      1,
+      [
+        [
+          "OPT_000070",
+          "테두리색상",
+          2,
+          true,
+          false
+        ],
+        [
+          "OPT_000288",
+          "포함품목",
+          1,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000198",
+      "피크닉매트",
+      1,
+      [
+        [
+          "OPT_000071",
+          "테두리색상",
+          2,
+          true,
+          false
+        ],
+        [
+          "OPT_000287",
+          "포함품목",
+          1,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000202",
+      "키캡키링",
+      1,
+      [
+        [
+          "OPT_000289",
+          "바디",
+          1,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000203",
+      "LED투명키캡키링",
+      1,
+      [
+        [
+          "OPT_000179",
+          "바디",
+          1,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000206",
+      "반팔티셔츠",
+      0,
+      [
+        [
+          "OPT_000246",
+          "칼라",
+          2,
+          true,
+          false
+        ],
+        [
+          "OPT_000247",
+          "사이즈",
+          4,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000217",
+      "만년스탬프",
+      1,
+      [
+        [
+          "OPT_000072",
+          "잉크칼라",
+          7,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000226",
+      "아크릴쉐이커코롯토",
+      1,
+      [
+        [
+          "OPT_000302",
+          "인쇄",
+          3,
+          true,
+          false
+        ],
+        [
+          "OPT_000303",
+          "글리터",
+          4,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000228",
+      "이미지피켓(소형)",
+      1,
+      [
+        [
+          "OPT_000261",
+          "인쇄",
+          1,
+          true,
+          false
+        ],
+        [
+          "OPT_000291",
+          "코팅",
+          1,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000229",
+      "이미지피켓",
+      1,
+      [
+        [
+          "OPT_000183",
+          "인쇄",
+          1,
+          true,
+          false
+        ],
+        [
+          "OPT_000290",
+          "코팅",
+          1,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000239",
+      "캔버스 플랫 파우치",
+      0,
+      [
+        [
+          "OPT_000188",
+          "사이즈",
+          2,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000240",
+      "캔버스 삼각 파우치",
+      0,
+      [
+        [
+          "OPT_000172",
+          "사이즈",
+          2,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000242",
+      "광목 스트링 라벨파우치",
+      0,
+      [
+        [
+          "OPT_000211",
+          "규격",
+          2,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000243",
+      "린넨 스트링 파우치",
+      0,
+      [
+        [
+          "OPT_000189",
+          "사이즈",
+          3,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000267",
+      "린넨 에코백",
+      0,
+      [
+        [
+          "OPT_000208",
+          "방향",
+          2,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000302",
+      "스프링노트-내지(무지)",
+      0,
+      [
+        [
+          "OPT_000312",
+          "내지",
+          1,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000306",
+      "메모패드-내지(무지)",
+      0,
+      [
+        [
+          "OPT_000306",
+          "내지",
+          1,
+          true,
+          false
+        ]
+      ]
+    ],
+    [
+      "PRD_000308",
+      "중철노트-내지(무지)",
+      0,
+      [
+        [
+          "OPT_000314",
+          "내지",
+          1,
+          true,
+          false
+        ]
+      ]
+    ]
+  ]
+}
