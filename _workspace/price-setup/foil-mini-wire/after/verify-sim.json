@@ -1,0 +1,112 @@
+{
+  "028_base": {
+    "final_price": 17736,
+    "formula": "PRF_DGP_E_FOIL",
+    "components": [
+      {
+        "cd": "COMP_PRINT_DIGITAL_S1",
+        "nm": "디지털인쇄비",
+        "unit_price": "1900.00"
+      },
+      {
+        "cd": "COMP_PAPER",
+        "nm": "용지비(종이별 절가)",
+        "unit_price": "70.64"
+      }
+    ]
+  },
+  "028_foil_금유광": {
+    "final_price": 83736,
+    "formula": "PRF_DGP_E_FOIL",
+    "components": [
+      {
+        "cd": "COMP_PRINT_DIGITAL_S1",
+        "nm": "디지털인쇄비",
+        "unit_price": "1900.00"
+      },
+      {
+        "cd": "COMP_PAPER",
+        "nm": "용지비(종이별 절가)",
+        "unit_price": "70.64"
+      },
+      {
+        "cd": "COMP_FOIL_SETUP_LARGE",
+        "nm": "박·형압 동판셋업비(대형)",
+        "unit_price": "11000.00"
+      },
+      {
+        "cd": "COMP_FOIL_PROC_LARGE_STD",
+        "nm": "박 가공비(대형·일반박)",
+        "unit_price": "55000.00"
+      }
+    ]
+  },
+  "028_foil_홀로그램": {
+    "final_price": 93736,
+    "formula": "PRF_DGP_E_FOIL",
+    "components": [
+      {
+        "cd": "COMP_PRINT_DIGITAL_S1",
+        "nm": "디지털인쇄비",
+        "unit_price": "1900.00"
+      },
+      {
+        "cd": "COMP_PAPER",
+        "nm": "용지비(종이별 절가)",
+        "unit_price": "70.64"
+      },
+      {
+        "cd": "COMP_FOIL_SETUP_LARGE",
+        "nm": "박·형압 동판셋업비(대형)",
+        "unit_price": "11000.00"
+      },
+      {
+        "cd": "COMP_FOIL_PROC_LARGE_SPECIAL",
+        "nm": "박 가공비(대형·특수박)",
+        "unit_price": "65000.00"
+      }
+    ]
+  },
+  "027_base": {
+    "final_price": 41766,
+    "formula": "PRF_DGP_E_FOIL",
+    "components": [
+      {
+        "cd": "COMP_PRINT_DIGITAL_S1",
+        "nm": "디지털인쇄비",
+        "unit_price": "1600.00"
+      },
+      {
+        "cd": "COMP_PAPER",
+        "nm": "용지비(종이별 절가)",
+        "unit_price": "70.64"
+      }
+    ]
+  },
+  "027_foil_금유광": {
+    "final_price": 107766,
+    "formula": "PRF_DGP_E_FOIL",
+    "components": [
+      {
+        "cd": "COMP_PRINT_DIGITAL_S1",
+        "nm": "디지털인쇄비",
+        "unit_price": "1600.00"
+      },
+      {
+        "cd": "COMP_PAPER",
+        "nm": "용지비(종이별 절가)",
+        "unit_price": "70.64"
+      },
+      {
+        "cd": "COMP_FOIL_SETUP_LARGE",
+        "nm": "박·형압 동판셋업비(대형)",
+        "unit_price": "11000.00"
+      },
+      {
+        "cd": "COMP_FOIL_PROC_LARGE_STD",
+        "nm": "박 가공비(대형·일반박)",
+        "unit_price": "55000.00"
+      }
+    ]
+  }
+}

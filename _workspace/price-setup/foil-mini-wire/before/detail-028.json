@@ -1,0 +1,159 @@
+{
+    "prd_cd": "PRD_000028",
+    "prd_nm": "\ubbf8\ub2c8\uc811\uc9c0\uce74\ub4dc",
+    "prd_typ": "\uc644",
+    "current_source": "FORMULA",
+    "cur_price": null,
+    "cur_frm": {
+        "apply_bgn_ymd": "2026-06-01",
+        "frm_cd": "PRF_DGP_E",
+        "frm_cd__frm_nm": "\ub514\uc9c0\ud138\uc778\uc1c4 \uc6d0\uc790\ud569\uc0b0\ud615E \uc811\uc9c0\uce74\ub4dc\u00b7\uc811\uc9c0\ub9ac\ud50c\ub81b"
+    },
+    "prices": [],
+    "formulas": [
+        {
+            "apply_bgn_ymd": "2026-06-01",
+            "frm_cd": "PRF_DGP_E",
+            "frm_nm": "\ub514\uc9c0\ud138\uc778\uc1c4 \uc6d0\uc790\ud569\uc0b0\ud615E \uc811\uc9c0\uce74\ub4dc\u00b7\uc811\uc9c0\ub9ac\ud50c\ub81b"
+        }
+    ],
+    "components": [
+        {
+            "comp_cd": "COMP_PRINT_DIGITAL_S1",
+            "comp_nm": "\ub514\uc9c0\ud138\uc778\uc1c4\ube44",
+            "disp_seq": 0,
+            "prc_typ": "\ub2e8\uac00\ud615",
+            "dims": [
+                "\uacf5\uc815",
+                "\ud310\ud615\uc0ac\uc774\uc988",
+                "\uc778\uc1c4\uc635\uc158",
+                "\uc218\ub7c9(\uc774\uc0c1)"
+            ],
+            "row_count": 625
+        },
+        {
+            "comp_cd": "COMP_COAT_GLOSSY",
+            "comp_nm": "\uc720\uad11\ucf54\ud305\ube44",
+            "disp_seq": 1,
+            "prc_typ": "\ub2e8\uac00\ud615",
+            "dims": [
+                "\uacf5\uc815",
+                "\ud310\ud615\uc0ac\uc774\uc988",
+                "\ucf54\ud305\uba74\uc218",
+                "\uc218\ub7c9(\uc774\uc0c1)"
+            ],
+            "row_count": 138
+        },
+        {
+            "comp_cd": "COMP_COAT_MATTE",
+            "comp_nm": "\ubb34\uad11\ucf54\ud305\ube44",
+            "disp_seq": 2,
+            "prc_typ": "\ub2e8\uac00\ud615",
+            "dims": [
+                "\uacf5\uc815",
+                "\ud310\ud615\uc0ac\uc774\uc988",
+                "\ucf54\ud305\uba74\uc218",
+                "\uc218\ub7c9(\uc774\uc0c1)"
+            ],
+            "row_count": 138
+        },
+        {
+            "comp_cd": "COMP_PAPER",
+            "comp_nm": "\uc6a9\uc9c0\ube44(\uc885\uc774\ubcc4 \uc808\uac00)",
+            "disp_seq": 3,
+            "prc_typ": "\ub2e8\uac00\ud615",
+            "dims": [
+                "\uc790\uc7ac",
+                "\ud310\ud615\uc0ac\uc774\uc988",
+                "\uc218\ub7c9(\uc774\uc0c1)"
+            ],
+            "row_count": 87
+        },
+        {
+            "comp_cd": "COMP_FOLD_LEAF_HALF",
+            "comp_nm": "\uc811\uc9c0\ube44 \ub9ac\ud50c\ub81b \ubc18\uc811\uc9c0",
+            "disp_seq": 4,
+            "prc_typ": "\uace0\uc815\uae08\uc561",
+            "dims": [
+                "\uacf5\uc815",
+                "\uc218\ub7c9(\uc774\uc0c1)"
+            ],
+            "row_count": 144
+        },
+        {
+            "comp_cd": "COMP_FOLD_LEAF_3FOLD",
+            "comp_nm": "\uc811\uc9c0\ube44 \ub9ac\ud50c\ub81b 3\ub2e8",
+            "disp_seq": 5,
+            "prc_typ": "\uace0\uc815\uae08\uc561",
+            "dims": [
+                "\uacf5\uc815",
+                "\uc218\ub7c9(\uc774\uc0c1)"
+            ],
+            "row_count": 144
+        },
+        {
+            "comp_cd": "COMP_FOLD_LEAF_4ACC",
+            "comp_nm": "\uc811\uc9c0\ube44 \ub9ac\ud50c\ub81b 4\ub2e8\uc544\ucf54\ub514\uc5b8",
+            "disp_seq": 6,
+            "prc_typ": "\uace0\uc815\uae08\uc561",
+            "dims": [
+                "\uacf5\uc815",
+                "\uc218\ub7c9(\uc774\uc0c1)"
+            ],
+            "row_count": 48
+        },
+        {
+            "comp_cd": "COMP_FOLD_LEAF_4GATE",
+            "comp_nm": "\uc811\uc9c0\ube44 \ub9ac\ud50c\ub81b 4\ub2e8\uac8c\uc774\ud2b8",
+            "disp_seq": 7,
+            "prc_typ": "\uace0\uc815\uae08\uc561",
+            "dims": [
+                "\uacf5\uc815",
+                "\uc218\ub7c9(\uc774\uc0c1)"
+            ],
+            "row_count": 48
+        },
+        {
+            "comp_cd": "COMP_CUT_PERF_1H6",
+            "comp_nm": "\ud0c0\uacf5\ube44 (6mm)",
+            "disp_seq": 8,
+            "prc_typ": "\ud569\uac00\ud615",
+            "dims": [
+                "\uacf5\uc815",
+                "\uc218\ub7c9(\uc774\uc0c1)"
+            ],
+            "row_count": 18
+        },
+        {
+            "comp_cd": "COMP_PP_VARTEXT_1EA",
+            "comp_nm": "\uac00\ubcc0\ud14d\uc2a4\ud2b8",
+            "disp_seq": 9,
+            "prc_typ": "\uace0\uc815\uae08\uc561",
+            "dims": [
+                "\uacf5\uc815",
+                "\uc218\ub7c9(\uc774\uc0c1)"
+            ],
+            "row_count": 69
+        },
+        {
+            "comp_cd": "COMP_PP_VARIMG_1EA",
+            "comp_nm": "\uac00\ubcc0\uc774\ubbf8\uc9c0",
+            "disp_seq": 10,
+            "prc_typ": "\uace0\uc815\uae08\uc561",
+            "dims": [
+                "\uacf5\uc815",
+                "\uc218\ub7c9(\uc774\uc0c1)"
+            ],
+            "row_count": 69
+        }
+    ],
+    "templates": [],
+    "discount": {
+        "links": [],
+        "current": null,
+        "scoped": [],
+        "details": [],
+        "main_cat": "\uc5fd\uc11c/\uce74\ub4dc",
+        "grade_rates": []
+    }
+}
