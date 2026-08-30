@@ -1,0 +1,67 @@
+{
+    "prd_cd": "PRD_000110",
+    "prd_nm": "\uc5fd\uc11c\uce98\ub9b0\ub354",
+    "prd_typ": "\uc644",
+    "current_source": "FORMULA",
+    "cur_price": null,
+    "cur_frm": {
+        "apply_bgn_ymd": "2026-07-01",
+        "frm_cd": "PRF_DGP_INNER",
+        "frm_cd__frm_nm": "\ub514\uc9c0\ud138\uc778\uc1c4 \ucc45\uc790 \ub0b4\uc9c0(\uc778\uc1c4\ube44+\uc6a9\uc9c0\ube44\u00b7\ucd9c\ub825\ub9e4\uc218)"
+    },
+    "prices": [],
+    "formulas": [
+        {
+            "apply_bgn_ymd": "2026-07-01",
+            "frm_cd": "PRF_DGP_INNER",
+            "frm_nm": "\ub514\uc9c0\ud138\uc778\uc1c4 \ucc45\uc790 \ub0b4\uc9c0(\uc778\uc1c4\ube44+\uc6a9\uc9c0\ube44\u00b7\ucd9c\ub825\ub9e4\uc218)"
+        }
+    ],
+    "components": [
+        {
+            "comp_cd": "COMP_PRINT_DIGITAL_S1",
+            "comp_nm": "\ub514\uc9c0\ud138\uc778\uc1c4\ube44",
+            "disp_seq": 1,
+            "prc_typ": "\ub2e8\uac00\ud615",
+            "dims": [
+                "\uacf5\uc815",
+                "\ud310\ud615\uc0ac\uc774\uc988",
+                "\uc778\uc1c4\uc635\uc158",
+                "\uc218\ub7c9(\uc774\uc0c1)"
+            ],
+            "row_count": 625
+        },
+        {
+            "comp_cd": "COMP_PAPER",
+            "comp_nm": "\uc6a9\uc9c0\ube44(\uc885\uc774\ubcc4 \uc808\uac00)",
+            "disp_seq": 2,
+            "prc_typ": "\ub2e8\uac00\ud615",
+            "dims": [
+                "\uc790\uc7ac",
+                "\ud310\ud615\uc0ac\uc774\uc988",
+                "\uc218\ub7c9(\uc774\uc0c1)"
+            ],
+            "row_count": 87
+        },
+        {
+            "comp_cd": "COMP_CUT_PERF_CAL",
+            "comp_nm": "\uce98\ub9b0\ub354 \ud0c0\uacf5\uac00\uacf5\ube44 (\ud0c0\uacf5+\ub048\u00b7\ud569\uac00)",
+            "disp_seq": null,
+            "prc_typ": "\uace0\uc815\uae08\uc561",
+            "dims": [
+                "\uacf5\uc815",
+                "\uc218\ub7c9(\uc774\uc0c1)"
+            ],
+            "row_count": 2
+        }
+    ],
+    "templates": [],
+    "discount": {
+        "links": [],
+        "current": null,
+        "scoped": [],
+        "details": [],
+        "main_cat": "\uc5fd\uc11c\uce98\ub9b0\ub354",
+        "grade_rates": []
+    }
+}
