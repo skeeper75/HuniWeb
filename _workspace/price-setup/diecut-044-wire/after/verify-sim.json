@@ -1,0 +1,78 @@
+{
+  "023_모양엽서(완칼필수)": {
+    "final_price": 28914,
+    "formula": "PRF_DGP_B",
+    "components": [
+      "디지털인쇄비",
+      "용지비(종이별 절가)",
+      "커팅 완제품가 완칼(모양엽서·라벨택)"
+    ]
+  },
+  "046_라벨택_완칼O": {
+    "final_price": 16569,
+    "formula": "PRF_DGP_B",
+    "components": [
+      "디지털인쇄비",
+      "용지비(종이별 절가)",
+      "커팅 완제품가 완칼(모양엽서·라벨택)"
+    ]
+  },
+  "046_라벨택_완칼X": {
+    "final_price": 8569,
+    "formula": "PRF_DGP_B",
+    "components": [
+      "디지털인쇄비",
+      "용지비(종이별 절가)"
+    ]
+  },
+  "051_썬캡": {
+    "final_price": 62300,
+    "formula": "PRF_DGP_F",
+    "components": [
+      "디지털인쇄비",
+      "용지비(종이별 절가)"
+    ]
+  },
+  "044_커팅형_완칼O": {
+    "final_price": 28600,
+    "formula": "PRF_DGP_C",
+    "components": [
+      "디지털인쇄비",
+      "용지비(종이별 절가)",
+      "커팅 완제품가 완칼(모양엽서·라벨택)"
+    ]
+  },
+  "044_커팅형_완칼X": {
+    "final_price": 10600,
+    "formula": "PRF_DGP_C",
+    "components": [
+      "디지털인쇄비",
+      "용지비(종이별 절가)"
+    ]
+  },
+  "043_일반형": {
+    "final_price": 9645,
+    "formula": "PRF_DGP_C",
+    "components": [
+      "디지털인쇄비",
+      "용지비(종이별 절가)"
+    ]
+  },
+  "045_헤더택_오시1줄": {
+    "final_price": 19645,
+    "formula": "PRF_DGP_C",
+    "components": [
+      "디지털인쇄비",
+      "용지비(종이별 절가)",
+      "오시비"
+    ]
+  },
+  "045_헤더택_타공1구": {
+    "final_price": 9645,
+    "formula": "PRF_DGP_C",
+    "components": [
+      "디지털인쇄비",
+      "용지비(종이별 절가)"
+    ]
+  }
+}

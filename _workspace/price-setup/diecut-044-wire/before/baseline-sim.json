@@ -1,0 +1,152 @@
+{
+  "023_모양엽서(완칼필수)": {
+    "final_price": 28914,
+    "formula": "PRF_DGP_B",
+    "components": [
+      {
+        "cd": "COMP_PRINT_DIGITAL_S1",
+        "nm": "디지털인쇄비",
+        "plt_siz_cd": "SIZ_000499",
+        "unit_price": "1100.00"
+      },
+      {
+        "cd": "COMP_PAPER",
+        "nm": "용지비(종이별 절가)",
+        "plt_siz_cd": "SIZ_000499",
+        "unit_price": "112.58"
+      },
+      {
+        "cd": "COMP_CUT_FULL_DIECUT",
+        "nm": "커팅 완제품가 완칼(모양엽서·라벨택)",
+        "plt_siz_cd": "SIZ_000499",
+        "unit_price": "18000.00"
+      }
+    ]
+  },
+  "046_라벨택_완칼O": {
+    "final_price": 16569,
+    "formula": "PRF_DGP_B",
+    "components": [
+      {
+        "cd": "COMP_PRINT_DIGITAL_S1",
+        "nm": "디지털인쇄비",
+        "plt_siz_cd": "SIZ_000499",
+        "unit_price": "2000.00"
+      },
+      {
+        "cd": "COMP_PAPER",
+        "nm": "용지비(종이별 절가)",
+        "plt_siz_cd": "SIZ_000499",
+        "unit_price": "142.20"
+      },
+      {
+        "cd": "COMP_CUT_FULL_DIECUT",
+        "nm": "커팅 완제품가 완칼(모양엽서·라벨택)",
+        "plt_siz_cd": "SIZ_000499",
+        "unit_price": "8000.00"
+      }
+    ]
+  },
+  "046_라벨택_완칼X": {
+    "final_price": 16569,
+    "formula": "PRF_DGP_B",
+    "components": [
+      {
+        "cd": "COMP_PRINT_DIGITAL_S1",
+        "nm": "디지털인쇄비",
+        "plt_siz_cd": "SIZ_000499",
+        "unit_price": "2000.00"
+      },
+      {
+        "cd": "COMP_PAPER",
+        "nm": "용지비(종이별 절가)",
+        "plt_siz_cd": "SIZ_000499",
+        "unit_price": "142.20"
+      },
+      {
+        "cd": "COMP_CUT_FULL_DIECUT",
+        "nm": "커팅 완제품가 완칼(모양엽서·라벨택)",
+        "plt_siz_cd": "SIZ_000499",
+        "unit_price": "8000.00"
+      }
+    ]
+  },
+  "051_썬캡(완칼공정없음)": {
+    "final_price": 262300,
+    "formula": "PRF_DGP_F",
+    "components": [
+      {
+        "cd": "COMP_PRINT_DIGITAL_S1",
+        "nm": "디지털인쇄비",
+        "plt_siz_cd": "SIZ_000535",
+        "unit_price": "470.00"
+      },
+      {
+        "cd": "COMP_PAPER",
+        "nm": "용지비(종이별 절가)",
+        "plt_siz_cd": "SIZ_000535",
+        "unit_price": "153.00"
+      },
+      {
+        "cd": "COMP_CUT_FULL_DIECUT",
+        "nm": "커팅 완제품가 완칼(모양엽서·라벨택)",
+        "plt_siz_cd": "SIZ_000535",
+        "unit_price": "200000.00"
+      }
+    ]
+  },
+  "044_커팅형_완칼O": {
+    "final_price": 10600,
+    "formula": "PRF_DGP_C",
+    "components": [
+      {
+        "cd": "COMP_PRINT_DIGITAL_S1",
+        "nm": "디지털인쇄비",
+        "plt_siz_cd": "SIZ_000499",
+        "unit_price": "1100.00"
+      },
+      {
+        "cd": "COMP_PAPER",
+        "nm": "용지비(종이별 절가)",
+        "plt_siz_cd": "SIZ_000499",
+        "unit_price": "77.75"
+      }
+    ]
+  },
+  "044_커팅형_완칼X": {
+    "final_price": 10600,
+    "formula": "PRF_DGP_C",
+    "components": [
+      {
+        "cd": "COMP_PRINT_DIGITAL_S1",
+        "nm": "디지털인쇄비",
+        "plt_siz_cd": "SIZ_000499",
+        "unit_price": "1100.00"
+      },
+      {
+        "cd": "COMP_PAPER",
+        "nm": "용지비(종이별 절가)",
+        "plt_siz_cd": "SIZ_000499",
+        "unit_price": "77.75"
+      }
+    ]
+  },
+  "043_일반형": {
+    "final_price": 9645,
+    "formula": "PRF_DGP_C",
+    "components": [
+      {
+        "cd": "COMP_PRINT_DIGITAL_S1",
+        "nm": "디지털인쇄비",
+        "plt_siz_cd": "SIZ_000499",
+        "unit_price": "1300.00"
+      },
+      {
+        "cd": "COMP_PAPER",
+        "nm": "용지비(종이별 절가)",
+        "plt_siz_cd": "SIZ_000499",
+        "unit_price": "77.75"
+      }
+    ]
+  }
+}
