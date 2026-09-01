@@ -6,6 +6,8 @@
 >
 > 성격: 전략·분석·설계·도입 레시피
 >
+> 상태: `PROPOSAL` · 운영 연결 `CONDITIONAL NO-GO`
+>
 > 변경 경계: 라이브 DB와 `raw/webadmin` 무수정
 
 ## 0. 결론
@@ -30,7 +32,7 @@ AI의 검색·설명·후보 생성
 2. **Snapshot contract**: 어느 시점의 어떤 열을 어떤 코드로 투영했는지 고정한다.
 3. **Tool contract**: AI가 할 수 있는 질문을 좁고 검증 가능한 읽기 도구로 제한한다.
 
-AI는 상품 후보 탐색, 의도 구조화, 관계 경로 설명, 누락 탐지 보조를 맡는다. 가격 계산, 제약 통과 판정, 주문 생성, 생산 지시는 기존 결정론 코드와 인간 승인 경계에 남긴다.
+AI는 상품 후보 탐색, 의도 구조화, 관계 경로 설명, 누락 탐지 보조를 맡는다. 가격 계산은 현재 strict 엔진에, 제약 판정은 현재 evaluator와 fail-closed completeness adapter에, 주문 생성·생산 지시는 인간 승인 경계에 남긴다. 현재 제약 endpoint는 미입력·평가불가 규칙을 skip할 수 있으므로 R4 adapter가 완전성을 증명하기 전에는 `PASS` 권위로 열지 않는다.
 
 ---
 
@@ -38,7 +40,7 @@ AI는 상품 후보 탐색, 의도 구조화, 관계 경로 설명, 누락 탐�
 
 후니의 데이터는 일반적인 상품 카탈로그보다 복잡하다.
 
-- 상품 하나가 자재, 사이즈, 판형, 도수, 공정, 옵션, 제약, 가격공식, 가격구성요소, 단가행으로 이어진다.
+- 상품 하나가 자재, 사이즈, 판형, 도수, 공정, 옵션, 제약, 가격공식, 가격구성요소, 구성요소 가격행으로 이어진다.
 - `단가형`, `합가형`, `고정금액형`처럼 원천 가격의 의미와 런타임 산술이 다르다.
 - Excel의 값·수식·comment와 라이브 DB의 현재값이 항상 같은 층위의 권위는 아니다.
 - 실무 수기 가격은 “계산 실패”가 아니라 시장가 보정을 반영한 의도적 값일 수 있다.
@@ -68,7 +70,7 @@ AI는 상품 후보 탐색, 의도 구조화, 관계 경로 설명, 누락 탐�
 - [live_tables.json](../product-worldmodel-viewer/config/live_tables.json)은 현재 18개 테이블을 닫힌 목록으로 관리한다.
 - [snapshot schema](../product-worldmodel-viewer/schemas/snapshot.schema.json)는 `SPEC-PRICEGRID-001` JSON 계약을 사용한다.
 - [authority.json](../product-worldmodel-viewer/config/authority.json)은 상품마스터·가격표 260822_1의 SHA-256과 dbmap manifest를 고정한다.
-- [live-product-graph.json](../product-worldmodel-viewer/public/data/live-product-graph.json)은 계산하지 않은 상품 관계 관측본이다.
+- [live-product-graph.json](../product-worldmodel-viewer/public/data/live-product-graph.json)은 견적·제약 통과 여부를 계산하지 않지만, active filtering·가격 의미/범위 요약·시각화용 추론 geometry를 포함한 결정론 projection이다. 각 파생·추론 상태는 원천 관측과 구분해 읽어야 한다.
 
 2026-09-01 01:06:18 UTC snapshot의 확인값은 다음과 같다.
 
@@ -77,7 +79,7 @@ AI는 상품 후보 탐색, 의도 구조화, 관계 경로 설명, 누락 탐�
 | 트랜잭션 | `repeatable read`, `readOnly=true` | 한 시점에서 일관된 18테이블 읽기 |
 | export 상품행 | 309 | `t_prd_products` 전체 추출행 |
 | 활성 상품 그래프 | 269 | 활성 필터 이후 상품 수 |
-| 가격 단가행 | 25,090 | 그래프 노드가 아니라 구성요소별 요약 대상으로 접음 |
+| 구성요소 가격행 | 25,090 | 단가형·합가형·고정금액형 등을 포함하며 그래프 노드가 아니라 구성요소별 요약 대상으로 접음 |
 | 가격 공식 | 121 | 현재 snapshot 내 전체 행 수 |
 | 가격 구성요소 | 219 | 현재 snapshot 내 전체 행 수 |
 | 상품 제약 | 101 | snapshot에 관측되지만 통과 여부는 별도 평가 필요 |
@@ -120,7 +122,7 @@ flowchart TB
     subgraph A[권위 원천 Authority Plane]
         XL[상품마스터·가격표 Excel<br/>셀·수식·comment·SHA-256]
         PG[(Live PostgreSQL<br/>현재 운영 상태)]
-        CODE[현재 코드<br/>evaluate_price·validate]
+        CODE[현재 코드<br/>evaluate_price·constraint behavior]
     end
 
     subgraph B[추출·증거 Plane]
@@ -158,8 +160,8 @@ flowchart TB
     FTS --> MCP
     DUCK --> MCP
     MCP --> AI
-    AI -. 검증 요청 .-> CODE
-    CODE -. 결정론 결과 .-> AI
+    MCP -. Governed R4 검증 요청 .-> CODE
+    CODE -. 결정론 결과 .-> MCP
 ```
 
 ### 3.2 권위와 파생물의 역할
@@ -185,16 +187,18 @@ flowchart LR
     S --> I[Internal Diagnostic Bundle]
 
     D --> D1[상품·자재·공정·옵션·용어]
-    D --> D2[가격 구조·유형·범위 요약]
+    D --> D2[가격 구조·유형·차원 요약]
     D --> D3[PII·주문·정확 원가 제외]
 
     I --> I1[관리자 전용 상세 배선]
-    I --> I2[단가행 locator·가격 trace]
+    I --> I2[가격행 locator·가격 trace]
     I --> I3[강한 ACL·감사·no-store]
 ```
 
-- **Discovery Bundle**: 상품 탐색과 의도 분석에 필요한 최소 정보. 고객·주문·계정·정확 내부 가격행은 제외한다.
-- **Internal Diagnostic Bundle**: 관리자에게 배선·단가행·오류 근거를 보여주는 제한 자료. 익명 정적 파일로 배포하지 않는다.
+- **Discovery Bundle**: 상품 탐색과 의도 분석에 필요한 최소 정보. 고객·주문·계정·정확 내부 가격행은 제외한다. 금액 최소·최대 범위도 영업기밀 분류가 끝나기 전에는 노출하지 않는다.
+- **Internal Diagnostic Bundle**: 관리자에게 배선·가격행·오류 근거를 보여주는 제한 자료. 익명 정적 파일로 배포하지 않는다.
+
+가격 표면은 더 엄격하게 나눈다. Discovery는 가격 구조·유형·적용 차원만 반환한다. Internal Diagnostic bundle은 분류와 ACL 승인을 받은 원천 가격행을 **저장할 수는 있지만**, 일반 AI tool로 그 금액을 반환하지 않는다. 별도 diagnostic tool 정책이 승인되기 전 기본 응답은 row ID·locator·digest로 제한한다. R4의 `quote_spec`은 고객에게 제시할 최종 계산 결과를 반환하며, 내부 가격행 원문을 자동 공개하는 도구가 아니다.
 
 이 분리는 동일 데이터를 두 번 권위화하는 것이 아니다. 동일 snapshot ID에서 projection policy만 다르게 적용한 파생물이다.
 
@@ -215,6 +219,21 @@ flowchart LR
 | AI 경계 | 공식 MCP Python SDK | 로컬 `stdio` | 포트·공용 gateway 없이 닫힌 tool 제공 |
 | 해시 | SHA-256 | 모든 파일·최상위 manifest | 재현성과 변경 탐지 |
 | 서명 | Ed25519 detached signature | `manifest.sig` | hash와 manifest 동시변조 탐지 |
+
+오픈소스·라이선스 기준도 배포 manifest에 고정한다.
+
+| 구성 | 라이선스 기준 | 배포 시 확인사항 |
+|---|---|---|
+| PostgreSQL | PostgreSQL License | 서버 버전과 extension 목록 기록 |
+| Apache Arrow·Parquet | Apache-2.0 중심 | `LICENSE`·`NOTICE`와 사용 모듈 확인 |
+| DuckDB | MIT | binary·Python package 버전 고정 |
+| SQLite FTS5 | SQLite public domain | 실제 build의 FTS5 활성화 확인 |
+| Pydantic | MIT | major/minor version 고정 |
+| MCP Python SDK | MIT | protocol·SDK version을 함께 고정 |
+| SQLGlot | MIT | 선택 도입 시 parser version 고정 |
+| OpenLineage | Apache-2.0 | 선택 도입 시 file transport만 초기 허용 |
+
+의존성은 “latest”가 아니라 승인된 tag 또는 commit SHA로 pin하고, 해당 버전의 `LICENSE`·`NOTICE` 사본과 SBOM을 bundle build 산출에 남긴다.
 
 공식 근거:
 
@@ -276,8 +295,9 @@ OpenLineage는 file transport를 지원하므로 중앙 계보 서비스를 도�
 |---|---|---|
 | PRODUCT_STRUCTURE | product, category, material, process | Discovery 허용 후보 |
 | CPQ | option group/item, constraint | 허용하되 다형참조 보존 |
-| PRICE_STRUCTURE | formula, component, use_dims | 구조 허용 |
-| PRICE_VALUE | component price row, direct price | Internal 전용 또는 요약 |
+| PRICE_STRUCTURE | formula, component, use_dims | Discovery에 구조·유형·적용 차원만 허용 |
+| PRICE_VALUE_INTERNAL | component price row, direct/pre-summed amount | Discovery 제외, Diagnostic ACL 저장과 tool 노출은 별도 승인 |
+| PRICE_VALUE_PUBLIC | 고객 공개가로 승인된 값 | 승인된 값만, 최종 견적은 R4 `quote_spec` |
 | ORDER | order, cart, item, handoff | 전면 제외 |
 | CUSTOMER_PII | name, phone, email, address | 전면 제외 |
 | AUTH_SECRET | token, key, credential | 전면 제외 |
@@ -382,9 +402,26 @@ snapshots/
    │  └─ lexical.sqlite
    └─ audit/
       └─ lineage.jsonl
+
+promotions/
+├─ promotion_<generation>.json
+└─ promotion_<generation>.sig
+current                       # snapshot ID + promotion generation만 보유
+
+[bundle root 밖 별도 OS-protected WORM trust store]
+└─ promotion-heads/
+   └─ head_<generation>.json + .sig  # append-only, 최고 generation이 신뢰 앵커
 ```
 
-각 bundle은 수정하지 않는다. `current`는 데이터가 아니라 승인된 bundle ID를 가리키는 원자적 포인터다. AI 세션은 시작 시 `current`를 실제 snapshot ID로 해석한 뒤, 세션 끝까지 같은 ID를 사용한다.
+각 bundle은 수정하지 않는다. build가 모든 immutable field와 gate digest를 채운 뒤 `manifest.json` 전체를 RFC 8785 JCS로 canonicalize하고, 그 **정확한 bytes**를 Ed25519 detached signature(`manifest.sig`)로 서명한다. signature 값과 runtime verification 결과는 manifest 안에 다시 쓰지 않는다.
+
+`current`는 데이터가 아니라 승인된 bundle ID와 monotonic promotion generation을 가리키는 원자적 포인터다. promotion record는 `generation`, `previousPromotionDigest`, `previousSnapshotId`, `newSnapshotId`, `manifestDigest`, `action`, `rollbackOf`, `reasonCode`, `approvedBy`, `approvalPolicyId`, `approvalEvidenceDigest`, `promotedAt`, `policyVersion`을 가지며 RFC 8785 JCS bytes를 별도 Ed25519 서명한다. 정상 게시와 rollback 모두 generation을 증가시킨다.
+
+prefix rollback을 막는 신뢰 앵커는 bundle·ledger·`current`와 **다른 OS 계정/ACL·WORM 저장영역**의 append-only `promotion-heads/head_<generation>.json`으로 고정한다. head JSON payload는 `generation`, `promotionDigest`, `policyVersion`, `keyId`만 가지며, payload 전체를 RFC 8785 JCS로 canonicalize한 exact bytes를 Ed25519로 서명해 `head_<generation>.sig` detached envelope(`keyId`, fingerprint, payload SHA-256, encoding, signature value)에 둔다. JSON 안에 signature를 중복 저장하지 않는다.
+
+일반 exporter·MCP·bundle publisher는 이 store를 쓸 수 없고, 승인된 privileged promotion helper만 새 head pair를 append한다. verifier는 서명 유효한 최고 generation/digest를 먼저 읽고 signed chain·manifest·`current`를 대조한다. head store가 없거나 서명 불일치, head보다 낮은 prefix, head가 가리키는 record/manifest 누락이면 자동 fallback·ledger 재구축 없이 fail-closed한다. head보다 높은 ledger tail은 미승인 pending으로 격리한다. 복구도 generation을 낮추거나 같은 generation을 덮어쓰지 않으며, 독립 백업의 마지막 trusted head를 기준으로 별도 recovery key와 2인 승인 evidence가 결속된 **더 높은 generation**의 signed recovery record를 append해야 한다. root/hardware/WORM 관리자 동시 침해는 이 레시피의 별도 상위 위협 모델로 남긴다.
+
+승인 rollback은 `action=ROLLBACK`, `rollbackOf`, stable `approvedBy`, `approvalPolicyId`, `approvalEvidenceDigest`를 요구한다. AI 세션은 시작 시 검증된 `current`를 실제 snapshot ID로 해석한 뒤 세션 끝까지 같은 ID를 사용한다.
 
 Gate `G2`:
 
@@ -394,6 +431,9 @@ Gate `G2`:
 - schema drift 또는 민감 열 탐지 시 publish 중단
 - 부분 `.tmp`가 소비자에게 노출되는 경우 0
 - `manifest.sig` 검증 성공 전 bundle 사용 0
+- signed promotion generation 역행·재사용 0, 승인 없는 과거 bundle rollback 0
+- 분리된 WORM `promotion-head` 누락·변조·체인 불일치 시 데이터 응답 0, 자동 head 재생성 0
+- 하나의 승인 immutable extract를 기존 `assemble()`과 새 `assemble_ai_read_model()`에 동시에 넣어 양쪽 `dbAsOf`가 같고, 기존 `SPEC-PRICEGRID-001` canonical bytes/contentHash가 pre-change golden과 완전히 같은 sibling-projection integration test 통과
 
 ### Phase 3 — 의미를 잃지 않는 정규화
 
@@ -409,9 +449,9 @@ flowchart LR
     P -->|HAS_PRINT_OPTION| PO[PRINT_OPTION]
     P -->|HAS_PROCESS| PR[PROCESS]
     P -->|HAS_OPTION_GROUP| OG[OPTION_GROUP]
-    OG -->|HAS_OPTION| OI[OPTION_ITEM]
-    OI -->|OPTION_REFS| M
-    OI -->|OPTION_REFS| PR
+    OG -. 포함 .-> OI[OPTION_ITEM record]
+    OG -->|OPTION_REFS<br/>item key qualifier| M
+    OG -->|OPTION_REFS<br/>item key qualifier| PR
     P -->|PRICED_BY| PF[PRICE_FORMULA]
     PF -->|HAS_COMPONENT| PC[PRICE_COMPONENT]
     PC -. requested drill-down .-> ROW[PRICE_ROW]
@@ -424,8 +464,8 @@ flowchart LR
 - junction·option item은 전체 복합키를 보존한다.
 - `size`와 `plate_size`를 합치지 않는다.
 - `option_refs`는 option group이 아니라 실제 option item의 다형참조에서 만든다.
-- 단가행 25,090건을 기본 그래프 노드로 펼치지 않는다.
-- 가격 구성요소에는 row count, use_dims, 적용일, 범위를 요약하고 상세는 drill-down한다.
+- 구성요소 가격행 25,090건을 기본 그래프 노드로 펼치지 않는다.
+- 가격 구성요소에는 row count, use_dims, 적용일, 적용 차원을 요약하고 상세는 drill-down한다. 금액의 최소·최대 범위를 뜻하지 않는다.
 - 원문, 정규화값, source locator를 함께 보존한다.
 - `null`, 빈 문자열, 0, 무료, 미적재를 서로 다른 값으로 유지한다.
 
@@ -436,17 +476,19 @@ flowchart LR
 ```json
 {
   "priceOrigin": "DB_ROW",
-  "sourceSemantic": "PRE_SUMMED_TOTAL",
-  "runtimeArithmetic": "PRORATE_TIER_TOTAL",
+  "sourceSemantic": "PRE_SUMMED_AS_IS",
+  "runtimeArithmetic": "USE_AS_IS",
   "authorityRef": "xlsx:price:260822_1#시트!셀",
   "runtimeEvaluator": "raw/webadmin/.../pricing.py:evaluate_price",
   "evaluationStatus": "NOT_EVALUATED"
 }
 ```
 
-- `단가형`: 원천 단가와 유효수량 산술을 구분한다.
-- `합가형`: 이미 합해진 구간총액이라는 의미를 보존하고 LLM이 다시 합산하지 못하게 한다.
-- `고정금액형`: 수량 산술 없이 그대로 사용하는지 엔진 계약을 기록한다.
+- `단가`: `UNIT_RATE + MULTIPLY_EFFECTIVE_QTY`. 원천 단가와 유효수량 산술을 구분한다.
+- 사용자 정의의 `합가`: `PRE_SUMMED_AS_IS + USE_AS_IS`. 이미 합해져 있어 계산식을 다시 적용하지 않는 금액이며 LLM·retrieval·adapter가 재합산·재곱셈하지 않는다.
+- `구간총액 환산형`: `TIER_TOTAL + PRORATE_TIER_TOTAL`. 구간 총액을 현재 결정론 엔진이 환산하는 별도 의미다.
+- `고정금액형`: `ABSOLUTE_CHARGE + USE_AS_IS`. 수량과 무관하게 그대로 쓰는 고정 charge다.
+- 현재 코드의 legacy `PRICE_TYPE.02`는 주석상 “합가형”이지만 런타임은 구간총액 환산을 수행하므로, 사용자 정의 `합가`로 이름만 보고 매핑하지 않는다. `legacyPriceType`과 승인된 `sourceSemantic`을 별도 필드로 보존한다.
 - 수기 입력: `ADMIN_MANUAL` 또는 `EXCEL_LITERAL`로 기록하고 입력자·승인자 정보가 없으면 `UNKNOWN`으로 남긴다.
 - Excel comment: 값과 별도 evidence이며, 승인 근거 없이는 공식 규칙으로 승격하지 않는다.
 
@@ -456,7 +498,7 @@ flowchart LR
 |---|---|---|
 | `authorityStatus` | `OBSERVED_LIVE_SNAPSHOT`, `SOURCE_ASSERTED`, `DERIVED_DETERMINISTIC`, `INFERRED`, `UNKNOWN` | 어디서 나온 사실인가 |
 | `dataStatus` | `READY`, `MISSING`, `BROKEN`, `UNDECIDED`, `INACTIVE` | 데이터 상태는 무엇인가 |
-| `evaluationStatus` | `PASS`, `FAIL`, `NOT_EVALUATED`, `BLOCKED` | 실제 evaluator가 평가했는가 |
+| `evaluationStatus` | `PASS`, `FAIL`, `UNKNOWN`, `NOT_EVALUATED`, `BLOCKED` | evaluator가 무엇까지 평가했는가 |
 
 금지 변환:
 
@@ -533,24 +575,28 @@ MCP는 데이터베이스가 아니라 AI와 read model 사이의 **좁은 도�
 | `search_products` | exact/facet/graph/FTS 후보 검색 | 가능 여부 확정 금지 |
 | `get_product_context` | 상품의 구조·상태·근거 조회 | 같은 snapshot만 |
 | `expand_product_graph` | 관계 whitelist 기반 N-hop | 최대 hop 제한 |
-| `get_evidence` | DB PK·Excel cell·KB claim 근거 조회 | 원문과 상태 반환 |
+| `get_evidence` | DB PK·Excel cell·KB claim 근거 조회 | projection별 redaction을 적용한 locator·상태 반환 |
 | `compare_snapshots` | 두 시점의 구조 변화 비교 | 자동 merge 금지 |
 
 #### Deterministic adapter tools
 
+아래 두 도구는 기본 Discovery MCP catalog에 넣지 않는다. R4에서 별도 scope·감사·골든 검증을 통과한 내부 adapter catalog로만 연다.
+
 | Tool | 실제 수행자 | 필수 반환 |
 |---|---|---|
-| `validate_spec` | 현재 서버 제약 evaluator | rule IDs, PASS/FAIL/UNKNOWN, evaluatedAt |
-| `quote_spec` | `evaluate_price(..., mode="strict")` | engine digest, input digest, selected rows, warnings/errors, QuoteRevision |
+| `validate_spec` | 현재 서버 evaluator + 별도 completeness adapter | 대상·실행·skip rule IDs, missing variables, PASS/FAIL/UNKNOWN, evaluatedAt |
+| `quote_spec` | `evaluate_price(..., mode="strict")` | engine digest, input digest, selected row ID/digest, warnings/errors, 고객용 QuoteRevision |
 
-`quote_spec`은 snapshot에 복사한 금액을 LLM이 계산하는 도구가 아니다. 현재 런타임 가격엔진을 호출하고 그 결과를 별도의 evaluation envelope로 반환한다. discovery snapshot 시점과 평가 시점이 다르면 둘을 명시하고 자동으로 같은 사실처럼 합치지 않는다.
+현재 제약 endpoint는 binary `ok`와 위반 문장만 반환하고 missing variable·평가 예외 규칙을 skip할 수 있다. 따라서 `validate_spec`은 단순 passthrough가 아니다. 대상 규칙과 실제 실행/skip 규칙을 대조해 skip·missing·error가 하나라도 있으면 `UNKNOWN/BLOCKED`로 닫으며, 이 계측과 parity test가 없으면 tool을 열지 않는다.
+
+`quote_spec`은 snapshot에 복사한 금액을 LLM이 계산하는 도구가 아니다. 현재 런타임 가격엔진을 호출하고 고객에게 제시할 결과를 별도의 evaluation envelope로 반환한다. 선택된 내부 가격행은 기본적으로 ID·digest만 추적하며 원문 금액 공개는 별도 diagnostic 정책을 요구한다. discovery snapshot 시점과 평가 시점이 다르면 둘을 명시하고 자동으로 같은 사실처럼 합치지 않는다.
 
 모든 MCP 입력은 다음을 따른다.
 
 - `additionalProperties: false`
 - `snapshotId` 필수
 - ID·enum·문자열 길이·limit·hop 제한
-- principal/tenant/role은 모델 인자가 아니라 인증 세션에서 서버 주입
+- principal/tenant/role은 모델 인자가 아니다. local stdio에서는 승인 launcher가 검증한 OS principal·parent executable·불변 session context에서 주입한다.
 - 원본 DB credential, arbitrary SQL, arbitrary URL, shell, write tool 없음
 
 응답 기본 envelope:
@@ -578,7 +624,8 @@ Gate `G5`:
 
 - mutation tool 0
 - generic SQL·URL·filesystem tool 0
-- 무토큰·만료·wrong audience/scope 요청 전부 거절
+- local stdio는 승인되지 않은 parent executable·OS principal·환경·bundle ACL 요청을 전부 거절
+- network listener로 기동하면 fail-closed. 향후 HTTP profile에만 TLS·issuer·expiry·audience·scope gate를 별도로 적용
 - 모든 응답에 snapshot ID·dbAsOf·contentHash 존재
 - prompt injection 문자열이 tool 권한을 변경하는 경우 0
 
@@ -629,9 +676,10 @@ stateDiagram-v2
 sequenceDiagram
     participant U as 사용자
     participant A as AI
-    participant M as Read-only MCP
+    participant M as Tool Gateway
     participant R as Snapshot Read Model
-    participant V as Constraint Evaluator
+    participant C as Completeness Adapter
+    participant V as Current Constraint Evaluator
     participant P as Strict Price Engine
 
     U->>A: 열린 자연어 의도
@@ -641,13 +689,24 @@ sequenceDiagram
     M-->>A: 후보와 UNKNOWN 필드
     A->>M: search_products hard facets
     M->>R: product graph query
-    R-->>A: 후보 상품 + 연결 경로 + snapshot ID
+    R-->>M: 후보 상품 + 연결 경로 + snapshot ID
+    M-->>A: 동일 snapshot 후보 + evidence
+    Note over A,M: 아래 경로는 Governed R4 gate 이후에만 활성화
     A->>M: validate_spec candidate
-    M->>V: deterministic validation
-    V-->>A: PASS/FAIL/UNKNOWN + rule IDs
-    A->>M: quote_spec validated candidate
-    M->>P: evaluate_price strict
-    P-->>A: QuoteRevision + engine/input digest
+    M->>C: governed validation request
+    C->>V: current validation
+    V-->>C: binary ok + violations
+    C->>C: 대상·실행·skip rules와 missing/error 대조
+    C-->>M: PASS/FAIL/UNKNOWN + complete rule trace
+    alt validation PASS
+        M-->>A: PASS + evaluatedAt + rule IDs
+        A->>M: quote_spec validated candidate
+        M->>P: evaluate_price strict
+        P-->>M: QuoteRevision + engine/input digest
+        M-->>A: 견적 trace + provenance
+    else FAIL or UNKNOWN
+        M-->>A: 차단 상태 + 미확정 질문
+    end
     A-->>U: 근거·미확정 질문·견적 설명
 ```
 
@@ -759,7 +818,8 @@ _workspace/ai-access/
 ### R3 — Full approved projection
 
 - current live table set 중 승인된 product/CPQ/price structure 확장
-- 18-table viewer output byte-level 회귀 없음
+- 동일 immutable extract로 기존 viewer와 AI read model을 함께 조립하고 `dbAsOf` 일치
+- 18-table `SPEC-PRICEGRID-001` canonical bytes/contentHash의 pre-change golden 대비 회귀 없음([계약 AC-19](./AI-READ-MODEL-CONTRACT.md))
 
 승인점: schema drift·FK·GAP·column coverage.
 
@@ -795,6 +855,7 @@ _workspace/ai-access/
 - dangling edge 0 또는 GAP 전환 100%
 - 동일 입력 두 번 빌드 hash 일치 100%
 - 응답 내 snapshot 혼합 0
+- sibling projection test에서 viewer `SPEC-PRICEGRID-001` bytes/hash 변화 0, 양 output `dbAsOf` 불일치 0
 
 ### 권위·가격
 
@@ -803,11 +864,12 @@ _workspace/ai-access/
 - 합가·단가·고정금액 의미 보존 100%
 - 수기값의 origin·locator 보유 100%
 - comment를 승인 없이 사실로 채택 0
+- 제약 대상·실행·skip rule ID 계측 100%, missing/error가 있는데 `PASS`인 경우 0
 
 ### 보안
 
 - DB physical read-only test 전건 PASS
-- `SELECT *` 0
+- 생성 SQL AST·승인 projection·`information_schema`·Parquet schema의 column 집합 정확 일치, wildcard 0
 - AI/MCP 프로세스 내 DB credential 0
 - PII/주문/계정 열 유입 0
 - generic SQL·write tool 0
@@ -826,7 +888,7 @@ _workspace/ai-access/
 ### 운영
 
 - 실패 refresh 시 last-known-good 유지
-- kill switch로 MCP token·exporter role·feature flag 독립 차단
+- kill switch로 MCP launch/surface·exporter role·publish pointer를 독립 차단
 - 임시 CSV 삭제 증거 존재
 - 보존·삭제 정책 승인
 
@@ -865,11 +927,11 @@ _workspace/ai-access/
 
 ### 현재 판정
 
-설계 착수는 `GO`, 운영 AI 연결은 `CONDITIONAL NO-GO`다. 다음 세 가지가 해결되기 전에는 기존 public snapshot을 운영 MCP에 바로 연결하지 않는다.
+설계 착수는 `GO`, 운영 AI 연결은 `CONDITIONAL NO-GO`다. 다음 세 가지가 해결되기 전에는 현재 `public/data` 경로의 snapshot을 운영 MCP에 바로 연결하지 않는다. 이 경로명만으로 인터넷 공개 상태를 뜻하지는 않는다.
 
 1. `SELECT *` 제거와 column allowlist
 2. DB role 자체의 physical read-only 증명
-3. private ACL·manifest signature·freshness gate
+3. private ACL·manifest/promotion signature·분리 WORM trusted head·freshness gate
 
 이 세 조건을 먼저 닫으면, 후니의 복잡한 상품·가격·제약 구조를 서비스 종속 없이 AI가 안전하게 탐색할 수 있는 기반이 만들어진다.
 
@@ -878,12 +940,17 @@ _workspace/ai-access/
 ## 공식 오픈소스 참고문서
 
 - [PostgreSQL Transaction Isolation](https://www.postgresql.org/docs/current/transaction-iso.html)
+- [PostgreSQL License](https://www.postgresql.org/about/licence/)
 - [Apache Parquet Documentation](https://parquet.apache.org/docs/)
 - [Apache Arrow Documentation](https://arrow.apache.org/docs/index.html)
 - [DuckDB Parquet](https://duckdb.org/docs/lts/data/parquet/overview)
 - [DuckDB Security](https://duckdb.org/docs/current/operations_manual/securing_duckdb/overview)
+- [DuckDB License](https://github.com/duckdb/duckdb/blob/main/LICENSE)
 - [SQLite FTS5](https://www.sqlite.org/fts5.html)
+- [SQLite Copyright](https://www.sqlite.org/copyright.html)
 - [JSON Schema Draft 2020-12](https://json-schema.org/draft/2020-12)
+- [RFC 8785 JSON Canonicalization Scheme](https://www.rfc-editor.org/rfc/rfc8785.html)
+- [RFC 8032 Ed25519/EdDSA](https://www.rfc-editor.org/rfc/rfc8032.html)
 - [Pydantic JSON Schema](https://docs.pydantic.dev/latest/concepts/json_schema/)
 - [MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk)
 - [SQLGlot](https://github.com/tobymao/sqlglot)

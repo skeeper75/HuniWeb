@@ -1,0 +1,547 @@
+{
+  "jsonSchemaDialect": "https://json-schema.org/draft/2020-12/schema",
+  "manifestSchemaVersion": "AI-READ-MODEL-MANIFEST-001",
+  "documentStatus": "EXAMPLE",
+  "statusVocabulary": {
+    "observed": "현재 파일 또는 기존 read-only snapshot에서 직접 확인한 사실",
+    "proposed": "향후 구현·운영을 위한 제안",
+    "unknown": "현재 증거로 판정하지 못한 상태",
+    "notRun": "아직 실행하지 않은 gate 또는 검증",
+    "placeholder": "실제 번들 생성 시 채워야 하는 값"
+  },
+  "bundle": {
+    "id": "huni:ai-read-model:example:2026-09-01T01-06-18.71677Z",
+    "kind": "AI_READ_MODEL_BUNDLE",
+    "status": "EXAMPLE",
+    "contentAddressing": "PROPOSED",
+    "projectionPolicy": {
+      "id": "AI-READ-MODEL-001",
+      "status": "PROPOSED",
+      "description": "PostgreSQL·Excel·현재 코드의 권위를 유지한 채 AI 검색용 읽기 투영본을 생성한다.",
+      "principles": [
+        "AI는 라이브 PostgreSQL에 직접 연결하지 않는다.",
+        "제품 구조와 관계는 검색 가능하게 투영하되 가격·제약 판정은 결정론 도구를 호출한다.",
+        "주문·고객 PII·인증정보·비밀값은 이 bundle에 포함하지 않는다.",
+        "authorityStatus·dataStatus·evaluationStatus를 하나의 상태로 합치지 않는다.",
+        "UNKNOWN과 NOT_EVALUATED를 PASS 또는 주문 가능으로 승격하지 않는다."
+      ],
+      "audiences": [
+        {
+          "id": "DISCOVERY",
+          "status": "PROPOSED",
+          "purpose": "상품 탐색·용어 해석·관계 설명",
+          "priceExposure": "STRUCTURE_SUMMARY_ONLY"
+        },
+        {
+          "id": "INTERNAL_DIAGNOSTIC",
+          "status": "PROPOSED",
+          "purpose": "관리자용 배선·근거·가격 trace 점검",
+          "priceExposure": "RESTRICTED_DETAIL"
+        }
+      ]
+    }
+  },
+  "snapshot": {
+    "id": "huni:live-snapshot:2026-09-01T01-06-18.71677Z",
+    "status": "OBSERVED",
+    "dbAsOf": "2026-09-01 01:06:18.71677Z",
+    "generatedAt": "2026-09-01 01:06:18.71677Z",
+    "readOnly": true,
+    "isolationLevel": "repeatable read",
+    "sourceKind": "LIVE_POSTGRESQL_READ_ONLY_SNAPSHOT",
+    "sourceScope": "CURRENT_VIEWER_18_TABLE_SEED",
+    "contentHash": "sha256:73e5d64699218c0105cf94cf4732a2906bd90cbb86f2d0eb1775c7a7b92e86b4",
+    "metrics": {
+      "exportProductRows": 309,
+      "activeProductGraphProducts": 269,
+      "priceComponentPriceRows": 25090,
+      "priceFormulaRows": 121,
+      "priceComponentRows": 219,
+      "constraintRows": 101
+    },
+    "tableRowCounts": {
+      "t_mat_materials": 707,
+      "t_prc_component_prices": 25090,
+      "t_prc_formula_components": 247,
+      "t_prc_price_components": 219,
+      "t_prc_price_formulas": 121,
+      "t_prd_product_constraints": 101,
+      "t_prd_product_materials": 1455,
+      "t_prd_product_option_groups": 381,
+      "t_prd_product_options": 1185,
+      "t_prd_product_price_formulas": 202,
+      "t_prd_product_prices": 72,
+      "t_prd_product_print_options": 235,
+      "t_prd_product_processes": 671,
+      "t_prd_product_sizes": 831,
+      "t_prd_products": 309,
+      "t_proc_processes": 170,
+      "t_prt_print_options": 13,
+      "t_siz_sizes": 641
+    },
+    "graphMetrics": {
+      "nodeOccurrences": 3493,
+      "uniqueNodeIds": 1814,
+      "edgeOccurrences": 3289,
+      "uniqueSourceRelationTargetTriples": 3009
+    }
+  },
+  "sources": [
+    {
+      "id": "SRC-LIVE-VIEWER-SNAPSHOT",
+      "kind": "LIVE_DB_SNAPSHOT",
+      "status": "OBSERVED",
+      "path": "_workspace/product-worldmodel-viewer/public/data/live-product-graph.json",
+      "authorityRole": "CURRENT_LIVE_OBSERVATION",
+      "contentHash": "sha256:73e5d64699218c0105cf94cf4732a2906bd90cbb86f2d0eb1775c7a7b92e86b4",
+      "credentialsIncluded": false
+    },
+    {
+      "id": "SRC-PRODUCT-WORKBOOK-260822-1",
+      "kind": "EXCEL_PRODUCT_MASTER",
+      "status": "OBSERVED_VERIFIED",
+      "path": "docs/huni/후니프린팅_상품마스터_260822_1.xlsx",
+      "version": "260822_1",
+      "sha256": "46225a1a730abb445753949622fc68ccad66f4aa18bacca95b497695c4d9e946",
+      "authorityRole": "PRODUCT_SOURCE_AUTHORITY",
+      "preserve": ["cell", "formula", "comment", "sheet", "row", "column"]
+    },
+    {
+      "id": "SRC-PRICE-WORKBOOK-260822-1",
+      "kind": "EXCEL_PRICE_MASTER",
+      "status": "OBSERVED_VERIFIED",
+      "path": "docs/huni/후니프린팅_인쇄상품_가격표_260822_1.xlsx",
+      "version": "260822_1",
+      "sha256": "f4a3e4cae4c9bb7530507a1f77ca8eaf80c1d0e2506904d962c0c0f92661c5a9",
+      "authorityRole": "PRICE_SOURCE_AUTHORITY",
+      "preserve": ["cell", "formula", "comment", "sheet", "row", "column"]
+    },
+    {
+      "id": "SRC-CURRENT-PRICE-CODE",
+      "kind": "RUNTIME_CODE",
+      "status": "OBSERVED_AUTHORITY_REFERENCE",
+      "path": "raw/webadmin/webadmin/catalog/pricing.py",
+      "entryPoint": {"function": "evaluate_price", "line": 604},
+      "authorityRole": "RUNTIME_PRICE_EVALUATION_AUTHORITY",
+      "aiAccess": "DETERMINISTIC_ADAPTER_ONLY"
+    },
+    {
+      "id": "SRC-CURRENT-CONSTRAINT-CODE",
+      "kind": "RUNTIME_CODE",
+      "status": "OBSERVED_WITH_LIMITATIONS",
+      "path": "raw/webadmin/webadmin/catalog/widget_api.py",
+      "entryPoints": [
+        {"function": "_eval_violations", "line": 2113},
+        {"function": "api_validate", "line": 2255}
+      ],
+      "observedLimitations": [
+        "missing variables and evaluation errors may skip a rule",
+        "response is binary ok plus violations without complete rule IDs or evaluatedAt"
+      ],
+      "authorityRole": "CURRENT_CONSTRAINT_BEHAVIOR_REFERENCE",
+      "aiAccess": "GOVERNED_FAIL_CLOSED_COMPLETENESS_ADAPTER_ONLY_NOT_PASSTHROUGH"
+    },
+    {
+      "id": "SRC-LIVE-EXPORT-CONTRACT",
+      "kind": "EXPORTER_AND_CONFIG",
+      "status": "OBSERVED_REUSE_CANDIDATE",
+      "paths": [
+        "_workspace/product-worldmodel-viewer/tools/export_live.py",
+        "_workspace/product-worldmodel-viewer/tools/live_snapshot.py",
+        "_workspace/product-worldmodel-viewer/config/live_tables.json",
+        "_workspace/product-worldmodel-viewer/config/authority.json"
+      ],
+      "authorityRole": "EXTRACTION_PATTERN_NOT_DATA_AUTHORITY"
+    }
+  ],
+  "authority": {
+    "status": "OBSERVED_WITH_PROPOSED_PROJECTION",
+    "byConcern": [
+      {
+        "concern": "CURRENT_OPERATIONAL_STATE",
+        "authority": "LIVE_POSTGRESQL",
+        "status": "OBSERVED"
+      },
+      {
+        "concern": "PRODUCT_AND_PRICE_SOURCE",
+        "authority": "EXCEL",
+        "status": "OBSERVED_VERIFIED"
+      },
+      {
+        "concern": "PRICE_AND_CONSTRAINT_EVALUATION",
+        "authority": "CURRENT_RUNTIME_CODE",
+        "status": "OBSERVED_PRICE_AUTHORITY_CONSTRAINT_LIMITATIONS"
+      },
+      {
+        "concern": "TIME_PINNED_DERIVED_PROJECTION",
+        "authority": "AI_READ_MODEL",
+        "status": "PROPOSED_NON_AUTHORITY"
+      },
+      {
+        "concern": "CANDIDATE_AND_EXPLANATION_ONLY",
+        "authority": "LLM_OR_EMBEDDING",
+        "status": "PROPOSED_NON_AUTHORITY"
+      }
+    ],
+    "priceSemantics": {
+      "status": "PROPOSED_EXPLICIT_MAPPING",
+      "sourceSemantics": ["UNIT_RATE", "PRE_SUMMED_AS_IS", "TIER_TOTAL", "ABSOLUTE_CHARGE", "UNKNOWN"],
+      "runtimeArithmetic": ["MULTIPLY_EFFECTIVE_QTY", "PRORATE_TIER_TOTAL", "USE_AS_IS", "UNKNOWN"],
+      "rule": "사용자 정의 합가 PRE_SUMMED_AS_IS+USE_AS_IS와 구간총액 TIER_TOTAL+PRORATE_TIER_TOTAL을 분리하고 legacy PRICE_TYPE.02 이름만으로 의미를 매핑하지 않는다.",
+      "calculationAuthority": "CURRENT_RUNTIME_PRICE_ENGINE"
+    },
+    "priceRowIdentity": {
+      "status": "PROPOSED_EXPLICIT_CONTRACT",
+      "primaryId": "comp_price_id when present",
+      "naturalKeyOrder": [
+        "comp_cd", "apply_ymd", "siz_cd", "plt_siz_cd", "clr_cd", "mat_cd",
+        "proc_cd", "opt_cd", "print_opt_cd", "coat_side_cnt", "spot_side_cnt",
+        "bdl_qty", "page_cnt", "siz_width", "siz_height", "min_qty", "dim_vals"
+      ],
+      "dimValsCanonicalization": "RFC8785",
+      "digest": "SHA-256",
+      "excludedFromIdentity": ["unit_price"]
+    }
+  },
+  "buildLineage": {
+    "status": "PROPOSED_NOT_IMPLEMENTED",
+    "buildId": "EXAMPLE-BUILD-2026-09-01-0001",
+    "inputSnapshotId": "huni:live-snapshot:2026-09-01T01-06-18.71677Z",
+    "plannedAssembler": "_workspace/ai-access/exporter/build_bundle.py",
+    "plannedSteps": [
+      "read approved PostgreSQL views in one REPEATABLE READ READ ONLY transaction",
+      "export explicit approved columns to temporary files",
+      "join verified Excel evidence by approved mapping manifest",
+      "normalize typed nodes, edges, aliases, evidence, gaps and price structure",
+      "write Parquet tables and SQLite FTS5 index",
+      "calculate every output-file SHA-256 and canonical manifest digest",
+      "run schema, PII, FK, freshness, security and golden-query gates",
+      "sign and atomically publish only an approved bundle"
+    ],
+    "existingPatternReuse": {
+      "status": "PROPOSED",
+      "paths": [
+        "_workspace/product-worldmodel-viewer/tools/export_live.py",
+        "_workspace/product-worldmodel-viewer/tools/live_snapshot.py"
+      ],
+      "preserveExistingViewerContract": true,
+      "targetContract": "AI-READ-MODEL-001"
+    },
+    "reproducibility": {
+      "status": "UNKNOWN",
+      "reason": "AI bundle assembler, dependency lock and current information_schema inventory are not implemented in this checkpoint."
+    }
+  },
+  "files": [
+    {
+      "path": "schemas/live-schema.json",
+      "kind": "SCHEMA_CATALOG",
+      "status": "PROPOSED_PLACEHOLDER",
+      "sha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "path": "schemas/ai-read-model.schema.json",
+      "kind": "AI_READ_MODEL_SCHEMA",
+      "status": "PROPOSED_PLACEHOLDER",
+      "sha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "path": "tables/products.parquet",
+      "kind": "PARQUET",
+      "status": "PROPOSED_PLACEHOLDER",
+      "sha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "path": "tables/relationships.parquet",
+      "kind": "PARQUET",
+      "status": "PROPOSED_PLACEHOLDER",
+      "sha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "path": "tables/price-structure.parquet",
+      "kind": "PARQUET",
+      "status": "PROPOSED_PLACEHOLDER",
+      "sha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "path": "graph/nodes.parquet",
+      "kind": "PARQUET",
+      "status": "PROPOSED_PLACEHOLDER",
+      "sha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "path": "graph/edges.parquet",
+      "kind": "PARQUET",
+      "status": "PROPOSED_PLACEHOLDER",
+      "sha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "path": "evidence/gaps.parquet",
+      "kind": "PARQUET",
+      "status": "PROPOSED_PLACEHOLDER",
+      "sha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "path": "search/lexical.sqlite",
+      "kind": "SQLITE_FTS5",
+      "status": "PROPOSED_PLACEHOLDER",
+      "sha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      "path": "audit/lineage.jsonl",
+      "kind": "LINEAGE",
+      "status": "PROPOSED_PLACEHOLDER",
+      "sha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+    }
+  ],
+  "dataClassifications": {
+    "status": "PROPOSED_POLICY_WITH_PARTIAL_OBSERVATION",
+    "classes": [
+      {
+        "id": "PRODUCT_STRUCTURE",
+        "examples": ["products", "materials", "sizes", "processes", "print options"],
+        "discovery": "ALLOW_MINIMUM_COLUMNS",
+        "diagnostic": "ALLOW_WITH_ACL"
+      },
+      {
+        "id": "CPQ_STRUCTURE",
+        "examples": ["option groups", "options", "constraints"],
+        "discovery": "ALLOW_TYPED_RELATION_ONLY",
+        "diagnostic": "ALLOW_WITH_ACL"
+      },
+      {
+        "id": "PRICE_STRUCTURE",
+        "examples": ["formulas", "formula components", "price component semantics"],
+        "discovery": "ALLOW_SUMMARY_ONLY",
+        "diagnostic": "ALLOW_WITH_ACL"
+      },
+      {
+        "id": "PRICE_VALUE_INTERNAL",
+        "examples": ["component price rows", "direct price rows", "manual/pre-summed values"],
+        "discovery": "DENY",
+        "diagnostic": "RESTRICTED_STORAGE_TOOL_DENY_UNTIL_SEPARATE_POLICY"
+      },
+      {
+        "id": "PRICE_VALUE_PUBLIC",
+        "examples": ["explicitly approved customer-visible price"],
+        "discovery": "ALLOW_APPROVED_VALUES_ONLY",
+        "diagnostic": "ALLOW_APPROVED_VALUES_ONLY",
+        "quote": "CURRENT_STRICT_ENGINE_CUSTOMER_QUOTE_ONLY"
+      },
+      {
+        "id": "ORDER",
+        "examples": ["orders", "cart", "order items", "handoff"],
+        "discovery": "DENY",
+        "diagnostic": "DENY_IN_MVP"
+      },
+      {
+        "id": "CUSTOMER_PII",
+        "examples": ["name", "phone", "email", "address"],
+        "discovery": "DENY",
+        "diagnostic": "DENY_IN_MVP"
+      },
+      {
+        "id": "AUTH_SECRET",
+        "examples": ["password", "token", "credential", "private key"],
+        "discovery": "DENY",
+        "diagnostic": "DENY"
+      },
+      {
+        "id": "INTERNAL_OPERATIONAL_NOTE",
+        "examples": ["free-form memo", "unreviewed internal comment"],
+        "discovery": "DENY",
+        "diagnostic": "HUMAN_REVIEW_REQUIRED"
+      }
+    ],
+    "observedCoverage": {
+      "status": "UNKNOWN",
+      "scope": "WHOLE_CURRENT_LIVE_T_STAR_SCHEMA",
+      "reason": "This checkpoint proves the 18-table viewer seed only; current information_schema full inventory and column-level classification are still required."
+    }
+  },
+  "transportProfiles": {
+    "localStdio": {
+      "status": "PROPOSED_MVP_REQUIRED",
+      "identityBoundary": [
+        "allowlisted executable and parent launcher digest",
+        "allowlisted OS principal",
+        "immutable launcher-owned session context",
+        "bundle and key filesystem ACL"
+      ],
+      "networkListener": "FAIL_CLOSED",
+      "bearerTokenRequired": false,
+      "diagnosticAndR4WhenRoleUnproven": "DISABLED"
+    },
+    "futureHttp": {
+      "status": "DISABLED_OUT_OF_MVP",
+      "requiredIfEnabled": ["TLS", "issuer", "audience", "expiry", "scope", "replay", "key rotation", "rate limit"]
+    }
+  },
+  "schemaDrift": {
+    "status": "UNKNOWN",
+    "baseline": {
+      "id": "CURRENT_VIEWER_18_TABLE_WHITELIST",
+      "status": "OBSERVED",
+      "tableCount": 18,
+      "path": "_workspace/product-worldmodel-viewer/config/live_tables.json"
+    },
+    "currentWholeLiveSchema": {
+      "status": "UNKNOWN",
+      "reason": "Historical project evidence contains both 34 and 35 t_* table counts; current information_schema was not remeasured in this checkpoint."
+    },
+    "requiredEvidence": [
+      "public t_* table inventory",
+      "explicit column and type inventory",
+      "PK/UK/FK/index/trigger inventory",
+      "new-column sensitivity classification",
+      "diff against approved projection"
+    ],
+    "publishAction": "BLOCK_UNTIL_CURRENT_INFORMATION_SCHEMA_GATE_PASSES"
+  },
+  "freshness": {
+    "status": "PROPOSED_POLICY_NOT_RUN",
+    "observedSnapshot": {
+      "dbAsOf": "2026-09-01 01:06:18.71677Z",
+      "ageAtManifestGeneration": "UNKNOWN",
+      "sourceStatus": "OBSERVED"
+    },
+    "policy": {
+      "maxDiscoveryAgeHours": 24,
+      "status": "PROPOSED",
+      "priceAndConstraintRule": "always call current deterministic evaluator",
+      "staleAction": "REFUSE_NEW_PUBLISH_AND_KEEP_LAST_KNOWN_GOOD",
+      "expiredReadAction": "HISTORICAL_ONLY_NO_NEW_DECISION",
+      "sessionPinning": "PIN_ONE_SNAPSHOT_ID_PER_AI_SESSION"
+    }
+  },
+  "gates": {
+    "overallStatus": "CONDITIONAL_NO_GO",
+    "releaseStatus": "NOT_RUN",
+    "items": [
+      {
+        "id": "G0-LIVE-SCHEMA-INVENTORY",
+        "status": "NOT_RUN",
+        "severity": "BLOCKER",
+        "criterion": "현재 information_schema와 모든 후보 column을 재측정한다."
+      },
+      {
+        "id": "G1-PHYSICAL-READ-ONLY-ROLE",
+        "status": "NOT_RUN",
+        "severity": "BLOCKER",
+        "criterion": "DB role 자체의 SELECT-only를 별도 세션에서 증명한다."
+      },
+      {
+        "id": "G2-EXPLICIT-COLUMN-PROJECTION",
+        "status": "NOT_RUN",
+        "severity": "BLOCKER",
+        "criterion": "SELECT * 없이 승인된 view와 column allowlist만 추출한다."
+      },
+      {
+        "id": "G3-HASH-AND-REPRODUCIBILITY",
+        "status": "NOT_RUN",
+        "severity": "HIGH",
+        "criterion": "같은 input snapshot과 pinned dependency로 동일 파일 hash를 재현한다."
+      },
+      {
+        "id": "G4-PII-AND-SECRET-SCAN",
+        "status": "NOT_RUN",
+        "severity": "BLOCKER",
+        "criterion": "PII·credential·secret·주문 데이터의 bundle 유입이 0이다."
+      },
+      {
+        "id": "G5-RELATION-AND-GAP-INTEGRITY",
+        "status": "NOT_RUN",
+        "severity": "HIGH",
+        "criterion": "FK/edge endpoint·dangling·unknown 상태를 숨기지 않고 검증한다."
+      },
+      {
+        "id": "G6-PRICE-CONSTRAINT-AUTHORITY",
+        "status": "NOT_RUN",
+        "severity": "BLOCKER",
+        "criterion": "가격은 current strict engine이 판정한다. 제약은 current evaluator와 대상·실행·skip·missing·error completeness adapter가 판정하며 미계측/skip은 UNKNOWN/BLOCKED다."
+      },
+      {
+        "id": "G7-FRESHNESS-AND-DRIFT",
+        "status": "NOT_RUN",
+        "severity": "BLOCKER",
+        "criterion": "TTL·schema drift·stale bundle이면 publish를 거절한다."
+      },
+      {
+        "id": "G8-MCP-READ-ONLY-BOUNDARY",
+        "status": "NOT_RUN",
+        "severity": "BLOCKER",
+        "criterion": "generic SQL·filesystem·URL·write·order·payment tool이 없고 local stdio launch identity·ACL·network fail-closed가 검증된다."
+      },
+      {
+        "id": "G9-SIGNATURE-VERIFICATION",
+        "status": "NOT_RUN",
+        "severity": "BLOCKER",
+        "criterion": "RFC8785 manifest bytes와 monotonic promotion record를 각각 Ed25519 서명·검증하고, 분리 WORM trusted head와 chain/current를 대조해 prefix replay·revoked key를 거절한 뒤에만 publish한다."
+      },
+      {
+        "id": "G10-SIBLING-PROJECTION-REGRESSION",
+        "status": "NOT_RUN",
+        "severity": "BLOCKER",
+        "criterion": "한 승인 immutable extract에서 SPEC-PRICEGRID-001과 AI-READ-MODEL-001을 함께 조립하고 input ID/dbAsOf가 같으며 기존 viewer canonical bytes/contentHash가 pre-change golden과 byte-identical이다."
+      }
+    ],
+    "blockingReasons": [
+      "explicit column allowlist와 sibling projection 회귀 미증명",
+      "physical SELECT-only role 미증명",
+      "private ACL·manifest/promotion signature·independent trusted head·freshness gate 미구현"
+    ]
+  },
+  "signatureContract": {
+    "status": "PROPOSED_NOT_CREATED",
+    "algorithm": "Ed25519",
+    "canonicalization": "RFC8785",
+    "signedObject": "ENTIRE_IMMUTABLE_MANIFEST_JSON",
+    "detachedEnvelope": "manifest.sig",
+    "envelopeFields": ["keyId", "publicKeyFingerprint", "payloadSha256", "encoding", "signatureValue"],
+    "encoding": "base64url-no-pad",
+    "runtimeVerificationInsideManifest": false,
+    "privateKeyMaterialIncluded": false
+  },
+  "promotionContract": {
+    "status": "PROPOSED_NOT_CREATED",
+    "recordFields": [
+      "generation", "previousPromotionDigest", "previousSnapshotId", "newSnapshotId", "manifestDigest",
+      "action", "rollbackOf", "reasonCode", "approvedBy", "approvalPolicyId",
+      "approvalEvidenceDigest", "promotedAt", "policyVersion"
+    ],
+    "generation": "MONOTONIC_INCREASING_FOR_PUBLISH_AND_ROLLBACK",
+    "canonicalization": "RFC8785",
+    "signature": "ED25519_DETACHED",
+    "ledger": "APPEND_ONLY_CHAINED_PROMOTION_RECORDS",
+    "trustedHead": {
+      "profile": "SEPARATE_OS_PROTECTED_WORM_HEAD_V1",
+      "location": "OUTSIDE_BUNDLE_LEDGER_AND_CURRENT",
+      "writer": "PRIVILEGED_PROMOTION_HELPER_ONLY",
+      "deniedWriters": ["EXPORTER", "MCP", "BUNDLE_PUBLISHER"],
+      "recordPath": "promotion-heads/head_<generation>.json",
+      "writeMode": "APPEND_ONLY_NO_OVERWRITE_OR_DELETE",
+      "payloadFields": ["generation", "promotionDigest", "policyVersion", "keyId"],
+      "detachedSignatureEnvelope": {
+        "path": "promotion-heads/head_<generation>.sig",
+        "algorithm": "Ed25519",
+        "canonicalization": "RFC8785",
+        "signedObject": "ENTIRE_HEAD_JSON_PAYLOAD",
+        "fields": ["keyId", "publicKeyFingerprint", "payloadSha256", "encoding", "signatureValue"]
+      },
+      "startupOrder": "VERIFY_HIGHEST_VALID_HEAD_THEN_CHAIN_MANIFEST_CURRENT",
+      "missingOrMismatch": "FAIL_CLOSED_NO_AUTO_REBUILD_OR_FALLBACK",
+      "unanchoredHigherTail": "QUARANTINE_AS_PENDING",
+      "recovery": "APPEND_HIGHER_GENERATION_ONLY_FROM_INDEPENDENT_BACKUP_WITH_SEPARATE_RECOVERY_KEY_TWO_STABLE_APPROVERS_AND_APPROVAL_EVIDENCE_DIGEST"
+    },
+    "replayAction": "REJECT_STARTUP_OR_QUERY_ON_TRUSTED_HEAD_MISMATCH",
+    "authorizedRollback": "REQUIRES_ACTION_ROLLBACK_ROLLBACK_OF_REASON_APPROVED_BY_POLICY_AND_APPROVAL_DIGEST",
+    "promotionRule": "ALL_BLOCKER_GATES_PASS_AND_SIGNATURE_VERIFIED",
+    "failureAction": "KEEP_LAST_KNOWN_GOOD_AND_REJECT_CANDIDATE"
+  },
+  "boundaryAssertions": {
+    "status": "EXAMPLE_NOT_RUN",
+    "audience": "INTERNAL_ONLY_AFTER_APPROVAL",
+    "writeToLiveDatabase": false,
+    "rawWebadminModified": false
+  }
+}

@@ -1,167 +1,107 @@
 ---
-status: in-progress
+status: design-package-complete
 branch: main
-timestamp: 2026-09-01T18:09:34+09:00
-session_duration_s: 205
-files_modified:
-  - _workspace/ai-ready-db-recipe/README.md
-  - _workspace/ai-ready-db-recipe/AI-READY-LIVE-DB-RECIPE.md
-  - _workspace/ai-ready-db-recipe/HANDOFF.md
+timestamp: 2026-09-01T20:18:08+09:00
+scope: open-source AI-ready live DB design package
+operating_connection: CONDITIONAL_NO_GO
 ---
 
-# AI-ready Live DB Recipe — 작업 체크포인트
+# AI-ready Live DB Recipe — 재개 포인터
 
-> 상태: `IN_PROGRESS / SAFE_TO_RESUME`
+> 현재 상태: `DESIGN_PACKAGE_COMPLETE / OPERATING_CONDITIONAL_NO_GO`
 >
-> 저장일: 2026-09-01 KST
->
-> 브랜치: `main`
->
-> 범위: 오픈소스 중심 AI Read Model 사전작업 설계
->
-> 라이브 DB·`raw/webadmin`: 무수정
+> 라이브 DB·`raw/webadmin`·기존 `SPEC-PRICEGRID-001`: 무수정
 
 ## 다음 시작점
 
-새 세션에서 아래 순서로 재개한다.
-
-1. 이 문서와 [현재 초안](./AI-READY-LIVE-DB-RECIPE.md)을 먼저 읽는다.
-2. `git status --short -- _workspace/ai-ready-db-recipe`로 이 폴더만 상태를 확인한다.
-3. 현재 README가 링크하지만 아직 없는 지원 산출물 3개를 작성한다.
-   - `AI-READ-MODEL-CONTRACT.md`
-   - `SECURITY-AND-ACCEPTANCE-GATES.md`
-   - `manifest.example.json`
-4. 본문 887줄의 사실·링크·Mermaid를 별도 reviewer가 검수한다.
-5. 보안 reviewer의 `CONDITIONAL NO-GO` 세 항목을 본문·지원문서·manifest에 일관되게 반영한다.
-6. 독립 gate가 통과한 뒤 사용자에게 설계안을 제시한다. 구현은 별도 승인 전 시작하지 않는다.
+1. [README](./README.md)와 아래 4개 산출물을 읽는다.
+2. 구현 승인을 별도로 받기 전에는 `_workspace/ai-access/`를 만들거나 라이브 DB/MCP를 연결하지 않는다.
+3. 구현이 승인되면 첫 작업은 R0 현재 `information_schema` 재측정과 column classification이다.
+4. R1 이후에도 세 운영 차단점의 실행 evidence가 없으면 `current`를 운영 AI에 연결하지 않는다.
 
 재개용 한 줄:
 
 ```text
-_workspace/ai-ready-db-recipe/HANDOFF.md부터 읽고, 미완성 지원문서 작성 → 사실/보안/다이어그램 독립검수 → 보정 순서로 재개해줘. raw/webadmin과 라이브 DB는 수정하지 마.
+_workspace/ai-ready-db-recipe/HANDOFF.md와 README.md부터 읽고, 구현 승인 여부부터 확인해줘. 설계 패키지는 완료됐지만 운영 연결은 CONDITIONAL NO-GO이며 raw/webadmin·라이브 DB·기존 viewer는 수정하지 마.
 ```
 
-## 이번 세션에서 완료한 것
+## 현재 산출물
 
-- 기존 라이브 viewer seed 재검증
-  - 18개 `t_*`
-  - `REPEATABLE READ, READ ONLY`
-  - `dbAsOf=2026-09-01 01:06:18.71677Z`
-  - export 상품행 309, 활성 상품 269, 가격 단가행 25,090
-  - 상품마스터·가격표 `260822_1` SHA-256 `VERIFIED`
-- 현재 자산 재사용 seam 확인
-  - `product-worldmodel-viewer/tools/export_live.py`
-  - `live_snapshot.py`
-  - `SPEC-PRICEGRID-001`
-  - ontology 17 entity / 19 relation 계약
-  - 현재 `evaluate_price`와 제약 API의 권위 경계
-- 공식 오픈소스 문서 확인
-  - PostgreSQL Repeatable Read
-  - Apache Parquet/Arrow
-  - DuckDB Parquet·security
-  - SQLite FTS5
-  - JSON Schema 2020-12 / Pydantic
-  - 공식 MCP Python SDK stdio
-  - SQLGlot / OpenLineage
-- 전문 에이전트 6개 결과 수집 완료
-  - 자산 인벤토리
-  - export 분리 가능성
-  - OSS 조사
-  - 참조 아키텍처
-  - semantic contract
-  - security/threat model
-- [README](./README.md) 작성
-- [상세 레시피 초안](./AI-READY-LIVE-DB-RECIPE.md) 작성
-  - 887줄
-  - 권위 분리, 전체 구조, OSS stack, Phase 0~6, MCP, refresh, GO 조건 포함
+- [상세 레시피](./AI-READY-LIVE-DB-RECIPE.md)
+- [AI Read Model 계약](./AI-READ-MODEL-CONTRACT.md)
+- [보안·수용 게이트](./SECURITY-AND-ACCEPTANCE-GATES.md)
+- [예시 manifest](./manifest.example.json)
+- [README](./README.md)
 
-## 이번 세션 결정
+## 이번 작업에서 완료한 것
 
-1. **서비스 중심이 아니라 artifact-centered/file-first 구조를 채택한다.**
-   - 중심은 특정 DB 제품이 아니라 authority + snapshot + tool contract다.
-2. **AI가 라이브 PostgreSQL에 직접 연결하지 않는다.**
-   - DB credential은 단일 exporter만 가진다.
-3. **기존 18-table viewer snapshot을 교체하지 않는다.**
-   - 같은 extract에서 별도 `AI-READ-MODEL-001` assembler를 병렬 생성한다.
-4. **PostgreSQL/Excel/현재 코드가 계속 권위다.**
-   - snapshot은 시점 관측 증거이고 ontology/FTS/vector는 파생물이다.
-5. **MVP stack은 PostgreSQL → Parquet → DuckDB/SQLite FTS5 → local stdio MCP다.**
-   - Neo4j, 중앙 vector DB, Kafka, Airflow, Kubernetes, 공용 HTTP MCP는 초기 중심에서 제외한다.
-6. **Discovery Bundle과 Internal Diagnostic Bundle을 분리한다.**
-   - 고객·주문·PII·정확 내부 가격의 노출면을 분리한다.
-7. **가격·제약은 LLM이 계산·판정하지 않는다.**
-   - `quote_spec`은 `evaluate_price(..., mode="strict")`, `validate_spec`은 현재 deterministic evaluator adapter다.
-8. **상태 축을 분리한다.**
-   - `authorityStatus`, `dataStatus`, `evaluationStatus`를 한 필드로 합치지 않는다.
+- 기존 18-table read-only viewer seed와 현재 코드·ontology·Excel hash를 다시 대조했다.
+- 서비스 중심이 아닌 `authority → signed immutable artifact → embedded query → local stdio MCP` 구조를 설계했다.
+- Discovery와 Internal Diagnostic projection을 분리했다.
+- 가격의 단가, 사용자 정의 합가(`PRE_SUMMED_AS_IS+USE_AS_IS`), 구간총액 환산, 고정금액형, 수기값 의미를 분리한 `price_row` 계약을 작성했다.
+- `comp_price_id`와 전체 자연키(`comp_cd`·적용일·고정 차원·canonical `dim_vals`) ID 규칙을 고정했다.
+- 현재 제약 endpoint가 missing/error 규칙을 skip하는 한계를 사실로 기록하고, R4 `validate_spec`을 fail-closed completeness adapter 목표 계약으로 분리했다.
+- RFC 8785 manifest bytes의 Ed25519 detached signature, signed monotonic promotion record, bundle 영역 밖 OS-protected WORM trusted head를 분리했다.
+- local stdio launch identity와 미래 HTTP token profile을 분리했다.
+- `SELECT *` 검증을 grep-only가 아니라 SQL AST·projection·`information_schema`·Parquet schema 집합 비교와 민감 canary 시험으로 강화했다.
+- JSON·Markdown·링크·snapshot 수치·secret pattern을 검증했다.
 
-## 미해결·블로커
+## 이번 작업의 결정
 
-### 운영 연결 전 필수 3건
+1. 라이브 PostgreSQL, Excel, 현재 코드는 질문 종류별 권위를 계속 가진다.
+2. AI는 라이브 DB credential이나 임의 SQL을 받지 않는다.
+3. 기존 viewer `SPEC-PRICEGRID-001`은 유지하고 같은 extract에서 `AI-READ-MODEL-001`을 형제 산출물로 만든다.
+4. MVP는 Parquet + DuckDB in-process + SQLite FTS5 + local stdio MCP다.
+5. vector/graph server는 필수가 아니며, 검색 품질 필요성이 측정된 뒤에만 추가한다.
+6. Discovery는 가격 구조·유형·적용 차원만 반환한다. 내부 원천 가격행의 금액 tool 노출은 별도 승인이다.
+7. `quote_spec`은 고객용 현재 strict 견적 결과를 반환하며 내부 가격행 원문을 자동 공개하지 않는다.
+8. current constraint endpoint의 binary `ok=true`는 completeness 증거 없이 `PASS`가 아니다.
+9. valid old bundle prefix replay를 막기 위해 publish와 rollback 모두 signed promotion generation을 증가시키고, 분리 WORM trusted head의 generation/digest와 대조한다.
 
-1. `SELECT *` 제거와 명시적 column allowlist
-2. DB role 자체의 physical SELECT-only 증명
-3. private ACL, manifest signature, freshness gate
+## 운영 연결 전 차단점
 
-이 셋이 닫히기 전 운영 AI/MCP 연결 판정은 `CONDITIONAL NO-GO`다.
+현재 판정은 `CONDITIONAL NO-GO`다.
 
-### 추가 미결정
+1. 기존 exporter의 `SELECT *` 제거·명시적 table/column projection과 sibling-projection 회귀(`SPEC-PRICEGRID-001` bytes/hash 불변)가 구현·검증되지 않았다.
+2. 전용 DB role의 physical SELECT-only 권한이 독립적으로 증명되지 않았다.
+3. private ACL, manifest/promotion signature, 분리 WORM trusted head, freshness gate가 구현·실행되지 않았다.
 
-- 현재 live `t_*` 전체 수: 과거 문서가 34→35로 변했으므로 `information_schema` 재측정 필요
-- Discovery Bundle에 노출할 가격 정보의 정확 범위
-- Korean FTS5 품질과 tokenizer 방식
-- snapshot TTL·보존기간·감사로그 보존기간의 운영 승인
-- MCP host 구현 언어 최종 선택. 현재 Python stdio를 권장
-- Ed25519 서명키의 보관·회전 방식
-- 임베딩 검색의 실제 필요성. 초기에는 미도입
+R4 추가 차단점:
 
-## 미완성 산출물
+- 현재 제약 endpoint는 missing variable·평가 예외 규칙을 skip하고 rule ID·`evaluatedAt`을 반환하지 않는다. 대상/실행/skip/missing/error 계측과 parity gate 전에는 `validate_spec`을 열 수 없다.
 
-README에 아래 링크가 있으나 파일은 아직 없다. 이는 의도적으로 중단된 상태다.
+## 인간 결정 대기
 
-- `AI-READ-MODEL-CONTRACT.md`
-- `SECURITY-AND-ACCEPTANCE-GATES.md`
-- `manifest.example.json`
-
-상세 레시피도 독립 review 전 초안이다. 완성·승인 문서로 표기하지 않는다.
+- Discovery에 공개할 고객 가격 값의 정확 범위
+- Internal Diagnostic 원천 금액 tool이 실제로 필요한지와 승인 role/purpose
+- snapshot TTL·bundle/audit 보존기간
+- signing key custody·rotation·revocation 정책
+- local launcher가 per-user role/scope를 증명할 수 있는지
+- Korean FTS5 tokenizer 품질과 vector rerank 필요성
 
 ## 검증 상태
 
-- 라이브 DB 재접속·재추출: 수행하지 않음. 2026-09-01 기존 read-only snapshot을 사용함.
-- 현재 전체 `information_schema`: 미재측정.
-- 코드·테스트 변경: 없음.
-- Markdown/Mermaid 독립 gate: 미수행.
-- 보안 reviewer: `DONE_WITH_CONCERNS`, 운영 연결은 `CONDITIONAL NO-GO`.
-- `.env.local`: `.gitignore`의 `.env.*` 규칙으로 ignored, 권한 `600` 확인.
+- 기존 seed 관측: `dbAsOf=2026-09-01 01:06:18.71677Z`, `repeatable read`, `readOnly=true`
+- 18 tables, 상품행 309, 활성 상품 269, 구성요소 가격행 25,090, 공식 121, 구성요소 219, 제약 101
+- graph occurrence/unique: node 3,493/1,814, edge 3,289/3,009
+- 상품·가격 workbook 260822_1 SHA-256: `VERIFIED`
+- manifest JSON과 문서 내 JSON 예시: parse PASS
+- Markdown fence·local link·`git diff --check`: PASS
+- viewer 독립 unit test: 9/9 PASS
+- Mermaid 11개: 정적 의미 검토 PASS, 실제 parser/render는 `mmdc` 미설치로 `NOT_RUN`
+- 독립 fact/code review: `APPROVE`
+- 독립 security gate: `APPROVE`
+- 독립 document/diagram static QA: `PASS`
+- 최종 통합 terminal gate: `APPROVE`
+- 현재 전체 라이브 `information_schema`: 미재측정
+- 운영 보안 gate·adversarial evidence: 설계만 완료, 실행 `NOT_RUN`
 
 ## 건드리지 말 것
 
 - `raw/webadmin` tracked 파일
-- 라이브 DB 쓰기·DDL·COMMIT
-- 현재 `SPEC-PRICEGRID-001` viewer output 계약
-- `_workspace/product-worldmodel-viewer`의 기존 동작과 snapshot
-- 사용자의 다른 dirty worktree 변경 366개
-- 상품/가격/제약 권위를 vector나 LLM으로 대체하는 설계
-- generic SQL·write·order·payment·production MCP tool
-
-## 작업환경 주의
-
-- 저장소 전체가 매우 dirty하다. 다른 변경을 stage, revert, format, cleanup하지 않는다.
-- 현재 작업은 `_workspace/ai-ready-db-recipe/`만 소유한다.
-- `raw/webadmin`은 읽기 권위로만 사용한다.
-- gstack 자동 업그레이드는 원격 코드 실행·홈 설치본 교체 위험으로 승인 단계에서 거절됐다. 기존 gstack 설치본은 변경되지 않았다. 체크포인트 재개와 무관하므로 별도 사용자 승인 없이는 재시도하지 않는다.
-
-## 현재 계획 상태
-
-| 단계 | 상태 |
-|---|---|
-| 라이브 snapshot·schema·ontology·price·constraint 재검증 | 완료 |
-| OSS 공식 문서·라이선스·복잡도 조사 | 완료 |
-| 참조 아키텍처·semantic/security contract 설계 | 완료 |
-| 상세 레시피·다이어그램 | 초안 작성, 지원문서 미완성 |
-| 독립 fact/security/diagram gate | 미시작 |
-
-## 현재 파일
-
-- [README.md](./README.md)
-- [AI-READY-LIVE-DB-RECIPE.md](./AI-READY-LIVE-DB-RECIPE.md)
-- [HANDOFF.md](./HANDOFF.md)
+- 라이브 DB write·DDL·COMMIT
+- `_workspace/product-worldmodel-viewer` 기존 코드·snapshot·`SPEC-PRICEGRID-001`
+- 저장소의 다른 dirty 변경
+- generic SQL·filesystem·URL·write·order·payment·production MCP tool
+- vector/LLM으로 가격·제약·주문 권위를 대체하는 설계
+- 승인 없는 gstack upgrade

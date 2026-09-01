@@ -2,6 +2,10 @@
 
 라이브 PostgreSQL과 권위 Excel을 AI가 안전하게 탐색할 수 있도록 준비하는 **오픈소스 중심 사전작업 설계**입니다. 새 중앙 서비스를 만들거나 라이브 DB를 AI에 직접 연결하지 않고, 현재 권위를 시점 고정한 불변 읽기 번들로 투영하는 방식을 권장합니다.
 
+> 문서 패키지: `PROPOSAL`
+>
+> 현재 운영 AI/MCP 연결: `CONDITIONAL NO-GO`
+
 ## 문서
 
 - [상세 레시피](./AI-READY-LIVE-DB-RECIPE.md)
@@ -15,6 +19,8 @@
 - 라이브 DB, `raw/webadmin`, 현재 상품뷰어 구현은 수정하지 않았습니다.
 - 현재 라이브 기준값은 2026-09-01에 생성된 기존 `REPEATABLE READ, READ ONLY` snapshot을 관측 근거로 사용했습니다.
 - 전체 라이브 `t_*` 수는 과거 문서의 34/35 표기가 서로 달라, 구현 착수 시 `information_schema` 재측정을 필수 게이트로 남겼습니다.
+- 명시적 column projection, physical read-only role, private ACL·manifest/promotion signature·분리 WORM trusted head·freshness가 구현·검증되기 전에는 운영 연결을 허용하지 않습니다.
+- 현재 제약 endpoint의 binary `ok`는 미평가 규칙을 숨길 수 있으므로, fail-closed completeness adapter와 parity gate 전에는 `validate_spec`을 열지 않습니다.
 
 ## 한 문장 권고
 
