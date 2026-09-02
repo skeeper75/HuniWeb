@@ -1,0 +1,7 @@
+$ psql <DATABASE_URL> -c "SELECT count(*) AS comps FROM t_prc_price_components; "
+
+ comps 
+-------
+   226
+(1 row)
+

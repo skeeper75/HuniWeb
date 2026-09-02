@@ -1,0 +1,44 @@
+no,new_code,new_name,authority_axis_header,live_use_dims,product_cnt,screen_evidence,verdict
+1,ACRYLIC_CLEAR3T_PRINT,아크릴_투명3T_출력가,가로 / 세로 | 20mm | 30mm | 40mm | 50mm | 60mm | 70mm | 80mm | 90mm | 100m,"[""mat_cd""  ""siz_width""  ""siz_height""  ""min_qty""]",9,자재: 등록 9/9상품 | siz_width=직접입력(가로·세로 실측) | siz_height=직접입력(가로·세로 실측) | 수량=주문수량(화면 요소 아님),축=화면 등록과 일치
+2,ACRYLIC_CLEAR15T_PRINT,아크릴_투명1.5T_출력가,가로 / 세로 | 20mm | 30mm | 40mm | 50mm | 60mm | 70mm | 80mm | 90mm | 100m,"[""mat_cd""  ""siz_width""  ""siz_height""  ""min_qty""]",0,자재: 걸린 상품 없음(그릇만 생성) | siz_width=직접입력(가로·세로 실측) | siz_height=직접입력(가로·세로 실측) | 수량=주문수량(화면 요소 아님),축=화면 등록과 일치
+3,ACRYLIC_MIRROR3T_PRINT,아크릴_미러3T_출력가,가로 / 세로 | 20mm | 30mm | 40mm | 50mm | 60mm | 70mm | 80mm | 90mm | 100m,"[""siz_width""  ""siz_height""]",0,siz_width=직접입력(가로·세로 실측) | siz_height=직접입력(가로·세로 실측),축=화면 등록과 일치
+4,ACRYLIC_TOTAL_FINISHING,아크릴_종합_부자재,아크릴키링 | 고리없음 | 0.0,"[""opt_cd""  ""min_qty""]",9,옵션그룹: 등록 9/9상품 | 수량=주문수량(화면 요소 아님),축=화면 등록과 일치
+5,ACRYLIC_CLEAR8T_PRINT,아크릴_투명8T_출력가,가로 / 세로 | 30mm | 40mm | 50mm | 60mm | 70mm | 80mm,"[""siz_width""  ""siz_height""  ""min_qty""]",1,siz_width=직접입력(가로·세로 실측) | siz_height=직접입력(가로·세로 실측) | 수량=주문수량(화면 요소 아님),축=화면 등록과 일치
+6,ACRYLIC_CARABINER_FINAL,아크릴_카라비너_제작가,옵션 | 단가,"[""siz_cd""  ""min_qty""]",1,사이즈: 등록 1/1상품 | 수량=주문수량(화면 요소 아님),축=화면 등록과 일치
+7,STK_KISSCUT_PRINT,스티커_반칼_제작가,옵션 | A5(4판) / 124 x186 mm (4판) | A4(2판) | A3(1판) | 90*190(6판) | A6(8판),"[""siz_cd"" ""mat_cd"" ""min_qty""]",12,사이즈: 등록 12/12상품 | 자재: 등록 12/12상품 | 수량=주문수량(화면 요소 아님),축=화면 등록과 일치
+8,STK_CUT_PRINT,스티커_완칼_제작가,옵션/ 제작수량 | A4 | B4 | A3 | B3 | A2,"[""siz_cd"" ""mat_cd"" ""min_qty""]",12,사이즈: 등록 12/12상품 | 자재: 등록 12/12상품 | 수량=주문수량(화면 요소 아님),축=화면 등록과 일치
+9,STK_CUT_CLEAR_PRINT,스티커_완칼투명_제작가,옵션/ 제작수량 | A4 | B4 | A3 | B3 | A2,"[""siz_cd"" ""mat_cd"" ""min_qty""]",12,사이즈: 등록 12/12상품 | 자재: 등록 12/12상품 | 수량=주문수량(화면 요소 아님),축=화면 등록과 일치
+10,STK_CUT_LARGE_PRINT,스티커_완칼대형_제작가,옵션/ 제작수량 | 400x600,"[""siz_cd"" ""mat_cd"" ""min_qty""]",12,사이즈: 등록 12/12상품 | 자재: 등록 12/12상품 | 수량=주문수량(화면 요소 아님),축=화면 등록과 일치
+11,STK_TATTOO_SETUP,스티커_타투_기본가,옵션/ 제작수량 | 90x190,"[""siz_cd""  ""mat_cd""  ""min_qty""]",1,사이즈: 등록 1/1상품 | 자재: 등록 1/1상품 | 수량=주문수량(화면 요소 아님),축=화면 등록과 일치
+12,STK_TATTOO_PRINT,스티커_타투_제작가,옵션/ 제작수량 | 90x190,"[""siz_cd""  ""mat_cd""  ""min_qty""]",1,사이즈: 등록 1/1상품 | 자재: 등록 1/1상품 | 수량=주문수량(화면 요소 아님),축=화면 등록과 일치
+13,POSTER_PHOTOPAPER_PRINT,포스터_인화지_출력가,가로 / 세로 | 600mm | 800mm | 1000mm | 1200mm,"[""siz_width""  ""siz_height""  ""min_qty""]",4,siz_width=직접입력(가로·세로 실측) | siz_height=직접입력(가로·세로 실측) | 수량=주문수량(화면 요소 아님),축=화면 등록과 일치
+14,POSTER_PAPER_PRINT,포스터_매트지_출력가,가로 / 세로 | 600mm | 800mm | 900mm,"[""siz_width""  ""siz_height""]",1,siz_width=직접입력(가로·세로 실측) | siz_height=직접입력(가로·세로 실측),축=화면 등록과 일치
+15,POSTER_PET_PRINT,포스터_PET_출력가,가로 / 세로 | 600mm | 800mm | 1000mm | 1200mm,"[""siz_width""  ""siz_height""  ""min_qty""]",4,siz_width=직접입력(가로·세로 실측) | siz_height=직접입력(가로·세로 실측) | 수량=주문수량(화면 요소 아님),축=화면 등록과 일치
+16,POSTER_PVC_PRINT,포스터_PVC_출력가,가로 / 세로 | 600mm | 800mm | 1000mm | 1200mm,"[""siz_width""  ""siz_height""  ""min_qty""]",4,siz_width=직접입력(가로·세로 실측) | siz_height=직접입력(가로·세로 실측) | 수량=주문수량(화면 요소 아님),축=화면 등록과 일치
+17,POSTER_CLEARPVC_PRINT,포스터_투명PVC_출력가,가로 / 세로 | 600mm | 800mm | 1000mm | 1200mm,"[""siz_width""  ""siz_height""]",1,siz_width=직접입력(가로·세로 실측) | siz_height=직접입력(가로·세로 실측),축=화면 등록과 일치
+18,POSTER_GRAPHIC_PRINT,포스터_그래픽천_출력가,가로 / 세로 | 600mm | 800mm | 1000mm | 1200mm,"[""siz_width""  ""siz_height""  ""min_qty""]",4,siz_width=직접입력(가로·세로 실측) | siz_height=직접입력(가로·세로 실측) | 수량=주문수량(화면 요소 아님),축=화면 등록과 일치
+19,POSTER_LINEN_PRINT,포스터_린넨_출력가,가로 / 세로 | 600mm | 800mm | 1000mm | 1200mm,"[""siz_width""  ""siz_height""]",1,siz_width=직접입력(가로·세로 실측) | siz_height=직접입력(가로·세로 실측),축=화면 등록과 일치
+20,POSTER_OXFORD_PRINT,포스터_캔버스옥스포드_출력가,가로 / 세로 | 600mm | 800mm | 1000mm | 1200mm,"[""siz_width""  ""siz_height""  ""min_qty""]",4,siz_width=직접입력(가로·세로 실측) | siz_height=직접입력(가로·세로 실측) | 수량=주문수량(화면 요소 아님),축=화면 등록과 일치
+21,POSTER_LEATHER_PRINT,포스터_레더_출력가,가로 / 세로 | 600mm | 800mm | 1000mm | 1200mm,"[""siz_width""  ""siz_height""  ""min_qty""]",4,siz_width=직접입력(가로·세로 실측) | siz_height=직접입력(가로·세로 실측) | 수량=주문수량(화면 요소 아님),축=화면 등록과 일치
+22,POSTER_TYVEK_PRINT,포스터_타이벡_출력가,가로 / 세로 | 600mm | 800mm | 1000mm | 1200mm,"[""siz_width""  ""siz_height""  ""min_qty""]",4,siz_width=직접입력(가로·세로 실측) | siz_height=직접입력(가로·세로 실측) | 수량=주문수량(화면 요소 아님),축=화면 등록과 일치
+23,POSTER_MESH_PRINT,포스터_메쉬_출력가,가로 / 세로 | 600mm | 800mm | 1000mm | 1200mm,"[""siz_width""  ""siz_height""  ""min_qty""]",4,siz_width=직접입력(가로·세로 실측) | siz_height=직접입력(가로·세로 실측) | 수량=주문수량(화면 요소 아님),축=화면 등록과 일치
+24,POSTER_PLACARD_PRINT,포스터_일반현수막_출력가,가로 / 세로 | 900mm | 1000mm | 1200mm | 1500mm | 1750mm,"[""siz_width""  ""siz_height""  ""min_qty""]",1,siz_width=직접입력(가로·세로 실측) | siz_height=직접입력(가로·세로 실측) | 수량=주문수량(화면 요소 아님),축=화면 등록과 일치
+25,POSTER_MESHPLACARD_PRINT,포스터_메쉬현수막_출력가,가로 / 세로 | 900mm | 1000mm | 1200mm,"[""siz_width""  ""siz_height""  ""min_qty""]",1,siz_width=직접입력(가로·세로 실측) | siz_height=직접입력(가로·세로 실측) | 수량=주문수량(화면 요소 아님),축=화면 등록과 일치
+26,POSTER_LINEN_FINISHING,포스터_린넨_가공가,사이즈 / 가공옵션 | A3 / A2 / A1,"[""opt_cd""  ""min_qty""]",1,옵션그룹: 등록 1/1상품 | 수량=주문수량(화면 요소 아님),축=화면 등록과 일치
+27,POSTER_PLACARD_FINISHING,포스터_현수막_가공가,가공옵션명,"[""opt_cd""  ""min_qty""  ""opt_grp:OPT_000003""]",1,옵션그룹: 등록 1/1상품 | 수량=주문수량(화면 요소 아님),축=화면 등록과 일치
+28,POSTER_PLACARD_ADDON,포스터_현수막_부자재,추가옵션명,"[""opt_cd""  ""min_qty""  ""opt_grp:OPT_000004""]",1,옵션그룹: 등록 1/1상품 | 수량=주문수량(화면 요소 아님),축=화면 등록과 일치
+29,POSTER_HANGINGCANVAS_ADDON,포스터_캔버스행잉_부자재,사이즈 / 추가옵션 | A4 | A3 | A2,"[""opt_cd""  ""siz_cd""  ""min_qty""  ""opt_grp:OPT_000283""]",1,옵션그룹: 등록 1/1상품 | 사이즈: 등록 1/1상품 | 수량=주문수량(화면 요소 아님),축=화면 등록과 일치
+30,POSTER_HANGINGLINEN_ADDON,포스터_린넨우드봉_부자재,사이즈 / 추가옵션 | A4 | A3 | A2,"[""opt_cd""  ""siz_cd""  ""min_qty""  ""opt_grp:OPT_000266""]",1,옵션그룹: 등록 1/1상품 | 사이즈: 등록 1/1상품 | 수량=주문수량(화면 요소 아님),축=화면 등록과 일치
+31,POSTER_FORMBOARD_PRINT,포스터_폼보드_출력가,사이즈 / 옵션명 | A3 | A2 | A1,"[""opt_cd""  ""siz_cd""  ""min_qty""]",1,옵션그룹: 등록 1/1상품 | 사이즈: 등록 1/1상품 | 수량=주문수량(화면 요소 아님),축=화면 등록과 일치
+32,POSTER_FOAMEX_PRINT,포스터_포맥스_출력가,사이즈 / 옵션명 | A3 | A2 | A1,"[""opt_cd""  ""siz_cd""  ""min_qty""]",1,옵션그룹: 등록 1/1상품 | 사이즈: 등록 1/1상품 | 수량=주문수량(화면 요소 아님),축=화면 등록과 일치
+33,POSTER_WOODPANEL_PRINT,포스터_나무판넬_출력가,사이즈 / 수량 | A3 | A2 | A1,"[""siz_cd""  ""min_qty""]",1,사이즈: 등록 1/1상품 | 수량=주문수량(화면 요소 아님),축=화면 등록과 일치
+34,POSTER_LEATHERPANEL_PRINT,포스터_레더아트액자_출력가,사이즈 / 수량 | 5x5 | 5x7 | 8x8 | 8x10 | A4 | A3,"[""siz_cd""  ""min_qty""]",1,사이즈: 등록 1/1상품 | 수량=주문수량(화면 요소 아님),축=화면 등록과 일치
+35,POSTER_HANGINGSCROLL_PRINT,포스터_족자_출력가,사이즈 / 수량 | A3 | A2 | A1 | 300*600 | 900*1200,"[""siz_cd""  ""min_qty""]",1,사이즈: 등록 1/1상품 | 수량=주문수량(화면 요소 아님),축=화면 등록과 일치
+36,POSTER_HANGINGCANVAS_PRINT,포스터_캔버스행잉_제작가,사이즈 / 수량 | A4 | A3 | A2,"[""siz_width""  ""siz_height""  ""siz_cd""  ""min_qty""]",1,siz_width=직접입력(가로·세로 실측) | siz_height=직접입력(가로·세로 실측) | 사이즈: 등록 1/1상품 | 수량=주문수량(화면 요소 아님),축=화면 등록과 일치
+37,POSTER_HANGINGLINEN_PRINT,포스터_린넨우드봉_제작가,사이즈 / 수량 | A4 | A3 | A2,"[""siz_cd""  ""min_qty""]",1,사이즈: 등록 1/1상품 | 수량=주문수량(화면 요소 아님),축=화면 등록과 일치
+38,POSTER_PETBANNER_PRINT,포스터_PET배너_제작가,사이즈 / 수량 | 600x1800 mm,"[""siz_cd""  ""min_qty""]",1,사이즈: 등록 1/1상품 | 수량=주문수량(화면 요소 아님),축=화면 등록과 일치
+39,POSTER_MESHBANNER_PRINT,포스터_메쉬배너_제작가,,"[""siz_cd""  ""min_qty""]",1,사이즈: 등록 1/1상품 | 수량=주문수량(화면 요소 아님),축=화면 등록과 일치
+40,POSTER_SHEETCUT_FINAL,포스터_시트커팅_제작가,사이즈 / 소재 | A4 | A3 | A2,"[""siz_cd"" ""min_qty""]",2,사이즈: 등록 2/2상품 | 수량=주문수량(화면 요소 아님),축=화면 등록과 일치
+41,POSTER_ACRYLICSTICKER_FINAL,포스터_아크릴스티커_제작가,사이즈 / 소재 | 290 x 90 mm | 290 x 190 mm | 390 x 290 mm | 590 x 390 mm,"[""siz_cd"" ""min_qty""]",2,사이즈: 등록 2/2상품 | 수량=주문수량(화면 요소 아님),축=화면 등록과 일치
+42,POSTER_MINIBOARD_FINAL,포스터_미니스탠딩보드_제작가,사이즈 / 수량 | A5 | A4 | A3,"[""siz_cd""  ""min_qty""]",1,사이즈: 등록 1/1상품 | 수량=주문수량(화면 요소 아님),축=화면 등록과 일치
+43,POSTER_MINIBANNER_FINAL,포스터_미니배너_제작가,사이즈 / 수량 | 150x300 mm | 180x420 mm,"[""siz_cd""  ""min_qty""]",1,사이즈: 등록 1/1상품 | 수량=주문수량(화면 요소 아님),축=화면 등록과 일치
