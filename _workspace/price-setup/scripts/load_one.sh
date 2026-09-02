@@ -17,8 +17,10 @@ print(db.q(\"SELECT count(*) FROM t_prc_component_prices WHERE comp_cd='$CODE'\"
 echo "[$CODE] 표 ${WANT}행 · 라이브 현재 ${HAVE}행"
 [ "$HAVE" != "0" ] && { echo "[$CODE] 이미 적재됨 — 건너뜀"; exit 0; }
 
+# 앞선 조작이 iframe 안에 머물러 있을 수 있다 — 반드시 최상위로 돌아온 뒤 이동한다.
+$B frame main >/dev/null 2>&1
 $B goto "https://huni-admin.printly.co.kr/admin/price-viewer/comp/$CODE/edit/" >/dev/null 2>&1
-sleep 3
+sleep 5
 
 # 표를 그리드에 얹는다. 적용일 칸은 비워 두고 화면의 「적용일 일괄 설정」이 오늘로 채우게 한다.
 python3 - "$CSV" > $SP/load.js <<'PY'
@@ -69,7 +71,7 @@ sys.path.insert(0, '/Users/innojini/Dev/HuniWeb/.claude/worktrees/t34/_workspace
 import db
 code, path = sys.argv[1], sys.argv[2]
 rows = list(csv.DictReader(open(path)))
-key_cols = [c for c in rows[0] if c not in ('적용일', '단가', '비고')]
+key_cols = [c for c in rows[0] if c not in ('적용일', '단가', '합가', '고정', '비고')]
 COL = {'자재': 'mat_cd', '사이즈': 'siz_cd', '사이즈가로(이하)': 'siz_width',
        '사이즈세로(이하)': 'siz_height', '수량(이상)': 'min_qty', '옵션코드': 'opt_cd',
        '공정': 'proc_cd', '묶음수': 'bdl_qty', '판형사이즈': 'plt_siz_cd',
@@ -90,7 +92,8 @@ def norm(v):
         return (v or '').strip()
 
 
-mine = {tuple(norm(r[c]) for c in key_cols): float(r['단가']) for r in rows}
+pcol = next(c for c in rows[0] if c in ('단가', '합가', '고정'))
+mine = {tuple(norm(r[c]) for c in key_cols): float(r[pcol]) for r in rows}
 livn = {tuple(norm(x) for x in k): v for k, v in live.items()}
 miss = [k for k in mine if k not in livn]
 extra = [k for k in livn if k not in mine]

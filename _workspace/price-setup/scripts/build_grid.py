@@ -28,6 +28,7 @@ def mm(v):
         return None
 
 
+PRICE_TITLE = {'PRICE_TYPE.01': '단가', 'PRICE_TYPE.02': '합가', 'PRICE_TYPE.03': '고정'}
 LABEL = {'siz_cd': '사이즈', 'plt_siz_cd': '판형사이즈', 'print_opt_cd': '인쇄옵션',
          'mat_cd': '자재', 'proc_cd': '공정', 'opt_cd': '옵션코드',
          'coat_side_cnt': '코팅면수', 'spot_side_cnt': '별색면수', 'bdl_qty': '묶음수',
@@ -81,12 +82,14 @@ def main():
     # 컬럼은 그 그릇의 use_dims 순서를 그대로 따른다(화면 그리드가 그렇게 만들어진다).
     spec = {r['new_code']: r for r in csv.DictReader(open(f'{BASE}/m2/registration-spec-43.csv'))}
     dims = [d for d in spec[code]['use_dims_to_pick'].split(',') if d]
+    sp_prc = spec[code]['prc_typ_cd']
     rows = wh_grid(ws, g, mat_cd, min_qty, note, dims)
 
     out = f'{BASE}/grid/{code}.csv'
     with open(out, 'w', newline='') as f:
         w = csv.writer(f)
-        w.writerow(['적용일'] + [LABEL[d] for d in dims] + ['단가', '비고'])
+        w.writerow(['적용일'] + [LABEL[d] for d in dims]
+                    + [PRICE_TITLE.get(sp_prc, '단가'), '비고'])
         w.writerows(rows)
     prices = [float(r[-2]) for r in rows]
     print(f'{code}: {len(rows)}행 -> {out}')

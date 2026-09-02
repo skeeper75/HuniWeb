@@ -1,0 +1,23 @@
+new_code,shape,col_axis,row_axis,note
+POSTER_LINEN_FINISHING,vlist,opt_cd,,사이즈 공용(REQ-025) — 머리의 「A3 / A2 / A1」은 값이 아니라 공용 표시
+POSTER_PLACARD_FINISHING,vlist,opt_cd,,세로 목록
+POSTER_PLACARD_ADDON,vlist,opt_cd,,세로 목록
+ACRYLIC_CARABINER_FINAL,vlist,siz_cd,,머리 「옵션」이지만 실제 축은 사이즈
+STK_CUT_PRINT,colrow,siz_cd,min_qty,머리 「옵션/ 제작수량」의 옵션은 사이즈다
+STK_CUT_CLEAR_PRINT,colrow,siz_cd,min_qty,
+STK_CUT_LARGE_PRINT,colrow,siz_cd,min_qty,
+STK_TATTOO_SETUP,single,,min_qty,수량만(REQ-023) — 값 하나
+STK_TATTOO_PRINT,colrow,siz_cd,min_qty,
+POSTER_WOODPANEL_PRINT,colrow,siz_cd,min_qty,
+POSTER_FORMBOARD_PRINT,colrow,siz_cd,opt_cd,
+POSTER_FOAMEX_PRINT,colrow,siz_cd,opt_cd,
+POSTER_HANGINGSCROLL_PRINT,colrow,siz_cd,min_qty,
+POSTER_PETBANNER_PRINT,colrow,siz_cd,min_qty,
+POSTER_MESHBANNER_PRINT,colrow,siz_cd,min_qty,권위 코드 오기 — D-3 정정분
+POSTER_MINIBANNER_FINAL,colrow,siz_cd,min_qty,
+POSTER_SHEETCUT_FINAL,colrow,siz_cd,mat_cd,
+POSTER_ACRYLICSTICKER_FINAL,colrow,siz_cd,mat_cd,
+POSTER_HANGINGCANVAS_ADDON,colrow,siz_cd,opt_cd,
+POSTER_HANGINGLINEN_ADDON,colrow,siz_cd,opt_cd,
+ACRYLIC_TOTAL_FINISHING,acryl3col,opt_cd,,상품/옵션명/값 3열
+STK_KISSCUT_PRINT,kisscut,siz_cd,min_qty,규격x소재 2단 머리 + 수량 행
