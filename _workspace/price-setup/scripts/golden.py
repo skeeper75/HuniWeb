@@ -33,6 +33,7 @@ from catalog import price_views as PV, pricing as P              # noqa: E402
 
 BASE = f'{WT}/_workspace/price-setup'
 DISCOUNT_QTY = 300
+TAG = sys.argv[1] if len(sys.argv) > 1 else 'before'
 
 
 def pick(options, idx=0):
@@ -143,7 +144,7 @@ def main():
                 failed.append((prd, f'{label} 계산 실패: {e}'))
 
     stamp = datetime.datetime.now(datetime.timezone.utc).isoformat(timespec='seconds')
-    path = f'{BASE}/golden/golden-before.csv'
+    path = f'{BASE}/golden/golden-{TAG}.csv'
     with open(path, 'w', newline='') as f:
         w = csv.DictWriter(f, fieldnames=list(rows[0].keys()) + ['captured_at_utc'])
         w.writeheader()
