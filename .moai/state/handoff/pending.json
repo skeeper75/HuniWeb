@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "spec_id": "SPEC-PRICECOMP-001",
+  "phase": "run",
+  "saved_at": "2026-09-03T02:27:43.431069+09:00",
+  "conversation_language": "ko",
+  "directives": {
+    "ultrathink": false,
+    "ultracode": false,
+    "goal": ""
+  },
+  "body": "Block 0: moai cc -w t34\n\nultrathink. SPEC-PRICECOMP-001 run 진입 — 카드 t34 · M4 정지점에서 이어받는다.\napplied lessons: webadmin-formula-inline-replace-single-save, huni-price-write-via-screen-ui-only, price-grid-orientation-authority-260902, widget-screen-is-truth-260823\nsource_session_id: \u003cnot-available — /moai session register 로 backfill\u003e\n\n전제 검증:\n0) git rev-parse --show-toplevel → 끝이 .claude/worktrees/t34 · 브랜치 WT-price-comp-rebuild · HEAD e37d43b9(≥ 540eb29c)\n1) 라이브 SELECT: 새 그릇 43(배선 42 · 미배선 1 = ACRYLIC_MIRROR3T_PRINT 의도적 고아) · 새 그릇을 보는 공식 47 · 상품 56 · 의도치 않은 옛+새 혼재 0\n2) progress.md §E.2 「트랙 A · M4 마감 정리」 절을 먼저 읽는다 — 순 교정 3 / 일시 불일치 2 / 코드만 변경 2 · 확인 항목 4 · 회신 대기 6 · M6 판단 5 · 화면 조작 누계 28\n3) 정지 사유 확인: D-16(메쉬 공용배선)과 M5 착수는 지니 결정 대기. 결정 전까지 라이브 쓰기 0\n\n실행: /moai run SPEC-PRICECOMP-001 — 지니 결정을 먼저 받는다. ① D-16: 메쉬현수막 가공·부자재를 일반현수막 그릇에 공용 배선하면 옵션 코드가 그룹마다 달라(메쉬 OPV_001000~003/OPV_000425~426 vs 일반 OPV_000006~011/OPV_000013~016) 전부 0원이 된다 → 현행 유지 권장. ② 승인 시 M5(골든 61 재산출 + 위젯 진단). [HARD] COMP_STK_PRINT 사용중지 금지(회신 5번 대기) · 라이브 등록·수정은 webadmin 실화면만 · 조작 전후 스크린샷 · 공식 인라인은 「새 행 추가 + 옛 행 DELETE」 1회 저장.\n\n후속: M5 통과 후 M6(옛 그릇 use_yn=N · 판단 항목 5건) → 트랙 B.\n"
+}
