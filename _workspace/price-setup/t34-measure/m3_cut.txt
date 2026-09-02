@@ -1,0 +1,11 @@
+$ psql <DATABASE_URL> -c "select pc.comp_cd, pc.comp_nm, pc.use_yn, (select count(*) from t_prc_component_prices cp where cp.comp_cd=pc.comp_cd) as price_row_cnt, (select count(*) from t_prc_formula_components fc where fc.comp_cd=pc.comp_cd) as formula_cnt from t_prc_price_components pc where pc.comp_cd like 'COMP_CUT%' order by pc.comp_cd;"
+
+        comp_cd         |               comp_nm               | use_yn | price_row_cnt | formula_cnt 
+------------------------+-------------------------------------+--------+---------------+-------------
+ COMP_CUT_FULL_DIECUT   | 커팅 완제품가 완칼(모양엽서·라벨택) | Y      |            72 |           3
+ COMP_CUT_FULL_PERF_1H6 | 커팅 완제품가 완칼+타공1구          | Y      |             9 |           0
+ COMP_CUT_FULL_PERF_2H6 | 커팅 완제품가 완칼+타공2구          | Y      |             9 |           0
+ COMP_CUT_PERF_1H6      | 타공비 (6mm)                        | Y      |            18 |           5
+ COMP_CUT_PERF_CAL      | 캘린더 타공가공비 (타공+끈·합가)    | Y      |             5 |           2
+(5 rows)
+

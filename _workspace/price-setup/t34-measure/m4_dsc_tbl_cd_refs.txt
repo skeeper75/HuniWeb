@@ -1,0 +1,9 @@
+$ psql <DATABASE_URL> -c "select table_name, column_name from information_schema.columns where table_schema='public' and column_name='dsc_tbl_cd' order by table_name;"
+
+          table_name           | column_name 
+-------------------------------+-------------
+ t_dsc_discount_details        | dsc_tbl_cd
+ t_dsc_discount_tables         | dsc_tbl_cd
+ t_prd_product_discount_tables | dsc_tbl_cd
+(3 rows)
+

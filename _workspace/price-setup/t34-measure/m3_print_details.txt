@@ -1,0 +1,9 @@
+$ psql <DATABASE_URL> -c "select comp_cd, comp_nm, use_dims, prc_typ_cd from t_prc_price_components where comp_cd in ('COMP_PRINT_DIGITAL_S1','COMP_PRINT_DIGITAL_S2','COMP_PRINT_SPOT_WHITE_S1');"
+
+         comp_cd          |   comp_nm    |                                   use_dims                                    |  prc_typ_cd   
+--------------------------+--------------+-------------------------------------------------------------------------------+---------------
+ COMP_PRINT_SPOT_WHITE_S1 | 별색인쇄비   | ["plt_siz_cd", "proc_cd", "spot_side_cnt", "min_qty", "proc_grp:PROC_000007"] | PRICE_TYPE.01
+ COMP_PRINT_DIGITAL_S2    | 디지털인쇄비 | ["proc_cd", "plt_siz_cd", "print_opt_cd", "min_qty", "proc_grp:PROC_000001"]  | PRICE_TYPE.01
+ COMP_PRINT_DIGITAL_S1    | 디지털인쇄   | ["proc_cd", "plt_siz_cd", "print_opt_cd", "min_qty", "proc_grp:PROC_000001"]  | PRICE_TYPE.01
+(3 rows)
+

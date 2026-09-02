@@ -1,0 +1,8 @@
+$ psql <DATABASE_URL> -c "select pc.comp_cd, pc.comp_nm, pc.use_yn, (select count(*) from t_prc_component_prices cp where cp.comp_cd=pc.comp_cd) as price_row_cnt, (select count(*) from t_prc_formula_components fc where fc.comp_cd=pc.comp_cd) as formula_cnt from t_prc_price_components pc where pc.comp_cd like 'COMP_PRINT_DIGITAL%' order by pc.comp_cd;"
+
+        comp_cd        |   comp_nm    | use_yn | price_row_cnt | formula_cnt 
+-----------------------+--------------+--------+---------------+-------------
+ COMP_PRINT_DIGITAL_S1 | 디지털인쇄   | Y      |          1049 |          14
+ COMP_PRINT_DIGITAL_S2 | 디지털인쇄비 | Y      |           212 |           0
+(2 rows)
+

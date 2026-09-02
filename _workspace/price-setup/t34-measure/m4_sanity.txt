@@ -1,0 +1,7 @@
+$ psql <DATABASE_URL> -c "select count(*) as total_rows, count(comp_cd) as rows_with_comp_cd, count(distinct comp_cd) as distinct_comp_cds from t_prd_product_discount_tables;"
+
+ total_rows | rows_with_comp_cd | distinct_comp_cds 
+------------+-------------------+-------------------
+        126 |               126 |                 2
+(1 row)
+

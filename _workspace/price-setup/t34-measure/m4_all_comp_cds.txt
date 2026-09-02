@@ -1,0 +1,8 @@
+$ psql <DATABASE_URL> -c "select comp_cd, count(*), array_agg(distinct dsc_tbl_cd) as dsc_tbl_cds from t_prd_product_discount_tables group by comp_cd order by comp_cd;"
+
+      comp_cd       | count |                                               dsc_tbl_cds                                               
+--------------------+-------+---------------------------------------------------------------------------------------------------------
+                    |   125 | {DSC_ACRCARA_QTY,DSC_ACR_QTY,DSC_FABRIC_QTY,DSC_GOODSA_QTY,DSC_GOODSB_QTY,DSC_SQUISHY_QTY,DSC_STAT_QTY}
+ COMP_ACRYL_CLEAR3T |     1 | {DSC_ACR_QTY}
+(2 rows)
+

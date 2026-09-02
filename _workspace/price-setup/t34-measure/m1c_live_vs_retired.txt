@@ -1,0 +1,8 @@
+$ psql <DATABASE_URL> -c "select p.use_yn, count(distinct pf.prd_cd) as cnt from t_prd_product_price_formulas pf join t_prc_price_formulas f on f.frm_cd=pf.frm_cd join t_prd_products p on p.prd_cd=pf.prd_cd where f.frm_cd like 'PRF_DGP%' group by p.use_yn order by p.use_yn;"
+
+ use_yn | cnt 
+--------+-----
+ N      |   3
+ Y      |  32
+(2 rows)
+

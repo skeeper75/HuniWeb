@@ -1,0 +1,82 @@
+$ psql <DATABASE_URL> -c "select table_name, column_name, data_type from information_schema.columns where table_schema='public' and table_name in ('t_prd_product_price_formulas','t_prc_price_formulas','t_prc_formula_components','t_prc_price_components','t_prc_component_prices','t_prd_products') order by table_name, ordinal_position;"
+
+          table_name          |     column_name     |          data_type          
+------------------------------+---------------------+-----------------------------
+ t_prc_component_prices       | comp_price_id       | bigint
+ t_prc_component_prices       | comp_cd             | character varying
+ t_prc_component_prices       | apply_ymd           | character varying
+ t_prc_component_prices       | siz_cd              | character varying
+ t_prc_component_prices       | clr_cd              | character varying
+ t_prc_component_prices       | mat_cd              | character varying
+ t_prc_component_prices       | coat_side_cnt       | integer
+ t_prc_component_prices       | bdl_qty             | integer
+ t_prc_component_prices       | min_qty             | integer
+ t_prc_component_prices       | unit_price          | numeric
+ t_prc_component_prices       | note                | character varying
+ t_prc_component_prices       | reg_dt              | timestamp without time zone
+ t_prc_component_prices       | upd_dt              | timestamp without time zone
+ t_prc_component_prices       | proc_cd             | character varying
+ t_prc_component_prices       | opt_cd              | character varying
+ t_prc_component_prices       | dim_vals            | jsonb
+ t_prc_component_prices       | print_opt_cd        | character varying
+ t_prc_component_prices       | plt_siz_cd          | character varying
+ t_prc_component_prices       | siz_width           | numeric
+ t_prc_component_prices       | siz_height          | numeric
+ t_prc_component_prices       | spot_side_cnt       | integer
+ t_prc_component_prices       | page_cnt            | integer
+ t_prc_formula_components     | frm_cd              | character varying
+ t_prc_formula_components     | comp_cd             | character varying
+ t_prc_formula_components     | disp_seq            | integer
+ t_prc_formula_components     | addtn_yn            | character
+ t_prc_formula_components     | reg_dt              | timestamp without time zone
+ t_prc_formula_components     | upd_dt              | timestamp without time zone
+ t_prc_price_components       | comp_cd             | character varying
+ t_prc_price_components       | comp_nm             | character varying
+ t_prc_price_components       | comp_typ_cd         | character varying
+ t_prc_price_components       | note                | character varying
+ t_prc_price_components       | use_yn              | character
+ t_prc_price_components       | reg_dt              | timestamp without time zone
+ t_prc_price_components       | upd_dt              | timestamp without time zone
+ t_prc_price_components       | prc_typ_cd          | character varying
+ t_prc_price_components       | use_dims            | jsonb
+ t_prc_price_components       | del_yn              | character
+ t_prc_price_components       | del_dt              | timestamp without time zone
+ t_prc_price_formulas         | frm_cd              | character varying
+ t_prc_price_formulas         | frm_nm              | character varying
+ t_prc_price_formulas         | note                | character varying
+ t_prc_price_formulas         | use_yn              | character
+ t_prc_price_formulas         | reg_dt              | timestamp without time zone
+ t_prc_price_formulas         | upd_dt              | timestamp without time zone
+ t_prd_product_price_formulas | prd_cd              | character varying
+ t_prd_product_price_formulas | frm_cd              | character varying
+ t_prd_product_price_formulas | apply_bgn_ymd       | character varying
+ t_prd_product_price_formulas | note                | character varying
+ t_prd_product_price_formulas | reg_dt              | timestamp without time zone
+ t_prd_product_price_formulas | upd_dt              | timestamp without time zone
+ t_prd_products               | prd_cd              | character varying
+ t_prd_products               | MES_ITEM_CD         | character varying
+ t_prd_products               | prd_nm              | character varying
+ t_prd_products               | prd_typ_cd          | character varying
+ t_prd_products               | semi_role_cd        | character varying
+ t_prd_products               | nonspec_yn          | character
+ t_prd_products               | nonspec_width_min   | numeric
+ t_prd_products               | nonspec_width_max   | numeric
+ t_prd_products               | nonspec_height_min  | numeric
+ t_prd_products               | nonspec_height_max  | numeric
+ t_prd_products               | file_upload_yn      | character
+ t_prd_products               | editor_yn           | character
+ t_prd_products               | min_qty             | integer
+ t_prd_products               | max_qty             | integer
+ t_prd_products               | qty_incr            | integer
+ t_prd_products               | dflt_qty            | integer
+ t_prd_products               | use_yn              | character
+ t_prd_products               | reg_dt              | timestamp without time zone
+ t_prd_products               | upd_dt              | timestamp without time zone
+ t_prd_products               | qty_unit_typ_cd     | character varying
+ t_prd_products               | del_yn              | character
+ t_prd_products               | del_dt              | timestamp without time zone
+ t_prd_products               | nonspec_width_incr  | numeric
+ t_prd_products               | nonspec_height_incr | numeric
+ t_prd_products               | soldout_yn          | character
+(76 rows)
+

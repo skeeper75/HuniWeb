@@ -1,0 +1,17 @@
+$ psql <DATABASE_URL> -c "select table_name from information_schema.tables where table_schema='public' and (table_name like 't_prc%' or table_name like 't_prd_product%formula%' or table_name like '%formula%');"
+
+                        table_name                        
+----------------------------------------------------------
+ bak_t_prd_product_price_formulas_tteokme_20260625_153807
+ t_prc_price_components
+ t_prc_price_formulas
+ t_prd_product_price_formulas
+ t_prc_formula_components
+ t_prc_component_prices
+ bak_t_prd_product_price_formulas_setbuild_20260701_0134
+ bak_t_prc_price_formulas_setbuild_20260701_0134
+ bak_t_prc_formula_components_setbuild_20260701_0134
+ bak_t_prd_product_price_formulas_setbuild_20260701_0204
+ z_bak_mcmerge_formula_components
+(11 rows)
+

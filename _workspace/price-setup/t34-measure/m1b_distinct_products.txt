@@ -1,0 +1,7 @@
+$ psql <DATABASE_URL> -c "select count(distinct pf.prd_cd) as distinct_products from t_prd_product_price_formulas pf join t_prc_price_formulas f on f.frm_cd=pf.frm_cd where f.frm_cd like 'PRF_DGP%';"
+
+ distinct_products 
+-------------------
+                35
+(1 row)
+

@@ -1,0 +1,13 @@
+$ psql <DATABASE_URL> -c "select column_name, data_type from information_schema.columns where table_schema='public' and table_name='t_dsc_discount_tables' order by ordinal_position;"
+
+ column_name |          data_type          
+-------------+-----------------------------
+ dsc_tbl_cd  | character varying
+ dsc_tbl_nm  | character varying
+ note        | character varying
+ use_yn      | character
+ reg_dt      | timestamp without time zone
+ upd_dt      | timestamp without time zone
+ dsc_typ_cd  | character varying
+(7 rows)
+

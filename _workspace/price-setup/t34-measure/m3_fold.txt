@@ -1,0 +1,13 @@
+$ psql <DATABASE_URL> -c "select pc.comp_cd, pc.comp_nm, pc.use_yn, (select count(*) from t_prc_component_prices cp where cp.comp_cd=pc.comp_cd) as price_row_cnt, (select count(*) from t_prc_formula_components fc where fc.comp_cd=pc.comp_cd) as formula_cnt from t_prc_price_components pc where pc.comp_cd like 'COMP_FOLD%' order by pc.comp_cd;"
+
+       comp_cd        |          comp_nm          | use_yn | price_row_cnt | formula_cnt 
+----------------------+---------------------------+--------+---------------+-------------
+ COMP_FOLD_CARD_2H    | 접지비 카드 2단           | N      |            48 |           1
+ COMP_FOLD_CARD_3H    | 접지비 카드 3단           | N      |            48 |           0
+ COMP_FOLD_CARD_6CR   | 접지비 카드 6크리즈       | Y      |            96 |           1
+ COMP_FOLD_LEAF_3FOLD | 접지비 리플렛 3단         | Y      |           144 |           2
+ COMP_FOLD_LEAF_4ACC  | 접지비 리플렛 4단아코디언 | Y      |            48 |           2
+ COMP_FOLD_LEAF_4GATE | 접지비 리플렛 4단게이트   | Y      |            48 |           2
+ COMP_FOLD_LEAF_HALF  | 접지비 리플렛 반접지      | Y      |           144 |           2
+(7 rows)
+

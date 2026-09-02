@@ -1,0 +1,11 @@
+$ psql <DATABASE_URL> -c "select pc.comp_cd, pc.comp_nm, pc.use_yn from t_prc_price_components pc where pc.comp_cd like '%WIDE%' or pc.comp_nm like '%와이드%' or pc.comp_nm like '%3절%' or pc.comp_nm like '%대형%' order by pc.comp_cd;"
+
+           comp_cd            |         comp_nm          | use_yn 
+------------------------------+--------------------------+--------
+ COMP_EMBOSS_PROC_LARGE_STD   | 형압 가공비(대형)        | Y
+ COMP_EMBOSS_SETUP_LARGE      | 형압 동판셋업비(대형)    | Y
+ COMP_FOIL_PROC_LARGE_SPECIAL | 박 가공비(대형·특수박)   | Y
+ COMP_FOIL_PROC_LARGE_STD     | 박 가공비(대형·일반박)   | Y
+ COMP_FOIL_SETUP_LARGE        | 박·형압 동판셋업비(대형) | Y
+(5 rows)
+

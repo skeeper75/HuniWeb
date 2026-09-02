@@ -1,0 +1,15 @@
+$ psql <DATABASE_URL> -c "select comp_cd, comp_nm, use_yn, use_dims from t_prc_price_components where comp_nm like '%코팅%' order by comp_cd;"
+
+           comp_cd            |                    comp_nm                    | use_yn |                                   use_dims                                    
+------------------------------+-----------------------------------------------+--------+-------------------------------------------------------------------------------
+ COMP_COAT_GLOSSY             | 유광코팅비                                    | Y      | ["proc_cd", "plt_siz_cd", "coat_side_cnt", "min_qty", "proc_grp:PROC_000013"]
+ COMP_COAT_MATTE              | 무광코팅비                                    | Y      | ["proc_cd", "plt_siz_cd", "coat_side_cnt", "min_qty", "proc_grp:PROC_000013"]
+ COMP_NAMECARD_COAT           | 코팅명함 완제품가(용지포함)                   | Y      | ["mat_cd", "print_opt_cd", "min_qty"]
+ COMP_NAMECARD_COAT_S1        | 코팅명함 완제품가 단면(용지포함)              | N      | ["mat_cd", "min_qty", "print_opt_cd"]
+ COMP_NAMECARD_COAT_S2        | 코팅명함 완제품가 양면(용지포함)              | N      | ["mat_cd", "min_qty", "print_opt_cd"]
+ COMP_NAMECARD_WHITE_S1W_CL   | 화이트인쇄명함 완제품가 단면·코팅(용지포함)   | N      | ["print_opt_cd", "opt_cd", "min_qty", "opt_grp:OPT_000081"]
+ COMP_NAMECARD_WHITE_S1W_NOCL | 화이트인쇄명함 완제품가 단면·무코팅(용지포함) | N      | ["print_opt_cd", "opt_cd", "min_qty", "opt_grp:OPT_000081"]
+ COMP_NAMECARD_WHITE_S2W_CL   | 화이트인쇄명함 완제품가 양면·코팅(용지포함)   | N      | ["print_opt_cd", "opt_cd", "min_qty", "opt_grp:OPT_000081"]
+ COMP_NAMECARD_WHITE_S2W_NOCL | 화이트인쇄명함 완제품가 양면·무코팅(용지포함) | N      | ["print_opt_cd", "opt_cd", "min_qty", "opt_grp:OPT_000081"]
+(9 rows)
+

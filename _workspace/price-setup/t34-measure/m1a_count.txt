@@ -1,0 +1,7 @@
+$ psql <DATABASE_URL> -c "select count(*) as cnt from t_prc_price_formulas where frm_cd like 'PRF_DGP%';"
+
+ cnt 
+-----
+  13
+(1 row)
+

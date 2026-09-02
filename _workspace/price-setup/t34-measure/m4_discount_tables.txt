@@ -1,0 +1,9 @@
+$ psql <DATABASE_URL> -c "select table_name from information_schema.tables where table_schema='public' and table_name like '%dsc%';"
+
+         table_name         
+----------------------------
+ t_dsc_discount_details
+ t_dsc_discount_tables
+ t_dsc_grade_discount_rates
+(3 rows)
+
