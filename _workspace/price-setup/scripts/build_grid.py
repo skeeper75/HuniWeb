@@ -29,17 +29,23 @@ def mm(v):
 
 
 def wh_grid(ws, g, mat_cd, min_qty, note):
-    """가로 × 세로 격자 → 행 목록. 머리 행 = 가로, 라벨 열 = 세로."""
+    """가로 × 세로 격자 → 행 목록.
+
+    **라벨 열 = 가로, 머리 행 = 세로.** 처음엔 반대로 읽었다가 실측으로 바로잡았다 —
+    포스터 인화지 격자는 13행(600~3000mm) × 4열(600~1200)인데 라이브의
+    `siz_width` 가 13종·`siz_height` 가 4종이다. 3000mm 를 담을 수 있는 축은
+    행뿐이므로 행이 가로다. 아크릴 격자는 거의 대칭이라 이 방향이 드러나지 않았다.
+    """
     r0, r1 = int(g['grid_head_row']), int(g['grid_last_row'])
     c0, c1 = int(g['grid_col_from']), int(g['grid_col_to'])
-    widths = [(c, mm(ws.cell(r0, c).value)) for c in range(c0 + 1, c1 + 1)]
-    widths = [(c, w) for c, w in widths if w is not None]
+    heights = [(c, mm(ws.cell(r0, c).value)) for c in range(c0 + 1, c1 + 1)]
+    heights = [(c, h) for c, h in heights if h is not None]
     rows = []
     for r in range(r0 + 1, r1 + 1):
-        h = mm(ws.cell(r, c0).value)
-        if h is None:
+        w = mm(ws.cell(r, c0).value)
+        if w is None:
             continue
-        for c, w in widths:
+        for c, h in heights:
             v = ws.cell(r, c).value
             if not isinstance(v, (int, float)) or isinstance(v, bool):
                 continue
