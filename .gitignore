@@ -263,3 +263,6 @@ docs/figma/*.fig
 
 # 별도 git repo (webadmin 소스 — embedded gitlink 방지·이 repo서 미추적)
 raw/webadmin/
+
+# 하위 디렉터리에서 실행할 때 훅이 만드는 상태 캐시(작업 산출물 아님)
+_workspace/**/.moai/
