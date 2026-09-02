@@ -7,7 +7,7 @@ STK_CUT_PRINT,colrow,siz_cd,min_qty,머리 「옵션/ 제작수량」의 옵션�
 STK_CUT_CLEAR_PRINT,colrow,siz_cd,min_qty,
 STK_CUT_LARGE_PRINT,colrow,siz_cd,min_qty,
 STK_TATTOO_SETUP,single,,min_qty,수량만(REQ-023) — 값 하나
-STK_TATTOO_PRINT,colrow,siz_cd,min_qty,
+STK_TATTOO_PRINT,manual,,,D-12 수기 확정표(세트단가) — 생성기 대상 아님
 POSTER_WOODPANEL_PRINT,colrow,siz_cd,min_qty,
 POSTER_FORMBOARD_PRINT,colrow,siz_cd,opt_cd,
 POSTER_FOAMEX_PRINT,colrow,siz_cd,opt_cd,

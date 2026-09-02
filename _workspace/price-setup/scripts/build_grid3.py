@@ -147,13 +147,43 @@ def cells_vlist(ws, r0, r1, c0, c1):
 
 
 def cells_acryl3col(ws, r0, r1, c0, c1):
-    """상품 / 옵션명 / 값 — 옵션명은 2열, 값은 3열. 상품 칸은 병합돼 비어 있을 수 있다."""
-    out = []
+    """상품 / 옵션명 / 값 — 상품 칸은 병합돼 비어 있으니 마지막 값을 이어서 쓴다.
+
+    상품 칸이 필요한 이유: 「일자핀」·「2구자석」·「투명」은 라이브에 상품별로 각각
+    있어 이름만으로는 코드를 가릴 수 없다(아크릴명찰의 일자핀 = OPV_001025).
+    """
+    out, prod = [], ''
     for r in range(r0, r1 + 1):
+        p = norm(ws.cell(r, c0).value)
+        if p:
+            prod = p
         lab = norm(ws.cell(r, c0 + 1).value)
         v = ws.cell(r, c0 + 2).value
         if lab and isinstance(v, (int, float)) and not isinstance(v, bool):
-            out.append((lab, '1', v))
+            out.append((lab, '1', v, prod))
+    return out
+
+
+def product_opts(prod_label):
+    """상품 이름 → 그 상품에 등록된 {정규화이름: {코드}}. 없으면 빈 표."""
+    pk = key(prod_label)
+    rows = db.q("SELECT prd_cd, prd_nm FROM t_prd_products WHERE use_yn='Y'", tuples=True)
+    prd = None
+    for line in rows.splitlines():
+        if line.strip():
+            cd, nm = line.split('\t')
+            if key(nm) == pk or key(nm).startswith(pk) or pk.startswith(key(nm)):
+                prd = cd
+                break
+    if not prd:
+        return {}
+    out = {}
+    for line in db.q(f"SELECT opt_nm, opt_cd FROM t_prd_product_options "
+                     f"WHERE prd_cd='{prd}' AND coalesce(del_yn,'N')='N'",
+                     tuples=True).splitlines():
+        if line.strip():
+            nm, cd = line.split('\t')
+            out.setdefault(key(nm), set()).add(cd)
     return out
 
 
@@ -203,7 +233,35 @@ def main():
         return 2
 
     rows, skipped = [], []
-    for clab, rlab, v in raw:
+    pcache = {}
+    for item in raw:
+        if len(item) == 4:
+            clab, rlab, v, prod = item
+            # 상품별 옵션표를 먼저 본다(같은 이름이 상품마다 다른 코드를 갖는다).
+            if prod not in pcache:
+                pcache[prod] = product_opts(prod)
+            manual = res.manual.get(('opt_cd', key(f'{prod} / {clab}')))
+            if manual is not None:
+                if not manual:
+                    skipped.append(('opt_cd', f'{prod} / {clab}',
+                                    res.notes.get(('opt_cd', key(f'{prod} / {clab}')), '')))
+                    continue
+                cd = manual[0]
+            else:
+                cd = match(pcache[prod], clab) if pcache[prod] else None
+                if not cd:
+                    codes, skip = res.resolve('opt_cd', clab)
+                    cd = codes[0] if codes else None
+                    if cd:
+                        res.unresolved = [u for u in res.unresolved
+                                          if u != ('opt_cd', norm(clab))]
+            if cd:
+                rows.append([''] + [{'opt_cd': cd, 'min_qty': '1'}.get(d, '') for d in dims]
+                            + [f'{v:g}', f"권위 {g['sheet']} r{r0}~r{r1} · {prod}"])
+                continue
+            res.unresolved.append(('opt_cd', f'{prod} / {clab}'))
+            continue
+        clab, rlab, v = item
         parts = []           # [(axis, [codes])]
         ok = True
         for axis, lab in ((col_axis, clab), (row_axis, rlab)):
