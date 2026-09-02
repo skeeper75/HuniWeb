@@ -1,0 +1,83 @@
+=== O1 기계 검산 ===
+
+① P0 단계 유니크 = 13 (기대 13)  → PASS
+   빠진 단계: 없음
+
+② 관측 불가 기대결과(금칙어) = 0건 → PASS
+③ G1 분기 시나리오 = 2 ['P1-G1a', 'P1-G1b'] → PASS
+③ G2 분기 시나리오 = 2 ['P1-G2a', 'P1-G2b'] → PASS
+
+④ 가격 결함 재현 시나리오 = 5건 ['P2-01', 'P2-02', 'P2-03', 'P2-04', 'P2-05'] → PASS
+
+⑤ 근거 파일 미실재 = 0건 → PASS
+   사용된 근거 파일 10종 전건 실재 확인 (repo root = /Users/innojini/Dev/HuniWeb)
+
+⑥ N1 §3-1 매트릭스 130셀 중 커버 67 · 미커버 63
+   ── 미커버 셀 전수 (숨기지 않음) ──
+   > 가능(O/△/?)인데 시나리오가 없는 셀 = 12  <= 진짜 갭
+     - PAY_DONE 결제완료 x 구매확정 [△]
+     - PRODUCT_PREPARE 상품준비중 x 환불 [O]
+     - PRODUCT_PREPARE 상품준비중 x 구매확정 [△]
+     - DELIVERY_PREPARE 배송준비중 x 환불 [O]
+     - DELIVERY_PREPARE 배송준비중 x 구매확정 [△]
+     - DELIVERY_ING 배송중 x 환불 [O]
+     - DELIVERY_ING 배송중 x 송장입력 [O]
+     - DELIVERY_ING 배송중 x 구매확정 [△]
+     - DELIVERY_DONE 배송완료 x 송장입력 [O]
+     - BUY_CONFIRM 구매확정 x 송장입력 [O]
+     - CANCEL/RETURN/EXCHANGE_DONE x 교환 [?]
+     - CANCEL/RETURN/EXCHANGE_DONE x 반품 [?]
+   > 원래 불가(x)/해당없음(-) 이라 덮을 조작이 없는 셀 = 51
+     . PAY_WAIT 결제대기 x 교환 [x]
+     . PAY_WAIT 결제대기 x 반품 [x]
+     . PAY_WAIT 결제대기 x 환불 [x]
+     . PAY_WAIT 결제대기 x 송장입력 [x]
+     . PAY_WAIT 결제대기 x 배송보류 [x]
+     . PAY_WAIT 결제대기 x 구매확정 [x]
+     . DEPOSIT_WAIT 입금대기 x 교환 [x]
+     . DEPOSIT_WAIT 입금대기 x 반품 [x]
+     . DEPOSIT_WAIT 입금대기 x 송장입력 [x]
+     . DEPOSIT_WAIT 입금대기 x 배송보류 [x]
+     . PAY_DONE 결제완료 x 반품 [x]
+     . PAY_DONE 결제완료 x 배송보류 [x]
+     . PRODUCT_PREPARE 상품준비중 x 반품 [x]
+     . 상품준비중+배송보류 x 반품 [x]
+     . 상품준비중+배송보류 x 옵션변경 [x]
+     . DELIVERY_PREPARE 배송준비중 x 반품 [x]
+     . 배송준비중+배송보류 x 반품 [x]
+     . 배송준비중+배송보류 x 옵션변경 [x]
+     . DELIVERY_DONE 배송완료 x 주문취소 [x]
+     . DELIVERY_DONE 배송완료 x 부분취소 [x]
+     . DELIVERY_DONE 배송완료 x 배송보류 [x]
+     . BUY_CONFIRM 구매확정 x 주문취소 [x]
+     . BUY_CONFIRM 구매확정 x 부분취소 [x]
+     . BUY_CONFIRM 구매확정 x 배송보류 [x]
+     . BUY_CONFIRM 구매확정 x 주문수정 [x]
+     . PAY_FAIL/PAY_CANCEL x 교환 [x]
+     . PAY_FAIL/PAY_CANCEL x 반품 [x]
+     . PAY_FAIL/PAY_CANCEL x 환불 [x]
+     . PAY_FAIL/PAY_CANCEL x 송장입력 [x]
+     . PAY_FAIL/PAY_CANCEL x 배송보류 [x]
+     . PAY_FAIL/PAY_CANCEL x 주문수정 [x]
+     . PAY_FAIL/PAY_CANCEL x 옵션변경 [x]
+     . PAY_FAIL/PAY_CANCEL x 구매확정 [x]
+     . CANCEL/RETURN/EXCHANGE_DONE x 주문취소 [x]
+     . CANCEL/RETURN/EXCHANGE_DONE x 부분취소 [x]
+     . CANCEL/RETURN/EXCHANGE_DONE x 환불 [-]
+     . CANCEL/RETURN/EXCHANGE_DONE x 송장입력 [x]
+     . CANCEL/RETURN/EXCHANGE_DONE x 배송보류 [x]
+     . CANCEL/RETURN/EXCHANGE_DONE x 주문수정 [x]
+     . CANCEL/RETURN/EXCHANGE_DONE x 옵션변경 [x]
+     . CANCEL/RETURN/EXCHANGE_DONE x 구매확정 [x]
+     . 이전주문 x 주문취소 [x]
+     . 이전주문 x 부분취소 [x]
+     . 이전주문 x 교환 [x]
+     . 이전주문 x 반품 [x]
+     . 이전주문 x 환불 [x]
+     . 이전주문 x 송장입력 [x]
+     . 이전주문 x 배송보류 [x]
+     . 이전주문 x 주문수정 [x]
+     . 이전주문 x 옵션변경 [x]
+     . 이전주문 x 구매확정 [x]
+
+총 시나리오 48건 (P0 21 · P1 19 · P2 8)

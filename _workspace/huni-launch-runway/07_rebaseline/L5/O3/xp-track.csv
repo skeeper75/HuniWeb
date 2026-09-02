@@ -1,0 +1,65 @@
+legacy_id,트랙,성격,기능서술,상품군·결함유형,affected_count,의사결정자,오픈차단여부,돈,주문,원판정,conflict,conflict_note,근거
+P-ACRYL-RINGCONFIRM-01,P,상품데이터,아크릴키링 고리 견적 실화면 + 아크릴 3상품 입력경로 규명 (담당자 회신 대기),아크릴키링 고리 견적 실화면 + 아크릴 3상품 입력경로 규명 (담당자 회신 대기),,개발,작업 항목,Y,N,검증대기,N,,_workspace/huni-price-table-integrity/HANDOFF.md:27-28
+P-EDITORYN-01,P,상품데이터,editor_yn 교정 미적용 — N→Y 13건 · Y→N 5건 (5건은 PRICE=0 위험),editor_yn 교정 미적용,13,개발,작업 항목,Y,Y,미착수,N,,_workspace/huni-edicus-product-map/HANDOFF.md:13 · _workspace/huni-edicus-product-map/HANDOFF.md:37
+P-MISMAP-FP-12-01,P,상품데이터,오매핑 FP 가드 12건 — 오염이 아닐 수 있어 판정 필요,오매핑 FP 가드 12건,12,개발,작업 항목,N,N,검증대기,N,,_workspace/huni-product-readiness/02_readiness/list-other-checks.md:38
+P-PED-CANVAS-01,P,상품데이터,Q-SB-CH1 — CANVAS_HANGING 차원 정합 (셀 표기 분리),Q-SB-CH1,,개발,작업 항목,Y,N,미착수,N,,_workspace/huni-price-engine-design/HANDOFF.md:75
+P-PED-NEXT-01,P,상품데이터,가격엔진 설계 다음 시작점 — 실 적재 승인 큐 소진 · 확정 결함 정립(D-CB-1/2/4) · 인간 결정 큐,가격엔진 설계 다음 시작점,,개발,작업 항목,Y,N,미착수,N,,_workspace/huni-price-engine-design/HANDOFF.md:34-37
+P-PED-POSTER-WIRE-01,P,상품데이터,"G-S1 — 후가공 배선 0건 (PRF_POSTER disp_seq 2~), 컨펌큐 해소 후 배선",G-S1,0,개발,작업 항목,Y,N,미착수,N,,_workspace/huni-price-engine-design/HANDOFF.md:76
+P-POSTER-OPT-POLLUTION-01,P,상품데이터,실사 28상품(특히 134/135) 옵션 레이어 오염 — 도수·사이즈·자재·스티커·후가공이 타상품에서 대량 혼입 (면적 적재 1차 차단),실사 28상품(특히 134/135) 옵션 레이어 오염,,개발,작업 항목,Y,Y,미착수,N,,_workspace/huni-dbmap/30_batch/PRF_POSTER_FIXED/_gate/area-load-design-gate.md:15 · _workspace/huni-dbmap/30_batch/PRF_POSTER_FIXED/_gate/area-load-design-gate.md:153 · _workspace/huni-dbmap/30_batch/PRF_POSTER_FIXED/_gate/area-load-design-gate.md:157 · _workspace/huni-dbmap/30_batch/PRF_POSTER_FIXED/_gate/area-load-design-gate.md:211 · _workspace/huni-dbmap/30_batch/PRF_POSTER_FIXED/_gate/area-load-design-gate.md:225
+P-REVIEW-25-01,P,상품데이터,REVIEW 잔여 25건 — 대부분 분담 FP·기추적,REVIEW 잔여 25건,25,개발,작업 항목,N,N,검증대기,N,,_workspace/huni-price-table-integrity/HANDOFF.md:107
+P-STICKER-INTEGRITY-01,P,상품데이터,스티커 무결성 게이트 NO-GO — 돈크리티컬 실결함 다수 라이브 재현,스티커 무결성 게이트 NO-GO,,개발,작업 항목,Y,N,미착수,N,,"_workspace/huni-price-table-integrity/04_gate/sticker-integrity-verdict.md:6,14"
+X-AGED-ADMIN-01,X,인프라·운영,admin-analysis / feature-matrix 출처 AGED (3.5개월) — 라이브 재확인 권장,,,개발,작업 항목,N,N,검증대기,N,,_workspace/huni-launch-scope/05_gate/gate-verdict.md:157 · _workspace/huni-launch-scope/02_gap/open-questions.md:70
+X-CHK-CS-01,X,인프라·운영,고객센터 응대 스크립트·FAQ 미확인,,,개발,작업 항목,N,N,미착수,N,,
+X-CHK-DNS-01,X,인프라·운영,도메인·SSL·DNS 전환 계획 미확인,,,개발,작업 항목,N,N,미착수,N,,
+X-CHK-TRAINING-01,X,인프라·운영,운영자 교육·인수인계 세션 미확인,,,개발,작업 항목,N,N,미착수,N,,
+X-DEC-IMMUTABLE-01,X,정책결정,I-BOUND-2 클레임 추적성 — 동적옵션 immutable 정책 유지 전제,,,PM,작업 항목,Y,Y,미착수,N,,_workspace/huni-shopby/01_research/open-questions.md:21
+X-DEC-MALLMODE-01,X,정책결정,I-AUTH-1 몰 운영방식 결정 필요 (스킨몰 vs headless),,,PM,작업 항목,N,Y,미착수,N,,_workspace/huni-shopby/05_gate/remediation-spec.md:74
+X-DEC-REDCAT-01,X,정책결정,I-RED-1 RED 카테고리(가격소스 0) 브리지 범위 결정 필요,,,PM,작업 항목,Y,Y,미착수,N,,_workspace/huni-shopby/05_gate/remediation-spec.md:77
+X-DEC-SELFVERIFY-01,X,정책결정,OQ-G12 비밀번호 변경·탈퇴 본인확인 방법 미결 (1차),,,PM,작업 항목,N,N,미착수,N,,_workspace/huni-launch-scope/02_gap/open-questions.md:56
+X-DEC-SUJAK-01,X,정책결정,OQ-G17 수작 브랜드 유지 여부 미결,,,PM,작업 항목,N,N,미착수,N,,_workspace/huni-launch-scope/02_gap/open-questions.md:61
+X-DEC-WRITEPOLICY-01,X,정책결정,POLICY-1 server-api 카탈로그 쓰기 허용 범위 미결 (현 단계 쓰기 금지),,,PM,작업 항목,Y,Y,미착수,N,,_workspace/huni-shopby/12_sim-bridge/03_simulator-gap.md:125
+X-DOC-ADMINMANUAL-01,X,인프라·운영,라이브 admin 매뉴얼 업데이트 미실행 — round-13~21 적재분의 admin 화면 반영 여부 미대조,,,개발,작업 항목,N,N,미착수,N,,_workspace/huni-admin-manual/HANDOFF.md:3-5
+X-EDX-D6-01,X,정책결정,D-6 하트 이미지피켓(use_yn=N) 런칭 범위 포함 여부 미결,,,PM,작업 항목,N,N,미착수,N,,_workspace/huni-edicus-product-map/05_design/decision-points.md:166
+X-EDX-D9-01,X,외부계약,"D-9 명함 cateCode=TEST — EDICUS 원장 결함 의심, 콘솔 확인 요청 미회신",,,외부,차단(외부 의존),N,N,미착수,N,,_workspace/huni-edicus-product-map/05_design/decision-points.md:242
+X-EDX-F12-01,X,외부계약,[적재 전 필수] F-12 런북 probe_fmz_cnt 채움 — 빠지면 315만원 누락 재통과,,,외부,작업 항목,Y,N,검증대기,N,,_workspace/huni-edicus-product-map/HANDOFF.md:44
+X-KB-01,X,코드부채,온톨로지 KB 후속 3건 — live-snapshot 재캡처 · PRICE_GAP_HINTS 필드 마커 강화 · 앨범/포토 INTENT 미등재,,,개발,작업 항목,N,N,미착수,N,,_workspace/huni-ontology-kb/HANDOFF.md:33 · _workspace/huni-ontology-kb/HANDOFF.md:34 · _workspace/huni-ontology-kb/HANDOFF.md:35
+X-MIG-CUTOVER-01,X,인프라·운영,MQ-19 컷오버 동결 창 운영 가능 여부 미확정,,,개발,작업 항목,Y,N,미착수,N,,_workspace/huni-launch-scope/03_migration/migration-open-questions.md:46
+X-NHN-REPLY-01,X,외부계약,NHN 2차 답신 미작성 — 역질문 2건(내부 견적엔진 정의 · 구매시점 가격변동 기준+실조합 수치) 답변 필요,,,외부,작업 항목,Y,Y,미착수,N,,_workspace/huni-shopby/HANDOFF.md:12 · _workspace/huni-shopby/HANDOFF.md:14 · _workspace/huni-shopby/HANDOFF.md:15
+X-NHN-REVIEW-01,X,외부계약,P-B 동적옵션 등록이 상품심사 승인대기를 유발하는가 — 미검증 (D 채택 결정적 관문),,,외부,차단(외부 의존),Y,Y,미착수,N,,_workspace/huni-shopby/HANDOFF.md:100 · _workspace/huni-shopby/10_gate2/remediation-spec.md:34 · _workspace/huni-shopby/05_gate/remediation-spec.md:63 · _workspace/huni-launch-scope/02_gap/open-questions.md:18-20
+X-OOS-MBO-01,X,런칭무관,[런칭 무관] 다중브랜드 온톨로지 잔여 6건 — 공급자 라우팅 데이터 0 · 코퍼스 편향 · 승격 대기 · 레드 미착수 · 팀파일 버그 · 구조 게이트 미검증,,,미상,오픈 무관,N,N,미착수,N,,_workspace/huni-multibrand-ontology/HANDOFF.md:34 · _workspace/huni-multibrand-ontology/HANDOFF.md:35 · _workspace/huni-multibrand-ontology/HANDOFF.md:36 · _workspace/huni-multibrand-ontology/HANDOFF.md:37 · _workspace/huni-multibrand-ontology/HANDOFF.md:38 · _workspace/huni-multibrand-ontology/HANDOFF.md:9
+X-OOS-PRINTLY-01,X,런칭무관,[런칭 무관] 프린틀리 별도사업 잔여 5건 — catalog 부재·노후·정식 하네스화 미정·지니 입력 대기·수렴 2트랙,,,미상,오픈 무관,N,N,미착수,N,,_workspace/printly/HANDOFF.md:73 · _workspace/printly/HANDOFF.md:74 · _workspace/printly/HANDOFF.md:76 · _workspace/printly/HANDOFF.md:77 · _workspace/printly/HANDOFF.md:9-11
+X-OOS-PRINTSTORY-01,X,런칭무관,[런칭 무관] print-story 발표 아티팩트 잔여 2건 — 저작 귀속 · 특허 등록 여부 미확인,,,미상,오픈 무관,N,N,미착수,N,,_workspace/print-story/01_source/open-questions.md:11 · _workspace/print-story/01_source/open-questions.md:55
+X-OOS-RPMETA-01,X,런칭무관,[런칭 무관] RP-Meta 역공학 잔여 7건 — deepcheck carry-forward 미검증 · 인간 결정 · DDL 제안 3건,,,미상,오픈 무관,N,N,미착수,N,,_workspace/huni-rpmeta/HANDOFF.md:47 · _workspace/huni-rpmeta/HANDOFF.md:48 · _workspace/huni-rpmeta/HANDOFF.md:49 · _workspace/huni-rpmeta/HANDOFF.md:50 · _workspace/huni-rpmeta/HANDOFF.md:51 · _workspace/huni-rpmeta/HANDOFF.md:54 · _workspace/huni-rpmeta/HANDOFF.md:75
+X-OPS-SITEKEY-01,X,정책결정,OQ-D2 후니 site_key 취득 방식 미결 (psql 조회 vs .env 신규 키),,,PM,작업 항목,N,N,미착수,N,,_workspace/huni-shopby/12_sim-bridge/04_extension-design.md:254
+X-ORDER-FLOW-VERIFY-01,X,코드부채,라이브 주문 동선 미검증 — cart 버튼 셀렉터 미검출·주문 경로 코드 미확인,,,개발,작업 항목,N,Y,검증대기,N,,_workspace/huni-launch-scope/05_gate/gate-verdict.md:99 · _workspace/huni-launch-scope/05_gate/gate-verdict.md:156
+X-PERF-CONCURRENCY-01,X,코드부채,동시성 — 고객별 견적행 분리(견적ID) 부하 실측 없음,,,개발,작업 항목,Y,Y,검증대기,N,,_workspace/huni-shopby/HANDOFF.md:102
+X-REPO-GITIGNORE-01,X,인프라·운영,하네스 자산 git 미추적 — hpti 인스펙터 에이전트 · §16 recipe-viz agents/skills 화이트리스트 누락,,,개발,작업 항목,N,N,미착수,N,,_workspace/huni-price-table-integrity/HANDOFF.md:108 · _workspace/huni-basedata-dedup/HANDOFF.md:58
+X-RVF-GATE-01,X,코드부채,V-PRICE(신규 14필드) 게이트 NO-GO — VP-1·VP-6 FAIL,,,개발,작업 항목,Y,Y,미착수,N,,_workspace/huni-re-verify/07_gate/verdict.md:20
+X-RVF-N1-01,X,코드부채,N1 ADD_CLR_YN 미전송 → 색수 미상향 저청구 (HIGH),,,개발,작업 항목,Y,N,미착수,N,,_workspace/huni-re-verify/07_gate/verdict.md:49 · _workspace/huni-re-verify/07_gate/verdict.md:72 · _workspace/huni-re-verify/CHANGELOG.md:41
+X-RVF-N245-01,X,코드부채,N2 REAM_CNT · N4 PACK/MAX_PRN_CNT · N5 DOSU_COD 미전송 — byte 정합 잔여,,,개발,작업 항목,Y,N,미착수,N,,_workspace/huni-re-verify/07_gate/verdict.md:50 · _workspace/huni-re-verify/07_gate/verdict.md:52 · _workspace/huni-re-verify/07_gate/verdict.md:53 · _workspace/huni-re-verify/CHANGELOG.md:42
+X-RVF-N3-01,X,코드부채,N3 모델A 래더 미구현 — 떡메모지·굿즈 견적 불가 (HIGH·라이브 비준),,,개발,작업 항목,Y,Y,미착수,N,,_workspace/huni-re-verify/07_gate/verdict.md:51
+X-RVF-N6-01,X,코드부채,N6 GSELGLV/TPTKDFT ATTB×10 미반영 — 후가공·수량 저청구 잠복,,,개발,작업 항목,Y,N,미착수,N,,_workspace/huni-re-verify/07_gate/verdict.md:54
+X-RVF-SUB-01,X,코드부채,V-WIDGET·V-EDITOR 재검증 서브시스템 미착수 (산출 0건),,,개발,작업 항목,N,Y,미착수,N,,_workspace/huni-re-verify/CHANGELOG.md:43
+X-SHOPBY-CART-CHANNEL-01,X,외부계약,Q-CART-2 post-cart channelType 예시 vs 스키마 불일치 — 라이브 실측 필요,,,외부,작업 항목,N,Y,검증대기,N,,_workspace/huni-shopby/01_research/open-questions.md:93-94
+X-SHOPBY-GATE-01,X,외부계약,샵바이 게이트 1R·2R 모두 조건부 GO — BLOCKED 3관문 및 2R 조건 미이행분 잔존,,,외부,작업 항목,Y,Y,미착수,N,,_workspace/huni-shopby/10_gate2/gate2-verdict.md:3 · _workspace/huni-shopby/05_gate/gate-verdict.md:13
+X-SHOPBY-MAXLEN-01,X,외부계약,A-BIND-1 optionInputs inputValue maxLength 미확정,,,외부,작업 항목,N,Y,검증대기,N,,_workspace/huni-shopby/10_gate2/remediation-spec.md:39
+X-SHOPBY-ORDERSHEET-01,X,외부계약,order-sheet 실계약 미명문화 — required vs live cartNos-only · 중복 시 우선순위 · recurringPaymentDelivery shape,,,외부,작업 항목,Y,Y,검증대기,N,,_workspace/huni-shopby/10_gate2/remediation-spec.md:51 · _workspace/huni-shopby/05_gate/remediation-spec.md:51 · _workspace/huni-shopby/01_research/open-questions.md:16
+X-SHOPBY-SPEC-FIX-01,X,외부계약,샵바이 API 명세 오기 5건 (put-product-options 경로/필드 환각 · groupId 타입 · 교환 operationId · get-categories 오기 · refresh 각주),,,외부,작업 항목,Y,Y,미착수,N,,_workspace/huni-shopby/10_gate2/remediation-spec.md:12 · _workspace/huni-shopby/10_gate2/remediation-spec.md:13 · _workspace/huni-shopby/10_gate2/remediation-spec.md:14 · _workspace/huni-shopby/10_gate2/remediation-spec.md:15 · _workspace/huni-shopby/10_gate2/remediation-spec.md:16
+X-SKIN-DEVREQ-01,X,외부계약,스킨 파트너사 수정 요청 5건 (하위 건수 표기 · 헤더 드롭다운 · 상세 URL 오리다이렉트 · BEST SELLERS 하드코딩 · depth3 미렌더),,,외부,작업 항목,N,Y,미착수,N,,_workspace/huni-shopby/14_storefront-audit/DEV-REQUEST-skin.md:107-108 · _workspace/huni-shopby/14_storefront-audit/DEV-REQUEST-skin.md:116 · _workspace/huni-shopby/14_storefront-audit/DEV-REQUEST-skin.md:132-133 · _workspace/huni-shopby/14_storefront-audit/DEV-REQUEST-skin.md:152-153 · _workspace/huni-shopby/14_storefront-audit/DEV-REQUEST-skin.md:175-177
+X-WGT-ADAPTER-01,X,코드부채,후니 어댑터(createHuniAdapter) 구현 0줄 — 위젯 컨버전 미착수,,,개발,작업 항목,N,N,미착수,N,,_workspace/huni-widget/HANDOFF.md:40 · _workspace/huni-widget/HANDOFF.md:76
+X-WGT-ANCHOR-01,X,코드부채,G-3 어댑터 주석 라인앵커 stale — deob 재생성으로 참조 어긋남,,,개발,작업 항목,N,N,미착수,N,,_workspace/huni-widget/HANDOFF.md:43
+X-WGT-AUDIT-01,X,코드부채,위젯 4축 감사 — 임계경로 인계 사슬 단절 + 4월→6월 역공학 드리프트,,,개발,작업 항목,N,N,미착수,N,,_workspace/huni-widget/CHANGELOG.md:32
+X-WGT-B1DEAD-01,X,코드부채,B-1 size 분기 영구 도달불능 dead code (컨버전 게이트 GSCDPOP),,,개발,작업 항목,N,N,미착수,N,,_workspace/huni-widget/07_parity/crossverify-round2-findings.md:82
+X-WGT-DATA-DEP-01,X,코드부채,후니 DB의 가격·제약·위젯용 테이블 미작성이 위젯 임계경로,,,개발,작업 항목,Y,N,미착수,N,,_workspace/huni-widget/HANDOFF.md:80
+X-WGT-F3FIX-01,X,코드부채,F-3 TieredDiscount 정대표 GSBGRDY fixture 미보유 (비차단 잔존),,,개발,작업 항목,Y,N,검증대기,N,,_workspace/huni-widget/05_qa/gate-equivalence-report.md:173
+X-WGT-F4-01,X,코드부채,F-4 finish-select-box 임계치 분기 부재 — 후니 후가공 데이터 확정 대기,,,개발,작업 항목,N,N,미착수,N,,_workspace/huni-widget/05_qa/gate-equivalence-report.md:174
+X-WGT-G5-01,X,코드부채,G-5 의류 apparel 배타삼항이 DIR_MTR 필수 가격축을 드롭 (실결함 확정),,,개발,작업 항목,Y,N,미착수,N,,_workspace/huni-widget/HANDOFF.md:35
+X-WGT-G6-01,X,코드부채,G-6 굿즈 수량 필드축 스왑 — ORD_CNT vs PRN_CNT 가격권위 배선 불일치,,,개발,작업 항목,Y,N,미착수,N,,_workspace/huni-widget/HANDOFF.md:34
+X-WGT-HTTP-01,X,코드부채,G-INT-0 런타임 가격경로가 fixture 정적룩업 — 실 HTTP 배선 회귀가드 부재,,,개발,작업 항목,Y,N,검증대기,N,,_workspace/huni-widget/HANDOFF.md:37
+X-WGT-OPTMAP-01,X,코드부채,"_opt_maps 자동변환이 위젯 전용 — 시뮬레이터 미동작, 위젯 경로 별도 작업 필요",,,개발,작업 항목,N,Y,미착수,N,,_workspace/huni-catalog-conformance/HANDOFF.md:27
+X-WGT-PRICEEQ-01,X,코드부채,의류·ACC·포스터 가격 동등성 미마감 — PRICE>0 재캡처 미완,,,개발,작업 항목,Y,N,검증대기,N,,_workspace/huni-widget/HANDOFF.md:41 · _workspace/huni-widget/HANDOFF.md:77
+X-WGTF-BRIDGE-01,X,코드부채,U-12 productRedWidgetSDK.js(브릿지/로더) 라인 단위 근거 부재,,,개발,작업 항목,N,N,검증대기,N,,_workspace/huni-widget-flow/01_curation/unknowns-board.md:37
+X-WGTF-CODE-01,X,코드부채,캡처 상품코드·BNSTDFT/STDRCAD 정의 미상 (U-11 · U-13),,,개발,작업 항목,N,N,검증대기,N,,_workspace/huni-widget-flow/01_curation/unknowns-board.md:31 · _workspace/huni-widget-flow/01_curation/unknowns-board.md:32
+X-WGTF-PDF-01,X,코드부채,PDF 업로드 경로 미상 (U-5 최종 제출 필드 · U-2 uploadType 규칙 · U-10 PDF 가용성),,,개발,작업 항목,N,Y,검증대기,N,,_workspace/huni-widget-flow/01_curation/unknowns-board.md:13 · _workspace/huni-widget-flow/01_curation/unknowns-board.md:18 · _workspace/huni-widget-flow/01_curation/unknowns-board.md:23
+X-WGTF-SCOPE-01,X,코드부채,U-14 26 카테고리 중 신위젯 적용 범위 미상 — matrix 카테고리 행이 추정값,,,개발,작업 항목,N,N,검증대기,N,,_workspace/huni-widget-flow/01_curation/unknowns-board.md:33
+X-WGTF-SUBMIT-01,X,코드부채,위젯→장바구니/주문 제출 계약 미상 (U-1 sdkCreatePot · U-9 호스트 핸드오프),,,개발,작업 항목,N,Y,검증대기,N,,_workspace/huni-widget-flow/01_curation/unknowns-board.md:11 · _workspace/huni-widget-flow/01_curation/unknowns-board.md:14 · _workspace/huni-widget-flow/04_validation/gate-verdict.md:6 · _workspace/huni-widget-flow/01_curation/unknowns-board.md:43

@@ -1,0 +1,600 @@
+# -*- coding: utf-8 -*-
+"""L4a 매핑 빌더 — std_id(186) ← legacy_id ← asis_id 매핑 + 상태 재판정."""
+import csv, json, os, sys
+
+BASE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.abspath(os.path.join(BASE, "..", ".."))
+
+MY_CATS = {"상품·카탈로그", "옵션·견적", "원고·파일", "장바구니·주문", "결제", "배송", "클레임·CS"}
+
+std_rows = [r for r in csv.DictReader(open(os.path.join(ROOT, "L1/standard-feature-canon.csv")))
+            if r["대분류"] in MY_CATS]
+legacy = json.load(open(os.path.join(BASE, "_legacy-lean.json")))
+LEG = {r["legacy_id"]: r for r in legacy}
+asis = {r["asis_id"]: r for r in csv.DictReader(open(os.path.join(ROOT, "L2/as-is-inventory.csv")))}
+
+def T(n, f=True, s=True, i=True):
+    """runway F-0NN / scope SCOPE-0NN / ia IA-0NN 3원 묶음 (실재하는 것만)."""
+    out = []
+    if f: out.append("F-%03d" % n)
+    if s: out.append("SCOPE-%03d" % n)
+    if i: out.append("IA-%03d" % n)
+    return [x for x in out if x in LEG]
+
+# (std_id, legacy_ids, asis_ids, 상태, 근거, 사유)
+M = []
+A = M.append
+
+# ── 상품·카탈로그 22 ────────────────────────────────────────────────
+A(("STD-CAT-001", [], ["SB-004","SB-003"], "new",
+   "huni-skin-shopby/src/lib/api/server/catalog.ts:1-20 (MULTI_LEVEL 트리 조회 done)",
+   "legacy 3원장 모두 고객용 카테고리 내비게이션 행이 없다(운영툴 SCOPE-153만 존재). ★근거출처=ia.md → §4-1 오염, 독립발견 아님"))
+A(("STD-CAT-002", [], ["SB-005","SB-006"], "new",
+   "huni-skin-shopby/src/lib/api/server/catalog.ts:5 · src/components/shop/shop-list.tsx:18-24",
+   "legacy에 카테고리 리스팅 행 없음. ★근거출처=ia.md → §4-1 오염"))
+A(("STD-CAT-003", T(88), [], "todo",
+   "F-088/SCOPE-088/IA-088 랜딩페이지 5종(종이·제본·캘린더·파우치·스티커) 미착수",
+   "상품군 전용 랜딩 = legacy 마케팅 랜딩 5종과 동일 대상. L2 근거 없음"))
+A(("STD-CAT-004", T(154, i=False), ["SB-008","SB-005"], "partial",
+   "huni-skin-shopby/src/app/(main)/search/page.tsx:1 (검색 페이지 존재) · 인기검색어 src/lib/api/hooks/use-search.ts:13",
+   "검색 자체는 배선, 필터 엔진(SCOPE-154)은 미착수"))
+A(("STD-CAT-005", T(154, i=False), [], "todo",
+   "SCOPE-154 상품 검색·필터 엔진 PARTIAL",
+   "종이/소재명 축 검색은 L2에 근거 없음"))
+A(("STD-CAT-006", T(154, i=False), ["SB-008"], "partial",
+   "huni-skin-shopby/src/app/(main)/search/page.tsx:1 · 인기검색어 src/lib/api/hooks/use-search.ts:13",
+   "자동완성은 근거 없음, 인기검색어만 배선"))
+A(("STD-CAT-007", T(66, f=False), ["SB-007","SB-016","SB-017"], "done",
+   "huni-skin-shopby/src/app/(main)/product/[slug]/page.tsx:42-47 · :51-56 · src/components/product/product-sections.tsx:1",
+   "상세 조회+Pie Canvas 발행탭+정적 섹션 전부 배선"))
+A(("STD-CAT-008", [], [], "new",
+   "print-story/02_capture/order-flow-steps.md §A-0 레드프린팅 상품 분할 전략",
+   "동일계열 상품 분기 안내는 legacy 3원장 부재. 근거=경쟁사 실측 → 오염 없음"))
+A(("STD-CAT-009", [], [], "new",
+   "print-story/02_capture/order-flow-steps.md §E-4 3사 용어 불일치",
+   "후가공 용어 툴팁 legacy 부재. 근거=경쟁사 실측 → 오염 없음"))
+A(("STD-CAT-010", T(60, f=False), [], "todo",
+   "SCOPE-060/IA-060 E4 작업/재단/블리드 사이즈 안내 PARTIAL·미착수",
+   "L2 근거 없음"))
+A(("STD-CAT-011", [], [], "new",
+   "print-story/02_capture/order-flow-steps.md §C-6 출고 옵션",
+   "제작 소요일/출고 기준 안내 legacy 부재. 근거=경쟁사 실측 → 오염 없음"))
+A(("STD-CAT-012", T(87), ["SB-055"], "partial",
+   "huni-skin-shopby/src/lib/guide-data.ts:41-50,158-202 (대부분 '준비중' 스텁)",
+   "F-087 작업시 유의사항 11개 = 재작업 불가 고지의 상위 그릇"))
+A(("STD-CAT-013", T(69, f=False), ["SB-056"], "todo",
+   "huni-skin-shopby/src/app/(main) 하위 inquiry/qna 라우트 부재 (SB-056 absent)",
+   "상품Q&A 게시 미배선"))
+A(("STD-CAT-014", T(89), ["SB-018"], "done",
+   "huni-skin-shopby/src/lib/api/hooks/use-product-reviews.ts:41",
+   "legacy는 '이용후기 메인'(마케팅) 축으로만 존재 — 상품상세 리뷰 노출과 근사 매핑"))
+A(("STD-CAT-015", T(18)+T(89), ["SB-018"], "partial",
+   "huni-skin-shopby/src/lib/api/hooks/use-product-reviews.ts:41 (목록만)",
+   "사진 리뷰 갤러리 전용 근거 없음 — 리뷰 목록에 흡수된 상태"))
+A(("STD-CAT-016", [], [], "new",
+   "print-quote/04_design/ia.md §2.1 리스팅 파생",
+   "관련상품 추천 legacy 부재. ★근거출처=ia.md → §4-1 오염"))
+A(("STD-CAT-017", [], [], "new",
+   "print-quote/04_design/ia.md §2.1 GNB 파생",
+   "최근 본 상품 legacy 부재. ★근거출처=ia.md → §4-1 오염"))
+A(("STD-CAT-018", [], [], "new",
+   "print-kb/wiki/policy/mypage.md 파생",
+   "찜/관심상품 legacy 부재. 근거=인쇄 KB → 오염 없음"))
+A(("STD-CAT-019", T(87), ["SB-055"], "partial",
+   "huni-skin-shopby/src/lib/guide-data.ts:41-50,158-202",
+   "가이드 11종 그릇은 있으나 내용 대부분 준비중"))
+A(("STD-CAT-020", T(56, f=False), ["WA-042","WA-049"], "partial",
+   "raw/webadmin/webadmin/config/urls.py:280,283,285,287,288 (가이드파일 조회) · :72-87 (업로드/관리)",
+   "운영자측 그릇 done, 고객 상세화면 다운로드 노출은 L2 근거 없음"))
+A(("STD-CAT-021", T(155, i=False), ["SB-001","SB-002"], "partial",
+   "huni-skin-shopby/src/app/(main)/page.tsx:1 · BEST 큐레이션 stub src/lib/legacy-data/hooks.ts:60",
+   "메인 섹션 렌더는 되나 데이터원 mock 빈배열 (§4-5 존중)"))
+A(("STD-CAT-022", [], [], "new",
+   "huni-shopby/01_research/order-to-delivery-contract.md §4.2 OUT_OF_STOCK",
+   "품절/대체 안내 legacy 부재. 근거=Shopby 계약 → 오염 없음"))
+
+# ── 옵션·견적 55 ────────────────────────────────────────────────────
+W = ["WA-026","WA-033","WA-034","SB-010"]
+A(("STD-OPT-001", T(33), ["SB-010","WA-026"], "done",
+   "huni-skin-shopby/src/components/product/huni-widget.tsx:312-313 · raw/webadmin/webadmin/config/urls.py:184,190,192",
+   "위젯 임베드+빌더 양쪽 배선"))
+A(("STD-OPT-002", T(33), ["WA-033","WA-034"], "done",
+   "raw/webadmin/webadmin/config/urls.py:246 (위젯 정의 조회) · :247 (카탈로그 조회)",
+   "정규화 계약 API 실재"))
+A(("STD-OPT-003", T(33), ["WA-026","SB-010"], "done",
+   "raw/webadmin/webadmin/config/urls.py:184,190,192 · src/lib/printly/widget.ts:60-90",
+   "componentType 다형 렌더는 위젯빌더 폼 정의 경로에 배선"))
+A(("STD-OPT-004", T(48), ["WA-036","WA-005"], "partial",
+   "raw/webadmin/webadmin/config/urls.py:249 (validate) · :368 (dim-choices)",
+   "서버측 배선 done이나 X-CR-ENFORCE-CLIENT-01(클라이언트 validate 호출 0건)로 종단 미성립"))
+A(("STD-OPT-005", [], [], "new",
+   "print-story/02_capture/order-flow-steps.md §A-7 토글형 후가공",
+   "토글 섹션 UI 패턴 legacy 부재. 근거=경쟁사 실측 → 오염 없음"))
+A(("STD-OPT-006", [], [], "new",
+   "print-story/02_capture/order-flow-steps.md §C 옵션 테이블 복잡도",
+   "그룹 접기/스텝 표시 legacy 부재. 근거=경쟁사 실측 → 오염 없음"))
+A(("STD-OPT-007", T(63), ["SB-011","SB-010"], "partial",
+   "huni-skin-shopby/src/components/product/huni-widget.tsx:162-176 (huni:priced 수신)",
+   "가격 수신은 배선, 플로팅 요약 패널 자체는 L2 근거 없음"))
+A(("STD-OPT-008", T(37)+["P-MATPOLLUTE-26-01","P-MAT-PRICEGAP-01"], ["WA-014","WA-034"], "done",
+   "raw/webadmin/webadmin/config/urls.py:304,307,310,313 (용지 관리+단가) · :247 (카탈로그 조회)",
+   "자재 축 코드경로 배선. 자재 오염·단가 결손은 데이터 부채(P-*)로 별도 계상"))
+A(("STD-OPT-009", T(37), ["WA-014"], "done",
+   "raw/webadmin/webadmin/config/urls.py:304,307,310,313 · catalog/paper_views.py:1",
+   "평량은 용지 마스터 속성으로 배선"))
+A(("STD-OPT-010", T(37)+["P-GOODS-AXIS-NORM-01"], ["WA-013","WA-034"], "done",
+   "raw/webadmin/webadmin/config/urls.py:344,346 (엔티티 공통 마스터) · :247",
+   "비종이 소재도 동일 자재 축. 굿즈 축 오적재는 데이터 부채"))
+A(("STD-OPT-011", T(38)+["P-DIGITAL-BW-01"], ["WA-005","WA-034"], "done",
+   "raw/webadmin/webadmin/config/urls.py:368 (dim-choices) · :247",
+   "도수 축 배선. 흑백1도 상품 미연결은 데이터 부채"))
+A(("STD-OPT-012", T(38), ["WA-005","WA-015"], "done",
+   "raw/webadmin/webadmin/config/urls.py:368 · :316 (색상칩 스테이징)",
+   "별색 축 + 색상칩 서빙 배선"))
+A(("STD-OPT-013", T(38), ["WA-005"], "done",
+   "raw/webadmin/webadmin/config/urls.py:368",
+   "화이트/UV white도 도수 축 선택지"))
+A(("STD-OPT-014", T(34)+["P-DELYN-SIZE-01","P-SIZEMAP-214-01"], ["WA-005","WA-034"], "done",
+   "raw/webadmin/webadmin/config/urls.py:368 · :247",
+   "규격 프리셋 배선. 사이즈 논리삭제/오매핑은 데이터 부채"))
+A(("STD-OPT-015", T(35)+["P-AREA-CUSTOM-01"], ["WA-005"], "partial",
+   "raw/webadmin/webadmin/config/urls.py:368 (dim-choices)",
+   "P-AREA-CUSTOM-01: 비규격 사용자입력 면적가 미배선(폼보드129·맥세이프151) → 종단 미성립"))
+A(("STD-OPT-016", T(60, f=False)+["P-BLEED-32-01"], [], "partial",
+   "P-BLEED-32-01 HOLD_BASIS 32건 — 라이브 완제품 사이즈에 블리드 미적용(자동제외 중)",
+   "작업사이즈 자동 도출 축이 라이브에서 비활성"))
+A(("STD-OPT-017", T(36), ["WA-035","WA-023"], "done",
+   "raw/webadmin/webadmin/config/urls.py:248 (price) · :137,177-181 (수량구간 할인표)",
+   "수량 축 + 구간 배선"))
+A(("STD-OPT-018", [], [], "new",
+   "print-story/02_capture/order-flow-steps.md §A-4 A-5 건수×수량",
+   "건수(디자인 종류 수) 축 legacy 부재. 근거=경쟁사 실측 → 오염 없음"))
+A(("STD-OPT-019", ["X-ENGINE-PAGE-01","P-PHOTOBOOK-PAGEFEE-01"], ["WA-035"], "partial",
+   "X-ENGINE-PAGE-01 094 30P 보류(page 전송 코드트랙) · P-PHOTOBOOK-PAGEFEE-01 페이지비 전액 미청구",
+   "페이지 축이 가격까지 종단 도달 못 함(돈 크리티컬)"))
+A(("STD-OPT-020", T(43), ["WA-003","WA-005"], "done",
+   "raw/webadmin/webadmin/config/urls.py:356-360 (옵션그룹/옵션/항목 CRUD) · :368",
+   "내지/표지 그룹 분리 배선"))
+A(("STD-OPT-021", T(43), ["WA-003","WA-005"], "done",
+   "raw/webadmin/webadmin/config/urls.py:356-360 · :368",
+   "표지/내지 도수 개별 축 배선"))
+A(("STD-OPT-022", T(42)+["P-PED-BOOK-W12-01"], ["WA-003","WA-016"], "done",
+   "raw/webadmin/webadmin/config/urls.py:356-360 · :320-330 (책등 계산)",
+   "제본 방식 축 배선. 제본비 재배선(W1/W2)은 가격 데이터 부채"))
+A(("STD-OPT-023", T(42), ["WA-003"], "done",
+   "raw/webadmin/webadmin/config/urls.py:356-360",
+   "제본 방향 축 배선"))
+A(("STD-OPT-024", T(39)+["X-ENGINE-SETCOAT-01"], ["WA-003","WA-025"], "partial",
+   "X-ENGINE-SETCOAT-01 price_simulate_set이 coat_side_cnt 드롭 → 셋트 경로 표지 코팅비 누락(C트랙)",
+   "단품 경로는 배선, 셋트 경로 코드 결함"))
+A(("STD-OPT-025", T(44)+["X-ENGINE-FOIL-01","P-FOIL-DTLOPT-01"], ["WA-003"], "partial",
+   "X-ENGINE-FOIL-01 박 엔진 미지원 — 027/028/029 박 가산 전부 0(데이터로 못 고침·C트랙)",
+   "옵션 축은 있으나 가격 엔진이 미지원"))
+A(("STD-OPT-026", T(44), ["WA-003"], "partial",
+   "raw/webadmin/webadmin/config/urls.py:356-360 (옵션 축) · X-ENGINE-FOIL-01 동일 엔진 경로",
+   "형압도 박과 같은 공정 그릇 — 엔진 미지원 영향권"))
+A(("STD-OPT-027", T(41), ["WA-003"], "partial",
+   "raw/webadmin/webadmin/config/urls.py:356-360 · 오배선 실증 huni-product-lifecycle §7.4",
+   "오시 표(합가) vs 카드접지 표 혼선 확정 결함 잔존"))
+A(("STD-OPT-028", T(41)+["P-DEDUP-PROC-3-01"], ["WA-003"], "partial",
+   "P-DEDUP-PROC-3-01 공정 중복정리 BLOCKED 3건(미싱086 포함) — 부모↔자식 가격사슬 단절",
+   "축은 있으나 정리 BLOCKED"))
+A(("STD-OPT-029", T(40)+["X-WGT-PUNCH-01","P-PED-PUNCH-01"], ["WA-003"], "partial",
+   "X-WGT-PUNCH-01 시뮬레이터/위젯이 procs detail{타공수}를 전송해야 타공수별 가산 작동(코드트랙)",
+   "타공수 차원 전송 미구현"))
+A(("STD-OPT-030", T(40)+["X-WGT-ATTB-01"], ["WA-003"], "partial",
+   "X-WGT-ATTB-01 합성 ATTB / size-linked 반경 잠복 — 컨버전 시 보정 필요",
+   "귀돌이 반경이 사이즈 연동 축이라 미보정"))
+A(("STD-OPT-031", T(40)+["P-DIECUT-2-01"], ["WA-003"], "done",
+   "raw/webadmin/webadmin/config/urls.py:356-360 (옵션 항목 CRUD)",
+   "도무송 축 배선. 절대값 골든 미검증은 검증대기 항목"))
+A(("STD-OPT-032", [], [], "new",
+   "print-story/02_capture/order-flow-steps.md §C-7-5 넘버링",
+   "넘버링 축 legacy 부재. 근거=경쟁사 실측 → 오염 없음"))
+A(("STD-OPT-033", ["X-GAP-UVFORM-01","P-UNDER-5-01"], [], "partial",
+   "X-GAP-UVFORM-01 webadmin UV 변형 입력 폼 적재경로 '미상' 정직 표기 잔존",
+   "부분UV 입력 경로 미확정"))
+A(("STD-OPT-034", T(47)+T(46), ["WA-004","WA-009"], "done",
+   "raw/webadmin/webadmin/config/urls.py:363-365 (상품 템플릿/추가상품) · :378 (SKU 카탈로그)",
+   "부자재=추가상품 템플릿 그릇으로 배선"))
+A(("STD-OPT-035", T(46), [], "todo",
+   "F-046/SCOPE-046/IA-046 B13 추가상품 PARTIAL·미착수",
+   "기본제공 규칙 표시는 L2 근거 없음"))
+A(("STD-OPT-036", T(46), ["WA-004","WA-009"], "done",
+   "raw/webadmin/webadmin/config/urls.py:363-365 · :378",
+   "추가상품 템플릿 묶음 선택 배선"))
+A(("STD-OPT-037", T(48)+["X-CR-ENFORCE-CLIENT-01","X-CR-ENFORCE-ENGINE-01","X-CR-HANDOFF-01"], ["WA-006","WA-036"], "partial",
+   "raw/webadmin/webadmin/config/urls.py:371 (제약규칙 관리) · :249 (validate) — 그러나 X-CR-ENFORCE-CLIENT-01: 위젯/장바구니/주문 어디에도 validate 호출 없음",
+   "생성은 되나 강제 지점 부재 → 불가 조합 통과"))
+A(("STD-OPT-038", T(48)+["X-CR-ENFORCE-ENGINE-01"], ["WA-006"], "partial",
+   "raw/webadmin/webadmin/config/urls.py:371 · X-CR-ENFORCE-ENGINE-01 가격엔진이 제약을 전혀 참조하지 않음",
+   "게이팅 규칙 그릇만 존재"))
+A(("STD-OPT-039", T(48)+["P-CPQ-CLASSA-01"], ["WA-006","WA-003"], "partial",
+   "raw/webadmin/webadmin/config/urls.py:371 · P-CPQ-CLASSA-01 PRD_000146 고리 그룹 sel_typ/min/max NULL",
+   "택일 그룹 메타 결손"))
+A(("STD-OPT-040", T(48)+["X-CR-C9-01"], ["WA-006"], "partial",
+   "X-CR-C9-01 폼빌더에 수치 범위 조건 타입 부재 — 자유치수 19건+raw-only 7건 UI 관리 불가",
+   "필수동반 규칙 표현력 제약"))
+A(("STD-OPT-041", T(36)+["P-MINIBOARD-QTY-01"], ["WA-003","WA-007"], "partial",
+   "raw/webadmin/webadmin/config/urls.py:373 (validate) · P-MINIBOARD-QTY-01 min1 < 완제품가 시작4 저청구",
+   "수량 규칙 그릇은 있으나 오적재 확인"))
+A(("STD-OPT-042", T(35)+["X-CR-C9-01"], ["WA-007"], "partial",
+   "X-CR-C9-01 수치 범위 조건 타입 부재",
+   "사이즈 범위 검증 표현 불가"))
+A(("STD-OPT-043", T(49), ["WA-035","SB-011","SB-025"], "done",
+   "raw/webadmin/webadmin/config/urls.py:248 (api/w/v1/price) · huni-widget.tsx:162-176 · src/app/api/printly/requote/route.ts:16-50",
+   "옵션 변경→재견적 종단 배선 확인"))
+A(("STD-OPT-044", T(49), ["WA-025","WA-035"], "done",
+   "raw/webadmin/webadmin/catalog/pricing.py:1 (evaluate_price 1561줄) · config/urls.py:248",
+   "서버 권위 계산 실재"))
+A(("STD-OPT-045", ["P-ZEROQUOTE-119-01","P-ANCHOR-149-01","P-QUOTE0-100-01","P-PRICED0-6-01"], [], "todo",
+   "P-ZEROQUOTE-119-01 0원 견적 조합 119건/32상품 — 손님이 0원에 주문 가능(4주째 OPEN)",
+   "0원 상태 가드/안내 자체가 없음 (가드가 is None만 본다)"))
+A(("STD-OPT-046", T(63), ["WA-022","SB-011"], "partial",
+   "raw/webadmin/webadmin/config/urls.py:157,159 (가격 다이어그램/소스 추적 — 운영자용) · huni-widget.tsx:162-176",
+   "운영자 분해는 done, 고객 화면 비목 분해 노출 근거 없음"))
+A(("STD-OPT-047", T(50), ["WA-023"], "partial",
+   "raw/webadmin/webadmin/config/urls.py:137,177-181 (수량구간 할인표 관리)",
+   "할인 적용 그릇 done. 고객 '수량별 가격표 보기'(C2)는 미구현"))
+A(("STD-OPT-048", ["P-AREA-CUSTOM-01","P-ACRYL-INTEGRITY-156-01","P-POSTER-FORMULA-SPLIT-01","P-POSTER-TRANSPOSE-01"], ["WA-025"], "partial",
+   "raw/webadmin/webadmin/catalog/pricing.py:1 · P-ACRYL-INTEGRITY-156-01 면적 미적재 156셀 + 12/13 상품 공식 0바인딩",
+   "면적형 엔진은 있으나 적재 미완"))
+A(("STD-OPT-049", ["P-L1-109-01","P-ORPHAN-211-01","P-OVERCHARGE-8-01"], ["WA-025","WA-018"], "partial",
+   "raw/webadmin/webadmin/catalog/pricing.py:1 · config/urls.py:144-148 (단가 그리드 편집) · P-L1-109-01 109상품 가격공식 미바인딩",
+   "원자합산 엔진 done, 배선 미완"))
+A(("STD-OPT-050", ["P-ACC-20-01","P-GOODS-DIRECTPRICE-01","P-GOODS57-LOAD-01"], ["WA-025","WA-024"], "partial",
+   "raw/webadmin/webadmin/catalog/pricing.py:1 · config/urls.py:113-117 (시작가) · P-GOODS-DIRECTPRICE-01 굿즈파우치 직접단가 110건 미적재",
+   "고정가형 경로 done, 적재 구멍 최대"))
+A(("STD-OPT-051", ["P-SET-072-01","P-SET-088-01","P-VERIFY-SET7-01","X-SET-SIZCD-01"], ["WA-008","WA-021"], "partial",
+   "raw/webadmin/webadmin/config/urls.py:336 (셋트상품 관리) · :169 (셋트 가격 시뮬레이션) · X-SET-SIZCD-01 고정가형 셋트 화면 0원",
+   "셋트 합산 경로 배선, siz_cd 미전파 결함"))
+A(("STD-OPT-052", ["X-ENGINE-PANSU-01","P-AXIS-265-01"], ["WA-025"], "partial",
+   "X-ENGINE-PANSU-01 fn_calc_pansu에 prd_cd 인자 추가 + pricing.py 수정 필요(C트랙)",
+   "판걸이수 계산은 있으나 자재종속 미지원"))
+A(("STD-OPT-053", T(65)+T(11), [], "todo",
+   "F-065/SCOPE-065/IA-065 F5 옵션 보관함 저장·불러오기 CUSTOM·미착수",
+   "L2 근거 없음"))
+A(("STD-OPT-054", T(51), [], "todo",
+   "F-051/SCOPE-051/IA-051 C3 견적서 생성·다운로드 CUSTOM·미착수",
+   "L2 근거 없음"))
+A(("STD-OPT-055", T(70)+T(116), ["SB-056"], "todo",
+   "huni-skin-shopby src/app/(main) 하위 inquiry/qna 라우트 부재 (SB-056 absent)",
+   "대량주문 견적문의 접수 경로 없음"))
+
+# ── 원고·파일 28 ────────────────────────────────────────────────────
+A(("STD-ART-001", T(52), ["WA-037","SB-019"], "partial",
+   "raw/webadmin/webadmin/config/urls.py:250,252 · catalog/s3_artwork.py:208-280 (presign done) — 그러나 SB-019 stub: configurator-actions.tsx:74-86 버튼 라벨만 업로드·실동작은 장바구니 담기",
+   "서버 업로드 계약 done, 고객 화면 미배선 (§4-5 존중)"))
+A(("STD-ART-002", T(52), ["WA-037"], "partial",
+   "raw/webadmin/webadmin/catalog/s3_artwork.py:208-280 (멀티파트)",
+   "멀티파트 서버측만"))
+A(("STD-ART-003", T(52), [], "todo",
+   "F-052/SCOPE-052/IA-052 D1 파일 업로드 CUSTOM·미착수",
+   "진행률/재시도 UI 근거 없음"))
+A(("STD-ART-004", [], [], "new",
+   "print-story/02_capture/order-flow-steps.md §A-4 건수 · §C-8 앞/뒷면 각각",
+   "건수별 개별 파일 업로드 legacy 부재. 근거=경쟁사 실측 → 오염 없음"))
+A(("STD-ART-005", [], [], "new",
+   "print-story/02_capture/order-flow-steps.md §C-8",
+   "앞/뒷면 분리 업로드 legacy 부재. 근거=경쟁사 실측 → 오염 없음"))
+A(("STD-ART-006", T(75), ["WA-052"], "partial",
+   "raw/webadmin/webadmin/catalog/artwork_promote.py:1 (tmp→order 버킷 승격) · models.py:1081",
+   "주문 후 원고 승격 경로 done, 고객 업로드 진입 미배선"))
+A(("STD-ART-007", T(137), ["WA-052"], "partial",
+   "raw/webadmin/webadmin/catalog/artwork_promote.py:1",
+   "승격 이력은 남으나 고객 재업로드·버전 이력 UI 근거 없음"))
+for n, name in [(8,"포맷 유효성"),(9,"블리드 3mm"),(10,"CMYK"),(11,"해상도"),(12,"폰트 아웃라인"),(13,"사양 대조"),(14,"별색·오버프린트")]:
+    A(("STD-ART-%03d" % n, ["X-DEC-FILECHECK-01"]+T(137), [], "todo",
+       "X-DEC-FILECHECK-01 OQ-G11 파일 검수 기준 미확정(1차)",
+       "검판 %s 검사 — 기준 자체가 미확정, L2 근거 없음" % name))
+A(("STD-ART-015", T(137), [], "todo",
+   "F-137/SCOPE-137/IA-137 파일확인처리 CUSTOM·미착수",
+   "검판 결과 고객 노출 근거 없음"))
+A(("STD-ART-016", [], [], "new",
+   "print-kb/wiki/policy/order-mgmt.md#OMG-02 PitStop 연동 후보",
+   "자동검판 도구 연동 legacy 부재. 근거=인쇄 KB → 오염 없음"))
+A(("STD-ART-017", T(137), [], "todo",
+   "F-137/SCOPE-137/IA-137 파일확인처리",
+   "검판 게이트 상태 관리 근거 없음"))
+A(("STD-ART-018", T(138), [], "todo",
+   "F-138/SCOPE-138/IA-138 재업로드요청 문자 발송 PARTIAL·대기 · X-SMS-CONTRACT-01 알림톡/SMS 계약 미체결",
+   "발송 경로 L2 근거 없음"))
+A(("STD-ART-019", T(53)+T(160, i=False), [], "todo",
+   "F-053/SCOPE-053/IA-053 D2 편집상품 미리보기·썸네일 CUSTOM·미착수",
+   "L2 근거 없음"))
+A(("STD-ART-020", T(58, f=False), [], "todo",
+   "SCOPE-058/IA-058 E2 인쇄영역·도련 가이드 PARTIAL·미착수",
+   "재단선 오버레이 근거 없음"))
+A(("STD-ART-021", T(54), ["WA-041","SB-020"], "partial",
+   "raw/webadmin/webadmin/config/urls.py:274,275 · catalog/edicus_lookup.py:214-260 (resolve/token done) — 그러나 SB-020 stub: configurator-actions.tsx:170-176 onClick 없음(데드 버튼)",
+   "서버 진입 계약 done, 고객 버튼 미배선 (§4-5 존중)"))
+A(("STD-ART-022", T(54)+["X-EDX-D3-01"], ["WA-047","WA-048"], "partial",
+   "raw/webadmin/webadmin/config/urls.py:41-49 · catalog/edicus_views.py:278-674 (템플릿 메타/차원/그리드) · :52-69 (tmpl-combo)",
+   "템플릿 관리 done, 고객 선택 경로 미배선"))
+A(("STD-ART-023", T(54)+["X-WGTF-EDICUS-01"], [], "todo",
+   "X-WGTF-EDICUS-01 에디터 연동 계약 미상(U-6/U-7)",
+   "저장·재편집 계약 미확정"))
+A(("STD-ART-024", T(54)+["X-WGTF-EDICUS-01","X-EDX-D8-01"], [], "todo",
+   "X-WGTF-EDICUS-01 · X-EDX-D8-01 EDICUS Link Manager POD 채널 이중 등록",
+   "산출물→주문 연결 계약 미상"))
+A(("STD-ART-025", T(54)+["P-EDICUS-MISSING-01"], [], "todo",
+   "P-EDICUS-MISSING-01 EDICUS 미등록/결손 — 셋트문구 5종·레더하드커버·벽걸이캘린더 2사이즈",
+   "옵션↔캔버스 동기화 근거 없음"))
+A(("STD-ART-026", [], [], "new",
+   "print-kb/wiki/policy/operations.md#OPS-02 현행 무정책 To-Be",
+   "파일 보관기간 정책 legacy 부재. 근거=인쇄 KB → 오염 없음"))
+A(("STD-ART-027", T(10), [], "todo",
+   "F-010/SCOPE-010/IA-010 주문상세조회(편집상품 미리보기) CUSTOM·미착수",
+   "과거 파일 재사용 재주문 근거 없음"))
+A(("STD-ART-028", T(157)+T(159, i=False), ["WA-052"], "partial",
+   "raw/webadmin/webadmin/catalog/artwork_promote.py:1 (order 버킷 승격)",
+   "생산 전달 그릇 일부, 파일명 일관화(F-159)·생산BOM 환원(F-157) 미착수"))
+
+# ── 장바구니·주문 27 ────────────────────────────────────────────────
+A(("STD-ORD-001", T(64)+T(76), ["SB-022","SB-012"], "done",
+   "huni-skin-shopby/src/lib/api/hooks/use-cart.ts:201 · src/lib/api/widget-order.ts:26-35 (위젯 견적가 적재)",
+   "인쇄옵션 동반 담기 배선"))
+A(("STD-ORD-002", T(76), ["SB-021"], "done",
+   "huni-skin-shopby/src/lib/api/hooks/use-cart.ts:130-230",
+   ""))
+A(("STD-ORD-003", T(76), ["SB-021","SB-025"], "done",
+   "huni-skin-shopby/src/lib/api/hooks/use-cart.ts:130-230 · src/app/api/printly/requote/route.ts:16-50",
+   "수량 변경 시 재견적까지 배선"))
+A(("STD-ORD-004", T(76), ["SB-021"], "done",
+   "huni-skin-shopby/src/lib/api/hooks/use-cart.ts:130-230",
+   ""))
+A(("STD-ORD-005", T(76), ["SB-027"], "done",
+   "huni-skin-shopby/src/lib/api/hooks/use-order-sheet.ts:177,252",
+   "금액계산 경로 배선"))
+A(("STD-ORD-006", T(61)+["X-CR-ENFORCE-CLIENT-01"], ["WA-036"], "partial",
+   "raw/webadmin/webadmin/config/urls.py:249 (validate) — X-CR-ENFORCE-CLIENT-01 호출 지점 0건",
+   "검증 API는 있으나 결제 전 sanity 호출 없음"))
+A(("STD-ORD-007", [], ["SB-023"], "new",
+   "huni-skin-shopby/src/lib/guest-cart.ts:1-31 (localStorage 게스트 장바구니 done)",
+   "비회원 장바구니 legacy 3원장 부재 — 이미 구현됨. 근거=Shopby 계약 → 오염 없음"))
+A(("STD-ORD-008", T(76), ["SB-012"], "partial",
+   "huni-skin-shopby/src/lib/api/widget-order.ts:26-35 · huni-widget.tsx:257-265",
+   "견적가는 실리나 인쇄사양 요약 표시 근거 없음"))
+A(("STD-ORD-009", T(77), ["SB-026"], "done",
+   "huni-skin-shopby/src/lib/api/hooks/use-order-sheet.ts:40",
+   ""))
+A(("STD-ORD-010", T(77), ["SB-027"], "done",
+   "huni-skin-shopby/src/lib/api/hooks/use-order-sheet.ts:177,252",
+   ""))
+A(("STD-ORD-011", T(77), ["SB-027","SB-029"], "done",
+   "huni-skin-shopby/src/lib/api/hooks/use-order-sheet.ts:177,252 · use-order-coupons.ts:34,69,102",
+   "쿠폰 최대할인 반영까지 배선"))
+A(("STD-ORD-012", T(77), ["SB-026"], "done",
+   "huni-skin-shopby/src/lib/api/hooks/use-order-sheet.ts:40",
+   ""))
+A(("STD-ORD-013", T(79, f=False), ["SB-028"], "done",
+   "huni-skin-shopby/src/components/checkout/address-modal.tsx:1 · src/lib/daum-postcode.ts:10",
+   "Daum 우편번호 연동(L2 D-10)"))
+A(("STD-ORD-014", T(77), [], "todo",
+   "F-077/SCOPE-077/IA-077 배송정보입력 PARTIAL·미착수",
+   "요청사항 입력 전용 근거 없음"))
+A(("STD-ORD-015", [], [], "new",
+   "huni-shopby/01_research/order-to-delivery-contract.md §2.2 later-input-shippings",
+   "나중배송 legacy 부재. 근거=Shopby 계약 → 오염 없음"))
+A(("STD-ORD-016", [], [], "new",
+   "print-story/02_capture/order-flow-steps.md §A-6 주문제목",
+   "주문 제목/작업명 legacy 부재. 근거=경쟁사 실측 → 오염 없음"))
+A(("STD-ORD-017", [], [], "new",
+   "print-story/02_capture/order-flow-steps.md §C-6 출고 옵션",
+   "오늘출고·토요일출고 legacy 부재. 근거=경쟁사 실측 → 오염 없음"))
+A(("STD-ORD-018", ["X-SHOPBY-TERMS-01"], [], "todo",
+   "X-SHOPBY-TERMS-01 Q-MISC-1 reserve 필수 agreementTermsAgrees termsType 세트 미상",
+   "구매 약관 동의 세트 미확정"))
+A(("STD-ORD-019", T(80)+["X-PAY-FLOW-01"], ["SB-031","SB-033"], "partial",
+   "huni-skin-shopby/src/components/checkout/checkout-form.tsx:157-158 · src/lib/payments/ncp-pay.ts:47-70 — X-PAY-FLOW-01 reserve/paymentAmtForVerification 산식 미상",
+   "무통장 경로만 성립"))
+A(("STD-ORD-020", T(81), ["SB-035"], "done",
+   "huni-skin-shopby/src/components/order/order-complete-view.tsx:1",
+   "주문완료 화면 배선 (메일 발송은 별도 미확인)"))
+A(("STD-ORD-021", T(9, f=False)+T(161, i=False), ["SB-045"], "done",
+   "huni-skin-shopby/src/lib/api/hooks/use-my-orders.ts:84,354",
+   "회원 주문내역 목록/상세 배선"))
+A(("STD-ORD-022", T(73, f=False), ["SB-036"], "done",
+   "huni-skin-shopby/src/components/order/guest-order-lookup.tsx:4-9",
+   "비회원 주문조회 배선 (주문번호+비밀번호 방식 — 표준은 휴대전화, 인증축 차이 있음)"))
+A(("STD-ORD-023", T(161, i=False)+["X-DEC-MIRROR-01"], ["SB-045"], "partial",
+   "huni-skin-shopby/src/lib/api/hooks/use-my-orders.ts:84,354 · X-DEC-MIRROR-01 샵바이→후니 상태 미러 채널 미확인",
+   "상태 표시는 되나 전이 미러 채널 미정"))
+A(("STD-ORD-024", T(162, i=False)+["X-DEC-MIRROR-01"], [], "todo",
+   "SCOPE-162 주문/주문상세 런타임 그릇 구축 PARTIAL·미착수",
+   "인쇄 공정 단계 상태 노출 근거 없음"))
+A(("STD-ORD-025", [], [], "new",
+   "huni-shopby/01_research/order-to-delivery-contract.md §3 confirm",
+   "구매확정 legacy 부재. 근거=Shopby 계약 → 오염 없음"))
+A(("STD-ORD-026", T(11), [], "todo",
+   "F-011/SCOPE-011/IA-011 옵션보관함 CUSTOM·미착수",
+   "재주문 전용 경로 근거 없음"))
+A(("STD-ORD-027", T(98), ["WA-060"], "partial",
+   "raw/webadmin/webadmin/catalog/models.py:87 (TCusCustomers 모델만 · 전용 운영화면 urls.py 부재)",
+   "오프라인 거래 원장은 모델만"))
+
+# ── 결제 18 ─────────────────────────────────────────────────────────
+A(("STD-PAY-001", T(80)+["X-PG-CONTRACT-01"], ["SB-032"], "todo",
+   "huni-skin-shopby/src/components/checkout/checkout-form.tsx:8-9 주석 'PG 연동은 후속 — 현재는 무통장만 동작' (SB-032 absent) · X-PG-CONTRACT-01 이니시스 계약 미체결",
+   "카드 결제 경로 부재"))
+A(("STD-PAY-002", T(80)+["X-PG-CONTRACT-01"], ["SB-032"], "todo",
+   "huni-skin-shopby/src/components/checkout/checkout-form.tsx:8-9 (SB-032 absent)",
+   "실시간 계좌이체 부재"))
+A(("STD-PAY-003", T(148, i=False), ["SB-031"], "done",
+   "huni-skin-shopby/src/components/checkout/checkout-form.tsx:157-158 · guest-checkout-form.tsx:100-101",
+   "무통장(ACCOUNT) 결제 배선"))
+A(("STD-PAY-004", T(149, i=False)+["X-DEC-NAVERPAY-01"], [], "todo",
+   "X-DEC-NAVERPAY-01 NaverPay 별도 mini-OrderSheet 1차 범위 포함 여부 미결",
+   "L2 근거 없음"))
+A(("STD-PAY-005", [], [], "new",
+   "print-kb/wiki/policy/order-payment.md#PAY-03",
+   "카카오페이 legacy 부재. 근거=인쇄 KB → 오염 없음"))
+A(("STD-PAY-006", [], [], "new",
+   "print-kb/wiki/policy/order-payment.md#PAY-03",
+   "토스페이 legacy 부재. 근거=인쇄 KB → 오염 없음"))
+A(("STD-PAY-007", T(14)+["X-DEC-PRINTMONEY-01"], ["SB-030","SB-050"], "partial",
+   "huni-skin-shopby/src/lib/api/hooks/use-points.ts:22,62 (조회 done) · checkout-form.tsx:52 (적립/충전은 mock)",
+   "잔액 조회·사용 UI는 있으나 프린팅머니 원장 정의 미결"))
+A(("STD-PAY-008", ["X-DEC-PRINTMONEY-01"], ["SB-030"], "todo",
+   "huni-skin-shopby/src/components/checkout/checkout-form.tsx:52 (mock)",
+   "복합결제 근거 없음"))
+A(("STD-PAY-009", [], [], "new",
+   "print-kb/wiki/policy/order-payment.md#PAY-04",
+   "할부·무이자 legacy 부재. 근거=인쇄 KB → 오염 없음"))
+A(("STD-PAY-010", T(141), [], "todo",
+   "F-141/SCOPE-141/IA-141 주문관리-후불결제 PARTIAL·미착수",
+   "B2B 후불 근거 없음"))
+A(("STD-PAY-011", T(80)+["X-PAY-FLOW-01"], ["SB-033"], "partial",
+   "huni-skin-shopby/src/lib/payments/ncp-pay.ts:47-70 · src/app/api/pay-config/route.ts:8 — X-PAY-FLOW-01 PG 콜백 흐름 미상",
+   "SDK 로더만 배선"))
+A(("STD-PAY-012", ["X-PAY-FLOW-01"], [], "todo",
+   "X-PAY-FLOW-01 결제 확정 흐름 미상",
+   "실패 안내·재시도 근거 없음"))
+A(("STD-PAY-013", ["X-PRICE-BRIDGE-01","X-PAY-FLOW-01","X-NHN-POLICY-01"], ["SB-012"], "partial",
+   "huni-skin-shopby/src/lib/api/widget-order.ts:26-35 (10원×orderCnt 적재 — 견적가 우회 적재) · X-PRICE-BRIDGE-01 동적 계산가 무손실 환원 경로 미확정",
+   "★돈 크리티컬: 서버 재계산 대조 축이 미확정"))
+A(("STD-PAY-014", [], [], "new",
+   "huni-shopby/01_research/order-to-delivery-contract.md §1 PAY_CANCEL",
+   "결제 포기 처리 legacy 부재. 근거=Shopby 계약 → 오염 없음"))
+A(("STD-PAY-015", T(28)+["X-TAXDOC-01"], ["SB-053"], "todo",
+   "huni-skin-shopby/src/components/mypage/document-section.tsx:1-6 (정적 표 UI만·API 호출 없음 = stub) · X-TAXDOC-01 팝빌 연동 미결",
+   "현금영수증 발급 미배선"))
+A(("STD-PAY-016", T(152, i=False)+["X-TAXDOC-01"], ["SB-053"], "todo",
+   "huni-skin-shopby/src/components/mypage/document-section.tsx:1-6 (stub)",
+   "세금계산서 발급 미배선"))
+A(("STD-PAY-017", T(26)+T(27), [], "todo",
+   "F-026/027·SCOPE-026/027·IA-026/027 사업자정보 목록·등록 PARTIAL·미착수",
+   "L2 근거 없음"))
+A(("STD-PAY-018", T(142)+T(25), [], "todo",
+   "F-142/SCOPE-142/IA-142 증빙서류발급 관리 PARTIAL·미착수",
+   "거래명세서 출력 근거 없음"))
+
+# ── 배송 16 ─────────────────────────────────────────────────────────
+A(("STD-SHP-001", T(151, i=False)+["X-DEC-SHIPPING-01"], ["SB-027"], "partial",
+   "huni-skin-shopby/src/lib/api/hooks/use-order-sheet.ts:177,252 (금액계산에 배송비 포함) · X-DEC-SHIPPING-01 배송비 정책 미확정",
+   "샵바이 기본 배송비 경로는 타지만 후니 정책 미확정"))
+A(("STD-SHP-002", T(151, i=False)+["X-DEC-SHIPPING-01"], ["SB-027"], "partial",
+   "huni-skin-shopby/src/lib/api/hooks/use-order-sheet.ts:177,252",
+   "무료배송 기준 정책 미확정"))
+A(("STD-SHP-003", T(150, i=False)+["X-DEC-SHIPPING-01"], [], "todo",
+   "F-150/SCOPE-150 도서산간 추가배송비 데이터화 PARTIAL·미착수",
+   "제주 권역 데이터 없음"))
+A(("STD-SHP-004", T(150, i=False)+["X-DEC-SHIPPING-01"], [], "todo",
+   "F-150/SCOPE-150 도서산간 추가배송비 데이터화",
+   "권역별 데이터 없음"))
+A(("STD-SHP-005", T(151, i=False), [], "todo",
+   "SCOPE-151 배송비 템플릿/조건부 무료배송 PARTIAL",
+   "상품군 제외 규칙 근거 없음"))
+A(("STD-SHP-006", [], [], "new",
+   "print-kb/wiki/policy/shipping.md#SHIP-04 최고값 1건",
+   "혼합주문 배송비 산정 legacy 부재. 근거=인쇄 KB → 오염 없음"))
+A(("STD-SHP-007", T(151, i=False), [], "todo",
+   "SCOPE-151 배송비 템플릿",
+   "권역·템플릿 운영툴 근거 없음"))
+A(("STD-SHP-008", T(77), ["SB-026","SB-028"], "partial",
+   "huni-skin-shopby/src/lib/api/hooks/use-order-sheet.ts:40 · src/components/checkout/address-modal.tsx:1",
+   "주문서 배송정보 입력 done, 택배 실행/연동은 근거 없음"))
+A(("STD-SHP-009", [], [], "new",
+   "print-kb/wiki/policy/shipping.md#SHIP-03 실사 대형 파생",
+   "퀵/화물 배송 legacy 부재. 근거=인쇄 KB → 오염 없음"))
+A(("STD-SHP-010", [], [], "new",
+   "print-kb/wiki/policy/order-mgmt.md#OMG-07 오프라인 경로 파생",
+   "매장 방문수령 legacy 부재. 근거=인쇄 KB → 오염 없음"))
+A(("STD-SHP-011", [], [], "new",
+   "huni-shopby/01_research/order-to-delivery-contract.md §2.1 주문상품옵션 단위 송장",
+   "분할배송 legacy 부재. 근거=Shopby 계약 → 오염 없음"))
+A(("STD-SHP-012", T(140), [], "todo",
+   "F-140/SCOPE-140/IA-140 주문상태변경 처리(+문자) PARTIAL·미착수",
+   "송장 등록 근거 없음"))
+A(("STD-SHP-013", T(143), [], "todo",
+   "F-143/SCOPE-143/IA-143 주문상태변경(일괄) PARTIAL·미착수",
+   "송장 기반 일괄변경 근거 없음"))
+A(("STD-SHP-014", T(161, i=False), ["SB-045"], "partial",
+   "huni-skin-shopby/src/lib/api/hooks/use-my-orders.ts:84,354",
+   "주문 상세는 조회되나 택배사 추적 연동 근거 없음"))
+A(("STD-SHP-015", T(78, f=False)+T(79, f=False), ["SB-048"], "done",
+   "huni-skin-shopby/src/lib/api/hooks/use-shipping-address.ts:65-125 (CRUD·기본배송지)",
+   ""))
+A(("STD-SHP-016", T(144)+["X-SMS-CONTRACT-01"], [], "todo",
+   "X-SMS-CONTRACT-01 OQ-G8 알림톡/SMS 서비스 계약 미체결(1차 영향)",
+   "배송 알림 발송 근거 없음"))
+
+# ── 클레임·CS 20 ────────────────────────────────────────────────────
+for sid, nm in [("STD-CLM-001","주문 전체 취소"),("STD-CLM-002","옵션 부분 취소"),("STD-CLM-003","비회원 취소"),
+                ("STD-CLM-005","반품 신청"),("STD-CLM-006","교환 신청"),("STD-CLM-007","환불 예상금액"),
+                ("STD-CLM-008","환불계좌 등록"),("STD-CLM-009","클레임 철회")]:
+    A((sid, [], [], "new",
+       "huni-shopby/01_research/order-to-delivery-contract.md §4.3 claims-*",
+       "%s — legacy 3원장(410/162/144) 전체에 취소·반품·교환·환불 행이 1건도 없다. 근거=Shopby 계약 → 오염 없음" % nm))
+A(("STD-CLM-004", [], [], "new",
+   "print-kb/wiki/policy/operations.md#OPS-01 케이스별 협의",
+   "제작 착수 후 취소 제한 — legacy 부재. 근거=인쇄 KB → 오염 없음"))
+A(("STD-CLM-010", [], [], "new",
+   "huni-shopby/01_research/order-to-delivery-contract.md §4.2 claimReasonType",
+   "클레임 사유 12종 — legacy 부재. 근거=Shopby 계약 → 오염 없음"))
+A(("STD-CLM-011", [], [], "new",
+   "huni-shopby/01_research/order-to-delivery-contract.md §4.2 responsibleObjectType",
+   "귀책 구분 — legacy 부재. 근거=Shopby 계약 → 오염 없음"))
+A(("STD-CLM-012", ["X-SHOPBY-CLAIM-FSM-01"], [], "todo",
+   "X-SHOPBY-CLAIM-FSM-01 클레임 상태머신 미폐합 — 수거진행 중간상태 누락·입금대기/교환대기/환불완료 전이 미정의",
+   "클레임 조회 화면 근거 없음"))
+A(("STD-CLM-013", ["X-SHOPBY-CLAIM-FSM-01"], [], "todo",
+   "X-SHOPBY-CLAIM-FSM-01 클레임 상태머신 미폐합",
+   "판매자 승인·거부 처리 근거 없음"))
+A(("STD-CLM-014", [], [], "new",
+   "print-kb/wiki/policy/operations.md#OPS-04 클레임/불량",
+   "인쇄 불량 접수(사진 첨부) — legacy 부재. 근거=인쇄 KB → 오염 없음"))
+A(("STD-CLM-015", [], [], "new",
+   "print-kb/wiki/policy/operations.md#OPS-04 재제작 우선",
+   "재제작 처리 경로 — legacy 부재. 근거=인쇄 KB → 오염 없음"))
+A(("STD-CLM-016", T(20, f=False)+T(120, f=False), ["SB-056"], "todo",
+   "huni-skin-shopby/src/app/(main) 하위 inquiry/qna 라우트 부재 (SB-056 absent)",
+   "1:1 문의 미배선"))
+A(("STD-CLM-017", T(69, f=False)+T(119, f=False)+T(16, f=False), ["SB-056"], "todo",
+   "huni-skin-shopby/src/app/(main) 하위 inquiry/qna 라우트 부재 (SB-056 absent)",
+   "상품 Q&A 미배선"))
+A(("STD-CLM-018", T(67, f=False)+T(68, f=False), ["SB-054","SB-056"], "partial",
+   "huni-skin-shopby/src/app/(main)/notice/page.tsx:1-27 · src/lib/api/server/board.ts:1 (공지 done) — FAQ 라우트 부재(SB-056 absent)",
+   "공지 done · FAQ 미배선"))
+A(("STD-CLM-019", T(71, f=False)+T(117, f=False), ["SB-056"], "todo",
+   "huni-skin-shopby src/app/(main) 하위 inquiry 라우트 부재 (SB-056 absent)",
+   "기업인쇄 상담 미배선"))
+A(("STD-CLM-020", T(72, f=False)+T(118, f=False)+T(82), ["SB-056"], "todo",
+   "huni-skin-shopby src/app/(main) 하위 inquiry 라우트 부재 (SB-056 absent)",
+   "디자인 상담 미배선"))
+
+# ══ 검증 + 산출 ═════════════════════════════════════════════════════
+MAP = {m[0]: m for m in M}
+std_ids = [r["std_id"] for r in std_rows]
+missing = [s for s in std_ids if s not in MAP]
+extra = [s for s in MAP if s not in set(std_ids)]
+dup = len(M) - len(MAP)
+bad_leg = sorted({l for m in M for l in m[1] if l not in LEG})
+bad_asis = sorted({a for m in M for a in m[2] if a not in asis})
+print("std 커버:", len(MAP), "/", len(std_ids), "| 누락:", missing, "| 초과:", extra, "| 중복:", dup)
+print("존재하지 않는 legacy_id:", bad_leg)
+print("존재하지 않는 asis_id:", bad_asis)
+assert not missing and not extra and not dup and not bad_leg and not bad_asis
+
+byid = {r["std_id"]: r for r in std_rows}
+with open(os.path.join(BASE, "mapping.csv"), "w", newline="") as f:
+    w = csv.writer(f)
+    w.writerow(["std_id","대분류","기능","매핑legacy_id","매핑asis_id","상태","근거","사유"])
+    for s in std_ids:
+        sid, leg, ais, st, ev, why = MAP[s]
+        w.writerow([sid, byid[s]["대분류"], byid[s]["기능"], ";".join(leg), ";".join(ais), st, ev, why])
+
+used = {l for m in M for l in m[1]}
+unassigned = [r for r in legacy if r["legacy_id"] not in used]
+with open(os.path.join(BASE, "unassigned-candidates.csv"), "w", newline="") as f:
+    w = csv.writer(f)
+    w.writerow(["legacy_id","원천","기능서술","원판정","돈여부","주문여부","비고"])
+    for r in unassigned:
+        w.writerow([r["legacy_id"], r["원천"], r["기능서술"], r["원판정"], r["돈여부"], r["주문여부"],
+                    "L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님"])
+
+from collections import Counter
+c = Counter(m[3] for m in M)
+print("상태 분포:", dict(c))
+print("legacy 귀속:", len(used), "/", len(legacy), "| 미귀속:", len(unassigned))
+json.dump({"used": sorted(used)}, open(os.path.join(BASE, "_used.json"), "w"))

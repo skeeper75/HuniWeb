@@ -1,0 +1,23 @@
+{
+  "viewShopSpecification": false,
+  "shopSpecificationFields": [
+    "IMMEDIATE_DISCOUNT_PRICE",
+    "PRODUCT_NO"
+  ],
+  "specificationAdditionalInfo": "",
+  "visibleReceiptBtn": {
+    "specification": false,
+    "pgReceipt": false,
+    "specificationBrief": false
+  },
+  "useSimpleReceipt": false,
+  "usePaymentReceipt": false,
+  "cashReceipt": false,
+  "cashReceiptRequired": false,
+  "pgType": null,
+  "escrow": {
+    "escrowInfoKey": null,
+    "exposeLogo": false,
+    "logo": null
+  }
+}

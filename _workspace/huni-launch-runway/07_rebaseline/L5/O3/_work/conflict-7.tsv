@@ -1,0 +1,8 @@
+legacy_id	소재	붙은 std_id	conflict_note
+P-DBMAP-OPEN-01	원장	STD-ADP-025	huni-dbmap/HANDOFF.md에 '미해결/블로커' 헤더가 4곳(:34-35 / :61-62 / :103-104 + :71)에 시간 역순 누적되어 자기모순. 지시대로 상위(:34-35) 섹션을 권위로 채택하되 하위 섹션 근거는 삭제하지 않고 sources에 보존. 대표 상충: :62 '수량구간할인 링크 미연결' ↔ :28 '수량구간 할인=이미 완비(미연결은 stale 오해)'; :70 '가격 전면 미적재 2시트' ↔ :50-52 '동일 2시트 라이브 COMMIT 완료' (gaps-t2-rest.md:33-37).
+P-DRIFT-10-01	원장	STD-ADP-033	HANDOFF.md:24 '현재 전수 DRIFT 0.'(07-07) vs verify/last-run.json:12-15 exit 1·findings 10(07-14). 최신인 센서 실측(07-14)을 채택.
+P-PRD042-MISWIRE-01	원장	STD-ADP-002	동일 상품·동일 옵션의 원인 진단이 두 하네스에서 다르다 — §load-governance CHANGELOG:17='비종이 굿즈 자재로 오배선' vs §dbmap precondition-gate §3-2='단가행 없는 중복 자재 MAT_000240/241 참조(정본은 MAT_000127/130)'. 양측 근거 보존, 교정 전 라이브 ref_key1 재실측으로 확정 필요.
+P-PRICED0-6-01	원장	STD-ADP-033;STD-OPT-045	§29 03_schedule/blocked-before-widget.md:51-53 = BLOCKED-미바인딩 vs §23 HANDOFF.md:84 = 라이브 COMMIT 완료. 시점은 §29(06-30) < §23(07-01/02)이라 §29가 stale일 가능성이 높으나 라이브 재실측 전에는 단정 불가 (gaps-t1-data.md:47-50 기록).
+X-CONFIRM-FOMEX-01	원장	STD-ADP-025	포맥스 3mm 단가가 권위 자료 내에서 8,300/11,500 vs 8,500/13,000으로 충돌 (_foundation/batch/wiring/HANDOFF.md:46-48). 양쪽 값을 모두 보존하고 채택은 인간 판정.
+X-CONFIRM-PRICE-2-01	원장	STD-ADP-025	라이브 값 vs 권위 엑셀 값 불일치 2건. 권위 엑셀의 족자 천정고리 표기가 '4000?'로 확정값이 아님 — 양측 값 모두 보존, 채택은 인간 판정.
+X-FOIL-MINQTY-01	원장	STD-ADP-021	§23 HANDOFF.md:29 = 제약규칙 미구축(→§31 이관) vs §31 CHANGELOG 2026-07-03 ⑦ = '박/쿠폰 최소수량=사이즈별 수량규칙(제약아님·상품레벨 적재됨)' (gaps-t1-widget.md:33). 지시상 constraint-rules/HANDOFF.md:4,6은 제외됐으나 본 항목은 §23 출처라 존치.

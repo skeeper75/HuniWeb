@@ -1,0 +1,186 @@
+STD-CAT-001	상품·카탈로그	카테고리	대분류/중분류/소분류 다단 카테고리 트리 노출	N	must	print-quote/04_design/ia.md §2.1 GNB 카테고리 메뉴
+STD-CAT-002	상품·카탈로그	카테고리	카테고리별 상품 리스팅(정렬·페이징)	N	must	print-quote/04_design/ia.md §2.1
+STD-CAT-003	상품·카탈로그	카테고리	상품군 전용 랜딩(출력/책자/실사/패키지/굿즈)	Y	should	print-kb/wiki/huni/price-engine.md#PE-SOT-1 상품마스터 11시트 상품군 그릇
+STD-CAT-004	상품·카탈로그	검색	상품명 통합검색	N	must	print-quote/04_design/ia.md §2.1 통합검색
+STD-CAT-005	상품·카탈로그	검색	종이/소재명 기준 검색(아트지·스노우지 등)	Y	should	print-quote/04_design/ia.md §2.1 · print-kb/wiki/base/paper.md#BPP-003
+STD-CAT-006	상품·카탈로그	검색	검색어 자동완성·인기검색어	N	could	print-quote/04_design/ia.md §2.1 통합검색 파생
+STD-CAT-007	상품·카탈로그	상품상세	상품 상세페이지 본문(이미지·설명 블록)	N	must	print-story/02_capture/order-flow-steps.md §A 상품 진입 캡처
+STD-CAT-008	상품·카탈로그	상품상세	동일 계열 상품 분기 안내(일반명함/고급지명함/부분UV명함 등)	Y	must	print-story/02_capture/order-flow-steps.md §A-0 레드프린팅 상품 분할 전략
+STD-CAT-009	상품·카탈로그	상품상세	후가공 용어 설명 툴팁(도무송·오시·형압·귀돌이)	Y	must	print-story/02_capture/order-flow-steps.md §E-4 3사 용어 불일치
+STD-CAT-010	상품·카탈로그	상품상세	재단사이즈 vs 작업사이즈 설명 가이드	Y	must	print-story/02_capture/order-flow-steps.md §E-1 · print-kb/wiki/base/sizes.md#BSZ-001 BSZ-002
+STD-CAT-011	상품·카탈로그	상품상세	상품별 제작 소요일/출고 기준 안내	Y	must	print-story/02_capture/order-flow-steps.md §C-6 출고 옵션
+STD-CAT-012	상품·카탈로그	상품상세	재작업 불가 사항 고지(폰트 아웃라인 등)	Y	must	print-story/02_capture/order-flow-steps.md §B 재작업 불가 안내
+STD-CAT-013	상품·카탈로그	상품상세	상품 Q&A 게시	N	should	print-quote/04_design/ia.md §2.1 고객센터 상품Q&A
+STD-CAT-014	상품·카탈로그	상품상세	상품 리뷰 목록·평점 노출	N	should	print-kb/wiki/policy/review.md#RVW-01
+STD-CAT-015	상품·카탈로그	상품상세	사진 리뷰 갤러리	N	could	print-kb/wiki/policy/review.md#RVW-04
+STD-CAT-016	상품·카탈로그	상품상세	관련상품/함께 주문한 상품 추천	N	could	print-quote/04_design/ia.md §2.1 리스팅 파생
+STD-CAT-017	상품·카탈로그	상품상세	최근 본 상품	N	could	print-quote/04_design/ia.md §2.1 GNB 파생
+STD-CAT-018	상품·카탈로그	상품상세	찜/관심상품	N	could	print-kb/wiki/policy/mypage.md 마이페이지 영역 파생
+STD-CAT-019	상품·카탈로그	콘텐츠	인쇄 가이드 콘텐츠(11종)	Y	should	print-quote/04_design/ia.md §2.1 가이드 11종
+STD-CAT-020	상품·카탈로그	콘텐츠	템플릿/샘플 다운로드 제공	Y	should	print-kb/wiki/base/prepress-file.md#BPF-003 블리드 3mm 입고표준
+STD-CAT-021	상품·카탈로그	콘텐츠	메인 기획전/배너 영역	N	should	print-quote/04_design/ia.md §2.1 메인
+STD-CAT-022	상품·카탈로그	전시	품절/판매중지 상품 표시 및 대체 안내	N	should	huni-shopby/01_research/order-to-delivery-contract.md §4.2 OUT_OF_STOCK 사유
+STD-OPT-001	옵션·견적	옵션위젯	상품 상세 내 주문옵션 위젯 마운트(격리 렌더)	Y	must	print-story/02_capture/order-flow-steps.md §A 위젯 Shadow DOM 2130px 실측 · print-kb/wiki/huni/widget-contract.md#WID-001
+STD-OPT-002	옵션·견적	옵션위젯	정규화 옵션 데이터 계약 기반 위젯 구동	Y	must	print-kb/wiki/huni/widget-contract.md#WID-001
+STD-OPT-003	옵션·견적	옵션위젯	옵션 컴포넌트 타입 다형 렌더(셀렉트·라디오·체크·수치입력·이미지선택)	Y	must	print-kb/wiki/huni/widget-contract.md#WID-003 14 componentType
+STD-OPT-004	옵션·견적	옵션위젯	옵션 선택 캐스케이드(상위 선택이 하위 목록 갱신)	Y	must	print-story/02_capture/order-flow-steps.md §A-1 자재→평량 캐스케이드 · print-kb/wiki/huni/widget-contract.md#WID-004
+STD-OPT-005	옵션·견적	옵션위젯	토글형 후가공 섹션(켜야 하위 선택지 노출)	Y	must	print-story/02_capture/order-flow-steps.md §A-7
+STD-OPT-006	옵션·견적	옵션위젯	옵션 그룹 접기/펼치기·진행 스텝 표시	Y	should	print-story/02_capture/order-flow-steps.md §C 옵션 테이블 1080x1694 복잡도
+STD-OPT-007	옵션·견적	옵션위젯	선택 요약 패널(현재 사양 한눈에)	Y	must	print-story/02_capture/order-flow-steps.md §B 우측 실시간 견적 패널
+STD-OPT-008	옵션·견적	옵션축	용지(자재) 선택	Y	must	print-kb/wiki/base/paper.md#BPP-003 · print-story/02_capture/order-flow-steps.md §A-1
+STD-OPT-009	옵션·견적	옵션축	평량(g/㎡) 선택	Y	must	print-kb/wiki/base/paper.md#BPP-002
+STD-OPT-010	옵션·견적	옵션축	비종이 소재 선택(아크릴·PVC·패브릭 등)	Y	must	print-kb/wiki/base/paper.md#BPP-005
+STD-OPT-011	옵션·견적	옵션축	인쇄도수 선택(단면/양면·4도/8도·1도)	Y	must	print-kb/wiki/base/color.md#BCL-004 · print-story/02_capture/order-flow-steps.md §B-2
+STD-OPT-012	옵션·견적	옵션축	별색(spot color) 선택	Y	should	print-kb/wiki/base/color.md#BCL-003 · print-kb/wiki/huni/processes.md#PRC-003
+STD-OPT-013	옵션·견적	옵션축	화이트/UV white 언더베이스 선택	Y	could	print-kb/wiki/base/color.md#BCL-005
+STD-OPT-014	옵션·견적	옵션축	규격 사이즈 선택(프리셋)	Y	must	print-story/02_capture/order-flow-steps.md §A-3
+STD-OPT-015	옵션·견적	옵션축	비규격 사이즈 직접입력(재단 가로·세로)	Y	must	print-story/02_capture/order-flow-steps.md §A-3 · print-kb/wiki/base/sizes.md#BSZ-001
+STD-OPT-016	옵션·견적	옵션축	작업 사이즈 입력·자동 도출(도련 포함)	Y	must	print-kb/wiki/base/sizes.md#BSZ-002 BSZ-004 표준 3mm
+STD-OPT-017	옵션·견적	옵션축	수량 선택(구간 프리셋 + 직접입력)	N	must	print-story/02_capture/order-flow-steps.md §A-5 · §C-4 57단계
+STD-OPT-018	옵션·견적	옵션축	건수(디자인 종류 수) 입력 및 총량 = 건수×수량 규칙 표시	Y	must	print-story/02_capture/order-flow-steps.md §A-4 A-5
+STD-OPT-019	옵션·견적	옵션축	페이지 수 입력(책자류 필수 축)	Y	must	print-story/02_capture/order-flow-steps.md §D 페이지수 미입력 시 0원
+STD-OPT-020	옵션·견적	옵션축	표지/내지/간지 용지 개별 선택	Y	must	print-story/02_capture/order-flow-steps.md §D 용지 선택 자리 3곳
+STD-OPT-021	옵션·견적	옵션축	표지/내지 인쇄도수 개별 선택	Y	must	print-story/02_capture/order-flow-steps.md §D 도수 자리 12곳
+STD-OPT-022	옵션·견적	옵션축	제본 방식 선택(중철·무선·PUR·트윈링·하드커버)	Y	must	print-kb/wiki/base/binding.md#BBD-003 BBD-004 BBD-005
+STD-OPT-023	옵션·견적	옵션축	제본 방향 선택(좌철/상철 × 세로/가로)	Y	must	print-story/02_capture/order-flow-steps.md §D 제본방향 4종
+STD-OPT-024	옵션·견적	후가공	코팅 선택(무광/유광 × 단면/양면)	Y	must	print-kb/wiki/base/finishing.md#BFN-003 · print-story/02_capture/order-flow-steps.md §A-7
+STD-OPT-025	옵션·견적	후가공	박 선택(색상 다종 × 면 × 크기 × 내용같음/틀림)	Y	must	print-story/02_capture/order-flow-steps.md §C-7-2 박 14종 · print-kb/wiki/base/finishing.md#BFN-004
+STD-OPT-026	옵션·견적	후가공	형압(양각/음각) 선택	Y	must	print-kb/wiki/base/finishing.md#BFN-005
+STD-OPT-027	옵션·견적	후가공	오시 선택(줄 수 × 방향)	Y	must	print-story/02_capture/order-flow-steps.md §C-7-1
+STD-OPT-028	옵션·견적	후가공	미싱 선택	Y	should	print-story/02_capture/order-flow-steps.md §C-7
+STD-OPT-029	옵션·견적	후가공	타공 선택(직경 × 개수 × 위치)	Y	must	print-story/02_capture/order-flow-steps.md §A-7 타공 3~7mm
+STD-OPT-030	옵션·견적	후가공	귀돌이/라운딩 선택(반경 × 모서리 위치)	Y	must	print-story/02_capture/order-flow-steps.md §C-7-4
+STD-OPT-031	옵션·견적	후가공	도무송(전체/부분·모양·개수) 선택	Y	must	print-story/02_capture/order-flow-steps.md §C-7-3
+STD-OPT-032	옵션·견적	후가공	넘버링(일반/난수 × 자릿수 × 개수) 선택	Y	should	print-story/02_capture/order-flow-steps.md §C-7-5
+STD-OPT-033	옵션·견적	후가공	부분UV/에폭시 선택	Y	should	print-kb/wiki/base/finishing.md#BFN-006 · print-story/02_capture/order-flow-steps.md §C-7
+STD-OPT-034	옵션·견적	부자재	부자재 선택(케이스·폴리백·포장)	N	should	print-story/02_capture/order-flow-steps.md §A-8 · §B-7
+STD-OPT-035	옵션·견적	부자재	상품별 기본제공 부자재 규칙 표시	Y	should	print-story/02_capture/order-flow-steps.md §B-7 기본 제공 규칙
+STD-OPT-036	옵션·견적	부자재	추가상품(악세사리) 템플릿 묶음 선택	Y	should	print-kb/wiki/huni/cpq-options.md#CPQ-006
+STD-OPT-037	옵션·견적	제약	옵션 조합 제약 규칙 평가(불가 조합 차단·사유 표시)	Y	must	print-kb/wiki/huni/cpq-options.md#CPQ-007 캐스케이드 제약
+STD-OPT-038	옵션·견적	제약	자재→가능 인쇄방식 게이팅	Y	must	print-kb/wiki/base/paper.md#BPP-005 · print-kb/wiki/huni/processes.md#PRC-GAP-4
+STD-OPT-039	옵션·견적	제약	공정 택일 그룹(상호배타) 처리	Y	must	print-kb/wiki/huni/processes.md#PRC-002
+STD-OPT-040	옵션·견적	제약	필수 동반 옵션 강제(예 인쇄없음 시 후가공 필수)	Y	should	print-story/02_capture/order-flow-steps.md §C-2 인쇄없음 선택지
+STD-OPT-041	옵션·견적	제약	수량 최소/최대/증분 검증	N	must	print-story/02_capture/order-flow-steps.md §B-4 최소 500매
+STD-OPT-042	옵션·견적	제약	사이즈 범위·비율 검증(매트릭스 밖 사이즈 차단)	Y	must	print-kb/wiki/huni/price-engine.md#PE-006 면적매트릭스형
+STD-OPT-043	옵션·견적	가격	옵션 변경 시 실시간 재견적	Y	must	print-story/02_capture/order-flow-steps.md §B 실측 가격 반응 3960→4950원
+STD-OPT-044	옵션·견적	가격	서버 권위 가격 계산(클라이언트 계산 금지)	Y	must	print-kb/wiki/huni/widget-contract.md#WID-005 가격 권위 = 서버
+STD-OPT-045	옵션·견적	가격	가격 0원/계산불가 상태 처리 및 사용자 안내	Y	must	print-kb/wiki/huni/widget-contract.md#WID-005 PRICE=0 불가 신호 · print-story/02_capture/order-flow-steps.md §D 0원
+STD-OPT-046	옵션·견적	가격	가격 내역 분해 표시(인쇄비·후가공비·부가세)	Y	must	print-story/02_capture/order-flow-steps.md §B 인쇄비 3600 + 부가세 360
+STD-OPT-047	옵션·견적	가격	수량구간 할인 적용	N	must	print-kb/wiki/huni/price-engine.md#PE-008 구간형 t_dsc_*
+STD-OPT-048	옵션·견적	가격	면적 기반 가격 계산(실사·현수막·아크릴)	Y	must	print-kb/wiki/huni/price-engine.md#PE-006
+STD-OPT-049	옵션·견적	가격	원자합산형 가격 계산(디지털인쇄)	Y	must	print-kb/wiki/huni/price-engine.md#PE-005
+STD-OPT-050	옵션·견적	가격	고정가형 가격 계산(수량×옵션)	Y	must	print-kb/wiki/huni/price-engine.md#PE-007
+STD-OPT-051	옵션·견적	가격	셋트/부품조립 상품 합산 가격 계산	Y	must	print-kb/wiki/huni/price-engine.md#PE-SOT-6 완제SKU 재귀
+STD-OPT-052	옵션·견적	가격	판걸이수 기반 판형 원가 반영	Y	must	print-kb/wiki/base/prepress-file.md#BPF-002 판걸이 N-up
+STD-OPT-053	옵션·견적	견적	견적 결과 저장(옵션보관함)	Y	must	print-kb/wiki/policy/mypage.md#MYP-01
+STD-OPT-054	옵션·견적	견적	견적서 PDF/출력물 발급	N	should	print-quote/04_design/ia.md §2.1 대량주문 견적문의
+STD-OPT-055	옵션·견적	견적	대량주문 견적 문의 접수	N	should	print-quote/04_design/ia.md §2.1 SM-CS-04
+STD-ART-001	원고·파일	업로드	인쇄원고 파일 업로드(PDF/AI/EPS)	Y	must	print-story/02_capture/order-flow-steps.md §A-9 · print-kb/wiki/policy/custom-dev.md#CST-01
+STD-ART-002	원고·파일	업로드	대용량 파일 분할/재개 업로드	Y	must	print-kb/wiki/policy/custom-dev.md#CST-01 XL 자체 빌드
+STD-ART-003	원고·파일	업로드	업로드 진행률·실패 재시도	Y	must	print-kb/wiki/policy/custom-dev.md#CST-01
+STD-ART-004	원고·파일	업로드	건수별 개별 파일 업로드(디자인 N종)	Y	must	print-story/02_capture/order-flow-steps.md §A-4 건수 · §C-8 앞면/뒷면 각각
+STD-ART-005	원고·파일	업로드	앞면/뒷면 파일 분리 업로드	Y	must	print-story/02_capture/order-flow-steps.md §C-8
+STD-ART-006	원고·파일	업로드	주문 이후 파일 업로드 경로(결제 후 입고)	Y	should	print-story/02_capture/order-flow-steps.md §B-8 파일 업로드 후행
+STD-ART-007	원고·파일	업로드	파일 재업로드·버전 이력 보관	Y	must	print-kb/wiki/policy/operations.md#OPS-03
+STD-ART-008	원고·파일	검판	파일 포맷 유효성 검사	Y	must	print-kb/wiki/base/prepress-file.md#BPF-005 PDF/X
+STD-ART-009	원고·파일	검판	재단선/블리드 3mm 확보 검사	Y	must	print-kb/wiki/base/prepress-file.md#BPF-003
+STD-ART-010	원고·파일	검판	색공간(CMYK) 검사 및 RGB 경고	Y	must	print-kb/wiki/base/color.md#BCL-001
+STD-ART-011	원고·파일	검판	해상도(dpi) 검사	Y	should	print-kb/wiki/base/prepress-file.md#BPF-006 GAP 표기
+STD-ART-012	원고·파일	검판	폰트 아웃라인 여부 검사	Y	must	print-story/02_capture/order-flow-steps.md §B 재작업 불가 1항
+STD-ART-013	원고·파일	검판	주문 사양과 파일 실측 사이즈 대조	Y	must	print-kb/wiki/base/sizes.md#BSZ-001 BSZ-002
+STD-ART-014	원고·파일	검판	별색 채널·오버프린트 검사	Y	could	print-kb/wiki/base/color.md#BCL-003
+STD-ART-015	원고·파일	검판	검판 결과 리포트 고객 노출	Y	must	print-kb/wiki/policy/order-mgmt.md#OMG-02 파일확인처리
+STD-ART-016	원고·파일	검판	자동검판 도구 연동(PitStop 등)	Y	should	print-kb/wiki/policy/order-mgmt.md#OMG-02 PitStop 연동 후보
+STD-ART-017	원고·파일	검판	검판 게이트 통과/보류 상태 관리	Y	must	print-kb/wiki/policy/order-mgmt.md#OMG-05 G1 파일게이트
+STD-ART-018	원고·파일	검판	재업로드 요청 발송(문자/알림)	Y	must	print-quote/04_design/ia.md §2.3 SM-A-62 재업로드요청 문자
+STD-ART-019	원고·파일	미리보기	업로드 파일 썸네일·PDF 미리보기	Y	must	print-quote/04_design/ia.md §1.4 미리보기 SM-MY-01.1
+STD-ART-020	원고·파일	미리보기	재단선 오버레이 미리보기	Y	should	print-kb/wiki/base/sizes.md#BSZ-004
+STD-ART-021	원고·파일	에디터	온라인 디자인 에디터 진입	Y	must	print-story/02_capture/order-flow-steps.md §A-9 에디터 편집하기
+STD-ART-022	원고·파일	에디터	에디터 템플릿 선택·불러오기	Y	must	print-kb/wiki/huni/widget-contract.md#WID-004 Edicus 브리지
+STD-ART-023	원고·파일	에디터	에디터 작업물 저장·재편집	Y	must	print-kb/wiki/huni/widget-contract.md#WID-004
+STD-ART-024	원고·파일	에디터	에디터 산출물 인쇄용 파일 변환·주문 연결	Y	must	print-kb/wiki/huni/widget-contract.md#WID-004
+STD-ART-025	원고·파일	에디터	선택 옵션(사이즈·페이지)과 에디터 캔버스 동기화	Y	must	print-kb/wiki/huni/widget-contract.md#WID-004
+STD-ART-026	원고·파일	보관	고객 파일 보관기간 정책 적용·만료 삭제	Y	should	print-kb/wiki/policy/operations.md#OPS-02 현행 무정책 To-Be
+STD-ART-027	원고·파일	보관	과거 주문 파일 재사용 재주문	Y	should	print-kb/wiki/policy/operations.md#OPS-02 재주문 편의
+STD-ART-028	원고·파일	생산연계	생산용 원고 자동 다운로드/전달	Y	must	print-kb/wiki/base/prepress-file.md#BPF-004 CIP4 JDF/XJDF
+STD-ORD-001	장바구니·주문	장바구니	장바구니 담기(인쇄옵션+파일 동반)	Y	must	huni-shopby/01_research/commerce-flow-contract.md §1.1 post-cart · print-kb/wiki/policy/order-payment.md#PAY-06
+STD-ORD-002	장바구니·주문	장바구니	장바구니 조회	N	must	huni-shopby/01_research/commerce-flow-contract.md §1.3 get-cart
+STD-ORD-003	장바구니·주문	장바구니	장바구니 수량/옵션 수정	N	must	huni-shopby/01_research/commerce-flow-contract.md §1.2 put-cart
+STD-ORD-004	장바구니·주문	장바구니	장바구니 항목 삭제	N	must	huni-shopby/01_research/commerce-flow-contract.md §1.4 delete-cart
+STD-ORD-005	장바구니·주문	장바구니	선택 상품 금액 계산	N	must	huni-shopby/01_research/commerce-flow-contract.md §1.5 get-cart-calculate
+STD-ORD-006	장바구니·주문	장바구니	구매가능 검증(결제 전 sanity)	N	must	huni-shopby/01_research/commerce-flow-contract.md §1.6 get-cart-validate
+STD-ORD-007	장바구니·주문	장바구니	비회원 장바구니 계산(비영속)	N	must	huni-shopby/01_research/commerce-flow-contract.md §2.1 post-guest-cart
+STD-ORD-008	장바구니·주문	장바구니	장바구니 인쇄사양 요약 표시	Y	must	print-kb/wiki/policy/order-payment.md#PAY-06 인쇄옵션 조합 저장
+STD-ORD-009	장바구니·주문	주문서	주문서 작성	N	must	huni-shopby/01_research/commerce-flow-contract.md §3.1 post-order-sheet
+STD-ORD-010	장바구니·주문	주문서	주문서 조회	N	must	huni-shopby/01_research/commerce-flow-contract.md §3.2 get-order-sheet
+STD-ORD-011	장바구니·주문	주문서	쿠폰·배송지 반영 최종 금액 계산	N	must	huni-shopby/01_research/commerce-flow-contract.md §3.3 최종 돈 확정
+STD-ORD-012	장바구니·주문	주문서	주문자/수령자 정보 입력	N	must	huni-shopby/01_research/commerce-flow-contract.md §3.1
+STD-ORD-013	장바구니·주문	주문서	배송지 주소 검색(우편번호)	N	must	huni-shopby/01_research/commerce-flow-contract.md §3.1 · print-kb/wiki/policy/shipping.md
+STD-ORD-014	장바구니·주문	주문서	배송 요청사항 입력	N	should	huni-shopby/01_research/order-to-delivery-contract.md §2.2
+STD-ORD-015	장바구니·주문	주문서	나중배송(배송지 미입력) 주문	N	could	huni-shopby/01_research/order-to-delivery-contract.md §2.2 later-input-shippings
+STD-ORD-016	장바구니·주문	주문서	주문 제목/작업명 입력	Y	should	print-story/02_capture/order-flow-steps.md §A-6 주문제목
+STD-ORD-017	장바구니·주문	주문서	출고 옵션 선택(오늘출고·토요일출고)	Y	should	print-story/02_capture/order-flow-steps.md §C-6
+STD-ORD-018	장바구니·주문	주문서	약관 동의(구매·개인정보 제3자)	N	must	print-kb/wiki/policy/membership-auth.md#MEM-04
+STD-ORD-019	장바구니·주문	주문	주문 예약(reserve) 및 금액 검증	N	must	huni-shopby/01_research/commerce-flow-contract.md §4.1 post-payments-reserve
+STD-ORD-020	장바구니·주문	주문	주문 완료 화면·주문번호 발급	N	must	huni-shopby/01_research/commerce-flow-contract.md §4.2
+STD-ORD-021	장바구니·주문	주문	주문 상태 조회(회원)	N	must	huni-shopby/01_research/order-to-delivery-contract.md §3 get-profile-orders
+STD-ORD-022	장바구니·주문	주문	비회원 주문 조회(주문번호+휴대전화)	N	must	huni-shopby/01_research/commerce-flow-contract.md §2.2 · print-kb/wiki/policy/membership-auth.md#MEM-05
+STD-ORD-023	장바구니·주문	주문	주문 상태 머신 전이 표시(결제완료→상품준비→배송준비→배송중→배송완료→구매확정)	N	must	huni-shopby/01_research/order-to-delivery-contract.md §1 orderStatusType enum
+STD-ORD-024	장바구니·주문	주문	인쇄 공정 단계 상태 노출(검판·출력·후가공)	Y	must	print-kb/wiki/policy/custom-dev.md#CST-08 커스텀 상태코드
+STD-ORD-025	장바구니·주문	주문	구매확정(고객·자동)	N	must	huni-shopby/01_research/order-to-delivery-contract.md §3 confirm
+STD-ORD-026	장바구니·주문	주문	재주문(동일 사양 반복)	Y	must	print-kb/wiki/policy/mypage.md#MYP-01 재주문 · print-kb/wiki/policy/custom-dev.md#CST-03
+STD-ORD-027	장바구니·주문	주문	오프라인 주문 별도 등록 경로	Y	should	print-kb/wiki/policy/order-mgmt.md#OMG-07
+STD-PAY-001	결제	결제수단	신용카드 결제(PG)	N	must	print-kb/wiki/policy/order-payment.md#PAY-02
+STD-PAY-002	결제	결제수단	실시간 계좌이체	N	must	print-kb/wiki/policy/order-payment.md#PAY-02
+STD-PAY-003	결제	결제수단	무통장입금(가상계좌)·입금대기 상태	N	must	huni-shopby/01_research/order-to-delivery-contract.md §1 DEPOSIT_WAIT
+STD-PAY-004	결제	결제수단	네이버페이 결제	N	should	huni-shopby/01_research/commerce-flow-contract.md §4.3 네이버페이 경로
+STD-PAY-005	결제	결제수단	카카오페이 결제	N	should	print-kb/wiki/policy/order-payment.md#PAY-03
+STD-PAY-006	결제	결제수단	토스페이 결제	N	could	print-kb/wiki/policy/order-payment.md#PAY-03
+STD-PAY-007	결제	결제수단	적립금(프린팅머니) 결제	N	must	print-kb/wiki/policy/mypage.md#MYP-02
+STD-PAY-008	결제	결제수단	복합결제(적립금+PG 병용)	N	should	print-kb/wiki/policy/custom-dev.md#CST-04 PG→적립금 전환
+STD-PAY-009	결제	결제수단	할부·무이자 옵션	N	could	print-kb/wiki/policy/order-payment.md#PAY-04
+STD-PAY-010	결제	결제수단	B2B 후불결제	N	should	print-kb/wiki/policy/custom-dev.md#CST-07
+STD-PAY-011	결제	결제처리	PG 리다이렉트·결제 확정 콜백	N	must	huni-shopby/01_research/commerce-flow-contract.md §4.2
+STD-PAY-012	결제	결제처리	결제 실패 안내·재시도	N	must	print-kb/wiki/policy/order-payment.md#PAY-04 · huni-shopby/01_research/order-to-delivery-contract.md §1 PAY_FAIL
+STD-PAY-013	결제	결제처리	결제 금액 위변조 검증(서버 재계산 대조)	N	must	huni-shopby/01_research/commerce-flow-contract.md §4.1 돈 검증
+STD-PAY-014	결제	결제처리	결제 포기 처리	N	must	huni-shopby/01_research/order-to-delivery-contract.md §1 PAY_CANCEL
+STD-PAY-015	결제	증빙	현금영수증 발급	N	must	print-kb/wiki/policy/mypage.md#MYP-03
+STD-PAY-016	결제	증빙	세금계산서 발급 신청·내역	N	must	print-kb/wiki/policy/mypage.md#MYP-03
+STD-PAY-017	결제	증빙	사업자정보 등록·관리	N	must	print-quote/04_design/ia.md §2.2 SM-MY-12.1
+STD-PAY-018	결제	증빙	거래명세서 출력	N	should	print-quote/04_design/ia.md §2.3 TR-PROC 명세서
+STD-SHP-001	배송	배송비	기본 배송비 부과	N	must	print-kb/wiki/policy/shipping.md#SHIP-02
+STD-SHP-002	배송	배송비	무료배송 기준금액 적용	N	must	print-kb/wiki/policy/shipping.md#SHIP-01
+STD-SHP-003	배송	배송비	제주 추가 배송비	N	must	print-kb/wiki/policy/shipping.md#SHIP-05
+STD-SHP-004	배송	배송비	도서산간 권역별 추가 배송비	N	must	print-kb/wiki/policy/shipping.md#SHIP-06
+STD-SHP-005	배송	배송비	특정 상품군 무료배송 제외(실사·대형)	Y	should	print-kb/wiki/policy/shipping.md#SHIP-03
+STD-SHP-006	배송	배송비	혼합주문 배송비 산정(최고값 1건)	N	must	print-kb/wiki/policy/shipping.md#SHIP-04
+STD-SHP-007	배송	배송비	배송 권역·템플릿 관리	N	should	huni-shopby/01_research/order-to-delivery-contract.md §2.2 areafees·template-groups
+STD-SHP-008	배송	배송방식	택배 배송	N	must	huni-shopby/01_research/order-to-delivery-contract.md §2.1
+STD-SHP-009	배송	배송방식	퀵/화물 배송(대형 인쇄물)	Y	should	print-kb/wiki/policy/shipping.md#SHIP-03 실사 대형 파생
+STD-SHP-010	배송	배송방식	매장 방문수령	N	could	print-kb/wiki/policy/order-mgmt.md#OMG-07 오프라인 경로 파생
+STD-SHP-011	배송	배송방식	분할배송(건별 부분 출고)	Y	should	huni-shopby/01_research/order-to-delivery-contract.md §2.1 주문상품옵션 단위 송장
+STD-SHP-012	배송	추적	송장번호 등록(판매자)	N	must	huni-shopby/01_research/order-to-delivery-contract.md §2.1 put-orders-delivery
+STD-SHP-013	배송	추적	송장 기반 배송상태 일괄변경	N	should	huni-shopby/01_research/order-to-delivery-contract.md §2.1 change-status-by-shipping-no
+STD-SHP-014	배송	추적	고객 배송 조회(택배사 추적)	N	must	huni-shopby/01_research/order-to-delivery-contract.md §2.2 get-profile-orders-order-no
+STD-SHP-015	배송	추적	배송지 변경/추가	N	must	huni-shopby/01_research/order-to-delivery-contract.md §2.2 put-profile-orders-deliveries
+STD-SHP-016	배송	알림	배송 상태 변경 알림 발송	N	must	print-kb/wiki/policy/order-mgmt.md#OMG-03 상태변경+문자
+STD-CLM-001	클레임·CS	취소	주문 전체 취소 신청	N	must	huni-shopby/01_research/order-to-delivery-contract.md §4.3 claims-cancel
+STD-CLM-002	클레임·CS	취소	옵션 부분 취소 신청	N	must	huni-shopby/01_research/order-to-delivery-contract.md §4.3 OPTION_CANCEL
+STD-CLM-003	클레임·CS	취소	비회원 취소 신청	N	must	huni-shopby/01_research/order-to-delivery-contract.md §4.3 guest 경로
+STD-CLM-004	클레임·CS	취소	제작 착수 후 취소 제한·협의 안내	Y	must	print-kb/wiki/policy/operations.md#OPS-01 케이스별 협의
+STD-CLM-005	클레임·CS	반품	반품 신청(단일·복수)	N	must	huni-shopby/01_research/order-to-delivery-contract.md §4.3 claims-return
+STD-CLM-006	클레임·CS	교환	교환 신청(출고 전/후)	N	must	huni-shopby/01_research/order-to-delivery-contract.md §4.2 CANCEL_EXCHANGE·RETURN_EXCHANGE
+STD-CLM-007	클레임·CS	환불	환불 예상금액 계산	N	must	huni-shopby/01_research/order-to-delivery-contract.md §4.3 claims-estimate
+STD-CLM-008	클레임·CS	환불	환불계좌 등록·수정	N	must	huni-shopby/01_research/order-to-delivery-contract.md §4.3 claims-account
+STD-CLM-009	클레임·CS	환불	클레임 철회	N	should	huni-shopby/01_research/order-to-delivery-contract.md §4.3 withdraw
+STD-CLM-010	클레임·CS	클레임	클레임 사유 분류 선택(12종)	N	must	huni-shopby/01_research/order-to-delivery-contract.md §4.2 claimReasonType
+STD-CLM-011	클레임·CS	클레임	귀책 구분(구매자/판매자/단순변심)	N	must	huni-shopby/01_research/order-to-delivery-contract.md §4.2 responsibleObjectType
+STD-CLM-012	클레임·CS	클레임	클레임 목록·상세 조회	N	must	huni-shopby/01_research/order-to-delivery-contract.md §4.3
+STD-CLM-013	클레임·CS	클레임	판매자 클레임 승인·거부 처리	N	must	huni-shopby/01_research/order-to-delivery-contract.md §4.4 claim-server
+STD-CLM-014	클레임·CS	불량	인쇄 불량 접수(사진 첨부)	Y	must	print-kb/wiki/policy/operations.md#OPS-04 클레임/불량
+STD-CLM-015	클레임·CS	불량	재제작(재작업) 처리 경로	Y	must	print-kb/wiki/policy/operations.md#OPS-04 재제작 우선
+STD-CLM-016	클레임·CS	문의	1:1 문의 등록·답변	N	must	print-quote/04_design/ia.md §2.2 SM-MY-08
+STD-CLM-017	클레임·CS	문의	상품 Q&A 등록·답변	N	must	print-quote/04_design/ia.md §2.1
+STD-CLM-018	클레임·CS	문의	공지사항·FAQ 열람	N	must	print-quote/04_design/ia.md §2.1
+STD-CLM-019	클레임·CS	문의	기업인쇄 상담 접수	N	should	print-quote/04_design/ia.md §2.1 SM-CS-05
+STD-CLM-020	클레임·CS	문의	디자인 상담 접수	Y	should	print-quote/04_design/ia.md §2.1 SM-CS-06

@@ -1,0 +1,22 @@
+PASS STD-PAY-010 | B2B 후불결제 | print-kb/wiki/policy/custom-dev.md#CST-07
+PASS STD-ADC-008 | FAQ 관리 | print-quote/04_design/ia.md §2.3 SM-A-30/31 공지·FAQ
+PASS STD-CLM-020 | 디자인 상담 접수 | print-quote/04_design/ia.md §2.1 SM-CS-06
+PASS STD-CAT-011 | 상품별 제작 소요일/출고 기준 안내 | print-story/02_capture/order-flow-steps.md §C-6 출고 옵션
+PASS STD-ADO-008 | 파일 확인 처리(검판 판정) | print-kb/wiki/policy/order-mgmt.md#OMG-02
+PASS STD-OPT-024 | 코팅 선택(무광/유광 × 단면/양면) | print-kb/wiki/base/finishing.md#BFN-003 · print-story/02_capture/order-flow-step
+PASS STD-ADP-028 | 면적 매트릭스 단가 관리 | print-kb/wiki/huni/price-engine.md#PE-006
+PASS STD-CLM-015 | 재제작(재작업) 처리 경로 | print-kb/wiki/policy/operations.md#OPS-04 재제작 우선
+PASS STD-CAT-009 | 후가공 용어 설명 툴팁(도무송·오시·형압·귀돌이) | print-story/02_capture/order-flow-steps.md §E-4 3사 용어 불일치
+PASS STD-ADC-013 | 메인/기획전 배너 관리 | print-quote/04_design/ia.md §2.1 메인
+PASS STD-PRM-008 | 리뷰 삭제 시 보상 회수 | print-kb/wiki/policy/review.md#RVW-03
+PASS STD-SYS-013 | 우편번호/주소 검색 서비스 연동 | huni-shopby/01_research/commerce-flow-contract.md §3.1 배송지
+PASS STD-B2B-007 | 업체별 미수금 관리 | print-quote/04_design/ia.md §2.3 SM-A-06
+PASS STD-PRM-013 | 이메일 뉴스레터 발송 | print-quote/04_design/ia.md §2.1 고객센터 파생
+PASS STD-PRM-011 | 체험단 모집·신청·당첨·후기 | print-kb/wiki/policy/custom-dev.md#CST-05
+PASS STD-SHP-010 | 매장 방문수령 | print-kb/wiki/policy/order-mgmt.md#OMG-07 오프라인 경로 파생
+PASS STD-ADP-032 | 가격뷰어(계산 결과 조회) | print-kb/wiki/huni/price-engine.md#PE-DEV-4
+PASS STD-ART-025 | 선택 옵션(사이즈·페이지)과 에디터 캔버스 동기화 | print-kb/wiki/huni/widget-contract.md#WID-004
+PASS STD-B2B-005 | 후불 주문 승인·미결제 관리 | print-kb/wiki/policy/order-mgmt.md#OMG-04
+PASS STD-FIN-005 | 상품군별 매출 비중 | print-quote/04_design/ia.md §2.3 상품통계 4종
+
+일치 20 /20 · 불일치 0

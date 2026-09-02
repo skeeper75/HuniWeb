@@ -1,0 +1,346 @@
+{
+  "card": "t29 (L2)",
+  "generated": "2026-09-02",
+  "method": "code-only inventory (read-only). 문서·커밋 메시지는 근거로 사용하지 않음.",
+  "repos": {
+    "shopby": "/Users/innojini/Dev/huni-skin-shopby",
+    "webadmin": "/Users/innojini/Dev/HuniWeb/raw/webadmin"
+  },
+  "risk_legend": {
+    "critical": "오픈 차단 — 없으면 주문 불성립",
+    "high": "기능 일부 결손",
+    "medium": "보완 필요",
+    "low": "운영 편의"
+  },
+  "count": 18,
+  "services": [
+    {
+      "id": "D-01",
+      "name": "Shopby shop API",
+      "category": "commerce-api",
+      "risk": "critical",
+      "contract_required": true,
+      "call_sites": [
+        "huni-skin-shopby/src/lib/api/config.ts:67",
+        "huni-skin-shopby/src/app/api/shop/[...path]/route.ts:43-48"
+      ],
+      "auth": "clientId + platform + Version 헤더 / 회원 Bearer accessToken 서버 주입",
+      "endpoint": "https://shop-api.e-ncp.com",
+      "failure_impact": "쇼핑몰 전 기능 정지 — 대체 경로 없음",
+      "used_by": [
+        "shopby"
+      ]
+    },
+    {
+      "id": "D-02",
+      "name": "Shopby server API",
+      "category": "commerce-api",
+      "risk": "critical",
+      "contract_required": true,
+      "call_sites": [
+        "huni-skin-shopby/src/lib/api/config.ts:31",
+        "huni-skin-shopby/src/app/api/shopby/[...path]/route.ts:21-45",
+        "raw/webadmin/webadmin/config/settings.py:465",
+        "raw/webadmin/webadmin/catalog/shopby_client.py:1-50"
+      ],
+      "auth": "Bearer 파트너 JWT + systemkey + version",
+      "endpoint": "https://server-api.e-ncp.com",
+      "failure_impact": "관리자 조회·메인이미지 동기화 정지(고객 주문은 D-01로 유지). 초당 100회 상한",
+      "used_by": [
+        "shopby",
+        "webadmin"
+      ]
+    },
+    {
+      "id": "D-03",
+      "name": "NCPPay 결제 SDK (PG)",
+      "category": "payment",
+      "risk": "critical",
+      "contract_required": true,
+      "call_sites": [
+        "huni-skin-shopby/src/lib/payments/ncp-pay.ts:60",
+        "huni-skin-shopby/src/lib/payments/ncp-pay.ts:31-38",
+        "huni-skin-shopby/src/app/api/pay-config/route.ts:8",
+        "huni-skin-shopby/src/components/checkout/checkout-form.tsx:395"
+      ],
+      "auth": "clientId(공개) + 회원 shopbyAuthorization Bearer / 게스트 무인증",
+      "endpoint": "<shopApiBase>/payments/ncp_pay.js",
+      "failure_impact": "결제 불가. 현행은 무통장입금만 동작 — 카드/실시간이체 미연동(checkout-form.tsx:8-9)",
+      "used_by": [
+        "shopby"
+      ]
+    },
+    {
+      "id": "D-04",
+      "name": "Printly 후니어드민 위젯 SDK + 견적 API",
+      "category": "quote-engine",
+      "risk": "critical",
+      "contract_required": false,
+      "call_sites": [
+        "huni-skin-shopby/src/lib/printly/huni.ts:10",
+        "huni-skin-shopby/src/components/product/huni-widget.tsx:312-313",
+        "huni-skin-shopby/src/app/api/printly/requote/route.ts:16",
+        "raw/webadmin/webadmin/config/urls.py:246-256"
+      ],
+      "auth": "site_key(도메인 제한 공개키, 서버 env) + 로그인 세션 게이트",
+      "endpoint": "https://huni-admin.printly.co.kr",
+      "failure_impact": "실시간 견적·옵션 선택 전면 불가 → 인쇄 주문 자체 불가. 도메인 화이트리스트 등록 필요",
+      "used_by": [
+        "shopby",
+        "webadmin"
+      ]
+    },
+    {
+      "id": "D-05",
+      "name": "Printly 커머스 DB (위젯 해석)",
+      "category": "database",
+      "risk": "critical",
+      "contract_required": false,
+      "call_sites": [
+        "huni-skin-shopby/src/lib/printly/widget.ts:44-53",
+        "huni-skin-shopby/src/lib/printly/widget.ts:68-90"
+      ],
+      "auth": "PRINTLY_DB_URL (읽기전용 세션 고정)",
+      "endpoint": "Railway PostgreSQL",
+      "failure_impact": "위젯 미해석 → 하드코딩 가격 폴백(configurator.tsx:45-52)으로 잘못된 가격 노출",
+      "used_by": [
+        "shopby"
+      ]
+    },
+    {
+      "id": "D-06",
+      "name": "Edicus 온라인 편집기",
+      "category": "editor",
+      "risk": "critical",
+      "contract_required": true,
+      "call_sites": [
+        "raw/webadmin/webadmin/config/settings.py:544-548",
+        "raw/webadmin/webadmin/catalog/edicus_lookup.py:214-241",
+        "raw/webadmin/webadmin/catalog/edicus_lookup.py:253-257",
+        "raw/webadmin/webadmin/config/urls.py:274-275"
+      ],
+      "auth": "edicus-api-key 헤더 + EDICUS_PARTNER_CODE",
+      "endpoint": "EDICUS_API_HOST / EDICUS_RESOURCE_HOST(기본 edicusbase.firebaseapp.com)",
+      "failure_impact": "에디터 주문 상품 전부 주문 불가. FE 에디터 버튼은 onClick 부재(configurator-actions.tsx:170-176)",
+      "used_by": [
+        "webadmin"
+      ]
+    },
+    {
+      "id": "D-07",
+      "name": "AWS S3 (원고/가이드/메인이미지/색상칩)",
+      "category": "storage",
+      "risk": "high",
+      "contract_required": true,
+      "call_sites": [
+        "raw/webadmin/webadmin/catalog/s3_artwork.py:208",
+        "raw/webadmin/webadmin/catalog/s3_artwork.py:239",
+        "raw/webadmin/webadmin/catalog/s3_artwork.py:280",
+        "raw/webadmin/webadmin/catalog/s3_guide.py:266",
+        "raw/webadmin/webadmin/catalog/s3_guide.py:288",
+        "raw/webadmin/webadmin/catalog/s3_main_img.py:187",
+        "raw/webadmin/webadmin/catalog/s3_swatch.py:143",
+        "raw/webadmin/webadmin/config/settings.py:439-441"
+      ],
+      "auth": "boto3 기본 자격증명 체인(환경변수/IAM 역할)",
+      "endpoint": "s3.ap-northeast-2.amazonaws.com",
+      "failure_impact": "원고 업로드 불가 · 가이드/메인이미지 서빙 불가",
+      "used_by": [
+        "webadmin"
+      ]
+    },
+    {
+      "id": "D-08",
+      "name": "Shopby 웹훅 수신",
+      "category": "commerce-api",
+      "risk": "high",
+      "contract_required": false,
+      "call_sites": [
+        "raw/webadmin/webadmin/config/urls.py:271",
+        "raw/webadmin/webadmin/catalog/shopby_hook.py:1-27",
+        "raw/webadmin/webadmin/config/settings.py:462"
+      ],
+      "auth": "서명 없음 — 비밀 경로(SHOPBY_WEBHOOK_SECRET)만이 방어선",
+      "endpoint": "(수신 엔드포인트)",
+      "failure_impact": "partial: 원문 적재까지만. Shopby는 실패 웹훅 재전송 없음 → 결제됐는데 생산 미시작 사고",
+      "used_by": [
+        "webadmin"
+      ]
+    },
+    {
+      "id": "D-09",
+      "name": "Pie Canvas 발행본 DB (상세탭)",
+      "category": "database",
+      "risk": "medium",
+      "contract_required": false,
+      "call_sites": [
+        "huni-skin-shopby/src/app/(main)/product/[slug]/page.tsx:51-56",
+        "huni-skin-shopby/src/lib/printly/product-code-map.ts:23-38"
+      ],
+      "auth": "PRINTLY_DB_URL + PRINTLY_WORKSPACE_ID",
+      "endpoint": "Railway PostgreSQL (vc_v_product_detail_tabs VIEW)",
+      "failure_impact": "상세탭이 정적 섹션으로 폴백(치명 아님)",
+      "used_by": [
+        "shopby"
+      ]
+    },
+    {
+      "id": "D-10",
+      "name": "Daum(카카오) 우편번호",
+      "category": "address",
+      "risk": "medium",
+      "contract_required": false,
+      "call_sites": [
+        "huni-skin-shopby/src/lib/daum-postcode.ts:10"
+      ],
+      "auth": "없음(무료 공개)",
+      "endpoint": "https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js",
+      "failure_impact": "주소 검색 팝업 불가 → 수기 입력만",
+      "used_by": [
+        "shopby"
+      ]
+    },
+    {
+      "id": "D-11",
+      "name": "Railway PostgreSQL (webadmin 주 DB)",
+      "category": "database",
+      "risk": "critical",
+      "contract_required": true,
+      "call_sites": [
+        "raw/webadmin/webadmin/catalog/models.py:13-1468",
+        "raw/webadmin/requirements.txt"
+      ],
+      "auth": "DATABASE_URL",
+      "endpoint": "Railway PostgreSQL",
+      "failure_impact": "가격엔진·위젯 API·운영자 화면 전면 정지",
+      "used_by": [
+        "webadmin"
+      ]
+    },
+    {
+      "id": "D-12",
+      "name": "Anthropic API (관리자 비서)",
+      "category": "ai",
+      "risk": "low",
+      "contract_required": true,
+      "call_sites": [
+        "raw/webadmin/webadmin/catalog/assistant.py:238-240",
+        "raw/webadmin/webadmin/config/settings.py:517",
+        "raw/webadmin/webadmin/config/urls.py:291-300"
+      ],
+      "auth": "ANTHROPIC_API_KEY",
+      "endpoint": "api.anthropic.com",
+      "failure_impact": "관리자 비서만 중단. 고객 경로 무영향(키 미설정 시 경로 비활성)",
+      "used_by": [
+        "webadmin"
+      ]
+    },
+    {
+      "id": "D-13",
+      "name": "GitHub API (비서 이슈 등록)",
+      "category": "devops",
+      "risk": "low",
+      "contract_required": true,
+      "call_sites": [
+        "raw/webadmin/webadmin/catalog/assistant_issue.py:174",
+        "raw/webadmin/webadmin/catalog/assistant_issue.py:177-183",
+        "raw/webadmin/webadmin/config/settings.py:536-537"
+      ],
+      "auth": "Bearer ASSISTANT_GITHUB_TOKEN",
+      "endpoint": "https://api.github.com",
+      "failure_impact": "리포트 자동 등록만 중단",
+      "used_by": [
+        "webadmin"
+      ]
+    },
+    {
+      "id": "D-14",
+      "name": "Telegram Bot API (남용 알림)",
+      "category": "notification",
+      "risk": "low",
+      "contract_required": true,
+      "call_sites": [
+        "raw/webadmin/webadmin/catalog/rate_alerts.py:61",
+        "raw/webadmin/webadmin/catalog/rate_alerts.py:56-58",
+        "raw/webadmin/webadmin/config/settings.py:416"
+      ],
+      "auth": "TELEGRAM_BOT_TOKEN + TELEGRAM_ALERT_CHAT_ID",
+      "endpoint": "https://api.telegram.org",
+      "failure_impact": "알림만 누락(모든 예외 흡수)",
+      "used_by": [
+        "webadmin"
+      ]
+    },
+    {
+      "id": "D-15",
+      "name": "Redis (위젯 rate-limit 공유 캐시)",
+      "category": "infra",
+      "risk": "high",
+      "contract_required": false,
+      "call_sites": [
+        "raw/webadmin/webadmin/config/settings.py:343",
+        "raw/webadmin/webadmin/config/settings.py:362-368",
+        "raw/webadmin/webadmin/config/settings.py:339-341",
+        "raw/webadmin/webadmin/config/settings.py:531"
+      ],
+      "auth": "REDIS_URL",
+      "endpoint": "Redis",
+      "failure_impact": "현행 Railway 미설정 → LocMem 폴백. 워커별 카운트라 실질 상한 = 값 x 워커수",
+      "used_by": [
+        "webadmin"
+      ]
+    },
+    {
+      "id": "D-16",
+      "name": "NextAuth OAuth (Google/Naver/Kakao)",
+      "category": "auth",
+      "risk": "medium",
+      "contract_required": true,
+      "call_sites": [
+        "huni-skin-shopby/.env.example:17-32",
+        "huni-skin-shopby/src/lib/auth/auth.config.ts:16",
+        "huni-skin-shopby/src/components/auth/sns-buttons.tsx:74-80"
+      ],
+      "auth": "AUTH_{GOOGLE,NAVER,KAKAO}_ID/SECRET",
+      "endpoint": "각 OAuth 콘솔",
+      "failure_impact": "미배선(providers 빈 배열). 소셜 로그인 미제공 — 이메일 로그인은 정상",
+      "used_by": [
+        "shopby"
+      ]
+    },
+    {
+      "id": "D-17",
+      "name": "본인인증(휴대폰/아이핀)",
+      "category": "auth",
+      "risk": "medium",
+      "contract_required": true,
+      "call_sites": [
+        "huni-skin-shopby/src/app/api/auth/signup/route.ts:26-31"
+      ],
+      "auth": "해당 없음",
+      "endpoint": "(호출 지점 없음)",
+      "failure_impact": "코드에 호출 지점 자체가 없음 — 오픈 정책상 필요하면 신규 개발",
+      "used_by": [
+        "shopby"
+      ]
+    },
+    {
+      "id": "D-18",
+      "name": "세금계산서/현금영수증 발행",
+      "category": "tax",
+      "risk": "medium",
+      "contract_required": true,
+      "call_sites": [
+        "huni-skin-shopby/src/components/mypage/document-section.tsx:1-6",
+        "raw/webadmin/webadmin/catalog/models.py:87"
+      ],
+      "auth": "해당 없음",
+      "endpoint": "(호출 지점 없음)",
+      "failure_impact": "증빙서류 화면은 정적 표 UI만. B2B 정산 경로 미구현 — 신규 개발",
+      "used_by": [
+        "shopby",
+        "webadmin"
+      ]
+    }
+  ]
+}

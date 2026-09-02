@@ -1,0 +1,40 @@
+L4c 무작위 15건 재대조 — seed=20260902 · 2026-09-02
+검사: ① 근거의 file:line 이 실재하는가 ② 그 줄 내용이 주장과 맞는가 ③ 상태 규칙(done 은 file:line 필수) 준수
+
+[STD-ADO-003] 주문 상태 변경(단건)  상태=partial
+   ✓ raw/webadmin/webadmin/catalog/models.py:1070 → ord_sts = models.CharField(max_length=50, db_comment='주문상태')
+[STD-FIN-008] PG 정산 대사  상태=todo
+   · 근거 file:line 없음(비-done 행이라 규칙상 허용)
+[STD-ADO-014] 판걸이/임포지션 정보 산출  상태=partial
+   ✓ raw/webadmin/webadmin/catalog/pricing.py:1 → """가격 계산 엔진 (Phase 11) — 단일 권위 ``evaluate_price``.
+[STD-ADP-003] 용지·평량 마스터 관리  상태=done
+   ✓ raw/webadmin/webadmin/config/urls.py:304 → path("admin/paper-management/", admin.site.admin_view(pp.paper_management),
+   ✓ raw/webadmin/webadmin/catalog/admin.py:2052 → if _model is M.TPaperMaterials:
+[STD-FIN-002] 일별/기간별 매출 조회  상태=new
+   · 근거 file:line 없음(비-done 행이라 규칙상 허용)
+[STD-ADP-012] 포장재 상품 등록  상태=done
+   ✓ raw/webadmin/webadmin/config/urls.py:333 → path("admin/product-viewer/", admin.site.admin_view(views.product_viewer),
+[STD-ADC-012] 대량견적/기업상담/디자인상담 접수 관리  상태=todo
+   · 근거 file:line 없음(비-done 행이라 규칙상 허용)
+[STD-ADO-013] 작업 큐/일정 배정  상태=new
+   · 근거 file:line 없음(비-done 행이라 규칙상 허용)
+[STD-FIN-009] 적립금(프린팅머니) 부채 집계  상태=todo
+   · 근거 file:line 없음(비-done 행이라 규칙상 허용)
+[STD-ADC-001] 회원 목록·검색·상세  상태=todo
+   · 근거 file:line 없음(비-done 행이라 규칙상 허용)
+[STD-ADC-004] 프린팅머니 수동 지급·차감  상태=todo
+   · 근거 file:line 없음(비-done 행이라 규칙상 허용)
+[STD-ADC-002] 회원등급 수동 조정  상태=todo
+   · 근거 file:line 없음(비-done 행이라 규칙상 허용)
+[STD-FIN-001] 월별 매출 통계  상태=todo
+   · 근거 file:line 없음(비-done 행이라 규칙상 허용)
+[STD-ADO-007] 고객 SMS/알림톡 수동 발송  상태=todo
+   · 근거 file:line 없음(비-done 행이라 규칙상 허용)
+[STD-ADP-026] 단가유형(단가형/합가형) 설정  상태=done
+   ✓ raw/webadmin/webadmin/catalog/admin.py:2202 → _admin_cls.form = PriceComponentAdminForm
+
+불일치 0건 / 검사 15행
+
+
+[보강] done 28행 전건 file:line 실재 검사
+  done 28행 · 인용 56개 · 불일치 0건

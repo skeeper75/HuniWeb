@@ -1,0 +1,40 @@
+== build_v3.py 재실행 ==
+총 505행 (v2 504 + 신설 1) · 열 16개(v2 동일)
+★ 행수가 504 → 505 로 늘었다 — L6 생성기·대시보드의 504 는 재실행이 필요하다
+오픈차단여부: {'작업 항목': 438, '차단(외부)': 8, '오픈 무관': 50, '미판정': 9}
+상태: {'new': 123, 'todo': 189, 'partial': 85, 'done': 99, '미판정': 9}
+무통장 선검증(차단 8): {'불가': 6, '미확인': 1, '가능(부분)': 1}
+partial 안 되는 부분 출처: {'partial_미확인': 38, 'partial_근거': 40, 'partial_비고': 7}
+Q2 라이브 실측 반영: 7행 · 갭 판단 근거 3행
+lead 결정 반영: 비고 5건 · 근거 정정 1건 · done_criteria 재작성 76건
+미반영(원장에 행 없음) X-NHN-REPLY-01: 근거 `_workspace/huni-shopby/HANDOFF.md:12,:14,:15` → `_workspace/huni-shopby/CHANGELOG.md:13` — 이 원장 504행에 `X-NHN-REPLY-01` 을 매핑한 행이 0건이다(기계 확인) — 값은 L3/legacy-normalized.json[323] · L3/id-preservation-map.csv:325 에 있고, lead 가 말한 「최종 원장 합침」이 아직 일어나지 않았다. 그 병합 때 정정한다.
+검증: OK
+exit=0
+
+== 후속 반영 검증 ==
+  행수 505 · std_id 중복 0
+  interface-6.md 를 근거로 인용한 행: 1
+  신설행: STD-ORD-030 주문 생성 직후 후니 주문등록 S2S 호출(order/register) | todo | 쇼핑개발 | 작업 항목 | 돈 Y 주문 Y
+  신설행 done_criteria 빈칸: False
+  STD-SYS-004 라이브 실측 표기: True
+  STD-PAY-018 라이브 실측 표기: True
+  STD-MEM-014 라이브 실측 표기: True
+  차단 8행 무통장 표기 누락: 0
+  partial 85 · 안 되는 부분 누락 0
+  비고 빈칸 0 · done_criteria 빈칸 0
+  오픈차단여부: {'작업 항목': 438, '차단(외부)': 8, '오픈 무관': 50, '미판정': 9}
+  상태: {'new': 123, 'todo': 189, 'partial': 85, 'done': 99, '미판정': 9}
+
+== 문서 금지어·확인처 ==
+  L5/Q1/gates-v2.md: 금지어 0 · [확인처] 27
+  L5/Q1/feasibility-verdict-v3.md: 금지어 0 · [확인처] 0
+  L5/Q1/progress.md: 금지어 0 · [확인처] 1
+
+== v2 대비 ==
+  삭제 0 · 신설 ['STD-ORD-030']
+  비고: 변경 104행(공통 504 기준)
+  근거: 변경 1행(공통 504 기준)
+  done_criteria: 변경 76행(공통 504 기준)
+  상태: 변경 0행(공통 504 기준)
+  오픈차단여부: 변경 0행(공통 504 기준)
+  담당: 변경 0행(공통 504 기준)

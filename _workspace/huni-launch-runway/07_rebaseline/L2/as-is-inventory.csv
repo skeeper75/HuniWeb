@@ -1,0 +1,125 @@
+asis_id,시스템,영역,기능,상태,근거 file:line
+SB-001,shopby,홈,메인 히어로/why/프로모/뉴스 섹션 렌더,partial,huni-skin-shopby/src/app/(main)/page.tsx:1 · 뉴스·프로모 데이터원 legacy mock 빈배열 src/lib/legacy-data/hooks.ts:352-360
+SB-002,shopby,홈,BEST 상품 큐레이션,stub,huni-skin-shopby/src/lib/legacy-data/hooks.ts:60 (useBestSellers → 빈 배열 고정)
+SB-003,shopby,홈,GNB/메가메뉴,partial,huni-skin-shopby/src/lib/legacy-data/hooks.ts:43 (정적 mock-data.GNB/MEGA 상수)
+SB-004,shopby,카탈로그,카테고리 트리 조회(shop-api MULTI_LEVEL),done,huni-skin-shopby/src/lib/api/server/catalog.ts:1-20
+SB-005,shopby,카탈로그,상품 목록/검색(products/search),done,huni-skin-shopby/src/lib/api/server/catalog.ts:5 · src/app/(main)/shop/[categoryNo]/page.tsx:1
+SB-006,shopby,카탈로그,SHOP 정렬/페이지네이션,partial,huni-skin-shopby/src/components/shop/shop-list.tsx:18-24 (클라이언트 로컬 정렬·8건 페이지)
+SB-007,shopby,카탈로그,상품 상세 조회(products/{no}),done,huni-skin-shopby/src/app/(main)/product/[slug]/page.tsx:42-47
+SB-008,shopby,카탈로그,통합검색 페이지,partial,huni-skin-shopby/src/app/(main)/search/page.tsx:1 · 인기검색어 src/lib/api/hooks/use-search.ts:13
+SB-009,shopby,카탈로그,최근검색어(localStorage),done,huni-skin-shopby/src/lib/recent-searches.ts:1
+SB-010,shopby,상품상세,Printly 주문위젯 임베드(<huni-widget>),done,huni-skin-shopby/src/components/product/huni-widget.tsx:312-313 · 해석 src/lib/printly/widget.ts:60-90
+SB-011,shopby,상품상세,위젯 실시간 견적 수신(huni:priced),done,huni-skin-shopby/src/components/product/huni-widget.tsx:162-176
+SB-012,shopby,상품상세,위젯 견적가 → shopby 금액 적재(10원×orderCnt),done,huni-skin-shopby/src/lib/api/widget-order.ts:26-35 · huni-widget.tsx:257-265
+SB-013,shopby,상품상세,위젯 미매핑 시 폴백 Configurator,partial,huni-skin-shopby/src/components/product/configurator.tsx:45-52 (가격 하드코딩 a4=75000 등 · 견적엔진 미연결)
+SB-014,shopby,상품상세,메뉴슬러그별 전용 컨피규레이터 11종,stub,huni-skin-shopby/src/components/product/configurators/index.ts:22-33 · 담기 no-op src/lib/legacy-data/hooks.ts:121-136
+SB-015,shopby,상품상세,shopby↔Printly 상품코드 매핑,partial,huni-skin-shopby/src/lib/printly/product-code-map.ts:41-49 (수동 7건만 등록)
+SB-016,shopby,상품상세,Pie Canvas 발행 상세탭 조회,done,huni-skin-shopby/src/app/(main)/product/[slug]/page.tsx:51-56 · src/lib/printly/publications.ts:1
+SB-017,shopby,상품상세,상세 정적 섹션(차별점/유의사항/포장배송),done,huni-skin-shopby/src/components/product/product-sections.tsx:1
+SB-018,shopby,상품상세,상품 리뷰 목록(shop-api),done,huni-skin-shopby/src/lib/api/hooks/use-product-reviews.ts:41
+SB-019,shopby,상품상세,PDF 원고 직접 업로드,stub,huni-skin-shopby/src/components/product/configurator-actions.tsx:74-86 (버튼 라벨만 업로드·실동작은 장바구니 담기 · 파일 선택/presign 없음)
+SB-020,shopby,상품상세,에디터로 디자인하기 버튼,stub,huni-skin-shopby/src/components/product/configurator-actions.tsx:170-176 (onClick 없음 · 데드 버튼)
+SB-021,shopby,장바구니,회원 장바구니 조회/수량/삭제(shop-api /cart),done,huni-skin-shopby/src/lib/api/hooks/use-cart.ts:130-230
+SB-022,shopby,장바구니,장바구니 담기,done,huni-skin-shopby/src/lib/api/hooks/use-cart.ts:201 · 호출 src/components/product/configurator-actions.tsx:15
+SB-023,shopby,장바구니,비회원 게스트 장바구니(localStorage),done,huni-skin-shopby/src/lib/guest-cart.ts:1-31
+SB-024,shopby,장바구니,장바구니 배지 카운트,done,huni-skin-shopby/src/lib/api/hooks/use-cart.ts:170
+SB-025,shopby,장바구니,위젯 주문 재견적(수량 변경 시),done,huni-skin-shopby/src/app/api/printly/requote/route.ts:16-50
+SB-026,shopby,주문,주문서 생성(order-sheets),done,huni-skin-shopby/src/lib/api/hooks/use-order-sheet.ts:40
+SB-027,shopby,주문,주문서 조회/금액계산,done,huni-skin-shopby/src/lib/api/hooks/use-order-sheet.ts:177,252
+SB-028,shopby,주문,배송지 선택/주소 검색 모달,done,huni-skin-shopby/src/components/checkout/address-modal.tsx:1 · src/lib/daum-postcode.ts:10
+SB-029,shopby,주문,주문 쿠폰 적용/최대할인,done,huni-skin-shopby/src/lib/api/hooks/use-order-coupons.ts:34,69,102
+SB-030,shopby,주문,포인트 사용,partial,huni-skin-shopby/src/components/checkout/checkout-form.tsx:52 (조회는 실API · 적립/충전은 mock)
+SB-031,shopby,결제,무통장입금(ACCOUNT) 결제,done,huni-skin-shopby/src/components/checkout/checkout-form.tsx:157-158 · guest-checkout-form.tsx:100-101
+SB-032,shopby,결제,카드/실시간계좌이체 등 PG 결제,absent,huni-skin-shopby/src/components/checkout/checkout-form.tsx:8-9 (주석 명시 "PG 연동은 후속 — 현재는 무통장만 동작")
+SB-033,shopby,결제,NCPPay SDK 로더/설정,done,huni-skin-shopby/src/lib/payments/ncp-pay.ts:47-70 · 설정 src/app/api/pay-config/route.ts:8
+SB-034,shopby,결제,비회원 결제(게스트 주문서),done,huni-skin-shopby/src/components/checkout/guest-checkout-form.tsx:9-10
+SB-035,shopby,주문,주문완료 화면,done,huni-skin-shopby/src/components/order/order-complete-view.tsx:1
+SB-036,shopby,주문,비회원 주문조회(주문번호+비밀번호),done,huni-skin-shopby/src/components/order/guest-order-lookup.tsx:4-9
+SB-037,shopby,회원,이메일 로그인(shopby Credentials),done,huni-skin-shopby/src/lib/auth/auth.config.ts:12-22 · src/lib/auth/shopby-auth.ts:1
+SB-038,shopby,회원,회원가입(POST /profile),done,huni-skin-shopby/src/app/api/auth/signup/route.ts:8-33
+SB-039,shopby,회원,로그아웃 + shopby 토큰 폐기,done,huni-skin-shopby/src/app/api/auth/shopby-logout/route.ts:17-40
+SB-040,shopby,회원,세션 토큰 자동 갱신(refresh 회전),done,huni-skin-shopby/src/lib/auth/auth.config.ts:18-22 · src/app/api/shop/[...path]/route.ts:20-27
+SB-041,shopby,회원,SNS 간편로그인(카카오/네이버/구글),stub,huni-skin-shopby/src/components/auth/sns-buttons.tsx:74-80 (토스트 안내만 · signIn 미호출)
+SB-042,shopby,회원,아이디 찾기 / 비밀번호 재설정,stub,huni-skin-shopby/src/components/auth/find-id-form.tsx:50-56 (토스트 "준비 중")
+SB-043,shopby,회원,본인인증(휴대폰/아이핀),absent,코드 전역 검색 결과 인증 SDK·API 호출 지점 없음(grep https:// src/ 결과에 인증사 호스트 부재)
+SB-044,shopby,마이페이지,대시보드 요약,done,huni-skin-shopby/src/components/mypage/dashboard-section.tsx:17-59
+SB-045,shopby,마이페이지,주문내역 목록/상세,done,huni-skin-shopby/src/lib/api/hooks/use-my-orders.ts:84,354
+SB-046,shopby,마이페이지,회원정보 수정/비밀번호 변경,done,huni-skin-shopby/src/lib/api/hooks/use-profile.ts:42,66,128
+SB-047,shopby,마이페이지,회원탈퇴,done,huni-skin-shopby/src/lib/api/hooks/use-profile.ts:112 · src/components/mypage/withdraw-section.tsx:4
+SB-048,shopby,마이페이지,배송지 관리(CRUD·기본배송지),done,huni-skin-shopby/src/lib/api/hooks/use-shipping-address.ts:65-125
+SB-049,shopby,마이페이지,쿠폰 조회/등록,done,huni-skin-shopby/src/lib/api/hooks/use-coupons.ts:71,96
+SB-050,shopby,마이페이지,포인트 잔액/내역 조회,done,huni-skin-shopby/src/lib/api/hooks/use-points.ts:22,62
+SB-051,shopby,마이페이지,포인트(프린트머니) 충전,stub,huni-skin-shopby/src/components/mypage/point-section.tsx:11-14 → src/lib/legacy-data/hooks.ts:423-432 (no-op)
+SB-052,shopby,마이페이지,리뷰 작성/수정/삭제,done,huni-skin-shopby/src/lib/api/hooks/use-review-write.ts:38,90 · use-my-reviews.ts:84,106
+SB-053,shopby,마이페이지,증빙서류 발급(세금계산서/현금영수증),stub,huni-skin-shopby/src/components/mypage/document-section.tsx:1-6 (정적 표 UI만 · API 호출 없음)
+SB-054,shopby,고객지원,공지사항 목록/상세(shopby 게시판),done,huni-skin-shopby/src/app/(main)/notice/page.tsx:1-27 · src/lib/api/server/board.ts:1
+SB-055,shopby,고객지원,이용가이드(파일/책자/후가공/주문/편집기),partial,huni-skin-shopby/src/lib/guide-data.ts:41-50,158-202 (대부분 "준비중" 스텁 글)
+SB-056,shopby,고객지원,1:1 문의/FAQ,absent,huni-skin-shopby/src/app/(main) 하위 라우트 부재(find src/app 결과에 inquiry/qna 없음)
+SB-057,shopby,정책,이용약관/개인정보처리방침,done,huni-skin-shopby/src/app/(main)/terms/page.tsx:1 · privacy/page.tsx:1 · src/lib/legal/markdown.ts:1
+SB-058,shopby,회사,회사소개/오시는길,done,huni-skin-shopby/src/app/(main)/company/page.tsx:1 · location/page.tsx:1
+SB-059,shopby,운영자,관리자 대시보드,stub,huni-skin-shopby/src/app/(admin)/admin/page.tsx:1-8 (자리표시 텍스트만)
+SB-060,shopby,운영자,관리자 역할 가드,partial,huni-skin-shopby/src/proxy.ts:21-23 (ADMIN 검사 미활성 주석) · src/lib/api/hooks/use-admins.ts:20
+SB-061,shopby,인프라,shopby server API 프록시(catch-all),done,huni-skin-shopby/src/app/api/shopby/[...path]/route.ts:21-45
+SB-062,shopby,인프라,shopby shop API 프록시(+토큰 주입),done,huni-skin-shopby/src/app/api/shop/[...path]/route.ts:27-48
+SB-063,shopby,인프라,Prisma 스키마(23모델),absent,huni-skin-shopby/prisma/schema.prisma:165-637 정의 · src 전역 import 0건(grep "@/lib/prisma" 무결과) = 미사용 사문
+SB-064,shopby,인프라,데모 백도어 로그인(DEMO_AUTH_*),absent,huni-skin-shopby/.env.example:74-80 에 키만 문서화 · src 전역 grep "DEMO_AUTH" 0건 = 코드 미구현(문서만 살아있음)
+WA-001,webadmin,상품관리,상품 뷰어(목록/상세),done,raw/webadmin/webadmin/config/urls.py:333,351
+WA-002,webadmin,상품관리,상품 섹션별 편집,done,raw/webadmin/webadmin/config/urls.py:353
+WA-003,webadmin,상품관리,상품 옵션(옵션그룹/옵션/항목) CRUD,done,raw/webadmin/webadmin/config/urls.py:356-360
+WA-004,webadmin,상품관리,상품 템플릿(추가상품) 관리,done,raw/webadmin/webadmin/config/urls.py:363-365
+WA-005,webadmin,상품관리,차원 선택지(dim-choices) 관리,done,raw/webadmin/webadmin/config/urls.py:368
+WA-006,webadmin,상품관리,제약규칙(JSONLogic) 관리,done,raw/webadmin/webadmin/config/urls.py:371 · 모델 catalog/models.py:801
+WA-007,webadmin,상품관리,상품 유효성 검증(validate),done,raw/webadmin/webadmin/config/urls.py:373
+WA-008,webadmin,상품관리,셋트상품 관리,done,raw/webadmin/webadmin/config/urls.py:336 · 모델 catalog/models.py:510
+WA-009,webadmin,상품관리,SKU 카탈로그,done,raw/webadmin/webadmin/config/urls.py:378
+WA-010,webadmin,상품관리,변경 영향분석(impact),done,raw/webadmin/webadmin/config/urls.py:376
+WA-011,webadmin,기초데이터,기초코드 마스터 CRUD,done,raw/webadmin/webadmin/config/urls.py:339,341
+WA-012,webadmin,기초데이터,카테고리 마스터,done,raw/webadmin/webadmin/config/urls.py:349 · 모델 catalog/models.py:13
+WA-013,webadmin,기초데이터,엔티티 공통 마스터(master/<entity>),done,raw/webadmin/webadmin/config/urls.py:344,346
+WA-014,webadmin,기초데이터,용지(자재) 관리 + 단가,done,raw/webadmin/webadmin/config/urls.py:304,307,310,313 · catalog/paper_views.py:1
+WA-015,webadmin,기초데이터,색상칩(swatch) 이미지 스테이징,done,raw/webadmin/webadmin/config/urls.py:316 · catalog/s3_swatch.py:143
+WA-016,webadmin,기초데이터,책등(spine) 계산 규칙 관리,done,raw/webadmin/webadmin/config/urls.py:320-330 · catalog/spine_calc.py:1
+WA-017,webadmin,가격,가격 뷰어(공식/구성요소/단가행),done,raw/webadmin/webadmin/config/urls.py:32,154
+WA-018,webadmin,가격,가격 구성요소 단가 그리드 편집/저장,done,raw/webadmin/webadmin/config/urls.py:144-148
+WA-019,webadmin,가격,구성요소 사용처/중복 점검,done,raw/webadmin/webadmin/config/urls.py:150,152
+WA-020,webadmin,가격,가격 시뮬레이터,done,raw/webadmin/webadmin/config/urls.py:172,174 · 상품별 164
+WA-021,webadmin,가격,셋트 가격 시뮬레이션,done,raw/webadmin/webadmin/config/urls.py:169
+WA-022,webadmin,가격,가격 계산 다이어그램/소스 추적,done,raw/webadmin/webadmin/config/urls.py:157,159
+WA-023,webadmin,가격,수량구간 할인표 관리,done,raw/webadmin/webadmin/config/urls.py:137,177-181
+WA-024,webadmin,가격,시작가(start price) 산출/수동설정,done,raw/webadmin/webadmin/config/urls.py:113-117 · catalog/start_price.py:1
+WA-025,webadmin,가격,가격엔진 evaluate_price 구현,done,raw/webadmin/webadmin/catalog/pricing.py:1 (1561줄)
+WA-026,webadmin,위젯,위젯 빌더(폼 편집/저장),done,raw/webadmin/webadmin/config/urls.py:184,190,192
+WA-027,webadmin,위젯,위젯 생성/삭제/이름변경,done,raw/webadmin/webadmin/config/urls.py:188,202,232
+WA-028,webadmin,위젯,위젯 게시/버전/롤백,done,raw/webadmin/webadmin/config/urls.py:205,207,209
+WA-029,webadmin,위젯,위젯 매니저(트리/상태),done,raw/webadmin/webadmin/config/urls.py:214-220
+WA-030,webadmin,위젯,위젯 템플릿 화면,done,raw/webadmin/webadmin/config/urls.py:223-229,234
+WA-031,webadmin,위젯,위젯 미리보기 이미지 업로드(presign/멀티파트),done,raw/webadmin/webadmin/config/urls.py:194,196
+WA-032,webadmin,위젯,위젯 주문 미리보기,done,raw/webadmin/webadmin/config/urls.py:200
+WA-033,webadmin,위젯API,위젯 정의 조회(api/w/v1/widgets),done,raw/webadmin/webadmin/config/urls.py:246
+WA-034,webadmin,위젯API,카탈로그 조회,done,raw/webadmin/webadmin/config/urls.py:247
+WA-035,webadmin,위젯API,실시간 가격 계산(api/w/v1/price),done,raw/webadmin/webadmin/config/urls.py:248
+WA-036,webadmin,위젯API,옵션 조합 검증(validate),done,raw/webadmin/webadmin/config/urls.py:249
+WA-037,webadmin,위젯API,원고 업로드 presign/멀티파트,done,raw/webadmin/webadmin/config/urls.py:250,252 · catalog/s3_artwork.py:208-280
+WA-038,webadmin,위젯API,견적 handoff 발급/검증/재견적,done,raw/webadmin/webadmin/config/urls.py:254-256
+WA-039,webadmin,위젯API,자체 장바구니 API,partial,raw/webadmin/webadmin/config/urls.py:261-264 (구현 존재 · shopby 스토어프론트는 미사용 — huni-skin-shopby 전역 grep에 호출 0건)
+WA-040,webadmin,위젯API,주문 등록(order/register),done,raw/webadmin/webadmin/config/urls.py:267 · 모델 catalog/models.py:1043
+WA-041,webadmin,위젯API,에디터 resolve/token 발급,done,raw/webadmin/webadmin/config/urls.py:274,275 · catalog/edicus_lookup.py:214-260
+WA-042,webadmin,위젯API,가이드파일/메인이미지/디자인 조회,done,raw/webadmin/webadmin/config/urls.py:280,283,285,287,288
+WA-043,webadmin,위젯API,색상칩 이미지 서빙,done,raw/webadmin/webadmin/config/urls.py:277
+WA-044,webadmin,연동,shopby 웹훅 수신(비밀경로),partial,raw/webadmin/webadmin/config/urls.py:271 · catalog/shopby_hook.py:1-27 (원문 적재만 · 후속 처리 미구현 명시)
+WA-045,webadmin,연동,메인이미지 → shopby 동기화,done,raw/webadmin/webadmin/catalog/shopby_sync.py:1-30 · 재동기화 urls.py:109
+WA-046,webadmin,연동,shopby server API 공통 클라이언트,done,raw/webadmin/webadmin/catalog/shopby_client.py:1-50
+WA-047,webadmin,연동,Edicus 템플릿 메타/차원/그리드 관리,done,raw/webadmin/webadmin/config/urls.py:41-49 · catalog/edicus_views.py:278-674
+WA-048,webadmin,연동,템플릿 조합(tmpl-combo) 관리,done,raw/webadmin/webadmin/config/urls.py:52-69 · catalog/tmpl_combo.py:1
+WA-049,webadmin,콘텐츠,가이드파일 업로드/관리(S3),done,raw/webadmin/webadmin/config/urls.py:72-87 · catalog/s3_guide.py:266-350
+WA-050,webadmin,콘텐츠,메인이미지 업로드/관리(S3),done,raw/webadmin/webadmin/config/urls.py:91-109 · catalog/s3_main_img.py:186-197
+WA-051,webadmin,콘텐츠,디자인(시안) 관리,done,raw/webadmin/webadmin/config/urls.py:121-128 · catalog/designs.py:1
+WA-052,webadmin,주문,원고 파일 승격(tmp→order 버킷),done,raw/webadmin/webadmin/catalog/artwork_promote.py:1 · 모델 catalog/models.py:1081
+WA-053,webadmin,운영,관리자 비서(Anthropic) 챗,done,raw/webadmin/webadmin/config/urls.py:291,292 · catalog/assistant.py:238-240
+WA-054,webadmin,운영,비서 리포트 → GitHub 이슈 등록,done,raw/webadmin/webadmin/config/urls.py:298 · catalog/assistant_issue.py:174-186
+WA-055,webadmin,운영,위젯 남용 탐지 + 텔레그램 알림,done,raw/webadmin/webadmin/catalog/abuse_log.py:1 · rate_alerts.py:61-75
+WA-056,webadmin,운영,SDK 가이드/데모/장바구니 가이드 문서,done,raw/webadmin/webadmin/config/urls.py:241,242,245
+WA-057,webadmin,운영,내장 매뉴얼(퀵스타트/매뉴얼/위젯매뉴얼/테이블명세),done,raw/webadmin/webadmin/config/urls.py:382-387
+WA-058,webadmin,운영,Django admin 표준 CRUD(용지·계정),partial,raw/webadmin/webadmin/catalog/admin.py:2242,2256,2310 (대부분 커스텀 뷰로 대체)
+WA-059,webadmin,인프라,Redis 공유 rate-limit 캐시,partial,raw/webadmin/webadmin/config/settings.py:343,362-368 (REDIS_URL 미설정 시 LocMem 폴백 — 현행 Railway 미설정 주석 :340)
+WA-060,webadmin,고객,거래처(B2B 고객) 마스터,partial,raw/webadmin/webadmin/catalog/models.py:87 (TCusCustomers 모델만 · 전용 운영화면 urls.py에 부재)

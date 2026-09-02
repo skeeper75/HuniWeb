@@ -1,0 +1,85 @@
+std_id,대분류,중분류,기능,인쇄특수여부,필수도,근거출처
+STD-MEM-001,회원·인증,가입,회원가입(이메일 식별자),N,must,print-kb/wiki/policy/membership-auth.md#MEM-01
+STD-MEM-002,회원·인증,가입,약관 동의·전체동의,N,must,print-kb/wiki/policy/membership-auth.md#MEM-04
+STD-MEM-003,회원·인증,가입,휴대전화 본인인증(SMS/PASS),N,must,print-kb/wiki/policy/membership-auth.md#MEM-04
+STD-MEM-004,회원·인증,가입,14세 미만 가입 제한,N,should,print-kb/wiki/policy/membership-auth.md#MEM-04
+STD-MEM-005,회원·인증,가입,1인 1계정 중복가입 제한,N,should,print-kb/wiki/policy/membership-auth.md#MEM-04
+STD-MEM-006,회원·인증,가입,가입완료 혜택 자동지급(쿠폰+적립금),N,should,print-kb/wiki/policy/membership-auth.md#MEM-07
+STD-MEM-007,회원·인증,로그인,아이디/비밀번호 로그인,N,must,print-kb/wiki/policy/membership-auth.md#MEM-01
+STD-MEM-008,회원·인증,로그인,아이디 찾기(마스킹),N,must,print-kb/wiki/policy/membership-auth.md#MEM-02
+STD-MEM-009,회원·인증,로그인,비밀번호 재설정(이메일 링크),N,must,print-kb/wiki/policy/membership-auth.md#MEM-02
+STD-MEM-010,회원·인증,로그인,카카오 소셜 로그인,N,must,print-kb/wiki/policy/membership-auth.md#MEM-03
+STD-MEM-011,회원·인증,로그인,네이버 소셜 로그인,N,must,print-kb/wiki/policy/membership-auth.md#MEM-03
+STD-MEM-012,회원·인증,로그인,구글/애플 소셜 로그인,N,could,print-kb/wiki/policy/membership-auth.md#MEM-03 2차 EXTERNAL
+STD-MEM-013,회원·인증,세션,로그인 세션 유지·자동 갱신,N,must,huni-shopby/01_research/commerce-flow-contract.md §0 인증 헤더 규약
+STD-MEM-014,회원·인증,세션,비회원 게스트 세션 처리,N,must,huni-shopby/01_research/commerce-flow-contract.md §2 GuestOrder
+STD-MEM-015,회원·인증,회원,회원정보 수정(비밀번호 재확인),N,must,print-quote/04_design/ia.md §2.2 SM-MY-09
+STD-MEM-016,회원·인증,회원,비밀번호 변경,N,must,print-quote/04_design/ia.md §2.2 SM-MY-10
+STD-MEM-017,회원·인증,회원,회원탈퇴,N,must,print-quote/04_design/ia.md §2.2 SM-MY-11
+STD-MEM-018,회원·인증,회원,회원등급 산정·자동 승급,N,should,print-kb/wiki/policy/membership-auth.md#MEM-06
+STD-MEM-019,회원·인증,회원,휴면계정 전환·복구,N,should,print-kb/wiki/policy/membership-auth.md#MEM-04 계정정책 파생
+STD-MEM-020,회원·인증,회원,기존 회원 데이터 이관(구 사이트),N,must,print-kb/wiki/policy/membership-auth.md#MEM-01 마이그레이션 이슈 명시
+STD-MYP-001,마이페이지,주문,주문 목록 조회,N,must,print-quote/04_design/ia.md §2.2 SM-MY-01
+STD-MYP-002,마이페이지,주문,주문 상세 조회(사양·파일·상태),Y,must,print-quote/04_design/ia.md §2.2 SM-MY-01.1
+STD-MYP-003,마이페이지,주문,편집상품 미리보기,Y,should,print-quote/04_design/ia.md §2.2 SM-MY-01.1
+STD-MYP-004,마이페이지,보관함,옵션보관함 저장/불러오기,Y,must,print-kb/wiki/policy/mypage.md#MYP-01
+STD-MYP-005,마이페이지,보관함,보관 기간 정책 적용·만료 처리,Y,should,print-kb/wiki/policy/mypage.md#MYP-01 3개월 권장
+STD-MYP-006,마이페이지,적립금,프린팅머니 잔액·내역 조회,N,must,print-kb/wiki/policy/mypage.md#MYP-02
+STD-MYP-007,마이페이지,적립금,프린팅머니 충전(PG 결제→적립 전환),N,must,print-kb/wiki/policy/custom-dev.md#CST-04
+STD-MYP-008,마이페이지,적립금,구매확정 적립금 자동 지급,N,should,huni-shopby/01_research/order-to-delivery-contract.md §3 accumulationAmtWhenBuyConfirm
+STD-MYP-009,마이페이지,적립금,기존 프린트머니 잔액 이관,N,must,print-kb/wiki/policy/mypage.md#MYP-02 · print-kb/wiki/policy/custom-dev.md#CST-04
+STD-MYP-010,마이페이지,쿠폰,보유 쿠폰 목록,N,must,print-quote/04_design/ia.md §2.2 SM-MY-03
+STD-MYP-011,마이페이지,쿠폰,쿠폰 번호 등록,N,should,print-quote/04_design/ia.md §2.2 SM-MY-03.1
+STD-MYP-012,마이페이지,리뷰,내 리뷰 작성·조회,N,must,print-kb/wiki/policy/review.md#RVW-01
+STD-MYP-013,마이페이지,문의,내 상품Q&A/1:1문의 조회,N,must,print-quote/04_design/ia.md §2.2 SM-MY-05 SM-MY-08
+STD-MYP-014,마이페이지,증빙,증빙서류 발급내역 조회,N,must,print-quote/04_design/ia.md §2.2 SM-MY-12
+STD-MYP-015,마이페이지,증빙,현금영수증 정보 관리,N,should,print-quote/04_design/ia.md §2.2 SM-MY-12.3
+STD-MYP-016,마이페이지,배송지,배송지 주소록 관리,N,must,huni-shopby/01_research/order-to-delivery-contract.md §2.2 주소지 추가
+STD-PRM-001,프로모션,쿠폰,신규회원 쿠폰 자동발행,N,should,print-kb/wiki/policy/coupon.md#CPN-01
+STD-PRM-002,프로모션,쿠폰,리뷰 작성 보상 쿠폰 발행,N,should,print-kb/wiki/policy/coupon.md#CPN-02
+STD-PRM-003,프로모션,쿠폰,재구매 쿠폰 발행,N,could,print-kb/wiki/policy/coupon.md#CPN-03
+STD-PRM-004,프로모션,쿠폰,회원등급(VIP) 쿠폰 발행,N,could,print-kb/wiki/policy/coupon.md#CPN-04
+STD-PRM-005,프로모션,쿠폰,쿠폰 동시사용 개수 제한,N,should,print-kb/wiki/policy/coupon.md#CPN-05
+STD-PRM-006,프로모션,쿠폰,쿠폰 유효기간 관리,N,must,print-kb/wiki/policy/coupon.md#CPN-06
+STD-PRM-007,프로모션,쿠폰,장바구니/주문서 쿠폰 적용,N,must,huni-shopby/01_research/commerce-flow-contract.md §3.4 쿠폰 보조
+STD-PRM-008,프로모션,리뷰,리뷰 삭제 시 보상 회수,N,could,print-kb/wiki/policy/review.md#RVW-03
+STD-PRM-009,프로모션,리뷰,사진 리뷰 추가 보상,N,could,print-kb/wiki/policy/review.md#RVW-04
+STD-PRM-010,프로모션,기획전,기획전/할인 이벤트 페이지,N,should,print-quote/04_design/ia.md §2.1 메인 기획전
+STD-PRM-011,프로모션,체험단,체험단 모집·신청·당첨·후기,N,could,print-kb/wiki/policy/custom-dev.md#CST-05
+STD-PRM-012,프로모션,알림,알림톡/SMS 마케팅 발송,N,should,print-kb/wiki/policy/membership-auth.md#MEM-02 알림톡 계약 필요
+STD-PRM-013,프로모션,알림,이메일 뉴스레터 발송,N,could,print-quote/04_design/ia.md §2.1 고객센터 파생
+STD-PRM-014,프로모션,수신동의,마케팅 수신동의 관리,N,must,print-kb/wiki/policy/membership-auth.md#MEM-04 약관
+STD-B2B-001,B2B,거래처,거래처(기업회원) 등록·관리,N,must,print-quote/04_design/ia.md §2.3 SM-A-02 거래처관리
+STD-B2B-002,B2B,거래처,거래처별 단가/할인율 설정,Y,should,print-kb/wiki/huni/price-engine.md#PE-SOT-5 가격소스 우선순위
+STD-B2B-003,B2B,거래처,거래처 소속 담당자 다계정,N,should,print-quote/04_design/ia.md §2.3 거래처·원장
+STD-B2B-004,B2B,후불,후불 여신한도 설정,N,should,print-kb/wiki/policy/custom-dev.md#CST-07
+STD-B2B-005,B2B,후불,후불 주문 승인·미결제 관리,N,should,print-kb/wiki/policy/order-mgmt.md#OMG-04
+STD-B2B-006,B2B,정산,월 마감 청구서 발행,N,should,print-kb/wiki/policy/operations.md#OPS-05 월단위 마감
+STD-B2B-007,B2B,정산,업체별 미수금 관리,N,should,print-quote/04_design/ia.md §2.3 SM-A-06
+STD-B2B-008,B2B,원장,거래처 원장(온·오프라인 통합),N,should,print-kb/wiki/policy/custom-dev.md#CST-06
+STD-B2B-009,B2B,원장,원장 데이터 파일 생성(.txt 연계),N,could,print-quote/04_design/ia.md §2.3 SM-A-02 .txt 생성
+STD-B2B-010,B2B,견적,대량 견적 요청 접수·회신,Y,should,print-quote/04_design/ia.md §2.1 SM-CS-04
+STD-B2B-011,B2B,견적,견적서 발행(사업자 양식),N,should,print-quote/04_design/ia.md §2.1 대량견적 파생
+STD-B2B-012,B2B,세금,세금계산서 일괄 발행,N,should,print-kb/wiki/policy/mypage.md#MYP-03
+STD-SYS-001,시스템·플랫폼,권한,관리자 계정 등록·관리,N,must,print-quote/04_design/ia.md §2.3 SM-A-01
+STD-SYS-002,시스템·플랫폼,권한,역할 기반 세분 권한 제어,N,should,print-kb/wiki/policy/order-mgmt.md#OMG-06 7조직 권한
+STD-SYS-003,시스템·플랫폼,권한,관리자 작업 감사로그,N,should,print-quote/04_design/ia.md §2.3 TR-SYS 감사로그
+STD-SYS-004,시스템·플랫폼,설정,PG 연동 설정,N,must,print-kb/wiki/policy/order-payment.md#PAY-02
+STD-SYS-005,시스템·플랫폼,설정,배송비 정책 설정,N,must,print-kb/wiki/policy/shipping.md#SHIP-02
+STD-SYS-006,시스템·플랫폼,설정,알림(SMS/알림톡/이메일) 템플릿 설정,N,must,print-kb/wiki/policy/order-mgmt.md#OMG-03
+STD-SYS-007,시스템·플랫폼,연동,커머스 플랫폼 API 인증·토큰 관리,N,must,huni-shopby/01_research/commerce-flow-contract.md §0 인증 헤더 규약
+STD-SYS-008,시스템·플랫폼,연동,인쇄 도메인 DB ↔ 커머스 상품 동기화,Y,must,huni-shopby/08_boundary/ownership-matrix.md §1.1 · §2 중복 보유 항목
+STD-SYS-009,시스템·플랫폼,연동,가격 계산 결과 카트 주입 브리지,Y,must,huni-shopby/08_boundary/ownership-matrix.md §1.2 가격 계산 소유권
+STD-SYS-010,시스템·플랫폼,연동,원고 저장소(스토리지) 연동,Y,must,huni-shopby/08_boundary/ownership-matrix.md §1.3 원고 소유권
+STD-SYS-011,시스템·플랫폼,연동,디자인 에디터 외부 서비스 연동,Y,must,huni-shopby/08_boundary/ownership-matrix.md §1.3
+STD-SYS-012,시스템·플랫폼,연동,본인인증 서비스 연동,N,must,print-kb/wiki/policy/membership-auth.md#MEM-04
+STD-SYS-013,시스템·플랫폼,연동,우편번호/주소 검색 서비스 연동,N,must,huni-shopby/01_research/commerce-flow-contract.md §3.1 배송지
+STD-SYS-014,시스템·플랫폼,연동,택배사 배송추적 연동,N,must,huni-shopby/01_research/order-to-delivery-contract.md §2.1 deliveryCompanyType
+STD-SYS-015,시스템·플랫폼,연동,웹 로그/전환 분석 도구 연동,N,should,print-quote/04_design/ia.md §2.1 통계 파생
+STD-SYS-016,시스템·플랫폼,품질,주문/결제 실패 모니터링·알림,N,should,huni-shopby/01_research/commerce-flow-contract.md §4.1 돈 검증 실패 경로
+STD-SYS-017,시스템·플랫폼,품질,데이터 백업·복구 절차,N,must,print-kb/wiki/huni/load-path.md 적재 경로 안전장치
+STD-SYS-018,시스템·플랫폼,품질,개인정보 보관·파기 정책 적용,N,must,print-kb/wiki/policy/operations.md#OPS-02
+STD-SYS-019,시스템·플랫폼,품질,반응형/모바일 대응,N,must,print-story/02_capture/order-flow-steps.md §A 위젯 높이 2130px 실측
+STD-SYS-020,시스템·플랫폼,품질,SEO 메타·사이트맵,N,should,print-quote/04_design/ia.md §2.1 리스팅 파생
+STD-SYS-021,시스템·플랫폼,품질,페이지 빌더(운영자 화면 편집),N,should,print-quote/04_design/ia.md §2.3 빌더 트랙
+STD-SYS-022,시스템·플랫폼,품질,구 사이트 → 신규 사이트 URL 리다이렉트,N,should,print-kb/wiki/policy/membership-auth.md#MEM-01 마이그레이션 파생

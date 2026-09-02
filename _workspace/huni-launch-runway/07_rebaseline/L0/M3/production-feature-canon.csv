@@ -1,0 +1,136 @@
+std_id,대분류,중분류,기능,인쇄특수여부,필수도,근거출처
+STD-MFG-001,생산·공정,MES연동,주문 등록 API 수신(자사몰→우리·site_key/order_no/line_no/token),N,must,raw/webadmin/webadmin/config/urls.py:267 POST /api/w/v1/order/register · order-to-mes-process.md §8.0 SF-1
+STD-MFG-002,생산·공정,MES연동,주문 등록 멱등 처리(재시도 already:true·같은 자리 다른 사양 409),N,must,order-to-mes-process.md §8.0 SF-1 · §11 0단계
+STD-MFG-003,생산·공정,MES연동,결제 사양 전문 보관(t_ord_orders·서명 token 검증 후 전개),Y,must,order-to-mes-process.md §6.5 · raw/webadmin/webadmin/catalog/models.py:1043 TOrdOrders
+STD-MFG-004,생산·공정,MES연동,원고 승격 tmp→order 버킷 CopyObject,Y,must,raw/webadmin/webadmin/catalog/artwork_promote.py · order-to-mes-process.md §4-2
+STD-MFG-005,생산·공정,MES연동,승격 시 원본 실존·크기 실측 대조(head_object) fail-closed,Y,must,artwork_promote.py:155 _promote_one · order-to-mes-process.md §4 승격 검증
+STD-MFG-006,생산·공정,MES연동,승격 실패 시 주문 보류(HOLD)+사유 기록,N,must,artwork_promote.py:51 ORD_HOLD · order-to-mes-process.md §11 1단계
+STD-MFG-007,생산·공정,MES연동,담당자용 보류 주문 목록 화면,N,must,order-to-mes-process.md §11 1단계 미체크(남음)
+STD-MFG-008,생산·공정,MES연동,원고 키 회차(r{n}) 규약·재업로드 누적 보관,Y,must,raw/webadmin/webadmin/catalog/s3_artwork.py build_order_key() · order-to-mes-process.md §4 키 규약
+STD-MFG-009,생산·공정,MES연동,MES 넘길 파일 목록 산출(t_ord_artworks 최신 회차),Y,must,raw/webadmin/webadmin/catalog/models.py:1086 · artwork_promote.py:296 latest_artworks
+STD-MFG-010,생산·공정,MES연동,상품↔MES 품목코드(MES_ITEM_CD) 매핑 일괄 적재,Y,must,order-to-mes-process.md §11 2단계 · 라이브 실측 260902 15/269
+STD-MFG-011,생산·공정,MES연동,MES 품목코드 중복 검증(부분 유니크·삭제상품 점유 명시),Y,should,raw/webadmin/webadmin/catalog/admin.py:2092 clean_mes_item_cd
+STD-MFG-012,생산·공정,MES연동,MES 품목코드 매핑 현황 목록 노출,N,should,order-to-mes-process.md §11 2단계 「목록에는 빠져 있어 현황 파악이 어려움」
+STD-MFG-013,생산·공정,MES연동,MES-1 주문 접수 전송(WCF·주문헤더+제작사양 전문+원고 목록+handoff_id),Y,must,order-to-mes-process.md §8.3 MES-1
+STD-MFG-014,생산·공정,MES연동,MES 중복 전송 방지 도장,N,must,order-to-mes-process.md §11 2단계
+STD-MFG-015,생산·공정,MES연동,MES-2 주문 취소 통보(생산중지 요청),N,must,order-to-mes-process.md §8.3 MES-2
+STD-MFG-016,생산·공정,MES연동,MES-3 원고 교체 통보(회차 증가 시 새 키 전달),Y,must,order-to-mes-process.md §8.3 MES-3
+STD-MFG-017,생산·공정,MES연동,MES-4 배송지·수령자 변경 통보(출고 전 한정),N,should,order-to-mes-process.md §8.3 MES-4
+STD-MFG-018,생산·공정,MES연동,MES-5 주문 조회 재동기화,N,could,order-to-mes-process.md §8.3 MES-5
+STD-MFG-019,생산·공정,MES연동,MES→우리 API 인증(VPC 사설 경로+API 키·인터넷 미개방),N,must,order-to-mes-process.md §8.4 인증·경로 · aws-architecture-huni.pdf p.11 §6
+STD-MFG-020,생산·공정,MES연동,주문 큐 비동기 처리(SQS 디커플·MES 다운 중에도 접수 지속),N,should,aws-architecture-huni.pdf p.7 §3.2
+STD-MFG-021,생산·공정,MES연동,실패 재시도·DLQ·처리 실패 주문 관리자 화면,N,must,order-to-mes-process.md §9.4 · aws-architecture-huni.pdf p.7 §3.2
+STD-MFG-022,생산·공정,상태왕복,주문 상태머신(REGISTERED/PROMOTING/PROMOTED/HOLD/PAID/FILE_CHECK/FILE_HOLD/MES_SENT/IN_PRODUCTION/PRODUCED/SHIPPED/DONE/CANCELED),N,must,order-to-mes-process.md §6.2 · artwork_promote.py:49-52
+STD-MFG-023,생산·공정,상태왕복,상태 단위=주문상품옵션(orderProductOptionNo)·주문 단위는 롤업,N,must,order-to-mes-process.md §6.3
+STD-MFG-024,생산·공정,상태왕복,3시스템 매핑 테이블(handoff_id·orderNo+orderProductOptionNo·MES 작업번호),N,must,order-to-mes-process.md §6.4
+STD-MFG-025,생산·공정,상태왕복,FR-1 MES 주문 상태 변경 통보 수신(접수완료/생산대기/생산중/생산완료),Y,must,order-to-mes-process.md §8.4 FR-1
+STD-MFG-026,생산·공정,상태왕복,접수완료 시 취소 잠금 원자적 전환(cancelable CAS),N,must,order-to-mes-process.md §7.3
+STD-MFG-027,생산·공정,상태왕복,TO-2 샵바이 상품준비중 전환(취소 창구 닫기),N,must,order-to-mes-process.md §8.2 TO-2 PUT /orders/prepare-product
+STD-MFG-028,생산·공정,상태왕복,FR-2 MES 송장번호 등록 수신,N,must,order-to-mes-process.md §8.4 FR-2
+STD-MFG-029,생산·공정,상태왕복,TO-3 샵바이 배송처리(송장 등록·정정),N,must,order-to-mes-process.md §8.2 TO-3
+STD-MFG-030,생산·공정,상태왕복,우리가 올린 상태변경 웹훅 메아리 필터(무한루프 방지),N,must,order-to-mes-process.md §8.1 SB-2 분기표
+STD-MFG-031,생산·공정,상태왕복,FR-3 MES 발 주문 취소 요청 수신→샵바이 취소·환불(TO-4),N,must,order-to-mes-process.md §8.4 FR-3 · §7.2 게이트③
+STD-MFG-032,생산·공정,상태왕복,FR-5 취소요청 승인·거부 수신→샵바이 클레임 처리(TO-5),N,should,order-to-mes-process.md §8.4 FR-5 · §8.2 TO-5
+STD-MFG-033,생산·공정,상태왕복,생산 시작 후 도착한 취소는 자동 처리하지 않고 담당자 에스컬레이션,N,must,order-to-mes-process.md §7.3 원칙 2·3
+STD-MFG-034,생산·공정,상태왕복,FR-7 주문 메모 기록→샵바이 업무 메시지 동기화(TO-6),N,could,order-to-mes-process.md §8.4 FR-7 · §8.2 TO-6
+STD-MFG-035,생산·공정,상태왕복,MES 화면 신규 버튼(취소·재업로드 요청·취소요청 승인거부)+사유 입력,N,must,order-to-mes-process.md §8.4 「MES 쪽 화면 작업(신규)」
+STD-MFG-036,생산·공정,프리플라이트,원고 바이러스 온디맨드 명시 스캔,Y,must,raw/webadmin/docs/artwork-scan-integration.md 해법
+STD-MFG-037,생산·공정,프리플라이트,바이러스 검사 3중 교차 판정(스캔결과·탐지기록·파일존재해시),Y,must,artwork-scan-integration.md ③ 결과 3가지 교차 확인
+STD-MFG-038,생산·공정,프리플라이트,시그니처 신선도 확인·오래되면 보류,N,must,artwork-scan-integration.md 시그니처 신선도
+STD-MFG-039,생산·공정,프리플라이트,스캔 실패·타임아웃은 통과가 아니라 보류(재시도 큐),N,must,artwork-scan-integration.md ⚠ 주의 3
+STD-MFG-040,생산·공정,프리플라이트,감염 파일 격리+담당자 알림+고객 재업로드 요청,Y,must,artwork-scan-integration.md n8n 배치 초안
+STD-MFG-041,생산·공정,프리플라이트,PitStop 프리플라이트 실행(PDF 내용 검사),Y,must,order-to-mes-process.md §5.1 · aws-architecture-huni.pdf p.13 §9 4단계
+STD-MFG-042,생산·공정,프리플라이트,재단 여백(도련) 유무·부족 검사,Y,must,order-to-mes-process.md §5.2 A목록·B목록
+STD-MFG-043,생산·공정,프리플라이트,해상도(dpi) 검사,Y,must,order-to-mes-process.md §5.2 B목록
+STD-MFG-044,생산·공정,프리플라이트,폰트 미포함 검사,Y,must,order-to-mes-process.md §5.2 A목록
+STD-MFG-045,생산·공정,프리플라이트,색공간(RGB→CMYK)·별색 채널·오버프린트 검사,Y,must,order-to-mes-process.md §5.2 B목록
+STD-MFG-046,생산·공정,프리플라이트,페이지 수와 주문 사양 대조,Y,must,order-to-mes-process.md §5.2 A목록
+STD-MFG-047,생산·공정,프리플라이트,실제 인쇄 크기와 주문 규격 대조,Y,must,order-to-mes-process.md §5.2 A목록
+STD-MFG-048,생산·공정,프리플라이트,파일 열림·손상·암호 걸림 검사,Y,must,order-to-mes-process.md §5.2 A목록
+STD-MFG-049,생산·공정,프리플라이트,판정 3갈래 분기(자동 재업로드 요청·담당자 검수·담당자 발 요청),Y,must,order-to-mes-process.md §5.2 표
+STD-MFG-050,생산·공정,프리플라이트,자동 발송 오류 목록 관리(좁게 유지·담당자와 확정),Y,must,order-to-mes-process.md §5.2 · §12-6
+STD-MFG-051,생산·공정,프리플라이트,FR-6 프리플라이트 재실행 요청 수신,N,could,order-to-mes-process.md §8.4 FR-6
+STD-MFG-052,생산·공정,프리플라이트,검사 감사기록 보관(검사시각·엔진시그니처버전·판정·탐지명·파일해시·PitStop 리포트),Y,should,artwork-scan-integration.md 감사 기록으로 남길 것
+STD-MFG-053,생산·공정,프리플라이트,검사 없이 PitStop 투입 경로 차단(코드상 부재 보장),Y,must,artwork-scan-integration.md 작업 폴더 정책
+STD-MFG-054,생산·공정,프리플라이트,FR-4 재업로드 요청 수신→서명 1회성 링크 발급(주문·항목·구성원 바인딩·7일),Y,must,order-to-mes-process.md §5.3 · §8.4 FR-4
+STD-MFG-055,생산·공정,프리플라이트,재업로드 화면(위젯 업로드 컴포넌트 재사용·대상 파일 지정),Y,must,order-to-mes-process.md §5.3
+STD-MFG-056,생산·공정,프리플라이트,재업로드 시 회차 증가+검사 자동 재실행,Y,must,order-to-mes-process.md §5.3
+STD-MFG-057,생산·공정,프리플라이트,원고 보완 대기 중 주문상태 결제완료 유지(고객 취소권 보존),N,must,order-to-mes-process.md §5.3 마지막 문단
+STD-MFG-058,생산·공정,접수·검판,접수파일 등록(원본 그대로 사용 vs 가공 후 등록 2경로),Y,must,후니프린팅_주문프로세스_20251001.pdf p.11 §09
+STD-MFG-059,생산·공정,접수·검판,품목관리 디자인파일여부 Y/N 로 원본 자동 접수 처리,Y,should,후니프린팅_주문프로세스_20251001.pdf p.11 §09 case1
+STD-MFG-060,생산·공정,접수·검판,Edicus Prepress 랜더링 결과 접수파일 등록,Y,must,후니프린팅_주문프로세스_20251001.pdf p.11 §09 case1 · p.1 랜더링전/랜더링완료
+STD-MFG-061,생산·공정,접수·검판,접수파일 인쇄공정 파일 기준 썸네일 자동 생성,Y,must,후니프린팅_주문프로세스_20251001.pdf p.11 §09 server · p.10 §10
+STD-MFG-062,생산·공정,접수·검판,AI 접수파일에 썸네일용 JPG 동반 업로드(아크릴스티커·박),Y,should,후니프린팅_주문프로세스_20251001.pdf p.11 §09 case2
+STD-MFG-063,생산·공정,접수·검판,파일 확인 처리(검판 판정)·재업로드 요청 발송,Y,must,후니프린팅_주문프로세스_20251001.pdf p.1 파일확인/재업로드요청
+STD-MFG-064,생산·공정,접수·검판,편집기 상품 수정요청·수정완료 왕복,Y,must,후니프린팅_주문프로세스_20251001.pdf p.1 case3
+STD-MFG-065,생산·공정,접수·검판,출고예정일(완료예정일) 등록,N,must,후니프린팅_주문프로세스_20251001.pdf p.10 §10 · p.1
+STD-MFG-066,생산·공정,접수·검판,생산메모 입력,N,should,후니프린팅_주문프로세스_20251001.pdf p.10 §10
+STD-MFG-067,생산·공정,접수·검판,작업의뢰서 출력(대표썸네일·EXCEL 다운),Y,must,후니프린팅_주문프로세스_20251001.pdf p.4 §04 · p.11 §09
+STD-MFG-068,생산·공정,접수·검판,의뢰서 출력 시 처리표시(빨간점)·주문상태 제작중 전환,N,must,후니프린팅_주문프로세스_20251001.pdf p.10 §10 · p.11 §09
+STD-MFG-069,생산·공정,접수·검판,거래처별 주문 EXCEL 다운(가격 제외),N,should,후니프린팅_주문프로세스_20251001.pdf p.4 §04 마스터관리
+STD-MFG-070,생산·공정,접수·검판,업체별 주문등록(EXCEL 등록·파일경로 선택),N,should,후니프린팅_주문프로세스_20251001.pdf p.10 §10 주문관리
+STD-MFG-071,생산·공정,접수·검판,OEM 주문 IMPORT(비즈하우스·후지필름·컨티뉴),N,could,후니프린팅_주문프로세스_20251001.pdf p.5 §05 주문확인/등록
+STD-MFG-072,생산·공정,조판·파일가공,원본 AI→PDF 변환 업로드,Y,must,후니프린팅_주문프로세스_20251001.pdf p.10 §10
+STD-MFG-073,생산·공정,조판·파일가공,인쇄파일과 칼선파일 분리하여 공정별 등록,Y,must,후니프린팅_주문프로세스_20251001.pdf p.10 §10 · p.5 §05
+STD-MFG-074,생산·공정,조판·파일가공,조판(판걸이+아이마크) 파일 생성,Y,must,후니프린팅_주문프로세스_20251001.pdf p.10 §10 · p.5 §05 조판
+STD-MFG-075,생산·공정,조판·파일가공,아크릴 원판 배치 조판(396x480·도수 구분·돔보),Y,should,후니프린팅_주문프로세스_20251001.pdf p.5 §05 조판 ⓛ
+STD-MFG-076,생산·공정,조판·파일가공,다도안 상품 판걸이·건수·수량 기준 조판,Y,should,후니프린팅_주문프로세스_20251001.pdf p.5 §05 조판 ➂
+STD-MFG-077,생산·공정,조판·파일가공,수동조판(여러 주문 취합·틴거울/아크릴/자석북마크),Y,should,후니프린팅_주문프로세스_20251001.pdf p.11 §09 수동조판
+STD-MFG-078,생산·공정,조판·파일가공,파일명 자동 RENAME 규약 적용(품목_출력사이즈_양단면_소재_거래처_고객_고유번호_수량),Y,must,후니프린팅_주문프로세스_20251001.pdf p.6 §06
+STD-MFG-079,생산·공정,조판·파일가공,상품군별 파일명 조합 규칙 8종(디지털/캘린더/스티커/실사/배너/패브릭/시트커팅/레이저커팅),Y,should,후니프린팅_주문프로세스_20251001.pdf p.6-7 §06
+STD-MFG-080,생산·공정,조판·파일가공,공정별 파일서버 폴더 구조(년도>발주일자) 자동 배치,Y,should,후니프린팅_주문프로세스_20251001.pdf p.12 §06-1
+STD-MFG-081,생산·공정,조판·파일가공,팀별 또는 담당자 파일 분리 전달(분배),Y,must,후니프린팅_주문프로세스_20251001.pdf p.5 §05
+STD-MFG-082,생산·공정,공정관리,공정 마스터 관리(계층·상세옵션·면별선택·작업여백·고객노출설명),Y,must,raw/webadmin/webadmin/catalog/models.py TProcProcesses · manual_content.py:623
+STD-MFG-083,생산·공정,공정관리,상품별 공정 연결·필수공정 여부·상세옵션 허용범위,Y,must,raw/webadmin/webadmin/catalog/models.py TPrdProductProcesses · manual_content.py:158
+STD-MFG-084,생산·공정,공정관리,공정라우트 마스터(18케이스 라우트 정의·재채번),Y,must,후니프린팅_공정관리_시행초안_20260210.pdf p.1 §02
+STD-MFG-085,생산·공정,공정관리,라우트 단계 정의(순번·공정·필수선택·담당팀),Y,must,후니프린팅_공정관리_시행초안_20260210.pdf p.1 §02
+STD-MFG-086,생산·공정,공정관리,상품→공정라우트 매핑,Y,must,후니프린팅_주문프로세스_20251001.pdf p.10 §10 「상품마스터(공정) SHEET 참고」
+STD-MFG-087,생산·공정,공정관리,팀·파트 마스터(디지털인쇄/스티커가공/인쇄후가공/제본/특수인쇄가공/봉재가공/굿즈가공),N,must,후니프린팅_공정관리_시행초안_20260210.pdf p.2 공정별 현황표
+STD-MFG-088,생산·공정,공정관리,공정 완료 신호 입력(출력완료·커팅완료·제본시작·봉재시작·가공시작),Y,must,후니프린팅_공정관리_시행초안_20260210.pdf p.1 Summary
+STD-MFG-089,생산·공정,공정관리,팀 간 출고·입고 처리(봉제미싱입고·아크릴가공입고·제본입고·박작업입고),Y,must,후니프린팅_공정관리_시행초안_20260210.pdf p.1 To Do List
+STD-MFG-090,생산·공정,공정관리,앞공정 미완료 시 다음공정 차단(선후관계 interlock),Y,must,후니프린팅_공정관리_시행초안_20260210.pdf p.1 「앞공정은 안찍으면 다음공정 못찍히게」
+STD-MFG-091,생산·공정,공정관리,팀별 파일 다운로드 권한(제작중 상태 and 생산다운여부 Y),Y,must,후니프린팅_주문프로세스_20251001.pdf p.9 §03-1 · p.11 §09
+STD-MFG-092,생산·공정,공정관리,인쇄타입별 접수파일 포맷 규약(PDF/AI/JPG),Y,should,후니프린팅_주문프로세스_20251001.pdf p.9 §03-1
+STD-MFG-093,생산·공정,공정관리,파일 다운로드 시 다운로드완료 상태 자동 전환,N,should,후니프린팅_주문프로세스_20251001.pdf p.1 · p.11 §09 server
+STD-MFG-094,생산·공정,공정관리,공정별 현황표(당일발주 대기·완료 / 당일생산 주의·불량 / 당일출고),Y,should,후니프린팅_공정관리_시행초안_20260210.pdf p.2
+STD-MFG-095,생산·공정,공정관리,1차 산출데이터(일별 출력량·출고건량·미출고건량·입고건량),Y,should,후니프린팅_공정관리_시행초안_20260210.pdf p.1 산출데이터 1차
+STD-MFG-096,생산·공정,공정관리,2차 산출데이터(팀별 입고예정·공정별 평균리드타임·평균 제작기간),Y,could,후니프린팅_공정관리_시행초안_20260210.pdf p.1 산출데이터 2차 「공정라우트 설정 후」
+STD-MFG-097,생산·공정,공정관리,불량 판정·재작업 지시,Y,should,후니프린팅_공정관리_시행초안_20260210.pdf p.2 현황표 불량
+STD-MFG-098,생산·공정,공정관리,자재 입·출고 관리,Y,should,후니프린팅_주문프로세스_20251001.pdf p.4 §04 생산
+STD-MFG-099,생산·공정,공정관리,셋트상품·건수(같은 사양 반복) MES 작업 분해,Y,must,order-to-mes-process.md §12-11 · widget_api.py:3388 case_cnt
+STD-MFG-100,생산·공정,외주,외주처별 발주서 생성(접수파일 취합),Y,must,후니프린팅_주문프로세스_20251001.pdf p.11 §09 외주발주
+STD-MFG-101,생산·공정,외주,책자 상품 수량·크기 기준 선택적 외주 판단,Y,should,후니프린팅_주문프로세스_20251001.pdf p.11 §09
+STD-MFG-102,생산·공정,외주,외주 파일 다운로드·업체 포맷 변환·웹하드 업로드,Y,should,후니프린팅_주문프로세스_20251001.pdf p.5 §05 외주발주
+STD-MFG-103,생산·공정,외주,외주공정 주문리스트·외주처별 생산리스트,Y,should,후니프린팅_주문프로세스_20251001.pdf p.4 §04 외주관리
+STD-MFG-104,생산·공정,외주,외주제작·외주공정 제작물 입·출고 기록,Y,should,후니프린팅_주문프로세스_20251001.pdf p.4 §04 외주관리
+STD-MFG-105,생산·공정,외주,외주 정산(업체별 EXCEL 다운·발주서 다운),N,should,후니프린팅_주문프로세스_20251001.pdf p.5 §05 외주발주 하단
+STD-MFG-106,생산·공정,포장·출고,1차포장 처리,Y,must,후니프린팅_공정관리_시행초안_20260210.pdf p.1 · p.4 §04 출고
+STD-MFG-107,생산·공정,포장·출고,박스포장 처리(실사·대형 상품군),Y,must,후니프린팅_공정관리_시행초안_20260210.pdf p.1 Case6-8
+STD-MFG-108,생산·공정,포장·출고,제작번호별 바코드 입력→포장완료 상태변경,Y,must,후니프린팅_주문프로세스_20251001.pdf p.1
+STD-MFG-109,생산·공정,포장·출고,전 상품 포장완료 시 제작완료 자동 전환,N,must,후니프린팅_주문프로세스_20251001.pdf p.1 「if 모든상품이 포장완료이면 제작완료」
+STD-MFG-110,생산·공정,포장·출고,주문번호별 바코드 입력→출고완료 전환,N,must,후니프린팅_주문프로세스_20251001.pdf p.1
+STD-MFG-111,생산·공정,포장·출고,송장 출력·송장 추가출력(택배),N,must,후니프린팅_주문프로세스_20251001.pdf p.1 case1 · p.4 §04
+STD-MFG-112,생산·공정,포장·출고,납품명세서 출력(퀵),N,must,후니프린팅_주문프로세스_20251001.pdf p.1 case2 · p.4 §04
+STD-MFG-113,생산·공정,포장·출고,출고명세서 출력(직접방문),N,must,후니프린팅_주문프로세스_20251001.pdf p.1 case3 · p.4 §04
+STD-MFG-114,생산·공정,포장·출고,한 주문에 다중 송장 부여,N,must,후니프린팅_주문프로세스_20251001.pdf p.5 §05 출고 Pain point
+STD-MFG-115,생산·공정,포장·출고,합배송 리스트 식별,N,should,후니프린팅_주문프로세스_20251001.pdf p.5 §05 출고 Pain point
+STD-MFG-116,생산·공정,포장·출고,전 상품 출고지 단일화(오프라인 주문 외),N,should,후니프린팅_주문프로세스_20251001.pdf p.3 §03 하단
+STD-MFG-117,생산·공정,포장·출고,재고상품(상품 액세서리) 관리,N,should,후니프린팅_주문프로세스_20251001.pdf p.4 §04 출고 · 공정관리 PDF Case16
+STD-MFG-118,생산·공정,포장·출고,제작완료 썸네일 확인 화면,Y,could,후니프린팅_주문프로세스_20251001.pdf p.4 §04 출고 ★썸네일 보는 화면
+STD-MFG-119,생산·공정,재제작·반송,일부 재제작+재배송 지시(MES 주문복사),Y,must,후니프린팅_주문프로세스_20251001.pdf p.7 §07 case1
+STD-MFG-120,생산·공정,재제작·반송,전체 재제작+재배송 지시,Y,must,후니프린팅_주문프로세스_20251001.pdf p.7 §07 case2
+STD-MFG-121,생산·공정,재제작·반송,반송 접수·반송여부 체크,N,must,후니프린팅_주문프로세스_20251001.pdf p.7 §07 반송
+STD-MFG-122,생산·공정,재제작·반송,주문 내 정산 메모필드(반송비·재제작 비용 부담),N,should,후니프린팅_주문프로세스_20251001.pdf p.7 §07 정산관련
+STD-MFG-123,생산·공정,재제작·반송,재출고 신규송장 부여(상품누락 추가발송·교환 재발송),N,should,후니프린팅_주문프로세스_20251001.pdf p.7 §07 재출고
+STD-MFG-124,생산·공정,재제작·반송,반품·교환 웹훅 기록만 하고 MES 작업 자동생성 안 함,N,must,order-to-mes-process.md §7.4
+STD-MFG-125,생산·공정,알림,파일 오류 재업로드 요청 알림톡 발송(자동·담당자 발),Y,must,order-to-mes-process.md §10 · 주문프로세스 PDF p.2 §02
+STD-MFG-126,생산·공정,알림,재업로드 접수 확인 알림,Y,must,order-to-mes-process.md §10
+STD-MFG-127,생산·공정,알림,편집상품 수정요청 알림(주문번호·편집번호·안내),Y,must,후니프린팅_주문프로세스_20251001.pdf p.2 §02
+STD-MFG-128,생산·공정,알림,알림톡 템플릿 사전 심사·승인 관리,N,must,order-to-mes-process.md §10 실무 주의
+STD-MFG-129,생산·공정,알림,알림톡 발송 실패 시 SMS/LMS 자동 대체,N,should,order-to-mes-process.md §10 · §12-7
+STD-MFG-130,생산·공정,알림,알림 발송 주체 경계 준수(주문·결제·배송=샵바이 / 파일=우리),N,must,order-to-mes-process.md §10 표
+STD-MFG-131,생산·공정,운영,단계별 체류 건수·DLQ 처리 현황 대시보드,N,could,order-to-mes-process.md §11 5단계
+STD-MFG-132,생산·공정,운영,조직별 권한 관리(마스터/상품마케팅/발주/생산/출고/외주관리/회계경리),N,must,후니프린팅_주문프로세스_20251001.pdf p.4 §04
+STD-MFG-133,생산·공정,운영,오프라인 주문 등록(거래처별 EXCEL·금액 직접 입력),N,should,후니프린팅_주문프로세스_20251001.pdf p.4 §04 ★오프라인 주문
+STD-MFG-134,생산·공정,운영,거래처별 청구서 발행(오프라인주문·금액 포함),N,should,후니프린팅_주문프로세스_20251001.pdf p.4 §04 회계경리
+STD-MFG-135,생산·공정,운영,세금계산서 발행여부·발행날짜 정보 보관,N,could,후니프린팅_주문프로세스_20251001.pdf p.7 §08

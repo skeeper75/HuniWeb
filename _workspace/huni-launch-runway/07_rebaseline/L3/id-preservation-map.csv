@@ -1,0 +1,717 @@
+legacy_id,원천,원본ID,id_unchanged,기능서술
+F-003,runway,F-003,Y,No3 로그인 — 비밀번호 찾기(휴대폰 임시PW) [PARTIAL·2차·M]
+F-005,runway,F-005,Y,No5 회원가입 — 정보입력 [PARTIAL·1차·M]
+F-007,runway,F-007,Y,No7 회원가입 — 휴대전화 인증 [PARTIAL·2차·M]
+F-010,runway,F-010,Y,No10 마이페이지 — 주문상세조회(편집상품 미리보기) [CUSTOM·1차·L]
+F-011,runway,F-011,Y,No11 마이페이지 — 옵션보관함(저장된 인쇄옵션) [CUSTOM·2차·M]
+F-014,runway,F-014,Y,No14 마이페이지 — 프린팅머니 [PARTIAL·2차·M]
+F-015,runway,F-015,Y,No15 마이페이지 — 머니충전 [CUSTOM·2차·M]
+F-018,runway,F-018,Y,No18 마이페이지 — 리뷰쓰기(사진업로드)수정/삭제 [PARTIAL·3차·M]
+F-019,runway,F-019,Y,No19 마이페이지 — 나의 체험단 활동내역+후기 [CUSTOM·3차·M]
+F-021,runway,F-021,Y,No21 마이페이지 — 회원정보수정 [PARTIAL·1차·M]
+F-025,runway,F-025,Y,No25 마이페이지 — 증빙서류발급내역 [PARTIAL·2차·M]
+F-026,runway,F-026,Y,No26 마이페이지 — 사업자정보(목록) [PARTIAL·2차·S]
+F-027,runway,F-027,Y,No27 마이페이지 — 사업자정보등록(쓰기) [PARTIAL·2차·M]
+F-028,runway,F-028,Y,No28 마이페이지 — 현금영수증정보 [PARTIAL·2차·M]
+F-029,runway,F-029,Y,No29 마이페이지 — 메인(대시보드) [PARTIAL·1차·S]
+F-030,runway,F-030,Y,No30 마이페이지 — 서브메인(랜딩페이지) [PARTIAL·3차·M]
+F-031,runway,F-031,Y,No31 마이페이지 — LIST(검색결과) [PARTIAL·1차·M]
+F-032,runway,F-032,Y,No32 인쇄상품 — A1 상품 기본정보 세팅 [PARTIAL·1차·S]
+F-033,runway,F-033,Y,No33 인쇄상품 — A2 상품별 옵션 목록 불러오기 [CUSTOM·1차·L]
+F-034,runway,F-034,Y,No34 인쇄상품 — B1 규격(사이즈) 선택 [CUSTOM·1차·M]
+F-035,runway,F-035,Y,No35 인쇄상품 — B2 비규격 사용자입력(가로×세로) [CUSTOM·1차·M]
+F-036,runway,F-036,Y,No36 인쇄상품 — B3 수량 선택+직접입력 [CUSTOM·1차·M]
+F-037,runway,F-037,Y,No37 인쇄상품 — B4 종이/소재 선택(+평량) [CUSTOM·1차·M]
+F-038,runway,F-038,Y,No38 인쇄상품 — B5 인쇄 도수(단/양면)+별색·화이트 [CUSTOM·1차·M]
+F-039,runway,F-039,Y,No39 인쇄상품 — B6 코팅 [CUSTOM·2차·S]
+F-040,runway,F-040,Y,No40 인쇄상품 — B7 커팅/조각수/모서리 [CUSTOM·2차·M]
+F-041,runway,F-041,Y,No41 인쇄상품 — B8 접지/오시/미싱 [CUSTOM·2차·M]
+F-042,runway,F-042,Y,No42 인쇄상품 — B9 제본(방향·면지·링·커버) [CUSTOM·1차·L]
+F-043,runway,F-043,Y,No43 인쇄상품 — B10 내지/표지 그룹 분리 [CUSTOM·1차·M]
+F-044,runway,F-044,Y,No44 인쇄상품 — B11 박/형압 [CUSTOM·2차·M]
+F-045,runway,F-045,Y,No45 인쇄상품 — B12 캘린더 가공/장수 [CUSTOM·2차·M]
+F-046,runway,F-046,Y,No46 인쇄상품 — B13 추가상품(봉투 등) [PARTIAL·2차·M]
+F-047,runway,F-047,Y,No47 인쇄상품 — B14 개별포장 [PARTIAL·3차·S]
+F-048,runway,F-048,Y,No48 인쇄상품 — B15 옵션 제약·조건부 노출 [CUSTOM·1차·L]
+F-049,runway,F-049,Y,No49 인쇄상품 — C1 옵션 변경 시 가격 실시간 재계산 [CUSTOM·1차·XL]
+F-050,runway,F-050,Y,No50 인쇄상품 — C2 수량별 가격표 보기 [CUSTOM·2차·M]
+F-051,runway,F-051,Y,No51 인쇄상품 — C3 견적서 생성·다운로드 [CUSTOM·2차·M]
+F-052,runway,F-052,Y,No52 인쇄상품 — D1 파일 업로드(PDF) [CUSTOM·1차·L]
+F-053,runway,F-053,Y,No53 인쇄상품 — D2 편집상품 미리보기·썸네일 [CUSTOM·1차·M]
+F-054,runway,F-054,Y,No54 인쇄상품 — D3 온라인 에디터 연동(Edicus) [CUSTOM·3차·XL]
+F-055,runway,F-055,Y,No55 인쇄상품 — D4 가변데이터 인쇄(VDP) [CUSTOM·3차·L]
+F-059,runway,F-059,Y,No59 인쇄상품 — E3 주문가능 자재 목록 모달 [CUSTOM·2차·M]
+F-061,runway,F-061,Y,No61 인쇄상품 — F1 주문 전 검증(필수옵션·파일·로그인) [PARTIAL·1차·M]
+F-062,runway,F-062,Y,No62 인쇄상품 — F2 주문 데이터 생성(선택옵션→주문 변환) [CUSTOM·1차·L]
+F-063,runway,F-063,Y,No63 인쇄상품 — F3 우측 플로팅 주문박스(가격·CTA) [PARTIAL·1차·M]
+F-064,runway,F-064,Y,No64 인쇄상품 — F4 장바구니 담기 [PARTIAL·1차·M]
+F-065,runway,F-065,Y,No65 인쇄상품 — F5 옵션 보관함 저장·불러오기 [CUSTOM·2차·M]
+F-070,runway,F-070,Y,No70 고객센터 — 대량주문 견적문의 [PARTIAL·2차·M]
+F-074,runway,F-074,Y,No74 결제 — 수동카드결제(PC+모바일) [CUSTOM·3차·M]
+F-075,runway,F-075,Y,No75 주문 — 파일/편집 정보입력 [CUSTOM·1차·XL]
+F-076,runway,F-076,Y,No76 주문 — 보관함/장바구니 [PARTIAL·1차·M]
+F-077,runway,F-077,Y,No77 주문 — 배송정보입력 [PARTIAL·1차·M]
+F-080,runway,F-080,Y,No80 결제하기(이니시스) — 게이트에서 SOLVED→조건부 재라벨 (가격브리지 종속)
+F-081,runway,F-081,Y,No81 주문완료+메일 — SOLVED→PARTIAL 재라벨
+F-082,runway,F-082,Y,No82 주문 — 디자인 의뢰하기 [CUSTOM·3차·M]
+F-087,runway,F-087,Y,No87 가이드 — 작업시 유의사항(11개) [PARTIAL·2차·M]
+F-088,runway,F-088,Y,No88 마케팅 — 랜딩페이지 5종 [PARTIAL·3차·L]
+F-089,runway,F-089,Y,No89 마케팅 — 이용후기 메인 [PARTIAL·3차·M]
+F-090,runway,F-090,Y,No90 마케팅 — 체험단 모집 메인 [CUSTOM·3차·M]
+F-091,runway,F-091,Y,No91 상품 — 포장재상품 주문하기 [CUSTOM·2차·L]
+F-092,runway,F-092,Y,No92 상품 — 굿즈상품 주문하기+파우치&백 [CUSTOM·2차·L]
+F-093,runway,F-093,Y,No93 상품 — 수작 상품(메인+상품페이지) [CUSTOM·3차·L]
+F-095,runway,F-095,Y,No95 거래처 — 거래처관리 [CUSTOM·2차·M]
+F-096,runway,F-096,Y,No96 거래처 — 매장게시판 [PARTIAL·3차·S]
+F-097,runway,F-097,Y,No97 원장관리 — 계좌관리 [CUSTOM·2차·S]
+F-098,runway,F-098,Y,No98 원장관리 — 원장관리(오프라인 거래) [CUSTOM·2차·L]
+F-099,runway,F-099,Y,No99 원장관리 — 업체별 미수금 [CUSTOM·2차·M]
+F-100,runway,F-100,Y,No100 상품관리 — 인쇄/제본 상품등록 [CUSTOM·1차·L]
+F-101,runway,F-101,Y,No101 상품관리 — 사이즈선택 팝업 [CUSTOM·1차·M]
+F-102,runway,F-102,Y,No102 상품관리 — 소재선택 팝업 [CUSTOM·1차·M]
+F-103,runway,F-103,Y,No103 상품관리 — 종이선택 팝업 [CUSTOM·1차·M]
+F-104,runway,F-104,Y,No104 상품관리 — 가격관리 팝업 8종 [CUSTOM·1차·L]
+F-105,runway,F-105,Y,No105 상품관리 — 사이즈관리 [CUSTOM·1차·S]
+F-106,runway,F-106,Y,No106 상품관리 — 소재관리 [CUSTOM·1차·S]
+F-107,runway,F-107,Y,No107 상품관리 — 용지관리 [CUSTOM·1차·S]
+F-108,runway,F-108,Y,No108 상품관리 — 가격관리(출력/코팅/후가공/제본) [CUSTOM·1차·XL]
+F-109,runway,F-109,Y,No109 상품관리 — 굿즈 카테고리관리 [CUSTOM·2차·M]
+F-110,runway,F-110,Y,No110 상품관리 — 굿즈 상품등록 [CUSTOM·2차·L]
+F-111,runway,F-111,Y,No111 상품관리 — 수작 상품등록 [CUSTOM·3차·M]
+F-112,runway,F-112,Y,No112 상품관리 — 포장재 상품등록 [CUSTOM·2차·M]
+F-113,runway,F-113,Y,No113 상품관리 — 디자인 상품등록 [CUSTOM·3차·M]
+F-116,runway,F-116,Y,No116 게시판 — 대량주문 견적문의(확인/답변) [PARTIAL·2차·M]
+F-121,runway,F-121,Y,No121 게시판 — 체험단관리 [CUSTOM·3차·M]
+F-122,runway,F-122,Y,No122 게시판 — 이용후기관리 [PARTIAL·3차·M]
+F-123,runway,F-123,Y,No123 회원관리(주문/정보) — SOLVED→PARTIAL 재라벨
+F-125,runway,F-125,Y,No125 회원관리 — 프린팅머니 관리 [PARTIAL·2차·M]
+F-126,runway,F-126,Y,No126 회원관리 — 쿠폰관리(발행/매칭) [PARTIAL·2차·L]
+F-129,runway,F-129,Y,No129 통계 — 인쇄/제본 상품통계 [PARTIAL·2차·S]
+F-130,runway,F-130,Y,No130 통계 — 굿즈 상품통계 [PARTIAL·2차·S]
+F-131,runway,F-131,Y,No131 통계 — 패키지 상품통계 [PARTIAL·2차·S]
+F-132,runway,F-132,Y,No132 통계 — 수작 상품통계 [PARTIAL·3차·S]
+F-134,runway,F-134,Y,No134 통계 — 굿즈 발주/정산(Excel) [CUSTOM·2차·M]
+F-135,runway,F-135,Y,No135 통계 — 제작상품 팀별통계 [CUSTOM·3차·M]
+F-136,runway,F-136,Y,No136 주문관리 — 주문관리-인쇄/제본/굿즈 [PARTIAL·1차·XL]
+F-137,runway,F-137,Y,No137 주문관리 — 파일확인처리 [CUSTOM·1차·L]
+F-138,runway,F-138,Y,No138 주문관리 — 재업로드요청 문자 [PARTIAL·2차·M]
+F-139,runway,F-139,Y,No139 주문관리 — 주문서출력 [PARTIAL·1차·M]
+F-140,runway,F-140,Y,No140 주문관리 — 주문상태변경 처리(+문자) [PARTIAL·1차·M]
+F-141,runway,F-141,Y,No141 주문관리 — 주문관리-후불결제 [PARTIAL·2차·M]
+F-142,runway,F-142,Y,No142 주문관리 — 증빙서류발급 관리 [PARTIAL·2차·M]
+F-143,runway,F-143,Y,No143 주문관리 — 주문상태변경(일괄) [PARTIAL·2차·S]
+F-144,runway,F-144,Y,No144 주문관리 — 고객 SMS 발송 [PARTIAL·2차·M]
+F-146,runway,F-146,Y,No146 회원 — 회원등급(VIP·B2B 등급가) [PARTIAL·2차·M]
+F-150,runway,F-150,Y,No150 주문 — 도서산간 추가배송비 데이터화 [PARTIAL·1차·M]
+F-152,runway,F-152,Y,No152 정보 — 세금계산서 발행 플로우(B2B) [PARTIAL·2차·M]
+F-153,runway,F-153,Y,No153 상품 — 전시 카테고리 트리 운영툴 [PARTIAL·1차·M]
+F-154,runway,F-154,Y,No154 상품 — 상품 검색·필터 엔진 [PARTIAL·2차·M]
+F-156,runway,F-156,Y,No156 마이페이지 — 첫구매/생일 자동쿠폰 [PARTIAL·3차·S]
+F-157,runway,F-157,Y,No157 주문관리 — 생산정보 전달(주문→생산BOM 환원) [CUSTOM·1차·L]
+F-158,runway,F-158,Y,No158 상품관리 — MES_ITEM_CD 전상품 채번 [CUSTOM·1차·M]
+F-159,runway,F-159,Y,No159 주문관리 — 생산파일명 일관화(Rename) [CUSTOM·1차·M]
+F-160,runway,F-160,Y,No160 주문관리 — 접수파일 썸네일 자동생성 [CUSTOM·2차·M]
+F-161,runway,F-161,Y,No161 주문 — 주문상태 추적(고객 마이페이지) [PARTIAL·1차·M]
+F-162,runway,F-162,Y,No162 주문 — 주문/주문상세 런타임 그릇 구축 [PARTIAL·1차·XL]
+P-19SHEET-BATCH-01,runway,P-19SHEET-BATCH-01,Y,계층4 전 19시트 전사슬 배치화 미완
+P-3JEOL-01,runway,P-3JEOL-01,Y,3절 라인 — 썬캡 아이보리 용지단가 국4절 carry(~20% 저평가) + 나머지 3상품 미완성
+P-ACC-20-01,runway,P-ACC-20-01,Y,상품악세사리 20건 L1(기성) — 고정가 라이브 적재 여부 미실측
+P-ACRYL-ADDON-6-01,runway,P-ACRYL-ADDON-6-01,Y,아크릴 부속 미청구 (147~154) — 6상품 본체전용 공식 + 부속 옵션 미노출
+P-ACRYL-INTEGRITY-156-01,runway,P-ACRYL-INTEGRITY-156-01,Y,아크릴 무결성 게이트 NO-GO — 면적 미적재 156셀 + 12/13 상품 공식 0바인딩
+P-ACRYL-RINGCONFIRM-01,runway,P-ACRYL-RINGCONFIRM-01,Y,아크릴키링 고리 견적 실화면 + 아크릴 3상품 입력경로 규명 (담당자 회신 대기)
+P-ACRYL-TBD-01,runway,P-ACRYL-TBD-01,Y,"아크릴 단가 미수신 — *_TBD 6건(단가/구성) · TBD 4상품(165/168/169/170) 단가행 부재 · 163 placeholder 10,000"
+P-ANCHOR-149-01,runway,P-ANCHOR-149-01,Y,깨진 가격 앵커 149건 / 40상품 — 화면에 보이는데 0원
+P-AREA-CUSTOM-01,runway,P-AREA-CUSTOM-01,Y,비규격 사용자입력 면적가 미배선 — 폼보드129 · 맥세이프151
+P-AUTH-3SHEET-01,runway,P-AUTH-3SHEET-01,Y,권위 3시트 260705 재추출 미완 (엽서북떡메·제본·출력소재IMPORT)
+P-AXIS-265-01,runway,P-AXIS-265-01,Y,축(차원) 미적재 265건 — needed=Y인데 라이브에 없음
+P-BLEED-32-01,runway,P-BLEED-32-01,Y,HOLD_BASIS 32건 — 라이브 완제품 사이즈에 블리드 미적용(자동제외 중)
+P-BOOK-5ITEM-01,runway,P-BOOK-5ITEM-01,Y,068~070 책자 표지/내지 5비목 누락 — 저청구
+P-CALENDAR-DESIGNBLOCKED-5-01,runway,P-CALENDAR-DESIGNBLOCKED-5-01,Y,캘린더 5건 전부 DESIGN_BLOCKED — 가격공식 설계 자체가 막힘
+P-CAT-INTEGRITY-01,runway,P-CAT-INTEGRITY-01,Y,라이브 카테고리 귀속 무결성 — 미귀속 상품(072·077·110 등) · main_cat_yn 결손 · 말단 미매칭 6건
+P-CATCONF-QUEUE-01,runway,P-CATCONF-QUEUE-01,Y,카테고리 교정 큐 (전 11시트) — 아크릴20 미바인딩 · GP-2 FORMULA · CPQ MISS · 배치1~3 NO-GO 교정명세
+P-CONSTRAINT-DATA-01,runway,P-CONSTRAINT-DATA-01,Y,OQ-G15 제약규칙(B15) 데이터 정리 미완 (1차 W5-7)
+P-CONSTRAINT-OG-048-01,runway,P-CONSTRAINT-OG-048-01,Y,048/049 코팅×종이두께 옵션그룹 미적재 — 제약 UI 등록 BLOCKED
+P-CPQ-CLASSA-01,runway,P-CPQ-CLASSA-01,Y,CPQ 클래스A 즉시 교정 2건 — PRD_000146 고리 그룹 sel_typ/min/max NULL · TMPL-000013 테스트 잔재
+P-CPQ-OPT-020-01,runway,P-CPQ-OPT-020-01,Y,PRD_000020 화이트인쇄엽서 옵션 미적재(NOOPT) — 종이·인쇄·후가공 선택 UI 부재
+P-D5-17-01,runway,P-D5-17-01,Y,D5 미실측 17건 (UNSCORED·축 미탑재) — 명함 6건 포함
+P-DBMAP-APPROVAL-01,runway,P-DBMAP-APPROVAL-01,Y,dbmap 승인 대기 잔여 — 아크릴 다중옵션 부속 3 · 146 볼체인 addon · 맥세이프 바디가격(업체 미정) · 스티커 나머지 CPQ · 책자 070/097
+P-DBMAP-NEXT-01,runway,P-DBMAP-NEXT-01,Y,dbmap 다음 시작점 — 문구·아크릴 잔여 시트 가격/CPQ 확대 (또는 §27 배선 잔여)
+P-DBMAP-OPEN-01,runway,P-DBMAP-OPEN-01,Y,dbmap 최신 미해결 — 폰케이스류·아크릴스탠드 addon(base 상품 없음) · 220 orphan siz · 217 빈 잉크칼라 · 무가격5
+P-DBMAP-UNDERCHARGE-01,runway,P-DBMAP-UNDERCHARGE-01,Y,돈크리티컬 저청구 3건 묶음 — 캘린더 장수 공식 약 12배 저청구 · 책자071 트윈링 · 실사 미니배너/미니보드 수량 floor
+P-DCAL-LOAD-01,runway,P-DCAL-LOAD-01,Y,디자인캘린더 실 적재 승인 대기 — Q-DCAL 컨펌 5건 선결 (AUTHORITY·ROUTE·FIN·ENVELOPE·DSC)
+P-DEADPARENT-500-01,runway,P-DEADPARENT-500-01,Y,옵션 항목 500건 / 74상품이 죽은 부모에 매달림 — 선택지 손실 (전건 인간 판정)
+P-DEDUP-AXISMOVE-01,runway,P-DEDUP-AXISMOVE-01,Y,자재 252/254 축이동 대기 (BLOCKED) — 캘린더 삼각대 자재→공정 param 축이동 미결
+P-DEDUP-CATBLIND-01,runway,P-DEDUP-CATBLIND-01,Y,round-24 D-1 정정 필요 — category-blind dedupe 오류로 다중분류 의도 소실 (타 상품군 동형 오류 가능)
+P-DEDUP-PROC-3-01,runway,P-DEDUP-PROC-3-01,Y,"공정 중복정리 BLOCKED 3건 (미싱086·오시090·타공092) — 부모↔자식 가격사슬 단절, 논리삭제 시 가격 전손"
+P-DEDUP-SIZE-BLOCKED-01,runway,P-DEDUP-SIZE-BLOCKED-01,Y,사이즈 중복정리 BLOCKED — D-2/D-3(A3 174/315 · A2 197/317) 가격종속 · SIZ_000499 판형 모델링 의도 미확인
+P-DELYN-SIZE-01,runway,P-DELYN-SIZE-01,Y,옵션 참조 사이즈 행 논리삭제로 견적 0원 — 5상품 10건 (D-001~D-005 · E_CELL_SHORT)
+P-DESIGNED22-01,runway,P-DESIGNED22-01,Y,DESIGNED_NOT_LOADED 22건 — 설계만 되고 라이브 미적재 (돈크리티컬)
+P-DIECUT-2-01,runway,P-DIECUT-2-01,Y,완칼 die-cut 절대값 골든 미검증 (023/046 pcode 미상)
+P-DIGITAL-BW-01,runway,P-DIGITAL-BW-01,Y,디지털 흑백 1도 POPT_000008/009 상품 미연결 — 단가는 적재됐으나 손님이 선택 불가
+P-DRIFT-10-01,runway,P-DRIFT-10-01,Y,verify_price_coverage 실측 10 findings — HANDOFF의 '전수 DRIFT 0' 주장과 불일치
+P-DTLOPT-SWEEP-01,runway,P-DTLOPT-SWEEP-01,Y,옵션 dtl_opt 누락 전수 점검(저청구 헌팅) 미실행 — 다른 상품도 동일 원인 저청구 가능
+P-DUPSIZE-WIRING-01,runway,P-DUPSIZE-WIRING-01,Y,DUP_SIZE_WIRING 22셀 / 11상품 — 중복 사이즈 배선 (§17 선행 필수)
+P-EDICUS-MISSING-01,runway,P-EDICUS-MISSING-01,Y,EDICUS 미등록/결손 — 셋트문구 5종 · 레더하드커버 · 벽걸이캘린더 2사이즈
+P-EDITORYN-01,runway,P-EDITORYN-01,Y,editor_yn 교정 미적용 — N→Y 13건 · Y→N 5건 (5건은 PRICE=0 위험)
+P-EDX-BOOK5-01,runway,P-EDX-BOOK5-01,Y,"D-16 책자 5종 배선 단절 — PRD_000072는 총액 796,900원인데 구성원 기여 0"
+P-EDX-HIGH40-01,runway,P-EDX-HIGH40-01,Y,🟠HIGH 40건 — 셋트 합산 제외 7 · size_blind 6 · 가격 무차별(단일고정가) 25
+P-EDX-MISSINGCELL-01,runway,P-EDX-MISSINGCELL-01,Y,missing-cells 38건 — BINDING_FAIL·미적재/오배선 셀
+P-EDX-SIZECONF-01,runway,P-EDX-SIZECONF-01,Y,차원 정합 결함 248행 (🔴53 · 🟠40 · 🟡110 · ⚪45) — 🔴53 전수 재검증 필요
+P-FOIL-DTLOPT-01,runway,P-FOIL-DTLOPT-01,Y,박 공정상세옵션(prcs_dtl_opt) 설계 미완 + 적재본 미작동 (key=siz_width 교체 필요)
+P-FOIL-E2E-01,runway,P-FOIL-E2E-01,Y,박 분기 활성(2026-07-01) 후 시뮬레이터 e2e 미실행 — 6상품 본체+박 합계 미확인
+P-GOLDEN-83-01,runway,P-GOLDEN-83-01,Y,"골든 전수대조 미수행 — L3+ 83상품은 계산만 성립, 정답가 미검증"
+P-GOODS-AXIS-NORM-01,runway,P-GOODS-AXIS-NORM-01,Y,굿즈 축 오적재 — 판형 85행 EXTRA(작업·재단 사이즈가 판형에) + 자재 76행 MISMATCH(옵션값 67행 혼입)
+P-GOODS-DIRECTPRICE-01,runway,P-GOODS-DIRECTPRICE-01,Y,굿즈파우치 97건 — 직접단가 110건 미적재 (최대 미적재 구멍)
+P-GOODS-DISCOUNT-203-01,runway,P-GOODS-DISCOUNT-203-01,Y,PRD_000203 할인타입 DSC_ACR_QTY 오귀속 — 굿즈에 아크릴 할인표가 물림 (잠재 오청구)
+P-GOODS-NOAUTH-5-01,runway,P-GOODS-NOAUTH-5-01,Y,굿즈 NO_AUTHORITY 5상품 — 가격·선택가격 둘 다 비어 권위 자체가 없음 (투명부채·미니CD앨범·극세사타월·타이벡북커버·말랑증사홀더)
+P-GOODS57-LOAD-01,runway,P-GOODS57-LOAD-01,Y,굿즈 57상품 가격 적재 미실행 (적재본 323행·band 배정 준비 완료)
+P-HDX-BACKLOG-01,runway,P-HDX-BACKLOG-01,Y,hdx 백로그 — 원자합산형 수량정합 · 검토11 권위대조 · 명함 박 저청구 · 레더링바인더A4 적재
+P-HYGIENE-670-01,runway,P-HYGIENE-670-01,Y,데이터 위생 — WORK_NULL 115 · MULTI_DFLT 86 · 미태깅 421 · 규격-0size 48 · TAG_MISMATCH 55
+P-L0-7-01,runway,P-L0-7-01,Y,L0 미적재 7상품 — 상품·구성요소가 라이브에 아예 없음(엑셀에만 존재)
+P-L1-109-01,runway,P-L1-109-01,Y,L1 구성요소만 109상품 — 가격공식 미바인딩 (D2 FAIL)
+P-L2-31-01,runway,P-L2-31-01,Y,L2+ 근접 31상품 — 공식은 붙었으나 골든 미달(WARN)
+P-MAT-PRICEGAP-01,runway,P-MAT-PRICEGAP-01,Y,자재 price_gap 26항목 / 8상품 — 자재는 적재됐으나 단가행 없음
+P-MATPOLLUTE-26-01,runway,P-MATPOLLUTE-26-01,Y,자재 오염 .08/.10 (26행) — 색/형상/사이즈/구수가 자재행에 오적재된 잔재
+P-MATPOLLUTE-WIDGET-3-01,runway,P-MATPOLLUTE-WIDGET-3-01,Y,게이트 Q6 조건 — 자재오염 위젯 누수 3건 제외 강제
+P-MINIBOARD-QTY-01,runway,P-MINIBOARD-QTY-01,Y,미니보드스탠딩(144)·미니배너(145) 수량축 — min1 < 완제품가 시작4 저청구 + 1~3개 견적불가
+P-MISMAP-FP-12-01,runway,P-MISMAP-FP-12-01,Y,오매핑 FP 가드 12건 — 오염이 아닐 수 있어 판정 필요
+P-MUG-193-01,runway,P-MUG-193-01,Y,"머그컵(193) 반투명·투명 7,500 가격축 통째 소실 — 손님이 선택 불가"
+P-NAMECARD-MAT-01,runway,P-NAMECARD-MAT-01,Y,명함 034 펄 · 040 화이트 자재 collapse (등록 MAT ≠ 단가행 MAT) + 037 박 CPQ 옵션그룹 선결
+P-NEEDSBASICS-97-01,runway,P-NEEDSBASICS-97-01,Y,NEEDS_BASICS_FIRST 97건 (굿즈/파우치 87 포함) — 차원·자재부터 필요
+P-OPT-D7-65-01,runway,P-OPT-D7-65-01,Y,위젯 착수 가능 83상품 중 D7(옵션) PASS 18뿐 — 65상품 옵션 미비
+P-ORPHAN-211-01,runway,P-ORPHAN-211-01,Y,가격사슬 순환고리 잔여 211 — 죽은공식 11 · 공식미연결 상품 125 · 죽은구성요소 21 · EMPTY_DECL 54
+P-OVERCHARGE-8-01,runway,P-OVERCHARGE-8-01,Y,§21 확증 과대청구 8건 — use_dims 판별차원 미충전으로 단가행이 전부 매칭돼 silent 합산
+P-PED-BOOK-W12-01,runway,P-PED-BOOK-W12-01,Y,책자 W1 제본비 재배선 · W2 중철 단가행 교정 — 돈크리티컬 과청구 50%
+P-PED-BOOK-W34-01,runway,P-PED-BOOK-W34-01,Y,책자 완성가 (W3/W4 표지+내지 부품 합산) — DV-BK2/BK3/BK4 저청구 위험
+P-PED-CANVAS-01,runway,P-PED-CANVAS-01,Y,Q-SB-CH1 — CANVAS_HANGING 차원 정합 (셀 표기 분리)
+P-PED-DSCLINK-4-01,runway,P-PED-DSCLINK-4-01,Y,"Q-ST-DSC-LINK (돈크리티컬) — DSC_STAT_QTY 링크 누락 4건, 누락 시 +150,000 과청구"
+P-PED-NEXT-01,runway,P-PED-NEXT-01,Y,가격엔진 설계 다음 시작점 — 실 적재 승인 큐 소진 · 확정 결함 정립(D-CB-1/2/4) · 인간 결정 큐
+P-PED-POSTER-WIRE-01,runway,P-PED-POSTER-WIRE-01,Y,"G-S1 — 후가공 배선 0건 (PRF_POSTER disp_seq 2~), 컨펌큐 해소 후 배선"
+P-PED-PUNCH-01,runway,P-PED-PUNCH-01,Y,"Q-SB-PUNCH-DIM — 배너 후가공 판별차원 미충전 시 타공 4+6+8 silent 합산 20,000 과청구"
+P-PED-STATIONERY-9-01,runway,P-PED-STATIONERY-9-01,Y,문구 본체 9건 product_prices INSERT · 떡메모 PRD_000097 바인딩 미실행
+P-PETBANNER-136-01,runway,P-PETBANNER-136-01,Y,"RC-2 PET배너(136) HOLD-1 — 거치대 택1 그룹 의미 중복, 실무진 CONFIRM 후 적재"
+P-PHOTOBOOK-D12-01,runway,P-PHOTOBOOK-D12-01,Y,D-12 포토북 10x10 × 소프트커버 단가행 부재 → 0원 (런칭 차단)
+P-PHOTOBOOK-DBL-01,runway,P-PHOTOBOOK-DBL-01,Y,"포토북100 셋트 이중합산 의심 (final 2,700,000 vs set_contrib 1,500,000)"
+P-PHOTOBOOK-PAGEFEE-01,runway,P-PHOTOBOOK-PAGEFEE-01,Y,D-15 포토북 페이지비 전액 미청구 — 건당 최대 315만원 누락 (최우선 런칭 차단)
+P-PHOTOCARD-024-01,runway,P-PHOTOCARD-024-01,Y,포토카드(024) 셋트 옵션 선택 시 묶음수 차원이 화면에 없어 0원
+P-POSTER-FORMULA-SPLIT-01,runway,P-POSTER-FORMULA-SPLIT-01,Y,실사 27상품 가격사슬 단절 — 28상품이 단일 공식에 묶였는데 그 공식은 인화지 1개만 합산
+P-POSTER-OPT-POLLUTION-01,runway,P-POSTER-OPT-POLLUTION-01,Y,실사 28상품(특히 134/135) 옵션 레이어 오염 — 도수·사이즈·자재·스티커·후가공이 타상품에서 대량 혼입 (면적 적재 1차 차단)
+P-POSTER-TRANSPOSE-01,runway,P-POSTER-TRANSPOSE-01,Y,포스터사인 transpose 687셀 — blanket swap 단독은 NO-GO(14셀 회귀) + 진짜 미적재 2셀
+P-PRD042-MISWIRE-01,runway,P-PRD042-MISWIRE-01,Y,PRD_042 스타드림 '종이' 옵션 ref가 비종이 굿즈 자재로 오배선 → 잘못된 금액 발현 (codex 적발)
+P-PRICED0-6-01,runway,P-PRICED0-6-01,Y,PRICED-0 돈크리티컬 6건 — 위젯 절대 제외 (077/082/088 적재 여부 하네스 간 불일치)
+P-PRINTLY-HUNI-SIZE-01,runway,P-PRINTLY-HUNI-SIZE-01,Y,후니 반칼원형 작은 원형 사이즈 미등록 + dflt_yn 3중복
+P-PRODUCT-IMAGE-01,runway,P-PRODUCT-IMAGE-01,Y,상품 이미지 전건 미등록 — 라이브 DB에 소스 자체가 없음
+P-QUOTE0-100-01,runway,P-QUOTE0-100-01,Y,견적0 100상품 (NEEDS_BASICS_FIRST 67 포함)
+P-QUOTE0-NAMECARD-01,runway,P-QUOTE0-NAMECARD-01,Y,명함 계열 견적0 — 프리미엄명함031·펄명함034·047 용지 미배선
+P-RC1-PRESET-01,runway,P-RC1-PRESET-01,Y,"RC-1 프리셋(R-B3-PRICE) 미모델링 — 실사 118/120/121/123 A3/A2/A1 프리셋 과대청구(A3·A2 +5,000 · A1 +8,000)"
+P-READINESS-FOLLOWUP-3-01,runway,P-READINESS-FOLLOWUP-3-01,Y,준비도 후속 3건 (§26 배지 반영·의심시트 셀단위·돈크리티컬 교정)
+P-REVERSE-4-01,runway,P-REVERSE-4-01,Y,역방향 4건 (인쇄배경지 74×74류 SIZ_000039~042) — 올바른 판형 회신 대기
+P-REVIEW-25-01,runway,P-REVIEW-25-01,Y,REVIEW 잔여 25건 — 대부분 분담 FP·기추적
+P-SET-072-01,runway,P-SET-072-01,Y,072 면지 통합 재설계 COMMIT 승인 대기 · 내지 반제품 승격 그릇 적재 대기
+P-SET-088-01,runway,P-SET-088-01,Y,088 레더링바인더 재설계 적재 승인 대기 (게이트 S1~S8 GO·COMMIT 미실행) · 면지 전파 조율 · 실무진 공유
+P-SET-INNER-PAGE-01,runway,P-SET-INNER-PAGE-01,Y,D-2 내지 페이지가격 미실현 — semi_role.01 부재로 내지비 0
+P-SET-MEMBRANE-PRINT-01,runway,P-SET-MEMBRANE-PRINT-01,Y,D-3 인쇄면지(082 MAT_385·088) 인쇄비 0 — 면지 멤버 무공식
+P-SET-PREMIUM-UNDER-01,runway,P-SET-PREMIUM-UNDER-01,Y,"프리미엄 정확값 트랙 저청구 잔존 (077 레더 +3,900 · 082 면지 유료 · 표지/면지 ×2)"
+P-SILENT-7-01,runway,P-SILENT-7-01,Y,돈크리티컬 silent 합산 7건 — 타 상품 부속이 자재로 묵음 가산
+P-SIZEMAP-214-01,runway,P-SIZEMAP-214-01,Y,verify_size_mapping 실측 214 findings / 128 warns (260714)
+P-SOT-RELOAD-65-01,runway,P-SOT-RELOAD-65-01,Y,SOT 260702 재적재 후속 33+32셀 별도 High 큐
+P-STATIONERY-SPARSE-01,runway,P-STATIONERY-SPARSE-01,Y,문구 sparse grid 충전 · 무지내지 min/max · 177 재분류 · 굿즈 NEITHER-gap 가격 적재
+P-STICKER-INTEGRITY-01,runway,P-STICKER-INTEGRITY-01,Y,스티커 무결성 게이트 NO-GO — 돈크리티컬 실결함 다수 라이브 재현
+P-STICKER-REPRICE-01,runway,P-STICKER-REPRICE-01,Y,가격표 260702 스티커 소재 연당가 변경 → 스티커 가격사슬 재적재 필요 (High)
+P-UNDER-5-01,runway,P-UNDER-5-01,Y,진짜 저청구 5건 webadmin 확증 대기 — 타공·UV평판·도장인쇄·전사인쇄
+P-UNDERCHARGE-BATCH-3-01,runway,P-UNDERCHARGE-BATCH-3-01,Y,배치 적발 저청구 3건 실무진 액션 대기 — 메쉬배너 타공 dtl_opt 누락 · TRAP_MIN 8상품 · 출력소재 specialty 30셀 미적재
+P-USAGECD-3-01,runway,P-USAGECD-3-01,Y,usage_cd 표시명 정합 (068~070 표지/내지 자재) — 가격 무관
+P-VERIFY-104-01,runway,P-VERIFY-104-01,Y,I-VERIFY-1 가격소스 보유 104상품 strict 실호출 final_price>0 실비율 미검증
+P-VERIFY-SET7-01,runway,P-VERIFY-SET7-01,Y,I-VERIFY-3 셋트 7부모 evaluate_set_price PRICE≠0·이중합산 0 미검증
+P-WIDGET-BLOCKED-200-01,runway,P-WIDGET-BLOCKED-200-01,Y,위젯 선행 불가 200상품 (준비도 L3 미만)
+P-WIRE-PROPOSAL-LOAD-01,runway,P-WIRE-PROPOSAL-LOAD-01,Y,round-19 가격 폐루프 제안본 3종 DB 미적재 (명함 공식분리·031 박·033 MATGROUP·042 박 공용 comp)
+P-WRONGCODE-4-01,runway,P-WRONGCODE-4-01,Y,사이즈 WRONG_CODE 4건 미교정 — 스티커 그리드 540행 재키 결합 블로커
+P-YELLOW-CAT-01,runway,P-YELLOW-CAT-01,Y,OQ-8 YELLOW 카테고리 미적재 상품 — 진성 부재인가 적재 대상인가 미판정
+P-ZEROQUOTE-119-01,runway,P-ZEROQUOTE-119-01,Y,0원 견적 조합 119건 / 32상품 — 손님이 0원에 주문 가능 (4주째 OPEN)
+X-AGED-ADMIN-01,runway,X-AGED-ADMIN-01,Y,admin-analysis / feature-matrix 출처 AGED (3.5개월) — 라이브 재확인 권장
+X-AUTH-CONTRACT-01,runway,X-AUTH-CONTRACT-01,Y,OQ-G9 휴대폰 본인인증 서비스 계약 미체결 (1차 영향)
+X-BATCH-REST-01,runway,X-BATCH-REST-01,Y,통합 배치 hdx 가격 파일럿 잔여 (전부 선택) — codex 2차 · 타 도메인 확장
+X-BFF-ENDPOINT-01,runway,X-BFF-ENDPOINT-01,Y,후니 evaluate_price 호출 가능 HTTP 엔드포인트·인증 미특정 · CPQ 옵션/제약 조회 쿼리 미확정
+X-CHK-BACKUP-01,runway,X-CHK-BACKUP-01,Y,백업·복구 절차 미확인 (DB 스냅샷·복구 리허설)
+X-CHK-CAPACITY-01,runway,X-CHK-CAPACITY-01,Y,서버 용량·오토스케일·모니터링 기준 미확인
+X-CHK-CS-01,runway,X-CHK-CS-01,Y,고객센터 응대 스크립트·FAQ 미확인
+X-CHK-DELIVERY-01,runway,X-CHK-DELIVERY-01,Y,배송사 연동·송장 발행·배송추적 경로 미확인
+X-CHK-DNS-01,runway,X-CHK-DNS-01,Y,도메인·SSL·DNS 전환 계획 미확인
+X-CHK-MIGDRILL-01,runway,X-CHK-MIGDRILL-01,Y,회원·머니 이관 리허설 미실행 (명세는 있으나 드라이런 기록 없음)
+X-CHK-OLDSITE-01,runway,X-CHK-OLDSITE-01,Y,이전 사이트 종료/병행 운영 계획 미확인
+X-CHK-ONCALL-01,runway,X-CHK-ONCALL-01,Y,장애 대응 연락망·에스컬레이션 경로 미확인
+X-CHK-PGTEST-01,runway,X-CHK-PGTEST-01,Y,테스트 결제 전 구간 리허설 미확인 — 카드·계좌·취소·부분취소·환불
+X-CHK-PRIVACY-01,runway,X-CHK-PRIVACY-01,Y,약관·개인정보처리방침 개정 및 게시 미확인
+X-CHK-SEO-01,runway,X-CHK-SEO-01,Y,SEO·구 URL 리다이렉트 맵 미확인
+X-CHK-TRAINING-01,runway,X-CHK-TRAINING-01,Y,운영자 교육·인수인계 세션 미확인
+X-CONFIRM-BASECODE-5-01,runway,X-CONFIRM-BASECODE-5-01,Y,기초코드 컨펌 큐 5건 (AX-5·B-PO-1·PO-1b·AX-6·SZ-2) 사용자/실무진 결정 대기
+X-CONFIRM-DSCDOUBLE-01,runway,X-CONFIRM-DSCDOUBLE-01,Y,Q-ST-DSC-DOUBLE — 떡메모 unit 내장 볼륨할인 위에 DSC_STAT_QTY 추가 = 의도된 추가할인 vs 이중할인
+X-CONFIRM-FOIL-042-SHEET-01,runway,X-CONFIRM-FOIL-042-SHEET-01,Y,WIRE-3b 042 박 소형/대형 시트 권위(박 면적) 미확정 — 실무진/디자인 회신 대기
+X-CONFIRM-FOILAREA-01,runway,X-CONFIRM-FOILAREA-01,Y,박영역 상한 CONFIRM (Q-FOIL-SIZE2) — 027/069/070 트림이 대형격자 초과
+X-CONFIRM-FOMEX-01,runway,X-CONFIRM-FOMEX-01,Y,"포맥스 컨펌큐 — A1 3종 미적재 · 3mm 권위충돌(8,300/11,500 vs 8,500/13,000) · mat×siz 교차조합 0원"
+X-CONFIRM-GOODS-FIN1-01,runway,X-CONFIRM-GOODS-FIN1-01,Y,굿즈 가격 의미 컨펌 2건 — C-GP-4 가공 가산 개당 vs 1회 정액(라벨·맥세이프·에폭시) · C-GP-5 구수 가격축 여부
+X-CONFIRM-MAT32-01,runway,X-CONFIRM-MAT32-01,Y,자재 MAT_000032 적재 승인 보류 — 사용자 '질문 명확화' 요청 미해소
+X-CONFIRM-MEMOPAD-01,runway,X-CONFIRM-MEMOPAD-01,Y,Q-ST-MEMO1 — 메모패드 2사이즈 2가격 = 사이즈 차원 공식 vs 별 prd_cd 미결
+X-CONFIRM-PRICE-2-01,runway,X-CONFIRM-PRICE-2-01,Y,돈크리티컬 가격 권위충돌 2건 — 일반현수막 타공수8 라이브 8000 vs 권위 5000 · 족자 천정고리 라이브 6500 vs 권위 '4000?'
+X-CONFIRM-PRICEAUTH-01,runway,X-CONFIRM-PRICEAUTH-01,Y,가격 권위 사람 판정 대기 — 명함 금유광 63000 vs 64000 · 펄프리미엄 mat_cd · 스티커 관례층 · 판수 이중권위 · 박등급 경계
+X-CONFIRM-PROCQTY-01,runway,X-CONFIRM-PROCQTY-01,Y,"Q-SB-PROC-QTY (돈크리티컬) — 후가공/거치 1건당 vs ×수량 prc_typ 미확정, 거치대 ×qty=250,000 과청구 가능"
+X-CONFIRM-QTYBASIS-01,runway,X-CONFIRM-QTYBASIS-01,Y,OQ-10 수량구간 단가행 기준 = 출력매수(판수) vs 주문수량 미확정 (돈)
+X-CONFIRM-SET-3-01,runway,X-CONFIRM-SET-3-01,Y,셋트 잔여 CONFIRM 3건 (책등 종이 추가비 · 비활성 판형 229건 여백 누락 · 088 제본방식)
+X-CONFIRM-STICKER-01,runway,X-CONFIRM-STICKER-01,Y,스티커 컨펌큐 5건 (CV-STK-053/054 · CV-STK-A4-MAP · G-STK-1/3/4) — 054 active
+X-CPQ-MEMBERSHIP-08-01,runway,X-CPQ-MEMBERSHIP-08-01,Y,D-2 옵션→가격구성요소 멤버십 매핑 부재 — PRF_DGP_A G-DATA 🔴 NO-GO(A-1)의 직접 원인
+X-CR-C10-01,runway,X-CR-C10-01,Y,C-10 폼빌더 결과절 리스트 implication RAW-ONLY (Med)
+X-CR-C3-01,runway,X-CR-C3-01,Y,"C-3 깨진 규칙 처리 불일치 — 한쪽은 500, 한쪽은 조용히 통과"
+X-CR-C9-01,runway,X-CR-C9-01,Y,C-9 폼빌더에 수치 범위 조건 타입 부재 — 자유치수 19건+raw-only 7건 UI 관리 불가
+X-CR-ENFORCE-CLIENT-01,runway,X-CR-ENFORCE-CLIENT-01,Y,C-2 강제 지점 부재 — 위젯/장바구니/주문 어디에도 validate 호출이 없음
+X-CR-ENFORCE-ENGINE-01,runway,X-CR-ENFORCE-ENGINE-01,Y,가격엔진(evaluate_price)이 제약을 전혀 참조하지 않음 — 불가 조합도 0원/가격 노출
+X-CR-HANDOFF-01,runway,X-CR-HANDOFF-01,Y,제약 개발자 전달 문서(dev-handoff-final) 미전달 — C-1~C-10·V-1~V-4·R-1~R-5
+X-DDL-REFPARAM-SLOT-01,runway,X-DDL-REFPARAM-SLOT-01,Y,GAP-2 ref_param_json 슬롯 위치 미결 (면적등급 보존) — DDL 제안 대기
+X-DEC-CALLER-01,runway,X-DEC-CALLER-01,Y,I-BOUND-1 server-api 전이 호출 주체 미결 (후니 직접 vs 어드민 위임)
+X-DEC-CATTREE-01,runway,X-DEC-CATTREE-01,Y,OQ-G14 전시 카테고리 구조 확정 미완 (1차 W3-5)
+X-DEC-DELYN-576-01,runway,X-DEC-DELYN-576-01,Y,SIZ_000576 마스터 del_yn Y→N 복원 승인 대기 · del_yn 편집 가능 여부 미실측
+X-DEC-EDICUS-01,runway,X-DEC-EDICUS-01,Y,OQ-G16 온라인 에디터(Edicus) 도입 결정 미정
+X-DEC-EXTMEMBER-01,runway,X-DEC-EXTMEMBER-01,Y,I-AUTH-3 외부회원 연동(ncpstore) 채택 + 1:1 등록 결정 필요
+X-DEC-FILECHECK-01,runway,X-DEC-FILECHECK-01,Y,OQ-G11 파일 검수 기준 미확정 (1차)
+X-DEC-FRMTYP-01,runway,X-DEC-FRMTYP-01,Y,frm_typ/clr_cd 보류 — dbm-price-formula-audit 결판 후 처리
+X-DEC-GRADE-01,runway,X-DEC-GRADE-01,Y,OQ-G6 회원등급 grade_cd ↔ 샵바이 memberGrade 매핑 미결 (1차 가격 영향)
+X-DEC-HYPHEN-01,runway,X-DEC-HYPHEN-01,Y,하이픈 레거시(그룹31·옵션85) 언더바 통일 = 지니 보류
+X-DEC-IMMUTABLE-01,runway,X-DEC-IMMUTABLE-01,Y,I-BOUND-2 클레임 추적성 — 동적옵션 immutable 정책 유지 전제
+X-DEC-MALLMODE-01,runway,X-DEC-MALLMODE-01,Y,I-AUTH-1 몰 운영방식 결정 필요 (스킨몰 vs headless)
+X-DEC-MIRROR-01,runway,X-DEC-MIRROR-01,Y,OQ-B3 샵바이→후니 상태 미러 채널 미확인 (폴링 vs 웹훅)
+X-DEC-NAMECARD-FORMULA-01,runway,X-DEC-NAMECARD-FORMULA-01,Y,WIRE-1 명함 분기로직 미결 (ⓐ 단일공식 vs ⓑ 공식분리) — PRF_NAMECARD_FIXED에 PREMIUM/COAT/FOIL 23 comp 미배선
+X-DEC-NAVERPAY-01,runway,X-DEC-NAVERPAY-01,Y,NaverPay 별도 mini-OrderSheet 1차 범위 포함 여부 미결
+X-DEC-PRINTMONEY-01,runway,X-DEC-PRINTMONEY-01,Y,OQ-G4 프린팅머니 = 샵바이 적립금 재해석 vs 별도 원장 미결
+X-DEC-REDCAT-01,runway,X-DEC-REDCAT-01,Y,I-RED-1 RED 카테고리(가격소스 0) 브리지 범위 결정 필요
+X-DEC-SELFVERIFY-01,runway,X-DEC-SELFVERIFY-01,Y,OQ-G12 비밀번호 변경·탈퇴 본인확인 방법 미결 (1차)
+X-DEC-SHIPPING-01,runway,X-DEC-SHIPPING-01,Y,OQ-G13 배송비·도서산간 권역 정책 미확정 (1차 W7-9)
+X-DEC-SUJAK-01,runway,X-DEC-SUJAK-01,Y,OQ-G17 수작 브랜드 유지 여부 미결
+X-DEC-VAT-01,runway,X-DEC-VAT-01,Y,후니 VAT 포함 여부 미확정 — basis 정합 데이터 부족으로 가격 비교 전면 기권 상태
+X-DEC-WRITEPOLICY-01,runway,X-DEC-WRITEPOLICY-01,Y,POLICY-1 server-api 카탈로그 쓰기 허용 범위 미결 (현 단계 쓰기 금지)
+X-DESET-01,runway,X-DESET-01,Y,떡메모지 de-set — 셋트행 논리삭제 경로가 webadmin에 없음 (실행 BLOCKER) · 동형 후보 2건
+X-DOC-ADMINMANUAL-01,runway,X-DOC-ADMINMANUAL-01,Y,라이브 admin 매뉴얼 업데이트 미실행 — round-13~21 적재분의 admin 화면 반영 여부 미대조
+X-EDX-D3-01,runway,X-EDX-D3-01,Y,D-3 template_uri 보관 vs 런타임 조회 미결 — 원천 API 미수확
+X-EDX-D6-01,runway,X-EDX-D6-01,Y,D-6 하트 이미지피켓(use_yn=N) 런칭 범위 포함 여부 미결
+X-EDX-D8-01,runway,X-EDX-D8-01,Y,D-8 EDICUS Link Manager POD 채널 이중 등록 — 실매출 라이브 운영 리스크
+X-EDX-D9-01,runway,X-EDX-D9-01,Y,"D-9 명함 cateCode=TEST — EDICUS 원장 결함 의심, 콘솔 확인 요청 미회신"
+X-EDX-F12-01,runway,X-EDX-F12-01,Y,[적재 전 필수] F-12 런북 probe_fmz_cnt 채움 — 빠지면 315만원 누락 재통과
+X-EDX-VESSEL-01,runway,X-EDX-VESSEL-01,Y,D-11 제3축 그릇 설계 미결 (polymorphic vs 축별 named 컬럼) · D-7 기존 제안과 중복 여부
+X-ENGINE-ACRYL-AREA-01,runway,X-ENGINE-ACRYL-AREA-01,Y,아크릴 siz_cd × 면적 코드 환원 (C) — 현재 area 바인딩 시 과소청구 확정이라 보류 중
+X-ENGINE-AUTOPICK-01,runway,X-ENGINE-AUTOPICK-01,Y,후니 auto-pick .first()가 극단 사이즈를 선택 — 스티커 2백만원 실증
+X-ENGINE-BOOK-01,runway,X-ENGINE-BOOK-01,Y,PRF 책자 트랙 NO-GO — 4 선결 (내지 이중판수 · S1/S2 내지인쇄 이중합산 · COVER-SPREAD-SIZ · COVER-A4PLT)
+X-ENGINE-DELYNFILTER-01,runway,X-ENGINE-DELYNFILTER-01,Y,책자 del_yn 필터 부재 확정 — 논리삭제된 구성요소도 가격 평가에 포함됨
+X-ENGINE-FOIL-01,runway,X-ENGINE-FOIL-01,Y,박 엔진 미지원 — 027/028/029 박 가산이 전부 0 (데이터로 못 고침·C트랙)
+X-ENGINE-GP2-01,runway,X-ENGINE-GP2-01,Y,GP-2 PRODUCT_PRICE 선점 가드 (돈크리티컬) — product_prices 1건만 있어도 FORMULA를 우회
+X-ENGINE-OPTKEY-01,runway,X-ENGINE-OPTKEY-01,Y,opt 동시선택 한계 (코드트랙) — 가공+추가 동시 선택 시 selections opt_cd 단일키로 1건 누락
+X-ENGINE-PAGE-01,runway,X-ENGINE-PAGE-01,Y,094 30P 보류 — 코드트랙 C-1 (page 전송)
+X-ENGINE-PANSU-01,runway,X-ENGINE-PANSU-01,Y,투명엽서019 자재종속 판걸이수 — fn_calc_pansu에 prd_cd 인자 추가 + pricing.py 수정 (C트랙)
+X-ENGINE-PRCTYP03-01,runway,X-ENGINE-PRCTYP03-01,Y,"후가공 14 comp prc_typ 오적재(.01 단가형) → 엔진이 단가×수량으로 해석해 과대청구 (엽서 C3 Δ990,000)"
+X-ENGINE-SETCOAT-01,runway,X-ENGINE-SETCOAT-01,Y,price_simulate_set이 coat_side_cnt를 드롭 → 셋트 경로 표지 코팅비 누락 (C트랙)
+X-ENGINE-TWINRING-01,runway,X-ENGINE-TWINRING-01,Y,071 트윈링 cover_mult ×2 — 데이터로 해결 불가·개발팀 C트랙 선행
+X-FILEMETA-01,runway,X-FILEMETA-01,Y,라인 단위 customProperty·구조화 파일메타 첨부 경로 미상 (I-META-1 / I-FILE-1)
+X-FOIL-MINQTY-01,runway,X-FOIL-MINQTY-01,Y,박(FOIL) 6상품 최소수량 제약규칙 미구축 — 다만 §31 CHANGELOG는 '제약 아님'으로 종결 표기
+X-GAP-UVFORM-01,runway,X-GAP-UVFORM-01,Y,webadmin UV 변형 입력 폼 적재경로 '미상' 정직 표기 잔존
+X-KB-01,runway,X-KB-01,Y,온톨로지 KB 후속 3건 — live-snapshot 재캡처 · PRICE_GAP_HINTS 필드 마커 강화 · 앨범/포토 INTENT 미등재
+X-MAPPING-MASTER-01,runway,X-MAPPING-MASTER-01,Y,prd_cd↔productNo · selections↔optionNo 매핑 마스터 소유·동기화 주체 미정 (+ 67노드 매핑표 · 동기화 범위·주기)
+X-MES-SPEC-01,runway,X-MES-SPEC-01,Y,OQ-G10 MES↔Front 통신 규격 미확정 (1차 W9-10)
+X-MIG-CONSENT-01,runway,X-MIG-CONSENT-01,Y,L4 교정 A7 — 마케팅 동의 내부모순 (동의일시 날조 금지·법적 리스크)
+X-MIG-CUTOVER-01,runway,X-MIG-CUTOVER-01,Y,MQ-19 컷오버 동결 창 운영 가능 여부 미확정
+X-MIG-EXPIRY-01,runway,X-MIG-EXPIRY-01,Y,L4 교정 A5 — Plan A 적립금 만료 기본값=제한없음 명문화 필요
+X-MIG-EXTRAINFO-01,runway,X-MIG-EXTRAINFO-01,Y,회원 부가정보 담을 그릇 미결 — extraInfo 수용 범위 · 사업자정보 다건 · 다중주소
+X-MIG-MEMBER-SCHEMA-01,runway,X-MIG-MEMBER-SCHEMA-01,Y,회원 이관 원천 스키마 미확인 — 해시·가입일·휴면·탈퇴·동의일시·중복이메일·등급 3원 매핑·본인인증 상태
+X-MIG-MONEY-RECON-01,runway,X-MIG-MONEY-RECON-01,Y,프린팅머니 컷오버 대사 게이트 미실행 — 전 회원 잔액 diff/hash · 합계 불일치 시 즉시 NO-GO
+X-MIG-MONEY-SCHEMA-01,runway,X-MIG-MONEY-SCHEMA-01,Y,프린팅머니 이관 원천 스키마 미확인 — 잔액 스냅샷·거래 원장·만료정책·음수 잔액·PG 트랜잭션 보존
+X-MONEY-EXTKEY-01,runway,X-MONEY-EXTKEY-01,Y,R5 적립금 externalKey 멱등·partial-spent·명칭 semantics 실측 대기
+X-NHN-POLICY-01,runway,X-NHN-POLICY-01,Y,NHN 공식 회신 — 동적 가격 산정은 샵바이 미제공·커스텀 불가
+X-NHN-REPLY-01,runway,X-NHN-REPLY-01,Y,NHN 2차 답신 미작성 — 역질문 2건(내부 견적엔진 정의 · 구매시점 가격변동 기준+실조합 수치) 답변 필요
+X-NHN-REVIEW-01,runway,X-NHN-REVIEW-01,Y,P-B 동적옵션 등록이 상품심사 승인대기를 유발하는가 — 미검증 (D 채택 결정적 관문)
+X-OLDDB-ACCESS-01,runway,X-OLDDB-ACCESS-01,Y,원천 구 DB 미접근 — 회원·머니 이관 질문 20건이 전부 미확정
+X-OOS-MBO-01,runway,X-OOS-MBO-01,Y,[런칭 무관] 다중브랜드 온톨로지 잔여 6건 — 공급자 라우팅 데이터 0 · 코퍼스 편향 · 승격 대기 · 레드 미착수 · 팀파일 버그 · 구조 게이트 미검증
+X-OOS-PRINTLY-01,runway,X-OOS-PRINTLY-01,Y,[런칭 무관] 프린틀리 별도사업 잔여 5건 — catalog 부재·노후·정식 하네스화 미정·지니 입력 대기·수렴 2트랙
+X-OOS-PRINTSTORY-01,runway,X-OOS-PRINTSTORY-01,Y,[런칭 무관] print-story 발표 아티팩트 잔여 2건 — 저작 귀속 · 특허 등록 여부 미확인
+X-OOS-RPMETA-01,runway,X-OOS-RPMETA-01,Y,[런칭 무관] RP-Meta 역공학 잔여 7건 — deepcheck carry-forward 미검증 · 인간 결정 · DDL 제안 3건
+X-OPS-ADMINPW-01,runway,X-OPS-ADMINPW-01,Y,OQ-12 HUNI_ADMIN_PW stale — product-viewer 화면축 3원 대조 BLOCKED
+X-OPS-SITEKEY-01,runway,X-OPS-SITEKEY-01,Y,OQ-D2 후니 site_key 취득 방식 미결 (psql 조회 vs .env 신규 키)
+X-OPS-TOKEN-01,runway,X-OPS-TOKEN-01,Y,SHOPBY_SERVER_ACCESS_TOKEN 만료 시 재발급 절차 미실행
+X-ORDER-FLOW-VERIFY-01,runway,X-ORDER-FLOW-VERIFY-01,Y,라이브 주문 동선 미검증 — cart 버튼 셀렉터 미검출·주문 경로 코드 미확인
+X-ORDER-SUBMIT-SPEC-01,runway,X-ORDER-SUBMIT-SPEC-01,Y,L3 격상조건② 주문서 submit path 명세 공백 — dev-plan 미명세
+X-PAY-FLOW-01,runway,X-PAY-FLOW-01,Y,결제 확정 흐름 미상 — 주문 생성 전용 POST·PG 콜백 · paymentAmtForVerification 산식
+X-PB-C7-01,runway,X-PB-C7-01,Y,C7 1:1 충돌 — link-product/쇼핑몰 발행 없이 성립하는가 (파트너사 개발 0건 주장 붕괴 위험)
+X-PB-CLEANUP-01,runway,X-PB-CLEANUP-01,Y,PC7 FAIL — 기존 복제본 정리 절차가 문서에 존재하지 않음
+X-PB-CONCEPT-01,runway,X-PB-CONCEPT-01,Y,HARD 제약 위반 — 운영진 신규 개념 4개(상한 2). 재설계 또는 재협상 필요 (+권고안 남는 약점 4건)
+X-PB-DESIGN-01,runway,X-PB-DESIGN-01,Y,"PC4 검증불가 — 04_design 미착수, 판정 대상 설계안 집합 부재"
+X-PB-DOC-01,runway,X-PB-DOC-01,Y,PC2 FAIL 인용 불일치(WP 7.0 pattern-overrides) + P1 문서 정정 다수 미해소
+X-PB-EMPTYVAL-01,runway,X-PB-EMPTYVAL-01,Y,PC6 조건부 — 의도적 빈 값 표현 불가 · 확인 게이트/복구 경로 없음
+X-PB-GATE-01,runway,X-PB-GATE-01,Y,페이지빌더 게이트 NO-GO — 문서 정본 승격·대외 배포 불가 (확장 회차에서 기존 결론 2개 붕괴)
+X-PB-INVENTORY-01,runway,X-PB-INVENTORY-01,Y,PC3 검증불가 — 분모 미확정 ('257곳'은 관측값이 아니라 투영값) · 사이트 전수 인벤토리 미착수
+X-PB-OPSSIM-01,runway,X-PB-OPSSIM-01,Y,"PC5 검증불가 — 05_ops-sim 미착수, 관리부담 실계수 0건 (하네스 존재 이유가 미측정)"
+X-PB-PARTNER-BUG-01,runway,X-PB-PARTNER-BUG-01,Y,파트너사 버그 수정(필수) 1건 — B1 편집기 하드 내비게이션 500 (P0)
+X-PB-PARTNER-CFG-01,runway,X-PB-PARTNER-CFG-01,Y,파트너사 설정·등록(필수) 2건 — 외부 콘텐츠 허용 도메인 + data-proxy 정책
+X-PB-PARTNER-OPT-01,runway,X-PB-PARTNER-OPT-01,Y,파트너사 있으면좋음 2건(F1·F2) + 확인 회신 4건 미회신
+X-PB-REVERIFY-01,runway,X-PB-REVERIFY-01,Y,PC1 검증불가 — 인증 영역 401로 역공학 사실 1행도 재실행 검증 못함 · C-a~C-g 미확정 전부 잔존
+X-PB-RISK-01,runway,X-PB-RISK-01,Y,R-1 iframe 임베드 SEO 불리 / R-2 후니팀 기배제 이력 우선
+X-PB-T4-01,runway,X-PB-T4-01,Y,X1 T4 실측 미실시 — 257 항목 CSV 등록 후 렌더·편집 응답 측정 (최대 이월) · T4 붕괴 시 권고안 우위 소멸
+X-PB-UX-01,runway,X-PB-UX-01,Y,P2 UX 결함 5건 미해소 (G14·G13·G15·G17·409 방어)
+X-PERF-CONCURRENCY-01,runway,X-PERF-CONCURRENCY-01,Y,동시성 — 고객별 견적행 분리(견적ID) 부하 실측 없음
+X-PG-CONTRACT-01,runway,X-PG-CONTRACT-01,Y,PG 미설정·이니시스 결제 계약 미체결 — 라이브몰 결제수단이 ACCOUNT/NONE만
+X-POSTER-SIZNUM-01,runway,X-POSTER-SIZNUM-01,Y,실사 면적 siz 채번 착수 불가 — 1건 과채번(109→108·SIZ_000402 재사용 미결) + orientation 규약 미명문화
+X-PRICE-BRIDGE-01,runway,X-PRICE-BRIDGE-01,Y,동적 계산가 무손실 환원 경로 미확정 — 1차 최대 리스크 (양측 독립 동일 지목)
+X-REPO-GITIGNORE-01,runway,X-REPO-GITIGNORE-01,Y,하네스 자산 git 미추적 — hpti 인스펙터 에이전트 · §16 recipe-viz agents/skills 화이트리스트 누락
+X-RVF-GATE-01,runway,X-RVF-GATE-01,Y,V-PRICE(신규 14필드) 게이트 NO-GO — VP-1·VP-6 FAIL
+X-RVF-N1-01,runway,X-RVF-N1-01,Y,N1 ADD_CLR_YN 미전송 → 색수 미상향 저청구 (HIGH)
+X-RVF-N245-01,runway,X-RVF-N245-01,Y,N2 REAM_CNT · N4 PACK/MAX_PRN_CNT · N5 DOSU_COD 미전송 — byte 정합 잔여
+X-RVF-N3-01,runway,X-RVF-N3-01,Y,N3 모델A 래더 미구현 — 떡메모지·굿즈 견적 불가 (HIGH·라이브 비준)
+X-RVF-N6-01,runway,X-RVF-N6-01,Y,N6 GSELGLV/TPTKDFT ATTB×10 미반영 — 후가공·수량 저청구 잠복
+X-RVF-SUB-01,runway,X-RVF-SUB-01,Y,V-WIDGET·V-EDITOR 재검증 서브시스템 미착수 (산출 0건)
+X-SENSOR-DIMBLIND-01,runway,X-SENSOR-DIMBLIND-01,Y,차원정합 사각 — '공정 미등록(노출 부재)'을 진단기가 못 잡음
+X-SENSOR-DIMVALS-01,runway,X-SENSOR-DIMVALS-01,Y,스캐너 dim_vals 축 탐지 보강 — component_merge_scan.py가 jsonb 축 병합 미탐지
+X-SENSOR-VERIFYLOAD-01,runway,X-SENSOR-VERIFYLOAD-01,Y,verify_load.py 기대 행수 하드코딩 → 상시 FAIL (경보 피로로 사실상 폐기된 센서)
+X-SET-SIZCD-01,runway,X-SET-SIZCD-01,Y,셋트 시뮬레이터/위젯 siz_cd 미전파 — 고정가형 셋트 화면 0원 (094/097/100)
+X-SET-UI-4-01,runway,X-SET-UI-4-01,Y,셋트 UI 개선 4건 (역전 절약배지·구간 프리셋 칩·부수 step/max·직접입력 스냅) — DEV-REQUEST 부록 후보
+X-SET-UI-MEMBER-01,runway,X-SET-UI-MEMBER-01,Y,D-1 셋트 구성원 옵션그룹이 시뮬레이터/위젯 구성원 UI에 미렌더 (코드)
+X-SETTLE-AUTH-01,runway,X-SETTLE-AUTH-01,Y,샵바이 정산이 라인 salePrice/addPrice를 권위로 쓰는가 — 미관측 (+적립금 명칭·재동의 법적요건·쿠폰 이관 범위)
+X-SHOPBY-ASSIGN-VOLATILE-01,runway,X-SHOPBY-ASSIGN-VOLATILE-01,Y,샵바이 카테고리 배정 휘발성 — 어드민 작업 후 배정이 풀림 (제약 #8·#9)
+X-SHOPBY-CART-CHANNEL-01,runway,X-SHOPBY-CART-CHANNEL-01,Y,Q-CART-2 post-cart channelType 예시 vs 스키마 불일치 — 라이브 실측 필요
+X-SHOPBY-CLAIM-FSM-01,runway,X-SHOPBY-CLAIM-FSM-01,Y,클레임 상태머신 미폐합 — 수거진행 중간상태 누락 · 입금대기/교환대기/환불완료 전이 미정의
+X-SHOPBY-GATE-01,runway,X-SHOPBY-GATE-01,Y,샵바이 게이트 1R·2R 모두 조건부 GO — BLOCKED 3관문 및 2R 조건 미이행분 잔존
+X-SHOPBY-HYGIENE-01,runway,X-SHOPBY-HYGIENE-01,Y,샵바이 카탈로그 위생 — 중복 71행 잔존 · 관리코드 미입력 3 · 앞공백 카테고리 1 · 삭제 카테고리 참조 2 · 빈 카테고리 3
+X-SHOPBY-IPALLOW-01,runway,X-SHOPBY-IPALLOW-01,Y,샵바이 server API IP 허용목록 — 등록 직후 산발적 400 S0001 거부
+X-SHOPBY-MAXLEN-01,runway,X-SHOPBY-MAXLEN-01,Y,A-BIND-1 optionInputs inputValue maxLength 미확정
+X-SHOPBY-NATIVE-01,runway,X-SHOPBY-NATIVE-01,Y,OQ-G19 샵바이 가입완료 메일·체험단·관리자 권한 native 지원 범위 미확인
+X-SHOPBY-ORDERSHEET-01,runway,X-SHOPBY-ORDERSHEET-01,Y,order-sheet 실계약 미명문화 — required vs live cartNos-only · 중복 시 우선순위 · recurringPaymentDelivery shape
+X-SHOPBY-SPEC-FIX-01,runway,X-SHOPBY-SPEC-FIX-01,Y,샵바이 API 명세 오기 5건 (put-product-options 경로/필드 환각 · groupId 타입 · 교환 operationId · get-categories 오기 · refresh 각주)
+X-SHOPBY-TERMS-01,runway,X-SHOPBY-TERMS-01,Y,Q-MISC-1 reserve 필수 agreementTermsAgrees termsType 세트 미상
+X-SIM-PRODUCT-SEMANTIC-01,runway,X-SIM-PRODUCT-SEMANTIC-01,Y,OQ-D1 상품 의미 불일치 — 가격엔진 상품 ≠ 샵바이 쓰기 상품 (값 생존만 실증됨)
+X-SKIN-DEVREQ-01,runway,X-SKIN-DEVREQ-01,Y,스킨 파트너사 수정 요청 5건 (하위 건수 표기 · 헤더 드롭다운 · 상세 URL 오리다이렉트 · BEST SELLERS 하드코딩 · depth3 미렌더)
+X-SKIN-REACH-01,runway,X-SKIN-REACH-01,Y,"스킨 도달 불가 — 판매중 217건 중 98건만 노출, 117건 도달 불가 (대분류 6개 0건·말단 25개 전멸)"
+X-SMS-CONTRACT-01,runway,X-SMS-CONTRACT-01,Y,OQ-G8 알림톡/SMS 서비스 계약 미체결 (1차 영향·조기 필요)
+X-TAXDOC-01,runway,X-TAXDOC-01,Y,OQ-G18 증빙발급·현금영수증·세금계산서 정책 및 팝빌 연동 미결
+X-VERIFY-ADAPTER-01,runway,X-VERIFY-ADAPTER-01,Y,I-VERIFY-2 옵션→차원 ref_dim 풀이 어댑터 무손실 재현 미검증
+X-VERIFY-PROD-01,runway,X-VERIFY-PROD-01,Y,"최종 프로덕션 검증 미실행 — 실 견적 조립은 신규 BFF/위젯(저장소 밖·개발중), 현 관리자 시뮬레이터는 비대표"
+X-WGT-ADAPTER-01,runway,X-WGT-ADAPTER-01,Y,후니 어댑터(createHuniAdapter) 구현 0줄 — 위젯 컨버전 미착수
+X-WGT-ANCHOR-01,runway,X-WGT-ANCHOR-01,Y,G-3 어댑터 주석 라인앵커 stale — deob 재생성으로 참조 어긋남
+X-WGT-ATTB-01,runway,X-WGT-ATTB-01,Y,합성 ATTB / size-linked 반경(L-3·G-4) 잠복 — 컨버전 시 보정 필요
+X-WGT-AUDIT-01,runway,X-WGT-AUDIT-01,Y,위젯 4축 감사 — 임계경로 인계 사슬 단절 + 4월→6월 역공학 드리프트
+X-WGT-B1DEAD-01,runway,X-WGT-B1DEAD-01,Y,B-1 size 분기 영구 도달불능 dead code (컨버전 게이트 GSCDPOP)
+X-WGT-DATA-DEP-01,runway,X-WGT-DATA-DEP-01,Y,후니 DB의 가격·제약·위젯용 테이블 미작성이 위젯 임계경로
+X-WGT-F3FIX-01,runway,X-WGT-F3FIX-01,Y,F-3 TieredDiscount 정대표 GSBGRDY fixture 미보유 (비차단 잔존)
+X-WGT-F4-01,runway,X-WGT-F4-01,Y,F-4 finish-select-box 임계치 분기 부재 — 후니 후가공 데이터 확정 대기
+X-WGT-G5-01,runway,X-WGT-G5-01,Y,G-5 의류 apparel 배타삼항이 DIR_MTR 필수 가격축을 드롭 (실결함 확정)
+X-WGT-G6-01,runway,X-WGT-G6-01,Y,G-6 굿즈 수량 필드축 스왑 — ORD_CNT vs PRN_CNT 가격권위 배선 불일치
+X-WGT-HTTP-01,runway,X-WGT-HTTP-01,Y,G-INT-0 런타임 가격경로가 fixture 정적룩업 — 실 HTTP 배선 회귀가드 부재
+X-WGT-OPTMAP-01,runway,X-WGT-OPTMAP-01,Y,"_opt_maps 자동변환이 위젯 전용 — 시뮬레이터 미동작, 위젯 경로 별도 작업 필요"
+X-WGT-PRICEEQ-01,runway,X-WGT-PRICEEQ-01,Y,의류·ACC·포스터 가격 동등성 미마감 — PRICE>0 재캡처 미완
+X-WGT-PUNCH-01,runway,X-WGT-PUNCH-01,Y,타공 위젯 코드트랙 — 시뮬레이터/위젯이 procs detail{타공수}를 전송해야 타공수별 가산이 작동
+X-WGT-W2B-01,runway,X-WGT-W2B-01,Y,W2-b 노트류 INN_DFT tmpl_price 요청 shape 결함 → 합계 0
+X-WGTF-BRIDGE-01,runway,X-WGTF-BRIDGE-01,Y,U-12 productRedWidgetSDK.js(브릿지/로더) 라인 단위 근거 부재
+X-WGTF-CODE-01,runway,X-WGTF-CODE-01,Y,캡처 상품코드·BNSTDFT/STDRCAD 정의 미상 (U-11 · U-13)
+X-WGTF-EDICUS-01,runway,X-WGTF-EDICUS-01,Y,에디터 연동 계약 미상 (U-6 KOI vs RP 타입 결정요인 · U-7 createProject projectOptions)
+X-WGTF-PDF-01,runway,X-WGTF-PDF-01,Y,PDF 업로드 경로 미상 (U-5 최종 제출 필드 · U-2 uploadType 규칙 · U-10 PDF 가용성)
+X-WGTF-S3-01,runway,X-WGTF-S3-01,Y,S3 presigned 업로드 계약 미상 (U-3 엔드포인트 호스트 · U-4 유효기간)
+X-WGTF-SCOPE-01,runway,X-WGTF-SCOPE-01,Y,U-14 26 카테고리 중 신위젯 적용 범위 미상 — matrix 카테고리 행이 추정값
+X-WGTF-SUBMIT-01,runway,X-WGTF-SUBMIT-01,Y,위젯→장바구니/주문 제출 계약 미상 (U-1 sdkCreatePot · U-9 호스트 핸드오프)
+SCOPE-001,scope,launch-scope#no=1,N,쇼핑몰 / 로그인 / 일반 로그인
+SCOPE-002,scope,launch-scope#no=2,N,쇼핑몰 / 로그인 / 아이디 찾기 (이메일 발송)
+SCOPE-003,scope,launch-scope#no=3,N,쇼핑몰 / 로그인 / 비밀번호 찾기 (휴대폰 임시PW)
+SCOPE-004,scope,launch-scope#no=4,N,쇼핑몰 / 회원가입 / 약관동의
+SCOPE-005,scope,launch-scope#no=5,N,쇼핑몰 / 회원가입 / 정보입력
+SCOPE-006,scope,launch-scope#no=6,N,쇼핑몰 / 회원가입 / 이메일 중복확인
+SCOPE-007,scope,launch-scope#no=7,N,쇼핑몰 / 회원가입 / 휴대전화 인증
+SCOPE-008,scope,launch-scope#no=8,N,쇼핑몰 / 회원가입 / 가입완료 메일 발송
+SCOPE-009,scope,launch-scope#no=9,N,쇼핑몰 / 마이페이지 / 주문조회
+SCOPE-010,scope,launch-scope#no=10,N,쇼핑몰 / 마이페이지 / 주문상세조회(편집상품 미리보기)
+SCOPE-011,scope,launch-scope#no=11,N,쇼핑몰 / 마이페이지 / 옵션보관함 (저장된 인쇄옵션)
+SCOPE-012,scope,launch-scope#no=12,N,쇼핑몰 / 마이페이지 / 쿠폰관리 
+SCOPE-013,scope,launch-scope#no=13,N,쇼핑몰 / 마이페이지 / 쿠폰등록
+SCOPE-014,scope,launch-scope#no=14,N,쇼핑몰 / 마이페이지 / 프린팅머니
+SCOPE-015,scope,launch-scope#no=15,N,쇼핑몰 / 마이페이지 / 머니충전
+SCOPE-016,scope,launch-scope#no=16,N,쇼핑몰 / 마이페이지 / 나의 상품Q&A + 문의하기
+SCOPE-017,scope,launch-scope#no=17,N,쇼핑몰 / 마이페이지 / 나의 리뷰
+SCOPE-018,scope,launch-scope#no=18,N,쇼핑몰 / 마이페이지 / 리뷰쓰기(사진업로드) 수정/삭제
+SCOPE-019,scope,launch-scope#no=19,N,쇼핑몰 / 마이페이지 / 나의 체험단 활동내역 + 후기
+SCOPE-020,scope,launch-scope#no=20,N,쇼핑몰 / 마이페이지 / 1:1문의 + 문의하기
+SCOPE-021,scope,launch-scope#no=21,N,쇼핑몰 / 마이페이지 / 회원정보수정
+SCOPE-022,scope,launch-scope#no=22,N,쇼핑몰 / 마이페이지 / 회원정보수정_비밀번호입력
+SCOPE-023,scope,launch-scope#no=23,N,쇼핑몰 / 마이페이지 / 비밀번호변경
+SCOPE-024,scope,launch-scope#no=24,N,쇼핑몰 / 마이페이지 / 회원탈퇴
+SCOPE-025,scope,launch-scope#no=25,N,쇼핑몰 / 마이페이지 / 증빙서류발급내역 (현금영수증+세금계산서)
+SCOPE-026,scope,launch-scope#no=26,N,쇼핑몰 / 마이페이지 / 사업자정보(목록)
+SCOPE-027,scope,launch-scope#no=27,N,쇼핑몰 / 마이페이지 / 사업자정보등록(쓰기)
+SCOPE-028,scope,launch-scope#no=28,N,쇼핑몰 / 마이페이지 / 현금영수증정보
+SCOPE-029,scope,launch-scope#no=29,N,쇼핑몰 / 마이페이지 / 메인
+SCOPE-030,scope,launch-scope#no=30,N,쇼핑몰 / 마이페이지 / 서브메인(랜딩페이지)
+SCOPE-031,scope,launch-scope#no=31,N,쇼핑몰 / 마이페이지 / LIST (검색결과)
+SCOPE-032,scope,launch-scope#no=32,N,쇼핑몰 / 인쇄상품 / A1 상품 기본정보 세팅(상품코드·주문가능·회원)
+SCOPE-033,scope,launch-scope#no=33,N,쇼핑몰 / 인쇄상품 / A2 상품별 옵션 목록 불러오기
+SCOPE-034,scope,launch-scope#no=34,N,쇼핑몰 / 인쇄상품 / B1 규격(사이즈) 선택
+SCOPE-035,scope,launch-scope#no=35,N,쇼핑몰 / 인쇄상품 / B2 비규격 사용자입력(가로×세로 최소/최대)
+SCOPE-036,scope,launch-scope#no=36,N,쇼핑몰 / 인쇄상품 / B3 수량 선택+직접입력
+SCOPE-037,scope,launch-scope#no=37,N,쇼핑몰 / 인쇄상품 / B4 종이/소재 선택(+평량)
+SCOPE-038,scope,launch-scope#no=38,N,쇼핑몰 / 인쇄상품 / B5 인쇄 도수(단/양면)+별색·화이트
+SCOPE-039,scope,launch-scope#no=39,N,쇼핑몰 / 인쇄상품 / B6 코팅
+SCOPE-040,scope,launch-scope#no=40,N,쇼핑몰 / 인쇄상품 / B7 커팅/조각수/모서리
+SCOPE-041,scope,launch-scope#no=41,N,쇼핑몰 / 인쇄상품 / B8 접지/오시/미싱
+SCOPE-042,scope,launch-scope#no=42,N,쇼핑몰 / 인쇄상품 / B9 제본(방향·면지·링컬러·바인더링·투명커버)
+SCOPE-043,scope,launch-scope#no=43,N,쇼핑몰 / 인쇄상품 / B10 내지/표지 그룹 분리
+SCOPE-044,scope,launch-scope#no=44,N,쇼핑몰 / 인쇄상품 / B11 박/형압(앞·뒤·크기·박칼라)
+SCOPE-045,scope,launch-scope#no=45,N,쇼핑몰 / 인쇄상품 / B12 캘린더 가공/장수
+SCOPE-046,scope,launch-scope#no=46,N,쇼핑몰 / 인쇄상품 / B13 추가상품(봉투 등)
+SCOPE-047,scope,launch-scope#no=47,N,쇼핑몰 / 인쇄상품 / B14 개별포장
+SCOPE-048,scope,launch-scope#no=48,N,쇼핑몰 / 인쇄상품 / B15 옵션 제약·조건부 노출(같이 못 고르는 조합 등)
+SCOPE-049,scope,launch-scope#no=49,N,쇼핑몰 / 인쇄상품 / C1 옵션 변경 시 가격 실시간 재계산
+SCOPE-050,scope,launch-scope#no=50,N,쇼핑몰 / 인쇄상품 / C2 수량별 가격표 보기
+SCOPE-051,scope,launch-scope#no=51,N,쇼핑몰 / 인쇄상품 / C3 견적서 생성·다운로드
+SCOPE-052,scope,launch-scope#no=52,N,쇼핑몰 / 인쇄상품 / D1 파일 업로드(PDF)
+SCOPE-053,scope,launch-scope#no=53,N,쇼핑몰 / 인쇄상품 / D2 편집상품 미리보기·썸네일
+SCOPE-054,scope,launch-scope#no=54,N,쇼핑몰 / 인쇄상품 / D3 온라인 에디터 연동(템플릿·편집)
+SCOPE-055,scope,launch-scope#no=55,N,쇼핑몰 / 인쇄상품 / D4 가변데이터 인쇄(VDP)
+SCOPE-056,scope,launch-scope#no=56,N,쇼핑몰 / 인쇄상품 / D5 표지/작업 템플릿 다운로드
+SCOPE-057,scope,launch-scope#no=57,N,쇼핑몰 / 인쇄상품 / E1 규격 가이드 모달
+SCOPE-058,scope,launch-scope#no=58,N,쇼핑몰 / 인쇄상품 / E2 인쇄영역·도련 가이드
+SCOPE-059,scope,launch-scope#no=59,N,쇼핑몰 / 인쇄상품 / E3 주문가능 자재(용지) 목록 모달
+SCOPE-060,scope,launch-scope#no=60,N,쇼핑몰 / 인쇄상품 / E4 작업/재단/블리드 사이즈 안내
+SCOPE-061,scope,launch-scope#no=61,N,쇼핑몰 / 인쇄상품 / F1 주문 전 검증(필수옵션·파일·로그인)
+SCOPE-062,scope,launch-scope#no=62,N,쇼핑몰 / 인쇄상품 / F2 주문 데이터 생성(선택 옵션을 주문으로 변환)
+SCOPE-063,scope,launch-scope#no=63,N,쇼핑몰 / 인쇄상품 / F3 우측 플로팅 주문박스(가격·CTA)
+SCOPE-064,scope,launch-scope#no=64,N,쇼핑몰 / 인쇄상품 / F4 장바구니 담기
+SCOPE-065,scope,launch-scope#no=65,N,쇼핑몰 / 인쇄상품 / F5 옵션 보관함 저장·불러오기
+SCOPE-066,scope,launch-scope#no=66,N,쇼핑몰 / 인쇄상품 / G1 상세설명 콘텐츠(하단 detail)
+SCOPE-067,scope,launch-scope#no=67,N,쇼핑몰 / 고객센터 / 공지사항
+SCOPE-068,scope,launch-scope#no=68,N,쇼핑몰 / 고객센터 / 자주묻는질문
+SCOPE-069,scope,launch-scope#no=69,N,쇼핑몰 / 고객센터 / 상품Q&A + 문의하기
+SCOPE-070,scope,launch-scope#no=70,N,쇼핑몰 / 고객센터 / 대량주문 견적문의
+SCOPE-071,scope,launch-scope#no=71,N,쇼핑몰 / 고객센터 / 기업인쇄상담
+SCOPE-072,scope,launch-scope#no=72,N,쇼핑몰 / 고객센터 / 디자인상담
+SCOPE-073,scope,launch-scope#no=73,N,쇼핑몰 / 고객센터 / 비회원 주문조회 (주문번호+이메일+휴대폰)
+SCOPE-074,scope,launch-scope#no=74,N,쇼핑몰 / 결제 / 수동카드결제 (PC+모바일)
+SCOPE-075,scope,launch-scope#no=75,N,쇼핑몰 / 주문 / 파일/편집 정보입력
+SCOPE-076,scope,launch-scope#no=76,N,쇼핑몰 / 주문 / 보관함/장바구니
+SCOPE-077,scope,launch-scope#no=77,N,쇼핑몰 / 주문 / 배송정보입력
+SCOPE-078,scope,launch-scope#no=78,N,쇼핑몰 / 주문 / 배송지목록
+SCOPE-079,scope,launch-scope#no=79,N,쇼핑몰 / 주문 / 배송지입력
+SCOPE-080,scope,launch-scope#no=80,N,쇼핑몰 / 주문 / 결제하기 (이니시스 연동)
+SCOPE-081,scope,launch-scope#no=81,N,쇼핑몰 / 주문 / 주문완료 + 주문완료 메일 발송
+SCOPE-082,scope,launch-scope#no=82,N,쇼핑몰 / 주문 / 디자인 의뢰하기
+SCOPE-083,scope,launch-scope#no=83,N,쇼핑몰 / 정보 / 회사소개
+SCOPE-084,scope,launch-scope#no=84,N,쇼핑몰 / 정보 / 이용약관
+SCOPE-085,scope,launch-scope#no=85,N,쇼핑몰 / 정보 / 개인정보보호
+SCOPE-086,scope,launch-scope#no=86,N,쇼핑몰 / 정보 / 찾아오시는 길
+SCOPE-087,scope,launch-scope#no=87,N,쇼핑몰 / 가이드 / 작업시 유의사항 (11개 가이드)
+SCOPE-088,scope,launch-scope#no=88,N,쇼핑몰 / 마케팅 / 랜딩페이지 5종 (종이/제본/캘린더/파우치/스티커)
+SCOPE-089,scope,launch-scope#no=89,N,쇼핑몰 / 마케팅 / 이용후기 메인
+SCOPE-090,scope,launch-scope#no=90,N,쇼핑몰 / 마케팅 / 체험단 모집 메인
+SCOPE-091,scope,launch-scope#no=91,N,쇼핑몰 / 상품 / 포장재상품 주문하기
+SCOPE-092,scope,launch-scope#no=92,N,쇼핑몰 / 상품 / 굿즈상품 주문하기 + 파우치&백
+SCOPE-093,scope,launch-scope#no=93,N,쇼핑몰 / 상품 / 수작 상품 (메인+상품페이지)
+SCOPE-094,scope,launch-scope#no=94,N,관리자 / 관리자 / 관리자 등록/관리
+SCOPE-095,scope,launch-scope#no=95,N,관리자 / 거래처 / 거래처관리 (등록/수정/처리)
+SCOPE-096,scope,launch-scope#no=96,N,관리자 / 거래처 / 매장게시판
+SCOPE-097,scope,launch-scope#no=97,N,관리자 / 원장관리 / 계좌관리 (원장용 계좌 등록)
+SCOPE-098,scope,launch-scope#no=98,N,관리자 / 원장관리 / 원장관리 (오프라인 거래 등록)
+SCOPE-099,scope,launch-scope#no=99,N,관리자 / 원장관리 / 업체별 미수금
+SCOPE-100,scope,launch-scope#no=100,N,관리자 / 상품관리 / 인쇄/제본 상품등록 (미리보기/등록/수정)
+SCOPE-101,scope,launch-scope#no=101,N,관리자 / 상품관리 / 사이즈선택 팝업
+SCOPE-102,scope,launch-scope#no=102,N,관리자 / 상품관리 / 소재선택 팝업
+SCOPE-103,scope,launch-scope#no=103,N,관리자 / 상품관리 / 종이선택 팝업
+SCOPE-104,scope,launch-scope#no=104,N,관리자 / 상품관리 / 가격관리 팝업 8종
+SCOPE-105,scope,launch-scope#no=105,N,관리자 / 상품관리 / 사이즈관리
+SCOPE-106,scope,launch-scope#no=106,N,관리자 / 상품관리 / 소재관리
+SCOPE-107,scope,launch-scope#no=107,N,관리자 / 상품관리 / 용지관리
+SCOPE-108,scope,launch-scope#no=108,N,관리자 / 상품관리 / 가격관리 (출력/코팅/후가공/제본)
+SCOPE-109,scope,launch-scope#no=109,N,관리자 / 상품관리 / 굿즈 카테고리관리
+SCOPE-110,scope,launch-scope#no=110,N,관리자 / 상품관리 / 굿즈 상품등록 (카테고리/옵션)
+SCOPE-111,scope,launch-scope#no=111,N,관리자 / 상품관리 / 수작 상품등록
+SCOPE-112,scope,launch-scope#no=112,N,관리자 / 상품관리 / 포장재 상품등록
+SCOPE-113,scope,launch-scope#no=113,N,관리자 / 상품관리 / 디자인 상품등록
+SCOPE-114,scope,launch-scope#no=114,N,관리자 / 게시판 / 공지사항 관리 (등록/수정/html생성)
+SCOPE-115,scope,launch-scope#no=115,N,관리자 / 게시판 / 자주묻는질문 관리
+SCOPE-116,scope,launch-scope#no=116,N,관리자 / 게시판 / 대량주문 견적문의 (확인/답변)
+SCOPE-117,scope,launch-scope#no=117,N,관리자 / 게시판 / 기업인쇄상담 (확인/답변)
+SCOPE-118,scope,launch-scope#no=118,N,관리자 / 게시판 / 디자인상담 (확인/답변)
+SCOPE-119,scope,launch-scope#no=119,N,관리자 / 게시판 / 상품Q&A (확인/답변)
+SCOPE-120,scope,launch-scope#no=120,N,관리자 / 게시판 / 1:1문의 (확인/답변)
+SCOPE-121,scope,launch-scope#no=121,N,관리자 / 게시판 / 체험단관리 (등록/수정/신청내역)
+SCOPE-122,scope,launch-scope#no=122,N,관리자 / 게시판 / 이용후기관리 (관리자등록/수정)
+SCOPE-123,scope,launch-scope#no=123,N,관리자 / 회원관리 / 회원관리 (주문내역/정보확인)
+SCOPE-124,scope,launch-scope#no=124,N,관리자 / 회원관리 / 탈퇴회원 관리
+SCOPE-125,scope,launch-scope#no=125,N,관리자 / 회원관리 / 프린팅머니 관리 (수정/처리)
+SCOPE-126,scope,launch-scope#no=126,N,관리자 / 회원관리 / 쿠폰관리 (발행/매칭/사용내역)
+SCOPE-127,scope,launch-scope#no=127,N,관리자 / 회원관리 / 쿠폰등록내역
+SCOPE-128,scope,launch-scope#no=128,N,관리자 / 회원관리 / 쿠폰사용내역
+SCOPE-129,scope,launch-scope#no=129,N,관리자 / 통계 / 인쇄/제본 상품통계 (상세보기)
+SCOPE-130,scope,launch-scope#no=130,N,관리자 / 통계 / 굿즈 상품통계 (상세보기)
+SCOPE-131,scope,launch-scope#no=131,N,관리자 / 통계 / 패키지 상품통계 (상세보기)
+SCOPE-132,scope,launch-scope#no=132,N,관리자 / 통계 / 수작 상품통계 (상세보기)
+SCOPE-133,scope,launch-scope#no=133,N,관리자 / 통계 / 월별 매출통계
+SCOPE-134,scope,launch-scope#no=134,N,관리자 / 통계 / 굿즈 발주/정산 (Excel 다운)
+SCOPE-135,scope,launch-scope#no=135,N,관리자 / 통계 / 제작상품 팀별통계 (Excel 다운)
+SCOPE-136,scope,launch-scope#no=136,N,관리자 / 주문관리 / 주문관리-인쇄/제본/굿즈 (상세)
+SCOPE-137,scope,launch-scope#no=137,N,관리자 / 주문관리 / 파일확인처리
+SCOPE-138,scope,launch-scope#no=138,N,관리자 / 주문관리 / 재업로드요청 문자 발송
+SCOPE-139,scope,launch-scope#no=139,N,관리자 / 주문관리 / 주문서출력
+SCOPE-140,scope,launch-scope#no=140,N,관리자 / 주문관리 / 주문상태변경 처리 (+ 문자)
+SCOPE-141,scope,launch-scope#no=141,N,관리자 / 주문관리 / 주문관리-후불결제
+SCOPE-142,scope,launch-scope#no=142,N,관리자 / 주문관리 / 증빙서류발급 관리
+SCOPE-143,scope,launch-scope#no=143,N,관리자 / 주문관리 / 주문상태변경 (일괄)
+SCOPE-144,scope,launch-scope#no=144,N,관리자 / 주문관리 / 고객 SMS 발송
+SCOPE-145,scope,launch-scope#no=145,N,쇼핑몰 / 회원 / 간편로그인(네이버/카카오)
+SCOPE-146,scope,launch-scope#no=146,N,쇼핑몰 / 회원 / 회원등급(VIP·B2B 등급가)
+SCOPE-147,scope,launch-scope#no=147,N,쇼핑몰 / 회원 / 휴면회원 전환/해제
+SCOPE-148,scope,launch-scope#no=148,N,쇼핑몰 / 결제 / 무통장입금/가상계좌+입금확인
+SCOPE-149,scope,launch-scope#no=149,N,쇼핑몰 / 결제 / 간편결제(네이버페이)
+SCOPE-150,scope,launch-scope#no=150,N,쇼핑몰 / 주문 / 도서산간 추가배송비 데이터화
+SCOPE-151,scope,launch-scope#no=151,N,쇼핑몰 / 주문 / 배송비 템플릿/조건부 무료배송
+SCOPE-152,scope,launch-scope#no=152,N,쇼핑몰 / 정보 / 세금계산서 발행 플로우(B2B)
+SCOPE-153,scope,launch-scope#no=153,N,쇼핑몰 / 상품 / 전시 카테고리 트리 운영툴
+SCOPE-154,scope,launch-scope#no=154,N,쇼핑몰 / 상품 / 상품 검색·필터 엔진
+SCOPE-155,scope,launch-scope#no=155,N,쇼핑몰 / 마케팅 / 베스트/기획전 진열 운영툴
+SCOPE-156,scope,launch-scope#no=156,N,쇼핑몰 / 마이페이지 / 첫구매/생일 자동쿠폰
+SCOPE-157,scope,launch-scope#no=157,N,관리자 / 주문관리 / 생산정보 전달(주문→생산BOM 환원)
+SCOPE-158,scope,launch-scope#no=158,N,관리자 / 상품관리 / MES_ITEM_CD 전상품 채번
+SCOPE-159,scope,launch-scope#no=159,N,관리자 / 주문관리 / 생산파일명 일관화(Rename 자동)
+SCOPE-160,scope,launch-scope#no=160,N,관리자 / 주문관리 / 접수파일 썸네일 자동생성
+SCOPE-161,scope,launch-scope#no=161,N,쇼핑몰 / 주문 / 주문상태 추적(고객 마이페이지)
+SCOPE-162,scope,launch-scope#no=162,N,관리자 / 주문관리 / 주문/주문상세 런타임 그릇 구축
+IA-001,ia,260616_IA#02_IA마스터!No=1,N,쇼핑몰 / 로그인 / 일반 로그인
+IA-002,ia,260616_IA#02_IA마스터!No=2,N,쇼핑몰 / 로그인 / 아이디 찾기 (이메일 발송)
+IA-003,ia,260616_IA#02_IA마스터!No=3,N,쇼핑몰 / 로그인 / 비밀번호 찾기 (휴대폰 임시PW)
+IA-004,ia,260616_IA#02_IA마스터!No=4,N,쇼핑몰 / 회원가입 / 약관동의
+IA-005,ia,260616_IA#02_IA마스터!No=5,N,쇼핑몰 / 회원가입 / 정보입력
+IA-006,ia,260616_IA#02_IA마스터!No=6,N,쇼핑몰 / 회원가입 / 이메일 중복확인
+IA-007,ia,260616_IA#02_IA마스터!No=7,N,쇼핑몰 / 회원가입 / 휴대전화 인증
+IA-008,ia,260616_IA#02_IA마스터!No=8,N,쇼핑몰 / 회원가입 / 가입완료 메일 발송
+IA-009,ia,260616_IA#02_IA마스터!No=9,N,쇼핑몰 / 마이페이지 / 주문조회
+IA-010,ia,260616_IA#02_IA마스터!No=10,N,쇼핑몰 / 마이페이지 / 주문상세조회(편집상품 미리보기)
+IA-011,ia,260616_IA#02_IA마스터!No=11,N,쇼핑몰 / 마이페이지 / 옵션보관함 (저장된 인쇄옵션)
+IA-012,ia,260616_IA#02_IA마스터!No=12,N,쇼핑몰 / 마이페이지 / 쿠폰관리 
+IA-013,ia,260616_IA#02_IA마스터!No=13,N,쇼핑몰 / 마이페이지 / 쿠폰등록
+IA-014,ia,260616_IA#02_IA마스터!No=14,N,쇼핑몰 / 마이페이지 / 프린팅머니
+IA-015,ia,260616_IA#02_IA마스터!No=15,N,쇼핑몰 / 마이페이지 / 머니충전
+IA-016,ia,260616_IA#02_IA마스터!No=16,N,쇼핑몰 / 마이페이지 / 나의 상품Q&A + 문의하기
+IA-017,ia,260616_IA#02_IA마스터!No=17,N,쇼핑몰 / 마이페이지 / 나의 리뷰
+IA-018,ia,260616_IA#02_IA마스터!No=18,N,쇼핑몰 / 마이페이지 / 리뷰쓰기(사진업로드) 수정/삭제
+IA-019,ia,260616_IA#02_IA마스터!No=19,N,쇼핑몰 / 마이페이지 / 나의 체험단 활동내역 + 후기
+IA-020,ia,260616_IA#02_IA마스터!No=20,N,쇼핑몰 / 마이페이지 / 1:1문의 + 문의하기
+IA-021,ia,260616_IA#02_IA마스터!No=21,N,쇼핑몰 / 마이페이지 / 회원정보수정
+IA-022,ia,260616_IA#02_IA마스터!No=22,N,쇼핑몰 / 마이페이지 / 회원정보수정_비밀번호입력
+IA-023,ia,260616_IA#02_IA마스터!No=23,N,쇼핑몰 / 마이페이지 / 비밀번호변경
+IA-024,ia,260616_IA#02_IA마스터!No=24,N,쇼핑몰 / 마이페이지 / 회원탈퇴
+IA-025,ia,260616_IA#02_IA마스터!No=25,N,쇼핑몰 / 마이페이지 / 증빙서류발급내역 (현금영수증+세금계산서)
+IA-026,ia,260616_IA#02_IA마스터!No=26,N,쇼핑몰 / 마이페이지 / 사업자정보(목록)
+IA-027,ia,260616_IA#02_IA마스터!No=27,N,쇼핑몰 / 마이페이지 / 사업자정보등록(쓰기)
+IA-028,ia,260616_IA#02_IA마스터!No=28,N,쇼핑몰 / 마이페이지 / 현금영수증정보
+IA-029,ia,260616_IA#02_IA마스터!No=29,N,쇼핑몰 / 마이페이지 / 메인
+IA-030,ia,260616_IA#02_IA마스터!No=30,N,쇼핑몰 / 마이페이지 / 서브메인(랜딩페이지)
+IA-031,ia,260616_IA#02_IA마스터!No=31,N,쇼핑몰 / 마이페이지 / LIST (검색결과)
+IA-032,ia,260616_IA#02_IA마스터!No=32,N,쇼핑몰 / 인쇄상품 / A1 상품 기본정보 세팅(상품코드·주문가능·회원)
+IA-033,ia,260616_IA#02_IA마스터!No=33,N,쇼핑몰 / 인쇄상품 / A2 상품별 옵션 목록 불러오기
+IA-034,ia,260616_IA#02_IA마스터!No=34,N,쇼핑몰 / 인쇄상품 / B1 규격(사이즈) 선택
+IA-035,ia,260616_IA#02_IA마스터!No=35,N,쇼핑몰 / 인쇄상품 / B2 비규격 사용자입력(가로×세로 최소/최대)
+IA-036,ia,260616_IA#02_IA마스터!No=36,N,쇼핑몰 / 인쇄상품 / B3 수량 선택+직접입력
+IA-037,ia,260616_IA#02_IA마스터!No=37,N,쇼핑몰 / 인쇄상품 / B4 종이/소재 선택(+평량)
+IA-038,ia,260616_IA#02_IA마스터!No=38,N,쇼핑몰 / 인쇄상품 / B5 인쇄 도수(단/양면)+별색·화이트
+IA-039,ia,260616_IA#02_IA마스터!No=39,N,쇼핑몰 / 인쇄상품 / B6 코팅
+IA-040,ia,260616_IA#02_IA마스터!No=40,N,쇼핑몰 / 인쇄상품 / B7 커팅/조각수/모서리
+IA-041,ia,260616_IA#02_IA마스터!No=41,N,쇼핑몰 / 인쇄상품 / B8 접지/오시/미싱
+IA-042,ia,260616_IA#02_IA마스터!No=42,N,쇼핑몰 / 인쇄상품 / B9 제본(방향·면지·링컬러·바인더링·투명커버)
+IA-043,ia,260616_IA#02_IA마스터!No=43,N,쇼핑몰 / 인쇄상품 / B10 내지/표지 그룹 분리
+IA-044,ia,260616_IA#02_IA마스터!No=44,N,쇼핑몰 / 인쇄상품 / B11 박/형압(앞·뒤·크기·박칼라)
+IA-045,ia,260616_IA#02_IA마스터!No=45,N,쇼핑몰 / 인쇄상품 / B12 캘린더 가공/장수
+IA-046,ia,260616_IA#02_IA마스터!No=46,N,쇼핑몰 / 인쇄상품 / B13 추가상품(봉투 등)
+IA-047,ia,260616_IA#02_IA마스터!No=47,N,쇼핑몰 / 인쇄상품 / B14 개별포장
+IA-048,ia,260616_IA#02_IA마스터!No=48,N,쇼핑몰 / 인쇄상품 / B15 옵션 제약·조건부 노출(같이 못 고르는 조합 등)
+IA-049,ia,260616_IA#02_IA마스터!No=49,N,쇼핑몰 / 인쇄상품 / C1 옵션 변경 시 가격 실시간 재계산
+IA-050,ia,260616_IA#02_IA마스터!No=50,N,쇼핑몰 / 인쇄상품 / C2 수량별 가격표 보기
+IA-051,ia,260616_IA#02_IA마스터!No=51,N,쇼핑몰 / 인쇄상품 / C3 견적서 생성·다운로드
+IA-052,ia,260616_IA#02_IA마스터!No=52,N,쇼핑몰 / 인쇄상품 / D1 파일 업로드(PDF)
+IA-053,ia,260616_IA#02_IA마스터!No=53,N,쇼핑몰 / 인쇄상품 / D2 편집상품 미리보기·썸네일
+IA-054,ia,260616_IA#02_IA마스터!No=54,N,쇼핑몰 / 인쇄상품 / D3 온라인 에디터 연동(템플릿·편집)
+IA-055,ia,260616_IA#02_IA마스터!No=55,N,쇼핑몰 / 인쇄상품 / D4 가변데이터 인쇄(VDP)
+IA-056,ia,260616_IA#02_IA마스터!No=56,N,쇼핑몰 / 인쇄상품 / D5 표지/작업 템플릿 다운로드
+IA-057,ia,260616_IA#02_IA마스터!No=57,N,쇼핑몰 / 인쇄상품 / E1 규격 가이드 모달
+IA-058,ia,260616_IA#02_IA마스터!No=58,N,쇼핑몰 / 인쇄상품 / E2 인쇄영역·도련 가이드
+IA-059,ia,260616_IA#02_IA마스터!No=59,N,쇼핑몰 / 인쇄상품 / E3 주문가능 자재(용지) 목록 모달
+IA-060,ia,260616_IA#02_IA마스터!No=60,N,쇼핑몰 / 인쇄상품 / E4 작업/재단/블리드 사이즈 안내
+IA-061,ia,260616_IA#02_IA마스터!No=61,N,쇼핑몰 / 인쇄상품 / F1 주문 전 검증(필수옵션·파일·로그인)
+IA-062,ia,260616_IA#02_IA마스터!No=62,N,쇼핑몰 / 인쇄상품 / F2 주문 데이터 생성(선택 옵션을 주문으로 변환)
+IA-063,ia,260616_IA#02_IA마스터!No=63,N,쇼핑몰 / 인쇄상품 / F3 우측 플로팅 주문박스(가격·CTA)
+IA-064,ia,260616_IA#02_IA마스터!No=64,N,쇼핑몰 / 인쇄상품 / F4 장바구니 담기
+IA-065,ia,260616_IA#02_IA마스터!No=65,N,쇼핑몰 / 인쇄상품 / F5 옵션 보관함 저장·불러오기
+IA-066,ia,260616_IA#02_IA마스터!No=66,N,쇼핑몰 / 인쇄상품 / G1 상세설명 콘텐츠(하단 detail)
+IA-067,ia,260616_IA#02_IA마스터!No=67,N,쇼핑몰 / 고객센터 / 공지사항
+IA-068,ia,260616_IA#02_IA마스터!No=68,N,쇼핑몰 / 고객센터 / 자주묻는질문
+IA-069,ia,260616_IA#02_IA마스터!No=69,N,쇼핑몰 / 고객센터 / 상품Q&A + 문의하기
+IA-070,ia,260616_IA#02_IA마스터!No=70,N,쇼핑몰 / 고객센터 / 대량주문 견적문의
+IA-071,ia,260616_IA#02_IA마스터!No=71,N,쇼핑몰 / 고객센터 / 기업인쇄상담
+IA-072,ia,260616_IA#02_IA마스터!No=72,N,쇼핑몰 / 고객센터 / 디자인상담
+IA-073,ia,260616_IA#02_IA마스터!No=73,N,쇼핑몰 / 고객센터 / 비회원 주문조회 (주문번호+이메일+휴대폰)
+IA-074,ia,260616_IA#02_IA마스터!No=74,N,쇼핑몰 / 결제 / 수동카드결제 (PC+모바일)
+IA-075,ia,260616_IA#02_IA마스터!No=75,N,쇼핑몰 / 주문 / 파일/편집 정보입력
+IA-076,ia,260616_IA#02_IA마스터!No=76,N,쇼핑몰 / 주문 / 보관함/장바구니
+IA-077,ia,260616_IA#02_IA마스터!No=77,N,쇼핑몰 / 주문 / 배송정보입력
+IA-078,ia,260616_IA#02_IA마스터!No=78,N,쇼핑몰 / 주문 / 배송지목록
+IA-079,ia,260616_IA#02_IA마스터!No=79,N,쇼핑몰 / 주문 / 배송지입력
+IA-080,ia,260616_IA#02_IA마스터!No=80,N,쇼핑몰 / 주문 / 결제하기 (이니시스 연동)
+IA-081,ia,260616_IA#02_IA마스터!No=81,N,쇼핑몰 / 주문 / 주문완료 + 주문완료 메일 발송
+IA-082,ia,260616_IA#02_IA마스터!No=82,N,쇼핑몰 / 주문 / 디자인 의뢰하기
+IA-083,ia,260616_IA#02_IA마스터!No=83,N,쇼핑몰 / 정보 / 회사소개
+IA-084,ia,260616_IA#02_IA마스터!No=84,N,쇼핑몰 / 정보 / 이용약관
+IA-085,ia,260616_IA#02_IA마스터!No=85,N,쇼핑몰 / 정보 / 개인정보보호
+IA-086,ia,260616_IA#02_IA마스터!No=86,N,쇼핑몰 / 정보 / 찾아오시는 길
+IA-087,ia,260616_IA#02_IA마스터!No=87,N,쇼핑몰 / 가이드 / 작업시 유의사항 (11개 가이드)
+IA-088,ia,260616_IA#02_IA마스터!No=88,N,쇼핑몰 / 마케팅 / 랜딩페이지 5종 (종이/제본/캘린더/파우치/스티커)
+IA-089,ia,260616_IA#02_IA마스터!No=89,N,쇼핑몰 / 마케팅 / 이용후기 메인
+IA-090,ia,260616_IA#02_IA마스터!No=90,N,쇼핑몰 / 마케팅 / 체험단 모집 메인
+IA-091,ia,260616_IA#02_IA마스터!No=91,N,쇼핑몰 / 상품 / 포장재상품 주문하기
+IA-092,ia,260616_IA#02_IA마스터!No=92,N,쇼핑몰 / 상품 / 굿즈상품 주문하기 + 파우치&백
+IA-093,ia,260616_IA#02_IA마스터!No=93,N,쇼핑몰 / 상품 / 수작 상품 (메인+상품페이지)
+IA-094,ia,260616_IA#02_IA마스터!No=94,N,관리자 / 관리자 / 관리자 등록/관리
+IA-095,ia,260616_IA#02_IA마스터!No=95,N,관리자 / 거래처 / 거래처관리 (등록/수정/처리)
+IA-096,ia,260616_IA#02_IA마스터!No=96,N,관리자 / 거래처 / 매장게시판
+IA-097,ia,260616_IA#02_IA마스터!No=97,N,관리자 / 원장관리 / 계좌관리 (원장용 계좌 등록)
+IA-098,ia,260616_IA#02_IA마스터!No=98,N,관리자 / 원장관리 / 원장관리 (오프라인 거래 등록)
+IA-099,ia,260616_IA#02_IA마스터!No=99,N,관리자 / 원장관리 / 업체별 미수금
+IA-100,ia,260616_IA#02_IA마스터!No=100,N,관리자 / 상품관리 / 인쇄/제본 상품등록 (미리보기/등록/수정)
+IA-101,ia,260616_IA#02_IA마스터!No=101,N,관리자 / 상품관리 / 사이즈선택 팝업
+IA-102,ia,260616_IA#02_IA마스터!No=102,N,관리자 / 상품관리 / 소재선택 팝업
+IA-103,ia,260616_IA#02_IA마스터!No=103,N,관리자 / 상품관리 / 종이선택 팝업
+IA-104,ia,260616_IA#02_IA마스터!No=104,N,관리자 / 상품관리 / 가격관리 팝업 8종
+IA-105,ia,260616_IA#02_IA마스터!No=105,N,관리자 / 상품관리 / 사이즈관리
+IA-106,ia,260616_IA#02_IA마스터!No=106,N,관리자 / 상품관리 / 소재관리
+IA-107,ia,260616_IA#02_IA마스터!No=107,N,관리자 / 상품관리 / 용지관리
+IA-108,ia,260616_IA#02_IA마스터!No=108,N,관리자 / 상품관리 / 가격관리 (출력/코팅/후가공/제본)
+IA-109,ia,260616_IA#02_IA마스터!No=109,N,관리자 / 상품관리 / 굿즈 카테고리관리
+IA-110,ia,260616_IA#02_IA마스터!No=110,N,관리자 / 상품관리 / 굿즈 상품등록 (카테고리/옵션)
+IA-111,ia,260616_IA#02_IA마스터!No=111,N,관리자 / 상품관리 / 수작 상품등록
+IA-112,ia,260616_IA#02_IA마스터!No=112,N,관리자 / 상품관리 / 포장재 상품등록
+IA-113,ia,260616_IA#02_IA마스터!No=113,N,관리자 / 상품관리 / 디자인 상품등록
+IA-114,ia,260616_IA#02_IA마스터!No=114,N,관리자 / 게시판 / 공지사항 관리 (등록/수정/html생성)
+IA-115,ia,260616_IA#02_IA마스터!No=115,N,관리자 / 게시판 / 자주묻는질문 관리
+IA-116,ia,260616_IA#02_IA마스터!No=116,N,관리자 / 게시판 / 대량주문 견적문의 (확인/답변)
+IA-117,ia,260616_IA#02_IA마스터!No=117,N,관리자 / 게시판 / 기업인쇄상담 (확인/답변)
+IA-118,ia,260616_IA#02_IA마스터!No=118,N,관리자 / 게시판 / 디자인상담 (확인/답변)
+IA-119,ia,260616_IA#02_IA마스터!No=119,N,관리자 / 게시판 / 상품Q&A (확인/답변)
+IA-120,ia,260616_IA#02_IA마스터!No=120,N,관리자 / 게시판 / 1:1문의 (확인/답변)
+IA-121,ia,260616_IA#02_IA마스터!No=121,N,관리자 / 게시판 / 체험단관리 (등록/수정/신청내역)
+IA-122,ia,260616_IA#02_IA마스터!No=122,N,관리자 / 게시판 / 이용후기관리 (관리자등록/수정)
+IA-123,ia,260616_IA#02_IA마스터!No=123,N,관리자 / 회원관리 / 회원관리 (주문내역/정보확인)
+IA-124,ia,260616_IA#02_IA마스터!No=124,N,관리자 / 회원관리 / 탈퇴회원 관리
+IA-125,ia,260616_IA#02_IA마스터!No=125,N,관리자 / 회원관리 / 프린팅머니 관리 (수정/처리)
+IA-126,ia,260616_IA#02_IA마스터!No=126,N,관리자 / 회원관리 / 쿠폰관리 (발행/매칭/사용내역)
+IA-127,ia,260616_IA#02_IA마스터!No=127,N,관리자 / 회원관리 / 쿠폰등록내역
+IA-128,ia,260616_IA#02_IA마스터!No=128,N,관리자 / 회원관리 / 쿠폰사용내역
+IA-129,ia,260616_IA#02_IA마스터!No=129,N,관리자 / 통계 / 인쇄/제본 상품통계 (상세보기)
+IA-130,ia,260616_IA#02_IA마스터!No=130,N,관리자 / 통계 / 굿즈 상품통계 (상세보기)
+IA-131,ia,260616_IA#02_IA마스터!No=131,N,관리자 / 통계 / 패키지 상품통계 (상세보기)
+IA-132,ia,260616_IA#02_IA마스터!No=132,N,관리자 / 통계 / 수작 상품통계 (상세보기)
+IA-133,ia,260616_IA#02_IA마스터!No=133,N,관리자 / 통계 / 월별 매출통계
+IA-134,ia,260616_IA#02_IA마스터!No=134,N,관리자 / 통계 / 굿즈 발주/정산 (Excel 다운)
+IA-135,ia,260616_IA#02_IA마스터!No=135,N,관리자 / 통계 / 제작상품 팀별통계 (Excel 다운)
+IA-136,ia,260616_IA#02_IA마스터!No=136,N,관리자 / 주문관리 / 주문관리-인쇄/제본/굿즈 (상세)
+IA-137,ia,260616_IA#02_IA마스터!No=137,N,관리자 / 주문관리 / 파일확인처리
+IA-138,ia,260616_IA#02_IA마스터!No=138,N,관리자 / 주문관리 / 재업로드요청 문자 발송
+IA-139,ia,260616_IA#02_IA마스터!No=139,N,관리자 / 주문관리 / 주문서출력
+IA-140,ia,260616_IA#02_IA마스터!No=140,N,관리자 / 주문관리 / 주문상태변경 처리 (+ 문자)
+IA-141,ia,260616_IA#02_IA마스터!No=141,N,관리자 / 주문관리 / 주문관리-후불결제
+IA-142,ia,260616_IA#02_IA마스터!No=142,N,관리자 / 주문관리 / 증빙서류발급 관리
+IA-143,ia,260616_IA#02_IA마스터!No=143,N,관리자 / 주문관리 / 주문상태변경 (일괄)
+IA-144,ia,260616_IA#02_IA마스터!No=144,N,관리자 / 주문관리 / 고객 SMS 발송

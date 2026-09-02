@@ -1,0 +1,440 @@
+legacy_id,원천,기능서술,원판정,돈여부,주문여부,비고
+F-003,runway,No3 로그인 — 비밀번호 찾기(휴대폰 임시PW) [PARTIAL·2차·M],미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-005,runway,No5 회원가입 — 정보입력 [PARTIAL·1차·M],미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-007,runway,No7 회원가입 — 휴대전화 인증 [PARTIAL·2차·M],미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-015,runway,No15 마이페이지 — 머니충전 [CUSTOM·2차·M],미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-019,runway,No19 마이페이지 — 나의 체험단 활동내역+후기 [CUSTOM·3차·M],미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-021,runway,No21 마이페이지 — 회원정보수정 [PARTIAL·1차·M],미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-029,runway,No29 마이페이지 — 메인(대시보드) [PARTIAL·1차·S],미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-030,runway,No30 마이페이지 — 서브메인(랜딩페이지) [PARTIAL·3차·M],미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-031,runway,No31 마이페이지 — LIST(검색결과) [PARTIAL·1차·M],미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-032,runway,No32 인쇄상품 — A1 상품 기본정보 세팅 [PARTIAL·1차·S],미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-045,runway,No45 인쇄상품 — B12 캘린더 가공/장수 [CUSTOM·2차·M],미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-055,runway,No55 인쇄상품 — D4 가변데이터 인쇄(VDP) [CUSTOM·3차·L],미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-059,runway,No59 인쇄상품 — E3 주문가능 자재 목록 모달 [CUSTOM·2차·M],미착수,False,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-062,runway,No62 인쇄상품 — F2 주문 데이터 생성(선택옵션→주문 변환) [CUSTOM·1차·L],미착수,True,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-074,runway,No74 결제 — 수동카드결제(PC+모바일) [CUSTOM·3차·M],미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-090,runway,No90 마케팅 — 체험단 모집 메인 [CUSTOM·3차·M],미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-091,runway,No91 상품 — 포장재상품 주문하기 [CUSTOM·2차·L],미착수,True,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-092,runway,No92 상품 — 굿즈상품 주문하기+파우치&백 [CUSTOM·2차·L],미착수,False,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-093,runway,No93 상품 — 수작 상품(메인+상품페이지) [CUSTOM·3차·L],미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-095,runway,No95 거래처 — 거래처관리 [CUSTOM·2차·M],미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-096,runway,No96 거래처 — 매장게시판 [PARTIAL·3차·S],미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-097,runway,No97 원장관리 — 계좌관리 [CUSTOM·2차·S],미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-099,runway,No99 원장관리 — 업체별 미수금 [CUSTOM·2차·M],미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-100,runway,No100 상품관리 — 인쇄/제본 상품등록 [CUSTOM·1차·L],미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-101,runway,No101 상품관리 — 사이즈선택 팝업 [CUSTOM·1차·M],미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-102,runway,No102 상품관리 — 소재선택 팝업 [CUSTOM·1차·M],미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-103,runway,No103 상품관리 — 종이선택 팝업 [CUSTOM·1차·M],미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-104,runway,No104 상품관리 — 가격관리 팝업 8종 [CUSTOM·1차·L],미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-105,runway,No105 상품관리 — 사이즈관리 [CUSTOM·1차·S],미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-106,runway,No106 상품관리 — 소재관리 [CUSTOM·1차·S],미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-107,runway,No107 상품관리 — 용지관리 [CUSTOM·1차·S],미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-108,runway,No108 상품관리 — 가격관리(출력/코팅/후가공/제본) [CUSTOM·1차·XL],미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-109,runway,No109 상품관리 — 굿즈 카테고리관리 [CUSTOM·2차·M],미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-110,runway,No110 상품관리 — 굿즈 상품등록 [CUSTOM·2차·L],미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-111,runway,No111 상품관리 — 수작 상품등록 [CUSTOM·3차·M],미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-112,runway,No112 상품관리 — 포장재 상품등록 [CUSTOM·2차·M],미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-113,runway,No113 상품관리 — 디자인 상품등록 [CUSTOM·3차·M],미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-121,runway,No121 게시판 — 체험단관리 [CUSTOM·3차·M],미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-122,runway,No122 게시판 — 이용후기관리 [PARTIAL·3차·M],미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-123,runway,No123 회원관리(주문/정보) — SOLVED→PARTIAL 재라벨,미착수,False,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-125,runway,No125 회원관리 — 프린팅머니 관리 [PARTIAL·2차·M],미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-126,runway,No126 회원관리 — 쿠폰관리(발행/매칭) [PARTIAL·2차·L],미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-129,runway,No129 통계 — 인쇄/제본 상품통계 [PARTIAL·2차·S],미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-130,runway,No130 통계 — 굿즈 상품통계 [PARTIAL·2차·S],미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-131,runway,No131 통계 — 패키지 상품통계 [PARTIAL·2차·S],미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-132,runway,No132 통계 — 수작 상품통계 [PARTIAL·3차·S],미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-134,runway,No134 통계 — 굿즈 발주/정산(Excel) [CUSTOM·2차·M],미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-135,runway,No135 통계 — 제작상품 팀별통계 [CUSTOM·3차·M],미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-136,runway,No136 주문관리 — 주문관리-인쇄/제본/굿즈 [PARTIAL·1차·XL],미착수,False,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-139,runway,No139 주문관리 — 주문서출력 [PARTIAL·1차·M],미착수,False,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-146,runway,No146 회원 — 회원등급(VIP·B2B 등급가) [PARTIAL·2차·M],미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-153,runway,No153 상품 — 전시 카테고리 트리 운영툴 [PARTIAL·1차·M],미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-156,runway,No156 마이페이지 — 첫구매/생일 자동쿠폰 [PARTIAL·3차·S],미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+F-158,runway,No158 상품관리 — MES_ITEM_CD 전상품 채번 [CUSTOM·1차·M],미착수,False,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-19SHEET-BATCH-01,runway,계층4 전 19시트 전사슬 배치화 미완,검증대기,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-3JEOL-01,runway,3절 라인 — 썬캡 아이보리 용지단가 국4절 carry(~20% 저평가) + 나머지 3상품 미완성,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-ACRYL-ADDON-6-01,runway,아크릴 부속 미청구 (147~154) — 6상품 본체전용 공식 + 부속 옵션 미노출,미착수,True,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-ACRYL-RINGCONFIRM-01,runway,아크릴키링 고리 견적 실화면 + 아크릴 3상품 입력경로 규명 (담당자 회신 대기),검증대기,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-ACRYL-TBD-01,runway,"아크릴 단가 미수신 — *_TBD 6건(단가/구성) · TBD 4상품(165/168/169/170) 단가행 부재 · 163 placeholder 10,000",미착수,True,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-AUTH-3SHEET-01,runway,권위 3시트 260705 재추출 미완 (엽서북떡메·제본·출력소재IMPORT),미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-BOOK-5ITEM-01,runway,068~070 책자 표지/내지 5비목 누락 — 저청구,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-CALENDAR-DESIGNBLOCKED-5-01,runway,캘린더 5건 전부 DESIGN_BLOCKED — 가격공식 설계 자체가 막힘,미착수,True,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-CAT-INTEGRITY-01,runway,라이브 카테고리 귀속 무결성 — 미귀속 상품(072·077·110 등) · main_cat_yn 결손 · 말단 미매칭 6건,미착수,False,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-CATCONF-QUEUE-01,runway,카테고리 교정 큐 (전 11시트) — 아크릴20 미바인딩 · GP-2 FORMULA · CPQ MISS · 배치1~3 NO-GO 교정명세,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-CONSTRAINT-DATA-01,runway,OQ-G15 제약규칙(B15) 데이터 정리 미완 (1차 W5-7),미착수,False,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-CONSTRAINT-OG-048-01,runway,048/049 코팅×종이두께 옵션그룹 미적재 — 제약 UI 등록 BLOCKED,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-CPQ-OPT-020-01,runway,PRD_000020 화이트인쇄엽서 옵션 미적재(NOOPT) — 종이·인쇄·후가공 선택 UI 부재,미착수,False,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-D5-17-01,runway,D5 미실측 17건 (UNSCORED·축 미탑재) — 명함 6건 포함,검증대기,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-DBMAP-APPROVAL-01,runway,dbmap 승인 대기 잔여 — 아크릴 다중옵션 부속 3 · 146 볼체인 addon · 맥세이프 바디가격(업체 미정) · 스티커 나머지 CPQ · 책자 070/097,설계완료·구현대기,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-DBMAP-NEXT-01,runway,dbmap 다음 시작점 — 문구·아크릴 잔여 시트 가격/CPQ 확대 (또는 §27 배선 잔여),미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-DBMAP-OPEN-01,runway,dbmap 최신 미해결 — 폰케이스류·아크릴스탠드 addon(base 상품 없음) · 220 orphan siz · 217 빈 잉크칼라 · 무가격5,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-DBMAP-UNDERCHARGE-01,runway,돈크리티컬 저청구 3건 묶음 — 캘린더 장수 공식 약 12배 저청구 · 책자071 트윈링 · 실사 미니배너/미니보드 수량 floor,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-DCAL-LOAD-01,runway,디자인캘린더 실 적재 승인 대기 — Q-DCAL 컨펌 5건 선결 (AUTHORITY·ROUTE·FIN·ENVELOPE·DSC),설계완료·구현대기,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-DEADPARENT-500-01,runway,옵션 항목 500건 / 74상품이 죽은 부모에 매달림 — 선택지 손실 (전건 인간 판정),미착수,False,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-DEDUP-AXISMOVE-01,runway,자재 252/254 축이동 대기 (BLOCKED) — 캘린더 삼각대 자재→공정 param 축이동 미결,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-DEDUP-CATBLIND-01,runway,round-24 D-1 정정 필요 — category-blind dedupe 오류로 다중분류 의도 소실 (타 상품군 동형 오류 가능),미착수,False,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-DEDUP-SIZE-BLOCKED-01,runway,사이즈 중복정리 BLOCKED — D-2/D-3(A3 174/315 · A2 197/317) 가격종속 · SIZ_000499 판형 모델링 의도 미확인,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-DESIGNED22-01,runway,DESIGNED_NOT_LOADED 22건 — 설계만 되고 라이브 미적재 (돈크리티컬),설계완료·구현대기,True,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-DRIFT-10-01,runway,verify_price_coverage 실측 10 findings — HANDOFF의 '전수 DRIFT 0' 주장과 불일치,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-DTLOPT-SWEEP-01,runway,옵션 dtl_opt 누락 전수 점검(저청구 헌팅) 미실행 — 다른 상품도 동일 원인 저청구 가능,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-DUPSIZE-WIRING-01,runway,DUP_SIZE_WIRING 22셀 / 11상품 — 중복 사이즈 배선 (§17 선행 필수),미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-EDITORYN-01,runway,editor_yn 교정 미적용 — N→Y 13건 · Y→N 5건 (5건은 PRICE=0 위험),미착수,True,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-EDX-BOOK5-01,runway,"D-16 책자 5종 배선 단절 — PRD_000072는 총액 796,900원인데 구성원 기여 0",미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-EDX-HIGH40-01,runway,🟠HIGH 40건 — 셋트 합산 제외 7 · size_blind 6 · 가격 무차별(단일고정가) 25,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-EDX-MISSINGCELL-01,runway,missing-cells 38건 — BINDING_FAIL·미적재/오배선 셀,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-EDX-SIZECONF-01,runway,차원 정합 결함 248행 (🔴53 · 🟠40 · 🟡110 · ⚪45) — 🔴53 전수 재검증 필요,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-FOIL-E2E-01,runway,박 분기 활성(2026-07-01) 후 시뮬레이터 e2e 미실행 — 6상품 본체+박 합계 미확인,검증대기,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-GOLDEN-83-01,runway,"골든 전수대조 미수행 — L3+ 83상품은 계산만 성립, 정답가 미검증",검증대기,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-GOODS-DISCOUNT-203-01,runway,PRD_000203 할인타입 DSC_ACR_QTY 오귀속 — 굿즈에 아크릴 할인표가 물림 (잠재 오청구),미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-GOODS-NOAUTH-5-01,runway,굿즈 NO_AUTHORITY 5상품 — 가격·선택가격 둘 다 비어 권위 자체가 없음 (투명부채·미니CD앨범·극세사타월·타이벡북커버·말랑증사홀더),미착수,True,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-HDX-BACKLOG-01,runway,hdx 백로그 — 원자합산형 수량정합 · 검토11 권위대조 · 명함 박 저청구 · 레더링바인더A4 적재,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-HYGIENE-670-01,runway,데이터 위생 — WORK_NULL 115 · MULTI_DFLT 86 · 미태깅 421 · 규격-0size 48 · TAG_MISMATCH 55,검증대기,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-L0-7-01,runway,L0 미적재 7상품 — 상품·구성요소가 라이브에 아예 없음(엑셀에만 존재),미착수,False,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-L2-31-01,runway,L2+ 근접 31상품 — 공식은 붙었으나 골든 미달(WARN),미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-MATPOLLUTE-WIDGET-3-01,runway,게이트 Q6 조건 — 자재오염 위젯 누수 3건 제외 강제,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-MISMAP-FP-12-01,runway,오매핑 FP 가드 12건 — 오염이 아닐 수 있어 판정 필요,검증대기,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-MUG-193-01,runway,"머그컵(193) 반투명·투명 7,500 가격축 통째 소실 — 손님이 선택 불가",미착수,True,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-NAMECARD-MAT-01,runway,명함 034 펄 · 040 화이트 자재 collapse (등록 MAT ≠ 단가행 MAT) + 037 박 CPQ 옵션그룹 선결,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-NEEDSBASICS-97-01,runway,NEEDS_BASICS_FIRST 97건 (굿즈/파우치 87 포함) — 차원·자재부터 필요,미착수,True,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-OPT-D7-65-01,runway,위젯 착수 가능 83상품 중 D7(옵션) PASS 18뿐 — 65상품 옵션 미비,미착수,False,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-PED-BOOK-W34-01,runway,책자 완성가 (W3/W4 표지+내지 부품 합산) — DV-BK2/BK3/BK4 저청구 위험,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-PED-CANVAS-01,runway,Q-SB-CH1 — CANVAS_HANGING 차원 정합 (셀 표기 분리),미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-PED-DSCLINK-4-01,runway,"Q-ST-DSC-LINK (돈크리티컬) — DSC_STAT_QTY 링크 누락 4건, 누락 시 +150,000 과청구",미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-PED-NEXT-01,runway,가격엔진 설계 다음 시작점 — 실 적재 승인 큐 소진 · 확정 결함 정립(D-CB-1/2/4) · 인간 결정 큐,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-PED-POSTER-WIRE-01,runway,"G-S1 — 후가공 배선 0건 (PRF_POSTER disp_seq 2~), 컨펌큐 해소 후 배선",미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-PED-STATIONERY-9-01,runway,문구 본체 9건 product_prices INSERT · 떡메모 PRD_000097 바인딩 미실행,설계완료·구현대기,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-PETBANNER-136-01,runway,"RC-2 PET배너(136) HOLD-1 — 거치대 택1 그룹 의미 중복, 실무진 CONFIRM 후 적재",미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-PHOTOBOOK-D12-01,runway,D-12 포토북 10x10 × 소프트커버 단가행 부재 → 0원 (런칭 차단),미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-PHOTOBOOK-DBL-01,runway,"포토북100 셋트 이중합산 의심 (final 2,700,000 vs set_contrib 1,500,000)",미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-PHOTOCARD-024-01,runway,포토카드(024) 셋트 옵션 선택 시 묶음수 차원이 화면에 없어 0원,미착수,True,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-POSTER-OPT-POLLUTION-01,runway,실사 28상품(특히 134/135) 옵션 레이어 오염 — 도수·사이즈·자재·스티커·후가공이 타상품에서 대량 혼입 (면적 적재 1차 차단),미착수,True,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-PRD042-MISWIRE-01,runway,PRD_042 스타드림 '종이' 옵션 ref가 비종이 굿즈 자재로 오배선 → 잘못된 금액 발현 (codex 적발),미착수,True,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-PRINTLY-HUNI-SIZE-01,runway,후니 반칼원형 작은 원형 사이즈 미등록 + dflt_yn 3중복,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-PRODUCT-IMAGE-01,runway,상품 이미지 전건 미등록 — 라이브 DB에 소스 자체가 없음,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-QUOTE0-NAMECARD-01,runway,명함 계열 견적0 — 프리미엄명함031·펄명함034·047 용지 미배선,미착수,True,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-RC1-PRESET-01,runway,"RC-1 프리셋(R-B3-PRICE) 미모델링 — 실사 118/120/121/123 A3/A2/A1 프리셋 과대청구(A3·A2 +5,000 · A1 +8,000)",미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-READINESS-FOLLOWUP-3-01,runway,준비도 후속 3건 (§26 배지 반영·의심시트 셀단위·돈크리티컬 교정),미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-REVERSE-4-01,runway,역방향 4건 (인쇄배경지 74×74류 SIZ_000039~042) — 올바른 판형 회신 대기,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-REVIEW-25-01,runway,REVIEW 잔여 25건 — 대부분 분담 FP·기추적,검증대기,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-SET-INNER-PAGE-01,runway,D-2 내지 페이지가격 미실현 — semi_role.01 부재로 내지비 0,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-SET-MEMBRANE-PRINT-01,runway,D-3 인쇄면지(082 MAT_385·088) 인쇄비 0 — 면지 멤버 무공식,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-SET-PREMIUM-UNDER-01,runway,"프리미엄 정확값 트랙 저청구 잔존 (077 레더 +3,900 · 082 면지 유료 · 표지/면지 ×2)",미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-SILENT-7-01,runway,돈크리티컬 silent 합산 7건 — 타 상품 부속이 자재로 묵음 가산,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-SOT-RELOAD-65-01,runway,SOT 260702 재적재 후속 33+32셀 별도 High 큐,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-STATIONERY-SPARSE-01,runway,문구 sparse grid 충전 · 무지내지 min/max · 177 재분류 · 굿즈 NEITHER-gap 가격 적재,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-STICKER-INTEGRITY-01,runway,스티커 무결성 게이트 NO-GO — 돈크리티컬 실결함 다수 라이브 재현,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-STICKER-REPRICE-01,runway,가격표 260702 스티커 소재 연당가 변경 → 스티커 가격사슬 재적재 필요 (High),미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-UNDERCHARGE-BATCH-3-01,runway,배치 적발 저청구 3건 실무진 액션 대기 — 메쉬배너 타공 dtl_opt 누락 · TRAP_MIN 8상품 · 출력소재 specialty 30셀 미적재,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-USAGECD-3-01,runway,usage_cd 표시명 정합 (068~070 표지/내지 자재) — 가격 무관,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-VERIFY-104-01,runway,I-VERIFY-1 가격소스 보유 104상품 strict 실호출 final_price>0 실비율 미검증,검증대기,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-WIDGET-BLOCKED-200-01,runway,위젯 선행 불가 200상품 (준비도 L3 미만),미착수,False,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-WIRE-PROPOSAL-LOAD-01,runway,round-19 가격 폐루프 제안본 3종 DB 미적재 (명함 공식분리·031 박·033 MATGROUP·042 박 공용 comp),설계완료·구현대기,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-WRONGCODE-4-01,runway,사이즈 WRONG_CODE 4건 미교정 — 스티커 그리드 540행 재키 결합 블로커,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+P-YELLOW-CAT-01,runway,OQ-8 YELLOW 카테고리 미적재 상품 — 진성 부재인가 적재 대상인가 미판정,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-AGED-ADMIN-01,runway,admin-analysis / feature-matrix 출처 AGED (3.5개월) — 라이브 재확인 권장,검증대기,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-AUTH-CONTRACT-01,runway,OQ-G9 휴대폰 본인인증 서비스 계약 미체결 (1차 영향),미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-BATCH-REST-01,runway,통합 배치 hdx 가격 파일럿 잔여 (전부 선택) — codex 2차 · 타 도메인 확장,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-BFF-ENDPOINT-01,runway,후니 evaluate_price 호출 가능 HTTP 엔드포인트·인증 미특정 · CPQ 옵션/제약 조회 쿼리 미확정,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-CHK-BACKUP-01,runway,백업·복구 절차 미확인 (DB 스냅샷·복구 리허설),미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-CHK-CAPACITY-01,runway,서버 용량·오토스케일·모니터링 기준 미확인,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-CHK-CS-01,runway,고객센터 응대 스크립트·FAQ 미확인,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-CHK-DELIVERY-01,runway,배송사 연동·송장 발행·배송추적 경로 미확인,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-CHK-DNS-01,runway,도메인·SSL·DNS 전환 계획 미확인,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-CHK-MIGDRILL-01,runway,회원·머니 이관 리허설 미실행 (명세는 있으나 드라이런 기록 없음),미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-CHK-OLDSITE-01,runway,이전 사이트 종료/병행 운영 계획 미확인,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-CHK-ONCALL-01,runway,장애 대응 연락망·에스컬레이션 경로 미확인,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-CHK-PGTEST-01,runway,테스트 결제 전 구간 리허설 미확인 — 카드·계좌·취소·부분취소·환불,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-CHK-PRIVACY-01,runway,약관·개인정보처리방침 개정 및 게시 미확인,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-CHK-SEO-01,runway,SEO·구 URL 리다이렉트 맵 미확인,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-CHK-TRAINING-01,runway,운영자 교육·인수인계 세션 미확인,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-CONFIRM-BASECODE-5-01,runway,기초코드 컨펌 큐 5건 (AX-5·B-PO-1·PO-1b·AX-6·SZ-2) 사용자/실무진 결정 대기,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-CONFIRM-DSCDOUBLE-01,runway,Q-ST-DSC-DOUBLE — 떡메모 unit 내장 볼륨할인 위에 DSC_STAT_QTY 추가 = 의도된 추가할인 vs 이중할인,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-CONFIRM-FOIL-042-SHEET-01,runway,WIRE-3b 042 박 소형/대형 시트 권위(박 면적) 미확정 — 실무진/디자인 회신 대기,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-CONFIRM-FOILAREA-01,runway,박영역 상한 CONFIRM (Q-FOIL-SIZE2) — 027/069/070 트림이 대형격자 초과,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-CONFIRM-FOMEX-01,runway,"포맥스 컨펌큐 — A1 3종 미적재 · 3mm 권위충돌(8,300/11,500 vs 8,500/13,000) · mat×siz 교차조합 0원",미착수,True,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-CONFIRM-GOODS-FIN1-01,runway,굿즈 가격 의미 컨펌 2건 — C-GP-4 가공 가산 개당 vs 1회 정액(라벨·맥세이프·에폭시) · C-GP-5 구수 가격축 여부,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-CONFIRM-MAT32-01,runway,자재 MAT_000032 적재 승인 보류 — 사용자 '질문 명확화' 요청 미해소,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-CONFIRM-MEMOPAD-01,runway,Q-ST-MEMO1 — 메모패드 2사이즈 2가격 = 사이즈 차원 공식 vs 별 prd_cd 미결,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-CONFIRM-PRICE-2-01,runway,돈크리티컬 가격 권위충돌 2건 — 일반현수막 타공수8 라이브 8000 vs 권위 5000 · 족자 천정고리 라이브 6500 vs 권위 '4000?',미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-CONFIRM-PRICEAUTH-01,runway,가격 권위 사람 판정 대기 — 명함 금유광 63000 vs 64000 · 펄프리미엄 mat_cd · 스티커 관례층 · 판수 이중권위 · 박등급 경계,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-CONFIRM-PROCQTY-01,runway,"Q-SB-PROC-QTY (돈크리티컬) — 후가공/거치 1건당 vs ×수량 prc_typ 미확정, 거치대 ×qty=250,000 과청구 가능",미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-CONFIRM-QTYBASIS-01,runway,OQ-10 수량구간 단가행 기준 = 출력매수(판수) vs 주문수량 미확정 (돈),미착수,True,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-CONFIRM-SET-3-01,runway,셋트 잔여 CONFIRM 3건 (책등 종이 추가비 · 비활성 판형 229건 여백 누락 · 088 제본방식),미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-CONFIRM-STICKER-01,runway,스티커 컨펌큐 5건 (CV-STK-053/054 · CV-STK-A4-MAP · G-STK-1/3/4) — 054 active,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-CPQ-MEMBERSHIP-08-01,runway,D-2 옵션→가격구성요소 멤버십 매핑 부재 — PRF_DGP_A G-DATA 🔴 NO-GO(A-1)의 직접 원인,설계완료·구현대기,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-CR-C10-01,runway,C-10 폼빌더 결과절 리스트 implication RAW-ONLY (Med),미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-CR-C3-01,runway,"C-3 깨진 규칙 처리 불일치 — 한쪽은 500, 한쪽은 조용히 통과",미착수,False,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-DDL-REFPARAM-SLOT-01,runway,GAP-2 ref_param_json 슬롯 위치 미결 (면적등급 보존) — DDL 제안 대기,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-DEC-CALLER-01,runway,I-BOUND-1 server-api 전이 호출 주체 미결 (후니 직접 vs 어드민 위임),미착수,False,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-DEC-CATTREE-01,runway,OQ-G14 전시 카테고리 구조 확정 미완 (1차 W3-5),미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-DEC-DELYN-576-01,runway,SIZ_000576 마스터 del_yn Y→N 복원 승인 대기 · del_yn 편집 가능 여부 미실측,미착수,True,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-DEC-EDICUS-01,runway,OQ-G16 온라인 에디터(Edicus) 도입 결정 미정,미착수,False,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-DEC-EXTMEMBER-01,runway,I-AUTH-3 외부회원 연동(ncpstore) 채택 + 1:1 등록 결정 필요,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-DEC-FRMTYP-01,runway,frm_typ/clr_cd 보류 — dbm-price-formula-audit 결판 후 처리,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-DEC-GRADE-01,runway,OQ-G6 회원등급 grade_cd ↔ 샵바이 memberGrade 매핑 미결 (1차 가격 영향),미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-DEC-HYPHEN-01,runway,하이픈 레거시(그룹31·옵션85) 언더바 통일 = 지니 보류,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-DEC-IMMUTABLE-01,runway,I-BOUND-2 클레임 추적성 — 동적옵션 immutable 정책 유지 전제,미착수,True,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-DEC-MALLMODE-01,runway,I-AUTH-1 몰 운영방식 결정 필요 (스킨몰 vs headless),미착수,False,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-DEC-NAMECARD-FORMULA-01,runway,WIRE-1 명함 분기로직 미결 (ⓐ 단일공식 vs ⓑ 공식분리) — PRF_NAMECARD_FIXED에 PREMIUM/COAT/FOIL 23 comp 미배선,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-DEC-REDCAT-01,runway,I-RED-1 RED 카테고리(가격소스 0) 브리지 범위 결정 필요,미착수,True,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-DEC-SELFVERIFY-01,runway,OQ-G12 비밀번호 변경·탈퇴 본인확인 방법 미결 (1차),미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-DEC-SUJAK-01,runway,OQ-G17 수작 브랜드 유지 여부 미결,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-DEC-VAT-01,runway,후니 VAT 포함 여부 미확정 — basis 정합 데이터 부족으로 가격 비교 전면 기권 상태,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-DEC-WRITEPOLICY-01,runway,POLICY-1 server-api 카탈로그 쓰기 허용 범위 미결 (현 단계 쓰기 금지),미착수,True,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-DESET-01,runway,떡메모지 de-set — 셋트행 논리삭제 경로가 webadmin에 없음 (실행 BLOCKER) · 동형 후보 2건,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-DOC-ADMINMANUAL-01,runway,라이브 admin 매뉴얼 업데이트 미실행 — round-13~21 적재분의 admin 화면 반영 여부 미대조,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-EDX-D6-01,runway,D-6 하트 이미지피켓(use_yn=N) 런칭 범위 포함 여부 미결,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-EDX-D9-01,runway,"D-9 명함 cateCode=TEST — EDICUS 원장 결함 의심, 콘솔 확인 요청 미회신",미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-EDX-F12-01,runway,[적재 전 필수] F-12 런북 probe_fmz_cnt 채움 — 빠지면 315만원 누락 재통과,검증대기,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-EDX-VESSEL-01,runway,D-11 제3축 그릇 설계 미결 (polymorphic vs 축별 named 컬럼) · D-7 기존 제안과 중복 여부,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-ENGINE-ACRYL-AREA-01,runway,아크릴 siz_cd × 면적 코드 환원 (C) — 현재 area 바인딩 시 과소청구 확정이라 보류 중,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-ENGINE-AUTOPICK-01,runway,후니 auto-pick .first()가 극단 사이즈를 선택 — 스티커 2백만원 실증,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-ENGINE-BOOK-01,runway,PRF 책자 트랙 NO-GO — 4 선결 (내지 이중판수 · S1/S2 내지인쇄 이중합산 · COVER-SPREAD-SIZ · COVER-A4PLT),미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-ENGINE-DELYNFILTER-01,runway,책자 del_yn 필터 부재 확정 — 논리삭제된 구성요소도 가격 평가에 포함됨,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-ENGINE-GP2-01,runway,GP-2 PRODUCT_PRICE 선점 가드 (돈크리티컬) — product_prices 1건만 있어도 FORMULA를 우회,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-ENGINE-OPTKEY-01,runway,opt 동시선택 한계 (코드트랙) — 가공+추가 동시 선택 시 selections opt_cd 단일키로 1건 누락,미착수,True,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-ENGINE-PRCTYP03-01,runway,"후가공 14 comp prc_typ 오적재(.01 단가형) → 엔진이 단가×수량으로 해석해 과대청구 (엽서 C3 Δ990,000)",설계완료·구현대기,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-ENGINE-TWINRING-01,runway,071 트윈링 cover_mult ×2 — 데이터로 해결 불가·개발팀 C트랙 선행,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-FILEMETA-01,runway,라인 단위 customProperty·구조화 파일메타 첨부 경로 미상 (I-META-1 / I-FILE-1),검증대기,False,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-FOIL-MINQTY-01,runway,박(FOIL) 6상품 최소수량 제약규칙 미구축 — 다만 §31 CHANGELOG는 '제약 아님'으로 종결 표기,미착수,False,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-KB-01,runway,온톨로지 KB 후속 3건 — live-snapshot 재캡처 · PRICE_GAP_HINTS 필드 마커 강화 · 앨범/포토 INTENT 미등재,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-MAPPING-MASTER-01,runway,prd_cd↔productNo · selections↔optionNo 매핑 마스터 소유·동기화 주체 미정 (+ 67노드 매핑표 · 동기화 범위·주기),미착수,False,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-MES-SPEC-01,runway,OQ-G10 MES↔Front 통신 규격 미확정 (1차 W9-10),미착수,False,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-MIG-CONSENT-01,runway,L4 교정 A7 — 마케팅 동의 내부모순 (동의일시 날조 금지·법적 리스크),미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-MIG-CUTOVER-01,runway,MQ-19 컷오버 동결 창 운영 가능 여부 미확정,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-MIG-EXPIRY-01,runway,L4 교정 A5 — Plan A 적립금 만료 기본값=제한없음 명문화 필요,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-MIG-EXTRAINFO-01,runway,회원 부가정보 담을 그릇 미결 — extraInfo 수용 범위 · 사업자정보 다건 · 다중주소,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-MIG-MEMBER-SCHEMA-01,runway,회원 이관 원천 스키마 미확인 — 해시·가입일·휴면·탈퇴·동의일시·중복이메일·등급 3원 매핑·본인인증 상태,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-MIG-MONEY-RECON-01,runway,프린팅머니 컷오버 대사 게이트 미실행 — 전 회원 잔액 diff/hash · 합계 불일치 시 즉시 NO-GO,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-MIG-MONEY-SCHEMA-01,runway,프린팅머니 이관 원천 스키마 미확인 — 잔액 스냅샷·거래 원장·만료정책·음수 잔액·PG 트랜잭션 보존,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-MONEY-EXTKEY-01,runway,R5 적립금 externalKey 멱등·partial-spent·명칭 semantics 실측 대기,검증대기,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-NHN-REPLY-01,runway,NHN 2차 답신 미작성 — 역질문 2건(내부 견적엔진 정의 · 구매시점 가격변동 기준+실조합 수치) 답변 필요,미착수,True,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-NHN-REVIEW-01,runway,P-B 동적옵션 등록이 상품심사 승인대기를 유발하는가 — 미검증 (D 채택 결정적 관문),미착수,True,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-OLDDB-ACCESS-01,runway,원천 구 DB 미접근 — 회원·머니 이관 질문 20건이 전부 미확정,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-OOS-MBO-01,runway,[런칭 무관] 다중브랜드 온톨로지 잔여 6건 — 공급자 라우팅 데이터 0 · 코퍼스 편향 · 승격 대기 · 레드 미착수 · 팀파일 버그 · 구조 게이트 미검증,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-OOS-PRINTLY-01,runway,[런칭 무관] 프린틀리 별도사업 잔여 5건 — catalog 부재·노후·정식 하네스화 미정·지니 입력 대기·수렴 2트랙,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-OOS-PRINTSTORY-01,runway,[런칭 무관] print-story 발표 아티팩트 잔여 2건 — 저작 귀속 · 특허 등록 여부 미확인,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-OOS-RPMETA-01,runway,[런칭 무관] RP-Meta 역공학 잔여 7건 — deepcheck carry-forward 미검증 · 인간 결정 · DDL 제안 3건,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-OPS-ADMINPW-01,runway,OQ-12 HUNI_ADMIN_PW stale — product-viewer 화면축 3원 대조 BLOCKED,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-OPS-SITEKEY-01,runway,OQ-D2 후니 site_key 취득 방식 미결 (psql 조회 vs .env 신규 키),미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-OPS-TOKEN-01,runway,SHOPBY_SERVER_ACCESS_TOKEN 만료 시 재발급 절차 미실행,미착수,False,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-ORDER-FLOW-VERIFY-01,runway,라이브 주문 동선 미검증 — cart 버튼 셀렉터 미검출·주문 경로 코드 미확인,검증대기,False,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-ORDER-SUBMIT-SPEC-01,runway,L3 격상조건② 주문서 submit path 명세 공백 — dev-plan 미명세,미착수,True,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-PB-C7-01,runway,C7 1:1 충돌 — link-product/쇼핑몰 발행 없이 성립하는가 (파트너사 개발 0건 주장 붕괴 위험),미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-PB-CLEANUP-01,runway,PC7 FAIL — 기존 복제본 정리 절차가 문서에 존재하지 않음,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-PB-CONCEPT-01,runway,HARD 제약 위반 — 운영진 신규 개념 4개(상한 2). 재설계 또는 재협상 필요 (+권고안 남는 약점 4건),미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-PB-DESIGN-01,runway,"PC4 검증불가 — 04_design 미착수, 판정 대상 설계안 집합 부재",미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-PB-DOC-01,runway,PC2 FAIL 인용 불일치(WP 7.0 pattern-overrides) + P1 문서 정정 다수 미해소,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-PB-EMPTYVAL-01,runway,PC6 조건부 — 의도적 빈 값 표현 불가 · 확인 게이트/복구 경로 없음,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-PB-GATE-01,runway,페이지빌더 게이트 NO-GO — 문서 정본 승격·대외 배포 불가 (확장 회차에서 기존 결론 2개 붕괴),미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-PB-INVENTORY-01,runway,PC3 검증불가 — 분모 미확정 ('257곳'은 관측값이 아니라 투영값) · 사이트 전수 인벤토리 미착수,검증대기,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-PB-OPSSIM-01,runway,"PC5 검증불가 — 05_ops-sim 미착수, 관리부담 실계수 0건 (하네스 존재 이유가 미측정)",미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-PB-PARTNER-BUG-01,runway,파트너사 버그 수정(필수) 1건 — B1 편집기 하드 내비게이션 500 (P0),미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-PB-PARTNER-CFG-01,runway,파트너사 설정·등록(필수) 2건 — 외부 콘텐츠 허용 도메인 + data-proxy 정책,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-PB-PARTNER-OPT-01,runway,파트너사 있으면좋음 2건(F1·F2) + 확인 회신 4건 미회신,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-PB-REVERIFY-01,runway,PC1 검증불가 — 인증 영역 401로 역공학 사실 1행도 재실행 검증 못함 · C-a~C-g 미확정 전부 잔존,검증대기,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-PB-RISK-01,runway,R-1 iframe 임베드 SEO 불리 / R-2 후니팀 기배제 이력 우선,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-PB-T4-01,runway,X1 T4 실측 미실시 — 257 항목 CSV 등록 후 렌더·편집 응답 측정 (최대 이월) · T4 붕괴 시 권고안 우위 소멸,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-PB-UX-01,runway,P2 UX 결함 5건 미해소 (G14·G13·G15·G17·409 방어),미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-PERF-CONCURRENCY-01,runway,동시성 — 고객별 견적행 분리(견적ID) 부하 실측 없음,검증대기,True,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-POSTER-SIZNUM-01,runway,실사 면적 siz 채번 착수 불가 — 1건 과채번(109→108·SIZ_000402 재사용 미결) + orientation 규약 미명문화,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-REPO-GITIGNORE-01,runway,하네스 자산 git 미추적 — hpti 인스펙터 에이전트 · §16 recipe-viz agents/skills 화이트리스트 누락,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-RVF-GATE-01,runway,V-PRICE(신규 14필드) 게이트 NO-GO — VP-1·VP-6 FAIL,미착수,True,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-RVF-N1-01,runway,N1 ADD_CLR_YN 미전송 → 색수 미상향 저청구 (HIGH),미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-RVF-N245-01,runway,N2 REAM_CNT · N4 PACK/MAX_PRN_CNT · N5 DOSU_COD 미전송 — byte 정합 잔여,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-RVF-N3-01,runway,N3 모델A 래더 미구현 — 떡메모지·굿즈 견적 불가 (HIGH·라이브 비준),미착수,True,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-RVF-N6-01,runway,N6 GSELGLV/TPTKDFT ATTB×10 미반영 — 후가공·수량 저청구 잠복,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-RVF-SUB-01,runway,V-WIDGET·V-EDITOR 재검증 서브시스템 미착수 (산출 0건),미착수,False,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-SENSOR-DIMBLIND-01,runway,차원정합 사각 — '공정 미등록(노출 부재)'을 진단기가 못 잡음,검증대기,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-SENSOR-DIMVALS-01,runway,스캐너 dim_vals 축 탐지 보강 — component_merge_scan.py가 jsonb 축 병합 미탐지,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-SENSOR-VERIFYLOAD-01,runway,verify_load.py 기대 행수 하드코딩 → 상시 FAIL (경보 피로로 사실상 폐기된 센서),미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-SET-UI-4-01,runway,셋트 UI 개선 4건 (역전 절약배지·구간 프리셋 칩·부수 step/max·직접입력 스냅) — DEV-REQUEST 부록 후보,미착수,True,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-SET-UI-MEMBER-01,runway,D-1 셋트 구성원 옵션그룹이 시뮬레이터/위젯 구성원 UI에 미렌더 (코드),미착수,False,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-SETTLE-AUTH-01,runway,샵바이 정산이 라인 salePrice/addPrice를 권위로 쓰는가 — 미관측 (+적립금 명칭·재동의 법적요건·쿠폰 이관 범위),미착수,True,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-SHOPBY-ASSIGN-VOLATILE-01,runway,샵바이 카테고리 배정 휘발성 — 어드민 작업 후 배정이 풀림 (제약 #8·#9),미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-SHOPBY-CART-CHANNEL-01,runway,Q-CART-2 post-cart channelType 예시 vs 스키마 불일치 — 라이브 실측 필요,검증대기,False,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-SHOPBY-GATE-01,runway,샵바이 게이트 1R·2R 모두 조건부 GO — BLOCKED 3관문 및 2R 조건 미이행분 잔존,미착수,True,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-SHOPBY-HYGIENE-01,runway,샵바이 카탈로그 위생 — 중복 71행 잔존 · 관리코드 미입력 3 · 앞공백 카테고리 1 · 삭제 카테고리 참조 2 · 빈 카테고리 3,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-SHOPBY-IPALLOW-01,runway,샵바이 server API IP 허용목록 — 등록 직후 산발적 400 S0001 거부,미착수,False,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-SHOPBY-MAXLEN-01,runway,A-BIND-1 optionInputs inputValue maxLength 미확정,검증대기,False,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-SHOPBY-NATIVE-01,runway,OQ-G19 샵바이 가입완료 메일·체험단·관리자 권한 native 지원 범위 미확인,검증대기,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-SHOPBY-ORDERSHEET-01,runway,order-sheet 실계약 미명문화 — required vs live cartNos-only · 중복 시 우선순위 · recurringPaymentDelivery shape,검증대기,True,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-SHOPBY-SPEC-FIX-01,runway,샵바이 API 명세 오기 5건 (put-product-options 경로/필드 환각 · groupId 타입 · 교환 operationId · get-categories 오기 · refresh 각주),미착수,True,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-SIM-PRODUCT-SEMANTIC-01,runway,OQ-D1 상품 의미 불일치 — 가격엔진 상품 ≠ 샵바이 쓰기 상품 (값 생존만 실증됨),검증대기,True,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-SKIN-DEVREQ-01,runway,스킨 파트너사 수정 요청 5건 (하위 건수 표기 · 헤더 드롭다운 · 상세 URL 오리다이렉트 · BEST SELLERS 하드코딩 · depth3 미렌더),미착수,False,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-SKIN-REACH-01,runway,"스킨 도달 불가 — 판매중 217건 중 98건만 노출, 117건 도달 불가 (대분류 6개 0건·말단 25개 전멸)",미착수,False,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-VERIFY-ADAPTER-01,runway,I-VERIFY-2 옵션→차원 ref_dim 풀이 어댑터 무손실 재현 미검증,검증대기,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-VERIFY-PROD-01,runway,"최종 프로덕션 검증 미실행 — 실 견적 조립은 신규 BFF/위젯(저장소 밖·개발중), 현 관리자 시뮬레이터는 비대표",검증대기,True,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-WGT-ADAPTER-01,runway,후니 어댑터(createHuniAdapter) 구현 0줄 — 위젯 컨버전 미착수,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-WGT-ANCHOR-01,runway,G-3 어댑터 주석 라인앵커 stale — deob 재생성으로 참조 어긋남,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-WGT-AUDIT-01,runway,위젯 4축 감사 — 임계경로 인계 사슬 단절 + 4월→6월 역공학 드리프트,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-WGT-B1DEAD-01,runway,B-1 size 분기 영구 도달불능 dead code (컨버전 게이트 GSCDPOP),미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-WGT-DATA-DEP-01,runway,후니 DB의 가격·제약·위젯용 테이블 미작성이 위젯 임계경로,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-WGT-F3FIX-01,runway,F-3 TieredDiscount 정대표 GSBGRDY fixture 미보유 (비차단 잔존),검증대기,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-WGT-F4-01,runway,F-4 finish-select-box 임계치 분기 부재 — 후니 후가공 데이터 확정 대기,미착수,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-WGT-G5-01,runway,G-5 의류 apparel 배타삼항이 DIR_MTR 필수 가격축을 드롭 (실결함 확정),미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-WGT-G6-01,runway,G-6 굿즈 수량 필드축 스왑 — ORD_CNT vs PRN_CNT 가격권위 배선 불일치,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-WGT-HTTP-01,runway,G-INT-0 런타임 가격경로가 fixture 정적룩업 — 실 HTTP 배선 회귀가드 부재,검증대기,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-WGT-OPTMAP-01,runway,"_opt_maps 자동변환이 위젯 전용 — 시뮬레이터 미동작, 위젯 경로 별도 작업 필요",미착수,False,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-WGT-PRICEEQ-01,runway,의류·ACC·포스터 가격 동등성 미마감 — PRICE>0 재캡처 미완,검증대기,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-WGT-W2B-01,runway,W2-b 노트류 INN_DFT tmpl_price 요청 shape 결함 → 합계 0,미착수,True,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-WGTF-BRIDGE-01,runway,U-12 productRedWidgetSDK.js(브릿지/로더) 라인 단위 근거 부재,검증대기,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-WGTF-CODE-01,runway,캡처 상품코드·BNSTDFT/STDRCAD 정의 미상 (U-11 · U-13),검증대기,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-WGTF-PDF-01,runway,PDF 업로드 경로 미상 (U-5 최종 제출 필드 · U-2 uploadType 규칙 · U-10 PDF 가용성),검증대기,False,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-WGTF-S3-01,runway,S3 presigned 업로드 계약 미상 (U-3 엔드포인트 호스트 · U-4 유효기간),검증대기,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-WGTF-SCOPE-01,runway,U-14 26 카테고리 중 신위젯 적용 범위 미상 — matrix 카테고리 행이 추정값,검증대기,False,False,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+X-WGTF-SUBMIT-01,runway,위젯→장바구니/주문 제출 계약 미상 (U-1 sdkCreatePot · U-9 호스트 핸드오프),검증대기,False,True,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-001,scope,쇼핑몰 / 로그인 / 일반 로그인,SOLVED,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-002,scope,쇼핑몰 / 로그인 / 아이디 찾기 (이메일 발송),SOLVED,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-003,scope,쇼핑몰 / 로그인 / 비밀번호 찾기 (휴대폰 임시PW),PARTIAL,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-004,scope,쇼핑몰 / 회원가입 / 약관동의,SOLVED,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-005,scope,쇼핑몰 / 회원가입 / 정보입력,PARTIAL,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-006,scope,쇼핑몰 / 회원가입 / 이메일 중복확인,SOLVED,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-007,scope,쇼핑몰 / 회원가입 / 휴대전화 인증,PARTIAL,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-008,scope,쇼핑몰 / 회원가입 / 가입완료 메일 발송,SOLVED,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-012,scope,쇼핑몰 / 마이페이지 / 쿠폰관리 ,SOLVED,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-013,scope,쇼핑몰 / 마이페이지 / 쿠폰등록,SOLVED,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-015,scope,쇼핑몰 / 마이페이지 / 머니충전,CUSTOM,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-017,scope,쇼핑몰 / 마이페이지 / 나의 리뷰,SOLVED,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-019,scope,쇼핑몰 / 마이페이지 / 나의 체험단 활동내역 + 후기,CUSTOM,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-021,scope,쇼핑몰 / 마이페이지 / 회원정보수정,PARTIAL,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-022,scope,쇼핑몰 / 마이페이지 / 회원정보수정_비밀번호입력,SOLVED,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-023,scope,쇼핑몰 / 마이페이지 / 비밀번호변경,SOLVED,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-024,scope,쇼핑몰 / 마이페이지 / 회원탈퇴,SOLVED,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-029,scope,쇼핑몰 / 마이페이지 / 메인,PARTIAL,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-030,scope,쇼핑몰 / 마이페이지 / 서브메인(랜딩페이지),PARTIAL,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-031,scope,쇼핑몰 / 마이페이지 / LIST (검색결과),PARTIAL,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-032,scope,쇼핑몰 / 인쇄상품 / A1 상품 기본정보 세팅(상품코드·주문가능·회원),PARTIAL,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-045,scope,쇼핑몰 / 인쇄상품 / B12 캘린더 가공/장수,CUSTOM,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-055,scope,쇼핑몰 / 인쇄상품 / D4 가변데이터 인쇄(VDP),CUSTOM,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-057,scope,쇼핑몰 / 인쇄상품 / E1 규격 가이드 모달,PARTIAL,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-059,scope,쇼핑몰 / 인쇄상품 / E3 주문가능 자재(용지) 목록 모달,CUSTOM,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-062,scope,쇼핑몰 / 인쇄상품 / F2 주문 데이터 생성(선택 옵션을 주문으로 변환),CUSTOM,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-074,scope,쇼핑몰 / 결제 / 수동카드결제 (PC+모바일),CUSTOM,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-083,scope,쇼핑몰 / 정보 / 회사소개,SOLVED,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-084,scope,쇼핑몰 / 정보 / 이용약관,SOLVED,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-085,scope,쇼핑몰 / 정보 / 개인정보보호,SOLVED,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-086,scope,쇼핑몰 / 정보 / 찾아오시는 길,SOLVED,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-090,scope,쇼핑몰 / 마케팅 / 체험단 모집 메인,CUSTOM,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-091,scope,쇼핑몰 / 상품 / 포장재상품 주문하기,CUSTOM,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-092,scope,쇼핑몰 / 상품 / 굿즈상품 주문하기 + 파우치&백,CUSTOM,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-093,scope,쇼핑몰 / 상품 / 수작 상품 (메인+상품페이지),CUSTOM,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-094,scope,관리자 / 관리자 / 관리자 등록/관리,SOLVED,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-095,scope,관리자 / 거래처 / 거래처관리 (등록/수정/처리),CUSTOM,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-096,scope,관리자 / 거래처 / 매장게시판,PARTIAL,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-097,scope,관리자 / 원장관리 / 계좌관리 (원장용 계좌 등록),CUSTOM,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-099,scope,관리자 / 원장관리 / 업체별 미수금,CUSTOM,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-100,scope,관리자 / 상품관리 / 인쇄/제본 상품등록 (미리보기/등록/수정),CUSTOM,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-101,scope,관리자 / 상품관리 / 사이즈선택 팝업,CUSTOM,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-102,scope,관리자 / 상품관리 / 소재선택 팝업,CUSTOM,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-103,scope,관리자 / 상품관리 / 종이선택 팝업,CUSTOM,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-104,scope,관리자 / 상품관리 / 가격관리 팝업 8종,CUSTOM,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-105,scope,관리자 / 상품관리 / 사이즈관리,CUSTOM,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-106,scope,관리자 / 상품관리 / 소재관리,CUSTOM,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-107,scope,관리자 / 상품관리 / 용지관리,CUSTOM,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-108,scope,관리자 / 상품관리 / 가격관리 (출력/코팅/후가공/제본),CUSTOM,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-109,scope,관리자 / 상품관리 / 굿즈 카테고리관리,CUSTOM,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-110,scope,관리자 / 상품관리 / 굿즈 상품등록 (카테고리/옵션),CUSTOM,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-111,scope,관리자 / 상품관리 / 수작 상품등록,CUSTOM,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-112,scope,관리자 / 상품관리 / 포장재 상품등록,CUSTOM,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-113,scope,관리자 / 상품관리 / 디자인 상품등록,CUSTOM,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-114,scope,관리자 / 게시판 / 공지사항 관리 (등록/수정/html생성),SOLVED,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-115,scope,관리자 / 게시판 / 자주묻는질문 관리,SOLVED,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-121,scope,관리자 / 게시판 / 체험단관리 (등록/수정/신청내역),CUSTOM,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-122,scope,관리자 / 게시판 / 이용후기관리 (관리자등록/수정),PARTIAL,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-123,scope,관리자 / 회원관리 / 회원관리 (주문내역/정보확인),SOLVED,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-124,scope,관리자 / 회원관리 / 탈퇴회원 관리,SOLVED,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-125,scope,관리자 / 회원관리 / 프린팅머니 관리 (수정/처리),PARTIAL,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-126,scope,관리자 / 회원관리 / 쿠폰관리 (발행/매칭/사용내역),PARTIAL,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-127,scope,관리자 / 회원관리 / 쿠폰등록내역,SOLVED,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-128,scope,관리자 / 회원관리 / 쿠폰사용내역,SOLVED,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-129,scope,관리자 / 통계 / 인쇄/제본 상품통계 (상세보기),PARTIAL,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-130,scope,관리자 / 통계 / 굿즈 상품통계 (상세보기),PARTIAL,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-131,scope,관리자 / 통계 / 패키지 상품통계 (상세보기),PARTIAL,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-132,scope,관리자 / 통계 / 수작 상품통계 (상세보기),PARTIAL,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-133,scope,관리자 / 통계 / 월별 매출통계,SOLVED,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-134,scope,관리자 / 통계 / 굿즈 발주/정산 (Excel 다운),CUSTOM,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-135,scope,관리자 / 통계 / 제작상품 팀별통계 (Excel 다운),CUSTOM,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-136,scope,관리자 / 주문관리 / 주문관리-인쇄/제본/굿즈 (상세),PARTIAL,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-139,scope,관리자 / 주문관리 / 주문서출력,PARTIAL,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-145,scope,쇼핑몰 / 회원 / 간편로그인(네이버/카카오),SOLVED,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-146,scope,쇼핑몰 / 회원 / 회원등급(VIP·B2B 등급가),PARTIAL,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-147,scope,쇼핑몰 / 회원 / 휴면회원 전환/해제,SOLVED,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-153,scope,쇼핑몰 / 상품 / 전시 카테고리 트리 운영툴,PARTIAL,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-156,scope,쇼핑몰 / 마이페이지 / 첫구매/생일 자동쿠폰,PARTIAL,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+SCOPE-158,scope,관리자 / 상품관리 / MES_ITEM_CD 전상품 채번,CUSTOM,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-001,ia,쇼핑몰 / 로그인 / 일반 로그인,미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-002,ia,쇼핑몰 / 로그인 / 아이디 찾기 (이메일 발송),미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-003,ia,쇼핑몰 / 로그인 / 비밀번호 찾기 (휴대폰 임시PW),대기,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-004,ia,쇼핑몰 / 회원가입 / 약관동의,미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-005,ia,쇼핑몰 / 회원가입 / 정보입력,미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-006,ia,쇼핑몰 / 회원가입 / 이메일 중복확인,미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-007,ia,쇼핑몰 / 회원가입 / 휴대전화 인증,대기,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-008,ia,쇼핑몰 / 회원가입 / 가입완료 메일 발송,미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-012,ia,쇼핑몰 / 마이페이지 / 쿠폰관리 ,미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-013,ia,쇼핑몰 / 마이페이지 / 쿠폰등록,미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-015,ia,쇼핑몰 / 마이페이지 / 머니충전,대기,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-017,ia,쇼핑몰 / 마이페이지 / 나의 리뷰,미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-019,ia,쇼핑몰 / 마이페이지 / 나의 체험단 활동내역 + 후기,미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-021,ia,쇼핑몰 / 마이페이지 / 회원정보수정,미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-022,ia,쇼핑몰 / 마이페이지 / 회원정보수정_비밀번호입력,미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-023,ia,쇼핑몰 / 마이페이지 / 비밀번호변경,미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-024,ia,쇼핑몰 / 마이페이지 / 회원탈퇴,미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-029,ia,쇼핑몰 / 마이페이지 / 메인,미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-030,ia,쇼핑몰 / 마이페이지 / 서브메인(랜딩페이지),미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-031,ia,쇼핑몰 / 마이페이지 / LIST (검색결과),미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-032,ia,쇼핑몰 / 인쇄상품 / A1 상품 기본정보 세팅(상품코드·주문가능·회원),미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-045,ia,쇼핑몰 / 인쇄상품 / B12 캘린더 가공/장수,미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-055,ia,쇼핑몰 / 인쇄상품 / D4 가변데이터 인쇄(VDP),대기,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-057,ia,쇼핑몰 / 인쇄상품 / E1 규격 가이드 모달,미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-059,ia,쇼핑몰 / 인쇄상품 / E3 주문가능 자재(용지) 목록 모달,미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-062,ia,쇼핑몰 / 인쇄상품 / F2 주문 데이터 생성(선택 옵션을 주문으로 변환),미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-074,ia,쇼핑몰 / 결제 / 수동카드결제 (PC+모바일),미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-083,ia,쇼핑몰 / 정보 / 회사소개,미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-084,ia,쇼핑몰 / 정보 / 이용약관,미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-085,ia,쇼핑몰 / 정보 / 개인정보보호,미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-086,ia,쇼핑몰 / 정보 / 찾아오시는 길,미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-090,ia,쇼핑몰 / 마케팅 / 체험단 모집 메인,미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-091,ia,쇼핑몰 / 상품 / 포장재상품 주문하기,미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-092,ia,쇼핑몰 / 상품 / 굿즈상품 주문하기 + 파우치&백,미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-093,ia,쇼핑몰 / 상품 / 수작 상품 (메인+상품페이지),미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-094,ia,관리자 / 관리자 / 관리자 등록/관리,미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-095,ia,관리자 / 거래처 / 거래처관리 (등록/수정/처리),미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-096,ia,관리자 / 거래처 / 매장게시판,미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-097,ia,관리자 / 원장관리 / 계좌관리 (원장용 계좌 등록),미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-099,ia,관리자 / 원장관리 / 업체별 미수금,미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-100,ia,관리자 / 상품관리 / 인쇄/제본 상품등록 (미리보기/등록/수정),진행중,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-101,ia,관리자 / 상품관리 / 사이즈선택 팝업,미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-102,ia,관리자 / 상품관리 / 소재선택 팝업,미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-103,ia,관리자 / 상품관리 / 종이선택 팝업,미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-104,ia,관리자 / 상품관리 / 가격관리 팝업 8종,진행중,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-105,ia,관리자 / 상품관리 / 사이즈관리,진행중,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-106,ia,관리자 / 상품관리 / 소재관리,진행중,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-107,ia,관리자 / 상품관리 / 용지관리,진행중,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-108,ia,관리자 / 상품관리 / 가격관리 (출력/코팅/후가공/제본),진행중,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-109,ia,관리자 / 상품관리 / 굿즈 카테고리관리,미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-110,ia,관리자 / 상품관리 / 굿즈 상품등록 (카테고리/옵션),미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-111,ia,관리자 / 상품관리 / 수작 상품등록,미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-112,ia,관리자 / 상품관리 / 포장재 상품등록,미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-113,ia,관리자 / 상품관리 / 디자인 상품등록,미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-114,ia,관리자 / 게시판 / 공지사항 관리 (등록/수정/html생성),미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-115,ia,관리자 / 게시판 / 자주묻는질문 관리,미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-121,ia,관리자 / 게시판 / 체험단관리 (등록/수정/신청내역),미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-122,ia,관리자 / 게시판 / 이용후기관리 (관리자등록/수정),미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-123,ia,관리자 / 회원관리 / 회원관리 (주문내역/정보확인),미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-124,ia,관리자 / 회원관리 / 탈퇴회원 관리,미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-125,ia,관리자 / 회원관리 / 프린팅머니 관리 (수정/처리),대기,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-126,ia,관리자 / 회원관리 / 쿠폰관리 (발행/매칭/사용내역),미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-127,ia,관리자 / 회원관리 / 쿠폰등록내역,미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-128,ia,관리자 / 회원관리 / 쿠폰사용내역,미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-129,ia,관리자 / 통계 / 인쇄/제본 상품통계 (상세보기),미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-130,ia,관리자 / 통계 / 굿즈 상품통계 (상세보기),미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-131,ia,관리자 / 통계 / 패키지 상품통계 (상세보기),미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-132,ia,관리자 / 통계 / 수작 상품통계 (상세보기),미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-133,ia,관리자 / 통계 / 월별 매출통계,미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-134,ia,관리자 / 통계 / 굿즈 발주/정산 (Excel 다운),미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-135,ia,관리자 / 통계 / 제작상품 팀별통계 (Excel 다운),미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-136,ia,관리자 / 주문관리 / 주문관리-인쇄/제본/굿즈 (상세),미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
+IA-139,ia,관리자 / 주문관리 / 주문서출력,미착수,,,L4a(고객 주문경로) 도메인 미귀속 — 고아 선언 아님
