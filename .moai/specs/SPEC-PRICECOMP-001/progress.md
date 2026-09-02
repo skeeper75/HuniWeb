@@ -974,6 +974,30 @@ T-2 로 들어간 2행(`OPV_001027` 일자핀 700 · `OPV_001028` 2구자석 1,7
 
 **M4 는 여기까지. 다음은 지니 결정(D-16 · M5 착수) 대기.**
 
+#### 다음 세션 시작점 (paste-ready · 2026-09-03 02:5x KST)
+
+지니 화면 기준 레인 컨텍스트 70% 도달 → 리드 지시로 `/clear` 인계.
+아래 블록을 새 세션에 그대로 붙여넣는다. 저장본 = `.moai/state/handoff/pending.json`.
+
+```text
+Block 0: moai cc -w t34
+
+ultrathink. SPEC-PRICECOMP-001 run 진입 — 카드 t34 · M4 정지점에서 이어받는다.
+applied lessons: webadmin-formula-inline-replace-single-save, huni-price-write-via-screen-ui-only, price-grid-orientation-authority-260902, widget-screen-is-truth-260823
+source_session_id: <not-available — /moai session register 로 backfill>
+
+전제 검증:
+0) git rev-parse --show-toplevel → 끝이 .claude/worktrees/t34 · 브랜치 WT-price-comp-rebuild · HEAD e37d43b9(≥ 540eb29c)
+1) 라이브 SELECT: 새 그릇 43(배선 42 · 미배선 1 = ACRYLIC_MIRROR3T_PRINT 의도적 고아) · 새 그릇을 보는 공식 47 · 상품 56 · 의도치 않은 옛+새 혼재 0
+2) progress.md §E.2 「트랙 A · M4 마감 정리」 절을 먼저 읽는다 — 순 교정 3 / 일시 불일치 2 / 코드만 변경 2 · 확인 항목 4 · 회신 대기 6 · M6 판단 5 · 화면 조작 누계 28
+3) 정지 사유 확인: D-16(메쉬 공용배선)과 M5 착수는 지니 결정 대기. 결정 전까지 라이브 쓰기 0
+
+실행: /moai run SPEC-PRICECOMP-001 — 지니 결정을 먼저 받는다. ① D-16: 메쉬현수막 가공·부자재를 일반현수막 그릇에 공용 배선하면 옵션 코드가 그룹마다 달라(메쉬 OPV_001000~003/OPV_000425~426 vs 일반 OPV_000006~011/OPV_000013~016) 전부 0원이 된다 → 현행 유지 권장. ② 승인 시 M5(골든 61 재산출 + 위젯 진단). [HARD] COMP_STK_PRINT 사용중지 금지(회신 5번 대기) · 라이브 등록·수정은 webadmin 실화면만 · 조작 전후 스크린샷 · 공식 인라인은 「새 행 추가 + 옛 행 DELETE」 1회 저장.
+
+후속: M5 통과 후 M6(옛 그릇 use_yn=N · 판단 항목 5건) → 트랙 B.
+```
+
+
 ---
 
 ## §E.3 Run-phase Audit-Ready Signal
@@ -985,5 +1009,6 @@ _<M1 진행 중 — M6 완료 후 채운다>_
 _<sync 단계 대기>_
 
 - plan_complete_at: 2026-09-02T20:00:00Z
+- handoff_at: 2026-09-03 02:5x KST · HEAD e37d43b9 · 다음 세션 시작점 = §E.2 「다음 세션 시작점」
 - run_status: **M1·M2·M3 완료 · M4 파일럿+묶음① 완료(33공식·45행)** · 골든 재산출 후 잔여 금액차 4조합(결함 D-14 `opt_grp:` 스코프 누락) · DB 직접 쓰기 0 · D-14 보정 완료 · **묶음② 완료**(스티커 7/12 + 타투 + 포스터 8공식 · 골든 금액차 0 · D-11 전치 교정으로 세로 1200 초과 포스터 0원 해소) · **묶음③ 미니파츠 완료(6,320 검산)** · 메쉬 공용배선 정지(D-16 옵션코드 불일치) · 보류 5상품 회신 대기
 - plan_status: audit-ready (5차 감사 PASS · 0.96 · 차단 결함 0 · 확인 대기 0)
