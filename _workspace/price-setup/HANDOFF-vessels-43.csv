@@ -1,0 +1,44 @@
+comp_cd,comp_nm,prc_typ_cd,use_dims,use_yn,price_rows,bound_formulas
+ACRYLIC_CARABINER_FINAL,아크릴_카라비너_제작가,PRICE_TYPE.02,"[""siz_cd""  ""min_qty""]",Y,4,PRF_ACRYL_CARABINER
+ACRYLIC_CLEAR15T_PRINT,아크릴_투명1.5T_출력가,PRICE_TYPE.01,"[""mat_cd""  ""siz_width""  ""siz_height""  ""min_qty""]",Y,90,PRF_ACRYL_MINIPART
+ACRYLIC_CLEAR3T_PRINT,아크릴_투명3T_출력가,PRICE_TYPE.01,"[""mat_cd""  ""siz_width""  ""siz_height""  ""min_qty""]",Y,196,PRF_ACRYL_BADGE PRF_ACRYL_CLIP PRF_ACRYL_HAIRBAND PRF_ACRYL_KEYRING PRF_ACRYL_MAGNET PRF_ACRYL_NAMETAG PRF_ACRYL_SMARTTOK PRF_CLR_ACRYL
+ACRYLIC_CLEAR8T_PRINT,아크릴_투명8T_출력가,PRICE_TYPE.01,"[""siz_width""  ""siz_height""  ""min_qty""]",Y,36,PRF_COROTTO_ACRYL PRF_COROTTO_ACRYL_MTX
+ACRYLIC_MIRROR3T_PRINT,아크릴_미러3T_출력가,PRICE_TYPE.01,"[""siz_width""  ""siz_height""  ""min_qty""]",Y,81,(미배선)
+ACRYLIC_TOTAL_FINISHING,아크릴_종합_부자재,PRICE_TYPE.01,"[""opt_cd""  ""min_qty""]",Y,24,PRF_ACRYL_BADGE PRF_ACRYL_CLIP PRF_ACRYL_HAIRBAND PRF_ACRYL_KEYRING PRF_ACRYL_MAGNET PRF_ACRYL_NAMETAG PRF_ACRYL_NAMETAG_GS PRF_ACRYL_SMARTTOK PRF_ZIBITZ_ACRYL
+POSTER_ACRYLICSTICKER_FINAL,포스터_아크릴스티커_제작가,PRICE_TYPE.01,"[""siz_cd""  ""mat_cd""  ""min_qty""]",Y,16,FORM_POSTER_ACRYLICSTICKER PRF_POSTER_ACRYLSTK_GLOSS PRF_POSTER_ACRYLSTK_MIRROR
+POSTER_CLEARPVC_PRINT,포스터_투명PVC_출력가,PRICE_TYPE.01,"[""siz_width""  ""siz_height""  ""min_qty""]",Y,52,FORM_POSTER_CLEARPVC_PRINT PRF_POSTER_ADH_CLEAR
+POSTER_FOAMEX_PRINT,포스터_포맥스_출력가,PRICE_TYPE.01,"[""opt_cd""  ""siz_cd""  ""min_qty""]",Y,6,FORM_POSTER_FOAMEX PRF_POSTER_FOMEXBOARD
+POSTER_FORMBOARD_PRINT,포스터_폼보드_출력가,PRICE_TYPE.01,"[""opt_cd""  ""siz_cd""  ""min_qty""]",Y,6,FORM_POSTER_FORMBOARD PRF_POSTER_FOAMBOARD
+POSTER_GRAPHIC_PRINT,포스터_그래픽천_출력가,PRICE_TYPE.01,"[""siz_width""  ""siz_height""  ""min_qty""]",Y,52,FORM_POSTER_GRAPHIC_PRINT PRF_POSTER_ARTFABRIC
+POSTER_HANGINGCANVAS_ADDON,포스터_캔버스행잉_부자재,PRICE_TYPE.01,"[""opt_cd""  ""siz_cd""  ""min_qty""  ""opt_grp:OPT_000283""]",Y,3,FORM_POSTER_HANGINGCANVAS PRF_POSTER_CANVAS_HANGING
+POSTER_HANGINGCANVAS_PRINT,포스터_캔버스행잉_제작가,PRICE_TYPE.01,"[""siz_width""  ""siz_height""  ""siz_cd""  ""min_qty""]",Y,3,FORM_POSTER_HANGINGCANVAS PRF_POSTER_CANVAS_HANGING
+POSTER_HANGINGLINEN_ADDON,포스터_린넨우드봉_부자재,PRICE_TYPE.01,"[""opt_cd""  ""siz_cd""  ""min_qty""  ""opt_grp:OPT_000266""]",Y,3,FORM_POSTER_HANGINGLINEN PRF_POSTER_LINEN_WOODBONG
+POSTER_HANGINGLINEN_PRINT,포스터_린넨우드봉_제작가,PRICE_TYPE.01,"[""siz_cd""  ""min_qty""]",Y,3,FORM_POSTER_HANGINGLINEN PRF_POSTER_LINEN_WOODBONG
+POSTER_HANGINGSCROLL_PRINT,포스터_족자_출력가,PRICE_TYPE.01,"[""siz_cd""  ""min_qty""]",Y,5,FORM_POSTER_HANGINGSCROLL PRF_POSTER_JOKJA
+POSTER_LEATHERPANEL_PRINT,포스터_레더아트액자_출력가,PRICE_TYPE.01,"[""siz_cd""  ""min_qty""]",Y,6,FORM_POSTER_LEATHERPANEL PRF_POSTER_LEATHER_FRAME
+POSTER_LEATHER_PRINT,포스터_레더_출력가,PRICE_TYPE.01,"[""siz_width""  ""siz_height""  ""min_qty""]",Y,52,FORM_POSTER_LEATHER PRF_POSTER_LEATHER_AP
+POSTER_LINEN_FINISHING,포스터_패브릭포스터_가공가,PRICE_TYPE.01,"[""opt_cd""  ""min_qty""]",Y,7,FORM_POSTER_LINEN FORM_POSTER_OXFORD PRF_POSTER_LINEN
+POSTER_LINEN_PRINT,포스터_린넨_출력가,PRICE_TYPE.01,"[""siz_width""  ""siz_height""  ""min_qty""]",Y,52,FORM_POSTER_LINEN PRF_POSTER_LINEN
+POSTER_MESHBANNER_PRINT,포스터_메쉬배너_제작가,PRICE_TYPE.01,"[""siz_cd""  ""min_qty""]",Y,1,FORM_POSTER_MESHBANNER PRF_POSTER_MESH_BANNER
+POSTER_MESHPLACARD_PRINT,포스터_메쉬현수막_출력가,PRICE_TYPE.01,"[""siz_width""  ""siz_height""  ""min_qty""]",Y,48,FORM_POSTER_MESHPLACARD PRF_POSTER_BANNER_M
+POSTER_MESH_PRINT,포스터_메쉬_출력가,PRICE_TYPE.01,"[""siz_width""  ""siz_height""  ""min_qty""]",Y,52,FORM_POSTER_MESH PRF_POSTER_MESH
+POSTER_MINIBANNER_FINAL,포스터_미니배너_제작가,PRICE_TYPE.01,"[""siz_cd""  ""min_qty""]",Y,10,FORM_POSTER_MINIBANNER PRF_POSTER_MINI_BANNER
+POSTER_MINIBOARD_FINAL,포스터_미니스탠딩보드_제작가,PRICE_TYPE.01,"[""siz_cd""  ""min_qty""]",Y,15,FORM_POSTER_MINIBOARD PRF_POSTER_MINI_STANDBOARD
+POSTER_OXFORD_PRINT,포스터_캔버스옥스포드_출력가,PRICE_TYPE.01,"[""siz_width""  ""siz_height""  ""min_qty""]",Y,52,FORM_POSTER_OXFORD PRF_POSTER_CANVAS
+POSTER_PAPER_PRINT,포스터_매트지_출력가,PRICE_TYPE.01,"[""siz_width""  ""siz_height""  ""min_qty""]",Y,39,FORM_POSTER_PAPER_PRINT PRF_POSTER_ARTPAPER
+POSTER_PETBANNER_PRINT,포스터_PET배너_제작가,PRICE_TYPE.01,"[""siz_cd""  ""min_qty""]",Y,1,FORM_POSTER_PETBANNER PRF_POSTER_PET_BANNER
+POSTER_PET_PRINT,포스터_PET_출력가,PRICE_TYPE.01,"[""siz_width""  ""siz_height""  ""min_qty""]",Y,52,FORM_POSTER_PET_PRINT PRF_POSTER_WATERPROOF
+POSTER_PHOTOPAPER_PRINT,포스터_인화지_출력가,PRICE_TYPE.01,"[""siz_width""  ""siz_height""  ""min_qty""]",Y,52,FORM_POSTER_PHOTOPAPER_PRINT PRF_POSTER_ARTPRINT
+POSTER_PLACARD_ADDON,포스터_현수막_부자재,PRICE_TYPE.01,"[""opt_cd""  ""min_qty""  ""opt_grp:OPT_000004""]",Y,4,FORM_POSTER_PLACARD PRF_POSTER_BANNER_N
+POSTER_PLACARD_FINISHING,포스터_현수막_가공가,PRICE_TYPE.01,"[""opt_cd""  ""min_qty""  ""opt_grp:OPT_000003""]",Y,6,FORM_POSTER_PLACARD PRF_POSTER_BANNER_N
+POSTER_PLACARD_PRINT,포스터_일반현수막_출력가,PRICE_TYPE.01,"[""siz_width""  ""siz_height""  ""min_qty""]",Y,80,FORM_POSTER_PLACARD PRF_POSTER_BANNER_N
+POSTER_PVC_PRINT,포스터_PVC_출력가,PRICE_TYPE.01,"[""siz_width""  ""siz_height""  ""min_qty""]",Y,52,FORM_POSTER_PVC_PRINT PRF_POSTER_ADH_WP
+POSTER_SHEETCUT_FINAL,포스터_시트커팅_제작가,PRICE_TYPE.01,"[""siz_cd""  ""mat_cd""  ""min_qty""]",Y,9,FORM_POSTER_SHEETCUT PRF_POSTER_SHEETCUT_HOLO PRF_POSTER_SHEETCUT_MATTE
+POSTER_TYVEK_PRINT,포스터_타이벡_출력가,PRICE_TYPE.01,"[""siz_width""  ""siz_height""  ""min_qty""]",Y,52,FORM_POSTER_TYVEK PRF_POSTER_TYVEK
+POSTER_WOODPANEL_PRINT,포스터_나무판넬_출력가,PRICE_TYPE.01,"[""siz_cd""  ""min_qty""]",Y,3,FORM_POSTER_WOODPANEL PRF_POSTER_FRAMELESS
+STK_CUT_CLEAR_PRINT,스티커_완칼투명_제작가,PRICE_TYPE.01,"[""siz_cd""  ""mat_cd""  ""min_qty""]",Y,30,PRF_STK_CUT_CLEAR
+STK_CUT_LARGE_PRINT,스티커_완칼대형_제작가,PRICE_TYPE.01,"[""siz_cd""  ""mat_cd""  ""min_qty""]",Y,6,PRF_STK_CUT_LARGE
+STK_CUT_PRINT,스티커_완칼_제작가,PRICE_TYPE.01,"[""siz_cd""  ""mat_cd""  ""min_qty""]",Y,30,PRF_STK_CUT
+STK_KISSCUT_PRINT,스티커_반칼_제작가,PRICE_TYPE.01,"[""siz_cd""  ""mat_cd""  ""min_qty""]",Y,1728,PRF_STK_KISSCUT
+STK_TATTOO_PRINT,스티커_타투_제작가,PRICE_TYPE.01,"[""siz_cd""  ""min_qty""]",Y,1,PRF_STK_TATTOO
+STK_TATTOO_SETUP,스티커_타투_기본가,PRICE_TYPE.03,"[""min_qty""]",Y,1,PRF_STK_TATTOO
