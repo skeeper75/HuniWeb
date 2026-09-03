@@ -1,0 +1,7 @@
+$ psql <DATABASE_URL> -c "select (select count(*) from t_prc_price_components) as 그릇총수, (select count(*) from t_prc_component_prices) as 단가행총수;"
+
+ 그릇총수 | 단가행총수 
+----------+------------
+      284 |      29368
+(1 row)
+

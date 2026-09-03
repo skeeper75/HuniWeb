@@ -1,0 +1,13 @@
+$ psql <DATABASE_URL> -c "select comp_cd, prc_typ_cd, (select count(*) from t_prc_component_prices p where p.comp_cd=c.comp_cd) rows, to_char(coalesce(upd_dt,reg_dt),'MM-DD HH24:MI') last_upd from t_prc_price_components c where comp_cd in ('COMP_PP_CORNER_RIGHT','COMP_PP_CREASE_1L','COMP_PP_PERF_1L','COMP_PP_VARTEXT_1EA','COMP_PP_VARIMG_1EA','COMP_CUT_FULL_DIECUT','COMP_ENV_MAKING') order by 1;"
+
+       comp_cd        |  prc_typ_cd   | rows |  last_upd   
+----------------------+---------------+------+-------------
+ COMP_CUT_FULL_DIECUT | PRICE_TYPE.03 |   72 | 08-30 17:50
+ COMP_ENV_MAKING      | PRICE_TYPE.02 |   60 | 09-03 14:09
+ COMP_PP_CORNER_RIGHT | PRICE_TYPE.03 |   18 | 09-01 18:00
+ COMP_PP_CREASE_1L    | PRICE_TYPE.03 |   30 | 08-30 16:45
+ COMP_PP_PERF_1L      | PRICE_TYPE.03 |   30 | 08-30 16:46
+ COMP_PP_VARIMG_1EA   | PRICE_TYPE.03 |   72 | 08-30 16:46
+ COMP_PP_VARTEXT_1EA  | PRICE_TYPE.03 |   72 | 08-30 16:46
+(7 rows)
+

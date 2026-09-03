@@ -1,0 +1,56 @@
+== P6 라이브 재검산 (권위 표 ↔ 라이브) ==
+COMP_PP_CORNER_RIGHT   라이브 28행 누락0 잉여0 값차이0 적용일차이0 적용일['2026-06-01'] diff 0 ✓
+COMP_PP_CREASE_1L      라이브 45행 누락0 잉여0 값차이0 적용일차이0 적용일['2026-06-01'] diff 0 ✓
+COMP_PP_PERF_1L        라이브 45행 누락0 잉여0 값차이0 적용일차이0 적용일['2026-06-01'] diff 0 ✓
+
+합계 118행 · 3/3 diff 0 ✓
+
+== 이름 변경 2건 ==
+       comp_cd        |      comp_nm      | note_len | rows 
+----------------------+-------------------+----------+------
+ COMP_CUT_FULL_DIECUT | 커팅_국4절_완칼   |      478 |   72
+ COMP_ENV_MAKING      | 봉투제작 완제품가 |      123 |   60
+(2 rows)
+
+
+== 손대지 않은 그릇(가변) 확인 ==
+       comp_cd       |  comp_nm   | rows |  last_upd   
+---------------------+------------+------+-------------
+ COMP_PP_VARIMG_1EA  | 가변이미지 |   72 | 08-30 16:46
+ COMP_PP_VARTEXT_1EA | 가변텍스트 |   72 | 08-30 16:46
+(2 rows)
+
+
+
+== P6 골든 before ↔ after (81줄) ==
+변한 줄 24 · 그중 의도 밖 **0** · 의도했는데 안 변한 줄 0
+
+상품          그릇                         수량    before     after  사유
+PRD_000016  COMP_PP_CORNER_RIGHT      101      2000      4000  하한 오기(C-6)
+PRD_000016  COMP_PP_CORNER_RIGHT     6000     51000     61000  상단 5구간(C-5)
+PRD_000016  COMP_PP_CORNER_RIGHT    10000     51000    101000  상단 5구간(C-5)
+PRD_000017  COMP_PP_CORNER_RIGHT      101      2000      4000  하한 오기(C-6)
+PRD_000017  COMP_PP_CORNER_RIGHT     6000     51000     61000  상단 5구간(C-5)
+PRD_000017  COMP_PP_CORNER_RIGHT    10000     51000    101000  상단 5구간(C-5)
+PRD_000018  COMP_PP_CORNER_RIGHT      101      2000      4000  하한 오기(C-6)
+PRD_000018  COMP_PP_CORNER_RIGHT     6000     51000     61000  상단 5구간(C-5)
+PRD_000018  COMP_PP_CORNER_RIGHT    10000     51000    101000  상단 5구간(C-5)
+PRD_000016  COMP_PP_CREASE_1L        6000    105000    125000  상단 5구간(C-5)
+PRD_000016  COMP_PP_CREASE_1L       10000    105000    205000  상단 5구간(C-5)
+PRD_000018  COMP_PP_CREASE_1L        6000    105000    125000  상단 5구간(C-5)
+PRD_000018  COMP_PP_CREASE_1L       10000    105000    205000  상단 5구간(C-5)
+PRD_000041  COMP_PP_CREASE_1L        6000    105000    125000  상단 5구간(C-5)
+PRD_000041  COMP_PP_CREASE_1L       10000    105000    205000  상단 5구간(C-5)
+PRD_000016  COMP_PP_PERF_1L           301     15000     17000  하한 오기(C-6)
+PRD_000016  COMP_PP_PERF_1L          6000    105000    125000  상단 5구간(C-5)
+PRD_000016  COMP_PP_PERF_1L         10000    105000    205000  상단 5구간(C-5)
+PRD_000018  COMP_PP_PERF_1L           301     15000     17000  하한 오기(C-6)
+PRD_000018  COMP_PP_PERF_1L          6000    105000    125000  상단 5구간(C-5)
+PRD_000018  COMP_PP_PERF_1L         10000    105000    205000  상단 5구간(C-5)
+PRD_000041  COMP_PP_PERF_1L           301     15000     17000  하한 오기(C-6)
+PRD_000041  COMP_PP_PERF_1L          6000    105000    125000  상단 5구간(C-5)
+PRD_000041  COMP_PP_PERF_1L         10000    105000    205000  상단 5구간(C-5)
+
+변하지 않은 줄 57 — 대조군(100·300·500·1000·5000) 포함 전부 동일
+
+판정: 의도된 교정만 반영 ✓

@@ -1,0 +1,24 @@
+$ psql <DATABASE_URL> -c "select comp_cd, proc_cd, coalesce(dim_vals::text,'') dv, min_qty, unit_price from t_prc_component_prices where comp_cd='COMP_PP_CORNER_RIGHT' order by proc_cd, min_qty;"
+
+       comp_cd        |   proc_cd   | dv | min_qty | unit_price 
+----------------------+-------------+----+---------+------------
+ COMP_PP_CORNER_RIGHT | PROC_000027 |    |       1 |       0.00
+ COMP_PP_CORNER_RIGHT | PROC_000027 |    |     100 |       0.00
+ COMP_PP_CORNER_RIGHT | PROC_000027 |    |     300 |       0.00
+ COMP_PP_CORNER_RIGHT | PROC_000027 |    |     500 |       0.00
+ COMP_PP_CORNER_RIGHT | PROC_000027 |    |    1000 |       0.00
+ COMP_PP_CORNER_RIGHT | PROC_000027 |    |    2000 |       0.00
+ COMP_PP_CORNER_RIGHT | PROC_000027 |    |    3000 |       0.00
+ COMP_PP_CORNER_RIGHT | PROC_000027 |    |    4000 |       0.00
+ COMP_PP_CORNER_RIGHT | PROC_000027 |    |    5000 |       0.00
+ COMP_PP_CORNER_RIGHT | PROC_000028 |    |       1 |    2000.00
+ COMP_PP_CORNER_RIGHT | PROC_000028 |    |     100 |    2000.00
+ COMP_PP_CORNER_RIGHT | PROC_000028 |    |     300 |    4000.00
+ COMP_PP_CORNER_RIGHT | PROC_000028 |    |     500 |    6000.00
+ COMP_PP_CORNER_RIGHT | PROC_000028 |    |    1000 |   11000.00
+ COMP_PP_CORNER_RIGHT | PROC_000028 |    |    2000 |   21000.00
+ COMP_PP_CORNER_RIGHT | PROC_000028 |    |    3000 |   31000.00
+ COMP_PP_CORNER_RIGHT | PROC_000028 |    |    4000 |   41000.00
+ COMP_PP_CORNER_RIGHT | PROC_000028 |    |    5000 |   51000.00
+(18 rows)
+

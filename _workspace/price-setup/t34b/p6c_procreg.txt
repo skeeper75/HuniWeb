@@ -1,0 +1,12 @@
+$ psql <DATABASE_URL> -c "select pp.proc_cd, pr.proc_nm, pr.upr_proc_cd, count(distinct pp.prd_cd) prds from t_prd_product_processes pp join t_proc_processes pr on pr.proc_cd=pp.proc_cd where coalesce(pp.del_yn,'N')='N' and (pp.proc_cd in ('PROC_000029','PROC_000030','PROC_000090','PROC_000086','PROC_000026','PROC_000027','PROC_000028','PROC_000152')) group by 1,2,3 order by 1;"
+
+   proc_cd   |      proc_nm      | upr_proc_cd | prds 
+-------------+-------------------+-------------+------
+ PROC_000027 | 직각모서리        | PROC_000026 |   13
+ PROC_000028 | 둥근모서리(4방4R) | PROC_000026 |   13
+ PROC_000029 | 오시              |             |    4
+ PROC_000030 | 미싱              |             |    4
+ PROC_000090 | 오시              | PROC_000029 |    1
+ PROC_000152 | 둥근모서리(2방4R) | PROC_000026 |    1
+(6 rows)
+

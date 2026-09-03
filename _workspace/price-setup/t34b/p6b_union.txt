@@ -1,0 +1,7 @@
+$ psql <DATABASE_URL> -c "with c as (select distinct fc.frm_cd from t_prc_formula_components fc where fc.comp_cd in ('COMP_PP_CORNER_RIGHT','COMP_PP_CREASE_1L','COMP_PP_PERF_1L')) select (select count(*) from c) 공식_고유, (select count(distinct pf.prd_cd) from t_prd_product_price_formulas pf join c on c.frm_cd=pf.frm_cd) 상품_고유, (select count(distinct pf.prd_cd) from t_prd_product_price_formulas pf join c on c.frm_cd=pf.frm_cd join t_prd_products p on p.prd_cd=pf.prd_cd where coalesce(p.use_yn,'Y')='Y') 상품_사용중;"
+
+ 공식_고유 | 상품_고유 | 상품_사용중 
+-----------+-----------+-------------
+        12 |        21 |          20
+(1 row)
+
