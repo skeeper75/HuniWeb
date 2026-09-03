@@ -1,0 +1,7 @@
+$ psql <DATABASE_URL> -c "select f.formula_cd, f.formula_nm, count(distinct pf.prd_cd) as prd_cnt from t_prc_price_formulas f left join t_prd_product_price_formulas pf on pf.formula_cd=f.formula_cd where f.formula_cd like 'PRF_DGP%' group by 1,2 order by 1;"
+
+
+[STDERR]
+ERROR:  column pf.formula_cd does not exist
+LINE 1: ...as f left join t_prd_product_price_formulas pf on pf.formula...
+                                                             ^

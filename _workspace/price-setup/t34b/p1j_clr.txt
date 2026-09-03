@@ -1,0 +1,7 @@
+$ psql <DATABASE_URL> -c "select clr_cd, clr_nm from t_clr_colors order by clr_cd limit 15;"
+
+
+[STDERR]
+ERROR:  relation "t_clr_colors" does not exist
+LINE 1: select clr_cd, clr_nm from t_clr_colors order by clr_cd limi...
+                                   ^

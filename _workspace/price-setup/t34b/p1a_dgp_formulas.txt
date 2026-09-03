@@ -1,0 +1,19 @@
+$ psql <DATABASE_URL> -c "select pf.frm_cd, f.frm_nm, count(*) cnt, string_agg(pf.prd_cd, ',' order by pf.prd_cd) prds from t_prd_product_price_formulas pf join t_prc_price_formulas f on f.frm_cd=pf.frm_cd where pf.frm_cd like 'PRF_DGP%' group by 1,2 order by 1;"
+
+      frm_cd       |                         frm_nm                         | cnt |                                                     prds                                                      
+-------------------+--------------------------------------------------------+-----+---------------------------------------------------------------------------------------------------------------
+ PRF_DGP_A         | 디지털인쇄 원자합산형A 엽서·상품권·슬로건              |  10 | PRD_000016,PRD_000017,PRD_000018,PRD_000019,PRD_000020,PRD_000021,PRD_000022,PRD_000026,PRD_000041,PRD_000042
+ PRF_DGP_A_FOIL    | 프리미엄쿠폰/상품권(디지털인쇄)+박                     |   1 | PRD_000042
+ PRF_DGP_B         | 디지털인쇄 원자합산형B 모양엽서·라벨택                 |   2 | PRD_000023,PRD_000046
+ PRF_DGP_C         | 디지털인쇄 원자합산형C 인쇄배경지·헤더택               |   3 | PRD_000043,PRD_000044,PRD_000045
+ PRF_DGP_C_6CR     | 디지털인쇄 원자합산형C-6단접지 지그재그엽서            |   1 | PRD_000030
+ PRF_DGP_CAL_DESK  | 디지털인쇄 원자합산형-탁상형캘린더(캘린더제본)         |   2 | PRD_000108,PRD_000109
+ PRF_DGP_CAL_WIDE  | 디지털인쇄 원자합산형-와이드벽걸이캘린더(트윈링)       |   2 | PRD_000111,PRD_000112
+ PRF_DGP_D         | 디지털인쇄 원자합산형D 소량전단지                      |   1 | PRD_000047
+ PRF_DGP_E         | 디지털인쇄 원자합산형E 접지카드·접지리플렛             |   5 | PRD_000027,PRD_000028,PRD_000029,PRD_000048,PRD_000049
+ PRF_DGP_E_FOIL    | 접지카드(디지털인쇄·접지·타공)+박                      |   3 | PRD_000027,PRD_000028,PRD_000029
+ PRF_DGP_F         | 디지털인쇄 원자합산형F 썬캡(미출시)                    |   1 | PRD_000051
+ PRF_DGP_INNER     | 디지털인쇄 책자 내지(인쇄비+용지비·출력매수)           |   8 | PRD_000110,PRD_000284,PRD_000285,PRD_000286,PRD_000287,PRD_000289,PRD_000291,PRD_000311
+ PRF_DGP_INNER_CAL | 디지털인쇄 엽서캘린더 내지(인쇄비+용지비+캘린더가공비) |   1 | PRD_000110
+(13 rows)
+

@@ -1,0 +1,24 @@
+$ psql <DATABASE_URL> -c "with dgp as (select distinct prd_cd from t_prd_product_price_formulas where frm_cd like 'PRF_DGP%') select pp.proc_cd, pr.proc_nm, pr.upr_proc_cd, count(distinct pp.prd_cd) prds, string_agg(distinct pp.prd_cd,',') list from t_prd_product_processes pp join t_proc_processes pr on pr.proc_cd=pp.proc_cd join dgp on dgp.prd_cd=pp.prd_cd where coalesce(pp.del_yn,'N')='N' and (pr.upr_proc_cd in ('PROC_000007','PROC_000013','PROC_000056','PROC_000079','PROC_000026','PROC_000029','PROC_000030') or pr.proc_cd in ('PROC_000007','PROC_000013','PROC_000056','PROC_000079')) group by 1,2,3 order by 3,1;"
+
+   proc_cd   |      proc_nm      | upr_proc_cd | prds |                          list                          
+-------------+-------------------+-------------+------+--------------------------------------------------------
+ PROC_000008 | 화이트인쇄        | PROC_000007 |    2 | PRD_000019,PRD_000020
+ PROC_000009 | 클리어인쇄        | PROC_000007 |    1 | PRD_000020
+ PROC_000010 | 핑크인쇄          | PROC_000007 |    1 | PRD_000021
+ PROC_000014 | 유광라미네이팅    | PROC_000013 |    5 | PRD_000017,PRD_000026,PRD_000047,PRD_000048,PRD_000049
+ PROC_000015 | 무광라미네이팅    | PROC_000013 |    5 | PRD_000017,PRD_000026,PRD_000047,PRD_000048,PRD_000049
+ PROC_000027 | 직각모서리        | PROC_000026 |    4 | PRD_000016,PRD_000017,PRD_000018,PRD_000019
+ PROC_000028 | 둥근모서리(4방4R) | PROC_000026 |    4 | PRD_000016,PRD_000017,PRD_000018,PRD_000019
+ PROC_000090 | 오시              | PROC_000029 |    1 | PRD_000045
+ PROC_000059 | 2단카드접지       | PROC_000056 |    2 | PRD_000027,PRD_000028
+ PROC_000060 | 3단카드접지       | PROC_000056 |    2 | PRD_000029,PRD_000049
+ PROC_000071 | 4단병풍접지       | PROC_000056 |    2 | PRD_000048,PRD_000049
+ PROC_000073 | 6단오시접지       | PROC_000056 |    1 | PRD_000030
+ PROC_000074 | 6단미싱접지       | PROC_000056 |    1 | PRD_000030
+ PROC_000106 | 4단대문접지       | PROC_000056 |    2 | PRD_000048,PRD_000049
+ PROC_000107 | 반접지            | PROC_000056 |    1 | PRD_000048
+ PROC_000171 | 3단접지           | PROC_000056 |    1 | PRD_000048
+ PROC_000126 | 1구 6mm 타공      | PROC_000079 |    2 | PRD_000045,PRD_000110
+ PROC_000127 | 2구 6mm 타공      | PROC_000079 |    1 | PRD_000111
+(18 rows)
+

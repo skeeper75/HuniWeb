@@ -1,0 +1,22 @@
+$ psql <DATABASE_URL> -c "select 'PLT' src, siz_cd cd, siz_nm nm from t_siz_sizes where siz_cd in ('SIZ_000499','SIZ_000475','SIZ_000535') union all select 'POPT', print_opt_cd, print_opt_nm from t_prt_print_options order by 1,2;"
+
+ src  |     cd      |     nm     
+------+-------------+------------
+ PLT  | SIZ_000475  | 330x660
+ PLT  | SIZ_000499  | 316x467
+ PLT  | SIZ_000535  | 330x540
+ POPT | POPT_000001 | 단면
+ POPT | POPT_000002 | 양면
+ POPT | POPT_000003 | 풀빼다
+ POPT | POPT_000004 | 배면양면
+ POPT | POPT_000005 | 투명테두리
+ POPT | POPT_000006 | 배면9도
+ POPT | POPT_000007 | 배면6도
+ POPT | POPT_000008 | 단면1도
+ POPT | POPT_000009 | 양면1도
+ POPT | POPT_000010 | 배면5도
+ POPT | POPT_000011 | 전면5도
+ POPT | POPT_000012 | 전면1도
+ POPT | POPT_000013 | 전면4도
+(16 rows)
+

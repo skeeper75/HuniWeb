@@ -1,0 +1,49 @@
+$ psql <DATABASE_URL> -c "select proc_cd, proc_nm, upr_proc_cd, use_yn from t_proc_processes where proc_nm like '%코팅%' or proc_nm like '%접지%' or proc_nm like '%타공%' or proc_nm like '%오시%' or proc_nm like '%미싱%' or proc_nm like '%모서리%' or proc_nm like '%별색%' order by upr_proc_cd nulls first, proc_cd;"
+
+   proc_cd   |      proc_nm      | upr_proc_cd | use_yn 
+-------------+-------------------+-------------+--------
+ PROC_000007 | 별색인쇄          |             | Y
+ PROC_000013 | 라미네이팅 코팅   |             | Y
+ PROC_000029 | 오시              |             | Y
+ PROC_000030 | 미싱              |             | Y
+ PROC_000056 | 접지              |             | Y
+ PROC_000079 | 타공              |             | Y
+ PROC_000104 | 현수막타공        |             | Y
+ PROC_000114 | 쿨코팅            |             | Y
+ PROC_000027 | 직각모서리        | PROC_000026 | Y
+ PROC_000028 | 둥근모서리(4방4R) | PROC_000026 | Y
+ PROC_000152 | 둥근모서리(2방4R) | PROC_000026 | Y
+ PROC_000090 | 오시              | PROC_000029 | Y
+ PROC_000086 | 미싱              | PROC_000030 | Y
+ PROC_000057 | 가로접지          | PROC_000056 | Y
+ PROC_000058 | 세로접지          | PROC_000056 | Y
+ PROC_000059 | 2단카드접지       | PROC_000056 | Y
+ PROC_000060 | 3단카드접지       | PROC_000056 | Y
+ PROC_000061 | 4단접지           | PROC_000056 | Y
+ PROC_000062 | 5단접지           | PROC_000056 | Y
+ PROC_000063 | 6단접지           | PROC_000056 | Y
+ PROC_000064 | 8단접지           | PROC_000056 | Y
+ PROC_000065 | 2단가로접지       | PROC_000056 | Y
+ PROC_000066 | 2단세로접지       | PROC_000056 | Y
+ PROC_000067 | 3단가로접지       | PROC_000056 | Y
+ PROC_000068 | 3단세로접지       | PROC_000056 | Y
+ PROC_000069 | 4단가로접지       | PROC_000056 | Y
+ PROC_000070 | 4단세로접지       | PROC_000056 | Y
+ PROC_000071 | 4단병풍접지       | PROC_000056 | Y
+ PROC_000072 | 롤접지            | PROC_000056 | Y
+ PROC_000073 | 6단오시접지       | PROC_000056 | Y
+ PROC_000074 | 6단미싱접지       | PROC_000056 | Y
+ PROC_000106 | 4단대문접지       | PROC_000056 | Y
+ PROC_000107 | 반접지            | PROC_000056 | Y
+ PROC_000171 | 3단접지           | PROC_000056 | Y
+ PROC_000092 | 1구 4mm 타공      | PROC_000079 | Y
+ PROC_000103 | 현수막타공        | PROC_000079 | Y
+ PROC_000126 | 1구 6mm 타공      | PROC_000079 | Y
+ PROC_000127 | 2구 6mm 타공      | PROC_000079 | Y
+ PROC_000128 | 3구 바인더 타공   | PROC_000079 | Y
+ PROC_000170 | 봉미싱(7cm)       | PROC_000080 | Y
+ PROC_000105 | 현수막타공        | PROC_000104 | Y
+ PROC_000115 | 쿨코팅(유광)      | PROC_000114 | Y
+ PROC_000116 | 쿨코팅(무광)      | PROC_000114 | Y
+(43 rows)
+

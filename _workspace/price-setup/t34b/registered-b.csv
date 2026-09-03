@@ -1,0 +1,9 @@
+order,comp_cd,comp_typ_cd,prc_typ_cd,use_yn,del_yn,use_dims,reg_dt,total_before,total_after,verdict,screenshot
+1,PRINT_SUPERA3_CMYK,PRC_COMPONENT_TYPE.01,PRICE_TYPE.01,Y,N,"[""proc_cd""  ""plt_siz_cd""  ""print_opt_cd""  ""min_qty""  ""proc_grp:PROC_000001""]",2026-09-03 17:44:56.985492,276,277,OK,f01-PRINT_SUPERA3_CMYK.png
+2,PRINT_WIDE_CMYK,PRC_COMPONENT_TYPE.01,PRICE_TYPE.01,Y,N,"[""proc_cd""  ""plt_siz_cd""  ""print_opt_cd""  ""min_qty""  ""proc_grp:PROC_000001""]",2026-09-03 17:45:14.643375,277,278,OK,f02-PRINT_WIDE_CMYK.png
+3,PRINT_SUPERA3_SPOT,PRC_COMPONENT_TYPE.01,PRICE_TYPE.01,Y,N,"[""plt_siz_cd""  ""proc_cd""  ""spot_side_cnt""  ""min_qty""  ""proc_grp:PROC_000007""]",2026-09-03 17:45:25.943175,278,279,OK,f03-PRINT_SUPERA3_SPOT.png
+4,COAT_SUPERA3_LAMINATING,PRC_COMPONENT_TYPE.02,PRICE_TYPE.01,Y,N,"[""proc_cd""  ""plt_siz_cd""  ""coat_side_cnt""  ""min_qty""  ""proc_grp:PROC_000013""]",2026-09-03 17:45:37.260829,279,280,OK,f04-COAT_SUPERA3_LAMINATING.png
+5,COAT_WIDE_LAMINATING,PRC_COMPONENT_TYPE.02,PRICE_TYPE.01,Y,N,"[""proc_cd""  ""plt_siz_cd""  ""coat_side_cnt""  ""min_qty""  ""proc_grp:PROC_000013""]",2026-09-03 17:45:48.403792,280,281,OK,f05-COAT_WIDE_LAMINATING.png
+6,FOLD_CARD_PROCESSING,PRC_COMPONENT_TYPE.04,PRICE_TYPE.03,Y,N,"[""proc_cd""  ""min_qty""  ""proc_grp:PROC_000056""]",2026-09-03 17:46:00.647574,281,282,OK,f06-FOLD_CARD_PROCESSING.png
+7,FOLD_LEAFLLET_PROCESSING,PRC_COMPONENT_TYPE.04,PRICE_TYPE.03,Y,N,"[""proc_cd""  ""min_qty""  ""proc_grp:PROC_000056""]",2026-09-03 17:46:12.666758,282,283,OK,f07-FOLD_LEAFLLET_PROCESSING.png
+8,PUNCHING_PROCESSING,PRC_COMPONENT_TYPE.04,PRICE_TYPE.02,Y,N,"[""proc_cd""  ""min_qty""  ""proc_grp:PROC_000079""]",2026-09-03 17:46:23.82381,283,284,OK,f08-PUNCHING_PROCESSING.png

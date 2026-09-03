@@ -1,0 +1,24 @@
+$ psql <DATABASE_URL> -c "select comp_cd, comp_nm, prc_typ_cd, use_dims from t_prc_price_components where comp_cd in ('COMP_PRINT_DIGITAL_S1','COMP_PRINT_DIGITAL_S2','COMP_PRINT_SPOT_WHITE_S1','COMP_COAT_MATTE','COMP_COAT_GLOSSY','COMP_FOLD_CARD_6CR','COMP_FOLD_LEAF_HALF','COMP_FOLD_LEAF_3FOLD','COMP_FOLD_LEAF_4ACC','COMP_FOLD_LEAF_4GATE','COMP_CUT_PERF_1H6','COMP_PP_CORNER_RIGHT','COMP_PP_CREASE_1L','COMP_PP_PERF_1L','COMP_PP_VARTEXT_1EA','COMP_PP_VARIMG_1EA','COMP_CUT_FULL_DIECUT','COMP_ENV_MAKING') order by comp_cd;"
+
+         comp_cd          |               comp_nm               |  prc_typ_cd   |                                   use_dims                                    
+--------------------------+-------------------------------------+---------------+-------------------------------------------------------------------------------
+ COMP_COAT_GLOSSY         | 유광코팅비                          | PRICE_TYPE.01 | ["proc_cd", "plt_siz_cd", "coat_side_cnt", "min_qty", "proc_grp:PROC_000013"]
+ COMP_COAT_MATTE          | 무광코팅비                          | PRICE_TYPE.01 | ["proc_cd", "plt_siz_cd", "coat_side_cnt", "min_qty", "proc_grp:PROC_000013"]
+ COMP_CUT_FULL_DIECUT     | 커팅 완제품가 완칼(모양엽서·라벨택) | PRICE_TYPE.03 | ["plt_siz_cd", "proc_cd", "min_qty", "proc_grp:PROC_000121"]
+ COMP_CUT_PERF_1H6        | 타공비 (6mm)                        | PRICE_TYPE.02 | ["proc_cd", "min_qty", "proc_grp:PROC_000079"]
+ COMP_ENV_MAKING          | 봉투제작(합판)                      | PRICE_TYPE.02 | ["siz_cd", "mat_cd", "min_qty"]
+ COMP_FOLD_CARD_6CR       | 접지비 카드 6크리즈                 | PRICE_TYPE.03 | ["proc_cd", "min_qty", "proc_grp:PROC_000056"]
+ COMP_FOLD_LEAF_3FOLD     | 접지비 리플렛 3단                   | PRICE_TYPE.03 | ["proc_cd", "min_qty", "proc_grp:PROC_000056"]
+ COMP_FOLD_LEAF_4ACC      | 접지비 리플렛 4단아코디언           | PRICE_TYPE.03 | ["proc_cd", "min_qty", "proc_grp:PROC_000056"]
+ COMP_FOLD_LEAF_4GATE     | 접지비 리플렛 4단게이트             | PRICE_TYPE.03 | ["proc_cd", "min_qty", "proc_grp:PROC_000056"]
+ COMP_FOLD_LEAF_HALF      | 접지비 리플렛 반접지                | PRICE_TYPE.03 | ["proc_cd", "min_qty", "proc_grp:PROC_000056"]
+ COMP_PP_CORNER_RIGHT     | 귀돌이                              | PRICE_TYPE.03 | ["proc_cd", "min_qty", "proc_grp:PROC_000026"]
+ COMP_PP_CREASE_1L        | 오시비                              | PRICE_TYPE.03 | ["proc_cd", "min_qty", "proc_grp:PROC_000029"]
+ COMP_PP_PERF_1L          | 미싱비                              | PRICE_TYPE.03 | ["proc_cd", "min_qty", "proc_grp:PROC_000030"]
+ COMP_PP_VARIMG_1EA       | 가변이미지                          | PRICE_TYPE.03 | ["proc_cd", "min_qty", "proc_grp:PROC_000085"]
+ COMP_PP_VARTEXT_1EA      | 가변텍스트                          | PRICE_TYPE.03 | ["proc_cd", "min_qty", "proc_grp:PROC_000085"]
+ COMP_PRINT_DIGITAL_S1    | 디지털인쇄                          | PRICE_TYPE.01 | ["proc_cd", "plt_siz_cd", "print_opt_cd", "min_qty", "proc_grp:PROC_000001"]
+ COMP_PRINT_DIGITAL_S2    | 디지털인쇄비                        | PRICE_TYPE.01 | ["proc_cd", "plt_siz_cd", "print_opt_cd", "min_qty", "proc_grp:PROC_000001"]
+ COMP_PRINT_SPOT_WHITE_S1 | 별색인쇄비                          | PRICE_TYPE.01 | ["plt_siz_cd", "proc_cd", "spot_side_cnt", "min_qty", "proc_grp:PROC_000007"]
+(18 rows)
+

@@ -1,0 +1,82 @@
+$ psql <DATABASE_URL> -c "select table_name, column_name, data_type from information_schema.columns where table_schema='public' and table_name in ('t_prd_product_price_formulas','t_prc_price_formulas','t_prd_product_processes','t_prd_product_print_options','t_prd_product_plate_sizes','t_proc_processes','t_prt_print_options') order by table_name, ordinal_position;"
+
+          table_name          |     column_name     |          data_type          
+------------------------------+---------------------+-----------------------------
+ t_prc_price_formulas         | frm_cd              | character varying
+ t_prc_price_formulas         | frm_nm              | character varying
+ t_prc_price_formulas         | note                | character varying
+ t_prc_price_formulas         | use_yn              | character
+ t_prc_price_formulas         | reg_dt              | timestamp without time zone
+ t_prc_price_formulas         | upd_dt              | timestamp without time zone
+ t_prd_product_plate_sizes    | prd_cd              | character varying
+ t_prd_product_plate_sizes    | siz_cd              | character varying
+ t_prd_product_plate_sizes    | dflt_plt_yn         | character
+ t_prd_product_plate_sizes    | output_paper_typ_cd | character varying
+ t_prd_product_plate_sizes    | output_file_typ     | character varying
+ t_prd_product_plate_sizes    | note                | character varying
+ t_prd_product_plate_sizes    | reg_dt              | timestamp without time zone
+ t_prd_product_plate_sizes    | upd_dt              | timestamp without time zone
+ t_prd_product_plate_sizes    | del_yn              | character
+ t_prd_product_plate_sizes    | del_dt              | timestamp without time zone
+ t_prd_product_plate_sizes    | item_siz_cd         | character varying
+ t_prd_product_price_formulas | prd_cd              | character varying
+ t_prd_product_price_formulas | frm_cd              | character varying
+ t_prd_product_price_formulas | apply_bgn_ymd       | character varying
+ t_prd_product_price_formulas | note                | character varying
+ t_prd_product_price_formulas | reg_dt              | timestamp without time zone
+ t_prd_product_price_formulas | upd_dt              | timestamp without time zone
+ t_prd_product_print_options  | prd_cd              | character varying
+ t_prd_product_print_options  | opt_id              | integer
+ t_prd_product_print_options  | print_side          | character varying
+ t_prd_product_print_options  | front_colrcnt_cd    | character varying
+ t_prd_product_print_options  | back_colrcnt_cd     | character varying
+ t_prd_product_print_options  | dflt_yn             | character
+ t_prd_product_print_options  | disp_seq            | integer
+ t_prd_product_print_options  | reg_dt              | timestamp without time zone
+ t_prd_product_print_options  | upd_dt              | timestamp without time zone
+ t_prd_product_print_options  | del_yn              | character
+ t_prd_product_print_options  | del_dt              | timestamp without time zone
+ t_prd_product_print_options  | print_opt_cd        | character varying
+ t_prd_product_processes      | prd_cd              | character varying
+ t_prd_product_processes      | proc_cd             | character varying
+ t_prd_product_processes      | mand_proc_yn        | character
+ t_prd_product_processes      | disp_seq            | integer
+ t_prd_product_processes      | reg_dt              | timestamp without time zone
+ t_prd_product_processes      | upd_dt              | timestamp without time zone
+ t_prd_product_processes      | del_yn              | character
+ t_prd_product_processes      | del_dt              | timestamp without time zone
+ t_prd_product_processes      | dtl_opt_rng         | jsonb
+ t_proc_processes             | proc_cd             | character varying
+ t_proc_processes             | proc_nm             | character varying
+ t_proc_processes             | upr_proc_cd         | character varying
+ t_proc_processes             | prcs_dtl_opt        | jsonb
+ t_proc_processes             | disp_seq            | integer
+ t_proc_processes             | use_yn              | character
+ t_proc_processes             | note                | character varying
+ t_proc_processes             | reg_dt              | timestamp without time zone
+ t_proc_processes             | upd_dt              | timestamp without time zone
+ t_proc_processes             | del_yn              | character
+ t_proc_processes             | del_dt              | timestamp without time zone
+ t_proc_processes             | cust_desc           | character varying
+ t_proc_processes             | side_sel_yn         | character
+ t_proc_processes             | swatch_img_key      | character varying
+ t_proc_processes             | usr_def_nm          | character varying
+ t_proc_processes             | swatch_color        | character varying
+ t_proc_processes             | work_margin_top     | numeric
+ t_proc_processes             | work_margin_bot     | numeric
+ t_proc_processes             | work_margin_lft     | numeric
+ t_proc_processes             | work_margin_rgt     | numeric
+ t_prt_print_options          | print_opt_cd        | character varying
+ t_prt_print_options          | print_opt_nm        | character varying
+ t_prt_print_options          | print_side          | character varying
+ t_prt_print_options          | front_colrcnt_cd    | character varying
+ t_prt_print_options          | back_colrcnt_cd     | character varying
+ t_prt_print_options          | disp_seq            | integer
+ t_prt_print_options          | use_yn              | character
+ t_prt_print_options          | del_yn              | character
+ t_prt_print_options          | del_dt              | timestamp without time zone
+ t_prt_print_options          | reg_dt              | timestamp without time zone
+ t_prt_print_options          | upd_dt              | timestamp without time zone
+ t_prt_print_options          | usr_def_nm          | character varying
+(76 rows)
+

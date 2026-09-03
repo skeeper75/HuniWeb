@@ -1,0 +1,8 @@
+$ psql <DATABASE_URL> -c "select clr_cd, clr_nm from t_clr_color_counts where clr_cd in ('CLR_000001','CLR_000005') order by 1;"
+
+   clr_cd   |   clr_nm   
+------------+------------
+ CLR_000001 | 인쇄 안 함
+ CLR_000005 | CMYK 4도
+(2 rows)
+

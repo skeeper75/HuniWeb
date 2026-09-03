@@ -1,0 +1,27 @@
+$ psql <DATABASE_URL> -c "select proc_cd, plt_siz_cd, print_opt_cd, count(*) rows, min(min_qty) minq, max(min_qty) maxq from t_prc_component_prices where comp_cd='COMP_PRINT_DIGITAL_S1' group by 1,2,3 order by 1,2,3;"
+
+   proc_cd   | plt_siz_cd | print_opt_cd | rows | minq |  maxq   
+-------------+------------+--------------+------+------+---------
+ PROC_000004 | SIZ_000077 | POPT_000001  |   53 |    1 | 1000000
+ PROC_000004 | SIZ_000077 | POPT_000002  |   53 |    1 | 1000000
+ PROC_000004 | SIZ_000077 | POPT_000008  |   53 |    1 | 1000000
+ PROC_000004 | SIZ_000077 | POPT_000009  |   53 |    1 | 1000000
+ PROC_000004 | SIZ_000475 | POPT_000001  |   37 |    1 |    1200
+ PROC_000004 | SIZ_000475 | POPT_000002  |   37 |    1 |    1200
+ PROC_000004 | SIZ_000475 | POPT_000008  |   37 |    1 |    1200
+ PROC_000004 | SIZ_000475 | POPT_000009  |   37 |    1 |    1200
+ PROC_000004 | SIZ_000499 | POPT_000001  |   53 |    1 | 1000000
+ PROC_000004 | SIZ_000499 | POPT_000002  |   53 |    1 | 1000000
+ PROC_000004 | SIZ_000499 | POPT_000008  |   53 |    1 | 1000000
+ PROC_000004 | SIZ_000499 | POPT_000009  |   53 |    1 | 1000000
+ PROC_000004 | SIZ_000535 | POPT_000001  |   53 |    1 | 1000000
+ PROC_000004 | SIZ_000640 | POPT_000001  |   53 |    1 | 1000000
+ PROC_000004 | SIZ_000640 | POPT_000002  |   53 |    1 | 1000000
+ PROC_000004 | SIZ_000640 | POPT_000008  |   53 |    1 | 1000000
+ PROC_000004 | SIZ_000640 | POPT_000009  |   53 |    1 | 1000000
+ PROC_000004 | SIZ_000641 | POPT_000001  |   53 |    1 | 1000000
+ PROC_000004 | SIZ_000641 | POPT_000002  |   53 |    1 | 1000000
+ PROC_000004 | SIZ_000641 | POPT_000008  |   53 |    1 | 1000000
+ PROC_000004 | SIZ_000641 | POPT_000009  |   53 |    1 | 1000000
+(21 rows)
+

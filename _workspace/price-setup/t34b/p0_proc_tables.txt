@@ -1,0 +1,26 @@
+$ psql <DATABASE_URL> -c "select table_name from information_schema.tables where table_schema='public' and (table_name like '%proc%' or table_name like '%print_opt%' or table_name like '%plate%') order by 1;"
+
+                       table_name                       
+--------------------------------------------------------
+ bak_proc_dedup_round_pilot
+ bak_t_prd_product_plate_sizes_setbuild_20260701_0134
+ bak_t_prd_product_plate_sizes_setbuild_20260701_0204
+ bak_t_prd_product_print_options_setbuild_20260701_0134
+ bak_t_prd_product_print_options_setbuild_20260701_0204
+ bak_t_prd_product_processes_setbuild_20260701_0134
+ bak_t_prd_product_processes_setbuild_20260701_0204
+ t_prd_edicus_templates
+ t_prd_product_plate_sizes
+ t_prd_product_print_options
+ t_prd_product_processes
+ t_prd_template_prices
+ t_prd_template_selections
+ t_prd_templates
+ t_proc_processes
+ t_proc_spine_calcs
+ t_proc_spine_specs
+ t_prt_print_options
+ z_bak_acacc_templates
+ z_bak_ackeyr2_templates
+(20 rows)
+

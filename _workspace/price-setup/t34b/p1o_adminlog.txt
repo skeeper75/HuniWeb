@@ -1,0 +1,18 @@
+$ psql <DATABASE_URL> -c "select to_char(action_time,'MM-DD HH24:MI') t, u.username, l.object_repr, l.action_flag from django_admin_log l left join auth_user u on u.id=l.user_id order by l.action_time desc limit 12;"
+
+      t      |   username   |       object_repr        | action_flag 
+-------------+--------------+--------------------------+-------------
+ 09-03 08:36 | huniprinting | [공식]피크닉매트         |           1
+ 09-03 08:33 | huniprinting | 피크닉매트               |           1
+ 09-03 07:45 | huniprinting | [공식]에코백_라벨        |           1
+ 09-03 07:44 | huniprinting | FORM_ECOBAG_LABEL        |           1
+ 09-03 07:41 | huniprinting | 레더라벨                 |           1
+ 09-03 07:37 | huniprinting | [공식]메쉬파우치에코백   |           1
+ 09-03 07:33 | huniprinting | 메쉬파우치에코백         |           1
+ 09-03 07:29 | huniprinting | [공식]타이벡파우치에코백 |           1
+ 09-03 07:25 | huniprinting | 세로형                   |           2
+ 09-03 07:24 | huniprinting | 세로형                   |           2
+ 09-03 07:24 | huniprinting | 타이벡 플랫 파우치 M     |           2
+ 09-03 07:16 | huniprinting | 타이벡파우치에코백       |           1
+(12 rows)
+

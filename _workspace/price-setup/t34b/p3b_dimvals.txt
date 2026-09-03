@@ -1,0 +1,10 @@
+$ psql <DATABASE_URL> -c "select comp_cd, count(*) rows, count(dim_vals) nonnull, (array_agg(distinct dim_vals::text))[1:3] samples from t_prc_component_prices where comp_cd in ('COMP_PRINT_SPOT_WHITE_S1','COMP_COAT_MATTE','COMP_CUT_PERF_1H6','COMP_PRINT_DIGITAL_S1') group by 1 order by 1;"
+
+         comp_cd          | rows | nonnull |              samples              
+--------------------------+------+---------+-----------------------------------
+ COMP_COAT_MATTE          |  230 |       0 | {NULL}
+ COMP_CUT_PERF_1H6        |   18 |      18 | {"{\"구수\": 1}","{\"구수\": 2}"}
+ COMP_PRINT_DIGITAL_S1    | 1049 |       0 | {NULL}
+ COMP_PRINT_SPOT_WHITE_S1 |  530 |       0 | {NULL}
+(4 rows)
+

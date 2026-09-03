@@ -1,0 +1,6 @@
+$ psql <DATABASE_URL> -c "select print_opt_cd, count(distinct prd_cd) prds, string_agg(distinct prd_cd,',') list from t_prd_product_print_options where print_opt_cd in ('POPT_000008','POPT_000009') and coalesce(del_yn,'N')='N' group by 1;"
+
+ print_opt_cd | prds | list 
+--------------+------+------
+(0 rows)
+

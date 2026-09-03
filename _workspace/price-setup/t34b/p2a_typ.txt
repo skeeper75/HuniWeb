@@ -1,0 +1,12 @@
+$ psql <DATABASE_URL> -c "select comp_cd, comp_nm, comp_typ_cd, prc_typ_cd, use_yn, use_dims from t_prc_price_components where comp_cd in ('COMP_PRINT_DIGITAL_S1','COMP_PRINT_SPOT_WHITE_S1','COMP_COAT_MATTE','COMP_FOLD_CARD_6CR','COMP_FOLD_LEAF_HALF','COMP_CUT_PERF_1H6') order by comp_cd;"
+
+         comp_cd          |       comp_nm        |      comp_typ_cd      |  prc_typ_cd   | use_yn |                                   use_dims                                    
+--------------------------+----------------------+-----------------------+---------------+--------+-------------------------------------------------------------------------------
+ COMP_COAT_MATTE          | 무광코팅비           | PRC_COMPONENT_TYPE.02 | PRICE_TYPE.01 | Y      | ["proc_cd", "plt_siz_cd", "coat_side_cnt", "min_qty", "proc_grp:PROC_000013"]
+ COMP_CUT_PERF_1H6        | 타공비 (6mm)         | PRC_COMPONENT_TYPE.04 | PRICE_TYPE.02 | Y      | ["proc_cd", "min_qty", "proc_grp:PROC_000079"]
+ COMP_FOLD_CARD_6CR       | 접지비 카드 6크리즈  | PRC_COMPONENT_TYPE.04 | PRICE_TYPE.03 | Y      | ["proc_cd", "min_qty", "proc_grp:PROC_000056"]
+ COMP_FOLD_LEAF_HALF      | 접지비 리플렛 반접지 | PRC_COMPONENT_TYPE.04 | PRICE_TYPE.03 | Y      | ["proc_cd", "min_qty", "proc_grp:PROC_000056"]
+ COMP_PRINT_DIGITAL_S1    | 디지털인쇄           | PRC_COMPONENT_TYPE.01 | PRICE_TYPE.01 | Y      | ["proc_cd", "plt_siz_cd", "print_opt_cd", "min_qty", "proc_grp:PROC_000001"]
+ COMP_PRINT_SPOT_WHITE_S1 | 별색인쇄비           | PRC_COMPONENT_TYPE.01 | PRICE_TYPE.01 | Y      | ["plt_siz_cd", "proc_cd", "spot_side_cnt", "min_qty", "proc_grp:PROC_000007"]
+(6 rows)
+

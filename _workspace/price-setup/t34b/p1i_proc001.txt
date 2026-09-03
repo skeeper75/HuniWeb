@@ -1,0 +1,17 @@
+$ psql <DATABASE_URL> -c "select proc_cd, proc_nm, upr_proc_cd, use_yn from t_proc_processes where proc_cd='PROC_000001' or upr_proc_cd='PROC_000001' order by proc_cd;"
+
+   proc_cd   |     proc_nm      | upr_proc_cd | use_yn 
+-------------+------------------+-------------+--------
+ PROC_000001 | 인쇄             |             | Y
+ PROC_000003 | 옵셋인쇄         | PROC_000001 | Y
+ PROC_000004 | 디지털인쇄       | PROC_000001 | Y
+ PROC_000005 | 실크인쇄         | PROC_000001 | Y
+ PROC_000006 | 실사출력         | PROC_000001 | Y
+ PROC_000108 | 패브릭출력       | PROC_000001 | Y
+ PROC_000109 | 화이트라텍스출력 | PROC_000001 | Y
+ PROC_000110 | 전사인쇄         | PROC_000001 | Y
+ PROC_000111 | UV평판인쇄       | PROC_000001 | Y
+ PROC_000112 | 도장인쇄         | PROC_000001 | Y
+ PROC_000113 | DTF              | PROC_000001 | Y
+(11 rows)
+

@@ -1,0 +1,8 @@
+$ psql <DATABASE_URL> -c "with dgp as (select distinct prd_cd from t_prd_product_price_formulas where frm_cd like 'PRF_DGP%') select po.front_colrcnt_cd, po.back_colrcnt_cd, count(*) cnt, count(distinct po.prd_cd) prds from t_prd_product_print_options po join dgp on dgp.prd_cd=po.prd_cd where coalesce(po.del_yn,'N')='N' group by 1,2 order by 3 desc;"
+
+ front_colrcnt_cd | back_colrcnt_cd | cnt | prds 
+------------------+-----------------+-----+------
+ CLR_000005       | CLR_000005      |  31 |   31
+ CLR_000005       | CLR_000001      |  25 |   25
+(2 rows)
+

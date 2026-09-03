@@ -1,0 +1,21 @@
+$ psql <DATABASE_URL> -c "select proc_cd, proc_nm, upr_proc_cd, use_yn, prcs_dtl_opt from t_proc_processes where proc_cd in ('PROC_000013','PROC_000014','PROC_000015','PROC_000007','PROC_000029','PROC_000030','PROC_000079','PROC_000026','PROC_000056') or upr_proc_cd in ('PROC_000013','PROC_000007') order by upr_proc_cd nulls first, proc_cd;"
+
+   proc_cd   |     proc_nm     | upr_proc_cd | use_yn |                                                                                             prcs_dtl_opt                                                                                             
+-------------+-----------------+-------------+--------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ PROC_000007 | 별색인쇄        |             | Y      | {"inputs": [{"key": "앞면별색", "type": "boolean", "contrib": "count_y", "price_dim": "spot_side_cnt"}, {"key": "뒷면별색", "type": "boolean", "contrib": "count_y", "price_dim": "spot_side_cnt"}]}
+ PROC_000013 | 라미네이팅 코팅 |             | Y      | {"inputs": [{"key": "앞면코팅", "type": "boolean", "contrib": "count_y", "price_dim": "coat_side_cnt"}, {"key": "뒷면코팅", "type": "boolean", "contrib": "count_y", "price_dim": "coat_side_cnt"}]}
+ PROC_000026 | 귀돌이          |             | Y      | 
+ PROC_000029 | 오시            |             | Y      | {"inputs": [{"key": "줄수", "max": 3, "min": 1, "type": "integer", "unit": "줄"}]}
+ PROC_000030 | 미싱            |             | Y      | {"inputs": [{"key": "줄수", "max": 3, "min": 1, "type": "integer", "unit": "줄"}]}
+ PROC_000056 | 접지            |             | Y      | 
+ PROC_000079 | 타공            |             | Y      | {"inputs": [{"key": "구수", "max": 8, "min": 1, "type": "integer", "unit": "개"}]}
+ PROC_000008 | 화이트인쇄      | PROC_000007 | Y      | 
+ PROC_000009 | 클리어인쇄      | PROC_000007 | Y      | 
+ PROC_000010 | 핑크인쇄        | PROC_000007 | Y      | 
+ PROC_000011 | 금색인쇄        | PROC_000007 | Y      | 
+ PROC_000012 | 은색인쇄        | PROC_000007 | Y      | 
+ PROC_000014 | 유광라미네이팅  | PROC_000013 | Y      | 
+ PROC_000015 | 무광라미네이팅  | PROC_000013 | Y      | 
+ PROC_000016 | UV              | PROC_000013 | Y      | 
+(15 rows)
+

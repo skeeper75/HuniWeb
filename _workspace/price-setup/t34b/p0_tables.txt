@@ -1,0 +1,24 @@
+$ psql <DATABASE_URL> -c "select table_name from information_schema.tables where table_schema='public' and table_name like 't_prd_product%' order by 1;"
+
+          table_name           
+-------------------------------
+ t_prd_product_addons
+ t_prd_product_bundle_qtys
+ t_prd_product_categories
+ t_prd_product_constraints
+ t_prd_product_discount_tables
+ t_prd_product_materials
+ t_prd_product_option_groups
+ t_prd_product_option_items
+ t_prd_product_options
+ t_prd_product_page_rules
+ t_prd_product_plate_sizes
+ t_prd_product_price_formulas
+ t_prd_product_prices
+ t_prd_product_print_options
+ t_prd_product_processes
+ t_prd_product_sets
+ t_prd_product_sizes
+ t_prd_products
+(18 rows)
+
